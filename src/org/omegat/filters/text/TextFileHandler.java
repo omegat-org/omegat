@@ -22,7 +22,6 @@
 package org.omegat.filters.text;
 
 import org.omegat.filters.FileHandler;
-import org.omegat.gui.threads.CommandThread;
 
 import java.io.*;
 import org.omegat.util.OStrings;

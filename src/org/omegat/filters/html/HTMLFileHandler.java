@@ -24,7 +24,6 @@ package org.omegat.filters.html;
 import org.omegat.filters.FileHandler;
 import org.omegat.filters.LBuffer;
 import org.omegat.util.OConsts;
-import org.omegat.gui.threads.CommandThread;
 
 import java.io.*;
 import java.text.MessageFormat;
@@ -768,7 +767,6 @@ public class HTMLFileHandler extends FileHandler
 		public UTF8Writer(Writer out)
 		{
 			super();
-			this.filename = filename;
 			this.out = out;
 		}
 		

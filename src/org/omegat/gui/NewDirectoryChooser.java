@@ -41,8 +41,7 @@ public class NewDirectoryChooser extends JFileChooser
 		if (getSelectedFile().exists())
 		{
 			// must select non-existing name for project
-			JOptionPane jop = new JOptionPane();
-			jop.showMessageDialog(this, OStrings.NDC_SELECT_UNIQUE,
+			JOptionPane.showMessageDialog(this, OStrings.NDC_SELECT_UNIQUE,
 					OStrings.NDC_SELECT_UNIQUE_TITLE, 
 					JOptionPane.ERROR_MESSAGE); 
 		}

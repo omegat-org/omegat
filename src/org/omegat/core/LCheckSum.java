@@ -21,7 +21,6 @@
 
 package org.omegat.core;
 
-import java.util.Date;
 import java.util.zip.Adler32;
 import java.util.zip.CRC32;
 

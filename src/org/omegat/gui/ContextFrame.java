@@ -21,14 +21,11 @@
 
 package org.omegat.gui;
 
-import org.omegat.gui.messages.MessageRelay;
 import org.omegat.util.OStrings;
 import org.omegat.core.SourceTextEntry;
 import org.omegat.core.StringEntry;
 
 import javax.swing.*;
-import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

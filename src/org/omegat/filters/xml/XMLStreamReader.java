@@ -21,12 +21,12 @@
 
 package org.omegat.filters.xml;
 
+import org.omegat.util.OStrings;
+
 import java.io.*;
-import java.lang.reflect.Array;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
-import org.omegat.util.OStrings;
 
 
 public class XMLStreamReader

@@ -22,7 +22,6 @@
 package org.omegat.filters.xml;
 
 import org.omegat.filters.FileHandler;
-import org.omegat.gui.threads.CommandThread;
 
 import java.io.IOException;
 import java.text.MessageFormat;

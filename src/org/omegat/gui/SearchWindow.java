@@ -316,7 +316,7 @@ public class SearchWindow extends JFrame
 	public void processWindowEvent(WindowEvent w)
 	{
 		int evt = w.getID();
-		if ((evt == w.WINDOW_CLOSING) || (evt == w.WINDOW_CLOSED))
+		if ((evt == WindowEvent.WINDOW_CLOSING) || (evt == WindowEvent.WINDOW_CLOSED))
 		{
 			if (m_thread != null)
 				m_thread.haltThread();

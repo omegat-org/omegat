@@ -959,7 +959,7 @@ public class TransFrame extends JFrame implements ActionListener
 		m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
 		setMessageText(OStrings.TF_LOADING_FILE + 
 								m_curEntry.getSrcFile().name);
-		Thread.currentThread().yield();	// let UI update
+		Thread.yield();	// let UI update
 		m_xlFirstEntry = m_curEntry.getFirstInFile();
 		m_xlLastEntry = m_curEntry.getLastInFile();
 
@@ -988,7 +988,7 @@ public class TransFrame extends JFrame implements ActionListener
 		m_xlPane.setText(textBuf.toString());
 		
 		setMessageText("");														// NOI18N
-		Thread.currentThread().yield();
+		Thread.yield();
 	}
 
 	///////////////////////////////////////////////////////////////

@@ -246,7 +246,7 @@ class MatchWindow extends JFrame
 			if (scrSize.width < 900)
 			{
 				// assume 800x600
-				setSize(200, 540);
+				setSize(200, 536);
 				setLocation(590, 0);
 			}
 			else

@@ -154,6 +154,8 @@ class HTMLTag
 					m_type = TAG_FORMAT;
 				else if (m_name.isEqualIgnoreCase("strong"))
 					m_type = TAG_FORMAT;
+				else if (m_name.isEqualIgnoreCase("span"))
+					m_type = TAG_FORMAT;
 				break;
 				
 			case 't':

@@ -29,6 +29,7 @@
 //-------------------------------------------------------------------------
 
 import java.lang.*;
+import javax.swing.UIManager;
 
 class OmegaT extends Thread
 {
@@ -48,6 +49,16 @@ class OmegaT extends Thread
 	
 	public static void main(String[] args)
 	{
+		try 
+		{
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} 
+		catch (Exception e) 
+		{
+                	// do nothing
+			System.out.println("Couldn't initialize OS look and feel");
+		}
+
 		OmegaT ot = new OmegaT();
 		ot.start();
 	}

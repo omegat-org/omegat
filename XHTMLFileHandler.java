@@ -58,6 +58,7 @@ class HTMLXmlFileHandler extends XmlFileHandler
 		defineFormatTag("strike", "strike");
 		defineFormatTag("s", "s");
 		defineFormatTag("small", "small");
+		defineFormatTag("span", "span");
 		defineFormatTag("sub", "sub");
 		defineFormatTag("sup", "sup");
 		defineFormatTag("strong", "strong");

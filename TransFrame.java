@@ -182,7 +182,7 @@ class TransFrame extends JFrame implements ActionListener
 			if (scrSize.width < 900)
 			{
 				// assume 800x600
-				setSize(585, 540);
+				setSize(585, 536);
 				setLocation(0, 0);
 			}
 			else
@@ -256,6 +256,7 @@ class TransFrame extends JFrame implements ActionListener
 			m_miEditInsert.setMnemonic(KeyEvent.VK_I);
 			m_miEditFind.setMnemonic(KeyEvent.VK_F);
 //			m_miEditUntrans.setMnemonic(KeyEvent.VK_U);
+			m_miEditNext.setMnemonic(KeyEvent.VK_N);
 			m_miEditPrev.setMnemonic(KeyEvent.VK_P);
 			m_miEditCompare1.setMnemonic(KeyEvent.VK_1);
 			m_miEditCompare2.setMnemonic(KeyEvent.VK_2);
@@ -289,6 +290,7 @@ class TransFrame extends JFrame implements ActionListener
 			m_miEditInsert.setMnemonic(0);
 			m_miEditFind.setMnemonic(0);
 	//		m_miEditUntrans.setMnemonic(0);
+			m_miEditNext.setMnemonic(0);
 			m_miEditPrev.setMnemonic(0);
 			m_miEditCompare1.setMnemonic(0);
 			m_miEditCompare2.setMnemonic(0);
@@ -321,8 +323,8 @@ class TransFrame extends JFrame implements ActionListener
 		m_mFile.add(m_miFileOpen);
 
 		m_miFileCreate = new JMenuItem();
-		m_miFileCreate.setAccelerator(
-					KeyStroke.getKeyStroke(KeyEvent.VK_N, m_shortcutKey));
+//		m_miFileCreate.setAccelerator(
+//					KeyStroke.getKeyStroke(KeyEvent.VK_N, m_shortcutKey));
 		m_miFileCreate.addActionListener(this);
 		m_mFile.add(m_miFileCreate);
 
@@ -405,6 +407,12 @@ class TransFrame extends JFrame implements ActionListener
 //				KeyEvent.VK_U,  m_shortcutKey));
 //		m_miEditUntrans.addActionListener(this);
 //		m_mEdit.add(m_miEditUntrans);
+
+		m_miEditNext = new JMenuItem();
+		m_miEditNext.setAccelerator(KeyStroke.getKeyStroke(
+				KeyEvent.VK_N,  m_shortcutKey));
+		m_miEditNext.addActionListener(this);
+		m_mEdit.add(m_miEditNext);
 
 		m_miEditPrev = new JMenuItem();
 		m_miEditPrev.setAccelerator(KeyStroke.getKeyStroke(
@@ -521,6 +529,7 @@ class TransFrame extends JFrame implements ActionListener
 		m_mEdit.setText(OStrings.TF_MENU_EDIT);
 		m_miEditUndo.setText(OStrings.TF_MENU_EDIT_UNDO);
 		m_miEditRedo.setText(OStrings.TF_MENU_EDIT_REDO);
+		m_miEditNext.setText(OStrings.TF_MENU_EDIT_NEXT);
 		m_miEditPrev.setText(OStrings.TF_MENU_EDIT_PREV);
 		m_miEditCompare1.setText(OStrings.TF_MENU_EDIT_COMPARE_1);
 		m_miEditCompare2.setText(OStrings.TF_MENU_EDIT_COMPARE_2);
@@ -777,6 +786,7 @@ class TransFrame extends JFrame implements ActionListener
 		m_projectLoaded = false;
 		m_xlPane.setText("");
 		m_miFileOpen.setEnabled(true);
+		m_miFileCreate.setEnabled(true);
 	}
 
 	// display dialog allowing selection of source and target language fonts
@@ -875,6 +885,7 @@ class TransFrame extends JFrame implements ActionListener
 		loadDocument();
 		m_projectLoaded = true;
 		m_miFileOpen.setEnabled(false);
+		m_miFileCreate.setEnabled(false);
 	}
 
 	private void doCompileProject()
@@ -1460,6 +1471,10 @@ System.out.println("");
 					m_undo.redo();
 				}
 				catch (CannotRedoException cue)	{ ; }
+			}
+			else if (evtSrc == m_miEditNext)
+			{
+				doPrevEntry();
 			}
 			else if (evtSrc == m_miEditPrev)
 			{
@@ -2087,6 +2102,7 @@ System.out.println("");
 	private JMenu m_mEdit;
 	private JMenuItem	m_miEditUndo;
 	private JMenuItem	m_miEditRedo;
+	private JMenuItem	m_miEditNext;
 	private JMenuItem	m_miEditPrev;
 //	private JMenuItem	m_miEditUntrans;
 //	private JMenuItem	m_miEditGoto;

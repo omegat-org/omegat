@@ -223,7 +223,7 @@ public class HelpFrame extends JFrame
 	private String detectLanguage()
 	{
 		String lang = System.getProperty("user.language", "en");
-		File docsFolder = new File("file:" + System.getProperty("user.dir")				// NOI18N
+		File docsFolder = new File(System.getProperty("user.dir")				// NOI18N
 				+ File.separator + OConsts.HELP_DIR + File.separator + lang);
 		if( docsFolder.exists() )
 			return lang;

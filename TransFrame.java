@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  16Sep2003
+//  Build date:  8Mar2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -38,6 +38,7 @@ import java.lang.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.text.*;
+import javax.swing.undo.*;
 
 class TransFrame extends JFrame implements ActionListener
 {
@@ -55,6 +56,8 @@ class TransFrame extends JFrame implements ActionListener
 
 		m_shortcutKey = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
 
+		m_undo = new UndoManager();
+
 		m_docSegList = new ArrayList();
 
 		createMenus();
@@ -65,9 +68,8 @@ class TransFrame extends JFrame implements ActionListener
 
 		enableEvents(0);
 
-                GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                Rectangle scrSize = env.getMaximumWindowBounds();
-		setSize( scrSize.width, scrSize.height );
+		setSize(650, 720);
+		setLocation(0, 0);
 		addWindowListener(new WindowAdapter()
 			{
 				public void windowClosing(WindowEvent e)
@@ -88,14 +90,18 @@ class TransFrame extends JFrame implements ActionListener
 		m_xlPane.requestFocus();
 
 		CommandThread core = CommandThread.core;
-		m_srcFont = core.getOrSetPreference(OConsts.TF_SRC_FONT_NAME,
+		m_font = core.getOrSetPreference(OConsts.TF_SRC_FONT_NAME,
 				OConsts.TF_FONT_DEFAULT);
-		m_locFont = core.getOrSetPreference(OConsts.TF_LOC_FONT_NAME,
-				OConsts.TF_FONT_DEFAULT);
-		m_srcFontSize = core.getOrSetPreference(OConsts.TF_SRC_FONT_SIZE,
+		m_fontSize = core.getOrSetPreference(OConsts.TF_SRC_FONT_SIZE,
 				OConsts.TF_FONT_SIZE_DEFAULT);
-		m_locFontSize = core.getOrSetPreference(OConsts.TF_LOC_FONT_SIZE,
-				OConsts.TF_FONT_SIZE_DEFAULT);
+		int fontSize = 12;
+		try
+		{
+			fontSize = Integer.parseInt(m_fontSize);
+		}
+		catch (NumberFormatException nfe) { ; }
+		m_xlPane.setFont(new Font(m_font, Font.PLAIN, fontSize));
+		m_matchViewer.setFont(new Font(m_font, Font.PLAIN, fontSize));
 
 		// check this only once as it can be changed only at compile time
 		// should be OK, but customization might have messed it up
@@ -116,56 +122,26 @@ class TransFrame extends JFrame implements ActionListener
 	{
 		int i;
 
-		// create 'old' src html field
-		m_oldSrcPane = new JTextPane();
-		JScrollPane oldSrcScroller = new JScrollPane(m_oldSrcPane);
-		m_oldSrcDoc = new DefaultStyledDocument(new StyleContext());
-		m_oldSrcPane.setDocument(m_oldSrcDoc);
-///		m_oldSrcPane.setEditable(false);
-//		m_oldSrcPane.setVisible(false);
-		oldSrcScroller.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
-
-		// create 'old' loc html field
-		m_oldLocPane = new JTextPane();
-		JScrollPane oldLocScroller = new JScrollPane(m_oldLocPane);
-		m_oldLocDoc = new DefaultStyledDocument(new StyleContext());
-		m_oldLocPane.setDocument(m_oldLocDoc);
-//		m_oldLocPane.setEditable(false);
-//		m_oldLocPane.setVisible(false);
-		oldLocScroller.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
-
 		// create translation edit field
 		//m_xlPane = new JTextPane();
 		m_xlPane = new XLPane();
+		DefaultStyledDocument doc = new 
+					DefaultStyledDocument(new StyleContext());
+		doc.addUndoableEditListener(m_undo);
+		m_xlPane.setDocument(doc);
 		m_xlScroller = new JScrollPane(m_xlPane);
-		m_xlDoc = new DefaultStyledDocument(new StyleContext());
-		m_xlPane.setDocument(m_xlDoc);
 		m_xlScroller.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
+		m_xlPane.setText(OStrings.TF_INTRO_MESSAGE);
 		
 		m_statusLabel = new JLabel();
 
-		/////////////////////////////////////////
-		// create stat container
-		// 4 rows are goto entry, word count, find label, find field
-		Container oldContainer = new Container();
-		oldContainer.setLayout(new GridLayout(1,2));
-		oldContainer.add(oldSrcScroller);
-		oldContainer.add(oldLocScroller);
-
-		getContentPane().add(m_statusLabel, BorderLayout.NORTH);
-		getContentPane().add(m_xlScroller, BorderLayout.CENTER);
-		getContentPane().add(oldContainer, BorderLayout.SOUTH);
+		Container cont = getContentPane();
+		cont.add(m_statusLabel, BorderLayout.NORTH);
+		cont.add(m_xlScroller, BorderLayout.CENTER);
 
 		m_projWin = new ProjectFrame(this);
-
-		try 
-		{
-			m_xlDoc.insertString(0, OStrings.TF_INTRO_MESSAGE, null);
-		}
-		catch (BadLocationException ble)
-		{
-			;	// let it go
-		}
+		m_matchViewer = new MatchWindow();
+		m_matchViewer.show();
 	}
 
 	protected void createMenus()
@@ -215,6 +191,18 @@ class TransFrame extends JFrame implements ActionListener
 
 		// edit
 		m_mEdit = new JMenu();
+		m_miEditUndo = new JMenuItem();
+		m_miEditUndo.setAccelerator(KeyStroke.getKeyStroke(
+				KeyEvent.VK_U,  m_shortcutKey));
+		m_miEditUndo.addActionListener(this);
+		m_mEdit.add(m_miEditUndo);
+		
+		m_miEditRedo = new JMenuItem();
+		m_miEditRedo.setAccelerator(KeyStroke.getKeyStroke(
+				KeyEvent.VK_R,  m_shortcutKey));
+		m_miEditRedo.addActionListener(this);
+		m_mEdit.add(m_miEditRedo);
+		
 		m_miEditNext = new JMenuItem();
 		m_miEditNext.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_N,  m_shortcutKey));
@@ -248,20 +236,6 @@ class TransFrame extends JFrame implements ActionListener
 				KeyEvent.VK_F, m_shortcutKey));
 		m_miEditFind.addActionListener(this);
 		m_mEdit.add(m_miEditFind);
-
-//		m_miEditFindLoc = new JMenuItem();
-//		m_miEditFindLoc.setAccelerator(KeyStroke.getKeyStroke(
-//				KeyEvent.VK_E,  m_shortcutKey));
-//		m_miEditFindLoc.addActionListener(this);
-//		m_mEdit.add(m_miEditFindLoc);
-//
-//		m_miEditGoto = new JMenuItem();
-//		m_miEditGoto.setAccelerator(KeyStroke.getKeyStroke(
-//				KeyEvent.VK_G,  m_shortcutKey));
-//		m_miEditGoto.addActionListener(this);
-//		m_mEdit.add(m_miEditGoto);
-//		
-//		m_mEdit.addSeparator();
 
 		m_miEditCompare1 = new JMenuItem();
 		m_miEditCompare1.setAccelerator(KeyStroke.getKeyStroke(
@@ -346,19 +320,13 @@ class TransFrame extends JFrame implements ActionListener
 
 		doSetTitle();
 
+		m_matchViewer.setTitle(OStrings.TF_MATCH_VIEWER_TITLE);
 		m_strFuzzy = OStrings.TF_FUZZY;
 		m_strGlossaryItem = OStrings.TF_GLOSSARY;
 		m_strSrcText = OStrings.TF_SRCTEXT;
 		m_strTranslation = OStrings.TF_TRANSLATION;
 		m_strScore = OStrings.TF_SCORE;
 		m_strNone = OStrings.TF_NONE;
-
-//		m_findLabel.setText(OStrings.TF_SEARCH);
-//		m_findExactLabel.setText(OStrings.TF_SEARCH_EXACT);
-//		int blockHeight = m_findLabel.getPreferredSize().height;
-//		m_statusLabel.setMinimumSize(new Dimension(m_leftX, blockHeight));
-//		m_curString = OStrings.TF_CUR_STRING;
-//		str = OStrings.TF_GOTO_ENTRY;
 
 		m_mFile.setText(OStrings.TF_MENU_FILE);
 		m_miFileOpen.setText(OStrings.TF_MENU_FILE_OPEN);
@@ -369,6 +337,8 @@ class TransFrame extends JFrame implements ActionListener
 		m_miFileQuit.setText(OStrings.TF_MENU_FILE_QUIT);
 
 		m_mEdit.setText(OStrings.TF_MENU_EDIT);
+		m_miEditUndo.setText(OStrings.TF_MENU_EDIT_UNDO);
+		m_miEditRedo.setText(OStrings.TF_MENU_EDIT_REDO);
 		m_miEditNext.setText(OStrings.TF_MENU_EDIT_NEXT);
 		m_miEditPrev.setText(OStrings.TF_MENU_EDIT_PREV);
 		m_miEditCompare1.setText(OStrings.TF_MENU_EDIT_COMPARE_1);
@@ -376,7 +346,6 @@ class TransFrame extends JFrame implements ActionListener
 		m_miEditCompare3.setText(OStrings.TF_MENU_EDIT_COMPARE_3);
 		m_miEditCompare4.setText(OStrings.TF_MENU_EDIT_COMPARE_4);
 		m_miEditCompare5.setText(OStrings.TF_MENU_EDIT_COMPARE_5);
-//		m_miEditGoto.setText(OStrings.TF_MENU_EDIT_GOTO);
 		m_miEditRecycle.setText(OStrings.TF_MENU_EDIT_RECYCLE);
 		m_miEditInsert.setText(OStrings.TF_MENU_EDIT_RECYCLE);
 		m_miEditFind.setText(OStrings.TF_MENU_EDIT_FIND);
@@ -469,7 +438,7 @@ class TransFrame extends JFrame implements ActionListener
 		if (m_projectLoaded == false)
 			return;
 		
-		checkEntry();
+		commitEntry();
 
 		m_curEntryNum++;
 		if (m_curEntryNum > m_xlLastEntry)
@@ -486,7 +455,7 @@ class TransFrame extends JFrame implements ActionListener
 		if (m_projectLoaded == false)
 			return;
 		
-		checkEntry();
+		commitEntry();
 
 		m_curEntryNum--;
 		if (m_curEntryNum < m_xlFirstEntry)
@@ -509,35 +478,9 @@ class TransFrame extends JFrame implements ActionListener
 
 		StringEntry se = m_curNear.str;
 		String s = se.getTrans();
-		try 
-		{
-			if (s != null)
-			{
-				int fontsize = 12;
-				try 
-				{
-					fontsize = Integer.valueOf(m_locFontSize).intValue();
-				}
-				catch (NumberFormatException nfe)
-				{
-					fontsize = 12;
-				}
-				int pos = m_xlPane.getCaretPosition();
-				MutableAttributeSet mattr = null;
-				mattr = new SimpleAttributeSet();
-				StyleConstants.setFontFamily(mattr, m_locFont);
-				StyleConstants.setFontSize(mattr, fontsize);
-				m_xlDoc.insertString(pos, s, mattr);
-			}
-		}
-		catch (BadLocationException e)
-		{
-			// something's wrong - print error 
-			// this should never happen, but if it does let it go as
-			//	no immediate harm is done.  maybe app will crash
-			//	in a critical section, or maybe nothing'll happen
-			System.out.println("INTERNAL ERROR - doInsertTrans: bad location");
-		}
+		int pos = m_xlPane.getCaretPosition();
+		m_xlPane.select(pos, pos);
+		m_xlPane.replaceSelection(s);
 	}
 
 	// replace entire edit area with active fuzzy match
@@ -561,45 +504,19 @@ class TransFrame extends JFrame implements ActionListener
 		if (m_curNear == null)
 			return;
 
-		try 
+		if (text != null)
 		{
-			if (text != null)
-			{
-				// remove current text
-				// build local offsets
-				int start = m_segmentStartOffset + m_segmentDisplayLength +
-					OStrings.TF_CUR_SEGMENT_START.length() + 1;
-				int end = m_xlDoc.getLength() - m_segmentEndInset -
-					OStrings.TF_CUR_SEGMENT_END.length() - 3;
+			// remove current text
+			// build local offsets
+			int start = m_segmentStartOffset + m_sourceDisplayLength +
+				OStrings.TF_CUR_SEGMENT_START.length() + 1;
+			int end = m_xlPane.getText().length() - m_segmentEndInset -
+				OStrings.TF_CUR_SEGMENT_END.length() - 3;
 
-				// remove text
+			// remove text
 //System.out.println("removing text "+start+" -> "+end+" length:"+(end-start));
-				m_xlDoc.remove(start, end-start);
-
-				// insert fuzzy match
-				int fontsize = 12;
-				try 
-				{
-					fontsize = Integer.valueOf(m_locFontSize).intValue();
-				}
-				catch (NumberFormatException nfe)
-				{
-					fontsize = 12;
-				}
-				MutableAttributeSet mattr = null;
-				mattr = new SimpleAttributeSet();
-				StyleConstants.setFontFamily(mattr, m_locFont);
-				StyleConstants.setFontSize(mattr, fontsize);
-				m_xlDoc.insertString(start, text, mattr);
-			}
-		}
-		catch (BadLocationException e)
-		{
-			// something's wrong - print error 
-			// this should never happen, but if it does let it go as
-			//	no immediate harm is done.  maybe app will crash
-			//	in a critical section, or maybe nothing'll happen
-			System.out.println("INTERNAL ERROR - doInsertTrans: bad location");
+			m_xlPane.select(start, end);
+			m_xlPane.replaceSelection(text);
 		}
 	}
 
@@ -607,24 +524,6 @@ class TransFrame extends JFrame implements ActionListener
 	{
 		if (m_projectLoaded == false)
 			return;
-		
-		// first clean out old display value
-		try
-		{
-			int len = m_oldSrcDoc.getLength();
-			if (len > 0)
-				m_oldSrcDoc.remove(0, len);
-			len = m_oldLocDoc.getLength();
-			if (len > 0)
-				m_oldLocDoc.remove(0, len);
-		}
-		catch (BadLocationException e)
-		{
-			// shouldn't happen - swallow it for now
-			System.out.println("Unexpected bad location exception " +
-					"encountered reading old source/target field.  " + 
-					"Ignoring it.");
-		}
 		
 		StringEntry se = m_curEntry.getStrEntry();
 		if (n < se.getNearList().size())
@@ -635,11 +534,7 @@ class TransFrame extends JFrame implements ActionListener
 	public void doUnloadProject()
 	{
 		m_projectLoaded = false;
-		try
-		{
-			m_xlDoc.remove(0, m_xlDoc.getLength());
-		}
-		catch (BadLocationException e)	{ ; }	// ignore	
+		m_xlPane.setText("");
 	}
 
 	// display dialog allowing selection of source and target language fonts
@@ -649,10 +544,18 @@ class TransFrame extends JFrame implements ActionListener
 		dlg.show();
 		if (dlg.isChanged())
 		{
-			// fonts have changed - reload the document
+			// fonts have changed  
 			// first commit current translation
-			checkEntry();
-			loadDocument();
+			commitEntry();
+			int fontSize = 12;
+			try
+			{
+				fontSize = Integer.parseInt(m_fontSize);
+			}
+			catch (NumberFormatException nfe) { ; }
+			Font font = new Font(m_font, Font.PLAIN, fontSize);
+			m_xlPane.setFont(font);
+			m_matchViewer.setFont(font);
 			activateEntry();
 		}
 	}
@@ -679,9 +582,9 @@ class TransFrame extends JFrame implements ActionListener
 
 	protected void doLoadProject()
 	{
-		m_oldSrcPane.setText("");
-		m_oldLocPane.setText("");
+		doUnloadProject();
 		m_xlPane.setText("");
+		m_matchViewer.reset();
 		
 		RequestPacket load;
 		load = new RequestPacket(RequestPacket.LOAD, this);
@@ -693,7 +596,7 @@ class TransFrame extends JFrame implements ActionListener
 		if (m_projectLoaded == false)
 			return;
 		
-		checkEntry();
+		commitEntry();
 
 		m_curEntryNum = entryNum - 1;
 		if (m_curEntryNum < m_xlFirstEntry)
@@ -801,129 +704,45 @@ class TransFrame extends JFrame implements ActionListener
 	protected void loadDocument() 
 	{
 		m_docReady = false;
-		if (m_defaultCursor == null)
-			m_defaultCursor = m_xlPane.getCursor();
 
-		m_xlPane.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-		try
+		// clear old text
+		m_xlPane.setText("");
+		m_docSegList.clear();
+		m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
+		setMessageText(OStrings.TF_LOADING_FILE + 
+								m_curEntry.getSrcFile().name);
+		Thread.currentThread().yield();	// let UI update
+		m_xlFirstEntry = m_curEntry.getFirstInFile();
+		m_xlLastEntry = m_curEntry.getLastInFile();
+
+		int len = 0;
+		DocumentSegment docSeg;
+		StringBuffer textBuf = new StringBuffer();
+		
+		for (int entryNum=m_xlFirstEntry; entryNum<=m_xlLastEntry; entryNum++)
 		{
-			// clear old text
-			m_xlDoc.remove(0, m_xlDoc.getLength());
-			m_docSegList.clear();
-			m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
-			setMessageText(OStrings.TF_LOADING_FILE + 
-									m_curEntry.getSrcFile().name);
-			m_xlFirstEntry = m_curEntry.getFirstInFile();
-			m_xlLastEntry = m_curEntry.getLastInFile();
-
-			// offset and len are char counts for the entry point
-			//	and length of the current displayed text segment
-			int offset = 0;
-			int len = 0;
-			int fontsize = 12;
-			String text;
-			MutableAttributeSet attr = null;
-			DocumentSegment docSeg;
+			docSeg = new DocumentSegment();
 			
-			for (int i=m_xlFirstEntry; i<=m_xlLastEntry; i++)
+			SourceTextEntry ste = CommandThread.core.getSTE(entryNum);
+			String text = ste.getTranslation();
+			// set text and font
+			if (text.length() == 0) 
 			{
-				docSeg = new DocumentSegment();
-				
-				len = insertSegment(i, offset, false, false);
-				offset += len;
-				
-				// keep track of segment size and location
-//				docSeg.transOffset = offset;
-				docSeg.length = len;
-				m_docSegList.add(docSeg);
+				// no translation available - use source text
+				text = ste.getSrcText(); 
 			}
-//
-//			activateEntry();
+			text += "\n\n";
+			
+			textBuf.append(text);
+
+			docSeg.length = text.length();
+//System.out.println(entryNum+"\t"+docSeg.length+"\t"+text);
+			m_docSegList.add(docSeg);
 		}
-		catch (BadLocationException e)
-		{
-System.out.println("LOAD DOCUMENT EXCEPTION");
-		}
+		m_xlPane.setText(textBuf.toString());
+		
 		setMessageText("");
-	}
-
-	private void checkEntry()
-	{
-//System.out.println("\nchecking entry ("+m_xlDoc.getLength()+")");
-		try
-		{
-			// see if previous entry changed - if so, update core
-			int start = m_segmentStartOffset + m_segmentDisplayLength + 
-					OStrings.TF_CUR_SEGMENT_START.length() + 1;
-			// -1 for space between tag and text, -2 for newlines 
-			int end = m_xlDoc.getLength() - m_segmentEndInset - 
-					OStrings.TF_CUR_SEGMENT_END.length() - 3;
-			String s = m_xlDoc.getText(start, end-start);
-//System.out.println("recovered translated text: '"+s+"'");
-			
-			// convert hard return to soft
-			s = s.replace((char) 0x0a, (char) 0x8d);
-			
-			// only record translation if the field is not blank
-			if ((s.equals(m_curTrans) == false) && (s.equals("") == false))
-			{
-				// translation has changed - do some housekeeping
-				m_curEntry.setTranslation(s);
-			}
-			
-			// deactivate entry now before updating identical segments
-			//	in display - starting offset and end inset might change
-			deactivateEntry();
-
-			// update the length parameters of all changed segments
-			// update strings in display
-			if ((s.equals(m_curTrans) == false) && (s.equals("") == false))
-			{
-				SourceTextEntry ste = CommandThread.core.getSTE(m_curEntryNum);
-				StringEntry se = ste.getStrEntry();
-				ListIterator it = se.getParentList().listIterator();
-				int entry;
-				int offset;
-				int i;
-				DocumentSegment docSeg;
-				while (it.hasNext())
-				{
-					ste = (SourceTextEntry) it.next();
-					entry = ste.entryNum();
-					if ((entry >= m_xlFirstEntry) && (entry <= m_xlLastEntry))
-					{
-						// found something to update
-						// find offset to this segment, remove it and
-						//	replace the updated text
-						offset = 0;
-						// current entry is handled in deactivateEntry
-						if (entry == m_curEntryNum)
-							continue;
-
-						// build offset
-						for (i=m_xlFirstEntry; i<entry; i++)
-						{
-							docSeg = (DocumentSegment) m_docSegList.get(
-									i-m_xlFirstEntry);
-							offset += docSeg.length;
-						}
-						// extract old text
-						docSeg = (DocumentSegment) m_docSegList.get(
-									entry - m_xlFirstEntry);
-						m_xlDoc.remove(offset, docSeg.length);
-						// insert new
-						docSeg.length = s.length() + 2;
-						insertSegment(entry, offset, false, false);
-					}
-				}
-			}
-		}
-		catch (BadLocationException e)
-		{
-			String msg = OStrings.TF_BAD_LOCATION_POSSIBLE_CORRUPTION;
-			System.out.println(msg + "\nfunction: checkEntry");
-			fatalError(msg, null);
-		}
+		Thread.currentThread().yield();
 	}
 
 	///////////////////////////////////////////////////////////////
@@ -943,8 +762,6 @@ System.out.println("LOAD DOCUMENT EXCEPTION");
 
 //System.out.println("updating fuzzy info - '"+m_curEntry.getSrcText()+"'");
 
-		try
-		{
 //System.out.println("checking for near terms...");
 				// see if there are any matches
 			StringEntry se = m_curEntry.getStrEntry();
@@ -962,217 +779,127 @@ System.out.println("LOAD DOCUMENT EXCEPTION");
 				m_nearList = null;
 				m_nearListNum = -1;
 				m_curNear = null;
-
-//				m_oldSrcPane.setVisible(false);
-//				m_oldLocPane.setVisible(false);
 				return;
 			}
 
 			String srcText = m_curEntry.getSrcText();
-			formatNearText(srcText, m_curNear.parAttr, Color.red, 
-					Color.darkGray, m_xlDoc, m_segmentStartOffset, 
-					srcText.length());
+			//formatNearText(srcText, m_curNear.parAttr, Color.red, 
+			//		Color.darkGray, m_xlDoc, m_segmentStartOffset, 
+			//		srcText.length());
 			
 			String oldStr = m_curNear.str.getSrcText();
 //System.out.println("old src text: "+oldStr);
 
 			// remember length of base string (before fuzzy % added)
-			int oldStrLen = oldStr.length();
+			//int oldStrLen = oldStr.length();
 //		String proj = m_curNear.proj;
 
-			// set appropriate font size
-			int fontsize = 12;
-			try 
-			{
-				fontsize = Integer.valueOf(m_srcFontSize).intValue();
-			}
-			catch (NumberFormatException nfe)
-			{
-				fontsize = 12;
-			}
-
-			MutableAttributeSet mattr = null;
-			mattr = new SimpleAttributeSet();
-			StyleConstants.setFontFamily(mattr, m_srcFont);
-			StyleConstants.setFontSize(mattr, fontsize);
-			m_oldSrcDoc.insertString(0, oldStr, mattr);
-			formatNearText(oldStr, m_curNear.attr, Color.blue, Color.black, 
-					m_oldSrcDoc, 0, oldStrLen);
-			Double sc = new Double(m_curNear.score * 100);
-			String nearStr = "\n\n" + sc.intValue() + "%";
-			StyleConstants.setForeground(mattr, Color.black);
-			m_oldSrcDoc.insertString(m_oldSrcDoc.getLength(), nearStr, mattr);
-
-			try 
-			{
-				fontsize = Integer.valueOf(m_locFontSize).intValue();
-			}
-			catch (NumberFormatException nfe)
-			{
-				fontsize = 12;
-			}
-			oldStr = m_curNear.str.getTrans();
-//System.out.println("old translation: "+oldStr);
-			mattr = new SimpleAttributeSet();
-			StyleConstants.setFontFamily(mattr, m_locFont);
-			StyleConstants.setFontSize(mattr, fontsize);
-			m_oldLocDoc.insertString(0, oldStr, mattr);
-
-			m_oldSrcPane.setCaretPosition(0);
-			m_oldLocPane.setCaretPosition(0);
+			//formatNearText(oldStr, m_curNear.attr, Color.blue, Color.black, 
+			//		m_oldSrcDoc, 0, oldStrLen);
+			String locStr = m_curNear.str.getTrans();
+			m_matchViewer.addMatchTerm(oldStr, locStr, 
+					(int) (m_curNear.score * 100), "");
 
 			// TODO XXX say where this fuzzy string came from
 	//		if (proj == null)
 	//			proj = OStrings.TF_FUZZY_CURRENT_PROJECT;
 	//		m_fuzzyProjLabel.setText(proj);
-		}
-		catch (BadLocationException e)
-		{
-System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
-		}
 	}
 	
-	// if useSource == true, displays source text
-	// otherwise displays trans if available, src if not
-	// 'hotSegment' means that this is the text that's put up for edit
-	protected int insertSegment(int entryNum, int offset, boolean useSource,
-			boolean hotSegment)
-		throws BadLocationException
+	private void commitEntry()
 	{
-		int len = 0;
-		m_curTrans = "";
-//System.out.println("inserting segment "+entryNum+" at offset "+offset);
-		
-		SourceTextEntry ste = CommandThread.core.getSTE(entryNum);
-		MutableAttributeSet attr = new SimpleAttributeSet();
-		
-		String fontSizeStr = "";
-		int fontsize = 12;
-		String text = ste.getTranslation();
-		// set text and font
-		if ((text.length() == 0) || (useSource == true))
+		if (m_projectLoaded == false)
 		{
-			// no translation available - display source text
-			text = ste.getSrcText();
-			if (hotSegment == true)
-			{
-				// this is a to-be-translated segment, use the target font
-				fontSizeStr = m_locFontSize;
-				StyleConstants.setFontFamily(attr, m_locFont);
-				StyleConstants.setForeground(attr, Color.darkGray);
-			}
-			else
-			{
-				fontSizeStr = m_srcFontSize;
-				StyleConstants.setFontFamily(attr, m_srcFont);
-			}
+			return;
 		}
-		else
-		{
-			fontSizeStr = m_locFontSize;
-			StyleConstants.setFontFamily(attr, m_locFont);
-			StyleConstants.setForeground(attr, Color.darkGray);
-		}
+		// read current entry text and commit it to memory if it's changed
+		// clear out segment markers while we're at it
+
+		// +1 is for newline between source text and SEGMENT 
+		int start = m_segmentStartOffset + m_sourceDisplayLength + 
+					OStrings.TF_CUR_SEGMENT_START.length() + 1;
+		int end = m_xlPane.getText().length() - m_segmentEndInset - 
+					OStrings.TF_CUR_SEGMENT_END.length();
+		String s = m_xlPane.getText().substring(start, end);
+		m_xlPane.select(start, end);
+		MutableAttributeSet mattr = null;
+		mattr = new SimpleAttributeSet();
+		StyleConstants.setForeground(mattr, Color.darkGray);
+		m_xlPane.setCharacterAttributes(mattr, true);
 		
-		// convert hard soft return to hard for display
-		text = text.replace((char) 0x8d, (char) 0x0a);
+		m_xlPane.select(end, m_xlPane.getText().length() - m_segmentEndInset);
+		m_xlPane.replaceSelection("");
+		m_xlPane.select(m_segmentStartOffset, start);
+		m_xlPane.replaceSelection("");
 			
-
-		// set appropriate font size
-		try 
+		if (s.equals(""))
 		{
-			fontsize = Integer.valueOf(fontSizeStr).intValue();
-		}
-		catch (NumberFormatException nfe)
-		{
-			fontsize = 12;
+			s = m_curEntry.getSrcText();
 		}
 
-		if (hotSegment == true)
+		// convert hard return to soft
+		s = s.replace((char) 0x0a, (char) 0x8d);
+		m_curEntry.setTranslation(s);
+		
+		DocumentSegment docSeg = (DocumentSegment) 
+							m_docSegList.get(m_curEntryNum - m_xlFirstEntry);
+		docSeg.length = s.length() + "\n\n".length();	
+		
+		// update the length parameters of all changed segments
+		// update strings in display
+		if (s.equals(m_curTrans) == false)
 		{
-			// add segment tags to start and end of display text
-			String start = OStrings.TF_CUR_SEGMENT_START;
-			String end = OStrings.TF_CUR_SEGMENT_END;
-			if (m_segmentTagHasNumber)
+			// update memory
+			m_curEntry.setTranslation(s);
+
+			// update display
+			// find all identical strings and redraw them
+			SourceTextEntry ste = CommandThread.core.getSTE(m_curEntryNum);
+			StringEntry se = ste.getStrEntry();
+			ListIterator it = se.getParentList().listIterator();
+			int entry;
+			int offset;
+			int i;
+			while (it.hasNext())
 			{
-				// put entry number in first tag
-				int num = m_curEntryNum + 1;
-				int ones;
-				// do it digit by digit - there's a better way (like sprintf)
-				//	but I don't recall the Java method presently
-				String disp = "";
-				while (num > 0)
+				ste = (SourceTextEntry) it.next();
+				entry = ste.entryNum();
+				if ((entry >= m_xlFirstEntry) && (entry <= m_xlLastEntry))
 				{
-					ones = num % 10;
-					num /= 10;
-					disp = ((int) ones) + disp;
+					// found something to update
+					// find offset to this segment, remove it and
+					//	replace the updated text
+					offset = 0;
+					// current entry is already handled 
+					if (entry == m_curEntryNum)
+						continue;
+
+					// build offset
+					for (i=m_xlFirstEntry; i<entry; i++)
+					{
+						docSeg = (DocumentSegment) m_docSegList.get(
+								i-m_xlFirstEntry);
+						offset += docSeg.length;
+					}
+					// replace old text w/ new
+					docSeg = (DocumentSegment) m_docSegList.get(
+								entry - m_xlFirstEntry);
+					m_xlPane.select(offset, offset+docSeg.length);
+					m_xlPane.replaceSelection(s + "\n");
+					docSeg.length = s.length() + 1;
+//					insertSegment(entry, offset, null, false, false);
 				}
-				int zero = start.lastIndexOf('0');
-				start = start.substring(0, zero-disp.length()+1) + 
-					disp + start.substring(zero+1);
 			}
-			// insert text into document
-			// make sure segment tags display in source font
-			MutableAttributeSet segAttr = new SimpleAttributeSet();
-			StyleConstants.setFontFamily(segAttr, m_srcFont);
-			StyleConstants.setFontSize(segAttr, fontsize);
-			StyleConstants.setBold(segAttr, true);
-
-			StyleConstants.setFontSize(attr, fontsize);
-			m_xlDoc.insertString(offset, start, segAttr);
-			offset += start.length();
-			m_xlDoc.insertString(offset, " " + text + " ", attr);
-			offset += text.length() + 2;
-			m_xlDoc.insertString(offset, end, segAttr);
-			offset += end.length();
-			len = start.length() + text.length() + end.length();
-			m_curTrans = text;
 		}
-		else
-		{
-			// insert text into document
-			StyleConstants.setFontSize(attr, fontsize);
-			m_xlDoc.insertString(offset, text, attr);
-			offset += text.length();
-			len = text.length();
-			m_segmentDisplayLength = len + 2;
-		}
-
-		// add a small space between segments for readibility
-		attr = new SimpleAttributeSet();
-		text = "\n\n";
-		StyleConstants.setFontFamily(attr, "Monospaced");
-		StyleConstants.setFontSize(attr, 6);
-		m_xlDoc.insertString(offset, text, attr);
-
-		len += text.length();
-
-		return len;
-	}
-	
-	// unhilite current entry; remove redundant text
-	public synchronized void deactivateEntry()
-		throws BadLocationException
-	{
-//System.out.println("deactivate entry  offset:"+m_segmentStartOffset+" doclen:"+m_xlDoc.getLength()+" dispLen:"+m_segmentDisplayLength+" inset:"+m_segmentEndInset+" segend:"+(m_xlDoc.getLength()-m_segmentEndInset));
-		// first cut out old text
-		m_xlDoc.remove(m_segmentStartOffset, 
-				m_xlDoc.getLength() - m_segmentEndInset - m_segmentStartOffset);
-
-		// insert translated text (if available) otherwise insert source
-		int len = insertSegment(m_curEntryNum, m_segmentStartOffset, 
-					false, false);
-
-		DocumentSegment docSeg = (DocumentSegment) m_docSegList.get(
-				m_curEntryNum-m_xlFirstEntry);
-		docSeg.length = len;
+		m_undo.die();
 	}
 
+	// activate current entry by displaying source text and imbedding
+	//	displaying text in markers
 	// move document focus to current entry
 	// make sure fuzzy info displayed if available and wanted
 	public synchronized void activateEntry() 
 	{
-//System.out.println("activate entry");
 		int i;
 		DocumentSegment docSeg;
 
@@ -1181,39 +908,61 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 		String srcText = m_curEntry.getSrcText();
 		String trans = m_curEntry.getTranslation();;
 		
+		m_sourceDisplayLength = srcText.length();
+		
 		// sum up total character offset to current segment start
 		m_segmentStartOffset = 0;
 		for (i=m_xlFirstEntry; i<m_curEntryNum; i++)
 		{
 			docSeg = (DocumentSegment) m_docSegList.get(i-m_xlFirstEntry);
-			m_segmentStartOffset += docSeg.length;
+			m_segmentStartOffset += docSeg.length; // length includes \n
 		}
 
-		// remove display text; replace w/ source
-		docSeg = (DocumentSegment) m_docSegList.get(m_curEntryNum - 
-					m_xlFirstEntry);
-		try 
-		{
-			m_xlDoc.remove(m_segmentStartOffset, docSeg.length);
-			// display source text
-			m_segmentDisplayLength = insertSegment(m_curEntryNum, 
-						m_segmentStartOffset, true, false);
-			m_segmentEndInset = m_segmentStartOffset + m_segmentDisplayLength;
-			m_segmentEndInset += insertSegment(m_curEntryNum, 
-						m_segmentEndInset, false, true);
-			// -2 to take into account double newlines at end of segment
-			m_segmentEndInset = m_xlDoc.getLength() - m_segmentEndInset - 2;
+		docSeg = (DocumentSegment) m_docSegList.get(
+					m_curEntryNum - m_xlFirstEntry);
+		// -2 to move inside newlines at end of segment
+		int paneLen = m_xlPane.getText().length();
+		m_segmentEndInset = paneLen - (m_segmentStartOffset + docSeg.length-2);
 
-		}
-		catch (BadLocationException e)
+		// get label tags
+		String startStr = "\n" + OStrings.TF_CUR_SEGMENT_START;
+		String endStr = OStrings.TF_CUR_SEGMENT_END;
+		if (m_segmentTagHasNumber)
 		{
-			// this is bad - for some reason we've got out of sync
-			//	w/ the UI
-			// possible corruption can occur if we continue, so 
-			//	bail out completely to be safe
-			displayError(OStrings.TF_BAD_LOCATION_POSSIBLE_CORRUPTION, e);
-			fatalError(OStrings.TF_BAD_LOCATION_POSSIBLE_CORRUPTION, null);
+			// put entry number in first tag
+			int num = m_curEntryNum + 1;
+			int ones;
+			// do it digit by digit - there's a better way (like sprintf)
+			//	but this works just fine
+			String disp = "";
+			while (num > 0)
+			{
+				ones = num % 10;
+				num /= 10;
+				disp = ((int) ones) + disp;
+			}
+			int zero = startStr.lastIndexOf('0');
+			startStr = startStr.substring(0, zero-disp.length()+1) + 
+				disp + startStr.substring(zero+1);
 		}
+
+		// append to end of segment first because this operation is done
+		//	by reference to end of file which will change after insert
+		m_xlPane.select(paneLen-m_segmentEndInset, paneLen-m_segmentEndInset);
+		MutableAttributeSet mattr = null;
+		mattr = new SimpleAttributeSet();
+		StyleConstants.setBold(mattr, true);
+		m_xlPane.setCharacterAttributes(mattr, true);
+		m_xlPane.replaceSelection(endStr);
+		paneLen = -1;	// after replacement this is no longer accurate
+
+		m_xlPane.select(m_segmentStartOffset, m_segmentStartOffset);
+		String insertText = srcText + startStr;
+		m_xlPane.replaceSelection(insertText);
+		m_xlPane.select(m_segmentStartOffset, m_segmentStartOffset + 
+				insertText.length() - 1);
+		m_xlPane.setCharacterAttributes(mattr, true);
+//System.out.println("inserting text '"+srcText+"' (+startString) at "+(m_segmentStartOffset));
 
 		
 		// TODO XXX format source text if there is near match
@@ -1236,9 +985,14 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 		if (se.getGlosList().size() > 0)
 		{
 			// TODO do something with glossary terms
-			m_glossaryLength = 0;
-
-			// make glossary entries bold
+			m_glossaryLength = se.getGlosList().size();
+			ListIterator li = se.getGlosList().listIterator();
+			while (li.hasNext())
+			{
+				GlossaryEntry glos = (GlossaryEntry) li.next();
+				m_matchViewer.addGlosTerm(glos.getSrcText(), glos.getLocText(),
+						glos.getCommentText());
+			}
 		}
 		else
 			m_glossaryLength = 0;
@@ -1270,19 +1024,12 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 		}
 		else
 			m_statusLabel.setText("");
+
+		m_matchViewer.updateText();
 		
-		// with glossary information displayed, we can finally set
-		//	the end inset
-		m_segmentEndInset += m_glossaryLength;
-//System.out.println("activate entry  offset:"+m_segmentStartOffset+" doclen:"+m_xlDoc.getLength()+" dispLen:"+m_segmentDisplayLength+" inset:"+m_segmentEndInset+" segend:"+(m_xlDoc.getLength()-m_segmentEndInset));
 //System.out.println(" segment text '"+m_curEntry.getSrcText()+"' -> '"+m_curEntry.getTranslation()+"'");
 
-		// hilite translation area in yellow
-		MutableAttributeSet attr = new SimpleAttributeSet();
-		StyleConstants.setBackground(attr, Color.yellow);
-		m_xlDoc.setCharacterAttributes(m_segmentStartOffset, 
-				m_xlDoc.getLength() - m_segmentEndInset - 
-				1 - m_segmentStartOffset, attr, false);
+		// TODO - hilite translation area in yellow
 
 		// set caret position
 
@@ -1305,9 +1052,8 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 		// don't try to set caret after end of document
 		if (padding > m_segmentEndInset)
 			padding = m_segmentEndInset;
-		m_xlPane.setCaretPosition(m_xlDoc.getLength() - m_segmentEndInset 
-				+ padding);
-//System.out.println("seg: ("+m_segmentStartOffset+", "+(m_xlDoc.getLength()-m_segmentEndInset)+")  setting "+(m_xlDoc.getLength() - m_segmentEndInset + padding));
+		m_xlPane.setCaretPosition(m_xlPane.getText().length() - 
+				m_segmentEndInset + padding);
 
 		// try to make sure entire segment displays
 		SwingUtilities.invokeLater(new Runnable()
@@ -1330,16 +1076,12 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 			}
 		});
 //
-//		m_xlPane.setCaretPosition(m_xlDoc.getLength() + nextLength -
-//		m_xlPane.setCaretPosition(m_xlDoc.getLength() -
-//					m_segmentEndInset - 
-//					OStrings.TF_CUR_SEGMENT_END.length() - 3);
 //		checkCaret();
 		if (m_docReady == false)
 		{
-			m_xlPane.setCursor(m_defaultCursor);
 			m_docReady = true;
 		}
+		m_undo.die();
 	}
 
 	// colors text in the given document according to the text differences
@@ -1354,13 +1096,7 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 		int start;
 		int end;
 
-		MutableAttributeSet mattr = null;
-
 		// reset color of text to default value
-		mattr = new SimpleAttributeSet();
-		StyleConstants.setForeground(mattr, textColor);
-		doc.setCharacterAttributes(startOffset, length, mattr, false);
-
 		ArrayList tokenList = new ArrayList();
 		StaticUtils.tokenizeText(text, tokenList);
 		int numTokens = tokenList.size();
@@ -1374,18 +1110,18 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 			start = startOffset + ((Token) tokenList.get(i)).offset;
 //System.out.println("  range "+start+" to "+end);
 
-			mattr = new SimpleAttributeSet();
-			if ((attrList[i] & StringData.UNIQ) != 0)
-			{
+//			mattr = new SimpleAttributeSet();
+//			if ((attrList[i] & StringData.UNIQ) != 0)
+//			{
 //System.out.println("    uniq");
-				StyleConstants.setForeground(mattr, uniqColor);
-			}
-			else if ((attrList[i] & StringData.PAIR) != 0)
-			{
+//				StyleConstants.setForeground(mattr, uniqColor);
+//			}
+//			else if ((attrList[i] & StringData.PAIR) != 0)
+//			{
 //System.out.println("    near");
-				StyleConstants.setForeground(mattr, Color.green);
-			}
-			doc.setCharacterAttributes(start, end-start, mattr, false);
+//				StyleConstants.setForeground(mattr, Color.green);
+//			}
+//			doc.setCharacterAttributes(start, end-start, mattr, false);
 		}
 	}
 
@@ -1421,6 +1157,22 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 					m_projWin.show();
 					m_projWin.toFront();
 				}
+			}
+			else if (evtSrc == m_miEditUndo)
+			{
+				try 
+				{
+					m_undo.undo();
+				}
+				catch (CannotUndoException cue)	{ ; }
+			}
+			else if (evtSrc == m_miEditRedo)
+			{
+				try 
+				{
+					m_undo.redo();
+				}
+				catch (CannotRedoException cue)	{ ; }
 			}
 			else if (evtSrc == m_miEditNext)
 			{
@@ -1495,84 +1247,47 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 		public MFontSelection(JFrame par)
 		{
 			super(par, true);
-			setSize(500, 240);
+			setSize(300, 100);
+			setLocation(200, 200);
+			Container cont = getContentPane();
+			cont.setLayout(new GridLayout(3, 2, 8, 3));
+			
+			// create UI objects
+			JLabel fontLabel = new JLabel();
+			m_fontCB = new JComboBox(StaticUtils.getFontNames());
+			m_fontCB.setEditable(true);
+			if (m_font.equals("") == false)
+				m_fontCB.setSelectedItem(m_font);
+			cont.add("font label", fontLabel);
+			cont.add("font box", m_fontCB);
 
 			String[] fontSizes = new String[] 
 				{	"8",	"9",	"10",	"11",	
 					"12",	"14",	"16",	"18" };
+			JLabel fontSizeLabel = new JLabel();
+			m_fontSizeCB = new JComboBox(fontSizes);
+			m_fontSizeCB.setEditable(true);
+			if (m_fontSize.equals("") == false)
+				m_fontSizeCB.setSelectedItem(m_fontSize);
+			cont.add("size label", fontSizeLabel);
+			cont.add("size box", m_fontSizeCB);
+			cont.add("spacer", new Container());
 			
-			// create UI objects
-			JLabel srcFontLabel = new JLabel();
-			m_srcFontCB = new JComboBox(StaticUtils.getFontNames());
-			m_srcFontCB.setEditable(true);
-			if (m_srcFont.equals("") == false)
-				m_srcFontCB.setSelectedItem(m_srcFont);
-
-			JLabel srcFontSizeLabel = new JLabel();
-			m_srcFontSizeCB = new JComboBox(fontSizes);
-			m_srcFontSizeCB.setEditable(true);
-			if (m_srcFontSize.equals("") == false)
-				m_srcFontSizeCB.setSelectedItem(m_srcFontSize);
-
-			JLabel locFontLabel = new JLabel();
-			m_locFontCB = new JComboBox(StaticUtils.getFontNames());
-			m_locFontCB.setEditable(true);
-			if (m_locFont.equals("") == false)
-				m_locFontCB.setSelectedItem(m_locFont);
-
-			JLabel locFontSizeLabel = new JLabel();
-			m_locFontSizeCB = new JComboBox(fontSizes);
-			m_locFontSizeCB.setEditable(true);
-			if (m_locFontSize.equals("") == false)
-				m_locFontSizeCB.setSelectedItem(m_locFontSize);
-
+			Box buttonBox = Box.createHorizontalBox();
 			JButton okButton = new JButton();
 			JButton cancelButton = new JButton();
+			buttonBox.add(Box.createHorizontalGlue());
+			buttonBox.add(okButton);
+			buttonBox.add(Box.createHorizontalStrut(5));
+			buttonBox.add(cancelButton);
+			cont.add(buttonBox);
 	
-			// arrange the UI
-			Box srcFontSize = Box.createHorizontalBox();
-			srcFontSize.add(srcFontSizeLabel);
-			srcFontSize.add(Box.createHorizontalGlue());
-			srcFontSize.add(m_srcFontSizeCB);
-			
-			Box srcFont = Box.createVerticalBox();
-			srcFont.add(srcFontLabel);
-			srcFont.add(m_srcFontCB);
-			srcFont.add(srcFontSize);
-
-			Box locFontSize = Box.createHorizontalBox();
-			locFontSize.add(locFontSizeLabel);
-			locFontSize.add(Box.createHorizontalGlue());
-			locFontSize.add(m_locFontSizeCB);
-			
-			Box locFont = Box.createVerticalBox();
-			locFont.add(locFontLabel);
-			locFont.add(m_locFontCB);
-			locFont.add(locFontSize);
-
-			Box font = Box.createHorizontalBox();
-			font.add(srcFont);
-			font.add(Box.createHorizontalStrut(10));
-			font.add(locFont);
-
-			Box buttons = Box.createHorizontalBox();
-			buttons.add(Box.createHorizontalGlue());
-			buttons.add(cancelButton);
-			buttons.add(Box.createHorizontalStrut(10));
-			buttons.add(okButton);
-
-			Container cont = getContentPane();
-			cont.add(font, "Center");
-			cont.add(buttons, "South");
-			
 			// add text
 			okButton.setText(OStrings.PP_BUTTON_OK);
 			cancelButton.setText(OStrings.PP_BUTTON_CANCEL);
 
-			srcFontLabel.setText(OStrings.TF_SELECT_SOURCE_FONT);
-			srcFontSizeLabel.setText(OStrings.TF_SELECT_FONTSIZE);
-			locFontLabel.setText(OStrings.TF_SELECT_TARGET_FONT);
-			locFontSizeLabel.setText(OStrings.TF_SELECT_FONTSIZE);
+			fontLabel.setText(OStrings.TF_SELECT_SOURCE_FONT);
+			fontSizeLabel.setText(OStrings.TF_SELECT_FONTSIZE);
 
 			setTitle(OStrings.TF_SELECT_FONTS_TITLE);
 
@@ -1598,48 +1313,30 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 		{
 			String str;
 			CommandThread core = CommandThread.core;
-			str = m_srcFontCB.getSelectedItem().toString();
-			if (str.equals(m_srcFont) == false)
+			str = m_fontCB.getSelectedItem().toString();
+			if (str.equals(m_font) == false)
 			{
 				m_isChanged = true;
-				m_srcFont = str;
-				core.setPreference(OConsts.TF_SRC_FONT_NAME, m_srcFont);
+				m_font = str;
+				core.setPreference(OConsts.TF_SRC_FONT_NAME, m_font);
 			}
 			
-			str = m_srcFontSizeCB.getSelectedItem().toString();
-			if (str.equals(m_srcFontSize) == false)
+			str = m_fontSizeCB.getSelectedItem().toString();
+			if (str.equals(m_fontSize) == false)
 			{
 				m_isChanged = true;
-				m_srcFontSize = str;
-				core.setPreference(OConsts.TF_SRC_FONT_SIZE, m_srcFontSize);
+				m_fontSize = str;
+				core.setPreference(OConsts.TF_SRC_FONT_SIZE, m_fontSize);
 			}
 			
-			str = m_locFontCB.getSelectedItem().toString();
-			if (str.equals(m_locFont) == false)
-			{
-				m_isChanged = true;
-				m_locFont = str;
-				core.setPreference(OConsts.TF_LOC_FONT_NAME, m_locFont);
-			}
-			
-			str = m_locFontSizeCB.getSelectedItem().toString();
-			if (str.equals(m_locFontSize) == false)
-			{
-				m_isChanged = true;
-				m_locFontSize = str;
-				core.setPreference(OConsts.TF_LOC_FONT_SIZE, m_locFontSize);
-			}
-
 			dispose();
 		}
 
 		private void		doCancel()		{ dispose();			}
 		protected boolean	isChanged()		{ return m_isChanged;	}
 		
-		protected JComboBox	m_srcFontCB;
-		protected JComboBox	m_srcFontSizeCB;
-		protected JComboBox	m_locFontCB;
-		protected JComboBox	m_locFontSizeCB;
+		protected JComboBox	m_fontCB;
+		protected JComboBox	m_fontSizeCB;
 
 		protected boolean	m_isChanged = false;
 	}
@@ -1696,10 +1393,12 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 								}
 							}
 						}
-						else if (pos > (m_xlDoc.getLength()-m_segmentEndInset))
+						else if (pos > (m_xlPane.getText().length() -
+											m_segmentEndInset))
 						{
 							// after current entry
-							int inset = (m_xlDoc.getLength()-m_segmentEndInset);
+							int inset = m_xlPane.getText().length() -
+											m_segmentEndInset;
 							for (i=m_curEntryNum+1; i<=m_xlLastEntry; i++)
 							{
 								docSeg = (DocumentSegment) 
@@ -1722,6 +1421,12 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 		//	across jvm versions
 		protected void processKeyEvent(KeyEvent e)
 		{
+			if (m_projectLoaded == false)
+			{
+				if (e.getModifiers() == m_shortcutKey)
+						super.processKeyEvent(e);
+				return;
+			}
 			int keyCode = e.getKeyCode();
 			char c = e.getKeyChar();
 
@@ -1858,7 +1563,7 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 					{
 						int pos = m_xlPane.getCaretPosition();
 						int start = m_segmentStartOffset + 
-									m_segmentDisplayLength +
+									m_sourceDisplayLength +
 									OStrings.TF_CUR_SEGMENT_START.length() + 1;
 						if (pos < start)
 							m_xlPane.moveCaretPosition(start);
@@ -1874,8 +1579,9 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 					{
 						int pos = m_xlPane.getCaretPosition();
 						// -1 for space before tag, -2 for newlines
-						int end = m_xlDoc.getLength() - m_segmentEndInset -
-								OStrings.TF_CUR_SEGMENT_END.length() - 3;
+						int end = m_xlPane.getText().length() -
+								m_segmentEndInset-
+								OStrings.TF_CUR_SEGMENT_END.length();
 						if (pos > end)
 							m_xlPane.moveCaretPosition(end);
 					}
@@ -1942,15 +1648,15 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 		{
 			// make sure we're not at end of segment
 			// -1 for space before tag, -2 for newlines
-			int end = m_xlDoc.getLength() - m_segmentEndInset -
-				OStrings.TF_CUR_SEGMENT_END.length() - 3;
+			int end = m_xlPane.getText().length() - m_segmentEndInset -
+				OStrings.TF_CUR_SEGMENT_END.length();
 			if (pos >= end)
 				return false;
 		}
 		else
 		{
 			// make sure we're not at start of segment
-			int start = m_segmentStartOffset + m_segmentDisplayLength +
+			int start = m_segmentStartOffset + m_sourceDisplayLength +
 				OStrings.TF_CUR_SEGMENT_START.length() + 1;
 			if (pos <= start)
 			{
@@ -1966,11 +1672,11 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 		//int pos = m_xlPane.getCaretPosition();
 		int spos = m_xlPane.getSelectionStart();
 		int epos = m_xlPane.getSelectionEnd();
-		int start = m_segmentStartOffset + m_segmentDisplayLength +
+		int start = m_segmentStartOffset + m_sourceDisplayLength +
 			OStrings.TF_CUR_SEGMENT_START.length() + 1;
 		// -1 for space before tag, -2 for newlines
-		int end = m_xlDoc.getLength() - m_segmentEndInset -
-			OStrings.TF_CUR_SEGMENT_END.length() - 3;
+		int end = m_xlPane.getText().length() - m_segmentEndInset -
+			OStrings.TF_CUR_SEGMENT_END.length();
 		boolean reset = false;
 		
 		if (spos != epos)
@@ -1981,10 +1687,20 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 				reset = true;
 				m_xlPane.setSelectionStart(start);
 			}
+			else if (spos > end)
+			{
+				reset = true;
+				m_xlPane.setSelectionStart(end);
+			}
 			if (epos > end)
 			{
 				reset = true;
 				m_xlPane.setSelectionEnd(end);
+			}
+			else if (epos < start)
+			{
+				reset = true;
+				m_xlPane.setSelectionStart(start);
 			}
 		}
 		else
@@ -2043,6 +1759,8 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 	private JMenuItem	m_miFileSave;
 	private JMenuItem	m_miFileQuit;
 	private JMenu m_mEdit;
+	private JMenuItem	m_miEditUndo;
+	private JMenuItem	m_miEditRedo;
 	private JMenuItem	m_miEditNext;
 	private JMenuItem	m_miEditPrev;
 //	private JMenuItem	m_miEditGoto;
@@ -2070,10 +1788,8 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 //	private JMenuItem	m_miVersionNumber;
 
 	// source and target font display info
-	protected String	m_srcFont;
-	protected String	m_srcFontSize;
-	protected String	m_locFont;
-	protected String	m_locFontSize;
+	protected String	m_font;
+	protected String	m_fontSize;
 
 	// first and last entry numbers in current file
 	protected int		m_xlFirstEntry;
@@ -2081,7 +1797,7 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 
 	// starting offset and length of source lang in current segment
 	protected int		m_segmentStartOffset = 0;
-	protected int		m_segmentDisplayLength = 0;
+	protected int		m_sourceDisplayLength = 0;
 	protected int		m_segmentEndInset = 0;
 	// text length of glossary, if displayed
 	protected int		m_glossaryLength = 0;
@@ -2092,7 +1808,6 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 
 	// indicates the document is loaded and ready for processing
 	protected boolean	m_docReady = false;
-	protected Cursor	m_defaultCursor = null;
 
 	// indicates the boundary of editable text in xlPane (char offsets)
 	protected int		m_lowTextLock = 0;
@@ -2103,13 +1818,9 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 
 	// make a local copy of this instead of fetching it each time
 	protected int	m_shortcutKey;
+	protected UndoManager	m_undo = null;
 
-	private JTextPane	m_oldSrcPane;
-	private DefaultStyledDocument	m_oldSrcDoc;
-	private JTextPane	m_oldLocPane;
-	private DefaultStyledDocument	m_oldLocDoc;
 	private XLPane		m_xlPane;
-	private DefaultStyledDocument	m_xlDoc;
 	private JScrollPane	m_xlScroller;
 
 	private LinkedList	m_nearList;
@@ -2128,6 +1839,7 @@ System.out.println("BAD LOCATION EXCEPTION UPDATE FUZZY");
 	protected String	m_curTrans = "";
 
 	private ProjectFrame	m_projWin = null;
+	protected MatchWindow	m_matchViewer = null;
 
 	private boolean m_projectLoaded = false;
 	

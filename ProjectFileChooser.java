@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  16Sep2003
+//  Build date:  8Mar2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -45,7 +45,7 @@ class ProjectFileChooser extends JFileChooser
 		setFileSelectionMode(DIRECTORIES_ONLY);
 		setMultiSelectionEnabled(false);
 		setFileHidingEnabled(true);
-		addPropertyChangeListener(new DirectoryChangeListener());
+		//addPropertyChangeListener(new DirectoryChangeListener());
 		if ((startDirectory != null) && (startDirectory.equals("") == false))
 		{
 			// set current directory
@@ -100,17 +100,17 @@ class ProjectFileChooser extends JFileChooser
 			return false;
 	}
 
-	class DirectoryChangeListener implements PropertyChangeListener
-	{
-		public void propertyChange(PropertyChangeEvent evt)
-		{
-			if (isProjectDir(getCurrentDirectory()))
-			{
-				acceptedProjectDir();
-			}
-		}
-	}
-
+//	class DirectoryChangeListener implements PropertyChangeListener
+//	{
+//		public void propertyChange(PropertyChangeEvent evt)
+//		{
+//			if (isProjectDir(getCurrentDirectory()))
+//			{
+//				acceptedProjectDir();
+//			}
+//		}
+//	}
+//
 	//////////////////////////////////////////////////////////////
 
 	public static void main(String[] args)

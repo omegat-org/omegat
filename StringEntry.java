@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  16Sep2003
+//  Build date:  8Mar2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -31,6 +31,24 @@
 
 import java.util.*;
 import java.security.*;
+
+class GlossaryEntry
+{
+	public GlossaryEntry(String src, String loc, String com)
+	{
+		m_src = src;
+		m_loc = loc;
+		m_com = com;
+	}
+
+	public String	getSrcText()	{ return m_src;		}
+	public String	getLocText()	{ return m_loc;		}
+	public String	getCommentText()	{ return m_com;		}
+
+	protected String	m_src;
+	protected String	m_loc;
+	protected String	m_com;
+}
 
 // a string entry represents a unique translatable string
 // (a single string may occur many times in data files, but only
@@ -86,7 +104,7 @@ class StringEntry
 	}
 	
 	public LinkedList getGlosList()		{ return m_glosList;	}
-	public void addGlosString(StringEntry strEntry)
+	public void addGlosString(GlossaryEntry strEntry)
 	{
 		m_glosList.add(strEntry);
 	}

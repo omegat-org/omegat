@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  16Sep2003
+//  Build date:  8Mar2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -933,10 +933,14 @@ class CommandThread extends Thread
 					{
 						src = tab.get(j, 0);
 						loc = tab.get(j, 1);
-						if (loc.equals(""))
-							addGlosEntry(src);
-						else
-							addGlosEntry(src, loc);
+						String com = tab.get(j, 2);
+						if (m_glosEntryHash.get(src) == null)
+						{
+							GlossaryEntry glosEntry = new GlossaryEntry(src, 
+									loc, com);
+							m_glosEntryHash.put(src, glosEntry);
+							m_glosEntryList.add(glosEntry);
+						}
 					}
 				}
 				else
@@ -1083,7 +1087,7 @@ class CommandThread extends Thread
 	protected void buildGlossary()
 	{
 		int i;
-		StringEntry glosEntry;
+		GlossaryEntry glosEntry;
 		StringEntry strEntry;
 		String glosStr;
 		String glosStrLow;
@@ -1092,7 +1096,7 @@ class CommandThread extends Thread
 		TreeMap foundList;
 		for (i=0; i<m_glosEntryList.size(); i++)
 		{
-			glosEntry = (StringEntry) m_glosEntryList.get(i);
+			glosEntry = (GlossaryEntry) m_glosEntryList.get(i);
 			glosStr = glosEntry.getSrcText();
 			foundList = findAll(glosStr);
 			// TODO - set locale in toLower call
@@ -1161,6 +1165,11 @@ class CommandThread extends Thread
 				Object[] obj = { new Integer(i), len};
 				MessageRelay.uiMessageSetMessageText(m_transFrame,
 					MessageFormat.format(evtStr, obj));
+				try
+				{
+					sleep(10);
+				}
+				catch (InterruptedException ie) { ; }
 			}
 			if (i == 1)
 			{
@@ -1373,27 +1382,6 @@ class CommandThread extends Thread
 		catch (ParseException e)
 		{
 			throw new IOException("Parse error in '" + fname + "'\n" +  e);
-		}
-	}
-
-	protected void addGlosEntry(String srcText)
-	{
-		if (m_glosEntryHash.get(srcText) == null)
-		{
-			StringEntry strEntry = new StringEntry(srcText);
-			m_glosEntryHash.put(srcText, strEntry);
-			m_glosEntryList.add(strEntry);
-		}
-	}
-
-	protected void addGlosEntry(String srcText, String locText)
-	{
-		if (m_glosEntryHash.get(srcText) == null)
-		{
-			StringEntry strEntry = new StringEntry(srcText);
-			strEntry.setTranslation(locText);
-			m_glosEntryHash.put(srcText, strEntry);
-			m_glosEntryList.add(strEntry);
 		}
 	}
 

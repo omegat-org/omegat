@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  16Sep2003
+//  Build date:  8Mar2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -675,7 +675,8 @@ class HTMLParser
 		String s = (String) m_charMap.get(new Character(c));
 		if ((s == null) && ((c > 255) || ((c > 126) && (c <= 160))))
 		{
-			s = "&#" + String.valueOf((int) c) + ";";
+			//s = "&#" + String.valueOf((int) c) + ";";
+			s = "#" + String.valueOf((int) c);
 		}
 		
 		return s;

@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  16Sep2003
+//  Build date:  8Mar2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -339,6 +339,8 @@ System.out.println("mapping extension '"+str.substring(0,pos)+"' to '"+str.subst
 		StringBuffer tokenBuf = new StringBuffer();
 		int len = str.length();
 		boolean hasText = true;
+		// process everything as lower case
+		str = str.toLowerCase();
 
 		char c;
 		int type;

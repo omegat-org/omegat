@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  16Sep2003
+//  Build date:  8Mar2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -33,7 +33,7 @@ import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-//import javax.swing.filechooser.*;
+import javax.swing.filechooser.*;
 import java.io.*;
 import java.lang.*;
 import java.text.ParseException;
@@ -65,14 +65,34 @@ class ProjectProperties extends JFrame
 		m_locLang = "";
 	}
 
+	class OTFileFilter extends javax.swing.filechooser.FileFilter
+	{
+		public String getDescription()
+		{
+			return "OmegaT project files";
+		}
+		
+		public boolean accept(File f)
+		{
+			if (f.getName().endsWith(OConsts.PROJ_EXTENSION) == true)
+				return true;
+			else if (f.isDirectory() == true)
+				return true;
+			else
+				return false;
+		}
+	}
+
 	public boolean loadExisting() throws IOException, InterruptedIOException
 	{
 		reset();
 
 		// select existing project file - open it
 		String curDir = CommandThread.core.getPreference(OConsts.PREF_CUR_DIR);
-		JFileChooser pfc = new ProjectFileChooser(curDir);
-
+		//JFileChooser pfc = new ProjectFileChooser(curDir);
+		JFileChooser pfc = new JFileChooser(curDir);
+		pfc.setFileFilter(new OTFileFilter());
+		pfc.setFileView(new ProjectFileView());
 		int res = pfc.showOpenDialog(this);
 		if (res == JFileChooser.CANCEL_OPTION)
 			throw new InterruptedIOException();

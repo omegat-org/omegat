@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  16Sep2003
+//  Build date:  8Mar2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -89,9 +89,13 @@ class EntryListPane extends JTextPane
 		if ((preamble != null) && (preamble.equals("") == false))
 			m_stringBuf.append(preamble + "\n");
 		if ((src != null) && (src.equals("") == false))
+		{
 			m_stringBuf.append("-- "+src + "\n");
+		}
 		if ((loc != null) && (loc.equals("") == false))
+		{
 			m_stringBuf.append("-- "+loc + "\n");
+		}
 
 		m_entryList.add(new Integer(num));
 		m_offsetList.add(new Integer(m_stringBuf.length()));
@@ -99,6 +103,19 @@ class EntryListPane extends JTextPane
 
 	public void finalize()
 	{
+		String srcFont = CommandThread.core.getPreference(
+				OConsts.TF_SRC_FONT_NAME);
+		if (srcFont.equals("") == false)
+		{
+			int fontsize = 12;
+			try 
+			{
+				fontsize = Integer.valueOf(CommandThread.core.getPreference(
+							OConsts.TF_SRC_FONT_SIZE)).intValue();
+			}
+			catch (NumberFormatException nfe) { fontsize = 12; }
+			setFont(new Font(srcFont, Font.PLAIN, fontsize));
+		}
 		setText(m_stringBuf.toString());
 	}
 

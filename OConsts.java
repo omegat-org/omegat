@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  16Sep2003
+//  Build date:  8Mar2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -35,7 +35,8 @@ public static final String HANDLER_LIST		= "file_extension_mapping";
 public static final String IGNORE_LIST		= "ignore_file_list";
 
 // project file consts
-public static final String PROJ_FILENAME	= "omegat.project";
+public static final String PROJ_EXTENSION	= ".project";
+public static final String PROJ_FILENAME	= "omegat" + PROJ_EXTENSION;
 public static final String PROJ_PREFERENCE	= "omegat.prefs";
 public static final String PROJ_CUR_VERSION = "1.0";
 
@@ -91,6 +92,7 @@ public static final String PREF_NUM_FILE_MAPPINGS	= "num_file_mappings";
 public static final String PREF_FILE_MAPPING_N		= "file_mapping";
 
 public static final String PREF_SEARCH_DIR	= "search_dir";
+public static final String PREF_HILITE_COLOR	= "hilite_color";
 
 public static final String SW_DIR_CB_CHECKED_CMD	= "dir_ck";
 
@@ -100,8 +102,6 @@ public static final int		ST_MAX_SEARCH_RESULTS	= 50;
 
 public static final String TF_SRC_FONT_NAME		= "source_font";
 public static final String TF_SRC_FONT_SIZE		= "source_font_size";
-public static final String TF_LOC_FONT_NAME		= "target_font";
-public static final String TF_LOC_FONT_SIZE		= "target_font_size";
 public static final String TF_FONT_DEFAULT		= "Courier";
 public static final String TF_FONT_SIZE_DEFAULT	= "12";
 

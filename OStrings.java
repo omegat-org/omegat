@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  16Sep2003
+//  Build date:  8Mar2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -71,6 +71,8 @@ public static final String TF_MENU_FILE_PROJWIN	= "Show file list";
 public static final String TF_MENU_FILE_SAVE	= "Save";
 public static final String TF_MENU_FILE_QUIT	= "Quit";
 public static final String TF_MENU_EDIT		= "Edit";
+public static final String TF_MENU_EDIT_UNDO	= "Undo";
+public static final String TF_MENU_EDIT_REDO	= "Redo";
 public static final String TF_MENU_EDIT_NEXT	= "Next entry";
 public static final String TF_MENU_EDIT_PREV	= "Previous entry";
 public static final String TF_MENU_EDIT_FIND	= "Find";
@@ -94,7 +96,7 @@ public static final String TF_MENU_DISPLAY			= "Configuration";
 public static final String TF_MENU_DISPLAY_FUZZY	= "Fuzzy match info";
 public static final String TF_MENU_DISPLAY_GLOSSARY	= "Glossary";
 public static final String TF_MENU_DISPLAY_SOURCE	= "Source text";
-public static final String TF_MENU_DISPLAY_FONT	= "Fonts";
+public static final String TF_MENU_DISPLAY_FONT	= "Font";
 //public static final String TF_MENU_SERVER	= "Server";
 //public static final String TF_MENU_LANGUAGE	= "Language";
 //public static final String TF_MENU_LANGUAGE_RESCAN	= "rescan";
@@ -143,17 +145,19 @@ public static final String TF_NOTICE_TITLE_TAGS	= "Validating tags";
 // NOTE: segment start is assumed to contain "0000" string to overwrite
 //	with entry number.  If zeros not detected, entry number will not be
 //	displayed
-public static final String TF_CUR_SEGMENT_START		= "<segment 0000>";
-public static final String TF_CUR_SEGMENT_END		= "<end segment> ";
-public static final String TF_SELECT_SOURCE_FONT	= "Source font";
-public static final String TF_SELECT_FONTSIZE		= "Font size";
-public static final String TF_SELECT_TARGET_FONT	= "Target font";
-public static final String TF_SELECT_FONTS_TITLE	= "Fonts";
+public static final String TF_CUR_SEGMENT_START		= "<segment 0000> ";
+public static final String TF_CUR_SEGMENT_END		= " <end segment>";
+public static final String TF_SELECT_SOURCE_FONT	= "Font";
+public static final String TF_SELECT_FONTSIZE		= "Size";
+//public static final String TF_SELECT_TARGET_FONT	= "Target font";
+public static final String TF_SELECT_FONTS_TITLE	= "Select display font";
 public static final String TF_BAD_LOCATION_POSSIBLE_CORRUPTION =
 	"Potentially serious error encountered - somehow engine lost " +
 	"synchronization with UI text fields.  Aborting execution and " +
 	"gracefully crashing before corruption occurs.";
 public static final String TF_LOADING_FILE			= "Loading file: ";
+public static final String TF_MATCH_VIEWER_TITLE	= 
+	"Match and Glossary Viewer";
 
 // ContextFrame
 public static final String CF_SEARCH_RESULTS_SRC	= 
@@ -313,7 +317,7 @@ public static final String ST_FATAL_ERROR =
 public static final String ST_NOTHING_FOUND = "Search returned no matches";
 
 public static final String TF_INTRO_MESSAGE = 
-	"Insert some basic first time user instructions here\n";
+	"Welcome to OmegaT\n";
 //	"Welcome to OmegaT.\n\nTo begin a new translation project, select " +
 //	"'" + TF_MENU_FILE_CREATE + "' from the file menu and select a " +
 //	"place to save the new project.  During project creation, you will " + 

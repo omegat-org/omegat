@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  16Sep2003
+//  Build date:  8Mar2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -349,12 +349,14 @@ class SearchThread extends Thread
 	
 	// look for the search text in the specified text
 	// search supports wildcards * and ?
-	protected boolean searchString(String text, String search)
+	protected boolean searchString(String _text, String _search)
 	{
-		if ((text == null) || (search == null))
+		if ((_text == null) || (_search == null))
 			return false;
 
 		char c, t;
+		String text = _text.toLowerCase();
+		String search = _search.toLowerCase();
 		int searchLen = search.length();
 		int textLen = text.length();
 		int spos = 0;

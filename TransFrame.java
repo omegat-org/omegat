@@ -1073,7 +1073,8 @@ class TransFrame extends JFrame implements ActionListener
 				}
 				else if (ctr == (m_nearListNum+1))
 					end = offset;
-				if (++ctr > 5)
+				ctr++;
+				if (ctr >= 5)
 					break;
 			}
 			m_matchViewer.hiliteRange(start, end);
@@ -1490,7 +1491,7 @@ System.out.println("");
 			}
 			else if (evtSrc == m_miEditNext)
 			{
-				doPrevEntry();
+				doNextEntry();
 			}
 			else if (evtSrc == m_miEditPrev)
 			{

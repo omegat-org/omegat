@@ -33,6 +33,7 @@
         <delete dir="classes"/>
         <delete dir="dist"/>
         <delete dir="tmp"/>
+        <ant dir="addons/properties-import" target="clean" inheritAll="false"/>
     </target>
 
     <target name="win" description="Build Win32 distro" depends="init,jar,zip">
@@ -67,6 +68,9 @@
         
         <mkdir dir="dist"/>
         <zip basedir="tmp" destfile="dist/OmegaT_${version}.zip"/>
+
+        <ant dir="addons/properties-import" inheritAll="false"/>
+        <copy todir="dist" file="addons/properties-import/import_properties.zip"/>
     </target>
 
 

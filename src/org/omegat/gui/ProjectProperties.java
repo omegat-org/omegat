@@ -23,6 +23,7 @@ package org.omegat.gui;
 
 import org.omegat.gui.threads.CommandThread;
 import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
 import org.omegat.util.ProjectFileReader;
 
 import javax.swing.*;
@@ -30,12 +31,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.text.ParseException;
-import org.omegat.util.OStrings;
 
 /**
  * Creates a dialog where project properties are entered and/or modified
  *
- * //TODO MatchWindow has the same description
+ * @author Keith Godfrey
  */
 public class ProjectProperties extends JFrame
 {

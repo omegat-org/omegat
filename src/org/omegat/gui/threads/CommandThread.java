@@ -41,7 +41,7 @@ import java.util.zip.Adler32;
 /**
  * CommandThread is a thread to asynchronously do the stuff
  *
- * //TODO make exception strings multilingual
+ * @author Keith Godfrey
  */
 public class CommandThread extends Thread
 {

@@ -27,6 +27,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.MessageFormat;
 
+/**
+ * Utility class for copying untranslatable files.
+ *
+ * @author Keith Godfrey
+ */
 public class LFileCopy
 {
 	public static void copy(String src, String dest) throws IOException

@@ -23,6 +23,11 @@ package org.omegat.core;
 
 import java.util.TreeMap;
 
+/**
+ * An entry in the index
+ *
+ * @author Keith Godfrey
+ */
 public class IndexEntry extends Object
 {
 	public IndexEntry(String wrd)

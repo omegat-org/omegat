@@ -21,6 +21,11 @@
 
 package org.omegat.core;
 
+/**
+ * An entry in the glossary.
+ *
+ * @author Keith Godfrey
+ */
 public class GlossaryEntry
 {
 	public GlossaryEntry(String src, String loc, String com)

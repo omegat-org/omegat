@@ -35,6 +35,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
+/**
+ * Frame that displays help HTML files.
+ *
+ * @author Keith Godfrey
+ */
 public class HelpFrame extends JFrame
 {
 	public HelpFrame()

@@ -23,6 +23,8 @@ package org.omegat.util;
 
 /**
  * keeps track of specific attributes for project files
+ *
+ * @author Keith Godfrey
  */
  public class ProjectFileData
  {

@@ -24,6 +24,8 @@ package org.omegat.util;
 /**
  * RequestPacket class is used to wrap a request to the CommandThread.
  * Requests are queued and executed when CommandThread is not busy.
+ *
+ * @author Keith Godfrey
  */
 public class RequestPacket 
 {

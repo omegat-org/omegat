@@ -29,6 +29,12 @@ import java.text.ParseException;
 import java.util.HashMap;
 import org.omegat.util.OStrings;
 
+/**
+ * A collection of ststic helper methods to make HTML parsing easier 
+ * for HTML filter.
+ *
+ * @author Keith Godfrey
+ */
 public class HTMLParser
 {
 	static HTMLTag identTag(FileHandler fh)

@@ -27,6 +27,8 @@ import java.util.Map;
 
 /*
  * Keeps track of how many times objects occur
+ *
+ * @author Keith Godfrey
  */
 public class FreqList 
 {

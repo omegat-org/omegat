@@ -29,6 +29,11 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Class to load & save OmegaT preferences
+ *
+ * @author Keith Godfrey
+ */
 public class PreferenceManager
 {
 	public PreferenceManager(String prefFile)

@@ -27,6 +27,12 @@ import org.omegat.gui.threads.SearchThread;
 
 import java.io.*;
 
+/**
+ * The base class for all filters (aka file handlers).
+ * Each filter should extend this class or one of its decendants
+ *
+ * @author Keith Godfrey
+ */
 public abstract class FileHandler
 {
 	public FileHandler(String type, String extension)

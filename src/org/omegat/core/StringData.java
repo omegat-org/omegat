@@ -23,6 +23,8 @@ package org.omegat.core;
 
 /** 
  * Tracks usage and frequency of words and word pairs 
+ *
+ * @author Keith Godfrey
  */
 public class StringData 
 {

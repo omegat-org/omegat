@@ -28,7 +28,11 @@ import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-
+/**
+ * A reader for XML stream.
+ *
+ * @author Keith Godfrey
+ */
 public class XMLStreamReader
 {
 	protected XMLStreamFilter	m_streamFilter = null;

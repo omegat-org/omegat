@@ -29,6 +29,11 @@ import org.omegat.filters.xml.xhtml.XHTMLFileHandler;
 
 import java.util.ArrayList;
 
+/**
+ * A master class that registers and handles all the filters.
+ *
+ * @author Keith Godfrey
+ */
 public class HandlerMaster
 {
 	public HandlerMaster()

@@ -39,6 +39,9 @@ import org.omegat.util.OStrings;
  * 
  * Credit to Maxym Mykhalchuk for paying attention to the encoding
  * declaration and doing something about it.
+ *
+ * @author Keith Godfrey
+ * @author Maxym Mykhalchuk
  */
 public class HTMLFileHandler extends FileHandler
 {

@@ -27,6 +27,8 @@ import java.util.ArrayList;
 
 /*
  * XML Block is either a tag (with optional attributes), or a string
+ *
+ * @author Keith Godfrey
  */
 public class XMLBlock
 {

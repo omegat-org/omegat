@@ -39,6 +39,8 @@ import java.util.ArrayList;
 /**
  * This is a combined Match + Glossary window, that displays
  * fuzzy matches and glossary entries.
+ *
+ * @author Keith Godfrey
  */
 public class MatchWindow extends JFrame
 {

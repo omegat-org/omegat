@@ -24,6 +24,11 @@ package org.omegat.filters.xml.xhtml;
 import org.omegat.filters.xml.XMLStreamFilter;
 import org.omegat.filters.html.HTMLParser;
 
+/**
+ * Stream filter for XHTML
+ *
+ * @author Keith Godfrey
+ */
 public class XHTMLStreamFilter extends XMLStreamFilter
 {
 	public XHTMLStreamFilter()

@@ -30,6 +30,8 @@ import org.omegat.util.OStrings;
 
 /**
  * The main OmegaT class, used to launch the programm.
+ *
+ * @author Keith Godfrey
  */
 public class Main
 {

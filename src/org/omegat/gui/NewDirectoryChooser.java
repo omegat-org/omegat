@@ -25,6 +25,11 @@ import org.omegat.util.OStrings;
 
 import javax.swing.*;
 
+/**
+ * A chooser for project's directory
+ *
+ * @author Keith Godfrey
+ */
 public class NewDirectoryChooser extends JFileChooser
 {
 	public NewDirectoryChooser()

@@ -29,6 +29,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * A frame for project
+ *
+ * @author Keith Godfrey
+ */
 public class ProjectFrame extends JFrame
 {
 	public ProjectFrame(TransFrame parent)

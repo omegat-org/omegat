@@ -23,6 +23,11 @@ package org.omegat.filters;
 
 import java.text.DecimalFormat;
 
+/**
+ * A buffer for filters
+ *
+ * @author Keith Godfrey
+ */
 public class LBuffer {
 	public LBuffer(int size)
 	{

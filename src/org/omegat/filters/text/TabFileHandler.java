@@ -29,6 +29,11 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 import org.omegat.util.OStrings;
 
+/**
+ * Filter to support tab-delimited files
+ *
+ * @author Keith Godfrey
+ */
 public class TabFileHandler extends FileHandler
 {
 	public TabFileHandler()

@@ -36,6 +36,8 @@ import java.util.ArrayList;
  * of a segment, instructs the main UI to jump to that segment
  * this replaces the previous huperlink interface and is much more
  * flexible in the fonts it displays than the HTML text
+ *
+ * @author Keith Godfrey
  */
 public class EntryListPane extends JTextPane
 {

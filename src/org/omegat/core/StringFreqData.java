@@ -31,7 +31,9 @@ import java.util.HashMap;
  * string decrements this count.  
  * What's left is counted and a ratio of how many word matches between
  * the two strings is generated
- * Objects stored are of type org.omegat.core.StringData
+ * Objects stored are of type StringData
+ *
+ * @author Keith Godfrey
  */
 public class StringFreqData 
 {

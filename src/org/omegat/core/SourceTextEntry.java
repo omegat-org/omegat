@@ -28,6 +28,8 @@ import org.omegat.util.ProjectFileData;
  * translation pulled directly from the input files.
  * There can be many SourceTextEntries having identical source
  * language strings
+ *
+ * @author Keith Godfrey
  */
 public class SourceTextEntry
 {

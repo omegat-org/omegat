@@ -38,6 +38,8 @@ import java.io.File;
  * This is a window that appears when user'd like to search for something.
  * For each new user's request new window is created.
  * Actual search is done by SearchThread.
+ *
+ * @author Keith Godfrey
  */
 public class SearchWindow extends JFrame
 {

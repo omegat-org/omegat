@@ -21,6 +21,11 @@
 
 package org.omegat.filters.xml;
 
+/**
+ * An attribute of XML tag.
+ *
+ * @author Keith Godfrey
+ */
 public class XMLAttribute
 {
 	public XMLAttribute(String n, String v)

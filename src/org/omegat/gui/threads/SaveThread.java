@@ -21,6 +21,12 @@
 
 package org.omegat.gui.threads;
 
+/**
+ * An independent stream to save project,
+ * created in order not to freese UI while project is saved (may take a lot)
+ *
+ * @author Keith Godfrey
+ */
 public class SaveThread extends Thread
 {
 	public SaveThread()

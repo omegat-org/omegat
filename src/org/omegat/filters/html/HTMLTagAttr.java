@@ -23,6 +23,11 @@ package org.omegat.filters.html;
 
 import org.omegat.filters.LBuffer;
 
+/**
+ * An attribute of HTML tag
+ *
+ * @author Keith Godfrey
+ */
 public class HTMLTagAttr
 {
 	public HTMLTagAttr()

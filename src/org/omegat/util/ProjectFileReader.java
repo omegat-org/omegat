@@ -32,6 +32,11 @@ import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+/**
+ * Class that reads project definition file and returns project's properties.
+ *
+ * @author Keith Godfrey
+ */
 public class ProjectFileReader
 {
 	public ProjectFileReader()

@@ -25,6 +25,8 @@ package org.omegat.util;
  * offset marks the display offset of character - this might be
  * different than the characters position in the char array
  * due existence of multi-char characters
+ *
+ * @author Keith Godfrey
  */
 public class Token
 {

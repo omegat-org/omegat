@@ -23,6 +23,8 @@ package org.omegat.core;
 
 /**
  * represents a translation memory element stored in memory
+ *
+ * @author Keith Godfrey
  */
 public class TransMemory
 {

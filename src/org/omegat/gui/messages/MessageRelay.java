@@ -29,6 +29,8 @@ import javax.swing.*;
  * Methods to send messages to UI objects
  * use indirect methods because Swing objects tend to lockup in
  * java 1.4 when accessed directly
+ *
+ * @author Keith Godfrey
  */
 public class MessageRelay
 {

@@ -24,6 +24,11 @@ package org.omegat.core;
 import java.util.zip.Adler32;
 import java.util.zip.CRC32;
 
+/**
+ * Utility class to compute checksums
+ *
+ * @author Keith Godfrey
+ */
 public class LCheckSum
 {
 

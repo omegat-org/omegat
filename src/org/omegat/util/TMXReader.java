@@ -29,6 +29,11 @@ import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+/**
+ * Class that loads up TMX 1.1 (Translation Memory) files
+ *
+ * @author Keith Godfrey
+ */
 public class TMXReader
 {
 

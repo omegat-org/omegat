@@ -28,6 +28,12 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
+/**
+ * Filter to natively handle OpenOffice XML file format.
+ * This format is used by OO Writer, OO Spreadsheet etc
+ *
+ * @author Keith Godfrey
+ */
 public class OOFileHandler extends XMLFileHandler
 {
 	public OOFileHandler()

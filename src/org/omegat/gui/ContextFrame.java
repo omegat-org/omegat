@@ -32,6 +32,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.*;
 
+/**
+ * A frame to display the context of a segment being currently translated.
+ * Not sure if it's still in use?
+ *
+ * @author Keith Godfrey
+ */
 public class ContextFrame extends JFrame
 {
 	public ContextFrame(TransFrame parent, boolean srcLang, boolean grabFocus)

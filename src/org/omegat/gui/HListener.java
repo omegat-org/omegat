@@ -11,8 +11,9 @@ import javax.swing.event.HyperlinkListener;
 import org.omegat.gui.messages.MessageRelay;
 
 /**
+ * A listener for old Hyperlink-like style
  *
- * @author  maxym
+ * @author Keith Godfrey
  */
 public class HListener implements HyperlinkListener
 {

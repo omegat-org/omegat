@@ -27,6 +27,11 @@ import javax.swing.*;
 import javax.swing.filechooser.FileView;
 import java.io.File;
 
+/**
+ * A special class to insert a custom OmegaT image into JFileChooser
+ *
+ * @author Keith Godfrey
+ */
 public class ProjectFileView extends FileView
 {
 	ImageIcon omegatIcon = new ImageIcon("images" + File.separator + "OmegaT.gif");	// NOI18N

@@ -25,6 +25,11 @@ import org.omegat.filters.LBuffer;
 
 import java.util.LinkedList;
 
+/**
+ * The name explains itself - class to represent a single HTML tag.
+ *
+ * @author Keith Godfrey
+ */
 public class HTMLTag
 {
 	public HTMLTag()

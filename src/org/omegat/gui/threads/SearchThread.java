@@ -41,6 +41,8 @@ import java.util.*;
  * Each search window has its own search thread to actually do the 
  * searching.  
  * This prevents lockup of the UI during intensive searches
+ *
+ * @author Keith Godfrey
  */
 public class SearchThread extends Thread
 {

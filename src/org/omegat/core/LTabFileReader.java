@@ -27,6 +27,8 @@ import java.util.ArrayList;
 /*
  * Assumes input files are ASCII - run native2ascii on any files
  * carrying extended characters
+ *
+ * @author Keith Godfrey
  */
 public class LTabFileReader 
 {

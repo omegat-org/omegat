@@ -21,7 +21,11 @@
 
 package org.omegat.core;
 
-
+/**
+ * Class to hold a single fuzzy match.
+ *
+ * @author Keith Godfrey
+ */
 public class NearString implements Comparable
 {
 	public NearString(StringEntry strEntry, 

@@ -26,6 +26,11 @@ import org.omegat.filters.FileHandler;
 import java.io.*;
 import org.omegat.util.OStrings;
 
+/**
+ * Filter to support plain txt files (both default OS- and utf8-encoded)
+ *
+ * @author Keith Godfrey
+ */
 public class TextFileHandler extends FileHandler
 {
 

@@ -31,6 +31,13 @@ import java.util.HashMap;
 import java.util.ListIterator;
 import org.omegat.util.OStrings;
 
+/**
+ * Filter to handle plain XML files.
+ * This filter is usually used as a basic class for specific filters of 
+ * XML-syntaxed documents (like OpenOffice).
+ *
+ * @author Keith Godfrey
+ */
 public class XMLFileHandler extends FileHandler
 {
 	public XMLFileHandler(String name, String ext)

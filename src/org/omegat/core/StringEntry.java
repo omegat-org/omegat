@@ -33,6 +33,8 @@ import java.util.ListIterator;
  * (a single string may occur many times in data files, but only
  *  one org.omegat.core.StringEntry is created for it).
  * Multiple translations can still exist the the single string, however.
+ *
+ * @author Keith Godfrey
  */
 public class StringEntry
 {

@@ -31,6 +31,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+/**
+ * The dialog for creation of a new OmegaT project
+ *
+ * @author Keith Godfrey
+ */
 public class NewProjectDialog extends JDialog
 {
     private ProjectProperties projectProperties;

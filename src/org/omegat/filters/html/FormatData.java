@@ -23,6 +23,11 @@ package org.omegat.filters.html;
 
 import org.omegat.filters.LBuffer;
 
+/**
+ * A class to hold HTML formatting data.
+ *
+ * @author Keith Godfrey
+ */
 public class FormatData
 {
 	public FormatData()

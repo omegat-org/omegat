@@ -24,6 +24,11 @@ package org.omegat.filters.xml.xhtml;
 import org.omegat.util.OConsts;
 import org.omegat.filters.xml.XMLFileHandler;
 
+/**
+ * Filter for handling XHTML files
+ *
+ * @author Keith Godfrey
+ */
 public class XHTMLFileHandler extends XMLFileHandler
 {
 	public XHTMLFileHandler()

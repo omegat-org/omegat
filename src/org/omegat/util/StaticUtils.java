@@ -33,8 +33,10 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 /**
- * static functions and generic object taken from
- * org.omegat.gui.threads.CommandThread to reduce file size
+ * Static functions taken from
+ * CommandThread to reduce file size.
+ *
+ * @author Keith Godfrey
  */
 public class StaticUtils
 {

@@ -26,6 +26,11 @@ import org.omegat.util.OConsts;
 import javax.swing.*;
 import java.io.File;
 
+/**
+ * File Chooser to open project.
+ *
+ * @author Keith Godfrey
+ */
 public class ProjectFileChooser extends JFileChooser
 {
 

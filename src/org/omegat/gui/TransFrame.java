@@ -42,6 +42,8 @@ import java.util.ListIterator;
 
 /**
  * The main frame of OmegaT application
+ *
+ * @author Keith Godfrey
  */
 public class TransFrame extends JFrame implements ActionListener
 {

@@ -25,6 +25,8 @@ import org.omegat.gui.TransFrame;
 
 /**
  * class to pass messages
+ *
+ * @author Keith Godfrey
  */
 public class MMx implements Runnable
 {

@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  9Jan2002
+//  Build date:  23Feb2002
 //  Copyright (C) 2002, Keith Godfrey
 //  aurora@coastside.net
 //  907.223.2039
@@ -59,6 +59,14 @@ class ProjectFileChooser extends JFileChooser
 		//  recurse into lower directory
 		if (isProjectDir(getSelectedFile()))
 		{
+			// ALERT - HACK
+			// when double clicking the file, everything works fine,
+			//  but when hitting 'OK' the parent directory is somehow
+			//	selected.  Explicitly make sure the selected directory
+			//	is targetted
+			File d = getSelectedFile();
+			if (d.isDirectory())
+				setCurrentDirectory(d);
 			// this is OK - continue
 			super.approveSelection();
 		}

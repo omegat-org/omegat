@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  9Jan2002
+//  Build date:  23Feb2002
 //  Copyright (C) 2002, Keith Godfrey
 //  aurora@coastside.net
 //  907.223.2039
@@ -39,9 +39,55 @@ class TextFileHandler extends FileHandler
 		super("textfile", "txt");
 	}
 
+	public TextFileHandler(String type, String ext)
+	{
+		super(type, ext);
+	}
+
 	public void doLoad() throws IOException
 	{ 
 		throw new IOException("unsupported function"); 
+	}
+
+	// NOTE dengue code change - review at future date
+	public String translateFileEncoding()
+	{
+		String code = "ISO-8859-1";
+		String type = type();
+		if (type.equals("textfile-latin1"))
+			code = "ISO-8859-1";
+		else if (type.equals("textfile-latin2"))
+			code = "ISO-8859-2";
+		else if (type.equals("textfile-utf8"))
+			code = "UTF8";
+//		else if (m_type.equals("textfile-shiftjis"))
+//			code = "SHIFT-JIS";
+
+		return code;
+	}
+
+	// create output stream - allow stream to have access to source file
+	//  if necessary
+	public BufferedReader createInputStream(String infile)
+			throws IOException
+	{
+		FileInputStream fis = new FileInputStream(infile);
+		//InputStreamReader isr = new InputStreamReader(fis);
+		String code = translateFileEncoding();
+		InputStreamReader isr = new InputStreamReader(fis, code);
+		BufferedReader br = new BufferedReader(isr);
+		return br;
+	}
+
+	public BufferedWriter createOutputStream(String infile, String outfile)
+			throws IOException
+	{
+		FileOutputStream fos = new FileOutputStream(outfile);
+		//OutputStreamWriter osw = new OutputStreamWriter(fos);
+		String code = translateFileEncoding();
+		OutputStreamWriter osw = new OutputStreamWriter(fos, code);
+		BufferedWriter bw = new BufferedWriter(osw);
+		return bw;
 	}
 
 	public void load(String file) throws IOException

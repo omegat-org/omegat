@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  9Jan2002
+//  Build date:  23Feb2002
 //  Copyright (C) 2002, Keith Godfrey
 //  aurora@coastside.net
 //  907.223.2039
@@ -1746,7 +1746,7 @@ System.out.println("ERROR - untrapped exchange call");
 			strEntryList.clear();
 			fname = fileList[i];
 			ext = fname.substring(fname.lastIndexOf('.'));
-			fname = m_config.getTMRoot() + fname;
+			fname = m_config.getTMRoot() + File.separator + fname;
 			if (ext.equalsIgnoreCase(OConsts.TM_EXTENSION))
 				loadTMFile(fname);
 			else if (ext.equalsIgnoreCase(OConsts.TMX_EXTENSION))
@@ -1828,7 +1828,8 @@ System.out.println("ERROR - untrapped exchange call");
 		String lang;
 		int i;
 		DataInputStream dis;
-		File f = new File(m_config.getTMRoot() + fname);
+		//File f = new File(m_config.getTMRoot() + fname);
+		File f = new File(fname);
 		dis = new DataInputStream(new FileInputStream(f));
 		String ident = dis.readUTF();
 		if (ident.compareTo(OConsts.TM_FILE_IDENT) != 0)
@@ -2020,7 +2021,7 @@ System.out.println("ERROR - untrapped exchange call");
 		}
 		catch (IOException e)
 		{
-			try { ofp.close();	}
+			try { if (ofp != null) ofp.close();	}
 			catch (IOException e2) { ; }
 		}
 	}
@@ -2298,6 +2299,16 @@ System.out.println("ERROR - untrapped exchange call");
 		tab.addLine("# The following defines the default mapping from " +
 					".htm to .html");
 		tab.addLine("htm\thtml");
+		tab.addLine("#");
+		tab.addLine("#");
+		tab.addLine("# The following maps *.txt files to UTF8 " +
+					"encoding as default");
+		tab.addLine("# Comment it out and uncomment one of the following " +
+					"lines");
+		tab.addLine("# to use a different encoding (i.e. Latin-1 or Latin-2)");
+		tab.addLine("txt\tutf8");
+		tab.addLine("#txt\ttxt1");
+		tab.addLine("#txt\ttxt2");
 
 		tab.write(name);
 	}

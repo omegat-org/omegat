@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -29,12 +29,27 @@
 //
 //-------------------------------------------------------------------------
 
-class OmegaT
+import java.lang.*;
+
+class OmegaT extends Thread
 {
-	public static void main(String[] args)
+	public OmegaT()
+	{
+		super("OmegaT");
+	}
+	
+	public void run()
 	{
 		TransFrame f = new TransFrame();
 		f.show();
+	}
+	
+	public static void main(String[] args)
+	{
+		OmegaT ot = new OmegaT();
+		ot.start();
+		//TransFrame f = new TransFrame();
+		//f.show();
 	}
 }
 

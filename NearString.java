@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -30,6 +30,21 @@
 //-------------------------------------------------------------------------
 
 import java.util.*;
+
+// represents a translation memory element stored in memory
+class TransMemory
+{
+	public TransMemory(String src, String tar, String f)
+	{
+		source = src;
+		target = tar;
+		file = f;
+	}
+
+	public String	source;
+	public String	target;
+	public String	file;
+}
 
 class NearString implements Comparable
 {

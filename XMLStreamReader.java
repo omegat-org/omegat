@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -36,17 +36,31 @@ import java.util.*;
 import java.text.*;
 import java.lang.reflect.Array;
 
+abstract class XMLStreamFilter
+{
+	abstract public String	convertToEscape(char c);
+	abstract  char		convertToChar(String escapeSequence);
+}
+
 class XMLStreamReader
 {
+	protected XMLStreamFilter	m_streamFilter = null;
+
 	public XMLStreamReader()
 	{
 		m_pos = -1;
 		m_stringStream = "";
-		m_pushedChar = 0;
+		m_charMark = -1;
+		m_charStack = new ArrayList();
+		m_charCache = new ArrayList();
 		m_ignoreReturn = false;
 		m_killEmptyBlocks = false;
+		m_ignoreWhiteSpace = false;
+		m_breakWhitespace = false;
+		m_compressWhitespace = false;
+		m_headBlock = null;
 	}
-	
+
 	// set the stream that tags and text are read from
 	public void setStream(String str)
 	{
@@ -67,6 +81,7 @@ class XMLStreamReader
 	{
 		setStream(new File(name), encoding);
 	}
+				
 	// opens and reads the file according to the specified encoding
 	// should have this auto-sense the unicode file type, but keep
 	//  it general as many 'xml' apps don't use unicode
@@ -74,11 +89,23 @@ class XMLStreamReader
 		throws FileNotFoundException, UnsupportedEncodingException,
 				IOException
 	{
-		m_pos = -1;
 		FileInputStream fis = new FileInputStream(name);
 		InputStreamReader isr = new InputStreamReader(fis, encoding);
 		m_bufferedReader = new BufferedReader(isr);
+		_setStream();
+	}
 
+	// provide interface where stream can be opened elsewhere
+	public void setStream(BufferedReader rdr) throws IOException
+	{
+		m_bufferedReader = rdr;
+		_setStream();
+	}
+	
+	// do the work here
+	protected void _setStream() throws IOException
+	{
+		m_pos = -1;
 		// make sure XML file and encoding is proper
 		try 
 		{
@@ -101,6 +128,7 @@ class XMLStreamReader
 					throw new ParseException("Unsupported XML version (" + 
 							ver + ")", 0);
 				}
+				m_headBlock = blk;
 				// TODO check encoding - adjust to match
 			}
 			else
@@ -112,8 +140,7 @@ class XMLStreamReader
 		catch (ParseException p1)
 		{
 			// TODO intelligently handle error
-			throw new IOException("Cannot load specified file (" + name +
-					")\n" + p1);
+			throw new IOException("Cannot load specified XML file\n" + p1);
 		}
 	}
 	
@@ -125,27 +152,34 @@ class XMLStreamReader
 		// otherwise it's text
 		// strip out any newline and multiple spaces (not valid xml)
 		char c = getNextChar();
+		
 		if (c == '<')
 		{
-			return getNextTag();
-		}
-		else if (c != 0)
-		{
+			// be lenient on incorrectly formatted XML - if a space
+			//	follows the < then treat it as a literal character
+			c = getNextChar();
 			pushChar(c);
-			XMLBlock blk = getNextText();
-			if ((blk != null) && m_killEmptyBlocks)
+			if (c != ' ')
 			{
-				String str = blk.getText();
-				str = str.trim();
-				if (str.length() == 0)
-				{
-					blk = getNextBlock();
-				}
+				XMLBlock b = getNextTag();
+				return b;
 			}
-			return blk;
 		}
-		else
+		else if (c == 0)
 			return null;
+
+		pushChar(c);
+		XMLBlock blk = getNextText();
+		if ((blk != null) && m_killEmptyBlocks)
+		{
+			String str = blk.getText();
+			str = str.trim();
+			if (str.length() == 0)
+			{
+				blk = getNextBlock();
+			}
+		}
+		return blk;
 	}
 
 	public void killEmptyBlocks(boolean kill)
@@ -158,28 +192,64 @@ class XMLStreamReader
 		m_ignoreReturn = ignore;
 	}
 
+	public void ignoreWhiteSpace(boolean ignore)
+	{
+		m_ignoreWhiteSpace = ignore;
+	}
+
+	public void breakOnWhitespace(boolean brk)
+	{
+		m_breakWhitespace = brk;
+	}
+
+	public void compressWhitespace(boolean tof)
+	{
+		m_compressWhitespace = tof;
+	}
+
+	public void setStreamFilter(XMLStreamFilter filter)
+	{
+		m_streamFilter = filter;
+	}
+
 	//////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////
 	// protected routines
 
+	// pushing chars and marking stream is to allow rewind
+	// mark is to try to back up to correct for incorrectly formatted 
+	//	document
 	protected void pushChar(char c)
 	{
-		if (m_pushedChar == 0)
-			m_pushedChar = c;
-		else
-		{
-			System.out.println("Internal Error - pushed multiple chars");
-		}
+		m_charStack.add(new Character(c));
+	}
+
+	// caches the current character in case rewind later desired
+	protected char getNextCharCache()
+	{
+		char c = getNextChar();
+		m_charCache.add(new Character(c));
+		return c;
 	}
 	
+	protected void clearCache()
+	{
+		m_charCache.clear();
+	}
+
+	// pushes cached chars onto the stack, in effect rewinding stream
+	protected void revertToCached()
+	{
+		for (int i=m_charCache.size()-1; i>=0; i--)
+			m_charStack.add(m_charCache.get(i));
+	}
+
 	protected char getNextChar()
 	{
-		if (m_pushedChar != 0)
+		if (m_charStack.size() > 0)
 		{
-			// if character pushed back on the stream, return it
-			char d = m_pushedChar;
-			m_pushedChar = 0;
-			return d;
+			Character ch = (Character) m_charStack.remove(m_charStack.size()-1);
+			return ch.charValue();
 		}
 		else
 		{
@@ -264,19 +334,94 @@ class XMLStreamReader
 	protected XMLBlock getNextText() throws ParseException
 	{
 		XMLBlock blk = new XMLBlock();
-		String str = "";
+		StringBuffer strBuf = new StringBuffer();
 		char c;
+		int wsCnt = 0;
+		int wsBreak = 0;
 		while (((c = getNextChar()) != '<') && ( c != 0))
 		{
 			if (c == '&')
-				str += getEscChar();
-			else
-				str += c;
+			{
+				wsCnt = 0;
+				if (wsBreak == 1)
+				{
+					// ws only tag - push char and bail out
+					pushChar(c);
+					break;
+				}
+				char c2 = getEscChar();
+				if (c2 == 0)
+					strBuf.append('&');
+				else
+					strBuf.append(c2);
+			}
+			else if ((c == ' ') || (c == 10) || (c == 13) || (c == 9))
+			{
+				// spaces get special handling 
+				if (m_ignoreWhiteSpace == true)
+				{
+					continue;
+				}
+
+				if (m_compressWhitespace == true)
+				{
+					if (m_breakWhitespace == true)
+					{
+						// if we're already in a text segment, break out
+						//	and return ws char to stack
+						if (strBuf.length() > 0)
+						{
+							if (wsBreak == 0)
+							{
+								// in text
+								pushChar(c);
+								break;
+							}
+							// else in a ws sequence
+						}
+						else
+						{
+							wsCnt = 1;
+							strBuf.setLength(0);
+							strBuf.append(" ");
+							wsBreak = 1;
+						}
+					}
+					else
+					{
+						// simply compress WS
+						if (wsCnt == 0)
+						{
+							strBuf.append(' ');
+							wsCnt = 1;
+						}
+						else
+							continue;
+					}
+				}
+				else
+				{
+					strBuf.append(c);
+				}
+			}
+			else // compressWhitespace == false
+			{
+				wsCnt = 0;
+				if (wsBreak == 1)
+				{
+					// ws only tag - push char and bail out
+					pushChar(c);
+					break;
+				}
+				strBuf.append(c);
+			}
+
 		}
+
 		if (c == '<')
 			pushChar(c);
 
-		blk.setText(str);
+		blk.setText(strBuf.toString());
 		return blk;
 	}
 
@@ -376,7 +521,8 @@ class XMLStreamReader
 							if (dashCnt >= 2)
 							{
 								// all done 
-								blk.setAttribute(data, "");
+								//blk.setAttribute(data, "");
+								blk.setText(data);
 								state = state_finish;
 							}
 							break;
@@ -414,6 +560,7 @@ class XMLStreamReader
 									bracCnt--;
 								}
 								state = state_finish;
+								blk.setText(data);
 							}
 							break;
 							
@@ -933,50 +1080,100 @@ class XMLStreamReader
 
 	// converts a stream of plaintext into valid XML 
 	// output stream must convert stream to UTF-8 when saving to disk
-	public static String controlify(String plaintext)
+	public static String makeValidXML(char c, XMLStreamFilter filter)
 	{
-		char c;
-		String out = "";
-		for (int i=0; i<plaintext.length(); i++)
+		String out;
+		if (c == '\'')
+			out = "&apos;";
+		else if (c == '&')
+			out = "&amp;";
+		else if (c == '>')
+			out = "&gt;";
+		else if (c == '<')
+			out = "&lt;";
+		else if (c == '"')
+			out = "&quot;";
+		else if (filter != null)
 		{
-			c = plaintext.charAt(i);
-			if (c == '\'')
-				out += "&apos;";
-			else if (c == '&')
-				out += "&amp;";
-			else if (c == '>')
-				out += "&gt;";
-			else if (c == '<')
-				out += "&lt;";
-			else if (c == '"')
-				out += "&quot;";
-//			else if (c > 1270000)
-//			{
-//				if (c > 0x07ff)
-//				{
-//					// triple byte
-//					out += createEscByte((byte) (0xe0 | ((c >>> 12) & 0x0f)));
-//					out += createEscByte((byte) (0x80 | ((c >>>  6) & 0x3f)));
-//					out += createEscByte((byte) (0x80 | ( c         & 0x3f)));
-//				}
-//				else
-//				{
-//					// double byte
-//					out += createEscByte((byte) (0xc0 | ((c >>>  6) & 0x1f)));
-//					out += createEscByte((byte) (0x80 | ( c         & 0x3f)));
-//				}
-//			}
-			else
-				out += c;
+			out = filter.convertToEscape(c);
+			if (out == null)
+				out = "" + c;
 		}
+		else
+			out = "" + c;
+
 		return out;
 	}
 
+	// converts a stream of plaintext into valid XML 
+	// output stream must convert stream to UTF-8 when saving to disk
+	public static String makeValidXML(String plaintext, XMLStreamFilter filter)
+	{
+		char c;
+		StringBuffer out = new StringBuffer();
+		for (int i=0; i<plaintext.length(); i++)
+		{
+			c = plaintext.charAt(i);
+			out.append(makeValidXML(c, filter));
+		}
+		return out.toString();
+	}
+
+	// return the list of blocks between the specified block and
+	//  its matching close (or the end of list) within the provided list
+	//  (includes open block with specified name, and corresponding
+	//  close block)
+	// if the provided block is not an empty tag, or if there are
+	//  no elements between open and close, a null is returned
+	public static ArrayList closeBlock(String name, ArrayList blockList, 
+				int offset)
+	{
+		if (blockList == null)
+			return null;
+
+		ArrayList result = null;
+		XMLBlock blk = null;
+		
+		int i;
+		for (i=offset; i<blockList.size(); i++)
+		{
+			blk = (XMLBlock) blockList.get(i);
+			if (blk.isTag() && blk.getTagName().equals(name))
+			{
+				if (blk.isEmpty())
+					return null;
+				result = new ArrayList(32);
+				result.add(blk);
+				break;
+			}
+		}
+		for (i++; i<blockList.size(); i++)
+		{
+			blk = (XMLBlock) blockList.get(i);
+			result.add(blk);
+			if (blk.isTag() && blk.getTagName().equals(name) && blk.isClose())
+			{
+				break;
+			}
+		}
+
+		if ((result == null) || (result.size() == 0))
+			result = null;
+
+		return result;
+	}
+
+	public ArrayList closeBlock(XMLBlock block) throws ParseException
+	{
+		return closeBlock(block, false);
+	}
+	
 	// return the list of blocks between the specified block and
 	//  its matching close
 	// if the provided block is not an empty tag, or if there are
 	//  no elements between open and close, a null is returned
-	public ArrayList closeBlock(XMLBlock block) throws ParseException
+	public ArrayList closeBlock(XMLBlock block, 
+			boolean includeTerminationBlock) throws ParseException
 	{
 		ArrayList lst = new ArrayList();
 		
@@ -997,8 +1194,8 @@ class XMLStreamReader
 			if (blk == null)
 			{
 				// stream ended without finding match
-				// TODO signal error
-				break;
+				throw new ParseException("End of stream encoutered without "+
+							"finding close block", 0);
 			}
 			
 			if ((blk.isTag()) && (blk.getTagName().equals(block.getTagName())))
@@ -1008,6 +1205,8 @@ class XMLStreamReader
 				   	if (depth == 0)
 					{
 						// found the closing tag
+						if (includeTerminationBlock)
+							lst.add(blk);
 						break;
 					}
 					else
@@ -1055,20 +1254,30 @@ class XMLStreamReader
 	protected char getEscChar() throws ParseException
 	{
 		// look for amp, lt, gt, apos, quot and &#
-		char c = getNextChar();
+		clearCache();
+		char c = getNextCharCache();
 		String val = "";
 		boolean hex = false;
 		
 		if (c == '#')
 		{
 			// char code
-			c = getNextChar();
+			c = getNextCharCache();
 			if ((c == 'x') || (c == 'X'))
 			{
-				c = getNextChar();
+				c = getNextCharCache();
 				hex = true;
 			}
 		}
+		else if (c == ' ')
+		{
+			// an ampersand occured by itself - illegal format, but accept
+			//	anyways 
+			revertToCached();
+			return 0;
+		}
+		
+		int ctr=0;
 		while (c != ';')
 		{
 			val += c;
@@ -1077,8 +1286,21 @@ class XMLStreamReader
 				throw new ParseException(
 							"Escaped character never terminated", 0);
 			}
-			c = getNextChar();
+			c = getNextCharCache();
+			if (ctr++ > 13)
+			{
+				// appears to be literal char because close for escape
+				//	sequence not found
+				// be lenient and accept the literal '&'
+				// rewind stream
+				revertToCached();
+				return 0;
+			}
 		}
+
+
+		// didn't detect an error so assume everything is OK
+		clearCache();
 
 		if (val.equals("amp"))
 			return '&';
@@ -1090,6 +1312,10 @@ class XMLStreamReader
 			return '\'';
 		else if (val.equals("quot"))
 			return '"';
+		else if (m_streamFilter != null)
+		{
+			return m_streamFilter.convertToChar(val);
+		}
 
 		// else, binary data
 		char b;
@@ -1100,7 +1326,7 @@ class XMLStreamReader
 			{
 				c *= 16;
 				if ((b >= '0') && (b <= '9'))
-					c += b;
+					c += b - '0';
 				else if ((b >= 'A') && (b <= 'F'))
 				{
 					c += 10;
@@ -1132,16 +1358,59 @@ class XMLStreamReader
 
 		return c;
 	}
+
+	public XMLBlock getHeadBlock()	{ return m_headBlock;	}
+	
+	///////////////////////////////////////////////////////////////
+
+	public static double getSingleValueDouble(ArrayList lst, double defaultVal)
+	{
+		if ((lst == null) || (lst.size() != 3))
+			return defaultVal;
+		try 
+		{
+			String str = ((XMLBlock) lst.get(1)).getText();
+			double val = Double.valueOf(str).doubleValue();
+			return val;
+		}
+		catch (NumberFormatException e1)
+		{
+			return defaultVal;
+		}
+	}
+	
+	public static int getSingleValueInt(ArrayList lst, int defaultVal)
+	{
+		if ((lst == null) || (lst.size() != 3))
+			return defaultVal;
+		try 
+		{
+			String str = ((XMLBlock) lst.get(1)).getText();
+			int val = Integer.decode(str).intValue();
+			return val;
+		}
+		catch (NumberFormatException e1)
+		{
+			return defaultVal;
+		}
+	}
 	
 	///////////////////////////////////////////////////////////////
 
 	protected BufferedReader	m_bufferedReader;
 	protected String			m_stringStream;
 
-	protected int				m_pos;
-	protected char				m_pushedChar;
-	protected boolean			m_ignoreReturn; //swallow 0x0a?
-	protected boolean			m_killEmptyBlocks;
+	protected XMLBlock			m_headBlock;
+
+	protected int		m_pos;
+	protected int		m_charMark;
+	protected ArrayList	m_charStack;
+	protected ArrayList	m_charCache;
+	protected boolean	m_ignoreReturn; //swallow 0x0a?
+	protected boolean	m_killEmptyBlocks;
+	protected boolean	m_ignoreWhiteSpace;	// don't copy ws to text
+	protected boolean	m_breakWhitespace;	// put all ws in own block
+	protected boolean	m_compressWhitespace;	// put ws span in single space
 
 	//////////////////////////////////////////////////////////////
 
@@ -1155,7 +1424,7 @@ class XMLStreamReader
 		XMLStreamReader reader = new XMLStreamReader();
 		String st = "test: <> &\"; ñ-éÑaâä ";
 		System.out.println(st);
-		System.out.println(controlify(st));
+		System.out.println(makeValidXML(st, null));
 //		System.out.println(str);
 //		reader.setStream(str);
 		int ctr = 0;

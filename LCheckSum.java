@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -30,13 +30,41 @@
 //-------------------------------------------------------------------------
 
 import java.util.zip.*;
+import java.util.Date;
 
 class LCheckSum
 {
+	// new method - takes about 40% of the time as the old
+	public static long compute2(String str)
+	{
+		// try a new way to see if it's faster
+		int len = str.length();
+		long dg1 = 0;
+		long dg2 = 0;
+		Adler32 adler = new Adler32();
+		// strings less than 4 characters should be unique under adler,
+		//	so just do a single pass, leaving high bytes zero
+		adler.update(str.getBytes());
+		dg1 = adler.getValue();
+		if (len < 4)
+		{
+			return dg1;
+		}
+		// if there is a conflict between two adler values, there 
+		//	shouldn't be a conflict between substrings of the original
+		//	text
+		String sub = str.substring(len/2);
+		adler.reset();
+		adler.update(sub.getBytes());
+		dg2 = adler.getValue();
+
+		return (dg2 << 32) | (dg1);
+	}
+
+	// old method - keep it around for posterity (and because it gives
+	//	a better pseudorandom sequence)
 	public static long compute(String str)
 	{
-		// since SHA is "in progress" at Sun, create a new system
-		// if crc32 is 4 bytes, why the 'long' return value???
 		CRC32 crc = new CRC32();
 		Adler32 adler = new Adler32();
 		crc.update(str.getBytes());
@@ -57,6 +85,7 @@ class LCheckSum
 	
 	public static void main(String[] args)
 	{
+		int i;
 		System.out.println("a:          " + LCheckSum.compute(new 
 				String("a")));
 		System.out.println("b:          " + LCheckSum.compute(new 
@@ -73,5 +102,55 @@ class LCheckSum
 				String("lousy")));
 		System.out.println("pink floyd: " + LCheckSum.compute(new 
 				String("pink floyd")));
+
+		Date start;
+		Date end;
+		start = new Date();
+		for (i=0; i<20000; i++)
+		{
+			LCheckSum.compute(new String("a    "));
+			LCheckSum.compute(new String("b    "));
+			LCheckSum.compute(new String("moose"));
+			LCheckSum.compute(new String("mouse"));
+			LCheckSum.compute(new String("house"));
+			LCheckSum.compute(new String("louse"));
+			LCheckSum.compute(new String("lousy"));
+			LCheckSum.compute(new String("pink floyd"));
+		}
+		end = new Date();
+		System.out.println("new mode - elapsed time: " + 
+				(end.getTime() - start.getTime()));
+
+		System.out.println("a:          " + LCheckSum.compute2(new 
+				String("a")));
+		System.out.println("b:          " + LCheckSum.compute2(new 
+				String("b")));
+		System.out.println("moose:      " + LCheckSum.compute2(new 
+				String("moose")));
+		System.out.println("mouse:      " + LCheckSum.compute2(new 
+				String("mouse")));
+		System.out.println("house:      " + LCheckSum.compute2(new 
+				String("house")));
+		System.out.println("louse:      " + LCheckSum.compute2(new 
+				String("louse")));
+		System.out.println("lousy:      " + LCheckSum.compute2(new 
+				String("lousy")));
+		System.out.println("pink floyd: " + LCheckSum.compute2(new 
+				String("pink floyd")));
+		start = new Date();
+		for (i=0; i<20000; i++)
+		{
+			LCheckSum.compute2(new String("a    "));
+			LCheckSum.compute2(new String("b    "));
+			LCheckSum.compute2(new String("moose"));
+			LCheckSum.compute2(new String("mouse"));
+			LCheckSum.compute2(new String("house"));
+			LCheckSum.compute2(new String("louse"));
+			LCheckSum.compute2(new String("lousy"));
+			LCheckSum.compute2(new String("pink floyd"));
+		}
+		end = new Date();
+		System.out.println("old mode - elapsed time: " + 
+				(end.getTime() - start.getTime()));
 	}
 }

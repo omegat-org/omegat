@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -82,15 +82,12 @@ class StringData
 	}
 
 	// 
-	// uniq flag set indicates that a given string doesn't occur 
+	// uniq flag set indicates that a given token doesn't occur 
 	//    elsewhere, flag clear indicates it has a (at least one) partner
-	// near flag set indicates that a string is not exactly like 
-	//    it's neigbors, clear indicates all are alike (i.e. same style)
-	// pair flag set indicates that word pair represented by either 
-	//    digest low or high is not unique
+	// near flag means that a given word has different neighbors
+	//	than in its compared-to string (this a constant used elsewhere)
 	public static final byte UNIQ = 0x01;
-	public static final byte NEAR = 0x02;
-	public static final byte PAIR = 0x04;
+	public static final byte PAIR = 0x02;
 
 	private String	m_orig;
 	private byte	m_attr;

@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -48,6 +48,13 @@ public static final String TP_BUTTON_PREV	= "Previous";
 public static final String MD_BUTTON_OK		= "OK";
 
 // TransFrame
+public static final String TF_NUM_NEAR_AND_GLOSSARY	= 
+	"{0,number,integer} fuzzy matche(s) and {1,number,integer} " +
+	"glossary term(s)";
+public static final String TF_NUM_GLOSSARY			=
+	"Found {1,number,integer} glossary term(s)";
+public static final String TF_NUM_NEAR				=
+	"Found {0,number,integer} fuzzy matche(s)";
 public static final String TF_FUZZY		= "Fuzzy matches...";
 public static final String TF_GLOSSARY		= "Glossary terms";
 public static final String TF_SRCTEXT		= "Source text";
@@ -60,14 +67,16 @@ public static final String TF_MENU_FILE		= "File";
 public static final String TF_MENU_FILE_OPEN	= "Open";
 public static final String TF_MENU_FILE_CREATE	= "Create";
 public static final String TF_MENU_FILE_COMPILE	= "Compile";
-public static final String TF_MENU_FILE_PROJWIN	= "Show project window";
+public static final String TF_MENU_FILE_PROJWIN	= "Show file list";
 public static final String TF_MENU_FILE_SAVE	= "Save";
 public static final String TF_MENU_FILE_QUIT	= "Quit";
 public static final String TF_MENU_EDIT		= "Edit";
 public static final String TF_MENU_EDIT_NEXT	= "Next entry";
 public static final String TF_MENU_EDIT_PREV	= "Previous entry";
-public static final String TF_MENU_EDIT_FIND	= "Keyword search (source)";
-public static final String TF_MENU_EDIT_FINDEXACT	= "Find exact (target)";
+public static final String TF_MENU_EDIT_FIND	= "Find";
+//public static final String TF_MENU_EDIT_FINDEXACT	= "Find exact (target)";
+public static final String TF_MENU_EDIT_INSERT
+			= "Insert Translation";
 public static final String TF_MENU_EDIT_RECYCLE
 			= "Recycle Translation";
 public static final String TF_MENU_EDIT_GOTO	= "Goto entry";
@@ -81,13 +90,19 @@ public static final String TF_MENU_EDIT_COMPARE_4
 			= "Compare fuzzy match #4";
 public static final String TF_MENU_EDIT_COMPARE_5
 			= "Compare fuzzy match #5";
-public static final String TF_MENU_SERVER	= "Server";
-public static final String TF_MENU_LANGUAGE	= "Language";
-public static final String TF_MENU_LANGUAGE_RESCAN	= "rescan";
+public static final String TF_MENU_DISPLAY			= "Configuration";
+public static final String TF_MENU_DISPLAY_FUZZY	= "Fuzzy match info";
+public static final String TF_MENU_DISPLAY_GLOSSARY	= "Glossary";
+public static final String TF_MENU_DISPLAY_SOURCE	= "Source text";
+public static final String TF_MENU_DISPLAY_FONT	= "Fonts";
+//public static final String TF_MENU_SERVER	= "Server";
+//public static final String TF_MENU_LANGUAGE	= "Language";
+//public static final String TF_MENU_LANGUAGE_RESCAN	= "rescan";
 public static final String TF_MENU_TOOLS		= "Tools";
 public static final String TF_MENU_TOOLS_PSEUDO	= "Pseudo translate";
 public static final String TF_MENU_TOOLS_VALIDATE	= "Validate tags";
-public static final String TF_MENU_VERSION		= "Version";
+public static final String TF_MENU_TOOLS_MERGE_TMX	= "Merge TMX files";
+public static final String TF_MENU_VERSION_HELP		= "Help";
 public static final String TF_TITLE		= "OmegaT";
 public static final String TF_SELECT_LANGUAGE_TITLE	=
 			"Select Language";
@@ -95,18 +110,20 @@ public static final String TF_SELECT_LANGUAGE	=
 			"Please select a language";
 public static final String TF_SELECT_LANGUAGE_FAILED	=
 		"You failed to indicate a language.  Selecting one for you";
+public static final String TF_TM_LOAD_ERROR	=
+			"Failed to load translation memory for project.";
 public static final String TF_LOAD_ERROR	=
 			"Failed to load specified project.";
 public static final String TF_COMPILE_ERROR	=
 			"Failed to compile project files.";
-public static final String TF_SEARCH		= "Keyword search (source)";
-public static final String TF_SEARCH_EXACT	= "Exact search (target)";
-public static final String TF_CUR_STRING
-		= "Segment {0,number,integer} of {1,number,integer}";
-public static final String TF_NUM_WORDS		=
-	"{0,number,integer} of {2,number,integer}" +
-	" words left ({1,number,integer})";
-public static final String TF_GOTO_ENTRY	= "Goto string:";
+//public static final String TF_SEARCH		= "Keyword search (source)";
+//public static final String TF_SEARCH_EXACT	= "Exact search (target)";
+//public static final String TF_CUR_STRING
+//		= "Segment {0,number,integer} of {1,number,integer}";
+//public static final String TF_NUM_WORDS		=
+//	"{0,number,integer} of {2,number,integer}" +
+//	" words left ({1,number,integer})";
+//public static final String TF_GOTO_ENTRY	= "Goto string:";
 public static final String TF_BUTTON_OK		= "OK";
 public static final String TF_BUTTON_CANCEL	= "Cancel";
 public static final String TF_FUZZY_CURRENT_PROJECT	= 
@@ -119,10 +136,24 @@ public static final String TF_PSEUDOTRANS_RUSURE	=
 public static final String TF_NUM_FUZZY_MATCHES	=
 	"Found {0,number,integer} fuzzy matches";
 public static final String TF_NUM_FUZZY_MATCH	=
-	"Found {0,number,integer} fuzzy match";
+	"Found 1 fuzzy match";
 public static final String TF_NOTICE_BAD_TAGS	= "Entries with modified tags";
 public static final String TF_NOTICE_OK_TAGS	= "No tag errors were detected";
 public static final String TF_NOTICE_TITLE_TAGS	= "Validating tags";
+// NOTE: segment start is assumed to contain "0000" string to overwrite
+//	with entry number.  If zeros not detected, entry number will not be
+//	displayed
+public static final String TF_CUR_SEGMENT_START		= "<segment 0000>";
+public static final String TF_CUR_SEGMENT_END		= "<end segment> ";
+public static final String TF_SELECT_SOURCE_FONT	= "Source font";
+public static final String TF_SELECT_FONTSIZE		= "Font size";
+public static final String TF_SELECT_TARGET_FONT	= "Target font";
+public static final String TF_SELECT_FONTS_TITLE	= "Fonts";
+public static final String TF_BAD_LOCATION_POSSIBLE_CORRUPTION =
+	"Potentially serious error encountered - somehow engine lost " +
+	"synchronization with UI text fields.  Aborting execution and " +
+	"gracefully crashing before corruption occurs.";
+public static final String TF_LOADING_FILE			= "Loading file: ";
 
 // ContextFrame
 public static final String CF_SEARCH_RESULTS_SRC	= 
@@ -136,6 +167,12 @@ public static final String PF_BUTTON_CLOSE	= "Close";
 public static final String PF_WINDOW_TITLE	= "Project Files";
 public static final String PF_FILENAME		= "File name";
 public static final String PF_NUM_SEGMENTS	= "Number of segments";
+
+public static final String HF_BUTTON_CLOSE	= "Close";
+public static final String HF_BUTTON_HOME	= "Index";
+public static final String HF_BUTTON_BACK	= "Back";
+public static final String HF_WINDOW_TITLE	= "User Manual";
+public static final String HF_CANT_FIND_HELP	= "Can't locate help file: ";
 
 // CommandThread
 public static final String CT_FUZZY_X_OF_Y	=
@@ -174,6 +211,13 @@ public static final String CT_ERROR_LOADING_IGNORE_FILE =
 	"Encountered error loading ignore file\nIgnoring ignore instructions";
 public static final String CT_NO_FILE_HANDLER =
 	"Can't associate parser for file extension";
+public static final String CT_PREF_LOAD_ERROR_MAPPINGS =
+	"Internal error (problems recovering file mappings from preference file)";
+public static final String CT_HTMLX_MASQUERADE	=
+	"Found XML based HTML file - using HTMLX parser";
+public static final String CT_LOAD_FILE_MX	= "Loading: ";
+public static final String CT_COMPILE_FILE_MX	= "Compiling: ";
+public static final String CT_COMPILE_DONE_MX	= "Compile complete";
 
 // ProjectProperties
 public static final String PP_CREATE_PROJ	= "Create new project";
@@ -232,4 +276,51 @@ public static final String NDC_SELECT_UNIQUE_TITLE	= "Error";
 public static final String FH_ERROR_WRITING_FILE	= 
 		"Error writing compiled output file";
 
+public static final String SW_SEARCH_TEXT	= "Search for: ";
+public static final String SW_WORD_SEARCH	= "Keyword search";
+public static final String SW_SEARCH		= "Search";
+public static final String SW_EXACT_SEARCH	= "Exact search";
+public static final String SW_SEARCH_TM		= "Search TMs";
+public static final String SW_LOCATION		= "Location";
+public static final String SW_BROWSE		= "Select folder";
+public static final String SW_DIR_SEARCH	= "Search files";
+public static final String SW_DIR_RECURSIVE	= "Recursive search";
+public static final String SW_TITLE		= "Text search";
+public static final String SW_DISMISS		= "Dismiss window";
+public static final String SW_BUTTON_SELECT	= "Select";
+public static final String SW_VIEWER_TEXT	=
+	"Exact searches look for the specified query string within the " +
+	"current project or in any directory or directory tree.  Exact search " +
+	"supports the wildcard search characters '*' and '?'.  The character " +
+	"'*' means to match zero or more characters (the search term 'run*' " +
+	"would match 'run', 'runs', and 'running', for example).  " +
+	"The character '?' means to match exactly one character ('run?' " +
+	"would match 'runs' and 'rung', for example, but not 'run' or " +
+	"'running').  This operation searches both source and target " +
+	"languages.\n\n" +
+	"Keyword searches examine the source text and return all segments " +
+	"which contain all of the query words, in any order.  This operation " +
+	"can only be done on the source text of loaded projects.\n\n" + 
+	"See documentation for details";
+public static final String SW_MAX_FINDS_REACHED	= 
+	"Maximum number of finds (" + OConsts.ST_MAX_SEARCH_RESULTS + 
+	") has been reached.";
+
+public static final String ST_FILE_SEARCH_ERROR =
+	"Error searching directory tree";
+public static final String ST_FATAL_ERROR = 
+	"Search thread unexpectedly died - please close search window";
+public static final String ST_NOTHING_FOUND = "Search returned no matches";
+
+public static final String TF_INTRO_MESSAGE = 
+	"Insert some basic first time user instructions here\n";
+//	"Welcome to OmegaT.\n\nTo begin a new translation project, select " +
+//	"'" + TF_MENU_FILE_CREATE + "' from the file menu and select a " +
+//	"place to save the new project.  During project creation, you will " + 
+//	"be prompted to select several folder locations - using the default " +
+//	"values should work just fine (but feel free to change these if you " +
+//	"so desire).\nAfter creating the project, unzip or copy your source " +
+//	"files into your project's \"source\" directory and put whatever TMX " +
+//	"files you have available to you in the \"tm\" folder.  Then you are " +
+//	"ready to open your project.";
 };

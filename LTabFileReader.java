@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -75,8 +75,9 @@ class LTabFileReader
 		String s;
 		String z;
 		String token;
-		StringTokenizer t;
+//		StringTokenizer t;
 		int i;
+		char c;
 
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		ArrayList tokenList = new ArrayList();
@@ -85,12 +86,20 @@ class LTabFileReader
 			// skip lines that start with '#'
 			if (s.startsWith("#") == true)
 				continue;
-			t = new StringTokenizer(s, "\t");
-			while (t.hasMoreTokens())
+			z = "";
+			for (i=0; i<s.length(); i++)
 			{
-				z = t.nextToken();
-				tokenList.add(z);
+				c = s.charAt(i);
+				if ((c == 9) || (c == 10) || (c == 13))
+				{
+					// close token
+					tokenList.add(z);
+					z = "";
+				}
+				else
+					z += c;
 			}
+			tokenList.add(z);
 
 			// check token list to see if it has a valid string
 			for (i=0; i<tokenList.size(); i++)

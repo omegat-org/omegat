@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -37,9 +37,37 @@ import java.util.*;
 import javax.swing.event.*;
 import java.net.*;
 
+class HListener implements HyperlinkListener
+{
+	public HListener(TransFrame t, boolean grabFocus)
+	{
+		m_transFrame = t;
+		m_grabFocus = grabFocus;
+	}
+
+	public void hyperlinkUpdate(HyperlinkEvent e)
+	{
+		String s;
+		if (e.getEventType() == 
+		HyperlinkEvent.EventType.ACTIVATED)
+		{
+			s = e.getDescription();
+			MessageRelay.uiMessageDoGotoEntry(m_transFrame, s);
+			//m_transFrame.doGotoEntry(s);
+			if (m_grabFocus == true)
+			{
+				m_transFrame.toFront();
+			}
+		}
+	}
+
+	private TransFrame	m_transFrame;
+	protected boolean	m_grabFocus;
+}
+
 class ContextFrame extends JFrame 
 {
-	public ContextFrame(TransFrame parent, boolean srcLang)
+	public ContextFrame(TransFrame parent, boolean srcLang, boolean grabFocus)
 	{
 		String str;
 		m_parent = parent;
@@ -59,7 +87,6 @@ class ContextFrame extends JFrame
 				doClose();
 			}
 		});
-		Container cont = new Container();
 		Box bbut = Box.createHorizontalBox();
 		bbut.add(Box.createHorizontalGlue());
 		bbut.add(m_closeButton);
@@ -67,7 +94,7 @@ class ContextFrame extends JFrame
 		cp.add(bbut, "South");
 
 		setSize(500, 400);
-		m_editorPane.addHyperlinkListener(new HListener(m_parent));
+		m_editorPane.addHyperlinkListener(new HListener(m_parent, grabFocus));
 
 		// this only seems to work in 1.4, but at least it works there
 		// throws exceptions in 1.2
@@ -140,7 +167,7 @@ class ContextFrame extends JFrame
 			if ((src.equals("") == false) && (trans.equals("") == false))
 			{
 				out += "<tr>";
-				out += "<td><a href=\"" + (ste.entryNum() + 1) + "\">";
+				out += "<td><a href=\"" + (ste.entryNum()+ 1) + "\">";
 				out += (ste.entryNum() + 1) + " </a></td>";
 				out += "<td>" + src + "</td>";
 				out += "<td>" + trans + "</td>";
@@ -231,7 +258,7 @@ class ContextFrame extends JFrame
 
 	public static void main(String[] args)
 	{
-		JFrame f = new ContextFrame(null, true);
+		JFrame f = new ContextFrame(null, true, true);
 		f.show();
 	}
 }

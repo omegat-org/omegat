@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -59,7 +59,7 @@ class ProjectFrame extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				doClose();
+				hide();
 			}
 		});
 		Container cont = new Container();
@@ -70,7 +70,7 @@ class ProjectFrame extends JFrame
 		cp.add(bbut, "South");
 
 		setSize(500, 400);
-		m_editorPane.addHyperlinkListener(new HListener(m_parent));
+		m_editorPane.addHyperlinkListener(new HListener(m_parent, true));
 
 		updateUIText();
 	}
@@ -106,7 +106,7 @@ class ProjectFrame extends JFrame
 		m_ready = true;
 	}
 
-	public synchronized void buildDisplay()
+	public /*synchronized*/ void buildDisplay()
 	{
 		if (!m_ready)
 			return;

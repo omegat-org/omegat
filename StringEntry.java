@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -91,6 +91,12 @@ class StringEntry
 		m_glosList.add(strEntry);
 	}
 
+	// these methods aren't sychronized - thought about doing so, but
+	//	as the translation is set by user action, any race condition
+	//	would be the same as user pressing 'enter' key a few milliseconds
+	//	before or after they actually did, making the condition trivial
+	// if more processing happens here later, readdress synchronization
+	//	issues
 	public String getTrans()
 	{
 		return m_translation;
@@ -98,6 +104,8 @@ class StringEntry
 
 	public void setTranslation(String trans)
 	{
+		// tell the boss things have changed to indicate a save is in order
+		CommandThread.core.markAsDirty();
 		if (trans == null)
 			m_translation = "";
 		else

@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -37,7 +37,7 @@ class HTMLFileHandler extends FileHandler
 {
 	public HTMLFileHandler()
 	{
-		super("htmlfile", "html");
+		super(OConsts.FH_HTML_TYPE, "html");
 		m_tagList = new LinkedList();
 		m_preNT = new LinkedList();
 		m_fdList = new LinkedList();
@@ -148,7 +148,7 @@ class HTMLFileHandler extends FileHandler
 			}
 			else
 			{
-				s = HTMLParser.convert(c);
+				s = HTMLParser.convertToEsc(c);
 				if (s == null)
 					outBuf.append(c);
 				else
@@ -162,7 +162,7 @@ class HTMLFileHandler extends FileHandler
 			if (state < 0)
 			{
 				tagBuf.append(c);
-				outBuf.append(HTMLParser.convertAll(tagBuf));
+				outBuf.append(HTMLParser.convertAllToEsc(tagBuf));
 				tagBuf.reset();
 				state = 0;
 			}
@@ -374,7 +374,7 @@ System.out.println("HTML parse error: '" + m_file + "' at line " + (e.getErrorOf
 			}
 			if (c == ';')
 			{
-				c = HTMLParser.convert(buf.string());
+				c = HTMLParser.convertToChar(buf.string());
 				break;
 			}
 			buf.append(c);

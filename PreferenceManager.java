@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -37,8 +37,9 @@ import java.text.*;
 
 class PreferenceManager
 {
-	public PreferenceManager()
+	public PreferenceManager(String pref)
 	{
+		m_prefFileName = pref;
 		m_loaded = false;
 		m_preferenceMap = new HashMap(64);
 		m_nameList = new ArrayList(32);
@@ -46,98 +47,70 @@ class PreferenceManager
 		m_changed = false;
 	}
 
-	public String getPreference(String name)
+	public synchronized String getPreference(String name)
 	{
-		return access(name, "", GET);
-	}
-
-	public void setPreference(String name, String val)
-	{
-		access(name, val, SET);
-	}
-
-	public void save()
-	{
-		access("", "", SAVE);
-	}
-	
-	protected static final int GET	= 1;
-	protected static final int SET	= 2;
-	protected static final int SAVE	= 3;
-	protected static final int RESET	= 4;
-
-	public void reset()
-	{
-		access("", "", RESET);
-	}
-	
-	protected synchronized String access(String name, String val, int mode)
-	{
-		switch (mode)
+		if ((name == null) || (name.equals("")))
+			return "";
+		if (m_loaded == false)
+			doLoad();
+		
+		Integer i = (Integer) m_preferenceMap.get(name);
+		String v = "";
+		if (i != null)
 		{
-			case GET:
-				{
-					if ((name == null) || (name.equals("")))
-						break;
-					if (m_loaded == false)
-						doLoad();
-					
-					Integer i = (Integer) m_preferenceMap.get(name);
-					String v = "";
-					if (i != null)
-					{
-						// mapping exists - recover value
-						v = (String) m_valList.get(i.intValue());
-					}
-					return v;
-				}
-
-			case SAVE:
-				try 
-				{
-					if (m_changed)
-						doSave();
-				}
-				catch (IOException e)
-				{
-					return "save failed";
-				}
-				break;
-
-			case SET:
-				if ((name != null) && (!name.equals("")) && (val != null))
-				{
-					if (m_loaded == false)
-						doLoad();
-					Integer i = (Integer) m_preferenceMap.get(name);
-					if (i == null)
-					{
-						// value doesn't exist - add it
-						i = new Integer(m_valList.size());
-						m_preferenceMap.put(name, i);
-						m_valList.add(val);
-						m_nameList.add(name);
-					}
-					else
-					{
-						// mapping exists - reset value to new
-						m_valList.set(i.intValue(), val);
-					}
-					m_changed = true;
-				}
-				break;
-
-			case RESET:
-				m_loaded = false;
-				m_changed = false;
-				m_preferenceMap.clear();
-				m_valList.clear();
-				m_nameList.clear();
-				break;
+			// mapping exists - recover value
+			v = (String) m_valList.get(i.intValue());
 		}
-		return "";
+		return v;
 	}
 
+	public synchronized void setPreference(String name, String val)
+	{
+		if ((name != null) && (!name.equals("")) && (val != null))
+		{
+			if (m_loaded == false)
+				doLoad();
+			Integer i = (Integer) m_preferenceMap.get(name);
+			if (i == null)
+			{
+				// value doesn't exist - add it
+				i = new Integer(m_valList.size());
+				m_preferenceMap.put(name, i);
+				m_valList.add(val);
+				m_nameList.add(name);
+			}
+			else
+			{
+				// mapping exists - reset value to new
+				m_valList.set(i.intValue(), val);
+			}
+			m_changed = true;
+		}
+	}
+
+	public synchronized void save()
+	{
+		try 
+		{
+			if (m_changed)
+				doSave();
+		}
+		catch (IOException e)
+		{
+			System.out.println(
+					"ERROR - preference system save operation failed");
+		}
+	}
+	
+	public synchronized void reset()
+	{
+		m_loaded = false;
+		m_changed = false;
+		m_preferenceMap.clear();
+		m_valList.clear();
+		m_nameList.clear();
+	}
+	
 	protected void doLoad() 
 	{
 		try
@@ -148,7 +121,7 @@ class PreferenceManager
 
 			XMLStreamReader xml = new XMLStreamReader();
 			xml.killEmptyBlocks(true);
-			xml.setStream(new File(OConsts.PROJ_PREFERENCE));
+			xml.setStream(new File(m_prefFileName));
 			XMLBlock blk;
 			ArrayList lst;
 
@@ -234,7 +207,7 @@ class PreferenceManager
 		String name = "";
 		String val = "";
 		BufferedWriter out = new BufferedWriter(new FileWriter(
-					OConsts.PROJ_PREFERENCE));
+					m_prefFileName));
 		
 		str =  "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n";
 
@@ -245,7 +218,7 @@ class PreferenceManager
 		for (int i=0; i<m_nameList.size(); i++)
 		{
 			name = (String) m_nameList.get(i);
-			val = XMLStreamReader.controlify((String) m_valList.get(i));
+			val = XMLStreamReader.makeValidXML((String) m_valList.get(i), null);
 			if (val.equals(""))
 				continue;	// don't write blank preferences
 			str = "    <" + name + ">";
@@ -263,6 +236,7 @@ class PreferenceManager
 	
 	protected boolean	m_loaded;
 	protected boolean	m_changed;
+	protected String	m_prefFileName;
 
 	// use a hash map for fast lookup of data
 	// use array lists for orderly recovery of it for saving to disk
@@ -274,7 +248,7 @@ class PreferenceManager
 
 	public static void main(String[] args)
 	{
-		PreferenceManager man = new PreferenceManager();
+		PreferenceManager man = new PreferenceManager("test.pref");
 		man.setPreference("pref1", "val 1");
 		man.setPreference("pref2", "val 2");
 		man.setPreference("pref3", "val 3");

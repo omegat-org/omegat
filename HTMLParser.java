@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -31,6 +31,7 @@
 
 import java.text.*;
 import java.io.*;
+import java.util.HashMap;
 
 class HTMLParser
 {
@@ -385,14 +386,309 @@ class HTMLParser
 	protected static final int STATE_RECORD_QUOTE		= 31;
 	protected static final int STATE_CLOSE			= 40;
 
-	static String convertAll(LBuffer b)
+	public static void initEscCharLookupTable()
+	{
+		// see if table has been initialized already
+		if (m_escMap != null)
+			return;
+
+		m_escMap = new HashMap(512);
+		m_charMap = new HashMap(512);
+
+		addMapEntry((char)34, "quot");
+		addMapEntry((char)38, "amp");
+		addMapEntry((char)60, "lt");
+		addMapEntry((char)62, "gt");
+		addMapEntry((char)160, "nbsp");
+		addMapEntry((char)161, "iexcl");
+		addMapEntry((char)162, "cent");
+		addMapEntry((char)163, "pound");
+		addMapEntry((char)164, "curren");
+		addMapEntry((char)165, "yen");
+		addMapEntry((char)166, "brvbar");
+		addMapEntry((char)167, "sect");
+		addMapEntry((char)168, "uml");
+		addMapEntry((char)169, "copy");
+		addMapEntry((char)170, "ordf");
+		addMapEntry((char)171, "laquo");
+		addMapEntry((char)172, "not");
+		addMapEntry((char)173, "shy");
+		addMapEntry((char)174, "reg");
+		addMapEntry((char)175, "macr");
+		addMapEntry((char)176, "deg");
+		addMapEntry((char)177, "plusmn");
+		addMapEntry((char)178, "sup2");
+		addMapEntry((char)179, "sup3");
+		addMapEntry((char)180, "acute");
+		addMapEntry((char)181, "micro");
+		addMapEntry((char)182, "para");
+		addMapEntry((char)183, "middot");
+		addMapEntry((char)184, "cedil");
+		addMapEntry((char)185, "sup1");
+		addMapEntry((char)186, "ordm");
+		addMapEntry((char)187, "raquo");
+		addMapEntry((char)188, "frac14");
+		addMapEntry((char)189, "frac12");
+		addMapEntry((char)190, "frac34");
+		addMapEntry((char)191, "iquest");
+		addMapEntry((char)192, "Agrave");
+		addMapEntry((char)193, "Aacute");
+		addMapEntry((char)194, "Acirc");
+		addMapEntry((char)195, "Atilde");
+		addMapEntry((char)196, "Auml");
+		addMapEntry((char)197, "Aring");
+		addMapEntry((char)198, "AElig");
+		addMapEntry((char)199, "Ccedil");
+		addMapEntry((char)200, "Egrave");
+		addMapEntry((char)201, "Eacute");
+		addMapEntry((char)202, "Ecirc");
+		addMapEntry((char)203, "Euml");
+		addMapEntry((char)204, "Igrave");
+		addMapEntry((char)205, "Iacute");
+		addMapEntry((char)206, "Icirc");
+		addMapEntry((char)207, "Iuml");
+		addMapEntry((char)208, "ETH");
+		addMapEntry((char)209, "Ntilde");
+		addMapEntry((char)210, "Ograve");
+		addMapEntry((char)211, "Oacute");
+		addMapEntry((char)212, "Ocirc");
+		addMapEntry((char)213, "Otilde");
+		addMapEntry((char)214, "Ouml");
+		addMapEntry((char)215, "times");
+		addMapEntry((char)216, "Oslash");
+		addMapEntry((char)217, "Ugrave");
+		addMapEntry((char)218, "Uacute");
+		addMapEntry((char)219, "Ucirc");
+		addMapEntry((char)220, "Uuml");
+		addMapEntry((char)221, "Yacute");
+		addMapEntry((char)222, "THORN");
+		addMapEntry((char)223, "szlig");
+		addMapEntry((char)224, "agrave");
+		addMapEntry((char)225, "aacute");
+		addMapEntry((char)226, "acirc");
+		addMapEntry((char)227, "atilde");
+		addMapEntry((char)228, "auml");
+		addMapEntry((char)229, "aring");
+		addMapEntry((char)230, "aelig");
+		addMapEntry((char)231, "ccedil");
+		addMapEntry((char)232, "egrave");
+		addMapEntry((char)233, "eacute");
+		addMapEntry((char)234, "ecirc");
+		addMapEntry((char)235, "euml");
+		addMapEntry((char)236, "igrave");
+		addMapEntry((char)237, "iacute");
+		addMapEntry((char)238, "icirc");
+		addMapEntry((char)239, "iuml");
+		addMapEntry((char)240, "eth");
+		addMapEntry((char)241, "ntilde");
+		addMapEntry((char)242, "ograve");
+		addMapEntry((char)243, "oacute");
+		addMapEntry((char)244, "ocirc");
+		addMapEntry((char)245, "otilde");
+		addMapEntry((char)246, "ouml");
+		addMapEntry((char)247, "divide");
+		addMapEntry((char)248, "oslash");
+		addMapEntry((char)249, "ugrave");
+		addMapEntry((char)250, "uacute");
+		addMapEntry((char)251, "ucirc");
+		addMapEntry((char)252, "uuml");
+		addMapEntry((char)253, "yacute");
+		addMapEntry((char)254, "thorn");
+		addMapEntry((char)255, "yuml");
+		addMapEntry((char)338, "OElig");
+		addMapEntry((char)339, "oelig");
+		addMapEntry((char)352, "Scaron");
+		addMapEntry((char)353, "scaron");
+		addMapEntry((char)376, "Yuml");
+		addMapEntry((char)402, "fnof");
+		addMapEntry((char)710, "circ");
+		addMapEntry((char)732, "tilde");
+		addMapEntry((char)913, "Alpha");
+		addMapEntry((char)914, "Beta");
+		addMapEntry((char)915, "Gamma");
+		addMapEntry((char)916, "Delta");
+		addMapEntry((char)917, "Epsilon");
+		addMapEntry((char)918, "Zeta");
+		addMapEntry((char)919, "Eta");
+		addMapEntry((char)920, "Theta");
+		addMapEntry((char)921, "Iota");
+		addMapEntry((char)922, "Kappa");
+		addMapEntry((char)923, "Lambda");
+		addMapEntry((char)924, "Mu");
+		addMapEntry((char)925, "Nu");
+		addMapEntry((char)926, "Xi");
+		addMapEntry((char)927, "Omicron");
+		addMapEntry((char)928, "Pi");
+		addMapEntry((char)929, "Rho");
+		addMapEntry((char)931, "Sigma");
+		addMapEntry((char)932, "Tau");
+		addMapEntry((char)933, "Upsilon");
+		addMapEntry((char)934, "Phi");
+		addMapEntry((char)935, "Chi");
+		addMapEntry((char)936, "Psi");
+		addMapEntry((char)937, "Omega");
+		addMapEntry((char)945, "alpha");
+		addMapEntry((char)946, "beta");
+		addMapEntry((char)947, "gamma");
+		addMapEntry((char)948, "delta");
+		addMapEntry((char)949, "epsilon");
+		addMapEntry((char)950, "zeta");
+		addMapEntry((char)951, "eta");
+		addMapEntry((char)952, "theta");
+		addMapEntry((char)953, "iota");
+		addMapEntry((char)954, "kappa");
+		addMapEntry((char)955, "lambda");
+		addMapEntry((char)956, "mu");
+		addMapEntry((char)957, "nu");
+		addMapEntry((char)958, "xi");
+		addMapEntry((char)959, "omicron");
+		addMapEntry((char)960, "pi");
+		addMapEntry((char)961, "rho");
+		addMapEntry((char)962, "sigmaf");
+		addMapEntry((char)963, "sigma");
+		addMapEntry((char)964, "tau");
+		addMapEntry((char)965, "upsilon");
+		addMapEntry((char)966, "phi");
+		addMapEntry((char)967, "chi");
+		addMapEntry((char)968, "psi");
+		addMapEntry((char)969, "omega");
+		addMapEntry((char)977, "thetasym");
+		addMapEntry((char)978, "upsih");
+		addMapEntry((char)982, "piv");
+		addMapEntry((char)8194, "ensp");
+		addMapEntry((char)8195, "emsp");
+		addMapEntry((char)8201, "thinsp");
+		addMapEntry((char)8204, "zwnj");
+		addMapEntry((char)8205, "zwj");
+		addMapEntry((char)8206, "lrm");
+		addMapEntry((char)8207, "rlm");
+		addMapEntry((char)8211, "ndash");
+		addMapEntry((char)8212, "mdash");
+		addMapEntry((char)8216, "lsquo");
+		addMapEntry((char)8217, "rsquo");
+		addMapEntry((char)8218, "sbquo");
+		addMapEntry((char)8220, "ldquo");
+		addMapEntry((char)8221, "rdquo");
+		addMapEntry((char)8222, "bdquo");
+		addMapEntry((char)8224, "dagger");
+		addMapEntry((char)8225, "Dagger");
+		addMapEntry((char)8226, "bull");
+		addMapEntry((char)8230, "hellip");
+		addMapEntry((char)8240, "permil");
+		addMapEntry((char)8242, "prime");
+		addMapEntry((char)8243, "Prime");
+		addMapEntry((char)8249, "lsaquo");
+		addMapEntry((char)8250, "rsaquo");
+		addMapEntry((char)8254, "oline");
+		addMapEntry((char)8260, "frasl");
+		addMapEntry((char)8364, "euro");
+		addMapEntry((char)8465, "image");
+		addMapEntry((char)8472, "weierp");
+		addMapEntry((char)8476, "real");
+		addMapEntry((char)8482, "trade");
+		addMapEntry((char)8501, "alefsym");
+		addMapEntry((char)8592, "larr");
+		addMapEntry((char)8593, "uarr");
+		addMapEntry((char)8594, "rarr");
+		addMapEntry((char)8595, "darr");
+		addMapEntry((char)8596, "harr");
+		addMapEntry((char)8629, "crarr");
+		addMapEntry((char)8656, "lArr");
+		addMapEntry((char)8657, "uArr");
+		addMapEntry((char)8658, "rArr");
+		addMapEntry((char)8659, "dArr");
+		addMapEntry((char)8660, "hArr");
+		addMapEntry((char)8704, "forall");
+		addMapEntry((char)8706, "part");
+		addMapEntry((char)8707, "exist");
+		addMapEntry((char)8709, "empty");
+		addMapEntry((char)8711, "nabla");
+		addMapEntry((char)8712, "isin");
+		addMapEntry((char)8713, "notin");
+		addMapEntry((char)8715, "ni");
+		addMapEntry((char)8719, "prod");
+		addMapEntry((char)8721, "sum");
+		addMapEntry((char)8722, "minus");
+		addMapEntry((char)8727, "lowast");
+		addMapEntry((char)8730, "radic");
+		addMapEntry((char)8733, "prop");
+		addMapEntry((char)8734, "infin");
+		addMapEntry((char)8736, "ang");
+		addMapEntry((char)8743, "and");
+		addMapEntry((char)8744, "or");
+		addMapEntry((char)8745, "cap");
+		addMapEntry((char)8746, "cup");
+		addMapEntry((char)8747, "int");
+		addMapEntry((char)8756, "there4");
+		addMapEntry((char)8764, "sim");
+		addMapEntry((char)8773, "cong");
+		addMapEntry((char)8776, "asymp");
+		addMapEntry((char)8800, "ne");
+		addMapEntry((char)8801, "equiv");
+		addMapEntry((char)8804, "le");
+		addMapEntry((char)8805, "ge");
+		addMapEntry((char)8834, "sub");
+		addMapEntry((char)8835, "sup");
+		addMapEntry((char)8836, "nsub");
+		addMapEntry((char)8838, "sube");
+		addMapEntry((char)8839, "supe");
+		addMapEntry((char)8853, "oplus");
+		addMapEntry((char)8855, "otimes");
+		addMapEntry((char)8869, "perp");
+		addMapEntry((char)8901, "sdot");
+		addMapEntry((char)8968, "lceil");
+		addMapEntry((char)8969, "rceil");
+		addMapEntry((char)8970, "lfloor");
+		addMapEntry((char)8971, "rfloor");
+		addMapEntry((char)9001, "lang");
+		addMapEntry((char)9002, "rang");
+		addMapEntry((char)9674, "loz");
+		addMapEntry((char)9824, "spades");
+		addMapEntry((char)9827, "clubs");
+		addMapEntry((char)9829, "hearts");
+		addMapEntry((char)9830, "diams");
+	}
+
+	protected static void addMapEntry(char val, String name)
+	{
+		m_escMap.put(name, new Character(val));
+		m_charMap.put(new Character(val), name);
+	}
+	
+	public static char convertToChar(String tok)
+	{
+		Character c = (Character) m_escMap.get(tok);
+		if (c == null)
+		{
+			Integer i = new Integer(tok);
+			if (i != null)
+				return (char) (i.intValue());
+
+			return 0;
+		}
+		else
+			return c.charValue();
+	}
+
+	public static String convertToEsc(char c)
+	{
+		String s = (String) m_charMap.get(new Character(c));
+		if ((s == null) && ((c > 255) || ((c > 126) && (c <= 160))))
+		{
+			s = "&#" + String.valueOf((int) c) + ";";
+		}
+		
+		return s;
+	}
+	
+	public static String convertAllToEsc(LBuffer b)
 	{
 		LBuffer buf = new LBuffer(b.size() * 2);
 		char[] car = b.getBuf();
 		String s;
 		for (int i=0; i<b.length(); i++)
 		{
-			s = convert(car[i]);
+			s = convertToEsc(car[i]);
 			if (s == null)
 				buf.append(car[i]);
 			else
@@ -405,604 +701,6 @@ class HTMLParser
 		return buf.string();
 	}
 
-	static char convert(String tok)
-	{
-		String s;
-		if (tok.startsWith("&"))
-			s = tok.substring(1);
-		else
-			s = tok;
-		char c = 0;
-		switch (s.charAt(0))
-		{
-			case 'A':
-				if (s.compareToIgnoreCase("AElig") == 0)
-					c = 198;
-				else if (s.compareToIgnoreCase("Aacute") == 0)
-					c = 193;
-				else if (s.compareToIgnoreCase("Acirc") == 0)
-					c = 194;
-				else if (s.compareToIgnoreCase("Agrave") == 0)
-					c = 192;
-				else if (s.compareToIgnoreCase("Aring") == 0)
-					c = 197;
-				else if (s.compareToIgnoreCase("Atilde") == 0)
-					c = 195;
-				else if (s.compareToIgnoreCase("Auml") == 0)
-					c = 196;
-				break;
-
-			case 'C':
-				if (s.compareToIgnoreCase("Ccedil") == 0)
-					c = 199;
-				break;
-
-			case 'E':
-				if (s.compareToIgnoreCase("ETH") == 0)
-					c = 208;
-				else if (s.compareToIgnoreCase("Eacute") == 0)
-					c = 201;
-				else if (s.compareToIgnoreCase("Ecirc") == 0)
-					c = 202;
-				else if (s.compareToIgnoreCase("Egrave") == 0)
-					c = 200;
-				else if (s.compareToIgnoreCase("Euml") == 0)
-					c = 203;
-				break;
-
-			case 'I':
-				if (s.compareToIgnoreCase("Iacute") == 0)
-					c = 205;
-				else if (s.compareToIgnoreCase("Icirc") == 0)
-					c = 206;
-				else if (s.compareToIgnoreCase("Igrave") == 0)
-					c = 204;
-				else if (s.compareToIgnoreCase("Iuml") == 0)
-					c = 207;
-				break;
-
-			case 'N':
-				if (s.compareToIgnoreCase("Ntilde") == 0)
-					c = 209;
-				break;
-
-			case 'O':
-				if (s.compareToIgnoreCase("Oacute") == 0)
-					c = 211;
-				else if (s.compareToIgnoreCase("Ocirc") == 0)
-					c = 212;
-				else if (s.compareToIgnoreCase("Ograve") == 0)
-					c = 210;
-				else if (s.compareToIgnoreCase("Oslash") == 0)
-					c = 216;
-				else if (s.compareToIgnoreCase("Otilde") == 0)
-					c = 213;
-				else if (s.compareToIgnoreCase("Ouml") == 0)
-					c = 214;
-				break;
-
-			case 'T':
-				if (s.compareToIgnoreCase("THORN") == 0)
-					c = 222;
-				break;
-
-			case 'U':
-				if (s.compareToIgnoreCase("Uacute") == 0)
-					c = 218;
-				else if (s.compareToIgnoreCase("Ucirc") == 0)
-					c = 219;
-				else if (s.compareToIgnoreCase("Ugrave") == 0)
-					c = 217;
-				else if (s.compareToIgnoreCase("Uuml") == 0)
-					c = 220;
-				break;
-
-			case 'Y':
-				if (s.compareToIgnoreCase("Yacute") == 0)
-					c = 221;
-			case 'a':
-				if (s.compareToIgnoreCase("amp") == 0)
-					c = '&';
-				else if (s.compareToIgnoreCase("aacute") == 0)
-					c = 225;
-				else if (s.compareToIgnoreCase("acirc") == 0)
-					c = 226;
-				else if (s.compareToIgnoreCase("acute") == 0)
-					c = 180;
-				else if (s.compareToIgnoreCase("aelig") == 0)
-					c = 230;
-				else if (s.compareToIgnoreCase("agrave") == 0)
-					c = 224;
-				else if (s.compareToIgnoreCase("aring") == 0)
-					c = 229;
-				else if (s.compareToIgnoreCase("atilde") == 0)
-					c = 227;
-				else if (s.compareToIgnoreCase("auml") == 0)
-					c = 228;
-				break;
-
-			case 'b':
-				if (s.compareToIgnoreCase("brvbar") == 0)
-					c = 166;
-				break;
-
-			case 'c':
-				if (s.compareToIgnoreCase("ccedil") == 0)
-					c = 231;
-				else if (s.compareToIgnoreCase("cedil") == 0)
-					c = 184;
-				else if (s.compareToIgnoreCase("cent") == 0)
-					c = 162;
-				else if (s.compareToIgnoreCase("copy") == 0)
-					c = 169;
-				else if (s.compareToIgnoreCase("curren") == 0)
-					c = 164;
-				break;
-
-			case 'd':
-				if (s.compareToIgnoreCase("deg") == 0)
-					c = 176;
-				else if (s.compareToIgnoreCase("divide") == 0)
-					c = 247;
-				break;
-
-			case 'e':
-				if (s.compareToIgnoreCase("eacute") == 0)
-					c = 233;
-				else if (s.compareToIgnoreCase("ecirc") == 0)
-					c = 234;
-				else if (s.compareToIgnoreCase("egrave") == 0)
-					c = 232;
-				else if (s.compareToIgnoreCase("eth") == 0)
-					c = 240;
-				else if (s.compareToIgnoreCase("euml") == 0)
-					c = 235;
-				break;
-
-			case 'f':
-				if (s.compareToIgnoreCase("frac12") == 0)
-					c = 189;
-				else if (s.compareToIgnoreCase("frac14") == 0)
-					c = 188;
-				else if (s.compareToIgnoreCase("frac34") == 0)
-					c = 190;
-			case 'g':
-				if (s.compareToIgnoreCase("gt") == 0)
-					c = '>';
-				break;
-
-			case 'i':
-				if (s.compareToIgnoreCase("iacute") == 0)
-					c = 237;
-				else if (s.compareToIgnoreCase("icirc") == 0)
-					c = 238;
-				else if (s.compareToIgnoreCase("iexcl") == 0)
-					c = 161;
-				else if (s.compareToIgnoreCase("igrave") == 0)
-					c = 236;
-				else if (s.compareToIgnoreCase("iquest") == 0)
-					c = 191;
-				else if (s.compareToIgnoreCase("iuml") == 0)
-					c = 239;
-			case 'l':
-				if (s.compareToIgnoreCase("lt") == 0)
-					c = '<';
-				else if (s.compareToIgnoreCase("laquo") == 0)
-					c = 171;
-				break;
-
-			case 'm':
-				if (s.compareToIgnoreCase("macr") == 0)
-					c = 175;
-				else if (s.compareToIgnoreCase("micro") == 0)
-					c = 181;
-				else if (s.compareToIgnoreCase("middot") == 0)
-					c = 183;
-				break;
-
-			case 'n':
-				if (s.compareToIgnoreCase("nbsp") == 0)
-					c = 160;
-				else if (s.compareToIgnoreCase("not") == 0)
-					c = 172;
-				else if (s.compareToIgnoreCase("ntilde") == 0)
-					c = 241;
-				break;
-
-			case 'o':
-				if (s.compareToIgnoreCase("oacute") == 0)
-					c = 243;
-				else if (s.compareToIgnoreCase("ocirc") == 0)
-					c = 244;
-				else if (s.compareToIgnoreCase("ograve") == 0)
-					c = 242;
-				else if (s.compareToIgnoreCase("ordf") == 0)
-					c = 170;
-				else if (s.compareToIgnoreCase("ordm") == 0)
-					c = 186;
-				else if (s.compareToIgnoreCase("oslash") == 0)
-					c = 248;
-				else if (s.compareToIgnoreCase("otilde") == 0)
-					c = 245;
-				else if (s.compareToIgnoreCase("ouml") == 0)
-					c = 246;
-				break;
-
-			case 'p':
-				if (s.compareToIgnoreCase("para") == 0)
-					c = 182;
-				else if (s.compareToIgnoreCase("plusmn") == 0)
-					c = 177;
-				else if (s.compareToIgnoreCase("pound") == 0)
-					c = 163;
-			case 'q':
-				if (s.compareToIgnoreCase("quot") == 0)
-					c = '"';
-				break;
-
-			case 'r':
-				if (s.compareToIgnoreCase("raquo") == 0)
-					c = 187;
-				else if (s.compareToIgnoreCase("reg") == 0)
-					c = 174;
-				break;
-
-			case 's':
-				if (s.compareToIgnoreCase("sect") == 0)
-					c = 167;
-				else if (s.compareToIgnoreCase("shy") == 0)
-					c = 173;
-				else if (s.compareToIgnoreCase("sup1") == 0)
-					c = 185;
-				else if (s.compareToIgnoreCase("sup2") == 0)
-					c = 178;
-				else if (s.compareToIgnoreCase("sup3") == 0)
-					c = 179;
-				else if (s.compareToIgnoreCase("szlig") == 0)
-					c = 223;
-				break;
-
-			case 't':
-				if (s.compareToIgnoreCase("thorn") == 0)
-					c = 254;
-				else if (s.compareToIgnoreCase("times") == 0)
-					c = 215;
-				break;
-
-			case 'u':
-				if (s.compareToIgnoreCase("uacute") == 0)
-					c = 250;
-				else if (s.compareToIgnoreCase("ucirc") == 0)
-					c = 251;
-				else if (s.compareToIgnoreCase("ugrave") == 0)
-					c = 249;
-				else if (s.compareToIgnoreCase("uml") == 0)
-					c = 168;
-				else if (s.compareToIgnoreCase("uuml") == 0)
-					c = 252;
-				break;
-
-			case 'y':
-				if (s.compareToIgnoreCase("yacute") == 0)
-					c = 253;
-				else if (s.compareToIgnoreCase("yen") == 0)
-					c = 165;
-				else if (s.compareToIgnoreCase("yuml") == 0)
-					c = 255;
-		}
-		return c;
-	}
-
-
-	static String convert(char c)
-	{
-		String s = null;
-		switch(c)
-		{
-			case '&':
-				s = "amp";
-				break;
-			case '<':
-				s = "lt";
-				break;
-			case '>':
-				s = "gt";
-				break;
-			case '"':
-				s = "quot";
-				break;
-			case 160:
-				s = "nbsp";
-				break;
-			case 161:
-				s = "iexcl";
-				break;
-			case 162:
-				s = "cent";
-				break;
-			case 163:
-				s = "pound";
-				break;
-			case 164:
-				s = "curren";
-				break;
-			case 165:
-				s = "yen";
-				break;
-			case 166:
-				s = "brvbar";
-				break;
-			case 167:
-				s = "sect";
-				break;
-			case 168:
-				s = "uml";
-				break;
-			case 169:
-				s = "copy";
-				break;
-			case 170:
-				s = "ordf";
-				break;
-			case 171:
-				s = "laquo";
-				break;
-			case 172:
-				s = "not";
-				break;
-			case 173:
-				s = "shy";
-				break;
-			case 174:
-				s = "reg";
-				break;
-			case 175:
-				s = "macr";
-				break;
-			case 176:
-				s = "deg";
-				break;
-			case 177:
-				s = "plusmn";
-				break;
-			case 178:
-				s = "sup2";
-				break;
-			case 179:
-				s = "sup3";
-				break;
-			case 180:
-				s = "acute";
-				break;
-			case 181:
-				s = "micro";
-				break;
-			case 182:
-				s = "para";
-				break;
-			case 183:
-				s = "middot";
-				break;
-			case 184:
-				s = "cedil";
-				break;
-			case 185:
-				s = "sup1";
-				break;
-			case 186:
-				s = "ordm";
-				break;
-			case 187:
-				s = "raquo";
-				break;
-			case 188:
-				s = "frac14";
-				break;
-			case 189:
-				s = "frac12";
-				break;
-			case 190:
-				s = "frac34";
-				break;
-			case 191:
-				s = "iquest";
-				break;
-			case 192:
-				s = "Agrave";
-				break;
-			case 193:
-				s = "Aacute";
-				break;
-			case 194:
-				s = "Acirc";
-				break;
-			case 195:
-				s = "Atilde";
-				break;
-			case 196:
-				s = "Auml";
-				break;
-			case 197:
-				s = "Aring";
-				break;
-			case 198:
-				s = "AElig";
-				break;
-			case 199:
-				s = "Ccedil";
-				break;
-			case 200:
-				s = "Egrave";
-				break;
-			case 201:
-				s = "Eacute";
-				break;
-			case 202:
-				s = "Ecirc";
-				break;
-			case 203:
-				s = "Euml";
-				break;
-			case 204:
-				s = "Igrave";
-				break;
-			case 205:
-				s = "Iacute";
-				break;
-			case 206:
-				s = "Icirc";
-				break;
-			case 207:
-				s = "Iuml";
-				break;
-			case 208:
-				s = "ETH";
-				break;
-			case 209:
-				s = "Ntilde";
-				break;
-			case 210:
-				s = "Ograve";
-				break;
-			case 211:
-				s = "Oacute";
-				break;
-			case 212:
-				s = "Ocirc";
-				break;
-			case 213:
-				s = "Otilde";
-				break;
-			case 214:
-				s = "Ouml";
-				break;
-			case 215:
-				s = "times";
-				break;
-			case 216:
-				s = "Oslash";
-				break;
-			case 217:
-				s = "Ugrave";
-				break;
-			case 218:
-				s = "Uacute";
-				break;
-			case 219:
-				s = "Ucirc";
-				break;
-			case 220:
-				s = "Uuml";
-				break;
-			case 221:
-				s = "Yacute";
-				break;
-			case 222:
-				s = "THORN";
-				break;
-			case 223:
-				s = "szlig";
-				break;
-			case 224:
-				s = "agrave";
-				break;
-			case 225:
-				s = "aacute";
-				break;
-			case 226:
-				s = "acirc";
-				break;
-			case 227:
-				s = "atilde";
-				break;
-			case 228:
-				s = "auml";
-				break;
-			case 229:
-				s = "aring";
-				break;
-			case 230:
-				s = "aelig";
-				break;
-			case 231:
-				s = "ccedil";
-				break;
-			case 232:
-				s = "egrave";
-				break;
-			case 233:
-				s = "eacute";
-				break;
-			case 234:
-				s = "ecirc";
-				break;
-			case 235:
-				s = "euml";
-				break;
-			case 236:
-				s = "igrave";
-				break;
-			case 237:
-				s = "iacute";
-				break;
-			case 238:
-				s = "icirc";
-				break;
-			case 239:
-				s = "iuml";
-				break;
-			case 240:
-				s = "eth";
-				break;
-			case 241:
-				s = "ntilde";
-				break;
-			case 242:
-				s = "ograve";
-				break;
-			case 243:
-				s = "oacute";
-				break;
-			case 244:
-				s = "ocirc";
-				break;
-			case 245:
-				s = "otilde";
-				break;
-			case 246:
-				s = "ouml";
-				break;
-			case 247:
-				s = "divide";
-				break;
-			case 248:
-				s = "oslash";
-				break;
-			case 249:
-				s = "ugrave";
-				break;
-			case 250:
-				s = "uacute";
-				break;
-			case 251:
-				s = "ucirc";
-				break;
-			case 252:
-				s = "uuml";
-				break;
-			case 253:
-				s = "yacute";
-				break;
-			case 254:
-				s = "thorn";
-				break;
-			case 255:
-				s = "yuml";
-				break;
-		}
-		if ((c > 255) || ((c > 126) && (c <= 160)))
-			s = "#" + String.valueOf((int) c);
-
-		return s;
-	}
+	protected static HashMap	m_charMap = null;
+	protected static HashMap	m_escMap = null;
 }

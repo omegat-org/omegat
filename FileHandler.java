@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -41,6 +41,8 @@ abstract class FileHandler
 		m_testMode = false;
 		m_outputMode = false;
 		m_outFile = null;
+		m_searchMode = false;
+		m_searchThread = null;
 	}
 
 	public String type()
@@ -58,6 +60,14 @@ abstract class FileHandler
 		m_testMode = state;
 	}
 
+	// when mode is set, output is now written and strings are passed
+	//	to  supplied search thread
+	public void setSearchMode(boolean mode, SearchThread search)
+	{
+		m_searchMode = mode;
+		m_searchThread = search;
+	}
+
 	public void fileWriteError(IOException e) throws IOException
 	{
 		String str = OStrings.FH_ERROR_WRITING_FILE;
@@ -70,6 +80,12 @@ abstract class FileHandler
 		return text;
 	}
 
+	protected void processEntry(StringBuffer buf, String file)
+					throws IOException
+	{
+		processEntry(buf.toString(), file);
+	}
+	
 	protected void processEntry(LBuffer buf, String file)
 					throws IOException
 	{
@@ -80,7 +96,15 @@ abstract class FileHandler
 					throws IOException
 	{
 		if ((m_testMode) && (!m_outputMode))
-			CommandThread.core.dumpEntry(srcText, file);
+		{
+			System.out.println(" val: " + srcText);
+			System.out.println("file: " + file);
+			System.out.println("");
+		}
+		else if (m_searchMode)
+		{
+			m_searchThread.searchText(srcText);
+		}
 		else if (m_outputMode)
 		{
 			// fetch translation and write it to outfile
@@ -93,7 +117,7 @@ abstract class FileHandler
 			}
 			else
 			{
-				s = CommandThread.core.getTranslation(srcText);
+				s = CommandThread.core.getStringEntry(srcText).getTrans();
 				if ((s == null) || (s.equals("")))
 					s = srcText;
 				s = formatString(s);
@@ -250,7 +274,9 @@ abstract class FileHandler
 		m_file = "";
 	}
 
+
 	public int	line()	{ return m_line;	}
+	public String	getType()	{ return m_type;		}
 
 	private String m_type;
 	private String m_preferredExtension;
@@ -258,6 +284,9 @@ abstract class FileHandler
 	protected boolean m_testMode;
 	protected boolean m_outputMode;
 	protected BufferedWriter	m_outFile;
+
+	protected boolean		m_searchMode;
+	protected SearchThread	m_searchThread;
 
 	private int		m_line = 0;
 	private boolean		m_cr = false;

@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -40,118 +40,6 @@ class HandlerMaster
 		setupDefaultHandlers();
 	}
 
-//	public void buildHandlerList(String srcRoot, String projRoot,
-//					String projName) throws IOException
-//	{
-//		File src = new File(srcRoot);
-//		File proj = new File(projRoot);
-//		boolean err = false;
-//		String errString = "";
-//		if (!src.isDirectory())
-//		{
-//			// complain
-//			err = true;
-//			errString = "Specified source location '" + 
-//				src.getName() + "' is not a directory";
-//		}
-//
-//		if (!proj.isDirectory())
-//		{
-//			errString = CommandThread.core.langManager().getString(
-//					OStrings.HM_MISSING_DIR);
-//			err = true;
-//		}
-//
-//		if (err == false)
-//		{
-//			FileWriter ofp = null;
-//			try
-//			{
-//				String fn = projRoot + File.separator + 
-//					projName + OConsts.HANDLER_LIST_EXT;
-//				ofp = new FileWriter(fn);
-//				ofp.write(src.getAbsolutePath() + "\n");
-//				outputFile("", src, ofp);
-//				ofp.close();
-//			}
-//			catch (IOException e)
-//			{
-//				try { ofp.close();	}
-//				catch(IOException d) { ; }
-//				err = true;
-//				errString = "Generic error writing '" + 
-//					projName + OConsts.HANDLER_LIST_EXT + 
-//					"' file";
-//			}
-//		}
-//		if (err == true)
-//		{
-//			throw new IOException(errString);
-//		}
-//	}
-//
-//	protected void outputFile(String path, File cur, 
-//		FileWriter ofp) throws IOException
-//	{
-//		File[] files = cur.listFiles();
-//		String pathFile = "";
-//		String outstr;
-//		String hndlr = null;
-//		String s;
-//		StringTokenizer tok;
-//		FileHandler fh;
-//		
-//		String handler;
-//		if (files == null)
-//			throw new NullPointerException();
-//		
-//		int i;
-//		Arrays.sort(files);
-//		for (i=0; i<files.length; i++)
-//		{
-//			if (!files[i].isFile())
-//				continue;
-//
-//			if (path.compareTo("") == 0)
-//				pathFile = files[i].getName();
-//			else
-//				pathFile = path + File.separator +
-//					files[i].getName();
-//
-//			// find default handler
-//			tok = new StringTokenizer(files[i].getName(),
-//				".");
-//			s = "";
-//			tok.nextToken();
-//			while (tok.hasMoreTokens())
-//			{
-//				s = tok.nextToken();
-//			}
-//			fh = findPreferredHandler(s);
-//			if (fh != null)
-//				hndlr = fh.type();
-//			else
-//				hndlr = OConsts.HANDLER_IGNORE;
-//
-//			// output filename
-//			outstr = pathFile + "\t" + hndlr + "\n";
-//			ofp.write(outstr);
-//		}
-//		for (i=0; i<files.length; i++)
-//		{
-//			if (!files[i].isDirectory())
-//				continue;
-//
-//			if (path.compareTo("") == 0)
-//				pathFile = files[i].getName();
-//			else
-//				pathFile = path + File.separator +
-//					files[i].getName();
-//
-//			outputFile(pathFile, files[i], ofp);
-//		}
-//	}
-//
 	public void addHandler(FileHandler hand)
 	{
 		m_handlerList.add(hand);
@@ -206,7 +94,9 @@ class HandlerMaster
 		addHandler(new TextFileHandler("textfile-latin2", "txt2"));
 		addHandler(new TextFileHandler("textfile-utf8", "utf8"));
 		addHandler(new HTMLFileHandler());
-		addHandler(new OOFileHandler());
+		addHandler(new HTMLXmlFileHandler());
+		addHandler(new OOXmlFileHandler());
+		addHandler(new testhandler());
 	}
 
 	public ArrayList getHandlerList()	{ return m_handlerList;	}
@@ -215,17 +105,4 @@ class HandlerMaster
 
 ////////////////////////////////////////////////////////////
 
-//	public static void main(String[] args)
-//	{
-//		try 
-//		{
-//			HandlerMaster mast = new HandlerMaster();
-//			mast.buildHandlerList(".", ".", "omegat");
-//		}
-//		catch(IOException e)
-//		{
-//			System.out.println("Error encountered:");
-//			System.out.println("   " + e);
-//		}
-//	}
 }

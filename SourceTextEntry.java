@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -37,7 +37,7 @@ import java.util.*;
 //  language strings
 class SourceTextEntry
 {
-	public void set(StringEntry str, String file, int entryNum)
+	public void set(StringEntry str, ProjectFileData file, int entryNum)
 	{
 		m_srcFile = file;
 		m_strEntry = str;
@@ -45,23 +45,37 @@ class SourceTextEntry
 		m_entryNum = entryNum;
 	}
 
-	public String getSrcFile()		{ return m_srcFile;	}
+	public ProjectFileData getSrcFile()	{ return m_srcFile;	}
+//	public String getSrcFile()			{ return m_srcFile.filename;	}
+	public int getFirstInFile()			{ return m_srcFile.firstEntry;	}
+	public int getLastInFile()			{ return m_srcFile.lastEntry;	}
+	public ProjectFileData getProjFile()	{ return m_srcFile;			}
+
 	public StringEntry getStrEntry()	{ return m_strEntry;	}
 	// NOTE: the uncloned reference to m_strEntry is returned on purpose
 
+	public String getSrcText()
+	{
+		return m_strEntry.getSrcText();
+	}
 
 	public String getTranslation()
 	{
-		if (m_strEntry != null)
+//		if (m_strEntry != null)
 			return m_strEntry.getTrans();
-		else
-			return "";
+//		else
+//			return "";
+	}
+
+	public void setTranslation(String t)
+	{
+		m_strEntry.setTranslation(t);
 	}
 
 	public void setEntryNum(int n)		{ m_entryNum = n;	}
 	public int entryNum()			{ return m_entryNum;	}
 
-	private	String m_srcFile;
+	private	ProjectFileData m_srcFile;
 	private StringEntry m_strEntry = null;
 	private int m_entryNum;
 }

@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -47,6 +47,14 @@ public static final String TMX_EXTENSION	= ".tmx";
 public static final String TAB_EXTENSION	= ".tab";
 public static final String TMW_EXTENSION	= ".wf";	// for wordfast
 
+// help
+public static final String HELP_HOME		= "OmegaT.html";
+public static final String HELP_DIR			= "docs";
+
+// file handler extensions
+public static final String FH_HTML_TYPE			= "htmlfile";
+public static final String FH_XML_BASED_HTML	= "xhtml";
+
 // status file consts
 public static final String STATUS_EXTENSION	= "project_save.tmx";
 public static final String STATUS_RECOVER_EXTENSION	= ".recover";
@@ -67,8 +75,8 @@ public static final String ERR_LOG_FILE			= "err.txt";
 
 public static final String WORD_CNT_FILE_EXT		= "word_counts";
 
-public static final double NEAR_THRESH		= 0.4;
-public static final double PAIR_THRESH		= 0.4;
+public static final double NEAR_THRESH		= 0.6;
+public static final double PAIR_THRESH		= 0.6;
 
 // preference names
 public static final String PREF_SRCLANG		= "source_lang";
@@ -78,6 +86,26 @@ public static final String PREF_SRC_DIR		= "source_folder";
 public static final String PREF_LOC_DIR		= "target_folder";
 public static final String PREF_TM_DIR		= "tm_folder";
 public static final String PREF_GLOS_DIR	= "glossary_folder";
+
+public static final String PREF_NUM_FILE_MAPPINGS	= "num_file_mappings";
+public static final String PREF_FILE_MAPPING_N		= "file_mapping";
+
+public static final String PREF_SEARCH_DIR	= "search_dir";
+
+public static final String SW_DIR_CB_CHECKED_CMD	= "dir_ck";
+
+//public static final String ST_SEARCH_TOKEN_BREAKS	= " \t\n\t\f<>-,.;:/?¿!¡";
+//public static final String ST_SEARCH_TOKEN_BREAKS2	= " \t\n\t\f<>-,.;:/¿!¡";
+public static final int		ST_MAX_SEARCH_RESULTS	= 50;
+
+public static final String TF_SRC_FONT_NAME		= "source_font";
+public static final String TF_SRC_FONT_SIZE		= "source_font_size";
+public static final String TF_LOC_FONT_NAME		= "target_font";
+public static final String TF_LOC_FONT_SIZE		= "target_font_size";
+public static final String TF_FONT_DEFAULT		= "Courier";
+public static final String TF_FONT_SIZE_DEFAULT	= "12";
+
+public static final String XB_COMMENT_SHORTCUT	= "!comment";
 
 //public static final int CUR_PROJFILE_VERS	= 1;
 public static final int MAX_NEAR_STRINGS	= 5;

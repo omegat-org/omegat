@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -39,13 +39,20 @@ import java.lang.*;
 
 class ProjectFileChooser extends JFileChooser
 {
-	public ProjectFileChooser()
+	public ProjectFileChooser(String startDirectory)
 	{
 		setFileView(new ProjectFileView());
 		setFileSelectionMode(DIRECTORIES_ONLY);
 		setMultiSelectionEnabled(false);
 		setFileHidingEnabled(true);
 		addPropertyChangeListener(new DirectoryChangeListener());
+		if ((startDirectory != null) && (startDirectory.equals("") == false))
+		{
+			// set current directory
+			File dir = new File(startDirectory);
+			if (dir.exists() && dir.isDirectory())
+				setCurrentDirectory(dir);
+		}
 	}
 
 	protected void acceptedProjectDir()
@@ -78,6 +85,8 @@ class ProjectFileChooser extends JFileChooser
 	
 	public static boolean isProjectDir(File f)
 	{
+		if (f == null)
+			return false;
 		File projFile = new File(f.getAbsolutePath() + File.separator + 
 		    OConsts.PROJ_FILENAME);
 		File internal = new File(f.getAbsolutePath() + File.separator + 
@@ -106,7 +115,7 @@ class ProjectFileChooser extends JFileChooser
 
 	public static void main(String[] args)
 	{
-		ProjectFileChooser pfc = new ProjectFileChooser();
+		ProjectFileChooser pfc = new ProjectFileChooser("/home/keith/tmp");
 		int retVal = pfc.showDialog(null, "select");
 		if (retVal == JFileChooser.APPROVE_OPTION)
 			System.out.println("accepted project directory '" +

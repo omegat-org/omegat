@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -38,11 +38,7 @@ class XMLBlock
 {
 	public XMLBlock()
 	{
-		m_isClose = false;
-		m_isEmpty = false;
-		m_isComment = false;
-		m_isTag = false;
-		m_typeChar = 0;
+		reset();
 	}
 
 	public void reset()
@@ -53,6 +49,8 @@ class XMLBlock
 		m_isComment = false;
 		m_isTag = false;
 		m_typeChar = 0;
+		m_hasText = false;
+		m_shortcut = "";
 
 		if (m_attrList != null)
 			m_attrList.clear();
@@ -80,11 +78,39 @@ class XMLBlock
 	{
 		setTag(false);
 		m_text = text;
+
+		// block considered text if it has length=1 and includes non ws
+		m_hasText = false;
+		if (text.length() == 1)
+		{
+			char c = text.charAt(0);
+			if ((c != 9) && (c != 10) && (c != 13) && (c != ' '))
+				m_hasText = true;
+		}
+		else
+			m_hasText = true;
 	}
 
 	public void setTypeChar(char c)
 	{
 		m_typeChar = c;
+	}
+
+	public void setShortcut(String shortcut)
+	{
+		m_shortcut = shortcut;
+	}
+	
+	public String getShortcut()	
+	{
+		if ((m_shortcut != null) && (m_shortcut.equals("") == false))
+		{
+			if (m_isClose)
+				return "/" + m_shortcut;
+			else if (m_isComment)
+				return OConsts.XB_COMMENT_SHORTCUT;
+		}
+		return m_shortcut;	
 	}
 	
 	public void setCloseFlag()	{	m_isClose = true; m_isEmpty = false;	}
@@ -123,6 +149,7 @@ class XMLBlock
 	/////////////////////////////////////////////////
 	// data retrieval functions
 	
+	public boolean hasText()	{ return m_hasText;		}
 	public boolean isTag()		{ return m_isTag;		}
 	public boolean isEmpty()	{ return m_isEmpty;		}
 	public boolean isClose()	{ return m_isClose;		}
@@ -174,7 +201,7 @@ class XMLBlock
 			}
 			else
 			{
-				tag += m_text;
+				tag += m_text + " ";
 				if (m_attrList != null)
 				{
 					if (m_attrList.size() > 0)
@@ -265,10 +292,12 @@ class XMLBlock
 	}
 
 	protected String	m_text;	// tagname if tag; text if not
+	protected String	m_shortcut;	// user display for tag
 	private boolean		m_isClose;
 	private boolean		m_isComment;
 	private boolean		m_isEmpty;
 	private boolean		m_isTag;
+	private boolean		m_hasText;
 	private char		m_typeChar;
 	protected ArrayList	m_attrList = null;
 

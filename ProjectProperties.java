@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -70,16 +70,9 @@ class ProjectProperties extends JFrame
 		reset();
 
 		// select existing project file - open it
-		JFileChooser pfc = new ProjectFileChooser();
 		String curDir = CommandThread.core.getPreference(OConsts.PREF_CUR_DIR);
-		if (curDir != null)
-		{
-			File dir = new File(curDir);
-			if (dir.exists() && dir.isDirectory())
-			{
-				pfc.setCurrentDirectory(dir);
-			}
-		}
+		JFileChooser pfc = new ProjectFileChooser(curDir);
+
 		int res = pfc.showOpenDialog(this);
 		if (res == JFileChooser.CANCEL_OPTION)
 			throw new InterruptedIOException();

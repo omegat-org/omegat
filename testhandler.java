@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------
 //  
-//  OOTagAttr.java - 
+//  testhandler.java - 
 //  
 //  Copyright (C) 2002, Keith Godfrey
 //  
@@ -18,9 +18,9 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  23Feb2002
+//  Build date:  16Sep2003
 //  Copyright (C) 2002, Keith Godfrey
-//  aurora@coastside.net
+//  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
 //  OmegaT comes with ABSOLUTELY NO WARRANTY
@@ -29,28 +29,25 @@
 //
 //-------------------------------------------------------------------------
 
-class OOTagAttr
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.util.zip.*;
+
+class testhandler extends XmlFileHandler
 {
-	public OOTagAttr()
+	public testhandler()
 	{
-		attr = null;
-		val = null;
-	}
+		super("test handler", "test");
+		compressWhitespace(true);
+		breakWhitespace(true);
 
-	public void attrAppend(char c)
-	{
-		if (attr == null)
-			attr = new LBuffer(8);
-		attr.append(c);
+		defineFormatTag("font", "f");
+		defineFormatTag("bold", "b");
+		defineFormatTag("italic", "i");
+		defineFormatTag("closed", "c");
+//		defineFormatTag("closed/", "Ci");
+		defineVerbatumTag("verb", "v");
 	}
-
-	public void valAppend(char c)
-	{
-		if (val == null)
-			val = new LBuffer(8);
-		val.append(c);
-	}
-
-	LBuffer attr;
-	LBuffer val;
 }
+

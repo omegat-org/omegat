@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------
- OmegaT 1.4.2 Release Notes
+ OmegaT 1.4.3 Release Notes
 
  OmegaT is brought to you by
    Marc Prior -       project management, evangelicism, documentation
@@ -21,6 +21,22 @@ UI changes:
 new filters:
 	xhtml
 	java resource bundles (.properties)
+
+1.4.3
+-------------------------------
+Bugfix release:
+
+- Fixed Bad Segmentation of some files,
+  as documented in: http://groups.yahoo.com/group/OmegaT/message/672
+
+- (minor) .properties file handler had off-by-one error when
+  parsing Unicode symbols of a form \uXXXX.
+
+Enchancements:
+- Created an independent tool to import existing translations 
+  of .properties files
+
+- Added "Join mailing list" to Windows menu
 
 1.4.2
 -------------------------------

@@ -1031,8 +1031,7 @@ public class TransFrame extends JFrame implements ActionListener
 		m_xlPane.select(m_segmentStartOffset, start);
 		m_xlPane.replaceSelection("");											// NOI18N
 			
-		// convert hard return to soft
-		s = s.replace((char) 0x0a, (char) 0x8d);
+		// update memory
 		m_curEntry.setTranslation(s);
 		
 		DocumentSegment docSeg = (DocumentSegment) 
@@ -1043,9 +1042,6 @@ public class TransFrame extends JFrame implements ActionListener
 		// update strings in display
 		if (s.equals(m_curTrans) == false)
 		{
-			// update memory
-			m_curEntry.setTranslation(s);
-
 			// update display
 			// find all identical strings and redraw them
 			SourceTextEntry ste = CommandThread.core.getSTE(m_curEntryNum);

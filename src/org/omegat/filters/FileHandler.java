@@ -91,6 +91,8 @@ public abstract class FileHandler
 	protected void processEntry(String srcText, String file)
 					throws IOException
 	{
+		srcText = srcText.replaceAll("\r", "");		// NOI18N
+
 		if ((m_testMode) && (!m_outputMode))
 		{
 			System.out.println(" val: " + srcText);	// NOI18N

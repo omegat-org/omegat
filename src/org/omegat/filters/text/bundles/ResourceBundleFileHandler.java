@@ -126,7 +126,7 @@ public class ResourceBundleFileHandler extends FileHandler
 						i+=4;
 					}
 					else
-						throw new IOException("Encountered illegal \\u sequence");
+						throw new IOException(OStrings.getString("RBFH_ERROR_ILLEGAL_U_SEQUENCE"));
 				} 
 				else
 				{

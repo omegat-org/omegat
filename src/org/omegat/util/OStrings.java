@@ -21,6 +21,7 @@
 
 package org.omegat.util;
 
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 /**
@@ -44,9 +45,8 @@ public class OStrings
 
 	/** OmegaT Version */
 	public static final String VERSION = 
-		getString("version-prefix")+
-		ResourceBundle.getBundle("org/omegat/Version").getString("version")+
-		getString("version-suffix");
+		MessageFormat.format(getString("version-template"), 
+			new Object[] {ResourceBundle.getBundle("org/omegat/Version").getString("version")});
 
     // TransFrame
 	public static final String TF_NUM_NEAR_AND_GLOSSARY	= getString("TF_NUM_NEAR_AND_GLOSSARY");

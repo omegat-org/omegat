@@ -64,7 +64,40 @@ public class XMLStreamReader
 	{
 		setStream(new File(name), encoding);
 	}
-				
+
+	
+	class AntiCRInputStream extends InputStream
+	{
+		private InputStream is;
+		
+		public AntiCRInputStream(InputStream is)
+		{
+			this.is = is;
+		}
+		
+	    public int available() throws IOException 
+		{
+			return is.available();
+		}
+		public long skip(long n) throws IOException 
+		{
+			return is.skip(n);
+		}
+		public void close() throws IOException 
+		{
+			is.close();
+		}
+		
+		public int read() throws IOException
+		{
+			int res = is.read();
+			while( res=='\r' )
+				res = is.read();
+			return res;
+		}
+		
+	}
+	
 	// opens and reads the file according to the specified encoding
 	// should have this auto-sense the unicode file type, but keep
 	//  it general as many 'xml' apps don't use unicode
@@ -73,7 +106,8 @@ public class XMLStreamReader
 				IOException
 	{
 		FileInputStream fis = new FileInputStream(name);
-		InputStreamReader isr = new InputStreamReader(fis, encoding);
+		AntiCRInputStream acris = new AntiCRInputStream(fis);
+		InputStreamReader isr = new InputStreamReader(acris, encoding);
 		m_bufferedReader = new BufferedReader(isr);
 		_setStream();
 	}

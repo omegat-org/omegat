@@ -165,6 +165,7 @@ class HTMLFileHandler extends FileHandler
 			if (state < 0)
 			{
 				tagBuf.append(c);
+				//outBuf.append(HTMLParser.convertAllToEsc(tagBuf));
 				outBuf.append(tagBuf);
 				tagBuf.reset();
 				state = 0;

@@ -33,7 +33,7 @@ class OmegaTVersion
 { 
 	static public String name()
 	{
-		return "OmegaT-1.3.14";
+		return "OmegaT-1.3.15";
 	}
 }
 

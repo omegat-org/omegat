@@ -1096,7 +1096,17 @@ class TransFrame extends JFrame implements ActionListener
 					OStrings.TF_CUR_SEGMENT_START.length() + 1;
 		int end = m_xlPane.getText().length() - m_segmentEndInset - 
 					OStrings.TF_CUR_SEGMENT_END.length();
-		String s = m_xlPane.getText().substring(start, end);
+		String s;
+		if (start == end)
+		{
+			s = m_curEntry.getSrcText();
+			m_xlPane.select(start, end);
+			m_xlPane.replaceSelection(s);
+			end += s.length();
+		}
+		else
+			s = m_xlPane.getText().substring(start, end);
+
 		m_xlPane.select(start, end);
 		MutableAttributeSet mattr = null;
 		mattr = new SimpleAttributeSet();
@@ -1108,11 +1118,6 @@ class TransFrame extends JFrame implements ActionListener
 		m_xlPane.select(m_segmentStartOffset, start);
 		m_xlPane.replaceSelection("");
 			
-		if (s.equals(""))
-		{
-			s = m_curEntry.getSrcText();
-		}
-
 		// convert hard return to soft
 		s = s.replace((char) 0x0a, (char) 0x8d);
 		m_curEntry.setTranslation(s);
@@ -1225,14 +1230,16 @@ class TransFrame extends JFrame implements ActionListener
 				disp + startStr.substring(zero+1);
 		}
 
+		MutableAttributeSet mattr = null;
 		// append to end of segment first because this operation is done
 		//	by reference to end of file which will change after insert
 		m_xlPane.select(paneLen-m_segmentEndInset, paneLen-m_segmentEndInset);
-		MutableAttributeSet mattr = null;
+		m_xlPane.replaceSelection(endStr);
+		m_xlPane.select(paneLen-m_segmentEndInset + 1, 
+				paneLen-m_segmentEndInset + endStr.length());
 		mattr = new SimpleAttributeSet();
 		StyleConstants.setBold(mattr, true);
 		m_xlPane.setCharacterAttributes(mattr, true);
-		m_xlPane.replaceSelection(endStr);
 		paneLen = -1;	// after replacement this is no longer accurate
 
 		m_xlPane.select(m_segmentStartOffset, m_segmentStartOffset);
@@ -1241,6 +1248,15 @@ class TransFrame extends JFrame implements ActionListener
 		m_xlPane.select(m_segmentStartOffset, m_segmentStartOffset + 
 				insertText.length() - 1);
 		m_xlPane.setCharacterAttributes(mattr, true);
+
+		// background color
+		Color background = new Color(192, 255, 192);
+		// other color options
+		m_xlPane.select(m_segmentStartOffset, m_segmentStartOffset + 
+				insertText.length() - startStr.length());
+		mattr = new SimpleAttributeSet();
+		StyleConstants.setBackground(mattr, background);
+		m_xlPane.setCharacterAttributes(mattr, false);
 //System.out.println("inserting text '"+srcText+"' (+startString) at "+(m_segmentStartOffset));
 
 		// TODO XXX format source text if there is near match
@@ -1492,7 +1508,7 @@ System.out.println("");
 				{	
 					m_advancer = KeyEvent.VK_ENTER;
 					CommandThread.core.setPreference(
-							OConsts.PREF_TAB, "true");
+							OConsts.PREF_TAB, "false");
 				}
 			}
 			else if (evtSrc == m_miDisplayMnemonic)

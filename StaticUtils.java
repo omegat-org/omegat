@@ -202,9 +202,9 @@ System.out.println("mapping extension '"+str.substring(0,pos)+"' to '"+str.subst
 			}
 			in.close();
 		}
-		catch (IOException e)
+		catch (Exception e)
 		{
-			// if an exception occured, it must not be an xml file 
+			// if any exception occured, it is not an xml file 
 		}
 		return false;
 	}

@@ -123,8 +123,8 @@ class StringEntry
 	{
 		// tell the boss things have changed to indicate a save is in order
 		CommandThread.core.markAsDirty();
-		if (trans == null)
-			m_translation = "";
+		if ((trans == null) || (trans.equals("")))
+			m_translation = m_srcText;
 		else
 			m_translation = trans;
 	}

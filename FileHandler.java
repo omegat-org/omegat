@@ -173,7 +173,7 @@ abstract class FileHandler
 	{
 		FileInputStream fis = new FileInputStream(infile);
 		//InputStreamReader isr = new InputStreamReader(fis);
-		InputStreamReader isr = new InputStreamReader(fis, "ISO-8859-2");
+		InputStreamReader isr = new InputStreamReader(fis, "ISO-8859-1");
 		BufferedReader br = new BufferedReader(isr);
 		return br;
 	}
@@ -183,7 +183,7 @@ abstract class FileHandler
 	{
 		FileOutputStream fos = new FileOutputStream(outfile);
 		//OutputStreamWriter osw = new OutputStreamWriter(fos);
-		OutputStreamWriter osw = new OutputStreamWriter(fos, "ISO-8859-2");
+		OutputStreamWriter osw = new OutputStreamWriter(fos, "ISO-8859-1");
 		BufferedWriter bw = new BufferedWriter(osw);
 		return bw;
 	}

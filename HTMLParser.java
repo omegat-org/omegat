@@ -114,8 +114,11 @@ class HTMLParser
 				case '=':
 					charType = TYPE_EQUAL;
 					break;
-				case '"':
-					charType = TYPE_QUOTE;
+				case '\'':
+					charType = TYPE_QUOTE_SINGLE;
+					break;
+				case '"': 
+					charType = TYPE_QUOTE_DOUBLE;
 					break;
 				case '>':
 					charType = TYPE_CLOSE;
@@ -168,8 +171,11 @@ class HTMLParser
 			case STATE_RECORD:
 				switch (charType)
 				{
-				case TYPE_QUOTE:
-					state = STATE_RECORD_QUOTE;
+				case TYPE_QUOTE_SINGLE:
+					state = STATE_RECORD_QUOTE_SINGLE;
+					break;
+				case TYPE_QUOTE_DOUBLE:
+					state = STATE_RECORD_QUOTE_DOUBLE;
 					break;
 				case TYPE_CLOSE:
 					state = STATE_CLOSE;
@@ -177,10 +183,19 @@ class HTMLParser
 				}
 				break;
 
-			case STATE_RECORD_QUOTE:
+			case STATE_RECORD_QUOTE_SINGLE:
 				switch (charType)
 				{
-				case TYPE_QUOTE:
+				case TYPE_QUOTE_SINGLE:
+					state = STATE_RECORD;
+					break;
+				}
+				break;
+
+			case STATE_RECORD_QUOTE_DOUBLE:
+				switch (charType)
+				{
+				case TYPE_QUOTE_DOUBLE:
 					state = STATE_RECORD;
 					break;
 				}
@@ -244,8 +259,11 @@ class HTMLParser
 					state = STATE_VAL;
 					tagAttr.valAppend(c);
 					break;
-				case TYPE_QUOTE:
-					state = STATE_VAL_QUOTE;
+				case TYPE_QUOTE_SINGLE:
+					state = STATE_VAL_QUOTE_SINGLE;
+					break;
+				case TYPE_QUOTE_DOUBLE:
+					state = STATE_VAL_QUOTE_DOUBLE;
 					break;
 				default:
 					throw new ParseException(
@@ -286,8 +304,11 @@ class HTMLParser
 					state = STATE_VAL;
 					tagAttr.valAppend(c);
 					break;
-				case TYPE_QUOTE:
-					state = STATE_VAL_QUOTE;
+				case TYPE_QUOTE_SINGLE:
+					state = STATE_VAL_QUOTE_SINGLE;
+					break;
+				case TYPE_QUOTE_DOUBLE:
+					state = STATE_VAL_QUOTE_DOUBLE;
 					break;
 				default:
 					throw new ParseException(
@@ -315,10 +336,22 @@ class HTMLParser
 				}
 				break;
 
-			case STATE_VAL_QUOTE:
+			case STATE_VAL_QUOTE_SINGLE:
 				switch (charType)
 				{
-				case TYPE_QUOTE:
+				case TYPE_QUOTE_SINGLE:
+					state = STATE_VAL_QUOTE_CLOSE;
+					break;
+				default:
+					// anything else is fair game
+					tagAttr.valAppend(c);
+				}
+				break;
+
+			case STATE_VAL_QUOTE_DOUBLE:
+				switch (charType)
+				{
+				case TYPE_QUOTE_DOUBLE:
 					state = STATE_VAL_QUOTE_CLOSE;
 					break;
 				default:
@@ -368,21 +401,24 @@ class HTMLParser
 	protected static final int TYPE_WS			= 1;
 	protected static final int TYPE_NON_IDENT		= 2;
 	protected static final int TYPE_EQUAL			= 3;
-	protected static final int TYPE_QUOTE			= 4;
-	protected static final int TYPE_CLOSE			= 5;
-
+	protected static final int TYPE_CLOSE			= 4;
+	protected static final int TYPE_QUOTE_SINGLE	= 5;
+	protected static final int TYPE_QUOTE_DOUBLE	= 6;
+	
 	protected static final int STATE_START			= 0;
 	protected static final int STATE_TOKEN			= 1;
-	protected static final int STATE_WS			= 2;
+	protected static final int STATE_WS				= 2;
 	protected static final int STATE_ATTR			= 3;
 	protected static final int STATE_ATTR_WS		= 5;
 	protected static final int STATE_EQUAL			= 6;
 	protected static final int STATE_EQUAL_WS		= 7;
-	protected static final int STATE_VAL_QUOTE		= 10;
-	protected static final int STATE_VAL_QUOTE_CLOSE	= 11;
+	protected static final int STATE_VAL_QUOTE_SINGLE			= 10;
+	protected static final int STATE_VAL_QUOTE_DOUBLE			= 11;
+	protected static final int STATE_VAL_QUOTE_CLOSE			= 15;
 	protected static final int STATE_VAL			= 20;
 	protected static final int STATE_RECORD			= 30;
-	protected static final int STATE_RECORD_QUOTE		= 31;
+	protected static final int STATE_RECORD_QUOTE_SINGLE		= 31;
+	protected static final int STATE_RECORD_QUOTE_DOUBLE		= 32;
 	protected static final int STATE_CLOSE			= 40;
 
 	public static void initEscCharLookupTable()

@@ -711,10 +711,10 @@ public class HTMLFileHandler extends FileHandler
 		}
 	}
 
-	/** the pattern string to extract the encoding from HTML file, if any */
-	private static String META_PATTERN = "(?is)<meta.*?content\\s*=\\s*[\"']\\s*text/html\\s*;\\s*charset\\s*=\\s*(\\S+?)[\"']\\s*>";  // NOI18N
 	/** compiled pattern to extract the encoding from HTML file, if any */
-	private static Pattern pattern = Pattern.compile(META_PATTERN);
+	private static Pattern pattern_meta = Pattern.compile(
+		"<meta.*?content\\s*=\\s*[\"']\\s*text/html\\s*;\\s*charset\\s*=\\s*(\\S+?)[\"']\\s*>", 
+		Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 	
 	/** Return encoding of HTML file, if defined */
 	private String fileEncoding(String filename) throws IOException
@@ -723,7 +723,7 @@ public class HTMLFileHandler extends FileHandler
 		StringBuffer buffer = new StringBuffer();
 		while( reader.ready() ) {
 			buffer.append( reader.readLine().toUpperCase() );
-			Matcher matcher = pattern.matcher(buffer);
+			Matcher matcher = pattern_meta.matcher(buffer);
 			if( matcher.find() )
 				return matcher.group(1);
 			if( buffer.indexOf("</HEAD") >= 0 ) // NOI18N
@@ -771,6 +771,9 @@ public class HTMLFileHandler extends FileHandler
 			this.out = out;
 		}
 		
+		private final Pattern pattern_head = Pattern.compile("<head\\s*?>", Pattern.CASE_INSENSITIVE);
+		private final Pattern pattern_html = Pattern.compile("<html\\s*?>", Pattern.CASE_INSENSITIVE);
+		
 		/** when we clase an Output Stream, we replace charset to be UTF-8
 		 * and write out the string
 		 */
@@ -779,17 +782,33 @@ public class HTMLFileHandler extends FileHandler
 			String UTF8_META = "<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"; // NOI18N
 			
 			StringBuffer buffer = getBuffer();
-			Matcher matcher = pattern.matcher(buffer);
+			Matcher matcher_enc = pattern_meta.matcher(buffer);
 			
 			String contents;
-			if( matcher.find() )
+			if( matcher_enc.find() )
 			{
-				contents = matcher.replaceFirst(UTF8_META);
+				contents = matcher_enc.replaceFirst(UTF8_META);
 			}
 			else
 			{
-				contents = Pattern.compile("(?i)<head\\s*?>") // NOI18N
-					.matcher(buffer).replaceFirst("<head>\n    "+UTF8_META); // NOI18N
+				Matcher matcher_head = pattern_head.matcher(buffer);
+				if( matcher_head.find() )
+				{
+					contents =  matcher_head.replaceFirst("<head>\n    "+UTF8_META); // NOI18N
+				}
+				else
+				{
+					Matcher matcher_html = pattern_html.matcher(buffer);
+					if( matcher_html.find() )
+					{
+						contents = matcher_html.replaceFirst("<html>\n<head>\n    "+UTF8_META+"\n</head>\n"); // NOI18N
+					}
+					else
+					{
+						contents = "<html>\n<head>\n    "+UTF8_META+"\n</head>\n"+ // NOI18N
+							buffer.toString();
+					}
+				}
 			}
 			BufferedWriter writer = new BufferedWriter(out);
 			writer.write(contents);

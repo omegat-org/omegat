@@ -51,7 +51,7 @@ public static final String TF_NUM_NEAR_AND_GLOSSARY	=
 	"{0,number,integer} fuzzy matche(s) and {1,number,integer} " +
 	"glossary term(s)";
 public static final String TF_NUM_GLOSSARY			=
-	"Found {1,number,integer} glossary term(s)";
+	"Found {0,number,integer} glossary term(s)";
 public static final String TF_NUM_NEAR				=
 	"Found {0,number,integer} fuzzy matche(s)";
 public static final String TF_FUZZY		= "Fuzzy matches...";

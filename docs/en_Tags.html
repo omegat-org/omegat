@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=iso-8859-1">
+	<TITLE>Editing tagged (formatted) texts</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.0  (Linux)">
+	<META NAME="CREATED" CONTENT="20030305;14173900">
+	<META NAME="CHANGED" CONTENT="20040421;17261800">
+	<STYLE>
+	<!--
+		@page { margin: 2cm }
+		H1.western { font-family: "Helvetica", sans-serif; font-size: 14pt }
+		P { margin-bottom: 0.21cm; text-decoration: none }
+		P.western { font-family: "Nimbus Sans L"; font-size: 12pt; font-style: normal }
+		H3.western { font-family: "Helvetica", sans-serif; font-size: 12pt }
+		H2.western { font-family: "Helvetica", sans-serif; font-size: 12pt; font-style: normal }
+		H2.cjk { font-size: 14pt; font-style: italic }
+		H2.ctl { font-size: 14pt; font-style: italic }
+		P.text-body-indent-western { margin-left: 1cm; font-family: "Nimbus Sans L"; font-size: 12pt; font-style: normal }
+		P.text-body-indent-cjk { margin-left: 1cm }
+		P.text-body-indent-ctl { margin-left: 1cm }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<H1 CLASS="western"><B>Editing tagged (formatted) texts</B></H1>
+<H2 CLASS="western">Working with tags</H2>
+<P CLASS="western">OmegaT displays the in-line formatting information
+of supported formats (at present HTML, XHTML and
+OpenOffice.org/StarOffice) as tags. The tags you see in OmegaT are
+not the same as those used by the original applications; OmegaT
+converts them internally, and converts them back at compilation. 
+</P>
+<P CLASS="western">Care must be taken with tags. If they are changed
+accidentally, the formatting of the final file may be corrupted. In
+worst cases, the file may refuse to open altogether: this is
+particularly the case with OpenOffice.org files.</P>
+<P CLASS="western">Although you cannot add formatting of your own in
+OmegaT, you do have some degree of control over the existing
+formatting. 
+</P>
+<H3 CLASS="western">Tag manipulation in OpenOffice.org files</H3>
+<P CLASS="western">OpenOffice.org tags must be retained unchanged.
+You cannot delete these tags, duplicate them, or change the sequence.
+You can:</P>
+<UL>
+	<LI><P CLASS="western"><I>move</I> tags to a different part of the
+	segment; they must, however, remain in the same order;</P>
+</UL>
+<UL>
+	<LI><P CLASS="western"><I>cancel</I> tags by placing them next to
+	each other. For instance, if you change <BR><BR>This text is in
+	&lt;f0&gt;italics&lt;/f0&gt;<BR>to<BR>This text is in
+	&lt;f0&gt;&lt;/f0&gt;italics</P>
+	<P CLASS="western">you effectively remove the italic formatting.</P>
+</UL>
+<H3 CLASS="western">Tag manipulation in HTML files</H3>
+<UL>
+	<LI><P CLASS="western">The start of formatting is marked by an
+	opening tag of the form &lt;<I>xx</I>&gt;, and the end of formatting
+	by a corresponding closing tag &lt;/<I>xx</I>&gt;. Any changes made
+	to formatting tags must be made to both tags in the pair.</P>
+</UL>
+<UL>
+	<LI><P CLASS="western" STYLE="font-style: normal">You can <I>delete</I>
+	tags. For example, to remove the italics from 
+	</P>
+</UL>
+<P CLASS="text-body-indent-western">This text is in &lt;f0&gt;italics&lt;/f0&gt;</P>
+<P CLASS="text-body-indent-western">simply delete the tags &lt;f0&gt;
+and &lt;/f0&gt;.</P>
+<UL>
+	<LI><P CLASS="western" STYLE="font-style: normal">You can <I>duplicate</I>
+	tags. For example,</P>
+</UL>
+<P CLASS="text-body-indent-western">This text is in &lt;f0&gt;italics&lt;/f0&gt;,
+and so is &lt;f0&gt;this&lt;/f0&gt;</P>
+<P CLASS="text-body-indent-western">applies the formatting of the
+word "italics"; to the word "this";.</P>
+<UL>
+	<LI><P CLASS="western" STYLE="font-style: normal">You can <I>change
+	the order</I> of tags. For example,</P>
+</UL>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">This
+text is in &lt;f0&gt;italics&lt;/f0&gt;, this text is
+&lt;f1&gt;underlined&lt;/f1&gt;</P>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">can be
+changed to 
+</P>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">This
+text is &lt;f1&gt;underlined&lt;/f1&gt;, this text is in
+&lt;f0&gt;italics&lt;/f0&gt;</P>
+<UL>
+	<LI><P CLASS="western" STYLE="font-style: normal">You can <I>nest</I>
+	tags. For example:</P>
+</UL>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">This
+text is in &lt;f0&gt;italics&lt;/f0&gt;, this text is
+&lt;f1&gt;underlined&lt;/f1&gt;</P>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">can be
+changed to 
+</P>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">This
+text is in &lt;f0&gt;italics and &lt;f1&gt;this text is also
+underlined&lt;/f1&gt;&lt;/f0&gt;</P>
+<UL>
+	<LI><P CLASS="western" STYLE="font-style: normal">You must <B>not</B>
+	<I>overlap</I> tags. For example:</P>
+</UL>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">This
+text is in &lt;f0&gt;italics, this text is also &lt;f1&gt;underlined&lt;/f0&gt;,
+this text is underlined but not in italics&lt;/f1&gt;</P>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">is not
+permitted and will corrupt your file if you try it. If you insert an
+opening tag and then open a second opening tag, you must insert the
+closing tag of the <B>second</B> opening tag <B>before</B> the
+closing tag of the first.</P>
+<H2 CLASS="western">Validating tags</H2>
+<P CLASS="western">The validate tags function (<I>Tools</I> &gt;
+<I>Validate tags</I>) detects tags to which changes have been made
+(whether deliberately or by accident), and indicates the affected
+segments.</P><br><P><A HREF="en_OmegaT.html">Return to index</A></P>
+</BODY>
+</HTML>

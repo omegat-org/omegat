@@ -21,24 +21,64 @@
 
 package org.omegat.gui;
 
-import org.omegat.util.*;
-import org.omegat.core.*;
 import org.omegat.gui.threads.CommandThread;
 import org.omegat.gui.threads.SearchThread;
+import org.omegat.core.GlossaryEntry;
+import org.omegat.core.NearString;
+import org.omegat.core.SourceTextEntry;
+import org.omegat.core.StringEntry;
+import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
+import org.omegat.util.PreferenceManager;
+import org.omegat.util.RequestPacket;
+import org.omegat.util.StaticUtils;
 
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.GridLayout;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.border.EtchedBorder;
-import javax.swing.text.*;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
-import java.awt.*;
-import java.awt.event.*;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
+import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.MutableAttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
 
 /**
  * The main frame of OmegaT application
@@ -234,7 +274,6 @@ public class TransFrame extends JFrame implements ActionListener
 
 		m_projWin = new ProjectFrame(this);
 		m_matchViewer = new MatchWindow();
-		m_matchViewer.show();
 	}
 
 	protected void doSetMnemonics(boolean show)
@@ -611,7 +650,7 @@ public class TransFrame extends JFrame implements ActionListener
 		{
 			// create list of suspect strings - use org.omegat.gui.ContextFrame for now
 			ContextFrame cf = new ContextFrame(this, true, false);
-			cf.show();
+			cf.setVisible(true);
 			cf.displayStringList(suspects, OStrings.TF_NOTICE_BAD_TAGS);
 		}
 		else
@@ -737,7 +776,7 @@ public class TransFrame extends JFrame implements ActionListener
 	protected void doFont()
 	{
 		MFontSelection dlg = new MFontSelection(this);
-		dlg.show();
+		dlg.setVisible(true);
 		if (dlg.isChanged())
 		{
 			// fonts have changed  
@@ -922,7 +961,7 @@ public class TransFrame extends JFrame implements ActionListener
 			SourceTextEntry ste = CommandThread.core.getSTE(entryNum);
 			String text = ste.getTranslation();
 			// set text and font
-			if (text.length() == 0) 
+			if( text.length()==0 ) 
 			{
 				// no translation available - use source text
 				text = ste.getSrcText(); 
@@ -992,7 +1031,7 @@ public class TransFrame extends JFrame implements ActionListener
 		
 		m_matchViewer.hiliteRange(start, end);
 		m_matchViewer.updateMatchText();
-		m_matchViewer.formatNearText(str, m_curNear.attr, Color.blue);
+		m_matchViewer.formatNearText(str, m_curNear.attr);
 	}
 	
 	private void commitEntry()
@@ -1311,15 +1350,18 @@ public class TransFrame extends JFrame implements ActionListener
 			else if (evtSrc == m_miFileMatchWin)
 			{
 				if (m_matchViewer.isVisible() == true)
-					m_matchViewer.hide();
+					m_matchViewer.setVisible(false);
 				else
-					m_matchViewer.show();
+				{
+					m_matchViewer.setVisible(true);
+					toFront();
+				}
 			}
 			else if (evtSrc == m_miFileProjWin)
 			{
 				if (m_projWin != null)
 				{
-					m_projWin.show();
+					m_projWin.setVisible(true);
 					m_projWin.toFront();
 				}
 			}
@@ -1434,8 +1476,8 @@ public class TransFrame extends JFrame implements ActionListener
 			}
 			else if (evtSrc == m_miVersionHelp)
 			{
-				HelpFrame hf = new HelpFrame();
-				hf.show();
+				HelpFrame hf = HelpFrame.getInstance();
+				hf.setVisible(true);
 				hf.toFront();
 			}
 		}
@@ -1945,6 +1987,17 @@ public class TransFrame extends JFrame implements ActionListener
 				break;
 		}
 		System.exit(1);
+	}
+	
+	/**
+	 * Overrides parent method to show Match/Glossary viewer 
+	 * simultaneously with the main frame.
+	 */
+	public void setVisible(boolean b)
+	{
+		super.setVisible(b);
+		m_matchViewer.setVisible(b);
+		toFront();
 	}
 
 	public boolean	isProjectLoaded()	{ return m_projectLoaded;		}

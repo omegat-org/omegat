@@ -37,12 +37,24 @@ import java.util.ArrayList;
 
 /**
  * Frame that displays help HTML files.
+ * Singleton.
  *
  * @author Keith Godfrey
+ * @author Sandra Jean Chua - sachachua at users.sourceforge.net
+ * @autor Maxym Mykhalchuk
  */
 public class HelpFrame extends JFrame
 {
-	public HelpFrame()
+	/* 
+	 * The Singleton design pattern allows us to have just one
+	 * instance of the help frame at all times. In order to use
+	 * this pattern, we need to prevent other classes from calling
+	 * HelpFrame's constructor. To get a reference to the help frame,
+	 * classes should call the static getInstance() method.
+	 */
+	protected static HelpFrame singleton;
+
+	protected HelpFrame()
 	{
 		String str;
 
@@ -116,6 +128,18 @@ public class HelpFrame extends JFrame
 
 		updateUIText();
 		displayFile(OConsts.HELP_HOME);
+	}
+	
+	/**
+	 * Gets the only instance of Help Frame
+	 */
+	public static HelpFrame getInstance()
+	{
+		if (singleton == null)
+		{
+			singleton = new HelpFrame();
+		}
+		return singleton;
 	}
 
 	public void displayFile(String file)

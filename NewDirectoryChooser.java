@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------
 //  
-//  SourceTextEntry.java - 
+//  NewDirectoryChooser.java - 
 //  
 //  Copyright (C) 2002, Keith Godfrey
 //  
@@ -29,39 +29,56 @@
 //
 //-------------------------------------------------------------------------
 
+
+import javax.swing.*;
+import javax.swing.event.*;
 import java.util.*;
+import java.lang.*;
+import java.awt.event.*;
 
-// a source text entry represents an individual segment for
-//  translation pulled directly from the input files
-// there can be many SourceTextEntries having identical source
-//  language strings
-class SourceTextEntry
+class NewDirectoryChooser extends JFileChooser
 {
-	public void set(StringEntry str, String file, int entryNum)
+	public NewDirectoryChooser()
 	{
-		m_srcFile = file;
-		m_strEntry = str;
-		m_strEntry.addParent(this);
-		m_entryNum = entryNum;
+		setFileView(new ProjectFileView());
+		setMultiSelectionEnabled(false);
+		setFileHidingEnabled(true);
+//		addActionListener(new ActionListener()
+//		{
+//			public void actionPerformed(ActionEvent e)
+//			{
+//				System.out.println("event: " +e.getActionCommand());
+//			}
+//		});
 	}
-
-	public String getSrcFile()		{ return m_srcFile;	}
-	public StringEntry getStrEntry()	{ return m_strEntry;	}
-	// NOTE: the uncloned reference to m_strEntry is returned on purpose
-
-
-	public String getTranslation()
+	
+	public void approveSelection()
 	{
-		if (m_strEntry != null)
-			return m_strEntry.getTrans();
+		// user hit 'open' button - redirect command to open project or
+		//  recurse into lower directory
+		if (getSelectedFile().exists())
+		{
+			// must select non-existing name for project
+			JOptionPane jop = new JOptionPane();
+			jop.showMessageDialog(this, OStrings.NDC_SELECT_UNIQUE, 
+					OStrings.NDC_SELECT_UNIQUE_TITLE, 
+					JOptionPane.ERROR_MESSAGE); 
+		}
 		else
-			return "";
+		{
+			// this is OK - continue
+			super.approveSelection();
+		}
 	}
+	
+	
+	//////////////////////////////////////////////////////////////
 
-	public void setEntryNum(int n)		{ m_entryNum = n;	}
-	public int entryNum()			{ return m_entryNum;	}
-
-	private	String m_srcFile;
-	private StringEntry m_strEntry = null;
-	private int m_entryNum;
+	public static void main(String[] args)
+	{
+		JOptionPane jop = new JOptionPane();
+		jop.showMessageDialog(null, OStrings.NDC_SELECT_UNIQUE, 
+					OStrings.NDC_SELECT_UNIQUE_TITLE, 
+					JOptionPane.ERROR_MESSAGE); 
+	}
 }

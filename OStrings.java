@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  21Dec2002
+//  Build date:  9Jan2002
 //  Copyright (C) 2002, Keith Godfrey
 //  aurora@coastside.net
 //  907.223.2039
@@ -66,7 +66,8 @@ public static final String TF_MENU_FILE_QUIT	= "Quit";
 public static final String TF_MENU_EDIT		= "Edit";
 public static final String TF_MENU_EDIT_NEXT	= "Next entry";
 public static final String TF_MENU_EDIT_PREV	= "Previous entry";
-public static final String TF_MENU_EDIT_FIND	= "Find";
+public static final String TF_MENU_EDIT_FIND	= "Keyword search (source)";
+public static final String TF_MENU_EDIT_FINDEXACT	= "Find exact (target)";
 public static final String TF_MENU_EDIT_RECYCLE
 			= "Recycle Translation";
 public static final String TF_MENU_EDIT_GOTO	= "Goto entry";
@@ -85,6 +86,7 @@ public static final String TF_MENU_LANGUAGE	= "Language";
 public static final String TF_MENU_LANGUAGE_RESCAN	= "rescan";
 public static final String TF_MENU_TOOLS		= "Tools";
 public static final String TF_MENU_TOOLS_PSEUDO	= "Pseudo translate";
+public static final String TF_MENU_TOOLS_VALIDATE	= "Validate tags";
 public static final String TF_MENU_VERSION		= "Version";
 public static final String TF_TITLE		= "OmegaT";
 public static final String TF_SELECT_LANGUAGE_TITLE	=
@@ -97,7 +99,8 @@ public static final String TF_LOAD_ERROR	=
 			"Failed to load specified project.";
 public static final String TF_COMPILE_ERROR	=
 			"Failed to compile project files.";
-public static final String TF_SEARCH		= "Keyword search:";
+public static final String TF_SEARCH		= "Keyword search (source)";
+public static final String TF_SEARCH_EXACT	= "Exact search (target)";
 public static final String TF_CUR_STRING
 		= "Segment {0,number,integer} of {1,number,integer}";
 public static final String TF_NUM_WORDS		=
@@ -110,15 +113,22 @@ public static final String TF_FUZZY_CURRENT_PROJECT	=
 		"Current project";
 public static final String TF_PSEUDOTRANS_RUSURE_TITLE	= "Warning";
 public static final String TF_PSEUDOTRANS_RUSURE	=
-	"This operation is destructive to the current\nproject and " +
-	"can NOT be undone.\nAre you sure you want to proceed?";
+	"This operation creates false translations for\n" +
+	"all strings in the current project and cannot be\n" +
+	"undone.  Are you sure you want to proceed?";
 public static final String TF_NUM_FUZZY_MATCHES	=
 	"Found {0,number,integer} fuzzy matches";
 public static final String TF_NUM_FUZZY_MATCH	=
 	"Found {0,number,integer} fuzzy match";
+public static final String TF_NOTICE_BAD_TAGS	= "Entries with modified tags";
+public static final String TF_NOTICE_OK_TAGS	= "No tag errors were detected";
+public static final String TF_NOTICE_TITLE_TAGS	= "Validating tags";
 
 // ContextFrame
-public static final String CF_SEARCH_RESULTS	= "Search results for: ";
+public static final String CF_SEARCH_RESULTS_SRC	= 
+	"Source language search results for: ";
+public static final String CF_SEARCH_RESULTS_LOC	= 
+	"Target language results for: ";
 public static final String CF_BUTTON_CLOSE	= "Close";
 
 // Project frame
@@ -173,6 +183,10 @@ public static final String PP_SRC_ROOT		= "Source file root: ";
 public static final String PP_LOC_ROOT		= "Loc file root: ";
 public static final String PP_GLOS_ROOT		= "Glossary root:";
 public static final String PP_TM_ROOT		= "Translation Memory root:";
+public static final String PP_SRC_LANG		= 
+		"Source language (i.e. EN-US, EN, ES-NI, DE, etc)";
+public static final String PP_LOC_LANG		= 
+		"Target language (i.e. DE-DE, EN-IE, ES, EN, etc)";
 public static final String PP_BUTTON_OK		= "OK";
 public static final String PP_BUTTON_CANCEL	= "Cancel";
 public static final String PP_BUTTON_ADVANCED	= "Edit paths";
@@ -187,11 +201,14 @@ public static final String PP_BROWSE_TITLE_TARGET	= "Select Target Directory";
 public static final String PP_BROWSE_TITLE_GLOS	= "Select Glossary Directory";
 public static final String PP_BROWSE_TITLE_TM	= 
 	"Select Translation Memory Directory";
+public static final String PP_MESSAGE_BADLANG	=
+	"Specified language codes are invalid (TMX requires correct codes)";
 public static final String PP_MESSAGE_BADPROJ	=
-	"This project seems to have been moved. " +
-	"Pleaes update the path information.";
+	"Some project folders seem to have moved.  Please find them.";
+public static final String PP_MESSAGE_CONFIGPROJ	=
+	"Specify custom project folders here.";
 public static final String PP_SAVE_PROJECT_FILE	=
-	"Create new project file";
+	"Create a new project";
 public static final String PP_DEFAULT_PROJECT_NAME = "omegat.proj";
 //public static final String PP_OMEGAT_PROJ_FILE	= "OmegaT project (.proj)";
 
@@ -202,6 +219,14 @@ public static final String LD_ERROR		= "ERROR";
 // HandlerMaster
 public static final String HM_MISSING_DIR	= 
 		"Project directory not found";
+
+// ProjectFileChooser
+public static final String PFC_OMEGAT_PROJECT	= "OmegaT project folder";
+
+// NewFileChooser 
+public static final String NDC_SELECT_UNIQUE	=
+	"That filename already exists.  Please select a new name.";
+public static final String NDC_SELECT_UNIQUE_TITLE	= "Error";
 
 // FileHandler
 public static final String FH_ERROR_WRITING_FILE	= 

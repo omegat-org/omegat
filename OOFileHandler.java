@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  21Dec2002
+//  Build date:  9Jan2002
 //  Copyright (C) 2002, Keith Godfrey
 //  aurora@coastside.net
 //  907.223.2039
@@ -294,8 +294,6 @@ class OOFileHandler extends FileHandler
 							m_preNT.add(fd);
 					}
 					fd.appendOrig(c);
-					// only include 1 space unless part of
-					// <pre>
 					if (m_ws == true)
 						continue;
 					m_ws = true;
@@ -315,18 +313,21 @@ class OOFileHandler extends FileHandler
 					if (c == '&')
 					{
 						c = getEscChar(fd);
+						// double up '<' character to reduce confusion in
+						//  files displaying HTML type codes to user
+						if (c == '<')
+							fd.appendDisplay(c);
 					}
+					fd.appendDisplay(c);
 					if ((c == 160) && (!m_hasText))	
 					{
 						// no text and a &nbsp;
 						// make it white space
-						fd.appendDisplay(c);
 						m_ws = true;
 						m_hasText = false;
 					}
 					else
 					{
-						fd.appendDisplay(c);
 						fd.setHasText(true);
 						m_hasText = true;
 						m_ws = false;
@@ -536,22 +537,22 @@ System.out.println("OO parse error: '" + m_file + "' at line " + (e.getErrorOffs
 		// see if there's anything interesting
 		if ((m_fdList.size() == 0) && (m_outFile == null))
 		{
-			if (m_outFile == null)
-			{
+//			if (m_outFile == null)
+//			{
 				m_preNT.clear();
 				m_postNT.clear();
-			}
-			else
-			{
-				// nothing interesting - move all postNT down
-				it = m_postNT.listIterator(m_postNT.size());
-				while (it.hasPrevious())
-				{
-					fd = (FormatData) it.previous();
-					m_preNT.add(fd);
-				}
-			}
-			m_postNT.clear();
+//			}
+//			else
+//			{
+//				// nothing interesting - move all postNT down
+//				it = m_postNT.listIterator(m_postNT.size());
+//				while (it.hasPrevious())
+//				{
+//					fd = (FormatData) it.previous();
+//					m_preNT.add(fd);
+//				}
+//			}
+//			m_postNT.clear();
 			m_fdList.clear();
 			m_tagList.clear();
 			m_ws = false;
@@ -584,7 +585,6 @@ System.out.println("OO parse error: '" + m_file + "' at line " + (e.getErrorOffs
 				out.append(fd.getDisplay());
 			}
 			processEntry(out, m_file);
-//System.out.println("recovered string: " + out.string());
 		}
 
 		// write out ignored trailing tags

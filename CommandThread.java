@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  21Dec2002
+//  Build date:  9Jan2002
 //  Copyright (C) 2002, Keith Godfrey
 //  aurora@coastside.net
 //  907.223.2039
@@ -63,12 +63,14 @@ class CommandThread extends Thread
 		m_projWin = null;
 		m_saveCount = -1;
 		m_saveThread = null;
+
+		m_prefManager = new PreferenceManager();
 	}
 
 	public void run()
 	{
 		RequestPacket pack = new RequestPacket();
-//		m_saveThread = new SaveThread();
+		m_saveThread = new SaveThread();
 		try 
 		{
 			while (m_stop == false)
@@ -92,8 +94,10 @@ class CommandThread extends Thread
 						break;
 				}
 			}
-//			m_saveThread.signalStop();
-//			m_saveThread.interrupt();
+			m_prefManager.save();
+
+			m_saveThread.signalStop();
+			m_saveThread.interrupt();
 			core = null;
 		}
 		catch (RuntimeException re)
@@ -167,6 +171,22 @@ class CommandThread extends Thread
 		m_glosEntryList.clear();
 		m_srcTextEntryArray.clear();
 
+		if (m_projWin != null)
+		{
+			if (m_projWin.isVisible())
+			{
+				m_projWin.hide();
+				m_projWin.reset();
+				m_projWin.buildDisplay();
+				m_projWin.show();
+			}
+			else
+			{
+				m_projWin.reset();
+				m_projWin.buildDisplay();
+			}
+		}
+		
 		m_totalWords = 0;
 		m_partialWords = 0;
 		m_currentWords = 0;
@@ -198,7 +218,7 @@ class CommandThread extends Thread
 			tf.finishLoadProject();
 			uiMessageDisplayEntry(tf, true);
 			if (m_saveCount == -1)
-//				m_saveThread.start();
+				m_saveThread.start();
 
 			evtStr = OStrings.CT_LOADING_INDEX;
 			uiMessageSetMessageText(tf, evtStr);
@@ -444,6 +464,21 @@ class CommandThread extends Thread
 		}
 	}
 
+	///////////////////////
+	// preference interface
+	// preference class is itself synchronized, so out of sync 
+	//  requests are OK
+	public String getPreference(String str)
+	{
+		return m_prefManager.getPreference(str);
+	}
+
+	public void setPreference(String name, String value)
+	{
+		m_prefManager.setPreference(name, value);
+	}
+	////////////////////////
+
 	// fetch strings above and below current string for translation
 	//  to provide a 'context'
 	public ArrayList getContext(int num, int low, int high)
@@ -667,18 +702,175 @@ System.out.println("ERROR - untrapped exchange call");
 		strEntry.setTranslation(exchange.trans);
 	}
 
+	protected void buildTMXFile(String filename) throws IOException
+	{
+		int i;
+		String s;
+		String t;
+
+		// build translation database files
+		File tm;
+		DataOutputStream dos;
+		StringEntry se;
+
+		// we got this far, so assume lang codes are proper
+		String srcLang = getPreference(OConsts.PREF_SRCLANG);
+		String locLang = getPreference(OConsts.PREF_LOCLANG);
+
+		FileOutputStream fos = new FileOutputStream(filename);
+		OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF8");
+		BufferedWriter out = new BufferedWriter(osw);
+		
+		String str = "<?xml version=\"1.0\"?>\n";
+		str += "<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">\n";
+		str += "<tmx version=\"1.1\">\n";
+		str += "  <header\n";
+		str += "    creationtool=\"OmegaT\"\n";
+		str += "    creationtoolversion=\"1\"\n";
+		str += "    segtype=\"paragraph\"\n";
+		str += "    o-tmf=\"OmegaT TMX\"\n";
+		str += "    adminlang=\"EN-US\"\n";
+		str += "    srclang=\"" + srcLang + "\"\n";
+		str += "    datatype=\"plaintext\"\n";
+		str += "  >\n";
+		str += "  </header>\n";
+		str += "  <body>\n";
+		out.write(str, 0, str.length());
+	
+		for (i=0; i<m_strEntryList.size(); i++)
+		{
+			se = (StringEntry) m_strEntryList.get(i);
+			s = XMLStreamReader.controlify(se.getSrcText());
+			t = XMLStreamReader.controlify(se.getTrans());
+			if (t.equals(""))
+				continue;
+			str =  "    <tu>\n";
+			str += "      <tuv lang=\"" + srcLang + "\">\n";
+			str += "        <seg>" + s + "</seg>\n";
+			str += "      </tuv>\n";
+			str += "      <tuv lang=\"" + locLang + "\">\n";
+			str += "        <seg>" + t + "</seg>\n";
+			str += "      </tuv>\n";
+			str += "    </tu>\n";
+			out.write(str, 0, str.length());
+		}
+		str =  "  </body>\n";
+		str += "</tmx>\n";
+		out.write(str, 0, str.length());
+		out.close();
+	}
+	
+	// scan project and build list of entries which are suspected of 
+	//  having changed (i.e. invalid) tag structures
+	public ArrayList validateTags()
+	{
+		int i, j;
+		String s;
+		String t;
+		ArrayList srcTags = new ArrayList(32);
+		ArrayList locTags = new ArrayList(32);
+		ArrayList suspects = new ArrayList(16);
+
+		StringEntry se;
+		SourceTextEntry ste;
+		
+		for (i=0; i<m_srcTextEntryArray.size(); i++)
+		{
+			ste = (SourceTextEntry) m_srcTextEntryArray.get(i);
+			se = ste.getStrEntry();
+			s = se.getSrcText();
+			t = se.getTrans();
+			// extract tags from src and loc string
+			buildTagList(s, srcTags);
+			buildTagList(t, locTags);
+			
+			// make sure lists match
+			// for now, insist on exact match
+			if (srcTags.size() != locTags.size())
+				suspects.add(ste);
+			else 
+			{
+				// compare one by one
+				for (j=0; j<srcTags.size(); j++)
+				{
+					s = (String) srcTags.get(j);
+					t = (String) locTags.get(j);
+					if (s.equals(t) == false)
+					{
+						suspects.add(ste);
+						break;
+					}
+				}
+			}
+
+			srcTags.clear();
+			locTags.clear();
+		}
+		return suspects;
+	}
+
+	public static void buildTagList(String str, ArrayList tagList)
+	{
+		String tag = "";
+		char c;
+		int state = 1;
+		// extract tags from source string
+		for (int j=0; j<str.length(); j++)
+		{
+			c = str.charAt(j);
+			switch (state)
+			{
+				// 'normal' mode
+				case 1:
+					if (c == '<')
+						state = 2;
+					break;
+
+				// found < - see if double or single
+				case 2:
+					if (c == '<')
+					{
+						// "<<" - let it slide
+						state = 1;
+					}
+					else
+					{
+						tag = "";
+						tag += c;
+						state = 3;
+					}
+					break;
+
+				// copy tag
+				case 3:
+					if (c == '>')
+					{
+						tagList.add(tag);
+						state = 1;
+						tag = "";
+					}
+					else
+						tag += c;
+					break;
+			};
+		}
+	}
+
 	// build all translated files and create a new TM file
 	public void compileProject() 
 			throws IOException
 	{
+		if (m_strEntryHash.size() == 0)
+			return;
+
 		int i;
 		int j;
 		String srcRoot = m_config.getSrcRoot();
 		String locRoot = m_config.getLocRoot();
-		String t;
-		String s;
 		// keep track of errors - try to continue through processing
 		boolean err = false;
+		String s;
+		String t;
 
 		// save project first
 		save();
@@ -693,50 +885,32 @@ System.out.println("ERROR - untrapped exchange call");
 		int namePos;
 		String shortName;
 
-		try 
+		String fname = m_config.getProjRoot() + m_config.getProjName() +
+					OConsts.TMX_EXTENSION;
+		try
 		{
-			// build translation database files
-			File tm;
-			DataOutputStream dos;
-			StringEntry se;
-			tm = new File(m_config.getProjFileBase() + OConsts.TM_EXTENSION);
-			dos = new DataOutputStream(new FileOutputStream(tm));
-			dos.writeUTF(OConsts.TM_FILE_IDENT);
-			dos.writeInt(OConsts.TM_CUR_VERSION);
-			dos.writeUTF(m_config.getProjName());
-	
-			for (i=0; i<m_strEntryList.size(); i++)
-			{
-				se = (StringEntry) m_strEntryList.get(i);
-				s = se.getSrcText();
-				t = se.getTrans();
-				dos.writeUTF(s);
-				dos.writeUTF(t);
-			}
-			dos.writeUTF(OConsts.UTF8_END_OF_LIST);
-			dos.close();
+			buildTMXFile(fname);
 		}
 		catch (IOException e)
 		{
-			System.out.println("Exception encountered: " + e);	
-			System.out.println("Unable to build TM file");
+			System.out.println("ERROR - unable to build new TMX file");
 			err = true;
 		}
 		
 		// build mirror directory of source tree
 		buildDirList(fileList, new File(srcRoot));
-		File fname;
+		File destFile;
 		for (i=0; i<fileList.size(); i++)
 		{
 			filename = (String) fileList.get(i);
 			destFileName = m_config.getLocRoot() + 
 					filename.substring(m_config.getSrcRoot().length()+1);
 			ignore = false;
-			fname = new File(destFileName);
-			if (!fname.exists())
+			destFile = new File(destFileName);
+			if (!destFile.exists())
 			{
 				// target directory doesn't exist - create it
-				if (fname.mkdir() == false)
+				if (destFile.mkdir() == false)
 				{
 					throw new IOException("Can't create target language " +
 						"directory " + destFileName);
@@ -818,59 +992,44 @@ System.out.println("ERROR - untrapped exchange call");
 
 	protected synchronized void forceSave(boolean corruptionDanger)
 	{
+		m_prefManager.save();
+		
 		if (m_saveCount <= 0)
 			return;
 		else if (m_saveCount == 1)
 			m_saveCount = 0;
 
-		try 
+//if (corruptionDanger == false) 
+//	System.out.println("changes detected - saving project");
+		String s = m_config.getInternal() + OConsts.STATUS_EXTENSION;
+		if (corruptionDanger)
 		{
-if (corruptionDanger == false) 
-	System.out.println("changes detected - saving project");
-			EntryData entryData;
-			ListIterator it;
-			String trans;
-			StringEntry strEntry;
-			String s = m_config.getInternal() + OConsts.STATUS_EXTENSION;
-			if (corruptionDanger)
-			{
-				s += OConsts.STATUS_RECOVER_EXTENSION;
-			}
-			else
-			{
-				// rename existing project file in case a fatal error
-				//  is encountered during the write procedure - that way
-				//  everything won't be lost
-				File backup = new File(s + OConsts.BACKUP_EXTENSION);
-				File orig = new File(s);
-				if (orig.exists())
-					orig.renameTo(backup);
-			}
+			s += OConsts.STATUS_RECOVER_EXTENSION;
+		}
+		else
+		{
+			// rename existing project file in case a fatal error
+			//  is encountered during the write procedure - that way
+			//  everything won't be lost
+			File backup = new File(s + OConsts.BACKUP_EXTENSION);
+			File orig = new File(s);
+			if (orig.exists())
+				orig.renameTo(backup);
+		}
 
-			File outFile = new File(s);
-			DataOutputStream dos;
-			dos = new DataOutputStream(new FileOutputStream(outFile));
-			dos.writeUTF(OConsts.STATUS_FILE_IDENT);
-			dos.writeInt(OConsts.STATUS_CUR_VERSION);
-			for (int i=0; i<m_srcTextEntryArray.size(); i++)
-			{
-				entryData = getEntryTextOnly(i);
-				dos.writeUTF(entryData.srcText);
-				dos.writeUTF(entryData.trans);
-			}
-			dos.writeUTF(OConsts.UTF8_END_OF_LIST);
-			dos.close();
+		try
+		{
+			buildTMXFile(s);
 			m_modifiedFlag = false;
 		}
-		catch(IOException e)
+		catch (IOException e)
 		{
 			String msg = OStrings.CT_ERROR_SAVING_PROJ;
 			displayError(msg, e);
 			// try to rename backup file to original name
 			if (corruptionDanger == false)
 			{
-				String s = m_config.getInternal() + 
-								OConsts.STATUS_EXTENSION;
+				s = m_config.getInternal() + OConsts.STATUS_EXTENSION;
 				File backup = new File(s + OConsts.BACKUP_EXTENSION);
 				File orig = new File(s);
 				if (backup.exists())
@@ -881,7 +1040,7 @@ if (corruptionDanger == false)
 		// if successful, delete backup file
 		if ((m_modifiedFlag == false) && (corruptionDanger == false))
 		{
-			String s = m_config.getInternal() + OConsts.STATUS_EXTENSION;
+			s = m_config.getInternal() + OConsts.STATUS_EXTENSION;
 			File backup = new File(s + OConsts.BACKUP_EXTENSION);
 			if (backup.exists())
 				backup.delete();
@@ -1001,6 +1160,30 @@ if (corruptionDanger == false)
 		}
 	}
 
+	// search all translated text for an exact match to the supplied string
+	public ArrayList findAllExact(String text, boolean srcLang)
+	{
+		ArrayList foundList = new ArrayList();
+		String str = text.toLowerCase();
+		SourceTextEntry ste;
+		String segment;
+		// TODO - set locale in toLower call
+		for (int i=0; i<m_srcTextEntryArray.size(); i++)
+		{
+			ste = (SourceTextEntry) m_srcTextEntryArray.get(i);
+			if (srcLang)
+				segment = ste.getStrEntry().getSrcText();
+			else
+				segment = ste.getTranslation();
+			segment = segment.toLowerCase();
+			if (segment.indexOf(str) >= 0)
+			{
+				foundList.add(ste);
+			}
+		}
+		return foundList;
+	}
+
 	public TreeMap findAll(String tokenList)
 	{
 		if (m_indexReady == false)
@@ -1106,37 +1289,11 @@ if (corruptionDanger == false)
 		}
 		try
 		{
-			DataInputStream dis = new DataInputStream(new 
-											FileInputStream(proj));
-			String ident = dis.readUTF();
-			if (ident.compareTo(OConsts.STATUS_FILE_IDENT) != 0)
-			{
-				throw new IOException(
-						"unrecognized status file");
-			}
-			int vers = dis.readInt();
-			if (vers != OConsts.STATUS_CUR_VERSION)
-				throw new IOException("unsupported version");
-
 			// recover existing translations
 			// since the source files may have changed since the last time
 			//  they were loaded, load each string then look for it's 
 			//  owner
-			srcText = dis.readUTF();
-			int cnt = 0;
-			while (srcText.equals(OConsts.UTF8_END_OF_LIST) == false)
-			{
-				// find stringEntry
-				obj = m_strEntryHash.get(srcText);
-				strEntry = (StringEntry) obj;
-				trans = dis.readUTF();
-
-				if (strEntry != null)
-					strEntry.setTranslation(trans);
-
-				srcText = dis.readUTF();
-			}
-			dis.close();
+			loadTMXFile(proj.getAbsolutePath(), "UTF-8", true);
 		}
 		catch (IOException e)
 		{
@@ -1153,7 +1310,7 @@ if (corruptionDanger == false)
 		int j;
 		m_ignoreNearLog = false;	// TODO identify this variable
 		if (m_config.loadExisting() == false)
-			return false;;
+			return false;
 
 		// first load glossary files
 		File dir = new File(m_config.getGlosRoot());
@@ -1562,7 +1719,6 @@ if (corruptionDanger == false)
 	{
 		// build strEntryList for each file
 		// send to buildNearList
-		String status = OStrings.CT_TM_X_OF_Y;
 		String [] fileList;
 		String lang;
 		File f;
@@ -1577,6 +1733,7 @@ if (corruptionDanger == false)
 		// call build near list (entry list, status+filename)
 		//buildNearList(m_strEntryList, status + " (" + fname + ")");
 
+		String ext;
 		String src;
 		String trans;
 		StringEntry se;
@@ -1588,46 +1745,132 @@ if (corruptionDanger == false)
 		{
 			strEntryList.clear();
 			fname = fileList[i];
-			f = new File(m_config.getTMRoot() + fname);
-			dis = new DataInputStream(new 
-					FileInputStream(f));
-			String ident = dis.readUTF();
-			if (ident.compareTo(OConsts.TM_FILE_IDENT) 
-								!= 0)
-			{
-				dis.close();
-				continue;
-			}
-			int vers = dis.readInt();
-			if (vers != OConsts.TM_CUR_VERSION)
-			{
-				throw new IOException(
-					"unsupported translation memory file version (" +
-					fname + ")");
-			}
-
-			System.out.println("Processing TM file '" + fname + "'");
-
-			m_nearProj = dis.readUTF();
-			while (true)
-			{
-				if (dis.available() <= 0)
-					break;
-				src = dis.readUTF();
-				if (src.compareTo(
-					OConsts.UTF8_END_OF_LIST) == 0)
-				{
-					break;
-				}
-				trans = dis.readUTF();
-				se = new StringEntry(src);
-				se.setTranslation(trans);
-				strEntryList.add(se);
-			}
-			buildNearList(strEntryList, 
-					status + " (" + fname + ")");
-			dis.close();
+			ext = fname.substring(fname.lastIndexOf('.'));
+			fname = m_config.getTMRoot() + fname;
+			if (ext.equalsIgnoreCase(OConsts.TM_EXTENSION))
+				loadTMFile(fname);
+			else if (ext.equalsIgnoreCase(OConsts.TMX_EXTENSION))
+				loadTMXFile(fname, "UTF-8", false);
+			else if (ext.equalsIgnoreCase(OConsts.TMW_EXTENSION))
+				loadTMXFile(fname, "ISO-8859-1", false);
+			else if (ext.equalsIgnoreCase(OConsts.TAB_EXTENSION))
+				loadTabFile(fname);
 		}
+		m_nearProj = null;
+	}
+
+	protected void loadTabFile(String fname) 
+		throws IOException, FileNotFoundException, InterruptedIOException
+	{
+		LTabFileReader tab = new LTabFileReader();
+		String status = OStrings.CT_TM_X_OF_Y;
+		tab.load(fname);
+		String src;
+		String trans;
+		StringEntry se;
+		int num = tab.numRows();
+		ArrayList strEntryList = new ArrayList(num+2);
+		for (int i=0; i<num; i++)
+		{
+			src = tab.get(i, 0);
+			trans = tab.get(i, 1);
+			se = new StringEntry(src);
+			se.setTranslation(trans);
+			strEntryList.add(se);
+		}
+		buildNearList(strEntryList, status + " (" + fname + ")");
+	}
+	
+	protected void loadTMXFile(String fname, String encoding, boolean isProject)
+		throws IOException, FileNotFoundException, InterruptedIOException
+	{
+		String status = OStrings.CT_TM_X_OF_Y;
+		TMXReader tmx = new TMXReader(encoding);
+		String src;
+		String trans;
+		StringEntry se;
+		try
+		{
+			tmx.loadFile(fname);
+			int num = tmx.numSegments();
+			ArrayList strEntryList = new ArrayList(num+2);
+			for (int i=0; i<num; i++)
+			{
+				src = tmx.getSourceSegment(i);
+				trans = tmx.getTargetSegment(i);
+				if (isProject)
+					se = (StringEntry) m_strEntryHash.get(src);
+				else		
+					se = new StringEntry(src);
+
+				if (se != null)
+				{	
+					se.setTranslation(trans);
+					if (isProject == false)
+						strEntryList.add(se);
+				}
+			}
+			if (isProject == false)
+				buildNearList(strEntryList, status + " (" + fname + ")");
+		}
+		catch (ParseException e)
+		{
+			throw new IOException("Parse error in '" + fname + "'\n" +  e);
+		}
+	}
+
+	protected void loadTMFile(String fname) 
+		throws IOException, FileNotFoundException, InterruptedIOException
+	{
+		// build strEntryList for each file
+		// send to buildNearList
+		String status = OStrings.CT_TM_X_OF_Y;
+		String lang;
+		int i;
+		DataInputStream dis;
+		File f = new File(m_config.getTMRoot() + fname);
+		dis = new DataInputStream(new FileInputStream(f));
+		String ident = dis.readUTF();
+		if (ident.compareTo(OConsts.TM_FILE_IDENT) != 0)
+		{
+			dis.close();
+			return;
+		}
+		
+		ArrayList strEntryList = new ArrayList(1024);
+		String src;
+		String trans;
+		StringEntry se;
+
+		int vers = dis.readInt();
+		if (vers != OConsts.TM_CUR_VERSION)
+		{
+			throw new IOException(
+				"unsupported translation memory file version (" +
+				fname + ")");
+		}
+
+		System.out.println("Processing TM file '" + fname + "'");
+
+		m_nearProj = dis.readUTF();
+		while (true)
+		{
+			if (dis.available() <= 0)
+				break;
+			src = dis.readUTF();
+			if (src.compareTo(
+				OConsts.UTF8_END_OF_LIST) == 0)
+			{
+				break;
+			}
+			trans = dis.readUTF();
+			se = new StringEntry(src);
+			se.setTranslation(trans);
+			strEntryList.add(se);
+		}
+		buildNearList(strEntryList, 
+				status + " (" + fname + ")");
+		dis.close();
 		m_nearProj = null;
 	}
 
@@ -1914,74 +2157,6 @@ if (corruptionDanger == false)
 				attr[i] |= StringData.PAIR;
 		}
 		return attr;
-	}
-
-	protected boolean loadNearList()
-	{
-		boolean res = false;
-		int cnt = 0;
-		byte[] parData;
-		byte[] nearData;
-		int len;
-		// attempt to load near list from disk
-		try 
-		{
-			StringEntry strEntry;
-			StringEntry cand;
-			String src;
-			String trans;
-			double ratio;
-			String s = m_config.getProjFileBase() + OConsts.FUZZY_EXTENSION;
-			FileInputStream fis = new FileInputStream(s);
-			DataInputStream dis = new DataInputStream(fis);
-//			DataInputStream dis = new DataInputStream(new
-//				GZIPInputStream(fis));
-			
-			String ident = dis.readUTF();
-			if (ident.compareTo(OConsts.FUZZY_FILE_IDENT) != 0)
-			{
-				throw new IOException(
-						"unrecognized fuzzy file");
-			}
-			int vers = dis.readInt();
-			if (vers != 1)
-				throw new IOException("unsupported version");
-			while (dis.available() > 0)
-			{
-				src = dis.readUTF();
-				trans = dis.readUTF();
-				ratio = dis.readDouble();
-				len = dis.readInt();
-				parData = new byte[len];
-				dis.read(parData);
-				len = dis.readInt();
-				nearData = new byte[len];
-				dis.read(nearData);
-			
-				strEntry = (StringEntry) 
-						m_strEntryHash.get(src);
-				cand = (StringEntry) m_strEntryHash.get(trans);
-				if ((strEntry == null) || (cand == null))
-					throw new IOException();
-				m_ignoreNearLog = true;
-				registerNear(strEntry, cand, ratio,
-							parData, nearData);
-				cnt++;
-			}
-
-
-			res = true;
-		}
-		catch(IOException e)
-		{
-			// above code will throw exception when datastream is
-			// exhausted 
-			// signal OK if any near strings were loaded 
-			if (cnt > 0)
-				res = true;
-		}
-		
-		return res;
 	}
 
 	protected void registerNear(StringEntry strEntry, 
@@ -2294,6 +2469,8 @@ if (corruptionDanger == false)
 	private DataOutputStream	m_nearLog = null;
 	private boolean		m_ignoreNearLog = false;
 	private boolean		m_modifiedFlag = false;
+
+	private PreferenceManager	m_prefManager = null;
 
 	// thread control flags
 	private boolean		m_stop = false;

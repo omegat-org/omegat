@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------
 //  
-//  OmegaTVersion.java - 
+//  XMLAttribute.java - 
 //  
 //  Copyright (C) 2002, Keith Godfrey
 //  
@@ -30,11 +30,17 @@
 //-------------------------------------------------------------------------
 
 
-class OmegaTVersion
-{ 
-	static public String name()
+import java.lang.String;
+
+class XMLAttribute
+{
+	public XMLAttribute(String n, String v)
 	{
-		return "OmegaT 1.0.0";
+		name = n;
+		value = v;
 	}
+	
+	public String name;
+	public String value;
 }
 

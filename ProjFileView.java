@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------
 //  
-//  OmegaTVersion.java - 
+//  ProjFileView.java - 
 //  
 //  Copyright (C) 2002, Keith Godfrey
 //  
@@ -30,11 +30,31 @@
 //-------------------------------------------------------------------------
 
 
-class OmegaTVersion
-{ 
-	static public String name()
+import java.io.File;
+import java.util.*;
+import javax.swing.filechooser.*;
+import javax.swing.*;
+
+class ProjectFileView extends FileView
+{
+	ImageIcon omegatIcon = new ImageIcon("images" + File.separator 
+				+ "OmegaT.gif");
+
+	public String getName(File f)				{ return null;		}
+	public String getDescription(File f)		{ return null;		}
+	public Boolean isTraversable(File f)		{ return null;		}
+	public String getTypeDescription(File f)
 	{
-		return "OmegaT 1.0.0";
+		if (ProjectFileChooser.isProjectDir(f))
+			return OStrings.PFC_OMEGAT_PROJECT;
+		else
+			return null;
+	}
+	public Icon getIcon(File f)
+	{
+		if (ProjectFileChooser.isProjectDir(f))
+			return omegatIcon;
+		else	
+			return null;
 	}
 }
-

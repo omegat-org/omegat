@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  21Dec2002
+//  Build date:  9Jan2002
 //  Copyright (C) 2002, Keith Godfrey
 //  aurora@coastside.net
 //  907.223.2039
@@ -39,10 +39,11 @@ import java.net.*;
 
 class ContextFrame extends JFrame 
 {
-	public ContextFrame(TransFrame parent)
+	public ContextFrame(TransFrame parent, boolean srcLang)
 	{
 		String str;
 		m_parent = parent;
+		m_srcLang = srcLang;
 
 		Container cp = getContentPane();
 		m_editorPane = new JEditorPane();
@@ -68,13 +69,33 @@ class ContextFrame extends JFrame
 		setSize(500, 400);
 		m_editorPane.addHyperlinkListener(new HListener(m_parent));
 
+		// this only seems to work in 1.4, but at least it works there
+		// throws exceptions in 1.2
+		{
+			KeyStroke escKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE,
+						0, false);
+			Action escAction = new AbstractAction()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					doClose();
+				}
+			};
+			getRootPane().getInputMap(JComponent.WHEN_FOCUSED).put(
+					escKeyStroke, "ESCAPE");
+			getRootPane().getActionMap().put("ESCAPE", escAction);
+		}
+		
 		updateUIText();
 	}
 
 	public void updateUIText()
 	{
 		m_closeButton.setText(OStrings.CF_BUTTON_CLOSE);
-		m_searchResults = OStrings.CF_SEARCH_RESULTS;
+		if (m_srcLang)
+			m_searchResults = OStrings.CF_SEARCH_RESULTS_SRC;
+		else
+			m_searchResults = OStrings.CF_SEARCH_RESULTS_LOC;
 	}
 
 	public void doClose()
@@ -97,6 +118,38 @@ class ContextFrame extends JFrame
 		public String src;
 		public String xl;
 		public int entryNum;
+	}
+	
+	public void displayStringList(ArrayList stringList, String searchTerms)
+	{
+		Object obj;
+		setTitle(m_searchResults + " " + searchTerms);
+		String out;
+		String src;
+		String trans;
+		SourceTextEntry ste;
+		StringEntry se;
+
+		out = "<table BORDER COLS=3 WIDTH=\"100%\" NOSAVE>";
+		for (int i=0; i<stringList.size(); i++)
+		{
+			ste = (SourceTextEntry) stringList.get(i);
+			se = ste.getStrEntry();
+			src = se.getSrcText();
+			trans = se.getTrans();
+			if ((src.equals("") == false) && (trans.equals("") == false))
+			{
+				out += "<tr>";
+				out += "<td><a href=\"" + (ste.entryNum() + 1) + "\">";
+				out += (ste.entryNum() + 1) + " </a></td>";
+				out += "<td>" + src + "</td>";
+				out += "<td>" + trans + "</td>";
+				out += "</tr>";
+			}
+		}
+		out += "</table>";
+		m_editorPane.setContentType("text/html");
+		m_editorPane.setText(out);
 	}
 
 	public void displayStringList(TreeMap stringList, String searchTerms)
@@ -153,7 +206,7 @@ class ContextFrame extends JFrame
 				out += "<tr>";
 				out += "<td><a href=\"" + qd.entryNum + "\">";
 				out += qd.entryNum + "</a></td>";
-				out += "<td>" + qd.src + "</td>";
+				out += "<td>" + qd.src + " </td>";
 				if (qd.xl == null)
 					s = "";
 				else 
@@ -170,6 +223,7 @@ class ContextFrame extends JFrame
 	private JEditorPane m_editorPane;
 	private JButton		m_closeButton;
 	private String m_searchResults;
+	private boolean	m_srcLang;
 
 	private TransFrame m_parent;
 
@@ -177,7 +231,7 @@ class ContextFrame extends JFrame
 
 	public static void main(String[] args)
 	{
-		JFrame f = new ContextFrame(null);
+		JFrame f = new ContextFrame(null, true);
 		f.show();
 	}
 }

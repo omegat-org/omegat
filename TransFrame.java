@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  21Dec2002
+//  Build date:  9Jan2002
 //  Copyright (C) 2002, Keith Godfrey
 //  aurora@coastside.net
 //  907.223.2039
@@ -132,13 +132,15 @@ class TransFrame extends JFrame implements ActionListener
 		// create stat container
 		// 4 rows are goto entry, word count, find label, find field
 		Container statContainer = new Container();
-		statContainer.setLayout(new GridLayout(5,1));
+		statContainer.setLayout(new GridLayout(6,1));
 
+		ImageIcon omegatIconBig = new ImageIcon("images" + File.separator 
+					+ "OmegaTBig.gif");
 		// entry info
 		m_statusLabel = new JLabel();
 		m_wordcountLabel = new JLabel();
 		m_entryNumPosition = new JLabel();
-		m_gotoEntry = new JTextField();
+		m_gotoEntry = new GotoField();
 		m_gotoEntry.setEnabled(false);
 		m_gotoEntryContainer = new Container();
 		m_gotoEntryContainer.setLayout(new GridLayout(1,2));
@@ -146,15 +148,29 @@ class TransFrame extends JFrame implements ActionListener
 		m_gotoEntryContainer.add(m_gotoEntry);
 
 		// create find fields
-		m_findPane = new JTextField();
+		m_findPane = new FindField();
 		m_findPane.setEnabled(false);
 		m_findLabel = new JLabel();
+		
+		m_findExactPane = new FindFieldExact();
+		m_findExactPane.setEnabled(false);
+		m_findExactLabel = new JLabel();
 
 		statContainer.add(m_gotoEntryContainer);
-		statContainer.add(m_wordcountLabel);
+//		statContainer.add(m_wordcountLabel);
 		statContainer.add(m_findLabel);
 		statContainer.add(m_findPane);
+		statContainer.add(m_findExactLabel);
+		statContainer.add(m_findExactPane);
 		statContainer.add(m_fuzzyProjLabel);
+		
+		Box vertImageBox = Box.createVerticalBox();
+		vertImageBox.add(new JLabel(omegatIconBig));
+		vertImageBox.add(Box.createVerticalGlue());
+		Box imageBox= Box.createHorizontalBox();
+		imageBox.add(vertImageBox);
+		imageBox.add(Box.createHorizontalStrut(5));
+		imageBox.add(statContainer);
 		
 		///////////////////////////////////////////
 		// create stat+oldSrc container
@@ -167,8 +183,8 @@ class TransFrame extends JFrame implements ActionListener
 		c.weightx = 1.0;
 		c.gridwidth = GridBagConstraints.REMAINDER;
 		c.insets = new Insets(3, 3, 3, 3);
-		gb.setConstraints(statContainer, c);
-		statSrc.add(statContainer);
+		gb.setConstraints(imageBox, c);
+		statSrc.add(imageBox);
 		
 		c.weighty = 1.0;
 		c.fill = GridBagConstraints.BOTH;
@@ -348,6 +364,13 @@ class TransFrame extends JFrame implements ActionListener
 		m_miEditFind.addActionListener(this);
 		m_mEdit.add(m_miEditFind);
 
+		m_miEditFindLoc = new JMenuItem();
+		m_miEditFindLoc.setAccelerator(KeyStroke.getKeyStroke(
+				KeyEvent.VK_E, 
+				Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+		m_miEditFindLoc.addActionListener(this);
+		m_mEdit.add(m_miEditFindLoc);
+
 		m_miEditGoto = new JMenuItem();
 		m_miEditGoto.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_G, 
@@ -400,6 +423,10 @@ class TransFrame extends JFrame implements ActionListener
 		m_miToolsPseudoTrans.addActionListener(this);
 		m_mTools.add(m_miToolsPseudoTrans);
 
+		m_miToolsValidateTags = new JMenuItem();
+		m_miToolsValidateTags.addActionListener(this);
+		m_mTools.add(m_miToolsValidateTags);
+
 		mb.add(m_mTools);
 		
 		m_mVersion = new JMenu();
@@ -411,7 +438,8 @@ class TransFrame extends JFrame implements ActionListener
 		setJMenuBar(mb);
 	}
 
-	protected void doPseudoTrans() {
+	protected void doPseudoTrans() 
+	{
 		if (m_projectLoaded == false)
 			return;
 
@@ -429,6 +457,25 @@ class TransFrame extends JFrame implements ActionListener
 		displayEntry(true);
 	}
 
+	protected void doValidateTags()
+	{
+		ArrayList suspects = CommandThread.core.validateTags();
+		if (suspects.size() > 0)
+		{
+			// create list of suspect strings - use ContextFrame for now
+			ContextFrame cf = new ContextFrame(this, true);
+			cf.show();
+			cf.displayStringList(suspects, OStrings.TF_NOTICE_BAD_TAGS);
+		}
+		else
+		{
+			// show dialog saying all is OK
+			JOptionPane.showMessageDialog(this, 
+						OStrings.TF_NOTICE_OK_TAGS,
+						OStrings.TF_NOTICE_TITLE_TAGS,
+						JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
 
 	public void doNextEntry()
 	{
@@ -671,6 +718,29 @@ class TransFrame extends JFrame implements ActionListener
 		}
 	}
 	
+	// if hilited text in m_xlPane, launch a find on that
+	// otherwise, simply move the cursor
+	protected void doStartFindExact()
+	{
+		int start = m_xlPane.getSelectionStart();
+		int end = m_xlPane.getSelectionEnd();
+		if ((end - start) >= 2)
+		{
+			String selection = m_xlPane.getSelectedText();
+			selection.trim();
+			if (selection.length() >= 2)
+			{
+				m_findExactPane.setText(selection);
+				doFindExact(selection, false);
+			}
+		}
+		else
+		{
+			// reset cursor to m_findExactPane
+			m_findExactPane.requestFocus();
+		}
+	}
+	
 	protected void doFind(String str)
 	{
 		if (m_projectLoaded == false)
@@ -685,7 +755,27 @@ class TransFrame extends JFrame implements ActionListener
 		}
 		else
 		{
-			ContextFrame cf = new ContextFrame(this);
+			ContextFrame cf = new ContextFrame(this, true);
+			cf.show();
+			cf.displayStringList(foundList, str);
+		}
+	}
+
+	protected void doFindExact(String str, boolean srcLang)
+	{
+		if (m_projectLoaded == false)
+			return;
+		
+		ArrayList foundList = CommandThread.core.findAllExact(str, srcLang);
+		if (foundList == null)
+		{
+			String msg = "search for terms '" + str + 
+					"' returned nothing";
+			setMessageText(msg);
+		}
+		else
+		{
+			ContextFrame cf = new ContextFrame(this, srcLang);
 			cf.show();
 			cf.displayStringList(foundList, str);
 		}
@@ -748,10 +838,12 @@ class TransFrame extends JFrame implements ActionListener
 
 	protected void doLoadProject()
 	{
-		if (m_projectLoaded == false)
-		{
-			// TODO - unload current project
-		}
+		m_matchPane.setText("");
+		m_oldSrcPane.setText("");
+		m_oldLocPane.setText("");
+		m_xlPane.setText("");
+		m_context1Pane.setText("");
+		m_context2Pane.setText("");
 		
 		RequestPacket pack;
 		pack = new RequestPacket(RequestPacket.LOAD, this);
@@ -766,6 +858,7 @@ class TransFrame extends JFrame implements ActionListener
 		m_curEntry = 0;
 		m_gotoEntry.setEnabled(true);
 		m_findPane.setEnabled(true);
+		m_findExactPane.setEnabled(true);
 		m_projectLoaded = true;
 
 		// this is called by another thread so try to avoid modifying
@@ -931,51 +1024,45 @@ class TransFrame extends JFrame implements ActionListener
 		else
 			m_matchPane.setText("");
 		
-		context = "<table BORDER COLS=2 WODTH=\"100%\" NOSAVE>";
+		context = "";
 		for (i=0, j=-m_contextLow; i<m_contextLow; i++, j++)
 		{
 			s = (String) contextList.get(i);
 			if ((s != null) && (s.equals("") == false))
 			{
 				num = m_curEntry + 1 + j;
-				context += "<tr><td><a href=\"" + num + "\">" 
-										+ num + "</a></td>";
-				context += "<td>" + controlifyHTML(s) + "</td></tr>";
+				context += "<a href=\"" + num + "\">" + num + ": </a> "
+					+ controlifyHTML(s) + "<br>";
 			}
 		}
 		num = m_curEntry + 1;
-		context += "<tr><td><font color=\"blue\"><bold>" + num + 
-						"</bold></font></td>";
-		context += "<td><font color=\"blue\">";
-		LBuffer buf = new LBuffer(256);
+		context += "<hr width=\"100%\" >";
+		context += "<font color=\"blue\"><bold> " + num + ": </bold></font> ";
 		if (m_curNear == null)
 		{
 			context += controlifyHTML(m_eData.srcText);
 		}
 		else
 		{
+			LBuffer buf = new LBuffer(256);
 			buildFormattedString(m_eData.srcText, m_curNear.parAttr, RED, buf);
 			context += buf.string();
 		}
-		context += "</font></td></tr></table>";
 		m_context1Pane.setText(context);
 
-		context = "<table BORDER COLS=2 WODTH=\"100%\" NOSAVE>";
+		context = "";
 		for (j++; i<m_contextHigh+m_contextLow; i++, j++)
 		{
 			s = (String) contextList.get(i);
-			if (s != null)
+			if ((s != null) && (s.equals("") == false))
 			{
 				num = m_curEntry + 1 + j;
-				context += "<tr><td><a href=\"" + num + "\">" 
-										+ num + "</a></td>";
-				context += "<td>" + controlifyHTML(s) + "</td></tr>";
+				context += "<a href=\"" + num + "\">" + num + ": </a> "
+					+ controlifyHTML(s) + "<br>";
 			}
 		}
-		context += "</table>";
 		m_context2Pane.setText(context);
 		m_context2Pane.setCaretPosition(0);
-
 	}
 
 	// convert & and < to HTML codes
@@ -1080,6 +1167,13 @@ class TransFrame extends JFrame implements ActionListener
 			{
 				doGoto();
 			}
+			else if (evtSrc == m_miEditFindLoc)
+			{
+				// doFind initiates the search - the menu option
+				//  will reset the cursor to find field or copy hilited 
+				//  text to find window then launch find
+				doStartFindExact();
+			}
 			else if (evtSrc == m_miEditFind)
 			{
 				// doFind initiates the search - the menu option
@@ -1111,6 +1205,10 @@ class TransFrame extends JFrame implements ActionListener
 			{
 				doPseudoTrans();
 			}
+			else if (evtSrc == m_miToolsValidateTags)
+			{
+				doValidateTags();
+			}
 		}
 	}
 
@@ -1128,8 +1226,9 @@ class TransFrame extends JFrame implements ActionListener
 		m_strNone = OStrings.TF_NONE;
 
 		m_findLabel.setText(OStrings.TF_SEARCH);
+		m_findExactLabel.setText(OStrings.TF_SEARCH_EXACT);
 		int blockHeight = m_findLabel.getPreferredSize().height;
-		m_statusLabel.setMinimumSize(new Dimension(m_leftX, blockHeight));
+//		m_statusLabel.setMinimumSize(new Dimension(m_leftX, blockHeight));
 		m_curString = OStrings.TF_CUR_STRING;
 		str = OStrings.TF_GOTO_ENTRY;
 
@@ -1152,30 +1251,14 @@ class TransFrame extends JFrame implements ActionListener
 		m_miEditGoto.setText(OStrings.TF_MENU_EDIT_GOTO);
 		m_miEditRecycle.setText(OStrings.TF_MENU_EDIT_RECYCLE);
 		m_miEditFind.setText(OStrings.TF_MENU_EDIT_FIND);
+		m_miEditFindLoc.setText(OStrings.TF_MENU_EDIT_FINDEXACT);
 
 		m_mTools.setText(OStrings.TF_MENU_TOOLS);
 		m_miToolsPseudoTrans.setText(OStrings.TF_MENU_TOOLS_PSEUDO);
+		m_miToolsValidateTags.setText(OStrings.TF_MENU_TOOLS_VALIDATE);
 
 		m_mVersion.setText(OStrings.TF_MENU_VERSION);
 		m_miVersionNumber.setText(OmegaTVersion.name());
-	}
-
-	protected void processKeyEvent(KeyEvent e)
-	{
-		super.processKeyEvent(e);
-		if (e.getKeyCode() == KeyEvent.VK_ENTER)
-		{
-			if (m_gotoEntry.hasFocus() == true)
-			{
-				doGotoEntry(m_gotoEntry.getText());
-				m_xlPane.requestFocus();
-			}
-			else if (m_findPane.hasFocus() == true)
-			{
-				doFind(m_findPane.getText());
-				m_xlPane.requestFocus();
-			}
-		}
 	}
 
 	class MSelectLanguage extends JDialog 
@@ -1318,6 +1401,65 @@ class TransFrame extends JFrame implements ActionListener
 		}
 	}
 	
+	class FindField extends JTextField
+	{
+		protected void processKeyEvent(KeyEvent e)
+		{
+			if (e.getKeyCode() == KeyEvent.VK_ENTER)  
+			{
+				doFind(getText());
+			}
+			else
+			{
+				super.processKeyEvent(e);
+			}
+		}
+	}
+	
+	class FindFieldExact extends JTextField
+	{
+		protected void processKeyEvent(KeyEvent e)
+		{
+			if (e.getKeyCode() == KeyEvent.VK_ENTER)  
+			{
+				if (e.isControlDown() == true)
+				{
+					// go backwards on control return
+					if (e.getID() == KeyEvent.KEY_PRESSED)
+						doFindExact(getText(), true);
+				}
+				else 
+				{
+					// return w/o modifiers - swallow event and move on to 
+					//  next segment
+					if (e.getID() == KeyEvent.KEY_PRESSED)
+						doFindExact(getText(), false);
+						doNextEntry();
+				}
+
+			}
+			else
+			{
+				super.processKeyEvent(e);
+			}
+		}
+	}
+	
+	class GotoField extends JTextField
+	{
+		protected void processKeyEvent(KeyEvent e)
+		{
+			if (e.getKeyCode() == KeyEvent.VK_ENTER)  
+			{
+				doGotoEntry(getText());
+			}
+			else
+			{
+				super.processKeyEvent(e);
+			}
+		}
+	}
+	
 	private String m_strFuzzy;
 	private String m_strGlossaryItem;
 	private String m_strSrcText;
@@ -1337,6 +1479,7 @@ class TransFrame extends JFrame implements ActionListener
 	private JMenuItem	m_miEditPrev;
 	private JMenuItem	m_miEditGoto;
 	private JMenuItem	m_miEditFind;
+	private JMenuItem	m_miEditFindLoc;
 	private JMenuItem	m_miEditRecycle;
 	private JMenuItem	m_miEditCompare1;
 	private JMenuItem	m_miEditCompare2;
@@ -1345,6 +1488,7 @@ class TransFrame extends JFrame implements ActionListener
 	private JMenuItem	m_miEditCompare5;
 	private JMenu		m_mTools;
 	private JMenuItem	m_miToolsPseudoTrans;
+	private JMenuItem	m_miToolsValidateTags;
 
 	private JMenu		m_mVersion;
 	private JMenuItem	m_miVersionNumber;
@@ -1355,21 +1499,23 @@ class TransFrame extends JFrame implements ActionListener
 	private XLPane		m_xlPane;
 	private JTextPane	m_context1Pane;
 	private JTextPane	m_context2Pane;
-	private int		m_contextLow = 4;
-	private int		m_contextHigh = 4;
+	private int		m_contextLow = 6;
+	private int		m_contextHigh = 6;
 //	private ArrayList	m_contextArray;	// stores JTextPanes
 //	private ArrayList	m_contextArrayStrings;
 	private LinkedList	m_nearList;
 	private int		m_nearListNum;
 
-	private JTextField	m_findPane;
+	private FindFieldExact m_findExactPane;
+	private JLabel		m_findExactLabel;
+	private FindField	m_findPane;
 	private JLabel		m_findLabel;
 	private JLabel		m_statusLabel;
 	private JLabel		m_fuzzyProjLabel;
 	private JLabel		m_wordcountLabel;
 	private JLabel		m_entryNumPosition;
 	private String		m_curString;
-	private JTextField	m_gotoEntry;
+	private GotoField	m_gotoEntry;
 	private Container	m_gotoEntryContainer;
 
 	private String	m_activeFile;

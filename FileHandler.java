@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  21Dec2002
+//  Build date:  9Jan2002
 //  Copyright (C) 2002, Keith Godfrey
 //  aurora@coastside.net
 //  907.223.2039
@@ -40,7 +40,6 @@ abstract class FileHandler
 		m_preferredExtension = new String(extension);
 		m_testMode = false;
 		m_outputMode = false;
-//		m_lang = "";
 		m_outFile = null;
 	}
 
@@ -110,7 +109,6 @@ abstract class FileHandler
 	public void write(String infile, String outfile) throws IOException
 	{
 		m_file = infile;
-//		m_lang = lang;
 		m_outputMode = true;
 		File of = new File(outfile);
 		File pd;
@@ -139,12 +137,10 @@ abstract class FileHandler
 		{
 			m_outputMode = false;
 			m_outFile = null;
-//			m_lang = "";
 			throw e;
 		}
 		m_outFile = null;
 		m_outputMode = false;
-//		m_lang = "";
 	}
 
 	// create output stream - allow stream to have access to source file
@@ -258,13 +254,10 @@ abstract class FileHandler
 
 	private String m_type;
 	private String m_preferredExtension;
-	//private DataInputStream m_in;
 	protected BufferedReader m_in;
 	protected boolean m_testMode;
 	protected boolean m_outputMode;
-	//protected DataOutputStream	m_outFile;
 	protected BufferedWriter	m_outFile;
-//	protected String m_lang = "";
 
 	private int		m_line = 0;
 	private boolean		m_cr = false;

@@ -1,10 +1,30 @@
-/*
- * ResourceBundleFileHandler.java
- *
- * Created on 11 Àâãóñò 2004 ã., 21:30
- */
+/**************************************************************************
+ OmegaT - Java based Computer Assisted Translation (CAT) tool
+ Copyright (C) 2002-2004  Keith Godfrey et al
+                          keithgodfrey@users.sourceforge.net
+                          907.223.2039
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+**************************************************************************/
 
 package org.omegat.filters.text.bundles;
+
+import org.omegat.filters.FileHandler;
+import org.omegat.gui.threads.CommandThread;
+import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,10 +37,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.text.MessageFormat;
-import org.omegat.filters.FileHandler;
-import org.omegat.gui.threads.CommandThread;
-import org.omegat.util.OConsts;
-import org.omegat.util.OStrings;
 
 /**
  * Filter to support Java Resource Bundles - the files that are used to I18ze
@@ -70,7 +86,7 @@ public class ResourceBundleFileHandler extends FileHandler
 			if( locale.length()>=5 )
 				country = locale.substring(2,5).toUpperCase();
 		} else 
-			throw new IOException(MessageFormat.format("Locale is wrong or not specified {0}. Localized Resource bundle cannot be created", new Object[]{locale}));
+			throw new IOException(MessageFormat.format(OStrings.getString("RBFH_ERROR_WRONG_LOCALE"), new Object[]{locale}));
 
 		
         int dotPos = outfile.lastIndexOf('.');
@@ -135,19 +151,19 @@ public class ResourceBundleFileHandler extends FileHandler
 			if( ch>=32 && ch<127 )
 				result.append(ch);
 			else if( ch=='\\' )
-				result.append("\\\\");
+				result.append("\\\\");											// NOI18N
 			else if( ch=='\n' )
-				result.append("\\n");
+				result.append("\\n");											// NOI18N
 			else if( ch=='\r' )
-				result.append("\\r");
+				result.append("\\r");											// NOI18N
 			else if( ch=='\t' )
-				result.append("\\t");
+				result.append("\\t");											// NOI18N
 			else
 			{
 				String code = Integer.toString(ch, 16);
 				while( code.length()<4 )
 					code = '0'+code;
-				result.append("\\u"+code);
+				result.append("\\u"+code);										// NOI18N
 			}
 		}
 		
@@ -159,7 +175,7 @@ public class ResourceBundleFileHandler extends FileHandler
 	 */
 	private String leftTrim(String s)
 	{
-		String trimmed = (s+".").trim();
+		String trimmed = (s+".").trim();										// NOI18N
 		return trimmed.substring(0, trimmed.length()-1);
 	}
 	

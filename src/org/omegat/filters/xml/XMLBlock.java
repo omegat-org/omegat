@@ -110,17 +110,7 @@ public class XMLBlock
 	public void setCloseFlag()	{	m_isClose = true; m_isEmpty = false;	}
 	public void setEmptyFlag()	{	m_isEmpty = true; m_isClose = false;	}
 
-	public void setComment(String text)
-	{
-		m_isTag = true;
-		setTypeChar('!');
-		m_isComment = true;
-		m_text = text;
-		m_isClose = false;
-		m_isEmpty = false;
-	}
-
-	public void setComment()
+    public void setComment()
 	{
 		m_isTag = true;
 		setTypeChar('!');
@@ -148,9 +138,8 @@ public class XMLBlock
 	public boolean isEmpty()	{ return m_isEmpty;		}
 	public boolean isClose()	{ return m_isClose;		}
 	public boolean isComment()	{ return m_isComment;	}
-	public char getTypeChar()	{ return m_typeChar;	}
 
-	// returns the block as text - either raw text if not a tag,
+    // returns the block as text - either raw text if not a tag,
 	//  or the tag and attributes in text form if it is
 	public String getText()
 	{

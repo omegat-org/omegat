@@ -23,6 +23,14 @@ package org.omegat.util;
 
 import java.util.ResourceBundle;
 
+/**
+ * Localizable strings.
+ * After refactoring this class is useless (except for getString method),
+ * but it's still here for legacy reasons.
+ *
+ * @author Keith Godfrey
+ * @author Maxym Mykhalchuk
+ */
 public class OStrings
 {
 	
@@ -39,23 +47,14 @@ public class OStrings
 		getString("version-prefix")+
 		ResourceBundle.getBundle("org/omegat/Version").getString("version")+
 		getString("version-suffix");
-	
-	// MessageDialog
-	public static final String MD_BUTTON_OK = getString("BUTTON_OK");
-	
-	// TransFrame
+
+    // TransFrame
 	public static final String TF_NUM_NEAR_AND_GLOSSARY	= getString("TF_NUM_NEAR_AND_GLOSSARY");
 	public static final String TF_NUM_GLOSSARY = getString("TF_NUM_GLOSSARY");
 	public static final String TF_NUM_NEAR = getString("TF_NUM_NEAR");
-	public static final String TF_FUZZY		= getString("TF_FUZZY");
-	public static final String TF_GLOSSARY		= getString("TF_GLOSSARY");
-	public static final String TF_SRCTEXT		= getString("TF_SRCTEXT");
-	public static final String TF_TRANSLATION	= getString("TF_TRANSLATION");
-	public static final String TF_SCORE		= getString("TF_SCORE");
-	public static final String TF_WARNING		= getString("TF_WARNING");
+    public static final String TF_WARNING		= getString("TF_WARNING");
 	public static final String TF_ERROR		= getString("TF_ERROR");
-	public static final String TF_NONE		= getString("TF_NONE");
-	public static final String TF_MENU_FILE		= getString("TF_MENU_FILE");
+    public static final String TF_MENU_FILE		= getString("TF_MENU_FILE");
 	public static final String TF_MENU_FILE_OPEN	= getString("TF_MENU_FILE_OPEN");
 	public static final String TF_MENU_FILE_CREATE	= getString("TF_MENU_FILE_CREATE");
 	public static final String TF_MENU_FILE_CLOSE	= getString("TF_MENU_FILE_CLOSE");
@@ -80,8 +79,7 @@ public class OStrings
 	public static final String TF_MENU_EDIT_COMPARE_5 = getString("TF_MENU_EDIT_COMPARE_5");
 	public static final String TF_MENU_DISPLAY        = getString("TF_MENU_DISPLAY");
 
-	public static final String TF_MENU_DISPLAY_SOURCE	= getString("TF_MENU_DISPLAY_SOURCE");
-	public static final String TF_MENU_DISPLAY_FONT	= getString("TF_MENU_DISPLAY_FONT");
+    public static final String TF_MENU_DISPLAY_FONT	= getString("TF_MENU_DISPLAY_FONT");
 	public static final String TF_MENU_DISPLAY_ADVANCE	= getString("TF_MENU_DISPLAY_ADVANCE");
 	public static final String TF_MENU_DISPLAY_MNEMONIC	= getString("TF_MENU_DISPLAY_MNEMONIC");
 
@@ -93,23 +91,14 @@ public class OStrings
 	public static final String TF_MENU_VERSION_HELP		= getString("TF_MENU_VERSION_HELP");
 	
 	public static final String TF_TITLE		= getString("TF_TITLE");
-	
-	public static final String TF_SELECT_LANGUAGE_TITLE	= getString("TF_SELECT_LANGUAGE_TITLE");
-	public static final String TF_SELECT_LANGUAGE	= getString("TF_SELECT_LANGUAGE");
-	public static final String TF_SELECT_LANGUAGE_FAILED	= getString("TF_SELECT_LANGUAGE_FAILED");
-	public static final String TF_TM_LOAD_ERROR	= getString("TF_TM_LOAD_ERROR");
+
+    public static final String TF_TM_LOAD_ERROR	= getString("TF_TM_LOAD_ERROR");
 	public static final String TF_LOAD_ERROR	= getString("TF_LOAD_ERROR");
 	public static final String TF_COMPILE_ERROR	= getString("TF_COMPILE_ERROR");
 
-	public static final String TF_BUTTON_OK		= getString("BUTTON_OK");
-	public static final String TF_BUTTON_CANCEL	= getString("BUTTON_CANCEL");
-	
-	public static final String TF_FUZZY_CURRENT_PROJECT	= getString("TF_FUZZY_CURRENT_PROJECT");
-	public static final String TF_PSEUDOTRANS_RUSURE_TITLE	= getString("TF_PSEUDOTRANS_RUSURE_TITLE");
+    public static final String TF_PSEUDOTRANS_RUSURE_TITLE	= getString("TF_PSEUDOTRANS_RUSURE_TITLE");
 	public static final String TF_PSEUDOTRANS_RUSURE	= getString("TF_PSEUDOTRANS_RUSURE");
-	public static final String TF_NUM_FUZZY_MATCHES	= getString("TF_NUM_FUZZY_MATCHES");
-	public static final String TF_NUM_FUZZY_MATCH	= getString("TF_NUM_FUZZY_MATCH");
-	public static final String TF_NOTICE_BAD_TAGS	= getString("TF_NOTICE_BAD_TAGS");
+    public static final String TF_NOTICE_BAD_TAGS	= getString("TF_NOTICE_BAD_TAGS");
 	public static final String TF_NOTICE_OK_TAGS	= getString("TF_NOTICE_OK_TAGS");
 	public static final String TF_NOTICE_TITLE_TAGS	= getString("TF_NOTICE_TITLE_TAGS");
 
@@ -122,12 +111,10 @@ public class OStrings
 	public static final String TF_SELECT_SOURCE_FONT	= getString("TF_SELECT_SOURCE_FONT");
 	public static final String TF_SELECT_FONTSIZE		= getString("TF_SELECT_FONTSIZE");
 	public static final String TF_SELECT_FONTS_TITLE	= getString("TF_SELECT_FONTS_TITLE");
-	public static final String TF_BAD_LOCATION_POSSIBLE_CORRUPTION = getString("TF_BAD_LOCATION_POSSIBLE_CORRUPTION");
-	public static final String TF_LOADING_FILE         = getString("TF_LOADING_FILE");
+    public static final String TF_LOADING_FILE         = getString("TF_LOADING_FILE");
 	public static final String TF_MATCH_VIEWER_TITLE   = getString("TF_MATCH_VIEWER_TITLE");
-	public static final String TF_NO_MORE_UNTRANSLATED = getString("TF_NO_MORE_UNTRANSLATED");
-	
-	// ContextFrame
+
+    // ContextFrame
 	public static final String CF_SEARCH_RESULTS_SRC = getString("CF_SEARCH_RESULTS_SRC");
 	public static final String CF_SEARCH_RESULTS_LOC = getString("CF_SEARCH_RESULTS_LOC");
 	public static final String CF_BUTTON_CLOSE	= getString("BUTTON_CLOSE");
@@ -164,19 +151,13 @@ public class OStrings
 	public static final String CT_LOADING_PROJECT	= getString("CT_LOADING_PROJECT");
 	public static final String CT_LOADING_INDEX	= getString("CT_LOADING_INDEX");
 	public static final String CT_LOADING_GLOSSARY	= getString("CT_LOADING_GLOSSARY");
-	public static final String CT_LOADING_FUZZY	= getString("CT_LOADING_FUZZY");
-	public static final String CT_CANCEL_LOAD = getString("CT_CANCEL_LOAD");
+    public static final String CT_CANCEL_LOAD = getString("CT_CANCEL_LOAD");
 	public static final String CT_LOADING_WORDCOUNT	= getString("CT_LOADING_WORDCOUNT");
 	public static final String CT_ERROR_SAVING_PROJ	= getString("CT_ERROR_SAVING_PROJ");
-	public static final String CT_ERROR_WRITING_NEARLOG	= getString("CT_ERROR_WRITING_NEARLOG");
-	public static final String CT_ERROR_CREATE	= getString("CT_ERROR_CREATE");
+    public static final String CT_ERROR_CREATE	= getString("CT_ERROR_CREATE");
 	public static final String CT_FATAL_ERROR	= getString("CT_FATAL_ERROR");
 	public static final String CT_DONT_RECOGNIZE_GLOS_FILE = getString("CT_DONT_RECOGNIZE_GLOS_FILE");
-	public static final String CT_ERROR_LOADING_HANDLER_FILE = getString("CT_ERROR_LOADING_HANDLER_FILE");
-	public static final String CT_ERROR_FINDING_HANDLER_FILE = getString("CT_ERROR_FINDING_HANDLER_FILE");
-	public static final String CT_ERROR_FINDING_IGNORE_FILE = getString("CT_ERROR_FINDING_IGNORE_FILE");
-	public static final String CT_ERROR_LOADING_IGNORE_FILE = getString("CT_ERROR_LOADING_IGNORE_FILE");
-	public static final String CT_NO_FILE_HANDLER = getString("CT_NO_FILE_HANDLER");
+    public static final String CT_NO_FILE_HANDLER = getString("CT_NO_FILE_HANDLER");
 	public static final String CT_PREF_LOAD_ERROR_MAPPINGS = getString("CT_PREF_LOAD_ERROR_MAPPINGS");
 	public static final String CT_HTMLX_MASQUERADE	= getString("CT_HTMLX_MASQUERADE");
 	public static final String CT_LOAD_FILE_MX	= getString("CT_LOAD_FILE_MX");
@@ -187,9 +168,7 @@ public class OStrings
 	
 	// ProjectProperties
 	public static final String PP_CREATE_PROJ	= getString("PP_CREATE_PROJ");
-	public static final String PP_PROJ_ROOT		= getString("PP_PROJ_ROOT");
-	public static final String PP_PROJ_INTERNAL		= getString("PP_PROJ_INTERNAL");
-	public static final String PP_SRC_ROOT		= getString("PP_SRC_ROOT");
+    public static final String PP_SRC_ROOT		= getString("PP_SRC_ROOT");
 	public static final String PP_LOC_ROOT		= getString("PP_LOC_ROOT");
 	public static final String PP_GLOS_ROOT		= getString("PP_GLOS_ROOT");
 	public static final String PP_TM_ROOT		= getString("PP_TM_ROOT");
@@ -197,9 +176,7 @@ public class OStrings
 	public static final String PP_LOC_LANG		= getString("PP_LOC_LANG");
 	public static final String PP_BUTTON_OK		= getString("BUTTON_OK");
 	public static final String PP_BUTTON_CANCEL	= getString("BUTTON_CANCEL");
-	public static final String PP_BUTTON_ADVANCED	= getString("PP_BUTTON_ADVANCED");
-	public static final String PP_PROJECT_NAME		= getString("PP_PROJECT_NAME");
-	public static final String PP_BUTTON_BROWSE_SRC		= getString("PP_BUTTON_BROWSE_SRC");
+    public static final String PP_BUTTON_BROWSE_SRC		= getString("PP_BUTTON_BROWSE_SRC");
 	public static final String PP_BUTTON_BROWSE_TAR		= getString("PP_BUTTON_BROWSE_TAR");
 	public static final String PP_BUTTON_BROWSE_GL		= getString("PP_BUTTON_BROWSE_GL");
 	public static final String PP_BUTTON_BROWSE_TM		= getString("PP_BUTTON_BROWSE_TM");
@@ -212,16 +189,10 @@ public class OStrings
 	public static final String PP_MESSAGE_BADPROJ		= getString("PP_MESSAGE_BADPROJ");
 	public static final String PP_MESSAGE_CONFIGPROJ	= getString("PP_MESSAGE_CONFIGPROJ");
 	public static final String PP_SAVE_PROJECT_FILE		= getString("PP_SAVE_PROJECT_FILE");
-	public static final String PP_DEFAULT_PROJECT_NAME	= getString("PP_DEFAULT_PROJECT_NAME");
-	
-	// LogDisplay
-	public static final String LD_WARNING		= getString("LD_WARNING");
-	public static final String LD_ERROR		= getString("LD_ERROR");
-	
-	// HandlerMaster
-	public static final String HM_MISSING_DIR = getString("HM_MISSING_DIR");
-	
-	// ProjectFileChooser
+
+    public static final String LD_ERROR		= getString("LD_ERROR");
+
+    // ProjectFileChooser
 	public static final String PFC_OMEGAT_PROJECT = getString("PFC_OMEGAT_PROJECT");
 	
 	// NewFileChooser

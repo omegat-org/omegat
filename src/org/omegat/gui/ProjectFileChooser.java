@@ -28,27 +28,8 @@ import java.io.File;
 
 public class ProjectFileChooser extends JFileChooser
 {
-	public ProjectFileChooser(String startDirectory)
-	{
-		setFileView(new ProjectFileView());
-		setFileSelectionMode(DIRECTORIES_ONLY);
-		setMultiSelectionEnabled(false);
-		setFileHidingEnabled(true);
-		if ((startDirectory != null) && (startDirectory.equals("") == false))	// NOI18N
-		{
-			// set current directory
-			File dir = new File(startDirectory);
-			if (dir.exists() && dir.isDirectory())
-				setCurrentDirectory(dir);
-		}
-	}
 
-	protected void acceptedProjectDir()
-	{
-		approveSelection();
-	}
-
-	public void approveSelection()
+    public void approveSelection()
 	{
 		// user hit 'open' button - redirect command to open project or
 		//  recurse into lower directory

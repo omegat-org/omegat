@@ -35,16 +35,8 @@ import java.util.HashMap;
  */
 public class StringFreqData 
 {
-	public StringFreqData()
-	{
-		m_map = new HashMap();
-		m_list = new ArrayList();
-		m_addCounter = 0;
-		m_subCounter = 0;
-		m_initCap = -1;
-	}
 
-	public StringFreqData(int initialCapacity)
+    public StringFreqData(int initialCapacity)
 	{
 		m_map = new HashMap(initialCapacity);
 		m_list = new ArrayList(initialCapacity/2);
@@ -154,29 +146,13 @@ public class StringFreqData
 			return pos;
 	}
 
-	public int getCount(long key)
-	{
-		Long k = new Long(key);
-		StringData sd = (StringData) m_map.get(k);
-		if (sd == null)
-			return 0;
-		else
-			return sd.getCount();
-	}
-
-	public StringData getObj(long key)
+    public StringData getObj(long key)
 	{
 		Long k = new Long(key);
 		return (StringData) m_map.get(k);
 	}
 
-	public StringData getN(int pos)
-	{
-		return (StringData) m_list.get(pos);
-	}
-
-	public int len()	{ return m_list.size();			}
-	public void reset()	
+    public void reset()
 	{ 
 		m_list.clear(); 
 		m_map.clear();	

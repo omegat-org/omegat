@@ -41,27 +41,8 @@ public class HandlerMaster
 	{
 		m_handlerList.add(hand);
 	}
-	
-	public FileHandler findHandler(String type)
-	{
-		FileHandler fh = null;
-		int i;
-		for (i=0; i<m_handlerList.size(); i++)
-		{
-			fh = (FileHandler) m_handlerList.get(i);
-			if (type.compareToIgnoreCase(fh.type()) == 0)
-			{
-				break;
-			}
-		}
-		if (i >= m_handlerList.size())
-		{
-			fh = null;
-		}
-		return fh;
-	}
 
-	public FileHandler findPreferredHandler(String ext)
+    public FileHandler findPreferredHandler(String ext)
 	{
 		FileHandler fh = null;
 		int i;
@@ -95,9 +76,7 @@ public class HandlerMaster
 		addHandler(new OOFileHandler());
 	}
 
-	public ArrayList getHandlerList()	{ return m_handlerList;	}
-
-	ArrayList	m_handlerList;
+    ArrayList	m_handlerList;
 
 ////////////////////////////////////////////////////////////
 

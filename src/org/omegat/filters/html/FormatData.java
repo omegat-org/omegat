@@ -47,17 +47,7 @@ public class FormatData
 		m_orig.append(data);
 	}
 
-	public void setDisplay(LBuffer data)
-	{
-		m_display.reset();
-		if (m_isTag)
-			m_display.append('<');
-		if (m_isCloseTag)
-			m_display.append('/');
-		m_display.append(data);
-	}
-
-	public void finalize()
+    public void finalize()
 	{
 		// finish tags by adding trailing '>'
 		if (!m_isTag)
@@ -72,18 +62,7 @@ public class FormatData
 		m_isFinalized = true;
 	}
 
-	public void appendOrig(String s)
-	{
-		if ((m_isTag) && (m_orig.size() == 0))
-		{
-			m_orig.append('<');
-			if (m_isCloseTag)
-				m_orig.append('/');
-		}
-		m_orig.append(s);
-	}
-
-	public void appendOrig(char c)
+    public void appendOrig(char c)
 	{
 		if ((m_isTag) && (m_orig.size() == 0))
 		{
@@ -94,18 +73,7 @@ public class FormatData
 		m_orig.append(c);
 	}
 
-	public void appendDisplay(String s)
-	{
-		if ((m_isTag) && (m_display.size() == 0))
-		{
-			m_display.append('<');
-			if (m_isCloseTag)
-				m_display.append('/');
-		}
-		m_display.append(s);
-	}
-
-	public void appendDisplay(char c)
+    public void appendDisplay(char c)
 	{
 		if ((m_isTag) && (m_display.size() == 0))
 		{

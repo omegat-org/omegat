@@ -31,11 +31,9 @@ public class Token
 	public Token(String _text, boolean _hasText, int _offset)
 	{
 		text = _text;
-		hasText = _hasText;
-		offset = _offset;
+        offset = _offset;
 	}
 	public String text;
-	public boolean hasText;
-	public int offset;
+    public int offset;
 };
 

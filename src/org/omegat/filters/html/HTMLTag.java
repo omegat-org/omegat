@@ -199,8 +199,7 @@ public class HTMLTag
 	public void setPartner(boolean x)	{ m_partner = x;	}
 
 	public static final int		TAG_NO_IDENT	= 2;
-	public static final int		TAG_STRUCTURAL	= 1;
-	public static final int		TAG_FORMAT	= 2;
+    public static final int		TAG_FORMAT	= 2;
 	
 	private boolean		m_close = false;
 	private boolean		m_partner = false;

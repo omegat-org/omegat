@@ -186,8 +186,7 @@ public class HTMLFileHandler extends FileHandler
 		m_preNT.clear();
 		m_postNT.clear();
 		m_fdList.clear();
-		m_ec = 0;
-		m_ws = false;
+        m_ws = false;
 		m_pre = false;
 		m_hasText = false;
 	}
@@ -760,9 +759,8 @@ public class HTMLFileHandler extends FileHandler
 	 */
 	class UTF8Writer extends StringWriter
 	{
-		
-		private String filename;
-		private Writer out;
+
+        private Writer out;
 		
 		public UTF8Writer(Writer out)
 		{
@@ -816,8 +814,7 @@ public class HTMLFileHandler extends FileHandler
 	private LinkedList	m_fdList;
 	private LinkedList	m_postNT;
 
-	private int		m_ec = 0;
-	private boolean		m_ws = false;
+    private boolean		m_ws = false;
 	private boolean		m_pre = false;
 	private boolean 	m_hasText = false;
 

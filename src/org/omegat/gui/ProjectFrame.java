@@ -81,12 +81,7 @@ public class ProjectFrame extends JFrame
 		buildDisplay();
 	}
 
-	public void doClose()
-	{
-		hide();
-	}
-
-	public void addFile(String name, int entryNum)
+    public void addFile(String name, int entryNum)
 	{
 		m_nameList.add(name);
 		m_offsetList.add(new Integer(entryNum));

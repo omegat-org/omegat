@@ -23,22 +23,15 @@
 
 	public class OConsts
 	{
-	public static final String HANDLER_LIST		= "file_extension_mapping";			// NOI18N
-	public static final String IGNORE_LIST		= "ignore_file_list";				// NOI18N
 
-	// project file consts
+        // project file consts
 	public static final String PROJ_EXTENSION	= ".project";						// NOI18N
 	public static final String PROJ_FILENAME	= "omegat" + PROJ_EXTENSION;		// NOI18N
 	public static final String PROJ_PREFERENCE	= "omegat.prefs";					// NOI18N
 	public static final String PROJ_CUR_VERSION = "1.0";							// NOI18N
 
-	// tm file consts
-	public static final String TM_EXTENSION	= ".tm";								// NOI18N
-	public static final String TM_FILE_IDENT = "omegat-tm";							// NOI18N
-	public static final int TM_CUR_VERSION	= 1;									// NOI18N
-	public static final String TMX_EXTENSION	= ".tmx";							// NOI18N
-	public static final String TAB_EXTENSION	= ".tab";							// NOI18N
-	public static final String TMW_EXTENSION	= ".wf";	// for wordfast			// NOI18N
+        public static final String TMX_EXTENSION	= ".tmx";							// NOI18N
+        public static final String TMW_EXTENSION	= ".wf";	// for wordfast			// NOI18N
 
 	// help
 	public static final String HELP_HOME		= "en_OmegaT.html";					// NOI18N
@@ -51,11 +44,9 @@
 	// status file consts
 	public static final String STATUS_EXTENSION	= "project_save.tmx";				// NOI18N
 	public static final String STATUS_RECOVER_EXTENSION	= ".recover";				// NOI18N
-	public static final String STATUS_FILE_IDENT = "omegat-status";					// NOI18N
-	public static final String BACKUP_EXTENSION	= ".backup";						// NOI18N
-	public static final int STATUS_CUR_VERSION = 2;									// NOI18N
+        public static final String BACKUP_EXTENSION	= ".backup";						// NOI18N
 
-	public static final String DEFAULT_SRC			= "source";						// NOI18N
+        public static final String DEFAULT_SRC			= "source";						// NOI18N
 	public static final String DEFAULT_LOC			= "target";						// NOI18N
 	public static final String DEFAULT_GLOS			= "glossary";					// NOI18N
 	public static final String DEFAULT_TM			= "tm";							// NOI18N
@@ -63,10 +54,7 @@
 
 	public static final String DEFAULT_FOLDER_MARKER	= "__DEFAULT__";			// NOI18N
 
-	public static final String UTF8_END_OF_LIST		= "_x_";						// NOI18N
-	public static final String ERR_LOG_FILE			= "err.txt";					// NOI18N
-
-	public static final String WORD_CNT_FILE_EXT		= "word_counts";			// NOI18N
+        public static final String WORD_CNT_FILE_EXT		= "word_counts";			// NOI18N
 
 	public static final double NEAR_THRESH		= 0.6;								// NOI18N
 	public static final double PAIR_THRESH		= 0.6;								// NOI18N
@@ -95,9 +83,8 @@
 	public static final String PREF_FILE_MAPPING_N		= "file_mapping";			// NOI18N
 
 	public static final String PREF_SEARCH_DIR	= "search_dir";						// NOI18N
-	public static final String PREF_HILITE_COLOR	= "hilite_color";				// NOI18N
 
-	public static final String SW_DIR_CB_CHECKED_CMD	= "dir_ck";					// NOI18N
+        public static final String SW_DIR_CB_CHECKED_CMD	= "dir_ck";					// NOI18N
 
 	public static final int		ST_MAX_SEARCH_RESULTS	= 50;
 

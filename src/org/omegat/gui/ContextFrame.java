@@ -97,22 +97,9 @@ public class ContextFrame extends JFrame
 		dispose();
 	}
 
-	class QueryComparator implements Comparator
+    class QueryData
 	{
-		public int compare(Object o1, Object o2)
-		{
-			int q1 = ((QueryData) o1).entryNum;
-			int q2 = ((QueryData) o2).entryNum;
-			return (q1 - q2);
-		}
-	}
-
-	class QueryData 
-	{
-		public String src;
-		public String xl;
-		public int entryNum;
-	}
+    }
 	
 	public void displayStringList(ArrayList stringList, String searchTerms)
 	{
@@ -146,75 +133,7 @@ public class ContextFrame extends JFrame
 		m_editorPane.setText(out);
 	}
 
-	public void displayStringList(TreeMap stringList, String searchTerms)
-	{
-		
-		Object obj;
-		setTitle(m_searchResults + " " + searchTerms);							// NOI18N
-		String out;
-		String s;
-		int entryNum;
-		int ps;
-		ListIterator it;
-		String xl;
-		TreeMap list = (TreeMap) stringList.clone();
-		TreeMap queryMap = new TreeMap(new QueryComparator());
-		LinkedList parentList;
-		StringEntry strEntry;
-		SourceTextEntry srcTextEntry;
-		QueryData qd;
-		while (list.size() > 0)
-		{
-			obj = list.firstKey();
-			strEntry = (StringEntry) list.remove(obj);
-			if (strEntry == null)
-			{
-				continue;
-			}
-			parentList = strEntry.getParentList();
-			if (parentList == null)
-			{
-				continue;
-			}
-
-			it = parentList.listIterator();
-			s = strEntry.getSrcText();
-			while (it.hasNext())
-			{
-				srcTextEntry = (SourceTextEntry) it.next();
-				qd = new QueryData();
-				qd.src = strEntry.getSrcText();
-				qd.xl = strEntry.getTrans();
-				qd.entryNum = srcTextEntry.entryNum() + 1;
-				queryMap.put(qd, qd);
-			}
-		}
-
-		out = "<table BORDER COLS=3 WIDTH=\"100%\" NOSAVE>";					// NOI18N
-		while (queryMap.size() > 0)
-		{
-			obj = queryMap.firstKey();
-			queryMap.remove(obj);
-			qd = (QueryData) obj;
-			{
-				out += "<tr>";													// NOI18N
-				out += "<td><a href=\"" + qd.entryNum + "\">";					// NOI18N
-				out += qd.entryNum + "</a></td>";								// NOI18N
-				out += "<td>" + qd.src + " </td>";								// NOI18N
-				if (qd.xl == null)
-					s = "";														// NOI18N
-				else 
-					s = qd.xl;
-				out += "<td>" + s + "</td>";									// NOI18N
-				out += "</tr>";													// NOI18N
-			}
-		}
-		out += "</table>";														// NOI18N
-		m_editorPane.setContentType("text/html");								// NOI18N
-		m_editorPane.setText(out);
-	}
-	
-	private JEditorPane m_editorPane;
+    private JEditorPane m_editorPane;
 	private JButton		m_closeButton;
 	private String m_searchResults;
 	private boolean	m_srcLang;

@@ -535,23 +535,10 @@ public class SearchThread extends Thread
 
 		protected JFrame m_win;
 	};
-	
-	class MQueryComparator implements Comparator
+
+    class MQueryData
 	{
-		public int compare(Object o1, Object o2)
-		{
-			int q1 = ((MQueryData) o1).entryNum;
-			int q2 = ((MQueryData) o2).entryNum;
-			return (q1 - q2);
-		}
-	}
-	
-	class MQueryData 
-	{
-		public String src;
-		public String xl;
-		public int entryNum;
-	}
+    }
 	
 	/////////////////////////////////////////////////////////////////
 	// interface used by FileHandlers
@@ -582,10 +569,7 @@ public class SearchThread extends Thread
 
 	protected int			m_numFinds;
 
-	// this contains the results of the current search
-	protected StringBuffer	m_results;
-
-	protected ArrayList		m_extList;
+    protected ArrayList		m_extList;
 	protected ArrayList		m_extMapList;
 };
 

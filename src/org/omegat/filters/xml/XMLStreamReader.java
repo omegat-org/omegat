@@ -37,8 +37,7 @@ public class XMLStreamReader
 	{
 		m_pos = -1;
 		m_stringStream = "";	// NOI18N
-		m_charMark = -1;
-		m_charStack = new ArrayList();
+        m_charStack = new ArrayList();
 		m_charCache = new ArrayList();
 		m_ignoreReturn = false;
 		m_killEmptyBlocks = false;
@@ -48,14 +47,7 @@ public class XMLStreamReader
 		m_headBlock = null;
 	}
 
-	// set the stream that tags and text are read from
-	public void setStream(String str)
-	{
-		m_pos = 0;
-		m_stringStream = str;
-	}
-
-	public void setStream(File name)
+    public void setStream(File name)
 		throws FileNotFoundException, UnsupportedEncodingException,
 				IOException
 	{
@@ -180,17 +172,7 @@ public class XMLStreamReader
 		m_killEmptyBlocks = kill;
 	}
 
-	public void ignoreReturn(boolean ignore)
-	{
-		m_ignoreReturn = ignore;
-	}
-
-	public void ignoreWhiteSpace(boolean ignore)
-	{
-		m_ignoreWhiteSpace = ignore;
-	}
-
-	public void breakOnWhitespace(boolean brk)
+    public void breakOnWhitespace(boolean brk)
 	{
 		m_breakWhitespace = brk;
 	}
@@ -1123,51 +1105,7 @@ public class XMLStreamReader
 		return out.toString();
 	}
 
-	// return the list of blocks between the specified block and
-	//  its matching close (or the end of list) within the provided list
-	//  (includes open block with specified name, and corresponding
-	//  close block)
-	// if the provided block is not an empty tag, or if there are
-	//  no elements between open and close, a null is returned
-	public static ArrayList closeBlock(String name, ArrayList blockList, 
-				int offset)
-	{
-		if (blockList == null)
-			return null;
-
-		ArrayList result = null;
-		XMLBlock blk = null;
-		
-		int i;
-		for (i=offset; i<blockList.size(); i++)
-		{
-			blk = (XMLBlock) blockList.get(i);
-			if (blk.isTag() && blk.getTagName().equals(name))
-			{
-				if (blk.isEmpty())
-					return null;
-				result = new ArrayList(32);
-				result.add(blk);
-				break;
-			}
-		}
-		for (i++; i<blockList.size(); i++)
-		{
-			blk = (XMLBlock) blockList.get(i);
-			result.add(blk);
-			if (blk.isTag() && blk.getTagName().equals(name) && blk.isClose())
-			{
-				break;
-			}
-		}
-
-		if ((result == null) || (result.size() == 0))
-			result = null;
-
-		return result;
-	}
-
-	public ArrayList closeBlock(XMLBlock block) throws ParseException
+    public ArrayList closeBlock(XMLBlock block) throws ParseException
 	{
 		return closeBlock(block, false);
 	}
@@ -1368,39 +1306,7 @@ public class XMLStreamReader
 	
 	///////////////////////////////////////////////////////////////
 
-	public static double getSingleValueDouble(ArrayList lst, double defaultVal)
-	{
-		if ((lst == null) || (lst.size() != 3))
-			return defaultVal;
-		try 
-		{
-			String str = ((XMLBlock) lst.get(1)).getText();
-			double val = Double.valueOf(str).doubleValue();
-			return val;
-		}
-		catch (NumberFormatException e1)
-		{
-			return defaultVal;
-		}
-	}
-	
-	public static int getSingleValueInt(ArrayList lst, int defaultVal)
-	{
-		if ((lst == null) || (lst.size() != 3))
-			return defaultVal;
-		try 
-		{
-			String str = ((XMLBlock) lst.get(1)).getText();
-			int val = Integer.decode(str).intValue();
-			return val;
-		}
-		catch (NumberFormatException e1)
-		{
-			return defaultVal;
-		}
-	}
-	
-	///////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////
 
 	protected BufferedReader	m_bufferedReader;
 	protected String			m_stringStream;
@@ -1408,8 +1314,7 @@ public class XMLStreamReader
 	protected XMLBlock			m_headBlock;
 
 	protected int		m_pos;
-	protected int		m_charMark;
-	protected ArrayList	m_charStack;
+    protected ArrayList	m_charStack;
 	protected ArrayList	m_charCache;
 	protected boolean	m_ignoreReturn; //swallow 0x0a?
 	protected boolean	m_killEmptyBlocks;

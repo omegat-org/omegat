@@ -219,75 +219,7 @@ System.out.println("mapping extension '"+str.substring(0,pos)+"' to '"+str.subst
 		}
 	}
 
-	public static void mergeTmxFiles(File outFile, File rootDir,
-			String srcLang, String tarLang) throws IOException, ParseException
-	{
-		// first, write preamble
-		FileOutputStream fos = new FileOutputStream(outFile);
-		OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF8");			// NOI18N
-		BufferedWriter out = new BufferedWriter(osw);
-
-		String s;
-		String t;
-		int cnt;
-		StringEntry se;
-		
-		String str = "<?xml version=\"1.0\"?>\n";								// NOI18N
-		str += "<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">\n";							// NOI18N
-		str += "<tmx version=\"1.1\">\n";										// NOI18N
-		str += "  <header\n";													// NOI18N
-		str += "    creationtool=\"org.omegat.OmegaT\"\n";						// NOI18N
-		str += "    creationtoolversion=\"1\"\n";								// NOI18N
-		str += "    segtype=\"paragraph\"\n";									// NOI18N
-		str += "    o-tmf=\"OmegaT TMX\"\n";									// NOI18N
-		str += "    adminlang=\"EN-US\"\n";										// NOI18N
-		str += "    srclang=\"" + srcLang + "\"\n";								// NOI18N
-		str += "    datatype=\"plaintext\"\n";									// NOI18N
-		str += "  >\n";															// NOI18N
-		str += "  </header>\n";													// NOI18N
-		str += "  <body>\n";													// NOI18N
-		out.write(str, 0, str.length());
-	
-		// write meat of file
-		TMXReader tmx = new TMXReader();
-		ArrayList lst = new ArrayList();
-		buildFileList(lst, rootDir, true);
-		for (int i=0; i<lst.size(); i++)
-		{
-			tmx.loadFile((String) lst.get(i), srcLang, tarLang);
-			cnt = tmx.numSegments();
-			for (int j=0; j<cnt; j++)
-			{
-				s = tmx.getSourceSegment(j);
-				t = tmx.getTargetSegment(j);
-				se = CommandThread.core.getStringEntry(j);
-				s = XMLStreamReader.makeValidXML(se.getSrcText(), null);
-				t = XMLStreamReader.makeValidXML(se.getTrans(), null);
-				if ((s.equals("") == false) && (t.equals("") == false))			// NOI18N
-				{
-					s = XMLStreamReader.makeValidXML(s, null);
-					t = XMLStreamReader.makeValidXML(t, null);
-					str =  "    <tu>\n";										// NOI18N
-					str += "      <tuv lang=\"" + srcLang + "\">\n";			// NOI18N
-					str += "        <seg>" + s + "</seg>\n";					// NOI18N
-					str += "      </tuv>\n";									// NOI18N
-					str += "      <tuv lang=\"" + tarLang + "\">\n";			// NOI18N
-					str += "        <seg>" + t + "</seg>\n";					// NOI18N
-					str += "      </tuv>\n";									// NOI18N
-					str += "    </tu>\n";										// NOI18N
-					out.write(str, 0, str.length());
-				}
-			}
-		}
-
-		// finish off file
-		str =  "  </body>\n";													// NOI18N
-		str += "</tmx>\n";														// NOI18N
-		out.write(str, 0, str.length());
-		out.close();
-	}
-
-	// returns a list of all files under the root directory
+    // returns a list of all files under the root directory
 	//  by absolute path
 	public static void buildDirList(ArrayList lst, File rootDir)
 	{
@@ -461,15 +393,7 @@ System.out.println("mapping extension '"+str.substring(0,pos)+"' to '"+str.subst
 		return numWords;
 	}
 
-	// for FileHandlers in test mode
-	public static void dumpEntry(String val, String file)
-	{
-		System.out.println(" val: " + val);										// NOI18N
-		System.out.println("file: " + file);									// NOI18N
-		System.out.println("");													// NOI18N
-	}
-
-	public static String[] getFontNames()
+    public static String[] getFontNames()
 	{
 		GraphicsEnvironment graphics;
 		graphics = GraphicsEnvironment.getLocalGraphicsEnvironment();

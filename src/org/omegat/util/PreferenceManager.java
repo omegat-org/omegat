@@ -95,17 +95,8 @@ public class PreferenceManager
 			System.out.println(OStrings.getString("PM_ERROR_SAVE") + e);
 		}
 	}
-	
-	public synchronized void reset()
-	{
-		m_loaded = false;
-		m_changed = false;
-		m_preferenceMap.clear();
-		m_valList.clear();
-		m_nameList.clear();
-	}
-	
-	protected void doLoad() 
+
+    protected void doLoad()
 	{
 		try
 		{

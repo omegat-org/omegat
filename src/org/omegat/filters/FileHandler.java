@@ -50,12 +50,7 @@ public abstract class FileHandler
 		return m_preferredExtension;
 	}
 
-	public void setTestMode(boolean state)
-	{
-		m_testMode = state;
-	}
-
-	// when mode is set, output is now written and strings are passed
+    // when mode is set, output is now written and strings are passed
 	//	to  supplied search thread
 	public void setSearchMode(boolean mode, SearchThread search)
 	{

@@ -162,25 +162,8 @@ public class XMLFileHandler extends FileHandler
 		}
 		return outBuf.toString();
 	}
-	
-	protected void initFormatTagList()
-	{
-		// there are no default format tags in XML - all subclasses
-		//	will need to overwrite this function
 
-		// format tags include those such as <bold>, <italic>, <font>, etc.
-		m_formatList.clear();
-
-		// verbatum tags indicate that all of the text between open and
-		//	close tags should be copied into the entry verbatum.  this
-		//	system was created to support OOo's habit of inserting 
-		//	footnote data w/in logical text segments and including 
-		//	breaking tags in this footnote data, thus forcing breakage 
-		//	of the segment at very awkward places
-		m_verbatumList.clear();
-	}
-	
-	public void doLoad() throws IOException
+    public void doLoad() throws IOException
 	{
 		int i;
 		String s;
@@ -451,9 +434,5 @@ public class XMLFileHandler extends FileHandler
 	protected boolean	m_compressWhitespace;
 	protected boolean	m_breakWhitespace;
 	protected XMLStreamFilter	m_streamFilter = null;
-
-	protected int		m_ec = 0;
-	protected boolean		m_ws = false;
-	protected boolean 	m_hasText = false;
 
 }

@@ -33,27 +33,7 @@ public class LBuffer {
 		m_size = 0;
 	}
 
-	public LBuffer(char[] str)
-	{
-		int sz = PowerOfTwo(str.length);
-		if (sz < 4)
-			sz = 4;
-		m_buf = new char[sz];
-		m_size = str.length;
-		System.arraycopy(str, 0, m_buf, 0, str.length);
-	}
-
-	public LBuffer(String str)
-	{
-		int sz = PowerOfTwo(str.length());
-		if (sz < 4)
-			sz = 4;
-		m_buf = new char[sz];
-		m_size = str.length();
-		str.getChars(0, str.length(), m_buf, 0);
-	}
-
-	public void append(LBuffer buf)
+    public void append(LBuffer buf)
 	{
 		if (buf.length() + m_size > m_buf.length)
 			setSize(buf.length() + m_size);
@@ -69,16 +49,8 @@ public class LBuffer {
 		str.getChars(0, str.length(), m_buf, m_size);
 		m_size += str.length();
 	}
-	
-	public void append(char[] str)
-	{
-		if (str.length + m_size > m_buf.length)
-			setSize(str.length + m_size);
-		System.arraycopy(str, 0, m_buf, m_size, str.length);
-		m_size += str.length;
-	}
 
-	public void append(char c)
+    public void append(char c)
 	{
 		if (m_size + 1 > m_buf.length)
 			setSize(m_size + 1);
@@ -106,18 +78,7 @@ public class LBuffer {
 		return true;
 	}
 
-	public boolean isEqual(String str)
-	{
-		if (str.length() != m_size)
-			return false;
-		else 
-		{
-			String s = new String(m_buf, 0, m_size);
-			return (str.compareTo(s) == 0);
-		}
-	}
-
-	public boolean isEqualIgnoreCase(String str)
+    public boolean isEqualIgnoreCase(String str)
 	{
 		if (str.length() != m_size)
 			return false;
@@ -138,15 +99,7 @@ public class LBuffer {
 		append(Integer.toString(x));
 	}
 
-	public void appendDouble(double x, int digits)
-	{
-		DecimalFormat nf = new DecimalFormat();
-		nf.setMaximumFractionDigits(2);
-		nf.setMinimumFractionDigits(2);
-		append(nf.format(x));
-	}
-	
-	public void setSize(int newSize)
+    public void setSize(int newSize)
 	{
 		char[] buf = null;
 		if (newSize < 0)
@@ -202,13 +155,6 @@ public class LBuffer {
 	public int size()	{ return m_size;	}
 	public char[] getBuf()	{ return m_buf;		}
 
-	public void report()
-	{
-		System.out.println("size:         " + m_size);			// NOI18N
-		System.out.println("logical size: " + m_buf.length);	// NOI18N
-		System.out.println(new String(m_buf, 0, m_size));		// NOI18N
-	}
-
-	private char[]	m_buf;
+    private char[]	m_buf;
 	private int	m_size;
 };

@@ -28,12 +28,8 @@ import org.omegat.util.OStrings;
 
 public class TextFileHandler extends FileHandler
 {
-	public TextFileHandler()
-	{
-		super("textfile", "txt");	 // NOI18N
-	}
 
-	public TextFileHandler(String type, String ext)
+    public TextFileHandler(String type, String ext)
 	{
 		super(type, ext);
 	}

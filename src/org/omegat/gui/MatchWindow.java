@@ -71,8 +71,7 @@ public class MatchWindow extends JFrame
 		});
 	}
 
-	public JTextPane getMatchPane()		{ return m_matchPane;	}
-	// copy match and glos buffers to display
+    // copy match and glos buffers to display
 	public void updateGlossaryText()
 	{
 		m_glosPane.setText(m_glosDisplay);

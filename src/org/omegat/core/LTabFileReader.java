@@ -35,36 +35,7 @@ public class LTabFileReader
 		m_line = new ArrayList();
 	}
 
-	public void write(String file) throws IOException
-	{
-		int i;
-		String str;
-		BufferedWriter out = new BufferedWriter(new FileWriter(file));
-		for (i=0; i<m_line.size(); i++)
-		{
-			str = (String) m_line.get(i);
-			out.write(str, 0, str.length());
-			out.newLine();
-		}
-		out.close();
-	}
-
-	public void reset()
-	{
-		m_line.clear();
-	}
-
-	public void addLine(String str)
-	{
-		m_line.add(str);
-	}
-
-	public void load(File file) throws IOException
-	{
-		load(file.getAbsolutePath());
-	}
-
-	public void load(String file) throws IOException
+    public void load(String file) throws IOException
 	{
 		String s;
 		String z;
@@ -140,17 +111,6 @@ public class LTabFileReader
 		return m_line.size();
 	}
 
-	public int numCols(int row)
-	{
-		if (row < m_line.size())
-		{
-			ArrayList tokenList = (ArrayList) m_line.get(row);
-			return tokenList.size();
-		}
-		else 
-			return 0;
-	}
-
-	private ArrayList	m_line;
+    private ArrayList	m_line;
 
 }

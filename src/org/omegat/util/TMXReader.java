@@ -31,16 +31,8 @@ import java.util.ArrayList;
 
 public class TMXReader
 {
-	public TMXReader()
-	{
-		m_reader = new XMLStreamReader();
-		m_reader.killEmptyBlocks(true);
-		m_encoding = "UTF-8";													// NOI18N
-		m_srcList = new ArrayList(512);
-		m_tarList = new ArrayList(512);
-	}
 
-	// to allow specification of alternative encodings (i.e. wordfast)
+    // to allow specification of alternative encodings (i.e. wordfast)
 	public TMXReader(String encoding)
 	{
 		m_reader = new XMLStreamReader();
@@ -199,114 +191,7 @@ public class TMXReader
 		}
 	}
 
-	// extracts first occurence of source and target lang strings from
-	//	each translation unit
-	public void loadFile(String filename, String srcLang, String targetLang)
-		throws IOException, ParseException
-	{
-		m_reader.setStream(filename, m_encoding);
-		
-		// verify valid project file
-		XMLBlock blk;
-		ArrayList lst;
-		m_tarList.clear();
-		m_srcList.clear();
-
-		// advance to tmx tag
-		if ((blk = m_reader.advanceToTag("tmx")) == null)						// NOI18N
-			throw new ParseException( MessageFormat.format(OStrings.getString("TMXR_ERROR_INVALID_TMX"), new Object[]{filename}), 0);
-
-		// check version
-		String ver = blk.getAttribute("version");								// NOI18N
-		if ((ver != null) && (ver.equals("1.1") == false))						// NOI18N
-		{
-			throw new ParseException( MessageFormat.format(OStrings.getString("TMXR_ERROR_UNSUPPORTED_TMX_VERSION"), new Object[]{ver}), 0 );
-		}
-		
-		// advance to header  
-		if ((blk=m_reader.advanceToTag("header")) == null)						// NOI18N
-			throw new ParseException( MessageFormat.format(OStrings.getString("TMXR_ERROR_INVALID_TMX"), new Object[]{filename}), 0);
-				
-		// TODO handle header specific information, as appropriate
-
-		// doesn't really matter what source lang is - go through file and
-		//	recover all translations between specified languages
-		//String src = blk.getAttribute("srclang");
-
-		// advance to body
-		if ((blk=m_reader.advanceToTag("body")) == null)						// NOI18N
-			throw new ParseException( MessageFormat.format(OStrings.getString("TMXR_ERROR_INVALID_TMX"), new Object[]{filename}), 0);
-
-		int seg = 0;
-		int ctr = 0;
-		int srcPos = -1;
-		String tarSeg;
-		String srcSeg;
-		String lang;
-		String text;
-		while (true)
-		{
-			seg++;
-			// advance to next tu element
-			if ((blk=m_reader.advanceToTag("tu")) == null)						// NOI18N
-				break;
-
-			lst = m_reader.closeBlock(blk);
-			tarSeg = null;
-			srcSeg = null;
-
-			try
-			{
-				// now go through tu block
-				// accept first non-src lang as target
-				srcPos = -1;
-				ctr = 0;
-
-				// tuv 1
-				while (ctr < lst.size())
-				{
-					while (blk.getTagName().equals("tuv") == false)				// NOI18N
-						blk = (XMLBlock) lst.get(ctr++);
-
-					lang = blk.getAttribute("lang");							// NOI18N
-					while (blk.getTagName().equals("seg") == false)				// NOI18N
-						blk = (XMLBlock) lst.get(ctr++);
-					
-					// next non-tag block is text
-					blk = (XMLBlock) lst.get(ctr++);
-					while (blk.isTag() == true)
-						blk = (XMLBlock) lst.get(ctr++);
-					text = blk.getText();
-
-					if (srcLang.regionMatches(0, lang, 0, 2))
-					{
-						srcSeg = text;
-					}
-					else if (targetLang.regionMatches(0, lang, 0, 2))
-					{
-						tarSeg = text;
-					}
-
-					if ((srcSeg != null) && (tarSeg != null))
-						break;
-				}
-			}
-			catch (IndexOutOfBoundsException e)
-			{
-				System.out.println( MessageFormat.format(OStrings.getString("TMXR_WARNING_SKIPPING_SEGMENT"), new Object[]{new Integer(seg), filename}) );
-				continue;
-			}
-
-			if ((srcSeg != null) && (tarSeg != null))
-			{
-				// found a match - save it
-				m_srcList.add(srcSeg);
-				m_tarList.add(tarSeg);
-			}
-		}
-	}
-
-	protected XMLStreamReader		m_reader;
+    protected XMLStreamReader		m_reader;
 	protected String		m_encoding;
 	protected ArrayList		m_srcList;
 	protected ArrayList		m_tarList;

@@ -45,10 +45,8 @@ import java.util.zip.Adler32;
  */
 public class CommandThread extends Thread
 {
-	protected CriticalSection		m_messageBoardCritSection;
-	protected CriticalSection		m_saveCriticalSection;
 
-	public CommandThread(TransFrame tf)
+    public CommandThread(TransFrame tf)
 	{
 		if (core != null)
 			return;
@@ -73,9 +71,6 @@ public class CommandThread extends Thread
 		m_projWin = null;
 		m_saveCount = -1;
 		m_saveThread = null;
-
-		m_messageBoardCritSection = new CriticalSection("CommandThread::MessageBoard");  // NOI18N
-		m_saveCriticalSection = new CriticalSection("CommandThread::Save");  // NOI18N
 
 		// static initialization
 		HTMLParser.initEscCharLookupTable();
@@ -764,31 +759,7 @@ public class CommandThread extends Thread
 		}
 	}
 
-	// search all translated text for an exact match to the supplied string
-	public ArrayList findAllExact(String text, boolean srcLang)
-	{
-		ArrayList foundList = new ArrayList();
-		String str = text.toLowerCase();
-		SourceTextEntry ste;
-		String segment;
-		// TODO - set locale in toLower call
-		for (int i=0; i<m_srcTextEntryArray.size(); i++)
-		{
-			ste = (SourceTextEntry) m_srcTextEntryArray.get(i);
-			if (srcLang)
-				segment = ste.getStrEntry().getSrcText();
-			else
-				segment = ste.getTranslation();
-			segment = segment.toLowerCase();
-			if (segment.indexOf(str) >= 0)
-			{
-				foundList.add(ste);
-			}
-		}
-		return foundList;
-	}
-
-	public TreeMap findAll(String tokens)
+    public TreeMap findAll(String tokens)
 	{
 		if (m_indexReady == false)
 			return null;
@@ -913,8 +884,7 @@ public class CommandThread extends Thread
 	{
 		int i;
 		int j;
-		m_ignoreNearLog = false;	// TODO identify this variable
-		if (m_config.loadExisting() == false)
+        if (m_config.loadExisting() == false)
 			return false;
 
 		// first load glossary files
@@ -1401,18 +1371,7 @@ public class CommandThread extends Thread
 		}
 	}
 
-	protected void displayWarning(String msg, Throwable e)
-	{
-		if (m_transFrame == null)
-		{
-			System.out.println(OStrings.LD_WARNING + " " + msg); // NOI18N
-		}
-		else
-			MessageRelay.uiMessageDisplayWarning(m_transFrame, msg, e);
-			
-	}
-
-	protected void displayError(String msg, Throwable e)
+    protected void displayError(String msg, Throwable e)
 	{
 		if (m_transFrame == null)
 		{
@@ -1750,12 +1709,7 @@ public class CommandThread extends Thread
 
 	public ArrayList	getTransMemory()		{ return m_tmList;		}
 
-	public StringEntry getStringEntry(int n)
-	{
-		return (StringEntry) m_strEntryList.get(n);
-	}
-
-	/////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////
 
 	private SaveThread	m_saveThread = null;
 	// count=0		save disabled
@@ -1765,8 +1719,7 @@ public class CommandThread extends Thread
 	
 	public static CommandThread core = null;
 	private ProjectProperties m_config;
-	private boolean		m_ignoreNearLog = false;
-	private boolean		m_modifiedFlag = false;
+    private boolean		m_modifiedFlag = false;
 
 	protected PreferenceManager	m_prefManager = null;
 
@@ -1792,8 +1745,7 @@ public class CommandThread extends Thread
 	private TransFrame	m_transFrame = null;
 	private ProjectFrame	m_projWin = null;
 
-	private boolean		m_glosFlag;
-	private HashMap		m_strEntryHash;	// maps text to strEntry obj
+    private HashMap		m_strEntryHash;	// maps text to strEntry obj
 	private ArrayList	m_strEntryList;
 	private ArrayList	m_srcTextEntryArray;
 	private HashMap		m_glosEntryHash;

@@ -27,8 +27,7 @@ public class IndexEntry extends Object
 {
 	public IndexEntry(String wrd)
 	{
-		m_word = wrd;
-		m_refTree = new TreeMap();
+        m_refTree = new TreeMap();
 	}
 
 	public TreeMap getTreeMap()	
@@ -43,11 +42,5 @@ public class IndexEntry extends Object
 			m_refTree.put(s, ref);
 	}
 
-	public String getWord()
-	{
-		return m_word;
-	}
-
-	private TreeMap		m_refTree;
-	private String 		m_word;
+    private TreeMap		m_refTree;
 }

@@ -51,8 +51,7 @@ public class TransFrame extends JFrame implements ActionListener
 		super();
 		m_curEntryNum = -1;
 		m_curNear = null;
-		m_numEntries = -1;
-		m_activeProj = "";														// NOI18N
+        m_activeProj = "";														// NOI18N
 		m_activeFile = "";														// NOI18N
 
 		m_shortcutKey = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
@@ -506,14 +505,8 @@ public class TransFrame extends JFrame implements ActionListener
 		doSetTitle();
 
 		m_matchViewer.setTitle(OStrings.TF_MATCH_VIEWER_TITLE);
-		m_strFuzzy = OStrings.TF_FUZZY;
-		m_strGlossaryItem = OStrings.TF_GLOSSARY;
-		m_strSrcText = OStrings.TF_SRCTEXT;
-		m_strTranslation = OStrings.TF_TRANSLATION;
-		m_strScore = OStrings.TF_SCORE;
-		m_strNone = OStrings.TF_NONE;
 
-		m_mFile.setText(OStrings.TF_MENU_FILE);
+        m_mFile.setText(OStrings.TF_MENU_FILE);
 		m_miFileOpen.setText(OStrings.TF_MENU_FILE_OPEN);
 		m_miFileCreate.setText(OStrings.TF_MENU_FILE_CREATE);
 		m_miFileClose.setText(OStrings.TF_MENU_FILE_CLOSE);
@@ -558,14 +551,7 @@ public class TransFrame extends JFrame implements ActionListener
 //		m_miToolsValidateTags.setDisplayedMnemonicIndex(9);
 	}
 
-	protected void updateMenuSelectabilityStates()
-	{
-		// if not in project, disable most of menu items
-		// otherwise, enable everything 
-		// TODO XXX update menu selectability states
-	}
-
-	///////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////
 	// command handling
 	
@@ -636,39 +622,7 @@ public class TransFrame extends JFrame implements ActionListener
 		}
 	}
 
-	public void doNextUntrans()
-	{
-		if (m_projectLoaded == false)
-			return;
-		
-		int cnt = CommandThread.core.numEntries();
-		int i;
-		for (i=1; i<cnt; i++)
-		{
-			int cur = (m_curEntryNum + i) % cnt;
-			StringEntry se = CommandThread.core.getStringEntry(cur);
-			String loc = se.getTrans();
-			String src = se.getSrcText();
-			if ((src.length() > 0) && (src.equals(loc) == true))
-			{
-				m_curEntryNum = cur;
-				if ((cur > m_xlLastEntry) || (cur < m_xlFirstEntry))
-				{
-					loadDocument();
-				}
-				commitEntry();
-				activateEntry();
-				i = -1;
-				break;
-			}
-		}
-		if (i > 0)
-		{
-			setMessageText(OStrings.TF_NO_MORE_UNTRANSLATED);
-		}
-	}
-
-	public void doNextEntry()
+    public void doNextEntry()
 	{
 		if (m_projectLoaded == false)
 			return;
@@ -731,13 +685,7 @@ public class TransFrame extends JFrame implements ActionListener
 		doReplaceEditText(se.getTrans());
 	}
 
-	// overwrite current text in edit field with source translation
-	protected void doCopySourceText()
-	{
-		doReplaceEditText(m_curEntry.getSrcText());
-	}
-
-	protected void doReplaceEditText(String text)
+    protected void doReplaceEditText(String text)
 	{
 		if (m_projectLoaded == false)
 			return;
@@ -872,7 +820,6 @@ public class TransFrame extends JFrame implements ActionListener
 
 	public void finishLoadProject()
 	{
-		m_numEntries = CommandThread.core.numEntries();
 		m_activeProj = CommandThread.core.projName();
 		m_activeFile = "";														// NOI18N
 		m_curEntryNum = 0;
@@ -1333,46 +1280,7 @@ public class TransFrame extends JFrame implements ActionListener
 		m_undo.die();
 	}
 
-	// colors text in the given document according to the text differences
-	//	versus compared-to text.  The supplied color indicates
-	//	new text and green text indicates the same word exists between
-	//	strings but has different neighbors.
-	protected void formatNearText(String text, byte[] attrList, 
-			Color uniqColor, Color textColor, JTextPane pane, 
-			int startOffset, int length) 
-	{
-		int start;
-		int end;
-
-		// reset color of text to default value
-		ArrayList tokenList = new ArrayList();
-		StaticUtils.tokenizeText(text, tokenList);
-		int numTokens = tokenList.size();
-
-		for (int i=0; i<numTokens; i++)
-		{
-			if (i == (numTokens-1))
-				end = startOffset + length;
-			else
-				end = startOffset + ((Token) tokenList.get(i+1)).offset;
-			start = startOffset + ((Token) tokenList.get(i)).offset;
-
-			pane.select(start, end);
-			SimpleAttributeSet mattr = new SimpleAttributeSet();
-			if ((attrList[i] & StringData.UNIQ) != 0)
-			{
-				StyleConstants.setForeground(mattr, uniqColor);
-			}
-			else if ((attrList[i] & StringData.PAIR) != 0)
-			{
-				StyleConstants.setForeground(mattr, Color.green);
-			}
-			StyleConstants.setItalic(mattr, true);
-			pane.setCharacterAttributes(mattr, false);
-		}
-	}
-
-	public void actionPerformed(ActionEvent evt)
+    public void actionPerformed(ActionEvent evt)
 	{
 		Object evtSrc = evt.getSource();
 		if (evtSrc instanceof JMenuItem)
@@ -2042,15 +1950,8 @@ public class TransFrame extends JFrame implements ActionListener
 	}
 
 	public boolean	isProjectLoaded()	{ return m_projectLoaded;		}
-	
-	private String m_strFuzzy;
-	private String m_strGlossaryItem;
-	private String m_strSrcText;
-	private String m_strTranslation;
-	private String m_strScore;
-	private String m_strNone;
 
-	private JMenu 		m_mFile;
+    private JMenu 		m_mFile;
 	private JMenuItem	m_miFileOpen;
 	private JMenuItem	m_miFileCreate;
 	private JMenuItem	m_miFileClose;
@@ -2080,8 +1981,7 @@ public class TransFrame extends JFrame implements ActionListener
 	private JMenu		m_mDisplay;
 	
 	private JMenu		m_mTools;
-	private JMenuItem	m_miToolsSpell;
-	private JMenuItem	m_miToolsPseudoTrans;
+    private JMenuItem	m_miToolsPseudoTrans;
 	private JMenuItem	m_miToolsValidateTags;
 	private JMenuItem	m_miToolsMergeTMX;
 
@@ -2111,11 +2011,7 @@ public class TransFrame extends JFrame implements ActionListener
 	// indicates the document is loaded and ready for processing
 	protected boolean	m_docReady = false;
 
-	// indicates the boundary of editable text in xlPane (char offsets)
-	protected int		m_lowTextLock = 0;
-	protected int		m_highTextLock = 0;
-
-	// list of text segments in current doc
+    // list of text segments in current doc
 	protected ArrayList	m_docSegList;
 
 	// make a local copy of this instead of fetching it each time
@@ -2133,25 +2029,12 @@ public class TransFrame extends JFrame implements ActionListener
 	private String	m_activeProj;
 	private int m_curEntryNum;
 	private NearString m_curNear;
-	private int m_numEntries;
-	protected String	m_curTrans = "";										// NOI18N
+    protected String	m_curTrans = "";										// NOI18N
 
 	private ProjectFrame	m_projWin = null;
 	protected MatchWindow	m_matchViewer = null;
 
 	private boolean m_projectLoaded = false;
-	
-	public static final String RED = "FF0000";									// NOI18N
-	public static final String BLUE = "000099";									// NOI18N
-	public static final String GREEN = "009900";								// NOI18N
-
-	public static final int LOADING_INDEX		= 1;
-	public static final int LOADING_GLOSSARY	= 2;
-	public static final int LOADING_FUZZY		= 3;
-	public static final int COMPUTING_FUZZY		= 4;
-	public static final int LOAD_COMPLETE		= 5;
-
-	private int	m_leftX = 350;
 
 }
 

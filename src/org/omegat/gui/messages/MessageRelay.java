@@ -32,31 +32,8 @@ import javax.swing.*;
  */
 public class MessageRelay
 {
-	public static void uiMessageDoPseudoTrans(TransFrame tf)
-	{
-		MMx msg = new MMx(tf, 1);
-		SwingUtilities.invokeLater(msg);
-	}
 
-	public static void uiMessageDoNextEntry(TransFrame tf)
-	{
-		MMx msg = new MMx(tf, 2);
-		SwingUtilities.invokeLater(msg);
-	}
-
-	public static void uiMessageDoPrevEntry(TransFrame tf)
-	{
-		MMx msg = new MMx(tf, 3);
-		SwingUtilities.invokeLater(msg);
-	}
-
-	public static void uiMessageDoRecycleTrans(TransFrame tf)
-	{
-		MMx msg = new MMx(tf, 4);
-		SwingUtilities.invokeLater(msg);
-	}
-
-	public static void uiMessageDisplayEntry(TransFrame tf)
+    public static void uiMessageDisplayEntry(TransFrame tf)
 	{
 		MMx msg = new MMx(tf, 5);
 		SwingUtilities.invokeLater(msg);
@@ -80,14 +57,7 @@ public class MessageRelay
 		SwingUtilities.invokeLater(msg);
 	}
 
-	public static void uiMessageDisplayWarning(TransFrame tf, 
-					String str, Throwable e)
-	{
-		MMx msg = new MMx(tf, 8, str, e);
-		SwingUtilities.invokeLater(msg);
-	}
-
-	public static void uiMessageDisplayError(TransFrame tf, 
+    public static void uiMessageDisplayError(TransFrame tf, 
 					String str, Throwable e)
 	{
 		MMx msg = new MMx(tf, 9, str, e);

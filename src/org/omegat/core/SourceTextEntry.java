@@ -43,9 +43,8 @@ public class SourceTextEntry
 //	public String getSrcFile()			{ return m_srcFile.filename;	}
 	public int getFirstInFile()			{ return m_srcFile.firstEntry;	}
 	public int getLastInFile()			{ return m_srcFile.lastEntry;	}
-	public ProjectFileData getProjFile()	{ return m_srcFile;			}
 
-	public StringEntry getStrEntry()	{ return m_strEntry;	}
+    public StringEntry getStrEntry()	{ return m_strEntry;	}
 	// NOTE: the uncloned reference to m_strEntry is returned on purpose
 
 	public String getSrcText()
@@ -66,8 +65,7 @@ public class SourceTextEntry
 		m_strEntry.setTranslation(t);
 	}
 
-	public void setEntryNum(int n)		{ m_entryNum = n;	}
-	public int entryNum()			{ return m_entryNum;	}
+    public int entryNum()			{ return m_entryNum;	}
 
 	private	ProjectFileData m_srcFile;
 	private StringEntry m_strEntry = null;

@@ -58,10 +58,8 @@ public class StringData
 	public long getLow()		{ return m_digestLow;	}
 
 	public long	getDigest()		{ return m_digest;	}
-	public String	getString()		{ return m_orig;	}
-	public byte	getAttr()		{ return m_attr;	}
-	public void	setAttr(byte b)		{ m_attr |= b;		}
-	public void	clearAttr(byte b)	{ m_attr &= ~b;		}
+
+    public void	clearAttr(byte b)	{ m_attr &= ~b;		}
 	public boolean	hasAttr(byte b)		{ return ((b & m_attr) != 0); }
 
 	public int	getCount()		{ return m_cnt;		}

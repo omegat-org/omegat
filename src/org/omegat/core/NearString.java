@@ -33,7 +33,6 @@ public class NearString implements Comparable
 		int i;
 		str = strEntry;
 		score = nearScore;
-		parAttr = parData;
 		attr = nearData;
 		if (projName != null)
 			proj = projName;
@@ -49,7 +48,6 @@ public class NearString implements Comparable
 
 	public StringEntry str;
 	public double score;
-	public byte[] parAttr;	// matching attributes of parent strEntry
 	public byte[] attr;	// matching attributes of near strEntry
 	public String proj = ""; // NOI18N
 }

@@ -56,16 +56,7 @@ public class SaveThread extends Thread
 	}
 
 	public void signalStop()	{ m_timeToDie = true;	}
-	
-	public void	setSaveDuration(int microSeconds)
-	{
-		// save interfal less than 15 seconds not necessary
-		if (microSeconds <= 15000)
-			m_saveDuration = 15000;
-		else 
-			m_saveDuration = microSeconds;
-	}
 
-	protected boolean	m_timeToDie;
+    protected boolean	m_timeToDie;
 	protected int		m_saveDuration;
 }

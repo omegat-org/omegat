@@ -713,35 +713,7 @@ public class HTMLParser
 		
 		return s;
 	}
-	
-	public static String convertAllToEsc(LBuffer b)
-	{
-		LBuffer buf = new LBuffer(b.size() * 2);
-		char[] car = b.getBuf();
-		String s;
-		for (int i=0; i<b.length(); i++)
-		{
-			char c = car[i];
-			s = (String) m_charMap.get(new Character(c));
-			if (s == null)
-			{
-				if ((c > 255) || ((c > 126) && (c <= 160)))
-				{
-					s = "&#" + String.valueOf((int) c) + ";";	 // NOI18N
-					buf.append(s);
-				}
-				else
-					buf.append(car[i]);
-			}
-			else 
-			{
-				s = "&" + s + ";";	 // NOI18N
-				buf.append(s);
-			}
-		}
-		return buf.string();
-	}
 
-	protected static HashMap	m_charMap = null;
+    protected static HashMap	m_charMap = null;
 	protected static HashMap	m_escMap = null;
 }

@@ -433,8 +433,7 @@ System.out.println("ERROR - bad directory name  '"+m_dirField.getText()+"'");	//
 	protected JTextField	m_searchField;
 	protected JButton		m_searchButton;
 
-	protected ButtonGroup	m_buttonGroup;
-	protected JRadioButton	m_wordSearchRB;
+    protected JRadioButton	m_wordSearchRB;
 	protected JRadioButton	m_exactSearchRB;
 	protected JCheckBox		m_tmSearchCB;
 

@@ -26,34 +26,8 @@ import java.util.zip.CRC32;
 
 public class LCheckSum
 {
-	// new method - takes about 40% of the time as the old
-	public static long compute2(String str)
-	{
-		// try a new way to see if it's faster
-		int len = str.length();
-		long dg1 = 0;
-		long dg2 = 0;
-		Adler32 adler = new Adler32();
-		// strings less than 4 characters should be unique under adler,
-		//	so just do a single pass, leaving high bytes zero
-		adler.update(str.getBytes());
-		dg1 = adler.getValue();
-		if (len < 4)
-		{
-			return dg1;
-		}
-		// if there is a conflict between two adler values, there 
-		//	shouldn't be a conflict between substrings of the original
-		//	text
-		String sub = str.substring(len/2);
-		adler.reset();
-		adler.update(sub.getBytes());
-		dg2 = adler.getValue();
 
-		return (dg2 << 32) | (dg1);
-	}
-
-	// old method - keep it around for posterity (and because it gives
+    // old method - keep it around for posterity (and because it gives
 	//	a better pseudorandom sequence)
 	public static long compute(String str)
 	{

@@ -30,13 +30,8 @@ import java.util.Map;
  */
 public class FreqList 
 {
-	public FreqList()
-	{
-		m_map = new HashMap();
-		m_list = new ArrayList();
-	}
 
-	public FreqList(int initialCapacity)
+    public FreqList(int initialCapacity)
 	{
 		m_map = new HashMap(initialCapacity);
 		m_list = new ArrayList(initialCapacity/2);
@@ -55,16 +50,7 @@ public class FreqList
 		return fo.cnt;
 	}
 
-	public int getCount(Object key)
-	{
-		FreqObj fo = (FreqObj) m_map.get(key);
-		if (fo == null)
-			return 0;
-		else
-			return fo.cnt;
-	}
-
-	public int getCountN(int num)
+    public int getCountN(int num)
 	{
 		FreqObj fo = (FreqObj) m_list.get(num);
 		if (fo == null)

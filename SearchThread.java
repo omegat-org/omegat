@@ -351,14 +351,14 @@ System.out.println("analyzing "+m_curFileName);
 	
 	// look for the search text in the specified text
 	// search supports wildcards * and ?
-	protected boolean searchString(String _text, String _search)
+	protected boolean searchString(String text, String search)
 	{
-		if ((_text == null) || (_search == null))
+		if ((text == null) || (search == null))
 			return false;
 
 		char c, t;
-		String text = _text.toLowerCase();
-		String search = _search.toLowerCase();
+//		String text = _text.toLowerCase();
+//		String search = _search.toLowerCase();
 		int searchLen = search.length();
 		int textLen = text.length();
 		int spos = 0;
@@ -435,6 +435,8 @@ System.out.println("analyzing "+m_curFileName);
 				default:
 					// regular text
 					t = text.charAt(pos++);
+					c = deflect(c);
+					t = deflect(t);
 					if (inSeq == false)
 					{
 						// TODO case insensitive compare change goes here
@@ -483,6 +485,39 @@ System.out.println("analyzing "+m_curFileName);
 		//	have a successful match
 		// otherwise, text ran out while searching and so no match
 		return inSeq;
+	}
+
+	// this is a lookup table that is designed to map high ASCII 
+	//	inflected characters to their non inflected equivalents, more 
+	//	or less (i.e. ñ map to n)
+	// it assumes that entered serach characters in the 192-255 range 
+	//	match the UTF8 equivalents - something that may work on UTF8 
+	//	operating systems (such as modern linux) and non-UTF8 operating 
+	//	systems running Latin1, but maybe not on older systems using 
+	//	different code pages
+	// in the worst case certain extended characters will find matches
+	//	in unrelated normal characters - in best case, someone will alter
+	//	the below character map for their operating system and locale
+	//	and recompile, should it not work as designed
+	protected final static char[] charMap =  
+	{	'A', 'A', 'A', 'A', 'A', 'A', 'A', 'C',
+		'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 
+		'D', 'N', 'O', 'O', 'O', 'O', 'O', 'X',
+		'O', 'U', 'U', 'U', 'U', 'Y', 'P', 'B', 
+		'A', 'A', 'A', 'A', 'A', 'A', 'A', 'C', 
+		'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 
+		'D', 'N', 'O', 'O', 'O', 'O', 'O', '/',
+		'O', 'U', 'U', 'U', 'U', 'Y', 'B', 'Y' 
+	};
+
+	public static char deflect(char c)
+	{
+		if ((c >= 'a') && (c <= 'z'))
+			return (char) (c - ('a' - 'A'));
+		else if ((c >= 192) && (c < 256))
+			return charMap[c-192];
+		else 
+			return c;
 	}
 
 	class MDialogThread extends Thread

@@ -7,6 +7,7 @@
                              documentation
    Maxym Mykhalchuk -        development and SF.net maintenance
    Henry Pijffers -          development
+   Sacha Chua -              development
    Jean-Christophe Helary -  general help
    Samuel Murray -           general help
 
@@ -80,6 +81,7 @@ Bugfixes:
   into compiled HTML files
 
 - Help file viewer was shown multiple times
+  by Sacha Chua
 
 - Empty segments were uselessly displayed
 

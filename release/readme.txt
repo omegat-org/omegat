@@ -1,4 +1,4 @@
-OmegaT 1.4.3 Read Me file
+OmegaT 1.4.4 Beta5 Read Me file
 
 The most actual info about OmegaT may be found at
                   http://www.omegat.org/omegat/omegat.html
@@ -18,8 +18,8 @@ To run OmegaT from a terminal or DOS window, change to the install directory
 or in DOS
   OmegaT.bat
 
-NOTE: this command is case sensitive on Linux - note the capital 'O' 
-and 'T' in OmegaT
+Note: This command is case sensitive on Linux - note the capital 'O' 
+and 'T' in OmegaT.
 
 In the event of a system error (as evidenced by a stack dump in the command
 line window), please note the error, the top 5 or so lines of the stack

@@ -1,11 +1,21 @@
 ----------------------------------------------------------------------
- OmegaT 1.4.3 Release Notes
+ OmegaT 1.4.4 Beta5 Release Notes
 
  OmegaT is brought to you by
-   Marc Prior -       project management, evangelicism, documentation
-   Keith Godfrey -    development
-   Maxym Mykhalchuk - development and SF.net maintenance
-   and many, many more very helpful people
+   Keith Godfrey -           Project Originator, development
+   Marc Prior -              project management, evangelicism, 
+                             documentation
+   Maxym Mykhalchuk -        development and SF.net maintenance
+   Henry Pijffers -          development
+   Jean-Christophe Helary -  general help
+   Samuel Murray -           general help
+
+ Localized OmegaT versions are by:
+   German l10n -             Sabine Cretella
+   Russian and Belorussian - Dmitry Gabinski
+   Spanish l10n -            Juan Salcines and Cesar Escribano Esteban
+
+ And many, many more very helpful people
 
  We thank you for your interest.
 ----------------------------------------------------------------------
@@ -14,13 +24,62 @@
 General changes in 1.4 (summary)
 ----------------------------------------------------------------------
 UI changes:
-	find interface + enhanced functionality
-	main interface rewritten
-	font selectability
-	full localisability
-new filters:
-	xhtml
-	java resource bundles (.properties)
+	Find interface rewritten with enhanced functionality
+	Main interface improved
+	Font may be selected
+	Full localisation support
+	Spanish and Russian UI and docs, Belorussian UI, German Docs
+	Ability to jump to the next untranslated segment (not yet in Beta5)
+New filters:
+	XHTML
+	Java resource bundles (.properties)
+Core changes:
+    New Fuzzy Matching algorithm - more matches, lower memory footprint
+    Refactored code with more comments
+    Windows installer
+
+
+1.4.4
+-------------------------------
+Enchancements:
+
+- Easy Help system localization 
+  (and German, Russian and Spanish translations)
+
+- Separate source distribution of OmegaT
+
+- Ability to jump to nearest not yet translated segment
+  by Henry Pijffers
+
+- Increased number of fuzzy matches 
+  (now with as low as 40% similarity)
+  
+- Refactoring HTML and XML file handlers
+  to improve speed and stability
+  
+- Some refactorings of file handlers
+  to streamline the development of new file handlers
+  (will be useful in the future, I hope)
+
+- Glossary now supports UTF-8
+  (glossary file should be tab-delimited,
+   if extension is .tab - it's in default system encoding,
+   is .utf8 - it's in UTF-8 encoding)
+
+Bugfixes:
+
+- Help file viewer was shown multiple times
+
+- HTML Encoding wasn't always recognized correctly
+
+- And sometimes encoding meta was not inserted 
+  into compiled HTML files
+
+- Empty segments were uselessly displayed
+
+- Too little fuzzy matches were found,
+  especially in small projects
+  
 
 1.4.3
 -------------------------------

@@ -21,6 +21,7 @@
 
 package org.omegat.gui;
 
+import java.util.List;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
 import org.omegat.util.OConsts;
@@ -73,25 +74,29 @@ class MatchWindow extends JFrame
 		});
 	}
 
-    // copy match and glos buffers to display
+    /**
+     * Sets the text of the glossary window to the found glossary entries
+     */
 	public void updateGlossaryText()
 	{
 		m_glosPane.setText(m_glosDisplay);
 		m_glosDisplay = "";														// NOI18N
 	}
 
-	public void formatNearText(String text, byte[] attrList)
+    /**
+     * Format the currently selected Near String (fuzzy match)
+     * according to the tokens and their attributes.
+     *
+     * @param tokenList - the list of tokens to highlight
+     * @param attrList - the attributes to color tokens accordingly
+     */
+	public void formatNearText(List tokenList, byte[] attrList)
 	{
-		if (text == null)
-			return;
-
 		int start;
 		int end;
 		JTextPane pane = m_matchPane;
 
 		// reset color of text to default value
-		ArrayList tokenList = new ArrayList();
-		StaticUtils.tokenizeText(text, tokenList);
 		int numTokens = tokenList.size();
 		for (int i=0; i<numTokens; i++)
 		{
@@ -112,6 +117,10 @@ class MatchWindow extends JFrame
 		pane.setCharacterAttributes(mattr, false);
 	}
 
+    /**
+     * Sets the text of match window to the list of found matches (near strings),
+     * and select the currently selected match in bold.
+     */
 	public void updateMatchText()
 	{
 		// Cancelling all the attributes

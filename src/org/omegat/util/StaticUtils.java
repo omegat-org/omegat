@@ -21,6 +21,7 @@
 
 package org.omegat.util;
 
+import java.util.List;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.gui.messages.MessageRelay;
 
@@ -28,7 +29,7 @@ import java.awt.*;
 import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
+
 
 /**
  * Static functions taken from
@@ -241,12 +242,17 @@ System.out.println("mapping extension '"+str.substring(0,pos)+"' to '"+str.subst
 	
 	/**
 	 * Builds a list of tokens and a list of their offsets w/in a file.
+	 * It breaks string into tokens like in the following examples:
+	 * <ul>
+	 * <li> This is a semi-good way. -> "this", "is", "a", "semi-good", "way"
+	 * <li> Fine, thanks, and you? -> "fine", "thanks", "and", "you"
+	 * </ul>
 	 * 
 	 * @param str string to tokenize
 	 * @param tokenList the list to add tokens to
 	 * @return number of tokens
 	 */
-	public static int tokenizeText(String str, ArrayList tokenList)
+	public static int tokenizeText(String str, List tokenList)
 	{
 		str = str.toLowerCase();
 		

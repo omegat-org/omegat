@@ -66,21 +66,6 @@ public class FuzzyMatcher
 		this.core = core;
 	}
 	
-	/** 
-	 * Breaks string into tokens.
-	 * Examples:
-	 * <ul>
-	 * <li> This is a semi-good way. -> "this", "is", "a", "semi-good", "way"
-	 * <li> Fine, thanks, and you? -> "fine", "thanks", "and", "you"
-	 * </ul>
-	 */
-	private List breakString(String string)
-	{
-		ArrayList tokenList = new ArrayList();
-        StaticUtils.tokenizeText(string, tokenList);
-		return tokenList;
-	}
-	
 	/**
 	 * Builds the similarity data for color highlight in match window.
 	 */
@@ -124,14 +109,6 @@ public class FuzzyMatcher
 		
 		updateStatus(0, total);
 		
-		List stringTokensList = new ArrayList();
-		for(int i=0; i<total; i++)
-		{
-			StringEntry string = (StringEntry) strings.get(i);
-			List stringTokens = breakString(string.getSrcText());
-			stringTokensList.add(stringTokens);
-		}
-		
 		for(int i=0; i<total; i++)
 		{
 			if( i%20==0 )
@@ -142,13 +119,13 @@ public class FuzzyMatcher
 			}
 
 			StringEntry strEntry = (StringEntry) strings.get(i);
-			List strTokens = (List) stringTokensList.get(i);
+			List strTokens = strEntry.getTokenList();
 			int strTokensSize = strTokens.size();
 			
 			for(int j=i+1; j<total; j++)
 			{
 				StringEntry candEntry = (StringEntry) strings.get(j);
-				List candTokens = (List) stringTokensList.get(j);
+				List candTokens = candEntry.getTokenList();
 				int candTokensSize = candTokens.size();
 				
 				int ld = LevenshteinDistance.compute(strTokens, candTokens);

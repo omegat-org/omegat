@@ -21,6 +21,7 @@
 
 package org.omegat.core.threads;
 
+import org.omegat.core.glossary.GlossaryManager;
 import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.util.*;
 import org.omegat.gui.TransFrame;
@@ -37,6 +38,7 @@ import java.io.*;
 import java.text.ParseException;
 import java.util.*;
 import org.omegat.core.matching.SourceTextEntry;
+import org.omegat.core.glossary.GlossaryEntry;
 
 /**
  * CommandThread is a thread to asynchronously do the stuff
@@ -56,8 +58,6 @@ public class CommandThread extends Thread
 		m_config = new ProjectProperties();
 		m_strEntryHash = new HashMap(4096);
 		m_strEntryList = new ArrayList();
-		m_glosEntryHash = new HashMap(2048);
-		m_glosEntryList = new ArrayList();
 		m_srcTextEntryArray = new ArrayList(4096);
 		m_tmList = new ArrayList();
 		m_orphanedList = new ArrayList();
@@ -174,7 +174,6 @@ public class CommandThread extends Thread
 
 		// TODO freeze UI to prevent race condition
 		m_strEntryHash.clear();
-		m_glosEntryHash.clear();
 
 		m_tmList.clear();
 		m_orphanedList.clear();
@@ -183,7 +182,6 @@ public class CommandThread extends Thread
 		m_extensionMapList.clear();
 
 		m_strEntryList.clear();
-		m_glosEntryList.clear();
 		m_srcTextEntryArray.clear();
 
 		if (m_projWin != null)
@@ -240,10 +238,12 @@ public class CommandThread extends Thread
 			if (m_saveCount == -1)
 				m_saveThread.start();
 
+            // Building up glossary
 			evtStr = OStrings.CT_LOADING_GLOSSARY;
 			MessageRelay.uiMessageSetMessageText(tf, evtStr);
-			buildGlossary();
-			// evaluate strings for fuzzy matching 
+            m_glossary.buildGlossary(m_strEntryList);
+
+            // evaluate strings for fuzzy matching 
 			String status = OStrings.CT_FUZZY_X_OF_Y;
 			
 			buildNearList(m_strEntryList, status);
@@ -793,52 +793,8 @@ public class CommandThread extends Thread
 			return false;
 
 		// first load glossary files
-		File dir = new File(m_config.getGlossaryRoot());
-		String [] fileList;
-		String fname;
-		String src;
-		String loc;
-		LTabFileReader tab = new LTabFileReader();
-		if (dir.isDirectory())
-		{
-			fileList = dir.list();
-			for (i=0; i<fileList.length; i++)
-			{
-				fname = fileList[i];
-				// only support 2 file types for input now - tab and txt
-				// and implement txt later TODO
-				// 
-				// print warning if glossary file is not recognized
-				if (fname.endsWith(".tab")) // NOI18N
-				{
-					System.out.println(OStrings.getString("CT_LOADING_GLOSSARY") + fname);
-					tab.load(dir.getAbsolutePath() + File.separator + fname);
-					for (j=0; j<tab.numRows(); j++)
-					{
-						src = tab.get(j, 0);
-						loc = tab.get(j, 1);
-						String com = tab.get(j, 2);
-						if (m_glosEntryHash.get(src) == null)
-						{
-							GlossaryEntry glosEntry = new GlossaryEntry(src,
-									loc, com);
-							m_glosEntryHash.put(src, glosEntry);
-							m_glosEntryList.add(glosEntry);
-						}
-					}
-				}
-				else
-				{
-					System.out.println(OStrings.CT_DONT_RECOGNIZE_GLOS_FILE +
-								fname);
-				}
-			}
-		}
-		else
-		{
-			// uh oh - something is screwed up here
-			throw new IOException(OStrings.getString("CT_ERROR_ACCESS_GLOSSARY_DIR"));
-		}
+        m_glossary = new GlossaryManager();
+        m_glossary.loadGlossaryFiles(new File(m_config.getGlossaryRoot()));
 
 		// now open source files
 		// to allow user ability to modify source files arbitrarily,
@@ -925,58 +881,11 @@ public class CommandThread extends Thread
 		return true;
 	}
 
-    private void buildGlossary()
-	{
-		int i;
-		GlossaryEntry glosEntry;
-		StringEntry strEntry;
-		String glosStr;
-		String glosStrLow;
-		String s;
-		int pos;
-		//TreeMap foundList;
-		for (i=0; i<m_glosEntryList.size(); i++)
-		{
-			glosEntry = (GlossaryEntry) m_glosEntryList.get(i);
-			glosStr = glosEntry.getSrcText();
-			// foundList = findAll(glosStr);
-			// TODO - set locale in toLower call
-			glosStrLow = glosStr.toLowerCase();
-			// TODO - strip formating info
-
-			//if (foundList == null)
-			continue;
-
-            /*
-			// have narrowed down search field to only strings
-			// containing words of glossary entries - now check
-			// for exact match
-			Object obj;
-			while (foundList.size() > 0)
-			{
-				obj = foundList.firstKey();
-				strEntry = (StringEntry) foundList.remove(obj);
-				if (strEntry == null)
-					continue;
-				// TODO - set locale in toLower call
-				s = strEntry.getSrcText().toLowerCase();
-				pos = s.indexOf(glosStrLow);
-				if (pos >= 0)
-				{
-					// found a match
-					strEntry.addGlosString(glosEntry);
-				}
-			}
-            */
-		}
-	}
-
 	/**
 	 * Builds the list of fuzzy matches between the source text strings.
 	 *
-	 * Old (Keith's Version)
-	 *
-	 * @author Keith Godfrey
+	 * @author Maxym Mykhalchuk
+     *
 	 * @param seList the list of string entries to match
 	 * @param status status string to display
 	 */
@@ -1066,9 +975,6 @@ public class CommandThread extends Thread
 						m_orphanedList.add(tm);
 						m_tmList.add(tm);
 						se = new StringEntry(src);
-						se.setTranslation(trans);
-						int wc = StaticUtils.tokenizeText(src, null);
-						se.setWordCount(wc);
 					}
 					se.setTranslation(trans);
 					strEntryList.add(se);
@@ -1080,8 +986,6 @@ public class CommandThread extends Thread
 					m_tmList.add(new TransMemory(src, trans, fname));
 					se = new StringEntry(src);
 					se.setTranslation(trans);
-					int wc = StaticUtils.tokenizeText(src, null);
-					se.setWordCount(wc);
 					strEntryList.add(se);
 				}
 			}
@@ -1318,12 +1222,12 @@ public class CommandThread extends Thread
     private HashMap		m_strEntryHash;	// maps text to strEntry obj
 	private ArrayList	m_strEntryList;
 	private ArrayList	m_srcTextEntryArray;
-	private HashMap		m_glosEntryHash;
-	private ArrayList	m_glosEntryList;
 
 	private ArrayList	m_tmList;
 	private ArrayList	m_orphanedList;
 
 	private ArrayList	m_extensionList;
     private ArrayList	m_extensionMapList;
+    
+    private GlossaryManager m_glossary;
 }

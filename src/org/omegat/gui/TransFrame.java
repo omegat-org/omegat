@@ -21,7 +21,7 @@
 
 package org.omegat.gui;
 
-import org.omegat.core.GlossaryEntry;
+import org.omegat.core.glossary.GlossaryEntry;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.StringEntry;
@@ -1059,7 +1059,7 @@ public class TransFrame extends JFrame implements ActionListener
 		
 		m_matchViewer.hiliteRange(start, end);
 		m_matchViewer.updateMatchText();
-		m_matchViewer.formatNearText(str, m_curNear.attr);
+		m_matchViewer.formatNearText(m_curNear.str.getTokenList(), m_curNear.attr);
 	}
 	
 	private void commitEntry()
@@ -1246,11 +1246,11 @@ public class TransFrame extends JFrame implements ActionListener
 
 		// add glossary terms and fuzzy match info to match window
 		StringEntry curEntry = m_curEntry.getStrEntry();
-		if (curEntry.getGlosList().size() > 0)
+		if (curEntry.getGlossaryEntries().size() > 0)
 		{
 			// TODO do something with glossary terms
-			m_glossaryLength = curEntry.getGlosList().size();
-			ListIterator li = curEntry.getGlosList().listIterator();
+			m_glossaryLength = curEntry.getGlossaryEntries().size();
+			ListIterator li = curEntry.getGlossaryEntries().listIterator();
 			while (li.hasNext())
 			{
 				GlossaryEntry glos = (GlossaryEntry) li.next();

@@ -285,10 +285,9 @@ public class TransFrame extends JFrame implements ActionListener
 			m_miEditRecycle.setMnemonic(KeyEvent.VK_R);
 			m_miEditInsert.setMnemonic(KeyEvent.VK_I);
 			m_miEditFind.setMnemonic(KeyEvent.VK_F);
-//			m_miEditUntrans.setMnemonic(KeyEvent.VK_U);
+			m_miEditUntrans.setMnemonic(KeyEvent.VK_U);
 			m_miEditNext.setMnemonic(KeyEvent.VK_N);
 			m_miEditPrev.setMnemonic(KeyEvent.VK_P);
-			m_miEditNextUntrans.setMnemonic(KeyEvent.VK_U);
 			m_miEditCompare1.setMnemonic(KeyEvent.VK_1);
 			m_miEditCompare2.setMnemonic(KeyEvent.VK_2);
 			m_miEditCompare3.setMnemonic(KeyEvent.VK_3);
@@ -319,10 +318,9 @@ public class TransFrame extends JFrame implements ActionListener
 			m_miEditRecycle.setMnemonic(0);
 			m_miEditInsert.setMnemonic(0);
 			m_miEditFind.setMnemonic(0);
-	//		m_miEditUntrans.setMnemonic(0);
+			m_miEditUntrans.setMnemonic(0);
 			m_miEditNext.setMnemonic(0);
 			m_miEditPrev.setMnemonic(0);
-			m_miEditNextUntrans.setMnemonic(0);
 			m_miEditCompare1.setMnemonic(0);
 			m_miEditCompare2.setMnemonic(0);
 			m_miEditCompare3.setMnemonic(0);
@@ -432,11 +430,11 @@ public class TransFrame extends JFrame implements ActionListener
 		m_miEditFind.addActionListener(this);
 		m_mEdit.add(m_miEditFind);
 
-//		m_miEditUntrans = new JMenuItem();
-//		m_miEditUntrans.setAccelerator(KeyStroke.getKeyStroke(
-//				KeyEvent.VK_U,  m_shortcutKey));
-//		m_miEditUntrans.addActionListener(this);
-//		m_mEdit.add(m_miEditUntrans);
+		m_miEditUntrans = new JMenuItem();
+		m_miEditUntrans.setAccelerator(KeyStroke.getKeyStroke(
+				KeyEvent.VK_U,  m_shortcutKey));
+		m_miEditUntrans.addActionListener(this);
+		m_mEdit.add(m_miEditUntrans);
 
 		m_miEditNext = new JMenuItem();
 		m_miEditNext.setAccelerator(KeyStroke.getKeyStroke(
@@ -450,11 +448,6 @@ public class TransFrame extends JFrame implements ActionListener
 		m_miEditPrev.addActionListener(this);
 		m_mEdit.add(m_miEditPrev);
 		
-		m_miEditNextUntrans = new JMenuItem();
-		m_miEditNextUntrans.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, m_shortcutKey));
-		m_miEditNextUntrans.addActionListener(this);
-		m_mEdit.add(m_miEditNextUntrans);
-
 		m_mEdit.addSeparator();
 
 		m_miEditCompare1 = new JMenuItem();
@@ -553,7 +546,7 @@ public class TransFrame extends JFrame implements ActionListener
 		m_miEditRedo.setText(OStrings.TF_MENU_EDIT_REDO);
 		m_miEditNext.setText(OStrings.TF_MENU_EDIT_NEXT);
 		m_miEditPrev.setText(OStrings.TF_MENU_EDIT_PREV);
-		m_miEditNextUntrans.setText(OStrings.TF_MENU_EDIT_NEXTUNTRANS);
+		m_miEditUntrans.setText(OStrings.TF_MENU_EDIT_UNTRANS);
 		m_miEditCompare1.setText(OStrings.TF_MENU_EDIT_COMPARE_1);
 		m_miEditCompare2.setText(OStrings.TF_MENU_EDIT_COMPARE_2);
 		m_miEditCompare3.setText(OStrings.TF_MENU_EDIT_COMPARE_3);
@@ -562,7 +555,6 @@ public class TransFrame extends JFrame implements ActionListener
 		m_miEditRecycle.setText(OStrings.TF_MENU_EDIT_RECYCLE);
 		m_miEditInsert.setText(OStrings.TF_MENU_EDIT_INSERT);
 		m_miEditFind.setText(OStrings.TF_MENU_EDIT_FIND);
-//		m_miEditUntrans.setText(org.omegat.OStrings.TF_MENU_EDIT_NEXT_UNTRANS);
 		
 		m_mDisplay.setText(OStrings.TF_MENU_DISPLAY);
 		m_miDisplayFont.setText(OStrings.TF_MENU_DISPLAY_FONT);
@@ -720,6 +712,10 @@ public class TransFrame extends JFrame implements ActionListener
 			{
 				// mark the entry
 				m_curEntryNum = curEntryNum;
+				
+				// load the document, if the segment is not in the current document
+				if (m_curEntryNum > m_xlLastEntry)
+					loadDocument();
 				
 				// activate the entry
 				activateEntry();
@@ -1418,10 +1414,6 @@ public class TransFrame extends JFrame implements ActionListener
 			{
 				doPrevEntry();
 			}
-			else if (evtSrc == m_miEditNextUntrans)
-			{
-				doNextUntranslatedEntry();
-			}
 			else if (evtSrc == m_miDisplayAdvanceKey)
 			{
 				if (m_miDisplayAdvanceKey.isSelected())
@@ -1452,10 +1444,10 @@ public class TransFrame extends JFrame implements ActionListener
 							OConsts.PREF_MNEMONIC, "false");					// NOI18N
 				}
 			}
-//			else if (evtSrc == m_miEditUntrans)
-//			{
-//				doNextUntrans();
-//			}
+			else if (evtSrc == m_miEditUntrans)
+			{
+				doNextUntranslatedEntry();
+			}
 			else if (evtSrc == m_miEditRecycle)
 			{
 				doRecycleTrans();
@@ -1933,8 +1925,7 @@ public class TransFrame extends JFrame implements ActionListener
 	private JMenuItem	m_miEditRedo;
 	private JMenuItem	m_miEditNext;
 	private JMenuItem	m_miEditPrev;
-	private JMenuItem m_miEditNextUntrans;
-//	private JMenuItem	m_miEditUntrans;
+	private JMenuItem	m_miEditUntrans;
 //	private JMenuItem	m_miEditGoto;
 	private JMenuItem	m_miEditFind;
 	private JMenuItem	m_miEditRecycle;

@@ -45,8 +45,9 @@ class LFileCopy
 		FileInputStream fis = new FileInputStream(ifp);
 		FileOutputStream fos = new FileOutputStream(ofp);
 		byte [] b = new byte[1024];
-		while (fis.read(b) > 0)
-			fos.write(b);
+		int readBytes;
+		while ( (readBytes = fis.read(b)) > 0)
+			fos.write(b, 0, readBytes);
 	
 		fis.close();
 		fos. close();

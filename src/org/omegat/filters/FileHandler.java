@@ -186,7 +186,12 @@ public abstract class FileHandler
 		return bw;
 	}
 
+	/**
+	 * Override this in your own file handler (filter) 
+	 * to parse the text
+	 */
 	public abstract void doLoad() throws IOException;
+	
 	public void load(String file) throws IOException
 	{
 		reset();

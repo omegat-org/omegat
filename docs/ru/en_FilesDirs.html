@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<TITLE>Файлы и директории проекта</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.0  (Linux)">
+	<META NAME="CREATED" CONTENT="20030305;14173900">
+	<META NAME="CHANGED" CONTENT="20040421;18064600">
+	<STYLE>
+	<!--
+		@page { margin: 2cm }
+		H1.western { font-family: "Helvetica", sans-serif; font-size: 14pt }
+		P { margin-bottom: 0.21cm; text-decoration: none }
+		P.western { font-family: "Nimbus Sans L"; font-size: 12pt; font-style: normal }
+		H2.western { font-family: "Helvetica", sans-serif; font-size: 12pt; font-style: normal }
+		H2.cjk { font-size: 14pt; font-style: italic }
+		H2.ctl { font-size: 14pt; font-style: italic }
+		P.text-body-indent-western { margin-left: 1cm; font-family: "Nimbus Sans L"; font-size: 12pt; font-style: normal }
+		P.text-body-indent-cjk { margin-left: 1cm }
+		P.text-body-indent-ctl { margin-left: 1cm }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="ru-RU" DIR="LTR">
+<H1 CLASS="western">Файлы и директории проекта</H1>
+<H2 CLASS="western">Описание файлов и директорий проекта</H2>
+<P CLASS="western">Проект OmegaT включает следующие файлы и директории.</P>
+<P CLASS="western">Главная директория проекта. Эта директория создаётся, когда создаётся проект. Её имя задаётся пользователем.</P>
+<P CLASS="text-body-indent-western"><I>omegat.project</I>. Когда создаётся проект, OmegaT автоматически создаёт этот файл и помещает его в эту директорию. Чтобы открыть проект в OmegaT, следует открыть его файл <I>omegat.project</I>.</P>
+<P CLASS="text-body-indent-western"><I><projectname>.tmx</I>. Это файл памяти переводов, экспортированный проектом. OmegaT создаёт его автоматически и помещает в данной директории при каждой компиляции проекта. Следует помнить, что этот файл памяти переводов содержит только сегменты из проекта на момент его последней компиляции. В него не импортируются сегменты из других файлов памяти переводов в директории <I>/tm</I>.</P>
+<P CLASS="western">Директория <I>/source</I>. Разместите файлы для перевода в этой директории после создания проекта и перед его открытием. Любые файлы в этой директории и её поддиректориях включаются в проект для перевода, если поддерживается их формат, и они имеют соответствующее расширение имени файла.</P>
+<P CLASS="text-body-indent-western"><I>*.txt</I>, <I>*.xhtml, *.html</I>, <I>*.sxw</I>: исходные файлы, импортируемые в проект для перевода. Файлы с другими расширениями могут также быть импортированы, если их расширения сопоставлены расширениям, заданным по умолчанию.</P>
+<P CLASS="text-body-indent-western">Файлы в <I>/source</I>, которые не импортированы в проект, передаются без изменений в <I>/target</I> при компиляции проекта. Это дает возможность создавать зеркала целых узлов web из <I>/source</I> в <I>/target</I> вместе с загружаемыми ими изображениями в таких форматах как GIF или JPEG 
+</P>
+<P CLASS="western">Директория <I>/glossary</I>. После создания проекта поместите в эту директорию <A HREF="en_Gloss.html">глоссарий</A>, который Вы желаете использовать. 
+</P>
+<P CLASS="text-body-indent-western"><I>*.tab</I>: файлы глоссария.</P>
+<P CLASS="western">Директория <I>/omegat</I>. OmegaT автоматически помещает в эту директорию следующие файлы при создании:</P>
+<P CLASS="text-body-indent-western"><I>file_e<SPAN STYLE="text-decoration: none"><SPAN STYLE="text-decoration: none"><SPAN STYLE="text-decoration: none">xtension_mapping:</SPAN></SPAN></SPAN></I><SPAN STYLE="text-decoration: none"><SPAN STYLE="text-decoration: none"><SPAN STYLE="text-decoration: none"> OmegaT определяет типы файлов типа по их расширениям; файлы StarOffice, например, должны иметь расширение .sxw, чтобы быть распознанными. Можно принудить OmegaT распознавать файлы с различными расширениями (но не форматами!), редактируя этот файл. </SPAN></SPAN></SPAN>
+</P>
+<P CLASS="text-body-indent-western" STYLE="text-decoration: none"><I>project_save.tmx:</I> этот файл создаётся при первом сохранении проекта. Он имеет формат TMX и является рабочей памятью переводов проекта.</P>
+<P CLASS="text-body-indent-western"><I><SPAN STYLE="text-decoration: none">word</SPAN>_counts: </I>этот файл содержит два счётчика слов законченного проекта: один, включающий 100%-ные совпадения, и один, их исключающий.</P>
+<P CLASS="western">Директория <I>/target</I>. OmegaT при компиляции помещает в эту директорию файлы с переводами.</P>
+<P CLASS="text-body-indent-western"><I>*.txt, *.xhtml, *.html, *.sxw</I>: переведённые файлы<BR>Непереведённые файлы передаются из <I>/source</I> при компиляции.</P>
+<P CLASS="western">Директория <I>/tm</I>. После создания и перед загрузкой проекта поместите в эту директорию <A HREF="en_TMFormats.html">файл памяти переводов</A>, который вы желаете использовать. Помните: независимо от того, используются или нет ранее созданные файлы памяти переводов, OmegaT создаёт рабочую память переводов для проекта, <SPAN STYLE="text-decoration: none"><I>project_save.tmx</I>, в <I>/omegat</I> при сохранении проекта, а также помещает экспортированную память переводов</SPAN> в корневую директорию при компиляции проекта.</P>
+<P CLASS="text-body-indent-western"><I>*.tmx</I>: файлы памяти переводов, созданные в предыдущих проектах. файлы <I>*.tmx</I> должны быть в формате TMX Уровень 1.</P>
+<H2 CLASS="western">Изменение размещения файлов и директорий проекта</H2>
+<P CLASS="western">Директории проекта создаются при создании проекта. По умолчанию они группируются в корневой директории проекта, но для них можно выбрать другие местоположения, щёлкнув по кнопке <I>Просмотр</I>. Таким образом, можно держать translation memories в определённых директориях, например, и выбирать желаемую директорию при создании нового проекта, вместо того, чтобы копировать файл памяти переводов во вновь созданную директорию <I>/tm</I>.</P>
+<P CLASS="western" STYLE="font-style: normal">Чтобы изменить расположение директорий ретроспективно, т.е., для существующего проекта, удалите соответствующую директорию (Этого нельзя делать, когда проект открыт.) При следующем открытии проекта OmegaT определяет, что отсутствуют некоторые директории, и выводит диалог выбора директорий, в котором можно выбрать новые местоположения.</P><br><P><A HREF="en_OmegaT.html">Вернуться в оглавление</A></P>
+</BODY>
+</HTML>

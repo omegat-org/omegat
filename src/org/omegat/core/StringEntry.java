@@ -99,10 +99,8 @@ public class StringEntry
 	{
 		NearString cand = new NearString(strEntry, score, nearData, nearProj);
 		m_nearList.add(cand);
-		//if( m_nearList.size() >= 2*OConsts.MAX_STORED_NEAR_STRINGS )
-		//	m_nearList.tailSet(near51).clear();
-		//if( m_nearList.size() == OConsts.MAX_STORED_NEAR_STRINGS+1 )
-		//	near51 = m_nearList.last();
+		if( m_nearList.size() > OConsts.MAX_STORED_NEAR_STRINGS )
+			m_nearList.remove(m_nearList.last());
 	}
 	private Object near51;
 

@@ -26,7 +26,6 @@ import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.StringEntry;
 import org.omegat.gui.dialogs.FontSelectionDialog;
-import org.omegat.gui.dialogs.MatchingSimilarityDialog;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.util.OConsts;
@@ -497,10 +496,6 @@ public class TransFrame extends JFrame implements ActionListener
 		m_miDisplayFont.addActionListener(this);
 		m_mDisplay.add(m_miDisplayFont);
 		
-		m_miDisplayMatches = new JMenuItem();
-		m_miDisplayMatches.addActionListener(this);
-		m_mDisplay.add(m_miDisplayMatches);
-		
 		m_miDisplayAdvanceKey = new JCheckBoxMenuItem();
 		m_miDisplayAdvanceKey.setSelected(false);
 		m_miDisplayAdvanceKey.addActionListener(this);
@@ -571,7 +566,6 @@ public class TransFrame extends JFrame implements ActionListener
 		
 		m_mDisplay.setText(OStrings.TF_MENU_DISPLAY);
 		m_miDisplayFont.setText(OStrings.TF_MENU_DISPLAY_FONT);
-		m_miDisplayMatches.setText(OStrings.getString("TF_MENU_DISPLAY_MATCHING"));
 		m_miDisplayAdvanceKey.setText(OStrings.TF_MENU_DISPLAY_ADVANCE);
 		m_miDisplayMnemonic.setText(OStrings.TF_MENU_DISPLAY_MNEMONIC);
 		
@@ -838,21 +832,6 @@ public class TransFrame extends JFrame implements ActionListener
 		}
 	}
 	
-	/**
-	 * Displays a dialogue to increase/decrese matching similarity.
-	 */
-    private void doMatchesSimilarity()
-	{
-		MatchingSimilarityDialog dialog = new MatchingSimilarityDialog(this, 
-				CommandThread.core.getOrSetPreference(OConsts.TF_NEAR_TRASH, OConsts.DEFAULT_NEAR_THRASH));
-		dialog.setVisible(true);
-		if( dialog.isChanged() )
-		{
-			String newNearTrash = dialog.getNearTrash();
-			CommandThread.core.setPreference(OConsts.TF_NEAR_TRASH, newNearTrash);
-		}
-	}
-
     private void doSave()
 	{
 		if (!m_projectLoaded)
@@ -1516,10 +1495,6 @@ public class TransFrame extends JFrame implements ActionListener
 			{
 				doFont();
 			}
-			else if (evtSrc == m_miDisplayMatches)
-			{
-				doMatchesSimilarity();
-			}
 			else if (evtSrc == m_miToolsPseudoTrans)
 			{
 				doPseudoTrans();
@@ -1974,7 +1949,6 @@ public class TransFrame extends JFrame implements ActionListener
 	private JCheckBoxMenuItem	m_miDisplayAdvanceKey;
 	private JCheckBoxMenuItem	m_miDisplayMnemonic;
 	private JMenuItem	m_miDisplayFont;
-	private JMenuItem	m_miDisplayMatches;
 	
 	private JMenu		m_mTools;
     private JMenuItem	m_miToolsPseudoTrans;

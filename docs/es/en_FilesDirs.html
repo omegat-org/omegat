@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=iso-8859-15">
+	<TITLE>Archivos y directorios del proyecto</TITLE>
+	<META NAME="GENERATOR" CONTENT="StarOffice 7  (Linux)">
+	<META NAME="CREATED" CONTENT="20030305;14173900">
+	<META NAME="CHANGED" CONTENT="20041026;11090100">
+	<STYLE>
+	<!--
+		@page { margin: 2cm }
+		H1.western { font-family: "Helvetica", sans-serif; font-size: 14pt }
+		P { margin-bottom: 0.21cm; text-decoration: none }
+		P.western { font-family: "Nimbus Sans L"; font-size: 12pt; font-style: normal }
+		H2.western { font-family: "Helvetica", sans-serif; font-size: 12pt; font-style: normal }
+		H2.cjk { font-size: 14pt; font-style: italic }
+		H2.ctl { font-size: 14pt; font-style: italic }
+		P.text-body-indent-western { margin-left: 1cm; font-family: "Nimbus Sans L"; font-size: 12pt; font-style: normal }
+		P.text-body-indent-cjk { margin-left: 1cm }
+		P.text-body-indent-ctl { margin-left: 1cm }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="es-ES" DIR="LTR">
+<H1 CLASS="western">Archivos y directorios del proyecto</H1>
+<H2 CLASS="western">Resumen de los archivos y directorios del
+proyecto</H2>
+<P CLASS="western">Un proyecto de OmegaT comprende los siguientes
+archivos y directorios:</P>
+<P CLASS="western">Un directorio principal del proyecto. Este
+directorio se crea cuando se crea el proyecto. Tiene el nombre que le
+ha dado el usuario.</P>
+<P CLASS="text-body-indent-western"><I>omegat.project.</I> Cuando se
+crea el proyecto, OmegaT crea autom&aacute;ticamente este archivo y
+lo coloca en este directorio. Para abrir un proyecto en OmegaT, debe
+abrir este archivo <I>omegat.project</I>.</P>
+<P CLASS="text-body-indent-western"><I>&lt;projectname&gt;.tmx</I>.
+Esta es la memoria de traducci&oacute;n exportada por el proyecto.
+OmegaT la crea autom&aacute;ticamente y la coloca en este directorio
+cada vez que compila el proyecto. Observe que esta memoria de
+traducci&oacute;n s&oacute;lo contiene los segmentos del proyecto
+existentes en el momento en que fue compilado por &uacute;ltima vez.
+No importa segmentos de ning&uacute;n archivo de memoria de
+traducci&oacute;n situado en el directorio <I>/tm</I>.</P>
+<P CLASS="western">Directorio <I>/source</I>. Coloque en este
+directorio, tras crear el proyecto y antes de abrirlo, cualquier
+archivo que desee traducir. Cualquier archivo situado en este
+directorio y en cualquier subdirectorio del mismo es incluido en el
+proyecto para su traducci&oacute;n, siempre que su formato est&eacute;
+soportado y tenga la extensi&oacute;n de archivo correspondiente.</P>
+<P CLASS="text-body-indent-western"><I>*.txt</I>, <I>*.xhtml, *.html</I>,
+<I>*.sxw:</I> archivos de origen importados en el proyecto para su
+traducci&oacute;n. Los archivos con otras extensiones pueden ser
+tambi&eacute;n importados si sus extensiones est&aacute;n asociadas a
+las extensiones por defecto.</P>
+<P CLASS="text-body-indent-western">Los archivos en <I>/source</I>
+que no son importados en el proyecto son transferidos sin cambios a
+<I>/target</I> cuando el proyecto es compilado. Esto permite crear
+r&eacute;plicas en <I>/target</I> de sitios web completos colocados
+en <I>/source</I>, junto con sus archivos de imagen en formatos como
+GIF o JPEG. 
+</P>
+<P CLASS="western">Directorio <I>/glossary</I>. Coloque en este
+directorio, tras crear el proyecto, cualquier <A HREF="en_Gloss.html">glosario</A>
+que desee utilizar. 
+</P>
+<P CLASS="text-body-indent-western"><I>*.tab</I>: archivos de
+glosario.</P>
+<P CLASS="western">Directorio <I>/omegat</I>. OmegaT coloca
+autom&aacute;ticamente los archivos siguientes en este directorio en
+el momento de su creaci&oacute;n:</P>
+<P CLASS="text-body-indent-western" STYLE="text-decoration: none"><I>project_save.tmx:</I>
+este archivo se crea cuando el proyecto se guarda por vez primera.
+Est&aacute; en formato TMX y es la memoria de trabajo del proyecto.</P>
+<P CLASS="text-body-indent-western"><I><SPAN STYLE="text-decoration: none">word</SPAN>_counts:
+</I>este archivo contiene dos recuentos de palabras del proyecto
+completo: uno que incluye y otro que excluye las coincidencias
+exactas (100%).</P>
+<P CLASS="western">Directorio <I>/target</I>. OmegaT coloca los
+archivos traducidos en este directorio al compilar.</P>
+<P CLASS="text-body-indent-western"><I>*.txt, *.xhtml, *.html, *.sxw</I>:
+archivos traducidos<BR>Archivos no traducidos transferidos desde
+<I>/source</I> al compilar</P>
+<P CLASS="western">Directorio <I>/tm</I>. Coloque en este directorio,
+tras crear el proyecto y antes de abrirlo, cualquier <A HREF="en_TMFormats.html">memoria
+de traducci&oacute;n</A> que desee utilizar. Nota: con independencia
+de que utilice o no memorias de traducci&oacute;n anteriores, OmegaT
+crea una memoria de traducci&oacute;n de trabajo para el proyecto,
+<SPAN STYLE="text-decoration: none"><I>project_save.tmx</I>, en
+<I>/omegat</I> cuando se guarda el proyecto, y coloca tambi&eacute;n
+una memoria de traducci&oacute;n exportada </SPAN>en el directorio
+ra&iacute;z cuando se compila el proyecto.</P>
+<P CLASS="text-body-indent-western"><I>*.tmx</I>: archivos de memoria
+de traducci&oacute;n creados durante proyectos anteriores. Los
+archivos <I>*.tmx</I> deben estar en formato TMX Nivel 1.</P>
+<H2 CLASS="western">Cambiar la ubicaci&oacute;n de los archivos y
+directorios del proyecto</H2>
+<P CLASS="western">Los directorios del proyecto se crean cuando se
+crea un proyecto. Por defecto, se agrupan todos dentro del directorio
+ra&iacute;z del proyecto, pero puede elegir localizaciones
+alternativas haciendo clic en el bot&oacute;n <I>Cambiar</I>. Puede
+por tanto mantener las memorias de traducci&oacute;n en un directorio
+determinado, por ejemplo, y seleccionar el directorio deseado cada
+vez que crea un nuevo proyecto para no tener que copiar el archivo de
+memoria de traducci&oacute;n en el directorio <I>/tm</I> reci&eacute;n
+creado.</P>
+<P CLASS="western" STYLE="font-style: normal">Para cambiar la
+ubicaci&oacute;n de los directorios con posterioridad, es decir, en
+un proyecto ya creado, borre los directorios correspondientes (no lo
+haga mientras el proyecto est&eacute; abierto). Cuando vuelva a abrir
+el proyecto, OmegaT detectar&aacute; que faltan algunos directorios,
+y presentar&aacute; el di&aacute;logo de selecci&oacute;n de
+directorios en el que podr&aacute; elegir las nuevas ubicaciones.</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><A HREF="en_OmegaT.html">Volver al &iacute;ndice</A></P>
+</BODY>
+</HTML>

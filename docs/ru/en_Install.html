@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<TITLE>Установка и настройка</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.0  (Linux)">
+	<META NAME="CREATED" CONTENT="20030305;14173800">
+	<META NAME="CHANGED" CONTENT="20040421;17460700">
+	<STYLE>
+	<!--
+		@page { margin: 2cm }
+		H1.western { font-family: "Helvetica", sans-serif; font-size: 14pt }
+		P { margin-bottom: 0.21cm; text-decoration: none }
+		P.western { font-family: "Nimbus Sans L"; font-size: 12pt; font-style: normal }
+		P.text-body-indent-western { margin-left: 1cm; font-family: "Nimbus Sans L"; font-size: 12pt; font-style: normal }
+		P.text-body-indent-cjk { margin-left: 1cm }
+		P.text-body-indent-ctl { margin-left: 1cm }
+		H3.western { font-family: "Helvetica", sans-serif; font-size: 12pt }
+		H2.western { font-family: "Helvetica", sans-serif; font-size: 12pt; font-style: normal }
+		H2.cjk { font-size: 14pt; font-style: italic }
+		H2.ctl { font-size: 14pt; font-style: italic }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="ru-RU" DIR="LTR">
+<H1 CLASS="western"><B>Установка и настройка</B></H1>
+<H2 CLASS="western">Установка</H2>
+<P CLASS="western">Установка включает три стадии. Во-первых, установить J2RE (если ещё не установлена). В-вторых, установить OmegaT. В-третьих, настроить. J2RE OmegaT можно устанавливать в любом порядке. Настройка не особенно важна, но облегчает запуск приложения.</P>
+<H3 CLASS="western">Установка Java Runtime Environment (среды выполнения Java)</H3>
+<P CLASS="western">Java Runtime Environment (J2RE) позволяет запускать в системе программы, написанные на Java. Её можно загрузить как отдельный продукт и в составе инструментария разработчика Java. 
+</P>
+<P CLASS="western">Java также доступна в виде подключаемого модуля к браузерам. Эта форма Java <B>не</B> позволит запустить OmegaT.
+</P>
+<P CLASS="western">JavaScript — совсем иной продукт, технически совершенно не связанный с Java.</P>
+<P CLASS="western">Если вы хотите использовать OmegaT, <B>обязательно</B> нужно установить J2RE в вашей системе. Без неё OmegaT не будет работать. Не следует запускать OmegaT без J2RE. Это напрасная трата времени!</P>
+<P CLASS="western">Если вы не знаете, установлена ли J2RE в вашей системе, просто попробуйте установить и запустить OmegaT (указания по установке OmegaT приведены ниже). Если ничего не происходит или появляются сообщения об ошибках, среда выполнения Java, вероятнее всего, не установлена. В этом случае следует её получить и установить. 
+</P>
+<P CLASS="text-body-indent-western">Пользователям Windows: узнать, какая версия Java Runtime Environment установлена, можно, щёлкнув по кнопке Пуск / нажав клавишу Windows и выбрав <I>Настройка</I> > <I>Панель управления</I>. Если J2RE уже установлена, будет видна панель управления с подписью  «Java(TM)2 Runtime Environment, Standard Edition 1.3.0_01» или сходной.</P>
+<P CLASS="text-body-indent-western">Пользователям Linux: просто введите <I>Java -version</I> в командной строке. Будет возвращена установленная версия (конечно, если она установлена на системном уровне).</P>
+<P CLASS="western">J2RE можно загрузить по ссылке ниже. Она бесплатна (обратите внимания на условия лицензии), но правила именования могут несколько затруднить поиск нужной версии. Понадобится версия для вышей платформы (Linux, Windows, и т.п.). Размер J2RE — около 14 Mб. 
+</P>
+<P CLASS="text-body-indent-western"><I>(Примечание: чтобы запутать клиентов, Sun постоянно меняет названия продуктов. Так, все версии JRE выше 1 известны как «Java 2», поэтому Java Runtime Environment теперь называется J2RE. Java Runtime Environment может также называться Java Virtual Machine или JVM, а на Macintosh она может быть известна как MRJ. Инструментарий разработчика известен как Java Developer's Kit (JDK), Software Developer's Kit (SDK), а теперь также J2SE, J2EE и J2ME, в зависимости от версии. По крайней мере, я так думаю. Но я сам запутался.)</I></P>
+<P CLASS="western">OmegaT 1.4.0 должна работать с любой версией J2RE от 1.2 и позднее. Однако мы рекомендуем получить последнюю версию J2RE, поскольку предыдущие версии Java могут не поддерживать определённые функции.</P>
+<P CLASS="western">В качестве альтернативы J2REможно установить инструментарий разработчика. Инструментарий разработчика содержит собственную копию J2RE, а также позволяет изменять OmegaT.  
+</P>
+<P CLASS="western"><I>Пользователи Windows и Linux могут загрузить Java Runtime Environment с сайтов:</I></P>
+<P CLASS="text-body-indent-western"><A HREF="http://java.sun.com/getjava/index.html">Sun</A> (все платформы)</P>
+<P CLASS="text-body-indent-western"><A HREF="http://www.blackdown.org/java-linux.html">Blackdown</A> (Linux)</P>
+<P CLASS="western">Пользователи Macintosh OS X, скорее всего, найдут, что Java Runtime Environment уже установлена.</P>
+<P CLASS="western">Предыдущие версии OmegaT работают в MRJ для Macintosh OS 9. Версия 1.4.0 <I>может</I> работать, но она не тестировалась на этой платформе.</P>
+<P CLASS="western">Установите J2RE согласно прилагаемым указаниям.</P>
+<H3 CLASS="western">Установка OmegaT</H3>
+<P CLASS="western">Просто распакуйте содержимое архива в директорию по выбору. Архив может быть в формате *.zip или *.tar.gzip. Пользователи Linux и Mac (Stuffit) не должны испытывать проблем в любом случае; пользователи же Windows могут не иметь утилиты для последнего.</P>
+<H2 CLASS="western">Запуск приложения</H2>
+<H3 CLASS="western">Windows и Macintosh OS X</H3>
+<P CLASS="western">Щёлкните по файлу <I>OmegaT.jar</I> в программе управления файлами.</P>
+<H3 CLASS="western">Linux</H3>
+<P CLASS="western">Введите <I>java -jar OmegaT.jar</I> в командной строке. Соблюдайте регистр буке в OmegaT. 
+</P>
+<P CLASS="western">Если Java не настроена на определение местонахождения файлов OmegaT, сначала следует перейти в директорию, содержащую файл OmegaT.jar. 
+</P>
+<P CLASS="western">Если не установлена переменная пути Java, следует указать полный путь. Если не сделано ничего из перечисленного выше, запуск должен происходить примерно следующим образом:</P>
+<P CLASS="western" STYLE="margin-left: 1cm">cd /home/user/OmegaT<BR>/home/user/j2re1.4.2/bin/java -jar OmegaT</P>
+<H2 CLASS="western">Настройка (только Linux)</H2>
+<P CLASS="western">Если вы используете Linux, но не очень хорошо его знаете, вот совет, как можно сделать более лёгким запуск OmegaT:</P>
+<P CLASS="western">Создайте shell-скрипт, написав текстовый файл следующего содержания:</P>
+<P CLASS="text-body-indent-western" STYLE="margin-left: 2cm">#!/bin/bash<BR>cd <I><OmegaT></I><BR><I><java>/</I>java -jar OmegaT.jar</P>
+<P CLASS="western">где <I><OmegaT></I> — директория, содержащая файл <I>OmegaT.jar</I>, а <I><java></I> — директория, содержащая исполняемый файл J2RE (который называется <I>java</I>). Если установлена переменная пути Java, эту директорию не нужно указывать, достаточно <I>java -jar OmegaT.jar</I>. Указывать директорию нужно, если не определена переменная пути Java, а также если в системе установлено несколько версий  Java, и нужно обеспечить, чтобы OmegaT запускалась с нужной версией.</P>
+<P CLASS="western">Сохраните текстовый файл как <I>OmegaT</I> и сделайте его исполняемым (напр., в Konqueror контекстное меню > <I>Properties</I> > <I>Permissions</I> > <I>Exec</I>). Теперь для запуска OmegaT можно просто ввести <I>OmegaT</I> в командной строке. При желании можно поместить значок на рабочий стол, назначив ему исполнение файла скрипта.</P><br><P><A HREF="en_OmegaT.html">Вернуться в оглавление</A></P>
+</BODY>
+</HTML>

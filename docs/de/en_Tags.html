@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html;  charset=iso-8859-1">
+	<TITLE>Editieren von formatiertem Text</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.0  (Linux)">
+	<META NAME="CREATED" CONTENT="20030305;14173900">
+	<META NAME="CHANGED" CONTENT="20040421;17261800">
+	<STYLE>
+	<!--
+		@page { margin: 2cm }
+		H1.western { font-family: "Helvetica", sans-serif; font-size: 14pt }
+		P { margin-bottom: 0.21cm; text-decoration: none }
+		P.western { font-family: "Nimbus Sans L"; font-size: 12pt; font-style: normal }
+		H3.western { font-family: "Helvetica", sans-serif; font-size: 12pt }
+		H2.western { font-family: "Helvetica", sans-serif; font-size: 12pt; font-style: normal }
+		H2.cjk { font-size: 14pt; font-style: italic }
+		H2.ctl { font-size: 14pt; font-style: italic }
+		P.text-body-indent-western { margin-left: 1cm; font-family: "Nimbus Sans L"; font-size: 12pt; font-style: normal }
+		P.text-body-indent-cjk { margin-left: 1cm }
+		P.text-body-indent-ctl { margin-left: 1cm }
+	-->
+	</STYLE>
+<META http-equiv=Content-Type content="text/html; charset=Windows-1252"></HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<H1 CLASS="western"><B>Editieren von formatiertem Text</B></H1>
+<H2 CLASS="western">Mit Tags arbeiten</H2>
+<P CLASS="western">OmegaT zeigt die eingebetteten Formatierungsinformationen von unterst&uuml;tzten Formaten als Tags an (im Moment sind das HTML,XHTML und OpenOffice.org/StarOffice).  Die Tags, die w&auml;hrend der Arbeit mit OmegaT zu sehen sind, sind nicht dieselben, die die Originalanwendungen verwenden;  OmegaT konvertiert sie intern und re-konvertiert sie beim Kompilieren.  
+</P>
+<P CLASS="western">Die Tags m&uuml;ssen unbedingt gleich belassen werden.  Sollten sie irrt&uuml;mlich ver&auml;ndert werden, kann die Formatierung der &Uuml;bersetzung verloren gehen.  Im schlimmsten Fall kann man die &uuml;bersetzte Datei nicht &ouml;ffnen:  dies passiert insbesondere mit OpenOffice.org Dateien.</P>
+<P CLASS="western">Auch wenn man selbst keinerlei Formatierung ausf&uuml;hren kann, hat man bis zu einem bestimmten Punkt die M&ouml;glichkeit, die existierende Formatierung zu beeinflussen. 
+</P>
+<H3 CLASS="western">Manipulieren von Tags bei OpenOffice.org-Dateien</H3>
+<P CLASS="western">Die Tags von OpenOffice.org m&uuml;ssen unver&auml;ndert erhalten bleiben. Man darf diese Tags nicht l&ouml;schen, vervielf&auml;ltigen oder deren Reihenfolge ver&auml;ndern. Man kann dagegen:</P>
+<UL>
+	<LI><P CLASS="western">die Tags an eine andere Stelle des Segments <I>bewegen</I>; sie m&uuml;ssen auf jeden Fall in derselben Reihenfolge bleiben;</P>
+</UL>
+<UL>
+	<LI><P CLASS="western">Tags <I>l&ouml;schen</I>, indem man sie hintereinander stellt. Wenn man z.B. diesen Text <BR><BR>Dieser Text ist &lt;f0&gt;kursiv&lt;/f0&gt;<BR>in<BR>Dieser Text ist &lt;f0&gt;&lt;/f0&gt;kursiv</P>
+	<P CLASS="western">ver&auml;ndert, wurde die Formatierung f&uuml;r Kursiv entfernt.</P>
+</UL>
+<H3 CLASS="western">Manipulieren von Tags in HTML-Dateien</H3>
+<UL>
+	<LI><P CLASS="western">Der Beginn der Formatierung ist von einem Er&ouml;ffnungstag gekennzeichnet, der folgende Form hat: &lt;<I>xx</I>&gt;; das Ende der Formatierung weist einen entsprechenden Abschlusstag auf: &lt;/<I>xx</I>&gt;.  Irgendwelche &Auml;nderungen bei der Formatierung m&uuml;ssen an beiden Tags des Paars ausgef&uuml;hrt werden.</P>
+</UL>
+<UL>
+	<LI><P CLASS="western" STYLE="font-style: normal">Man kann Tags <I>l&ouml;schen</I>
+	.  Wenn man z.B. die Kursivschrift von nachfolgenden Tag entfernen will:  
+	</P>
+</UL>
+<P CLASS="text-body-indent-western">Dieser Text ist &lt;f0&gt;kursiv&lt;/f0&gt;</P>
+<P CLASS="text-body-indent-western">l&ouml;scht man einfach die Tags &lt;f0&gt; und &lt;/f0&gt;.</P>
+<UL>
+	<LI><P CLASS="western" STYLE="font-style: normal">Man kann Tags <I>duplizieren</I>
+	.  Zum Beispiel:</P>
+</UL>
+<P CLASS="text-body-indent-western">Dieser Text ist &lt;f0&gt;kursiv&lt;/f0&gt;, und so ist &lt;f0&gt;das&lt;/f0&gt;</P>
+<P CLASS="text-body-indent-western">- die "kursiv"- Formatierung ist damit auch bei dem Wort &ldquo;das&rdquo; g&uuml;ltig.</P>
+<UL>
+	<LI><P CLASS="western" STYLE="font-style: normal">Man kann <I>die Reihenfolge</I> von Tags &auml;ndern.  Zum Beispiel:</P>
+</UL>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">Dieser Text ist &lt;f0&gt;kursiv&lt;/f0&gt;, dieser Text ist &lt;f1&gt;unterstrichen&lt;/f1&gt;</P>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">kann ge&auml;ndert werden in 
+</P>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">Dieser Text ist &lt;f1&gt;unterstrichen&lt;/f1&gt;, dieser Text ist &lt;f0&gt;kursiv&lt;/f0&gt;</P>
+<UL>
+	<LI><P CLASS="western" STYLE="font-style: normal">Man kann Tags ineinander <I>verschachteln</I>
+	.  Zum Beispiel:</P>
+</UL>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">Dieser Text ist &lt;f0&gt;kursiv&lt;/f0&gt;, dieser Text ist &lt;f1&gt;unterstrichen&lt;/f1&gt;</P>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">kann ge&auml;ndert werden in 
+</P>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">Dieser Text ist &lt;f0&gt;kursiv und &lt;f1&gt;dieser Text ist auch unterstrichen&lt;/f1&gt;&lt;/f0&gt;</P>
+<UL>
+	<LI><P CLASS="western" STYLE="font-style: normal">Die Tags d&uuml;rfen sich <B>nicht</B>
+	<I>&uuml;berschneiden</I>.  Zum Beispiel:</P>
+</UL>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">Dieser Text ist &lt;f0&gt;kursiv, dieser Text ist auch  &lt;f1&gt;unterstrichen&lt;/f0&gt;, dieser Text ist unterstrichen, aber nicht kursiv&lt;/f1&gt;</P>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">ist nicht erlaubt und macht die Datei kaputt, wenn man versucht die Tags so platzieren.  Wenn man einen Er&ouml;ffnungstag und dann danach einen zweiten Er&ouml;ffnungstag einf&uuml;gt, muss der Abschlusstag zu dem <B>zweiten</B> Er&ouml;ffnungstag <B>vor dem</B> Abschlusstag des ersten eingef&uuml;gt werden.</P>
+<H2 CLASS="western">Pr&uuml;fen der Tags</H2>
+<P CLASS="western">Die Funktion zum Pr&uuml;fen der Tags (<I>Extras</I> &gt;
+<I>Tags pr&uuml;fen</I>) sucht Tags, die (absichtlich oder unbeabsichtigt) ge&auml;ndert wurden und zeigt die betroffenen Segmente an.</P><br><P><A HREF="en_OmegaT.html">Zur&uuml;ck zur &Uuml;bersicht</A></P>
+</BODY>
+</HTML>

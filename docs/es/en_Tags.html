@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=iso-8859-15">
+	<TITLE>Edici&oacute;n de textos con etiquetas (con formato)</TITLE>
+	<META NAME="GENERATOR" CONTENT="StarOffice 7  (Linux)">
+	<META NAME="CREATED" CONTENT="20030305;14173900">
+	<META NAME="CHANGED" CONTENT="20041026;11293400">
+	<STYLE>
+	<!--
+		@page { margin: 2cm }
+		H1.western { font-family: "Helvetica", sans-serif; font-size: 14pt }
+		P { margin-bottom: 0.21cm; text-decoration: none }
+		P.western { font-family: "Nimbus Sans L"; font-size: 12pt; font-style: normal }
+		H3.western { font-family: "Helvetica", sans-serif; font-size: 12pt }
+		H2.western { font-family: "Helvetica", sans-serif; font-size: 12pt; font-style: normal }
+		H2.cjk { font-size: 14pt; font-style: italic }
+		H2.ctl { font-size: 14pt; font-style: italic }
+		P.text-body-indent-western { margin-left: 1cm; font-family: "Nimbus Sans L"; font-size: 12pt; font-style: normal }
+		P.text-body-indent-cjk { margin-left: 1cm }
+		P.text-body-indent-ctl { margin-left: 1cm }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="es-ES" DIR="LTR">
+<H1 CLASS="western"><B>Edici&oacute;n de textos con etiquetas (con
+formato)</B></H1>
+<H2 CLASS="western">Trabajar con etiquetas</H2>
+<P CLASS="western">OmegaT muestra el formato interno de los archivos
+soportados (por el momento HTML, XHTML y OpenOffice.org/StarOffice)
+como etiquetas. Las etiquetas que se muestran en OmegaT no son las
+mismas utilizadas por las aplicaciones originales; OmegaT las
+convierte internamente, y las reconvierte al compilar. 
+</P>
+<P CLASS="western">Hay que tener cuidado con las etiquetas. Si se
+modifican accidentalmente, el formato del archivo final puede
+corromperse. En el peor de los casos, puede que no sea posible abrir
+el archivo: esto ocurre en particular con los archivos
+OpenOffice.org.</P>
+<P CLASS="western">Aunque no se puede a&ntilde;adir formato en
+OmegaT, se tiene un cierto nivel de control sobre el formato
+existente. 
+</P>
+<H3 CLASS="western">Manipulaci&oacute;n de etiquetas en archivos
+OpenOffice.org</H3>
+<P CLASS="western">Las etiquetas de OpenOffice.org no admiten
+cambios. No se pueden borrar, duplicar ni cambiar de orden. S&iacute;
+se pueden:</P>
+<UL>
+	<LI><P CLASS="western"><I>mover</I> las etiquetas a otro lugar del
+	segmento; deben, sin embargo, mantener el mismo orden;</P>
+</UL>
+<UL>
+	<LI><P CLASS="western"><I>anular</I> las etiquetas colocando una
+	junto a otra. Por ejemplo, si cambia <BR><BR>Este texto est&aacute;
+	en &lt;f0&gt;cursiva&lt;/f0&gt;<BR>a<BR>Este texto est&aacute; en
+	&lt;f0&gt;&lt;/f0&gt;cursiva</P>
+	<P CLASS="western">elimina de hecho la cursiva.</P>
+</UL>
+<H3 CLASS="western">Manipulaci&oacute;n de etiquetas en archivos HTML</H3>
+<UL>
+	<LI><P CLASS="western">El inicio del formato viene marcado por una
+	etiqueta de apertura de la forma &lt;<I>xx&gt;</I>, y el final del
+	formato por su correspondiente etiqueta de cierre &lt;/<I>xx&gt;</I>.
+	Cualquier cambio que se introduzca en las etiquetas de formato debe
+	aplicarse a ambas etiquetas de la pareja.</P>
+</UL>
+<UL>
+	<LI><P CLASS="western" STYLE="font-style: normal">Se pueden <I>borrar</I>
+	las etiquetas. Por ejemplo, para eliminar la cursiva de 
+	</P>
+</UL>
+<P CLASS="text-body-indent-western">Este texto est&aacute; en
+&lt;f0&gt;cursiva&lt;/f0&gt;</P>
+<P CLASS="text-body-indent-western">borre simplemente las etiquetas
+&lt;f0&gt; y &lt;/f0&gt;.</P>
+<UL>
+	<LI><P CLASS="western" STYLE="font-style: normal">Se pueden <I>duplicar</I>
+	las etiquetas. Por ejemplo,</P>
+</UL>
+<P CLASS="text-body-indent-western">Este texto est&aacute; en
+&lt;f0&gt;cursiva&lt;/f0&gt;</P>
+<P CLASS="text-body-indent-western">aplica el formato de la palabra
+&quot;cursiva&quot; a la palabra &quot;&eacute;ste&quot;.</P>
+<UL>
+	<LI><P CLASS="western" STYLE="font-style: normal">Se puede <I>cambiar
+	el orden</I> de las etiquetas. Por ejemplo,</P>
+</UL>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">Este
+texto est&aacute; en &lt;f0&gt;cursiva&lt;/f0&gt;, este texto est&aacute;
+&lt;f1&gt;subrayado&lt;/f1&gt;</P>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">puede
+cambiarse a 
+</P>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">Este
+texto est&aacute; en &lt;f0&gt;cursiva&lt;/f0&gt;</P>
+<UL>
+	<LI><P CLASS="western" STYLE="font-style: normal">Se pueden <I>anidar</I>
+	las etiquetas. Por ejemplo:</P>
+</UL>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">Este
+texto est&aacute; en &lt;f0&gt;cursiva&lt;/f0&gt;, este texto est&aacute;
+&lt;f1&gt;subrayado&lt;/f1&gt;</P>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">puede
+cambiarse a 
+</P>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">Este
+texto est&aacute; en &lt;f0&gt;cursiva y &lt;f1&gt;este texto est&aacute;
+tambi&eacute;n subrayado&lt;/f1&gt;&lt;/f0&gt;</P>
+<UL>
+	<LI><P CLASS="western" STYLE="font-style: normal"><B>No</B> debe
+	<I>solapar</I> las etiquetas. Por ejemplo:</P>
+</UL>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">Este
+texto est&aacute; en &lt;f0&gt;cursiva, este texto est&aacute;
+tambi&eacute;n &lt;f1&gt;subrayado&lt;/f0&gt;, este texto est&aacute;
+subrayado pero no en cursiva&lt;/f1&gt;</P>
+<P CLASS="text-body-indent-western" STYLE="font-style: normal">no
+est&aacute; permitido y corromper&aacute; su archivo si lo intenta
+utilizar. Si inserta una etiqueta de apertura y abre a continuaci&oacute;n
+una segunda etiqueta de apertura, debe insertar la etiqueta de cierre
+de la <B>segunda</B> etiqueta de apertura <B>antes</B> de la etiqueta
+de cierre de la primera.</P>
+<H2 CLASS="western">Validar las etiquetas</H2>
+<P CLASS="western">La funci&oacute;n de validaci&oacute;n de
+etiquetas (<I>Herramientas</I> &gt; <I>Validar etiquetas</I>) detecta
+las etiquetas que han sufrido cambios (deliberados o accidentales) e
+indica los segmentos que se han visto afectados.</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><A HREF="en_OmegaT.html">Volver al &iacute;ndice</A></P>
+</BODY>
+</HTML>

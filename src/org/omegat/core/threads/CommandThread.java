@@ -983,14 +983,11 @@ public class CommandThread extends Thread
 	private void buildNearList(ArrayList seList, String status) 
 				throws InterruptedException
 	{
-		String sNearTrash = getOrSetPreference(OConsts.TF_NEAR_TRASH, OConsts.DEFAULT_NEAR_THRASH);
-		double nearTrash = Double.parseDouble(sNearTrash);
-		
 		String project = null;
 		if( seList!=m_strEntryList )
 			project = m_nearProj;
 		
-		FuzzyMatcher matcher = new FuzzyMatcher(status, nearTrash, m_transFrame, project, this);
+		FuzzyMatcher matcher = new FuzzyMatcher(status, OConsts.NEAR_THRASH, m_transFrame, project, this);
 		matcher.match(seList);
 	}
 		

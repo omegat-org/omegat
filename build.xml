@@ -1,48 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project basedir="." default="all" name="OmegaT">
 
-    <target name="init">
+<!--
+/**************************************************************************
+ OmegaT - Java based Computer Assisted Translation (CAT) tool
+ Copyright (C) 2002-2004  Keith Godfrey et al
+                          keithgodfrey@users.sourceforge.net
+                          907.223.2039
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+**************************************************************************/
+-->
+
+<project name="OmegaT" default="all" basedir=".">
+    <description>Builds, tests, and runs the project OmegaT.</description>
+    <import file="nbproject/build-impl.xml"/>
+
+    <target name="-pre-init">
         <property name="iscc.exe" value="m:/progs/Inno Setup 4/iscc.exe"/>
-
-        <property name="jar" location="tmp/${ant.project.name}.jar"/>
-        
         <property file="src/org/omegat/Version.properties"/>
     </target>
 
-    <target name="compile" depends="init">
-        <mkdir dir="classes"/>
-        <copy todir="classes/org/omegat">
-            <fileset dir="src/org/omegat" includes="*.properties"/>
-        </copy>
-        <javac debug="true" deprecation="true" destdir="classes" srcdir="src"/>
+    <target name="-pre-jar">
+        <filter filtersfile="src/org/omegat/Version.properties"/>
+        <copy file="manifest-template.mf" tofile="manifest.mf" filtering="true"/>
     </target>
 
-    <target name="jar" depends="init,compile">
-        <mkdir dir="tmp"/>
-        <jar basedir="classes" compress="false" jarfile="${jar}">
-            <manifest>
-                <attribute name="Main-Class" value="org.omegat.Main"/>
-                <attribute name="License" value="GNU Public License version 2"/>
-                <attribute name="Specification-Version" value="${specification-version}"/>
-                <attribute name="Implementation-Version" value="${version}"/>
-            </manifest>
-        </jar>
-    </target>
-
-    <target name="clean" depends="init" description="Clean all build products.">
+    <target name="-post-clean">
         <delete>
             <fileset dir="src" includes="**/*.class"/>
         </delete>
-        <delete dir="classes"/>
+        <delete file="manifest.mf"/>
         <delete dir="dist"/>
-        <delete dir="tmp"/>
         <ant dir="addons/properties-import" target="clean" inheritAll="false"/>
     </target>
 
     <target name="win" description="Build Win32 distro" depends="init,jar,zip">
         <copy todir="tmp" file="release/win32-specific/OmegaT.exe"/>
 
-	<filter token="VERSION_NUMBER_SUBST" value="${version}"/>
+        <filter token="VERSION_NUMBER_SUBST" value="${version}"/>
         <copy todir="tmp" file="release/win32-specific/OmegaT.iss" filtering="on"/>
         
         <mkdir dir="dist"/>
@@ -77,23 +84,6 @@
         <zip destfile="dist/OmegaT_src_${version}.zip" basedir="." includes="addons/** docs/** images/** nbproject/** release/** src/** build.xml"/>
     </target>
 
-
     <target name="all" depends="src,zip" description="Build distributions."/>
-    
-    <target name="run" depends="compile">
-        <java classpath="classes" classname="org.omegat.Main" fork="true"/>
-    </target>
-    
-    <target name="debug" depends="compile" if="netbeans.home" description="Debug Project">
-        <nbjpdastart name="OmegaT" addressproperty="jpda.address" transport="dt_socket">
-            <classpath path="classes"/>
-        </nbjpdastart>
-        <java fork="true" classname="org.omegat.Main">
-            <jvmarg value="-Xdebug"/>
-            <jvmarg value="-Xnoagent"/>     
-            <jvmarg value="-Djava.compiler=none"/>     
-            <jvmarg value="-Xrunjdwp:transport=dt_socket,address=${jpda.address}"/>     
-            <classpath path="classes"/>
-        </java> 
-    </target>
+
 </project>

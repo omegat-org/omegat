@@ -54,8 +54,11 @@ public class HelpFrame extends JFrame
 	 */
 	private static HelpFrame singleton;
 
+	/** Creates the Help Frame */
 	private HelpFrame()
 	{
+		language = detectLanguage();
+		
 		m_historyList = new ArrayList();
 		
 		Container cp = getContentPane();
@@ -141,9 +144,7 @@ public class HelpFrame extends JFrame
 
 	private void displayFile(String file)
 	{
-		//m_helpPane.setText("");
-		String fullname = "file:" + System.getProperty("user.dir") +  // NOI18N
-			File.separator + OConsts.HELP_DIR + File.separator + file;
+		String fullname = absolutePath(file);
 		try
 		{
 			URL page = new URL(fullname);
@@ -211,6 +212,24 @@ public class HelpFrame extends JFrame
 		m_backButton.setText(OStrings.HF_BUTTON_BACK);
 		setTitle(OStrings.HF_WINDOW_TITLE);
 	}
+	
+	private String absolutePath(String file)
+	{
+		return "file:" + System.getProperty("user.dir")				// NOI18N
+				+ File.separator + OConsts.HELP_DIR + File.separator 
+				+ language + File.separator + file;
+	}
+	
+	private String detectLanguage()
+	{
+		String lang = System.getProperty("user.language", "en");
+		File docsFolder = new File("file:" + System.getProperty("user.dir")				// NOI18N
+				+ File.separator + OConsts.HELP_DIR + File.separator + lang);
+		if( docsFolder.exists() )
+			return lang;
+		else
+			return "en";
+	}
 
 	private JEditorPane m_helpPane;
 	private JButton		m_closeButton;
@@ -220,5 +239,7 @@ public class HelpFrame extends JFrame
 
 	private String	m_filename = ""; // NOI18N
 
+	/** The language of the help files, English by default */
+	private String language;
 }
 

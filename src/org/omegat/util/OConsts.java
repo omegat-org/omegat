@@ -61,8 +61,7 @@ public class OConsts
 	
 	public static final String WORD_CNT_FILE_EXT		= "word_counts";			// NOI18N
 	
-	public static final String DEFAULT_NEAR_THRASH	= "0.6";						// NOI18N
-	public static final String TF_NEAR_TRASH		= "near_trash";					// NOI18N
+	public static final double NEAR_THRASH = 0.4;
 	
 	// preference names
 	public static final String PREF_SRCLANG		= "source_lang";					// NOI18N
@@ -91,7 +90,7 @@ public class OConsts
 	
 	public static final String SW_DIR_CB_CHECKED_CMD	= "dir_ck";					// NOI18N
 	
-	public static final int		ST_MAX_SEARCH_RESULTS	= 50;
+	public static final int		ST_MAX_SEARCH_RESULTS	= 100;
 	
 	public static final String TF_SRC_FONT_NAME		= "source_font";				// NOI18N
 	public static final String TF_SRC_FONT_SIZE		= "source_font_size";			// NOI18N

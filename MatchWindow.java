@@ -124,7 +124,7 @@ class MatchWindow extends JFrame
 		
 		m_matchPane.setText(m_matchDisplay);
 
-		if (m_hiliteStart >= 0)
+		if ( m_hiliteStart >= 0 && m_matchDisplay.length()>0 )
 		{
 			m_matchPane.select(m_hiliteStart, m_hiliteEnd);
 			MutableAttributeSet mattr = null;

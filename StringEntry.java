@@ -78,6 +78,31 @@ class StringEntry
 	}
 	
 	public LinkedList getNearList()		{ return m_nearList;	}
+	
+	/**
+	 * Gets a list with (max) 5 near segments, but only with those that have a
+	 * translation. This list is recomputed on each call to this method,
+	 * because some text may become translated after a call to this method.
+	 *
+	 * @return list of near segments, that have a translation
+	 */
+	public LinkedList getNearListTranslated() {
+		LinkedList res = new LinkedList();
+		int size = 0;
+		Iterator i = ((LinkedList)getNearList().clone()).listIterator();
+		while( i.hasNext() ) {
+			NearString next = (NearString) i.next();
+			if( !next.str.getTrans().equals("") ) {
+				res.add(next);
+				size++;
+				if( size>=OConsts.MAX_NEAR_STRINGS )
+					break;
+			}
+		}
+		return res;
+	}
+
+	
 	public void addNearString(StringEntry strEntry, 
 		double score, byte[] parData, byte[] nearData, String nearProj)
 	{

@@ -51,7 +51,6 @@ class TransFrame extends JFrame implements ActionListener
 		m_numEntries = -1;
 		m_activeProj = "";
 		m_activeFile = "";
-		m_nearListNum = -1;
 
 		m_shortcutKey = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
 
@@ -764,15 +763,12 @@ class TransFrame extends JFrame implements ActionListener
 		}
 	}
 
-	protected void doCompareN(int n)
+	protected void doCompareN(int nearNum)
 	{
 		if (m_projectLoaded == false)
 			return;
 		
-		StringEntry se = m_curEntry.getStrEntry();
-		if (n < se.getNearList().size())
-			m_nearListNum = n;
-		updateFuzzyInfo();
+		updateFuzzyInfo(nearNum);
 	}
 
 	public void doUnloadProject()
@@ -1007,81 +1003,51 @@ class TransFrame extends JFrame implements ActionListener
 
 	// display fuzzy matching info if it's available
 	// don't call this directly - should only be called through doCompareN
-	protected void updateFuzzyInfo() 
+	protected void updateFuzzyInfo(int nearNum) 
 	{
 		if (m_projectLoaded == false)
 			return;
-
-//System.out.println("updating fuzzy info - '"+m_curEntry.getSrcText()+"'");
-
-//System.out.println("checking for near terms...");
-				// see if there are any matches
-			StringEntry se = m_curEntry.getStrEntry();
-			if (se.getNearList().size() > 0)
-			{
-//System.out.println("  found "+ se.getNearList().size());
-				m_nearList = (LinkedList) se.getNearList().clone();
-				NearString ns = (NearString) m_nearList.get(m_nearListNum);
-				m_curNear = ns;
-			}
-			else
-			{
-//System.out.println("  found none");
-				// hide match windows if they're visible
-				m_nearList = null;
-				m_nearListNum = -1;
-				m_curNear = null;
-				m_matchViewer.updateMatchText();
-				return;
-			}
-
-			//String srcText = m_curEntry.getSrcText();
-			//formatNearText(srcText, m_curNear.parAttr, Color.red, 
-			//		Color.darkGray, m_xlDoc, m_segmentStartOffset, 
-			//		srcText.length());
-			
-			//String oldStr = m_curNear.str.getSrcText();
-//System.out.println("old src text: "+oldStr);
-
-			// remember length of base string (before fuzzy % added)
-			//int oldStrLen = oldStr.length();
-//		String proj = m_curNear.proj;
-
-			//m_matchPane.formatNearText(oldStr, m_curNear.attr, Color.blue);
-			//String locStr = m_curNear.str.getTrans();
-//			m_matchViewer.addMatchTerm(oldStr, locStr, 
-//					(int) (m_curNear.score * 100), "");
+		
 		StringEntry curEntry = m_curEntry.getStrEntry();
-		String str = null;
-		if (curEntry.getNearList().size() > 0)
+		LinkedList nearList = curEntry.getNearListTranslated();
+		// see if there are any matches
+		if( nearList.size()<=0 ) 
 		{
-			NearString ns;
-			int ctr = 0;
-			int offset;
-			int start = -1;
-			int end = -1;
-			ListIterator li = curEntry.getNearList().listIterator();
-			while (li.hasNext())
-			{
-				ns = (NearString) li.next();
-				String oldStr = ns.str.getSrcText();
-				String locStr = ns.str.getTrans();
-				String proj = ns.proj;
-				offset = m_matchViewer.addMatchTerm(oldStr, locStr, 
-						(int) (ns.score * 100), proj);
-				if (ctr == m_nearListNum)
-				{
-					start = offset;
-					str = oldStr;
-				}
-				else if (ctr == (m_nearListNum+1))
-					end = offset;
-				ctr++;
-				if (ctr >= 5)
-					break;
-			}
-			m_matchViewer.hiliteRange(start, end);
+			m_curNear = null;
+			m_matchViewer.updateMatchText();
+			return;
 		}
+		
+		m_curNear = (NearString) nearList.get(nearNum);
+		String str = null;
+		
+		NearString ns;
+		int ctr = 0;
+		int offset;
+		int start = -1;
+		int end = -1;
+		ListIterator li = nearList.listIterator();
+		
+		while( li.hasNext() ) 
+		{
+			ns = (NearString) li.next();
+			
+			String oldStr = ns.str.getSrcText();
+			String locStr = ns.str.getTrans();
+			String proj = ns.proj;
+			offset = m_matchViewer.addMatchTerm(oldStr, locStr,	(int)(ns.score*100), proj);
+			
+			if( ctr==nearNum ) {
+				start = offset;
+				str = oldStr;
+			} else if( ctr==(nearNum+1) ) {
+				end = offset;
+			}
+			
+			ctr++;
+		}
+		
+		m_matchViewer.hiliteRange(start, end);
 		m_matchViewer.updateMatchText();
 		m_matchViewer.formatNearText(str, m_curNear.attr, Color.blue);
 	}
@@ -1294,9 +1260,7 @@ class TransFrame extends JFrame implements ActionListener
 			m_glossaryLength = 0;
 		m_matchViewer.updateGlossaryText();
 
-		int nearLength = curEntry.getNearList().size();
-		if (nearLength > 5)
-			nearLength = 5;
+		int nearLength = curEntry.getNearListTranslated().size();
 		
 		if ((nearLength > 0) && (m_glossaryLength > 0))
 		{
@@ -2185,9 +2149,6 @@ System.out.println("");
 
 	private XLPane		m_xlPane;
 	private JScrollPane	m_xlScroller;
-
-	private LinkedList	m_nearList;
-	private int		m_nearListNum;
 
 	private JLabel		m_statusLabel;
 	// TODO fuzzy match and project info in status label

@@ -1323,7 +1323,7 @@ public class CommandThread extends Thread
 			
 			// RFE 1001918 - backing up project's TMX upon successful read
 			if( isProject )
-				LFileCopy.copy(fname, fname+".bak");
+				LFileCopy.copy(fname, fname+".bak");							// NOI18N
 			
 			int num = tmx.numSegments();
 			ArrayList strEntryList = new ArrayList(num+2);

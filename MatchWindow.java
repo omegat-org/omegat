@@ -2,7 +2,7 @@
 //  
 //  MatchWindow.java - 
 //  
-//  Copyright (C) 2002, Keith Godfrey
+//  Copyright (C) 2004, Keith Godfrey
 //  
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,8 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  16Apr2003
-//  Copyright (C) 2002, Keith Godfrey
+//  Copyright (C) 2004, Keith Godfrey, et al
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
@@ -44,28 +43,9 @@ class MatchWindow extends JFrame
 {
 	public MatchWindow()
 	{
-		// SIB - find available screen real-estate and adjust size
-		//	accordingly
-		// KBG - don't be obnoxious and take too much of screen 
-		//	(1200x1000 total area should be more than adequate)
-		// KBG - in case center is offset (i.e. if taskbar on top of screen)
-		//	then offset windows (14apr04)
-		GraphicsEnvironment env = 
-				GraphicsEnvironment.getLocalGraphicsEnvironment();
-		Rectangle scrSize = env.getMaximumWindowBounds();
-		Point center = env.getCenterPoint();
-		int origX = scrSize.width/2 - center.x;
-		int origY = scrSize.height/2 - center.y;
-		int pos = (int) (scrSize.width * 0.67);
-		int wid = (int) (scrSize.width * 0.33);
-		if (pos > 800)
-			pos = 800;
-		if (wid > 400)
-			wid = 400;
-		if (scrSize.height > 1000)
-			scrSize.height = 1000;
-		setSize(wid, scrSize.height);
-		setLocation(origX+pos, origY);
+		// KBG - set screen size based on saved values or guesses about
+		//		screen size (18may04)
+		initScreenLayout();
 
 		Container cont = getContentPane();
 		cont.setLayout(new GridLayout(2, 1, 3, 4));
@@ -166,6 +146,81 @@ class MatchWindow extends JFrame
 
 		m_hiliteStart = start;
 		m_hiliteEnd = end;
+	}
+
+	public void storeScreenLayout()
+	{
+		int w = getWidth();
+		int h = getHeight();
+		int x = getX();
+		int y = getY();
+		PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_W, "" + w);
+		PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_H, "" + h);
+		PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_X, "" + x);
+		PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_Y, "" + y);
+	}
+	
+	protected void initScreenLayout()
+	{
+		// KBG - assume screen size is 800x600 if width less than 900, and
+		//		1024x768 if larger.  assume task bar at bottom of screen.
+		//		if screen size saved, recover that and use instead
+		//	(18may04)
+		String dw, dh, dx, dy;
+		dw = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_W);
+		dh = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_H);
+		dx = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_X);
+		dy = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_Y);
+		int x=0;
+		int y=0;
+		int w=0;
+		int h=0;
+		boolean badSize = false;
+		if ((dw == null) || (dw.equals(""))	|| (dh == null)			|| 
+				(dh.equals(""))	|| (dx == null) || (dx.equals(""))	||
+				(dy == null) || (dy.equals("")))
+		{
+			badSize = true;
+		}
+		else
+		{
+			try 
+			{
+				x = Integer.parseInt(dx);
+				y = Integer.parseInt(dy);
+				w = Integer.parseInt(dw);
+				h = Integer.parseInt(dh);
+			}
+			catch (NumberFormatException nfe)
+			{
+				badSize = true;
+			}
+		}
+		if (badSize)
+		{
+			// size info missing - put window in default position
+			GraphicsEnvironment env = 
+					GraphicsEnvironment.getLocalGraphicsEnvironment();
+			Rectangle scrSize = env.getMaximumWindowBounds();
+			Point center = env.getCenterPoint();
+			if (scrSize.width < 900)
+			{
+				// assume 800x600
+				setSize(200, 560);
+				setLocation(590, 0);
+			}
+			else
+			{
+				// assume 1024x768 or larger
+				setSize(320, 720);
+				setLocation(680, 0);
+			}
+		}
+		else
+		{
+			setSize(w, h);
+			setLocation(x, y);
+		}
 	}
 
 	protected String		m_matchDisplay = "";

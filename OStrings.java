@@ -2,7 +2,7 @@
 //  
 //  OStrings.java - 
 //  
-//  Copyright (C) 2002, Keith Godfrey
+//  Copyright (C) 2004, Keith Godfrey
 //  
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,8 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  16Apr2003
-//  Copyright (C) 2002, Keith Godfrey
+//  Copyright (C) 2004, Keith Godfrey, et al
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
@@ -66,6 +65,7 @@ public static final String TF_NONE		= "--none--";
 public static final String TF_MENU_FILE		= "File";
 public static final String TF_MENU_FILE_OPEN	= "Open";
 public static final String TF_MENU_FILE_CREATE	= "Create New project";
+public static final String TF_MENU_FILE_CLOSE	= "Close";
 public static final String TF_MENU_FILE_COMPILE	= "Compile";
 public static final String TF_MENU_FILE_PROJWIN	= "Show file List";
 public static final String TF_MENU_FILE_MATCHWIN	= "Show Match window";
@@ -99,6 +99,8 @@ public static final String TF_MENU_DISPLAY			= "Configuration";
 //public static final String TF_MENU_DISPLAY_GLOSSARY	= "Glossary";
 public static final String TF_MENU_DISPLAY_SOURCE	= "Source text";
 public static final String TF_MENU_DISPLAY_FONT	= "Font";
+public static final String TF_MENU_DISPLAY_ADVANCE	= "Use TAB to advance";
+public static final String TF_MENU_DISPLAY_MNEMONIC	= "Show mnemonics";
 //public static final String TF_MENU_SERVER	= "Server";
 //public static final String TF_MENU_LANGUAGE	= "Language";
 //public static final String TF_MENU_LANGUAGE_RESCAN	= "rescan";

@@ -2,7 +2,7 @@
 //  
 //  PreferenceManager.java - 
 //  
-//  Copyright (C) 2002, Keith Godfrey
+//  Copyright (C) 2004, Keith Godfrey
 //  
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,8 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  16Apr2003
-//  Copyright (C) 2002, Keith Godfrey
+//  Copyright (C) 2004, Keith Godfrey, et al
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
@@ -37,9 +36,10 @@ import java.text.*;
 
 class PreferenceManager
 {
-	public PreferenceManager(String pref)
+	public PreferenceManager(String prefFile)
 	{
-		m_prefFileName = pref;
+		pref = this;
+		m_prefFileName = prefFile;
 		m_loaded = false;
 		m_preferenceMap = new HashMap(64);
 		m_nameList = new ArrayList(32);
@@ -243,6 +243,8 @@ class PreferenceManager
 	protected ArrayList	m_nameList;
 	protected ArrayList	m_valList;
 	protected HashMap	m_preferenceMap;
+
+	public static PreferenceManager pref = null;
 
 	///////////////////////////////////////////////////////////////////
 

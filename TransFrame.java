@@ -2,7 +2,7 @@
 //  
 //  TransFrame.java - 
 //  
-//  Copyright (C) 2002, Keith Godfrey
+//  Copyright (C) 2004, Keith Godfrey
 //  
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,8 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  16Apr2003
-//  Copyright (C) 2002, Keith Godfrey
+//  Copyright (C) 2004, Keith Godfrey, et al
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
@@ -65,28 +64,11 @@ class TransFrame extends JFrame implements ActionListener
 		
 		////////////////////////////////
 		updateUIText();
+		loadDisplayPrefs();
 
 		enableEvents(0);
 
-		// SIB - find available screen real-estate and adjust size
-		//	accordingly
-		// KBG - don't be obnoxious and take too much of screen 
-		//	(1200x1000 total area should be more than adequate)
-		// KBG - in case center is offset (i.e. if taskbar on top of screen)
-		//	then offset windows (14apr04)
-		GraphicsEnvironment env = 
-				GraphicsEnvironment.getLocalGraphicsEnvironment();
-		Rectangle scrSize = env.getMaximumWindowBounds();
-		Point center = env.getCenterPoint();
-		int origX = scrSize.width/2 - center.x;
-		int origY = scrSize.height/2 - center.y;
-		scrSize.width = (int) (scrSize.width * 0.67);
-		if (scrSize.width > 790)
-			scrSize.width = 790;
-		if (scrSize.height > 1000)
-			scrSize.height = 1000;
-		setSize(scrSize.width, scrSize.height );
-		setLocation(origX, origY);
+		initScreenLayout();
 
 		addWindowListener(new WindowAdapter()
 			{
@@ -136,6 +118,99 @@ class TransFrame extends JFrame implements ActionListener
 			m_segmentTagHasNumber = false;
 	}
 
+	protected void loadDisplayPrefs()
+	{
+		String mn = PreferenceManager.pref.getPreference(OConsts.PREF_MNEMONIC);
+		if ((mn != null) && (mn.equals("true")))
+		{
+			m_miDisplayMnemonic.setSelected(true);
+			doSetMnemonics(true);
+		}
+		String tab = PreferenceManager.pref.getPreference(OConsts.PREF_TAB);
+		if ((tab != null) && (tab.equals("true")))
+		{
+			m_miDisplayAdvanceKey.setSelected(true);
+			m_advancer = KeyEvent.VK_TAB;
+		}
+		else
+			m_advancer = KeyEvent.VK_ENTER;
+	}
+
+	protected void initScreenLayout()
+	{
+		// KBG - assume screen size is 800x600 if width less than 900, and
+		//		1024x768 if larger.  assume task bar at bottom of screen.
+		//		if screen size saved, recover that and use instead
+		//	(18may04)
+		String dw, dh, dx, dy;
+		dw = PreferenceManager.pref.getPreference(OConsts.PREF_DISPLAY_W);
+		dh = PreferenceManager.pref.getPreference(OConsts.PREF_DISPLAY_H);
+		dx = PreferenceManager.pref.getPreference(OConsts.PREF_DISPLAY_X);
+		dy = PreferenceManager.pref.getPreference(OConsts.PREF_DISPLAY_Y);
+		int x=0;
+		int y=0;
+		int w=0;
+		int h=0;
+		boolean badSize = false;
+		if ((dw == null) || (dw.equals(""))	|| (dh == null)			|| 
+				(dh.equals(""))	|| (dx == null) || (dx.equals(""))	||
+				(dy == null) || (dy.equals("")))
+		{
+			badSize = true;
+		}
+		else
+		{
+			try 
+			{
+				x = Integer.parseInt(dx);
+				y = Integer.parseInt(dy);
+				w = Integer.parseInt(dw);
+				h = Integer.parseInt(dh);
+			}
+			catch (NumberFormatException nfe)
+			{
+				badSize = true;
+			}
+		}
+		if (badSize)
+		{
+			// size info missing - put window in default position
+			GraphicsEnvironment env = 
+					GraphicsEnvironment.getLocalGraphicsEnvironment();
+			Rectangle scrSize = env.getMaximumWindowBounds();
+			Point center = env.getCenterPoint();
+			if (scrSize.width < 900)
+			{
+				// assume 800x600
+				setSize(585, 560);
+				setLocation(0, 0);
+			}
+			else
+			{
+				// assume 1024x768 or larger
+				setSize(675, 720);
+				setLocation(0, 0);
+			}
+		}
+		else
+		{
+			setSize(w, h);
+			setLocation(x, y);
+		}
+	}
+
+	public void storeScreenLayout()
+	{
+		int w = getWidth();
+		int h = getHeight();
+		int x = getX();
+		int y = getY();
+		CommandThread.core.setPreference(OConsts.PREF_DISPLAY_W, "" + w);
+		CommandThread.core.setPreference(OConsts.PREF_DISPLAY_H, "" + h);
+		CommandThread.core.setPreference(OConsts.PREF_DISPLAY_X, "" + x);
+		CommandThread.core.setPreference(OConsts.PREF_DISPLAY_Y, "" + y);
+	}
+
 	protected void createUI()
 	{
 		int i;
@@ -162,6 +237,76 @@ class TransFrame extends JFrame implements ActionListener
 		m_matchViewer.show();
 	}
 
+	protected void doSetMnemonics(boolean show)
+	{
+		if (show == true)
+		{
+			m_mFile.setMnemonic(KeyEvent.VK_F);
+			m_miFileOpen.setMnemonic(KeyEvent.VK_O);
+			m_miFileCreate.setMnemonic(KeyEvent.VK_N);
+			m_miFileCompile.setMnemonic(KeyEvent.VK_C);
+			m_miFileProjWin.setMnemonic(KeyEvent.VK_L);
+			m_miFileMatchWin.setMnemonic(KeyEvent.VK_M);
+			m_miFileSave.setMnemonic(KeyEvent.VK_S);
+			m_miFileQuit.setMnemonic(KeyEvent.VK_Q);
+			m_mEdit.setMnemonic(KeyEvent.VK_E);
+			m_miEditUndo.setMnemonic(KeyEvent.VK_Z);
+			m_miEditRedo.setMnemonic(KeyEvent.VK_Y);
+			m_miEditRecycle.setMnemonic(KeyEvent.VK_R);
+			m_miEditInsert.setMnemonic(KeyEvent.VK_I);
+			m_miEditFind.setMnemonic(KeyEvent.VK_F);
+//			m_miEditUntrans.setMnemonic(KeyEvent.VK_U);
+			m_miEditPrev.setMnemonic(KeyEvent.VK_P);
+			m_miEditCompare1.setMnemonic(KeyEvent.VK_1);
+			m_miEditCompare2.setMnemonic(KeyEvent.VK_2);
+			m_miEditCompare3.setMnemonic(KeyEvent.VK_3);
+			m_miEditCompare4.setMnemonic(KeyEvent.VK_4);
+			m_miEditCompare5.setMnemonic(KeyEvent.VK_5);
+			m_mDisplay.setMnemonic(KeyEvent.VK_C);
+			m_miDisplayFont.setMnemonic(KeyEvent.VK_F);
+			m_miDisplayAdvanceKey.setMnemonic(KeyEvent.VK_T);
+			m_miDisplayMnemonic.setMnemonic(KeyEvent.VK_M);
+			m_mTools.setMnemonic(KeyEvent.VK_T);
+			m_miToolsValidateTags.setMnemonic(KeyEvent.VK_T);
+			m_miToolsMergeTMX.setMnemonic(KeyEvent.VK_M);
+			m_mVersion.setMnemonic(KeyEvent.VK_O);
+			m_miVersionHelp.setMnemonic(KeyEvent.VK_H);
+		}
+		else
+		{
+			m_mFile.setMnemonic(0);
+			m_miFileOpen.setMnemonic(0);
+			m_miFileCreate.setMnemonic(0);
+			m_miFileCompile.setMnemonic(0);
+			m_miFileProjWin.setMnemonic(0);
+			m_miFileMatchWin.setMnemonic(0);
+			m_miFileSave.setMnemonic(0);
+			m_miFileQuit.setMnemonic(0);
+			m_mEdit.setMnemonic(0);
+			m_miEditUndo.setMnemonic(0);
+			m_miEditRedo.setMnemonic(0);
+			m_miEditRecycle.setMnemonic(0);
+			m_miEditInsert.setMnemonic(0);
+			m_miEditFind.setMnemonic(0);
+	//		m_miEditUntrans.setMnemonic(0);
+			m_miEditPrev.setMnemonic(0);
+			m_miEditCompare1.setMnemonic(0);
+			m_miEditCompare2.setMnemonic(0);
+			m_miEditCompare3.setMnemonic(0);
+			m_miEditCompare4.setMnemonic(0);
+			m_miEditCompare5.setMnemonic(0);
+			m_mDisplay.setMnemonic(0);
+			m_miDisplayFont.setMnemonic(0);
+			m_miDisplayAdvanceKey.setMnemonic(0);
+			m_miDisplayMnemonic.setMnemonic(0);
+			m_mTools.setMnemonic(0);
+			m_miToolsValidateTags.setMnemonic(0);
+			m_miToolsMergeTMX.setMnemonic(0);
+			m_mVersion.setMnemonic(0);
+			m_miVersionHelp.setMnemonic(0);
+		}
+	}
+
 	protected void createMenus()
 	{
 		////////////////////////////////
@@ -169,24 +314,23 @@ class TransFrame extends JFrame implements ActionListener
 		JMenuBar mb = new JMenuBar();
 		// file
 		m_mFile = new JMenu();
-		m_mFile.setMnemonic(KeyEvent.VK_F);
 		m_miFileOpen = new JMenuItem();
 		m_miFileOpen.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_O, m_shortcutKey));
-		m_miFileOpen.setMnemonic(KeyEvent.VK_O);
 		m_miFileOpen.addActionListener(this);
 		m_mFile.add(m_miFileOpen);
 
 		m_miFileCreate = new JMenuItem();
-		// SIB: add accelerator to Create; add mnemonic
-		m_miFileCreate.setMnemonic(KeyEvent.VK_N);
 		m_miFileCreate.setAccelerator(
 					KeyStroke.getKeyStroke(KeyEvent.VK_N, m_shortcutKey));
 		m_miFileCreate.addActionListener(this);
 		m_mFile.add(m_miFileCreate);
 
+		m_miFileClose = new JMenuItem();
+		m_miFileClose.addActionListener(this);
+		m_mFile.add(m_miFileClose);
+
 		m_miFileCompile = new JMenuItem();
-		m_miFileCompile.setMnemonic(KeyEvent.VK_C);
 		m_miFileCompile.addActionListener(this);
 		m_mFile.add(m_miFileCompile);
 		
@@ -195,14 +339,12 @@ class TransFrame extends JFrame implements ActionListener
 		m_miFileProjWin = new JMenuItem();
 		m_miFileProjWin.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_L,  m_shortcutKey));
-		m_miFileProjWin.setMnemonic(KeyEvent.VK_L);
 		m_miFileProjWin.addActionListener(this);
 		m_mFile.add(m_miFileProjWin);
 		
 		m_miFileMatchWin = new JMenuItem();
 		m_miFileMatchWin.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_M,  m_shortcutKey));
-		m_miFileMatchWin.setMnemonic(KeyEvent.VK_M);
 		m_miFileMatchWin.addActionListener(this);
 		m_mFile.add(m_miFileMatchWin);
 		
@@ -212,7 +354,6 @@ class TransFrame extends JFrame implements ActionListener
 		m_miFileSave.addActionListener(this);
 		m_miFileSave.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_S, m_shortcutKey));
-		m_miFileSave.setMnemonic(KeyEvent.VK_S);
 		m_mFile.add(m_miFileSave);
 
 		m_miFileQuit = new JMenuItem();
@@ -220,17 +361,14 @@ class TransFrame extends JFrame implements ActionListener
 		m_mFile.addSeparator();
 		m_miFileQuit.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_Q,  m_shortcutKey));
-		m_miFileQuit.setMnemonic(KeyEvent.VK_Q);
 		m_mFile.add(m_miFileQuit);
 		mb.add(m_mFile);
 
 		// edit
 		m_mEdit = new JMenu();
-		m_mEdit.setMnemonic(KeyEvent.VK_E);
 		m_miEditUndo = new JMenuItem();
 		m_miEditUndo.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_Z,  m_shortcutKey));
-		m_miEditUndo.setMnemonic(KeyEvent.VK_Z);
 		m_miEditUndo.addActionListener(this);
 		m_mEdit.add(m_miEditUndo);
 		
@@ -238,7 +376,6 @@ class TransFrame extends JFrame implements ActionListener
 		m_miEditRedo.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_Y,  m_shortcutKey));
 		m_miEditRedo.addActionListener(this);
-		m_miEditRedo.setMnemonic(KeyEvent.VK_Y);
 		m_mEdit.add(m_miEditRedo);
 		
 		m_mEdit.addSeparator();
@@ -246,14 +383,12 @@ class TransFrame extends JFrame implements ActionListener
 		m_miEditRecycle = new JMenuItem();
 		m_miEditRecycle.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_R,  m_shortcutKey));
-		m_miEditRecycle.setMnemonic(KeyEvent.VK_R);
 		m_miEditRecycle.addActionListener(this);
 		m_mEdit.add(m_miEditRecycle);
 
 		m_miEditInsert = new JMenuItem();
 		m_miEditInsert.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_I,  m_shortcutKey));
-		m_miEditInsert.setMnemonic(KeyEvent.VK_I);
 		m_miEditInsert.addActionListener(this);
 		m_mEdit.add(m_miEditInsert);
 
@@ -262,21 +397,18 @@ class TransFrame extends JFrame implements ActionListener
 		m_miEditFind = new JMenuItem();
 		m_miEditFind.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_F, m_shortcutKey));
-		m_miEditFind.setMnemonic(KeyEvent.VK_F);
 		m_miEditFind.addActionListener(this);
 		m_mEdit.add(m_miEditFind);
 
-		m_miEditUntrans = new JMenuItem();
-		m_miEditUntrans.setAccelerator(KeyStroke.getKeyStroke(
-				KeyEvent.VK_U,  m_shortcutKey));
-		m_miEditUntrans.setMnemonic(KeyEvent.VK_U);
-		m_miEditUntrans.addActionListener(this);
-		m_mEdit.add(m_miEditUntrans);
+//		m_miEditUntrans = new JMenuItem();
+//		m_miEditUntrans.setAccelerator(KeyStroke.getKeyStroke(
+//				KeyEvent.VK_U,  m_shortcutKey));
+//		m_miEditUntrans.addActionListener(this);
+//		m_mEdit.add(m_miEditUntrans);
 
 		m_miEditPrev = new JMenuItem();
 		m_miEditPrev.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_P,  m_shortcutKey));
-		m_miEditPrev.setMnemonic(KeyEvent.VK_P);
 		m_miEditPrev.addActionListener(this);
 		m_mEdit.add(m_miEditPrev);
 
@@ -285,35 +417,30 @@ class TransFrame extends JFrame implements ActionListener
 		m_miEditCompare1 = new JMenuItem();
 		m_miEditCompare1.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_1,  m_shortcutKey));
-		m_miEditCompare1.setMnemonic(KeyEvent.VK_1);
 		m_miEditCompare1.addActionListener(this);
 		m_mEdit.add(m_miEditCompare1);
 
 		m_miEditCompare2 = new JMenuItem();
 		m_miEditCompare2.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_2,  m_shortcutKey));
-		m_miEditCompare2.setMnemonic(KeyEvent.VK_2);
 		m_miEditCompare2.addActionListener(this);
 		m_mEdit.add(m_miEditCompare2);
 
 		m_miEditCompare3 = new JMenuItem();
 		m_miEditCompare3.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_3,  m_shortcutKey));
-		m_miEditCompare3.setMnemonic(KeyEvent.VK_3);
 		m_miEditCompare3.addActionListener(this);
 		m_mEdit.add(m_miEditCompare3);
 
 		m_miEditCompare4 = new JMenuItem();
 		m_miEditCompare4.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_4,  m_shortcutKey));
-		m_miEditCompare4.setMnemonic(KeyEvent.VK_4);
 		m_miEditCompare4.addActionListener(this);
 		m_mEdit.add(m_miEditCompare4);
 
 		m_miEditCompare5 = new JMenuItem();
 		m_miEditCompare5.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_5,  m_shortcutKey));
-		m_miEditCompare5.setMnemonic(KeyEvent.VK_5);
 		m_miEditCompare5.addActionListener(this);
 		m_mEdit.add(m_miEditCompare5);
 
@@ -321,29 +448,34 @@ class TransFrame extends JFrame implements ActionListener
 
 		// display
 		m_mDisplay = new JMenu();
-		m_mDisplay.setMnemonic(KeyEvent.VK_C);
 
 		m_miDisplayFont = new JMenuItem();
-		m_miDisplayFont.setMnemonic(KeyEvent.VK_F);
 		m_miDisplayFont.addActionListener(this);
 		m_mDisplay.add(m_miDisplayFont);
+
+		m_miDisplayAdvanceKey = new JCheckBoxMenuItem();
+		m_miDisplayAdvanceKey.setSelected(false);
+		m_miDisplayAdvanceKey.addActionListener(this);
+		m_mDisplay.add(m_miDisplayAdvanceKey);
+
+		m_miDisplayMnemonic = new JCheckBoxMenuItem();
+		m_miDisplayMnemonic.setSelected(false);
+		m_miDisplayMnemonic.addActionListener(this);
+		m_mDisplay.add(m_miDisplayMnemonic);
 
 		mb.add(m_mDisplay);
 		
 		// tools
 		m_mTools = new JMenu();
-		m_mTools.setMnemonic(KeyEvent.VK_T);
 		m_miToolsPseudoTrans = new JMenuItem();
 		m_miToolsPseudoTrans.addActionListener(this);
 		m_mTools.add(m_miToolsPseudoTrans);
 
 		m_miToolsValidateTags = new JMenuItem();
-		m_miToolsValidateTags.setMnemonic(KeyEvent.VK_T);
 		m_miToolsValidateTags.addActionListener(this);
 		m_mTools.add(m_miToolsValidateTags);
 
 		m_miToolsMergeTMX = new JMenuItem();
-		m_miToolsMergeTMX.setMnemonic(KeyEvent.VK_M);
 		m_miToolsMergeTMX.setEnabled(false);
 		m_miToolsMergeTMX.addActionListener(this);
 		m_mTools.add(m_miToolsMergeTMX);
@@ -351,11 +483,9 @@ class TransFrame extends JFrame implements ActionListener
 		mb.add(m_mTools);
 		
 		m_mVersion = new JMenu();
-		m_mVersion.setMnemonic(KeyEvent.VK_O);
 		m_miVersionHelp = new JMenuItem();
 		m_miVersionHelp.setAccelerator(
 					KeyStroke.getKeyStroke(KeyEvent.VK_F1,0));
-		m_miVersionHelp.setMnemonic(KeyEvent.VK_H);
 		m_miVersionHelp.addActionListener(this);
 		m_mVersion.add(m_miVersionHelp);
 
@@ -381,6 +511,7 @@ class TransFrame extends JFrame implements ActionListener
 		m_mFile.setText(OStrings.TF_MENU_FILE);
 		m_miFileOpen.setText(OStrings.TF_MENU_FILE_OPEN);
 		m_miFileCreate.setText(OStrings.TF_MENU_FILE_CREATE);
+		m_miFileClose.setText(OStrings.TF_MENU_FILE_CLOSE);
 		m_miFileCompile.setText(OStrings.TF_MENU_FILE_COMPILE);
 		m_miFileProjWin.setText(OStrings.TF_MENU_FILE_PROJWIN);
 		m_miFileMatchWin.setText(OStrings.TF_MENU_FILE_MATCHWIN);
@@ -399,10 +530,12 @@ class TransFrame extends JFrame implements ActionListener
 		m_miEditRecycle.setText(OStrings.TF_MENU_EDIT_RECYCLE);
 		m_miEditInsert.setText(OStrings.TF_MENU_EDIT_INSERT);
 		m_miEditFind.setText(OStrings.TF_MENU_EDIT_FIND);
-		m_miEditUntrans.setText(OStrings.TF_MENU_EDIT_NEXT_UNTRANS);
+//		m_miEditUntrans.setText(OStrings.TF_MENU_EDIT_NEXT_UNTRANS);
 		
 		m_mDisplay.setText(OStrings.TF_MENU_DISPLAY);
 		m_miDisplayFont.setText(OStrings.TF_MENU_DISPLAY_FONT);
+		m_miDisplayAdvanceKey.setText(OStrings.TF_MENU_DISPLAY_ADVANCE);
+		m_miDisplayMnemonic.setText(OStrings.TF_MENU_DISPLAY_MNEMONIC);
 		
 		m_mTools.setText(OStrings.TF_MENU_TOOLS);
 		m_miToolsPseudoTrans.setText(OStrings.TF_MENU_TOOLS_PSEUDO);
@@ -426,21 +559,6 @@ class TransFrame extends JFrame implements ActionListener
 		// TODO XXX update menu selectability states
 	}
 
-	protected boolean checkClose()
-	{
-		// user has requested to close document - see if they really want
-		//  to close and if so, if they want to save the current entry
-
-		// display dialog
-		// if user says cancel close, return false
-		// if user says continue and save, call commitEntry() and return true
-		// if user says continue w/ no save, simply return true
-		
-		//commitEntry();	// saves current entry
-		
-		return true;
-	}
-
 	///////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////
 	// command handling
@@ -448,12 +566,15 @@ class TransFrame extends JFrame implements ActionListener
 	protected void doQuit()
 	{
 		// shutdown
-		doSave();
-		// display dialog to verify that user wants to quit - see
-		//	if they want to save current entry (if it's been modified)
-		if ((m_projectLoaded == true) && (checkClose() == false))
-			return;
+		if (m_projectLoaded == true)
+		{
+			commitEntry();
+			doSave();
+		}
 
+		storeScreenLayout();
+		m_matchViewer.storeScreenLayout();
+		PreferenceManager.pref.save();
 
 		CommandThread.core.signalStop();
 		for (int i=0; i<25; i++)
@@ -647,11 +768,15 @@ class TransFrame extends JFrame implements ActionListener
 
 	public void doUnloadProject()
 	{
-		if ((m_projectLoaded == true) && (checkClose() == false))
-			return;
-
+		if (m_projectLoaded == true)
+		{
+			commitEntry();
+			doSave();
+		}
+		m_projWin.reset();
 		m_projectLoaded = false;
 		m_xlPane.setText("");
+		m_miFileOpen.setEnabled(true);
 	}
 
 	// display dialog allowing selection of source and target language fonts
@@ -700,7 +825,6 @@ class TransFrame extends JFrame implements ActionListener
 	protected void doLoadProject()
 	{
 		doUnloadProject();
-		m_xlPane.setText("");
 		m_matchViewer.reset();
 		
 		RequestPacket load;
@@ -750,6 +874,7 @@ class TransFrame extends JFrame implements ActionListener
 		m_curEntryNum = 0;
 		loadDocument();
 		m_projectLoaded = true;
+		m_miFileOpen.setEnabled(false);
 	}
 
 	private void doCompileProject()
@@ -1281,6 +1406,11 @@ class TransFrame extends JFrame implements ActionListener
 			{
 				CommandThread.core.createProject();
 			}
+			else if (evtSrc == m_miFileClose)
+			{
+				doUnloadProject();
+				CommandThread.core.requestUnload();
+			}
 			else if (evtSrc == m_miFileCompile)
 			{
 				doCompileProject();
@@ -1320,10 +1450,40 @@ class TransFrame extends JFrame implements ActionListener
 			{
 				doPrevEntry();
 			}
-			else if (evtSrc == m_miEditUntrans)
+			else if (evtSrc == m_miDisplayAdvanceKey)
 			{
-				doNextUntrans();
+				if (m_miDisplayAdvanceKey.isSelected())
+				{
+					m_advancer = KeyEvent.VK_TAB;
+					CommandThread.core.setPreference(
+							OConsts.PREF_TAB, "true");
+				}
+				else
+				{	
+					m_advancer = KeyEvent.VK_ENTER;
+					CommandThread.core.setPreference(
+							OConsts.PREF_TAB, "true");
+				}
 			}
+			else if (evtSrc == m_miDisplayMnemonic)
+			{
+				if (m_miDisplayMnemonic.isSelected())
+				{
+					doSetMnemonics(true);
+					CommandThread.core.setPreference(
+							OConsts.PREF_MNEMONIC, "true");
+				}
+				else
+				{
+					doSetMnemonics(false);
+					CommandThread.core.setPreference(
+							OConsts.PREF_MNEMONIC, "false");
+				}
+			}
+//			else if (evtSrc == m_miEditUntrans)
+//			{
+//				doNextUntrans();
+//			}
 			else if (evtSrc == m_miEditRecycle)
 			{
 				doRecycleTrans();
@@ -1641,7 +1801,10 @@ class TransFrame extends JFrame implements ActionListener
 
 			// if user pressed enter, see what modifiers were pressed
 			//	so determine what to do
-			if (keyCode == KeyEvent.VK_ENTER)  
+			// 18may04 KBG - enable user to hit TAB to advance to next 
+			//	entry.  some asian IMEs don't swallow enter key resulting
+			//	in non-usability
+			if (keyCode == KeyEvent.VK_ENTER) 
 			{
 				if (e.isShiftDown() == true)
 				{
@@ -1650,18 +1813,46 @@ class TransFrame extends JFrame implements ActionListener
 							e.getWhen(), 0, KeyEvent.VK_ENTER, '\n');
 					super.processKeyEvent(ke);
 				}
-				else if (e.isControlDown() == true)
+				else if (m_advancer != keyCode)
 				{
-					// go backwards on control return
-					if (e.getID() == KeyEvent.KEY_PRESSED)
-						doPrevEntry();
+					return;	// swallow event - hopefully IME still works
 				}
-				else 
+			}
+			
+			if (keyCode == m_advancer)
+			{
+				if (m_advancer == KeyEvent.VK_ENTER)
 				{
-					// return w/o modifiers - swallow event and move on to 
-					//  next segment
-					if (e.getID() == KeyEvent.KEY_PRESSED)
-						doNextEntry();
+					if (e.isControlDown() == true)
+					{
+						// go backwards on control return
+						if (e.getID() == KeyEvent.KEY_PRESSED)
+							doPrevEntry();
+					}
+					else if (e.isShiftDown() == false)
+					{
+						// return w/o modifiers - swallow event and move on to 
+						//  next segment
+						if (e.getID() == KeyEvent.KEY_PRESSED)
+							doNextEntry();
+					}
+				}
+				else if (m_advancer == KeyEvent.VK_TAB)
+				{
+					// ctrl-tab not caught
+					if (e.isShiftDown() == true)
+					{
+						// go backwards on control return
+						if (e.getID() == KeyEvent.KEY_PRESSED)
+							doPrevEntry();
+					}
+					else 
+					{
+						// return w/o modifiers - swallow event and move on to 
+						//  next segment
+						if (e.getID() == KeyEvent.KEY_PRESSED)
+							doNextEntry();
+					}
 				}
 				return;
 			}
@@ -1872,6 +2063,7 @@ class TransFrame extends JFrame implements ActionListener
 	private JMenu 		m_mFile;
 	private JMenuItem	m_miFileOpen;
 	private JMenuItem	m_miFileCreate;
+	private JMenuItem	m_miFileClose;
 	private JMenuItem	m_miFileCompile;
 	private JMenuItem	m_miFileProjWin;
 	private JMenuItem	m_miFileMatchWin;
@@ -1881,7 +2073,7 @@ class TransFrame extends JFrame implements ActionListener
 	private JMenuItem	m_miEditUndo;
 	private JMenuItem	m_miEditRedo;
 	private JMenuItem	m_miEditPrev;
-	private JMenuItem	m_miEditUntrans;
+//	private JMenuItem	m_miEditUntrans;
 //	private JMenuItem	m_miEditGoto;
 	private JMenuItem	m_miEditFind;
 	private JMenuItem	m_miEditRecycle;
@@ -1892,6 +2084,8 @@ class TransFrame extends JFrame implements ActionListener
 	private JMenuItem	m_miEditCompare4;
 	private JMenuItem	m_miEditCompare5;
 	private JMenuItem	m_miDisplayFont;
+	private JCheckBoxMenuItem	m_miDisplayAdvanceKey;
+	private JCheckBoxMenuItem	m_miDisplayMnemonic;
 	private JMenu		m_mDisplay;
 	
 	private JMenu		m_mTools;
@@ -1936,6 +2130,7 @@ class TransFrame extends JFrame implements ActionListener
 	// make a local copy of this instead of fetching it each time
 	protected int	m_shortcutKey;
 	protected UndoManager	m_undo = null;
+	protected char	m_advancer;
 
 	private XLPane		m_xlPane;
 	private JScrollPane	m_xlScroller;

@@ -2,7 +2,7 @@
 //  
 //  OmegaTVersion.java - 
 //  
-//  Copyright (C) 2002, Keith Godfrey
+//  Copyright (C) 2004, Keith Godfrey
 //  
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,8 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  16Apr2003
-//  Copyright (C) 2002, Keith Godfrey
+//  Copyright (C) 2004, Keith Godfrey, et al
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
@@ -34,7 +33,7 @@ class OmegaTVersion
 { 
 	static public String name()
 	{
-		return "OmegaT-1.3.11";
+		return "OmegaT-1.3.12";
 	}
 }
 

@@ -2,7 +2,7 @@
 //  
 //  OConsts.java - 
 //  
-//  Copyright (C) 2002, Keith Godfrey
+//  Copyright (C) 2004, Keith Godfrey
 //  
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,8 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  16Apr2003
-//  Copyright (C) 2002, Keith Godfrey
+//  Copyright (C) 2004, Keith Godfrey, et al
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
@@ -49,7 +48,7 @@ public static final String TAB_EXTENSION	= ".tab";
 public static final String TMW_EXTENSION	= ".wf";	// for wordfast
 
 // help
-public static final String HELP_HOME		= "OmegaT.html";
+public static final String HELP_HOME		= "en_OmegaT.html";
 public static final String HELP_DIR			= "docs";
 
 // file handler extensions
@@ -87,6 +86,17 @@ public static final String PREF_SRC_DIR		= "source_folder";
 public static final String PREF_LOC_DIR		= "target_folder";
 public static final String PREF_TM_DIR		= "tm_folder";
 public static final String PREF_GLOS_DIR	= "glossary_folder";
+
+public static final String PREF_DISPLAY_W	= "screen_width";
+public static final String PREF_DISPLAY_H	= "screen_height";
+public static final String PREF_DISPLAY_X	= "screen_x";
+public static final String PREF_DISPLAY_Y	= "screen_y";
+public static final String PREF_MATCH_W		= "match_width";
+public static final String PREF_MATCH_H		= "match_height";
+public static final String PREF_MATCH_X		= "match_x";
+public static final String PREF_MATCH_Y		= "match_y";
+public static final String PREF_MNEMONIC	= "mnemonics";
+public static final String PREF_TAB			= "tab_advance";
 
 public static final String PREF_NUM_FILE_MAPPINGS	= "num_file_mappings";
 public static final String PREF_FILE_MAPPING_N		= "file_mapping";

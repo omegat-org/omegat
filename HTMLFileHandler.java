@@ -2,7 +2,7 @@
 //  
 //  HTMLFileHandler.java - 
 //  
-//  Copyright (C) 2002, Keith Godfrey
+//  Copyright (C) 2004, Keith Godfrey
 //  
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,8 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  16Apr2003
-//  Copyright (C) 2002, Keith Godfrey
+//  Copyright (C) 2004, Keith Godfrey, et al
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
 //  
@@ -32,7 +31,10 @@
 import java.io.*;
 import java.util.*;
 import java.text.*;
+import java.util.regex.*;
 
+// credit to Maxim Mykhalchuk for paying attention to the encoding
+//	declaration and doing something about it
 class HTMLFileHandler extends FileHandler
 {
 	public HTMLFileHandler()
@@ -163,7 +165,7 @@ class HTMLFileHandler extends FileHandler
 			if (state < 0)
 			{
 				tagBuf.append(c);
-				outBuf.append(HTMLParser.convertAllToEsc(tagBuf));
+				outBuf.append(tagBuf);
 				tagBuf.reset();
 				state = 0;
 			}
@@ -706,6 +708,108 @@ System.out.println("HTML parse error: '" + m_file + "' at line " + (e.getErrorOf
 			// if we made it here, nothing happened
 			change = false;
 		}
+	}
+
+	/** the pattern string to extract the encoding from HTML file, if any */
+	private static String META_PATTERN = "(?is)<meta.*?content\\s*=\\s*[\"']\\s*text/html\\s*;\\s*charset\\s*=\\s*(\\S+?)[\"']\\s*>";
+	/** compiled pattern to extract the encoding from HTML file, if any */
+	private static Pattern pattern = Pattern.compile(META_PATTERN);
+	
+	/** Return encoding of HTML file, if defined */
+	private String fileEncoding(String filename) throws IOException
+	{
+		BufferedReader reader = new BufferedReader(new FileReader(filename));
+		StringBuffer buffer = new StringBuffer();
+		while( reader.ready() ) {
+			buffer.append( reader.readLine().toUpperCase() );
+			Matcher matcher = pattern.matcher(buffer);
+			if( matcher.find() )
+				return matcher.group(1);
+			if( buffer.indexOf("</HEAD") >= 0 )
+				break;
+		}
+		reader.close();
+		
+		return "";
+	}
+	
+	/** Customized version of creatning input stream for HTML files, that is
+	 *  reading a possible &lt;META http-equiv="content-type" content="text/html; charset=..."&gt;
+	 *  first, and then opens a file in that encoding.
+	 *  If there's no META in HTML file, or it is not supported by Java platform,
+	 *  file is opened in default system encoding (ISO-8859-2 in USA, Windows-1251 on my OS).
+	 */
+	public BufferedReader createInputStream(String infile) throws IOException
+	{
+		FileInputStream fis = new FileInputStream(infile);
+		InputStreamReader isr;
+		try
+		{
+			isr = new InputStreamReader(fis, fileEncoding(infile));
+		}
+		catch( UnsupportedEncodingException uee )
+		{
+			isr = new InputStreamReader(fis);
+		}
+		BufferedReader br = new BufferedReader(isr);
+		return br;
+	}
+	
+	/** This class acts as an interceptor of output:
+	 *  First it collects all the output inside itself in a string.
+	 *  then adds a META with UTF-8 charset (or replaces the charset to UTF-8)
+	 */
+	class UTF8Writer extends StringWriter
+	{
+		
+		private String filename;
+		private Writer out;
+		
+		public UTF8Writer(Writer out)
+		{
+			super();
+			this.filename = filename;
+			this.out = out;
+		}
+		
+		/** when we clase an Output Stream, we replace charset to be UTF-8
+		 * and write out the string
+		 */
+		public void close() throws IOException
+		{
+			String UTF8_META = "<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">";
+			
+			StringBuffer buffer = getBuffer();
+			Matcher matcher = pattern.matcher(buffer);
+			
+			String contents;
+			if( matcher.find() )
+			{
+				contents = matcher.replaceFirst(UTF8_META);
+			}
+			else
+			{
+				contents = Pattern.compile("(?i)<head\\s*?>")
+					.matcher(buffer).replaceFirst("<head>\n    "+UTF8_META);
+			}
+			BufferedWriter writer = new BufferedWriter(out);
+			writer.write(contents);
+			writer.close();
+			
+			super.close();
+		}
+	}
+	
+	/** Customized version of creating an output stream for HTML files,
+	 *  always UTF-8 and appending charset meta with UTF-8
+	 */
+	public BufferedWriter createOutputStream(String infile, String outfile) throws IOException
+	{
+		FileOutputStream fos = new FileOutputStream(outfile);
+		OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
+		UTF8Writer uw = new UTF8Writer(osw);
+		BufferedWriter bw = new BufferedWriter(uw);
+		return bw;
 	}
 
 	private LinkedList 	m_tagList = null;

@@ -119,6 +119,9 @@ class MatchWindow extends JFrame
 
 	public void updateMatchText()
 	{
+		// Cancelling all the attributes
+		m_matchPane.setCharacterAttributes(new SimpleAttributeSet(), true);
+		
 		m_matchPane.setText(m_matchDisplay);
 
 		if (m_hiliteStart >= 0)

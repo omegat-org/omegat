@@ -1,0 +1,97 @@
+/**************************************************************************
+ OmegaT - Java based Computer Assisted Translation (CAT) tool
+ Copyright (C) 2002-2004  Keith Godfrey et al
+                          keithgodfrey@users.sourceforge.net
+                          907.223.2039
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+**************************************************************************/
+
+package org.omegat.core;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+/*
+ * Keeps track of how many times objects occur
+ */
+public class FreqList 
+{
+	public FreqList()
+	{
+		m_map = new HashMap();
+		m_list = new ArrayList();
+	}
+
+	public FreqList(int initialCapacity)
+	{
+		m_map = new HashMap(initialCapacity);
+		m_list = new ArrayList(initialCapacity/2);
+	}
+
+	public int add(Object key)
+	{
+		FreqObj fo = (FreqObj) m_map.get(key);
+		if (fo == null)
+		{
+			fo = new FreqObj(key);
+			m_list.add(fo);
+		}
+		fo.cnt++;
+		m_map.put(key, fo);
+		return fo.cnt;
+	}
+
+	public int getCount(Object key)
+	{
+		FreqObj fo = (FreqObj) m_map.get(key);
+		if (fo == null)
+			return 0;
+		else
+			return fo.cnt;
+	}
+
+	public int getCountN(int num)
+	{
+		FreqObj fo = (FreqObj) m_list.get(num);
+		if (fo == null)
+			return 0;
+		else
+			return fo.cnt;
+	}
+
+	public Object getObj(int num)
+	{
+		FreqObj fo = (FreqObj) m_list.get(num);
+		if (fo == null)
+			return null;
+		else
+			return fo.obj;
+	}
+
+	public int len()	{ return m_list.size();			}
+	public void reset()	{ m_list.clear(); m_map.clear();	}
+
+	class FreqObj {
+		public FreqObj(Object o)	{ cnt = 0; obj = o;	}
+		public int	cnt;
+		public Object	obj;
+	};
+
+	private Map m_map;
+	private ArrayList m_list;
+
+};

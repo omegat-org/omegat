@@ -1,0 +1,320 @@
+OmegaT 1.4.1 Release Notes
+
+NOTE: OmegaT is beta software and has not been extensively tested.  
+      That said, version 1.0.2 seems to be rather stable.  
+      OmegaT 1.1.x was left uncompleted in favor of 1.3.x and should 
+      have never seen the light	of day (although there may be a copy 
+      or two floating around somewhere).
+      OmegaT 1.3.x was developed until it became seemingly stable, 
+      after which it was renamed the official 1.4 release.
+
+OmegaT is brought to you by
+  Marc Prior - project management, evangelicism, documentation
+  Keith Godfrey - development
+  (and many, many more very helpful people)
+
+We thank you for your interest.
+Marc and Keith
+---------------------------------
+
+1.4 general changes (summary)
+---------------------------------
+UI changes:
+	find interface + enhanced functionality            
+	main interface rewritten                           
+	font selectability                                 
+new filters:
+	xhtml                                              
+
+2.0 wishlist
+---------------------------------
+new tools:
+	spell check
+	dialog interface to edit file extension mappings
+new filters:
+	docbook
+
+
+1.4.1
+-------------------------------
+Match window now displays only fuzzy matches that have a translation.
+Benefits:
+- fuzzy matches of very similiar phrases without translation 
+  don't garbage the screen estate
+- in early times of project (when there's not a lot of strings translated), 
+  less similiar phrases may be found
+
+and 6 minor bugs fixed:
+- Match window contains 6 matches sometimes
+- Ctrl-N goes to previous segment
+- Sometimes all the text in match window is bold
+- Wrong message template: "found {1} glossary term(s)"
+- Going to segment without matches may throw Exception
+- Status label disappears someties
+
+
+1.4.0
+-------------------------------
+Repackaging of 1.3.16 plus the latest help files.
+
+	
+1.3.16
+-------------------------------
+Fixed a bug in the file copy routine which would append extra data onto
+  unrecongized files when making an image of the source tree (thanks Maxym)
+Modified the search mechanism to uninflect common western letters, so
+  a search for an accented character would also match its unaccented form
+
+1.3.15
+-------------------------------
+fixed bug where advance key wouldn't reset back from TAB in pref file
+fixed bugs involving text being deleted from translation area (corrupted
+  and incorrect display)
+(re)added background color to source text
+
+1.3.14 rc3 (and there'll be at least one more RC relase to go)
+--------------------------------
+now pull look and feel from system
+shrank default window size for 600x800 screen a couple of pixels
+deactivated 'New Project' feature while existing project was active
+added new <span> tag to HTML and XHTML file parser
+
+1.3.13 rc2
+--------------------------------
+activated colors for fuzzy match info
+reduced default window height to give at least 60 pixels at bottom of screen
+
+1.3.12 (1.4 release candidate 1)
+--------------------------------
+changed window auto-sizing code (it would break on certain platforms).
+  now store window positions in preference file and restore on open
+fixed potential bug in project quit routine
+allow users to select between TAB and ENTER to advance to next string
+  (Asian IMEs require the ENTER key in a way that is sometimes incompatible)
+  new behavior: ENTER to advance; CTRL-ENTER to move backwards
+                TAB to advance; SHIFT-TAB to move backwards
+                SHIFT-ENTER to insert soft return
+updated help files
+removed buggy "goto next untranslated entry" feature
+deactivated 'File:Open' when project is already open to prevent accidental
+  project closures.  Added new 'File:Close' to explicitly close project.
+extended HTML file parser to observe encoding declaration (code changes
+  thanks to Maxym Mykhalchuk)
+removed build date from .java files to make them more CVS friendly
+
+1.3.11
+--------------------------------
+fixed a bug in the XHTML parser that would sometimes not build accented
+  characters correctly
+all files from source directory tree now copied to target tree on compile
+gave match/glossary window a keyboard shortcut to hide/show it
+activated recursive file searching (this had been silently inactive)
+hilited "active" fuzzy match in match pane
+fixed offset bug where documents with identical entries would lose a 
+  character
+fixed bug where exception would be thrown if font was set before project
+  was loaded
+
+1.3.10 alpha
+--------------------------------
+fixed bug w/ recycle translation feature where strings became corrupted
+added logic to account for task bars at top or left of screen when placing
+  windows
+fixed bug where TM strings were not recycled into project
+changed auto-save interval from every 5 minutes to every minute
+removed some unused menu items
+returned Ctrl-P as shortcut for goto previous entry
+fixed some bugs in the fuzzy matching system
+
+1.3.9 alpha
+--------------------------------
+depricated 'prev' and 'next' navigation shortcuts (Ctrl-R/P) in favor of more 
+  more convenient and existing 'Enter' and 'Ctrl-Enter' 
+added new feature to go to next untranslated string (Ctrl-N)
+added mnemonics and changed key mappings (undo/redo now Z/Y - wanted to
+  use Mac method of undo=Ctrl-Z and redo=Ctrl-shift-Z, but don't know of
+  a straightforward method to do this yet)
+find screen display size before drawing windows
+(thanks SIB for implementation of these last parts)
+
+1.3.8 alpha
+--------------------------------
+updated font dialog
+fixed bug where exception thrown when changing font w/ no project loaded
+extracted fuzzy match info to new window; made glossary info visible
+fixed offset bugs that caused out-of-bounds exceptions when changing 
+  documents
+
+
+1.3.7 alpha (internal release)
+--------------------------------
+removed second font and reverted text editor to JTextPane w/o an explicit
+  backend document to allow files to open faster (10 times faster).  lost
+  some control of display formating in the process
+added undo/redo to current edit field
+fixed copy-paste bug that allowed ctrl-V paste when selection was hilited
+  in context area to misalign display
+made searches case insensitive
+fixed XHTML output bug that would add extra & and ; to certain escaped 
+  characters
+
+1.3.6 alpha
+--------------------------------
+Changed project open dialog to operate on project files directly (instead
+		of project directories) as some users could not open projects 
+		at all (esp. mac users)
+Set font in find window to match source language font and size.
+Locked out keyboard input when no project active 
+
+1.3.5 alpha
+--------------------------------
+(all bug fixes)
+where text hilited outside of edit zone could delete non editable text
+fixed several bugs in fuzzy matching - now back online
+
+1.3.4 alpha
+--------------------------------
+#fixed scroll problem where current entry sometimes shows off bottom of screen
+fixed bug where untranslated identical segments in same file would throw
+	off display
+soft returns save and restore correctly now
+fixed bug where project would encounter error while loading before
+	save thread could be activated, but project would appear to be normal
+added TM search to search window
+fixed bug where escaped hex codes in xml parser weren't read correctly
+fixed bug in html parser where all chars were escaped
+fixed character offset problem when identical strings resided in same file
+	and UI would get out of sync
+added better control to find window controls to only what's available
+
+
+1.3.2 alpha
+--------------------------------
+added help window
+changed caret movment when hiliting text
+
+1.3.1 alpha
+--------------------------------
+rewrote string tokenizer - now handles multi-char glyphs
+new fuzzy match 'insert' feature
+updated 'replace' and 'copy source' to new UI
+changed font display mechanism
+enabled text hiliting outside of editing zone for copy actions
+extended yellow hilite to cover editing zone
+
+
+1.3.0 alpha
+---------------------------------
+new UI up and running - text and fonts display properly
+
+
+OmegaT 1.1.3 (dev)
+---------------------------------
+deprecated ignore file list
+
+
+OmegaT 1.1.2 (beta build)
+---------------------------------
+- Moved find mechanism to seperate window; added wildcard abilities to keyword 
+  search.
+- Modified main UI to provide more space to the translation and context areas.
+- OOo parser rewritten to use new core XML file parser
+- XHTML support
+- extension of HTML parser to recognize more extended characters
+- deprecation of .../<project>/omegat/file_extension_mapping file - moved 
+  information to global preference system
+
+
+OmegaT 1.0.2
+23 February, 2003:
+---------------------------------
+bug fixes (exact change lost)
+
+OmegaT 1.0.0
+10 January, 2003
+---------------------------------
+changes
+- UI updates: got rid of tables in context view; added icon to UI
+- File formats: converted all internal files to XML (except 2 which were left 
+  as tab files); project_save and compiled tm now TMX (or at least a close 
+  cousin of TMX)
+- Search target text: added mechanism to search translated text.  uses exact 
+  string matching (as opposed to keyword search in source text)
+- Preference system to remember previously used directories and locales
+- Project (creating/opening) interface completely changed.  Projects now 
+  handled as folders instead of files.  Cute icon in file open dialog indicates 
+  valid project folder.
+- New option under Tools menu to examine tags and see if any have changed 
+  position, been deleted or been added.
+- Enabled JVM 1.4 support for find and goto fields to be activated by 'ENTER' 
+  key
+
+undocumented feature
+- hilite text in translation pane then hit ctrl-f (or 'e') and search will 
+  automatically begin using hilited text
+- control enter in the exact match search field will search the source 
+  langauge segments instead of target lang
+
+bug fixes
+all fixes as of 0.9.9 
+---------------------------------
+---------------------------------
+
+0.9.9
+---------------------------------
+bug fixes
+- fixed compile bug in HTML and OOo parsers where parser would get confused 
+  if a close tag didn't have an associated open tag
+
+note: this release was built by hand using files unziped from 0.9.8.  
+The release is not in CVS but the changes were put into the 1.0 tree
+---------------------------------
+
+0.9.8
+---------------------------------
+updated manual to most current available
+
+bug fixes
+- keyboard shortcuts should now used preferred OS meta key
+- changed first project creation dialog to be save dialog (should resolve
+mac specific behavior problems)
+- fixed potential bug in ignore and mapping preference system
+---------------------------------
+
+
+0.9.7
+---------------------------------
+changes
+converted text file reader to expect latin-1 input, as the default
+ utf-8 keeps choking it
+added some meaningful output to the console 
+ 
+bug fixes
+fixed path bug in TM loader
+removed debugging code that kept informing of swallowd keypresses
+---------------------------------
+
+
+0.9.6
+---------------------------------
+Changes / new features
+- New project window that lists all files within a project and hyper-links 
+  to them for better navigation
+- Added 'Browse' buttons to project creation window for more user friendly 
+  selection of non-default project directories (such as to select a directory 
+  containing already unpacked source language files)
+- New auto-save mechanism.  Currently set to save project automatically 
+  every 5 minutes.
+- Returned ENTER key to it's original use of commiting current entry and 
+  moving on to the next.  SHIFT-ENTER inserts a soft return (ascii 0x8d) 
+  into the text field, and CONTROL-ENTER moves to the previous entry.
+
+Bug-fixes
+- Automatic saving of existing project when attempting to load new one
+- Fixed an intermittent deadlock bug for JRE 1.4
+
+Issues
+- Discovered bug in the Java HTML viewer in JRE 1.2 where correctly formed
+HTML will sometimes (somehow) cause a string of exceptions to arise and
+eventually freeze the application.  
+---------------------------------

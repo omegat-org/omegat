@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="all" name="OmegaT">
+
+    <target name="init">
+        <property name="iscc.exe" value="m:/progs/Inno Setup 4/iscc.exe"/>
+
+        <property name="jar" location="tmp/${ant.project.name}.jar"/>
+        
+        <property file="src/org/omegat/Version.properties"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <mkdir dir="classes"/>
+        <copy todir="classes/org/omegat">
+            <fileset dir="src/org/omegat" includes="*.properties"/>
+        </copy>
+        <javac debug="true" deprecation="true" destdir="classes" srcdir="src"/>
+    </target>
+
+    <target name="jar" depends="init,compile">
+        <mkdir dir="tmp"/>
+        <jar basedir="classes" compress="false" jarfile="${jar}">
+            <manifest>
+                <attribute name="Main-Class" value="org.omegat.Main"/>
+                <attribute name="License" value="GNU Public License version 2"/>
+                <attribute name="Specification-Version" value="${specification-version}"/>
+                <attribute name="Implementation-Version" value="${version}"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="clean" depends="init" description="Clean all build products.">
+        <delete dir="classes"/>
+        <delete dir="dist"/>
+        <delete dir="tmp"/>
+    </target>
+
+    <target name="win" description="Build Win32 distro" depends="init,jar,zip">
+        <copy todir="tmp" file="release/win32-specific/OmegaT.exe"/>
+        <copy todir="tmp" file="release/win32-specific/OmegaT.iss"/>
+        
+        <mkdir dir="dist"/>
+        <exec executable="${iscc.exe}">
+            <arg file="tmp/OmegaT.iss"/>
+        </exec>
+    </target>
+
+    <target name="zip" description="Build Zip distro" depends="init,jar">
+        <mkdir dir="tmp"/>
+        <copy todir="tmp">
+            <fileset dir="release" includes="*" excludes="win32-specific"/>
+        </copy>
+        <mkdir dir="tmp/docs"/>
+        <copy todir="tmp/docs">
+            <fileset dir="docs"/>
+        </copy>
+        <mkdir dir="tmp/images"/>
+        <copy todir="tmp/images">
+            <fileset dir="images"/>
+        </copy>
+        <mkdir dir="tmp/source"/>
+        <copy todir="tmp/source">
+            <fileset dir="src"/>
+        </copy>
+        
+        <mkdir dir="dist"/>
+        <zip basedir="tmp" destfile="dist/OmegaT_${version}.zip"/>
+    </target>
+
+
+    <target name="all" depends="zip,win" description="Build distributions."/>
+
+</project>

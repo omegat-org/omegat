@@ -1,24 +1,18 @@
-OmegaT 1.4.2 Release Notes
+----------------------------------------------------------------------
+ OmegaT 1.4.2 Release Notes
 
-NOTE: OmegaT is beta software and has not been extensively tested.  
-      That said, version 1.0.2 seems to be rather stable.  
-      OmegaT 1.1.x was left uncompleted in favor of 1.3.x and should 
-      have never seen the light	of day (although there may be a copy 
-      or two floating around somewhere).
-      OmegaT 1.3.x was developed until it became seemingly stable, 
-      after which it was renamed the official 1.4 release.
+ OmegaT is brought to you by
+   Marc Prior -       project management, evangelicism, documentation
+   Keith Godfrey -    development
+   Maxym Mykhalchuk - development and SF.net maintenance
+   and many, many more very helpful people
 
-OmegaT is brought to you by
-  Marc Prior - project management, evangelicism, documentation
-  Keith Godfrey - development
-  (and many, many more very helpful people)
+ We thank you for your interest.
+----------------------------------------------------------------------
 
-We thank you for your interest.
-Marc and Keith
----------------------------------
 
-General changes (summary)
----------------------------------
+General changes in 1.4 (summary)
+----------------------------------------------------------------------
 UI changes:
 	find interface + enhanced functionality
 	main interface rewritten
@@ -30,7 +24,33 @@ new filters:
 
 1.4.2
 -------------------------------
+A lot of enhancements:
 
+- Installer and Native .exe launcher for Win32 platform:
+    Install script was created by Samuel Murray
+    Launcher created using JSmooth.SF.net project
+
+- OmegaT code was refactored:
+  1) Each class now resides in a separate file
+  2) Classes are structured to packages according to their function
+  3) Unused, commented-out and debug code was cleaned out
+
+- OmegaT backs up it's main TMX file after successfully opening it
+  (backup has the name project_save.tmx.bak)
+
+- OmegaT is fully localizable now:
+  All localizable strings are moved to resource bundle
+
+- New filter: Java ResourceBundles (.properties files)
+
+  !!! Now you're able to localize OmegaT using OmegaT itself !!!
+  - create an empty project for your language, 
+  - copy source/org/omegat/Bundle.properties into project's 'source' dir
+  - open the project, translate it and compile
+  - send us the Bundle_XX.properties from project's 'target' dir
+
+One MAJOR bug fixed:
+- Cannot insert \n (newline) into localized text
 
 1.4.1
 -------------------------------
@@ -201,17 +221,17 @@ extended yellow hilite to cover editing zone
 
 
 1.3.0 alpha
----------------------------------
+----------------------------------------------------------------------
 new UI up and running - text and fonts display properly
 
 
 OmegaT 1.1.3 (dev)
----------------------------------
+----------------------------------------------------------------------
 deprecated ignore file list
 
 
 OmegaT 1.1.2 (beta build)
----------------------------------
+----------------------------------------------------------------------
 - Moved find mechanism to seperate window; added wildcard abilities to keyword 
   search.
 - Modified main UI to provide more space to the translation and context areas.
@@ -224,12 +244,12 @@ OmegaT 1.1.2 (beta build)
 
 OmegaT 1.0.2
 23 February, 2003:
----------------------------------
+----------------------------------------------------------------------
 bug fixes (exact change lost)
 
 OmegaT 1.0.0
 10 January, 2003
----------------------------------
+----------------------------------------------------------------------
 changes
 - UI updates: got rid of tables in context view; added icon to UI
 - File formats: converted all internal files to XML (except 2 which were left 
@@ -254,21 +274,21 @@ undocumented feature
 
 bug fixes
 all fixes as of 0.9.9 
----------------------------------
----------------------------------
+----------------------------------------------------------------------
+----------------------------------------------------------------------
 
 0.9.9
----------------------------------
+----------------------------------------------------------------------
 bug fixes
 - fixed compile bug in HTML and OOo parsers where parser would get confused 
   if a close tag didn't have an associated open tag
 
 note: this release was built by hand using files unziped from 0.9.8.  
 The release is not in CVS but the changes were put into the 1.0 tree
----------------------------------
+----------------------------------------------------------------------
 
 0.9.8
----------------------------------
+----------------------------------------------------------------------
 updated manual to most current available
 
 bug fixes
@@ -276,11 +296,11 @@ bug fixes
 - changed first project creation dialog to be save dialog (should resolve
 mac specific behavior problems)
 - fixed potential bug in ignore and mapping preference system
----------------------------------
+----------------------------------------------------------------------
 
 
 0.9.7
----------------------------------
+----------------------------------------------------------------------
 changes
 converted text file reader to expect latin-1 input, as the default
  utf-8 keeps choking it
@@ -289,11 +309,11 @@ added some meaningful output to the console
 bug fixes
 fixed path bug in TM loader
 removed debugging code that kept informing of swallowd keypresses
----------------------------------
+----------------------------------------------------------------------
 
 
 0.9.6
----------------------------------
+----------------------------------------------------------------------
 Changes / new features
 - New project window that lists all files within a project and hyper-links 
   to them for better navigation
@@ -314,4 +334,4 @@ Issues
 - Discovered bug in the Java HTML viewer in JRE 1.2 where correctly formed
 HTML will sometimes (somehow) cause a string of exceptions to arise and
 eventually freeze the application.  
----------------------------------
+----------------------------------------------------------------------

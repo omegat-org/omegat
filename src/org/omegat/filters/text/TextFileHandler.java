@@ -33,6 +33,12 @@ import org.omegat.util.OStrings;
  */
 public class TextFileHandler extends FileHandler
 {
+	/** The encoding of the text file is ISO-8859-1 (Latin 1) */
+	public static final String TYPE_LATIN1 = "Text File - Latin 1";	// NOI18N
+	/** The encoding of the text file is ISO-8859-2 (Latin 2) */
+	public static final String TYPE_LATIN2 = "Text File - Latin 2";	// NOI18N
+	/** The encoding of the text file is UTF-8 */
+	public static final String TYPE_UTF8 = "Text File - UTF-8";		// NOI18N
 
     public TextFileHandler(String type, String ext)
 	{
@@ -44,19 +50,18 @@ public class TextFileHandler extends FileHandler
 		throw new IOException(OStrings.getString("TFH_ERROR_UNSUPPORTED")); 
 	}
 
-	// NOTE dengue code change - review at future date
-	public String translateFileEncoding()
+	/**
+	 * Gives the encoding of this text file according to its type.
+	 * @return encoding of this text file
+	 */
+	private String getEncoding()
 	{
-		String code = "ISO-8859-1";	 // NOI18N
-		String type = type();
-		if (type.equals("textfile-latin1"))	 // NOI18N
-			code = "ISO-8859-1";	 // NOI18N
-		else if (type.equals("textfile-latin2"))	 // NOI18N
-			code = "ISO-8859-2";	 // NOI18N
-		else if (type.equals("textfile-utf8"))	 // NOI18N
-			code = "UTF8";	 // NOI18N
-
-		return code;
+		if( type().equals(TYPE_LATIN2) )
+			return "ISO-8859-2";						// NOI18N
+		else if(type().equals(TYPE_UTF8))
+			return "UTF8";								// NOI18N
+		else
+			return "ISO-8859-1";						// NOI18N
 	}
 
 	/**
@@ -66,16 +71,14 @@ public class TextFileHandler extends FileHandler
 			throws IOException
 	{
 		FileInputStream fis = new FileInputStream(infile);
-		String code = translateFileEncoding();
-		InputStreamReader isr = new InputStreamReader(fis, code);
+		InputStreamReader isr = new InputStreamReader(fis, getEncoding());
 		return isr;
 	}
 
 	public Writer createOutputStream(String outfile) throws IOException
 	{
 		FileOutputStream fos = new FileOutputStream(outfile);
-		String code = translateFileEncoding();
-		OutputStreamWriter osw = new OutputStreamWriter(fos, code);
+		OutputStreamWriter osw = new OutputStreamWriter(fos, getEncoding());
 		BufferedWriter bw = new BufferedWriter(osw);
 		return bw;
 	}

@@ -543,11 +543,10 @@ public class CommandThread extends Thread
 			}
 			if (fh.getType().equals(OConsts.FH_HTML_TYPE))
 			{
-				// preview file to see if we should use the htmlx parser
-				//	since it uses UTF8 encoding
+				// preview file to see if we should use the XHTML parser
 				if (StaticUtils.isXMLFile(filename) == true)
 				{
-					// look for htmlx parser
+					// look for XHTML parser
 					FileHandler fhx = hm.findPreferredHandler(
 							OConsts.FH_XML_BASED_HTML);
 					if (fhx != null)

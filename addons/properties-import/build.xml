@@ -33,5 +33,18 @@
     </target>
 
     <target name="all" depends="zip" description="Build this addon."/>
+    
+    <target name="debug" depends="compile" if="netbeans.home" description="Debug Project">   
+        <nbjpdastart name="OT Properties Import" addressproperty="jpda.address" transport="dt_socket">     
+            <classpath refid="run.classpath"/>     
+        </nbjpdastart>
+        <java fork="true" classname="com.me.myapp.Main">
+            <jvmarg value="-Xdebug"/>
+            <jvmarg value="-Xnoagent"/>
+            <jvmarg value="-Djava.compiler=none"/>
+            <jvmarg value="-Xrunjdwp:transport=dt_socket,address=${jpda.address}"/>
+            <classpath refid="run.classpath"/>
+        </java>
+    </target>
 
 </project>

@@ -74,9 +74,9 @@ public class HandlerMaster
 	protected void setupDefaultHandlers()
 	{
 		addHandler(new TabFileHandler());
-		addHandler(new TextFileHandler("textfile-latin1", "txt1"));	// NOI18N
-		addHandler(new TextFileHandler("textfile-latin2", "txt2"));	// NOI18N
-		addHandler(new TextFileHandler("textfile-utf8", "utf8"));	// NOI18N
+		addHandler(new TextFileHandler(TextFileHandler.TYPE_LATIN1, "txt1"));	// NOI18N
+		addHandler(new TextFileHandler(TextFileHandler.TYPE_LATIN2, "txt2"));	// NOI18N
+		addHandler(new TextFileHandler(TextFileHandler.TYPE_UTF8, "utf8"));		// NOI18N
 		addHandler(new HTMLFileHandler());
 		addHandler(new XHTMLFileHandler());
 		addHandler(new OOFileHandler());

@@ -30,6 +30,9 @@
     </target>
 
     <target name="clean" depends="init" description="Clean all build products.">
+        <delete>
+            <fileset dir="src" includes="**/*.class"/>
+        </delete>
         <delete dir="classes"/>
         <delete dir="dist"/>
         <delete dir="tmp"/>

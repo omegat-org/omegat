@@ -71,43 +71,6 @@ public class XHTMLFileHandler extends XMLFileHandler
 		defineFormatTag("var", "var");	 // NOI18N
 	}
 
-	/** compiled pattern to extract the encoding from HTML file, if any */
-	private static Pattern pattern_xml_encoding = Pattern.compile(
-		"<\\?xml\\s+version\\s*=\\s*\".+?\"\\s+encoding\\s*=\\s*\"(\\S+?)\"\\s*>", 
-		Pattern.DOTALL);
-	
-	/** compiled pattern to extract the encoding from HTML file, if any */
-	private static Pattern pattern_meta = Pattern.compile(
-		"<meta.*?content\\s*=\\s*[\"']\\s*text/html\\s*;\\s*charset\\s*=\\s*(\\S+?)[\"']\\s*>", 
-		Pattern.DOTALL);
-	
-	/**
-	 * Return encoding of XHTML file, if defined.
-	 * <p/>
-	 * In XHTML, encoding may be defined in XML header, e.g.
-	 * <code>&lt;?xml version="1.0" encoding="EUC-JP"?&gt;</code>,
-	 * or in a HTML content type meta, e.g. 
-	 * <code>&lt;meta http-equiv="content-type" content="text/html; charset=EUC-JP"/&gt;</code>.
-	 * <p/>
-	 * If both are defined, then the encoding from XML header takes precendence.
-	 */
-	private String fileEncoding(String filename) throws IOException
-	{
-		BufferedReader reader = new BufferedReader(new FileReader(filename));
-		StringBuffer buffer = new StringBuffer();
-		while( reader.ready() ) {
-			buffer.append( reader.readLine().toLowerCase() );
-			Matcher matcher = pattern_meta.matcher(buffer);
-			if( matcher.find() )
-				return matcher.group(1);
-			if( buffer.indexOf("</HEAD") >= 0 ) // NOI18N
-				break;
-		}
-		reader.close();
-		
-		return ""; // NOI18N
-	}
-	
 	public Reader createInputStream(String filename) throws IOException
 	{
 		return new EncodingAwareReader(filename, EncodingAwareReader.ST_XML);

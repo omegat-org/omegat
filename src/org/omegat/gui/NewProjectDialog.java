@@ -47,7 +47,6 @@ public class NewProjectDialog extends JDialog
         super(par, true);
         this.projectProperties = projectProperties;
         projectProperties.m_dialogOK = false;
-        projectProperties.setSize(650, 500);
 
         if (projFileName == null)
             projectProperties.reset();
@@ -260,6 +259,7 @@ public class NewProjectDialog extends JDialog
         m_srcLangField.setText(projectProperties.getSrcLang());
         m_locLangField.setText(projectProperties.getLocLang());
 
+		this.setBounds(50,50, 550, 350);
         updateUIText();
     }
 
@@ -397,7 +397,7 @@ public class NewProjectDialog extends JDialog
             return;
         }
 
-        projectProperties.m_dialogOK = true;
+        m_dialogCancelled = false;
         hide();
 
         m_browseTarget = 0;
@@ -405,7 +405,7 @@ public class NewProjectDialog extends JDialog
 
     private void doCancel()
     {
-        projectProperties.m_dialogOK = false;
+        m_dialogCancelled = false;
         hide();
     }
 

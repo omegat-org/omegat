@@ -236,12 +236,8 @@ public class ProjectProperties extends JFrame
 	{
 		// new project window; create project file
 		NewProjectDialog newProjDialog = new NewProjectDialog(this, this, null, 0);
-		if (newProjDialog.dialogCancelled())
-		{
-			newProjDialog.dispose();
-			return false;
-		}
 		newProjDialog.show();
+		boolean m_dialogOK = ! newProjDialog.dialogCancelled();
 		newProjDialog.dispose();
 		return m_dialogOK;
 	}

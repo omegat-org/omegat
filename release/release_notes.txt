@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------
- OmegaT 1.4.4 Release Notes
+ OmegaT 1.4.4.02 Release Notes
 
  OmegaT is the work of Keith Godfrey
 
@@ -17,7 +17,6 @@
 
  Localized OmegaT versions are by
    Jean-Christophe Helary (French l10n)
-   Sabine Cretella (German l10n)
    Dmitry Gabinski (Belorussian, Russian and Esperanto)
    Juan Salcines and Cesar Escribano Esteban (Spanish l10n)
 
@@ -45,7 +44,22 @@ Core changes:
     Windows installer
 
 
-1.4.4
+1.4.4.02
+-------------------------------
+Bugfixes:
+
+- Wrong handling of CDATA tags in XHTML
+  http://sf.net/tracker/index.php?func=detail&aid=1109089&group_id=68187&atid=520347
+
+- OmegaT throws error instead of eating BOM (byte order mark)
+  http://sf.net/tracker/index.php?func=detail&aid=1107299&group_id=68187&atid=520347
+
+
+1.4.4.01 
+-------------------------------
+(1.4.4 "final" contained a serious bug in TXT file handler,
+ http://sf.net/tracker/index.php?func=detail&aid=1106314&group_id=68187&atid=520347
+ and was released for a couple of days only, hope you don't have it)
 -------------------------------
 Enchancements:
 

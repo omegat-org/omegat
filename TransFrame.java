@@ -933,8 +933,11 @@ class TransFrame extends JFrame implements ActionListener
 		srch.start();
 	}
 
+	/* updates status label */
 	public void setMessageText(String str)
 	{
+		if( str.equals("") )
+			str = " ";
 		m_statusLabel.setText(str);
 	}
 
@@ -1301,23 +1304,23 @@ class TransFrame extends JFrame implements ActionListener
 			Object obj[] = { 
 					new Integer(nearLength), 
 					new Integer(m_glossaryLength) };
-			m_statusLabel.setText(MessageFormat.format(
+			setMessageText(MessageFormat.format(
 							OStrings.TF_NUM_NEAR_AND_GLOSSARY, obj));
 		}
 		else if (nearLength > 0)
 		{
 			Object obj[] = { new Integer(nearLength) };
-			m_statusLabel.setText(MessageFormat.format(
+			setMessageText(MessageFormat.format(
 							OStrings.TF_NUM_NEAR, obj));
 		}
 		else if (m_glossaryLength > 0)
 		{
 			Object obj[] = { new Integer(m_glossaryLength) };
-			m_statusLabel.setText(MessageFormat.format(
+			setMessageText(MessageFormat.format(
 							OStrings.TF_NUM_GLOSSARY, obj));
 		}
 		else
-			m_statusLabel.setText("");
+			setMessageText("");
 
 //System.out.println(" segment text '"+m_curEntry.getSrcText()+"' -> '"+m_curEntry.getTranslation()+"'");
 

@@ -22,10 +22,9 @@
 package org.omegat.filters.xml.xhtml;
 
 import java.io.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.omegat.util.OConsts;
 import org.omegat.filters.xml.XMLFileHandler;
+import org.omegat.util.AntiCRReader;
 import org.omegat.util.EncodingAwareReader;
 import org.omegat.util.UTF8Writer;
 
@@ -44,7 +43,7 @@ public class XHTMLFileHandler extends XMLFileHandler
 		// TODO manually compress white space to help preserve file format
 		compressWhitespace();
 		breakWhitespace();
-		
+        
 		defineFormatTag("a", "a");	 // NOI18N
 		defineFormatTag("abbr", "abbr");	 // NOI18N
 		defineFormatTag("acronym", "acronym");	 // NOI18N
@@ -71,7 +70,7 @@ public class XHTMLFileHandler extends XMLFileHandler
 
 	public Reader createInputStream(String filename) throws IOException
 	{
-		return new EncodingAwareReader(filename, EncodingAwareReader.ST_XML);
+		return new AntiCRReader( new EncodingAwareReader(filename, EncodingAwareReader.ST_XML) );
 	}
 
     protected Writer createOutputStream(String outfile) throws IOException

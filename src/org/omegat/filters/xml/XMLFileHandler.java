@@ -83,10 +83,19 @@ public class XMLFileHandler extends FileHandler
 		m_formatDisplayList.add(display);
 	}
 
-	// prepare string for user
-	// for now this only entails doubling up '<'
+    /**
+     * prepare string for user
+     * for now this only entails doubling up '<'
+     *
+     * ???
+     * mihmax: I wander what for???
+     * ???
+     */
     private String makeDisplayable(String text)
 	{
+        return text;
+        
+        /*
 		char c;
 		StringBuffer out = new StringBuffer();
 		for (int i=0; i<text.length(); i++)
@@ -97,6 +106,7 @@ public class XMLFileHandler extends FileHandler
 				out.append('<');
 		}
 		return out.toString();
+         */
 	}
 	
 	// convert simplified formatting tags to originals

@@ -27,6 +27,8 @@ import java.io.*;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import org.omegat.util.AntiCRReader;
+import org.omegat.util.EncodingAwareReader;
 
 /**
  * A reader for XML stream.
@@ -66,21 +68,23 @@ public class XMLStreamReader
 	}
 
 
-    // opens and reads the file according to the specified encoding
-	// should have this auto-sense the unicode file type, but keep
-	//  it general as many 'xml' apps don't use unicode
-    private void setStream(File name, String encoding)
-		throws FileNotFoundException, UnsupportedEncodingException,
-				IOException
+    /**
+     * Opens and reads the XML file according to the specified encoding.
+     * You may pass <code>null</code> as encoding, then we'll try
+     * to auto-sense the encoding.
+     */
+    private void setStream(File file, String encoding)
+            throws FileNotFoundException, UnsupportedEncodingException, IOException
 	{
-		FileInputStream fis = new FileInputStream(name);
-		AntiCRInputStream acris = new AntiCRInputStream(fis);
-		InputStreamReader isr = new InputStreamReader(acris, encoding);
-		m_bufferedReader = new BufferedReader(isr);
+        EncodingAwareReader ear = new EncodingAwareReader(
+                file.getAbsolutePath(), EncodingAwareReader.ST_XML, encoding);
+        m_bufferedReader = new BufferedReader( new AntiCRReader( ear ) );
 		_setStream();
 	}
 
-	// provide interface where stream can be opened elsewhere
+    /**
+     * Provide an interface where stream can be opened elsewhere.
+     */
 	public void setStream(BufferedReader rdr) throws IOException
 	{
 		m_bufferedReader = rdr;
@@ -144,6 +148,10 @@ public class XMLStreamReader
 		// strip out any newline and multiple spaces (not valid xml)
 		char c = getNextChar();
 		
+        // BOM (byte order mark) bugfix
+        if( c==0xFEFF )
+            c = getNextChar();
+        
 		if (c == '<')
 		{
 			// be lenient on incorrectly formatted XML - if a space
@@ -406,13 +414,21 @@ public class XMLStreamReader
 		return blk;
 	}
 
-	// tags defined by <!
+    /**
+     * Handles tags defined by &lt;!:
+     * <ul>
+     * <li>Comment tags &lt;!-- ... --&gt;.
+     * <li>CDATA tags &lt;![CDATA[ ... ]]&gt;.
+     * </ul>
+     * <p>
+     * For comments we copy "--" into tagname and '...' into first attribute.
+     * For CDATA we set CDATA as a tag name and copy '...' as raw (translatable) text.
+     *
+     * @uthor Maxym Mykhalchuk
+     * @bugfixes http://sourceforge.net/tracker/?func=detail&atid=520347&aid=1109089&group_id=68187
+     */
     private XMLBlock getNextTagExclamation() throws ParseException
 	{
-		// for <!declaration .... >
-		//  copy declaration into tagname and '...' into first attribute
-		// for <![statement[ ... ]]>
-		//  copy 'statement[ ... ]' as raw text
 
 		final int state_start			= 1;
 		final int state_name			= 2;
@@ -461,6 +477,7 @@ public class XMLStreamReader
 						case type_opBrac:
 							blk.setTagName("CDATA");	// NOI18N
 							state = state_cdata;
+                            
 							break;
 
 						case type_dash:
@@ -535,7 +552,7 @@ public class XMLStreamReader
 						case type_gt:
 							if (bracCnt >= 2)
 							{
-								// all done - append all but last bracket
+								// all done - append all but last brackets 
 								while (bracCnt > 1)
 								{
 									data += ']';

@@ -30,6 +30,7 @@ import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import org.omegat.util.AntiCRReader;
 import org.omegat.util.EncodingAwareReader;
 import org.omegat.util.OStrings;
 import org.omegat.util.UTF8Writer;
@@ -694,7 +695,7 @@ public class HTMLFileHandler extends FileHandler
 	 */
 	public Reader createInputStream(String infile) throws IOException
 	{
-		Reader ear = new EncodingAwareReader(infile, EncodingAwareReader.ST_HTML);
+		Reader ear = new AntiCRReader( new EncodingAwareReader(infile, EncodingAwareReader.ST_HTML) );
 		return ear;
 	}
 	

@@ -77,19 +77,19 @@ public abstract class FileHandler
 		return text;
 	}
 
-	protected void processEntry(StringBuffer buf, String file)
+	protected final void processEntry(StringBuffer buf, String file)
 					throws IOException
 	{
 		processEntry(buf.toString(), file);
 	}
 	
-	protected void processEntry(LBuffer buf, String file)
+	protected final void processEntry(LBuffer buf, String file)
 					throws IOException
 	{
 		processEntry(buf.string(), file);
 	}
 	
-	protected void processEntry(String srcText, String file)
+	protected final void processEntry(String srcText, String file)
 					throws IOException
 	{
 		srcText = srcText.replaceAll("\r", "");		// NOI18N

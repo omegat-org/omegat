@@ -141,8 +141,10 @@ public class XMLBlock
 	public boolean isClose()	{ return m_isClose;		}
 	public boolean isComment()	{ return m_isComment;	}
 
-    // returns the block as text - either raw text if not a tag,
-	//  or the tag and attributes in text form if it is
+    /**
+     * Returns the block as text - either raw text if not a tag,
+     * or the tag and attributes in text form if it is
+     */
 	public String getText()
 	{
 		if (m_typeChar == '?')
@@ -165,18 +167,11 @@ public class XMLBlock
 		}
 		else if (m_typeChar == '!')
 		{
-			String tag = "<!";	// NOI18N
-			if (m_text.equals("CDATA"))	// NOI18N
+			String tag = "<!";                                                  // NOI18N
+			if (m_text.startsWith("CDATA"))                                   // NOI18N
 			{
-				tag += "[";	// NOI18N
-				if (m_attrList != null)
-				{
-					if (m_attrList.size() > 0)
-					{
-						tag += ((XMLAttribute) m_attrList.get(0)).name;
-					}
-				}
-			   	tag += "]>";	// NOI18N
+                tag += m_text;
+			   	tag += "]>";	                                                // NOI18N
 			}
 			else if (m_isComment)
 			{

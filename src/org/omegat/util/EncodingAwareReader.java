@@ -29,7 +29,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 /**
  * This class automatically detects encoding of an inner file
@@ -59,32 +59,95 @@ public class EncodingAwareReader extends Reader
 	
 	/** The type of inner data - HTML or XML */
 	private int type;
-	
+
 	/**
 	 * Creates a new instance of EncodingAwareReader.
+     * If encoding cannot be detected,
+     * falls back to default encoding of Operating System.
 	 *
 	 * @param fileName - the file to read
 	 * @param type - the type of data (HTML or XML)
 	 */
 	public EncodingAwareReader(String fileName, int type) throws IOException
 	{
+        constructor(fileName, type, null);
+	}
+	
+	/**
+	 * Creates a new instance of EncodingAwareReader.
+     * If encoding cannot be detected, falls back to supplied <code>encoding</code>,
+     * or (if supplied null, or supplied encoding is not supported by JVM)
+     * falls back to default encoding of Operating System.
+	 *
+	 * @param fileName   The file to read.
+	 * @param type       The type of data (HTML or XML).
+     * @param encoding   The encoding to use if we can't autodetect.
+	 */
+	public EncodingAwareReader(String fileName, int type, String encoding)
+            throws IOException
+	{
+        constructor(fileName, type, encoding);
+	}
+    
+    private void constructor(String fileName, int type, String encoding)
+            throws IOException
+    {
 		this.type = type;
 		FileInputStream fis = new FileInputStream(fileName);
 		try
 		{
-			String encoding = fileEncoding(fileName);
-			reader = new InputStreamReader(fis, encoding);
+			String detectencoding = fileEncoding(fileName);
+            if( detectencoding==null )
+                detectencoding="<WRONG, WRONG ENCODING, REALLY WRONG!!!>";      // NOI18N
+            reader = new InputStreamReader(fis, detectencoding);
 		}
 		catch( UnsupportedEncodingException uee )
 		{
-			reader = new InputStreamReader(fis);
+            try
+            {
+                if( encoding==null )
+                    encoding="<WRONG, WRONG ENCODING, REALLY WRONG!!!>";      // NOI18N
+                reader = new InputStreamReader(fis, encoding);
+            }
+            catch( UnsupportedEncodingException uee2 )
+            {
+                reader = new InputStreamReader(fis);
+            }
 		}
-	}
+    }
 	
-	/** Return encoding of the file, if defined */
+	/** 
+     * Return encoding of the file, if we can detect it.
+     *
+     * <p>
+     * We can detect the following:
+     * <ul>
+     * <li>UTF-16 with BOM (byte order mark)
+     * <li>UTF-8 with BOM (byte order mark)
+     * <li>Any other 8-bit-Latin encoding, specified with XML/HTML-style encoding declarations.
+     * </ul>
+     *
+     * <p>
+     * Note that we cannot detect UTF-16 encoding, if there's no BOM!
+     */
 	private String fileEncoding(String fileName) throws IOException
 	{
-		BufferedReader ereader = new BufferedReader(new FileReader(fileName));
+        // BOM detection
+        Reader reader = new InputStreamReader(new FileInputStream(fileName), "ISO-8859-1");
+        int char1 = reader.read();
+        int char2 = reader.read();
+        int char3 = reader.read();
+        if( char1==0xFE && char2==0xFF )
+            return "UTF-16BE";
+        if( char1==0xFF && char2==0xFE )
+            return "UTF-16LE";
+        if( char1==0xEF && char2==0xBB && char3==0xBF )
+            return "UTF-8";
+        reader.close();
+        
+        // Otherwise we look at file contents
+		BufferedReader ereader = new BufferedReader(new InputStreamReader(
+                                new FileInputStream(fileName), "ISO-8859-1"));
 		StringBuffer buffer = new StringBuffer();
 		while( ereader.ready() ) {
 			buffer.append( ereader.readLine().toLowerCase() );
@@ -112,7 +175,7 @@ public class EncodingAwareReader extends Reader
 		ereader.close();
 		return ""; // NOI18N
 	}
-	
+    
 	public void close() throws IOException
 	{
 		reader.close();

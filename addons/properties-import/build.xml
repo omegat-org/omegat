@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="all" name="OT Properties Import">
+
+    <target name="init">
+        <property name="jar" location="properties_import.jar"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <mkdir dir="classes"/>
+        <javac debug="true" deprecation="true" destdir="classes" srcdir="src"/>
+    </target>
+
+    <target name="jar" depends="init,compile">
+        <jar basedir="classes" compress="false" jarfile="${jar}">
+            <manifest>
+                <attribute name="Main-Class" value="org.omegat.addons.properties_import.Main"/>
+                <attribute name="License" value="GNU Public License version 2"/>
+                <attribute name="Specification-Version" value="1.0"/>
+                <attribute name="Implementation-Version" value="1.0.0.1"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="clean" depends="init" description="Clean all build products.">
+        <delete dir="classes"/>
+        <delete file="${jar}"/>
+    </target>
+
+    <target name="all" depends="jar" description="Build this addon."/>
+
+</project>

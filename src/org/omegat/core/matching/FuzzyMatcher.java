@@ -30,6 +30,8 @@ import org.omegat.core.StringEntry;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.gui.TransFrame;
 import org.omegat.gui.messages.MessageRelay;
+import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
 
@@ -42,10 +44,7 @@ import org.omegat.util.Token;
 public class FuzzyMatcher
 {
 	private String statusTemplate;
-	private double nearTrash;
 	private TransFrame tf;	
-	/** near proj is the project a near (fuzzy matched) string is from */
-	private String project;
 	private CommandThread core;
 	
 	private void updateStatus(int index, int total)
@@ -55,14 +54,12 @@ public class FuzzyMatcher
 		Thread.yield();
 	}
 	
-	/** Creates a new instance of FuzzyMatcher */
-	public FuzzyMatcher(String statusTemplate, double nearTrash, 
-							TransFrame tf, String project, CommandThread core)
+	/** 
+     * Creates a new instance of FuzzyMatcher 
+     */
+	public FuzzyMatcher(TransFrame tf, CommandThread core)
 	{
-		this.statusTemplate = statusTemplate;
-		this.nearTrash = nearTrash;
 		this.tf = tf;
-		this.project = project;
 		this.core = core;
 	}
 	
@@ -99,15 +96,17 @@ public class FuzzyMatcher
 	}
 	
 	/**
-	 * Actually does build the list of fuzzy matches.
+	 * Builds the list of fuzzy matches
+     * between the strings of the source text(s).
 	 *
 	 * @param strings - the list of the source text strings.
 	 */
-	public void match(ArrayList strings) throws InterruptedException
+	public void match(List strings) throws InterruptedException
 	{
 		int total = strings.size();
 		
-		updateStatus(0, total);
+        statusTemplate = OStrings.CT_FUZZY_X_OF_Y;
+        updateStatus(0, total);
 		
 		for(int i=0; i<total; i++)
 		{
@@ -119,30 +118,84 @@ public class FuzzyMatcher
 			}
 
 			StringEntry strEntry = (StringEntry) strings.get(i);
-			List strTokens = strEntry.getTokenList();
+			List strTokens = strEntry.getSrcTokenList();
 			int strTokensSize = strTokens.size();
 			
 			for(int j=i+1; j<total; j++)
 			{
 				StringEntry candEntry = (StringEntry) strings.get(j);
-				List candTokens = candEntry.getTokenList();
+                // don't know why, but it happened once
+                if( candEntry==null )
+                    continue;
+				List candTokens = candEntry.getSrcTokenList();
 				int candTokensSize = candTokens.size();
 				
 				int ld = LevenshteinDistance.compute(strTokens, candTokens);
 				double similarity = (1.0 * (Math.max(strTokensSize, candTokensSize) - ld)) / 
 						Math.max(strTokensSize, candTokensSize);
 				
-				if( similarity<nearTrash )
+				if( similarity<OConsts.FUZZY_MATCH_THRESHOLD )
 					continue;
 				
 				byte similarityData[] = buildSimilarityData(strTokens, candTokens);
-				strEntry.addNearString(candEntry, similarity, similarityData, project);
+				strEntry.addNearString(candEntry, similarity, similarityData, null);
 				
 				similarityData = buildSimilarityData(candTokens, strTokens);
-				candEntry.addNearString(strEntry, similarity, similarityData, project);
+				candEntry.addNearString(strEntry, similarity, similarityData, null);
 			}
 		}
 		updateStatus(total, total);
 	}
+    
+    
+	/**
+	 * Builds the list of fuzzy matches
+     * of legacy TMs and the strings of the source text(s).
+	 *
+	 * @param strings    list of the source text strings
+     * @param tmxname    name of legacy TMX file
+     * @param tmstrings  the strings of legacy TMX file
+	 */
+	public void match(List strings, String tmxname, List tmstrings) throws InterruptedException
+	{
+		int tmtotal = tmstrings.size();
+		int total = strings.size();
+		
+        statusTemplate = OStrings.CT_FUZZY_X_OF_Y + " (" + tmxname + ")";
+		updateStatus(0, tmtotal);
+		
+		for(int i=0; i<tmtotal; i++)
+		{
+			if( i%20==0 )
+			{
+				if( core.shouldStop() )
+					throw new InterruptedException("Stopping on demand");		// NOI18N
+				updateStatus(i, tmtotal);
+			}
+
+			StringEntry strEntry = (StringEntry) tmstrings.get(i);
+			List strTokens = strEntry.getSrcTokenList();
+			int strTokensSize = strTokens.size();
+			
+			for(int j=0; j<total; j++)
+			{
+				StringEntry candEntry = (StringEntry) strings.get(j);
+				List candTokens = candEntry.getSrcTokenList();
+				int candTokensSize = candTokens.size();
+				
+				int ld = LevenshteinDistance.compute(strTokens, candTokens);
+				double similarity = (1.0 * (Math.max(strTokensSize, candTokensSize) - ld)) / 
+						Math.max(strTokensSize, candTokensSize);
+				
+				if( similarity<OConsts.FUZZY_MATCH_THRESHOLD )
+					continue;
+				
+				byte similarityData[] = buildSimilarityData(candTokens, strTokens);
+				candEntry.addNearString(strEntry, similarity, similarityData, tmxname);
+			}
+		}
+		updateStatus(tmtotal, tmtotal);
+	}
+    
 	
 }

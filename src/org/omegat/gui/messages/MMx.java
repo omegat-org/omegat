@@ -74,9 +74,6 @@ class MMx implements Runnable
 	{
 		switch (m_cmdNum)
 		{
-			case 1:
-				m_tf.doPseudoTrans();
-				break;
 			case 2:
 				m_tf.doNextEntry();
 				break;

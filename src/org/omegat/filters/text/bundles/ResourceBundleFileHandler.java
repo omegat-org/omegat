@@ -39,7 +39,8 @@ import java.text.MessageFormat;
  * Filter to support Java Resource Bundles - the files that are used to I18ze
  * Java applications.
  *
- * @author  maxym
+ * @author Maxym Mykhalchuk
+ * @author Keith Godfrey
  */
 public class ResourceBundleFileHandler extends FileHandler
 {
@@ -230,6 +231,10 @@ public class ResourceBundleFileHandler extends FileHandler
 			// if there's no separator, assume it's a key w/o a value
 			if( equalsPos==-1 )
 				equalsPos = str.length()-1;
+            
+            // advance if there're spaces after =
+            while( (equalsPos+1)<str.length() && str.charAt(equalsPos+1)==' ' )
+                equalsPos++;
 			
 			// writing out everything before = (and = itself)
 			if( m_outFile!=null )

@@ -41,7 +41,7 @@ import java.util.ArrayList;
  *
  * @author Keith Godfrey
  * @author Sandra Jean Chua - sachachua at users.sourceforge.net
- * @autor Maxym Mykhalchuk
+ * @author Maxym Mykhalchuk
  */
 public class HelpFrame extends JFrame
 {

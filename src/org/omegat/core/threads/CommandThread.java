@@ -21,6 +21,7 @@
 
 package org.omegat.core.threads;
 
+import org.omegat.core.LegacyTM;
 import org.omegat.core.glossary.GlossaryManager;
 import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.util.*;
@@ -60,6 +61,7 @@ public class CommandThread extends Thread
 		m_strEntryList = new ArrayList();
 		m_srcTextEntryArray = new ArrayList(4096);
 		m_tmList = new ArrayList();
+        m_legacyTMs = new ArrayList();
 		m_orphanedList = new ArrayList();
 		m_modifiedFlag = false;
 
@@ -175,6 +177,8 @@ public class CommandThread extends Thread
 		// TODO freeze UI to prevent race condition
 		m_strEntryHash.clear();
 
+        m_legacyTMs.clear();
+        
 		m_tmList.clear();
 		m_orphanedList.clear();
 		
@@ -208,8 +212,6 @@ public class CommandThread extends Thread
 		m_totalWords = 0;
 		m_partialWords = 0;
 		m_currentWords = 0;
-
-		m_nearProj = null;
 	}
 
 	private void requestLoad(RequestPacket pack)
@@ -242,11 +244,7 @@ public class CommandThread extends Thread
 			evtStr = OStrings.CT_LOADING_GLOSSARY;
 			MessageRelay.uiMessageSetMessageText(tf, evtStr);
             m_glossary.buildGlossary(m_strEntryList);
-
-            // evaluate strings for fuzzy matching 
-			String status = OStrings.CT_FUZZY_X_OF_Y;
-			
-			buildNearList(m_strEntryList, status);
+			MessageRelay.uiMessageSetMessageText(tf, OStrings.CT_LOADING_PROJECT);
 
 			// load in translation database files
 			try
@@ -259,6 +257,10 @@ public class CommandThread extends Thread
 				displayError(msg, e);
 				// allow project load to resume
 			}
+            
+            // evaluate strings for fuzzy matching 
+			buildNearList();
+            
 			evtStr = OStrings.CT_LOADING_WORDCOUNT;
 			MessageRelay.uiMessageSetMessageText(tf, evtStr);
 			buildWordCounts();
@@ -286,26 +288,6 @@ public class CommandThread extends Thread
 	///////////////////////////////////////////////////////////////
 	// public interface
 
-	// 'translate' all untranslated strings by either finding an 
-	//  appropriate translation or prepending some text
-	public void pseudoTranslate()
-	{
-		String str;
-		SourceTextEntry srcTE;
-		StringEntry se;
-		for (int i=0; i<m_srcTextEntryArray.size(); i++)
-		{
-			srcTE = (SourceTextEntry) m_srcTextEntryArray.get(i);
-			se = srcTE.getStrEntry();
-			str = srcTE.getTranslation();
-			if (str == null || str.equals("")) // NOI18N
-			{
-				str = "omega - " + se.getSrcText(); // NOI18N
-			}
-			se.setTranslation(str);
-		}
-	}
-
 	private void buildTMXFile(String filename) throws IOException
 	{
 		int i;
@@ -327,10 +309,10 @@ public class CommandThread extends Thread
 		str += "<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">\n";		 // NOI18N
 		str += "<tmx version=\"1.1\">\n";					 // NOI18N
 		str += "  <header\n";								 // NOI18N
-		str += "    creationtool=\"org.omegat.OmegaT\"\n";	 // NOI18N
+		str += "    creationtool=\"OmegaT\"\n";	             // NOI18N
 		str += "    creationtoolversion=\"1\"\n";			 // NOI18N
 		str += "    segtype=\"paragraph\"\n";				 // NOI18N
-		str += "    o-tmf=\"org.omegat.OmegaT TMX\"\n";		 // NOI18N
+        str += "    o-tmf=\"OmegaT TMX\"\n";                 // NOI18N
 		str += "    adminlang=\"EN-US\"\n";					 // NOI18N
 		str += "    srclang=\"" + srcLang + "\"\n";			 // NOI18N
 		str += "    datatype=\"plaintext\"\n";				 // NOI18N
@@ -886,18 +868,23 @@ public class CommandThread extends Thread
 	 *
 	 * @author Maxym Mykhalchuk
      *
-	 * @param seList the list of string entries to match
+	 * @param tmxname the name of legacy TMX file (null for project's own translation memory)
 	 * @param status status string to display
 	 */
-	private void buildNearList(ArrayList seList, String status) 
-				throws InterruptedException
+	private void buildNearList() throws InterruptedException
 	{
-		String project = null;
-		if( seList!=m_strEntryList )
-			project = m_nearProj;
-		
-		FuzzyMatcher matcher = new FuzzyMatcher(status, OConsts.NEAR_THRASH, m_transFrame, project, this);
-		matcher.match(seList);
+        // creating a fuzzy matching engine
+		FuzzyMatcher matcher = new FuzzyMatcher(m_transFrame, this);
+        
+        // matching source strings with each other
+		matcher.match(m_strEntryList);
+        
+        // matching legacy TMX files
+        for(int i=0; i<m_legacyTMs.size(); i++)
+        {
+            LegacyTM tm = (LegacyTM)m_legacyTMs.get(i);
+            matcher.match(m_strEntryList, tm.getName(), tm.getStrings());
+        }
 	}
 		
 	private void loadTM() throws IOException
@@ -929,71 +916,79 @@ public class CommandThread extends Thread
 			if (!fname.endsWith(File.separator))
 				fname += File.separator;
 			fname += fileList[i];
-			m_nearProj = fileList[i];
 
 			if (ext.equalsIgnoreCase(OConsts.TMX_EXTENSION))
 				loadTMXFile(fname, "UTF-8", false); // NOI18N
 			else if (ext.equalsIgnoreCase(OConsts.TMW_EXTENSION))
 				loadTMXFile(fname, "ISO-8859-1", false); // NOI18N
 		}
-		m_nearProj = null;
 	}
 
 	private void loadTMXFile(String fname, String encoding, boolean isProject)
 		throws IOException
 	{
-		TMXReader tmx = new TMXReader(encoding);
-		String src;
-		String trans;
-		StringEntry se;
-		TransMemory tm;
 		try
 		{
+    		TMXReader tmx = new TMXReader(encoding);
 			tmx.loadFile(fname);
 			
+			int num = tmx.numSegments();
+			ArrayList strEntryList = new ArrayList(num);
+            ArrayList strOrphaneList = null;
+            
 			// RFE 1001918 - backing up project's TMX upon successful read
 			if( isProject )
 				LFileCopy.copy(fname, fname+".bak");							// NOI18N
+
+            // If a legacy TM, creating one 
+            // and adding to the list of legacy TMs
+            if( isProject )
+            {
+                strOrphaneList = new ArrayList();
+                LegacyTM tm = new LegacyTM(OStrings.getString("CT_ORPHAN_STRINGS"), strOrphaneList);
+                m_legacyTMs.add(tm);
+            }
+            else
+            {
+                LegacyTM tm = new LegacyTM(new File(fname).getName(), strEntryList);
+                m_legacyTMs.add(tm);
+            }
 			
-			int num = tmx.numSegments();
-			ArrayList strEntryList = new ArrayList(num+2);
 			for (int i=0; i<num; i++)
 			{
-				src = tmx.getSourceSegment(i);
-				trans = tmx.getTargetSegment(i);
+				String src = tmx.getSourceSegment(i);
+				String trans = tmx.getTargetSegment(i);
 
 				if (isProject)
 				{
-					se = (StringEntry) m_strEntryHash.get(src);
-					if (se == null)
+					StringEntry se = (StringEntry) m_strEntryHash.get(src);
+					if( se==null )
 					{
 						// loading a project save file and the
 						//	old entry can't be found - source files
 						//	must have changed
 						// remember it anyways
-						tm = new TransMemory(src, trans, fname);
+						TransMemory tm = new TransMemory(src, trans, fname);
 						m_orphanedList.add(tm);
 						m_tmList.add(tm);
 						se = new StringEntry(src);
+                        se.setTranslation(trans);
+                        strOrphaneList.add(se);
 					}
-					se.setTranslation(trans);
-					strEntryList.add(se);
+                    else
+                        se.setTranslation(trans);
 				}
 				else		
 				{
 					// not in a project - remember this as a translation
 					//	memory string and add it to near list
 					m_tmList.add(new TransMemory(src, trans, fname));
-					se = new StringEntry(src);
+					StringEntry se = new StringEntry(src);
 					se.setTranslation(trans);
 					strEntryList.add(se);
 				}
 			}
-			/*
-			if (strEntryList.size() > 0)
-			{
-				buildNearList(strEntryList, status + " (" + fname + ")");		// NOI18N
-			} //mihmax */
+            
 		}
 		catch (ParseException e)
 		{
@@ -1075,55 +1070,6 @@ public class CommandThread extends Thread
             }
 		}
 	}
-
-//	protected void registerNear(org.omegat.StringEntry strEntry,
-//					org.omegat.StringEntry cand, double ratio,
-//					ArrayList parDataArray, ArrayList nearDataArray)
-//	{
-//		int i;
-//		byte[] pData = new byte[parDataArray.size()];
-//		for (i=0; i<pData.length; i++)
-//			pData[i] = ((org.omegat.StringData) parDataArray.get(i)).getAttr();
-//		byte[] nData = new byte[nearDataArray.size()];
-//		for (i=0; i<nData.length; i++)
-//			nData[i] = ((org.omegat.StringData)nearDataArray.get(i)).getAttr();
-//
-//		strEntry.addNearString(cand, ratio, pData, nData, null);
-//	}
-//
-	/////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	// static functions
-
-//	// return 0 for normal char, 1 for imbeddable, 2 for deletable
-//	protected static int charType(char c)
-//	{
-//		int type = 0;
-//		if ((c == '.') || (c == '-') || (c == '@'))
-//		{
-//			// allow URL, email and hypenated words
-//			type = 1;
-//		}
-//		else
-//		{
-//			int t = Character.getType(c);
-//			switch (t) {
-//				case Character.DASH_PUNCTUATION:
-//				case Character.START_PUNCTUATION:
-//				case Character.END_PUNCTUATION:
-//				case Character.CONNECTOR_PUNCTUATION:
-//				case Character.OTHER_PUNCTUATION:
-//				case Character.MATH_SYMBOL:
-//				case Character.CURRENCY_SYMBOL:
-//				case Character.MODIFIER_SYMBOL:
-//					type = 2;
-//				default:
-//					type = 0;
-//			};
-//		}
-//		return type;
-//	}
-
 
 	////////////////////////////////////////////////////////////////
 	// preference interface
@@ -1209,9 +1155,6 @@ public class CommandThread extends Thread
 	// project name of strings loaded from TM - store globally so to not
 	// pass seperately on each function call
 
-	// near proj is the project a near (fuzzy matched) string is from
-	private String		m_nearProj;
-
 	// keep track of file specific data to feed to org.omegat.SourceTextEntry objects
 	//	so they can have a bigger picture of what's where
     private ProjectFileData	m_curFile;
@@ -1222,6 +1165,9 @@ public class CommandThread extends Thread
     private HashMap		m_strEntryHash;	// maps text to strEntry obj
 	private ArrayList	m_strEntryList;
 	private ArrayList	m_srcTextEntryArray;
+    
+    /** the list of legacy TMX files, each object is the list of string entries */
+    private List m_legacyTMs;
 
 	private ArrayList	m_tmList;
 	private ArrayList	m_orphanedList;

@@ -47,6 +47,13 @@ public class PreferenceManager
 		m_changed = false;
 	}
 
+    /**
+     * Gets the preference out of OmegaT's preferences file.
+     * <p>
+     * If the key is not found, returns the empty string
+     *
+     * @param name name of the key to look up
+     */
 	public synchronized String getPreference(String name)
 	{
 		if (name == null || name.equals(""))								// NOI18N

@@ -33,6 +33,8 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
+
 import org.omegat.core.StringEntry;
 import org.omegat.util.OStrings;
 
@@ -45,6 +47,9 @@ import org.omegat.util.OStrings;
  */
 public class GlossaryManager
 {
+    
+    private final String EXT_DEF_ENC = ".tab";      // NOI18N
+    private final String EXT_UTF8_ENC = ".utf8";    // NOI18N
     
     /** Creates a new instance of GlossaryLoader */
     public GlossaryManager()
@@ -60,6 +65,7 @@ public class GlossaryManager
      * <li>tab-separated files in default system encoding - with .tab extension
      * <li>tab-separated files in utf-8 encoding - with .utf8 extension
      * </ul>
+     * Files with other extensions are ignored
      * 
      * @param folder - folder to look for the glossary files
      */
@@ -72,7 +78,10 @@ public class GlossaryManager
 			{
 				String fname = folder.getAbsolutePath() + File.separator + fileList[i];
 				System.out.println(OStrings.getString("CT_LOADING_GLOSSARY") + fname);
-				loadGlossaryFile(new File(fname));
+                String fname_lower=fname.toLowerCase();
+                // ignoring files with unrecognized extensions - http://sf.net/tracker/index.php?func=detail&aid=1088247&group_id=68187&atid=520347
+                if( fname_lower.endsWith(EXT_DEF_ENC) || fname_lower.endsWith(EXT_UTF8_ENC) )
+                    loadGlossaryFile(new File(fname));
 			}
 		}
 		else
@@ -90,23 +99,19 @@ public class GlossaryManager
     private void loadGlossaryFile(File file) 
             throws FileNotFoundException, UnsupportedEncodingException, IOException
     {
-        String fname = file.getName();
-        Reader reader;
-        if( fname.endsWith(".tab") )                                         // NOI18N
+        String fname_lower = file.getName().toLowerCase();
+        Reader reader = null;
+        if( fname_lower.endsWith(EXT_DEF_ENC) )
         {
             reader = new FileReader(file);
         }
-        else if( fname.endsWith(".utf8") )                                  // NOI18N
+        else if( fname_lower.endsWith(EXT_UTF8_ENC) )
         {
             InputStream fis = new FileInputStream(file);
             reader = new InputStreamReader(fis, "UTF-8");                   // NOI18N
         }
-        else
-        {
-            System.out.println(OStrings.CT_DONT_RECOGNIZE_GLOS_FILE + file.getName());
-            throw new IOException(OStrings.CT_DONT_RECOGNIZE_GLOS_FILE + file.getName());
-        }
-		BufferedReader in = new BufferedReader(reader);
+
+        BufferedReader in = new BufferedReader(reader);
         for( String s = in.readLine(); s!=null; s = in.readLine() )
 		{
 			// skip lines that start with '#'
@@ -134,6 +139,15 @@ public class GlossaryManager
      * Builds the Glossary.
      * This process looks up the source string entries, 
      * and adds the glossary entries there.
+     * <p>
+     * Test cases wheter a glossary entry matches a string entry text:
+     * <ul>
+     * <li>"Edit" vs "Editing" - doesn't match
+     * <li>"Old Line" vs "Hold Line" - doesn't match
+     * <li>"Some Text" vs "There was some text there" - OK!
+     * <li>"Edit" vs "Editing the edit" - matches OK!
+     * <li>"Edit" vs "Edit" - matches OK!
+     * </ul>
      */
     public void buildGlossary(List strEntryList)
 	{
@@ -141,12 +155,14 @@ public class GlossaryManager
 		{
 			GlossaryEntry glosEntry = (GlossaryEntry)glossaryEntries.get(i);
             String glosStrLow = glosEntry.getSrcText().toLowerCase();
+            Pattern pattern = Pattern.compile("\\b"+glosStrLow+"\\b");
             
             for(int j=0; j<strEntryList.size(); j++)
             {
                 StringEntry strEntry = (StringEntry)strEntryList.get(j);
                 String strStrLow = strEntry.getSrcTextLow();
-                if( strStrLow.indexOf(glosEntry.getSrcText())>=0 )
+
+                if( pattern.matcher(strStrLow).find() )
                     strEntry.addGlossaryEntry(glosEntry);
             }
 		}

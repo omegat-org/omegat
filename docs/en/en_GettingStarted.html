@@ -1,84 +1,112 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 <HEAD>
-	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=iso-8859-1">
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 	<TITLE>Getting started - an example project</TITLE>
-	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.0  (Linux)">
-	<META NAME="CREATED" CONTENT="20030305;14173800">
-	<META NAME="CHANGED" CONTENT="20040421;18011400">
-	<STYLE>
-	<!--
-		@page { margin: 2cm }
-		H1.western { font-family: "Helvetica", sans-serif; font-size: 14pt }
-		P { margin-bottom: 0.21cm; text-decoration: none }
-		P.western { font-family: "Nimbus Sans L"; font-size: 12pt; font-style: normal }
-	-->
-	</STYLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.3  (Win32)">
+	<META NAME="CREATED" CONTENT="20041208;15541098">
+	<META NAME="CHANGED" CONTENT="16010101;0">
+	<link rel="stylesheet" type="text/css" href="omegat.css"></head>
 </HEAD>
 <BODY LANG="en-US" DIR="LTR">
-<H1 CLASS="western"><B>Getting started - an example project</B></H1>
-<P CLASS="western">The procedure here is for the purposes of
-explanation; it need not be followed rigidly in practice.</P>
-<UL>
-	<LI><P CLASS="western">Launch OmegaT. 
+<TABLE WIDTH=100% BORDER=0 CELLPADDING=2 CELLSPACING=2 STYLE="page-break-before: always">
+	<TR>
+		<TD>
+			<P><IMG SRC="OmegaT.gif" NAME="Graphic1" ALIGN=BOTTOM WIDTH=32 HEIGHT=32 BORDER=0></P>
+		</TD>
+		<TH>
+			<P><A HREF="en_OmegaT.html">Table of contents</A></P>
+		</TH>
+		<TD>
+			<P>previous:&nbsp;<A HREF="en_Important.html">Important</A></P>
+		</TD>
+		<TD>
+			<P>next:&nbsp;<A HREF="en_UI.html">The user interface</A></P>
+		</TD>
+	</TR>
+</TABLE>
+<H1>Getting started - an example project</H1>
+<P>The procedure here is for the purposes of explanation; it need not
+be followed rigidly in practice.</P>
+<OL>
+	<LI><P STYLE="margin-bottom: 0cm">Launch OmegaT. 
 	</P>
-	<LI><P CLASS="western">Create a new project by selecting <I>File</I>
-	&gt; <I>Create New Project</I> from the menu bar. 
+	<LI><P STYLE="margin-bottom: 0cm">Create a new project by selecting
+	<I>File</I>&gt; <I>Create New Project</I> from the menu bar.</P>
+	<LI><P STYLE="margin-bottom: 0cm">A file navigation dialog is
+	displayed. In this dialog, select a suitable directory into which to
+	place your project. 
 	</P>
-	<LI><P CLASS="western">A file navigation dialog is displayed. In
-	this dialog, select a suitable directory into which to place your
-	project. 
-	</P>
-	<LI><P CLASS="western">In the File name field, enter a name (e.g.
-	<I>ABC</I>) for your project, and confirm.</P>
-	<LI><P CLASS="western">Another dialog is called up, this time
-	indicating the directories for the project. As you can see from the
-	dialog, OmegaT is proposing to create a new directory with the name
-	you selected (e.g. <I>ABC</I>), and below that a further five
+	<LI><P STYLE="margin-bottom: 0cm">In the File name field, enter a
+	name (e.g. <I>ABC</I>) for your project, and confirm.</P>
+	<LI><P STYLE="margin-bottom: 0cm">Another dialog is called up, this
+	time indicating the directories for the project. As you can see from
+	the dialog, OmegaT is proposing to create a new directory with the
+	name you selected (e.g. <I>ABC</I>), and below that a further five
 	subdirectories. You can modify the locations of these default
 	directories, but for the sake of the example, confirm the defaults.
-	(The project files and directories are explained in detail <A HREF="en_FilesDirs.html">here</A>.)</P>
-	<LI><P CLASS="western">Enter the language and locale codes for your
-	source and target languages, e.g. DE-CH for German (Switzerland),
-	EN-UK for English (United Kingdom). The actual codes are not
-	particularly important unless you intend to exchange translation
-	memories with customers or colleagues, in which case you should be
-	careful to follow the standard required (usually ISO).</P>
-	<LI><P CLASS="western">OmegaT now creates a main directory (also
-	referred to as the "project root directory") with the
-	name you selected previously (e.g. <I>ABC</I>). Below the project
-	root directory are five subdirectories: <I>/glossary</I>, <I>/source</I>,
-	<I>/omegat</I>, <I>/target</I> and <I>/tm</I>. 
-	</P>
-	<LI><P CLASS="western">Find a file to translate. Save it as a text
-	file with the extension <I>*.txt</I>, and place it in <I>/source</I>.
+	(The project files and directories are explained in detail <A HREF="en_FilesDirs.html">here</A>.)
 		</P>
-	<LI><P CLASS="western">Open the project you have just created with
-	<I>File</I> &gt; <I>Open</I>. OmegaT automatically looks in the
-	directory you last opened. Your project root directory is displayed
-	with the OmegaT icon, indicating that it is a project.</P>
-	<LI><P CLASS="western">Open the project by selecting first the
-	project directory marked with the icon (double-click or select and
-	confirm with "Open"), then the file <I>omegat.project</I>.
-	Do not try to open any other file, such as your source text file -
-	it won't work!</P>
-	<LI><P CLASS="western">OmegaT opens the project, displaying the text
-	of your file in the main OmegaT window. 
+	<LI><P STYLE="margin-bottom: 0cm">Enter the language and locale
+	codes for your source and target languages, e.g. DE-CH for German
+	(Switzerland), EN-UK for English (United Kingdom). The actual codes
+	are not particularly important unless you intend to exchange
+	translation memories with customers or colleagues, in which case you
+	should be careful to follow the standard required (usually ISO). 
 	</P>
-	<LI><P CLASS="western">Place the cursor in the target field of the
-	first segment, between the tags &lt;segment 0001&gt; and &lt;end
-	segment&gt;. Type in your translation and delete the original text.
-	Hit <I>Enter</I> to confirm. 
+	<LI><P STYLE="margin-bottom: 0cm">OmegaT now creates a main
+	directory (also referred to as the &#8220;project root directory&#8221;)
+	with the name you selected previously (e.g. <I>ABC</I>). Below the
+	project root directory are five subdirectories: <I>/glossary</I>,
+	<I>/source</I>, <I>/omegat</I>, <I>/target</I> and <I>/tm</I>.</P>
+	<LI><P STYLE="margin-bottom: 0cm">Find a file to translate. Save it
+	as a text file with the extension <I>*.txt</I>, and place it in
+	<I>/source</I>. 
 	</P>
-	<LI><P CLASS="western">Repeat this process with each segment until
-	you have translated the complete text. 
+	<LI><P STYLE="margin-bottom: 0cm">Open the project you have just
+	created with <I>File</I> &gt; <I>Open</I>. OmegaT automatically
+	looks in the directory you last opened. Your project root directory
+	is displayed with the OmegaT icon, indicating that it is a project.</P>
+	<LI><P STYLE="margin-bottom: 0cm">Open the project by selecting
+	first the project directory marked with the icon (double-click or
+	select and confirm with &#8220;Open&#8221;), then the file
+	<I>omegat.project</I>. Do not try to open any other file, such as
+	your source text file &#8212; it won't work!</P>
+	<LI><P STYLE="margin-bottom: 0cm">OmegaT opens the project,
+	displaying the text of your file in the main OmegaT window. 
 	</P>
-	<LI><P CLASS="western">Now select <I>File</I> &gt; <I>Save</I>, then
-	<I>File</I> &gt; <I>Compile</I>. You can then close OmegaT <I>(File</I>
-	&gt; <I>Quit</I>)<I>.</I> 
+	<LI><P STYLE="margin-bottom: 0cm">Place the cursor in the target
+	field of the first segment, between the tags &lt;segment 0001&gt;
+	and &lt;end segment&gt;. Type in your translation and delete the
+	original text. Hit <I>Enter</I> to confirm.</P>
+	<LI><P STYLE="margin-bottom: 0cm">Repeat this process with each
+	segment until you have translated the complete text. 
 	</P>
-	<LI><P CLASS="western">You will find your translated file in the
-	directory <I>/target</I>.</P>
-</UL><br><P><A HREF="en_OmegaT.html">Return to index</A></P>
+	<LI><P STYLE="margin-bottom: 0cm">Now select <I>File</I> &gt; <I>Save</I>,
+	then <I>File</I> &gt; <I>Compile</I>. You can then close OmegaT
+	<I>(File</I> &gt; <I>Quit</I>)<I>.</I> 
+	</P>
+	<LI><P>You will find your translated file in the directory <I>/target</I>.
+		</P>
+</OL>
+<P>&nbsp;</P>
+<TABLE WIDTH=100% BORDER=0 CELLPADDING=2 CELLSPACING=2>
+	<TR>
+		<TD>
+			<P><IMG SRC="OmegaT.gif" NAME="Graphic8" ALIGN=BOTTOM WIDTH=32 HEIGHT=32 BORDER=0></P>
+		</TD>
+		<TH>
+			<P><A HREF="en_OmegaT.html">Table of contents</A></P>
+		</TH>
+		<TD>
+			<P>previous:&nbsp;<A HREF="en_Important.html">Important</A></P>
+		</TD>
+		<TD>
+			<P>next:&nbsp;<A HREF="en_UI.html">The user interface</A></P>
+		</TD>
+	</TR>
+</TABLE>
+<P><BR><BR>
+</P>
 </BODY>
 </HTML>

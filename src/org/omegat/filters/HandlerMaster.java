@@ -84,6 +84,7 @@ public class HandlerMaster
 	private void setupDefaultHandlers()
 	{
 		addHandler(new TabFileHandler());
+        addHandler(new TextFileHandler(TextFileHandler.TYPE_DEFAULT,"txt"));    // NOI18N
 		addHandler(new TextFileHandler(TextFileHandler.TYPE_LATIN1, "txt1"));	// NOI18N
 		addHandler(new TextFileHandler(TextFileHandler.TYPE_LATIN2, "txt2"));	// NOI18N
 		addHandler(new TextFileHandler(TextFileHandler.TYPE_UTF8, "utf8"));		// NOI18N

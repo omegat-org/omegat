@@ -33,7 +33,7 @@ class SaveThread extends Thread
 	{
 		setName("Save thread");	// NOI18N
 		m_timeToDie = false;
-		m_saveDuration = 60000;	// 1 minute
+		m_saveDuration = 20 * 60 * 1000;	// 20 minutes
 	}
 
 	public void run()
@@ -55,6 +55,7 @@ class SaveThread extends Thread
 			}
 			catch (InterruptedException e)
 			{
+                break;
             }
 		}
 	}

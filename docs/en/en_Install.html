@@ -1,144 +1,82 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
-<HEAD>
-	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=iso-8859-1">
-	<TITLE>Installation and configuration</TITLE>
-	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.0  (Linux)">
-	<META NAME="CREATED" CONTENT="20030305;14173800">
-	<META NAME="CHANGED" CONTENT="20040421;17460700">
-	<STYLE>
-	<!--
-		@page { margin: 2cm }
-		H1.western { font-family: "Helvetica", sans-serif; font-size: 14pt }
-		P { margin-bottom: 0.21cm; text-decoration: none }
-		P.western { font-family: "Nimbus Sans L"; font-size: 12pt; font-style: normal }
-		P.text-body-indent-western { margin-left: 1cm; font-family: "Nimbus Sans L"; font-size: 12pt; font-style: normal }
-		P.text-body-indent-cjk { margin-left: 1cm }
-		P.text-body-indent-ctl { margin-left: 1cm }
-		H3.western { font-family: "Helvetica", sans-serif; font-size: 12pt }
-		H2.western { font-family: "Helvetica", sans-serif; font-size: 12pt; font-style: normal }
-		H2.cjk { font-size: 14pt; font-style: italic }
-		H2.ctl { font-size: 14pt; font-style: italic }
-	-->
-	</STYLE>
-</HEAD>
-<BODY LANG="en-US" DIR="LTR">
-<H1 CLASS="western"><B>Installation and configuration</B></H1>
-<H2 CLASS="western">Installation</H2>
-<P CLASS="western">Installation involves three stages. One, install
-the J2RE (if it isn't already installed). Two, install OmegaT. Three,
-configure. You can install the J2RE and OmegaT in either order.
-Configuration isn't essential, but makes launching the application
-more user-friendly.</P>
-<H3 CLASS="western">Installing the Java Runtime Environment</H3>
-<P CLASS="western">The Java Runtime Environment (J2RE) enables you to
-run any Java program on your system. It is available both as a
-standalone product, and as part of the Java developer's kit. 
-</P>
-<P CLASS="western">Java is also available as a plug-in for web
-browsers. This form of Java will <B>not</B> enable you to run OmegaT.
-</P>
-<P CLASS="western">JavaScript is a different product altogether and
-is not related technically to Java at all.</P>
-<P CLASS="western">If you want to use OmegaT, the J2RE <B>must</B> be
-installed on your system. OmegaT will not work without it. Please do
-not try getting OmegaT to work without the J2RE. You will only be
-wasting your time!</P>
-<P CLASS="western">If you are not sure whether the J2RE is installed
-on your system, simply try installing OmegaT to see whether it works
-(see below for installation of OmegaT). If nothing happens, or you
-receive error messages, the Java Runtime Environment is almost
-certainly not installed. In this case, please obtain it and install
-it. 
-</P>
-<P CLASS="text-body-indent-western">Windows users: you can check
-which version of the Java Runtime Environment, if any, is installed
-with Start button/Windows key &gt; <I>Settings</I> &gt; <I>Control
-Panel</I>. If the J2RE is already installed, you will see a control
-panel labelled "Java(TM)2 Runtime Environment, Standard Edition
-1.3.0_01" or similar.</P>
-<P CLASS="text-body-indent-western">Linux users: simply type <I>Java
--version</I> at the command line. The version installed will be
-returned (assuming of course that it is installed at system level).</P>
-<P CLASS="western">You can download the J2RE from the links below. It
-is free (note the licence conditions), but the naming conventions may
-make finding the right version a little confusing. You will need the
-version for your platform (Linux, Windows, etc.). The size of the
-J2RE is around 14 MB. 
-</P>
-<P CLASS="text-body-indent-western"><I>(Note: in order to confuse its
-customers, Sun regularly changes the names of its products. So, all
-versions of the JRE above 1 are known as "Java 2", hence
-the Java Runtime Environment is now the J2RE. The Java Runtime
-Environment may also be known as the Java Virtual Machine, or JVM,
-and on Macintosh, it may be known as the MRJ. The developer's kit has
-been known as the Java Developer's Kit (JDK), Software Developer's
-Kit (SDK), and now also J2SE, J2EE and J2ME, according to the
-version. At least, I think so. But I'm among the confused.)</I></P>
-<P CLASS="western">OmegaT 1.4.0 should work with any version of the
-J2RE from 1.2 upwards. However, we recommend that you obtain the latest version of the J2RE, since older versions of Java may not support certain features.</P>
-<P CLASS="western">As an alternative to the J2RE, you can install the
-developer's kit. The developer's kit contains its own copy of the
-J2RE, and also enables you to modify OmegaT.  
-</P>
-<P CLASS="western"><I>Windows and Linux users can download the Java
-Runtime Environment from:</I></P>
-<P CLASS="text-body-indent-western"><A HREF="http://java.sun.com/getjava/index.html">Sun</A>
-(all platforms)</P>
-<P CLASS="text-body-indent-western"><A HREF="http://www.blackdown.org/java-linux.html">Blackdown</A>
-(Linux)</P>
-<P CLASS="western">Macintosh OS X users should find that the Java
-Runtime Environment is already installed.</P>
-<P CLASS="western">Earlier versions of OmegaT are known to run on the
-MRJ for Macintosh OS 9. Version 1.4.0 <I>may</I> work but has not
-been tested on this platform.</P>
-<P CLASS="western">Install the J2RE by following the accompanying
-instructions.</P>
-<H3 CLASS="western">Installing OmegaT</H3>
-<P CLASS="western">Simply extract the contents of the archive into a
-directory of your choice. The archive may be in *.zip or *.tar.gzip
-form. Linux and Mac (Stuffit) users should have no problems with
-either; Windows users may not necessarily have a utility for the
-latter.</P>
-<H2 CLASS="western">Launching the application</H2>
-<H3 CLASS="western">Windows and Macintosh OS X</H3>
-<P CLASS="western">Click on the file <I>OmegaT.jar</I> in the file
-manager.</P>
-<H3 CLASS="western">Linux</H3>
-<P CLASS="western">Execute <I>java -jar OmegaT.jar</I> from the
-command line. Observe the typography of OmegaT - the capitals are
-important. 
-</P>
-<P CLASS="western">If you have not configured Java to detect the
-location of your OmegaT files, you must first change directories to
-the directory containing the file OmegaT.jar. 
-</P>
-<P CLASS="western">If you have not set the Java path variable, you
-must specify the full path. If you have done neither of the above,
-your launch routine might therefore look something like this:</P>
-<P CLASS="western" STYLE="margin-left: 1cm">cd
-/home/user/OmegaT<BR>/home/user/j2re1.4.2/bin/java -jar OmegaT</P>
-<H2 CLASS="western">Configuration (Linux only)</H2>
-<P CLASS="western">If you are using Linux but are not very familiar
-with it, this is how to make launching of OmegaT more user-friendly:</P>
-<P CLASS="western">Create a shell script by creating a text file with
-the following content:</P>
-<P CLASS="text-body-indent-western" STYLE="margin-left: 2cm">#!/bin/bash<BR>cd
-<I>&lt;OmegaT&gt;</I><BR><I>&lt;java&gt;/</I>java -jar OmegaT.jar</P>
-<P CLASS="western">where <I>&lt;OmegaT&gt;</I> is the directory
-containing the file <I>OmegaT.jar</I> and <I>&lt;java&gt;</I> is the
-directory containing the J2RE binary (the file named <I>java</I>). If
-you have set the Java path variable, you don't need to specify this
-directory, and <I>java -jar OmegaT.jar</I> is sufficient. Specifying
-the directory is necessary if you have not set the Java path
-variable, and also if your system has more than one version of Java
-installed and you need to ensure that OmegaT is launched by the
-correct version.</P>
-<P CLASS="western">Save the text file as <I>OmegaT</I>, and set the
-permissions to executable (e.g. in Konqueror, context menu &gt;
-<I>Properties</I> &gt; <I>Permissions</I> &gt; <I>Exec</I>). You can
-now launch OmegaT simply by typing <I>OmegaT</I> at the command line.
-If you want to put an icon on your desktop, set it to execute the
-shell script file.</P><br><P><A HREF="en_OmegaT.html">Return to index</A></P>
-</BODY>
-</HTML>
+<html>
+<head>
+	<meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+	<title>Installation and configuration</title>
+<link rel="stylesheet" type="text/css" href="omegat.css"></head>
+<body lang="en-US" dir="LTR">
+<table border="0" cellpadding="2" width="100%">
+<tr><td><img src="./OmegaT.gif"></td>
+<th><a href="en_OmegaT.html">Table of contents</a></th>
+<td>previous:&nbsp;<a href="en_SysReqs.html">System requirements</a></td>
+<td>next:&nbsp;<a href="en_Important.html">Important</a></td></tr></table>
+<h1>Installation and configuration</h1>
+
+<h2>Installation</h2>
+
+<p>Installation involves three stages. One, install the J2RE (if it isn't already installed). Two, install OmegaT. Three, configure (only necessary for Linux). You can install the J2RE and OmegaT in either order. Configuration isn't essential, but makes launching the application more user-friendly.</p>
+
+<h3>About the Java Runtime Environment</h3>
+
+<p>The Java Runtime Environment (J2RE) enables you to run any Java program on your system. It is available both as a standalone product, and as part of the Java developer's kit.</p>
+<p>Java is also available as a plug-in for web browsers. This form of Java will <b>not</b> enable you to run OmegaT.</p>
+<p>JavaScript is a different product altogether and is not related technically to Java at all.</p>
+<p>If you want to use OmegaT, the J2RE <b>must</b> be installed on your system. OmegaT will not work without it. Please do not try getting OmegaT to work without the J2RE. You will only be wasting your time!</p>
+<p>If you are not sure whether the J2RE is installed on your system, simply try installing OmegaT to see whether it works (see below for installation of OmegaT). If nothing happens, or you receive error messages, the Java Runtime Environment is almost certainly not installed. In this case, please obtain it and install it.</p>
+
+<p><i>(Note: in order to confuse its customers, Sun regularly changes the names of its products. So, all versions of the JRE above 1 are known as &#8220;Java 2&#8221;, hence the Java Runtime Environment is now the J2RE. The Java Runtime Environment may also be known as the Java Virtual Machine, or JVM, and on Macintosh, it may be known as the MRJ. The developer's kit has been known as the Java Developer's Kit (JDK), Software Developer's Kit (SDK), and now also J2SE, J2EE and J2ME, according to the version. At least, I think so. But I'm among the confused.)</i></p>
+
+<h3>Installing the Java Runtime Environment</h3>
+
+<p>The only platform that does not require a Java Runtime Environment install is MacOSX. On MacOSX, JRE comes pre-installed and preconfigured.</p>
+
+<p>Windows users: you can check which version of the Java Runtime Environment, if any, is installed with Start button/Windows key &gt; <i>Settings</i> &gt; <i>Control Panel</i>. If the J2RE is already installed, you will see a control panel labelled &#8220;Java(TM)2 Runtime Environment, Standard Edition 1.3.0_01&#8221; or similar.</p>
+<p>Linux users: simply type <i>Java -version</i> at the command line. The version installed will be returned (assuming of course that it is installed at system level).</p>
+<p>You can download the J2RE from the links below. It is free (note the licence conditions), but the naming conventions may make finding the right version a little confusing. You will need the version for your platform (Linux, Windows, etc.). The size of the J2RE is around 14 MB.</p>
+
+<p>OmegaT 1.4.0 should work with any version of the J2RE from 1.2 upwards. However, we recommend that you obtain the latest version of the J2RE, since older versions of Java may not support certain features.</p>
+<p>As an alternative to the J2RE, you can install the developer's kit. The developer's kit contains its own copy of the J2RE, and also enables you to modify OmegaT.</p>
+<p><i>Windows and Linux users can download the Java Runtime Environment from:</i></p>
+<p><a href="http://java.sun.com/getjava/index.html">Sun</a> (all platforms)</p>
+<p><a href="http://www.blackdown.org/java-linux.html">Blackdown</a> (Linux)</p>
+
+<p>Earlier versions of OmegaT are known to run on the MRJ for Macintosh OS 9. Version 1.4.0 <i>may</i> work but has not been tested on this platform. You can download the MRJ from the Apple site.</p>
+<p>Install the J2RE by following the accompanying instructions.</p>
+
+<h3>Installing OmegaT</h3>
+<h4>All platforms</h4>
+<p>Simply extract the contents of the archive into a directory of your choice. The archive may be in *.zip or *.tar.gzip form. Linux and Mac (Stuffit) users should have no problems with either; Windows users may not necessarily have a utility for the latter.</p>
+
+<h4>Windows only</h4>
+<p>Windows users can download a Windows binary installer OmegaT_1.4.4_setup.exe and just run it. In this case, the installer creates a shortcut to launch OmegaT in the <i>Start > Programs</i> menu.</p>
+
+<h3>Configuration (Linux only)</h3>
+<p>If you are using Linux but are not very familiar with it, this is how to make launching of OmegaT more user-friendly:</p>
+<p>Create a shell script by creating a text file with the following content:</p>
+<p>#!/bin/bash<br>cd <i>&lt;OmegaT&gt;</i><br><i>&lt;java&gt;/</i>java -jar OmegaT.jar</p>
+<p>where <i>&lt;OmegaT&gt;</i> is the directory containing the file <i>OmegaT.jar</i> and <i>&lt;java&gt;</i> is the directory containing the J2RE binary (the file named <i>java</i>). If you have set the Java path variable, you don't need to specify this directory, and <i>java -jar OmegaT.jar</i> is sufficient. Specifying the directory is necessary if you have not set the Java path variable, and also if your system has more than one version of Java installed and you need to ensure that OmegaT is launched by the correct version.</p>
+<p>Save the text file as <i>OmegaT</i>, and set the permissions to executable (e.g. in Konqueror, context menu &gt; <i>Properties</i> &gt; <i>Permissions</i> &gt; <i>Exec</i>). You can now launch OmegaT simply by typing <i>OmegaT</i> at the command line. If you want to put an icon on your desktop, set it to execute the shell script file.</p>
+
+<h2>Launching the application</h2>
+
+<h3>Macintosh OS X</h3>
+<p>Click on the file <i>OmegaT.jar</i> in the file manager.</p>
+
+<h3>Windows</h3>
+<p>If OmegaT has been installed with the help of the Windows installer (see above), it can be launched by clicking on the OmegaT 1.4.4 shortcut from the <i>Start > Programs > OmegaT</i> menu. You can also click on either of the files <i>OmegaT.exe</i>, <i>OmegaT.bat</i> or <i>OmegaT.jar</i> in the file manager.</p>
+
+<h3>Linux</h3>
+<p>Execute <i>java -jar OmegaT.jar</i> from the command line. Observe the typography of OmegaT - the capitals are important.</p>
+<p>If you have not configured Java to detect the location of your OmegaT files, you must first change directories to the directory containing the file OmegaT.jar.</p>
+<p>If you have not set the Java path variable, you must specify the full path. If you have done neither of the above, your launch routine might therefore look something like this:</p>
+<p>cd /home/user/OmegaT<br>/home/user/j2re1.4.2/bin/java -jar OmegaT</p>
+
+<p>&nbsp;</p>
+<table border="0" cellpadding="2" width="100%">
+<tr><td><img src="./OmegaT.gif"></td>
+<th><a href="en_OmegaT.html">Table of contents</a></th>
+<td>previous:&nbsp;<a href="en_SysReqs.html">System requirements</a></td>
+<td>next:&nbsp;<a href="en_Important.html">Important</a></td></tr></table>
+
+</body>
+</html>

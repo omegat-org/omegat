@@ -30,9 +30,12 @@ import org.omegat.util.OStrings;
  * Filter to support plain txt files (both latin- and utf8-encoded)
  *
  * @author Keith Godfrey
+ * @author Maxym Mykhalchuk
  */
 public class TextFileHandler extends FileHandler
 {
+	/** Text file uses system-default encoding */
+	public static final String TYPE_DEFAULT = "Text File";	        // NOI18N
 	/** The encoding of the text file is ISO-8859-1 (Latin 1) */
 	public static final String TYPE_LATIN1 = "Text File - Latin 1";	// NOI18N
 	/** The encoding of the text file is ISO-8859-2 (Latin 2) */
@@ -56,12 +59,15 @@ public class TextFileHandler extends FileHandler
 	 */
 	private String getEncoding()
 	{
-		if( type().equals(TYPE_LATIN2) )
+		if( type().equals(TYPE_LATIN1) )
+			return "ISO-8859-1";						// NOI18N
+        else if( type().equals(TYPE_LATIN2) )
 			return "ISO-8859-2";						// NOI18N
 		else if(type().equals(TYPE_UTF8))
 			return "UTF8";								// NOI18N
 		else
-			return "ISO-8859-1";						// NOI18N
+			return null;
+        
 	}
 
 	/**
@@ -71,7 +77,12 @@ public class TextFileHandler extends FileHandler
 			throws IOException
 	{
 		FileInputStream fis = new FileInputStream(infile);
-		InputStreamReader isr = new InputStreamReader(fis, getEncoding());
+        String encoding = getEncoding();
+        InputStreamReader isr;
+        if( encoding==null )
+            isr = new InputStreamReader(fis);
+        else
+            isr = new InputStreamReader(fis, getEncoding());
 		return isr;
 	}
 

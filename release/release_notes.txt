@@ -1,20 +1,25 @@
 ----------------------------------------------------------------------
- OmegaT 1.4.4 Beta5 Release Notes
+ OmegaT 1.4.4 Release Notes
 
- OmegaT is brought to you by
-   Keith Godfrey -           Project Originator, development
-   Marc Prior -              project management, evangelicism, 
-                             documentation
-   Maxym Mykhalchuk -        development and SF.net maintenance
-   Henry Pijffers -          development
-   Sacha Chua -              development
-   Jean-Christophe Helary -  general help
-   Samuel Murray -           general help
+ OmegaT is the work of Keith Godfrey
 
- Localized OmegaT versions are by:
-   German l10n -             Sabine Cretella
-   Russian and Belorussian - Dmitry Gabinski
-   Spanish l10n -            Juan Salcines and Cesar Escribano Esteban
+ Code has been contributed by
+   Benjamin Siband
+   Maxym Mykhalchuk (lead developer at the time of this release)
+   Sacha Chua
+   Henry Pijffers
+
+ Other contributions by
+   Marc Prior (project coordinator and ASAD manual writer)
+   Jean-Christophe Helary
+   Samuel Murray
+   Dmitry Gabinski (user manual writer at the time of this release)
+
+ Localized OmegaT versions are by
+   Jean-Christophe Helary (French l10n)
+   Sabine Cretella (German l10n)
+   Dmitry Gabinski (Belorussian, Russian and Esperanto)
+   Juan Salcines and Cesar Escribano Esteban (Spanish l10n)
 
  And many, many more very helpful people
 
@@ -25,15 +30,15 @@
 General changes in 1.4 (summary)
 ----------------------------------------------------------------------
 UI changes:
-	Find interface rewritten with enhanced functionality
-	Main interface improved
-	Font may be selected
-	Full localisation support
-	Spanish and Russian UI and docs, Belorussian UI, German Docs
-	Ability to jump to the next untranslated segment (not yet in Beta5)
+    Find interface rewritten with enhanced functionality
+    Main interface improved
+    Font may be selected
+    Full localisation support
+    Belorussian, French, German, Russian and Spanish l10n
+    Ability to jump to the next untranslated segment
 New filters:
-	XHTML
-	Java resource bundles (.properties)
+    XHTML
+    Java resource bundles (.properties)
 Core changes:
     New Fuzzy Matching algorithm - more matches, lower memory footprint
     Refactored code with more comments
@@ -45,11 +50,11 @@ Core changes:
 Enchancements:
 
 - Easy Help system localization 
-  (and German, Russian and Spanish translations)
+  (and Belorussian, French, German, Russian and Spanish l10ns)
 
 - Separate source distribution of OmegaT
 
-- Ability to jump to nearest not yet translated segment
+- Ability to jump to next not yet translated segment
   by Henry Pijffers
 
 - Increased number of fuzzy matches 
@@ -66,12 +71,13 @@ Enchancements:
   (glossary file should be tab-delimited,
    if extension is .tab - it's in default system encoding,
    is .utf8 - it's in UTF-8 encoding)
+   itherwise the file is ignored
 
 Bugfixes:
 
 - Too little fuzzy matches were found,
   especially in small projects
-  
+
 - Old Fuzzy Matching engine was totally
   bad on Japanese source files
 
@@ -84,6 +90,8 @@ Bugfixes:
   by Sacha Chua
 
 - Empty segments were uselessly displayed
+
+- Font Change now works reliably
 
 
 1.4.3

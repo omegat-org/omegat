@@ -25,7 +25,6 @@ import org.omegat.core.glossary.GlossaryEntry;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.StringEntry;
-import org.omegat.gui.dialogs.FontSelectionDialog;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.util.OConsts;
@@ -74,6 +73,7 @@ import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
+import org.omegat.gui.dialogs.FontSelectionDialog;
 
 /**
  * The main frame of OmegaT application
@@ -127,20 +127,19 @@ public class TransFrame extends JFrame implements ActionListener
 		m_xlPane.requestFocus();
 
 		CommandThread core = CommandThread.core;
-		m_font = core.getOrSetPreference(OConsts.TF_SRC_FONT_NAME,
-				OConsts.TF_FONT_DEFAULT);
-		m_fontSize = core.getOrSetPreference(OConsts.TF_SRC_FONT_SIZE,
-				OConsts.TF_FONT_SIZE_DEFAULT);
-		int fontSize = 12;
-		try
-		{
-			fontSize = Integer.parseInt(m_fontSize);
+		String fontName = core.getOrSetPreference(OConsts.TF_SRC_FONT_NAME, OConsts.TF_FONT_DEFAULT);
+		String fontSize = core.getOrSetPreference(OConsts.TF_SRC_FONT_SIZE, OConsts.TF_FONT_SIZE_DEFAULT);
+        int fontSizeInt = 12;
+		try 
+        {
+			fontSizeInt = Integer.parseInt(fontSize);
 		}
-		catch (NumberFormatException nfe) {
+		catch (NumberFormatException nfe) 
+        {
         }
-		m_xlPane.setFont(new Font(m_font, Font.PLAIN, fontSize));
-		m_matchViewer.setFont(new Font(m_font, Font.PLAIN, fontSize));
-
+        m_font = new Font(fontName, Font.PLAIN, fontSizeInt);
+		m_xlPane.setFont(m_font);
+		m_matchViewer.setFont(m_font);
 		
 		// check this only once as it can be changed only at compile time
 		// should be OK, but customization might have messed it up
@@ -155,11 +154,16 @@ public class TransFrame extends JFrame implements ActionListener
 	private void loadDisplayPrefs()
 	{
 		String mn = PreferenceManager.pref.getPreference(OConsts.PREF_MNEMONIC);
-		if (mn != null && mn.equals("true"))								// NOI18N
+        
+        // if this property is set to true
+        // or if we're running on non-MacOSX
+		if( mn.equals("true")                                                             // NOI18N
+            || (mn.equals("") && !System.getProperty("os.name").toLowerCase().startsWith("mac os x")) )   // NOI18N
 		{
 			m_miDisplayMnemonic.setSelected(true);
 			doSetMnemonics(true);
 		}
+        
 		String tab = PreferenceManager.pref.getPreference(OConsts.PREF_TAB);
 		if (tab != null && tab.equals("true"))								// NOI18N
 		{
@@ -503,9 +507,6 @@ public class TransFrame extends JFrame implements ActionListener
 		
 		// tools
 		m_mTools = new JMenu();
-		m_miToolsPseudoTrans = new JMenuItem();
-		m_miToolsPseudoTrans.addActionListener(this);
-		m_mTools.add(m_miToolsPseudoTrans);
 
 		m_miToolsValidateTags = new JMenuItem();
 		m_miToolsValidateTags.addActionListener(this);
@@ -562,7 +563,6 @@ public class TransFrame extends JFrame implements ActionListener
 		m_miDisplayMnemonic.setText(OStrings.TF_MENU_DISPLAY_MNEMONIC);
 		
 		m_mTools.setText(OStrings.TF_MENU_TOOLS);
-		m_miToolsPseudoTrans.setText(OStrings.TF_MENU_TOOLS_PSEUDO);
 		m_miToolsValidateTags.setText(OStrings.TF_MENU_TOOLS_VALIDATE);
 
 		m_mVersion.setText(OStrings.VERSION);
@@ -606,25 +606,6 @@ public class TransFrame extends JFrame implements ActionListener
 		}
 
 		System.exit(0);
-	}
-
-	public void doPseudoTrans()
-	{
-		if (!m_projectLoaded)
-			return;
-
-		// since this is a destructive operation, verify the user
-		// _REALLY_ wants to do this
-		String title = OStrings.TF_PSEUDOTRANS_RUSURE_TITLE;
-		String msg = OStrings.TF_PSEUDOTRANS_RUSURE;
-		int choice = JOptionPane.showConfirmDialog(this, msg, title,
-				JOptionPane.OK_CANCEL_OPTION,
-				JOptionPane.WARNING_MESSAGE);
-		if (choice == JOptionPane.CANCEL_OPTION)
-			return;
-
-		CommandThread.core.pseudoTranslate();
-		activateEntry();
 	}
 
 	private void doValidateTags()
@@ -682,8 +663,11 @@ public class TransFrame extends JFrame implements ActionListener
 	}
 
 	/**
-	  * Finds the next untranslated entry in the document.
-	  */	
+	 * Finds the next untranslated entry in the document.
+     * 
+     * @author Henry Pjiffers
+     * @author Maxym Mykhalchuk
+	 */	
 	public void doNextUntranslatedEntry()
 	{
 		// check if a document is loaded
@@ -700,6 +684,10 @@ public class TransFrame extends JFrame implements ActionListener
 		// iterate through the list of entries,
 		// starting at the current entry,
 		// until an entry with no translation is found
+        //
+		// P.S. going to the next entry anyway, even if it's not translated
+		curEntryNum++;
+        
 		SourceTextEntry entry = null;
 		while (curEntryNum < numEntries)
 		{
@@ -717,9 +705,6 @@ public class TransFrame extends JFrame implements ActionListener
 				if (m_curEntryNum > m_xlLastEntry)
 					loadDocument();
 				
-				// activate the entry
-				activateEntry();
-				
 				// stop searching
 				break;
 			}
@@ -727,6 +712,9 @@ public class TransFrame extends JFrame implements ActionListener
 			// next entry
 			curEntryNum++;
 		}
+        
+        // activate the entry
+        activateEntry();
 	}
 
 	// insert current fuzzy match at cursor position
@@ -804,26 +792,25 @@ public class TransFrame extends JFrame implements ActionListener
 		m_miFileCreate.setEnabled(true);
 	}
 
-	// display dialog allowing selection of source and target language fonts
+    /**
+     * Displays the font dialog to allow selecting
+     * the font for source, target text (in main window) 
+     * and for match and glossary windows.
+     */
     private void doFont()
 	{
-		FontSelectionDialog dlg = new FontSelectionDialog(this, m_font, m_fontSize);
+		FontSelectionDialog dlg = new FontSelectionDialog(this, m_font);
 		dlg.setVisible(true);
-		if (dlg.isChanged())
+		if( dlg.getReturnStatus()==FontSelectionDialog.RET_OK_CHANGED )
 		{
 			// fonts have changed  
 			// first commit current translation
 			commitEntry();
-			int fontSize = 12;
-			try
-			{
-				fontSize = Integer.parseInt(m_fontSize);
-			}
-			catch (NumberFormatException nfe) {
-            }
-			Font font = new Font(m_font, Font.PLAIN, fontSize);
-			m_xlPane.setFont(font);
-			m_matchViewer.setFont(font);
+            m_font = dlg.getSelectedFont();
+			m_xlPane.setFont(m_font);
+			m_matchViewer.setFont(m_font);
+            CommandThread.core.setPreference(OConsts.TF_SRC_FONT_NAME, m_font.getName());
+            CommandThread.core.setPreference(OConsts.TF_SRC_FONT_SIZE, ""+m_font.getSize());
 			activateEntry();
 		}
 	}
@@ -1055,7 +1042,7 @@ public class TransFrame extends JFrame implements ActionListener
 		
 		m_matchViewer.hiliteRange(start, end);
 		m_matchViewer.updateMatchText();
-		m_matchViewer.formatNearText(m_curNear.str.getTokenList(), m_curNear.attr);
+		m_matchViewer.formatNearText(m_curNear.str.getSrcTokenList(), m_curNear.attr);
 	}
 	
 	private void commitEntry()
@@ -1487,10 +1474,6 @@ public class TransFrame extends JFrame implements ActionListener
 			{
 				doFont();
 			}
-			else if (evtSrc == m_miToolsPseudoTrans)
-			{
-				doPseudoTrans();
-			}
 			else if (evtSrc == m_miToolsValidateTags)
 			{
 				doValidateTags();
@@ -1906,6 +1889,7 @@ public class TransFrame extends JFrame implements ActionListener
 	{
 		super.setVisible(b);
 		m_matchViewer.setVisible(b);
+        m_matchViewer.setFont(m_font);
 		toFront();
 	}
 
@@ -1942,16 +1926,14 @@ public class TransFrame extends JFrame implements ActionListener
 	private JMenuItem	m_miDisplayFont;
 	
 	private JMenu		m_mTools;
-    private JMenuItem	m_miToolsPseudoTrans;
 	private JMenuItem	m_miToolsValidateTags;
 
     private JMenu		m_mVersion;
 	private JMenuItem	m_miVersionHelp;
 //	private JMenuItem	m_miVersionNumber;
 
-	// source and target font display info
-    private String	m_font;
-	private String	m_fontSize;
+	/** The font for main window (source and target text) and for match and glossary windows */
+    private Font m_font;
 
 	// first and last entry numbers in current file
     private int		m_xlFirstEntry;
@@ -1979,6 +1961,7 @@ public class TransFrame extends JFrame implements ActionListener
 	private UndoManager	m_undo;
 	private char	m_advancer;
 
+    /** Main panel with source and target strings */
 	private XLPane		m_xlPane;
 	private JScrollPane	m_xlScroller;
 

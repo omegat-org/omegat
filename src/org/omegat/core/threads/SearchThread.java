@@ -67,13 +67,22 @@ public class SearchThread extends Thread
 	}
 
 	/////////////////////////////////////////////////////////
-	// poublic interface
+	// public interface
 
-	// only starts a search if another is not currently running
-	// returns 0 on successful start, 1 on failure (i.e. search in progress)
-	// to search current project only, set rootDir to null
+    /**
+     * Starts a search if another is not currently running.
+     * To search current project only, set rootDir to null.
+     *
+     * @param text string to searh for
+     * @param rootDir folder to search in
+     * @param recursive search in subfolders of rootDir too
+     * @param exact search for a substring
+     * @param tm search in legacy and orphan TM strings too
+     * @param keyword search for keywords
+     * @return 0 on successful start, 1 on failure (i.e. search in progress)
+     */
 	public synchronized void requestSearch(String text, String rootDir,
-			boolean recursive, boolean exact, boolean tm)
+			boolean recursive, boolean exact, boolean tm, boolean keyword)
 	{
 		if (!m_searching)
 		{
@@ -82,6 +91,7 @@ public class SearchThread extends Thread
 			m_searchText = text;
 			m_exactSearch = exact;
 			m_tmSearch = tm;
+            m_keywordSearch = keyword;
 			m_searching = true;
 			interrupt();
 			return;
@@ -183,7 +193,7 @@ public class SearchThread extends Thread
 		if (entryNum >= 0)
 		{
 			// entries are referenced at offset 1 but stored at offset 0
-			m_window.addEntry(entryNum+1, null, entryNum+"> "+src, target);	// NOI18N
+			m_window.addEntry(entryNum+1, null, (entryNum+1)+"> "+src, target);	// NOI18N
 		}
 		else
 		{
@@ -198,19 +208,15 @@ public class SearchThread extends Thread
 
 	private void searchProject()
 	{
-		SourceTextEntry ste;
-		int numEntries = CommandThread.core.numEntries();
 		m_numFinds = 0;
-		String srcText;
-		String locText;
 		if (m_exactSearch)
 		{
 			int i;
-			for (i=0; i<numEntries; i++)
+			for (i=0; i<CommandThread.core.numEntries(); i++)
 			{
-				ste = CommandThread.core.getSTE(i);
-				srcText = ste.getSrcText();
-				locText = ste.getTranslation();
+				SourceTextEntry ste = CommandThread.core.getSTE(i);
+				String srcText = ste.getSrcText();
+				String locText = ste.getTranslation();
 				if (searchString(srcText, m_searchText) ||
                         searchString(locText, m_searchText))
 				{
@@ -229,8 +235,8 @@ public class SearchThread extends Thread
 				for (i=0; i<tmList.size(); i++)
 				{
 					tm = (TransMemory) tmList.get(i);
-					srcText = tm.source;
-					locText = tm.target;
+					String srcText = tm.source;
+					String locText = tm.target;
 					if (searchString(srcText, m_searchText) ||
                             searchString(locText, m_searchText))
 					{
@@ -244,36 +250,44 @@ public class SearchThread extends Thread
 				}
 			}
 		}
-		else
+		else if( m_keywordSearch )
 		{
-			// keyword search - recycling org.omegat.TransFrame search code
-			TreeMap foundList = null; //mihmax CommandThread.core.findAll(m_searchText);
-			if (foundList != null)
+            ArrayList searchTokens = new ArrayList();
+            StaticUtils.tokenizeText(m_searchText, searchTokens);
+			int i;
+			for (i=0; i<CommandThread.core.numEntries(); i++)
 			{
-				ListIterator it;
-				TreeMap list = (TreeMap) foundList.clone();
-				LinkedList parentList;
-				StringEntry strEntry;
-				SourceTextEntry srcTextEntry;
-				while (list.size() > 0)
+				SourceTextEntry ste = CommandThread.core.getSTE(i);
+                List srcTokens = ste.getStrEntry().getSrcTokenList();
+                List transTokens = ste.getStrEntry().getTransTokenList();
+                
+				if( StaticUtils.isSubset(searchTokens, srcTokens) || 
+                        StaticUtils.isSubset(searchTokens, transTokens) )
 				{
-					strEntry = (StringEntry) list.remove(list.firstKey());
-					if (strEntry == null)
+					// found a match - relay source and trans text
+					foundString(i, null, ste.getStrEntry().getSrcText(), 
+                            ste.getStrEntry().getTrans());
+					if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS)
+						break;
+				}
+			}
+			if (m_tmSearch)
+			{
+				ArrayList tmList = CommandThread.core.getTransMemory();
+				TransMemory tm;
+				for (i=0; i<tmList.size(); i++)
+				{
+					tm = (TransMemory) tmList.get(i);
+                    List srcTokens = new ArrayList();
+                    StaticUtils.tokenizeText(tm.source, srcTokens);
+                    List transTokens = new ArrayList();
+                    StaticUtils.tokenizeText(tm.target, transTokens);
+                    
+    				if( StaticUtils.isSubset(searchTokens, srcTokens) || 
+                            StaticUtils.isSubset(searchTokens, transTokens) )
 					{
-						continue;
-					}
-					parentList = strEntry.getParentList();
-					if (parentList == null)
-					{
-						continue;
-					}
-
-					it = parentList.listIterator();
-					while (it.hasNext())
-					{
-						srcTextEntry = (SourceTextEntry) it.next();
-						foundString(srcTextEntry.entryNum(), null, 
-								strEntry.getSrcText(), strEntry.getTrans());
+						// found a match - relay source and trans text
+						foundString(-1, tm.file, tm.source, tm.target);
 						if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS)
 						{
 							break;
@@ -341,12 +355,6 @@ public class SearchThread extends Thread
 			}
 		}
 	}
-
-	// extract 'strings' from current file.  Use newline and non-display
-	// char strings w/ length > 5 for searches.
-	//protected void examineBinary()
-	//{
-	//}
 
 	///////////////////////////////////////////////////////////////////////
 	// search algorithm
@@ -548,6 +556,7 @@ public class SearchThread extends Thread
 	private String		m_curFileName;
 	private boolean		m_exactSearch;
 	private boolean		m_tmSearch;
+    private boolean     m_keywordSearch;
 
 	private int			m_numFinds;
 

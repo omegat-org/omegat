@@ -47,9 +47,6 @@ public class StringEntry
 {
 	public StringEntry(String srcText) 
 	{
-        tokenList = new ArrayList();
-        StaticUtils.tokenizeText(srcText, tokenList);
-        
 		m_parentList = new LinkedList();
 		m_nearList = new TreeSet();
 		m_glosList = new LinkedList();
@@ -63,11 +60,19 @@ public class StringEntry
     /** Retruns source string in lower case */
     public String getSrcTextLow() { return m_srcTextLow; }
     
-    /** Returns the tokens of this string */
-    public List getTokenList() { return tokenList; }
+    /** Returns the tokens of this entry's source string */
+    public List getSrcTokenList() 
+    { 
+        if( srcTokenList==null )
+        {
+            srcTokenList = new ArrayList();
+            StaticUtils.tokenizeText(m_srcText, srcTokenList);
+        }        
+        return srcTokenList; 
+    }
     
     /** Returns the number of words in this string */
-	public int getWordCount() { return tokenList.size(); }
+	public int getWordCount() { return srcTokenList.size(); }
 
 	public LinkedList getParentList()	{ return m_parentList;	}
 	public void addParent(SourceTextEntry srcTextEntry)
@@ -135,10 +140,27 @@ public class StringEntry
 	//	before or after they actually did, making the condition trivial
 	// if more processing happens here later, readdress synchronization
 	//	issues
+    
+    /**
+     * Returns the translation of the StringEntry.
+     */    
 	public String getTrans()
 	{
 		return m_translation;
 	}
+    
+    
+    /** Returns the tokens of this entry's translation */
+    public List getTransTokenList() 
+    { 
+        if( transTokenList==null )
+        {
+            transTokenList = new ArrayList();
+            StaticUtils.tokenizeText(m_translation, transTokenList);
+        }
+        return transTokenList; 
+    }
+
 
 	/**
 	 * Sets the translation of the StringEntry.
@@ -147,14 +169,19 @@ public class StringEntry
 	 */
 	public void setTranslation(String trans)
 	{
-		// tell the boss things have changed to indicate a save is in order
-		CommandThread.core.markAsDirty();
 		if( trans==null )
-			m_translation = "";		// NOI18N
+			trans = "";		        // NOI18N
 		else if( trans.equals(m_srcText) )
-			m_translation = "";		// NOI18N
-		else
-			m_translation = trans;
+			trans = "";             // NOI18N
+        
+        if( !trans.equals(m_translation) )
+        {
+            // tell the boss things have changed to indicate a save is in order
+            // only if translation changed
+            CommandThread.core.markAsDirty();
+    		m_translation = trans;
+        }
+
 	}
 
 	// NOTE: references to these lists are returned through the above
@@ -167,5 +194,6 @@ public class StringEntry
     private String m_srcTextLow;
 	private String m_translation;
     
-    private List tokenList;
+    private List srcTokenList;
+    private List transTokenList;
 }

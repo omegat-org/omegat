@@ -73,7 +73,6 @@ public class MessageRelay
 	}
 
 	// command codes
-	//		1		doPseudoTrans
 	//		2		doNextEntry
 	//		3		doPrevEntry
 	//		4		doRecycleTrans

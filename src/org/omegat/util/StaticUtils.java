@@ -44,24 +44,21 @@ public class StaticUtils
 		PreferenceManager pref = CommandThread.core.getPrefManager();
 
 		pref.setPreference(OConsts.PREF_FILE_MAPPING_N + "1", "htm html");		// NOI18N
-		// common alternatives here are 'txt txt1' and 'txt txt2' for
-		//	Latin1 and Latin2 encodings
-		pref.setPreference(OConsts.PREF_FILE_MAPPING_N + "2", "txt utf8");		// NOI18N
 
 		///////////////////////////////////////////////
 		// OOo family mappings
 		// spreadsheet
-		pref.setPreference(OConsts.PREF_FILE_MAPPING_N + "3", "sxc sxw");		// NOI18N
+		pref.setPreference(OConsts.PREF_FILE_MAPPING_N + "2", "sxc sxw");		// NOI18N
 		// master doc
-		pref.setPreference(OConsts.PREF_FILE_MAPPING_N + "4", "sxg sxw");		// NOI18N
+		pref.setPreference(OConsts.PREF_FILE_MAPPING_N + "3", "sxg sxw");		// NOI18N
 		// formula
-		pref.setPreference(OConsts.PREF_FILE_MAPPING_N + "5", "sxm sxw");		// NOI18N
+		pref.setPreference(OConsts.PREF_FILE_MAPPING_N + "4", "sxm sxw");		// NOI18N
 		// drawing
-		pref.setPreference(OConsts.PREF_FILE_MAPPING_N + "6", "sxd sxw");		// NOI18N
+		pref.setPreference(OConsts.PREF_FILE_MAPPING_N + "5", "sxd sxw");		// NOI18N
 		// presentation
-		pref.setPreference(OConsts.PREF_FILE_MAPPING_N + "7", "sxi sxw");		// NOI18N
+		pref.setPreference(OConsts.PREF_FILE_MAPPING_N + "6", "sxi sxw");		// NOI18N
 
-		pref.setPreference(OConsts.PREF_NUM_FILE_MAPPINGS, "7");				// NOI18N
+		pref.setPreference(OConsts.PREF_NUM_FILE_MAPPINGS, "6");				// NOI18N
 
 		pref.save();
 	}
@@ -319,11 +316,27 @@ System.out.println("mapping extension '"+str.substring(0,pos)+"' to '"+str.subst
 		return nTokens;
 	}
 	
+    /**
+     * Returns the names of all font families available.
+     */
     public static String[] getFontNames()
 	{
 		GraphicsEnvironment graphics;
 		graphics = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		return graphics.getAvailableFontFamilyNames();
 	}
+    
+    
+    /**
+     * Tests, whether one list of tokens is fully contained (is-a subset)
+     * in other list of tokens
+     */
+    public static boolean isSubset(List maybeSubset, List maybeSuperset)
+    {
+        for(int i=0; i<maybeSubset.size(); i++)
+            if( !maybeSuperset.contains(maybeSubset.get(i)) )
+                return false;
+        return true;
+    }
 
 }

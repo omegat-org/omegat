@@ -61,7 +61,8 @@ public class OConsts
 	
 	public static final String WORD_CNT_FILE_EXT		= "word_counts";			// NOI18N
 	
-	public static final double NEAR_THRASH = 0.4;
+    /** The smallest threshold to detect a fuzzy match string */
+	public static final double FUZZY_MATCH_THRESHOLD = 0.3;
 	
 	// preference names
 	public static final String PREF_SRCLANG		= "source_lang";					// NOI18N
@@ -94,7 +95,7 @@ public class OConsts
 	
 	public static final String TF_SRC_FONT_NAME		= "source_font";				// NOI18N
 	public static final String TF_SRC_FONT_SIZE		= "source_font_size";			// NOI18N
-	public static final String TF_FONT_DEFAULT		= "Courier";					// NOI18N
+	public static final String TF_FONT_DEFAULT		= "Dialog";					    // NOI18N
 	public static final String TF_FONT_SIZE_DEFAULT	= "12";							// NOI18N
 	
 	public static final String XB_COMMENT_SHORTCUT	= "!comment";					// NOI18N

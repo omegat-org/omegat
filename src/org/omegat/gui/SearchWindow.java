@@ -65,25 +65,25 @@ public class SearchWindow extends JFrame
 		m_exactSearchRB.setMnemonic(KeyEvent.VK_E);
 		m_exactSearchRB.setSelected(true);
 
+		m_keywordSearchRB = new JRadioButton();
+		m_keywordSearchRB.setMnemonic(KeyEvent.VK_K);
+		m_keywordSearchRB.setSelected(false);
+
 		m_tmSearchCB = new JCheckBox();
 		m_tmSearchCB.setMnemonic(KeyEvent.VK_T);
 		m_tmSearchCB.setSelected(true);
 		m_tmSearch = true;
 
-		//mihmax m_wordSearchRB = new JRadioButton();
-		//mihmax m_wordSearchRB.setMnemonic(KeyEvent.VK_K);
-		//mihmax m_wordSearchRB.setSelected(false);
-
 		ButtonGroup bg = new ButtonGroup();
 		bg.add(m_exactSearchRB);
-		//mihmax bg.add(m_wordSearchRB);
+		bg.add(m_keywordSearchRB);
 
 		Box bRB = Box.createHorizontalBox();
 		bRB.add(m_exactSearchRB);
 		bRB.add(Box.createHorizontalStrut(10));
-		bRB.add(m_tmSearchCB);
+		bRB.add(m_keywordSearchRB);
 		bRB.add(Box.createHorizontalStrut(10));
-		//mihmax bRB.add(m_wordSearchRB);
+		bRB.add(m_tmSearchCB);
 
 		m_viewer = new EntryListPane(par);
 		JScrollPane viewerScroller = new JScrollPane(m_viewer);
@@ -204,20 +204,6 @@ public class SearchWindow extends JFrame
 			}
 		});
 
-		/*mihmax m_wordSearchRB.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				if (m_wordSearchRB.isSelected())
-				{
-					m_tmSearchCB.setEnabled(false);
-					m_tmSearch = m_tmSearchCB.isSelected();
-					m_tmSearchCB.setSelected(false);
-				}
-			}
-		});
-		 */
-
 		m_tmSearchCB.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -237,9 +223,9 @@ public class SearchWindow extends JFrame
 					m_dirField.requestFocus();
 					m_tmSearchCB.setEnabled(false);
 					m_tmSearchCB.setSelected(false);
-					//mihmax m_wordSearch = m_wordSearchRB.isSelected();
-					//mihmax m_wordSearchRB.setSelected(false);
-					//mihmax m_wordSearchRB.setEnabled(false);
+					m_keywordSearch = m_keywordSearchRB.isSelected();
+					m_keywordSearchRB.setSelected(false);
+					m_keywordSearchRB.setEnabled(false);
 					m_exactSearchRB.setSelected(true);
 				}
 				else
@@ -248,9 +234,9 @@ public class SearchWindow extends JFrame
 					m_dirField.setEditable(false);
 					m_tmSearchCB.setEnabled(true);
 					m_tmSearchCB.setSelected(m_tmSearch);
-					//mihmax m_wordSearchRB.setSelected(m_wordSearch);
-					//mihmax m_wordSearchRB.setEnabled(true);
-					//mihmax m_exactSearchRB.setSelected(!m_wordSearch);
+					m_keywordSearchRB.setSelected(m_keywordSearch);
+					m_keywordSearchRB.setEnabled(true);
+					m_exactSearchRB.setSelected(!m_keywordSearch);
 					m_exactSearchRB.setSelected(true);
 				}
 			}
@@ -274,7 +260,7 @@ public class SearchWindow extends JFrame
 			m_dirCB.setEnabled(false);
 			m_tmSearchCB.setSelected(false);
 			m_tmSearchCB.setEnabled(false);
-			//mihmax m_wordSearchRB.setEnabled(false);
+			m_keywordSearchRB.setEnabled(false);
 			m_dirField.setEditable(true);
 		}
 
@@ -388,7 +374,8 @@ System.out.println("ERROR - bad directory name  '"+m_dirField.getText()+"'");	//
 			m_thread.requestSearch(m_searchField.getText(), root, 
 					m_recursiveCB.isSelected(), 
 					m_exactSearchRB.isSelected(), 
-					m_tmSearchCB.isSelected());
+					m_tmSearchCB.isSelected(),
+                    m_keywordSearchRB.isSelected());
 		}
 	}
 
@@ -406,7 +393,7 @@ System.out.println("ERROR - bad directory name  '"+m_dirField.getText()+"'");	//
 		
 		m_exactSearchRB.setText(OStrings.SW_EXACT_SEARCH);
 		m_tmSearchCB.setText(OStrings.SW_SEARCH_TM);
-		//mihmax m_wordSearchRB.setText(OStrings.SW_WORD_SEARCH);
+		m_keywordSearchRB.setText(OStrings.SW_WORD_SEARCH);
 		
 		m_dirLabel.setText(OStrings.SW_LOCATION);
 		m_dirCB.setText(OStrings.SW_DIR_SEARCH);
@@ -437,12 +424,12 @@ System.out.println("ERROR - bad directory name  '"+m_dirField.getText()+"'");	//
 	private JTextField	m_searchField;
 	private JButton		m_searchButton;
 
-    private JRadioButton	m_wordSearchRB;
+    private JRadioButton	m_keywordSearchRB;
 	private JRadioButton	m_exactSearchRB;
 	private JCheckBox		m_tmSearchCB;
 
 	private boolean		m_tmSearch = true;
-	private boolean		m_wordSearch;
+	private boolean		m_keywordSearch;
 
 	private JLabel		m_dirLabel;
 	private JTextField	m_dirField;

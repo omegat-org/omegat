@@ -85,9 +85,7 @@ public class OStrings
 	public static final String TF_MENU_DISPLAY_MNEMONIC	= getString("TF_MENU_DISPLAY_MNEMONIC");
 
 	public static final String TF_MENU_TOOLS		= getString("TF_MENU_TOOLS");
-	public static final String TF_MENU_TOOLS_PSEUDO	= getString("TF_MENU_TOOLS_PSEUDO");
 	public static final String TF_MENU_TOOLS_VALIDATE	= getString("TF_MENU_TOOLS_VALIDATE");
-	// --Commented out by Inspection (31.10.04 1:50): public static final String TF_MENU_TOOLS_MERGE_TMX	= getString("TF_MENU_TOOLS_MERGE_TMX");
 
 	public static final String TF_MENU_VERSION_HELP		= getString("TF_MENU_VERSION_HELP");
 	
@@ -97,8 +95,6 @@ public class OStrings
 	public static final String TF_LOAD_ERROR	= getString("TF_LOAD_ERROR");
 	public static final String TF_COMPILE_ERROR	= getString("TF_COMPILE_ERROR");
 
-    public static final String TF_PSEUDOTRANS_RUSURE_TITLE	= getString("TF_PSEUDOTRANS_RUSURE_TITLE");
-	public static final String TF_PSEUDOTRANS_RUSURE	= getString("TF_PSEUDOTRANS_RUSURE");
     public static final String TF_NOTICE_BAD_TAGS	= getString("TF_NOTICE_BAD_TAGS");
 	public static final String TF_NOTICE_OK_TAGS	= getString("TF_NOTICE_OK_TAGS");
 	public static final String TF_NOTICE_TITLE_TAGS	= getString("TF_NOTICE_TITLE_TAGS");

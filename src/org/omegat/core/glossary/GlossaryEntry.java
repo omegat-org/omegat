@@ -19,7 +19,8 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.core;
+package org.omegat.core.glossary;
+
 
 /**
  * An entry in the glossary.
@@ -38,7 +39,7 @@ public class GlossaryEntry
 	public String	getSrcText()	{ return m_src;		}
 	public String	getLocText()	{ return m_loc;		}
 	public String	getCommentText()	{ return m_com;		}
-
+    
 	private String	m_src;
 	private String	m_loc;
 	private String	m_com;

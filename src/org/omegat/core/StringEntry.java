@@ -32,12 +32,14 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.matching.NearString;
+import org.omegat.core.glossary.GlossaryEntry;
+import org.omegat.util.StaticUtils;
 
 /*
  * String entry represents a unique translatable string
  * (a single string may occur many times in data files, but only
- *  one org.omegat.core.StringEntry is created for it).
- * Multiple translations can still exist the the single string, however.
+ *  one StringEntry is created for it).
+ * Multiple translations can still exist for the single string, however.
  *
  * @author Keith Godfrey
  */
@@ -45,17 +47,27 @@ public class StringEntry
 {
 	public StringEntry(String srcText) 
 	{
-		m_wordCount = 0;
+        tokenList = new ArrayList();
+        StaticUtils.tokenizeText(srcText, tokenList);
+        
 		m_parentList = new LinkedList();
 		m_nearList = new TreeSet();
 		m_glosList = new LinkedList();
 		m_srcText = srcText;
+        m_srcTextLow = srcText.toLowerCase();
 		m_translation = ""; // NOI18N
 	}
 
+    /** Returns the source string */
     public String getSrcText()	{ return m_srcText;	}
-	public void setWordCount(int n)	{ m_wordCount = n;	}
-	public int getWordCount()	{ return m_wordCount;	}
+    /** Retruns source string in lower case */
+    public String getSrcTextLow() { return m_srcTextLow; }
+    
+    /** Returns the tokens of this string */
+    public List getTokenList() { return tokenList; }
+    
+    /** Returns the number of words in this string */
+	public int getWordCount() { return tokenList.size(); }
 
 	public LinkedList getParentList()	{ return m_parentList;	}
 	public void addParent(SourceTextEntry srcTextEntry)
@@ -104,10 +116,17 @@ public class StringEntry
 	}
 	private Object near51;
 
-    public LinkedList getGlosList()		{ return m_glosList;	}
-	public void addGlosString(GlossaryEntry strEntry)
+    /** 
+     * Returns a List of Glossary entries, associated with 
+     * the current String entry 
+     */
+    public List getGlossaryEntries()
+    { 
+        return m_glosList;	
+    }
+	public void addGlossaryEntry(GlossaryEntry glosEntry)
 	{
-		m_glosList.add(strEntry);
+		m_glosList.add(glosEntry);
 	}
 
 	// these methods aren't sychronized - thought about doing so, but
@@ -145,6 +164,8 @@ public class StringEntry
 	private LinkedList	m_glosList;
 
     private String m_srcText;
-	private int m_wordCount;
+    private String m_srcTextLow;
 	private String m_translation;
+    
+    private List tokenList;
 }

@@ -177,8 +177,7 @@ public abstract class FileHandler
 			throws IOException
 	{
 		FileOutputStream fos = new FileOutputStream(outfile);
-		//OutputStreamWriter osw = new OutputStreamWriter(fos);
-		OutputStreamWriter osw = new OutputStreamWriter(fos, "ISO-8859-1");	// NOI18N
+		OutputStreamWriter osw = new OutputStreamWriter(fos);
 		BufferedWriter bw = new BufferedWriter(osw);
 		return bw;
 	}

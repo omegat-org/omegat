@@ -289,6 +289,7 @@ public class TransFrame extends JFrame implements ActionListener
 //			m_miEditUntrans.setMnemonic(KeyEvent.VK_U);
 			m_miEditNext.setMnemonic(KeyEvent.VK_N);
 			m_miEditPrev.setMnemonic(KeyEvent.VK_P);
+			m_miEditNextUntrans.setMnemonic(KeyEvent.VK_U);
 			m_miEditCompare1.setMnemonic(KeyEvent.VK_1);
 			m_miEditCompare2.setMnemonic(KeyEvent.VK_2);
 			m_miEditCompare3.setMnemonic(KeyEvent.VK_3);
@@ -322,6 +323,7 @@ public class TransFrame extends JFrame implements ActionListener
 	//		m_miEditUntrans.setMnemonic(0);
 			m_miEditNext.setMnemonic(0);
 			m_miEditPrev.setMnemonic(0);
+			m_miEditNextUntrans.setMnemonic(0);
 			m_miEditCompare1.setMnemonic(0);
 			m_miEditCompare2.setMnemonic(0);
 			m_miEditCompare3.setMnemonic(0);
@@ -448,6 +450,11 @@ public class TransFrame extends JFrame implements ActionListener
 				KeyEvent.VK_P,  m_shortcutKey));
 		m_miEditPrev.addActionListener(this);
 		m_mEdit.add(m_miEditPrev);
+		
+		m_miEditNextUntrans = new JMenuItem();
+		m_miEditNextUntrans.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, m_shortcutKey));
+		m_miEditNextUntrans.addActionListener(this);
+		m_mEdit.add(m_miEditNextUntrans);
 
 		m_mEdit.addSeparator();
 
@@ -551,6 +558,7 @@ public class TransFrame extends JFrame implements ActionListener
 		m_miEditRedo.setText(OStrings.TF_MENU_EDIT_REDO);
 		m_miEditNext.setText(OStrings.TF_MENU_EDIT_NEXT);
 		m_miEditPrev.setText(OStrings.TF_MENU_EDIT_PREV);
+		m_miEditNextUntrans.setText(OStrings.TF_MENU_EDIT_NEXTUNTRANS);
 		m_miEditCompare1.setText(OStrings.TF_MENU_EDIT_COMPARE_1);
 		m_miEditCompare2.setText(OStrings.TF_MENU_EDIT_COMPARE_2);
 		m_miEditCompare3.setText(OStrings.TF_MENU_EDIT_COMPARE_3);
@@ -685,6 +693,50 @@ public class TransFrame extends JFrame implements ActionListener
 			loadDocument();
 		}
 		activateEntry();
+	}
+
+	/**
+	  * Finds the next untranslated entry in the document.
+	  */	
+	public void doNextUntranslatedEntry()
+	{
+		// check if a document is loaded
+		if (m_projectLoaded == false)
+			return;
+		
+		// save the current entry
+		commitEntry();
+	
+		// get the current entry number and the total number of entries
+		int curEntryNum = m_curEntryNum;
+		int numEntries = CommandThread.core.numEntries();
+		
+		// iterate through the list of entries,
+		// starting at the current entry,
+		// until an entry with no translation is found
+		SourceTextEntry entry = null;
+		while (curEntryNum < numEntries)
+		{
+			// get the next entry
+			entry = CommandThread.core.getSTE(curEntryNum);
+			
+			// check if the entry is not null, and whether it contains a translation
+			if (   (entry != null)
+			    && (entry.getTranslation().length() == 0))
+			{
+				// mark the entry
+				m_curEntryNum = curEntryNum;
+				
+				// activate the entry
+				activateEntry();
+				
+				// stop searching
+				break;
+			}
+			
+			// next entry
+			curEntryNum++;
+		}
 	}
 
 	// insert current fuzzy match at cursor position
@@ -1387,6 +1439,10 @@ public class TransFrame extends JFrame implements ActionListener
 			{
 				doPrevEntry();
 			}
+			else if (evtSrc == m_miEditNextUntrans)
+			{
+				doNextUntranslatedEntry();
+			}
 			else if (evtSrc == m_miDisplayAdvanceKey)
 			{
 				if (m_miDisplayAdvanceKey.isSelected())
@@ -1902,6 +1958,7 @@ public class TransFrame extends JFrame implements ActionListener
 	private JMenuItem	m_miEditRedo;
 	private JMenuItem	m_miEditNext;
 	private JMenuItem	m_miEditPrev;
+	private JMenuItem m_miEditNextUntrans;
 //	private JMenuItem	m_miEditUntrans;
 //	private JMenuItem	m_miEditGoto;
 	private JMenuItem	m_miEditFind;

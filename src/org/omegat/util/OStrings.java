@@ -68,6 +68,7 @@ public class OStrings
 	public static final String TF_MENU_EDIT_REDO	= getString("TF_MENU_EDIT_REDO");
 	public static final String TF_MENU_EDIT_NEXT	= getString("TF_MENU_EDIT_NEXT");
 	public static final String TF_MENU_EDIT_PREV	= getString("TF_MENU_EDIT_PREV");
+	public static final String TF_MENU_EDIT_NEXTUNTRANS = getString("TF_MENU_EDIT_NEXTUNTRANS");
 	public static final String TF_MENU_EDIT_FIND	= getString("TF_MENU_EDIT_FIND");
 	public static final String TF_MENU_EDIT_INSERT	= getString("TF_MENU_EDIT_INSERT");
 	public static final String TF_MENU_EDIT_RECYCLE	= getString("TF_MENU_EDIT_RECYCLE");

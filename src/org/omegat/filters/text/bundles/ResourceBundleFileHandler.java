@@ -25,17 +25,14 @@ import org.omegat.filters.FileHandler;
 import org.omegat.gui.threads.CommandThread;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FilterReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
+import java.io.Writer;
 import java.text.MessageFormat;
 
 /**
@@ -58,13 +55,12 @@ public class ResourceBundleFileHandler extends FileHandler
 	 * Creating an input stream to read the source resource bundle.
 	 * NOTE: resource bundles use ISO-8859-1 encoding
 	 */
-	public BufferedReader createInputStream(String infile)
+	public Reader createInputStream(String infile)
 			throws IOException
 	{
 		FileInputStream fis = new FileInputStream(infile);
 		InputStreamReader isr = new InputStreamReader(fis, "ISO-8859-1");		// NOI18N
-		BufferedReader br = new BufferedReader(isr);
-		return br;
+		return isr;
 	}
 	
 	/**
@@ -76,8 +72,7 @@ public class ResourceBundleFileHandler extends FileHandler
 	 * @author Keith Godfrey
 	 * @author Maxym Mykhalchuk
 	 */
-	public BufferedWriter createOutputStream(String infile, String outfile)
-			throws IOException
+	public Writer createOutputStream(String outfile) throws IOException
 	{
         String locale, language=null, country=null;
 		locale = CommandThread.core.getPreference(OConsts.PREF_LOCLANG);

@@ -30,9 +30,9 @@ import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.ListIterator;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import org.omegat.util.EncodingAwareReader;
 import org.omegat.util.OStrings;
+import org.omegat.util.UTF8Writer;
 
 /*
  * A filter to translate HTML files.
@@ -711,123 +711,26 @@ public class HTMLFileHandler extends FileHandler
 		}
 	}
 
-	/** compiled pattern to extract the encoding from HTML file, if any */
-	private static Pattern pattern_meta = Pattern.compile(
-		"<meta.*?content\\s*=\\s*[\"']\\s*text/html\\s*;\\s*charset\\s*=\\s*(\\S+?)[\"']\\s*>", 
-		Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
-	
-	/** Return encoding of HTML file, if defined */
-	private String fileEncoding(String filename) throws IOException
+	/**
+	 * Customized version of creatning input stream for HTML files,
+	 * aware of encoding by using <code>EncodingAwareReader</code> class.
+	 *
+	 * @see org.omegat.util.EncodingAwareReader
+	 */
+	public Reader createInputStream(String infile) throws IOException
 	{
-		BufferedReader reader = new BufferedReader(new FileReader(filename));
-		StringBuffer buffer = new StringBuffer();
-		while( reader.ready() ) {
-			buffer.append( reader.readLine().toUpperCase() );
-			Matcher matcher = pattern_meta.matcher(buffer);
-			if( matcher.find() )
-				return matcher.group(1);
-			if( buffer.indexOf("</HEAD") >= 0 ) // NOI18N
-				break;
-		}
-		reader.close();
-		
-		return ""; // NOI18N
+		Reader ear = new EncodingAwareReader(infile, EncodingAwareReader.ST_HTML);
+		return ear;
 	}
 	
-	/** Customized version of creatning input stream for HTML files, that is
-	 *  reading a possible &lt;META http-equiv="content-type" content="text/html; charset=..."&gt;
-	 *  first, and then opens a file in that encoding.
-	 *  If there's no META in HTML file, or it is not supported by Java platform,
-	 *  file is opened in default system encoding (ISO-8859-2 in USA, Windows-1251 on my OS).
+	/** 
+	 * Customized version of creating an output stream for HTML files,
+	 * always UTF-8 and appending charset meta with UTF-8
 	 */
-	public BufferedReader createInputStream(String infile) throws IOException
+	public Writer createOutputStream(String outfile) throws IOException
 	{
-		FileInputStream fis = new FileInputStream(infile);
-		InputStreamReader isr;
-		try
-		{
-			isr = new InputStreamReader(fis, fileEncoding(infile));
-		}
-		catch( UnsupportedEncodingException uee )
-		{
-			isr = new InputStreamReader(fis);
-		}
-		BufferedReader br = new BufferedReader(isr);
-		return br;
-	}
-	
-	/** This class acts as an interceptor of output:
-	 *  First it collects all the output inside itself in a string.
-	 *  then adds a META with UTF-8 charset (or replaces the charset to UTF-8)
-	 */
-	class UTF8Writer extends StringWriter
-	{
-
-        private Writer out;
-		
-		public UTF8Writer(Writer out)
-		{
-			super();
-			this.out = out;
-		}
-		
-		private final Pattern pattern_head = Pattern.compile("<head\\s*?>", Pattern.CASE_INSENSITIVE);
-		private final Pattern pattern_html = Pattern.compile("<html\\s*?>", Pattern.CASE_INSENSITIVE);
-		
-		/** when we clase an Output Stream, we replace charset to be UTF-8
-		 * and write out the string
-		 */
-		public void close() throws IOException
-		{
-			String UTF8_META = "<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"; // NOI18N
-			
-			StringBuffer buffer = getBuffer();
-			Matcher matcher_enc = pattern_meta.matcher(buffer);
-			
-			String contents;
-			if( matcher_enc.find() )
-			{
-				contents = matcher_enc.replaceFirst(UTF8_META);
-			}
-			else
-			{
-				Matcher matcher_head = pattern_head.matcher(buffer);
-				if( matcher_head.find() )
-				{
-					contents =  matcher_head.replaceFirst("<head>\n    "+UTF8_META); // NOI18N
-				}
-				else
-				{
-					Matcher matcher_html = pattern_html.matcher(buffer);
-					if( matcher_html.find() )
-					{
-						contents = matcher_html.replaceFirst("<html>\n<head>\n    "+UTF8_META+"\n</head>\n"); // NOI18N
-					}
-					else
-					{
-						contents = "<html>\n<head>\n    "+UTF8_META+"\n</head>\n"+ // NOI18N
-							buffer.toString();
-					}
-				}
-			}
-			BufferedWriter writer = new BufferedWriter(out);
-			writer.write(contents);
-			writer.close();
-			
-			super.close();
-		}
-	}
-	
-	/** Customized version of creating an output stream for HTML files,
-	 *  always UTF-8 and appending charset meta with UTF-8
-	 */
-	public BufferedWriter createOutputStream(String infile, String outfile) throws IOException
-	{
-		FileOutputStream fos = new FileOutputStream(outfile);
-		OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8"); // NOI18N
-		UTF8Writer uw = new UTF8Writer(osw);
-		BufferedWriter bw = new BufferedWriter(uw);
-		return bw;
+		UTF8Writer uw = new UTF8Writer(outfile, UTF8Writer.ST_HTML);
+		return uw;
 	}
 
 	private LinkedList 	m_tagList = null;

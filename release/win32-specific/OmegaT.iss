@@ -15,7 +15,6 @@ OutputBaseFilename=OmegaT_@VERSION_NUMBER_SUBST@_setup
 [Files]
 Source: "docs\*"; DestDir: "{app}\docs"; Flags: recursesubdirs
 Source: "images\*"; DestDir: "{app}\images"; Flags: recursesubdirs
-Source: "source\*"; DestDir: "{app}\source"; Flags: recursesubdirs
 Source: "OmegaT.bat"; DestDir: "{app}"
 Source: "OmegaT.exe"; DestDir: "{app}"
 Source: "OmegaT.jar"; DestDir: "{app}"

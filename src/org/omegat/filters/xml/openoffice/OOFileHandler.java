@@ -36,6 +36,9 @@ import java.util.zip.ZipOutputStream;
  */
 public class OOFileHandler extends XMLFileHandler
 {
+	/** holds the name of input file */
+	private String inFile;
+	
 	public OOFileHandler()
 	{
 		super("OpenOffice", "sxw");	 // NOI18N
@@ -51,14 +54,13 @@ public class OOFileHandler extends XMLFileHandler
 	}
 
 
-	public BufferedReader createInputStream(String filename) 
-		throws IOException
+	public Reader createInputStream(String inFile) throws IOException
 	{
-		File ifp = new File(filename);
+		this.inFile = inFile;
+		File ifp = new File(inFile);
 		
 		ZipInputStream zis = new ZipInputStream(new FileInputStream(ifp));
 		InputStreamReader isr = new InputStreamReader(zis, "UTF8");	 // NOI18N
-		BufferedReader br = new BufferedReader(isr);
 		ZipEntry zit = null;
 		while ((zit = zis.getNextEntry()) != null)
 		{
@@ -68,14 +70,15 @@ public class OOFileHandler extends XMLFileHandler
 		if (zit == null)
 			return null;
 		else
-			return br;
+			return isr;
 	}
 
-	// writing a zipfile with several components in it
-	// first copy all unchanged components (i.e. everything but content.xml)
-	//  then set the stream for the changed file to be written directly
-	public BufferedWriter createOutputStream(String inFile, String outFile)
-			throws IOException
+	/**
+	 * Writing a zipfile with several components in it.
+	 * First copy all unchanged components (i.e. everything but content.xml)
+	 * then set the stream for the changed file to be written directly
+	 */
+	public Writer createOutputStream(String outFile) throws IOException
 	{
 		int k_blockSize = 1024;
 		int byteCount;

@@ -61,10 +61,6 @@
         <copy todir="tmp/images">
             <fileset dir="images"/>
         </copy>
-        <mkdir dir="tmp/source"/>
-        <copy todir="tmp/source">
-            <fileset dir="src"/>
-        </copy>
         
         <mkdir dir="dist"/>
         <zip basedir="tmp" destfile="dist/OmegaT_${version}.zip"/>
@@ -73,7 +69,28 @@
         <copy todir="dist" file="addons/properties-import/import_properties.zip"/>
     </target>
 
+    <target name="src" depends="init" description="Build source distribution">
+        <mkdir dir="dist"/>
+        <zip destfile="dist/OmegaT_src_${version}.zip" basedir="." includes="addons/** docs/** images/** release/** src/** build.xml"/>
+    </target>
 
-    <target name="all" depends="zip,win" description="Build distributions."/>
 
+    <target name="all" depends="src,zip,win" description="Build distributions."/>
+    
+    <target name="run" depends="compile">
+        <java classpath="classes" classname="org.omegat.Main" fork="true"/>
+    </target>
+    
+    <target name="debug" depends="compile" if="netbeans.home" description="Debug Project">
+        <nbjpdastart name="OmegaT" addressproperty="jpda.address" transport="dt_socket">
+            <classpath path="classes"/>
+        </nbjpdastart>
+        <java fork="true" classname="org.omegat.Main">
+            <jvmarg value="-Xdebug"/>
+            <jvmarg value="-Xnoagent"/>     
+            <jvmarg value="-Djava.compiler=none"/>     
+            <jvmarg value="-Xrunjdwp:transport=dt_socket,address=${jpda.address}"/>     
+            <classpath path="classes"/>
+        </java> 
+    </target>
 </project>

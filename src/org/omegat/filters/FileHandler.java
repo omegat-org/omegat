@@ -149,7 +149,7 @@ public abstract class FileHandler
 						"(" + pd.getAbsolutePath() + ")");	// NOI18N
 				}
 			}
-			m_outFile = createOutputStream(infile, outfile);
+			m_outFile = new BufferedWriter(createOutputStream(outfile));
 			load(infile);
 			m_outFile.close();
 		}
@@ -166,7 +166,7 @@ public abstract class FileHandler
 	/**
 	 * Method to create an input stream to read the source file
 	 */
-	public BufferedReader createInputStream(String infile)
+	public Reader createInputStream(String infile)
 			throws IOException
 	{
 		FileInputStream fis = new FileInputStream(infile);
@@ -177,10 +177,8 @@ public abstract class FileHandler
 
 	/**
 	 * Create output stream.
-	 * Allow stream to have access to source file if necessary
 	 */
-	public BufferedWriter createOutputStream(String infile, String outfile)
-			throws IOException
+	public Writer createOutputStream(String outfile) throws IOException
 	{
 		FileOutputStream fos = new FileOutputStream(outfile);
 		OutputStreamWriter osw = new OutputStreamWriter(fos);
@@ -198,11 +196,10 @@ public abstract class FileHandler
 	{
 		reset();
 		m_file = file;
-		//m_in = new DataInputStream(new FileReader(file));
 		
 		try 
 		{
-			m_in = createInputStream(file);
+			m_in = new BufferedReader(createInputStream(file));
 	
 			if (m_in == null)
 			{
@@ -287,7 +284,7 @@ public abstract class FileHandler
 	protected BufferedReader m_in;
 	protected boolean m_testMode;
 	protected boolean m_outputMode;
-	protected BufferedWriter	m_outFile;
+	protected BufferedWriter m_outFile;
 
 	protected boolean		m_searchMode;
 	protected SearchThread	m_searchThread;

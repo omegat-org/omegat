@@ -59,24 +59,21 @@ public class TextFileHandler extends FileHandler
 		return code;
 	}
 
-	// create output stream - allow stream to have access to source file
-	//  if necessary
-	public BufferedReader createInputStream(String infile)
+	/**
+	 * Create input stream.
+	 */
+	public Reader createInputStream(String infile)
 			throws IOException
 	{
 		FileInputStream fis = new FileInputStream(infile);
-		//InputStreamReader isr = new InputStreamReader(fis);
 		String code = translateFileEncoding();
 		InputStreamReader isr = new InputStreamReader(fis, code);
-		BufferedReader br = new BufferedReader(isr);
-		return br;
+		return isr;
 	}
 
-	public BufferedWriter createOutputStream(String infile, String outfile)
-			throws IOException
+	public Writer createOutputStream(String outfile) throws IOException
 	{
 		FileOutputStream fos = new FileOutputStream(outfile);
-		//OutputStreamWriter osw = new OutputStreamWriter(fos);
 		String code = translateFileEncoding();
 		OutputStreamWriter osw = new OutputStreamWriter(fos, code);
 		BufferedWriter bw = new BufferedWriter(osw);
@@ -92,7 +89,7 @@ public class TextFileHandler extends FileHandler
 		String nonTrans = "";	 // NOI18N
 		int ctr = 0;
 
-		m_in = createInputStream(file);
+		m_in = new BufferedReader(createInputStream(file));
 
 		while ((s = getNextLine()) != null)
 		{

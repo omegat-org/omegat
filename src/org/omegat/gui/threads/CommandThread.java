@@ -333,7 +333,7 @@ public class CommandThread extends Thread
 		OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF8"); // NOI18N
 		BufferedWriter out = new BufferedWriter(osw);
 		
-		String str = "<?xml version=\"1.0\"?>\n";			 // NOI18N
+		String str = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";			 // NOI18N
 		str += "<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">\n";		 // NOI18N
 		str += "<tmx version=\"1.1\">\n";					 // NOI18N
 		str += "  <header\n";								 // NOI18N
@@ -864,6 +864,7 @@ public class CommandThread extends Thread
 			displayError(msg, se);
 			return;
 		}
+		
 		try
 		{
 			// recover existing translations
@@ -1020,6 +1021,7 @@ public class CommandThread extends Thread
 			fh.load(filename);
 			m_curFile.lastEntry = m_srcTextEntryArray.size()-1;
 		}
+		m_transFrame.setMessageText(OStrings.getString("CT_LOAD_SRC_COMPLETE"));
 		m_curFile = null;
 		m_projWin.setNumEntries(numEntries());
 		loadTranslations();
@@ -1140,16 +1142,12 @@ public class CommandThread extends Thread
 
 		for (i=0; i<seList.size(); i++)
 		{
-			if (i%10 == 0)
+			if (i%20 == 0)
 			{
 				Object[] obj = { new Integer(i), len};
 				MessageRelay.uiMessageSetMessageText(m_transFrame,
 					MessageFormat.format(evtStr, obj));
-				try
-				{
-					sleep(10);
-				}
-				catch (InterruptedException ie) { ; }
+				Thread.yield();
 			}
 			if (i == 1)
 			{

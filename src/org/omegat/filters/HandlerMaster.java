@@ -24,6 +24,7 @@ package org.omegat.filters;
 import org.omegat.filters.html.HTMLFileHandler;
 import org.omegat.filters.text.TabFileHandler;
 import org.omegat.filters.text.TextFileHandler;
+import org.omegat.filters.text.bundles.ResourceBundleFileHandler;
 import org.omegat.filters.xml.openoffice.OOFileHandler;
 import org.omegat.filters.xml.xhtml.XHTMLFileHandler;
 
@@ -79,6 +80,7 @@ public class HandlerMaster
 		addHandler(new HTMLFileHandler());
 		addHandler(new XHTMLFileHandler());
 		addHandler(new OOFileHandler());
+		addHandler(new ResourceBundleFileHandler());
 	}
 
     ArrayList	m_handlerList;

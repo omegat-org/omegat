@@ -182,13 +182,13 @@ class TransFrame extends JFrame implements ActionListener
 			if (scrSize.width < 900)
 			{
 				// assume 800x600
-				setSize(585, 560);
+				setSize(585, 540);
 				setLocation(0, 0);
 			}
 			else
 			{
 				// assume 1024x768 or larger
-				setSize(675, 720);
+				setSize(675, 700);
 				setLocation(0, 0);
 			}
 		}
@@ -1033,12 +1033,12 @@ class TransFrame extends JFrame implements ActionListener
 			//int oldStrLen = oldStr.length();
 //		String proj = m_curNear.proj;
 
-			//formatNearText(oldStr, m_curNear.attr, Color.blue, Color.black, 
-			//		m_oldSrcDoc, 0, oldStrLen);
+			//m_matchPane.formatNearText(oldStr, m_curNear.attr, Color.blue);
 			//String locStr = m_curNear.str.getTrans();
 //			m_matchViewer.addMatchTerm(oldStr, locStr, 
 //					(int) (m_curNear.score * 100), "");
 		StringEntry curEntry = m_curEntry.getStrEntry();
+		String str = null;
 		if (curEntry.getNearList().size() > 0)
 		{
 			NearString ns;
@@ -1056,7 +1056,10 @@ class TransFrame extends JFrame implements ActionListener
 				offset = m_matchViewer.addMatchTerm(oldStr, locStr, 
 						(int) (ns.score * 100), proj);
 				if (ctr == m_nearListNum)
+				{
 					start = offset;
+					str = oldStr;
+				}
 				else if (ctr == (m_nearListNum+1))
 					end = offset;
 				if (++ctr > 5)
@@ -1065,6 +1068,7 @@ class TransFrame extends JFrame implements ActionListener
 			m_matchViewer.hiliteRange(start, end);
 		}
 		m_matchViewer.updateMatchText();
+		m_matchViewer.formatNearText(str, m_curNear.attr, Color.blue);
 	}
 	
 	private void commitEntry()
@@ -1349,40 +1353,51 @@ class TransFrame extends JFrame implements ActionListener
 	//	new text and green text indicates the same word exists between
 	//	strings but has different neighbors.
 	protected void formatNearText(String text, byte[] attrList, 
-			Color uniqColor, Color textColor, DefaultStyledDocument doc, 
-			int startOffset, int length) throws BadLocationException
+			Color uniqColor, Color textColor, JTextPane pane, 
+			int startOffset, int length) 
 	{
 //System.out.println("format near text");
 		int start;
 		int end;
 
-		// reset color of text to default value
-		ArrayList tokenList = new ArrayList();
-		StaticUtils.tokenizeText(text, tokenList);
-		int numTokens = tokenList.size();
+//		try
+//		{
+			// reset color of text to default value
+			ArrayList tokenList = new ArrayList();
+			StaticUtils.tokenizeText(text, tokenList);
+			int numTokens = tokenList.size();
 //System.out.println("  "+numTokens+" tokens in string '"+text+"'");
-		for (int i=0; i<numTokens; i++)
-		{
-			if (i == (numTokens-1))
-				end = startOffset + length;
-			else
-				end = startOffset + ((Token) tokenList.get(i+1)).offset;
-			start = startOffset + ((Token) tokenList.get(i)).offset;
+			for (int i=0; i<numTokens; i++)
+			{
+				if (i == (numTokens-1))
+					end = startOffset + length;
+				else
+					end = startOffset + ((Token) tokenList.get(i+1)).offset;
+				start = startOffset + ((Token) tokenList.get(i)).offset;
 //System.out.println("  range "+start+" to "+end);
 
-//			mattr = new SimpleAttributeSet();
-//			if ((attrList[i] & StringData.UNIQ) != 0)
-//			{
+				pane.select(start, end);
+				SimpleAttributeSet mattr = new SimpleAttributeSet();
+System.out.print("fuzzy match format:"+start+" to "+end);
+				if ((attrList[i] & StringData.UNIQ) != 0)
+				{
+System.out.println("   uniq");
 //System.out.println("    uniq");
-//				StyleConstants.setForeground(mattr, uniqColor);
-//			}
-//			else if ((attrList[i] & StringData.PAIR) != 0)
-//			{
+					StyleConstants.setForeground(mattr, uniqColor);
+				}
+				else if ((attrList[i] & StringData.PAIR) != 0)
+				{
+System.out.println("   pair");
 //System.out.println("    near");
-//				StyleConstants.setForeground(mattr, Color.green);
-//			}
-//			doc.setCharacterAttributes(start, end-start, mattr, false);
-		}
+					StyleConstants.setForeground(mattr, Color.green);
+				}
+else System.out.println("   nada");
+				StyleConstants.setItalic(mattr, true);
+				pane.setCharacterAttributes(mattr, false);
+			}
+System.out.println("");
+//		}
+//		catch (BadLocationException ble)	{ ; }
 	}
 
 	public void actionPerformed(ActionEvent evt)

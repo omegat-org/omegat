@@ -70,11 +70,51 @@ class MatchWindow extends JFrame
 		});
 	}
 
+	public JTextPane getMatchPane()		{ return m_matchPane;	}
 	// copy match and glos buffers to display
 	public void updateGlossaryText()
 	{
 		m_glosPane.setText(m_glosDisplay);
 		m_glosDisplay = "";
+	}
+
+	public void formatNearText(String text, byte[] attrList, Color uniqColor)
+	{
+		if (text == null)
+			return;
+
+		int start;
+		int end;
+		int len = text.length();
+		JTextPane pane = m_matchPane;
+
+		// reset color of text to default value
+		ArrayList tokenList = new ArrayList();
+		StaticUtils.tokenizeText(text, tokenList);
+		int numTokens = tokenList.size();
+		for (int i=0; i<numTokens; i++)
+		{
+			if (i == (numTokens-1))
+				end = m_hiliteStart + len + 4;
+			else
+				end = m_hiliteStart + ((Token) tokenList.get(i+1)).offset + 4;
+			start = m_hiliteStart + ((Token) tokenList.get(i)).offset + 4;
+
+			pane.select(start, end);
+			SimpleAttributeSet mattr = new SimpleAttributeSet();
+			if ((attrList[i] & StringData.UNIQ) != 0)
+			{
+				StyleConstants.setForeground(mattr, uniqColor);
+			}
+			else if ((attrList[i] & StringData.PAIR) != 0)
+			{
+				StyleConstants.setForeground(mattr, Color.green);
+			}
+			pane.setCharacterAttributes(mattr, false);
+		}
+		pane.select(0, 0);
+		SimpleAttributeSet mattr = new SimpleAttributeSet();
+		pane.setCharacterAttributes(mattr, false);
 	}
 
 	public void updateMatchText()
@@ -206,13 +246,13 @@ class MatchWindow extends JFrame
 			if (scrSize.width < 900)
 			{
 				// assume 800x600
-				setSize(200, 560);
+				setSize(200, 540);
 				setLocation(590, 0);
 			}
 			else
 			{
 				// assume 1024x768 or larger
-				setSize(320, 720);
+				setSize(320, 700);
 				setLocation(680, 0);
 			}
 		}

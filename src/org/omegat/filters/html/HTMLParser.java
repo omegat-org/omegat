@@ -45,7 +45,7 @@ public class HTMLParser
 		int lines = 0;
 		int state = STATE_START;
 		HTMLTag tag = new HTMLTag();
-		int charType = 0;
+		int charType;
 		HTMLTagAttr tagAttr = null;
 		int i;
 		int excl = 0;
@@ -57,16 +57,16 @@ public class HTMLParser
 			if (i < 0)
 				break;
 			c = (char) i;
-			if ((c == 10) || (c == 13))
+			if (c == 10 || c == 13)
 				lines++;
 
-			if ((ctr == 1) && (c == '/'))
+			if (ctr == 1 && c == '/')
 			{
-				tag.setClose(true);
+				tag.setClose();
 				continue;
 			}
 
-			if ((ctr == 1) && (c == '!'))	// script
+			if (ctr == 1 && c == '!')	// script
 			{
 				excl = 1;
 				tag.verbatumAppend(c);
@@ -76,7 +76,7 @@ public class HTMLParser
 			{
 				if (c == '/')
 				{
-					tag.setClose(true);
+					tag.setClose();
 					continue;
 				}
 				else if (c == '!')
@@ -85,7 +85,7 @@ public class HTMLParser
 					continue;
 				}
 			}
-			else if ((ctr == 2) && (excl == 1))
+			else if (ctr == 2 && excl == 1)
 			{
 				if (c == '-')
 					excl = 2;
@@ -96,7 +96,7 @@ public class HTMLParser
 				// loop until '-->' encountered
 				if (c == '-')
 					excl++;
-				else if ((c == '>') && (excl >= 4))
+				else if (c == '>' && excl >= 4)
 					break;
 				else 
 					excl = 2;
@@ -398,28 +398,28 @@ public class HTMLParser
 		return tag;
 	}
 
-	protected static final int TYPE_WS			= 1;
-	protected static final int TYPE_NON_IDENT		= 2;
-	protected static final int TYPE_EQUAL			= 3;
-	protected static final int TYPE_CLOSE			= 4;
-	protected static final int TYPE_QUOTE_SINGLE	= 5;
-	protected static final int TYPE_QUOTE_DOUBLE	= 6;
+	private static final int TYPE_WS			= 1;
+	private static final int TYPE_NON_IDENT		= 2;
+	private static final int TYPE_EQUAL			= 3;
+	private static final int TYPE_CLOSE			= 4;
+	private static final int TYPE_QUOTE_SINGLE	= 5;
+	private static final int TYPE_QUOTE_DOUBLE	= 6;
 	
-	protected static final int STATE_START			= 0;
-	protected static final int STATE_TOKEN			= 1;
-	protected static final int STATE_WS				= 2;
-	protected static final int STATE_ATTR			= 3;
-	protected static final int STATE_ATTR_WS		= 5;
-	protected static final int STATE_EQUAL			= 6;
-	protected static final int STATE_EQUAL_WS		= 7;
-	protected static final int STATE_VAL_QUOTE_SINGLE			= 10;
-	protected static final int STATE_VAL_QUOTE_DOUBLE			= 11;
-	protected static final int STATE_VAL_QUOTE_CLOSE			= 15;
-	protected static final int STATE_VAL			= 20;
-	protected static final int STATE_RECORD			= 30;
-	protected static final int STATE_RECORD_QUOTE_SINGLE		= 31;
-	protected static final int STATE_RECORD_QUOTE_DOUBLE		= 32;
-	protected static final int STATE_CLOSE			= 40;
+	private static final int STATE_START			= 0;
+	private static final int STATE_TOKEN			= 1;
+	private static final int STATE_WS				= 2;
+	private static final int STATE_ATTR			= 3;
+	private static final int STATE_ATTR_WS		= 5;
+	private static final int STATE_EQUAL			= 6;
+	private static final int STATE_EQUAL_WS		= 7;
+	private static final int STATE_VAL_QUOTE_SINGLE			= 10;
+	private static final int STATE_VAL_QUOTE_DOUBLE			= 11;
+	private static final int STATE_VAL_QUOTE_CLOSE			= 15;
+	private static final int STATE_VAL			= 20;
+	private static final int STATE_RECORD			= 30;
+	private static final int STATE_RECORD_QUOTE_SINGLE		= 31;
+	private static final int STATE_RECORD_QUOTE_DOUBLE		= 32;
+	private static final int STATE_CLOSE			= 40;
 
 	public static void initEscCharLookupTable()
 	{
@@ -684,7 +684,7 @@ public class HTMLParser
 		addMapEntry((char)9830, "diams");	 // NOI18N
 	}
 
-	protected static void addMapEntry(char val, String name)
+	private static void addMapEntry(char val, String name)
 	{
 		m_escMap.put(name, new Character(val));
 		m_charMap.put(new Character(val), name);
@@ -696,10 +696,7 @@ public class HTMLParser
 		if (c == null)
 		{
 			Integer i = new Integer(tok);
-			if (i != null)
-				return (char) (i.intValue());
-
-			return 0;
+			return (char) i.intValue();
 		}
 		else
 			return c.charValue();
@@ -708,7 +705,7 @@ public class HTMLParser
 	public static String convertToEsc(char c)
 	{
 		String s = (String) m_charMap.get(new Character(c));
-		if ((s == null) && ((c > 255) || ((c > 126) && (c <= 160))))
+		if (s == null && (c > 255 || c > 126 && c <= 160))
 		{
 			s = "&#" + String.valueOf((int) c) + ";";	 // NOI18N
 		}
@@ -720,6 +717,6 @@ public class HTMLParser
 		return s;
 	}
 
-    protected static HashMap	m_charMap = null;
-	protected static HashMap	m_escMap = null;
+    private static HashMap	m_charMap;
+	private static HashMap	m_escMap;
 }

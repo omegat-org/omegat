@@ -19,20 +19,19 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.gui.threads;
+package org.omegat.core.threads;
 
 import org.omegat.gui.TransFrame;
 import org.omegat.gui.SearchWindow;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.OStrings;
 import org.omegat.util.OConsts;
-import org.omegat.core.SourceTextEntry;
+import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.TransMemory;
 import org.omegat.core.StringEntry;
 import org.omegat.filters.FileHandler;
 import org.omegat.filters.HandlerMaster;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -73,10 +72,10 @@ public class SearchThread extends Thread
 	// only starts a search if another is not currently running
 	// returns 0 on successful start, 1 on failure (i.e. search in progress)
 	// to search current project only, set rootDir to null
-	public synchronized int requestSearch(String text, String rootDir, 
+	public synchronized void requestSearch(String text, String rootDir,
 			boolean recursive, boolean exact, boolean tm)
 	{
-		if (m_searching == false)
+		if (!m_searching)
 		{
 			m_searchDir = rootDir;
 			m_searchRecursive = recursive;
@@ -84,16 +83,15 @@ public class SearchThread extends Thread
 			m_exactSearch = exact;
 			m_tmSearch = tm;
 			m_searching = true;
-			this.interrupt();
-			return 0;
+			interrupt();
+			return;
 		}
-		return 1;
-	}
+    }
 
 	public void haltThread()
 	{
 		m_stop = true;
-		this.interrupt();
+		interrupt();
 	}
 
 	///////////////////////////////////////////////////////////
@@ -103,18 +101,19 @@ public class SearchThread extends Thread
 		// have search thread control search window to allow parent 
 		//	window to avoid blocking
 		// need to spawn subthread so we don't block either
-		MDialogThread dlgThread = new MDialogThread(m_window);
+		DialogThread dlgThread = new DialogThread(m_window);
 		dlgThread.start();
 
 		boolean firstPass = true;
 		try 
 		{
-			while (m_stop == false)
+			while (!m_stop)
 			{
 				try { sleep(80); }
-				catch (InterruptedException e) { ; }
+				catch (InterruptedException e) {
+                }
 
-				if (firstPass == true)
+				if (firstPass)
 				{
 					// on first pass send a request to place cursor in
 					//	search field (otherwise search window has no
@@ -125,7 +124,7 @@ public class SearchThread extends Thread
 					m_window.setSearchControlFocus();
 				}
 				
-				if (m_searching == true)
+				if (m_searching)
 				{
 					// work to be done
 					if (m_searchDir == null)
@@ -173,7 +172,7 @@ public class SearchThread extends Thread
 	//////////////////////////////////////////////////////////////
 	// internal functions
 
-	protected void foundString(int entryNum, String intro, String src,
+	private void foundString(int entryNum, String intro, String src,
 			String target)
 	{
 		if (m_numFinds++ > OConsts.ST_MAX_SEARCH_RESULTS)
@@ -184,7 +183,7 @@ public class SearchThread extends Thread
 		if (entryNum >= 0)
 		{
 			// entries are referenced at offset 1 but stored at offset 0
-			m_window.addEntry(entryNum+1, null, (entryNum)+"> "+src, target);	// NOI18N
+			m_window.addEntry(entryNum+1, null, entryNum+"> "+src, target);	// NOI18N
 		}
 		else
 		{
@@ -197,14 +196,14 @@ public class SearchThread extends Thread
 		}
 	}
 
-	protected void searchProject()
+	private void searchProject()
 	{
 		SourceTextEntry ste;
 		int numEntries = CommandThread.core.numEntries();
 		m_numFinds = 0;
 		String srcText;
 		String locText;
-		if (m_exactSearch == true)
+		if (m_exactSearch)
 		{
 			int i;
 			for (i=0; i<numEntries; i++)
@@ -212,8 +211,8 @@ public class SearchThread extends Thread
 				ste = CommandThread.core.getSTE(i);
 				srcText = ste.getSrcText();
 				locText = ste.getTranslation();
-				if ((searchString(srcText, m_searchText) == true) ||
-						(searchString(locText, m_searchText) == true))
+				if (searchString(srcText, m_searchText) ||
+                        searchString(locText, m_searchText))
 				{
 					// found a match - relay source and trans text
 					foundString(i, null, srcText, locText);
@@ -232,8 +231,8 @@ public class SearchThread extends Thread
 					tm = (TransMemory) tmList.get(i);
 					srcText = tm.source;
 					locText = tm.target;
-					if ((searchString(srcText, m_searchText) == true) ||
-							(searchString(locText, m_searchText) == true))
+					if (searchString(srcText, m_searchText) ||
+                            searchString(locText, m_searchText))
 					{
 						// found a match - relay source and trans text
 						foundString(-1, tm.file, srcText, locText);
@@ -248,7 +247,7 @@ public class SearchThread extends Thread
 		else
 		{
 			// keyword search - recycling org.omegat.TransFrame search code
-			TreeMap foundList = CommandThread.core.findAll(m_searchText);
+			TreeMap foundList = null; //mihmax CommandThread.core.findAll(m_searchText);
 			if (foundList != null)
 			{
 				ListIterator it;
@@ -285,15 +284,15 @@ public class SearchThread extends Thread
 		}
 	}
 	
-	protected void searchFiles() throws IOException
+	private void searchFiles() throws IOException
 	{
 		int i;
 		int j;
 
-		FileHandler fh = null;
-		HandlerMaster hm = new HandlerMaster();
+		FileHandler fh;
+		HandlerMaster hm = HandlerMaster.getInstance();
 		ArrayList fileList = new ArrayList(256);
-		if (m_searchDir.endsWith(File.separator) == false)
+		if (!m_searchDir.endsWith(File.separator))
 			m_searchDir += File.separator;
 
 		StaticUtils.buildFileList(fileList, new File(m_searchDir), 
@@ -315,7 +314,7 @@ public class SearchThread extends Thread
 			// look for mapping of this extension
 			for (j=0; j<m_extList.size(); j++)
 			{
-				if (ext.equals(m_extList.get(j)) == true)
+				if (ext.equals(m_extList.get(j)))
 				{
 					ext = (String) m_extMapList.get(j);
 					break;
@@ -327,7 +326,7 @@ public class SearchThread extends Thread
 			if (fh != null)
 			{
 				// make sure file hander in correct mode
-				fh.setSearchMode(true, this);
+				fh.setSearchMode(this);
 
 				// don't bother to tell handler what we're looking for - 
 				//	the search data is already known here (and the 
@@ -354,9 +353,9 @@ public class SearchThread extends Thread
 	
 	// look for the search text in the specified text
 	// search supports wildcards * and ?
-	protected boolean searchString(String text, String search)
+    private boolean searchString(String text, String search)
 	{
-		if ((text == null) || (search == null))
+		if (text == null || search == null)
 			return false;
 
 		char c, t;
@@ -400,7 +399,7 @@ public class SearchThread extends Thread
 			{
 				case '*':	// match zero or more characters
 					spos++;
-					if (inSeq == true)
+					if (inSeq)
 					{
 						// currently in a match sequence - recurse to check
 						//	substring
@@ -425,7 +424,7 @@ public class SearchThread extends Thread
 						}
 						return true;
 					}
-					if (inSeq == false)
+					if (!inSeq)
 					{
 						// if not in a sequence, simply skip first text
 						//	character (there is implied * at head of 
@@ -440,7 +439,7 @@ public class SearchThread extends Thread
 					t = text.charAt(pos++);
 					c = deflect(c);
 					t = deflect(t);
-					if (inSeq == false)
+					if (!inSeq)
 					{
 						// TODO case insensitive compare change goes here
 						if (c == t)
@@ -464,7 +463,7 @@ public class SearchThread extends Thread
 
 					if (pos >= textLen)
 					{
-						if (inSeq == true)
+						if (inSeq)
 						{
 							// text overwith - if search string also done, 
 							//	or if only has *s left, then a match
@@ -481,8 +480,8 @@ public class SearchThread extends Thread
 							return false;
 					}
 					break;
-			};
-		}
+			}
+        }
 
 		// search string finished - if we're still in sequence, we must 
 		//	have a successful match
@@ -502,7 +501,7 @@ public class SearchThread extends Thread
 	//	in unrelated normal characters - in best case, someone will alter
 	//	the below character map for their operating system and locale
 	//	and recompile, should it not work as designed
-	protected final static char[] charMap =  
+	private final static char[] charMap =
 	{	'A', 'A', 'A', 'A', 'A', 'A', 'A', 'C',
 		'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 
 		'D', 'N', 'O', 'O', 'O', 'O', 'O', 'X',
@@ -513,36 +512,17 @@ public class SearchThread extends Thread
 		'O', 'U', 'U', 'U', 'U', 'Y', 'B', 'Y' 
 	};
 
-	public static char deflect(char c)
+	private static char deflect(char c)
 	{
-		if ((c >= 'a') && (c <= 'z'))
+		if (c >= 'a' && c <= 'z')
 			return (char) (c - ('a' - 'A'));
-		else if ((c >= 192) && (c < 256))
+		else if (c >= 192 && c < 256)
 			return charMap[c-192];
 		else 
 			return c;
 	}
 
-	class MDialogThread extends Thread
-	{
-		public MDialogThread(JFrame win)
-		{
-			m_win = win;
-		}
-		
-		public void run()
-		{
-			m_win.setVisible(true);
-		}
-
-		protected JFrame m_win;
-	};
-
-    class MQueryData
-	{
-    }
-	
-	/////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
 	// interface used by FileHandlers
 	
 	public void searchText(String seg)
@@ -552,26 +532,26 @@ public class SearchThread extends Thread
 			return;
 		}
 
-		if (searchString(seg, m_searchText) == true)
+		if (searchString(seg, m_searchText))
 		{
 			// found a match - do something about it
 			foundString(-1, m_curFileName, seg, null);
 		}
 	}
 
-	protected SearchWindow	m_window;
-	protected boolean		m_stop;
-	protected boolean		m_searching;
-	protected String		m_searchText;
-	protected String		m_searchDir;
-	protected boolean		m_searchRecursive;
-	protected String		m_curFileName;
-	protected boolean		m_exactSearch;
-	protected boolean		m_tmSearch;
+	private SearchWindow	m_window;
+	private boolean		m_stop;
+	private boolean		m_searching;
+	private String		m_searchText;
+	private String		m_searchDir;
+	private boolean		m_searchRecursive;
+	private String		m_curFileName;
+	private boolean		m_exactSearch;
+	private boolean		m_tmSearch;
 
-	protected int			m_numFinds;
+	private int			m_numFinds;
 
-    protected ArrayList		m_extList;
-	protected ArrayList		m_extMapList;
-};
+    private ArrayList		m_extList;
+	private ArrayList		m_extMapList;
+}
 

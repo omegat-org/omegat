@@ -31,7 +31,7 @@ import java.io.File;
  *
  * @author Keith Godfrey
  */
-public class ProjectFileChooser extends JFileChooser
+class ProjectFileChooser extends JFileChooser
 {
 
     public void approveSelection()
@@ -65,13 +65,7 @@ public class ProjectFileChooser extends JFileChooser
 		    OConsts.PROJ_FILENAME);
 		File internal = new File(f.getAbsolutePath() + File.separator + 
 		    OConsts.DEFAULT_INTERNAL);
-		if (projFile.exists() && internal.exists() && 
-					internal.isDirectory())
-		{
-			return true;
-		}
-		else
-			return false;
+        return projFile.exists() && internal.exists() && internal.isDirectory();
 	}
 
 }

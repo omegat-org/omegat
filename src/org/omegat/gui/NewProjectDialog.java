@@ -21,7 +21,7 @@
 
 package org.omegat.gui;
 
-import org.omegat.gui.threads.CommandThread;
+import org.omegat.core.threads.CommandThread;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 
@@ -36,7 +36,7 @@ import java.io.File;
  *
  * @author Keith Godfrey
  */
-public class NewProjectDialog extends JDialog
+class NewProjectDialog extends JDialog
 {
     private ProjectProperties projectProperties;
 
@@ -259,13 +259,13 @@ public class NewProjectDialog extends JDialog
         m_srcLangField.setText(projectProperties.getSrcLang());
         m_locLangField.setText(projectProperties.getLocLang());
 
-		this.setBounds(50,50, 550, 350);
+		setBounds(50,50, 550, 350);
         updateUIText();
     }
 
     private void doBrowseDirectoy()
     {
-        String title = "";														// NOI18N
+        String title;														// NOI18N
         switch (m_browseTarget)
         {
             case 1:
@@ -286,7 +286,7 @@ public class NewProjectDialog extends JDialog
 
             default:
                 return;
-        };
+        }
 
         JFileChooser browser = new JFileChooser();
         String str = OStrings.PP_BUTTON_SELECT;
@@ -316,12 +316,12 @@ public class NewProjectDialog extends JDialog
                         OConsts.PREF_TM_DIR);
                 break;
 
-        };
+        }
 
         if (curDir.equals(""))													// NOI18N
             curDir = CommandThread.core.getPreference(OConsts.PREF_CUR_DIR);
 
-        if (curDir.equals("") == false)											// NOI18N
+        if (!curDir.equals(""))											// NOI18N
         {
             File dir = new File(curDir);
             if (dir.exists() && dir.isDirectory())
@@ -367,30 +367,30 @@ public class NewProjectDialog extends JDialog
                 m_tmRootField.setText(projectProperties.getTMRoot());
                 break;
 
-        };
+        }
     }
 
     private void doOK()
     {
         projectProperties.setSourceRoot(m_srcRootField.getText());
-        if (projectProperties.getSourceRoot().endsWith(File.separator) == false)
+        if (!projectProperties.getSourceRoot().endsWith(File.separator))
             projectProperties.setSourceRoot(projectProperties.getSourceRoot() + File.separator);
 
         projectProperties.setLocRoot(m_locRootField.getText());
-        if (projectProperties.getLocRoot().endsWith(File.separator) == false)
+        if (!projectProperties.getLocRoot().endsWith(File.separator))
             projectProperties.setLocRoot(projectProperties.getLocRoot() + File.separator);
 
         projectProperties.setGlossaryRoot(m_glosRootField.getText());
-        if (projectProperties.getGlossaryRoot().endsWith(File.separator) == false)
+        if (!projectProperties.getGlossaryRoot().endsWith(File.separator))
             projectProperties.setGlossaryRoot(projectProperties.getGlossaryRoot() + File.separator);
 
         projectProperties.setTMRoot(m_tmRootField.getText());
-        if (projectProperties.getTMRoot().endsWith(File.separator) == false)
+        if (!projectProperties.getTMRoot().endsWith(File.separator))
             projectProperties.setTMRoot(projectProperties.getTMRoot() + File.separator);
 
         projectProperties.setSrcLang(m_srcLangField.getText());
         projectProperties.setLocLang(m_locLangField.getText());
-        if (projectProperties.verifyLangCodes() == false)
+        if (!projectProperties.verifyLangCodes())
         {
             // TODO display dialog describing how to fix
             setMessageCode(1);
@@ -414,7 +414,7 @@ public class NewProjectDialog extends JDialog
         m_message = n;
     }
 
-    public void updateUIText()
+    private void updateUIText()
     {
         String str;
 
@@ -490,31 +490,31 @@ public class NewProjectDialog extends JDialog
 
     private int				m_browseTarget;
 
-    public JLabel		m_messageLabel;
-    public int			m_message;
+    private JLabel		m_messageLabel;
+    private int			m_message;
 
-    public JLabel		m_srcRootLabel;
-    public JTextField	m_srcRootField;
-    public JButton		m_srcBrowse;
+    private JLabel		m_srcRootLabel;
+    private JTextField	m_srcRootField;
+    private JButton		m_srcBrowse;
 
-    public JLabel		m_locRootLabel;
-    public JTextField	m_locRootField;
-    public JButton		m_locBrowse;
+    private JLabel		m_locRootLabel;
+    private JTextField	m_locRootField;
+    private JButton		m_locBrowse;
 
-    public JLabel		m_glosRootLabel;
-    public JTextField	m_glosRootField;
-    public JButton		m_glosBrowse;
+    private JLabel		m_glosRootLabel;
+    private JTextField	m_glosRootField;
+    private JButton		m_glosBrowse;
 
-    public JLabel		m_tmRootLabel;
-    public JTextField	m_tmRootField;
-    public JButton		m_tmBrowse;
+    private JLabel		m_tmRootLabel;
+    private JTextField	m_tmRootField;
+    private JButton		m_tmBrowse;
 
-    public JLabel		m_srcLangLabel;
-    public JTextField	m_srcLangField;
+    private JLabel		m_srcLangLabel;
+    private JTextField	m_srcLangField;
 
-    public JLabel		m_locLangLabel;
-    public JTextField	m_locLangField;
+    private JLabel		m_locLangLabel;
+    private JTextField	m_locLangField;
 
-    public JButton		m_okButton;
-    public JButton		m_cancelButton;
+    private JButton		m_okButton;
+    private JButton		m_cancelButton;
 }

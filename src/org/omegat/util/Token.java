@@ -31,6 +31,35 @@ package org.omegat.util;
 public class Token
 {
 	/**
+	 * Two tokens are thought equal if their text is equal.
+	 */
+	public boolean equals(Object obj)
+	{
+		if( this==obj )
+			return true;
+		if( obj instanceof Token )
+		{
+			Token tok = (Token)obj;
+			if( text==null )
+				return tok.text==null;
+            else if( text.equals(tok.text) )
+				return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * -1 if text is null,
+	 * text's hashcode otherwise.
+	 */
+	public int hashCode()
+	{
+		if( text==null )
+			return -1;
+		return text.hashCode();
+	}
+	
+	/**
 	 * Creates a new token.
 	 * @param _text the text of the token
 	 * @param _offset the starting position of this token in parent string
@@ -42,5 +71,5 @@ public class Token
 	}
 	public String text;
     public int offset;
-};
+}
 

@@ -21,12 +21,13 @@
 
 package org.omegat.gui;
 
-import org.omegat.gui.threads.CommandThread;
+import org.omegat.core.threads.CommandThread;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.ProjectFileReader;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 import java.io.File;
 import java.io.IOException;
 import java.io.InterruptedIOException;
@@ -74,7 +75,7 @@ public class ProjectProperties extends JFrame
 		setLocLang("");	// NOI18N
 	}
 
-    class OTFileFilter extends javax.swing.filechooser.FileFilter
+    class OTFileFilter extends FileFilter
 	{
 		public String getDescription()
 		{
@@ -83,12 +84,10 @@ public class ProjectProperties extends JFrame
 		
 		public boolean accept(File f)
 		{
-			if (f.getName().endsWith(OConsts.PROJ_EXTENSION) == true)
-				return true;
-			else if (f.isDirectory() == true)
+			if (f.getName().endsWith(OConsts.PROJ_EXTENSION))
 				return true;
 			else
-				return false;
+                return f.isDirectory();
 		}
 	}
 
@@ -140,7 +139,7 @@ public class ProjectProperties extends JFrame
 				while (true)
 				{
 					prj.setVisible(true);
-					if (m_dialogOK == false)
+					if (!m_dialogOK)
 					{
 						abort = true;
 						break;
@@ -156,7 +155,7 @@ public class ProjectProperties extends JFrame
 					}
 				}
 				prj.dispose();
-				if (abort == true)
+				if (abort)
 				{
 					reset();
 					return false;
@@ -172,15 +171,14 @@ public class ProjectProperties extends JFrame
 	}
 
 	// returns 0 if project OK, 1 if language codes off, 2 if directories off
-	protected int verifyProject() throws IOException
-	{
+    private int verifyProject() {
 		// now see if these directories are where they're suposed to be
 		File src = new File(getSourceRoot());
 		File loc = new File(getLocRoot());
 		File gls = new File(getGlossaryRoot());
 		File tmx = new File(getTMRoot());
 
-		if (verifyLangCodes() == false)
+		if (!verifyLangCodes())
 			return 1;
 		
 		if (src.exists() && loc.exists() && gls.exists() && tmx.exists())
@@ -190,17 +188,17 @@ public class ProjectProperties extends JFrame
 	}
 
 	// make sure language codes are of the variety XX_XX, XX-XX or XX
-	protected boolean verifyLangCodes()
+    boolean verifyLangCodes()
 	{
-		if (verifySingleLangCode(getSrcLang()) == false)
+		if (!verifySingleLangCode(getSrcLang()))
 			return false;
-		if (verifySingleLangCode(getLocLang()) == false)
+		if (!verifySingleLangCode(getLocLang()))
 			return false;
 
 		return true;
 	}
 
-	public static boolean verifySingleLangCode(String code)
+	private static boolean verifySingleLangCode(String code)
 	{
 		if (code.length() == 2)
 		{
@@ -221,7 +219,7 @@ public class ProjectProperties extends JFrame
 				Character.isLetter(code.charAt(4)))
 			{
 				char c = code.charAt(2);
-				if ((c == '-') || (c == '_'))
+				if (c == '-' || c == '_')
 				{
 					// good enough
 					return true;
@@ -237,7 +235,7 @@ public class ProjectProperties extends JFrame
 		// new project window; create project file
 		NewProjectDialog newProjDialog = new NewProjectDialog(this, this, null, 0);
 		newProjDialog.setVisible(true);
-		boolean m_dialogOK = ! newProjDialog.dialogCancelled();
+		m_dialogOK = ! newProjDialog.dialogCancelled();
 		newProjDialog.dispose();
 		return m_dialogOK;
 	}
@@ -268,6 +266,6 @@ public class ProjectProperties extends JFrame
 	private String	m_srcLang;
 	private String	m_locLang;
 	
-	protected boolean m_dialogOK;
+	boolean m_dialogOK;
 
 }

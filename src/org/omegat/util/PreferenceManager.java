@@ -36,10 +36,10 @@ import java.util.HashMap;
  */
 public class PreferenceManager
 {
-	public PreferenceManager(String prefFile)
+	public PreferenceManager()
 	{
 		pref = this;
-		m_prefFileName = prefFile;
+		m_prefFileName = OConsts.PROJ_PREFERENCE;
 		m_loaded = false;
 		m_preferenceMap = new HashMap(64);
 		m_nameList = new ArrayList(32);
@@ -49,9 +49,9 @@ public class PreferenceManager
 
 	public synchronized String getPreference(String name)
 	{
-		if ((name == null) || (name.equals("")))								// NOI18N
+		if (name == null || name.equals(""))								// NOI18N
 			return "";															// NOI18N
-		if (m_loaded == false)
+		if (!m_loaded)
 			doLoad();
 		
 		Integer i = (Integer) m_preferenceMap.get(name);
@@ -66,9 +66,9 @@ public class PreferenceManager
 
 	public synchronized void setPreference(String name, String val)
 	{
-		if ((name != null) && (!name.equals("")) && (val != null))				// NOI18N
+		if (name != null && !name.equals("") && val != null)				// NOI18N
 		{
-			if (m_loaded == false)
+			if (!m_loaded)
 				doLoad();
 			Integer i = (Integer) m_preferenceMap.get(name);
 			if (i == null)
@@ -101,7 +101,7 @@ public class PreferenceManager
 		}
 	}
 
-    protected void doLoad()
+    private void doLoad()
 	{
 		try
 		{
@@ -110,7 +110,7 @@ public class PreferenceManager
 			m_loaded = true;
 
 			XMLStreamReader xml = new XMLStreamReader();
-			xml.killEmptyBlocks(true);
+			xml.killEmptyBlocks();
 			xml.setStream(new File(m_prefFileName));
 			XMLBlock blk;
 			ArrayList lst;
@@ -119,7 +119,7 @@ public class PreferenceManager
 			String pref;
 			String val;
 			// advance to omegat tag
-			if ((blk = xml.advanceToTag("omegat")) == null)	// NOI18N
+			if (xml.advanceToTag("omegat") == null)	// NOI18N
 				return;
 			
 			// advance to project tag
@@ -127,7 +127,7 @@ public class PreferenceManager
 				return;
 	
 			String ver = blk.getAttribute("version");			// NOI18N
-			if ((ver != null) && (ver.equals("1.0") == false))	// NOI18N
+			if (ver != null && !ver.equals("1.0"))	// NOI18N
 			{
 				// unsupported preference file version - abort read
 				return;
@@ -155,7 +155,7 @@ public class PreferenceManager
 					continue;
 				}
 				val = blk.getText();
-				if ((pref != null) && (!pref.equals("")) && (val != null))		// NOI18N
+				if (pref != null && !pref.equals("") && val != null)		// NOI18N
 				{
 					// valid match - record these
 					j = new Integer(m_valList.size());
@@ -189,11 +189,11 @@ public class PreferenceManager
 		}
 	}
 	
-	protected void doSave() throws IOException
+	private void doSave() throws IOException
 	{
-		String str = "";														// NOI18N
-		String name = "";														// NOI18N
-		String val = "";														// NOI18N
+		String str;														// NOI18N
+		String name;														// NOI18N
+		String val;														// NOI18N
 		BufferedWriter out = new BufferedWriter(new FileWriter(
 					m_prefFileName));
 		
@@ -206,7 +206,7 @@ public class PreferenceManager
 		for (int i=0; i<m_nameList.size(); i++)
 		{
 			name = (String) m_nameList.get(i);
-			val = XMLStreamReader.makeValidXML((String) m_valList.get(i), null);
+			val = XMLStreamReader.makeValidXML((String) m_valList.get(i));
 			if (val.equals(""))													// NOI18N
 				continue;	// don't write blank preferences
 			str = "    <" + name + ">";											// NOI18N
@@ -222,16 +222,16 @@ public class PreferenceManager
 	}
 
 	
-	protected boolean	m_loaded;
-	protected boolean	m_changed;
-	protected String	m_prefFileName;
+	private boolean	m_loaded;
+	private boolean	m_changed;
+	private String	m_prefFileName;
 
 	// use a hash map for fast lookup of data
 	// use array lists for orderly recovery of it for saving to disk
-	protected ArrayList	m_nameList;
-	protected ArrayList	m_valList;
-	protected HashMap	m_preferenceMap;
+    private ArrayList	m_nameList;
+	private ArrayList	m_valList;
+	private HashMap	m_preferenceMap;
 
-	public static PreferenceManager pref = null;
+	public static PreferenceManager pref;
 
 }

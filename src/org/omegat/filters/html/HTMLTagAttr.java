@@ -28,7 +28,7 @@ import org.omegat.filters.LBuffer;
  *
  * @author Keith Godfrey
  */
-public class HTMLTagAttr
+class HTMLTagAttr
 {
 	public HTMLTagAttr()
 	{
@@ -50,7 +50,7 @@ public class HTMLTagAttr
 		val.append(c);
 	}
 
-	LBuffer attr;
-	LBuffer val;
+	private LBuffer attr;
+	private LBuffer val;
 }
 

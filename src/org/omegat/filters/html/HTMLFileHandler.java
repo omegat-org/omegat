@@ -65,11 +65,11 @@ public class HTMLFileHandler extends FileHandler
 		text.getChars(0, text.length(), car, 0);
 		char c;
 		int num = 0;
-		String s = null;
+		String s;
 		char shortcut = 0;
 		int state = 0;
 		boolean close = false;
-		HTMLTag tag = null;
+		HTMLTag tag;
 		LBuffer tagBuf = new LBuffer(8);
 		LBuffer outBuf = new LBuffer(text.length() * 2);
 		for (int i=0; i<car.length; i++)
@@ -96,32 +96,32 @@ public class HTMLFileHandler extends FileHandler
 					state = 1;
 				}
 			}
-			else if ((state == 1) && (c == '/'))
+			else if (state == 1 && c == '/')
 			{
 				close = true;
 			}
-			else if ((state == 1) && (((c >= 'a') && (c <= 'z')) ||
-					((c >= 'A') && (c <= 'Z'))))
+			else if (state == 1 && (c >= 'a' && c <= 'z' ||
+                    c >= 'A' && c <= 'Z'))
 			{
 				state++;
 				shortcut = c;
 				if (shortcut < 'a')
-					shortcut += ('a' - 'A');
+					shortcut += 'a' - 'A';
 				tagBuf.append(c);
 			}
-			else if (((state == 2) || (state == 3)) && 
-						((c >= '0') && (c <= '9')))
+			else if ((state == 2 || state == 3) &&
+						(c >= '0' && c <= '9'))
 			{
 				state++;
 				num = num*10 + (c - '0');
 				tagBuf.append(c);
 			}
-			else if (((state == 3) || (state == 4)) && (c == '>'))
+			else if ((state == 3 || state == 4) && c == '>')
 			{
 				// found shortcut tag - look it up and 
 				// replace it
 				tag = null;
-				if ((num >= 0) && (num < m_tagList.size()))
+				if (num >= 0 && num < m_tagList.size())
 				{
 					tag = (HTMLTag) m_tagList.get(num);
 					if (tag.shortcut() != shortcut)
@@ -129,9 +129,9 @@ public class HTMLFileHandler extends FileHandler
 				}
 				if (tag == null)
 				{
-					state = -1;
+					//state = -1;
 				}
-				else if (close == false)
+				else if (!close)
 				{
 					outBuf.append('<');
 					outBuf.append(tag.verbatum());
@@ -202,10 +202,6 @@ public class HTMLFileHandler extends FileHandler
 
 		// for white space control
 
-		LBuffer nt = new LBuffer(256);
-		LBuffer t = new LBuffer(256);
-		LBuffer tmp = new LBuffer(256);
-		LBuffer esc = new LBuffer(16);
 		try
 		{
 			while ((i = getNextChar()) >= 0)
@@ -220,11 +216,11 @@ public class HTMLFileHandler extends FileHandler
 						fd = null;
 					handleTag();
 				}
-				else if ((c == 10) || (c == 13) || (c == 9) ||
-						(c == ' '))
+				else if (c == 10 || c == 13 || c == 9 ||
+                        c == ' ')
 				{
 					// white space
-					if ((m_ws == false) || (fd == null))
+					if (!m_ws || fd == null)
 					{
 						fd = new FormatData();
 						if (m_hasText)
@@ -235,11 +231,11 @@ public class HTMLFileHandler extends FileHandler
 					fd.appendOrig(c);
 					// only include 1 space unless part of
 					// <pre>
-					if ((m_ws == true) && (m_pre == false))
+					if (m_ws && !m_pre)
 						continue;
 					m_ws = true;
 
-					if (m_pre == true)
+					if (m_pre)
 						fd.appendDisplay(c);
 					else
 						fd.appendDisplay(' ');
@@ -247,8 +243,8 @@ public class HTMLFileHandler extends FileHandler
 				else
 				{
 					// text
-					if ((m_hasText == false) || 
-						(m_ws == true) || (fd == null))
+					if (!m_hasText ||
+                            m_ws || fd == null)
 					{
 						fd = new FormatData();
 						m_fdList.add(fd);
@@ -258,7 +254,7 @@ public class HTMLFileHandler extends FileHandler
 					{
 						c = getEscChar(fd);
 					}
-					if ((c == 160) && (!m_hasText))	
+					if (c == 160 && !m_hasText)
 					{
 						// no text and a &nbsp;
 						// make it white space
@@ -269,7 +265,7 @@ public class HTMLFileHandler extends FileHandler
 					else
 					{
 						fd.appendDisplay(c);
-						fd.setHasText(true);
+						fd.setHasText();
 						m_hasText = true;
 						m_ws = false;
 					}
@@ -288,7 +284,7 @@ public class HTMLFileHandler extends FileHandler
 		}
 	}
 
-	protected char getEscChar(FormatData fd)
+	private char getEscChar(FormatData fd)
 					throws IOException, ParseException
 	{
 		char c = 0;
@@ -305,8 +301,8 @@ public class HTMLFileHandler extends FileHandler
 			if (ctr == 0)
 			{
 				// allow ws to immediately follow '&'
-				if ((c == 10) || (c == 13) || (c == 0) ||
-							(c == ' '))
+				if (c == 10 || c == 13 || c == 0 ||
+                        c == ' ')
 				{
 					fd.appendDisplay('&');
 					c = ' ';
@@ -320,9 +316,9 @@ public class HTMLFileHandler extends FileHandler
 					continue;
 				}
 			}
-			else if ((ctr == 1) && (numeric > 0))
+			else if (ctr == 1 && numeric > 0)
 			{
-				if ((c == 'x') || (c == 'X'))
+				if (c == 'x' || c == 'X')
 				{
 					numeric = 2;	// hex
 					ctr++;
@@ -339,7 +335,7 @@ public class HTMLFileHandler extends FileHandler
 				}
 				if (numeric == 1)
 				{
-					if ((c >= '0') && (c <= '9'))
+					if (c >= '0' && c <= '9')
 						val = val*10 + (c - '0');
 					else
 					{
@@ -352,9 +348,9 @@ public class HTMLFileHandler extends FileHandler
 				{
 					if (c > 'Z')
 						c -= 'a' - 'A';
-					if ((c >= '0') && (c <= '9')) 
+					if (c >= '0' && c <= '9')
 						val = val*16 + (c - '0');
-					else if ((c >= 'A') && (c <= 'F'))
+					else if (c >= 'A' && c <= 'F')
 						val = val*16 + (c - 'A');
 					else
 					{
@@ -369,7 +365,7 @@ public class HTMLFileHandler extends FileHandler
 				continue;
 			}
 			else
-			if ((c == 10) || (c == 13) || (ctr > 10))
+			if (c == 10 || c == 13 || ctr > 10)
 			{ 
 				// '&' encountered that's not a part of
 				// an escaped character - rewind stream
@@ -390,18 +386,14 @@ public class HTMLFileHandler extends FileHandler
 		return c;
 	}
 
-	protected void handleTag() 
+	private void handleTag()
 			throws ParseException, IOException
 	{
-		HTMLTag tag = null;
-		FormatData fd = null;
+		HTMLTag tag;
+		FormatData fd;
 
 		tag = HTMLParser.identTag(this);
-		if (tag.hasTrans() == true)
-		{
-			; // TODO - trans in tag
-		}
-		
+
 		fd = new FormatData(tag.close());
 		fd.setOrig(tag.verbatum());
 
@@ -420,7 +412,7 @@ public class HTMLFileHandler extends FileHandler
 			// formatting tag - replace
 			// raw HTML tag with simplified
 			// version
-			HTMLTag cand = null;
+			HTMLTag cand;
 			if (tag.close())
 			{
 				ListIterator it;
@@ -432,14 +424,14 @@ public class HTMLFileHandler extends FileHandler
 					cand = (HTMLTag) it.previous();
 					if (tag.willPartner(cand))
 					{
-						cand.setPartner(true);
-						tag.setPartner(true);
+						cand.setPartner();
+						tag.setPartner();
 						fd.setTagData(cand.shortcut(), cand.num());
 						foundPartner = true;
 						break;
 					}
 				}
-				if (foundPartner == false)
+				if (!foundPartner)
 				{
 					// failed to find partner - probably a close format
 					//  tag that starts in a previous paragraph
@@ -465,42 +457,25 @@ public class HTMLFileHandler extends FileHandler
 			writeEntry();
 		}
 
-		if (tag.isEqual("pre")) // NOI18N
+		if (tag.isPreTag()) // NOI18N
 		{
-			if (tag.close())
-				m_pre = false;
-			else
-				m_pre = true;
+            m_pre = !tag.close();
 		}
 	}
 
-	protected void writeEntry() throws IOException
+	private void writeEntry() throws IOException
 	{
 		ListIterator it;
-		FormatData fd = null;
-		LBuffer buf = null;
+		FormatData fd;
+		LBuffer buf;
 
 		// compress output data
 		compressOutputData();
 
 		// see if there's anything interesting
-		if ((m_fdList.size() == 0) && (m_outFile == null))
+		if (m_fdList.size() == 0 && m_outFile == null)
 		{
-			if (m_outFile == null)
-			{
-				m_preNT.clear();
-				m_postNT.clear();
-			}
-			else
-			{
-				// nothing interesting - move all postNT down
-				it = m_postNT.listIterator(m_postNT.size());
-				while (it.hasPrevious())
-				{
-					fd = (FormatData) it.previous();
-					m_preNT.add(fd);
-				}
-			}
+			m_preNT.clear();
 			m_postNT.clear();
 			m_fdList.clear();
 			m_tagList.clear();
@@ -556,18 +531,18 @@ public class HTMLFileHandler extends FileHandler
 		m_hasText = false;
 	}
 
-	protected void compressOutputData()
+	private void compressOutputData()
 	{
 		// remove leading and trailing white space, 
 		// leading and trailing tags and tag pairs
 
 		boolean change = true;
-		FormatData fd_head = null;
-		FormatData fd_tail = null;
+		FormatData fd_head;
+		FormatData fd_tail;
 		ListIterator it;
-		int ctr = 0;
+		int ctr;
 		int len;
-		FormatData fd = null;
+		FormatData fd;
 		while (change)
 		{
 			if (m_fdList.size() == 0)
@@ -625,8 +600,8 @@ public class HTMLFileHandler extends FileHandler
 			}
 
 			// if first and last tags pair, move to lists
-			if (fd_tail.isTag() && fd_head.isTag() && 
-				(fd_tail.tagData() == fd_head.tagData()))
+			if (fd_tail.isTag() && fd_head.isTag() &&
+                    fd_tail.tagData() == fd_head.tagData())
 			{
 //System.out.println("      matching pair");
 				if (m_fdList.size() == 1)
@@ -733,14 +708,14 @@ public class HTMLFileHandler extends FileHandler
 		return uw;
 	}
 
-	private LinkedList 	m_tagList = null;
+	private LinkedList 	m_tagList;
 
 	private LinkedList	m_preNT;
 	private LinkedList	m_fdList;
 	private LinkedList	m_postNT;
 
-    private boolean		m_ws = false;
-	private boolean		m_pre = false;
-	private boolean 	m_hasText = false;
+    private boolean		m_ws;
+	private boolean		m_pre;
+	private boolean 	m_hasText;
 
 }

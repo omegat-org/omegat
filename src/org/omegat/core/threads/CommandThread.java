@@ -19,9 +19,9 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.gui.threads;
+package org.omegat.core.threads;
 
-import java.util.regex.Pattern;
+import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.util.*;
 import org.omegat.gui.TransFrame;
 import org.omegat.gui.ProjectProperties;
@@ -34,10 +34,9 @@ import org.omegat.filters.HandlerMaster;
 import org.omegat.core.*;
 
 import java.io.*;
-import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.*;
-import java.util.zip.Adler32;
+import org.omegat.core.matching.SourceTextEntry;
 
 /**
  * CommandThread is a thread to asynchronously do the stuff
@@ -46,7 +45,7 @@ import java.util.zip.Adler32;
  */
 public class CommandThread extends Thread
 {
-
+	
     public CommandThread(TransFrame tf)
 	{
 		if (core != null)
@@ -62,7 +61,6 @@ public class CommandThread extends Thread
 		m_srcTextEntryArray = new ArrayList(4096);
 		m_tmList = new ArrayList();
 		m_orphanedList = new ArrayList();
-		m_indexHash = new HashMap(8192);
 		m_modifiedFlag = false;
 
 		m_extensionList = new ArrayList(32);
@@ -78,7 +76,7 @@ public class CommandThread extends Thread
 
 		m_prefManager = PreferenceManager.pref;
 		if (m_prefManager == null)
-			m_prefManager = new PreferenceManager(OConsts.PROJ_PREFERENCE);
+			m_prefManager = new PreferenceManager();
 	}
 
 	public void run()
@@ -87,10 +85,11 @@ public class CommandThread extends Thread
 		m_saveThread = new SaveThread();
 		try 
 		{
-			while (m_stop == false)
+			while (!m_stop)
 			{
 				try { sleep(40); }
-				catch (InterruptedException e) { ; }
+				catch (InterruptedException e) {
+                }
 				pack.reset();
 				messageBoardCheck(pack);
 				switch (pack.type)
@@ -131,39 +130,36 @@ public class CommandThread extends Thread
 		messageBoard(true, pack);
 	}
 
-	public void messageBoardCheck(RequestPacket pack)
+	private void messageBoardCheck(RequestPacket pack)
 	{
 		messageBoard(false, pack);
 	}
 
-	protected void messageBoard(boolean post, 
+	private void messageBoard(boolean post,
 						RequestPacket pack)
-	{
-		//synchronized (m_messageBoardCritSection)
-		{
-			if (CommandThread.core == null)
-				return;
-
-			if (post == true)
-			{
-				m_requestQueue.add(pack);
-				CommandThread.core.interrupt();
-			}
-			else
-			{
-				if (m_requestQueue.size() > 0)
-				{
-					pack.set((RequestPacket) 
-							m_requestQueue.removeFirst());
-				}
-			}
-		}
-	}
+    {
+        if (CommandThread.core == null)
+            return;
+        if (post) {
+            m_requestQueue.add(pack);
+            CommandThread.core.interrupt();
+        } else {
+            if (m_requestQueue.size() > 0) {
+                pack.set((RequestPacket)
+                        m_requestQueue.removeFirst());
+            }
+        }
+}
 	
 	public void signalStop()
 	{
 		m_stop = true;
 		CommandThread.core.interrupt();
+	}
+	
+	public boolean shouldStop()
+	{
+		return m_stop;
 	}
 
 	public void requestUnload()
@@ -179,7 +175,6 @@ public class CommandThread extends Thread
 		// TODO freeze UI to prevent race condition
 		m_strEntryHash.clear();
 		m_glosEntryHash.clear();
-		m_indexHash.clear();
 
 		m_tmList.clear();
 		m_orphanedList.clear();
@@ -219,7 +214,7 @@ public class CommandThread extends Thread
 		m_nearProj = null;
 	}
 
-	protected void requestLoad(RequestPacket pack)
+	private void requestLoad(RequestPacket pack)
 	{
 		TransFrame tf = (TransFrame) pack.obj;
 		// load new project
@@ -231,7 +226,7 @@ public class CommandThread extends Thread
 
 			evtStr = OStrings.CT_LOADING_PROJECT;
 			MessageRelay.uiMessageSetMessageText(tf, evtStr);
-			if (loadProject() == false)
+			if (!loadProject())
 			{
 				// loading of project cancelled
 				evtStr = OStrings.CT_CANCEL_LOAD;
@@ -245,9 +240,6 @@ public class CommandThread extends Thread
 			if (m_saveCount == -1)
 				m_saveThread.start();
 
-			evtStr = OStrings.CT_LOADING_INDEX;
-			MessageRelay.uiMessageSetMessageText(tf, evtStr);
-			buildIndex();
 			evtStr = OStrings.CT_LOADING_GLOSSARY;
 			MessageRelay.uiMessageSetMessageText(tf, evtStr);
 			buildGlossary();
@@ -276,11 +268,10 @@ public class CommandThread extends Thread
 			// enable normal saves
 			m_saveCount = 2;
 		}
-		catch (InterruptedIOException e1)
+		catch (InterruptedException e1)
 		{
 			// user said cancel - this is OK
-			;
-		}
+        }
 		catch (IOException e)
 		{
 			String msg = OStrings.TF_LOAD_ERROR;
@@ -300,15 +291,14 @@ public class CommandThread extends Thread
 	public void pseudoTranslate()
 	{
 		String str;
-		int ps;
-		SourceTextEntry srcTE = null;
-		StringEntry se = null;
+		SourceTextEntry srcTE;
+		StringEntry se;
 		for (int i=0; i<m_srcTextEntryArray.size(); i++)
 		{
 			srcTE = (SourceTextEntry) m_srcTextEntryArray.get(i);
 			se = srcTE.getStrEntry();
 			str = srcTE.getTranslation();
-			if ((str == null) || (str.equals(""))) // NOI18N
+			if (str == null || str.equals("")) // NOI18N
 			{
 				str = "omega - " + se.getSrcText(); // NOI18N
 			}
@@ -316,15 +306,13 @@ public class CommandThread extends Thread
 		}
 	}
 
-	protected void buildTMXFile(String filename) throws IOException
+	private void buildTMXFile(String filename) throws IOException
 	{
 		int i;
 		String s;
 		String t;
 
 		// build translation database files
-		File tm;
-		DataOutputStream dos;
 		StringEntry se;
 
 		// we got this far, so assume lang codes are proper
@@ -354,8 +342,8 @@ public class CommandThread extends Thread
 		for (i=0; i<m_strEntryList.size(); i++)
 		{
 			se = (StringEntry) m_strEntryList.get(i);
-			s = XMLStreamReader.makeValidXML(se.getSrcText(), null);
-			t = XMLStreamReader.makeValidXML(se.getTrans(), null);
+			s = XMLStreamReader.makeValidXML(se.getSrcText());
+			t = XMLStreamReader.makeValidXML(se.getTrans());
 			if (t.equals(""))								 // NOI18N
 				continue;									 // NOI18N
 			str =  "    <tu>\n";							 // NOI18N
@@ -372,8 +360,8 @@ public class CommandThread extends Thread
 		for (i=0; i<m_orphanedList.size(); i++)
 		{
 			transMem = (TransMemory) m_orphanedList.get(i);
-			s = XMLStreamReader.makeValidXML(transMem.source, null);
-			t = XMLStreamReader.makeValidXML(transMem.target, null);
+			s = XMLStreamReader.makeValidXML(transMem.source);
+			t = XMLStreamReader.makeValidXML(transMem.target);
 			if (t.equals(""))								 // NOI18N
 				continue;		
 			str =  "    <tu>\n";							 // NOI18N
@@ -427,7 +415,7 @@ public class CommandThread extends Thread
 				{
 					s = (String) srcTags.get(j);
 					t = (String) locTags.get(j);
-					if (s.equals(t) == false)
+					if (!s.equals(t))
 					{
 						suspects.add(ste);
 						break;
@@ -461,14 +449,11 @@ public class CommandThread extends Thread
 		save();
 
 		// remap extensions where necessary and ignore specified files
-		FileHandler fh = null;
-		HandlerMaster hm = new HandlerMaster();
+		FileHandler fh;
+		HandlerMaster hm = HandlerMaster.getInstance();
 		ArrayList fileList = new ArrayList(256);
-		boolean ignore;
 		String filename;
 		String destFileName;
-		int namePos;
-		String shortName;
 
 		String fname = m_config.getProjectRoot() + m_config.getProjectName() +
 					OConsts.TMX_EXTENSION;
@@ -490,12 +475,11 @@ public class CommandThread extends Thread
 			filename = (String) fileList.get(i);
 			destFileName = m_config.getLocRoot() + 
 					filename.substring(m_config.getSourceRoot().length());
-			ignore = false;
 			destFile = new File(destFileName);
 			if (!destFile.exists())
 			{
 				// target directory doesn't exist - create it
-				if (destFile.mkdir() == false)
+				if (!destFile.mkdir())
 				{
 					throw new IOException(OStrings.getString("CT_ERROR_CREATING_TARGET_DIR") + destFileName);
 				}
@@ -510,18 +494,14 @@ public class CommandThread extends Thread
 			filename = (String) fileList.get(i);
 			destFileName = m_config.getLocRoot()+ 
 						filename.substring(m_config.getSourceRoot().length());
-			ignore = false;
 
-			// determine actual file name w/o no path info
-			namePos = filename.lastIndexOf(File.separator)+1;
-			shortName = filename.substring(namePos);
-
+			// determine actual extension
 			int extPos = filename.lastIndexOf('.') + 1;
 			String ext = filename.substring(extPos);
 			// look for mapping of this extension
 			for (j=0; j<m_extensionList.size(); j++)
 			{
-				if (ext.equals(m_extensionList.get(j)) == true)
+				if (ext.equals(m_extensionList.get(j)))
 				{
 					ext = (String) m_extensionMapList.get(j);
 					break;
@@ -533,8 +513,7 @@ public class CommandThread extends Thread
 			fh = hm.findPreferredHandler(ext);
 			if (fh == null)
 			{
-				System.out.println(OStrings.CT_NO_FILE_HANDLER + 
-						" (." + ext + ")");								 // NOI18N
+				System.out.println(OStrings.CT_NO_FILE_HANDLER + " (." + ext + ")");								 // NOI18N
 				// copy file to target tree
 				System.out.println(OStrings.CT_COPY_FILE + 
 						" '" +											 // NOI18N
@@ -546,7 +525,7 @@ public class CommandThread extends Thread
 			if (fh.getType().equals(OConsts.FH_HTML_TYPE))
 			{
 				// preview file to see if we should use the XHTML parser
-				if (StaticUtils.isXMLFile(filename) == true)
+				if (StaticUtils.isXMLFile(filename))
 				{
 					// look for XHTML parser
 					FileHandler fhx = hm.findPreferredHandler(
@@ -569,7 +548,7 @@ public class CommandThread extends Thread
 		}
 		m_transFrame.setMessageText(OStrings.CT_COMPILE_DONE_MX);
 
-		if (err == true)
+		if (err)
 		{
 			throw new IOException(OStrings.getString("CT_ERROR_BUILDING_TMX"));
 		}
@@ -578,7 +557,7 @@ public class CommandThread extends Thread
 
 	public void save()
 	{
-		if (m_modifiedFlag == false)
+		if (!m_modifiedFlag)
 			return;
 
 		forceSave(false);
@@ -589,7 +568,7 @@ public class CommandThread extends Thread
 		m_modifiedFlag = true;
 	}
 
-	protected void forceSave(boolean corruptionDanger)
+	private void forceSave(boolean corruptionDanger)
 	{
 		//synchronized (m_saveCriticalSection)
 		{
@@ -626,7 +605,7 @@ public class CommandThread extends Thread
 				String msg = OStrings.CT_ERROR_SAVING_PROJ;
 				displayError(msg, e);
 				// try to rename backup file to original name
-				if (corruptionDanger == false)
+				if (!corruptionDanger)
 				{
 					s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
 					File backup = new File(s + OConsts.BACKUP_EXTENSION);
@@ -637,7 +616,7 @@ public class CommandThread extends Thread
 			}
 
 			// if successful, delete backup file
-			if ((m_modifiedFlag == false) && (corruptionDanger == false))
+			if (!m_modifiedFlag && !corruptionDanger)
 			{
 				s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
 				File backup = new File(s + OConsts.BACKUP_EXTENSION);
@@ -647,14 +626,14 @@ public class CommandThread extends Thread
 		}
 	}
 
-	public void addEntry(String srcText, String file)
+	public void addEntry(String srcText)
 	{
 		// if the source string is empty, don't add it to TM
 		if( srcText.length()==0 || srcText.trim().length()==0 )
 			return;
 		
-		SourceTextEntry srcTextEntry = null;
-		StringEntry strEntry = null;
+		SourceTextEntry srcTextEntry;
+		StringEntry strEntry;
 
 		srcTextEntry = new SourceTextEntry();
 		strEntry = (StringEntry) m_strEntryHash.get(srcText);
@@ -675,17 +654,16 @@ public class CommandThread extends Thread
 	{
 		// create project directories
 		// save project files (.proj .handlers .ignore)
-		HandlerMaster hand = new HandlerMaster();
-		try 
+		try
 		{
-			if (m_config.createNew() == false)
+			if (!m_config.createNew())
 				return;	// cancel pressed
 
 			// create project root directory
 			File proj = new File(m_config.getProjectRoot());
 			if (!proj.isDirectory())
 			{
-				if (proj.mkdirs() == false)
+				if (!proj.mkdirs())
 				{
 					String msg = OStrings.CT_ERROR_CREATE;
 					throw new IOException(msg);
@@ -696,7 +674,7 @@ public class CommandThread extends Thread
 			File internal = new File(m_config.getProjectInternal());
 			if (!internal.isDirectory())
 			{
-				if (internal.mkdirs() == false)
+				if (!internal.mkdirs())
 				{
 					String msg = OStrings.CT_ERROR_CREATE;
 					throw new IOException(msg);
@@ -711,7 +689,7 @@ public class CommandThread extends Thread
 			File src = new File(m_config.getSourceRoot());
 			if (!src.isDirectory())
 			{
-				if (src.mkdirs() == false)
+				if (!src.mkdirs())
 				{
 					String msg = OStrings.CT_ERROR_CREATE + " (.../src/)";  // NOI18N
 					throw new IOException(msg);
@@ -722,7 +700,7 @@ public class CommandThread extends Thread
 			File glos = new File(m_config.getGlossaryRoot());
 			if (!glos.isDirectory())
 			{
-				if (glos.mkdirs() == false)
+				if (!glos.mkdirs())
 				{
 					String msg = OStrings.CT_ERROR_CREATE + " (.../glos/)";	 // NOI18N
 					throw new IOException(msg);
@@ -733,7 +711,7 @@ public class CommandThread extends Thread
 			File tm = new File(m_config.getTMRoot());
 			if (!tm.isDirectory())
 			{
-				if (tm.mkdirs() == false)
+				if (!tm.mkdirs())
 				{
 					String msg = OStrings.CT_ERROR_CREATE + " (.../tm/)";	 // NOI18N
 					throw new IOException(msg);
@@ -744,7 +722,7 @@ public class CommandThread extends Thread
 			File loc = new File(m_config.getLocRoot());
 			if (!loc.isDirectory())
 			{
-				if (loc.mkdirs() == false)
+				if (!loc.mkdirs())
 				{
 					String msg = OStrings.CT_ERROR_CREATE + " (.../target/)"; // NOI18N
 					throw new IOException(msg);
@@ -764,97 +742,18 @@ public class CommandThread extends Thread
 		}
 	}
 
-    public TreeMap findAll(String tokens)
-	{
-		if (m_indexReady == false)
-			return null;
-		TreeMap foundList = null;
-		// TODO - set locale in toLower call
-		String str = tokens.toLowerCase();
-		Token tok;
-		ArrayList tokenList = new ArrayList();
-		StaticUtils.tokenizeText(tokens, tokenList);
-		for (int i=0; i<tokenList.size(); i++)
-		{
-			tok = (Token) tokenList.get(i);
-			//if ((tok.hasText == false) || (tok.text.equals("")))
-			if (tok.text.equals("")) // NOI18N
-				continue;
-
-			if (foundList == null)
-				foundList = find(tok.text);
-			else
-				foundList = refineQuery(tok.text, foundList);
-			if (foundList == null)
-				break;
-		}
-		return foundList;
-	}
-
-	public TreeMap find(String wrd)
-	{
-		if (m_indexReady == false)
-			return null;
-		String local = wrd.toLowerCase();
-		TreeMap tree = null;
-		IndexEntry index = null;
-		index = (IndexEntry) m_indexHash.get(local);
-		if (index != null)
-			tree = index.getTreeMap();
-		return tree;
-	}
-
-	public TreeMap refineQuery(String wrd, TreeMap foundList)
-	{
-		if (m_indexReady == false)
-			return null;
-		if (foundList == null)
-			return null;
-		TreeMap tree = find(wrd);
-		if (tree == null)
-			return null;
-		TreeMap queryTree = null;
-		StringEntry strEntry;
-		String s;
-		Object obj;
-		// merge trees
-		while ((tree.size() > 0) && (foundList.size() > 0))
-		{
-			obj = tree.firstKey();
-			strEntry = (StringEntry) foundList.remove(obj);
-			if (strEntry != null)
-			{
-				// match
-				if (queryTree == null)
-					queryTree = new TreeMap();
-				s = String.valueOf(strEntry.digest());
-				queryTree.put(s, strEntry);
-			}
-			tree.remove(obj);
-		}
-
-		return queryTree;
-	}
-
-
 	/////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	// protected functions
 
-	protected void loadTranslations()
+	private void loadTranslations()
 	{
-		String srcText;
-		String trans;
-		String s;
-		StringEntry strEntry;
-		SourceTextEntry srcTextEntry;
-		Object obj;
 		File proj;
 		// load translation file (project_name.bin)
 		try 
 		{
 			proj = new File(m_config.getProjectInternal() + OConsts.STATUS_EXTENSION);
-			if (proj.exists() == false)
+			if (!proj.exists())
 			{ 
 				System.out.println(OStrings.getString("CT_ERROR_CANNOT_FIND_TMX")+ 
 						"'" + proj + "'"); // NOI18N
@@ -885,12 +784,12 @@ public class CommandThread extends Thread
 		}
 	}
 
-	protected boolean loadProject() 
+	private boolean loadProject()
 			throws IOException, InterruptedIOException
 	{
 		int i;
 		int j;
-        if (m_config.loadExisting() == false)
+        if (!m_config.loadExisting())
 			return false;
 
 		// first load glossary files
@@ -957,32 +856,24 @@ public class CommandThread extends Thread
 
 		// ready to read in files
 		// remap extensions where necessary and ignore specified files
-		FileHandler fh = null;
-		HandlerMaster hm = new HandlerMaster();
+		FileHandler fh;
+		HandlerMaster hm = HandlerMaster.getInstance();
 		ArrayList srcFileList = new ArrayList(256);
 		File root = new File(m_config.getSourceRoot());
 		StaticUtils.buildFileList(srcFileList, root, true);
-		boolean ignore;
-		int namePos;
-		String shortName;
 		String filename;
 		// keep track of how many entries are in each file
-		int numEntries = 0;
 		for (i=0; i<srcFileList.size(); i++)
 		{
 			filename = (String) srcFileList.get(i);
-			ignore = false;
 
-			// determine actual file name w/o no path info
-			namePos = filename.lastIndexOf(File.separator)+1;
-			shortName = filename.substring(namePos);
-
+			// determine actual extension
 			int extPos = filename.lastIndexOf('.');
 			String ext = filename.substring(extPos+1);
 			// look for mapping of this extension
 			for (j=0; j<m_extensionList.size(); j++)
 			{
-				if (ext.equals(m_extensionList.get(j)) == true)
+				if (ext.equals(m_extensionList.get(j)))
 				{
 					ext = (String) m_extensionMapList.get(j);
 					break;
@@ -994,14 +885,13 @@ public class CommandThread extends Thread
 			fh = hm.findPreferredHandler(ext);
 			if (fh == null)
 			{
-				System.out.println(OStrings.CT_NO_FILE_HANDLER 
-								+ " (." + ext + ")");  // NOI18N
+				// System.out.println(OStrings.CT_NO_FILE_HANDLER + " (." + ext + ")");  // NOI18N
 				continue;
 			}
 			if (fh.getType().equals(OConsts.FH_HTML_TYPE))
 			{
 				// preview file to see if we should use the htmlx parser
-				if (StaticUtils.isXMLFile(filename) == true)
+				if (StaticUtils.isXMLFile(filename))
 				{
 					// look for htmlx parser
 					FileHandler fhx = hm.findPreferredHandler(
@@ -1017,8 +907,7 @@ public class CommandThread extends Thread
 						m_config.getSourceRoot().length());
 			m_projWin.addFile(filepath, numEntries());
 			//m_projWin.addFile(filename, numEntries());
-			System.out.println(OStrings.getString("CT_LOADING_FILE")+
-						"'" + filepath + "'");  // NOI18N
+			//System.out.println(OStrings.getString("CT_LOADING_FILE")+	"'" + filepath + "'");  // NOI18N
 			m_transFrame.setMessageText(OStrings.CT_LOAD_FILE_MX + filepath);
 			m_curFile = new ProjectFileData();
 			m_curFile.name = filename;
@@ -1036,42 +925,7 @@ public class CommandThread extends Thread
 		return true;
 	}
 
-	protected void buildIndex()
-	{
-		StringEntry strEntry;
-		int wordCount;
-		String s;
-		Token tok;
-		int i, j;
-		ArrayList tokenList = new ArrayList();
-
-		IndexEntry indexEntry;
-		for (i=0; i<m_strEntryList.size(); i++)
-		{
-			strEntry = (StringEntry) m_strEntryList.get(i);
-			s = strEntry.getSrcText();
-			wordCount = StaticUtils.tokenizeText(s, tokenList);
-			for (j=0; j<tokenList.size(); j++)
-			{
-				tok = (Token) tokenList.get(j);
-
-				if (tok.text.equals("")) // NOI18N
-					continue;
-				s = tok.text.toLowerCase(); // TODO set locale
-				indexEntry = (IndexEntry) m_indexHash.get(s);
-				if (indexEntry == null)
-				{
-					// didn't exist - make a new one
-					indexEntry = new IndexEntry(s);
-					m_indexHash.put(s, indexEntry);
-				}
-				indexEntry.addReference(strEntry);
-			}
-			strEntry.setWordCount(wordCount);
-		}
-	}
-
-	protected void buildGlossary()
+    private void buildGlossary()
 	{
 		int i;
 		GlossaryEntry glosEntry;
@@ -1080,18 +934,20 @@ public class CommandThread extends Thread
 		String glosStrLow;
 		String s;
 		int pos;
-		TreeMap foundList;
+		//TreeMap foundList;
 		for (i=0; i<m_glosEntryList.size(); i++)
 		{
 			glosEntry = (GlossaryEntry) m_glosEntryList.get(i);
 			glosStr = glosEntry.getSrcText();
-			foundList = findAll(glosStr);
+			// foundList = findAll(glosStr);
 			// TODO - set locale in toLower call
 			glosStrLow = glosStr.toLowerCase();
 			// TODO - strip formating info
 
-			if (foundList == null)
-				continue;
+			//if (foundList == null)
+			continue;
+
+            /*
 			// have narrowed down search field to only strings
 			// containing words of glossary entries - now check
 			// for exact match
@@ -1111,6 +967,7 @@ public class CommandThread extends Thread
 					strEntry.addGlosString(glosEntry);
 				}
 			}
+            */
 		}
 	}
 
@@ -1124,161 +981,28 @@ public class CommandThread extends Thread
 	 * @param status status string to display
 	 */
 	private void buildNearList(ArrayList seList, String status) 
-				throws InterruptedIOException
+				throws InterruptedException
 	{
 		String sNearTrash = getOrSetPreference(OConsts.TF_NEAR_TRASH, OConsts.DEFAULT_NEAR_THRASH);
 		double nearTrash = Double.parseDouble(sNearTrash);
-
-		// array lists maintain ordered lists of stringdata objs
-		ArrayList pairList = new ArrayList(32);
-		ArrayList candPairList = new ArrayList(32);
-		ArrayList wordList = new ArrayList(32);
-		ArrayList candList = new ArrayList(32);
-
-		StringFreqData masterWordFreq = new StringFreqData(64);
-		StringFreqData masterPairFreq = new StringFreqData(64);
-		StringFreqData wordFreq = new StringFreqData(64);
-		StringFreqData pairFreq = new StringFreqData(64);
-
-		FreqList freqList = new FreqList(256);
-
-		StringEntry 	strEntry;
-		StringEntry 	cand;
-		String		tok;
-		String		curWord = null;
-		String		lastWord = null;
-		String		wordPair;
-		int 		i, j;
-		byte[]		candAttr;
-		byte[]		strAttr;
-		double		ratio;
-		double		wordRatio;
-		double		pairRatio;
-		Integer		len = new Integer(seList.size());
-
-		for (i=0; i<seList.size(); i++)
-		{
-			if (i%20 == 0)
-			{
-				Object[] obj = { new Integer(i), len};
-				MessageRelay.uiMessageSetMessageText(m_transFrame,
-					MessageFormat.format(status, obj));
-				Thread.yield();
-			}
-			if (i == 1)
-			{
-				// redisplay entry to force UI update, but DON'T 
-				//  update the translation field
-				MessageRelay.uiMessageFuzzyInfo(m_transFrame);
-			}
-			
-			if (m_stop == true)
-			{
-				throw new InterruptedIOException(""); // NOI18N
-			}
-
-			pairList.clear();
-			wordList.clear();
-			masterWordFreq.reset();
-			masterPairFreq.reset();
-			freqList.reset();
-
-			// tokenize string - make token lists out of 
-			//    org.omegat.StringData objs
-			// get candidate near strings
-			strEntry = (StringEntry) seList.get(i);
-			buildFreqTable(freqList, strEntry,
-					masterWordFreq, wordList,
-					masterPairFreq, pairList);
-			// word list is a list the list of tokens in the segment
-			// pair list is a list of word pairs in the segment - the 
-			//	first word is prepended with a space and the last has
-			//	a space appended to it (to differentiate first and last
-			//	words in the list/freq map)
-			// tokens take the form of org.omegat.StringData objects
-			// freqList is the list of all StringEntrys that contain
-			//	one or more words in common with the current string
-			// it also includes information on how many words are
-			//	shared between the strings (words were searched for
-			//	one by one and a counter was incremented each time
-			//	a matching string was found and added to the list)
-	
-			// for each candidate string, compare composition to 
-			//	current segment
-			for (j=0; j<freqList.len(); j++)
-			{
-				cand = (StringEntry) freqList.getObj(j);
-				ratio = 1.0 * freqList.getCountN(j);
-				if (cand.getWordCount() > strEntry.getWordCount())
-					ratio /= strEntry.getWordCount();
-				else
-					ratio /= cand.getWordCount();
-
-				if (ratio < nearTrash)
-					continue;
-
-				candList.clear();
-				candPairList.clear();
-				wordFreq = (StringFreqData) 
-							masterWordFreq.clone();
-				pairFreq = (StringFreqData)
-							masterPairFreq.clone();
-	
-				// tokenize cand string; update freq tables
-				buildFreqTable(null, cand,
-						wordFreq, candList,
-						pairFreq, candPairList);
-	
-				// analyze word matches
-				wordRatio = wordFreq.getMatchRatio();
-				if (wordRatio < nearTrash)
-					continue;
 		
-				// analyze pair matches
-				pairRatio = pairFreq.getMatchRatio();
-				if (pairRatio < nearTrash)
-					continue;
-
-				ratio = Math.sqrt(wordRatio * pairRatio);
+		String project = null;
+		if( seList!=m_strEntryList )
+			project = m_nearProj;
 		
-				// build attr list (cand)
-				candAttr = buildAttrList(candList, //candPairList,
-							wordFreq,
-							pairFreq);
-		
-				// build attr list (src)
-				strAttr = buildAttrList(wordList, //pairList,
-							wordFreq,
-							pairFreq);
-	
-				if (seList == m_strEntryList)
-				{
-					// near strings need extra processing
-					// if they're part of the project
-					strEntry.addNearString(cand, ratio, candAttr, null);
-//					registerNear(strEntry, cand, ratio, 
-//							strAttr, candAttr);
-				}
-				else
-				{
-					cand.addNearString(strEntry, ratio, strAttr, m_nearProj);
-				}
-			}
-		}
+		FuzzyMatcher matcher = new FuzzyMatcher(status, nearTrash, m_transFrame, project, this);
+		matcher.match(seList);
 	}
 		
-	protected void loadTM() throws IOException, FileNotFoundException, 
-					InterruptedIOException
+	private void loadTM() throws IOException
 	{
 		// build strEntryList for each file
 		// send to buildNearList
 		String [] fileList;
-		String lang;
 		File f;
 		int i;
 		String fname;
 		ArrayList strEntryList = new ArrayList(m_strEntryList.size());
-		DataInputStream dis;
 
 		// foreach lang
 		// foreach file
@@ -1287,10 +1011,6 @@ public class CommandThread extends Thread
 		//buildNearList(m_strEntryList, status + " (" + fname + ")");
 
 		String ext;
-		String src;
-		String trans;
-		StringEntry se;
-		String base = m_config.getProjectRoot() + File.separator;
 		strEntryList.clear();
 		f = new File(m_config.getTMRoot());
 		fileList = f.list();
@@ -1300,7 +1020,7 @@ public class CommandThread extends Thread
 			fname = fileList[i];
 			ext = fname.substring(fname.lastIndexOf('.'));
 			fname = m_config.getTMRoot();
-			if (fname.endsWith(File.separator) == false)
+			if (!fname.endsWith(File.separator))
 				fname += File.separator;
 			fname += fileList[i];
 			m_nearProj = fileList[i];
@@ -1313,10 +1033,9 @@ public class CommandThread extends Thread
 		m_nearProj = null;
 	}
 
-	protected void loadTMXFile(String fname, String encoding, boolean isProject)
-		throws IOException, FileNotFoundException, InterruptedIOException
+	private void loadTMXFile(String fname, String encoding, boolean isProject)
+		throws IOException
 	{
-		String status = OStrings.CT_TM_X_OF_Y;
 		TMXReader tmx = new TMXReader(encoding);
 		String src;
 		String trans;
@@ -1369,10 +1088,11 @@ public class CommandThread extends Thread
 					strEntryList.add(se);
 				}
 			}
+			/*
 			if (strEntryList.size() > 0)
 			{
 				buildNearList(strEntryList, status + " (" + fname + ")");		// NOI18N
-			}
+			} //mihmax */
 		}
 		catch (ParseException e)
 		{
@@ -1381,7 +1101,7 @@ public class CommandThread extends Thread
 		}
 	}
 
-    protected void displayError(String msg, Throwable e)
+    void displayError(String msg, Throwable e)
 	{
 		if (m_transFrame == null)
 		{
@@ -1391,14 +1111,14 @@ public class CommandThread extends Thread
 			MessageRelay.uiMessageDisplayError(m_transFrame, msg, e);
 	}
 
-	protected void buildWordCounts()
+	private void buildWordCounts()
 	{
 		ListIterator it;
 		StringEntry se;
 		LinkedList pl;
 		m_totalWords = 0;
 		m_partialWords = 0;
-		int words = 0;
+		int words;
 		it = m_strEntryList.listIterator();
 		while(it.hasNext())
 		{
@@ -1406,7 +1126,7 @@ public class CommandThread extends Thread
 			pl = se.getParentList();
 			words = se.getWordCount();
 			m_partialWords += words;
-			m_totalWords += (words * pl.size());
+			m_totalWords += words * pl.size();
 		}
 
 		// now dump file based word counts to disk
@@ -1423,9 +1143,7 @@ public class CommandThread extends Thread
 			SourceTextEntry ste;
 			String curFile = ""; // NOI18N
 			String file;
-			words = 0;
 			int totWords = 0;
-			ListIterator it2;
 			while(it.hasNext())
 			{
 				ste = (SourceTextEntry) it.next();
@@ -1452,163 +1170,9 @@ public class CommandThread extends Thread
 		catch (IOException e)
 		{
 			try { if (ofp != null) ofp.close();	}
-			catch (IOException e2) { ; }
+			catch (IOException e2) {
+            }
 		}
-	}
-
-	protected void buildFreqTable(FreqList freqList, StringEntry strEntry,
-			StringFreqData wordFreq, ArrayList wordList,
-			StringFreqData pairFreq, ArrayList pairList)
-	{
-		String		tok = null;
-		String		curWord = null;
-		String		lastWord = null;
-		String		wordPair = null;
-		Adler32		ad = new Adler32();
-		StringData	curSD = null;
-		StringData	lastSD = null;
-		StringData	pairSD = null;
-		TreeMap		foundList = null;
-		StringEntry	se = null;
-		Object		obj = null;
-		//org.omegat.Token		token = null;
-
-		// consider the last token to be a space so to differentiate
-		//	words coming at the start and end of a sequence in pair matches
-		String lastTok = " "; // NOI18N
-		long dig;
-
-		ArrayList tokenList = new ArrayList();
-		StaticUtils.tokenizeText(strEntry.getSrcText(), tokenList);
-		for (int i=0; i<tokenList.size(); i++)
-		{
-			//token = (org.omegat.Token) tokenList.get(i);
-			//if (token.hasText == false)
-			//	continue;
-			//tok = token.text;
-			tok = ((Token) tokenList.get(i)).text;
-			ad.reset();
-
-			// build word and word pair lists
-			lastWord = curWord;
-			curWord = tok.toLowerCase();
-			wordPair = lastWord + curWord;
-
-			// make a record of each word
-			ad.update(curWord.getBytes());
-			curSD = new StringData(ad.getValue(), tok);
-			wordList.add(curSD);
-			// keep a count as well
-			if (freqList == null)
-				wordFreq.sub(curSD.getDigest(), tok);
-			else
-				wordFreq.add(curSD.getDigest(), tok);
-
-			// make a record of each word pair
-			// make this compare case sensitive
-			dig = curSD.getDigest();
-			if (lastSD != null)
-				dig += (lastSD.getDigest() << 32);
-			pairSD = new StringData(dig, lastTok + tok);
-			pairList.add(pairSD);
-			// ... and a count
-			if (freqList == null)
-				pairFreq.sub(pairSD.getDigest(), wordPair);
-			else
-				pairFreq.add(pairSD.getDigest(), wordPair);
-
-			// associate each word w/ both pairs it's in
-			curSD.setLow(pairSD.getDigest());
-			if (lastSD != null)
-				lastSD.setHigh(pairSD.getDigest());
-
-			if (freqList != null)
-			{
-				// find all strings remotely similar to current 
-				//    strEntry
-				// for each word, find all strings where it 
-				//    occurs and keep track of how many times 
-				//    each of these strings is accessed
-				foundList = find(curWord);
-				if (foundList != null)
-				{
-					while(foundList.size() > 0)
-					{
-						obj = foundList.firstKey();
-						se = (StringEntry) 
-							foundList.remove(obj);
-						if (se != strEntry)
-							freqList.add(se);
-					}
-				}
-			}
-			lastTok = tok;
-			lastSD = curSD;
-		}
-		if (curWord == null)
-			return;
-		// add last word pair to list
-		ad.reset();
-//		// append a space to the last word to differentiate it from
-//		//	a word coming at the beginning of the segment
-//		curWord += " ";
-		ad.update(curWord.getBytes());
-		pairSD = new StringData(ad.getValue(), tok);
-		curSD.setHigh(pairSD.getDigest());
-		pairList.add(pairSD);
-		if (freqList == null)
-			pairFreq.sub(curSD.getDigest(), tok);
-		else
-			pairFreq.add(curSD.getDigest(), tok);
-	}
-
-	// analyzes "nearness" of two strings
-	// nearness value is based upon whether string is unique versus 
-	//	compared-to string and whether or not it has the same neighbors
-	// returned array contains nearness value for each token
-	// the UNIQ flag is set if a word occurs in the current segment and 
-	//	not in the compared-to segment
-	// PAIR is set if a token doesn't have words with the same neighbors
-	//	in the compared-to segment
-	protected byte[] buildAttrList(ArrayList tokList, 
-					StringFreqData wordFreq,
-					StringFreqData pairFreq)
-	{
-		byte[] attr = new byte[tokList.size()];
-		// information on token and its neighbors
-		StringData tokData;
-		StringData freqData;
-		StringData low;
-		StringData high;
-		// first look for token uniqueness
-		for (int i=0; i<tokList.size(); i++)
-		{
-			attr[i] = 0;
-			tokData = (StringData) tokList.get(i);
-			freqData = wordFreq.getObj(tokData.getDigest());
-			if (freqData.isUnique())
-			{
-				attr[i] |= StringData.UNIQ;
-			}
-		}
-
-		// now check for pair uniqueness
-		// a word fails this check if either of it's neighbors are different
-		// this can be detected if a word concatted w/ either neighbor
-		//	is not in the pair list
-		for (int i=0; i<tokList.size()-1; i++)
-		{
-			tokData = (StringData) tokList.get(i);
-
-			// see if the neighbors are the same
-			low = pairFreq.getObj(tokData.getLow());
-			high = pairFreq.getObj(tokData.getHigh());
-			if (low.isUnique() || high.isUnique())
-			{
-				attr[i] |= StringData.PAIR;
-			}
-		}
-		return attr;
 	}
 
 //	protected void registerNear(org.omegat.StringEntry strEntry,
@@ -1721,50 +1285,48 @@ public class CommandThread extends Thread
 
     /////////////////////////////////////////////////////////
 
-	private SaveThread	m_saveThread = null;
+	private SaveThread	m_saveThread;
 	// count=0		save disabled
 	// count=1		one more save only
 	// count=2		regular mode
 	private int m_saveCount;
 	
-	public static CommandThread core = null;
+	public static CommandThread core;
 	private ProjectProperties m_config;
-    private boolean		m_modifiedFlag = false;
+    private boolean		m_modifiedFlag;
 
-	protected PreferenceManager	m_prefManager = null;
+	private PreferenceManager	m_prefManager;
 
 	// thread control flags
-	private boolean		m_stop = false;
-	private boolean		m_indexReady = true;
+	private boolean		m_stop;
 	private LinkedList	m_requestQueue;
 
-	private int		m_totalWords = 0;
-	private int		m_partialWords = 0;
+	private int		m_totalWords;
+	private int		m_partialWords;
 	private int		m_currentWords;
 
 	// project name of strings loaded from TM - store globally so to not
 	// pass seperately on each function call
 
 	// near proj is the project a near (fuzzy matched) string is from
-	private String		m_nearProj = null;
+	private String		m_nearProj;
 
 	// keep track of file specific data to feed to org.omegat.SourceTextEntry objects
 	//	so they can have a bigger picture of what's where
-	protected ProjectFileData	m_curFile = null;
+    private ProjectFileData	m_curFile;
 
-	private TransFrame	m_transFrame = null;
-	private ProjectFrame	m_projWin = null;
+	private TransFrame	m_transFrame;
+	private ProjectFrame	m_projWin;
 
     private HashMap		m_strEntryHash;	// maps text to strEntry obj
 	private ArrayList	m_strEntryList;
 	private ArrayList	m_srcTextEntryArray;
 	private HashMap		m_glosEntryHash;
 	private ArrayList	m_glosEntryList;
-	private HashMap		m_indexHash;
 
-	protected ArrayList	m_tmList;
-	protected ArrayList	m_orphanedList;
+	private ArrayList	m_tmList;
+	private ArrayList	m_orphanedList;
 
-	private ArrayList	m_extensionList;;
-	private ArrayList	m_extensionMapList;;
+	private ArrayList	m_extensionList;
+    private ArrayList	m_extensionMapList;
 }

@@ -32,9 +32,9 @@ import java.io.File;
  *
  * @author Keith Godfrey
  */
-public class ProjectFileView extends FileView
+class ProjectFileView extends FileView
 {
-	ImageIcon omegatIcon = new ImageIcon("images" + File.separator + "OmegaT.gif");	// NOI18N
+	private ImageIcon omegatIcon = new ImageIcon("images" + File.separator + "OmegaT.gif");	// NOI18N
 	
 	public String getName(File f)				{ return null;		}
 	public String getDescription(File f)		{ return null;		}

@@ -19,9 +19,10 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.core;
+package org.omegat.core.matching;
 
 import org.omegat.util.ProjectFileData;
+import org.omegat.core.*;
 
 /* 
  * Source text entry represents an individual segment for
@@ -67,6 +68,6 @@ public class SourceTextEntry
     public int entryNum()			{ return m_entryNum;	}
 
 	private	ProjectFileData m_srcFile;
-	private StringEntry m_strEntry = null;
+	private StringEntry m_strEntry;
 	private int m_entryNum;
 }

@@ -41,7 +41,7 @@ public class TMXReader
 	public TMXReader(String encoding)
 	{
 		m_reader = new XMLStreamReader();
-		m_reader.killEmptyBlocks(true);
+		m_reader.killEmptyBlocks();
 		m_encoding = encoding;
 		m_srcList = new ArrayList(512);
 		m_tarList = new ArrayList(512);
@@ -86,7 +86,7 @@ public class TMXReader
 
 		// check version
 		String ver = blk.getAttribute("version");								// NOI18N
-		if ((ver != null) && (ver.equals("1.1") == false))						// NOI18N
+		if (ver != null && !ver.equals("1.1"))						// NOI18N
 		{
 			throw new ParseException( MessageFormat.format(OStrings.getString("TMXR_ERROR_UNSUPPORTED_TMX_VERSION"), new Object[]{ver}), 0);
 		}
@@ -99,12 +99,12 @@ public class TMXReader
 		String src = blk.getAttribute("srclang");								// NOI18N
 
 		// advance to body
-		if ((blk=m_reader.advanceToTag("body")) == null)						// NOI18N
+		if (m_reader.advanceToTag("body") == null)						// NOI18N
 			throw new ParseException( MessageFormat.format(OStrings.getString("TMXR_ERROR_INVALID_TMX"), new Object[]{filename}), 0);
 
 		int seg = 0;
-		int ctr = 0;
-		int srcPos = -1;
+		int ctr;
+		int srcPos;
 		String tarSeg;
 		String srcSeg;
 		String lang;
@@ -127,19 +127,19 @@ public class TMXReader
 				ctr = 0;
 
 				// tuv 1
-				while (blk.getTagName().equals("tuv") == false)					// NOI18N
+				while (!blk.getTagName().equals("tuv"))					// NOI18N
 					blk = (XMLBlock) lst.get(ctr++);
 				lang = blk.getAttribute("lang");								// NOI18N
 				if (src.regionMatches(0, lang, 0, 2))
 					srcPos = 0;
 
 				// advance to segment marker
-				while (blk.getTagName().equals("seg") == false)					// NOI18N
+				while (!blk.getTagName().equals("seg"))					// NOI18N
 					blk = (XMLBlock) lst.get(ctr++);
 				
 				// next non-tag block is text
 				blk = (XMLBlock) lst.get(ctr++);
-				while (blk.isTag() == true)
+				while (blk.isTag())
 					blk = (XMLBlock) lst.get(ctr++);
 				if (srcPos == 0)
 					srcSeg = blk.getText();
@@ -147,12 +147,12 @@ public class TMXReader
 					tarSeg = blk.getText();
 
 				// close tuv tag
-				while (blk.getTagName().equals("tuv") == false)					// NOI18N
+				while (!blk.getTagName().equals("tuv"))					// NOI18N
 					blk = (XMLBlock) lst.get(ctr++);
 
 				// open next tuv tag
 				blk = (XMLBlock) lst.get(ctr++);
-				while (blk.getTagName().equals("tuv") == false)					// NOI18N
+				while (!blk.getTagName().equals("tuv"))					// NOI18N
 					blk = (XMLBlock) lst.get(ctr++);
 				
 				lang = blk.getAttribute("lang");								// NOI18N
@@ -171,12 +171,12 @@ public class TMXReader
 				}
 
 				// advance to segment marker
-				while (blk.getTagName().equals("seg") == false)					// NOI18N
+				while (!blk.getTagName().equals("seg"))					// NOI18N
 					blk = (XMLBlock) lst.get(ctr++);
 				
 				// next non-tag block is text
 				blk = (XMLBlock) lst.get(ctr++);
-				while (blk.isTag() == true)
+				while (blk.isTag())
 					blk = (XMLBlock) lst.get(ctr++);
 				if (srcPos == 1)
 					srcSeg = blk.getText();
@@ -196,10 +196,10 @@ public class TMXReader
 		}
 	}
 
-    protected XMLStreamReader		m_reader;
-	protected String		m_encoding;
-	protected ArrayList		m_srcList;
-	protected ArrayList		m_tarList;
+    private XMLStreamReader		m_reader;
+	private String		m_encoding;
+	private ArrayList		m_srcList;
+	private ArrayList		m_tarList;
 }
 
 

@@ -51,13 +51,13 @@ public class LTabFileReader
 		while ((s = in.readLine()) != null)
 		{
 			// skip lines that start with '#'
-			if (s.startsWith("#") == true) // NOI18N
+			if (s.startsWith("#")) // NOI18N
 				continue;
 			z = ""; // NOI18N
 			for (i=0; i<s.length(); i++)
 			{
 				c = s.charAt(i);
-				if ((c == 9) || (c == 10) || (c == 13))
+				if (c == 9 || c == 10 || c == 13)
 				{
 					// close token
 					tokenList.add(z);

@@ -30,7 +30,7 @@ import java.util.LinkedList;
  *
  * @author Keith Godfrey
  */
-public class HTMLTag
+class HTMLTag
 {
 	public HTMLTag()
 	{
@@ -49,7 +49,7 @@ public class HTMLTag
 	{
 		// assume structural until proven otherwise
 		m_type = 1;
-		char c = m_name.getChar(0);
+		char c = m_name.getZeroChar();
 		switch (c)
 		{
 			case 'a':	 // NOI18N
@@ -165,14 +165,14 @@ public class HTMLTag
 	}
 
 	// case insensitive compare
-	public boolean isEqual(String name)
+	public boolean isPreTag()
 	{
-		return m_name.isEqualIgnoreCase(name);
+		return m_name.isEqualIgnoreCase("pre");
 	}
 
 	public String name()	
 	{ 
-		if (m_close == true)
+		if (m_close)
 			return "/" + m_name.string();		 // NOI18N
 		else
 			return m_name.string();	
@@ -180,38 +180,35 @@ public class HTMLTag
 
 	public boolean willPartner(HTMLTag tag)
 	{
-		if ((m_partner == true) || (tag.hasPartner() == true))
+		if (m_partner || tag.hasPartner())
 			return false;
 		if (tag.close() == m_close)
 			return false;
-		if (m_name.isEqual(tag.m_name) == false)
+		if (!m_name.isEqual(tag.m_name))
 			return false;
 		return true;
 	}
-
-	// TODO - ident tags w/ imbedded translatable text
-	public boolean hasTrans()	{ return false;		}
 
 	public int type()		{ return m_type;	}
 	public char shortcut()		{ return m_shortcut;	}
 	public int num()		{ return m_num;		}
 	public void setNum(int x)	{ m_num = x;		}
 	public LBuffer verbatum()	{ return m_verbatum;	}
-	public void setClose(boolean x)	{ m_close = x;		}
+	public void setClose()	{ m_close = true;		}
 	public boolean close()		{ return m_close;	}
 
-	public boolean hasPartner()	{ return m_partner;	}
-	public void setPartner(boolean x)	{ m_partner = x;	}
+	private boolean hasPartner()	{ return m_partner;	}
+	public void setPartner()	{ m_partner = true;	}
 
-	public static final int		TAG_NO_IDENT	= 2;
+	private static final int		TAG_NO_IDENT	= 2;
     public static final int		TAG_FORMAT	= 2;
 	
-	private boolean		m_close = false;
-	private boolean		m_partner = false;
-	private char		m_shortcut = 0;
-	private int		m_num = 0;
+	private boolean		m_close;
+	private boolean		m_partner;
+	private char		m_shortcut;
+	private int		m_num;
 	private int		m_type = TAG_NO_IDENT;
-	protected LBuffer	m_name;
+	private LBuffer	m_name;
 	private LBuffer		m_verbatum;
 	private LinkedList	m_attrList;
 }

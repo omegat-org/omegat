@@ -28,7 +28,7 @@ import org.omegat.filters.LBuffer;
  *
  * @author Keith Godfrey
  */
-public class FormatData
+class FormatData
 {
 	public FormatData()
 	{
@@ -69,7 +69,7 @@ public class FormatData
 
     public void appendOrig(char c)
 	{
-		if ((m_isTag) && (m_orig.size() == 0))
+		if (m_isTag && m_orig.size() == 0)
 		{
 			m_orig.append('<');
 			if (m_isCloseTag)
@@ -80,7 +80,7 @@ public class FormatData
 
     public void appendDisplay(char c)
 	{
-		if ((m_isTag) && (m_display.size() == 0))
+		if (m_isTag && m_display.size() == 0)
 		{
 			m_display.append('<');
 			if (m_isCloseTag)
@@ -114,7 +114,7 @@ public class FormatData
 	public boolean isTag()		{ return m_isTag;	}
 	public boolean isCloseTag()	{ return m_isCloseTag;	}
 
-	public void setHasText(boolean b)	{ m_hasText = b;	}
+	public void setHasText()	{ m_hasText = true;	}
 
 	public boolean isWhiteSpace()
 	{

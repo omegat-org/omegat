@@ -21,15 +21,13 @@
 
 package org.omegat.filters.xml.xhtml;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.omegat.util.OConsts;
 import org.omegat.filters.xml.XMLFileHandler;
 import org.omegat.util.EncodingAwareReader;
+import org.omegat.util.UTF8Writer;
 
 /**
  * Filter for handling XHTML files
@@ -44,8 +42,8 @@ public class XHTMLFileHandler extends XMLFileHandler
 		super("XML based HTML", OConsts.FH_XML_BASED_HTML);	 // NOI18N
 		setStreamFilter(new XHTMLStreamFilter());
 		// TODO manually compress white space to help preserve file format
-		compressWhitespace(true);
-		breakWhitespace(true);
+		compressWhitespace();
+		breakWhitespace();
 		
 		defineFormatTag("a", "a");	 // NOI18N
 		defineFormatTag("abbr", "abbr");	 // NOI18N
@@ -75,6 +73,12 @@ public class XHTMLFileHandler extends XMLFileHandler
 	{
 		return new EncodingAwareReader(filename, EncodingAwareReader.ST_XML);
 	}
+
+    protected Writer createOutputStream(String outfile) throws IOException
+    {
+        return new UTF8Writer(outfile, UTF8Writer.ST_XML);
+    }
+
 
 }
 

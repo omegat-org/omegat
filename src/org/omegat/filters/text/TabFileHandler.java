@@ -49,9 +49,8 @@ public class TabFileHandler extends FileHandler
 	public void load(String file) throws IOException
 	{
 		String id;
-		int i;
 		StringTokenizer t;
-		String srcText = "";	 // NOI18N
+		String srcText;	 // NOI18N
 		String s;
 		String nonTrans = "";	 // NOI18N
 		BufferedReader in = new BufferedReader(new FileReader(file));
@@ -79,7 +78,7 @@ public class TabFileHandler extends FileHandler
 				nonTrans += "\t" + t.nextToken();	 // NOI18N
 			}
 		}
-		if ((m_outFile != null) && (nonTrans.compareTo("") != 0))	 // NOI18N
+		if (m_outFile != null && nonTrans.compareTo("") != 0)	 // NOI18N
 		{
 			m_outFile.write(nonTrans);
 		}

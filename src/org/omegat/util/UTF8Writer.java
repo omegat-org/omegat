@@ -134,9 +134,9 @@ public class UTF8Writer extends Writer
 		
 		FileOutputStream fos = new FileOutputStream(fileName);
 		OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8"); // NOI18N
-		BufferedWriter writer = new BufferedWriter(osw);
-		writer.write(contents);
-		writer.close();
+		BufferedWriter ewriter = new BufferedWriter(osw);
+		ewriter.write(contents);
+		ewriter.close();
 	}
 
 	/**

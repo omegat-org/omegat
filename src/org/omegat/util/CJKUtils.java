@@ -19,50 +19,41 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.gui.threads;
+package org.omegat.util;
+
+import java.util.HashSet;
+import java.util.Set;
+
 
 /**
- * An independent stream to save project,
- * created in order not to freese UI while project is saved (may take a lot)
+ * Class to test if smth is Chinese/Japanese/Korean.
+ * CJK language family is different because it has no spaces between words.
  *
- * @author Keith Godfrey
+ * @author  Maxym Mykhalchuk
  */
-public class SaveThread extends Thread
-{
-	public SaveThread()
+class CJKUtils {
+	
+	/** the list of unicode block where Japanese symbols fall to */
+    private final static Set cjkBlocks = new HashSet();
+    static 
 	{
-		setName("Save thread");	// NOI18N
-		m_timeToDie = false;
-		m_saveDuration = 60000;	// 1 minute
-	}
+        cjkBlocks.add(Character.UnicodeBlock.KATAKANA);
+        cjkBlocks.add(Character.UnicodeBlock.HIRAGANA);
+        cjkBlocks.add(Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS);
+        cjkBlocks.add(Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A);
+		// need more:
+		// Chinese Traditional
+		// Chinese Simplified
+		// Korean
+    }
 
-	public void run()
+	/**
+	 * @param ch character to test
+	 * @return if the character is CJK
+	 */
+	public static boolean isCJK(char ch) 
 	{
-		try
-		{
-			sleep(m_saveDuration);
-		}
-		catch (InterruptedException e2)
-		{
-			;	// let it pass
-		}
-		
-		while (m_timeToDie == false)
-		{
-			CommandThread.core.save();
-			try 
-			{
-				sleep(m_saveDuration);
-			}
-			catch (InterruptedException e)
-			{
-				;	// this is OK
-			}
-		}
+		Character.UnicodeBlock block = Character.UnicodeBlock.of(ch);
+		return cjkBlocks.contains(block);
 	}
-
-	public void signalStop()	{ m_timeToDie = true;	}
-
-    protected boolean	m_timeToDie;
-	protected int		m_saveDuration;
 }

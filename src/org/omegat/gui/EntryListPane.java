@@ -22,7 +22,7 @@
 package org.omegat.gui;
 
 import org.omegat.gui.messages.MessageRelay;
-import org.omegat.gui.threads.CommandThread;
+import org.omegat.core.threads.CommandThread;
 import org.omegat.util.OConsts;
 
 import javax.swing.*;
@@ -39,7 +39,7 @@ import java.util.ArrayList;
  *
  * @author Keith Godfrey
  */
-public class EntryListPane extends JTextPane
+class EntryListPane extends JTextPane
 {
 	public EntryListPane(TransFrame trans)
 	{
@@ -87,13 +87,13 @@ public class EntryListPane extends JTextPane
 		if (m_stringBuf.length() > 0)
 			m_stringBuf.append("---------\n");									// NOI18N
 
-		if ((preamble != null) && (preamble.equals("") == false))				// NOI18N
+		if (preamble != null && !preamble.equals(""))				// NOI18N
 			m_stringBuf.append(preamble + "\n");								// NOI18N
-		if ((src != null) && (src.equals("") == false))							// NOI18N
+		if (src != null && !src.equals(""))							// NOI18N
 		{
 			m_stringBuf.append("-- "+src + "\n");								// NOI18N
 		}
-		if ((loc != null) && (loc.equals("") == false))							// NOI18N
+		if (loc != null && !loc.equals(""))							// NOI18N
 		{
 			m_stringBuf.append("-- "+loc + "\n");								// NOI18N
 		}
@@ -106,9 +106,9 @@ public class EntryListPane extends JTextPane
 	{
 		String srcFont = CommandThread.core.getPreference(
 				OConsts.TF_SRC_FONT_NAME);
-		if (srcFont.equals("") == false)										// NOI18N
+		if (!srcFont.equals(""))										// NOI18N
 		{
-			int fontsize = 12;
+			int fontsize;
 			try 
 			{
 				fontsize = Integer.valueOf(CommandThread.core.getPreference(
@@ -128,8 +128,8 @@ public class EntryListPane extends JTextPane
 		setText("");															// NOI18N
 	}
 
-	protected StringBuffer	m_stringBuf;
-	protected ArrayList		m_entryList;
-	protected ArrayList		m_offsetList;
-	protected TransFrame	m_transFrame;
-};
+	private StringBuffer	m_stringBuf;
+	private ArrayList		m_entryList;
+	private ArrayList		m_offsetList;
+	private TransFrame	m_transFrame;
+}

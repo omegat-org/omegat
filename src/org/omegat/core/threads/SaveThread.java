@@ -19,38 +19,48 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.core;
+package org.omegat.core.threads;
 
 /**
- * Class to hold a single fuzzy match.
+ * An independent stream to save project,
+ * created in order not to freese UI while project is saved (may take a lot)
  *
  * @author Keith Godfrey
  */
-public class NearString implements Comparable
+class SaveThread extends Thread
 {
-	public NearString(StringEntry strEntry, 
-				double nearScore, 
-				byte[] nearData,
-				String projName)
+	public SaveThread()
 	{
-		int i;
-		str = strEntry;
-		score = nearScore;
-		attr = nearData;
-		if (projName != null)
-			proj = projName;
+		setName("Save thread");	// NOI18N
+		m_timeToDie = false;
+		m_saveDuration = 60000;	// 1 minute
 	}
 
-	public int compareTo(Object obj)
+	public void run()
 	{
-		NearString visitor = (NearString) obj;
-		Double homeScore = new Double(score);
-		Double visitorScore = new Double(visitor.score);
-		return homeScore.compareTo(visitorScore);
+		try
+		{
+			sleep(m_saveDuration);
+		}
+		catch (InterruptedException e2)
+		{
+        }
+		
+		while (!m_timeToDie)
+		{
+			CommandThread.core.save();
+			try 
+			{
+				sleep(m_saveDuration);
+			}
+			catch (InterruptedException e)
+			{
+            }
+		}
 	}
 
-	public StringEntry str;
-	public double score;
-	public byte[] attr;	// matching attributes of near strEntry
-	public String proj = ""; // NOI18N
+	public void signalStop()	{ m_timeToDie = true;	}
+
+    private boolean	m_timeToDie;
+	private int		m_saveDuration;
 }

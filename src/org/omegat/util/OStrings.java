@@ -86,7 +86,7 @@ public class OStrings
 	public static final String TF_MENU_TOOLS		= getString("TF_MENU_TOOLS");
 	public static final String TF_MENU_TOOLS_PSEUDO	= getString("TF_MENU_TOOLS_PSEUDO");
 	public static final String TF_MENU_TOOLS_VALIDATE	= getString("TF_MENU_TOOLS_VALIDATE");
-	public static final String TF_MENU_TOOLS_MERGE_TMX	= getString("TF_MENU_TOOLS_MERGE_TMX");
+	// --Commented out by Inspection (31.10.04 1:50): public static final String TF_MENU_TOOLS_MERGE_TMX	= getString("TF_MENU_TOOLS_MERGE_TMX");
 
 	public static final String TF_MENU_VERSION_HELP		= getString("TF_MENU_VERSION_HELP");
 	
@@ -146,10 +146,10 @@ public class OStrings
 	
 	// CommandThread
 	public static final String CT_FUZZY_X_OF_Y = getString("CT_FUZZY_X_OF_Y");
-	public static final String CT_TM_X_OF_Y	= getString("CT_TM_X_OF_Y");
+	// --Commented out by Inspection (31.10.04 1:50): public static final String CT_TM_X_OF_Y	= getString("CT_TM_X_OF_Y");
 	
 	public static final String CT_LOADING_PROJECT	= getString("CT_LOADING_PROJECT");
-	public static final String CT_LOADING_INDEX	= getString("CT_LOADING_INDEX");
+	// --Commented out by Inspection (31.10.04 1:50): public static final String CT_LOADING_INDEX	= getString("CT_LOADING_INDEX");
 	public static final String CT_LOADING_GLOSSARY	= getString("CT_LOADING_GLOSSARY");
     public static final String CT_CANCEL_LOAD = getString("CT_CANCEL_LOAD");
 	public static final String CT_LOADING_WORDCOUNT	= getString("CT_LOADING_WORDCOUNT");
@@ -224,4 +224,4 @@ public class OStrings
 	public static final String ST_NOTHING_FOUND = getString("ST_NOTHING_FOUND");
 	
 	public static final String TF_INTRO_MESSAGE = getString("TF_INTRO_MESSAGE");
-};
+}

@@ -78,7 +78,7 @@ public class ProjectFrame extends JFrame
 		m_editorPane.setText("");												// NOI18N
 	}
 	
-	public void updateUIText()
+	private void updateUIText()
 	{
 		m_closeButton.setText(OStrings.PF_BUTTON_CLOSE);
 		setTitle(OStrings.PF_WINDOW_TITLE);
@@ -106,7 +106,7 @@ public class ProjectFrame extends JFrame
 		int i;
 		Integer inum;
 		int num = 0;
-		int next = 0;
+		int next;
 		String name;
 		if (m_nameList.size() <= 0)
 			return;
@@ -117,7 +117,7 @@ public class ProjectFrame extends JFrame
 		for (i=0; i<m_nameList.size(); i++)
 		{
 			name = (String) m_nameList.get(i);
-			if (i < (m_nameList.size() - 1))
+			if (i < m_nameList.size() - 1)
 			{
 				inum = (Integer) m_offsetList.get(i + 1);
 				next = inum.intValue();
@@ -138,10 +138,10 @@ public class ProjectFrame extends JFrame
 	private ArrayList	m_nameList;
 	private ArrayList	m_offsetList;
 
-	private int			m_maxEntries = 0;
-	private boolean		m_ready = false;
+	private int			m_maxEntries;
+	private boolean		m_ready;
 
-	private TransFrame m_parent = null;
+	private TransFrame m_parent;
 
 }
 

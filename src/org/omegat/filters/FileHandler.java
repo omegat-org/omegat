@@ -22,8 +22,8 @@
 package org.omegat.filters;
 
 import org.omegat.util.OStrings;
-import org.omegat.gui.threads.CommandThread;
-import org.omegat.gui.threads.SearchThread;
+import org.omegat.core.threads.CommandThread;
+import org.omegat.core.threads.SearchThread;
 
 import java.io.*;
 import org.omegat.core.StringEntry;
@@ -36,7 +36,7 @@ import org.omegat.core.StringEntry;
  */
 public abstract class FileHandler
 {
-	public FileHandler(String type, String extension)
+	protected FileHandler(String type, String extension)
 	{
 		m_type = new String(type);
 		m_preferredExtension = new String(extension);
@@ -47,7 +47,7 @@ public abstract class FileHandler
 		m_searchThread = null;
 	}
 
-	public String type()
+	protected String type()
 	{
 		return m_type;
 	}
@@ -59,19 +59,19 @@ public abstract class FileHandler
 
     // when mode is set, output is now written and strings are passed
 	//	to  supplied search thread
-	public void setSearchMode(boolean mode, SearchThread search)
+	public void setSearchMode(SearchThread search)
 	{
-		m_searchMode = mode;
+		m_searchMode = true;
 		m_searchThread = search;
 	}
 
-	public void fileWriteError(IOException e) throws IOException
+	protected void fileWriteError(IOException e) throws IOException
 	{
 		String str = OStrings.FH_ERROR_WRITING_FILE;
 		throw new IOException(str + " - " + e);	// NOI18N
 	}
 
-	public String formatString(String text) 
+	protected String formatString(String text)
 	{
 		// override in subclasses when formatting important
 		return text;
@@ -94,7 +94,7 @@ public abstract class FileHandler
 	{
 		srcText = srcText.replaceAll("\r", "");		// NOI18N
 
-		if ((m_testMode) && (!m_outputMode))
+		if (m_testMode && !m_outputMode)
 		{
 			System.out.println(" val: " + srcText);	// NOI18N
 			System.out.println("file: " + file);	// NOI18N
@@ -127,7 +127,7 @@ public abstract class FileHandler
 		}
 		else
 		{
-			CommandThread.core.addEntry(srcText, file);
+			CommandThread.core.addEntry(srcText);
 		}
 	}
 
@@ -144,8 +144,8 @@ public abstract class FileHandler
 				pd = of.getParentFile();
 				if (pd == null)
 					throw new IOException(OStrings.getString("FH_ERROR_INVALID_PROJECT_TREE"));
-				if ((pd.isDirectory() == false) &&
-						(pd.mkdirs() == false))
+				if (!pd.isDirectory() &&
+                        !pd.mkdirs())
 				{
 					throw new IOException(
 						OStrings.getString("FH_CANNOT_CREATE_TARGET_DIR_TREE")+ 
@@ -169,7 +169,7 @@ public abstract class FileHandler
 	/**
 	 * Method to create an input stream to read the source file
 	 */
-	public Reader createInputStream(String infile)
+    protected Reader createInputStream(String infile)
 			throws IOException
 	{
 		FileInputStream fis = new FileInputStream(infile);
@@ -181,7 +181,7 @@ public abstract class FileHandler
 	/**
 	 * Create output stream.
 	 */
-	public Writer createOutputStream(String outfile) throws IOException
+    protected Writer createOutputStream(String outfile) throws IOException
 	{
 		FileOutputStream fos = new FileOutputStream(outfile);
 		OutputStreamWriter osw = new OutputStreamWriter(fos);
@@ -193,7 +193,7 @@ public abstract class FileHandler
 	 * Override this in your own file handler (filter) 
 	 * to parse the text
 	 */
-	public abstract void doLoad() throws IOException;
+	protected abstract void doLoad() throws IOException;
 	
 	public void load(String file) throws IOException
 	{
@@ -203,18 +203,14 @@ public abstract class FileHandler
 		try 
 		{
 			m_in = new BufferedReader(createInputStream(file));
-	
-			if (m_in == null)
-			{
-				throw new IOException(OStrings.getString("FD_ERROR_CANT_OPEN_INPUT_FILE") + file + "'");	// NOI18N
-			}
 			doLoad();
 			m_in.close();
 		}
 		catch (IOException e)
 		{
 			try				{ if (m_in != null) m_in.close(); }
-			catch (IOException e2)		{ ; }
+			catch (IOException e2)		{
+            }
 			m_in = null;
 			throw e;
 		}
@@ -241,7 +237,7 @@ public abstract class FileHandler
 			if (i == 10)
 			{
 				// don't increment counter again on /r/m
-				if (m_cr == false)
+				if (!m_cr)
 					m_line++;
 				m_cr = false;
 			}
@@ -271,7 +267,7 @@ public abstract class FileHandler
 		m_in.reset();
 	}
 
-	public void reset()
+	protected void reset()
 	{
 		m_line = 0;
 		m_cr = false;
@@ -279,22 +275,22 @@ public abstract class FileHandler
 	}
 
 
-	public int	line()	{ return m_line;	}
+	protected int	line()	{ return m_line;	}
 	public String	getType()	{ return m_type;		}
 
 	private String m_type;
 	private String m_preferredExtension;
 	protected BufferedReader m_in;
-	protected boolean m_testMode;
-	protected boolean m_outputMode;
+	private boolean m_testMode;
+	private boolean m_outputMode;
 	protected BufferedWriter m_outFile;
 
-	protected boolean		m_searchMode;
-	protected SearchThread	m_searchThread;
+	private boolean		m_searchMode;
+	private SearchThread	m_searchThread;
 
-	private int		m_line = 0;
-	private boolean		m_cr = false;
-	private int		m_pushChar = 0;
+	private int		m_line;
+	private boolean		m_cr;
+	private int		m_pushChar;
 
 	protected String	m_file = "";	// NOI18N
 }

@@ -31,7 +31,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import org.omegat.gui.threads.CommandThread;
+import org.omegat.core.threads.CommandThread;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
@@ -62,7 +62,7 @@ public class FontSelectionDialog extends JDialog
 		JLabel fontLabel = new JLabel();
 		m_fontCB = new JComboBox(StaticUtils.getFontNames());
 		m_fontCB.setEditable(true);
-		if (m_font.equals("") == false)										// NOI18N
+		if (!m_font.equals(""))										// NOI18N
 			m_fontCB.setSelectedItem(m_font);
 		cont.add("font label", fontLabel);									// NOI18N
 		cont.add("font box", m_fontCB);										// NOI18N
@@ -73,7 +73,7 @@ public class FontSelectionDialog extends JDialog
 		JLabel fontSizeLabel = new JLabel();
 		m_fontSizeCB = new JComboBox(fontSizes);
 		m_fontSizeCB.setEditable(true);
-		if (m_fontSize.equals("") == false)									// NOI18N
+		if (!m_fontSize.equals(""))									// NOI18N
 			m_fontSizeCB.setSelectedItem(m_fontSize);
 		cont.add("size label", fontSizeLabel);								// NOI18N
 		cont.add("size box", m_fontSizeCB);									// NOI18N
@@ -126,7 +126,7 @@ public class FontSelectionDialog extends JDialog
 		String str;
 		CommandThread core = CommandThread.core;
 		str = m_fontCB.getSelectedItem().toString();
-		if (str.equals(m_font) == false)
+		if (!str.equals(m_font))
 		{
 			m_isChanged = true;
 			m_font = str;
@@ -134,7 +134,7 @@ public class FontSelectionDialog extends JDialog
 		}
 
 		str = m_fontSizeCB.getSelectedItem().toString();
-		if (str.equals(m_fontSize) == false)
+		if (!str.equals(m_fontSize))
 		{
 			m_isChanged = true;
 			m_fontSize = str;
@@ -146,9 +146,9 @@ public class FontSelectionDialog extends JDialog
 
 	private void		doCancel()		{ dispose();			}
 
-	protected JComboBox	m_fontCB;
-	protected JComboBox	m_fontSizeCB;
+	private JComboBox	m_fontCB;
+	private JComboBox	m_fontSizeCB;
 
-	protected boolean	m_isChanged = false;
+	private boolean	m_isChanged;
 }
 

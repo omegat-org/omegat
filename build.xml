@@ -78,7 +78,7 @@
     </target>
 
 
-    <target name="all" depends="src,zip,win" description="Build distributions."/>
+    <target name="all" depends="src,zip" description="Build distributions."/>
     
     <target name="run" depends="compile">
         <java classpath="classes" classname="org.omegat.Main" fork="true"/>

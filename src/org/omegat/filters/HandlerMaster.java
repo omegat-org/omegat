@@ -32,18 +32,28 @@ import java.util.ArrayList;
 
 /**
  * A master class that registers and handles all the filters.
+ * Singleton - there can be only one instance of this class.
  *
  * @author Keith Godfrey
+ * @author Maxym Mykhalchuk
  */
 public class HandlerMaster
 {
-	public HandlerMaster()
+	private static HandlerMaster instance = null;
+	public static HandlerMaster getInstance()
+	{
+		if( instance==null )
+			instance = new HandlerMaster();
+		return instance;				
+	}
+	
+	private HandlerMaster()
 	{
 		m_handlerList = new ArrayList();
 		setupDefaultHandlers();
 	}
 
-	public void addHandler(FileHandler hand)
+	private void addHandler(FileHandler hand)
 	{
 		m_handlerList.add(hand);
 	}
@@ -71,7 +81,7 @@ public class HandlerMaster
 		return fh;
 	}
 
-	protected void setupDefaultHandlers()
+	private void setupDefaultHandlers()
 	{
 		addHandler(new TabFileHandler());
 		addHandler(new TextFileHandler(TextFileHandler.TYPE_LATIN1, "txt1"));	// NOI18N
@@ -83,7 +93,7 @@ public class HandlerMaster
 		addHandler(new ResourceBundleFileHandler());
 	}
 
-    ArrayList	m_handlerList;
+    private ArrayList	m_handlerList;
 
 ////////////////////////////////////////////////////////////
 

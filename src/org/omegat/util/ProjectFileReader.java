@@ -42,11 +42,11 @@ public class ProjectFileReader
 	public ProjectFileReader()
 	{
 		m_reader = new XMLStreamReader();
-		m_reader.killEmptyBlocks(true);
+		m_reader.killEmptyBlocks();
 		reset();
 	}
 
-	public boolean loadProjectFile(String filename)
+	public void loadProjectFile(String filename)
 		throws IOException, ParseException
 	{
 		m_reader.setStream(filename, "UTF8");									// NOI18N
@@ -56,15 +56,15 @@ public class ProjectFileReader
 		ArrayList lst;
 
 		// advance to omegat tag
-		if ((blk = m_reader.advanceToTag("omegat")) == null)					// NOI18N
-			return false;
+		if (m_reader.advanceToTag("omegat") == null)					// NOI18N
+			return;
 		
 		// advance to project tag
 		if ((blk=m_reader.advanceToTag("project")) == null)						// NOI18N
-			return false;
+			return;
 
 		String ver = blk.getAttribute("version");								// NOI18N
-		if ((ver != null) && (ver.equals(OConsts.PROJ_CUR_VERSION) == false))
+		if (ver != null && !ver.equals(OConsts.PROJ_CUR_VERSION))
 		{
 			throw new ParseException(
 				MessageFormat.format(OStrings.getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"), new Object[]{ver}), 
@@ -77,7 +77,7 @@ public class ProjectFileReader
 
 		lst = m_reader.closeBlock(blk);
 		if (lst == null)
-			return false;
+			return;
 
 		for (int i=0; i<lst.size(); i++)
 		{
@@ -130,11 +130,9 @@ public class ProjectFileReader
 					m_locLang = blk.getText();
 			}
 		}
+    }
 
-		return true;
-	}
-
-	protected String translateBlock(XMLBlock blk, String def)
+	private String translateBlock(XMLBlock blk, String def)
 	{
 		if (blk == null)
 			return "";															// NOI18N
@@ -155,10 +153,10 @@ public class ProjectFileReader
 					filename.lastIndexOf(File.separator));
 		root += File.separator;
 
-		String source = "";														// NOI18N
-		String target = "";														// NOI18N
-		String tm = "";															// NOI18N
-		String glossary = "";													// NOI18N
+		String source;														// NOI18N
+		String target;														// NOI18N
+		String tm;															// NOI18N
+		String glossary;													// NOI18N
 		if (m_source.equals(root + OConsts.DEFAULT_SRC + File.separator))
 			source = OConsts.DEFAULT_FOLDER_MARKER;
 		else
@@ -195,7 +193,7 @@ public class ProjectFileReader
 		out.flush();
 	}
 	
-	public void reset()
+	private void reset()
 	{
 		m_target = "";															// NOI18N
 		m_source = "";															// NOI18N
@@ -221,15 +219,15 @@ public class ProjectFileReader
 	public String getSourceLang()	{ return m_srcLang;		}
 	public String getTargetLang()	{ return m_locLang;		}
 	
-	protected XMLStreamReader		m_reader;
-	protected String		m_target;
-	protected String		m_source;
-	protected String		m_tm;
-	protected String		m_glossary;
-	protected String		m_locLang;
-	protected String		m_srcLang;
+	private XMLStreamReader		m_reader;
+	private String		m_target;
+	private String		m_source;
+	private String		m_tm;
+	private String		m_glossary;
+	private String		m_locLang;
+	private String		m_srcLang;
 
-	protected String		m_root;	
+	private String		m_root;
 
 }
 

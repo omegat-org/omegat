@@ -42,7 +42,7 @@ import java.util.ArrayList;
  *
  * @author Keith Godfrey
  */
-public class MatchWindow extends JFrame
+class MatchWindow extends JFrame
 {
 	public MatchWindow()
 	{
@@ -87,7 +87,6 @@ public class MatchWindow extends JFrame
 
 		int start;
 		int end;
-		int len = text.length();
 		JTextPane pane = m_matchPane;
 
 		// reset color of text to default value
@@ -96,22 +95,16 @@ public class MatchWindow extends JFrame
 		int numTokens = tokenList.size();
 		for (int i=0; i<numTokens; i++)
 		{
-			if (i == (numTokens-1))
-				end = m_hiliteStart + len + 4;
-			else
-				end = m_hiliteStart + ((Token) tokenList.get(i+1)).offset + 4;
 			start = m_hiliteStart + ((Token) tokenList.get(i)).offset + 4;
+			end = m_hiliteStart + ((Token) tokenList.get(i)).offset + 4 + 
+										((Token) tokenList.get(i)).text.length();
 
 			pane.select(start, end);
 			SimpleAttributeSet mattr = new SimpleAttributeSet();
 			if ((attrList[i] & StringData.UNIQ) != 0)
-			{
 				StyleConstants.setForeground(mattr, Color.blue);
-			}
 			else if ((attrList[i] & StringData.PAIR) != 0)
-			{
 				StyleConstants.setForeground(mattr, Color.green);
-			}
 			pane.setCharacterAttributes(mattr, false);
 		}
 		pane.select(0, 0);
@@ -129,7 +122,7 @@ public class MatchWindow extends JFrame
 		if ( m_hiliteStart >= 0 && m_matchDisplay.length()>0 )
 		{
 			m_matchPane.select(m_hiliteStart, m_hiliteEnd);
-			MutableAttributeSet mattr = null;
+			MutableAttributeSet mattr;
 			mattr = new SimpleAttributeSet();
 			StyleConstants.setBold(mattr, true);
 			m_matchPane.setCharacterAttributes(mattr, false);
@@ -179,7 +172,7 @@ public class MatchWindow extends JFrame
 	public void hiliteRange(int start, int end)
 	{
 		int len = m_matchDisplay.length();
-		if ((start < 0) || (start > len))
+		if (start < 0 || start > len)
 		{
 			m_hiliteStart = -1;
 			m_hiliteEnd = -1;
@@ -205,7 +198,7 @@ public class MatchWindow extends JFrame
 		PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_Y, "" + y);		// NOI18N
 	}
 	
-	protected void initScreenLayout()
+	private void initScreenLayout()
 	{
 		// KBG - assume screen size is 800x600 if width less than 900, and
 		//		1024x768 if larger.  assume task bar at bottom of screen.
@@ -221,9 +214,9 @@ public class MatchWindow extends JFrame
 		int w=0;
 		int h=0;
 		boolean badSize = false;
-		if ((dw == null) || (dw.equals(""))	|| (dh == null)			||			// NOI18N
-				(dh.equals(""))	|| (dx == null) || (dx.equals(""))	||			// NOI18N
-				(dy == null) || (dy.equals("")))								// NOI18N
+		if (dw == null || dw.equals("")	|| dh == null			||			// NOI18N
+                dh.equals("")	|| dx == null || dx.equals("")	||			// NOI18N
+                dy == null || dy.equals(""))								// NOI18N
 		{
 			badSize = true;
 		}
@@ -247,7 +240,6 @@ public class MatchWindow extends JFrame
 			GraphicsEnvironment env = 
 					GraphicsEnvironment.getLocalGraphicsEnvironment();
 			Rectangle scrSize = env.getMaximumWindowBounds();
-			Point center = env.getCenterPoint();
 			if (scrSize.width < 900)
 			{
 				// assume 800x600
@@ -268,12 +260,12 @@ public class MatchWindow extends JFrame
 		}
 	}
 
-	protected String		m_matchDisplay = "";								// NOI18N
-	protected String		m_glosDisplay = "";									// NOI18N
-	protected JTextPane		m_matchPane;
-	protected JTextPane		m_glosPane;
-	protected int			m_matchCount = 0;
-	protected int			m_hiliteStart = -1;
-	protected int			m_hiliteEnd = -1;
+	private String		m_matchDisplay = "";								// NOI18N
+	private String		m_glosDisplay = "";									// NOI18N
+	private JTextPane		m_matchPane;
+	private JTextPane		m_glosPane;
+	private int			m_matchCount;
+	private int			m_hiliteStart = -1;
+	private int			m_hiliteEnd = -1;
 
 }

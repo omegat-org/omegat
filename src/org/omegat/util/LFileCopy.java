@@ -38,7 +38,7 @@ public class LFileCopy
 	{
 		File ifp = new File(src);
 		File ofp = new File(dest);
-		if (ifp.exists() == false)
+		if (!ifp.exists())
 		{
 			throw new IOException(
 				MessageFormat.format(OStrings.getString("LFC_ERROR_FILE_DOESNT_EXIST"), new Object[] {src}));

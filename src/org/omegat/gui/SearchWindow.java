@@ -21,8 +21,8 @@
 
 package org.omegat.gui;
 
-import org.omegat.gui.threads.CommandThread;
-import org.omegat.gui.threads.SearchThread;
+import org.omegat.core.threads.CommandThread;
+import org.omegat.core.threads.SearchThread;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 
@@ -70,20 +70,20 @@ public class SearchWindow extends JFrame
 		m_tmSearchCB.setSelected(true);
 		m_tmSearch = true;
 
-		m_wordSearchRB = new JRadioButton();
-		m_wordSearchRB.setMnemonic(KeyEvent.VK_K);
-		m_wordSearchRB.setSelected(false);
+		//mihmax m_wordSearchRB = new JRadioButton();
+		//mihmax m_wordSearchRB.setMnemonic(KeyEvent.VK_K);
+		//mihmax m_wordSearchRB.setSelected(false);
 
 		ButtonGroup bg = new ButtonGroup();
 		bg.add(m_exactSearchRB);
-		bg.add(m_wordSearchRB);
+		//mihmax bg.add(m_wordSearchRB);
 
 		Box bRB = Box.createHorizontalBox();
 		bRB.add(m_exactSearchRB);
 		bRB.add(Box.createHorizontalStrut(10));
 		bRB.add(m_tmSearchCB);
 		bRB.add(Box.createHorizontalStrut(10));
-		bRB.add(m_wordSearchRB);
+		//mihmax bRB.add(m_wordSearchRB);
 
 		m_viewer = new EntryListPane(par);
 		JScrollPane viewerScroller = new JScrollPane(m_viewer);
@@ -195,20 +195,20 @@ public class SearchWindow extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				if (m_exactSearchRB.isSelected() == true)
+				if (m_exactSearchRB.isSelected())
 				{
 					m_tmSearchCB.setEnabled(true);
-					if (m_dirCB.isSelected() == false)
+					if (!m_dirCB.isSelected())
 						m_tmSearchCB.setSelected(m_tmSearch);
 				}
 			}
 		});
 
-		m_wordSearchRB.addActionListener(new ActionListener()
+		/*mihmax m_wordSearchRB.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				if (m_wordSearchRB.isSelected() == true)
+				if (m_wordSearchRB.isSelected())
 				{
 					m_tmSearchCB.setEnabled(false);
 					m_tmSearch = m_tmSearchCB.isSelected();
@@ -216,6 +216,7 @@ public class SearchWindow extends JFrame
 				}
 			}
 		});
+		 */
 
 		m_tmSearchCB.addActionListener(new ActionListener()
 		{
@@ -229,16 +230,16 @@ public class SearchWindow extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				if (m_dirCB.isSelected() == true)
+				if (m_dirCB.isSelected())
 				{
 					m_recursiveCB.setEnabled(true);
 					m_dirField.setEditable(true);
 					m_dirField.requestFocus();
 					m_tmSearchCB.setEnabled(false);
 					m_tmSearchCB.setSelected(false);
-					m_wordSearch = m_wordSearchRB.isSelected();
-					m_wordSearchRB.setSelected(false);
-					m_wordSearchRB.setEnabled(false);
+					//mihmax m_wordSearch = m_wordSearchRB.isSelected();
+					//mihmax m_wordSearchRB.setSelected(false);
+					//mihmax m_wordSearchRB.setEnabled(false);
 					m_exactSearchRB.setSelected(true);
 				}
 				else
@@ -247,16 +248,17 @@ public class SearchWindow extends JFrame
 					m_dirField.setEditable(false);
 					m_tmSearchCB.setEnabled(true);
 					m_tmSearchCB.setSelected(m_tmSearch);
-					m_wordSearchRB.setSelected(m_wordSearch);
-					m_wordSearchRB.setEnabled(true);
-					m_exactSearchRB.setSelected(!m_wordSearch);
+					//mihmax m_wordSearchRB.setSelected(m_wordSearch);
+					//mihmax m_wordSearchRB.setEnabled(true);
+					//mihmax m_exactSearchRB.setSelected(!m_wordSearch);
+					m_exactSearchRB.setSelected(true);
 				}
 			}
 		});
 
-		String searchDir = "";													// NOI18N
+		String searchDir;													// NOI18N
 		searchDir = CommandThread.core.getPreference(OConsts.PREF_SEARCH_DIR);
-		if (searchDir.equals("") == false)										// NOI18N
+		if (!searchDir.equals(""))										// NOI18N
 		{
 			m_dirField.setText(searchDir);
 		}
@@ -265,14 +267,14 @@ public class SearchWindow extends JFrame
 
 		m_viewer.setText(OStrings.SW_VIEWER_TEXT);
 
-		if (par.isProjectLoaded() == false)
+		if (!par.isProjectLoaded())
 		{
 			// restrict user to file only access
 			m_dirCB.setSelected(true);
 			m_dirCB.setEnabled(false);
 			m_tmSearchCB.setSelected(false);
 			m_tmSearchCB.setEnabled(false);
-			m_wordSearchRB.setEnabled(false);
+			//mihmax m_wordSearchRB.setEnabled(false);
 			m_dirField.setEditable(true);
 		}
 
@@ -318,7 +320,7 @@ public class SearchWindow extends JFrame
 	public void processWindowEvent(WindowEvent w)
 	{
 		int evt = w.getID();
-		if ((evt == WindowEvent.WINDOW_CLOSING) || (evt == WindowEvent.WINDOW_CLOSED))
+		if (evt == WindowEvent.WINDOW_CLOSING || evt == WindowEvent.WINDOW_CLOSED)
 		{
 			if (m_thread != null)
 				m_thread.haltThread();
@@ -335,7 +337,7 @@ public class SearchWindow extends JFrame
 		browser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		String curDir = m_dirField.getText();
 		
-		if (curDir.equals("") == false)											// NOI18N
+		if (!curDir.equals(""))											// NOI18N
 		{
 			File dir = new File(curDir);
 			if (dir.exists() && dir.isDirectory())
@@ -344,7 +346,7 @@ public class SearchWindow extends JFrame
 			}
 		}
 
-		int res = browser.showOpenDialog(this);
+		browser.showOpenDialog(this);
 		File dir = browser.getSelectedFile();
 		if (dir == null)
 			return;
@@ -365,16 +367,16 @@ public class SearchWindow extends JFrame
 			{
 				// make sure it's a valid directory name
 				root = m_dirField.getText();
-				if (root.endsWith(File.separator) == false)
+				if (!root.endsWith(File.separator))
 					root += File.separator;
 				File f = new File(root);
-				if ((f.exists() == false) || (f.isDirectory() == false))
+				if (!f.exists() || !f.isDirectory())
 				{
 					// TODO XXX alert user folder is invalid
 System.out.println("ERROR - bad directory name  '"+m_dirField.getText()+"'");	// NOI18N
 					return;
 				}
-				if ((CommandThread.core != null) && (m_dirCB.isSelected()))
+				if (CommandThread.core != null && m_dirCB.isSelected())
 				{
 					CommandThread.core.setPreference(
 								OConsts.PREF_SEARCH_DIR, root);
@@ -395,7 +397,7 @@ System.out.println("ERROR - bad directory name  '"+m_dirField.getText()+"'");	//
 		dispose();
 	}
 
-	public void updateUIText()
+	private void updateUIText()
 	{
 		setTitle(OStrings.SW_TITLE);
 		
@@ -404,7 +406,7 @@ System.out.println("ERROR - bad directory name  '"+m_dirField.getText()+"'");	//
 		
 		m_exactSearchRB.setText(OStrings.SW_EXACT_SEARCH);
 		m_tmSearchCB.setText(OStrings.SW_SEARCH_TM);
-		m_wordSearchRB.setText(OStrings.SW_WORD_SEARCH);
+		//mihmax m_wordSearchRB.setText(OStrings.SW_WORD_SEARCH);
 		
 		m_dirLabel.setText(OStrings.SW_LOCATION);
 		m_dirCB.setText(OStrings.SW_DIR_SEARCH);
@@ -418,10 +420,10 @@ System.out.println("ERROR - bad directory name  '"+m_dirField.getText()+"'");	//
 	{
 		protected void processKeyEvent(KeyEvent e)
 		{
-			if ((e.getKeyCode() == KeyEvent.VK_ENTER) &&
-					(e.getID() == KeyEvent.KEY_PRESSED))
+			if (e.getKeyCode() == KeyEvent.VK_ENTER &&
+                    e.getID() == KeyEvent.KEY_PRESSED)
 			{
-				if (getText().equals("") == false)								// NOI18N
+				if (!getText().equals(""))								// NOI18N
 					doSearch();
 			}
 			else
@@ -431,27 +433,27 @@ System.out.println("ERROR - bad directory name  '"+m_dirField.getText()+"'");	//
 		}
 	}
 
-	protected JLabel		m_searchLabel;
-	protected JTextField	m_searchField;
-	protected JButton		m_searchButton;
+	private JLabel		m_searchLabel;
+	private JTextField	m_searchField;
+	private JButton		m_searchButton;
 
-    protected JRadioButton	m_wordSearchRB;
-	protected JRadioButton	m_exactSearchRB;
-	protected JCheckBox		m_tmSearchCB;
+    private JRadioButton	m_wordSearchRB;
+	private JRadioButton	m_exactSearchRB;
+	private JCheckBox		m_tmSearchCB;
 
-	protected boolean		m_tmSearch = true;
-	protected boolean		m_wordSearch = false;
+	private boolean		m_tmSearch = true;
+	private boolean		m_wordSearch;
 
-	protected JLabel		m_dirLabel;
-	protected JTextField	m_dirField;
-	protected JButton		m_dirButton;
-	protected JCheckBox	m_dirCB;
-	protected JCheckBox	m_recursiveCB;
+	private JLabel		m_dirLabel;
+	private JTextField	m_dirField;
+	private JButton		m_dirButton;
+	private JCheckBox	m_dirCB;
+	private JCheckBox	m_recursiveCB;
 
-	protected JButton		m_dismissButton;
+	private JButton		m_dismissButton;
 
-	protected EntryListPane	m_viewer;
+	private EntryListPane	m_viewer;
 
-	protected SearchThread	m_thread;
+	private SearchThread	m_thread;
 
 }

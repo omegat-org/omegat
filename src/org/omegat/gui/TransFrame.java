@@ -22,13 +22,13 @@
 package org.omegat.gui;
 
 import org.omegat.core.GlossaryEntry;
-import org.omegat.core.NearString;
-import org.omegat.core.SourceTextEntry;
+import org.omegat.core.matching.NearString;
+import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.StringEntry;
 import org.omegat.gui.dialogs.FontSelectionDialog;
 import org.omegat.gui.dialogs.MatchingSimilarityDialog;
-import org.omegat.gui.threads.CommandThread;
-import org.omegat.gui.threads.SearchThread;
+import org.omegat.core.threads.CommandThread;
+import org.omegat.core.threads.SearchThread;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.PreferenceManager;
@@ -57,7 +57,7 @@ import javax.swing.undo.UndoManager;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
@@ -86,8 +86,7 @@ public class TransFrame extends JFrame implements ActionListener
 	// Initialization and display code
 	public TransFrame()
 	{
-		super();
-		m_curEntryNum = -1;
+        m_curEntryNum = -1;
 		m_curNear = null;
         m_activeProj = "";														// NOI18N
 		m_activeFile = "";														// NOI18N
@@ -138,7 +137,8 @@ public class TransFrame extends JFrame implements ActionListener
 		{
 			fontSize = Integer.parseInt(m_fontSize);
 		}
-		catch (NumberFormatException nfe) { ; }
+		catch (NumberFormatException nfe) {
+        }
 		m_xlPane.setFont(new Font(m_font, Font.PLAIN, fontSize));
 		m_matchViewer.setFont(new Font(m_font, Font.PLAIN, fontSize));
 
@@ -147,27 +147,22 @@ public class TransFrame extends JFrame implements ActionListener
 		// should be OK, but customization might have messed it up
 		String start = OStrings.TF_CUR_SEGMENT_START;
 		int zero = start.lastIndexOf('0');
-		if ((zero > 4) &&	// 4 to reserve room for 10000 digit
-				(start.charAt(zero-1) == '0')	&&
-				(start.charAt(zero-2) == '0')	&&
-				(start.charAt(zero-3) == '0'))
-		{
-			m_segmentTagHasNumber = true;
-		}
-		else
-			m_segmentTagHasNumber = false;
+        m_segmentTagHasNumber = (zero > 4) && // 4 to reserve room for 10000 digit
+                (start.charAt(zero - 1) == '0') &&
+                (start.charAt(zero - 2) == '0') &&
+                (start.charAt(zero - 3) == '0');
 	}
 
-	protected void loadDisplayPrefs()
+	private void loadDisplayPrefs()
 	{
 		String mn = PreferenceManager.pref.getPreference(OConsts.PREF_MNEMONIC);
-		if ((mn != null) && (mn.equals("true")))								// NOI18N
+		if (mn != null && mn.equals("true"))								// NOI18N
 		{
 			m_miDisplayMnemonic.setSelected(true);
 			doSetMnemonics(true);
 		}
 		String tab = PreferenceManager.pref.getPreference(OConsts.PREF_TAB);
-		if ((tab != null) && (tab.equals("true")))								// NOI18N
+		if (tab != null && tab.equals("true"))								// NOI18N
 		{
 			m_miDisplayAdvanceKey.setSelected(true);
 			m_advancer = KeyEvent.VK_TAB;
@@ -176,7 +171,7 @@ public class TransFrame extends JFrame implements ActionListener
 			m_advancer = KeyEvent.VK_ENTER;
 	}
 
-	protected void initScreenLayout()
+	private void initScreenLayout()
 	{
 		// KBG - assume screen size is 800x600 if width less than 900, and
 		//		1024x768 if larger.  assume task bar at bottom of screen.
@@ -192,9 +187,9 @@ public class TransFrame extends JFrame implements ActionListener
 		int w=0;
 		int h=0;
 		boolean badSize = false;
-		if ((dw == null) || (dw.equals(""))	|| (dh == null)			||			// NOI18N
-				(dh.equals(""))	|| (dx == null) || (dx.equals(""))	||			// NOI18N
-				(dy == null) || (dy.equals("")))								// NOI18N
+		if (dw == null || dw.equals("")	|| dh == null			||			// NOI18N
+                dh.equals("")	|| dx == null || dx.equals("")	||			// NOI18N
+                dy == null || dy.equals(""))								// NOI18N
 		{
 			badSize = true;
 		}
@@ -238,7 +233,7 @@ public class TransFrame extends JFrame implements ActionListener
 		}
 	}
 
-	public void storeScreenLayout()
+	private void storeScreenLayout()
 	{
 		int w = getWidth();
 		int h = getHeight();
@@ -250,7 +245,7 @@ public class TransFrame extends JFrame implements ActionListener
 		CommandThread.core.setPreference(OConsts.PREF_DISPLAY_Y, "" + y);		// NOI18N
 	}
 
-	protected void createUI()
+	private void createUI()
 	{
 		// create translation edit field
 		//m_xlPane = new JTextPane();
@@ -273,9 +268,9 @@ public class TransFrame extends JFrame implements ActionListener
 		m_matchViewer = new MatchWindow();
 	}
 
-	protected void doSetMnemonics(boolean show)
+	private void doSetMnemonics(boolean show)
 	{
-		if (show == true)
+		if (show)
 		{
 			m_mFile.setMnemonic(KeyEvent.VK_F);
 			m_miFileOpen.setMnemonic(KeyEvent.VK_O);
@@ -305,7 +300,6 @@ public class TransFrame extends JFrame implements ActionListener
 			m_miDisplayMnemonic.setMnemonic(KeyEvent.VK_M);
 			m_mTools.setMnemonic(KeyEvent.VK_T);
 			m_miToolsValidateTags.setMnemonic(KeyEvent.VK_T);
-			m_miToolsMergeTMX.setMnemonic(KeyEvent.VK_M);
 			m_mVersion.setMnemonic(KeyEvent.VK_O);
 			m_miVersionHelp.setMnemonic(KeyEvent.VK_H);
 		}
@@ -339,13 +333,12 @@ public class TransFrame extends JFrame implements ActionListener
 			m_miDisplayMnemonic.setMnemonic(0);
 			m_mTools.setMnemonic(0);
 			m_miToolsValidateTags.setMnemonic(0);
-			m_miToolsMergeTMX.setMnemonic(0);
 			m_mVersion.setMnemonic(0);
 			m_miVersionHelp.setMnemonic(0);
 		}
 	}
 
-	protected void createMenus()
+	private void createMenus()
 	{
 		////////////////////////////////
 		// create menus
@@ -523,11 +516,6 @@ public class TransFrame extends JFrame implements ActionListener
 		m_miToolsValidateTags.addActionListener(this);
 		m_mTools.add(m_miToolsValidateTags);
 
-		m_miToolsMergeTMX = new JMenuItem();
-		m_miToolsMergeTMX.setEnabled(false);
-		m_miToolsMergeTMX.addActionListener(this);
-		m_mTools.add(m_miToolsMergeTMX);
-
 		mb.add(m_mTools);
 		
 		m_mVersion = new JMenu();
@@ -542,7 +530,7 @@ public class TransFrame extends JFrame implements ActionListener
 		setJMenuBar(mb);
 	}
 
-	public void updateUIText()
+	private void updateUIText()
 	{
 		doSetTitle();
 
@@ -582,7 +570,6 @@ public class TransFrame extends JFrame implements ActionListener
 		m_mTools.setText(OStrings.TF_MENU_TOOLS);
 		m_miToolsPseudoTrans.setText(OStrings.TF_MENU_TOOLS_PSEUDO);
 		m_miToolsValidateTags.setText(OStrings.TF_MENU_TOOLS_VALIDATE);
-		m_miToolsMergeTMX.setText(OStrings.TF_MENU_TOOLS_MERGE_TMX);
 
 		m_mVersion.setText(OStrings.VERSION);
 		m_miVersionHelp.setText(OStrings.TF_MENU_VERSION_HELP);
@@ -598,10 +585,10 @@ public class TransFrame extends JFrame implements ActionListener
 	///////////////////////////////////////////////////////////////
 	// command handling
 	
-	protected void doQuit()
+	private void doQuit()
 	{
 		// shutdown
-		if (m_projectLoaded == true)
+		if (m_projectLoaded)
 		{
 			commitEntry();
 			doSave();
@@ -617,7 +604,8 @@ public class TransFrame extends JFrame implements ActionListener
 			while (CommandThread.core != null)
 			{
 				try { Thread.sleep(10); }
-				catch (InterruptedException e) { ; }
+				catch (InterruptedException e) {
+                }
 			}
 			if (CommandThread.core == null)
 				break;
@@ -628,7 +616,7 @@ public class TransFrame extends JFrame implements ActionListener
 
 	public void doPseudoTrans()
 	{
-		if (m_projectLoaded == false)
+		if (!m_projectLoaded)
 			return;
 
 		// since this is a destructive operation, verify the user
@@ -645,15 +633,15 @@ public class TransFrame extends JFrame implements ActionListener
 		activateEntry();
 	}
 
-	protected void doValidateTags()
+	private void doValidateTags()
 	{
 		ArrayList suspects = CommandThread.core.validateTags();
 		if (suspects.size() > 0)
 		{
 			// create list of suspect strings - use org.omegat.gui.ContextFrame for now
-			ContextFrame cf = new ContextFrame(this, true, false);
+			ContextFrame cf = new ContextFrame(this);
 			cf.setVisible(true);
-			cf.displayStringList(suspects, OStrings.TF_NOTICE_BAD_TAGS);
+			cf.displayStringList(suspects);
 		}
 		else
 		{
@@ -667,7 +655,7 @@ public class TransFrame extends JFrame implements ActionListener
 
     public void doNextEntry()
 	{
-		if (m_projectLoaded == false)
+		if (!m_projectLoaded)
 			return;
 		
 		commitEntry();
@@ -684,7 +672,7 @@ public class TransFrame extends JFrame implements ActionListener
 
 	public void doPrevEntry()
 	{
-		if (m_projectLoaded == false)
+		if (!m_projectLoaded)
 			return;
 		
 		commitEntry();
@@ -700,9 +688,9 @@ public class TransFrame extends JFrame implements ActionListener
 	}
 
 	// insert current fuzzy match at cursor position
-	public void doInsertTrans()
+    private void doInsertTrans()
 	{
-		if (m_projectLoaded == false)
+		if (!m_projectLoaded)
 			return;
 		
 		if (m_curNear == null)
@@ -718,7 +706,7 @@ public class TransFrame extends JFrame implements ActionListener
 	// replace entire edit area with active fuzzy match
 	public void doRecycleTrans()
 	{
-		if (m_projectLoaded == false)
+		if (!m_projectLoaded)
 			return;
 		
 		if (m_curNear == null)
@@ -728,9 +716,9 @@ public class TransFrame extends JFrame implements ActionListener
 		doReplaceEditText(se.getTrans());
 	}
 
-    protected void doReplaceEditText(String text)
+    private void doReplaceEditText(String text)
 	{
-		if (m_projectLoaded == false)
+		if (!m_projectLoaded)
 			return;
 		
 		if (m_curNear == null)
@@ -754,7 +742,7 @@ public class TransFrame extends JFrame implements ActionListener
 
 	public void doCompareN(int nearNum)
 	{
-		if (m_projectLoaded == false)
+		if (!m_projectLoaded)
 			return;
 		
 		updateFuzzyInfo(nearNum);
@@ -762,7 +750,7 @@ public class TransFrame extends JFrame implements ActionListener
 
 	public void doUnloadProject()
 	{
-		if (m_projectLoaded == true)
+		if (m_projectLoaded)
 		{
 			commitEntry();
 			doSave();
@@ -775,7 +763,7 @@ public class TransFrame extends JFrame implements ActionListener
 	}
 
 	// display dialog allowing selection of source and target language fonts
-	protected void doFont()
+    private void doFont()
 	{
 		FontSelectionDialog dlg = new FontSelectionDialog(this, m_font, m_fontSize);
 		dlg.setVisible(true);
@@ -789,7 +777,8 @@ public class TransFrame extends JFrame implements ActionListener
 			{
 				fontSize = Integer.parseInt(m_fontSize);
 			}
-			catch (NumberFormatException nfe) { ; }
+			catch (NumberFormatException nfe) {
+            }
 			Font font = new Font(m_font, Font.PLAIN, fontSize);
 			m_xlPane.setFont(font);
 			m_matchViewer.setFont(font);
@@ -800,7 +789,7 @@ public class TransFrame extends JFrame implements ActionListener
 	/**
 	 * Displays a dialogue to increase/decrese matching similarity.
 	 */
-	protected void doMatchesSimilarity()
+    private void doMatchesSimilarity()
 	{
 		MatchingSimilarityDialog dialog = new MatchingSimilarityDialog(this, 
 				CommandThread.core.getOrSetPreference(OConsts.TF_NEAR_TRASH, OConsts.DEFAULT_NEAR_THRASH));
@@ -811,20 +800,10 @@ public class TransFrame extends JFrame implements ActionListener
 			CommandThread.core.setPreference(OConsts.TF_NEAR_TRASH, newNearTrash);
 		}
 	}
-	
-	protected void doMergeTMX()
-	{
-//System.out.println("merge TMX not implemented");
-		// needs dialog to specify source and target languages, source
-		//	dir and target file
-		// if in project, supply default file values to TM folder and 
-		//	<project>/merge.tmx
-		//org.omegat.StaticUtils.mergeTmxFiles(File out, String root, srcLang, targetLang);
-	}
 
-	protected void doSave()
+    private void doSave()
 	{
-		if (m_projectLoaded == false)
+		if (!m_projectLoaded)
 			return;
 		
 		RequestPacket pack;
@@ -832,7 +811,7 @@ public class TransFrame extends JFrame implements ActionListener
 		CommandThread.core.messageBoardPost(pack);
 	}
 
-	protected void doLoadProject()
+	private void doLoadProject()
 	{
 		doUnloadProject();
 		m_matchViewer.reset();
@@ -842,9 +821,9 @@ public class TransFrame extends JFrame implements ActionListener
 		CommandThread.core.messageBoardPost(load);
 	}
 
-	protected void doGotoEntry(int entryNum)
+	private void doGotoEntry(int entryNum)
 	{
-		if (m_projectLoaded == false)
+		if (!m_projectLoaded)
 			return;
 		
 		commitEntry();
@@ -867,13 +846,14 @@ public class TransFrame extends JFrame implements ActionListener
 
 	public void doGotoEntry(String str)
 	{
-		int num = -1;
+		int num;
 		try
 		{
 			num = Integer.parseInt(str);
 			doGotoEntry(num);
 		}
-		catch (NumberFormatException e) { ; }
+		catch (NumberFormatException e) {
+        }
 	}
 
 	public void finishLoadProject()
@@ -889,7 +869,7 @@ public class TransFrame extends JFrame implements ActionListener
 
 	private void doCompileProject()
 	{
-		if (m_projectLoaded == false)
+		if (!m_projectLoaded)
 			return;
 		try 
 		{
@@ -902,7 +882,7 @@ public class TransFrame extends JFrame implements ActionListener
 		// TODO - cleanup on error
 	}
 
-	protected void doSetTitle()
+	private void doSetTitle()
 	{
 		String s = OStrings.TF_TITLE;
 		if (m_activeProj.compareTo("") != 0)									// NOI18N
@@ -914,7 +894,7 @@ public class TransFrame extends JFrame implements ActionListener
 		setTitle(s);
 	}
 
-	protected void doFind()
+	private void doFind()
 	{
 		String selection = m_xlPane.getSelectedText();
 		if (selection != null)
@@ -947,14 +927,14 @@ public class TransFrame extends JFrame implements ActionListener
 		// length is the char count of the display value of the segment
 		//	(i.e. trans if it exists, else src)
 		// it also includes the 2 newlines used for spacing
-		public int	length = 0;		// display length
+		public int	length;		// display length
 	}
 
 	// displays all segments in current document
 	// displays translation for each segment if it's available (in dark gray)
 	// otherwise displays source text (in black)
 	// stores length of each displayed segment plus its starting offset
-	protected void loadDocument() 
+    private void loadDocument()
 	{
 		m_docReady = false;
 
@@ -1002,13 +982,13 @@ public class TransFrame extends JFrame implements ActionListener
 
 	// display fuzzy matching info if it's available
 	// don't call this directly - should only be called through doCompareN
-	protected void updateFuzzyInfo(int nearNum) 
+    private void updateFuzzyInfo(int nearNum)
 	{
-		if (m_projectLoaded == false)
+		if (!m_projectLoaded)
 			return;
 		
 		StringEntry curEntry = m_curEntry.getStrEntry();
-		LinkedList nearList = curEntry.getNearListTranslated();
+		List nearList = curEntry.getNearListTranslated();
 		// see if there are any matches
 		if( nearList.size()<=0 ) 
 		{
@@ -1039,7 +1019,7 @@ public class TransFrame extends JFrame implements ActionListener
 			if( ctr==nearNum ) {
 				start = offset;
 				str = oldStr;
-			} else if( ctr==(nearNum+1) ) {
+			} else if( ctr==nearNum + 1 ) {
 				end = offset;
 			}
 			
@@ -1053,7 +1033,7 @@ public class TransFrame extends JFrame implements ActionListener
 	
 	private void commitEntry()
 	{
-		if (m_projectLoaded == false)
+		if (!m_projectLoaded)
 		{
 			return;
 		}
@@ -1077,7 +1057,7 @@ public class TransFrame extends JFrame implements ActionListener
 			s = m_xlPane.getText().substring(start, end);
 
 		m_xlPane.select(start, end);
-		MutableAttributeSet mattr = null;
+		MutableAttributeSet mattr;
 		mattr = new SimpleAttributeSet();
 		StyleConstants.setForeground(mattr, Color.darkGray);
 		m_xlPane.setCharacterAttributes(mattr, true);
@@ -1096,7 +1076,7 @@ public class TransFrame extends JFrame implements ActionListener
 		
 		// update the length parameters of all changed segments
 		// update strings in display
-		if (s.equals(m_curTrans) == false)
+		if (!s.equals(m_curTrans))
 		{
 			// update display
 			// find all identical strings and redraw them
@@ -1110,7 +1090,7 @@ public class TransFrame extends JFrame implements ActionListener
 			{
 				ste = (SourceTextEntry) it.next();
 				entry = ste.entryNum();
-				if ((entry >= m_xlFirstEntry) && (entry <= m_xlLastEntry))
+				if (entry >= m_xlFirstEntry && entry <= m_xlLastEntry)
 				{
 					// found something to update
 					// find offset to this segment, remove it and
@@ -1145,7 +1125,7 @@ public class TransFrame extends JFrame implements ActionListener
 	// make sure fuzzy info displayed if available and wanted
 	public synchronized void activateEntry() 
 	{
-		if (m_projectLoaded == false)
+		if (!m_projectLoaded)
 			return;
 
 		int i;
@@ -1187,14 +1167,14 @@ public class TransFrame extends JFrame implements ActionListener
 			{
 				ones = num % 10;
 				num /= 10;
-				disp = ((int) ones) + disp;
+				disp = ones + disp;
 			}
 			int zero = startStr.lastIndexOf('0');
 			startStr = startStr.substring(0, zero-disp.length()+1) + 
 				disp + startStr.substring(zero+1);
 		}
 
-		MutableAttributeSet mattr = null;
+		MutableAttributeSet mattr;
 		// append to end of segment first because this operation is done
 		//	by reference to end of file which will change after insert
 		m_xlPane.select(paneLen-m_segmentEndInset, paneLen-m_segmentEndInset);
@@ -1204,7 +1184,6 @@ public class TransFrame extends JFrame implements ActionListener
 		mattr = new SimpleAttributeSet();
 		StyleConstants.setBold(mattr, true);
 		m_xlPane.setCharacterAttributes(mattr, true);
-		paneLen = -1;	// after replacement this is no longer accurate
 
 		m_xlPane.select(m_segmentStartOffset, m_segmentStartOffset);
 		String insertText = srcText + startStr;
@@ -1255,7 +1234,7 @@ public class TransFrame extends JFrame implements ActionListener
 
 		int nearLength = curEntry.getNearListTranslated().size();
 		
-		if ((nearLength > 0) && (m_glossaryLength > 0))
+		if (nearLength > 0 && m_glossaryLength > 0)
 		{
 			// display text indicating both categories exist
 			Object obj[] = { 
@@ -1296,7 +1275,7 @@ public class TransFrame extends JFrame implements ActionListener
 		{
 			docSeg = (DocumentSegment) m_docSegList.get(i);
 			padding += docSeg.length;
-			if ((j > 2) || (padding > 500))
+			if (j > 2 || padding > 500)
 				break;
 		}
 		// don't try to set caret after end of document
@@ -1327,7 +1306,7 @@ public class TransFrame extends JFrame implements ActionListener
 		});
 //
 //		checkCaret();
-		if (m_docReady == false)
+		if (!m_docReady)
 		{
 			m_docReady = true;
 		}
@@ -1366,7 +1345,7 @@ public class TransFrame extends JFrame implements ActionListener
 			}
 			else if (evtSrc == m_miFileMatchWin)
 			{
-				if (m_matchViewer.isVisible() == true)
+				if (m_matchViewer.isVisible())
 					m_matchViewer.setVisible(false);
 				else
 				{
@@ -1388,7 +1367,8 @@ public class TransFrame extends JFrame implements ActionListener
 				{
 					m_undo.undo();
 				}
-				catch (CannotUndoException cue)	{ ; }
+				catch (CannotUndoException cue)	{
+                }
 			}
 			else if (evtSrc == m_miEditRedo)
 			{
@@ -1396,7 +1376,8 @@ public class TransFrame extends JFrame implements ActionListener
 				{
 					m_undo.redo();
 				}
-				catch (CannotRedoException cue)	{ ; }
+				catch (CannotRedoException cue)	{
+                }
 			}
 			else if (evtSrc == m_miEditNext)
 			{
@@ -1491,10 +1472,6 @@ public class TransFrame extends JFrame implements ActionListener
 			{
 				doValidateTags();
 			}
-			else if (evtSrc == m_miToolsMergeTMX)
-			{
-				doMergeTMX();
-			}
 			else if (evtSrc == m_miVersionHelp)
 			{
 				HelpFrame hf = HelpFrame.getInstance();
@@ -1529,7 +1506,7 @@ public class TransFrame extends JFrame implements ActionListener
 				public void mouseClicked(MouseEvent e)
 				{
 					// ignore mouse clicks until document is ready
-					if (m_docReady == false)
+					if (!m_docReady)
 						return;
 
 					super.mouseClicked(e);
@@ -1538,7 +1515,7 @@ public class TransFrame extends JFrame implements ActionListener
 						// user double clicked on view pane - goto entry
 						// that was clicked
 						int pos = getCaretPosition();
-						DocumentSegment docSeg = null;
+						DocumentSegment docSeg;
 						int i;
 						if (pos < m_segmentStartOffset)
 						{
@@ -1556,8 +1533,7 @@ public class TransFrame extends JFrame implements ActionListener
 								}
 							}
 						}
-						else if (pos > (m_xlPane.getText().length() -
-											m_segmentEndInset))
+						else if (pos > m_xlPane.getText().length() - m_segmentEndInset)
 						{
 							// after current entry
 							int inset = m_xlPane.getText().length() -
@@ -1584,10 +1560,10 @@ public class TransFrame extends JFrame implements ActionListener
 		//	across jvm versions
 		protected void processKeyEvent(KeyEvent e)
 		{
-			if (m_projectLoaded == false)
+			if (!m_projectLoaded)
 			{
-				if ((e.getModifiers() == m_shortcutKey) || 
-						(e.getModifiers() == InputEvent.ALT_MASK));
+				if (e.getModifiers() == m_shortcutKey ||
+                        e.getModifiers() == InputEvent.ALT_MASK);
 					super.processKeyEvent(e);
 				return;
 			}
@@ -1605,11 +1581,11 @@ public class TransFrame extends JFrame implements ActionListener
 			}
 
 			// let control keypresses pass through unscathed
-			if ((e.getID() == KeyEvent.KEY_PRESSED)	&&
-					((keyCode == KeyEvent.VK_CONTROL)	||
-					(keyCode == KeyEvent.VK_ALT)		||
-					(keyCode == KeyEvent.VK_META)		||
-					(keyCode == KeyEvent.VK_SHIFT)))
+			if (e.getID() == KeyEvent.KEY_PRESSED	&&
+					(keyCode == KeyEvent.VK_CONTROL	||
+                    keyCode == KeyEvent.VK_ALT		||
+                    keyCode == KeyEvent.VK_META		||
+                    keyCode == KeyEvent.VK_SHIFT))
 			{
 				super.processKeyEvent(e);
 				return;
@@ -1625,7 +1601,7 @@ public class TransFrame extends JFrame implements ActionListener
 			switch (c)
 			{
 				case 8:
-					if (checkCaretForDelete(false) == true)
+					if (checkCaretForDelete(false))
 					{
 						super.processKeyEvent(e);
 					}
@@ -1634,7 +1610,7 @@ public class TransFrame extends JFrame implements ActionListener
 					// this check shouldn't be necessary, but
 					//	make it in case the key handling changes to make
 					//	backspace and delete work the same way
-					if (checkCaretForDelete(true) == true)
+					if (checkCaretForDelete(true))
 					{
 						super.processKeyEvent(e);
 					}
@@ -1643,13 +1619,9 @@ public class TransFrame extends JFrame implements ActionListener
 
 			// for now, force all key presses to reset the cursor to
 			//	the editing region unless it's a ctrl-c (copy)
-			if (((e.getID() == KeyEvent.KEY_PRESSED)		&& 
-					(e.getModifiers() == m_shortcutKey)		&&
-					((keyCode == 'c') || (keyCode == 'C')))
+			if (e.getID() == KeyEvent.KEY_PRESSED && e.getModifiers() == m_shortcutKey && (keyCode == 'c' || keyCode == 'C')
 					||
-					((e.getID() == KeyEvent.KEY_TYPED)		&&
-					(e.getModifiers() == m_shortcutKey)		&&
-					(c == 3)))
+                    e.getID() == KeyEvent.KEY_TYPED && e.getModifiers() == m_shortcutKey && c == 3)
 			{
 				// control-c pressed or typed
 				super.processKeyEvent(e);
@@ -1667,7 +1639,7 @@ public class TransFrame extends JFrame implements ActionListener
 			//	in non-usability
 			if (keyCode == KeyEvent.VK_ENTER) 
 			{
-				if (e.isShiftDown() == true)
+				if (e.isShiftDown())
 				{
 					// convert key event to straight enter key
 					KeyEvent ke = new KeyEvent(e.getComponent(), e.getID(), 
@@ -1684,13 +1656,13 @@ public class TransFrame extends JFrame implements ActionListener
 			{
 				if (m_advancer == KeyEvent.VK_ENTER)
 				{
-					if (e.isControlDown() == true)
+					if (e.isControlDown())
 					{
 						// go backwards on control return
 						if (e.getID() == KeyEvent.KEY_PRESSED)
 							doPrevEntry();
 					}
-					else if (e.isShiftDown() == false)
+					else if (!e.isShiftDown())
 					{
 						// return w/o modifiers - swallow event and move on to 
 						//  next segment
@@ -1701,7 +1673,7 @@ public class TransFrame extends JFrame implements ActionListener
 				else if (m_advancer == KeyEvent.VK_TAB)
 				{
 					// ctrl-tab not caught
-					if (e.isShiftDown() == true)
+					if (e.isShiftDown())
 					{
 						// go backwards on control return
 						if (e.getID() == KeyEvent.KEY_PRESSED)
@@ -1720,13 +1692,13 @@ public class TransFrame extends JFrame implements ActionListener
 			
 			// need to over-ride default text hiliting procedures because
 			//	we're managing caret placement manually
-			if (e.isShiftDown() == true)
+			if (e.isShiftDown())
 			{
 				// if navigation control, make sure things are hilited
-				if ((keyCode == KeyEvent.VK_UP)				|| 
-						(keyCode == KeyEvent.VK_LEFT)		||
-						(keyCode == KeyEvent.VK_KP_UP)		||
-						(keyCode == KeyEvent.VK_KP_LEFT))
+				if (keyCode == KeyEvent.VK_UP				||
+                        keyCode == KeyEvent.VK_LEFT		||
+                        keyCode == KeyEvent.VK_KP_UP		||
+                        keyCode == KeyEvent.VK_KP_LEFT)
 				{
 					super.processKeyEvent(e);
 					if (e.getID() == KeyEvent.KEY_PRESSED)
@@ -1739,10 +1711,10 @@ public class TransFrame extends JFrame implements ActionListener
 							m_xlPane.moveCaretPosition(start);
 					}
 				}
-				else if ((keyCode == KeyEvent.VK_DOWN)		|| 
-						(keyCode == KeyEvent.VK_RIGHT)		||
-						(keyCode == KeyEvent.VK_KP_DOWN)	||
-						(keyCode == KeyEvent.VK_KP_RIGHT))
+				else if (keyCode == KeyEvent.VK_DOWN		||
+                        keyCode == KeyEvent.VK_RIGHT		||
+                        keyCode == KeyEvent.VK_KP_DOWN	||
+                        keyCode == KeyEvent.VK_KP_RIGHT)
 				{
 					super.processKeyEvent(e);
 					if (e.getID() == KeyEvent.KEY_PRESSED)
@@ -1768,10 +1740,10 @@ public class TransFrame extends JFrame implements ActionListener
 			// shift key is not down
 			// if arrow key pressed, make sure caret moves to correct side
 			//	of hilite (if text hilited)
-			if ((keyCode == KeyEvent.VK_UP)				|| 
-					(keyCode == KeyEvent.VK_LEFT)		||
-					(keyCode == KeyEvent.VK_KP_UP)		||
-					(keyCode == KeyEvent.VK_KP_LEFT))
+			if (keyCode == KeyEvent.VK_UP				||
+                    keyCode == KeyEvent.VK_LEFT		||
+                    keyCode == KeyEvent.VK_KP_UP		||
+                    keyCode == KeyEvent.VK_KP_LEFT)
 			{
 				int end = m_xlPane.getSelectionEnd();
 				int start = m_xlPane.getSelectionStart();
@@ -1782,10 +1754,10 @@ public class TransFrame extends JFrame implements ActionListener
 				checkCaret();
 				return;
 			}
-			else if ((keyCode == KeyEvent.VK_DOWN)		|| 
-					(keyCode == KeyEvent.VK_RIGHT)		||
-					(keyCode == KeyEvent.VK_KP_DOWN)	||
-					(keyCode == KeyEvent.VK_KP_RIGHT))
+			else if (keyCode == KeyEvent.VK_DOWN		||
+                    keyCode == KeyEvent.VK_RIGHT		||
+                    keyCode == KeyEvent.VK_KP_DOWN	||
+                    keyCode == KeyEvent.VK_KP_RIGHT)
 			{
 				int end = m_xlPane.getSelectionEnd();
 				int start = m_xlPane.getSelectionStart();
@@ -1806,7 +1778,7 @@ public class TransFrame extends JFrame implements ActionListener
 	// make sure there's one character in the direction indicated for
 	//	delete operation
 	// returns true if space is available
-	protected boolean checkCaretForDelete(boolean forward)
+    private boolean checkCaretForDelete(boolean forward)
 	{
 		int pos = m_xlPane.getCaretPosition();
 		
@@ -1836,7 +1808,7 @@ public class TransFrame extends JFrame implements ActionListener
 	}
 	
 	// returns true if position reset, false otherwise
-	protected boolean checkCaret()
+    private void checkCaret()
 	{
 		//int pos = m_xlPane.getCaretPosition();
 		int spos = m_xlPane.getSelectionStart();
@@ -1846,29 +1818,24 @@ public class TransFrame extends JFrame implements ActionListener
 		// -1 for space before tag, -2 for newlines
 		int end = m_xlPane.getText().length() - m_segmentEndInset -
 			OStrings.TF_CUR_SEGMENT_END.length();
-		boolean reset = false;
-		
+
 		if (spos != epos)
 		{
 			// dealing with a selection here - make sure it's w/in bounds
 			if (spos < start)
 			{
-				reset = true;
 				m_xlPane.setSelectionStart(start);
 			}
 			else if (spos > end)
 			{
-				reset = true;
 				m_xlPane.setSelectionStart(end);
 			}
 			if (epos > end)
 			{
-				reset = true;
 				m_xlPane.setSelectionEnd(end);
 			}
 			else if (epos < start)
 			{
-				reset = true;
 				m_xlPane.setSelectionStart(start);
 			}
 		}
@@ -1878,17 +1845,13 @@ public class TransFrame extends JFrame implements ActionListener
 			if (spos < start)
 			{
 				m_xlPane.setCaretPosition(start);
-				reset = true;
 			}
 			else if (spos > end)
 			{
 				m_xlPane.setCaretPosition(end);
-				reset = true;
 			}
 		}
-		
-		return reset;
-	}
+    }
 
 	public void fatalError(String msg, RuntimeException re)
 	{
@@ -1903,7 +1866,8 @@ public class TransFrame extends JFrame implements ActionListener
 			while (CommandThread.core != null)
 			{
 				try { Thread.sleep(10); }
-				catch (InterruptedException e) { ; }
+				catch (InterruptedException e) {
+                }
 			}
 			if (CommandThread.core == null)
 				break;
@@ -1958,58 +1922,57 @@ public class TransFrame extends JFrame implements ActionListener
 	private JMenu		m_mTools;
     private JMenuItem	m_miToolsPseudoTrans;
 	private JMenuItem	m_miToolsValidateTags;
-	private JMenuItem	m_miToolsMergeTMX;
 
-	private JMenu		m_mVersion;
+    private JMenu		m_mVersion;
 	private JMenuItem	m_miVersionHelp;
 //	private JMenuItem	m_miVersionNumber;
 
 	// source and target font display info
-	protected String	m_font;
-	protected String	m_fontSize;
+    private String	m_font;
+	private String	m_fontSize;
 
 	// first and last entry numbers in current file
-	protected int		m_xlFirstEntry;
-	protected int		m_xlLastEntry;
+    private int		m_xlFirstEntry;
+	private int		m_xlLastEntry;
 
 	// starting offset and length of source lang in current segment
-	protected int		m_segmentStartOffset = 0;
-	protected int		m_sourceDisplayLength = 0;
-	protected int		m_segmentEndInset = 0;
+    private int		m_segmentStartOffset;
+	private int		m_sourceDisplayLength;
+	private int		m_segmentEndInset;
 	// text length of glossary, if displayed
-	protected int		m_glossaryLength = 0;
+    private int		m_glossaryLength;
 
 	// boolean set after safety check that org.omegat.OStrings.TF_CUR_SEGMENT_START
 	//	contains empty "0000" for segment number
-	protected boolean	m_segmentTagHasNumber = false;
+    private boolean	m_segmentTagHasNumber;
 
 	// indicates the document is loaded and ready for processing
-	protected boolean	m_docReady = false;
+    private boolean	m_docReady;
 
     // list of text segments in current doc
-	protected ArrayList	m_docSegList;
+    private ArrayList	m_docSegList;
 
 	// make a local copy of this instead of fetching it each time
-	protected int	m_shortcutKey;
-	protected UndoManager	m_undo = null;
-	protected char	m_advancer;
+    private int	m_shortcutKey;
+	private UndoManager	m_undo;
+	private char	m_advancer;
 
 	private XLPane		m_xlPane;
 	private JScrollPane	m_xlScroller;
 
 	private JLabel		m_statusLabel;
-	protected SourceTextEntry		m_curEntry;
+	private SourceTextEntry		m_curEntry;
 
 	private String	m_activeFile;
 	private String	m_activeProj;
 	private int m_curEntryNum;
 	private NearString m_curNear;
-    protected String	m_curTrans = "";										// NOI18N
+    private String	m_curTrans = "";										// NOI18N
 
-	private ProjectFrame	m_projWin = null;
-	protected MatchWindow	m_matchViewer = null;
+	private ProjectFrame	m_projWin;
+	private MatchWindow	m_matchViewer;
 
-	private boolean m_projectLoaded = false;
+	private boolean m_projectLoaded;
 
 }
 

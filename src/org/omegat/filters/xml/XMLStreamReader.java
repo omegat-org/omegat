@@ -35,7 +35,7 @@ import java.util.ArrayList;
  */
 public class XMLStreamReader
 {
-	protected XMLStreamFilter	m_streamFilter = null;
+	private XMLStreamFilter	m_streamFilter;
 
 	public XMLStreamReader()
 	{
@@ -65,43 +65,11 @@ public class XMLStreamReader
 		setStream(new File(name), encoding);
 	}
 
-	
-	class AntiCRInputStream extends InputStream
-	{
-		private InputStream is;
-		
-		public AntiCRInputStream(InputStream is)
-		{
-			this.is = is;
-		}
-		
-	    public int available() throws IOException 
-		{
-			return is.available();
-		}
-		public long skip(long n) throws IOException 
-		{
-			return is.skip(n);
-		}
-		public void close() throws IOException 
-		{
-			is.close();
-		}
-		
-		public int read() throws IOException
-		{
-			int res = is.read();
-			while( res=='\r' )
-				res = is.read();
-			return res;
-		}
-		
-	}
-	
-	// opens and reads the file according to the specified encoding
+
+    // opens and reads the file according to the specified encoding
 	// should have this auto-sense the unicode file type, but keep
 	//  it general as many 'xml' apps don't use unicode
-	public void setStream(File name, String encoding)
+    private void setStream(File name, String encoding)
 		throws FileNotFoundException, UnsupportedEncodingException,
 				IOException
 	{
@@ -120,7 +88,7 @@ public class XMLStreamReader
 	}
 	
 	// do the work here
-	protected void _setStream() throws IOException
+    private void _setStream() throws IOException
 	{
 		m_pos = -1;
 		// make sure XML file and encoding is proper
@@ -131,15 +99,15 @@ public class XMLStreamReader
 			{
 				throw new ParseException(OStrings.getString("XSR_ERROR_UNABLE_INIT_READ_XML"), 0);
 			}
-			if (blk.getTagName().equals("xml") == true)	// NOI18N
+			if (blk.getTagName().equals("xml"))	// NOI18N
 			{
 				String ver = blk.getAttribute("version");	// NOI18N
-				String enc = blk.getAttribute("encoding");	// NOI18N
-				if ((ver == null) || (ver.equals("")))	// NOI18N
+				//String enc = blk.getAttribute("encoding");	// NOI18N
+				if (ver == null || ver.equals(""))	// NOI18N
 				{
 					// no version declared - assume it's readable
 				}
-				else if (ver.equals("1.0") == false)	// NOI18N
+				else if (!ver.equals("1.0"))	// NOI18N
 				{
 					throw new ParseException
 					( 
@@ -193,7 +161,7 @@ public class XMLStreamReader
 
 		pushChar(c);
 		XMLBlock blk = getNextText();
-		if ((blk != null) && m_killEmptyBlocks)
+		if (blk != null && m_killEmptyBlocks)
 		{
 			String str = blk.getText();
 			str = str.trim();
@@ -205,9 +173,9 @@ public class XMLStreamReader
 		return blk;
 	}
 
-	public void killEmptyBlocks(boolean kill)
+	public void killEmptyBlocks()
 	{
-		m_killEmptyBlocks = kill;
+		m_killEmptyBlocks = true;
 	}
 
     public void breakOnWhitespace(boolean brk)
@@ -232,32 +200,32 @@ public class XMLStreamReader
 	// pushing chars and marking stream is to allow rewind
 	// mark is to try to back up to correct for incorrectly formatted 
 	//	document
-	protected void pushChar(char c)
+    private void pushChar(char c)
 	{
 		m_charStack.add(new Character(c));
 	}
 
 	// caches the current character in case rewind later desired
-	protected char getNextCharCache()
+    private char getNextCharCache()
 	{
 		char c = getNextChar();
 		m_charCache.add(new Character(c));
 		return c;
 	}
 	
-	protected void clearCache()
+	private void clearCache()
 	{
 		m_charCache.clear();
 	}
 
 	// pushes cached chars onto the stack, in effect rewinding stream
-	protected void revertToCached()
+    private void revertToCached()
 	{
 		for (int i=m_charCache.size()-1; i>=0; i--)
 			m_charStack.add(m_charCache.get(i));
 	}
 
-	protected char getNextChar()
+	private char getNextChar()
 	{
 		if (m_charStack.size() > 0)
 		{
@@ -285,7 +253,7 @@ public class XMLStreamReader
 						else
 							c = 10;
 					}
-					if ((m_ignoreReturn) && (c == 10))
+					if (m_ignoreReturn && c == 10)
 						return getNextChar();
 					else
 						return c;
@@ -330,7 +298,7 @@ public class XMLStreamReader
 					else
 						return 0;
 					
-					if ((m_ignoreReturn) && (b == 10))
+					if (m_ignoreReturn && b == 10)
 						return getNextChar();
 					else
 						return b;
@@ -344,14 +312,14 @@ public class XMLStreamReader
 		}
 	}
 	
-	protected XMLBlock getNextText() throws ParseException
+	private XMLBlock getNextText() throws ParseException
 	{
 		XMLBlock blk = new XMLBlock();
 		StringBuffer strBuf = new StringBuffer();
 		char c;
 		int wsCnt = 0;
 		int wsBreak = 0;
-		while (((c = getNextChar()) != '<') && ( c != 0))
+		while ((c = getNextChar()) != '<' && c != 0)
 		{
 			if (c == '&')
 			{
@@ -368,17 +336,17 @@ public class XMLStreamReader
 				else
 					strBuf.append(c2);
 			}
-			else if ((c == ' ') || (c == 10) || (c == 13) || (c == 9))
+			else if (c == ' ' || c == 10 || c == 13 || c == 9)
 			{
 				// spaces get special handling 
-				if (m_ignoreWhiteSpace == true)
+				if (m_ignoreWhiteSpace)
 				{
 					continue;
 				}
 
-				if (m_compressWhitespace == true)
+				if (m_compressWhitespace)
 				{
-					if (m_breakWhitespace == true)
+					if (m_breakWhitespace)
 					{
 						// if we're already in a text segment, break out
 						//	and return ws char to stack
@@ -439,7 +407,7 @@ public class XMLStreamReader
 	}
 
 	// tags defined by <!
-	protected XMLBlock getNextTagExclamation() throws ParseException
+    private XMLBlock getNextTagExclamation() throws ParseException
 	{
 		// for <!declaration .... >
 		//  copy declaration into tagname and '...' into first attribute
@@ -696,7 +664,7 @@ public class XMLStreamReader
 					break;
 
 			}
-			if (err == true)
+			if (err)
 			{
 				// TODO construct error message with correct state data
 				// for now, just throw a parse error
@@ -705,7 +673,7 @@ public class XMLStreamReader
 				if (blk.isComment())
 					str += OStrings.getString("XSR_ERROR_COMMENT_TAG");
 				if (blk.numAttributes() > 0)
-					str += ((XMLAttribute) blk.getAttribute(0)).name;
+					str += blk.getAttribute(0).name;
 				throw new ParseException(msg + str + "::" + data, 0);	// NOI18N
 			}
 			else if (state == state_finish)
@@ -716,7 +684,7 @@ public class XMLStreamReader
 		return blk;
 	}
 
-	protected XMLBlock getNextTag() throws ParseException
+	private XMLBlock getNextTag() throws ParseException
 	{
 		final int state_start				= 1;
 		final int state_buildName			= 2;
@@ -753,7 +721,7 @@ public class XMLStreamReader
 		String name = "";	// NOI18N
 		String attr = "";	// NOI18N
 		String val = "";	// NOI18N
-		int type = 0;
+		int type;
 		while (c != 0)
 		{
 			type = getCharType(c);
@@ -997,7 +965,7 @@ public class XMLStreamReader
 					System.out.println("INTERNAL ERROR untrapped parse state " + state);	// NOI18N
 			}
 
-			if (error == true)
+			if (error)
 			{
 				// TODO construct error message with correct state data
 				// for now, just throw a parse error
@@ -1022,24 +990,24 @@ public class XMLStreamReader
 		return blk;
 	}
 
-	protected static final int	type_text		= 1;
-	protected static final int	type_ws			= 2;
-	protected static final int	type_apos		= 3;
-	protected static final int	type_quote		= 4;
-	protected static final int	type_lt			= 5;
-	protected static final int	type_gt			= 6;
-	protected static final int	type_amp		= 7;
+	private static final int	type_text		= 1;
+	private static final int	type_ws			= 2;
+	private static final int	type_apos		= 3;
+	private static final int	type_quote		= 4;
+	private static final int	type_lt			= 5;
+	private static final int	type_gt			= 6;
+	private static final int	type_amp		= 7;
 
-	protected static final int	type_equals		= 8;
-	protected static final int	type_ques		= 9;
-	protected static final int	type_opBrac		= 10;
-	protected static final int	type_clBrac		= 11;
-	protected static final int	type_slash		= 12;
-	protected static final int	type_backSlash	= 13;
-	protected static final int	type_dash		= 14;
+	private static final int	type_equals		= 8;
+	private static final int	type_ques		= 9;
+	private static final int	type_opBrac		= 10;
+	private static final int	type_clBrac		= 11;
+	private static final int	type_slash		= 12;
+	private static final int	type_backSlash	= 13;
+	private static final int	type_dash		= 14;
 
 	// used by getNextTag for parsing of tag data
-	protected int getCharType(char c)
+    private int getCharType(char c)
 	{
 		int type = type_text;
 		switch (c)
@@ -1131,14 +1099,14 @@ public class XMLStreamReader
 
 	// converts a stream of plaintext into valid XML 
 	// output stream must convert stream to UTF-8 when saving to disk
-	public static String makeValidXML(String plaintext, XMLStreamFilter filter)
+	public static String makeValidXML(String plaintext)
 	{
 		char c;
 		StringBuffer out = new StringBuffer();
 		for (int i=0; i<plaintext.length(); i++)
 		{
 			c = plaintext.charAt(i);
-			out.append(makeValidXML(c, filter));
+			out.append(makeValidXML(c, null));
 		}
 		return out.toString();
 	}
@@ -1167,7 +1135,7 @@ public class XMLStreamReader
 
 		// start search
 		int depth = 0;
-		XMLBlock blk = null;
+		XMLBlock blk;
 		while (true)
 		{
 			blk = getNextBlock();
@@ -1177,7 +1145,7 @@ public class XMLStreamReader
 				throw new ParseException(OStrings.getString("XSR_ERROR_END_OF_STREAM"), 0);
 			}
 			
-			if ((blk.isTag()) && (blk.getTagName().equals(block.getTagName())))
+			if (blk.isTag() && blk.getTagName().equals(block.getTagName()))
 			{
 				if (blk.isClose())
 				{
@@ -1204,7 +1172,7 @@ public class XMLStreamReader
 			}
 		}
 
-		if ((blk == null) || (lst.size() == 0))
+		if( lst.size()==0 )
 			return null;
 		else
 			return lst;
@@ -1212,7 +1180,7 @@ public class XMLStreamReader
 
 	public XMLBlock advanceToTag(String tagname) throws ParseException
 	{
-		XMLBlock blk = null;
+		XMLBlock blk;
 		while (true)
 		{
 			blk = getNextBlock();
@@ -1221,7 +1189,7 @@ public class XMLStreamReader
 				break;
 			}
 			
-			if ((blk.isTag()) && (blk.getTagName().equals(tagname)))
+			if (blk.isTag() && blk.getTagName().equals(tagname))
 			{
 				break;
 			}
@@ -1230,7 +1198,7 @@ public class XMLStreamReader
 		return blk;
 	}
 
-	protected char getEscChar() throws ParseException
+	private char getEscChar() throws ParseException
 	{
 		// look for amp, lt, gt, apos, quot and &#
 		clearCache();
@@ -1242,7 +1210,7 @@ public class XMLStreamReader
 		{
 			// char code
 			c = getNextCharCache();
-			if ((c == 'x') || (c == 'X'))
+			if (c == 'x' || c == 'X')
 			{
 				c = getNextCharCache();
 				hex = true;
@@ -1304,14 +1272,14 @@ public class XMLStreamReader
 			if (hex)
 			{
 				c *= 16;
-				if ((b >= '0') && (b <= '9'))
+				if (b >= '0' && b <= '9')
 					c += b - '0';
-				else if ((b >= 'A') && (b <= 'F'))
+				else if (b >= 'A' && b <= 'F')
 				{
 					c += 10;
 					c += b - 'A';
 				}
-				else if ((b >= 'a') && (b <= 'f'))
+				else if (b >= 'a' && b <= 'f')
 				{
 					c += 10;
 					c += b - 'a';
@@ -1326,7 +1294,7 @@ public class XMLStreamReader
 			else
 			{
 				c *= 10;
-				if ((b >= '0') && (b <= '9'))
+				if (b >= '0' && b <= '9')
 					c += b - '0';
 				else
 				{
@@ -1346,18 +1314,18 @@ public class XMLStreamReader
 
     ///////////////////////////////////////////////////////////////
 
-	protected BufferedReader	m_bufferedReader;
-	protected String			m_stringStream;
+	private BufferedReader	m_bufferedReader;
+	private String			m_stringStream;
 
-	protected XMLBlock			m_headBlock;
+	private XMLBlock			m_headBlock;
 
-	protected int		m_pos;
-    protected ArrayList	m_charStack;
-	protected ArrayList	m_charCache;
-	protected boolean	m_ignoreReturn; //swallow 0x0a?
-	protected boolean	m_killEmptyBlocks;
-	protected boolean	m_ignoreWhiteSpace;	// don't copy ws to text
-	protected boolean	m_breakWhitespace;	// put all ws in own block
-	protected boolean	m_compressWhitespace;	// put ws span in single space
+	private int		m_pos;
+    private ArrayList	m_charStack;
+	private ArrayList	m_charCache;
+	private boolean	m_ignoreReturn; //swallow 0x0a?
+	private boolean	m_killEmptyBlocks;
+	private boolean	m_ignoreWhiteSpace;	// don't copy ws to text
+	private boolean	m_breakWhitespace;	// put all ws in own block
+	private boolean	m_compressWhitespace;	// put ws span in single space
 
 }

@@ -22,7 +22,7 @@
 package org.omegat.gui;
 
 import org.omegat.util.OStrings;
-import org.omegat.core.SourceTextEntry;
+import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.StringEntry;
 
 import javax.swing.*;
@@ -38,13 +38,12 @@ import java.util.*;
  *
  * @author Keith Godfrey
  */
-public class ContextFrame extends JFrame
+class ContextFrame extends JFrame
 {
-	public ContextFrame(TransFrame parent, boolean srcLang, boolean grabFocus)
+	public ContextFrame(TransFrame parent)
 	{
-		String str;
 		m_parent = parent;
-		m_srcLang = srcLang;
+		m_srcLang = true;
 
 		Container cp = getContentPane();
 		m_editorPane = new JEditorPane();
@@ -67,7 +66,7 @@ public class ContextFrame extends JFrame
 		cp.add(bbut, "South");	// NOI18N
 
 		setSize(500, 400);
-		m_editorPane.addHyperlinkListener(new HListener(m_parent, grabFocus));
+		m_editorPane.addHyperlinkListener(new HListener(m_parent, false));
 
 		// this only seems to work in 1.4, but at least it works there
 		// throws exceptions in 1.2
@@ -89,7 +88,7 @@ public class ContextFrame extends JFrame
 		updateUIText();
 	}
 
-	public void updateUIText()
+	private void updateUIText()
 	{
 		m_closeButton.setText(OStrings.CF_BUTTON_CLOSE);
 		if (m_srcLang)
@@ -98,19 +97,14 @@ public class ContextFrame extends JFrame
 			m_searchResults = OStrings.CF_SEARCH_RESULTS_LOC;
 	}
 
-	public void doClose()
+	private void doClose()
 	{
 		dispose();
 	}
 
-    class QueryData
+    public void displayStringList(ArrayList stringList)
 	{
-    }
-	
-	public void displayStringList(ArrayList stringList, String searchTerms)
-	{
-		Object obj;
-		setTitle(m_searchResults + " " + searchTerms);			// NOI18N
+		setTitle(m_searchResults + " " + OStrings.TF_NOTICE_BAD_TAGS);			// NOI18N
 		String out;
 		String src;
 		String trans;
@@ -124,11 +118,11 @@ public class ContextFrame extends JFrame
 			se = ste.getStrEntry();
 			src = se.getSrcText();
 			trans = se.getTrans();
-			if ((src.equals("") == false) && (trans.equals("") == false))		// NOI18N
+			if (!src.equals("") && !trans.equals(""))		// NOI18N
 			{
 				out += "<tr>";													// NOI18N
 				out += "<td><a href=\"" + (ste.entryNum()+ 1) + "\">";			// NOI18N
-				out += (ste.entryNum() + 1) + " </a></td>";						// NOI18N
+				out += ste.entryNum() + 1 + " </a></td>";						// NOI18N
 				out += "<td>" + src + "</td>";									// NOI18N
 				out += "<td>" + trans + "</td>";								// NOI18N
 				out += "</tr>";													// NOI18N

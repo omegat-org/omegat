@@ -19,37 +19,49 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.core;
+package org.omegat.core.matching;
 
-import java.util.zip.Adler32;
-import java.util.zip.CRC32;
+import org.omegat.core.*;
 
 /**
- * Utility class to compute checksums
+ * Class to hold a single fuzzy match.
  *
  * @author Keith Godfrey
  */
-public class LCheckSum
+public class NearString implements Comparable
 {
-
-    // old method - keep it around for posterity (and because it gives
-	//	a better pseudorandom sequence)
-	public static long compute(String str)
+	public NearString(StringEntry strEntry, 
+				double nearScore, 
+				byte[] nearData,
+				String projName)
 	{
-		CRC32 crc = new CRC32();
-		Adler32 adler = new Adler32();
-		crc.update(str.getBytes());
-		adler.update(str.getBytes());
-		long dg1 = crc.getValue();
-		long dg2 = adler.getValue();
-		crc.update(String.valueOf(dg2).getBytes());
-		adler.update(String.valueOf(dg1).getBytes());
-		long d3 = crc.getValue();
-		long d4 = adler.getValue();
-		dg1 ^= d4;
-		dg2 ^= d3;
-		return (dg2 ^ ((dg1 >>> 32) | (dg1 << 32)));
-		// convert this to first 8 bytes of SHA later
+		str = strEntry;
+		score = nearScore;
+		attr = nearData;
+		if (projName != null)
+			proj = projName;
 	}
 
+	public int compareTo(Object obj)
+	{
+		NearString visitor = (NearString) obj;
+		Double homeScore = new Double(score);
+		Double visitorScore = new Double(visitor.score);
+		// return homeScore.compareTo(visitorScore);
+		// backwards, because we need to sort it this way (1.0 -> 0.9 -> ...)
+		int result = visitorScore.compareTo(homeScore);
+		if( result==0 )
+		{
+			if( equals(obj) )
+				return 0;
+			else
+				return 1;
+		}
+		return result;
+	}
+
+	public StringEntry str;
+	public double score;
+	public byte[] attr;	// matching attributes of near strEntry
+	public String proj = ""; // NOI18N
 }

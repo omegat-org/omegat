@@ -39,7 +39,7 @@ public class GlossaryEntry
 	public String	getLocText()	{ return m_loc;		}
 	public String	getCommentText()	{ return m_com;		}
 
-	protected String	m_src;
-	protected String	m_loc;
-	protected String	m_com;
+	private String	m_src;
+	private String	m_loc;
+	private String	m_com;
 }

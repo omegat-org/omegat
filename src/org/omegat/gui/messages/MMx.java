@@ -28,12 +28,12 @@ import org.omegat.gui.TransFrame;
  *
  * @author Keith Godfrey
  */
-public class MMx implements Runnable
+class MMx implements Runnable
 {
-	protected String	m_msg = "";	// NOI18N
-	protected int		m_cmdNum = 0;
-	protected Throwable	m_throw = null;
-	protected TransFrame m_tf = null;
+	private String	m_msg = "";	// NOI18N
+	private int		m_cmdNum;
+	private Throwable	m_throw;
+	private TransFrame m_tf;
 
 	public MMx(TransFrame tf, int cmd)
 	{
@@ -41,7 +41,7 @@ public class MMx implements Runnable
 		m_tf = tf;
 
 		// check for errors 
-		if (((cmd >= 1) && (cmd <= 5)) || (cmd == 10) || (cmd == 11))
+		if (cmd >= 1 && cmd <= 5 || cmd == 10 || cmd == 11)
 			m_cmdNum = cmd;
 	}
 
@@ -51,25 +51,23 @@ public class MMx implements Runnable
 		m_tf = tf;
 
 		// check for errors 
-		if ((cmd == 6) || (cmd == 7))
+		if (cmd == 6 || cmd == 7)
 		{
 			m_cmdNum = cmd;
 			m_msg = msg;
 		}
 	}
 
-	public MMx(TransFrame tf, int cmd, String msg, Throwable e)
+	public MMx(TransFrame tf, String msg, Throwable e)
 	{
 		m_cmdNum = 0;
 		m_tf = tf;
+        int cmd = 9;
 
-		// check for errors 
-		if ((cmd == 8) || (cmd == 9))
-		{
-			m_cmdNum = cmd;
-			m_msg = msg;
-			m_throw = e;
-		}
+		// check for errors
+		m_cmdNum = cmd;
+		m_msg = msg;
+		m_throw = e;
 	}
 
 	public void run()
@@ -112,7 +110,7 @@ public class MMx implements Runnable
 			default:
 				// do nothing
 				break;
-		};
-	}
-};
+		}
+    }
+}
 

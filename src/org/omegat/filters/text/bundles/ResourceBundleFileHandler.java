@@ -22,7 +22,7 @@
 package org.omegat.filters.text.bundles;
 
 import org.omegat.filters.FileHandler;
-import org.omegat.gui.threads.CommandThread;
+import org.omegat.core.threads.CommandThread;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import java.io.BufferedWriter;
@@ -74,7 +74,7 @@ public class ResourceBundleFileHandler extends FileHandler
 	 */
 	public Writer createOutputStream(String outfile) throws IOException
 	{
-        String locale, language=null, country=null;
+        String locale, language, country=null;
 		locale = CommandThread.core.getPreference(OConsts.PREF_LOCLANG);
 		if( locale!=null && locale.length()>=2 ) {
 			language = locale.substring(0,2).toLowerCase();
@@ -185,8 +185,8 @@ public class ResourceBundleFileHandler extends FileHandler
 	 */
 	public void doLoad() throws IOException
 	{
-		String str, buffer;
-		boolean glueNextLine = false, noi18n=false;
+		String str;
+		boolean noi18n=false;
 		while( (str=getNextLine())!=null ) 
 		{
 			String trimmed = str.trim();

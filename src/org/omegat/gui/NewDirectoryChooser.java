@@ -30,7 +30,7 @@ import javax.swing.*;
  *
  * @author Keith Godfrey
  */
-public class NewDirectoryChooser extends JFileChooser
+class NewDirectoryChooser extends JFileChooser
 {
 	public NewDirectoryChooser()
 	{

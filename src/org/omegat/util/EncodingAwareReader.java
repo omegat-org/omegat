@@ -84,10 +84,10 @@ public class EncodingAwareReader extends Reader
 	/** Return encoding of the file, if defined */
 	private String fileEncoding(String fileName) throws IOException
 	{
-		BufferedReader reader = new BufferedReader(new FileReader(fileName));
+		BufferedReader ereader = new BufferedReader(new FileReader(fileName));
 		StringBuffer buffer = new StringBuffer();
-		while( reader.ready() ) {
-			buffer.append( reader.readLine().toLowerCase() );
+		while( ereader.ready() ) {
+			buffer.append( ereader.readLine().toLowerCase() );
 			switch( type )
 			{
 				case ST_HTML:
@@ -109,7 +109,7 @@ public class EncodingAwareReader extends Reader
 					throw new IOException("[EAR] Wrong type of stream specified: Either it's HTML, or XML!");
 			}
 		}
-		reader.close();
+		ereader.close();
 		return ""; // NOI18N
 	}
 	

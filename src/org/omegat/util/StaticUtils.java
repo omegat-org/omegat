@@ -21,7 +21,7 @@
 
 package org.omegat.util;
 
-import org.omegat.gui.threads.CommandThread;
+import org.omegat.core.threads.CommandThread;
 import org.omegat.gui.messages.MessageRelay;
 
 import java.awt.*;
@@ -38,7 +38,7 @@ import java.util.StringTokenizer;
  */
 public class StaticUtils
 {
-	public static void initPrefFileMappings()
+	private static void initPrefFileMappings()
 	{
 		PreferenceManager pref = CommandThread.core.getPrefManager();
 
@@ -71,18 +71,18 @@ public class StaticUtils
 	{
 		PreferenceManager pref = CommandThread.core.getPrefManager();
 
-		if ((mapFrom == null) || (mapTo == null))
+		if (mapFrom == null || mapTo == null)
 			return;
 
 		String str = pref.getPreference(OConsts.PREF_NUM_FILE_MAPPINGS);
-		if ((str == null) || (str.equals("")))									// NOI18N
+		if (str == null || str.equals(""))									// NOI18N
 		{
 			// probably an old pref file - update it
 			initPrefFileMappings();
 
 			// now try to read it again
 			str = pref.getPreference(OConsts.PREF_NUM_FILE_MAPPINGS);
-			if ((str == null) || (str.equals("")))								// NOI18N
+			if (str == null || str.equals(""))								// NOI18N
 			{
 				// we've got problems here
 				String msg = OStrings.CT_PREF_LOAD_ERROR_MAPPINGS;
@@ -158,8 +158,8 @@ System.out.println("mapping extension '"+str.substring(0,pos)+"' to '"+str.subst
 					else
 						tag += c;
 					break;
-			};
-		}
+			}
+        }
 	}
 
 	// returns true if file starts w/ "<?xml"
@@ -169,11 +169,11 @@ System.out.println("mapping extension '"+str.substring(0,pos)+"' to '"+str.subst
 		{
 			BufferedReader in = new BufferedReader(new FileReader(filename));
 			String s = in.readLine();
-			if ((s.charAt(0) == '<')		&& 
-					(s.charAt(1) == '?')	&&
-					(s.charAt(2) == 'x')	&&
-					(s.charAt(3) == 'm')	&&
-					(s.charAt(4) == 'l'))
+			if (s.charAt(0) == '<'		&&
+                    s.charAt(1) == '?'	&&
+                    s.charAt(2) == 'x'	&&
+                    s.charAt(3) == 'm'	&&
+                    s.charAt(4) == 'l')
 			{
 				// got a match
 				// for now, assume version 1.0 and utf-8 encoding
@@ -206,7 +206,7 @@ System.out.println("mapping extension '"+str.substring(0,pos)+"' to '"+str.subst
 			}
 			lst.add(flist[i].getAbsolutePath());
 		}
-		if (recursive == true)
+		if (recursive)
 		{
 			for (i=0; i<Array.getLength(flist); i++)
 			{
@@ -238,6 +238,7 @@ System.out.println("mapping extension '"+str.substring(0,pos)+"' to '"+str.subst
 		}
 	}
 
+	
 	/**
 	 * Builds a list of tokens and a list of their offsets w/in a file.
 	 * 
@@ -247,21 +248,69 @@ System.out.println("mapping extension '"+str.substring(0,pos)+"' to '"+str.subst
 	 */
 	public static int tokenizeText(String str, ArrayList tokenList)
 	{
-		StringTokenizer st = new StringTokenizer(str, " \t\n\r\f.!?,:;0123456789");
-		if( tokenList==null )
-			return st.countTokens();
+		str = str.toLowerCase();
 		
-		tokenList.clear();
-		int searchstart = 0;
-		while( st.hasMoreTokens() )
+		int len = str.length();
+		boolean word = false;
+		StringBuffer tokenString = new StringBuffer(len);
+		int tokenStart = 0;
+		int nTokens = 0;
+		for(int i=0; i<len; i++)
 		{
-			String nt = st.nextToken();
-			int pos = str.indexOf(nt, searchstart);
-			searchstart = pos + 1;
-			Token token = new Token(nt, pos);
-			tokenList.add(token);
+			char ch = str.charAt(i);
+			if( word )
+			{
+				if( Character.isLetter(ch) )
+				{
+					tokenString.append(ch);
+				}
+				else
+				{
+					nTokens++;
+					word = false;
+					if( tokenList!=null )
+					{
+						Token token = new Token(tokenString.toString(), tokenStart);
+						tokenList.add(token);
+					}
+				}
+			}
+			else
+			{
+				if( Character.isLetter(ch) )
+				{
+					if( !CJKUtils.isCJK(ch) )
+					{
+						word = true;
+						tokenStart = i;
+						tokenString.setLength(0);
+						tokenString.append(ch);
+					}
+					else
+					{
+						nTokens++;
+						if( tokenList!=null )
+						{
+							Token token = new Token(Character.toString(ch), i);
+							tokenList.add(token);
+						}
+					}
+					
+				}
+			}
 		}
-		return tokenList.size();
+		
+		if( word )
+		{
+			nTokens++;
+			if( tokenList!=null )
+			{
+				Token token = new Token(tokenString.toString(), tokenStart);
+				tokenList.add(token);
+			}
+		}
+		
+		return nTokens;
 	}
 	
     public static String[] getFontNames()
@@ -271,4 +320,4 @@ System.out.println("mapping extension '"+str.substring(0,pos)+"' to '"+str.subst
 		return graphics.getAvailableFontFamilyNames();
 	}
 
-};
+}

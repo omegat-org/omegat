@@ -62,7 +62,7 @@ public class MessageRelay
     public static void uiMessageDisplayError(TransFrame tf, 
 					String str, Throwable e)
 	{
-		MMx msg = new MMx(tf, 9, str, e);
+		MMx msg = new MMx(tf, str, e);
 		SwingUtilities.invokeLater(msg);
 	}
 

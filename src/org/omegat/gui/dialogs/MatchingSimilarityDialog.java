@@ -23,8 +23,12 @@ package org.omegat.gui.dialogs;
 
 import org.omegat.util.OStrings;
 
-import java.awt.Frame;
-import javax.swing.JDialog;
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.ActionEvent;
+import javax.swing.*;
 
 /**
  *
@@ -42,7 +46,7 @@ public class MatchingSimilarityDialog extends JDialog
 		pack();
 	}
 	
-	private boolean changed = false;
+	private boolean changed;
 	/** @return if the user changed similarity coefficient and pressed OK */
 	public boolean isChanged()
 	{
@@ -73,143 +77,143 @@ public class MatchingSimilarityDialog extends JDialog
 	 */
     private void initComponents()//GEN-BEGIN:initComponents
     {
-        java.awt.GridBagConstraints gridBagConstraints;
+        GridBagConstraints gridBagConstraints;
 
-        buttonPanel = new javax.swing.JPanel();
-        okButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
-        descriptionText = new javax.swing.JTextArea();
-        similaritySlider = new javax.swing.JSlider();
-        captionsPanel = new javax.swing.JPanel();
-        minLabel = new javax.swing.JLabel();
-        normLabel = new javax.swing.JLabel();
-        maxLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        buttonPanel = new JPanel();
+        okButton = new JButton();
+        cancelButton = new JButton();
+        descriptionText = new JTextArea();
+        similaritySlider = new JSlider();
+        captionsPanel = new JPanel();
+        minLabel = new JLabel();
+        normLabel = new JLabel();
+        maxLabel = new JLabel();
+        jLabel1 = new JLabel();
+        jLabel2 = new JLabel();
 
-        getContentPane().setLayout(new java.awt.GridBagLayout());
+        getContentPane().setLayout(new GridBagLayout());
 
         setTitle(OStrings.getString("MS_TITLE"));
         setModal(true);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter()
+        addWindowListener(new WindowAdapter()
         {
-            public void windowClosing(java.awt.event.WindowEvent evt)
+            public void windowClosing(WindowEvent evt)
             {
-                closeDialog(evt);
+                closeDialog();
             }
         });
 
-        buttonPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
         okButton.setText(OStrings.getString("BUTTON_OK"));
-        okButton.addActionListener(new java.awt.event.ActionListener()
+        okButton.addActionListener(new ActionListener()
         {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
+            public void actionPerformed(ActionEvent evt)
             {
-                okButtonActionPerformed(evt);
+                okButtonActionPerformed();
             }
         });
 
         buttonPanel.add(okButton);
 
         cancelButton.setText(OStrings.getString("BUTTON_CANCEL"));
-        cancelButton.addActionListener(new java.awt.event.ActionListener()
+        cancelButton.addActionListener(new ActionListener()
         {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
+            public void actionPerformed(ActionEvent evt)
             {
-                cancelButtonActionPerformed(evt);
+                cancelButtonActionPerformed();
             }
         });
 
         buttonPanel.add(cancelButton);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         getContentPane().add(buttonPanel, gridBagConstraints);
 
-        descriptionText.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        descriptionText.setBackground(UIManager.getDefaults().getColor("Label.background"));
         descriptionText.setEditable(false);
         descriptionText.setFont(maxLabel.getFont());
         descriptionText.setLineWrap(true);
         descriptionText.setText(OStrings.getString("MS_DESCRIPTION"));
         descriptionText.setWrapStyleWord(true);
-        descriptionText.setDisabledTextColor(javax.swing.UIManager.getDefaults().getColor("Label.foreground"));
+        descriptionText.setDisabledTextColor(UIManager.getDefaults().getColor("Label.foreground"));
         descriptionText.setEnabled(false);
-        descriptionText.setMinimumSize(new java.awt.Dimension(200, 100));
+        descriptionText.setMinimumSize(new Dimension(200, 100));
         descriptionText.setOpaque(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = GridBagConstraints.NORTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        gridBagConstraints.insets = new Insets(4, 4, 4, 4);
         getContentPane().add(descriptionText, gridBagConstraints);
 
         similaritySlider.setMajorTickSpacing(1);
         similaritySlider.setMaximum(2);
         similaritySlider.setPaintTicks(true);
         similaritySlider.setSnapToTicks(true);
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 10, 0, 10);
+        gridBagConstraints.insets = new Insets(4, 10, 0, 10);
         getContentPane().add(similaritySlider, gridBagConstraints);
 
-        captionsPanel.setLayout(new java.awt.GridLayout(2, 3, 30, 0));
+        captionsPanel.setLayout(new GridLayout(2, 3, 30, 0));
 
-        minLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        minLabel.setHorizontalAlignment(SwingConstants.LEFT);
         minLabel.setText(OStrings.getString("MS_LABEL_MIN"));
         captionsPanel.add(minLabel);
 
-        normLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        normLabel.setHorizontalAlignment(SwingConstants.CENTER);
         normLabel.setText(OStrings.getString("MS_LABEL_LOW"));
         captionsPanel.add(normLabel);
 
-        maxLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        maxLabel.setHorizontalAlignment(SwingConstants.TRAILING);
         maxLabel.setText(OStrings.getString("MS_LABEL_NORMAL"));
         captionsPanel.add(maxLabel);
 
         jLabel1.setText(OStrings.getString("MS_HINT_MIN"));
         captionsPanel.add(jLabel1);
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel2.setText(OStrings.getString("MS_HINT_LOW"));
         captionsPanel.add(jLabel2);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 4, 4, 4);
+        gridBagConstraints.insets = new Insets(0, 4, 4, 4);
         getContentPane().add(captionsPanel, gridBagConstraints);
 
         pack();
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        java.awt.Dimension dialogSize = getSize();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension dialogSize = getSize();
         setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
     }//GEN-END:initComponents
 	
-	private void okButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_okButtonActionPerformed
+	private void okButtonActionPerformed()//GEN-FIRST:event_okButtonActionPerformed
 	{
 		changed = similaritySlider.getValue() != value;
 		value = similaritySlider.getValue();
 		doClose();
 	}//GEN-LAST:event_okButtonActionPerformed
 	
-	private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cancelButtonActionPerformed
+	private void cancelButtonActionPerformed()//GEN-FIRST:event_cancelButtonActionPerformed
 	{
 		doClose();
 	}//GEN-LAST:event_cancelButtonActionPerformed
 	
 	/** Closes the dialog */
-	private void closeDialog(java.awt.event.WindowEvent evt)//GEN-FIRST:event_closeDialog
+	private void closeDialog()//GEN-FIRST:event_closeDialog
 	{
 		doClose();
 	}//GEN-LAST:event_closeDialog
@@ -221,17 +225,17 @@ public class MatchingSimilarityDialog extends JDialog
 	}
 	
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel buttonPanel;
-    private javax.swing.JButton cancelButton;
-    private javax.swing.JPanel captionsPanel;
-    private javax.swing.JTextArea descriptionText;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel maxLabel;
-    private javax.swing.JLabel minLabel;
-    private javax.swing.JLabel normLabel;
-    private javax.swing.JButton okButton;
-    private javax.swing.JSlider similaritySlider;
+    private JPanel buttonPanel;
+    private JButton cancelButton;
+    private JPanel captionsPanel;
+    private JTextArea descriptionText;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
+    private JLabel maxLabel;
+    private JLabel minLabel;
+    private JLabel normLabel;
+    private JButton okButton;
+    private JSlider similaritySlider;
     // End of variables declaration//GEN-END:variables
 	
 }

@@ -63,12 +63,12 @@ public class LBuffer {
 		m_size++;
 	}
 	
-	public char getChar(int pos)
+	public char getZeroChar()
 	{
-		if ((pos >= m_size) || (pos < 0))
+		if (0 >= m_size || 0 < 0)
 			return 0;
 		else
-			return m_buf[pos];
+			return m_buf[0];
 	}
 
 	public boolean isEqual(LBuffer buf)
@@ -90,7 +90,7 @@ public class LBuffer {
 		else 
 		{
 			String s = new String(m_buf, 0, m_size);
-			return (str.compareToIgnoreCase(s) == 0);
+			return str.compareToIgnoreCase(s) == 0;
 		}
 	}
 
@@ -104,9 +104,9 @@ public class LBuffer {
 		append(Integer.toString(x));
 	}
 
-    public void setSize(int newSize)
+    private void setSize(int newSize)
 	{
-		char[] buf = null;
+		char[] buf;
 		if (newSize < 0)
 			newSize = 0;
 
@@ -130,7 +130,7 @@ public class LBuffer {
 		m_size = 0;
 	}
 
-	public static int PowerOfTwo(int x)
+	private static int PowerOfTwo(int x)
 	{
 		int retVal = 0;
 		int initVal = x;
@@ -156,10 +156,10 @@ public class LBuffer {
 
 	}
 
-	public int length()	{ return m_size;	}
+	private int length()	{ return m_size;	}
 	public int size()	{ return m_size;	}
 	public char[] getBuf()	{ return m_buf;		}
 
     private char[]	m_buf;
 	private int	m_size;
-};
+}

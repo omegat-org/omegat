@@ -67,7 +67,7 @@ public class TextFileHandler extends FileHandler
 	/**
 	 * Create input stream.
 	 */
-	public Reader createInputStream(String infile)
+    protected Reader createInputStream(String infile)
 			throws IOException
 	{
 		FileInputStream fis = new FileInputStream(infile);
@@ -85,9 +85,8 @@ public class TextFileHandler extends FileHandler
 
 	public void load(String file) throws IOException
 	{
-		int i;
 		String t;
-		String srcText = "";	 // NOI18N
+		String srcText;	 // NOI18N
 		String s;
 		String nonTrans = "";	 // NOI18N
 		int ctr = 0;
@@ -113,7 +112,7 @@ public class TextFileHandler extends FileHandler
 			processEntry(srcText, file);
 			nonTrans += "\n";	 // NOI18N
 		}
-		if ((m_outFile != null) && (nonTrans.compareTo("") != 0))	 // NOI18N
+		if (m_outFile != null && nonTrans.compareTo("") != 0)	 // NOI18N
 		{
 			m_outFile.write(nonTrans);
 		}

@@ -21,12 +21,17 @@
 
 package org.omegat.core;
 
-import org.omegat.gui.threads.CommandThread;
+import java.util.ArrayList;
+import org.omegat.core.threads.CommandThread;
 import org.omegat.util.OConsts;
 
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.ListIterator;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import org.omegat.core.matching.SourceTextEntry;
+import org.omegat.core.matching.NearString;
 
 /*
  * String entry represents a unique translatable string
@@ -42,15 +47,13 @@ public class StringEntry
 	{
 		m_wordCount = 0;
 		m_parentList = new LinkedList();
-		m_nearList = new LinkedList();
+		m_nearList = new TreeSet();
 		m_glosList = new LinkedList();
 		m_srcText = srcText;
 		m_translation = ""; // NOI18N
-		m_digest = LCheckSum.compute(srcText);
 	}
 
-	public long digest()		{ return m_digest;	}
-	public String getSrcText()	{ return m_srcText;	}
+    public String getSrcText()	{ return m_srcText;	}
 	public void setWordCount(int n)	{ m_wordCount = n;	}
 	public int getWordCount()	{ return m_wordCount;	}
 
@@ -60,8 +63,6 @@ public class StringEntry
 		m_parentList.add(srcTextEntry);
 	}
 	
-	public LinkedList getNearList()		{ return m_nearList;	}
-	
 	/**
 	 * Gets a list with (max) 5 near segments, but only with those that have a
 	 * translation. This list is recomputed on each call to this method,
@@ -69,18 +70,15 @@ public class StringEntry
 	 *
 	 * @return list of near segments, that have a translation
 	 */
-	public LinkedList getNearListTranslated() {
-		LinkedList res = new LinkedList();
-		int size = 0;
-		Iterator i = ((LinkedList)getNearList().clone()).listIterator();
-		while( i.hasNext() ) {
+	public List getNearListTranslated() {
+		List res = new ArrayList(OConsts.MAX_NEAR_STRINGS);
+		int size;
+		Iterator i;
+		for(size=0, i=m_nearList.iterator(); i.hasNext() && res.size()<OConsts.MAX_NEAR_STRINGS; )
+		{
 			NearString next = (NearString) i.next();
-			if( next.str.getTrans().length()!=0 ) {
+			if( next.str.getTrans().length()!=0 )
 				res.add(next);
-				size++;
-				if( size>=OConsts.MAX_NEAR_STRINGS )
-					break;
-			}
 		}
 		return res;
 	}
@@ -90,7 +88,7 @@ public class StringEntry
 	 * Near string links to another existing string entry and has 
 	 * a similarity score and a similarity coloring data.
 	 * Near string is inserted into the list according to its score,
-	 * and there cannot be more than MAX_STORED_NEAR_STRINGS (30) near strings.
+	 * and there cannot be more than MAX_STORED_NEAR_STRINGS (50) near strings.
 	 * 
 	 * @param strEntry actual near string
 	 * @param score similarity score
@@ -99,28 +97,16 @@ public class StringEntry
 	 */
 	public void addNearString(StringEntry strEntry, double score, byte[] nearData, String nearProj)
 	{
-		ListIterator it = m_nearList.listIterator();
-		int pos = 0;
-		NearString ns = null;
-		while (it.hasNext())
-		{
-			ns = (NearString) it.next();
-			if (score >= ns.score)
-				break;
-			pos++;
-		}
-		if( pos < OConsts.MAX_STORED_NEAR_STRINGS )
-		{
-			NearString cand = new NearString(strEntry, score, nearData, nearProj);
-			m_nearList.add(pos, cand);
-		}
-
-		if( m_nearList.size() > OConsts.MAX_STORED_NEAR_STRINGS )
-			m_nearList.removeLast();
+		NearString cand = new NearString(strEntry, score, nearData, nearProj);
+		m_nearList.add(cand);
+		//if( m_nearList.size() >= 2*OConsts.MAX_STORED_NEAR_STRINGS )
+		//	m_nearList.tailSet(near51).clear();
+		//if( m_nearList.size() == OConsts.MAX_STORED_NEAR_STRINGS+1 )
+		//	near51 = m_nearList.last();
 	}
-	private static int counter = 0;
-	
-	public LinkedList getGlosList()		{ return m_glosList;	}
+	private Object near51;
+
+    public LinkedList getGlosList()		{ return m_glosList;	}
 	public void addGlosString(GlossaryEntry strEntry)
 	{
 		m_glosList.add(strEntry);
@@ -157,11 +143,10 @@ public class StringEntry
 	// NOTE: references to these lists are returned through the above
 	// access calls 
 	private LinkedList	m_parentList;
-	private LinkedList	m_nearList;
+	private SortedSet	m_nearList;
 	private LinkedList	m_glosList;
 
-	private long	m_digest;
-	private String m_srcText;
+    private String m_srcText;
 	private int m_wordCount;
 	private String m_translation;
 }

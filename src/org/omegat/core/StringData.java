@@ -28,17 +28,8 @@ package org.omegat.core;
  */
 public class StringData 
 {
-	public StringData(long key, String str)
-	{
-		m_cnt = 0;
-		m_orig = str;
-		m_attr = UNIQ;
-		m_digestLow = 0;
-		m_digestHigh = 0;
-		m_digest = key;
-	}
 
-	public StringData(int c, String s, byte a, long dl, long dh, long d)
+    private StringData(int c, String s, byte a, long dl, long dh, long d)
 	{
 		m_cnt = c;
 		m_orig = s;
@@ -48,32 +39,12 @@ public class StringData
 		m_digest = d;
 	}
 
-	public Object clone()
-	{
+	public Object clone() {
 		return new StringData(m_cnt, m_orig, m_attr, m_digestLow,
 				m_digestHigh, m_digest);
 	}
 
-	public void setHigh(long dig)	{ m_digestHigh = dig;	}
-	public void setLow(long dig)	{ m_digestLow = dig;	}
-	public long getHigh()		{ return m_digestHigh;	}
-	public long getLow()		{ return m_digestLow;	}
-
-	public long	getDigest()		{ return m_digest;	}
-
-    public void	clearAttr(byte b)	{ m_attr &= ~b;		}
-	public boolean	hasAttr(byte b)		{ return ((b & m_attr) != 0); }
-
-	public int	getCount()		{ return m_cnt;		}
-	public int	incCount()		{ return ++m_cnt;	}
-	public int	decCount()		{ return --m_cnt;	}
-
-	public boolean isUnique()
-	{
-		return ((m_attr & UNIQ) != 0);
-	}
-
-	// 
+    //
 	// uniq flag set indicates that a given token doesn't occur 
 	//    elsewhere, flag clear indicates it has a (at least one) partner
 	// near flag means that a given word has different neighbors

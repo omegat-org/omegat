@@ -37,7 +37,7 @@ public class XMLBlock
 		reset();
 	}
 
-	public void reset()
+	private void reset()
 	{
 		m_text = "";	// NOI18N
 		m_isClose = false;
@@ -61,7 +61,7 @@ public class XMLBlock
 		setAttribute(attr);
 	}
 
-	public void setAttribute(XMLAttribute attr)
+	private void setAttribute(XMLAttribute attr)
 	{
 		if (m_attrList == null)
 			m_attrList = new ArrayList(8);
@@ -80,7 +80,7 @@ public class XMLBlock
 		if (text.length() == 1)
 		{
 			char c = text.charAt(0);
-			if ((c != 9) && (c != 10) && (c != 13) && (c != ' '))
+			if (c != 9 && c != 10 && c != 13 && c != ' ')
 				m_hasText = true;
 		}
 		else
@@ -99,7 +99,7 @@ public class XMLBlock
 	
 	public String getShortcut()	
 	{
-		if ((m_shortcut != null) && (m_shortcut.equals("") == false))	// NOI18N
+		if (m_shortcut != null && !m_shortcut.equals(""))	// NOI18N
 		{
 			if (m_isClose)
 				return "/" + m_shortcut;	// NOI18N
@@ -127,7 +127,7 @@ public class XMLBlock
 		m_text = name;
 	}
 
-	public void setTag(boolean isTag)
+	private void setTag(boolean isTag)
 	{
 		m_isTag = isTag;
 	}
@@ -247,8 +247,8 @@ public class XMLBlock
 
 	public XMLAttribute getAttribute(int n)
 	{
-		if ((n < 0) || (isTag() == false) || (m_attrList == null) 
-					|| (n > m_attrList.size()))
+		if (n < 0 || !isTag() || m_attrList == null
+					|| n > m_attrList.size())
 		{
 			return null;
 		}
@@ -258,7 +258,7 @@ public class XMLBlock
 
 	public String getAttribute(String name)
 	{
-		if ((isTag() == false) || (m_attrList == null))
+		if (!isTag() || m_attrList == null)
 			return null;
 		XMLAttribute attr = null;
 		
@@ -276,14 +276,14 @@ public class XMLBlock
 			return attr.value;
 	}
 
-	protected String	m_text;	// tagname if tag; text if not
-	protected String	m_shortcut;	// user display for tag
+	private String	m_text;	// tagname if tag; text if not
+	private String	m_shortcut;	// user display for tag
 	private boolean		m_isClose;
 	private boolean		m_isComment;
 	private boolean		m_isEmpty;
 	private boolean		m_isTag;
 	private boolean		m_hasText;
 	private char		m_typeChar;
-	protected ArrayList	m_attrList = null;
+	private ArrayList	m_attrList;
 
 }

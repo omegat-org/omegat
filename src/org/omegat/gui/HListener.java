@@ -15,7 +15,7 @@ import org.omegat.gui.messages.MessageRelay;
  *
  * @author Keith Godfrey
  */
-public class HListener implements HyperlinkListener
+class HListener implements HyperlinkListener
 {
 	public HListener(TransFrame t, boolean grabFocus)
 	{
@@ -32,7 +32,7 @@ public class HListener implements HyperlinkListener
 			s = e.getDescription();
 			MessageRelay.uiMessageDoGotoEntry(m_transFrame, s);
 			//m_transFrame.doGotoEntry(s);
-			if (m_grabFocus == true)
+			if (m_grabFocus)
 			{
 				m_transFrame.toFront();
 			}
@@ -40,5 +40,5 @@ public class HListener implements HyperlinkListener
 	}
 
 	private TransFrame	m_transFrame;
-	protected boolean	m_grabFocus;
+	private boolean	m_grabFocus;
 }

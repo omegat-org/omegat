@@ -40,7 +40,7 @@ import org.omegat.util.OStrings;
  */
 public class XMLFileHandler extends FileHandler
 {
-	public XMLFileHandler(String name, String ext)
+	protected XMLFileHandler(String name, String ext)
 	{
 		super(name, ext);
 
@@ -57,7 +57,7 @@ public class XMLFileHandler extends FileHandler
 		m_streamFilter = null;
 	}
 
-	public void setStreamFilter(XMLStreamFilter filter)
+	protected void setStreamFilter(XMLStreamFilter filter)
 	{
 		m_streamFilter = filter;
 	}
@@ -71,13 +71,13 @@ public class XMLFileHandler extends FileHandler
 		m_tagMap.clear();
 	}
 
-	public void defineVerbatumTag(String tag, String display)
+	protected void defineVerbatumTag(String tag, String display)
 	{
 		m_verbatumList.add(tag);
 		m_verbatumDisplayList.add(display);
 	}
 
-	public void defineFormatTag(String tag, String display)
+	protected void defineFormatTag(String tag, String display)
 	{
 		m_formatList.add(tag);
 		m_formatDisplayList.add(display);
@@ -85,7 +85,7 @@ public class XMLFileHandler extends FileHandler
 
 	// prepare string for user
 	// for now this only entails doubling up '<'
-	public String makeDisplayable(String text)
+    private String makeDisplayable(String text)
 	{
 		char c;
 		StringBuffer out = new StringBuffer();
@@ -140,7 +140,7 @@ public class XMLFileHandler extends FileHandler
 					if (c == '>')
 					{
 						String orig = (String) m_tagMap.get(tagBuf.toString());
-						if ((orig == null) || (orig.equals("")))	// NOI18N
+						if (orig == null || orig.equals(""))	// NOI18N
 						{
 							orig = "<" + tagBuf.toString() + ">";	// NOI18N
 						}
@@ -179,7 +179,7 @@ public class XMLFileHandler extends FileHandler
 		xml.setStreamFilter(m_streamFilter);
 		xml.compressWhitespace(m_compressWhitespace);
 		xml.breakOnWhitespace(m_breakWhitespace);
-		XMLBlock blk = null;
+		XMLBlock blk;
 		xml.setStream(m_in);
 
 		// to keep track of blocks in current segment
@@ -201,7 +201,7 @@ public class XMLFileHandler extends FileHandler
 			{
 				if (target == m_preTextList)
 				{
-					if ((blk.hasText() == true) && (blk.isComment() == false))
+					if (blk.hasText() && !blk.isComment())
 					{
 						// first real text encountered - switch list
 						target = m_textList;
@@ -213,7 +213,7 @@ public class XMLFileHandler extends FileHandler
 						target.add(blk);
 					}
 				}
-				else if (blk.isTag() == false)
+				else if (!blk.isTag())
 				{
 					target.add(blk);
 				}
@@ -224,7 +224,7 @@ public class XMLFileHandler extends FileHandler
 					for (i=0; i<m_verbatumList.size(); i++)
 					{
 						s = (String) m_verbatumList.get(i);
-						if (blk.getTagName().equals(s) == true)
+						if (blk.getTagName().equals(s))
 						{
 							// store the identifying tag
 							target.add(blk);
@@ -241,13 +241,13 @@ public class XMLFileHandler extends FileHandler
 							{
 								blk = (XMLBlock) lst.get(j);
 								// if format tag, write shortcut
-								if ((target == m_textList) && 
-										((blk.isTag()) || (blk.isComment())))
+								if (target == m_textList &&
+										(blk.isTag() || blk.isComment()))
 								{
 									for (int k=0; k<m_formatList.size(); k++)
 									{
 										s = (String) m_formatList.get(k);
-										if (blk.getTagName().equals(s) == true)
+										if (blk.getTagName().equals(s))
 										{
 											s = (String) 
 												m_formatDisplayList.get(k);
@@ -258,8 +258,8 @@ public class XMLFileHandler extends FileHandler
 								}
 
 								target.add(blk);
-								if ((target == m_preTextList) && 
-										(blk.hasText() == true))
+								if (target == m_preTextList &&
+                                        blk.hasText())
 								{
 									// text encountered - switch to correct
 									//	list (if not already done so)
@@ -279,7 +279,7 @@ public class XMLFileHandler extends FileHandler
 					for (i=0; i<m_formatList.size(); i++)
 					{
 						s = (String) m_formatList.get(i);
-						if (blk.getTagName().equals(s) == true)
+						if (blk.getTagName().equals(s))
 						{
 							// give it a shortcut
 							s = (String) m_formatDisplayList.get(i);
@@ -296,11 +296,11 @@ public class XMLFileHandler extends FileHandler
 					// if we've made it this far it must be a structural tag
 					// consolidate lists and write entry
 					// move empty blocks at end of text list to post list
-					XMLBlock end = null;
+					XMLBlock end;
 					for (i=m_textList.size()-1; i>=0; i--)
 					{
 						end = (XMLBlock) m_textList.get(i);
-						if (end.hasText() == false)
+						if (!end.hasText())
 						{
 							m_postTextList.add(0, end);
 							m_textList.remove(i);
@@ -330,7 +330,7 @@ public class XMLFileHandler extends FileHandler
 		}
 	}
 
-	protected void writeEntry(XMLBlock breaker) throws IOException
+	private void writeEntry(XMLBlock breaker) throws IOException
 	{
 		ListIterator it;
 		String str;
@@ -338,7 +338,7 @@ public class XMLFileHandler extends FileHandler
 		int ctr = 1;
 
 		// if there's nothing interesting and no outfile, ignore it
-		if ((m_textList.size() == 0) && (m_outFile == null))
+		if (m_textList.size() == 0 && m_outFile == null)
 		{
 			m_preTextList.clear();
 			m_postTextList.clear();
@@ -348,7 +348,7 @@ public class XMLFileHandler extends FileHandler
 		}
 
 		// write out ignored leading tags
-		if ((m_preTextList.size() > 0) && (m_outFile != null))
+		if (m_preTextList.size() > 0 && m_outFile != null)
 		{
 			it = m_preTextList.listIterator();
 			while (it.hasNext())
@@ -371,11 +371,11 @@ public class XMLFileHandler extends FileHandler
 				blk = (XMLBlock) it.next();
 				// need to convert non-tag chars to control values 
 				//	when writing
-				if ((blk.isTag()) || (blk.isComment()))
+				if (blk.isTag() || blk.isComment())
 				{
 					String sh = blk.getShortcut();
 					String display;
-					if ((sh != null) && (sh.equals("") == false))	// NOI18N
+					if (sh != null && !sh.equals(""))	// NOI18N
 					{
 						display = blk.getShortcut() + ctr++;
 						m_tagMap.put(display, blk.getText());
@@ -394,7 +394,7 @@ public class XMLFileHandler extends FileHandler
 		}
 
 		// write out ignored trailing tags
-		if ((m_postTextList.size() > 0) && (m_outFile != null))
+		if (m_postTextList.size() > 0 && m_outFile != null)
 		{
 			it = m_postTextList.listIterator();
 			while (it.hasNext())
@@ -405,7 +405,7 @@ public class XMLFileHandler extends FileHandler
 			}
 		}
 
-		if ((m_outFile != null) && (breaker != null))
+		if (m_outFile != null && breaker != null)
 		{
 			if (m_compressWhitespace)
 				str = "\n" + breaker.getText();		// NOI18N
@@ -415,31 +415,31 @@ public class XMLFileHandler extends FileHandler
 		}
 	}
 
-	public void compressWhitespace(boolean tof)
+	protected void compressWhitespace()
 	{
-		m_compressWhitespace = tof;
+		m_compressWhitespace = true;
 	}
 	
-	public void breakWhitespace(boolean tof)
+	protected void breakWhitespace()
 	{
-		m_breakWhitespace = tof;
+		m_breakWhitespace = true;
 	}
 	
 //	private LinkedList 	m_tagList = null;
 
-	protected ArrayList	m_preTextList;
-	protected ArrayList	m_textList;
-	protected ArrayList	m_postTextList;
+	private ArrayList	m_preTextList;
+	private ArrayList	m_textList;
+	private ArrayList	m_postTextList;
 
-	protected HashMap	m_tagMap;	// associate block shortcut with text
+	private HashMap	m_tagMap;	// associate block shortcut with text
 
-	protected ArrayList	m_formatList;
-	protected ArrayList	m_formatDisplayList;
-	protected ArrayList	m_verbatumList;
-	protected ArrayList	m_verbatumDisplayList;
+	private ArrayList	m_formatList;
+	private ArrayList	m_formatDisplayList;
+	private ArrayList	m_verbatumList;
+	private ArrayList	m_verbatumDisplayList;
 
-	protected boolean	m_compressWhitespace;
-	protected boolean	m_breakWhitespace;
-	protected XMLStreamFilter	m_streamFilter = null;
+	private boolean	m_compressWhitespace;
+	private boolean	m_breakWhitespace;
+	private XMLStreamFilter	m_streamFilter;
 
 }

@@ -31,5 +31,5 @@ package org.omegat.util;
      public String	name;
      public int		firstEntry;
      public int		lastEntry;
- };
+ }
 

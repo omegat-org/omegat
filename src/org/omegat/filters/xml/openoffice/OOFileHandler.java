@@ -61,7 +61,7 @@ public class OOFileHandler extends XMLFileHandler
 		
 		ZipInputStream zis = new ZipInputStream(new FileInputStream(ifp));
 		InputStreamReader isr = new InputStreamReader(zis, "UTF8");	 // NOI18N
-		ZipEntry zit = null;
+		ZipEntry zit;
 		while ((zit = zis.getNextEntry()) != null)
 		{
 			if (zit.getName().equals("content.xml"))	 // NOI18N
@@ -89,13 +89,13 @@ public class OOFileHandler extends XMLFileHandler
 		zos.setMethod(ZipOutputStream.DEFLATED);
 		OutputStreamWriter osw = new OutputStreamWriter(zos, "ISO-8859-1");	 // NOI18N
 		BufferedWriter bw = new BufferedWriter(osw);
-		ZipEntry zot = null;
+		ZipEntry zot;
 		
 		File ifp = new File(inFile);
 		ZipInputStream zis = new ZipInputStream(new FileInputStream(ifp));
 		InputStreamReader isr = new InputStreamReader(zis, "ISO-8859-1");	 // NOI18N
 		BufferedReader br = new BufferedReader(isr);
-		ZipEntry zit = null;
+		ZipEntry zit;
 		
 		while ((zit = zis.getNextEntry()) != null)
 		{

@@ -52,12 +52,10 @@ public class HelpFrame extends JFrame
 	 * HelpFrame's constructor. To get a reference to the help frame,
 	 * classes should call the static getInstance() method.
 	 */
-	protected static HelpFrame singleton;
+	private static HelpFrame singleton;
 
-	protected HelpFrame()
+	private HelpFrame()
 	{
-		String str;
-
 		m_historyList = new ArrayList();
 		
 		Container cp = getContentPane();
@@ -103,7 +101,6 @@ public class HelpFrame extends JFrame
 				dispose();
 			}
 		});
-		Container cont = new Container();
 		Box bbut = Box.createHorizontalBox();
 		bbut.add(m_backButton);
 		bbut.add(Box.createHorizontalStrut(10));
@@ -142,7 +139,7 @@ public class HelpFrame extends JFrame
 		return singleton;
 	}
 
-	public void displayFile(String file)
+	private void displayFile(String file)
 	{
 		//m_helpPane.setText("");
 		String fullname = "file:" + System.getProperty("user.dir") +  // NOI18N
@@ -163,7 +160,7 @@ public class HelpFrame extends JFrame
 	}
 
 	// immortalize the BeOS 404 messages (some modified a bit for context)
-	protected String errorHaiku()
+    private String errorHaiku()
 	{
 		String s;
 		switch( (int) (Math.random() * 11) )
@@ -202,12 +199,12 @@ public class HelpFrame extends JFrame
 			default:
 				s=OStrings.HF_HAIKU_11;
 				break;
-		};
+		}
 
-		return s;
+        return s;
 	}
 	
-	public void updateUIText()
+	private void updateUIText()
 	{
 		m_closeButton.setText(OStrings.HF_BUTTON_CLOSE);
 		m_homeButton.setText(OStrings.HF_BUTTON_HOME);
@@ -221,7 +218,7 @@ public class HelpFrame extends JFrame
 	private JButton		m_backButton;
 	private ArrayList	m_historyList;
 
-	protected String	m_filename = ""; // NOI18N
+	private String	m_filename = ""; // NOI18N
 
 }
 

@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  4Dec2002
+//  Build date:  21Dec2002
 //  Copyright (C) 2002, Keith Godfrey
 //  aurora@coastside.net
 //  907.223.2039
@@ -1213,6 +1213,7 @@ if (corruptionDanger == false)
 		m_ignoreList = new ArrayList(32);
 		String ignoreName = m_config.getInternal()+ OConsts.IGNORE_LIST;
 		File ignoreFile = new File(ignoreName);
+		tab.reset();
 		if (ignoreFile.exists())
 		{
 			String str;
@@ -1223,7 +1224,7 @@ if (corruptionDanger == false)
 				{
 					str = tab.get(i, 0);
 					str.trim();
-					System.out.println("ignoring file " + str);
+					System.out.println("Setting ignore file: " + str);
 					m_ignoreList.add(str);
 				}
 			}
@@ -1239,6 +1240,7 @@ if (corruptionDanger == false)
 		// now read handler list
 		String handlerName = m_config.getInternal() + OConsts.HANDLER_LIST;
 		File handlerFile = new File(handlerName);
+		tab.reset();
 		if (handlerFile.exists())
 		{
 			String ext;

@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  4Dec2002
+//  Build date:  21Dec2002
 //  Copyright (C) 2002, Keith Godfrey
 //  aurora@coastside.net
 //  907.223.2039
@@ -437,7 +437,7 @@ class ProjectProperties extends JFrame
 				label = OStrings.PP_SAVE_PROJECT_FILE;
 				jfc.setDialogTitle(label);
 				
-				int val = jfc.showOpenDialog(this);
+				int val = jfc.showSaveDialog(this);
 				if (val == JFileChooser.APPROVE_OPTION)
 				{
 					m_projFile = jfc.getSelectedFile().getAbsolutePath();

@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  4Dec2002
+//  Build date:  21Dec2002
 //  Copyright (C) 2002, Keith Godfrey
 //  aurora@coastside.net
 //  907.223.2039
@@ -277,7 +277,8 @@ class TransFrame extends JFrame implements ActionListener
 		m_mFile = new JMenu();
 		m_miFileOpen = new JMenuItem();
 		m_miFileOpen.setAccelerator(KeyStroke.getKeyStroke(
-			KeyEvent.VK_O, InputEvent.CTRL_MASK));
+				KeyEvent.VK_O, 
+				Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		m_miFileOpen.addActionListener(this);
 		m_mFile.add(m_miFileOpen);
 
@@ -300,14 +301,16 @@ class TransFrame extends JFrame implements ActionListener
 		m_miFileSave = new JMenuItem();
 		m_miFileSave.addActionListener(this);
 		m_miFileSave.setAccelerator(KeyStroke.getKeyStroke(
-			KeyEvent.VK_S, InputEvent.CTRL_MASK));
+				KeyEvent.VK_S,
+				Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		m_mFile.add(m_miFileSave);
 
 		m_miFileQuit = new JMenuItem();
 		m_miFileQuit.addActionListener(this);
 		m_mFile.addSeparator();
 		m_miFileQuit.setAccelerator(KeyStroke.getKeyStroke(
-			KeyEvent.VK_Q, InputEvent.CTRL_MASK));
+				KeyEvent.VK_Q, 
+				Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		m_mFile.add(m_miFileQuit);
 		mb.add(m_mFile);
 
@@ -315,13 +318,15 @@ class TransFrame extends JFrame implements ActionListener
 		m_mEdit = new JMenu();
 		m_miEditNext = new JMenuItem();
 		m_miEditNext.setAccelerator(KeyStroke.getKeyStroke(
-			KeyEvent.VK_N, InputEvent.CTRL_MASK));
+				KeyEvent.VK_N, 
+				Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		m_miEditNext.addActionListener(this);
 		m_mEdit.add(m_miEditNext);
 
 		m_miEditPrev = new JMenuItem();
 		m_miEditPrev.setAccelerator(KeyStroke.getKeyStroke(
-			KeyEvent.VK_P, InputEvent.CTRL_MASK));
+				KeyEvent.VK_P, 
+				Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		m_miEditPrev.addActionListener(this);
 		m_mEdit.add(m_miEditPrev);
 
@@ -329,7 +334,8 @@ class TransFrame extends JFrame implements ActionListener
 
 		m_miEditRecycle = new JMenuItem();
 		m_miEditRecycle.setAccelerator(KeyStroke.getKeyStroke(
-			KeyEvent.VK_R, InputEvent.CTRL_MASK));
+				KeyEvent.VK_R, 
+				Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		m_miEditRecycle.addActionListener(this);
 		m_mEdit.add(m_miEditRecycle);
 
@@ -337,13 +343,15 @@ class TransFrame extends JFrame implements ActionListener
 
 		m_miEditFind = new JMenuItem();
 		m_miEditFind.setAccelerator(KeyStroke.getKeyStroke(
-			KeyEvent.VK_F, InputEvent.CTRL_MASK));
+				KeyEvent.VK_F, 
+				Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		m_miEditFind.addActionListener(this);
 		m_mEdit.add(m_miEditFind);
 
 		m_miEditGoto = new JMenuItem();
 		m_miEditGoto.setAccelerator(KeyStroke.getKeyStroke(
-			KeyEvent.VK_G, InputEvent.CTRL_MASK));
+				KeyEvent.VK_G, 
+				Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		m_miEditGoto.addActionListener(this);
 		m_mEdit.add(m_miEditGoto);
 		
@@ -351,31 +359,36 @@ class TransFrame extends JFrame implements ActionListener
 
 		m_miEditCompare1 = new JMenuItem();
 		m_miEditCompare1.setAccelerator(KeyStroke.getKeyStroke(
-			KeyEvent.VK_1, InputEvent.CTRL_MASK));
+				KeyEvent.VK_1, 
+				Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		m_miEditCompare1.addActionListener(this);
 		m_mEdit.add(m_miEditCompare1);
 
 		m_miEditCompare2 = new JMenuItem();
 		m_miEditCompare2.setAccelerator(KeyStroke.getKeyStroke(
-			KeyEvent.VK_2, InputEvent.CTRL_MASK));
+				KeyEvent.VK_2, 
+				Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		m_miEditCompare2.addActionListener(this);
 		m_mEdit.add(m_miEditCompare2);
 
 		m_miEditCompare3 = new JMenuItem();
 		m_miEditCompare3.setAccelerator(KeyStroke.getKeyStroke(
-			KeyEvent.VK_3, InputEvent.CTRL_MASK));
+				KeyEvent.VK_3, 
+				Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		m_miEditCompare3.addActionListener(this);
 		m_mEdit.add(m_miEditCompare3);
 
 		m_miEditCompare4 = new JMenuItem();
 		m_miEditCompare4.setAccelerator(KeyStroke.getKeyStroke(
-			KeyEvent.VK_4, InputEvent.CTRL_MASK));
+				KeyEvent.VK_4, 
+				Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		m_miEditCompare4.addActionListener(this);
 		m_mEdit.add(m_miEditCompare4);
 
 		m_miEditCompare5 = new JMenuItem();
 		m_miEditCompare5.setAccelerator(KeyStroke.getKeyStroke(
-			KeyEvent.VK_5, InputEvent.CTRL_MASK));
+				KeyEvent.VK_5, 
+				Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		m_miEditCompare5.addActionListener(this);
 		m_mEdit.add(m_miEditCompare5);
 
@@ -965,6 +978,7 @@ class TransFrame extends JFrame implements ActionListener
 
 	}
 
+	// convert & and < to HTML codes
 	protected static String controlifyHTML(String text)
 	{
 		int endPos = 0;

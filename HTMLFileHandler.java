@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  4Dec2002
+//  Build date:  21Dec2002
 //  Copyright (C) 2002, Keith Godfrey
 //  aurora@coastside.net
 //  907.223.2039
@@ -129,6 +129,11 @@ class HTMLFileHandler extends FileHandler
 				}
 				else
 				{
+					// orphaned close tags will begin with a '/' already
+					if (tag.name().startsWith("/"))
+						outBuf.append("<");
+					else
+						outBuf.append("</");
 					outBuf.append("</");
 					outBuf.append(tag.name());
 					outBuf.append('>');
@@ -418,6 +423,7 @@ System.out.println("HTML parse error: '" + m_file + "' at line " + (e.getErrorOf
 				ListIterator it;
 				it = m_tagList.listIterator(m_tagList.size());
 				// move backwards to find source tag
+				boolean foundPartner = false;
 				while (it.hasPrevious())
 				{
 					cand = (HTMLTag) it.previous();
@@ -425,10 +431,19 @@ System.out.println("HTML parse error: '" + m_file + "' at line " + (e.getErrorOf
 					{
 						cand.setPartner(true);
 						tag.setPartner(true);
-						fd.setTagData(cand.shortcut(),
-								cand.num());
+						fd.setTagData(cand.shortcut(), cand.num());
+						foundPartner = true;
 						break;
 					}
+				}
+				if (foundPartner == false)
+				{
+					// failed to find partner - probably a close format
+					//  tag that starts in a previous paragraph
+					// give the tag a shortcut and number
+					tag.setNum(m_tagList.size());
+					m_tagList.add(tag);
+					fd.setTagData(tag.shortcut(), tag.num());
 				}
 			}
 			else	// open

@@ -9,4 +9,4 @@ to import his work into OmegaT-compatible TMX file.
 
 To run from a terminal or DOS window, change to this directory
 and type
-  java properties_import.jar
+  java -jar properties_import.jar

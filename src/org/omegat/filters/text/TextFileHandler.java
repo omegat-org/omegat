@@ -27,7 +27,7 @@ import java.io.*;
 import org.omegat.util.OStrings;
 
 /**
- * Filter to support plain txt files (both default OS- and utf8-encoded)
+ * Filter to support plain txt files (both latin- and utf8-encoded)
  *
  * @author Keith Godfrey
  */

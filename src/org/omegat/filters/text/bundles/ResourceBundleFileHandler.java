@@ -119,8 +119,14 @@ public class ResourceBundleFileHandler extends FileHandler
 				ch = ascii.charAt(i);
 				if( ch == 'u' )
 				{
-					ch=(char)Integer.parseInt(ascii.substring(i+1, i+1+4+1), 16);
-					i+=4;
+					// checking if the string is long enough
+					if( ascii.length() >= i+1+4 )
+					{
+						ch=(char)Integer.parseInt(ascii.substring(i+1, i+1+4), 16);
+						i+=4;
+					}
+					else
+						throw new IOException("Encountered illegal \\u sequence");
 				} 
 				else
 				{

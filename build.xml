@@ -28,11 +28,8 @@
     <import file="nbproject/build-impl.xml"/>
 
     <target name="-pre-init">
-        <property name="iscc.exe" value="m:/progs/Inno Setup 4/iscc.exe"/>
+        <property name="iscc.exe" value="iscc.exe"/>
         <property file="src/org/omegat/Version.properties"/>
-    </target>
-
-    <target name="-pre-jar">
         <filter filtersfile="src/org/omegat/Version.properties"/>
         <copy file="manifest-template.mf" tofile="manifest.mf" filtering="true"/>
     </target>
@@ -42,6 +39,7 @@
             <fileset dir="src" includes="**/*.class"/>
         </delete>
         <delete file="manifest.mf"/>
+        <delete file="omegat.prefs"/>
         <delete dir="dist"/>
         <ant dir="addons/properties-import" target="clean" inheritAll="false"/>
     </target>
@@ -81,7 +79,7 @@
 
     <target name="src" depends="init" description="Build source distribution">
         <mkdir dir="dist"/>
-        <zip destfile="dist/OmegaT_src_${version}.zip" basedir="." includes="addons/** docs/** images/** nbproject/** release/** src/** build.xml"/>
+        <zip destfile="dist/OmegaT_src_${version}.zip" basedir="." includes="addons/** docs/** images/** nbproject/** release/** src/** manifest-template.mf build.xml"/>
     </target>
 
     <target name="all" depends="src,zip" description="Build distributions."/>

@@ -37,7 +37,9 @@
 
     <target name="win" description="Build Win32 distro" depends="init,jar,zip">
         <copy todir="tmp" file="release/win32-specific/OmegaT.exe"/>
-        <copy todir="tmp" file="release/win32-specific/OmegaT.iss"/>
+
+	<filter token="VERSION_NUMBER_SUBST" value="${version}"/>
+        <copy todir="tmp" file="release/win32-specific/OmegaT.iss" filtering="on"/>
         
         <mkdir dir="dist"/>
         <exec executable="${iscc.exe}">

@@ -1,4 +1,4 @@
-OmegaT 1.4.1 Read Me file
+OmegaT 1.4.2 Read Me file
 
 The most actual info about OmegaT may be found at
                   http://www.omegat.org/omegat/omegat.html

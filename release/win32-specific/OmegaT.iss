@@ -2,15 +2,15 @@
 
 [Setup]
 AppName=OmegaT
-AppVerName=OmegaT version 1.4.2
+AppVerName=OmegaT version @VERSION_NUMBER_SUBST@
 DefaultDirName={pf}\OmegaT
 DefaultGroupName=OmegaT
-UninstallDisplayIcon={app}\MyProg.exe
+UninstallDisplayIcon={app}\OmegaT.exe
 Compression=lzma
 SolidCompression=yes
 LicenseFile=license.txt
 OutputDir=..\dist
-OutputBaseFilename=OmegaT_1.4.2_setup
+OutputBaseFilename=OmegaT_@VERSION_NUMBER_SUBST@_setup
 
 [Files]
 Source: "docs\*"; DestDir: "{app}\docs"; Flags: recursesubdirs
@@ -23,7 +23,7 @@ Source: "readme.txt"; DestDir: "{app}"; Flags: isreadme
 Source: "release_notes.txt"; DestDir: "{app}"
 
 [Icons]
-Name: "{group}\OmegaT 1.4.2"; Filename: "{app}\OmegaT.exe"
+Name: "{group}\OmegaT @VERSION_NUMBER_SUBST@"; Filename: "{app}\OmegaT.exe"
 Name: "{group}\OmegaT Readme"; Filename: "{app}\readme.txt"
 Name: "{group}\OmegaT User Manual"; Filename: "{app}\docs\index.html"
 Name: "{group}\Uninstall OmegaT"; Filename: "{uninstallexe}"

@@ -1,4 +1,4 @@
-OmegaT 1.4.1 Release Notes
+OmegaT 1.4.2 Release Notes
 
 NOTE: OmegaT is beta software and has not been extensively tested.  
       That said, version 1.0.2 seems to be rather stable.  
@@ -17,22 +17,19 @@ We thank you for your interest.
 Marc and Keith
 ---------------------------------
 
-1.4 general changes (summary)
+General changes (summary)
 ---------------------------------
 UI changes:
-	find interface + enhanced functionality            
-	main interface rewritten                           
-	font selectability                                 
+	find interface + enhanced functionality
+	main interface rewritten
+	font selectability
+	full localisability
 new filters:
-	xhtml                                              
+	xhtml
+	java resource bundles (.properties)
 
-2.0 wishlist
----------------------------------
-new tools:
-	spell check
-	dialog interface to edit file extension mappings
-new filters:
-	docbook
+1.4.2
+-------------------------------
 
 
 1.4.1

@@ -61,8 +61,8 @@ public class OConsts
 	
 	public static final String WORD_CNT_FILE_EXT		= "word_counts";			// NOI18N
 	
-	public static final double NEAR_THRESH		= 0.6;								// NOI18N
-	public static final double PAIR_THRESH		= 0.6;								// NOI18N
+	public static final String DEFAULT_NEAR_THRASH	= "0.6";						// NOI18N
+	public static final String TF_NEAR_TRASH		= "near_trash";					// NOI18N
 	
 	// preference names
 	public static final String PREF_SRCLANG		= "source_lang";					// NOI18N
@@ -100,6 +100,9 @@ public class OConsts
 	
 	public static final String XB_COMMENT_SHORTCUT	= "!comment";					// NOI18N
 	
+	/** Number of fuzzy matches to display */
 	public static final int MAX_NEAR_STRINGS	= 5;
+	/** Number of fuzzy matches to store */
+	public static final int MAX_STORED_NEAR_STRINGS	= 50;
 	
 }

@@ -50,7 +50,8 @@ public class Main
 		// since TransFrame now requires preferences for initialization,
 		//	handle pref initialization here (17may04)
 		new PreferenceManager(OConsts.PROJ_PREFERENCE);
-		new TransFrame().show();
+		TransFrame mainframe = new TransFrame();
+		mainframe.setVisible(true);
 	}
 }
 

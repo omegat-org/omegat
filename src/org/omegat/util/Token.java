@@ -30,7 +30,12 @@ package org.omegat.util;
  */
 public class Token
 {
-	public Token(String _text, boolean _hasText, int _offset)
+	/**
+	 * Creates a new token.
+	 * @param _text the text of the token
+	 * @param _offset the starting position of this token in parent string
+	 */
+	public Token(String _text, int _offset)
 	{
 		text = _text;
         offset = _offset;

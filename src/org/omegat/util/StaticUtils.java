@@ -23,14 +23,12 @@ package org.omegat.util;
 
 import org.omegat.gui.threads.CommandThread;
 import org.omegat.gui.messages.MessageRelay;
-import org.omegat.core.StringEntry;
-import org.omegat.filters.xml.XMLStreamReader;
 
 import java.awt.*;
 import java.io.*;
 import java.lang.reflect.Array;
-import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * Static functions taken from
@@ -240,161 +238,32 @@ System.out.println("mapping extension '"+str.substring(0,pos)+"' to '"+str.subst
 		}
 	}
 
-	// builds a list of tokens and a list of their offsets w/in a file
-	// returns number of "words" in file (this may be less than the
-	//	number of tokens)
+	/**
+	 * Builds a list of tokens and a list of their offsets w/in a file.
+	 * 
+	 * @param str string to tokenize
+	 * @param tokenList the list to add tokens to
+	 * @return number of tokens
+	 */
 	public static int tokenizeText(String str, ArrayList tokenList)
 	{
-		if (tokenList != null)
-			tokenList.clear();
-		int numWords = 0;
-		StringBuffer tokenBuf = new StringBuffer();
-		int len = str.length();
-		boolean hasText = true;
-		// process everything as lower case
-		str = str.toLowerCase();
-
-		char c;
-		int type;
-		int offset = 0;
-		boolean closeToken = false;
-		for (int i=0; i<len; i++)
+		StringTokenizer st = new StringTokenizer(str, " \t\n\r\f.!?,:;0123456789");
+		if( tokenList==null )
+			return st.countTokens();
+		
+		tokenList.clear();
+		int searchstart = 0;
+		while( st.hasMoreTokens() )
 		{
-			c = str.charAt(i);
-			type = Character.getType(c);
-
-			if ((type == Character.UPPERCASE_LETTER)		||
-					(type == Character.LOWERCASE_LETTER)	||
-					(type == Character.TITLECASE_LETTER)	||
-					(type == Character.MODIFIER_LETTER)		||
-					(type == Character.OTHER_LETTER))
-			{
-				// make sure we're not in a non-text token
-				if (hasText == true)
-				{
-					tokenBuf.append(c);
-				}
-				else
-				{
-					// in a non-text token.  close token and push char
-					closeToken = true;
-					i--;
-				}
-			}
-			else if ((type == Character.NON_SPACING_MARK)	||
-					(type == Character.ENCLOSING_MARK)		||
-					(type == Character.COMBINING_SPACING_MARK))
-			{
-				// modifies preceding character - add it to existing token
-				//	but don't increase position counter
-				tokenBuf.append(c);
-			}
-			else if ((type == Character.SPACE_SEPARATOR)	||
-					(type == Character.CONTROL)				||
-					(type == Character.PARAGRAPH_SEPARATOR)	||
-					(type == Character.FORMAT))
-			{
-				// close token and swallow character
-				closeToken = true;
-			}
-			else if (type == Character.SURROGATE)
-			{
-				tokenBuf.append(c);
-				// if one surrogate is found, it's almost guaranteed
-				//	there should be a second, but check just in case
-				if (i < (len-1))
-					tokenBuf.append(str.charAt(++i));
-			}
-			else 
-			{
-				// punctuation of some sort 
-				// end token and return char to stack
-				if ((tokenBuf.length() > 0) && (hasText == true))
-				{
-					// don't end if char is in {@.'} and followed by
-					// text
-					if (((c == '@') || (c == '.')) && (i < (len-1)))
-					{
-						// take a peek at next char
-						char c2 = str.charAt(i+1);
-						int t2 = Character.getType(c2);
-						if ((t2 == Character.UPPERCASE_LETTER)		||
-								(t2 == Character.LOWERCASE_LETTER)	||
-								(t2 == Character.TITLECASE_LETTER)	||
-								(t2 == Character.MODIFIER_LETTER)		||
-								(t2 == Character.OTHER_LETTER))
-						{
-							// followed by text 
-							// probably filename or email address - either 
-							//	it's not a word
-							tokenBuf.append(c);
-							tokenBuf.append(c2);
-							i++;
-						}
-						else
-						{
-							closeToken = true;
-							i--;
-						}
-					}
-					else if ((c == '\'') && (i < (len-1)))
-					{
-						// see if it's an imbedded apostrophe
-						char c2 = str.charAt(i+1);
-						int t2 = Character.getType(c2);
-						if ((t2 == Character.UPPERCASE_LETTER)		||
-								(t2 == Character.LOWERCASE_LETTER)	||
-								(t2 == Character.TITLECASE_LETTER)	||
-								(t2 == Character.MODIFIER_LETTER)		||
-								(t2 == Character.OTHER_LETTER))
-						{
-							// apostrophe surrounded by text
-							// fits pattern of a word
-							tokenBuf.append(c);
-							tokenBuf.append(c2);
-							i++;
-						}
-						else
-						{
-							closeToken = true;
-							i--;
-						}
-					}
-					else
-					{
-						// normal punctuation - break token and push char
-						closeToken = true;
-						i--;
-					}
-				}
-				else
-				{
-					// empty buffer or non text token - append char
-					tokenBuf.append(c);
-					hasText = false;
-				}
-			}
-
-
-			if (((closeToken == true) || (i == (len-1))) &&
-					(tokenBuf.length() > 0))
-			{
-				if (hasText == true)
-					numWords++;
-				if (tokenList != null)
-					tokenList.add(new Token(tokenBuf.toString(), 
-								hasText, offset));
-				offset = i+1;
-				tokenBuf.setLength(0);
-
-				hasText = true;	// start off assuming it's text
-				closeToken = false;
-			}
+			String nt = st.nextToken();
+			int pos = str.indexOf(nt, searchstart);
+			searchstart = pos + 1;
+			Token token = new Token(nt, pos);
+			tokenList.add(token);
 		}
-
-		return numWords;
+		return tokenList.size();
 	}
-
+	
     public static String[] getFontNames()
 	{
 		GraphicsEnvironment graphics;

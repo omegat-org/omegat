@@ -68,7 +68,7 @@ public class MatchWindow extends JFrame
 		{
 			public void windowClosing(WindowEvent e)
 			{
-				hide();
+				setVisible(false);
 			}
 		});
 	}
@@ -80,7 +80,7 @@ public class MatchWindow extends JFrame
 		m_glosDisplay = "";														// NOI18N
 	}
 
-	public void formatNearText(String text, byte[] attrList, Color uniqColor)
+	public void formatNearText(String text, byte[] attrList)
 	{
 		if (text == null)
 			return;
@@ -106,7 +106,7 @@ public class MatchWindow extends JFrame
 			SimpleAttributeSet mattr = new SimpleAttributeSet();
 			if ((attrList[i] & StringData.UNIQ) != 0)
 			{
-				StyleConstants.setForeground(mattr, uniqColor);
+				StyleConstants.setForeground(mattr, Color.blue);
 			}
 			else if ((attrList[i] & StringData.PAIR) != 0)
 			{

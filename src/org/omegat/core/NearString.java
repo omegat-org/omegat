@@ -30,7 +30,6 @@ public class NearString implements Comparable
 {
 	public NearString(StringEntry strEntry, 
 				double nearScore, 
-				byte[] parData,
 				byte[] nearData,
 				String projName)
 	{

@@ -75,7 +75,7 @@ public class StringEntry
 		Iterator i = ((LinkedList)getNearList().clone()).listIterator();
 		while( i.hasNext() ) {
 			NearString next = (NearString) i.next();
-			if( !next.str.getTrans().equals("") ) { // NOI18N
+			if( next.str.getTrans().length()!=0 ) {
 				res.add(next);
 				size++;
 				if( size>=OConsts.MAX_NEAR_STRINGS )
@@ -85,30 +85,40 @@ public class StringEntry
 		return res;
 	}
 
-	
-	public void addNearString(StringEntry strEntry, 
-		double score, byte[] parData, byte[] nearData, String nearProj)
+	/**
+	 * Adds near string for this string.
+	 * Near string links to another existing string entry and has 
+	 * a similarity score and a similarity coloring data.
+	 * Near string is inserted into the list according to its score,
+	 * and there cannot be more than MAX_STORED_NEAR_STRINGS (30) near strings.
+	 * 
+	 * @param strEntry actual near string
+	 * @param score similarity score
+	 * @param nearData coloring data
+	 * @param nearProj (?) the project of the string
+	 */
+	public void addNearString(StringEntry strEntry, double score, byte[] nearData, String nearProj)
 	{
 		ListIterator it = m_nearList.listIterator();
 		int pos = 0;
 		NearString ns = null;
-		NearString cand;
-		cand = new NearString(strEntry, score, parData, 
-							nearData, nearProj);
 		while (it.hasNext())
 		{
 			ns = (NearString) it.next();
-			if (score > ns.score)
+			if (score >= ns.score)
 				break;
 			pos++;
 		}
- 		if (m_nearList.size() == 0)
-			pos = 0;
-		if (pos >= 0)
+		if( pos < OConsts.MAX_STORED_NEAR_STRINGS )
+		{
+			NearString cand = new NearString(strEntry, score, nearData, nearProj);
 			m_nearList.add(pos, cand);
-		if (m_nearList.size() >= OConsts.MAX_NEAR_STRINGS)
-			m_nearList.getLast();
+		}
+
+		if( m_nearList.size() > OConsts.MAX_STORED_NEAR_STRINGS )
+			m_nearList.removeLast();
 	}
+	private static int counter = 0;
 	
 	public LinkedList getGlosList()		{ return m_glosList;	}
 	public void addGlosString(GlossaryEntry strEntry)
@@ -127,19 +137,23 @@ public class StringEntry
 		return m_translation;
 	}
 
+	/**
+	 * Sets the translation of the StringEntry.
+	 * If translation given is null or equal to the source, than 
+	 * the empty string is set as a translation to indicate that there's no translation.
+	 */
 	public void setTranslation(String trans)
 	{
 		// tell the boss things have changed to indicate a save is in order
 		CommandThread.core.markAsDirty();
-		if ((trans == null) || (trans.equals(""))) // NOI18N
-			m_translation = m_srcText;
+		if( trans==null )
+			m_translation = "";		// NOI18N
+		else if( trans.equals(m_srcText) )
+			m_translation = "";		// NOI18N
 		else
 			m_translation = trans;
 	}
 
-//	// need to share the list for near string processing
-//	public LinkedList getTransList()	{ return m_transList;	}
-//	
 	// NOTE: references to these lists are returned through the above
 	// access calls 
 	private LinkedList	m_parentList;

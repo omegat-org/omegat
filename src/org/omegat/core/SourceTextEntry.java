@@ -56,10 +56,7 @@ public class SourceTextEntry
 
 	public String getTranslation()
 	{
-//		if (m_strEntry != null)
-			return m_strEntry.getTrans();
-//		else
-//			return "";
+		return m_strEntry.getTrans();
 	}
 
 	public void setTranslation(String t)

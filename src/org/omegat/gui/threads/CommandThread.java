@@ -21,6 +21,7 @@
 
 package org.omegat.gui.threads;
 
+import java.util.regex.Pattern;
 import org.omegat.util.*;
 import org.omegat.gui.TransFrame;
 import org.omegat.gui.ProjectProperties;
@@ -194,10 +195,10 @@ public class CommandThread extends Thread
 		{
 			if (m_projWin.isVisible())
 			{
-				m_projWin.hide();
+				m_projWin.setVisible(false);
 				m_projWin.reset();
 				m_projWin.buildDisplay();
-				m_projWin.show();
+				m_projWin.setVisible(true);
 			}
 			else
 			{
@@ -252,6 +253,7 @@ public class CommandThread extends Thread
 			buildGlossary();
 			// evaluate strings for fuzzy matching 
 			String status = OStrings.CT_FUZZY_X_OF_Y;
+			
 			buildNearList(m_strEntryList, status);
 
 			// load in translation database files
@@ -1029,7 +1031,7 @@ public class CommandThread extends Thread
 		m_projWin.setNumEntries(numEntries());
 		loadTranslations();
 		m_projWin.buildDisplay();
-		m_projWin.show();
+		m_projWin.setVisible(true);
 		m_projWin.toFront();
 		return true;
 	}
@@ -1114,13 +1116,19 @@ public class CommandThread extends Thread
 
 	/**
 	 * Builds the list of fuzzy matches between the source text strings.
+	 *
+	 * Old (Keith's Version)
+	 *
+	 * @author Keith Godfrey
 	 * @param seList the list of string entries to match
 	 * @param status status string to display
 	 */
 	private void buildNearList(ArrayList seList, String status) 
 				throws InterruptedIOException
 	{
-		String evtStr = status;
+		String sNearTrash = getOrSetPreference(OConsts.TF_NEAR_TRASH, OConsts.DEFAULT_NEAR_THRASH);
+		double nearTrash = Double.parseDouble(sNearTrash);
+
 		// array lists maintain ordered lists of stringdata objs
 		ArrayList pairList = new ArrayList(32);
 		ArrayList candPairList = new ArrayList(32);
@@ -1154,7 +1162,7 @@ public class CommandThread extends Thread
 			{
 				Object[] obj = { new Integer(i), len};
 				MessageRelay.uiMessageSetMessageText(m_transFrame,
-					MessageFormat.format(evtStr, obj));
+					MessageFormat.format(status, obj));
 				Thread.yield();
 			}
 			if (i == 1)
@@ -1179,7 +1187,6 @@ public class CommandThread extends Thread
 			//    org.omegat.StringData objs
 			// get candidate near strings
 			strEntry = (StringEntry) seList.get(i);
-//System.out.println("\nsrc text: "+strEntry.getSrcText());
 			buildFreqTable(freqList, strEntry,
 					masterWordFreq, wordList,
 					masterPairFreq, pairList);
@@ -1196,7 +1203,6 @@ public class CommandThread extends Thread
 			//	one by one and a counter was incremented each time
 			//	a matching string was found and added to the list)
 	
-//System.out.println("freq list len="+freqList.len());
 			// for each candidate string, compare composition to 
 			//	current segment
 			for (j=0; j<freqList.len(); j++)
@@ -1207,11 +1213,9 @@ public class CommandThread extends Thread
 					ratio /= strEntry.getWordCount();
 				else
 					ratio /= cand.getWordCount();
-//System.out.println("- "+ratio+", "+freqList.getCountN(j)+", "+cand.getWordCount()+", "+strEntry.getWordCount()+"  '"+cand.getSrcText()+"'");
 
-				if (ratio < OConsts.NEAR_THRESH)
+				if (ratio < nearTrash)
 					continue;
-//System.out.println("comparing to '"+cand.getSrcText()+"'");
 
 				candList.clear();
 				candPairList.clear();
@@ -1227,18 +1231,15 @@ public class CommandThread extends Thread
 	
 				// analyze word matches
 				wordRatio = wordFreq.getMatchRatio();
-//System.out.println("- word ratio: "+ratio);
-				if (wordRatio < OConsts.NEAR_THRESH)
+				if (wordRatio < nearTrash)
 					continue;
 		
 				// analyze pair matches
 				pairRatio = pairFreq.getMatchRatio();
-//System.out.println("- pair ratio: "+pairRatio);
-				if (pairRatio < OConsts.PAIR_THRESH)
+				if (pairRatio < nearTrash)
 					continue;
 
 				ratio = Math.sqrt(wordRatio * pairRatio);
-//System.out.println("near analysis: '"+strEntry.getSrcText()+"' vs. '"+cand.getSrcText()+"' "+((int) (ratio*100.0))+"%"+"   "+((int)(wordRatio*100.0))+"+"+((int)(pairRatio*100.0)));
 		
 				// build attr list (cand)
 				candAttr = buildAttrList(candList, //candPairList,
@@ -1254,15 +1255,13 @@ public class CommandThread extends Thread
 				{
 					// near strings need extra processing
 					// if they're part of the project
-					strEntry.addNearString(cand, ratio, strAttr, 
-							candAttr, null);
+					strEntry.addNearString(cand, ratio, candAttr, null);
 //					registerNear(strEntry, cand, ratio, 
 //							strAttr, candAttr);
 				}
 				else
 				{
-					cand.addNearString(strEntry, ratio,
-						candAttr, strAttr, m_nearProj);
+					cand.addNearString(strEntry, ratio, strAttr, m_nearProj);
 				}
 			}
 		}
@@ -1372,7 +1371,7 @@ public class CommandThread extends Thread
 			}
 			if (strEntryList.size() > 0)
 			{
-				buildNearList(strEntryList, status + " (" + fname + ")");  // NOI18N
+				buildNearList(strEntryList, status + " (" + fname + ")");		// NOI18N
 			}
 		}
 		catch (ParseException e)

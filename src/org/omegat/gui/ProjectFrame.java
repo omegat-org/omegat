@@ -55,7 +55,7 @@ public class ProjectFrame extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				hide();
+				setVisible(false);
 			}
 		});
 

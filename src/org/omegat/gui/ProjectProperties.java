@@ -139,7 +139,7 @@ public class ProjectProperties extends JFrame
 				boolean abort = false;
 				while (true)
 				{
-					prj.show();
+					prj.setVisible(true);
 					if (m_dialogOK == false)
 					{
 						abort = true;
@@ -236,7 +236,7 @@ public class ProjectProperties extends JFrame
 	{
 		// new project window; create project file
 		NewProjectDialog newProjDialog = new NewProjectDialog(this, this, null, 0);
-		newProjDialog.show();
+		newProjDialog.setVisible(true);
 		boolean m_dialogOK = ! newProjDialog.dialogCancelled();
 		newProjDialog.dispose();
 		return m_dialogOK;

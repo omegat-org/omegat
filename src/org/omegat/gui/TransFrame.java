@@ -21,24 +21,24 @@
 
 package org.omegat.gui;
 
-import org.omegat.gui.threads.CommandThread;
-import org.omegat.gui.threads.SearchThread;
 import org.omegat.core.GlossaryEntry;
 import org.omegat.core.NearString;
 import org.omegat.core.SourceTextEntry;
 import org.omegat.core.StringEntry;
+import org.omegat.gui.dialogs.FontSelectionDialog;
+import org.omegat.gui.dialogs.MatchingSimilarityDialog;
+import org.omegat.gui.threads.CommandThread;
+import org.omegat.gui.threads.SearchThread;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.PreferenceManager;
 import org.omegat.util.RequestPacket;
-import org.omegat.util.StaticUtils;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
-import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -59,11 +59,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
-import javax.swing.Box;
-import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -146,6 +142,7 @@ public class TransFrame extends JFrame implements ActionListener
 		m_xlPane.setFont(new Font(m_font, Font.PLAIN, fontSize));
 		m_matchViewer.setFont(new Font(m_font, Font.PLAIN, fontSize));
 
+		
 		// check this only once as it can be changed only at compile time
 		// should be OK, but customization might have messed it up
 		String start = OStrings.TF_CUR_SEGMENT_START;
@@ -499,7 +496,11 @@ public class TransFrame extends JFrame implements ActionListener
 		m_miDisplayFont = new JMenuItem();
 		m_miDisplayFont.addActionListener(this);
 		m_mDisplay.add(m_miDisplayFont);
-
+		
+		m_miDisplayMatches = new JMenuItem();
+		m_miDisplayMatches.addActionListener(this);
+		m_mDisplay.add(m_miDisplayMatches);
+		
 		m_miDisplayAdvanceKey = new JCheckBoxMenuItem();
 		m_miDisplayAdvanceKey.setSelected(false);
 		m_miDisplayAdvanceKey.addActionListener(this);
@@ -574,6 +575,7 @@ public class TransFrame extends JFrame implements ActionListener
 		
 		m_mDisplay.setText(OStrings.TF_MENU_DISPLAY);
 		m_miDisplayFont.setText(OStrings.TF_MENU_DISPLAY_FONT);
+		m_miDisplayMatches.setText(OStrings.getString("TF_MENU_DISPLAY_MATCHING"));
 		m_miDisplayAdvanceKey.setText(OStrings.TF_MENU_DISPLAY_ADVANCE);
 		m_miDisplayMnemonic.setText(OStrings.TF_MENU_DISPLAY_MNEMONIC);
 		
@@ -775,7 +777,7 @@ public class TransFrame extends JFrame implements ActionListener
 	// display dialog allowing selection of source and target language fonts
 	protected void doFont()
 	{
-		MFontSelection dlg = new MFontSelection(this);
+		FontSelectionDialog dlg = new FontSelectionDialog(this, m_font, m_fontSize);
 		dlg.setVisible(true);
 		if (dlg.isChanged())
 		{
@@ -794,7 +796,22 @@ public class TransFrame extends JFrame implements ActionListener
 			activateEntry();
 		}
 	}
-
+	
+	/**
+	 * Displays a dialogue to increase/decrese matching similarity.
+	 */
+	protected void doMatchesSimilarity()
+	{
+		MatchingSimilarityDialog dialog = new MatchingSimilarityDialog(this, 
+				CommandThread.core.getOrSetPreference(OConsts.TF_NEAR_TRASH, OConsts.DEFAULT_NEAR_THRASH));
+		dialog.setVisible(true);
+		if( dialog.isChanged() )
+		{
+			String newNearTrash = dialog.getNearTrash();
+			CommandThread.core.setPreference(OConsts.TF_NEAR_TRASH, newNearTrash);
+		}
+	}
+	
 	protected void doMergeTMX()
 	{
 //System.out.println("merge TMX not implemented");
@@ -1462,6 +1479,10 @@ public class TransFrame extends JFrame implements ActionListener
 			{
 				doFont();
 			}
+			else if (evtSrc == m_miDisplayMatches)
+			{
+				doMatchesSimilarity();
+			}
 			else if (evtSrc == m_miToolsPseudoTrans)
 			{
 				doPseudoTrans();
@@ -1481,105 +1502,6 @@ public class TransFrame extends JFrame implements ActionListener
 				hf.toFront();
 			}
 		}
-	}
-
-	class MFontSelection extends JDialog 
-	{
-		public MFontSelection(JFrame par)
-		{
-			super(par, true);
-			setSize(300, 100);
-			setLocation(200, 200);
-			Container cont = getContentPane();
-			cont.setLayout(new GridLayout(3, 2, 8, 3));
-			
-			// create UI objects
-			JLabel fontLabel = new JLabel();
-			m_fontCB = new JComboBox(StaticUtils.getFontNames());
-			m_fontCB.setEditable(true);
-			if (m_font.equals("") == false)										// NOI18N
-				m_fontCB.setSelectedItem(m_font);
-			cont.add("font label", fontLabel);									// NOI18N
-			cont.add("font box", m_fontCB);										// NOI18N
-
-			String[] fontSizes = new String[] 
-				{	"8",	"9",	"10",	"11",								// NOI18N
-					"12",	"14",	"16",	"18" };								// NOI18N
-			JLabel fontSizeLabel = new JLabel();
-			m_fontSizeCB = new JComboBox(fontSizes);
-			m_fontSizeCB.setEditable(true);
-			if (m_fontSize.equals("") == false)									// NOI18N
-				m_fontSizeCB.setSelectedItem(m_fontSize);
-			cont.add("size label", fontSizeLabel);								// NOI18N
-			cont.add("size box", m_fontSizeCB);									// NOI18N
-			cont.add("spacer", new Container());								// NOI18N
-			
-			Box buttonBox = Box.createHorizontalBox();
-			JButton okButton = new JButton();
-			JButton cancelButton = new JButton();
-			buttonBox.add(Box.createHorizontalGlue());
-			buttonBox.add(okButton);
-			buttonBox.add(Box.createHorizontalStrut(5));
-			buttonBox.add(cancelButton);
-			cont.add(buttonBox);
-	
-			// add text
-			okButton.setText(OStrings.PP_BUTTON_OK);
-			cancelButton.setText(OStrings.PP_BUTTON_CANCEL);
-
-			fontLabel.setText(OStrings.TF_SELECT_SOURCE_FONT);
-			fontSizeLabel.setText(OStrings.TF_SELECT_FONTSIZE);
-
-			setTitle(OStrings.TF_SELECT_FONTS_TITLE);
-
-			// arrange action listeners
-			okButton.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					doOK();
-				}
-			});
-
-			cancelButton.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					doCancel();
-				}
-			});
-		}
-
-		private void doOK()
-		{
-			String str;
-			CommandThread core = CommandThread.core;
-			str = m_fontCB.getSelectedItem().toString();
-			if (str.equals(m_font) == false)
-			{
-				m_isChanged = true;
-				m_font = str;
-				core.setPreference(OConsts.TF_SRC_FONT_NAME, m_font);
-			}
-			
-			str = m_fontSizeCB.getSelectedItem().toString();
-			if (str.equals(m_fontSize) == false)
-			{
-				m_isChanged = true;
-				m_fontSize = str;
-				core.setPreference(OConsts.TF_SRC_FONT_SIZE, m_fontSize);
-			}
-			
-			dispose();
-		}
-
-		private void		doCancel()		{ dispose();			}
-		protected boolean	isChanged()		{ return m_isChanged;	}
-		
-		protected JComboBox	m_fontCB;
-		protected JComboBox	m_fontSizeCB;
-
-		protected boolean	m_isChanged = false;
 	}
 
 	public void displayWarning(String msg, Throwable e)
@@ -2026,10 +1948,12 @@ public class TransFrame extends JFrame implements ActionListener
 	private JMenuItem	m_miEditCompare3;
 	private JMenuItem	m_miEditCompare4;
 	private JMenuItem	m_miEditCompare5;
-	private JMenuItem	m_miDisplayFont;
+
+	private JMenu		m_mDisplay;
 	private JCheckBoxMenuItem	m_miDisplayAdvanceKey;
 	private JCheckBoxMenuItem	m_miDisplayMnemonic;
-	private JMenu		m_mDisplay;
+	private JMenuItem	m_miDisplayFont;
+	private JMenuItem	m_miDisplayMatches;
 	
 	private JMenu		m_mTools;
     private JMenuItem	m_miToolsPseudoTrans;

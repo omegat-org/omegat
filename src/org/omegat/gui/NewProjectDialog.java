@@ -398,7 +398,7 @@ public class NewProjectDialog extends JDialog
         }
 
         m_dialogCancelled = false;
-        hide();
+        setVisible(false);
 
         m_browseTarget = 0;
     }
@@ -406,7 +406,7 @@ public class NewProjectDialog extends JDialog
     private void doCancel()
     {
         m_dialogCancelled = false;
-        hide();
+        setVisible(false);
     }
 
     public void setMessageCode(int n)

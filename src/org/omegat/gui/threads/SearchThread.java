@@ -532,7 +532,7 @@ public class SearchThread extends Thread
 		
 		public void run()
 		{
-			m_win.show();
+			m_win.setVisible(true);
 		}
 
 		protected JFrame m_win;

@@ -161,18 +161,22 @@ public abstract class FileHandler
 		m_outputMode = false;
 	}
 
-	// create output stream - allow stream to have access to source file
-	//  if necessary
+	/**
+	 * Method to create an input stream to read the source file
+	 */
 	public BufferedReader createInputStream(String infile)
 			throws IOException
 	{
 		FileInputStream fis = new FileInputStream(infile);
-		//InputStreamReader isr = new InputStreamReader(fis);
-		InputStreamReader isr = new InputStreamReader(fis, "ISO-8859-1");	// NOI18N
+		InputStreamReader isr = new InputStreamReader(fis);
 		BufferedReader br = new BufferedReader(isr);
 		return br;
 	}
 
+	/**
+	 * Create output stream.
+	 * Allow stream to have access to source file if necessary
+	 */
 	public BufferedWriter createOutputStream(String infile, String outfile)
 			throws IOException
 	{

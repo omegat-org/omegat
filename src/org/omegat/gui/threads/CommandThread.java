@@ -647,6 +647,10 @@ public class CommandThread extends Thread
 
 	public void addEntry(String srcText, String file)
 	{
+		// if the source string is empty, don't add it to TM
+		if( srcText.length()==0 || srcText.trim().length()==0 )
+			return;
+		
 		SourceTextEntry srcTextEntry = null;
 		StringEntry strEntry = null;
 
@@ -1108,7 +1112,12 @@ public class CommandThread extends Thread
 		}
 	}
 
-	protected void buildNearList(ArrayList seList, String status) 
+	/**
+	 * Builds the list of fuzzy matches between the source text strings.
+	 * @param seList the list of string entries to match
+	 * @param status status string to display
+	 */
+	private void buildNearList(ArrayList seList, String status) 
 				throws InterruptedIOException
 	{
 		String evtStr = status;

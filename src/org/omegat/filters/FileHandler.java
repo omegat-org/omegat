@@ -26,6 +26,7 @@ import org.omegat.gui.threads.CommandThread;
 import org.omegat.gui.threads.SearchThread;
 
 import java.io.*;
+import org.omegat.core.StringEntry;
 
 /**
  * The base class for all filters (aka file handlers).
@@ -106,17 +107,19 @@ public abstract class FileHandler
 		else if (m_outputMode)
 		{
 			// fetch translation and write it to outfile
-			String s;
 			if (m_testMode)
 			{
-				s = srcText;
+				String s = srcText;
 				s = formatString(s);
 				m_outFile.write(s + "-trans");	// NOI18N
 			}
 			else
 			{
-				s = CommandThread.core.getStringEntry(srcText).getTrans();
-				if ((s == null) || (s.equals("")))	// NOI18N
+				String s = null;
+				StringEntry se = CommandThread.core.getStringEntry(srcText);
+				if( se!=null )
+					s = se.getTrans();
+				if( s==null || s.length()==0 )
 					s = srcText;
 				s = formatString(s);
 				m_outFile.write(s);

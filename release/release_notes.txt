@@ -68,18 +68,21 @@ Enchancements:
 
 Bugfixes:
 
-- Help file viewer was shown multiple times
+- Too little fuzzy matches were found,
+  especially in small projects
+  
+- Old Fuzzy Matching engine was totally
+  bad on Japanese source files
 
 - HTML Encoding wasn't always recognized correctly
 
 - And sometimes encoding meta was not inserted 
   into compiled HTML files
 
+- Help file viewer was shown multiple times
+
 - Empty segments were uselessly displayed
 
-- Too little fuzzy matches were found,
-  especially in small projects
-  
 
 1.4.3
 -------------------------------

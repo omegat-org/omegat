@@ -40,7 +40,7 @@ public class PatternConsts
 	
 	/** compiled pattern to extract the encoding from HTML file, if any */
 	public static final Pattern HTML_ENCODING = Pattern.compile(
-		"<meta.*?content\\s*=\\s*[\"']\\s*text/html\\s*;\\s*charset\\s*=\\s*(\\S+?)[\"']\\s*/?\\s*>", 
+		"<meta.*?content\\s*=\\s*[\"']\\s*text/html\\s*;\\s*charset\\s*=\\s*(\\S+?)[\"'].*?/?\\s*>",
 		Pattern.CASE_INSENSITIVE);
 	
 	/** compiled pattern to look for HTML file HEAD declaration */

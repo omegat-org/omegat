@@ -608,6 +608,12 @@ public class CommandThread extends Thread
 		}
 	}
 
+    /**
+     * Creates a new Source Text Entry 
+     * (mapping between source file and a TM).
+     * Also if there's no entry for <code>srcText</code> string yet,
+     * then adds a new String Entry to internal in-memory TM.
+     */
 	public void addEntry(String srcText)
 	{
 		// if the source string is empty, don't add it to TM

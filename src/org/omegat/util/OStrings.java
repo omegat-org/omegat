@@ -210,7 +210,6 @@ public class OStrings
 	public static final String SW_DIR_SEARCH	= getString("SW_DIR_SEARCH");
 	public static final String SW_DIR_RECURSIVE	= getString("SW_DIR_RECURSIVE");
 	public static final String SW_TITLE			= getString("SW_TITLE");
-	public static final String SW_DISMISS		= getString("SW_DISMISS");
 	public static final String SW_BUTTON_SELECT	= getString("BUTTON_SELECT");
 	public static final String SW_VIEWER_TEXT	= getString("SW_VIEWER_TEXT");
 	public static final String SW_MAX_FINDS_REACHED	= getString("SW_MAX_FINDS_REACHED") + 

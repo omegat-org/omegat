@@ -400,7 +400,7 @@ System.out.println("ERROR - bad directory name  '"+m_dirField.getText()+"'");	//
 		m_recursiveCB.setText(OStrings.SW_DIR_RECURSIVE);
 		m_dirButton.setText(OStrings.SW_BROWSE);
 		
-		m_dismissButton.setText(OStrings.SW_DISMISS);
+		m_dismissButton.setText(OStrings.CF_BUTTON_CLOSE);
 	}
 
 	class MFindField extends JTextField

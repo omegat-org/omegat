@@ -89,7 +89,12 @@ public class TextFileHandler extends FileHandler
 	public Writer createOutputStream(String outfile) throws IOException
 	{
 		FileOutputStream fos = new FileOutputStream(outfile);
-		OutputStreamWriter osw = new OutputStreamWriter(fos, getEncoding());
+        String encoding = getEncoding();
+        OutputStreamWriter osw;
+        if( encoding==null )
+            osw = new OutputStreamWriter(fos);
+        else
+            osw = new OutputStreamWriter(fos, getEncoding());
 		BufferedWriter bw = new BufferedWriter(osw);
 		return bw;
 	}

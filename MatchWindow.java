@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  17Mar2003
+//  Build date:  16Apr2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -33,6 +33,7 @@ import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.text.*;
 //import javax.swing.filechooser.*;
 import java.io.*;
 import java.lang.*;
@@ -45,10 +46,16 @@ class MatchWindow extends JFrame
 	{
 		// SIB - find available screen real-estate and adjust size
 		//	accordingly
-		// don't be obnoxious though
+		// KBG - don't be obnoxious and take too much of screen 
+		//	(1200x1000 total area should be more than adequate)
+		// KBG - in case center is offset (i.e. if taskbar on top of screen)
+		//	then offset windows (14apr04)
 		GraphicsEnvironment env = 
 				GraphicsEnvironment.getLocalGraphicsEnvironment();
 		Rectangle scrSize = env.getMaximumWindowBounds();
+		Point center = env.getCenterPoint();
+		int origX = scrSize.width/2 - center.x;
+		int origY = scrSize.height/2 - center.y;
 		int pos = (int) (scrSize.width * 0.67);
 		int wid = (int) (scrSize.width * 0.33);
 		if (pos > 800)
@@ -58,7 +65,7 @@ class MatchWindow extends JFrame
 		if (scrSize.height > 1000)
 			scrSize.height = 1000;
 		setSize(wid, scrSize.height);
-		setLocation(pos, 0);
+		setLocation(origX+pos, origY);
 
 		Container cont = getContentPane();
 		cont.setLayout(new GridLayout(2, 1, 3, 4));
@@ -73,15 +80,39 @@ class MatchWindow extends JFrame
 
 		m_matchPane.setEditable(false);
 		m_glosPane.setEditable(false);
+
+		addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e)
+			{
+				hide();
+			}
+		});
 	}
 
 	// copy match and glos buffers to display
-	public void updateText()
+	public void updateGlossaryText()
+	{
+		m_glosPane.setText(m_glosDisplay);
+		m_glosDisplay = "";
+	}
+
+	public void updateMatchText()
 	{
 		m_matchPane.setText(m_matchDisplay);
-		m_glosPane.setText(m_glosDisplay);
+
+		if (m_hiliteStart >= 0)
+		{
+			m_matchPane.select(m_hiliteStart, m_hiliteEnd);
+			MutableAttributeSet mattr = null;
+			mattr = new SimpleAttributeSet();
+			StyleConstants.setBold(mattr, true);
+			m_matchPane.setCharacterAttributes(mattr, false);
+
+			m_matchPane.setCaretPosition(m_hiliteStart);
+		}
+
 		m_matchDisplay = "";
-		m_glosDisplay = "";
 		m_matchCount = 0;
 	}
 
@@ -120,12 +151,30 @@ class MatchWindow extends JFrame
 		return size;
 	}
 
+	public void hiliteRange(int start, int end)
+	{
+		int len = m_matchDisplay.length();
+		if ((start < 0) || (start > len))
+		{
+			m_hiliteStart = -1;
+			m_hiliteEnd = -1;
+			return;
+		}
+
+		if (end < 0)
+			end = len;
+
+		m_hiliteStart = start;
+		m_hiliteEnd = end;
+	}
 
 	protected String		m_matchDisplay = "";
 	protected String		m_glosDisplay = "";
 	protected JTextPane		m_matchPane;
 	protected JTextPane		m_glosPane;
 	protected int			m_matchCount = 0;
+	protected int			m_hiliteStart = -1;
+	protected int			m_hiliteEnd = -1;
 
 //////////////////////////////////////////////////////////
 
@@ -137,7 +186,8 @@ class MatchWindow extends JFrame
 				"but a tool from a very greedy company");
 		mw.addMatchTerm("For whom the bell tolls", "Whence the bell tolls",
 				65, "unknown");
-		mw.updateText();
+		mw.updateGlossaryText();
+		mw.updateMatchText();
 		mw.show();
 	}
 }

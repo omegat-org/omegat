@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  17Mar2003
+//  Build date:  16Apr2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -59,7 +59,8 @@ class NearString implements Comparable
 		score = nearScore;
 		parAttr = parData;
 		attr = nearData;
-		proj = projName;
+		if (projName != null)
+			proj = projName;
 	}
 
 	public int compareTo(Object obj)
@@ -74,5 +75,5 @@ class NearString implements Comparable
 	public double score;
 	public byte[] parAttr;	// matching attributes of parent strEntry
 	public byte[] attr;	// matching attributes of near strEntry
-	public String proj;
+	public String proj = "";
 }

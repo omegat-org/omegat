@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  17Mar2003
+//  Build date:  16Apr2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -70,17 +70,23 @@ class TransFrame extends JFrame implements ActionListener
 
 		// SIB - find available screen real-estate and adjust size
 		//	accordingly
-		// don't be obnoxious though
+		// KBG - don't be obnoxious and take too much of screen 
+		//	(1200x1000 total area should be more than adequate)
+		// KBG - in case center is offset (i.e. if taskbar on top of screen)
+		//	then offset windows (14apr04)
 		GraphicsEnvironment env = 
 				GraphicsEnvironment.getLocalGraphicsEnvironment();
 		Rectangle scrSize = env.getMaximumWindowBounds();
+		Point center = env.getCenterPoint();
+		int origX = scrSize.width/2 - center.x;
+		int origY = scrSize.height/2 - center.y;
 		scrSize.width = (int) (scrSize.width * 0.67);
 		if (scrSize.width > 790)
 			scrSize.width = 790;
 		if (scrSize.height > 1000)
 			scrSize.height = 1000;
 		setSize(scrSize.width, scrSize.height );
-		setLocation(0, 0);
+		setLocation(origX, origY);
 
 		addWindowListener(new WindowAdapter()
 			{
@@ -192,6 +198,13 @@ class TransFrame extends JFrame implements ActionListener
 		m_miFileProjWin.setMnemonic(KeyEvent.VK_L);
 		m_miFileProjWin.addActionListener(this);
 		m_mFile.add(m_miFileProjWin);
+		
+		m_miFileMatchWin = new JMenuItem();
+		m_miFileMatchWin.setAccelerator(KeyStroke.getKeyStroke(
+				KeyEvent.VK_M,  m_shortcutKey));
+		m_miFileMatchWin.setMnemonic(KeyEvent.VK_M);
+		m_miFileMatchWin.addActionListener(this);
+		m_mFile.add(m_miFileMatchWin);
 		
 		m_mFile.addSeparator();
 
@@ -309,19 +322,6 @@ class TransFrame extends JFrame implements ActionListener
 		// display
 		m_mDisplay = new JMenu();
 		m_mDisplay.setMnemonic(KeyEvent.VK_C);
-		m_miDisplayFuzzyMatch = new JCheckBoxMenuItem();
-		m_miDisplayFuzzyMatch.addActionListener(this);
-		m_miDisplayFuzzyMatch.setMnemonic(KeyEvent.VK_M);
-		m_miDisplayFuzzyMatch.setState(true);
-		m_miDisplayFuzzyMatch.setEnabled(false);
-		m_mDisplay.add(m_miDisplayFuzzyMatch);
-
-		m_miDisplayGlossaryMatch = new JCheckBoxMenuItem();
-		m_miDisplayGlossaryMatch.setMnemonic(KeyEvent.VK_G);
-		m_miDisplayGlossaryMatch.addActionListener(this);
-		m_miDisplayGlossaryMatch.setState(true);
-		m_miDisplayGlossaryMatch.setEnabled(false);
-		m_mDisplay.add(m_miDisplayGlossaryMatch);
 
 		m_miDisplayFont = new JMenuItem();
 		m_miDisplayFont.setMnemonic(KeyEvent.VK_F);
@@ -383,6 +383,7 @@ class TransFrame extends JFrame implements ActionListener
 		m_miFileCreate.setText(OStrings.TF_MENU_FILE_CREATE);
 		m_miFileCompile.setText(OStrings.TF_MENU_FILE_COMPILE);
 		m_miFileProjWin.setText(OStrings.TF_MENU_FILE_PROJWIN);
+		m_miFileMatchWin.setText(OStrings.TF_MENU_FILE_MATCHWIN);
 		m_miFileSave.setText(OStrings.TF_MENU_FILE_SAVE);
 		m_miFileQuit.setText(OStrings.TF_MENU_FILE_QUIT);
 
@@ -401,10 +402,8 @@ class TransFrame extends JFrame implements ActionListener
 		m_miEditUntrans.setText(OStrings.TF_MENU_EDIT_NEXT_UNTRANS);
 		
 		m_mDisplay.setText(OStrings.TF_MENU_DISPLAY);
-		m_miDisplayFuzzyMatch.setText(OStrings.TF_MENU_DISPLAY_FUZZY);
-		m_miDisplayGlossaryMatch.setText(OStrings.TF_MENU_DISPLAY_GLOSSARY);
 		m_miDisplayFont.setText(OStrings.TF_MENU_DISPLAY_FONT);
-
+		
 		m_mTools.setText(OStrings.TF_MENU_TOOLS);
 		m_miToolsPseudoTrans.setText(OStrings.TF_MENU_TOOLS_PSEUDO);
 		m_miToolsValidateTags.setText(OStrings.TF_MENU_TOOLS_VALIDATE);
@@ -413,8 +412,11 @@ class TransFrame extends JFrame implements ActionListener
 		m_mVersion.setText(OmegaTVersion.name());
 		m_miVersionHelp.setText(OStrings.TF_MENU_VERSION_HELP);
 		
-		m_miFileProjWin.setDisplayedMnemonicIndex(10);
-		m_miToolsValidateTags.setDisplayedMnemonicIndex(9);
+		// KBG - the UI looks bad w/ misplaced mnemonics, but this is
+		//	better than hard coding their location for localized versions
+//		m_miFileProjWin.setDisplayedMnemonicIndex(10);
+//		m_miFileMatchWin.setDisplayedMnemonicIndex(5);
+//		m_miToolsValidateTags.setDisplayedMnemonicIndex(9);
 	}
 
 	protected void updateMenuSelectabilityStates()
@@ -592,6 +594,12 @@ class TransFrame extends JFrame implements ActionListener
 	// replace entire edit area with active fuzzy match
 	public void doRecycleTrans()
 	{
+		if (m_projectLoaded == false)
+			return;
+		
+		if (m_curNear == null)
+			return;
+
 		StringEntry se = m_curNear.str;
 		doReplaceEditText(se.getTrans());
 	}
@@ -617,7 +625,7 @@ class TransFrame extends JFrame implements ActionListener
 			int start = m_segmentStartOffset + m_sourceDisplayLength +
 				OStrings.TF_CUR_SEGMENT_START.length() + 1;
 			int end = m_xlPane.getText().length() - m_segmentEndInset -
-				OStrings.TF_CUR_SEGMENT_END.length() - 3;
+				OStrings.TF_CUR_SEGMENT_END.length();
 
 			// remove text
 //System.out.println("removing text "+start+" -> "+end+" length:"+(end-start));
@@ -857,11 +865,7 @@ class TransFrame extends JFrame implements ActionListener
 	///////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////
 	// display oriented code
-	protected void updateMatchPane()
-	{
-//System.out.println("display fuzzy match summary + handle glossary terms");
-	}
-	
+
 	// display fuzzy matching info if it's available
 	// don't call this directly - should only be called through doCompareN
 	protected void updateFuzzyInfo() 
@@ -888,15 +892,16 @@ class TransFrame extends JFrame implements ActionListener
 				m_nearList = null;
 				m_nearListNum = -1;
 				m_curNear = null;
+				m_matchViewer.updateMatchText();
 				return;
 			}
 
-			String srcText = m_curEntry.getSrcText();
+			//String srcText = m_curEntry.getSrcText();
 			//formatNearText(srcText, m_curNear.parAttr, Color.red, 
 			//		Color.darkGray, m_xlDoc, m_segmentStartOffset, 
 			//		srcText.length());
 			
-			String oldStr = m_curNear.str.getSrcText();
+			//String oldStr = m_curNear.str.getSrcText();
 //System.out.println("old src text: "+oldStr);
 
 			// remember length of base string (before fuzzy % added)
@@ -905,14 +910,36 @@ class TransFrame extends JFrame implements ActionListener
 
 			//formatNearText(oldStr, m_curNear.attr, Color.blue, Color.black, 
 			//		m_oldSrcDoc, 0, oldStrLen);
-			String locStr = m_curNear.str.getTrans();
-			m_matchViewer.addMatchTerm(oldStr, locStr, 
-					(int) (m_curNear.score * 100), "");
-
-			// TODO XXX say where this fuzzy string came from
-	//		if (proj == null)
-	//			proj = OStrings.TF_FUZZY_CURRENT_PROJECT;
-	//		m_fuzzyProjLabel.setText(proj);
+			//String locStr = m_curNear.str.getTrans();
+//			m_matchViewer.addMatchTerm(oldStr, locStr, 
+//					(int) (m_curNear.score * 100), "");
+		StringEntry curEntry = m_curEntry.getStrEntry();
+		if (curEntry.getNearList().size() > 0)
+		{
+			NearString ns;
+			int ctr = 0;
+			int offset;
+			int start = -1;
+			int end = -1;
+			ListIterator li = curEntry.getNearList().listIterator();
+			while (li.hasNext())
+			{
+				ns = (NearString) li.next();
+				String oldStr = ns.str.getSrcText();
+				String locStr = ns.str.getTrans();
+				String proj = ns.proj;
+				offset = m_matchViewer.addMatchTerm(oldStr, locStr, 
+						(int) (ns.score * 100), proj);
+				if (ctr == m_nearListNum)
+					start = offset;
+				else if (ctr == (m_nearListNum+1))
+					end = offset;
+				if (++ctr > 5)
+					break;
+			}
+			m_matchViewer.hiliteRange(start, end);
+		}
+		m_matchViewer.updateMatchText();
 	}
 	
 	private void commitEntry()
@@ -994,8 +1021,8 @@ class TransFrame extends JFrame implements ActionListener
 					docSeg = (DocumentSegment) m_docSegList.get(
 								entry - m_xlFirstEntry);
 					m_xlPane.select(offset, offset+docSeg.length);
-					m_xlPane.replaceSelection(s + "\n");
-					docSeg.length = s.length() + 1;
+					m_xlPane.replaceSelection(s + "\n\n");
+					docSeg.length = s.length() + "\n\n".length();
 //					insertSegment(entry, offset, null, false, false);
 				}
 			}
@@ -1009,6 +1036,9 @@ class TransFrame extends JFrame implements ActionListener
 	// make sure fuzzy info displayed if available and wanted
 	public synchronized void activateEntry() 
 	{
+		if (m_projectLoaded == false)
+			return;
+
 		int i;
 		DocumentSegment docSeg;
 
@@ -1073,10 +1103,8 @@ class TransFrame extends JFrame implements ActionListener
 		m_xlPane.setCharacterAttributes(mattr, true);
 //System.out.println("inserting text '"+srcText+"' (+startString) at "+(m_segmentStartOffset));
 
-		
 		// TODO XXX format source text if there is near match
 		
-//		m_fuzzyProjLabel.setText("");
 		if (m_curEntry.getSrcFile().name.compareTo(m_activeFile) != 0)
 		{
 			m_activeFile = m_curEntry.getSrcFile().name;
@@ -1084,29 +1112,29 @@ class TransFrame extends JFrame implements ActionListener
 		}
 		
 		// TODO set word counts
-		
-		// fill context fields.  make text to be translated red so
-		//  to stand out in low context field
 
 		doCompareN(0);
 
-		StringEntry se = m_curEntry.getStrEntry();
-		if (se.getGlosList().size() > 0)
+		// add glossary terms and fuzzy match info to match window
+		StringEntry curEntry = m_curEntry.getStrEntry();
+		if (curEntry.getGlosList().size() > 0)
 		{
 			// TODO do something with glossary terms
-			m_glossaryLength = se.getGlosList().size();
-			ListIterator li = se.getGlosList().listIterator();
+			m_glossaryLength = curEntry.getGlosList().size();
+			ListIterator li = curEntry.getGlosList().listIterator();
 			while (li.hasNext())
 			{
 				GlossaryEntry glos = (GlossaryEntry) li.next();
 				m_matchViewer.addGlosTerm(glos.getSrcText(), glos.getLocText(),
 						glos.getCommentText());
 			}
+		
 		}
 		else
 			m_glossaryLength = 0;
+		m_matchViewer.updateGlossaryText();
 
-		int nearLength = se.getNearList().size();
+		int nearLength = curEntry.getNearList().size();
 		if (nearLength > 5)
 			nearLength = 5;
 		
@@ -1134,8 +1162,6 @@ class TransFrame extends JFrame implements ActionListener
 		else
 			m_statusLabel.setText("");
 
-		m_matchViewer.updateText();
-		
 //System.out.println(" segment text '"+m_curEntry.getSrcText()+"' -> '"+m_curEntry.getTranslation()+"'");
 
 		// TODO - hilite translation area in yellow
@@ -1258,6 +1284,13 @@ class TransFrame extends JFrame implements ActionListener
 			else if (evtSrc == m_miFileCompile)
 			{
 				doCompileProject();
+			}
+			else if (evtSrc == m_miFileMatchWin)
+			{
+				if (m_matchViewer.isVisible() == true)
+					m_matchViewer.hide();
+				else
+					m_matchViewer.show();
 			}
 			else if (evtSrc == m_miFileProjWin)
 			{
@@ -1841,6 +1874,7 @@ class TransFrame extends JFrame implements ActionListener
 	private JMenuItem	m_miFileCreate;
 	private JMenuItem	m_miFileCompile;
 	private JMenuItem	m_miFileProjWin;
+	private JMenuItem	m_miFileMatchWin;
 	private JMenuItem	m_miFileSave;
 	private JMenuItem	m_miFileQuit;
 	private JMenu m_mEdit;
@@ -1859,8 +1893,6 @@ class TransFrame extends JFrame implements ActionListener
 	private JMenuItem	m_miEditCompare5;
 	private JMenuItem	m_miDisplayFont;
 	private JMenu		m_mDisplay;
-	private JCheckBoxMenuItem	m_miDisplayFuzzyMatch;
-	private JCheckBoxMenuItem	m_miDisplayGlossaryMatch;
 	
 	private JMenu		m_mTools;
 	private JMenuItem	m_miToolsSpell;

@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  17Mar2003
+//  Build date:  16Apr2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -68,6 +68,7 @@ public static final String TF_MENU_FILE_OPEN	= "Open";
 public static final String TF_MENU_FILE_CREATE	= "Create New project";
 public static final String TF_MENU_FILE_COMPILE	= "Compile";
 public static final String TF_MENU_FILE_PROJWIN	= "Show file List";
+public static final String TF_MENU_FILE_MATCHWIN	= "Show Match window";
 public static final String TF_MENU_FILE_SAVE	= "Save";
 public static final String TF_MENU_FILE_QUIT	= "Quit";
 public static final String TF_MENU_EDIT		= "Edit";
@@ -94,8 +95,8 @@ public static final String TF_MENU_EDIT_COMPARE_4
 public static final String TF_MENU_EDIT_COMPARE_5
 			= "Compare fuzzy match #5";
 public static final String TF_MENU_DISPLAY			= "Configuration";
-public static final String TF_MENU_DISPLAY_FUZZY	= "Fuzzy Match info";
-public static final String TF_MENU_DISPLAY_GLOSSARY	= "Glossary";
+//public static final String TF_MENU_DISPLAY_FUZZY	= "Fuzzy Match info";
+//public static final String TF_MENU_DISPLAY_GLOSSARY	= "Glossary";
 public static final String TF_MENU_DISPLAY_SOURCE	= "Source text";
 public static final String TF_MENU_DISPLAY_FONT	= "Font";
 //public static final String TF_MENU_SERVER	= "Server";
@@ -225,6 +226,7 @@ public static final String CT_HTMLX_MASQUERADE	=
 public static final String CT_LOAD_FILE_MX	= "Loading: ";
 public static final String CT_COMPILE_FILE_MX	= "Compiling: ";
 public static final String CT_COMPILE_DONE_MX	= "Compile complete";
+public static final String CT_COPY_FILE	= "Copying file";
 
 // ProjectProperties
 public static final String PP_CREATE_PROJ	= "Create new project";

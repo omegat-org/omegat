@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  17Mar2003
+//  Build date:  16Apr2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -533,6 +533,11 @@ class CommandThread extends Thread
 			{
 				System.out.println(OStrings.CT_NO_FILE_HANDLER 
 								+ " (." + ext + ")");
+				// copy file to target tree
+				System.out.println(OStrings.CT_COPY_FILE + " '" + 
+						filename.substring(m_config.getSrcRoot().length()) +
+						"'");
+				LFileCopy.copy(filename, destFileName);
 				continue;
 			}
 			if (fh.getType().equals(OConsts.FH_HTML_TYPE))
@@ -1210,6 +1215,7 @@ class CommandThread extends Thread
 			//	one by one and a counter was incremented each time
 			//	a matching string was found and added to the list)
 	
+//System.out.println("freq list len="+freqList.len());
 			// for each candidate string, compare composition to 
 			//	current segment
 			for (j=0; j<freqList.len(); j++)
@@ -1317,6 +1323,7 @@ class CommandThread extends Thread
 			if (fname.endsWith(File.separator) == false)
 				fname += File.separator;
 			fname += fileList[i];
+			m_nearProj = fileList[i];
 			////fname = m_config.getTMRoot() + File.separator + fname;
 			if (ext.equalsIgnoreCase(OConsts.TMX_EXTENSION))
 				loadTMXFile(fname, "UTF-8", false);
@@ -1344,7 +1351,6 @@ class CommandThread extends Thread
 			{
 				src = tmx.getSourceSegment(i);
 				trans = tmx.getTargetSegment(i);
-				tm = new TransMemory(src, trans, fname);
 
 				if (isProject)
 				{
@@ -1355,29 +1361,34 @@ class CommandThread extends Thread
 						//	old entry can't be found - source files
 						//	must have changed
 						// remember it anyways
+						tm = new TransMemory(src, trans, fname);
 						m_orphanedList.add(tm);
-						// remember the old translation as a TM entity
-						//	as well
 						m_tmList.add(tm);
 						se = new StringEntry(src);
-					}
-					else
-					{
-						// restore the translation to this string
 						se.setTranslation(trans);
-						if (isProject == false)
-							strEntryList.add(se);
+						int wc = StaticUtils.tokenizeText(src, null);
+						se.setWordCount(wc);
 					}
+					se.setTranslation(trans);
+					strEntryList.add(se);
 				}
 				else		
 				{
 					// not in a project - remember this as a translation
-					//	memory string
-					m_tmList.add(tm);
+					//	memory string and add it to near list
+					m_tmList.add(new TransMemory(src, trans, fname));
+					se = new StringEntry(src);
+					se.setTranslation(trans);
+					int wc = StaticUtils.tokenizeText(src, null);
+					se.setWordCount(wc);
+					strEntryList.add(se);
 				}
 			}
-			if (isProject == false)
+			if (strEntryList.size() > 0)
+			{
+//System.out.println("str entry list has "+strEntryList.size()+" entries");
 				buildNearList(strEntryList, status + " (" + fname + ")");
+			}
 		}
 		catch (ParseException e)
 		{
@@ -1710,7 +1721,10 @@ class CommandThread extends Thread
 	// 
 	public SourceTextEntry getSTE(int num)
 	{
-		return (SourceTextEntry) m_srcTextEntryArray.get(num);
+		if (num >= 0)
+			return (SourceTextEntry) m_srcTextEntryArray.get(num);
+		else 
+			return null;
 	}
 
 	public StringEntry getStringEntry(String srcText)

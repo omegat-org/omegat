@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  17Mar2003
+//  Build date:  16Apr2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -381,8 +381,10 @@ System.out.println("ERROR - bad directory name  '"+m_dirField.getText()+"'");
 					CommandThread.core.savePreferences();
 				}
 			}
-			m_thread.requestSearch(m_searchField.getText(), root, false, 
-					m_exactSearchRB.isSelected(), m_tmSearchCB.isSelected());
+			m_thread.requestSearch(m_searchField.getText(), root, 
+					m_recursiveCB.isSelected(), 
+					m_exactSearchRB.isSelected(), 
+					m_tmSearchCB.isSelected());
 		}
 	}
 

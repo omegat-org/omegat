@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  17Mar2003
+//  Build date:  16Apr2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -675,12 +675,27 @@ class HTMLParser
 		String s = (String) m_charMap.get(new Character(c));
 		if ((s == null) && ((c > 255) || ((c > 126) && (c <= 160))))
 		{
-			//s = "&#" + String.valueOf((int) c) + ";";
-			s = "#" + String.valueOf((int) c);
+			s = "&#" + String.valueOf((int) c) + ";";
+		}
+		else if (s != null)
+		{
+			s = "&" + s + ";";
 		}
 		
 		return s;
 	}
+	
+	//public static String convertToEsc(char c)
+	//{
+	//	String s = (String) m_charMap.get(new Character(c));
+	//	if ((s == null) && ((c > 255) || ((c > 126) && (c <= 160))))
+	//	{
+	//		//s = "&#" + String.valueOf((int) c) + ";";
+	//		s = "#" + String.valueOf((int) c);
+	//	}
+	//	
+	//	return s;
+	//}
 	
 	public static String convertAllToEsc(LBuffer b)
 	{
@@ -689,18 +704,46 @@ class HTMLParser
 		String s;
 		for (int i=0; i<b.length(); i++)
 		{
-			s = convertToEsc(car[i]);
+			char c = car[i];
+			s = (String) m_charMap.get(new Character(c));
 			if (s == null)
-				buf.append(car[i]);
-			else
 			{
-				buf.append("&");
+				if ((c > 255) || ((c > 126) && (c <= 160)))
+				{
+					s = "&#" + String.valueOf((int) c) + ";";
+					buf.append(s);
+				}
+				else
+					buf.append(car[i]);
+			}
+			else 
+			{
+				s = "&" + s + ";";
 				buf.append(s);
-				buf.append(";");
 			}
 		}
 		return buf.string();
 	}
+
+	//public static String convertAllToEsc(LBuffer b)
+	//{
+	//	LBuffer buf = new LBuffer(b.size() * 2);
+	//	char[] car = b.getBuf();
+	//	String s;
+	//	for (int i=0; i<b.length(); i++)
+	//	{
+	//		s = convertToEsc(car[i]);
+	//		if (s == null)
+	//			buf.append(car[i]);
+	//		else
+	//		{
+	//			buf.append("&");
+	//			buf.append(s);
+	//			buf.append(";");
+	//		}
+	//	}
+	//	return buf.string();
+	//}
 
 	protected static HashMap	m_charMap = null;
 	protected static HashMap	m_escMap = null;

@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  17Mar2003
+//  Build date:  16Apr2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -332,10 +332,9 @@ System.out.println("mapping extension '"+str.substring(0,pos)+"' to '"+str.subst
 	//	number of tokens)
 	public static int tokenizeText(String str, ArrayList tokenList)
 	{
-		if (tokenList == null)
-			return -1;
+		if (tokenList != null)
+			tokenList.clear();
 		int numWords = 0;
-		tokenList.clear();
 		StringBuffer tokenBuf = new StringBuffer();
 		int len = str.length();
 		boolean hasText = true;
@@ -469,7 +468,9 @@ System.out.println("mapping extension '"+str.substring(0,pos)+"' to '"+str.subst
 			{
 				if (hasText == true)
 					numWords++;
-				tokenList.add(new Token(tokenBuf.toString(), hasText, offset));
+				if (tokenList != null)
+					tokenList.add(new Token(tokenBuf.toString(), 
+								hasText, offset));
 				offset = i+1;
 				tokenBuf.setLength(0);
 

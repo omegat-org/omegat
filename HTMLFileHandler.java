@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  17Mar2003
+//  Build date:  16Apr2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -149,14 +149,15 @@ class HTMLFileHandler extends FileHandler
 			else
 			{
 				s = HTMLParser.convertToEsc(c);
-				if (s == null)
-					outBuf.append(c);
-				else
-				{
-					outBuf.append('&');
-					outBuf.append(s);
-					outBuf.append(';');
-				}
+				outBuf.append(s);
+				//if (s == null)
+				//	outBuf.append(c);
+				//else
+				//{
+				//	outBuf.append('&');
+				//	outBuf.append(s);
+				//	outBuf.append(';');
+				//}
 			}
 
 			if (state < 0)

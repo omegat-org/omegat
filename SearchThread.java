@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  17Mar2003
+//  Build date:  16Apr2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -291,6 +291,7 @@ class SearchThread extends Thread
 		ArrayList fileList = new ArrayList(256);
 		if (m_searchDir.endsWith(File.separator) == false)
 			m_searchDir += File.separator;
+System.out.println("searching directory "+m_searchDir+"  "+m_searchRecursive);
 		StaticUtils.buildFileList(fileList, new File(m_searchDir), 
 				m_searchRecursive);
 		//TODO m_window.numberSearchFiles(fileList.size());
@@ -299,11 +300,13 @@ class SearchThread extends Thread
 		boolean ignore;
 		String shortName;
 		String filename;
+System.out.println("file list has "+fileList.size()+" entries");
 		for (i=0; i<fileList.size(); i++)
 		{
 			filename = (String) fileList.get(i);
 			// determine actual file name w/ no root path info
 			m_curFileName = filename.substring(namePos);
+System.out.println("analyzing "+m_curFileName);
 
 			int extPos = filename.lastIndexOf('.');
 			String ext = filename.substring(extPos+1);

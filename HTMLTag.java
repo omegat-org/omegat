@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  8Mar2003
+//  Build date:  17Mar2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -30,6 +30,32 @@
 //-------------------------------------------------------------------------
 
 import java.util.*;
+
+class HTMLTagAttr
+{
+	public HTMLTagAttr()
+	{
+		attr = null;
+		val = null;
+	}
+
+	public void attrAppend(char c)
+	{
+		if (attr == null)
+			attr = new LBuffer(8);
+		attr.append(c);
+	}
+
+	public void valAppend(char c)
+	{
+		if (val == null)
+			val = new LBuffer(8);
+		val.append(c);
+	}
+
+	LBuffer attr;
+	LBuffer val;
+}
 
 class HTMLTag 
 {

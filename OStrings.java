@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  8Mar2003
+//  Build date:  17Mar2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -65,16 +65,17 @@ public static final String TF_ERROR		= "Error";
 public static final String TF_NONE		= "--none--";
 public static final String TF_MENU_FILE		= "File";
 public static final String TF_MENU_FILE_OPEN	= "Open";
-public static final String TF_MENU_FILE_CREATE	= "Create";
+public static final String TF_MENU_FILE_CREATE	= "Create New project";
 public static final String TF_MENU_FILE_COMPILE	= "Compile";
-public static final String TF_MENU_FILE_PROJWIN	= "Show file list";
+public static final String TF_MENU_FILE_PROJWIN	= "Show file List";
 public static final String TF_MENU_FILE_SAVE	= "Save";
 public static final String TF_MENU_FILE_QUIT	= "Quit";
 public static final String TF_MENU_EDIT		= "Edit";
-public static final String TF_MENU_EDIT_UNDO	= "Undo";
-public static final String TF_MENU_EDIT_REDO	= "Redo";
-public static final String TF_MENU_EDIT_NEXT	= "Next entry";
+public static final String TF_MENU_EDIT_UNDO	= "Undo (Z)";
+public static final String TF_MENU_EDIT_REDO	= "Redo (Y)";
+//public static final String TF_MENU_EDIT_NEXT	= "Next entry";
 public static final String TF_MENU_EDIT_PREV	= "Previous entry";
+public static final String TF_MENU_EDIT_NEXT_UNTRANS	= "Next Untranslated";
 public static final String TF_MENU_EDIT_FIND	= "Find";
 //public static final String TF_MENU_EDIT_FINDEXACT	= "Find exact (target)";
 public static final String TF_MENU_EDIT_INSERT
@@ -93,7 +94,7 @@ public static final String TF_MENU_EDIT_COMPARE_4
 public static final String TF_MENU_EDIT_COMPARE_5
 			= "Compare fuzzy match #5";
 public static final String TF_MENU_DISPLAY			= "Configuration";
-public static final String TF_MENU_DISPLAY_FUZZY	= "Fuzzy match info";
+public static final String TF_MENU_DISPLAY_FUZZY	= "Fuzzy Match info";
 public static final String TF_MENU_DISPLAY_GLOSSARY	= "Glossary";
 public static final String TF_MENU_DISPLAY_SOURCE	= "Source text";
 public static final String TF_MENU_DISPLAY_FONT	= "Font";
@@ -102,7 +103,7 @@ public static final String TF_MENU_DISPLAY_FONT	= "Font";
 //public static final String TF_MENU_LANGUAGE_RESCAN	= "rescan";
 public static final String TF_MENU_TOOLS		= "Tools";
 public static final String TF_MENU_TOOLS_PSEUDO	= "Pseudo translate";
-public static final String TF_MENU_TOOLS_VALIDATE	= "Validate tags";
+public static final String TF_MENU_TOOLS_VALIDATE	= "Validate Tags";
 public static final String TF_MENU_TOOLS_MERGE_TMX	= "Merge TMX files";
 public static final String TF_MENU_VERSION_HELP		= "Help";
 public static final String TF_TITLE		= "OmegaT";
@@ -158,6 +159,8 @@ public static final String TF_BAD_LOCATION_POSSIBLE_CORRUPTION =
 public static final String TF_LOADING_FILE			= "Loading file: ";
 public static final String TF_MATCH_VIEWER_TITLE	= 
 	"Match and Glossary Viewer";
+public static final String TF_NO_MORE_UNTRANSLATED	= 
+	"No more untranslated strings";
 
 // ContextFrame
 public static final String CF_SEARCH_RESULTS_SRC	= 

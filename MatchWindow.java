@@ -18,7 +18,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  
-//  Build date:  8Mar2003
+//  Build date:  17Mar2003
 //  Copyright (C) 2002, Keith Godfrey
 //  keithgodfrey@users.sourceforge.net
 //  907.223.2039
@@ -43,9 +43,22 @@ class MatchWindow extends JFrame
 {
 	public MatchWindow()
 	{
-		//super(par, false);
-		setSize(350, 720);
-		setLocation(660, 0);
+		// SIB - find available screen real-estate and adjust size
+		//	accordingly
+		// don't be obnoxious though
+		GraphicsEnvironment env = 
+				GraphicsEnvironment.getLocalGraphicsEnvironment();
+		Rectangle scrSize = env.getMaximumWindowBounds();
+		int pos = (int) (scrSize.width * 0.67);
+		int wid = (int) (scrSize.width * 0.33);
+		if (pos > 800)
+			pos = 800;
+		if (wid > 400)
+			wid = 400;
+		if (scrSize.height > 1000)
+			scrSize.height = 1000;
+		setSize(wid, scrSize.height);
+		setLocation(pos, 0);
 
 		Container cont = getContentPane();
 		cont.setLayout(new GridLayout(2, 1, 3, 4));

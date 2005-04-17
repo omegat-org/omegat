@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------
- OmegaT 1.4.4.02 Release Notes
+ OmegaT 1.4.5 Beta 1 Release Notes
 
  OmegaT is the work of Keith Godfrey
 
@@ -33,8 +33,9 @@ UI changes:
     Main interface improved
     Font may be selected
     Full localisation support
-    Belorussian, French, German, Russian and Spanish l10n
+    // not in 1.4.5 Beta1 Belorussian, French, German, Russian and Spanish l10n
     Ability to jump to the next untranslated segment
+    Rich customization of Format Filters behaiviour
 New filters:
     XHTML
     Java resource bundles (.properties)
@@ -43,6 +44,20 @@ Core changes:
     Refactored code with more comments
     Windows installer
 
+1.4.5 Beta1
+-------------------------------
+Bugfixes:
+
+- Less than sign causes problems in HTML
+  http://sf.net/tracker/index.php?func=detail&aid=1176585&group_id=68187&atid=520347
+
+Enchancements:
+
+- Change the way we display version
+  http://sf.net/tracker/index.php?func=detail&aid=1037638&group_id=68187&atid=520350
+
+- Editing extension mapping
+  http://sf.net/tracker/index.php?func=detail&aid=991526&group_id=68187&atid=520350
 
 1.4.4.02
 -------------------------------
@@ -176,7 +191,7 @@ and 6 minor bugs fixed:
 -------------------------------
 Repackaging of 1.3.16 plus the latest help files.
 
-	
+        
 1.3.16
 -------------------------------
 Fixed a bug in the file copy routine which would append extra data onto
@@ -280,8 +295,8 @@ fixed XHTML output bug that would add extra & and ; to certain escaped
 1.3.6 alpha
 --------------------------------
 Changed project open dialog to operate on project files directly (instead
-		of project directories) as some users could not open projects 
-		at all (esp. mac users)
+                of project directories) as some users could not open projects 
+                at all (esp. mac users)
 Set font in find window to match source language font and size.
 Locked out keyboard input when no project active 
 
@@ -295,15 +310,15 @@ fixed several bugs in fuzzy matching - now back online
 --------------------------------
 #fixed scroll problem where current entry sometimes shows off bottom of screen
 fixed bug where untranslated identical segments in same file would throw
-	off display
+        off display
 soft returns save and restore correctly now
 fixed bug where project would encounter error while loading before
-	save thread could be activated, but project would appear to be normal
+        save thread could be activated, but project would appear to be normal
 added TM search to search window
 fixed bug where escaped hex codes in xml parser weren't read correctly
 fixed bug in html parser where all chars were escaped
 fixed character offset problem when identical strings resided in same file
-	and UI would get out of sync
+        and UI would get out of sync
 added better control to find window controls to only what's available
 
 

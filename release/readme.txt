@@ -1,7 +1,27 @@
-OmegaT 1.4.4.02 Read Me file
+OmegaT 1.4.5Beta1 Read Me file
 
 The most actual info about OmegaT may be found at
                   http://www.omegat.org/omegat/omegat.html
+
+
+OmegaT is a high performance Java based Computer Assisted Translation tool 
+with fuzzy matching, translation memory, keyword search, glossary term 
+identification, and translation leveraging into updated projects.
+
+OmegaT is originally the work of Keith Godfrey
+
+Code has been contributed by 
+  Benjamin Siband
+  Maxym Mykhalchuk (lead developer at the time of this release)
+  Sacha Chua 
+  Henry Pijffers
+
+Other contributions by 
+  Marc Prior (project coordinator and ASAD manual writer)
+  Jean-Christophe Helary
+  Samuel Murray
+  Dmitry Gabinski (user manual writer at the time of this release) 
+  and many, many more very helpful people
 
 General Notes:
 

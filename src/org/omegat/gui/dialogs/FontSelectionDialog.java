@@ -52,10 +52,15 @@ public class FontSelectionDialog extends javax.swing.JDialog
     {
         super(parent, true);
         initComponents();
+        
+        getRootPane().setDefaultButton(okButton);
+        
         oldFont = font;
         previewTextArea.setFont(oldFont);
         fontComboBox.setSelectedItem(oldFont.getName());
         sizeSpinner.setValue(new Integer(oldFont.getSize()));
+        
+        invalidate();
         pack();
     }
     
@@ -87,7 +92,6 @@ public class FontSelectionDialog extends javax.swing.JDialog
 
         setTitle(OStrings.getString("TF_SELECT_FONTS_TITLE"));
         setModal(true);
-        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter()
         {
             public void windowClosing(java.awt.event.WindowEvent evt)
@@ -98,7 +102,7 @@ public class FontSelectionDialog extends javax.swing.JDialog
 
         buttonPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        okButton.setText(OStrings.getString("BUTTON_OK"));
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK"));
         okButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -109,7 +113,7 @@ public class FontSelectionDialog extends javax.swing.JDialog
 
         buttonPanel.add(okButton);
 
-        cancelButton.setText(OStrings.getString("BUTTON_CANCEL"));
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL"));
         cancelButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -124,9 +128,9 @@ public class FontSelectionDialog extends javax.swing.JDialog
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
-        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
         getContentPane().add(buttonPanel, gridBagConstraints);
 
@@ -143,16 +147,16 @@ public class FontSelectionDialog extends javax.swing.JDialog
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(fontComboBox, gridBagConstraints);
 
-        fontLabel.setText(OStrings.getString("TF_SELECT_SOURCE_FONT"));
+        org.openide.awt.Mnemonics.setLocalizedText(fontLabel, OStrings.getString("TF_SELECT_SOURCE_FONT"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(fontLabel, gridBagConstraints);
 
@@ -168,16 +172,16 @@ public class FontSelectionDialog extends javax.swing.JDialog
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(sizeSpinner, gridBagConstraints);
 
-        sizeLabel.setText(OStrings.getString("TF_SELECT_FONTSIZE"));
+        org.openide.awt.Mnemonics.setLocalizedText(sizeLabel, OStrings.getString("TF_SELECT_FONTSIZE"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(sizeLabel, gridBagConstraints);
 
@@ -185,16 +189,20 @@ public class FontSelectionDialog extends javax.swing.JDialog
         previewTextArea.setEditable(false);
         previewTextArea.setText(OStrings.getString("TF_FONT_SAMPLE_TEXT"));
         previewTextArea.setBorder(new javax.swing.border.TitledBorder(null, OStrings.getString("TF_FONT_SAMPLE_TITLE"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, fontLabel.getFont()));
-        previewTextArea.setPreferredSize(new java.awt.Dimension(200, 80));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
         getContentPane().add(previewTextArea, gridBagConstraints);
 
+        pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-324)/2, (screenSize.height-222)/2, 324, 222);
+        java.awt.Dimension dialogSize = getSize();
+        setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
     }//GEN-END:initComponents
 
     private void fontComboBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_fontComboBoxActionPerformed
@@ -233,7 +241,7 @@ public class FontSelectionDialog extends javax.swing.JDialog
         dispose();
     }
     
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // ќбъ€вление переменных - не измен€йте данный код//GEN-BEGIN:variables
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox fontComboBox;
@@ -242,7 +250,7 @@ public class FontSelectionDialog extends javax.swing.JDialog
     private javax.swing.JTextArea previewTextArea;
     private javax.swing.JLabel sizeLabel;
     private javax.swing.JSpinner sizeSpinner;
-    // End of variables declaration//GEN-END:variables
+    //  онец объ€влени€ переменных//GEN-END:variables
     
     private int returnStatus = RET_CANCEL_OR_UNCHANGED;
 }

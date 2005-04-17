@@ -21,16 +21,16 @@
 
 package org.omegat.util;
 
-import org.omegat.filters.xml.XMLBlock;
-import org.omegat.filters.xml.XMLStreamReader;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
+
+import org.omegat.filters2.TranslationException;
+import org.omegat.filters2.xml.XMLBlock;
+import org.omegat.filters2.xml.XMLStreamReader;
 
 /**
  * Class that reads project definition file and returns project's properties.
@@ -47,9 +47,9 @@ public class ProjectFileReader
 	}
 
 	public void loadProjectFile(String filename)
-		throws IOException, ParseException
+		throws IOException, TranslationException
 	{
-		m_reader.setStream(filename, "UTF8");									// NOI18N
+		m_reader.setStream(filename, "UTF-8");									// NOI18N
 		
 		// verify valid project file
 		XMLBlock blk;
@@ -66,9 +66,9 @@ public class ProjectFileReader
 		String ver = blk.getAttribute("version");								// NOI18N
 		if (ver != null && !ver.equals(OConsts.PROJ_CUR_VERSION))
 		{
-			throw new ParseException(
-				MessageFormat.format(OStrings.getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"), new Object[]{ver}), 
-				0);
+			throw new TranslationException(
+                    MessageFormat.format(OStrings.getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"), 
+                    new Object[]{ver}));
 		}
 		
 		// if folder is in default locations, name stored as __DEFAULT__

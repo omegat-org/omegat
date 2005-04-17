@@ -21,25 +21,41 @@
 
 package org.omegat.core.threads;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InterruptedIOException;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+
 import org.omegat.core.LegacyTM;
+import org.omegat.core.StringEntry;
+import org.omegat.core.TransMemory;
 import org.omegat.core.glossary.GlossaryManager;
 import org.omegat.core.matching.FuzzyMatcher;
-import org.omegat.util.*;
-import org.omegat.gui.TransFrame;
-import org.omegat.gui.ProjectProperties;
-import org.omegat.gui.ProjectFrame;
-import org.omegat.gui.messages.MessageRelay;
-import org.omegat.filters.html.HTMLParser;
-import org.omegat.filters.xml.XMLStreamReader;
-import org.omegat.filters.FileHandler;
-import org.omegat.filters.HandlerMaster;
-import org.omegat.core.*;
-
-import java.io.*;
-import java.text.ParseException;
-import java.util.*;
 import org.omegat.core.matching.SourceTextEntry;
-import org.omegat.core.glossary.GlossaryEntry;
+import org.omegat.filters2.TranslationException;
+import org.omegat.filters2.master.FilterMaster;
+import org.omegat.filters2.xml.XMLStreamReader;
+import org.omegat.gui.ProjectFrame;
+import org.omegat.gui.ProjectProperties;
+import org.omegat.gui.TransFrame;
+import org.omegat.gui.messages.MessageRelay;
+import org.omegat.util.LFileCopy;
+import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
+import org.omegat.util.PreferenceManager;
+import org.omegat.util.ProjectFileData;
+import org.omegat.util.RequestPacket;
+import org.omegat.util.StaticUtils;
+import org.omegat.util.TMXReader;
+
 
 /**
  * CommandThread is a thread to asynchronously do the stuff
@@ -72,9 +88,6 @@ public class CommandThread extends Thread
 		m_projWin = null;
 		m_saveCount = -1;
 		m_saveThread = null;
-
-		// static initialization
-		HTMLParser.initEscCharLookupTable();
 
 		m_prefManager = PreferenceManager.pref;
 		if (m_prefManager == null)
@@ -281,6 +294,13 @@ public class CommandThread extends Thread
 			// don't know what happened - cancel load to be on the safe side
 			requestUnload();
 		}
+		catch( TranslationException te )
+		{
+			String msg = OStrings.TF_LOAD_ERROR;
+			displayError(msg, te);
+			// don't know what happened - cancel load to be on the safe side
+			requestUnload();
+		}
 	}
 
 
@@ -302,7 +322,7 @@ public class CommandThread extends Thread
 		String locLang = getPreference(OConsts.PREF_LOCLANG);
 
 		FileOutputStream fos = new FileOutputStream(filename);
-		OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF8"); // NOI18N
+		OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8"); // NOI18N
 		BufferedWriter out = new BufferedWriter(osw);
 		
 		String str = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";			 // NOI18N
@@ -413,51 +433,36 @@ public class CommandThread extends Thread
 
 	// build all translated files and create a new TM file
 	public void compileProject() 
-			throws IOException
+			throws IOException, TranslationException
 	{
 		if (m_strEntryHash.size() == 0)
 			return;
 
-		int i;
-		int j;
-		String srcRoot = m_config.getSourceRoot();
-		String locRoot = m_config.getLocRoot();
-		// keep track of errors - try to continue through processing
-		boolean err = false;
-		String s;
-		String t;
-
 		// save project first
 		save();
 
-		// remap extensions where necessary and ignore specified files
-		FileHandler fh;
-		HandlerMaster hm = HandlerMaster.getInstance();
-		ArrayList fileList = new ArrayList(256);
-		String filename;
-		String destFileName;
-
-		String fname = m_config.getProjectRoot() + m_config.getProjectName() +
-					OConsts.TMX_EXTENSION;
 		try
 		{
+    		String fname = m_config.getProjectRoot() + m_config.getProjectName() +
+					OConsts.TMX_EXTENSION;
 			buildTMXFile(fname);
 		}
 		catch (IOException e)
 		{
-			System.out.println(OStrings.getString("CT_ERROR_CREATING_TMX"));
-			err = true;
+			throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX"));
 		}
 		
 		// build mirror directory of source tree
+		ArrayList fileList = new ArrayList(256);
+		String srcRoot = m_config.getSourceRoot();
+		String locRoot = m_config.getLocRoot();
 		StaticUtils.buildDirList(fileList, new File(srcRoot));
-		File destFile;
-		for (i=0; i<fileList.size(); i++)
+		
+		for(int i=0; i<fileList.size(); i++)
 		{
-			filename = (String) fileList.get(i);
-			destFileName = m_config.getLocRoot() + 
-					filename.substring(m_config.getSourceRoot().length());
-			destFile = new File(destFileName);
+			String filename = (String) fileList.get(i);
+			String destFileName = locRoot + filename.substring(srcRoot.length());
+			File destFile = new File(destFileName);
 			if (!destFile.exists())
 			{
 				// target directory doesn't exist - create it
@@ -469,72 +474,21 @@ public class CommandThread extends Thread
 		}
 
 		// build translated files
+        FilterMaster fm = FilterMaster.getInstance();
+        
 		fileList.clear();
 		StaticUtils.buildFileList(fileList, new File(srcRoot), true);
-		for (i=0; i<fileList.size(); i++)
+        
+		for(int i=0; i<fileList.size(); i++)
 		{
-			filename = (String) fileList.get(i);
-			destFileName = m_config.getLocRoot()+ 
-						filename.substring(m_config.getSourceRoot().length());
-
-			// determine actual extension
-			int extPos = filename.lastIndexOf('.') + 1;
-			String ext = filename.substring(extPos);
-			// look for mapping of this extension
-			for (j=0; j<m_extensionList.size(); j++)
-			{
-				if (ext.equals(m_extensionList.get(j)))
-				{
-					ext = (String) m_extensionMapList.get(j);
-					break;
-				}
-			}
-
-			// file not ignored and extension is mapped - time to 
-			//  process it
-			fh = hm.findPreferredHandler(ext);
-			if (fh == null)
-			{
-				System.out.println(OStrings.CT_NO_FILE_HANDLER + " (." + ext + ")");								 // NOI18N
-				// copy file to target tree
-				System.out.println(OStrings.CT_COPY_FILE + 
-						" '" +											 // NOI18N
-						filename.substring(m_config.getSourceRoot().length()) +
-						"'");											 // NOI18N
-				LFileCopy.copy(filename, destFileName);
-				continue;
-			}
-			if (fh.getType().equals(OConsts.FH_HTML_TYPE))
-			{
-				// preview file to see if we should use the XHTML parser
-				if (StaticUtils.isXMLFile(filename))
-				{
-					// look for XHTML parser
-					FileHandler fhx = hm.findPreferredHandler(
-							OConsts.FH_XML_BASED_HTML);
-					if (fhx != null)
-					{
-						System.out.println(OStrings.CT_HTMLX_MASQUERADE + 
-								" (" + filename + ")");						 // NOI18N
-						fh = fhx;
-					}
-					// else - htmlx parser gone... give it our best shot
-				}
-			}
+			String filename = (String) fileList.get(i);
 			// shorten filename to that which is relative to src root
 			String midName = filename.substring(srcRoot.length());
-			s = srcRoot + midName;
-			t = locRoot + midName;
 			m_transFrame.setMessageText(OStrings.CT_COMPILE_FILE_MX + midName);
-			fh.write(s, t);
+
+            fm.translateFile(srcRoot, midName, locRoot);
 		}
 		m_transFrame.setMessageText(OStrings.CT_COMPILE_DONE_MX);
-
-		if (err)
-		{
-			throw new IOException(OStrings.getString("CT_ERROR_BUILDING_TMX"));
-		}
-
 	}
 
 	public void save()
@@ -772,8 +726,16 @@ public class CommandThread extends Thread
 		}
 	}
 
+    /**
+     * Loads project in a "big" sense -- loads project's properties, glossaryes, tms, source files etc.
+     * <p>
+     * We may pass here the folder where the project resides
+     * or null, in which case JFileChooser is brought up to select a project.
+     * 
+     * @param projectRoot The folder where the project resides. If it's null, JFileChooser is called to select a project.
+     */
 	private boolean loadProject()
-			throws IOException, InterruptedIOException
+			throws IOException, InterruptedIOException, TranslationException
 	{
 		int i;
 		int j;
@@ -785,78 +747,30 @@ public class CommandThread extends Thread
         m_glossary.loadGlossaryFiles(new File(m_config.getGlossaryRoot()));
 
 		// now open source files
-		// to allow user ability to modify source files arbitrarily,
-		//  we need to reload _everything_ on each startup
-		// load handler file if it exists.  Use file extension 
-		//  mappings there to map 
-		// check each file against handler list to see if special
-		//  instructions exist for file.  If not, guess file type
-		//  based on filename extension.  If no match, ignore file.
-		// check each file against ignore list also
-
-		// now read handler list
-		// handlers now stored in preference file
-		StaticUtils.loadFileMappings(m_extensionList, m_extensionMapList);
-
-		// ready to read in files
-		// remap extensions where necessary and ignore specified files
-		FileHandler fh;
-		HandlerMaster hm = HandlerMaster.getInstance();
+        FilterMaster fm = FilterMaster.getInstance();
+                
 		ArrayList srcFileList = new ArrayList(256);
 		File root = new File(m_config.getSourceRoot());
 		StaticUtils.buildFileList(srcFileList, root, true);
-		String filename;
+		
 		// keep track of how many entries are in each file
 		for (i=0; i<srcFileList.size(); i++)
 		{
-			filename = (String) srcFileList.get(i);
+			String filename = (String) srcFileList.get(i);
 
-			// determine actual extension
-			int extPos = filename.lastIndexOf('.');
-			String ext = filename.substring(extPos+1);
-			// look for mapping of this extension
-			for (j=0; j<m_extensionList.size(); j++)
-			{
-				if (ext.equals(m_extensionList.get(j)))
-				{
-					ext = (String) m_extensionMapList.get(j);
-					break;
-				}
-			}
-
-			// file not ignored and extension is mapped - time to 
-			//  process it
-			fh = hm.findPreferredHandler(ext);
-			if (fh == null)
-			{
-				// System.out.println(OStrings.CT_NO_FILE_HANDLER + " (." + ext + ")");  // NOI18N
-				continue;
-			}
-			if (fh.getType().equals(OConsts.FH_HTML_TYPE))
-			{
-				// preview file to see if we should use the htmlx parser
-				if (StaticUtils.isXMLFile(filename))
-				{
-					// look for htmlx parser
-					FileHandler fhx = hm.findPreferredHandler(
-							OConsts.FH_XML_BASED_HTML);
-					if (fhx != null)
-						fh = fhx;
-					// else - htmlx parser gone... give it our best shot
-				}
-			}
-			// strip leading path information; feed file name to project
-			//  window
+            // strip leading path information; 
+            // feed file name to project window
 			String filepath = filename.substring(
 						m_config.getSourceRoot().length());
 			m_projWin.addFile(filepath, numEntries());
-			//m_projWin.addFile(filename, numEntries());
-			//System.out.println(OStrings.getString("CT_LOADING_FILE")+	"'" + filepath + "'");  // NOI18N
 			m_transFrame.setMessageText(OStrings.CT_LOAD_FILE_MX + filepath);
+
 			m_curFile = new ProjectFileData();
 			m_curFile.name = filename;
 			m_curFile.firstEntry = m_srcTextEntryArray.size();
-			fh.load(filename);
+            
+            fm.loadFile(filename);
+            
 			m_curFile.lastEntry = m_srcTextEntryArray.size()-1;
 		}
 		m_transFrame.setMessageText(OStrings.getString("CT_LOAD_SRC_COMPLETE"));
@@ -996,7 +910,7 @@ public class CommandThread extends Thread
 			}
             
 		}
-		catch (ParseException e)
+		catch (TranslationException e)
 		{
 			throw new IOException(OStrings.getString("CT_ERROR_PARSEERROR")+ 
 					"'" + fname + "'\n" +  e); // NOI18N

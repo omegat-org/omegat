@@ -21,17 +21,18 @@
 
 package org.omegat.gui;
 
-import org.omegat.core.threads.CommandThread;
-import org.omegat.util.OConsts;
-import org.omegat.util.OStrings;
-import org.omegat.util.ProjectFileReader;
-
-import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.io.File;
 import java.io.IOException;
 import java.io.InterruptedIOException;
-import java.text.ParseException;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+
+import org.omegat.core.threads.CommandThread;
+import org.omegat.filters2.TranslationException;
+import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
+import org.omegat.util.ProjectFileReader;
 
 /**
  * Creates a dialog where project properties are entered and/or modified
@@ -91,28 +92,32 @@ public class ProjectProperties extends JFrame
 		}
 	}
 
+    /**
+     * Loads existing project file.
+     * Brings up JFileChooser to open a file and 
+     * sets global properties.
+     */
 	public boolean loadExisting() throws IOException, InterruptedIOException
 	{
 		reset();
 
-		// select existing project file - open it
-		String curDir = CommandThread.core.getPreference(OConsts.PREF_CUR_DIR);
-		//JFileChooser pfc = new org.omegat.gui.ProjectFileChooser(curDir);
-		JFileChooser pfc = new JFileChooser(curDir);
-		pfc.setFileFilter(new OTFileFilter());
-		pfc.setFileView(new ProjectFileView());
-		int res = pfc.showOpenDialog(this);
-		if (res == JFileChooser.CANCEL_OPTION)
-			throw new InterruptedIOException();
+        // select existing project file - open it
+        JFileChooser pfc=new JFileChooser(CommandThread.core.getPreference(OConsts.PREF_CUR_DIR));
+        pfc.setFileFilter(new OTFileFilter());
+        pfc.setFileView(new ProjectFileView());
 
-		CommandThread.core.setPreference(OConsts.PREF_CUR_DIR, 
-							pfc.getSelectedFile().getParent());
+        if( pfc.showOpenDialog(this)==JFileChooser.CANCEL_OPTION )
+            throw new InterruptedIOException();
+
+        File projectRootFolder = pfc.getCurrentDirectory();
+        String projectRoot = projectRootFolder.getAbsolutePath() + File.separator;
+
+		CommandThread.core.setPreference(OConsts.PREF_CUR_DIR, projectRootFolder.getParent());
 		try 
 		{
 			ProjectFileReader pfr = new ProjectFileReader();
-			setProjectName(pfc.getCurrentDirectory().getName());
-			setProjectRoot(pfc.getCurrentDirectory().getAbsolutePath()
-						+ File.separator);
+			setProjectName(projectRootFolder.getName());
+			setProjectRoot(projectRoot);
 			pfr.loadProjectFile(getProjectRoot() + OConsts.PROJ_FILENAME);
 
 			setSourceRoot(pfr.getSource());
@@ -127,8 +132,8 @@ public class ProjectProperties extends JFrame
 			CommandThread.core.setPreference(OConsts.PREF_LOCLANG, getLocLang());
 			setProjectFile(getProjectRoot() + OConsts.PROJ_FILENAME);
 
-			res = verifyProject();
-			if (res != 0)
+			int res = verifyProject();
+			if( res!=0 )
 			{
 				// something wrong with the project - display open dialog
 				//  to fix it
@@ -163,10 +168,10 @@ public class ProjectProperties extends JFrame
 			}
 			return true;
 		}
-		catch (ParseException e)
+		catch( TranslationException te )
 		{
 			reset();
-			throw new IOException(OStrings.getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE") + e);
+			throw new IOException(OStrings.getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE") + te);
 		}
 	}
 

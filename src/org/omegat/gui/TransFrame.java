@@ -27,6 +27,7 @@ import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.StringEntry;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.SearchThread;
+import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.PreferenceManager;
@@ -73,7 +74,10 @@ import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
+import org.omegat.filters2.TranslationException;
+import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.dialogs.FontSelectionDialog;
+import org.omegat.gui.filters2.FiltersCustomizer;
 
 /**
  * The main frame of OmegaT application
@@ -299,12 +303,14 @@ public class TransFrame extends JFrame implements ActionListener
 			m_miEditCompare5.setMnemonic(KeyEvent.VK_5);
 			m_mDisplay.setMnemonic(KeyEvent.VK_C);
 			m_miDisplayFont.setMnemonic(KeyEvent.VK_F);
+			m_miDisplayFilters.setMnemonic(KeyEvent.VK_I);
 			m_miDisplayAdvanceKey.setMnemonic(KeyEvent.VK_T);
 			m_miDisplayMnemonic.setMnemonic(KeyEvent.VK_M);
 			m_mTools.setMnemonic(KeyEvent.VK_T);
 			m_miToolsValidateTags.setMnemonic(KeyEvent.VK_T);
-			m_mVersion.setMnemonic(KeyEvent.VK_O);
-			m_miVersionHelp.setMnemonic(KeyEvent.VK_H);
+			m_mHelp.setMnemonic(KeyEvent.VK_H);
+			m_miHelpContents.setMnemonic(KeyEvent.VK_C);
+			m_miHelpAbout.setMnemonic(KeyEvent.VK_A);
 		}
 		else
 		{
@@ -336,8 +342,9 @@ public class TransFrame extends JFrame implements ActionListener
 			m_miDisplayMnemonic.setMnemonic(0);
 			m_mTools.setMnemonic(0);
 			m_miToolsValidateTags.setMnemonic(0);
-			m_mVersion.setMnemonic(0);
-			m_miVersionHelp.setMnemonic(0);
+			m_mHelp.setMnemonic(0);
+			m_miHelpContents.setMnemonic(0);
+			m_miHelpAbout.setMnemonic(0);
 		}
 	}
 
@@ -493,6 +500,10 @@ public class TransFrame extends JFrame implements ActionListener
 		m_miDisplayFont.addActionListener(this);
 		m_mDisplay.add(m_miDisplayFont);
 		
+		m_miDisplayFilters = new JMenuItem();
+		m_miDisplayFilters.addActionListener(this);
+		m_mDisplay.add(m_miDisplayFilters);
+		
 		m_miDisplayAdvanceKey = new JCheckBoxMenuItem();
 		m_miDisplayAdvanceKey.setSelected(false);
 		m_miDisplayAdvanceKey.addActionListener(this);
@@ -514,14 +525,17 @@ public class TransFrame extends JFrame implements ActionListener
 
 		mb.add(m_mTools);
 		
-		m_mVersion = new JMenu();
-		m_miVersionHelp = new JMenuItem();
-		m_miVersionHelp.setAccelerator(
-					KeyStroke.getKeyStroke(KeyEvent.VK_F1,0));
-		m_miVersionHelp.addActionListener(this);
-		m_mVersion.add(m_miVersionHelp);
+		m_mHelp = new JMenu();
+		m_miHelpContents = new JMenuItem();
+		m_miHelpContents.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1,0));
+		m_miHelpContents.addActionListener(this);
+		m_mHelp.add(m_miHelpContents);
 
-		mb.add(m_mVersion);
+		m_miHelpAbout = new JMenuItem();
+		m_miHelpAbout.addActionListener(this);
+		m_mHelp.add(m_miHelpAbout);
+        
+		mb.add(m_mHelp);
 
 		setJMenuBar(mb);
 	}
@@ -559,14 +573,16 @@ public class TransFrame extends JFrame implements ActionListener
 		
 		m_mDisplay.setText(OStrings.TF_MENU_DISPLAY);
 		m_miDisplayFont.setText(OStrings.TF_MENU_DISPLAY_FONT);
+        m_miDisplayFilters.setText("Setup File Filters");
 		m_miDisplayAdvanceKey.setText(OStrings.TF_MENU_DISPLAY_ADVANCE);
 		m_miDisplayMnemonic.setText(OStrings.TF_MENU_DISPLAY_MNEMONIC);
 		
 		m_mTools.setText(OStrings.TF_MENU_TOOLS);
 		m_miToolsValidateTags.setText(OStrings.TF_MENU_TOOLS_VALIDATE);
 
-		m_mVersion.setText(OStrings.VERSION);
-		m_miVersionHelp.setText(OStrings.TF_MENU_VERSION_HELP);
+		m_mHelp.setText("Help");
+		m_miHelpContents.setText("Contents");
+		m_miHelpAbout.setText("About");
 		
 		// KBG - the UI looks bad w/ misplaced mnemonics, but this is
 		//	better than hard coding their location for localized versions
@@ -790,6 +806,7 @@ public class TransFrame extends JFrame implements ActionListener
 		m_xlPane.setText("");													// NOI18N
 		m_miFileOpen.setEnabled(true);
 		m_miFileCreate.setEnabled(true);
+		m_miDisplayFilters.setEnabled(true);
 	}
 
     /**
@@ -815,6 +832,30 @@ public class TransFrame extends JFrame implements ActionListener
 		}
 	}
 	
+    /**
+     * Displays the filters setup dialog to allow 
+     * customizing file filters in detail.
+     * <p>
+     * Note that if you change filters config, OmegaT closes 
+     * and reopens the current project.
+     */
+    private void doFilters()
+    {
+        FiltersCustomizer dlg = new FiltersCustomizer(this);
+        dlg.setVisible(true);
+        if( dlg.getReturnStatus()==FiltersCustomizer.RET_OK )
+        {
+            // saving config
+            FilterMaster.getInstance().saveConfig();
+            // closing and opening the project
+        }
+        else
+        {
+            // reloading config from disk
+            FilterMaster.getInstance().loadConfig();
+        }
+    }
+    
     private void doSave()
 	{
 		if (!m_projectLoaded)
@@ -879,6 +920,7 @@ public class TransFrame extends JFrame implements ActionListener
 		m_projectLoaded = true;
 		m_miFileOpen.setEnabled(false);
 		m_miFileCreate.setEnabled(false);
+		m_miDisplayFilters.setEnabled(false);
 	}
 
 	private void doCompileProject()
@@ -893,12 +935,15 @@ public class TransFrame extends JFrame implements ActionListener
 		{
 			displayError(OStrings.TF_COMPILE_ERROR, e);
 		}
-		// TODO - cleanup on error
+		catch(TranslationException te)
+		{
+			displayError(OStrings.TF_COMPILE_ERROR, te);
+		}
 	}
 
 	private void doSetTitle()
 	{
-		String s = OStrings.TF_TITLE;
+		String s = OStrings.VERSION;
 		if (m_activeProj.compareTo("") != 0)									// NOI18N
 		{
 			String file = m_activeFile.substring(
@@ -1474,15 +1519,23 @@ public class TransFrame extends JFrame implements ActionListener
 			{
 				doFont();
 			}
+			else if (evtSrc == m_miDisplayFilters)
+			{
+				doFilters();
+			}
 			else if (evtSrc == m_miToolsValidateTags)
 			{
 				doValidateTags();
 			}
-			else if (evtSrc == m_miVersionHelp)
+			else if (evtSrc == m_miHelpContents)
 			{
 				HelpFrame hf = HelpFrame.getInstance();
 				hf.setVisible(true);
 				hf.toFront();
+			}
+			else if( evtSrc==m_miHelpAbout )
+			{
+				new AboutDialog(this).setVisible(true);
 			}
 		}
 	}
@@ -1924,13 +1977,14 @@ public class TransFrame extends JFrame implements ActionListener
 	private JCheckBoxMenuItem	m_miDisplayAdvanceKey;
 	private JCheckBoxMenuItem	m_miDisplayMnemonic;
 	private JMenuItem	m_miDisplayFont;
+	private JMenuItem	m_miDisplayFilters;
 	
 	private JMenu		m_mTools;
 	private JMenuItem	m_miToolsValidateTags;
 
-    private JMenu		m_mVersion;
-	private JMenuItem	m_miVersionHelp;
-//	private JMenuItem	m_miVersionNumber;
+    private JMenu		m_mHelp;
+	private JMenuItem	m_miHelpContents;
+	private JMenuItem	m_miHelpAbout;
 
 	/** The font for main window (source and target text) and for match and glossary windows */
     private Font m_font;

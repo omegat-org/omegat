@@ -40,6 +40,7 @@
         </delete>
         <delete file="manifest.mf"/>
         <delete file="omegat.prefs"/>
+        <delete file="filters.conf"/>
         <delete dir="dist"/>
         <ant dir="addons/properties-import" target="clean" inheritAll="false"/>
     </target>

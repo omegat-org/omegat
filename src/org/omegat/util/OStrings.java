@@ -47,6 +47,10 @@ public class OStrings
 	public static final String VERSION = 
 		MessageFormat.format(getString("version-template"), 
 			new Object[] {ResourceBundle.getBundle("org/omegat/Version").getString("version")});
+            
+	/** Human-Readable OmegaT Version */
+	public static final String HUMAN_VERSION = 
+		ResourceBundle.getBundle("org/omegat/Version").getString("human-version");
 
     // TransFrame
 	public static final String TF_NUM_NEAR_AND_GLOSSARY	= getString("TF_NUM_NEAR_AND_GLOSSARY");
@@ -89,8 +93,6 @@ public class OStrings
 
 	public static final String TF_MENU_VERSION_HELP		= getString("TF_MENU_VERSION_HELP");
 	
-	public static final String TF_TITLE		= getString("TF_TITLE");
-
     public static final String TF_TM_LOAD_ERROR	= getString("TF_TM_LOAD_ERROR");
 	public static final String TF_LOAD_ERROR	= getString("TF_LOAD_ERROR");
 	public static final String TF_COMPILE_ERROR	= getString("TF_COMPILE_ERROR");

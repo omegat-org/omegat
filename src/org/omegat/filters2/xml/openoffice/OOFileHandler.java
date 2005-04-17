@@ -1,0 +1,161 @@
+/**************************************************************************
+ OmegaT - Java based Computer Assisted Translation (CAT) tool
+ Copyright (C) 2002-2004  Keith Godfrey et al
+                          keithgodfrey@users.sourceforge.net
+                          907.223.2039
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+**************************************************************************/
+
+package org.omegat.filters2.xml.openoffice;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
+import org.omegat.filters2.Instance;
+
+import org.omegat.filters2.xml.XMLAbstractFilter;
+import org.omegat.util.AntiCRReader;
+import org.omegat.util.EncodingAwareReader;
+import org.omegat.util.UTF8Writer;
+
+/**
+ * Filter to natively handle OpenOffice XML file format.
+ * This format is used by OO Writer, OO Spreadsheet etc
+ *
+ * @author Keith Godfrey
+ */
+public class OOFileHandler extends XMLAbstractFilter
+{
+    // information about the filter
+    public String getFileFormatName()
+    {
+        return "OpenOffice files";
+    }
+
+    public boolean isSourceEncodingVariable()
+    {
+        return false;
+    }
+
+    public boolean isTargetEncodingVariable()
+    {
+        return false;
+    }
+    
+    public Instance[] getDefaultInstances()
+    {
+        return new Instance[] {
+            new Instance("*.sxw", ENCODING_AUTO, ENCODING_AUTO),
+            new Instance("*.sxc", ENCODING_AUTO, ENCODING_AUTO),
+            new Instance("*.sxg", ENCODING_AUTO, ENCODING_AUTO),
+            new Instance("*.sxm", ENCODING_AUTO, ENCODING_AUTO),
+            new Instance("*.sxd", ENCODING_AUTO, ENCODING_AUTO),
+            new Instance("*.sxi", ENCODING_AUTO, ENCODING_AUTO),
+        };
+    }
+    
+    // readers and writers
+    
+	/** holds the input file */
+	private File infile;
+    
+    public Reader createReader(File infile, String encoding) 
+            throws UnsupportedEncodingException, IOException
+    {
+        this.infile = infile;        
+		ZipInputStream zis = new ZipInputStream(new FileInputStream(infile));
+		ZipEntry zipEntry;
+		while( (zipEntry = zis.getNextEntry())!=null )
+		{
+			if( zipEntry.getName().equals("content.xml") )	 // NOI18N
+				break;
+		}
+		if( zipEntry==null )
+            throw new IOException("ERROR: Illegal OpenOffice file, no contents found.");
+		else
+			return new InputStreamReader(zis, "UTF-8");
+    }
+	/**
+	 * Writing a zipfile with several components in it.
+	 * First copy all unchanged components (i.e. everything but content.xml)
+	 * then set the stream for the changed file to be written directly
+	 */
+    public Writer createWriter(File outfile, String encoding) throws UnsupportedEncodingException, IOException
+    {
+		int k_blockSize = 1024;
+		int byteCount;
+		char [] buf = new char[k_blockSize];
+
+		ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(outfile));
+		zos.setMethod(ZipOutputStream.DEFLATED);
+		OutputStreamWriter osw = new OutputStreamWriter(zos, "ISO-8859-1");	 // NOI18N
+		BufferedWriter bw = new BufferedWriter(osw);
+		ZipEntry zot;
+		
+		ZipInputStream zis = new ZipInputStream(new FileInputStream(infile));
+		InputStreamReader isr = new InputStreamReader(zis, "ISO-8859-1");	 // NOI18N
+		BufferedReader br = new BufferedReader(isr);
+		ZipEntry zit;
+		
+		while ((zit = zis.getNextEntry()) != null)
+		{
+			if (zit.getName().equals("content.xml"))	 // NOI18N
+			{
+				// this is the meat of the file - don't copy this over
+				// save its contents for the output data stream
+				continue;
+			}
+
+			// copy this entry to the output file
+			zot = new ZipEntry(zit.getName());
+			zos.putNextEntry(zot);
+			while ((byteCount = br.read(buf, 0, k_blockSize)) >= 0)
+				bw.write(buf, 0, byteCount);
+			bw.flush();
+			zos.closeEntry();
+		}
+		zos.putNextEntry(new ZipEntry("content.xml"));	 // NOI18N
+		bw.flush();
+		
+		return new OutputStreamWriter(zos, "UTF-8");
+    }
+
+	public OOFileHandler()
+	{
+		defineFormatTag("text:a", "a");	 // NOI18N
+		defineFormatTag("text:span", "f");	 // NOI18N
+		defineFormatTag("text:s", "s");	 // NOI18N
+		defineFormatTag("text:s/", "s/");	 // NOI18N
+		defineFormatTag("text:tab-stop", "t");	 // NOI18N
+		defineFormatTag("text:tab-stop/", "t/");	 // NOI18N
+
+		defineVerbatumTag("text:footnote", "foot");	 // NOI18N
+	}
+
+
+}
+

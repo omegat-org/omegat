@@ -21,13 +21,13 @@
 
 package org.omegat.util;
 
-import org.omegat.filters.xml.XMLBlock;
-import org.omegat.filters.xml.XMLStreamReader;
-
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
+
+import org.omegat.filters2.TranslationException;
+import org.omegat.filters2.xml.XMLBlock;
+import org.omegat.filters2.xml.XMLStreamReader;
 
 /**
  * Class that loads up TMX 1.1 (Translation Memory) files
@@ -70,7 +70,7 @@ public class TMXReader
 	}
 	
 	public void loadFile(String filename)
-		throws IOException, ParseException
+		throws IOException, TranslationException
 	{
 		m_reader.setStream(filename, m_encoding);
 		
@@ -82,25 +82,33 @@ public class TMXReader
 
 		// advance to tmx tag
 		if ((blk = m_reader.advanceToTag("tmx")) == null)						// NOI18N
-			throw new ParseException( MessageFormat.format(OStrings.getString("TMXR_ERROR_INVALID_TMX"), new Object[]{filename}), 0);
+			throw new TranslationException( 
+                    MessageFormat.format(OStrings.getString("TMXR_ERROR_INVALID_TMX"), 
+                    new Object[]{filename}));
 
 		// check version
 		String ver = blk.getAttribute("version");								// NOI18N
 		if (ver != null && !ver.equals("1.1"))						// NOI18N
 		{
-			throw new ParseException( MessageFormat.format(OStrings.getString("TMXR_ERROR_UNSUPPORTED_TMX_VERSION"), new Object[]{ver}), 0);
+			throw new TranslationException( 
+                    MessageFormat.format(OStrings.getString("TMXR_ERROR_UNSUPPORTED_TMX_VERSION"), 
+                    new Object[]{ver}));
 		}
 		
 		// advance to header  
 		if ((blk=m_reader.advanceToTag("header")) == null)						// NOI18N
-			throw new ParseException( MessageFormat.format(OStrings.getString("TMXR_ERROR_INVALID_TMX"), new Object[]{filename}), 0);
+			throw new TranslationException( 
+                    MessageFormat.format(OStrings.getString("TMXR_ERROR_INVALID_TMX"), 
+                    new Object[]{filename}));
 		
 		// TODO handle header specific information, as appropriate
 		String src = blk.getAttribute("srclang");								// NOI18N
 
 		// advance to body
 		if (m_reader.advanceToTag("body") == null)						// NOI18N
-			throw new ParseException( MessageFormat.format(OStrings.getString("TMXR_ERROR_INVALID_TMX"), new Object[]{filename}), 0);
+			throw new TranslationException( 
+                    MessageFormat.format(OStrings.getString("TMXR_ERROR_INVALID_TMX"), 
+                    new Object[]{filename}));
 
 		int seg = 0;
 		int ctr;

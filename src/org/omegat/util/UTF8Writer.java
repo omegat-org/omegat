@@ -144,7 +144,6 @@ public class UTF8Writer extends Writer
 	 */
 	public void flush() throws IOException
 	{
-		writer.flush();		
 	}
 
 	/**

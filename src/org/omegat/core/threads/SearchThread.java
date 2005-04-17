@@ -28,13 +28,12 @@ import org.omegat.util.OStrings;
 import org.omegat.util.OConsts;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.TransMemory;
-import org.omegat.core.StringEntry;
-import org.omegat.filters.FileHandler;
-import org.omegat.filters.HandlerMaster;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import org.omegat.filters2.TranslationException;
+import org.omegat.filters2.master.FilterMaster;
 
 /**
  * Each search window has its own search thread to actually do the 
@@ -60,10 +59,6 @@ public class SearchThread extends Thread
 
 		m_extList = new ArrayList();
 		m_extMapList = new ArrayList();
-
-		// load mapping table
-		// do this check so dialog cna be displayed independently
-		StaticUtils.loadFileMappings(m_extList, m_extMapList);
 	}
 
 	/////////////////////////////////////////////////////////
@@ -156,6 +151,13 @@ public class SearchThread extends Thread
 							// alert user to badness
 							String msg = OStrings.ST_FILE_SEARCH_ERROR;
 							CommandThread.core.displayError(msg, e);
+						}
+						catch (TranslationException te)
+						{
+							// something bad happened 
+							// alert user to badness
+							String msg = OStrings.ST_FILE_SEARCH_ERROR;
+							CommandThread.core.displayError(msg, te);
 						}
 					}
 		
@@ -298,61 +300,28 @@ public class SearchThread extends Thread
 		}
 	}
 	
-	private void searchFiles() throws IOException
+	private void searchFiles() throws IOException, TranslationException
 	{
 		int i;
 		int j;
 
-		FileHandler fh;
-		HandlerMaster hm = HandlerMaster.getInstance();
 		ArrayList fileList = new ArrayList(256);
 		if (!m_searchDir.endsWith(File.separator))
 			m_searchDir += File.separator;
-
-		StaticUtils.buildFileList(fileList, new File(m_searchDir), 
-				m_searchRecursive);
+		StaticUtils.buildFileList(fileList, new File(m_searchDir), m_searchRecursive);
 		
-		//TODO m_window.numberSearchFiles(fileList.size());
-		int namePos = m_searchDir.length();
-
-		String filename;
-
+        FilterMaster fm = FilterMaster.getInstance();
+        
 		for (i=0; i<fileList.size(); i++)
 		{
-			filename = (String) fileList.get(i);
+			String filename = (String) fileList.get(i);
 			// determine actual file name w/ no root path info
-			m_curFileName = filename.substring(namePos);
+			m_curFileName = filename.substring(m_searchDir.length());
 
-			int extPos = filename.lastIndexOf('.');
-			String ext = filename.substring(extPos+1);
-			// look for mapping of this extension
-			for (j=0; j<m_extList.size(); j++)
-			{
-				if (ext.equals(m_extList.get(j)))
-				{
-					ext = (String) m_extMapList.get(j);
-					break;
-				}
-			}
-
-			// if file has handler, use it, otherwise do a binary search
-			fh = hm.findPreferredHandler(ext);
-			if (fh != null)
-			{
-				// make sure file hander in correct mode
-				fh.setSearchMode(this);
-
-				// don't bother to tell handler what we're looking for - 
-				//	the search data is already known here (and the 
-				//	handler is in the same thread, so info is not volatile)
-				fh.load(filename);
-			}
-			else
-			{
-				// do binary search -- TODO
-				System.out.println("Don't recognize file extension for '" +		// NOI18N
-						filename + "' - omitting file from search");			// NOI18N
-			}
+            // don't bother to tell handler what we're looking for - 
+            //	the search data is already known here (and the 
+            //	handler is in the same thread, so info is not volatile)
+            fm.loadFile(filename);
 		}
 	}
 

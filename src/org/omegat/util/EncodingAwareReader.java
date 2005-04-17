@@ -23,8 +23,8 @@ package org.omegat.util;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
@@ -93,13 +93,12 @@ public class EncodingAwareReader extends Reader
             throws IOException
     {
 		this.type = type;
-		FileInputStream fis = new FileInputStream(fileName);
 		try
 		{
 			String detectencoding = fileEncoding(fileName);
             if( detectencoding==null )
                 detectencoding="<WRONG, WRONG ENCODING, REALLY WRONG!!!>";      // NOI18N
-            reader = new InputStreamReader(fis, detectencoding);
+            reader = new InputStreamReader(new FileInputStream(fileName), detectencoding);
 		}
 		catch( UnsupportedEncodingException uee )
 		{
@@ -107,11 +106,11 @@ public class EncodingAwareReader extends Reader
             {
                 if( encoding==null )
                     encoding="<WRONG, WRONG ENCODING, REALLY WRONG!!!>";      // NOI18N
-                reader = new InputStreamReader(fis, encoding);
+                reader = new InputStreamReader(new FileInputStream(fileName), encoding);
             }
             catch( UnsupportedEncodingException uee2 )
             {
-                reader = new InputStreamReader(fis);
+                reader = new InputStreamReader(new FileInputStream(fileName));
             }
 		}
     }
@@ -146,11 +145,12 @@ public class EncodingAwareReader extends Reader
         reader.close();
         
         // Otherwise we look at file contents
-		BufferedReader ereader = new BufferedReader(new InputStreamReader(
-                                new FileInputStream(fileName), "ISO-8859-1"));
+		BufferedReader ereader = new BufferedReader(
+                new InputStreamReader(new FileInputStream(fileName), "ISO-8859-1"));
 		StringBuffer buffer = new StringBuffer();
-		while( ereader.ready() ) {
-			buffer.append( ereader.readLine().toLowerCase() );
+        String line;
+		while( (line=ereader.readLine())!=null ) {
+			buffer.append( line.toLowerCase() );
 			switch( type )
 			{
 				case ST_HTML:

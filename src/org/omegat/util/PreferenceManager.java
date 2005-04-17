@@ -21,13 +21,18 @@
 
 package org.omegat.util;
 
-import org.omegat.filters.xml.XMLBlock;
-import org.omegat.filters.xml.XMLStreamReader;
-
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import org.omegat.filters2.TranslationException;
+
+import org.omegat.filters2.xml.XMLBlock;
+import org.omegat.filters2.xml.XMLStreamReader;
 
 /**
  * Class to load & save OmegaT preferences
@@ -172,12 +177,13 @@ public class PreferenceManager
 				}
 			}
 		}
-		catch (ParseException e)
+		catch (TranslationException te)
 		{
 			// error loading preference file - keep whatever was
 			//  loaded then return gracefully to calling function
 			// print an error to the console as an FYI
-			System.out.println(OStrings.getString("PM_WARNING_PARSEERROR_ON_READ") + e);
+			System.out.println(OStrings.getString("PM_WARNING_PARSEERROR_ON_READ") + te);
+            te.printStackTrace();
 		}
 		catch (IndexOutOfBoundsException e3)
 		{
@@ -185,14 +191,17 @@ public class PreferenceManager
 			//  loaded then return gracefully to calling function
 			// print an error to the console as an FYI
 			System.out.println(OStrings.getString("PM_WARNING_PARSEERROR_ON_READ") + e3);
+            e3.printStackTrace();
 		}
 		catch (UnsupportedEncodingException e3)
 		{
 			// unrecognized file - forget about it
+            e3.printStackTrace();
 		}
 		catch (IOException e4)
 		{
 			// can't read file - forget about it and move on
+            // e4.printStackTrace();
 		}
 	}
 	

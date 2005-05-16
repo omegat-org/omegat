@@ -329,7 +329,7 @@ public class Main extends javax.swing.JFrame
 			// do nothing
 		}
 		
-		new Main().show();
+		new Main().setVisible(true);
 	}
 	
     // ƒеклараци€ переменных - не измен€йте данный код//GEN-BEGIN:variables

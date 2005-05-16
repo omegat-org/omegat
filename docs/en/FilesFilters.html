@@ -1,0 +1,679 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+  "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+  <head>
+    <title>OmegaT: File Filters</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="generator" content="Kate (Linux)">
+    <meta name="changed" content="20050513">
+    <meta name="copyright" content="Raymond: Martin, BSc. (2005)">
+    <link rel="stylesheet" type="text/css" href="omegat.css">
+  </head>
+
+  <body lang="en" dir="LTR">
+
+    <div class="navbar-top">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="OmegaT.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Previous</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="FilesEditingTagged.html">Tagged (Formatted) Files Text Editing</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Next</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="FilesProjDirs.html">Project Files and Directories</a>
+        </td>
+      </tr>
+    </table>        
+    </div>
+    
+    <div class="content">
+    
+    <h1 align="center">File Filters</h1>
+
+    <p>
+     A new addition starting with OmegaT version 1.4.5 is user configurable file 
+     (conversion) filters.
+    </p>    
+
+    <h2>Overview</h2>
+
+    <p>
+      File filters are responsible for:
+    </p>    
+    
+    <ul>
+      <li>
+        reading a source document in from a file in a specific format (e.g. different 
+        filters exist for handling plaintext and OpenDocument/OpenOffice files);
+      </li>
+      <li>
+        extracting translatable content from a file;
+      </li>
+      <li>
+        writing the target document out to file (replacing translatable content 
+        with its translation in the process).
+      </li>
+    </ul>
+
+    <p>
+      Since the filters are a new addition in this release there may still be 
+      unknown bugs, user interface quirks, and unclear procedure&#8211;hopefully 
+      this documentation will help clear up a few things in that respect. At present 
+      the user interface text for the file filters is only available in English. 
+      This is a limitation of the current version that will be remedied in a newer 
+      version of OmegaT.
+    </p>
+
+    <p>
+      Please use realistic settings when configuring filters or else unexpected 
+      results may occur. Read the instructions carefully and, if the results of 
+      manipulating the filters is not understood, stick with the default settings
+      or work with a test project before using them on serious work. Ask questions 
+      on the OmegaT users group to get more help.
+    </p>
+
+    <p>
+      Take note that file filters can only be configured when there is no project 
+      open. To modify file handling for a particular project it must be done before
+      the project is opened.      
+    </p>
+    
+    <h2>Filter Dialogs</h2>
+    
+    <p>
+      The details for each of the dialogs and filter usage is given here.
+    </p>
+    
+    <h3>File Filters</h3>
+        
+    <p>
+      Access to this dialog is gained by selecting
+      
+      <i>File Filters...</i> 
+      
+      from the
+      
+      <i>Settings</i>
+      
+      menu. 
+    </p>
+      
+    <p>  
+      Within the dialog a table of the available file formats that can be handled
+      is presented. The left column shows the available filter types. The right 
+      column shows a checkbox next to each filter type that indicates whether it 
+      is enabled (i.e. with a check mark) or not.
+    </p>
+    
+    <p>  
+      Currently available filter types are: text, XHTML, HTML, OpenDocument/OpenOffice.org, 
+      and Java Resource Bundles.
+    </p>
+    
+    <p>
+      To edit a file filter from the types available highlight it and select the
+      
+      <i>Edit...</i> 
+      
+      button to open the 
+      
+      <i>Edit File Filter</i>
+      
+      configuration dialog for it.
+    </p>
+
+    <p>
+      To reset the file filters after changes have been made select the
+      
+      <i>Defaults</i>
+      
+      button. Select
+      
+      <i>OK</i>
+
+      for the reset to defaults to take effect or
+      
+      <i>Cancel</i>
+      
+      to back out of the reset. Be sure that resetting the filters to defaults
+      is what is wanted before accepting the changes.
+    </p>
+  
+    <h3>Edit File Filters</h3>
+        
+    <p>
+      Access this from the 
+      
+      <i>File Filters</i> 
+      
+      dialog via the
+      
+      <i>Edit...</i>
+      
+      button.      
+    </p>
+    
+    <p>
+      The user is presented here with a four column table for the file filter 
+      type selected. The table contains the headings: 
+      
+      <i>Source Filename Pattern</i>, 
+      
+      <i>Source File Encoding</i>,
+       
+      <i>Target File Encoding</i>, 
+        
+      and 
+        
+      <i>Target Filename Pattern</i>
+      
+      for the configured settings of a particular filter. These are used for the following
+      purposes:
+    </p>
+    
+    <ul>
+      <li>
+        Source Filename Pattern - determines which files in the 
+      
+        <b>/source</b>
+       
+        directory will have the particular filter applied to them. Patterns can be 
+        customized according to the users' preferences.
+      </li>
+      <li>
+        Source File Encoding - the character encoding in effect for the source files.
+        Used to read in the source files. Has a drop down list from which to choose
+        encodings.
+      </li>
+      <li>
+        Target File Encoding - the character encoding in effect for the target 
+        files. Used to write out the target files. Has a drop down list from which 
+        to choose encodings.
+      </li>
+      <li>
+        Target Filename Pattern - determines the pattern used to assign filenames 
+        to the target documents created in 
+        
+        <b>/target</b>. 
+        
+        Patterns can be customized according to the users' preferences.
+      </li>
+    </ul>    
+    
+    <p>
+      On the right side of the dialog are the buttons 
+      
+      <i>Add...</i>,
+      
+      <i>Edit...</i>,
+      
+      and
+      
+      <i>Remove...</i>
+      
+      that are used to open the
+      
+      <i>Add Filter</i>,
+      
+      <i>Edit Filter</i>,
+      
+      and
+      
+      <i>Remove Filter</i>
+      
+      dialogs, respectively
+    </p>
+
+    <p>
+     There is another
+     
+     <i>Defaults</i>
+     
+     button available in this dialog also. Use of this button will reset the filters 
+     for the filter type back to its original number of filters and default settings. 
+     Again, be sure this is exactly what is wanted before using it.    
+    </p>    
+            
+    <h3>Add Filter &amp; Edit Filter</h3>
+
+    <p>
+      Access these from the 
+      
+      <i>Edit File Filters</i> 
+      
+      dialog via the
+      
+      <i>Add...</i>
+      
+      and
+      
+      <i>Edit...</i>
+      
+      buttons, respectively.      
+    </p>
+                
+    <p>
+      These dialogs and their instructions are the same, but their use is slightly
+      different. User defined filters are created in the
+      
+      <i>Add Filter</i>
+      
+      dialog. A newly created filter is added to the list of available filters 
+      for the particular type of filter through this dialog. Default and user defined 
+      filters are edited in the
+      
+      <i>Edit Filter</i>
+      
+      dialog. A chosen filter is updated when changes are accepted there.      
+    </p>
+    
+    <p>
+      Each dialog contains a number of entries that must be filled in to properly
+      configure the settings of a filter. These correspond to the settings seen
+      in the
+      
+      <i>Edit File Filters</i>
+      
+      dialog. Select
+      
+      <i>OK</i>
+
+      to add a new filter or accept changes to an existing filter, or
+      
+      <i>Cancel</i>
+      
+      to back out of the particular operation.
+    </p>
+
+    <h4>Source Filename Pattern</h4>
+    
+    <p>
+      Specify the pattern used to the determine which files in the 
+      
+      <b>/source</b>
+       
+      directory will have the particular filter applied to them. Patterns can be 
+      customized according to the users' preferences and within the limits of normal 
+      shell (glob) patterns. 
+    </p>
+    
+    <p>    
+      Enter the appropriate source file pattern in the text area. There is a default 
+      pattern set here which depends on the particular filter under consideration. 
+      Use the default or set a custom one according to the specific source files 
+      that are to be used with the filter.
+    </p>
+      
+    <h4>Source File Encoding</h4>
+    
+    <p>
+      Specify the source file character encoding. This can be determined externally
+      and entered (e.g. known ahead of time, from OpenOffice.org, etc.), by the 
+      file extension for some preset file formats (i.e. plaintext in Latin-1 uses
+      
+      <b>*.txt1</b>)
+      
+      or, if applicable, the 
+      
+      <i>&lt;auto&gt;</i> 
+      
+      setting can be used. For some formats the ability to change the encoding 
+      will be disabled. See the Encodings section on this page for details on
+      the
+      
+      <i>&lt;auto&gt;</i> 
+      
+      and disabled settings.
+    </p>
+      
+    <p>
+      Select the appropriate encoding from the drop down list, or use 
+        
+     <i>&lt;auto&gt;</i> 
+        
+     for a filter to be automatically selected to read source files in with.
+    </p>
+
+    <h4>Target File Encoding</h4>
+    
+    <p>
+      Specify the target file character encoding. The target documents will be
+      created with the selected encoding. It may be a good idea to know the encoding
+      required ahead of time for the particular target locale. If applicable, the
+      
+      <i>&lt;auto&gt;</i> 
+      
+      setting can be used to attempt to automatically set the encoding. Again, 
+      for some formats the ability to change the encoding will be disabled. See 
+      the Encodings section on this page for details on the
+      
+      <i>&lt;auto&gt;</i> 
+      
+      and disabled settings.
+    </p>
+          
+    <h4>Target Filename Pattern</h4>
+     
+    <p> 
+      Specify the pattern used to assign filenames to the target documents created 
+      in 
+        
+      <b>/target</b>. 
+        
+      Patterns can be customized according to the users' preferences, within 
+      the limits of normal shell (glob) patterns.
+    </p>
+             
+    <p>
+      Enter the appropriate target file pattern in the text area. The default pattern 
+      set here depends on the particular filter under consideration. Use the default 
+      or set up a custom pattern to alter the filenames of the target files for
+      this filter. There are a number of preset filename variables available for 
+      this purpose.      
+    </p>
+          
+    <h4>Filename Variables</h4>
+
+    <p>
+      For the 
+      
+      <i>Target Filename Pattern</i>
+    
+      there are few preset filename variables that can be used to help create the 
+      filenames of the target documents. The syntax of these variables is 
+      
+      <code>${VARIABLE}</code>
+       
+      and follows from commonly known glob patterns in shell (command line) usage.
+      A variable is used in line in the 
+      
+      <i>Target Filename Pattern</i>
+       
+      text area to insert the filename variables' values that are determined from 
+      the files and settings in a project.
+    </p>
+      
+    <p>
+      Select a filename variable from the drop down list. 
+      
+      Use the
+      
+      <i>Insert</i>
+      
+      button to put it at the cursor location in the Target Filename Pattern text 
+      area.
+    </p>
+
+    <ul>      
+      <li>
+        <code>${filename}</code>
+         
+        - the complete filename of a source file (name and extension). This is 
+        the default configuration in most cases, which means that the source file 
+        name and target (translated) file names will be the same.
+      </li>
+      <li>        
+        <code>${nameOnly}</code>  - source file name only, without the extension.
+      </li>
+      <li>
+        <code>${extension}</code> - source file extension only.
+      </li>
+      <li>
+        <code>${sourceLanguage}</code> - source language (locale) of the project.
+      </li>
+      <li>
+        <code>${targetLanguage}</code> - target language (locale) of the project.
+      </li>
+    </ul>
+
+    <p>
+      Use the
+      
+      <i>Insert</i>
+      
+      button to put a selected variable at the cursor location in the 
+      
+      <i>Target Filename Pattern</i>
+       
+      text area.
+    </p>   
+   
+    <h3>Remove Filter</h3>
+        
+    <p>
+      This is a confirmation dialog only. Select 
+      
+      <i>OK</i>
+       
+      to permanently remove a filter. User defined filters will not be available 
+      after confirming their removal. The default filters for a particular file 
+      format will also not be available if removed, but these can be restored 
+      from the 
+      
+      <i>Edit File Filters</i> 
+      
+      dialog by selecting 
+      
+      <i>Defaults</i>. 
+    </p>
+    
+    <h3>Encodings</h3>
+        
+    <p>
+      Encodings for source and target are selectable from the drop down lists
+      in the 
+      
+      <i>Edit File Filters</i>,
+      
+      <i>Add Filter</i>,
+      
+      and
+      
+      <i>Edit Filter</i>
+      
+      dialogs. The encodings available are limited to those in the Java Runtime
+      Environment in operation. In addition, an 
+      
+      <i>&lt;auto&gt;</i>
+       
+      variable can be used to attempt to automatically detect the source file encoding
+      required.
+    </p>
+      
+    <h4><i>&lt;auto&gt;</i> Setting</h4>
+    
+    <p>
+      Depending upon the particular filter in use, one of three actions will 
+      be taken when an 
+      
+      <i>&lt;auto&gt;</i>
+       
+      setting is encountered:
+    </p>
+          
+     <ol>
+      <li>
+        OmegaT will attempt to determine the encoding automatically; applies to 
+        source files only. 
+      </li>
+      <li>
+        the default encoding of the operating system will be used.
+      </li>
+      <li>
+        no action will occur. This happens when the filter only supports a single
+        source and target encoding.
+      </li>
+    </ol>
+                
+    <h4>Disabled(Grayed Out) Setting</h4>
+    
+    <p>
+      The particular filter with the disabled variable does not support multiple 
+      file encodings or the file format is encoding-neutral. In which case there 
+      is no way to specify another encoding.
+    </p>
+      
+    <h3>Target Filename Pattern Example</h3>
+
+    <p>
+      Perhaps it would be nice to change the target filenames to reflect the particular
+      target language or locale being translated to. One possibility is to add a suffix 
+      to the file names (before the extension). For instance, if the target language 
+      is French, then the addition of the language code might be good.
+    </p>
+     
+    <p> 
+      In this case the pattern could be 
+    </p>
+      
+    <p>
+      <code>${nameOnly}-fr.${extension}</code>, 
+    </p>
+      
+    <p>  
+      but there is already a variable for the target language so insert that variable 
+      instead to give   
+    </p>
+      
+    <p>        
+      <code>${nameOnly}-${targetLanguage}.${extension}</code>.
+    </p>
+    
+    <p>
+      Now, if a source file was named 
+      
+      <b>test.txt</b> 
+      
+      (e.g. under the 
+      
+      <b>*.txt</b> 
+      
+      text filter) the target filename for it would become 
+      
+      <b>test-fr.txt</b>.
+    </p>  
+    
+    <p>
+      Note that the filename separator 
+      
+      <b>'.'</b> 
+      
+      is not inserted by using ${extension}, it must be manually included in the 
+      pattern if you want it.
+    </p>
+    
+    <p>
+      Continuing, perhaps the country code would be nice also. It could be added
+      with 
+    </p>
+      
+    <p>      
+      <code>${nameOnly}-${targetLanguage}_CA.${extension}</code>
+    </p>
+      
+    <p>      
+      for the case of French as the target language and Canada as the country. 
+      In this case 
+      
+      <b>test.txt</b> 
+      
+      would become 
+      
+      <b>test-fr_CA.txt</b>.
+    </p>
+      
+    <p>
+      In this example the target filename now has the standard locale code (language 
+      plus country code) tacked on as a suffix to all of the files' names and 
+      the extension is unaltered.
+    </p>    
+       
+    <h3>Questions & Answers</h3>
+    
+    <h4>How is the filter that works with a file determined?</h4>
+        
+    <p>
+      This is determined by a file's pattern. Each filter lists the source file 
+      pattern of the files it can handle. This can be set by adding or editing a 
+      file filter. Each filter may have a distinct pattern associated with it. 
+      For example, if the plaintext filter is to be used to handle all files without 
+      an extension, add or edit a filter to have a 
+      
+      <b>*.</b> 
+      
+      source filename pattern. There are also a few preset filters that work with 
+      a specific file type, but use different encodings. For example, a Latin-1
+      encoded plaintext file can be recognized by the 
+      
+      <b>.txt1</b>
+      
+      extension. All files can be given a particular pattern ahead of using them 
+      in a project so they will automatically be recognized. In the example, the
+      extension was the determining factor for associating files with a filter.
+    </p>
+    
+    <h4>What if a file encoding seems incorrect?</h4>
+    
+    <p>
+      Set up another encoding instead by changing the 
+      
+      <i>Source File Encoding</i>
+       
+      of the appropriate file filter.
+    </p>  
+        
+    <h4>
+      What can be done if a single encoding does not work well for the source and 
+      target languages?
+    </h4>
+        
+    <p>
+      In reality, UTF-8, UTF-16, and UTF-32 encodings will work in almost all 
+      cases. It is possible to use one of these encodings for source and target 
+      together. To use two different encodings for source and target ensure that
+      the appropriate encodings are chosen for each character set and that the
+      source document files are saved in the proper encoding before opening the
+      project. 
+    </p>    
+    </div>
+    
+    <div class="navbar-bottom">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="OmegaT.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Previous</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="FilesEditingTagged.html">Tagged (Formatted) Files Text Editing</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Next</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="FilesProjDirs.html">Project Files and Directories</a>
+        </td>
+      </tr>
+    </table>        
+    </div>
+    
+  </body>
+</html>  
+

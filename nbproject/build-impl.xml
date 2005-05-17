@@ -214,7 +214,9 @@ is divided into following sections:
     COMPILATION SECTION
     ===================
     -->
-    <target name="deps-jar" depends="init" unless="no.deps"/>
+    <target name="deps-jar" depends="init" unless="no.deps">
+        <ant antfile="${project.lib-mnemonics}/build.xml" inheritall="false" target="jar"/>
+    </target>
     <target name="-pre-pre-compile" depends="init,deps-jar">
         <mkdir dir="${build.classes.dir}"/>
     </target>
@@ -462,7 +464,9 @@ is divided into following sections:
     CLEANUP SECTION
     ===============
     -->
-    <target name="deps-clean" depends="init" unless="no.deps"/>
+    <target name="deps-clean" depends="init" unless="no.deps">
+        <ant antfile="${project.lib-mnemonics}/build.xml" inheritall="false" target="clean"/>
+    </target>
     <target name="-do-clean" depends="init">
         <delete dir="${build.dir}"/>
         <delete dir="${dist.dir}"/>

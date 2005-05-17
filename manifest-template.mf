@@ -2,3 +2,5 @@ Main-Class: org.omegat.Main
 License: GNU Public License version 2
 Specification-Version: @specification-version@
 Implementation-Version: @version@
+Class-Path: lib-mnemonics.jar
+

@@ -23,9 +23,10 @@
 **************************************************************************/
 -->
 
-<project name="OmegaT" default="all" basedir=".">
+<project name="OmegaT" default="default" basedir=".">
     <description>Builds, tests, and runs the project OmegaT.</description>
     <import file="nbproject/build-impl.xml"/>
+
 
     <target name="-pre-init">
         <property name="iscc.exe" value="iscc.exe"/>
@@ -41,48 +42,48 @@
         <delete file="manifest.mf"/>
         <delete file="omegat.prefs"/>
         <delete file="filters.conf"/>
-        <delete dir="dist"/>
+        <delete dir="dist2"/>
+        <delete dir="plugins"/>
         <ant dir="addons/properties-import" target="clean" inheritAll="false"/>
     </target>
-
+    
     <target name="win" description="Build Win32 distro" depends="init,jar,zip">
-        <copy todir="tmp" file="release/win32-specific/OmegaT.exe"/>
+        <copy todir="dist" file="release/win32-specific/OmegaT.exe"/>
 
         <filter token="VERSION_NUMBER_SUBST" value="${version}"/>
-        <copy todir="tmp" file="release/win32-specific/OmegaT.iss" filtering="on"/>
+        <copy todir="dist" file="release/win32-specific/OmegaT.iss" filtering="on"/>
         
-        <mkdir dir="dist"/>
+        <mkdir dir="dist2"/>
         <exec executable="${iscc.exe}">
-            <arg file="tmp/OmegaT.iss"/>
+            <arg file="dist/OmegaT.iss"/>
         </exec>
     </target>
 
     <target name="zip" description="Build Zip distro" depends="init,jar">
-        <mkdir dir="tmp"/>
-        <copy todir="tmp">
+        <mkdir dir="dist"/>
+        <copy todir="dist">
             <fileset dir="release" includes="*" excludes="win32-specific"/>
         </copy>
-        <mkdir dir="tmp/docs"/>
-        <copy todir="tmp/docs">
+        <mkdir dir="dist/docs"/>
+        <copy todir="dist/docs">
             <fileset dir="docs"/>
         </copy>
-        <mkdir dir="tmp/images"/>
-        <copy todir="tmp/images">
+        <mkdir dir="dist/images"/>
+        <copy todir="dist/images">
             <fileset dir="images"/>
         </copy>
         
-        <mkdir dir="dist"/>
-        <zip basedir="tmp" destfile="dist/OmegaT_${version}.zip"/>
+        <mkdir dir="dist2"/>
+        <zip basedir="dist" destfile="dist2/OmegaT_${version}.zip"/>
 
         <ant dir="addons/properties-import" inheritAll="false"/>
-        <copy todir="dist" file="addons/properties-import/import_properties.zip"/>
+        <copy todir="dist2" file="addons/properties-import/import_properties.zip"/>
     </target>
 
-    <target name="src" depends="init" description="Build source distribution">
-        <mkdir dir="dist"/>
-        <zip destfile="dist/OmegaT_src_${version}.zip" basedir="." includes="addons/** docs/** images/** nbproject/** release/** src/** manifest-template.mf build.xml"/>
+    <target name="src" depends="init, clean" description="Build source distribution">
+        <mkdir dir="dist2"/>
+        <zip destfile="dist2/OmegaT_src_${version}.zip" basedir="." 
+                includes="addons/** docs/** images/** nbedge-filter/** nbproject/** lib-mnemonics/** release/** src/** manifest-template.mf build.xml"/>
     </target>
-
-    <target name="all" depends="src,zip" description="Build distributions."/>
 
 </project>

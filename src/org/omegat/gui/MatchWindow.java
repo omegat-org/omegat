@@ -42,38 +42,61 @@ import java.util.ArrayList;
  * fuzzy matches and glossary entries.
  *
  * @author Keith Godfrey
+ * @author Raymond Martin
  */
 class MatchWindow extends JFrame
-{
-	public MatchWindow()
-	{
-		// KBG - set screen size based on saved values or guesses about
-		//		screen size (18may04)
-		initScreenLayout();
-
-		Container cont = getContentPane();
-		cont.setLayout(new GridLayout(2, 1, 3, 4));
-
-		m_matchPane = new JTextPane();
-		m_glosPane = new JTextPane();
-		JScrollPane matchScroller = new JScrollPane(m_matchPane);
-		JScrollPane glosScroller = new JScrollPane(m_glosPane);
-
-		cont.add(matchScroller);
-		cont.add(glosScroller);
-
-		m_matchPane.setEditable(false);
-		m_glosPane.setEditable(false);
-
-		addWindowListener(new WindowAdapter()
-		{
-			public void windowClosing(WindowEvent e)
-			{
-				setVisible(false);
-			}
-		});
-	}
-
+{ 
+    public MatchWindow()
+    {
+        // KBG - set screen size based on saved values or guesses about
+        //    screen size (18may04)
+        initScreenLayout();
+        
+        //  Top level container
+        Container cntMatch = getContentPane();
+        
+        ///////////////////////////////////////////////////////////////////
+        //  Panes
+        //
+        
+        //  Match Pane
+        m_matchPane = new JTextPane();
+        //  Embed text pane within scrollable pane - RM
+        JScrollPane scpnMatch = new JScrollPane( m_matchPane );
+        
+        //  Glossary Pane
+        m_glosPane = new JTextPane();
+        //  Embed text pane within scrollable pane - RM
+        JScrollPane scpnGlossary = new JScrollPane( m_glosPane );
+        
+        ///////////////////////////////////////////////////////////////////
+        //  Split Pane with Two Scroll Panes - RM
+        JSplitPane sppnMatchGlos =
+                new JSplitPane( JSplitPane.VERTICAL_SPLIT, scpnMatch, scpnGlossary );
+        
+        sppnMatchGlos.setResizeWeight( 0.5 );
+        sppnMatchGlos.setContinuousLayout( true );
+        sppnMatchGlos.setOneTouchExpandable( true );
+        
+        //  Provide minimum sizes for the two components in the split pane
+        Dimension minimumSize = new Dimension( 100, 50 );
+        m_matchPane.setMinimumSize( minimumSize );
+        m_glosPane.setMinimumSize( minimumSize );
+        
+        cntMatch.add( sppnMatchGlos );
+        
+        m_matchPane.setEditable(false);
+        m_glosPane.setEditable(false);
+        
+        addWindowListener(new WindowAdapter()
+        {
+            public void windowClosing(WindowEvent e)
+            {
+                setVisible(false);
+            }
+        });
+    }
+    
     /**
      * Sets the text of the glossary window to the found glossary entries
      */

@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -21,18 +21,32 @@
 
 package org.omegat.gui;
 
-import org.omegat.core.threads.CommandThread;
-import org.omegat.core.threads.SearchThread;
-import org.omegat.util.OConsts;
-import org.omegat.util.OStrings;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Container;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import javax.swing.Box;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+
+import org.omegat.core.threads.CommandThread;
+import org.omegat.core.threads.SearchThread;
+import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
+import org.openide.awt.Mnemonics;
 
 /**
  * This is a window that appears when user'd like to search for something.
@@ -54,7 +68,6 @@ public class SearchWindow extends JFrame
 		if (startText != null)
 			m_searchField.setText(startText);
 		m_searchButton = new JButton();
-		m_searchButton.setMnemonic(KeyEvent.VK_S);
 		Box bSearch = Box.createHorizontalBox();
 		bSearch.add(m_searchLabel);
 		bSearch.add(m_searchField);
@@ -62,15 +75,12 @@ public class SearchWindow extends JFrame
 		bSearch.add(m_searchButton);
 
 		m_exactSearchRB = new JRadioButton();
-		m_exactSearchRB.setMnemonic(KeyEvent.VK_E);
 		m_exactSearchRB.setSelected(true);
 
 		m_keywordSearchRB = new JRadioButton();
-		m_keywordSearchRB.setMnemonic(KeyEvent.VK_K);
 		m_keywordSearchRB.setSelected(false);
 
 		m_tmSearchCB = new JCheckBox();
-		m_tmSearchCB.setMnemonic(KeyEvent.VK_T);
 		m_tmSearchCB.setSelected(true);
 		m_tmSearch = true;
 
@@ -101,14 +111,11 @@ public class SearchWindow extends JFrame
 		m_dirCB = new JCheckBox();
 		m_dirCB.setSelected(false);
 		m_dirCB.setActionCommand(OConsts.SW_DIR_CB_CHECKED_CMD);
-		m_dirCB.setMnemonic(KeyEvent.VK_F);
 		m_recursiveCB = new JCheckBox();
 		m_recursiveCB.setSelected(true);
-		m_recursiveCB.setMnemonic(KeyEvent.VK_R);
 		m_recursiveCB.setEnabled(false);
 
 		m_dismissButton = new JButton();
-		m_dismissButton.setMnemonic(KeyEvent.VK_W);
 
 		Box bCB = Box.createHorizontalBox();
 		bCB.add(m_dirCB);
@@ -359,7 +366,8 @@ public class SearchWindow extends JFrame
 				if (!f.exists() || !f.isDirectory())
 				{
 					// TODO XXX alert user folder is invalid
-System.out.println("ERROR - bad directory name  '"+m_dirField.getText()+"'");	// NOI18N
+                    StaticUtils.log("ERROR - bad directory name  '"+
+                            m_dirField.getText()+"'");	// NOI18N
 					return;
 				}
 				if (CommandThread.core != null && m_dirCB.isSelected())
@@ -388,19 +396,19 @@ System.out.println("ERROR - bad directory name  '"+m_dirField.getText()+"'");	//
 	{
 		setTitle(OStrings.SW_TITLE);
 		
-		m_searchLabel.setText(OStrings.SW_SEARCH_TEXT);
-		m_searchButton.setText(OStrings.SW_SEARCH);
+		Mnemonics.setLocalizedText(m_searchLabel, OStrings.SW_SEARCH_TEXT);
+		Mnemonics.setLocalizedText(m_searchButton, OStrings.SW_SEARCH);
 		
-		m_exactSearchRB.setText(OStrings.SW_EXACT_SEARCH);
-		m_tmSearchCB.setText(OStrings.SW_SEARCH_TM);
-		m_keywordSearchRB.setText(OStrings.SW_WORD_SEARCH);
+		Mnemonics.setLocalizedText(m_exactSearchRB, OStrings.SW_EXACT_SEARCH);
+		Mnemonics.setLocalizedText(m_tmSearchCB, OStrings.SW_SEARCH_TM);
+		Mnemonics.setLocalizedText(m_keywordSearchRB, OStrings.SW_WORD_SEARCH);
 		
-		m_dirLabel.setText(OStrings.SW_LOCATION);
-		m_dirCB.setText(OStrings.SW_DIR_SEARCH);
-		m_recursiveCB.setText(OStrings.SW_DIR_RECURSIVE);
-		m_dirButton.setText(OStrings.SW_BROWSE);
+		Mnemonics.setLocalizedText(m_dirLabel, OStrings.SW_LOCATION);
+		Mnemonics.setLocalizedText(m_dirCB, OStrings.SW_DIR_SEARCH);
+		Mnemonics.setLocalizedText(m_recursiveCB, OStrings.SW_DIR_RECURSIVE);
+		Mnemonics.setLocalizedText(m_dirButton, OStrings.SW_BROWSE);
 		
-		m_dismissButton.setText(OStrings.CF_BUTTON_CLOSE);
+		Mnemonics.setLocalizedText(m_dismissButton, OStrings.CF_BUTTON_CLOSE);
 	}
 
 	class MFindField extends JTextField

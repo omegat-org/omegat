@@ -1,37 +1,38 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- **************************************************************************/
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+**************************************************************************/
 
 package org.omegat.filters2;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.Reader;
 import java.io.UnsupportedEncodingException;
-import java.io.Writer;
+
 import org.omegat.filters2.master.FilterMaster;
+import org.omegat.util.OStrings;
 
 /**
  * The base class for all filters (aka file handlers).
@@ -44,15 +45,35 @@ public abstract class AbstractFilter
     /**
      * This value means that the encoding is determined by the filter itself.
      */
-    public static String ENCODING_AUTO = "<auto>";
+    public static String ENCODING_AUTO = "<auto>";                              // NOI18N
+    /**
+     * This value represents to the user that 
+     * the encoding is determined by the filter itself.
+     */
+    public static String ENCODING_AUTO_HUMAN = OStrings.getString("ENCODING_AUTO");
 
+    public static final String TFP_FILENAME = "${filename}";                 // NOI18N
+    public static final String TFP_NAMEONLY = "${nameOnly}";                 // NOI18N
+    public static final String TFP_EXTENSION = "${extension}";               // NOI18N
+    public static final String TFP_SOURCELOCALE = "${sourceLanguage}";       // NOI18N
+    public static final String TFP_TARGETLOCALE = "${targetLanguage}";       // NOI18N
+    public static final String[] TARGET_FILENAME_PATTERNS = new String[] 
+    {
+        TFP_FILENAME,
+        TFP_NAMEONLY,
+        TFP_EXTENSION,
+        TFP_SOURCELOCALE,
+        TFP_TARGETLOCALE,
+    };
+    
+    
     /**
      * The default output filename pattern.
      * <p>
      * It is equal to "${filename}", which means that the name of the
      * translated file should be the same as the name of the input file.
      */
-    public static String TARGET_DEFAULT = "${filename}";
+    public static String TARGET_DEFAULT = TFP_FILENAME;
 
     /**
      * Human-readable name of the File Format this filter supports.
@@ -103,17 +124,21 @@ public abstract class AbstractFilter
     /**
      * Returns whether the file is supported by the filter.
      * <p>
+     * !!! 
+     * <br>It is recommended that for performance reasons you shouldn't read
+     * more than {@link org.omegat.util.OConsts#READ_AHEAD_LIMIT}.
+     * <br>And you surely must not close the reader.
+     * <p>
      * By default returns true, because this method should be overriden
      * only by filters that differentiate input files not by extensions,
      * but by file's content.
      * <p>
      * For example, DocBook files have .xml extension, as possibly many other 
      * XML files, so the filter should check a DTD of the document.
-     *
-     * @param infile The source file
-     * @return       Does the filter support the file
+     * @param reader The reader of the source file
+     * @return Does the filter support the file
      */
-    public boolean isFileSupported(File infile)
+    public boolean isFileSupported(BufferedReader reader)
     {
         return true;
     }
@@ -128,13 +153,15 @@ public abstract class AbstractFilter
      * @throws UnsupportedEncodingException Thrown if JVM doesn't support the specified encoding
      * @throws IOException If any I/O Error occurs upon reader creation
      */
-    public Reader createReader(File infile, String encoding)
+    public BufferedReader createReader(File infile, String encoding)
             throws UnsupportedEncodingException, IOException
     {
-        if( encoding.equals(ENCODING_AUTO) )
-            return new InputStreamReader(new FileInputStream(infile));
+        InputStreamReader isr;
+        if( encoding==null || encoding.equals(ENCODING_AUTO) )
+            isr = new InputStreamReader(new FileInputStream(infile));
         else
-            return new InputStreamReader(new FileInputStream(infile), encoding);
+            isr = new InputStreamReader(new FileInputStream(infile), encoding);
+        return new BufferedReader(isr);
     }
 
 	/**
@@ -147,13 +174,15 @@ public abstract class AbstractFilter
      * @throws UnsupportedEncodingException Thrown if JVM doesn't support the specified encoding
      * @throws IOException If any I/O Error occurs upon writer creation
      */
-    public Writer createWriter(File outfile, String encoding)
+    public BufferedWriter createWriter(File outfile, String encoding)
             throws UnsupportedEncodingException, IOException
     {
-        if( encoding.equals(ENCODING_AUTO) )
-            return new OutputStreamWriter(new FileOutputStream(outfile));
+        OutputStreamWriter osw;
+        if( encoding==null || encoding.equals(ENCODING_AUTO) )
+            osw = new OutputStreamWriter(new FileOutputStream(outfile));
         else
-            return new OutputStreamWriter(new FileOutputStream(outfile), encoding);
+            osw = new OutputStreamWriter(new FileOutputStream(outfile), encoding);
+        return new BufferedWriter(osw);
     }
     
     /**
@@ -171,7 +200,7 @@ public abstract class AbstractFilter
      * @throws TranslationException Should be thrown when processed file has any format defects.
      * @throws IOException Thrown in case of any I/O error.
      */
-    public abstract void processFile(Reader infile, Writer outfile)
+    public abstract void processFile(BufferedReader infile, BufferedWriter outfile)
             throws IOException, TranslationException;
 
     /**

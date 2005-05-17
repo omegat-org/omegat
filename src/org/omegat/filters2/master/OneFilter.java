@@ -1,23 +1,23 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- **************************************************************************/
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+**************************************************************************/
 
 package org.omegat.filters2.master;
 
@@ -27,6 +27,7 @@ import java.util.Arrays;
 import javax.swing.table.AbstractTableModel;
 import org.omegat.filters2.*;
 import org.omegat.filters2.Instance;
+import org.omegat.util.OStrings;
 
 
 /**
@@ -52,92 +53,157 @@ public class OneFilter extends AbstractTableModel implements Serializable
     /**
      * Creates a wrapper from a filter class.
      * Needs to construct an XML element.
+     *
+     * @param fromPlugin is the filter loaded from a plugin? if yes, we'll check is the plugin still available upon loading configuration
      */
-    public OneFilter(AbstractFilter filter)
+    public OneFilter(AbstractFilter filter, boolean fromPlugin)
     {
         setClassName(filter.getClass().getName());
         setHumanName(filter.getFileFormatName());
         setOn(true);
+        setFromPlugin(fromPlugin);
         setSourceEncodingVariable(filter.isSourceEncodingVariable());
         setTargetEncodingVariable(filter.isTargetEncodingVariable());
         setInstance(filter.getDefaultInstances());
     }
     
-    /**
-     * Хранит значение свойства instance.
-     */
-    private ArrayList instances = new ArrayList();
-    
-    
     /////////////////////////////////////////////////////////////////////////
     // Properties
     /////////////////////////////////////////////////////////////////////////
     
-    private String className;
+    /** Holds the class name of the filter */
+    private String className = null;
+    /**
+     * Returns the class name of the filter.
+     */
     public String getClassName()
     {
         return className;
     }
+    /**
+     * Sets the class name of the filter.
+     */
     public void setClassName(String value)
     {
         className = value;
     }
 
-    private String humanName;
+    /** Holds the human-readable name of the filter */
+    private String humanName = null;
+    /**
+     * Returns the human-readable name of the filter.
+     */
     public String getHumanName()
     {
         return humanName;
     }
+    /**
+     * Sets the "human" name of the filter.
+     */
     public void setHumanName(String value)
     {
         humanName = value;
     }
     
-    private boolean on;
+    /** If the filter is used. */
+    private boolean on = true;
+    /** 
+     * Returns whether the filter is on (used by OmegaT).
+     */
     public boolean isOn()
     {
         return on;
     }
+    /** 
+     * Sets whether the filter is on (used by OmegaT). 
+     */
     public void setOn(boolean value)
     {
         on = value;
     }
+
+
+    /** Holds whether this filter was loaded from a plugin */
+    private boolean fromPlugin = false;
+    /** 
+     * Returns whether this filter was loaded from a plugin 
+     */
+    public boolean isFromPlugin()
+    {
+        return fromPlugin;
+    }
+    /** 
+     * Sets whether this filter was loaded from a plugin 
+     */
+    public void setFromPlugin(boolean fromPlugin)
+    {
+        this.fromPlugin = fromPlugin;
+    }
     
+    /** Holds whether the filter's source encoding can be varied by user */
     private boolean sourceEncodingVariable;
+    /** 
+     * Returns whether the filter's source encoding can be varied by user 
+     */
     public boolean isSourceEncodingVariable()
     {
         return sourceEncodingVariable;
     }
+    /** 
+     * Sets whether the filter's source encoding can be varied by user 
+     */
     public void setSourceEncodingVariable(boolean value)
     {
         sourceEncodingVariable = value;
     }
     
+    /** Holds whether the filter's target encoding can be varied by user */
     private boolean targetEncodingVariable;
+    /** 
+     * Returns whether the filter's target encoding can be varied by user 
+     */
     public boolean isTargetEncodingVariable()
     {
         return targetEncodingVariable;
     }
+    /** 
+     * Sets whether the filter's target encoding can be varied by user 
+     */
     public void setTargetEncodingVariable(boolean value)
     {
         targetEncodingVariable = value;
     }
-    
+
+    /** Holds instances property. */
+    private ArrayList instances = new ArrayList();
+
+    /**
+     * Returns all the instances of the filter.
+     */
     public Instance[] getInstance()
     {
         return (Instance[])instances.toArray(new Instance[0]);
     }
+    /**
+     * Sets all the instances of the filter at once.
+     */
     public void setInstance(Instance[] instance)
     {
         instances = new ArrayList(Arrays.asList(instance));
         fireTableDataChanged();
     }
 
+    /**
+     * Adds one the instance of the filter.
+     */
     public void addInstance(Instance instance)
     {
         instances.add(instance);
         fireTableDataChanged();
     }
+    /**
+     * Removes one instance of the filter.
+     */
     public void removeInstance(int index)
     {
         instances.remove(index);
@@ -171,13 +237,13 @@ public class OneFilter extends AbstractTableModel implements Serializable
         switch( columnIndex )
         {
             case 0:
-                return "Source Filename Mask";
+                return OStrings.getString("ONEFILTER_SOURCE_FILENAME_MASK");
             case 1:
-                return "Source File Encoding";
+                return OStrings.getString("ONEFILTER_SOURCE_FILE_ENCODING");
             case 2:
-                return "Target File Encoding";
+                return OStrings.getString("ONEFILTER_TARGET_FILE_ENCODING");
             case 3:
-                return "Target Filename Pattern";
+                return OStrings.getString("ONEFILTER_TARGET_FILENAME_ENCODING");
         }
         return null;
     }
@@ -200,9 +266,9 @@ public class OneFilter extends AbstractTableModel implements Serializable
             case 0:
                 return instance.getSourceFilenameMask();
             case 1:
-                return instance.getSourceEncoding();
+                return instance.getSourceEncodingHuman();
             case 2:
-                return instance.getTargetEncoding();
+                return instance.getTargetEncodingHuman();
             case 3:
                 return instance.getTargetFilenamePattern();
         }
@@ -243,6 +309,5 @@ public class OneFilter extends AbstractTableModel implements Serializable
         }
         return false;
     }
-
     
 }

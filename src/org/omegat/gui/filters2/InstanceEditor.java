@@ -1,8 +1,23 @@
-/*
- * InstanceEditor.java
- *
- * Created on 25 январь 2005 г., 15:56
- */
+/**************************************************************************
+ OmegaT - Java based Computer Assisted Translation (CAT) tool
+ Copyright (C) 2002-2005  Keith Godfrey et al
+                          keithgodfrey@users.sourceforge.net
+                          907.223.2039
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+**************************************************************************/
 
 package org.omegat.gui.filters2;
 
@@ -11,10 +26,17 @@ import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.border.TitledBorder;
+import org.omegat.filters2.AbstractFilter;
 
 import org.omegat.filters2.master.FilterMaster;
+import org.omegat.util.OStrings;
+import org.openide.awt.Mnemonics;
 
 /**
+ * Editor for a single instance of the filter.
+ * E.g. HTML filter may have two instances -- one for .html and 
+ * other for .htm files.
  *
  * @author  Maxym Mykhalchuk
  */
@@ -26,6 +48,14 @@ public class InstanceEditor extends JDialog
     /** A return status code - returned if OK button has been pressed */
     public static final int RET_OK = 1;
     
+    private void init2(boolean sourceEncodingVariable, boolean targetEncodingVariable)
+    {
+        getRootPane().setDefaultButton(addOrUpdateButton);
+        this.sourceEncodingField.setEnabled(sourceEncodingVariable);
+        this.targetEncodingField.setEnabled(targetEncodingVariable);
+        ((TitledBorder)tfnpPanel.getBorder()).setTitle(OStrings.getString("INSTANCEEDITOR_Target_Filename_Pattern"));
+    }
+    
     /** 
      * Creates an InstanceEditor form,
      * that is used to add a new filter instance.
@@ -34,13 +64,9 @@ public class InstanceEditor extends JDialog
     {
         super(parent, true);
         initComponents();
-        
-        getRootPane().setDefaultButton(addOrUpdateButton);
-        this.sourceEncodingField.setEnabled(sourceEncodingVariable);
-        this.targetEncodingField.setEnabled(targetEncodingVariable);
-        
-        invalidate();
-        pack();
+        init2(sourceEncodingVariable, targetEncodingVariable);
+        setTitle(OStrings.getString("INSTANCEEDITOR_TITLE_ADD"));
+        Mnemonics.setLocalizedText(addOrUpdateButton, OStrings.getString("BUTTON_ADD_NODOTS"));
     }
     
     /** 
@@ -51,21 +77,15 @@ public class InstanceEditor extends JDialog
     {
         super(parent, true);
         initComponents();
+        init2(sourceEncodingVariable, targetEncodingVariable);
+        setTitle( OStrings.getString("INSTANCEEDITOR_TITLE_UPDATE"));
         
-        getRootPane().setDefaultButton(addOrUpdateButton);
-        sourceEncodingField.setEnabled(sourceEncodingVariable);
-        targetEncodingField.setEnabled(targetEncodingVariable);
-        
-        setTitle("Update a filter instance");
-        addOrUpdateButton.setText("Update");
+        Mnemonics.setLocalizedText(addOrUpdateButton, OStrings.getString("BUTTON_UPDATE"));
         
         sourceFilenameMaskField.setText(sourceFilenameMask);
         sourceEncodingField.setSelectedItem(sourceEncoding);
         targetEncodingField.setSelectedItem(targetEncoding);
         targetFilenamePatternField.setText(targetFilenamePattern);
-        
-        invalidate();
-        pack();
     }
     
     
@@ -128,10 +148,11 @@ public class InstanceEditor extends JDialog
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Add a new filter instance");
+        setTitle(OStrings.getString("INSTANCEEDITOR_TITLE_ADD"));
+        setResizable(false);
         buttonPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        org.openide.awt.Mnemonics.setLocalizedText(addOrUpdateButton, "&Add");
+        org.openide.awt.Mnemonics.setLocalizedText(addOrUpdateButton, OStrings.getString("BUTTON_ADD"));
         addOrUpdateButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -142,7 +163,7 @@ public class InstanceEditor extends JDialog
 
         buttonPanel.add(addOrUpdateButton);
 
-        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, "&Cancel");
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL"));
         cancelButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -167,7 +188,7 @@ public class InstanceEditor extends JDialog
         jTextArea1.setEditable(false);
         jTextArea1.setFont(new JLabel().getFont());
         jTextArea1.setLineWrap(true);
-        jTextArea1.setText("Here you may add or edit a single filter instance.");
+        jTextArea1.setText(OStrings.getString("INSTANCEEDITOR_DESCRIPTION"));
         jTextArea1.setWrapStyleWord(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -183,7 +204,7 @@ public class InstanceEditor extends JDialog
         tfnpPanel.setLayout(new java.awt.GridBagLayout());
 
         tfnpPanel.setBorder(new javax.swing.border.TitledBorder("Target Filename Pattern"));
-        org.openide.awt.Mnemonics.setLocalizedText(insertButton, "&Insert");
+        org.openide.awt.Mnemonics.setLocalizedText(insertButton, OStrings.getString("BUTTON_INSERT"));
         insertButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -199,7 +220,7 @@ public class InstanceEditor extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         tfnpPanel.add(insertButton, gridBagConstraints);
 
-        substitute.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "${filename}", "${nameOnly}", "${extension}", "${sourceLanguage}", "${targetLanguage}" }));
+        substitute.setModel(new DefaultComboBoxModel(AbstractFilter.TARGET_FILENAME_PATTERNS));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -210,7 +231,7 @@ public class InstanceEditor extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         tfnpPanel.add(substitute, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, "Substituted &Variable");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, OStrings.getString("INSTANCEEDITOR_Substituted_Variable"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -241,7 +262,7 @@ public class InstanceEditor extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(tfnpPanel, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, "Source Filename &Mask");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, OStrings.getString("INSTANCEEDITOR_SOURCE_MASK"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -258,7 +279,7 @@ public class InstanceEditor extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(sourceFilenameMaskField, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, "Source &Encoding");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, OStrings.getString("INSTANCEEDITOR_SOURCE_ENCODING"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -275,7 +296,7 @@ public class InstanceEditor extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(sourceEncodingField, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel6, "&Target Encoding");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel6, OStrings.getString("INSTANCEEDITOR_Target_Encoding"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;

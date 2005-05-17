@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -86,13 +86,10 @@ public class OStrings
 
     public static final String TF_MENU_DISPLAY_FONT	= getString("TF_MENU_DISPLAY_FONT");
 	public static final String TF_MENU_DISPLAY_ADVANCE	= getString("TF_MENU_DISPLAY_ADVANCE");
-	public static final String TF_MENU_DISPLAY_MNEMONIC	= getString("TF_MENU_DISPLAY_MNEMONIC");
 
 	public static final String TF_MENU_TOOLS		= getString("TF_MENU_TOOLS");
 	public static final String TF_MENU_TOOLS_VALIDATE	= getString("TF_MENU_TOOLS_VALIDATE");
 
-	public static final String TF_MENU_VERSION_HELP		= getString("TF_MENU_VERSION_HELP");
-	
     public static final String TF_TM_LOAD_ERROR	= getString("TF_TM_LOAD_ERROR");
 	public static final String TF_LOAD_ERROR	= getString("TF_LOAD_ERROR");
 	public static final String TF_COMPILE_ERROR	= getString("TF_COMPILE_ERROR");
@@ -145,10 +142,7 @@ public class OStrings
 	
 	// CommandThread
 	public static final String CT_FUZZY_X_OF_Y = getString("CT_FUZZY_X_OF_Y");
-	// --Commented out by Inspection (31.10.04 1:50): public static final String CT_TM_X_OF_Y	= getString("CT_TM_X_OF_Y");
-	
 	public static final String CT_LOADING_PROJECT	= getString("CT_LOADING_PROJECT");
-	// --Commented out by Inspection (31.10.04 1:50): public static final String CT_LOADING_INDEX	= getString("CT_LOADING_INDEX");
 	public static final String CT_LOADING_GLOSSARY	= getString("CT_LOADING_GLOSSARY");
     public static final String CT_CANCEL_LOAD = getString("CT_CANCEL_LOAD");
 	public static final String CT_LOADING_WORDCOUNT	= getString("CT_LOADING_WORDCOUNT");
@@ -157,8 +151,6 @@ public class OStrings
 	public static final String CT_FATAL_ERROR	= getString("CT_FATAL_ERROR");
 	public static final String CT_DONT_RECOGNIZE_GLOS_FILE = getString("CT_DONT_RECOGNIZE_GLOS_FILE");
     public static final String CT_NO_FILE_HANDLER = getString("CT_NO_FILE_HANDLER");
-	public static final String CT_PREF_LOAD_ERROR_MAPPINGS = getString("CT_PREF_LOAD_ERROR_MAPPINGS");
-	public static final String CT_HTMLX_MASQUERADE	= getString("CT_HTMLX_MASQUERADE");
 	public static final String CT_LOAD_FILE_MX	= getString("CT_LOAD_FILE_MX");
 	public static final String CT_COMPILE_FILE_MX	= getString("CT_COMPILE_FILE_MX");
 	public static final String CT_COMPILE_DONE_MX	= getString("CT_COMPILE_DONE_MX");
@@ -167,6 +159,7 @@ public class OStrings
 	
 	// ProjectProperties
 	public static final String PP_CREATE_PROJ	= getString("PP_CREATE_PROJ");
+	public static final String PP_OPEN_PROJ     = getString("PP_OPEN_PROJ");
     public static final String PP_SRC_ROOT		= getString("PP_SRC_ROOT");
 	public static final String PP_LOC_ROOT		= getString("PP_LOC_ROOT");
 	public static final String PP_GLOS_ROOT		= getString("PP_GLOS_ROOT");

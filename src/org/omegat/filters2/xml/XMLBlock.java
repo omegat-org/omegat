@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -167,11 +167,16 @@ public class XMLBlock
 		else if (m_typeChar == '!')
 		{
 			String tag = "<!";                                                  // NOI18N
-			if (m_text.startsWith("CDATA"))                                   // NOI18N
+			if( m_text.equals("CDATA") )                                        // NOI18N
 			{
+                tag += "[";                                                     // NOI18N
                 tag += m_text;
-			   	tag += "]>";	                                                // NOI18N
+                tag += "[";                                                     // NOI18N
 			}
+            else if( m_text.equals("]]") )                                      // NOI18N
+            {
+                tag = "]]>";
+            }
 			else if (m_isComment)
 			{
 				tag += "-- ";	// NOI18N

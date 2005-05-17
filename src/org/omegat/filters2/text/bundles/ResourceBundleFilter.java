@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -22,18 +22,18 @@
 package org.omegat.filters2.text.bundles;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import org.omegat.util.OStrings;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.Reader;
 import java.io.UnsupportedEncodingException;
-import java.io.Writer;
+
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
+import org.omegat.util.OStrings;
 
 /**
  * Filter to support Java Resource Bundles - the files that are used to I18ze
@@ -47,7 +47,7 @@ public class ResourceBundleFilter extends AbstractFilter
 	
     public String getFileFormatName()
     {
-        return "Java(TM) Resource Bundles";
+        return OStrings.getString("RBFILTER_FILTER_NAME");
     }
     
     public boolean isSourceEncodingVariable()
@@ -64,7 +64,8 @@ public class ResourceBundleFilter extends AbstractFilter
     {
         return new Instance[] 
             { 
-                new Instance("*.properties", ENCODING_AUTO, ENCODING_AUTO, "${nameonly}_${targetlanguage}.${extension}")
+                new Instance("*.properties", ENCODING_AUTO, ENCODING_AUTO,      // NOI18N
+                        TFP_NAMEONLY+"_"+TFP_TARGETLOCALE+"."+TFP_EXTENSION)           // NOI18N
             };
     }
 	
@@ -73,10 +74,11 @@ public class ResourceBundleFilter extends AbstractFilter
      * <p>
 	 * NOTE: resource bundles use always ISO-8859-1 encoding.
 	 */
-    public Reader createReader(File infile, String encoding) 
+    public BufferedReader createReader(File infile, String encoding) 
             throws UnsupportedEncodingException, IOException
 	{
-		return new InputStreamReader(new FileInputStream(infile), "ISO-8859-1");		// NOI18N
+		return new BufferedReader(
+                new InputStreamReader(new FileInputStream(infile), "ISO-8859-1")); // NOI18N
 	}
     
 	/**
@@ -88,11 +90,12 @@ public class ResourceBundleFilter extends AbstractFilter
 	 *       the name of original one.
 	 *       e.g. "Bundle.properties" -> Russian = "Bundle_ru.properties"
 	 */
-    public Writer createWriter(File outfile, String encoding) 
+    public BufferedWriter createWriter(File outfile, String encoding) 
             throws UnsupportedEncodingException, IOException
     {
 		// resource bundles use ASCII encoding
-        return new OutputStreamWriter(new FileOutputStream(outfile), "ISO-8859-1");     // NOI18N
+        return new BufferedWriter(
+                new OutputStreamWriter(new FileOutputStream(outfile), "ISO-8859-1")); // NOI18N
     }
     
 	/**
@@ -184,11 +187,11 @@ public class ResourceBundleFilter extends AbstractFilter
 	/**
 	 * Doing the processing of the file...
 	 */
-    public void processFile(Reader infile, Writer outfile) throws IOException
+    public void processFile(BufferedReader reader, BufferedWriter outfile) 
+            throws IOException
 	{
 		String str;
 		boolean noi18n=false;
-        BufferedReader reader = new BufferedReader(infile);
 		while( (str=getNextLine(reader))!=null ) 
 		{
 			String trimmed = str.trim();

@@ -1,23 +1,23 @@
 /**************************************************************************
- * OmegaT - Java based Computer Assisted Translation (CAT) tool
- * Copyright (C) 2002-2004  Keith Godfrey et al
- * keithgodfrey@users.sourceforge.net
- * 907.223.2039
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- **************************************************************************/
+ OmegaT - Java based Computer Assisted Translation (CAT) tool
+ Copyright (C) 2002-2005  Keith Godfrey et al
+                          keithgodfrey@users.sourceforge.net
+                          907.223.2039
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+**************************************************************************/
 
 package org.omegat.core.glossary;
 
@@ -25,11 +25,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +35,7 @@ import java.util.regex.Pattern;
 
 import org.omegat.core.StringEntry;
 import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
 
 /**
  * Class that loads glossary files and adds glossary entries 
@@ -77,7 +76,7 @@ public class GlossaryManager
 			for (int i=0; i<fileList.length; i++)
 			{
 				String fname = folder.getAbsolutePath() + File.separator + fileList[i];
-				System.out.println(OStrings.getString("CT_LOADING_GLOSSARY") + fname);
+				StaticUtils.log(OStrings.getString("CT_LOADING_GLOSSARY") + fname);
                 String fname_lower=fname.toLowerCase();
                 // ignoring files with unrecognized extensions - http://sf.net/tracker/index.php?func=detail&aid=1088247&group_id=68187&atid=520347
                 if( fname_lower.endsWith(EXT_DEF_ENC) || fname_lower.endsWith(EXT_UTF8_ENC) )
@@ -100,10 +99,10 @@ public class GlossaryManager
             throws FileNotFoundException, UnsupportedEncodingException, IOException
     {
         String fname_lower = file.getName().toLowerCase();
-        Reader reader = null;
+        InputStreamReader reader = null;
         if( fname_lower.endsWith(EXT_DEF_ENC) )
         {
-            reader = new FileReader(file);
+            reader = new InputStreamReader(new FileInputStream(file));
         }
         else if( fname_lower.endsWith(EXT_UTF8_ENC) )
         {
@@ -119,7 +118,7 @@ public class GlossaryManager
 				continue;
             
             // divide lines on tabs
-            String tokens[] = s.split("\t");
+            String tokens[] = s.split("\t");                                    // NOI18N
 			// check token list to see if it has a valid string
             if( tokens.length<2 || tokens[0].length()==0 )
                 continue;
@@ -155,7 +154,7 @@ public class GlossaryManager
 		{
 			GlossaryEntry glosEntry = (GlossaryEntry)glossaryEntries.get(i);
             String glosStrLow = glosEntry.getSrcText().toLowerCase();
-            Pattern pattern = Pattern.compile("\\b"+glosStrLow+"\\b");
+            Pattern pattern = Pattern.compile("\\b"+glosStrLow+"\\b");          // NOI18N
             
             for(int j=0; j<strEntryList.size(); j++)
             {

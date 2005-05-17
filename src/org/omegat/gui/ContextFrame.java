@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -31,6 +31,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.*;
+import org.openide.awt.Mnemonics;
 
 /**
  * A frame to display the context of a segment being currently translated.
@@ -90,7 +91,7 @@ class ContextFrame extends JFrame
 
 	private void updateUIText()
 	{
-		m_closeButton.setText(OStrings.CF_BUTTON_CLOSE);
+		Mnemonics.setLocalizedText(m_closeButton, OStrings.CF_BUTTON_CLOSE);
 		if (m_srcLang)
 			m_searchResults = OStrings.CF_SEARCH_RESULTS_SRC;
 		else

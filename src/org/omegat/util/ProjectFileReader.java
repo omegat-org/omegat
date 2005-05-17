@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -119,7 +119,7 @@ public class ProjectFileReader
 					break;
 				blk = (XMLBlock) lst.get(i);
 				if (blk != null)
-					m_srcLang = blk.getText();
+					m_sourceLocale = blk.getText();
 			}
 			else if (blk.getTagName().equals("target_lang"))					// NOI18N
 			{
@@ -127,7 +127,7 @@ public class ProjectFileReader
 					break;
 				blk = (XMLBlock) lst.get(i);
 				if (blk != null)
-					m_locLang = blk.getText();
+					m_targetLocale = blk.getText();
 			}
 		}
     }
@@ -184,8 +184,8 @@ public class ProjectFileReader
 		str += "    <target_dir>" + target + "</target_dir>\n";					// NOI18N
 		str += "    <tm_dir>" + tm + "</tm_dir>\n";								// NOI18N
 		str += "    <glossary_dir>" + glossary + "</glossary_dir>\n";			// NOI18N
-		str += "    <source_lang>" + m_srcLang + "</source_lang>\n";			// NOI18N
-		str += "    <target_lang>" + m_locLang + "</target_lang>\n";			// NOI18N
+		str += "    <source_lang>" + m_sourceLocale + "</source_lang>\n";			// NOI18N
+		str += "    <target_lang>" + m_targetLocale + "</target_lang>\n";			// NOI18N
 		str += "  </project>\n";												// NOI18N
 		str += "</omegat>\n";													// NOI18N
 
@@ -199,8 +199,8 @@ public class ProjectFileReader
 		m_source = "";															// NOI18N
 		m_tm = "";																// NOI18N
 		m_glossary = "";														// NOI18N
-		m_srcLang = "";															// NOI18N
-		m_locLang = "";															// NOI18N
+		m_sourceLocale = "";															// NOI18N
+		m_targetLocale = "";															// NOI18N
 		m_root = "";															// NOI18N
 	}
 	
@@ -209,23 +209,23 @@ public class ProjectFileReader
 	public void	setTM(String x)			{ m_tm = x;			}
 	public void	setGlossary(String x)	{ m_glossary = x;	}
 
-	public void setSourceLang(String x)	{ m_srcLang = x;	}
-	public void setTargetLang(String x)	{ m_locLang = x;	}
+	public void setSourceLang(String x)	{ m_sourceLocale = x;	}
+	public void setTargetLang(String x)	{ m_targetLocale = x;	}
 
 	public String getTarget()		{ return m_target;		}
 	public String getSource()		{ return m_source;		}
 	public String getTM()			{ return m_tm;			}
 	public String getGlossary()		{ return m_glossary;	}
-	public String getSourceLang()	{ return m_srcLang;		}
-	public String getTargetLang()	{ return m_locLang;		}
+	public String getSourceLang()	{ return m_sourceLocale;		}
+	public String getTargetLang()	{ return m_targetLocale;		}
 	
 	private XMLStreamReader		m_reader;
 	private String		m_target;
 	private String		m_source;
 	private String		m_tm;
 	private String		m_glossary;
-	private String		m_locLang;
-	private String		m_srcLang;
+	private String		m_targetLocale;
+	private String		m_sourceLocale;
 
 	private String		m_root;
 

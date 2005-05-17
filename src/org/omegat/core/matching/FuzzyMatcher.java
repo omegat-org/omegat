@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -161,7 +161,7 @@ public class FuzzyMatcher
 		int tmtotal = tmstrings.size();
 		int total = strings.size();
 		
-        statusTemplate = OStrings.CT_FUZZY_X_OF_Y + " (" + tmxname + ")";
+        statusTemplate = OStrings.CT_FUZZY_X_OF_Y + " (" + tmxname + ")";       // NOI18N
 		updateStatus(0, tmtotal);
 		
 		for(int i=0; i<tmtotal; i++)

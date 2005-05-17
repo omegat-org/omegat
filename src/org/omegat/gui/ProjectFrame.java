@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -27,7 +27,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import org.openide.awt.Mnemonics;
 
 /**
  * A frame for project
@@ -67,6 +69,18 @@ public class ProjectFrame extends JFrame
 
 		setSize(500, 400);
 		m_editorPane.addHyperlinkListener(new HListener(m_parent, true));
+        
+        //  Handle escape key to close the window
+        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
+        Action escapeAction = new AbstractAction()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                setVisible(false);
+            }
+        };
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);
 
 		updateUIText();
 	}
@@ -80,7 +94,7 @@ public class ProjectFrame extends JFrame
 	
 	private void updateUIText()
 	{
-		m_closeButton.setText(OStrings.PF_BUTTON_CLOSE);
+		Mnemonics.setLocalizedText(m_closeButton, OStrings.PF_BUTTON_CLOSE);
 		setTitle(OStrings.PF_WINDOW_TITLE);
 
 		buildDisplay();

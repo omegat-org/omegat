@@ -1,36 +1,33 @@
-/*
- * FiltersBean.java
- *
- * Created on 2 Февраль 2005 г., 15:41
- */
+/**************************************************************************
+ OmegaT - Java based Computer Assisted Translation (CAT) tool
+ Copyright (C) 2002-2005  Keith Godfrey et al
+                          keithgodfrey@users.sourceforge.net
+                          907.223.2039
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+**************************************************************************/
 
 package org.omegat.filters2.master;
 
-import java.beans.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.Serializable;
-import java.io.Writer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import org.omegat.filters2.text.TextFilter;
-import org.omegat.filters2.text.bundles.ResourceBundleFilter;
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.DocumentType;
+
+import org.omegat.util.OStrings;
 
 
 /**
@@ -53,25 +50,71 @@ public class Filters extends AbstractTableModel implements Serializable
     {
     }
     
+    /** Holds the list of available filters. */
     private ArrayList filters = new ArrayList();
+    
+    /** 
+     * Returns the number of filters. 
+     */
+    public int filtersSize()
+    {
+        return filters.size();
+    }
+    
+    /**
+     * Returns all the filters as an array.
+     */
     public OneFilter[] getFilter()
     {
         return (OneFilter[])filters.toArray(new OneFilter[0]);
     }
+    /**
+     * Sets all filters from the array.
+     */
     public void setFilter(OneFilter[] filter)
     {
         filters = new ArrayList(Arrays.asList(filter));
     }
     
+    /**
+     * Returns a filter by index.
+     */
     public OneFilter getFilter(int index)
     {
         return (OneFilter)filters.get(index);
     }
+    /**
+     * Sets a filter by index.
+     */
     public void setFilter(int index, OneFilter filter)
     {
         while( index>=filters.size() )
             filters.add(null);
         filters.set(index, filter);
+    }
+    
+    /**
+     * Adds one filter to the list of filters.
+     * <p>
+     * Checks if there's already such a filter installed
+     * (by filter's class name).
+     */
+    public void addFilter(OneFilter filter)
+    {
+        for(int i=0; i<filters.size(); i++)
+            if(getFilter(i).getClassName().equals(filter.getClassName()))
+                return;
+        filters.add(filter);
+    }
+    /**
+     * Removes one filter from the list of filters.
+     * <p>
+     * It might happen if we loaded the filter from a plugin,
+     * and the plugin is no longer available.
+     */
+    public void removeFilter(int index)
+    {
+        filters.remove(index);
     }
 
     //////////////////////////////////////////////////////////////////////////
@@ -88,9 +131,9 @@ public class Filters extends AbstractTableModel implements Serializable
         switch( columnIndex )
         {
             case 0:
-                return "File Format";
+                return OStrings.getString("FILTERS_FILE_FORMAT");
             case 1:
-                return "On";
+                return OStrings.getString("FILTERS_ON");
         }
         return null;
     }
@@ -134,7 +177,8 @@ public class Filters extends AbstractTableModel implements Serializable
                 filter.setOn(((Boolean)aValue).booleanValue());
                 break;
             default:
-                throw new IllegalArgumentException("Column Index must be equal to 1");
+                throw new IllegalArgumentException(
+                        OStrings.getString("FILTERS_ERROR_COLUMN_INDEX_NOT_1"));
         }
     }
     

@@ -19,28 +19,32 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.filters2;
+package org.omegat.filters2.xml.xhtml;
 
-import java.lang.reflect.InvocationTargetException;
+import org.omegat.filters2.html.HTMLFilter;
 
 /**
- * TranslationException is a checked exception that may be thrown
- * by filter while parsing/writing out the file.
+ * Entity filter for XHTML.
  * <p>
- * Note that a filter may also throw IOException in case of any I/O errors.
+ * Does XML Entity -> Symbol conversion on source file read
+ * and Symbol -> XML Entity conversion on translation write.
  *
- * @author Maxym Mykhalchuk
+ * @author Keith Godfrey
  */
-public class TranslationException extends Exception
+public class XHTMLEntityFilter
 {
     /**
-     * Constructs an instance of <code>TranslationException</code> 
-     * with the specified detail message.
-     *
-     * @param msg the detail message.
+     * Converts plaintext symbol to XML entity.
      */
-    public TranslationException(String msg)
+	public String convertToEntity(char c)
     {
-        super(msg);
+        return HTMLFilter.convertToEntity(c);
+    }
+    /**
+     * Converts XML entity to plaintext symbol.
+     */
+	public char convertToSymbol(String escapeSequence)
+    {
+        return HTMLFilter.convertToChar(escapeSequence);
     }
 }

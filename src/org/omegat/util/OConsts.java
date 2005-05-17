@@ -1,23 +1,23 @@
 /**************************************************************************
- * OmegaT - Java based Computer Assisted Translation (CAT) tool
- * Copyright (C) 2002-2004  Keith Godfrey et al
- * keithgodfrey@users.sourceforge.net
- * 907.223.2039
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- **************************************************************************/
+ OmegaT - Java based Computer Assisted Translation (CAT) tool
+ Copyright (C) 2002-2005  Keith Godfrey et al
+                          keithgodfrey@users.sourceforge.net
+                          907.223.2039
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+**************************************************************************/
 
 package org.omegat.util;
 
@@ -65,8 +65,8 @@ public class OConsts
 	public static final double FUZZY_MATCH_THRESHOLD = 0.3;
 	
 	// preference names
-	public static final String PREF_SRCLANG		= "source_lang";					// NOI18N
-	public static final String PREF_LOCLANG		= "target_lang";					// NOI18N
+	public static final String PREF_SOURCELOCALE		= "source_lang";					// NOI18N
+	public static final String PREF_TARGETLOCALE		= "target_lang";					// NOI18N
 	public static final String PREF_CUR_DIR		= "current_folder";					// NOI18N
 	public static final String PREF_SRC_DIR		= "source_folder";					// NOI18N
 	public static final String PREF_LOC_DIR		= "target_folder";					// NOI18N
@@ -81,17 +81,16 @@ public class OConsts
 	public static final String PREF_MATCH_H		= "match_height";					// NOI18N
 	public static final String PREF_MATCH_X		= "match_x";						// NOI18N
 	public static final String PREF_MATCH_Y		= "match_y";						// NOI18N
+    
 	public static final String PREF_MNEMONIC	= "mnemonics";						// NOI18N
 	public static final String PREF_TAB			= "tab_advance";					// NOI18N
-	
-	public static final String PREF_NUM_FILE_MAPPINGS	= "num_file_mappings";		// NOI18N
-	public static final String PREF_FILE_MAPPING_N		= "file_mapping";			// NOI18N
-	
 	public static final String PREF_SEARCH_DIR	= "search_dir";						// NOI18N
+    
+    public static final String PREF_SENTENCE_SEGMENTING = "sentence_segmenting";    // NOI18N
 	
 	public static final String SW_DIR_CB_CHECKED_CMD	= "dir_ck";					// NOI18N
 	
-	public static final int		ST_MAX_SEARCH_RESULTS	= 100;
+	public static final int		ST_MAX_SEARCH_RESULTS	= 1000;
 	
 	public static final String TF_SRC_FONT_NAME		= "source_font";				// NOI18N
 	public static final String TF_SRC_FONT_SIZE		= "source_font_size";			// NOI18N
@@ -104,5 +103,11 @@ public class OConsts
 	public static final int MAX_NEAR_STRINGS	= 5;
 	/** Number of fuzzy matches to store */
 	public static final int MAX_STORED_NEAR_STRINGS	= 50;
+    
+    /** 
+     * The limit of bytes that AbstractFilter.isFileSupported may read. 
+     * 8k (8192 bytes) for now, as this is the default buffer size for BufferedReader.
+     */
+    public static final int READ_AHEAD_LIMIT = 8192;
 	
 }

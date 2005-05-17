@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -24,7 +24,6 @@ package org.omegat.core.threads;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.io.OutputStreamWriter;
@@ -32,7 +31,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 
 import org.omegat.core.LegacyTM;
 import org.omegat.core.StringEntry;
@@ -42,7 +40,6 @@ import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.xml.XMLStreamReader;
 import org.omegat.gui.ProjectFrame;
 import org.omegat.gui.ProjectProperties;
 import org.omegat.gui.TransFrame;
@@ -274,11 +271,14 @@ public class CommandThread extends Thread
             // evaluate strings for fuzzy matching 
 			buildNearList();
             
+            /*
+             temporary removed
 			evtStr = OStrings.CT_LOADING_WORDCOUNT;
 			MessageRelay.uiMessageSetMessageText(tf, evtStr);
 			buildWordCounts();
 			MessageRelay.uiMessageFuzzyInfo(tf);
 			MessageRelay.uiMessageSetMessageText(tf, "");  // NOI18N
+             */
 
 			// enable normal saves
 			m_saveCount = 2;
@@ -318,8 +318,8 @@ public class CommandThread extends Thread
 		StringEntry se;
 
 		// we got this far, so assume lang codes are proper
-		String srcLang = getPreference(OConsts.PREF_SRCLANG);
-		String locLang = getPreference(OConsts.PREF_LOCLANG);
+		String sourceLocale = getPreference(OConsts.PREF_SOURCELOCALE);
+		String targetLocale = getPreference(OConsts.PREF_TARGETLOCALE);
 
 		FileOutputStream fos = new FileOutputStream(filename);
 		OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8"); // NOI18N
@@ -334,7 +334,7 @@ public class CommandThread extends Thread
 		str += "    segtype=\"paragraph\"\n";				 // NOI18N
         str += "    o-tmf=\"OmegaT TMX\"\n";                 // NOI18N
 		str += "    adminlang=\"EN-US\"\n";					 // NOI18N
-		str += "    srclang=\"" + srcLang + "\"\n";			 // NOI18N
+		str += "    srclang=\"" + sourceLocale + "\"\n";			 // NOI18N
 		str += "    datatype=\"plaintext\"\n";				 // NOI18N
 		str += "  >\n";										 // NOI18N
 		str += "  </header>\n";								 // NOI18N
@@ -344,15 +344,15 @@ public class CommandThread extends Thread
 		for (i=0; i<m_strEntryList.size(); i++)
 		{
 			se = (StringEntry) m_strEntryList.get(i);
-			s = XMLStreamReader.makeValidXML(se.getSrcText());
-			t = XMLStreamReader.makeValidXML(se.getTrans());
+			s = StaticUtils.makeValidXML(se.getSrcText());
+			t = StaticUtils.makeValidXML(se.getTrans());
 			if (t.equals(""))								 // NOI18N
 				continue;									 // NOI18N
 			str =  "    <tu>\n";							 // NOI18N
-			str += "      <tuv lang=\"" + srcLang + "\">\n"; // NOI18N
+			str += "      <tuv lang=\"" + sourceLocale + "\">\n"; // NOI18N
 			str += "        <seg>" + s + "</seg>\n";		 // NOI18N
 			str += "      </tuv>\n";						 // NOI18N
-			str += "      <tuv lang=\"" + locLang + "\">\n"; // NOI18N
+			str += "      <tuv lang=\"" + targetLocale + "\">\n"; // NOI18N
 			str += "        <seg>" + t + "</seg>\n";		 // NOI18N
 			str += "      </tuv>\n";						 // NOI18N
 			str += "    </tu>\n";							 // NOI18N
@@ -362,15 +362,15 @@ public class CommandThread extends Thread
 		for (i=0; i<m_orphanedList.size(); i++)
 		{
 			transMem = (TransMemory) m_orphanedList.get(i);
-			s = XMLStreamReader.makeValidXML(transMem.source);
-			t = XMLStreamReader.makeValidXML(transMem.target);
+			s = StaticUtils.makeValidXML(transMem.source);
+			t = StaticUtils.makeValidXML(transMem.target);
 			if (t.equals(""))								 // NOI18N
 				continue;		
 			str =  "    <tu>\n";							 // NOI18N
-			str += "      <tuv lang=\"" + srcLang + "\">\n"; // NOI18N
+			str += "      <tuv lang=\"" + sourceLocale + "\">\n"; // NOI18N
 			str += "        <seg>" + s + "</seg>\n";		 // NOI18N
 			str += "      </tuv>\n";						 // NOI18N
-			str += "      <tuv lang=\"" + locLang + "\">\n"; // NOI18N
+			str += "      <tuv lang=\"" + targetLocale + "\">\n"; // NOI18N
 			str += "        <seg>" + t + "</seg>\n";		 // NOI18N
 			str += "      </tuv>\n";						 // NOI18N
 			str += "    </tu>\n";							 // NOI18N
@@ -583,8 +583,8 @@ public class CommandThread extends Thread
 		{
 			// entry doesn't exist yet - create and store it
 			strEntry = new StringEntry(srcText);
-			m_strEntryHash.put(srcText, strEntry);
-			m_strEntryList.add(strEntry);
+            m_strEntryList.add(strEntry);
+            m_strEntryHash.put(srcText, strEntry);
 		}
 
 		srcTextEntry.set(strEntry, m_curFile, m_srcTextEntryArray.size());
@@ -697,7 +697,7 @@ public class CommandThread extends Thread
 			proj = new File(m_config.getProjectInternal() + OConsts.STATUS_EXTENSION);
 			if (!proj.exists())
 			{ 
-				System.out.println(OStrings.getString("CT_ERROR_CANNOT_FIND_TMX")+ 
+				StaticUtils.log(OStrings.getString("CT_ERROR_CANNOT_FIND_TMX")+ 
 						"'" + proj + "'"); // NOI18N
 				// nothing to do here
 				return;
@@ -762,16 +762,21 @@ public class CommandThread extends Thread
             // feed file name to project window
 			String filepath = filename.substring(
 						m_config.getSourceRoot().length());
-			m_projWin.addFile(filepath, numEntries());
-			m_transFrame.setMessageText(OStrings.CT_LOAD_FILE_MX + filepath);
+			
 
-			m_curFile = new ProjectFileData();
-			m_curFile.name = filename;
-			m_curFile.firstEntry = m_srcTextEntryArray.size();
+            if( fm.isTranslatable(filename) )
+            {
+                m_transFrame.setMessageText(OStrings.CT_LOAD_FILE_MX + filepath);
+                
+    			m_curFile = new ProjectFileData();
+        		m_curFile.name = filename;
+            	m_curFile.firstEntry = m_srcTextEntryArray.size();
+                m_projWin.addFile(filepath, numEntries());
+                
+                fm.loadFile(filename);
             
-            fm.loadFile(filename);
-            
-			m_curFile.lastEntry = m_srcTextEntryArray.size()-1;
+    			m_curFile.lastEntry = m_srcTextEntryArray.size()-1;
+            }
 		}
 		m_transFrame.setMessageText(OStrings.getString("CT_LOAD_SRC_COMPLETE"));
 		m_curFile = null;
@@ -921,12 +926,14 @@ public class CommandThread extends Thread
 	{
 		if (m_transFrame == null)
 		{
-			System.out.println(OStrings.LD_ERROR + " " + msg); // NOI18N
+			StaticUtils.log(OStrings.LD_ERROR + " " + msg); // NOI18N
 		}
 		else
 			MessageRelay.uiMessageDisplayError(m_transFrame, msg, e);
 	}
 
+    /*
+     temporary removed
 	private void buildWordCounts()
 	{
 		ListIterator it;
@@ -990,22 +997,56 @@ public class CommandThread extends Thread
             }
 		}
 	}
+     */
 
 	////////////////////////////////////////////////////////////////
 	// preference interface
 	
-	// access in manager is synchronized, so out of sync requests are OK
-	// make it available to external objects upon request
-	public PreferenceManager getPrefManager()	{ return m_prefManager; }
-
-	public String getPreference(String str)
+    /**
+     * Returns the value of some preference.
+     * <p>
+     * Access in manager is synchronized, so out of sync requests are OK.
+     *
+     * @param key preference name, usually OConsts.PREF_...
+     * @return    preference value as a string
+     */
+	public String getPreference(String key)
 	{
-		return m_prefManager.getPreference(str);
+		return m_prefManager.getPreference(key);
+	}
+    /**
+     * Returns the boolean value of some preference.
+     * <p>
+     * Returns true if the preference exists and is equal to "true",
+     * false otherwise (no such preference, or it's equal to "false", etc).
+     *
+     * @param key preference name, usually OConsts.PREF_...
+     * @return    preference value as a boolean
+     */
+	public boolean isPreference(String key)
+	{
+		return "true".equals(getPreference(key));
 	}
 
+    /**
+     * Sets the value of some preference.
+     *
+     * @param name  preference name, usually OConsts.PREF_...
+     * @param value preference value as a string
+     */
 	public void setPreference(String name, String value)
 	{
 		m_prefManager.setPreference(name, value);
+	}
+    /**
+     * Sets the boolean value of some preference.
+     *
+     * @param name  preference name, usually OConsts.PREF_...
+     * @param value preference value as a boolean
+     */
+	public void setPreference(String name, boolean boolvalue)
+	{
+		setPreference(name, String.valueOf(boolvalue));
 	}
 
 	public void savePreferences()

@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -28,8 +28,11 @@ import java.util.Set;
 /**
  * Class to test if smth is Chinese/Japanese/Korean.
  * CJK language family is different because it has no spaces between words.
+ * <p>
+ * Our thanks go to Jean-Christophe Helary for bringing this issue up
+ * and finding out what Unicode Blocks are used for CJK languages.
  *
- * @author  Maxym Mykhalchuk
+ * @author Maxym Mykhalchuk
  */
 class CJKUtils {
 	
@@ -37,14 +40,30 @@ class CJKUtils {
     private final static Set cjkBlocks = new HashSet();
     static 
 	{
-        cjkBlocks.add(Character.UnicodeBlock.KATAKANA);
+        // For Japanese:
         cjkBlocks.add(Character.UnicodeBlock.HIRAGANA);
+        cjkBlocks.add(Character.UnicodeBlock.KATAKANA);
+        cjkBlocks.add(Character.UnicodeBlock.KANBUN);
+
+        // For Chinese:
+        cjkBlocks.add(Character.UnicodeBlock.BOPOMOFO);
+        cjkBlocks.add(Character.UnicodeBlock.BOPOMOFO_EXTENDED);
+        cjkBlocks.add(Character.UnicodeBlock.KANGXI_RADICALS);
+
+        // For Korean:
+        cjkBlocks.add(Character.UnicodeBlock.HANGUL_COMPATIBILITY_JAMO);
+        cjkBlocks.add(Character.UnicodeBlock.HANGUL_JAMO);
+        cjkBlocks.add(Character.UnicodeBlock.HANGUL_SYLLABLES);
+
+        // For the CJK set:
+        cjkBlocks.add(Character.UnicodeBlock.CJK_COMPATIBILITY);
+        cjkBlocks.add(Character.UnicodeBlock.CJK_COMPATIBILITY_FORMS);
+        cjkBlocks.add(Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS);
+        cjkBlocks.add(Character.UnicodeBlock.CJK_RADICALS_SUPPLEMENT);
+        cjkBlocks.add(Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION);
         cjkBlocks.add(Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS);
         cjkBlocks.add(Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A);
-		// need more:
-		// Chinese Traditional
-		// Chinese Simplified
-		// Korean
+        cjkBlocks.add(Character.UnicodeBlock.ENCLOSED_CJK_LETTERS_AND_MONTHS);
     }
 
 	/**

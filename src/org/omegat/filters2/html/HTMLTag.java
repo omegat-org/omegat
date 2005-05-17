@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -167,7 +167,7 @@ public class HTMLTag
 	// case insensitive compare
 	public boolean isPreTag()
 	{
-		return m_name.isEqualIgnoreCase("pre");
+		return m_name.isEqualIgnoreCase("pre");                                 // NOI18N
 	}
 
 	public String name()	

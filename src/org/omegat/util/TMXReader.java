@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -174,7 +174,7 @@ public class TMXReader
 				else if (srcPos == -1)
 				{
 					// source language segment not specified 
-					System.out.println( MessageFormat.format(OStrings.getString("TMXR_WARNING_UNABLE_TO_LOCATE_SRC_LANG"), new Object[]{new Integer(seg)}) );
+					StaticUtils.log( MessageFormat.format(OStrings.getString("TMXR_WARNING_UNABLE_TO_LOCATE_SRC_LANG"), new Object[]{new Integer(seg)}) );
 					continue;
 				}
 
@@ -195,7 +195,7 @@ public class TMXReader
 			}
 			catch (IndexOutOfBoundsException e)
 			{
-				System.out.println( MessageFormat.format(OStrings.getString("TMXR_WARNING_SKIPPING_SEGMENT"), new Object[]{new Integer(seg), filename}) );
+				StaticUtils.log( MessageFormat.format(OStrings.getString("TMXR_WARNING_SKIPPING_SEGMENT"), new Object[]{new Integer(seg), filename}) );
 				continue;
 			}
 

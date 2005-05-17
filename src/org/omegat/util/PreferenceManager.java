@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -26,11 +26,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import org.omegat.filters2.TranslationException;
 
+import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.xml.XMLBlock;
 import org.omegat.filters2.xml.XMLStreamReader;
 
@@ -109,7 +108,7 @@ public class PreferenceManager
 		}
 		catch (IOException e)
 		{
-			System.out.println(OStrings.getString("PM_ERROR_SAVE") + e);
+			StaticUtils.log(OStrings.getString("PM_ERROR_SAVE") + e);
 		}
 	}
 
@@ -182,21 +181,22 @@ public class PreferenceManager
 			// error loading preference file - keep whatever was
 			//  loaded then return gracefully to calling function
 			// print an error to the console as an FYI
-			System.out.println(OStrings.getString("PM_WARNING_PARSEERROR_ON_READ") + te);
-            te.printStackTrace();
+			StaticUtils.log(OStrings.getString("PM_WARNING_PARSEERROR_ON_READ") + te);
+            te.printStackTrace(StaticUtils.getLogStream());
 		}
 		catch (IndexOutOfBoundsException e3)
 		{
 			// error loading preference file - keep whatever was
 			//  loaded then return gracefully to calling function
 			// print an error to the console as an FYI
-			System.out.println(OStrings.getString("PM_WARNING_PARSEERROR_ON_READ") + e3);
-            e3.printStackTrace();
+			StaticUtils.log(OStrings.getString("PM_WARNING_PARSEERROR_ON_READ") + e3);
+            e3.printStackTrace(StaticUtils.getLogStream());
 		}
 		catch (UnsupportedEncodingException e3)
 		{
 			// unrecognized file - forget about it
-            e3.printStackTrace();
+            StaticUtils.log("Unrecognized file's encoding"); // NOI18N
+            e3.printStackTrace(StaticUtils.getLogStream());
 		}
 		catch (IOException e4)
 		{
@@ -222,7 +222,7 @@ public class PreferenceManager
 		for (int i=0; i<m_nameList.size(); i++)
 		{
 			name = (String) m_nameList.get(i);
-			val = XMLStreamReader.makeValidXML((String) m_valList.get(i));
+			val = StaticUtils.makeValidXML((String) m_valList.get(i));
 			if (val.equals(""))													// NOI18N
 				continue;	// don't write blank preferences
 			str = "    <" + name + ">";											// NOI18N

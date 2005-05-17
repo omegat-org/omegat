@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -21,12 +21,12 @@
 
 package org.omegat;
 
-import org.omegat.gui.TransFrame;
-import org.omegat.util.OConsts;
-import org.omegat.util.PreferenceManager;
+import javax.swing.UIManager;
 
-import javax.swing.*;
+import org.omegat.gui.TransFrame;
+import org.omegat.util.PreferenceManager;
 import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
 
 /**
  * The main OmegaT class, used to launch the programm.
@@ -44,7 +44,7 @@ public class Main
 		catch (Exception e) 
 		{
             // do nothing
-			System.out.println(OStrings.getString("MAIN_ERROR_CANT_INIT_OSLF"));
+			StaticUtils.log(OStrings.getString("MAIN_ERROR_CANT_INIT_OSLF"));
 		}
 
 		// since TransFrame now requires preferences for initialization,

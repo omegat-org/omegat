@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -34,6 +34,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import org.openide.awt.Mnemonics;
 
 /**
  * Frame that displays help HTML files.
@@ -207,9 +208,9 @@ public class HelpFrame extends JFrame
 	
 	private void updateUIText()
 	{
-		m_closeButton.setText(OStrings.HF_BUTTON_CLOSE);
-		m_homeButton.setText(OStrings.HF_BUTTON_HOME);
-		m_backButton.setText(OStrings.HF_BUTTON_BACK);
+		Mnemonics.setLocalizedText(m_closeButton, OStrings.HF_BUTTON_CLOSE);
+		Mnemonics.setLocalizedText(m_homeButton, OStrings.HF_BUTTON_HOME);
+		Mnemonics.setLocalizedText(m_backButton, OStrings.HF_BUTTON_BACK);
 		setTitle(OStrings.HF_WINDOW_TITLE);
 	}
 	
@@ -222,13 +223,13 @@ public class HelpFrame extends JFrame
 	
 	private String detectLanguage()
 	{
-		String lang = System.getProperty("user.language", "en");
+		String lang = System.getProperty("user.language", "en");                // NOI18N
 		File docsFolder = new File(System.getProperty("user.dir")				// NOI18N
 				+ File.separator + OConsts.HELP_DIR + File.separator + lang);
 		if( docsFolder.exists() )
 			return lang;
 		else
-			return "en";
+			return "en";                                                        // NOI18N
 	}
 
 	private JEditorPane m_helpPane;

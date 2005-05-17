@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -21,12 +21,11 @@
 
 package org.omegat.util;
 
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.List;
-import org.omegat.core.threads.CommandThread;
-import org.omegat.gui.messages.MessageRelay;
-
-import java.awt.*;
-import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -232,7 +231,6 @@ public class StaticUtils
 		return graphics.getAvailableFontFamilyNames();
 	}
     
-    
     /**
      * Tests, whether one list of tokens is fully contained (is-a subset)
      * in other list of tokens
@@ -243,6 +241,96 @@ public class StaticUtils
             if( !maybeSuperset.contains(maybeSubset.get(i)) )
                 return false;
         return true;
+    }
+
+    /**
+     * Converts a single char into valid XML.
+     * Output stream must convert stream to UTF-8 when saving to disk.
+     */
+	public static String makeValidXML(char c)
+	{
+        switch( c )
+        {
+            //case '\'':
+            //    return "&apos;";	// NOI18N
+            case '&':
+                return "&amp;";	// NOI18N
+            case '>':
+                return "&gt;";	// NOI18N
+            case '<':
+                return "&lt;";	// NOI18N
+            case '"':
+                return "&quot;";	// NOI18N
+            default:
+                return "" + c;
+        }
+	}
+    
+    /**
+     * Converts a stream of plaintext into valid XML.
+     * Output stream must convert stream to UTF-8 when saving to disk.
+     */
+	public static String makeValidXML(String plaintext)
+	{
+		char c;
+		StringBuffer out = new StringBuffer();
+		for (int i=0; i<plaintext.length(); i++)
+		{
+			c = plaintext.charAt(i);
+			out.append(makeValidXML(c));
+		}
+		return out.toString();
+	}
+
+    /**
+     * Removes the log on start.
+     */
+    static
+    {
+        try
+        {
+            new File("log.txt").delete();
+        }
+        catch( Exception e )
+        {
+            // do nothing
+        }
+    }
+    
+    /**
+     * Returns a log stream.
+     */
+    public static PrintStream getLogStream()
+    {
+        try
+        {
+            return new PrintStream(new FileOutputStream("log.txt", true));
+        }
+        catch( Exception e )
+        {
+            // in case we cannot create a log file on dist,
+            // redirect to single out
+            return System.out;
+        }
+    }
+    
+    /**
+     * Logs what otherwise would go to System.out
+     */
+    public static void log(String s)
+    {
+        try
+        {
+            PrintStream fout = getLogStream();
+            fout.println(s);
+            fout.close();
+        }
+        catch( Exception e )
+        {
+            // doing nothing
+        }
+        
+        System.out.println(s);
     }
 
 }

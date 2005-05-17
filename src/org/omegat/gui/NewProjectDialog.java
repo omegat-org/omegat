@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -21,7 +21,9 @@
 
 package org.omegat.gui;
 
+import javax.swing.border.EmptyBorder;
 import org.omegat.core.threads.CommandThread;
+import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 
@@ -30,6 +32,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import javax.swing.border.Border;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import org.openide.awt.Mnemonics;
 
 /**
  * The dialog for creation of a new OmegaT project
@@ -40,39 +45,46 @@ class NewProjectDialog extends JDialog
 {
     private ProjectProperties projectProperties;
 
-    // msg: 0 for no message, 1 for bad project message
-    // 0=config; 1=badlang; 2=badproj
-    public NewProjectDialog(ProjectProperties projectProperties, JFrame par, String projFileName, int msg)
+    /**
+     * Creates a dialog to create a new project / edit folders of existing one.
+     * 
+     * @param foldersMissing if this is an existing project with some folders missing
+     */
+    public NewProjectDialog(ProjectProperties projectProperties, JFrame par, String projFileName, 
+            boolean foldersMissing)
     {
         super(par, true);
         this.projectProperties = projectProperties;
+        this.foldersMissing = foldersMissing;
         projectProperties.m_dialogOK = false;
 
         if (projFileName == null)
             projectProperties.reset();
-        m_message = msg;
 
         if (projFileName == null)
         {
-            projectProperties.setSrcLang(
-					CommandThread.core.getPreference(OConsts.PREF_SRCLANG) );
-            projectProperties.setLocLang(
-					CommandThread.core.getPreference(OConsts.PREF_LOCLANG));
-            if (projectProperties.getSrcLang().equals(""))						// NOI18N
-                projectProperties.setSrcLang("EN-US");							// NOI18N
-            if (projectProperties.getLocLang().equals(""))						// NOI18N
-                projectProperties.setLocLang("EN-UK");							// NOI18N
+            String sourceLocale = CommandThread.core.getPreference(OConsts.PREF_SOURCELOCALE);
+            if( !sourceLocale.equals(""))						                            // NOI18N
+                projectProperties.setSourceLanguage(sourceLocale);
+            
+            String targetLocale = CommandThread.core.getPreference(OConsts.PREF_TARGETLOCALE);
+            if( !targetLocale.equals("") )                                                // NOI18N
+                projectProperties.setTargetLanguage(targetLocale);
         }
 
         m_browseTarget = 0;
+        
+        Border emptyBorder = new EmptyBorder(2,0,2,0);
 
         m_messageLabel = new JLabel();
         Box bMes = Box.createHorizontalBox();
+        bMes.setBorder(emptyBorder);
         bMes.add(m_messageLabel);
         bMes.add(Box.createHorizontalGlue());
 
         m_srcRootLabel = new JLabel();
         Box bSrc = Box.createHorizontalBox();
+        bSrc.setBorder(emptyBorder);
         bSrc.add(m_srcRootLabel);
         bSrc.add(Box.createHorizontalGlue());
         m_srcBrowse = new JButton();
@@ -82,6 +94,7 @@ class NewProjectDialog extends JDialog
 
         m_locRootLabel = new JLabel();
         Box bLoc = Box.createHorizontalBox();
+        bLoc.setBorder(emptyBorder);
         bLoc.add(m_locRootLabel);
         bLoc.add(Box.createHorizontalGlue());
         m_locBrowse = new JButton();
@@ -91,6 +104,7 @@ class NewProjectDialog extends JDialog
 
         m_glosRootLabel = new JLabel();
         Box bGlos = Box.createHorizontalBox();
+        bGlos.setBorder(emptyBorder);
         bGlos.add(m_glosRootLabel);
         bGlos.add(Box.createHorizontalGlue());
         m_glosBrowse = new JButton();
@@ -100,6 +114,7 @@ class NewProjectDialog extends JDialog
 
         m_tmRootLabel = new JLabel();
         Box bTM = Box.createHorizontalBox();
+        bTM.setBorder(emptyBorder);
         bTM.add(m_tmRootLabel);
         bTM.add(Box.createHorizontalGlue());
         m_tmBrowse = new JButton();
@@ -107,24 +122,34 @@ class NewProjectDialog extends JDialog
         m_tmRootField = new JTextField();
         m_tmRootField.setEditable(false);
 
-        m_srcLangLabel = new JLabel();
+        m_sourceLocaleLabel = new JLabel();
         Box bSL = Box.createHorizontalBox();
-        bSL.add(m_srcLangLabel);
+        bSL.setBorder(emptyBorder);
+        bSL.add(m_sourceLocaleLabel);
         bSL.add(Box.createHorizontalGlue());
-        m_srcLangField = new JTextField();
-        m_srcLangField.setText(projectProperties.getSrcLang());
+        
+        m_sourceLocaleField = new JComboBox(Language.LANGUAGES);
+        if( m_sourceLocaleField.getMaximumRowCount()<20 )
+            m_sourceLocaleField.setMaximumRowCount(20);
+        m_sourceLocaleField.setEditable(true);
+        m_sourceLocaleField.setRenderer(new MyComboBoxRenderer());
+        m_sourceLocaleField.setSelectedItem(projectProperties.getSourceLanguage());
 
-        m_locLangLabel = new JLabel();
+        m_targetLocaleLabel = new JLabel();
         Box bLL = Box.createHorizontalBox();
-        bLL.add(m_locLangLabel);
+        bLL.setBorder(emptyBorder);
+        bLL.add(m_targetLocaleLabel);
         bLL.add(Box.createHorizontalGlue());
-        m_locLangField = new JTextField();
-        m_locLangField.setText(projectProperties.getLocLang());
-
-        m_okButton = new JButton();
-        m_cancelButton = new JButton();
-
+        
+        m_targetLocaleField = new JComboBox(Language.LANGUAGES);
+        if( m_targetLocaleField.getMaximumRowCount()<20 )
+            m_targetLocaleField.setMaximumRowCount(20);
+        m_targetLocaleField.setEditable(true);
+        m_targetLocaleField.setRenderer(new MyComboBoxRenderer());
+        m_targetLocaleField.setSelectedItem(projectProperties.getTargetLanguage());
+        
         Box b = Box.createVerticalBox();
+        b.setBorder(new EmptyBorder(5,5,5,5));
         b.add(bMes);
         b.add(bSrc);
         b.add(m_srcRootField);
@@ -135,17 +160,22 @@ class NewProjectDialog extends JDialog
         b.add(bTM);
         b.add(m_tmRootField);
         b.add(bSL);
-        b.add(m_srcLangField);
+        b.add(m_sourceLocaleField);
         b.add(bLL);
-        b.add(m_locLangField);
+        b.add(m_targetLocaleField);
         getContentPane().add(b, "North");										// NOI18N
-        Box b2 = Box.createHorizontalBox();
-        b2.add(Box.createHorizontalGlue());
-        b2.add(m_cancelButton);
-        b2.add(Box.createHorizontalStrut(5));
-        b2.add(m_okButton);
-        getContentPane().add(b2, "South");										// NOI18N
 
+        m_okButton = new JButton();
+        m_cancelButton = new JButton();
+        
+        Box b2 = Box.createHorizontalBox();
+        b2.setBorder(new EmptyBorder(5,5,5,5));
+        b2.add(Box.createHorizontalGlue());
+        b2.add(m_okButton);
+        b2.add(Box.createHorizontalStrut(5));
+        b2.add(m_cancelButton);
+        getContentPane().add(b2, "South");										// NOI18N
+        
         m_okButton.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -256,11 +286,37 @@ class NewProjectDialog extends JDialog
         m_locRootField.setText(projectProperties.getLocRoot());
         m_glosRootField.setText(projectProperties.getGlossaryRoot());
         m_tmRootField.setText(projectProperties.getTMRoot());
-        m_srcLangField.setText(projectProperties.getSrcLang());
-        m_locLangField.setText(projectProperties.getLocLang());
+        m_sourceLocaleField.setSelectedItem(projectProperties.getSourceLanguage());
+        m_targetLocaleField.setSelectedItem(projectProperties.getTargetLanguage());
 
-		setBounds(50,50, 550, 350);
+        if( foldersMissing )
+        {
+            File f = new File(m_srcRootField.getText());
+            if( !f.exists() || !f.isDirectory() ) 
+                m_srcRootField.setForeground(Color.RED);
+            
+            f = new File(m_locRootField.getText());
+            if( !f.exists() || !f.isDirectory() )
+                m_locRootField.setForeground(Color.RED);
+            
+            f = new File(m_glosRootField.getText());
+            if( !f.exists() || !f.isDirectory() )
+                m_glosRootField.setForeground(Color.RED);
+            
+            f = new File(m_tmRootField.getText());
+            if( !f.exists() || !f.isDirectory() )
+                m_tmRootField.setForeground(Color.RED);
+        }
+        
         updateUIText();
+        
+        pack();
+        
+        setSize(3*getWidth()/2, getHeight());
+        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension dialogSize = getSize();
+        setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
     }
 
     private void doBrowseDirectoy()
@@ -289,8 +345,8 @@ class NewProjectDialog extends JDialog
         }
 
         JFileChooser browser = new JFileChooser();
-        String str = OStrings.PP_BUTTON_SELECT;
-        browser.setApproveButtonText(str);
+        String str = OStrings.getString("BUTTON_SELECT_NO_MNEMONIC");
+        // browser.setApproveButtonText(str);
         browser.setDialogTitle(title);
         browser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         String curDir = "";														// NOI18N
@@ -344,6 +400,9 @@ class NewProjectDialog extends JDialog
                         browser.getSelectedFile().getParent());
                 projectProperties.setSourceRoot(str);
                 m_srcRootField.setText(projectProperties.getSourceRoot());
+                if( new File(projectProperties.getSourceRoot()).exists() &&
+                        new File(projectProperties.getSourceRoot()).isDirectory() )
+                    m_srcRootField.setForeground(java.awt.SystemColor.textText);
                 break;
 
             case 2:
@@ -351,6 +410,9 @@ class NewProjectDialog extends JDialog
                         browser.getSelectedFile().getParent());
                 projectProperties.setLocRoot(str);
                 m_locRootField.setText(projectProperties.getLocRoot());
+                if( new File(projectProperties.getLocRoot()).exists() &&
+                        new File(projectProperties.getLocRoot()).isDirectory() )
+                m_locRootField.setForeground(java.awt.SystemColor.textText);
                 break;
 
             case 3:
@@ -358,6 +420,9 @@ class NewProjectDialog extends JDialog
                         browser.getSelectedFile().getParent());
                 projectProperties.setGlossaryRoot(str);
                 m_glosRootField.setText(projectProperties.getGlossaryRoot());
+                if( new File(projectProperties.getGlossaryRoot()).exists() &&
+                        new File(projectProperties.getGlossaryRoot()).isDirectory() )
+                m_glosRootField.setForeground(java.awt.SystemColor.textText);
                 break;
 
             case 4:
@@ -365,6 +430,9 @@ class NewProjectDialog extends JDialog
                         browser.getSelectedFile().getParent());
                 projectProperties.setTMRoot(str);
                 m_tmRootField.setText(projectProperties.getTMRoot());
+                if( new File(projectProperties.getTMRoot()).exists() &&
+                        new File(projectProperties.getTMRoot()).isDirectory() )
+                m_tmRootField.setForeground(java.awt.SystemColor.textText);
                 break;
 
         }
@@ -372,6 +440,25 @@ class NewProjectDialog extends JDialog
 
     private void doOK()
     {
+        if( !projectProperties.verifySingleLangCode(m_sourceLocaleField.getSelectedItem().toString()) )
+        {
+            JOptionPane.showMessageDialog(this, 
+                    OStrings.getString("NP_INVALID_SOURCE_LOCALE") +
+                    OStrings.getString("NP_LOCALE_SUGGESTION"), 
+                    OStrings.TF_ERROR, JOptionPane.ERROR_MESSAGE);
+            m_sourceLocaleField.requestFocusInWindow();
+            return;
+        }
+        if( !projectProperties.verifySingleLangCode(m_targetLocaleField.getSelectedItem().toString()) )
+        {
+            JOptionPane.showMessageDialog(this, 
+                    OStrings.getString("NP_INVALID_TARGET_LOCALE") +
+                    OStrings.getString("NP_LOCALE_SUGGESTION"), 
+                    OStrings.TF_ERROR, JOptionPane.ERROR_MESSAGE);
+            m_targetLocaleField.requestFocusInWindow();
+            return;
+        }
+        
         projectProperties.setSourceRoot(m_srcRootField.getText());
         if (!projectProperties.getSourceRoot().endsWith(File.separator))
             projectProperties.setSourceRoot(projectProperties.getSourceRoot() + File.separator);
@@ -388,81 +475,47 @@ class NewProjectDialog extends JDialog
         if (!projectProperties.getTMRoot().endsWith(File.separator))
             projectProperties.setTMRoot(projectProperties.getTMRoot() + File.separator);
 
-        projectProperties.setSrcLang(m_srcLangField.getText());
-        projectProperties.setLocLang(m_locLangField.getText());
-        if (!projectProperties.verifyLangCodes())
-        {
-            // TODO display dialog describing how to fix
-            setMessageCode(1);
-            return;
-        }
+        projectProperties.setSourceLanguage(m_sourceLocaleField.getSelectedItem().toString());
+        projectProperties.setTargetLanguage(m_targetLocaleField.getSelectedItem().toString());
 
         m_dialogCancelled = false;
         setVisible(false);
-
         m_browseTarget = 0;
     }
 
     private void doCancel()
     {
-        m_dialogCancelled = false;
+        m_dialogCancelled = true;
         setVisible(false);
-    }
-
-    public void setMessageCode(int n)
-    {
-        m_message = n;
     }
 
     private void updateUIText()
     {
-        String str;
-
-        str = OStrings.PP_CREATE_PROJ;
-        setTitle(str);
-
-        if (m_message == 0)
+        if( foldersMissing )
         {
-            str = OStrings.PP_MESSAGE_CONFIGPROJ;
-            m_messageLabel.setText(str);
+            setTitle(OStrings.PP_OPEN_PROJ);
+            m_messageLabel.setText(OStrings.PP_MESSAGE_BADPROJ);
         }
-        else if (m_message == 1)
+        else
         {
-            str = OStrings.PP_MESSAGE_BADLANG;
-            m_messageLabel.setText(str);
-        }
-        else if (m_message == 2)
-        {
-            str = OStrings.PP_MESSAGE_BADPROJ;
-            m_messageLabel.setText(str);
+            setTitle(OStrings.PP_CREATE_PROJ);
+            m_messageLabel.setText(OStrings.PP_MESSAGE_CONFIGPROJ);
         }
 
-        str = OStrings.PP_SRC_ROOT;
-        m_srcRootLabel.setText(str);
+        Mnemonics.setLocalizedText(m_srcRootLabel, OStrings.PP_SRC_ROOT);
+        Mnemonics.setLocalizedText(m_srcBrowse, OStrings.PP_BUTTON_BROWSE_SRC);
+        
+        Mnemonics.setLocalizedText(m_locRootLabel, OStrings.PP_LOC_ROOT);
+        Mnemonics.setLocalizedText(m_locBrowse, OStrings.PP_BUTTON_BROWSE_TAR);
 
-        str = OStrings.PP_BUTTON_BROWSE_SRC;
-        m_srcBrowse.setText(str);
+        Mnemonics.setLocalizedText(m_glosRootLabel, OStrings.PP_GLOS_ROOT);
+        Mnemonics.setLocalizedText(m_glosBrowse, OStrings.PP_BUTTON_BROWSE_GL);
+        
+        Mnemonics.setLocalizedText(m_tmRootLabel, OStrings.PP_TM_ROOT);
+        Mnemonics.setLocalizedText(m_tmBrowse, OStrings.PP_BUTTON_BROWSE_TM);
 
-        str = OStrings.PP_LOC_ROOT;
-        m_locRootLabel.setText(str);
-        str = OStrings.PP_BUTTON_BROWSE_TAR;
-        m_locBrowse.setText(str);
-
-        str = OStrings.PP_GLOS_ROOT;
-        m_glosRootLabel.setText(str);
-        str = OStrings.PP_BUTTON_BROWSE_GL;
-        m_glosBrowse.setText(str);
-
-        str = OStrings.PP_TM_ROOT;
-        m_tmRootLabel.setText(str);
-        str = OStrings.PP_BUTTON_BROWSE_TM;
-        m_tmBrowse.setText(str);
-
-        str = OStrings.PP_SRC_LANG;
-        m_srcLangLabel.setText(str);
-
-        str = OStrings.PP_LOC_LANG;
-        m_locLangLabel.setText(str);
+        Mnemonics.setLocalizedText(m_sourceLocaleLabel, OStrings.PP_SRC_LANG);
+        Mnemonics.setLocalizedText(m_targetLocaleLabel, OStrings.PP_LOC_LANG);
 
         Dimension orig = m_srcBrowse.getPreferredSize();
         Dimension tmp = m_locBrowse.getPreferredSize();
@@ -480,18 +533,21 @@ class NewProjectDialog extends JDialog
         m_glosBrowse.setPreferredSize(orig);
         m_tmBrowse.setPreferredSize(orig);
 
-        m_okButton.setText(OStrings.PP_BUTTON_OK);
-
-        m_cancelButton.setText(OStrings.PP_BUTTON_CANCEL);
+        Mnemonics.setLocalizedText(m_okButton, OStrings.PP_BUTTON_OK);
+        Mnemonics.setLocalizedText(m_cancelButton, OStrings.PP_BUTTON_CANCEL);
     }
 
+    /**
+     * Whether the user cancelled the dialog.
+     */
     public boolean dialogCancelled()	{ return m_dialogCancelled;	}
     private boolean		m_dialogCancelled;
 
     private int				m_browseTarget;
 
     private JLabel		m_messageLabel;
-    private int			m_message;
+    /** if this is an existing project with some folders missing */
+    private boolean		foldersMissing;
 
     private JLabel		m_srcRootLabel;
     private JTextField	m_srcRootField;
@@ -509,12 +565,35 @@ class NewProjectDialog extends JDialog
     private JTextField	m_tmRootField;
     private JButton		m_tmBrowse;
 
-    private JLabel		m_srcLangLabel;
-    private JTextField	m_srcLangField;
+    private JLabel		m_sourceLocaleLabel;
+    private JComboBox	m_sourceLocaleField;
 
-    private JLabel		m_locLangLabel;
-    private JTextField	m_locLangField;
+    private JLabel		m_targetLocaleLabel;
+    private JComboBox	m_targetLocaleField;
 
     private JButton		m_okButton;
     private JButton		m_cancelButton;
 }
+
+
+/**
+ * My own class that renders a locale combo box smartly.
+ *
+ * @author Maxym Mykhalchuk
+ */
+class MyComboBoxRenderer extends BasicComboBoxRenderer
+{
+    public Component getListCellRendererComponent(
+            JList list,
+            Object value,            // value to display
+            int index,               // cell index
+            boolean isSelected,      // is the cell selected
+            boolean cellHasFocus)    // the list and the cell have the focus
+    {
+        JLabel label = (JLabel)super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+        Language lang = (Language)value;
+        label.setText(lang + " - " + lang.getDisplayName()); // NOI18N
+        return label;
+    }
+}
+

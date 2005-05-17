@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -30,6 +30,7 @@ import javax.swing.JFrame;
 
 import org.omegat.core.threads.CommandThread;
 import org.omegat.filters2.TranslationException;
+import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.ProjectFileReader;
@@ -44,15 +45,20 @@ public class ProjectProperties extends JFrame
 	public String getLocRoot()		{ return m_locRoot;		}
 	public String getGlossaryRoot()	{ return m_glosRoot;	}
 	public String getTMRoot()		{ return m_tmRoot;		}
-	public String getSrcLang()		{ return m_srcLang;	}
-	public String getLocLang()		{ return m_locLang;	}
     public String getProjectName() {        return m_projName;    }
     public String getProjectFile() {        return m_projFile;    }
     public String getProjectRoot() {        return m_projRoot;    }
     public String getProjectInternal() {    return m_projInternal;    }
     public String getSourceRoot() {         return m_srcRoot;    }
-    public void setSrcLang(String m_srcLang) {        this.m_srcLang = m_srcLang;    }
-    public void setLocLang(String m_locLang) {        this.m_locLang = m_locLang;    }
+    
+	public Language getSourceLanguage()		{ return m_sourceLang;	}
+    public void setSourceLanguage(Language m_srcLoc) {      this.m_sourceLang = m_srcLoc;    }
+    public void setSourceLanguage(String srcLocale) {       this.m_sourceLang = new Language(srcLocale);  }
+    
+	public Language getTargetLanguage()		{ return m_targetLang;	}
+    public void setTargetLanguage(Language m_trgLoc) {      this.m_targetLang = m_trgLoc;    }
+    public void setTargetLanguage(String trgLocale) {       this.m_targetLang = new Language(trgLocale);  }
+    
     public void setProjectName(String m_projName) {   this.m_projName = m_projName;  }
     public void setProjectFile(String m_projFile) {   this.m_projFile = m_projFile;  }
     public void setProjectRoot(String m_projRoot) {   this.m_projRoot = m_projRoot;  }
@@ -72,8 +78,8 @@ public class ProjectProperties extends JFrame
 		setLocRoot("");	// NOI18N
 		setGlossaryRoot("");	// NOI18N
 		setTMRoot("");	// NOI18N
-		setSrcLang("");	// NOI18N
-		setLocLang("");	// NOI18N
+		setSourceLanguage("EN-US");  // NOI18N
+		setTargetLanguage("EN-GB");  // NOI18N
 	}
 
     class OTFileFilter extends FileFilter
@@ -106,8 +112,8 @@ public class ProjectProperties extends JFrame
         pfc.setFileFilter(new OTFileFilter());
         pfc.setFileView(new ProjectFileView());
 
-        if( pfc.showOpenDialog(this)==JFileChooser.CANCEL_OPTION )
-            throw new InterruptedIOException();
+        if( JFileChooser.APPROVE_OPTION!=pfc.showOpenDialog(this) )
+            return false;
 
         File projectRootFolder = pfc.getCurrentDirectory();
         String projectRoot = projectRootFolder.getAbsolutePath() + File.separator;
@@ -126,35 +132,30 @@ public class ProjectProperties extends JFrame
 			setTMRoot(pfr.getTM());
 			setProjectInternal(getProjectRoot() + OConsts.DEFAULT_INTERNAL
 						+ File.separator);
-			setSrcLang(pfr.getSourceLang());
-			setLocLang(pfr.getTargetLang());
-			CommandThread.core.setPreference(OConsts.PREF_SRCLANG, getSrcLang());
-			CommandThread.core.setPreference(OConsts.PREF_LOCLANG, getLocLang());
+			setSourceLanguage(pfr.getSourceLang());
+			setTargetLanguage(pfr.getTargetLang());
+			CommandThread.core.setPreference(OConsts.PREF_SOURCELOCALE, getSourceLanguage().toString());
+			CommandThread.core.setPreference(OConsts.PREF_TARGETLOCALE, getTargetLanguage().toString());
 			setProjectFile(getProjectRoot() + OConsts.PROJ_FILENAME);
 
-			int res = verifyProject();
-			if( res!=0 )
+			if( !verifyProject() )
 			{
 				// something wrong with the project - display open dialog
 				//  to fix it
-				NewProjectDialog prj = new NewProjectDialog(this, this, getProjectFile(), res);
+				NewProjectDialog prj = new NewProjectDialog(this, this, getProjectFile(), true);
 
 				// continue  until user fixes problem or cancels
 				boolean abort = false;
-				while (true)
+				while( true )
 				{
 					prj.setVisible(true);
-					if (!m_dialogOK)
+					if( prj.dialogCancelled() )
 					{
 						abort = true;
 						break;
 					}
-					if ((res = verifyProject()) != 0)
-					{
-						prj.setMessageCode(res);
-					}
-					else
-					{
+                    else if( verifyProject() )
+                    {
 						buildProjFile();
 						break;
 					}
@@ -175,73 +176,63 @@ public class ProjectProperties extends JFrame
 		}
 	}
 
-	// returns 0 if project OK, 1 if language codes off, 2 if directories off
-    private int verifyProject() {
+    /**
+     * @return true if project OK, false if some directories are missing
+     */
+    private boolean verifyProject() {
 		// now see if these directories are where they're suposed to be
 		File src = new File(getSourceRoot());
 		File loc = new File(getLocRoot());
 		File gls = new File(getGlossaryRoot());
 		File tmx = new File(getTMRoot());
 
-		if (!verifyLangCodes())
-			return 1;
-		
 		if (src.exists() && loc.exists() && gls.exists() && tmx.exists())
-			return 0;
+			return true;
 
-		return 2;
+		return false;
 	}
 
-	// make sure language codes are of the variety XX_XX, XX-XX or XX
-    boolean verifyLangCodes()
+    /**
+     * Verifies whether the language code is OK.
+     */
+	public static boolean verifySingleLangCode(String code)
 	{
-		if (!verifySingleLangCode(getSrcLang()))
-			return false;
-		if (!verifySingleLangCode(getLocLang()))
-			return false;
-
-		return true;
-	}
-
-	private static boolean verifySingleLangCode(String code)
-	{
-		if (code.length() == 2)
+		if( code.length()==2 )
 		{
 			// make sure both values are characters
-			if (Character.isLetter(code.charAt(0)) && 
-					Character.isLetter(code.charAt(1)))
+			if( Character.isLetter(code.charAt(0)) &&
+                    Character.isLetter(code.charAt(1)) &&
+                    new Language(code).getDisplayName().length()>0 )
 			{
-				// looks good
 				return true;
 			}
 		}
 		else if (code.length() == 5)
 		{
 			// make sure both values are characters
-			if (Character.isLetter(code.charAt(0))	&& 
-				Character.isLetter(code.charAt(1))  &&
-				Character.isLetter(code.charAt(3))  &&
-				Character.isLetter(code.charAt(4)))
+			if( Character.isLetter(code.charAt(0)) &&
+                    Character.isLetter(code.charAt(1)) &&
+                    Character.isLetter(code.charAt(3)) &&
+                    Character.isLetter(code.charAt(4)) &&
+                    (code.charAt(2)=='-' || code.charAt(2)=='_') &&
+                    new Language(code).getDisplayName().length()>0 )
 			{
-				char c = code.charAt(2);
-				if (c == '-' || c == '_')
-				{
-					// good enough
-					return true;
-				}
+                return true;
 			}
 		}
-
 		return false;
 	}
 
 	public boolean createNew()
 	{
 		// new project window; create project file
-		NewProjectDialog newProjDialog = new NewProjectDialog(this, this, null, 0);
-		newProjDialog.setVisible(true);
-		m_dialogOK = ! newProjDialog.dialogCancelled();
-		newProjDialog.dispose();
+		NewProjectDialog newProjDialog = new NewProjectDialog(this, this, null, false);
+        if( !newProjDialog.dialogCancelled() )
+        {
+            newProjDialog.setVisible(true);
+            m_dialogOK = ! newProjDialog.dialogCancelled();
+            newProjDialog.dispose();
+        }
 		return m_dialogOK;
 	}
 
@@ -253,8 +244,8 @@ public class ProjectProperties extends JFrame
 		pfr.setSource(getSourceRoot());
 		pfr.setTM(getTMRoot());
 		pfr.setGlossary(getGlossaryRoot());
-		pfr.setSourceLang(getSrcLang());
-		pfr.setTargetLang(getLocLang());
+		pfr.setSourceLang(getSourceLanguage().toString());
+		pfr.setTargetLang(getTargetLanguage().toString());
 		
 		pfr.writeProjectFile(getProjectFile());
 	}
@@ -268,8 +259,8 @@ public class ProjectProperties extends JFrame
 	private String	m_glosRoot;
 	private String	m_tmRoot;
 
-	private String	m_srcLang;
-	private String	m_locLang;
+	private Language	m_sourceLang;
+	private Language	m_targetLang;
 	
 	boolean m_dialogOK;
 

@@ -1,8 +1,23 @@
-/*
- * AboutDialog.java
- *
- * Created on 23 Март 2005 г., 22:47
- */
+/**************************************************************************
+ OmegaT - Java based Computer Assisted Translation (CAT) tool
+ Copyright (C) 2002-2005  Keith Godfrey et al
+                          keithgodfrey@users.sourceforge.net
+                          907.223.2039
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+**************************************************************************/
 
 package org.omegat.gui.dialogs;
 
@@ -27,7 +42,7 @@ public class AboutDialog extends JDialog
     {
         super(parent, true);
         initComponents();
-        versionLabel.setText("OmegaT version "+OStrings.HUMAN_VERSION);
+        versionLabel.setText(  OStrings.getString("ABOUTDIALOG_VERSION_PREFIX")+OStrings.HUMAN_VERSION);
     }
     
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
@@ -53,7 +68,7 @@ public class AboutDialog extends JDialog
 
         getContentPane().setLayout(new java.awt.BorderLayout(5, 5));
 
-        setTitle("About OmegaT");
+        setTitle(OStrings.getString("ABOUTDIALOG_TITLE"));
         setModal(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -65,11 +80,11 @@ public class AboutDialog extends JDialog
         buttonPanel.setLayout(new java.awt.BorderLayout());
 
         buttonPanel.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(5, 5, 5, 5)));
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, "Copyright \u00a9 2002-2005 Keith Godfrey et al");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, OStrings.getString("ABOUTDIALOG_COPYRIGHT"));
         jLabel2.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(5, 5, 5, 5)));
         buttonPanel.add(jLabel2, java.awt.BorderLayout.WEST);
 
-        org.openide.awt.Mnemonics.setLocalizedText(licenseButton, "&License");
+        org.openide.awt.Mnemonics.setLocalizedText(licenseButton, OStrings.getString("ABOUTDIALOG_LICENSE_BUTTON"));
         licenseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 licenseButtonActionPerformed(evt);
@@ -78,7 +93,7 @@ public class AboutDialog extends JDialog
 
         jPanel1.add(licenseButton);
 
-        org.openide.awt.Mnemonics.setLocalizedText(okButton, "&OK");
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK"));
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okButtonActionPerformed(evt);
@@ -92,7 +107,6 @@ public class AboutDialog extends JDialog
         getContentPane().add(buttonPanel, java.awt.BorderLayout.SOUTH);
 
         versionLabel.setIcon(new javax.swing.ImageIcon("D:\\omegat\\src\\org\\omegat\\resources\\OmegaT.gif"));
-        org.openide.awt.Mnemonics.setLocalizedText(versionLabel, " OmegaT version 1.4.5");
         versionLabel.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(5, 5, 5, 5)));
         getContentPane().add(versionLabel, java.awt.BorderLayout.NORTH);
 
@@ -101,7 +115,7 @@ public class AboutDialog extends JDialog
         jTextArea1.setEditable(false);
         jTextArea1.setFont(versionLabel.getFont());
         jTextArea1.setLineWrap(true);
-        jTextArea1.setText("OmegaT is a high performance Java based Computer Assisted Translation tool with fuzzy matching, translation memory, keyword search, glossary term identification, and translation leveraging into updated projects.\n\nOmegaT is originally the work of Keith Godfrey\n\nCode has been contributed by \n  Benjamin Siband\n  Maxym Mykhalchuk (lead developer at the time of this release)\n  Sacha Chua \n  Henry Pijffers\n\nOther contributions by \n  Marc Prior (project coordinator and ASAD manual writer)\n  Jean-Christophe Helary\n  Samuel Murray\n  Dmitry Gabinski (user manual writer at the time of this release) \n  and many, many more very helpful people");
+        jTextArea1.setText(OStrings.getString("ABOUTDIALOG_CONTRIBUTORS"));
         jTextArea1.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextArea1);
 

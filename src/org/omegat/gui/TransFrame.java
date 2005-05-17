@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -21,18 +21,6 @@
 
 package org.omegat.gui;
 
-import org.omegat.core.glossary.GlossaryEntry;
-import org.omegat.core.matching.NearString;
-import org.omegat.core.matching.SourceTextEntry;
-import org.omegat.core.StringEntry;
-import org.omegat.core.threads.CommandThread;
-import org.omegat.core.threads.SearchThread;
-import org.omegat.gui.dialogs.AboutDialog;
-import org.omegat.util.OConsts;
-import org.omegat.util.OStrings;
-import org.omegat.util.PreferenceManager;
-import org.omegat.util.RequestPacket;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -48,7 +36,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import javax.swing.border.EtchedBorder;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
@@ -74,10 +61,24 @@ import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
+
+import org.omegat.core.glossary.GlossaryEntry;
+import org.omegat.core.matching.NearString;
+import org.omegat.core.matching.SourceTextEntry;
+import org.omegat.core.StringEntry;
+import org.omegat.core.threads.CommandThread;
+import org.omegat.core.threads.SearchThread;
+import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.dialogs.FontSelectionDialog;
 import org.omegat.gui.filters2.FiltersCustomizer;
+import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
+import org.omegat.util.PreferenceManager;
+import org.omegat.util.RequestPacket;
+import org.omegat.util.StaticUtils;
+import org.openide.awt.Mnemonics;
 
 /**
  * The main frame of OmegaT application
@@ -164,8 +165,7 @@ public class TransFrame extends JFrame implements ActionListener
 		if( mn.equals("true")                                                             // NOI18N
             || (mn.equals("") && !System.getProperty("os.name").toLowerCase().startsWith("mac os x")) )   // NOI18N
 		{
-			m_miDisplayMnemonic.setSelected(true);
-			doSetMnemonics(true);
+			// doSetMnemonics(true);
 		}
         
 		String tab = PreferenceManager.pref.getPreference(OConsts.PREF_TAB);
@@ -275,6 +275,7 @@ public class TransFrame extends JFrame implements ActionListener
 		m_matchViewer = new MatchWindow();
 	}
 
+    /*
 	private void doSetMnemonics(boolean show)
 	{
 		if (show)
@@ -305,7 +306,6 @@ public class TransFrame extends JFrame implements ActionListener
 			m_miDisplayFont.setMnemonic(KeyEvent.VK_F);
 			m_miDisplayFilters.setMnemonic(KeyEvent.VK_I);
 			m_miDisplayAdvanceKey.setMnemonic(KeyEvent.VK_T);
-			m_miDisplayMnemonic.setMnemonic(KeyEvent.VK_M);
 			m_mTools.setMnemonic(KeyEvent.VK_T);
 			m_miToolsValidateTags.setMnemonic(KeyEvent.VK_T);
 			m_mHelp.setMnemonic(KeyEvent.VK_H);
@@ -339,7 +339,6 @@ public class TransFrame extends JFrame implements ActionListener
 			m_mDisplay.setMnemonic(0);
 			m_miDisplayFont.setMnemonic(0);
 			m_miDisplayAdvanceKey.setMnemonic(0);
-			m_miDisplayMnemonic.setMnemonic(0);
 			m_mTools.setMnemonic(0);
 			m_miToolsValidateTags.setMnemonic(0);
 			m_mHelp.setMnemonic(0);
@@ -347,6 +346,7 @@ public class TransFrame extends JFrame implements ActionListener
 			m_miHelpAbout.setMnemonic(0);
 		}
 	}
+     */
 
 	private void createMenus()
 	{
@@ -509,11 +509,6 @@ public class TransFrame extends JFrame implements ActionListener
 		m_miDisplayAdvanceKey.addActionListener(this);
 		m_mDisplay.add(m_miDisplayAdvanceKey);
 
-		m_miDisplayMnemonic = new JCheckBoxMenuItem();
-		m_miDisplayMnemonic.setSelected(false);
-		m_miDisplayMnemonic.addActionListener(this);
-		m_mDisplay.add(m_miDisplayMnemonic);
-
 		mb.add(m_mDisplay);
 		
 		// tools
@@ -546,49 +541,42 @@ public class TransFrame extends JFrame implements ActionListener
 
 		m_matchViewer.setTitle(OStrings.TF_MATCH_VIEWER_TITLE);
 
-        m_mFile.setText(OStrings.TF_MENU_FILE);
-		m_miFileOpen.setText(OStrings.TF_MENU_FILE_OPEN);
-		m_miFileCreate.setText(OStrings.TF_MENU_FILE_CREATE);
-		m_miFileClose.setText(OStrings.TF_MENU_FILE_CLOSE);
-		m_miFileCompile.setText(OStrings.TF_MENU_FILE_COMPILE);
-		m_miFileProjWin.setText(OStrings.TF_MENU_FILE_PROJWIN);
-		m_miFileMatchWin.setText(OStrings.TF_MENU_FILE_MATCHWIN);
-		m_miFileSave.setText(OStrings.TF_MENU_FILE_SAVE);
-		m_miFileQuit.setText(OStrings.TF_MENU_FILE_QUIT);
+        Mnemonics.setLocalizedText(m_mFile, OStrings.TF_MENU_FILE);
+		Mnemonics.setLocalizedText(m_miFileOpen, OStrings.TF_MENU_FILE_OPEN);
+		Mnemonics.setLocalizedText(m_miFileCreate, OStrings.TF_MENU_FILE_CREATE);
+		Mnemonics.setLocalizedText(m_miFileClose, OStrings.TF_MENU_FILE_CLOSE);
+		Mnemonics.setLocalizedText(m_miFileCompile, OStrings.TF_MENU_FILE_COMPILE);
+		Mnemonics.setLocalizedText(m_miFileProjWin, OStrings.TF_MENU_FILE_PROJWIN);
+		Mnemonics.setLocalizedText(m_miFileMatchWin, OStrings.TF_MENU_FILE_MATCHWIN);
+		Mnemonics.setLocalizedText(m_miFileSave, OStrings.TF_MENU_FILE_SAVE);
+		Mnemonics.setLocalizedText(m_miFileQuit, OStrings.TF_MENU_FILE_QUIT);
 
-		m_mEdit.setText(OStrings.TF_MENU_EDIT);
-		m_miEditUndo.setText(OStrings.TF_MENU_EDIT_UNDO);
-		m_miEditRedo.setText(OStrings.TF_MENU_EDIT_REDO);
-		m_miEditNext.setText(OStrings.TF_MENU_EDIT_NEXT);
-		m_miEditPrev.setText(OStrings.TF_MENU_EDIT_PREV);
-		m_miEditUntrans.setText(OStrings.TF_MENU_EDIT_UNTRANS);
-		m_miEditCompare1.setText(OStrings.TF_MENU_EDIT_COMPARE_1);
-		m_miEditCompare2.setText(OStrings.TF_MENU_EDIT_COMPARE_2);
-		m_miEditCompare3.setText(OStrings.TF_MENU_EDIT_COMPARE_3);
-		m_miEditCompare4.setText(OStrings.TF_MENU_EDIT_COMPARE_4);
-		m_miEditCompare5.setText(OStrings.TF_MENU_EDIT_COMPARE_5);
-		m_miEditRecycle.setText(OStrings.TF_MENU_EDIT_RECYCLE);
-		m_miEditInsert.setText(OStrings.TF_MENU_EDIT_INSERT);
-		m_miEditFind.setText(OStrings.TF_MENU_EDIT_FIND);
+		Mnemonics.setLocalizedText(m_mEdit, OStrings.TF_MENU_EDIT);
+		Mnemonics.setLocalizedText(m_miEditUndo, OStrings.TF_MENU_EDIT_UNDO);
+		Mnemonics.setLocalizedText(m_miEditRedo, OStrings.TF_MENU_EDIT_REDO);
+		Mnemonics.setLocalizedText(m_miEditNext, OStrings.TF_MENU_EDIT_NEXT);
+		Mnemonics.setLocalizedText(m_miEditPrev, OStrings.TF_MENU_EDIT_PREV);
+		Mnemonics.setLocalizedText(m_miEditUntrans, OStrings.TF_MENU_EDIT_UNTRANS);
+		Mnemonics.setLocalizedText(m_miEditCompare1, OStrings.TF_MENU_EDIT_COMPARE_1);
+		Mnemonics.setLocalizedText(m_miEditCompare2, OStrings.TF_MENU_EDIT_COMPARE_2);
+		Mnemonics.setLocalizedText(m_miEditCompare3, OStrings.TF_MENU_EDIT_COMPARE_3);
+		Mnemonics.setLocalizedText(m_miEditCompare4, OStrings.TF_MENU_EDIT_COMPARE_4);
+		Mnemonics.setLocalizedText(m_miEditCompare5, OStrings.TF_MENU_EDIT_COMPARE_5);
+		Mnemonics.setLocalizedText(m_miEditRecycle, OStrings.TF_MENU_EDIT_RECYCLE);
+		Mnemonics.setLocalizedText(m_miEditInsert, OStrings.TF_MENU_EDIT_INSERT);
+		Mnemonics.setLocalizedText(m_miEditFind, OStrings.TF_MENU_EDIT_FIND);
 		
-		m_mDisplay.setText(OStrings.TF_MENU_DISPLAY);
-		m_miDisplayFont.setText(OStrings.TF_MENU_DISPLAY_FONT);
-        m_miDisplayFilters.setText("Setup File Filters");
-		m_miDisplayAdvanceKey.setText(OStrings.TF_MENU_DISPLAY_ADVANCE);
-		m_miDisplayMnemonic.setText(OStrings.TF_MENU_DISPLAY_MNEMONIC);
+		Mnemonics.setLocalizedText(m_mDisplay, OStrings.TF_MENU_DISPLAY);
+		Mnemonics.setLocalizedText(m_miDisplayFont, OStrings.TF_MENU_DISPLAY_FONT);
+        Mnemonics.setLocalizedText(m_miDisplayFilters, OStrings.getString("TF_MENU_DISPLAY_FILTERS"));
+		Mnemonics.setLocalizedText(m_miDisplayAdvanceKey, OStrings.TF_MENU_DISPLAY_ADVANCE);
 		
-		m_mTools.setText(OStrings.TF_MENU_TOOLS);
-		m_miToolsValidateTags.setText(OStrings.TF_MENU_TOOLS_VALIDATE);
+		Mnemonics.setLocalizedText(m_mTools, OStrings.TF_MENU_TOOLS);
+		Mnemonics.setLocalizedText(m_miToolsValidateTags, OStrings.TF_MENU_TOOLS_VALIDATE);
 
-		m_mHelp.setText("Help");
-		m_miHelpContents.setText("Contents");
-		m_miHelpAbout.setText("About");
-		
-		// KBG - the UI looks bad w/ misplaced mnemonics, but this is
-		//	better than hard coding their location for localized versions
-//		m_miFileProjWin.setDisplayedMnemonicIndex(10);
-//		m_miFileMatchWin.setDisplayedMnemonicIndex(5);
-//		m_miToolsValidateTags.setDisplayedMnemonicIndex(9);
+		Mnemonics.setLocalizedText(m_mHelp, OStrings.getString("TF_MENU_HELP"));
+		Mnemonics.setLocalizedText(m_miHelpContents, OStrings.getString("TF_MENU_HELP_CONTENTS"));
+		Mnemonics.setLocalizedText(m_miHelpAbout, OStrings.getString("TF_MENU_HELP_ABOUT"));
 	}
 
     ///////////////////////////////////////////////////////////////
@@ -780,7 +768,7 @@ public class TransFrame extends JFrame implements ActionListener
 				OStrings.TF_CUR_SEGMENT_END.length();
 
 			// remove text
-//System.out.println("removing text "+start+" -> "+end+" length:"+(end-start));
+//StaticUtils.log("removing text "+start+" -> "+end+" length:"+(end-start));
 			m_xlPane.select(start, end);
 			m_xlPane.replaceSelection(text);
 		}
@@ -827,7 +815,7 @@ public class TransFrame extends JFrame implements ActionListener
 			m_xlPane.setFont(m_font);
 			m_matchViewer.setFont(m_font);
             CommandThread.core.setPreference(OConsts.TF_SRC_FONT_NAME, m_font.getName());
-            CommandThread.core.setPreference(OConsts.TF_SRC_FONT_SIZE, ""+m_font.getSize());
+            CommandThread.core.setPreference(OConsts.TF_SRC_FONT_SIZE, String.valueOf(m_font.getSize()));
 			activateEntry();
 		}
 	}
@@ -835,9 +823,6 @@ public class TransFrame extends JFrame implements ActionListener
     /**
      * Displays the filters setup dialog to allow 
      * customizing file filters in detail.
-     * <p>
-     * Note that if you change filters config, OmegaT closes 
-     * and reopens the current project.
      */
     private void doFilters()
     {
@@ -847,7 +832,6 @@ public class TransFrame extends JFrame implements ActionListener
         {
             // saving config
             FilterMaster.getInstance().saveConfig();
-            // closing and opening the project
         }
         else
         {
@@ -1461,21 +1445,6 @@ public class TransFrame extends JFrame implements ActionListener
 							OConsts.PREF_TAB, "false");							// NOI18N
 				}
 			}
-			else if (evtSrc == m_miDisplayMnemonic)
-			{
-				if (m_miDisplayMnemonic.isSelected())
-				{
-					doSetMnemonics(true);
-					CommandThread.core.setPreference(
-							OConsts.PREF_MNEMONIC, "true");						// NOI18N
-				}
-				else
-				{
-					doSetMnemonics(false);
-					CommandThread.core.setPreference(
-							OConsts.PREF_MNEMONIC, "false");					// NOI18N
-				}
-			}
 			else if (evtSrc == m_miEditUntrans)
 			{
 				doNextUntranslatedEntry();
@@ -1614,9 +1583,11 @@ public class TransFrame extends JFrame implements ActionListener
 			});
 		}
 		
-		// monitor key events - need to prevent text insertion 
-		//	outside of edit zone while maintaining normal functionality
-		//	across jvm versions
+        /**
+         * Monitors key events - need to prevent text insertion 
+         * outside of edit zone while maintaining normal functionality
+         * across jvm versions.
+         */
 		protected void processKeyEvent(KeyEvent e)
 		{
 			if (!m_projectLoaded)
@@ -1657,24 +1628,21 @@ public class TransFrame extends JFrame implements ActionListener
 
 			// look for delete/backspace events and make sure they're
 			//	in an acceptable area
-			switch (c)
-			{
-				case 8:
-					if (checkCaretForDelete(false))
-					{
-						super.processKeyEvent(e);
-					}
-					return;
-				case 127:
-					// this check shouldn't be necessary, but
-					//	make it in case the key handling changes to make
-					//	backspace and delete work the same way
-					if (checkCaretForDelete(true))
-					{
-						super.processKeyEvent(e);
-					}
-					return;
-			}
+            switch (c)
+            {
+                case KeyEvent.VK_BACK_SPACE:
+                    if (checkCaretForDelete(false))
+                    {
+                        super.processKeyEvent(e);
+                    }
+                    return;
+                case KeyEvent.VK_DELETE:
+                    if (checkCaretForDelete(true))
+                    {
+                        super.processKeyEvent(e);
+                    }
+                    return;
+            }
 
 			// for now, force all key presses to reset the cursor to
 			//	the editing region unless it's a ctrl-c (copy)
@@ -1687,6 +1655,23 @@ public class TransFrame extends JFrame implements ActionListener
 				return;
 			}
 
+            
+            // handling Ctrl+Shift+Home / End manually
+            // in order to select only to beginning / to end 
+            // of the current segment
+            if( e.isControlDown() && e.isShiftDown() &&
+                    (e.getKeyCode()==KeyEvent.VK_HOME || e.getKeyCode()==KeyEvent.VK_END) )
+            {
+                // letting parent do the handling
+                super.processKeyEvent(e);
+                
+                // and then "refining" the selection
+                checkCaret();
+                
+                return;
+            }
+
+            
 			// every other key press should be within the editing zone
 			//	so make sure the caret is there
 			checkCaret();
@@ -1787,56 +1772,55 @@ public class TransFrame extends JFrame implements ActionListener
 							m_xlPane.moveCaretPosition(end);
 					}
 				}
-				else
-				{
-					// a regular shift-key press
-					// handle it normally
-					super.processKeyEvent(e);
-				}
-				return;
 			}
 
 			// shift key is not down
 			// if arrow key pressed, make sure caret moves to correct side
 			//	of hilite (if text hilited)
-			if (keyCode == KeyEvent.VK_UP				||
-                    keyCode == KeyEvent.VK_LEFT		||
-                    keyCode == KeyEvent.VK_KP_UP		||
-                    keyCode == KeyEvent.VK_KP_LEFT)
-			{
-				int end = m_xlPane.getSelectionEnd();
-				int start = m_xlPane.getSelectionStart();
-				if (end != start)
-					m_xlPane.setCaretPosition(start);
-				else
-					super.processKeyEvent(e);
-				checkCaret();
-				return;
-			}
-			else if (keyCode == KeyEvent.VK_DOWN		||
-                    keyCode == KeyEvent.VK_RIGHT		||
-                    keyCode == KeyEvent.VK_KP_DOWN	||
-                    keyCode == KeyEvent.VK_KP_RIGHT)
-			{
-				int end = m_xlPane.getSelectionEnd();
-				int start = m_xlPane.getSelectionStart();
-				if (end != start)
-					m_xlPane.setCaretPosition(end);
-				else 
-					super.processKeyEvent(e);
-				checkCaret();
-				return;
-			}
-
-			// no shift and no arrow and caret is in correct place
+			if( !e.isShiftDown() )
+            {
+                if( keyCode == KeyEvent.VK_UP      ||
+                    keyCode == KeyEvent.VK_LEFT    ||
+                    keyCode == KeyEvent.VK_KP_UP   ||
+                    keyCode == KeyEvent.VK_KP_LEFT )
+                {
+                    int end = m_xlPane.getSelectionEnd();
+                    int start = m_xlPane.getSelectionStart();
+                    if (end != start)
+                        m_xlPane.setCaretPosition(start);
+                    else
+                        super.processKeyEvent(e);
+                    checkCaret();
+                    return;
+                }
+                else if (keyCode == KeyEvent.VK_DOWN		||
+                        keyCode == KeyEvent.VK_RIGHT		||
+                        keyCode == KeyEvent.VK_KP_DOWN	||
+                        keyCode == KeyEvent.VK_KP_RIGHT)
+                {
+                    int end = m_xlPane.getSelectionEnd();
+                    int start = m_xlPane.getSelectionStart();
+                    if (end != start)
+                        m_xlPane.setCaretPosition(end);
+                    else 
+                        super.processKeyEvent(e);
+                    checkCaret();
+                    return;
+                }
+            }
+            
 			// no more special handling required
 			super.processKeyEvent(e);
 		}
 	}
 
-	// make sure there's one character in the direction indicated for
-	//	delete operation
-	// returns true if space is available
+    /**
+     * Make sure there's one character in the direction indicated for
+     * delete operation.
+     *
+     * @param forward 
+     * @return true if space is available
+     */
     private boolean checkCaretForDelete(boolean forward)
 	{
 		int pos = m_xlPane.getCaretPosition();
@@ -1850,7 +1834,9 @@ public class TransFrame extends JFrame implements ActionListener
 			// -1 for space before tag, -2 for newlines
 			int end = m_xlPane.getText().length() - m_segmentEndInset -
 				OStrings.TF_CUR_SEGMENT_END.length();
-			if (pos >= end)
+       		int spos = m_xlPane.getSelectionStart();
+    		int epos = m_xlPane.getSelectionEnd();
+			if( pos>=end && spos>=end && epos>=end )
 				return false;
 		}
 		else
@@ -1858,15 +1844,18 @@ public class TransFrame extends JFrame implements ActionListener
 			// make sure we're not at start of segment
 			int start = m_segmentStartOffset + m_sourceDisplayLength +
 				OStrings.TF_CUR_SEGMENT_START.length() + 1;
-			if (pos <= start)
-			{
+       		int spos = m_xlPane.getSelectionStart();
+    		int epos = m_xlPane.getSelectionEnd();
+			if( pos<=start && epos<=start && spos<=start )
 				return false;
-			}
 		}
 		return true;
 	}
 	
-	// returns true if position reset, false otherwise
+    /**
+     * Checks whether the selection & caret is inside editable text,
+     * and changes their positions accordingly if not.
+     */
     private void checkCaret()
 	{
 		//int pos = m_xlPane.getCaretPosition();
@@ -1914,9 +1903,9 @@ public class TransFrame extends JFrame implements ActionListener
 
 	public void fatalError(String msg, RuntimeException re)
 	{
-		System.out.println(msg);
+		StaticUtils.log(msg);
 		if (re != null)
-			re.printStackTrace();
+			re.printStackTrace(StaticUtils.getLogStream());
 
 		// try to shutdown gracefully
 		CommandThread.core.signalStop();
@@ -1963,7 +1952,6 @@ public class TransFrame extends JFrame implements ActionListener
 	private JMenuItem	m_miEditNext;
 	private JMenuItem	m_miEditPrev;
 	private JMenuItem	m_miEditUntrans;
-//	private JMenuItem	m_miEditGoto;
 	private JMenuItem	m_miEditFind;
 	private JMenuItem	m_miEditRecycle;
 	private JMenuItem	m_miEditInsert;
@@ -1975,7 +1963,6 @@ public class TransFrame extends JFrame implements ActionListener
 
 	private JMenu		m_mDisplay;
 	private JCheckBoxMenuItem	m_miDisplayAdvanceKey;
-	private JCheckBoxMenuItem	m_miDisplayMnemonic;
 	private JMenuItem	m_miDisplayFont;
 	private JMenuItem	m_miDisplayFilters;
 	

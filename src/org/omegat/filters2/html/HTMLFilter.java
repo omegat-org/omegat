@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -25,9 +25,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.io.Reader;
 import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -40,6 +38,7 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.util.AntiCRReader;
 import org.omegat.util.EncodingAwareReader;
 import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.UTF8Writer;
 
 /*
@@ -63,134 +62,79 @@ public class HTMLFilter extends AbstractFilter
 
 	/** 
      * Convert simplified formatting tags to full originals.
+     * Version 2.
+     *
+     * @author Maxym Mykhalchuk
      */
-	public String formatString(String text)
+	private String formatString(String text)
 	{
-		// TODO - different formatting rules for tag imbedded text
-
-		// pull labels from string, ident them in tag
-		// and replace them w/ the original data
-		char[] car = new char[text.length()];
-		text.getChars(0, text.length(), car, 0);
-		char c;
-		int num = 0;
-		String s;
-		char shortcut = 0;
-		int state = 0;
-		boolean close = false;
-		HTMLTag tag;
-		LBuffer tagBuf = new LBuffer(8);
-		LBuffer outBuf = new LBuffer(text.length() * 2);
-		for (int i=0; i<car.length; i++)
+        StringBuffer res = new StringBuffer(text.length()*2);
+		for(int i=0; i<text.length(); i++)
 		{
-			c = car[i];
-			// scan for <CN>
-			if (c == '<')
+			char c = text.charAt(i);
+			if( c=='<' )
 			{
-				if (state == 1)
-				{
-					// double < - convert to &lt;
-					outBuf.append("&lt;"); // NOI18N
-					tagBuf.reset();
-					state = 0;
-				}
-				else if (state > 1)
-				{
-					// format error
-					state = -1;
-				}
-				else
-				{
-					tagBuf.append(c);
-					state = 1;
-				}
-			}
-			else if (state == 1 && c == '/')
-			{
-				close = true;
-			}
-			else if (state == 1 && (c >= 'a' && c <= 'z' ||
-                    c >= 'A' && c <= 'Z'))
-			{
-				state++;
-				shortcut = c;
-				if (shortcut < 'a')
-					shortcut += 'a' - 'A';
-				tagBuf.append(c);
-			}
-			else if ((state == 2 || state == 3) &&
-						(c >= '0' && c <= '9'))
-			{
-				state++;
-				num = num*10 + (c - '0');
-				tagBuf.append(c);
-			}
-			else if ((state == 3 || state == 4) && c == '>')
-			{
-				// found shortcut tag - look it up and 
-				// replace it
-				tag = null;
-				if (num >= 0 && num < m_tagList.size())
-				{
-					tag = (HTMLTag) m_tagList.get(num);
-					if (tag.shortcut() != shortcut)
-						tag = null;
-				}
-				if (tag == null)
-				{
-					//state = -1;
-				}
-				else if (!close)
-				{
-					outBuf.append('<');
-					outBuf.append(tag.verbatum());
-					outBuf.append('>');
-				}
-				else
-				{
-					// orphaned close tags will begin with a '/' already
-					if (tag.name().startsWith("/")) // NOI18N
-						outBuf.append("<"); // NOI18N
-					else
-						outBuf.append("</"); // NOI18N
-					outBuf.append(tag.name());
-					outBuf.append('>'); // NOI18N
-				}
-				state = 0;
-				num = 0;
-				tagBuf.reset();
-				close = false;
-			}
-			else if (state >= 0)
-			{
-				state = -1;
-			}
-			else
-			{
-				s = convertToEsc(c);
-				outBuf.append(s);
-				//if (s == null)
-				//	outBuf.append(c);
-				//else
-				//{
-				//	outBuf.append('&');
-				//	outBuf.append(s);
-				//	outBuf.append(';');
-				//}
-			}
-
-			if (state < 0)
-			{
-				tagBuf.append(c);
-				//outBuf.append(org.omegat.HTMLParser.convertAllToEsc(tagBuf));
-				outBuf.append(tagBuf);
-				tagBuf.reset();
-				state = 0;
-			}
+                try
+                {
+                    int tagend = text.indexOf('>', i);
+                    if( tagend>i+2 )
+                    {
+                        String inside = text.substring(i+1, tagend);
+                        boolean close = false;
+                        int shortcutStart = 0;
+                        int shortcutEnd = inside.length()-1;
+                        if( inside.charAt(0)=='/' )
+                        {
+                            shortcutStart = 1;
+                            close = true;
+                        }
+                        else if( inside.charAt(shortcutEnd)=='/' )
+                        {
+                            shortcutEnd = inside.length()-2;
+                            close = true;
+                        }
+                        char shortcut = inside.charAt(shortcutStart);
+                        String tagNumberString = inside.substring(shortcutStart+1, shortcutEnd+1);
+                        int tagNumber = Integer.parseInt(tagNumberString);
+                        HTMLTag tag = (HTMLTag)m_tagList.get(tagNumber);
+                        if( tag.shortcut()==shortcut )
+                        {
+                            if( !close )
+                            {
+                                res.append('<');
+                                res.append(tag.verbatum().string());
+                                res.append('>');
+                            }
+                            else
+                            {
+                                // orphaned close tags will begin with a '/' already
+                                if( tag.name().startsWith("/") )                    // NOI18N
+                                    res.append("<");                                // NOI18N
+                                else
+                                    res.append("</");                               // NOI18N
+                                res.append(tag.name());
+                                res.append('>');                                    // NOI18N
+                            }
+                            i=tagend;
+                            continue;
+                        }
+                    }
+                }
+                catch( NumberFormatException nfe ) { } // do nothing
+                catch( StringIndexOutOfBoundsException sioob ) { } // do nothing
+                catch( IndexOutOfBoundsException iobe ) { } // do nothing
+                catch( Exception e )
+                {
+                    // strange, as we handled all the possibilities above
+                    StaticUtils.log("Exception: " + e);                      // NOI18N
+                }
+            }
+            // else it's not a tag, so char as, converting to escaped form
+            res.append(convertToEntity(c));
 		}
-		return outBuf.string();
+		return res.toString();
 	}
-
+    
 	public void reset()
 	{
 		m_tagList.clear();
@@ -211,7 +155,7 @@ public class HTMLFilter extends AbstractFilter
 	}
 
     /** Returns the last char, supports pushing the char "back" */
-	private int getNextChar(Reader infile) throws IOException
+	private int getNextChar(BufferedReader infile) throws IOException
 	{
 		if( pushedChar!=0 )
 		{
@@ -224,7 +168,7 @@ public class HTMLFilter extends AbstractFilter
 	}
 
 
-	private char getEscChar(Reader reader, FormatData fd)
+	private char getEscChar(BufferedReader reader, FormatData fd)
 					throws IOException, TranslationException
 	{
 		char c = 0;
@@ -301,7 +245,7 @@ public class HTMLFilter extends AbstractFilter
 				}
 				ctr++;
 				if (ctr > 10)
-					throw new TranslationException("Illegal HTML entity (&---;):" + buf.string());
+					throw new TranslationException(OStrings.getString("HTMLFILTER_ERROR_ILLEGAL_ENTITY") + buf.string());
 				continue;
 			}
 			else
@@ -326,7 +270,7 @@ public class HTMLFilter extends AbstractFilter
 		return c;
 	}
 
-	private void handleTag(Reader reader, Writer writer)
+	private void handleTag(BufferedReader reader, BufferedWriter writer)
 			throws IOException, TranslationException
 	{
 		HTMLTag tag;
@@ -403,7 +347,7 @@ public class HTMLFilter extends AbstractFilter
 		}
 	}
 
-	private void writeEntry(Writer writer) throws IOException
+	private void writeEntry(BufferedWriter writer) throws IOException
 	{
 		ListIterator it;
 		FormatData fd;
@@ -448,7 +392,8 @@ public class HTMLFilter extends AbstractFilter
 				fd = (FormatData) it.next();
 				out.append(fd.getDisplay());
 			}
-			writer.write(convertToEsc(processEntry(out.string())));
+			// writer.write(convertToEntities(processEntry(out.string())));
+			writer.write(formatString(processEntry(out.string())));
 		}
 
 		// write out ignored trailing tags
@@ -490,11 +435,11 @@ public class HTMLFilter extends AbstractFilter
 
 			fd_head = (FormatData) m_fdList.getFirst();
 			fd_tail = (FormatData) m_fdList.getLast();
-//System.out.println(fd_head.getDisplay().string() + "\t" + fd_tail.getDisplay().string()); 
+//StaticUtils.log(fd_head.getDisplay().string() + "\t" + fd_tail.getDisplay().string()); 
 			// if leading white space, move to preNT
 			if (fd_head.isWhiteSpace())
 			{
-//System.out.println("      head ws");
+//StaticUtils.log("      head ws");
 				m_preNT.add(fd_head);
 				m_fdList.removeFirst();
 				continue;
@@ -503,7 +448,7 @@ public class HTMLFilter extends AbstractFilter
 			// if trailing ws, move to postNT
 			if (fd_tail.isWhiteSpace())
 			{
-//System.out.println("      tail ws");
+//StaticUtils.log("      tail ws");
 				m_postNT.add(fd_tail);
 				m_fdList.removeLast();
 				continue;
@@ -524,7 +469,7 @@ public class HTMLFilter extends AbstractFilter
 			// if trailing tag is open, move to postNT
 			if (fd_tail.isTag() && !fd_tail.isCloseTag())
 			{
-//System.out.println("      tail open");
+//StaticUtils.log("      tail open");
 				m_postNT.add(fd_tail);
 				m_fdList.removeLast();
 				continue;
@@ -533,7 +478,7 @@ public class HTMLFilter extends AbstractFilter
 			// if leading tag is open, move to preNT
 			if (fd_head.isTag() && fd_head.isCloseTag())
 			{
-//System.out.println("      head close");
+//StaticUtils.log("      head close");
 				m_preNT.add(fd_head);
 				m_fdList.removeFirst();
 				continue;
@@ -543,7 +488,7 @@ public class HTMLFilter extends AbstractFilter
 			if (fd_tail.isTag() && fd_head.isTag() &&
                     fd_tail.tagData() == fd_head.tagData())
 			{
-//System.out.println("      matching pair");
+//StaticUtils.log("      matching pair");
 				if (m_fdList.size() == 1)
 					break;	// first = last
 				m_postNT.add(fd_tail);
@@ -577,7 +522,7 @@ public class HTMLFilter extends AbstractFilter
 				{
 					m_preNT.add(fd_head);
 					m_fdList.removeFirst();
-//System.out.println("      unmatched lead token");
+//StaticUtils.log("      unmatched lead token");
 					continue;
 				}
 			}
@@ -616,7 +561,7 @@ public class HTMLFilter extends AbstractFilter
 				{
 					m_postNT.add(fd_tail);
 					m_fdList.removeLast();
-//System.out.println("      unmatched tail token");
+//StaticUtils.log("      unmatched tail token");
 					continue;
 				}
 			}
@@ -624,28 +569,6 @@ public class HTMLFilter extends AbstractFilter
 			// if we made it here, nothing happened
 			change = false;
 		}
-	}
-
-	/**
-	 * Customized version of creatning input stream for HTML files,
-	 * aware of encoding by using <code>EncodingAwareReader</code> class.
-	 *
-	 * @see org.omegat.util.EncodingAwareReader
-	 */
-	public Reader createInputStream(String infile) throws IOException
-	{
-		Reader ear = new AntiCRReader( new EncodingAwareReader(infile, EncodingAwareReader.ST_HTML) );
-		return ear;
-	}
-	
-	/** 
-	 * Customized version of creating an output stream for HTML files,
-	 * always UTF-8 and appending charset meta with UTF-8
-	 */
-	public Writer createOutputStream(String outfile) throws IOException
-	{
-		UTF8Writer uw = new UTF8Writer(outfile, UTF8Writer.ST_HTML);
-		return uw;
 	}
 
 	private LinkedList 	m_tagList;
@@ -661,14 +584,14 @@ public class HTMLFilter extends AbstractFilter
     public Instance[] getDefaultInstances()
     {
         return new Instance[] {
-            new Instance("*.html", ENCODING_AUTO, "UTF-8"),
-            new Instance("*.htm", ENCODING_AUTO, "UTF-8", "${nameOnly}.html")
+            new Instance("*.html", ENCODING_AUTO, "UTF-8"),                     // NOI18N
+            new Instance("*.htm", ENCODING_AUTO, "UTF-8", "${nameOnly}.html")   // NOI18N
         };
     }
 
     public String getFileFormatName()
     {
-        return "HTML files";
+        return OStrings.getString("HTMLFILTER_FILTER_NAME");
     }
 
     public boolean isSourceEncodingVariable()
@@ -681,7 +604,7 @@ public class HTMLFilter extends AbstractFilter
         return false;
     }
 
-    public void processFile(Reader reader2, Writer writer2) 
+    public void processFile(BufferedReader reader, BufferedWriter writer) 
         throws IOException, TranslationException
     {
         reset();
@@ -689,8 +612,6 @@ public class HTMLFilter extends AbstractFilter
 		int i;
 		FormatData fd = null;
 
-        BufferedReader reader = new BufferedReader(reader2);
-        BufferedWriter writer = new BufferedWriter(writer2);
 		try
 		{
 			while ((i = getNextChar(reader)) >= 0)
@@ -777,16 +698,31 @@ public class HTMLFilter extends AbstractFilter
          */
     }
 
-    public Reader createReader(File infile, String encoding) throws UnsupportedEncodingException, IOException
+	/**
+	 * Customized version of creating input reader for HTML files,
+	 * aware of encoding by using <code>EncodingAwareReader</code> class.
+	 *
+	 * @see org.omegat.util.EncodingAwareReader
+	 */
+    public BufferedReader createReader(File infile, String encoding) throws UnsupportedEncodingException, IOException
     {
-		return new AntiCRReader( new EncodingAwareReader(infile.getAbsolutePath(), EncodingAwareReader.ST_HTML) );
+		return new BufferedReader(new AntiCRReader( 
+                new EncodingAwareReader(infile.getAbsolutePath(), EncodingAwareReader.ST_HTML)));
     }
-    public Writer createWriter(File outfile, String encoding) throws UnsupportedEncodingException, IOException
+	/** 
+	 * Customized version of creating an output stream for HTML files,
+	 * always UTF-8 and appending charset meta with UTF-8
+     * by using <code>UTF8Writer</code> class.
+     *
+	 * @see org.omegat.util.UTF8Writer
+	 */
+    public BufferedWriter createWriter(File outfile, String encoding) throws UnsupportedEncodingException, IOException
     {
-		return new UTF8Writer(outfile.getAbsolutePath(), UTF8Writer.ST_HTML);
+		return new BufferedWriter(
+                new UTF8Writer(outfile.getAbsolutePath(), UTF8Writer.ST_HTML));
     }
 
-	private HTMLTag identTag(Reader reader)
+	private HTMLTag identTag(BufferedReader reader)
 				throws IOException, TranslationException
 	{
 		char c;
@@ -1444,6 +1380,9 @@ public class HTMLFilter extends AbstractFilter
 		m_charMap.put(new Character(val), name);
 	}
 	
+    /**
+     * Converts XML entity to plaintext character.
+     */
 	public static char convertToChar(String tok)
 	{
 		Character c = (Character) m_escMap.get(tok);
@@ -1456,7 +1395,10 @@ public class HTMLFilter extends AbstractFilter
 			return c.charValue();
 	}
 
-	public static String convertToEsc(char c)
+    /**
+     * Converts plaintext symbol to XML entity.
+     */
+	public static String convertToEntity(char c)
 	{
 		String s = (String) m_charMap.get(new Character(c));
         if (s != null)
@@ -1464,14 +1406,18 @@ public class HTMLFilter extends AbstractFilter
 			return "&" + s + ";";	 // NOI18N
 		}
         else
-            return ""+c;
+            return ""+c;             // NOI18N
 	}
 
-	public static String convertToEsc(String s)
+    /**
+     * Converts plaintext string into valid HTML/XML,
+     * replacing all "special" symbols with corresponding entities.
+     */
+	public static String convertToEntities(String s)
 	{
         StringBuffer sb = new StringBuffer();
         for(int i=0; i<s.length(); i++)
-            sb.append(convertToEsc(s.charAt(i)));
+            sb.append(convertToEntity(s.charAt(i)));
         return sb.toString();
 	}
 

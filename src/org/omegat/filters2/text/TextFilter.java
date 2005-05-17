@@ -1,6 +1,6 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
+ Copyright (C) 2002-2005  Keith Godfrey et al
                           keithgodfrey@users.sourceforge.net
                           907.223.2039
 
@@ -21,10 +21,13 @@
 
 package org.omegat.filters2.text;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
-import java.io.*;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
+import org.omegat.util.OStrings;
 
 /**
  * Filter to support plain text files (in various encodings).
@@ -37,17 +40,17 @@ public class TextFilter extends AbstractFilter
     
     public String getFileFormatName()
     {
-        return "Text Files";
+        return OStrings.getString("TEXTFILTER_FILTER_NAME");
     }
 
     public Instance[] getDefaultInstances()
     {
         return new Instance[] 
             { 
-                new Instance("*.txt"), 
-                new Instance("*.txt1", "ISO-8859-1", "ISO-8859-1"),
-                new Instance("*.txt2", "ISO-8859-2", "ISO-8859-2"),
-                new Instance("*.utf8", "UTF-8", "UTF-8")
+                new Instance("*.txt"),                                          // NOI18N
+                new Instance("*.txt1", "ISO-8859-1", "ISO-8859-1"),             // NOI18N
+                new Instance("*.txt2", "ISO-8859-2", "ISO-8859-2"),             // NOI18N
+                new Instance("*.utf8", "UTF-8", "UTF-8")                        // NOI18N
             };
     }
 
@@ -61,11 +64,10 @@ public class TextFilter extends AbstractFilter
         return true;
     }
     
-    public void processFile(Reader infile, Writer outfile)
+    public void processFile(BufferedReader in, BufferedWriter outfile)
             throws IOException
     {
 		String s;
-		BufferedReader in = new BufferedReader(infile);
 
         String nontrans = "";	                                                // NOI18N
 		while( (s=in.readLine())!=null )
@@ -77,11 +79,8 @@ public class TextFilter extends AbstractFilter
 			}
 			String srcText = s;
 			
-			if( outfile!=null )
-			{
-				outfile.write(nontrans);
-				nontrans = "";	                                                // NOI18N
-			}
+            outfile.write(nontrans);
+            nontrans = "";	                                                    // NOI18N
 
             String translation = processEntry(srcText);
             outfile.write(translation);
@@ -89,7 +88,7 @@ public class TextFilter extends AbstractFilter
 			nontrans += "\n";	                                                // NOI18N
 		}
         
-		if( nontrans.length()!=0 )                                             // NOI18N
+		if( nontrans.length()!=0 )
 			outfile.write(nontrans);
     }
 

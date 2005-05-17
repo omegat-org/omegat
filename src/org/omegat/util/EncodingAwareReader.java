@@ -1,30 +1,30 @@
 /**************************************************************************
- * OmegaT - Java based Computer Assisted Translation (CAT) tool
- * Copyright (C) 2002-2004  Keith Godfrey et al
- * keithgodfrey@users.sourceforge.net
- * 907.223.2039
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- **************************************************************************/
+ OmegaT - Java based Computer Assisted Translation (CAT) tool
+ Copyright (C) 2002-2005  Keith Godfrey et al
+                          keithgodfrey@users.sourceforge.net
+                          907.223.2039
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+**************************************************************************/
 
 package org.omegat.util;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
@@ -93,87 +93,87 @@ public class EncodingAwareReader extends Reader
             throws IOException
     {
 		this.type = type;
-		try
-		{
-			String detectencoding = fileEncoding(fileName);
-            if( detectencoding==null )
-                detectencoding="<WRONG, WRONG ENCODING, REALLY WRONG!!!>";      // NOI18N
-            reader = new InputStreamReader(new FileInputStream(fileName), detectencoding);
-		}
-		catch( UnsupportedEncodingException uee )
-		{
-            try
-            {
-                if( encoding==null )
-                    encoding="<WRONG, WRONG ENCODING, REALLY WRONG!!!>";      // NOI18N
-                reader = new InputStreamReader(new FileInputStream(fileName), encoding);
-            }
-            catch( UnsupportedEncodingException uee2 )
-            {
-                reader = new InputStreamReader(new FileInputStream(fileName));
-            }
-		}
+        reader = createReader(fileName, encoding);
     }
 	
 	/** 
-     * Return encoding of the file, if we can detect it.
+     * Returns the reader of the underlying file in the correct encoding.
      *
      * <p>
      * We can detect the following:
      * <ul>
      * <li>UTF-16 with BOM (byte order mark)
      * <li>UTF-8 with BOM (byte order mark)
-     * <li>Any other 8-bit-Latin encoding, specified with XML/HTML-style encoding declarations.
+     * <li>Any other encoding with 8-bit Latin symbols (e.g. Windows-1251, UTF-8 etc), 
+     *     if it is specified using XML/HTML-style encoding declarations.
      * </ul>
      *
      * <p>
      * Note that we cannot detect UTF-16 encoding, if there's no BOM!
      */
-	private String fileEncoding(String fileName) throws IOException
+	private Reader createReader(String fileName, String defaultEncoding) throws IOException
 	{
         // BOM detection
-        Reader reader = new InputStreamReader(new FileInputStream(fileName), "ISO-8859-1");
-        int char1 = reader.read();
-        int char2 = reader.read();
-        int char3 = reader.read();
-        if( char1==0xFE && char2==0xFF )
-            return "UTF-16BE";
-        if( char1==0xFF && char2==0xFE )
-            return "UTF-16LE";
-        if( char1==0xEF && char2==0xBB && char3==0xBF )
-            return "UTF-8";
-        reader.close();
+        BufferedInputStream is = new BufferedInputStream(
+                new FileInputStream(fileName));
         
-        // Otherwise we look at file contents
-		BufferedReader ereader = new BufferedReader(
-                new InputStreamReader(new FileInputStream(fileName), "ISO-8859-1"));
-		StringBuffer buffer = new StringBuffer();
-        String line;
-		while( (line=ereader.readLine())!=null ) {
-			buffer.append( line.toLowerCase() );
-			switch( type )
-			{
-				case ST_HTML:
-					Matcher matcher_html = PatternConsts.HTML_ENCODING.matcher(buffer);
-					if( matcher_html.find() )
-						return matcher_html.group(1);
-					if( buffer.indexOf("</head>") >= 0 ) // NOI18N
-						return "";
-					break;
-				case ST_XML:
-					Matcher matcher_xml = PatternConsts.XML_ENCODING.matcher(buffer);
-					if( matcher_xml.find() )
-						return matcher_xml.group(1);
-					Matcher matcher_xml2 = PatternConsts.XML_HEADER.matcher(buffer);
-					if( matcher_xml2.find() )
-						return "";
-					break;
-				default:
-					throw new IOException("[EAR] Wrong type of stream specified: Either it's HTML, or XML!");
-			}
-		}
-		ereader.close();
-		return ""; // NOI18N
+        is.mark(OConsts.READ_AHEAD_LIMIT);
+        
+        int char1 = is.read();
+        int char2 = is.read();
+        int char3 = is.read();
+        String encoding = null;
+        if( char1==0xFE && char2==0xFF )
+            encoding = "UTF-16BE";                                                  // NOI18N
+        if( char1==0xFF && char2==0xFE )
+            encoding = "UTF-16LE";                                                  // NOI18N
+        if( char1==0xEF && char2==0xBB && char3==0xBF )
+            encoding = "UTF-8";                                                     // NOI18N
+
+        is.reset();
+        if( encoding!=null )
+        {
+            return new InputStreamReader(is, encoding);
+        }
+        
+        is.mark(OConsts.READ_AHEAD_LIMIT);
+        byte[] buf = new byte[OConsts.READ_AHEAD_LIMIT];
+        int len = is.read(buf);
+		String buffer = new String(buf, 0, len);
+            
+        switch( type )
+        {
+            case ST_HTML:
+                Matcher matcher_html = PatternConsts.HTML_ENCODING.matcher(buffer);
+                if( matcher_html.find() )
+                    encoding = matcher_html.group(1);
+                break;
+            case ST_XML:
+                Matcher matcher_xml = PatternConsts.XML_ENCODING.matcher(buffer);
+                if( matcher_xml.find() )
+                    encoding = matcher_xml.group(1);
+                break;
+            default:
+                // generally not reached unless some coding error
+                // as we still support JDK 1.4, we can't use enum to eliminate this
+                throw new IOException("[EAR] Wrong stream type specified: It must be HTML or XML!"); // NOI18N
+        }
+        
+        is.reset();
+        if( encoding!=null )
+        {
+            return new InputStreamReader(is, encoding);
+        }
+        
+        // default encoding if we couldn't detect it ourselves
+        try
+        {
+            return new InputStreamReader(is, defaultEncoding);
+        }
+        catch( UnsupportedEncodingException e )
+        {
+            return new InputStreamReader(is);
+        }
 	}
     
 	public void close() throws IOException

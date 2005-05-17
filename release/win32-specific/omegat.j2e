@@ -1,9 +1,9 @@
-Java parameters=-Xmx128M -jar OmegaT.jar
+Java parameters=-Xmx256M -jar OmegaT.jar
 Main class=
 Application parameters=
 From jar=true
 Working directory=.
 Environment variables=
 Type=JDK without console
-Icon=D:\images\OmegaT.ico
-Output=D:\OmegaT.exe
+Icon=D:\omegat\images\OmegaT.ico
+Output=D:\omegat\release\win32-specific\OmegaT.exe

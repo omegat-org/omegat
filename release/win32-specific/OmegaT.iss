@@ -9,7 +9,7 @@ UninstallDisplayIcon={app}\OmegaT.exe
 Compression=lzma
 SolidCompression=yes
 LicenseFile=license.txt
-OutputDir=..\dist
+OutputDir=..\dist2
 OutputBaseFilename=OmegaT_@VERSION_NUMBER_SUBST@_setup
 
 [Files]
@@ -18,6 +18,7 @@ Source: "images\*"; DestDir: "{app}\images"; Flags: recursesubdirs
 Source: "OmegaT.bat"; DestDir: "{app}"
 Source: "OmegaT.exe"; DestDir: "{app}"
 Source: "OmegaT.jar"; DestDir: "{app}"
+Source: "lib-mnemonics.jar"; DestDir: "{app}"
 Source: "license.txt"; DestDir: "{app}"
 Source: "readme.txt"; DestDir: "{app}"; Flags: isreadme
 Source: "join.html"; DestDir: "{app}"

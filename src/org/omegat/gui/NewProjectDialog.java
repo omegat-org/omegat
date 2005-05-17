@@ -76,10 +76,14 @@ class NewProjectDialog extends JDialog
         
         Border emptyBorder = new EmptyBorder(2,0,2,0);
 
-        m_messageLabel = new JLabel();
+        m_messageArea = new javax.swing.JTextArea();
+        m_messageArea.setEditable(false);
+        m_messageArea.setBackground(
+                javax.swing.UIManager.getDefaults().getColor("Label.background")); // NOI18N
+        m_messageArea.setFont(new Label().getFont());
         Box bMes = Box.createHorizontalBox();
         bMes.setBorder(emptyBorder);
-        bMes.add(m_messageLabel);
+        bMes.add(m_messageArea);
         bMes.add(Box.createHorizontalGlue());
 
         m_srcRootLabel = new JLabel();
@@ -90,7 +94,6 @@ class NewProjectDialog extends JDialog
         m_srcBrowse = new JButton();
         bSrc.add(m_srcBrowse);
         m_srcRootField = new JTextField();
-        m_srcRootField.setEditable(false);
 
         m_locRootLabel = new JLabel();
         Box bLoc = Box.createHorizontalBox();
@@ -100,7 +103,6 @@ class NewProjectDialog extends JDialog
         m_locBrowse = new JButton();
         bLoc.add(m_locBrowse);
         m_locRootField = new JTextField();
-        m_locRootField.setEditable(false);
 
         m_glosRootLabel = new JLabel();
         Box bGlos = Box.createHorizontalBox();
@@ -110,7 +112,6 @@ class NewProjectDialog extends JDialog
         m_glosBrowse = new JButton();
         bGlos.add(m_glosBrowse);
         m_glosRootField = new JTextField();
-        m_glosRootField.setEditable(false);
 
         m_tmRootLabel = new JLabel();
         Box bTM = Box.createHorizontalBox();
@@ -120,7 +121,6 @@ class NewProjectDialog extends JDialog
         m_tmBrowse = new JButton();
         bTM.add(m_tmBrowse);
         m_tmRootField = new JTextField();
-        m_tmRootField.setEditable(false);
 
         m_sourceLocaleLabel = new JLabel();
         Box bSL = Box.createHorizontalBox();
@@ -175,6 +175,8 @@ class NewProjectDialog extends JDialog
         b2.add(Box.createHorizontalStrut(5));
         b2.add(m_cancelButton);
         getContentPane().add(b2, "South");										// NOI18N
+        
+        setResizable(false);
         
         m_okButton.addActionListener(new ActionListener()
         {
@@ -462,18 +464,51 @@ class NewProjectDialog extends JDialog
         projectProperties.setSourceRoot(m_srcRootField.getText());
         if (!projectProperties.getSourceRoot().endsWith(File.separator))
             projectProperties.setSourceRoot(projectProperties.getSourceRoot() + File.separator);
+        
+        if( foldersMissing && !new File(projectProperties.getSourceRoot()).exists() )
+        {
+            JOptionPane.showMessageDialog(this, 
+                    OStrings.getString("NP_SOURCEDIR_DOESNT_EXIST"),
+                    OStrings.TF_ERROR, JOptionPane.ERROR_MESSAGE);
+            m_srcRootField.requestFocusInWindow();
+            return;
+        }
 
         projectProperties.setLocRoot(m_locRootField.getText());
         if (!projectProperties.getLocRoot().endsWith(File.separator))
             projectProperties.setLocRoot(projectProperties.getLocRoot() + File.separator);
+        if( foldersMissing && !new File(projectProperties.getLocRoot()).exists() )
+        {
+            JOptionPane.showMessageDialog(this, 
+                    OStrings.getString("NP_TRANSDIR_DOESNT_EXIST"),
+                    OStrings.TF_ERROR, JOptionPane.ERROR_MESSAGE);
+            m_locRootField.requestFocusInWindow();
+            return;
+        }
 
         projectProperties.setGlossaryRoot(m_glosRootField.getText());
         if (!projectProperties.getGlossaryRoot().endsWith(File.separator))
             projectProperties.setGlossaryRoot(projectProperties.getGlossaryRoot() + File.separator);
+        if( foldersMissing && !new File(projectProperties.getGlossaryRoot()).exists() )
+        {
+            JOptionPane.showMessageDialog(this, 
+                    OStrings.getString("NP_GLOSSDIR_DOESNT_EXIST"),
+                    OStrings.TF_ERROR, JOptionPane.ERROR_MESSAGE);
+            m_glosRootField.requestFocusInWindow();
+            return;
+        }
 
         projectProperties.setTMRoot(m_tmRootField.getText());
         if (!projectProperties.getTMRoot().endsWith(File.separator))
             projectProperties.setTMRoot(projectProperties.getTMRoot() + File.separator);
+        if( foldersMissing && !new File(projectProperties.getTMRoot()).exists() )
+        {
+            JOptionPane.showMessageDialog(this, 
+                    OStrings.getString("NP_TMDIR_DOESNT_EXIST"),
+                    OStrings.TF_ERROR, JOptionPane.ERROR_MESSAGE);
+            m_tmRootField.requestFocusInWindow();
+            return;
+        }
 
         projectProperties.setSourceLanguage(m_sourceLocaleField.getSelectedItem().toString());
         projectProperties.setTargetLanguage(m_targetLocaleField.getSelectedItem().toString());
@@ -494,12 +529,12 @@ class NewProjectDialog extends JDialog
         if( foldersMissing )
         {
             setTitle(OStrings.PP_OPEN_PROJ);
-            m_messageLabel.setText(OStrings.PP_MESSAGE_BADPROJ);
+            m_messageArea.setText(OStrings.PP_MESSAGE_BADPROJ);
         }
         else
         {
             setTitle(OStrings.PP_CREATE_PROJ);
-            m_messageLabel.setText(OStrings.PP_MESSAGE_CONFIGPROJ);
+            m_messageArea.setText(OStrings.PP_MESSAGE_CONFIGPROJ);
         }
 
         Mnemonics.setLocalizedText(m_srcRootLabel, OStrings.PP_SRC_ROOT);
@@ -517,22 +552,6 @@ class NewProjectDialog extends JDialog
         Mnemonics.setLocalizedText(m_sourceLocaleLabel, OStrings.PP_SRC_LANG);
         Mnemonics.setLocalizedText(m_targetLocaleLabel, OStrings.PP_LOC_LANG);
 
-        Dimension orig = m_srcBrowse.getPreferredSize();
-        Dimension tmp = m_locBrowse.getPreferredSize();
-        orig.width = Math.max(orig.width, tmp.width);
-        orig.height = Math.max(orig.height, tmp.height);
-        tmp = m_glosBrowse.getPreferredSize();
-        orig.width = Math.max(orig.width, tmp.width);
-        orig.height = Math.max(orig.height, tmp.height);
-        tmp = m_tmBrowse.getPreferredSize();
-        orig.width = Math.max(orig.width, tmp.width);
-        orig.height = Math.max(orig.height, tmp.height);
-
-        m_srcBrowse.setPreferredSize(orig);
-        m_locBrowse.setPreferredSize(orig);
-        m_glosBrowse.setPreferredSize(orig);
-        m_tmBrowse.setPreferredSize(orig);
-
         Mnemonics.setLocalizedText(m_okButton, OStrings.PP_BUTTON_OK);
         Mnemonics.setLocalizedText(m_cancelButton, OStrings.PP_BUTTON_CANCEL);
     }
@@ -545,7 +564,7 @@ class NewProjectDialog extends JDialog
 
     private int				m_browseTarget;
 
-    private JLabel		m_messageLabel;
+    private JTextArea   m_messageArea;
     /** if this is an existing project with some folders missing */
     private boolean		foldersMissing;
 

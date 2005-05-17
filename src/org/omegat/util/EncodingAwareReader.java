@@ -170,7 +170,7 @@ public class EncodingAwareReader extends Reader
         {
             return new InputStreamReader(is, defaultEncoding);
         }
-        catch( UnsupportedEncodingException e )
+        catch( Exception e )
         {
             return new InputStreamReader(is);
         }

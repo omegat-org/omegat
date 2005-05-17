@@ -1,30 +1,10 @@
 ----------------------------------------------------------------------
- OmegaT 1.4.5 Beta 1 Release Notes
-
- OmegaT is the work of Keith Godfrey
-
- Code has been contributed by
-   Benjamin Siband
-   Maxym Mykhalchuk (lead developer at the time of this release)
-   Sacha Chua
-   Henry Pijffers
-
- Other contributions by
-   Marc Prior (project coordinator and ASAD manual writer)
-   Jean-Christophe Helary
-   Samuel Murray
-   Dmitry Gabinski (user manual writer at the time of this release)
-
- Localized OmegaT versions are by
-   Jean-Christophe Helary (French l10n)
-   Dmitry Gabinski (Belorussian, Russian and Esperanto)
-   Juan Salcines and Cesar Escribano Esteban (Spanish l10n)
-
- And many, many more very helpful people
-
- We thank you for your interest.
+ OmegaT 1.4.5 Release Candidate Release Notes
 ----------------------------------------------------------------------
 
+General note:
+  OmegaT 1.4.5 loads source files visibly slower than 1.4.4.
+  This is a productivity regression, and is to be fixed in a final 1.4.5 release.
 
 General changes in 1.4 (summary)
 ----------------------------------------------------------------------
@@ -33,16 +13,117 @@ UI changes:
     Main interface improved
     Font may be selected
     Full localisation support
-    // not in 1.4.5 Beta1 Belorussian, French, German, Russian and Spanish l10n
+    // not in 1.4.5Beta2 // Belorussian, Esperanto, French, German, Japanese, Russian and Spanish l10ns
     Ability to jump to the next untranslated segment
-    Rich customization of Format Filters behaiviour
+    Rich customization of Format Filters behaviour
 New filters:
     XHTML
     Java resource bundles (.properties)
+    NetBeans EDGE Newsletters
 Core changes:
     New Fuzzy Matching algorithm - more matches, lower memory footprint
     Refactored code with more comments
     Windows installer
+
+
+1.4.5 Release Candidate
+-------------------------------
+
+Bugfixes:
+
+- Less than sign causes problems in HTML, XHTML and OpenOffice
+  http://sf.net/tracker/index.php?func=detail&aid=1176585&group_id=68187&atid=520347
+
+- Keys to select/delete target text work not as expected
+  http://sf.net/tracker/index.php?func=detail&aid=1085043&group_id=68187&atid=520347
+
+- No warnings on wrong language codes during project creation
+  http://sf.net/tracker/index.php?func=detail&aid=1053695&group_id=68187&atid=520347
+
+- Weird behaviour of Create Project / Open Project dialogs:
+  * Cancel during project creation caused the dialog to appear in weird state
+  * Cancel during project load resulted in InterruptedAcception shown to the user
+
+- Corrupt target OOo files after compiling
+  http://sf.net/tracker/index.php?func=detail&aid=1188307&group_id=68187&atid=520347
+  (regression in OpenOffice and XHTML due to a massive rewrite of file filters)
+
+
+Enchancements:
+
+- File Filters Redesign 
+  http://sf.net/tracker/index.php?func=detail&aid=991526&group_id=68187&atid=520350
+
+  Now mostly all the information about filters is exposed,
+  and may be edited by user. Such as:
+  * Turning filters on/off
+  * Adding/changing extension(s) of each format
+  * Setting of the source & target encoding for the filter to use.
+  * Setting a pattern of target filename
+
+Note that filters must be 
+
+- Load filters as plugins
+  http://sf.net/tracker/index.php?func=detail&aid=1195957&group_id=68187&atid=520350
+  
+  OmegaT now may load filter plugins dynamically.
+  Filter plugins should be situated in [OmegaT-install-dir]/plugins 
+  and should be packed as JAR files with manifest stating:
+  * OmegaT-Plugin: true
+  and then for each filter in a plugin (each plugin may have more than one filter)
+  * Name: the.package.name.TheFilterName
+  * OmegaT-Filter: true
+
+- UI issues: Make menu item names more clear & Change the way we display version
+  http://sf.net/tracker/index.php?func=detail&aid=1037633&group_id=68187&atid=520350
+  http://sf.net/tracker/index.php?func=detail&aid=1037638&group_id=68187&atid=520350
+
+- ESC to close the file list
+  http://sf.net/tracker/index.php?func=detail&aid=1073194&group_id=68187&atid=520350
+
+- Hide CDATA from translators in XML/XHTML
+  http://sf.net/tracker/index.php?func=detail&aid=1110991&group_id=68187&atid=520350
+
+- Error log
+  http://sf.net/tracker/index.php?func=detail&aid=1164377&group_id=68187&atid=520350
+  (now OmegaT stores error messages to 'log.txt' file, reset each time you start OmegaT)
+
+- New filter: NetBeans EDGE Newsletter
+  http://sf.net/tracker/index.php?func=detail&aid=1195959&group_id=68187&atid=520350
+  (really a small extension of XML filter, useful for a really small number of people.
+   this filter is implemented as a plugn).
+
+
+1.4.5 Beta3
+-------------------------------
+
+Bugfixes:
+
+- Compiled OpenOffice files missing language-specific characters
+  http://sf.net/tracker/index.php?func=detail&aid=1188723&group_id=68187&atid=520347
+  
+- No warnings on wrong language codes during project creation
+  http://sf.net/tracker/index.php?func=detail&aid=1053695&group_id=68187&atid=520347
+
+Also some work on stabilizing the interface...
+
+TODO: Finalize documentation and implement some minor Bugfixes / RFEs.
+
+
+1.4.5 Beta2
+-------------------------------
+Bugfixes:
+
+- Less than sign causes problems in XHTML & OpenOffice
+  (similar to the bugfix in Beta1, but for XML-based filters)
+  http://sf.net/tracker/index.php?func=detail&aid=1176585&group_id=68187&atid=520347
+
+Enchancements:
+
+- Now 1.4.5 is fully localizable (no hardcoded English is left).
+
+- OmegaT 1.4.5 is compiled using Java 1.4,
+  but is fully functional under both Java 1.4 and Java 5.
 
 1.4.5 Beta1
 -------------------------------

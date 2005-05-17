@@ -52,18 +52,31 @@ public abstract class AbstractFilter
      */
     public static String ENCODING_AUTO_HUMAN = OStrings.getString("ENCODING_AUTO");
 
-    public static final String TFP_FILENAME = "${filename}";                 // NOI18N
-    public static final String TFP_NAMEONLY = "${nameOnly}";                 // NOI18N
-    public static final String TFP_EXTENSION = "${extension}";               // NOI18N
-    public static final String TFP_SOURCELOCALE = "${sourceLanguage}";       // NOI18N
-    public static final String TFP_TARGETLOCALE = "${targetLanguage}";       // NOI18N
+    /** The original filename (with extension). */
+    public static final String TFP_FILENAME = "${filename}";                    // NOI18N
+    /** The original filename without extension. */
+    public static final String TFP_NAMEONLY = "${nameOnly}";                    // NOI18N
+    /** The original file extension. */
+    public static final String TFP_EXTENSION = "${extension}";                  // NOI18N
+    /** "xx_YY", locale code */
+    public static final String TFP_TARGET_LOCALE = "${targetLocale}";           // NOI18N
+    /** "xx-YY", the TMX/XML language code */
+    public static final String TFP_TARGET_LANGUAGE = "${targetLanguage}";       // NOI18N
+    /** language "xx" only */
+    public static final String TFP_TARGET_LANG_CODE = "${targetLanguageCode}";  // NOI18N
+    /** country "YY" only */
+    public static final String TFP_TARGET_COUNTRY_CODE = "${targetCoutryCode}";    // NOI18N
+    
+    /** All target filename patterns. */
     public static final String[] TARGET_FILENAME_PATTERNS = new String[] 
     {
         TFP_FILENAME,
         TFP_NAMEONLY,
         TFP_EXTENSION,
-        TFP_SOURCELOCALE,
-        TFP_TARGETLOCALE,
+        TFP_TARGET_LOCALE,
+        TFP_TARGET_LANGUAGE,
+        TFP_TARGET_LANG_CODE,
+        TFP_TARGET_COUNTRY_CODE
     };
     
     

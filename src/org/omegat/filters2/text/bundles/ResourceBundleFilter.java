@@ -65,7 +65,7 @@ public class ResourceBundleFilter extends AbstractFilter
         return new Instance[] 
             { 
                 new Instance("*.properties", ENCODING_AUTO, ENCODING_AUTO,      // NOI18N
-                        TFP_NAMEONLY+"_"+TFP_TARGETLOCALE+"."+TFP_EXTENSION)           // NOI18N
+                        TFP_NAMEONLY+"_"+TFP_TARGET_LOCALE+"."+TFP_EXTENSION)           // NOI18N
             };
     }
 	

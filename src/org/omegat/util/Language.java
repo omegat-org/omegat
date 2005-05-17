@@ -68,9 +68,18 @@ public class Language
     
     /**
      * Returns a string representation
-     * as an ISO language code (LL-CC).
+     * as an ISO language code (xx-YY).
      */
     public String toString()
+    {
+        return getISOLanguage();
+    }
+    
+    /**
+     * Returns a string representation
+     * as an ISO language code (xx-YY).
+     */
+    public String getISOLanguage()
     {
         if( locale==null || locale.toString().length()==0 )
             return "";
@@ -82,6 +91,54 @@ public class Language
             return localestring;
         }
     }
+
+    /**
+     * Returns a string representation
+     * as an Java locale (xx_YY).
+     */
+    public String getLocale()
+    {
+        if( locale==null || locale.toString().length()==0 )
+            return "";
+        else
+        {
+            String localestring = locale.getLanguage().toLowerCase();
+            if( !"".equals(locale.getCountry()) )
+                localestring += "_"+locale.getCountry().toUpperCase();
+            return localestring;
+        }
+    }
+    
+    /**
+     * Returns only a language (xx).
+     */
+    public String getLanguageCode()
+    {
+        if( locale==null || locale.toString().length()==0 )
+            return "";
+        else
+        {
+            return locale.getLanguage().toLowerCase();
+        }
+    }
+    
+    /**
+     * Returns only a country (YY).
+     */
+    public String getCountryCode()
+    {
+        if( locale==null || locale.toString().length()==0 || 
+                "".equals(locale.getCountry()) )
+            return "";
+        else
+        {
+            return locale.getCountry().toUpperCase();
+        }
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     
     /**
      * The array of all the languages.

@@ -58,6 +58,7 @@ import org.omegat.filters2.Instance;
 import org.omegat.filters2.html.HTMLFilter;
 import org.omegat.filters2.text.TextFilter;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
+import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
@@ -887,17 +888,35 @@ public class FilterMaster
             nameOnly = filename.substring(0, dot);
             extension = filename.substring(dot+1);
         }
-        String sourceLanguage = CommandThread.core.
-                getPreference(OConsts.PREF_SOURCELOCALE).replace('-', '_');
-        String targetLanguage = CommandThread.core.
-                getPreference(OConsts.PREF_TARGETLOCALE).replace('-', '_');
         
         String res = pattern;
-        res = res.replaceAll("(?i)\\$\\{filename\\}", filename);                // NOI18N
-        res = res.replaceAll("(?i)\\$\\{nameOnly\\}", nameOnly);                // NOI18N
-        res = res.replaceAll("(?i)\\$\\{extension\\}", extension);              // NOI18N
-        res = res.replaceAll("(?i)\\$\\{sourceLanguage\\}", sourceLanguage);    // NOI18N
-        res = res.replaceAll("(?i)\\$\\{targetLanguage\\}", targetLanguage);    // NOI18N
+        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_FILENAME), 
+                filename);
+        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_NAMEONLY), 
+                nameOnly);
+        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_EXTENSION), 
+                extension);
+
+        Language targetLang = new Language(CommandThread.core.getPreference(OConsts.PREF_TARGETLOCALE));
+        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LOCALE), 
+                targetLang.getLocale());
+        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LANGUAGE), 
+                targetLang.getISOLanguage());
+        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LANG_CODE), 
+                targetLang.getLanguageCode());
+        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_COUNTRY_CODE), 
+                targetLang.getCountryCode());
+        
         return res;
+    }
+    
+    private String targetRegexer(String tfp)
+    {
+        String pattern = tfp;
+        pattern = pattern.replaceAll("\\$", "\\\\\\$");
+        pattern = pattern.replaceAll("\\{", "\\\\{");
+        pattern = pattern.replaceAll("\\}", "\\\\}");
+        pattern = "(?i)"+pattern;
+        return pattern;
     }
 }

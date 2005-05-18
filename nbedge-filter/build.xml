@@ -70,6 +70,8 @@
     <target name="-post-jar">
         <mkdir dir="../plugins/edge/" />
         <copy file="${dist.jar}" todir="../plugins/edge/" />
+        <mkdir dir="../dist/plugins/edge/" />
+        <copy file="${dist.jar}" todir="../dist/plugins/edge/" />
     </target>
     
     <target name="-post-clean">

@@ -92,7 +92,7 @@ public class NBEdgeFilter extends XMLAbstractFilter
         return new Instance[]
         {
             new Instance("*.xml", ENCODING_AUTO, ENCODING_AUTO, 
-                    TFP_NAMEONLY+"_"+TFP_TARGETLOCALE+"."+TFP_EXTENSION),
+                    TFP_NAMEONLY+"_"+TFP_TARGET_LOCALE+"."+TFP_EXTENSION),
         };
     }
     

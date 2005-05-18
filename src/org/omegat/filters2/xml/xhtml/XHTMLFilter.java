@@ -132,8 +132,8 @@ public class XHTMLFilter extends XMLAbstractFilter
 		defineFormatTag("u", "u");	 // NOI18N
 		defineFormatTag("var", "var");	 // NOI18N
         
-        defineVerbatumTag("meta", "meta"); // NOI18N
-        defineVerbatumTag("style", "style"); // NOI18N
+        // defineVerbatumTag("meta", "meta"); // NOI18N
+        // defineVerbatumTag("style", "style"); // NOI18N
         
 		setEntityFilter(new XHTMLEntityFilter());
 	}

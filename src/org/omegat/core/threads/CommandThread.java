@@ -271,6 +271,9 @@ public class CommandThread extends Thread
             // evaluate strings for fuzzy matching 
 			buildNearList();
             
+            // Project Loaded...
+			MessageRelay.uiMessageSetMessageText(tf, "");  // NOI18N
+            
             /*
              temporary removed
 			evtStr = OStrings.CT_LOADING_WORDCOUNT;
@@ -764,19 +767,16 @@ public class CommandThread extends Thread
 						m_config.getSourceRoot().length());
 			
 
-            if( fm.isTranslatable(filename) )
+            m_transFrame.setMessageText(OStrings.CT_LOAD_FILE_MX + filepath);
+
+            m_curFile = new ProjectFileData();
+            m_curFile.name = filename;
+            m_curFile.firstEntry = m_srcTextEntryArray.size();
+            if( fm.loadFile(filename) )
             {
-                m_transFrame.setMessageText(OStrings.CT_LOAD_FILE_MX + filepath);
-                
-    			m_curFile = new ProjectFileData();
-        		m_curFile.name = filename;
-            	m_curFile.firstEntry = m_srcTextEntryArray.size();
                 m_projWin.addFile(filepath, numEntries());
-                
-                fm.loadFile(filename);
-            
-    			m_curFile.lastEntry = m_srcTextEntryArray.size()-1;
             }
+            m_curFile.lastEntry = m_srcTextEntryArray.size()-1;
 		}
 		m_transFrame.setMessageText(OStrings.getString("CT_LOAD_SRC_COMPLETE"));
 		m_curFile = null;

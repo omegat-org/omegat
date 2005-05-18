@@ -132,7 +132,7 @@ public class AboutDialog extends JDialog
         getContentPane().add(scroll, java.awt.BorderLayout.CENTER);
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-460)/2, (screenSize.height-420)/2, 460, 420);
+        setBounds((screenSize.width-460)/2, (screenSize.height-436)/2, 460, 436);
     }
     // </editor-fold>//GEN-END:initComponents
 

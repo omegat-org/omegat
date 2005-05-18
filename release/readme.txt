@@ -1,5 +1,5 @@
 
- OmegaT 1.4.5 Release Candidate Read Me file
+ OmegaT 1.4.5 Release Candidate 3 Read Me file
 =============================================
 
 The most actual info about OmegaT may be found at
@@ -33,6 +33,7 @@ Code has been contributed by
   Maxym Mykhalchuk (lead developer at the time of this release)
   Sacha Chua 
   Henry Pijffers
+  Raymond Martin
 
 Other contributions by 
   Marc Prior (project coordinator and ASAD manual writer)

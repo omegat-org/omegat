@@ -1,14 +1,10 @@
 ----------------------------------------------------------------------
- OmegaT 1.4.5 Release Candidate Release Notes
+ OmegaT 1.4.5 Release Candidate 3 Release Notes
 ----------------------------------------------------------------------
 
-General note:
-  OmegaT 1.4.5 loads source files visibly slower than 1.4.4.
-  This is a productivity regression, and is to be fixed in a final 1.4.5 release.
-
-General changes in 1.4 (summary)
+ General changes in 1.4 (summary)
 ----------------------------------------------------------------------
-UI changes:
+ UI changes:
     Find interface rewritten with enhanced functionality
     Main interface improved
     Font may be selected
@@ -16,83 +12,92 @@ UI changes:
     // not in 1.4.5Beta2 // Belorussian, Esperanto, French, German, Japanese, Russian and Spanish l10ns
     Ability to jump to the next untranslated segment
     Rich customization of Format Filters behaviour
-New filters:
+    Match/Glossary Window has a Split Pane
+ New filters:
     XHTML
     Java resource bundles (.properties)
     NetBeans EDGE Newsletters
-Core changes:
+ Core changes:
     New Fuzzy Matching algorithm - more matches, lower memory footprint
     Refactored code with more comments
     Windows installer
 
 
-1.4.5 Release Candidate
+1.4.5 Release Candidate 3
 -------------------------------
 
-Bugfixes:
+ Bugfixes:
 
-- Less than sign causes problems in HTML, XHTML and OpenOffice
-  http://sf.net/tracker/index.php?func=detail&aid=1176585&group_id=68187&atid=520347
+ - Less than sign causes problems in HTML, XHTML and OpenOffice
+   http://sf.net/tracker/index.php?func=detail&aid=1176585&group_id=68187&atid=520347
 
-- Keys to select/delete target text work not as expected
-  http://sf.net/tracker/index.php?func=detail&aid=1085043&group_id=68187&atid=520347
+ - Keys to select/delete target text work not as expected
+   http://sf.net/tracker/index.php?func=detail&aid=1085043&group_id=68187&atid=520347
 
-- No warnings on wrong language codes during project creation
-  http://sf.net/tracker/index.php?func=detail&aid=1053695&group_id=68187&atid=520347
+ - No warnings on wrong language codes during project creation
+   http://sf.net/tracker/index.php?func=detail&aid=1053695&group_id=68187&atid=520347
 
-- Weird behaviour of Create Project / Open Project dialogs:
-  * Cancel during project creation caused the dialog to appear in weird state
-  * Cancel during project load resulted in InterruptedAcception shown to the user
+ - Weird behaviour of Create Project / Open Project dialogs:
+   * Cancel during project creation caused the dialog to appear in weird state
+   * Cancel during project load resulted in InterruptedAcception shown to the user
 
-- Corrupt target OOo files after compiling
-  http://sf.net/tracker/index.php?func=detail&aid=1188307&group_id=68187&atid=520347
-  (regression in OpenOffice and XHTML due to a massive rewrite of file filters)
+ - Corrupt target OOo files after compiling
+   http://sf.net/tracker/index.php?func=detail&aid=1188307&group_id=68187&atid=520347
+   (regression in OpenOffice and XHTML due to a massive rewrite of file filters)
+
+ - Compiled OO files missing language-specific characters
+   http://sourceforge.net/tracker/index.php?func=detail&aid=1188723&group_id=68187&atid=520347
+   (regression in OpenOffice filter due to a massive rewrite of file filters)
 
 
-Enchancements:
+ Enchancements:
 
-- File Filters Redesign 
-  http://sf.net/tracker/index.php?func=detail&aid=991526&group_id=68187&atid=520350
+ - File Filters Redesign 
+   http://sf.net/tracker/index.php?func=detail&aid=991526&group_id=68187&atid=520350
 
-  Now mostly all the information about filters is exposed,
-  and may be edited by user. Such as:
-  * Turning filters on/off
-  * Adding/changing extension(s) of each format
-  * Setting of the source & target encoding for the filter to use.
-  * Setting a pattern of target filename
+   Now mostly all the information about filters is exposed,
+   and may be edited by user. Such as:
+   * Turning filters on/off
+   * Adding/changing extension(s) of each format
+   * Setting of the source & target encoding for the filter to use.
+   * Setting a pattern of target filename
 
-Note that filters must be 
+ - Load filters as plugins
+   http://sf.net/tracker/index.php?func=detail&aid=1195957&group_id=68187&atid=520350
+   
+   OmegaT now may load filter plugins dynamically.
+   Filter plugins should be situated in [OmegaT-install-dir]/plugins 
+   and should be packed as JAR files with manifest stating:
+   * OmegaT-Plugin: true
+   and then for each filter in a plugin (each plugin may have more than one filter)
+   * Name: the.package.name.TheFilterName
+   * OmegaT-Filter: true
 
-- Load filters as plugins
-  http://sf.net/tracker/index.php?func=detail&aid=1195957&group_id=68187&atid=520350
-  
-  OmegaT now may load filter plugins dynamically.
-  Filter plugins should be situated in [OmegaT-install-dir]/plugins 
-  and should be packed as JAR files with manifest stating:
-  * OmegaT-Plugin: true
-  and then for each filter in a plugin (each plugin may have more than one filter)
-  * Name: the.package.name.TheFilterName
-  * OmegaT-Filter: true
+ - UI issues: Make menu item names more clear & Change the way we display version
+   http://sf.net/tracker/index.php?func=detail&aid=1037633&group_id=68187&atid=520350
+   http://sf.net/tracker/index.php?func=detail&aid=1037638&group_id=68187&atid=520350
 
-- UI issues: Make menu item names more clear & Change the way we display version
-  http://sf.net/tracker/index.php?func=detail&aid=1037633&group_id=68187&atid=520350
-  http://sf.net/tracker/index.php?func=detail&aid=1037638&group_id=68187&atid=520350
+ - ESC to close the file list
+   http://sf.net/tracker/index.php?func=detail&aid=1073194&group_id=68187&atid=520350
 
-- ESC to close the file list
-  http://sf.net/tracker/index.php?func=detail&aid=1073194&group_id=68187&atid=520350
+ - Hide CDATA from translators in XML/XHTML
+   http://sf.net/tracker/index.php?func=detail&aid=1110991&group_id=68187&atid=520350
 
-- Hide CDATA from translators in XML/XHTML
-  http://sf.net/tracker/index.php?func=detail&aid=1110991&group_id=68187&atid=520350
+ - Error log
+   http://sf.net/tracker/index.php?func=detail&aid=1164377&group_id=68187&atid=520350
+   (now OmegaT stores error messages to 'log.txt' file, reset each time you start OmegaT)
 
-- Error log
-  http://sf.net/tracker/index.php?func=detail&aid=1164377&group_id=68187&atid=520350
-  (now OmegaT stores error messages to 'log.txt' file, reset each time you start OmegaT)
+ - New filter: NetBeans EDGE Newsletter
+   http://sf.net/tracker/index.php?func=detail&aid=1195959&group_id=68187&atid=520350
+   (really a small extension of XML filter, useful for a really small number of people.
+    this filter is implemented as a plugn).
 
-- New filter: NetBeans EDGE Newsletter
-  http://sf.net/tracker/index.php?func=detail&aid=1195959&group_id=68187&atid=520350
-  (really a small extension of XML filter, useful for a really small number of people.
-   this filter is implemented as a plugn).
+ - Edit the project directories paths
+   http://sourceforge.net/tracker/index.php?func=detail&aid=1202405&group_id=68187&atid=520350
 
+ - Match/Glossary Split Pane
+   http://sourceforge.net/tracker/index.php?func=detail&aid=1202984&group_id=68187&atid=520350
+   by Raymond Martin
 
 1.4.5 Beta3
 -------------------------------

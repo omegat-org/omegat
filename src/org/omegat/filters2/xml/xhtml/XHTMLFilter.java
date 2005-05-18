@@ -106,8 +106,8 @@ public class XHTMLFilter extends XMLAbstractFilter
 	public XHTMLFilter()
 	{
 		// TODO manually compress white space to help preserve file format
-		//compressWhitespace();
-		//breakWhitespace();
+		compressWhitespace();
+		breakWhitespace();
         
 		defineFormatTag("a", "a");	 // NOI18N
 		defineFormatTag("abbr", "abbr");	 // NOI18N

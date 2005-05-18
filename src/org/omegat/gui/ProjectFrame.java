@@ -112,36 +112,28 @@ public class ProjectFrame extends JFrame
 		m_ready = true;
 	}
 
-	public /*synchronized*/ void buildDisplay()
+	public void buildDisplay()
 	{
 		if (!m_ready)
 			return;
 
-		int i;
-		Integer inum;
-		int num = 0;
-		int next;
-		String name;
 		if (m_nameList.size() <= 0)
 			return;
 
 		String output = "<table BORDER COLS=2 WIDTH=\"100%\" NOSAVE>";			// NOI18N
 		output += "<tr><td>" + OStrings.PF_FILENAME + "</td><td>" +				// NOI18N
 					OStrings.PF_NUM_SEGMENTS + "</td></tr>";					// NOI18N
-		for (i=0; i<m_nameList.size(); i++)
+        int firstEntry = 1;
+		for (int i=0; i<m_nameList.size(); i++)
 		{
-			name = (String) m_nameList.get(i);
-			if (i < m_nameList.size() - 1)
-			{
-				inum = (Integer) m_offsetList.get(i + 1);
-				next = inum.intValue();
-			}
-			else
-				next = m_maxEntries;
+			String name = (String) m_nameList.get(i);
+            int entriesUpToNow = ((Integer)m_offsetList.get(i)).intValue();
+            int size = 1+entriesUpToNow-firstEntry;
 
-			output += "<tr><td><a href=\"" + (num+1) + "\">" + name +			// NOI18N
-						"</a></td><td>" + (next - num) + "</td></tr>";			// NOI18N
-			num = next;
+			output += "<tr><td><a href=\"" + firstEntry + "\">" + name +        // NOI18N
+						"</a></td><td>" + size + "</td></tr>";                  // NOI18N
+            
+			firstEntry = entriesUpToNow+1;
 		}
 		output += "</table>";													// NOI18N
 		m_editorPane.setText(output);

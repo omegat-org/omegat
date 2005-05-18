@@ -6,7 +6,7 @@
     <title>OmegaT: Project Files and Directories</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="generator" content="Kate (Linux)">
-    <meta name="changed" content="20050513">
+    <meta name="changed" content="20050517">
     <link rel="stylesheet" type="text/css" href="omegat.css">
   </head>
 
@@ -50,6 +50,19 @@
     <ul>
       <li>
         <p>
+          <b>log.txt:</b> 
+      
+          an automatically created log file used to check for errors. Users can
+          check this file and report errors and bugs to the users group or development
+          team (see
+          
+          <a href="Important.html">Important Notes</a>
+          
+          also).
+        </p>
+      </li>
+      <li>
+        <p>
           <b>omegat.project.</b> 
       
           OmegaT automatically creates this file when the project is created. It is
@@ -71,6 +84,57 @@
           <b>/tm</b> 
      
           directory.
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>project_save.tmx:</b>
+      
+          this is a TMX file that is created in
+          
+          <b>/omegat</b>
+          
+          when the project is saved for the first time. This serves as the working 
+          translation memory for the project. It is possible to merge pre-existing
+          TMs (of the same type) into this one.
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>project_save.tmx.bak:</b>
+      
+          this is a TMX file that is created in
+          
+          <b>/omegat</b>
+          
+          when a project is first reopened. It serves as a backup of 
+          
+          <b>project_save.tmx:</b>
+          
+          and is updated each time you reopen a project, before any possible change 
+          has taken place to the translation memory for the project.
+        </p>
+      </li>      
+      <li>
+        <p>        
+          <b>*.tmx</b>
+           
+          in
+          
+          <b>/tm</b>: 
+          
+          translation memory exchange files created previously. These files must 
+          be in TMX Level 1 (version 1.1) format.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          <b>word_counts:</b>
+      
+          contains two word counts of the complete project: one count including and 
+          one count excluding 100% matches (this function is currently disabled; 
+          it will be re-enabled in a newer versions of OmegaT)
         </p>
       </li>
       <li>
@@ -115,57 +179,6 @@
         </p>
       </li>
       <li>
-        <p>
-          glossary files (i.e. 
-          
-          <b>*.tab</b>, 
-          <b>*.utf8</b>
-           
-          file types) in
-          
-          <b>/glossary</b>.
-        </p>
-      </li>
-
-      <li>
-        <p>
-          <b>project_save.tmx:</b>
-      
-          this is a TMX file that is created in
-          
-          <b>/omegat</b>
-          
-          when the project is saved for the first time. This serves as the working 
-          translation memory for the project. It is possible to merge pre-existing
-          TMs (of the same type) into this one.
-        </p>
-      </li>
-      <li>
-        <p>
-          <b>project_save.tmx.bak:</b>
-      
-          this is a TMX file that is created in
-          
-          <b>/omegat</b>
-          
-          when a project is first reopened. It serves as a backup of 
-          
-          <b>project_save.tmx:</b>
-          
-          and is updated each time you reopen a project, before any possible change 
-          has taken place to the translation memory for the project.
-        </p>
-      </li>      
-      <li>
-        <p>
-          <b>word_counts:</b>
-      
-          contains two word counts of the complete project: one count including and 
-          one count excluding 100% matches (this function is currently disabled; 
-          it will be re-enabled in a newer versions of OmegaT)
-        </p>
-      </li>
-      <li>
         <p>      
           translated document files (of the same type as the associated source 
           document files in /source), along with other non-translatable files copied 
@@ -177,15 +190,15 @@
         </p>
       </li>
       <li>
-        <p>        
-          <b>*.tmx</b>
+        <p>
+          glossary files (i.e. 
+          
+          <b>*.tab</b>, 
+          <b>*.utf8</b>
            
-          in
+          file types) in
           
-          <b>/tm</b>: 
-          
-          translation memory exchange files created previously. These files must 
-          be in TMX Level 1 (version 1.1) format.
+          <b>/glossary</b>.
         </p>
       </li>
     </ul>

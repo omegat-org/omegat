@@ -25,10 +25,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.table.AbstractTableModel;
-import org.omegat.filters2.*;
+
+import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.util.OStrings;
-
 
 /**
  * Wrapper around a single file filter class
@@ -221,7 +221,6 @@ public class OneFilter extends AbstractTableModel implements Serializable
         instances.set(index, instance);
         fireTableRowsUpdated(index, index);
     }
-    
     
     //////////////////////////////////////////////////////////////////////////
     //  TableModel implementation

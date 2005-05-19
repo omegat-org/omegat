@@ -36,6 +36,7 @@
     </target>
 
     <target name="-post-clean">
+        <ant dir="nbedge-filter" target="clean" inheritAll="false" />
         <delete>
             <fileset dir="src" includes="**/*.class"/>
         </delete>
@@ -45,6 +46,10 @@
         <delete dir="dist2"/>
         <delete dir="plugins"/>
         <ant dir="addons/properties-import" target="clean" inheritAll="false"/>
+    </target>
+
+    <target name="-post-jar">
+        <ant dir="nbedge-filter" target="jar" inheritAll="false" />
     </target>
     
     <target name="win" description="Build Win32 distro" depends="init,jar,zip">

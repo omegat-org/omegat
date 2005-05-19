@@ -219,7 +219,7 @@ is divided into following sections:
     ===================
     -->
     <target name="deps-jar" depends="init" unless="no.deps">
-        <ant antfile="${project.omegat}/build.xml" inheritall="false" target="jar"/>
+        <ant antfile="${project.OmegaT}/build.xml" inheritall="false" target="jar"/>
     </target>
     <target name="-pre-pre-compile" depends="init,deps-jar">
         <mkdir dir="${build.classes.dir}"/>
@@ -479,7 +479,7 @@ is divided into following sections:
     ===============
     -->
     <target name="deps-clean" depends="init" unless="no.deps">
-        <ant antfile="${project.omegat}/build.xml" inheritall="false" target="clean"/>
+        <ant antfile="${project.OmegaT}/build.xml" inheritall="false" target="clean"/>
     </target>
     <target name="-do-clean" depends="init">
         <delete dir="${build.dir}"/>

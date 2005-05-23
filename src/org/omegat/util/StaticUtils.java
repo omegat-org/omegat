@@ -283,21 +283,6 @@ public class StaticUtils
 	}
 
     /**
-     * Removes the log on start.
-     */
-    static
-    {
-        try
-        {
-            new File("log.txt").delete();
-        }
-        catch( Exception e )
-        {
-            // do nothing
-        }
-    }
-    
-    /**
      * Returns a log stream.
      */
     public static PrintStream getLogStream()

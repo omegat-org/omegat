@@ -22,6 +22,7 @@
 package org.omegat;
 
 import java.util.Date;
+import java.util.Locale;
 import javax.swing.UIManager;
 
 import org.omegat.gui.TransFrame;
@@ -43,7 +44,8 @@ public class Main
                 "===================================================================" +   // NOI18N
                 "\n" +                                                                    // NOI18N
                 OStrings.VERSION+                                                         // NOI18N
-                " ("+new Date()+")" +                                                     // NOI18N
+                " ("+new Date()+") " +                                                    // NOI18N
+                " Locale "+Locale.getDefault()+                                           // NOI18N
                 "\n");                                                                    // NOI18N
 		try 
 		{

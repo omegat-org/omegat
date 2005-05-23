@@ -654,10 +654,12 @@ public class FilterMaster
      */
     class MyExceptionListener implements ExceptionListener
     {
+        private List exceptionsList = new ArrayList();
         private boolean exceptionOccured = false;
         public void exceptionThrown(Exception e)
         {
             exceptionOccured = true;
+            exceptionsList.add(e);
         }
         
         /**
@@ -666,6 +668,13 @@ public class FilterMaster
         public boolean isExceptionOccured()
         {
             return exceptionOccured;
+        }
+        /**
+         * Returns the list of occured exceptions.
+         */
+        public List getExceptionsList()
+        {
+            return exceptionsList;
         }
     }
     
@@ -683,7 +692,17 @@ public class FilterMaster
             xmldec.close();
             
             if( myel.isExceptionOccured() )
-                throw new Exception("Some exception occured while loading file filters..."); // NOI18N
+            {
+                StringBuffer sb = new StringBuffer();
+                List exceptions = myel.getExceptionsList();
+                for(int i=0; i<exceptions.size(); i++)
+                {
+                    sb.append("    ");                                          // NOI18N
+                    sb.append(exceptions.get(i));
+                    sb.append("\n");                                            // NOI18N
+                }
+                throw new Exception("Exceptions occured while loading file filters:\n"+sb.toString()); // NOI18N
+            }
             
             checkIfAllFilterPluginsAreAvailable();
         }

@@ -289,10 +289,16 @@ public class FilterMaster
         BufferedReader reader = lookup.reader;
 
         BufferedWriter writer = new BufferedWriter(new StringWriter());
-                    
-        filterObject.processFile(reader, writer);
-        reader.close();
-        writer.close();
+        
+        try
+        {
+            filterObject.processFile(reader, writer);
+            reader.close();
+        }
+        catch( IOException ioe )
+        {
+            throw new IOException(filename + "\n" + ioe);                       // NOI18N
+        }
                     
         setMemorizing(false);
         return true;
@@ -364,20 +370,25 @@ public class FilterMaster
             // Copying it
             LFileCopy.copy(sourcedir+File.separator+filename, 
                     targetdir+File.separator+filename);
+            return;
         }
         
         File file = new File(sourcedir+File.separatorChar+filename);
         String name = file.getName();
-        String path = file.getParent();
-        if( path==null )
-            path = "";                                                          // NOI18N
+        String path = filename.substring(0, filename.length()-name.length());
         
         AbstractFilter filterObject = lookup.filterObject;
         BufferedReader reader = lookup.reader;
         Instance instance = lookup.instance;
-        File outfile = new File(targetdir+File.separatorChar+path+File.separatorChar+
-                constructTargetFilename(instance.getSourceFilenameMask(), 
-                                name, instance.getTargetFilenamePattern()));
+        File outfile = 
+                new File(
+                    targetdir + File.separatorChar +
+                    path + File.separatorChar +
+                    constructTargetFilename(
+                        instance.getSourceFilenameMask(),
+                        name, 
+                        instance.getTargetFilenamePattern()));
+        
         BufferedWriter writer = filterObject.createWriter(outfile, instance.getTargetEncoding());
                     
         filterObject.processFile(reader, writer);
@@ -854,9 +865,21 @@ public class FilterMaster
         int lastStarPos = sourceMask.lastIndexOf('*');
         int dot = 0; 
         if( lastStarPos>=0 )
-            dot = filename.indexOf('.', lastStarPos);
+        {
+            // bugfix #1204740
+            // so where's the dot next to the star
+            int lastDotPos=sourceMask.indexOf('.', lastStarPos);
+            // counting chars after the dot
+            int extlength=sourceMask.length()-lastDotPos;
+            // going forward this many chars
+            // and finding the dot we looked for
+            dot = filename.length()-extlength;
+        }
         else
+        {
             dot = filename.lastIndexOf('.');
+        }
+        
         String nameOnly = filename;
         String extension = "";                                                  // NOI18N
         if( dot>=0 )

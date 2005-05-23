@@ -278,7 +278,7 @@ class NewProjectDialog extends JDialog
         {
             projectProperties.setProjectFile(projFileName);
             projectProperties.setProjectRoot(projectProperties.getProjectFile().substring(0,
-                            projectProperties.getProjectFile().lastIndexOf(File.separator)));
+                            projectProperties.getProjectFile().lastIndexOf(File.separator)+1));
         }
 
         projectProperties.setProjectInternal(projectProperties.getProjectRoot() + OConsts.DEFAULT_INTERNAL

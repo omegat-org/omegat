@@ -21,6 +21,7 @@
 
 package org.omegat;
 
+import java.util.Date;
 import javax.swing.UIManager;
 
 import org.omegat.gui.TransFrame;
@@ -37,6 +38,13 @@ public class Main
 {
 	public static void main(String[] args)
 	{
+        StaticUtils.log(
+                "\n" +                                                                    // NOI18N
+                "===================================================================" +   // NOI18N
+                "\n" +                                                                    // NOI18N
+                OStrings.VERSION+                                                         // NOI18N
+                " ("+new Date()+")" +                                                     // NOI18N
+                "\n");                                                                    // NOI18N
 		try 
 		{
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

@@ -1905,7 +1905,10 @@ public class TransFrame extends JFrame implements ActionListener
 	{
 		StaticUtils.log(msg);
 		if (re != null)
+        {
 			re.printStackTrace(StaticUtils.getLogStream());
+            re.printStackTrace();
+        }
 
 		// try to shutdown gracefully
 		CommandThread.core.signalStop();
@@ -1920,7 +1923,7 @@ public class TransFrame extends JFrame implements ActionListener
 			if (CommandThread.core == null)
 				break;
 		}
-		System.exit(1);
+        Runtime.getRuntime().halt(1);
 	}
 	
 	/**

@@ -21,6 +21,7 @@
 
 package org.omegat.filters2.master;
 
+import java.beans.ExceptionListener;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedReader;
@@ -648,6 +649,27 @@ public class FilterMaster
     private File configFile = new File("filters.conf");                         // NOI18N
     
     /**
+     * My Own Class to listen to exceptions, 
+     * occured while loading filters configuration.
+     */
+    class MyExceptionListener implements ExceptionListener
+    {
+        private boolean exceptionOccured = false;
+        public void exceptionThrown(Exception e)
+        {
+            exceptionOccured = true;
+        }
+        
+        /**
+         * Returns whether any exceptions occured.
+         */
+        public boolean isExceptionOccured()
+        {
+            return exceptionOccured;
+        }
+    }
+    
+    /**
      * Loads information about the filters from an XML file.
      * If there's an error loading a file, it calls <code>setupDefaultFilters</code>.
      */
@@ -655,9 +677,14 @@ public class FilterMaster
     {
         try
         {
-            XMLDecoder xmldec = new XMLDecoder(new FileInputStream(configFile));
+            MyExceptionListener myel = new MyExceptionListener();
+            XMLDecoder xmldec = new XMLDecoder(new FileInputStream(configFile), this, myel);
             filters = (Filters)xmldec.readObject();
             xmldec.close();
+            
+            if( myel.isExceptionOccured() )
+                throw new Exception("Some exception occured while loading file filters..."); // NOI18N
+            
             checkIfAllFilterPluginsAreAvailable();
         }
         catch( Exception e )

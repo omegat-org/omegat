@@ -56,8 +56,8 @@ public abstract class XMLAbstractFilter extends AbstractFilter
         
         m_formatList = new ArrayList();
         m_formatDisplayList = new ArrayList();
-        m_verbatumList = new ArrayList();
-        m_verbatumDisplayList = new ArrayList();
+        // not working in 1.4.5
+        // m_verbatumList = new ArrayList();
         m_compressWhitespace = false;
     }
     
@@ -70,14 +70,21 @@ public abstract class XMLAbstractFilter extends AbstractFilter
     }
     
     /**
-     * Defines
+     * Defines a tag that will be transferred into target text without 
+     * any changes.
      */
-    protected void defineVerbatumTag(String tag, String display)
+    // not working in 1.4.5
+    /*
+    protected void defineVerbatumTag(String tag)
     {
         m_verbatumList.add(tag);
-        m_verbatumDisplayList.add(display);
     }
+     */
     
+    /**
+     * Defines formatting tags, that don't count for segment breaks.
+     * E.g. bold, italic, other font modifiers.
+     */
     protected void defineFormatTag(String tag, String display)
     {
         m_formatList.add(tag);
@@ -133,6 +140,9 @@ public abstract class XMLAbstractFilter extends AbstractFilter
             else
             {
                 // tag encountered
+                
+                // not working in 1.4.5
+                /*
                 // first cycle through verbatum tag list to see if match
                 for (i=0; i<m_verbatumList.size(); i++)
                 {
@@ -143,7 +153,7 @@ public abstract class XMLAbstractFilter extends AbstractFilter
                         target.add(blk);
                         
                         // give it a shortcut
-                        s = (String) m_verbatumDisplayList.get(i);
+                        //! s = (String) m_verbatumDisplayList.get(i);
                         blk.setShortcut(s);
                         
                         // copy everything until close block
@@ -187,6 +197,7 @@ public abstract class XMLAbstractFilter extends AbstractFilter
                 // verbatum block handled - continue with new block
                 if (i < m_verbatumList.size())
                     continue;
+                 */
                 
                 // cycle through format tag list to see if match
                 for (i=0; i<m_formatList.size(); i++)
@@ -390,8 +401,8 @@ public abstract class XMLAbstractFilter extends AbstractFilter
     
     private ArrayList	m_formatList;
     private ArrayList	m_formatDisplayList;
-    private ArrayList	m_verbatumList;
-    private ArrayList	m_verbatumDisplayList;
+    // not working in 1.4.5
+    // private ArrayList	m_verbatumList;
     
     private boolean	m_compressWhitespace;
     private boolean	m_breakWhitespace;

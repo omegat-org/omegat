@@ -66,19 +66,8 @@ public class OOFilter extends XMLAbstractFilter
     public Instance[] getDefaultInstances()
     {
         return new Instance[] {
-//            new Instance("*.sxw", ENCODING_AUTO, ENCODING_AUTO),                // NOI18N
-//            new Instance("*.sxc", ENCODING_AUTO, ENCODING_AUTO),                // NOI18N
-//            new Instance("*.sxg", ENCODING_AUTO, ENCODING_AUTO),                // NOI18N
-//            new Instance("*.sxm", ENCODING_AUTO, ENCODING_AUTO),                // NOI18N
-//            new Instance("*.sxd", ENCODING_AUTO, ENCODING_AUTO),                // NOI18N
-//            new Instance("*.sxi", ENCODING_AUTO, ENCODING_AUTO),                // NOI18N
             new Instance("*.sx?", ENCODING_AUTO, ENCODING_AUTO),                // NOI18N
-//            new Instance("*.odw", ENCODING_AUTO, ENCODING_AUTO),                // NOI18N
-//            new Instance("*.odc", ENCODING_AUTO, ENCODING_AUTO),                // NOI18N
-//            new Instance("*.odg", ENCODING_AUTO, ENCODING_AUTO),                // NOI18N
-//            new Instance("*.odm", ENCODING_AUTO, ENCODING_AUTO),                // NOI18N
-//            new Instance("*.odd", ENCODING_AUTO, ENCODING_AUTO),                // NOI18N
-//            new Instance("*.odi", ENCODING_AUTO, ENCODING_AUTO),                // NOI18N
+            new Instance("*.st?", ENCODING_AUTO, ENCODING_AUTO),                // NOI18N
             new Instance("*.od?", ENCODING_AUTO, ENCODING_AUTO),                // NOI18N
             new Instance("*.ot?", ENCODING_AUTO, ENCODING_AUTO),                // NOI18N
         };
@@ -161,7 +150,11 @@ public class OOFilter extends XMLAbstractFilter
 		defineFormatTag("text:s/", "s/");	                                    // NOI18N
 		defineFormatTag("text:tab-stop", "t");	                                // NOI18N
 		defineFormatTag("text:tab-stop/", "t/");	                            // NOI18N
-		defineVerbatumTag("text:footnote", "foot");	                            // NOI18N
+        defineFormatTag("text:line-break", "br");                               // NOI18N
+        defineFormatTag("text:line-break/", "br/");                             // NOI18N
+        
+        // not working in 1.4.5
+		// defineVerbatumTag("text:note-citation");	                            // NOI18N
 	}
 
 

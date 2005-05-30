@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+  "http://www.w3.org/TR/html4/strict.dtd">
+  
+<html>
+  <head>
+    <title>OmegaT: Codes: Language and Locale</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="generator" content="Kate (linux)">
+    <meta name="changed" content="20050514">
+    <meta name="copyright" content="Raymond: Martin, BSc. (2005)">
+    <link rel="stylesheet" type="text/css" href="omegat.css">
+  </head>
+
+  <body lang="en" dir="LTR">
+
+    <div class="navbar-top">
+        
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="OmegaT.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Previous</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="CharsetsFonts.html">Language Character Sets and Fonts</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Next</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="OmegaT.html">Table of Contents</a>
+        </td>
+      </tr>
+    </table>    
+    </div>
+    
+    <div class="content">
+    
+    <h1 align="center">Codes: Language and Locale</h1>
+
+    <h2>Overview</h2>
+
+    <p>
+      OmegaT uses a locale standard in its operation. A locale is used to localize 
+      the user interface and user documentation. It is also used to set up certain 
+      aspects of a translation project and to handle files. This localization makes 
+      use of local codes for its implementation.
+    </p>
+    
+    <h2>Language</h2>
+    
+    
+    <h2>Locale</h2>
+    
+    <p>    
+      A locale in OmegaT refers to what most call a 
+      
+      <i>language</i>. 
+      
+      This encompasses the system locale of the computing environment, but also 
+      involves internal usage within the program specifically aimed at translation
+      projects and the processing of files, or documents, themselves at a more 
+      general level. As such, it is not exclusively concerned with the natural 
+      language text contained within documents; which is considered a separate 
+      and integral part contained in a locale. The locale is specified in terms 
+      of a locale code.     
+    </p>    
+    
+    <h2>Locales Codes</h2>
+    
+    <p>
+      The locale codes (a.k.a. locale names or locale IDs) are based on locales 
+      as implemented in the underlying Java internationization framework. This 
+      is basically a language code and a country code, which many people refer 
+      to inclusively, but incorrectly, as a 
+      
+      <i>language code</i>, 
+      
+      with the requirement that the language code must be lowercase, the country 
+      code must be uppercase, and both are connected by an underscore. There also 
+      exists an optional variant code which is not defined by any standard and is 
+      left up to the application vendor to specify usage of, if any. OmegaT does 
+      not use the variant code presently.
+    </p>
+
+    <p>  
+      A locale code replaces what many still refer to as a
+      
+      <i>language code</i>
+       
+      (a form of locale code) that was used in previous versions of OmegaT. Nevertheless,
+      it is still possible to use a 
+      
+      <i>language code</i> 
+      
+      without any concerns. The reason for using a locale code instead of a 
+      
+      <i>language code</i> 
+      
+      to refer to these similar things is because that is what OmegaT is presenting 
+      to the user, as well as using internally. In order not to confuse the issue 
+      it is better to put these ideas up front so that translators and other language 
+      professionals can work in full knowledge of what they are presented with and 
+      so that they are given the correct terminology.           
+    </p>
+    
+    <p>
+      In practice there is no real confusion in this matter and it is not necessary 
+      to be too concerned about locale code versus 
+      
+      <i>language code</i> 
+      
+      or any internal details related to locale code usage. The facts have merely 
+      been presented to help avoid any possible confusion that may arise.      
+    </p>
+
+    <h3>Compatibility</h3>
+    
+    <p>      
+      There is no compatability issue for end users to be concerned with since
+      it is possible to use the same locale codes
+      
+      (<i>language codes</i>)
+      
+      in OmegaT as are used in TMX or other applications.
+    </p>      
+    
+    <h2>Related Standards</h2>
+    
+    <h3>Language</h3>
+
+    <p>
+      Defined in the RFC 3066 and RFC 1766. In general, uses a two character language 
+      and two character country code connected by a hyphen. The type case is not
+      important in general, but certain implementation specify a particular case for 
+      the combination of language code and country code.
+    </p>
+    
+    <h3>Locale</h3>
+
+    <p>
+      Defined in the ANSI C Standard (ISO 9899) and Java Internationalization framework.
+      Both use a two character language and two character country code connected by
+      an underscore. Language code is lowercase. Country code is uppercase. A
+      variant code is also specified, in different ways in each, but not defined. 
+      All codes are optional.
+    </p>
+    
+    <h3>Language Codes</h3>
+    
+    <p>  
+      Defined by ISO 639. Part 1 of the standard (639-1) defines two character
+      country codes and part 2 (639-2) defines three character codes.
+    </p>
+    
+    <h3>Country Codes</h3>
+    
+    <p>
+      Defined by ISO 3166. Part 1 of the standard (3166-1) defines two character
+      country codes and part 2 (3166-2) defines three character codes.
+    </p>
+    
+    <h3>Variant Codes</h3>
+    
+    <p>
+      Not defined by any standards or codes. Implementation and application
+      dependent, if at all applicable.
+    </p>
+    </div>
+    
+    <div class="navbar-bottom">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="OmegaT.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Previous</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="CharsetsFonts.html">Language Character Sets and Fonts</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Next</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="OmegaT.html">Table of Contents</a>
+        </td>
+      </tr>
+    </table>    
+    </div>
+
+  </body>
+</html>

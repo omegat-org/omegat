@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>インストール</title>
+<link rel="stylesheet" type="text/css" href="omegat.css"></head>
+<body lang="en-US" dir="LTR">
+<table border="0" cellpadding="2" width="100%">
+<tr><td><img src="./OmegaT.png"></td>
+<th><a href="OmegaT.html">目次</a></th>
+<td>前: <a href="SysReqs.html">システム要求</a></td>
+<td>次: <a href="Important.html">重要</a></td></tr></table>
+<h1>インストール</h1>
+
+<h2>インストール</h2>
+
+<p>インストールは3つの段階に分かれます。1つめはJava実行環境(J2RE)のインストール(必要な場合)、2つめはOmegaTのインストール、3つめは設定(Linuxでのみ必要)です。J2REとOmegaTはどちらを先にインストールしてもかまいません。設定は必須ではありませんが、起動がより簡便になります。</p>
+
+<h3>Java実行環境について</h3>
+
+<p>Java実行環境 (J2RE) はシステムでのJavaアプリケーション実行に必要です。スタンドアローン版と開発環境キット付の2つの形で配布されています。</p>
+<p>Javaはブラウザへのプラグインとしても配布されています。しかしこのタイプのJavaではOmegaTは実行<b>できません</b> 。</p>
+<p>JavaScript別の製品で、技術的にはJavaと関係ありません。</p>
+<p>OmegaTを使うにはJ2REが必要です。J2RE無しでOmegaTを動かそうとしないでください。時間の無駄です。</p>
+<p>J2REがインストールされているかわからない場合は、OmegaTをインストールして動くかどうか試してみてください。 (OmegaTのインストールについては下を参照)　なにも起こらないか、エラーメッセージが出た場合はJ2REがインストールされていないと思われます。その際にはJ2REをダウンロード・インストールしてください。</p>
+
+<p><i>（注意：顧客を混乱させるためにSunは定期的に製品名を変えます。バージョン1以降のJREは「Java2」と呼ばれており、そのため現在はJ2REとなっています。Java実行環境にはJava仮想マシン、あるいはJVMという名前があり、MRJとも呼ばれています。開発者用キットはバージョンによってJava Developer's Kit (JDK)、Software Developer's Kit (SDK)、またはJ2SE、J2EE、J2MEなどと呼ばれています。ような気がします。私も混乱しています）</i></p>
+
+<h3>Java実行環境のインストール</h3>
+
+<p>MacOSXではJava実行環境のインストールが必要ありません。プレインストール・設定済みで出荷されています。</p>
+
+<p>Windowsユーザー：「スタート」ボタンまたは「Windows」キーを押して<i>設定</i> > <i>コントロールパネル</i>に行きます。J2REがインストールされている場合は「Java(TM)2 Runtime Environment, Standard Edition 1.3.0_01」などのラベルが見つかるはずです。</p>
+<p>Linux ユーザー：コマンドラインで<i>Java -version</i>してください。インストールされているバージョンが表示されます。 (システムレベルでインストールされている場合ですが)</p>
+<p>J2REは以下のリンクからダウンロード可能です。無料(ライセンスは読んでください)ですがどれが正しいバージョンなのか分かりにくいかもしれません。自分のプラットホーム(Linux, Windows, など)にあわせてダウンロードしてください。ファイルの大きさは14M程度です。</p>
+
+<p>OmegaT 1.4.0はJ2RE1.2以上で動作するはずですが、なるべく新しいバージョンをお勧めします。古いバージョンではいくつかの機能が整っていない可能性があります。</p>
+<p>J2REのかわりに開発者用キットも使えます。中にはJ2REが含まれており、OmegaTを修正できるツールも入っています。</p>
+<p><i>WindowsとLinuxのユーザーは以下のサイトからJava実行環境をダウンロードできます：</i></p>
+<p><a href="http://java.sun.com/getjava/index.html">Sun</a> (すべてのプラットホーム)</p>
+<p><a href="http://www.blackdown.org/java-linux.html">Blackdown</a> (Linux)</p>
+
+<p>古いバージョンのOmegaTはMacintoshOS9のMRJで動作しましたが、新しいバージョンはテストされていません。MRJはアップル社のサイトからダウンロードできます。</p>
+<p>J2REのインストールは付属のインストラクションにしたがってください。</p>
+
+<h3>OmegaTのインストール</h3>
+<h4>すべてのプラットホーム</h4>
+<p>圧縮ファイルを好きな場所に解凍してください。圧縮形式は.zipか.tar.gzipです。LinuxやMac(Stuffit)ユーザーは問題ないはずですが、Windowsユーザーは解凍に特定のツールが必要かも知れません。</p>
+
+<h4>Windowsユーザーのみ</h4>
+<p>Windowsユーザーはインストーラ形式のOmegaT_1.4.4_setup.exeをダウンロードして実行できます。この場合だとインストーラは起動用ショートカットアイコンを<i>スタート > プログラム</i> メニューに配置します。</p>
+
+<h3>設定(Linuxユーザーのみ)</h3>
+<p>Linuxを使っていてもあまり詳しくない場合は、この方法でOmegaTの起動を簡略化してください：</p>
+<p>次の内容のテキストファイルを作成してシェルスクリプトを作ってください：</p>
+<p>#!/bin/bash<br>cd <i><OmegaT></i><br><i><java>/</i>java -jar OmegaT.jar</p>
+<p><i><OmegaT></i> は<i>OmegaT.jar</i>を含んだディレクトリパスで、<i><java></i>はJ2REバイナリ (ファイル名<i>java</i>)のディレクトリです。Javaにパスを設定している場合にはディレクトリを特定する必要なく、<i>java -jar OmegaT.jar</i>で十分です。パスが設定されていない場合はディレクトリの指定が必要です。複数のJavaがインストールされている場合も、OmegaTが正しいバージョンで実行されるよう注意してください。</p>
+<p>ファイル名を<i>OmegaT</i>としてパーミッションを実行可能にしてください。(Konquerorならcontext menu > <i>Properties</i> > <i>Permissions</i> > <i>Exec</i>). これで、コマンドライン上で<i>OmegaT</i> とタイプするだけでOmegaTが起動されるようになりました。アイコンがデスクトップに必要な場合は今回のシェルスクリプトを実行するアイコンを置いてください。</p>
+
+<h2>アプリケーションの起動</h2>
+
+<h3>Macintosh OS X</h3>
+<p>ファイルマネジャで<i>OmegaT.jar</i> をクリック。</p>
+
+<h3>Windows</h3>
+<p>OmegaTがインストーラでインストールされたなら、<i>スタート > プログラム > OmegaT</i>で起動できます。エクスプローラで<i>OmegaT.exe</i>, <i>OmegaT.bat</i> か <i>OmegaT.jar</i> をクリックしても同じです。</p>
+
+<h3>Linux</h3>
+<p><i>java -jar OmegaT.jar</i>をコマンドラインで実行してください。OmegaT をちゃんとタイプしてください - 大文字小文字も区別されます。</p>
+<p>JavaがOmegaTの場所を検知するように設定していない場合、まずOmegaT.jarが含まれているディレクトリに移動する必要があります。</p>
+<p>Javaにパスを設定していない場合にはフルパスを指定する必要があります。上記の設定を何もしていない場合は、起動方法は以下のようになるかと思います：</p>
+<p>cd /home/user/OmegaT<br>/home/user/j2re1.4.2/bin/java -jar OmegaT</p>
+
+<p>&nbsp;</p>
+<table border="0" cellpadding="2" width="100%">
+<tr><td><img src="./OmegaT.png"></td>
+<th><a href="OmegaT.html">目次</a></th>
+<td>前: <a href="SysReqs.html">システム要求</a></td>
+<td>次: <a href="Important.html">重要</a></td></tr></table>
+
+</body>
+</html>

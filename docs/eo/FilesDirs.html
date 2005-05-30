@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Projektaj dosieroj kaj dosierujoj</title>
+<link rel="stylesheet" type="text/css" href="omegat.css"></head>
+<body lang="en-US" dir="LTR">
+<table border="0" cellpadding="2" width="100%">
+<tr><td><img src="../OmegaT.png"></td>
+<th><a href="OmegaT.html">Enhavo</a></th>
+<td>reen: <a href="TMFormats.html">Formatoj de tradukmemoraj kaj glosaraj dosieroj</a></td>
+<td>antaŭen: <a href="Shortcuts.html">Tujaĵoj</a></td></tr></table>
+<h1>Projektaj dosieroj kaj dosierujoj</h1>
+
+<h2>Priskribo de projektaj dosieroj kaj dosierujoj</h2>
+
+<p>OmegaT-projekto enhavas sekvajn dosierojn kaj dosierujojn:</p>
+<p><i>Ĉefa projektodosierujo</i>. Ĉi tiun dosierujon oni kreas, kiam projekto estas kreata.<br>Ĝin nomigas la uzulo.</p>
+<ul><li><i>omegat.project.</i> Kiam projekto estas kreata, OmegaT aŭtomate kreas ĉi-tiun dosieron kaj metas ĝin en ĉi-tiun ujon. Pro malfermi projekton en OmegaT, malfermu ĝian dosieron <i>omegat.project</i>.</li>
+
+<li><i><projektonomo>.tmx</i>. Tio estas la tradukmemoro, ekposrtita per la projekto. OmegaT kreas ĝin aŭtomate kaj metas ĝin en ĉi-tiun ujon ĉiam, kiam oni kompilas projekton. Atentu: ĉi-tiu tradukmemoro enhavas nur segmentojn el la projekto je la tempo de la lasta kompilo. Ĝi ne importas iujn segmentojn el iu tradukmemora dosiero el la dosierujo <i>/tm</i>.</li>
+
+<li>Dosierujo <i>/source</i>. Metu en ĉi-tiun dosierujon tradukendajn dosierojn post krei projekton kaj antaŭ malfermi ĝin. Ĉiuj dosieroj el ĉi-tiu dosierujo kaj ĝiaj subdosierujoj estas inkluzivataj enprojeken por traduko, kondiĉe ke iliaj formatoj estas subtenataj, kaj ili havas taŭgajn dosiernomajn sufiksojn.</li>
+
+<ul><li><i>*.txt</i>,</li>
+  <li><i>*.xhtml, *.html</i>,</li>
+  <li><i>*.properties</i>,</li>
+  <li><i>*.sxw</i></li></ul>
+
+  <p>Dosieroj kun aliaj sufiksoj ankaŭ povas esti importataj, se iliaj sufiksoj estas alfrontataj al la defaŭltaj sufiksoj.</p>
+<p>Dosieroj en <i>/source</i>, kiuj ne estis importitaj neprojekten, estas senŝanĝe transdonataj en <i>/target</i>, kiam oni kompilas projekton. Tio ebligas krei kompletajn spegulojn de TTTejoj el <i>/source</i> en <i>/target</i>, kune kun iliaj bildodosieroj en formatoj GIF aŭ JPEG ktp.</p></li>
+
+<li>Dosierujo <i>/glossary</i>. Metu <a href="Gloss.html">glosaro(j)n</a>, kiu(j)n vi volas uzi, en ĉi-tiun ujon post krei projekton.
+<ul><li><i>*.tab, *.utf8</i>: glosardosieroj.</li></ul></li>
+
+<li>Dosierujo <i>/omegat</i>. OmegaT aŭtomate metas en ĉi-tiun dosierujon sekvajn dosierojn, kiam projekto estas kreita:</li>
+
+<ul><li><i>project_save.tmx:</i> ĉi-tiu dosiero estas kreata, kiam oni konservas projekton unuafoje. Ĝi estas en TMX-formato kaj estas portempa tradukmemoro de la projekto.</li>
+
+<li><i>word_counts: </i>ĉi-tiu dosiero enhavas du vortokkvantoj  de la kompleta projekto: unu inkluzive de 100%-aj kongruaĵoj kaj unu ekskluzive.</li></ul>
+
+<li>Dosierujo <i>/target</i>. OmegaT metas ĉi-tien tradukitajn dosierojn, kiam projekto estas kompilita.<br>
+<ul><li><i>*.txt, *.xhtml, *.html, *.properties, *.sxw</i>: tradukitaj dosieroj</li>
+<li>Netradukitaj dosieroj estas transdonataj el <i>/source</i>, kiam projekto estas kompilata.</li></ul></li>
+<li>Dosierujo <i>/tm</i>. Metu ĉi-dosierujen <a href="TMFormats.html">tradukmemorojn</a>, kiujn vi volas uzi, post krei kaj antaŭ malfermi projekton. Atentu: se vi uzas antaŭajn tradukmemorojn aŭ ne, OmegaT kreas portempan tradukmemoron por la projekto, <i>project_save.tmx</i>, en <i>/omegat</i>, kiam projekto estas konservata, kaj ankaŭ metas eksportitajn tradukmemoron en la radikan dosierujon, kiam projekto estas kompilata.
+<ul><li><i>*.tmx</i>: tradukmemoraj dosieroj, kreitaj en antaŭaj projektoj. <i>*.tmx</i>-dosieroj devas esti en la formato TMX nivelo 1.</li></ul></li>
+</ul>
+
+<h2>Ŝanĝo de lokon de projektaj dosieroj kaj dosierujoj</h2>
+
+<p>Projektaj dosierujoj estas kreataj, kiam oni kreas projekton. Defaŭlte ili ĉiuj subas la ĉefan projektodosierujon, sed oni povas elekti aliajn lokojn por ili, alklakante butonon <i>Foliumu</i>. Tiel oni povas konservi tradukmemorojn en difinitajn ujojn, ekzeple, kaj elekti la necesan dosierujon, kiam oni kreas novan projekton, anstataŭ kopii tradukmemora(j)n dosiero(j)n en nove kreitan dosierujon <i>/tm</i>.</p>
+
+<p>Por ŝanĝi lokon de dosierujojn de jam kreita projekto, forigu koncernan dosierujon. (Ne faru tion, kiam la projekto estas malfermita!) Kiam la projekto estas malfermata sekvafoje, OmegaT detektas, ke mankas kelkaj dosierujoj, kaj vidigas dialogujon de dosierujelekto, kie oni povas elekti novan lokon.</p>
+
+<p>&nbsp;</p>
+<table border="0" cellpadding="2" width="100%">
+<tr><td><img src="../OmegaT.png"></td>
+<th><a href="OmegaT.html">Enhavo</a></th>
+<td>reen: <a href="TMFormats.html">Formatoj de tradukmemoraj kaj glosaraj dosieroj</a></td>
+<td>antaŭen: <a href="Shortcuts.html">Tujaĵoj</a></td></tr></table>
+</body>
+</html>

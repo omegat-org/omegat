@@ -1,0 +1,579 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+  "http://www.w3.org/TR/html4/strict.dtd">
+  
+<html>
+  <head>
+    <title>OmegaT: Installation and Configuration</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="generator" content="Kate (Linux)">
+    <meta name="changed" content="20050513">
+    <link rel="stylesheet" type="text/css" href="omegat.css">
+  </head>
+  
+  <body lang="en" dir="LTR">
+
+    <div class="navbar-top">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="OmegaT.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Previous</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="SystemReqs.html">System Requirements</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Next</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="Important.html">Important</a>
+        </td>
+      </tr>
+    </table>   
+    </div>
+    
+    <div class="content">
+    
+    <h1 align="center">Installation and Configuration</h1>
+
+    <h2>Installation</h2>
+
+    <p>
+      Installation involves three stages: 
+    </p>
+    
+    <ol>
+      <li>
+        <b>Java Installation</b>
+        
+        (if not already installed)
+      </li>
+      <li>
+        <b>OmegaT Installation</b>
+      </li>
+      <li>
+        <b>OmegaT Configuration</b>
+      
+        (UNIX/optional)
+      </li> 
+    </ol>
+    
+    <p>
+      Java and OmegaT can be installed in any order. Configuration is not essential
+      on UNIX based platforms, but it will make launching the application more
+      user-friendly for those that require it.
+    </p>
+
+    <h3>Java Installation</h3>
+
+    <p>
+      The computer being used to run OmegaT must have a
+            
+      <b>Java Runtime Environment(JRE)</b>
+      
+      installed on it--<b>IT WILL NOT WORK WITHOUT ONE INSTALLED!</b> 
+    </p>  
+
+    <p>
+      If uncertain as to whether or not a JRE is installed, install OmegaT first 
+      and then test to see if it works (see 
+      
+      <a href="InstallConfig.html#omegat-install">OmegaT Installation</a>). 
+      
+      If nothing happens, or error messages are returned, the Java Runtime Environment 
+      is almost certainly not installed. In which case, please obtain one and install
+      it first. 
+    </p>
+    
+    <p>  
+        Please note that JRE is available in the form of both a standalone product 
+      
+        <b>(J2RE)</b>
+       
+        or as part of the 
+      
+        <b>Java Software Developer's Kit(J2SDK)</b>.
+    </p>
+
+    <p>
+      <b>Mac users</b>: 
+      
+      On Mac OS X, a JRE is pre-installed and configured. This is the only platform 
+      that does not require the user to install a JRE. Depending upon the OS X 
+      version installed, an old JRE version may be the only one available. If OmegaT
+      does not work, make sure to run Software Update from the Apple Menu to get 
+      the latest JRE available for the OS X version. OmegaT is known to work on 
+      OS X from OS X 10.2 to the most recent OS X 10.3.9 update. It has not yet been
+      tested on OS X 10.4 but should work too. In case the system has been updated 
+      to OS X 10.3.9 and problems occur, be aware that a special update is necessary 
+      to make Java application run on this OS X version. Run Software Update and
+      install the required package. Earlier versions of OmegaT (namely 0.97) are 
+      known to run on the MRJ for Macintosh OS 9. OmegaT version 1.4 or greater 
+      will not run on this platform. To run an OmegaT 0.97 version, download the 
+      MRJ for Mac OS9 from the
+       
+      <!--<a href="http://www.apple.com">Apple</a>-->
+      
+      Apple website at http://www.apple.com. OmegaT 0.97 is an obsolete version 
+      and this documentation makes no further reference to it.      
+    </p>
+    
+    <p>
+      <b>UNIX users</b>
+      
+      (includes Linux & Solaris): 
+      
+      type 
+      
+      <code>java -version</code> 
+      
+      at a command prompt in a console or terminal program. The version installed 
+      will be returned(if Java is installed as an executeable in your shell path).
+    </p>
+    
+    <p>
+      <b>Windows users</b>: 
+      
+      check which version of JRE, if any, is installed with 
+      
+      <i>Start(button)/Windows key &gt; Settings &gt; Control Panel</i>.
+      
+      If a JRE is already installed, a control panel dialog labelled 
+      "Java(TM)2 Runtime Environment, Standard Edition 1.x.y_z&#8221; or similar
+      (with x, y, z representing some version numbers) will be present. Note that
+      OmegaT cannot be used on any version before Windows 98 due to the fact that 
+      the JREs available on that platform are not recent enough.
+    </p>
+
+    <p>
+      For both UNIX and Windows, please note that as of this writing the current 
+      Java version is in the 1.5 range (stable version). Please upgrade to a newer
+      version if it is not very recent. A J2RE or J2SDK can be downloaded from the 
+      links below. They are free (note the license conditions), but the naming conventions 
+      may make finding the right version a little confusing. The correct version for 
+      a particular platform (Linux, Solaris, Windows, etc.) is mandatory. The download
+      size and final installation disk space required for a JRE should be taken into 
+      consideration before proceeding. The download sizes are approximately 14 MB 
+      and 32 MB, for J2RE and J2SDK, respectively. Required disk space for installation 
+      may be as much as 2 to 3 times larger than the downloaded installation file 
+      or package.
+    </p>
+    
+    <p>
+      1.4.x versions of OmegaT should work with any JRE version from 1.2 upwards. 
+      However, it is recommended to have the latest JRE version installed, older 
+      versions of Java may not support certain features.
+    </p>
+
+    <p>
+      As an alternative to J2RE the J2SDK can be installed. The J2SDK developer's 
+      kit contains its own copy of J2RE, as well as support for Java software development.
+    </p>
+
+    <p>
+      UNIX and Windows users can download the Java Runtime Environment from:
+    </p>
+
+    <p>
+      <!--<a href="http://java.sun.com/getjava/index.html">Sun</a> (all platforms)-->
+      Sun (all platforms) at http://java.sun.com/getjava/index.html
+    </p>
+
+    <p>
+      <!--<a href="http://www.blackdown.org/java-linux.html">Blackdown</a> (Linux)-->
+      Blackdown (Linux) at http://www.blackdown.org/java-linux.html
+    </p>
+
+    <p>
+      Installation instructions for JRE can be found on the website where it is 
+      downloaded from or accompanying the downloaded file or package once it has 
+      been opened or unarchived.
+    </p>
+
+    <h4>Important Notes:</h4>
+
+    <p>
+      Sun regularly changes the names of its products--possibly to confuse its 
+      customers. So, all JRE above version 1 are known as Java 2, hence the Java 
+      Runtime Environment is now J2RE. The Java Runtime Environment is also known 
+      as the Java Virtual Machine, or JVM. On Macintosh, it also is known as the 
+      MRJ. The developer's kit has been known as the Java Developer's Kit(JDK), 
+      Software Developer's Kit(SDK), and now as J2SE, J2EE, and J2ME, according 
+      to the version. At least, I think so. But I am among the confused.
+    </p>
+
+    <p>
+      Other related (or not so related) forms of Java exist:
+    </p>
+    
+    <ul>  
+      <li>
+        Java for embedded web browser applications (i.e. via plugins); 
+      </li>
+      <li>
+        JavaScript scripting language for webpages (technically unrelated to Java).
+      </li>
+    </ul>
+       
+    <p>
+      Neither of these forms of Java will enable OmegaT to run.
+    </p>
+
+    <a name="omegat-install">    
+    <h3>OmegaT Installation</h3>
+
+    <h4>All Platforms</h4>
+
+    <p>
+      A generic OmegaT archive is available for installation. This version of OmegaT
+      works on Linux, Solaris, Mac OS X, and Windows (and possibly others). See
+      
+      <a href="SystemReqs.html">System Requirements<a> also. Simply extract the contents
+      of the archive into a directory. The archive may be in *.zip, *.tgz, or *.tar.bz2
+      form. UNIX and Mac (Stuffit) users should have no problem with most of these
+      formats; Windows users may not necessarily have a utility for the latter
+      two (recent WinZip versions will probably work with or .tgz file formats; 
+      other file compression programs may work also). For more platform specific
+      packages see the relevant sections.
+    </p>
+
+    <h4>Linux</h4>
+    
+    <p>
+      RPM packages are starting to become available on the sourceforge site. 
+    </p>
+    
+    <p>     
+      The RPM should be compatible with all RPM based Linux distributions. By default, 
+      the OmegaT package will install itself in the directory /opt/omegat. This is 
+      in accord with the Linux Filesystem Hierarchy Standard(FHS) which specifies 
+      that all non-essential (non-system related) applications be installed under 
+      /opt. If an /opt directory does not exist the installation RPM will create 
+      it. Note that system administrator privileges are required to install the 
+      package. Contact your system administrator if it cannot be installed. Please 
+      note that this differs from the other installation methods in that it is 
+      a system-wide installation. As such, each user will have their own OmegaT 
+      preferences file in their home directory distinct from all other users. In
+      this way separate users can log in and have their own preferences rather 
+      than relying on a single preferences setup for all users.
+    </p>
+
+    <h4>Mac OS X</h4>
+
+    <p>
+      OS X users can download a Mac OS X package that automatically installs a Mac 
+      OS X bundle into /Applications/. As usual, the final installation directory 
+      can be modified if desired.
+    </p>
+ 
+    <h4>Windows</h4>
+
+    <p>
+      Windows users can download a Windows binary installer 
+      
+      <b>OmegaT_1.4.x_setup.exe</b>
+       
+      and just run it. In this case, the installer creates a shortcut to launch 
+      OmegaT from the 
+      
+      <i>Start > Programs</i>
+      
+      menu.
+    </p>
+
+    <h3>OmegaT Configuration (UNIX only)</h3>
+
+    <p>
+      If installation on a UNIX based system is done by using the generic archive, 
+      and you are not very familiar with the platform, perform the following to make
+      launching of OmegaT more user-friendly:
+    </p>
+
+    <p>
+      Save the following Bash shell script content as a text file:
+    </p>
+
+    <code>
+      #!/bin/bash
+      <br>
+      
+      cd 
+      
+      <i>&lt;OmegaT&gt;</i>
+      <br>
+      
+      <i>&lt;java&gt;/</i>java -jar OmegaT.jar
+    </code>
+
+    <p>
+      where 
+      
+      <b>&lt;OmegaT&gt;</b> 
+      
+      is the directory containing the file 
+      
+      <b>OmegaT.jar</b> 
+      
+      and 
+      
+      <b>&lt;java&gt;</b> 
+      
+      is the directory containing the J2RE binary (the file named 
+      
+      <b>java</b>). 
+      
+      If the Java path variable is set, it is not necessary to specify this 
+      directory, and 
+      
+      <code>java -jar OmegaT.jar</code> 
+      
+      is sufficient to launch the program. Specifying the directory is necessary if 
+      the Java path variable is not set, and also if the system has more than one 
+      version of Java installed and a specific version needs to be used to launch
+      OmegaT.
+    </p>
+    
+    <p>
+      If Bash is not the default shell program change the first line of the script
+      to reflect this (e.g. for Korn shell use
+    
+      <code>
+        #!/bin/ksh
+      </code>
+    
+      in place of
+      
+      <code>
+        #!/bin/bash
+      </code>)
+    </p>
+
+    <p>
+      Save the script as 
+      
+      <b>OmegaT</b>, 
+      <b>omegat</b>,
+      
+      or under whatever name is preferred. Then set the file permissions of the 
+      script to executable (e.g. via
+      
+      <code>
+      $ chmod u+x OmegaT
+      </code>
+      
+      in a shell, or if using Konqueror, context menu &gt; 
+      
+      <i>Properties</i> &gt; 
+      <i>Permissions</i> &gt; 
+      <i>Exec</i>). 
+      
+      OmegaT can then be launched from the command line by typing the name given
+      to the script. To launch from the desktop, create an icon and set it to execute 
+      the shell script file.
+    </p>
+    
+    <h2>OmegaT Execution</h2>
+
+    <h3>Mac OS X</h3>
+
+    <p>
+      If the Mac OS X bundle has been installed, simply click on the OmegaT icon 
+      located in the install directory. In the case where only the standard Java 
+      files have been downloaded and installed, simply click on the OmegaT.jar 
+      file in a Finder window. OmegaT can also be launched from the Terminal (in 
+      a way similar to the command line under Linux). See the UNIX configuration
+      and execution sections for more information. 
+    </p>
+
+    <h3>UNIX</h3>
+
+    <p>
+      If a generic archive was used for installation then try these instructions
+      to launch OmegaT. For RPM install under Linux executing 
+      
+      <code>
+        OmegaT
+      </code>
+          
+      from a shell is enough to launch the application (no default desktop menu 
+      entry is available yet).
+    </p>
+    <p>
+      Execute 
+      
+      <code>java -jar OmegaT.jar</code> 
+      
+      from the command line. Observe the exact type case of 
+      
+      <i>OmegaT</i>&#8212;the 
+      
+      capitals are important.
+    </p>
+
+    <p>
+      If Java has not been configured to detect the location of the OmegaT files, 
+      change directories to the directory containing the file OmegaT.jar.
+    </p>
+
+    <p>
+      If the Java path variable is not set, specify the complete path first. If 
+      neither of the above have been done, a routine to launch the application 
+      might look something like this for installation from the generic archive:
+    </p>
+    
+    <code>
+      cd /home/<i>&lt;user&gt;</i>/<i>&lt;OmegaT install directory&gt;</i>
+      <br>
+      
+      <i>&lt;JRE directory&gt;</i>/bin/java -jar OmegaT.jar
+    </code>
+
+    <p>
+      for user Joe Blow, archive installation directory 
+    
+      <i>OmegaT</i>, and  JRE directory 
+    </p>
+        
+    <code>
+      /usr/jre1.5
+    </code>
+    
+    <p>
+      this would be
+    </p>
+    
+    <code>
+      cd /home/joeblow/OmegaT</i>
+      <br>
+      
+      /usr/jre1.5/bin/java -jar OmegaT.jar
+    </code>
+        
+    <h3>Windows</h3>
+
+    <p>
+      If OmegaT has been installed with the help of the Windows installer (see above), 
+      it can be launched by clicking on the OmegaT 1.4.x shortcut from the 
+      
+      <i>Start > Programs > OmegaT</i> 
+      
+      menu. It is also possible to click on one of the files 
+      
+      <b>OmegaT.exe</b>, 
+      <b>OmegaT.bat</b>, 
+      
+      or 
+      
+      <b>OmegaT.jar</b> 
+      
+      in the file manager.
+    </p>
+
+    <h2>Localization</h2>
+
+    <p>
+      The language used by OmegaT for the user interface and the user manual
+      are set to a default value which depends on your locale and the localizations
+      available. Only the following localizations can be used at present:
+    </p>
+        
+    <ul>
+      <li>
+        Belorussian (be)
+      </li>
+      <li>
+        English (en)
+      </li>
+      <li>
+        Esperanto (eo)
+      </li>
+      <li>
+        French (fr)
+      </li>
+      <li>
+        Japanese (ja)
+      </li>
+      <li>
+        Spanish (es)
+      </li>
+      <li>
+        Russian (ru)
+      </li>
+    </ul>
+    
+    <p>        
+      If the language desired is not available, the default language will be used.
+      This will default to the system locale, if it is one of the localizations 
+      available, or English when nothing else is available.
+    </p>
+    
+    <p>
+      It is possible to override the default language used by OmegaT by entering 
+      the two letter language code, from the list given, to the -Duser.language 
+      java option (at the command line or in a shell script). This can be useful 
+      when using OmegaT in an environment where the default locale is not supported
+      or is different than the one desired. For instance, starting OmegaT with
+    </p>
+      
+    <code>java -Duser.language=fr -jar OmegaT.jar</code>
+    
+    <p>     
+      will set the language to French regardless of whether other applications
+      in the windowing environment are in French or not.
+    </p>      
+
+    <p>
+      More specific locale settings are not supported for the localization of
+      OmegaT at present (i.e. via the -Duser.country and -Duser.variant options
+      passed to java).
+    </p>
+        
+    <p>     
+      Something else to note is the fact that for a language like Japanese it
+      may be necessary to use a specific internationalized version of JRE from
+      Sun to support character encodings properly. This is most likely in the
+      case of Windows installation.
+    </p>
+    
+    <h4>Mac OS X</h4>
+    
+    <p>
+      On Mac OS X, changing the locale can be done from System Preferences in the 
+      Apple Menu by selecting the International preference pane. Locales can be
+      added and prioritized according to the way any application should be displayed.
+    </p>        
+    </div>    
+    
+    <div class="navbar-bottom">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="OmegaT.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Previous</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="SystemReqs.html">System Requirements</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Next</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="Important.html">Important</a>
+        </td>
+      </tr>
+    </table>   
+    </div>
+    
+  </body>
+</html>
+

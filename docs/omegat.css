@@ -1,2 +1,43 @@
-p, a, li, dt, dd, table, h4 {font-family: "Times New Roman", "Times", "Sans Serif";}
-h1, h2, h3 {font-family: "Arial", "Helvetica", "Serif"; color: darkblue}
+
+p, a, li, dt, dd, table 
+{
+  font-family: "Times New Roman", "Times", "Sans Serif"
+}
+
+h1
+{
+  font-family: "Arial", "Helvetica", "Serif"; 
+  color: navy;
+  margin-top: 0px;
+  margin-bottom: 5px
+}
+
+h2
+{
+  font-family: "Arial", "Helvetica", "Serif";
+  color: navy;
+  margin-top: 15px;
+  margin-bottom: 0px
+}
+
+h3, h4
+{
+  font-family: "Arial", "Helvetica", "Serif";
+  color: navy;
+  margin-top: 15px;
+  margin-bottom: 0px
+}
+
+div.navbar-bottom
+{
+  padding-top: 10px;
+  margin-bottom: 0px
+}
+
+div.shortcuts
+{
+  padding-top: 10px;
+  margin-bottom: 0px
+}
+
+

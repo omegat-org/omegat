@@ -32,6 +32,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import org.omegat.core.StringEntry;
 import org.omegat.util.OStrings;
@@ -154,7 +155,16 @@ public class GlossaryManager
 		{
 			GlossaryEntry glosEntry = (GlossaryEntry)glossaryEntries.get(i);
             String glosStrLow = glosEntry.getSrcText().toLowerCase();
-            Pattern pattern = Pattern.compile("\\b"+glosStrLow+"\\b");          // NOI18N
+            Pattern pattern = null;
+            try
+            {
+                pattern = Pattern.compile("\\b"+glosStrLow+"\\b");      // NOI18N
+            }
+            catch( PatternSyntaxException pse )
+            {
+                StaticUtils.log(pse.toString());
+                continue;
+            }
             
             for(int j=0; j<strEntryList.size(); j++)
             {

@@ -1,5 +1,5 @@
-
- OmegaT 1.4.5 Release Candidate 3 Read Me file
+=============================================
+ OmegaT 1.4.5 Read Me file
 =============================================
 
 The most actual info about OmegaT may be found at
@@ -50,6 +50,6 @@ please note the error, the top 5 or so lines of the stack
 trace and a brief description of how the error occured and forward this info 
 to Yahoo! OmegaT group - http://groups.yahoo.com/group/OmegaT/
 or file the bug for OmegaT project - http://sourceforge.net/projects/omegat/.
-
 ================================
+
 Please see the file 'release_notes.txt' for information specific to this release.

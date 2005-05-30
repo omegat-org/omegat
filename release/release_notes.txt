@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------
- OmegaT 1.4.5 Release Candidate 3 Release Notes
+ OmegaT 1.4.5 Release Notes
 ----------------------------------------------------------------------
 
  General changes in 1.4 (summary)
@@ -9,7 +9,8 @@
     Main interface improved
     Font may be selected
     Full localisation support
-    // not in 1.4.5Beta2 // Belorussian, Esperanto, French, German, Japanese, Russian and Spanish l10ns
+    Belorussian, English, Esperanto, French, German, Italian, Japanese, 
+                            Russian, Spanish, Turkish interface and manual
     Ability to jump to the next untranslated segment
     Rich customization of Format Filters behaviour
     Match/Glossary Window has a Split Pane
@@ -21,6 +22,19 @@
     New Fuzzy Matching algorithm - more matches, lower memory footprint
     Refactored code with more comments
     Windows installer
+
+
+1.4.5
+-------------------------------
+
+ Bugfixes:
+
+ - Problem with glossary - OmT freezing
+   http://sourceforge.net/support/tracker.php?aid=1211458
+
+ - Filters Configuration is not persistent under Turkish locale
+   http://sourceforge.net/support/tracker.php?aid=1207296
+   (workaround JVM bug)
 
 
 1.4.5 Release Candidate 3

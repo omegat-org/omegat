@@ -35,6 +35,15 @@ Code has been contributed by
   Henry Pijffers
   Raymond Martin
 
+Localization contributed by
+  Alessandro Cattelan (Italian)
+  Sabine Cretella and Martin Wunderlich (German)
+  Dmitri Gabinski (Belorussian, Esperanto, and Russian)
+  Jean-Christophe Helary (French)
+  Pablo Roca Santiagio; Juan Salcines and Cesar Escribano Esteban (Spanish)
+  Hisashi Yanagida (Japanese)
+  Erhan Yukselci (Turkish)
+
 Other contributions by 
   Marc Prior (project coordinator and ASAD manual writer)
   Jean-Christophe Helary

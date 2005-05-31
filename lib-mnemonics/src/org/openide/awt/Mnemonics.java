@@ -177,8 +177,11 @@ public final class Mnemonics extends Object {
             } else {
                 // it's non-latin, getting the latin correspondance
                 int latinCode = getLatinKeycode(ch);
-                setMnemonic(item, latinCode);
-                setMnemonicIndex(item, index);
+                if( latinCode!=0 )
+                {
+                    setMnemonic(item, latinCode);
+                    setMnemonicIndex(item, index);
+                }
             }
         }
     }
@@ -188,10 +191,11 @@ public final class Mnemonics extends Object {
      * to some non-Latin symbol on the localized keyboard.
      * The search is done via lookup of Resource bundle 
      * for pairs having the form (e.g.) <code>MNEMONIC_\u0424=A</code>.
+     *
      * @param localeChar non-Latin character or a punctuator to be used as mnemonic
      * @return character on latin keyboard, corresponding to the locale character,
      *         or the appropriate VK_*** code (if there's no latin character 
-     *         "under" the non-Latin one
+     *         "under" the non-Latin one)
      */
     private static int getLatinKeycode(char localeChar) {
         try {
@@ -204,9 +208,8 @@ public final class Mnemonics extends Object {
                 return Integer.parseInt(str); 
         } catch (MissingResourceException x) {
             // correspondence not found, it IS an error,
-            // but we eat it, and return the character itself
-            x.printStackTrace();
-            return localeChar;
+            // but we eat it, and return zero - no mnemonics
+            return 0;
         }
     }
 

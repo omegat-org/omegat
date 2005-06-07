@@ -153,9 +153,7 @@ public class ResourceBundleFilter extends AbstractFilter
 		for(int i=0; i<text.length(); i++)
 		{
 			char ch = text.charAt(i);
-			if( ch>=32 && ch<127 )
-				result.append(ch);
-			else if( ch=='\\' )
+			if( ch=='\\' )
 				result.append("\\\\");											// NOI18N
 			else if( ch=='\n' )
 				result.append("\\n");											// NOI18N
@@ -163,6 +161,8 @@ public class ResourceBundleFilter extends AbstractFilter
 				result.append("\\r");											// NOI18N
 			else if( ch=='\t' )
 				result.append("\\t");											// NOI18N
+            else if( ch>=32 && ch<127 )
+				result.append(ch);
 			else
 			{
 				String code = Integer.toString(ch, 16);

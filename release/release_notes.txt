@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------
- OmegaT 1.4.5 Release Notes
+ OmegaT 1.4.5.01 Release Notes
 ----------------------------------------------------------------------
 
  General changes in 1.4 (summary)
@@ -23,6 +23,24 @@
     Refactored code with more comments
     Windows installer
 
+1.4.5.01
+-------------------------------
+ 
+ Bugfixes:
+
+ - Serious threading issue, preventing OmegaT from showing up...
+   http://sourceforge.net/support/tracker.php?aid=1216514
+
+ - ResourceBundle filter bug: \\ -> \
+   http://sourceforge.net/support/tracker.php?aid=1215590
+
+ - Select all in the editing field shifts focus on MacOSX
+   http://sourceforge.net/support/tracker.php?aid=1211826
+
+ Enchancements:
+ 
+ - Open the project when selecting the project folder
+   http://sourceforge.net/support/tracker.php?aid=1216533
 
 1.4.5
 -------------------------------

@@ -1,7 +1,7 @@
 ; -- OmegaT.iss --
 
 [Setup]
-AppName=OmegaT
+AppName=OmegaT @VERSION_NUMBER_SUBST@
 AppVerName=OmegaT version @VERSION_NUMBER_SUBST@
 DefaultDirName={pf}\OmegaT
 DefaultGroupName=OmegaT

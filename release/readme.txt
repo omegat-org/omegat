@@ -1,5 +1,5 @@
 =============================================
- OmegaT 1.4.5 Read Me file
+ OmegaT 1.4.5.01 Read Me file
 =============================================
 
 The most actual info about OmegaT may be found at
@@ -55,10 +55,10 @@ Other contributions by
 ================================
 In the event of a system error (as evidenced by a stack dump in the command
 line window or file 'log.txt'), 
-please note the error, the top 5 or so lines of the stack
-trace and a brief description of how the error occured and forward this info 
-to Yahoo! OmegaT group - http://groups.yahoo.com/group/OmegaT/
-or file the bug for OmegaT project - http://sourceforge.net/projects/omegat/.
+please note the error and a brief description of how the error occured 
+and forward the file 'log.txt' together with this info 
+to Yahoo! OmegaT group (http://groups.yahoo.com/group/OmegaT/)
+or file the bug for OmegaT project (http://sourceforge.net/projects/omegat/).
 ================================
 
 Please see the file 'release_notes.txt' for information specific to this release.

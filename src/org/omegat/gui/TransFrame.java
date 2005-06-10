@@ -120,20 +120,8 @@ public class TransFrame extends JFrame implements ActionListener
 				}
 			});
 
-		if (CommandThread.core == null)
-		{
-			CommandThread.core = new CommandThread(this);
-			int pri = CommandThread.core.getPriority();
-			if (pri > 1)
-				CommandThread.core.setPriority(pri-1);
-			CommandThread.core.setProjWin(m_projWin);
-			CommandThread.core.start();
-		}
-		m_xlPane.requestFocus();
-
-		CommandThread core = CommandThread.core;
-		String fontName = core.getOrSetPreference(OConsts.TF_SRC_FONT_NAME, OConsts.TF_FONT_DEFAULT);
-		String fontSize = core.getOrSetPreference(OConsts.TF_SRC_FONT_SIZE, OConsts.TF_FONT_SIZE_DEFAULT);
+		String fontName = PreferenceManager.pref.getPreferenceDefault(OConsts.TF_SRC_FONT_NAME, OConsts.TF_FONT_DEFAULT);
+		String fontSize = PreferenceManager.pref.getPreferenceDefault(OConsts.TF_SRC_FONT_SIZE, OConsts.TF_FONT_SIZE_DEFAULT);
         int fontSizeInt = 12;
 		try 
         {
@@ -246,10 +234,10 @@ public class TransFrame extends JFrame implements ActionListener
 		int h = getHeight();
 		int x = getX();
 		int y = getY();
-		CommandThread.core.setPreference(OConsts.PREF_DISPLAY_W, "" + w);		// NOI18N
-		CommandThread.core.setPreference(OConsts.PREF_DISPLAY_H, "" + h);		// NOI18N
-		CommandThread.core.setPreference(OConsts.PREF_DISPLAY_X, "" + x);		// NOI18N
-		CommandThread.core.setPreference(OConsts.PREF_DISPLAY_Y, "" + y);		// NOI18N
+		PreferenceManager.pref.setPreference(OConsts.PREF_DISPLAY_W, "" + w);		// NOI18N
+		PreferenceManager.pref.setPreference(OConsts.PREF_DISPLAY_H, "" + h);		// NOI18N
+		PreferenceManager.pref.setPreference(OConsts.PREF_DISPLAY_X, "" + x);		// NOI18N
+		PreferenceManager.pref.setPreference(OConsts.PREF_DISPLAY_Y, "" + y);		// NOI18N
 	}
 
 	private void createUI()
@@ -814,8 +802,8 @@ public class TransFrame extends JFrame implements ActionListener
             m_font = dlg.getSelectedFont();
 			m_xlPane.setFont(m_font);
 			m_matchViewer.setFont(m_font);
-            CommandThread.core.setPreference(OConsts.TF_SRC_FONT_NAME, m_font.getName());
-            CommandThread.core.setPreference(OConsts.TF_SRC_FONT_SIZE, String.valueOf(m_font.getSize()));
+            PreferenceManager.pref.setPreference(OConsts.TF_SRC_FONT_NAME, m_font.getName());
+            PreferenceManager.pref.setPreference(OConsts.TF_SRC_FONT_SIZE, String.valueOf(m_font.getSize()));
 			activateEntry();
 		}
 	}
@@ -1166,7 +1154,7 @@ public class TransFrame extends JFrame implements ActionListener
 	//	displaying text in markers
 	// move document focus to current entry
 	// make sure fuzzy info displayed if available and wanted
-	public synchronized void activateEntry() 
+	public void activateEntry() 
 	{
 		if (!m_projectLoaded)
 			return;
@@ -1435,14 +1423,12 @@ public class TransFrame extends JFrame implements ActionListener
 				if (m_miDisplayAdvanceKey.isSelected())
 				{
 					m_advancer = KeyEvent.VK_TAB;
-					CommandThread.core.setPreference(
-							OConsts.PREF_TAB, "true");							// NOI18N
+					PreferenceManager.pref.setPreference(OConsts.PREF_TAB, true);
 				}
 				else
 				{	
 					m_advancer = KeyEvent.VK_ENTER;
-					CommandThread.core.setPreference(
-							OConsts.PREF_TAB, "false");							// NOI18N
+					PreferenceManager.pref.setPreference(OConsts.PREF_TAB, false);
 				}
 			}
 			else if (evtSrc == m_miEditUntrans)
@@ -1659,7 +1645,8 @@ public class TransFrame extends JFrame implements ActionListener
             // handling Ctrl+Shift+Home / End manually
             // in order to select only to beginning / to end 
             // of the current segment
-            if( e.isControlDown() && e.isShiftDown() &&
+            if( ((e.getModifiers() & m_shortcutKey)==m_shortcutKey) && 
+                    e.isShiftDown() &&
                     (e.getKeyCode()==KeyEvent.VK_HOME || e.getKeyCode()==KeyEvent.VK_END) )
             {
                 // letting parent do the handling
@@ -1671,6 +1658,24 @@ public class TransFrame extends JFrame implements ActionListener
                 return;
             }
 
+            // handling Ctrl+A manually
+            // BUGFIX FOR: Select all in the editing field shifts focus
+            //             http://sourceforge.net/support/tracker.php?aid=1211826
+            if( ((e.getModifiers() & m_shortcutKey)==m_shortcutKey) && 
+                    e.getKeyCode()==KeyEvent.VK_A )
+            {
+                int start = m_segmentStartOffset + m_sourceDisplayLength +
+                        OStrings.TF_CUR_SEGMENT_START.length() + 1;
+                int end = m_xlPane.getText().length() - m_segmentEndInset -
+                        OStrings.TF_CUR_SEGMENT_END.length();
+                
+                // selecting
+                setSelectionStart(start);
+                setSelectionEnd(end);
+                
+                return;
+            }
+                
             
 			// every other key press should be within the editing zone
 			//	so make sure the caret is there
@@ -2019,6 +2024,11 @@ public class TransFrame extends JFrame implements ActionListener
     private String	m_curTrans = "";										// NOI18N
 
 	private ProjectFrame	m_projWin;
+    public ProjectFrame getProjectFrame()
+    {
+        return m_projWin;
+    }
+    
 	private MatchWindow	m_matchViewer;
 
 	private boolean m_projectLoaded;

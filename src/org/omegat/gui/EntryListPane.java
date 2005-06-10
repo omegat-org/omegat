@@ -30,6 +30,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import org.omegat.util.PreferenceManager;
 
 /** 
  * EntryListPane displays translation segments and, upon doubleclick
@@ -104,15 +105,15 @@ class EntryListPane extends JTextPane
 
 	public void finalize()
 	{
-		String srcFont = CommandThread.core.getPreference(
-				OConsts.TF_SRC_FONT_NAME);
+		String srcFont = PreferenceManager.pref.getPreference(OConsts.TF_SRC_FONT_NAME);
 		if (!srcFont.equals(""))										// NOI18N
 		{
 			int fontsize;
 			try 
 			{
-				fontsize = Integer.valueOf(CommandThread.core.getPreference(
-							OConsts.TF_SRC_FONT_SIZE)).intValue();
+				fontsize = Integer.valueOf(
+                        PreferenceManager.pref.getPreference(OConsts.TF_SRC_FONT_SIZE)).
+                        intValue();
 			}
 			catch (NumberFormatException nfe) { fontsize = 12; }
 			setFont(new Font(srcFont, Font.PLAIN, fontsize));

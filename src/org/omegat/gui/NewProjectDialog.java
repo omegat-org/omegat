@@ -34,6 +34,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import org.omegat.util.PreferenceManager;
 import org.openide.awt.Mnemonics;
 
 /**
@@ -63,11 +64,11 @@ class NewProjectDialog extends JDialog
 
         if (projFileName == null)
         {
-            String sourceLocale = CommandThread.core.getPreference(OConsts.PREF_SOURCELOCALE);
+            String sourceLocale = PreferenceManager.pref.getPreference(OConsts.PREF_SOURCELOCALE);
             if( !sourceLocale.equals(""))						                            // NOI18N
                 projectProperties.setSourceLanguage(sourceLocale);
             
-            String targetLocale = CommandThread.core.getPreference(OConsts.PREF_TARGETLOCALE);
+            String targetLocale = PreferenceManager.pref.getPreference(OConsts.PREF_TARGETLOCALE);
             if( !targetLocale.equals("") )                                                // NOI18N
                 projectProperties.setTargetLanguage(targetLocale);
         }
@@ -242,8 +243,7 @@ class NewProjectDialog extends JDialog
             label = OStrings.PP_SAVE_PROJECT_FILE;
             ndc.setDialogTitle(label);
 
-            String curDir = CommandThread.core.getPreference(
-                        OConsts.PREF_CUR_DIR);
+            String curDir = PreferenceManager.pref.getPreference(OConsts.PREF_CUR_DIR);
             if (curDir != null)
             {
                 File dir = new File(curDir);
@@ -262,7 +262,7 @@ class NewProjectDialog extends JDialog
             projectProperties.setProjectRoot(ndc.getSelectedFile().getAbsolutePath()
                         + File.separator);
             projectProperties.setProjectFile(projectProperties.getProjectRoot() + OConsts.PROJ_FILENAME);
-            CommandThread.core.setPreference(OConsts.PREF_CUR_DIR,
+            PreferenceManager.pref.setPreference(OConsts.PREF_CUR_DIR,
                         ndc.getSelectedFile().getParent());
             projectProperties.setProjectName(projectProperties.getProjectFile().substring(projectProperties.getProjectRoot().length()));
             projectProperties.setSourceRoot(projectProperties.getProjectRoot() + OConsts.DEFAULT_SRC
@@ -355,29 +355,24 @@ class NewProjectDialog extends JDialog
         switch (m_browseTarget)
         {
             case 1:
-                curDir = CommandThread.core.getPreference(
-                        OConsts.PREF_SRC_DIR);
+                curDir = PreferenceManager.pref.getPreference(OConsts.PREF_SRC_DIR);
                 break;
 
             case 2:
-                curDir = CommandThread.core.getPreference(
-                        OConsts.PREF_LOC_DIR);
+                curDir = PreferenceManager.pref.getPreference(OConsts.PREF_LOC_DIR);
                 break;
 
             case 3:
-                curDir = CommandThread.core.getPreference(
-                        OConsts.PREF_GLOS_DIR);
+                curDir = PreferenceManager.pref.getPreference(OConsts.PREF_GLOS_DIR);
                 break;
 
             case 4:
-                curDir = CommandThread.core.getPreference(
-                        OConsts.PREF_TM_DIR);
+                curDir = PreferenceManager.pref.getPreference(OConsts.PREF_TM_DIR);
                 break;
-
         }
 
         if (curDir.equals(""))													// NOI18N
-            curDir = CommandThread.core.getPreference(OConsts.PREF_CUR_DIR);
+            curDir = PreferenceManager.pref.getPreference(OConsts.PREF_CUR_DIR);
 
         if (!curDir.equals(""))											// NOI18N
         {
@@ -398,7 +393,7 @@ class NewProjectDialog extends JDialog
         switch (m_browseTarget)
         {
             case 1:
-                CommandThread.core.setPreference(OConsts.PREF_SRC_DIR,
+                PreferenceManager.pref.setPreference(OConsts.PREF_SRC_DIR,
                         browser.getSelectedFile().getParent());
                 projectProperties.setSourceRoot(str);
                 m_srcRootField.setText(projectProperties.getSourceRoot());
@@ -408,7 +403,7 @@ class NewProjectDialog extends JDialog
                 break;
 
             case 2:
-                CommandThread.core.setPreference(OConsts.PREF_LOC_DIR,
+                PreferenceManager.pref.setPreference(OConsts.PREF_LOC_DIR,
                         browser.getSelectedFile().getParent());
                 projectProperties.setLocRoot(str);
                 m_locRootField.setText(projectProperties.getLocRoot());
@@ -418,7 +413,7 @@ class NewProjectDialog extends JDialog
                 break;
 
             case 3:
-                CommandThread.core.setPreference(OConsts.PREF_GLOS_DIR,
+                PreferenceManager.pref.setPreference(OConsts.PREF_GLOS_DIR,
                         browser.getSelectedFile().getParent());
                 projectProperties.setGlossaryRoot(str);
                 m_glosRootField.setText(projectProperties.getGlossaryRoot());
@@ -428,7 +423,7 @@ class NewProjectDialog extends JDialog
                 break;
 
             case 4:
-                CommandThread.core.setPreference(OConsts.PREF_TM_DIR,
+                PreferenceManager.pref.setPreference(OConsts.PREF_TM_DIR,
                         browser.getSelectedFile().getParent());
                 projectProperties.setTMRoot(str);
                 m_tmRootField.setText(projectProperties.getTMRoot());

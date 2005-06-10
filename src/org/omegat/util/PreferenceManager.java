@@ -49,57 +49,112 @@ public class PreferenceManager
 		m_nameList = new ArrayList(32);
 		m_valList = new ArrayList(32);
 		m_changed = false;
+        
+        doLoad();
 	}
 
     /**
-     * Gets the preference out of OmegaT's preferences file.
-     * <p>
-     * If the key is not found, returns the empty string
-     *
-     * @param name name of the key to look up
-     */
-	public synchronized String getPreference(String name)
+	 * Returns the defaultValue of some preference out of OmegaT's preferences file.
+	 * <p>
+	 * If the key is not found, returns the empty string.
+	 * 
+	 * @param key key of the key to look up, usually OConsts.PREF_...
+	 * @return    preference defaultValue as a string
+	 */
+	public String getPreference(String key)
 	{
-		if (name == null || name.equals(""))								// NOI18N
+		if (key == null || key.equals(""))								// NOI18N
 			return "";															// NOI18N
 		if (!m_loaded)
 			doLoad();
 		
-		Integer i = (Integer) m_preferenceMap.get(name);
+		Integer i = (Integer) m_preferenceMap.get(key);
 		String v = "";															// NOI18N
 		if (i != null)
 		{
-			// mapping exists - recover value
+			// mapping exists - recover defaultValue
 			v = (String) m_valList.get(i.intValue());
 		}
 		return v;
 	}
 
-	public synchronized void setPreference(String name, String val)
+    /**
+	 * Returns the boolean defaultValue of some preference.
+	 * <p>
+	 * Returns true if the preference exists and is equal to "true",
+	 * false otherwise (no such preference, or it's equal to "false", etc).
+	 * 
+	 * @param key preference key, usually OConsts.PREF_...
+	 * @return    preference defaultValue as a boolean
+	 */
+	public boolean isPreference(String key)
 	{
-		if (name != null && !name.equals("") && val != null)				// NOI18N
+		return "true".equals(getPreference(key));
+	}
+
+    /**
+	 * Returns the value of some preference out of OmegaT's preferences file,
+	 * if it exists.
+	 * <p>
+	 * If the key is not found, returns the default value provided
+     * and sets the preference to the default value.
+	 * 
+	 * @param key           name of the key to look up, usually OConsts.PREF_...
+     * @param defaultValue  default value for the key
+	 * @return              preference value as a string
+	 */
+	public String getPreferenceDefault(String key, String defaultValue)
+	{
+		String val = getPreference(key);
+		if (val.equals("")) // NOI18N
+		{
+			val = defaultValue;
+			setPreference(key, defaultValue);
+		}
+		return val;
+	}
+    
+    /**
+	 * Sets the defaultValue of some preference.
+	 * 
+	 * @param key  preference key, usually OConsts.PREF_...
+	 * @param defaultValue preference defaultValue as a string
+	 */
+	public void setPreference(String name, String value)
+	{
+		if( name!=null && name.length()!=0 && value!=null )
 		{
 			if (!m_loaded)
 				doLoad();
 			Integer i = (Integer) m_preferenceMap.get(name);
 			if (i == null)
 			{
-				// value doesn't exist - add it
+				// defaultValue doesn't exist - add it
 				i = new Integer(m_valList.size());
 				m_preferenceMap.put(name, i);
-				m_valList.add(val);
+				m_valList.add(value);
 				m_nameList.add(name);
 			}
 			else
 			{
-				// mapping exists - reset value to new
-				m_valList.set(i.intValue(), val);
+				// mapping exists - reset defaultValue to new
+				m_valList.set(i.intValue(), value);
 			}
 			m_changed = true;
 		}
 	}
+    /**
+	 * Sets the boolean defaultValue of some preference.
+	 * 
+	 * @param key  preference key, usually OConsts.PREF_...
+	 * @param defaultValue preference defaultValue as a boolean
+	 */
+	public void setPreference(String name, boolean boolvalue)
+	{
+		setPreference(name, String.valueOf(boolvalue));
+	}
 
-	public synchronized void save()
+	public void save()
 	{
 		try 
 		{
@@ -250,4 +305,5 @@ public class PreferenceManager
 
 	public static PreferenceManager pref;
 
+    
 }

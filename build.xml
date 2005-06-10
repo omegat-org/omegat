@@ -43,6 +43,7 @@
         <delete file="manifest.mf"/>
         <delete file="omegat.prefs"/>
         <delete file="filters.conf"/>
+        <delete file="log.txt"/>
         <delete dir="dist2"/>
         <delete dir="plugins"/>
         <ant dir="addons/properties-import" target="clean" inheritAll="false"/>

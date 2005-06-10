@@ -51,6 +51,6 @@ class ProjectFileView extends FileView
 		if (ProjectFileChooser.isProjectDir(f))
 			return omegatIcon;
 		else	
-			return null;
+			return super.getIcon(f);
 	}
 }

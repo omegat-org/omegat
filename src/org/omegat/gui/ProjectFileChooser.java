@@ -21,18 +21,47 @@
 
 package org.omegat.gui;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import org.omegat.util.OConsts;
 
 import javax.swing.*;
 import java.io.File;
+import org.omegat.util.StaticUtils;
 
 /**
  * File Chooser to open project.
+ * Project is a directory, so it's a bit tricky, we need to react on both:
+ * - changing directory
+ * - and hitting OK. 
  *
  * @author Keith Godfrey
+ * @author Maxym Mykhalchuk
  */
 class ProjectFileChooser extends JFileChooser
 {
+
+	public ProjectFileChooser(String curdir)
+	{
+        super(curdir);
+		setFileView(new ProjectFileView());
+		setFileSelectionMode(DIRECTORIES_ONLY);
+		setMultiSelectionEnabled(false);
+		setFileHidingEnabled(true);
+		addPropertyChangeListener(new DirectoryChangeListener());
+	}
+    
+	class DirectoryChangeListener implements PropertyChangeListener
+	{
+		public void propertyChange(PropertyChangeEvent evt)
+		{
+			if( evt.getPropertyName().equals("directoryChanged") && 
+                    isProjectDir(getCurrentDirectory()))
+			{
+				approveSelection();
+			}
+		}
+	}
 
     public void approveSelection()
 	{
@@ -40,26 +69,15 @@ class ProjectFileChooser extends JFileChooser
 		//  recurse into lower directory
 		if (isProjectDir(getSelectedFile()))
 		{
-			// ALERT - HACK
-			// when double clicking the file, everything works fine,
-			//  but when hitting 'OK' the parent directory is somehow
-			//	selected.  Explicitly make sure the selected directory
-			//	is targetted
-			File d = getSelectedFile();
-			if (d.isDirectory())
-				setCurrentDirectory(d);
-			// this is OK - continue
+			// The parent directory is made current,
+            // and the project's directory is the selected 'file'.
 			super.approveSelection();
-		}
-		else
-		{
-			setCurrentDirectory(getSelectedFile());
 		}
 	}
 	
 	public static boolean isProjectDir(File f)
 	{
-		if (f == null)
+		if( f==null || f.getName().length()==0 )
 			return false;
 		File projFile = new File(f.getAbsolutePath() + File.separator + 
 		    OConsts.PROJ_FILENAME);

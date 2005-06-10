@@ -50,7 +50,7 @@ public class OStrings
             
 	/** Human-Readable OmegaT Version */
 	public static final String HUMAN_VERSION = 
-		ResourceBundle.getBundle("org/omegat/Version").getString("human-version");
+		ResourceBundle.getBundle("org/omegat/Version").getString("version");
 
     // TransFrame
 	public static final String TF_NUM_NEAR_AND_GLOSSARY	= getString("TF_NUM_NEAR_AND_GLOSSARY");

@@ -83,7 +83,7 @@
         <zip basedir="dist" destfile="dist2/OmegaT_${version}.zip"/>
 
         <ant dir="addons/properties-import" inheritAll="false"/>
-        <copy todir="dist2" file="addons/properties-import/import_properties.zip"/>
+        <copy todir="dist2" file="addons/properties-import/import_properties_1.1.zip"/>
     </target>
 
     <target name="src" depends="init, clean" description="Build source distribution">

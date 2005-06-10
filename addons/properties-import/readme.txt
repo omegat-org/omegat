@@ -1,4 +1,4 @@
-.properties Import 1.0 ReadMe file
+.properties Import 1.1 ReadMe file
 
 This import tool supplements OmegaT in the following way:
 
@@ -10,3 +10,8 @@ to import his work into OmegaT-compatible TMX file.
 To run from a terminal or DOS window, change to this directory
 and type
   java -jar properties_import.jar
+
+----------------------------------------------------------------------
+
+Verison 1.0: Initial release
+Version 1.1: Some bugs fixed

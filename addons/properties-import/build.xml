@@ -24,12 +24,12 @@
     <target name="clean" depends="init" description="Clean all build products.">
         <delete dir="classes"/>
         <delete file="${jar}"/>
-        <delete file="import_properties.zip"/>
+        <delete file="import_properties_1.1.zip"/>
     </target>
 
     <target name="zip" depends="jar">
-    	<zip basedir="." destfile="import_properties.zip"
-    	     includes="properties_import.jar readme.txt" />
+        <zip basedir="." destfile="import_properties_1.1.zip"
+                  includes="properties_import.jar readme.txt" />
     </target>
 
     <target name="all" depends="zip" description="Build this addon."/>

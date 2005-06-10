@@ -177,11 +177,9 @@ public final class Mnemonics extends Object {
             } else {
                 // it's non-latin, getting the latin correspondance
                 int latinCode = getLatinKeycode(ch);
+                setMnemonic(item, latinCode);
                 if( latinCode!=0 )
-                {
-                    setMnemonic(item, latinCode);
                     setMnemonicIndex(item, index);
-                }
             }
         }
     }

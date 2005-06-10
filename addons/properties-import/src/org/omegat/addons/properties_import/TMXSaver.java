@@ -76,8 +76,8 @@ public class TMXSaver
 		Object keys[] = map.keySet().toArray();
 		for(int i=0; i<keys.length; i++)
 		{
-			String key = replaceMoreLess((String) keys[i]);
-			String value = replaceMoreLess((String) map.get(keys[i]));
+			String key = replaceSpecialChars((String) keys[i]);
+			String value = replaceSpecialChars((String) map.get(keys[i]));
 			buffer.append("    <tu>                                 \n");
 			buffer.append("      <tuv lang=\""+sourcelang+"\">      \n");
 			buffer.append("        <seg>"+key+"</seg>               \n");
@@ -96,11 +96,13 @@ public class TMXSaver
 		writer.close();
 	}
 
-	public String replaceMoreLess(String s)
+	public String replaceSpecialChars(String s)
 	{
 		String st = s;
+		st = st.replaceAll("&", "&amp;");
 		st = st.replaceAll("<", "&lt;");
 		st = st.replaceAll(">", "&gt;");
+		st = st.replaceAll("\"", "&quot;");
 		return st;
 	}
 }

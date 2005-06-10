@@ -180,8 +180,9 @@ public class ResourceBundleFilter extends AbstractFilter
 	 */
 	private String leftTrim(String s)
 	{
-		String trimmed = (s+".").trim();										// NOI18N
-		return trimmed.substring(0, trimmed.length()-1);
+        int i;
+        for(i=0; i<s.length() && s.charAt(i)==' '; i++);
+		return s.substring(i, s.length());
 	}
 	
 	/**

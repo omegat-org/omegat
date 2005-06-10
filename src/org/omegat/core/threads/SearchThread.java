@@ -76,7 +76,7 @@ public class SearchThread extends Thread
      * @param keyword search for keywords
      * @return 0 on successful start, 1 on failure (i.e. search in progress)
      */
-	public synchronized void requestSearch(String text, String rootDir,
+	public void requestSearch(String text, String rootDir,
 			boolean recursive, boolean exact, boolean tm, boolean keyword)
 	{
 		if (!m_searching)

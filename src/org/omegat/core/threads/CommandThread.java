@@ -62,13 +62,14 @@ import org.omegat.util.TMXReader;
 public class CommandThread extends Thread
 {
 	
-    public CommandThread(TransFrame tf)
+    public CommandThread(TransFrame tf, ProjectFrame projectWin)
 	{
-		if (core != null)
-			return;
-		core = this;
 		setName("Command thread"); // NOI18N
+        setPriority(MIN_PRIORITY);
+        
 		m_transFrame = tf;
+		m_projWin = projectWin;
+        
 		m_config = new ProjectProperties();
 		m_strEntryHash = new HashMap(4096);
 		m_strEntryList = new ArrayList();
@@ -82,13 +83,8 @@ public class CommandThread extends Thread
 		m_extensionMapList = new ArrayList(32);
 
 		m_requestQueue = new LinkedList();
-		m_projWin = null;
 		m_saveCount = -1;
 		m_saveThread = null;
-
-		m_prefManager = PreferenceManager.pref;
-		if (m_prefManager == null)
-			m_prefManager = new PreferenceManager();
 	}
 
 	public void run()
@@ -119,7 +115,7 @@ public class CommandThread extends Thread
 						break;
 				}
 			}
-			m_prefManager.save();
+			PreferenceManager.pref.save();
 
 			m_saveThread.signalStop();
 			m_saveThread.interrupt();
@@ -321,8 +317,8 @@ public class CommandThread extends Thread
 		StringEntry se;
 
 		// we got this far, so assume lang codes are proper
-		String sourceLocale = getPreference(OConsts.PREF_SOURCELOCALE);
-		String targetLocale = getPreference(OConsts.PREF_TARGETLOCALE);
+		String sourceLocale = PreferenceManager.pref.getPreference(OConsts.PREF_SOURCELOCALE);
+		String targetLocale = PreferenceManager.pref.getPreference(OConsts.PREF_TARGETLOCALE);
 
 		FileOutputStream fos = new FileOutputStream(filename);
 		OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8"); // NOI18N
@@ -509,60 +505,57 @@ public class CommandThread extends Thread
 
 	private void forceSave(boolean corruptionDanger)
 	{
-		//synchronized (m_saveCriticalSection)
-		{
-			m_prefManager.save();
-			
-			if (m_saveCount <= 0)
-				return;
-			else if (m_saveCount == 1)
-				m_saveCount = 0;
+        PreferenceManager.pref.save();
 
-			String s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
-			if (corruptionDanger)
-			{
-				s += OConsts.STATUS_RECOVER_EXTENSION;
-			}
-			else
-			{
-				// rename existing project file in case a fatal error
-				//  is encountered during the write procedure - that way
-				//  everything won't be lost
-				File backup = new File(s + OConsts.BACKUP_EXTENSION);
-				File orig = new File(s);
-				if (orig.exists())
-					orig.renameTo(backup);
-			}
+        if (m_saveCount <= 0)
+            return;
+        else if (m_saveCount == 1)
+            m_saveCount = 0;
 
-			try
-			{
-				buildTMXFile(s);
-				m_modifiedFlag = false;
-			}
-			catch (IOException e)
-			{
-				String msg = OStrings.CT_ERROR_SAVING_PROJ;
-				displayError(msg, e);
-				// try to rename backup file to original name
-				if (!corruptionDanger)
-				{
-					s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
-					File backup = new File(s + OConsts.BACKUP_EXTENSION);
-					File orig = new File(s);
-					if (backup.exists())
-						backup.renameTo(orig);
-				}
-			}
+        String s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
+        if (corruptionDanger)
+        {
+            s += OConsts.STATUS_RECOVER_EXTENSION;
+        }
+        else
+        {
+            // rename existing project file in case a fatal error
+            //  is encountered during the write procedure - that way
+            //  everything won't be lost
+            File backup = new File(s + OConsts.BACKUP_EXTENSION);
+            File orig = new File(s);
+            if (orig.exists())
+                orig.renameTo(backup);
+        }
 
-			// if successful, delete backup file
-			if (!m_modifiedFlag && !corruptionDanger)
-			{
-				s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
-				File backup = new File(s + OConsts.BACKUP_EXTENSION);
-				if (backup.exists())
-					backup.delete();
-			}
-		}
+        try
+        {
+            buildTMXFile(s);
+            m_modifiedFlag = false;
+        }
+        catch (IOException e)
+        {
+            String msg = OStrings.CT_ERROR_SAVING_PROJ;
+            displayError(msg, e);
+            // try to rename backup file to original name
+            if (!corruptionDanger)
+            {
+                s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
+                File backup = new File(s + OConsts.BACKUP_EXTENSION);
+                File orig = new File(s);
+                if (backup.exists())
+                    backup.renameTo(orig);
+            }
+        }
+
+        // if successful, delete backup file
+        if (!m_modifiedFlag && !corruptionDanger)
+        {
+            s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
+            File backup = new File(s + OConsts.BACKUP_EXTENSION);
+            if (backup.exists())
+                backup.delete();
+        }
 	}
 
     /**
@@ -999,72 +992,6 @@ public class CommandThread extends Thread
 	}
      */
 
-	////////////////////////////////////////////////////////////////
-	// preference interface
-	
-    /**
-     * Returns the value of some preference.
-     * <p>
-     * Access in manager is synchronized, so out of sync requests are OK.
-     *
-     * @param key preference name, usually OConsts.PREF_...
-     * @return    preference value as a string
-     */
-	public String getPreference(String key)
-	{
-		return m_prefManager.getPreference(key);
-	}
-    /**
-     * Returns the boolean value of some preference.
-     * <p>
-     * Returns true if the preference exists and is equal to "true",
-     * false otherwise (no such preference, or it's equal to "false", etc).
-     *
-     * @param key preference name, usually OConsts.PREF_...
-     * @return    preference value as a boolean
-     */
-	public boolean isPreference(String key)
-	{
-		return "true".equals(getPreference(key));
-	}
-
-    /**
-     * Sets the value of some preference.
-     *
-     * @param name  preference name, usually OConsts.PREF_...
-     * @param value preference value as a string
-     */
-	public void setPreference(String name, String value)
-	{
-		m_prefManager.setPreference(name, value);
-	}
-    /**
-     * Sets the boolean value of some preference.
-     *
-     * @param name  preference name, usually OConsts.PREF_...
-     * @param value preference value as a boolean
-     */
-	public void setPreference(String name, boolean boolvalue)
-	{
-		setPreference(name, String.valueOf(boolvalue));
-	}
-
-	public void savePreferences()
-	{
-		m_prefManager.save();
-	}
-
-	public String getOrSetPreference(String name, String value)
-	{
-		String val = m_prefManager.getPreference(name);
-		if (val.equals("")) // NOI18N
-		{
-			val = value;
-			setPreference(name, value);
-		}
-		return val;
-	}
-	
 	////////////////////////////////////////////////////////
 	// 
 	public SourceTextEntry getSTE(int num)
@@ -1086,7 +1013,6 @@ public class CommandThread extends Thread
 	public String	sourceRoot()	{ return m_config.getSourceRoot();		}
 	public String	projName()		{ return m_config.getProjectName();	}
 	public int		numEntries()	{ return m_srcTextEntryArray.size(); }
-	public void		setProjWin(ProjectFrame win)	{ m_projWin = win;	}
 	public TransFrame getTransFrame()			{ return m_transFrame;	}
 
 	public ArrayList	getTransMemory()		{ return m_tmList;		}
@@ -1102,8 +1028,6 @@ public class CommandThread extends Thread
 	public static CommandThread core;
 	private ProjectProperties m_config;
     private boolean		m_modifiedFlag;
-
-	private PreferenceManager	m_prefManager;
 
 	// thread control flags
 	private boolean		m_stop;

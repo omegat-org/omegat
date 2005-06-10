@@ -27,12 +27,11 @@ import java.io.IOException;
 import java.io.InterruptedIOException;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-
-import org.omegat.core.threads.CommandThread;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.PreferenceManager;
 import org.omegat.util.ProjectFileReader;
 
 /**
@@ -108,17 +107,16 @@ public class ProjectProperties extends JFrame
 		reset();
 
         // select existing project file - open it
-        JFileChooser pfc=new JFileChooser(CommandThread.core.getPreference(OConsts.PREF_CUR_DIR));
-        pfc.setFileFilter(new OTFileFilter());
-        pfc.setFileView(new ProjectFileView());
-
+        JFileChooser pfc=new ProjectFileChooser(
+                PreferenceManager.pref.getPreference(OConsts.PREF_CUR_DIR));
         if( JFileChooser.APPROVE_OPTION!=pfc.showOpenDialog(this) )
             return false;
 
-        File projectRootFolder = pfc.getCurrentDirectory();
+        File projectRootFolder = pfc.getSelectedFile();
         String projectRoot = projectRootFolder.getAbsolutePath() + File.separator;
 
-		CommandThread.core.setPreference(OConsts.PREF_CUR_DIR, projectRootFolder.getParent());
+		PreferenceManager.pref.setPreference(
+                OConsts.PREF_CUR_DIR, projectRootFolder.getParent());
 		try 
 		{
 			ProjectFileReader pfr = new ProjectFileReader();
@@ -134,8 +132,10 @@ public class ProjectProperties extends JFrame
 						+ File.separator);
 			setSourceLanguage(pfr.getSourceLang());
 			setTargetLanguage(pfr.getTargetLang());
-			CommandThread.core.setPreference(OConsts.PREF_SOURCELOCALE, getSourceLanguage().toString());
-			CommandThread.core.setPreference(OConsts.PREF_TARGETLOCALE, getTargetLanguage().toString());
+			PreferenceManager.pref.setPreference(
+                    OConsts.PREF_SOURCELOCALE, getSourceLanguage().toString());
+			PreferenceManager.pref.setPreference(
+                    OConsts.PREF_TARGETLOCALE, getTargetLanguage().toString());
 			setProjectFile(getProjectRoot() + OConsts.PROJ_FILENAME);
 
 			if( !verifyProject() )

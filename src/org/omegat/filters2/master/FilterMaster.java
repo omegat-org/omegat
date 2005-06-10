@@ -33,7 +33,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
@@ -63,6 +62,7 @@ import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.PreferenceManager;
 import org.omegat.util.StaticUtils;
 
 
@@ -942,7 +942,9 @@ public class FilterMaster
         res = res.replaceAll(targetRegexer(AbstractFilter.TFP_EXTENSION), 
                 extension);
 
-        Language targetLang = new Language(CommandThread.core.getPreference(OConsts.PREF_TARGETLOCALE));
+        Language targetLang = new Language(
+                PreferenceManager.pref.getPreference(OConsts.PREF_TARGETLOCALE));
+        
         res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LOCALE), 
                 targetLang.getLocale());
         res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LANGUAGE), 

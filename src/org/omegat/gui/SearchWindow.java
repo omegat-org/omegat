@@ -45,6 +45,7 @@ import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.PreferenceManager;
 import org.omegat.util.StaticUtils;
 import org.openide.awt.Mnemonics;
 
@@ -249,9 +250,8 @@ public class SearchWindow extends JFrame
 			}
 		});
 
-		String searchDir;													// NOI18N
-		searchDir = CommandThread.core.getPreference(OConsts.PREF_SEARCH_DIR);
-		if (!searchDir.equals(""))										// NOI18N
+		String searchDir = PreferenceManager.pref.getPreference(OConsts.PREF_SEARCH_DIR);
+		if (!searchDir.equals(""))
 		{
 			m_dirField.setText(searchDir);
 		}
@@ -372,11 +372,10 @@ public class SearchWindow extends JFrame
 				}
 				if (CommandThread.core != null && m_dirCB.isSelected())
 				{
-					CommandThread.core.setPreference(
-								OConsts.PREF_SEARCH_DIR, root);
+					PreferenceManager.pref.setPreference(OConsts.PREF_SEARCH_DIR, root);
 					// need to explicitly save preferences because project
 					//	might not be open
-					CommandThread.core.savePreferences();
+					PreferenceManager.pref.save();
 				}
 			}
 			m_thread.requestSearch(m_searchField.getText(), root, 

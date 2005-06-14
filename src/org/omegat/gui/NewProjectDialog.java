@@ -314,7 +314,7 @@ class NewProjectDialog extends JDialog
         
         pack();
         
-        setSize(3*getWidth()/2, getHeight());
+        setSize(6*getWidth()/5, getHeight());
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension dialogSize = getSize();

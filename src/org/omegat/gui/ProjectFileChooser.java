@@ -20,14 +20,11 @@
 **************************************************************************/
 
 package org.omegat.gui;
-
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import org.omegat.util.OConsts;
 
 import javax.swing.*;
 import java.io.File;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.OStrings;
 
 /**
  * File Chooser to open project.
@@ -44,35 +41,20 @@ class ProjectFileChooser extends JFileChooser
 	public ProjectFileChooser(String curdir)
 	{
         super(curdir);
-		setFileView(new ProjectFileView());
 		setFileSelectionMode(DIRECTORIES_ONLY);
 		setMultiSelectionEnabled(false);
-		setFileHidingEnabled(true);
-		addPropertyChangeListener(new DirectoryChangeListener());
 	}
     
-	class DirectoryChangeListener implements PropertyChangeListener
-	{
-		public void propertyChange(PropertyChangeEvent evt)
-		{
-			if( evt.getPropertyName().equals("directoryChanged") && 
-                    isProjectDir(getCurrentDirectory()))
-			{
-				approveSelection();
-			}
-		}
-	}
-
     public void approveSelection()
 	{
 		// user hit 'open' button - redirect command to open project or
 		//  recurse into lower directory
 		if (isProjectDir(getSelectedFile()))
-		{
 			// The parent directory is made current,
             // and the project's directory is the selected 'file'.
 			super.approveSelection();
-		}
+        else
+            setCurrentDirectory(getSelectedFile());
 	}
 	
 	public static boolean isProjectDir(File f)
@@ -86,4 +68,35 @@ class ProjectFileChooser extends JFileChooser
         return projFile.exists() && internal.exists() && internal.isDirectory();
 	}
 
+    public void setCurrentDirectory(File dir)
+    {
+        if( isProjectDir(dir) )
+        {
+            setSelectedFile(dir);
+            approveSelection();
+        }
+        else
+            super.setCurrentDirectory(dir);
+    }
+
+    /** OmegaT project icon */
+    private static ImageIcon omegatIcon = new ImageIcon("images" + File.separator + "OmegaT_small.gif");	// NOI18N
+
+    /** Redefines the icon for OmegaT projects. */
+    public Icon getIcon(File f)
+    {
+		if (ProjectFileChooser.isProjectDir(f))
+			return omegatIcon;
+		else	
+			return super.getIcon(f);
+    }
+
+    /** Redefines the file type for OmegaT projects. */
+    public String getTypeDescription(File f)
+    {
+		if (ProjectFileChooser.isProjectDir(f))
+			return OStrings.PFC_OMEGAT_PROJECT;
+		else
+			return super.getTypeDescription(f);
+    }
 }

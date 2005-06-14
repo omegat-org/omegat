@@ -21,21 +21,34 @@
 
 package org.omegat.gui;
 
-import javax.swing.border.EmptyBorder;
-import org.omegat.core.threads.CommandThread;
-import org.omegat.util.Language;
-import org.omegat.util.OConsts;
-import org.omegat.util.OStrings;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Label;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
+
+import org.omegat.util.Language;
+import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
 import org.omegat.util.PreferenceManager;
 import org.openide.awt.Mnemonics;
+
 
 /**
  * The dialog for creation of a new OmegaT project
@@ -254,7 +267,7 @@ class NewProjectDialog extends JDialog
             }
 
             int val = ndc.showSaveDialog(this);
-            if (val != JFileChooser.APPROVE_OPTION)
+            if (val != OmegaTFileChooser.APPROVE_OPTION)
             {
                 m_dialogCancelled = true;
                 return;
@@ -346,11 +359,11 @@ class NewProjectDialog extends JDialog
                 return;
         }
 
-        JFileChooser browser = new JFileChooser();
+        OmegaTFileChooser browser = new OmegaTFileChooser();
         String str = OStrings.getString("BUTTON_SELECT_NO_MNEMONIC");
         // browser.setApproveButtonText(str);
         browser.setDialogTitle(title);
-        browser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        browser.setFileSelectionMode(OmegaTFileChooser.DIRECTORIES_ONLY);
         String curDir = "";														// NOI18N
         switch (m_browseTarget)
         {

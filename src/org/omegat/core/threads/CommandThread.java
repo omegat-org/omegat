@@ -723,12 +723,14 @@ public class CommandThread extends Thread
 	}
 
     /**
-     * Loads project in a "big" sense -- loads project's properties, glossaryes, tms, source files etc.
+     * Loads project in a "big" sense -- loads project's properties, glossaryes, 
+     * tms, source files etc.
      * <p>
      * We may pass here the folder where the project resides
-     * or null, in which case JFileChooser is brought up to select a project.
+     * or null, in which case FileChooser is brought up to select a project.
      * 
-     * @param projectRoot The folder where the project resides. If it's null, JFileChooser is called to select a project.
+     * @param projectRoot The folder where the project resides. If it's null, 
+     *                     FileChooser is called to select a project.
      */
 	private boolean loadProject()
 			throws IOException, InterruptedIOException, TranslationException

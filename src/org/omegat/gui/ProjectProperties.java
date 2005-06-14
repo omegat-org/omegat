@@ -25,8 +25,8 @@ import javax.swing.filechooser.FileFilter;
 import java.io.File;
 import java.io.IOException;
 import java.io.InterruptedIOException;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
@@ -99,7 +99,7 @@ public class ProjectProperties extends JFrame
 
     /**
      * Loads existing project file.
-     * Brings up JFileChooser to open a file and 
+     * Brings up OmegaTFileChooser to open a file and 
      * sets global properties.
      */
 	public boolean loadExisting() throws IOException, InterruptedIOException
@@ -107,8 +107,8 @@ public class ProjectProperties extends JFrame
 		reset();
 
         // select existing project file - open it
-        JFileChooser pfc=new OpenProjectFileChooser();
-        if( JFileChooser.APPROVE_OPTION!=pfc.showOpenDialog(this) )
+        OmegaTFileChooser pfc=new OpenProjectFileChooser();
+        if( OmegaTFileChooser.APPROVE_OPTION!=pfc.showOpenDialog(this) )
             return false;
 
         File projectRootFolder = pfc.getSelectedFile();

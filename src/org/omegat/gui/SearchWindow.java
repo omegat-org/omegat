@@ -34,7 +34,6 @@ import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
@@ -323,11 +322,11 @@ public class SearchWindow extends JFrame
 	
 	private void doBrowseDirectory()
 	{
-		JFileChooser browser = new JFileChooser();
+		OmegaTFileChooser browser = new OmegaTFileChooser();
 		String str = OStrings.SW_BUTTON_SELECT;
 		browser.setApproveButtonText(str);
 		browser.setDialogTitle(OStrings.SW_TITLE);
-		browser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		browser.setFileSelectionMode(OmegaTFileChooser.DIRECTORIES_ONLY);
 		String curDir = m_dirField.getText();
 		
 		if (!curDir.equals(""))											// NOI18N

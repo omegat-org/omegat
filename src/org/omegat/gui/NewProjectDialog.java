@@ -238,7 +238,7 @@ class NewProjectDialog extends JDialog
             //  want to put it.  use that information to derive the
             //  location for project, source and loc directories
             // open save dialog
-            NewDirectoryChooser ndc = new NewDirectoryChooser();
+            NewProjectFileChooser ndc = new NewProjectFileChooser();
             String label;
             label = OStrings.PP_SAVE_PROJECT_FILE;
             ndc.setDialogTitle(label);

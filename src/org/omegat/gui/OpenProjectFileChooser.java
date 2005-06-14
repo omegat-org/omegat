@@ -35,12 +35,11 @@ import org.omegat.util.OStrings;
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  */
-class ProjectFileChooser extends JFileChooser
+class OpenProjectFileChooser extends OmegaTFileChooser
 {
 
-	public ProjectFileChooser(String curdir)
+	public OpenProjectFileChooser()
 	{
-        super(curdir);
 		setFileSelectionMode(DIRECTORIES_ONLY);
 		setMultiSelectionEnabled(false);
 	}
@@ -77,26 +76,5 @@ class ProjectFileChooser extends JFileChooser
         }
         else
             super.setCurrentDirectory(dir);
-    }
-
-    /** OmegaT project icon */
-    private static ImageIcon omegatIcon = new ImageIcon("images" + File.separator + "OmegaT_small.gif");	// NOI18N
-
-    /** Redefines the icon for OmegaT projects. */
-    public Icon getIcon(File f)
-    {
-		if (ProjectFileChooser.isProjectDir(f))
-			return omegatIcon;
-		else	
-			return super.getIcon(f);
-    }
-
-    /** Redefines the file type for OmegaT projects. */
-    public String getTypeDescription(File f)
-    {
-		if (ProjectFileChooser.isProjectDir(f))
-			return OStrings.PFC_OMEGAT_PROJECT;
-		else
-			return super.getTypeDescription(f);
     }
 }

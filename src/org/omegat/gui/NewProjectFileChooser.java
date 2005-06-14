@@ -26,15 +26,14 @@ import org.omegat.util.OStrings;
 import javax.swing.*;
 
 /**
- * A chooser for project's directory
+ * A chooser for project's directory for a newly created project.
  *
  * @author Keith Godfrey
  */
-class NewDirectoryChooser extends JFileChooser
+class NewProjectFileChooser extends OmegaTFileChooser
 {
-	public NewDirectoryChooser()
+	public NewProjectFileChooser()
 	{
-		setFileView(new ProjectFileView());
 		setMultiSelectionEnabled(false);
 		setFileHidingEnabled(true);
 	}

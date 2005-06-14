@@ -107,8 +107,7 @@ public class ProjectProperties extends JFrame
 		reset();
 
         // select existing project file - open it
-        JFileChooser pfc=new ProjectFileChooser(
-                PreferenceManager.pref.getPreference(OConsts.PREF_CUR_DIR));
+        JFileChooser pfc=new OpenProjectFileChooser();
         if( JFileChooser.APPROVE_OPTION!=pfc.showOpenDialog(this) )
             return false;
 

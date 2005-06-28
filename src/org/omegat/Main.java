@@ -51,7 +51,7 @@ public class Main
 		try 
 		{
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            System.setProperty("apple.laf.useScreenMenuBar", "true");
+            System.setProperty("apple.laf.useScreenMenuBar", "true");           // NOI18N
 		} 
 		catch (Exception e) 
 		{

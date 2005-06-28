@@ -113,6 +113,14 @@ public class HTMLFilter2 extends AbstractFilter
     }
     
     //////////////////////////////////////////////////////////////////////////
+    
+    /** Package-internal processEntry to give it to FilterVisitor */
+    String privateProcessEntry(String entry)
+    {
+        return super.processEntry(entry);
+    }
+    
+    //////////////////////////////////////////////////////////////////////////
 
     public boolean isTargetEncodingVariable()
     {

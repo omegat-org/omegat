@@ -284,7 +284,7 @@ class FilterVisitor extends NodeVisitor
         }
         
         // getting the translation
-        para = filter.processEntry(para);
+        para = filter.privateProcessEntry(para);
         
         // converting & < and > into &amp; &lt; and &gt; respectively
         // note that this doesn't change < and > of tag shortcuts

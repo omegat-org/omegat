@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------
- OmegaT 1.4.5.01 Release Notes
+ OmegaT 1.4.6 Beta 2 Release Notes
 ----------------------------------------------------------------------
 
  General changes in 1.4 (summary)
@@ -22,6 +22,59 @@
     New Fuzzy Matching algorithm - more matches, lower memory footprint
     Refactored code with more comments
     Windows installer
+
+
+1.4.6
+-------------------------------
+ 
+ Bugfixes:
+
+ - Tools/Validate tags shouldn't display a list of errors 
+   if no errors were found
+   http://sourceforge.net/support/tracker.php?aid=1209839
+
+ - Several problems in XHTML filter
+   http://sourceforge.net/support/tracker.php?aid=1111338
+
+ - HTML filter doesn't handle CDATA sections
+   http://sourceforge.net/support/tracker.php?aid=1207505
+
+ - javascript quote marks wrongly replaced (in HTML)
+   http://sourceforge.net/support/tracker.php?aid=1213496
+
+ Enchancements:
+
+ - ** PARTIALLY IMPLEMENTED IN BETA 2 **
+   Option: Change Segmenting: Sentences vs. Paragraphs
+   http://sourceforge.net/support/tracker.php?aid=1053692
+
+ - ** PARTIALLY IMPLEMENTED IN BETA 2 **
+   Edit Project to change project parameters
+   http://sourceforge.net/support/tracker.php?aid=1227890
+
+ - Display save status in the status bar
+   http://sourceforge.net/support/tracker.php?aid=1228249
+
+ - ** NOT YET IN BETA 2 ** 
+   Display "OmegaT: Instant Start" article on statup
+   http://sourceforge.net/support/tracker.php?aid=1217081
+
+ - ** NOT YET IN BETA 2 **
+   Option: not copy source text into target field
+   http://sourceforge.net/support/tracker.php?aid=1075972
+
+ - ** NOT YET IN BETA 2 **
+   Option: Insert best match (80%+) into target field
+   http://sourceforge.net/support/tracker.php?aid=1075976
+
+1.4.5.02
+-------------------------------
+ 
+ Bugfixes:
+
+ - Regression: 1.4.5.01 Cannot create/open a project
+   http://sourceforge.net/support/tracker.php?aid=1225510
+
 
 1.4.5.01
 -------------------------------

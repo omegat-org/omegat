@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,7 +43,7 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.ProjectFrame;
 import org.omegat.gui.ProjectProperties;
-import org.omegat.gui.TransFrame;
+import org.omegat.gui.main.MainInterface;
 import org.omegat.gui.messages.MessageRelay;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.OConsts;
@@ -61,14 +62,23 @@ import org.omegat.util.TMXReader;
  */
 public class CommandThread extends Thread
 {
+    
+    /** 
+     * One and only CommandThread object in the OmegaT. 
+     * <p>
+     * <small>
+     * mihmax: Threading nightmare, IMHO.
+     * </small>
+     */
+	public static CommandThread core;
 	
-    public CommandThread(TransFrame tf, ProjectFrame projectWin)
+    public CommandThread(MainInterface tf)
 	{
 		setName("Command thread"); // NOI18N
         setPriority(MIN_PRIORITY);
         
 		m_transFrame = tf;
-		m_projWin = projectWin;
+		m_projWin = tf.getProjectFrame();
         
 		m_config = new ProjectProperties();
 		m_strEntryHash = new HashMap(4096);
@@ -201,7 +211,6 @@ public class CommandThread extends Thread
 				m_projWin.setVisible(false);
 				m_projWin.reset();
 				m_projWin.buildDisplay();
-				m_projWin.setVisible(true);
 			}
 			else
 			{
@@ -210,11 +219,6 @@ public class CommandThread extends Thread
 			}
 		}
 
-		if (m_transFrame != null)
-		{
-			MessageRelay.uiMessageUnloadProject(m_transFrame);
-		}
-		
 		m_totalWords = 0;
 		m_partialWords = 0;
 		m_currentWords = 0;
@@ -222,7 +226,7 @@ public class CommandThread extends Thread
 
 	private void requestLoad(RequestPacket pack)
 	{
-		TransFrame tf = (TransFrame) pack.obj;
+		MainInterface tf = (MainInterface) pack.obj;
 		// load new project
 		try
 		{
@@ -1021,7 +1025,7 @@ public class CommandThread extends Thread
 	public String	sourceRoot()	{ return m_config.getSourceRoot();		}
 	public String	projName()		{ return m_config.getProjectName();	}
 	public int		numEntries()	{ return m_srcTextEntryArray.size(); }
-	public TransFrame getTransFrame()			{ return m_transFrame;	}
+	public MainInterface getTransFrame() { return m_transFrame;	}
 
 	public ArrayList	getTransMemory()		{ return m_tmList;		}
 
@@ -1033,9 +1037,25 @@ public class CommandThread extends Thread
 	// count=2		regular mode
 	private int m_saveCount;
 	
-	public static CommandThread core;
 	private ProjectProperties m_config;
+
+    /**
+     * Returns the active Project's Properties.
+     */
+    public ProjectProperties getProjectProperties()
+    {
+        return m_config;
+    }
+    
     private boolean		m_modifiedFlag;
+    
+    /**
+     * Returns whether the project was modified.
+     */
+    public synchronized boolean isProjectModified()
+    {
+        return m_modifiedFlag;
+    }
 
 	// thread control flags
 	private boolean		m_stop;
@@ -1052,7 +1072,7 @@ public class CommandThread extends Thread
 	//	so they can have a bigger picture of what's where
     private ProjectFileData	m_curFile;
 
-	private TransFrame	m_transFrame;
+	MainInterface	m_transFrame;
 	private ProjectFrame	m_projWin;
 
     private HashMap		m_strEntryHash;	// maps text to strEntry obj

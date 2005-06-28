@@ -78,6 +78,10 @@
         <copy todir="dist/images">
             <fileset dir="images"/>
         </copy>
+        <mkdir dir="dist/lib"/>
+        <copy todir="dist/lib">
+            <fileset dir="lib"/>
+        </copy>
         
         <mkdir dir="dist2"/>
         <zip basedir="dist" destfile="dist2/OmegaT_${version}.zip"/>
@@ -89,7 +93,7 @@
     <target name="src" depends="init, clean" description="Build source distribution">
         <mkdir dir="dist2"/>
         <zip destfile="dist2/OmegaT_src_${version}.zip" basedir="." 
-                includes="addons/** docs/** images/** nbedge-filter/** nbproject/** lib-mnemonics/** release/** src/** manifest-template.mf build.xml"/>
+                includes="addons/** docs/** images/** lib/** nbedge-filter/** nbproject/** lib-mnemonics/** release/** src/** manifest-template.mf build.xml"/>
     </target>
 
 </project>

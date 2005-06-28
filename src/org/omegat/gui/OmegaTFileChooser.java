@@ -62,19 +62,30 @@ public class OmegaTFileChooser extends JFileChooser
     /** Redefines the icon for OmegaT projects. */
     public Icon getIcon(File f)
     {
-		if (OpenProjectFileChooser.isProjectDir(f))
-			return omegatIcon;
-		else	
-			return null;
+        if (isProjectDir(f))
+            return omegatIcon;
+        else
+            return super.getIcon(f);
     }
 
     /** Redefines the file type for OmegaT projects. */
     public String getTypeDescription(File f)
     {
-		if (OpenProjectFileChooser.isProjectDir(f))
-			return OStrings.PFC_OMEGAT_PROJECT;
-		else
-			return null;
+        if (isProjectDir(f))
+            return OStrings.PFC_OMEGAT_PROJECT;
+        else
+            return super.getTypeDescription(f);
     }
+    
+	public static boolean isProjectDir(File f)
+	{
+		if( f==null || f.getName().length()==0 )
+			return false;
+		File projFile = new File(f.getAbsolutePath() + File.separator + 
+		    OConsts.PROJ_FILENAME);
+		File internal = new File(f.getAbsolutePath() + File.separator + 
+		    OConsts.DEFAULT_INTERNAL);
+        return projFile.exists() && internal.exists() && internal.isDirectory();
+	}
     
 }

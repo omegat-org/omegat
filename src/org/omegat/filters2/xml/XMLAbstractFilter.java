@@ -30,7 +30,7 @@ import java.util.ListIterator;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.TranslationException;
-import org.omegat.filters2.xml.xhtml.XHTMLEntityFilter;
+import org.omegat.filters2.xml.DefaultEntityFilter;
 import org.omegat.util.StaticUtils;
 
 /**
@@ -388,7 +388,7 @@ public abstract class XMLAbstractFilter extends AbstractFilter
         return res.toString();
     }
     
-    public void setEntityFilter(XHTMLEntityFilter filter)
+    public void setEntityFilter(DefaultEntityFilter filter)
     {
         entityFilter = filter;
     }
@@ -406,5 +406,5 @@ public abstract class XMLAbstractFilter extends AbstractFilter
     
     private boolean	m_compressWhitespace;
     private boolean	m_breakWhitespace;
-    private XHTMLEntityFilter	entityFilter;
+    private DefaultEntityFilter	entityFilter;
 }

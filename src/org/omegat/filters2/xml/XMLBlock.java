@@ -175,7 +175,7 @@ public class XMLBlock
 			}
             else if( m_text.equals("]]") )                                      // NOI18N
             {
-                tag = "]]>";
+                tag = "]]>";                                                    // NOI18N
             }
 			else if (m_isComment)
 			{

@@ -31,10 +31,10 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import org.omegat.filters2.TranslationException;
+import org.omegat.filters2.xml.DefaultEntityFilter;
 import org.omegat.util.AntiCRReader;
 import org.omegat.util.EncodingAwareReader;
 import org.omegat.util.OStrings;
-import org.omegat.filters2.xml.xhtml.XHTMLEntityFilter;
 import org.omegat.util.StaticUtils;
 
 /**
@@ -44,7 +44,7 @@ import org.omegat.util.StaticUtils;
  */
 public class XMLStreamReader
 {
-    private XHTMLEntityFilter	entityFilter;
+    private DefaultEntityFilter	entityFilter;
     
     public XMLStreamReader()
     {
@@ -199,7 +199,7 @@ public class XMLStreamReader
         m_compressWhitespace = tof;
     }
     
-    public void setEntityFilter(XHTMLEntityFilter filter)
+    public void setEntityFilter(DefaultEntityFilter filter)
     {
         entityFilter = filter;
     }

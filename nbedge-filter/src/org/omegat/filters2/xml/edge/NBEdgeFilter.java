@@ -15,8 +15,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import org.omegat.filters2.Instance;
+import org.omegat.filters2.xml.DefaultEntityFilter;
 import org.omegat.filters2.xml.XMLAbstractFilter;
-import org.omegat.filters2.xml.xhtml.XHTMLEntityFilter;
 import org.omegat.util.AntiCRReader;
 import org.omegat.util.EncodingAwareReader;
 import org.omegat.util.UTF8Writer;
@@ -57,7 +57,7 @@ public class NBEdgeFilter extends XMLAbstractFilter
 		defineFormatTag("u", "u");	 // NOI18N
 		defineFormatTag("var", "var");	 // NOI18N
         
-        setEntityFilter(new XHTMLEntityFilter());
+        setEntityFilter(new DefaultEntityFilter());
     }
 
     /**

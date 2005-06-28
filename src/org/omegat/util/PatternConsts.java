@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
  *
  * @author Maxym Mykhalchuk
  */
-class PatternConsts
+public class PatternConsts
 {
 	/** compiled pattern to extract the encoding from XML file, if any */
 	public static final Pattern XML_ENCODING = Pattern.compile(

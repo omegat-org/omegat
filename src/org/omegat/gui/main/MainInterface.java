@@ -19,42 +19,37 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.gui;
+package org.omegat.gui.main;
 
-import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
-import org.omegat.gui.messages.MessageRelay;
-import org.omegat.gui.main.MainInterface;
+import org.omegat.gui.ProjectFrame;
 
 /**
- * A listener for old Hyperlink-like style
+ * The interface specifying the interface of the main window,
+ * i.e. the methods that can be used throughout OmegaT.
  *
- * @author Keith Godfrey
+ * @author Maxym Mykhalchuk
  */
-class HListener implements HyperlinkListener
+public interface MainInterface
 {
-	public HListener(MainInterface t, boolean grabFocus)
-	{
-		m_transFrame = t;
-		m_grabFocus = grabFocus;
-	}
-
-	public void hyperlinkUpdate(HyperlinkEvent e)
-	{
-		String s;
-		if (e.getEventType() == 
-		HyperlinkEvent.EventType.ACTIVATED)
-		{
-			s = e.getDescription();
-			MessageRelay.uiMessageDoGotoEntry(m_transFrame, s);
-			//m_transFrame.doGotoEntry(s);
-			if (m_grabFocus)
-			{
-				m_transFrame.toFront();
-			}
-		}
-	}
-
-	private MainInterface	m_transFrame;
-	private boolean	m_grabFocus;
+    public void doNextEntry();
+    public void doPrevEntry();
+    public void doRecycleTrans();
+    public void activateEntry();
+    public void doGotoEntry(String entry);
+    public void setMessageText(String message);
+    public void displayWarning(String warning, Throwable throwable);
+    public void displayError(String error, Throwable throwable);
+    public void fatalError(String error, Throwable throwable);
+    public void doCompareN(int n);
+    
+    public void finishLoadProject();
+    
+    public boolean isProjectLoaded();
+    
+    public void toFront();
+    
+    public void setVisible(boolean show);
+    
+    /** Returns the window which lists all the source files. */
+    public ProjectFrame getProjectFrame();
 }

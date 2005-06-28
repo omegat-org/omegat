@@ -21,16 +21,16 @@
 
 package org.omegat.gui;
 
-import org.omegat.gui.messages.MessageRelay;
-import org.omegat.core.threads.CommandThread;
-import org.omegat.util.OConsts;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.swing.JTextPane;
+
+import org.omegat.gui.messages.MessageRelay;
+import org.omegat.util.OConsts;
 import org.omegat.util.PreferenceManager;
+import org.omegat.gui.main.MainInterface;
 
 /** 
  * EntryListPane displays translation segments and, upon doubleclick
@@ -42,7 +42,7 @@ import org.omegat.util.PreferenceManager;
  */
 class EntryListPane extends JTextPane
 {
-	public EntryListPane(TransFrame trans)
+	public EntryListPane(MainInterface trans)
 	{
 		m_transFrame = trans;
 		m_offsetList = new ArrayList();
@@ -132,5 +132,5 @@ class EntryListPane extends JTextPane
 	private StringBuffer	m_stringBuf;
 	private ArrayList		m_entryList;
 	private ArrayList		m_offsetList;
-	private TransFrame	m_transFrame;
+	private MainInterface	m_transFrame;
 }

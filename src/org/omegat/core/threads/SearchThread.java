@@ -21,19 +21,21 @@
 
 package org.omegat.core.threads;
 
-import org.omegat.gui.TransFrame;
-import org.omegat.gui.SearchWindow;
-import org.omegat.util.StaticUtils;
-import org.omegat.util.OStrings;
-import org.omegat.util.OConsts;
-import org.omegat.core.matching.SourceTextEntry;
-import org.omegat.core.TransMemory;
-
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.omegat.core.TransMemory;
+import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
+import org.omegat.gui.SearchWindow;
+import org.omegat.gui.main.MainInterface;
+import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
+
 
 /**
  * Each search window has its own search thread to actually do the 
@@ -44,7 +46,7 @@ import org.omegat.filters2.master.FilterMaster;
  */
 public class SearchThread extends Thread
 {
-	public SearchThread(TransFrame par, String startText)
+	public SearchThread(MainInterface par, String startText)
 	{
 		m_window = new SearchWindow(par, this, startText);
 		m_stop = false;

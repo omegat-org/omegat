@@ -47,6 +47,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.PreferenceManager;
 import org.omegat.util.StaticUtils;
 import org.openide.awt.Mnemonics;
+import org.omegat.gui.main.MainInterface;
 
 /**
  * This is a window that appears when user'd like to search for something.
@@ -57,7 +58,7 @@ import org.openide.awt.Mnemonics;
  */
 public class SearchWindow extends JFrame
 {
-	public SearchWindow(TransFrame par, SearchThread th, String startText)
+	public SearchWindow(MainInterface par, SearchThread th, String startText)
 	{
 		//super(par, false);
 		setSize(650, 700);
@@ -250,7 +251,7 @@ public class SearchWindow extends JFrame
 		});
 
 		String searchDir = PreferenceManager.pref.getPreference(OConsts.PREF_SEARCH_DIR);
-		if (!searchDir.equals(""))
+		if (!searchDir.equals(""))                                              // NOI18N
 		{
 			m_dirField.setText(searchDir);
 		}
@@ -365,8 +366,7 @@ public class SearchWindow extends JFrame
 				if (!f.exists() || !f.isDirectory())
 				{
 					// TODO XXX alert user folder is invalid
-                    StaticUtils.log("ERROR - bad directory name  '"+
-                            m_dirField.getText()+"'");	// NOI18N
+                    StaticUtils.log("ERROR - bad directory name  '"+m_dirField.getText()+"'");	// NOI18N
 					return;
 				}
 				if (CommandThread.core != null && m_dirCB.isSelected())

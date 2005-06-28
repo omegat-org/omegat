@@ -30,15 +30,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import org.openide.awt.Mnemonics;
+import org.omegat.gui.main.MainInterface;
 
 /**
- * A frame for project
+ * A frame for project,
+ * showing all the files of the project.
  *
  * @author Keith Godfrey
  */
 public class ProjectFrame extends JFrame
 {
-	public ProjectFrame(TransFrame parent)
+	public ProjectFrame(MainInterface parent)
 	{
 		m_parent = parent;
 
@@ -79,8 +81,9 @@ public class ProjectFrame extends JFrame
                 setVisible(false);
             }
         };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
+                put(escape, "ESCAPE");                                          // NOI18N
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
 
 		updateUIText();
 	}
@@ -147,7 +150,7 @@ public class ProjectFrame extends JFrame
 	private int			m_maxEntries;
 	private boolean		m_ready;
 
-	private TransFrame m_parent;
+	private MainInterface m_parent;
 
 }
 

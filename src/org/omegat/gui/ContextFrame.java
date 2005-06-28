@@ -21,17 +21,26 @@
 
 package org.omegat.gui;
 
-import org.omegat.util.OStrings;
-import org.omegat.core.matching.SourceTextEntry;
-import org.omegat.core.StringEntry;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.util.*;
+import java.util.ArrayList;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.KeyStroke;
+
+import org.omegat.core.StringEntry;
+import org.omegat.core.matching.SourceTextEntry;
+import org.omegat.util.OStrings;
 import org.openide.awt.Mnemonics;
+import org.omegat.gui.main.MainInterface;
 
 /**
  * A frame to display the context of a segment being currently translated.
@@ -39,9 +48,9 @@ import org.openide.awt.Mnemonics;
  *
  * @author Keith Godfrey
  */
-class ContextFrame extends JFrame
+public class ContextFrame extends JFrame
 {
-	public ContextFrame(TransFrame parent)
+	public ContextFrame(MainInterface parent)
 	{
 		m_parent = parent;
 		m_srcLang = true;
@@ -139,7 +148,7 @@ class ContextFrame extends JFrame
 	private String m_searchResults;
 	private boolean	m_srcLang;
 
-	private TransFrame m_parent;
+	private MainInterface m_parent;
 
 }
 

@@ -56,17 +56,6 @@ class OpenProjectFileChooser extends OmegaTFileChooser
             setCurrentDirectory(getSelectedFile());
 	}
 	
-	public static boolean isProjectDir(File f)
-	{
-		if( f==null || f.getName().length()==0 )
-			return false;
-		File projFile = new File(f.getAbsolutePath() + File.separator + 
-		    OConsts.PROJ_FILENAME);
-		File internal = new File(f.getAbsolutePath() + File.separator + 
-		    OConsts.DEFAULT_INTERNAL);
-        return projFile.exists() && internal.exists() && internal.isDirectory();
-	}
-
     public void setCurrentDirectory(File dir)
     {
         if( isProjectDir(dir) )

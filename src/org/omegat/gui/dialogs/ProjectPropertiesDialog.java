@@ -24,6 +24,7 @@ package org.omegat.gui;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -31,6 +32,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -39,8 +41,10 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import org.omegat.util.Language;
@@ -51,26 +55,51 @@ import org.openide.awt.Mnemonics;
 
 
 /**
- * The dialog for creation of a new OmegaT project
+ * The dialog for customizing the OmegaT project.
+ * <p>
+ * It is used:
+ * <ul>
+ * <li>During creation of a new project.
+ * <li>If some directories are missing while opening a project.
+ * <li>For editing project properties.
+ * </ul>
  *
  * @author Keith Godfrey
+ * @author Maxym Mykhalchuk
  */
-class NewProjectDialog extends JDialog
+public class ProjectPropertiesDialog extends JDialog
 {
     private ProjectProperties projectProperties;
+    
+    /** This dialog is used to create a new project. */
+    public static final int NEW_PROJECT = 1;
+    /** This dialog is used to resolve missing directories of existing project (upon opening the project). */
+    public static final int RESOLVE_DIRS = 2;
+    /** This dialog is used to edit project's properties: where directories reside, languages, etc. */
+    public static final int EDIT_PROJECT = 3;
 
+    /**
+     * The type of the dialog: 
+     * <ul>
+     * <li>Creating project == {@link #NEW_PROJECT}
+     * <li>Resolving the project's directories (existing project with some dirs missing)
+     *      == {@link #RESOLVE_DIRS}
+     * <li>Editing project properties == {@link #EDIT_PROJECT}
+     * </ul>
+     */
+    private int dialogType;
+    
     /**
      * Creates a dialog to create a new project / edit folders of existing one.
      * 
      * @param foldersMissing if this is an existing project with some folders missing
      */
-    public NewProjectDialog(ProjectProperties projectProperties, JFrame par, String projFileName, 
-            boolean foldersMissing)
+    public ProjectPropertiesDialog(ProjectProperties projectProperties, 
+            String projFileName, int dialogTypeValue)
     {
-        super(par, true);
+        super((Frame)null, true);
         this.projectProperties = projectProperties;
-        this.foldersMissing = foldersMissing;
-        projectProperties.m_dialogOK = false;
+        this.dialogType = dialogTypeValue;
 
         if (projFileName == null)
             projectProperties.reset();
@@ -89,7 +118,10 @@ class NewProjectDialog extends JDialog
         m_browseTarget = 0;
         
         Border emptyBorder = new EmptyBorder(2,0,2,0);
+        Box centerBox = Box.createVerticalBox();
+        centerBox.setBorder(new EmptyBorder(5,5,5,5));
 
+        // hinting message
         m_messageArea = new javax.swing.JTextArea();
         m_messageArea.setEditable(false);
         m_messageArea.setBackground(
@@ -99,48 +131,19 @@ class NewProjectDialog extends JDialog
         bMes.setBorder(emptyBorder);
         bMes.add(m_messageArea);
         bMes.add(Box.createHorizontalGlue());
+        centerBox.add(bMes);
 
-        m_srcRootLabel = new JLabel();
-        Box bSrc = Box.createHorizontalBox();
-        bSrc.setBorder(emptyBorder);
-        bSrc.add(m_srcRootLabel);
-        bSrc.add(Box.createHorizontalGlue());
-        m_srcBrowse = new JButton();
-        bSrc.add(m_srcBrowse);
-        m_srcRootField = new JTextField();
-
-        m_locRootLabel = new JLabel();
-        Box bLoc = Box.createHorizontalBox();
-        bLoc.setBorder(emptyBorder);
-        bLoc.add(m_locRootLabel);
-        bLoc.add(Box.createHorizontalGlue());
-        m_locBrowse = new JButton();
-        bLoc.add(m_locBrowse);
-        m_locRootField = new JTextField();
-
-        m_glosRootLabel = new JLabel();
-        Box bGlos = Box.createHorizontalBox();
-        bGlos.setBorder(emptyBorder);
-        bGlos.add(m_glosRootLabel);
-        bGlos.add(Box.createHorizontalGlue());
-        m_glosBrowse = new JButton();
-        bGlos.add(m_glosBrowse);
-        m_glosRootField = new JTextField();
-
-        m_tmRootLabel = new JLabel();
-        Box bTM = Box.createHorizontalBox();
-        bTM.setBorder(emptyBorder);
-        bTM.add(m_tmRootLabel);
-        bTM.add(Box.createHorizontalGlue());
-        m_tmBrowse = new JButton();
-        bTM.add(m_tmBrowse);
-        m_tmRootField = new JTextField();
-
+        // source and target languages
+        Box localesBox = Box.createVerticalBox();
+        localesBox.setBorder(new EtchedBorder());
+        
         m_sourceLocaleLabel = new JLabel();
+        Mnemonics.setLocalizedText(m_sourceLocaleLabel, OStrings.PP_SRC_LANG);
         Box bSL = Box.createHorizontalBox();
         bSL.setBorder(emptyBorder);
         bSL.add(m_sourceLocaleLabel);
         bSL.add(Box.createHorizontalGlue());
+        localesBox.add(bSL);
         
         m_sourceLocaleField = new JComboBox(Language.LANGUAGES);
         if( m_sourceLocaleField.getMaximumRowCount()<20 )
@@ -148,12 +151,15 @@ class NewProjectDialog extends JDialog
         m_sourceLocaleField.setEditable(true);
         m_sourceLocaleField.setRenderer(new MyComboBoxRenderer());
         m_sourceLocaleField.setSelectedItem(projectProperties.getSourceLanguage());
+        localesBox.add(m_sourceLocaleField);
 
         m_targetLocaleLabel = new JLabel();
+        Mnemonics.setLocalizedText(m_targetLocaleLabel, OStrings.PP_LOC_LANG);
         Box bLL = Box.createHorizontalBox();
         bLL.setBorder(emptyBorder);
         bLL.add(m_targetLocaleLabel);
         bLL.add(Box.createHorizontalGlue());
+        localesBox.add(bLL);
         
         m_targetLocaleField = new JComboBox(Language.LANGUAGES);
         if( m_targetLocaleField.getMaximumRowCount()<20 )
@@ -161,34 +167,92 @@ class NewProjectDialog extends JDialog
         m_targetLocaleField.setEditable(true);
         m_targetLocaleField.setRenderer(new MyComboBoxRenderer());
         m_targetLocaleField.setSelectedItem(projectProperties.getTargetLanguage());
+        localesBox.add(m_targetLocaleField);
         
-        Box b = Box.createVerticalBox();
-        b.setBorder(new EmptyBorder(5,5,5,5));
-        b.add(bMes);
-        b.add(bSrc);
-        b.add(m_srcRootField);
-        b.add(bLoc);
-        b.add(m_locRootField);
-        b.add(bGlos);
-        b.add(m_glosRootField);
-        b.add(bTM);
-        b.add(m_tmRootField);
-        b.add(bSL);
-        b.add(m_sourceLocaleField);
-        b.add(bLL);
-        b.add(m_targetLocaleField);
-        getContentPane().add(b, "North");										// NOI18N
+        // sentence-segmenting
+        Box bSent = Box.createHorizontalBox();
+        m_sentenceSegmentingCheckBox = new JCheckBox();
+        Mnemonics.setLocalizedText(m_sentenceSegmentingCheckBox, OStrings.getString("PP_SENTENCE_SEGMENTING"));
+        bSent.add(m_sentenceSegmentingCheckBox);
+        bSent.add(Box.createHorizontalGlue());
+        localesBox.add(bSent);
+        
+        centerBox.add(localesBox);
+        
+        // directories
+        centerBox.add(Box.createVerticalStrut(5));
+        
+        Box dirsBox = Box.createVerticalBox();
+        dirsBox.setBorder(new EtchedBorder());
+        
+        m_srcRootLabel = new JLabel();
+        Mnemonics.setLocalizedText(m_srcRootLabel, OStrings.PP_SRC_ROOT);
+        Box bSrc = Box.createHorizontalBox();
+        bSrc.setBorder(emptyBorder);
+        bSrc.add(m_srcRootLabel);
+        bSrc.add(Box.createHorizontalGlue());
+        m_srcBrowse = new JButton();
+        Mnemonics.setLocalizedText(m_srcBrowse, OStrings.PP_BUTTON_BROWSE_SRC);
+        bSrc.add(m_srcBrowse);
+        m_srcRootField = new JTextField();
+        dirsBox.add(bSrc);
+        dirsBox.add(m_srcRootField);
+
+        m_locRootLabel = new JLabel();
+        Mnemonics.setLocalizedText(m_locRootLabel, OStrings.PP_LOC_ROOT);
+        Box bLoc = Box.createHorizontalBox();
+        bLoc.setBorder(emptyBorder);
+        bLoc.add(m_locRootLabel);
+        bLoc.add(Box.createHorizontalGlue());
+        m_locBrowse = new JButton();
+        Mnemonics.setLocalizedText(m_locBrowse, OStrings.PP_BUTTON_BROWSE_TAR);
+        bLoc.add(m_locBrowse);
+        m_locRootField = new JTextField();
+        dirsBox.add(bLoc);
+        dirsBox.add(m_locRootField);
+
+        m_glosRootLabel = new JLabel();
+        Mnemonics.setLocalizedText(m_glosRootLabel, OStrings.PP_GLOS_ROOT);
+        Box bGlos = Box.createHorizontalBox();
+        bGlos.setBorder(emptyBorder);
+        bGlos.add(m_glosRootLabel);
+        bGlos.add(Box.createHorizontalGlue());
+        m_glosBrowse = new JButton();
+        Mnemonics.setLocalizedText(m_glosBrowse, OStrings.PP_BUTTON_BROWSE_GL);
+        bGlos.add(m_glosBrowse);
+        m_glosRootField = new JTextField();
+        dirsBox.add(bGlos);
+        dirsBox.add(m_glosRootField);
+
+        m_tmRootLabel = new JLabel();
+        Mnemonics.setLocalizedText(m_tmRootLabel, OStrings.PP_TM_ROOT);
+        Box bTM = Box.createHorizontalBox();
+        bTM.setBorder(emptyBorder);
+        bTM.add(m_tmRootLabel);
+        bTM.add(Box.createHorizontalGlue());
+        m_tmBrowse = new JButton();
+        Mnemonics.setLocalizedText(m_tmBrowse, OStrings.PP_BUTTON_BROWSE_TM);
+        bTM.add(m_tmBrowse);
+        m_tmRootField = new JTextField();
+        dirsBox.add(bTM);
+        dirsBox.add(m_tmRootField);
+        
+        centerBox.add(dirsBox);
+        
+        getContentPane().add(centerBox, "Center");										// NOI18N
 
         m_okButton = new JButton();
+        Mnemonics.setLocalizedText(m_okButton, OStrings.PP_BUTTON_OK);
         m_cancelButton = new JButton();
+        Mnemonics.setLocalizedText(m_cancelButton, OStrings.PP_BUTTON_CANCEL);
         
-        Box b2 = Box.createHorizontalBox();
-        b2.setBorder(new EmptyBorder(5,5,5,5));
-        b2.add(Box.createHorizontalGlue());
-        b2.add(m_okButton);
-        b2.add(Box.createHorizontalStrut(5));
-        b2.add(m_cancelButton);
-        getContentPane().add(b2, "South");										// NOI18N
+        Box southBox = Box.createHorizontalBox();
+        southBox.setBorder(new EmptyBorder(5,5,5,5));
+        southBox.add(Box.createHorizontalGlue());
+        southBox.add(m_okButton);
+        southBox.add(Box.createHorizontalStrut(5));
+        southBox.add(m_cancelButton);
+        getContentPane().add(southBox, "South");										// NOI18N
         
         setResizable(false);
         
@@ -303,31 +367,40 @@ class NewProjectDialog extends JDialog
         m_tmRootField.setText(projectProperties.getTMRoot());
         m_sourceLocaleField.setSelectedItem(projectProperties.getSourceLanguage());
         m_targetLocaleField.setSelectedItem(projectProperties.getTargetLanguage());
+        m_sentenceSegmentingCheckBox.setSelected(projectProperties.isSentenceSegmentingEnabled());
 
-        if( foldersMissing )
+        switch( dialogType )
         {
-            File f = new File(m_srcRootField.getText());
-            if( !f.exists() || !f.isDirectory() ) 
-                m_srcRootField.setForeground(Color.RED);
-            
-            f = new File(m_locRootField.getText());
-            if( !f.exists() || !f.isDirectory() )
-                m_locRootField.setForeground(Color.RED);
-            
-            f = new File(m_glosRootField.getText());
-            if( !f.exists() || !f.isDirectory() )
-                m_glosRootField.setForeground(Color.RED);
-            
-            f = new File(m_tmRootField.getText());
-            if( !f.exists() || !f.isDirectory() )
-                m_tmRootField.setForeground(Color.RED);
+            case RESOLVE_DIRS:
+                // disabling some of the controls
+                m_sourceLocaleField.setEnabled(false);
+                m_targetLocaleField.setEnabled(false);
+                m_sentenceSegmentingCheckBox.setEnabled(false);
+
+                // marking missing folder RED
+                File f = new File(m_srcRootField.getText());
+                if( !f.exists() || !f.isDirectory() ) 
+                    m_srcRootField.setForeground(Color.RED);
+
+                f = new File(m_locRootField.getText());
+                if( !f.exists() || !f.isDirectory() )
+                    m_locRootField.setForeground(Color.RED);
+
+                f = new File(m_glosRootField.getText());
+                if( !f.exists() || !f.isDirectory() )
+                    m_glosRootField.setForeground(Color.RED);
+
+                f = new File(m_tmRootField.getText());
+                if( !f.exists() || !f.isDirectory() )
+                    m_tmRootField.setForeground(Color.RED);
+                break;
         }
         
         updateUIText();
         
         pack();
         
-        setSize(6*getWidth()/5, getHeight());
+        setSize(9*getWidth()/8, getHeight()+10);
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension dialogSize = getSize();
@@ -459,6 +532,8 @@ class NewProjectDialog extends JDialog
             m_sourceLocaleField.requestFocusInWindow();
             return;
         }
+        projectProperties.setSourceLanguage(m_sourceLocaleField.getSelectedItem().toString());
+        
         if( !projectProperties.verifySingleLangCode(m_targetLocaleField.getSelectedItem().toString()) )
         {
             JOptionPane.showMessageDialog(this, 
@@ -468,12 +543,16 @@ class NewProjectDialog extends JDialog
             m_targetLocaleField.requestFocusInWindow();
             return;
         }
+        projectProperties.setTargetLanguage(m_targetLocaleField.getSelectedItem().toString());
+
+        projectProperties.setSentenceSegmentingEnabled(m_sentenceSegmentingCheckBox.isSelected());
         
         projectProperties.setSourceRoot(m_srcRootField.getText());
         if (!projectProperties.getSourceRoot().endsWith(File.separator))
             projectProperties.setSourceRoot(projectProperties.getSourceRoot() + File.separator);
         
-        if( foldersMissing && !new File(projectProperties.getSourceRoot()).exists() )
+        if( dialogType!=NEW_PROJECT && 
+                !new File(projectProperties.getSourceRoot()).exists() )
         {
             JOptionPane.showMessageDialog(this, 
                     OStrings.getString("NP_SOURCEDIR_DOESNT_EXIST"),
@@ -485,7 +564,8 @@ class NewProjectDialog extends JDialog
         projectProperties.setLocRoot(m_locRootField.getText());
         if (!projectProperties.getLocRoot().endsWith(File.separator))
             projectProperties.setLocRoot(projectProperties.getLocRoot() + File.separator);
-        if( foldersMissing && !new File(projectProperties.getLocRoot()).exists() )
+        if( dialogType!=NEW_PROJECT && 
+                !new File(projectProperties.getLocRoot()).exists() )
         {
             JOptionPane.showMessageDialog(this, 
                     OStrings.getString("NP_TRANSDIR_DOESNT_EXIST"),
@@ -497,7 +577,8 @@ class NewProjectDialog extends JDialog
         projectProperties.setGlossaryRoot(m_glosRootField.getText());
         if (!projectProperties.getGlossaryRoot().endsWith(File.separator))
             projectProperties.setGlossaryRoot(projectProperties.getGlossaryRoot() + File.separator);
-        if( foldersMissing && !new File(projectProperties.getGlossaryRoot()).exists() )
+        if( dialogType!=NEW_PROJECT && 
+                !new File(projectProperties.getGlossaryRoot()).exists() )
         {
             JOptionPane.showMessageDialog(this, 
                     OStrings.getString("NP_GLOSSDIR_DOESNT_EXIST"),
@@ -509,7 +590,8 @@ class NewProjectDialog extends JDialog
         projectProperties.setTMRoot(m_tmRootField.getText());
         if (!projectProperties.getTMRoot().endsWith(File.separator))
             projectProperties.setTMRoot(projectProperties.getTMRoot() + File.separator);
-        if( foldersMissing && !new File(projectProperties.getTMRoot()).exists() )
+        if( dialogType!=NEW_PROJECT && 
+                !new File(projectProperties.getTMRoot()).exists() )
         {
             JOptionPane.showMessageDialog(this, 
                     OStrings.getString("NP_TMDIR_DOESNT_EXIST"),
@@ -517,9 +599,6 @@ class NewProjectDialog extends JDialog
             m_tmRootField.requestFocusInWindow();
             return;
         }
-
-        projectProperties.setSourceLanguage(m_sourceLocaleField.getSelectedItem().toString());
-        projectProperties.setTargetLanguage(m_targetLocaleField.getSelectedItem().toString());
 
         m_dialogCancelled = false;
         setVisible(false);
@@ -534,34 +613,21 @@ class NewProjectDialog extends JDialog
 
     private void updateUIText()
     {
-        if( foldersMissing )
+        switch( dialogType )
         {
-            setTitle(OStrings.PP_OPEN_PROJ);
-            m_messageArea.setText(OStrings.PP_MESSAGE_BADPROJ);
+            case NEW_PROJECT:
+                setTitle(OStrings.PP_CREATE_PROJ);
+                m_messageArea.setText(OStrings.PP_MESSAGE_CONFIGPROJ);
+                break;
+            case RESOLVE_DIRS:
+                setTitle(OStrings.PP_OPEN_PROJ);
+                m_messageArea.setText(OStrings.PP_MESSAGE_BADPROJ);
+                break;
+            case EDIT_PROJECT:
+                setTitle(OStrings.getString("PP_EDIT_PROJECT"));
+                m_messageArea.setText(OStrings.getString("PP_MESSAGE_EDITPROJ"));
+                break;
         }
-        else
-        {
-            setTitle(OStrings.PP_CREATE_PROJ);
-            m_messageArea.setText(OStrings.PP_MESSAGE_CONFIGPROJ);
-        }
-
-        Mnemonics.setLocalizedText(m_srcRootLabel, OStrings.PP_SRC_ROOT);
-        Mnemonics.setLocalizedText(m_srcBrowse, OStrings.PP_BUTTON_BROWSE_SRC);
-        
-        Mnemonics.setLocalizedText(m_locRootLabel, OStrings.PP_LOC_ROOT);
-        Mnemonics.setLocalizedText(m_locBrowse, OStrings.PP_BUTTON_BROWSE_TAR);
-
-        Mnemonics.setLocalizedText(m_glosRootLabel, OStrings.PP_GLOS_ROOT);
-        Mnemonics.setLocalizedText(m_glosBrowse, OStrings.PP_BUTTON_BROWSE_GL);
-        
-        Mnemonics.setLocalizedText(m_tmRootLabel, OStrings.PP_TM_ROOT);
-        Mnemonics.setLocalizedText(m_tmBrowse, OStrings.PP_BUTTON_BROWSE_TM);
-
-        Mnemonics.setLocalizedText(m_sourceLocaleLabel, OStrings.PP_SRC_LANG);
-        Mnemonics.setLocalizedText(m_targetLocaleLabel, OStrings.PP_LOC_LANG);
-
-        Mnemonics.setLocalizedText(m_okButton, OStrings.PP_BUTTON_OK);
-        Mnemonics.setLocalizedText(m_cancelButton, OStrings.PP_BUTTON_CANCEL);
     }
 
     /**
@@ -573,8 +639,6 @@ class NewProjectDialog extends JDialog
     private int				m_browseTarget;
 
     private JTextArea   m_messageArea;
-    /** if this is an existing project with some folders missing */
-    private boolean		foldersMissing;
 
     private JLabel		m_srcRootLabel;
     private JTextField	m_srcRootField;
@@ -598,6 +662,8 @@ class NewProjectDialog extends JDialog
     private JLabel		m_targetLocaleLabel;
     private JComboBox	m_targetLocaleField;
 
+    private JCheckBox   m_sentenceSegmentingCheckBox;
+    
     private JButton		m_okButton;
     private JButton		m_cancelButton;
 }

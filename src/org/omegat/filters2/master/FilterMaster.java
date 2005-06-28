@@ -45,6 +45,7 @@ import java.util.Map;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
@@ -52,11 +53,10 @@ import org.omegat.core.StringEntry;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.filters2.xml.openoffice.OOFilter;
-import org.omegat.filters2.xml.xhtml.XHTMLFilter;
 import org.omegat.util.LFileCopy;
 import org.omegat.filters2.*;
 import org.omegat.filters2.Instance;
-import org.omegat.filters2.html.HTMLFilter;
+import org.omegat.filters2.html2.HTMLFilter2;
 import org.omegat.filters2.text.TextFilter;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 import org.omegat.util.Language;
@@ -64,7 +64,6 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.PreferenceManager;
 import org.omegat.util.StaticUtils;
-
 
 /**
  * A master class that registers and handles all the filters.
@@ -135,7 +134,8 @@ public class FilterMaster
         return s.replaceAll("\r", "");		// NOI18N
     }
     
-    private Pattern PATTERN_SENTENCE_BREAK = Pattern.compile("\\p{Ll}[\\.\\?!]\\.?\\.?(\\s+)\\p{Lu}");
+    private Pattern PATTERN_SENTENCE_BREAK = 
+            Pattern.compile("\\p{Ll}[\\.\\?!]\\.?\\.?(\\s+)\\p{Lu}");           // NOI18N
     
     /**
      * This method is called by filters to:
@@ -152,12 +152,9 @@ public class FilterMaster
         // ugly hack, to say the truth
 		String src = removeLineFeed(entry);
         
-        /*
-        if( CommandThread.core.isPreference(OConsts.PREF_SENTENCE_SEGMENTING) )
+        if( PreferenceManager.pref.isPreference(OConsts.PREF_SENTENCE_SEGMENTING) )
         {
             Matcher m = PATTERN_SENTENCE_BREAK.matcher(src);
-            StaticUtils.log();
-            StaticUtils.log("src = '"+src+"'");
             int nextSentenceStart = 0;
             StringBuffer res = new StringBuffer();
             while( m.find() )
@@ -170,8 +167,8 @@ public class FilterMaster
             res.append(processSingleEntry(src.substring(nextSentenceStart)));
             return res.toString();
         }
-         */
-        return processSingleEntry(entry);
+        else
+            return processSingleEntry(entry);
 	}
     
     /**
@@ -470,9 +467,9 @@ public class FilterMaster
                     {
                         // it means that isFileSupported() have read more than the buffer was
                         StaticUtils.log(filter.getClassName()+
-                                ".isFileSupported() violated the contract:\n " +
-                                "It have read more than "+OConsts.READ_AHEAD_LIMIT+
-                                " bytes from the reader.");
+                                ".isFileSupported() violated the contract:\n " +        // NOI18N
+                                "It have read more than "+OConsts.READ_AHEAD_LIMIT+     // NOI18N
+                                " bytes from the reader.");                             // NOI18N
                         // we need to reopen the reader
                         reader = filterObject.createReader(file, instance.getSourceEncoding());
                     }
@@ -533,7 +530,7 @@ public class FilterMaster
     private void loadPlugins()
     {
         plugins = new ArrayList();
-        File pluginsDir = new File("plugins/");
+        File pluginsDir = new File("plugins/");                                 // NOI18N
         if( pluginsDir.exists() && pluginsDir.isDirectory() )
             loadPluginsFrom(pluginsDir);
     }
@@ -548,8 +545,17 @@ public class FilterMaster
         {
             public boolean accept(File file)
             {
-                return (file.isFile() && file.getName().toLowerCase().endsWith(".jar")) ||
-                        (file.isDirectory() && !file.getName().equals(".") && !file.getName().equals("..") );
+                return 
+                        (
+                            file.isFile() && 
+                            file.getName().toLowerCase().endsWith(".jar")       // NOI18N
+                        ) 
+                        ||      
+                        (
+                            file.isDirectory() && 
+                            !file.getName().equals(".") &&                      // NOI18N
+                            !file.getName().equals("..")                        // NOI18N
+                        );
             }
         });
         for(int i=0; i<filters.length; i++)
@@ -563,14 +569,18 @@ public class FilterMaster
                 }
                 catch( MalformedURLException mue )
                 {
-                    StaticUtils.log("Something went wrong!");
+                    // nothing is really wrong
+                    // strange exception
+                    StaticUtils.log("Couldn't access local file system " +      // NOI18N
+                            "to get '"+filters[i]+"' !");                       // NOI18N
                     mue.printStackTrace(StaticUtils.getLogStream());
                 }
                 catch( IOException ioe )
                 {
                     // nothing is really wrong
                     // we just couldn't load one JAR
-                    StaticUtils.log("Couldn't load plugin JAR '"+filters[i]+"' !");
+                    StaticUtils.log("Couldn't load plugin JAR '"+               // NOI18N
+                            filters[i]+"' !");                                  // NOI18N
                 }
             }
             else
@@ -589,7 +599,7 @@ public class FilterMaster
         Manifest manifest = filter_jar.getManifest();
 
         Attributes mainattribs = manifest.getMainAttributes();
-        if( mainattribs.getValue("OmegaT-Plugin")==null )
+        if( mainattribs.getValue("OmegaT-Plugin")==null )                       // NOI18N
             return; // it's not OmegaT plugin
 
         List filterList = new ArrayList();
@@ -600,9 +610,9 @@ public class FilterMaster
         for(int i=0; i<keys.length; i++)
         {
             Attributes attrs = (Attributes)entries.get(keys[i]);
-            String name = attrs.getValue("Name");
-            String isfilter = attrs.getValue("OmegaT-Filter");
-            if( isfilter!=null && isfilter.equals("true") )
+            String name = attrs.getValue("Name");                               // NOI18N
+            String isfilter = attrs.getValue("OmegaT-Filter");                  // NOI18N
+            if( isfilter!=null && isfilter.equals("true") )                     // NOI18N
             {
                 filterList.add(keys[i]);
                 try
@@ -779,8 +789,7 @@ public class FilterMaster
         filters = new Filters();
         filters.addFilter(new OneFilter(new TextFilter(), false));
         filters.addFilter(new OneFilter(new ResourceBundleFilter(), false));
-        filters.addFilter(new OneFilter(new XHTMLFilter(), false));
-        filters.addFilter(new OneFilter(new HTMLFilter(), false));
+        filters.addFilter(new OneFilter(new HTMLFilter2(), false));
         filters.addFilter(new OneFilter(new OOFilter(), false));
     }
 
@@ -818,9 +827,9 @@ public class FilterMaster
                 {
                     // couldn't load one of filters
                     // eat (almost) silently
-                    StaticUtils.log("Filter '"+(String)filterList.get(j)+
-                            "' from '"+((URL)filterList.get(0)).getFile()+"'"+
-                            " cannot be loaded");
+                    StaticUtils.log("Filter '"+(String)filterList.get(j)+       // NOI18N
+                            "' from '"+((URL)filterList.get(0)).getFile()+"'"+  // NOI18N
+                            " cannot be loaded");                               // NOI18N
                 }
             }
         }
@@ -960,10 +969,10 @@ public class FilterMaster
     private String targetRegexer(String tfp)
     {
         String pattern = tfp;
-        pattern = pattern.replaceAll("\\$", "\\\\\\$");
-        pattern = pattern.replaceAll("\\{", "\\\\{");
-        pattern = pattern.replaceAll("\\}", "\\\\}");
-        pattern = "(?i)"+pattern;
+        pattern = pattern.replaceAll("\\$", "\\\\\\$");                         // NOI18N
+        pattern = pattern.replaceAll("\\{", "\\\\{");                           // NOI18N
+        pattern = pattern.replaceAll("\\}", "\\\\}");                           // NOI18N
+        pattern = "(?i)"+pattern;                                               // NOI18N
         return pattern;
     }
 }

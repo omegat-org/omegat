@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<!-- The HTML code is taken from the latest OmegaT User Manual, and it uses the OmegaT User Manual's style sheet as well -->
+
+
+<html>
+<head>
+<title>OmegaT: Instant Start</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="omegat.css">
+</head>
+
+<body lang="en" dir="LTR">
+
+    <div class="navbar-top">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td align="left" valign="center" width="7%">
+          <a href="OmegaT.html" title="Table of Contents">
+            <img src="OmegaT.png" alt="OmegaT Logo" border="0">
+          </a>
+        </td>
+        <td align="left" valign="center" width="9%">
+          <b>Previous</b>
+        </td>
+        <td align="left" valign="center" width="39%">        
+          <a href="Important.html">Important Notes</a>
+        </td>
+        <td align="left" valign="center" width="6%">
+          <b>Next</b>
+        </td>
+        <td align="left" valign="center" width="39%">
+          <a href="SampleProject.html">Sample Project</a>
+        </td>
+      </tr>
+    </table>    
+
+    </div>
+
+
+<div class="content">
+
+<h1 align="center">OmegaT: Instant Start v0.2</h1>
+
+<p><i>This instant start guide covers only the very basics.  Ideally, all users should read the OmegaT User Manual to familiarise themselves with everything OmegaT has to offer.</i></p>
+
+<ol>
+<li>Briefly, how OmegaT works</li>
+<li>How to translate using OmegaT</li>
+<li>Dealing with tagged text</li>
+</ol>
+
+<h2>Briefly, how OmegaT works</h2>
+
+<p>When OmegaT starts, it will look similar to this picture:</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="firststart.png" width="513" height="368" alt="Start screen" border="0"></p>
+
+<p>OmegaT consists of two windows, which you can independently move around on your screen.  The left-hand window is the edit window where you will type your translation.  The right-hand window is the Match/Glossary Viewer, where fuzzy matches (top frame) and glossary matches (bottom frame) will be displayed.</p>
+
+<p>OmegaT extracts segments from the source document, displays them in the edit screen for you to translate, and adds your translations to a translation memory.  After the translation is done (or at any time requested by you), OmegaT creates a target document by rebuilding the source document using the segments from the translation memory.</p>
+
+<p>OmegaT organises your translation work into so-called translation projects.  For each project, OmegaT first creates a set of folders which will contain the source documents, the glossaries and translation memories, and eventually also the target documents.</p>
+
+<h2>How to translate using OmegaT</h2>
+
+<h3>1. Create a new project</h3>
+
+<p>Select File -&gt; New Project... from the menu.</p>
+
+<p>Navigate to the folder where you'd like to save the project files, and type in a name for the translation project.  This name will also be the name of the project folder, and all project files will be stored in that folder.</p>
+
+<p>OmegaT will prompt you to change or accept the project folders to be created.  It will look similar to this picture:</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="createproj.png" width="513" height="369" alt="Create new project" border="0"></p>
+
+<p>You may simply accept the location of the subfolders (directories), but you should make sure that source and target language codes are correct (you can find a list of commonly used language codes in the OmegaT User Manual).  Make a mental note of the location of the "Source files directory".</p>
+
+<p>Then click OK to accept the project setup.</p>
+
+<p>Now copy your source documents into the "source" folder of the translation project.  Remember, OmegaT can only translate OpenDocument files, OpenOffice.org documents, HTML, plaintext and certain Java files.  If you copy any other files into the "source" folder, OmegaT will ignore them.</p>
+
+<h3>2. Open the new project</h3>
+
+<p>Select File -&gt; Open Project... from the menu.</p>
+
+<p>Select the existing translation project, which may have an OmegaT icon, and click "Open".  Then select the file called omegat.project, and click "Open" again.</p>
+
+<p>OmegaT will prompt you to select a source file in the project.  OmegaT loads the first file on the list by default.  Select a file, and click "Close" to close the window.</p>
+
+<h3>3. Translate the segments one by one</h3>
+
+<p>For the current segment, OmegaT highlights the source text in green and displays a copy of the source text between two tags &lt;segment 0001&gt; and &lt;end segment&gt;.  Type your translation between the two tags by overwriting the text.</p>
+
+<p>Press "ENTER" to advance to the next segment.</p>
+
+<p>When you press "ENTER", several things happen invisibly:  OmegaT adds the translated segment to the translation memory, and OmegaT searches the translation memory and glossary for matches for the untranslated segment.</p>
+
+<p>If the next segment has a fuzzy match from the translation memory, it would be displayed in the top frame of the Match/Glossary Viewer.  If that segment matched any terms in the glossary, it would be displayed in the bottom frame of the Match/Glossary Viewer.</p>
+
+<p>If there is a fuzzy match, you can insert the fuzzy match text into the edit window as follows:</p>
+
+<ul><li>Select the correct fuzzy match using Ctrl+1, Ctrl+2 etc.</li>
+<li>Press Ctrl+I to insert it at the cursor's current position, or...</li>
+<li>Press Ctrl+R to overwrite the entire current segment by it.</li>
+</ul>
+
+<p>Whenever there is a 100% match, OmegaT will automatically overwrite the entire current segment with it.  Keep in mind that 100% matches are propagated throughout the entire project -- or to put it simply, if you change the text of a 100% match, OmegaT will automatically update all occurences of that segment with the new text.</p>
+
+<h3>4. Build the target documents</h3>
+
+<p>After the translation is done (or at any time requested by you), OmegaT creates a target document by rebuilding the source document using the segments from the translation memory.</p>
+
+<p>To create the target documents, select File -&gt; Create Target Documents from the menu.  OmegaT will build target versions of all valid documents in the "source" directory, regardless of how much of it is translated.</p>
+
+<p>You can check at any time what the target document currently looks like by simply invoking Create Target Documents.  You can alter existing translations in your translation project and then recreate the target documents as often as you like.  It is recommended that you save your translation memory regularly and that you build your target documents regularly</p>
+
+<p>The translated files can now be found in the "target directory".</p>
+
+<h2>Dealing with tagged text</h2>
+
+<p>In OpenDocument files, OpenOffice.org documents or HTML files, certain words within a sentence often have special formatting of their own.  For example, a sentence may be in italic font but a word in the middle of the sentence might be in bold font.</p>
+
+<p>OmegaT marks up these format changes using special tags, which you must transfer to the translated version of the text.  See the OmegaT User Manual for advanced tag editing.</p>
+
+<h3>An example...</h3>
+
+<p>Here is an example of a segment in HTML:</p>
+
+<pre>&lt;p&gt;A different display font can be selected via the &lt;b&gt;Display Font&lt;/b&gt; dialog.
+Open it via the &lt;i&gt;Settings&lt;/i&gt; &amp;gt; &lt;i&gt;Display Font...&lt;/i&gt; menu item.
+The font type and size can be changed from the dialog.&lt;/p&gt;</pre>
+
+<p>Here is how OmegaT will display it, highlighted in green:</p>
+
+<pre>A different display font can be selected via the &lt;b0&gt;Display Font&lt;/b0&gt; dialog.
+Open it via the &lt;i0&gt;Settings&lt;/i0&gt; &gt; &lt;i1&gt;Display Font...&lt;/i1&gt; menu item.
+The font type and size can be changed from the dialog.</pre>
+
+<p>And here is how you would translate it (this example is in Afrikaans):</p>
+
+<pre>'n Mens kan 'n ander vertoonfont kies met die &lt;b0&gt;Vertoonfont&lt;/b0&gt;-dialoogkassie.
+Kies  &lt;i0&gt;Opstelling&lt;/i0&gt; &gt; &lt;i1&gt;Vertoonfont...&lt;/i1&gt; op die kieslys.
+Die lettertipe &eacute;n die lettergrootte kan met di&eacute; dialoogkassie verander word.</pre>
+
+<p>When OmegaT creates the target document, the HTML will look like this:</p>
+
+<pre>&lt;p&gt;'n Mens kan 'n ander vertoonfont kies met die &lt;b&gt;Vertoonfont&lt;/b&gt;-dialoogkassie.
+Kies  &lt;i&gt;Opstelling&lt;/i&gt; &amp;gt; &lt;i&gt;Vertoonfont...&lt;/i&gt; op die kieslys.
+Die lettertipe &eacute;n die lettergrootte kan met di&eacute; dialoogkassie verander word.&lt;/p&gt;</pre>
+
+<p>OmegaT doesn't automatically detect mistakes in a tagged translation.  Before you deliver the target document to your client, you should check your tags for errors, by selecting Tools -&gt; Validate Tags from the menu.  Ideally you should open the document in its associated viewer or editor to double-check the formatting.</p>
+
+<hr>
+
+<p>Copyright (c) 2005 Samuel Murray</p>
+
+</div>
+
+    <div class="navbar-bottom">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td align="left" valign="center" width="7%">
+          <a href="OmegaT.html" title="Table of Contents">
+            <img src="OmegaT.png" alt="OmegaT Logo" border="0">
+          </a>
+        </td>
+        <td align="left" valign="center" width="9%">
+          <b>Previous</b>
+        </td>
+        <td align="left" valign="center" width="39%">        
+          <a href="Important.html">Important Notes</a>
+        </td>
+        <td align="left" valign="center" width="6%">
+          <b>Next</b>
+        </td>
+        <td align="left" valign="center" width="39%">
+          <a href="UserInterface.html">User Interface</a>
+        </td>
+      </tr>
+    </table>    
+
+    </div>
+
+
+</body>
+</html>
+

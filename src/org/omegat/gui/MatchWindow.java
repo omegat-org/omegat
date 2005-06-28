@@ -21,21 +21,28 @@
 
 package org.omegat.gui;
 
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
-import org.omegat.util.StaticUtils;
-import org.omegat.util.Token;
-import org.omegat.util.OConsts;
-import org.omegat.util.PreferenceManager;
-import org.omegat.core.StringData;
-
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTextPane;
 import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
-import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.ArrayList;
+
+import org.omegat.core.StringData;
+import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
+import org.omegat.util.PreferenceManager;
+import org.omegat.util.Token;
 
 /**
  * This is a combined Match + Glossary window, that displays
@@ -44,10 +51,11 @@ import java.util.ArrayList;
  * @author Keith Godfrey
  * @author Raymond Martin
  */
-class MatchWindow extends JFrame
+public class MatchWindow extends JFrame
 { 
     public MatchWindow()
     {
+        setTitle(OStrings.TF_MATCH_VIEWER_TITLE);
         // KBG - set screen size based on saved values or guesses about
         //    screen size (18may04)
         initScreenLayout();

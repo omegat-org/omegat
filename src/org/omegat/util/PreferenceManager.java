@@ -40,16 +40,14 @@ import org.omegat.filters2.xml.XMLStreamReader;
  */
 public class PreferenceManager
 {
-	public PreferenceManager()
+	private PreferenceManager()
 	{
-		pref = this;
 		m_prefFileName = OConsts.PROJ_PREFERENCE;
 		m_loaded = false;
 		m_preferenceMap = new HashMap(64);
 		m_nameList = new ArrayList(32);
 		m_valList = new ArrayList(32);
 		m_changed = false;
-        
         doLoad();
 	}
 
@@ -89,7 +87,7 @@ public class PreferenceManager
 	 */
 	public boolean isPreference(String key)
 	{
-		return "true".equals(getPreference(key));
+		return "true".equals(getPreference(key));                               // NOI18N
 	}
 
     /**
@@ -304,6 +302,10 @@ public class PreferenceManager
 	private HashMap	m_preferenceMap;
 
 	public static PreferenceManager pref;
+    static
+    {
+        pref = new PreferenceManager();
+    }
 
     
 }

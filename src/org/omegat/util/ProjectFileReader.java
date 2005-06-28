@@ -36,6 +36,7 @@ import org.omegat.filters2.xml.XMLStreamReader;
  * Class that reads project definition file and returns project's properties.
  *
  * @author Keith Godfrey
+ * @author Maxym Mykhalchuk
  */
 public class ProjectFileReader
 {
@@ -129,6 +130,14 @@ public class ProjectFileReader
 				if (blk != null)
 					m_targetLocale = blk.getText();
 			}
+			else if (blk.getTagName().equals("sentence_seg"))					// NOI18N
+			{
+				if (++i >= lst.size())
+					break;
+				blk = (XMLBlock) lst.get(i);
+				if (blk != null)
+					m_sentenceSeg = blk.getText();
+			}
 		}
     }
 
@@ -186,6 +195,7 @@ public class ProjectFileReader
 		str += "    <glossary_dir>" + glossary + "</glossary_dir>\n";			// NOI18N
 		str += "    <source_lang>" + m_sourceLocale + "</source_lang>\n";			// NOI18N
 		str += "    <target_lang>" + m_targetLocale + "</target_lang>\n";			// NOI18N
+		str += "    <sentence_seg>" + m_sentenceSeg + "</sentence_seg>\n";			// NOI18N
 		str += "  </project>\n";												// NOI18N
 		str += "</omegat>\n";													// NOI18N
 
@@ -211,6 +221,7 @@ public class ProjectFileReader
 
 	public void setSourceLang(String x)	{ m_sourceLocale = x;	}
 	public void setTargetLang(String x)	{ m_targetLocale = x;	}
+    
 
 	public String getTarget()		{ return m_target;		}
 	public String getSource()		{ return m_source;		}
@@ -218,14 +229,20 @@ public class ProjectFileReader
 	public String getGlossary()		{ return m_glossary;	}
 	public String getSourceLang()	{ return m_sourceLocale;		}
 	public String getTargetLang()	{ return m_targetLocale;		}
-	
+
+    public String getSentenceSeg(){ return m_sentenceSeg; }
+    public void setSentenceSeg(String x){ m_sentenceSeg = x; }
+    
 	private XMLStreamReader		m_reader;
 	private String		m_target;
 	private String		m_source;
 	private String		m_tm;
 	private String		m_glossary;
-	private String		m_targetLocale;
+
+    private String		m_targetLocale;
 	private String		m_sourceLocale;
+    
+	private String		m_sentenceSeg;
 
 	private String		m_root;
 

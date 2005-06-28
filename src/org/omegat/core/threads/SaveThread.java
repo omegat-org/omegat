@@ -21,6 +21,12 @@
 
 package org.omegat.core.threads;
 
+import java.text.MessageFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import org.omegat.util.OStrings;
+
 /**
  * An independent stream to save project,
  * created in order not to freese UI while project is saved (may take a lot)
@@ -49,6 +55,17 @@ class SaveThread extends Thread
 		while (!m_timeToDie)
 		{
 			CommandThread.core.save();
+            Calendar cldr = Calendar.getInstance();
+            int hours = cldr.get(Calendar.HOUR_OF_DAY);
+            int minutes = cldr.get(Calendar.MINUTE);
+            CommandThread.core.m_transFrame.setMessageText(
+                    MessageFormat.format(OStrings.getString("ST_PROJECT_AUTOSAVED"),
+                    new Object[] 
+                    {
+                        new Integer(hours), 
+                        new Integer(minutes)
+                    } ));
+            
 			try 
 			{
 				sleep(m_saveDuration);

@@ -262,7 +262,7 @@ public class StaticUtils
             case '"':
                 return "&quot;";	// NOI18N
             default:
-                return "" + c;
+                return "" + c;      // NOI18N
         }
 	}
     
@@ -289,7 +289,7 @@ public class StaticUtils
     {
         try
         {
-            return new PrintStream(new FileOutputStream("log.txt", true));
+            return new PrintStream(new FileOutputStream("log.txt", true));      // NOI18N
         }
         catch( Exception e )
         {

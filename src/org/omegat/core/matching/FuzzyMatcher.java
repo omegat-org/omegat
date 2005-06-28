@@ -28,7 +28,7 @@ import java.util.List;
 import org.omegat.core.StringData;
 import org.omegat.core.StringEntry;
 import org.omegat.core.threads.CommandThread;
-import org.omegat.gui.TransFrame;
+import org.omegat.gui.main.MainInterface;
 import org.omegat.gui.messages.MessageRelay;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -44,7 +44,7 @@ import org.omegat.util.Token;
 public class FuzzyMatcher
 {
 	private String statusTemplate;
-	private TransFrame tf;	
+	private MainInterface tf;	
 	private CommandThread core;
 	
 	private void updateStatus(int index, int total)
@@ -57,7 +57,7 @@ public class FuzzyMatcher
 	/** 
      * Creates a new instance of FuzzyMatcher 
      */
-	public FuzzyMatcher(TransFrame tf, CommandThread core)
+	public FuzzyMatcher(MainInterface tf, CommandThread core)
 	{
 		this.tf = tf;
 		this.core = core;

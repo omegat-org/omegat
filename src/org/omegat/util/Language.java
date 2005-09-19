@@ -72,24 +72,24 @@ public class Language
     
     /**
      * Returns a string representation
-     * as an ISO language code (xx-YY).
+     * as an ISO language code (XX-YY).
      */
     public String toString()
     {
-        return getISOLanguage();
+        return getLanguage();
     }
     
     /**
      * Returns a string representation
-     * as an ISO language code (xx-YY).
+     * as an ISO language code (XX-YY).
      */
-    public String getISOLanguage()
+    public String getLanguage()
     {
         if( locale==null || locale.toString().length()==0 )
             return "";                                                          // NOI18N
         else
         {
-            String localestring = locale.getLanguage().toLowerCase();
+            String localestring = locale.getLanguage().toUpperCase();
             if( !"".equals(locale.getCountry()) )                               // NOI18N
                 localestring += "-"+locale.getCountry().toUpperCase();          // NOI18N
             return localestring;
@@ -114,7 +114,7 @@ public class Language
     }
     
     /**
-     * Returns only a language (xx).
+     * Returns only a language (XX).
      */
     public String getLanguageCode()
     {

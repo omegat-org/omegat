@@ -40,10 +40,18 @@ public class RequestPacket
 		obj = o;
 	}
 
+	public RequestPacket(int num, Object o, Object p)
+	{
+		type = num;
+		obj = o;
+        parameter = p;
+	}
+    
 	public void set(RequestPacket pack)
 	{
 		type = pack.type;
 		obj = pack.obj;
+        parameter = pack.parameter;
 	}
 
 	public void reset()
@@ -58,4 +66,5 @@ public class RequestPacket
 
 	public int type;
 	public Object obj;
+    public Object parameter;
 }

@@ -180,7 +180,10 @@ public class CommandThread extends Thread
 		return m_stop;
 	}
 
-	public void requestUnload()
+    /**
+     * Clears all hashes, lists etc.
+     */
+	public void cleanUp()
 	{
 		if (m_strEntryList.size() > 0)
 		{
@@ -230,13 +233,13 @@ public class CommandThread extends Thread
 		// load new project
 		try
 		{
-			requestUnload();
+			cleanUp();
 
 			String evtStr;
 
 			evtStr = OStrings.CT_LOADING_PROJECT;
 			MessageRelay.uiMessageSetMessageText(tf, evtStr);
-			if (!loadProject())
+			if (!loadProject((String)pack.parameter))
 			{
 				// loading of project cancelled
 				evtStr = OStrings.CT_CANCEL_LOAD;
@@ -248,7 +251,10 @@ public class CommandThread extends Thread
 			tf.finishLoadProject();
 			MessageRelay.uiMessageDisplayEntry(tf);
 			if (m_saveCount == -1)
+            {
 				m_saveThread.start();
+                m_saveCount = 1;
+            }
 
             // Building up glossary
 			evtStr = OStrings.CT_LOADING_GLOSSARY;
@@ -269,7 +275,7 @@ public class CommandThread extends Thread
 			}
             
             // evaluate strings for fuzzy matching 
-			buildNearList();
+            buildNearList();
             
             // Project Loaded...
 			MessageRelay.uiMessageSetMessageText(tf, "");  // NOI18N
@@ -290,20 +296,11 @@ public class CommandThread extends Thread
 		{
 			// user said cancel - this is OK
         }
-		catch (IOException e)
-		{
-			String msg = OStrings.TF_LOAD_ERROR;
-			displayError(msg, e);
-			// don't know what happened - cancel load to be on the safe side
-			requestUnload();
-		}
-		catch( TranslationException te )
-		{
-			String msg = OStrings.TF_LOAD_ERROR;
-			displayError(msg, te);
-			// don't know what happened - cancel load to be on the safe side
-			requestUnload();
-		}
+        catch( Exception e )
+        {
+            // any error
+			displayError(OStrings.TF_LOAD_ERROR, e);
+        }
 	}
 
 
@@ -399,7 +396,7 @@ public class CommandThread extends Thread
 		StringEntry se;
 		SourceTextEntry ste;
 		
-		for (i=0; i<m_srcTextEntryArray.size(); i++)
+		for (i=0; i<numEntries(); i++)
 		{
 			ste = (SourceTextEntry) m_srcTextEntryArray.get(i);
 			se = ste.getStrEntry();
@@ -593,7 +590,7 @@ public class CommandThread extends Thread
             m_strEntryHash.put(srcText, strEntry);
 		}
 
-		srcTextEntry.set(strEntry, m_curFile, m_srcTextEntryArray.size());
+		srcTextEntry.set(strEntry, m_curFile, numEntries());
 		m_srcTextEntryArray.add(srcTextEntry);
 
 	}
@@ -742,12 +739,12 @@ public class CommandThread extends Thread
      * @param projectRoot The folder where the project resides. If it's null, 
      *                     FileChooser is called to select a project.
      */
-	private boolean loadProject()
+	private boolean loadProject(String projectRoot)
 			throws IOException, InterruptedIOException, TranslationException
 	{
 		int i;
 		int j;
-        if (!m_config.loadExisting())
+        if (!m_config.loadExisting(projectRoot))
 			return false;
 
 		// first load glossary files
@@ -777,11 +774,15 @@ public class CommandThread extends Thread
             m_curFile = new ProjectFileData();
             m_curFile.name = filename;
             m_curFile.firstEntry = m_srcTextEntryArray.size();
-            if( fm.loadFile(filename) )
+            boolean fileLoaded = fm.loadFile(filename);
+            m_curFile.lastEntry = m_srcTextEntryArray.size()-1;
+            // BUGFIX FOR: Empty files are displayed in a file list window
+            //             http://sourceforge.net/support/tracker.php?aid=1256026
+            //             added condition m_curFile.lastEntry>=m_curFile.firstEntry
+            if( fileLoaded && (m_curFile.lastEntry>=m_curFile.firstEntry) )
             {
                 m_projWin.addFile(filepath, numEntries());
             }
-            m_curFile.lastEntry = m_srcTextEntryArray.size()-1;
 		}
 		m_transFrame.setMessageText(OStrings.getString("CT_LOAD_SRC_COMPLETE"));
 		m_curFile = null;
@@ -927,15 +928,19 @@ public class CommandThread extends Thread
 		}
 	}
 
+    /**
+     * Writes the error info to the log and 
+     * displays an error message.
+     */
     void displayError(String msg, Throwable e)
-	{
-		if (m_transFrame == null)
-		{
-			StaticUtils.log(OStrings.LD_ERROR + " " + msg); // NOI18N
-		}
-		else
-			MessageRelay.uiMessageDisplayError(m_transFrame, msg, e);
-	}
+    {
+        StaticUtils.log(OStrings.LD_ERROR + " " + msg); // NOI18N
+        e.printStackTrace(StaticUtils.getLogStream());
+        e.printStackTrace();
+        StaticUtils.log("----------------------------"); // NOI18N
+        if( m_transFrame!=null )
+            MessageRelay.uiMessageDisplayError(m_transFrame, msg, e);
+    }
 
     /*
      temporary removed

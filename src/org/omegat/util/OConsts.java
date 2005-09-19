@@ -77,10 +77,13 @@ public class OConsts
 	public static final String PREF_DISPLAY_H	= "screen_height";					// NOI18N
 	public static final String PREF_DISPLAY_X	= "screen_x";						// NOI18N
 	public static final String PREF_DISPLAY_Y	= "screen_y";						// NOI18N
+
 	public static final String PREF_MATCH_W		= "match_width";					// NOI18N
 	public static final String PREF_MATCH_H		= "match_height";					// NOI18N
 	public static final String PREF_MATCH_X		= "match_x";						// NOI18N
 	public static final String PREF_MATCH_Y		= "match_y";						// NOI18N
+    /** Where the divider between Main area and Match/Glossary is */
+	public static final String PREF_MATCH_DIVIDER = "match_divider";				// NOI18N
     
 	public static final String PREF_MNEMONIC	= "mnemonics";						// NOI18N
 	public static final String PREF_TAB			= "tab_advance";					// NOI18N

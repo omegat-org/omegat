@@ -60,9 +60,9 @@ public abstract class AbstractFilter
     public static final String TFP_EXTENSION = "${extension}";                  // NOI18N
     /** "xx_YY", locale code */
     public static final String TFP_TARGET_LOCALE = "${targetLocale}";           // NOI18N
-    /** "xx-YY", the TMX/XML language code */
+    /** "XX-YY", the TMX/XML language code */
     public static final String TFP_TARGET_LANGUAGE = "${targetLanguage}";       // NOI18N
-    /** language "xx" only */
+    /** language "XX" only */
     public static final String TFP_TARGET_LANG_CODE = "${targetLanguageCode}";  // NOI18N
     /** country "YY" only */
     public static final String TFP_TARGET_COUNTRY_CODE = "${targetCoutryCode}";    // NOI18N

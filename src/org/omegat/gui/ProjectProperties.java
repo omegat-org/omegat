@@ -160,7 +160,7 @@ public class ProjectProperties
 		setTMRoot("");	// NOI18N
 		setSourceLanguage("EN-US");  // NOI18N
 		setTargetLanguage("EN-GB");  // NOI18N
-        setSentenceSegmentingEnabled(false);
+        setSentenceSegmentingEnabled(true);
 	}
 
     private MainInterface mainframe;
@@ -169,19 +169,36 @@ public class ProjectProperties
      * Loads existing project file.
      * Brings up OmegaTFileChooser to open a file and 
      * sets global properties.
+     *
+     * @param projectRoot Project root. If null, brings up the file chooser so that the user chooses the project.
      */
-	public boolean loadExisting() throws IOException, InterruptedIOException
+	public boolean loadExisting(String projectRoot) throws IOException, InterruptedIOException
 	{
 		reset();
 
-        // select existing project file - open it
-        OmegaTFileChooser pfc=new OpenProjectFileChooser();
-        if( OmegaTFileChooser.APPROVE_OPTION!=pfc.showOpenDialog(null) )
-            return false;
+        File projectRootFolder = null;
+        try
+        {
+            projectRootFolder = new File(projectRoot);
+            if( !projectRootFolder.exists() )
+                projectRootFolder = null;
+        }
+        catch( Exception e )
+        {
+            projectRootFolder = null;
+        }
+        
+        if( projectRootFolder==null )
+        {
+            // select existing project file - open it
+            OmegaTFileChooser pfc=new OpenProjectFileChooser();
+            if( OmegaTFileChooser.APPROVE_OPTION!=pfc.showOpenDialog(null) )
+                return false;
 
-        File projectRootFolder = pfc.getSelectedFile();
-        String projectRoot = projectRootFolder.getAbsolutePath() + File.separator;
-
+            projectRootFolder = pfc.getSelectedFile();
+        }
+        
+        projectRoot = projectRootFolder.getAbsolutePath() + File.separator;
 		PreferenceManager.pref.setPreference(
                 OConsts.PREF_CUR_DIR, projectRootFolder.getParent());
 		try 

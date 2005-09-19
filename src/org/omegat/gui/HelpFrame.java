@@ -58,7 +58,7 @@ public class HelpFrame extends JFrame
 	/** Creates the Help Frame */
 	private HelpFrame()
 	{
-		language = detectLanguage();
+		language = detectDocLanguage();
 		
 		m_historyList = new ArrayList();
 		
@@ -221,7 +221,10 @@ public class HelpFrame extends JFrame
 				+ language + File.separator + file;
 	}
 	
-	private String detectLanguage()
+    /**
+     * Detects the documentation language to use.
+     */
+	public static String detectDocLanguage()
 	{
 		String lang = System.getProperty("user.language", "en");                // NOI18N
 		File docsFolder = new File(System.getProperty("user.dir")				// NOI18N

@@ -29,6 +29,7 @@ import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
@@ -38,6 +39,7 @@ import java.util.ListIterator;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
@@ -55,10 +57,11 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.ContextFrame;
 import org.omegat.gui.HelpFrame;
-import org.omegat.gui.MatchWindow;
 import org.omegat.gui.ProjectFrame;
 import org.omegat.gui.ProjectProperties;
 import org.omegat.gui.dialogs.AboutDialog;
+import org.omegat.gui.dialogs.WorkflowOptionsDialog;
+import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.StaticUtils;
 import org.omegat.gui.dialogs.FontSelectionDialog;
 import org.omegat.gui.filters2.FiltersCustomizer;
@@ -82,8 +85,9 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
     public MainWindow()
     {
         initComponents();
-		additionalUIInit();
+        additionalUIInit();
         oldInit();
+        loadInstantStart();
         
         try
         {
@@ -98,16 +102,23 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
         }
     }
     
+    /**
+     * Some additional actions to initialize UI, 
+     * not doable via NetBeans Form Editor 
+     */
 	private void additionalUIInit()
 	{
 		updateTitle();
-        
-		xlPane = new XLPane(this);
-        mainScroller.setViewportView(xlPane);
-        
 		m_projWin = new ProjectFrame(this);
-		m_matchViewer = new MatchWindow();
+        matchWindow = new MatchGlossaryWindow(this);
+        xlPane.setMainWindow(this);
+		initScreenLayout();
+		updateCheckboxesOnStart();
 	}
+
+    /**
+     * Sets the title of the main window appropriately
+     */
 	private void updateTitle()
 	{
 		String s = OStrings.VERSION;
@@ -139,11 +150,8 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
 		m_docSegList = new ArrayList();
 		
 		////////////////////////////////
-		loadDisplayPrefs();
 
 		enableEvents(0);
-
-		initScreenLayout();
 
 		String fontName = PreferenceManager.pref.getPreferenceDefault(OConsts.TF_SRC_FONT_NAME, OConsts.TF_FONT_DEFAULT);
 		String fontSize = PreferenceManager.pref.getPreferenceDefault(OConsts.TF_SRC_FONT_SIZE, OConsts.TF_FONT_SIZE_DEFAULT);
@@ -157,7 +165,8 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
         }
         m_font = new Font(fontName, Font.PLAIN, fontSizeInt);
 		xlPane.setFont(m_font);
-		m_matchViewer.setFont(m_font);
+        
+        matchWindow.getMatchGlossaryPane().setFont(m_font);
 		
 		// check this only once as it can be changed only at compile time
 		// should be OK, but customization might have messed it up
@@ -169,7 +178,8 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
                 (start.charAt(zero - 3) == '0');
 	}
 
-	private void loadDisplayPrefs()
+    /** Updates menu checkboxes from preferences on start */
+	private void updateCheckboxesOnStart()
 	{
 		String tab = PreferenceManager.pref.getPreference(OConsts.PREF_TAB);
 		if (tab != null && tab.equals("true"))								// NOI18N
@@ -181,44 +191,65 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
 			m_advancer = KeyEvent.VK_ENTER;
 	}
 
+    /**
+     * Initialized the sizes of OmegaT window.
+     * <p>
+     * Assume screen size is 800x600 if width less than 900, and 
+     * 1024x768 if larger. Assume task bar at bottom of screen.
+     * If screen size saved, recover that and use instead
+     * (18may04).
+     */
 	private void initScreenLayout()
 	{
-		// KBG - assume screen size is 800x600 if width less than 900, and
-		//		1024x768 if larger.  assume task bar at bottom of screen.
-		//		if screen size saved, recover that and use instead
-		//	(18may04)
-		String dw, dh, dx, dy;
-		dw = PreferenceManager.pref.getPreference(OConsts.PREF_DISPLAY_W);
-		dh = PreferenceManager.pref.getPreference(OConsts.PREF_DISPLAY_H);
-		dx = PreferenceManager.pref.getPreference(OConsts.PREF_DISPLAY_X);
-		dy = PreferenceManager.pref.getPreference(OConsts.PREF_DISPLAY_Y);
-		int x=0;
-		int y=0;
-		int w=0;
-		int h=0;
-		boolean badSize = false;
-		if (dw == null || dw.equals("")	|| dh == null			||			// NOI18N
-                dh.equals("")	|| dx == null || dx.equals("")	||			// NOI18N
-                dy == null || dy.equals(""))								// NOI18N
-		{
-			badSize = true;
-		}
-		else
-		{
-			try 
+        // main window
+        try 
+        {
+            String dx = PreferenceManager.pref.getPreference(OConsts.PREF_DISPLAY_X);
+            String dy = PreferenceManager.pref.getPreference(OConsts.PREF_DISPLAY_Y);
+            int x = Integer.parseInt(dx);
+            int y = Integer.parseInt(dy);
+			setLocation(x, y);
+            String dw = PreferenceManager.pref.getPreference(OConsts.PREF_DISPLAY_W);
+            String dh = PreferenceManager.pref.getPreference(OConsts.PREF_DISPLAY_H);
+            int w = Integer.parseInt(dw);
+            int h = Integer.parseInt(dh);
+			setSize(w, h);
+        }
+        catch (NumberFormatException nfe)
+        {
+			// size info missing - put window in default position
+			GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			Rectangle scrSize = env.getMaximumWindowBounds();
+			if (scrSize.width < 900)
 			{
-				x = Integer.parseInt(dx);
-				y = Integer.parseInt(dy);
-				w = Integer.parseInt(dw);
-				h = Integer.parseInt(dh);
+				// assume 800x600
+				setSize(580, 536);
+				setLocation(0, 0);
 			}
-			catch (NumberFormatException nfe)
+			else
 			{
-				badSize = true;
+				// assume 1024x768 or larger
+				setSize(690, 700);
+				setLocation(0, 0);
 			}
 		}
-		if (badSize)
-		{
+
+        // match/glossary window
+        try
+        {
+            String dw = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_W);
+            String dh = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_H);
+            int w = Integer.parseInt(dw);
+			int h = Integer.parseInt(dh);
+			matchWindow.setSize(w, h);
+            String dx = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_X);
+            String dy = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_Y);
+            int x = Integer.parseInt(dx);
+            int y = Integer.parseInt(dy);
+			matchWindow.setLocation(x, y);
+        }
+        catch (NumberFormatException nfe)
+        {
 			// size info missing - put window in default position
 			GraphicsEnvironment env = 
 					GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -226,33 +257,74 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
 			if (scrSize.width < 900)
 			{
 				// assume 800x600
-				setSize(585, 536);
-				setLocation(0, 0);
+				matchWindow.setSize(200, 536);
+				matchWindow.setLocation(590, 0);
 			}
 			else
 			{
 				// assume 1024x768 or larger
-				setSize(675, 700);
-				setLocation(0, 0);
+				matchWindow.setSize(300, 700);
+				matchWindow.setLocation(700, 0);
 			}
 		}
-		else
-		{
-			setSize(w, h);
-			setLocation(x, y);
+        
+        // match/glossary window divider
+        try
+        {
+            String divs = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_DIVIDER);
+            int div = Integer.parseInt(divs);
+			matchWindow.setDividerLocation(div);
+        }
+        catch (NumberFormatException nfe)
+        {
+			// divider info missing - put in default position - middle
+            int div = matchWindow.getHeight() / 2;
+            matchWindow.setDividerLocation(div);
 		}
 	}
-
+    
+    /** Loads Instant start article */
+    private void loadInstantStart()
+    {
+		try
+		{
+            String lang = HelpFrame.detectDocLanguage();
+            String filepath = System.getProperty("user.dir")
+                    + File.separator + OConsts.HELP_DIR + File.separator 
+                    + lang + File.separator + "InstantStart.html";
+            JTextPane instantArticlePane = new JTextPane();
+            instantArticlePane.setEditable(false);
+			instantArticlePane.setPage("file:///"+filepath);
+            mainScroller.setViewportView(instantArticlePane);
+        }
+		catch (IOException e)
+		{
+            mainScroller.setViewportView(xlPane);
+		}
+    }
+    
 	private void storeScreenLayout()
 	{
-		int w = getWidth();
-		int h = getHeight();
-		int x = getX();
-		int y = getY();
-		PreferenceManager.pref.setPreference(OConsts.PREF_DISPLAY_W, "" + w);		// NOI18N
-		PreferenceManager.pref.setPreference(OConsts.PREF_DISPLAY_H, "" + h);		// NOI18N
-		PreferenceManager.pref.setPreference(OConsts.PREF_DISPLAY_X, "" + x);		// NOI18N
-		PreferenceManager.pref.setPreference(OConsts.PREF_DISPLAY_Y, "" + y);		// NOI18N
+		PreferenceManager.pref.setPreference(OConsts.PREF_DISPLAY_W, 
+                String.valueOf(getWidth()));
+		PreferenceManager.pref.setPreference(OConsts.PREF_DISPLAY_H, 
+                String.valueOf(getHeight()));
+		PreferenceManager.pref.setPreference(OConsts.PREF_DISPLAY_X, 
+                String.valueOf(getX()));
+		PreferenceManager.pref.setPreference(OConsts.PREF_DISPLAY_Y,
+                String.valueOf(getY()));
+        
+        PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_DIVIDER, 
+                String.valueOf(matchWindow.getDividerLocation()));
+        
+        PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_W, 
+                String.valueOf(matchWindow.getWidth()));
+        PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_H, 
+                String.valueOf(matchWindow.getHeight()));
+        PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_X, 
+                String.valueOf(matchWindow.getX()));
+        PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_Y, 
+                String.valueOf(matchWindow.getY()));
 	}
 
     ///////////////////////////////////////////////////////////////
@@ -269,7 +341,6 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
 		}
 
 		storeScreenLayout();
-		m_matchViewer.storeScreenLayout();
 		PreferenceManager.pref.save();
 
 		CommandThread.core.signalStop();
@@ -470,22 +541,24 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
 		m_projectLoaded = false;
 		xlPane.setText("");													// NOI18N
         
-        m_matchViewer.reset();
+        matchWindow.getMatchGlossaryPane().reset();
 
         projectOpenMenuItem.setEnabled(true);
 		projectNewMenuItem.setEnabled(true);
         projectEditMenuItem.setEnabled(false);
 		optionsSetupFileFiltersMenuItem.setEnabled(true);
+        xlPane.setEditable(false);
         
         updateTitle();
         
-        CommandThread.core.requestUnload();
+        CommandThread.core.cleanUp();
 	}
     
     /** Edits project's properties */
     private void doEditProject()
     {
         ProjectProperties config = CommandThread.core.getProjectProperties();
+        String projectRoot = config.getProjectRoot();
         boolean changed = false;
         try
         {
@@ -505,7 +578,7 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
             if( res==JOptionPane.YES_OPTION )
             {
                 doCloseProject();
-                doLoadProject();
+                doLoadProject(projectRoot);
             }
         }
     }
@@ -526,7 +599,9 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
 			commitEntry();
             m_font = dlg.getSelectedFont();
 			xlPane.setFont(m_font);
-			m_matchViewer.setFont(m_font);
+            
+            matchWindow.getMatchGlossaryPane().setFont(m_font);
+            
             PreferenceManager.pref.setPreference(OConsts.TF_SRC_FONT_NAME, m_font.getName());
             PreferenceManager.pref.setPreference(OConsts.TF_SRC_FONT_SIZE, String.valueOf(m_font.getSize()));
 			activateEntry();
@@ -551,6 +626,24 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
             // reloading config from disk
             FilterMaster.getInstance().loadConfig();
         }
+    }
+    
+    /**
+     * Displays the segmentation setup dialog to allow
+     * customizing the segmentation rules in detail.
+     */
+    private void setupSegmentation()
+    {
+        new SegmentationCustomizer(this).setVisible(true);
+    }
+    
+    /**
+     * Displays the workflow setup dialog to allow
+     * customizing the diverse workflow options.
+     */
+    private void setupWorkflow()
+    {
+        new WorkflowOptionsDialog(this).setVisible(true);
     }
     
     private void doSave()
@@ -585,10 +678,30 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
 			return;
         }
         
-		m_matchViewer.reset();
+        matchWindow.getMatchGlossaryPane().reset();
+        mainScroller.setViewportView(xlPane);
 		
 		RequestPacket load;
 		load = new RequestPacket(RequestPacket.LOAD, this);
+		CommandThread.core.messageBoardPost(load);
+	}
+    /** 
+     * Reloads Project.
+     * @param projectRoot previously closed project's root
+     */
+	private void doLoadProject(String projectRoot)
+	{
+		if (m_projectLoaded)
+        {
+            displayError( "Please close the project first!", new Exception( "Another project is open")); // NOI18N
+			return;
+        }
+        
+        matchWindow.getMatchGlossaryPane().reset();
+        mainScroller.setViewportView(xlPane);
+		
+		RequestPacket load;
+		load = new RequestPacket(RequestPacket.LOAD, this, projectRoot);
 		CommandThread.core.messageBoardPost(load);
 	}
 
@@ -639,6 +752,7 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
 		projectNewMenuItem.setEnabled(false);
         projectEditMenuItem.setEnabled(true);
 		optionsSetupFileFiltersMenuItem.setEnabled(false);
+        xlPane.setEditable(true);
 	}
 
 	private void doCompileProject()
@@ -750,7 +864,7 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
 		if( nearList.size()<=0 ) 
 		{
 			m_curNear = null;
-			m_matchViewer.updateMatchText();
+			matchWindow.getMatchGlossaryPane().updateMatchText();
 			return;
 		}
 		
@@ -771,7 +885,7 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
 			String oldStr = ns.str.getSrcText();
 			String locStr = ns.str.getTrans();
 			String proj = ns.proj;
-			offset = m_matchViewer.addMatchTerm(oldStr, locStr,	(int)(ns.score*100), proj);
+			offset = matchWindow.getMatchGlossaryPane().addMatchTerm(oldStr, locStr, (int)(ns.score*100), proj);
 			
 			if( ctr==nearNum ) {
 				start = offset;
@@ -783,9 +897,9 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
 			ctr++;
 		}
 		
-		m_matchViewer.hiliteRange(start, end);
-		m_matchViewer.updateMatchText();
-		m_matchViewer.formatNearText(m_curNear.str.getSrcTokenList(), m_curNear.attr);
+		matchWindow.getMatchGlossaryPane().hiliteRange(start, end);
+		matchWindow.getMatchGlossaryPane().updateMatchText();
+		matchWindow.getMatchGlossaryPane().formatNearText(m_curNear.str.getSrcTokenList(), m_curNear.attr);
 	}
 	
 	private void commitEntry()
@@ -980,14 +1094,17 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
 			while (li.hasNext())
 			{
 				GlossaryEntry glos = (GlossaryEntry) li.next();
-				m_matchViewer.addGlosTerm(glos.getSrcText(), glos.getLocText(),
+				matchWindow.getMatchGlossaryPane().addGlosTerm(glos.getSrcText(), glos.getLocText(),
 						glos.getCommentText());
 			}
 		
 		}
 		else
+        {
 			m_glossaryLength = 0;
-		m_matchViewer.updateGlossaryText();
+        }
+        
+		matchWindow.getMatchGlossaryPane().updateGlossaryText();
 
 		int nearLength = curEntry.getNearListTranslated().size();
 		
@@ -1207,8 +1324,8 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
 	public void setVisible(boolean b)
 	{
 		super.setVisible(b);
-		m_matchViewer.setVisible(b);
-        m_matchViewer.setFont(m_font);
+		matchWindow.setVisible(b);
+        matchWindow.getMatchGlossaryPane().setFont(m_font);
 		toFront();
 	}
 
@@ -1240,9 +1357,6 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
 
 	public char	m_advancer;
 
-    /** Main panel with source and target strings */
-	private XLPane		xlPane;
-
 	private SourceTextEntry		m_curEntry;
 
 	private String	m_activeFile;
@@ -1257,10 +1371,8 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
         return m_projWin;
     }
     
-	private MatchWindow	m_matchViewer;
-
 	public boolean m_projectLoaded;
-
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -1270,8 +1382,8 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
     private void initComponents()
     {
         statusLabel = new javax.swing.JLabel();
-        mainArea = new javax.swing.JPanel();
         mainScroller = new javax.swing.JScrollPane();
+        xlPane = new org.omegat.gui.main.MainPane();
         mainMenu = new javax.swing.JMenuBar();
         projectMenu = new javax.swing.JMenu();
         projectNewMenuItem = new javax.swing.JMenuItem();
@@ -1321,14 +1433,16 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(this);
 
+        org.openide.awt.Mnemonics.setLocalizedText(statusLabel, " ");
         getContentPane().add(statusLabel, java.awt.BorderLayout.SOUTH);
 
-        mainArea.setLayout(new java.awt.BorderLayout());
-
         mainScroller.setBorder(null);
-        mainArea.add(mainScroller, java.awt.BorderLayout.CENTER);
+        mainScroller.setMinimumSize(new java.awt.Dimension(100, 100));
+        xlPane.setEditable(false);
+        xlPane.setMinimumSize(new java.awt.Dimension(100, 100));
+        mainScroller.setViewportView(xlPane);
 
-        getContentPane().add(mainArea, java.awt.BorderLayout.CENTER);
+        getContentPane().add(mainScroller, java.awt.BorderLayout.CENTER);
 
         org.openide.awt.Mnemonics.setLocalizedText(projectMenu, OStrings.getString("TF_MENU_FILE"));
         org.openide.awt.Mnemonics.setLocalizedText(projectNewMenuItem, OStrings.getString("TF_MENU_FILE_CREATE"));
@@ -1483,7 +1597,7 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
         mainMenu.add(viewMenu);
 
         org.openide.awt.Mnemonics.setLocalizedText(toolsMenu, OStrings.getString("TF_MENU_TOOLS"));
-        toolsValidateTagsMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        toolsValidateTagsMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
         org.openide.awt.Mnemonics.setLocalizedText(toolsValidateTagsMenuItem, OStrings.getString("TF_MENU_TOOLS_VALIDATE"));
         toolsValidateTagsMenuItem.addActionListener(this);
 
@@ -1701,12 +1815,12 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
 
     private void optionsWorkflowMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsWorkflowMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsWorkflowMenuItemActionPerformed
-        displayWarning( "Not yet implemented", null);                           // NOI18N
+        setupWorkflow();
     }//GEN-LAST:event_optionsWorkflowMenuItemActionPerformed
 
     private void optionsSentsegMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsSentsegMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsSentsegMenuItemActionPerformed
-        displayWarning( "Not yet implemented", null);                           // NOI18N
+        setupSegmentation();
     }//GEN-LAST:event_optionsSentsegMenuItemActionPerformed
 
     private void projectEditMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectEditMenuItemActionPerformed
@@ -1843,12 +1957,12 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
     {//GEN-HEADEREND:event_viewMatchWindowCheckBoxMenuItemActionPerformed
         if( viewMatchWindowCheckBoxMenuItem.isSelected() )
         {
-            m_matchViewer.setVisible(true);
+            matchWindow.setVisible(true);
             toFront();
         }
         else
         {
-            m_matchViewer.setVisible(false);
+            matchWindow.setVisible(false);
         }
     }//GEN-LAST:event_viewMatchWindowCheckBoxMenuItemActionPerformed
 
@@ -1910,7 +2024,6 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
     private javax.swing.JMenuItem helpAboutMenuItem;
     private javax.swing.JMenuItem helpContentsMenuItem;
     private javax.swing.JMenu helpMenu;
-    private javax.swing.JPanel mainArea;
     private javax.swing.JMenuBar mainMenu;
     private javax.swing.JScrollPane mainScroller;
     private javax.swing.JMenuItem optionsFontSelectionMenuItem;
@@ -1940,6 +2053,8 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
     private javax.swing.JCheckBoxMenuItem viewFileListCheckBoxMenuItem;
     private javax.swing.JCheckBoxMenuItem viewMatchWindowCheckBoxMenuItem;
     private javax.swing.JMenu viewMenu;
+    private org.omegat.gui.main.MainPane xlPane;
     // End of variables declaration//GEN-END:variables
     
+    private MatchGlossaryWindow matchWindow;
 }

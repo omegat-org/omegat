@@ -43,6 +43,7 @@
         <delete file="manifest.mf"/>
         <delete file="omegat.prefs"/>
         <delete file="filters.conf"/>
+        <delete file="segmentation.conf"/>
         <delete file="log.txt"/>
         <delete dir="dist2"/>
         <delete dir="plugins"/>

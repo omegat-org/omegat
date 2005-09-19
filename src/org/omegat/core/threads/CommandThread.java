@@ -210,21 +210,14 @@ public class CommandThread extends Thread
 		if (m_projWin != null)
 		{
 			if (m_projWin.isVisible())
-			{
 				m_projWin.setVisible(false);
-				m_projWin.reset();
-				m_projWin.buildDisplay();
-			}
-			else
-			{
-				m_projWin.reset();
-				m_projWin.buildDisplay();
-			}
+            m_projWin.reset();
 		}
 
 		m_totalWords = 0;
 		m_partialWords = 0;
 		m_currentWords = 0;
+        numberofTranslatedSegments = 0;
 	}
 
 	private void requestLoad(RequestPacket pack)
@@ -786,8 +779,8 @@ public class CommandThread extends Thread
 		}
 		m_transFrame.setMessageText(OStrings.getString("CT_LOAD_SRC_COMPLETE"));
 		m_curFile = null;
-		m_projWin.setNumEntries(numEntries());
 		loadTranslations();
+        m_projWin.setNumberofTranslatedSegments(numberofTranslatedSegments);
 		m_projWin.buildDisplay();
 		m_projWin.setVisible(true);
 		m_projWin.toFront();
@@ -907,7 +900,10 @@ public class CommandThread extends Thread
                         strOrphaneList.add(se);
 					}
                     else
+                    {
                         se.setTranslation(trans);
+                        numberofTranslatedSegments++;
+                    }
 				}
 				else		
 				{
@@ -1069,6 +1065,7 @@ public class CommandThread extends Thread
 	private int		m_totalWords;
 	private int		m_partialWords;
 	private int		m_currentWords;
+    private int numberofTranslatedSegments;
 
 	// project name of strings loaded from TM - store globally so to not
 	// pass seperately on each function call

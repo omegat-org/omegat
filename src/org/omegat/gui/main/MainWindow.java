@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 import javax.swing.ImageIcon;
@@ -78,7 +79,7 @@ import org.omegat.util.RequestPacket;
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  */
-class MainWindow extends JFrame implements MainInterface, ActionListener, WindowListener
+class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, java.awt.event.ActionListener, java.awt.event.WindowListener, java.awt.event.WindowFocusListener
 {
     
     /** Creates new form MainWindow */
@@ -1431,6 +1432,7 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
         helpAboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(this);
         addWindowListener(this);
 
         org.openide.awt.Mnemonics.setLocalizedText(statusLabel, " ");
@@ -1583,6 +1585,7 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
 
         org.openide.awt.Mnemonics.setLocalizedText(viewMenu, OStrings.getString("MW_VIEWMENU"));
         viewMatchWindowCheckBoxMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
+        viewMatchWindowCheckBoxMenuItem.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(viewMatchWindowCheckBoxMenuItem, OStrings.getString("TF_MENU_FILE_MATCHWIN"));
         viewMatchWindowCheckBoxMenuItem.addActionListener(this);
 
@@ -1780,6 +1783,18 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
         }
     }
 
+    public void windowGainedFocus(java.awt.event.WindowEvent evt)
+    {
+        if (evt.getSource() == MainWindow.this)
+        {
+            MainWindow.this.formWindowGainedFocus(evt);
+        }
+    }
+
+    public void windowLostFocus(java.awt.event.WindowEvent evt)
+    {
+    }
+
     public void windowActivated(java.awt.event.WindowEvent evt)
     {
     }
@@ -1812,6 +1827,52 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
     {
     }
     // </editor-fold>//GEN-END:initComponents
+
+    /**
+     * The last time OmegaT did manual focusing on match/glossary window.
+     * <p>
+     * In Implementation of RFE 
+     * http://sourceforge.net/support/tracker.php?aid=1073199
+     */
+    private long lastManualFocusingTime = 0;
+
+    /**
+     * Minimum difference between WINDOW_FOCUSED events to 
+     * consider them different. (= 500ms)
+     * <p>
+     * In Implementation of RFE 
+     * http://sourceforge.net/support/tracker.php?aid=1073199
+     */
+    private final static int FOCUSING_TIME_DIFF = 500;
+    
+    /**
+     * Informs Main Window that Match/Glossary window got focus.
+     * <p>
+     * In Implementation of RFE 
+     * http://sourceforge.net/support/tracker.php?aid=1073199
+     */
+    public void matchWindowGotFocus()
+    {
+        toFront();
+    }
+    
+    /**
+     * When Main Window gets focus, Match/Glossary window is brought forward.
+     * <p>
+     * In Implementation of RFE 
+     * http://sourceforge.net/support/tracker.php?aid=1073199
+     */
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowGainedFocus
+    {//GEN-HEADEREND:event_formWindowGainedFocus
+        long currTime = new Date().getTime();
+        long diffTime = currTime-lastManualFocusingTime;
+        if( diffTime>FOCUSING_TIME_DIFF )
+        {
+            lastManualFocusingTime = currTime;
+            matchWindow.toFront();
+            toFront();
+        }
+    }//GEN-LAST:event_formWindowGainedFocus
 
     private void optionsWorkflowMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsWorkflowMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsWorkflowMenuItemActionPerformed
@@ -1953,6 +2014,12 @@ class MainWindow extends JFrame implements MainInterface, ActionListener, Window
         }
     }//GEN-LAST:event_viewFileListCheckBoxMenuItemActionPerformed
 
+    /** Informs Main Window class that the user closed the Match/Glossary window */
+    public void matchWindowClosed()
+    {
+        viewMatchWindowCheckBoxMenuItem.setSelected(false);
+    }
+    
     private void viewMatchWindowCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_viewMatchWindowCheckBoxMenuItemActionPerformed
     {//GEN-HEADEREND:event_viewMatchWindowCheckBoxMenuItemActionPerformed
         if( viewMatchWindowCheckBoxMenuItem.isSelected() )

@@ -54,13 +54,40 @@ public class MatchGlossaryWindow extends javax.swing.JFrame
     {
         m_matchPane = new org.omegat.gui.main.MatchGlossaryPane();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle(OStrings.getString("TF_MATCH_VIEWER_TITLE"));
+        addComponentListener(new java.awt.event.ComponentAdapter()
+        {
+            public void componentHidden(java.awt.event.ComponentEvent evt)
+            {
+                formComponentHidden(evt);
+            }
+        });
+        addWindowFocusListener(new java.awt.event.WindowFocusListener()
+        {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt)
+            {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt)
+            {
+            }
+        });
+
         getContentPane().add(m_matchPane, java.awt.BorderLayout.CENTER);
 
         pack();
     }
     // </editor-fold>//GEN-END:initComponents
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowGainedFocus
+    {//GEN-HEADEREND:event_formWindowGainedFocus
+        mainwindow.matchWindowGotFocus();
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentHidden
+    {//GEN-HEADEREND:event_formComponentHidden
+        mainwindow.matchWindowClosed();
+    }//GEN-LAST:event_formComponentHidden
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.omegat.gui.main.MatchGlossaryPane m_matchPane;

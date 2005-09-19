@@ -69,7 +69,9 @@ public class ProjectFrame extends JFrame
 		bbut.add(Box.createHorizontalGlue());
 		cp.add(bbut, "South");													// NOI18N
 
-		setSize(500, 400);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-500)/2, (screenSize.height-500)/2, 500, 400);
+        
 		m_editorPane.addHyperlinkListener(new HListener(m_parent, true));
         
         //  Handle escape key to close the window
@@ -99,8 +101,6 @@ public class ProjectFrame extends JFrame
 	{
 		Mnemonics.setLocalizedText(m_closeButton, OStrings.PF_BUTTON_CLOSE);
 		setTitle(OStrings.PF_WINDOW_TITLE);
-
-		buildDisplay();
 	}
 
     public void addFile(String name, int entryNum)
@@ -109,37 +109,72 @@ public class ProjectFrame extends JFrame
 		m_offsetList.add(new Integer(entryNum));
 	}
 
-	public void setNumEntries(int num)
+    /**
+     * Sets the number of translated segments to display.
+     */
+	public void setNumberofTranslatedSegments(int value)
 	{
-		m_maxEntries = num;
-		m_ready = true;
+		numberofTranslatedSegments = value;
 	}
-
+    
+    /**
+     * Builds the table which lists all the project files.
+     */
 	public void buildDisplay()
 	{
-		if (!m_ready)
+		if( m_nameList==null || m_offsetList==null || m_nameList.size()==0 )
 			return;
 
-		if (m_nameList.size() <= 0)
-			return;
-
-		String output = "<table BORDER COLS=2 WIDTH=\"100%\" NOSAVE>";			// NOI18N
-		output += "<tr><td>" + OStrings.PF_FILENAME + "</td><td>" +				// NOI18N
-					OStrings.PF_NUM_SEGMENTS + "</td></tr>";					// NOI18N
+		StringBuffer output = new StringBuffer();
+        output.append("<table align=center width=95% border=0>\n");             // NOI18N
+		output.append("<tr>\n");                                                // NOI18N
+        output.append("<th width=80% align=center>");                           // NOI18N
+        output.append(OStrings.PF_FILENAME);                                    // NOI18N
+        output.append("</th>\n");                                               // NOI18N
+        output.append("<th width=20% align=center>");                           // NOI18N
+        output.append(OStrings.PF_NUM_SEGMENTS);                                // NOI18N
+        output.append("</th>\n");                                               // NOI18N
+        output.append("</tr>\n");                                               // NOI18N
         int firstEntry = 1;
+        int entriesUpToNow = 0;
 		for (int i=0; i<m_nameList.size(); i++)
 		{
 			String name = (String) m_nameList.get(i);
-            int entriesUpToNow = ((Integer)m_offsetList.get(i)).intValue();
+            entriesUpToNow = ((Integer)m_offsetList.get(i)).intValue();
             int size = 1+entriesUpToNow-firstEntry;
 
-			output += "<tr><td><a href=\"" + firstEntry + "\">" + name +        // NOI18N
-						"</a></td><td>" + size + "</td></tr>";                  // NOI18N
+			output.append("<tr>\n");                                            // NOI18N
+            output.append("<td width=80%>");                                    // NOI18N
+            output.append("<a href=\""+firstEntry+"\">"+name+"</a>");           // NOI18N
+            output.append("</td>\n");                                           // NOI18N
+            output.append("<td width=20% align=center>");                       // NOI18N
+            output.append(size);                                                // NOI18N
+            output.append("</td>\n");                                           // NOI18N
+            output.append("</tr>\n");                                           // NOI18N
             
 			firstEntry = entriesUpToNow+1;
 		}
-		output += "</table>";													// NOI18N
-		m_editorPane.setText(output);
+        
+        output.append("<tr>\n");                                                // NOI18N
+        output.append("<td width=80%><b>");                                     // NOI18N
+        output.append("Total number of segments");
+        output.append("</b></td>\n");                                           // NOI18N
+        output.append("<td width=20% align=center><b>");                        // NOI18N
+        output.append(entriesUpToNow);                                          // NOI18N
+        output.append("</b></td>\n");                                           // NOI18N
+        output.append("</tr>\n");                                               // NOI18N
+        output.append("<tr>\n");                                                // NOI18N
+        output.append("<td width=80%><b>");                                     // NOI18N
+        output.append("Of which translated");
+        output.append("</b></td>\n");                                           // NOI18N
+        output.append("<td width=20% align=center><b>");                        // NOI18N
+        output.append(numberofTranslatedSegments);                              // NOI18N
+        output.append("</b></td>\n");                                           // NOI18N
+        output.append("</tr>\n");                                               // NOI18N
+        
+		output.append("</table>\n");                                            // NOI18N
+        
+		m_editorPane.setText(output.toString());
 	}
 	
 	private JEditorPane m_editorPane;
@@ -147,8 +182,7 @@ public class ProjectFrame extends JFrame
 	private ArrayList	m_nameList;
 	private ArrayList	m_offsetList;
 
-	private int			m_maxEntries;
-	private boolean		m_ready;
+	private int			numberofTranslatedSegments;
 
 	private MainInterface m_parent;
 

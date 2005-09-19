@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------
- OmegaT 1.4.6 Beta 2 Release Notes
+ OmegaT 1.4.6 Beta 4 Release Notes
 ----------------------------------------------------------------------
 
  General changes in 1.4 (summary)
@@ -24,7 +24,7 @@
     Windows installer
 
 
-1.4.6
+1.4.6 beta 4
 -------------------------------
  
  Bugfixes:
@@ -42,21 +42,34 @@
  - javascript quote marks wrongly replaced (in HTML)
    http://sourceforge.net/support/tracker.php?aid=1213496
 
+ - Empty files are displayed in a file list window
+   http://sourceforge.net/support/tracker.php?aid=1256026
+
+ - AltGr+A in Irish deletes all the segment text
+   http://sourceforge.net/support/tracker.php?aid=1256094
+
+ - Valid TMX 1.1 unsupported (CSVConverter's output)
+   http://sourceforge.net/support/tracker.php?aid=1295165
+
+ - A space is added in front of segments
+   (regression in 1.4.6 beta 3)
+   http://sourceforge.net/support/tracker.php?aid=1288742
+
+ - <address> doesn't segment in HTML documents
+   http://sourceforge.net/support/tracker.php?aid=1288756
+
  Enchancements:
 
- - ** PARTIALLY IMPLEMENTED IN BETA 2 **
-   Option: Change Segmenting: Sentences vs. Paragraphs
+ - Option: Change Segmenting: Sentences vs. Paragraphs
    http://sourceforge.net/support/tracker.php?aid=1053692
 
- - ** PARTIALLY IMPLEMENTED IN BETA 2 **
-   Edit Project to change project parameters
+ - Edit Project to change project parameters
    http://sourceforge.net/support/tracker.php?aid=1227890
 
  - Display save status in the status bar
    http://sourceforge.net/support/tracker.php?aid=1228249
 
- - ** NOT YET IN BETA 2 ** 
-   Display "OmegaT: Instant Start" article on statup
+ - Display "OmegaT: Instant Start" article on statup
    http://sourceforge.net/support/tracker.php?aid=1217081
 
  - ** NOT YET IN BETA 2 **
@@ -197,7 +210,8 @@ Bugfixes:
 
 Also some work on stabilizing the interface...
 
-TODO: Finalize documentation and implement some minor Bugfixes / RFEs.
+Not yet in Beta3: 
+      Finalize documentation and implement some minor Bugfixes / RFEs.
 
 
 1.4.5 Beta2

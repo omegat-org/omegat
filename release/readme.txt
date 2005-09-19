@@ -1,5 +1,5 @@
 =============================================
-OmegaT 1.4.6 Beta 2 Read Me file
+OmegaT 1.4.6 Beta 4 Read Me file
 
 I.   Where to get information about OmegaT
 II.  General notes about Java & OmegaT

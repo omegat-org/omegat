@@ -212,6 +212,9 @@ class FilterVisitor extends NodeVisitor
     {
         String tagname = tag.getTagName();
         return
+                // Bugfix for http://sourceforge.net/support/tracker.php?aid=1288756
+                // ADDRESS tag is also a paragraph tag
+                tagname.equals("ADDRESS") ||                                    // NOI18N
                 tagname.equals("BLOCKQUOTE") ||                                 // NOI18N
                 tagname.equals("BODY") ||                                       // NOI18N
                 tagname.equals("CENTER") ||                                     // NOI18N

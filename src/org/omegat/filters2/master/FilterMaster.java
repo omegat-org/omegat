@@ -45,11 +45,11 @@ import java.util.Map;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 import org.omegat.core.StringEntry;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.filters2.xml.openoffice.OOFilter;
@@ -154,17 +154,37 @@ public class FilterMaster
         
         if( PreferenceManager.pref.isPreference(OConsts.PREF_SENTENCE_SEGMENTING) )
         {
-            Matcher m = PATTERN_SENTENCE_BREAK.matcher(src);
-            int nextSentenceStart = 0;
+            List segments = Segmenter.getSegmenter().segment(src);
             StringBuffer res = new StringBuffer();
-            while( m.find() )
+            for(int i=0; i<segments.size(); i++)
             {
-                String onesrc = src.substring(nextSentenceStart, m.start(1));
-                res.append(processSingleEntry(onesrc));
-                res.append(m.group(1));
-                nextSentenceStart = m.end(1);
+                String onesrc = (String)segments.get(i);
+                
+                // Bugfix for http://sourceforge.net/support/tracker.php?aid=1288742
+                // skipping spaces manually
+                int ol = onesrc.length();
+                int b = 0;
+                StringBuffer bs = new StringBuffer();
+                while( b<ol && Character.isSpaceChar(onesrc.charAt(b)) )
+                {
+                    bs.append(onesrc.charAt(b));
+                    b++;
+                }
+
+                int e = ol-1;
+                StringBuffer es = new StringBuffer();
+                while( e>=b && Character.isSpaceChar(onesrc.charAt(e)) )
+                {
+                    es.append(onesrc.charAt(e));
+                    e--;
+                }
+                es.reverse();
+
+                String trimmed = onesrc.substring(b, e+1);
+                res.append(bs);
+                res.append(processSingleEntry(trimmed));
+                res.append(es);
             }
-            res.append(processSingleEntry(src.substring(nextSentenceStart)));
             return res.toString();
         }
         else
@@ -957,7 +977,7 @@ public class FilterMaster
         res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LOCALE), 
                 targetLang.getLocale());
         res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LANGUAGE), 
-                targetLang.getISOLanguage());
+                targetLang.getLanguage());
         res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LANG_CODE), 
                 targetLang.getLanguageCode());
         res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_COUNTRY_CODE), 

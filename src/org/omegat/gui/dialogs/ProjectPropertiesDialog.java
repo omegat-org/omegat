@@ -19,7 +19,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.gui;
+package org.omegat.gui.dialogs;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -35,18 +35,18 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
+import org.omegat.gui.OmegaTFileChooser;
+import org.omegat.gui.ProjectProperties;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -107,7 +107,7 @@ public class ProjectPropertiesDialog extends JDialog
         if (projFileName == null)
         {
             String sourceLocale = PreferenceManager.pref.getPreference(OConsts.PREF_SOURCELOCALE);
-            if( !sourceLocale.equals(""))						                            // NOI18N
+            if( !sourceLocale.equals(""))                                                   // NOI18N
                 projectProperties.setSourceLanguage(sourceLocale);
             
             String targetLocale = PreferenceManager.pref.getPreference(OConsts.PREF_TARGETLOCALE);
@@ -239,7 +239,7 @@ public class ProjectPropertiesDialog extends JDialog
         
         centerBox.add(dirsBox);
         
-        getContentPane().add(centerBox, "Center");										// NOI18N
+        getContentPane().add(centerBox, "Center");                                      // NOI18N
 
         m_okButton = new JButton();
         Mnemonics.setLocalizedText(m_okButton, OStrings.PP_BUTTON_OK);
@@ -252,7 +252,7 @@ public class ProjectPropertiesDialog extends JDialog
         southBox.add(m_okButton);
         southBox.add(Box.createHorizontalStrut(5));
         southBox.add(m_cancelButton);
-        getContentPane().add(southBox, "South");										// NOI18N
+        getContentPane().add(southBox, "South");                                        // NOI18N
         
         setResizable(false);
         
@@ -409,7 +409,7 @@ public class ProjectPropertiesDialog extends JDialog
 
     private void doBrowseDirectoy()
     {
-        String title;														// NOI18N
+        String title;                                                       // NOI18N
         switch (m_browseTarget)
         {
             case 1:
@@ -437,7 +437,7 @@ public class ProjectPropertiesDialog extends JDialog
         // browser.setApproveButtonText(str);
         browser.setDialogTitle(title);
         browser.setFileSelectionMode(OmegaTFileChooser.DIRECTORIES_ONLY);
-        String curDir = "";														// NOI18N
+        String curDir = "";                                                     // NOI18N
         switch (m_browseTarget)
         {
             case 1:
@@ -457,10 +457,10 @@ public class ProjectPropertiesDialog extends JDialog
                 break;
         }
 
-        if (curDir.equals(""))													// NOI18N
+        if (curDir.equals(""))                                                  // NOI18N
             curDir = PreferenceManager.pref.getPreference(OConsts.PREF_CUR_DIR);
 
-        if (!curDir.equals(""))											// NOI18N
+        if (!curDir.equals(""))                                         // NOI18N
         {
             File dir = new File(curDir);
             if (dir.exists() && dir.isDirectory())
@@ -633,39 +633,39 @@ public class ProjectPropertiesDialog extends JDialog
     /**
      * Whether the user cancelled the dialog.
      */
-    public boolean dialogCancelled()	{ return m_dialogCancelled;	}
-    private boolean		m_dialogCancelled;
+    public boolean dialogCancelled()    { return m_dialogCancelled; }
+    private boolean     m_dialogCancelled;
 
-    private int				m_browseTarget;
+    private int             m_browseTarget;
 
     private JTextArea   m_messageArea;
 
-    private JLabel		m_srcRootLabel;
-    private JTextField	m_srcRootField;
-    private JButton		m_srcBrowse;
+    private JLabel      m_srcRootLabel;
+    private JTextField  m_srcRootField;
+    private JButton     m_srcBrowse;
 
-    private JLabel		m_locRootLabel;
-    private JTextField	m_locRootField;
-    private JButton		m_locBrowse;
+    private JLabel      m_locRootLabel;
+    private JTextField  m_locRootField;
+    private JButton     m_locBrowse;
 
-    private JLabel		m_glosRootLabel;
-    private JTextField	m_glosRootField;
-    private JButton		m_glosBrowse;
+    private JLabel      m_glosRootLabel;
+    private JTextField  m_glosRootField;
+    private JButton     m_glosBrowse;
 
-    private JLabel		m_tmRootLabel;
-    private JTextField	m_tmRootField;
-    private JButton		m_tmBrowse;
+    private JLabel      m_tmRootLabel;
+    private JTextField  m_tmRootField;
+    private JButton     m_tmBrowse;
 
-    private JLabel		m_sourceLocaleLabel;
-    private JComboBox	m_sourceLocaleField;
+    private JLabel      m_sourceLocaleLabel;
+    private JComboBox   m_sourceLocaleField;
 
-    private JLabel		m_targetLocaleLabel;
-    private JComboBox	m_targetLocaleField;
+    private JLabel      m_targetLocaleLabel;
+    private JComboBox   m_targetLocaleField;
 
     private JCheckBox   m_sentenceSegmentingCheckBox;
     
-    private JButton		m_okButton;
-    private JButton		m_cancelButton;
+    private JButton     m_okButton;
+    private JButton     m_cancelButton;
 }
 
 

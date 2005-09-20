@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InterruptedIOException;
 
 import org.omegat.filters2.TranslationException;
+import org.omegat.gui.dialogs.ProjectPropertiesDialog;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;

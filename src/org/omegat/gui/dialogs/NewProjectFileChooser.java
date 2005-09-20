@@ -19,41 +19,42 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.gui;
+package org.omegat.gui.dialogs;
 
+import javax.swing.JOptionPane;
+
+import org.omegat.gui.OmegaTFileChooser;
 import org.omegat.util.OStrings;
 
-import javax.swing.*;
 
 /**
  * A chooser for project's directory for a newly created project.
  *
  * @author Keith Godfrey
  */
-class NewProjectFileChooser extends OmegaTFileChooser
+public class NewProjectFileChooser extends OmegaTFileChooser
 {
-	public NewProjectFileChooser()
-	{
-		setMultiSelectionEnabled(false);
-		setFileHidingEnabled(true);
-	}
-	
-	public void approveSelection()
-	{
-		// user hit 'open' button - redirect command to open project or
-		//  recurse into lower directory
-		if (getSelectedFile().exists())
-		{
-			// must select non-existing name for project
-			JOptionPane.showMessageDialog(this, OStrings.NDC_SELECT_UNIQUE,
-					OStrings.NDC_SELECT_UNIQUE_TITLE, 
-					JOptionPane.ERROR_MESSAGE); 
-		}
-		else
-		{
-			// this is OK - continue
-			super.approveSelection();
-		}
-	}
-	
+    public NewProjectFileChooser()
+    {
+        setMultiSelectionEnabled(false);
+        setFileHidingEnabled(true);
+    }
+    
+    public void approveSelection()
+    {
+        // user hit 'open' button - redirect command to open project or
+        //  recurse into lower directory
+        if (getSelectedFile().exists())
+        {
+            // must select non-existing name for project
+            JOptionPane.showMessageDialog(this, OStrings.NDC_SELECT_UNIQUE,
+                    OStrings.NDC_SELECT_UNIQUE_TITLE, 
+                    JOptionPane.ERROR_MESSAGE); 
+        }
+        else
+        {
+            // this is OK - continue
+            super.approveSelection();
+        }
+    }
 }

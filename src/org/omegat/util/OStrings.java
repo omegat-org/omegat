@@ -101,8 +101,12 @@ public class OStrings
 	// NOTE: segment start is assumed to contain "0000" string to overwrite
 	//	with entry number.  If zeros not detected, entry number will not be
 	//	displayed
-	public static final String TF_CUR_SEGMENT_START		= getString("TF_CUR_SEGMENT_START");
-	public static final String TF_CUR_SEGMENT_END		= getString("TF_CUR_SEGMENT_END");
+	public static final String TF_CUR_SEGMENT_START		= 
+            "\n"                                                                // NOI18N
+            + getString("TF_CUR_SEGMENT_START");
+	public static final String TF_CUR_SEGMENT_END		= 
+            " "                                                                 // NOI18N
+            + getString("TF_CUR_SEGMENT_END");
 	
 	public static final String TF_SELECT_SOURCE_FONT	= getString("TF_SELECT_SOURCE_FONT");
 	public static final String TF_SELECT_FONTSIZE		= getString("TF_SELECT_FONTSIZE");

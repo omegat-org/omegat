@@ -24,9 +24,8 @@ package org.omegat.gui.dialogs;
 import java.awt.Frame;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 
 /**
  *
@@ -44,6 +43,15 @@ public class WorkflowOptionsDialog extends JDialog
     {
         super(parent, true);
         initComponents();
+        
+        // initializing options
+        doNotCopySourceTextCheckBox.setSelected(Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT));
+        insertBestMatchCheckBox.setSelected(Preferences.isPreference(Preferences.BEST_MATCH_INSERT));
+        minimalSimilaritySpinner.setValue(new Integer(Preferences.getPreferenceDefault(Preferences.BEST_MATCH_MINIMAL_SIMILARITY, Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT)));
+        minimalSimilaritySpinner.setEnabled(insertBestMatchCheckBox.isSelected());
+        insertExplanatoryTextCheckBox.setSelected(Preferences.isPreference(Preferences.BEST_MATCH_EXPLANATORY_TEXT));
+        insertExplanatoryTextCheckBox.setEnabled(insertBestMatchCheckBox.isSelected());
+        
         invalidate();
         pack();
     }
@@ -71,10 +79,11 @@ public class WorkflowOptionsDialog extends JDialog
         descriptionTextArea = new javax.swing.JTextArea();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        insertExplanatoryTextCheckBox = new javax.swing.JCheckBox();
 
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        setTitle("Workflow Options");
+        setTitle(OStrings.getString("GUI_TITLE_Workflow_Options"));
         addWindowListener(new java.awt.event.WindowAdapter()
         {
             public void windowClosing(java.awt.event.WindowEvent evt)
@@ -83,38 +92,47 @@ public class WorkflowOptionsDialog extends JDialog
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(doNotCopySourceTextCheckBox, "Do &not copy source text into target field");
+        org.openide.awt.Mnemonics.setLocalizedText(doNotCopySourceTextCheckBox, OStrings.getString("GUI_WORKFLOW_OPTION_Dont_copy_source_text_into_target_field"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.ipadx = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(doNotCopySourceTextCheckBox, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(insertBestMatchCheckBox, " Insert best fuzzy match into target field");
+        org.openide.awt.Mnemonics.setLocalizedText(insertBestMatchCheckBox, OStrings.getString("GUI_WORKFLOW_OPTION_Insert_best_fuzzy_match_into_target_field"));
+        insertBestMatchCheckBox.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                insertBestMatchCheckBoxActionPerformed(evt);
+            }
+        });
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(insertBestMatchCheckBox, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(minimalSimilarityLabel, "Minimal Similarity:");
+        org.openide.awt.Mnemonics.setLocalizedText(minimalSimilarityLabel, OStrings.getString("GUI_WORKFLOW_OPTION_Minimal_Similarity"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        gridBagConstraints.insets = new java.awt.Insets(4, 14, 4, 4);
         getContentPane().add(minimalSimilarityLabel, gridBagConstraints);
 
+        minimalSimilaritySpinner.setEnabled(false);
         minimalSimilaritySpinner.setValue(new Integer(90));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -123,14 +141,14 @@ public class WorkflowOptionsDialog extends JDialog
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(minimalSimilaritySpinner, gridBagConstraints);
 
         descriptionTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         descriptionTextArea.setEditable(false);
         descriptionTextArea.setFont(new JLabel().getFont());
         descriptionTextArea.setLineWrap(true);
-        descriptionTextArea.setText("Here you may edit the parameters affecting your workflow. They are optional and they affect only the experience you get when moving to a not-yet-translated segment.");
+        descriptionTextArea.setText(OStrings.getString("GUI_WORKFLOW_DESCRIPTION"));
         descriptionTextArea.setWrapStyleWord(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -140,7 +158,7 @@ public class WorkflowOptionsDialog extends JDialog
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(descriptionTextArea, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK"));
@@ -154,9 +172,9 @@ public class WorkflowOptionsDialog extends JDialog
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        gridBagConstraints.insets = new java.awt.Insets(12, 4, 4, 4);
         getContentPane().add(okButton, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL"));
@@ -170,10 +188,19 @@ public class WorkflowOptionsDialog extends JDialog
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        gridBagConstraints.insets = new java.awt.Insets(12, 4, 4, 4);
         getContentPane().add(cancelButton, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(insertExplanatoryTextCheckBox, OStrings.getString("GUI_WORKFLOW_OPTION_NO_EXPLANATORY_TEXT"));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 14, 4, 4);
+        getContentPane().add(insertExplanatoryTextCheckBox, gridBagConstraints);
 
         pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -181,11 +208,21 @@ public class WorkflowOptionsDialog extends JDialog
         setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
     }
     // </editor-fold>//GEN-END:initComponents
+
+    private void insertBestMatchCheckBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_insertBestMatchCheckBoxActionPerformed
+    {//GEN-HEADEREND:event_insertBestMatchCheckBoxActionPerformed
+        minimalSimilaritySpinner.setEnabled(insertBestMatchCheckBox.isSelected());
+        insertExplanatoryTextCheckBox.setEnabled(insertBestMatchCheckBox.isSelected());
+    }//GEN-LAST:event_insertBestMatchCheckBoxActionPerformed
     
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_okButtonActionPerformed
     {
-        JOptionPane.showMessageDialog(this, "Not yet implemented", "Warning", JOptionPane.WARNING_MESSAGE);
-        // doClose(RET_OK);
+        Preferences.setPreference(Preferences.DONT_INSERT_SOURCE_TEXT, doNotCopySourceTextCheckBox.isSelected());
+        Preferences.setPreference(Preferences.BEST_MATCH_INSERT, insertBestMatchCheckBox.isSelected());
+        Preferences.setPreference(Preferences.BEST_MATCH_MINIMAL_SIMILARITY, minimalSimilaritySpinner.getValue().toString());
+        Preferences.setPreference(Preferences.BEST_MATCH_EXPLANATORY_TEXT, insertExplanatoryTextCheckBox.isSelected());
+        
+        doClose(RET_OK);
     }//GEN-LAST:event_okButtonActionPerformed
     
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cancelButtonActionPerformed
@@ -211,6 +248,7 @@ public class WorkflowOptionsDialog extends JDialog
     private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JCheckBox doNotCopySourceTextCheckBox;
     private javax.swing.JCheckBox insertBestMatchCheckBox;
+    private javax.swing.JCheckBox insertExplanatoryTextCheckBox;
     private javax.swing.JLabel minimalSimilarityLabel;
     private javax.swing.JSpinner minimalSimilaritySpinner;
     private javax.swing.JButton okButton;

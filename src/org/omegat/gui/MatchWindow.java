@@ -41,7 +41,7 @@ import javax.swing.text.StyleConstants;
 import org.omegat.core.StringData;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.PreferenceManager;
+import org.omegat.util.Preferences;
 import org.omegat.util.Token;
 
 /**
@@ -232,10 +232,10 @@ public class MatchWindow extends JFrame
 		int h = getHeight();
 		int x = getX();
 		int y = getY();
-		PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_W, "" + w);		// NOI18N
-		PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_H, "" + h);		// NOI18N
-		PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_X, "" + x);		// NOI18N
-		PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_Y, "" + y);		// NOI18N
+		Preferences.setPreference(Preferences.MATCHWINDOW_WIDTH, w);
+		Preferences.setPreference(Preferences.MATCHWINDOW_HEIGHT, h);
+		Preferences.setPreference(Preferences.MATCHWINDOW_X, x);
+		Preferences.setPreference(Preferences.MATCHWINDOW_Y, y);
 	}
 	
 	private void initScreenLayout()
@@ -245,10 +245,10 @@ public class MatchWindow extends JFrame
 		//		if screen size saved, recover that and use instead
 		//	(18may04)
 		String dw, dh, dx, dy;
-		dw = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_W);
-		dh = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_H);
-		dx = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_X);
-		dy = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_Y);
+		dw = Preferences.getPreference(Preferences.MATCHWINDOW_WIDTH);
+		dh = Preferences.getPreference(Preferences.MATCHWINDOW_HEIGHT);
+		dx = Preferences.getPreference(Preferences.MATCHWINDOW_X);
+		dy = Preferences.getPreference(Preferences.MATCHWINDOW_Y);
 		int x=0;
 		int y=0;
 		int w=0;

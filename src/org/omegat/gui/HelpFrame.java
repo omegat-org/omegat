@@ -34,6 +34,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import org.omegat.util.StaticUtils;
 import org.openide.awt.Mnemonics;
 
 /**
@@ -216,7 +217,8 @@ public class HelpFrame extends JFrame
 	
 	private String absolutePath(String file)
 	{
-		return "file:" + System.getProperty("user.dir")				// NOI18N
+		return "file:"                                                          // NOI18N
+                + StaticUtils.installDir()
 				+ File.separator + OConsts.HELP_DIR + File.separator 
 				+ language + File.separator + file;
 	}
@@ -227,7 +229,7 @@ public class HelpFrame extends JFrame
 	public static String detectDocLanguage()
 	{
 		String lang = System.getProperty("user.language", "en");                // NOI18N
-		File docsFolder = new File(System.getProperty("user.dir")				// NOI18N
+		File docsFolder = new File(StaticUtils.installDir()
 				+ File.separator + OConsts.HELP_DIR + File.separator + lang);
 		if( docsFolder.exists() )
 			return lang;

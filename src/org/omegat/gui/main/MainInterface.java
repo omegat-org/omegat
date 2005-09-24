@@ -40,7 +40,9 @@ public interface MainInterface
     public void displayWarning(String warning, Throwable throwable);
     public void displayError(String error, Throwable throwable);
     public void fatalError(String error, Throwable throwable);
-    public void doCompareN(int n);
+    
+    /** Displays fuzzy matching info if it's available. */
+    public void updateFuzzyInfo(int nearnum);
     
     public void finishLoadProject();
     

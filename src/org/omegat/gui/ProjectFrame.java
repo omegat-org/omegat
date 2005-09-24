@@ -21,16 +21,26 @@
 
 package org.omegat.gui;
 
-import org.omegat.util.OStrings;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.KeyStroke;
+
 import org.openide.awt.Mnemonics;
 import org.omegat.gui.main.MainInterface;
+import org.omegat.util.OStrings;
 
 /**
  * A frame for project,
@@ -157,7 +167,7 @@ public class ProjectFrame extends JFrame
         
         output.append("<tr>\n");                                                // NOI18N
         output.append("<td width=80%><b>");                                     // NOI18N
-        output.append("Total number of segments");
+        output.append(OStrings.getString("GUI_PROJECT_Total_number_of_segments"));
         output.append("</b></td>\n");                                           // NOI18N
         output.append("<td width=20% align=center><b>");                        // NOI18N
         output.append(entriesUpToNow);                                          // NOI18N
@@ -165,7 +175,7 @@ public class ProjectFrame extends JFrame
         output.append("</tr>\n");                                               // NOI18N
         output.append("<tr>\n");                                                // NOI18N
         output.append("<td width=80%><b>");                                     // NOI18N
-        output.append("Of which translated");
+        output.append(OStrings.getString("GUI_PROJECT_Of_which_translated_segments"));
         output.append("</b></td>\n");                                           // NOI18N
         output.append("<td width=20% align=center><b>");                        // NOI18N
         output.append(numberofTranslatedSegments);                              // NOI18N

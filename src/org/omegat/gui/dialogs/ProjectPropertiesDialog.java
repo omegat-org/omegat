@@ -47,15 +47,17 @@ import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import org.omegat.gui.OmegaTFileChooser;
 import org.omegat.gui.ProjectProperties;
+import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.PreferenceManager;
+import org.omegat.util.Preferences;
 import org.openide.awt.Mnemonics;
 
 
 /**
- * The dialog for customizing the OmegaT project.
+ * The dialog for customizing the OmegaT project
+ * (where project properties are entered and/or modified).
  * <p>
  * It is used:
  * <ul>
@@ -106,23 +108,21 @@ public class ProjectPropertiesDialog extends JDialog
 
         if (projFileName == null)
         {
-            String sourceLocale = PreferenceManager.pref.getPreference(OConsts.PREF_SOURCELOCALE);
+            String sourceLocale = Preferences.getPreference(Preferences.SOURCE_LOCALE);
             if( !sourceLocale.equals(""))                                                   // NOI18N
                 projectProperties.setSourceLanguage(sourceLocale);
             
-            String targetLocale = PreferenceManager.pref.getPreference(OConsts.PREF_TARGETLOCALE);
+            String targetLocale = Preferences.getPreference(Preferences.TARGET_LOCALE);
             if( !targetLocale.equals("") )                                                // NOI18N
                 projectProperties.setTargetLanguage(targetLocale);
         }
 
-        m_browseTarget = 0;
-        
         Border emptyBorder = new EmptyBorder(2,0,2,0);
         Box centerBox = Box.createVerticalBox();
         centerBox.setBorder(new EmptyBorder(5,5,5,5));
 
         // hinting message
-        m_messageArea = new javax.swing.JTextArea();
+        JTextArea m_messageArea = new JTextArea();
         m_messageArea.setEditable(false);
         m_messageArea.setBackground(
                 javax.swing.UIManager.getDefaults().getColor("Label.background")); // NOI18N
@@ -137,7 +137,7 @@ public class ProjectPropertiesDialog extends JDialog
         Box localesBox = Box.createVerticalBox();
         localesBox.setBorder(new EtchedBorder());
         
-        m_sourceLocaleLabel = new JLabel();
+        JLabel m_sourceLocaleLabel = new JLabel();
         Mnemonics.setLocalizedText(m_sourceLocaleLabel, OStrings.PP_SRC_LANG);
         Box bSL = Box.createHorizontalBox();
         bSL.setBorder(emptyBorder);
@@ -145,7 +145,7 @@ public class ProjectPropertiesDialog extends JDialog
         bSL.add(Box.createHorizontalGlue());
         localesBox.add(bSL);
         
-        m_sourceLocaleField = new JComboBox(Language.LANGUAGES);
+        final JComboBox m_sourceLocaleField = new JComboBox(Language.LANGUAGES);
         if( m_sourceLocaleField.getMaximumRowCount()<20 )
             m_sourceLocaleField.setMaximumRowCount(20);
         m_sourceLocaleField.setEditable(true);
@@ -153,7 +153,7 @@ public class ProjectPropertiesDialog extends JDialog
         m_sourceLocaleField.setSelectedItem(projectProperties.getSourceLanguage());
         localesBox.add(m_sourceLocaleField);
 
-        m_targetLocaleLabel = new JLabel();
+        JLabel m_targetLocaleLabel = new JLabel();
         Mnemonics.setLocalizedText(m_targetLocaleLabel, OStrings.PP_LOC_LANG);
         Box bLL = Box.createHorizontalBox();
         bLL.setBorder(emptyBorder);
@@ -161,7 +161,7 @@ public class ProjectPropertiesDialog extends JDialog
         bLL.add(Box.createHorizontalGlue());
         localesBox.add(bLL);
         
-        m_targetLocaleField = new JComboBox(Language.LANGUAGES);
+        final JComboBox m_targetLocaleField = new JComboBox(Language.LANGUAGES);
         if( m_targetLocaleField.getMaximumRowCount()<20 )
             m_targetLocaleField.setMaximumRowCount(20);
         m_targetLocaleField.setEditable(true);
@@ -170,11 +170,16 @@ public class ProjectPropertiesDialog extends JDialog
         localesBox.add(m_targetLocaleField);
         
         // sentence-segmenting
-        Box bSent = Box.createHorizontalBox();
-        m_sentenceSegmentingCheckBox = new JCheckBox();
+        final JCheckBox m_sentenceSegmentingCheckBox = new JCheckBox();
         Mnemonics.setLocalizedText(m_sentenceSegmentingCheckBox, OStrings.getString("PP_SENTENCE_SEGMENTING"));
+        
+        JButton m_sentenceSegmentingButton = new JButton();
+        Mnemonics.setLocalizedText(m_sentenceSegmentingButton, OStrings.getString("MW_OPTIONSMENU_SENTSEG"));
+        
+        Box bSent = Box.createHorizontalBox();
         bSent.add(m_sentenceSegmentingCheckBox);
         bSent.add(Box.createHorizontalGlue());
+        bSent.add(m_sentenceSegmentingButton);
         localesBox.add(bSent);
         
         centerBox.add(localesBox);
@@ -185,55 +190,55 @@ public class ProjectPropertiesDialog extends JDialog
         Box dirsBox = Box.createVerticalBox();
         dirsBox.setBorder(new EtchedBorder());
         
-        m_srcRootLabel = new JLabel();
+        JLabel m_srcRootLabel = new JLabel();
         Mnemonics.setLocalizedText(m_srcRootLabel, OStrings.PP_SRC_ROOT);
         Box bSrc = Box.createHorizontalBox();
         bSrc.setBorder(emptyBorder);
         bSrc.add(m_srcRootLabel);
         bSrc.add(Box.createHorizontalGlue());
-        m_srcBrowse = new JButton();
+        JButton m_srcBrowse = new JButton();
         Mnemonics.setLocalizedText(m_srcBrowse, OStrings.PP_BUTTON_BROWSE_SRC);
         bSrc.add(m_srcBrowse);
-        m_srcRootField = new JTextField();
+        final JTextField m_srcRootField = new JTextField();
         dirsBox.add(bSrc);
         dirsBox.add(m_srcRootField);
 
-        m_locRootLabel = new JLabel();
+        JLabel m_locRootLabel = new JLabel();
         Mnemonics.setLocalizedText(m_locRootLabel, OStrings.PP_LOC_ROOT);
         Box bLoc = Box.createHorizontalBox();
         bLoc.setBorder(emptyBorder);
         bLoc.add(m_locRootLabel);
         bLoc.add(Box.createHorizontalGlue());
-        m_locBrowse = new JButton();
+        JButton m_locBrowse = new JButton();
         Mnemonics.setLocalizedText(m_locBrowse, OStrings.PP_BUTTON_BROWSE_TAR);
         bLoc.add(m_locBrowse);
-        m_locRootField = new JTextField();
+        final JTextField m_locRootField = new JTextField();
         dirsBox.add(bLoc);
         dirsBox.add(m_locRootField);
 
-        m_glosRootLabel = new JLabel();
+        JLabel m_glosRootLabel = new JLabel();
         Mnemonics.setLocalizedText(m_glosRootLabel, OStrings.PP_GLOS_ROOT);
         Box bGlos = Box.createHorizontalBox();
         bGlos.setBorder(emptyBorder);
         bGlos.add(m_glosRootLabel);
         bGlos.add(Box.createHorizontalGlue());
-        m_glosBrowse = new JButton();
+        JButton m_glosBrowse = new JButton();
         Mnemonics.setLocalizedText(m_glosBrowse, OStrings.PP_BUTTON_BROWSE_GL);
         bGlos.add(m_glosBrowse);
-        m_glosRootField = new JTextField();
+        final JTextField m_glosRootField = new JTextField();
         dirsBox.add(bGlos);
         dirsBox.add(m_glosRootField);
 
-        m_tmRootLabel = new JLabel();
+        JLabel m_tmRootLabel = new JLabel();
         Mnemonics.setLocalizedText(m_tmRootLabel, OStrings.PP_TM_ROOT);
         Box bTM = Box.createHorizontalBox();
         bTM.setBorder(emptyBorder);
         bTM.add(m_tmRootLabel);
         bTM.add(Box.createHorizontalGlue());
-        m_tmBrowse = new JButton();
+        JButton m_tmBrowse = new JButton();
         Mnemonics.setLocalizedText(m_tmBrowse, OStrings.PP_BUTTON_BROWSE_TM);
         bTM.add(m_tmBrowse);
-        m_tmRootField = new JTextField();
+        final JTextField m_tmRootField = new JTextField();
         dirsBox.add(bTM);
         dirsBox.add(m_tmRootField);
         
@@ -241,9 +246,9 @@ public class ProjectPropertiesDialog extends JDialog
         
         getContentPane().add(centerBox, "Center");                                      // NOI18N
 
-        m_okButton = new JButton();
+        JButton m_okButton = new JButton();
         Mnemonics.setLocalizedText(m_okButton, OStrings.PP_BUTTON_OK);
-        m_cancelButton = new JButton();
+        JButton m_cancelButton = new JButton();
         Mnemonics.setLocalizedText(m_cancelButton, OStrings.PP_BUTTON_CANCEL);
         
         Box southBox = Box.createHorizontalBox();
@@ -260,7 +265,9 @@ public class ProjectPropertiesDialog extends JDialog
         {
             public void actionPerformed(ActionEvent e)
             {
-                doOK();
+                doOK(m_sourceLocaleField, m_targetLocaleField, 
+                        m_sentenceSegmentingCheckBox, 
+                        m_srcRootField, m_locRootField, m_glosRootField, m_tmRootField);
             }
         });
 
@@ -276,8 +283,7 @@ public class ProjectPropertiesDialog extends JDialog
         {
             public void actionPerformed(ActionEvent e)
             {
-                m_browseTarget = 1;
-                doBrowseDirectoy();
+                doBrowseDirectoy(1, m_srcRootField);
             }
         });
 
@@ -285,8 +291,7 @@ public class ProjectPropertiesDialog extends JDialog
         {
             public void actionPerformed(ActionEvent e)
             {
-                m_browseTarget = 2;
-                doBrowseDirectoy();
+                doBrowseDirectoy(2, m_locRootField);
             }
         });
 
@@ -294,8 +299,7 @@ public class ProjectPropertiesDialog extends JDialog
         {
             public void actionPerformed(ActionEvent e)
             {
-                m_browseTarget = 3;
-                doBrowseDirectoy();
+                doBrowseDirectoy(3, m_glosRootField);
             }
         });
 
@@ -303,10 +307,19 @@ public class ProjectPropertiesDialog extends JDialog
         {
             public void actionPerformed(ActionEvent e)
             {
-                m_browseTarget = 4;
-                doBrowseDirectoy();
+                doBrowseDirectoy(4, m_tmRootField);
             }
         });
+        
+        final JDialog self = this;
+        m_sentenceSegmentingButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                new SegmentationCustomizer(self).setVisible(true);
+            }
+        }
+        );
 
         // if no project file specified, ask user to create one
         if (projFileName == null)
@@ -320,7 +333,7 @@ public class ProjectPropertiesDialog extends JDialog
             label = OStrings.PP_SAVE_PROJECT_FILE;
             ndc.setDialogTitle(label);
 
-            String curDir = PreferenceManager.pref.getPreference(OConsts.PREF_CUR_DIR);
+            String curDir = Preferences.getPreference(Preferences.CURRENT_FOLDER);
             if (curDir != null)
             {
                 File dir = new File(curDir);
@@ -338,8 +351,8 @@ public class ProjectPropertiesDialog extends JDialog
             }
             projectProperties.setProjectRoot(ndc.getSelectedFile().getAbsolutePath()
                         + File.separator);
-            projectProperties.setProjectFile(projectProperties.getProjectRoot() + OConsts.PROJ_FILENAME);
-            PreferenceManager.pref.setPreference(OConsts.PREF_CUR_DIR,
+            projectProperties.setProjectFile(projectProperties.getProjectRoot() + OConsts.FILE_PROJECT);
+            Preferences.setPreference(Preferences.CURRENT_FOLDER,
                         ndc.getSelectedFile().getParent());
             projectProperties.setProjectName(projectProperties.getProjectFile().substring(projectProperties.getProjectRoot().length()));
             projectProperties.setSourceRoot(projectProperties.getProjectRoot() + OConsts.DEFAULT_SRC
@@ -396,7 +409,7 @@ public class ProjectPropertiesDialog extends JDialog
                 break;
         }
         
-        updateUIText();
+        updateUIText(m_messageArea);
         
         pack();
         
@@ -407,10 +420,16 @@ public class ProjectPropertiesDialog extends JDialog
         setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
     }
 
-    private void doBrowseDirectoy()
+    /**
+     * Browses for the directory.
+     * 
+     * @param browseTarget customizes the messages depening on what is browsed for
+     * @param field text field to write browsed folder to
+     */
+    private void doBrowseDirectoy(int browseTarget, JTextField field)
     {
         String title;                                                       // NOI18N
-        switch (m_browseTarget)
+        switch (browseTarget)
         {
             case 1:
                 title = OStrings.PP_BROWSE_TITLE_SOURCE;
@@ -438,27 +457,27 @@ public class ProjectPropertiesDialog extends JDialog
         browser.setDialogTitle(title);
         browser.setFileSelectionMode(OmegaTFileChooser.DIRECTORIES_ONLY);
         String curDir = "";                                                     // NOI18N
-        switch (m_browseTarget)
+        switch (browseTarget)
         {
             case 1:
-                curDir = PreferenceManager.pref.getPreference(OConsts.PREF_SRC_DIR);
+                curDir = Preferences.getPreference(Preferences.SOURCE_FOLDER);
                 break;
 
             case 2:
-                curDir = PreferenceManager.pref.getPreference(OConsts.PREF_LOC_DIR);
+                curDir = Preferences.getPreference(Preferences.TARGET_FOLDER);
                 break;
 
             case 3:
-                curDir = PreferenceManager.pref.getPreference(OConsts.PREF_GLOS_DIR);
+                curDir = Preferences.getPreference(Preferences.GLOSSARY_FOLDER);
                 break;
 
             case 4:
-                curDir = PreferenceManager.pref.getPreference(OConsts.PREF_TM_DIR);
+                curDir = Preferences.getPreference(Preferences.TM_FOLDER);
                 break;
         }
 
         if (curDir.equals(""))                                                  // NOI18N
-            curDir = PreferenceManager.pref.getPreference(OConsts.PREF_CUR_DIR);
+            curDir = Preferences.getPreference(Preferences.CURRENT_FOLDER);
 
         if (!curDir.equals(""))                                         // NOI18N
         {
@@ -476,52 +495,60 @@ public class ProjectPropertiesDialog extends JDialog
 
         str = dir.getAbsolutePath() + File.separator;
         // reset appropriate path - store preferred directory
-        switch (m_browseTarget)
+        switch (browseTarget)
         {
             case 1:
-                PreferenceManager.pref.setPreference(OConsts.PREF_SRC_DIR,
+                Preferences.setPreference(Preferences.SOURCE_FOLDER,
                         browser.getSelectedFile().getParent());
                 projectProperties.setSourceRoot(str);
-                m_srcRootField.setText(projectProperties.getSourceRoot());
+                field.setText(projectProperties.getSourceRoot());
                 if( new File(projectProperties.getSourceRoot()).exists() &&
                         new File(projectProperties.getSourceRoot()).isDirectory() )
-                    m_srcRootField.setForeground(java.awt.SystemColor.textText);
+                    field.setForeground(java.awt.SystemColor.textText);
                 break;
 
             case 2:
-                PreferenceManager.pref.setPreference(OConsts.PREF_LOC_DIR,
+                Preferences.setPreference(Preferences.TARGET_FOLDER,
                         browser.getSelectedFile().getParent());
                 projectProperties.setLocRoot(str);
-                m_locRootField.setText(projectProperties.getLocRoot());
+                field.setText(projectProperties.getLocRoot());
                 if( new File(projectProperties.getLocRoot()).exists() &&
                         new File(projectProperties.getLocRoot()).isDirectory() )
-                m_locRootField.setForeground(java.awt.SystemColor.textText);
+                    field.setForeground(java.awt.SystemColor.textText);
                 break;
 
             case 3:
-                PreferenceManager.pref.setPreference(OConsts.PREF_GLOS_DIR,
+                Preferences.setPreference(Preferences.GLOSSARY_FOLDER,
                         browser.getSelectedFile().getParent());
                 projectProperties.setGlossaryRoot(str);
-                m_glosRootField.setText(projectProperties.getGlossaryRoot());
+                field.setText(projectProperties.getGlossaryRoot());
                 if( new File(projectProperties.getGlossaryRoot()).exists() &&
                         new File(projectProperties.getGlossaryRoot()).isDirectory() )
-                m_glosRootField.setForeground(java.awt.SystemColor.textText);
+                    field.setForeground(java.awt.SystemColor.textText);
                 break;
 
             case 4:
-                PreferenceManager.pref.setPreference(OConsts.PREF_TM_DIR,
+                Preferences.setPreference(Preferences.TM_FOLDER,
                         browser.getSelectedFile().getParent());
                 projectProperties.setTMRoot(str);
-                m_tmRootField.setText(projectProperties.getTMRoot());
+                field.setText(projectProperties.getTMRoot());
                 if( new File(projectProperties.getTMRoot()).exists() &&
                         new File(projectProperties.getTMRoot()).isDirectory() )
-                m_tmRootField.setForeground(java.awt.SystemColor.textText);
+                    field.setForeground(java.awt.SystemColor.textText);
                 break;
 
         }
     }
 
-    private void doOK()
+    private void doOK(
+            JComboBox m_sourceLocaleField, 
+            JComboBox m_targetLocaleField,
+            JCheckBox m_sentenceSegmentingCheckBox,
+            JTextField m_srcRootField,
+            JTextField m_locRootField,
+            JTextField m_glosRootField,
+            JTextField m_tmRootField
+            )
     {
         if( !projectProperties.verifySingleLangCode(m_sourceLocaleField.getSelectedItem().toString()) )
         {
@@ -602,7 +629,6 @@ public class ProjectPropertiesDialog extends JDialog
 
         m_dialogCancelled = false;
         setVisible(false);
-        m_browseTarget = 0;
     }
 
     private void doCancel()
@@ -611,7 +637,7 @@ public class ProjectPropertiesDialog extends JDialog
         setVisible(false);
     }
 
-    private void updateUIText()
+    private void updateUIText(JTextArea m_messageArea)
     {
         switch( dialogType )
         {
@@ -635,37 +661,6 @@ public class ProjectPropertiesDialog extends JDialog
      */
     public boolean dialogCancelled()    { return m_dialogCancelled; }
     private boolean     m_dialogCancelled;
-
-    private int             m_browseTarget;
-
-    private JTextArea   m_messageArea;
-
-    private JLabel      m_srcRootLabel;
-    private JTextField  m_srcRootField;
-    private JButton     m_srcBrowse;
-
-    private JLabel      m_locRootLabel;
-    private JTextField  m_locRootField;
-    private JButton     m_locBrowse;
-
-    private JLabel      m_glosRootLabel;
-    private JTextField  m_glosRootField;
-    private JButton     m_glosBrowse;
-
-    private JLabel      m_tmRootLabel;
-    private JTextField  m_tmRootField;
-    private JButton     m_tmBrowse;
-
-    private JLabel      m_sourceLocaleLabel;
-    private JComboBox   m_sourceLocaleField;
-
-    private JLabel      m_targetLocaleLabel;
-    private JComboBox   m_targetLocaleField;
-
-    private JCheckBox   m_sentenceSegmentingCheckBox;
-    
-    private JButton     m_okButton;
-    private JButton     m_cancelButton;
 }
 
 

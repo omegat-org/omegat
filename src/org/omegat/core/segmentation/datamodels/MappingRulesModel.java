@@ -26,6 +26,7 @@ import javax.swing.table.AbstractTableModel;
 
 import org.omegat.core.segmentation.MapRule;
 import org.omegat.core.segmentation.SRX;
+import org.omegat.util.OStrings;
 
 /**
  *
@@ -68,7 +69,9 @@ public class MappingRulesModel extends AbstractTableModel
 
     /** The names of table columns */
     private static String[] COLUMN_NAMES = 
-            new String[] {"Language Name", "Language Pattern"};
+            new String[] {
+                OStrings.getString("CORE_SRX_TABLE_HEADER_Language_Name"), 
+                OStrings.getString("CORE_SRX_TABLE_HEADER_Language_Pattern")};
             
     public String getColumnName(int column)
     {
@@ -103,7 +106,7 @@ public class MappingRulesModel extends AbstractTableModel
     public int addRow()
     {
         int rows = srx.getMappingRules().size();
-        srx.getMappingRules().add(new MapRule("", "", new ArrayList()));
+        srx.getMappingRules().add(new MapRule("", "", new ArrayList()));        // NOI18N
         fireTableRowsInserted(rows, rows);
         return rows;
     }

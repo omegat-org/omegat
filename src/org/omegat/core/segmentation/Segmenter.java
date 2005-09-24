@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
-import org.omegat.util.PreferenceManager;
+import org.omegat.util.Preferences;
 
 /**
  * The class that actually segments the text.
@@ -66,7 +66,7 @@ public final class Segmenter
      */
     public static List segment(String paragraph)
     {
-        Language srclang = new Language(PreferenceManager.pref.getPreference(OConsts.PREF_SOURCELOCALE));
+        Language srclang = new Language(Preferences.getPreference(Preferences.SOURCE_LOCALE));
         List rules = SRX.getSRX().lookupRulesForLanguage(srclang);
 
         // determining the applicable break positions
@@ -110,7 +110,7 @@ public final class Segmenter
         return segments;
     }
     
-    private static Pattern DEFAULT_BEFOREBREAK_PATTERN = Pattern.compile(".");
+    private static Pattern DEFAULT_BEFOREBREAK_PATTERN = Pattern.compile(".");  // NOI18N
     
     /**
      * Returns the places of possible breaks between segments.

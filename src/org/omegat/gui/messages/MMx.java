@@ -99,7 +99,7 @@ class MMx implements Runnable
 				m_tf.displayError(m_msg, m_throw);
 				break;
 			case 10:
-				m_tf.doCompareN(0);
+				m_tf.updateFuzzyInfo(0);
 				break;
 			default:
 				// do nothing

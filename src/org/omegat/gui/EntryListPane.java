@@ -29,7 +29,7 @@ import javax.swing.JTextPane;
 
 import org.omegat.gui.messages.MessageRelay;
 import org.omegat.util.OConsts;
-import org.omegat.util.PreferenceManager;
+import org.omegat.util.Preferences;
 import org.omegat.gui.main.MainInterface;
 
 /** 
@@ -105,14 +105,14 @@ class EntryListPane extends JTextPane
 
 	public void finalize()
 	{
-		String srcFont = PreferenceManager.pref.getPreference(OConsts.TF_SRC_FONT_NAME);
+		String srcFont = Preferences.getPreference(OConsts.TF_SRC_FONT_NAME);
 		if (!srcFont.equals(""))										// NOI18N
 		{
 			int fontsize;
 			try 
 			{
 				fontsize = Integer.valueOf(
-                        PreferenceManager.pref.getPreference(OConsts.TF_SRC_FONT_SIZE)).
+                        Preferences.getPreference(OConsts.TF_SRC_FONT_SIZE)).
                         intValue();
 			}
 			catch (NumberFormatException nfe) { fontsize = 12; }

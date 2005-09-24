@@ -28,7 +28,8 @@ import javax.swing.JFileChooser;
 
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.PreferenceManager;
+import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
 
 /**
  * Basic File Chooser for OmegaT, showing the icon for OmegaT projects
@@ -46,7 +47,7 @@ public class OmegaTFileChooser extends JFileChooser
      */
     public OmegaTFileChooser()
     {
-        super(PreferenceManager.pref.getPreference(OConsts.PREF_CUR_DIR));
+        super(Preferences.getPreference(Preferences.CURRENT_FOLDER));
     }
     /**
      * Constructs an <code>OmegaTFileChooser</code> using the given path.
@@ -57,7 +58,8 @@ public class OmegaTFileChooser extends JFileChooser
     }
     
     /** OmegaT project icon */
-    private static ImageIcon omegatIcon = new ImageIcon("images" + File.separator + "OmegaT_small.gif");	// NOI18N
+    private static ImageIcon omegatIcon = new ImageIcon(
+            StaticUtils.installDir()+ File.separator + "images" + File.separator + "OmegaT_small.gif");	// NOI18N
 
     /** Redefines the icon for OmegaT projects. */
     public Icon getIcon(File f)
@@ -82,7 +84,7 @@ public class OmegaTFileChooser extends JFileChooser
 		if( f==null || f.getName().length()==0 )
 			return false;
 		File projFile = new File(f.getAbsolutePath() + File.separator + 
-		    OConsts.PROJ_FILENAME);
+		    OConsts.FILE_PROJECT);
 		File internal = new File(f.getAbsolutePath() + File.separator + 
 		    OConsts.DEFAULT_INTERNAL);
         return projFile.exists() && internal.exists() && internal.isDirectory();

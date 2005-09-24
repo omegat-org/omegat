@@ -262,7 +262,7 @@ public class StaticUtils
             case '"':
                 return "&quot;";	// NOI18N
             default:
-                return "" + c;      // NOI18N
+                return String.valueOf(c);
         }
 	}
     
@@ -317,5 +317,78 @@ public class StaticUtils
         
         System.out.println(s);
     }
+
+    /** 
+     * Extracts an element of a class path.
+     * 
+     * @param fullcp the classpath
+     * @param posInsideElement position inside a class path string, that fits inside some classpath element.
+     */
+    private static String classPathElement(String fullcp, int posInsideElement)
+    {
+        // semicolon before the path to the Jar
+        int semicolon1 = fullcp.lastIndexOf(File.pathSeparatorChar, posInsideElement);
+        // semicolon after the path to the Jar
+        int semicolon2 = fullcp.indexOf(File.pathSeparatorChar, posInsideElement);
+        if( semicolon1<0 )
+            semicolon1 = -1;
+        if( semicolon2<0 )
+            semicolon2 = fullcp.length();
+        return fullcp.substring(semicolon1+1, semicolon2);
+    }
+
+    /** Trying to see if this ending is inside the classpath */
+    private static String tryThisClasspathElement(String cp, String ending)
+    {
+        try
+        {
+            int pos = cp.indexOf(ending);
+            if( pos>=0 )
+            {
+                String path = classPathElement(cp, pos);
+                path = path.substring(0, path.indexOf(ending));
+                return path;
+            }
+        }
+        catch( Exception e )
+        {
+            // should never happen, but just in case ;-)
+        }
+        return null;
+    }
+    
+    /** Caching install dir */
+    private static String INSTALLDIR = null;
+    
+    /**
+     * Returns OmegaT installation directory.
+     * The code uses this method to look up for OmegaT documentation.
+     */
+    public static String installDir()
+    {
+        if( INSTALLDIR!=null )
+            return INSTALLDIR;
+        
+        String cp = System.getProperty("java.class.path");                      // NOI18N
+        String path;
+        
+        // running from a Jar ?
+        path = tryThisClasspathElement(cp, OConsts.APPLICATION_JAR);
+        
+        // again missed, we're not running from Jar, most probably debug mode
+        if( path==null )
+            path = tryThisClasspathElement(cp, OConsts.DEBUG_CLASSPATH);
+
+        // WTF?!! using current directory
+        if( path==null )
+            path = ".";                                                         // NOI18N
+
+        // absolutizing the path
+        path = new File(path).getAbsolutePath();
+        
+        INSTALLDIR = path;
+        return path;
+    }
+    
 
 }

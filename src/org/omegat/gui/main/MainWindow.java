@@ -26,9 +26,7 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -68,7 +66,7 @@ import org.omegat.gui.dialogs.FontSelectionDialog;
 import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.PreferenceManager;
+import org.omegat.util.Preferences;
 import org.omegat.util.RequestPacket;
 
 /**
@@ -154,8 +152,8 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 
 		enableEvents(0);
 
-		String fontName = PreferenceManager.pref.getPreferenceDefault(OConsts.TF_SRC_FONT_NAME, OConsts.TF_FONT_DEFAULT);
-		String fontSize = PreferenceManager.pref.getPreferenceDefault(OConsts.TF_SRC_FONT_SIZE, OConsts.TF_FONT_SIZE_DEFAULT);
+		String fontName = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_NAME, OConsts.TF_FONT_DEFAULT);
+		String fontSize = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_SIZE, OConsts.TF_FONT_SIZE_DEFAULT);
         int fontSizeInt = 12;
 		try 
         {
@@ -182,7 +180,7 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
     /** Updates menu checkboxes from preferences on start */
 	private void updateCheckboxesOnStart()
 	{
-		String tab = PreferenceManager.pref.getPreference(OConsts.PREF_TAB);
+		String tab = Preferences.getPreference(Preferences.USE_TAB_TO_ADVANCE);
 		if (tab != null && tab.equals("true"))								// NOI18N
 		{
 			optionsTabAdvanceCheckBoxMenuItem.setSelected(true);
@@ -205,13 +203,13 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
         // main window
         try 
         {
-            String dx = PreferenceManager.pref.getPreference(OConsts.PREF_DISPLAY_X);
-            String dy = PreferenceManager.pref.getPreference(OConsts.PREF_DISPLAY_Y);
+            String dx = Preferences.getPreference(Preferences.MAINWINDOW_X);
+            String dy = Preferences.getPreference(Preferences.MAINWINDOW_Y);
             int x = Integer.parseInt(dx);
             int y = Integer.parseInt(dy);
 			setLocation(x, y);
-            String dw = PreferenceManager.pref.getPreference(OConsts.PREF_DISPLAY_W);
-            String dh = PreferenceManager.pref.getPreference(OConsts.PREF_DISPLAY_H);
+            String dw = Preferences.getPreference(Preferences.MAINWINDOW_WIDTH);
+            String dh = Preferences.getPreference(Preferences.MAINWINDOW_HEIGHT);
             int w = Integer.parseInt(dw);
             int h = Integer.parseInt(dh);
 			setSize(w, h);
@@ -238,13 +236,13 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
         // match/glossary window
         try
         {
-            String dw = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_W);
-            String dh = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_H);
+            String dw = Preferences.getPreference(Preferences.MATCHWINDOW_WIDTH);
+            String dh = Preferences.getPreference(Preferences.MATCHWINDOW_HEIGHT);
             int w = Integer.parseInt(dw);
 			int h = Integer.parseInt(dh);
 			matchWindow.setSize(w, h);
-            String dx = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_X);
-            String dy = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_Y);
+            String dx = Preferences.getPreference(Preferences.MATCHWINDOW_X);
+            String dy = Preferences.getPreference(Preferences.MATCHWINDOW_Y);
             int x = Integer.parseInt(dx);
             int y = Integer.parseInt(dy);
 			matchWindow.setLocation(x, y);
@@ -272,7 +270,7 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
         // match/glossary window divider
         try
         {
-            String divs = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_DIVIDER);
+            String divs = Preferences.getPreference(Preferences.MATCHWINDOW_DIVIDER);
             int div = Integer.parseInt(divs);
 			matchWindow.setDividerLocation(div);
         }
@@ -290,12 +288,14 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 		try
 		{
             String lang = HelpFrame.detectDocLanguage();
-            String filepath = System.getProperty("user.dir")
+            String filepath = 
+                    StaticUtils.installDir()
                     + File.separator + OConsts.HELP_DIR + File.separator 
-                    + lang + File.separator + "InstantStart.html";
+                    + lang + File.separator 
+                    + OConsts.HELP_INSTANT_START;
             JTextPane instantArticlePane = new JTextPane();
             instantArticlePane.setEditable(false);
-			instantArticlePane.setPage("file:///"+filepath);
+			instantArticlePane.setPage("file:///"+filepath);                    // NOI18N
             mainScroller.setViewportView(instantArticlePane);
         }
 		catch (IOException e)
@@ -306,26 +306,17 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
     
 	private void storeScreenLayout()
 	{
-		PreferenceManager.pref.setPreference(OConsts.PREF_DISPLAY_W, 
-                String.valueOf(getWidth()));
-		PreferenceManager.pref.setPreference(OConsts.PREF_DISPLAY_H, 
-                String.valueOf(getHeight()));
-		PreferenceManager.pref.setPreference(OConsts.PREF_DISPLAY_X, 
-                String.valueOf(getX()));
-		PreferenceManager.pref.setPreference(OConsts.PREF_DISPLAY_Y,
-                String.valueOf(getY()));
+		Preferences.setPreference(Preferences.MAINWINDOW_WIDTH, getWidth());
+		Preferences.setPreference(Preferences.MAINWINDOW_HEIGHT, getHeight());
+		Preferences.setPreference(Preferences.MAINWINDOW_X, getX());
+		Preferences.setPreference(Preferences.MAINWINDOW_Y, getY());
         
-        PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_DIVIDER, 
-                String.valueOf(matchWindow.getDividerLocation()));
+        Preferences.setPreference(Preferences.MATCHWINDOW_DIVIDER, matchWindow.getDividerLocation());
         
-        PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_W, 
-                String.valueOf(matchWindow.getWidth()));
-        PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_H, 
-                String.valueOf(matchWindow.getHeight()));
-        PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_X, 
-                String.valueOf(matchWindow.getX()));
-        PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_Y, 
-                String.valueOf(matchWindow.getY()));
+        Preferences.setPreference(Preferences.MATCHWINDOW_WIDTH, matchWindow.getWidth());
+        Preferences.setPreference(Preferences.MATCHWINDOW_HEIGHT, matchWindow.getHeight());
+        Preferences.setPreference(Preferences.MATCHWINDOW_X, matchWindow.getX());
+        Preferences.setPreference(Preferences.MATCHWINDOW_Y, matchWindow.getY());
 	}
 
     ///////////////////////////////////////////////////////////////
@@ -342,7 +333,7 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 		}
 
 		storeScreenLayout();
-		PreferenceManager.pref.save();
+		Preferences.save();
 
 		CommandThread.core.signalStop();
 		for (int i=0; i<25; i++)
@@ -511,7 +502,7 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 			// remove current text
 			// build local offsets
 			int start = m_segmentStartOffset + m_sourceDisplayLength +
-				OStrings.TF_CUR_SEGMENT_START.length() + 1;
+				OStrings.TF_CUR_SEGMENT_START.length();
 			int end = xlPane.getText().length() - m_segmentEndInset -
 				OStrings.TF_CUR_SEGMENT_END.length();
 
@@ -520,14 +511,6 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 			xlPane.select(start, end);
 			xlPane.replaceSelection(text);
 		}
-	}
-
-	public void doCompareN(int nearNum)
-	{
-		if (!m_projectLoaded)
-			return;
-		
-		updateFuzzyInfo(nearNum);
 	}
 
     /** Closes the project. */
@@ -603,8 +586,8 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
             
             matchWindow.getMatchGlossaryPane().setFont(m_font);
             
-            PreferenceManager.pref.setPreference(OConsts.TF_SRC_FONT_NAME, m_font.getName());
-            PreferenceManager.pref.setPreference(OConsts.TF_SRC_FONT_SIZE, String.valueOf(m_font.getSize()));
+            Preferences.setPreference(OConsts.TF_SRC_FONT_NAME, m_font.getName());
+            Preferences.setPreference(OConsts.TF_SRC_FONT_SIZE, m_font.getSize());
 			activateEntry();
 		}
 	}
@@ -852,9 +835,10 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 	///////////////////////////////////////////////////////////////
 	// display oriented code
 
-	// display fuzzy matching info if it's available
-	// don't call this directly - should only be called through doCompareN
-    private void updateFuzzyInfo(int nearNum)
+    /**
+     * Displays fuzzy matching info if it's available.
+     */
+    public void updateFuzzyInfo(int nearNum)
 	{
 		if (!m_projectLoaded)
 			return;
@@ -868,6 +852,9 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 			matchWindow.getMatchGlossaryPane().updateMatchText();
 			return;
 		}
+        
+        if( nearNum>=nearList.size() )
+            return;
 		
 		m_curNear = (NearString) nearList.get(nearNum);
 		String str = null;
@@ -902,6 +889,34 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 		matchWindow.getMatchGlossaryPane().updateMatchText();
 		matchWindow.getMatchGlossaryPane().formatNearText(m_curNear.str.getSrcTokenList(), m_curNear.attr);
 	}
+    
+    /**
+     * Displays glossary terms for the current segment.
+     */
+    private void updateGlossaryInfo()
+    {
+		// add glossary terms and fuzzy match info to match window
+		StringEntry curEntry = m_curEntry.getStrEntry();
+		if (curEntry.getGlossaryEntries().size() > 0)
+		{
+			// TODO do something with glossary terms
+			m_glossaryLength = curEntry.getGlossaryEntries().size();
+			ListIterator li = curEntry.getGlossaryEntries().listIterator();
+			while (li.hasNext())
+			{
+				GlossaryEntry glos = (GlossaryEntry) li.next();
+				matchWindow.getMatchGlossaryPane().addGlosTerm(glos.getSrcText(), glos.getLocText(),
+						glos.getCommentText());
+			}
+		
+		}
+		else
+        {
+			m_glossaryLength = 0;
+        }
+        
+		matchWindow.getMatchGlossaryPane().updateGlossaryText();
+    }
 	
 	private void commitEntry()
 	{
@@ -912,9 +927,8 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 		// read current entry text and commit it to memory if it's changed
 		// clear out segment markers while we're at it
 
-		// +1 is for newline between source text and SEGMENT 
 		int start = m_segmentStartOffset + m_sourceDisplayLength + 
-					OStrings.TF_CUR_SEGMENT_START.length() + 1;
+					OStrings.TF_CUR_SEGMENT_START.length();
 		int end = xlPane.getText().length() - m_segmentEndInset - 
 					OStrings.TF_CUR_SEGMENT_END.length();
 		String s;
@@ -991,10 +1005,13 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
         xlPane.cancelUndo();
 	}
 
-	// activate current entry by displaying source text and imbedding
-	//	displaying text in markers
-	// move document focus to current entry
-	// make sure fuzzy info displayed if available and wanted
+    /**
+     * Activates the current entry by displaying source text and embedding
+     * displayed text in markers.
+     * <p>
+     * Also moves document focus to current entry,
+     * and makes sure fuzzy info displayed if available.
+     */
 	public void activateEntry() 
 	{
 		if (!m_projectLoaded)
@@ -1024,39 +1041,69 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 		m_segmentEndInset = paneLen - (m_segmentStartOffset + docSeg.length-2);
 
 		// get label tags
-		String startStr = "\n" + OStrings.TF_CUR_SEGMENT_START;					// NOI18N
+		String startStr = OStrings.TF_CUR_SEGMENT_START;
 		String endStr = OStrings.TF_CUR_SEGMENT_END;
 		if (m_segmentTagHasNumber)
 		{
 			// put entry number in first tag
-			int num = m_curEntryNum + 1;
-			int ones;
-			
-			// do it digit by digit - there's a better way (like sprintf)
-			//	but this works just fine
-			String disp = "";													// NOI18N
-			while (num > 0)
-			{
-				ones = num % 10;
-				num /= 10;
-				disp = ones + disp;
-			}
+			String num = String.valueOf(m_curEntryNum + 1);
 			int zero = startStr.lastIndexOf('0');
-			startStr = startStr.substring(0, zero-disp.length()+1) + 
-				disp + startStr.substring(zero+1);
+			startStr = startStr.substring(0, zero-num.length()+1) 
+                    + num + startStr.substring(zero+1);
 		}
 
 		MutableAttributeSet mattr;
 		// append to end of segment first because this operation is done
 		//	by reference to end of file which will change after insert
-		xlPane.select(paneLen-m_segmentEndInset, paneLen-m_segmentEndInset);
+        int inset = paneLen-m_segmentEndInset;
+		xlPane.select(inset, inset);
 		xlPane.replaceSelection(endStr);
-		xlPane.select(paneLen-m_segmentEndInset + 1, 
-				paneLen-m_segmentEndInset + endStr.length());
+		xlPane.select(inset+1, inset+endStr.length());
 		mattr = new SimpleAttributeSet();
 		StyleConstants.setBold(mattr, true);
 		xlPane.setCharacterAttributes(mattr, true);
+        
+        String translation = m_curEntry.getTranslation();
+        if( translation==null || translation.length()==0 )
+        {
+            translation=m_curEntry.getSrcText();
+            
+            // if WORKFLOW_OPTION "don't insert source text into translation segment" is set
+            // RFE "Option: not copy source text into target field"
+            //      http://sourceforge.net/support/tracker.php?aid=1075972
+            if( Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT) )
+            {
+                xlPane.select(m_segmentStartOffset, m_segmentStartOffset + translation.length());
+                xlPane.replaceSelection("");                                    // NOI18N
+                translation = "";                                               // NOI18N
+            }
 
+            // if WORKFLOW_OPTION "Insert best fuzzy match into target field" is set
+            // RFE "Option: Insert best match (80%+) into target field"
+            //      http://sourceforge.net/support/tracker.php?aid=1075976
+            if( Preferences.isPreference(Preferences.BEST_MATCH_INSERT) )
+            {
+                String percentage_s = Preferences.getPreferenceDefault(Preferences.BEST_MATCH_MINIMAL_SIMILARITY, Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT);
+                int percentage = Integer.parseInt(percentage_s);
+                List near = m_curEntry.getStrEntry().getNearListTranslated();
+                if( near.size()>0 )
+                {
+                    NearString thebest = (NearString)near.get(0);
+                    if( (100*thebest.score) >= percentage )
+                    {
+                        xlPane.select(m_segmentStartOffset, m_segmentStartOffset + translation.length());
+                        String toinsert = "";                                   // NOI18N
+                        if( !Preferences.isPreference(Preferences.BEST_MATCH_EXPLANATORY_TEXT) )
+                            toinsert += OStrings.getString("GUI_WORKFLOW_EXPLANATORY_TEXT")
+                                      + " ";                                    // NOI18N
+                        toinsert+=thebest.str.getTrans();
+                        xlPane.replaceSelection(toinsert);
+                    }
+                }
+            }
+            
+        }
+        
 		xlPane.select(m_segmentStartOffset, m_segmentStartOffset);
 		String insertText = srcText + startStr;
 		xlPane.replaceSelection(insertText);
@@ -1081,32 +1128,10 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 			updateTitle();
 		}
 		
-		// TODO set word counts
+		updateFuzzyInfo(0);
+        updateGlossaryInfo();
 
-		doCompareN(0);
-
-		// add glossary terms and fuzzy match info to match window
 		StringEntry curEntry = m_curEntry.getStrEntry();
-		if (curEntry.getGlossaryEntries().size() > 0)
-		{
-			// TODO do something with glossary terms
-			m_glossaryLength = curEntry.getGlossaryEntries().size();
-			ListIterator li = curEntry.getGlossaryEntries().listIterator();
-			while (li.hasNext())
-			{
-				GlossaryEntry glos = (GlossaryEntry) li.next();
-				matchWindow.getMatchGlossaryPane().addGlosTerm(glos.getSrcText(), glos.getLocText(),
-						glos.getCommentText());
-			}
-		
-		}
-		else
-        {
-			m_glossaryLength = 0;
-        }
-        
-		matchWindow.getMatchGlossaryPane().updateGlossaryText();
-
 		int nearLength = curEntry.getNearListTranslated().size();
 		
 		if (nearLength > 0 && m_glossaryLength > 0)
@@ -1188,6 +1213,12 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 		xlPane.cancelUndo();
 	}
 
+    /**
+     * Displays a warning message.
+     * 
+     * @param msg the message to show
+     * @param e exception occured. may be null
+     */
 	public void displayWarning(String msg, Throwable e)
 	{
 		setMessageText(msg);
@@ -1198,12 +1229,20 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
                 JOptionPane.WARNING_MESSAGE);
 	}
 
+    /**
+     * Displays an error message.
+     * 
+     * @param msg the message to show
+     * @param e exception occured. may be null
+     */
 	public void displayError(String msg, Throwable e)
 	{
 		setMessageText(msg);
-		String str = OStrings.TF_ERROR;
-		JOptionPane.showMessageDialog(this, msg + "\n" + e.toString(),			// NOI18N 
-					str, JOptionPane.ERROR_MESSAGE);
+        String fulltext = msg;
+        if( e!=null )
+            fulltext+= "\n" + e.toString();                                     // NOI18N
+		JOptionPane.showMessageDialog(this, fulltext, OStrings.TF_ERROR, 
+                JOptionPane.ERROR_MESSAGE);
 	}
 
     /**
@@ -1235,7 +1274,7 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 		{
 			// make sure we're not at start of segment
 			int start = m_segmentStartOffset + m_sourceDisplayLength +
-				OStrings.TF_CUR_SEGMENT_START.length() + 1;
+				OStrings.TF_CUR_SEGMENT_START.length();
        		int spos = xlPane.getSelectionStart();
     		int epos = xlPane.getSelectionEnd();
 			if( pos<=start && epos<=start && spos<=start )
@@ -1254,7 +1293,7 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 		int spos = xlPane.getSelectionStart();
 		int epos = xlPane.getSelectionEnd();
 		int start = m_segmentStartOffset + m_sourceDisplayLength +
-			OStrings.TF_CUR_SEGMENT_START.length() + 1;
+			OStrings.TF_CUR_SEGMENT_START.length();
 		// -1 for space before tag, -2 for newlines
 		int end = xlPane.getText().length() - m_segmentEndInset -
 			OStrings.TF_CUR_SEGMENT_END.length();
@@ -1435,7 +1474,6 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
         addWindowFocusListener(this);
         addWindowListener(this);
 
-        org.openide.awt.Mnemonics.setLocalizedText(statusLabel, " ");
         getContentPane().add(statusLabel, java.awt.BorderLayout.SOUTH);
 
         mainScroller.setBorder(null);
@@ -1846,6 +1884,12 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
     private final static int FOCUSING_TIME_DIFF = 500;
     
     /**
+     * To temporarily turn off this buggy focusing thing
+     * (useful when calling up dialogs)
+     */
+    private boolean turnAutofocusingOff = false;
+    
+    /**
      * Informs Main Window that Match/Glossary window got focus.
      * <p>
      * In Implementation of RFE 
@@ -1853,7 +1897,8 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
      */
     public void matchWindowGotFocus()
     {
-        toFront();
+        if( !turnAutofocusingOff )
+            toFront();
     }
     
     /**
@@ -1864,13 +1909,16 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
      */
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowGainedFocus
     {//GEN-HEADEREND:event_formWindowGainedFocus
-        long currTime = new Date().getTime();
-        long diffTime = currTime-lastManualFocusingTime;
-        if( diffTime>FOCUSING_TIME_DIFF )
+        if( !turnAutofocusingOff )
         {
-            lastManualFocusingTime = currTime;
-            matchWindow.toFront();
-            toFront();
+            long currTime = new Date().getTime();
+            long diffTime = currTime-lastManualFocusingTime;
+            if( diffTime>FOCUSING_TIME_DIFF )
+            {
+                lastManualFocusingTime = currTime;
+                matchWindow.toFront();
+                toFront();
+            }
         }
     }//GEN-LAST:event_formWindowGainedFocus
 
@@ -1886,13 +1934,15 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 
     private void projectEditMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectEditMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectEditMenuItemActionPerformed
+        turnAutofocusingOff = true;
         doEditProject();
+        turnAutofocusingOff = false;
     }//GEN-LAST:event_projectEditMenuItemActionPerformed
 
     private void optionsTabAdvanceCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsTabAdvanceCheckBoxMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsTabAdvanceCheckBoxMenuItemActionPerformed
 
-        PreferenceManager.pref.setPreference(OConsts.PREF_TAB, 
+        Preferences.setPreference(Preferences.USE_TAB_TO_ADVANCE, 
                 optionsTabAdvanceCheckBoxMenuItem.isSelected());
         if( optionsTabAdvanceCheckBoxMenuItem.isSelected() )
 			m_advancer = KeyEvent.VK_TAB;
@@ -1924,27 +1974,27 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 
     private void editSelectFuzzy5MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy5MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy5MenuItemActionPerformed
-        doCompareN(4);
+        updateFuzzyInfo(4);
     }//GEN-LAST:event_editSelectFuzzy5MenuItemActionPerformed
 
     private void editSelectFuzzy4MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy4MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy4MenuItemActionPerformed
-        doCompareN(3);
+        updateFuzzyInfo(3);
     }//GEN-LAST:event_editSelectFuzzy4MenuItemActionPerformed
 
     private void editSelectFuzzy3MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy3MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy3MenuItemActionPerformed
-        doCompareN(2);
+        updateFuzzyInfo(2);
     }//GEN-LAST:event_editSelectFuzzy3MenuItemActionPerformed
 
     private void editSelectFuzzy2MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy2MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy2MenuItemActionPerformed
-        doCompareN(1);
+        updateFuzzyInfo(1);
     }//GEN-LAST:event_editSelectFuzzy2MenuItemActionPerformed
 
     private void editSelectFuzzy1MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy1MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy1MenuItemActionPerformed
-        doCompareN(0);
+        updateFuzzyInfo(0);
     }//GEN-LAST:event_editSelectFuzzy1MenuItemActionPerformed
 
     private void editFindInProjectMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editFindInProjectMenuItemActionPerformed
@@ -2050,12 +2100,16 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 
     private void projectOpenMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectOpenMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectOpenMenuItemActionPerformed
+        turnAutofocusingOff = true;
         doLoadProject();
+        turnAutofocusingOff = false;
     }//GEN-LAST:event_projectOpenMenuItemActionPerformed
 
     private void projectNewMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectNewMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectNewMenuItemActionPerformed
+        turnAutofocusingOff = true;
         CommandThread.core.createProject();
+        turnAutofocusingOff = false;
     }//GEN-LAST:event_projectNewMenuItemActionPerformed
 
     private void projectExitMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectExitMenuItemActionPerformed

@@ -2,7 +2,9 @@
 
 <Form version="1.0" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
-    <Property name="title" type="java.lang.String" value="Segmentation Setup"/>
+    <Property name="title" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+      <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_SEGMENTATION_TITLE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="0"/>
@@ -35,7 +37,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="okButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="OK"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="BUTTON_OK" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="okButtonActionPerformed"/>
@@ -43,7 +47,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="cancelButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cancel"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="BUTTON_CANCEL" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelButtonActionPerformed"/>
@@ -87,7 +93,9 @@
         </Container>
         <Component class="javax.swing.JButton" name="ruleUpButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&amp;Move Up"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_SEGMENTATION_BUTTON_UP_1" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -101,7 +109,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="ruleDeleteButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Dele&amp;te"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_SEGMENTATION_BUTTON_DELETE_1" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -115,7 +125,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="ruleInsertButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="I&amp;nsert"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_SEGMENTATION_BUTTON_INSERT_1" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -129,7 +141,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="ruleDownButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Mo&amp;ve Down"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_SEGMENTATION_BUTTON_DOWN_1" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -184,7 +198,9 @@
         </Container>
         <Component class="javax.swing.JButton" name="mapUpButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Move &amp;Up"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_SEGMENTATION_BUTTON_UP_2" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -198,7 +214,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="mapDeleteButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="D&amp;elete"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_SEGMENTATION_BUTTON_DELETE_2" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -212,7 +230,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="mapInsertButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&amp;Insert"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_SEGMENTATION_BUTTON_INSERT_2" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mapInsertButtonActionPerformed"/>
@@ -225,7 +245,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="mapDownButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Move &amp;Down"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_SEGMENTATION_BUTTON_DOWN_2" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -258,7 +280,9 @@
         <Component class="javax.swing.JCheckBox" name="segmentSubflowsCheckBox">
           <Properties>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Segment the subflows (footnotes, images alt text)"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_SEGMENTATION_OPTION_Segment_Subflows" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="SRXOptionsModel.getSegmentSubflowsModel(SRX.getSRX())" type="code"/>
             </Property>
@@ -271,7 +295,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="terminalThingDescLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Segments should include the following formatting that falls on the terminal segment boundary:"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_SEGMENTATION_OPTION_Include_Terminal_Formatting" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -281,8 +307,12 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="includeStartingTagsCheckBox">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Starting tags"/>
-            <Property name="toolTipText" type="java.lang.String" value="Unchecked means that the starting formatting tag will be included into the following segment."/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_SEGMENTATION_OPTION_Include_Starting_tags" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_SEGMENTATION_TIP_Include_Starting_Tags" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="SRXOptionsModel.getIncludeStartingTagsModel(SRX.getSRX())" type="code"/>
             </Property>
@@ -296,7 +326,9 @@
         <Component class="javax.swing.JCheckBox" name="includeEndingTagsCheckBox">
           <Properties>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Ending tags"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_SEGMENTATION_OPTION_Include_Ending_Tags" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="SRXOptionsModel.getIncludeEndingTagsModel(SRX.getSRX())" type="code"/>
             </Property>
@@ -309,7 +341,9 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="includeIsolatedTagsCheckBox">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Isolated tags"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_SEGMENTATION_OPTION_Include_Isolated_Tags" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="SRXOptionsModel.getIncludeIsolatedTagsModel(SRX.getSRX())" type="code"/>
             </Property>

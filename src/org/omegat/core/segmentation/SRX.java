@@ -26,9 +26,11 @@ import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -49,7 +51,7 @@ public class SRX implements Serializable
 {
     
     private static SRX srx = null;
-    private static File configFile=new File("segmentation.conf");
+    private static File configFile=new File("segmentation.conf");               // NOI18N
             
     /**
      * SRX factory method.
@@ -94,9 +96,12 @@ public class SRX implements Serializable
         }
         catch( IOException ioe )
         {
-            StaticUtils.log("Error saving segmentation rules configuration! :\n" + ioe);
+            String message = 
+                    MessageFormat.format(OStrings.getString("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG"),
+                    new Object[] {ioe} );
+            StaticUtils.log(message);
             JOptionPane.showMessageDialog(null, 
-                    "Error saving segmentation rules configuration! :\n" + ioe,
+                    message,
                     OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -110,6 +115,7 @@ public class SRX implements Serializable
         SRX res;
         try
         {
+            
             MyExceptionListener myel = new MyExceptionListener();
             XMLDecoder xmldec = new XMLDecoder(new FileInputStream(configFile), null, myel);
             res = (SRX)xmldec.readObject();
@@ -125,11 +131,16 @@ public class SRX implements Serializable
                     sb.append(exceptions.get(i));
                     sb.append("\n");                                            // NOI18N
                 }
-                throw new Exception("Exceptions occured while loading segmentation rules:\n"+sb.toString()); // NOI18N
+                throw new Exception(
+                        MessageFormat.format("Exceptions occured while loading segmentation rules:\n{0}",  // NOI18N
+                        new Object[] {sb.toString()} ) );
             }
         }
         catch( Exception e )
         {
+            // silently ignoring FNF
+            if( !(e instanceof FileNotFoundException) )
+                StaticUtils.log(e.toString());
             res = new SRX();
             res.init();
         }
@@ -174,22 +185,26 @@ public class SRX implements Serializable
         List srules = new ArrayList();
         
         // exceptions first
-        srules.add(new Rule(false, "Dr\\.", "\\s"));
-        srules.add(new Rule(false, "U\\.K\\.", "\\s"));
-        srules.add(new Rule(false, "M\\.", "\\s"));
-        srules.add(new Rule(false, "Mr\\.", "\\s"));
-        srules.add(new Rule(false, "Mrs\\.", "\\s"));
-        srules.add(new Rule(false, "Ms\\.", "\\s"));
-        srules.add(new Rule(false, "Prof\\.", "\\s"));
+        srules.add(new Rule(false, "Dr\\.", "\\s"));                            // NOI18N
+        srules.add(new Rule(false, "U\\.K\\.", "\\s"));                         // NOI18N
+        srules.add(new Rule(false, "M\\.", "\\s"));                             // NOI18N
+        srules.add(new Rule(false, "Mr\\.", "\\s"));                            // NOI18N
+        srules.add(new Rule(false, "Mrs\\.", "\\s"));                           // NOI18N
+        srules.add(new Rule(false, "Ms\\.", "\\s"));                            // NOI18N
+        srules.add(new Rule(false, "Prof\\.", "\\s"));                          // NOI18N
         
-        srules.add(new Rule(false, "e\\.g\\.", "\\s"));
-        srules.add(new Rule(false, "resp\\.", "\\s"));
-        srules.add(new Rule(false, "tel\\.", "\\s"));
+        srules.add(new Rule(false, "e\\.g\\.", "\\s"));                         // NOI18N
+        srules.add(new Rule(false, "resp\\.", "\\s"));                          // NOI18N
+        srules.add(new Rule(false, "tel\\.", "\\s"));                           // NOI18N
 
         // here goes the rule
-        srules.add(new Rule(true, "[\\.\\?\\!]+", "\\s"));
+        srules.add(new Rule(true, "[\\.\\?\\!]+", "\\s"));                      // NOI18N
 
-        getMappingRules().add(new MapRule("Default", ".*", srules));
+        getMappingRules().add(
+                new MapRule(
+                OStrings.getString("CORE_SRX_DEFAULT_RULES_NAME"), 
+                ".*",                                                           // NOI18N
+                srules));
     }
         
     /**
@@ -343,7 +358,7 @@ public class SRX implements Serializable
     // and possibly do something if required
     
     /** Version of OmegaT 1.4.6 segmentation support. */
-    public static String OT146_VERSION = "0.1";
+    public static String OT146_VERSION = "0.2";                                 // NOI18N
     /** Currently supported segmentation support version. */
     public static String CURRENT_VERSION =OT146_VERSION;
     

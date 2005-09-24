@@ -135,11 +135,11 @@ public class TMXReader
 				ctr = 0;
 
 				// tuv 1
-				while (!blk.getTagName().equals("tuv"))					// NOI18N
+				while (!blk.getTagName().equals("tuv"))                         // NOI18N
 					blk = (XMLBlock) lst.get(ctr++);
-				lang = blk.getAttribute("lang");						// NOI18N
+				lang = blk.getAttribute("lang");                                // NOI18N
                 if( lang==null )
-                    lang = blk.getAttribute("xml:lang");
+                    lang = blk.getAttribute("xml:lang");                        // NOI18N
                 
                 if( lang==null )
                 {
@@ -147,7 +147,7 @@ public class TMXReader
                     try
                     {
                         // advance to segment marker
-                        while( !blk.getTagName().equals("seg") )				// NOI18N
+                        while( !blk.getTagName().equals("seg") )                // NOI18N
                             blk = (XMLBlock) lst.get(ctr++);
                         blktext = blk.getText();
                     }
@@ -156,7 +156,7 @@ public class TMXReader
                     // source language segment not specified 
 					StaticUtils.log(
                             MessageFormat.format(
-                            "WARNING: Language attribute is missing for segment '{0}'", 
+                            OStrings.getString("TMX_READER_WARNING_Language_Attribute_Missing"), 
                             new Object[]{blktext}) );
 					continue;
                 }
@@ -178,17 +178,17 @@ public class TMXReader
 					tarSeg = blk.getText();
 
 				// close tuv tag
-				while (!blk.getTagName().equals("tuv"))					// NOI18N
+				while (!blk.getTagName().equals("tuv"))                         // NOI18N
 					blk = (XMLBlock) lst.get(ctr++);
 
 				// open next tuv tag
 				blk = (XMLBlock) lst.get(ctr++);
-				while (!blk.getTagName().equals("tuv"))					// NOI18N
+				while (!blk.getTagName().equals("tuv"))                         // NOI18N
 					blk = (XMLBlock) lst.get(ctr++);
 				
-				lang = blk.getAttribute("lang");								// NOI18N
+				lang = blk.getAttribute("lang");                                // NOI18N
                 if( lang==null )
-                    lang = blk.getAttribute("xml:lang");
+                    lang = blk.getAttribute("xml:lang");                        // NOI18N
                 
                 if( lang==null )
                 {
@@ -196,7 +196,7 @@ public class TMXReader
                     try
                     {
                         // advance to segment marker
-                        while( !blk.getTagName().equals("seg") )				// NOI18N
+                        while( !blk.getTagName().equals("seg") )                // NOI18N
                             blk = (XMLBlock) lst.get(ctr++);
                         blktext = blk.getText();
                     }
@@ -205,7 +205,7 @@ public class TMXReader
                     // source language segment not specified 
 					StaticUtils.log(
                             MessageFormat.format(
-                            "WARNING: Language attribute is missing for segment '{0}'", 
+                            OStrings.getString("TMX_READER_WARNING_Language_Attribute_Missing"), 
                             new Object[]{blktext}) );
 					continue;
                 }

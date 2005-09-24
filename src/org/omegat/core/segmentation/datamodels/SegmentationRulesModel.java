@@ -25,6 +25,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import org.omegat.core.segmentation.Rule;
+import org.omegat.util.OStrings;
 
 /**
  * Table Model for Segmentation Rules.
@@ -78,7 +79,10 @@ public class SegmentationRulesModel extends AbstractTableModel
 
     /** The names of table columns */
     private static String[] COLUMN_NAMES = 
-            new String[] {"Break", "Before Break", "After Break"};
+            new String[] {
+                OStrings.getString("CORE_SRX_TABLE_COLUMN_Break"), 
+                OStrings.getString("CORE_SRX_TABLE_COLUMN_Before_Break"), 
+                OStrings.getString("CORE_SRX_TABLE_COLUMN_After_Break")};
             
     public String getColumnName(int column)
     {

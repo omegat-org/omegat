@@ -30,12 +30,13 @@ import org.omegat.gui.dialogs.ProjectPropertiesDialog;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.PreferenceManager;
+import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileReader;
 import org.omegat.gui.main.MainInterface;
 
 /**
- * Creates a dialog where project properties are entered and/or modified.
+ * Storage for project properties.
+ * May read and write project from/to disk.
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
@@ -149,6 +150,9 @@ public class ProjectProperties
         this.m_sentenceSegmenting = m_sentenceSegmenting; 
     }
 
+    /**
+     * Resets all project properties to empty or default values
+     */
 	public void reset()
 	{
 		setProjectFile("");	// NOI18N
@@ -200,14 +204,14 @@ public class ProjectProperties
         }
         
         projectRoot = projectRootFolder.getAbsolutePath() + File.separator;
-		PreferenceManager.pref.setPreference(
-                OConsts.PREF_CUR_DIR, projectRootFolder.getParent());
+		Preferences.setPreference(
+                Preferences.CURRENT_FOLDER, projectRootFolder.getParent());
 		try 
 		{
 			ProjectFileReader pfr = new ProjectFileReader();
 			setProjectName(projectRootFolder.getName());
 			setProjectRoot(projectRoot);
-			pfr.loadProjectFile(getProjectRoot() + OConsts.PROJ_FILENAME);
+			pfr.loadProjectFile(getProjectRoot() + OConsts.FILE_PROJECT);
 
 			setSourceRoot(pfr.getSource());
 			setLocRoot(pfr.getTarget());
@@ -217,15 +221,13 @@ public class ProjectProperties
 						+ File.separator);
 			setSourceLanguage(pfr.getSourceLang());
 			setTargetLanguage(pfr.getTargetLang());
-			PreferenceManager.pref.setPreference(
-                    OConsts.PREF_SOURCELOCALE, getSourceLanguage().toString());
-			PreferenceManager.pref.setPreference(
-                    OConsts.PREF_TARGETLOCALE, getTargetLanguage().toString());
-			setProjectFile(getProjectRoot() + OConsts.PROJ_FILENAME);
+			Preferences.setPreference(
+                    Preferences.SOURCE_LOCALE, getSourceLanguage().toString());
+			Preferences.setPreference(
+                    Preferences.TARGET_LOCALE, getTargetLanguage().toString());
+			setProjectFile(getProjectRoot() + OConsts.FILE_PROJECT);
             
             setSentenceSegmentingEnabled((pfr.getSentenceSeg()!=null) && pfr.getSentenceSeg().equals("true"));  // NOI18N
-			PreferenceManager.pref.setPreference(
-                    OConsts.PREF_SENTENCE_SEGMENTING, isSentenceSegmentingEnabled());
 
 			if( !verifyProject() )
 			{
@@ -414,10 +416,10 @@ public class ProjectProperties
             setTargetLanguage(backup.m_targetLang);
             
             // also updating some global OmegaT preferences
-			PreferenceManager.pref.setPreference(
-                    OConsts.PREF_SOURCELOCALE, getSourceLanguage().toString());
-			PreferenceManager.pref.setPreference(
-                    OConsts.PREF_TARGETLOCALE, getTargetLanguage().toString());
+			Preferences.setPreference(
+                    Preferences.SOURCE_LOCALE, getSourceLanguage().toString());
+			Preferences.setPreference(
+                    Preferences.TARGET_LOCALE, getTargetLanguage().toString());
         }
     }
     
@@ -442,4 +444,7 @@ public class ProjectProperties
 	private Language	m_targetLang;
 	
     private boolean m_sentenceSegmenting;
+    private boolean dontInsertSource;
+    private boolean insertBestMatch;
+    private int minimalSimilarity;
 }

@@ -53,6 +53,7 @@ import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.filters2.xml.openoffice.OOFilter;
+import org.omegat.gui.ProjectProperties;
 import org.omegat.util.LFileCopy;
 import org.omegat.filters2.*;
 import org.omegat.filters2.Instance;
@@ -62,7 +63,7 @@ import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.PreferenceManager;
+import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 
 /**
@@ -131,7 +132,7 @@ public class FilterMaster
      */
     private String removeLineFeed(String s)
     {
-        return s.replaceAll("\r", "");		// NOI18N
+        return s.replaceAll("\r", "");                                          // NOI18N
     }
     
     private Pattern PATTERN_SENTENCE_BREAK = 
@@ -152,7 +153,7 @@ public class FilterMaster
         // ugly hack, to say the truth
 		String src = removeLineFeed(entry);
         
-        if( PreferenceManager.pref.isPreference(OConsts.PREF_SENTENCE_SEGMENTING) )
+        if( CommandThread.core.getProjectProperties().isSentenceSegmentingEnabled() )
         {
             List segments = Segmenter.getSegmenter().segment(src);
             StringBuffer res = new StringBuffer();
@@ -972,7 +973,7 @@ public class FilterMaster
                 extension);
 
         Language targetLang = new Language(
-                PreferenceManager.pref.getPreference(OConsts.PREF_TARGETLOCALE));
+                Preferences.getPreference(Preferences.TARGET_LOCALE));
         
         res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LOCALE), 
                 targetLang.getLocale());

@@ -21,6 +21,7 @@
 
 package org.omegat.core.threads;
 
+import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -39,7 +40,7 @@ class SaveThread extends Thread
 	{
 		setName("Save thread");	// NOI18N
 		m_timeToDie = false;
-		m_saveDuration = 20 * 60 * 1000;	// 20 minutes
+		m_saveDuration = 1 * 60 * 1000;	// 10 minutes
 	}
 
 	public void run()
@@ -55,15 +56,11 @@ class SaveThread extends Thread
 		while (!m_timeToDie)
 		{
 			CommandThread.core.save();
-            Calendar cldr = Calendar.getInstance();
-            int hours = cldr.get(Calendar.HOUR_OF_DAY);
-            int minutes = cldr.get(Calendar.MINUTE);
             CommandThread.core.m_transFrame.setMessageText(
                     MessageFormat.format(OStrings.getString("ST_PROJECT_AUTOSAVED"),
                     new Object[] 
                     {
-                        new Integer(hours), 
-                        new Integer(minutes)
+                        DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date())
                     } ));
             
 			try 

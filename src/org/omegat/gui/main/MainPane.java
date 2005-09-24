@@ -160,13 +160,14 @@ public class MainPane extends JTextPane implements MouseListener
     {
         if (!mw.m_projectLoaded)
         {
-            if (e.getModifiers() == CTRL_KEY_MASK ||
-                    e.getModifiers() == InputEvent.ALT_MASK);
-            super.processKeyEvent(e);
+            if( (e.getModifiers()&CTRL_KEY_MASK)==CTRL_KEY_MASK ||
+                    (e.getModifiers()&InputEvent.ALT_MASK)==InputEvent.ALT_MASK )
+                super.processKeyEvent(e);
             return;
         }
+        
         int keyCode = e.getKeyCode();
-        char c = e.getKeyChar();
+        char keyChar = e.getKeyChar();
         
         // let released keys go straight to parent - they should
         //	have no effect on UI and so don't need processing
@@ -191,11 +192,24 @@ public class MainPane extends JTextPane implements MouseListener
         
         // for now, force all key presses to reset the cursor to
         //	the editing region unless it's a ctrl-c (copy)
-        if (e.getID() == KeyEvent.KEY_PRESSED && e.getModifiers() == CTRL_KEY_MASK && (keyCode == 'c' || keyCode == 'C')
-        ||
-                e.getID() == KeyEvent.KEY_TYPED && e.getModifiers() == CTRL_KEY_MASK && c == 3)
+        if( e.getID()==KeyEvent.KEY_PRESSED && e.getModifiers()==CTRL_KEY_MASK && keyCode == KeyEvent.VK_C
+            || e.getID() == KeyEvent.KEY_TYPED && e.getModifiers() == CTRL_KEY_MASK && keyChar=='\u0003' )
         {
             // control-c pressed or typed
+            super.processKeyEvent(e);
+            return;
+        }
+
+        // handling Ctrl+1 - Ctrl+5 automatically too
+        // BUGFIX FOR: Changing the highlighted match types number on MacOSX
+        //             http://sourceforge.net/support/tracker.php?aid=1295936 
+        if( (e.getModifiers()&KeyEvent.CTRL_MASK)==KeyEvent.CTRL_MASK
+                && ( keyCode == KeyEvent.VK_1 
+                || keyCode == KeyEvent.VK_2
+                || keyCode == KeyEvent.VK_3
+                || keyCode == KeyEvent.VK_4
+                || keyCode == KeyEvent.VK_5 ) )
+        {
             super.processKeyEvent(e);
             return;
         }
@@ -207,7 +221,7 @@ public class MainPane extends JTextPane implements MouseListener
         
         // look for delete/backspace events and make sure they're
         //	in an acceptable area
-        switch (c)
+        switch (keyChar)
         {
             case KeyEvent.VK_BACK_SPACE:
                 if (mw.checkCaretForDelete(false))
@@ -250,7 +264,7 @@ public class MainPane extends JTextPane implements MouseListener
                 e.getKeyCode()==KeyEvent.VK_A )
         {
             int start = mw.m_segmentStartOffset + mw.m_sourceDisplayLength +
-                    OStrings.TF_CUR_SEGMENT_START.length() + 1;
+                    OStrings.TF_CUR_SEGMENT_START.length();
             int end = getText().length() - mw.m_segmentEndInset -
                     OStrings.TF_CUR_SEGMENT_END.length();
             
@@ -339,7 +353,7 @@ public class MainPane extends JTextPane implements MouseListener
                     int pos = getCaretPosition();
                     int start = mw.m_segmentStartOffset +
                             mw.m_sourceDisplayLength +
-                            OStrings.TF_CUR_SEGMENT_START.length() + 1;
+                            OStrings.TF_CUR_SEGMENT_START.length();
                     if (pos < start)
                         moveCaretPosition(start);
                 }

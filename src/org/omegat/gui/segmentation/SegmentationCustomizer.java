@@ -21,6 +21,7 @@
 
 package org.omegat.gui.segmentation;
 
+import java.awt.Dialog;
 import java.awt.Frame;
 import javax.swing.JDialog;
 import javax.swing.ListSelectionModel;
@@ -33,6 +34,7 @@ import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.datamodels.MappingRulesModel;
 import org.omegat.core.segmentation.datamodels.SegmentationRulesModel;
 import org.omegat.core.segmentation.datamodels.SRXOptionsModel;
+import org.omegat.util.OStrings;
 
 /**
  * Main dialog for for setting up sentence segmenting.
@@ -48,15 +50,30 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
     /** A return status code - returned if OK button has been pressed */
     public static final int RET_OK = 1;
     
+    private void constructor()
+    {
+        initComponents();
+        mapTable.getSelectionModel().addListSelectionListener(this);
+        ruleTable.getSelectionModel().addListSelectionListener(this);
+    }
+    
     /**
      * Creates new form SegmentationCustomizer 
+     * (to be called from a frame)
      */
     public SegmentationCustomizer(Frame parent)
     {
         super(parent, true);
-        initComponents();
-        mapTable.getSelectionModel().addListSelectionListener(this);
-        ruleTable.getSelectionModel().addListSelectionListener(this);
+        constructor();
+    }
+    /**
+     * Creates new form SegmentationCustomizer 
+     * (to be called from a dialog)
+     */
+    public SegmentationCustomizer(Dialog parent)
+    {
+        super(parent, true);
+        constructor();
     }
     
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
@@ -167,7 +184,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        setTitle("Segmentation Setup");
+        setTitle(OStrings.getString("GUI_SEGMENTATION_TITLE"));
         addWindowListener(new java.awt.event.WindowAdapter()
         {
             public void windowClosing(java.awt.event.WindowEvent evt)
@@ -178,7 +195,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
         buttonPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        org.openide.awt.Mnemonics.setLocalizedText(okButton, "OK");
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK"));
         okButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -189,7 +206,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
         buttonPanel.add(okButton);
 
-        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, "Cancel");
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL"));
         cancelButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -224,7 +241,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         rulePanel.add(ruleScrollPane, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(ruleUpButton, "&Move Up");
+        org.openide.awt.Mnemonics.setLocalizedText(ruleUpButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_UP_1"));
         ruleUpButton.setEnabled(false);
         ruleUpButton.addActionListener(new java.awt.event.ActionListener()
         {
@@ -242,7 +259,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         rulePanel.add(ruleUpButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(ruleDeleteButton, "Dele&te");
+        org.openide.awt.Mnemonics.setLocalizedText(ruleDeleteButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_DELETE_1"));
         ruleDeleteButton.setEnabled(false);
         ruleDeleteButton.addActionListener(new java.awt.event.ActionListener()
         {
@@ -260,7 +277,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         rulePanel.add(ruleDeleteButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(ruleInsertButton, "I&nsert");
+        org.openide.awt.Mnemonics.setLocalizedText(ruleInsertButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_INSERT_1"));
         ruleInsertButton.setEnabled(false);
         ruleInsertButton.addActionListener(new java.awt.event.ActionListener()
         {
@@ -278,7 +295,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         rulePanel.add(ruleInsertButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(ruleDownButton, "Mo&ve Down");
+        org.openide.awt.Mnemonics.setLocalizedText(ruleDownButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_DOWN_1"));
         ruleDownButton.setEnabled(false);
         ruleDownButton.addActionListener(new java.awt.event.ActionListener()
         {
@@ -321,7 +338,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         mapPanel.add(mapScrollPane, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(mapUpButton, "Move &Up");
+        org.openide.awt.Mnemonics.setLocalizedText(mapUpButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_UP_2"));
         mapUpButton.setEnabled(false);
         mapUpButton.addActionListener(new java.awt.event.ActionListener()
         {
@@ -339,7 +356,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         mapPanel.add(mapUpButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(mapDeleteButton, "D&elete");
+        org.openide.awt.Mnemonics.setLocalizedText(mapDeleteButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_DELETE_2"));
         mapDeleteButton.setEnabled(false);
         mapDeleteButton.addActionListener(new java.awt.event.ActionListener()
         {
@@ -357,7 +374,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         mapPanel.add(mapDeleteButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(mapInsertButton, "&Insert");
+        org.openide.awt.Mnemonics.setLocalizedText(mapInsertButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_INSERT_2"));
         mapInsertButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -374,7 +391,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         mapPanel.add(mapInsertButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(mapDownButton, "Move &Down");
+        org.openide.awt.Mnemonics.setLocalizedText(mapDownButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_DOWN_2"));
         mapDownButton.setEnabled(false);
         mapDownButton.addActionListener(new java.awt.event.ActionListener()
         {
@@ -403,7 +420,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
         optionsPanel.setBorder(new javax.swing.border.TitledBorder("Segmentation options:"));
         segmentSubflowsCheckBox.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(segmentSubflowsCheckBox, "Segment the subflows (footnotes, images alt text)");
+        org.openide.awt.Mnemonics.setLocalizedText(segmentSubflowsCheckBox, OStrings.getString("GUI_SEGMENTATION_OPTION_Segment_Subflows"));
         segmentSubflowsCheckBox.setModel(SRXOptionsModel.getSegmentSubflowsModel(SRX.getSRX()));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 3;
@@ -411,7 +428,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.weightx = 1.0;
         optionsPanel.add(segmentSubflowsCheckBox, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(terminalThingDescLabel, "Segments should include the following formatting that falls on the terminal segment boundary:");
+        org.openide.awt.Mnemonics.setLocalizedText(terminalThingDescLabel, OStrings.getString("GUI_SEGMENTATION_OPTION_Include_Terminal_Formatting"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -420,8 +437,8 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.weightx = 1.0;
         optionsPanel.add(terminalThingDescLabel, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(includeStartingTagsCheckBox, "Starting tags");
-        includeStartingTagsCheckBox.setToolTipText("Unchecked means that the starting formatting tag will be included into the following segment.");
+        org.openide.awt.Mnemonics.setLocalizedText(includeStartingTagsCheckBox, OStrings.getString("GUI_SEGMENTATION_OPTION_Include_Starting_tags"));
+        includeStartingTagsCheckBox.setToolTipText(OStrings.getString("GUI_SEGMENTATION_TIP_Include_Starting_Tags"));
         includeStartingTagsCheckBox.setModel(SRXOptionsModel.getIncludeStartingTagsModel(SRX.getSRX()));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -431,7 +448,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         optionsPanel.add(includeStartingTagsCheckBox, gridBagConstraints);
 
         includeEndingTagsCheckBox.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(includeEndingTagsCheckBox, "Ending tags");
+        org.openide.awt.Mnemonics.setLocalizedText(includeEndingTagsCheckBox, OStrings.getString("GUI_SEGMENTATION_OPTION_Include_Ending_Tags"));
         includeEndingTagsCheckBox.setModel(SRXOptionsModel.getIncludeEndingTagsModel(SRX.getSRX()));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -440,7 +457,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.weightx = 1.0;
         optionsPanel.add(includeEndingTagsCheckBox, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(includeIsolatedTagsCheckBox, "Isolated tags");
+        org.openide.awt.Mnemonics.setLocalizedText(includeIsolatedTagsCheckBox, OStrings.getString("GUI_SEGMENTATION_OPTION_Include_Isolated_Tags"));
         includeIsolatedTagsCheckBox.setModel(SRXOptionsModel.getIncludeIsolatedTagsModel(SRX.getSRX()));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;

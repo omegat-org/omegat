@@ -141,6 +141,7 @@ public class HTMLFilter2 extends AbstractFilter
     {
         return new Instance[]
         {
+            new Instance("*.htm", ENCODING_AUTO, "UTF-8"),                      // NOI18N
             new Instance("*.html", ENCODING_AUTO, "UTF-8"),                     // NOI18N
             new Instance("*.xhtml", ENCODING_AUTO, "UTF-8")                     // NOI18N
         };

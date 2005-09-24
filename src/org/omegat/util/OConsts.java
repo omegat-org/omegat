@@ -21,26 +21,35 @@
 
 package org.omegat.util;
 
+import java.io.File;
+
 /**
- * OmegaT-wide Constants
+ * OmegaT-wide Constants.
+ * <p>
+ * // TODO
+ * Note: Some constants that are used only in a single class,
+ * or are more appropriate in another class (e.g. preference names)
+ * are moved in appropriate class definitions.
  *
  * @author Keith Godfrey
+ * @author Maxym Mykhalchuk
  */
 public class OConsts
 {
 
 	// project file consts
-	public static final String PROJ_EXTENSION	= ".project";						// NOI18N
-	public static final String PROJ_FILENAME	= "omegat" + PROJ_EXTENSION;		// NOI18N
-	public static final String PROJ_PREFERENCE	= "omegat.prefs";					// NOI18N
-	public static final String PROJ_CUR_VERSION = "1.0";							// NOI18N
-	
+    /** Project Filename */
+	public static final String FILE_PROJECT	= "omegat.project";                 // NOI18N
+    /** Project Version */
+	public static final String PROJ_CUR_VERSION = "1.0";						// NOI18N
+
 	public static final String TMX_EXTENSION	= ".tmx";							// NOI18N
 	public static final String TMW_EXTENSION	= ".wf";	// for wordfast			// NOI18N
 	
 	// help
-	public static final String HELP_HOME		= "OmegaT.html";					// NOI18N
-	public static final String HELP_DIR			= "docs";							// NOI18N
+	public static final String HELP_HOME		= "OmegaT.html";				// NOI18N
+	public static final String HELP_INSTANT_START = "InstantStart.html";        // NOI18N
+	public static final String HELP_DIR			= "docs";						// NOI18N
 	
 	// file handler extensions
 	public static final String FH_HTML_TYPE			= "htmlfile";					// NOI18N
@@ -64,33 +73,6 @@ public class OConsts
     /** The smallest threshold to detect a fuzzy match string */
 	public static final double FUZZY_MATCH_THRESHOLD = 0.3;
 	
-	// preference names
-	public static final String PREF_SOURCELOCALE		= "source_lang";					// NOI18N
-	public static final String PREF_TARGETLOCALE		= "target_lang";					// NOI18N
-	public static final String PREF_CUR_DIR		= "current_folder";					// NOI18N
-	public static final String PREF_SRC_DIR		= "source_folder";					// NOI18N
-	public static final String PREF_LOC_DIR		= "target_folder";					// NOI18N
-	public static final String PREF_TM_DIR		= "tm_folder";						// NOI18N
-	public static final String PREF_GLOS_DIR	= "glossary_folder";				// NOI18N
-	
-	public static final String PREF_DISPLAY_W	= "screen_width";					// NOI18N
-	public static final String PREF_DISPLAY_H	= "screen_height";					// NOI18N
-	public static final String PREF_DISPLAY_X	= "screen_x";						// NOI18N
-	public static final String PREF_DISPLAY_Y	= "screen_y";						// NOI18N
-
-	public static final String PREF_MATCH_W		= "match_width";					// NOI18N
-	public static final String PREF_MATCH_H		= "match_height";					// NOI18N
-	public static final String PREF_MATCH_X		= "match_x";						// NOI18N
-	public static final String PREF_MATCH_Y		= "match_y";						// NOI18N
-    /** Where the divider between Main area and Match/Glossary is */
-	public static final String PREF_MATCH_DIVIDER = "match_divider";				// NOI18N
-    
-	public static final String PREF_MNEMONIC	= "mnemonics";						// NOI18N
-	public static final String PREF_TAB			= "tab_advance";					// NOI18N
-	public static final String PREF_SEARCH_DIR	= "search_dir";						// NOI18N
-    
-    public static final String PREF_SENTENCE_SEGMENTING = "sentence_segmenting";    // NOI18N
-	
 	public static final String SW_DIR_CB_CHECKED_CMD	= "dir_ck";					// NOI18N
 	
 	public static final int		ST_MAX_SEARCH_RESULTS	= 1000;
@@ -112,5 +94,17 @@ public class OConsts
      * 8k (8192 bytes) for now, as this is the default buffer size for BufferedReader.
      */
     public static final int READ_AHEAD_LIMIT = 8192;
-	
+    
+    /**
+     * The name of the OmegaT Jar file.
+     * It is used to calculate the installation directory.
+     */
+    public static final String APPLICATION_JAR = "OmegaT.jar";                  // NOI18N
+
+    /**
+     * Application debug classpath.
+     * It is used to calculate the installation directory 
+     * (in case of debugging -- the sources directory).
+     */
+    public static final String DEBUG_CLASSPATH = "build"+File.separator+"classes";           // NOI18N
 }

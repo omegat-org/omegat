@@ -32,7 +32,8 @@ import javax.swing.text.StyleConstants;
 
 import org.omegat.core.StringData;
 import org.omegat.util.OConsts;
-import org.omegat.util.PreferenceManager;
+import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.Token;
 
 /**
@@ -76,9 +77,11 @@ public class MatchGlossaryPane extends javax.swing.JPanel
         matchSplitPane = new javax.swing.JSplitPane();
         upPanel = new javax.swing.JPanel();
         fuzzyMatchesLabel = new javax.swing.JLabel();
+        matchScrollPane = new javax.swing.JScrollPane();
         m_matchPane = new javax.swing.JTextPane();
         downPanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        glossaryLabel = new javax.swing.JLabel();
+        glossaryScrollPane = new javax.swing.JScrollPane();
         m_glosPane = new javax.swing.JTextPane();
 
         setLayout(new java.awt.BorderLayout());
@@ -89,7 +92,7 @@ public class MatchGlossaryPane extends javax.swing.JPanel
         matchSplitPane.setOneTouchExpandable(true);
         upPanel.setLayout(new java.awt.GridBagLayout());
 
-        org.openide.awt.Mnemonics.setLocalizedText(fuzzyMatchesLabel, "Fuzzy Matches");
+        org.openide.awt.Mnemonics.setLocalizedText(fuzzyMatchesLabel, OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 4, 0, 4);
@@ -97,34 +100,37 @@ public class MatchGlossaryPane extends javax.swing.JPanel
 
         m_matchPane.setEditable(false);
         m_matchPane.setMinimumSize(new java.awt.Dimension(100, 50));
+        matchScrollPane.setViewportView(m_matchPane);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        upPanel.add(m_matchPane, gridBagConstraints);
+        upPanel.add(matchScrollPane, gridBagConstraints);
 
         matchSplitPane.setLeftComponent(upPanel);
 
         downPanel.setLayout(new java.awt.GridBagLayout());
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, "Glossary");
+        org.openide.awt.Mnemonics.setLocalizedText(glossaryLabel, OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Glossary"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 4, 0, 4);
-        downPanel.add(jLabel2, gridBagConstraints);
+        downPanel.add(glossaryLabel, gridBagConstraints);
 
         m_glosPane.setEditable(false);
         m_glosPane.setMinimumSize(new java.awt.Dimension(100, 50));
+        glossaryScrollPane.setViewportView(m_glosPane);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        downPanel.add(m_glosPane, gridBagConstraints);
+        downPanel.add(glossaryScrollPane, gridBagConstraints);
 
         matchSplitPane.setRightComponent(downPanel);
 
@@ -137,9 +143,11 @@ public class MatchGlossaryPane extends javax.swing.JPanel
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel downPanel;
     private javax.swing.JLabel fuzzyMatchesLabel;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel glossaryLabel;
+    private javax.swing.JScrollPane glossaryScrollPane;
     private javax.swing.JTextPane m_glosPane;
     private javax.swing.JTextPane m_matchPane;
+    private javax.swing.JScrollPane matchScrollPane;
     private javax.swing.JSplitPane matchSplitPane;
     private javax.swing.JPanel upPanel;
     // End of variables declaration//GEN-END:variables
@@ -272,14 +280,10 @@ public class MatchGlossaryPane extends javax.swing.JPanel
 
 	public void storeScreenLayout()
 	{
-		int w = getWidth();
-		int h = getHeight();
-		int x = getX();
-		int y = getY();
-		PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_W, "" + w);		// NOI18N
-		PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_H, "" + h);		// NOI18N
-		PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_X, "" + x);		// NOI18N
-		PreferenceManager.pref.setPreference(OConsts.PREF_MATCH_Y, "" + y);		// NOI18N
+		Preferences.setPreference(Preferences.MATCHWINDOW_WIDTH, getWidth());
+		Preferences.setPreference(Preferences.MATCHWINDOW_HEIGHT, getHeight());
+		Preferences.setPreference(Preferences.MATCHWINDOW_X, getX());
+		Preferences.setPreference(Preferences.MATCHWINDOW_Y, getY());
 	}
 
     /**
@@ -295,10 +299,10 @@ public class MatchGlossaryPane extends javax.swing.JPanel
 		boolean badSize = false;
         try 
         {
-            String dw = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_W);
-            String dh = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_H);
-            String dx = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_X);
-            String dy = PreferenceManager.pref.getPreference(OConsts.PREF_MATCH_Y);
+            String dw = Preferences.getPreference(Preferences.MATCHWINDOW_WIDTH);
+            String dh = Preferences.getPreference(Preferences.MATCHWINDOW_HEIGHT);
+            String dx = Preferences.getPreference(Preferences.MATCHWINDOW_X);
+            String dy = Preferences.getPreference(Preferences.MATCHWINDOW_Y);
             int x = Integer.parseInt(dx);
             int y = Integer.parseInt(dy);
             int w = Integer.parseInt(dw);

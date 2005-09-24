@@ -48,7 +48,7 @@ import org.omegat.gui.messages.MessageRelay;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.PreferenceManager;
+import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileData;
 import org.omegat.util.RequestPacket;
 import org.omegat.util.StaticUtils;
@@ -125,7 +125,7 @@ public class CommandThread extends Thread
 						break;
 				}
 			}
-			PreferenceManager.pref.save();
+			Preferences.save();
 
 			m_saveThread.signalStop();
 			m_saveThread.interrupt();
@@ -311,8 +311,8 @@ public class CommandThread extends Thread
 		StringEntry se;
 
 		// we got this far, so assume lang codes are proper
-		String sourceLocale = PreferenceManager.pref.getPreference(OConsts.PREF_SOURCELOCALE);
-		String targetLocale = PreferenceManager.pref.getPreference(OConsts.PREF_TARGETLOCALE);
+		String sourceLocale = Preferences.getPreference(Preferences.SOURCE_LOCALE);
+		String targetLocale = Preferences.getPreference(Preferences.TARGET_LOCALE);
 
 		FileOutputStream fos = new FileOutputStream(filename);
 		OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8"); // NOI18N
@@ -505,7 +505,7 @@ public class CommandThread extends Thread
 
 	private void forceSave(boolean corruptionDanger)
 	{
-        PreferenceManager.pref.save();
+        Preferences.save();
 
         if (m_saveCount <= 0)
             return;

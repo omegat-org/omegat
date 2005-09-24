@@ -19,6 +19,7 @@
     Java resource bundles (.properties)
     NetBeans EDGE Newsletters
  Core changes:
+    Flexible (Sentence) Segmentation
     New Fuzzy Matching algorithm - more matches, lower memory footprint
     Refactored code with more comments
     Windows installer
@@ -46,7 +47,7 @@
    http://sourceforge.net/support/tracker.php?aid=1256026
 
  - AltGr+A in Irish deletes all the segment text
-   http://sourceforge.net/support/tracker.php?aid=1256094
+   http://sourceforge.net/support/tracker.php?aid=1296761
 
  - Valid TMX 1.1 unsupported (CSVConverter's output)
    http://sourceforge.net/support/tracker.php?aid=1295165
@@ -58,9 +59,15 @@
  - <address> doesn't segment in HTML documents
    http://sourceforge.net/support/tracker.php?aid=1288756
 
+ - Changing the highlighted match types number on MacOSX
+   http://sourceforge.net/support/tracker.php?aid=1295936
+
+ - Users Manual not found if OT is started not from install dir
+   http://sourceforge.net/support/tracker.php?aid=1296688
+
  Enchancements:
 
- - Option: Change Segmenting: Sentences vs. Paragraphs
+ - Flexible (Sentence) Segmenting
    http://sourceforge.net/support/tracker.php?aid=1053692
 
  - Edit Project to change project parameters
@@ -72,12 +79,16 @@
  - Display "OmegaT: Instant Start" article on statup
    http://sourceforge.net/support/tracker.php?aid=1217081
 
- - ** NOT YET IN BETA 2 **
-   Option: not copy source text into target field
+ - Restore match window when the main window is restored
+   http://sourceforge.net/support/tracker.php?aid=1073199
+
+ - Project File List small improvements
+   http://sourceforge.net/support/tracker.php?aid=1295695
+
+ - Option: not copy source text into target field
    http://sourceforge.net/support/tracker.php?aid=1075972
 
- - ** NOT YET IN BETA 2 **
-   Option: Insert best match (80%+) into target field
+ - Option: Insert best match (80%+) into target field
    http://sourceforge.net/support/tracker.php?aid=1075976
 
 1.4.5.02

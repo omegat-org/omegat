@@ -34,15 +34,58 @@ import org.omegat.filters2.xml.XMLBlock;
 import org.omegat.filters2.xml.XMLStreamReader;
 
 /**
- * Class to load & save OmegaT preferences
+ * Class to load & save OmegaT preferences.
+ * All methods are static here.
  *
  * @author Keith Godfrey
+ * @author Maxym Mykhalchuk
  */
-public class PreferenceManager
+public class Preferences
 {
-	private PreferenceManager()
+    
+    /** OmegaT-wide Preferences Filename */
+	public static final String FILE_PREFERENCES	= "omegat.prefs";				// NOI18N
+    
+	// preference names
+	public static final String SOURCE_LOCALE	= "source_lang";                // NOI18N
+	public static final String TARGET_LOCALE	= "target_lang";                // NOI18N
+	public static final String CURRENT_FOLDER	= "current_folder";				// NOI18N
+	public static final String SOURCE_FOLDER	= "source_folder";				// NOI18N
+	public static final String TARGET_FOLDER	= "target_folder";				// NOI18N
+	public static final String TM_FOLDER		= "tm_folder";					// NOI18N
+	public static final String GLOSSARY_FOLDER	= "glossary_folder";			// NOI18N
+	
+	public static final String MAINWINDOW_WIDTH	= "screen_width";				// NOI18N
+	public static final String MAINWINDOW_HEIGHT= "screen_height";				// NOI18N
+	public static final String MAINWINDOW_X     = "screen_x";					// NOI18N
+	public static final String MAINWINDOW_Y     = "screen_y";					// NOI18N
+
+	public static final String MATCHWINDOW_WIDTH= "match_width";				// NOI18N
+	public static final String MATCHWINDOW_HEIGHT= "match_height";				// NOI18N
+	public static final String MATCHWINDOW_X	= "match_x";					// NOI18N
+	public static final String MATCHWINDOW_Y	= "match_y";					// NOI18N
+    
+    /** Where the divider between Main area and Match/Glossary is */
+	public static final String MATCHWINDOW_DIVIDER= "match_divider";			// NOI18N
+    
+	public static final String USE_MNEMONIC_SEQUENCES = "mnemonics";			// NOI18N
+	public static final String USE_TAB_TO_ADVANCE     = "tab_advance";			// NOI18N
+	public static final String SEARCH_FOLDER	= "search_dir";					// NOI18N
+    
+    /** Workflow Option: Don't Insert Source Text Into Translated Segment */
+    public static final String DONT_INSERT_SOURCE_TEXT = "wf_noSourceText";     // NOI18N
+    /** Workflow Option: Insert Best Match Into Translated Segment */
+    public static final String BEST_MATCH_INSERT = "wf_insertBestMatch";        // NOI18N
+    /** Workflow Option: Minimal Similarity Of the Best Fuzzy Match to insert */
+    public static final String BEST_MATCH_MINIMAL_SIMILARITY = "wf_minimalSimilarity";  // NOI18N
+    /** Default Value of Workflow Option: Minimal Similarity Of the Best Fuzzy Match to insert */
+    public static final String BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT = "80";    // NOI18N
+    /** Workflow Option: Insert Explanatory Text before the Best Fuzzy Match */
+    public static final String BEST_MATCH_EXPLANATORY_TEXT = "wf_explanatoryText";  // NOI18N
+    
+    /** Private constructor, because this file is singleton */
+	static
 	{
-		m_prefFileName = OConsts.PROJ_PREFERENCE;
 		m_loaded = false;
 		m_preferenceMap = new HashMap(64);
 		m_nameList = new ArrayList(32);
@@ -59,7 +102,7 @@ public class PreferenceManager
 	 * @param key key of the key to look up, usually OConsts.PREF_...
 	 * @return    preference defaultValue as a string
 	 */
-	public String getPreference(String key)
+	public static String getPreference(String key)
 	{
 		if (key == null || key.equals(""))								// NOI18N
 			return "";															// NOI18N
@@ -85,7 +128,7 @@ public class PreferenceManager
 	 * @param key preference key, usually OConsts.PREF_...
 	 * @return    preference defaultValue as a boolean
 	 */
-	public boolean isPreference(String key)
+	public static boolean isPreference(String key)
 	{
 		return "true".equals(getPreference(key));                               // NOI18N
 	}
@@ -101,7 +144,7 @@ public class PreferenceManager
      * @param defaultValue  default value for the key
 	 * @return              preference value as a string
 	 */
-	public String getPreferenceDefault(String key, String defaultValue)
+	public static String getPreferenceDefault(String key, String defaultValue)
 	{
 		String val = getPreference(key);
 		if (val.equals("")) // NOI18N
@@ -113,12 +156,12 @@ public class PreferenceManager
 	}
     
     /**
-	 * Sets the defaultValue of some preference.
+	 * Sets the value of some preference.
 	 * 
-	 * @param key  preference key, usually OConsts.PREF_...
-	 * @param defaultValue preference defaultValue as a string
+	 * @param key   preference key, usually Preferences.PREF_...
+	 * @param value preference value as a string
 	 */
-	public void setPreference(String name, String value)
+	public static void setPreference(String name, String value)
 	{
 		if( name!=null && name.length()!=0 && value!=null )
 		{
@@ -142,17 +185,27 @@ public class PreferenceManager
 		}
 	}
     /**
-	 * Sets the boolean defaultValue of some preference.
+	 * Sets the boolean value of some preference.
 	 * 
-	 * @param key  preference key, usually OConsts.PREF_...
-	 * @param defaultValue preference defaultValue as a boolean
+	 * @param key  preference key, usually Preferences.PREF_...
+	 * @param boolvalue preference defaultValue as a boolean
 	 */
-	public void setPreference(String name, boolean boolvalue)
+	public static void setPreference(String name, boolean boolvalue)
 	{
 		setPreference(name, String.valueOf(boolvalue));
 	}
+    /**
+	 * Sets the int value of some preference.
+	 * 
+	 * @param key      preference key, usually Preferences.PREF_...
+	 * @param intvalue preference value as an integer
+	 */
+	public static void setPreference(String name, int intvalue)
+	{
+		setPreference(name, String.valueOf(intvalue));
+	}
 
-	public void save()
+	public static void save()
 	{
 		try 
 		{
@@ -165,7 +218,7 @@ public class PreferenceManager
 		}
 	}
 
-    private void doLoad()
+    private static void doLoad()
 	{
 		try
 		{
@@ -175,7 +228,7 @@ public class PreferenceManager
 
 			XMLStreamReader xml = new XMLStreamReader();
 			xml.killEmptyBlocks();
-			xml.setStream(new File(m_prefFileName));
+			xml.setStream(new File(FILE_PREFERENCES));
 			XMLBlock blk;
 			ArrayList lst;
 
@@ -258,13 +311,12 @@ public class PreferenceManager
 		}
 	}
 	
-	private void doSave() throws IOException
+	private static void doSave() throws IOException
 	{
-		String str;														// NOI18N
-		String name;														// NOI18N
-		String val;														// NOI18N
-		BufferedWriter out = new BufferedWriter(new FileWriter(
-					m_prefFileName));
+		String str;
+		String name;
+		String val;
+		BufferedWriter out = new BufferedWriter(new FileWriter(FILE_PREFERENCES));
 		
 		str =  "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n";					// NOI18N
 
@@ -291,21 +343,13 @@ public class PreferenceManager
 	}
 
 	
-	private boolean	m_loaded;
-	private boolean	m_changed;
-	private String	m_prefFileName;
+	private static boolean	m_loaded;
+	private static boolean	m_changed;
 
 	// use a hash map for fast lookup of data
 	// use array lists for orderly recovery of it for saving to disk
-    private ArrayList	m_nameList;
-	private ArrayList	m_valList;
-	private HashMap	m_preferenceMap;
+    private static ArrayList m_nameList;
+	private static ArrayList m_valList;
+	private static HashMap   m_preferenceMap;
 
-	public static PreferenceManager pref;
-    static
-    {
-        pref = new PreferenceManager();
-    }
-
-    
 }

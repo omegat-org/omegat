@@ -99,10 +99,6 @@ public class HTMLFilter2 extends AbstractFilter
         Parser parser = new Parser();
         try
         {
-            // magic to workaround HTMLParser bug:
-            // http://sourceforge.net/tracker/index.php?func=detail&aid=1227213&group_id=24399&atid=381399
-            ScriptScanner.STRICT = true;
-            
             parser.setInputHTML(all.toString());
             parser.visitAllNodesWith(new FilterVisitor(this, outfile));
         }

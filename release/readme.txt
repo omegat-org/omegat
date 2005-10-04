@@ -57,6 +57,7 @@ Code has been contributed by
    Sacha Chua
    Henry Pijffers
    Raymond Martin
+   Kim Bruning
 
 Localization contributed by
    Alessandro Cattelan (Italian)

@@ -31,7 +31,7 @@ import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.SearchWindow;
-import org.omegat.gui.main.MainInterface;
+import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
@@ -46,7 +46,7 @@ import org.omegat.util.StaticUtils;
  */
 public class SearchThread extends Thread
 {
-	public SearchThread(MainInterface par, String startText)
+	public SearchThread(MainWindow par, String startText)
 	{
 		m_window = new SearchWindow(par, this, startText);
 		m_stop = false;

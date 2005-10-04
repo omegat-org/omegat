@@ -22,9 +22,12 @@
 package org.omegat.gui.segmentation;
 
 import java.awt.Dialog;
+import java.awt.Dimension;
 import java.awt.Frame;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -53,8 +56,15 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
     private void constructor()
     {
         initComponents();
+        optionsPanel.setBorder(new TitledBorder( OStrings.getString("GUI_SEGMENTATION_RULESETS")));
+        rulePanel.setBorder(new TitledBorder( OStrings.getString("GUI_SEGMENTATION_RULEORDER")));
         mapTable.getSelectionModel().addListSelectionListener(this);
         ruleTable.getSelectionModel().addListSelectionListener(this);
+        
+        pack();
+        setSize(getWidth()*5/4, getHeight()*5/4);
+        Dimension screen = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation((screen.width-getWidth())/2,(screen.height-getHeight())/2);
     }
     
     /**
@@ -158,6 +168,12 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
     {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        optionsPanel = new javax.swing.JPanel();
+        segmentSubflowsCheckBox = new javax.swing.JCheckBox();
+        terminalThingDescLabel = new javax.swing.JLabel();
+        includeStartingTagsCheckBox = new javax.swing.JCheckBox();
+        includeEndingTagsCheckBox = new javax.swing.JCheckBox();
+        includeIsolatedTagsCheckBox = new javax.swing.JCheckBox();
         buttonPanel = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -175,12 +191,57 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         mapDeleteButton = new javax.swing.JButton();
         mapInsertButton = new javax.swing.JButton();
         mapDownButton = new javax.swing.JButton();
-        optionsPanel = new javax.swing.JPanel();
-        segmentSubflowsCheckBox = new javax.swing.JCheckBox();
-        terminalThingDescLabel = new javax.swing.JLabel();
-        includeStartingTagsCheckBox = new javax.swing.JCheckBox();
-        includeEndingTagsCheckBox = new javax.swing.JCheckBox();
-        includeIsolatedTagsCheckBox = new javax.swing.JCheckBox();
+        hintTextArea = new javax.swing.JTextArea();
+
+        optionsPanel.setLayout(new java.awt.GridBagLayout());
+
+        optionsPanel.setBorder(new javax.swing.border.TitledBorder("Segmentation options:"));
+        segmentSubflowsCheckBox.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(segmentSubflowsCheckBox, OStrings.getString("GUI_SEGMENTATION_OPTION_Segment_Subflows"));
+        segmentSubflowsCheckBox.setModel(SRXOptionsModel.getSegmentSubflowsModel(SRX.getSRX()));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        optionsPanel.add(segmentSubflowsCheckBox, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(terminalThingDescLabel, OStrings.getString("GUI_SEGMENTATION_OPTION_Include_Terminal_Formatting"));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        optionsPanel.add(terminalThingDescLabel, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(includeStartingTagsCheckBox, OStrings.getString("GUI_SEGMENTATION_OPTION_Include_Starting_tags"));
+        includeStartingTagsCheckBox.setToolTipText(OStrings.getString("GUI_SEGMENTATION_TIP_Include_Starting_Tags"));
+        includeStartingTagsCheckBox.setModel(SRXOptionsModel.getIncludeStartingTagsModel(SRX.getSRX()));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        optionsPanel.add(includeStartingTagsCheckBox, gridBagConstraints);
+
+        includeEndingTagsCheckBox.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(includeEndingTagsCheckBox, OStrings.getString("GUI_SEGMENTATION_OPTION_Include_Ending_Tags"));
+        includeEndingTagsCheckBox.setModel(SRXOptionsModel.getIncludeEndingTagsModel(SRX.getSRX()));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        optionsPanel.add(includeEndingTagsCheckBox, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(includeIsolatedTagsCheckBox, OStrings.getString("GUI_SEGMENTATION_OPTION_Include_Isolated_Tags"));
+        includeIsolatedTagsCheckBox.setModel(SRXOptionsModel.getIncludeIsolatedTagsModel(SRX.getSRX()));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        optionsPanel.add(includeIsolatedTagsCheckBox, gridBagConstraints);
 
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -323,14 +384,14 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
         mapPanel.setLayout(new java.awt.GridBagLayout());
 
-        mapPanel.setBorder(new javax.swing.border.TitledBorder("Different segmentation rules are applied for the following languages:"));
+        mapPanel.setBorder(new javax.swing.border.TitledBorder("Sets of segmentation rules:"));
         mapScrollPane.setPreferredSize(new java.awt.Dimension(300, 100));
         mapTable.setModel(new MappingRulesModel(SRX.getSRX()));
         mapScrollPane.setViewportView(mapTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.gridheight = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
@@ -350,7 +411,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
@@ -368,7 +429,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
@@ -385,7 +446,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
@@ -403,11 +464,25 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         mapPanel.add(mapDownButton, gridBagConstraints);
+
+        hintTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        hintTextArea.setEditable(false);
+        hintTextArea.setFont(new JLabel().getFont());
+        hintTextArea.setLineWrap(true);
+        hintTextArea.setText(OStrings.getString("GUI_SEGMENTATION_NOTE"));
+        hintTextArea.setWrapStyleWord(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        mapPanel.add(hintTextArea, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -416,65 +491,6 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.weightx = 1.0;
         getContentPane().add(mapPanel, gridBagConstraints);
 
-        optionsPanel.setLayout(new java.awt.GridBagLayout());
-
-        optionsPanel.setBorder(new javax.swing.border.TitledBorder("Segmentation options:"));
-        segmentSubflowsCheckBox.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(segmentSubflowsCheckBox, OStrings.getString("GUI_SEGMENTATION_OPTION_Segment_Subflows"));
-        segmentSubflowsCheckBox.setModel(SRXOptionsModel.getSegmentSubflowsModel(SRX.getSRX()));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        optionsPanel.add(segmentSubflowsCheckBox, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(terminalThingDescLabel, OStrings.getString("GUI_SEGMENTATION_OPTION_Include_Terminal_Formatting"));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        optionsPanel.add(terminalThingDescLabel, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(includeStartingTagsCheckBox, OStrings.getString("GUI_SEGMENTATION_OPTION_Include_Starting_tags"));
-        includeStartingTagsCheckBox.setToolTipText(OStrings.getString("GUI_SEGMENTATION_TIP_Include_Starting_Tags"));
-        includeStartingTagsCheckBox.setModel(SRXOptionsModel.getIncludeStartingTagsModel(SRX.getSRX()));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        optionsPanel.add(includeStartingTagsCheckBox, gridBagConstraints);
-
-        includeEndingTagsCheckBox.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(includeEndingTagsCheckBox, OStrings.getString("GUI_SEGMENTATION_OPTION_Include_Ending_Tags"));
-        includeEndingTagsCheckBox.setModel(SRXOptionsModel.getIncludeEndingTagsModel(SRX.getSRX()));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        optionsPanel.add(includeEndingTagsCheckBox, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(includeIsolatedTagsCheckBox, OStrings.getString("GUI_SEGMENTATION_OPTION_Include_Isolated_Tags"));
-        includeIsolatedTagsCheckBox.setModel(SRXOptionsModel.getIncludeIsolatedTagsModel(SRX.getSRX()));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        optionsPanel.add(includeIsolatedTagsCheckBox, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        getContentPane().add(optionsPanel, gridBagConstraints);
-
-        pack();
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        java.awt.Dimension dialogSize = getSize();
-        setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
     }
     // </editor-fold>//GEN-END:initComponents
 
@@ -566,6 +582,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JTextArea hintTextArea;
     private javax.swing.JCheckBox includeEndingTagsCheckBox;
     private javax.swing.JCheckBox includeIsolatedTagsCheckBox;
     private javax.swing.JCheckBox includeStartingTagsCheckBox;

@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -43,7 +42,7 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.ProjectFrame;
 import org.omegat.gui.ProjectProperties;
-import org.omegat.gui.main.MainInterface;
+import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.messages.MessageRelay;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.OConsts;
@@ -72,7 +71,7 @@ public class CommandThread extends Thread
      */
 	public static CommandThread core;
 	
-    public CommandThread(MainInterface tf)
+    public CommandThread(MainWindow tf)
 	{
 		setName("Command thread"); // NOI18N
         setPriority(MIN_PRIORITY);
@@ -127,7 +126,6 @@ public class CommandThread extends Thread
 			}
 			Preferences.save();
 
-			m_saveThread.signalStop();
 			m_saveThread.interrupt();
 			core = null;
 		}
@@ -193,7 +191,6 @@ public class CommandThread extends Thread
 			save();
 		}
 
-		// TODO freeze UI to prevent race condition
 		m_strEntryHash.clear();
 
         m_legacyTMs.clear();
@@ -222,7 +219,7 @@ public class CommandThread extends Thread
 
 	private void requestLoad(RequestPacket pack)
 	{
-		MainInterface tf = (MainInterface) pack.obj;
+		MainWindow tf = (MainWindow) pack.obj;
 		// load new project
 		try
 		{
@@ -239,8 +236,8 @@ public class CommandThread extends Thread
 				MessageRelay.uiMessageSetMessageText(tf, evtStr);
 				return;
 			}
-			if (numEntries() <= 0)
-				throw new IOException("empty project");  // NOI18N
+//			if (numEntries() <= 0)
+//				throw new IOException("The project is empty");
 			tf.finishLoadProject();
 			MessageRelay.uiMessageDisplayEntry(tf);
 			if (m_saveCount == -1)
@@ -292,9 +289,25 @@ public class CommandThread extends Thread
         catch( Exception e )
         {
             // any error
-			displayError(OStrings.TF_LOAD_ERROR, e);
+            if( !projectClosing )
+                displayError(OStrings.TF_LOAD_ERROR, e);
+            else
+                StaticUtils.log("Project Load aborted by user.");               // NOI18N
         }
 	}
+    
+    
+    private boolean projectClosing = false;
+    /**
+     * Signals to the core thread that a project is being closed now,
+     * and if it's still being loaded, core thread shouldn't throw 
+     * any error.
+     */
+    public void signalProjectClosing()
+    {
+        projectClosing = true;
+    }
+
 
 
 	///////////////////////////////////////////////////////////////
@@ -454,7 +467,7 @@ public class CommandThread extends Thread
 		// build mirror directory of source tree
 		ArrayList fileList = new ArrayList(256);
 		String srcRoot = m_config.getSourceRoot();
-		String locRoot = m_config.getLocRoot();
+		String locRoot = m_config.getTargetRoot();
 		StaticUtils.buildDirList(fileList, new File(srcRoot));
 		
 		for(int i=0; i<fileList.size(); i++)
@@ -490,12 +503,11 @@ public class CommandThread extends Thread
 		m_transFrame.setMessageText(OStrings.CT_COMPILE_DONE_MX);
 	}
 
+    /** Saves the translation memory and preferences */
 	public void save()
 	{
-		if (!m_modifiedFlag)
-			return;
-
-		forceSave(false);
+		if( isProjectModified() )
+    		forceSave(false);
 	}
 
 	public void markAsDirty()
@@ -657,7 +669,7 @@ public class CommandThread extends Thread
 			}
 
 			// create loc dir
-			File loc = new File(m_config.getLocRoot());
+			File loc = new File(m_config.getTargetRoot());
 			if (!loc.isDirectory())
 			{
 				if (!loc.mkdirs())
@@ -667,9 +679,6 @@ public class CommandThread extends Thread
 				}
 			}
 
-//			hand.buildHandlerList(m_config.getSrcRoot(),
-//				m_config.getProjRoot(), m_config.getProjName());
-			//mirrorSrcTree();
 			m_config.buildProjFile();
 		}
 		catch(IOException e)
@@ -740,6 +749,8 @@ public class CommandThread extends Thread
         if (!m_config.loadExisting(projectRoot))
 			return false;
 
+        projectClosing = false;
+        
 		// first load glossary files
         m_glossary = new GlossaryManager();
         m_glossary.loadGlossaryFiles(new File(m_config.getGlossaryRoot()));
@@ -1005,14 +1016,34 @@ public class CommandThread extends Thread
 	}
      */
 
-	////////////////////////////////////////////////////////
-	// 
+	/**
+     * Returns a Source Text Entry of a certain number.
+     * <p>
+     * Source text entry is an individual segment for
+     * translation pulled directly from the input files.
+     * There can be many SourceTextEntries having identical source
+     * language strings.
+     */
 	public SourceTextEntry getSTE(int num)
 	{
-		if (num >= 0)
-			return (SourceTextEntry) m_srcTextEntryArray.get(num);
-		else 
-			return null;
+        try
+        {
+            return (SourceTextEntry) m_srcTextEntryArray.get(num);
+        }
+        catch( IndexOutOfBoundsException iobe )
+        {
+            StringEntry str = new StringEntry(OStrings.getString("CT_WELCOME_EMPTY_PROJECT"));
+            
+            ProjectFileData file = new ProjectFileData();
+            file.name = "Wellcome to OmegaT";                                   // NOI18N
+            file.firstEntry = 0;
+            file.lastEntry = 0;
+            
+            SourceTextEntry res = new SourceTextEntry();
+            res.set(str, file, 0);
+            
+            return res;
+        }
 	}
 
 	public StringEntry getStringEntry(String srcText)
@@ -1024,9 +1055,9 @@ public class CommandThread extends Thread
 	// simple project info
 	
 	public String	sourceRoot()	{ return m_config.getSourceRoot();		}
-	public String	projName()		{ return m_config.getProjectName();	}
+    
 	public int		numEntries()	{ return m_srcTextEntryArray.size(); }
-	public MainInterface getTransFrame() { return m_transFrame;	}
+	public MainWindow getTransFrame() { return m_transFrame;	}
 
 	public ArrayList	getTransMemory()		{ return m_tmList;		}
 
@@ -1074,7 +1105,7 @@ public class CommandThread extends Thread
 	//	so they can have a bigger picture of what's where
     private ProjectFileData	m_curFile;
 
-	MainInterface	m_transFrame;
+	MainWindow	m_transFrame;
 	private ProjectFrame	m_projWin;
 
     private HashMap		m_strEntryHash;	// maps text to strEntry obj

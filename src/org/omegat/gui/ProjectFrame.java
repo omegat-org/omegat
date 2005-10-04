@@ -27,6 +27,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -34,12 +36,16 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JEditorPane;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
+import org.omegat.core.threads.CommandThread;
+import org.omegat.util.StaticUtils;
 
 import org.openide.awt.Mnemonics;
-import org.omegat.gui.main.MainInterface;
+import org.omegat.gui.main.MainWindow;
+import org.omegat.util.LFileCopy;
 import org.omegat.util.OStrings;
 
 /**
@@ -47,10 +53,12 @@ import org.omegat.util.OStrings;
  * showing all the files of the project.
  *
  * @author Keith Godfrey
+ * @author Kim Bruning
+ * @author Maxym Mykhalchuk
  */
 public class ProjectFrame extends JFrame
 {
-	public ProjectFrame(MainInterface parent)
+	public ProjectFrame(MainWindow parent)
 	{
 		m_parent = parent;
 
@@ -64,6 +72,16 @@ public class ProjectFrame extends JFrame
 		JScrollPane scroller = new JScrollPane(m_editorPane);
 		cp.add(scroller, "Center");												// NOI18N
 
+        m_addNewFileButton = new JButton(OStrings.getString("TF_MENU_FILE_IMPORT"));
+        update_addNewFileButton();
+        m_addNewFileButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                addNewFile();
+            }
+        });
+        
 		m_closeButton = new JButton();
 		m_closeButton.addActionListener(new ActionListener()
 		{
@@ -75,6 +93,7 @@ public class ProjectFrame extends JFrame
 
 		Box bbut = Box.createHorizontalBox();
 		bbut.add(Box.createHorizontalGlue());
+        bbut.add(m_addNewFileButton);
 		bbut.add(m_closeButton);
 		bbut.add(Box.createHorizontalGlue());
 		cp.add(bbut, "South");													// NOI18N
@@ -105,12 +124,14 @@ public class ProjectFrame extends JFrame
 		m_nameList.clear();
 		m_offsetList.clear();
 		m_editorPane.setText("");												// NOI18N
+        update_addNewFileButton();
 	}
 	
 	private void updateUIText()
 	{
 		Mnemonics.setLocalizedText(m_closeButton, OStrings.PF_BUTTON_CLOSE);
 		setTitle(OStrings.PF_WINDOW_TITLE);
+        update_addNewFileButton();
 	}
 
     public void addFile(String name, int entryNum)
@@ -185,16 +206,36 @@ public class ProjectFrame extends JFrame
 		output.append("</table>\n");                                            // NOI18N
         
 		m_editorPane.setText(output.toString());
+        update_addNewFileButton();
 	}
-	
+
+    
+    /**
+     * Imports the file/files/folder into project's source files.
+     * @author Kim Bruning
+     * @author Maxym Mykhalchuk
+     */
+    private void addNewFile()
+    {
+        m_parent.doImportSourceFiles();
+    }
+
+    /** Updates the Import Files button status. */    
+    public void update_addNewFileButton()
+    {
+        m_addNewFileButton.setEnabled(m_parent.isProjectLoaded());
+    }
+    
+    
 	private JEditorPane m_editorPane;
+    private JButton     m_addNewFileButton;
 	private JButton		m_closeButton;
 	private ArrayList	m_nameList;
 	private ArrayList	m_offsetList;
 
 	private int			numberofTranslatedSegments;
 
-	private MainInterface m_parent;
+	private MainWindow m_parent;
 
 }
 

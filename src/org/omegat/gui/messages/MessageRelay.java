@@ -23,7 +23,7 @@ package org.omegat.gui.messages;
 
 import javax.swing.SwingUtilities;
 
-import org.omegat.gui.main.MainInterface;
+import org.omegat.gui.main.MainWindow;
 
 /**
  * Methods to send messages to UI objects
@@ -35,31 +35,31 @@ import org.omegat.gui.main.MainInterface;
 public class MessageRelay
 {
 
-    public static void uiMessageDisplayEntry(MainInterface tf)
+    public static void uiMessageDisplayEntry(MainWindow tf)
 	{
 		MMx msg = new MMx(tf, 5);
 		SwingUtilities.invokeLater(msg);
 	}
 
-	public static void uiMessageFuzzyInfo(MainInterface tf)
+	public static void uiMessageFuzzyInfo(MainWindow tf)
 	{
 		MMx msg = new MMx(tf, 10);
 		SwingUtilities.invokeLater(msg);
 	}
 
-	public static void uiMessageDoGotoEntry(MainInterface tf, String str)
+	public static void uiMessageDoGotoEntry(MainWindow tf, String str)
 	{
 		MMx msg = new MMx(tf, 6, str);
 		SwingUtilities.invokeLater(msg);
 	}
 
-	public static void uiMessageSetMessageText(MainInterface tf, String str)
+	public static void uiMessageSetMessageText(MainWindow tf, String str)
 	{
 		MMx msg = new MMx(tf, 7, str);
 		SwingUtilities.invokeLater(msg);
 	}
 
-    public static void uiMessageDisplayError(MainInterface tf, 
+    public static void uiMessageDisplayError(MainWindow tf, 
 					String str, Throwable e)
 	{
 		MMx msg = new MMx(tf, str, e);

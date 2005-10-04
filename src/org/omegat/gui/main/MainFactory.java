@@ -31,7 +31,7 @@ public final class MainFactory
     /** cannot be used */
     private MainFactory() { }
     
-    public static MainInterface createMainWindow()
+    public static MainWindow createMainWindow()
     {
         return new MainWindow();
     }

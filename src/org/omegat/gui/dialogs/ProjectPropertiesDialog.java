@@ -357,7 +357,7 @@ public class ProjectPropertiesDialog extends JDialog
             projectProperties.setProjectName(projectProperties.getProjectFile().substring(projectProperties.getProjectRoot().length()));
             projectProperties.setSourceRoot(projectProperties.getProjectRoot() + OConsts.DEFAULT_SRC
                 + File.separator);
-            projectProperties.setLocRoot(projectProperties.getProjectRoot() + OConsts.DEFAULT_LOC
+            projectProperties.setTargetRoot(projectProperties.getProjectRoot() + OConsts.DEFAULT_LOC
                 + File.separator);
             projectProperties.setGlossaryRoot(projectProperties.getProjectRoot() + OConsts.DEFAULT_GLOS
                 + File.separator);
@@ -375,7 +375,7 @@ public class ProjectPropertiesDialog extends JDialog
                 + File.separator);
 
         m_srcRootField.setText(projectProperties.getSourceRoot());
-        m_locRootField.setText(projectProperties.getLocRoot());
+        m_locRootField.setText(projectProperties.getTargetRoot());
         m_glosRootField.setText(projectProperties.getGlossaryRoot());
         m_tmRootField.setText(projectProperties.getTMRoot());
         m_sourceLocaleField.setSelectedItem(projectProperties.getSourceLanguage());
@@ -510,10 +510,10 @@ public class ProjectPropertiesDialog extends JDialog
             case 2:
                 Preferences.setPreference(Preferences.TARGET_FOLDER,
                         browser.getSelectedFile().getParent());
-                projectProperties.setLocRoot(str);
-                field.setText(projectProperties.getLocRoot());
-                if( new File(projectProperties.getLocRoot()).exists() &&
-                        new File(projectProperties.getLocRoot()).isDirectory() )
+                projectProperties.setTargetRoot(str);
+                field.setText(projectProperties.getTargetRoot());
+                if( new File(projectProperties.getTargetRoot()).exists() &&
+                        new File(projectProperties.getTargetRoot()).isDirectory() )
                     field.setForeground(java.awt.SystemColor.textText);
                 break;
 
@@ -588,11 +588,11 @@ public class ProjectPropertiesDialog extends JDialog
             return;
         }
 
-        projectProperties.setLocRoot(m_locRootField.getText());
-        if (!projectProperties.getLocRoot().endsWith(File.separator))
-            projectProperties.setLocRoot(projectProperties.getLocRoot() + File.separator);
+        projectProperties.setTargetRoot(m_locRootField.getText());
+        if (!projectProperties.getTargetRoot().endsWith(File.separator))
+            projectProperties.setTargetRoot(projectProperties.getTargetRoot() + File.separator);
         if( dialogType!=NEW_PROJECT && 
-                !new File(projectProperties.getLocRoot()).exists() )
+                !new File(projectProperties.getTargetRoot()).exists() )
         {
             JOptionPane.showMessageDialog(this, 
                     OStrings.getString("NP_TRANSDIR_DOESNT_EXIST"),

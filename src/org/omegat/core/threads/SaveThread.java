@@ -39,8 +39,6 @@ class SaveThread extends Thread
 	public SaveThread()
 	{
 		setName("Save thread");	// NOI18N
-		m_timeToDie = false;
-		m_saveDuration = 1 * 60 * 1000;	// 10 minutes
 	}
 
 	public void run()
@@ -53,15 +51,23 @@ class SaveThread extends Thread
 		{
         }
 		
-		while (!m_timeToDie)
+		while( !isInterrupted() )
 		{
-			CommandThread.core.save();
-            CommandThread.core.m_transFrame.setMessageText(
-                    MessageFormat.format(OStrings.getString("ST_PROJECT_AUTOSAVED"),
-                    new Object[] 
-                    {
-                        DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date())
-                    } ));
+            synchronized(CommandThread.core)
+            {
+                if( CommandThread.core.isProjectModified() )
+                {
+                    CommandThread.core.save();
+                    CommandThread.core.m_transFrame.setMessageText(
+                            MessageFormat.format(
+                            OStrings.getString("ST_PROJECT_AUTOSAVED"),
+                            new Object[] 
+                            {
+                                DateFormat.getTimeInstance(DateFormat.SHORT).
+                                        format(new Date())
+                            } ));
+                }
+            }
             
 			try 
 			{
@@ -74,8 +80,5 @@ class SaveThread extends Thread
 		}
 	}
 
-	public void signalStop()	{ m_timeToDie = true;	}
-
-    private boolean	m_timeToDie;
-	private int		m_saveDuration;
+	private int	m_saveDuration = 1 * 60 * 100;  // 10 minutes;
 }

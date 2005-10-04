@@ -34,6 +34,8 @@ import org.htmlparser.visitors.NodeVisitor;
 import org.omegat.util.PatternConsts;
 
 /**
+ * The part of HTML filter that actually does the job.
+ * This class is called back by HTMLParser (http://sf.net/projects/htmlparser/).
  *
  * @author Maxym Mykhalchuk
  */
@@ -118,13 +120,43 @@ class FilterVisitor extends NodeVisitor
             if( isPreformattingTag(tag) )
                 preformatting = true;
 
+            maybeTranslateAttribute(tag, "abbr");                               // NOI18N
+            maybeTranslateAttribute(tag, "alt");                                // NOI18N
+            maybeTranslateAttribute(tag, "content");                            // NOI18N
+            maybeTranslateAttribute(tag, "href");                               // NOI18N
+            maybeTranslateAttribute(tag, "hreflang");                           // NOI18N
+            maybeTranslateAttribute(tag, "lang");                               // NOI18N
+            if( "IMG".equals(tag.getTagName()) )                                // NOI18N
+                maybeTranslateAttribute(tag, "src");                            // NOI18N
+            maybeTranslateAttribute(tag, "summary");                            // NOI18N
+            maybeTranslateAttribute(tag, "title");                              // NOI18N
+            if( "INPUT".equals(tag.getTagName()) )                              // NOI18N
+                maybeTranslateAttribute(tag, "value");                          // NOI18N
+            
             if( text )
                 queueTranslatable(tag);
             else
                 writeout("<"+tag.getText()+">");                                // NOI18N
         }
     }
-
+    
+    /**
+     * If the attribute of the tag is not empty,
+     * it translates it as a separate segment.
+     * 
+     * @param tag the tag object
+     * @param key the name of the attribute
+     */
+    private void maybeTranslateAttribute(Tag tag, String key)
+    {
+        String attr = tag.getAttribute(key);
+        if( attr!=null )
+        {
+            String trans = filter.privateProcessEntry(attr);
+            tag.setAttribute(key, trans);
+        }
+    }
+    
     boolean firstcall = true;
     
     /**
@@ -229,7 +261,9 @@ class FilterVisitor extends NodeVisitor
                 tagname.equals("PRE") ||                                        // NOI18N
                 tagname.equals("OL") || tagname.equals("UL") ||                 // NOI18N
                     tagname.equals("LI") ||                                     // NOI18N
-                tagname.equals("FORM") || tagname.equals("TEXTAREA")            // NOI18N
+                tagname.equals("FORM") || tagname.equals("TEXTAREA") ||         // NOI18N
+                tagname.equals("FIELDSET") || tagname.equals("LEGEND") ||       // NOI18N
+                tagname.equals("LABEL")                                         // NOI18N
                 ;
     }
     
@@ -365,7 +399,14 @@ class FilterVisitor extends NodeVisitor
             s_nshortcuts++;
         }
 
-        result.append(Character.toLowerCase(tag.getTagName().charAt(0)));
+        // special handling for BR tag, as it's given a two-char shortcut
+        // to allow for its segmentation in sentence-segmentation mode
+        // idea by Jean-Christophe Helary
+        if( "BR".equals(tag.getTagName()) )                                     // NOI18N
+            result.append("br");                                                // NOI18N
+        else
+            result.append(Character.toLowerCase(tag.getTagName().charAt(0)));
+        
         result.append(n);
         if(tag.isEmptyXmlTag())
             result.append('/');
@@ -375,7 +416,7 @@ class FilterVisitor extends NodeVisitor
     }
     
     /**
-     * Recovers shortcuts into full tags.
+     * Recovers tag shortcuts into full tags.
      */
     private String unshorcutize(String str)
     {

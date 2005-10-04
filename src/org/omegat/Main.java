@@ -27,7 +27,7 @@ import javax.swing.UIManager;
 
 import org.omegat.core.threads.CommandThread;
 import org.omegat.gui.main.MainFactory;
-import org.omegat.gui.main.MainInterface;
+import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 
@@ -59,7 +59,7 @@ public class Main
 			StaticUtils.log(OStrings.getString("MAIN_ERROR_CANT_INIT_OSLF"));
 		}
 
-        MainInterface mainwindow = MainFactory.createMainWindow();
+        MainWindow mainwindow = MainFactory.createMainWindow();
         
         // bugfix - Serious threading issue, preventing OmegaT from showing up...
         //          http://sourceforge.net/support/tracker.php?aid=1216514

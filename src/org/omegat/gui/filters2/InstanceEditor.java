@@ -54,6 +54,9 @@ public class InstanceEditor extends JDialog
         this.sourceEncodingField.setEnabled(sourceEncodingVariable);
         this.targetEncodingField.setEnabled(targetEncodingVariable);
         ((TitledBorder)tfnpPanel.getBorder()).setTitle(OStrings.getString("INSTANCEEDITOR_Target_Filename_Pattern"));
+        
+        sourceFilenameMaskField.setText("*.*");                                 // NOI18N
+        targetFilenamePatternField.setText("${filename}");                      // NOI18N
     }
     
     /** 
@@ -242,7 +245,6 @@ public class InstanceEditor extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         tfnpPanel.add(jLabel4, gridBagConstraints);
 
-        targetFilenamePatternField.setText("${filename}");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -271,7 +273,6 @@ public class InstanceEditor extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(jLabel2, gridBagConstraints);
 
-        sourceFilenameMaskField.setText("*.*");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;

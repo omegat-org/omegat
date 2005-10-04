@@ -199,6 +199,9 @@ public class SRX implements Serializable
 
         // here goes the rule
         srules.add(new Rule(true, "[\\.\\?\\!]+", "\\s"));                      // NOI18N
+        // special handling for BR tag to segmenent on it
+        // idea by Jean-Christophe Helary
+        srules.add(new Rule(true, "<br\\d+>", "\\."));                          // NOI18N
 
         getMappingRules().add(
                 new MapRule(
@@ -273,7 +276,6 @@ public class SRX implements Serializable
      */
     public void setIncludeStartingTags(boolean includeStartingTags)
     {
-
         this.includeStartingTags = includeStartingTags;
     }
 
@@ -288,7 +290,6 @@ public class SRX implements Serializable
      */
     public boolean isIncludeEndingTags()
     {
-
         return this.includeEndingTags;
     }
 
@@ -298,7 +299,6 @@ public class SRX implements Serializable
      */
     public void setIncludeEndingTags(boolean includeEndingTags)
     {
-
         this.includeEndingTags = includeEndingTags;
     }
 

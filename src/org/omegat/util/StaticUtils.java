@@ -160,7 +160,8 @@ public class StaticUtils
 		
 		int len = str.length();
 		boolean word = false;
-		StringBuffer tokenString = new StringBuffer(len);
+        boolean tagstart = false;
+		StringBuffer tokenBuff = new StringBuffer(len);
 		int tokenStart = 0;
 		int nTokens = 0;
 		for(int i=0; i<len; i++)
@@ -168,31 +169,41 @@ public class StaticUtils
 			char ch = str.charAt(i);
 			if( word )
 			{
-				if( Character.isLetter(ch) )
+				if( Character.isLetterOrDigit(ch) )
 				{
-					tokenString.append(ch);
+					tokenBuff.append(ch);
 				}
 				else
 				{
-					nTokens++;
-					word = false;
-					if( tokenList!=null )
-					{
-						Token token = new Token(tokenString.toString(), tokenStart);
-						tokenList.add(token);
-					}
+                    String tokenString = tokenBuff.toString();
+                    if( ch=='>' && tagstart 
+                            && Character.isDigit(tokenString.charAt(tokenString.length()-1)) )
+                    {
+                        // this is a tag!
+                        word = false;
+                    }
+                    else
+                    {
+                        nTokens++;
+                        word = false;
+                        if( tokenList!=null )
+                        {
+                            Token token = new Token(tokenString, tokenStart);
+                            tokenList.add(token);
+                        }
+                    }
 				}
 			}
 			else
 			{
-				if( Character.isLetter(ch) )
+				if( Character.isLetterOrDigit(ch) )
 				{
 					if( !CJKUtils.isCJK(ch) )
 					{
 						word = true;
 						tokenStart = i;
-						tokenString.setLength(0);
-						tokenString.append(ch);
+						tokenBuff.setLength(0);
+						tokenBuff.append(ch);
 					}
 					else
 					{
@@ -203,8 +214,11 @@ public class StaticUtils
 							tokenList.add(token);
 						}
 					}
-					
 				}
+                else if( ch=='<' )
+                {
+                    tagstart = true;
+                }
 			}
 		}
 		
@@ -213,7 +227,7 @@ public class StaticUtils
 			nTokens++;
 			if( tokenList!=null )
 			{
-				Token token = new Token(tokenString.toString(), tokenStart);
+				Token token = new Token(tokenBuff.toString(), tokenStart);
 				tokenList.add(token);
 			}
 		}

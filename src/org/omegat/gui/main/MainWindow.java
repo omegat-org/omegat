@@ -20,25 +20,27 @@
 **************************************************************************/
 
 package org.omegat.gui.main;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
@@ -56,6 +58,7 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.ContextFrame;
 import org.omegat.gui.HelpFrame;
+import org.omegat.gui.OmegaTFileChooser;
 import org.omegat.gui.ProjectFrame;
 import org.omegat.gui.ProjectProperties;
 import org.omegat.gui.dialogs.AboutDialog;
@@ -64,6 +67,7 @@ import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.StaticUtils;
 import org.omegat.gui.dialogs.FontSelectionDialog;
 import org.omegat.gui.filters2.FiltersCustomizer;
+import org.omegat.util.LFileCopy;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -76,10 +80,10 @@ import org.omegat.util.RequestPacket;
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
+ * @author Kim Bruning
  */
-class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, java.awt.event.ActionListener, java.awt.event.WindowListener, java.awt.event.WindowFocusListener
+public class MainWindow extends JFrame implements java.awt.event.ActionListener, java.awt.event.WindowListener, java.awt.event.ComponentListener
 {
-    
     /** Creates new form MainWindow */
     public MainWindow()
     {
@@ -87,7 +91,30 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
         additionalUIInit();
         oldInit();
         loadInstantStart();
-        
+    }
+    
+    /**
+     * Some additional actions to initialize UI, 
+     * not doable via NetBeans Form Editor 
+     */
+	private void additionalUIInit()
+	{
+		updateTitle();
+        loadWindowIcon();
+		m_projWin = new ProjectFrame(this);
+        matchWindow = new MatchGlossaryWindow(this);
+        xlPane.setMainWindow(this);
+		initScreenLayout();
+		updateCheckboxesOnStart();
+        uiUpdateOnProjectClose();
+        initUIShortcuts();
+	}
+    
+    /**
+     * Loads and set main window's icon.
+     */
+    private void loadWindowIcon()
+    {
         try
         {
             URL resource = getClass().getResource("/org/omegat/gui/resources/omegat-small.gif");  // NOI18N
@@ -102,18 +129,48 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
     }
     
     /**
-     * Some additional actions to initialize UI, 
-     * not doable via NetBeans Form Editor 
+     * Sets the shortcut keys.
+     * Need to do it here (manually), because on MacOSX the shortcut key is CMD,
+     * and on other OSes it's Ctrl.
      */
-	private void additionalUIInit()
-	{
-		updateTitle();
-		m_projWin = new ProjectFrame(this);
-        matchWindow = new MatchGlossaryWindow(this);
-        xlPane.setMainWindow(this);
-		initScreenLayout();
-		updateCheckboxesOnStart();
-	}
+    private void initUIShortcuts()
+    {
+        setAccelerator(projectNewMenuItem, KeyEvent.VK_N);
+        setAccelerator(projectOpenMenuItem, KeyEvent.VK_O);
+        setAccelerator(projectSaveMenuItem, KeyEvent.VK_S);
+        setAccelerator(projectEditMenuItem, KeyEvent.VK_E);
+        setAccelerator(projectExitMenuItem, KeyEvent.VK_Q);
+        
+        setAccelerator(editUndoMenuItem , KeyEvent.VK_Z);
+        setAccelerator(editRedoMenuItem , KeyEvent.VK_Y);
+        setAccelerator(editOverwriteTranslationMenuItem , KeyEvent.VK_R);
+        setAccelerator(editInsertTranslationMenuItem , KeyEvent.VK_I);
+        setAccelerator(editFindInProjectMenuItem , KeyEvent.VK_F);
+        setAccelerator(editSelectFuzzy1MenuItem , KeyEvent.VK_1);
+        setAccelerator(editSelectFuzzy2MenuItem , KeyEvent.VK_2);
+        setAccelerator(editSelectFuzzy3MenuItem , KeyEvent.VK_3);
+        setAccelerator(editSelectFuzzy4MenuItem , KeyEvent.VK_4);
+        setAccelerator(editSelectFuzzy5MenuItem , KeyEvent.VK_5);
+        
+        setAccelerator(gotoNextUntranslatedMenuItem , KeyEvent.VK_U);
+        setAccelerator(gotoNextSegmentMenuItem , KeyEvent.VK_N);
+        setAccelerator(gotoPreviousSegmentMenuItem , KeyEvent.VK_P);
+        
+        setAccelerator(viewMatchWindowCheckBoxMenuItem , KeyEvent.VK_M);
+        setAccelerator(viewFileListCheckBoxMenuItem , KeyEvent.VK_L);
+        
+        setAccelerator(toolsValidateTagsMenuItem , KeyEvent.VK_T);
+    }
+    
+    /**
+     * Utility method to set Ctrl + key accelerators for menu items.
+     * @param key integer specifiyng the key code (e.g. KeyEvent.VK_Z)
+     */
+    private void setAccelerator(JMenuItem item, int key)
+    {
+        item.setAccelerator(KeyStroke.getKeyStroke(key, 
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+    }
 
     /**
      * Sets the title of the main window appropriately
@@ -127,7 +184,7 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
             {
                 String file = m_activeFile.substring(
                     	CommandThread.core.sourceRoot().length());
-                s += " - " + m_activeProj + " :: " + file;							// NOI18N
+                s += " :: " + m_activeProj + " :: " + file;							// NOI18N
             }
             catch( Exception e )
             {
@@ -280,6 +337,8 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
             int div = matchWindow.getHeight() / 2;
             matchWindow.setDividerLocation(div);
 		}
+        
+        screenLayoutLoaded = true;
 	}
     
     /** Loads Instant start article */
@@ -304,19 +363,25 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 		}
     }
     
-	private void storeScreenLayout()
+    /**
+     * Stores screen layout (width, height, position, etc).
+     */
+	public void storeScreenLayout()
 	{
-		Preferences.setPreference(Preferences.MAINWINDOW_WIDTH, getWidth());
-		Preferences.setPreference(Preferences.MAINWINDOW_HEIGHT, getHeight());
-		Preferences.setPreference(Preferences.MAINWINDOW_X, getX());
-		Preferences.setPreference(Preferences.MAINWINDOW_Y, getY());
+        if( screenLayoutLoaded )
+        {
+            Preferences.setPreference(Preferences.MAINWINDOW_WIDTH, getWidth());
+            Preferences.setPreference(Preferences.MAINWINDOW_HEIGHT, getHeight());
+            Preferences.setPreference(Preferences.MAINWINDOW_X, getX());
+            Preferences.setPreference(Preferences.MAINWINDOW_Y, getY());
         
-        Preferences.setPreference(Preferences.MATCHWINDOW_DIVIDER, matchWindow.getDividerLocation());
-        
-        Preferences.setPreference(Preferences.MATCHWINDOW_WIDTH, matchWindow.getWidth());
-        Preferences.setPreference(Preferences.MATCHWINDOW_HEIGHT, matchWindow.getHeight());
-        Preferences.setPreference(Preferences.MATCHWINDOW_X, matchWindow.getX());
-        Preferences.setPreference(Preferences.MATCHWINDOW_Y, matchWindow.getY());
+            Preferences.setPreference(Preferences.MATCHWINDOW_DIVIDER, matchWindow.getDividerLocation());
+
+            Preferences.setPreference(Preferences.MATCHWINDOW_WIDTH, matchWindow.getWidth());
+            Preferences.setPreference(Preferences.MATCHWINDOW_HEIGHT, matchWindow.getHeight());
+            Preferences.setPreference(Preferences.MATCHWINDOW_X, matchWindow.getX());
+            Preferences.setPreference(Preferences.MATCHWINDOW_Y, matchWindow.getY());
+        }
 	}
 
     ///////////////////////////////////////////////////////////////
@@ -325,15 +390,15 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 	
 	private void doQuit()
 	{
+		storeScreenLayout();
+		Preferences.save();
+        
 		// shutdown
 		if (m_projectLoaded)
 		{
 			commitEntry();
 			doSave();
 		}
-
-		storeScreenLayout();
-		Preferences.save();
 
 		CommandThread.core.signalStop();
 		for (int i=0; i<25; i++)
@@ -516,6 +581,8 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
     /** Closes the project. */
 	public void doCloseProject()
 	{
+        Preferences.save();
+        
 		if (m_projectLoaded)
 		{
 			commitEntry();
@@ -527,22 +594,69 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
         
         matchWindow.getMatchGlossaryPane().reset();
 
-        projectOpenMenuItem.setEnabled(true);
-		projectNewMenuItem.setEnabled(true);
-        projectEditMenuItem.setEnabled(false);
-		optionsSetupFileFiltersMenuItem.setEnabled(true);
-        xlPane.setEditable(false);
-        
         updateTitle();
         
+        CommandThread.core.signalProjectClosing();
         CommandThread.core.cleanUp();
 	}
+    
+    /** Updates UI (enables/disables menu items) upon <b>closing</b> project */
+    private void uiUpdateOnProjectClose()
+    {
+        projectNewMenuItem.setEnabled(true);
+        projectOpenMenuItem.setEnabled(true);
+		projectNewMenuItem.setEnabled(true);
+        
+		optionsSetupFileFiltersMenuItem.setEnabled(true);
+        optionsSentsegMenuItem.setEnabled(true);
+
+        
+        projectImportMenuItem.setEnabled(false);
+        projectReloadMenuItem.setEnabled(false);
+        projectCloseMenuItem.setEnabled(false);
+        projectSaveMenuItem.setEnabled(false);
+        projectEditMenuItem.setEnabled(false);
+        projectCompileMenuItem.setEnabled(false);
+        
+        editMenu.setEnabled(false);
+        gotoMenu.setEnabled(false);
+        toolsMenu.setEnabled(false);
+        
+        xlPane.setEditable(false);
+        m_projWin.update_addNewFileButton();
+    }
+    
+    /** Updates UI (enables/disables menu items) upon <b>opening</b> project */
+    private void uiUpdateOnProjectOpen()
+    {
+        projectNewMenuItem.setEnabled(false);
+        projectOpenMenuItem.setEnabled(false);
+		projectNewMenuItem.setEnabled(false);
+        
+		optionsSetupFileFiltersMenuItem.setEnabled(false);
+        optionsSentsegMenuItem.setEnabled(false);
+
+        
+        projectImportMenuItem.setEnabled(true);
+        projectReloadMenuItem.setEnabled(true);
+        projectCloseMenuItem.setEnabled(true);
+        projectSaveMenuItem.setEnabled(true);
+        projectEditMenuItem.setEnabled(true);
+        projectCompileMenuItem.setEnabled(true);
+        
+        editMenu.setEnabled(true);
+        gotoMenu.setEnabled(true);
+        toolsMenu.setEnabled(true);
+        
+        xlPane.setEditable(true);
+        m_projWin.update_addNewFileButton();
+    }
+    
     
     /** Edits project's properties */
     private void doEditProject()
     {
         ProjectProperties config = CommandThread.core.getProjectProperties();
-        String projectRoot = config.getProjectRoot();
         boolean changed = false;
         try
         {
@@ -560,10 +674,7 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
                      OStrings.getString("MW_REOPEN_TITLE"),
                     JOptionPane.YES_NO_OPTION);
             if( res==JOptionPane.YES_OPTION )
-            {
-                doCloseProject();
-                doLoadProject(projectRoot);
-            }
+                doReloadProject();
         }
     }
     
@@ -637,23 +748,32 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 		
         setMessageText( OStrings.getString("MW_STATUS_SAVING"));
                 
-		RequestPacket pack;
-		pack = new RequestPacket(RequestPacket.SAVE, this);
-		CommandThread.core.messageBoardPost(pack);
+        CommandThread.core.save();
 
-        while( CommandThread.core.isProjectModified() )
-        {
-            try 
-            { 
-                // sleeping a bit
-                Thread.sleep(100);
-            }
-            catch (InterruptedException e) { }
-        }
-        
         setMessageText( OStrings.getString("MW_STATUS_SAVED"));
 	}
+    
+    /**
+     * Creates a new Project.
+     */
+    private void doCreateProject()
+    {
+        CommandThread.core.createProject();
+        try
+        {
+            String projectRoot = CommandThread.core.getProjectProperties().getProjectRoot();
+            if( new File(projectRoot).exists() )
+                doLoadProject(projectRoot);
+        }
+        catch( Exception e )
+        {
+            // do nothing
+        }
+    }
 
+    /**
+     * Loads a new project.
+     */
 	private void doLoadProject()
 	{
 		if (m_projectLoaded)
@@ -669,11 +789,12 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 		load = new RequestPacket(RequestPacket.LOAD, this);
 		CommandThread.core.messageBoardPost(load);
 	}
+    
     /** 
-     * Reloads Project.
+     * Loads the same project as was open in OmegaT before.
      * @param projectRoot previously closed project's root
      */
-	private void doLoadProject(String projectRoot)
+	public void doLoadProject(String projectRoot)
 	{
 		if (m_projectLoaded)
         {
@@ -688,6 +809,69 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 		load = new RequestPacket(RequestPacket.LOAD, this, projectRoot);
 		CommandThread.core.messageBoardPost(load);
 	}
+    
+    /**
+     * Reloads, i.e. closes and loads the same project.
+     */
+    public void doReloadProject()
+    {
+        ProjectProperties config = CommandThread.core.getProjectProperties();
+        String projectRoot = config.getProjectRoot();
+        doCloseProject();
+        doLoadProject(projectRoot);
+    }
+    
+    /**
+     * Imports the file/files/folder into project's source files.
+     * @author Kim Bruning
+     * @author Maxym Mykhalchuk
+     */
+    public void doImportSourceFiles()
+    {
+        OmegaTFileChooser chooser=new OmegaTFileChooser();
+        chooser.setMultiSelectionEnabled(true);
+        chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        
+        int result=chooser.showOpenDialog(this);
+        if( result==OmegaTFileChooser.APPROVE_OPTION )
+        {
+            String projectsource = CommandThread.core.getProjectProperties().getSourceRoot();
+            File sourcedir = new File(projectsource);
+            File[] selFiles=chooser.getSelectedFiles();
+            try
+            {
+                for(int i=0;i<selFiles.length;i++)
+                {
+                    File selSrc=selFiles[i];
+                    if( selSrc.isDirectory() )
+                    {
+                        ArrayList files = new ArrayList();
+                        StaticUtils.buildFileList(files, selSrc, true);
+                        String selSourceParent = selSrc.getParent();
+                        for(int j=0; j<files.size(); j++)
+                        {
+                            String filename = (String)files.get(j);
+                            String midName = filename.substring(selSourceParent.length());
+                            File src=new File(filename);
+                            File dest=new File(sourcedir, midName);
+                            LFileCopy.copy(src, dest);
+                        }
+                    }
+                    else
+                    {
+                        File dest=new File(sourcedir, selFiles[i].getName());
+                        LFileCopy.copy(selSrc, dest);
+                    }
+                }
+                doReloadProject();
+            }
+            catch(IOException ioe)
+            {
+                displayError(OStrings.getString("MAIN_ERROR_File_Import_Failed"), ioe);
+            }
+        }
+        
+    }
 
 	public void doGotoEntry(int entryNum)
 	{
@@ -726,17 +910,18 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 
 	public void finishLoadProject()
 	{
-		m_activeProj = CommandThread.core.projName();
-		m_activeFile = "";														// NOI18N
-		m_curEntryNum = 0;
-		loadDocument();
-		m_projectLoaded = true;
-        
-        projectOpenMenuItem.setEnabled(false);
-		projectNewMenuItem.setEnabled(false);
-        projectEditMenuItem.setEnabled(true);
-		optionsSetupFileFiltersMenuItem.setEnabled(false);
-        xlPane.setEditable(true);
+        SwingUtilities.invokeLater(new Runnable(){
+            public void run()
+            {
+                m_activeProj = CommandThread.core.getProjectProperties().getProjectName();
+                m_activeFile = "";														// NOI18N
+                m_curEntryNum = 0;
+                loadDocument();
+                m_projectLoaded = true;
+
+                uiUpdateOnProjectOpen();
+            }
+        });
 	}
 
 	private void doCompileProject()
@@ -785,10 +970,13 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 	/////////////////////////////////////////////////////////////////
 	// internal routines 
 
-	// displays all segments in current document
-	// displays translation for each segment if it's available (in dark gray)
-	// otherwise displays source text (in black)
-	// stores length of each displayed segment plus its starting offset
+    /**
+     * Displays all segments in current document.
+     * <p>
+     * Displays translation for each segment if it's available,
+     * otherwise displays source text.
+     * Also stores length of each displayed segment plus its starting offset.
+     */
     private void loadDocument()
 	{
 		m_docReady = false;
@@ -796,9 +984,10 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 		// clear old text
 		xlPane.setText("");													// NOI18N
 		m_docSegList.clear();
-		m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
-		setMessageText(OStrings.TF_LOADING_FILE + 
-								m_curEntry.getSrcFile().name);
+        
+        m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
+        
+		setMessageText(OStrings.TF_LOADING_FILE + m_curEntry.getSrcFile().name);
 		Thread.yield();	// let UI update
 		m_xlFirstEntry = m_curEntry.getFirstInFile();
 		m_xlLastEntry = m_curEntry.getLastInFile();
@@ -1427,7 +1616,11 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
         mainMenu = new javax.swing.JMenuBar();
         projectMenu = new javax.swing.JMenu();
         projectNewMenuItem = new javax.swing.JMenuItem();
+        separator4inProjectMenu = new javax.swing.JSeparator();
         projectOpenMenuItem = new javax.swing.JMenuItem();
+        projectImportMenuItem = new javax.swing.JMenuItem();
+        projectReloadMenuItem = new javax.swing.JMenuItem();
+        separator5inProjectMenu = new javax.swing.JSeparator();
         projectCloseMenuItem = new javax.swing.JMenuItem();
         projectSaveMenuItem = new javax.swing.JMenuItem();
         separator1inProjectMenu = new javax.swing.JSeparator();
@@ -1471,7 +1664,7 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
         helpAboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowFocusListener(this);
+        addComponentListener(this);
         addWindowListener(this);
 
         getContentPane().add(statusLabel, java.awt.BorderLayout.SOUTH);
@@ -1490,18 +1683,30 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 
         projectMenu.add(projectNewMenuItem);
 
-        projectOpenMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        projectMenu.add(separator4inProjectMenu);
+
         org.openide.awt.Mnemonics.setLocalizedText(projectOpenMenuItem, OStrings.getString("TF_MENU_FILE_OPEN"));
         projectOpenMenuItem.addActionListener(this);
 
         projectMenu.add(projectOpenMenuItem);
+
+        org.openide.awt.Mnemonics.setLocalizedText(projectImportMenuItem, OStrings.getString("TF_MENU_FILE_IMPORT"));
+        projectImportMenuItem.addActionListener(this);
+
+        projectMenu.add(projectImportMenuItem);
+
+        org.openide.awt.Mnemonics.setLocalizedText(projectReloadMenuItem, OStrings.getString("TF_MENU_PROJECT_RELOAD"));
+        projectReloadMenuItem.addActionListener(this);
+
+        projectMenu.add(projectReloadMenuItem);
+
+        projectMenu.add(separator5inProjectMenu);
 
         org.openide.awt.Mnemonics.setLocalizedText(projectCloseMenuItem, OStrings.getString("TF_MENU_FILE_CLOSE"));
         projectCloseMenuItem.addActionListener(this);
 
         projectMenu.add(projectCloseMenuItem);
 
-        projectSaveMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         org.openide.awt.Mnemonics.setLocalizedText(projectSaveMenuItem, OStrings.getString("TF_MENU_FILE_SAVE"));
         projectSaveMenuItem.addActionListener(this);
 
@@ -1510,7 +1715,6 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
         projectMenu.add(separator1inProjectMenu);
 
         org.openide.awt.Mnemonics.setLocalizedText(projectEditMenuItem, OStrings.getString("MW_PROJECTMENU_EDIT"));
-        projectEditMenuItem.setEnabled(false);
         projectEditMenuItem.addActionListener(this);
 
         projectMenu.add(projectEditMenuItem);
@@ -1532,13 +1736,11 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
         mainMenu.add(projectMenu);
 
         org.openide.awt.Mnemonics.setLocalizedText(editMenu, OStrings.getString("TF_MENU_EDIT"));
-        editUndoMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_MASK));
         org.openide.awt.Mnemonics.setLocalizedText(editUndoMenuItem, OStrings.getString("TF_MENU_EDIT_UNDO"));
         editUndoMenuItem.addActionListener(this);
 
         editMenu.add(editUndoMenuItem);
 
-        editRedoMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_MASK));
         org.openide.awt.Mnemonics.setLocalizedText(editRedoMenuItem, OStrings.getString("TF_MENU_EDIT_REDO"));
         editRedoMenuItem.addActionListener(this);
 
@@ -1546,13 +1748,11 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 
         editMenu.add(separator1inEditMenu);
 
-        editOverwriteTranslationMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         org.openide.awt.Mnemonics.setLocalizedText(editOverwriteTranslationMenuItem, OStrings.getString("TF_MENU_EDIT_RECYCLE"));
         editOverwriteTranslationMenuItem.addActionListener(this);
 
         editMenu.add(editOverwriteTranslationMenuItem);
 
-        editInsertTranslationMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
         org.openide.awt.Mnemonics.setLocalizedText(editInsertTranslationMenuItem, OStrings.getString("TF_MENU_EDIT_INSERT"));
         editInsertTranslationMenuItem.addActionListener(this);
 
@@ -1560,7 +1760,6 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 
         editMenu.add(separator2inEditMenu);
 
-        editFindInProjectMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
         org.openide.awt.Mnemonics.setLocalizedText(editFindInProjectMenuItem, OStrings.getString("TF_MENU_EDIT_FIND"));
         editFindInProjectMenuItem.addActionListener(this);
 
@@ -1568,31 +1767,26 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 
         editMenu.add(separator3inEditMenu);
 
-        editSelectFuzzy1MenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_MASK));
         org.openide.awt.Mnemonics.setLocalizedText(editSelectFuzzy1MenuItem, OStrings.getString("TF_MENU_EDIT_COMPARE_1"));
         editSelectFuzzy1MenuItem.addActionListener(this);
 
         editMenu.add(editSelectFuzzy1MenuItem);
 
-        editSelectFuzzy2MenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_MASK));
         org.openide.awt.Mnemonics.setLocalizedText(editSelectFuzzy2MenuItem, OStrings.getString("TF_MENU_EDIT_COMPARE_2"));
         editSelectFuzzy2MenuItem.addActionListener(this);
 
         editMenu.add(editSelectFuzzy2MenuItem);
 
-        editSelectFuzzy3MenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_MASK));
         org.openide.awt.Mnemonics.setLocalizedText(editSelectFuzzy3MenuItem, OStrings.getString("TF_MENU_EDIT_COMPARE_3"));
         editSelectFuzzy3MenuItem.addActionListener(this);
 
         editMenu.add(editSelectFuzzy3MenuItem);
 
-        editSelectFuzzy4MenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_MASK));
         org.openide.awt.Mnemonics.setLocalizedText(editSelectFuzzy4MenuItem, OStrings.getString("TF_MENU_EDIT_COMPARE_4"));
         editSelectFuzzy4MenuItem.addActionListener(this);
 
         editMenu.add(editSelectFuzzy4MenuItem);
 
-        editSelectFuzzy5MenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.CTRL_MASK));
         org.openide.awt.Mnemonics.setLocalizedText(editSelectFuzzy5MenuItem, OStrings.getString("TF_MENU_EDIT_COMPARE_5"));
         editSelectFuzzy5MenuItem.addActionListener(this);
 
@@ -1601,19 +1795,16 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
         mainMenu.add(editMenu);
 
         org.openide.awt.Mnemonics.setLocalizedText(gotoMenu, OStrings.getString("MW_GOTOMENU"));
-        gotoNextUntranslatedMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
         org.openide.awt.Mnemonics.setLocalizedText(gotoNextUntranslatedMenuItem, OStrings.getString("TF_MENU_EDIT_UNTRANS"));
         gotoNextUntranslatedMenuItem.addActionListener(this);
 
         gotoMenu.add(gotoNextUntranslatedMenuItem);
 
-        gotoNextSegmentMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         org.openide.awt.Mnemonics.setLocalizedText(gotoNextSegmentMenuItem, OStrings.getString("TF_MENU_EDIT_NEXT"));
         gotoNextSegmentMenuItem.addActionListener(this);
 
         gotoMenu.add(gotoNextSegmentMenuItem);
 
-        gotoPreviousSegmentMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         org.openide.awt.Mnemonics.setLocalizedText(gotoPreviousSegmentMenuItem, OStrings.getString("TF_MENU_EDIT_PREV"));
         gotoPreviousSegmentMenuItem.addActionListener(this);
 
@@ -1622,14 +1813,12 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
         mainMenu.add(gotoMenu);
 
         org.openide.awt.Mnemonics.setLocalizedText(viewMenu, OStrings.getString("MW_VIEWMENU"));
-        viewMatchWindowCheckBoxMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
         viewMatchWindowCheckBoxMenuItem.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(viewMatchWindowCheckBoxMenuItem, OStrings.getString("TF_MENU_FILE_MATCHWIN"));
         viewMatchWindowCheckBoxMenuItem.addActionListener(this);
 
         viewMenu.add(viewMatchWindowCheckBoxMenuItem);
 
-        viewFileListCheckBoxMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
         org.openide.awt.Mnemonics.setLocalizedText(viewFileListCheckBoxMenuItem, OStrings.getString("TF_MENU_FILE_PROJWIN"));
         viewFileListCheckBoxMenuItem.addActionListener(this);
 
@@ -1638,7 +1827,6 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
         mainMenu.add(viewMenu);
 
         org.openide.awt.Mnemonics.setLocalizedText(toolsMenu, OStrings.getString("TF_MENU_TOOLS"));
-        toolsValidateTagsMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
         org.openide.awt.Mnemonics.setLocalizedText(toolsValidateTagsMenuItem, OStrings.getString("TF_MENU_TOOLS_VALIDATE"));
         toolsValidateTagsMenuItem.addActionListener(this);
 
@@ -1706,6 +1894,14 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
         else if (evt.getSource() == projectOpenMenuItem)
         {
             MainWindow.this.projectOpenMenuItemActionPerformed(evt);
+        }
+        else if (evt.getSource() == projectImportMenuItem)
+        {
+            MainWindow.this.projectImportMenuItemActionPerformed(evt);
+        }
+        else if (evt.getSource() == projectReloadMenuItem)
+        {
+            MainWindow.this.projectReloadMenuItemActionPerformed(evt);
         }
         else if (evt.getSource() == projectCloseMenuItem)
         {
@@ -1821,15 +2017,27 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
         }
     }
 
-    public void windowGainedFocus(java.awt.event.WindowEvent evt)
+    public void componentHidden(java.awt.event.ComponentEvent evt)
+    {
+    }
+
+    public void componentMoved(java.awt.event.ComponentEvent evt)
     {
         if (evt.getSource() == MainWindow.this)
         {
-            MainWindow.this.formWindowGainedFocus(evt);
+            MainWindow.this.formComponentMoved(evt);
         }
     }
 
-    public void windowLostFocus(java.awt.event.WindowEvent evt)
+    public void componentResized(java.awt.event.ComponentEvent evt)
+    {
+        if (evt.getSource() == MainWindow.this)
+        {
+            MainWindow.this.formComponentResized(evt);
+        }
+    }
+
+    public void componentShown(java.awt.event.ComponentEvent evt)
     {
     }
 
@@ -1866,61 +2074,25 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
     }
     // </editor-fold>//GEN-END:initComponents
 
-    /**
-     * The last time OmegaT did manual focusing on match/glossary window.
-     * <p>
-     * In Implementation of RFE 
-     * http://sourceforge.net/support/tracker.php?aid=1073199
-     */
-    private long lastManualFocusingTime = 0;
+    private void projectImportMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectImportMenuItemActionPerformed
+    {//GEN-HEADEREND:event_projectImportMenuItemActionPerformed
+        doImportSourceFiles();
+    }//GEN-LAST:event_projectImportMenuItemActionPerformed
 
-    /**
-     * Minimum difference between WINDOW_FOCUSED events to 
-     * consider them different. (= 500ms)
-     * <p>
-     * In Implementation of RFE 
-     * http://sourceforge.net/support/tracker.php?aid=1073199
-     */
-    private final static int FOCUSING_TIME_DIFF = 500;
-    
-    /**
-     * To temporarily turn off this buggy focusing thing
-     * (useful when calling up dialogs)
-     */
-    private boolean turnAutofocusingOff = false;
-    
-    /**
-     * Informs Main Window that Match/Glossary window got focus.
-     * <p>
-     * In Implementation of RFE 
-     * http://sourceforge.net/support/tracker.php?aid=1073199
-     */
-    public void matchWindowGotFocus()
-    {
-        if( !turnAutofocusingOff )
-            toFront();
-    }
-    
-    /**
-     * When Main Window gets focus, Match/Glossary window is brought forward.
-     * <p>
-     * In Implementation of RFE 
-     * http://sourceforge.net/support/tracker.php?aid=1073199
-     */
-    private void formWindowGainedFocus(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowGainedFocus
-    {//GEN-HEADEREND:event_formWindowGainedFocus
-        if( !turnAutofocusingOff )
-        {
-            long currTime = new Date().getTime();
-            long diffTime = currTime-lastManualFocusingTime;
-            if( diffTime>FOCUSING_TIME_DIFF )
-            {
-                lastManualFocusingTime = currTime;
-                matchWindow.toFront();
-                toFront();
-            }
-        }
-    }//GEN-LAST:event_formWindowGainedFocus
+    private void projectReloadMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectReloadMenuItemActionPerformed
+    {//GEN-HEADEREND:event_projectReloadMenuItemActionPerformed
+        doReloadProject();
+    }//GEN-LAST:event_projectReloadMenuItemActionPerformed
+
+    private void formComponentMoved(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentMoved
+    {//GEN-HEADEREND:event_formComponentMoved
+		storeScreenLayout();
+    }//GEN-LAST:event_formComponentMoved
+
+    private void formComponentResized(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentResized
+    {//GEN-HEADEREND:event_formComponentResized
+		storeScreenLayout();
+    }//GEN-LAST:event_formComponentResized
 
     private void optionsWorkflowMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsWorkflowMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsWorkflowMenuItemActionPerformed
@@ -1934,9 +2106,7 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 
     private void projectEditMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectEditMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectEditMenuItemActionPerformed
-        turnAutofocusingOff = true;
         doEditProject();
-        turnAutofocusingOff = false;
     }//GEN-LAST:event_projectEditMenuItemActionPerformed
 
     private void optionsTabAdvanceCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsTabAdvanceCheckBoxMenuItemActionPerformed
@@ -2100,16 +2270,12 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
 
     private void projectOpenMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectOpenMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectOpenMenuItemActionPerformed
-        turnAutofocusingOff = true;
         doLoadProject();
-        turnAutofocusingOff = false;
     }//GEN-LAST:event_projectOpenMenuItemActionPerformed
 
     private void projectNewMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectNewMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectNewMenuItemActionPerformed
-        turnAutofocusingOff = true;
-        CommandThread.core.createProject();
-        turnAutofocusingOff = false;
+        doCreateProject();        
     }//GEN-LAST:event_projectNewMenuItemActionPerformed
 
     private void projectExitMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectExitMenuItemActionPerformed
@@ -2157,9 +2323,11 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
     private javax.swing.JMenuItem projectCompileMenuItem;
     private javax.swing.JMenuItem projectEditMenuItem;
     private javax.swing.JMenuItem projectExitMenuItem;
+    private javax.swing.JMenuItem projectImportMenuItem;
     private javax.swing.JMenu projectMenu;
     private javax.swing.JMenuItem projectNewMenuItem;
     private javax.swing.JMenuItem projectOpenMenuItem;
+    private javax.swing.JMenuItem projectReloadMenuItem;
     private javax.swing.JMenuItem projectSaveMenuItem;
     private javax.swing.JSeparator separator1inEditMenu;
     private javax.swing.JSeparator separator1inOptionsMenu;
@@ -2168,6 +2336,8 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
     private javax.swing.JSeparator separator2inProjectMenu;
     private javax.swing.JSeparator separator3inEditMenu;
     private javax.swing.JSeparator separator3inProjectMenu;
+    private javax.swing.JSeparator separator4inProjectMenu;
+    private javax.swing.JSeparator separator5inProjectMenu;
     private javax.swing.JLabel statusLabel;
     private javax.swing.JMenu toolsMenu;
     private javax.swing.JMenuItem toolsValidateTagsMenuItem;
@@ -2178,4 +2348,5 @@ class MainWindow extends JFrame implements org.omegat.gui.main.MainInterface, ja
     // End of variables declaration//GEN-END:variables
     
     private MatchGlossaryWindow matchWindow;
+    private boolean screenLayoutLoaded = false;
 }

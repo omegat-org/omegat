@@ -30,7 +30,7 @@ import javax.swing.JTextPane;
 import org.omegat.gui.messages.MessageRelay;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
-import org.omegat.gui.main.MainInterface;
+import org.omegat.gui.main.MainWindow;
 
 /** 
  * EntryListPane displays translation segments and, upon doubleclick
@@ -42,7 +42,7 @@ import org.omegat.gui.main.MainInterface;
  */
 class EntryListPane extends JTextPane
 {
-	public EntryListPane(MainInterface trans)
+	public EntryListPane(MainWindow trans)
 	{
 		m_transFrame = trans;
 		m_offsetList = new ArrayList();
@@ -132,5 +132,5 @@ class EntryListPane extends JTextPane
 	private StringBuffer	m_stringBuf;
 	private ArrayList		m_entryList;
 	private ArrayList		m_offsetList;
-	private MainInterface	m_transFrame;
+	private MainWindow	m_transFrame;
 }

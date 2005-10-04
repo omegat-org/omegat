@@ -46,7 +46,7 @@ import org.omegat.util.Token;
  * @author Raymond Martin
  * @author Maxym Mykhalchuk
  */
-public class MatchGlossaryPane extends javax.swing.JPanel
+public class MatchGlossaryPane extends javax.swing.JPanel implements java.beans.PropertyChangeListener
 {
 
     /** main window holder */
@@ -90,6 +90,8 @@ public class MatchGlossaryPane extends javax.swing.JPanel
         matchSplitPane.setResizeWeight(0.5);
         matchSplitPane.setContinuousLayout(true);
         matchSplitPane.setOneTouchExpandable(true);
+        matchSplitPane.addPropertyChangeListener(this);
+
         upPanel.setLayout(new java.awt.GridBagLayout());
 
         org.openide.awt.Mnemonics.setLocalizedText(fuzzyMatchesLabel, OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches"));
@@ -137,7 +139,23 @@ public class MatchGlossaryPane extends javax.swing.JPanel
         add(matchSplitPane, java.awt.BorderLayout.CENTER);
 
     }
+
+    // Code for dispatching events from components to event handlers.
+
+    public void propertyChange(java.beans.PropertyChangeEvent evt)
+    {
+        if (evt.getSource() == matchSplitPane)
+        {
+            MatchGlossaryPane.this.matchSplitPanePropertyChange(evt);
+        }
+    }
     // </editor-fold>//GEN-END:initComponents
+
+    private void matchSplitPanePropertyChange(java.beans.PropertyChangeEvent evt)//GEN-FIRST:event_matchSplitPanePropertyChange
+    {//GEN-HEADEREND:event_matchSplitPanePropertyChange
+        if( mainwindow!=null &&  "dividerLocation".equals(evt.getPropertyName()) )  // NOI18N
+            mainwindow.storeScreenLayout();
+    }//GEN-LAST:event_matchSplitPanePropertyChange
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

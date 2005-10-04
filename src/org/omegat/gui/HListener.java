@@ -24,7 +24,7 @@ package org.omegat.gui;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 import org.omegat.gui.messages.MessageRelay;
-import org.omegat.gui.main.MainInterface;
+import org.omegat.gui.main.MainWindow;
 
 /**
  * A listener for old Hyperlink-like style
@@ -33,7 +33,7 @@ import org.omegat.gui.main.MainInterface;
  */
 class HListener implements HyperlinkListener
 {
-	public HListener(MainInterface t, boolean grabFocus)
+	public HListener(MainWindow t, boolean grabFocus)
 	{
 		m_transFrame = t;
 		m_grabFocus = grabFocus;
@@ -55,6 +55,6 @@ class HListener implements HyperlinkListener
 		}
 	}
 
-	private MainInterface	m_transFrame;
+	private MainWindow	m_transFrame;
 	private boolean	m_grabFocus;
 }

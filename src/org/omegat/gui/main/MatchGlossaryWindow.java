@@ -61,15 +61,13 @@ public class MatchGlossaryWindow extends javax.swing.JFrame
             {
                 formComponentHidden(evt);
             }
-        });
-        addWindowFocusListener(new java.awt.event.WindowFocusListener()
-        {
-            public void windowGainedFocus(java.awt.event.WindowEvent evt)
+            public void componentMoved(java.awt.event.ComponentEvent evt)
             {
-                formWindowGainedFocus(evt);
+                formComponentMoved(evt);
             }
-            public void windowLostFocus(java.awt.event.WindowEvent evt)
+            public void componentResized(java.awt.event.ComponentEvent evt)
             {
+                formComponentResized(evt);
             }
         });
 
@@ -79,10 +77,15 @@ public class MatchGlossaryWindow extends javax.swing.JFrame
     }
     // </editor-fold>//GEN-END:initComponents
 
-    private void formWindowGainedFocus(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowGainedFocus
-    {//GEN-HEADEREND:event_formWindowGainedFocus
-        mainwindow.matchWindowGotFocus();
-    }//GEN-LAST:event_formWindowGainedFocus
+    private void formComponentResized(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentResized
+    {//GEN-HEADEREND:event_formComponentResized
+        mainwindow.storeScreenLayout();
+    }//GEN-LAST:event_formComponentResized
+
+    private void formComponentMoved(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentMoved
+    {//GEN-HEADEREND:event_formComponentMoved
+        mainwindow.storeScreenLayout();
+    }//GEN-LAST:event_formComponentMoved
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentHidden
     {//GEN-HEADEREND:event_formComponentHidden

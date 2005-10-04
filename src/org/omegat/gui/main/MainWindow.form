@@ -27,11 +27,10 @@
                 <AuxValue name="generateMnemonicsCode" type="java.lang.Boolean" value="true"/>
               </AuxValues>
             </MenuItem>
+            <MenuItem class="javax.swing.JSeparator" name="separator4inProjectMenu">
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="projectOpenMenuItem">
               <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+O"/>
-                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_FILE_OPEN" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -42,6 +41,28 @@
               <AuxValues>
                 <AuxValue name="generateMnemonicsCode" type="java.lang.Boolean" value="true"/>
               </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="projectImportMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_FILE_IMPORT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="projectImportMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="projectReloadMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_PROJECT_RELOAD" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="projectReloadMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JSeparator" name="separator5inProjectMenu">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="projectCloseMenuItem">
               <Properties>
@@ -58,9 +79,6 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="projectSaveMenuItem">
               <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+S"/>
-                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_FILE_SAVE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -79,7 +97,6 @@
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="MW_PROJECTMENU_EDIT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="projectEditMenuItemActionPerformed"/>
@@ -129,9 +146,6 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="editUndoMenuItem">
               <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+Z"/>
-                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_EDIT_UNDO" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -145,9 +159,6 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="editRedoMenuItem">
               <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+Y"/>
-                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_EDIT_REDO" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -163,9 +174,6 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="editOverwriteTranslationMenuItem">
               <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+R"/>
-                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_EDIT_RECYCLE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -179,9 +187,6 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="editInsertTranslationMenuItem">
               <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+I"/>
-                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_EDIT_INSERT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -197,9 +202,6 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="editFindInProjectMenuItem">
               <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+F"/>
-                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_EDIT_FIND" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -215,9 +217,6 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="editSelectFuzzy1MenuItem">
               <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+1"/>
-                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_EDIT_COMPARE_1" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -231,9 +230,6 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="editSelectFuzzy2MenuItem">
               <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+2"/>
-                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_EDIT_COMPARE_2" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -247,9 +243,6 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="editSelectFuzzy3MenuItem">
               <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+3"/>
-                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_EDIT_COMPARE_3" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -263,9 +256,6 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="editSelectFuzzy4MenuItem">
               <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+4"/>
-                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_EDIT_COMPARE_4" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -279,9 +269,6 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="editSelectFuzzy5MenuItem">
               <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+5"/>
-                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_EDIT_COMPARE_5" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -307,9 +294,6 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="gotoNextUntranslatedMenuItem">
               <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+U"/>
-                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_EDIT_UNTRANS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -323,9 +307,6 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="gotoNextSegmentMenuItem">
               <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+N"/>
-                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_EDIT_NEXT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -339,9 +320,6 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="gotoPreviousSegmentMenuItem">
               <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+P"/>
-                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_EDIT_PREV" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -367,9 +345,6 @@
           <SubComponents>
             <MenuItem class="javax.swing.JCheckBoxMenuItem" name="viewMatchWindowCheckBoxMenuItem">
               <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+M"/>
-                </Property>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_FILE_MATCHWIN" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
@@ -384,9 +359,6 @@
             </MenuItem>
             <MenuItem class="javax.swing.JCheckBoxMenuItem" name="viewFileListCheckBoxMenuItem">
               <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+L"/>
-                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_FILE_PROJWIN" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -412,9 +384,6 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="toolsValidateTagsMenuItem">
               <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+T"/>
-                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_TOOLS_VALIDATE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -547,7 +516,8 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
   <Events>
-    <EventHandler event="windowGainedFocus" listener="java.awt.event.WindowFocusListener" parameters="java.awt.event.WindowEvent" handler="formWindowGainedFocus"/>
+    <EventHandler event="componentMoved" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="formComponentMoved"/>
+    <EventHandler event="componentResized" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="formComponentResized"/>
     <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
   </Events>
   <AuxValues>

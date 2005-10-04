@@ -163,6 +163,7 @@ public class Preferences
 	 */
 	public static void setPreference(String name, String value)
 	{
+        m_changed = true;
 		if( name!=null && name.length()!=0 && value!=null )
 		{
 			if (!m_loaded)
@@ -181,7 +182,6 @@ public class Preferences
 				// mapping exists - reset defaultValue to new
 				m_valList.set(i.intValue(), value);
 			}
-			m_changed = true;
 		}
 	}
     /**
@@ -313,32 +313,25 @@ public class Preferences
 	
 	private static void doSave() throws IOException
 	{
-		String str;
-		String name;
-		String val;
 		BufferedWriter out = new BufferedWriter(new FileWriter(FILE_PREFERENCES));
 		
-		str =  "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n";					// NOI18N
-
-		str += "<omegat>\n";													// NOI18N
-		str += "  <preference version=\"1.0\">\n";								// NOI18N
-		out.write(str, 0, str.length());
+		out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");             // NOI18N
+		out.write("<omegat>\n");												// NOI18N
+		out.write("  <preference version=\"1.0\">\n");							// NOI18N
 
 		for (int i=0; i<m_nameList.size(); i++)
 		{
-			name = (String) m_nameList.get(i);
-			val = StaticUtils.makeValidXML((String) m_valList.get(i));
+			String name = (String) m_nameList.get(i);
+			String val = StaticUtils.makeValidXML((String) m_valList.get(i));
 			if (val.equals(""))													// NOI18N
 				continue;	// don't write blank preferences
-			str = "    <" + name + ">";											// NOI18N
-			str += val;
-			str += "</" + name + ">\n";											// NOI18N
-			out.write(str, 0, str.length());
+			out.write("    <" + name + ">");									// NOI18N
+			out.write(val);
+			out.write("</" + name + ">\n");										// NOI18N
 		}
-		str =  "  </preference>\n";												// NOI18N
-		str += "</omegat>\n";													// NOI18N
-		out.write(str, 0, str.length());
-		out.flush();
+		out.write("  </preference>\n");											// NOI18N
+		out.write("</omegat>\n");												// NOI18N
+		out.close();
 		m_changed = false;
 	}
 

@@ -40,7 +40,7 @@ import org.omegat.core.StringEntry;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.util.OStrings;
 import org.openide.awt.Mnemonics;
-import org.omegat.gui.main.MainInterface;
+import org.omegat.gui.main.MainWindow;
 
 /**
  * A frame to display the context of a segment being currently translated.
@@ -50,7 +50,7 @@ import org.omegat.gui.main.MainInterface;
  */
 public class ContextFrame extends JFrame
 {
-	public ContextFrame(MainInterface parent)
+	public ContextFrame(MainWindow parent)
 	{
 		m_parent = parent;
 		m_srcLang = true;
@@ -148,7 +148,7 @@ public class ContextFrame extends JFrame
 	private String m_searchResults;
 	private boolean	m_srcLang;
 
-	private MainInterface m_parent;
+	private MainWindow m_parent;
 
 }
 

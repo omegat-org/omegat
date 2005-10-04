@@ -42,12 +42,12 @@ import javax.swing.JTextField;
 
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.SearchThread;
+import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.openide.awt.Mnemonics;
-import org.omegat.gui.main.MainInterface;
 
 /**
  * This is a window that appears when user'd like to search for something.
@@ -58,7 +58,7 @@ import org.omegat.gui.main.MainInterface;
  */
 public class SearchWindow extends JFrame
 {
-	public SearchWindow(MainInterface par, SearchThread th, String startText)
+	public SearchWindow(MainWindow par, SearchThread th, String startText)
 	{
 		//super(par, false);
 		setSize(650, 700);

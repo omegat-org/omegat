@@ -32,7 +32,7 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileReader;
-import org.omegat.gui.main.MainInterface;
+import org.omegat.gui.main.MainWindow;
 
 /**
  * Storage for project properties.
@@ -43,111 +43,135 @@ import org.omegat.gui.main.MainInterface;
  */
 public class ProjectProperties
 {
-    public String getLocRoot()
+    /** Returns The Target (Compiled) Files Directory */
+    public String getTargetRoot()
     { 
-        return m_locRoot;		
+        return targetRoot;		
     }
-    public void setLocRoot(String m_locRoot)
+    /** Sets The Target (Compiled) Files Directory */
+    public void setTargetRoot(String targetRoot)
     {        
-        this.m_locRoot = m_locRoot;    
+        this.targetRoot = targetRoot;    
     }
     
+    /** Returns The Glossary Files Directory */
     public String getGlossaryRoot()
     { 
-        return m_glosRoot;	
+        return glossaryRoot;	
     }
-    public void setGlossaryRoot(String m_glosRoot)
+    /** Sets The Glossary Files Directory */
+    public void setGlossaryRoot(String glossaryRoot)
     {  
-        this.m_glosRoot = m_glosRoot;  
+        this.glossaryRoot = glossaryRoot;  
     }
     
+    /** Returns The Translation Memory (TMX) Files Directory */
     public String getTMRoot()
     { 
-        return m_tmRoot;		
+        return tmRoot;		
     }
-    public void setTMRoot(String m_tmRoot)
+    /** Sets The Translation Memory (TMX) Files Directory */
+    public void setTMRoot(String tmRoot)
     {          
-        this.m_tmRoot = m_tmRoot;      
+        this.tmRoot = tmRoot;      
     }
     
+    /** Returns the name of the Project */
     public String getProjectName()
     {        
-        return m_projName;    
+        return projectName;    
     }
-    public void setProjectName(String m_projName)
+    /** Sets the name of the Project */
+    public void setProjectName(String projectName)
     {   
-        this.m_projName = m_projName;  
+        this.projectName = projectName;  
     }
     
+    /** Returns The Project File Name */
     public String getProjectFile()
     {        
-        return m_projFile;    
+        return projectFile;    
     }
-    public void setProjectFile(String m_projFile)
+    /** Sets The Project File Name */
+    public void setProjectFile(String projectFile)
     {   
-        this.m_projFile = m_projFile;  
+        this.projectFile = projectFile;  
     }
     
+    /** Returns The Project Root Directory */
     public String getProjectRoot()
     {        
-        return m_projRoot;    
+        return projectRoot;
     }
-    public void setProjectRoot(String m_projRoot)
+    /** Sets The Project Root Directory */
+    public void setProjectRoot(String projectRoot)
     {   
-        this.m_projRoot = m_projRoot;  
+        this.projectRoot = projectRoot;
     }
     
+    /** Returns The Project's Translation Memory (TMX) File */
     public String getProjectInternal()
     {    
-        return m_projInternal;    
+        return projectInternal;
     }
-    public void setProjectInternal(String m_projInternal)
+    /** Sets The Project's Translation Memory (TMX) File */
+    public void setProjectInternal(String projectInternal)
     {    
-        this.m_projInternal = m_projInternal;   
+        this.projectInternal = projectInternal;   
     }
     
+    /** Returns The Source (to be translated) Files Directory */
     public String getSourceRoot()
     {         
-        return m_srcRoot;    
+        return sourceRoot;    
     }
-    public void setSourceRoot(String m_srcRoot)
+    /** Sets The Source (to be translated) Files Directory */
+    public void setSourceRoot(String sourceRoot)
     {     
-        this.m_srcRoot = m_srcRoot;    
+        this.sourceRoot = sourceRoot;    
     }
     
+    /** Returns The Source Language (language of the source files) of the Project */
     public Language getSourceLanguage()
     { 
-        return m_sourceLang;	
+        return sourceLanguage;	
     }
-    public void setSourceLanguage(Language m_sourceLang)
+    /** Sets The Source Language (language of the source files) of the Project */
+    public void setSourceLanguage(Language sourceLanguage)
     {      
-        this.m_sourceLang = m_sourceLang;    
+        this.sourceLanguage = sourceLanguage;    
     }
-    public void setSourceLanguage(String m_sourceLang)
+    /** Sets The Source Language (language of the source files) of the Project */
+    public void setSourceLanguage(String sourceLanguage)
     {       
-        this.m_sourceLang = new Language(m_sourceLang);  
+        this.sourceLanguage = new Language(sourceLanguage);  
     }
     
+    /** Returns The Target Language (language of the translated files) of the Project */
     public Language getTargetLanguage()
     { 
-        return m_targetLang;	
+        return targetLanguage;	
     }
-    public void setTargetLanguage(Language m_targetLang)
+    /** Sets The Target Language (language of the translated files) of the Project */
+    public void setTargetLanguage(Language targetLanguage)
     {      
-        this.m_targetLang = m_targetLang;    
+        this.targetLanguage = targetLanguage;    
     }
-    public void setTargetLanguage(String m_targetLang)
+    /** Sets The Target Language (language of the translated files) of the Project */
+    public void setTargetLanguage(String targetLanguage)
     {       
-        this.m_targetLang = new Language(m_targetLang);  
+        this.targetLanguage = new Language(targetLanguage);  
     }
     
+    /** Returns whether The Sentence Segmenting is Enabled for this Project. Default, Yes. */
     public boolean isSentenceSegmentingEnabled()
     { 
-        return m_sentenceSegmenting; 
+        return sentenceSegmentingOn; 
     }
-    public void setSentenceSegmentingEnabled(boolean m_sentenceSegmenting)
+    /** Sets whether The Sentence Segmenting is Enabled for this Project */
+    public void setSentenceSegmentingEnabled(boolean sentenceSegmentingOn)
     { 
-        this.m_sentenceSegmenting = m_sentenceSegmenting; 
+        this.sentenceSegmentingOn = sentenceSegmentingOn; 
     }
 
     /**
@@ -160,7 +184,7 @@ public class ProjectProperties
 		setProjectRoot("");	// NOI18N
 		setProjectInternal("");	// NOI18N
 		setSourceRoot("");	// NOI18N
-		setLocRoot("");	// NOI18N
+		setTargetRoot("");	// NOI18N
 		setGlossaryRoot("");	// NOI18N
 		setTMRoot("");	// NOI18N
 		setSourceLanguage("EN-US");  // NOI18N
@@ -168,7 +192,7 @@ public class ProjectProperties
         setSentenceSegmentingEnabled(true);
 	}
 
-    private MainInterface mainframe;
+    private MainWindow mainframe;
     
     /**
      * Loads existing project file.
@@ -214,7 +238,7 @@ public class ProjectProperties
 			pfr.loadProjectFile(getProjectRoot() + OConsts.FILE_PROJECT);
 
 			setSourceRoot(pfr.getSource());
-			setLocRoot(pfr.getTarget());
+			setTargetRoot(pfr.getTarget());
 			setGlossaryRoot(pfr.getGlossary());
 			setTMRoot(pfr.getTM());
 			setProjectInternal(getProjectRoot() + OConsts.DEFAULT_INTERNAL
@@ -273,7 +297,7 @@ public class ProjectProperties
     private boolean verifyProject() {
 		// now see if these directories are where they're suposed to be
 		File src = new File(getSourceRoot());
-		File loc = new File(getLocRoot());
+		File loc = new File(getTargetRoot());
 		File gls = new File(getGlossaryRoot());
 		File tmx = new File(getTMRoot());
 
@@ -331,7 +355,7 @@ public class ProjectProperties
 	{
 		ProjectFileReader pfr = new ProjectFileReader();
 		
-		pfr.setTarget(getLocRoot());
+		pfr.setTarget(getTargetRoot());
 		pfr.setSource(getSourceRoot());
 		pfr.setTM(getTMRoot());
 		pfr.setGlossary(getGlossaryRoot());
@@ -404,16 +428,16 @@ public class ProjectProperties
     {
         if( backup!=null )
         {
-            setProjectName(backup.m_projName);
-            setProjectFile(backup.m_projFile);
-            setProjectRoot(backup.m_projRoot);
-            setProjectInternal(backup.m_projInternal);
-            setSourceRoot(backup.m_srcRoot);
-            setLocRoot(backup.m_locRoot);
-            setGlossaryRoot(backup.m_glosRoot);
-            setTMRoot(backup.m_tmRoot);
-            setSourceLanguage(backup.m_sourceLang);
-            setTargetLanguage(backup.m_targetLang);
+            setProjectName(backup.projectName);
+            setProjectFile(backup.projectFile);
+            setProjectRoot(backup.projectRoot);
+            setProjectInternal(backup.projectInternal);
+            setSourceRoot(backup.sourceRoot);
+            setTargetRoot(backup.targetRoot);
+            setGlossaryRoot(backup.glossaryRoot);
+            setTMRoot(backup.tmRoot);
+            setSourceLanguage(backup.sourceLanguage);
+            setTargetLanguage(backup.targetLanguage);
             
             // also updating some global OmegaT preferences
 			Preferences.setPreference(
@@ -426,24 +450,24 @@ public class ProjectProperties
     protected Object clone() throws CloneNotSupportedException
     {
         ProjectProperties res = (ProjectProperties)super.clone();
-        res.m_sourceLang = new Language(m_sourceLang.getLocale());
-        res.m_targetLang = new Language(m_targetLang.getLocale());
+        res.sourceLanguage = new Language(sourceLanguage.getLocale());
+        res.targetLanguage = new Language(targetLanguage.getLocale());
         return res;
     }
 
-    private String	m_projName;
-	private String	m_projFile;
-	private String	m_projRoot;
-	private String	m_projInternal;
-	private String	m_srcRoot;
-	private String	m_locRoot;
-	private String	m_glosRoot;
-	private String	m_tmRoot;
+    private String projectName;
+	private String projectFile;
+	private String projectRoot;
+	private String projectInternal;
+	private String sourceRoot;
+	private String targetRoot;
+	private String glossaryRoot;
+	private String tmRoot;
 
-	private Language	m_sourceLang;
-	private Language	m_targetLang;
+	private Language sourceLanguage;
+	private Language targetLanguage;
 	
-    private boolean m_sentenceSegmenting;
+    private boolean sentenceSegmentingOn;
     private boolean dontInsertSource;
     private boolean insertBestMatch;
     private int minimalSimilarity;

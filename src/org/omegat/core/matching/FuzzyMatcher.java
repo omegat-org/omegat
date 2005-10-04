@@ -22,17 +22,15 @@
 package org.omegat.core.matching;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.omegat.core.StringData;
 import org.omegat.core.StringEntry;
 import org.omegat.core.threads.CommandThread;
-import org.omegat.gui.main.MainInterface;
+import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.messages.MessageRelay;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
 
 /**
@@ -44,7 +42,7 @@ import org.omegat.util.Token;
 public class FuzzyMatcher
 {
 	private String statusTemplate;
-	private MainInterface tf;	
+	private MainWindow tf;	
 	private CommandThread core;
 	
 	private void updateStatus(int index, int total)
@@ -57,7 +55,7 @@ public class FuzzyMatcher
 	/** 
      * Creates a new instance of FuzzyMatcher 
      */
-	public FuzzyMatcher(MainInterface tf, CommandThread core)
+	public FuzzyMatcher(MainWindow tf, CommandThread core)
 	{
 		this.tf = tf;
 		this.core = core;
@@ -79,7 +77,7 @@ public class FuzzyMatcher
 			Token righttoken = null;
 			if( i+1<len )
 				righttoken = (Token)matchTokens.get(i+1);
-			boolean rightfound = sourceTokens.contains(righttoken);
+			boolean rightfound = (i+1==len) || sourceTokens.contains(righttoken);
 
 			Token token;
 			token = (Token)matchTokens.get(i);

@@ -1,13 +1,13 @@
-=============================================
-OmegaT 1.4.6 Beta 4 Read Me file
+==============================================================================
+OmegaT 1.4.6 RC Read Me file
 
 I.   Where to get information about OmegaT
 II.  General notes about Java & OmegaT
 III. Contributions to OmegaT
-IV.  Is OmegaT bugging you ? Do you need help ?
+IV.  Is OmegaT bugging you? Do you need help?
 V.   Release details
 
-=============================================
+==============================================================================
 I.  Where to get information about OmegaT
 
 The most actual info about OmegaT may be found at:
@@ -23,7 +23,7 @@ For a quick start tutorial, check:
 The user manual is in the package you just downloaded, you can access
 it from the [Help] menu after starting OmegaT.
 
-=============================================
+==============================================================================
 II. General notes about Java & OmegaT
 
 OmegaT 1.4.x requires the Java Runtime Environment version 1.4 or
@@ -46,7 +46,7 @@ To run OmegaT from a terminal change to the install (this) directory and
 - for Windows type
      OmegaT.bat or OmegaT.exe
 
-=============================================
+==============================================================================
 III. Contributions to OmegaT
 
 OmegaT is originally the work of Keith Godfrey
@@ -91,7 +91,7 @@ For other kind of contributions, subscribe first to the user group at:
 
 And get a feel of what is going on in the OmegaT world...
 
-=============================================
+==============================================================================
 IV.  Is OmegaT bugging you ? Do you need help ?
 
 In the event of a system error (as evidenced by a stack dump in the
@@ -106,9 +106,34 @@ If your problem does not need a bug report, you can get user volunteer
 support at:
      http://groups.yahoo.com/group/OmegaT/
 
-=============================================
+==============================================================================
 V.   Release details
 
-Please see the file 'release_notes.txt' for information specific
-to this release.
-=============================================
+New UI features (comparing to 1.0 OmegaT series):
+    Find interface rewritten with enhanced functionality
+    Main interface improved
+    Font may be selected
+    Full localisation support
+    Belorussian, English, Esperanto, French, German, Italian, Japanese, 
+                            Russian, Spanish, Turkish interface and manual
+    Ability to jump to the next untranslated segment
+    Rich customization of Format Filters behaviour
+    User-customizable Segmentation
+    Match/Glossary Window has a Split Pane
+File formats supported:
+    Plain text
+    HTML and XHTML
+    OpenDocument / OpenOffice
+    Java resource bundles (.properties)
+    NetBeans EDGE Newsletters
+Core changes:
+    Flexible (Sentence) Segmentation
+    File format filters may be created as plugins
+    Refactored code with more comments
+    Windows installer
+    Attributes of HTML tags are translatable
+
+==============================================================================
+Please see the file 'changes.txt' for detailed information about changes 
+in this and all previous releases.
+==============================================================================

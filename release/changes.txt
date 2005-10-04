@@ -1,31 +1,8 @@
 ----------------------------------------------------------------------
- OmegaT 1.4.6 Beta 4 Release Notes
+ OmegaT 1.4.6 RC Changes
 ----------------------------------------------------------------------
 
- General changes in 1.4 (summary)
-----------------------------------------------------------------------
- UI changes:
-    Find interface rewritten with enhanced functionality
-    Main interface improved
-    Font may be selected
-    Full localisation support
-    Belorussian, English, Esperanto, French, German, Italian, Japanese, 
-                            Russian, Spanish, Turkish interface and manual
-    Ability to jump to the next untranslated segment
-    Rich customization of Format Filters behaviour
-    Match/Glossary Window has a Split Pane
- New filters:
-    XHTML
-    Java resource bundles (.properties)
-    NetBeans EDGE Newsletters
- Core changes:
-    Flexible (Sentence) Segmentation
-    New Fuzzy Matching algorithm - more matches, lower memory footprint
-    Refactored code with more comments
-    Windows installer
-
-
-1.4.6 beta 4
+1.4.6 RC
 -------------------------------
  
  Bugfixes:
@@ -52,11 +29,7 @@
  - Valid TMX 1.1 unsupported (CSVConverter's output)
    http://sourceforge.net/support/tracker.php?aid=1295165
 
- - A space is added in front of segments
-   (regression in 1.4.6 beta 3)
-   http://sourceforge.net/support/tracker.php?aid=1288742
-
- - <address> doesn't segment in HTML documents
+ - <br> and <address> don't segment in HTML documents
    http://sourceforge.net/support/tracker.php?aid=1288756
 
  - Changing the highlighted match types number on MacOSX
@@ -78,9 +51,6 @@
 
  - Display "OmegaT: Instant Start" article on statup
    http://sourceforge.net/support/tracker.php?aid=1217081
-
- - Restore match window when the main window is restored
-   http://sourceforge.net/support/tracker.php?aid=1073199
 
  - Project File List small improvements
    http://sourceforge.net/support/tracker.php?aid=1295695

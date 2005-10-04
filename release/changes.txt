@@ -1,10 +1,44 @@
 ----------------------------------------------------------------------
- OmegaT 1.4.6 RC Changes
+ OmegaT 1.4.6 RC Changes (comparing to 1.4.5.04)
 ----------------------------------------------------------------------
 
 1.4.6 RC
 -------------------------------
  
+ Enchancements:
+
+ - Flexible (Sentence) Segmenting
+   http://sourceforge.net/support/tracker.php?aid=1053692
+
+ - Translate HTML attributes "alt", "title" etc
+   http://sourceforge.net/support/tracker.php?aid=1236555
+
+ - Edit Project to change project parameters
+   http://sourceforge.net/support/tracker.php?aid=1227890
+
+ - Display save status in the status bar
+   http://sourceforge.net/support/tracker.php?aid=1228249
+
+ - Display "OmegaT: Instant Start" article on statup
+   http://sourceforge.net/support/tracker.php?aid=1217081
+
+ - Project File List small improvements
+   http://sourceforge.net/support/tracker.php?aid=1295695
+
+ - Option: not copy source text into target field
+   http://sourceforge.net/support/tracker.php?aid=1075972
+
+ - Option: Insert best match (80%+) into target field
+   http://sourceforge.net/support/tracker.php?aid=1075976
+
+ - Creating project should immediately open it
+   (code by Kim Bruning)
+   http://sourceforge.net/support/tracker.php?aid=1313027
+
+ - Allow adding source files from OmegaT UI
+   (code by Kim Bruning)
+   http://sourceforge.net/support/tracker.php?aid=1313033
+
  Bugfixes:
 
  - Tools/Validate tags shouldn't display a list of errors 
@@ -38,28 +72,48 @@
  - Users Manual not found if OT is started not from install dir
    http://sourceforge.net/support/tracker.php?aid=1296688
 
+ - 1.4.6beta4 selection in the match window
+   (1.4.6 beta 4 regression)
+   http://sourceforge.net/support/tracker.php?aid=1303853 
+
+ - Tags are taken into account when computing similarity
+   http://sourceforge.net/support/tracker.php?aid=1298542
+
+ - Command shortcuts must use CMD+Key on MacOSX
+   http://sourceforge.net/support/tracker.php?aid=1295936
+
+ - <br> and <address> do not segment in HTLM documents
+   http://sourceforge.net/support/tracker.php?aid=1288756
+
+ - Window size settings not memorized on MacOSX
+   http://sourceforge.net/support/tracker.php?aid=1224884
+
+1.4.5.04
+-------------------------------
+ 
+ Bugfixes:
+ 
+ - Empty files are displayed in a file list window
+   http://sourceforge.net/support/tracker.php?aid=1256026
+
+ - AltGr+A in Irish deletes all the segment text
+   http://sourceforge.net/support/tracker.php?aid=1256094
+
+
+1.4.5.03
+-------------------------------
+ 
+ Bugfixes:
+ 
+ - HOME and END key issues:
+     * While pressing the HOME key cursor moves to begining of a line
+     * While pressing the END key cursor moves to end of a line
+   http://sourceforge.net/support/tracker.php?aid=1228296
+
  Enchancements:
 
- - Flexible (Sentence) Segmenting
-   http://sourceforge.net/support/tracker.php?aid=1053692
-
- - Edit Project to change project parameters
-   http://sourceforge.net/support/tracker.php?aid=1227890
-
- - Display save status in the status bar
-   http://sourceforge.net/support/tracker.php?aid=1228249
-
- - Display "OmegaT: Instant Start" article on statup
-   http://sourceforge.net/support/tracker.php?aid=1217081
-
- - Project File List small improvements
-   http://sourceforge.net/support/tracker.php?aid=1295695
-
- - Option: not copy source text into target field
-   http://sourceforge.net/support/tracker.php?aid=1075972
-
- - Option: Insert best match (80%+) into target field
-   http://sourceforge.net/support/tracker.php?aid=1075976
+ - German User Manual included
+   Thanks goes to Martin Wunderlich!
 
 1.4.5.02
 -------------------------------

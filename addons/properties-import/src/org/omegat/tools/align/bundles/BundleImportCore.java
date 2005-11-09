@@ -1,7 +1,7 @@
 /**************************************************************************
  OmegaT Addon - Import of legacy translations of Java(TM) Resource Bundles
- Copyright (C) 2004  Maxym Mykhalchuk
-                     mihmax@yahoo.com
+ Copyright (C) 2004-05  Maxym Mykhalchuk
+                        mihmax@gmail.com
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.addons.properties_import;
+package org.omegat.tools.align.bundles;
 
 import java.io.IOException;
 
@@ -27,15 +27,15 @@ import java.io.IOException;
  *
  * @author  Maxym Mykhalchuk
  */
-public class Core
+public class BundleImportCore
 {
-
-	public static void doImport(String sourcelang, String targetlang, String folder, String tmxfile) throws IOException
-	{
-		TMXSaver saver = new TMXSaver(sourcelang, targetlang, tmxfile);
-		FolderScanner scanner = new FolderScanner(folder, targetlang, saver);
-		scanner.scan();
-		saver.save();
-	}
-	
+    
+    public static void doImport(String sourcelang, String targetlang, String folder, String tmxfile) throws IOException
+    {
+        TMXSaver saver = new TMXSaver(sourcelang, targetlang, tmxfile);
+        FolderScanner scanner = new FolderScanner(folder, targetlang, saver);
+        scanner.scan();
+        saver.save();
+    }
+    
 }

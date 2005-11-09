@@ -1,7 +1,0 @@
-License: Public Domain
-Specification-Version: 1.0
-Implementation-Version: 1.0.0.5
-OmegaT-Plugin: true
-
-Name: org.omegat.filters2.xml.edge.NBEdgeFilter
-OmegaT-Filter: true

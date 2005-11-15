@@ -48,7 +48,7 @@ public class InstanceEditor extends JDialog
     /** A return status code - returned if OK button has been pressed */
     public static final int RET_OK = 1;
     
-    private void init2(boolean sourceEncodingVariable, boolean targetEncodingVariable)
+    private void init2(boolean sourceEncodingVariable, boolean targetEncodingVariable, String hint)
     {
         getRootPane().setDefaultButton(addOrUpdateButton);
         this.sourceEncodingField.setEnabled(sourceEncodingVariable);
@@ -57,33 +57,40 @@ public class InstanceEditor extends JDialog
         
         sourceFilenameMaskField.setText("*.*");                                 // NOI18N
         targetFilenamePatternField.setText("${filename}");                      // NOI18N
+        
+        if( hint!=null && hint.length()!=0 )
+            hintTextArea.setText(hint);
+        else
+            hintTextArea.setVisible(false);
+        
+        pack();
     }
     
     /** 
      * Creates an InstanceEditor form,
      * that is used to add a new filter instance.
      */
-    public InstanceEditor(Dialog parent, boolean sourceEncodingVariable, boolean targetEncodingVariable)
+    public InstanceEditor(Dialog parent, boolean sourceEncodingVariable, boolean targetEncodingVariable, String hint)
     {
         super(parent, true);
         initComponents();
-        init2(sourceEncodingVariable, targetEncodingVariable);
+        init2(sourceEncodingVariable, targetEncodingVariable, hint);
         setTitle(OStrings.getString("INSTANCEEDITOR_TITLE_ADD"));
-        Mnemonics.setLocalizedText(addOrUpdateButton, OStrings.getString("BUTTON_ADD_NODOTS"));
+        Mnemonics.setLocalizedText(addOrUpdateButton, OStrings.getString("BUTTON_OK"));
     }
     
     /** 
      * Creates an InstanceEditor form,
      * that is used to edit an existing filter instance.
      */
-    public InstanceEditor(Dialog parent, boolean sourceEncodingVariable, boolean targetEncodingVariable, String sourceFilenameMask, String sourceEncoding, String targetEncoding, String targetFilenamePattern)
+    public InstanceEditor(Dialog parent, boolean sourceEncodingVariable, boolean targetEncodingVariable, String hint, String sourceFilenameMask, String sourceEncoding, String targetEncoding, String targetFilenamePattern)
     {
         super(parent, true);
         initComponents();
-        init2(sourceEncodingVariable, targetEncodingVariable);
+        init2(sourceEncodingVariable, targetEncodingVariable, hint);
         setTitle( OStrings.getString("INSTANCEEDITOR_TITLE_UPDATE"));
         
-        Mnemonics.setLocalizedText(addOrUpdateButton, OStrings.getString("BUTTON_UPDATE"));
+        Mnemonics.setLocalizedText(addOrUpdateButton, OStrings.getString("BUTTON_OK"));
         
         sourceFilenameMaskField.setText(sourceFilenameMask);
         sourceEncodingField.setSelectedItem(sourceEncoding);
@@ -136,7 +143,7 @@ public class InstanceEditor extends JDialog
         buttonPanel = new javax.swing.JPanel();
         addOrUpdateButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        jTextArea1 = new javax.swing.JTextArea();
+        hintTextArea = new javax.swing.JTextArea();
         tfnpPanel = new javax.swing.JPanel();
         insertButton = new javax.swing.JButton();
         substitute = new javax.swing.JComboBox();
@@ -188,12 +195,11 @@ public class InstanceEditor extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(buttonPanel, gridBagConstraints);
 
-        jTextArea1.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
-        jTextArea1.setEditable(false);
-        jTextArea1.setFont(new JLabel().getFont());
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setText(OStrings.getString("INSTANCEEDITOR_DESCRIPTION"));
-        jTextArea1.setWrapStyleWord(true);
+        hintTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        hintTextArea.setEditable(false);
+        hintTextArea.setFont(new JLabel().getFont());
+        hintTextArea.setLineWrap(true);
+        hintTextArea.setWrapStyleWord(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -203,11 +209,11 @@ public class InstanceEditor extends JDialog
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        getContentPane().add(jTextArea1, gridBagConstraints);
+        getContentPane().add(hintTextArea, gridBagConstraints);
 
         tfnpPanel.setLayout(new java.awt.GridBagLayout());
 
-        tfnpPanel.setBorder(new javax.swing.border.TitledBorder("Target Filename Pattern"));
+        tfnpPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Target Filename Pattern"));
         org.openide.awt.Mnemonics.setLocalizedText(insertButton, OStrings.getString("BUTTON_INSERT"));
         insertButton.addActionListener(new java.awt.event.ActionListener()
         {
@@ -361,12 +367,12 @@ public class InstanceEditor extends JDialog
     private javax.swing.JButton addOrUpdateButton;
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JTextArea hintTextArea;
     private javax.swing.JButton insertButton;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JComboBox sourceEncodingField;
     private javax.swing.JTextField sourceFilenameMaskField;
     private javax.swing.JComboBox substitute;

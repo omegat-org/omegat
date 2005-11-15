@@ -31,9 +31,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import org.omegat.filters2.TranslationException;
-import org.omegat.filters2.xml.DefaultEntityFilter;
-import org.omegat.util.AntiCRReader;
-import org.omegat.util.EncodingAwareReader;
+import org.omegat.filters2.xml.XMLReader;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 
@@ -78,9 +76,8 @@ public class XMLStreamReader
      */
     private void setStream(File file, String encoding) throws FileNotFoundException, UnsupportedEncodingException, IOException, TranslationException
     {
-        EncodingAwareReader ear = new EncodingAwareReader(
-                file.getAbsolutePath(), EncodingAwareReader.ST_XML, encoding);
-        m_bufferedReader = new BufferedReader( new AntiCRReader( ear ) );
+        XMLReader ear = new XMLReader(file.getAbsolutePath(), encoding);
+        m_bufferedReader = new BufferedReader( ear );
         _setStream();
     }
     
@@ -1383,7 +1380,15 @@ public class XMLStreamReader
     }
     
     public XMLBlock getHeadBlock()
-    { return m_headBlock;	}
+    { 
+        return m_headBlock;	
+    }
+    
+    /** Closes the TMX file */
+    public void close() throws IOException
+    {
+        m_bufferedReader.close();
+    }
     
     ///////////////////////////////////////////////////////////////
     

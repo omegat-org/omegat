@@ -26,6 +26,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
@@ -40,6 +42,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
+import javax.swing.text.Element;
+import javax.swing.text.html.HTMLDocument;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.util.StaticUtils;
 
@@ -58,50 +62,48 @@ import org.omegat.util.OStrings;
  */
 public class ProjectFrame extends JFrame
 {
-	public ProjectFrame(MainWindow parent)
-	{
-		m_parent = parent;
-
-		m_nameList = new ArrayList(256);
-		m_offsetList = new ArrayList(256);
-		
-		Container cp = getContentPane();
-		m_editorPane = new JEditorPane();
-		m_editorPane.setEditable(false);
-		m_editorPane.setContentType("text/html");								// NOI18N
-		JScrollPane scroller = new JScrollPane(m_editorPane);
-		cp.add(scroller, "Center");												// NOI18N
-
-        m_addNewFileButton = new JButton(OStrings.getString("TF_MENU_FILE_IMPORT"));
-        update_addNewFileButton();
+    public ProjectFrame(MainWindow parent)
+    {
+        m_parent = parent;
+        
+        m_nameList = new ArrayList(256);
+        m_offsetList = new ArrayList(256);
+        
+        Container cp = getContentPane();
+        m_editorPane = new JEditorPane();
+        m_editorPane.setEditable(false);
+        m_editorPane.setContentType("text/html");								// NOI18N
+        JScrollPane scroller = new JScrollPane(m_editorPane);
+        cp.add(scroller, "Center");												// NOI18N
+        
+        m_addNewFileButton = new JButton();
+        org.openide.awt.Mnemonics.setLocalizedText(m_addNewFileButton, OStrings.getString("TF_MENU_FILE_IMPORT"));
+        uiUpdateImportButtonStatus();
         m_addNewFileButton.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                addNewFile();
+                doImportSourceFiles();
             }
         });
         
-		m_closeButton = new JButton();
-		m_closeButton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				setVisible(false);
-			}
-		});
-
-		Box bbut = Box.createHorizontalBox();
-		bbut.add(Box.createHorizontalGlue());
-        bbut.add(m_addNewFileButton);
-		bbut.add(m_closeButton);
-		bbut.add(Box.createHorizontalGlue());
-		cp.add(bbut, "South");													// NOI18N
-
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-500)/2, (screenSize.height-500)/2, 500, 400);
+        m_closeButton = new JButton();
+        m_closeButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                setVisible(false);
+            }
+        });
         
-		m_editorPane.addHyperlinkListener(new HListener(m_parent, true));
+        Box bbut = Box.createHorizontalBox();
+        bbut.add(Box.createHorizontalGlue());
+        bbut.add(m_addNewFileButton);
+        bbut.add(m_closeButton);
+        bbut.add(Box.createHorizontalGlue());
+        cp.add(bbut, "South");                                                  // NOI18N
+        
+        m_editorPane.addHyperlinkListener(new HListener(m_parent, true));
         
         //  Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
@@ -113,52 +115,59 @@ public class ProjectFrame extends JFrame
             }
         };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
-                put(escape, "ESCAPE");                                          // NOI18N
+        put(escape, "ESCAPE");                                                  // NOI18N
         getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+        
+        addComponentListener(new java.awt.event.ComponentAdapter()
+        {
+            public void componentHidden(java.awt.event.ComponentEvent evt)
+            {
+                m_parent.filelistWindowClosed();
+            }
+        });        
 
-		updateUIText();
-	}
-
-	public void reset()
-	{
-		m_nameList.clear();
-		m_offsetList.clear();
-		m_editorPane.setText("");												// NOI18N
-        update_addNewFileButton();
-	}
-	
-	private void updateUIText()
-	{
-		Mnemonics.setLocalizedText(m_closeButton, OStrings.PF_BUTTON_CLOSE);
-		setTitle(OStrings.PF_WINDOW_TITLE);
-        update_addNewFileButton();
-	}
-
+        Mnemonics.setLocalizedText(m_closeButton, OStrings.getString("BUTTON_CLOSE"));
+        setTitle(OStrings.PF_WINDOW_TITLE);
+        uiUpdateImportButtonStatus();
+        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-600)/2, (screenSize.height-500)/2, 600, 400);
+    }
+    
+    public void reset()
+    {
+        m_nameList.clear();
+        m_offsetList.clear();
+        m_editorPane.setText("");                                               // NOI18N
+        numberofUniqueSegments = -1;
+        uiUpdateImportButtonStatus();
+    }
+    
     public void addFile(String name, int entryNum)
-	{
-		m_nameList.add(name);
-		m_offsetList.add(new Integer(entryNum));
-	}
-
+    {
+        m_nameList.add(name);
+        m_offsetList.add(new Integer(entryNum));
+    }
+    
     /**
-     * Sets the number of translated segments to display.
+     * Sets the number of unique translatable segments to display.
      */
-	public void setNumberofTranslatedSegments(int value)
-	{
-		numberofTranslatedSegments = value;
-	}
+    public void setNumberofUniqueSegments(int value)
+    {
+        numberofUniqueSegments = value;
+    }
     
     /**
      * Builds the table which lists all the project files.
      */
-	public void buildDisplay()
-	{
-		if( m_nameList==null || m_offsetList==null || m_nameList.size()==0 )
-			return;
-
-		StringBuffer output = new StringBuffer();
+    public void buildDisplay()
+    {
+        if( m_nameList==null || m_offsetList==null || m_nameList.size()==0 )
+            return;
+        
+        StringBuffer output = new StringBuffer();
         output.append("<table align=center width=95% border=0>\n");             // NOI18N
-		output.append("<tr>\n");                                                // NOI18N
+        output.append("<tr>\n");                                                // NOI18N
         output.append("<th width=80% align=center>");                           // NOI18N
         output.append(OStrings.PF_FILENAME);                                    // NOI18N
         output.append("</th>\n");                                               // NOI18N
@@ -168,13 +177,13 @@ public class ProjectFrame extends JFrame
         output.append("</tr>\n");                                               // NOI18N
         int firstEntry = 1;
         int entriesUpToNow = 0;
-		for (int i=0; i<m_nameList.size(); i++)
-		{
-			String name = (String) m_nameList.get(i);
+        for (int i=0; i<m_nameList.size(); i++)
+        {
+            String name = (String) m_nameList.get(i);
             entriesUpToNow = ((Integer)m_offsetList.get(i)).intValue();
             int size = 1+entriesUpToNow-firstEntry;
-
-			output.append("<tr>\n");                                            // NOI18N
+            
+            output.append("<tr>\n");                                            // NOI18N
             output.append("<td width=80%>");                                    // NOI18N
             output.append("<a href=\""+firstEntry+"\">"+name+"</a>");           // NOI18N
             output.append("</td>\n");                                           // NOI18N
@@ -183,59 +192,76 @@ public class ProjectFrame extends JFrame
             output.append("</td>\n");                                           // NOI18N
             output.append("</tr>\n");                                           // NOI18N
             
-			firstEntry = entriesUpToNow+1;
-		}
+            firstEntry = entriesUpToNow+1;
+        }
         
         output.append("<tr>\n");                                                // NOI18N
         output.append("<td width=80%><b>");                                     // NOI18N
         output.append(OStrings.getString("GUI_PROJECT_Total_number_of_segments"));
         output.append("</b></td>\n");                                           // NOI18N
         output.append("<td width=20% align=center><b>");                        // NOI18N
-        output.append(entriesUpToNow);                                          // NOI18N
+        output.append(numberofUniqueSegments);
         output.append("</b></td>\n");                                           // NOI18N
         output.append("</tr>\n");                                               // NOI18N
         output.append("<tr>\n");                                                // NOI18N
         output.append("<td width=80%><b>");                                     // NOI18N
         output.append(OStrings.getString("GUI_PROJECT_Of_which_translated_segments"));
         output.append("</b></td>\n");                                           // NOI18N
-        output.append("<td width=20% align=center><b>");                        // NOI18N
-        output.append(numberofTranslatedSegments);                              // NOI18N
+        output.append("<td width=20% align=center id=\"nts\"><b>");                        // NOI18N
+        int nts = CommandThread.core.getNumberofTranslatedSegments();
+        output.append(nts);
         output.append("</b></td>\n");                                           // NOI18N
         output.append("</tr>\n");                                               // NOI18N
         
-		output.append("</table>\n");                                            // NOI18N
+        output.append("</table>\n");                                            // NOI18N
         
-		m_editorPane.setText(output.toString());
-        update_addNewFileButton();
-	}
-
+        m_editorPane.setText(output.toString());
+        uiUpdateImportButtonStatus();
+    }
+    
+    /** 
+     * Updates the number of translated segments only, 
+     * does not rebuild the whole display.
+     */
+    public void updateNumberOfTranslatedSegments()
+    {
+        try
+        {
+            HTMLDocument doc = (HTMLDocument) m_editorPane.getDocument();
+            Element elem = doc.getElement("nts");                               // NOI18N
+            int nts = CommandThread.core.getNumberofTranslatedSegments();
+            doc.setInnerHTML(elem, "<b>"+nts+"</b>");                           // NOI18N
+        }
+        catch( Exception e ) { }
+    }
+    
+    
     
     /**
      * Imports the file/files/folder into project's source files.
      * @author Kim Bruning
      * @author Maxym Mykhalchuk
      */
-    private void addNewFile()
+    private void doImportSourceFiles()
     {
         m_parent.doImportSourceFiles();
     }
-
-    /** Updates the Import Files button status. */    
-    public void update_addNewFileButton()
+    
+    /** Updates the Import Files button status. */
+    public void uiUpdateImportButtonStatus()
     {
         m_addNewFileButton.setEnabled(m_parent.isProjectLoaded());
     }
-    
-    
-	private JEditorPane m_editorPane;
+
+    private JEditorPane m_editorPane;
     private JButton     m_addNewFileButton;
-	private JButton		m_closeButton;
-	private ArrayList	m_nameList;
-	private ArrayList	m_offsetList;
-
-	private int			numberofTranslatedSegments;
-
-	private MainWindow m_parent;
-
+    private JButton     m_closeButton;
+    private ArrayList   m_nameList;
+    private ArrayList   m_offsetList;
+    
+    private int         numberofUniqueSegments;
+    
+    private MainWindow  m_parent;
+    
 }
 

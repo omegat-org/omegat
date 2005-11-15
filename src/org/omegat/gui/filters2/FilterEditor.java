@@ -72,6 +72,10 @@ public class FilterEditor extends JDialog implements ListSelectionListener
         initComponents();
         
         fileFormatTextField.setText(filter.getHumanName());
+        if( filter.getHint()!=null && filter.getHint().length()!=0 )
+            hintTextArea.setText(filter.getHint());
+        else
+            hintTextArea.setVisible(false);
         
         getRootPane().setDefaultButton(okButton);
 
@@ -137,6 +141,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener
 
         buttonPanel = new javax.swing.JPanel();
         toDefaultsButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         fileFormatLabel = new javax.swing.JLabel();
@@ -148,6 +153,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener
         removeButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         addButton = new javax.swing.JButton();
+        hintTextArea = new javax.swing.JTextArea();
 
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -174,6 +180,9 @@ public class FilterEditor extends JDialog implements ListSelectionListener
 
         buttonPanel.add(toDefaultsButton);
 
+        jLabel1.setPreferredSize(new java.awt.Dimension(20, 0));
+        buttonPanel.add(jLabel1);
+
         org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK"));
         okButton.addActionListener(new java.awt.event.ActionListener()
         {
@@ -198,8 +207,8 @@ public class FilterEditor extends JDialog implements ListSelectionListener
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(buttonPanel, gridBagConstraints);
@@ -207,7 +216,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener
         org.openide.awt.Mnemonics.setLocalizedText(fileFormatLabel, OStrings.getString("FILTEREDITOR_File_Format"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
@@ -216,7 +225,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener
         fileFormatTextField.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
@@ -232,7 +241,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
@@ -308,13 +317,27 @@ public class FilterEditor extends JDialog implements ListSelectionListener
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(jPanel3, gridBagConstraints);
+
+        hintTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        hintTextArea.setEditable(false);
+        hintTextArea.setFont(new JLabel().getFont());
+        hintTextArea.setLineWrap(true);
+        hintTextArea.setWrapStyleWord(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        getContentPane().add(hintTextArea, gridBagConstraints);
 
         pack();
     }
@@ -355,7 +378,10 @@ public class FilterEditor extends JDialog implements ListSelectionListener
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addButtonActionPerformed
     {//GEN-HEADEREND:event_addButtonActionPerformed
-        InstanceEditor ie = new InstanceEditor(this, filter.isSourceEncodingVariable(), filter.isTargetEncodingVariable());
+        InstanceEditor ie = new InstanceEditor(this, 
+                filter.isSourceEncodingVariable(), 
+                filter.isTargetEncodingVariable(), 
+                filter.getHint());
         ie.setVisible(true);
         if( ie.getReturnStatus()==InstanceEditor.RET_OK )
         {
@@ -375,6 +401,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener
         InstanceEditor ie = new InstanceEditor(this, 
                 filter.isSourceEncodingVariable(), 
                 filter.isTargetEncodingVariable(), 
+                filter.getHint(),
                 instances.getModel().getValueAt(row, 0).toString(),
                 instances.getModel().getValueAt(row, 1).toString(), 
                 instances.getModel().getValueAt(row, 2).toString(),
@@ -421,8 +448,10 @@ public class FilterEditor extends JDialog implements ListSelectionListener
     private javax.swing.JButton editButton;
     private javax.swing.JLabel fileFormatLabel;
     private javax.swing.JTextField fileFormatTextField;
+    private javax.swing.JTextArea hintTextArea;
     private javax.swing.JTable instances;
     private javax.swing.JScrollPane instancesScrollPane;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton okButton;
     private javax.swing.JButton removeButton;

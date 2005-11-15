@@ -100,7 +100,7 @@ public class ContextFrame extends JFrame
 
 	private void updateUIText()
 	{
-		Mnemonics.setLocalizedText(m_closeButton, OStrings.CF_BUTTON_CLOSE);
+		Mnemonics.setLocalizedText(m_closeButton, OStrings.getString("BUTTON_CLOSE"));
 		if (m_srcLang)
 			m_searchResults = OStrings.CF_SEARCH_RESULTS_SRC;
 		else
@@ -127,7 +127,7 @@ public class ContextFrame extends JFrame
 			ste = (SourceTextEntry) stringList.get(i);
 			se = ste.getStrEntry();
 			src = se.getSrcText();
-			trans = se.getTrans();
+			trans = se.getTranslation();
 			if (!src.equals("") && !trans.equals(""))		// NOI18N
 			{
 				out += "<tr>";													// NOI18N

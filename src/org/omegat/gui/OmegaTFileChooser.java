@@ -47,7 +47,7 @@ public class OmegaTFileChooser extends JFileChooser
      */
     public OmegaTFileChooser()
     {
-        super(Preferences.getPreference(Preferences.CURRENT_FOLDER));
+        this(Preferences.getPreference(Preferences.CURRENT_FOLDER));
     }
     /**
      * Constructs an <code>OmegaTFileChooser</code> using the given path.
@@ -55,16 +55,25 @@ public class OmegaTFileChooser extends JFileChooser
     public OmegaTFileChooser(String path)
     {
         super(path);
+        try
+        {
+            if( omegatIcon==null )
+                omegatIcon = new ImageIcon( getClass().getResource(
+                        "/org/omegat/gui/resources/OmegaT_small.gif") );        // NOI18N
+        }
+        catch( Exception e )
+        {
+            // do nothing
+        }
     }
     
     /** OmegaT project icon */
-    private static ImageIcon omegatIcon = new ImageIcon(
-            StaticUtils.installDir()+ File.separator + "images" + File.separator + "OmegaT_small.gif");	// NOI18N
+    private static ImageIcon omegatIcon = null;
 
     /** Redefines the icon for OmegaT projects. */
     public Icon getIcon(File f)
     {
-        if (isProjectDir(f))
+        if( isProjectDir(f) && omegatIcon!=null )
             return omegatIcon;
         else
             return super.getIcon(f);

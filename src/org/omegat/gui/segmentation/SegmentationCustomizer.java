@@ -21,16 +21,24 @@
 
 package org.omegat.gui.segmentation;
 
+import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.beans.ExceptionListener;
+import java.text.MessageFormat;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 
 import org.omegat.core.segmentation.MapRule;
 import org.omegat.core.segmentation.SRX;
@@ -46,7 +54,8 @@ import org.omegat.util.OStrings;
  *
  * @author  Maxym Mykhalchuk
  */
-public class SegmentationCustomizer extends JDialog implements ListSelectionListener
+public class SegmentationCustomizer extends JDialog 
+        implements ListSelectionListener
 {
     /** A return status code - returned if Cancel button has been pressed */
     public static final int RET_CANCEL = 0;
@@ -56,10 +65,20 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
     private void constructor()
     {
         initComponents();
-        optionsPanel.setBorder(new TitledBorder( OStrings.getString("GUI_SEGMENTATION_RULESETS")));
-        rulePanel.setBorder(new TitledBorder( OStrings.getString("GUI_SEGMENTATION_RULEORDER")));
+        
+        getRootPane().setDefaultButton(okButton);
+        
         mapTable.getSelectionModel().addListSelectionListener(this);
         ruleTable.getSelectionModel().addListSelectionListener(this);
+        
+        MappingRulesModel model = (MappingRulesModel)mapTable.getModel();
+        model.addExceptionListener(new ExceptionListener()
+        {
+            public void exceptionThrown(Exception e)
+            {
+                mapErrorsLabel.setText(e.getLocalizedMessage());
+            }
+        });
         
         pack();
         setSize(getWidth()*5/4, getHeight()*5/4);
@@ -98,6 +117,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         ListSelectionModel lsm = (ListSelectionModel)e.getSource();
         if( e.getSource()==mapTable.getSelectionModel() )
         {
+            mapErrorsLabel.setText("");                                         // NOI18N
             if (lsm.isSelectionEmpty())
             {
                 mapDeleteButton.setEnabled(false);
@@ -125,12 +145,21 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
                     mapDownButton.setEnabled(false);
                 
                 MapRule maprule = (MapRule)SRX.getSRX().getMappingRules().get(selrow);
-                ruleTable.setModel(new SegmentationRulesModel(maprule.getRules()));
+                SegmentationRulesModel model = new SegmentationRulesModel(maprule.getRules());
+                ruleTable.setModel(model);
+                model.addExceptionListener(new ExceptionListener()
+                {
+                    public void exceptionThrown(Exception e)
+                    {
+                        ruleErrorsLabel.setText(e.getLocalizedMessage());
+                    }
+                });
                 ruleInsertButton.setEnabled(true);
             }
         }
         else if( e.getSource()==ruleTable.getSelectionModel() )
         {
+            ruleErrorsLabel.setText("");                                         // NOI18N
             if (lsm.isSelectionEmpty())
             {
                 ruleDeleteButton.setEnabled(false);
@@ -157,6 +186,14 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         }
     }
     
+    /** Commits all pending edits on tables to allow up/down row movement */
+    private void commitTableEdits()
+    {
+        if( mapTable.getCellEditor()!=null )
+            mapTable.getCellEditor().stopCellEditing();
+        if( ruleTable.getCellEditor()!=null )
+            ruleTable.getCellEditor().stopCellEditing();
+    }
     
     /** This method is called from within the constructor to
      * initialize the form.
@@ -168,13 +205,9 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
     {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        optionsPanel = new javax.swing.JPanel();
-        segmentSubflowsCheckBox = new javax.swing.JCheckBox();
-        terminalThingDescLabel = new javax.swing.JLabel();
-        includeStartingTagsCheckBox = new javax.swing.JCheckBox();
-        includeEndingTagsCheckBox = new javax.swing.JCheckBox();
-        includeIsolatedTagsCheckBox = new javax.swing.JCheckBox();
         buttonPanel = new javax.swing.JPanel();
+        toDefaultsButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         rulePanel = new javax.swing.JPanel();
@@ -184,6 +217,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         ruleDeleteButton = new javax.swing.JButton();
         ruleInsertButton = new javax.swing.JButton();
         ruleDownButton = new javax.swing.JButton();
+        ruleErrorsLabel = new javax.swing.JLabel();
         mapPanel = new javax.swing.JPanel();
         mapScrollPane = new javax.swing.JScrollPane();
         mapTable = new javax.swing.JTable();
@@ -192,56 +226,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         mapInsertButton = new javax.swing.JButton();
         mapDownButton = new javax.swing.JButton();
         hintTextArea = new javax.swing.JTextArea();
-
-        optionsPanel.setLayout(new java.awt.GridBagLayout());
-
-        optionsPanel.setBorder(new javax.swing.border.TitledBorder("Segmentation options:"));
-        segmentSubflowsCheckBox.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(segmentSubflowsCheckBox, OStrings.getString("GUI_SEGMENTATION_OPTION_Segment_Subflows"));
-        segmentSubflowsCheckBox.setModel(SRXOptionsModel.getSegmentSubflowsModel(SRX.getSRX()));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        optionsPanel.add(segmentSubflowsCheckBox, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(terminalThingDescLabel, OStrings.getString("GUI_SEGMENTATION_OPTION_Include_Terminal_Formatting"));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        optionsPanel.add(terminalThingDescLabel, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(includeStartingTagsCheckBox, OStrings.getString("GUI_SEGMENTATION_OPTION_Include_Starting_tags"));
-        includeStartingTagsCheckBox.setToolTipText(OStrings.getString("GUI_SEGMENTATION_TIP_Include_Starting_Tags"));
-        includeStartingTagsCheckBox.setModel(SRXOptionsModel.getIncludeStartingTagsModel(SRX.getSRX()));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        optionsPanel.add(includeStartingTagsCheckBox, gridBagConstraints);
-
-        includeEndingTagsCheckBox.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(includeEndingTagsCheckBox, OStrings.getString("GUI_SEGMENTATION_OPTION_Include_Ending_Tags"));
-        includeEndingTagsCheckBox.setModel(SRXOptionsModel.getIncludeEndingTagsModel(SRX.getSRX()));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        optionsPanel.add(includeEndingTagsCheckBox, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(includeIsolatedTagsCheckBox, OStrings.getString("GUI_SEGMENTATION_OPTION_Include_Isolated_Tags"));
-        includeIsolatedTagsCheckBox.setModel(SRXOptionsModel.getIncludeIsolatedTagsModel(SRX.getSRX()));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        optionsPanel.add(includeIsolatedTagsCheckBox, gridBagConstraints);
+        mapErrorsLabel = new javax.swing.JLabel();
 
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -255,6 +240,20 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         });
 
         buttonPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        org.openide.awt.Mnemonics.setLocalizedText(toDefaultsButton, OStrings.getString("BUTTON_TO_DEFAULTS"));
+        toDefaultsButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                toDefaultsButtonActionPerformed(evt);
+            }
+        });
+
+        buttonPanel.add(toDefaultsButton);
+
+        jLabel1.setPreferredSize(new java.awt.Dimension(20, 0));
+        buttonPanel.add(jLabel1);
 
         org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK"));
         okButton.addActionListener(new java.awt.event.ActionListener()
@@ -288,7 +287,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
         rulePanel.setLayout(new java.awt.GridBagLayout());
 
-        rulePanel.setBorder(new javax.swing.border.TitledBorder("Segmentation rules are applied in the following order:"));
+        rulePanel.setBorder(new javax.swing.border.TitledBorder(OStrings.getString("GUI_SEGMENTATION_RULEORDER")));
         ruleScrollPane.setPreferredSize(new java.awt.Dimension(300, 120));
         ruleScrollPane.setViewportView(ruleTable);
 
@@ -302,7 +301,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         rulePanel.add(ruleScrollPane, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(ruleUpButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_UP_1"));
+        org.openide.awt.Mnemonics.setLocalizedText(ruleUpButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_UP_2"));
         ruleUpButton.setEnabled(false);
         ruleUpButton.addActionListener(new java.awt.event.ActionListener()
         {
@@ -320,7 +319,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         rulePanel.add(ruleUpButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(ruleDeleteButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_DELETE_1"));
+        org.openide.awt.Mnemonics.setLocalizedText(ruleDeleteButton, OStrings.getString("BUTTON_REMOVE_2"));
         ruleDeleteButton.setEnabled(false);
         ruleDeleteButton.addActionListener(new java.awt.event.ActionListener()
         {
@@ -338,7 +337,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         rulePanel.add(ruleDeleteButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(ruleInsertButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_INSERT_1"));
+        org.openide.awt.Mnemonics.setLocalizedText(ruleInsertButton, OStrings.getString("BUTTON_ADD_NODOTS2"));
         ruleInsertButton.setEnabled(false);
         ruleInsertButton.addActionListener(new java.awt.event.ActionListener()
         {
@@ -356,7 +355,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         rulePanel.add(ruleInsertButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(ruleDownButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_DOWN_1"));
+        org.openide.awt.Mnemonics.setLocalizedText(ruleDownButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_DOWN_2"));
         ruleDownButton.setEnabled(false);
         ruleDownButton.addActionListener(new java.awt.event.ActionListener()
         {
@@ -374,6 +373,16 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         rulePanel.add(ruleDownButton, gridBagConstraints);
 
+        ruleErrorsLabel.setForeground(new java.awt.Color(255, 0, 0));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 2);
+        rulePanel.add(ruleErrorsLabel, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -384,7 +393,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
         mapPanel.setLayout(new java.awt.GridBagLayout());
 
-        mapPanel.setBorder(new javax.swing.border.TitledBorder("Sets of segmentation rules:"));
+        mapPanel.setBorder(new javax.swing.border.TitledBorder(OStrings.getString("GUI_SEGMENTATION_RULESETS")));
         mapScrollPane.setPreferredSize(new java.awt.Dimension(300, 100));
         mapTable.setModel(new MappingRulesModel(SRX.getSRX()));
         mapScrollPane.setViewportView(mapTable);
@@ -399,7 +408,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         mapPanel.add(mapScrollPane, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(mapUpButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_UP_2"));
+        org.openide.awt.Mnemonics.setLocalizedText(mapUpButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_UP_1"));
         mapUpButton.setEnabled(false);
         mapUpButton.addActionListener(new java.awt.event.ActionListener()
         {
@@ -417,7 +426,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         mapPanel.add(mapUpButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(mapDeleteButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_DELETE_2"));
+        org.openide.awt.Mnemonics.setLocalizedText(mapDeleteButton, OStrings.getString("BUTTON_REMOVE"));
         mapDeleteButton.setEnabled(false);
         mapDeleteButton.addActionListener(new java.awt.event.ActionListener()
         {
@@ -435,7 +444,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         mapPanel.add(mapDeleteButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(mapInsertButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_INSERT_2"));
+        org.openide.awt.Mnemonics.setLocalizedText(mapInsertButton, OStrings.getString("BUTTON_ADD_NODOTS"));
         mapInsertButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -452,7 +461,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         mapPanel.add(mapInsertButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(mapDownButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_DOWN_2"));
+        org.openide.awt.Mnemonics.setLocalizedText(mapDownButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_DOWN_1"));
         mapDownButton.setEnabled(false);
         mapDownButton.addActionListener(new java.awt.event.ActionListener()
         {
@@ -484,6 +493,16 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         mapPanel.add(hintTextArea, gridBagConstraints);
 
+        mapErrorsLabel.setForeground(new java.awt.Color(255, 0, 0));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 2);
+        mapPanel.add(mapErrorsLabel, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -494,8 +513,25 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
     }
     // </editor-fold>//GEN-END:initComponents
 
+    private void toDefaultsButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_toDefaultsButtonActionPerformed
+    {//GEN-HEADEREND:event_toDefaultsButtonActionPerformed
+        commitTableEdits();
+        SRX.init();
+        MappingRulesModel model = new MappingRulesModel(SRX.getSRX());
+        mapTable.setModel(model);
+        model.addExceptionListener(new ExceptionListener()
+        {
+            public void exceptionThrown(Exception e)
+            {
+                mapErrorsLabel.setText(e.getLocalizedMessage());
+            }
+        });
+        ruleTable.setModel(new DefaultTableModel());
+    }//GEN-LAST:event_toDefaultsButtonActionPerformed
+    
     private void ruleDownButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ruleDownButtonActionPerformed
     {//GEN-HEADEREND:event_ruleDownButtonActionPerformed
+        commitTableEdits();
         SegmentationRulesModel model = (SegmentationRulesModel)ruleTable.getModel();
         int selrow = ruleTable.getSelectedRow();
         model.moveRowDown(selrow);
@@ -505,6 +541,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
     private void ruleUpButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ruleUpButtonActionPerformed
     {//GEN-HEADEREND:event_ruleUpButtonActionPerformed
+        commitTableEdits();
         SegmentationRulesModel model = (SegmentationRulesModel)ruleTable.getModel();
         int selrow = ruleTable.getSelectedRow();
         model.moveRowUp(selrow);
@@ -514,12 +551,14 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
     private void ruleDeleteButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ruleDeleteButtonActionPerformed
     {//GEN-HEADEREND:event_ruleDeleteButtonActionPerformed
+        commitTableEdits();
         SegmentationRulesModel model = (SegmentationRulesModel)ruleTable.getModel();
         model.removeRow(ruleTable.getSelectedRow());
     }//GEN-LAST:event_ruleDeleteButtonActionPerformed
 
     private void mapDownButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mapDownButtonActionPerformed
     {//GEN-HEADEREND:event_mapDownButtonActionPerformed
+        commitTableEdits();
         MappingRulesModel model = (MappingRulesModel)mapTable.getModel();
         int selrow = mapTable.getSelectedRow();
         model.moveRowDown(selrow);
@@ -529,6 +568,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
     private void mapUpButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mapUpButtonActionPerformed
     {//GEN-HEADEREND:event_mapUpButtonActionPerformed
+        commitTableEdits();
         MappingRulesModel model = (MappingRulesModel)mapTable.getModel();
         int selrow = mapTable.getSelectedRow();
         model.moveRowUp(selrow);
@@ -538,24 +578,35 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
     private void mapDeleteButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mapDeleteButtonActionPerformed
     {//GEN-HEADEREND:event_mapDeleteButtonActionPerformed
+        commitTableEdits();
         MappingRulesModel model = (MappingRulesModel)mapTable.getModel();
-        model.removeRow(mapTable.getSelectedRow());
+        String set = model.getValueAt(mapTable.getSelectedRow(), 0).toString();
+        String title = OStrings.getString("CONFIRM_DIALOG_TITLE");
+        String message = MessageFormat.format(
+                OStrings.getString("SEG_CONFIRM_REMOVE_SENTSEG_SET"),
+                new Object[] { set } );
+        if( JOptionPane.showConfirmDialog(this, message , title, JOptionPane.YES_NO_OPTION)
+                == JOptionPane.YES_OPTION )
+            model.removeRow(mapTable.getSelectedRow());
     }//GEN-LAST:event_mapDeleteButtonActionPerformed
 
     private void ruleInsertButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ruleInsertButtonActionPerformed
     {//GEN-HEADEREND:event_ruleInsertButtonActionPerformed
+        commitTableEdits();
         SegmentationRulesModel model = (SegmentationRulesModel)ruleTable.getModel();
         model.addRow();
     }//GEN-LAST:event_ruleInsertButtonActionPerformed
 
     private void mapInsertButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mapInsertButtonActionPerformed
     {//GEN-HEADEREND:event_mapInsertButtonActionPerformed
+        commitTableEdits();
         MappingRulesModel model = (MappingRulesModel)mapTable.getModel();
         model.addRow();
     }//GEN-LAST:event_mapInsertButtonActionPerformed
     
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_okButtonActionPerformed
     {
+        commitTableEdits();
         SRX.getSRX().save();
         doClose(RET_OK);
     }//GEN-LAST:event_okButtonActionPerformed
@@ -583,29 +634,27 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JTextArea hintTextArea;
-    private javax.swing.JCheckBox includeEndingTagsCheckBox;
-    private javax.swing.JCheckBox includeIsolatedTagsCheckBox;
-    private javax.swing.JCheckBox includeStartingTagsCheckBox;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton mapDeleteButton;
     private javax.swing.JButton mapDownButton;
+    private javax.swing.JLabel mapErrorsLabel;
     private javax.swing.JButton mapInsertButton;
     private javax.swing.JPanel mapPanel;
     private javax.swing.JScrollPane mapScrollPane;
     private javax.swing.JTable mapTable;
     private javax.swing.JButton mapUpButton;
     private javax.swing.JButton okButton;
-    private javax.swing.JPanel optionsPanel;
     private javax.swing.JButton ruleDeleteButton;
     private javax.swing.JButton ruleDownButton;
+    private javax.swing.JLabel ruleErrorsLabel;
     private javax.swing.JButton ruleInsertButton;
     private javax.swing.JPanel rulePanel;
     private javax.swing.JScrollPane ruleScrollPane;
     private javax.swing.JTable ruleTable;
     private javax.swing.JButton ruleUpButton;
-    private javax.swing.JCheckBox segmentSubflowsCheckBox;
-    private javax.swing.JLabel terminalThingDescLabel;
+    private javax.swing.JButton toDefaultsButton;
     // End of variables declaration//GEN-END:variables
     
     private int returnStatus = RET_CANCEL;
-    
+
 }

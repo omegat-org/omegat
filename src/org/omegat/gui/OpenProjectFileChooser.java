@@ -20,42 +20,39 @@
 **************************************************************************/
 
 package org.omegat.gui;
-import org.omegat.util.OConsts;
 
-import javax.swing.*;
 import java.io.File;
-import org.omegat.util.OStrings;
 
 /**
  * File Chooser to open project.
  * Project is a directory, so it's a bit tricky, we need to react on both:
  * - changing directory
- * - and hitting OK. 
+ * - and hitting OK.
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  */
 class OpenProjectFileChooser extends OmegaTFileChooser
 {
-
-	public OpenProjectFileChooser()
-	{
-		setFileSelectionMode(DIRECTORIES_ONLY);
-		setMultiSelectionEnabled(false);
-	}
+    
+    public OpenProjectFileChooser()
+    {
+        setFileSelectionMode(DIRECTORIES_ONLY);
+        setMultiSelectionEnabled(false);
+    }
     
     public void approveSelection()
-	{
-		// user hit 'open' button - redirect command to open project or
-		//  recurse into lower directory
-		if (isProjectDir(getSelectedFile()))
-			// The parent directory is made current,
+    {
+        // user hit 'open' button - redirect command to open project or
+        //  recurse into lower directory
+        if (isProjectDir(getSelectedFile()))
+            // The parent directory is made current,
             // and the project's directory is the selected 'file'.
-			super.approveSelection();
+            super.approveSelection();
         else
             setCurrentDirectory(getSelectedFile());
-	}
-	
+    }
+    
     public void setCurrentDirectory(File dir)
     {
         if( isProjectDir(dir) )

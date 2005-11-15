@@ -22,7 +22,6 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Label;
@@ -36,15 +35,14 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
-import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
+import org.omegat.util.gui.LanguageComboBoxRenderer;
 import org.omegat.gui.OmegaTFileChooser;
 import org.omegat.gui.ProjectProperties;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
@@ -149,7 +147,7 @@ public class ProjectPropertiesDialog extends JDialog
         if( m_sourceLocaleField.getMaximumRowCount()<20 )
             m_sourceLocaleField.setMaximumRowCount(20);
         m_sourceLocaleField.setEditable(true);
-        m_sourceLocaleField.setRenderer(new MyComboBoxRenderer());
+        m_sourceLocaleField.setRenderer(new LanguageComboBoxRenderer());
         m_sourceLocaleField.setSelectedItem(projectProperties.getSourceLanguage());
         localesBox.add(m_sourceLocaleField);
 
@@ -165,7 +163,7 @@ public class ProjectPropertiesDialog extends JDialog
         if( m_targetLocaleField.getMaximumRowCount()<20 )
             m_targetLocaleField.setMaximumRowCount(20);
         m_targetLocaleField.setEditable(true);
-        m_targetLocaleField.setRenderer(new MyComboBoxRenderer());
+        m_targetLocaleField.setRenderer(new LanguageComboBoxRenderer());
         m_targetLocaleField.setSelectedItem(projectProperties.getTargetLanguage());
         localesBox.add(m_targetLocaleField);
         
@@ -247,9 +245,9 @@ public class ProjectPropertiesDialog extends JDialog
         getContentPane().add(centerBox, "Center");                                      // NOI18N
 
         JButton m_okButton = new JButton();
-        Mnemonics.setLocalizedText(m_okButton, OStrings.PP_BUTTON_OK);
+        Mnemonics.setLocalizedText(m_okButton, OStrings.getString("BUTTON_OK"));
         JButton m_cancelButton = new JButton();
-        Mnemonics.setLocalizedText(m_cancelButton, OStrings.PP_BUTTON_CANCEL);
+        Mnemonics.setLocalizedText(m_cancelButton, OStrings.getString("BUTTON_CANCEL"));
         
         Box southBox = Box.createHorizontalBox();
         southBox.setBorder(new EmptyBorder(5,5,5,5));
@@ -662,26 +660,3 @@ public class ProjectPropertiesDialog extends JDialog
     public boolean dialogCancelled()    { return m_dialogCancelled; }
     private boolean     m_dialogCancelled;
 }
-
-
-/**
- * My own class that renders a locale combo box smartly.
- *
- * @author Maxym Mykhalchuk
- */
-class MyComboBoxRenderer extends BasicComboBoxRenderer
-{
-    public Component getListCellRendererComponent(
-            JList list,
-            Object value,            // value to display
-            int index,               // cell index
-            boolean isSelected,      // is the cell selected
-            boolean cellHasFocus)    // the list and the cell have the focus
-    {
-        JLabel label = (JLabel)super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-        Language lang = (Language)value;
-        label.setText(lang + " - " + lang.getDisplayName()); // NOI18N
-        return label;
-    }
-}
-

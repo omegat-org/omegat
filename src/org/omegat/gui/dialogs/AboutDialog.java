@@ -43,7 +43,7 @@ public class AboutDialog extends JDialog
     {
         super(parent, true);
         initComponents();
-        versionLabel.setText(  OStrings.getString("ABOUTDIALOG_VERSION_PREFIX")+OStrings.HUMAN_VERSION);
+        versionLabel.setText(  OStrings.getString("ABOUTDIALOG_VERSION_PREFIX")+OStrings.VERSION);
         abouttext.setCaretPosition(1);
     }
     
@@ -85,9 +85,9 @@ public class AboutDialog extends JDialog
 
         buttonPanel.setLayout(new java.awt.BorderLayout());
 
-        buttonPanel.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(5, 5, 5, 5)));
+        buttonPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         org.openide.awt.Mnemonics.setLocalizedText(jLabel2, OStrings.getString("ABOUTDIALOG_COPYRIGHT"));
-        jLabel2.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(5, 5, 5, 5)));
+        jLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         buttonPanel.add(jLabel2, java.awt.BorderLayout.WEST);
 
         org.openide.awt.Mnemonics.setLocalizedText(licenseButton, OStrings.getString("ABOUTDIALOG_LICENSE_BUTTON"));
@@ -117,10 +117,10 @@ public class AboutDialog extends JDialog
         getContentPane().add(buttonPanel, java.awt.BorderLayout.SOUTH);
 
         versionLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/omegat/gui/resources/OmegaT.gif")));
-        versionLabel.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(5, 5, 5, 5)));
+        versionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         getContentPane().add(versionLabel, java.awt.BorderLayout.NORTH);
 
-        scroll.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(5, 5, 5, 5)));
+        scroll.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         abouttext.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         abouttext.setEditable(false);
         abouttext.setFont(versionLabel.getFont());
@@ -132,7 +132,7 @@ public class AboutDialog extends JDialog
         getContentPane().add(scroll, java.awt.BorderLayout.CENTER);
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-460)/2, (screenSize.height-436)/2, 460, 436);
+        setBounds((screenSize.width-515)/2, (screenSize.height-451)/2, 515, 451);
     }
     // </editor-fold>//GEN-END:initComponents
 

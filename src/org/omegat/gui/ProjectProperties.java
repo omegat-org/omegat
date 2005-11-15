@@ -32,7 +32,6 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileReader;
-import org.omegat.gui.main.MainWindow;
 
 /**
  * Storage for project properties.
@@ -45,166 +44,165 @@ public class ProjectProperties
 {
     /** Returns The Target (Compiled) Files Directory */
     public String getTargetRoot()
-    { 
-        return targetRoot;		
+    {
+        return targetRoot;
     }
     /** Sets The Target (Compiled) Files Directory */
     public void setTargetRoot(String targetRoot)
-    {        
-        this.targetRoot = targetRoot;    
+    {
+        this.targetRoot = targetRoot;
     }
     
     /** Returns The Glossary Files Directory */
     public String getGlossaryRoot()
-    { 
-        return glossaryRoot;	
+    {
+        return glossaryRoot;
     }
     /** Sets The Glossary Files Directory */
     public void setGlossaryRoot(String glossaryRoot)
-    {  
-        this.glossaryRoot = glossaryRoot;  
+    {
+        this.glossaryRoot = glossaryRoot;
     }
     
     /** Returns The Translation Memory (TMX) Files Directory */
     public String getTMRoot()
-    { 
-        return tmRoot;		
+    {
+        return tmRoot;
     }
     /** Sets The Translation Memory (TMX) Files Directory */
     public void setTMRoot(String tmRoot)
-    {          
-        this.tmRoot = tmRoot;      
+    {
+        this.tmRoot = tmRoot;
     }
     
     /** Returns the name of the Project */
     public String getProjectName()
-    {        
-        return projectName;    
+    {
+        return projectName;
     }
     /** Sets the name of the Project */
     public void setProjectName(String projectName)
-    {   
-        this.projectName = projectName;  
+    {
+        this.projectName = projectName;
     }
     
     /** Returns The Project File Name */
     public String getProjectFile()
-    {        
-        return projectFile;    
+    {
+        return projectFile;
     }
     /** Sets The Project File Name */
     public void setProjectFile(String projectFile)
-    {   
-        this.projectFile = projectFile;  
+    {
+        this.projectFile = projectFile;
     }
     
     /** Returns The Project Root Directory */
     public String getProjectRoot()
-    {        
+    {
         return projectRoot;
     }
     /** Sets The Project Root Directory */
     public void setProjectRoot(String projectRoot)
-    {   
+    {
         this.projectRoot = projectRoot;
     }
     
     /** Returns The Project's Translation Memory (TMX) File */
     public String getProjectInternal()
-    {    
+    {
         return projectInternal;
     }
     /** Sets The Project's Translation Memory (TMX) File */
     public void setProjectInternal(String projectInternal)
-    {    
-        this.projectInternal = projectInternal;   
+    {
+        this.projectInternal = projectInternal;
     }
     
     /** Returns The Source (to be translated) Files Directory */
     public String getSourceRoot()
-    {         
-        return sourceRoot;    
+    {
+        return sourceRoot;
     }
     /** Sets The Source (to be translated) Files Directory */
     public void setSourceRoot(String sourceRoot)
-    {     
-        this.sourceRoot = sourceRoot;    
+    {
+        this.sourceRoot = sourceRoot;
     }
     
     /** Returns The Source Language (language of the source files) of the Project */
     public Language getSourceLanguage()
-    { 
-        return sourceLanguage;	
+    {
+        return sourceLanguage;
     }
     /** Sets The Source Language (language of the source files) of the Project */
     public void setSourceLanguage(Language sourceLanguage)
-    {      
-        this.sourceLanguage = sourceLanguage;    
+    {
+        this.sourceLanguage = sourceLanguage;
     }
     /** Sets The Source Language (language of the source files) of the Project */
     public void setSourceLanguage(String sourceLanguage)
-    {       
-        this.sourceLanguage = new Language(sourceLanguage);  
+    {
+        this.sourceLanguage = new Language(sourceLanguage);
     }
     
     /** Returns The Target Language (language of the translated files) of the Project */
     public Language getTargetLanguage()
-    { 
-        return targetLanguage;	
+    {
+        return targetLanguage;
     }
     /** Sets The Target Language (language of the translated files) of the Project */
     public void setTargetLanguage(Language targetLanguage)
-    {      
-        this.targetLanguage = targetLanguage;    
+    {
+        this.targetLanguage = targetLanguage;
     }
     /** Sets The Target Language (language of the translated files) of the Project */
     public void setTargetLanguage(String targetLanguage)
-    {       
-        this.targetLanguage = new Language(targetLanguage);  
+    {
+        this.targetLanguage = new Language(targetLanguage);
     }
     
     /** Returns whether The Sentence Segmenting is Enabled for this Project. Default, Yes. */
     public boolean isSentenceSegmentingEnabled()
-    { 
-        return sentenceSegmentingOn; 
+    {
+        return sentenceSegmentingOn;
     }
     /** Sets whether The Sentence Segmenting is Enabled for this Project */
     public void setSentenceSegmentingEnabled(boolean sentenceSegmentingOn)
-    { 
-        this.sentenceSegmentingOn = sentenceSegmentingOn; 
+    {
+        this.sentenceSegmentingOn = sentenceSegmentingOn;
     }
-
+    
     /**
      * Resets all project properties to empty or default values
      */
-	public void reset()
-	{
-		setProjectFile("");	// NOI18N
-		setProjectName("");	// NOI18N
-		setProjectRoot("");	// NOI18N
-		setProjectInternal("");	// NOI18N
-		setSourceRoot("");	// NOI18N
-		setTargetRoot("");	// NOI18N
-		setGlossaryRoot("");	// NOI18N
-		setTMRoot("");	// NOI18N
-		setSourceLanguage("EN-US");  // NOI18N
-		setTargetLanguage("EN-GB");  // NOI18N
+    public void reset()
+    {
+        setProjectFile("");	// NOI18N
+        setProjectName("");	// NOI18N
+        setProjectRoot("");	// NOI18N
+        setProjectInternal("");	// NOI18N
+        setSourceRoot("");	// NOI18N
+        setTargetRoot("");	// NOI18N
+        setGlossaryRoot("");	// NOI18N
+        setTMRoot("");	// NOI18N
+        setSourceLanguage("EN-US");  // NOI18N
+        setTargetLanguage("EN-GB");  // NOI18N
         setSentenceSegmentingEnabled(true);
-	}
-
-    private MainWindow mainframe;
+    }
     
     /**
      * Loads existing project file.
-     * Brings up OmegaTFileChooser to open a file and 
+     * Brings up OmegaTFileChooser to open a file and
      * sets global properties.
      *
-     * @param projectRoot Project root. If null, brings up the file chooser so that the user chooses the project.
+     * @param projectRoot Project root. If null, brings up the file chooser 
+     *                      so that the user chooses the project.
      */
-	public boolean loadExisting(String projectRoot) throws IOException, InterruptedIOException
-	{
-		reset();
-
+    public boolean loadExisting(String projectRoot) throws IOException, InterruptedIOException
+    {
+        reset();
+        
         File projectRootFolder = null;
         try
         {
@@ -223,148 +221,149 @@ public class ProjectProperties
             OmegaTFileChooser pfc=new OpenProjectFileChooser();
             if( OmegaTFileChooser.APPROVE_OPTION!=pfc.showOpenDialog(null) )
                 return false;
-
+            
             projectRootFolder = pfc.getSelectedFile();
         }
         
         projectRoot = projectRootFolder.getAbsolutePath() + File.separator;
-		Preferences.setPreference(
+        Preferences.setPreference(
                 Preferences.CURRENT_FOLDER, projectRootFolder.getParent());
-		try 
-		{
-			ProjectFileReader pfr = new ProjectFileReader();
-			setProjectName(projectRootFolder.getName());
-			setProjectRoot(projectRoot);
-			pfr.loadProjectFile(getProjectRoot() + OConsts.FILE_PROJECT);
-
-			setSourceRoot(pfr.getSource());
-			setTargetRoot(pfr.getTarget());
-			setGlossaryRoot(pfr.getGlossary());
-			setTMRoot(pfr.getTM());
-			setProjectInternal(getProjectRoot() + OConsts.DEFAULT_INTERNAL
-						+ File.separator);
-			setSourceLanguage(pfr.getSourceLang());
-			setTargetLanguage(pfr.getTargetLang());
-			Preferences.setPreference(
+        try
+        {
+            ProjectFileReader pfr = new ProjectFileReader();
+            setProjectName(projectRootFolder.getName());
+            setProjectRoot(projectRoot);
+            pfr.loadProjectFile(getProjectRoot() + OConsts.FILE_PROJECT);
+            
+            setSourceRoot(pfr.getSource());
+            setTargetRoot(pfr.getTarget());
+            setGlossaryRoot(pfr.getGlossary());
+            setTMRoot(pfr.getTM());
+            setProjectInternal(getProjectRoot() + OConsts.DEFAULT_INTERNAL
+                    + File.separator);
+            setSourceLanguage(pfr.getSourceLang());
+            setTargetLanguage(pfr.getTargetLang());
+            Preferences.setPreference(
                     Preferences.SOURCE_LOCALE, getSourceLanguage().toString());
-			Preferences.setPreference(
+            Preferences.setPreference(
                     Preferences.TARGET_LOCALE, getTargetLanguage().toString());
-			setProjectFile(getProjectRoot() + OConsts.FILE_PROJECT);
+            setProjectFile(getProjectRoot() + OConsts.FILE_PROJECT);
             
             setSentenceSegmentingEnabled((pfr.getSentenceSeg()!=null) && pfr.getSentenceSeg().equals("true"));  // NOI18N
-
-			if( !verifyProject() )
-			{
-				// something wrong with the project - display open dialog
-				//  to fix it
-				ProjectPropertiesDialog prj = new ProjectPropertiesDialog(this, getProjectFile(), ProjectPropertiesDialog.RESOLVE_DIRS);
-
-				// continue  until user fixes problem or cancels
-				boolean abort = false;
-				while( true )
-				{
-					prj.setVisible(true);
-					if( prj.dialogCancelled() )
-					{
-						abort = true;
-						break;
-					}
+            
+            if( !verifyProject() )
+            {
+                // something wrong with the project - display open dialog
+                //  to fix it
+                ProjectPropertiesDialog prj = new ProjectPropertiesDialog(this, getProjectFile(), ProjectPropertiesDialog.RESOLVE_DIRS);
+                
+                // continue  until user fixes problem or cancels
+                boolean abort = false;
+                while( true )
+                {
+                    prj.setVisible(true);
+                    if( prj.dialogCancelled() )
+                    {
+                        abort = true;
+                        break;
+                    }
                     else if( verifyProject() )
                     {
-						buildProjFile();
-						break;
-					}
-				}
-				prj.dispose();
-				if (abort)
-				{
-					reset();
-					return false;
-				}
-			}
-			return true;
-		}
-		catch( TranslationException te )
-		{
-			reset();
-			throw new IOException(OStrings.getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE") + te);
-		}
-	}
-
+                        buildProjFile();
+                        break;
+                    }
+                }
+                prj.dispose();
+                if (abort)
+                {
+                    reset();
+                    return false;
+                }
+            }
+            return true;
+        }
+        catch( TranslationException te )
+        {
+            reset();
+            throw new IOException(OStrings.getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE") + te);
+        }
+    }
+    
     /**
      * @return true if project OK, false if some directories are missing
      */
-    private boolean verifyProject() {
-		// now see if these directories are where they're suposed to be
-		File src = new File(getSourceRoot());
-		File loc = new File(getTargetRoot());
-		File gls = new File(getGlossaryRoot());
-		File tmx = new File(getTMRoot());
-
-		if (src.exists() && loc.exists() && gls.exists() && tmx.exists())
-			return true;
-
-		return false;
-	}
-
+    private boolean verifyProject()
+    {
+        // now see if these directories are where they're suposed to be
+        File src = new File(getSourceRoot());
+        File loc = new File(getTargetRoot());
+        File gls = new File(getGlossaryRoot());
+        File tmx = new File(getTMRoot());
+        
+        if (src.exists() && loc.exists() && gls.exists() && tmx.exists())
+            return true;
+        
+        return false;
+    }
+    
     /**
      * Verifies whether the language code is OK.
      */
-	public static boolean verifySingleLangCode(String code)
-	{
-		if( code.length()==2 )
-		{
-			// make sure both values are characters
-			if( Character.isLetter(code.charAt(0)) &&
+    public static boolean verifySingleLangCode(String code)
+    {
+        if( code.length()==2 )
+        {
+            // make sure both values are characters
+            if( Character.isLetter(code.charAt(0)) &&
                     Character.isLetter(code.charAt(1)) &&
                     new Language(code).getDisplayName().length()>0 )
-			{
-				return true;
-			}
-		}
-		else if (code.length() == 5)
-		{
-			// make sure both values are characters
-			if( Character.isLetter(code.charAt(0)) &&
+            {
+                return true;
+            }
+        }
+        else if (code.length() == 5)
+        {
+            // make sure both values are characters
+            if( Character.isLetter(code.charAt(0)) &&
                     Character.isLetter(code.charAt(1)) &&
                     Character.isLetter(code.charAt(3)) &&
                     Character.isLetter(code.charAt(4)) &&
                     (code.charAt(2)=='-' || code.charAt(2)=='_') &&
                     new Language(code).getDisplayName().length()>0 )
-			{
+            {
                 return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean createNew()
-	{
-		// new project window; create project file
-		ProjectPropertiesDialog newProjDialog = new ProjectPropertiesDialog(this, null, ProjectPropertiesDialog.NEW_PROJECT);
+            }
+        }
+        return false;
+    }
+    
+    public boolean createNew()
+    {
+        // new project window; create project file
+        ProjectPropertiesDialog newProjDialog = new ProjectPropertiesDialog(this, null, ProjectPropertiesDialog.NEW_PROJECT);
         if( !newProjDialog.dialogCancelled() )
         {
             newProjDialog.setVisible(true);
             if( !newProjDialog.dialogCancelled() )
                 return true;
         }
-		return false;
-	}
-
-	public void buildProjFile() throws IOException
-	{
-		ProjectFileReader pfr = new ProjectFileReader();
-		
-		pfr.setTarget(getTargetRoot());
-		pfr.setSource(getSourceRoot());
-		pfr.setTM(getTMRoot());
-		pfr.setGlossary(getGlossaryRoot());
-		pfr.setSourceLang(getSourceLanguage().toString());
-		pfr.setTargetLang(getTargetLanguage().toString());
+        return false;
+    }
+    
+    public void buildProjFile() throws IOException
+    {
+        ProjectFileReader pfr = new ProjectFileReader();
+        
+        pfr.setTarget(getTargetRoot());
+        pfr.setSource(getSourceRoot());
+        pfr.setTM(getTMRoot());
+        pfr.setGlossary(getGlossaryRoot());
+        pfr.setSourceLang(getSourceLanguage().toString());
+        pfr.setTargetLang(getTargetLanguage().toString());
         pfr.setSentenceSeg(isSentenceSegmentingEnabled() ? "true" : "false");   // NOI18N
-		
-		pfr.writeProjectFile(getProjectFile());
-	}
+        
+        pfr.writeProjectFile(getProjectFile());
+    }
     
     /**
      * Edits the properties of opened project.
@@ -372,15 +371,15 @@ public class ProjectProperties
      *
      * @return returns true if the project was edited by the user.
      */
-	public boolean editProject() throws IOException
-	{
+    public boolean editProject() throws IOException
+    {
         // backing up, as NewProjectDialog changes properties directly
         // it's a hack, but faster than refactoring ;-)
         ProjectProperties backup = createBackup();
         
         // displaying the dialog to change paths and other properties
         ProjectPropertiesDialog prj = new ProjectPropertiesDialog(this, getProjectFile(), ProjectPropertiesDialog.EDIT_PROJECT);
-
+        
         // continue until user changes correctly or cancels
         boolean abort = false;
         while( true )
@@ -409,8 +408,8 @@ public class ProjectProperties
         }
         else
             return true;
-	}
-
+    }
+    
     /** Backs up all the properties */
     private ProjectProperties createBackup()
     {
@@ -440,9 +439,9 @@ public class ProjectProperties
             setTargetLanguage(backup.targetLanguage);
             
             // also updating some global OmegaT preferences
-			Preferences.setPreference(
+            Preferences.setPreference(
                     Preferences.SOURCE_LOCALE, getSourceLanguage().toString());
-			Preferences.setPreference(
+            Preferences.setPreference(
                     Preferences.TARGET_LOCALE, getTargetLanguage().toString());
         }
     }
@@ -454,19 +453,19 @@ public class ProjectProperties
         res.targetLanguage = new Language(targetLanguage.getLocale());
         return res;
     }
-
+    
     private String projectName;
-	private String projectFile;
-	private String projectRoot;
-	private String projectInternal;
-	private String sourceRoot;
-	private String targetRoot;
-	private String glossaryRoot;
-	private String tmRoot;
-
-	private Language sourceLanguage;
-	private Language targetLanguage;
-	
+    private String projectFile;
+    private String projectRoot;
+    private String projectInternal;
+    private String sourceRoot;
+    private String targetRoot;
+    private String glossaryRoot;
+    private String tmRoot;
+    
+    private Language sourceLanguage;
+    private Language targetLanguage;
+    
     private boolean sentenceSegmentingOn;
     private boolean dontInsertSource;
     private boolean insertBestMatch;

@@ -97,6 +97,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener
 
         buttonPanel = new javax.swing.JPanel();
         toDefaultsButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         filtersScrollPane = new javax.swing.JScrollPane();
@@ -128,6 +129,9 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener
         });
 
         buttonPanel.add(toDefaultsButton);
+
+        jLabel1.setPreferredSize(new java.awt.Dimension(20, 0));
+        buttonPanel.add(jLabel1);
 
         org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK"));
         okButton.addActionListener(new java.awt.event.ActionListener()
@@ -178,7 +182,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener
         description.setLineWrap(true);
         description.setText(OStrings.getString("FILTERSCUSTOMIZER_DESCRIPTION"));
         description.setWrapStyleWord(true);
-        description.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(3, 3, 3, 3)));
+        description.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -254,6 +258,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener
     private javax.swing.JButton editButton;
     private javax.swing.JScrollPane filtersScrollPane;
     private javax.swing.JTable filtersTable;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton okButton;
     private javax.swing.JButton toDefaultsButton;
     // End of variables declaration//GEN-END:variables

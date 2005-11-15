@@ -24,6 +24,7 @@ package org.omegat.core.segmentation;
 import java.io.Serializable;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 /**
  * A class representing the language rules 
@@ -57,26 +58,26 @@ public class MapRule implements Serializable
         this.language = language;
     }
 
-    /** Pattern for the language/country ISO code (of a form LL-CC) */
-    private String pattern;
-    /** Returns Pattern for the language/country ISO code (of a form LL-CC) */
+    /** Pattern for the language/country ISO code (of a form LL-CC). */
+    private Pattern pattern;
+    /** Returns Pattern for the language/country ISO code (of a form LL-CC). */
     public String getPattern()
+    {
+        if( pattern!=null )
+            return pattern.pattern();
+        else
+            return null;
+    }
+    /** Returns Compiled Pattern for the language/country ISO code (of a form LL-CC). */
+    public Pattern getCompiledPattern()
     {
         return pattern;
     }
-    /** 
-     * Returns Pattern object for the 
-     * Pattern for the language/country ISO code (of a form LL-CC) 
-     */
-    public Pattern getCompiledPattern()
-    {
-        return Pattern.compile(pattern);
-    }
     
-    /** Sets Pattern for the language/country ISO code (of a form LL-CC) */
-    public void setPattern(String pattern)
+    /** Sets Pattern for the language/country ISO code (of a form LL-CC). */
+    public void setPattern(String pattern) throws PatternSyntaxException
     {
-        this.pattern = pattern;
+        this.pattern = Pattern.compile(pattern);
     }
 
     /** List of rules (of class {@link Rule}) for the language */

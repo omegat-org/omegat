@@ -135,9 +135,6 @@ public class FilterMaster
         return s.replaceAll("\r", "");                                          // NOI18N
     }
     
-    private Pattern PATTERN_SENTENCE_BREAK = 
-            Pattern.compile("\\p{Ll}[\\.\\?!]\\.?\\.?(\\s+)\\p{Lu}");           // NOI18N
-    
     /**
      * This method is called by filters to:
      * <ul>
@@ -148,49 +145,52 @@ public class FilterMaster
      * @param entry Translatable source string
      * @return Translation of the source string. If there's no translation, returns the source string itself.
      */
-   	public String processEntry(String entry)
-	{
+    public String processEntry(String entry)
+    {
         // ugly hack, to say the truth
-		String src = removeLineFeed(entry);
+        String src = removeLineFeed(entry);
+        
+        // some special space handling
+        int len = src.length();
+        int b = 0;
+        StringBuffer bs = new StringBuffer();
+        while( b<len && Character.isWhitespace(src.charAt(b)) )
+        {
+            bs.append(src.charAt(b));
+            b++;
+        }
+
+        int e = len-1;
+        StringBuffer es = new StringBuffer();
+        while( e>=b && Character.isWhitespace(src.charAt(e)) )
+        {
+            es.append(src.charAt(e));
+            e--;
+        }
+        es.reverse();
+
+        src = src.substring(b, e+1);
+        
+        StringBuffer res = new StringBuffer();
+        res.append(bs);
         
         if( CommandThread.core.getProjectProperties().isSentenceSegmentingEnabled() )
         {
-            List segments = Segmenter.getSegmenter().segment(src);
-            StringBuffer res = new StringBuffer();
+            List spaces = new ArrayList();
+            List segments = Segmenter.segment(src, spaces);
             for(int i=0; i<segments.size(); i++)
             {
                 String onesrc = (String)segments.get(i);
-                
-                // Bugfix for http://sourceforge.net/support/tracker.php?aid=1288742
-                // skipping spaces manually
-                int ol = onesrc.length();
-                int b = 0;
-                StringBuffer bs = new StringBuffer();
-                while( b<ol && Character.isSpaceChar(onesrc.charAt(b)) )
-                {
-                    bs.append(onesrc.charAt(b));
-                    b++;
-                }
-
-                int e = ol-1;
-                StringBuffer es = new StringBuffer();
-                while( e>=b && Character.isSpaceChar(onesrc.charAt(e)) )
-                {
-                    es.append(onesrc.charAt(e));
-                    e--;
-                }
-                es.reverse();
-
-                String trimmed = onesrc.substring(b, e+1);
-                res.append(bs);
-                res.append(processSingleEntry(trimmed));
-                res.append(es);
+                segments.set(i, processSingleEntry(onesrc));
             }
-            return res.toString();
+            res.append(Segmenter.glue(segments, spaces));
         }
         else
-            return processSingleEntry(entry);
-	}
+            res.append(processSingleEntry(src));
+        
+        res.append(es);
+        return res.toString();
+    }
     
     /**
      * Processes a single entry.
@@ -208,7 +208,7 @@ public class FilterMaster
             searchthread.searchText(src);
             return src;
         }
-        else 
+        else
         {
             StringEntry se = CommandThread.core.getStringEntry(src);
             if( isMemorizing() )
@@ -219,14 +219,14 @@ public class FilterMaster
             }
             else
             {
-                String s = se.getTrans();
+                String s = se.getTranslation();
                 if( s==null || s.length()==0 )
                     s = src;
                 return s;
             }
         }
     }
-
+    
     private List old_plugins = null;
     private ClassLoader plugins_cl = null;
     /** Returns the classloader of the filter plugins. */
@@ -287,7 +287,7 @@ public class FilterMaster
         }
         return filterObject;
     }
-
+    
     /**
      * OmegaT core calls this method to load a source file.
      *
@@ -302,11 +302,12 @@ public class FilterMaster
         if( lookup==null )
             return false;
         
+        //if()
         setMemorizing(true);
-
+        
         AbstractFilter filterObject = lookup.filterObject;
         BufferedReader reader = lookup.reader;
-
+        
         BufferedWriter writer = new BufferedWriter(new StringWriter());
         
         try
@@ -316,34 +317,35 @@ public class FilterMaster
         }
         catch( IOException ioe )
         {
+            ioe.printStackTrace();
             throw new IOException(filename + "\n" + ioe);                       // NOI18N
         }
-                    
+        
         setMemorizing(false);
         return true;
     }
-
+    
     
     private SearchThread searchthread = null;
     /**
-     * When mode is set, 
+     * When mode is set,
      * strings are passed to supplied search thread.
      *
      * @param searchthread The Search Thread supplied.
      */
-	private void setSearchMode(SearchThread searchthread)
-	{
+    private void setSearchMode(SearchThread searchthread)
+    {
         setMemorizing(false);
-		this.searchthread = searchthread;
-	}
+        this.searchthread = searchthread;
+    }
     /**
      * Cancels search mode.
      */
-	private void cancelSearchMode()
-	{
-		this.searchthread = null;
-	}
-
+    private void cancelSearchMode()
+    {
+        this.searchthread = null;
+    }
+    
     
     /**
      * OmegaT core calls this method to search within a source file.
@@ -387,7 +389,7 @@ public class FilterMaster
         {
             // The file is not supported by any of the filters.
             // Copying it
-            LFileCopy.copy(sourcedir+File.separator+filename, 
+            LFileCopy.copy(sourcedir+File.separator+filename,
                     targetdir+File.separator+filename);
             return;
         }
@@ -399,22 +401,22 @@ public class FilterMaster
         AbstractFilter filterObject = lookup.filterObject;
         BufferedReader reader = lookup.reader;
         Instance instance = lookup.instance;
-        File outfile = 
+        File outfile =
                 new File(
-                    targetdir + File.separatorChar +
-                    path + File.separatorChar +
-                    constructTargetFilename(
-                        instance.getSourceFilenameMask(),
-                        name, 
-                        instance.getTargetFilenamePattern()));
+                targetdir + File.separatorChar +
+                path + File.separatorChar +
+                constructTargetFilename(
+                instance.getSourceFilenameMask(),
+                name,
+                instance.getTargetFilenamePattern()));
         
         BufferedWriter writer = filterObject.createWriter(outfile, instance.getTargetEncoding());
-                    
+        
         filterObject.processFile(reader, writer);
         reader.close();
         writer.close();
     }
-
+    
     class LookupInformation
     {
         public OneFilter filter;
@@ -422,7 +424,7 @@ public class FilterMaster
         public AbstractFilter filterObject;
         public BufferedReader reader;
         
-        public LookupInformation(OneFilter filter, Instance instance, 
+        public LookupInformation(OneFilter filter, Instance instance,
                 AbstractFilter filterObject, BufferedReader reader)
         {
             this.filter = filter;
@@ -433,11 +435,11 @@ public class FilterMaster
     }
     
     /**
-     * Gets the filter according to the source 
+     * Gets the filter according to the source
      * filename provided.
-     * In case of failing to find a filter to handle the file 
+     * In case of failing to find a filter to handle the file
      * returns <code>null</code>.
-     * 
+     *
      * In case of finding an appropriate filter it
      * <ul>
      * <li>Creates the filter (use <code>OneFilter.getFilter()</code> to get it)
@@ -495,7 +497,7 @@ public class FilterMaster
                         reader = filterObject.createReader(file, instance.getSourceEncoding());
                     }
                     
-                    return new LookupInformation(filter, instance, filterObject, reader);                
+                    return new LookupInformation(filter, instance, filterObject, reader);
                 }
             }
         }
@@ -525,7 +527,7 @@ public class FilterMaster
     // Plugins
     //////////////////////////////////////////////////////////////////////////
     
-    /** 
+    /**
      * The list of plugins.
      * <p>
      * The format is simple:
@@ -545,7 +547,7 @@ public class FilterMaster
      * <pre> OmegaT-Plugin: true </pre>
      * and then for each filter
      * <pre> Name: the.package.name.TheFilterName
-     * OmegaT-Filter: true</pre> for each filter in a plugin 
+     * OmegaT-Filter: true</pre> for each filter in a plugin
      * (plugin may have more than one filter).
      */
     private void loadPlugins()
@@ -555,7 +557,7 @@ public class FilterMaster
         if( pluginsDir.exists() && pluginsDir.isDirectory() )
             loadPluginsFrom(pluginsDir);
     }
-
+    
     /**
      * Loads filter plugins from a single directory.
      */
@@ -566,16 +568,16 @@ public class FilterMaster
         {
             public boolean accept(File file)
             {
-                return 
+                return
                         (
-                            file.isFile() && 
-                            file.getName().toLowerCase().endsWith(".jar")       // NOI18N
-                        ) 
-                        ||      
+                        file.isFile() &&
+                        file.getName().toLowerCase().endsWith(".jar")       // NOI18N
+                        )
+                        ||
                         (
-                            file.isDirectory() && 
-                            !file.getName().equals(".") &&                      // NOI18N
-                            !file.getName().equals("..")                        // NOI18N
+                        file.isDirectory() &&
+                        !file.getName().equals(".") &&                      // NOI18N
+                        !file.getName().equals("..")                        // NOI18N
                         );
             }
         });
@@ -618,14 +620,14 @@ public class FilterMaster
     {
         JarFile filter_jar = new JarFile(jar.getFile());
         Manifest manifest = filter_jar.getManifest();
-
+        
         Attributes mainattribs = manifest.getMainAttributes();
         if( mainattribs.getValue("OmegaT-Plugin")==null )                       // NOI18N
             return; // it's not OmegaT plugin
-
+        
         List filterList = new ArrayList();
         filterList.add(jar);
-
+        
         Map entries = manifest.getEntries();
         String[] keys = (String[])entries.keySet().toArray(new String[]{});
         for(int i=0; i<keys.length; i++)
@@ -647,7 +649,7 @@ public class FilterMaster
                 }
             }
         }
-
+        
         if( filterList.size()>1 )
         {
             plugins.add(filterList);
@@ -657,7 +659,7 @@ public class FilterMaster
     //////////////////////////////////////////////////////////////////////////
     // Filters
     //////////////////////////////////////////////////////////////////////////
-
+    
     /**
      * Reverts Filter Configuration to Default values.
      * Basically
@@ -680,7 +682,7 @@ public class FilterMaster
     private File configFile = new File("filters.conf");                         // NOI18N
     
     /**
-     * My Own Class to listen to exceptions, 
+     * My Own Class to listen to exceptions,
      * occured while loading filters configuration.
      */
     class MyExceptionListener implements ExceptionListener
@@ -761,7 +763,7 @@ public class FilterMaster
                 k++;
                 continue;
             }
-
+            
             for(int i=0; i<plugins.size(); i++)
             {
                 List filterList = (List)plugins.get(i);
@@ -813,7 +815,7 @@ public class FilterMaster
         filters.addFilter(new OneFilter(new HTMLFilter2(), false));
         filters.addFilter(new OneFilter(new OOFilter(), false));
     }
-
+    
     /**
      * Loads filter classes from plugins.
      * <p>
@@ -822,7 +824,7 @@ public class FilterMaster
      * <pre> OmegaT-Plugin: true </pre>
      * and then for each filter
      * <pre> Name: the.package.name.TheFilterName
-     * OmegaT-Filter: true</pre> for each filter in a plugin 
+     * OmegaT-Filter: true</pre> for each filter in a plugin
      * (plugin may have more than one filter).
      */
     private void loadFilterClassesFromPlugins()
@@ -842,7 +844,7 @@ public class FilterMaster
                     {
                         OneFilter one_filter = new OneFilter((AbstractFilter)filter, true);
                         filters.addFilter(one_filter);
-                    }   
+                    }
                 }
                 catch( Exception e )
                 {
@@ -870,7 +872,7 @@ public class FilterMaster
         catch( FileNotFoundException fnfe )
         {
             StaticUtils.log(OStrings.getString("FILTERMASTER_ERROR_SAVING_FILTERS_CONFIG") + fnfe);
-            JOptionPane.showMessageDialog(null, 
+            JOptionPane.showMessageDialog(null,
                     OStrings.getString("FILTERMASTER_ERROR_SAVING_FILTERS_CONFIG") + fnfe,
                     OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
         }
@@ -882,7 +884,7 @@ public class FilterMaster
     //////////////////////////////////////////////////////////////////////////
     
     /**
-     * Whether the mask matches the filename. 
+     * Whether the mask matches the filename.
      * Filename should be "name.ext", without path.
      *
      * @param filename The filename to check
@@ -903,7 +905,7 @@ public class FilterMaster
      * <p>
      * Output filename pattern is pretty complex.
      * <br>
-     * It may consist of normal characters and some substituted variables. 
+     * It may consist of normal characters and some substituted variables.
      * They have the format <code>${variableName}</code> and are case insensitive.
      * <br>
      * There're such variables:
@@ -911,17 +913,19 @@ public class FilterMaster
      * <li><code>${filename}</code> - full filename of the input file, both name and extension (default)
      * <li><code>${nameOnly}</code> - only the name of the input file without extension part
      * <li><code>${extension}</code> - the extension of the input file
-     * <li><code>${sourceLanguage}</code> - the source language of the project
-     * <li><code>${targetLanguage}</code> - the target language of the project
+     * <li><code>${targetLocale}</code> - target locale code (of a form "xx_YY")
+     * <li><code>${targetLanguage}</code> - the target language and country code together (of a form "XX-YY")
+     * <li><code>${targetLanguageCode}</code> - the target language only ("XX")
+     * <li><code>${targetCoutryCode}</code> - the target country only ("YY")
      * </ul>
      * <p>
-     * Most file filters will use default "<code>${filename}</code>, 
+     * Most file filters will use default "<code>${filename}</code>,
      * that leads to the name of translated file being the same as
      * the name of source file. But for example the Java(TM) Resource Bundles file filter
-     * will have the pattern equal to 
+     * will have the pattern equal to
      * "<code>${nameonly}_${targetlanguage}.${extension}</code>".
      * <p>
-     * E.g. if you have 
+     * E.g. if you have
      * <ul>
      * <li>a source filename mask "*.ext1.ext2"
      * <li>file name "thisisfile.ext1.ext2"
@@ -931,7 +935,7 @@ public class FilterMaster
      * <li><code>${nameOnly}</code> will be equal to "thisisfile"
      * <li>and <code>${extension}</code> - "ext1.ext2"
      * </ul>
-     * 
+     *
      * @param filename Filename to change
      * @param pattern Pattern, according to which we change the filename
      * @return The changed filename
@@ -939,7 +943,7 @@ public class FilterMaster
     private String constructTargetFilename(String sourceMask, String filename, String pattern)
     {
         int lastStarPos = sourceMask.lastIndexOf('*');
-        int dot = 0; 
+        int dot = 0;
         if( lastStarPos>=0 )
         {
             // bugfix #1204740
@@ -965,23 +969,23 @@ public class FilterMaster
         }
         
         String res = pattern;
-        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_FILENAME), 
+        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_FILENAME),
                 filename);
-        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_NAMEONLY), 
+        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_NAMEONLY),
                 nameOnly);
-        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_EXTENSION), 
+        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_EXTENSION),
                 extension);
-
+        
         Language targetLang = new Language(
                 Preferences.getPreference(Preferences.TARGET_LOCALE));
         
-        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LOCALE), 
+        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LOCALE),
                 targetLang.getLocale());
-        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LANGUAGE), 
+        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LANGUAGE),
                 targetLang.getLanguage());
-        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LANG_CODE), 
+        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LANG_CODE),
                 targetLang.getLanguageCode());
-        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_COUNTRY_CODE), 
+        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_COUNTRY_CODE),
                 targetLang.getCountryCode());
         
         return res;

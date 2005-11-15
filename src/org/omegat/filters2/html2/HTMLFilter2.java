@@ -26,17 +26,14 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+
 import org.htmlparser.Parser;
-import org.htmlparser.scanners.ScriptScanner;
 import org.htmlparser.util.ParserException;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
-import org.omegat.util.AntiCRReader;
-import org.omegat.util.EncodingAwareReader;
 import org.omegat.util.OStrings;
-import org.omegat.util.UTF8Writer;
 
 /**
  * A filter to translate HTML and XHTML files.
@@ -50,6 +47,9 @@ public class HTMLFilter2 extends AbstractFilter
     {
     }
 
+    /** Stores the source encoding of HTML file. */
+    private String sourceEncoding;
+    
     /**
      * Customized version of creating input reader for HTML files,
      * aware of encoding by using <code>EncodingAwareReader</code> class.
@@ -59,21 +59,26 @@ public class HTMLFilter2 extends AbstractFilter
     public BufferedReader createReader(File infile, String encoding) 
             throws UnsupportedEncodingException, IOException
     {
-        return new BufferedReader(new AntiCRReader(
-                new EncodingAwareReader(infile.getAbsolutePath(), EncodingAwareReader.ST_HTML)));
+        HTMLReader hreader = new HTMLReader(infile.getAbsolutePath(), encoding);
+        sourceEncoding = hreader.getEncoding();
+        return new BufferedReader(hreader);
     }
     /**
      * Customized version of creating an output stream for HTML files,
-     * always UTF-8 and appending charset meta with UTF-8
-     * by using <code>UTF8Writer</code> class.
+     * appending charset meta by using <code>HTMLWriter</code> class.
      *
-     * @see org.omegat.util.UTF8Writer
+     * @see HTMLWriter
      */
     public BufferedWriter createWriter(File outfile, String encoding) 
             throws UnsupportedEncodingException, IOException
     {
-        return new BufferedWriter(
-                new UTF8Writer(outfile.getAbsolutePath(), UTF8Writer.ST_HTML));
+        HTMLWriter hwriter;
+        if( encoding==null )
+            hwriter = new HTMLWriter(outfile.getAbsolutePath(), sourceEncoding);
+        else
+            hwriter = new HTMLWriter(outfile.getAbsolutePath(), encoding);
+        
+        return new BufferedWriter(hwriter);
     }
 
     public void processFile(BufferedReader infile, BufferedWriter outfile) 
@@ -120,7 +125,7 @@ public class HTMLFilter2 extends AbstractFilter
 
     public boolean isTargetEncodingVariable()
     {
-        return false;
+        return true;
     }
 
     public boolean isSourceEncodingVariable()
@@ -137,10 +142,25 @@ public class HTMLFilter2 extends AbstractFilter
     {
         return new Instance[]
         {
-            new Instance("*.htm", ENCODING_AUTO, "UTF-8"),                      // NOI18N
-            new Instance("*.html", ENCODING_AUTO, "UTF-8"),                     // NOI18N
-            new Instance("*.xhtml", ENCODING_AUTO, "UTF-8")                     // NOI18N
+            new Instance("*.htm", null, "UTF-8"),                      // NOI18N
+            new Instance("*.html", null, "UTF-8"),                     // NOI18N
+            new Instance("*.xhtml", null, "UTF-8")                     // NOI18N
         };
+    }
+
+    /**
+     * Returns the editing hint for HTML filter.
+     * <p>
+     * In English, the hint is as follows:
+     * <br>
+     * Note: Source File Encoding setting affects only the HTML files that 
+     * have no encoding declaration inside. If HTML file has the encoding 
+     * declaration, it will be used disregarding any value you set in this 
+     * dialog.
+     */
+    public String getHint() 
+    {
+        return OStrings.getString("HTML_NOTE");
     }
     
 }

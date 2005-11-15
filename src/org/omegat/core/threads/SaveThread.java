@@ -36,23 +36,24 @@ import org.omegat.util.OStrings;
  */
 class SaveThread extends Thread
 {
-	public SaveThread()
-	{
-		setName("Save thread");	// NOI18N
-	}
-
-	public void run()
-	{
-		try
-		{
-			sleep(m_saveDuration);
-		}
-		catch (InterruptedException e2)
-		{
+    public SaveThread()
+    {
+        setName("Save thread");	// NOI18N
+    }
+    
+    public void run()
+    {
+        try
+        {
+            sleep(SAVE_DURATION);
         }
-		
-		while( !isInterrupted() )
-		{
+        catch (InterruptedException e2)
+        {
+            interrupt();
+        }
+        
+        while( !interrupted() )
+        {
             synchronized(CommandThread.core)
             {
                 if( CommandThread.core.isProjectModified() )
@@ -60,25 +61,25 @@ class SaveThread extends Thread
                     CommandThread.core.save();
                     CommandThread.core.m_transFrame.setMessageText(
                             MessageFormat.format(
-                            OStrings.getString("ST_PROJECT_AUTOSAVED"),
-                            new Object[] 
-                            {
-                                DateFormat.getTimeInstance(DateFormat.SHORT).
+                                    OStrings.getString("ST_PROJECT_AUTOSAVED"),
+                                    new Object[]
+                                    {
+                                        DateFormat.getTimeInstance(DateFormat.SHORT).
                                         format(new Date())
-                            } ));
+                                    } ));
                 }
             }
             
-			try 
-			{
-				sleep(m_saveDuration);
-			}
-			catch (InterruptedException e)
-			{
-                break;
+            try
+            {
+                sleep(SAVE_DURATION);
             }
-		}
-	}
-
-	private int	m_saveDuration = 1 * 60 * 100;  // 10 minutes;
+            catch (InterruptedException e)
+            {
+                interrupt();
+            }
+        }
+    }
+    
+    private static final int SAVE_DURATION = 10 * 60 * 1000;  // 10 minutes;
 }

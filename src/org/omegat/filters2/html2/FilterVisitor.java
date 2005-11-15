@@ -239,7 +239,12 @@ class FilterVisitor extends NodeVisitor
     }
     
     
-    /** Does the tag lead to starting (ending) a paragraph. */
+    /**
+     * Does the tag lead to starting (ending) a paragraph. 
+     * <p>
+     * Contains code by JC to have dictionary list parsed as segmenting.
+     * http://sourceforge.net/support/tracker.php?aid=1348792
+     */
     private boolean isParagraphTag(Tag tag)
     {
         String tagname = tag.getTagName();
@@ -261,6 +266,11 @@ class FilterVisitor extends NodeVisitor
                 tagname.equals("PRE") ||                                        // NOI18N
                 tagname.equals("OL") || tagname.equals("UL") ||                 // NOI18N
                     tagname.equals("LI") ||                                     // NOI18N
+                // Added by JC to have dictionary list parsed as segmenting.
+                tagname.equals("DL") ||                                         // NOI18N
+                     tagname.equals("DT") || tagname.equals("DD") ||            // NOI18N
+                // End of JC's contribution
+
                 tagname.equals("FORM") || tagname.equals("TEXTAREA") ||         // NOI18N
                 tagname.equals("FIELDSET") || tagname.equals("LEGEND") ||       // NOI18N
                 tagname.equals("LABEL")                                         // NOI18N
@@ -721,13 +731,13 @@ class FilterVisitor extends NodeVisitor
         {"Prime", new Integer(8243)},                          // NOI18N
         {"oline", new Integer(8254)},                          // NOI18N
         {"frasl", new Integer(8260)},                          // NOI18N
-	
+    
         {"weierp", new Integer(8472)},                          // NOI18N
         {"image", new Integer(8465)},                          // NOI18N
         {"real", new Integer(8476)},                          // NOI18N
         {"trade", new Integer(8482)},                          // NOI18N
         {"alefsym", new Integer(8501)},                          // NOI18N
-	
+    
         {"larr", new Integer(8592)},                          // NOI18N
         {"uarr", new Integer(8593)},                          // NOI18N
         {"rarr", new Integer(8594)},                          // NOI18N
@@ -739,7 +749,7 @@ class FilterVisitor extends NodeVisitor
         {"rArr", new Integer(8658)},                          // NOI18N
         {"dArr", new Integer(8659)},                          // NOI18N
         {"hArr", new Integer(8660)},                          // NOI18N
-	
+    
         {"forall", new Integer(8704)},                          // NOI18N
         {"part", new Integer(8706)},                          // NOI18N
         {"exist", new Integer(8707)},                          // NOI18N
@@ -778,16 +788,16 @@ class FilterVisitor extends NodeVisitor
         {"otimes", new Integer(8855)},                          // NOI18N
         {"perp", new Integer(8869)},                          // NOI18N
         {"sdot", new Integer(8901)},                          // NOI18N
-	
+    
         {"lceil", new Integer(8968)},                          // NOI18N
         {"rceil", new Integer(8969)},                          // NOI18N
         {"lfloor", new Integer(8970)},                          // NOI18N
         {"rfloor", new Integer(8971)},                          // NOI18N
         {"lang", new Integer(9001)},                          // NOI18N
         {"rang", new Integer(9002)},                          // NOI18N
-	
+    
         {"loz", new Integer(9674)},                          // NOI18N
-	
+    
         {"spades", new Integer(9824)},                          // NOI18N
         {"clubs", new Integer(9827)},                          // NOI18N
         {"hearts", new Integer(9829)},                          // NOI18N
@@ -805,7 +815,16 @@ class FilterVisitor extends NodeVisitor
             switch( ch )
             {
                 case '&':
-                    char ch1 = str.charAt(i+1);
+                    char ch1;
+                    // if there's one more symbol, reading it,
+                    // otherwise it's a dangling '&'
+                    if( (i+1)>=strlen )
+                    {
+                        res.append(ch);
+                        break;
+                    }
+                    else
+                        ch1 = str.charAt(i+1);
                     if( ch1=='#' )
                     {
                         // numeric entity
@@ -815,7 +834,7 @@ class FilterVisitor extends NodeVisitor
                             // hex numeric entity
                             int n = i+3;
                             char chh;
-                            while( isHexDigit(chh=str.charAt(n)) && n<strlen )
+                            while( n<strlen && isHexDigit(chh=str.charAt(n)) )
                                 n++;
                             String s_entity = str.substring(i+3, n);
                             try
@@ -848,7 +867,7 @@ class FilterVisitor extends NodeVisitor
                             // decimal entity
                             int n = i+2;
                             char chh;
-                            while( isDecimalDigit(chh=str.charAt(n)) && n<strlen )
+                            while( n<strlen && isDecimalDigit(chh=str.charAt(n)) )
                                 n++;
                             String s_entity = str.substring(i+2, n);
                             try
@@ -882,7 +901,7 @@ class FilterVisitor extends NodeVisitor
                         // named entity?
                         int n = i+1;
                         char chh;
-                        while( isLatinLetter(chh=str.charAt(n)) && n<strlen )
+                        while( n<strlen && isLatinLetter(chh=str.charAt(n)) )
                             n++;
                         String s_entity = str.substring(i+1, n);
                         int n_entity = lookupEntity(s_entity);

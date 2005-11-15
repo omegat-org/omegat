@@ -65,6 +65,7 @@ public class OneFilter extends AbstractTableModel implements Serializable
         setSourceEncodingVariable(filter.isSourceEncodingVariable());
         setTargetEncodingVariable(filter.isTargetEncodingVariable());
         setInstance(filter.getDefaultInstances());
+        setHint(filter.getHint());
     }
     
     /////////////////////////////////////////////////////////////////////////
@@ -210,16 +211,29 @@ public class OneFilter extends AbstractTableModel implements Serializable
         fireTableDataChanged();
     }
     
+    /** Returns the filter instance #... */
     public Instance getInstance(int index)
     {
         return (Instance)instances.get(index);
     }
+    /** Sets the filter instance #... */
     public void setInstance(int index, Instance instance)
     {
         while( index>=instances.size() )
             instances.add(null);
         instances.set(index, instance);
         fireTableRowsUpdated(index, index);
+    }
+    
+    /** Stores the hint for editing the filter and adding/editing filter instance */
+    private String hint;
+    /** Returns the hint for editing the filter and adding/editing filter instance */
+    public String getHint()  {
+        return hint;
+    }
+    /** Sets the hint for editing the filter and adding/editing filter instance */
+    public void setHint(String hint)  {
+        this.hint = hint;
     }
     
     //////////////////////////////////////////////////////////////////////////
@@ -308,5 +322,4 @@ public class OneFilter extends AbstractTableModel implements Serializable
         }
         return false;
     }
-    
 }

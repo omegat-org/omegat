@@ -24,7 +24,7 @@ package org.omegat.core.matching;
 import org.omegat.util.ProjectFileData;
 import org.omegat.core.*;
 
-/* 
+/*
  * Source text entry represents an individual segment for
  * translation pulled directly from the input files.
  * There can be many SourceTextEntries having identical source
@@ -34,40 +34,52 @@ import org.omegat.core.*;
  */
 public class SourceTextEntry
 {
-	public void set(StringEntry str, ProjectFileData file, int entryNum)
-	{
-		m_srcFile = file;
-		m_strEntry = str;
-		m_strEntry.addParent(this);
-		m_entryNum = entryNum;
-	}
-
-	public ProjectFileData getSrcFile()	{ return m_srcFile;	}
+    public void set(StringEntry str, ProjectFileData file, int entryNum)
+    {
+        m_srcFile = file;
+        m_strEntry = str;
+        m_strEntry.addParent(this);
+        m_entryNum = entryNum;
+    }
+    
+    public ProjectFileData getSrcFile()
+    { return m_srcFile;	}
 //	public String getSrcFile()			{ return m_srcFile.filename;	}
-	public int getFirstInFile()			{ return m_srcFile.firstEntry;	}
-	public int getLastInFile()			{ return m_srcFile.lastEntry;	}
-
-    public StringEntry getStrEntry()	{ return m_strEntry;	}
-	// NOTE: the uncloned reference to m_strEntry is returned on purpose
-
-	public String getSrcText()
-	{
-		return m_strEntry.getSrcText();
-	}
-
-	public String getTranslation()
-	{
-		return m_strEntry.getTrans();
-	}
-
-	public void setTranslation(String t)
-	{
-		m_strEntry.setTranslation(t);
-	}
-
-    public int entryNum()			{ return m_entryNum;	}
-
-	private	ProjectFileData m_srcFile;
-	private StringEntry m_strEntry;
-	private int m_entryNum;
+    public int getFirstInFile()
+    { return m_srcFile.firstEntry;	}
+    public int getLastInFile()
+    { return m_srcFile.lastEntry;	}
+    
+    public StringEntry getStrEntry()
+    { return m_strEntry;	}
+    // NOTE: the uncloned reference to m_strEntry is returned on purpose
+    
+    public String getSrcText()
+    {
+        return m_strEntry.getSrcText();
+    }
+    
+    public String getTranslation()
+    {
+        return m_strEntry.getTranslation();
+    }
+    
+    public void setTranslation(String t)
+    {
+        m_strEntry.setTranslation(t);
+    }
+    
+    public boolean isTranslated()
+    {
+        return m_strEntry.isTranslated();
+    }
+    
+    public int entryNum()
+    { 
+        return m_entryNum;
+    }
+    
+    private	ProjectFileData m_srcFile;
+    private StringEntry m_strEntry;
+    private int m_entryNum;
 }

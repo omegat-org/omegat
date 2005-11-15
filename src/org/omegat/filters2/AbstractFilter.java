@@ -43,12 +43,8 @@ public abstract class AbstractFilter
 {
     
     /**
-     * This value means that the encoding is determined by the filter itself.
-     */
-    public static String ENCODING_AUTO = "<auto>";                              // NOI18N
-    /**
-     * This value represents to the user that 
-     * the encoding is determined by the filter itself.
+     * This value represents to the user that the encoding is determined by the filter itself.
+     * "In code" the <code>null</code> is used to represent automatic encoding selection.
      */
     public static String ENCODING_AUTO_HUMAN = OStrings.getString("ENCODING_AUTO");
 
@@ -65,7 +61,7 @@ public abstract class AbstractFilter
     /** language "XX" only */
     public static final String TFP_TARGET_LANG_CODE = "${targetLanguageCode}";  // NOI18N
     /** country "YY" only */
-    public static final String TFP_TARGET_COUNTRY_CODE = "${targetCoutryCode}";    // NOI18N
+    public static final String TFP_TARGET_COUNTRY_CODE = "${targetCoutryCode}"; // NOI18N
     
     /** All target filename patterns. */
     public static final String[] TARGET_FILENAME_PATTERNS = new String[] 
@@ -155,6 +151,16 @@ public abstract class AbstractFilter
     {
         return true;
     }
+
+    /**
+     * Returns the hint displayed while the user edits the filter,
+     * and when she adds/edits the instance of this filter.
+     * The hint may be any string, preferably in a non-geek language.
+     */
+    public String getHint() 
+    {
+        return "";                                                              // NOI18N
+    }
     
     /**
      * Creates a reader of an input file.
@@ -170,7 +176,7 @@ public abstract class AbstractFilter
             throws UnsupportedEncodingException, IOException
     {
         InputStreamReader isr;
-        if( encoding==null || encoding.equals(ENCODING_AUTO) )
+        if( encoding==null )
             isr = new InputStreamReader(new FileInputStream(infile));
         else
             isr = new InputStreamReader(new FileInputStream(infile), encoding);
@@ -191,7 +197,7 @@ public abstract class AbstractFilter
             throws UnsupportedEncodingException, IOException
     {
         OutputStreamWriter osw;
-        if( encoding==null || encoding.equals(ENCODING_AUTO) )
+        if( encoding==null )
             osw = new OutputStreamWriter(new FileOutputStream(outfile));
         else
             osw = new OutputStreamWriter(new FileOutputStream(outfile), encoding);
@@ -230,5 +236,4 @@ public abstract class AbstractFilter
     {
         return FilterMaster.getInstance().processEntry(entry);
     }
-    
 }

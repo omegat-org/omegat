@@ -23,6 +23,7 @@ package org.omegat.core.segmentation;
 
 import java.io.Serializable;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 
 /**
@@ -75,7 +76,7 @@ public class Rule implements Serializable
     /**
      * A regular expression which represents the text that appears before a segment break.
      */
-    private String beforebreak;
+    private Pattern beforebreak;
 
     /**
      * Returns a regular expression which represents the text that appears before a segment break.
@@ -83,7 +84,10 @@ public class Rule implements Serializable
      */
     public String getBeforebreak()
     {
-        return this.beforebreak;
+        if( beforebreak!=null )
+            return beforebreak.pattern();
+        else
+            return null;
     }
     /**
      * Returns a regular expression which represents the text that appears before a segment break.
@@ -91,22 +95,22 @@ public class Rule implements Serializable
      */
     public Pattern getCompiledBeforebreak()
     {
-        return Pattern.compile(beforebreak);
+        return beforebreak;
     }
 
     /**
      * Sets a regular expression which represents the text that appears before a segment break.
      * @param beforebreak Regular expression string of a text before break.
      */
-    public void setBeforebreak(String beforebreak)
+    public void setBeforebreak(String beforebreak) throws PatternSyntaxException
     {
-        this.beforebreak=beforebreak;
+        this.beforebreak=Pattern.compile(beforebreak, Pattern.UNICODE_CASE);
     }
 
     /**
      * A regular expression which represents the text that appears after a segment break.
      */
-    private String afterbreak;
+    private Pattern afterbreak;
 
     /**
      * Returns a regular expression which represents the text that appears after a segment break.
@@ -114,7 +118,10 @@ public class Rule implements Serializable
      */
     public String getAfterbreak()
     {
-        return this.afterbreak;
+        if( afterbreak!=null )
+            return afterbreak.pattern();
+        else
+            return null;
     }
     /**
      * Returns a regular expression which represents the text that appears after a segment break.
@@ -122,16 +129,16 @@ public class Rule implements Serializable
      */
     public Pattern getCompiledAfterbreak()
     {
-        return Pattern.compile(afterbreak);
+        return afterbreak;
     }
 
     /**
      * Sets a regular expression which represents the text that appears after a segment break.
      * @param afterbreak Regular expression string of a text after break.
      */
-    public void setAfterbreak(String afterbreak)
+    public void setAfterbreak(String afterbreak) throws PatternSyntaxException
     {
-        this.afterbreak=afterbreak;
+        this.afterbreak=Pattern.compile(afterbreak, Pattern.UNICODE_CASE);
     }
     
         

@@ -19,37 +19,32 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.core.matching;
+package org.omegat.util.gui;
 
-import org.omegat.core.*;
+import java.awt.Component;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
+
+import org.omegat.util.Language;
 
 /**
- * Class to hold a single fuzzy match.
+ * A class that renders a language combo box smartly.
  *
- * @author Keith Godfrey
+ * @author Maxym Mykhalchuk
  */
-public class NearString implements Comparable
+public class LanguageComboBoxRenderer extends BasicComboBoxRenderer
 {
-    public NearString(StringEntry strEntry,
-            int nearScore,
-            byte[] nearData,
-            String projName)
+    public Component getListCellRendererComponent(
+            JList list,
+            Object value,            // value to display
+            int index,               // cell index
+            boolean isSelected,      // is the cell selected
+            boolean cellHasFocus)    // the list and the cell have the focus
     {
-        str = strEntry;
-        score = nearScore;
-        attr = nearData;
-        if (projName != null)
-            proj = projName;
+        JLabel label = (JLabel)super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+        Language lang = (Language)value;
+        label.setText(lang + " - " + lang.getDisplayName()); // NOI18N
+        return label;
     }
-    
-    public int compareTo(Object object)
-    {
-        NearString visitor = (NearString)object;
-        return (visitor.score<score) ? -1 : 1 ;
-    }
-    
-    public StringEntry str;
-    public int score;
-    public byte[] attr;	// matching attributes of near strEntry
-    public String proj = ""; // NOI18N
 }

@@ -21,7 +21,13 @@
 
 package org.omegat.core.segmentation.datamodels;
 
+import java.beans.ExceptionListener;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.PatternSyntaxException;
+import javax.swing.event.EventListenerList;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
 import org.omegat.core.segmentation.MapRule;
@@ -29,6 +35,7 @@ import org.omegat.core.segmentation.SRX;
 import org.omegat.util.OStrings;
 
 /**
+ * Table Model for Sets of segmentation rules.
  *
  * @author Maxym Mykhalchuk
  */
@@ -92,7 +99,14 @@ public class MappingRulesModel extends AbstractTableModel
                 maprule.setLanguage((String)aValue);
                 break;
             case 1:
-                maprule.setPattern((String)aValue);
+                try
+                {
+                    maprule.setPattern((String)aValue);
+                }
+                catch( PatternSyntaxException pse )
+                {
+                    fireException(pse);
+                }
                 break;
         }
     }
@@ -106,7 +120,10 @@ public class MappingRulesModel extends AbstractTableModel
     public int addRow()
     {
         int rows = srx.getMappingRules().size();
-        srx.getMappingRules().add(new MapRule("", "", new ArrayList()));        // NOI18N
+        srx.getMappingRules().add(new MapRule(
+                OStrings.getString("SEG_NEW_LN_CO"),
+                "LN-CO",                                                        // NOI18N
+                new ArrayList()));
         fireTableRowsInserted(rows, rows);
         return rows;
     }
@@ -136,6 +153,32 @@ public class MappingRulesModel extends AbstractTableModel
         srx.getMappingRules().remove(row+1);
         srx.getMappingRules().add(row, mapruleNext);
         fireTableRowsUpdated(row, row+1);
+    }
+
+//
+//  Managing Listeners of Errorneous Input
+//
+
+    /** List of listeners */
+    protected List listeners = new ArrayList();
+
+    public void addExceptionListener(ExceptionListener l) 
+    {
+	listeners.add(l);
+    }
+
+    public void removeTableModelListener(ExceptionListener l) 
+    {
+	listeners.remove(l);
+    }
+
+    public void fireException(Exception e) 
+    {
+	for(int i=listeners.size()-1; i>=0; i--) 
+        {
+            ExceptionListener l = (ExceptionListener)listeners.get(i);
+            l.exceptionThrown(e);
+	}
     }
     
 }

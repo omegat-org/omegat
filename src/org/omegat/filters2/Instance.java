@@ -47,7 +47,7 @@ public class Instance implements Serializable
     private String sourceEncoding;
     public String getSourceEncodingHuman()
     {
-        if( sourceEncoding==null || sourceEncoding.equals(AbstractFilter.ENCODING_AUTO) )
+        if( sourceEncoding==null )
             return AbstractFilter.ENCODING_AUTO_HUMAN;
         else
             return sourceEncoding;
@@ -59,7 +59,7 @@ public class Instance implements Serializable
     public void setSourceEncoding(String sourceEncoding)
     {
         if( sourceEncoding==null || sourceEncoding.equals(AbstractFilter.ENCODING_AUTO_HUMAN) )
-            this.sourceEncoding = AbstractFilter.ENCODING_AUTO;
+            this.sourceEncoding = null;
         else
             this.sourceEncoding = sourceEncoding;
     }
@@ -67,7 +67,7 @@ public class Instance implements Serializable
     private String targetEncoding;
     public String getTargetEncodingHuman()
     {
-        if( targetEncoding==null || targetEncoding.equals(AbstractFilter.ENCODING_AUTO) )
+        if( targetEncoding==null )
             return AbstractFilter.ENCODING_AUTO_HUMAN;
         else
             return targetEncoding;
@@ -79,7 +79,7 @@ public class Instance implements Serializable
     public void setTargetEncoding(String targetEncoding)
     {
         if( targetEncoding==null || targetEncoding.equals(AbstractFilter.ENCODING_AUTO_HUMAN) )
-            this.targetEncoding = AbstractFilter.ENCODING_AUTO;
+            this.targetEncoding = null;
         else
             this.targetEncoding = targetEncoding;
     }
@@ -104,6 +104,11 @@ public class Instance implements Serializable
 
     /**
      * Creates a new instance of FilterInstance.
+     * <p>
+     * Value <code>null</code> for source and target encoding means that the filter
+     * selects encodings automatically.
+     * <p>
+     * Output (target) filename pattern cannot be null.
      */
     public Instance(String sourceFilenameMask, String sourceEncoding, String targetEncoding, String targetFilenamePattern)
     {
@@ -114,10 +119,11 @@ public class Instance implements Serializable
      * Creates a new Filter Instance with source file mask and two encodings specified,
      * and having a default target filename pattern.
      * <p>
+     * Value <code>null</code> for source and target encoding means that the filter
+     * selects encodings automatically.
+     * <p>
      * The default output filename pattern is "${filename}", which means that
      * the name of the translated file should be the same as the name of the input file.
-     *
-     * @return Output filename pattern
      */
     public Instance(String sourceFilenameMask, String sourceEncoding, String targetEncoding)
     {
@@ -127,28 +133,43 @@ public class Instance implements Serializable
     /**
      * Creates a new Filter Instance with source file mask and source encoding specified,
      * and having a default target encoding and target filename pattern.
+     * <p>
+     * Value <code>null</code> (default value) for source encoding means that the filter
+     * selects encoding of the source file automatically.
+     * <p>
+     * Default value for target encoding is <code>null</code>,
+     * meaning that the filter selects encoding of the target file automatically.
+     * <p>
+     * The default output filename pattern is "${filename}", which means that
+     * the name of the translated file should be the same as the name of the input file.
      */
     public Instance(String sourceFilenameMask, String sourceEncoding)
     {
-        init(sourceFilenameMask, sourceEncoding, AbstractFilter.ENCODING_AUTO, AbstractFilter.TARGET_DEFAULT);
+        init(sourceFilenameMask, sourceEncoding, null, AbstractFilter.TARGET_DEFAULT);
     }
     
     /**
      * Creates a new Filter Instance with only source file mask specified,
      * and default values for everything else.
+     * <p>
+     * Default value for source and target encoding is <code>null</code>,
+     * meaning that the filter selects encodings automatically.
+     * <p>
+     * The default output filename pattern is "${filename}", which means that
+     * the name of the translated file should be the same as the name of the input file.
      */
     public Instance(String sourceFilenameMask)
     {
-        init(sourceFilenameMask, AbstractFilter.ENCODING_AUTO, AbstractFilter.ENCODING_AUTO, AbstractFilter.TARGET_DEFAULT);
+        init(sourceFilenameMask, null, null, AbstractFilter.TARGET_DEFAULT);
     }
     
     /**
      * Creates a new Filter Instance, uninitialized.
-     * Needed to support JavaBeans specification, don't use it in filters.
+     * Is here to support JavaBeans specification, <b>don't use</b> it in filters.
      */
     public Instance()
     {
-        init("*.*", AbstractFilter.ENCODING_AUTO, AbstractFilter.ENCODING_AUTO, AbstractFilter.TARGET_DEFAULT);  // NOI18N
+        init("*.*", null, null, AbstractFilter.TARGET_DEFAULT);  // NOI18N
     }
 
 }

@@ -21,55 +21,89 @@
 
 package org.omegat.util;
 
+import java.util.regex.Pattern;
+
 /**
- * offset marks the display offset of character - this might be
+ * Offset marks the display offset of character - this might be
  * different than the characters position in the char array
- * due existence of multi-char characters
+ * due existence of multi-char characters.
+ * <p>
+ * Since 1.6 strips '&' in given token text.
  *
  * @author Keith Godfrey
+ * @author Maxym Mykhalchuk
  */
 public class Token
 {
-	/**
-	 * Two tokens are thought equal if their text is equal.
-	 */
-	public boolean equals(Object obj)
-	{
-		if( this==obj )
-			return true;
-		if( obj instanceof Token )
-		{
-			Token tok = (Token)obj;
-			if( text==null )
-				return tok.text==null;
-            else if( text.equals(tok.text) )
-				return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * -1 if text is null,
-	 * text's hashcode otherwise.
-	 */
-	public int hashCode()
-	{
-		if( text==null )
-			return -1;
-		return text.hashCode();
-	}
-	
-	/**
-	 * Creates a new token.
-	 * @param _text the text of the token
-	 * @param _offset the starting position of this token in parent string
-	 */
-	public Token(String _text, int _offset)
-	{
-		text = _text;
+    /**
+     * Two tokens are thought equal if their text is equal.
+     */
+    public boolean equals(Object obj)
+    {
+        if( this==obj )
+            return true;
+        if( obj instanceof Token )
+        {
+            Token tok = (Token)obj;
+            if( text==null )
+                return tok.text==null;
+            else
+                return text.equals(tok.text);
+        }
+        return false;
+    }
+    
+    /**
+     * -1 if text is null,
+     * text's hashcode otherwise.
+     */
+    public int hashCode()
+    {
+        if( text==null )
+            return -1;
+        return text.hashCode();
+    }
+    
+    
+    private static Pattern AMP = Pattern.compile("\\&");                        // NOI18N
+    private static Pattern LAST_AMPS = Pattern.compile("\\&+$");                // NOI18N
+    
+    private String stripAmpersand(String s)
+    {
+        return AMP.matcher(s).replaceAll("");                                   // NOI18N
+    }
+    private String stripLastAmpersands(String s)
+    {
+        return LAST_AMPS.matcher(s).replaceFirst("");                           // NOI18N
+    }
+    
+    /**
+     * Creates a new token.
+     * @param _text the text of the token
+     * @param _offset the starting position of this token in parent string
+     */
+    public Token(String _text, int _offset)
+    {
+        length = stripLastAmpersands(_text).length();
+        text = stripAmpersand(_text);
         offset = _offset;
-	}
-	public String text;
-    public int offset;
+    }
+    
+    private int length;
+    /** Text without '&' */
+    private String text;
+    private int offset;
+
+    /** Returns the length of a token. */
+    public int getLength()
+    {
+        return length;
+    }
+
+    /** Returns token's offset in a source string. */
+    public int getOffset()
+    {
+        return offset;
+    }
 }
 

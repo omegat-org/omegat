@@ -21,7 +21,10 @@
 
 package org.omegat.core.segmentation.datamodels;
 
+import java.beans.ExceptionListener;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.PatternSyntaxException;
 import javax.swing.table.AbstractTableModel;
 
 import org.omegat.core.segmentation.Rule;
@@ -98,10 +101,24 @@ public class SegmentationRulesModel extends AbstractTableModel
                 rule.setBreakRule(((Boolean)aValue).booleanValue());
                 break;
             case 1:
-                rule.setBeforebreak((String)aValue);
+                try
+                {
+                    rule.setBeforebreak((String)aValue);
+                }
+                catch( PatternSyntaxException pse )
+                {
+                    fireException(pse);
+                }
                 break;
             case 2:
-                rule.setAfterbreak((String)aValue);
+                try
+                {
+                    rule.setAfterbreak((String)aValue);
+                }
+                catch( PatternSyntaxException pse )
+                {
+                    fireException(pse);
+                }
                 break;
         }
     }
@@ -115,7 +132,7 @@ public class SegmentationRulesModel extends AbstractTableModel
     public int addRow()
     {
         int rows = rules.size();
-        rules.add(new Rule());
+        rules.add(new Rule(false, "\\.", "\\s"));                               // NOI18N
         fireTableRowsInserted(rows, rows);
         return rows;
     }
@@ -146,5 +163,32 @@ public class SegmentationRulesModel extends AbstractTableModel
         rules.add(row, ruleNext);
         fireTableRowsUpdated(row, row+1);
     }
+    
+//
+//  Managing Listeners of Errorneous Input
+//
+
+    /** List of listeners */
+    protected List listeners = new ArrayList();
+
+    public void addExceptionListener(ExceptionListener l) 
+    {
+	listeners.add(l);
+    }
+
+    public void removeTableModelListener(ExceptionListener l) 
+    {
+	listeners.remove(l);
+    }
+
+    public void fireException(Exception e) 
+    {
+	for(int i=listeners.size()-1; i>=0; i--) 
+        {
+            ExceptionListener l = (ExceptionListener)listeners.get(i);
+            l.exceptionThrown(e);
+	}
+    }
+    
     
 }

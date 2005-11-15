@@ -26,7 +26,6 @@ import java.util.Locale;
 import javax.swing.UIManager;
 
 import org.omegat.core.threads.CommandThread;
-import org.omegat.gui.main.MainFactory;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
@@ -38,28 +37,28 @@ import org.omegat.util.StaticUtils;
  */
 public class Main
 {
-	public static void main(String[] args)
-	{
+    public static void main(String[] args)
+    {
         StaticUtils.log(
                 "\n" +                                                                    // NOI18N
                 "===================================================================" +   // NOI18N
                 "\n" +                                                                    // NOI18N
-                OStrings.VERSION+                                                         // NOI18N
+                OStrings.OMEGAT_VERSION+                                                         // NOI18N
                 " ("+new Date()+") " +                                                    // NOI18N
                 " Locale "+Locale.getDefault()+                                           // NOI18N
                 "\n");                                                                    // NOI18N
-		try 
-		{
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        try
+        {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             System.setProperty("apple.laf.useScreenMenuBar", "true");           // NOI18N
-		} 
-		catch (Exception e) 
-		{
+        }
+        catch (Exception e)
+        {
             // do nothing
-			StaticUtils.log(OStrings.getString("MAIN_ERROR_CANT_INIT_OSLF"));
-		}
-
-        MainWindow mainwindow = MainFactory.createMainWindow();
+            StaticUtils.log(OStrings.getString("MAIN_ERROR_CANT_INIT_OSLF"));
+        }
+        
+        MainWindow mainwindow = new MainWindow();
         
         // bugfix - Serious threading issue, preventing OmegaT from showing up...
         //          http://sourceforge.net/support/tracker.php?aid=1216514
@@ -68,6 +67,6 @@ public class Main
         CommandThread.core.start();
         
         mainwindow.setVisible(true);
-	}
+    }
 }
 

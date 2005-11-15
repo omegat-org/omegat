@@ -75,8 +75,19 @@ public class SRX implements Serializable
         srx = load();
     }
     
+    /**
+     * Initializes SRX rules to defaults.
+     */
+    public static void init()
+    {
+        srx = new SRX();
+        srx.initDefaults();
+    }
+    
     /** 
      * Creates an empty SRX, without any rules.
+     * <p>
+     * Please do not call directly unless you know what you are doing.
      */
     public SRX() 
     {
@@ -108,7 +119,7 @@ public class SRX implements Serializable
     
     /**
      * Loads segmentation rules from an XML file.
-     * If there's an error loading a file, it calls <code>init</code>.
+     * If there's an error loading a file, it calls <code>initDefaults</code>.
      */
     private static SRX load()
     {
@@ -142,7 +153,7 @@ public class SRX implements Serializable
             if( !(e instanceof FileNotFoundException) )
                 StaticUtils.log(e.toString());
             res = new SRX();
-            res.init();
+            res.initDefaults();
         }
         return res;
     }
@@ -176,15 +187,37 @@ public class SRX implements Serializable
             return exceptionsList;
         }
     }
+
+    private static final String DEFAULT_RULES_PATTERN = ".*";                   // NOI18N
+    private static final String JAPANESE_RULES_PATTERN = "JA.*";                // NOI18N
+    private static final String RUSSIAN_RULES_PATTERN = "RU.*";                 // NOI18N
     
     /**
      * Initializes default rules.
      */
-    private void init()
+    private void initDefaults()
     {
-        List srules = new ArrayList();
+        List srules;
+
+        // Russian as an example
+        srules = new ArrayList();
+        srules.add(new Rule(false, "(?i)\u0442\\.\u0435\\.", "\\s"));           // NOI18N
+        srules.add(new Rule(false, "(?i)\u0442\\.\u043A\\.", "\\s"));           // NOI18N
+        getMappingRules().add(new MapRule(
+                "Russian",
+                RUSSIAN_RULES_PATTERN, srules));
         
+        // Japanese first
+        srules = new ArrayList();
+        srules.add(new Rule(true, "\u3002", "."));                              // NOI18N
+        getMappingRules().add(new MapRule(
+                "Japanese",
+                JAPANESE_RULES_PATTERN, srules));
+
         // exceptions first
+        srules = new ArrayList();
+        srules.add(new Rule(false, "\\.\\.\\.", "\\s+\\P{Lu}"));                // NOI18N
+        
         srules.add(new Rule(false, "Dr\\.", "\\s"));                            // NOI18N
         srules.add(new Rule(false, "U\\.K\\.", "\\s"));                         // NOI18N
         srules.add(new Rule(false, "M\\.", "\\s"));                             // NOI18N
@@ -193,7 +226,8 @@ public class SRX implements Serializable
         srules.add(new Rule(false, "Ms\\.", "\\s"));                            // NOI18N
         srules.add(new Rule(false, "Prof\\.", "\\s"));                          // NOI18N
         
-        srules.add(new Rule(false, "e\\.g\\.", "\\s"));                         // NOI18N
+        srules.add(new Rule(false, "(?i)e\\.g\\.", "\\s"));                         // NOI18N
+        srules.add(new Rule(false, "(?i)i\\.e\\.", "\\s"));                         // NOI18N
         srules.add(new Rule(false, "resp\\.", "\\s"));                          // NOI18N
         srules.add(new Rule(false, "tel\\.", "\\s"));                           // NOI18N
 
@@ -203,11 +237,10 @@ public class SRX implements Serializable
         // idea by Jean-Christophe Helary
         srules.add(new Rule(true, "<br\\d+>", "\\."));                          // NOI18N
 
-        getMappingRules().add(
-                new MapRule(
-                OStrings.getString("CORE_SRX_DEFAULT_RULES_NAME"), 
-                ".*",                                                           // NOI18N
-                srules));
+        getMappingRules().add(new MapRule(
+                OStrings.getString("CORE_SRX_DEFAULT_RULES_NAME"),
+                DEFAULT_RULES_PATTERN, srules));
+
     }
         
     /**
@@ -221,13 +254,14 @@ public class SRX implements Serializable
      */
     public List lookupRulesForLanguage(Language srclang)
     {
+        List rules = new ArrayList();
         for(int i=0; i<getMappingRules().size(); i++)
         {
             MapRule maprule = (MapRule)getMappingRules().get(i);
             if( maprule.getCompiledPattern().matcher(srclang.getLanguage()).matches() )
-                return maprule.getRules();
+                rules.addAll(maprule.getRules());
         }
-        return new ArrayList();
+        return rules;
     }
 
     /**
@@ -327,11 +361,6 @@ public class SRX implements Serializable
         this.includeIsolatedTags = includeIsolatedTags;
     }
     
-    public static void main(String args[])
-    {
-        SRX.getSRX().save();
-    }
-
     /** Correspondences between languages and their segmentation rules. */
     private List mappingRules = new ArrayList();
 

@@ -31,10 +31,12 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
 import org.omegat.core.StringData;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.Token;
+
+/* Previously this file contained a reference to Raymond Martin authorship by mistake.
+ * The code he provided was not used because of low quality. */
 
 /**
  * This is a combined Match + Glossary pane, that displays
@@ -43,12 +45,11 @@ import org.omegat.util.Token;
  * Separated into a component for future single-window design.
  *
  * @author Keith Godfrey
- * @author Raymond Martin
  * @author Maxym Mykhalchuk
  */
 public class MatchGlossaryPane extends javax.swing.JPanel implements java.beans.PropertyChangeListener
 {
-
+    
     /** main window holder */
     MainWindow mainwindow;
     
@@ -150,10 +151,10 @@ public class MatchGlossaryPane extends javax.swing.JPanel implements java.beans.
         }
     }
     // </editor-fold>//GEN-END:initComponents
-
+    
     private void matchSplitPanePropertyChange(java.beans.PropertyChangeEvent evt)//GEN-FIRST:event_matchSplitPanePropertyChange
     {//GEN-HEADEREND:event_matchSplitPanePropertyChange
-        if( mainwindow!=null &&  "dividerLocation".equals(evt.getPropertyName()) )  // NOI18N
+        if( mainwindow!=null && "dividerLocation".equals(evt.getPropertyName()) )  // NOI18N
             mainwindow.storeScreenLayout();
     }//GEN-LAST:event_matchSplitPanePropertyChange
     
@@ -169,17 +170,17 @@ public class MatchGlossaryPane extends javax.swing.JPanel implements java.beans.
     private javax.swing.JSplitPane matchSplitPane;
     private javax.swing.JPanel upPanel;
     // End of variables declaration//GEN-END:variables
-
+    
     
     /**
      * Sets the text of the glossary window to the found glossary entries
      */
-	public void updateGlossaryText()
-	{
-		m_glosPane.setText(m_glosDisplay);
-		m_glosDisplay = "";														// NOI18N
-	}
-
+    public void updateGlossaryText()
+    {
+        m_glosPane.setText(m_glosDisplay);
+        m_glosDisplay = "";                                                     // NOI18N
+    }
+    
     /**
      * Format the currently selected Near String (fuzzy match)
      * according to the tokens and their attributes.
@@ -187,123 +188,123 @@ public class MatchGlossaryPane extends javax.swing.JPanel implements java.beans.
      * @param tokenList - the list of tokens to highlight
      * @param attrList - the attributes to color tokens accordingly
      */
-	public void formatNearText(List tokenList, byte[] attrList)
-	{
-		int start;
-		int end;
-		javax.swing.JTextPane pane = m_matchPane;
-
-		// reset color of text to default value
-		int numTokens = tokenList.size();
-		for (int i=0; i<numTokens; i++)
-		{
-			start = m_hiliteStart + ((Token) tokenList.get(i)).offset + 4;
-			end = m_hiliteStart + ((Token) tokenList.get(i)).offset + 4 + 
-										((Token) tokenList.get(i)).text.length();
-
-			pane.select(start, end);
-			SimpleAttributeSet mattr = new SimpleAttributeSet();
-			if ((attrList[i] & StringData.UNIQ) != 0)
-				StyleConstants.setForeground(mattr, Color.blue);
-			else if ((attrList[i] & StringData.PAIR) != 0)
-				StyleConstants.setForeground(mattr, Color.green);
-			pane.setCharacterAttributes(mattr, false);
-		}
-		pane.select(0, 0);
-		SimpleAttributeSet mattr = new SimpleAttributeSet();
-		pane.setCharacterAttributes(mattr, false);
-	}
-
+    public void formatNearText(List tokenList, byte[] attrList)
+    {
+        int start;
+        int end;
+        javax.swing.JTextPane pane = m_matchPane;
+        
+        // reset color of text to default value
+        int numTokens = tokenList.size();
+        for (int i=0; i<numTokens; i++)
+        {
+            start = m_hiliteStart + ((Token) tokenList.get(i)).getOffset() + 4;
+            end = m_hiliteStart + ((Token) tokenList.get(i)).getOffset() + 4 +
+                    ((Token) tokenList.get(i)).getLength();
+            
+            pane.select(start, end);
+            SimpleAttributeSet mattr = new SimpleAttributeSet();
+            if ((attrList[i] & StringData.UNIQ) != 0)
+                StyleConstants.setForeground(mattr, Color.blue);
+            else if ((attrList[i] & StringData.PAIR) != 0)
+                StyleConstants.setForeground(mattr, Color.green);
+            pane.setCharacterAttributes(mattr, false);
+        }
+        pane.select(0, 0);
+        SimpleAttributeSet mattr = new SimpleAttributeSet();
+        pane.setCharacterAttributes(mattr, false);
+    }
+    
     /**
      * Sets the text of match window to the list of found matches (near strings),
      * and select the currently selected match in bold.
      */
-	public void updateMatchText()
-	{
-		// Cancelling all the attributes
-		m_matchPane.setCharacterAttributes(new SimpleAttributeSet(), true);
-		
-		m_matchPane.setText(m_matchDisplay);
-
-		if ( m_hiliteStart >= 0 && m_matchDisplay.length()>0 )
-		{
-			m_matchPane.select(m_hiliteStart, m_hiliteEnd);
-			MutableAttributeSet mattr;
-			mattr = new SimpleAttributeSet();
-			StyleConstants.setBold(mattr, true);
-			m_matchPane.setCharacterAttributes(mattr, false);
-
-			m_matchPane.setCaretPosition(m_hiliteStart);
-		}
-
-		m_matchDisplay = "";													// NOI18N
-		m_matchCount = 0;
-	}
-
-	public void reset()
-	{
-		m_matchDisplay = "";													// NOI18N
-		m_glosDisplay = "";														// NOI18N
-		m_matchCount = 0;
-		m_matchPane.setText("");												// NOI18N
-		m_glosPane.setText("");													// NOI18N
-	}
-
-	public void setFont(Font f)
-	{
+    public void updateMatchText()
+    {
+        // Cancelling all the attributes
+        m_matchPane.setCharacterAttributes(new SimpleAttributeSet(), true);
+        
+        m_matchPane.setText(m_matchDisplay);
+        
+        if ( m_hiliteStart >= 0 && m_matchDisplay.length()>0 )
+        {
+            m_matchPane.select(m_hiliteStart, m_hiliteEnd);
+            MutableAttributeSet mattr;
+            mattr = new SimpleAttributeSet();
+            StyleConstants.setBold(mattr, true);
+            m_matchPane.setCharacterAttributes(mattr, false);
+            
+            m_matchPane.setCaretPosition(m_hiliteStart);
+        }
+        
+        m_matchDisplay = "";                                                    // NOI18N
+        m_matchCount = 0;
+    }
+    
+    public void reset()
+    {
+        m_matchDisplay = "";                                                    // NOI18N
+        m_glosDisplay = "";                                                     // NOI18N
+        m_matchCount = 0;
+        m_matchPane.setText("");                                                // NOI18N
+        m_glosPane.setText("");                                                 // NOI18N
+    }
+    
+    public void setFont(Font f)
+    {
         super.setFont(f);
         if( m_matchPane!=null )
         {
             m_matchPane.setFont(f);
             m_glosPane.setFont(f);
         }
-	}
-
-	public void addGlosTerm(String src, String loc, String comments)
-	{
-		String glos = "'" + src + "'  =  '" + loc + "'\n";						// NOI18N
-		if (comments.length() > 0)
-			glos += comments + "\n\n";											// NOI18N
-		else
-			glos += "\n";														// NOI18N
-		m_glosDisplay += glos;
-	}
-
-	// returns offset in display of the start of this term
-	public int addMatchTerm(String src, String loc, int score, String proj)
-	{
-		String entry = ++m_matchCount + ")  " + src + "\n" + loc + "\n< " +		// NOI18N
-					score + "% " + proj + " >\n\n";								// NOI18N
-		int size = m_matchDisplay.length();
-		m_matchDisplay += entry;
-		return size;
-	}
-
-	public void hiliteRange(int start, int end)
-	{
-		int len = m_matchDisplay.length();
-		if (start < 0 || start > len)
-		{
-			m_hiliteStart = -1;
-			m_hiliteEnd = -1;
-			return;
-		}
-
-		if (end < 0)
-			end = len;
-
-		m_hiliteStart = start;
-		m_hiliteEnd = end;
-	}
-
-	public void storeScreenLayout()
-	{
-		Preferences.setPreference(Preferences.MATCHWINDOW_WIDTH, getWidth());
-		Preferences.setPreference(Preferences.MATCHWINDOW_HEIGHT, getHeight());
-		Preferences.setPreference(Preferences.MATCHWINDOW_X, getX());
-		Preferences.setPreference(Preferences.MATCHWINDOW_Y, getY());
-	}
-
+    }
+    
+    public void addGlosTerm(String src, String loc, String comments)
+    {
+        String glos = "'" + src + "'  =  '" + loc + "'\n";                      // NOI18N
+        if (comments.length() > 0)
+            glos += comments + "\n\n";                                          // NOI18N
+        else
+            glos += "\n";                                                       // NOI18N
+        m_glosDisplay += glos;
+    }
+    
+    // returns offset in display of the start of this term
+    public int addMatchTerm(String src, String loc, int score, String proj)
+    {
+        String entry = ++m_matchCount + ")  " + src + "\n" + loc + "\n< " +     // NOI18N
+                score + "% " + proj + " >\n\n";                                 // NOI18N
+        int size = m_matchDisplay.length();
+        m_matchDisplay += entry;
+        return size;
+    }
+    
+    public void hiliteRange(int start, int end)
+    {
+        int len = m_matchDisplay.length();
+        if (start < 0 || start > len)
+        {
+            m_hiliteStart = -1;
+            m_hiliteEnd = -1;
+            return;
+        }
+        
+        if (end < 0)
+            end = len;
+        
+        m_hiliteStart = start;
+        m_hiliteEnd = end;
+    }
+    
+    public void storeScreenLayout()
+    {
+        Preferences.setPreference(Preferences.MATCHWINDOW_WIDTH, getWidth());
+        Preferences.setPreference(Preferences.MATCHWINDOW_HEIGHT, getHeight());
+        Preferences.setPreference(Preferences.MATCHWINDOW_X, getX());
+        Preferences.setPreference(Preferences.MATCHWINDOW_Y, getY());
+    }
+    
     /**
      * Initializes the screen layout.
      * <p>
@@ -312,10 +313,10 @@ public class MatchGlossaryPane extends javax.swing.JPanel implements java.beans.
      * if screen size saved, recover that and use instead
      * (18may04).
      */
-	private void initScreenLayout()
-	{
-		boolean badSize = false;
-        try 
+    private void initScreenLayout()
+    {
+        boolean badSize = false;
+        try
         {
             String dw = Preferences.getPreference(Preferences.MATCHWINDOW_WIDTH);
             String dh = Preferences.getPreference(Preferences.MATCHWINDOW_HEIGHT);
@@ -325,35 +326,35 @@ public class MatchGlossaryPane extends javax.swing.JPanel implements java.beans.
             int y = Integer.parseInt(dy);
             int w = Integer.parseInt(dw);
             int h = Integer.parseInt(dh);
-			setSize(w, h);
-			setLocation(x, y);
+            setSize(w, h);
+            setLocation(x, y);
         }
         catch(Exception e)
         {
-			// size info missing - put window in default position
-			GraphicsEnvironment env = 
-					GraphicsEnvironment.getLocalGraphicsEnvironment();
-			Rectangle scrSize = env.getMaximumWindowBounds();
-			if (scrSize.width < 900)
-			{
-				// assume 800x600
-				setSize(200, 536);
-				setLocation(590, 0);
-			}
-			else
-			{
-				// assume 1024x768 or larger
-				setSize(320, 700);
-				setLocation(680, 0);
-			}
-		}
-	}
-
-	private String		m_matchDisplay = "";								// NOI18N
-	private String		m_glosDisplay = "";									// NOI18N
-	private int			m_matchCount;
-	private int			m_hiliteStart = -1;
-	private int			m_hiliteEnd = -1;
+            // size info missing - put window in default position
+            GraphicsEnvironment env =
+                    GraphicsEnvironment.getLocalGraphicsEnvironment();
+            Rectangle scrSize = env.getMaximumWindowBounds();
+            if (scrSize.width < 900)
+            {
+                // assume 800x600
+                setSize(200, 536);
+                setLocation(590, 0);
+            }
+            else
+            {
+                // assume 1024x768 or larger
+                setSize(320, 700);
+                setLocation(680, 0);
+            }
+        }
+    }
+    
+    private String m_matchDisplay = "";                                         // NOI18N
+    private String m_glosDisplay = "";                                          // NOI18N
+    private int    m_matchCount;
+    private int    m_hiliteStart = -1;
+    private int    m_hiliteEnd = -1;
     
     /** Returns divider location */
     public int getDividerLocation()

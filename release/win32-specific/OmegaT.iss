@@ -10,7 +10,7 @@ Compression=lzma
 SolidCompression=yes
 LicenseFile=license.txt
 OutputDir=..\dist2
-OutputBaseFilename=OmegaT_@VERSION_NUMBER_SUBST@_setup
+OutputBaseFilename=OmegaT_win_@VERSION_NUMBER_SUBST@
 
 [Files]
 Source: "docs\*"; DestDir: "{app}\docs"; Flags: recursesubdirs
@@ -23,7 +23,7 @@ Source: "lib-mnemonics.jar"; DestDir: "{app}"
 Source: "license.txt"; DestDir: "{app}"
 Source: "readme.txt"; DestDir: "{app}"; Flags: isreadme
 Source: "join.html"; DestDir: "{app}"
-Source: "release_notes.txt"; DestDir: "{app}"
+Source: "changes.txt"; DestDir: "{app}"
 
 [Icons]
 Name: "{group}\OmegaT @VERSION_NUMBER_SUBST@"; Filename: "{app}\OmegaT.exe"; WorkingDir: "{app}"

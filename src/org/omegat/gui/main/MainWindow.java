@@ -20,7 +20,9 @@
 **************************************************************************/
 
 package org.omegat.gui.main;
+
 import java.awt.Color;
+import java.awt.Event;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
@@ -75,8 +77,6 @@ import org.omegat.util.RequestPacket;
 
 /**
  * The main window of OmegaT application.
- * <p>
- * Currently prototype.
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
@@ -94,21 +94,21 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     }
     
     /**
-     * Some additional actions to initialize UI, 
-     * not doable via NetBeans Form Editor 
+     * Some additional actions to initialize UI,
+     * not doable via NetBeans Form Editor
      */
-	private void additionalUIInit()
-	{
-		updateTitle();
+    private void additionalUIInit()
+    {
+        updateTitle();
         loadWindowIcon();
-		m_projWin = new ProjectFrame(this);
+        m_projWin = new ProjectFrame(this);
         matchWindow = new MatchGlossaryWindow(this);
         xlPane.setMainWindow(this);
-		initScreenLayout();
-		updateCheckboxesOnStart();
+        initScreenLayout();
+        updateCheckboxesOnStart();
         uiUpdateOnProjectClose();
         initUIShortcuts();
-	}
+    }
     
     /**
      * Loads and set main window's icon.
@@ -117,7 +117,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     {
         try
         {
-            URL resource = getClass().getResource("/org/omegat/gui/resources/omegat-small.gif");  // NOI18N
+            URL resource = getClass().getResource("/org/omegat/gui/resources/OmegaT_small.gif");  // NOI18N
             ImageIcon imageicon = new ImageIcon(resource);
             Image image = imageicon.getImage();
             setIconImage(image);
@@ -139,12 +139,13 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         setAccelerator(projectOpenMenuItem, KeyEvent.VK_O);
         setAccelerator(projectSaveMenuItem, KeyEvent.VK_S);
         setAccelerator(projectEditMenuItem, KeyEvent.VK_E);
-        setAccelerator(projectExitMenuItem, KeyEvent.VK_Q);
         
         setAccelerator(editUndoMenuItem , KeyEvent.VK_Z);
         setAccelerator(editRedoMenuItem , KeyEvent.VK_Y);
         setAccelerator(editOverwriteTranslationMenuItem , KeyEvent.VK_R);
         setAccelerator(editInsertTranslationMenuItem , KeyEvent.VK_I);
+        setAccelerator(editOverwriteSourceMenuItem , KeyEvent.VK_R, true);
+        setAccelerator(editInsertSourceMenuItem , KeyEvent.VK_I, true);
         setAccelerator(editFindInProjectMenuItem , KeyEvent.VK_F);
         setAccelerator(editSelectFuzzy1MenuItem , KeyEvent.VK_1);
         setAccelerator(editSelectFuzzy2MenuItem , KeyEvent.VK_2);
@@ -168,448 +169,479 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
      */
     private void setAccelerator(JMenuItem item, int key)
     {
-        item.setAccelerator(KeyStroke.getKeyStroke(key, 
-                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        setAccelerator(item, key, false);
     }
 
     /**
+     * Utility method to set Ctrl + key accelerators for menu items.
+     * @param key integer specifiyng the key code (e.g. KeyEvent.VK_Z)
+     */
+    private void setAccelerator(JMenuItem item, int key, boolean shift)
+    {
+        int shiftmask = shift ? Event.SHIFT_MASK : 0;
+        item.setAccelerator(KeyStroke.getKeyStroke(key,
+                shiftmask | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+    }
+    
+    
+    /**
      * Sets the title of the main window appropriately
      */
-	private void updateTitle()
-	{
-		String s = OStrings.VERSION;
-		if( m_projectLoaded )
-		{
+    private void updateTitle()
+    {
+        String s = OStrings.OMEGAT_VERSION;
+        if( m_projectLoaded )
+        {
             try
             {
                 String file = m_activeFile.substring(
-                    	CommandThread.core.sourceRoot().length());
+                CommandThread.core.sourceRoot().length());
                 s += " :: " + m_activeProj + " :: " + file;							// NOI18N
             }
             catch( Exception e )
             {
                 // nothing...
             }
-		}
-		setTitle(s);
-	}
+        }
+        setTitle(s);
+    }
     
-	/**
+    /**
      * Old Initialization.
      */
-	public void oldInit()
-	{
+    public void oldInit()
+    {
         m_curEntryNum = -1;
-		m_curNear = null;
+        m_curNear = null;
         m_activeProj = "";														// NOI18N
-		m_activeFile = "";														// NOI18N
-		m_docSegList = new ArrayList();
-		
-		////////////////////////////////
-
-		enableEvents(0);
-
-		String fontName = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_NAME, OConsts.TF_FONT_DEFAULT);
-		String fontSize = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_SIZE, OConsts.TF_FONT_SIZE_DEFAULT);
+        m_activeFile = "";														// NOI18N
+        m_docSegList = new ArrayList();
+        
+        ////////////////////////////////
+        
+        enableEvents(0);
+        
+        String fontName = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_NAME, OConsts.TF_FONT_DEFAULT);
+        String fontSize = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_SIZE, OConsts.TF_FONT_SIZE_DEFAULT);
         int fontSizeInt = 12;
-		try 
+        try
         {
-			fontSizeInt = Integer.parseInt(fontSize);
-		}
-		catch (NumberFormatException nfe) 
+            fontSizeInt = Integer.parseInt(fontSize);
+        }
+        catch (NumberFormatException nfe)
         {
         }
         m_font = new Font(fontName, Font.PLAIN, fontSizeInt);
-		xlPane.setFont(m_font);
+        xlPane.setFont(m_font);
         
         matchWindow.getMatchGlossaryPane().setFont(m_font);
-		
-		// check this only once as it can be changed only at compile time
-		// should be OK, but customization might have messed it up
-		String start = OStrings.TF_CUR_SEGMENT_START;
-		int zero = start.lastIndexOf('0');
+        
+        // check this only once as it can be changed only at compile time
+        // should be OK, but customization might have messed it up
+        String start = OStrings.TF_CUR_SEGMENT_START;
+        int zero = start.lastIndexOf('0');
         m_segmentTagHasNumber = (zero > 4) && // 4 to reserve room for 10000 digit
-                (start.charAt(zero - 1) == '0') &&
-                (start.charAt(zero - 2) == '0') &&
-                (start.charAt(zero - 3) == '0');
-	}
-
+        (start.charAt(zero - 1) == '0') &&
+        (start.charAt(zero - 2) == '0') &&
+        (start.charAt(zero - 3) == '0');
+    }
+    
     /** Updates menu checkboxes from preferences on start */
-	private void updateCheckboxesOnStart()
-	{
-		String tab = Preferences.getPreference(Preferences.USE_TAB_TO_ADVANCE);
-		if (tab != null && tab.equals("true"))								// NOI18N
-		{
-			optionsTabAdvanceCheckBoxMenuItem.setSelected(true);
-			m_advancer = KeyEvent.VK_TAB;
-		}
-		else
-			m_advancer = KeyEvent.VK_ENTER;
-	}
-
+    private void updateCheckboxesOnStart()
+    {
+        String tab = Preferences.getPreference(Preferences.USE_TAB_TO_ADVANCE);
+        if (tab != null && tab.equals("true"))								// NOI18N
+        {
+            optionsTabAdvanceCheckBoxMenuItem.setSelected(true);
+            m_advancer = KeyEvent.VK_TAB;
+        }
+        else
+            m_advancer = KeyEvent.VK_ENTER;
+    }
+    
     /**
      * Initialized the sizes of OmegaT window.
      * <p>
-     * Assume screen size is 800x600 if width less than 900, and 
+     * Assume screen size is 800x600 if width less than 900, and
      * 1024x768 if larger. Assume task bar at bottom of screen.
      * If screen size saved, recover that and use instead
      * (18may04).
      */
-	private void initScreenLayout()
-	{
+    private void initScreenLayout()
+    {
         // main window
-        try 
+        try
         {
             String dx = Preferences.getPreference(Preferences.MAINWINDOW_X);
             String dy = Preferences.getPreference(Preferences.MAINWINDOW_Y);
             int x = Integer.parseInt(dx);
             int y = Integer.parseInt(dy);
-			setLocation(x, y);
+            setLocation(x, y);
             String dw = Preferences.getPreference(Preferences.MAINWINDOW_WIDTH);
             String dh = Preferences.getPreference(Preferences.MAINWINDOW_HEIGHT);
             int w = Integer.parseInt(dw);
             int h = Integer.parseInt(dh);
-			setSize(w, h);
+            setSize(w, h);
         }
         catch (NumberFormatException nfe)
         {
-			// size info missing - put window in default position
-			GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			Rectangle scrSize = env.getMaximumWindowBounds();
-			if (scrSize.width < 900)
-			{
-				// assume 800x600
-				setSize(580, 536);
-				setLocation(0, 0);
-			}
-			else
-			{
-				// assume 1024x768 or larger
-				setSize(690, 700);
-				setLocation(0, 0);
-			}
-		}
-
+            // size info missing - put window in default position
+            GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            Rectangle scrSize = env.getMaximumWindowBounds();
+            if (scrSize.width < 900)
+            {
+                // assume 800x600
+                setSize(580, 536);
+                setLocation(0, 0);
+            }
+            else
+            {
+                // assume 1024x768 or larger
+                setSize(690, 700);
+                setLocation(0, 0);
+            }
+        }
+        
         // match/glossary window
         try
         {
             String dw = Preferences.getPreference(Preferences.MATCHWINDOW_WIDTH);
             String dh = Preferences.getPreference(Preferences.MATCHWINDOW_HEIGHT);
             int w = Integer.parseInt(dw);
-			int h = Integer.parseInt(dh);
-			matchWindow.setSize(w, h);
+            int h = Integer.parseInt(dh);
+            matchWindow.setSize(w, h);
             String dx = Preferences.getPreference(Preferences.MATCHWINDOW_X);
             String dy = Preferences.getPreference(Preferences.MATCHWINDOW_Y);
             int x = Integer.parseInt(dx);
             int y = Integer.parseInt(dy);
-			matchWindow.setLocation(x, y);
+            matchWindow.setLocation(x, y);
         }
         catch (NumberFormatException nfe)
         {
-			// size info missing - put window in default position
-			GraphicsEnvironment env = 
-					GraphicsEnvironment.getLocalGraphicsEnvironment();
-			Rectangle scrSize = env.getMaximumWindowBounds();
-			if (scrSize.width < 900)
-			{
-				// assume 800x600
-				matchWindow.setSize(200, 536);
-				matchWindow.setLocation(590, 0);
-			}
-			else
-			{
-				// assume 1024x768 or larger
-				matchWindow.setSize(300, 700);
-				matchWindow.setLocation(700, 0);
-			}
-		}
+            // size info missing - put window in default position
+            GraphicsEnvironment env =
+            GraphicsEnvironment.getLocalGraphicsEnvironment();
+            Rectangle scrSize = env.getMaximumWindowBounds();
+            if (scrSize.width < 900)
+            {
+                // assume 800x600
+                matchWindow.setSize(200, 536);
+                matchWindow.setLocation(590, 0);
+            }
+            else
+            {
+                // assume 1024x768 or larger
+                matchWindow.setSize(300, 700);
+                matchWindow.setLocation(700, 0);
+            }
+        }
         
         // match/glossary window divider
         try
         {
             String divs = Preferences.getPreference(Preferences.MATCHWINDOW_DIVIDER);
             int div = Integer.parseInt(divs);
-			matchWindow.setDividerLocation(div);
+            matchWindow.setDividerLocation(div);
         }
         catch (NumberFormatException nfe)
         {
-			// divider info missing - put in default position - middle
+            // divider info missing - put in default position - middle
             int div = matchWindow.getHeight() / 2;
             matchWindow.setDividerLocation(div);
-		}
+        }
         
         screenLayoutLoaded = true;
-	}
+    }
     
     /** Loads Instant start article */
     private void loadInstantStart()
     {
-		try
-		{
+        try
+        {
             String lang = HelpFrame.detectDocLanguage();
-            String filepath = 
-                    StaticUtils.installDir()
-                    + File.separator + OConsts.HELP_DIR + File.separator 
-                    + lang + File.separator 
-                    + OConsts.HELP_INSTANT_START;
+            String filepath =
+            StaticUtils.installDir()
+            + File.separator + OConsts.HELP_DIR + File.separator
+            + lang + File.separator
+            + OConsts.HELP_INSTANT_START;
             JTextPane instantArticlePane = new JTextPane();
             instantArticlePane.setEditable(false);
-			instantArticlePane.setPage("file:///"+filepath);                    // NOI18N
+            instantArticlePane.setPage("file:///"+filepath);                    // NOI18N
             mainScroller.setViewportView(instantArticlePane);
         }
-		catch (IOException e)
-		{
+        catch (IOException e)
+        {
             mainScroller.setViewportView(xlPane);
-		}
+        }
     }
     
     /**
      * Stores screen layout (width, height, position, etc).
      */
-	public void storeScreenLayout()
-	{
+    public void storeScreenLayout()
+    {
         if( screenLayoutLoaded )
         {
             Preferences.setPreference(Preferences.MAINWINDOW_WIDTH, getWidth());
             Preferences.setPreference(Preferences.MAINWINDOW_HEIGHT, getHeight());
             Preferences.setPreference(Preferences.MAINWINDOW_X, getX());
             Preferences.setPreference(Preferences.MAINWINDOW_Y, getY());
-        
+            
             Preferences.setPreference(Preferences.MATCHWINDOW_DIVIDER, matchWindow.getDividerLocation());
-
+            
             Preferences.setPreference(Preferences.MATCHWINDOW_WIDTH, matchWindow.getWidth());
             Preferences.setPreference(Preferences.MATCHWINDOW_HEIGHT, matchWindow.getHeight());
             Preferences.setPreference(Preferences.MATCHWINDOW_X, matchWindow.getX());
             Preferences.setPreference(Preferences.MATCHWINDOW_Y, matchWindow.getY());
         }
-	}
-
+    }
+    
     ///////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////
-	// command handling
-	
-	private void doQuit()
-	{
-		storeScreenLayout();
-		Preferences.save();
+    ///////////////////////////////////////////////////////////////
+    // command handling
+    
+    private void doQuit()
+    {
+        storeScreenLayout();
+        Preferences.save();
         
-		// shutdown
-		if (m_projectLoaded)
-		{
-			commitEntry();
-			doSave();
-		}
+        // shutdown
+        if (m_projectLoaded)
+        {
+            commitEntry();
+            doSave();
+        }
 
-		CommandThread.core.signalStop();
-		for (int i=0; i<25; i++)
-		{
-			while (CommandThread.core != null)
-			{
-				try { Thread.sleep(10); }
-				catch (InterruptedException e) {
-                }
-			}
-			if (CommandThread.core == null)
-				break;
-		}
+        if( CommandThread.core!=null )
+            CommandThread.core.interrupt();
 
-		System.exit(0);
-	}
-
-	private void doValidateTags()
-	{
-		ArrayList suspects = CommandThread.core.validateTags();
-		if (suspects.size() > 0)
-		{
-			// create list of suspect strings - use org.omegat.gui.ContextFrame for now
-			ContextFrame cf = new ContextFrame(this);
-			cf.setVisible(true);
-			cf.displayStringList(suspects);
-		}
-		else
-		{
-			// show dialog saying all is OK
-			JOptionPane.showMessageDialog(this, 
-						OStrings.TF_NOTICE_OK_TAGS,
-						OStrings.TF_NOTICE_TITLE_TAGS,
-						JOptionPane.INFORMATION_MESSAGE);
-		}
-	}
-
+        // waiting for CommandThread to finish for 1 minute
+        for( int i=0; i<600 && CommandThread.core!=null; i++ )
+        {
+            try
+            { 
+                Thread.sleep(100);
+            }
+            catch (InterruptedException e)
+            {
+            }
+        }
+        
+        System.exit(0);
+    }
+    
+    private void doValidateTags()
+    {
+        ArrayList suspects = CommandThread.core.validateTags();
+        if (suspects.size() > 0)
+        {
+            // create list of suspect strings - use org.omegat.gui.ContextFrame for now
+            ContextFrame cf = new ContextFrame(this);
+            cf.setVisible(true);
+            cf.displayStringList(suspects);
+        }
+        else
+        {
+            // show dialog saying all is OK
+            JOptionPane.showMessageDialog(this,
+            OStrings.TF_NOTICE_OK_TAGS,
+            OStrings.TF_NOTICE_TITLE_TAGS,
+            JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
     public void doNextEntry()
-	{
-		if (!m_projectLoaded)
-			return;
-		
-		commitEntry();
-
-		m_curEntryNum++;
-		if (m_curEntryNum > m_xlLastEntry)
-		{
-			if (m_curEntryNum >= CommandThread.core.numEntries())
-				m_curEntryNum = 0;
-			loadDocument();
-		}
-		activateEntry();
-	}
-
-	public void doPrevEntry()
-	{
-		if (!m_projectLoaded)
-			return;
-		
-		commitEntry();
-
-		m_curEntryNum--;
-		if (m_curEntryNum < m_xlFirstEntry)
-		{
-			if (m_curEntryNum < 0)
-				m_curEntryNum = CommandThread.core.numEntries() - 1;
-			loadDocument();
-		}
-		activateEntry();
-	}
-
-	/**
-	 * Finds the next untranslated entry in the document.
-     * 
+    {
+        if (!m_projectLoaded)
+            return;
+        
+        commitEntry();
+        
+        m_curEntryNum++;
+        if (m_curEntryNum > m_xlLastEntry)
+        {
+            if (m_curEntryNum >= CommandThread.core.numEntries())
+                m_curEntryNum = 0;
+            loadDocument();
+        }
+        activateEntry();
+    }
+    
+    public void doPrevEntry()
+    {
+        if (!m_projectLoaded)
+            return;
+        
+        commitEntry();
+        
+        m_curEntryNum--;
+        if (m_curEntryNum < m_xlFirstEntry)
+        {
+            if (m_curEntryNum < 0)
+                m_curEntryNum = CommandThread.core.numEntries() - 1;
+            // empty project bugfix:
+            if (m_curEntryNum < 0)
+                m_curEntryNum = 0;
+            loadDocument();
+        }
+        activateEntry();
+    }
+    
+    /**
+     * Finds the next untranslated entry in the document.
+     *
      * @author Henry Pjiffers
      * @author Maxym Mykhalchuk
-	 */	
-	public void doNextUntranslatedEntry()
-	{
-		// check if a document is loaded
-		if (m_projectLoaded == false)
-			return;
-		
-		// save the current entry
-		commitEntry();
-	
-		// get the current entry number and the total number of entries
-		int curEntryNum = m_curEntryNum;
-		int numEntries = CommandThread.core.numEntries();
-		
-		// iterate through the list of entries,
-		// starting at the current entry,
-		// until an entry with no translation is found
-        //
-		// P.S. going to the next entry anyway, even if it's not translated
-		curEntryNum++;
+     */
+    public void doNextUntranslatedEntry()
+    {
+        // check if a document is loaded
+        if (m_projectLoaded == false)
+            return;
         
-		SourceTextEntry entry = null;
-		while (curEntryNum < numEntries)
-		{
-			// get the next entry
-			entry = CommandThread.core.getSTE(curEntryNum);
-			
-			// check if the entry is not null, and whether it contains a translation
-			if (   (entry != null)
-			    && (entry.getTranslation().length() == 0))
-			{
-				// mark the entry
-				m_curEntryNum = curEntryNum;
-				
-				// load the document, if the segment is not in the current document
-				if (m_curEntryNum > m_xlLastEntry)
-					loadDocument();
-				
-				// stop searching
-				break;
-			}
-			
-			// next entry
-			curEntryNum++;
-		}
+        // save the current entry
+        commitEntry();
+        
+        // get the current entry number and the total number of entries
+        int curEntryNum = m_curEntryNum;
+        int numEntries = CommandThread.core.numEntries();
+        
+        // iterate through the list of entries,
+        // starting at the current entry,
+        // until an entry with no translation is found
+        //
+        // P.S. going to the next entry anyway, even if it's not translated
+        curEntryNum++;
+        
+        SourceTextEntry entry = null;
+        while (curEntryNum < numEntries)
+        {
+            // get the next entry
+            entry = CommandThread.core.getSTE(curEntryNum);
+            
+            // check if the entry is not null, and whether it contains a translation
+            if (   (entry != null)
+            && (entry.getTranslation().length() == 0))
+            {
+                // mark the entry
+                m_curEntryNum = curEntryNum;
+                
+                // load the document, if the segment is not in the current document
+                if (m_curEntryNum > m_xlLastEntry)
+                    loadDocument();
+                
+                // stop searching
+                break;
+            }
+            
+            // next entry
+            curEntryNum++;
+        }
         
         // activate the entry
         activateEntry();
-	}
-
-	// insert current fuzzy match at cursor position
+    }
+    
+    
+    /** inserts the source text of a segment at cursor position */
+    private void doInsertSource()
+    {
+        if (!m_projectLoaded)
+            return;
+        
+        String s = m_curEntry.getSrcText();
+        int pos = xlPane.getCaretPosition();
+        xlPane.select(pos, pos);
+        xlPane.replaceSelection(s);
+    }
+    
+    /** replaces entire edited segment text with a the source text of a segment at cursor position */
+    private void doOverwriteSource()
+    {
+        if (!m_projectLoaded)
+            return;
+        
+        String s = m_curEntry.getSrcText();
+        doReplaceEditText(s);
+    }
+    
+    /** insert current fuzzy match at cursor position */
     private void doInsertTrans()
-	{
-		if (!m_projectLoaded)
-			return;
-		
-		if (m_curNear == null)
-			return;
+    {
+        if (!m_projectLoaded)
+            return;
+        
+        if (m_curNear == null)
+            return;
+        
+        StringEntry se = m_curNear.str;
+        String s = se.getTranslation();
+        int pos = xlPane.getCaretPosition();
+        xlPane.select(pos, pos);
+        xlPane.replaceSelection(s);
+    }
+    
+    
+    /** replace entire edit area with active fuzzy match */
+    public void doRecycleTrans()
+    {
+        if (!m_projectLoaded)
+            return;
+        
+        if (m_curNear == null)
+            return;
+        
+        StringEntry se = m_curNear.str;
+        doReplaceEditText(se.getTranslation());
+    }
 
-		StringEntry se = m_curNear.str;
-		String s = se.getTrans();
-		int pos = xlPane.getCaretPosition();
-		xlPane.select(pos, pos);
-		xlPane.replaceSelection(s);
-	}
-
-	// replace entire edit area with active fuzzy match
-	public void doRecycleTrans()
-	{
-		if (!m_projectLoaded)
-			return;
-		
-		if (m_curNear == null)
-			return;
-
-		StringEntry se = m_curNear.str;
-		doReplaceEditText(se.getTrans());
-	}
-
+    /** replaces the entire edit area with a given text */
     private void doReplaceEditText(String text)
-	{
-		if (!m_projectLoaded)
-			return;
-		
-		if (m_curNear == null)
-			return;
+    {
+        // build local offsets
+        int start = m_segmentStartOffset + m_sourceDisplayLength +
+        OStrings.TF_CUR_SEGMENT_START.length();
+        int end = xlPane.getText().length() - m_segmentEndInset -
+        OStrings.TF_CUR_SEGMENT_END.length();
 
-		if (text != null)
-		{
-			// remove current text
-			// build local offsets
-			int start = m_segmentStartOffset + m_sourceDisplayLength +
-				OStrings.TF_CUR_SEGMENT_START.length();
-			int end = xlPane.getText().length() - m_segmentEndInset -
-				OStrings.TF_CUR_SEGMENT_END.length();
-
-			// remove text
-//StaticUtils.log("removing text "+start+" -> "+end+" length:"+(end-start));
-			xlPane.select(start, end);
-			xlPane.replaceSelection(text);
-		}
-	}
-
+        // remove text
+        xlPane.select(start, end);
+        xlPane.replaceSelection(text);
+    }
+    
     /** Closes the project. */
-	public void doCloseProject()
-	{
+    public void doCloseProject()
+    {
         Preferences.save();
         
-		if (m_projectLoaded)
-		{
-			commitEntry();
-			doSave();
-		}
-		m_projWin.reset();
-		m_projectLoaded = false;
-		xlPane.setText("");													// NOI18N
+        if (m_projectLoaded)
+        {
+            commitEntry();
+            doSave();
+        }
+        m_projWin.reset();
+        m_projectLoaded = false;
+        xlPane.setText(OStrings.TF_INTRO_MESSAGE);                              // NOI18N
         
         matchWindow.getMatchGlossaryPane().reset();
-
+        
         updateTitle();
+        uiUpdateOnProjectClose();
         
         CommandThread.core.signalProjectClosing();
         CommandThread.core.cleanUp();
-	}
+    }
     
     /** Updates UI (enables/disables menu items) upon <b>closing</b> project */
     private void uiUpdateOnProjectClose()
     {
         projectNewMenuItem.setEnabled(true);
         projectOpenMenuItem.setEnabled(true);
-		projectNewMenuItem.setEnabled(true);
+        projectNewMenuItem.setEnabled(true);
         
-		optionsSetupFileFiltersMenuItem.setEnabled(true);
+        optionsSetupFileFiltersMenuItem.setEnabled(true);
         optionsSentsegMenuItem.setEnabled(true);
-
+        
         
         projectImportMenuItem.setEnabled(false);
         projectReloadMenuItem.setEnabled(false);
@@ -620,10 +652,13 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         
         editMenu.setEnabled(false);
         gotoMenu.setEnabled(false);
-        toolsMenu.setEnabled(false);
+        toolsValidateTagsMenuItem.setEnabled(false);
         
         xlPane.setEditable(false);
-        m_projWin.update_addNewFileButton();
+        m_projWin.uiUpdateImportButtonStatus();
+        
+        m_projWin.setVisible(false);
+        viewFileListCheckBoxMenuItem.setSelected(false);
     }
     
     /** Updates UI (enables/disables menu items) upon <b>opening</b> project */
@@ -631,11 +666,11 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     {
         projectNewMenuItem.setEnabled(false);
         projectOpenMenuItem.setEnabled(false);
-		projectNewMenuItem.setEnabled(false);
+        projectNewMenuItem.setEnabled(false);
         
-		optionsSetupFileFiltersMenuItem.setEnabled(false);
+        optionsSetupFileFiltersMenuItem.setEnabled(false);
         optionsSentsegMenuItem.setEnabled(false);
-
+        
         
         projectImportMenuItem.setEnabled(true);
         projectReloadMenuItem.setEnabled(true);
@@ -646,10 +681,13 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         
         editMenu.setEnabled(true);
         gotoMenu.setEnabled(true);
-        toolsMenu.setEnabled(true);
+        toolsValidateTagsMenuItem.setEnabled(true);
         
         xlPane.setEditable(true);
-        m_projWin.update_addNewFileButton();
+        m_projWin.uiUpdateImportButtonStatus();
+        
+        m_projWin.setVisible(true);
+        viewFileListCheckBoxMenuItem.setSelected(true);
     }
     
     
@@ -669,10 +707,10 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         
         if( changed )
         {
-            int res = JOptionPane.showConfirmDialog(this, 
-                     OStrings.getString("MW_REOPEN_QUESTION"),
-                     OStrings.getString("MW_REOPEN_TITLE"),
-                    JOptionPane.YES_NO_OPTION);
+            int res = JOptionPane.showConfirmDialog(this,
+            OStrings.getString("MW_REOPEN_QUESTION"),
+            OStrings.getString("MW_REOPEN_TITLE"),
+            JOptionPane.YES_NO_OPTION);
             if( res==JOptionPane.YES_OPTION )
                 doReloadProject();
         }
@@ -680,31 +718,31 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     
     /**
      * Displays the font dialog to allow selecting
-     * the font for source, target text (in main window) 
+     * the font for source, target text (in main window)
      * and for match and glossary windows.
      */
     private void doFont()
-	{
-		FontSelectionDialog dlg = new FontSelectionDialog(this, m_font);
-		dlg.setVisible(true);
-		if( dlg.getReturnStatus()==FontSelectionDialog.RET_OK_CHANGED )
-		{
-			// fonts have changed  
-			// first commit current translation
-			commitEntry();
+    {
+        FontSelectionDialog dlg = new FontSelectionDialog(this, m_font);
+        dlg.setVisible(true);
+        if( dlg.getReturnStatus()==FontSelectionDialog.RET_OK_CHANGED )
+        {
+            // fonts have changed
+            // first commit current translation
+            commitEntry();
             m_font = dlg.getSelectedFont();
-			xlPane.setFont(m_font);
+            xlPane.setFont(m_font);
             
             matchWindow.getMatchGlossaryPane().setFont(m_font);
             
             Preferences.setPreference(OConsts.TF_SRC_FONT_NAME, m_font.getName());
             Preferences.setPreference(OConsts.TF_SRC_FONT_SIZE, m_font.getSize());
-			activateEntry();
-		}
-	}
-	
+            activateEntry();
+        }
+    }
+    
     /**
-     * Displays the filters setup dialog to allow 
+     * Displays the filters setup dialog to allow
      * customizing file filters in detail.
      */
     private void doFilters()
@@ -742,16 +780,16 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     }
     
     private void doSave()
-	{
-		if (!m_projectLoaded)
-			return;
-		
+    {
+        if (!m_projectLoaded)
+            return;
+        
         setMessageText( OStrings.getString("MW_STATUS_SAVING"));
-                
+        
         CommandThread.core.save();
-
+        
         setMessageText( OStrings.getString("MW_STATUS_SAVED"));
-	}
+    }
     
     /**
      * Creates a new Project.
@@ -770,45 +808,45 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             // do nothing
         }
     }
-
+    
     /**
      * Loads a new project.
      */
-	private void doLoadProject()
-	{
-		if (m_projectLoaded)
+    private void doLoadProject()
+    {
+        if (m_projectLoaded)
         {
             displayError( "Please close the project first!", new Exception( "Another project is open")); // NOI18N
-			return;
+            return;
         }
         
         matchWindow.getMatchGlossaryPane().reset();
         mainScroller.setViewportView(xlPane);
-		
-		RequestPacket load;
-		load = new RequestPacket(RequestPacket.LOAD, this);
-		CommandThread.core.messageBoardPost(load);
-	}
+        
+        RequestPacket load;
+        load = new RequestPacket(RequestPacket.LOAD, this);
+        CommandThread.core.messageBoardPost(load);
+    }
     
-    /** 
+    /**
      * Loads the same project as was open in OmegaT before.
      * @param projectRoot previously closed project's root
      */
-	public void doLoadProject(String projectRoot)
-	{
-		if (m_projectLoaded)
+    public void doLoadProject(String projectRoot)
+    {
+        if (m_projectLoaded)
         {
             displayError( "Please close the project first!", new Exception( "Another project is open")); // NOI18N
-			return;
+            return;
         }
         
         matchWindow.getMatchGlossaryPane().reset();
         mainScroller.setViewportView(xlPane);
-		
-		RequestPacket load;
-		load = new RequestPacket(RequestPacket.LOAD, this, projectRoot);
-		CommandThread.core.messageBoardPost(load);
-	}
+        
+        RequestPacket load;
+        load = new RequestPacket(RequestPacket.LOAD, this, projectRoot);
+        CommandThread.core.messageBoardPost(load);
+    }
     
     /**
      * Reloads, i.e. closes and loads the same project.
@@ -872,45 +910,47 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         }
         
     }
-
-	public void doGotoEntry(int entryNum)
-	{
-		if (!m_projectLoaded)
-			return;
-		
-		commitEntry();
-
-		m_curEntryNum = entryNum - 1;
-		if (m_curEntryNum < m_xlFirstEntry)
-		{
-			if (m_curEntryNum < 0)
-				m_curEntryNum = CommandThread.core.numEntries();
-			loadDocument();
-		}
-		else if (m_curEntryNum > m_xlLastEntry)
-		{
-			if (m_curEntryNum >= CommandThread.core.numEntries())
-				m_curEntryNum = 0;
-			loadDocument();
-		}
-		activateEntry();
-	}
-
-	public void doGotoEntry(String str)
-	{
-		int num;
-		try
-		{
-			num = Integer.parseInt(str);
-			doGotoEntry(num);
-		}
-		catch (NumberFormatException e) {
+    
+    public void doGotoEntry(int entryNum)
+    {
+        if (!m_projectLoaded)
+            return;
+        
+        commitEntry();
+        
+        m_curEntryNum = entryNum - 1;
+        if (m_curEntryNum < m_xlFirstEntry)
+        {
+            if (m_curEntryNum < 0)
+                m_curEntryNum = CommandThread.core.numEntries();
+            loadDocument();
         }
-	}
-
-	public void finishLoadProject()
-	{
-        SwingUtilities.invokeLater(new Runnable(){
+        else if (m_curEntryNum > m_xlLastEntry)
+        {
+            if (m_curEntryNum >= CommandThread.core.numEntries())
+                m_curEntryNum = 0;
+            loadDocument();
+        }
+        activateEntry();
+    }
+    
+    public void doGotoEntry(String str)
+    {
+        int num;
+        try
+        {
+            num = Integer.parseInt(str);
+            doGotoEntry(num);
+        }
+        catch (NumberFormatException e)
+        {
+        }
+    }
+    
+    public void finishLoadProject()
+    {
+        SwingUtilities.invokeLater(new Runnable()
+        {
             public void run()
             {
                 m_activeProj = CommandThread.core.getProjectProperties().getProjectName();
@@ -918,58 +958,58 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                 m_curEntryNum = 0;
                 loadDocument();
                 m_projectLoaded = true;
-
+                
                 uiUpdateOnProjectOpen();
             }
         });
-	}
-
-	private void doCompileProject()
-	{
-		if (!m_projectLoaded)
-			return;
-		try 
-		{
-			CommandThread.core.compileProject();
-		}
-		catch(IOException e)
-		{
-			displayError(OStrings.TF_COMPILE_ERROR, e);
-		}
-		catch(TranslationException te)
-		{
-			displayError(OStrings.TF_COMPILE_ERROR, te);
-		}
-	}
-
-	private void doFind()
-	{
-		String selection = xlPane.getSelectedText();
-		if (selection != null)
-		{
-			selection.trim();
-			if (selection.length() < 3)
-			{
-				selection = null;
-			}
-		}
-
-		SearchThread srch = new SearchThread(this, selection);
-		srch.start();
-	}
-
-	/* updates status label */
-	public void setMessageText(String str)
-	{
-		if( str.equals("") )													// NOI18N
-			str = " ";															// NOI18N
-		statusLabel.setText(str);
-	}
-
-	/////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	// internal routines 
-
+    }
+    
+    private void doCompileProject()
+    {
+        if (!m_projectLoaded)
+            return;
+        try
+        {
+            CommandThread.core.compileProject();
+        }
+        catch(IOException e)
+        {
+            displayError(OStrings.TF_COMPILE_ERROR, e);
+        }
+        catch(TranslationException te)
+        {
+            displayError(OStrings.TF_COMPILE_ERROR, te);
+        }
+    }
+    
+    private void doFind()
+    {
+        String selection = xlPane.getSelectedText();
+        if (selection != null)
+        {
+            selection.trim();
+            if (selection.length() < 3)
+            {
+                selection = null;
+            }
+        }
+        
+        SearchThread srch = new SearchThread(this, selection);
+        srch.start();
+    }
+    
+    /* updates status label */
+    public void setMessageText(String str)
+    {
+        if( str.equals("") )													// NOI18N
+            str = " ";															// NOI18N
+        statusLabel.setText(str);
+    }
+    
+    /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
+    // internal routines
+    
     /**
      * Displays all segments in current document.
      * <p>
@@ -978,222 +1018,236 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
      * Also stores length of each displayed segment plus its starting offset.
      */
     private void loadDocument()
-	{
-		m_docReady = false;
-
-		// clear old text
-		xlPane.setText("");													// NOI18N
-		m_docSegList.clear();
+    {
+        m_docReady = false;
+        
+        // clear old text
+        xlPane.setText("");													// NOI18N
+        m_docSegList.clear();
         
         m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
         
-		setMessageText(OStrings.TF_LOADING_FILE + m_curEntry.getSrcFile().name);
-		Thread.yield();	// let UI update
-		m_xlFirstEntry = m_curEntry.getFirstInFile();
-		m_xlLastEntry = m_curEntry.getLastInFile();
-
-		DocumentSegment docSeg;
-		StringBuffer textBuf = new StringBuffer();
-		
-		for (int entryNum=m_xlFirstEntry; entryNum<=m_xlLastEntry; entryNum++)
-		{
-			docSeg = new DocumentSegment();
-			
-			SourceTextEntry ste = CommandThread.core.getSTE(entryNum);
-			String text = ste.getTranslation();
-			// set text and font
-			if( text.length()==0 ) 
-			{
-				// no translation available - use source text
-				text = ste.getSrcText(); 
-			}
-			text += "\n\n";														// NOI18N
-			
-			textBuf.append(text);
-
-			docSeg.length = text.length();
-			m_docSegList.add(docSeg);
-		}
-		xlPane.setText(textBuf.toString());
-		
-		setMessageText("");														// NOI18N
-		Thread.yield();
-	}
-
-	///////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////
-	// display oriented code
-
+        setMessageText(OStrings.TF_LOADING_FILE + m_curEntry.getSrcFile().name);
+        Thread.yield();	// let UI update
+        m_xlFirstEntry = m_curEntry.getFirstInFile();
+        m_xlLastEntry = m_curEntry.getLastInFile();
+        
+        DocumentSegment docSeg;
+        StringBuffer textBuf = new StringBuffer();
+        
+        for (int entryNum=m_xlFirstEntry; entryNum<=m_xlLastEntry; entryNum++)
+        {
+            docSeg = new DocumentSegment();
+            
+            SourceTextEntry ste = CommandThread.core.getSTE(entryNum);
+            String text = ste.getTranslation();
+            // set text and font
+            if( text.length()==0 )
+            {
+                // no translation available - use source text
+                text = ste.getSrcText();
+            }
+            text += "\n\n";														// NOI18N
+            
+            textBuf.append(text);
+            
+            docSeg.length = text.length();
+            m_docSegList.add(docSeg);
+        }
+        xlPane.setText(textBuf.toString());
+        
+        setMessageText("");														// NOI18N
+        Thread.yield();
+    }
+    
+    ///////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////
+    // display oriented code
+    
     /**
      * Displays fuzzy matching info if it's available.
      */
     public void updateFuzzyInfo(int nearNum)
-	{
-		if (!m_projectLoaded)
-			return;
-		
-		StringEntry curEntry = m_curEntry.getStrEntry();
-		List nearList = curEntry.getNearListTranslated();
-		// see if there are any matches
-		if( nearList.size()<=0 ) 
-		{
-			m_curNear = null;
-			matchWindow.getMatchGlossaryPane().updateMatchText();
-			return;
-		}
+    {
+        if (!m_projectLoaded)
+            return;
+        
+        StringEntry curEntry = m_curEntry.getStrEntry();
+        List nearList = curEntry.getNearListTranslated();
+        // see if there are any matches
+        if( nearList.size()<=0 )
+        {
+            m_curNear = null;
+            matchWindow.getMatchGlossaryPane().updateMatchText();
+            return;
+        }
         
         if( nearNum>=nearList.size() )
             return;
-		
-		m_curNear = (NearString) nearList.get(nearNum);
-		String str = null;
-		
-		NearString ns;
-		int ctr = 0;
-		int offset;
-		int start = -1;
-		int end = -1;
-		ListIterator li = nearList.listIterator();
-		
-		while( li.hasNext() ) 
-		{
-			ns = (NearString) li.next();
-			
-			String oldStr = ns.str.getSrcText();
-			String locStr = ns.str.getTrans();
-			String proj = ns.proj;
-			offset = matchWindow.getMatchGlossaryPane().addMatchTerm(oldStr, locStr, (int)(ns.score*100), proj);
-			
-			if( ctr==nearNum ) {
-				start = offset;
-				str = oldStr;
-			} else if( ctr==nearNum + 1 ) {
-				end = offset;
-			}
-			
-			ctr++;
-		}
-		
-		matchWindow.getMatchGlossaryPane().hiliteRange(start, end);
-		matchWindow.getMatchGlossaryPane().updateMatchText();
-		matchWindow.getMatchGlossaryPane().formatNearText(m_curNear.str.getSrcTokenList(), m_curNear.attr);
-	}
+        
+        m_curNear = (NearString) nearList.get(nearNum);
+        
+        NearString ns;
+        int ctr = 0;
+        int offset;
+        int start = -1;
+        int end = -1;
+        ListIterator li = nearList.listIterator();
+        
+        while( li.hasNext() )
+        {
+            ns = (NearString) li.next();
+            
+            offset = matchWindow.getMatchGlossaryPane().addMatchTerm(
+                    ns.str.getSrcText(), ns.str.getTranslation(), ns.score, ns.proj);
+            
+            if( ctr==nearNum )
+            {
+                start = offset;
+            }
+            else if( ctr==nearNum + 1 )
+            {
+                end = offset;
+            }
+            
+            ctr++;
+        }
+        
+        matchWindow.getMatchGlossaryPane().hiliteRange(start, end);
+        matchWindow.getMatchGlossaryPane().updateMatchText();
+        matchWindow.getMatchGlossaryPane().formatNearText(m_curNear.str.getSrcTokenList(), m_curNear.attr);
+    }
     
     /**
      * Displays glossary terms for the current segment.
      */
     private void updateGlossaryInfo()
     {
-		// add glossary terms and fuzzy match info to match window
-		StringEntry curEntry = m_curEntry.getStrEntry();
-		if (curEntry.getGlossaryEntries().size() > 0)
-		{
-			// TODO do something with glossary terms
-			m_glossaryLength = curEntry.getGlossaryEntries().size();
-			ListIterator li = curEntry.getGlossaryEntries().listIterator();
-			while (li.hasNext())
-			{
-				GlossaryEntry glos = (GlossaryEntry) li.next();
-				matchWindow.getMatchGlossaryPane().addGlosTerm(glos.getSrcText(), glos.getLocText(),
-						glos.getCommentText());
-			}
-		
-		}
-		else
+        // add glossary terms and fuzzy match info to match window
+        StringEntry curEntry = m_curEntry.getStrEntry();
+        if (curEntry.getGlossaryEntries().size() > 0)
         {
-			m_glossaryLength = 0;
+            // TODO do something with glossary terms
+            m_glossaryLength = curEntry.getGlossaryEntries().size();
+            ListIterator li = curEntry.getGlossaryEntries().listIterator();
+            while (li.hasNext())
+            {
+                GlossaryEntry glos = (GlossaryEntry) li.next();
+                matchWindow.getMatchGlossaryPane().addGlosTerm(glos.getSrcText(), glos.getLocText(),
+                glos.getCommentText());
+            }
+            
+        }
+        else
+        {
+            m_glossaryLength = 0;
         }
         
-		matchWindow.getMatchGlossaryPane().updateGlossaryText();
+        matchWindow.getMatchGlossaryPane().updateGlossaryText();
     }
-	
-	private void commitEntry()
-	{
-		if (!m_projectLoaded)
-		{
-			return;
-		}
-		// read current entry text and commit it to memory if it's changed
-		// clear out segment markers while we're at it
+    
+    /**
+     * Commits the translation.
+     * <p>
+     * Since 1.6: Translation equal to source may be validated as OK translation
+     *            if appropriate option is set in Workflow options dialog.
+     */
+    private void commitEntry()
+    {
+        if (!m_projectLoaded)
+        {
+            return;
+        }
+        // read current entry text and commit it to memory if it's changed
+        // clear out segment markers while we're at it
+        
+        int start = m_segmentStartOffset + m_sourceDisplayLength +
+        OStrings.TF_CUR_SEGMENT_START.length();
+        int end = xlPane.getText().length() - m_segmentEndInset -
+        OStrings.TF_CUR_SEGMENT_END.length();
+        String display_string;
+        String new_translation;
+        if (start == end)
+        {
+            new_translation =  "";                                              // NOI18N
+            display_string = m_curEntry.getSrcText();
+            xlPane.select(start, end);
+            xlPane.replaceSelection(display_string);
+            end += display_string.length();
+        }
+        else
+        {
+            new_translation = xlPane.getText().substring(start, end);
+            display_string = new_translation;
+        }
+        
+        xlPane.select(start, end);
+        MutableAttributeSet mattr;
+        mattr = new SimpleAttributeSet();
+        StyleConstants.setForeground(mattr, Color.darkGray);
+        xlPane.setCharacterAttributes(mattr, true);
+        
+        xlPane.select(end, xlPane.getText().length() - m_segmentEndInset);
+        xlPane.replaceSelection("");											// NOI18N
+        xlPane.select(m_segmentStartOffset, start);
+        xlPane.replaceSelection("");											// NOI18N
 
-		int start = m_segmentStartOffset + m_sourceDisplayLength + 
-					OStrings.TF_CUR_SEGMENT_START.length();
-		int end = xlPane.getText().length() - m_segmentEndInset - 
-					OStrings.TF_CUR_SEGMENT_END.length();
-		String s;
-		if (start == end)
-		{
-			s = m_curEntry.getSrcText();
-			xlPane.select(start, end);
-			xlPane.replaceSelection(s);
-			end += s.length();
-		}
-		else
-			s = xlPane.getText().substring(start, end);
-
-		xlPane.select(start, end);
-		MutableAttributeSet mattr;
-		mattr = new SimpleAttributeSet();
-		StyleConstants.setForeground(mattr, Color.darkGray);
-		xlPane.setCharacterAttributes(mattr, true);
-		
-		xlPane.select(end, xlPane.getText().length() - m_segmentEndInset);
-		xlPane.replaceSelection("");											// NOI18N
-		xlPane.select(m_segmentStartOffset, start);
-		xlPane.replaceSelection("");											// NOI18N
-			
-		// update memory
-		m_curEntry.setTranslation(s);
-		
-		DocumentSegment docSeg = (DocumentSegment) 
-							m_docSegList.get(m_curEntryNum - m_xlFirstEntry);
-		docSeg.length = s.length() + "\n\n".length();							// NOI18N	
-		
-		// update the length parameters of all changed segments
-		// update strings in display
-		if (!s.equals(m_curTrans))
-		{
-			// update display
-			// find all identical strings and redraw them
-			SourceTextEntry ste = CommandThread.core.getSTE(m_curEntryNum);
-			StringEntry se = ste.getStrEntry();
-			ListIterator it = se.getParentList().listIterator();
-			int entry;
-			int offset;
-			int i;
-			while (it.hasNext())
-			{
-				ste = (SourceTextEntry) it.next();
-				entry = ste.entryNum();
-				if (entry >= m_xlFirstEntry && entry <= m_xlLastEntry)
-				{
-					// found something to update
-					// find offset to this segment, remove it and
-					//	replace the updated text
-					offset = 0;
-					// current entry is already handled 
-					if (entry == m_curEntryNum)
-						continue;
-
-					// build offset
-					for (i=m_xlFirstEntry; i<entry; i++)
-					{
-						docSeg = (DocumentSegment) m_docSegList.get(
-								i-m_xlFirstEntry);
-						offset += docSeg.length;
-					}
-					// replace old text w/ new
-					docSeg = (DocumentSegment) m_docSegList.get(
-								entry - m_xlFirstEntry);
-					xlPane.select(offset, offset+docSeg.length);
-					xlPane.replaceSelection(s + "\n\n");						// NOI18N
-					docSeg.length = s.length() + "\n\n".length();				// NOI18N
-				}
-			}
-		}
+        // update memory
+        if( !new_translation.equals(m_curEntry.getSrcText()) || 
+                Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC) )
+        {
+            m_curEntry.setTranslation(new_translation);
+        }
+        
+        DocumentSegment docSeg = (DocumentSegment)
+        m_docSegList.get(m_curEntryNum - m_xlFirstEntry);
+        docSeg.length = display_string.length() + "\n\n".length();							// NOI18N
+        
+        // update the length parameters of all changed segments
+        // update strings in display
+        if (!display_string.equals(m_curTrans))
+        {
+            // update display
+            // find all identical strings and redraw them
+            SourceTextEntry ste = CommandThread.core.getSTE(m_curEntryNum);
+            StringEntry se = ste.getStrEntry();
+            ListIterator it = se.getParentList().listIterator();
+            int entry;
+            int offset;
+            int i;
+            while (it.hasNext())
+            {
+                ste = (SourceTextEntry) it.next();
+                entry = ste.entryNum();
+                if (entry >= m_xlFirstEntry && entry <= m_xlLastEntry)
+                {
+                    // found something to update
+                    // find offset to this segment, remove it and
+                    //	replace the updated text
+                    offset = 0;
+                    // current entry is already handled
+                    if (entry == m_curEntryNum)
+                        continue;
+                    
+                    // build offset
+                    for (i=m_xlFirstEntry; i<entry; i++)
+                    {
+                        docSeg = (DocumentSegment) m_docSegList.get(
+                        i-m_xlFirstEntry);
+                        offset += docSeg.length;
+                    }
+                    // replace old text w/ new
+                    docSeg = (DocumentSegment) m_docSegList.get(
+                    entry - m_xlFirstEntry);
+                    xlPane.select(offset, offset+docSeg.length);
+                    xlPane.replaceSelection(display_string + "\n\n");						// NOI18N
+                    docSeg.length = display_string.length() + "\n\n".length();				// NOI18N
+                }
+            }
+        }
         xlPane.cancelUndo();
-	}
-
+    }
+    
     /**
      * Activates the current entry by displaying source text and embedding
      * displayed text in markers.
@@ -1201,63 +1255,64 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
      * Also moves document focus to current entry,
      * and makes sure fuzzy info displayed if available.
      */
-	public void activateEntry() 
-	{
-		if (!m_projectLoaded)
-			return;
-
-		int i;
-		DocumentSegment docSeg;
-
-		// recover data about current entry
-		m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
-		String srcText = m_curEntry.getSrcText();
-
-		m_sourceDisplayLength = srcText.length();
-		
-		// sum up total character offset to current segment start
-		m_segmentStartOffset = 0;
-		for (i=m_xlFirstEntry; i<m_curEntryNum; i++)
-		{
-			docSeg = (DocumentSegment) m_docSegList.get(i-m_xlFirstEntry);
-			m_segmentStartOffset += docSeg.length; // length includes \n
-		}
-
-		docSeg = (DocumentSegment) m_docSegList.get(
-					m_curEntryNum - m_xlFirstEntry);
-		// -2 to move inside newlines at end of segment
-		int paneLen = xlPane.getText().length();
-		m_segmentEndInset = paneLen - (m_segmentStartOffset + docSeg.length-2);
-
-		// get label tags
-		String startStr = OStrings.TF_CUR_SEGMENT_START;
-		String endStr = OStrings.TF_CUR_SEGMENT_END;
-		if (m_segmentTagHasNumber)
-		{
-			// put entry number in first tag
-			String num = String.valueOf(m_curEntryNum + 1);
-			int zero = startStr.lastIndexOf('0');
-			startStr = startStr.substring(0, zero-num.length()+1) 
-                    + num + startStr.substring(zero+1);
-		}
-
-		MutableAttributeSet mattr;
-		// append to end of segment first because this operation is done
-		//	by reference to end of file which will change after insert
+    public void activateEntry()
+    {
+        if (!m_projectLoaded)
+            return;
+        
+        int i;
+        DocumentSegment docSeg;
+        
+        // recover data about current entry
+        m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
+        String srcText = m_curEntry.getSrcText();
+        
+        m_sourceDisplayLength = srcText.length();
+        
+        // sum up total character offset to current segment start
+        m_segmentStartOffset = 0;
+        for (i=m_xlFirstEntry; i<m_curEntryNum; i++)
+        {
+            docSeg = (DocumentSegment) m_docSegList.get(i-m_xlFirstEntry);
+            m_segmentStartOffset += docSeg.length; // length includes \n
+        }
+        
+        docSeg = (DocumentSegment) m_docSegList.get(m_curEntryNum - m_xlFirstEntry);
+        // -2 to move inside newlines at end of segment
+        int paneLen = xlPane.getText().length();
+        m_segmentEndInset = paneLen - (m_segmentStartOffset + docSeg.length-2);
+        
+        // get label tags
+        String startStr = OStrings.TF_CUR_SEGMENT_START;
+        String endStr = OStrings.TF_CUR_SEGMENT_END;
+        if (m_segmentTagHasNumber)
+        {
+            // put entry number in first tag
+            String num = String.valueOf(m_curEntryNum + 1);
+            int zero = startStr.lastIndexOf('0');
+            startStr = startStr.substring(0, zero-num.length()+1)
+            + num + startStr.substring(zero+1);
+        }
+        
+        MutableAttributeSet mattr;
+        // append to end of segment first because this operation is done
+        //	by reference to end of file which will change after insert
         int inset = paneLen-m_segmentEndInset;
-		xlPane.select(inset, inset);
-		xlPane.replaceSelection(endStr);
-		xlPane.select(inset+1, inset+endStr.length());
-		mattr = new SimpleAttributeSet();
-		StyleConstants.setBold(mattr, true);
-		xlPane.setCharacterAttributes(mattr, true);
+        xlPane.select(inset, inset);
+        xlPane.replaceSelection(endStr);
+        xlPane.select(inset+1, inset+endStr.length());
+        mattr = new SimpleAttributeSet();
+        StyleConstants.setBold(mattr, true);
+        xlPane.setCharacterAttributes(mattr, true);
         
         String translation = m_curEntry.getTranslation();
         if( translation==null || translation.length()==0 )
         {
             translation=m_curEntry.getSrcText();
             
-            // if WORKFLOW_OPTION "don't insert source text into translation segment" is set
+            // if "Leave translation empty" is set
+            // then we don't insert a source text into target
+            //
             // RFE "Option: not copy source text into target field"
             //      http://sourceforge.net/support/tracker.php?aid=1075972
             if( Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT) )
@@ -1266,7 +1321,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                 xlPane.replaceSelection("");                                    // NOI18N
                 translation = "";                                               // NOI18N
             }
-
+            
             // if WORKFLOW_OPTION "Insert best fuzzy match into target field" is set
             // RFE "Option: Insert best match (80%+) into target field"
             //      http://sourceforge.net/support/tracker.php?aid=1075976
@@ -1278,329 +1333,327 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                 if( near.size()>0 )
                 {
                     NearString thebest = (NearString)near.get(0);
-                    if( (100*thebest.score) >= percentage )
+                    if( thebest.score >= percentage )
                     {
                         xlPane.select(m_segmentStartOffset, m_segmentStartOffset + translation.length());
-                        String toinsert = "";                                   // NOI18N
-                        if( !Preferences.isPreference(Preferences.BEST_MATCH_EXPLANATORY_TEXT) )
-                            toinsert += OStrings.getString("GUI_WORKFLOW_EXPLANATORY_TEXT")
-                                      + " ";                                    // NOI18N
-                        toinsert+=thebest.str.getTrans();
+                        String toinsert = Preferences.getPreferenceDefault(
+                                Preferences.BEST_MATCH_EXPLANATORY_TEXT,
+                                OStrings.getString("WF_DEFAULT_PREFIX"));
+                        toinsert+=thebest.str.getTranslation();
                         xlPane.replaceSelection(toinsert);
                     }
                 }
             }
-            
         }
         
-		xlPane.select(m_segmentStartOffset, m_segmentStartOffset);
-		String insertText = srcText + startStr;
-		xlPane.replaceSelection(insertText);
-		xlPane.select(m_segmentStartOffset, m_segmentStartOffset + 
-				insertText.length() - 1);
-		xlPane.setCharacterAttributes(mattr, true);
-
-		// background color
-		Color background = new Color(192, 255, 192);
-		// other color options
-		xlPane.select(m_segmentStartOffset, m_segmentStartOffset + 
-				insertText.length() - startStr.length());
-		mattr = new SimpleAttributeSet();
-		StyleConstants.setBackground(mattr, background);
-		xlPane.setCharacterAttributes(mattr, false);
-
-		// TODO XXX format source text if there is near match
-		
-		if (m_curEntry.getSrcFile().name.compareTo(m_activeFile) != 0)
-		{
-			m_activeFile = m_curEntry.getSrcFile().name;
-			updateTitle();
-		}
-		
-		updateFuzzyInfo(0);
+        xlPane.select(m_segmentStartOffset, m_segmentStartOffset);
+        String insertText = srcText + startStr;
+        xlPane.replaceSelection(insertText);
+        xlPane.select(m_segmentStartOffset, m_segmentStartOffset +
+        insertText.length() - 1);
+        xlPane.setCharacterAttributes(mattr, true);
+        
+        // background color
+        Color background = new Color(192, 255, 192);
+        // other color options
+        xlPane.select(m_segmentStartOffset, m_segmentStartOffset +
+        insertText.length() - startStr.length());
+        mattr = new SimpleAttributeSet();
+        StyleConstants.setBackground(mattr, background);
+        xlPane.setCharacterAttributes(mattr, false);
+        
+        // TODO XXX format source text if there is near match
+        
+        if (m_curEntry.getSrcFile().name.compareTo(m_activeFile) != 0)
+        {
+            m_activeFile = m_curEntry.getSrcFile().name;
+            updateTitle();
+        }
+        
+        updateFuzzyInfo(0);
         updateGlossaryInfo();
-
-		StringEntry curEntry = m_curEntry.getStrEntry();
-		int nearLength = curEntry.getNearListTranslated().size();
-		
-		if (nearLength > 0 && m_glossaryLength > 0)
-		{
-			// display text indicating both categories exist
-			Object obj[] = { 
-					new Integer(nearLength), 
-					new Integer(m_glossaryLength) };
-			setMessageText(MessageFormat.format(
-							OStrings.TF_NUM_NEAR_AND_GLOSSARY, obj));
-		}
-		else if (nearLength > 0)
-		{
-			Object obj[] = { new Integer(nearLength) };
-			setMessageText(MessageFormat.format(
-							OStrings.TF_NUM_NEAR, obj));
-		}
-		else if (m_glossaryLength > 0)
-		{
-			Object obj[] = { new Integer(m_glossaryLength) };
-			setMessageText(MessageFormat.format(
-							OStrings.TF_NUM_GLOSSARY, obj));
-		}
-		else
-			setMessageText("");													// NOI18N
-
-		// TODO - hilite translation area in yellow
-
-		// set caret position
-
-		// try to scroll so next 3 entries are displayed after current entry
-		//	or first entry ending after the 500 characters mark
-		// to do this, set cursor 3 entries down, then reset it to 
-		//	begging of source text in current entry, then finnaly into
-		//	editing region
-		int padding = 0;
-		int j;
-		for (i=m_curEntryNum+1-m_xlFirstEntry, j=0; 
-				i<=m_xlLastEntry-m_xlFirstEntry; 
-				i++, j++)
-		{
-			docSeg = (DocumentSegment) m_docSegList.get(i);
-			padding += docSeg.length;
-			if (j > 2 || padding > 500)
-				break;
-		}
-		// don't try to set caret after end of document
-		if (padding > m_segmentEndInset)
-			padding = m_segmentEndInset;
-		xlPane.setCaretPosition(xlPane.getText().length() - 
-				m_segmentEndInset + padding);
-
-		// try to make sure entire segment displays
-		SwingUtilities.invokeLater(new Runnable()
-		{
-			public void run()
-			{
-				// make sure 2 newlines above current segment are visible
-				int loc = m_segmentStartOffset - 3;
-				if (loc < 0)
-					loc = 0;
-				xlPane.setCaretPosition(loc);
-				SwingUtilities.invokeLater(new Runnable()
-				{
-					public void run()
-					{
-						checkCaret();
-					}
-				});
-
-			}
-		});
+        
+        StringEntry curEntry = m_curEntry.getStrEntry();
+        int nearLength = curEntry.getNearListTranslated().size();
+        
+        if (nearLength > 0 && m_glossaryLength > 0)
+        {
+            // display text indicating both categories exist
+            Object obj[] = {
+                new Integer(nearLength),
+                new Integer(m_glossaryLength) };
+                setMessageText(MessageFormat.format(
+                OStrings.TF_NUM_NEAR_AND_GLOSSARY, obj));
+        }
+        else if (nearLength > 0)
+        {
+            Object obj[] = { new Integer(nearLength) };
+            setMessageText(MessageFormat.format(
+            OStrings.TF_NUM_NEAR, obj));
+        }
+        else if (m_glossaryLength > 0)
+        {
+            Object obj[] = { new Integer(m_glossaryLength) };
+            setMessageText(MessageFormat.format(
+            OStrings.TF_NUM_GLOSSARY, obj));
+        }
+        else
+            setMessageText("");													// NOI18N
+        
+        // TODO - hilite translation area in yellow
+        
+        // set caret position
+        
+        // try to scroll so next 3 entries are displayed after current entry
+        //	or first entry ending after the 500 characters mark
+        // to do this, set cursor 3 entries down, then reset it to
+        //	begging of source text in current entry, then finnaly into
+        //	editing region
+        int padding = 0;
+        int j;
+        for (i=m_curEntryNum+1-m_xlFirstEntry, j=0;
+        i<=m_xlLastEntry-m_xlFirstEntry;
+        i++, j++)
+        {
+            docSeg = (DocumentSegment) m_docSegList.get(i);
+            padding += docSeg.length;
+            if (j > 2 || padding > 500)
+                break;
+        }
+        // don't try to set caret after end of document
+        if (padding > m_segmentEndInset)
+            padding = m_segmentEndInset;
+        xlPane.setCaretPosition(xlPane.getText().length() -
+        m_segmentEndInset + padding);
+        
+        // try to make sure entire segment displays
+        SwingUtilities.invokeLater(new Runnable()
+        {
+            public void run()
+            {
+                // make sure 2 newlines above current segment are visible
+                int loc = m_segmentStartOffset - 3;
+                if (loc < 0)
+                    loc = 0;
+                xlPane.setCaretPosition(loc);
+                SwingUtilities.invokeLater(new Runnable()
+                {
+                    public void run()
+                    {
+                        checkCaret();
+                    }
+                });
+                
+            }
+        });
 //
 //		checkCaret();
-		if (!m_docReady)
-		{
-			m_docReady = true;
-		}
-		xlPane.cancelUndo();
-	}
-
+        if (!m_docReady)
+        {
+            m_docReady = true;
+        }
+        xlPane.cancelUndo();
+    }
+    
     /**
      * Displays a warning message.
-     * 
+     *
      * @param msg the message to show
      * @param e exception occured. may be null
      */
-	public void displayWarning(String msg, Throwable e)
-	{
-		setMessageText(msg);
+    public void displayWarning(String msg, Throwable e)
+    {
+        setMessageText(msg);
         String fulltext = msg;
         if( e!=null )
             fulltext+= "\n" + e.toString();                                     // NOI18N
-		JOptionPane.showMessageDialog(this, fulltext, OStrings.TF_WARNING, 
-                JOptionPane.WARNING_MESSAGE);
-	}
-
+        JOptionPane.showMessageDialog(this, fulltext, OStrings.TF_WARNING,
+        JOptionPane.WARNING_MESSAGE);
+    }
+    
     /**
      * Displays an error message.
-     * 
+     *
      * @param msg the message to show
      * @param e exception occured. may be null
      */
-	public void displayError(String msg, Throwable e)
-	{
-		setMessageText(msg);
+    public void displayError(String msg, Throwable e)
+    {
+        setMessageText(msg);
         String fulltext = msg;
         if( e!=null )
             fulltext+= "\n" + e.toString();                                     // NOI18N
-		JOptionPane.showMessageDialog(this, fulltext, OStrings.TF_ERROR, 
-                JOptionPane.ERROR_MESSAGE);
-	}
-
+        JOptionPane.showMessageDialog(this, fulltext, OStrings.TF_ERROR,
+        JOptionPane.ERROR_MESSAGE);
+    }
+    
     /**
      * Make sure there's one character in the direction indicated for
      * delete operation.
      *
-     * @param forward 
+     * @param forward
      * @return true if space is available
      */
     public boolean checkCaretForDelete(boolean forward)
-	{
-		int pos = xlPane.getCaretPosition();
-		
-		// make sure range doesn't overlap boundaries
-		checkCaret();
-
-		if (forward)
-		{
-			// make sure we're not at end of segment
-			// -1 for space before tag, -2 for newlines
-			int end = xlPane.getText().length() - m_segmentEndInset -
-				OStrings.TF_CUR_SEGMENT_END.length();
-       		int spos = xlPane.getSelectionStart();
-    		int epos = xlPane.getSelectionEnd();
-			if( pos>=end && spos>=end && epos>=end )
-				return false;
-		}
-		else
-		{
-			// make sure we're not at start of segment
-			int start = m_segmentStartOffset + m_sourceDisplayLength +
-				OStrings.TF_CUR_SEGMENT_START.length();
-       		int spos = xlPane.getSelectionStart();
-    		int epos = xlPane.getSelectionEnd();
-			if( pos<=start && epos<=start && spos<=start )
-				return false;
-		}
-		return true;
-	}
-	
+    {
+        int pos = xlPane.getCaretPosition();
+        
+        // make sure range doesn't overlap boundaries
+        checkCaret();
+        
+        if (forward)
+        {
+            // make sure we're not at end of segment
+            // -1 for space before tag, -2 for newlines
+            int end = xlPane.getText().length() - m_segmentEndInset -
+            OStrings.TF_CUR_SEGMENT_END.length();
+            int spos = xlPane.getSelectionStart();
+            int epos = xlPane.getSelectionEnd();
+            if( pos>=end && spos>=end && epos>=end )
+                return false;
+        }
+        else
+        {
+            // make sure we're not at start of segment
+            int start = m_segmentStartOffset + m_sourceDisplayLength +
+            OStrings.TF_CUR_SEGMENT_START.length();
+            int spos = xlPane.getSelectionStart();
+            int epos = xlPane.getSelectionEnd();
+            if( pos<=start && epos<=start && spos<=start )
+                return false;
+        }
+        return true;
+    }
+    
     /**
      * Checks whether the selection & caret is inside editable text,
      * and changes their positions accordingly if not.
      */
     public void checkCaret()
-	{
-		//int pos = m_xlPane.getCaretPosition();
-		int spos = xlPane.getSelectionStart();
-		int epos = xlPane.getSelectionEnd();
-		int start = m_segmentStartOffset + m_sourceDisplayLength +
-			OStrings.TF_CUR_SEGMENT_START.length();
-		// -1 for space before tag, -2 for newlines
-		int end = xlPane.getText().length() - m_segmentEndInset -
-			OStrings.TF_CUR_SEGMENT_END.length();
-
-		if (spos != epos)
-		{
-			// dealing with a selection here - make sure it's w/in bounds
-			if (spos < start)
-			{
-				xlPane.setSelectionStart(start);
-			}
-			else if (spos > end)
-			{
-				xlPane.setSelectionStart(end);
-			}
-			if (epos > end)
-			{
-				xlPane.setSelectionEnd(end);
-			}
-			else if (epos < start)
-			{
-				xlPane.setSelectionStart(start);
-			}
-		}
-		else
-		{
-			// non selected text 
-			if (spos < start)
-			{
-				xlPane.setCaretPosition(start);
-			}
-			else if (spos > end)
-			{
-				xlPane.setCaretPosition(end);
-			}
-		}
-    }
-
-	public void fatalError(String msg, Throwable re)
-	{
-		StaticUtils.log(msg);
-		if (re != null)
+    {
+        //int pos = m_xlPane.getCaretPosition();
+        int spos = xlPane.getSelectionStart();
+        int epos = xlPane.getSelectionEnd();
+        int start = m_segmentStartOffset + m_sourceDisplayLength +
+        OStrings.TF_CUR_SEGMENT_START.length();
+        // -1 for space before tag, -2 for newlines
+        int end = xlPane.getText().length() - m_segmentEndInset -
+        OStrings.TF_CUR_SEGMENT_END.length();
+        
+        if (spos != epos)
         {
-			re.printStackTrace(StaticUtils.getLogStream());
+            // dealing with a selection here - make sure it's w/in bounds
+            if (spos < start)
+            {
+                xlPane.setSelectionStart(start);
+            }
+            else if (spos > end)
+            {
+                xlPane.setSelectionStart(end);
+            }
+            if (epos > end)
+            {
+                xlPane.setSelectionEnd(end);
+            }
+            else if (epos < start)
+            {
+                xlPane.setSelectionStart(start);
+            }
+        }
+        else
+        {
+            // non selected text
+            if (spos < start)
+            {
+                xlPane.setCaretPosition(start);
+            }
+            else if (spos > end)
+            {
+                xlPane.setCaretPosition(end);
+            }
+        }
+    }
+    
+    public void fatalError(String msg, Throwable re)
+    {
+        StaticUtils.log(msg);
+        if (re != null)
+        {
+            re.printStackTrace(StaticUtils.getLogStream());
             re.printStackTrace();
         }
-
-		// try to shutdown gracefully
-		CommandThread.core.signalStop();
-		for (int i=0; i<25; i++)
-		{
-			while (CommandThread.core != null)
-			{
-				try { Thread.sleep(10); }
-				catch (InterruptedException e) {
-                }
-			}
-			if (CommandThread.core == null)
-				break;
-		}
+        
+        // try for 10 seconds to shutdown gracefully
+        CommandThread.core.interrupt();
+        for( int i=0; i<100 && CommandThread.core!=null; i++ )
+        {
+            try
+            { 
+                Thread.sleep(100); 
+            }
+            catch (InterruptedException e)
+            {
+            }
+        }
         Runtime.getRuntime().halt(1);
-	}
-	
-	/**
-	 * Overrides parent method to show Match/Glossary viewer 
-	 * simultaneously with the main frame.
-	 */
-	public void setVisible(boolean b)
-	{
-		super.setVisible(b);
-		matchWindow.setVisible(b);
+    }
+    
+    /**
+     * Overrides parent method to show Match/Glossary viewer
+     * simultaneously with the main frame.
+     */
+    public void setVisible(boolean b)
+    {
+        super.setVisible(b);
+        matchWindow.setVisible(b);
         matchWindow.getMatchGlossaryPane().setFont(m_font);
-		toFront();
-	}
-
-	public boolean	isProjectLoaded()	{ return m_projectLoaded;		}
-
-	/** The font for main window (source and target text) and for match and glossary windows */
+        toFront();
+    }
+    
+    public boolean	isProjectLoaded()
+    { return m_projectLoaded;		}
+    
+    /** The font for main window (source and target text) and for match and glossary windows */
     private Font m_font;
-
-	// first and last entry numbers in current file
+    
+    // first and last entry numbers in current file
     public int		m_xlFirstEntry;
-	public int		m_xlLastEntry;
-
-	// starting offset and length of source lang in current segment
+    public int		m_xlLastEntry;
+    
+    // starting offset and length of source lang in current segment
     public int		m_segmentStartOffset;
-	public int		m_sourceDisplayLength;
-	public int		m_segmentEndInset;
-	// text length of glossary, if displayed
+    public int		m_sourceDisplayLength;
+    public int		m_segmentEndInset;
+    // text length of glossary, if displayed
     private int		m_glossaryLength;
-
-	// boolean set after safety check that org.omegat.OStrings.TF_CUR_SEGMENT_START
-	//	contains empty "0000" for segment number
+    
+    // boolean set after safety check that org.omegat.OStrings.TF_CUR_SEGMENT_START
+    //	contains empty "0000" for segment number
     private boolean	m_segmentTagHasNumber;
-
-	// indicates the document is loaded and ready for processing
+    
+    // indicates the document is loaded and ready for processing
     public boolean	m_docReady;
-
+    
     // list of text segments in current doc
     public ArrayList	m_docSegList;
-
-	public char	m_advancer;
-
-	private SourceTextEntry		m_curEntry;
-
-	private String	m_activeFile;
-	private String	m_activeProj;
-	public int m_curEntryNum;
-	private NearString m_curNear;
+    
+    public char	m_advancer;
+    
+    private SourceTextEntry		m_curEntry;
+    
+    private String	m_activeFile;
+    private String	m_activeProj;
+    public int m_curEntryNum;
+    private NearString m_curNear;
     private String	m_curTrans = "";										// NOI18N
-
-	private ProjectFrame	m_projWin;
+    
+    private ProjectFrame	m_projWin;
     public ProjectFrame getProjectFrame()
     {
         return m_projWin;
     }
     
-	public boolean m_projectLoaded;
+    public boolean m_projectLoaded;
     
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1616,18 +1669,17 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         mainMenu = new javax.swing.JMenuBar();
         projectMenu = new javax.swing.JMenu();
         projectNewMenuItem = new javax.swing.JMenuItem();
-        separator4inProjectMenu = new javax.swing.JSeparator();
         projectOpenMenuItem = new javax.swing.JMenuItem();
         projectImportMenuItem = new javax.swing.JMenuItem();
         projectReloadMenuItem = new javax.swing.JMenuItem();
-        separator5inProjectMenu = new javax.swing.JSeparator();
         projectCloseMenuItem = new javax.swing.JMenuItem();
+        separator4inProjectMenu = new javax.swing.JSeparator();
         projectSaveMenuItem = new javax.swing.JMenuItem();
+        separator5inProjectMenu = new javax.swing.JSeparator();
+        projectCompileMenuItem = new javax.swing.JMenuItem();
         separator1inProjectMenu = new javax.swing.JSeparator();
         projectEditMenuItem = new javax.swing.JMenuItem();
         separator2inProjectMenu = new javax.swing.JSeparator();
-        projectCompileMenuItem = new javax.swing.JMenuItem();
-        separator3inProjectMenu = new javax.swing.JSeparator();
         projectExitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         editUndoMenuItem = new javax.swing.JMenuItem();
@@ -1635,6 +1687,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         separator1inEditMenu = new javax.swing.JSeparator();
         editOverwriteTranslationMenuItem = new javax.swing.JMenuItem();
         editInsertTranslationMenuItem = new javax.swing.JMenuItem();
+        separator4inEditMenu = new javax.swing.JSeparator();
+        editOverwriteSourceMenuItem = new javax.swing.JMenuItem();
+        editInsertSourceMenuItem = new javax.swing.JMenuItem();
         separator2inEditMenu = new javax.swing.JSeparator();
         editFindInProjectMenuItem = new javax.swing.JMenuItem();
         separator3inEditMenu = new javax.swing.JSeparator();
@@ -1671,8 +1726,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
 
         mainScroller.setBorder(null);
         mainScroller.setMinimumSize(new java.awt.Dimension(100, 100));
-        xlPane.setEditable(false);
-        xlPane.setMinimumSize(new java.awt.Dimension(100, 100));
         mainScroller.setViewportView(xlPane);
 
         getContentPane().add(mainScroller, java.awt.BorderLayout.CENTER);
@@ -1682,8 +1735,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         projectNewMenuItem.addActionListener(this);
 
         projectMenu.add(projectNewMenuItem);
-
-        projectMenu.add(separator4inProjectMenu);
 
         org.openide.awt.Mnemonics.setLocalizedText(projectOpenMenuItem, OStrings.getString("TF_MENU_FILE_OPEN"));
         projectOpenMenuItem.addActionListener(this);
@@ -1700,17 +1751,24 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
 
         projectMenu.add(projectReloadMenuItem);
 
-        projectMenu.add(separator5inProjectMenu);
-
         org.openide.awt.Mnemonics.setLocalizedText(projectCloseMenuItem, OStrings.getString("TF_MENU_FILE_CLOSE"));
         projectCloseMenuItem.addActionListener(this);
 
         projectMenu.add(projectCloseMenuItem);
 
+        projectMenu.add(separator4inProjectMenu);
+
         org.openide.awt.Mnemonics.setLocalizedText(projectSaveMenuItem, OStrings.getString("TF_MENU_FILE_SAVE"));
         projectSaveMenuItem.addActionListener(this);
 
         projectMenu.add(projectSaveMenuItem);
+
+        projectMenu.add(separator5inProjectMenu);
+
+        org.openide.awt.Mnemonics.setLocalizedText(projectCompileMenuItem, OStrings.getString("TF_MENU_FILE_COMPILE"));
+        projectCompileMenuItem.addActionListener(this);
+
+        projectMenu.add(projectCompileMenuItem);
 
         projectMenu.add(separator1inProjectMenu);
 
@@ -1720,13 +1778,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         projectMenu.add(projectEditMenuItem);
 
         projectMenu.add(separator2inProjectMenu);
-
-        org.openide.awt.Mnemonics.setLocalizedText(projectCompileMenuItem, OStrings.getString("TF_MENU_FILE_COMPILE"));
-        projectCompileMenuItem.addActionListener(this);
-
-        projectMenu.add(projectCompileMenuItem);
-
-        projectMenu.add(separator3inProjectMenu);
 
         org.openide.awt.Mnemonics.setLocalizedText(projectExitMenuItem, OStrings.getString("TF_MENU_FILE_QUIT"));
         projectExitMenuItem.addActionListener(this);
@@ -1757,6 +1808,18 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         editInsertTranslationMenuItem.addActionListener(this);
 
         editMenu.add(editInsertTranslationMenuItem);
+
+        editMenu.add(separator4inEditMenu);
+
+        org.openide.awt.Mnemonics.setLocalizedText(editOverwriteSourceMenuItem, OStrings.getString("TF_MENU_EDIT_SOURCE_OVERWRITE"));
+        editOverwriteSourceMenuItem.addActionListener(this);
+
+        editMenu.add(editOverwriteSourceMenuItem);
+
+        org.openide.awt.Mnemonics.setLocalizedText(editInsertSourceMenuItem, OStrings.getString("TF_MENU_EDIT_SOURCE_INSERT"));
+        editInsertSourceMenuItem.addActionListener(this);
+
+        editMenu.add(editInsertSourceMenuItem);
 
         editMenu.add(separator2inEditMenu);
 
@@ -1911,13 +1974,13 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             MainWindow.this.projectSaveMenuItemActionPerformed(evt);
         }
-        else if (evt.getSource() == projectEditMenuItem)
-        {
-            MainWindow.this.projectEditMenuItemActionPerformed(evt);
-        }
         else if (evt.getSource() == projectCompileMenuItem)
         {
             MainWindow.this.projectCompileMenuItemActionPerformed(evt);
+        }
+        else if (evt.getSource() == projectEditMenuItem)
+        {
+            MainWindow.this.projectEditMenuItemActionPerformed(evt);
         }
         else if (evt.getSource() == projectExitMenuItem)
         {
@@ -1938,6 +2001,10 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         else if (evt.getSource() == editInsertTranslationMenuItem)
         {
             MainWindow.this.editInsertTranslationMenuItemActionPerformed(evt);
+        }
+        else if (evt.getSource() == editInsertSourceMenuItem)
+        {
+            MainWindow.this.editInsertSourceMenuItemActionPerformed(evt);
         }
         else if (evt.getSource() == editFindInProjectMenuItem)
         {
@@ -2015,6 +2082,10 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             MainWindow.this.helpAboutMenuItemActionPerformed(evt);
         }
+        else if (evt.getSource() == editOverwriteSourceMenuItem)
+        {
+            MainWindow.this.editOverwriteSourceMenuItemActionPerformed(evt);
+        }
     }
 
     public void componentHidden(java.awt.event.ComponentEvent evt)
@@ -2074,147 +2145,165 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     }
     // </editor-fold>//GEN-END:initComponents
 
+    private void editOverwriteSourceMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editOverwriteSourceMenuItemActionPerformed
+    {//GEN-HEADEREND:event_editOverwriteSourceMenuItemActionPerformed
+        doOverwriteSource();
+    }//GEN-LAST:event_editOverwriteSourceMenuItemActionPerformed
+
+    private void editInsertSourceMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editInsertSourceMenuItemActionPerformed
+    {//GEN-HEADEREND:event_editInsertSourceMenuItemActionPerformed
+        doInsertSource();
+    }//GEN-LAST:event_editInsertSourceMenuItemActionPerformed
+    
     private void projectImportMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectImportMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectImportMenuItemActionPerformed
         doImportSourceFiles();
     }//GEN-LAST:event_projectImportMenuItemActionPerformed
-
+    
     private void projectReloadMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectReloadMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectReloadMenuItemActionPerformed
         doReloadProject();
     }//GEN-LAST:event_projectReloadMenuItemActionPerformed
-
+    
     private void formComponentMoved(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentMoved
     {//GEN-HEADEREND:event_formComponentMoved
-		storeScreenLayout();
+        storeScreenLayout();
     }//GEN-LAST:event_formComponentMoved
-
+    
     private void formComponentResized(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentResized
     {//GEN-HEADEREND:event_formComponentResized
-		storeScreenLayout();
+        storeScreenLayout();
     }//GEN-LAST:event_formComponentResized
-
+    
     private void optionsWorkflowMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsWorkflowMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsWorkflowMenuItemActionPerformed
         setupWorkflow();
     }//GEN-LAST:event_optionsWorkflowMenuItemActionPerformed
-
+    
     private void optionsSentsegMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsSentsegMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsSentsegMenuItemActionPerformed
         setupSegmentation();
     }//GEN-LAST:event_optionsSentsegMenuItemActionPerformed
-
+    
     private void projectEditMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectEditMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectEditMenuItemActionPerformed
         doEditProject();
     }//GEN-LAST:event_projectEditMenuItemActionPerformed
-
+    
     private void optionsTabAdvanceCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsTabAdvanceCheckBoxMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsTabAdvanceCheckBoxMenuItemActionPerformed
-
-        Preferences.setPreference(Preferences.USE_TAB_TO_ADVANCE, 
-                optionsTabAdvanceCheckBoxMenuItem.isSelected());
+        
+        Preferences.setPreference(Preferences.USE_TAB_TO_ADVANCE,
+        optionsTabAdvanceCheckBoxMenuItem.isSelected());
         if( optionsTabAdvanceCheckBoxMenuItem.isSelected() )
-			m_advancer = KeyEvent.VK_TAB;
-		else
-			m_advancer = KeyEvent.VK_ENTER;
+            m_advancer = KeyEvent.VK_TAB;
+        else
+            m_advancer = KeyEvent.VK_ENTER;
     }//GEN-LAST:event_optionsTabAdvanceCheckBoxMenuItemActionPerformed
-
+    
     private void helpContentsMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_helpContentsMenuItemActionPerformed
     {//GEN-HEADEREND:event_helpContentsMenuItemActionPerformed
         HelpFrame hf = HelpFrame.getInstance();
         hf.setVisible(true);
         hf.toFront();
     }//GEN-LAST:event_helpContentsMenuItemActionPerformed
-
+    
     private void optionsSetupFileFiltersMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsSetupFileFiltersMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsSetupFileFiltersMenuItemActionPerformed
         doFilters();
     }//GEN-LAST:event_optionsSetupFileFiltersMenuItemActionPerformed
-
+    
     private void optionsFontSelectionMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsFontSelectionMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsFontSelectionMenuItemActionPerformed
         doFont();
     }//GEN-LAST:event_optionsFontSelectionMenuItemActionPerformed
-
+    
     private void toolsValidateTagsMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_toolsValidateTagsMenuItemActionPerformed
     {//GEN-HEADEREND:event_toolsValidateTagsMenuItemActionPerformed
         doValidateTags();
     }//GEN-LAST:event_toolsValidateTagsMenuItemActionPerformed
-
+    
     private void editSelectFuzzy5MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy5MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy5MenuItemActionPerformed
         updateFuzzyInfo(4);
     }//GEN-LAST:event_editSelectFuzzy5MenuItemActionPerformed
-
+    
     private void editSelectFuzzy4MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy4MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy4MenuItemActionPerformed
         updateFuzzyInfo(3);
     }//GEN-LAST:event_editSelectFuzzy4MenuItemActionPerformed
-
+    
     private void editSelectFuzzy3MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy3MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy3MenuItemActionPerformed
         updateFuzzyInfo(2);
     }//GEN-LAST:event_editSelectFuzzy3MenuItemActionPerformed
-
+    
     private void editSelectFuzzy2MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy2MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy2MenuItemActionPerformed
         updateFuzzyInfo(1);
     }//GEN-LAST:event_editSelectFuzzy2MenuItemActionPerformed
-
+    
     private void editSelectFuzzy1MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy1MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy1MenuItemActionPerformed
         updateFuzzyInfo(0);
     }//GEN-LAST:event_editSelectFuzzy1MenuItemActionPerformed
-
+    
     private void editFindInProjectMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editFindInProjectMenuItemActionPerformed
     {//GEN-HEADEREND:event_editFindInProjectMenuItemActionPerformed
         doFind();
     }//GEN-LAST:event_editFindInProjectMenuItemActionPerformed
-
+    
     private void editInsertTranslationMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editInsertTranslationMenuItemActionPerformed
     {//GEN-HEADEREND:event_editInsertTranslationMenuItemActionPerformed
         doInsertTrans();
     }//GEN-LAST:event_editInsertTranslationMenuItemActionPerformed
-
+    
     private void editOverwriteTranslationMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editOverwriteTranslationMenuItemActionPerformed
     {//GEN-HEADEREND:event_editOverwriteTranslationMenuItemActionPerformed
         doRecycleTrans();
     }//GEN-LAST:event_editOverwriteTranslationMenuItemActionPerformed
-
+    
     private void gotoNextUntranslatedMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_gotoNextUntranslatedMenuItemActionPerformed
     {//GEN-HEADEREND:event_gotoNextUntranslatedMenuItemActionPerformed
         doNextUntranslatedEntry();
     }//GEN-LAST:event_gotoNextUntranslatedMenuItemActionPerformed
-
+    
     private void gotoPreviousSegmentMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_gotoPreviousSegmentMenuItemActionPerformed
     {//GEN-HEADEREND:event_gotoPreviousSegmentMenuItemActionPerformed
         doPrevEntry();
     }//GEN-LAST:event_gotoPreviousSegmentMenuItemActionPerformed
-
+    
     private void gotoNextSegmentMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_gotoNextSegmentMenuItemActionPerformed
     {//GEN-HEADEREND:event_gotoNextSegmentMenuItemActionPerformed
         doNextEntry();
     }//GEN-LAST:event_gotoNextSegmentMenuItemActionPerformed
-
+    
     private void editRedoMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editRedoMenuItemActionPerformed
     {//GEN-HEADEREND:event_editRedoMenuItemActionPerformed
-        try 
+        try
         {
             xlPane.redoOneEdit();
         }
-        catch (CannotRedoException cue)	{ }
+        catch (CannotRedoException cue)
+        { }
     }//GEN-LAST:event_editRedoMenuItemActionPerformed
-
+    
     private void editUndoMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editUndoMenuItemActionPerformed
     {//GEN-HEADEREND:event_editUndoMenuItemActionPerformed
         try
         {
             xlPane.undoOneEdit();
         }
-        catch( CannotUndoException cue ) { }
+        catch( CannotUndoException cue )
+        { }
     }//GEN-LAST:event_editUndoMenuItemActionPerformed
 
+    /** Informs Main Window class that the user closed the Match/Glossary window */
+    public void filelistWindowClosed()
+    {
+        viewFileListCheckBoxMenuItem.setSelected(false);
+    }
+    
     private void viewFileListCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_viewFileListCheckBoxMenuItemActionPerformed
     {//GEN-HEADEREND:event_viewFileListCheckBoxMenuItemActionPerformed
         if( m_projWin==null )
@@ -2222,9 +2311,10 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             viewFileListCheckBoxMenuItem.setSelected(false);
             return;
         }
-            
+        
         if( viewFileListCheckBoxMenuItem.isSelected() )
         {
+            m_projWin.buildDisplay();
             m_projWin.setVisible(true);
             m_projWin.toFront();
         }
@@ -2233,7 +2323,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             m_projWin.setVisible(false);
         }
     }//GEN-LAST:event_viewFileListCheckBoxMenuItemActionPerformed
-
+    
     /** Informs Main Window class that the user closed the Match/Glossary window */
     public void matchWindowClosed()
     {
@@ -2252,50 +2342,52 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             matchWindow.setVisible(false);
         }
     }//GEN-LAST:event_viewMatchWindowCheckBoxMenuItemActionPerformed
-
+    
     private void projectCompileMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectCompileMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectCompileMenuItemActionPerformed
         doCompileProject();
     }//GEN-LAST:event_projectCompileMenuItemActionPerformed
-
+    
     private void projectCloseMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectCloseMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectCloseMenuItemActionPerformed
         doCloseProject();
     }//GEN-LAST:event_projectCloseMenuItemActionPerformed
-
+    
     private void projectSaveMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectSaveMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectSaveMenuItemActionPerformed
         doSave();
     }//GEN-LAST:event_projectSaveMenuItemActionPerformed
-
+    
     private void projectOpenMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectOpenMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectOpenMenuItemActionPerformed
         doLoadProject();
     }//GEN-LAST:event_projectOpenMenuItemActionPerformed
-
+    
     private void projectNewMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectNewMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectNewMenuItemActionPerformed
-        doCreateProject();        
+        doCreateProject();
     }//GEN-LAST:event_projectNewMenuItemActionPerformed
-
+    
     private void projectExitMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectExitMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectExitMenuItemActionPerformed
         doQuit();
     }//GEN-LAST:event_projectExitMenuItemActionPerformed
-
+    
     private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
     {//GEN-HEADEREND:event_formWindowClosing
         doQuit();
     }//GEN-LAST:event_formWindowClosing
-
+    
     private void helpAboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpAboutMenuItemActionPerformed
         new AboutDialog(this).setVisible(true);
     }//GEN-LAST:event_helpAboutMenuItemActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem editFindInProjectMenuItem;
+    private javax.swing.JMenuItem editInsertSourceMenuItem;
     private javax.swing.JMenuItem editInsertTranslationMenuItem;
     private javax.swing.JMenu editMenu;
+    private javax.swing.JMenuItem editOverwriteSourceMenuItem;
     private javax.swing.JMenuItem editOverwriteTranslationMenuItem;
     private javax.swing.JMenuItem editRedoMenuItem;
     private javax.swing.JMenuItem editSelectFuzzy1MenuItem;
@@ -2335,7 +2427,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     private javax.swing.JSeparator separator2inEditMenu;
     private javax.swing.JSeparator separator2inProjectMenu;
     private javax.swing.JSeparator separator3inEditMenu;
-    private javax.swing.JSeparator separator3inProjectMenu;
+    private javax.swing.JSeparator separator4inEditMenu;
     private javax.swing.JSeparator separator4inProjectMenu;
     private javax.swing.JSeparator separator5inProjectMenu;
     private javax.swing.JLabel statusLabel;

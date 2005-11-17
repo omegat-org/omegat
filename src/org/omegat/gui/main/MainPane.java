@@ -78,7 +78,9 @@ public class MainPane extends JTextPane implements MouseListener
     /** Ctrl key mask. On MacOSX it's CMD key. */
     private static final int CTRL_KEY_MASK = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
     
-	private UndoManager	undoManager;
+    /** Undo Manager to store edits */
+    private UndoManager	undoManager;
+    
     /** Orders to cancel all Undoable edits. */
     public void cancelUndo()
     {
@@ -106,6 +108,10 @@ public class MainPane extends JTextPane implements MouseListener
      */
     public void mouseClicked(MouseEvent e)
     {
+        // design-time
+        if (mw==null)
+            return;
+        
         // ignore mouse clicks until document is ready
         if (!mw.m_docReady)
             return;
@@ -158,6 +164,10 @@ public class MainPane extends JTextPane implements MouseListener
      */
     protected void processKeyEvent(KeyEvent e)
     {
+        // design-time
+        if (mw==null)
+            return;
+        
         if (!mw.m_projectLoaded)
         {
             if( (e.getModifiers()&CTRL_KEY_MASK)==CTRL_KEY_MASK ||

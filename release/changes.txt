@@ -1,8 +1,49 @@
 ----------------------------------------------------------------------
- OmegaT 1.4.6 RC Changes (comparing to 1.4.5.04)
+ OmegaT 1.6 RC3 Changes
 ----------------------------------------------------------------------
 
-1.4.6 RC
+1.6 RC3
+
+ Enchancements:
+
+ - Keyboard option to close Find window
+   http://sourceforge.net/support/tracker.php?aid=1350555
+
+ - Add Yes/No Warning before OmegaT quits
+   http://sourceforge.net/support/tracker.php?aid=1302358
+
+ Bugfixes:
+
+ - sentence segmenting regexp and Japanese
+   http://sourceforge.net/support/tracker.php?aid=1333721
+
+ - search bug
+   http://sourceforge.net/support/tracker.php?aid=1348191
+
+ - The help viewer does not recognize external links
+   http://sourceforge.net/support/tracker.php?aid=1348851
+
+ - Index entries in OpenOffice documents segment the text
+   http://sourceforge.net/support/tracker.php?aid=1353211
+
+
+1.6 RC2.002
+
+ Enchancements:
+
+ - DL, DD, DT tags should segment
+   http://sourceforge.net/support/tracker.php?aid=1348792
+
+ - Different enchancements for Editing Options
+   http://sourceforge.net/support/tracker.php?aid=1337476
+
+ Bugfixes:
+
+ - Bug if Target Encoding is set to [auto] for (X)HTML
+   http://sourceforge.net/support/tracker.php?aid=1350320
+
+
+1.6 RC2
 -------------------------------
  
  Enchancements:
@@ -12,6 +53,9 @@
 
  - Translate HTML attributes "alt", "title" etc
    http://sourceforge.net/support/tracker.php?aid=1236555
+
+ - Variable charset for output of (X)HTML documents
+   http://sourceforge.net/support/tracker.php?aid=1309787
 
  - Edit Project to change project parameters
    http://sourceforge.net/support/tracker.php?aid=1227890
@@ -38,6 +82,12 @@
  - Allow adding source files from OmegaT UI
    (code by Kim Bruning)
    http://sourceforge.net/support/tracker.php?aid=1313033
+
+ - Add scroller to Match Window
+   http://sourceforge.net/support/tracker.php?aid=1295945
+
+ - Give use more key shorctuts!
+   http://sourceforge.net/support/tracker.php?aid=1230230
 
  Bugfixes:
 
@@ -230,7 +280,6 @@
 
  - Match/Glossary Split Pane
    http://sourceforge.net/tracker/index.php?func=detail&aid=1202984&group_id=68187&atid=520350
-   by Raymond Martin
 
 1.4.5 Beta3
 -------------------------------

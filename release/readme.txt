@@ -1,5 +1,5 @@
 ==============================================================================
-OmegaT 1.4.6 RC Read Me file
+OmegaT 1.6 RC3 Read Me file
 
 I.   Where to get information about OmegaT
 II.  General notes about Java & OmegaT
@@ -13,12 +13,20 @@ I.  Where to get information about OmegaT
 The most actual info about OmegaT may be found at:
      http://www.omegat.org/omegat/omegat.html
 
-OmegaT is a high performance Java based Computer Assisted Translation
-tool with fuzzy matching, translation memory, keyword search, glossary
-term identification, and translation leveraging into updated projects.
+OmegaT is a free and open source multiplatform Computer Assisted Translation 
+tool with :
+ - fuzzy matching,
+ - translation memory,
+ - keyword search,
+ - glossary,
+ - and translation leveraging into updated projects.
 
-For a quick start tutorial, check:
-     http://www.leuce.com/translate/omegat/en_Instant.html
+OmegaT supports projects including Microsoft Office files (using 
+OpenOffice.org as a conversion filter), OpenOffice.org or StarOffice files, 
+as well as (X)HTML, Java localization files or plain text files.
+
+For a quick start tutorial, launch OmegaT and read the displayed
+Instant Start Tutorial.
 
 The user manual is in the package you just downloaded, you can access
 it from the [Help] menu after starting OmegaT.
@@ -26,13 +34,12 @@ it from the [Help] menu after starting OmegaT.
 ==============================================================================
 II. General notes about Java & OmegaT
 
-OmegaT 1.4.x requires the Java Runtime Environment version 1.4 or
-higher be installed on your system. It is available from:
-     http://java.com:80/en/selectlanguage.jsp
+OmegaT requires the Java Runtime Environment version 1.4 or higher 
+be installed on your system. It is available from:
+     http://java.com
 
 Windows and Linux users may need to install Java if it is not already
-done.
-MacOSX users have Java already installed on their machines.
+done. MacOSX users have Java already installed on their machines.
 
 On a properly installed machine, you should be able to launch OmegaT by
 double-clicking on the OmegaT.jar file.
@@ -56,29 +63,29 @@ Code has been contributed by
    Maxym Mykhalchuk (lead developer at the time of this release)
    Sacha Chua
    Henry Pijffers
-   Raymond Martin
    Kim Bruning
 
 Localization contributed by
-   Alessandro Cattelan (Italian)
-   Sabine Cretella and Martin Wunderlich (German)
    Dmitri Gabinski (Belorussian, Esperanto, and Russian)
    Jean-Christophe Helary (French)
-   Pablo Roca Santiagio; Juan Salcines and Cesar Escribano Esteban (Spanish)
+   Sabine Cretella and Martin Wunderlich (German)
+   Alessandro Cattelan (Italian)
    Hisashi Yanagida (Japanese)
+   Pablo Roca Santiagio; Juan Salcines and Cesar Escribano Esteban (Spanish)
    Erhan Yukselci (Turkish)
 
 Other contributions by
-   Marc Prior (project coordinator and ASAD manual writer)
-   Jean-Christophe Helary
-   Samuel Murray
+   Sabine Cretella
    Dmitry Gabinski
+   Jean-Christophe Helary
    Raymond Martin
+   Samuel Murray
+   Marc Prior (project coordinator and ASAD manual writer)
    and many, many more very helpful people
 
 To contribute to OmegaT development, get in touch with the developers
 at:
-     http://sourceforge.net/projects/omegat
+   http://lists.sourceforge.net/lists/listinfo/omegat-development
 
 To translate OmegaT's user interface, user manual or other related
 documents, read:

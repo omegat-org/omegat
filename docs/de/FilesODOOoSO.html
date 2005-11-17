@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+  "http://www.w3.org/TR/html4/strict.dtd">
+  
+<html>
+  <head>
+    <title>OmegaT: OpenDocument-, OpenOffice.org- und StarOffice-Dateien</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="Kate (Linux)">
+    <meta name="changed" content="20050513">
+    <link rel="stylesheet" type="text/css" href="omegat.css">
+  </head>
+
+  <body lang="en" dir="LTR">
+  
+    <div class="navbar-top">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="OmegaT.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Zurück</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="FilesSourceDoc.html">Ausgangsdateien</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Weiter</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="FilesTMGloss.html">Translation Memory und Glossardateien</a>
+        </td>
+      </tr>
+    </table>    
+    </div>
+    
+    <div class="content">
+    
+    <h1 align="center">OpenDocument, OpenOffice.org und StarOffice-Dateien</h1>
+
+    <h2>OpenDocument</h2>
+    
+    <p>
+      OpenDocument ist ein neueres von OmegaT unterstütztes Format. Wenn nicht anders angegeben, dann bezieht sich OpenOffice.org hier auf die Anwendung und nicht auf das Dateiformat.
+    </p>
+    
+    
+    <h2>Unterscheide zwischen OpenOffice.org und StarOffice</h2>
+
+    <p>
+      OpenOffice.org und StarOffice sind im Grunde genommen das gleiche Programm. OpenOffice.org ist Open-Source (offener Quellcode), was im Prinzip heisst, dass es frei ist und beliebig kopiert werden kann. StarOffice andererseits ist ein kommerzielles Produkt. Für jedes System muss eine Lizenz erworben werden. StarOffice enthält bestimmte Komponenten, die in OpenOffice.org nicht vorhanden sind. Die Lizenz umfasst darüberhinaus auch den technischen Support. In dieser Anleitung beziehen sich Verweise auf OpenOffice.org ebenso auf StarOffice.
+    </p>
+
+    <h2>OpenOffice.org und OmegaT</h2>
+
+    <p>
+      OmegaT ist eine Anwendung, die alleine lauffähig ist. Es werden weder OpenOffice.org bzw. StarOffice noch MS Word oder andere Textverarbeitungsprogramme vorausgesetzt. 
+    </p>
+
+    <p>
+      Allerdings erweitern OpenOffice.org und StarOffice die Funktionen von OmegaT beträchtlich, da das Programm dadurch Dateiformate handhaben kann, die sonst nicht direkt unterstützt werden. Diese Formate sind: MS Word, MS Excel, MS Powerpoint und RTF. Um Dateien in diesen Formaten zur Verarbeitung in OmegaT vorzubereiten, öffnen Sie sie in OpenOffice.org und speichern Sie sie als OpenDocument oder im OpenOffice.org-Format. Nach der Übersetzung öffnen Sie die übersetzte Datei und konvertieren sie zurück in das ursprüngliche Format, indem Sie die Datei entsprechend speichern.
+    </p>
+
+    <p>
+      OpenOffice.org/StarOffice bieten auch weitere Funktionen, die nicht zum Kern von OmegaT gehören. Rechtschreibprüfung und Segmentierung auf Satzebene (statt auf Absatzebene) sind zwei solcher Funktionen, die in OmegaT selbst nicht enthalten sind, aber durch OpenOffice.org möglich werden. Um die Rechtschreibprüfung für Dokumente durchzuführen, installieren Sie die entsprechenden Wörterbücher für die verwendeten Sprachen. Zur Segmentierung auf Satzebene können Sie Makros von der OmegaT-Website (http://www.omegat.org) herunterladen, die diese Funktionen ermöglichen.
+    </p>
+    
+    <p>
+      Achten Sie darauf, dass Sie zusammen mit OmegaT  OpenOffice.org 1.0/StarOffice 6.0 oder höher verwenden. Diese Anwendungen unterstützen die Formate von OpenOffice.org 1.x. Für OpenDocument-Dateien benötigen Sie OpenOffice.org 2.0/StarOffice 8.0 oder höher oder eine andere Textverarbeitung (bzw. Editor) mit Unterstützung für OASIS OpenDocument.      
+    </p>
+
+    <h2>Tipps und Tricks</h2>
+
+    <p>
+      Achten Sie darauf, dass MS Word-Dateien nicht mit der Option 'Fast Save' (bzw. Schnellspeicherung) gespeichert wurden, da OpenOffice.org die Dokumente andernfalls wahrscheinlich nicht lesen kann.
+    </p>
+
+    <p>
+      Versuchen Sie nicht OpenDocument- oder OpenOffice.org-Dateien zu laden, die mit aktivierter Überarbeitungsfunktion (d.h. "Änderungen aufzeichnen") gespeichert wurden. Schalten Sie diese Funktion aus und nehmen Sie alle Änderungen an. Dieses Problem tritt wahrscheinlich dann auf, wenn Sie MS Word-Dateien bekommen, die mit aktivierter Überarbeitungsfunktion gespeichert wurden, ohne dass Sie sich dessen bewusst sind OpenOffice.org unterstützt diese Funktion (die auch sehr nützlich ist), aber sie sollte nicht zusammen mit OmegaT verwendet werden.
+    </p>
+
+    <p>
+      Installieren Sie die Rechtschreibwerkzeuge von OpenOffice.org für die Zielsprache(n). Bevor Sie zum ersten Mal ein Projekt laden, das OpenDocument/OpenOffice.org-Dateien enthält, öffnen Sie diese Dateien in OpenOffice.org und ändern Sie die Sprache des Textes in die Zielsprache. Markieren Sie hierzu den gesamten Text mit <i>&lt;Strg-A&gt;</i> und klicken Sie dann auf <i>Format</i> > <i>Zeichen</i> > <i>Sprache</i>. Verwenden Sie OpenOffice.org für die Rechtschreibprüfung der Übersetzung nach dem Export. Die Sprache kann nach dem Export geändert werden. Wenn die Zieldateien des Projekts aber öfter exportiert werden, dann wird die Sprache immer wieder auf die des Ausgangstextes zurückgesetzt.
+    </p>
+
+    <p>
+      Überprüfen Sie nach dem letzten Export eines als OpenDocument/OpenOffice.org formatierten Textes, ob auch alles übersetzt wurde. Sie sollten die Datei in jedem Falle in OpenOffice.org öffnen, um die Rechtschreibprüfung durchzuführen. Es kann allerdings sein, dass OmegaT bestimmte Teile des Textes, wie etwa Kopf- und Fußzeilen ignoriert hat.
+    </p>
+
+    <p>
+      Wenn OpenOffice.org eine übersetzte Datei nicht öffnen kann und stattdessen einen Fehler ausgibt, dann haben Sie wahrscheinlich bei der Übersetzung Tags beschädigt. Öffnen Sie in diesem Falle das Projekt erneut in OmegaT und verwenden Sie die Funktion <i>Tags validieren</i>, um die betroffenen Segmente ausfindig zu machen.
+    </p>
+
+    <p>
+      Siehe auch <a href="FilesSourceDoc.html">Dateien der Ausgangsdokumente</a> und <a href="FilesEditingTagged.html">Bearbeitung von Dateien mit Tags (formatiert)</a>
+    </p>
+    </div>
+    
+    <div class="navbar-bottom">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="OmegaT.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Zurück</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="FilesSourceDoc.html">Ausgangsdateien</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Weiter</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="FilesTMGloss.html">Translation Memory und Glossardateien</a>
+        </td>
+      </tr>
+    </table>    
+    </div>
+    
+  </body>
+</html>
+

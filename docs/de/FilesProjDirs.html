@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+  "http://www.w3.org/TR/html4/strict.dtd">
+  
+<html>
+  <head>
+    <title>Projektdateien und -verzeichnisse</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="Kate (Linux)">
+    <meta name="changed" content="20050607">
+    <link rel="stylesheet" type="text/css" href="omegat.css">
+  </head>
+
+  <body lang="en" dir="LTR">
+  
+    <div class="navbar-top">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="OmegaT.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Zurück</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="FilesFilters.html">Dateifilter</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Weiter</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="HintsTips.html">Allgemeine Hinweise und Tipps</a>
+        </td>
+      </tr>
+    </table>    
+    </div>
+    
+    <div class="content">
+    
+    <h1 align="center">Projektdateien und -verzeichnisse</h1>
+
+    <p>
+      Projektdateien und -verzeichnisse
+    </p>
+
+    <h2>Glossardateien</h2>
+    
+    <ul>
+      <li>
+        <p>
+          <b>log.txt</b>: automatisch erstellte Protokolldatei, die bei Fehlern zurate gezogen werden kann. Fehler können auch der Benutzergruppe oder dem Entwicklungs-Team gemeldet werden (siehe <a href="Important.html">Wichtige Hinweise</a>).
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>omegat.project</b>: OmegaT erstellt diese Datei automatisch, wenn das Projekt angelegt wird. Sie befindet sich im Hauptprojektverzeichnis. Diese Datei kann in einem beliebigen Texteditor bearbeitet werden, um Projektparameter zu ändern. Ändern diese Datei aber nur, wenn Sie genau wissen, was zu tun ist.
+        </p>
+      </li>
+      <li>
+        <p>
+          <b><projectname>.tmx</b>: Dies ist das Translation Memory, das vom Projekt exportiert wird. Es wird im Hauptverzeichnis des Projekts gespeichert und jedes Mal  automatisch aktualisiert, wenn ein Export vorgenommen wird. Dieses Translation Memory enthält alle Segmente des letzten Exports des Projekts. Beachten Sie, dass keine Segmente aus den Translation-Memory-Dateien im Verzeichnis <b>/tm</b> importiert werden.
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>project_save.tmx</b>: Dies ist die TMX-Datei, die in <b>/omegat</b> angelegt wird, wenn das Projekt zum ersten Mal gespeichert wird. Diese dient als Arbeitsspeicher für das Projekt. Vorhandene TMs des gleichen Typs können in diese Datei eingebunden werden.
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>project_save.tmx.bak</b>: Diese TMX-Datei wird in <b>/omegat</b> angelegt, wenn ein Projekt zum ersten Mal erneut geöffnet wird. In ihr wird eine Sicherungskopie von <b>project_save.tmx</b> gespeichert, die jedes Mal aktualisiert wird, wenn Sie ein Projekt erneut öffnen, bevor am Translation Memory des Projekts irgendwelche Änderungen vorgenommen wurden.
+        </p>
+      </li>      
+      <li>
+        <p>        
+          <b>*.tmx</b> in <b>/tm</b>: Translation Memory Exchange-Dateien, die zuvor erstellt wurden. Diese Dateien müssen das Format TMX Level 1 (Version 1.1) haben.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          <b>word_counts</b>: Enthält zwei Zählungen der Wörter des gesamten Projekt: Eine Zählung mit und eine ohne den exakten (100 %) Matches (diese Funktion steht derzeit nicht zur Verfügung. Sie wird in einer der nächsten Versionen von OmegaT wieder aktiviert werden)
+        </p>
+      </li>
+      <li>
+        <p>
+          Ausgangsdateien in <b>/source</b>: Diese werden zur Übersetzung in das Projekt importiert. Dateien mit anderen Erweiterungen können ebenfalls importiert werden, wenn ihre Erweiterungen auf die voreingestellen Erweiterungen abgebildet werden. Informationen zu den Dateitypen und den Abbildungen finden Sie unter <a href="FilesSourceDoc.html">Dateien der Ausgangsdokumente</a> und <a href="FilesFilters.html">Dateifilter</a> .          
+        </p>        
+      </li>      
+      <li>
+        <p>
+          andere (nicht unterstützte) Dateien in <b>/source</b>: Diese werden beim Export eines Projekts unverändert nach <b>/target</b> kopiert. Dadurch können z.B: die Dateien einer vollständigen Website in <b>/source</b> abgelegt werden, die zusammen mit den Grafikdateien (z.B. GIF, JPEG oder PNG) nach <b>/target</b>  kopiert werden soll. 
+        </p>
+      </li>
+      <li>
+        <p>      
+          Dateien übersetzter Dokumente (mit dem gleichen Dateityp wie die zugehörigen Ausgangsdateien in /source), zusammen mit anderen nicht zu übersetzenden Dateien aus <b>/source</b> beim Export.
+        </p>
+      </li>
+      <li>
+        <p>
+          Glossardateien (d.h. vom Typ <b>*.tab</b>, <b>*.utf8</b>) in <b>/glossary</b>.
+        </p>
+      </li>
+    </ul>
+
+    <h2>Verzeichnisse</h2>
+    
+    <ul>    
+      <li>
+        <p>
+          Ein Hauptverzeichnis für das Projekt. Dieses Verzeichnis wird bei der Erstellung des Projekts angelegt. Der Name wird vom Benutzer festgelegt.
+        </p>  
+      </li>
+     
+      <li>
+        <p>      
+          <b>/glossary</b>. Enthält die zu verwendenden <a href="Glossary.html">Glossardateien</a>, falls vorhanden. Der Benutzer muss die Glossardateien in diesem Verzeichnis ablegen, bevor er ein Projekt öffnet.
+        </p>
+      </li>      
+      <li>
+        <p>      
+          <b>/omegat</b>. Enthält die Dateien <b>project_save.tmx</b>, <b>project_save.tmx.bak</b> und <b>word_counts</b>.
+        </p>
+      </li>
+      <li>
+        <p>     
+          <b>/source</b>. Alle zu übersetzenden Dateien werden in diesem Verzeichnis abgelegt, bevor das Projekt geöffnet wird. Alle Dateien, die sich in diesem Verzeichnis und seinen Unterverzeichnissen befinden, werden in das Projekt zur Übersetzung importiert, wenn ihre Formate unterstützt werden und sie die entsprechenden Dateiendungen haben.
+        </p>
+      </li>      
+      <li>
+        <p>       
+          <b>/target</b>. Übersetzte (und nicht zu übersetzende) Dateien befinden sich nach dem Export in diesem Verzeichnis.
+        </p>
+      </li>      
+      <li>
+        <p>      
+          <b>/tm</b>. Alle zu verwendenden <a href="FilesTMGloss.html">Translation Memorys</a> werden vor dem Laden eines Projekts in diesem Verzeichnis abgelegt. Beachten Sie bitte, dass OmegaT die Datei <b>project_save.tmx</b> (in <b>/omegat</b>) anlegt, unabhängig davon, ob Sie TMs verwenden oder nicht. Hierbei handelt es sich um das Arbeits-Memory für das Projekt, das gespeichert wird, wenn Sie das Projekt speichern. Nach dem Export der Zieldateien wird auch ein Translation Memory im Hauptprojektverzeichnis erstellt.
+        </p>
+      </li>
+    </ul>
+        
+    <h2>Änderung des Speicherorts der Projektdateien und -verzeichnisse</h2>
+
+    <p>
+      Die Projektverzeichnisse werden zusammen mit dem Projekt erstellt. Standardmäßig befinden sie sich im Hauptverzeichnis des Projekts. Sie können alternative Speicherorte für die Verzeichnisse wählen, indem Sie bei der Erstellung eines Projekts auf die Schaltfläche <i>Durchsuchen...</i> klicken. Sie können die Translation Memorys dann in einem bestimmten Verzeichnis haben (etwa als TM-Ablage) und dieses Verzeichnis bei einem neuen Projekt auswählen. Dadurch müssen Sie die TMs nicht in das Verzeichnis <b>/tm</b> des neu angelegt Projekts kopieren.
+    </p>
+    <p>
+      Um den Speicherort der Verzeichnisse zu ändern, nachdem ein Projekt angelegt wurde, muss die akzeptierte, standardmäßige Struktur des Projekts geändert werden. Stellen Sie zunächst sicher, dass das Projekt nicht geöffnet ist. Anschließend bewegen oder kopieren Sie die Datei(en) zum neuen Speicherort. Wenn Sie Dateien nur kopieren, dann löschen Sie das/die Ursprungsverzeichnis(se). Wenn Sie das Projekt nun erneut öffnen, dann erkennt OmegaT, dass einige Verzeichnisse fehlen und öffnet daher den Dialog zur Verzeichnisauswahl. Sie können dann die neuen Verzeichnisse und Speicherorte auswählen.
+    </p>
+    </div>
+    
+    <div class="navbar-bottom">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="OmegaT.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Zurück</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="FilesFilters.html">Dateifilter</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Weiter</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="HintsTips.html">Allgemeine Hinweise und Tipps</a>
+        </td>
+      </tr>
+    </table>    
+    </div>
+    
+  </body>
+</html>
+

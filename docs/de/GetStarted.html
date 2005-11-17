@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+  "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+  <head>
+    <title>OmegaT: Einstieg in das Programm (Beispielprojekt)</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="Kate (Linux)">
+    <meta name="changed" content="20050607">
+    <link rel="stylesheet" type="text/css" href="omegat.css">
+  </head>
+
+  <body lang="en" dir="LTR">
+
+    <div class="navbar-top">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="OmegaT.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Zurück</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="Important.html">Wichtige Hinweise</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Weiter</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="UserInterface.html">Benutzerschnittstelle</a>
+        </td>
+      </tr>
+    </table>   
+    </div>
+    
+    <div class="content">
+    
+    <h1 align="center">Einstieg in das Programm (Beispielprojekt)</h1>
+  
+    <p>
+      Die hier vorgestellte Vorgehensweise dient nur der Erläuterung. Abweichungen von diesem Verfahren sind im echten Einsatz sehr wahrscheinlich. 
+    </p>
+    
+    <h2>Neues Projekt erstellen</h2>
+    
+    <ol>
+      <li>
+        <p>OmegaT starten.</p>
+      </li>
+      <li>
+        <p>
+          Erstellen Sie ein neues Projekt, indem Sie den Menüpunkt <i>Neues  Projekt...</i> im Menü <i>Datei</i> auswählen. 
+        </p>
+      </li>  
+      <li>
+        <p>
+          Wählen Sie in dem Dialog zur Dateiauswahl ein geeignetes Verzeichnis, in dem das neue Projektverzeichnis und die entsprechenden Datei angelegt werden sollen. 
+        </p>
+      </li>  
+      <li>
+        <p>
+          Im Eingabefeld für <i>Dateiname</i> geben Sie einen Namen für das Projekt ein (z.B. <i>ABC</i>) und klicken Sie anschließend auf <i>Speichern</i> zur Bestätigung.
+        </p>
+      </li>  
+      <li>
+        <p>
+          Es wird ein weiterer Dialog angezeigt, der die Verzeichnispfade für das Projekt angibt. In dem Dialog schlägt OmegaT die Erstellung eines neuen Verzeichnisses vor, dessen Name dem des Projekts entspricht (<i>ABC</i>). Es werden fünf weitere Standard-Unterverzeichnisse angezeigt. Die Speicherorte dieser Verzeichnisse können zwar verändert werden, aber für dieses Beispiel übernehmen Sie einfach die angezeigten Werte (diese werden auf der Seite <a href="FilesProjDirs.html">Projektdateien und -verzeichnisse</a> erläutert).         
+        </p>        
+      </li>  
+      <li> 
+        <p>
+          Geben Sie die Sprachcodes für die Ausgangs- und Zieldateien ein oder wählen Sie diese aus der Drop-Down-Liste aus. Diese Codes werden für den Translation-Memory-Standard <b>TMX</b> benötigt. In OmegaT besteht der Sprachcode aus zwei Zeichen (ISO 639) in Kleinbuchstaben und einem optionalen Landescode, ebenfalls zwei Zeichen (ISO 3166), in Großbuchstaben. Die Codes müssen mit einem Bindestrich getrennt werden (z.b. de-DE). Dies wird vom TMX-Standard so vorgeschrieben.          
+        </p>          
+        <p>
+          Anstelle der Sprachcodes können auch sog. Locale-Codes verwendet werden. Locales-Codes bestehen ebenfalls aus einem Sprachcode und einem Landescode. Der Unterschied zwischen diesen beiden Code-Arten liegt in der Verwendung und in der Syntax. Locale-Codes finden sich normalerweise im Bereich der Software-Lokalisierung, bei Computersystemen und anderen Softwarebereichen. Bei einem Locale-Code sind die beiden einzelnen Codes für Sprache und Land durch einen Unterstrich getrennt (z.B. de_AT).
+        </p>               
+        <p>          
+          Die tatsächlichen Codes sind vor allem dann wichtig, wenn Sie Translation Memorys mit Anderen austauschen wollen (Kunden, Kollegen, Organisationen usw.). In diesem Falle sollten Sie darauf achten, dass Sie die Standards für ein bestimmtes Format oder eine bestimmte Anwendung einhalten. In jedem Falle werden bei TMX Sprachcodes verwendet. Die Locale-Codes werden automatisch als Sprachcodes in die TMX-Datei geschrieben. <!--See
+          
+          <a href="Codes.html">Codes: Language and Locale</a>
+          
+          for further details.-->
+        </p>
+      </li>  
+      <li>        
+        <p>
+          Nun wird ein Projektverzeichnis (auch als <i>Hauptverzeichnis des Projekts</i> bezeichnet) mit dem zuvor ausgewählten Namen <i>ABC</i> erstellt. Innerhalb des Hauptverzeichnisses des Projekts befinden sich fünf Unterverzeichnisse: 
+        </p>
+        
+        <ol>
+          <li>  
+            <b>/glossary</b> - <a href="Glossary.html">Glossar</a>-Dateien;
+          </li>
+          <li>
+            <b>/source</b> - Dateien der Ausgangsdokumente;
+          </li>
+          <li>
+            <b>/omegat</b> - Projektdateien;
+          </li>
+          <li>
+            <b>/target</b> - Dokumente der Zieldateien;
+          </li>
+          <li>        
+            <b>/tm</b> - Translation-Memory-Dateien.
+          </li>
+        </ol>
+        
+        <br>
+        
+        <p>
+          Siehe auch <a href="FilesProjDirs.html">Projektdateien und -verzeichnisse</a>.
+        </p>
+      </li>  
+    </ol>  
+      
+    <h2>Übersetzung einer Datei</h2>
+
+    <ol>
+      <li>
+        <p>
+          Platzieren Sie eine zu übersetzende Textdatei (mit der Erweiterung <b>.txt</b>) im Verzeichnis <b>/source</b>. Die <b>.txt</b>-Datei muss die Standardkodierung des Betriebssystems haben. Um eine in Unicode kodierte Datei zu verwenden (UTF-8), muss die Erweiterung der Datei in <b>.utf8</b> umbenannt werden.
+        </p>
+      </li>  
+      <li>
+        <p>
+          Öffnen Sie das neu erstellte Projekt, indem Sie <i>Projekt öffnen...</i> im Menü <i>Datei</i> des Editors auswählen  (OmegaT sucht automatisch in dem zuletzt geöffneten Verzeichnis). Das Hauptverzeichnis des Projekts wird mit dem OmegaT-Symbol angezeigt. Dies gibt an, dass es sich um ein Translation-Memory-Projekt handelt.          
+        </p>
+      </li>  
+      <li>
+        <p>
+          Öffnen Sie das Projekt, indem Sie das mit dem OmegaT-Symbol markierte Projektverzeichnis auswählen (per Doppelklick oder durch Auswahl und Bestätigung mit <i>Öffnen</i>). Wählen Sie auf gleiche Art und Weise die Projektdatei omegat.project aus. Versuchen Sie nicht, andere Dateien, wie etwa die Ausgangsdateien, zu öffnen. OmegaT könnte sonst abstürzen.
+        </p>
+      </li>  
+      <li>
+        <p>
+          Das Projekt ist nun geöffnet und der Text der Datei wird im Editor-Fenster angezeigt. 
+        </p>
+      </li>  
+      <li>
+        <p>
+          Platzieren Sie den Cursor im Zieltextfeld des ersten Segments, zwischen den Tags <b>&lt;Segment 0001&gt;</b> und <b>&lt;Segmentende&gt;</b>. Geben Sie die Übersetzung ein und löschen Sie den Ausgangstext. Drücken Sie <i>&lt;Enter&gt;</i>, um die Änderungen zu übernehmen. 
+        </p>
+      </li>  
+      <li>
+        <p>
+          Wiederholen Sie dies für jedes Segment, bis die Übersetzung beendet ist. 
+        </p>
+      </li>  
+    </ol>
+    
+    <h2>Export der übersetzten Datei</h2>
+
+    <ol>      
+      <li>
+        <p>
+          Wählen Sie <i>Translation Memory speichern</i> aus, gefolgt von <i>Zieldokumente exportieren</i> im Menü <i>Datei</i>. Danach kann OmegaT beendet werden, falls gewünscht, indem Sie im gleichen Menü <i>Beenden</i> wählen.          
+        </p>
+      </li>  
+      <li>
+        <p>
+          Die übersetzte Datei befindet sich nun im Verzeichnis <b>/target</b>.        
+        </p>
+      </li>  
+    </ol>
+    </div>
+    
+    <div class="navbar-bottom">
+
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="OmegaT.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Zurück</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="Important.html">Wichtige Hinweise</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Weiter</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="UserInterface.html">Benutzerschnittstelle</a>
+        </td>
+      </tr>
+    </table>   
+    </div>
+
+  </body>
+</html>
+

@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+  "http://www.w3.org/TR/html4/strict.dtd">
+  
+<html>
+  <head>
+    <title>OmegaT: Matches: Exakt und Fuzzy</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="Kate (Linux)">
+    <meta name="changed" content="20050513">
+    <link rel="stylesheet" type="text/css" href="omegat.css">
+  </head>
+
+  <body lang="en" dir="LTR">
+
+    <div class="navbar-top">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="OmegaT.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Zurück</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="SaveRevComp.html">Übersetzung: Speichern, Bearbeitung und Export</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Weiter</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="Searches.html">Suchen: Stichwort und genaue Suche</a>
+        </td>
+      </tr>
+    </table>
+    </div>
+    
+    <div class="content">
+    
+    <h1 align="center">Matches: Exakt und Fuzzy</h1>
+
+    <p>
+      Wenn ein Segment aktiviert wird, dann durchsucht OmegaT das Translation Memory des aktuellen Projekts und andere Translation Memorys, die sich in dem Verzeichnis <b>/tm</b> des Projekts befinden, auf Matches. 
+    </p>
+    
+    <p>  
+      Falls in der TMX-Datei eines Projekts ein 100%-Match (exakt) gefunden wird, dann wird dieser automatisch in das Zielfeld des aktiven Segments und in andere gleiche Segmente des selben Dokuments eingesetzt. Es ist allerdings zu beachten, dass sehr ähnliche Matches, wie zum Beispiel "Hallo!" und "Hallo" von OmegaT nicht als 100%-Matches angesehen und daher nicht automatisch eingefügt werden. Alle gefundenen Fuzzy-Matches werden im Feld <i>Matches</i> der <i>Match- und Glossaranzeige</i> angezeigt. 
+    </p>
+
+    <p>
+      OmegaT sucht auf zwei verschiedene Arten nach Matches und verfügt über drei Arten von Matches. Entweder sucht das Programm nach Matches basierend auf dem Leerzeichen als Worttrennzeichen (z.B im Englischen oder Deutschen). Oder es sucht nach Matches in Sprachen, die das Leerzeichen nicht als Wortgrenze verwenden (speziell Japanisch in OmegaT 1.4.4).      
+    </p>
+    
+    <p>      
+      Die drei Match-Arten sind: 
+    </p>
+    
+    <ul>
+      <li>
+        Exakte Matches (100 %). Diese Matches werden automatisch in diejenigen Segmente kopiert, die identisch sind, ohne dass sie vom Benutzer ausgewählt werden müssen. Dies geschieht nur dann, wenn der Match zum Translation Memory des Projekts gehört (d.h. in der Datei project_save.tmx, die sich im Verzeichnis  /omegat/ befindet). Alle exakten Matches, die in anderen Translation-Memory-Dateien im Verzeichnis /tm/ befinden, werden nicht automatisch eingesetzt. Diese müssen explizit eingefügt werden.
+      </li>
+      <li>
+        Ungenaue Matches (zu 100 %, auch "Fuzzy" genannt). Diese Matches unterscheiden sich durch ein Interpunktionszeichen, eine Zahl, oder ähnliche Zeichen. Diese werden nicht automatisch eingesetzt.
+      </li>
+      <li>  
+        Ungenaue Matches (weniger als 100 %, auch "Fuzzy"). Diese werden ebenfalls nicht automatisch eingesetzt.    
+      </li>
+    </ul>
+        
+    <p>
+      Im Fenster der Match-Anzeige können gleichzeitig maximal fünf exakte oder Fuzzy-Matches angezeigt werden. Drücken Sie <i>&lt;Strg+1>&gt;</i>, um den ersten Match auszuwählen, <i>&lt;Strg+2&gt;</i> für die Auswahl des zweiten und so weiter. Der ausgewählte Match wird dann fett angezeigt. Der Name des Translation Memorys, das den Match enthält, wird ebenfalls angezeigt (wenn der Match nicht Teil des aktuellen Projekts ist).
+    </p>
+
+    <p>
+      Ein ausgewählter Match kann in das aktive Segment eingefügt werden, indem man <i>&lt;Strg-I&gt;</i> drückt, um den Text an der aktuellen Cursor-Position einzufügen, oder <i>&lt;Strg+R&gt;</i>, um den Text des aktiven Segments vollständig zu ersetzen.
+    </p>
+
+    <p>
+      Der Prozentwert für den Match, der von OmegaT angegeben wird, ist lediglich von technischem Interesse. Er gibt nicht an, welcher Teil der Arbeit bereits erledigt ist.
+    </p>
+    
+    <p>
+      Die genauen Unterschiede zwischen dem aktiven Ausgangssegment und dem Fuzzy Match werden nicht angegeben. Allerdings werden in der Match-Anzeige Farben verwendet, um eine ungefähre Vorstellung davon zu vermitteln, wo die Unterschiede liegen. Grüne Zeichenketten sind im Ausgangssegment enthalten, blaue hingegen nicht.
+    </p>
+    </div>
+    
+    <div class="navbar-bottom">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="OmegaT.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Zurück</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="SaveRevComp.html">Übersetzung: Speichern, Bearbeitung und Export</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Weiter</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="Searches.html">Suchen: Stichwort und genaue Suche</a>
+        </td>
+      </tr>
+    </table>
+    </div>
+    
+  </body>
+</html>
+

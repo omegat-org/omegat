@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<!-- alph order for contributors, change "preliminaries" to "general information", "introduction" to "what is OmegaT", remove ref to Japanese in News, add languages to localization contributors, edited a few things here and there, removed reference to "Sample Project" since it is redundant with "Instant Start". -->
+
+<html>
+<head>
+<title>OmegaT: Users Manual</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="changed" content="20051103">
+<link rel="stylesheet" type="text/css" href="./omegat.css">
+</head>
+
+<body lang="en" dir="LTR">
+
+<div class="navbar-top">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+<tr><td width="7%" align="left" valign="center"><img src="OmegaT.png" alt="Table of Contents"></td>
+<td width="9%" align="left" valign="center"> &nbsp;</td>
+<td width="39%" align="left" valign="center"><b>Table of Contents</b></td>
+<td width="6%" align="left" valign="center"><b>Next</b></td>
+<td width="39%" align="left" valign="center"><a href="./Introduction.html">What is OmegaT</a></td></tr>
+</table>
+
+</div>
+
+<div class="content">
+
+<a name="00" />
+<h1 align="center" name="00" id="00">OmegaT: Users Manual (Version 1.6)</h1>
+
+<table width="100%" border="0" id="detailed_contents">
+<tr><td width="50%">Detailed Table of Contents</td><td colspan="2">Topics index</td></tr>
+<tr><td colspan="3"><hr /></td></tr>
+<tr><td name="detailed_toc" id="detailed_toc" rowspan="27">
+
+<p><a class="chapter" href="./Introduction.html#1">What is OmegaT</a>
+	<ol><li><a href="./Introduction.html#1.1">Overview</a></li>
+	<li><a href="./Introduction.html#1.2">What is special about OmegaT?</a></li>
+	<li><a href="./Introduction.html#1.3">What is a translation memory</a></li>
+	<li><a href="./Introduction.html#1.4">Terminology used in this manual</a></li>
+	<li><a href="./Introduction.html#1.5">Participation to the OmegaT project</a>
+		<ul><li><a href="./Introduction.html#1.5.1">Documentation authoring</a></li>
+		<li><a href="./Introduction.html#1.5.2">Localization</a></li>
+		<li><a href="./Introduction.html#1.5.3">Testing</a></li>
+		<li><a href="./Introduction.html#1.5.4">Programming (Java)</a></li>
+		<li><a href="./Introduction.html#1.5.5">Programming (not Java)</a></li>
+		<li><a href="./Introduction.html#1.5.6">Publicity</a></li>
+		<li><a href="./Introduction.html#1.5.7">Get in touch!</a></li></ul></li>
+	<li><a href="./Introduction.html#1.6">About this manual</a></li></ol><p>
+
+<p><a class="chapter" href="./InstallConfig.html#2">System Requirements and Installation</a>
+	<ol><li><a href="./InstallConfig.html#2.1">Java Runtime Environment</a></li>
+	<li><a href="./InstallConfig.html#2.2">Java Installation</a>
+		<ul><li><a href="./InstallConfig.html#2.2.1">Important Notes</a></li>
+		<li><a href="./InstallConfig.html#2.2.2">Java on Windows</a></li>
+		<li><a href="./InstallConfig.html#2.2.3">Java on UNIX (includes Linux & Solaris)</a></li>
+		<li><a href="./InstallConfig.html#2.2.4">Java on MacOSX</a></li></ul></li>
+	<li><a href="./InstallConfig.html#2.3">OmegaT installation</a>
+		<ul><li><a href="./InstallConfig.html#2.3.1">All Platforms</a></li>
+		<li><a href="./InstallConfig.html#2.3.2">Windows</a></li>
+		<li><a href="./InstallConfig.html#2.3.3">MacOSX</a></li></ul></li>
+	<li><a href="./InstallConfig.html#2.4">OmegaT configuration</a>
+		<ul><li><a href="./InstallConfig.html#2.4.1">UNIX</a></li></ul></li>
+	<li><a href="./InstallConfig.html#2.5">OmegaT execution</a>
+		<ul><li><a href="./InstallConfig.html#2.5.1">Windows</a></li>
+		<li><a href="./InstallConfig.html#2.5.2">UNIX</a></li>
+		<li><a href="./InstallConfig.html#2.5.3">MacOSX</a></li></ul></li>
+	<li><a href="./InstallConfig.html#2.6">Changing the user interface language settings</a>
+		<ul><li><a href="./InstallConfig.html#2.6.1">UNIX</a></li>
+		<li><a href="./InstallConfig.html#2.6.2">MacOSX</a></li></ul></li>
+	<li><a href="./InstallConfig.html#2.7">Available languages for OmegaT 1.6</a>
+		<ul><li><a href="./InstallConfig.html#2.7.1">Full localizations</a></li>
+		<li><a href="./InstallConfig.html#2.7.2">Partial localizations</a></li>
+		<li><a href="./InstallConfig.html#2.7.3">Non up-to-date localizations</a></li></ul></li>
+	<li><a href="./InstallConfig.html#2.8">Language Character Sets and Fonts</a></li></ol></p>
+	
+<p><a class="chapter" href="./Important.html#3">Important Notes</a>
+	<ol><li><a href="./Important.html#3.1">Precautions against data loss!</a></li>
+	<li><a href="./Important.html#3.2">Error Logging</a></li>
+	<li><a href="./Important.html#3.3">Bug reports</a></li></ol></p>
+	
+<p><a class="chapter" href="./InstantStart.html#4">Instant Start tutorial</a> <font color="red" size="-1">new! in 1.6</font>
+	<ol><li><a href="#4.1">Briefly, how OmegaT works</a></li>
+	<li><a href="./InstantStart.html#4.2">How to translate using OmegaT</a>
+		<ul><li><a href="./InstantStart.html#4.2.1">Create and open a new project</a></li>
+		<li><a href="./InstantStart.html#4.2.2">Translate the segments one by one</a></li>
+		<li><a href="./InstantStart.html#4.2.3">Create the target documents</a></li></ul></li>
+	<li><a href="./InstantStart.html#4.3">Dealing with tagged text</a>
+		<ul><li><a href="./InstantStart.html#4.3.1">An example...</a></li></ul></li></ol></p>
+
+<p><a class="chapter" href="./UserInterface.html#5">User Interface</a>
+	<ol><li><a href="./UserInterface.html#5.1">Editor window</a></li>
+	<li><a href="./UserInterface.html#5.2">Match and glossary viewer</a></li>
+	<li><a href="./UserInterface.html#5.3">Project files window</a></li>
+	<li><a href="./UserInterface.html#5.4">Search window</a></li>
+	<li><a href="./UserInterface.html#5.5">Tag validation window</a></li>
+	<li><a href="./UserInterface.html#5.6">Help browser</a></li>
+	<li><a href="./UserInterface.html#5.7">Project properties window</a></li>
+	<li><a href="./UserInterface.html#5.8">Files filtering settings</a></li>
+	<li><a href="./UserInterface.html#5.9">Segmentation settings</a></li>
+	<li><a href="./UserInterface.html#5.10">Editing field options</a></li>
+	<li><a href="./UserInterface.html#5.11">Font settings</a></li>
+	<li><a href="./UserInterface.html#5.12">Menu items</a>
+		<ul><li><a href="./UserInterface.html#5.12.1">Project Menu</li>
+		<li><a href="./UserInterface.html#5.12.2">Edit Menu</li>
+		<li><a href="./UserInterface.html#5.12.3">Go to Menu</li>
+		<li><a href="./UserInterface.html#5.12.4">View Menu</li>
+		<li><a href="./UserInterface.html#5.12.5">Tools Menu</li>
+		<li><a href="./UserInterface.html#5.12.6">Options Menu</li>
+		<li><a href="./UserInterface.html#5.12.7">Help Menu</li></ul></li>
+	<li><a href="#5.13">Status bar</a></li></ol></p>
+
+<p><a class="chapter" href="./Segmentation.html#6">Basic Segmentation</a>
+	<ol><li><a href="./Segmentation.html#6.1">Segments</a></li>
+	<li><a href="./Segmentation.html#6.2">File Structure Segmentation</a>
+		<ul><li><a href="./Segmentation.html#6.2.1">Text Files</a></li>
+		<li><a href="./Segmentation.html#6.2.2">Java Resource Bundles</a></li>
+		<li><a href="./Segmentation.html#6.2.3">Tagged (Formatted) Files</a></li>
+		<li><a href="./Segmentation.html#6.2.4">(X)HTML Files</a></li>
+		<li><a href="./Segmentation.html#6.2.5">Spreadsheets, tables, visual presentation</a></li></ul></li></ol></p>
+
+<p><a class="chapter" href="./Translation.html#7">Translation Process</a>
+	<ol><li><a href="./Translation.html#7.1">Create a new project</a></li>
+		<ul><li><a href="./Translation.html#7.1.1">Project loading and files</a></li></ul></li>
+	<li><a href="./Translation.html#7.2">or Open an already existing project</a></li>
+	<li><a href="./Translation.html#7.3">Basics of OmegaT</a></li>
+	<li><a href="./Translation.html#7.4">Navigation</a></li>
+	<li><a href="./Translation.html#7.5">Editing</a></li>
+		<ul><li><a href="./Translation.html#7.5.1">Markers, edition and navigation</a></li></ul></li>
+	<li><a href="./Translation.html#7.6">Matches</a></li>
+	<li><a href="./Translation.html#7.7">Translated files</a></li>
+	<li><a href="./Translation.html#7.8">Editing field settings</a></li>
+	<li><a href="./Translation.html#7.9">Problems!</a></li></ol></p>
+
+<p><a class="chapter" href="./SaveRevComp.html#8">Save, Revise and Compile</a>
+	<ol><li><a href="./SaveRevComp.html#8.1">Save</a></li>
+	<li><a href="./SaveRevComp.html#8.2">Revision</a></li>
+	<li><a href="./SaveRevComp.html#8.3">Compilation</a></li>
+	<li><a href="./SaveRevComp.html#8.4">Precautions</a></li></ol></p>
+
+<li><a href="./SentSeg.html#9">Sentence Segmentation</a> <font color="red" size="-1">new! in 1.6</font></li>
+	<ol><li><a href="./SentSeg.html#9.1">Introduction</a></li>
+	<li><a href="./SentSeg.html#9.2">Rules Setup</a>
+		<ul><li><a href="./SentSeg.html#9.2.1">Sets of Rules</a></li>
+		<li><a href="./SentSeg#9.2.2">Simple examples</a></li></ul></li>	
+	<li><a href="./SentSeg.html#9.3">Regular Expressions to use in segmentation rules</a>
+		<ul><li><a href="./SentSeg.html#9.3.1">Short summary of regular-expression constructs</a></li></ul></li></ol>
+</p>
+
+<p><a class="chapter" href="./Searches.html#10">Searches: Keyword and Exact</a>
+	<ol><li><a href="./Searches.html#10.1">Summary</a>
+		<ul><li><a href="./Searches.html#10.1.1">Open a search window</a></li>
+		<li><a href="./Searches.html#10.1.2">Search a string</a></li>
+		<li><a href="./Searches.html#10.1.3">Options</a></li></ul></li>
+	<li><a href="./Searches.html#10.2">Exact Searches</a>
+		<ul><li><a href="./Searches.html#10.2.1">Wildcard characters</a></li>
+		<li><a href="./Searches.html#10.2.2">Exact search location</a></li></ul></li>
+	<li><a href="./Searches.html#10.3">Keyword Searches</a>
+		<ul><li><a href="./Searches.html#10.3.1">Keyword searches location</a></li></ul></li></ol></p>
+
+<p><a class="chapter" href="./Matches.html#11">Matches and Glossary items</a>
+	<ol><li><a href="./Matches.html#11.1">Matches: exact matches, fuzzy matches</a>
+		<ul><li><a href="./Matches.html#11.1.1">Types of matches</a></li>
+		<li><a href="./Matches.html#11.1.2">Using Matches in your work</a></li>
+		<li><a href="./Matches.html#11.1.3">Matches Options</a></li></ul></li>
+	<li><a href="./Matches.html#11.2">Glossary items</a></li></ol></p>
+
+<p><a class="chapter" href="./FilesEditingTagged.html#12">Tagged (Formatted) Files Text Editing</a>
+	<ol><li><a href="./FilesEditingTagged.html#12.1">Working with tags</a>
+		<ul><li><a href="./FilesEditingTagged.html#12.1.1">OpenDocument and OpenOffice.org File Tag Manipulation</a></li>
+		<li><a href="./FilesEditingTagged.html#12.1.2">HTML/XHTML File Tag Manipulation</a></li></ul></li>
+	<li><a href="./FilesEditingTagged.html#12.2">Tag Validation</a></li></ol></p>
+
+<li><a href="./Filters.html#13">File Filters</a> <font color="red" size="-1">new! in 1.4.5</font> </li>
+	<ol><li><a href="./Filters.html#13.1">Introduction</a>
+		<ul><li><a href="./Filters.html#13.1.1">File types</a></li>
+		<li><a href="./Filters.html#13.1.2">File encodings</a></li>
+		<li><a href="./Filters.html#13.1.3">Target file renaming</a></li></ul></li>
+	<li><a href="./Filters.html#13.2">File filter setup</a>
+		<ul><li><a href="./Filters.html#13.2.1">File filter dialog</a></li>
+		<li><a href="./Filters.html#13.2.2">Edit filter dialog</a></li>
+		<li><a href="./Filters.html#13.2.3">Add/edit pattern dialog</a></li></ul></li></ol></p>
+
+<p><a class="chapter" href="./FilesProjDirs.html#14">Project Files and Directories</a>
+	<ol><li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li></ol></p>
+
+<p><a class="chapter" href="./FilesSourceDoc.html#15">Source Document Files</a>
+	<ol><li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li></ol></p>
+
+<p><a class="chapter" href="./FilesTMGloss.html#16">Translation Memory and Glossary Files</a>
+	<ol><li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li></ol></p>
+
+<p><a class="chapter" href="./OOoOmegaT.html#17">OpenOffice.org and OmegaT</a>
+<br>./FilesODOOoSO.html: TO MERGE WITH "Source Files"  and OOo&OmT
+	<ol><li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li></ol></p>
+
+<p><a class="chapter" href="./Localizing.html#18">Localizing OmegaT</a>
+	<ol><li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li></ol></p>
+
+<p><a class="chapter" href="./Links.html#19">Useful links</a>
+	<ol><li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li></ol></p>
+</ul>
+</td>
+<td name="topics_a" id="topics_a">A</td><td>
+</td></tr>
+<tr><td name="topics_b" id="topics_b">B</td><td>
+</td></tr>
+<tr><td name="topics_c" id="topics_c">C</td><td>
+</td></tr>
+<tr><td name="topics_d" id="topics_d">D</td><td>
+</td></tr>
+<tr><td name="topics_e" id="topics_e">E</td><td>
+</td></tr>
+<tr><td name="topics_f" id="topics_f">F</td><td>
+</td></tr>
+<tr><td name="topics_g" id="topics_g">G</td><td>
+</td></tr>
+<tr><td name="topics_h" id="topics_h">H</td><td>
+</td></tr>
+<tr><td name="topics_i" id="topics_i">I</td><td>
+</td></tr>
+<tr><td name="topics_j" id="topics_j">J</td><td>
+</td></tr>
+<tr><td name="topics_k" id="topics_k">K</td><td>
+</td></tr>
+<tr><td name="topics_l" id="topics_l">L</td><td>
+</td></tr>
+<tr><td name="topics_m" id="topics_m">M</td><td>
+</td></tr>
+<tr><td name="topics_n" id="topics_n">N</td><td>
+</td></tr>
+<tr><td name="topics_o" id="topics_o">O</td><td>
+</td></tr>
+<tr><td name="topics_p" id="topics_p">P</td><td>
+</td></tr>
+<tr><td name="topics_q" id="topics_q">Q</td><td>
+</td></tr>
+<tr><td name="topics_r" id="topics_r">R</td><td>
+</td></tr>
+<tr><td name="topics_s" id="topics_s">S</td><td>
+</td></tr>
+<tr><td name="topics_t" id="topics_t">T</td><td>
+</td></tr>
+<tr><td name="topics_u" id="topics_u">U</td><td>
+</td></tr>
+<tr><td name="topics_v" id="topics_v">V</td><td>
+</td></tr>
+<tr><td name="topics_w" id="topics_w">W</td><td>
+</td></tr>
+<tr><td name="topics_x" id="topics_x">X</td><td>
+</td></tr>
+<tr><td name="topics_y" id="topics_y">Y</td><td>
+</td></tr>
+<tr><td name="topics_z" id="topics_z">Z</td><td>
+</td></tr>
+</table>
+
+</div>
+
+<div class="navbar-bottom">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+<tr><td width="7%" align="left" valign="center"><img src="OmegaT.png" alt="OmegaT Logo"></td>
+<td width="9%" align="left" valign="center"> &nbsp;</td>
+<td width="39%" align="left" valign="center"><b>Table of Contents</b></td>
+<td width="6%" align="left" valign="center"><b>Next</b></td>
+<td width="39%" align="left" valign="center"><a href="./Introduction.html">What is OmegaT</a></td></tr>
+</table>
+
+</div>
+
+</body>
+</html>

@@ -28,10 +28,11 @@
 <a name="9" />
 <h1 align="center" name="9" id="9">Sentence Segmentation</h1>
 
-	<ol><li><a href="#9.1">Introduction</a></li>
-	<li><a href="#9.2">Rules Setup</a></li>	
-	<li><a href="#9.3">Regular Expressions to use in segmentation rules</a></li></ol>
-
+<ol>
+<li><a href="#9.1">Introduction</a></li>
+<li><a href="#9.2">Rules Setup</a></li>	
+<li><a href="#9.3">Regular Expressions to use in segmentation rules</a></li>
+</ol>
 
 <p>After OmegaT has segmented the source file into logical units, for formatted files usually corresponding to paragraphs, it will further segment these blocks into sentences if you don't turn the Sentence Segmenting off. Generally speaking, OmegaT may segment the logical source file blocks into any segments you setup it to. However as <b>by default</b> OmegaT segments into sentences, we will call it <b>sentence</b> segmenting.</p>
 
@@ -48,7 +49,7 @@
 <p>Break rule example: <b>"Did it make sense? I was not sure."</b> can be segmented as two sentences after the "?". There should be a break rule for "<b>?</b>"</p>
 <p>Exception rule example: <b>"Who is afraid of Mrs. Woolf?"</b> cannot be segmented after the ".". There should be an exception rule for "<b>Mrs.</b>".</p>
 
-<p> <b>NEED TO REWRITE THIS PARAGRAPH ACCORDING TO THE FINAL DEFAULTS</b> <br>While the predefined break rules should be sufficient for most European languages and Japanese, more exception rules should probably be defined for the language you translate from, as it is obviosly impossible to predefine all possible exceptions for all possible languages.</p>
+<p>The predefined break rules should be sufficient for most European languages and Japanese, but we recommend to define more exception rules for the language you translate from, as it is obviosly impossible to predefine all possible exceptions for all possible languages.</p>
 
 <a name="9.2" />
 <h2 name="9.2" id="9.2">Rules Setup</h2>
@@ -58,38 +59,25 @@
 <a name="9.2.1" />
 <h3 name="9.2.1" id="9.2.1">Sets of Rules</h3>
 
-<p>Each language may use only one of the segmentation rule sets. The first set 
-with a matching Language Pattern is applied, so rules for a specific language
-should be higher than more general ones.</p>
+<p>All the segmentation rule sets with a matching Language Pattern are applied 
+in the given order of priority, so rules for specific language should be higher 
+than default ones.</p>
 
-<p>For example, rules for Canadian French (FR-CA) should be
-higher than rules for French (FR.*), and higher than Default (.*) ones.</p>
+<p>For example, rules for Canadian French (FR-CA) should be higher than rules 
+for French (FR.*), and higher than Default (.*) ones.</p>
+ 
+<p>Then while translating from Canadian French your project will use the rules defined for this language, the rules for French, and the Default rules in a correct order.</p>
 
-<p>Note, however, that while translating from Canadian French your project will use only the rules defined for this language, and will neither use the rules for French nor the Default ones.</p>
+<p>In order to create an empty set of rules, click <b>Add</b> in the upper half of the dialog. An empty line appears at the bottom of a table. Change the name of the rule set and the language pattern. Syntax of the language pattern conforms to regular expression syntax. See <a href="#9.3.1">Short summary of regular-expression constructs</a> below.</p>
 
-<p>In order to create an empty set of rules, click <b>Add</b> in the upper half
-of the dialog. An empty line appears at the bottom of a table. Change the name
-of the rule set and the language pattern. Syntax of the language pattern
-conforms to regular expression syntax. See <a href="#9.3.1">Short summary of regular-expression constructs</a> below.</p>
+<p>If your set of rules handles a language-country pair, we advise you to move it atop using <b>Move Up</b> button.</p>
 
-<p>If your set of rules handles a language-country pair, we advise you to move
-it atop using <b>Move Up</b> button.</p>
+<p>In order to edit a set of rules, simply click on it in a table, the rules of the set will appear in the bottom half of the window.</p>
 
-<p>In order to edit a set of rules, simply click on it in a table, the rules of
-the set will appear in the bottom half of the window.</p>
+<p>The Break/Exception checkbox determines whether it is a break rule (checkbox set) or an exception rule (checkbox unset). Two regular expressions Before and After specify what must be before and after some position so that it qualifies for exception rule or for break rule.</p>
 
-<p>The Break/Exception checkbox determines whether it is a break rule 
-(checkbox set) or an exception rule (checkbox unset). Two regular expressions 
-Before and After specify what must be before and after some position so that it 
-qualifies for exception rule or for break rule.</p>
-
-<p>The process of segmenting may be simplified to the following. Imagine a
-cursor moving from after the first to before the last symbol of the text.
-For each cursor position we take each rule in the given order and 
-try to apply the <b>Before</b> pattern to all the text that is on the left of a cursor and the <b>After</b> pattern to the text on the right so that they touch the cursor.<br>
-If the application of some rule is successful, for exception rules we do nothing
-but stop examining more rules, and for break rules we take the text on the left
-as a separate segment, for each position of the text (by position we understand a cursor between two symbols)</p>
+<p>The process of segmenting may be simplified to the following. Imagine a cursor moving from after the first to before the last symbol of the text. For each cursor position we take each rule in the given order and try to apply the <b>Before</b> pattern to all the text that is on the left of a cursor and the <b>After</b> pattern to the text on the right so that they touch the cursor.
+<br>If the application of some rule is successful, for exception rules we do nothing but stop examining more rules, and for break rules we take the text on the left as a separate segment, for each position of the text (by position we understand a cursor between two symbols).</p>
 
 <a name="9.2.2" />
 <h3 name="9.2.2" id="9.2.2">Simple examples</h3>
@@ -118,6 +106,9 @@ The first two examples are taken from the <b>Default</b> rules.</p>
 
 <table border="0" width="80%" cellpadding="1" cellspacing="0" summary="Regular expression constructs, and what they match">
 <tr bgcolor="#DDEEFF"><th width="10%" align="left" id="construct">Construct&nbsp;</th><th align="left">Matches</th></tr>
+<tr><th>&nbsp;</th></tr>
+<tr align="left"><th colspan="2" id="flags">Flags</th></tr>
+<tr><td><tt>(?i)</tt></td><td>Enables case-insensitive matching (by default, the pattern is case-sensitive).</td></tr>
 <tr><th>&nbsp;</th></tr>
 <tr><th align="left" colspan="2" id="characters">Characters</th></tr>
 <tr><td><b>x</b></td><td>The character <b>x</b>, except the following...</td></tr>

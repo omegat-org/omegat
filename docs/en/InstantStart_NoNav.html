@@ -1,45 +1,28 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 
-<!-- removed copyright info, put it on the front page instead -->
-
 <html>
 
 <head>
 <title>OmegaT: Instant Start</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="version" content="0.3.1">
-<meta name="changed" content="20051103">
+<meta name="copyright" content="Copyright (c) 2005 Samuel Murray, with contributions by Maxym Mykhalchuk">
 <link rel="stylesheet" type="text/css" href="./omegat.css">
 </head>
 
 <body lang="en" dir="LTR">
-
-<div class="navbar-top">
-<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-<tr><td align="left" valign="center" width="7%"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" alt="OmegaT Logo" border="0"></a></td>
-<td align="left" valign="center" width="9%"><b>Previous</b></td>
-<td align="left" valign="center" width="39%"><a href="./Important.html">Important Notes</a></td>
-<td align="left" valign="center" width="6%"><b>Next</b></td>
-<td align="left" valign="center" width="39%"><a href="./UserInterface.html">User Interface</a></td></tr>
-</table>
-</div>
-
-<div class="content">
-
-<a name="4" />
-<h1 align="center" name="4" id="4">Instant Start</h1>
+<hr>
+<h1 align="center">Instant Start</h1>
 
 <ol>
-<li><a href="#4.1">Briefly, how OmegaT works</a></li>
-<li><a href="#4.2">How to translate using OmegaT</a></li>
-<li><a href="#4.3">Dealing with tagged text</a></li>
+<li>Briefly, how OmegaT works</li>
+<li>How to translate using OmegaT</li>
+<li>Dealing with tagged text</li>
 </ol>
 
+<p><b>This instant start guide covers only the very basics.  Ideally, all users should read the OmegaT User Manual to familiarise themselves with everything OmegaT has to offer.</b></p>
 
-<p><b>This instant start guide covers only the very basics.  Ideally, all users should read this manual to familiarise themselves with everything OmegaT has to offer.</b></p>
-
-<a name="4.1" />
-<h2 name="4.1" id="4.1">Briefly, how OmegaT works</h2>
+<h2>Briefly, how OmegaT works</h2>
 
 <p>OmegaT consists of two windows, which you can independently move around on your screen.  The left-hand window is the edit window where you will type your translation.  The right-hand window is the Match/Glossary Viewer, where fuzzy matches (top frame) and glossary matches (bottom frame) will be displayed.</p>
 
@@ -47,11 +30,9 @@
 
 <p>OmegaT organises your translation work into so-called translation projects. For each project, OmegaT creates a set of folders into which you should copy the source documents, any glossaries and existing translation memories. OmegaT also creates a  folder which will contain the translated documents.</p>
 
-<a name="4.2" />
-<h2 name="4.2" id="4.2">How to translate using OmegaT</h2>
+<h2>How to translate using OmegaT</h2>
 
-<a name="4.2.1" />
-<h3 name="4.2.1" id="4.2.1">Create and open a new project</h3>
+<h3>1. Create and open a new project</h3>
 
 <p>Select <b>Project -&gt; New...</b> from the menu.</p>
 
@@ -71,8 +52,7 @@
 
 <p>Make sure <b>View -&gt; Project Files...</b> is enabled, and then select <b>Project -&gt; Reload</b> to view a list of all files to be translated.  OmegaT loads the first file on the project list by default.</p>
 
-<a name="4.2.2" />
-<h3 name="4.2.2" id="4.2.2">Translate the segments one by one</h3>
+<h3>2. Translate the segments one by one</h3>
 
 <p>For the current segment, OmegaT highlights the source text in green and displays a copy of the source text between two tags &lt;segment 0001&gt; and &lt;end segment&gt;.  Type your translation between the two tags by overwriting the text.</p>
 
@@ -91,8 +71,7 @@
 
 <p>If you want OmegaT not to copy the source text into the target field, or if you'd prefer matches with a high fuzzy percentage to be automatically inserted into the target field, you can set these options using <b>Options -&gt; Workflow...</b>.
 
-<a name="4.2.3" />
-<h3 name="4.2.3" id="4.2.3">Create the target documents</h3>
+<h3>3. Create the target documents</h3>
 
 <p>After the translation is done (or at any time requested by you), OmegaT can create the target documents by rebuilding the source document using the segments from the translation memory.</p>
 
@@ -102,15 +81,13 @@
 
 <p>The translated files can now be found in the project's "target" directory.</p>
 
-<a name="4.3" />
-<h2 name="4.3" id="4.3">Dealing with tagged text</h2>
+<h2>Dealing with tagged text</h2>
 
 <p>In OpenDocument files, OpenOffice.org documents or HTML files, certain words within a sentence often have special formatting of their own.  For example, a sentence may be in italic font but a word in the middle of the sentence might be in bold font.</p>
 
 <p>OmegaT marks up these format changes using special tags, which you must transfer to the translated version of the text.  See the OmegaT User Manual for advanced tag editing.</p>
 
-<a name="4.3.1" />
-<h3 name="4.3.1" id="4.3.1">An example...</h3>
+<h3>An example...</h3>
 
 <p>In these examples we've highlighted the tags in <font COLOR=#ff0000>red</font> to make them easier to see, but in OmegaT they will not be highlighted.</p>
 
@@ -132,17 +109,6 @@
 
 <p>OmegaT doesn't automatically detect mistakes in a tagged translation.  Before you deliver the target document to your client, you should check your tags for errors, by selecting <b>Tools -&gt; Validate Tags</b> from the menu.  Ideally you should open the document in its associated viewer or editor to double-check the formatting.</p>
 
-</div>
-
-<div class="navbar-bottom">
-<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-<tr><td align="left" valign="center" width="7%"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" alt="OmegaT Logo" border="0"></a></td>
-<td align="left" valign="center" width="9%"><b>Previous</b></td>
-<td align="left" valign="center" width="39%"><a href="./Important.html">Important Notes</a></td>
-<td align="left" valign="center" width="6%"><b>Next</b></td>
-<td align="left" valign="center" width="39%"><a href="./UserInterface.html">User Interface</a></td></tr>
-</table>
-</div>
-
+<hr>
 </body>
 </html>

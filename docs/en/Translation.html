@@ -1,173 +1,188 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
-  "http://www.w3.org/TR/html4/strict.dtd">
-  
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<!-- included "Editing.html" and "Navigation.html" for information redundancy and clarity, a part of "Matches.html" and a part of "InstantTutorial.html" for completeness, included Workflow options info for updateness -->
+
 <html>
-  <head>
-    <title>OmegaT: Translation Process</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="generator" content="Kate (Linux)">
-    <meta name="changed" content="20050513">
-    <link rel="stylesheet" type="text/css" href="omegat.css">
-  </head>
+<head>
+<title>OmegaT: Translation Process</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="generator" content="Kate (Linux)">
+<meta name="changed" content="20051001">
+<link rel="stylesheet" type="text/css" href="./omegat.css">
+</head>
 
-  <body lang="en" dir="LTR">
+<body lang="en" dir="LTR">
 
-    <div class="navbar-top">
-    
-    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-      <tr>
-        <td width="7%" align="left" valign="center">
-          <a href="OmegaT.html" title="Table of Contents">
-            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
-          </a>
-        </td>
-        <td width="9%" align="left" valign="center">
-          <b>Previous</b>
-        </td>
-        <td width="39%" align="left" valign="center">        
-          <a href="Segmentation.html">Segmentation</a>
-        </td>
-        <td width="6%" align="left" valign="center">
-          <b>Next</b>
-        </td>
-        <td width="39%" align="left" valign="center">
-          <a href="Editing.html">Editing Functions</a>
-        </td>
-      </tr>
-    </table>   
-    </div>
-    
-    <div class="content">
-   
-    <h1 align="center">Translation Process</h1>
+<div class="navbar-top">
 
-    <p>
-      To translate text just overwrite it in the active segment's editing field. 
-    </p>
+<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td width="9%" align="left" valign="center"><b>Previous</b></td>
+<td width="39%" align="left" valign="center"><a href="./Segmentation.html">Basic Segmentation</a></td>
+<td width="6%" align="left" valign="center"><b>Next</b></td>
+<td width="39%" align="left" valign="center"><a href="./SaveRevComp.html">Save, Revise, Compile</a></td></tr>
+</table>
 
-    <p>
-      Press 
-      
-      <i>&lt;Enter&gt;</i>
-      
-      or 
-      
-      <i>&lt;Ctrl+N&gt;</i>
-      
-      to accept a translation and proceed to the next segment. If  
-      
-      <i>&lt;Enter&gt;</i>
-      
-      is needed for another purpose, like using it in a tool for the input of 
-      complex characters, it is possible to use 
-      
-      <i>&lt;Tab&gt;</i>
-      
-      as an alternative. To activate this functionality, enable the 
-      
-      <i>TAB Advance</i> 
-       
-      menu item checkbox in the 
-      
-      <i>Settings</i>
-      
-      menu.
-    </p>
-    
-    <p>
-      When a project is initially opened the the active segment defaults to the 
-      first segment of the first file in the 
-      
-      <i>Project Files</i>
-       
-      list. To jump quickly to the next untranslated segment of the project, press
-      
-      <i>&lt;Ctrl+U&gt;</i>
-      
-      or choose the
-      
-      <i>Next Untranslated Segment</i> 
-      
-      menu item from the
-      
-      <i>Edit</i> 
-      
-      menu.
-    </p>
-    
-    <p>
-      In some case the source and target segments will be the same even after
-      translation. In such cases OmegaT will consider these segments as untranslated
-      since there is no way to know if the segments' translations have been completed. 
-      Segments are considered to be untranslated when source and target segments
-      are the same. 
-    </p>
-    
-    <p>
-      Create translated files at anytime during the translation process by compiling 
-      the project documents with the 
-      
-      <i>Create Target Documents</i> 
-      
-      menu item from the 
-      
-      <i>File</i> 
-      
-      menu. It is not necessary to have all files and segments translated before
-      using this function. The translated segments will be written to the files
-      and any remaining untranslated segments will be written out untouched. This 
-      can be useful, for example, to perform a partial review of the translation. 
-      The target files are created in the 
-      
-      <b>/target</b> 
-      
-      subdirectory of the project (for details on files and directories see 
-      
-      <a href="FilesProjDirs.html">Project Files and Directories</a>).       
-    </p>
- 
-    <p>
-      Please be aware that modifying target files in an outside application without
-      updating the segments from within OmegaT is dangerous because the next compilation
-      performed in OmegaT will only take into consideration modifications made
-      internally. Any changes made externally will be overwritten and lost in 
-      this case. If the translation of the target files is not satisfactory, redo 
-      the translation according to the previously prescribed procedure (see also 
-      
-      <a href="SaveRevComp.html">Translation: Save, Revision, and Compilation</a>, 
-      <a href="HintsTips.html">General Hints and Tips</a> 
-      
-      and 
-      
-      <a href="Shortcuts.html">Keyboard Shortcuts</a>). 
-    </p>
-    </div>
-    
-    <div class="navbar-bottom">
+</div>
 
-    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-      <tr>
-        <td width="7%" align="left" valign="center">
-          <a href="OmegaT.html" title="Table of Contents">
-            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
-          </a>
-        </td>
-        <td width="9%" align="left" valign="center">
-          <b>Previous</b>
-        </td>
-        <td width="39%" align="left" valign="center">        
-          <a href="Segmentation.html">Segmentation</a>
-        </td>
-        <td width="6%" align="left" valign="center">
-          <b>Next</b>
-        </td>
-        <td width="39%" align="left" valign="center">
-          <a href="Editing.html">Editing Functions</a>
-        </td>
-      </tr>
-    </table>   
-    </div>
-        
-  </body>
+<div class="content">
+
+<a name="7" />
+<h1 align="center" name="7" id="7">Translation Process</h1>
+
+	<ol><li><a href="#7.1">Create a new project</a></li>
+	<li><a href="#7.2">or Open an already existing project</a></li>
+	<li><a href="#7.3">Basics of OmegaT</a></li>
+	<li><a href="#7.4">Navigation</a></li>
+	<li><a href="#7.5">Editing</a></li>
+	<li><a href="#7.6">Matches</a></li>
+	<li><a href="#7.7">Translated files</a></li>
+	<li><a href="#7.8">Editing field settings</a></li>
+	<li><a href="#7.9">Problems!</a></li></ol>
+
+
+<a name="7.1" />
+<h2 name="7.1" id="7.1">Create a new project</h2>
+
+<p>Select <b>Project -&gt; New...</b> from the menu.</p>
+
+<p>Navigate to the folder where you'd like to save the project files, and type in a name for the translation project.  This name will also be the name of the project folder, and all project files will be stored in that folder.</p>
+
+<p>OmegaT will prompt you to change or accept the project folders to be created.</p>
+
+<p>You may simply accept the location of the subfolders (directories), but you should make sure that source and target language codes are correct.  Select the language or language-and-country codes from the dropdown-list or type them in by hand.  Make a mental note of the location of the "target" subfolder, for this is where target documents will be exported to.</p>
+
+<p>If you want OmegaT to segment by sentence instead of by "paragraph", it's a good idea to double-check the Segmentation Rules.</p>
+
+<p>When you click OK to accept the project setup, OmegaT will prompt you to import source documents.  You can import individual files, but you can also import entire directory trees (with all files in all subfolders).  If you've accidentally imported the wrong documents or too many documents, you can simply remove them from the "source" folder of your OmegaT project.</p>
+
+<p>Remember, OmegaT can only translate OpenDocument files, OpenOffice.org documents, HTML, plaintext and certain Java files.  Other files will be ignored by OmegaT.</p>
+
+<p>Make sure <b>View -&gt; Project Files...</b> is enabled, and then select <b>Project -&gt; Reload</b> to view a list of all files to be translated.  OmegaT loads the first file on the project list by default.</p>
+
+<a name="7.1.1" />
+<h3 name="7.1.1" id="7.1.1">Project loading and files</h3>
+
+<p>If OmegaT indicates that a newly created project is empty after the source files for translation have been copied into the <b>/source</b> directory, then the files are probably in an unsupported format (<b>MS Word</b>. etc.). All files must be converted to a supported format, such as OpenDocument text or OpenOffice.org writer, for OmegaT to work with them. See <a href="./FilesSourceDoc.html#">Source Document Files</a> for details.</p>
+
+<p>If the original source documents intended for translation are in an unsupported file format remember to convert them to OpenDocument or other supported format and place them in the <b>/source</b> sub-directory of the project. It is usually only necessary to place the converted source documents in this directory.</p>
+
+<p>The originals can be kept in a different directory. Any documents that are included in this directory that are in an unsupported format will be copied to the <b>/target</b> directory without modification when the project is compiled.</p>
+
+<p>If you cannot open a translation memory received from an external source (colleague, customer, etc.) it may be in an unsupported TM format. If it is a TMX file (file extension <b>.tmx</b>), it is probably a higher version than currently supported. OmegaT only supports <b>TMX Version 1.1 (Level 1)</b> presently. The most recent TMX version is 1.4b. See <a href="FilesTMGloss.html#16">Translation Memory and Glossary Files</a> for more information.<p>
+
+<a name="7.2" />
+<h2 name="7.2" id="7.2">or Open an already existing project</h2>
+
+<p>Select <b>Project -&gt; Open...</b> from the menu.</p>
+
+<p>Navigate to the folder where you'll see the OmegaT icon associated to a folder named after your project. Click on that folder. The project will load automatically.</p>
+
+<a name="7.3" />
+<h2 name="7.3" id="7.3">Basics of OmegaT</h2>
+
+<p>To translate text just overwrite it in the active segment's editing field.</p>
+<p>Press <b>&lt;Enter&gt;</b>, <b>&lt;Return&gt;</b> or <b>&lt;Ctrl+N&gt;</b> to accept a translation and proceed to the next segment. It is possible to use <b>&lt;Tab&gt;</b> as an alternative. To activate this functionality, enable the <b>Use TAB to Advance</b> menu item in the <b>Options</b> menu.</p>
+<p>When a project is opened the active segment defaults to the first segment of the first file in the <b>Project Files</b> list. To jump quickly to the next untranslated segment of the project, press <b>&lt;Ctrl+U&gt;</b> or choose the <b>Next Untranslated Segment</b> menu item from the <b>Edit</b> menu.</p>
+
+<p>Move to the:</p>
+
+<ul><li>next segment by pressing <b>&lt;Enter&gt;</b>, <b>&lt;Return&gt;</b>, <b>&lt;Ctrl+N&gt;</b>, or <b>&lt;Tab&gt;</b>
+<br> (Tab Advance must be enabled in the <b>Options</b> menu for use);</li>
+<li>previous segment by pressing <b>&lt;Ctrl+P&gt;</b>;</li>
+<li>next untranslated segment by pressing <b>&lt;Ctrl+U&gt;</b>.</li></ul>
+
+<p>In some case the source and target segments will be the same even after translation. In such cases OmegaT will consider these segments as untranslated since there is no way to know if the segments' translations have been completed. Segments are considered to be untranslated when source and target segments are the same. Such segments will nevertheless be present in the final translation.</p>
+
+<p>Open an appropriate application with the original source text in it to see the layout of text during translation.</li>
+
+<a name="7.4" />
+<h2 name="7.4" id="7.4">Navigation</h2>
+
+<p>Movement to a different segment within the same file is accomplished by dragging the vertical scroll bar of the window up or down, then mouse click inside the desired segment to activate it.</p>
+<p>To access a different file within the same project, select it in the <b>Project Files</b> window by clicking on the filename of the desired file to open in the editor. By default, the first segment at the beginning of the file will be the active one. Open the project files list window with <b>File</b> &gt; <b>Project Files...</b>, if it is not already visible.</p>
+<p>To return to a segment later, insert a marker in the segment. Then it will be possible to find it using the search functionality. It is a good idea to include the segment number with the marker. The reason being that if the segment is a 100% exact match to other segments the marker will be reproduced in all similar segments due to automatic insertion. The only way to locate the right segment is to compare the marker, which now includes a number, to the active segment number (see <a href="./Searches.html">Searches: Keyword and Exact</a>).</p>
+<p>See also: <a href="./HintsTips.html">General Hints and Tips</a>.</p>
+
+<a name="7.5" />
+<h2 name="7.5" id="7.5">Editing</h2>
+
+<p>OmegaT's editing functions are only applicable to the target text of the active segment. This is the only text that may be edited at any one time. However, text in any segment outside the active one can be marked, copied, or pasted.</p>
+<p>The usual mouse operations, cursor keys, cursor key shortcuts, and shortcuts (select, cut, and paste) are supported. These are likely to vary between operating systems though.</p>
+<p><b>Undo</b> and <b>Redo</b> operations are possible with <b>&lt;Ctrl-Z&gt;</b> and <b>&lt;Ctrl-Y&gt;</b>, respectively.</p>
+
+<p>When working on a formatted file, the editor field will contain OmegaT specific tags that refer to the file's internal formatting structure.</p>
+
+<p>It is not possible to add or change text formatting during translation. The formatting of the underlying structured file format, such as OpenDocument, OpenOffice.org, StarOffice, XHTML, or HTML (the only ones supported at present), is retained. Only a limited degree of control can be exercised over it. Refer to <a href="./FilesEditingTagged.html">Tagged (Formatted) Files Text Editing</a> for details.</p>
+
+<a name="7.5.1" />
+<h3 name="7.5.1" id="7.5.1">Markers, edition and navigation</h3>
+
+<p>One way to add formatting is to insert a marker in the text, where formatting is desired (using &quot;##&quot;, for instance) and then format the text in another application (e.g. OpenOffice.org) using the target documents that result from project compilation.</p>
+
+<p>After moving to a segment in a different part of a large project, the location of the previous segment that was being worked on may be difficult to locate in order to return to it. To enable quick segment location, place a unique marker in the current working segment, such as <b>'###xxxx'</b> (where <b>xxxx</b>. is a unique value, like the current segment number) then press <b>&lt;Enter&gt;</b>, to confirm the change to the segment before moving to a different location. A search for the unique marker will cause it to be the active segment again.</li>
+
+<p>To insert a marker in your translation, to indicate an unresolved query or for some other reason, do not use <b>?</b>. or <b>*</b>. These characters are used in searches (as wildcards) and are therefore impossible to find with <b>&lt;Ctrl-F&gt;</b>.</p>
+
+
+<a name="7.6" />
+<h2 name="7.6" id="7.6">Matches</h2>
+
+<p>When a segment becomes active, OmegaT scans the current project translation memory file and any other translation memories found in the /tm directory of the project for matches.</p>
+
+<p>If an exact match is found in a project's TMX it is automatically inserted into the target text field of the active segment and any other matching segments in the same document. It must be understood that close matches such as "Hi!" and "Hi" are 100% matches (the words are the same), but not exact matches and thus will not be inserted automatically. The best five fuzzy matches that are located will be displayed in the Matches pane of the Match and Glossary Viewer window.</p>
+
+<p>If there are fuzzy matches for the current segment it is possible to:</p>
+
+<ul><li>select the most useful fuzzy with <b>&lt;Ctrl-(nb)&gt;</b> where (nb) is the number of the fuzzy as displayed in the <b>Match and Glossary Viewer</b></li>
+<li>insert the selected fuzzy match in the editor field with <b>&lt;Ctrl-I&gt;</b></li>
+<li>rewrite the whole field with the selected fuzzy match with <b>&lt;Ctrl-R&gt;</b></li></ul>
+
+<a name="7.7" />
+<h2 name="7.7" id="7.7">Editing Field Settings</h2>
+
+<p>Starting with OmegaT 1.6 you can configure the contents of the target editing field.<p>
+
+<p>The <b>Option</b> menu item <b>Editing field</b> allows the following configurations:
+
+<dl><dt><b>Contents of the target field</b></dt><dd>You are presented with a 3 radio buttons set with possible values:
+<ul><li>Leave the segment empty</li>
+<li>Source text</li>
+<li>Best fuzzy match</li></ul>
+<b>Source text</b> was the default behavior until OmegaT 1.6. You can now choose either an empty editing field or a field with a fuzzy match inserted.<br>
+If you select <b>Best fuzzy match</b>, only the best fuzzy match with a similarity score above the set level will be inserted. Fuzzy matches below this level, even if present, will not be inserted and the field will be left empty.</dd>
+<dt><b>Minimal similarity</b></dt><dd>This setting allows you to set the level from which OmegaT considers a fuzzy valid for insertion in the target field. The highest the number is, the most similar the matched segment will be the current source segment.</dd>
+<dt><b>Prefix</b></dt><dd>To make sure you notice the automatic insertion of a "best match" in your target field, OmegaT inserts a string at the beginning of the best match. You can set the value of the string here but it cannot be set to be empty. Since the best match is always selected by default (it is the first one), you can use <b>Ctrl+R</b> to rewrite the automatically inserted string with the match itself, which will remove the "best fuzzy" prefix part.</dd>
+<dt>Allow target to be equal to source</dt><dd>This setting allows you to create translation units with the target part equal to the source part. This can be useful when a segment needs not be translated but you still want to insert it into the translation memory. Default behavior is to consider segments where target is identical to source as untranslated. See <a href="#7.3">Basics of OmegaT</a> above.</dd></dl>
+
+<a name="7.8" />
+<h2 name="7.8" id="7.8">Translated files</h2>
+
+<p>Create translated files at anytime during the translation process by compiling the project documents with the <b>Create Target Documents</b> menu item from the <b>Project</b> menu. It is not necessary to have all files and segments translated before using this function. The translated segments will be written to the files and any remaining untranslated segments will be written out untouched.</p>
+
+<p>This can be useful, for example, to perform a partial review of the translation. The target files are created in the <b>/target</b> subdirectory of the project (for details on files and directories see <a href="./FilesProjDirs.html">Project Files and Directories</a>).</p>
+<p>Any changes made externally to the files in <b>/target</b> will be overwritten and lost at the next creation. If the translation of the target files is not satisfactory, redo the translation from within OmegaT (see also <a href="./SaveRevComp.html">Translation: Save, Revision, and Compilation</a>, <a href="./HintsTips.html">General Hints and Tips</a> and <a href="./Shortcuts.html">Keyboard Shortcuts</a>).</p>
+
+<a name="7.9" />
+<h2 name="7.9" id="7.9">Problems!</h2>
+<p><b>Errors:</b> in general, if errors or program bugs are encountered or suspected there is a log file (<b>log.txt</b>. in the root directory of a project that can be checked. Errors and bugs can be reported to the users group or development team. See <a href="./Important.html#3">Important Notes</a> for more information.</p>
+
+</div>
+
+<div class="navbar-bottom">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td width="9%" align="left" valign="center"><b>Previous</b></td>
+<td width="39%" align="left" valign="center"><a href="./Segmentation.html">Basic Segmentation</a></td>
+<td width="6%" align="left" valign="center"><b>Next</b></td>
+<td width="39%" align="left" valign="center"><a href="./SaveRevComp.html">Save, Revise, Compile</a></td></tr>
+</table>
+
+</div>
+
+</body>
 </html>
 
+	add mini TOC
+	merge "general hint and tips" info where relevant.

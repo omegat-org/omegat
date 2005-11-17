@@ -1,176 +1,104 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
-  "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<!-- edited for clarity and to reflect the current situation -->
 
 <html>
-  <head>
-    <title>OmegaT: Segmentation</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="generator" content="Kate (Linux)">
-    <meta name="changed" content="20050513">
-    <link rel="stylesheet" type="text/css" href="omegat.css">
-  </head>
-  
-  <body lang="en" dir="LTR">
+<head>
+<title>OmegaT: Segmentation</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="changed" content="20051103">
+<link rel="stylesheet" type="text/css" href="./omegat.css">
+</head>
 
-    <div class="navbar-top">
-    
-    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-      <tr>
-        <td width="7%" align="left" valign="center">
-          <a href="OmegaT.html" title="Table of Contents">
-            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
-          </a>
-        </td>
-        <td width="9%" align="left" valign="center">
-          <b>Previous</b>
-        </td>
-        <td width="39%" align="left" valign="center">        
-          <a href="UserInterface.html">User Interface</a>
-        </td>
-        <td width="6%" align="left" valign="center">
-          <b>Next</b>
-        </td>
-        <td width="39%" align="left" valign="center">
-          <a href="Translation.html">Translation Process</a>
-        </td>
-      </tr>
-    </table>
-    </div>
-    
-    <div class="content">
+<body lang="en" dir="LTR">
 
-    <h1 align="center">Segmentation</h1>
+<div class="navbar-top">
 
-    <p>
-      When a project is opened the text goes through a pre-segmentation process 
-      before being displayed in the editor window. During this process segment 
-      boundaries are set and cannot be changed afterwards from within OmegaT 
-      (during translation). 
-    </p>
+<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td width="9%" align="left" valign="center"><b>Previous</b></td>
+<td width="39%" align="left" valign="center"><a href="./UserInterface.html">User Interface</a></td>
+<td width="6%" align="left" valign="center"><b>Next</b></td>
+<td width="39%" align="left" valign="center"><a href="./Translation.html">Translation Process</a></td></tr>
+</table>
 
-    <p>
-      If bad segmentation occurs in a file, close the project, modify the file
-      responsible, and then reopen the project.
-    </p>
+</div>
 
-    <p>
-      Segmentation in OmegaT depends on the file types in a project. 
-    </p>
-    
-    <h3>Text Files</h3>
+<div class="content">
 
-    <p>
-      Segmentation for text files in OmegaT occurs at line breaks. Line breaks 
-      are sometimes found at the end of sentences and sometimes at the end of paragraphs.
-    </p>
-    
-    <p>
-      Paragraph-level segments, sentence-level segments, or segments that include 
-      parts of sentences will be created depending upon how your text file is formatted.
-      Therefore, it is possible to force segmentation at any level desired by the
-      insertion of line breaks in a file before starting work on a project.
-    </p>
-    
-    <p>
-      It could be worthwhile to edit source text prior to opening a project if it 
-      contains manual line breaks, carriage returns, or other formatting at 
-      inconvenient locations which may lead to bad segmentation or a disorganized
-      presentation. An external text editor or wordprocessor (e.g. OpenOffice.org) 
-      can be used for this purpose. To see any changes made in this way the project
-      must be reloaded.
-    </p>
-   
-    <h3>Tagged (Formatted) Files</h3>
+<a name="6" />
+<h1 align="center" name="6" id="6">Basic Segmentation</h1>
 
-    <p>
-      Relevant tagged files in OmegaT include: HTML, XHTML, OpenDocument, OpenOffice.org, 
-      and StarOffice. In general, these files contain two types of tags:
-    </p>
-    
-    <ul>
-      <li>
-        in line&#8211;usually defines the style of the text;
-      </li>
-      <li>   
-        block level&#8211;usually describes its logical structure.
-      </li>
-    </ul>  
+	<ol><li><a href="#6.1">Segments</a></li>
+	<li><a href="#6.2">File Structure Segmentation</a></li></ol>
 
-    <p>
-      Segmentation in formatted files occurs at block level tags.
-    </p>
+<a name="6.1" />
+<h2 name="6.1" id="6.1">Segments</h2>
 
-    <p>
-      To use sentence level segmentation in tagged files there are OpenOffice.org 
-      conversion macros available. These macros convert sentences (stylistic units)
-      in OpenDocument/OpenOffice.org files to paragraphs (logical units) so that 
-      when a file is opened in OmegaT it is segmented by sentence instead of by
-      paragraph. Go to the website (http://www.omegat.org/omegat/omegat.html) to
-      download them.
-      
-      <!--<a href="http://www.omegat.org/omegat/omegat.html">OmegaT</a>-->       
-    </p>
-    
-    <h3>Other File Types</h3>
+<p>Translation memory tools work with textual units called segments. There are multiple ways to segment a text.</p>
 
-    <p>
-      In addition to text files and tagged files, OmegaT 1.4.4 also supports Java 
-      Resource Bundle files. These files use one line per language item (character
-      string) to be translated. The segmentation is very similar to that of text
-      files, except that there is no need to modify the file's formatting.
-    </p>
+<p>OmegaT first parses the text for structure-level segmentation. During this process it is only the structure of the source file that is used to produce segments.</p>
 
-    <h3>Notes</h3>
+<p>Starting from version 1.6, OmegaT may segment by sentence. More about it in <a href="./SentSeg.html">Sentence Segmentation</a>. Sentence segmentation takes place after structure-level segmentation.</p>
 
-    <p>
-      It was previously believed, and indicated in older versions of this manual,
-      that OmegaT segments by the paragraph. This is incorrect. The logical structure
-      of a file determines how segmentation is delimited. Also note that punctuation
-      marks (. ! ; and so on) are not considered delimiters.
-    </p>
-    
-    <p>  
-      The context used in regard to segmentation is only applicable to written
-      text. It cannot be taken to apply to elements of spreadsheets, tables, visual
-      presentations, or other non-textual formats. Text elements in a spreadsheet, 
-      a table or a visual presentation, among other documents a translator usually 
-      works with, are logically structured at what CAT tool users call the "sentence"
-      level. In such a context, OmegaT's segmentation will reflect the original 
-      sentence level structure. For such documents, very common in the translation
-      industry, distinction between paragraph and sentence is not relevant anymore.
-    </p>
-    
-    <p>
-      If the segmentation of a file is not satisfactory it will be necessary to 
-      alter it outside of OmegaT before working on a project.
-    </p>   
-    </div>
-            
-    <div class="navbar-bottom">
+<p>Segments created during either process cannot be changed (split or merged) during translation.</p>
 
-    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-      <tr>
-        <td width="7%" align="left" valign="center">
-          <a href="OmegaT.html" title="Table of Contents">
-            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
-          </a>
-        </td>
-        <td width="9%" align="left" valign="center">
-          <b>Previous</b>
-        </td>
-        <td width="39%" align="left" valign="center">        
-          <a href="UserInterface.html">User Interface</a>
-        </td>
-        <td width="6%" align="left" valign="center">
-          <b>Next</b>
-        </td>
-        <td width="39%" align="left" valign="center">
-          <a href="Translation.html">Translation Process</a>
-        </td>
-      </tr>
-    </table>
-    </div>
-            
-  </body>
+<p>If you are not satified with the segmentation you will need to either modify the file externally and/or to modify the sentence segmentation rules. Once this is done you will need to reload the project for your modifications to be taken into account.
+
+<a name="6.2" />
+<h2 name="6.2" id="6.2">File Structure Segmentation</h2>
+
+<a name="6.2.1" />
+<h3 name="6.2.1" id="6.2.1">Text Files</h3>
+
+<p>Segmentation for text files in OmegaT occurs at line breaks. Line breaks are sometimes found at the end of sentences and sometimes at the end of paragraphs.</p>
+
+<p>Paragraph-level segments, sentence-level segments, or segments that include parts of sentences will be created depending upon how your text file is formatted. Therefore, it is possible to force segmentation at any level by editing the line breaks in a file.</p>
+
+<p>Don't forget to <b>reload</b> your project once you have modified your files.</p>
+
+<a name="6.2.2" />
+<h3 name="6.2.2" id="6.2.2">Java Resource Bundles</h3>
+
+<p>Since 1.4.4 OmegaT supports Java Resource Bundle files. These files use one line per language item (character string) to be translated. The segmentation is very similar to that of text files, except that it is not possible to modify the segment boundaries.</p>
+
+<a name="6.2.3" />
+<h3 name="6.2.3" id="6.2.3">Tagged (Formatted) Files</h3>
+
+<p>Relevant tagged files in OmegaT include: HTML, XHTML, OpenDocument, OpenOffice.org, and StarOffice. In general, these files contain two types of tags:</p>
+
+<ul>
+<li>in line&#8212;usually defines the style of the text;</li>
+<li>block level&#8212;usually describes its logical structure.</li>
+</ul>  
+
+<p>Segmentation in formatted files occurs at block level tags.</p>
+
+<a name="6.2.4" />
+<h3 name="6.2.4" id="6.2.4">(X)HTML Files</h3>
+
+<p>Since version 1.6, OmegaT parses the internals of the (X)HTML file and extracts parts of the code that do not appear on the screen but that still need to be translated.</p>
+
+<p>Typically this includes string data of human readable attributes like: <b>abbr</b>, <b>alt</b> to offer an alternative textual description of a picture, <b>content</b>, <b>href</b>, <b>hreflang</b>, <b>lang</b> to describe the file language, <b>src</b>, <b>summary</b>, <b>title</b> and <b>value</b>. Such strings appear as one segment.
+
+<a name="6.2.5" />
+<h3 name="6.2.5" id="6.2.5">Spreadsheets, tables, visual presentation</h3>
+
+<p>Text elements in a spreadsheet, a table or a visual presentation, among other documents a translator usually works with, will be segmented according to the object (cell etc.) that contains them.</p>
+
+</div>
+
+<div class="navbar-bottom">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td width="9%" align="left" valign="center"><b>Previous</b></td>
+<td width="39%" align="left" valign="center"><a href="./UserInterface.html">User Interface</a></td>
+<td width="6%" align="left" valign="center"><b>Next</b></td>
+<td width="39%" align="left" valign="center"><a href="./Translation.html">Translation Process</a></td></tr>
+</table>
+
+</div>
+
+</body>
 </html>
-

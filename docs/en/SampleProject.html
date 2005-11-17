@@ -1,347 +1,84 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
-  "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 
 <html>
-  <head>
-    <title>OmegaT: Sample Project</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="generator" content="Kate (Linux)">
-    <meta name="changed" content="20050607">
-    <link rel="stylesheet" type="text/css" href="omegat.css">
-  </head>
+<head>
+<title>OmegaT: Sample Project</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="changed" content="20051001">
+<link rel="stylesheet" type="text/css" href="./omegat.css">
+</head>
 
-  <body lang="en" dir="LTR">
+<body lang="en" dir="LTR">
 
-    <div class="navbar-top">
-    
-    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-      <tr>
-        <td width="7%" align="left" valign="center">
-          <a href="OmegaT.html" title="Table of Contents">
-            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
-          </a>
-        </td>
-        <td width="9%" align="left" valign="center">
-          <b>Previous</b>
-        </td>
-        <td width="39%" align="left" valign="center">        
-          <a href="InstantStart.html">Instant Start tutorial</a>
-        </td>
-        <td width="6%" align="left" valign="center">
-          <b>Next</b>
-        </td>
-        <td width="39%" align="left" valign="center">
-          <a href="UserInterface.html">User Interface</a>
-        </td>
-      </tr>
-    </table>   
-    </div>
-    
-    <div class="content">
-    
-    <h1 align="center">Getting Started with a Sample Project</h1>
-  
-    <p>
-      The procedure presented here is for explanatory purposes only; 
-      variations on this procedure will most likely be necessary in practice.
-    </p>
-    
-    <h2>Create a New Project</h2>
-    
-    <ol>
-      <li>
-        <p>Launch OmegaT.</p>
-      </li>
-      <li>
-        <p>
-          Create a new project by selecting
-           
-          <i>New Project...</i> 
-          
-          from the 
-          
-          <i>File</i>
-           
-          menu in the editor menubar. 
-        </p>
-      </li>  
-      <li>
-        <p>
-          In the file selector dialog that appears, navigate to a suitable directory 
-          where the new project directory and its files are to be created. 
-        </p>
-      </li>  
-      <li>
-        <p>
-          In the 
-          
-          <i>File Name</i>
-           
-          text entry area, enter a project name (e.g. 
-          
-          <i>ABC</i>), 
-          
-          then press 
-          
-          <i>Save</i>
-           
-          to confirm it.
-        </p>
-      </li>  
-      <li>
-        <p>
-          Another dialog will appear indicating the directory paths for the project. 
-          In the dialog, OmegaT will propose the creation of a new directory with 
-          the project name 
-          
-          <i>ABC</i> 
-          
-          that was selected.
-          
-          Five other default subdirectories are also shown. The locations of these 
-          default directories can be modified, but for the sake of this example just 
-          accept the values given (these are explained in the
-          
-          <a href="FilesProjDirs.html">Project Files and Directories</a>
-          
-          manual page).         
-        </p>        
-      </li>  
-      <li> 
-        <p>
-          Enter language codes for the source and target files or select them from 
-          the drop down lists. These codes are required by the 
-          
-          <b>TMX</b>
-           
-          standard. As used in OmegaT, the language code is composed of a 2 character
-          language code (ISO 639), in lowercase, and an optional 2 character country
-          code (ISO 3166), in uppercase. The codes must be separated by a hyphen 
-          in accord with the requirements of the standard.          
-        </p>          
-        <p>
-          It is also possible to use locale codes in place of the language codes
-          already specified. Locales codes are also made up of a language code 
-          and a country code. The difference between the two types of codes is
-          their application and syntax. Locale codes are more commonly associated
-          with software localization and computer systems and other software issues.
-          A locale code has its codes separated by an underscore instead of a hyphen.
-        </p>               
-        <p>          
-          The actual codes are particularly important if you send, receive, or
-          exchange translation memories with external entities (customers, colleagues,
-          organizations, etc.); in which case you should be careful to follow required
-          standards for a particular format and application. In any event, language
-          codes will be used in the TMX; locale codes are automatically written
-          to the TMX as language codes. <!--See
-          
-          <a href="Codes.html">Codes: Language and Locale</a>
-          
-          for further details.-->
-        </p>
-      </li>  
-      <li>        
-        <p>
-          A project directory (also referred to as the 
-          
-          <i>project root directory</i>), 
-          
-          with the 
-                    
-          <i>ABC</i>
-                  
-          name selected previously, will now be created. Within the project root 
-          directory are five subdirectories: 
-        </p>
-        
-        <ol>
-          <li>  
-            <b>/glossary</b>
-            
-            - 
-          
-            <a href="Glossary.html">glossary</a>
-             
-            files;
-          </li>
-          <li>
-            <b>/source</b> 
-            
-            - source document files;
-          </li>
-          <li>
-            <b>/omegat</b> 
-            
-            - project files;
-          </li>
-          <li>
-            <b>/target</b> 
-            
-            - target document files;
-          </li>
-          <li>        
-            <b>/tm</b> 
-            
-            - translation memory files.
-          </li>
-        </ol>
-        
-        <br>
-        
-        <p>
-          See
-          
-          <a href="FilesProjDirs.html">Project Files and Directories</a>
-          
-          also.
-        </p>
-      </li>  
-    </ol>  
-      
-    <h2>Translate a File</h2>
+<div class="navbar-top">
 
-    <ol>
-      <li>
-        <p>
-          Place a text file (with extension 
-          
-          <b>.txt</b>) 
-          
-          to translate inside the
-          
-          <b>/source</b>
-          
-          directory. The 
-          
-          <b>.txt</b>
-          
-          text file must be in the default operating system encoding. To use a 
-          Unicode encoded file (UTF-8) rename the file with 
-          
-          <b>.utf8</b> 
-          
-          as the file extension instead.
-        </p>
-      </li>  
-      <li>
-        <p>
-          Open the newly created project. Select
-          
-          <i>Open Project...</i>
-          
-          in the 
-          
-          <i>File</i>
-           
-          menu of the editor (OmegaT will automatically look in the directory last 
-          opened). The project root directory is displayed with the OmegaT icon--this 
-          indicates that it is a translation memory project.          
-        </p>
-      </li>  
-      <li>
-        <p>
-          Open the project by selecting the project directory marked with the 
-          OmegaT icon (double-click or select and confirm with 
-          
-          <i>Open</i>).
-          
-          Do not try to open a file, it won't work! It might crash OmegaT also.
-        </p>
-      </li>  
-      <li>
-        <p>
-          The project is now open and the file's text is displayed in the editor window. 
-        </p>
-      </li>  
-      <li>
-        <p>
-          Place the cursor in the target field of the first segment, between the tags
-          
-          <b>&lt;segment 0001&gt;</b>
-           
-          and 
-          
-          <b>&lt;end segment&gt;</b>. 
-          
-          Type in a translation and delete the original text. Press          
-        
-          <i>&lt;Enter&gt;</i> 
-        
-          to accept the change. 
-        </p>
-      </li>  
-      <li>
-        <p>
-          Repeat the process for each segment until the translation is complete. 
-        </p>
-      </li>  
-    </ol>
-    
-    <h2>Create the Translated File</h2>
+<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td width="9%" align="left" valign="center"><b>Previous</b></td>
+<td width="39%" align="left" valign="center"><a href="./InstantStart.html">Instant Start tutorial</a></td>
+<td width="6%" align="left" valign="center"><b>Next</b></td>
+<td width="39%" align="left" valign="center"><a href="./UserInterface.html">User Interface</a></td></tr>
+</table>
 
-    <ol>      
-      <li>
-        <p>
-          Select 
-          
-          <i>Save Translation Memory</i> 
-                
-          followed by
-          
-          <i>Create Target Documents</i> 
- 
-          from the
-          
-          <i>File</i>
-          
-          menu.     
-                                       
-          At this point OmegaT may be closed, if desired.
-          
-          Just choose 
-          
-          <i>Quit</i>
-          
-          from the same menu.          
-        </p>
-      </li>  
-      <li>
-        <p>
-          The translated file will be located in the 
-  
-          <b>/target</b>
-          
-          directory.        
-        </p>
-      </li>  
-    </ol>
-    </div>
-    
-    <div class="navbar-bottom">
+</div>
 
-    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-      <tr>
-        <td width="7%" align="left" valign="center">
-          <a href="OmegaT.html" title="Table of Contents">
-            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
-          </a>
-        </td>
-        <td width="9%" align="left" valign="center">
-          <b>Previous</b>
-        </td>
-        <td width="39%" align="left" valign="center">        
-          <a href="InstantStart.html">Instant Start tutorial</a>
-        </td>
-        <td width="6%" align="left" valign="center">
-          <b>Next</b>
-        </td>
-        <td width="39%" align="left" valign="center">
-          <a href="UserInterface.html">User Interface</a>
-        </td>
-      </tr>
-    </table>   
-    </div>
+<div class="content">
 
-  </body>
+<a name="" />
+<h1 align="center" name="" id="">Getting Started with a Sample Project</h1>
+
+<p>The procedure presented here is for explanatory purposes only; variations on this procedure will most likely be necessary in practice.</p>
+
+<a name="" />
+<h2 name="" id="">Create a New Project</h2>
+
+<ol><li>Launch OmegaT.</li>
+<li>Create a new project by selecting <b>New Project...</b> from the <b>File</b> menu in the editor menubar.</li>
+<li>In the file selector dialog that appears, navigate to a suitable directory where the new project directory and its files are to be created.</li>
+<li>In the <b>File Name</b> text entry area, enter a project name (e.g. <b>ABC</b>), then press <b>Save</b> to confirm it.</li>
+<li>Another dialog will appear indicating the directory paths for the project. In the dialog, OmegaT will propose the creation of a new directory with the project name <b>ABC</b> that was selected. Five other default subdirectories are also shown. The locations of these default directories can be modified, but for the sake of this example just accept the values given (these are explained in the <a href="./FilesProjDirs.html">Project Files and Directories</a> manual page).</li>
+<li>Enter language codes for the source and target files or select them from the drop down lists. These codes are required by the <b>TMX</b> standard. As used in OmegaT, the language code is composed of a 2 character language code (ISO 639), in lowercase, and an optional 2 character country code (ISO 3166), in uppercase. The codes must be separated by a hyphen in accord with the requirements of the standard.</p><p>It is also possible to use locale codes in place of the language codes already specified. Locales codes are also made up of a language code and a country code. The difference between the two types of codes is their application and syntax. Locale codes are more commonly associated with software localization and computer systems and other software issues. A locale code has its codes separated by an underscore instead of a hyphen.</p><p>The actual codes are particularly important if you send, receive, or exchange translation memories with external entities (customers, colleagues, organizations, etc.); in which case you should be careful to follow required standards for a particular format and application. In any event, language codes will be used in the TMX; locale codes are automatically written to the TMX as language codes. <!--See <a href="./Codes.html">Codes: Language and Locale</a> for further details.--></li>
+<li>A project directory (also referred to as the <b>project root directory</b>), with the <b>ABC</b> name selected previously, will now be created. Within the project root directory are five subdirectories:</p>
+
+<ol><li><b>/glossary</b> - <a href="./Glossary.html">glossary</a> files;</li>
+<li><b>/source</b>. - source document files;</li>
+<li><b>/omegat</b>. - project files;</li>
+<li><b>/target</b>. - target document files;</li>
+<li><b>/tm</b>. - translation memory files.</li></ol>
+
+<br>
+
+<p>See <a href="./FilesProjDirs.html">Project Files and Directories</a> also.</li></ol>
+
+<a name="" />
+<h2 name="" id="">Translate a File</h2>
+
+<ol><li>Place a text file (with extension <b>.txt</b>. to translate inside the <b>/source</b> directory. The <b>.txt</b> text file must be in the default operating system encoding. To use a Unicode encoded file (UTF-8) rename the file with <b>.utf8</b>. as the file extension instead.</li>
+<li>Open the newly created project. Select <b>Open Project...</b> in the <b>File</b> menu of the editor (OmegaT will automatically look in the directory last opened). The project root directory is displayed with the OmegaT icon--this indicates that it is a translation memory project.</li>
+<li>Open the project by selecting the project directory marked with the OmegaT icon (double-click or select and confirm with <b>Open</b>). Do not try to open a file, it won't work! It might crash OmegaT also.</li>
+<li>The project is now open and the file's text is displayed in the editor window.</li>
+<li>Place the cursor in the target field of the first segment, between the tags <b>&lt;segment 0001&gt;</b> and <b>&lt;end segment&gt;</b>. Type in a translation and delete the original text. Press <b>&lt;Enter&gt;</b> to accept the change.</li>
+<li>Repeat the process for each segment until the translation is complete.</li></ol>
+
+<a name="" />
+<h2 name="" id="">Create the Translated File</h2>
+
+<ol><li>Select <b>Save Translation Memory</b> followed by <b>Create Target Documents</b> from the <b>File</b> menu. At this point OmegaT may be closed, if desired. Just choose <b>Quit</b> from the same menu.</li>
+<li>The translated file will be located in the <b>/target</b> directory.</li></ol>
+
+</div>
+
+<div class="navbar-bottom">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td width="9%" align="left" valign="center"><b>Previous</b></td>
+<td width="39%" align="left" valign="center"><a href="./InstantStart.html">Instant Start tutorial</a></td>
+<td width="6%" align="left" valign="center"><b>Next</b></td>
+<td width="39%" align="left" valign="center"><a href="./UserInterface.html">User Interface</a></td></tr>
+</table>
+
+</div>
+
+</body>
 </html>
-

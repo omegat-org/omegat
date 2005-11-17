@@ -1,211 +1,116 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
-  "http://www.w3.org/TR/html4/strict.dtd">
-  
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<!-- edited for clarity, modified contents for completedness -->
+
 <html>
-  <head>
-    <title>OmegaT: Searches: Keyword and Exact</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="generator" content="Kate (Linux)">
-    <meta name="changed" content="20050513">
-    <link rel="stylesheet" type="text/css" href="omegat.css">
-  </head>
+<head>
+<title>OmegaT: Searches: Keyword and Exact</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="generator" content="Kate (Linux)">
+<meta name="changed" content="20051001">
+<link rel="stylesheet" type="text/css" href="./omegat.css">
+</head>
 
-  <body lang="en" dir="LTR">
+<body lang="en" dir="LTR">
 
-    <div class="navbar-top">
-    
-    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-      <tr>
-        <td width="7%" align="left" valign="center">
-          <a href="OmegaT.html" title="Table of Contents">
-            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
-          </a>
-        </td>
-        <td width="9%" align="left" valign="center">
-          <b>Previous</b>
-        </td>
-        <td width="39%" align="left" valign="center">        
-          <a href="Matches.html">Matches: Full and Fuzzy</a>
-        </td>
-        <td width="6%" align="left" valign="center">
-          <b>Next</b>
-        </td>
-        <td width="39%" align="left" valign="center">
-          <a href="Glossary.html">Glossary</a>
-        </td>
-      </tr>
-    </table>
-    </div>
-    
-    <div class="content">
+<div class="navbar-top">
 
-    <h1 align="center">Searches: Keyword and Exact</h1>
+<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td width="9%" align="left" valign="center"><b>Previous</b></td>
+<td width="39%" align="left" valign="center"><a href="./SentSeg.html">Sentence Segmentation</a></td>
+<td width="6%" align="left" valign="center"><b>Next</b></td>
+<td width="39%" align="left" valign="center"><a href="./Matches.html">Matches and Glossary items</a></td></tr>
+</table>
 
-    <p>
-      OmegaT provides a powerful range of search functions.
-    </p>
-    
-    <p>
-      Open the search functions window by selecting
-      
-      <i>Search Project...</i> from the 
-      
-      <i>Edit</i> 
-            
-      menu or by pressing
-      
-      <i>&lt;Ctrl+F&gt;</i>.
-      
-      Enter a word or phrase to search for in the 
-      
-      <i>Search for</i>
-      
-      text entry area. 
-    </p>
-    
-    <p>
-      Alternatively, select a word or phrase in the editing field (target text of 
-      the active segment) and press 
-      
-      <i>&lt;Ctrl+F&gt;</i>. 
-      
-      This way the word or phrase is automatically entered into the 
-      
-      <i>Search for</i>
-      
-      box. Selecting is usually done by double clicking on a word or by dragging
-      from the beginning to the end of a phrase with the mouse. On certain platforms
-      this may not function in the same way, if at all.
-    </p>
-    
-    <p>
-      Select the type of search using the radio buttons (keyword or exact search) 
-      and check boxes (search TMs/search files). 
-    </p>
-    
-    <p>
-      All search types given are case-insensitive. That is, a search for &quot;abc&quot; 
-      will find instances of &quot;abc&quot;, &quot;ABC&quot;, &quot;Abc&quot;, etc.
-    </p>
-    
-    <h2>Keyword Searches</h2>
-    
-    <p>
-      Select 
-      
-      <i>Keyword search</i>
-       
-      and enter any number of individual words, in any order, and OmegaT displays 
-      a list of all segments in which all the words occur. These searches are 
-      similar to a search &quot;with all of the words&quot; in an internet search 
-      engine, such as Google (i.e. AND logic). 
-    </p>
+</div>
 
-    <p>
-      Only whole words, not parts of words or incomplete words, can be found.
-    </p>
+<div class="content">
 
-    <p>
-      Only the project source files can be searched. Translation memories are not 
-      searched.
-    </p>
+<a name="10" />
+<h1 align="center" name="10" id="10">Searches: Keyword and Exact</h1>
 
-    <h2>Exact Searches</h2>
+	<ol><li><a href="#10.1">Summary</a></li>
+	<li><a href="#10.2">Exact Searches</a></li>
+	<li><a href="#10.3">Keyword Searches</a></li></ol>
 
-    <p>
-      An exact search looks for a phrase. Therefore, if several words are entered, 
-      they are only found when they occur in exactly the same sequence. An exact 
-      search is similar to an exact phrase search in an internet search 
-      engine. 
-    </p>
-    
-    <p>
-      Exact searches can look for search terms within:
-    </p>
-    
-    <ul>
-      <li>
-        <p>
-          source and target segments of the current project;
-        </p>
-      </li>  
-      <li>
-        <p>
-          translation memories (files in 
-          
-          <b>/tm</i>);
-        </p>
-      </li>  
-      <li>
-        <p>
-          any file in a format supported by OmegaT (e.g. 
-          
-          <b>*.txt</b>, 
-          <b>*.html</b>, 
-          <b>*.xhtml</b>, 
-          <b>*.odt</b>, 
-          <b>*.sxw</b>,           
-          <b>*.properties</b>),
-          
-          in selected directories and subdirectories (if required).
-        </p>
-      </li>  
-    </ul>
 
-    <p>
-      Wildcard characters (glob pattern characters) such as 
-      
-      <b>*</b> and </b>?</b> 
-      
-      can be used in exact searches:
-    </p>
+<a name="10.1" />
+<h2 name="10.1" id="10.1">Summary</h2>
 
-    <ul>
-      <li>
-        An asterisk
-        
-        <b>*</b>
-        
-        matches any character or number of characters. For instance,
-        
-        &quot;b*d&quot; matches instances of &quot;bad&quot;, &quot;bid&quot;, 
-        &quot;bold&quot; and &quot;band&quot;;
-      </li>
-      <li>
-        A question mark
-        
-        <b>?</b>
-      
-        matches any single character. &quot;b?d&quot; will match instances of      
-        &quot;bad&quot; and &quot;bid&quot;.
-      </li>
-    </ul>
-    </div>
-    
-    <div class="navbar-bottom">
-    
-    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-      <tr>
-        <td width="7%" align="left" valign="center">
-          <a href="OmegaT.html" title="Table of Contents">
-            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
-          </a>
-        </td>
-        <td width="9%" align="left" valign="center">
-          <b>Previous</b>
-        </td>
-        <td width="39%" align="left" valign="center">        
-          <a href="Matches.html">Matches: Full and Fuzzy</a>
-        </td>
-        <td width="6%" align="left" valign="center">
-          <b>Next</b>
-        </td>
-        <td width="39%" align="left" valign="center">
-          <a href="Glossary.html">Glossary</a>
-        </td>
-      </tr>
-    </table>
-    </div>
-    
-  </body>
+<p>OmegaT provides a powerful range of search functions.</p>
+
+<a name="10.1.1" />
+<h3 name="10.1.1" id="10.1.1">Open a search window</h3>
+
+<p>Press <b>&lt;Ctrl+F&gt;</b> or select <b>Search Project...</b> from the <b>Edit</b> menu.</p>
+
+<p>To keep track of previous searches calling a search window will always create a new window.</p>
+
+<a name="10.1.2" />
+<h3 name="10.1.2" id="10.1.2">Search a string</h3>
+
+<p>Select a word or phrase in the editing field (target text of the active segment) and open a search window. The word or phrase is automatically entered into the <b>Search for</b> box.</p>
+<p>Alternatively, enter a word or phrase to search for in the <b>Search for</b> text entry area of an opened search window.</p>
+
+<a name="10.1.3" />
+<h3 name="10.1.3" id="10.1.3">Options</h3>
+
+<p>Select the type of search using the radio buttons (<b>exact</b> or <b>keyword</b> search).
+
+<p>Both search types give you access to <b>search TMs</b>, only <b>exact</b> searches give you access to <b>search files</b> (recursively or not).</p>
+
+<p>All search types given are case-insensitive. That is, a search for &quot;abc&quot; will find instances of &quot;abc&quot;, &quot;ABC&quot;, &quot;Abc&quot;, etc.</p>
+
+<a name="10.2" />
+<h2 name="10.2" id="10.2">Exact Searches</h2>
+
+<p>An exact search looks for a character string. Therefore, if several words are entered, they are only found when they occur in exactly the same sequence. The searched string can also be an incomplete word.</p>
+
+<a name="10.2.1" />
+<h3 name="10.2.1" id="10.2.1">Wildcard characters</h3>
+
+<p>Wildcard characters (glob pattern characters) such as <b>*</b> and</b>?</b>. can be used in exact searches:</p>
+
+<ul><li>An asterisk <b>*</b> matches any character or number of characters. For instance, &quot;b*d&quot; matches instances of &quot;bad&quot;, &quot;bid&quot;, &quot;bold&quot; and &quot;band&quot;;</li>
+<li>A question mark <b>?</b> matches any single character. &quot;b?d&quot; will match instances of &quot;bad&quot; and &quot;bid&quot;.</li></ul>
+
+<a name="10.2.2" />
+<h3 name="10.2.2" id="10.2.2">Exact search location</h3>
+
+<dl><dt>When <b>Search TMs</b>" is <b>on</b> (default setting):</dt><dd>OmegaT searches for the string in the source and target segments of the current project, in the translation memories (files in <b>/tm</b>) as well as in the project translation memory (<b>/omegat/project_save.tmx</b>).</dd>
+<dt>When <b>Search TMs</b> is <b>off</b>:</dt><dd>OmegaT searches for the string exclusively in the source and target segments of the current project</dd>
+<dt>When <b>Search Files</b> is <b>on</b>:</dt><dd>OmegaT searches the string in any file in a format supported by OmegaT (e.g. <b>*.txt</b>, <b>*.html</b>, <b>*.xhtml</b>, <b>*.odt</b>, <b>*.sxw</b>, <b>*.properties</b>), located in the set directory.</dd>
+<dt>When both <b>Search Files</b> and <b>Recursive search</b> are <b>on</b>:</dt><dd>OmegaT searches the string in any file in a format supported by OmegaT (e.g. <b>*.txt</b>, <b>*.html</b>, <b>*.xhtml</b>, <b>*.odt</b>, <b>*.sxw</b>, <b>*.properties</b>), located in the set directory and any subdirectory existing.</dd></dl>
+
+<a name="10.3" />
+<h2 name="10.3" id="10.3">Keyword Searches</h2>
+
+<p>Select <b>Keyword search</b> and enter any number of individual words, in any order, and OmegaT displays a list of all segments in which all the words occur.</p>
+<p>Only whole words, not parts of words or incomplete words, can be found.</p>
+
+<a name="10.3.1" />
+<h3 name="10.3.1" id="10.3.1">Keyword search location</h3>
+
+<dl><dt>When <b>Search TMs</b>" is <b>on</b> (default setting):</dt><dd>OmegaT searches for the keywords in the source and target segments of the current project, in the translation memories (files in <b>/tm</b>) as well as in the project translation memory (<b>/omegat/project_save.tmx</b>).</dd>
+<dt>When <b>Search TMs</b> is <b>off</b>:</dt><dd>OmegaT searches for the keywords exclusively in the source and target segments of the current project</dd>
+
+<p><b>Search files</b> cannot be activated with Keyword searches.</p>
+
+
+</div>
+
+<div class="navbar-bottom">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td width="9%" align="left" valign="center"><b>Previous</b></td>
+<td width="39%" align="left" valign="center"><a href="./SentSeg.html">Sentence Segmentation</a></td>
+<td width="6%" align="left" valign="center"><b>Next</b></td>
+<td width="39%" align="left" valign="center"><a href="./Matches.html">Matches and Glossary items</a></td></tr>
+</table>
+
+</div>
+
+</body>
 </html>

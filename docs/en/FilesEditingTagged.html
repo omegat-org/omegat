@@ -1,288 +1,106 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
-  "http://www.w3.org/TR/html4/strict.dtd">
-  
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
 <html>
-  <head>
-    <title>OmegaT: Tagged (Formatted) Files Text Editing</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="generator" content="Kate (Linux)">
-    <meta name="changed" content="20050514">
-    <link rel="stylesheet" type="text/css" href="omegat.css">
-  </head>
+<head>
+<title>OmegaT: Tagged (Formatted) Files Text Editing</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="changed" content="20051001">
+<link rel="stylesheet" type="text/css" href="./omegat.css">
+</head>
 
-  <body lang="en" dir="LTR">
-  
-    <div class="navbar-top">
-    
-    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-      <tr>
-        <td width="7%" align="left" valign="center">
-          <a href="OmegaT.html" title="Table of Contents">
-            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
-          </a>
-        </td>
-        <td width="9%" align="left" valign="center">
-          <b>Previous</b>
-        </td>
-        <td width="39%" align="left" valign="center">        
-          <a href="FilesTMGloss.html">Translation Memory and Glossary Files</a>
-        </td>
-        <td width="6%" align="left" valign="center">
-          <b>Next</b>
-        </td>
-        <td width="39%" align="left" valign="center">
-          <a href="FilesFilters.html">File Filters</a>
-        </td>
-      </tr>
-    </table>
-    </div>
-    
-    <div class="content">
+<body lang="en" dir="LTR">
 
-    <h1 align="center">Tagged (Formatted) Files Text Editing</h1>
+<div class="navbar-top">
 
-    <h2>Working with Tags</h2>
-    
-    <p>
-      OmegaT displays the in-line formatting information of supported formats (at 
-      present HTML, XHTML, OpenDocument, and OpenOffice.org/StarOffice) as tags. 
-      The tags that are visible in OmegaT are not the same as those used by the 
-      original format; OmegaT converts them internally, and converts them back 
-      at compilation when the target documents are created. 
-    </p>
-    
-    <p>
-      Care must be exercised with tags. If they are accidentally changed, the formatting 
-      of the final file may be corrupted. In the worst case scenario a file may not 
-      open altogether; this occurs with OpenOffice.org files in particular.
-    </p>
+<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td width="9%" align="left" valign="center"><b>Previous</b></td>
+<td width="39%" align="left" valign="center"><a href="./Matches.html">Matches and glossary items</a></td>
+<td width="6%" align="left" valign="center"><b>Next</b></td>
+<td width="39%" align="left" valign="center"><a href="./Filters.html">File Filters</a></td></tr>
+</table>
 
-    <p>
-      Although custom formatting cannot be performed from within OmegaT, it is possible
-      to apply some degree of control over the existing format. 
-    </p>
+</div>
 
-    
-    <h3>OpenDocument and OpenOffice.org File Tag Manipulation</h3>
+<div class="content">
 
-    <p>
-      OpenDocument and OpenOffice.org tags must be preserved as is. Tags are paired 
-      as opening
-       
-      (<code>&lt;f&gt;</code>)
-       
-      and closing
-       
-      (<code>&lt;/f&gt;</code>)
-       
-      tags with consecutive numbers, starting from 1, in each segment. These tags 
-      cannot be deleted, duplicated, or have their sequence changed. However, it 
-      is possible to:     
-    </p>
+<a name="12" />
+<h1 align="center" name="12" id="12">Tagged (Formatted) Files Text Editing</h1>
 
-    <ul>
-      <li>
-        move tags to a different part of the segment; as long as they remain in 
-        the same order;
-      </li>
-      <li>
-        cancel tags by placing them next to each other. 
-      </li>
-    </ul>
-          
-    <p>        
-      For instance, if the tagged sentence 
-    </p>
-    
-    <p>
-      <code>      
-        This text is in &lt;f1&gt;italics&lt;/f2&gt;.
-      </code>  
-    </p>
-          
-    <p>
-      is changed to
-    </p>
-    
-    <p>
-      <code>      
-        This text is in &lt;f1&gt;&lt;/f2&gt;italics.
-      </code>  
-    </p>
-      
-    <p>
-      the italic formatting is effectively removed.
-    </p>
+	<ol><li><a href="#12.1">Working with tags</a></li>
+	<li><a href="#12.2">Tag Validation</a></li></ol>
 
-    <h3>HTML/XHTML File Tag Manipulation</h3>
 
-    <p>
-      In HTML or XHTML the beginning of formatting is marked by an opening tag of 
-      the form 
-      
-      <code>      
-        &lt;x&gt;, 
-      </code>  
-          
-      and the end of formatting by a corresponding closing tag 
-          
-      <code>      
-        &lt;/x&gt;
-      </code>  
-      
-      (where x represents the characters of a particular tag element). These tags 
-      have matching numbers, starting from 0, in each segment. Essentially, 
-      any changes made to tags must be made to both tags of the same pair.
-    </p>
-    
-    <p>
-      The following rules for tags are applicable:
-    </p>
+<a name="12.1" />
+<h2 name="12.1" id="12.1">Working with Tags</h2>
 
-    <ul>
-      <li>
-        <p>
-          Deletion is permitted (e.g. to remove italics from
-        </p>
-        <p>
-          <code>
-            This text is in &lt;x0&gt;italics&lt;/x0&gt;
-          </code>
-        </p>        
-        <p>              
-          simply delete the tags &lt;x0&gt; and &lt;/x0&gt;).
-        </p>
-      </li>
-    </ul>
-    
-    <ul>
-      <li>
-        <p>
-          Duplication is permitted (e.g. in          
-        </p>
-        <p>  
-          <code>
-            This text is in &lt;x0&gt;italics&lt;/x0&gt;, and so is
-            &lt;x1&gt;this&lt;/x1&gt;
-          </code>  
-        </p>  
-        <p>
-          the same formatting of "italics" is applied to "this").
-        </p>      
-      </li>  
-    </ul>
-   
-    <ul>
-      <li>
-        <p>
-          Change of order is permitted (e.g. 
-        </p>
-        <p>      
-          <code>
-            This text is in &lt;x0&gt;italics&lt;/x0&gt;, this text is &lt;x1&gt;
-            underlined&lt;/x1&gt;
-          </code>
-        </p>      
-        <p>
-          can be changed to 
-        </p>
-        <p>   
-          <code>
-            This text is &lt;x1&gt;underlined&lt;/x1&gt;, this text is in 
-            &lt;x0&gt;italics&lt;/x0&gt;
-          </code>)
-        </p>        
-      </li>
-    </ul>
+<p>OmegaT displays the in-line formatting information of supported formats (at present HTML, XHTML, OpenDocument, and OpenOffice.org/StarOffice) as tags. The tags that are visible in OmegaT are not the same as those used by the original format; OmegaT converts them internally, and converts them back at compilation when the target documents are created.</p>
+<p>Care must be exercised with tags. If they are accidentally changed, the formatting of the final file may be corrupted. In the worst case scenario a file may not open altogether; this occurs with OpenOffice.org files in particular.</p>
+<p>Although custom formatting cannot be performed from within OmegaT, it is possible to apply some degree of control over the existing format.</p>
 
-    <ul>
-      <li>
-        <p>
-          Nesting is permitted (e.g. 
-        </p>  
-        <p>   
-          <code>
-            This text is in &lt;x0&gt;italics&lt;/x0&gt;, this text is 
-            &lt;x1&gt;underlined&lt;/x1&gt;
-          </code>
-        </p>   
-        <p>   
-          can be changed to 
-        </p>   
-        <p>   
-          <code>
-            This text is in &lt;x0&gt;italics and &lt;x1&gt;this text is also 
-            underlined&lt;/x1&gt;&lt;/x0&gt;
-          </code>)
-        </p>
-      </li>
-    </ul>
-       
-    <ul>
-      <li>
-        <p>
-          Overlap is not permitted (tagging like this
-        </p>
-        <p>   
-          <code>
-            This text is in &lt;x0&gt;italics, this text is also
-            &lt;x1&gt;underlined&lt;/x0&gt;, this text is underlined but not in 
-            italics&lt;/x1&gt;
-          </code>
-        </p>
-        <p>   
-          is not allowed and will corrupt the file. Insertion of an opening tag 
-          followed by a second opening tag requires the closing tag of the second 
-          opening tag to come before the closing tag of the first.
-        </p>    
-      </li>  
-    </ul>        
-    
-    <h2>Tag Validation</h2>
+<p>OmegaT usually does not display tags that fall on segment boundaries. In case this tag is the opening tag of a pair, it may sometimes be difficult to properly replace the closing tag when the target word order needs to be profundly modified. When this occur, create the target files and check the file rendering in the appropriate file viewer to make sure your modification did not disrupt the overall layout.</p>
 
-    <p>
-      The validate tags function 
-      
-      (<i>Tools</i> &gt; <i>Validate Tags</i>) 
-      
-      detects changed tags (whether done deliberately or by accident), and indicates 
-      the affected segments. Use of this function will open a dialog with any suspected
-      broken or bad tags in a document.      
-    </p>
-    
-    <p>
-      This function can be useful for tracking down bugs in a translated tagged text. 
-      This is often a problem in OpenDocument or OpenOffice.org files that will not
-      open due to tag problems created in the process of translation. Fixing the 
-      tags and recreating the target documents again can often remedy the problem.
-    </p>
-    </div>
-    
-    <div class="navbar-bottom">
-    
-    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-      <tr>
-        <td width="7%" align="left" valign="center">
-          <a href="OmegaT.html" title="Table of Contents">
-            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
-          </a>
-        </td>
-        <td width="9%" align="left" valign="center">
-          <b>Previous</b>
-        </td>
-        <td width="39%" align="left" valign="center">        
-          <a href="FilesTMGloss.html">Translation Memory and Glossary Files</a>
-        </td>
-        <td width="6%" align="left" valign="center">
-          <b>Next</b>
-        </td>
-        <td width="39%" align="left" valign="center">
-          <a href="FilesFilters.html">File Filters</a>
-        </td>
-      </tr>
-    </table>
-    </div>
-    
-  </body>
+<a name="12.1.1" />
+<h3 name="12.1.1" id="12.1.1">OpenDocument and OpenOffice.org File Tag Manipulation</h3>
+
+<p>OpenDocument and OpenOffice.org tags must be preserved as is. Tags are paired as opening ( <code>&lt;f&gt;</code>) and closing ( <code>&lt;/f&gt;</code>) tags with consecutive numbers, starting from 1, in each segment. These tags cannot be deleted, duplicated, or have their sequence changed. However, it is possible to:</p>
+
+<ul><li> move tags to a different part of the segment; as long as they remain in the same order;</li>
+<li> cancel tags by placing them next to each other.</li></ul>
+
+<p>For instance, if the tagged sentence</p>
+<p><code> This text is in &lt;f1&gt;italics&lt;/f2&gt;.</code></p>
+<p>is changed to</p>
+<p><code> This text is in &lt;f1&gt;&lt;/f2&gt;italics.</code></p>
+<p>the italic formatting is effectively removed.</p>
+
+<a name="12.1.2" />
+<h3 name="12.1.2" id="12.1.2">HTML/XHTML File Tag Manipulation</h3>
+
+<p>In HTML or XHTML the beginning of formatting is marked by an opening tag of the form <code> &lt;x&gt;,</code> and the end of formatting by a corresponding closing tag<code> &lt;/x&gt;</code> (where x represents the characters of a particular tag element). These tags have matching numbers, starting from 0, in each segment. Essentially, any changes made to tags must be made to both tags of the same pair.</p>
+<p>The following rules for tags are applicable:</p>
+
+<ul><li>Deletion is permitted e.g. to remove italics from</p>
+<p><code> This text is in &lt;x0&gt;italics&lt;/x0&gt;</code></p>
+<p>simply delete the tags &lt;x0&gt; and &lt;/x0&gt;.</li></ul>
+
+<ul><li>Duplication is permitted e.g. in</p>
+<p><code> This text is in &lt;x0&gt;italics&lt;/x0&gt;, and so is &lt;x1&gt;this&lt;/x1&gt;</code></p>
+<p>the same formatting of "italics" is applied to "this".</li></ul>
+
+<ul><li>Change of order is permitted e.g.</p>
+<p><code> This text is in &lt;x0&gt;italics&lt;/x0&gt;, this text is &lt;x1&gt; underlined&lt;/x1&gt;</code></p>
+<p>can be changed to</p>
+<p><code> This text is &lt;x1&gt;underlined&lt;/x1&gt;, this text is in &lt;x0&gt;italics&lt;/x0&gt;</code></li></ul>
+
+<ul><li>Nesting is permitted e.g.</p>
+<p><code> This text is in &lt;x0&gt;italics&lt;/x0&gt;, this text is &lt;x1&gt;underlined&lt;/x1&gt;</code></p>
+<p>can be changed to</p>
+<p><code> This text is in &lt;x0&gt;italics and &lt;x1&gt;this text is also underlined&lt;/x1&gt;&lt;/x0&gt;</code></li></ul>
+
+<ul><li>Overlap is not permitted tagging like this</p>
+<p><code> This text is in &lt;x0&gt;italics, this text is also &lt;x1&gt;underlined&lt;/x0&gt;, this text is underlined but not in italics&lt;/x1&gt;</code></p>
+<p>is not allowed and will corrupt the file. Insertion of an opening tag followed by a second opening tag requires the closing tag of the second opening tag to come before the closing tag of the first.</li></ul>
+
+<a name="12.2" />
+<h2 name="12.2" id="12.2">Tag Validation</h2>
+
+<p>The validate tags function ( <b>Tools</b> &gt; <b>Validate Tags</b>) detects changed tags (whether done deliberately or by accident), and indicates the affected segments. Use of this function will open a dialog with any suspected broken or bad tags in a document.</p>
+<p>This function can be useful for tracking down bugs in a translated tagged text. This is often a problem in OpenDocument or OpenOffice.org files that will not open due to tag problems created in the process of translation. Fixing the tags and recreating the target documents again can often remedy the problem.</p>
+
+</div>
+
+<div class="navbar-bottom">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td width="9%" align="left" valign="center"><b>Previous</b></td>
+<td width="39%" align="left" valign="center"><a href="./Matches.html">Matches and glossary items</a></td>
+<td width="6%" align="left" valign="center"><b>Next</b></td>
+<td width="39%" align="left" valign="center"><a href="./Filters.html">File Filters</a></td></tr>
+</table>
+
+</div>
+
+</body>
 </html>
-

@@ -1,267 +1,130 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
-  "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<!-- alph order for contributors, change "preliminaries" to "general information", "introduction" to "what is OmegaT", remove ref to Japanese in News, add languages to localization contributors, edited a few things here and there, removed reference to "Sample Project" since it is redundant with "Instant Start". -->
 
 <html>
-  <head>
-    <title>OmegaT: Users Manual</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="generator" content="Kate (Linux)">
-    <meta name="changed" content="20050607">
-    <link rel="stylesheet" type="text/css" href="omegat.css">
-  </head>
+<head>
+<title>OmegaT: Users Manual</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="changed" content="20051103">
+<link rel="stylesheet" type="text/css" href="./omegat.css">
+</head>
 
-  <body lang="en" dir="LTR">
+<body lang="en" dir="LTR">
 
-    <div class="navbar-top">
-    
-    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-      <tr>
-        <td width="7%" align="left" valign="center">
-          <img src="OmegaT.png" alt="Table of Contents">
-        </td>
-        <td width="9%" align="left" valign="center">
-          &nbsp;
-        </td>
-        <td width="39%" align="left" valign="center">
-          <b>Table of Contents</b>
-        </td>
-        <td width="6%" align="left" valign="center">
-          <b>Next</b>
-        </td>
-        <td width="39%" align="left" valign="center">
-          <a href="Introduction.html">Introduction</a>
-        </td>
-      </tr>
-    </table>
-    </div>
-    
-    <div class="contents">
-    
-    <h1 align="center">OmegaT: Users Manual (Version 1.4.6)</h1>
-    
-    <h2>Preliminaries</h2>
-    
-    <ul>
-      <li><a href="Introduction.html">Introduction</a></li>
-      <li><a href="SystemReqs.html">System Requirements</a></li>
-      <li><a href="InstallConfig.html">Installation and Configuration</a></li>
-      <li><a href="Important.html">Important Notes</a></li>
-    </ul>
+<div class="navbar-top">
 
-    <h2>First Steps</h2>
-  
-    <ul>
-      <li><a href="InstantStart.html">Instant Start tutorial</a></li>
-      <li><a href="SampleProject.html">Sample Project</a></li>
-      <li><a href="UserInterface.html">User Interface</a></li>
-      <li><a href="Segmentation.html">Segmentation</a></li>
-      <li><a href="Translation.html">Translation Process</a></li>
-    </ul>
+<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+<tr><td width="7%" align="left" valign="center"><img src="OmegaT.png" alt="Table of Contents"></td>
+<td width="9%" align="left" valign="center"> &nbsp;</td>
+<td width="39%" align="left" valign="center"><b>Table of Contents</b></td>
+<td width="6%" align="left" valign="center"><b>Next</b></td>
+<td width="39%" align="left" valign="center"><a href="./Introduction.html">What is OmegaT</a></td></tr>
+</table>
 
-    <h2>Further Steps</h2>
-    
-    <ul>
-      <li><a href="Editing.html">Editing Functions</a></li>
-      <li><a href="Navigation.html">Text Navigation</a></li>
-      <li>
-        <a href="SaveRevComp.html">Translation: Save, Revision, and Compilation</a>
-      </li>
-      <li><a href="Matches.html">Matches: Full and Fuzzy</a></li>
-      <li><a href="Searches.html">Searches: Keyword and Exact</a></li>
-      <li><a href="Glossary.html">Glossary</a></li>
-    </ul>
+</div>
 
-    <h2>Files and Projects</h2>
-    
-    <ul>
-      <li><a href="FilesSourceDoc.html">Source Document Files</a></li>
-      <li>
-        <a href="FilesODOOoSO.html">
-          OpenDocument, OpenOffice.org and StarOffice Files
-        </a>
-      </li>
-      <li>
-        <a href="FilesTMGloss.html">Translation Memory and Glossary Files</a>
-      </li>
-      <li><a href="FilesEditingTagged.html">Tagged (Formatted) Files Text Editing</a></li>
-      <li><a href="FilesFilters.html">File Filters</a></li>
-      <li><a href="FilesProjDirs.html">Project Files and Directories</a></li>
-    </ul>
-    
-    <h2>Appendix</h2>
-    
-    <ul>
-      <li><a href="HintsTips.html">General Hints and Tips</a></li>
-      <li><a href="Shortcuts.html">Keyboard Shortcuts</a></li>
-      <li><a href="CharsetsFonts.html">Language Character Sets and Fonts</a></li>
-    </ul>
-    
-    <h2>New in version 1.4.5 and 1.4.6 (the two being pretty close in time)</h2>
+<div class="content">
 
-    <ul>
-      <li>
-        Massive rewrite of HTML and XHTML file filters,
-        providing you a rock-solid HTML/XHTML translation experience.
-      </li>
+<a name="0" />
+<h1 align="center" name="0" id="0">OmegaT: Users Manual (Version 1.6)</h1>
 
-      <li>
-        User configurable file filters for advanced control of source to target
-        (translated) file encodings and naming conversion.
-      </li>
-      <li>
-        Split pane in 
-        
-        <i>Match and Glossary Viewer</i>
-         
-        that allows for adjustable resizing via dragging or clicking with the mouse.
-      </li>
-      <li>
-        Menubar and menu changes. Some renaming and rearrangement for better use.
-        Help menu includes access to a new 
-        
-        <i>About</i>
-         
-        dialog as well as the 
-        
-        <i>Users Manual</i>.
-      </li>
-      <li>
-        Improved user interface text strings throughout.
-      </li>
-      <li>
-        Log file for tracking operations and errors.
-      </li>
-      <li>
-        Japanese help and user interface localization.
-      </li>
-      <li>
-        Users manual has been completely revised and updated. New section 
-        on 
-        
-        <i>File Filters</i>
-        
-        added.
-        
-      </li>
-      <li>
-        Localization TMX availability to aid in the user manual and user interface 
-        localization efforts.
-      </li>
-    </ul>
-    
-    <h2>Credits</h2>
+<a name="0.1" />
+<h2 name="0.1" id="0.1">General information</h2>
 
-    <p>
-      <b>Software:</b>
-      
-      Keith Godfrey with contributions by Benjamin Siband, Maxym Mykhalchuk, 
-      Sacha Chua, Henry Pijffers, Raymond: Martin, BSc.
-    </p>
-    
-    <p>
-      <b>Documentation:</b>
-      
-      Marc Prior with contributions by Jean-Christophe Helary, Dmitri Gabinski, 
-      and Raymond: Martin, BSc.
-      <!-- Insert Authors of Translation Here -->      
-    </p>
+<ul><li><a href="./Introduction.html#1">What is OmegaT</a></li>
+<li><a href="./InstallConfig.html#2">System Requirements and Installation</a></li>
+<li><a href="./Important.html#3">Important Notes</a></li>
+<li><a href="./InstantStart.html#4">Instant Start tutorial</a> <font color="red" size="-1">new! in 1.6</font></li></ul>
 
-    <p>
-      <b>Localization:</b>
-      
-      Contributions by Alessandro Cattelan, Sabine Cretella, C&eacute;sar Escribano Esteban,
-      Dmitri Gabinski, Jean-Christophe Helary, Juan Sacines, Pablo Roca Santiago, 
-      Martin Wunderlich, Hisashi Yanagida, and Erhan Yukselci.
-    </p>
+<a name="0.2" />
+<h2 name="0.2" id="0.2">First Steps</h2>
 
-    <p>
-      OmegaT uses
-      <a href="http://htmlparser.sourceforge.net/">HTMLParser</a>
-      to parse HTML and XHTML. We'd like to thank 
-      Somik Raha, Derrick Oswald and 
-      <a href="http://htmlparser.sourceforge.net/contributors.html">other HTMLParser contributors</a>
-      for writing this amazing piece of software we were able to use.
-    </p>
-    
-    
-    <p>
-      Users Manual (English Version): Last edited: June 24, 2005 by Maxym Mykhalchuk.
-    </p>
-    
-    <h2>Legal</h2>
-   
-    <p>
-      This document is distributed in the hope that it will be useful, but 
-      WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
-      or FITNESS FOR A PARTICULAR PURPOSE.
-    </p>
+<ul><li><a href="./UserInterface.html#5">User Interface</a></li>
+<li><a href="./Segmentation.html#6">Basic Segmentation</a></li>
+<li><a href="./Translation.html#7">Translation Process</a></li>
+<li><a href="./SaveRevComp.html#8">Save, Revise and Compile</a></li></ul>
 
-    <p>
-      Permission is granted to copy, distribute and/or modify this document 
-      under the terms of the GNU Free Documentation License, Version 1.2 or any 
-      later version published by the Free Software Foundation; with no Invariant 
-      Sections, no Front-Cover Texts, and no Back-Cover Texts.
-    </p>
+<a name="0.3" />
+<h2 name="0.3" id="0.3">Further Steps</h2>
 
-    <p>
-      A copy of the GNU Free Documentation license can be obtained from the 
-      OmegaT home page, from Free Software Foundation, Inc., 59 Temple Place, 
-      Suite 330, Boston, MA 02111-1307, USA, or from http://www.gnu.org.
-      <!--<a href="http://www.gnu.org">http://www.gnu.org</a>.-->
-    </p>
+<ul><li><a href="./SentSeg.html#9">Sentence Segmentation</a> <font color="red" size="-1">new! in 1.6</font></li>
+<li><a href="./Searches.html#10">Searches: Keyword and Exact</a></li>
+<li><a href="./Matches.html#11">Matches and Glossary items</a></li>
+<li><a href="./FilesEditingTagged.html#12">Tagged (Formatted) Files Text Editing</a></li>
+</ul>
 
-    <p>
-      All trademarks referred to in this manual are the property of their respective owners.
-    </p>
+<a name="0.4" />
+<h2 name="0.4" id="0.4">Files and Projects</h2>
 
-    <p>
-      All parts of this manual are
-      
-      <b>Copyright &copy; 2003-2005 Marc Prior</b>
-      
-      except:
-    </p>
-    
-    <p>
-      (<b>Copyright &copy; 2005 Jean-Christophe Helary</b>)
+<ul><li><a href="./Filters.html#13">File Filters</a> <font color="red" size="-1">new! in 1.4.5</font> </li>
+<li><a href="./FilesProjDirs.html#14">Project Files and Directories</a></li>
+<li><a href="./FilesSourceDoc.html#15">Source Document Files</a></li>
+<li><a href="./FilesTMGloss.html#16">Translation Memory and Glossary Files</a></li></ul>
 
-      Segmentation;    
-      <br>
-      
-      (<b>Copyright &copy; 2005 Raymond: Martin, BSc.</b>)
+<a name="0.5" />
+<h2 name="0.5" id="0.5">Appendix</h2>
 
-      File Filters;
-      <br>
-      
-      (<b>Copyright &copy; 2005 Samuel Murray</b>)
+<ul><li><a href="./OOoOmegaT.html#17">OpenOffice.org and OmegaT</a></li>
+<li>./FilesODOOoSO.html: TO MERGE WITH "Source Files"  and OOo&OmT</li>
+<li><a href="./Localizing.html#18">Localizing OmegaT</a></li>
+<li><a href="./Links.html#19">Useful links</a></li></ul>
 
-      Instant tutorial.
-    </p>
-    </div>
-    
-    <div class="navbar-bottom">
-    
-    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-      <tr>
-        <td width="7%" align="left" valign="center">
-          <img src="OmegaT.png" alt="OmegaT Logo">
-        </td>
-        <td width="9%" align="left" valign="center">
-          &nbsp;
-        </td>
-        <td width="39%" align="left" valign="center">
-          <b>Table of Contents</b>
-        </td>
-        <td width="6%" align="left" valign="center">
-          <b>Next</b>
-        </td>
-        <td width="39%" align="left" valign="center">
-          <a href="Introduction.html">Introduction</a>
-        </td>
-      </tr>
-    </table>    
-    </div>
-    
-  </body>
-</html>  
-  
+<a name="0.6" />
+<h2 name="0.6" id="0.6">Main news in recent versions</h2>
+
+<ul>
+<li>Sentence Segmenting, providing better translation reuse via a fine-grained segmentation.</li>
+<li>Massive rewrite of HTML and XHTML file filters, providing you a rock-solid HTML/XHTML translation experience.</li>
+<li>User configurable file filters for advanced control of source to target (translated) file encodings and naming conversion.</li>
+<li>Split pane in <b>Match and Glossary Viewer</b> that allows for adjustable resizing via dragging or clicking with the mouse.</li>
+<li>Menubar and menu changes. Some renaming and rearrangement for better use. Help menu includes access to a new <b>About</b> dialog as well as the <b>Users Manual</b>.</li>
+<li>Improved user interface text strings throughout.</li>
+<li>Log file (<code>log.txt</code>) for tracking operations and errors.</li></ul>
+
+<a name="0.7" />
+<h2 name="0.7" id="0.7">Credits</h2>
+
+<p><b>Software:</b> <b>Keith Godfrey (author)</b>, with contributions by Kim Bruning, Sacha Chua, Maxym Mykhalchuk, Henry Pijffers and Benjamin Siband.</p>
+<p><b>Documentation:</b> <b>Marc Prior (author)</b>, with contributions by Dmitri Gabinski, Jean-Christophe Helary, Raymond Martin and Maxym Mykhalchuk.</p>
+<p><b>Localization:</b> Alessandro Cattelan (it), Sabine Cretella (de), C&eacute;sar Escribano Esteban (es), Dmitri Gabinski (ru, be, el), Jean-Christophe Helary (fr, jp), Juan Sacines (es), Pablo Roca Santiago (es), Martin Wunderlich (de), Hisashi Yanagida (jp), and Erhan Yukselci (tu).</p>
+<p><b>Other contributions:</b> Marc Prior, Jean-Christophe Helary, Samuel Murray, Sabine Cretella, Dmitri Gabinski.</p>
+
+<p>OmegaT uses <a href="http://htmlparser.sourceforge.net/">HTMLParser</a> to parse HTML and XHTML. Thanks to Somik Raha, Derrick Oswald and <a href="http://htmlparser.sourceforge.net/contributors.html">all the HTMLParser contributors</a> for writing this amazing piece of software.</p>
+
+<p>Thanks go out to all the other people whose contributions have made OmegaT what it is today!</p>
+
+<p>Users Manual (English Version): Last edited: November 3, 2005 by Maxym Mykhalchuk.</p>
+
+<a name="0.8" />
+<h2 name="0.8" id="0.8">Legal</h2>
+
+<p>This document is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</p>
+<p>Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.2 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.</p>
+<p>A copy of the GNU Free Documentation license can be obtained from the OmegaT home page, from Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA, or from http://www.gnu.org. <!--<a href="http://www.gnu.org">http://www.gnu.org</a>.--></p>
+<p>All trademarks referred to in this manual are the property of their respective owners.</p>
+<p>The manual is originally written by Marc Prior, but many people worked on it afterwards.</p>
+<p>The Users Manual is Copyright &copy; 2003-2005 Marc Prior
+
+<ul>
+<li><a href="./Segmentation.html">Basic Segmentation</a> is Copyright &copy; 2005 Jean-Christophe Helary</li>
+<li><a href="./InstantStart.html">Instant Start tutorial</a> is Copyright &copy; 2005 Samuel Murray</li>
+<li><a href="./Filters.html">File Filters</a> and <a href="./SentSeg.html">Sentence Segmentation</a> are Copyright &copy; 2005 Maxym Mykhalchuk</li>
+</ul>
+
+</div>
+
+<div class="navbar-bottom">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+<tr><td width="7%" align="left" valign="center"><img src="OmegaT.png" alt="OmegaT Logo"></td>
+<td width="9%" align="left" valign="center"> &nbsp;</td>
+<td width="39%" align="left" valign="center"><b>Table of Contents</b></td>
+<td width="6%" align="left" valign="center"><b>Next</b></td>
+<td width="39%" align="left" valign="center"><a href="./Introduction.html">What is OmegaT</a></td></tr>
+</table>
+
+</div>
+
+</body>
+</html>

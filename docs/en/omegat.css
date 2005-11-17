@@ -1,43 +1,19 @@
+body {
+	font-family: "serif";
+	margin: 1em;
+	}
 
-p, a, li, dt, dd, table 
-{
-  font-family: "Times New Roman", "Times", "Sans Serif"
-}
+.chapter {
+	color: black;
+	}
 
-h1
-{
-  font-family: "Arial", "Helvetica", "Serif"; 
-  color: navy;
-  margin-top: 0px;
-  margin-bottom: 5px
-}
-
-h2
-{
-  font-family: "Arial", "Helvetica", "Serif";
-  color: navy;
-  margin-top: 15px;
-  margin-bottom: 0px
-}
-
-h3, h4
-{
-  font-family: "Arial", "Helvetica", "Serif";
-  color: navy;
-  margin-top: 15px;
-  margin-bottom: 0px
-}
-
-div.navbar-bottom
-{
-  padding-top: 10px;
-  margin-bottom: 0px
-}
-
-div.shortcuts
-{
-  padding-top: 10px;
-  margin-bottom: 0px
-}
-
-
+h1, h2, table, dt {
+	color: navy;
+	}
+h3, h4, ul a {
+	color: green;
+	}
+.navbar-top, .navbar-bottom {
+	margin-top: 1em;
+	margin-bottom: 1em;
+	}

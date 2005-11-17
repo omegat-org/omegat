@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<title>OmegaT: Sentence Segmentation</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="./omegat.css">
+</head>
+
+<body lang="en" dir="LTR">
+
+<div class="navbar-top">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td width="9%" align="left" valign="center"><b>Previous</b></td>
+<td width="39%" align="left" valign="center"><a href="./SaveRevComp.html">Save, Revise, Compile</a></td>
+<td width="6%" align="left" valign="center"><b>Next</b></td>
+<td width="39%" align="left" valign="center"><a href="./Searches.html">Searches</a></td></tr>
+</table>
+
+</div>
+
+<div class="content">
+
+<h1>This page is being written. Please do NOT translate it yet.</h1>
+    
+<a name="9" />
+<h1 align="center" name="9" id="9">Sentence Segmentation</h1>
+
+	<ol><li><a href="#9.1">Introduction</a></li>
+	<li><a href="#9.2">Rules Setup</a></li>	
+	<li><a href="#9.3">Regular Expressions to use in segmentation rules</a></li></ol>
+
+
+<p>After OmegaT has segmented the source file into logical units, for formatted files usually corresponding to paragraphs, it will further segment these blocks into sentences if you don't turn the Sentence Segmenting off. Generally speaking, OmegaT may segment the logical source file blocks into any segments you setup it to. However as <b>by default</b> OmegaT segments into sentences, we will call it <b>sentence</b> segmenting.</p>
+
+<p>The Sentence Segmentation was built with Segmentation Rules eXchange (SRX) standard in mind, though as of current writing, OmegaT neither supports all SRX features, nor is able to import/export rules defined in SRX format.</p>
+
+<a name="9.1" />
+<h2 name="9.1" id="9.1">Introduction</h2>
+
+<p>There are two kinds of rules.</p>
+<ul>
+<li>Break rules break the text into segments.</li>
+<li>Exception rules specify what chunks of text should not be separated from others.</li></ul>
+
+<p>Break rule example: <b>"Did it make sense? I was not sure."</b> can be segmented as two sentences after the "?". There should be a break rule for "<b>?</b>"</p>
+<p>Exception rule example: <b>"Who is afraid of Mrs. Woolf?"</b> cannot be segmented after the ".". There should be an exception rule for "<b>Mrs.</b>".</p>
+
+<p> <b>NEED TO REWRITE THIS PARAGRAPH ACCORDING TO THE FINAL DEFAULTS</b> <br>While the predefined break rules should be sufficient for most European languages and Japanese, more exception rules should probably be defined for the language you translate from, as it is obviosly impossible to predefine all possible exceptions for all possible languages.</p>
+
+<a name="9.2" />
+<h2 name="9.2" id="9.2">Rules Setup</h2>
+
+<p>In order to setup the rules, select <b>Options &gt; Segmentation...</b> from the main menu. Note that you may change segmentation options only when there is no project open, because of the possible conflicts between the changed segmentation rules and segmentation in use in the opened project.</p>
+
+<a name="9.2.1" />
+<h3 name="9.2.1" id="9.2.1">Sets of Rules</h3>
+
+<p>Each language may use only one of the segmentation rule sets. The first set 
+with a matching Language Pattern is applied, so rules for a specific language
+should be higher than more general ones.</p>
+
+<p>For example, rules for Canadian French (FR-CA) should be
+higher than rules for French (FR.*), and higher than Default (.*) ones.</p>
+
+<p>Note, however, that while translating from Canadian French your project will use only the rules defined for this language, and will neither use the rules for French nor the Default ones.</p>
+
+<p>In order to create an empty set of rules, click <b>Add</b> in the upper half
+of the dialog. An empty line appears at the bottom of a table. Change the name
+of the rule set and the language pattern. Syntax of the language pattern
+conforms to regular expression syntax. See <a href="#9.3.1">Short summary of regular-expression constructs</a> below.</p>
+
+<p>If your set of rules handles a language-country pair, we advise you to move
+it atop using <b>Move Up</b> button.</p>
+
+<p>In order to edit a set of rules, simply click on it in a table, the rules of
+the set will appear in the bottom half of the window.</p>
+
+<p>The Break/Exception checkbox determines whether it is a break rule 
+(checkbox set) or an exception rule (checkbox unset). Two regular expressions 
+Before and After specify what must be before and after some position so that it 
+qualifies for exception rule or for break rule.</p>
+
+<p>The process of segmenting may be simplified to the following. Imagine a
+cursor moving from after the first to before the last symbol of the text.
+For each cursor position we take each rule in the given order and 
+try to apply the <b>Before</b> pattern to all the text that is on the left of a cursor and the <b>After</b> pattern to the text on the right so that they touch the cursor.<br>
+If the application of some rule is successful, for exception rules we do nothing
+but stop examining more rules, and for break rules we take the text on the left
+as a separate segment, for each position of the text (by position we understand a cursor between two symbols)</p>
+
+<a name="9.2.2" />
+<h3 name="9.2.2" id="9.2.2">Simple examples</h3>
+
+<p><dl><dt><b>Aim:</b> to set a segment after a "\." (period) and before a space</dt>
+<dd><code>Before: \. After: \s</code><br>
+<b>Note:</b> "\." means the character "."<br>
+"\s" means any white space character</dd>
+<dt><b>Aim:</b> to not set a segment after "Mr."</dt>
+<dd>Before: Mr\. After: \s<br>
+<b>Note:</b> Don't forget to leave the rule box <b>unchecked</b></dd>
+<dt><b>Aim:</b> to set a segment after "。" (Japanese period)</dt>
+<dd><code>Before: 。 After: (empty)</code><br>
+<b>Note:</b> You can leave a field empty</dd></dl>
+The first two examples are taken from the <b>Default</b> rules.</p>
+
+<a name="9.3" />
+<h2 name="9.3" id="9.3">Regular Expressions to use in segmentation rules</h2>
+
+<p>The segmentation rules themselves are represented using regular expressions. This allows for maximum flexibility in the definition of the rules and conforms to SRX.</p>
+
+<a name="9.3.1" />
+<h3 name="9.3.1" id="9.3.1">Short summary of regular-expression constructs</h3>
+
+<p>These are not the only constructs you may use in OmegaT segmentation rules, but rather the most commonly used. OmegaT supports all the regular expression features as described in SRX standard.</p>
+
+<table border="0" width="80%" cellpadding="1" cellspacing="0" summary="Regular expression constructs, and what they match">
+<tr bgcolor="#DDEEFF"><th width="10%" align="left" id="construct">Construct&nbsp;</th><th align="left">Matches</th></tr>
+<tr><th>&nbsp;</th></tr>
+<tr><th align="left" colspan="2" id="characters">Characters</th></tr>
+<tr><td><b>x</b></td><td>The character <b>x</b>, except the following...</td></tr>
+<tr><td><tt>\u</tt><b>hhhh</b></td><td>The character with hexadecimal&nbsp;value&nbsp;<tt>0x</tt><b>hhhh</b></td></tr>
+<tr><td><tt>\t</tt></td><td>The tab character (<tt>'\u0009'</tt>)</td></tr>
+<tr><td><tt>\n</tt></td><td>The newline (line feed) character (<tt>'\u000A'</tt>)</td></tr>
+<tr><td><tt>\r</tt></td><td>The carriage-return character (<tt>'\u000D'</tt>)</td></tr>
+<tr><th>&nbsp;</th></tr>
+<tr align="left"><th colspan="2" id="quot">Quotation</th></tr>
+<tr><td><tt>\</tt></td><td>Nothing, but quotes the following character. This is required if you would like to enter of the metacharacters <code>!$()*+.&lt;&gt;?[\]^{|}</code> to match as themselves.</td></tr>
+<tr><td><tt>\\</tt></td><td>For example, this is the backslash character</td></tr>
+<tr><td><tt>\Q</tt></td><td>Nothing, but quotes all characters until <tt>\E</tt></td></tr>
+<tr><td><tt>\E</tt></td><td>Nothing, but ends quoting started by <tt>\Q</tt></td></tr>
+<tr><th>&nbsp;</th></tr>
+<tr align="left"><th colspan="2" id="classes">Character classes</th></tr>
+<tr><td><tt>[abc]</tt></td><td><tt>a</tt>, <tt>b</tt>, or <tt>c</tt> (simple class)</td></tr>
+<tr><td><tt>[^abc]</tt></td><td>Any character except <tt>a</tt>, <tt>b</tt>, or <tt>c</tt> (negation)</td></tr>
+<tr><td><tt>[a-zA-Z]</tt></td><td><tt>a</tt> through <tt>z</tt> or <tt>A</tt> through <tt>Z</tt>, inclusive (range)</td></tr>
+<tr><th>&nbsp;</th></tr>
+<tr align="left"><th colspan="2" id="predef">Predefined character classes</th></tr>
+<tr><td><tt>.</tt></td><td>Any character (except for line terminators)</td></tr>
+<tr><td><tt>\d</tt></td><td>A digit: <tt>[0-9]</tt></td></tr>
+<tr><td><tt>\D</tt></td><td>A non-digit: <tt>[^0-9]</tt></td></tr>
+<tr><td><tt>\s</tt></td><td>A whitespace character: <tt>[ \t\n\x0B\f\r]</tt></td></tr>
+<tr><td><tt>\S</tt></td><td>A non-whitespace character: <tt>[^\s]</tt></td></tr>
+<tr><td><tt>\w</tt></td><td>A word character: <tt>[a-zA-Z_0-9]</tt></td></tr>
+<tr><td><tt>\W</tt></td><td>A non-word character: <tt>[^\w]</tt></td></tr>
+<tr><th>&nbsp;</th></tr>
+<tr align="left"><th colspan="2" id="bounds">Boundary matchers</th></tr>
+<tr><td><tt>^</tt></td><td>The beginning of a line</td></tr>
+<tr><td><tt>$</tt></td><td>The end of a line</td></tr>
+<tr><td><tt>\b</tt></td><td>A word boundary</td></tr>
+<tr><td><tt>\B</tt></td><td>A non-word boundary</td></tr>
+<tr><th>&nbsp;</th></tr>
+<tr align="left"><th colspan="2" id="greedy">Greedy quantifiers</th></tr>
+<tr><td colspan="2">These will match as much as they can. For example, <code>a+</code> will match <code>aaa</code> in <code>aaabbb</code></td></tr>
+<tr><td><b>X</b><tt>?</tt></td><td><b>X</b>, once or not at all</td></tr>
+<tr><td><b>X</b><tt>*</tt></td><td><b>X</b>, zero or more times</td></tr>
+<tr><td><b>X</b><tt>+</tt></td><td><b>X</b>, one or more times</td></tr>
+<tr><th>&nbsp;</th></tr>
+<tr align="left"><th colspan="2" id="reluc">Reluctant (non-greedy) quantifiers</th></tr>
+<tr><td colspan="2">These will match as little as they can. For example, <code>a+?</code> will match the first <code>a</code> in <code>aaabbb</code></td></tr>
+<tr><td><b>X</b><tt>??</tt></td><td><b>X</b>, once or not at all</td></tr>
+<tr><td><b>X</b><tt>*?</tt></td><td><b>X</b>, zero or more times</td></tr>
+<tr><td><b>X</b><tt>+?</tt></td><td><b>X</b>, one or more times</td></tr>
+<tr><th>&nbsp;</th></tr>
+<tr align="left"><th colspan="2" id="logical">Logical operators</th></tr>
+<tr><td><b>XY</b></td><td><b>X</b> followed by <b>Y</b></td></tr>
+<tr><td><b>X</b><tt>|</tt><b>Y</b></td><td>Either <b>X</b> or <b>Y</b></td></tr>
+<tr><td><tt>(</tt><b>XY</b><tt>)</tt></td><td><b>XY</b> as a single group</td></tr></table>
+
+</div>
+
+<div class="navbar-bottom">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td width="9%" align="left" valign="center"><b>Previous</b></td>
+<td width="39%" align="left" valign="center"><a href="./SaveRevComp.html">Save, Revise, Compile</a></td>
+<td width="6%" align="left" valign="center"><b>Next</b></td>
+<td width="39%" align="left" valign="center"><a href="./Searches.html">Searches</a></td></tr>
+</table>
+
+</div>
+
+</body>
+</html>

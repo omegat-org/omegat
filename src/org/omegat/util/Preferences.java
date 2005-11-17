@@ -66,11 +66,13 @@ public class Preferences
     public static final String MATCHWINDOW_Y	= "match_y";					// NOI18N
     
     /** Where the divider between Main area and Match/Glossary is */
-    public static final String MATCHWINDOW_DIVIDER= "match_divider";                            // NOI18N
-    
-    public static final String USE_MNEMONIC_SEQUENCES = "mnemonics";                            // NOI18N
-    public static final String USE_TAB_TO_ADVANCE     = "tab_advance";                          // NOI18N
-    public static final String SEARCH_FOLDER	= "search_dir";                                 // NOI18N
+    public static final String MATCHWINDOW_DIVIDER= "match_divider";            // NOI18N
+
+    /** Use the TAB button to advance to the next segment */
+    public static final String USE_TAB_TO_ADVANCE     = "tab_advance";          // NOI18N
+    /** Always confirm Quit, even if the project is saved */
+    public static final String ALWAYS_CONFIRM_QUIT     = "always_confirm_quit"; // NOI18N
+    public static final String SEARCH_FOLDER	= "search_dir";                 // NOI18N
     
     /** Workflow Option: Don't Insert Source Text Into Translated Segment */
     public static final String DONT_INSERT_SOURCE_TEXT = "wf_noSourceText";                     // NOI18N

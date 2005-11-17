@@ -6,7 +6,7 @@
 
  Enchancements:
 
- - Keyboard option to close Find window
+ - Keyboard option (ESC) to close Find window
    http://sourceforge.net/support/tracker.php?aid=1350555
 
  - Add Yes/No Warning before OmegaT quits

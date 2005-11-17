@@ -69,8 +69,6 @@ public class OConsts
     /** The smallest threshold to detect a fuzzy match string */
     public static final int    FUZZY_MATCH_THRESHOLD    = 30;
     
-    public static final String SW_DIR_CB_CHECKED_CMD    = "dir_ck";					// NOI18N
-    
     public static final int    ST_MAX_SEARCH_RESULTS    = 1000;
     
     public static final String TF_SRC_FONT_NAME		= "source_font";				// NOI18N

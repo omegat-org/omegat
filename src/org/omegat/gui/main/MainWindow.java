@@ -249,14 +249,16 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     /** Updates menu checkboxes from preferences on start */
     private void updateCheckboxesOnStart()
     {
-        String tab = Preferences.getPreference(Preferences.USE_TAB_TO_ADVANCE);
-        if (tab != null && tab.equals("true"))								// NOI18N
+        if (Preferences.isPreference(Preferences.USE_TAB_TO_ADVANCE))
         {
             optionsTabAdvanceCheckBoxMenuItem.setSelected(true);
             m_advancer = KeyEvent.VK_TAB;
         }
         else
             m_advancer = KeyEvent.VK_ENTER;
+        
+        optionsAlwaysConfirmQuitCheckBoxMenuItem.setSelected(
+                Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT));
     }
     
     /**
@@ -404,14 +406,32 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     {
         storeScreenLayout();
         Preferences.save();
-        
-        // shutdown
+
         if (m_projectLoaded)
         {
             commitEntry();
+            activateEntry();
+        }
+        
+        boolean projectModified = false;
+        if (m_projectLoaded)
+        {
+            projectModified = CommandThread.core.isProjectModified();
             doSave();
         }
+        // RFE 1302358
+        // Add Yes/No Warning before OmegaT quits
+        if (projectModified || 
+                Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT))
+        {
+            if( JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(this, 
+                    OStrings.getString("MW_QUIT_CONFIRM"), 
+                    OStrings.getString("CONFIRM_DIALOG_TITLE"), 
+                    JOptionPane.YES_NO_OPTION) )
+                return;
+        }
 
+        // shut down
         if( CommandThread.core!=null )
             CommandThread.core.interrupt();
 
@@ -1709,6 +1729,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         toolsValidateTagsMenuItem = new javax.swing.JMenuItem();
         optionsMenu = new javax.swing.JMenu();
         optionsTabAdvanceCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
+        optionsAlwaysConfirmQuitCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
         separator1inOptionsMenu = new javax.swing.JSeparator();
         optionsFontSelectionMenuItem = new javax.swing.JMenuItem();
         optionsSetupFileFiltersMenuItem = new javax.swing.JMenuItem();
@@ -1718,7 +1739,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         helpContentsMenuItem = new javax.swing.JMenuItem();
         helpAboutMenuItem = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addComponentListener(this);
         addWindowListener(this);
 
@@ -1903,6 +1924,11 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
 
         optionsMenu.add(optionsTabAdvanceCheckBoxMenuItem);
 
+        org.openide.awt.Mnemonics.setLocalizedText(optionsAlwaysConfirmQuitCheckBoxMenuItem, OStrings.getString("MW_OPTIONSMENU_ALWAYS_CONFIRM_QUIT"));
+        optionsAlwaysConfirmQuitCheckBoxMenuItem.addActionListener(this);
+
+        optionsMenu.add(optionsAlwaysConfirmQuitCheckBoxMenuItem);
+
         optionsMenu.add(separator1inOptionsMenu);
 
         org.openide.awt.Mnemonics.setLocalizedText(optionsFontSelectionMenuItem, OStrings.getString("TF_MENU_DISPLAY_FONT"));
@@ -2002,6 +2028,10 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             MainWindow.this.editInsertTranslationMenuItemActionPerformed(evt);
         }
+        else if (evt.getSource() == editOverwriteSourceMenuItem)
+        {
+            MainWindow.this.editOverwriteSourceMenuItemActionPerformed(evt);
+        }
         else if (evt.getSource() == editInsertSourceMenuItem)
         {
             MainWindow.this.editInsertSourceMenuItemActionPerformed(evt);
@@ -2082,9 +2112,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             MainWindow.this.helpAboutMenuItemActionPerformed(evt);
         }
-        else if (evt.getSource() == editOverwriteSourceMenuItem)
+        else if (evt.getSource() == optionsAlwaysConfirmQuitCheckBoxMenuItem)
         {
-            MainWindow.this.editOverwriteSourceMenuItemActionPerformed(evt);
+            MainWindow.this.optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed(evt);
         }
     }
 
@@ -2145,6 +2175,12 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     }
     // </editor-fold>//GEN-END:initComponents
 
+    private void optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed
+    {//GEN-HEADEREND:event_optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed
+        Preferences.setPreference(Preferences.ALWAYS_CONFIRM_QUIT,
+                optionsAlwaysConfirmQuitCheckBoxMenuItem.isSelected());
+    }//GEN-LAST:event_optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed
+
     private void editOverwriteSourceMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editOverwriteSourceMenuItemActionPerformed
     {//GEN-HEADEREND:event_editOverwriteSourceMenuItemActionPerformed
         doOverwriteSource();
@@ -2192,9 +2228,8 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     
     private void optionsTabAdvanceCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsTabAdvanceCheckBoxMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsTabAdvanceCheckBoxMenuItemActionPerformed
-        
         Preferences.setPreference(Preferences.USE_TAB_TO_ADVANCE,
-        optionsTabAdvanceCheckBoxMenuItem.isSelected());
+                optionsTabAdvanceCheckBoxMenuItem.isSelected());
         if( optionsTabAdvanceCheckBoxMenuItem.isSelected() )
             m_advancer = KeyEvent.VK_TAB;
         else
@@ -2405,6 +2440,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuBar mainMenu;
     private javax.swing.JScrollPane mainScroller;
+    private javax.swing.JCheckBoxMenuItem optionsAlwaysConfirmQuitCheckBoxMenuItem;
     private javax.swing.JMenuItem optionsFontSelectionMenuItem;
     private javax.swing.JMenu optionsMenu;
     private javax.swing.JMenuItem optionsSentsegMenuItem;

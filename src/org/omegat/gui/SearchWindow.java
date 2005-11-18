@@ -31,20 +31,23 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.text.MessageFormat;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.gui.main.MainWindow;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -112,7 +115,6 @@ public class SearchWindow extends JFrame
         
         m_dirCB = new JCheckBox();
         m_dirCB.setSelected(false);
-        m_dirCB.setActionCommand(OConsts.SW_DIR_CB_CHECKED_CMD);
         m_recursiveCB = new JCheckBox();
         m_recursiveCB.setSelected(true);
         m_recursiveCB.setEnabled(false);
@@ -191,6 +193,18 @@ public class SearchWindow extends JFrame
             }
         });
         
+        //  Handle escape key to close the window
+        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
+        Action escapeAction = new AbstractAction()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                setVisible(false);
+            }
+        };
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
+        put(escape, "ESCAPE");                                                  // NOI18N
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
         
         // need to control check boxes and radio buttons manually
         //

@@ -1,4 +1,4 @@
-.properties Import 1.1 ReadMe file
+.properties Import 1.2 ReadMe file
 
 This import tool supplements OmegaT in the following way:
 
@@ -13,5 +13,6 @@ and type
 
 ----------------------------------------------------------------------
 
-Verison 1.0: Initial release
+Version 1.2: Make it look nicer
 Version 1.1: Some bugs fixed
+Verison 1.0: Initial release

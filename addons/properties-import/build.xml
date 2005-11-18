@@ -1,50 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project basedir="." default="all" name="OT Properties Import">
+<project name="properties-import" default="default" basedir=".">
+    <description>Builds, tests, and runs the project properties-import.</description>
+    <import file="nbproject/build-impl.xml"/>
 
-    <target name="init">
-        <property name="jar" location="properties_import.jar"/>
+    <target name="-pre-compile">
+        <copy file="../../dist/lib-mnemonics.jar" todir="lib" />
     </target>
-
-    <target name="compile" depends="init">
-        <mkdir dir="classes"/>
-        <javac debug="true" deprecation="true" destdir="classes" srcdir="src"/>
-    </target>
-
-    <target name="jar" depends="init,compile">
-        <jar basedir="classes" compress="false" jarfile="${jar}">
-            <manifest>
-                <attribute name="Main-Class" value="org.omegat.addons.properties_import.Main"/>
-                <attribute name="License" value="GNU Public License version 2"/>
-                <attribute name="Specification-Version" value="1.0"/>
-                <attribute name="Implementation-Version" value="1.0.0.1"/>
-            </manifest>
-        </jar>
-    </target>
-
-    <target name="clean" depends="init" description="Clean all build products.">
-        <delete dir="classes"/>
-        <delete file="${jar}"/>
-        <delete file="import_properties_1.1.zip"/>
-    </target>
-
-    <target name="zip" depends="jar">
-        <zip basedir="." destfile="import_properties_1.1.zip"
-                  includes="properties_import.jar readme.txt" />
-    </target>
-
-    <target name="all" depends="zip" description="Build this addon."/>
     
-    <target name="debug" depends="compile" if="netbeans.home" description="Debug Project">   
-        <nbjpdastart name="OT Properties Import" addressproperty="jpda.address" transport="dt_socket">     
-            <classpath refid="run.classpath"/>     
-        </nbjpdastart>
-        <java fork="true" classname="com.me.myapp.Main">
-            <jvmarg value="-Xdebug"/>
-            <jvmarg value="-Xnoagent"/>
-            <jvmarg value="-Djava.compiler=none"/>
-            <jvmarg value="-Xrunjdwp:transport=dt_socket,address=${jpda.address}"/>
-            <classpath refid="run.classpath"/>
-        </java>
+    <target name="-post-clean">
+        <delete file="import_properties_1.2.zip"/>
+        <delete file="properties-import.jar"/>
     </target>
-
+        
+    <target name="dist" depends="jar" description="Creates a ZIP distro of Properties Import">
+        <zip basedir="." destfile="import_properties_1.2.zip"
+                  includes="properties-import.jar lib/** readme.txt" />
+    </target>
+    
 </project>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="nbedge-filter" default="default" basedir=".">
+    <description>Builds, tests, and runs the project nbedge-filter.</description>
+    <import file="nbproject/build-impl.xml"/>
+   
+    <property name="plugins.dir" location="../../dist/plugins" />
+
+    <target name="-post-jar">
+        <mkdir dir="${plugins.dir}/edge/" />
+        <copy file="${dist.jar}" todir="${plugins.dir}/edge/" />
+    </target>
+    
+    <target name="-post-clean">
+        <delete dir="${plugins.dir}/edge"/>
+    </target>
+
+</project>

@@ -100,7 +100,21 @@ public class StaticUtils
         int i;
         // read all files in current directory, recurse into subdirs
         // append files to supplied list
-        File [] flist = rootDir.listFiles();
+        File flist[] = null;
+        try
+        {
+            flist = rootDir.listFiles();
+        }
+        catch( Exception e )
+        {
+            // don't care what exception is there.
+            // by contract, only a SecurityException is possible, but who knows...
+        }
+        // if IOException occured, flist is null
+        // and we simply return
+        if( flist==null )
+            return;
+        
         for (i=0; i<Array.getLength(flist); i++)
         {
             if (flist[i].isDirectory())
@@ -157,9 +171,12 @@ public class StaticUtils
      */
     public static int tokenizeText(String str, List tokenList)
     {
+        int len = str.length();
+        if (len==0)
+            return 0;
+        
         str = str.toLowerCase();
         
-        int len = str.length();
         boolean word = false;
         boolean tagstart = false;
         StringBuffer tokenBuff = new StringBuffer(len);

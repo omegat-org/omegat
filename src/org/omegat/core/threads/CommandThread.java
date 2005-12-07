@@ -277,14 +277,12 @@ public class CommandThread extends Thread
             // Project Loaded...
             MessageRelay.uiMessageSetMessageText(tf, "");  // NOI18N
             
-            /*
-             temporary removed
-                        evtStr = OStrings.CT_LOADING_WORDCOUNT;
-                        MessageRelay.uiMessageSetMessageText(tf, evtStr);
-                        buildWordCounts();
-                        MessageRelay.uiMessageFuzzyInfo(tf);
-                        MessageRelay.uiMessageSetMessageText(tf, "");  // NOI18N
-             */
+            // Calling Main Window back to notify that project
+            // is successfully loaded.
+            // Part of bugfix for
+            //           First segment does not trigger matches after load
+            //           http://sourceforge.net/support/tracker.php?aid=1370838
+            m_transFrame.projectLoaded();
             
             // enable normal saves
             m_saveCount = 2;
@@ -750,7 +748,7 @@ public class CommandThread extends Thread
      *                     FileChooser is called to select a project.
      */
     private boolean loadProject(String projectRoot)
-    throws IOException, InterruptedIOException, TranslationException
+            throws IOException, InterruptedIOException, TranslationException
     {
         int i;
         int j;

@@ -38,19 +38,19 @@ import javax.swing.KeyStroke;
 
 import org.omegat.core.StringEntry;
 import org.omegat.core.matching.SourceTextEntry;
+import org.omegat.filters2.xml.DefaultEntityFilter;
 import org.omegat.util.OStrings;
 import org.openide.awt.Mnemonics;
 import org.omegat.gui.main.MainWindow;
 
 /**
- * A frame to display the context of a segment being currently translated.
- * Not sure if it's still in use?
+ * A frame to display the tags with errors during tag validation.
  *
  * @author Keith Godfrey
  */
-public class ContextFrame extends JFrame
+public class TagValidationFrame extends JFrame
 {
-	public ContextFrame(MainWindow parent)
+	public TagValidationFrame(MainWindow parent)
 	{
 		m_parent = parent;
 		m_srcLang = true;
@@ -112,6 +112,14 @@ public class ContextFrame extends JFrame
 		dispose();
 	}
 
+    private String htmlize(String str)
+    {
+        String htmld = str;
+        htmld = htmld.replaceAll("\\<", "&lt;");
+        htmld = htmld.replaceAll("\\>", "&gt;");
+        return htmld;
+    }
+    
     public void displayStringList(ArrayList stringList)
 	{
 		setTitle(m_searchResults + " " + OStrings.TF_NOTICE_BAD_TAGS);			// NOI18N
@@ -133,8 +141,8 @@ public class ContextFrame extends JFrame
 				out += "<tr>";													// NOI18N
 				out += "<td><a href=\"" + (ste.entryNum()+ 1) + "\">";			// NOI18N
 				out += ste.entryNum() + 1 + " </a></td>";						// NOI18N
-				out += "<td>" + src + "</td>";									// NOI18N
-				out += "<td>" + trans + "</td>";								// NOI18N
+				out += "<td>" + htmlize(src) + "</td>";									// NOI18N
+				out += "<td>" + htmlize(trans) + "</td>";								// NOI18N
 				out += "</tr>";													// NOI18N
 			}
 		}

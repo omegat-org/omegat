@@ -60,7 +60,7 @@ import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.gui.ContextFrame;
+import org.omegat.gui.TagValidationFrame;
 import org.omegat.gui.HelpFrame;
 import org.omegat.gui.OmegaTFileChooser;
 import org.omegat.gui.ProjectFrame;
@@ -450,7 +450,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         if (m_projectLoaded)
         {
             commitEntry();
-            activateEntry();
         }
         
         boolean projectModified = false;
@@ -468,7 +467,11 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                     OStrings.getString("MW_QUIT_CONFIRM"),
                     OStrings.getString("CONFIRM_DIALOG_TITLE"),
                     JOptionPane.YES_NO_OPTION) )
+            {
+                if(m_projectLoaded)
+                    activateEntry();
                 return;
+            }
         }
         
         // shut down
@@ -495,8 +498,8 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         ArrayList suspects = CommandThread.core.validateTags();
         if (suspects.size() > 0)
         {
-            // create list of suspect strings - use org.omegat.gui.ContextFrame for now
-            ContextFrame cf = new ContextFrame(this);
+            // create list of suspect strings - use org.omegat.gui.TagValidationFrame for now
+            TagValidationFrame cf = new TagValidationFrame(this);
             cf.setVisible(true);
             cf.displayStringList(suspects);
         }
@@ -742,6 +745,30 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         viewFileListCheckBoxMenuItem.setSelected(true);
     }
     
+    /**
+     * Notifies Main Window that the CommandThread has finished loading the 
+     * project.
+     * <p>
+     * Current implementation commits and re-activates current entry to show 
+     * fuzzy matches.
+     * <p>
+     * Calling Main Window back to notify that project is successfully loaded.
+     * Part of bugfix for 
+     * <a href="http://sourceforge.net/support/tracker.php?aid=1370838">[1370838]
+     * First segment does not trigger matches after load</a>.
+     */
+    public void projectLoaded()
+    {
+        Thread runlater = new Thread()
+        {
+            public void run()
+            {
+                commitEntry();
+                activateEntry();
+            }
+        };
+        SwingUtilities.invokeLater(runlater);
+    }
     
     /** Edits project's properties */
     private void doEditProject()
@@ -1064,10 +1091,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         if (selection != null)
         {
             selection.trim();
-            if (selection.length() < 3)
-            {
-                selection = null;
-            }
         }
         
         SearchThread srch = new SearchThread(this, selection);
@@ -1222,8 +1245,13 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         matchWindow.getMatchGlossaryPane().updateGlossaryText();
     }
     
+    /** Is any segment edited currently? */
+    private boolean entryActivated = false;
+    
     /**
      * Commits the translation.
+     * Reads current entry text and commit it to memory if it's changed.
+     * Also clears out segment markers while we're at it.
      * <p>
      * Since 1.6: Translation equal to source may be validated as OK translation
      *            if appropriate option is set in Workflow options dialog.
@@ -1231,11 +1259,11 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     private void commitEntry()
     {
         if (!m_projectLoaded)
-        {
             return;
-        }
-        // read current entry text and commit it to memory if it's changed
-        // clear out segment markers while we're at it
+        
+        if (!entryActivated)
+            return;
+        entryActivated = false;
         
         int start = m_segmentStartOffset + m_sourceDisplayLength +
                 OStrings.TF_CUR_SEGMENT_START.length();
@@ -1263,7 +1291,13 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         StyleConstants.setForeground(mattr, Color.darkGray);
         xlPane.setCharacterAttributes(mattr, true);
         
-        xlPane.select(end, xlPane.getText().length() - m_segmentEndInset);
+        try
+        {
+            int end2 = xlPane.getText().length() - m_segmentEndInset;
+            xlPane.select(end, end2);
+        }
+        catch( Exception e ) {}
+        
         xlPane.replaceSelection("");											// NOI18N
         xlPane.select(m_segmentStartOffset, start);
         xlPane.replaceSelection("");											// NOI18N
@@ -1331,10 +1365,12 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
      * Also moves document focus to current entry,
      * and makes sure fuzzy info displayed if available.
      */
-    public void activateEntry()
+    public synchronized void activateEntry()
     {
         if (!m_projectLoaded)
             return;
+        
+        entryActivated = true;
         
         int i;
         DocumentSegment docSeg;

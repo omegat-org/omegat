@@ -50,7 +50,6 @@ public class XMLStreamReader
         m_stringStream = "";	// NOI18N
         m_charStack = new Stack();
         m_charCache = new ArrayList();
-        m_ignoreReturn = false;
         m_killEmptyBlocks = false;
         m_ignoreWhiteSpace = false;
         m_breakWhitespace = false;
@@ -266,18 +265,15 @@ public class XMLStreamReader
                         // convert 13 to 10 - or just omit 13
                         // (XML specs instruct this)
                         c = m_stringStream.charAt(m_pos);
-                        if (c == 10)
+                        if (c == '\n')
                         {
                             // simply drop 13
                             m_pos++;
                         }
                         else
-                            c = 10;
+                            c = '\n';
                     }
-                    if (m_ignoreReturn && c == 10)
-                        return getNextChar();
-                    else
-                        return c;
+                    return c;
                 }
                 else
                     return 0;
@@ -301,14 +297,12 @@ public class XMLStreamReader
                             if (res > 0)
                             {
                                 b = c[0];
-                                if (b != 10)
+                                if (b != '\n')
                                 {
                                     // not a cr/lf pair - make sure not
                                     // another cr and then push char
                                     if (b == 13)
-                                        pushChar((char) 0x0a);
-                                    else
-                                        pushChar(b);
+                                        pushChar('\n');
                                 }
                                 // else - do nothing; swallow the 13
                             }
@@ -319,10 +313,7 @@ public class XMLStreamReader
                     else
                         return 0;
                     
-                    if (m_ignoreReturn && b == 10)
-                        return getNextChar();
-                    else
-                        return b;
+                    return b;
                 }
                 catch (IOException e)
                 {
@@ -357,7 +348,7 @@ public class XMLStreamReader
                 else
                     strBuf.append(c2);
             }
-            else if (c == ' ' || c == 10 || c == 13 || c == 9)
+            else if (c == ' ' || c == '\n' || c == 13 || c == 9)
             {
                 // spaces get special handling
                 if (m_ignoreWhiteSpace)
@@ -592,28 +583,9 @@ public class XMLStreamReader
                     break;
                     
                 case state_cdata:
-                    //                    // copy until ]]> encountered
+                    // copy until ]]> encountered
                     switch (type)
                     {
-/*
-                        case type_clBrac:
-                            bracCnt++;
-                            break;
- 
-                        case type_gt:
-                            if (bracCnt >= 2)
-                            {
-                                // all done - append all but last brackets
-                                while (bracCnt > 1)
-                                {
-                                    data += ']';
-                                    bracCnt--;
-                                }
-                                state = state_finish;
-                                blk.setText(data);
-                            }
-                            break;
- */
                         case type_opBrac:
                             // the end of CDATA declaration
                             state=state_finish;
@@ -621,17 +593,6 @@ public class XMLStreamReader
                             break;
                             
                         default:
-/*
-                            if (bracCnt > 0)
-                            {
-                                while (bracCnt > 0)
-                                {
-                                    bracCnt--;
-                                    data += ']';
-                                }
-                            }
-                            data += c;
- */
                     }
                     break;
                     
@@ -760,6 +721,23 @@ public class XMLStreamReader
         return blk;
     }
     
+    private void throwErrorInGetNextTag(XMLBlock blk, String msg) throws TranslationException
+    {
+        // TODO construct error message with correct state data
+        // for now, just throw a parse error
+        String data = OStrings.getString("XSR_ERROR_TAG_NAME") +
+                blk.getTagName() + " ";	// NOI18N
+        if (blk.isEmpty())
+            data += OStrings.getString("XSR_ERROR_EMPTY_TAG");
+        else if (blk.isClose())
+            data += OStrings.getString("XSR_ERROR_CLOSE_TAG");
+        if (blk.numAttributes() > 0)
+            data += OStrings.getString("XSR_ERROR_LOADED") + 
+                    blk.numAttributes() + 
+                    OStrings.getString("XSR_ERROR_ATTRIBUTES");
+        throw new TranslationException(msg + data);
+    }
+    
     private XMLBlock getNextTag() throws TranslationException
     {
         char c = getNextChar();
@@ -793,8 +771,6 @@ public class XMLStreamReader
         }
         
         int state = state_start;
-        boolean error = false;
-        String msg = "";	// NOI18N
         String name = "";	// NOI18N
         String attr = "";	// NOI18N
         String val = "";	// NOI18N
@@ -819,9 +795,10 @@ public class XMLStreamReader
                             break;
                             
                         default:
-                            error = true;
-                            msg = MessageFormat.format( OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
-                                    new Object[] {""+c, ""+state} );	// NOI18N
+                            throwErrorInGetNextTag(blk, 
+                                    MessageFormat.format( 
+                                    OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                                    new Object[] {""+c, ""+state}));	// NOI18N
                     }
                     break;
                     
@@ -854,9 +831,10 @@ public class XMLStreamReader
                             break;
                             
                         default:
-                            error = true;
-                            msg = MessageFormat.format( OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
-                                    new Object[] {""+c, ""+state} );	// NOI18N
+                            throwErrorInGetNextTag(blk, 
+                                    MessageFormat.format( 
+                                    OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                                    new Object[] {""+c, ""+state}));	// NOI18N
                     }
                     break;
                     
@@ -874,9 +852,10 @@ public class XMLStreamReader
                             break;
                             
                         default:
-                            msg = MessageFormat.format( OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
-                                    new Object[] {""+c, ""+state} );	// NOI18N
-                                    error = true;
+                            throwErrorInGetNextTag(blk, 
+                                    MessageFormat.format( 
+                                    OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                                    new Object[] {""+c, ""+state}));	// NOI18N
                     }
                     break;
                     
@@ -893,9 +872,10 @@ public class XMLStreamReader
                             break;
                             
                         default:
-                            error = true;
-                            msg = MessageFormat.format( OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
-                                    new Object[] {""+c, ""+state} );	// NOI18N
+                            throwErrorInGetNextTag(blk, 
+                                    MessageFormat.format( 
+                                    OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                                    new Object[] {""+c, ""+state}));	// NOI18N
                     }
                     break;
                     
@@ -925,9 +905,10 @@ public class XMLStreamReader
                             break;
                             
                         default:
-                            error = true;
-                            msg = MessageFormat.format( OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
-                                    new Object[] {""+c, ""+state} );	// NOI18N
+                            throwErrorInGetNextTag(blk, 
+                                    MessageFormat.format( 
+                                    OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                                    new Object[] {""+c, ""+state}));	// NOI18N
                     }
                     break;
                     
@@ -936,8 +917,8 @@ public class XMLStreamReader
                     {
                         // parse error - got '?' followed by something
                         //  unexpected
-                        error = true;
-                        msg = OStrings.getString("XSR_ERROR_FLOATING_QUESTION_MARK");
+                        throwErrorInGetNextTag(blk, 
+                                OStrings.getString("XSR_ERROR_FLOATING_QUESTION_MARK"));
                     }
                     else
                         state = state_finish;
@@ -958,9 +939,10 @@ public class XMLStreamReader
                             break;
                             
                         default:
-                            error = true;
-                            msg = MessageFormat.format( OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
-                                    new Object[] {""+c, ""+state} );	// NOI18N
+                            throwErrorInGetNextTag(blk, 
+                                    MessageFormat.format( 
+                                    OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                                    new Object[] {""+c, ""+state}));	// NOI18N
                     }
                     break;
                     
@@ -975,9 +957,10 @@ public class XMLStreamReader
                             break;
                             
                         default:
-                            error = true;
-                            msg = MessageFormat.format( OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
-                                    new Object[] {""+c, ""+state} );	// NOI18N
+                            throwErrorInGetNextTag(blk, 
+                                    MessageFormat.format( 
+                                    OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                                    new Object[] {""+c, ""+state}));	// NOI18N
                     }
                     break;
                     
@@ -1041,9 +1024,10 @@ public class XMLStreamReader
                             break;
                             
                         default:
-                            error = true;
-                            msg = MessageFormat.format( OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
-                                    new Object[] {""+c, ""+state} );	// NOI18N
+                            throwErrorInGetNextTag(blk, 
+                                    MessageFormat.format( 
+                                    OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                                    new Object[] {""+c, ""+state}));	// NOI18N
                     }
                     break;
                     
@@ -1051,21 +1035,7 @@ public class XMLStreamReader
                     StaticUtils.log("INTERNAL ERROR untrapped parse state " + state);	// NOI18N
             }
             
-            if (error)
-            {
-                // TODO construct error message with correct state data
-                // for now, just throw a parse error
-                String data = OStrings.getString("XSR_ERROR_TAG_NAME") +
-                        blk.getTagName() + " ";	// NOI18N
-                if (blk.isEmpty())
-                    data += OStrings.getString("XSR_ERROR_EMPTY_TAG");
-                else if (blk.isClose())
-                    data += OStrings.getString("XSR_ERROR_CLOSE_TAG");
-                if (blk.numAttributes() > 0)
-                    data += OStrings.getString("XSR_ERROR_LOADED") + blk.numAttributes() + OStrings.getString("XSR_ERROR_ATTRIBUTES");
-                throw new TranslationException(msg + data);
-            }
-            else if (state == state_finish)
+            if (state == state_finish)
             {
                 break;
             }
@@ -1401,7 +1371,6 @@ public class XMLStreamReader
     private int		m_pos;
     private Stack	    m_charStack;
     private ArrayList	m_charCache;
-    private boolean	m_ignoreReturn; //swallow 0x0a?
     private boolean	m_killEmptyBlocks;
     private boolean	m_ignoreWhiteSpace;	// don't copy ws to text
     private boolean	m_breakWhitespace;	// put all ws in own block

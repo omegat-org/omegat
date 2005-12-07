@@ -39,10 +39,10 @@ import org.omegat.filters2.xml.XMLStreamReader;
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
+ * @author Henry Pijffers
  */
 public class Preferences
 {
-    
     /** OmegaT-wide Preferences Filename */
     public static final String FILE_PREFERENCES	= "omegat.prefs";				// NOI18N
     
@@ -162,7 +162,7 @@ public class Preferences
     /**
      * Sets the value of some preference.
      *
-     * @param key   preference key, usually Preferences.PREF_...
+     * @param name  preference key name, usually Preferences.PREF_...
      * @param value preference value as a string
      */
     public static void setPreference(String name, String value)
@@ -191,7 +191,7 @@ public class Preferences
     /**
      * Sets the boolean value of some preference.
      *
-     * @param key  preference key, usually Preferences.PREF_...
+     * @param name      preference key name, usually Preferences.PREF_...
      * @param boolvalue preference defaultValue as a boolean
      */
     public static void setPreference(String name, boolean boolvalue)
@@ -201,7 +201,7 @@ public class Preferences
     /**
      * Sets the int value of some preference.
      *
-     * @param key      preference key, usually Preferences.PREF_...
+     * @param name     preference key name, usually Preferences.PREF_...
      * @param intvalue preference value as an integer
      */
     public static void setPreference(String name, int intvalue)
@@ -232,7 +232,7 @@ public class Preferences
             
             XMLStreamReader xml = new XMLStreamReader();
             xml.killEmptyBlocks();
-            xml.setStream(new File(FILE_PREFERENCES));
+            xml.setStream(new File(StaticUtils.getConfigDir() + FILE_PREFERENCES));
             XMLBlock blk;
             ArrayList lst;
             
@@ -317,7 +317,8 @@ public class Preferences
     
     private static void doSave() throws IOException
     {
-        BufferedWriter out = new BufferedWriter(new FileWriter(FILE_PREFERENCES));
+        BufferedWriter out = new BufferedWriter(new FileWriter(
+                StaticUtils.getConfigDir() + FILE_PREFERENCES));
         
         out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");             // NOI18N
         out.write("<omegat>\n");						// NOI18N
@@ -350,3 +351,4 @@ public class Preferences
     private static HashMap   m_preferenceMap;
     
 }
+

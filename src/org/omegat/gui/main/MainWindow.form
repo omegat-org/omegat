@@ -2,6 +2,21 @@
 
 <Form version="1.0" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
+    <MenuItem class="javax.swing.JSeparator" name="separator2inProjectMenu">
+    </MenuItem>
+    <MenuItem class="javax.swing.JMenuItem" name="projectExitMenuItem">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_FILE_QUIT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="projectExitMenuItemActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="generateMnemonicsCode" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+    </MenuItem>
     <Menu class="javax.swing.JMenuBar" name="mainMenu">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="projectMenu">
@@ -114,21 +129,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="projectEditMenuItemActionPerformed"/>
               </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JSeparator" name="separator2inProjectMenu">
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="projectExitMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_FILE_QUIT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="projectExitMenuItemActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="generateMnemonicsCode" type="java.lang.Boolean" value="true"/>
-              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>

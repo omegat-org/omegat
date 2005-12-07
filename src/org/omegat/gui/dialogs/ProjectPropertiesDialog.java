@@ -92,7 +92,10 @@ public class ProjectPropertiesDialog extends JDialog
     /**
      * Creates a dialog to create a new project / edit folders of existing one.
      * 
-     * @param foldersMissing if this is an existing project with some folders missing
+     * @param projectProperties properties of the project
+     * @param projFileName      project file name
+     * @param dialogTypeValue   type of the dialog ({@link #NEW_PROJECT}, 
+     *                          {@link #RESOLVE_DIRS} or {@link #EDIT_PROJECT}).
      */
     public ProjectPropertiesDialog(ProjectProperties projectProperties, 
             String projFileName, int dialogTypeValue)

@@ -59,10 +59,23 @@ class FilterVisitor extends NodeVisitor
     /** Do we collect the translatable text now. */
     boolean text = false;
     /** The translatable text being collected. */
-    StringBuffer paragraph;
+    // StringBuffer paragraph;
     /** Did the PRE block start (it means we mustn't compress the spaces). */
     boolean preformatting = false;
     
+    /** 
+     * The list of non-paragraph tags before a chunk of text.
+     * <ul>
+     * <li>If a chunk of text follows, they get prepended to the translatable paragraph,
+     *     (starting from the first tag having a pair inside a chunk of text)
+     * <li>Otherwise they are written out directly.
+     * </ul>
+     */
+    ArrayList befors;
+    
+    /** The list of nodes forming a chunk of text. */
+    ArrayList translatable;
+
     /** 
      * The list of non-paragraph tags following a chunk of text.
      * <ul>
@@ -74,6 +87,8 @@ class FilterVisitor extends NodeVisitor
     
     /** The tags behind the shortcuts */
     ArrayList s_tags;
+    /** The tag numbers of shorcutized tags */
+    ArrayList s_tag_numbers;
     /** The list of all the tag shortcuts */
     ArrayList s_shortcuts;
     /** The number of shortcuts stored */
@@ -132,11 +147,8 @@ class FilterVisitor extends NodeVisitor
             maybeTranslateAttribute(tag, "title");                              // NOI18N
             if( "INPUT".equals(tag.getTagName()) )                              // NOI18N
                 maybeTranslateAttribute(tag, "value");                          // NOI18N
-            
-            if( text )
-                queueTranslatable(tag);
-            else
-                writeout("<"+tag.getText()+">");                                // NOI18N
+
+            queuePrefix(tag);
         }
     }
     
@@ -178,17 +190,14 @@ class FilterVisitor extends NodeVisitor
                 return;
             }
             
-            if(!text)
-                initnow();
             text = true;
             firstcall = false;
         }
 
-        
         if( text )
             queueTranslatable(string);
         else
-            writeout(string.toHtml());
+            queuePrefix(string);
     }
 
     /**
@@ -215,10 +224,7 @@ class FilterVisitor extends NodeVisitor
         if( isPreformattingTag(tag) )
             preformatting = false;
 
-        if( text )
-            queueTranslatable(tag);
-        else
-            writeout(tag.toHtml());
+        queuePrefix(tag);
     }
 
     /**
@@ -226,7 +232,7 @@ class FilterVisitor extends NodeVisitor
      */
     public void beginParsing()
     {
-        initnow();
+        cleanup();
     }
     
     /**
@@ -274,6 +280,7 @@ class FilterVisitor extends NodeVisitor
                 tagname.equals("FORM") || tagname.equals("TEXTAREA") ||         // NOI18N
                 tagname.equals("FIELDSET") || tagname.equals("LEGEND") ||       // NOI18N
                 tagname.equals("LABEL")                                         // NOI18N
+                || tagname.equals("SELECT") || tagname.equals("OPTION")         // NOI18N
                 ;
     }
     
@@ -284,10 +291,13 @@ class FilterVisitor extends NodeVisitor
         return
                 tagname.equals("!DOCTYPE") ||                                   // NOI18N
                 tagname.equals("STYLE") ||                                      // NOI18N
-                tagname.equals("META") ||                                       // NOI18N
                 tagname.equals("SCRIPT") ||                                     // NOI18N
                 tagname.equals("OBJECT") ||                                     // NOI18N
-                tagname.equals("EMBED")                                         // NOI18N
+                tagname.equals("EMBED") ||                                      // NOI18N
+                (
+                    tagname.equals("META") &&                                   // NOI18N
+                    "content-type".equalsIgnoreCase(tag.getAttribute("http-equiv")) // NOI18N
+                )
                 ;
     }
     
@@ -321,53 +331,182 @@ class FilterVisitor extends NodeVisitor
      */
     private void endup()
     {
-        String para;
-        para = paragraph.toString();
-        
-        if( !preformatting )
+        // detecting the first starting tag in 'befors'
+        // that has its ending in the paragraph
+        // all before this "first good" are simply writen out
+        ArrayList all = new ArrayList();
+        all.addAll(befors);
+        all.addAll(translatable);
+        int firstgoodlimit = befors.size();
+        int firstgood = 0;
+        while( firstgood<firstgoodlimit )
         {
-            // compressing the space if this paragraph wasn't inside <PRE> tag
-            para = compressSpaces(para);
+            Node good_node = (Node)all.get(firstgood); 
+            if( !(good_node instanceof Tag) )
+            {
+                firstgood++;
+                continue;
+            }
+            Tag good = (Tag)good_node;
+            
+            // trying to test
+            int recursion = 1;
+            boolean found = false;
+            for(int i=firstgood+1; i<all.size(); i++)
+            {
+                Node cand_node = (Node)all.get(i);
+                if( cand_node instanceof Tag )
+                {
+                    Tag cand = (Tag)cand_node;
+                    if( cand.getTagName().equals(good.getTagName()) )
+                    {
+                        if( !cand.isEndTag() )
+                            recursion++;
+                        else
+                        {
+                            recursion--;
+                            if( recursion==0 )
+                            {
+                                if( i>=firstgoodlimit )
+                                    found = true;
+                                    // we've found an ending tag for this "good one"
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            // if we coud find an ending, 
+            // this is a "good one"
+            if( found )
+                break;
+            firstgood++;
         }
         
+        // writing out all tags before the "first good" one
+        for(int i=0; i<firstgood;i++)
+        {
+            Node node = (Node)all.get(i);
+            if( node instanceof Tag )
+                writeout("<" + node.getText() + ">");                           // NOI18N
+            else
+                writeout(node.getText());
+        }
+        
+
+        // detecting the last ending tag in 'afters'
+        // that has its starting in the paragraph
+        // all after this "last good" is simply writen out
+        int lastgoodlimit = all.size()-1;
+        all.addAll(afters);
+        int lastgood = all.size()-1;
+        while( lastgood>lastgoodlimit )
+        {
+            Node good_node = (Node)all.get(lastgood); 
+            if( !(good_node instanceof Tag) )
+            {
+                lastgood--;
+                continue;
+            }
+            Tag good = (Tag)good_node;
+            
+            // trying to test
+            int recursion = 1;
+            boolean found = false;
+            for(int i=lastgood-1; i>=firstgoodlimit; i--)
+            {
+                Node cand_node = (Node)all.get(i);
+                if( cand_node instanceof Tag )
+                {
+                    Tag cand = (Tag)cand_node;
+                    if( cand.getTagName().equals(good.getTagName()) )
+                    {
+                        if( cand.isEndTag() )
+                            recursion++;
+                        else
+                        {
+                            recursion--;
+                            if( recursion==0 )
+                            {
+                                if( i<=lastgoodlimit )
+                                    found = true;
+                                    // we've found a starting tag for this "good one"
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            // if we coud find a starting, 
+            // this is a "good one"
+            if( found )
+                break;
+            lastgood--;
+        }
+        
+        // appending all tags until "last good" one to paragraph text
+        StringBuffer paragraph = new StringBuffer();
+        // appending all tags starting from "first good" one to paragraph text
+        for(int i=firstgood; i<=lastgood; i++)
+        {
+            Node node = (Node)all.get(i);
+            if( node instanceof Tag )
+            {
+                shortcut((Tag)node, paragraph);
+            }
+            else // node instanceof Text
+            {
+                paragraph.append(entitiesToChars(node.toHtml()));
+            }
+        }
+
+        // also see http://sourceforge.net/support/tracker.php?aid=1364265
+        String para = paragraph.toString();
+
         // getting the translation
         para = filter.privateProcessEntry(para);
-        
         // converting & < and > into &amp; &lt; and &gt; respectively
         // note that this doesn't change < and > of tag shortcuts
         para = charsToEntities(para);
-        
         // expands tag shortcuts into full-blown tags
         para = unshorcutize(para);
-        
         // writing out the paragraph into target file
         writeout(para);
         
-        // writing out the tags that followed
-        for(int i=0; i<afters.size(); i++)
-            writeout(((Node)afters.get(i)).toHtml());
-        
-        initnow();
+        // writing out all tags after the "last good" one
+        for(int i=lastgood+1; i<all.size();i++)
+        {
+            Node node = (Node)all.get(i);
+            if( node instanceof Tag )
+                writeout("<" + node.getText() + ">");                           // NOI18N
+            else
+                writeout(node.getText());
+        }
+
+        cleanup();
     }
     
     /**
      * Inits a new paragraph.
      */
-    private void initnow()
+    private void cleanup()
     {
         text = false;
         recurse = true;
-        paragraph = new StringBuffer();
+        // paragraph = new StringBuffer();
+        befors = new ArrayList();
+        translatable = new ArrayList();
         afters = new ArrayList();
         s_tags = new ArrayList();
+        s_tag_numbers = new ArrayList();
         s_shortcuts = new ArrayList();
         s_nshortcuts = 0;
     }
     
     /**
-     * Creates a shortcut for the tag.
+     * Creates and stores a shortcut for the tag.
      */
-    private String shortcut(Tag tag)
+    private void shortcut(Tag tag, StringBuffer paragraph)
     {
         StringBuffer result = new StringBuffer();
         result.append('<');
@@ -390,7 +529,7 @@ class FilterVisitor extends NodeVisitor
                         if( recursion==0 )
                         {
                             // we've found a starting tag for this ending one !!!
-                            n = i;
+                            n = ((Integer)s_tag_numbers.get(i)).intValue();
                             break;
                         }
                     }
@@ -422,7 +561,11 @@ class FilterVisitor extends NodeVisitor
             result.append('/');
         result.append('>');
         
-        return result.toString();
+        String shortcut = result.toString();
+        s_tags.add(tag);
+        s_tag_numbers.add(new Integer(n));
+        s_shortcuts.add(shortcut);
+        paragraph.append(shortcut);
     }
     
     /**
@@ -433,39 +576,25 @@ class FilterVisitor extends NodeVisitor
         for(int i=0; i<s_shortcuts.size(); i++)
         {
             String shortcut = (String)s_shortcuts.get(i);
-            int pos = str.indexOf(shortcut);
-            Tag tag = (Tag)s_tags.get(i);
-            try
+            int pos;
+            while( (pos=str.indexOf(shortcut))>=0 )
             {
-                str = str.substring(0, pos) + 
-                        "<" + tag.getText() + ">" +                             // NOI18N
-                        str.substring(pos+shortcut.length());
-            }
-            catch( StringIndexOutOfBoundsException sioobe )
-            {
-                // nothing, string doesn't change
+                Tag tag = (Tag)s_tags.get(i);
+                try
+                {
+                    str = str.substring(0, pos) + 
+                            "<" + tag.getText() + ">" +                             // NOI18N
+                            str.substring(pos+shortcut.length());
+                }
+                catch( StringIndexOutOfBoundsException sioobe )
+                {
+                    // nothing, string doesn't change
+                    // but prevent endless loop
+                    break;
+                }
             }
         }
         return str;
-    }
-    
-    /** Appends something to the translatable paragraph text. */
-    private void appendTranslatable(Node something)
-    {
-        if( something instanceof Tag )
-        {
-            String shortcut = shortcut((Tag)something);
-            s_tags.add(something);
-            s_shortcuts.add(shortcut);
-            paragraph.append(shortcut);
-        }
-        else if( something instanceof Text )
-        {
-            paragraph.append(
-                    entitiesToChars(something.toHtml()));
-        }
-        else
-            System.out.println("ERROR");                                        // NOI18N
     }
     
     /** 
@@ -481,10 +610,9 @@ class FilterVisitor extends NodeVisitor
     {
         if( text.toHtml().trim().length()>0 )
         {
-            for(int i=0; i<afters.size(); i++)
-                appendTranslatable((Node)afters.get(i));
+            translatable.addAll(afters);
             afters.clear();
-            appendTranslatable(text);
+            translatable.add(text);
         }
         else
             afters.add(text);
@@ -501,6 +629,47 @@ class FilterVisitor extends NodeVisitor
     {
         afters.add(tag);
     }
+    
+    /**
+     * Queues up something, possibly before a text.
+     * If the text is collected now, the tag is queued up as translatable
+     * by calling {@link #queueTranslatable(Tag)},
+     * otherwise it's collected to a special list that is inspected
+     * when the translatable text is sent to OmegaT core.
+     */
+    private void queuePrefix(Tag tag)
+    {
+        if( text )
+            queueTranslatable(tag);
+        else if( isParagraphTag(tag) )
+        {
+            for(int i=0; i<befors.size(); i++)
+            {
+                Node node = (Node)befors.get(i);
+                if( node instanceof Tag )
+                    writeout("<"+node.getText()+">");                           // NOI18N
+                else
+                    writeout(node.getText());
+            }
+            befors.clear();
+            writeout("<"+tag.getText()+">");                                    // NOI18N
+        }
+        else 
+            befors.add(tag);
+    }
+
+    /**
+     * Queues up some text, possibly before a meaningful text.
+     * If the text is collected now, the tag is queued up as translatable
+     * by calling {@link #queueTranslatable(Tag)},
+     * otherwise it's collected to a special list that is inspected
+     * when the translatable text is sent to OmegaT core.
+     */
+    private void queuePrefix(Text text)
+    {
+        befors.add(text);
+    }
+    
     
     /** Compresses spaces in case of non-preformatting paragraph. */
     private String compressSpaces(String str)

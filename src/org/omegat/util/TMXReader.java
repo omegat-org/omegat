@@ -30,7 +30,9 @@ import org.omegat.filters2.xml.XMLBlock;
 import org.omegat.filters2.xml.XMLStreamReader;
 
 /**
- * Class that loads up TMX 1.1 (Translation Memory) files
+ * Class that loads up TMX 1.1 (Translation Memory) files.
+ * <p>
+ * Since OmegaT 1.6 does not check the TMX version.
  *
  * @author Keith Godfrey
  */
@@ -97,7 +99,7 @@ public class TMXReader
      * a single translation.
      * <p>
      * Note: This attribute will be available only after the call to 
-     * {@link loadFile(String)}.
+     * {@link #loadFile(String)}.
      */
     public String getTargetLanguage()
     {
@@ -148,15 +150,6 @@ public class TMXReader
             throw new TranslationException(
                     MessageFormat.format(OStrings.getString("TMXR_ERROR_INVALID_TMX"),
                     new Object[]{filename}));
-        }
-        
-        // check version
-        String ver = blk.getAttribute("version");				// NOI18N
-        if (ver != null && !ver.equals("1.1"))					// NOI18N
-        {
-            throw new TranslationException( MessageFormat.format(
-                    OStrings.getString("TMXR_ERROR_UNSUPPORTED_TMX_VERSION"),
-                    new Object[]{ver}) );
         }
         
         // advance to header
@@ -334,7 +327,7 @@ public class TMXReader
                 
                 // ignore the rest
             }
-            catch (IndexOutOfBoundsException e)
+            catch (Exception e)
             {
                 StaticUtils.log( MessageFormat.format(
                         OStrings.getString("TMXR_WARNING_SKIPPING_SEGMENT"), 

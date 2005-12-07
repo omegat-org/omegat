@@ -35,9 +35,32 @@ import java.util.ArrayList;
  * CommandThread to reduce file size.
  *
  * @author Keith Godfrey
+ * @author Henry Pijffers
  */
 public class StaticUtils
 {
+	/** Name of the log file */
+	private final static String FILE_LOG = "log.txt";                           // NOI18N
+	
+	/**
+	 * Configuration directory on Windows platforms
+	 */
+	private final static String WINDOWS_CONFIG_DIR = "\\OmegaT\\";              // NOI18N
+
+	/**
+	 * Configuration directory on UNIX platforms
+	 */
+	private final static String UNIX_CONFIG_DIR = "/.omegat/";                  // NOI18N
+	
+	/**
+	 * Configuration directory on Mac OS X
+	 */
+	private final static String OSX_CONFIG_DIR = "/Library/Preferences/OmegaT/";// NOI18N
+	
+	/**
+	 * Contains the location of the directory containing the configuration files.
+	 */
+	private static String m_configDir = null;
     
     /**
      * Builds a list of format tags within the supplied string.
@@ -330,7 +353,7 @@ public class StaticUtils
     {
         try
         {
-            return new PrintStream(new FileOutputStream("log.txt", true));      // NOI18N
+            return new PrintStream(new FileOutputStream(getConfigDir() + FILE_LOG, true));
         }
         catch( Exception e )
         {
@@ -363,7 +386,8 @@ public class StaticUtils
      * Extracts an element of a class path.
      *
      * @param fullcp the classpath
-     * @param posInsideElement position inside a class path string, that fits inside some classpath element.
+     * @param posInsideElement position inside a class path string, that fits 
+     *                          inside some classpath element.
      */
     private static String classPathElement(String fullcp, int posInsideElement)
     {
@@ -431,5 +455,145 @@ public class StaticUtils
         return path;
     }
     
-    
+    /**
+     * Returns the location of the configuration directory, depending on
+     * the user's platform. Also creates the configuration directory,
+     * if necessary. If any problems occur while the location of the
+     * configuration directory is being determined, an empty string will
+     * be returned, resulting in the current working directory being used.
+     *
+     * Windows:  <Documents and Settings>\<User name>\Application Data\OmegaT
+     * Linux:    <User Home>/.omegat
+     * Solaris:  <User Home>/.omegat
+     * FreeBSD:  <User Home>/.omegat
+     * Mac OS X: <User Home>/Library/Preferences/OmegaT
+     * Other:    User home directory
+     *
+     * @return The full path of the directory containing the OmegaT
+     *         configuration files, including trailing path separator.
+     *
+     * @author Henry Pijffers (henry@saxnot.com)
+     */
+    public static String getConfigDir()
+    {
+        // if the configuration directory has already been determined, return it
+        if (m_configDir != null)
+            return m_configDir;
+        
+        String os;   // name of operating system
+        String home; // user home directory
+        
+        // get os and user home properties
+        try
+        {
+            // get the name of the operating system
+            os = System.getProperty("os.name");                                 // NOI18N
+            
+            // get the user's home directory
+            home = System.getProperty("user.home");                             // NOI18N
+        }
+        catch (SecurityException e)
+        {
+            // access to the os/user home properties is restricted,
+            // the location of the config dir cannot be determined,
+            // set the config dir to the current working dir
+            m_configDir = new File(".").getAbsolutePath();                      // NOI18N
+            
+            // log the exception, only do this after the config dir
+            // has been set to the current working dir, otherwise
+            // the log method will probably fail
+            log(e.toString());
+            
+            return m_configDir;
+        }
+        
+        // if os or user home is null or empty, we cannot reliably determine
+        // the config dir, so we use the current working dir (= empty string)
+        if ( (os == null) || (os.length() == 0) ||
+                (home == null) || (home.length() == 0))
+        {
+            // set the config dir to the current working dir
+            m_configDir = new File(".").getAbsolutePath();                      // NOI18N
+            return m_configDir;
+        }
+        
+        // check for Windows versions
+        if (os.startsWith("Windows"))                                           // NOI18N
+        {
+            // get the user's application data directory through the environment
+            // variable %APPDATA%, which usually points to the directory
+            // C:\Documents and Settings\<User>\Application Data
+            File appDataFile = new File(home, "Application Data");              // NOI18N
+            String appData;
+            if (appDataFile.exists())
+                appData = appDataFile.getAbsolutePath();
+            else
+                appData = null;                                                 // NOI18N
+            
+            if ((appData != null) && (appData.length() > 0))
+            {
+                // if a valid application data dir has been found, 
+                // append an OmegaT subdir to it
+                m_configDir = appData + WINDOWS_CONFIG_DIR;
+            }
+            else
+            {
+                // otherwise set the config dir to the user's home directory, usually
+                // C:\Documents and Settings\<User>
+                m_configDir = home;
+            }
+        }
+        // check for UNIX varieties
+        else if (os.equals("Linux") || os.equals("Solaris") ||                  // NOI18N
+                os.equals("FreeBSD"))                                           // NOI18N
+        {
+            // set the config dir to the user's home dir + "/.omegat", so it's hidden
+            m_configDir = home + UNIX_CONFIG_DIR;
+        }
+        // check for Mac OS X
+        else if (os.equals("Mac OS X"))                                         // NOI18N
+        {
+            // set the config dir to the user's home dir + "/Library/Preferences/OmegaT"
+            m_configDir = home + OSX_CONFIG_DIR;
+        }
+        // other OS'es / default
+        else
+        {
+            // use the user's home directory by default
+            m_configDir = home;
+        }
+        
+        // create the path to the configuration dir, if necessary
+        if (m_configDir.length() > 0)
+        {
+            try
+            {
+                // check if the dir exists
+                File dir = new File(m_configDir);
+                if (!dir.exists())
+                {
+                    // create the dir
+                    boolean created = dir.mkdirs();
+                    
+                    // if the dir could not be created,
+                    // set the config dir to the current working dir
+                    if (!created)
+                        m_configDir = new File(".").getAbsolutePath();          // NOI18N
+                }
+            }
+            catch (SecurityException e)
+            {
+                // the system doesn't want us to write where we want to write
+                // reset the config dir to the current working dir
+                m_configDir = new File(".").getAbsolutePath();                  // NOI18N
+                
+                // log the exception, but only after the config dir has been reset
+                log(e.toString());
+            }
+        }
+        
+        // we should have a correct, existing config dir now
+        return m_configDir;
+    }
 }
+

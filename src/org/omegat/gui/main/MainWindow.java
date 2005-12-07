@@ -28,6 +28,8 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
@@ -108,6 +110,36 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         updateCheckboxesOnStart();
         uiUpdateOnProjectClose();
         initUIShortcuts();
+        
+        try
+        {
+            // MacOSX-specific
+            net.roydesign.mac.MRJAdapter.addQuitApplicationListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    doQuit();
+                }
+            });
+            net.roydesign.mac.MRJAdapter.addAboutListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    doAbout();
+                }
+            });
+        }
+        catch(NoClassDefFoundError e)
+        {
+            e.printStackTrace(StaticUtils.getLogStream());
+        }
+        
+        // all except MacOSX
+		if( !System.getProperty("os.name").toLowerCase().startsWith("mac os x") )   // NOI18N
+        {
+            projectMenu.add(separator2inProjectMenu);
+            projectMenu.add(projectExitMenuItem);
+        }
     }
     
     /**
@@ -139,6 +171,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         setAccelerator(projectOpenMenuItem, KeyEvent.VK_O);
         setAccelerator(projectSaveMenuItem, KeyEvent.VK_S);
         setAccelerator(projectEditMenuItem, KeyEvent.VK_E);
+        setAccelerator(projectExitMenuItem, KeyEvent.VK_Q);
         
         setAccelerator(editUndoMenuItem , KeyEvent.VK_Z);
         setAccelerator(editRedoMenuItem , KeyEvent.VK_Y);
@@ -171,7 +204,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     {
         setAccelerator(item, key, false);
     }
-
+    
     /**
      * Utility method to set Ctrl + key accelerators for menu items.
      * @param key integer specifiyng the key code (e.g. KeyEvent.VK_Z)
@@ -195,7 +228,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             try
             {
                 String file = m_activeFile.substring(
-                CommandThread.core.sourceRoot().length());
+                        CommandThread.core.sourceRoot().length());
                 s += " :: " + m_activeProj + " :: " + file;							// NOI18N
             }
             catch( Exception e )
@@ -241,9 +274,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         String start = OStrings.TF_CUR_SEGMENT_START;
         int zero = start.lastIndexOf('0');
         m_segmentTagHasNumber = (zero > 4) && // 4 to reserve room for 10000 digit
-        (start.charAt(zero - 1) == '0') &&
-        (start.charAt(zero - 2) == '0') &&
-        (start.charAt(zero - 3) == '0');
+                (start.charAt(zero - 1) == '0') &&
+                (start.charAt(zero - 2) == '0') &&
+                (start.charAt(zero - 3) == '0');
     }
     
     /** Updates menu checkboxes from preferences on start */
@@ -322,7 +355,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             // size info missing - put window in default position
             GraphicsEnvironment env =
-            GraphicsEnvironment.getLocalGraphicsEnvironment();
+                    GraphicsEnvironment.getLocalGraphicsEnvironment();
             Rectangle scrSize = env.getMaximumWindowBounds();
             if (scrSize.width < 900)
             {
@@ -362,10 +395,10 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             String lang = HelpFrame.detectDocLanguage();
             String filepath =
-            StaticUtils.installDir()
-            + File.separator + OConsts.HELP_DIR + File.separator
-            + lang + File.separator
-            + OConsts.HELP_INSTANT_START;
+                    StaticUtils.installDir()
+                    + File.separator + OConsts.HELP_DIR + File.separator
+                    + lang + File.separator
+                    + OConsts.HELP_INSTANT_START;
             JTextPane instantArticlePane = new JTextPane();
             instantArticlePane.setEditable(false);
             instantArticlePane.setPage("file:///"+filepath);                    // NOI18N
@@ -402,11 +435,18 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     ///////////////////////////////////////////////////////////////
     // command handling
     
+    /** Shows About dialog */
+    private void doAbout()
+    {
+        new AboutDialog(this).setVisible(true);        
+    }
+    
+    /** Shows About dialog */
     private void doQuit()
     {
         storeScreenLayout();
         Preferences.save();
-
+        
         if (m_projectLoaded)
         {
             commitEntry();
@@ -421,25 +461,25 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         }
         // RFE 1302358
         // Add Yes/No Warning before OmegaT quits
-        if (projectModified || 
+        if (projectModified ||
                 Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT))
         {
-            if( JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(this, 
-                    OStrings.getString("MW_QUIT_CONFIRM"), 
-                    OStrings.getString("CONFIRM_DIALOG_TITLE"), 
+            if( JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(this,
+                    OStrings.getString("MW_QUIT_CONFIRM"),
+                    OStrings.getString("CONFIRM_DIALOG_TITLE"),
                     JOptionPane.YES_NO_OPTION) )
                 return;
         }
-
+        
         // shut down
         if( CommandThread.core!=null )
             CommandThread.core.interrupt();
-
+        
         // waiting for CommandThread to finish for 1 minute
         for( int i=0; i<600 && CommandThread.core!=null; i++ )
         {
             try
-            { 
+            {
                 Thread.sleep(100);
             }
             catch (InterruptedException e)
@@ -464,9 +504,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             // show dialog saying all is OK
             JOptionPane.showMessageDialog(this,
-            OStrings.TF_NOTICE_OK_TAGS,
-            OStrings.TF_NOTICE_TITLE_TAGS,
-            JOptionPane.INFORMATION_MESSAGE);
+                    OStrings.TF_NOTICE_OK_TAGS,
+                    OStrings.TF_NOTICE_TITLE_TAGS,
+                    JOptionPane.INFORMATION_MESSAGE);
         }
     }
     
@@ -614,16 +654,16 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         StringEntry se = m_curNear.str;
         doReplaceEditText(se.getTranslation());
     }
-
+    
     /** replaces the entire edit area with a given text */
     private void doReplaceEditText(String text)
     {
         // build local offsets
         int start = m_segmentStartOffset + m_sourceDisplayLength +
-        OStrings.TF_CUR_SEGMENT_START.length();
+                OStrings.TF_CUR_SEGMENT_START.length();
         int end = xlPane.getText().length() - m_segmentEndInset -
-        OStrings.TF_CUR_SEGMENT_END.length();
-
+                OStrings.TF_CUR_SEGMENT_END.length();
+        
         // remove text
         xlPane.select(start, end);
         xlPane.replaceSelection(text);
@@ -659,10 +699,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         projectOpenMenuItem.setEnabled(true);
         projectNewMenuItem.setEnabled(true);
         
-        optionsSetupFileFiltersMenuItem.setEnabled(true);
-        optionsSentsegMenuItem.setEnabled(true);
-        
-        
         projectImportMenuItem.setEnabled(false);
         projectReloadMenuItem.setEnabled(false);
         projectCloseMenuItem.setEnabled(false);
@@ -687,10 +723,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         projectNewMenuItem.setEnabled(false);
         projectOpenMenuItem.setEnabled(false);
         projectNewMenuItem.setEnabled(false);
-        
-        optionsSetupFileFiltersMenuItem.setEnabled(false);
-        optionsSentsegMenuItem.setEnabled(false);
-        
         
         projectImportMenuItem.setEnabled(true);
         projectReloadMenuItem.setEnabled(true);
@@ -728,9 +760,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         if( changed )
         {
             int res = JOptionPane.showConfirmDialog(this,
-            OStrings.getString("MW_REOPEN_QUESTION"),
-            OStrings.getString("MW_REOPEN_TITLE"),
-            JOptionPane.YES_NO_OPTION);
+                    OStrings.getString("MW_REOPEN_QUESTION"),
+                    OStrings.getString("MW_REOPEN_TITLE"),
+                    JOptionPane.YES_NO_OPTION);
             if( res==JOptionPane.YES_OPTION )
                 doReloadProject();
         }
@@ -765,7 +797,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
      * Displays the filters setup dialog to allow
      * customizing file filters in detail.
      */
-    private void doFilters()
+    private void setupFilters()
     {
         FiltersCustomizer dlg = new FiltersCustomizer(this);
         dlg.setVisible(true);
@@ -773,6 +805,17 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             // saving config
             FilterMaster.getInstance().saveConfig();
+            
+            if(isProjectLoaded())
+            {
+                // asking to reload a project
+                int res = JOptionPane.showConfirmDialog(this,
+                        OStrings.getString("MW_REOPEN_QUESTION"),
+                        OStrings.getString("MW_REOPEN_TITLE"),
+                        JOptionPane.YES_NO_OPTION);
+                if( res==JOptionPane.YES_OPTION )
+                    doReloadProject();
+            }
         }
         else
         {
@@ -787,7 +830,20 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
      */
     private void setupSegmentation()
     {
-        new SegmentationCustomizer(this).setVisible(true);
+        SegmentationCustomizer segment_window = new SegmentationCustomizer(this);
+        segment_window.setVisible(true);
+        
+        if( segment_window.getReturnStatus()==SegmentationCustomizer.RET_OK 
+                && isProjectLoaded())
+        {
+            // asking to reload a project
+            int res = JOptionPane.showConfirmDialog(this,
+                    OStrings.getString("MW_REOPEN_QUESTION"),
+                    OStrings.getString("MW_REOPEN_TITLE"),
+                    JOptionPane.YES_NO_OPTION);
+            if( res==JOptionPane.YES_OPTION )
+                doReloadProject();
+        }
     }
     
     /**
@@ -1154,7 +1210,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             {
                 GlossaryEntry glos = (GlossaryEntry) li.next();
                 matchWindow.getMatchGlossaryPane().addGlosTerm(glos.getSrcText(), glos.getLocText(),
-                glos.getCommentText());
+                        glos.getCommentText());
             }
             
         }
@@ -1182,9 +1238,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         // clear out segment markers while we're at it
         
         int start = m_segmentStartOffset + m_sourceDisplayLength +
-        OStrings.TF_CUR_SEGMENT_START.length();
+                OStrings.TF_CUR_SEGMENT_START.length();
         int end = xlPane.getText().length() - m_segmentEndInset -
-        OStrings.TF_CUR_SEGMENT_END.length();
+                OStrings.TF_CUR_SEGMENT_END.length();
         String display_string;
         String new_translation;
         if (start == end)
@@ -1211,9 +1267,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         xlPane.replaceSelection("");											// NOI18N
         xlPane.select(m_segmentStartOffset, start);
         xlPane.replaceSelection("");											// NOI18N
-
+        
         // update memory
-        if( !new_translation.equals(m_curEntry.getSrcText()) || 
+        if( !new_translation.equals(m_curEntry.getSrcText()) ||
                 Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC) )
         {
             m_curEntry.setTranslation(new_translation);
@@ -1253,12 +1309,12 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                     for (i=m_xlFirstEntry; i<entry; i++)
                     {
                         docSeg = (DocumentSegment) m_docSegList.get(
-                        i-m_xlFirstEntry);
+                                i-m_xlFirstEntry);
                         offset += docSeg.length;
                     }
                     // replace old text w/ new
                     docSeg = (DocumentSegment) m_docSegList.get(
-                    entry - m_xlFirstEntry);
+                            entry - m_xlFirstEntry);
                     xlPane.select(offset, offset+docSeg.length);
                     xlPane.replaceSelection(display_string + "\n\n");						// NOI18N
                     docSeg.length = display_string.length() + "\n\n".length();				// NOI18N
@@ -1370,14 +1426,14 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         String insertText = srcText + startStr;
         xlPane.replaceSelection(insertText);
         xlPane.select(m_segmentStartOffset, m_segmentStartOffset +
-        insertText.length() - 1);
+                insertText.length() - 1);
         xlPane.setCharacterAttributes(mattr, true);
         
         // background color
         Color background = new Color(192, 255, 192);
         // other color options
         xlPane.select(m_segmentStartOffset, m_segmentStartOffset +
-        insertText.length() - startStr.length());
+                insertText.length() - startStr.length());
         mattr = new SimpleAttributeSet();
         StyleConstants.setBackground(mattr, background);
         xlPane.setCharacterAttributes(mattr, false);
@@ -1401,21 +1457,21 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             // display text indicating both categories exist
             Object obj[] = {
                 new Integer(nearLength),
-                new Integer(m_glossaryLength) };
-                setMessageText(MessageFormat.format(
-                OStrings.TF_NUM_NEAR_AND_GLOSSARY, obj));
+                        new Integer(m_glossaryLength) };
+                        setMessageText(MessageFormat.format(
+                                OStrings.TF_NUM_NEAR_AND_GLOSSARY, obj));
         }
         else if (nearLength > 0)
         {
             Object obj[] = { new Integer(nearLength) };
             setMessageText(MessageFormat.format(
-            OStrings.TF_NUM_NEAR, obj));
+                    OStrings.TF_NUM_NEAR, obj));
         }
         else if (m_glossaryLength > 0)
         {
             Object obj[] = { new Integer(m_glossaryLength) };
             setMessageText(MessageFormat.format(
-            OStrings.TF_NUM_GLOSSARY, obj));
+                    OStrings.TF_NUM_GLOSSARY, obj));
         }
         else
             setMessageText("");													// NOI18N
@@ -1444,7 +1500,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         if (padding > m_segmentEndInset)
             padding = m_segmentEndInset;
         xlPane.setCaretPosition(xlPane.getText().length() -
-        m_segmentEndInset + padding);
+                m_segmentEndInset + padding);
         
         // try to make sure entire segment displays
         SwingUtilities.invokeLater(new Runnable()
@@ -1488,7 +1544,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         if( e!=null )
             fulltext+= "\n" + e.toString();                                     // NOI18N
         JOptionPane.showMessageDialog(this, fulltext, OStrings.TF_WARNING,
-        JOptionPane.WARNING_MESSAGE);
+                JOptionPane.WARNING_MESSAGE);
     }
     
     /**
@@ -1504,7 +1560,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         if( e!=null )
             fulltext+= "\n" + e.toString();                                     // NOI18N
         JOptionPane.showMessageDialog(this, fulltext, OStrings.TF_ERROR,
-        JOptionPane.ERROR_MESSAGE);
+                JOptionPane.ERROR_MESSAGE);
     }
     
     /**
@@ -1526,7 +1582,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             // make sure we're not at end of segment
             // -1 for space before tag, -2 for newlines
             int end = xlPane.getText().length() - m_segmentEndInset -
-            OStrings.TF_CUR_SEGMENT_END.length();
+                    OStrings.TF_CUR_SEGMENT_END.length();
             int spos = xlPane.getSelectionStart();
             int epos = xlPane.getSelectionEnd();
             if( pos>=end && spos>=end && epos>=end )
@@ -1536,7 +1592,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             // make sure we're not at start of segment
             int start = m_segmentStartOffset + m_sourceDisplayLength +
-            OStrings.TF_CUR_SEGMENT_START.length();
+                    OStrings.TF_CUR_SEGMENT_START.length();
             int spos = xlPane.getSelectionStart();
             int epos = xlPane.getSelectionEnd();
             if( pos<=start && epos<=start && spos<=start )
@@ -1555,10 +1611,10 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         int spos = xlPane.getSelectionStart();
         int epos = xlPane.getSelectionEnd();
         int start = m_segmentStartOffset + m_sourceDisplayLength +
-        OStrings.TF_CUR_SEGMENT_START.length();
+                OStrings.TF_CUR_SEGMENT_START.length();
         // -1 for space before tag, -2 for newlines
         int end = xlPane.getText().length() - m_segmentEndInset -
-        OStrings.TF_CUR_SEGMENT_END.length();
+                OStrings.TF_CUR_SEGMENT_END.length();
         
         if (spos != epos)
         {
@@ -1608,8 +1664,8 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         for( int i=0; i<100 && CommandThread.core!=null; i++ )
         {
             try
-            { 
-                Thread.sleep(100); 
+            {
+                Thread.sleep(100);
             }
             catch (InterruptedException e)
             {
@@ -1630,8 +1686,11 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         toFront();
     }
     
-    public boolean	isProjectLoaded()
-    { return m_projectLoaded;		}
+    /** Tells whether the project is loaded. */
+    public boolean isProjectLoaded()
+    { 
+        return m_projectLoaded;
+    }
     
     /** The font for main window (source and target text) and for match and glossary windows */
     private Font m_font;
@@ -1683,6 +1742,8 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents()
     {
+        separator2inProjectMenu = new javax.swing.JSeparator();
+        projectExitMenuItem = new javax.swing.JMenuItem();
         statusLabel = new javax.swing.JLabel();
         mainScroller = new javax.swing.JScrollPane();
         xlPane = new org.omegat.gui.main.MainPane();
@@ -1699,8 +1760,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         projectCompileMenuItem = new javax.swing.JMenuItem();
         separator1inProjectMenu = new javax.swing.JSeparator();
         projectEditMenuItem = new javax.swing.JMenuItem();
-        separator2inProjectMenu = new javax.swing.JSeparator();
-        projectExitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         editUndoMenuItem = new javax.swing.JMenuItem();
         editRedoMenuItem = new javax.swing.JMenuItem();
@@ -1738,6 +1797,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         helpMenu = new javax.swing.JMenu();
         helpContentsMenuItem = new javax.swing.JMenuItem();
         helpAboutMenuItem = new javax.swing.JMenuItem();
+
+        org.openide.awt.Mnemonics.setLocalizedText(projectExitMenuItem, OStrings.getString("TF_MENU_FILE_QUIT"));
+        projectExitMenuItem.addActionListener(this);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addComponentListener(this);
@@ -1797,13 +1859,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         projectEditMenuItem.addActionListener(this);
 
         projectMenu.add(projectEditMenuItem);
-
-        projectMenu.add(separator2inProjectMenu);
-
-        org.openide.awt.Mnemonics.setLocalizedText(projectExitMenuItem, OStrings.getString("TF_MENU_FILE_QUIT"));
-        projectExitMenuItem.addActionListener(this);
-
-        projectMenu.add(projectExitMenuItem);
 
         mainMenu.add(projectMenu);
 
@@ -1976,7 +2031,11 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
 
     public void actionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (evt.getSource() == projectNewMenuItem)
+        if (evt.getSource() == projectExitMenuItem)
+        {
+            MainWindow.this.projectExitMenuItemActionPerformed(evt);
+        }
+        else if (evt.getSource() == projectNewMenuItem)
         {
             MainWindow.this.projectNewMenuItemActionPerformed(evt);
         }
@@ -2007,10 +2066,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         else if (evt.getSource() == projectEditMenuItem)
         {
             MainWindow.this.projectEditMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == projectExitMenuItem)
-        {
-            MainWindow.this.projectExitMenuItemActionPerformed(evt);
         }
         else if (evt.getSource() == editUndoMenuItem)
         {
@@ -2088,6 +2143,10 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             MainWindow.this.optionsTabAdvanceCheckBoxMenuItemActionPerformed(evt);
         }
+        else if (evt.getSource() == optionsAlwaysConfirmQuitCheckBoxMenuItem)
+        {
+            MainWindow.this.optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed(evt);
+        }
         else if (evt.getSource() == optionsFontSelectionMenuItem)
         {
             MainWindow.this.optionsFontSelectionMenuItemActionPerformed(evt);
@@ -2111,10 +2170,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         else if (evt.getSource() == helpAboutMenuItem)
         {
             MainWindow.this.helpAboutMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == optionsAlwaysConfirmQuitCheckBoxMenuItem)
-        {
-            MainWindow.this.optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed(evt);
         }
     }
 
@@ -2245,7 +2300,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     
     private void optionsSetupFileFiltersMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsSetupFileFiltersMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsSetupFileFiltersMenuItemActionPerformed
-        doFilters();
+        setupFilters();
     }//GEN-LAST:event_optionsSetupFileFiltersMenuItemActionPerformed
     
     private void optionsFontSelectionMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsFontSelectionMenuItemActionPerformed
@@ -2414,7 +2469,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     }//GEN-LAST:event_formWindowClosing
     
     private void helpAboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpAboutMenuItemActionPerformed
-        new AboutDialog(this).setVisible(true);
+        doAbout();
     }//GEN-LAST:event_helpAboutMenuItemActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

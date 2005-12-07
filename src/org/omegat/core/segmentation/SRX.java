@@ -51,7 +51,9 @@ public class SRX implements Serializable
 {
     
     private static SRX srx = null;
-    private static File configFile=new File("segmentation.conf");               // NOI18N
+    private static final String CONF_SENTSEG = "segmentation.conf";             // NOI18N
+    private static final File configFile=new File(
+            StaticUtils.getConfigDir()+CONF_SENTSEG);
             
     /**
      * SRX factory method.
@@ -204,14 +206,14 @@ public class SRX implements Serializable
         srules.add(new Rule(false, "(?i)\u0442\\.\u0435\\.", "\\s"));           // NOI18N
         srules.add(new Rule(false, "(?i)\u0442\\.\u043A\\.", "\\s"));           // NOI18N
         getMappingRules().add(new MapRule(
-                "Russian",
+                OStrings.getString("CORE_SRX_RULES_NAME_RUSSIAN"),
                 RUSSIAN_RULES_PATTERN, srules));
         
         // Japanese first
         srules = new ArrayList();
         srules.add(new Rule(true, "\u3002", "."));                              // NOI18N
         getMappingRules().add(new MapRule(
-                "Japanese",
+                OStrings.getString("CORE_SRX_RULES_NAME_JAPANESE"),
                 JAPANESE_RULES_PATTERN, srules));
 
         // exceptions first
@@ -235,7 +237,7 @@ public class SRX implements Serializable
         srules.add(new Rule(true, "[\\.\\?\\!]+", "\\s"));                      // NOI18N
         // special handling for BR tag to segmenent on it
         // idea by Jean-Christophe Helary
-        srules.add(new Rule(true, "<br\\d+>", "\\."));                          // NOI18N
+        srules.add(new Rule(true, "<br\\d+>", "."));                            // NOI18N
 
         getMappingRules().add(new MapRule(
                 OStrings.getString("CORE_SRX_DEFAULT_RULES_NAME"),

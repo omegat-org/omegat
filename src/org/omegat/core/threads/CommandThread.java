@@ -937,8 +937,10 @@ public class CommandThread extends Thread
         }
         catch (TranslationException e)
         {
+            e.printStackTrace();
+            e.printStackTrace(StaticUtils.getLogStream());
             throw new IOException(OStrings.getString("CT_ERROR_PARSEERROR")+
-            "'" + fname + "'\n" +  e); // NOI18N
+                    "'" + fname + "'\n" +  e); // NOI18N
         }
     }
     

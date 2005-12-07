@@ -32,6 +32,7 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileReader;
+import org.omegat.util.StaticUtils;
 
 /**
  * Storage for project properties.
@@ -285,6 +286,8 @@ public class ProjectProperties
         catch( TranslationException te )
         {
             reset();
+            te.printStackTrace();
+            te.printStackTrace(StaticUtils.getLogStream());
             throw new IOException(OStrings.getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE") + te);
         }
     }

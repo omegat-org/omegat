@@ -71,9 +71,13 @@ import org.omegat.util.StaticUtils;
  * Singleton - there can be only one instance of this class.
  *
  * @author Maxym Mykhalchuk
+ * @author Henry Pijffers
  */
 public class FilterMaster
 {
+	/** name of the filter configuration file */
+	private final static String FILE_FILTERS = "filters.conf";                  // NOI18N
+
     /** Wrapper around filters storage in an XML file */
     private Filters  filters;
     /** Returns Wrapper around filters storage in an XML file */
@@ -679,7 +683,7 @@ public class FilterMaster
     }
     
     /** XML file with filters configuration */
-    private File configFile = new File("filters.conf");                         // NOI18N
+    private File configFile = new File(StaticUtils.getConfigDir() + FILE_FILTERS);
     
     /**
      * My Own Class to listen to exceptions,

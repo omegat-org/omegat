@@ -996,11 +996,10 @@ public class XMLStreamReader
                                 val = "";	// NOI18N
                                 state = state_closeValueQuote;
                             } // else -- an error!
-                            else
+                            else 
                             {
-                                error = true;
-                                msg = MessageFormat.format( OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
-                                        new Object[] {""+c, ""+state} );	// NOI18N
+                                // this is a quoted value - be lenient on OK chars
+                                val += c;
                             }
                             break;
                             

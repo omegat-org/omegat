@@ -3,5 +3,5 @@ Main-Class: org.omegat.Main
 License: GNU Public License version 2
 Specification-Version: 1
 Implementation-Version: @version@
-Class-Path: lib-mnemonics.jar lib/htmlparser.jar
+Class-Path: lib-mnemonics.jar lib/htmlparser.jar lib/MRJAdapter.jar
 

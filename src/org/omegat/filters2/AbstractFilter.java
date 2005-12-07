@@ -214,8 +214,8 @@ public abstract class AbstractFilter
      * Note that outfile is never null, even when the project is loading.
      * (in this case it writes no nowhere, but anyway you may use it...)
      *
-     * @param infile Reader of the source file. It's the result of calling {@link #createReader(InputStream)}.
-     * @param outfile Writer of the target file on compilation (the result of calling {@link #createWriter(OutputStream)}), or a fictive writer to /dev/null.
+     * @param infile Reader of the source file. It's the result of calling {@link #createReader(File,String)}.
+     * @param outfile Writer of the target file on compilation (the result of calling {@link #createWriter(File, String)}), or a fictive writer to /dev/null.
      * @throws TranslationException Should be thrown when processed file has any format defects.
      * @throws IOException Thrown in case of any I/O error.
      */

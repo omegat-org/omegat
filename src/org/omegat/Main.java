@@ -50,7 +50,10 @@ public class Main
         try
         {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            
+            // MacOSX-specfic
             System.setProperty("apple.laf.useScreenMenuBar", "true");           // NOI18N
+            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "OmegaT"); // NOI18N
         }
         catch (Exception e)
         {

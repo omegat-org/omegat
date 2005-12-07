@@ -168,6 +168,10 @@ public class HelpFrame extends JFrame
      */
     private void displayFile(String file)
     {
+        // workaround for Java (?) bug
+        m_helpPane.setContentType("text/plain"); // NOI18N
+        m_helpPane.setContentType("text/html");  // NOI18N
+
         if( file.startsWith("http://") )                                        // NOI18N
         {
             String link = "<b>" + file + "</b>";                                // NOI18N
@@ -180,15 +184,19 @@ public class HelpFrame extends JFrame
                     new Object[] {"<b>"+StaticUtils.installDir()+File.separator+"docs"+File.separator+"index.html</b>"}) ); // NOI18N
             buf.append("</body></html>");                                       // NOI18N
             
-            // workaround for Java (?) bug
-            m_helpPane.setContentType("text/plain"); // NOI18N
-            m_helpPane.setContentType("text/html");  // NOI18N
-            
             m_helpPane.setText(buf.toString());
         }
         else
         {
+            
+            if(file.startsWith("#"))                                            // NOI18N
+                file = m_filename_nosharp+file;
             String fullname = absolutePath(file);
+            int sharppos = file.indexOf('#');
+            if(sharppos<0)
+                sharppos = file.length();
+            m_filename_nosharp = file.substring(0, sharppos);
+            
             try
             {
                 URL page = new URL(fullname);
@@ -288,6 +296,12 @@ public class HelpFrame extends JFrame
     private JButton		m_backButton;
     private ArrayList	m_historyList;
     
+    /** Stores the information about the currently opened HTML file,
+      without trailing #... */
+    private String m_filename_nosharp;
+    
+    /** Stores the full information about the currently opened HTML file,
+      including trailing #... */
     private String	m_filename = ""; // NOI18N
     
     /** The language of the help files, English by default */

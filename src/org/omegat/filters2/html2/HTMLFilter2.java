@@ -37,6 +37,11 @@ import org.omegat.util.OStrings;
 
 /**
  * A filter to translate HTML and XHTML files.
+ * <p>
+ * Some useful discussion why HTML filter should behave like it does,
+ * happened on a 
+ * <a href="http://sourceforge.net/support/tracker.php?aid=1364265">bug report</a>
+ * devoted to compressing space.
  *
  * @author Maxym Mykhalchuk
  */
@@ -54,7 +59,7 @@ public class HTMLFilter2 extends AbstractFilter
      * Customized version of creating input reader for HTML files,
      * aware of encoding by using <code>EncodingAwareReader</code> class.
      *
-     * @see org.omegat.util.EncodingAwareReader
+     * @see HTMLReader
      */
     public BufferedReader createReader(File infile, String encoding) 
             throws UnsupportedEncodingException, IOException

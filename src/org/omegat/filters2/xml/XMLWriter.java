@@ -55,8 +55,8 @@ public class XMLWriter extends Writer
     /**
      * Creates new XMLWriter.
      *
-     * @param fileName - file name to write to
-     * @param type - the type of data (HTML or XML)
+     * @param fileName  file name to write to
+     * @param encoding  encoding to write a file in
      */
     public XMLWriter(String fileName, String encoding) throws 
             FileNotFoundException, UnsupportedEncodingException

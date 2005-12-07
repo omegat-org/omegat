@@ -219,7 +219,7 @@ public final class Segmenter
     /**
      * Glues the sentences back to paragraph.
      * <p>
-     * As sentences are returned by {@link segment(String)}
+     * As sentences are returned by {@link #segment(String, List)}
      * without spaces before and after them, this method adds 
      * spaces if needed:
      * <ul>

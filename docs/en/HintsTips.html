@@ -13,49 +13,49 @@
 <div class="navbar-top">
 
 <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
-<td width="9%" align="left" valign="center"><b>Previous</b></td>
-<td width="39%" align="left" valign="center"><a href="./FilesProjDirs.html">Project Files and Directories</a></td>
-<td width="6%" align="left" valign="center"><b>Next</b></td>
-<td width="39%" align="left" valign="center"><a href="./Shortcuts.html">Keyboard Shortcuts</a></td></tr>
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td class="rel-p">Previous</td>
+<td class="nav-link"><a href="./FilesProjDirs.html">OmegaT Files and Directories</a></td>
+<td class="rel-n">Next</td>
+<td class="nav-link"><a href="./Shortcuts.html">Keyboard Shortcuts</a></td></tr>
 </table>
 
 </div>
 
 <div class="content">
 
-<a name="" />
+<a name=""></a>
 <h1 align="center" name="" id="">General Hints and Tips</h1>
 
-<ul><li><b>Errors:</b> in general, if errors or program bugs are encountered or suspected there is a log file (<b>log.txt</b>. in the root directory of a project that can be checked. Errors and bugs can be reported to the users group or development team (see <a href="./Important.html">Important Notes</a> also).</li>
+<ul><li><strong>Errors:</strong> in general, if errors or program bugs are encountered or suspected there is a log file (<strong>log.txt</strong>. in the root directory of a project that can be checked. Errors and bugs can be reported to the users group or development team (see <a href="./Important.html">Important Notes</a> also).</li>
 
-<li><b>Project is empty after creation:</b>. if OmegaT indicates that a newly created project is empty after the source files for translation have been copied into the <b>/source</b> directory, then the files are probably in an unsupported format (<b>MS Word</b>. etc.). All files must be converted to a supported format, such as OpenDocument text or OpenOffice.org writer, for OmegaT to work with them. See <a href="./FilesSourceDoc.html">Source Document Files</a> for details.</li>
+<li><strong>Project is empty after creation:</strong>. if OmegaT indicates that a newly created project is empty after the source files for translation have been copied into the <strong>/source</strong> directory, then the files are probably in an unsupported format (<strong>MS Word</strong>. etc.). All files must be converted to a supported format, such as OpenDocument text or OpenOffice.org writer, for OmegaT to work with them. See <a href="./FilesSourceDoc.html">Source Document Files</a> for details.</li>
 
-<li><b>File conversion and placement:</b> if the original source documents intended for translation are in an unsupported file format remember to convert them to OpenDocument or other supported format and place them in the <b>/source</b> sub-directory of the project. It is usually only necessary to place the converted source documents in this directory. The originals can be kept in a different directory. Any documents that are included in this directory that are in an unsupported format will be copied to the <b>/target</b> directory without modification when the project is compiled.</li>
-
-
-<li><b>Project creation location:</b> remember that when creating a new project OmegaT will open its file selection dialog to the location it was last used at. This will most likely be inside a project directory. There is little benefit to creating one project inside another, so make sure that the top level directory where a project is to be created is not within an existing project.</li>
+<li><strong>File conversion and placement:</strong> if the original source documents intended for translation are in an unsupported file format remember to convert them to OpenDocument or other supported format and place them in the <strong>/source</strong> sub-directory of the project. It is usually only necessary to place the converted source documents in this directory. The originals can be kept in a different directory. Any documents that are included in this directory that are in an unsupported format will be copied to the <strong>/target</strong> directory without modification when the project is compiled.</li>
 
 
-<li><b>Segment location:</b> after moving to a segment in a different part of a large project, the location of the previous segment that was being worked on may be difficult to locate in order to return to it. To enable quick segment location, place a unique marker in the current working segment, such as <b>'###xxxx'</b> (where <b>xxxx</b>. is a unique value, like the current segment number) then press <b>&lt;Enter&gt;</b>, to confirm the change to the segment before moving to a different location. A search for the unique marker will cause it to be the active segment again.</li>
-
-<li><b>Markers:</b> to insert a marker in your translation, to indicate an unresolved query or for some other reason, do not use <b>?</b>. or <b>*</b>. These characters are used in searches (as wildcards) and are therefore impossible to find with <b>&lt;Ctrl-F&gt;</b>.</li>
+<li><strong>Project creation location:</strong> remember that when creating a new project OmegaT will open its file selection dialog to the location it was last used at. This will most likely be inside a project directory. There is little benefit to creating one project inside another, so make sure that the top level directory where a project is to be created is not within an existing project.</li>
 
 
-<li><b>Text layout viewing:</b>. open a separate wordprocessor with the original source text in it to see the layout of text during translation.</li>
+<li><strong>Segment location:</strong> after moving to a segment in a different part of a large project, the location of the previous segment that was being worked on may be difficult to locate in order to return to it. To enable quick segment location, place a unique marker in the current working segment, such as <strong>'###xxxx'</strong> (where <strong>xxxx</strong>. is a unique value, like the current segment number) then press <strong>&lt;Enter&gt;</strong>, to confirm the change to the segment before moving to a different location. A search for the unique marker will cause it to be the active segment again.</li>
 
-<li><b>Translation memory will not open:</b> if you cannot open a translation memory received from an external source (colleague, customer, etc.) it may be in an unsupported TM format. If it is a TMX file (file extension <b>.tmx</b>), it is probably a higher version than currently supported. OmegaT only supports <b>TMX Version 1.1 (Level 1)</b> presently. The most recent TMX version is 1.4b.</li></ul>
+<li><strong>Markers:</strong> to insert a marker in your translation, to indicate an unresolved query or for some other reason, do not use <strong>?</strong>. or <strong>*</strong>. These characters are used in searches (as wildcards) and are therefore impossible to find with <strong>&lt;Ctrl-F&gt;</strong>.</li>
+
+
+<li><strong>Text layout viewing:</strong>. open a separate wordprocessor with the original source text in it to see the layout of text during translation.</li>
+
+<li><strong>Translation memory will not open:</strong> if you cannot open a translation memory received from an external source (colleague, customer, etc.) it may be in an unsupported TM format. If it is a TMX file (file extension <strong>.tmx</strong>), it is probably a higher version than currently supported. OmegaT only supports <strong>TMX Version 1.1 (Level 1)</strong> presently. The most recent TMX version is 1.4b.</li></ul>
 
 </div>
 
 <div class="navbar-bottom">
 
 <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
-<td width="9%" align="left" valign="center"><b>Previous</b></td>
-<td width="39%" align="left" valign="center"><a href="./FilesProjDirs.html">Project Files and Directories</a></td>
-<td width="6%" align="left" valign="center"><b>Next</b></td>
-<td width="39%" align="left" valign="center"><a href="./Shortcuts.html">Keyboard Shortcuts</a></td></tr>
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td class="rel-p">Previous</td>
+<td class="nav-link"><a href="./FilesProjDirs.html">OmegaT Files and Directories</a></td>
+<td class="rel-n">Next</td>
+<td class="nav-link"><a href="./Shortcuts.html">Keyboard Shortcuts</a></td></tr>
 </table>
 
 </div>

@@ -15,18 +15,18 @@
 <div class="navbar-top">
 
 <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
-<td width="9%" align="left" valign="center"><b>Previous</b></td>
-<td width="39%" align="left" valign="center"><a href="./OmegaT.html">Table of Contents</a></td>
-<td width="6%" align="left" valign="center"><b>Next</b></td>
-<td width="39%" align="left" valign="center"><a href="./InstallConfig.html">System Requirements and Installation</a></td></tr>
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td class="rel-p">Previous</td>
+<td class="nav-link"><a href="./OmegaT.html">Table of Contents</a></td>
+<td class="rel-n">Next</td>
+<td class="nav-link"><a href="./InstallConfig.html">System Requirements and Installation</a></td></tr>
 </table>
 
 </div>
 
 <div class="content">
 
-<a name="1" />
+<a name="1"></a>
 <h1 align="center" name="1" id="1">What is OmegaT</h1>
 
 <ol><li><a href="#1.1">Overview</a></li>
@@ -36,97 +36,97 @@
 <li><a href="#1.5">Participation to the OmegaT project</a></li>
 <li><a href="#1.6">About this manual</a></li></ol>
 
-<a name="1.1" />
+<a name="1.1"></a>
 <h2 name="1.1" id="1.1">Overview</h2>
 
 <p>OmegaT is a cross-platform application Computer Assisted Translation (CAT) tool with fuzzy matching, translation memory, keyword searches, glossary term identification and many other useful functions.</p>
 
-<a name="1.2" />
+<a name="1.2"></a>
 <h2 name="1.2" id="1.2">What is special about OmegaT?</h2>
 
 <p>There are many translation memory programs on the market. OmegaT's particular features include that it is:</p>
 
-<ul><li><b>platform independent</b>. uses a Java Runtime Environment for operation, and so can be used on a number of different operating systems including: Linux, Mac OS X, and Windows;</li>
-<li><b>free</b>;</li>
-<li><b>open-source software</b>. which means that users are free to distribute and modify it;</li>
-<li>distributed with <b>OpenDocument/OpenOffice.org file format support</b>.</li>
-<li>productive in <b>website localization of XHMTL or HTML files</b>.</li>
-<li>useful for <b>software localization of Java programs</b>.</li></ul></p>
+<ul><li><strong>platform independent</strong>. uses a Java Runtime Environment for operation, and so can be used on a number of different operating systems including: Linux, Mac OS X, and Windows;</li>
+<li><strong>free</strong>;</li>
+<li><strong>open-source software</strong>. which means that users are free to distribute and modify it;</li>
+<li>distributed with <strong>OpenDocument/OpenOffice.org file format support</strong>.</li>
+<li>productive in <strong>website localization of XHMTL or HTML files</strong>.</li>
+<li>useful for <strong>software localization of Java programs</strong>.</li></ul></p>
 
 
-<a name="1.3" />
+<a name="1.3"></a>
 <h2 name="1.3" id="1.3">What is a Translation Memory?</h2>
 
-<p>The term "translation memory" refers to both a program that works with a translation memory and an actual translation memory. A translation memory program, a <b>Computer Assisted Translation(CAT)</b> tool, is used during the translation of documents and assists the translator by storing pieces of text in a database (i.e. the translation memory) so that when the same piece of text (a segment) or a part of it is next encountered it is immediately visible as to how it was previously translated.</p>
+<p>The term “translation memory” refers to both a program that works with a translation memory and an actual translation memory. A translation memory program, a <strong>Computer Assisted Translation(CAT)</strong> tool, is used during the translation of documents and assists the translator by storing pieces of text in a database (i.e. the translation memory) so that when the same piece of text (a segment) or a part of it is next encountered it is immediately visible as to how it was previously translated.</p>
 
 <p>OmegaT saves translation information in 3 separate translation memories, and can use pre-existing translation information from multiple translation memories.
 <dl>
-<dt><b>&lt;projectname&gt;.tmx</b></dt><dd>This is the project translation memory. It is saved in the main project directory and is automatically updated each time the project is compiled.</dd>
-<dt><b>project_save.tmx</b></dt><dd>This is a TMX file that is created in <b>/omegat</b> when the project is saved for the first time. It is updated each time the project is saved.</dd>
-<dt><b>project_save.tmx.bak</b></dt><dd>This is a TMX file that is created in <b>/omegat</b> when a project is first reopened. It serves as a backup of <b>project_save.tmx:</b> and is updated each time you reopen a project, before any possible change has taken place to the translation memory for the project.</dd>
-<dt><b>*.tmx</b> in <b>/tm</b></dt><dd>Translation memory exchange files created previously. These files must be in TMX Level 1.1 format.</dd></dl>
+<dt><strong>&lt;projectname&gt;.tmx</strong></dt><dd>This is the project translation memory. It is saved in the main project directory and is automatically updated each time the project is compiled.</dd>
+<dt><strong>project_save.tmx</strong></dt><dd>This is a TMX file that is created in <strong>/omegat</strong> when the project is saved for the first time. It is updated each time the project is saved.</dd>
+<dt><strong>project_save.tmx.bak</strong></dt><dd>This is a TMX file that is created in <strong>/omegat</strong> when a project is first reopened. It serves as a backup of <strong>project_save.tmx:</strong> and is updated each time you reopen a project, before any possible change has taken place to the translation memory for the project.</dd>
+<dt><strong>*.tmx</strong> in <strong>/tm</strong></dt><dd>Translation memory exchange files created previously. These files must be in TMX Level 1.1 format.</dd></dl>
 
 <p>For more information about translation memories format see: <a href="./FilesTMGloss.html">Translation Memory and Glossary Files</a>.</p>
 
 
-<a name="1.4" />
+<a name="1.4"></a>
 <h2 name="1.4" id="1.4">Terminology used in this manual</h2>
 
 <p>OmegaT works on Linux, Windows as well as MacOSX. Each platform uses specific terms to describe elements of the user environement. In this manual we tried to keep
 a generic way to write about the user environement.</p>
-<p>When we describe a hierarchy of directories (or folders) we adopted the Unix notation: <b>/project/</b> means the directory named "project", <b>/project/omegat/file.txt</b> means the file "file.txt" located in the directory named "omegat" of the "project" directory.</p>
-<p>Similarily, shortcuts are written <b>Ctrl+</b>(letter or number), but the actual key will depend on your system. MacOSX users will have to mentally convert to <b>Cmd+</b>(letter or number).
+<p>When we describe a hierarchy of directories (or folders) we adopted the Unix notation: <strong>/project/</strong> means the directory named “project”, <strong>/project/omegat/file.txt</strong> means the file “file.txt” located in the directory named “omegat” of the “project” directory.</p>
+<p>Similarily, shortcuts are written <strong>Ctrl+</strong>(letter or number), but the actual key will depend on your system. MacOSX users will have to mentally convert to <strong>Cmd+</strong>(letter or number).
 
-<a name="1.5" />
+<a name="1.5"></a>
 <h2 name="1.5" id="1.5">Participation to the OmegaT project</h2>
 
 <p>OmegaT isn't just a product; it's an exciting project, and you can be part of it.
 OmegaT is free software. That means that users like you are free to download and use it with very little in the way of restrictions. You are also free to copy it pass it on to other people.</p>
 <p>OmegaT is open-source software. That means that if you feel so inclined, you may modify OmegaT to suit your own requirements. For advocates of open-source software, this freedom is even more important than the exemption from having to pay anything.</p>
 <p>By the same token, the OmegaT project is run by volunteers who receive no payment for the work they do and time they spend on the project. If you have found OmegaT useful, you are welcome to contact the development team and make a donation. However, the project relies for its survival and progress much more on OmegaT users providing support in other forms than upon financial contributions.</p>
-<p>The OmegaT project would benefit from greater support from volunteers in almost all areas. Although many users are aware of this, their reaction is often "But I can't program!". Programming is certainly the most important function, and without programming, there is no program. But programming isn't the only job needing to be done. Below is a list of areas for which further volunteers would be more than welcome!</p>
+<p>The OmegaT project would benefit from greater support from volunteers in almost all areas. Although many users are aware of this, their reaction is often “But I can't program!”. Programming is certainly the most important function, and without programming, there is no program. But programming isn't the only job needing to be done. Below is a list of areas for which further volunteers would be more than welcome!</p>
 
-<a name="1.5.1" />
+<a name="1.5.1"></a>
 <h3 name="1.5.1" id="1.5.1">Documentation authoring</h3>
 
 <p>Documentation is very important. Many of you reading this will be translators who have translated a lot of user documentation. Have you considered writing some user documentation yourself? It's a real eye-opener!</p>
 
-<a name="1.5.2" />
+<a name="1.5.2"></a>
 <h3 name="1.5.2" id="1.5.2">Localization</h3>
 
 <p>Thanks to the work of translators in the past, OmegaT's user interface and/or Help texts have been translated into several languages. That means there are only a few thousand left! Localizing OmegaT into other languages is also an ongoing task, since new features and functions are being added all the time.</p>
 
-<a name="1.5.3" />
+<a name="1.5.3"></a>
 <h3 name="1.5.3" id="1.5.3">Testing</h3>
 
 <p>One of the most useful things OmegaT users can do is... to use OmegaT. And when they find things that don't work, or deficiencies in the documentation, to tell us about them.</p>
 
-<a name="1.5.4" />
+<a name="1.5.4"></a>
 <h3 name="1.5.4" id="1.5.4">Programming (Java)</h3>
 
 <p>OmegaT is written in Java. If you're a programmer and you happen to know Java, we'd like to hear from you. If not...</p>
 
-<a name="1.5.5" />
+<a name="1.5.5"></a>
 <h3 name="1.5.5" id="1.5.5">Programming (not Java)</h3>
 
-<p>... it's by no means the case that all programming need be done in Java. If you can program in another language, you can write code to support the core application. Such auxiliary code has already been written in Star Basic and Tcl/Tk, for instance. But I can't program at all, I hear you say. Well, have you considered learning? If you are already reasonably familiar with computers in general and choose a straightforward scripting language like Tcl/Tk, you could teach yourself enough to be able to write simple but useful scripts within just a couple of weeks. Continuing Professional Development is the current buzzword!</p>
+<p>... it's by no means the case that all programming need be done in Java. If you can program in another language, you can write code to support the core application. Such auxiliary code has already been written in StarBasic, Python and Tcl/Tk, for instance. But I can't program at all, I hear you say. Well, have you considered learning? If you are already reasonably familiar with computers in general and choose a straightforward scripting language like Tcl/Tk, you could teach yourself enough to be able to write simple but useful scripts within just a couple of weeks. Continuing Professional Development is the current buzzword!</p>
 
-<a name="1.5.6" />
+<a name="1.5.6"></a>
 <h3 name="1.5.6" id="1.5.6">Publicity</h3>
 
 <p>Have you ever written an article for your professional association's journal? If not, why not write an article on using OmegaT?</p>
 
-<a name="1.5.7" />
+<a name="1.5.7"></a>
 <h3 name="1.5.7" id="1.5.7">Get in touch!</h3>
 
 <p>OmegaT's user group, where you can make proposals, exchange ideas, get answers, is at:<br><a href="http://groups.yahoo.com/group/OmegaT/">http://groups.yahoo.com/group/OmegaT/</a>.</p>
 <p>People interested in localization can subscribe to OmegaT's dedicated mailing list at:<br><a href="http://lists.sourceforge.net/lists/listinfo/omegat-l10n">http://lists.sourceforge.net/lists/listinfo/omegat-l10n</a>.<br>The list archives are at:<br><a href="http://sourceforge.net/mailarchive/forum.php?forum_id=44900">http://sourceforge.net/mailarchive/forum.php?forum_id=44900</a>.
 <p>Would be developers can subscribe to OmegaT's dedicated mailing list at:<br><a href="http://lists.sourceforge.net/mailman/listinfo/omegat-development">http://lists.sourceforge.net/mailman/listinfo/omegat-development</a>.<br>The list archives are at:<br><a href="http://sourceforge.net/mailarchive/forum.php?forum_id=40737">http://sourceforge.net/mailarchive/forum.php?forum_id=40737</a>.
 
-<a name="1.6" />
+<a name="1.6"></a>
 <h2 name="1.6" id="1.6">About this manual</h2>
 
-<p>For further information above and beyond what is contained in this manual please visit the <a href="./http://www.omegat.org">OmegaT</a> official home page. Should you have any questions or comments on the manual please send them to the author (email: <a href="./mailto:lin4trans@users.sourceforge.net?subject=OmegaT%20documentation"> lin4trans at users dot sourceforge dot net</a> with the subject line "OmegaT documentation"). Feedback is welcome!</p>
+<p>For further information above and beyond what is contained in this manual please visit the <a href="./http://www.omegat.org">OmegaT</a> official home page. Should you have any questions or comments on the manual please send them to the author (email: <a href="./mailto:lin4trans@users.sourceforge.net?subject=OmegaT%20documentation"> lin4trans at users dot sourceforge dot net</a> with the subject line “OmegaT documentation”). Feedback is welcome!</p>
 
 </div>
 
@@ -134,11 +134,11 @@ OmegaT is free software. That means that users like you are free to download and
 <div class="navbar-bottom">
 
 <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
-<td width="9%" align="left" valign="center"><b>Previous</b></td>
-<td width="39%" align="left" valign="center"><a href="./OmegaT.html">Table of Contents</a></td>
-<td width="6%" align="left" valign="center"><b>Next</b></td>
-<td width="39%" align="left" valign="center"><a href="./InstallConfig.html">System Requirements and Installation</a></td></tr>
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td class="rel-p">Previous</td>
+<td class="nav-link"><a href="./OmegaT.html">Table of Contents</a></td>
+<td class="rel-n">Next</td>
+<td class="nav-link"><a href="./InstallConfig.html">System Requirements and Installation</a></td></tr>
 </table>
 
 </div>

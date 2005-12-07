@@ -14,82 +14,107 @@
 <div class="navbar-top">
 
 <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
-<td width="9%" align="left" valign="center"><b>Previous</b></td>
-<td width="39%" align="left" valign="center"><a href="./Glossary.html">Glossary</a></td>
-<td width="6%" align="left" valign="center"><b>Next</b></td>
-<td width="39%" align="left" valign="center"><a href="./FilesODOOoSO.html"> OpenDocument, OpenOffice.org and StarOffice Files</a></td></tr>
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td class="rel-p">Previous</td>
+<td class="nav-link"><a href="./FilesProjDirs.html#14">OmegaT files and directories</a></td>
+<td class="rel-n">Next</td>
+<td class="nav-link"><a href="./FilesODOOoSO.html"> Translation memories and glossary files</a></td></tr>
 </table>
 
 </div>
 
 <div class="content">
 
-<a name="" />
-<h1 align="center" name="" id="">Source Document Files</h1>
+<a name="15"></a>
+<h1 align="center" name="15" id="15">Source Document Files</h1>
 
-<p>OmegaT supports the following source document file formats for translation: <b>plaintext; HTML; XHTML; OpenDocument; OpenOffice.org; StarOffice;</b> and <b>Java resource bundles.</b></p>
-<p>These file formats are automatically detected based upon their filename extensions. Make sure that only files with the following extensions are used:</p>
+	<ol><li><a href="#15.1">Supported file types</a></li>
+	<li><a href="#15.2">File types and encodings</a></li>
+	<li><a href="#15.3">Other files</a></li></ol>
 
-<table>
-<tr><td><b>.txt</b>, <b>.txt1</b>, <b>.txt2</b>, <b>.utf8</b>;</td><td>plain text</td></tr>
-<tr><td><b>.htm</b>, <b>.html</b></td><td>HTML, XHTML</td></tr>
-<tr><td><b>.od*</b></td><td>OpenDocument (exact extension depends on file type)</td></tr>
-<tr><td><b>sx*</b></td><td>OpenOffice.org or StarOffice (exact extension depends on file type)</td></tr>
-<tr><td><b>.properties</b></td><td>Java resource bundles</td></tr>
-</table>
+<a name="15.1"></a>
+<h2 name="15.1" id="15.1">Supported file types</h2>
 
-<p>OpenOffice.org possesses excellent import and export filters for file format conversion&#8211;this includes filters for MS Word, Excel, and Powerpoint. Therefore, files in different formats can readily be converted to the OpenDocument (OpenOffice 2.0) or OpenOffice.org native formats, then translated in OmegaT, and finally converted back to the original format again.</p>
-<p>It may also be possible to use other wordprocessors and editors to create OpenDocument or OpenOffice.org file formats. AbiWord and KWord (KDE Environment) are two possibilities. Unfortunately, support for MS formats is not necessarily at the same level as with OpenOffice.org.</p>
 
-<a name="" />
-<h2 name="" id="">Plain Text</h2>
+<p>OmegaT supports the following source document file types for translation: <strong>plain text; HTML; XHTML; OpenDocument; OpenOffice.org;</strong> and <strong>Java resource bundles.</strong></p>
+<p>You can choose to have OmegaT ignore some file types by unckecking the corresponding checkboxes in the <strong>Options > File Filters</strong> dialog.</p>
 
-<p>For plain text files the following encodings are supported:</p>
+<p>File formats are automatically detected based upon their filename extensions. Current supported file extensions are:</p>
 
-<ul><li>Latin-1, ISO-8859-1 (<b>.txt1</b>);</li>
-<li>Latin-2, ISO-8859-2 (<b>.txt2</b>);</li>
-<li>UTF-8 (<b>.utf8</b>);</li>
-<li>the default operating system text encoding (<b>.txt</b>).</li></ul>
+<dl>
+<dt>Plain text:</dt>
+	<dd><strong>.txt</strong> for files in the OS default encoding</dd>
+	<dd><strong>.txt1</strong> for files in Latin-1</dd>
+	<dd><strong>.txt2</strong> for files in Latin-2</dd>
+	<dd><strong>.utf8</strong> for files in UTF-8</dd>
+<dt>(X)HTML:</dt>
+	<dd><strong>.htm</strong></dd>
+	<dd><strong>.html</strong></dd>
+	<dd><strong>.xhtml</strong></dd>
+<dt>OpenOffice:</dt>
+	<dd><strong>.sx?</strong> for OpenOffice.org 1.1.5 files and earlier versions</dd>
+	<dd><strong>.st?</strong> for OpenOffice.org 1.1.5 templates and earlier versions</dd>
+	<dd><strong>.od?</strong> for OpenOffice.org 2.0 files and more recent versions</dd>
+	<dd><strong>.ot?</strong> for OpenOffice.org 2.0 templates and more recent versions</dd>
+	<dd>OpenOffice.org files come in a variety of types. Word processor files have the <strong>.sxw</strong> extension for the old format or the <strong>.odt</strong> for the newer one which is the reason why we have put a "?" instead of the last letter.</dd>
+<dt>Java localization ressource bundles</dt>
+	<dd><strong>.properties</strong></dd></dl>
 
-<a name="" />
-<h2 name="" id="">HTML/XHTML</h2>
+<p>Files with other extensions can also be imported if their extensions are mapped to default file types. See <a href="./Filters.html">File Filters</a> for details on file types and extensions.</p>
 
-<p>HTML and XHTML encodings are automatically detected when files of these types are opened. Please note that, by default, these file types are saved as UTF-8 encoded files.</p>
+<p>OmegaT unsupported files are copied unmodified to <strong>/target</strong> when a project is compiled. This enables, for instance, the inclusion of files for a complete web site in <strong>/source</strong> to be mirrored in <strong>/target</strong>, together with any image files (e.g. GIF, JPEG, or PNG images).</p>
 
-<a name="" />
-<h2 name="" id="">OpenDocument</h2>
+<a name="15.2"></a>
+<h2 name="15.2" id="15.2">File types and encoding</h2>
 
-<p>OpenDocument is an OASIS document file format that supercedes OpenOffice.org 1.x format.</p>
-<p>Supported versions include: OpenDocument 1.0</p>
-<p>To open OpenDocument formatted source or target files for review or other operations external to OmegaT requires OpenOffice.org 2.0 or greater, StarOffice 8.0 or greater, or another OASIS OpenDocument compliant wordprocessor or editor.</p>
+<p>The above four file types have encodings that OmegaT needs to know to be able to properly parse and display the file.</p>
 
-<a name="" />
-<h2 name="" id="">OpenOffice.org/StarOffice</h2>
+<dl>
+<dt>Plain text:</dt>
+	<dd><strong>.txt</strong> are considered to be encoded in the OS default encoding</dd>
+	<dd><strong>.txt1</strong> are considered to be encoded in Latin-1</dd>
+	<dd><strong>.txt2</strong> are considered to be encoded in Latin-2</dd>
+	<dd><strong>.utf8</strong> are considered to be encoded in UTF-8</dd>
+<dt>(X)HTML:</dt>
+	<dd>(X)HTML files are supposed to include encoding information. OmegaT will look for this information and parse the file accordingly. If the information is not present, OmegaT will consider the files to be in the OS default encoding.</dd>
+<dt>OpenOffice:</dt>
+	<dd>OpenOffice.org files are encoded in UTF-8 and OmegaT parses them accordingly.</dd>
+<dt>Java localization ressource bundles</dt>
+	<dd>Java localization ressource bundles are encoded in Latin-1 and OmegaT parses them accordingly. All the characters that are not included into ascii will automatically be converted to the proper bundle format so that you don't need to worry about anything else but getting your translation right.</dd></dl>
 
-<p>Supported versions include: OpenOffice.org 1.x and StarOffice 6.x.</p>
+<p>Encoding settings for plain text and (x)html files can be modified from the <strong>Options > File Filters</strong> dialog. You can easily set <strong>.txt</strong> files to be considered as UTF-8 files in OmegaT by editing the <strong>Text files</strong> field of the dialog: change <strong>Source File Encoding</strong> and <strong>Target File Encoding</strong> from <strong>auto</strong> to <strong>UTF-8</strong> for example. See <a href="Filters.html#13">File filters</a> for more information.</p>
 
-<a name="" />
-<h2 name="" id="">Java Resource Bundles</h2>
+<p>Files in a supported type, with a supported file extension are expected to be encoded in the encoding set in <strong>File Filters</strong>. Files that are encoded in a different encoding may not be properly displayed since OmegaT will interpret their contents using non compatible encoding rules.</p>
 
-<p>These are Java localization files used by user interfaces (i.e OmegaT). They have a .properties file name extension by default.</p>
-<p>The default character encoding expected for this format is Latin-1 (ISO 8859-1). To use characters that are unsupported by this format they must be entered as Unicode escape sequences (i.e. '\u' followed by a four digit code).</p>
+<p>Be especially careful with plain text files. Plain text files with the <strong>.txt</strong> extension are <strong>not</strong> expected to be encoded in UTF-8.</p> 
 
-<a name="" />
-<h2 name="" id="">Filename Extension Mapping</h2>
+<a name="15.3"></a>
+<h2 name="15.3" id="15.3">Other files</h2>
 
-<p>Extension mappings to respective formats are described in <a href="./Filters.html">File Filters</a>. The method used in previous versions (via omegat.prefs) is now obsolete.</p>
+<p>OmegaT will look for translatable strings exclusively in files that conform to the file types extension rules above.</p>
+
+<p>If you put files that are not supported by OmegaT in <strong>source/</strong>, OmegaT will not look for translatable strings in them. The files will not be modified and when the target documents are set to be created, OmegaT will simply copy them to an equivalent position in the <strong>target/</strong> directory.</p>
+
+<p>You can take advantage of this feature to translate full web sites including image files for example.</p>
+
+<a name="15.3.1"></a>
+<h3 name="15.3.1" id="15.3.1">Microsoft Office Files</h3>
+
+<p>OpenOffice.org and related office suites (StarOffice, NeoOffice etc) possess excellent import and export filters for file format conversion&#8211;this includes filters for MS Word, Excel, and Powerpoint. Therefore, files in different formats can readily be converted to an equivalent OpenOffice.org file format, then translated in OmegaT, and finally converted back to the original format again.</p>
+
+<p>Such round-trip conversion rarely generates problems but you may want to make tests on a few samples to confirm that your files can go through this process without major breakdowns.</p>
+
 
 </div>
 
 <div class="navbar-bottom">
 
 <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
-<td width="9%" align="left" valign="center"><b>Previous</b></td>
-<td width="39%" align="left" valign="center"><a href="./Glossary.html">Glossary</a></td>
-<td width="6%" align="left" valign="center"><b>Next</b></td>
-<td width="39%" align="left" valign="center"><a href="./FilesODOOoSO.html"> OpenDocument, OpenOffice.org and StarOffice Files</a></td></tr>
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td class="rel-p">Previous</td>
+<td class="nav-link"><a href="./FilesProjDirs.html#14">OmegaT files and directories</a></td>
+<td class="rel-n">Next</td>
+<td class="nav-link"><a href="./FilesODOOoSO.html"> Translation memories and glossary files</a></td></tr>
 </table>
 
 </div>

@@ -13,91 +13,369 @@
 <div class="navbar-top">
 
 <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
-<td width="9%" align="left" valign="center"><b>Previous</b></td>
-<td width="39%" align="left" valign="center"><a href="./Matches.html">Matches and glossary items</a></td>
-<td width="6%" align="left" valign="center"><b>Next</b></td>
-<td width="39%" align="left" valign="center"><a href="./Filters.html">File Filters</a></td></tr>
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td class="rel-p">Previous</td>
+<td class="nav-link"><a href="./Matches.html">Matches and glossary items</a></td>
+<td class="rel-n">Next</td>
+<td class="nav-link"><a href="./Filters.html">File Filters</a></td></tr>
 </table>
 
 </div>
 
 <div class="content">
 
-<a name="12" />
+<a name="12"></a>
 <h1 align="center" name="12" id="12">Tagged (Formatted) Files Text Editing</h1>
 
-	<ol><li><a href="#12.1">Working with tags</a></li>
-	<li><a href="#12.2">Tag Validation</a></li></ol>
+	<ol><li><a href="#12.1">OmegaT tags</a></li>
+	<li><a href="#12.2">Tag operations</a></li>
+	<li><a href="#12.3">Tag Validation</a></li>
+	<li><a href="#12.4">Java localisation bundles</a></li></ol>
+
+<p>Plain text files only require typing the correct translation in the editing field. Other file types that OmegaT supports natively sometimes require specific knowledge of how OmegaT handles them. This chapter describes how OmegaT handles (X)HTML files, OpenOffice.org files and Java localisation bundles.</p>
+
+<a name="12.1"></a>
+<h2 name="12.1" id="12.1">OmegaT tags</h2>
+
+<p>Formatting information present in the source file usually needs to be reproduced in the target file. OmegaT displays the in-line formatting information of supported formats (at present HTML, XHTML, OpenDocument, and OpenOffice.org) as tags. Tags are usually not taken into account when considering string similarity for matching purposes. Tags that you have reproduced in the translated segment will be present in the translated document.</p>
+
+<p>Examples in this chapter are taken from this user manual as displayed in OmegaT. Some files have purposedly been converted to OpenOffice.org format to ensure completeness of the examples. We use the notation <strong>HTML tags</strong> to refer to <strong>HTML</strong> and <strong>XHTML</strong> tags, and <strong>OOo tags</strong> to refer to <strong>OpenDocument</strong>, and <strong>OpenOffice.org</strong> tags.</p>
+
+<a name="12.1.1"></a>
+<h3 name="12.1.1" id="12.1.1">Pairs and singletons</h3>
+
+<p>Tags come either in singletons or in pairs.</p>
+
+<ul><li>Single tags indicate formatting information that does not affect the surrounding text (extra space or line break for example).
+<dl><dt>Single tags:</dt><dd><code><strong>&lt;segment 2132&gt;</strong>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;, &lt;br3&gt;&lt;b4&gt;&lt;Tab&gt;&lt;/b4&gt;&lt;s5&gt;*&lt;/s5&gt;<strong>&lt;end segment&gt;</strong></code><br>
+<strong>&lt;br1&gt;</strong> and <strong>&lt;br3&gt;</strong> are single tags and do not affect any surrounding text.</dd></dl></li>
+
+<li>Paired tags usually indicate style information that applies to the text between the opening tag and the closing tag of a pair.
+<dl><dt>Paired tags:</dt><dd><code><strong>&lt;segment 3167&gt;</strong>Log file (&lt;f1&gt;log.txt&lt;/f2&gt;) for tracking operations and errors.<strong>&lt;end segment&gt;</strong></code><br>
+<strong>&lt;f1&gt;</strong> and <strong>&lt;/f2&gt;</strong> are paired and affect <strong>log.txt</strong></dd></dl></li></ul>
 
 
-<a name="12.1" />
-<h2 name="12.1" id="12.1">Working with Tags</h2>
+<a name="12.1.2"></a>
+<h3 name="12.1.2" id="12.1.2">Tags numbering</h3>
 
-<p>OmegaT displays the in-line formatting information of supported formats (at present HTML, XHTML, OpenDocument, and OpenOffice.org/StarOffice) as tags. The tags that are visible in OmegaT are not the same as those used by the original format; OmegaT converts them internally, and converts them back at compilation when the target documents are created.</p>
+<p>Tags in OmegaT are numbered. Numbering depends on the source file format.</p>
+
+<dl><dt>HTML tags:</dt><dd><code><strong>&lt;segment 2132&gt;</strong>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;, &lt;br3&gt;&lt;b4&gt;&lt;Tab&gt;&lt;/b4&gt;&lt;s5&gt;*&lt;/s5&gt;<strong>&lt;end segment&gt;</strong></code><br>
+Tags in HTML source files are numbered in an incremental way by tag group. The first group (pair or singleton) gets the number <strong>0</strong>, the second the number <strong>1</strong> etc.<br>
+Here, the (pair) group <strong>&lt;b0&gt; &lt;/b0&gt;</strong> gets number 0 and the (singleton) group <strong>&lt;br1&gt;</strong> gets number 1.</dd></dl></li>
+
+<dl><dt>OOo tags:</dt><dd><code><strong>&lt;segment 3167&gt;</strong>Log file (&lt;f1&gt;log.txt&lt;/f2&gt;) for tracking operations and errors.<strong>&lt;end segment&gt;</strong></code><br>
+Tags in OOo source files  are numbered in an incremental way by tag. The first tag (tag in a pair or singleton) gets the number <strong>1</strong>, the second the number <strong>2</strong> etc.<br>
+Here, the tag <strong>&lt;f1&gt;</strong>, opening a pair, gets number 1 and the tag <strong>&lt;/f2&gt;</strong>, closing the pair, gets number 2.</dd></dl></li></ul>
+
+<p>The different numbering pattern helps you remember that in HTML files, you have to focus on tag pairing, while in OOo files, tag order is more important.</p>
+
+<a name="12.1.3"></a>
+<h3 name="12.1.3" id="12.1.3">Tags and sentence segmenting</h3>
+
+<p>OmegaT creates its tags before sentences segmenting is applied. Depending on the segmenting rules, tags may look like they do not respect the above rules of pairing and numbering.</p>
+
+<p>Let's consider the following segment without sentence segmenting:</p>
+
+<code><strong>&lt;segment 1554&gt;</strong> &lt;c0&gt;Before: \. After: \s&lt;/c0&gt;&lt;br1&gt; &lt;b2&gt;Note:&lt;/b2&gt; "\." means the character "."&lt;br3&gt; "\s" means any white space character <strong>&lt;end segment&gt;</strong></code>
+
+<p>There seems to be no problem here. Now, if we apply the default segmenting rules on this segment (the default OmegaT behavior) we will have the following result:</p>
+
+
+<code><strong>&lt;segment 1990&gt;</strong> &lt;c0&gt;Before: \. <strong>&lt;end segment&gt;</strong><br>
+<strong>&lt;segment 1991&gt;</strong> After: \s&lt;/c0&gt;&lt;br1&gt; <strong>&lt;end segment&gt;</strong><br>
+<strong>&lt;segment 1992&gt;</strong> &lt;b2&gt;Note:&lt;/b2&gt; "\." means the character "."&lt;br3&gt; <strong>&lt;end segment&gt;</strong><br>
+<strong>&lt;segment 1993&gt;</strong> "\s" means any white space character <strong>&lt;end segment&gt;</strong></code>
+
+<p>Here, we see that segments taken one by one do not respect the pairing and numbering rules. In some cases that may even cause problems in the translation, when tags must be displaced in the target language to reflect the word order of that language.</p>
+
+<a name="12.1.4"></a>
+<h3 name="12.1.4" id="12.1.4">OOo Tags and segment boundaries</h3>
+
+<p>Only <strong>OOo</strong> tags are concerned by this item. <strong>HTML</strong> tags are not.</p>
+
+<p>Tags can sometimes fall on segment boundaries (ie. just after <code><strong>&lt;segment nnnn&gt;</strong> or just before <strong>&lt;end segment&gt;</strong></code>). OmegaT usually does not display OOo tags that fall on segment boundaries.</p>
+
+<p>When the target language structure requires word order to be changed, it may sometimes be difficult to displace formatting information so that it sticks to the formatted string since one of the tag is missing. This issue is well known and will be fixed in a future version of OmegaT.</p>
+
+<p>If non displayed tags must be displaced insert a mark in the target segment and correct the formatting in the target document with a compatible application.</p>
+
+<dl><dt>Tags falling on segment boundaries (current, faulty, behavior):</dt><dd><code><strong>&lt;segment 3134&gt;</strong>Instant Start tutorial&lt;/a1&gt; &lt;f2&gt;new!<strong>&lt;end segment&gt;</strong></code></dd></dl>
+
+<p>Proper support for tags falling on segment boundaries should have OmegaT display the above segment the following way:</p>
+
+<dl><dt>Tags falling on segment boundaries (future, correct, behavior):</dt><dd><code><strong>&lt;segment 3134&gt;</strong>&lt;a1&gt;Instant Start tutorial&lt;/a2&gt; &lt;f3&gt;new!&lt;/f4&gt;<strong>&lt;end segment&gt;</strong></code></dd></dl>
+
+<a name="12.2"></a>
+<h2 name="12.2" id="12.2">Tag operations</h2>
+
 <p>Care must be exercised with tags. If they are accidentally changed, the formatting of the final file may be corrupted. In the worst case scenario a file may not open altogether; this occurs with OpenOffice.org files in particular.</p>
+
 <p>Although custom formatting cannot be performed from within OmegaT, it is possible to apply some degree of control over the existing format.</p>
 
-<p>OmegaT usually does not display tags that fall on segment boundaries. In case this tag is the opening tag of a pair, it may sometimes be difficult to properly replace the closing tag when the target word order needs to be profundly modified. When this occur, create the target files and check the file rendering in the appropriate file viewer to make sure your modification did not disrupt the overall layout.</p>
+<a name="12.2.1"></a>
+<h3 name="12.2.1" id="12.2.1">OOo tags manipulation</h3>
 
-<a name="12.1.1" />
-<h3 name="12.1.1" id="12.1.1">OpenDocument and OpenOffice.org File Tag Manipulation</h3>
 
-<p>OpenDocument and OpenOffice.org tags must be preserved as is. Tags are paired as opening ( <code>&lt;f&gt;</code>) and closing ( <code>&lt;/f&gt;</code>) tags with consecutive numbers, starting from 1, in each segment. These tags cannot be deleted, duplicated, or have their sequence changed. However, it is possible to:</p>
+<p>OpenDocument and OpenOffice.org tags must be preserved as is. These tags cannot be deleted or have their sequence changed. However, it is possible to:</p>
 
 <ul><li> move tags to a different part of the segment; as long as they remain in the same order;</li>
 <li> cancel tags by placing them next to each other.</li></ul>
 
 <p>For instance, if the tagged sentence</p>
-<p><code> This text is in &lt;f1&gt;italics&lt;/f2&gt;.</code></p>
+<p><code><strong>&lt;segment 3270&gt;</strong> Log file (<strong>&lt;f1&gt;</strong>log.txt<strong>&lt;/f2&gt;</strong>) for tracking operations and errors. <strong>&lt;end segment&gt;</strong></code></p>
 <p>is changed to</p>
-<p><code> This text is in &lt;f1&gt;&lt;/f2&gt;italics.</code></p>
-<p>the italic formatting is effectively removed.</p>
+<p><code><strong>&lt;segment 3270&gt;</strong> Log file (<strong>&lt;f1&gt;&lt;/f2&gt;</strong>log.txt) for tracking operations and errors. <strong>&lt;end segment&gt;</strong></code></p>
+<p>the formatting of <strong>log.txt</strong> is effectively removed.</p>
 
-<a name="12.1.2" />
-<h3 name="12.1.2" id="12.1.2">HTML/XHTML File Tag Manipulation</h3>
+<a name="12.2.2"></a>
+<h3 name="12.2.2" id="12.2.2">HTML tags manipulation</h3>
 
-<p>In HTML or XHTML the beginning of formatting is marked by an opening tag of the form <code> &lt;x&gt;,</code> and the end of formatting by a corresponding closing tag<code> &lt;/x&gt;</code> (where x represents the characters of a particular tag element). These tags have matching numbers, starting from 0, in each segment. Essentially, any changes made to tags must be made to both tags of the same pair.</p>
-<p>The following rules for tags are applicable:</p>
+<p>In HTML or XHTML the following rules for tags are applicable:</p>
 
-<ul><li>Deletion is permitted e.g. to remove italics from</p>
-<p><code> This text is in &lt;x0&gt;italics&lt;/x0&gt;</code></p>
-<p>simply delete the tags &lt;x0&gt; and &lt;/x0&gt;.</li></ul>
+<dl><dt>Duplication is permitted e.g.:</dt>
+<dd><code><strong>&lt;segment 3116&gt;</strong> Help menu includes access to a new &lt;b0&gt;About&lt;/b0&gt; dialog as well as the &lt;b1&gt;Users Manual&lt;/b1&gt;. <strong>&lt;end segment&gt;</strong></code>
 
-<ul><li>Duplication is permitted e.g. in</p>
-<p><code> This text is in &lt;x0&gt;italics&lt;/x0&gt;, and so is &lt;x1&gt;this&lt;/x1&gt;</code></p>
-<p>the same formatting of "italics" is applied to "this".</li></ul>
+<p>to duplicate tags, just copy them in the position of your choice (remember that overlaping of paired tags is never allowed, see <strong>Overlap</strong> below):</p>
 
-<ul><li>Change of order is permitted e.g.</p>
-<p><code> This text is in &lt;x0&gt;italics&lt;/x0&gt;, this text is &lt;x1&gt; underlined&lt;/x1&gt;</code></p>
+<code><strong>&lt;segment 3116&gt;</strong> Help menu <strong>&lt;b0&gt;</strong>includes<strong>&lt;/b0&gt;</strong> access to a new &lt;b0&gt;About&lt;/b0&gt; dialog as well as the &lt;b1&gt;Users Manual&lt;/b1&gt;. <strong>&lt;end segment&gt;</strong></code></dd></dl>
+
+<dl><dt>Deletion is permitted e.g.:</dt>
+<dd><code><strong>&lt;segment 3116&gt;</strong> Help menu includes access to a new &lt;b0&gt;About&lt;/b0&gt; dialog as well as the &lt;b1&gt;Users Manual&lt;/b1&gt;. <strong>&lt;end segment&gt;</strong></code>
+
+<p>to remove formatting you don't need, just delete the related tag pairs:</p>
+
+<code><strong>&lt;segment 3116&gt;</strong> Help menu includes access to a new <strong><s>&lt;b0&gt;</s></strong>About<strong><s>&lt;/b0&gt;</s></strong> dialog as well as the &lt;b1&gt;Users Manual&lt;/b1&gt;. <strong>&lt;end segment&gt;</strong></code></dd></dl>
+
+
+<dl><dt>Change of order is permitted:</dt>
+<dd><code><strong>&lt;segment 3116&gt;</strong> Help menu includes access to a new &lt;b0&gt;About&lt;/b0&gt; dialog as well as the &lt;b1&gt;Users Manual&lt;/b1&gt;. <strong>&lt;end segment&gt;</strong></code>
+<p>can be changed to:</p>
+<code><strong>&lt;segment 3116&gt;</strong> Help menu includes access to a new <u><strong>&lt;b1&gt;</strong></u>About<u><strong>&lt;/b1&gt;</strong></u> dialog as well as the <u><strong>&lt;b0&gt;</strong></u>Users Manual<u><strong>&lt;/b0&gt;</strong></u>. <strong>&lt;end segment&gt;</strong></code></dd></dl>
+
+<dl><dt>Nesting is permitted e.g.</dt>
+<dd><code><strong>&lt;segment 3116&gt;</strong> Help menu includes access to a new &lt;b0&gt;About&lt;/b0&gt; dialog as well as the &lt;b1&gt;Users Manual&lt;/b1&gt;. <strong>&lt;end segment&gt;</strong></code>
 <p>can be changed to</p>
-<p><code> This text is &lt;x1&gt;underlined&lt;/x1&gt;, this text is in &lt;x0&gt;italics&lt;/x0&gt;</code></li></ul>
+<code><strong>&lt;segment 3116&gt;</strong> Help menu includes access to a new <u><strong>&lt;b0&gt;</strong></u>About dialog as well as the &lt;b1&gt;Users Manual&lt;/b1&gt;.<u><strong>&lt;/b0&gt;</strong></u> <strong>&lt;end segment&gt;</strong></code></dd></dl>
 
-<ul><li>Nesting is permitted e.g.</p>
-<p><code> This text is in &lt;x0&gt;italics&lt;/x0&gt;, this text is &lt;x1&gt;underlined&lt;/x1&gt;</code></p>
-<p>can be changed to</p>
-<p><code> This text is in &lt;x0&gt;italics and &lt;x1&gt;this text is also underlined&lt;/x1&gt;&lt;/x0&gt;</code></li></ul>
+<dl><dt>Overlap is <strong>not</strong> permitted. Tagging like this:</dt>
+<dd><code><strong>&lt;segment 3116&gt;</strong> Help menu includes access to a new <u><strong>&lt;b1&gt;</strong></u>About dialog as well as the <u><strong>&lt;b0&gt;</strong></u>Users<u><strong>&lt;/b1&gt;</strong></u> Manual<u><strong>&lt;/b0&gt;</strong></u>. <strong>&lt;end segment&gt;</strong></code></dd></dl>
 
-<ul><li>Overlap is not permitted tagging like this</p>
-<p><code> This text is in &lt;x0&gt;italics, this text is also &lt;x1&gt;underlined&lt;/x0&gt;, this text is underlined but not in italics&lt;/x1&gt;</code></p>
 <p>is not allowed and will corrupt the file. Insertion of an opening tag followed by a second opening tag requires the closing tag of the second opening tag to come before the closing tag of the first.</li></ul>
 
-<a name="12.2" />
-<h2 name="12.2" id="12.2">Tag Validation</h2>
+<a name="12.3"></a>
+<h2 name="12.3" id="12.3">Tag Validation</h2>
 
-<p>The validate tags function ( <b>Tools</b> &gt; <b>Validate Tags</b>) detects changed tags (whether done deliberately or by accident), and indicates the affected segments. Use of this function will open a dialog with any suspected broken or bad tags in a document.</p>
+<p>The validate tags function ( <strong>Tools</strong> &gt; <strong>Validate Tags</strong>) detects changed tags (whether done deliberately or by accident), and indicates the affected segments. Use of this function will open a dialog with any suspected broken or bad tags in a document.</p>
 <p>This function can be useful for tracking down bugs in a translated tagged text. This is often a problem in OpenDocument or OpenOffice.org files that will not open due to tag problems created in the process of translation. Fixing the tags and recreating the target documents again can often remedy the problem.</p>
+
+<a name="12.4"></a>
+<h2 name="12.4" id="12.4">Java localisation bundles</h2>
+
+<p>Java localisation bundles are not to be considered as tagged files. Still, their translation is not as straight forward as plain text files so we include here a reasonably detailed section about their specificities. Most examples are taken from the OmegaT GUI bundle.</p>
+
+<p><span class="warning">Warning!</span> Special characters are used in bundles to indicate user interface access accelerators, variables, escaped characters (end of line etc.), you must reproduce these characters in the relevant position of your translation.</p>
+
+<a name="12.4.1"></a>
+<h3 name="12.4.1" id="12.4.1">Translation context</h3>
+
+<p>Although the bundle internal structure is relatively complex, OmegaT hides the complexity and only gives you access to the string to translate. If you are not confident about the context of the string you are translating, open the file in a text editor and consult it if necessary, while translating in OmegaT.</p>
+
+<strong>A few lines of the OmegaT bundle</strong>:
+<p><code># The version number is taken from Version.properties, key 'version'<br>
+# and inserted into the following template<br>
+version-template=OmegaT-{0}<br>
+# buttons<br>
+BUTTON_OK=&OK<br>
+BUTTON_CANCEL=&Cancel</code></p>
+
+<p>OmegaT will only display the part after the "=" equal sign:</p>
+
+<p><code>OmegaT-{0}<br>
+<strong>&lt;segment 4345&gt;</strong> OmegaT-{0} <strong>&lt;end segment&gt;</strong></code></p>
+
+<p><code>&OK<br>
+<strong>&lt;segment 4346&gt;</strong> &Ok <strong>&lt;end segment&gt;</strong></code></p>
+
+<a name="12.4.2"></a>
+<h3 name="12.4.2" id="12.4.2">Comments</h3>
+
+<p>Comments do not appear in OmegaT, but you may want to read them while translating (see <a href="#12.4.1">Translation context</a> above).</p>
+
+<p>Here are two examples of comments:</p>
+
+<p><code># MainWindow TF_INTRO_MESSAGE=OmegaT Translation Memory CAT Tool</code></p>
+
+<p><code># NOTE: segment start is assumed to end with "0000" string to overwrite<br>
+# with entry number. If zeros not detected, entry number will not be<br>
+# displayed TF_CUR_SEGMENT_START=&lt;segment 0000&gt;</code></p>
+
+<p>Any line in the .properties file that begins with a hash sign (#) (also known as a pound sign in the United States), is a comment. These comments are for the benefit of the translator and the programmer, and need not be translated. None of the comments will appear anywhere in the user interface, so there's no need to translate them.</p>
+
+<a name="12.4.3"></a>
+<h3 name="12.4.3" id="12.4.3">Accelerators</h3>
+
+<p>The acccelerator enables the user to navigate the menus using his keyboard. Accelerators are letters inside a function name directly accessible from the keyboard that trigger that function. In Java bundles they are indicated with "<strong>&</strong>". Such keyboard access is not conformant with MacOSX GUI guidelines but is common on Windows or Linux.</p>
+
+<p>Here are two examples with accelerators:</p>
+
+<p><code>BUTTON_SEARCH=&Search</code><br>
+the accelerator for "<strong>Search</strong>" is set to letter "<strong>s</strong>".</p>
+<p><code>BUTTON_TO_DEFAULTS=De&faults</code><br>
+the accelerator for "<strong>Defaults</strong>" is set to letter "<strong>f</strong>".</p>
+
+<p>Try to use different letters for the accelerator in successive strings, because these strings often appear together on a menu or dialog. Try to use the same letter for the accelerator as is used in English.</p>
+
+<p>Examples:</p>
+
+<p>In Afrikaans, the translation for "Search" and "Defaults" is "Deursoek" and "Verstek".</p>
+
+<p>Incorrect:<br>
+
+<code>* BUTTON_SEARCH=Deur&Soek</code> (no need to capitalize "s").<br>
+<code>* BUTTON_SEARCH=Deur &soek</code> (no need to insert a space).<br>
+<code>* BUTTON_SEARCH=Deursoek&</code> ("&" is not set to any letter).<br>
+<code>* BUTTON_SEARCH=& Deursoek</code> ("&" is not set to any letter).</p>
+
+<p>Correct:</p>
+
+<code>* BUTTON_SEARCH=Deur&soek<br>
+* BUTTON_SEARCH=&Deursoek</code>
+
+<p>Incorrect:</p>
+
+<code>* BUTTON_TO_DEFAULTS=Ver&Stek</code> (no need to capitalize "s").<br>
+<code>* BUTTON_TO_DEFAULTS=&fVerstek</code> (adding "f" makes the translation incorrect).<br>
+<code>* BUTTON_TO_DEFAULTS=Verstek&f</code> (adding "f" makes the translation incorrect).</p>
+
+<p>Correct:</p>
+
+<code>* BUTTON_TO_DEFAULTS=&Verstek<br>
+* BUTTON_TO_DEFAULTS=Ver&stek</code>
+
+<a name="12.4.4"></a>
+<h3 name="12.4.4" id="12.4.4">Variables</h3>
+
+<p>Here are three example of variables:</p>
+
+<p><code>HF_ERROR_EXTLINK_TITLE=Cannot open the link <strong>{0}</strong><br>
+CT_FUZZY_X_OF_Y=Analyzing strings - <strong>{0}</strong> of <strong>{1}</strong> completed<br>
+SOME_FICTICIOUS_EXAMPLE=Project saved on <strong>{0}</strong> at <strong>{1}</strong> by <strong>{2}</strong></code></p>
+
+<p>The <strong>{0}</strong>, <strong>{1}</strong> and <strong>{2}</strong> are placeholders for variables. When OmegaT displays this string to the user, it automatically adds numbers or pieces of text instead of the {0}, the {1} or the {2}.</p>
+
+<p>Examples:</p>
+
+<p>In Afrikaans, the strings are usually translated as follows (notice the last example, in which the order of the variables are different owing to the different grammatical structure of Afrikaans):</p>
+
+<p><code>HF_ERROR_EXTLINK_TITLE=Cannot open the link <strong>{0}</strong></code><br>
+produces the following string: <code>Cannot open the link <strong>foo.bar</strong></code><br>
+which should be translated: <code>Kon nie die skakel <strong>foo.bar</strong> open nie</code></p>
+<p>The OmegaT segment should thus be:<br>
+<code>HF_ERROR_EXTLINK_TITLE=Kon nie die skakel <strong>{0}</strong> open nie</code></p>
+
+<p>Similarly:</p>
+
+<p><code>CT_FUZZY_X_OF_Y=Analyzing strings - <strong>{0}</strong> of <strong>{1}</strong> completed</code><br>
+produces the following string: <code>Analyzing stings - <strong>23</strong> of <strong>100</strong> completed</code><br>
+which should be translated: <code>Ontleed tans stringe - <strong>23</strong> van <strong>100</strong> afgehandel</code></p>
+<p>The OmegaT segment should thus be:<br>
+<code>CT_FUZZY_X_OF_Y=Ontleed tans stringe - <strong>{0}</strong> van <strong>{1}</strong> afgehandel</code></p>
+
+<p>And:</p>
+
+<p><code>SOME_FICTICIOUS_EXAMPLE=Project saved on <strong>{0}</strong> at <strong>{1}</strong> by <strong>{2}</strong></code><br>
+produces the following string: <code>Project saved on <strong>2005-11-23</strong> at <strong>23:55</strong> by <strong>John Doe</strong></code><br>
+which should be translated: <code>Projek om <strong>23:55</strong> op <strong>2005-11-23</strong> deur <strong>John Doe</strong> gestoor</code></p>
+<p>The OmegaT segment should thus be:<br>
+<code>SOME_FICTICIOUS_EXAMPLE=Projek om <strong>{1}</strong> op <strong>{0}</strong> deur <strong>{2}</strong> gestoor</code></p>
+
+<a name="12.4.5"></a>
+<h3 name="12.4.5" id="12.4.5">Escaped characters</h3>
+
+<p>Some letters or signs used in ordinary, human writing have special meaning to a computer, and for that reason these characters must be escaped to make OmegaT treat them correctly and display them correctly.</p>
+
+<p>Some characters are escaped so that they display (for example, the colon). Some characters are escaped so that they don't display (for example, the newline-n).</p>
+
+<p>Here are some examples of escaped characters (in the .properties file, characters are escaped using a backslash):</p>
+
+<p><code>HF_CANT_FIND_HELP=Cannot locate help file<strong>\:</strong></code><br>will be displayed on screen as:<br>
+<code>Cannot locate help file:</code></p>
+
+<p><code>RBFH_ERROR_ILLEGAL_U_SEQUENCE=Encountered illegal <strong>\\u</strong> sequence</code><br>will be displayed on screen as:<br>
+<code>Encountered illegal \u sequence</code></p>
+
+<p><code>SOME_FICTITIOUS_STRING=Hello<strong>\n</strong>world!</code><br>will be displayed on screen as:<br><code>Hello<br>world!</code></p>
+
+<a name="12.4."></a>
+<h3 name="12.4." id="12.4.">HTML in strings</h3>
+
+<p>Most of the strings in the .properties file will be displayed in OmegaT as menu items or dialog boxes. However, a few of them will be displayed in a view box that uses HTML (the haiku error messages are one example).</p>
+
+<p>Here is an example of such a string (notice also the escaped colon):</p>
+
+<p><code>HF_HAIKU_2=Wind catches lily<strong>&lt;p&gt;</strong>Scatt'ring petals to the wind \:<strong>&lt;p&gt;</strong>Your page is not found</code></p>
+
+<p>This string will be displayed in the view box as:</p>
+
+<p><code>Wind catches lily<br>Scatt'ring petals to the wind:<br>Your page is not found</code></p>
+
+<a name="12.4.6"></a>
+<h3 name="12.4.6" id="12.4.6">Dealing with newlines</h3>
+
+<p>To display multiple lines in the OmegaT user interface, escaped newline-n characters are used to force a break in the line. Do not use newlines in the translation if there are no newlines in the English text, and try to keep as many lines in the translation as in the English text.</p>
+
+<p>Here is an example of newlines and their effects:</p>
+
+<p><code>SOME_FAKE_STRING=This<strong>\n</strong>is<strong>\n</strong>my<strong>\n</strong>life</code></p>
+
+<p>This will be displayed as:</p>
+
+<p><code>This<br>is<br>my<br>life</code></p>
+
+<p>Notice that there are no spaces before or after the newline-n characters. If you insert spaces, OmegaT will display spaces.</p>
+
+<p>Here is an example with incorrectly inserted spaces:</p>
+
+<p><code>SOME_FAKE_STRING=This<strong>\n</strong> is<strong>\n</strong> my<strong>\n</strong> life</code></p>
+
+<p>This will be displayed as:</p>
+
+<p><code>This<br>&nbsp;is<br>&nbsp;my<br>&nbsp;life</code></p>
+
+<a name="12.4.7"></a>
+<h3 name="12.4.7" id="12.4.7">Multiline strings</h3>
+
+<p>For reasons of legibility, the programmer may have broken a long string into several lines in the .properties file. The line breaks in the .properties file will not affect the way the string is displayed on screen.</p>
+
+<p>Here are two examples of multiline strings:</p>
+
+<p><code>YET_ANOTHER_FAKE_STRING=This is an example of<strong>\</strong><br>
+how one would write a multiline string<strong>\</strong><br>
+and how one would write it.</code></p>
+
+<p>will be displayed: <code>This is an example of<strong>\</strong>how one would write a multiline string<strong>\</strong>and how one would write it.</code></p>
+
+<p><code>STILL_ANOTHER_FAKE_STRING=<strong>\</strong><br>
+&nbsp;This is another example of how one would write<strong>\</strong><br>
+&nbsp;a multiline string and how one would write it.</code></p>
+
+<p>will be displayed: <code>STILL_ANOTHER_FAKE_STRING=<strong>\</strong> This is another example of how one would write<strong>\</strong> a multiline string and how one would write it.</code></p>
+
+<p>The multiline string ends with a backslash, and may or may not be indented.</p>
+
+<p>Some multiline strings end on both a newline-n and a backslash. Those strings will indeed be displayed as multiple lines in the OmegaT user interface, because of the newline-n characters.</p>
 
 </div>
 
 <div class="navbar-bottom">
 
 <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-<tr><td width="7%" align="left" valign="center"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
-<td width="9%" align="left" valign="center"><b>Previous</b></td>
-<td width="39%" align="left" valign="center"><a href="./Matches.html">Matches and glossary items</a></td>
-<td width="6%" align="left" valign="center"><b>Next</b></td>
-<td width="39%" align="left" valign="center"><a href="./Filters.html">File Filters</a></td></tr>
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td class="rel-p">Previous</td>
+<td class="nav-link"><a href="./Matches.html">Matches and glossary items</a></td>
+<td class="rel-n">Next</td>
+<td class="nav-link"><a href="./Filters.html">File Filters</a></td></tr>
 </table>
 
 </div>

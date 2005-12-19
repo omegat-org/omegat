@@ -194,12 +194,12 @@ public class Language
         new Language("bs"),       // NOI18N  // Bosnian
 //        new Language("bs-BA"),       // NOI18N  // Bosnian (Bosnia and Herzegovina)
         
-//        new Language("ca"),       // NOI18N  // Catalan
+        new Language("ca"),       // NOI18N  // Catalan
 //        new Language("ca-ES"),       // NOI18N  // Catalan (Spain)
         
 //        new Language("ce"),       // NOI18N  // Chechen 
 //        new Language("ch"),       // NOI18N  // Chamorro
-//        new Language("co"),       // NOI18N  // Corsican
+        new Language("co"),       // NOI18N  // Corsican
 //        new Language("cr"),       // NOI18N  // Cree
         
         new Language("cs"),       // NOI18N  // Czech
@@ -464,7 +464,7 @@ public class Language
         
 //        new Language("rw"),       // NOI18N  // Kinyarwanda
 //        new Language("sa"),       // NOI18N  // Sanskrit
-//        new Language("sc"),       // NOI18N  // Sardinian
+        new Language("sc"),       // NOI18N  // Sardinian
 //        new Language("sd"),       // NOI18N  // Sindhi
 //        new Language("sd-IN"),       // NOI18N  // Sindhi (India)
 //        new Language("sd-PK"),       // NOI18N  // Sindhi (Pakistan)

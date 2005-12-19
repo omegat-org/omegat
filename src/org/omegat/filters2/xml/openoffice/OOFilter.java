@@ -157,6 +157,7 @@ public class OOFilter extends XMLAbstractFilter
         defineFormatTag("text:line-break", "br");                               // NOI18N
         defineFormatTag("text:line-break/", "br/");                             // NOI18N
         defineFormatTag("text:user-defined", "ud");                             // NOI18N
+        defineFormatTag("text:sequence", "seq");                                // NOI18N
         
         // not working in 1.4.5
         // defineVerbatumTag("text:note-citation");                             // NOI18N

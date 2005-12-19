@@ -261,6 +261,7 @@ class FilterVisitor extends NodeVisitor
                 tagname.equals("BLOCKQUOTE") ||                                 // NOI18N
                 tagname.equals("BODY") ||                                       // NOI18N
                 tagname.equals("CENTER") ||                                     // NOI18N
+                tagname.equals("DIV") ||                                        // NOI18N
                 tagname.equals("H1") || tagname.equals("H2") ||                 // NOI18N
                     tagname.equals("H3") || tagname.equals("H4") ||             // NOI18N
                     tagname.equals("H5") || tagname.equals("H6") ||             // NOI18N

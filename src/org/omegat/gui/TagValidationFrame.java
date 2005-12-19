@@ -112,6 +112,7 @@ public class TagValidationFrame extends JFrame
 		dispose();
 	}
 
+    /** replaces all &lt; and &gt; with &amp;lt; and &amp;gt; */
     private String htmlize(String str)
     {
         String htmld = str;

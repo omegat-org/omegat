@@ -43,6 +43,12 @@ import org.omegat.util.StaticUtils;
  */
 public class ProjectProperties
 {
+    /** Default constructor to initialize fields (to get no NPEs). */
+    public ProjectProperties()
+    {
+        reset();
+    }
+    
     /** Returns The Target (Compiled) Files Directory */
     public String getTargetRoot()
     {
@@ -179,16 +185,16 @@ public class ProjectProperties
      */
     public void reset()
     {
-        setProjectFile("");	// NOI18N
-        setProjectName("");	// NOI18N
-        setProjectRoot("");	// NOI18N
-        setProjectInternal("");	// NOI18N
-        setSourceRoot("");	// NOI18N
-        setTargetRoot("");	// NOI18N
-        setGlossaryRoot("");	// NOI18N
-        setTMRoot("");	// NOI18N
-        setSourceLanguage("EN-US");  // NOI18N
-        setTargetLanguage("EN-GB");  // NOI18N
+        setProjectFile("");                                                     // NOI18N
+        setProjectName("");	                                                // NOI18N
+        setProjectRoot("");	                                                // NOI18N
+        setProjectInternal("");	                                                // NOI18N
+        setSourceRoot("");	                                                // NOI18N
+        setTargetRoot("");	                                                // NOI18N
+        setGlossaryRoot("");	                                                // NOI18N
+        setTMRoot("");                                                          // NOI18N
+        setSourceLanguage("EN-US");                                             // NOI18N
+        setTargetLanguage("EN-GB");                                             // NOI18N
         setSentenceSegmentingEnabled(true);
     }
     

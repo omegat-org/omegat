@@ -207,7 +207,7 @@ public final class Segmenter
                         return res;
                     abs = abm.start();
                 }
-                if( abm.start()==bbe )
+                if( abs==bbe )
                     res.add( new Integer(bbe) );
             }
         }
@@ -238,7 +238,12 @@ public final class Segmenter
         if( sentences.size()<=0 )
             return "";                                                          // NOI18N
 	
-	ProjectProperties config = CommandThread.core.getProjectProperties();
+	ProjectProperties config;
+        if(CommandThread.core!=null)
+            config=CommandThread.core.getProjectProperties();
+        else
+            config = new ProjectProperties();
+        
         StringBuffer res = new StringBuffer();
         res.append((String)sentences.get(0));
 	

@@ -99,12 +99,14 @@ public class Rule implements Serializable
     }
 
     /**
-     * Sets a regular expression which represents the text that appears before a segment break.
+     * Sets a regular expression which represents the text that appears before 
+     * a segment break.
      * @param beforebreak Regular expression string of a text before break.
      */
     public void setBeforebreak(String beforebreak) throws PatternSyntaxException
     {
-        this.beforebreak=Pattern.compile(beforebreak, Pattern.UNICODE_CASE);
+        this.beforebreak=Pattern.compile(beforebreak, Pattern.UNICODE_CASE+Pattern.DOTALL);
+        // Pattern.DOTALL is added to fix the bug# 1385202 
     }
 
     /**
@@ -138,7 +140,8 @@ public class Rule implements Serializable
      */
     public void setAfterbreak(String afterbreak) throws PatternSyntaxException
     {
-        this.afterbreak=Pattern.compile(afterbreak, Pattern.UNICODE_CASE);
+        this.afterbreak=Pattern.compile(afterbreak, Pattern.UNICODE_CASE+Pattern.DOTALL);
+        // Pattern.DOTALL is added to fix the bug# 1385202 
     }
     
         

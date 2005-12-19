@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<!-- edited for clarity, added titles, added menu information, modified status bar information -->
+
+<html>
+<head>
+<title>OmegaT: User Interface</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="changed" content="20051103">
+<link rel="stylesheet" type="text/css" href="./omegat.css">
+</head>
+
+<body lang="en" dir="LTR">
+
+<div class="navbar-top">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td class="rel-p">Previous</td>
+<td class="nav-link"><a href="./InstantStart.html">Instant Start Tutorial</a></td>
+<td class="rel-n">Next</td>
+<td class="nav-link"><a href="./Segmentation.html">Basic Segmentation</a></td></tr>
+</table>
+
+</div>
+
+<div class="content">
+
+<a name="5"></a>
+<h1 align="center" name="5" id="5">User Interface</h1>
+
+<ol><li><a href="#5.1">Editor window</a></li>
+<li><a href="#5.2">Match and glossary viewer</a></li>
+<li><a href="#5.3">Project files window</a></li>
+<li><a href="#5.4">Search window</a></li>
+<li><a href="#5.5">Tag validation window</a></li>
+<li><a href="#5.6">Help browser</a></li>
+<li><a href="#5.7">Project properties window</a></li>
+<li><a href="#5.8">Files filtering settings</a></li>
+<li><a href="#5.9">Segmentation settings</a></li>
+<li><a href="#5.10">Editing field options</a></li>
+<li><a href="#5.11">Font settings</a></li>
+<li><a href="#5.12">Menu items</a></li>
+<li><a href="#5.13">Status bar</a></li></ol>
+
+<p>The graphical user interface of OmegaT consists mainly of an <strong>Editor</strong> window and a <strong>Match and Glossary Viewer</strong> window.</p>
+
+<p>This user interface is localized to a number of languages and if the language of your computer environment is available it should be displayed in this language. See <a href="./InstallConfig.html#2.7">Available languages for OmegaT 1.6</a> for the languages available in this version and <a href="./InstallConfig.html#2.6">Changing the user interface language settings</a> to have OmegaT display an available language of your choice.
+
+<a name="5.1"></a>
+<h2 name="5.1" id="5.1">Editor Window</h2>
+
+<p>The <strong>Editor</strong> displays the text currently in the process of translation. The state of each segment is clearly indicated in the editor pane. Untranslated segments are displayed in the source language and translated segments are displayed in the target language.</p>
+
+<p>The only exception to this is the active segment where translation and the revision take place. It has two features: the segment is displayed in an editing field and bracketed by <i>&lt;segment <strong>number</strong>&gt;</i> and <i>&lt;end segment&gt;</i> tags; and the source language text is displayed above the editing field in highlighted bold characters for easy reference;</p>
+
+<p><span class="warning">Warning!</span> It may take a noticeable amount of time for OmegaT to update the display after you have resized the window, especially when a big project is opened. Generally speaking, it is better to resize the window <strong>before</strong> opening a project.</p>
+
+<p><span class="warning">Warning!</span> Closing the editor manually (with the mouse for example) will automatically close your project.</p>
+
+<a name="5.2"></a>
+<h2 name="5.2" id="5.2">Match and Glossary Viewer</h2>
+
+<p>The <strong>Match and Glossary Viewer</strong> is automatically displayed when OmegaT is started. It can be opened and closed with the <strong>File</strong> &gt; <strong>Match/Glossary Viewer...</strong> menu item (<i>&lt;Ctrl+M&gt;</i>).</p>
+
+<p>It is divided into two panes. The <strong>Match</strong> pane displays fuzzy matches (previously translated segments with a certain degree of similarity to the active segment). The <strong>Glossary</strong> pane displays information from the glossary file(s), if one exists.</p>
+
+<p>You can modify the respective sizes of the panes by dragging the separation up or down. You can also use the small arrows on the right of the separation to make a pane use the whole window.</p>
+
+<a name="5.3"></a>
+<h2 name="5.3" id="5.3">Project File Window</h2>
+
+<p>This window automatically opens when a project is opened. Access to it is available through the <strong>View</strong> &gt; <strong>Project Files...</strong> menu item when it is closed (<i>&lt;Ctrl+L&gt;</i>). You can dismiss the window by pressing <i>&lt;Esc&gt;</i>.</p>
+
+<p>The <strong>Project Files</strong> window contains a list of files for translation in the current project. Select a file for translation by clicking on its name in the window.</p>
+
+<p>The window also displays the number of unique segments in each file, the total number number of unique segments in the project and the number of translated segments. The number of translated segments is updated each a segment is translated.</p>
+
+<p>A <strong>Import Source Files</strong> button is enabled to assist you in importing source files at project creation. This function is similar to the <a href="#5.12.1">Import Source Files...</a> menu item below. You can use it while working on a project.</p>
+
+<a name="5.4"></a>
+<h2 name="5.4" id="5.4">Search Window</h2>
+
+<p>This window opens when called through the <strong>Edit</strong> &gt; <strong>Search Project...</strong> menu item (<i>&lt;Ctrl+F&gt;</i>). See <a href="./Searches.html">Searches</a> for more information.</p>
+
+<p>To keep track of previous searches calling a search window will always create a new window.</p>
+
+<a name="5.5"></a>
+<h2 name="5.5" id="5.5">Tag Validation Window</h2>
+
+<p>This window opens when called through the <strong>Tools</strong> &gt; <strong>Validate Tags...</strong> menu item (<i>&lt;Ctrl+T&gt;</i>). If tag errors are detected, the window will display a 3 column table with:<br>
+<ol><li>the number of the segment where the error was detected</li>
+<li>the source content of the segment</li>
+<li>the target content of the segment</li></ol>
+
+Clicking on the segment number will bring it to the front in the Editor window for verification.</p>
+
+<p>See <a href="./FilesEditingTagged.html">Tag Validation</a> for more information.</p>
+
+<a name="5.6"></a>
+<h2 name="5.6" id="5.6">Help Browser</h2>
+
+<p>This window opens when called through the <strong>Help</strong> &gt; <strong>User Manual...</strong> menu item (<i>&lt;F1&gt;</i>). It displays the HTML version of this manual in a local browser that will not access external links to the internet.</p>
+
+<p>You can display the User Manual in a normal web browser and have access to external links by opening the <strong>index.html</strong> file located in the <strong>/docs/</strong> directory of the OmegaT application directory.</p>
+
+<a name="5.7"></a>
+<h2 name="5.7" id="5.7">Project Properties Window</h2>
+
+<p>This windows opens when called through the <strong>Project</strong> &gt; <strong>Properties...</strong> menu item (<i>&lt;Ctrl+E&gt;</i>) or at project creation. See <a href="./InstantStart.html#4.2.1">Create and open a new project</a> for a visual image.</p>
+
+<p>All the fields are editable. You can either enter the languages by hand or use the drop down menu. You can type the names of folders that do not exist, OmegaT will create them on the spot.</p>
+
+<p><span class="warning">Warning!</span> You can enable or disable the sentence segmenting function from this window. Modifying this setting while working on a project can be extremely damaging. See <a href="./Important.html#3.1">Precautions against data loss!</a> for ways to protect your work.</p>
+
+<a name="5.8"></a>
+<h2 name="5.8" id="5.8">Files Filtering Settings</h2>
+
+<p>This window can be accessed only when no project is opened. It opens when called through the <strong>Options</strong> &gt; <strong>File Filters...</strong> menu item. See <a href="./Filters.html#13">File Filters</a> for more information.</p>
+
+<a name="5.9"></a>
+<h2 name="5.9" id="5.9">Segmentation Settings</h2>
+
+<p>This window can be accessed only when no project is opened. It opens when called through the <strong>Options</strong> &gt; <strong>Segmentation...</strong> menu item. See <a href="./SentSeg.html#9">Sentence Segmentation</a> for more information.</p>
+
+<p>Sentence level segmentation can be enabled through the <strong>Project Properties</strong> window. See above <a href="#5.7">The Project Properties Window</a> for more information.</p>
+
+<a name="5.10"></a>
+<h2 name="5.10" id="5.10">Editing Field Options</h2>
+
+<p>This window can be accessed at all times. It is called through the <strong>Options</strong> &gt; <strong>Editing field...</strong> menu item. See <a href="./Translation.html#7.8">Editing Field Settings</a> for more information.</p>
+
+<a name="5.11"></a>
+<h2 name="5.11" id="5.11">Font Settings</h2>
+
+<p>This window can be accessed at all times. It is called through the <strong>Options</strong> &gt; <strong>Font...</strong> menu item. See <a href="./InstallConfig.html#2.8">Language Character Sets and Fonts</a> for more information.</p>
+
+<p><span class="warning">Warning!</span> It may take a noticeable amount of time for OmegaT to update the display after you have changed the font setting, especially when a big project is opened. Also, some fonts behave better for some language pairs than for others. Generally speaking, it is better to change of font <strong>before</strong> opening a project.</p>
+
+<a name="5.12"></a>
+<h2 name="5.12" id="5.12">Menu items</h2>
+
+<p>All of OmegaT's functionality is available through the menu bar at the top of the <strong>Editor</strong> window. Most functions are also available via keyboard shortcuts</a>.</p>
+
+<p>The shortcuts given here are for those operating systems with a <strong>Control (Ctrl)</strong> key (UNIX, Windows, etc.). For Mac OS X use the <strong>Apple key (cmd)</strong> in place of <strong>Ctrl</strong>.</p>
+
+<a name="5.12.1"></a>
+<h3 name="5.12.1" id="5.12.1">Project Menu:</h3>
+<dl><dt><strong>New</strong></dt><dd>Creates a new project (disabled when a project is open). See <a href="./Translation.html#7.1">Create a project</a>.</dd>
+<dt><strong>Open</strong> <i>&lt;Ctr+O&gt;</i></dt><dd>Opens a previously created project (disabled when a project is open). See <a href="./Translation.html#7.2">Open a project</a>.</dd>
+<dt><strong>Import Source Files...</strong></dt><dd>Copies the selected files to the /source/ directory (disabled when no project is open). See <a href="./Translation.html#7.1">Create a project</a> and <a href="#5.3">Project Files Window</a> above.</dd>
+<dt><strong>Reload</strong></dt><dd>Reloads the project to take external modifications into account (disabled when no project is open).</dd>
+<dt><strong>Close</strong></dt><dd>Close project after saving the translation (disabled when no project is open).</dd>
+<dt><strong>Save</strong> <i>&lt;Ctr+S&gt;</i></dt><dd>Saves the translation into the translation memory (disabled when no project is open). OmegaT automatically saves the translation at very short intervals of time.</dd>
+<dt><strong>Create target Documents</strong></dt><dd>Creates the target documents based on the translation memory (disabled when no project is open). The documents will be located in the /target/ directory.</dd>
+<dt><strong>Properties</strong> <i>&lt;Ctr+E&gt;</i></dt><dd>Displays the project details for modification (disabled when no project is open). See <a href="#5.7">Project properties window</a> above.</dd>
+<dt><strong>Quit</strong> <i>&lt;Ctr+Q&gt;</i></dt><dd>Quits OmegaT after saving the translation.</dd></dl>
+
+<a name="5.12.2"></a>
+<h3 name="5.12.2" id="5.12.2">Edit Menu:</h3>
+<p>Items that one can find in most applications (copy/cut/paste) are not displayed in this menu but are available with your system shorcuts.</p>
+<dl><dt><strong>Undo Last Action</strong> <i>&lt;Ctr+Z&gt;</i></dt><dd>Goes back to the status before the last editing action was taken. Does not work once the modified segment has been validated.</dd>
+<dt><strong>Redo Last Action</strong> <i>&lt;Ctr+Y&gt;</i></dt><dd>Goes back to the status before the last editing action was cancelled. Does not work once the modified segment has been validated.</dd>
+<dt><strong>Overwrite Translation</strong> <i>&lt;Ctr+R&gt;</i></dt><dd>Overwrites the whole target segment with the currently selected fuzzy (fuzzy#1 default value).</dd>
+<dt><strong>Insert Translation</strong> <i>&lt;Ctr+I&gt;</i></dt><dd>Inserts currently selected fuzzy at the cursor position (fuzzy#1 default value). This function will never overwrite a portion of the target segment.</dd>
+<dt><strong>Overwrite Source</strong> <i>&lt;Shift+Ctr+R&gt;</i></dt><dd>Overwrites the whole target segment with the source.</dd>
+<dt><strong>Insert Source</strong> <i>&lt;Shift+Ctr+I&gt;</i></dt><dd>Inserts the source at the cursor position.</dd>
+<dt><strong>Search Project...</strong> <i>&lt;Ctr+F&gt;</i></dt><dd>Creates a new search window. See <a href="Searches.html#10">Searches</a>.</dd>
+<dt><strong>Select Fuzzy Match #1</strong> <i>&lt;Ctr+1&gt;</i></dt><dd>Selects the first fuzzy displayed in the <strong>Match and Glossary Viewer</strong>. See <a href="./Matches#11">Matches</a> and <a href="#5.2">Match and glossary viewer</a> above.</dd>
+<dt><strong>Select Fuzzy Match #2</strong> <i>&lt;Ctr+2&gt;</i></dt><dd>Selects the second fuzzy displayed in the <strong>Match and Glossary Viewer</strong>.</dd>
+<dt><strong>Select Fuzzy Match #3</strong> <i>&lt;Ctr+3&gt;</i></dt><dd>Selects the third fuzzy displayed in the <strong>Match and Glossary Viewer</strong>.</dd>
+<dt><strong>Select Fuzzy Match #4</strong> <i>&lt;Ctr+4&gt;</i></dt><dd>Selects the fourth fuzzy displayed in the <strong>Match and Glossary Viewer</strong>.</dd>
+<dt><strong>Select Fuzzy Match #5</strong> <i>&lt;Ctr+5&gt;</i></dt><dd>Selects the fifth fuzzy displayed in the <strong>Match and Glossary Viewer</strong>.</dd></dl>
+
+<a name="5.12.3"></a>
+<h3 name="5.12.3" id="5.12.3">Go to Menu:</h3>
+<dl><dt><strong>Next Untranslated Segment</strong> <i>&lt;Ctr+U&gt;</i></dt><dd>Shifts the <strong>Editor</strong> focus to the next segment that has no equivalent in the translation memory.</dd>
+<dt><strong>Next Segment</strong> <i>&lt;Ctr+N&gt;</i>, <i>&lt;Return&gt;</i>, <i>&lt;Enter&gt;</i> or <i>&lt;Tab&gt;</i></dt><dd>Shifts the <strong>Editor</strong> focus to the next segment. When the current segment is the last of a file, the next segment will be the first segment of the file displayed next in the <strong>Project Files Window</strong>.</dd>
+<dt><strong>Previous Segment</strong> <i>&lt;Ctr+P&gt;</i></dt><dd>Shifts the <strong>Editor</strong> focus to the previous segment. When the current segment is the first of a file, the previous segment will be the last segment of the file displayed before the current file in the <strong>Project Files Window</strong>.</dd></dl>
+
+<a name="5.12.4"></a>
+<h3 name="5.12.4" id="5.12.4">View Menu:</h3>
+<dl><dt><strong>Match/Glossary Viewer...</strong> <i>&lt;Ctr+M&gt;</i></dt><dd>Displays or dismises the <strong>Match/Glossary Viewer</strong>. See <a href="#5.2">Match and glossary viewer</a> above.</dd>
+<dt><strong>Project Files...</strong> <i>&lt;Ctr+L&gt;</i></dt><dd>Puts the <strong>Project Files Window</strong> to the foreground (can be dismissed with <i>&lt;Esc&gt;</i>). See <a href="#5.3">Project Files Window</a> above.</dd></dl>
+
+<a name="5.12.5"></a>
+<h3 name="5.12.5" id="5.12.5">Tools Menu:</h3>
+<dl><dt><strong>Validate Tags</strong> <i>&lt;Ctr+T&gt;</i></dt><dd>Checks for missing or displaced tags in formatted files. Will display a list of segments with tag mistakes. See <a href="./FilesEditingTagged.html#12.2">Tag Validation</a> and <a href="#5.5">Tag Validation Window</a> above.</dd></dl>
+
+<a name="5.12.6"></a>
+<h3 name="5.12.6" id="5.12.6">Options Menu:</h3>
+<dl><dt><strong>Use Tab To Advance</strong></dt><dd>Sets segment validation key to <i>&lt;TAB&gt;</i> instead of the default <i>&lt;Return&gt;</i> or <i>&lt;Enter&gt;</i>.</dd>
+<dt><strong>Font...</strong></dt><dd>Presents the user with a dialog to modify the text display font. It is better to change of font before opening a large project. See <a href="./InstallConfig.html#2.8">Language Character Sets and Fonts</a> and <a href="#5.11">Font Settings</a> above.</dd>
+<dt><strong>File Filters...</strong></dt><dd>Displays a dialogue to configure file handling and parsing (disabled when a project is open). See <a href="./Filters.html#13.2">File Filters Setup</a> and <a href="#5.8">Files Filtering Settings</a> above.</dd>
+<dt><strong>Segmentation...</strong></dt><dd>Displays a dialogue to configure text segmenting (disabled when a project is open). You can modify text segmenting while the project is open by selecting <strong>Properties</strong> in the <strong>Project</strong> menu. See <a href="./SentSeg.html#9.2">Rules Setup</a> and <a href="#5.9">Segmentation Settings</a> above.</dd>
+<dt><strong>Editing field...</strong></dt><dd>Displays a dialogue to configure target field contents. See <a href="./Translation.html#7.8">Editing Field Settings</a> and <a href="#5.10">Editing Field Options</a> above..</dd></dl>
+
+<a name="5.12.7"></a>
+<h3 name="5.12.7" id="5.12.7">Help Menu:</h3>
+<dl><dt><strong>User Manual...</strong> <i>&lt;F1&gt;</i></dt><dd>Opens a separate window with this manual for easy reference. See <a href="#5.6">Help Browser</a> above.</dd>
+<dt><strong>About...</strong></dt><dd>Displays credit and user license information.</dd></dl>
+
+<a name="5.13"></a>
+<h2 name="5.13" id="5.13">Status Bar</h2>
+<p>A status bar is visible at the bottom of the <strong>Editor</strong>. This bar gives the user feedback messages about specific operations that are in progress. It also displays the number of fuzzy and glossary items matches.</p>
+
+</div>
+
+<div class="navbar-bottom">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Table of Contents"><img src="OmegaT.png" border="0" alt="OmegaT Logo"></a></td>
+<td class="rel-p">Previous</td>
+<td class="nav-link"><a href="./InstantStart.html">Instant Start Tutorial</a></td>
+<td class="rel-n">Next</td>
+<td class="nav-link"><a href="./Segmentation.html">Basic Segmentation</a></td></tr>
+</table>
+
+</div>
+
+</body>
+</html>

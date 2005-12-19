@@ -11,6 +11,8 @@ To run from a terminal or DOS window, change to this directory
 and type
   java -jar properties_import.jar
 
+The sources are supplied inside the OmegaT sources distribution.
+
 ----------------------------------------------------------------------
 
 Version 1.2: Make it look nicer

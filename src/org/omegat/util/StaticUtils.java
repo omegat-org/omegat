@@ -353,7 +353,9 @@ public class StaticUtils
     {
         try
         {
-            return new PrintStream(new FileOutputStream(getConfigDir() + FILE_LOG, true));
+            return new PrintStream(
+                    new FileOutputStream(getConfigDir() + FILE_LOG, true), 
+                    true, "UTF-8");                                             // NOI18N
         }
         catch( Exception e )
         {

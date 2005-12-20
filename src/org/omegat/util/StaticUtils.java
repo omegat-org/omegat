@@ -35,11 +35,14 @@ import java.util.ArrayList;
  * CommandThread to reduce file size.
  *
  * @author Keith Godfrey
+ * @author Maxym Mykhalchuk
  * @author Henry Pijffers
  */
 public class StaticUtils
 {
-	/** Name of the log file */
+	/**
+	 * Name of the log file
+	 */
 	private final static String FILE_LOG = "log.txt";                           // NOI18N
 	
 	/**
@@ -196,7 +199,7 @@ public class StaticUtils
     {
         int len = str.length();
         if (len==0)
-            return 0;
+            return 0;  // fixes bug nr. 1382810 (StringIndexOutOfBoundsException)
         
         str = str.toLowerCase();
         
@@ -205,7 +208,7 @@ public class StaticUtils
         StringBuffer tokenBuff = new StringBuffer(len);
         int tokenStart = 0;
         int nTokens = 0;
-        char ch = str.charAt(0);
+        char ch = 'x'; // fixes bug nr. 1382810 (StringIndexOutOfBoundsException)
         for(int i=0; i<len; i++)
         {
             char pch = ch;
@@ -499,7 +502,7 @@ public class StaticUtils
             // access to the os/user home properties is restricted,
             // the location of the config dir cannot be determined,
             // set the config dir to the current working dir
-            m_configDir = new File(".").getAbsolutePath();                      // NOI18N
+            m_configDir = "";                                                   // NOI18N
             
             // log the exception, only do this after the config dir
             // has been set to the current working dir, otherwise
@@ -512,10 +515,10 @@ public class StaticUtils
         // if os or user home is null or empty, we cannot reliably determine
         // the config dir, so we use the current working dir (= empty string)
         if ( (os == null) || (os.length() == 0) ||
-                (home == null) || (home.length() == 0))
+                (home == null) || (home.length() == 0) )
         {
             // set the config dir to the current working dir
-            m_configDir = new File(".").getAbsolutePath();                      // NOI18N
+            m_configDir = "";                                                   // NOI18N
             return m_configDir;
         }
         
@@ -530,7 +533,7 @@ public class StaticUtils
             if (appDataFile.exists())
                 appData = appDataFile.getAbsolutePath();
             else
-                appData = null;                                                 // NOI18N
+                appData = null;
             
             if ((appData != null) && (appData.length() > 0))
             {
@@ -546,8 +549,9 @@ public class StaticUtils
             }
         }
         // check for UNIX varieties
-        else if (os.equals("Linux") || os.equals("Solaris") ||                  // NOI18N
-                os.equals("FreeBSD"))                                           // NOI18N
+        else if ( os.equals("Linux") ||                                         // NOI18N
+                os.equals("Solaris") ||                                         // NOI18N
+                os.equals("FreeBSD") )                                          // NOI18N
         {
             // set the config dir to the user's home dir + "/.omegat", so it's hidden
             m_configDir = home + UNIX_CONFIG_DIR;
@@ -580,14 +584,14 @@ public class StaticUtils
                     // if the dir could not be created,
                     // set the config dir to the current working dir
                     if (!created)
-                        m_configDir = new File(".").getAbsolutePath();          // NOI18N
+                        m_configDir = "";                                       // NOI18N
                 }
             }
             catch (SecurityException e)
             {
                 // the system doesn't want us to write where we want to write
                 // reset the config dir to the current working dir
-                m_configDir = new File(".").getAbsolutePath();                  // NOI18N
+                m_configDir = "";                                               // NOI18N
                 
                 // log the exception, but only after the config dir has been reset
                 log(e.toString());

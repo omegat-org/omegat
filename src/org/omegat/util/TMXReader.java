@@ -26,19 +26,24 @@ import java.io.StringReader;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Stack;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import org.omegat.core.threads.CommandThread;
+import org.omegat.gui.ProjectProperties;
 import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import org.omegat.filters2.TranslationException;
-import org.xml.sax.InputSource;
 
 /**
  * Class that load up TMX (Translation Memory) files (any version)
  *
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
+ * @author Maxym Mykhalchuk
  */
 public class TMXReader extends DefaultHandler
 {
@@ -48,11 +53,13 @@ public class TMXReader extends DefaultHandler
      *
      * @param encoding -- encoding to allow specification of alternative encodings (i.e. wordfast)
      */
-    public TMXReader(String encoding)
+    public TMXReader(String encoding, Language sourceLanguage, Language targetLanguage)
     {
         m_encoding = encoding;
         m_srcList = new ArrayList(512);
         m_tarList = new ArrayList(512);
+        this.sourceLanguage = sourceLanguage;
+        this.targetLanguage = targetLanguage;
     }
     
     /** Returns a number of segments */
@@ -81,31 +88,6 @@ public class TMXReader extends DefaultHandler
             return "";								// NOI18N
         else
             return (String) m_tarList.get(n);
-    }
-    
-    private String sourceLanguage;
-    
-    /** Returns a source language of a TMX file */
-    public String getSourceLanguage()
-    {
-        return sourceLanguage;
-    }
-    
-    private String targetLanguage = null;
-    
-    /** Returns a target language of a TMX file.
-     * <p>
-     * <b>Non-standard</b>: there's no 'target' language of a TMX,
-     * as TMX files may contain translations of the same segment
-     * to several languages, but <i>our</i> TMX files contain only
-     * a single translation.
-     * <p>
-     * Note: This attribute will be available only after the call to
-     * {@link #loadFile(String)}.
-     */
-    public String getTargetLanguage()
-    {
-        return targetLanguage;
     }
     
     private String creationtool;
@@ -158,26 +140,25 @@ public class TMXReader extends DefaultHandler
                     OStrings.getString("TMXR_INFO_READING_FILE"),
                     new Object[]{filename}));
                     
-                    // create a new SAX parser factory
-                    javax.xml.parsers.SAXParserFactory parserFactory =
-                            javax.xml.parsers.SAXParserFactory.newInstance();
-                    
-                    // configure the factory
-                    parserFactory.setValidating(false); // skips TMX validity checking
-                    
-                    // create a new SAX parser
-                    javax.xml.parsers.SAXParser parser = parserFactory.newSAXParser();
-                    
-                    // make this TMX reader the default entity resolver for the parser,
-                    // so we can handle DTD declarations ourselves
-                    parser.getXMLReader().setEntityResolver(this);
-                    
-                    // parse the TM, provide the current TMX reader as notification handler
-                    parser.parse(new java.io.File(filename), this);
-                    
-                    // log the fact that parsing is done
-                    StaticUtils.log(OStrings.getString("TMXR_INFO_READING_COMPLETE"));
-                    StaticUtils.log("");                                        // NOI18N
+            // create a new SAX parser factory
+            SAXParserFactory parserFactory =
+                    SAXParserFactory.newInstance();
+
+            // configure the factory
+            parserFactory.setValidating(false); // skips TMX validity checking
+
+            // create a new SAX parser
+            SAXParser parser = parserFactory.newSAXParser();
+
+            // make this TMX reader the default entity resolver for the parser,
+            // so we can handle DTD declarations ourselves
+            parser.getXMLReader().setEntityResolver(this);
+
+            // parse the TM, provide the current TMX reader as notification handler
+            parser.parse(new java.io.File(filename), this);
+
+            // log the fact that parsing is done
+            StaticUtils.log(OStrings.getString("TMXR_INFO_READING_COMPLETE"));
         }
         catch (Exception exception)
         {
@@ -266,12 +247,12 @@ public class TMXReader extends DefaultHandler
             startElementTUV(attributes);
         else if (qName.equals(TMX_TAG_SEG))
             startElementSegment(attributes);
-        else if (   qName.equals(TMX_TAG_BPT)
-        || qName.equals(TMX_TAG_EPT)
-        || qName.equals(TMX_TAG_HI)
-        || qName.equals(TMX_TAG_IT)
-        || qName.equals(TMX_TAG_PH)
-        || qName.equals(TMX_TAG_UT))
+        else if (qName.equals(TMX_TAG_BPT) || 
+                qName.equals(TMX_TAG_EPT) || 
+                qName.equals(TMX_TAG_HI) || 
+                qName.equals(TMX_TAG_IT) || 
+                qName.equals(TMX_TAG_PH) || 
+                qName.equals(TMX_TAG_UT))
             startElementInline(attributes);
         else if (qName.equals(TMX_TAG_SUB))
             startElementSub(attributes);
@@ -293,12 +274,12 @@ public class TMXReader extends DefaultHandler
             endElementTUV();
         else if (qName.equals(TMX_TAG_SEG))
             endElementSegment();
-        else if (   qName.equals(TMX_TAG_BPT)
-        || qName.equals(TMX_TAG_EPT)
-        || qName.equals(TMX_TAG_HI)
-        || qName.equals(TMX_TAG_IT)
-        || qName.equals(TMX_TAG_PH)
-        || qName.equals(TMX_TAG_UT))
+        else if (qName.equals(TMX_TAG_BPT) || 
+                qName.equals(TMX_TAG_EPT) || 
+                qName.equals(TMX_TAG_HI) || 
+                qName.equals(TMX_TAG_IT) || 
+                qName.equals(TMX_TAG_PH) || 
+                qName.equals(TMX_TAG_UT))
             endElementInline();
         else if (qName.equals(TMX_TAG_SUB))
             endElementSub();
@@ -316,14 +297,20 @@ public class TMXReader extends DefaultHandler
             return;
         
         // determine the correct segment to add the data to
-        StringBuffer segment = !((String)currentElement.peek()).equals(TMX_TAG_SUB)
-        ? (segmentIsSource
-                ? sourceSegment
-                : targetSegment)
-                : (StringBuffer)currentSub.peek();
+        StringBuffer segment = null;
+        if (TMX_TAG_SUB.equals(currentElement.peek()))
+            segment = (StringBuffer)currentSub.peek();
+        else
+        {
+            if (segmentIsSource)
+                segment = sourceSegment;
+            else if (segmentIsTarget)
+                segment = targetSegment;
+        }
         
         // append the data
-        segment.append(ch, start, length);
+        if (segment!=null)
+            segment.append(ch, start, length);
     }
     
     /**
@@ -357,7 +344,7 @@ public class TMXReader extends DefaultHandler
         creationtool        = attributes.getValue(TMX_ATTR_CREATIONTOOL);
         creationtoolversion = attributes.getValue(TMX_ATTR_CREATIONTOOLVERSION);
         segtype             = attributes.getValue(TMX_ATTR_SEGTYPE);
-        sourceLanguage      = attributes.getValue(TMX_ATTR_SRCLANG);
+        String tmxSourceLanguage = attributes.getValue(TMX_ATTR_SRCLANG);
         
         // mark the header as parsed
         headerParsed = true;
@@ -374,7 +361,7 @@ public class TMXReader extends DefaultHandler
                 new Object[]{segtype}));
         StaticUtils.log(MessageFormat.format(
                 OStrings.getString("TMXR_INFO_SOURCE_LANG"),
-                new Object[]{sourceLanguage}));
+                new Object[]{tmxSourceLanguage}));
     }
     
     /**
@@ -463,20 +450,9 @@ public class TMXReader extends DefaultHandler
         }
         
         // check if the tuv is the source or target segment
-        segmentIsSource = language.regionMatches(0, sourceLanguage, 0, 2);
-        
-        // set the target language, if it's not set yet
-        if (   targetLanguage == null
-                && !segmentIsSource)
-        {
-            targetLanguage = language;
-            
-            // log the target language
-            StaticUtils.log(MessageFormat.format(
-                    OStrings.getString("TMXR_INFO_TARGET_LANG"),
-                    new Object[]{targetLanguage}));
-        }
-        
+        segmentIsSource = sourceLanguage.equals(new Language(language));
+        segmentIsTarget = targetLanguage.equals(new Language(language));
+
         // mark the current position as in a tuv
         inTUV = true;
         
@@ -592,6 +568,8 @@ public class TMXReader extends DefaultHandler
     private boolean      inSegment;
     /** True if the segment currently being parsed is the source segment */
     private boolean      segmentIsSource;
+    /** True if the segment currently being parsed is the target segment */
+    private boolean      segmentIsTarget;
     /** Contains the source text of the current TU */
     private StringBuffer sourceSegment;
     /** Contains the target text of the current TU */
@@ -636,5 +614,9 @@ public class TMXReader extends DefaultHandler
     private ArrayList       m_srcList;
     /** The list of target segments (translations). */
     private ArrayList       m_tarList;
+    /** The source language, taken from project properties. */
+    private Language sourceLanguage;
+    /** The target language, taken from project properties. */
+    private Language targetLanguage;
 }
 

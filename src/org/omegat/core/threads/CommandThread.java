@@ -867,7 +867,8 @@ public class CommandThread extends Thread
     {
         try
         {
-            TMXReader tmx = new TMXReader(encoding);
+            TMXReader tmx = new TMXReader(encoding, 
+                    m_config.getSourceLanguage(), m_config.getTargetLanguage());
             tmx.loadFile(fname);
             
             int num = tmx.numSegments();

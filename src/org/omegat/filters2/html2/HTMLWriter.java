@@ -86,11 +86,7 @@ public class HTMLWriter extends Writer
         
         OutputStreamWriter osw;
         if( encoding!=null )
-        {
-            HTML_META = "<meta http-equiv=\"content-type\" content=\"text/html; charset="+encoding+"\" />"; // NOI18N
-            XML_HEADER = "<?xml version=\"1.0\" encoding=\""+encoding+"\"?>"; // NOI18N
             osw = new OutputStreamWriter(fos, encoding);
-        }
         else
             osw = new OutputStreamWriter(fos);
         
@@ -139,43 +135,42 @@ public class HTMLWriter extends Writer
         }
         else if( signalClosing || buffer.length()>=minHeaderedBufferSize )
         {
-            // else if we'return closing or the buffer is big enough
+            // else if we're closing or the buffer is big enough
             // to (hopefully) contain all the existing headers
             
             signalAlreadyFlushed = true;
             
-            String contents;
-            Matcher matcher_enc = PatternConsts.HTML_ENCODING.matcher(buffer);
-            if( matcher_enc.find() )
-            {
-                contents = matcher_enc.replaceFirst(HTML_META);
-            }
-            else
-            {
-                Matcher matcher_head = PatternConsts.HTML_HEAD.matcher(buffer);
-                if( matcher_head.find() )
-                {
-                    contents = matcher_head.replaceFirst("<head>\n    "+HTML_META); // NOI18N
-                }
-                else
-                {
-                    Matcher matcher_html = PatternConsts.HTML_HTML.matcher(buffer);
-                    if( matcher_html.find() )
-                    {
-                        contents = matcher_html.replaceFirst("<html>\n<head>\n    "+HTML_META+"\n</head>\n"); // NOI18N
-                    }
-                    else
-                    {
-                        contents = "<html>\n<head>\n    "+HTML_META+"\n</head>\n"+ // NOI18N
-                                buffer.toString();
-                    }
-                }
-            }
-
+            String contents = buffer.toString();
             Matcher matcher_header = PatternConsts.XML_HEADER.matcher(contents);
+            boolean xhtml = false;
             if( matcher_header.find() )
             {
+                XML_HEADER = "<?xml version=\"1.0\" encoding=\""+encoding+"\"?>";   // NOI18N
                 contents = matcher_header.replaceFirst(XML_HEADER);
+                xhtml = true;
+            }
+
+            HTML_META = "<meta http-equiv=\"content-type\" content=\"text/html; charset="+encoding+"\""; // NOI18N
+            if(xhtml)
+                HTML_META+="/>";                                           // NOI18N
+            else
+                HTML_META+=">";                                             // NOI18N
+            Matcher matcher_enc = PatternConsts.HTML_ENCODING.matcher(contents);
+            if( matcher_enc.find() )
+                contents = matcher_enc.replaceFirst(HTML_META);
+            else
+            {
+                Matcher matcher_head = PatternConsts.HTML_HEAD.matcher(contents);
+                if( matcher_head.find() )
+                    contents = matcher_head.replaceFirst("<head>\n    "+HTML_META); // NOI18N
+                else
+                {
+                    Matcher matcher_html = PatternConsts.HTML_HTML.matcher(contents);
+                    if( matcher_html.find() )
+                        contents = matcher_html.replaceFirst("<html>\n<head>\n    "+HTML_META+"\n</head>\n"); // NOI18N
+                    else
+                        contents = "<html>\n<head>\n    "+HTML_META+"\n</head>\n"+contents;  // NOI18N
+                }
             }
 
             realWriter.write(contents);

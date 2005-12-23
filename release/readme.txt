@@ -1,5 +1,5 @@
 ==============================================================================
-OmegaT 1.6 RC3 Read Me file
+OmegaT 1.6 RC5 Read Me file
 
 I.   Where to get information about OmegaT
 II.  General notes about Java & OmegaT

@@ -1,6 +1,88 @@
 ----------------------------------------------------------------------
- OmegaT 1.6 RC3 Changes
+ OmegaT 1.6 RC5 Changes
 ----------------------------------------------------------------------
+
+ - 
+   http://sourceforge.net/support/tracker.php?aid=
+
+1.6 RC5
+
+ Enchancements:
+ 
+ - OOo tag support (text:user-defined and text:sequence)
+   http://sourceforge.net/support/tracker.php?aid=1385052
+
+ - log does not indicate if tmx is loaded.
+   http://sourceforge.net/support/tracker.php?aid=1372226
+
+ Bugfixes:
+
+ - generic tmx compatibility issue
+   http://sourceforge.net/support/tracker.php?aid=1365649
+
+ - Previously working TMX not accepted
+   http://sourceforge.net/support/tracker.php?aid=1369056
+
+ - tmx files with srclang set to "*all*"
+   http://sourceforge.net/support/tracker.php?aid=1370836
+
+ - TMX load error message
+   http://sourceforge.net/support/tracker.php?aid=1370530
+
+ - StringIndexOutOfBoundsException in tokenizer
+   http://sourceforge.net/support/tracker.php?aid=1382810
+
+ - OmegaT does not segment on "<br>\n"
+   http://sourceforge.net/support/tracker.php?aid=1385202
+
+ - <div> not considered as segmenting
+   http://sourceforge.net/support/tracker.php?aid=1379137
+
+ - target doc meta-tag not corresponding to original
+   http://sourceforge.net/support/tracker.php?aid=1388802
+
+ - Incorrect encoding of error messages
+   http://sourceforge.net/support/tracker.php?aid=1378639
+
+ - typo in about box
+   http://sourceforge.net/support/tracker.php?aid=1377539
+
+ - Bug in auto-copy selected text for search
+   http://sourceforge.net/support/tracker.php?aid=1374100
+
+ - OmegaT autoinserts a fuzzy match when you try to quit it
+   http://sourceforge.net/support/tracker.php?aid=1370840
+
+ - first segment does not trigger matches after load
+   http://sourceforge.net/support/tracker.php?aid=1370838
+
+ - False positive in tag validation
+   http://sourceforge.net/support/tracker.php?aid=1374674
+
+1.6 RC4
+
+ Enchancements:
+
+ - Access to segmentation rules
+   http://sourceforge.net/support/tracker.php?aid=1367707
+
+ Bugfixes:
+
+ - HTML bug: Initial tags falsely skipped
+   http://sourceforge.net/support/tracker.php?aid=1359915
+
+ - Structure of HTML not respected in output
+   http://sourceforge.net/support/tracker.php?aid=1364265
+
+ - trados tmx compatibility issue
+   http://sourceforge.net/support/tracker.php?aid=1365597
+
+ - empty <tu> in external TMX fail project loading
+   http://sourceforge.net/support/tracker.php?aid=1365457
+
+ - search bug
+   http://sourceforge.net/support/tracker.php?aid=1348191
+
 
 1.6 RC3
 

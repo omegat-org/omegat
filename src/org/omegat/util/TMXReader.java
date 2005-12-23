@@ -28,15 +28,13 @@ import java.util.ArrayList;
 import java.util.Stack;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import org.omegat.core.threads.CommandThread;
-import org.omegat.gui.ProjectProperties;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import org.omegat.filters2.TranslationException;
+import org.omegat.filters2.xml.XMLReader;
 
 /**
  * Class that load up TMX (Translation Memory) files (any version)
@@ -130,7 +128,7 @@ public class TMXReader extends DefaultHandler
      * and resolveEntity. Together these methods implement the
      * parsing of the TMX file.
      */
-    public void loadFile(String filename) throws IOException, TranslationException
+    public void loadFile(String filename) throws IOException
     {
         // parse the TMX file
         try
@@ -155,7 +153,7 @@ public class TMXReader extends DefaultHandler
             parser.getXMLReader().setEntityResolver(this);
 
             // parse the TM, provide the current TMX reader as notification handler
-            parser.parse(new java.io.File(filename), this);
+            parser.parse(new InputSource(new XMLReader(filename, m_encoding)), this);
 
             // log the fact that parsing is done
             StaticUtils.log(OStrings.getString("TMXR_INFO_READING_COMPLETE"));

@@ -863,83 +863,72 @@ public class CommandThread extends Thread
     }
     
     private void loadTMXFile(String fname, String encoding, boolean isProject)
-    throws IOException
+            throws IOException
     {
-        try
+        TMXReader tmx = new TMXReader(encoding, 
+                m_config.getSourceLanguage(), m_config.getTargetLanguage());
+        tmx.loadFile(fname);
+
+        int num = tmx.numSegments();
+        ArrayList strEntryList = new ArrayList(num);
+        ArrayList strOrphaneList = null;
+
+        // RFE 1001918 - backing up project's TMX upon successful read
+        if( isProject )
+            LFileCopy.copy(fname, fname+".bak");                            // NOI18N
+
+        // If a legacy TM, creating one
+        // and adding to the list of legacy TMs
+        if( isProject )
         {
-            TMXReader tmx = new TMXReader(encoding, 
-                    m_config.getSourceLanguage(), m_config.getTargetLanguage());
-            tmx.loadFile(fname);
-            
-            int num = tmx.numSegments();
-            ArrayList strEntryList = new ArrayList(num);
-            ArrayList strOrphaneList = null;
-            
-            // RFE 1001918 - backing up project's TMX upon successful read
-            if( isProject )
-                LFileCopy.copy(fname, fname+".bak");                            // NOI18N
-            
-            // If a legacy TM, creating one
-            // and adding to the list of legacy TMs
-            if( isProject )
+            strOrphaneList = new ArrayList();
+            LegacyTM tm = new LegacyTM(
+                    OStrings.getString("CT_ORPHAN_STRINGS"), strOrphaneList);
+            m_legacyTMs.add(tm);
+        }
+        else
+        {
+            LegacyTM tm = new LegacyTM(new File(fname).getName(), strEntryList);
+            m_legacyTMs.add(tm);
+        }
+
+        for (int i=0; i<num; i++)
+        {
+            String src = tmx.getSourceSegment(i);
+            String trans = tmx.getTargetSegment(i);
+
+            if (isProject)
             {
-                strOrphaneList = new ArrayList();
-                LegacyTM tm = new LegacyTM(
-                        OStrings.getString("CT_ORPHAN_STRINGS"), strOrphaneList);
-                m_legacyTMs.add(tm);
-            }
-            else
-            {
-                LegacyTM tm = new LegacyTM(new File(fname).getName(), strEntryList);
-                m_legacyTMs.add(tm);
-            }
-            
-            for (int i=0; i<num; i++)
-            {
-                String src = tmx.getSourceSegment(i);
-                String trans = tmx.getTargetSegment(i);
-                
-                if (isProject)
+                StringEntry se = (StringEntry) m_strEntryHash.get(src);
+                if( se==null )
                 {
-                    StringEntry se = (StringEntry) m_strEntryHash.get(src);
-                    if( se==null )
-                    {
-                        // loading a project save file and the
-                        //	old entry can't be found - source files
-                        //	must have changed
-                        // remember it anyways
-                        TransMemory tm = new TransMemory(src, trans, fname);
-                        m_orphanedList.add(tm);
-                        m_tmList.add(tm);
-                        se = new StringEntry(src);
-                        dontCountNextIncrement(); // orphane translation don't count
-                        se.setTranslation(trans);
-                        strOrphaneList.add(se);
-                    }
-                    else
-                    {
-                        se.setTranslation(trans);
-                    }
+                    // loading a project save file and the
+                    //	old entry can't be found - source files
+                    //	must have changed
+                    // remember it anyways
+                    TransMemory tm = new TransMemory(src, trans, fname);
+                    m_orphanedList.add(tm);
+                    m_tmList.add(tm);
+                    se = new StringEntry(src);
+                    dontCountNextIncrement(); // orphane translation don't count
+                    se.setTranslation(trans);
+                    strOrphaneList.add(se);
                 }
                 else
                 {
-                    // not in a project - remember this as a translation
-                    //	memory string and add it to near list
-                    m_tmList.add(new TransMemory(src, trans, fname));
-                    StringEntry se = new StringEntry(src);
-                    dontCountNextIncrement();   // external TMXes don't count
                     se.setTranslation(trans);
-                    strEntryList.add(se);
                 }
             }
-            
-        }
-        catch (TranslationException e)
-        {
-            e.printStackTrace();
-            e.printStackTrace(StaticUtils.getLogStream());
-            throw new IOException(OStrings.getString("CT_ERROR_PARSEERROR")+
-                    "'" + fname + "'\n" +  e); // NOI18N
+            else
+            {
+                // not in a project - remember this as a translation
+                //	memory string and add it to near list
+                m_tmList.add(new TransMemory(src, trans, fname));
+                StringEntry se = new StringEntry(src);
+                dontCountNextIncrement();   // external TMXes don't count
+                se.setTranslation(trans);
+                strEntryList.add(se);
+            }
         }
     }
     

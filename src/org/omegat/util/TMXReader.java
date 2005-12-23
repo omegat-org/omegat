@@ -22,32 +22,34 @@
 package org.omegat.util;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Stack;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+import org.xml.sax.helpers.DefaultHandler;
 
 import org.omegat.filters2.TranslationException;
-import org.omegat.filters2.xml.XMLBlock;
-import org.omegat.filters2.xml.XMLStreamReader;
+import org.xml.sax.InputSource;
 
 /**
- * Class that loads up TMX 1.1 (Translation Memory) files.
- * <p>
- * Since OmegaT 1.6 does not check the TMX version.
+ * Class that load up TMX (Translation Memory) files (any version)
  *
  * @author Keith Godfrey
+ * @author Henry Pijffers (henry.pijffers@saxnot.com)
  */
-public class TMXReader
+public class TMXReader extends DefaultHandler
 {
     
-    /** 
+    /**
      * Creates a new TMX Reader.
-     * 
+     *
      * @param encoding -- encoding to allow specification of alternative encodings (i.e. wordfast)
      */
     public TMXReader(String encoding)
     {
-        m_reader = new XMLStreamReader();
-        m_reader.killEmptyBlocks();
         m_encoding = encoding;
         m_srcList = new ArrayList(512);
         m_tarList = new ArrayList(512);
@@ -55,8 +57,8 @@ public class TMXReader
     
     /** Returns a number of segments */
     public int numSegments()
-    { 
-        return m_srcList.size();		
+    {
+        return m_srcList.size();
     }
     
     /** Returns an original text of a target segment #n */
@@ -91,21 +93,21 @@ public class TMXReader
     
     private String targetLanguage = null;
     
-    /** Returns a target language of a TMX file. 
+    /** Returns a target language of a TMX file.
      * <p>
-     * <b>Non-standard</b>: there's no 'target' language of a TMX, 
-     * as TMX files may contain translations of the same segment 
-     * to several languages, but <i>our</i> TMX files contain only 
+     * <b>Non-standard</b>: there's no 'target' language of a TMX,
+     * as TMX files may contain translations of the same segment
+     * to several languages, but <i>our</i> TMX files contain only
      * a single translation.
      * <p>
-     * Note: This attribute will be available only after the call to 
+     * Note: This attribute will be available only after the call to
      * {@link #loadFile(String)}.
      */
     public String getTargetLanguage()
     {
         return targetLanguage;
     }
-   
+    
     private String creationtool;
     /** Creation Tool attribute value of OmegaT TMXs: "OmegaT" */
     public static final String CT_OMEGAT = "OmegaT";                            // NOI18N
@@ -125,7 +127,7 @@ public class TMXReader
     {
         return creationtoolversion;
     }
-
+    
     private String segtype;
     /** Segment Type attribute value: "paragraph" */
     public static final String SEG_PARAGRAPH = "paragraph";                    // NOI18N
@@ -137,215 +139,502 @@ public class TMXReader
         return segtype;
     }
     
-    /** Loads only the header of TMX file */
-    public void loadHeader(String filename) throws IOException, TranslationException
-    {
-        m_reader.setStream(filename, m_encoding);
-        
-        XMLBlock blk;
-        
-        // advance to tmx tag
-        if ((blk = m_reader.advanceToTag("tmx")) == null) // NOI18N
-        {
-            throw new TranslationException(
-                    MessageFormat.format(OStrings.getString("TMXR_ERROR_INVALID_TMX"),
-                    new Object[]{filename}));
-        }
-        
-        // advance to header
-        if ((blk=m_reader.advanceToTag("header")) == null)			// NOI18N
-        {
-            throw new TranslationException( MessageFormat.format(
-                    OStrings.getString("TMXR_ERROR_INVALID_TMX"),
-                    new Object[]{filename}) );
-        }
-        
-        creationtool = blk.getAttribute("creationtool");                        // NOI18N
-        creationtoolversion = blk.getAttribute("creationtoolversion");          // NOI18N
-        segtype = blk.getAttribute("segtype");                                  // NOI18N
-        sourceLanguage = blk.getAttribute("srclang");                           // NOI18N
-    }
-    
-    /** Loads the TMX */
+    /**
+     * Loads the specified TMX file by using a SAX parser.
+     *
+     * The parser makes callbacks to the TMXReader, to the methods
+     * warning, error, fatalError, startDocument, endDocument,
+     * startElement, endElement, characters, ignorableWhiteSpace,
+     * and resolveEntity. Together these methods implement the
+     * parsing of the TMX file.
+     */
     public void loadFile(String filename) throws IOException, TranslationException
     {
-        loadHeader(filename);
-
-        XMLBlock blk;
-        ArrayList lst;
-        m_tarList.clear();
-        m_srcList.clear();
-        
-        // advance to body
-        if (m_reader.advanceToTag("body") == null)				// NOI18N
+        // parse the TMX file
+        try
         {
-            throw new TranslationException( MessageFormat.format(
-                    OStrings.getString("TMXR_ERROR_INVALID_TMX"),
-                    new Object[]{filename}) );
+            // log the parsing attempt
+            StaticUtils.log(MessageFormat.format(
+                    OStrings.getString("TMXR_INFO_READING_FILE"),
+                    new Object[]{filename}));
+                    
+                    // create a new SAX parser factory
+                    javax.xml.parsers.SAXParserFactory parserFactory =
+                            javax.xml.parsers.SAXParserFactory.newInstance();
+                    
+                    // configure the factory
+                    parserFactory.setValidating(false); // skips TMX validity checking
+                    
+                    // create a new SAX parser
+                    javax.xml.parsers.SAXParser parser = parserFactory.newSAXParser();
+                    
+                    // make this TMX reader the default entity resolver for the parser,
+                    // so we can handle DTD declarations ourselves
+                    parser.getXMLReader().setEntityResolver(this);
+                    
+                    // parse the TM, provide the current TMX reader as notification handler
+                    parser.parse(new java.io.File(filename), this);
+                    
+                    // log the fact that parsing is done
+                    StaticUtils.log(OStrings.getString("TMXR_INFO_READING_COMPLETE"));
+                    StaticUtils.log("");                                        // NOI18N
         }
-        
-        int seg = 0;
-        int ctr;
-        int srcPos;
-        String tarSeg;
-        String srcSeg;
-        String lang;
-        while (true)
+        catch (Exception exception)
         {
-            seg++;
-            // advance to next tu element
-            if ((blk=m_reader.advanceToTag("tu")) == null)			// NOI18N
-                break;
-            
-            lst = m_reader.closeBlock(blk);
-            tarSeg = "";							// NOI18N
-            srcSeg = "";							// NOI18N
-            
-            try
-            {
-                // now go through tu block
-                // accept first non-src lang as target
-                srcPos = -1;
-                ctr = 0;
-                
-                // tuv 1
-                while (!blk.getTagName().equals("tuv"))                         // NOI18N
-                    blk = (XMLBlock) lst.get(ctr++);
-                lang = blk.getAttribute("lang");                                // NOI18N
-                if( lang==null )
-                    lang = blk.getAttribute("xml:lang");                        // NOI18N
-                
-                if( lang==null )
-                {
-                    String blktext = "<segment text not found>";                // NOI18N
-                    try
-                    {
-                        // advance to segment marker
-                        while( !blk.getTagName().equals("seg") )                // NOI18N
-                            blk = (XMLBlock) lst.get(ctr++);
-                        blktext = blk.getText();
-                    }
-                    catch( Exception e )
-                    { }
-                    
-                    // source language segment not specified
-                    StaticUtils.log(
-                            MessageFormat.format(
-                            OStrings.getString("TMX_READER_WARNING_Language_Attribute_Missing"),
-                            new Object[]{blktext}) );
-                            continue;
-                }
-                
-                if (sourceLanguage.regionMatches(0, lang, 0, 2))
-                    srcPos = 0;
-                else if( targetLanguage==null )
-                    targetLanguage = lang;
-                
-                // advance to segment marker
-                while (!blk.getTagName().equals("seg"))				// NOI18N
-                    blk = (XMLBlock) lst.get(ctr++);
-                
-                // next non-tag block is text
-                blk = (XMLBlock) lst.get(ctr++);
-                while (blk.isTag())
-                    blk = (XMLBlock) lst.get(ctr++);
-                if (srcPos == 0)
-                    srcSeg = blk.getText();
-                else
-                    tarSeg = blk.getText();
-                
-                // close tuv tag
-                while (!blk.getTagName().equals("tuv"))                         // NOI18N
-                    blk = (XMLBlock) lst.get(ctr++);
-                
-                // open next tuv tag
-                blk = (XMLBlock) lst.get(ctr++);
-                while (!blk.getTagName().equals("tuv"))                         // NOI18N
-                    blk = (XMLBlock) lst.get(ctr++);
-                
-                lang = blk.getAttribute("lang");                                // NOI18N
-                if( lang==null )
-                    lang = blk.getAttribute("xml:lang");                        // NOI18N
-                
-                if( lang==null )
-                {
-                    String blktext = "<segment text not found>";                // NOI18N
-                    try
-                    {
-                        // advance to segment marker
-                        while( !blk.getTagName().equals("seg") )                // NOI18N
-                            blk = (XMLBlock) lst.get(ctr++);
-                        blktext = blk.getText();
-                    }
-                    catch( Exception e )
-                    { }
-                    
-                    // source language segment not specified
-                    StaticUtils.log(
-                            MessageFormat.format(
-                            OStrings.getString("TMX_READER_WARNING_Language_Attribute_Missing"),
-                            new Object[]{blktext}) );
-                            continue;
-                }
-                
-                if (sourceLanguage.regionMatches(0, lang, 0, 2))
-                {
-                    if (srcPos == -1)
-                        srcPos = 1;
-                    else 
-                    {
-                        // target language segment not specified
-                        StaticUtils.log( MessageFormat.format(
-                                OStrings.getString("TMXR_WARNING_UNABLE_TO_LOCATE_SRC_LANG"), 
-                                new Object[]{new Integer(seg)}) );
-                        continue;
-                    }
-                }
-                else if (srcPos == -1)
-                {
-                    // source language segment not specified
-                    StaticUtils.log( MessageFormat.format(
-                            OStrings.getString("TMXR_WARNING_UNABLE_TO_LOCATE_TARGET_LANG"), 
-                            new Object[]{new Integer(seg)}) );
-                    continue;
-                }
-                else if( targetLanguage==null )
-                    targetLanguage = lang;
-                
-                // advance to segment marker
-                while (!blk.getTagName().equals("seg"))					// NOI18N
-                    blk = (XMLBlock) lst.get(ctr++);
-                
-                // next non-tag block is text
-                blk = (XMLBlock) lst.get(ctr++);
-                while (blk.isTag())
-                    blk = (XMLBlock) lst.get(ctr++);
-                if (srcPos == 1)
-                    srcSeg = blk.getText();
-                else
-                    tarSeg = blk.getText();
-                
-                // ignore the rest
-            }
-            catch (Exception e)
-            {
-                StaticUtils.log( MessageFormat.format(
-                        OStrings.getString("TMXR_WARNING_SKIPPING_SEGMENT"), 
-                        new Object[]{new Integer(seg), filename}) );
-                continue;
-            }
-            
-            m_srcList.add(srcSeg);
-            m_tarList.add(tarSeg);
+            StaticUtils.log(MessageFormat.format(
+                    OStrings.getString("TMXR_EXCEPTION_WHILE_PARSING"),
+                    new Object[]{exception.getLocalizedMessage()}));
         }
-        
-        m_reader.close();
     }
     
-    private XMLStreamReader m_reader;
+    /**
+     * Receives notification of a parser warning. Called by SAX parser.
+     */
+    public void warning(SAXParseException exception) throws SAXException
+    {
+        StaticUtils.log(MessageFormat.format(
+                OStrings.getString("TMXR_WARNING_WHILE_PARSING"),
+                new Object[]{exception.getLocalizedMessage()}));
+    }
+    
+    /**
+     * Receives notification of a recoverable XML parsing error. Called by SAX parser.
+     */
+    public void error(SAXParseException exception) throws SAXException
+    {
+        StaticUtils.log(MessageFormat.format(
+                OStrings.getString("TMXR_RECOVERABLE_ERROR_WHILE_PARSING"),
+                new Object[]{exception.getLocalizedMessage()}));
+    }
+    
+    /**
+     * Receives notification of a fatal XML parsing error. Called by SAX parser.
+     */
+    public void fatalError(SAXParseException exception) throws SAXException
+    {
+        StaticUtils.log(MessageFormat.format(
+                OStrings.getString("TMXR_FATAL_ERROR_WHILE_PARSING"),
+                new Object[]{exception.getLocalizedMessage()}));
+    }
+    
+    /**
+     * Receives notification of the start of the XML document. Called by SAX parser.
+     * Initialises variables needed for parsing of the TMX file.
+     */
+    public void startDocument()
+    {
+        headerParsed      = false;
+        inTU              = false;
+        inTUV             = false;
+        inSegment         = false;
+        sourceSegment     = new StringBuffer(1024); // allocate some memory for source segments
+        targetSegment     = new StringBuffer(1024); // allcoate some memory for target segments
+        subSourceSegments = new ArrayList();
+        subTargetSegments = new ArrayList();
+        currentElement    = new Stack();
+        currentSub        = new Stack();
+    }
+    
+    /**
+     * Receives notification of the end of the XML document. Called by SAX parser.
+     */
+    public void endDocument()
+    {
+        // clear allocated memory for source/target/sub segments
+        sourceSegment     = null;
+        targetSegment     = null;
+        subSourceSegments = null;
+        subTargetSegments = null;
+        currentElement    = null;
+        currentSub        = null;
+    }
+    
+    /**
+     * Receives notification of the start of an element. Called by SAX parser.
+     */
+    public void startElement(String uri,
+            String localName,
+            String qName,
+            Attributes attributes) throws SAXException
+    {
+        // determine the type of element and handle it, if required
+        if (qName.equals(TMX_TAG_HEADER))
+            startElementHeader(attributes);
+        else if (qName.equals(TMX_TAG_TU))
+            startElementTU(attributes);
+        else if (qName.equals(TMX_TAG_TUV))
+            startElementTUV(attributes);
+        else if (qName.equals(TMX_TAG_SEG))
+            startElementSegment(attributes);
+        else if (   qName.equals(TMX_TAG_BPT)
+        || qName.equals(TMX_TAG_EPT)
+        || qName.equals(TMX_TAG_HI)
+        || qName.equals(TMX_TAG_IT)
+        || qName.equals(TMX_TAG_PH)
+        || qName.equals(TMX_TAG_UT))
+            startElementInline(attributes);
+        else if (qName.equals(TMX_TAG_SUB))
+            startElementSub(attributes);
+    }
+    
+    /**
+     * Receives notification of the end of an element. Called by SAX parser.
+     */
+    public void endElement(String uri,
+            String localName,
+            String qName) throws SAXException
+    {
+        // determine the type of element and handle it, if required
+        if (qName.equals(TMX_TAG_HEADER))
+            endElementHeader();
+        else if (qName.equals(TMX_TAG_TU))
+            endElementTU();
+        else if (qName.equals(TMX_TAG_TUV))
+            endElementTUV();
+        else if (qName.equals(TMX_TAG_SEG))
+            endElementSegment();
+        else if (   qName.equals(TMX_TAG_BPT)
+        || qName.equals(TMX_TAG_EPT)
+        || qName.equals(TMX_TAG_HI)
+        || qName.equals(TMX_TAG_IT)
+        || qName.equals(TMX_TAG_PH)
+        || qName.equals(TMX_TAG_UT))
+            endElementInline();
+        else if (qName.equals(TMX_TAG_SUB))
+            endElementSub();
+    }
+    
+    /**
+     * Receives character data in element content. Called by the SAX parser.
+     */
+    public void characters(char[] ch,
+            int    start,
+            int    length) throws SAXException
+    {
+        // if not in a segment, or when in an inline element other than sub, do nothing
+        if (!inSegment || ((String)currentElement.peek()).equals(TMX_TAG_INLINE))
+            return;
+        
+        // determine the correct segment to add the data to
+        StringBuffer segment = !((String)currentElement.peek()).equals(TMX_TAG_SUB)
+        ? (segmentIsSource
+                ? sourceSegment
+                : targetSegment)
+                : (StringBuffer)currentSub.peek();
+        
+        // append the data
+        segment.append(ch, start, length);
+    }
+    
+    /**
+     * Receives ignorable whitespace in element content. Called by the SAX parser.
+     */
+    public void ignorableWhitespace(char[] ch,
+            int    start,
+            int    length) throws SAXException
+    {
+        // if not in a segment, or when in an inline element other than sub, do nothing
+        if (!inSegment || ((String)currentElement.peek()).equals(TMX_TAG_INLINE))
+            return;
+        
+        // determine the correct segment to add the data to
+        StringBuffer segment = !((String)currentElement.peek()).equals(TMX_TAG_SUB)
+        ? (segmentIsSource
+                ? sourceSegment
+                : targetSegment)
+                : (StringBuffer)currentSub.peek();
+        
+        // append the data
+        segment.append(ch, start, length);
+    }
+    
+    /**
+     * Handles the start of a header element in a TMX file.
+     */
+    private void startElementHeader(Attributes attributes)
+    {
+        // get the header attributes
+        creationtool        = attributes.getValue(TMX_ATTR_CREATIONTOOL);
+        creationtoolversion = attributes.getValue(TMX_ATTR_CREATIONTOOLVERSION);
+        segtype             = attributes.getValue(TMX_ATTR_SEGTYPE);
+        sourceLanguage      = attributes.getValue(TMX_ATTR_SRCLANG);
+        
+        // mark the header as parsed
+        headerParsed = true;
+        
+        // log some details
+        StaticUtils.log(MessageFormat.format(
+                OStrings.getString("TMXR_INFO_CREATION_TOOL"),
+                new Object[]{creationtool}));
+        StaticUtils.log(MessageFormat.format(
+                OStrings.getString("TMXR_INFO_CREATION_TOOL_VERSION"),
+                new Object[]{creationtoolversion}));
+        StaticUtils.log(MessageFormat.format(
+                OStrings.getString("TMXR_INFO_SEG_TYPE"),
+                new Object[]{segtype}));
+        StaticUtils.log(MessageFormat.format(
+                OStrings.getString("TMXR_INFO_SOURCE_LANG"),
+                new Object[]{sourceLanguage}));
+    }
+    
+    /**
+     * Handles the end of a header element.
+     */
+    private void endElementHeader()
+    {
+    }
+    
+    /**
+     * Handles the start of a translation unit.
+     */
+    private void startElementTU(Attributes attributes) throws SAXException
+    {
+        currentElement.push(TMX_TAG_TU);
+        
+        // ensure the header has been parsed
+        // without the header info, we can't determine what's source and what's target
+        if (!headerParsed)
+            throw new SAXException(OStrings.getString("TMXR_ERROR_TU_BEFORE_HEADER"));
+        
+        // mark the current position as in a translation unit
+        inTU = true;
+        
+        // clear the source, target, and sub segment buffers
+        sourceSegment.setLength(0);
+        targetSegment.setLength(0);
+        subSourceSegments.clear();
+        subTargetSegments.clear();
+    }
+    
+    /**
+     * Handles the end of a translation unit.
+     */
+    private void endElementTU()
+    {
+        currentElement.pop();
+        
+        // mark the current position as *not* in a translation unit
+        inTU = false;
+        
+        // add source and target segment to lists
+        if (sourceSegment.length() > 0)
+        {
+            m_srcList.add(sourceSegment.toString());
+            m_tarList.add(targetSegment.toString());
+        }
+        
+        // create a separate segment for each sub segment
+        if (subSourceSegments.size() > 0)
+        {
+            for (int i = 0; i < subSourceSegments.size(); i++)
+            {
+                m_srcList.add(subSourceSegments.get(i).toString());
+                m_tarList.add(subTargetSegments.get(i).toString());
+            }
+        }
+    }
+    
+    /**
+     * Handles the start of a tuv element.
+     */
+    private void startElementTUV(Attributes attributes)
+    {
+        currentElement.push(TMX_TAG_TUV);
+        
+        // ensure we're in a translation unit
+        if (!inTU)
+        {
+            StaticUtils.log(OStrings.getString("TMXR_WARNING_TUV_NOT_IN_TU"));
+            return;
+        }
+        
+        // get the language of the tuv
+        // try "lang" first, then "xml:lang"
+        String language = attributes.getValue(TMX_ATTR_LANG);
+        if (language == null)
+            language = attributes.getValue(TMX_ATTR_LANG_NS);
+        
+        // if the language is not specified, skip the tuv
+        if (language == null)
+        {
+            StaticUtils.log(
+                    OStrings.getString("TMXR_WARNING_TUV_LANG_NOT_SPECIFIED"));
+            return;
+        }
+        
+        // check if the tuv is the source or target segment
+        segmentIsSource = language.regionMatches(0, sourceLanguage, 0, 2);
+        
+        // set the target language, if it's not set yet
+        if (   targetLanguage == null
+                && !segmentIsSource)
+        {
+            targetLanguage = language;
+            
+            // log the target language
+            StaticUtils.log(MessageFormat.format(
+                    OStrings.getString("TMXR_INFO_TARGET_LANG"),
+                    new Object[]{targetLanguage}));
+        }
+        
+        // mark the current position as in a tuv
+        inTUV = true;
+        
+        // clear the stack of sub segments
+        currentSub.clear();
+    }
+    
+    /**
+     * Handles the end of a tuv element.
+     */
+    private void endElementTUV()
+    {
+        currentElement.pop();
+        
+        // mark the current position as *not* in a tuv element
+        inTUV = false;
+    }
+    
+    /**
+     * Handles the start of a segment.
+     */
+    private void startElementSegment(Attributes attributes)
+    {
+        currentElement.push(TMX_TAG_SEG);
+        
+        // ensure we are currently in a tuv
+        if (!inTUV)
+        {
+            StaticUtils.log(OStrings.getString("TMXR_WARNING_SEG_NOT_IN_TUV"));
+            return;
+        }
+        
+        // mark the current position as in a segment
+        inSegment = true;
+    }
+    
+    /**
+     * Handles the end of a segment.
+     */
+    private void endElementSegment()
+    {
+        currentElement.pop();
+        
+        // mark the current position as *not* in a segment
+        inSegment = false;
+    }
+    
+    /**
+     * Handles the start of a TMX inline element (<bpt>,  <ept>, <hi>,  <it>, <ph>,  <ut>).
+     */
+    private void startElementInline(Attributes attributes)
+    {
+        currentElement.push(TMX_TAG_INLINE);
+    }
+    
+    /**
+     * Handles the end of a TMX inline element (<bpt>,  <ept>, <hi>,  <it>, <ph>,  <ut>).
+     */
+    private void endElementInline()
+    {
+        currentElement.pop();
+    }
+    
+    /**
+     * Handles the start of a SUB inline element.
+     */
+    private void startElementSub(Attributes attributes)
+    {
+        currentElement.push(TMX_TAG_SUB);
+        
+        // create new entries in the sub segment lists/stack
+        // NOTE: the assumption is made here that sub segments are
+        // in the same order in both source and target segments
+        StringBuffer sub = new StringBuffer();
+        currentSub.push(sub);
+        if (segmentIsSource)
+            subSourceSegments.add(sub);
+        else
+            subTargetSegments.add(sub);
+    }
+    
+    /**
+     * Handles the end of a SUB inline element.
+     */
+    private void endElementSub() throws SAXException
+    {
+        currentElement.pop();
+        
+        // remove the current sub from the sub stack
+        currentSub.pop();
+    }
+    
+    /**
+     * Makes the parser skip DTDs.
+     */
+    public InputSource resolveEntity(String publicId, String systemId) 
+            throws SAXException
+    {
+        // simply return an empty dtd
+        return new InputSource(new StringReader(""));                           // NOI18N
+    }
+    
+    ////////////////////////////////////////////////////
+    // Some variables needed while parsing a TMX file
+    
+    /** True if the TMX header has been parsed correctly. */
+    private boolean      headerParsed;
+    /** True if the current parsing position is in a TU element */
+    private boolean      inTU;
+    /** True if in a TUV element */
+    private boolean      inTUV;
+    /** True if in a SEG element */
+    private boolean      inSegment;
+    /** True if the segment currently being parsed is the source segment */
+    private boolean      segmentIsSource;
+    /** Contains the source text of the current TU */
+    private StringBuffer sourceSegment;
+    /** Contains the target text of the current TU */
+    private StringBuffer targetSegment;
+    /** Contains the source texts of sub segments of the current TU */
+    private ArrayList    subSourceSegments;
+    /** Contains the target texts of sub segments of the current TU */
+    private ArrayList    subTargetSegments;
+    /** Contains a stack of the tag names up to the current parsing point */
+    private Stack        currentElement;
+    /** Contains a stack of the sub segment buffers */
+    private Stack        currentSub;
+
+    ///////////////////////////////////////////////////
+    // Constants for certain TMX tag names/attributes
+    
+    private final static String TMX_TMX_TAG    = "tmx";                         // NOI18N
+    private final static String TMX_TAG_HEADER = "header";                      // NOI18N
+    private final static String TMX_TAG_BODY   = "body";                        // NOI18N
+    private final static String TMX_TAG_TU     = "tu";                          // NOI18N
+    private final static String TMX_TAG_TUV    = "tuv";                         // NOI18N
+    private final static String TMX_TAG_SEG    = "seg";                         // NOI18N
+    private final static String TMX_TAG_INLINE = "inline"; // made up for convenience // NOI18N
+    private final static String TMX_TAG_BPT    = "bpt";                         // NOI18N
+    private final static String TMX_TAG_EPT    = "ept";                         // NOI18N
+    private final static String TMX_TAG_HI     = "hi";                          // NOI18N
+    private final static String TMX_TAG_IT     = "it";                          // NOI18N
+    private final static String TMX_TAG_PH     = "ph";                          // NOI18N
+    private final static String TMX_TAG_UT     = "ut";                          // NOI18N
+    private final static String TMX_TAG_SUB    = "sub";                         // NOI18N
+    
+    private final static String TMX_ATTR_LANG                = "lang";          // NOI18N
+    private final static String TMX_ATTR_LANG_NS             = "xml:lang";      // NOI18N
+    private final static String TMX_ATTR_CREATIONTOOL        = "creationtool";  // NOI18N
+    private final static String TMX_ATTR_CREATIONTOOLVERSION = "creationtoolversion"; // NOI18N
+    private final static String TMX_ATTR_SEGTYPE             = "segtype";       // NOI18N
+    private final static String TMX_ATTR_SRCLANG             = "srclang";       // NOI18N
+
+    /** Encoding to use while reading TMX file, if not found in TMX itself. */
     private String          m_encoding;
+    /** The list of source segments. */
     private ArrayList       m_srcList;
+    /** The list of target segments (translations). */
     private ArrayList       m_tarList;
 }
-
 

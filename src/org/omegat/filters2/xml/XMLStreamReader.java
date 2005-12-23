@@ -138,10 +138,6 @@ public class XMLStreamReader
         // strip out any newline and multiple spaces (not valid xml)
         char c = getNextChar();
         
-        // BOM (byte order mark) bugfix
-        if( c==0xFEFF )
-            c = getNextChar();
-        
         if (c == 0)
         {
             return null;

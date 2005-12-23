@@ -27,9 +27,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.util.regex.Matcher;
-import org.omegat.util.*;
+
+import org.omegat.util.OConsts;
+import org.omegat.util.PatternConsts;
 
 
 /**
@@ -48,7 +49,7 @@ import org.omegat.util.*;
 public class XMLReader extends Reader
 {
 	/** Inner reader */
-	private Reader reader;
+	private BufferedReader reader;
 	
 	/**
 	 * Creates a new instance of XMLReader.
@@ -74,7 +75,7 @@ public class XMLReader extends Reader
 	public XMLReader(String fileName, String encoding)
             throws IOException
 	{
-        reader = createReader(fileName, encoding);
+        reader = new BufferedReader(createReader(fileName, encoding));
 	}
     
 	/** 
@@ -148,8 +149,19 @@ public class XMLReader extends Reader
 		reader.close();
 	}
 
+    boolean readFirstTime = true;
 	public int read(char[] cbuf, int off, int len) throws IOException
 	{
+        // BOM (byte order mark) bugfix
+        if(readFirstTime)
+        {
+            readFirstTime = false;
+            reader.mark(1);
+            int ch = reader.read();
+            boolean bom = false;
+            if (ch!=0xFEFF)
+                reader.reset();
+        }
 		return reader.read(cbuf, off, len);
 	}
 	

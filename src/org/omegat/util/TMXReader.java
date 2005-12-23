@@ -153,7 +153,9 @@ public class TMXReader extends DefaultHandler
             parser.getXMLReader().setEntityResolver(this);
 
             // parse the TM, provide the current TMX reader as notification handler
-            parser.parse(new InputSource(new XMLReader(filename, m_encoding)), this);
+            InputSource is = new InputSource(new XMLReader(filename, m_encoding));
+            is.setSystemId("");
+            parser.parse(is, this);
 
             // log the fact that parsing is done
             StaticUtils.log(OStrings.getString("TMXR_INFO_READING_COMPLETE"));

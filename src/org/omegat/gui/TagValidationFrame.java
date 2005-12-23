@@ -116,8 +116,8 @@ public class TagValidationFrame extends JFrame
     private String htmlize(String str)
     {
         String htmld = str;
-        htmld = htmld.replaceAll("\\<", "&lt;");
-        htmld = htmld.replaceAll("\\>", "&gt;");
+        htmld = htmld.replaceAll("\\<", "&lt;");                                // NOI18N
+        htmld = htmld.replaceAll("\\>", "&gt;");                                // NOI18N
         return htmld;
     }
     

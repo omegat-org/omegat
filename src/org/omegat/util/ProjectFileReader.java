@@ -23,8 +23,9 @@ package org.omegat.util;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
@@ -153,7 +154,8 @@ public class ProjectFileReader
 
 	public void writeProjectFile(String filename) throws IOException
 	{
-		BufferedWriter out = new BufferedWriter(new FileWriter(filename));
+		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(filename), "UTF-8"));                      // NOI18N
 		String str;
 
 		// if folders are in default locations, store name as 

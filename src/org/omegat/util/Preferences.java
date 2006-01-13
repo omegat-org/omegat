@@ -23,8 +23,10 @@ package org.omegat.util;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -317,8 +319,9 @@ public class Preferences
     
     private static void doSave() throws IOException
     {
-        BufferedWriter out = new BufferedWriter(new FileWriter(
-                StaticUtils.getConfigDir() + FILE_PREFERENCES));
+        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(StaticUtils.getConfigDir() + FILE_PREFERENCES), 
+                "UTF-8"));                                                      // NOI18N
         
         out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");             // NOI18N
         out.write("<omegat>\n");						// NOI18N

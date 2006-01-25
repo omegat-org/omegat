@@ -22,6 +22,7 @@
 package org.omegat.filters2.html2;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -48,7 +49,7 @@ import org.omegat.util.PatternConsts;
 public class HTMLReader extends Reader
 {
     /** Inner reader */
-    private Reader reader;
+    private BufferedReader reader;
     
     /**
      * Creates a new instance of HTMLReader.
@@ -61,7 +62,7 @@ public class HTMLReader extends Reader
      */
     public HTMLReader(String fileName, String encoding) throws IOException
     {
-        reader = createReader(fileName, encoding);
+        reader = new BufferedReader(createReader(fileName, encoding));
     }
 
     private String encoding = null;
@@ -152,8 +153,18 @@ public class HTMLReader extends Reader
         reader.close();
     }
     
+    boolean readFirstTime = true;
     public int read(char[] cbuf, int off, int len) throws IOException
     {
+        // BOM (byte order mark) bugfix
+        if(readFirstTime)
+        {
+            readFirstTime = false;
+            reader.mark(1);
+            int ch = reader.read();
+            if (ch!=0xFEFF)
+                reader.reset();
+        }
         return reader.read(cbuf, off, len);
     }
     

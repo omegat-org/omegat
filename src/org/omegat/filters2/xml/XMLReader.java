@@ -161,7 +161,6 @@ public class XMLReader extends Reader
             readFirstTime = false;
             reader.mark(1);
             int ch = reader.read();
-            boolean bom = false;
             if (ch!=0xFEFF)
                 reader.reset();
         }

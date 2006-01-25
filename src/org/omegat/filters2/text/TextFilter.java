@@ -68,6 +68,11 @@ public class TextFilter extends AbstractFilter
             throws IOException
     {
 		String s;
+        // BOM (byte order mark) bugfix
+        in.mark(1);
+        int ch = in.read();
+        if (ch!=0xFEFF)
+            in.reset();
 
         String nontrans = "";	                                                // NOI18N
 		while( (s=in.readLine())!=null )

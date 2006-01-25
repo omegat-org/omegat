@@ -121,11 +121,14 @@ public class XMLReader extends Reader
         is.mark(OConsts.READ_AHEAD_LIMIT);
         byte[] buf = new byte[OConsts.READ_AHEAD_LIMIT];
         int len = is.read(buf);
-		String buffer = new String(buf, 0, len);
-            
-        Matcher matcher_xml = PatternConsts.XML_ENCODING.matcher(buffer);
-        if( matcher_xml.find() )
-            encoding = matcher_xml.group(1);
+        if( len>0 )
+        {
+            String buffer = new String(buf, 0, len);
+
+            Matcher matcher_xml = PatternConsts.XML_ENCODING.matcher(buffer);
+            if( matcher_xml.find() )
+                encoding = matcher_xml.group(1);
+        }
         
         is.reset();
         if( encoding!=null )

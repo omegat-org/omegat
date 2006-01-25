@@ -114,17 +114,20 @@ public class HTMLReader extends Reader
         is.mark(OConsts.READ_AHEAD_LIMIT);
         byte[] buf = new byte[OConsts.READ_AHEAD_LIMIT];
         int len = is.read(buf);
-        String buffer = new String(buf, 0, len);
-        
-        Matcher matcher_html = PatternConsts.HTML_ENCODING.matcher(buffer);
-        if( matcher_html.find() )
-            encoding = matcher_html.group(1);
-        
-        if( encoding==null )
+        if( len>0 )
         {
-            Matcher matcher_xml = PatternConsts.XML_ENCODING.matcher(buffer);
-            if( matcher_xml.find() )
-                encoding = matcher_xml.group(1);
+            String buffer = new String(buf, 0, len);
+
+            Matcher matcher_html = PatternConsts.HTML_ENCODING.matcher(buffer);
+            if( matcher_html.find() )
+                encoding = matcher_html.group(1);
+
+            if( encoding==null )
+            {
+                Matcher matcher_xml = PatternConsts.XML_ENCODING.matcher(buffer);
+                if( matcher_xml.find() )
+                    encoding = matcher_xml.group(1);
+            }
         }
         
         is.reset();

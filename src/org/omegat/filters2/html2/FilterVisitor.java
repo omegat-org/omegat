@@ -122,6 +122,8 @@ class FilterVisitor extends NodeVisitor
         {
             if( text )
                 endup();
+            else
+                flushbefors();
             writeout(tag.toHtml());
             if( tag.getEndTag()!=null )
                 recurse = false;
@@ -644,15 +646,7 @@ class FilterVisitor extends NodeVisitor
             queueTranslatable(tag);
         else if( isParagraphTag(tag) )
         {
-            for(int i=0; i<befors.size(); i++)
-            {
-                Node node = (Node)befors.get(i);
-                if( node instanceof Tag )
-                    writeout("<"+node.getText()+">");                           // NOI18N
-                else
-                    writeout(node.getText());
-            }
-            befors.clear();
+            flushbefors();
             writeout("<"+tag.getText()+">");                                    // NOI18N
         }
         else 
@@ -671,6 +665,19 @@ class FilterVisitor extends NodeVisitor
         befors.add(text);
     }
     
+    /** Saves "Befors" to output stream and cleans the list. */
+    private void flushbefors()
+    {
+        for(int i=0; i<befors.size(); i++)
+        {
+            Node node = (Node)befors.get(i);
+            if( node instanceof Tag )
+                writeout("<"+node.getText()+">");                           // NOI18N
+            else
+                writeout(node.getText());
+        }
+        befors.clear();
+    }
     
     /** Compresses spaces in case of non-preformatting paragraph. */
     private String compressSpaces(String str)

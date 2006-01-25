@@ -54,10 +54,10 @@ public class PatternConsts
 		Pattern.CASE_INSENSITIVE);
     
     /** 
-     * Pattern that matches omegat-specific tag
-     * (without leading &lt; and trailing &gt;).
+     * Pattern that matches full string containing in full and only 
+     * omegat-specific tag (without leading &lt; and trailing &gt;).
      */
-    public static final Pattern OMEGAT_TAG = Pattern.compile(
+    public static final Pattern OMEGAT_TAG_ONLY = Pattern.compile(
             "^\\/?[a-zA-Z]+[0-9]+$");                                           // NOI18N
 
 }

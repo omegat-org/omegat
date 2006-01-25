@@ -109,7 +109,7 @@ public class StaticUtils
                     {
                         // checking if the tag looks like OmegaT tag, 
                         // not 100% correct, but is the best what I can think of now
-                        if(PatternConsts.OMEGAT_TAG.matcher(tag).matches())
+                        if(PatternConsts.OMEGAT_TAG_ONLY.matcher(tag).matches())
                             tagList.add(tag);
                         state = 1;
                         tag = "";												// NOI18N
@@ -629,7 +629,7 @@ public class StaticUtils
      */
     public static String stripTags(String xml)
     {
-        return xml.replaceAll("<[^>]*>", "");
+        return PatternConsts.OMEGAT_TAG_ONLY.matcher(xml).replaceAll("");
     }
 }
 

@@ -105,8 +105,7 @@ public class Rule implements Serializable
      */
     public void setBeforebreak(String beforebreak) throws PatternSyntaxException
     {
-        this.beforebreak=Pattern.compile(beforebreak, Pattern.UNICODE_CASE+Pattern.DOTALL);
-        // Pattern.DOTALL is added to fix the bug# 1385202 
+        this.beforebreak = compilePattern(beforebreak);
     }
 
     /**
@@ -140,9 +139,28 @@ public class Rule implements Serializable
      */
     public void setAfterbreak(String afterbreak) throws PatternSyntaxException
     {
-        this.afterbreak=Pattern.compile(afterbreak, Pattern.UNICODE_CASE+Pattern.DOTALL);
-        // Pattern.DOTALL is added to fix the bug# 1385202 
+        this.afterbreak=compilePattern(afterbreak);
     }
     
+    /** 
+     * Compiles the pattern and avoids two bugs: 
+     * <ul>
+     * <li>#1385202 - "." does not match newline chars, and hence,
+     *      OmegaT does not segment on "<br>\n".
+     *      Fixed by adding Pattern.DOTALL flag.
+     * <li>#1393484 - Case sensitivity for segmentation rules, e.g. exception 
+     *      "M\." glues "them. All".
+     *      Fixed by testing for case sensitivity, and turning UNICODE_CASE 
+     *      flag on iff the case insensitivity is turned on too.
+     * </ul>
+     */
+    private Pattern compilePattern(String pattern)
+    {
+        Pattern testFlags = Pattern.compile(pattern);
+        if ( (testFlags.flags() & Pattern.CASE_INSENSITIVE) == Pattern.CASE_INSENSITIVE )
+            return Pattern.compile(pattern, Pattern.UNICODE_CASE | Pattern.DOTALL);
+        else
+            return Pattern.compile(pattern, Pattern.DOTALL);
+    }
         
 }

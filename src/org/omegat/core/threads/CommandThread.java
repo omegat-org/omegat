@@ -21,12 +21,12 @@
 
 package org.omegat.core.threads;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -58,6 +58,7 @@ import org.omegat.util.TMXReader;
  * CommandThread is a thread to asynchronously do the stuff
  *
  * @author Keith Godfrey
+ * @author Henry Pijffers (henry.pijffers@saxnot.com)
  */
 public class CommandThread extends Thread
 {
@@ -316,12 +317,9 @@ public class CommandThread extends Thread
     /**
      * Saves a TMX file to disk
      */
-    private void buildTMXFile(String filename) throws IOException
+    private void buildTMXFile(String filename, boolean forceValidTMX) 
+            throws IOException
     {
-        int i;
-        String s;
-        String t;
-        
         // build translation database files
         StringEntry se;
         
@@ -336,59 +334,71 @@ public class CommandThread extends Thread
         
         FileOutputStream fos = new FileOutputStream(filename);
         OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");          // NOI18N
-        BufferedWriter out = new BufferedWriter(osw);
+        PrintWriter out = new PrintWriter(osw); // PW is easier to use than Buff.Writer
         
-        out.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");              // NOI18N
-        out.write("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">\n");                     // NOI18N
-        out.write("<tmx version=\"1.1\">\n");                                   // NOI18N
-        out.write("  <header\n");                                               // NOI18N
-        out.write("    creationtool=\"OmegaT\"\n");                             // NOI18N
-        out.write("    creationtoolversion=\"1.6\"\n");                         // NOI18N
-        out.write("    segtype=\""+segmenting+"\"\n");                          // NOI18N
-        out.write("    o-tmf=\"OmegaT TMX\"\n");                                // NOI18N
-        out.write("    adminlang=\"EN-US\"\n");                                 // NOI18N
-        out.write("    srclang=\"" + sourceLocale + "\"\n");                    // NOI18N
-        out.write("    datatype=\"plaintext\"\n");                              // NOI18N
-        out.write("  >\n");                                                     // NOI18N
-        out.write("  </header>\n");                                             // NOI18N
-        out.write("  <body>\n");                                                // NOI18N
-        
-        for (i=0; i<m_strEntryList.size(); i++)
+        out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");              // NOI18N
+        out.println("<!DOCTYPE tmx SYSTEM \"tmx14.dtd\">");                     // NOI18N
+        out.println("<tmx version=\"1.4\">");                                   // NOI18N
+        out.println("  <header");                                               // NOI18N
+        out.println("    creationtool=\"OmegaT\"");                             // NOI18N
+        out.println("    creationtoolversion=\"1.6\"");                         // NOI18N
+        out.println("    segtype=\"" + segmenting + "\"");                      // NOI18N
+        out.println("    o-tmf=\"OmegaT TMX\"");                                // NOI18N
+        out.println("    adminlang=\"EN-US\"");                                 // NOI18N
+        out.println("    srclang=\"" + sourceLocale + "\"");                    // NOI18N
+        out.println("    datatype=\"plaintext\"");                              // NOI18N
+        out.println("  >");                                                     // NOI18N
+        out.println("  </header>");                                             // NOI18N
+        out.println("  <body>");                                                // NOI18N
+
+        String source = null;
+        String target = null;
+        for (int i = 0; i < m_strEntryList.size(); i++)
         {
             se = (StringEntry) m_strEntryList.get(i);
-            String translation = se.getTranslation();
-            if( translation.length()==0 )
+            source = forceValidTMX ? StaticUtils.stripTags(se.getSrcText())
+                                   : se.getSrcText();
+            target = forceValidTMX ? StaticUtils.stripTags(se.getTranslation())
+                                   : se.getTranslation();
+            if (target.length() == 0)
                 continue;
-            s = StaticUtils.makeValidXML(se.getSrcText());
-            t = StaticUtils.makeValidXML(translation);
-            out.write("    <tu>\n");                                            // NOI18N
-            out.write("      <tuv lang=\"" + sourceLocale + "\">\n");           // NOI18N
-            out.write("        <seg>" + s + "</seg>\n");                        // NOI18N
-            out.write("      </tuv>\n");                                        // NOI18N
-            out.write("      <tuv lang=\"" + targetLocale + "\">\n");           // NOI18N
-            out.write("        <seg>" + t + "</seg>\n");                        // NOI18N
-            out.write("      </tuv>\n");                                        // NOI18N
-            out.write("    </tu>\n");                                           // NOI18N
+            source = StaticUtils.makeValidXML(source);
+            target = StaticUtils.makeValidXML(target);
+            out.println("    <tu>");                                            // NOI18N
+            out.println("      <tuv lang=\"" + sourceLocale + "\">");           // NOI18N
+            out.println("        <seg>" + source + "</seg>");                   // NOI18N
+            out.println("      </tuv>");                                        // NOI18N
+            out.println("      <tuv lang=\"" + targetLocale + "\">");           // NOI18N
+            out.println("        <seg>" + target + "</seg>");                   // NOI18N
+            out.println("      </tuv>");                                        // NOI18N
+            out.println("    </tu>");                                           // NOI18N
         }
+        
         TransMemory transMem;
-        for (i=0; i<m_orphanedList.size(); i++)
+        for (int i = 0; i < m_orphanedList.size(); i++)
         {
             transMem = (TransMemory) m_orphanedList.get(i);
-            if( transMem.target.length()==0 )
+            if (transMem.target.length() == 0)
                 continue;
-            s = StaticUtils.makeValidXML(transMem.source);
-            t = StaticUtils.makeValidXML(transMem.target);
-            out.write("    <tu>\n");                                            // NOI18N
-            out.write("      <tuv lang=\"" + sourceLocale + "\">\n");           // NOI18N
-            out.write("        <seg>" + s + "</seg>\n");                        // NOI18N
-            out.write("      </tuv>\n");                                        // NOI18N
-            out.write("      <tuv lang=\"" + targetLocale + "\">\n");           // NOI18N
-            out.write("        <seg>" + t + "</seg>\n");                        // NOI18N
-            out.write("      </tuv>\n");                                        // NOI18N
-            out.write("    </tu>\n");                                           // NOI18N
+            source = forceValidTMX ? StaticUtils.stripTags(transMem.source)
+                                   : transMem.source;
+            target = forceValidTMX ? StaticUtils.stripTags(transMem.target)
+                                   : transMem.target;
+            if (target.length() == 0)
+                continue;
+            source = StaticUtils.makeValidXML(source);
+            target = StaticUtils.makeValidXML(target);
+            out.println("    <tu>");                                            // NOI18N
+            out.println("      <tuv lang=\"" + sourceLocale + "\">");           // NOI18N
+            out.println("        <seg>" + source + "</seg>");                   // NOI18N
+            out.println("      </tuv>");                                        // NOI18N
+            out.println("      <tuv lang=\"" + targetLocale + "\">");           // NOI18N
+            out.println("        <seg>" + target + "</seg>");                   // NOI18N
+            out.println("      </tuv>");                                        // NOI18N
+            out.println("    </tu>");                                           // NOI18N
         }
-        out.write("  </body>\n");                                               // NOI18N
-        out.write("</tmx>\n");                                                  // NOI18N
+        out.println("  </body>");                                               // NOI18N
+        out.println("</tmx>");                                                  // NOI18N
         out.close();
     }
     
@@ -451,23 +461,36 @@ public class CommandThread extends Thread
     
     // build all translated files and create a new TM file
     public void compileProject()
-    throws IOException, TranslationException
+            throws IOException, TranslationException
     {
         if (m_strEntryHash.size() == 0)
             return;
         
         // save project first
         save();
-        
+
+        // build 2 TMX files, one with OmegaT formatting tags,
+        // one without, making it TMX level 1 compliant        
         try
         {
+            // build TMX with OmegaT tags
             String fname = m_config.getProjectRoot() + m_config.getProjectName() +
-            OConsts.TMX_EXTENSION;
-            buildTMXFile(fname);
+                OConsts.OMEGAT_TMX + OConsts.TMX_EXTENSION;
+            buildTMXFile(fname, false);
+            
+            // build TMX level 1 compliant file
+            fname = m_config.getProjectRoot() + m_config.getProjectName() +
+                OConsts.LEVEL1_TMX + OConsts.TMX_EXTENSION;
+            buildTMXFile(fname, true);
         }
         catch (IOException e)
         {
-            throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX"));
+            StaticUtils.log(OStrings.getString("CT_ERROR_CREATING_TMX"));
+            StaticUtils.log(e.getMessage());
+            e.printStackTrace(StaticUtils.getLogStream());
+            throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") +
+                    "\n" +                                                      // NOI18N
+                    e.getMessage());
         }
         
         // build mirror directory of source tree
@@ -550,7 +573,7 @@ public class CommandThread extends Thread
         
         try
         {
-            buildTMXFile(s);
+            buildTMXFile(s, false);
             m_modifiedFlag = false;
         }
         catch (IOException e)
@@ -869,7 +892,7 @@ public class CommandThread extends Thread
     {
         TMXReader tmx = new TMXReader(encoding, 
                 m_config.getSourceLanguage(), m_config.getTargetLanguage());
-        tmx.loadFile(fname);
+        tmx.loadFile(fname, isProject);
 
         int num = tmx.numSegments();
         ArrayList strEntryList = new ArrayList(num);
@@ -1185,3 +1208,4 @@ public class CommandThread extends Thread
     
     private GlossaryManager m_glossary;
 }
+

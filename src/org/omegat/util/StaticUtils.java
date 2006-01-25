@@ -623,5 +623,13 @@ public class StaticUtils
         // we should have a correct, existing config dir now
         return m_configDir;
     }
+    
+    /**
+     * Strips all XML tags (converts to plain text).
+     */
+    public static String stripTags(String xml)
+    {
+        return xml.replaceAll("<[^>]*>", "");
+    }
 }
 

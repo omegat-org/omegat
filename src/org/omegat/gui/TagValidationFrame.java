@@ -123,14 +123,14 @@ public class TagValidationFrame extends JFrame
     
     public void displayStringList(ArrayList stringList)
 	{
-		setTitle(m_searchResults + " " + OStrings.TF_NOTICE_BAD_TAGS);			// NOI18N
+		setTitle(m_searchResults + " " + OStrings.TF_NOTICE_BAD_TAGS);          // NOI18N
 		String out;
 		String src;
 		String trans;
 		SourceTextEntry ste;
 		StringEntry se;
 
-		out = "<table BORDER COLS=3 WIDTH=\"100%\" NOSAVE>";		// NOI18N
+		out = "<table BORDER COLS=3 WIDTH=\"100%\" NOSAVE>";                    // NOI18N
 		for (int i=0; i<stringList.size(); i++)
 		{
 			ste = (SourceTextEntry) stringList.get(i);
@@ -141,9 +141,9 @@ public class TagValidationFrame extends JFrame
 			{
 				out += "<tr>";													// NOI18N
 				out += "<td><a href=\"" + (ste.entryNum()+ 1) + "\">";			// NOI18N
-				out += ste.entryNum() + 1 + " </a></td>";						// NOI18N
-				out += "<td>" + htmlize(src) + "</td>";									// NOI18N
-				out += "<td>" + htmlize(trans) + "</td>";								// NOI18N
+				out += (ste.entryNum() + 1) + "</a></td>";						// NOI18N
+				out += "<td>" + htmlize(src) + "</td>";							// NOI18N
+				out += "<td>" + htmlize(trans) + "</td>";						// NOI18N
 				out += "</tr>";													// NOI18N
 			}
 		}

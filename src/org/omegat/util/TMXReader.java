@@ -144,7 +144,8 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         this.isProjectTMX = isProjectTMX;
     
         // parse the TMX file
-        try {
+        try 
+        {
             // log the parsing attempt
             StaticUtils.log(MessageFormat.format(
                 OStrings.getString("TMXR_INFO_READING_FILE"), 
@@ -167,7 +168,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             // parse the TM, provide the current TMX reader as notification handler
             //parser.parse(new java.io.File(filename), this);
             InputSource is = new InputSource(new XMLReader(filename, m_encoding));
-            is.setSystemId("");
+            is.setSystemId("");                                                 // NOI18N
             parser.parse(is, this);
             
             // if no source could be found for 1 or more TUs, log this fact
@@ -176,6 +177,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             
             // log the fact that parsing is done
             StaticUtils.log(OStrings.getString("TMXR_INFO_READING_COMPLETE"));
+            StaticUtils.log("");                                                // NOI18N
         }
         catch (Exception exception) 
         {
@@ -441,7 +443,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                 // match against entire TMX source language
                 if (   (sourceT == null)
                          && (   tuv.language.equalsIgnoreCase(tmxSourceLanguage)
-                             || tmxSourceLanguage.equalsIgnoreCase("*all*")))
+                             || tmxSourceLanguage.equalsIgnoreCase("*all*")))   // NOI18N
                     // the current TUV is the source according to the TMX source language
                     sourceT = tuv;
                 // match against TMX source language code only
@@ -468,7 +470,6 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         if (source == null) 
         {
             sourceNotFound = true;
-            //StaticUtils.log(OStrings.getString("TMXR_WARNING_CANNOT_FIND_SOURCE"));
             return;
         }
         
@@ -496,7 +497,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             if (i < target.subSegments.size())
                 m_tarList.add(target.subSegments.get(i).toString());
             else
-                m_tarList.add("");
+                m_tarList.add("");                                              // NOI18N
         }
     }
 
@@ -605,7 +606,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         // create new entries in the current TUV's sub segment list and on the stack
         // NOTE: the assumption is made here that sub segments are
         // in the same order in both source and target segments
-        StringBuffer sub = new StringBuffer("");
+        StringBuffer sub = new StringBuffer();                                  // NOI18N
         ((TUV)tuvs.get(tuvs.size() - 1)).subSegments.add(sub);
         currentSub.push(sub);
     }
@@ -629,31 +630,31 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                                                  throws SAXException 
     {
         // simply return an empty dtd
-        return new org.xml.sax.InputSource(new java.io.StringReader(""));
+        return new org.xml.sax.InputSource(new java.io.StringReader(""));       // NOI18N
     }
 
     // Constants for certain TMX tag names/attributes
-    private final static String TMX_TMX_TAG    = "tmx";
-    private final static String TMX_TAG_HEADER = "header";
-    private final static String TMX_TAG_BODY   = "body";
-    private final static String TMX_TAG_TU     = "tu";
-    private final static String TMX_TAG_TUV    = "tuv";
-    private final static String TMX_TAG_SEG    = "seg";
-    private final static String TMX_TAG_INLINE = "inline"; // made up for convenience
-    private final static String TMX_TAG_BPT    = "bpt";
-    private final static String TMX_TAG_EPT    = "ept";
-    private final static String TMX_TAG_HI     = "hi";
-    private final static String TMX_TAG_IT     = "it";
-    private final static String TMX_TAG_PH     = "ph";
-    private final static String TMX_TAG_UT     = "ut";
-    private final static String TMX_TAG_SUB    = "sub";
+    private final static String TMX_TMX_TAG    = "tmx";                         // NOI18N
+    private final static String TMX_TAG_HEADER = "header";                      // NOI18N
+    private final static String TMX_TAG_BODY   = "body";                        // NOI18N
+    private final static String TMX_TAG_TU     = "tu";                          // NOI18N
+    private final static String TMX_TAG_TUV    = "tuv";                         // NOI18N
+    private final static String TMX_TAG_SEG    = "seg";                         // NOI18N
+    private final static String TMX_TAG_INLINE = "inline"; // made up for convenience // NOI18N
+    private final static String TMX_TAG_BPT    = "bpt";                         // NOI18N
+    private final static String TMX_TAG_EPT    = "ept";                         // NOI18N
+    private final static String TMX_TAG_HI     = "hi";                          // NOI18N
+    private final static String TMX_TAG_IT     = "it";                          // NOI18N
+    private final static String TMX_TAG_PH     = "ph";                          // NOI18N
+    private final static String TMX_TAG_UT     = "ut";                          // NOI18N
+    private final static String TMX_TAG_SUB    = "sub";                         // NOI18N
     
-    private final static String TMX_ATTR_LANG                = "lang";
-    private final static String TMX_ATTR_LANG_NS             = "xml:lang";
-    private final static String TMX_ATTR_CREATIONTOOL        = "creationtool";
-    private final static String TMX_ATTR_CREATIONTOOLVERSION = "creationtoolversion";
-    private final static String TMX_ATTR_SEGTYPE             = "segtype";
-    private final static String TMX_ATTR_SRCLANG             = "srclang";
+    private final static String TMX_ATTR_LANG                = "lang";          // NOI18N
+    private final static String TMX_ATTR_LANG_NS             = "xml:lang";      // NOI18N
+    private final static String TMX_ATTR_CREATIONTOOL        = "creationtool";  // NOI18N
+    private final static String TMX_ATTR_CREATIONTOOLVERSION = "creationtoolversion";   // NOI18N
+    private final static String TMX_ATTR_SEGTYPE             = "segtype";       // NOI18N
+    private final static String TMX_ATTR_SRCLANG             = "srclang";       // NOI18N
 
     private String    m_encoding;
     private ArrayList m_srcList;

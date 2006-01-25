@@ -191,13 +191,13 @@ public class StaticUtils
     static
     {
         // STOP_WORDS.add("a"); // words with length = 1 are stripped automatically
-        STOP_WORDS.add("an");
-        STOP_WORDS.add("for");
-        STOP_WORDS.add("from");
-        STOP_WORDS.add("of");
-        STOP_WORDS.add("out");
-        STOP_WORDS.add("to");
-        STOP_WORDS.add("the");
+        STOP_WORDS.add("an");                                                   // NOI18N
+        STOP_WORDS.add("for");                                                  // NOI18N
+        STOP_WORDS.add("from");                                                 // NOI18N
+        STOP_WORDS.add("of");                                                   // NOI18N
+        STOP_WORDS.add("out");                                                  // NOI18N
+        STOP_WORDS.add("to");                                                   // NOI18N
+        STOP_WORDS.add("the");                                                  // NOI18N
     }
     
     /**
@@ -629,7 +629,7 @@ public class StaticUtils
      */
     public static String stripTags(String xml)
     {
-        return PatternConsts.OMEGAT_TAG.matcher(xml).replaceAll("");
+        return PatternConsts.OMEGAT_TAG.matcher(xml).replaceAll("");            // NOI18N
     }
 }
 

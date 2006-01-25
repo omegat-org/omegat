@@ -165,7 +165,7 @@ public final class Segmenter
         return segments;
     }
     
-    private static Pattern DEFAULT_BEFOREBREAK_PATTERN = Pattern.compile(".");  // NOI18N
+    private static Pattern DEFAULT_BEFOREBREAK_PATTERN = Pattern.compile(".", Pattern.DOTALL);  // NOI18N
     
     /**
      * Returns the places of possible breaks between sentences.
@@ -190,7 +190,6 @@ public final class Segmenter
         
         if( bbm==null )
             bbm = DEFAULT_BEFOREBREAK_PATTERN.matcher(paragraph);
-        
         
         while( bbm.find() )
         {

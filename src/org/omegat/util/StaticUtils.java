@@ -28,6 +28,8 @@ import java.io.PrintStream;
 import java.util.List;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 
 /**
@@ -67,7 +69,7 @@ public class StaticUtils
     
     /**
      * Builds a list of format tags within the supplied string.
-     * Format tags are HTML style <xxx> tags.
+     * Format tags are OmegaT style tags: &lt;xx02&gt; or &lt;/yy01&gt;.
      */
     public static void buildTagList(String str, ArrayList tagList)
     {
@@ -105,7 +107,10 @@ public class StaticUtils
                 case 3:
                     if (c == '>')
                     {
-                        tagList.add(tag);
+                        // checking if the tag looks like OmegaT tag, 
+                        // not 100% correct, but is the best what I can think of now
+                        if(PatternConsts.OMEGAT_TAG.matcher(tag).matches())
+                            tagList.add(tag);
                         state = 1;
                         tag = "";												// NOI18N
                     }
@@ -181,6 +186,19 @@ public class StaticUtils
         }
     }
     
+    /** List with stop-words like "a", "the" in English. */
+    private static SortedSet STOP_WORDS = new TreeSet();
+    static
+    {
+        // STOP_WORDS.add("a"); // words with length = 1 are stripped automatically
+        STOP_WORDS.add("an");
+        STOP_WORDS.add("for");
+        STOP_WORDS.add("from");
+        STOP_WORDS.add("of");
+        STOP_WORDS.add("out");
+        STOP_WORDS.add("to");
+        STOP_WORDS.add("the");
+    }
     
     /**
      * Builds a list of tokens and a list of their offsets w/in a file.
@@ -208,7 +226,7 @@ public class StaticUtils
         StringBuffer tokenBuff = new StringBuffer(len);
         int tokenStart = 0;
         int nTokens = 0;
-        char ch = 'x'; // fixes bug nr. 1382810 (StringIndexOutOfBoundsException)
+        char ch = str.charAt(0);
         for(int i=0; i<len; i++)
         {
             char pch = ch;
@@ -227,6 +245,11 @@ public class StaticUtils
                     if( tokenBuff.length()<=1 )
                     {
                         // too short (one char) for a word
+                        word = false;
+                    }
+                    else if( STOP_WORDS.contains(tokenBuff.toString()) )
+                    {
+                        // is in a stop-words list
                         word = false;
                     }
                     else if( ch=='>' && tagstart && Character.isDigit(pch) )
@@ -275,7 +298,7 @@ public class StaticUtils
             }
         }
         
-        if( word )
+        if( word && tokenBuff.length()>1 && !STOP_WORDS.contains(tokenBuff.toString()) )
         {
             nTokens++;
             if( tokenList!=null )
@@ -502,7 +525,7 @@ public class StaticUtils
             // access to the os/user home properties is restricted,
             // the location of the config dir cannot be determined,
             // set the config dir to the current working dir
-            m_configDir = "";                                                   // NOI18N
+            m_configDir = new File(".").getAbsolutePath();                      // NOI18N
             
             // log the exception, only do this after the config dir
             // has been set to the current working dir, otherwise
@@ -515,10 +538,10 @@ public class StaticUtils
         // if os or user home is null or empty, we cannot reliably determine
         // the config dir, so we use the current working dir (= empty string)
         if ( (os == null) || (os.length() == 0) ||
-                (home == null) || (home.length() == 0) )
+                (home == null) || (home.length() == 0))
         {
             // set the config dir to the current working dir
-            m_configDir = "";                                                   // NOI18N
+            m_configDir = new File(".").getAbsolutePath();                      // NOI18N
             return m_configDir;
         }
         
@@ -533,7 +556,7 @@ public class StaticUtils
             if (appDataFile.exists())
                 appData = appDataFile.getAbsolutePath();
             else
-                appData = null;
+                appData = null;                                                 // NOI18N
             
             if ((appData != null) && (appData.length() > 0))
             {
@@ -549,9 +572,8 @@ public class StaticUtils
             }
         }
         // check for UNIX varieties
-        else if ( os.equals("Linux") ||                                         // NOI18N
-                os.equals("Solaris") ||                                         // NOI18N
-                os.equals("FreeBSD") )                                          // NOI18N
+        else if (os.equals("Linux") || os.equals("Solaris") ||                  // NOI18N
+                os.equals("FreeBSD"))                                           // NOI18N
         {
             // set the config dir to the user's home dir + "/.omegat", so it's hidden
             m_configDir = home + UNIX_CONFIG_DIR;
@@ -584,14 +606,14 @@ public class StaticUtils
                     // if the dir could not be created,
                     // set the config dir to the current working dir
                     if (!created)
-                        m_configDir = "";                                       // NOI18N
+                        m_configDir = new File(".").getAbsolutePath();          // NOI18N
                 }
             }
             catch (SecurityException e)
             {
                 // the system doesn't want us to write where we want to write
                 // reset the config dir to the current working dir
-                m_configDir = "";                                               // NOI18N
+                m_configDir = new File(".").getAbsolutePath();                  // NOI18N
                 
                 // log the exception, but only after the config dir has been reset
                 log(e.toString());

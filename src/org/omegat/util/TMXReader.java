@@ -404,7 +404,7 @@ public class TMXReader extends DefaultHandler
         inTU = false;
         
         // add source and target segment to lists
-        if (sourceSegment.length() > 0)
+        if (sourceSegment.length()>0 && targetSegment.length()>0)
         {
             m_srcList.add(sourceSegment.toString());
             m_tarList.add(targetSegment.toString());

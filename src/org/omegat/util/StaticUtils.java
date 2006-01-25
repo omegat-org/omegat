@@ -629,7 +629,7 @@ public class StaticUtils
      */
     public static String stripTags(String xml)
     {
-        return PatternConsts.OMEGAT_TAG_ONLY.matcher(xml).replaceAll("");
+        return PatternConsts.OMEGAT_TAG.matcher(xml).replaceAll("");
     }
 }
 

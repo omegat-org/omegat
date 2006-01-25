@@ -392,8 +392,10 @@ public class CommandThread extends Thread
         out.close();
     }
     
-    // scan project and build list of entries which are suspected of
-    //  having changed (i.e. invalid) tag structures
+    /**
+     * Scans project and builds the list of entries which are suspected of
+     * having changed (possibly invalid) tag structures.
+     */
     public ArrayList validateTags()
     {
         int i, j;

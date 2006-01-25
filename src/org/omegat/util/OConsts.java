@@ -44,6 +44,9 @@ public class OConsts
     public static final String PROJ_CUR_VERSION = "1.0";						// NOI18N
     
     public static final String TMX_EXTENSION	= ".tmx";							// NOI18N
+    public static final String OMEGAT_TMX       = "-omegat";                    // NOI18N
+    public static final String LEVEL1_TMX       = "-level1";                    // NOI18N
+    
     public static final String TMW_EXTENSION	= ".wf";	// for wordfast			// NOI18N
     
     // help

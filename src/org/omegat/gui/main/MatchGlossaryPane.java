@@ -190,6 +190,9 @@ public class MatchGlossaryPane extends javax.swing.JPanel implements java.beans.
      */
     public void formatNearText(List tokenList, byte[] attrList)
     {
+        if (attrList==null)
+            return;
+        
         int start;
         int end;
         javax.swing.JTextPane pane = m_matchPane;

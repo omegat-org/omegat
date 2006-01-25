@@ -1,9 +1,38 @@
 ----------------------------------------------------------------------
- OmegaT 1.6 RC5 Changes
+ OmegaT 1.6 RC6 Changes
 ----------------------------------------------------------------------
 
  - 
    http://sourceforge.net/support/tracker.php?aid=
+
+1.6 RC6
+
+ Bugfixes:
+
+ - Unicode path names problem
+   http://sourceforge.net/support/tracker.php?aid=1391060
+
+ - Case sensitivity for segmentation rules
+   http://sourceforge.net/support/tracker.php?aid=1393484
+
+ - False positive in tag validation
+   http://sourceforge.net/support/tracker.php?aid=1374674
+
+ - UTF-8 BOM not recognized
+   http://sourceforge.net/support/tracker.php?aid=1407663
+
+ - The order of tags is changed in HTML header when translating
+   http://sourceforge.net/support/tracker.php?aid=1398044
+
+ - incorrect punctuation in some error messages
+   http://sourceforge.net/support/tracker.php?aid=1399514
+
+ - Incorrect menu option naming
+   http://sourceforge.net/support/tracker.php?aid=1410234
+
+ - Empty file makes loading of project fail
+   http://sourceforge.net/support/tracker.php?aid=1406084
+
 
 1.6 RC5
 

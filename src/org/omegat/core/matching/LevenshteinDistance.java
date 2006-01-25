@@ -144,7 +144,6 @@ class LevenshteinDistance
             d[0] = j;
             
             Object s_i = null; // ith object of s
-            Object s_i2; // i-1th object of s
             for (i=1; i<=n; i++)
             {
                 s_i = s.get(i-1);

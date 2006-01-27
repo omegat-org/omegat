@@ -337,8 +337,8 @@ public class CommandThread extends Thread
         PrintWriter out = new PrintWriter(osw); // PW is easier to use than Buff.Writer
         
         out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");              // NOI18N
-        out.println("<!DOCTYPE tmx SYSTEM \"tmx14.dtd\">");                     // NOI18N
-        out.println("<tmx version=\"1.4\">");                                   // NOI18N
+        out.println("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">");                     // NOI18N
+        out.println("<tmx version=\"1.1\">");                                   // NOI18N
         out.println("  <header");                                               // NOI18N
         out.println("    creationtool=\"OmegaT\"");                             // NOI18N
         out.println("    creationtoolversion=\"1.6\"");                         // NOI18N

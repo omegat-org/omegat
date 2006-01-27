@@ -2,10 +2,15 @@
  OmegaT 1.6 RC6 Changes
 ----------------------------------------------------------------------
 
- - 
-   http://sourceforge.net/support/tracker.php?aid=
-
 1.6 RC6
+
+ Enchancements:
+ 
+ - TMX: Import TMX 1.4b, export TMX 1.1 Level 1
+   http://sourceforge.net/support/tracker.php?aid=1031139
+
+ - Language matching precision while importing TMX files
+   http://sourceforge.net/support/tracker.php?aid=1416610
 
  Bugfixes:
 

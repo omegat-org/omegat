@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+  "http://www.w3.org/TR/html4/strict.dtd">
+  
+<html>
+  <head>
+    <title>OmegaT: Translation Process</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="generator" content="Kate (Linux)">
+    <meta name="changed" content="20050513">
+    <link rel="stylesheet" type="text/css" href="omegat.css">
+  </head>
+
+  <body lang="pl" dir="LTR">
+
+    <div class="navbar-top">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Pasek nawigacji">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="OmegaT.html" title="Spis treści">
+            <img src="OmegaT.png" border="0" alt="Logo OmegaT">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Poprzedni</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="Segmentation.html">Segmentation</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Następny</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="Editing.html">Editing Functions</a>
+        </td>
+      </tr>
+    </table>   
+    </div>
+    
+    <div class="content">
+   
+    <h1 align="center">Translation Process</h1>
+
+    <p>To translate text just overwrite it in the active segment's editing field.</p>
+
+    <p>Press <i>&lt;Enter&gt;</i> or <i>&lt;Ctrl+N&gt;</i> to accept a translation and proceed to the next segment. If <i>&lt;Enter&gt;</i> is needed for another purpose, like using it in a tool for the input of complex characters, it is possible to use <i>&lt;Tab&gt;</i> as an alternative. To activate this functionality, enable the <i>TAB Advance</i> menu item checkbox in the <i>Settings</i> menu.</p>
+    
+    <p>When a project is initially opened the the active segment defaults to the first segment of the first file in the <i>Project Files</i> list. To jump quickly to the next untranslated segment of the project, press <i>&lt;Ctrl+U&gt;</i> or choose the <i>Next Untranslated Segment</i> menu item from the <i>Edit</i> menu.</p>
+    
+    <p>In some case the source and target segments will be the same even after translation. In such cases OmegaT will consider these segments as untranslated since there is no way to know if the segments' translations have been completed. Segments are considered to be untranslated when source and target segments are the same.</p>
+    
+    <p>Create translated files at anytime during the translation process by compiling the project documents with the <i>Create Target Documents</i> menu item from the <i>File</i> menu. It is not necessary to have all files and segments translated before using this function. The translated segments will be written to the files and any remaining untranslated segments will be written out untouched. This can be useful, for example, to perform a partial review of the translation. The target files are created in the <b>/target</b> subdirectory of the project (for details on files and directories see <a href="FilesProjDirs.html">Project Files and Directories</a>).</p>
+ 
+    <p>Please be aware that modifying target files in an outside application without updating the segments from within OmegaT is dangerous because the next compilation performed in OmegaT will only take into consideration modifications made internally. Any changes made externally will be overwritten and lost in this case. If the translation of the target files is not satisfactory, redo the translation according to the previously prescribed procedure (see also <a href="SaveRevComp.html">Translation: Save, Revision, and Compilation</a>, <a href="HintsTips.html">General Hints and Tips</a> and <a href="Shortcuts.html">Keyboard Shortcuts</a>).</p>
+    </div>
+    
+    <div class="navbar-bottom">
+
+    <table border="0" cellpadding="2" width="100%" summary="Pasek nawigacji">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="OmegaT.html" title="Spis treści">
+            <img src="OmegaT.png" border="0" alt="Logo OmegaT">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Poprzedni</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="Segmentation.html">Segmentation</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Następny</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="Editing.html">Editing Functions</a>
+        </td>
+      </tr>
+    </table>   
+    </div>
+        
+  </body>
+</html>
+

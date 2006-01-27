@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<!-- The HTML code is taken from the latest OmegaT User Manual, and it uses the OmegaT User Manual's style sheet as well -->
+
+
+<html>
+<head>
+<title>OmegaT: szybki start</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="omegat.css">
+</head>
+
+<body lang="pl" dir="LTR">
+
+    <div class="navbar-top">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Pasek nawigacji">
+      <tr>
+        <td align="left" valign="center" width="7%">
+          <a href="OmegaT.html" title="Spis treści">
+            <img src="OmegaT.png" alt="Logo OmegaT" border="0">
+          </a>
+        </td>
+        <td align="left" valign="center" width="9%">
+          <b>Poprzedni</b>
+        </td>
+        <td align="left" valign="center" width="39%">        
+          <a href="Important.html">Ważne wyjaśnienia</a>
+        </td>
+        <td align="left" valign="center" width="6%">
+          <b>Następny</b>
+        </td>
+        <td align="left" valign="center" width="39%">
+          <a href="SampleProject.html">Projekt przykładowy</a>
+        </td>
+      </tr>
+    </table>    
+
+    </div>
+
+
+<div class="content">
+
+<h1 align="center">OmegaT: szybki start wersja 0.2</h1>
+
+<p><i>Niniejsza instrukcja "Szybki start" obejmuje tylko bardzo podstawowe sprawy. Każdy użytkownik powinien przeczytać podręcznik OmegaT aby poznać wszystkie możliwości OmegaT.</i></p>
+
+<ol>
+<li>Krótko o tym, jak OmegaT działa</li>
+<li>Jak tłumaczyć za pomocą OmegaT</li>
+<li>Obchodzenie się z tekstem z znacznikami</li>
+</ol>
+
+<h2>Krótko o tym, jak OmegaT działa</h2>
+
+<p>Po uruchomieniu OmegaT wygląda podobno do tego obrazu:</p>
+
+<center><img src="firststart.png" width="513" height="368" alt="Ekran startowy" border="0"></center>
+
+<p>OmegaT składa się z dwóch okien, które można niezależnie przesuwać na ekranie. Lewe okno to okno edycji, gdzie można pisać tłumaczenie. Prawe Okno to Przeglądarka dopasowań/słownika, gdzie będą pokazywane dopasowania rozmyte (górna ramka) i hasła z słownika (dolna ramka).</p>
+
+<p>OmegaT wydobywa segmenty z dokumentu źródłowego, pokazuje je w oknie edycji do tłumaczenia, i dodaje twoje tłumaczenia do pamięci tłumaczeń. Kiedy tłumaczenie jest gotowe (lub w każdym momencie na twoje życzenie), OmegaT tworzy dokument docelowy używając segmentów z pamięci tłumaczeń.</p>
+
+<p>OmegaT organizuje tłumaczenia w tzw. projektach tłumaczeń. Dla każdego projektu OmegaT najpierw tworzy zestaw folderów, które zawierają dokumenty źródłowe, słowniki, pamięć tłumaczeń, oraz na końcu dokumenty dokumenty docelowe.</p>
+
+<h2>Jak tłumaczyć za pomocą OmegaT</h2>
+
+<h3>1. Tworzenie nowego projektu</h3>
+
+<p>Wybierz w menu Plik -&gt; Nowy projekt...</p>
+
+<p>Przejdź do folderu, gdzie chcesz zapisać pliki projektu, i podaj nazwę dla projektu tłumaczenia. Nazwa ta będzie też nazwą folderu projektu, i wszystkie pliki projektu będą zapisane w tym folderze.</p>
+
+<p>OmegaT daje możliwość do zmiany lub akceptacji folderów projektu. Okno wygląda podobno do tego obrazu:</p>
+
+<center><img src="createproj.png" width="513" height="369" alt="Stwórz nowy projekt" border="0"></center>
+
+<p>Można po prostu akceptować miejsce podfolderów, ale powinno sprawdzić, czy kody języka źródłowego i języka docelowego są prawidłowe (Listę rozpowszechnionych kodów języka można znaleść w podręczniku OmegaT). Proszę zapamiętać miejsce katalogu plików źródłowych.</p>
+
+<p>W celu akceptacji ustawień projektu kliknij na OK.</p>
+
+<p>Teraz kopiuj dokumenty źródłowe do folderu źródła projektu tłumaczenia. Proszę zapamiętać, że OmegaT może tylko pliki OpenDocument, dokumenty OpenOffice.org, HTML, zwykły tekst i pewne pliki Java tłumaczyć. Jeśli kopiujesz inne pliki do folderu źródła, OmegaT ignoruje ich.</p>
+
+<h3>2. Otwórz nowy projekt</h3>
+
+<p>Wybierz w menu Plik -&gt; Otwórz projekt...</p>
+
+<p>Wybierz istniejący projekt tłumaczenia, który może mieć ikonkę OmegaT, i kliknij na "Otwórz". Potem wybierz plik omegat.project, i kliknij jeszcze raz na "Otwórz".</p>
+
+<p>OmegaT prosi o wybór pliku żródłowego w projekcie. Domyślnie OmegaT ładuje pierwszy plik w liście. Wybierz plik, i kliknij na "żamknij" w celu zamykania okna.</p>
+
+<h3>3. Tłumacz segmenty jeden po drugim</h3>
+
+<p>Dla aktualnego segmentu OmegaT podświetla tekst źródłowy na zielono i pokazuje kopię tekstu źródłowego między znacznikami &lt;segment 0001&gt; i &lt;end segment&gt;. Wprowadz twoje tlumaczenie między znacznikami zastępując tekst źródłowy.</p>
+
+<p>Naciśnij "ENTER" aby przejść do następnego segmentu.</p>
+
+<p>Kiedy naciśnisz "ENTER", różne rzeczy dzieją się niewidocznie: OmegaT doda tlumaczony segment do pamięci tlumaczeń, i wyszuka w pamięci tłumaczeń i w słowniku dopasowań dla nietłumaczonego segmentu.</p>
+
+<p>Jeśli segment ma dopasowanie rozmyte w pamięci tłumaczeń, to będzie one wyświetlone w górnej ramce przeglądarki dopasowań/słownika. Jeśli są w słowniku hasła z segmentu, to będą one wyświetlone w dolnej ramce przeglądarki dopasowań/słownika.</p>
+
+<p>Jeśli jest dopasowanie rozmyte, można je wstawić w okno educji w taki sposób:</p>
+
+<ul><li>Wybierz dopasowanie rozmyte używając Ctrl+1, Ctrl+2 itd.</li>
+<li>Naciśnij Ctrl+I aby wstawić je na aktualnej pozycji kursora, lub...</li>
+<li>Naciśnij Ctrl+R aby zastąpić nim cały akualny segment.</li>
+</ul>
+
+<p>Kiedy jest dokładne dopasowanie, OmegaT automatycznie zastąpi nim cały segment. Pamiętaj, że dokładne dopasowania są ważne w całym projekcie -- prosto mówiąc, jeśli zmieniasz tekst dokładnego dopasowania, OmegaT aktualizuje wszystkie występowania tego segmentu z nowym tekstem.</p>
+
+<h3>4. Stwórz dokumenty docelowe</h3>
+
+<p>Kiedy tłumaczenie jest gotowe (lub w każdym momencie na twoje życzenie), OmegaT tworzy dokument docelowy używając segmentów z pamięci tłumaczeń.</p>
+
+<p>W celu utworzenia dokumentów docelowych wybierz w menu Plik -&gt; Utwórz dokumenty docelowe. OmegaT utworzy wersje docelowe wszstkich ważnych dokumentów w katalogu żródłowym, niezależnie od tego ile z nich jest tłumaczone.</p>
+
+<p>Zawsze można sprawdzić, jak wyglądają dokumenty docelowe poprzez wywołanie polecenia Utwórz dokumenty docelowe. Można zmieniać istniejące tlumaczenia w projekcie i ponownie utworzyć dokumenty docelowe, ile razy chcesz. Wskazane jest regularne zapisanie pamięci tłumaczeń i utworzenie dokumentów docelowych</p>
+
+<p>Tłumaczone pliki można teraz znaleśc w katalogu docelowym.</p>
+
+<h2>Obchodzenie się z tekstem z znacznikami</h2>
+
+<p>W plikach OpenDocument, dokumentach OpenOffice.org lub plikach HTML, pewne słowa w zdaniu często mają własne formatowanie. Np. zdanie może być w kursywie, ale jedno słowo w środku zdania może być pogrubione.</p>
+
+<p>OmegaT oznacza takie formatowania specjalnymi znacznikami, które muszą być przeniesione do tłumaczonej wersji tekstu. Szukaj w podręczniku OmegaT informacje o zaawansowanej edycju znaczników.</p>
+
+<h3>Przykład...</h3>
+
+<p>Oto przykład segmentu w HTML:</p>
+
+<pre>&lt;p&gt;A different display font can be selected via the &lt;b&gt;Display Font&lt;/b&gt; dialog.
+Open it via the &lt;i&gt;Settings&lt;/i&gt; &amp;gt; &lt;i&gt;Display Font...&lt;/i&gt; menu item.
+The font type and size can be changed from the dialog.&lt;/p&gt;</pre>
+
+<p>Tak OmegaT wyświetla segment, podświetlone na zielono:</p>
+
+<pre>A different display font can be selected via the &lt;b0&gt;Display Font&lt;/b0&gt; dialog.
+Open it via the &lt;i0&gt;Settings&lt;/i0&gt; &gt; &lt;i1&gt;Display Font...&lt;/i1&gt; menu item.
+The font type and size can be changed from the dialog.</pre>
+
+<p>Tak segment będzie tłumaczony (przykład jest afrikaans):</p>
+
+<pre>'n Mens kan 'n ander vertoonfont kies met die &lt;b0&gt;Vertoonfont&lt;/b0&gt;-dialoogkassie.
+Kies  &lt;i0&gt;Opstelling&lt;/i0&gt; &gt; &lt;i1&gt;Vertoonfont...&lt;/i1&gt; op die kieslys.
+Die lettertipe én die lettergrootte kan met dié dialoogkassie verander word.</pre>
+
+<p>Kiedy OmegaT utworzy dokument docelowy, HTML tak wygląda:</p>
+
+<pre>&lt;p&gt;'n Mens kan 'n ander vertoonfont kies met die &lt;b&gt;Vertoonfont&lt;/b&gt;-dialoogkassie.
+Kies  &lt;i&gt;Opstelling&lt;/i&gt; &amp;gt; &lt;i&gt;Vertoonfont...&lt;/i&gt; op die kieslys.
+Die lettertipe én die lettergrootte kan met dié dialoogkassie verander word.&lt;/p&gt;</pre>
+
+<p>OmegaT nie rozpoznaje automatycznie błedy tłumaczenia z znacznikami. Przed dostawą klientowi dokumentów docelowych powinno sprawdzić, czy nie ma błędnych znaczników. Wybierz w menu Narzędzia -&gt; Sprawdź znaczniki. Powinno też otwierać dokument z skojarzonej przeglądarką lub z edytorem w celu sprawdzenia formatowania.</p>
+
+<hr>
+
+<p>Copyright (c) 2005 Samuel Murray</p>
+
+</div>
+
+    <div class="navbar-bottom">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Pasek nawigacji">
+      <tr>
+        <td align="left" valign="center" width="7%">
+          <a href="OmegaT.html" title="Spis treści">
+            <img src="OmegaT.png" alt="Logo OmegaT" border="0">
+          </a>
+        </td>
+        <td align="left" valign="center" width="9%">
+          <b>Poprzedni</b>
+        </td>
+        <td align="left" valign="center" width="39%">        
+          <a href="Important.html">Ważne wyjaśnienia</a>
+        </td>
+        <td align="left" valign="center" width="6%">
+          <b>Następny</b>
+        </td>
+        <td align="left" valign="center" width="39%">
+          <a href="UserInterface.html">Interfejs użytkownika</a>
+        </td>
+      </tr>
+    </table>    
+
+    </div>
+
+
+</body>
+</html>
+

@@ -1,0 +1,354 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+  "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+  <head>
+    <title>OmegaT: Sentence Segmentation</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="generator" content="Kate (Linux)">
+    <meta name="changed" content="20050513">
+    <link rel="stylesheet" type="text/css" href="omegat.css">
+  </head>
+  
+  <body lang="pl" dir="LTR">
+
+    <div class="navbar-top">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Pasek nawigacji">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="OmegaT.html" title="Spis treści">
+            <img src="OmegaT.png" border="0" alt="Logo OmegaT">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Poprzedni</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="UserInterface.html">Interfejs użytkownika</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Następny</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="Translation.html">Translation Process</a>
+        </td>
+      </tr>
+    </table>
+    </div>
+    
+    <div class="content">
+
+    <h1 align="center">Sentence Segmentation</h1>
+
+    <h2>Regular Expressions to use in segmentation rules</h2>
+
+    <p>The segmentation rules themselves are represented using regular expressions. This allows for maximum flexibility in the definition of the rules.</p>
+
+    <h3>Summary of regular-expression constructs</h3>
+
+    <table>
+    <tr>
+        <th align="left"><h4>Construct</h4></th>
+        <th align="left"><h4>Matches</h4></th>
+    </tr>
+
+    <tr>
+        <th align="left" colspan="2">Characters</th>
+    </tr>
+
+    <tr><td><i>x</i></td>
+        <td>The character <i>x</i></td></tr>
+    <tr><td><tt>\\</tt></td>
+
+        <td>The backslash character</td></tr>
+    <tr><td><tt>\0</tt><i>n</i></td>
+        <td>The character with octal value <tt>0</tt><i>n</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</td></tr>
+
+    <tr><td><tt>\0</tt><i>nn</i></td>
+        <td>The character with octal value <tt>0</tt><i>nn</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</td></tr>
+    <tr><td><tt>\0</tt><i>mnn</i></td>
+
+        <td>The character with octal value <tt>0</tt><i>mnn</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>m</i>&nbsp;<tt>&lt;=</tt>&nbsp;3, 0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</td></tr>
+    <tr><td><tt>\x</tt><i>hh</i></td>
+
+        <td>The character with hexadecimal&nbsp;value&nbsp;<tt>0x</tt><i>hh</i></td></tr>
+    <tr><td><tt>\u</tt><i>hhhh</i></td>
+        <td>The character with hexadecimal&nbsp;value&nbsp;<tt>0x</tt><i>hhhh</i></td></tr>
+    <tr><td valign="top"><tt>\t</tt></td>
+
+        <td>The tab character (<tt>'\u0009'</tt>)</td></tr>
+    <tr><td><tt>\n</tt></td>
+        <td>The newline (line feed) character (<tt>'\u000A'</tt>)</td></tr>
+    <tr><td><tt>\r</tt></td>
+        <td>The carriage-return character (<tt>'\u000D'</tt>)</td></tr>
+
+    <tr><td><tt>\f</tt></td>
+        <td>The form-feed character (<tt>'\u000C'</tt>)</td></tr>
+    <tr><td><tt>\a</tt></td>
+        <td>The alert (bell) character (<tt>'\u0007'</tt>)</td></tr>
+    <tr><td><tt>\e</tt></td>
+
+        <td>The escape character (<tt>'\u001B'</tt>)</td></tr>
+    <tr><td><tt>\c</tt><i>x</i></td>
+        <td>The control character corresponding to <i>x</i></td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="classes">Character classes</th></tr>
+
+    <tr><td headers="construct classes" valign="top"><tt>[abc]</tt></td>
+        <td><tt>a</tt>, <tt>b</tt>, or <tt>c</tt> (simple class)</td></tr>
+    <tr><td headers="construct classes" valign="top"><tt>[^abc]</tt></td>
+        <td>Any character except <tt>a</tt>, <tt>b</tt>, or <tt>c</tt> (negation)</td></tr>
+
+    <tr><td headers="construct classes" valign="top"><tt>[a-zA-Z]</tt></td>
+        <td><tt>a</tt> through <tt>z</tt> or <tt>A</tt> through <tt>Z</tt>, inclusive (range)</td></tr>
+
+    <tr><td headers="construct classes" valign="top"><tt>[a-d[m-p]]</tt></td>
+        <td><tt>a</tt> through <tt>d</tt>, or <tt>m</tt> through <tt>p</tt>: <tt>[a-dm-p]</tt> (union)</td></tr>
+
+    <tr><td headers="construct classes" valign="top"><tt>[a-z&amp;&amp;[def]]</tt></td>
+        <td><tt>d</tt>, <tt>e</tt>, or <tt>f</tt> (intersection)</td></tr>
+    <tr><td headers="construct classes" valign="top"><tt>[a-z&amp;&amp;[^bc]]</tt></td>
+
+        <td><tt>a</tt> through <tt>z</tt>, except for <tt>b</tt> and <tt>c</tt>: <tt>[ad-z]</tt> (subtraction)</td></tr>
+    <tr><td headers="construct classes" valign="top"><tt>[a-z&amp;&amp;[^m-p]]</tt></td>
+
+        <td><tt>a</tt> through <tt>z</tt>, and not <tt>m</tt> through <tt>p</tt>: <tt>[a-lq-z]</tt>(subtraction)</td></tr>
+    <tr><th>&nbsp;</th></tr>
+
+    <tr align="left"><th colspan="2" id="predef">Predefined character classes</th></tr>
+
+    <tr><td headers="construct predef" valign="top"><tt>.</tt></td>
+        <td>Any character (may or may not match line terminators)</td></tr>
+    <tr><td headers="construct predef" valign="top"><tt>\d</tt></td>
+        <td>A digit: <tt>[0-9]</tt></td></tr>
+
+    <tr><td headers="construct predef" valign="top"><tt>\D</tt></td>
+        <td>A non-digit: <tt>[^0-9]</tt></td></tr>
+    <tr><td headers="construct predef" valign="top"><tt>\s</tt></td>
+        <td>A whitespace character: <tt>[ \t\n\x0B\f\r]</tt></td></tr>
+    <tr><td headers="construct predef" valign="top"><tt>\S</tt></td>
+
+        <td>A non-whitespace character: <tt>[^\s]</tt></td></tr>
+    <tr><td headers="construct predef" valign="top"><tt>\w</tt></td>
+        <td>A word character: <tt>[a-zA-Z_0-9]</tt></td></tr>
+    <tr><td headers="construct predef" valign="top"><tt>\W</tt></td>
+        <td>A non-word character: <tt>[^\w]</tt></td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="posix">POSIX character classes (US-ASCII only)<b></b></th></tr>
+
+    <tr><td headers="construct posix" valign="top"><tt>\p{Lower}</tt></td>
+        <td>A lower-case alphabetic character: <tt>[a-z]</tt></td></tr>
+    <tr><td headers="construct posix" valign="top"><tt>\p{Upper}</tt></td>
+
+        <td>An upper-case alphabetic character:<tt>[A-Z]</tt></td></tr>
+    <tr><td headers="construct posix" valign="top"><tt>\p{ASCII}</tt></td>
+        <td>All ASCII:<tt>[\x00-\x7F]</tt></td></tr>
+    <tr><td headers="construct posix" valign="top"><tt>\p{Alpha}</tt></td>
+        <td>An alphabetic character:<tt>[\p{Lower}\p{Upper}]</tt></td></tr>
+
+    <tr><td headers="construct posix" valign="top"><tt>\p{Digit}</tt></td>
+        <td>A decimal digit: <tt>[0-9]</tt></td></tr>
+    <tr><td headers="construct posix" valign="top"><tt>\p{Alnum}</tt></td>
+        <td>An alphanumeric character:<tt>[\p{Alpha}\p{Digit}]</tt></td></tr>
+    <tr><td headers="construct posix" valign="top"><tt>\p{Punct}</tt></td>
+
+        <td>Punctuation: One of <tt>!"#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~</tt></td></tr>
+        <!-- <tt>[\!"#\$%&'\(\)\*\+,\-\./:;\<=\>\?@\[\\\]\^_`\{\|\}~]</tt>
+             <tt>[\X21-\X2F\X31-\X40\X5B-\X60\X7B-\X7E]</tt> -->
+    <tr><td headers="construct posix" valign="top"><tt>\p{Graph}</tt></td>
+        <td>A visible character: <tt>[\p{Alnum}\p{Punct}]</tt></td></tr>
+    <tr><td headers="construct posix" valign="top"><tt>\p{Print}</tt></td>
+
+        <td>A printable character: <tt>[\p{Graph}]</tt></td></tr>
+    <tr><td headers="construct posix" valign="top"><tt>\p{Blank}</tt></td>
+        <td>A space or a tab: <tt>[ \t]</tt></td></tr>
+    <tr><td headers="construct posix" valign="top"><tt>\p{Cntrl}</tt></td>
+        <td>A control character: <tt>[\x00-\x1F\x7F]</tt></td></tr>
+
+    <tr><td headers="construct posix" valign="top"><tt>\p{XDigit}</tt></td>
+        <td>A hexadecimal digit: <tt>[0-9a-fA-F]</tt></td></tr>
+    <tr><td headers="construct posix" valign="top"><tt>\p{Space}</tt></td>
+        <td>A whitespace character: <tt>[ \t\n\x0B\f\r]</tt></td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+
+    <tr align="left"><th colspan="2" id="unicode">Classes for Unicode blocks and categories</th></tr>
+
+    <tr><td headers="construct unicode" valign="top"><tt>\p{InGreek}</tt></td>
+        <td>A character in the Greek&nbsp;block (simple <a href="#ubc">block</a>)</td></tr>
+    <tr><td headers="construct unicode" valign="top"><tt>\p{Lu}</tt></td>
+        <td>An uppercase letter (simple <a href="#ubc">category</a>)</td></tr>
+
+    <tr><td headers="construct unicode" valign="top"><tt>\p{Sc}</tt></td>
+        <td>A currency symbol</td></tr>
+    <tr><td headers="construct unicode" valign="top"><tt>\P{InGreek}</tt></td>
+        <td>Any character except one in the Greek block (negation)</td></tr>
+    <tr><td headers="construct unicode" valign="top"><tt>[\p{L}&amp;&amp;[^\p{Lu}]]&nbsp;</tt></td>
+        <td>Any letter except an uppercase letter (subtraction)</td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="bounds">Boundary matchers</th></tr>
+
+    <tr><td><tt>^</tt></td>
+        <td>The beginning of a line</td></tr>
+    <tr><td><tt>$</tt></td>
+        <td>The end of a line</td></tr>
+
+    <tr><td><tt>\b</tt></td>
+        <td>A word boundary</td></tr>
+    <tr><td><tt>\B</tt></td>
+        <td>A non-word boundary</td></tr>
+    <tr><td><tt>\A</tt></td>
+        <td>The beginning of the input</td></tr>
+
+    <tr><td><tt>\G</tt></td>
+        <td>The end of the previous match</td></tr>
+    <tr><td><tt>\Z</tt></td>
+        <td>The end of the input but for the final <a href="#lt">terminator</a>, if&nbsp;any</td></tr>
+    <tr><td><tt>\z</tt></td>
+
+        <td>The end of the input</td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="greedy">Greedy quantifiers</th></tr>
+
+    <tr><td headers="construct greedy" valign="top"><i>X</i><tt>?</tt></td>
+        <td><i>X</i>, once or not at all</td></tr>
+
+    <tr><td headers="construct greedy" valign="top"><i>X</i><tt>*</tt></td>
+        <td><i>X</i>, zero or more times</td></tr>
+    <tr><td headers="construct greedy" valign="top"><i>X</i><tt>+</tt></td>
+        <td><i>X</i>, one or more times</td></tr>
+    <tr><td headers="construct greedy" valign="top"><i>X</i><tt>{</tt><i>n</i><tt>}</tt></td>
+
+        <td><i>X</i>, exactly <i>n</i> times</td></tr>
+    <tr><td headers="construct greedy" valign="top"><i>X</i><tt>{</tt><i>n</i><tt>,}</tt></td>
+        <td><i>X</i>, at least <i>n</i> times</td></tr>
+
+    <tr><td headers="construct greedy" valign="top"><i>X</i><tt>{</tt><i>n</i><tt>,</tt><i>m</i><tt>}</tt></td>
+        <td><i>X</i>, at least <i>n</i> but not more than <i>m</i> times</td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="reluc">Reluctant quantifiers</th></tr>
+
+    <tr><td headers="construct reluc" valign="top"><i>X</i><tt>??</tt></td>
+        <td><i>X</i>, once or not at all</td></tr>
+    <tr><td headers="construct reluc" valign="top"><i>X</i><tt>*?</tt></td>
+
+        <td><i>X</i>, zero or more times</td></tr>
+    <tr><td headers="construct reluc" valign="top"><i>X</i><tt>+?</tt></td>
+        <td><i>X</i>, one or more times</td></tr>
+    <tr><td headers="construct reluc" valign="top"><i>X</i><tt>{</tt><i>n</i><tt>}?</tt></td>
+
+        <td><i>X</i>, exactly <i>n</i> times</td></tr>
+    <tr><td headers="construct reluc" valign="top"><i>X</i><tt>{</tt><i>n</i><tt>,}?</tt></td>
+        <td><i>X</i>, at least <i>n</i> times</td></tr>
+
+    <tr><td headers="construct reluc" valign="top"><i>X</i><tt>{</tt><i>n</i><tt>,</tt><i>m</i><tt>}?</tt></td>
+        <td><i>X</i>, at least <i>n</i> but not more than <i>m</i> times</td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="poss">Possessive quantifiers</th></tr>
+
+    <tr><td headers="construct poss" valign="top"><i>X</i><tt>?+</tt></td>
+        <td><i>X</i>, once or not at all</td></tr>
+    <tr><td headers="construct poss" valign="top"><i>X</i><tt>*+</tt></td>
+
+        <td><i>X</i>, zero or more times</td></tr>
+    <tr><td headers="construct poss" valign="top"><i>X</i><tt>++</tt></td>
+        <td><i>X</i>, one or more times</td></tr>
+    <tr><td headers="construct poss" valign="top"><i>X</i><tt>{</tt><i>n</i><tt>}+</tt></td>
+
+        <td><i>X</i>, exactly <i>n</i> times</td></tr>
+    <tr><td headers="construct poss" valign="top"><i>X</i><tt>{</tt><i>n</i><tt>,}+</tt></td>
+        <td><i>X</i>, at least <i>n</i> times</td></tr>
+
+    <tr><td headers="construct poss" valign="top"><i>X</i><tt>{</tt><i>n</i><tt>,</tt><i>m</i><tt>}+</tt></td>
+        <td><i>X</i>, at least <i>n</i> but not more than <i>m</i> times</td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="logical">Logical operators</th></tr>
+
+    <tr><td headers="construct logical" valign="top"><i>XY</i></td>
+        <td><i>X</i> followed by <i>Y</i></td></tr>
+    <tr><td headers="construct logical" valign="top"><i>X</i><tt>|</tt><i>Y</i></td>
+
+        <td>Either <i>X</i> or <i>Y</i></td></tr>
+    <tr><td headers="construct logical" valign="top"><tt>(</tt><i>X</i><tt>)</tt></td>
+        <td>X, as a <a href="#cg">capturing group</a></td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="backref">Back references</th></tr>
+
+    <tr><td><tt>\</tt><i>n</i></td>
+        <td valign="bottom">Whatever the <i>n</i><sup>th</sup> <a href="#cg">capturing group</a> matched</td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="quot">Quotation</th></tr>
+
+    <tr><td headers="construct quot" valign="top"><tt>\</tt></td>
+        <td>Nothing, but quotes the following character</td></tr>
+    <tr><td headers="construct quot" valign="top"><tt>\Q</tt></td>
+        <td>Nothing, but quotes all characters until <tt>\E</tt></td></tr>
+
+    <tr><td headers="construct quot" valign="top"><tt>\E</tt></td>
+        <td>Nothing, but ends quoting started by <tt>\Q</tt></td></tr>
+        <!-- Metachars: !$()*+.<>?[\]^{|} -->
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="special">Special constructs (non-capturing)</th></tr>
+
+    <tr><td><tt>(?:</tt><i>X</i><tt>)</tt></td>
+
+        <td><i>X</i>, as a non-capturing group</td></tr>
+    <tr><td><tt>(?idmsux-idmsux)&nbsp;</tt></td>
+        <td>Nothing, but turns match flags on - off</td></tr>
+    <tr><td><tt>(?idmsux-idmsux:</tt><i>X</i><tt>)</tt>&nbsp;&nbsp;</td>
+        <td><i>X</i>, as a <a href="#cg">non-capturing group</a> with the given flags on - off</td></tr>
+
+    <tr><td><tt>(?=</tt><i>X</i><tt>)</tt></td>
+        <td><i>X</i>, via zero-width positive lookahead</td></tr>
+    <tr><td><tt>(?!</tt><i>X</i><tt>)</tt></td>
+        <td><i>X</i>, via zero-width negative lookahead</td></tr>
+
+    <tr><td><tt>(?&lt;=</tt><i>X</i><tt>)</tt></td>
+        <td><i>X</i>, via zero-width positive lookbehind</td></tr>
+    <tr><td><tt>(?&lt;!</tt><i>X</i><tt>)</tt></td>
+        <td><i>X</i>, via zero-width negative lookbehind</td></tr>
+
+    <tr><td><tt>(?&gt;</tt><i>X</i><tt>)</tt></td>
+        <td><i>X</i>, as an independent, non-capturing group</td>
+
+    </tr></table></div>
+            
+    <div class="navbar-bottom">
+
+    <table border="0" cellpadding="2" width="100%" summary="Pasek nawigacji">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="OmegaT.html" title="Spis treści">
+            <img src="OmegaT.png" border="0" alt="Logo OmegaT">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Poprzedni</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="UserInterface.html">Interfejs użytkownika</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Następny</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="Translation.html">Translation Process</a>
+        </td>
+      </tr>
+    </table>
+    </div>
+            
+  </body>
+</html>
+

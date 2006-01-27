@@ -1,0 +1,543 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+</head>
+<h3 style=""><a name="Intro_RegExp"></a><a name="Intro_Enc"></a><span style=""><span style="" lang="EN-US">1.2. Regular Expressions</span></span><span style="" lang="EN-US"><o:p></o:p></span><o:p></o:p></span></h3>
+
+<p style=""><span style="" lang="EN-US">The segmentation rules themselves are represented using regular expressions. This allows for maximum flexibility in the definition of the rules. The following definitions are a subset of the current definition for the ICU regular expressions. Applications using other engines will need to adapt this format for use with their own parser.<o:p></o:p></span></p>
+
+<h4 style=""><span style="" lang="EN-US">1.2.1. Metacharacters<o:p></o:p></span></h4>
+
+<table style="border: 0.5pt solid windowtext; margin-left: -0.4pt;" border="1" cellpadding="0">
+ <tbody><tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" width="177">
+  <p style="text-align: center;" align="center"><b>Character</b><b><span style=""><o:p></o:p></span><o:p></o:p></span></b></p>
+
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" width="718">
+  <p style="text-align: center;" align="center"><b>Description</b><b><span style=""><o:p></o:p></span><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\a</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match a BELL, </span><code><span style="font-family: &quot;Courier New&quot;;">\u0007</span></code><span style="">&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\A</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match at the beginning of the input. Differs from </span><code><span style="font-family: &quot;Courier New&quot;;">^</span></code><span style=""> in that </span><code><span style="font-family: &quot;Courier New&quot;;">\A</span></code><span style=""> will not match after a new line within the input.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\b</span></code>, outside of a [Set]&nbsp;<span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+
+  <p class="MsoNormal"><span style="">Match if the current position is a word boundary. Boundaries occur at the transitions betweem word (</span><code><span style="font-family: &quot;Courier New&quot;;">\w</span></code><span style="">) and non-word (</span><code><span style="font-family: &quot;Courier New&quot;;">\W</span></code><span style="">) characters, with combining marks ignored.</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\b</span></code><span style="">, within a [Set]&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match a BACKSPACE, </span><code><span style="font-family: &quot;Courier New&quot;;">\u0008</span></code><span style="">.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\B</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match if the current position is not a word boundary.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\cX</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match a control-X character.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+ </tr>
+
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\d</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match any character with the Unicode General Category of Nd (Number, Decimal Digit.)&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\D</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match any character that is not a decimal digit.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\e</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match an ESCAPE, </span><code><span style="font-family: &quot;Courier New&quot;;">\u001B</span></code><span style="">.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\E</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Terminates a </span><code><span style="font-family: &quot;Courier New&quot;;">\Q</span></code><span style=""> ... </span><code><span style="font-family: &quot;Courier New&quot;;">\E</span></code><span style=""> quoted sequence.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\f</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match a FORM FEED, </span><code><span style="font-family: &quot;Courier New&quot;;">\u000C</span></code><span style="">.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\G</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match if the current position is at the end of the previous match.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\n</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match a LINE FEED, </span><code><span style="font-family: &quot;Courier New&quot;;">\u000A</span></code><span style="">.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\N{UNICODE CHARACTER NAME}</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match the named character.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\p{UNICODE PROPERTY NAME}</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match any character with the specified Unicode Property.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\P{UNICODE PROPERTY NAME}</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match any character not having the specified Unicode Property.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\Q</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Quotes all following characters until </span><code><span style="font-family: &quot;Courier New&quot;;">\E</span></code><span style="">.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\r</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match a CARRIAGE RETURN, </span><code><span style="font-family: &quot;Courier New&quot;;">\u000D</span></code><span style="">.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\s</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match a white space character. White space is defined as </span><code><span style="font-family: &quot;Courier New&quot;;">[\t\n\f\r\p{Z}]</span></code><span style="">.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\S</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match a non-white space character.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\t</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match a HORIZONTAL TABULATION, </span><code><span style="font-family: &quot;Courier New&quot;;">\u0009</span></code><span style="">.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\uhhhh</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match the character with the hex value hhhh.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\Uhhhhhhhh</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match the character with the hex value hhhhhhhh. Exactly eight hex digits must be provided, even though the largest Unicode code point is </span><code><span style="font-family: &quot;Courier New&quot;;">\U0010ffff</span></code><span style="">.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\w</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match a word character. Word characters are </span><code><span style="font-family: &quot;Courier New&quot;;">[\p{Ll}\p{Lu}\p{Lt}\p{Lo}\p{Nd}]</span></code><span style="">.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\W</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match a non-word character.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\x{hhhh}</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="logo" style="margin: 0cm 0cm 0.0001pt;"><span style="">Match the character with hex value hhhh&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\xhh</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match the character with two digit hex value hh&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\X</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match a <a href="http://www.unicode.org/unicode/reports/tr29/#Grapheme_Cluster_Boundaries">Grapheme Cluster</a> </span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\Z</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match if the current position is at the end of input, but before the final line terminator, if one exists.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\z</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match if the current position is at the end of input.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\0nnn</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match the character with octal value nnn&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\n</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Back Reference. Match whatever the nth capturing group matched. n must be &gt; 1 and &lt; total number of capture groups in the pattern&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">[pattern]</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match any one character from the set. See <a href="http://oss.software.ibm.com/icu/userguide/unicodeSet.html">UnicodeSet </a>for a full description of what may appear in the pattern.</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">.</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match any character.&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">^</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match at the beginning of a line. &nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">$</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Match at the end of a line. &nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: Courier;">\</span></code><span style="font-family: Arial;">&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Arial Unicode MS&quot;; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 538.45pt;" valign="top" width="718">
+  <p class="MsoNormal"><span style="">Quotes the following character. Characters that must be quoted to be treated as literals are </span><code><span style="font-family: &quot;Courier New&quot;;">* ? + [ ( ) { } ^ $ | \ . /</span></code><span style="">&nbsp;</span><span style="font-size: 12pt; color: black;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+</tbody></table>
+
+<h4 style=""><span style="" lang="EN-US">1.2.2. Operators<o:p></o:p></span></h4>
+
+<p style=""><span style="" lang="EN-US">The following operators can be used.<o:p></o:p></span></p>
+
+<table style="border: 0.5pt solid windowtext; margin-left: -0.4pt;" border="1" cellpadding="0">
+ <tbody><tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" width="177">
+
+  <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="">Operator</span></b><span style="">&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" width="717">
+  <p class="MsoNormal" style="text-align: center;" align="center"><b><span style="">Description</span></b><span style="">&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: &quot;Courier New&quot;;">|&nbsp;<o:p></o:p></span></code></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" valign="top" width="717">
+  <p class="MsoNormal"><span style="">Alternation. A|B matches either A or B.&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+ </tr>
+
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: &quot;Courier New&quot;;">*&nbsp;<o:p></o:p></span></code></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" valign="top" width="717">
+  <p class="MsoNormal"><span style="">Match 0 or more times. Match as many times as possible.&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: &quot;Courier New&quot;;">+&nbsp;<o:p></o:p></span></code></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" valign="top" width="717">
+  <p class="MsoNormal"><span style="">Match 1 or more times. Match as many times as possible.&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: &quot;Courier New&quot;;">?&nbsp;<o:p></o:p></span></code></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" valign="top" width="717">
+  <p class="MsoNormal"><span style="">Match zero or one times. Prefer one.&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: &quot;Courier New&quot;;">{n}&nbsp;<o:p></o:p></span></code></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" valign="top" width="717">
+  <p class="MsoNormal"><span style="">Match exactly n times&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: &quot;Courier New&quot;;">{n,}&nbsp;<o:p></o:p></span></code></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" valign="top" width="717">
+  <p class="MsoNormal"><span style="">Match at least n times. Match as many times as possible.&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: &quot;Courier New&quot;;">{n,m}&nbsp;<o:p></o:p></span></code></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" valign="top" width="717">
+  <p class="MsoNormal"><span style="">Match between n and m times. Match as many times as possible, but not more than m.&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: &quot;Courier New&quot;;">*?&nbsp;<o:p></o:p></span></code></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" valign="top" width="717">
+  <p class="MsoNormal"><span style="">Match 0 or more times. Match as few times as possible.&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: &quot;Courier New&quot;;">+?&nbsp;<o:p></o:p></span></code></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" valign="top" width="717">
+  <p class="MsoNormal"><span style="">Match 1 or more times. Match as few times as possible.&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: &quot;Courier New&quot;;">??&nbsp;<o:p></o:p></span></code></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" valign="top" width="717">
+  <p class="MsoNormal"><span style="">Match zero or one times. Prefer zero.&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: &quot;Courier New&quot;;">{n}?&nbsp;<o:p></o:p></span></code></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" valign="top" width="717">
+  <p class="MsoNormal"><span style="">Match exactly n times&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: &quot;Courier New&quot;;">{n,}?&nbsp;<o:p></o:p></span></code></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" valign="top" width="717">
+  <p class="MsoNormal"><span style="">Match at least n times, but no more than required for an overall pattern match&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: &quot;Courier New&quot;;">{n,m}?&nbsp;<o:p></o:p></span></code></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" valign="top" width="717">
+
+  <p class="MsoNormal"><span style="">Match between n and m times. Match as few times as possible, but not less than n.&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: &quot;Courier New&quot;;">*+&nbsp;<o:p></o:p></span></code></p>
+  </td>
+
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" valign="top" width="717">
+  <p class="MsoNormal"><span style="">Match 0 or more times. Match as many times as possible when first encountered, do not retry with fewer even if overall match fails (Possessive Match)&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: &quot;Courier New&quot;;">++&nbsp;<o:p></o:p></span></code></p>
+
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" valign="top" width="717">
+  <p class="MsoNormal"><span style="">Match 1 or more times. Possessive match.&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: &quot;Courier New&quot;;">?+&nbsp;<o:p></o:p></span></code></p>
+
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" valign="top" width="717">
+  <p class="MsoNormal"><span style="">Match zero or one times. Possessive match.&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: &quot;Courier New&quot;;">{n}+&nbsp;<o:p></o:p></span></code></p>
+
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" valign="top" width="717">
+  <p class="MsoNormal"><span style="">Match exactly n times&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: &quot;Courier New&quot;;">{n,}+&nbsp;<o:p></o:p></span></code></p>
+
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" valign="top" width="717">
+  <p class="MsoNormal"><span style="">Match at least n times. Possessive Match.&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 132.75pt;" valign="top" width="177">
+  <p class="MsoNormal"><code><span style="font-family: &quot;Courier New&quot;;">{n,m}+&nbsp;<o:p></o:p></span></code></p>
+  </td>
+  <td style="border: 0.5pt solid windowtext; padding: 1.5pt; width: 537.75pt;" valign="top" width="717">
+  <p class="MsoNormal"><span style="">Match between n and m times. Possessive Match.&nbsp;</span><span style="font-size: 12pt;"><o:p></o:p></span><o:p></o:p></span></p>
+  </td>
+ </tr>
+</tbody></table>

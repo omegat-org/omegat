@@ -35,9 +35,6 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.Token;
 
-/* Previously this file contained a reference to Raymond Martin authorship by mistake.
- * The code he provided was not used because of low quality. */
-
 /**
  * This is a combined Match + Glossary pane, that displays
  * fuzzy matches and glossary entries.

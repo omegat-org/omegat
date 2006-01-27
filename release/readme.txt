@@ -1,147 +1,193 @@
 ==============================================================================
-OmegaT 1.6 RC5 Read Me file
+OmegaT 1.6 RC6 Read Me file
 
-I.   Where to get information about OmegaT
-II.  General notes about Java & OmegaT
-III. Contributions to OmegaT
-IV.  Is OmegaT bugging you? Do you need help?
-V.   Release details
-
-==============================================================================
-I.  Where to get information about OmegaT
-
-The most actual info about OmegaT may be found at:
-     http://www.omegat.org/omegat/omegat.html
-
-OmegaT is a free and open source multiplatform Computer Assisted Translation 
-tool with :
- - fuzzy matching,
- - translation memory,
- - keyword search,
- - glossary,
- - and translation leveraging into updated projects.
-
-OmegaT supports projects including Microsoft Office files (using 
-OpenOffice.org as a conversion filter), OpenOffice.org or StarOffice files, 
-as well as (X)HTML, Java localization files or plain text files.
-
-For a quick start tutorial, launch OmegaT and read the displayed
-Instant Start Tutorial.
-
-The user manual is in the package you just downloaded, you can access
-it from the [Help] menu after starting OmegaT.
+  1.  Information about OmegaT
+  2.  What is OmegaT?
+  3.  General notes about Java & OmegaT
+  4.  Contributions to OmegaT
+  5.  Is OmegaT bugging you? Do you need help?
+  6.  Release details
 
 ==============================================================================
-II. General notes about Java & OmegaT
+1.  Information about OmegaT
 
-OmegaT requires the Java Runtime Environment version 1.4 or higher 
-be installed on your system. It is available from:
-     http://java.com
+The most current info about OmegaT can be found at:
+      http://www.omegat.org/omegat/omegat.html
 
-Windows and Linux users may need to install Java if it is not already
-done. MacOSX users have Java already installed on their machines.
+More information can be found on the following pages:
+
+User support, at the Yahoo user group:
+     http://groups.yahoo.com/group/OmegaT/
+     Where the archives are searchable without subscription.
+
+Requests for Enhancements, at the SourceForge site:
+     http://sourceforge.net/tracker/?group_id=68187&atid=520350
+
+Bug reports, at the SourceForge site:
+     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+
+==============================================================================
+2.  What is OmegaT?
+
+OmegaT is a Computer Assisted Translation tool. It is free, in the meaning
+that you don't have to pay anything to be able to use it, even for
+professional use, and in the meaning that you are free to modify it and/or
+re-distribute it as long as you respect the user license.
+
+OmegaT's main features are
+- ability to run on any operating system supporting Java
+- use of any valid TMX file as translation reference
+- flexible sentence segmenting (using an SRX-like method)
+- searches in the project and the reference translation memories
+- searches in any directory including OmegaT-readable files
+- fuzzy matching
+- smart handling of projects including complex directory hierarchies
+- support for glossaries (terminology checks)
+- easy to understand documentation and tutorial
+- localization in a number of languages.
+
+OmegaT supports OpenDocument files, Microsoft Office files (using
+OpenOffice.org as a conversion filter), OpenOffice.org or StarOffice files, as
+well as (X)HTML, Java localization files or plain text files.
+
+OmegaT will automatically parse even the most complex source directory
+hierarchies, to access all the supported files, and produce a target directory
+with exactly the same structure, including copies of any non-supported files.
+
+For a quick-start tutorial, launch OmegaT and read the displayed
+  "Instant Start Tutorial".
+
+The user manual is in the package you just downloaded, you can access it from
+the [Help] menu after starting OmegaT.
+
+==============================================================================
+3. General notes about Java & OmegaT
+
+OmegaT requires the Java Runtime Environment version 1.4 or higher be
+installed on your system. It is available from:
+      http://java.com
+
+Windows and Linux users may need to install Java if it is not already done.
+MacOSX users have Java already installed on their machines.
 
 On a properly installed machine, you should be able to launch OmegaT by
-double-clicking on the OmegaT.jar file.
+double-clicking the OmegaT.jar file.
 
-After installing java modify your system path variable so that it
-includes the directory where the 'java' application resides.
-
-To run OmegaT from a terminal change to the install (this) directory and
-- for Unixes (Linux, FreeBSD, MacOSX) type (case sensitive!)
-     ./OmegaT
-- for Windows type
-     OmegaT.bat or OmegaT.exe
+After installing java you may need to modify your system path variable so that
+it includes the directory where the 'java' application resides.
 
 ==============================================================================
-III. Contributions to OmegaT
+4. Contributions to OmegaT
 
-OmegaT is originally the work of Keith Godfrey
+To contribute to OmegaT development, get in touch with the developers at:
+    http://lists.sourceforge.net/lists/listinfo/omegat-development
 
-Code has been contributed by
-   Benjamin Siband
-   Maxym Mykhalchuk (lead developer at the time of this release)
-   Sacha Chua
-   Henry Pijffers
-   Kim Bruning
-
-Localization contributed by
-   Dmitri Gabinski (Belorussian, Esperanto, and Russian)
-   Jean-Christophe Helary (French)
-   Sabine Cretella and Martin Wunderlich (German)
-   Alessandro Cattelan (Italian)
-   Hisashi Yanagida (Japanese)
-   Pablo Roca Santiagio; Juan Salcines and Cesar Escribano Esteban (Spanish)
-   Erhan Yukselci (Turkish)
-
-Other contributions by
-   Sabine Cretella
-   Dmitry Gabinski
-   Jean-Christophe Helary
-   Raymond Martin
-   Samuel Murray
-   Marc Prior (project coordinator and ASAD manual writer)
-   and many, many more very helpful people
-
-To contribute to OmegaT development, get in touch with the developers
-at:
-   http://lists.sourceforge.net/lists/listinfo/omegat-development
-
-To translate OmegaT's user interface, user manual or other related
-documents, read:
-     http://www.omegat.org/omegat/translation-info.html
+To translate OmegaT's user interface, user manual or other related documents,
+read:
+      http://www.omegat.org/omegat/translation-info.html
 
 And subscribe to the translators' list:
-     http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
+      http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
 
 For other kind of contributions, subscribe first to the user group at:
-     http://groups.yahoo.com/group/OmegaT/
+      http://groups.yahoo.com/group/OmegaT/
 
 And get a feel of what is going on in the OmegaT world...
 
+
+OmegaT is originally the work of Keith Godfrey.
+Marc Prior is the coordinator of the OmegaT project.
+
+Previous contributors include:
+(alphabetical order)
+
+Code has been contributed by
+    Sacha Chua
+    Kim Bruning
+    Maxym Mykhalchuk (current lead developer)
+    Henry Pijffers
+    Benjamin Siband
+
+Localization contributed by
+    Alessandro Cattelan (Italian)
+    Sabine Cretella (German)
+    Cesar Escribano Esteban (Spanish)
+    Dmitri Gabinski (Belarusian, Esperanto, and Russian)
+    Jean-Christophe Helary (French)
+    Juan Salcines (Spanish)
+    Pablo Roca Santiagio (Spanish)
+    Martin Wunderlich (German)
+    Hisashi Yanagida (Japanese)
+
+Other contributions by
+    Sabine Cretella
+    Dmitri Gabinski
+    Jean-Christophe Helary (current documentation manager)
+    Raymond Martin
+    Samuel Murray
+    Marc Prior (current localization manager)
+    and many, many more very helpful people
+
 ==============================================================================
-IV.  Is OmegaT bugging you ? Do you need help ?
+5.  Is OmegaT bugging you ? Do you need help ?
 
-In the event of a system error (as evidenced by a stack dump in the
-command line window or file 'log.txt'),
-please note the error and a brief description of how the error occured
-and file the bug for OmegaT project:
-     http://sourceforge.net/tracker/?func=add&group_id=68187&atid=520347
+Before reporting a bug, make sure that you have thouroughly checked the
+documentation. What you see may instead be a characteristic of OmegaT that
+you have just discovered. If you check the OmegaT log and you see words like
+"Error", "Warning", "Exception", or "died unexpectedly" then you are on to
+something (the log.txt is located in the user preferences directory, see the
+manual for its location).
 
-Do not forget to attach the 'log.txt' file.
+The next thing you do is confirm what you found with other users, to make sure
+this has not already been reported. You can verify the bug report page at
+SourceForge too. Only when you are sure you are the first to have found some
+reproductible sequence of event that triggered something not supposed to
+happen should you file a bug report.
 
-If your problem does not need a bug report, you can get user volunteer
-support at:
+Every good bug report needs exactly three things.
+  - Steps to reproduce,
+  - What you expected to see, and
+  - What you saw instead.
+  
+You can add copies of files, portions of the log, screenshots, anything that
+you think will help the developers with finding and fixing your bug.
+
+To browse the archives of the user group, go to:
      http://groups.yahoo.com/group/OmegaT/
 
+To browse the bug report page and file a new bug report if necessary, go to:
+     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+
+To keep track of what is happening to your bug report you may want to register
+as a Source Forge user.
+
 ==============================================================================
-V.   Release details
+6.   Release details
+
+Please see the file 'changes.txt' for detailed information about changes in
+this and all previous releases.
 
 New UI features (comparing to 1.0 OmegaT series):
-    Find interface rewritten with enhanced functionality
-    Main interface improved
-    Font may be selected
-    Full localisation support
-    Belorussian, English, Esperanto, French, German, Italian, Japanese, 
-                            Russian, Spanish, Turkish interface and manual
-    Ability to jump to the next untranslated segment
-    Rich customization of Format Filters behaviour
-    User-customizable Segmentation
-    Match/Glossary Window has a Split Pane
-File formats supported:
-    Plain text
-    HTML and XHTML
-    OpenDocument / OpenOffice
-    Java resource bundles (.properties)
-    NetBeans EDGE Newsletters
-Core changes:
-    Flexible (Sentence) Segmentation
-    File format filters may be created as plugins
-    Refactored code with more comments
-    Windows installer
-    Attributes of HTML tags are translatable
+     Find interface rewritten with enhanced functionality
+     Main interface improved
+     Ability to select a display font
+     Full localization support
+     Ability to jump to the next untranslated segment
+     Rich customization of Format Filters behaviour
+     User-customizable Segmentation
+     Match/Glossary Window has a Split Pane
 
-==============================================================================
-Please see the file 'changes.txt' for detailed information about changes 
-in this and all previous releases.
+File formats supported:
+     Plain text
+     HTML and XHTML
+     OpenDocument / OpenOffice
+     Java resource bundles (.properties)
+
+Core changes:
+     Flexible (Sentence) Segmentation
+     File format filters may be created as plugins
+     Refactored code with more comments
+     Windows installer
+     Attributes of HTML tags are translatable
+
 ==============================================================================

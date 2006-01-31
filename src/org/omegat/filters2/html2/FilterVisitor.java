@@ -244,6 +244,8 @@ class FilterVisitor extends NodeVisitor
     {
         if( text )
             endup();
+        else
+            flushbefors();
     }
     
     

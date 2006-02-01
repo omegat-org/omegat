@@ -24,6 +24,7 @@ Source: "license.txt"; DestDir: "{app}"
 Source: "doc-license.txt"; DestDir: "{app}"
 Source: "readme.txt"; DestDir: "{app}"; Flags: isreadme
 Source: "join.html"; DestDir: "{app}"
+Source: "index.html"; DestDir: "{app}"
 Source: "changes.txt"; DestDir: "{app}"
 
 [Icons]

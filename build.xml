@@ -28,7 +28,7 @@
     <import file="nbproject/build-impl.xml"/>
     <import file="nbproject/profiler-build-impl.xml"/>
 
-    <target name="-post-init">
+    <target name="-pre-init">
         <property name="iscc.exe" value="iscc.exe"/>
         <property file="src/org/omegat/Version.properties"/>
         <filter filtersfile="src/org/omegat/Version.properties"/>

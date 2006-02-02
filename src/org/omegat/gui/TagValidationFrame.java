@@ -90,7 +90,8 @@ public class TagValidationFrame extends JFrame
 					doClose();
 				}
 			};
-			getRootPane().getInputMap(JComponent.WHEN_FOCUSED).put(
+			//getRootPane().getInputMap(JComponent.WHEN_FOCUSED).put(         // HP
+            getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put( // HP
 					escKeyStroke, "ESCAPE");						// NOI18N
 			getRootPane().getActionMap().put("ESCAPE", escAction);	// NOI18N
 		}

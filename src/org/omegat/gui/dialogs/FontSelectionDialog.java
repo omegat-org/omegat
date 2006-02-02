@@ -21,8 +21,15 @@
 
 package org.omegat.gui.dialogs;
 
+import java.awt.event.ActionEvent;     // HP
+import java.awt.event.KeyEvent;        // HP
 import java.awt.Font;
 import java.awt.Frame;
+import javax.swing.AbstractAction;     // HP
+import javax.swing.Action;             // HP
+import javax.swing.JComponent;         // HP
+import javax.swing.KeyStroke;          // HP
+
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 
@@ -51,6 +58,22 @@ public class FontSelectionDialog extends javax.swing.JDialog
     public FontSelectionDialog(Frame parent, Font font)
     {
         super(parent, true);
+        
+        // HP
+        //  Handle escape key to close the window
+        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
+        Action escapeAction = new AbstractAction()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                dispose();
+            }
+        };
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
+        put(escape, "ESCAPE");                                                  // NOI18N
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+        // END HP
+        
         initComponents();
         
         getRootPane().setDefaultButton(okButton);
@@ -230,7 +253,7 @@ public class FontSelectionDialog extends javax.swing.JDialog
         dispose();
     }
     
-    // Объявление переменных - не изменяйте данный код//GEN-BEGIN:variables
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ//GEN-BEGIN:variables
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox fontComboBox;
@@ -239,7 +262,7 @@ public class FontSelectionDialog extends javax.swing.JDialog
     private javax.swing.JTextArea previewTextArea;
     private javax.swing.JLabel sizeLabel;
     private javax.swing.JSpinner sizeSpinner;
-    // Конец объявления переменных//GEN-END:variables
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ//GEN-END:variables
     
     private int returnStatus = RET_CANCEL_OR_UNCHANGED;
 }

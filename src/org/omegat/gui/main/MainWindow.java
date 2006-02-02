@@ -21,10 +21,6 @@
 
 package org.omegat.gui.main;
 
-// TEMP
-import org.omegat.util.dev.*;
-// END TEMP
-
 import java.awt.Color;
 import java.awt.Event;
 import java.awt.Font;
@@ -530,13 +526,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             loadDocument();
         }
 
-TimeTrack.clearAll();
-TimeTrack.start("AE");
         activateEntry();
-TimeTrack.stop("AE");
-TTTimer timer = (TTTimer)TimeTrack.getTimer("AE");
-if ((timer.total / timer.nrOfMeasurements) > 50)
-TimeTrack.printTimers(System.out);
     }
     
     public void doPrevEntry()
@@ -1415,26 +1405,16 @@ TimeTrack.printTimers(System.out);
             + num + startStr.substring(zero+1);
         }
         
-TimeTrack.start("AE-1");
-        MutableAttributeSet mattr;
+  MutableAttributeSet mattr;
         // append to end of segment first because this operation is done
         //	by reference to end of file which will change after insert
         int inset = paneLen-m_segmentEndInset;
-TimeTrack.start("AE-1.1");
         xlPane.select(inset, inset);
-TimeTrack.stop("AE-1.1");
-TimeTrack.start("AE-1.2");
         xlPane.replaceSelection(endStr);
-TimeTrack.stop("AE-1.2");
-TimeTrack.start("AE-1.3");
         xlPane.select(inset+1, inset+endStr.length());
-TimeTrack.stop("AE-1.3");
-TimeTrack.start("AE-1.4");
         mattr = new SimpleAttributeSet();
         StyleConstants.setBold(mattr, true);
         xlPane.setCharacterAttributes(mattr, true);
-TimeTrack.stop("AE-1.4");
-TimeTrack.stop("AE-1");
         
         String translation = m_curEntry.getTranslation();
         if( translation==null || translation.length()==0 )
@@ -1477,17 +1457,13 @@ TimeTrack.stop("AE-1");
             }
         }
         
-TimeTrack.start("activateEntry-2");
-TimeTrack.start("activateEntry-2.1");
         xlPane.select(m_segmentStartOffset, m_segmentStartOffset);
         String insertText = srcText + startStr;
         xlPane.replaceSelection(insertText);
         xlPane.select(m_segmentStartOffset, m_segmentStartOffset +
                 insertText.length() - 1);
         xlPane.setCharacterAttributes(mattr, true);
-TimeTrack.stop("activateEntry-2.1");
         
-TimeTrack.start("activateEntry-2.2");
         // background color
         Color background = new Color(192, 255, 192);
         // other color options
@@ -1496,8 +1472,6 @@ TimeTrack.start("activateEntry-2.2");
         mattr = new SimpleAttributeSet();
         StyleConstants.setBackground(mattr, background);
         xlPane.setCharacterAttributes(mattr, false);
-TimeTrack.stop("activateEntry-2.2");
-TimeTrack.stop("activateEntry-2");
         
         // TODO XXX format source text if there is near match
         if (m_curEntry.getSrcFile().name.compareTo(m_activeFile) != 0)

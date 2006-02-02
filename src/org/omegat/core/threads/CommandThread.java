@@ -317,7 +317,7 @@ public class CommandThread extends Thread
     /**
      * Saves a TMX file to disk
      */
-    private void buildTMXFile(String filename, boolean forceValidTMX) 
+    private void buildTMXFile(String filename, boolean forceValidTMX, boolean addOrphans) 
             throws IOException
     {
         // build translation database files
@@ -336,6 +336,7 @@ public class CommandThread extends Thread
         OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");          // NOI18N
         PrintWriter out = new PrintWriter(osw); // PW is easier to use than Buff.Writer
         
+        // Write TMX header
         out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");              // NOI18N
         out.println("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">");                     // NOI18N
         out.println("<tmx version=\"1.1\">");                                   // NOI18N
@@ -351,6 +352,7 @@ public class CommandThread extends Thread
         out.println("  </header>");                                             // NOI18N
         out.println("  <body>");                                                // NOI18N
 
+        // Write TUs
         String source = null;
         String target = null;
         for (int i = 0; i < m_strEntryList.size(); i++)
@@ -374,31 +376,38 @@ public class CommandThread extends Thread
             out.println("    </tu>");                                           // NOI18N
         }
         
-        TransMemory transMem;
-        for (int i = 0; i < m_orphanedList.size(); i++)
-        {
-            transMem = (TransMemory) m_orphanedList.get(i);
-            if (transMem.target.length() == 0)
-                continue;
-            source = forceValidTMX ? StaticUtils.stripTags(transMem.source)
-                                   : transMem.source;
-            target = forceValidTMX ? StaticUtils.stripTags(transMem.target)
-                                   : transMem.target;
-            if (target.length() == 0)
-                continue;
-            source = StaticUtils.makeValidXML(source);
-            target = StaticUtils.makeValidXML(target);
-            out.println("    <tu>");                                            // NOI18N
-            out.println("      <tuv lang=\"" + sourceLocale + "\">");           // NOI18N
-            out.println("        <seg>" + source + "</seg>");                   // NOI18N
-            out.println("      </tuv>");                                        // NOI18N
-            out.println("      <tuv lang=\"" + targetLocale + "\">");           // NOI18N
-            out.println("        <seg>" + target + "</seg>");                   // NOI18N
-            out.println("      </tuv>");                                        // NOI18N
-            out.println("    </tu>");                                           // NOI18N
+        // Write orphan strings
+        if (addOrphans) {
+            TransMemory transMem;
+            for (int i = 0; i < m_orphanedList.size(); i++)
+            {
+                transMem = (TransMemory) m_orphanedList.get(i);
+                if (transMem.target.length() == 0)
+                    continue;
+                source = forceValidTMX ? StaticUtils.stripTags(transMem.source)
+                                       : transMem.source;
+                target = forceValidTMX ? StaticUtils.stripTags(transMem.target)
+                                       : transMem.target;
+                if (target.length() == 0)
+                    continue;
+                source = StaticUtils.makeValidXML(source);
+                target = StaticUtils.makeValidXML(target);
+                out.println("    <tu>");                                            // NOI18N
+                out.println("      <tuv lang=\"" + sourceLocale + "\">");           // NOI18N
+                out.println("        <seg>" + source + "</seg>");                   // NOI18N
+                out.println("      </tuv>");                                        // NOI18N
+                out.println("      <tuv lang=\"" + targetLocale + "\">");           // NOI18N
+                out.println("        <seg>" + target + "</seg>");                   // NOI18N
+                out.println("      </tuv>");                                        // NOI18N
+                out.println("    </tu>");                                           // NOI18N
+            }
         }
+        
+        // Write TMX footer
         out.println("  </body>");                                               // NOI18N
         out.println("</tmx>");                                                  // NOI18N
+        
+        // Close output stream
         out.close();
     }
     
@@ -476,12 +485,12 @@ public class CommandThread extends Thread
             // build TMX with OmegaT tags
             String fname = m_config.getProjectRoot() + m_config.getProjectName() +
                 OConsts.OMEGAT_TMX + OConsts.TMX_EXTENSION;
-            buildTMXFile(fname, false);
+            buildTMXFile(fname, false, false);
             
             // build TMX level 1 compliant file
             fname = m_config.getProjectRoot() + m_config.getProjectName() +
                 OConsts.LEVEL1_TMX + OConsts.TMX_EXTENSION;
-            buildTMXFile(fname, true);
+            buildTMXFile(fname, true, false);
         }
         catch (IOException e)
         {
@@ -573,7 +582,7 @@ public class CommandThread extends Thread
         
         try
         {
-            buildTMXFile(s, false);
+            buildTMXFile(s, false, true);
             m_modifiedFlag = false;
         }
         catch (IOException e)

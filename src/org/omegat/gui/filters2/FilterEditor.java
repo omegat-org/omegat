@@ -23,15 +23,21 @@ package org.omegat.gui.filters2;
 
 import java.awt.Dialog;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;     // HP
+import java.awt.event.KeyEvent;        // HP
 import java.awt.Toolkit;
 import java.lang.reflect.Constructor;
 import java.text.MessageFormat;
 import java.util.Vector;
+import javax.swing.AbstractAction;     // HP
+import javax.swing.Action;             // HP
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;         // HP
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;          // HP
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -68,6 +74,21 @@ public class FilterEditor extends JDialog implements ListSelectionListener
         this.filter = filters.getFilter(index);
         this.filters = filters;
         this.index = index;
+        
+        // HP
+        //  Handle escape key to close the window
+        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
+        Action escapeAction = new AbstractAction()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                dispose();
+            }
+        };
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
+        put(escape, "ESCAPE");                                                  // NOI18N
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+        // END HP
         
         initComponents();
         

@@ -24,6 +24,7 @@ package org.omegat.core.threads;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.omegat.core.TransMemory;
@@ -54,7 +55,8 @@ public class SearchThread extends Thread
         m_searchText = "";	// NOI18N
         m_searching = false;
         m_tmSearch = false;
-        
+        m_sourceSet = null;
+                
         m_numFinds = 0;
         m_curFileName = "";	// NOI18N
         
@@ -75,7 +77,6 @@ public class SearchThread extends Thread
      * @param exact search for a substring
      * @param tm search in legacy and orphan TM strings too
      * @param keyword search for keywords
-     * @return 0 on successful start, 1 on failure (i.e. search in progress)
      */
     public void requestSearch(String text, String rootDir,
             boolean recursive, boolean exact, boolean tm, boolean keyword)
@@ -89,6 +90,7 @@ public class SearchThread extends Thread
             m_tmSearch = tm;
             m_keywordSearch = keyword;
             m_searching = true;
+            m_sourceSet = new HashSet();
         }
     }
     
@@ -168,6 +170,7 @@ public class SearchThread extends Thread
                     }
                     m_window.displayResults();
                     m_searching = false;
+                    m_sourceSet = null;
                 }
             }
         }
@@ -192,8 +195,11 @@ public class SearchThread extends Thread
         
         if (entryNum >= 0)
         {
-            // entries are referenced at offset 1 but stored at offset 0
-            m_window.addEntry(entryNum+1, null, (entryNum+1)+"> "+src, target);	// NOI18N
+            if (!m_sourceSet.contains(src)) { // HP, duplicate entry prevention
+                // entries are referenced at offset 1 but stored at offset 0
+                m_window.addEntry(entryNum+1, null, (entryNum+1)+"> "+src, target);	// NOI18N
+                m_sourceSet.add(src); // HP
+            }
         }
         else
         {
@@ -514,15 +520,16 @@ public class SearchThread extends Thread
         }
     }
     
-    private SearchWindow	m_window;
-    private boolean		m_searching;
-    private String		m_searchText;
-    private String		m_searchDir;
-    private boolean		m_searchRecursive;
-    private String		m_curFileName;
-    private boolean		m_exactSearch;
-    private boolean		m_tmSearch;
-    private boolean     m_keywordSearch;
+    private SearchWindow m_window;
+    private boolean		 m_searching;
+    private String		 m_searchText;
+    private String		 m_searchDir;
+    private boolean		 m_searchRecursive;
+    private String		 m_curFileName;
+    private boolean		 m_exactSearch;
+    private boolean		 m_tmSearch;
+    private boolean      m_keywordSearch;
+    private HashSet      m_sourceSet;
     
     private int			m_numFinds;
     

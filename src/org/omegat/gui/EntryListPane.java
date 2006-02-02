@@ -46,7 +46,6 @@ class EntryListPane extends JTextPane
 	public EntryListPane(MainWindow trans)
 	{
 		m_transFrame = trans;
-        m_stringSet  = new HashSet(); // HP
 		m_offsetList = new ArrayList();
 		m_entryList = new ArrayList();
 		m_stringBuf = new StringBuffer();
@@ -87,13 +86,6 @@ class EntryListPane extends JTextPane
 	// add entry text - remember what it's number is and where it ends
 	public void addEntry(int num, String preamble, String src, String loc)
 	{
-        // HP
-        // Test for duplicate entries
-        if (m_stringSet.contains(preamble))
-            return;
-        m_stringSet.add(preamble);
-        // END HP
-    
 		if (m_stringBuf.length() > 0)
 			m_stringBuf.append("---------\n");									// NOI18N
 
@@ -132,15 +124,13 @@ class EntryListPane extends JTextPane
 
 	public void reset()	
 	{
-        m_stringSet.clear(); // HP
 		m_entryList.clear();
 		m_offsetList.clear();
 		m_stringBuf.setLength(0);
 		setText("");															// NOI18N
 	}
 
-    private HashSet         m_stringSet; // HP, for prevention of duplicates
-	private StringBuffer	m_stringBuf;
+ 	private StringBuffer	m_stringBuf;
 	private ArrayList		m_entryList;
 	private ArrayList		m_offsetList;
 	private MainWindow	m_transFrame;

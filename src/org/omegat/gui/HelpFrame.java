@@ -22,8 +22,6 @@
 package org.omegat.gui;
 
 
-import javax.swing.AbstractAction;     // HP
-import javax.swing.Action;             // HP
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,6 +31,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import javax.swing.AbstractAction;     // HP
+import javax.swing.Action;             // HP
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;         // HP

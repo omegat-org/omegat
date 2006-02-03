@@ -55,7 +55,7 @@ public class SearchThread extends Thread
         m_searchText = "";	// NOI18N
         m_searching = false;
         m_tmSearch = false;
-        m_sourceSet = null;
+        m_entrySet = null; // HP
                 
         m_numFinds = 0;
         m_curFileName = "";	// NOI18N
@@ -90,7 +90,7 @@ public class SearchThread extends Thread
             m_tmSearch = tm;
             m_keywordSearch = keyword;
             m_searching = true;
-            m_sourceSet = new HashSet();
+            m_entrySet = new HashSet(); // HP
         }
     }
     
@@ -170,7 +170,7 @@ public class SearchThread extends Thread
                     }
                     m_window.displayResults();
                     m_searching = false;
-                    m_sourceSet = null;
+                    m_entrySet = null; // HP
                 }
             }
         }
@@ -195,10 +195,10 @@ public class SearchThread extends Thread
         
         if (entryNum >= 0)
         {
-            if (!m_sourceSet.contains(src)) { // HP, duplicate entry prevention
+            if (!m_entrySet.contains(src + target)) { // HP, duplicate entry prevention
                 // entries are referenced at offset 1 but stored at offset 0
                 m_window.addEntry(entryNum+1, null, (entryNum+1)+"> "+src, target);	// NOI18N
-                m_sourceSet.add(src); // HP
+                m_entrySet.add(src + target); // HP
             }
         }
         else
@@ -529,7 +529,7 @@ public class SearchThread extends Thread
     private boolean		 m_exactSearch;
     private boolean		 m_tmSearch;
     private boolean      m_keywordSearch;
-    private HashSet      m_sourceSet;
+    private HashSet      m_entrySet; // HP: keeps track of previous results, to avoid duplicate entries
     
     private int			m_numFinds;
     

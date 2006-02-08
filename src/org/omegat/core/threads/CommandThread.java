@@ -762,6 +762,7 @@ public class CommandThread extends Thread
             // since the source files may have changed since the last time
             //  they were loaded, load each string then look for it's
             //  owner
+            m_transFrame.setMessageText(OStrings.getString("CT_LOAD_TMX"));
             loadTMXFile(proj.getAbsolutePath(), "UTF-8", true); // NOI18N
         }
         catch (IOException e)

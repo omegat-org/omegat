@@ -1274,6 +1274,8 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             new_translation =  "";                                              // NOI18N
             display_string = m_curEntry.getSrcText();
+            xlPane.select(start, end);
+            xlPane.replaceSelection(display_string);
             end += display_string.length();
         }
         else
@@ -1282,9 +1284,10 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             display_string = new_translation;
         }
 
-        int end2 = xlPane.getText().length() - m_segmentEndInset;
-        xlPane.select(m_segmentStartOffset, end2);
-        xlPane.replaceSelection(display_string);
+        xlPane.select(end, xlPane.getText().length() - m_segmentEndInset);
+        xlPane.replaceSelection("");											// NOI18N
+        xlPane.select(m_segmentStartOffset, start);
+        xlPane.replaceSelection("");											// NOI18N
         
         // update memory
         if( !new_translation.equals(m_curEntry.getSrcText()) ||

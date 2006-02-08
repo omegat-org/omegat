@@ -121,12 +121,7 @@ public class LicenseDialog extends javax.swing.JDialog
         getContentPane().add(scroll, java.awt.BorderLayout.CENTER);
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        int width = 400;
-        setBounds((screenSize.width-width)/2, (screenSize.height-400)/2, width, 400);
-        javax.swing.JScrollBar hsb = scroll.getHorizontalScrollBar();
-        hsb.setValue(hsb.getMaximum());
-        width=Math.min(screenSize.width-100, Math.max(width, hsb.getMaximum())+20);
-        setBounds((screenSize.width-width)/2, (screenSize.height-400)/2, width, 400);
+        setBounds((screenSize.width-600)/2, (screenSize.height-400)/2, 600, 400);
     }
     
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) 

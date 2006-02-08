@@ -67,7 +67,8 @@ public class AboutDialog extends JDialog
 
         initComponents();
         versionLabel.setText(  OStrings.getString("ABOUTDIALOG_VERSION_PREFIX")+OStrings.VERSION);
-        abouttext.setCaretPosition(1);
+        invalidate();
+        pack();
     }
     
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
@@ -90,7 +91,6 @@ public class AboutDialog extends JDialog
         licenseButton = new javax.swing.JButton();
         okButton = new javax.swing.JButton();
         versionLabel = new javax.swing.JLabel();
-        scroll = new javax.swing.JScrollPane();
         abouttext = new javax.swing.JTextArea();
 
         getContentPane().setLayout(new java.awt.BorderLayout(5, 5));
@@ -108,9 +108,9 @@ public class AboutDialog extends JDialog
 
         buttonPanel.setLayout(new java.awt.BorderLayout());
 
-        buttonPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        buttonPanel.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(5, 5, 5, 5)));
         org.openide.awt.Mnemonics.setLocalizedText(jLabel2, OStrings.getString("ABOUTDIALOG_COPYRIGHT"));
-        jLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jLabel2.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(5, 5, 5, 5)));
         buttonPanel.add(jLabel2, java.awt.BorderLayout.WEST);
 
         org.openide.awt.Mnemonics.setLocalizedText(licenseButton, OStrings.getString("ABOUTDIALOG_LICENSE_BUTTON"));
@@ -140,22 +140,23 @@ public class AboutDialog extends JDialog
         getContentPane().add(buttonPanel, java.awt.BorderLayout.SOUTH);
 
         versionLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/omegat/gui/resources/OmegaT.gif")));
-        versionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        org.openide.awt.Mnemonics.setLocalizedText(versionLabel, OStrings.getString("ABOUTDIALOG_VERSION_PREFIX"));
+        versionLabel.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(5, 5, 5, 5)));
         getContentPane().add(versionLabel, java.awt.BorderLayout.NORTH);
 
-        scroll.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         abouttext.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         abouttext.setEditable(false);
         abouttext.setFont(versionLabel.getFont());
         abouttext.setLineWrap(true);
         abouttext.setText(OStrings.getString("ABOUTDIALOG_CONTRIBUTORS"));
         abouttext.setWrapStyleWord(true);
-        scroll.setViewportView(abouttext);
+        abouttext.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(3, 3, 3, 3)));
+        getContentPane().add(abouttext, java.awt.BorderLayout.CENTER);
 
-        getContentPane().add(scroll, java.awt.BorderLayout.CENTER);
-
+        pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-515)/2, (screenSize.height-451)/2, 515, 451);
+        java.awt.Dimension dialogSize = getSize();
+        setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
     }
     // </editor-fold>//GEN-END:initComponents
 
@@ -188,7 +189,6 @@ public class AboutDialog extends JDialog
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton licenseButton;
     private javax.swing.JButton okButton;
-    private javax.swing.JScrollPane scroll;
     private javax.swing.JLabel versionLabel;
     // End of variables declaration//GEN-END:variables
     

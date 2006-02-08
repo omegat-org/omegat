@@ -209,32 +209,6 @@ public class ProjectPropertiesDialog extends JDialog
         dirsBox.add(bSrc);
         dirsBox.add(m_srcRootField);
 
-        JLabel m_locRootLabel = new JLabel();
-        Mnemonics.setLocalizedText(m_locRootLabel, OStrings.PP_LOC_ROOT);
-        Box bLoc = Box.createHorizontalBox();
-        bLoc.setBorder(emptyBorder);
-        bLoc.add(m_locRootLabel);
-        bLoc.add(Box.createHorizontalGlue());
-        JButton m_locBrowse = new JButton();
-        Mnemonics.setLocalizedText(m_locBrowse, OStrings.PP_BUTTON_BROWSE_TAR);
-        bLoc.add(m_locBrowse);
-        final JTextField m_locRootField = new JTextField();
-        dirsBox.add(bLoc);
-        dirsBox.add(m_locRootField);
-
-        JLabel m_glosRootLabel = new JLabel();
-        Mnemonics.setLocalizedText(m_glosRootLabel, OStrings.PP_GLOS_ROOT);
-        Box bGlos = Box.createHorizontalBox();
-        bGlos.setBorder(emptyBorder);
-        bGlos.add(m_glosRootLabel);
-        bGlos.add(Box.createHorizontalGlue());
-        JButton m_glosBrowse = new JButton();
-        Mnemonics.setLocalizedText(m_glosBrowse, OStrings.PP_BUTTON_BROWSE_GL);
-        bGlos.add(m_glosBrowse);
-        final JTextField m_glosRootField = new JTextField();
-        dirsBox.add(bGlos);
-        dirsBox.add(m_glosRootField);
-
         JLabel m_tmRootLabel = new JLabel();
         Mnemonics.setLocalizedText(m_tmRootLabel, OStrings.PP_TM_ROOT);
         Box bTM = Box.createHorizontalBox();
@@ -248,6 +222,32 @@ public class ProjectPropertiesDialog extends JDialog
         dirsBox.add(bTM);
         dirsBox.add(m_tmRootField);
         
+        JLabel m_glosRootLabel = new JLabel();
+        Mnemonics.setLocalizedText(m_glosRootLabel, OStrings.PP_GLOS_ROOT);
+        Box bGlos = Box.createHorizontalBox();
+        bGlos.setBorder(emptyBorder);
+        bGlos.add(m_glosRootLabel);
+        bGlos.add(Box.createHorizontalGlue());
+        JButton m_glosBrowse = new JButton();
+        Mnemonics.setLocalizedText(m_glosBrowse, OStrings.PP_BUTTON_BROWSE_GL);
+        bGlos.add(m_glosBrowse);
+        final JTextField m_glosRootField = new JTextField();
+        dirsBox.add(bGlos);
+        dirsBox.add(m_glosRootField);
+
+        JLabel m_locRootLabel = new JLabel();
+        Mnemonics.setLocalizedText(m_locRootLabel, OStrings.PP_LOC_ROOT);
+        Box bLoc = Box.createHorizontalBox();
+        bLoc.setBorder(emptyBorder);
+        bLoc.add(m_locRootLabel);
+        bLoc.add(Box.createHorizontalGlue());
+        JButton m_locBrowse = new JButton();
+        Mnemonics.setLocalizedText(m_locBrowse, OStrings.PP_BUTTON_BROWSE_TAR);
+        bLoc.add(m_locBrowse);
+        final JTextField m_locRootField = new JTextField();
+        dirsBox.add(bLoc);
+        dirsBox.add(m_locRootField);
+
         centerBox.add(dirsBox);
         
         getContentPane().add(centerBox, "Center");                                      // NOI18N

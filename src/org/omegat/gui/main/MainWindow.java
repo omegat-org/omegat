@@ -1125,8 +1125,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         
         m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
         
-        setMessageText(OStrings.TF_LOADING_FILE + m_curEntry.getSrcFile().name);
-        Thread.yield();	// let UI update
         m_xlFirstEntry = m_curEntry.getFirstInFile();
         m_xlLastEntry = m_curEntry.getLastInFile();
         
@@ -1155,7 +1153,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         xlPane.setText(textBuf.toString());
         
         setMessageText("");														// NOI18N
-        Thread.yield();
     }
     
     ///////////////////////////////////////////////////////////////
@@ -1264,6 +1261,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             return;
         entryActivated = false;
         
+        // Making selection invisible for performance reasons
+        xlPane.getCaret().setSelectionVisible(false);
+        
         int start = m_segmentStartOffset + m_sourceDisplayLength +
                 OStrings.TF_CUR_SEGMENT_START.length();
         int end = xlPane.getText().length() - m_segmentEndInset -
@@ -1274,8 +1274,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             new_translation =  "";                                              // NOI18N
             display_string = m_curEntry.getSrcText();
-            xlPane.select(start, end);
-            xlPane.replaceSelection(display_string);
             end += display_string.length();
         }
         else
@@ -1283,23 +1281,10 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             new_translation = xlPane.getText().substring(start, end);
             display_string = new_translation;
         }
-        
-        xlPane.select(start, end);
-        MutableAttributeSet mattr;
-        mattr = new SimpleAttributeSet();
-        StyleConstants.setForeground(mattr, Color.darkGray);
-        xlPane.setCharacterAttributes(mattr, true);
-        
-        try
-        {
-            int end2 = xlPane.getText().length() - m_segmentEndInset;
-            xlPane.select(end, end2);
-        }
-        catch( Exception e ) {}
-        
-        xlPane.replaceSelection("");											// NOI18N
-        xlPane.select(m_segmentStartOffset, start);
-        xlPane.replaceSelection("");											// NOI18N
+
+        int end2 = xlPane.getText().length() - m_segmentEndInset;
+        xlPane.select(m_segmentStartOffset, end2);
+        xlPane.replaceSelection(display_string);
         
         // update memory
         if( !new_translation.equals(m_curEntry.getSrcText()) ||
@@ -1355,6 +1340,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             }
         }
         xlPane.cancelUndo();
+        
+        // Making selection visible again after updates for performance reasons
+        xlPane.getCaret().setSelectionVisible(true);
     }
     
     /**
@@ -1405,16 +1393,20 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             + num + startStr.substring(zero+1);
         }
         
-  MutableAttributeSet mattr;
+        SimpleAttributeSet bold_attrs = new SimpleAttributeSet();
+        StyleConstants.setBold(bold_attrs, true);
+        
+        // Making selection invisible for performance reasons
+        xlPane.getCaret().setSelectionVisible(false);
+        
         // append to end of segment first because this operation is done
         //	by reference to end of file which will change after insert
         int inset = paneLen-m_segmentEndInset;
-        xlPane.select(inset, inset);
+        xlPane.setCaretPosition(inset);
         xlPane.replaceSelection(endStr);
-        xlPane.select(inset+1, inset+endStr.length());
-        mattr = new SimpleAttributeSet();
-        StyleConstants.setBold(mattr, true);
-        xlPane.setCharacterAttributes(mattr, true);
+        xlPane.setCaretPosition(inset+1);
+        xlPane.moveCaretPosition(inset+endStr.length());
+        xlPane.setCharacterAttributes(bold_attrs, true);
         
         String translation = m_curEntry.getTranslation();
         if( translation==null || translation.length()==0 )
@@ -1428,8 +1420,11 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             //      http://sourceforge.net/support/tracker.php?aid=1075972
             if( Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT) )
             {
-                xlPane.select(m_segmentStartOffset, m_segmentStartOffset + translation.length());
-                xlPane.replaceSelection("");                                    // NOI18N
+                if( translation.length()>0 )
+                {
+                    xlPane.select(m_segmentStartOffset, m_segmentStartOffset + translation.length());
+                    xlPane.replaceSelection("");                                    // NOI18N
+                }
                 translation = "";                                               // NOI18N
             }
             
@@ -1446,7 +1441,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                     NearString thebest = (NearString)near.get(0);
                     if( thebest.score >= percentage )
                     {
-                        xlPane.select(m_segmentStartOffset, m_segmentStartOffset + translation.length());
+                        xlPane.setCaretPosition(m_segmentStartOffset);
+                        if( translation.length()>0 )
+                            xlPane.moveCaretPosition(m_segmentStartOffset + translation.length());
                         String toinsert = Preferences.getPreferenceDefault(
                                 Preferences.BEST_MATCH_EXPLANATORY_TEXT,
                                 OStrings.getString("WF_DEFAULT_PREFIX"));
@@ -1457,23 +1454,21 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             }
         }
         
-        xlPane.select(m_segmentStartOffset, m_segmentStartOffset);
+        xlPane.setCaretPosition(m_segmentStartOffset);
         String insertText = srcText + startStr;
         xlPane.replaceSelection(insertText);
-        xlPane.select(m_segmentStartOffset, m_segmentStartOffset +
-                insertText.length() - 1);
-        xlPane.setCharacterAttributes(mattr, true);
         
+        xlPane.select(m_segmentStartOffset, m_segmentStartOffset + insertText.length() - 1);
+        xlPane.setCharacterAttributes(bold_attrs, true);
+        
+        // other color options
+        xlPane.select(m_segmentStartOffset, m_segmentStartOffset + insertText.length() - startStr.length());
         // background color
         Color background = new Color(192, 255, 192);
-        // other color options
-        xlPane.select(m_segmentStartOffset, m_segmentStartOffset +
-                insertText.length() - startStr.length());
-        mattr = new SimpleAttributeSet();
-        StyleConstants.setBackground(mattr, background);
-        xlPane.setCharacterAttributes(mattr, false);
-        
-        // TODO XXX format source text if there is near match
+        SimpleAttributeSet bg_attrs = new SimpleAttributeSet();
+        StyleConstants.setBackground(bg_attrs, background);
+        xlPane.setCharacterAttributes(bg_attrs, false);
+
         if (m_curEntry.getSrcFile().name.compareTo(m_activeFile) != 0)
         {
             m_activeFile = m_curEntry.getSrcFile().name;
@@ -1563,6 +1558,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             m_docReady = true;
         }
         xlPane.cancelUndo();
+        
+        // Making selection visible now for performance reasons
+        xlPane.getCaret().setSelectionVisible(true);
     }
     
     /**

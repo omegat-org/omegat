@@ -72,9 +72,6 @@ public class OStrings
     public static final String TF_NOTICE_OK_TAGS	= getString("TF_NOTICE_OK_TAGS");
     public static final String TF_NOTICE_TITLE_TAGS	= getString("TF_NOTICE_TITLE_TAGS");
     
-    public static final String TF_LOADING_FILE         = getString("TF_LOADING_FILE");
-
-    
     // NOTE: segment start is assumed to contain "0000" string to overwrite
     //	with entry number.  If zeros not detected, entry number will not be
     //	displayed

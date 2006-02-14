@@ -40,7 +40,7 @@ public class XMLBlock
 	{
 		m_text = "";	// NOI18N
 		m_isClose = false;
-		m_isEmpty = false;
+		m_isStandalone = false;
 		m_isComment = false;
 		m_isTag = false;
 		m_typeChar = 0;
@@ -108,8 +108,10 @@ public class XMLBlock
 		return m_shortcut;	
 	}
 	
-	public void setCloseFlag()	{	m_isClose = true; m_isEmpty = false;	}
-	public void setEmptyFlag()	{	m_isEmpty = true; m_isClose = false;	}
+    /** Sets that this block is a closing tag. */
+	public void setCloseFlag()	{	m_isClose = true; m_isStandalone = false;	}
+    /** Sets that this block is a stand-alone tag. */
+	public void setStandaloneFlag()	{	m_isStandalone = true; m_isClose = false;	}
 
     public void setComment()
 	{
@@ -117,7 +119,7 @@ public class XMLBlock
 		setTypeChar('!');
 		m_isComment = true;
 		m_isClose = false;
-		m_isEmpty = false;
+		m_isStandalone = false;
 	}
 	
 	public void setTagName(String name)
@@ -134,10 +136,15 @@ public class XMLBlock
 	/////////////////////////////////////////////////
 	// data retrieval functions
 	
+    /** Whether this block is a chunk of text (not a tag). */
 	public boolean hasText()	{ return m_hasText;		}
+    /** Whether this block is a tag. */
 	public boolean isTag()		{ return m_isTag;		}
-	public boolean isEmpty()	{ return m_isEmpty;		}
+    /** Whether this block is a standalone tag. */
+	public boolean isStandalone()	{ return m_isStandalone;		}
+    /** Whether this is a closing tag. */
 	public boolean isClose()	{ return m_isClose;		}
+    /** Whether this block is a comment. */
 	public boolean isComment()	{ return m_isComment;	}
 
     /**
@@ -217,7 +224,7 @@ public class XMLBlock
 				}
 			}
 
-			if (m_isEmpty)
+			if (m_isStandalone)
 				tag += " /";	// NOI18N
 
 			tag += '>';	// NOI18N
@@ -279,10 +286,30 @@ public class XMLBlock
 	private String	m_shortcut;	// user display for tag
 	private boolean		m_isClose;
 	private boolean		m_isComment;
-	private boolean		m_isEmpty;
+	private boolean		m_isStandalone;
 	private boolean		m_isTag;
 	private boolean		m_hasText;
 	private char		m_typeChar;
 	private ArrayList	m_attrList;
 
+    /** Returns a string representation for debugging purposes mainly. */
+    public String toString()
+    {
+        return getText();
+    }
+
+    /** holds the shortcut number of this tag. */
+    private int shortcutNumber;
+
+    /** What's the shortcut number of this tag. */
+    public int getShortcutNumber()
+    {
+        return this.shortcutNumber;
+    }
+
+    /** Sets the shortcut number of this tag. */
+    public void setShortcutNumber(int shortcutNumber)
+    {
+        this.shortcutNumber = shortcutNumber;
+    }
 }

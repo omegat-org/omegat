@@ -246,15 +246,11 @@ public abstract class XMLAbstractFilter extends AbstractFilter
         if (m_preTextList.size() > 0)
             writeEntry(xml, outfile, null);
     }
-    
+
+    /** Collects tags together, translates some text and writes it to target file. */
     private void writeEntry(XMLStreamReader xmlsr, BufferedWriter m_outFile, XMLBlock breaker) 
             throws IOException
     {
-        ListIterator it;
-        String str;
-        XMLBlock blk;
-        int ctr = 1;
-        
         // if there's nothing interesting and no outfile, ignore it
         if (m_textList.size() == 0 && m_outFile == null)
         {
@@ -268,39 +264,61 @@ public abstract class XMLAbstractFilter extends AbstractFilter
         // write out ignored leading tags
         if (m_preTextList.size() > 0 && m_outFile != null)
         {
-            it = m_preTextList.listIterator();
+            ListIterator it = m_preTextList.listIterator();
             while (it.hasNext())
             {
-                blk = (XMLBlock) it.next();
-                str = blk.getText();
+                XMLBlock blk = (XMLBlock) it.next();
+                String str = blk.getText();
                 if (m_compressWhitespace)
                     str += "\n";	// NOI18N
                 m_outFile.write(str, 0, str.length());
             }
         }
         
+        // process display text
         if (m_textList.size() > 0)
         {
-            // process display text
-            it = m_textList.listIterator();
-            StringBuffer out = new StringBuffer(256);
-            while (it.hasNext())
+            int tag_number = 0;
+            StringBuffer out = new StringBuffer();
+            int len = m_textList.size();
+            for(int i=0; i<len; i++)
             {
-                blk = (XMLBlock) it.next();
-                // need to convert non-tag chars to control values
-                //	when writing
-                if (blk.isTag() || blk.isComment())
+                XMLBlock blk = (XMLBlock) m_textList.get(i);
+                // We need to "shorcutize" tags
+                if (blk.isTag())
                 {
-                    String sh = blk.getShortcut();
-                    String display;
-                    if (sh != null && !sh.equals(""))	// NOI18N
+                    boolean increment_tag_number = true;
+                    int this_tag_number = tag_number;
+                    // if this is a closing tag, trying to lookup
+                    if( blk.isClose() )
                     {
-                        display = blk.getShortcut() + ctr++;
-                        m_tagMap.put(display, blk.getText());
-                        display = "<" + display + ">";	// NOI18N
+                        int depth = 1;
+                        for(int j=i-1; j>=0; j--)
+                        {
+                            XMLBlock open = (XMLBlock) m_textList.get(j);
+                            if( open.isTag() && !open.isStandalone() &&
+                                    open.getTagName().equals(blk.getTagName()) )
+                            {
+                                if( open.isClose() )
+                                    depth++;
+                                else
+                                    depth--;
+                                if( depth==0 )
+                                {
+                                    this_tag_number = open.getShortcutNumber();
+                                    increment_tag_number = false;
+                                    break;
+                                }
+                            }
+                        }
                     }
-                    else
-                        display = blk.getText();
+                    if( increment_tag_number )
+                        tag_number++;
+                    
+                    blk.setShortcutNumber(this_tag_number);
+                    String display = blk.getShortcut() + this_tag_number;
+                    m_tagMap.put(display, blk.getText());
+                    display = "<" + display + ">";	// NOI18N
                     out.append(display);
                 }
                 else
@@ -316,17 +334,18 @@ public abstract class XMLAbstractFilter extends AbstractFilter
         // write out ignored trailing tags
         if (m_postTextList.size() > 0 && m_outFile != null)
         {
-            it = m_postTextList.listIterator();
+            ListIterator it = m_postTextList.listIterator();
             while (it.hasNext())
             {
-                blk = (XMLBlock) it.next();
-                str = blk.getText();
+                XMLBlock blk = (XMLBlock) it.next();
+                String str = blk.getText();
                 m_outFile.write(str, 0, str.length());
             }
         }
         
         if (m_outFile != null && breaker != null)
         {
+            String str;
             if (m_compressWhitespace)
                 str = "\n" + breaker.getText();		// NOI18N
             else

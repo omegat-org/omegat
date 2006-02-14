@@ -723,7 +723,7 @@ public class XMLStreamReader
         // for now, just throw a parse error
         String data = OStrings.getString("XSR_ERROR_TAG_NAME") +
                 blk.getTagName() + " ";	// NOI18N
-        if (blk.isEmpty())
+        if (blk.isStandalone())
             data += OStrings.getString("XSR_ERROR_EMPTY_TAG");
         else if (blk.isClose())
             data += OStrings.getString("XSR_ERROR_CLOSE_TAG");
@@ -747,7 +747,7 @@ public class XMLStreamReader
         final int state_start				= 1;
         final int state_buildName			= 2;
         final int state_setCloseFlag		= 3;
-        final int state_setEmptyFlag		= 4;
+        final int state_setStandaloneFlag		= 4;
         final int state_attrStandby			= 5;
         final int state_buildAttr			= 6;
         final int state_transitionFromAttr	= 7;
@@ -814,10 +814,10 @@ public class XMLStreamReader
                             break;
                             
                         case type_slash:
-                            // name done - empty tag slash encountered
+                            // name done - standalone tag slash encountered
                             blk.setTagName(name);
-                            blk.setEmptyFlag();
-                            state = state_setEmptyFlag;
+                            blk.setStandaloneFlag();
+                            state = state_setStandaloneFlag;
                             break;
                             
                         case type_gt:
@@ -855,7 +855,7 @@ public class XMLStreamReader
                     }
                     break;
                     
-                case state_setEmptyFlag:
+                case state_setStandaloneFlag:
                     switch (type)
                     {
                         case type_ws:
@@ -863,7 +863,7 @@ public class XMLStreamReader
                             break;
                             
                         case type_gt:
-                            // all done with empty tag
+                            // all done with standalone tag
                             state = state_finish;
                             break;
                             
@@ -896,8 +896,8 @@ public class XMLStreamReader
                             break;
                             
                         case type_slash:
-                            blk.setEmptyFlag();
-                            state = state_setEmptyFlag;
+                            blk.setStandaloneFlag();
+                            state = state_setStandaloneFlag;
                             break;
                             
                         default:
@@ -1003,9 +1003,9 @@ public class XMLStreamReader
                             break;
                             
                         case type_slash:
-                            // empty tag with attributes
-                            blk.setEmptyFlag();
-                            state = state_setEmptyFlag;
+                            // standalone tag with attributes
+                            blk.setStandaloneFlag();
+                            state = state_setStandaloneFlag;
                             break;
                             
                         case type_gt:
@@ -1159,7 +1159,7 @@ public class XMLStreamReader
     /*
      * Returns the list of blocks between the specified block and
      * its matching close.
-     * If the provided block is not an empty tag, or if there are
+     * If the provided block is not a standalone tag, or if there are
      * no elements between open and close, a null is returned.
      */
     public ArrayList closeBlock(XMLBlock block, boolean includeTerminationBlock) throws TranslationException
@@ -1170,8 +1170,8 @@ public class XMLStreamReader
         if (block == null)
             return lst;
         
-        // if block is empty, return straight away
-        if (block.isEmpty())
+        // if block is a standalone tag, return straight away
+        if (block.isStandalone())
             return lst;
         
         // start search

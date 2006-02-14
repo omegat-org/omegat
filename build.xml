@@ -49,11 +49,40 @@
         <ant dir="addons/sentseg-tmx" target="clean" inheritall="false" />
     </target>
     
-    <!-- Creates a zip with all localizable NetBeans resources -->
+    <!-- Creates a zip with two localization packs -->
     <target name="l10n-pack" depends="init" description="Build a distribution of localizable files">
         <mkdir dir="dist2"/>
-        <zip destfile="dist2/OmegaT_l10n_${version}.zip" basedir="." 
-                includes="docs/en/** src/**/Bundle.properties"/>
+        <property name="l10n.project.dir" value="release/l10n-project"/>
+        <property name="l10n.dir" value="${build.dir}/l10n"/>
+        <mkdir dir="${l10n.dir}"/>
+        
+        <!-- minimal -->
+        <property name="l10n.min" value="OmegaT_l10n_${version}_minimal"/>
+        <property name="l10n.min.dir" value="${l10n.dir}/${l10n.min}"/>
+        <mkdir dir="${l10n.min.dir}"/>
+        <copy todir="${l10n.min.dir}">
+            <fileset dir="${l10n.project.dir}"/>
+        </copy>
+        <copy todir="${l10n.min.dir}/source">
+            <fileset dir="." 
+                    includes="docs/en/InstantStart_NoNav.html src/**/Bundle.properties"/>
+        </copy>
+        <zip destfile="dist2/${l10n.min}.zip" 
+                basedir="${l10n.dir}" includes="${l10n.min}/**" />
+                
+        <!-- full -->
+        <property name="l10n.max" value="OmegaT_l10n_${version}_full"/>
+        <property name="l10n.max.dir" value="${l10n.dir}/${l10n.max}"/>
+        <mkdir dir="${l10n.max.dir}"/>
+        <copy todir="${l10n.max.dir}">
+            <fileset dir="${l10n.project.dir}"/>
+        </copy>
+        <copy todir="${l10n.max.dir}/source">
+            <fileset dir="." 
+                    includes="docs/en/** src/**/Bundle.properties"/>
+        </copy>
+        <zip destfile="dist2/${l10n.max}.zip" 
+                basedir="${l10n.dir}" includes="${l10n.max}/**" />
     </target>
     
     <!-- Builds a source distribution -->    

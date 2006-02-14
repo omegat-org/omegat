@@ -884,7 +884,10 @@ public class CommandThread extends Thread
         {
             strEntryList.clear();
             fname = fileList[i];
-            ext = fname.substring(fname.lastIndexOf('.'));
+            int lastdot = fname.lastIndexOf('.');
+            if (lastdot<0)
+                lastdot = fname.length();
+            ext = fname.substring(lastdot);
             fname = m_config.getTMRoot();
             if (!fname.endsWith(File.separator))
                 fname += File.separator;

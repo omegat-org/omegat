@@ -251,101 +251,184 @@ public abstract class XMLAbstractFilter extends AbstractFilter
     private void writeEntry(XMLStreamReader xmlsr, BufferedWriter m_outFile, XMLBlock breaker) 
             throws IOException
     {
-        // if there's nothing interesting and no outfile, ignore it
-        if (m_textList.size() == 0 && m_outFile == null)
-        {
-            m_preTextList.clear();
-            m_postTextList.clear();
-            m_tagMap.clear();
-            
-            return;
-        }
+        int pre_len = m_preTextList.size();
+        int end_ignored = pre_len;
+        int text_len = m_textList.size();
+        int post_len = m_postTextList.size();
         
-        // write out ignored leading tags
-        if (m_preTextList.size() > 0 && m_outFile != null)
+        ArrayList all = new ArrayList();
+        all.addAll(m_preTextList);
+        all.addAll(m_textList);
+        int len = all.size();
+        
+        // detecting the first starting tag in m_preTextList
+        // that has its ending in the m_textList
+        // all before this "first good" are simply writen out
+        
+        int firstgoodlimit = pre_len;
+        int firstgood = 0;
+        while (firstgood<firstgoodlimit)
         {
-            ListIterator it = m_preTextList.listIterator();
-            while (it.hasNext())
+            XMLBlock good = (XMLBlock) all.get(firstgood); 
+            if (!good.isTag())
             {
-                XMLBlock blk = (XMLBlock) it.next();
-                String str = blk.getText();
-                if (m_compressWhitespace)
-                    str += "\n";	// NOI18N
-                m_outFile.write(str, 0, str.length());
+                firstgood++;
+                continue;
             }
+            // trying to test
+            int recursion = 1;
+            boolean found = false;
+            for (int i=firstgood+1; i<len; i++)
+            {
+                XMLBlock cand = (XMLBlock) all.get(i);
+                if (cand.getTagName().equals(good.getTagName()))
+                {
+                    if (!cand.isClose())
+                        recursion++;
+                    else
+                    {
+                        recursion--;
+                        if (recursion==0)
+                        {
+                            if (i>=firstgoodlimit)
+                                found = true;
+                                // we've found an ending tag for this "good one"
+                            break;
+                        }
+                    }
+                }
+            }
+            // if we coud find an ending, 
+            // this is a "good one"
+            if (found)
+                break;
+            firstgood++;
         }
         
-        // process display text
-        if (m_textList.size() > 0)
+        // writing out everything before the "first good" tag
+        for (int i=0; i<firstgood; i++)
         {
-            int tag_number = 0;
-            StringBuffer out = new StringBuffer();
-            int len = m_textList.size();
-            for(int i=0; i<len; i++)
+            XMLBlock blk = (XMLBlock) all.get(i);
+            String str = blk.getText();
+            if (m_compressWhitespace)
+                str += "\n";	// NOI18N
+            m_outFile.write(str, 0, str.length());
+        }
+        
+        // detecting the last ending tag in 'afters'
+        // that has its starting in the paragraph
+        // all after this "last good" is simply writen out
+        int lastgoodlimit = len-1;
+        all.addAll(m_postTextList);
+        len = all.size();
+        int lastgood = len-1;
+        
+        while (lastgood>lastgoodlimit)
+        {
+            XMLBlock good = (XMLBlock) all.get(lastgood); 
+            if (!good.isTag())
             {
-                XMLBlock blk = (XMLBlock) m_textList.get(i);
-                // We need to "shorcutize" tags
-                if (blk.isTag())
+                lastgood--;
+                continue;
+            }
+            // trying to test
+            int recursion = 1;
+            boolean found = false;
+            for (int i=lastgood-1; i>=firstgoodlimit; i--)
+            {
+                XMLBlock cand = (XMLBlock) all.get(i);
+                if (cand.getTagName().equals(good.getTagName()))
                 {
-                    boolean increment_tag_number = true;
-                    int this_tag_number = tag_number;
-                    // if this is a closing tag, trying to lookup
-                    if( blk.isClose() )
+                    if (cand.isClose())
+                        recursion++;
+                    else
                     {
-                        int depth = 1;
-                        for(int j=i-1; j>=0; j--)
+                        recursion--;
+                        if (recursion==0)
                         {
-                            XMLBlock open = (XMLBlock) m_textList.get(j);
-                            if( open.isTag() && !open.isStandalone() &&
-                                    open.getTagName().equals(blk.getTagName()) )
+                            if (i<=lastgoodlimit)
+                                found = true;
+                                // we've found a starting tag for this "good one"
+                            break;
+                        }
+                    }
+                }
+            }
+            // if we coud find a starting, 
+            // this is a "good one"
+            if( found )
+                break;
+            lastgood--;
+        }
+        
+        // appending all tags starting from "first good",
+        // and until "last good" one to paragraph text
+        int tag_number = 0;
+        StringBuffer out = new StringBuffer();
+        for(int i=firstgood; i<=lastgood; i++)
+        {
+            XMLBlock blk = (XMLBlock) all.get(i);
+            // We need to "shorcutize" tags
+            if (blk.isTag())
+            {
+                boolean increment_tag_number = true;
+                int this_tag_number = tag_number;
+                // if this is a closing tag, trying to lookup
+                if( blk.isClose() )
+                {
+                    int depth = 1;
+                    for(int j=i-1; j>=0; j--)
+                    {
+                        XMLBlock open = (XMLBlock) all.get(j);
+                        if( open.isTag() && !open.isStandalone() &&
+                                open.getTagName().equals(blk.getTagName()) )
+                        {
+                            if( open.isClose() )
+                                depth++;
+                            else
+                                depth--;
+                            if( depth==0 )
                             {
-                                if( open.isClose() )
-                                    depth++;
-                                else
-                                    depth--;
-                                if( depth==0 )
-                                {
-                                    this_tag_number = open.getShortcutNumber();
-                                    increment_tag_number = false;
-                                    break;
-                                }
+                                this_tag_number = open.getShortcutNumber();
+                                increment_tag_number = false;
+                                break;
                             }
                         }
                     }
-                    if( increment_tag_number )
-                        tag_number++;
-                    
-                    blk.setShortcutNumber(this_tag_number);
-                    String display = blk.getShortcut() + this_tag_number;
-                    if( blk.isStandalone() )
-                        display+="/";
-                    m_tagMap.put(display, blk.getText());
-                    display = "<" + display + ">";	// NOI18N
-                    out.append(display);
                 }
-                else
-                {
-                    out.append(blk.getText());
-                }
+                if( increment_tag_number )
+                    tag_number++;
+
+                blk.setShortcutNumber(this_tag_number);
+                String display = blk.getShortcut() + this_tag_number;
+                if( blk.isStandalone() )
+                    display+="/";
+                m_tagMap.put(display, blk.getText());
+                display = "<" + display + ">";	// NOI18N
+                out.append(display);
             }
-            String translation = processEntry(out.toString());
-            String formatted = formatString(xmlsr, translation);
-            m_outFile.write(formatted);
-        }
-        
-        // write out ignored trailing tags
-        if (m_postTextList.size() > 0 && m_outFile != null)
-        {
-            ListIterator it = m_postTextList.listIterator();
-            while (it.hasNext())
+            else
             {
-                XMLBlock blk = (XMLBlock) it.next();
-                String str = blk.getText();
-                m_outFile.write(str, 0, str.length());
+                out.append(blk.getText());
             }
         }
         
-        if (m_outFile != null && breaker != null)
+        // sending to core
+        String translation = processEntry(out.toString());
+        
+        // reformatting and writing out
+        String formatted = formatString(xmlsr, translation);
+        m_outFile.write(formatted);
+        
+        // writing out all ignored trailing tags
+        for (int i=lastgood+1; i<len; i++)
+        {
+            XMLBlock blk = (XMLBlock) all.get(i);
+            String str = blk.getText();
+            m_outFile.write(str, 0, str.length());
+        }
+        
+        if (breaker!=null)
         {
             String str;
             if (m_compressWhitespace)

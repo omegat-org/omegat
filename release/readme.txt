@@ -1,5 +1,5 @@
 ==============================================================================
-OmegaT 1.6 RC6 Read Me file
+OmegaT 1.6 RC7 Read Me file
 
   1.  Information about OmegaT
   2.  What is OmegaT?
@@ -123,7 +123,6 @@ Other contributions by
     Sabine Cretella
     Dmitri Gabinski
     Jean-Christophe Helary (current documentation manager)
-    Raymond Martin
     Samuel Murray
     Marc Prior (current localization manager)
     and many, many more very helpful people
@@ -175,12 +174,12 @@ New UI features (comparing to 1.0 OmegaT series):
      Ability to jump to the next untranslated segment
      Rich customization of Format Filters behaviour
      User-customizable Segmentation
-     Match/Glossary Window has a Split Pane
+     Match/Glossary Window is united by a draggable split pane
 
 File formats supported:
      Plain text
      HTML and XHTML
-     OpenDocument / OpenOffice
+     OpenDocument / OpenOffice.org
      Java resource bundles (.properties)
 
 Core changes:
@@ -189,5 +188,6 @@ Core changes:
      Refactored code with more comments
      Windows installer
      Attributes of HTML tags are translatable
+     Full TMX 1.1-1.4b Level 1 compatibility
 
 ==============================================================================

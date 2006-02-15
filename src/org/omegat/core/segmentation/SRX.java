@@ -219,6 +219,7 @@ public class SRX implements Serializable
         // exceptions first
         srules = new ArrayList();
         srules.add(new Rule(false, "\\.\\.\\.", "\\s+\\P{Lu}"));                // NOI18N
+        srules.add(new Rule(false, "etc\\.", "\\s+\\P{Lu}"));                   // NOI18N
         
         srules.add(new Rule(false, "Dr\\.", "\\s"));                            // NOI18N
         srules.add(new Rule(false, "U\\.K\\.", "\\s"));                         // NOI18N

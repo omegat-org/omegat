@@ -193,6 +193,7 @@ public class SRX implements Serializable
     private static final String DEFAULT_RULES_PATTERN = ".*";                   // NOI18N
     private static final String JAPANESE_RULES_PATTERN = "JA.*";                // NOI18N
     private static final String RUSSIAN_RULES_PATTERN = "RU.*";                 // NOI18N
+    private static final String GERMAN_RULES_PATTERN = "DE.*";                 // NOI18N
     
     /**
      * Initializes default rules.
@@ -201,48 +202,29 @@ public class SRX implements Serializable
     {
         List srules;
 
+        // Extensive set of German exceptions
+        getMappingRules().add(new MapRule(
+                OStrings.getString("CORE_SRX_RULES_NAME_GERMAN"),
+                GERMAN_RULES_PATTERN, 
+                DefaultRules.german()));
+        
         // Russian as an example
-        srules = new ArrayList();
-        srules.add(new Rule(false, "(?i)\u0442\\.\u0435\\.", "\\s"));           // NOI18N
-        srules.add(new Rule(false, "(?i)\u0442\\.\u043A\\.", "\\s"));           // NOI18N
         getMappingRules().add(new MapRule(
                 OStrings.getString("CORE_SRX_RULES_NAME_RUSSIAN"),
-                RUSSIAN_RULES_PATTERN, srules));
+                RUSSIAN_RULES_PATTERN, 
+                DefaultRules.russian()));
         
-        // Japanese first
-        srules = new ArrayList();
-        srules.add(new Rule(true, "\u3002", "."));                              // NOI18N
+        // now Japanese
         getMappingRules().add(new MapRule(
                 OStrings.getString("CORE_SRX_RULES_NAME_JAPANESE"),
-                JAPANESE_RULES_PATTERN, srules));
+                JAPANESE_RULES_PATTERN, 
+                DefaultRules.japanese()));
 
-        // exceptions first
-        srules = new ArrayList();
-        srules.add(new Rule(false, "\\.\\.\\.", "\\s+\\P{Lu}"));                // NOI18N
-        srules.add(new Rule(false, "etc\\.", "\\s+\\P{Lu}"));                   // NOI18N
-        
-        srules.add(new Rule(false, "Dr\\.", "\\s"));                            // NOI18N
-        srules.add(new Rule(false, "U\\.K\\.", "\\s"));                         // NOI18N
-        srules.add(new Rule(false, "M\\.", "\\s"));                             // NOI18N
-        srules.add(new Rule(false, "Mr\\.", "\\s"));                            // NOI18N
-        srules.add(new Rule(false, "Mrs\\.", "\\s"));                           // NOI18N
-        srules.add(new Rule(false, "Ms\\.", "\\s"));                            // NOI18N
-        srules.add(new Rule(false, "Prof\\.", "\\s"));                          // NOI18N
-        
-        srules.add(new Rule(false, "(?i)e\\.g\\.", "\\s"));                         // NOI18N
-        srules.add(new Rule(false, "(?i)i\\.e\\.", "\\s"));                         // NOI18N
-        srules.add(new Rule(false, "resp\\.", "\\s"));                          // NOI18N
-        srules.add(new Rule(false, "tel\\.", "\\s"));                           // NOI18N
-
-        // here goes the rule
-        srules.add(new Rule(true, "[\\.\\?\\!]+", "\\s"));                      // NOI18N
-        // special handling for BR tag to segmenent on it
-        // idea by Jean-Christophe Helary
-        srules.add(new Rule(true, "<br\\d+/?>", "."));                            // NOI18N
-
+        // English (default) goes last
         getMappingRules().add(new MapRule(
                 OStrings.getString("CORE_SRX_DEFAULT_RULES_NAME"),
-                DEFAULT_RULES_PATTERN, srules));
+                DEFAULT_RULES_PATTERN, 
+                DefaultRules.english()));
 
     }
         

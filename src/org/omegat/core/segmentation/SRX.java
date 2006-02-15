@@ -237,7 +237,7 @@ public class SRX implements Serializable
         srules.add(new Rule(true, "[\\.\\?\\!]+", "\\s"));                      // NOI18N
         // special handling for BR tag to segmenent on it
         // idea by Jean-Christophe Helary
-        srules.add(new Rule(true, "<br\\d+>", "."));                            // NOI18N
+        srules.add(new Rule(true, "<br\\d+/?>", "."));                            // NOI18N
 
         getMappingRules().add(new MapRule(
                 OStrings.getString("CORE_SRX_DEFAULT_RULES_NAME"),

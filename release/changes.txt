@@ -8,10 +8,9 @@
 
 ----------------------------------------------------------------------
 
-1.6.0 Show-Stopper Not Yet in 1.6.RC7:
-
- - Don't add encoding declaration to HTML files without headers
-   http://sourceforge.net/support/tracker.php?aid=1406630
+Not yet fixed in full:
+ - Performance issue with Huge files
+   http://sourceforge.net/support/tracker.php?aid=1427669
 
 1.6.RC7
 
@@ -23,10 +22,10 @@
  - Esc to cancel all dialogs
    http://sourceforge.net/support/tracker.php?aid=1210444
 
- Bugfixes:
+ - Filters should be individually configured
+   http://sourceforge.net/support/tracker.php?aid=1434121
 
- - Performance issue with Huge files
-   http://sourceforge.net/support/tracker.php?aid=1427669
+ Bugfixes:
 
  - Dialogs/windows do not close on Escape
    http://sourceforge.net/support/tracker.php?aid=1422959
@@ -34,6 +33,9 @@
  - Structure of HTML not respected in output 
    (second iteration over a bugfix first appeared in 1.6.RC4)
    http://sourceforge.net/support/tracker.php?aid=1364265
+
+ - Do not add encoding declaration meta if HTML has no header
+   http://sourceforge.net/support/tracker.php?aid=1406630
 
  - OO tags are numbered one-by-one
    http://sourceforge.net/support/tracker.php?aid=1431473

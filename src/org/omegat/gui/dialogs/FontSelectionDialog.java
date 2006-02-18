@@ -253,7 +253,7 @@ public class FontSelectionDialog extends javax.swing.JDialog
         dispose();
     }
     
-    // ���������� ���������� - �� ��������� ������ ���//GEN-BEGIN:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox fontComboBox;
@@ -262,7 +262,7 @@ public class FontSelectionDialog extends javax.swing.JDialog
     private javax.swing.JTextArea previewTextArea;
     private javax.swing.JLabel sizeLabel;
     private javax.swing.JSpinner sizeSpinner;
-    // ����� ���������� ����������//GEN-END:variables
+    // End of variables declaration//GEN-END:variables
     
     private int returnStatus = RET_CANCEL_OR_UNCHANGED;
 }

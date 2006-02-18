@@ -402,7 +402,7 @@ public abstract class XMLAbstractFilter extends AbstractFilter
                 blk.setShortcutNumber(this_tag_number);
                 String display = blk.getShortcut() + this_tag_number;
                 if( blk.isStandalone() )
-                    display+="/";
+                    display+="/";                                               // NOI18N
                 m_tagMap.put(display, blk.getText());
                 display = "<" + display + ">";	// NOI18N
                 out.append(display);

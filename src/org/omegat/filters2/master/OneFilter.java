@@ -29,6 +29,7 @@ import javax.swing.table.AbstractTableModel;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
 
 /**
  * Wrapper around a single file filter class
@@ -59,13 +60,11 @@ public class OneFilter extends AbstractTableModel implements Serializable
     public OneFilter(AbstractFilter filter, boolean fromPlugin)
     {
         setClassName(filter.getClass().getName());
-        setHumanName(filter.getFileFormatName());
         setOn(true);
         setFromPlugin(fromPlugin);
         setSourceEncodingVariable(filter.isSourceEncodingVariable());
         setTargetEncodingVariable(filter.isTargetEncodingVariable());
         setInstance(filter.getDefaultInstances());
-        setHint(filter.getHint());
     }
     
     /////////////////////////////////////////////////////////////////////////
@@ -89,21 +88,21 @@ public class OneFilter extends AbstractTableModel implements Serializable
         className = value;
     }
 
-    /** Holds the human-readable name of the filter */
-    private String humanName = null;
     /**
      * Returns the human-readable name of the filter.
      */
     public String getHumanName()
     {
-        return humanName;
-    }
-    /**
-     * Sets the "human" name of the filter.
-     */
-    public void setHumanName(String value)
-    {
-        humanName = value;
+        try
+        {
+            AbstractFilter filter = PluginUtils.instantiateFilter(this);
+            return filter.getFileFormatName();
+        }
+        catch (Exception e)
+        {
+            StaticUtils.log(e.getMessage());
+            return getClassName();
+        }
     }
     
     /** If the filter is used. */
@@ -225,15 +224,73 @@ public class OneFilter extends AbstractTableModel implements Serializable
         fireTableRowsUpdated(index, index);
     }
     
-    /** Stores the hint for editing the filter and adding/editing filter instance */
-    private String hint;
     /** Returns the hint for editing the filter and adding/editing filter instance */
-    public String getHint()  {
-        return hint;
+    public String getHint()  
+    {
+        try
+        {
+            AbstractFilter filter = PluginUtils.instantiateFilter(this);
+            return filter.getHint();
+        }
+        catch (Exception e)
+        {
+            StaticUtils.log(e.getMessage());
+            return "";                                                          // NOI18N
+        }
     }
-    /** Sets the hint for editing the filter and adding/editing filter instance */
-    public void setHint(String hint)  {
-        this.hint = hint;
+    
+    /** Holds options of the filter. */
+    private Serializable options = null;
+
+    /**
+     * Returns filter's options.
+     * @return Filter options object.
+     */
+    public Serializable getOptions()
+    {
+        return this.options;
+    }
+
+    /**
+     * Setter for property options.
+     * @param options New value of property options.
+     */
+    public void setOptions(Serializable options)
+    {
+        this.options = options;
+    }
+    
+    //////////////////////////////////////////////////////////////////////////
+    //  Filter Options
+    //////////////////////////////////////////////////////////////////////////
+
+    /** Returns whether the filter has options. */
+    public boolean hasOptions()
+    {
+        try
+        {
+            AbstractFilter filter = PluginUtils.instantiateFilter(this);
+            return filter.hasOptions();
+        }
+        catch (Exception e)
+        {
+            StaticUtils.log(e.getMessage());
+            return false;
+        }
+    }
+    
+    /** Calls filter's modal dialog to change its options. */
+    public void changeOptions(java.awt.Dialog parent)
+    {
+        try
+        {
+            AbstractFilter filter = PluginUtils.instantiateFilter(this);
+            setOptions(filter.changeOptions(parent, getOptions()));
+        }
+        catch (Exception e)
+        {
+            StaticUtils.log(e.getMessage());
+        }
     }
     
     //////////////////////////////////////////////////////////////////////////

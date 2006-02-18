@@ -21,6 +21,7 @@
 
 package org.omegat.filters2;
 
+import java.awt.Dialog;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -29,6 +30,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 
 import org.omegat.filters2.master.FilterMaster;
@@ -156,10 +158,64 @@ public abstract class AbstractFilter
      * Returns the hint displayed while the user edits the filter,
      * and when she adds/edits the instance of this filter.
      * The hint may be any string, preferably in a non-geek language.
+     * @return The hint for editing the filter in a non-geek language.
      */
     public String getHint() 
     {
         return "";                                                              // NOI18N
+    }
+    
+    /**
+     * OmegaT calls this to see whether the filter has any options.
+     * By default returns false, so filter authors should override this
+     * to tell OmegaT core that this filter has options.
+     * @return True if the filter has any options, and false otherwise.
+     */
+    public boolean hasOptions()
+    {
+        return false;
+    }
+    
+    /** Holds filter's options. */
+    private Serializable options = null;
+    
+    /**
+     * Returns deserialized filter's options.
+     * May return null indicating that the filter had not yet set any options.
+     *
+     * @return Filter's options.
+     */
+    public final Serializable getOptions()
+    {
+        return options;
+    }
+    
+    /**
+     * Called by the OmegaT filter engine to set filter's options.
+     * Do not call it in your code.
+     *
+     * @param options Filter's options.
+     */
+    public final void setOptions(Serializable options)
+    {
+        this.options = options;
+    }
+    
+    /**
+     * Is called by OmegaT if the filter has options to edit them.
+     * Filter authors should override this to show a <b>modal</b>
+     * dialog to edit options specific to their filters and return
+     * changed options if user confirmed the changes, and current 
+     * options if the user cancelled the dialog.
+     * By default returns current options.
+     *
+     * @param parent Parent dialog to declare a modal dialog.
+     * @param currentOptions Current options of the filter.
+     * @return Updated filter options if user confirmed the changes, and current options otherwise.
+     */
+    public Serializable changeOptions(Dialog parent,Serializable currentOptions)
+    {
+        return currentOptions;
     }
     
     /**

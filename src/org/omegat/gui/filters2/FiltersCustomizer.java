@@ -35,7 +35,9 @@ import javax.swing.KeyStroke;          // HP
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
 import org.omegat.filters2.master.FilterMaster;
+import org.omegat.filters2.master.OneFilter;
 import org.omegat.util.OStrings;
 
 /**
@@ -95,9 +97,16 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener
         if (e.getValueIsAdjusting()) return;
         ListSelectionModel lsm = (ListSelectionModel)e.getSource();
         if (lsm.isSelectionEmpty())
+        {
             editButton.setEnabled(false);
+            optionsButton.setEnabled(false);
+        }
         else
+        {
             editButton.setEnabled(true);
+            optionsButton.setEnabled(FilterMaster.getInstance().getFilters().
+                    getFilter(filtersTable.getSelectedRow()).hasOptions());
+        }
     }
     
     
@@ -126,6 +135,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener
         filtersTable = new javax.swing.JTable();
         description = new javax.swing.JTextArea();
         editButton = new javax.swing.JButton();
+        optionsButton = new javax.swing.JButton();
 
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -179,7 +189,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
@@ -192,6 +202,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -204,7 +215,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener
         description.setLineWrap(true);
         description.setText(OStrings.getString("FILTERSCUSTOMIZER_DESCRIPTION"));
         description.setWrapStyleWord(true);
-        description.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
+        description.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(3, 3, 3, 3)));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -234,9 +245,34 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(editButton, gridBagConstraints);
 
+        org.openide.awt.Mnemonics.setLocalizedText(optionsButton, OStrings.getString("FILTERSCUSTOMIZER_BUTTON_OPTIONS"));
+        optionsButton.setEnabled(false);
+        optionsButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                optionsButtonActionPerformed(evt);
+            }
+        });
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        getContentPane().add(optionsButton, gridBagConstraints);
+
         pack();
     }
     // </editor-fold>//GEN-END:initComponents
+
+    private void optionsButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsButtonActionPerformed
+    {//GEN-HEADEREND:event_optionsButtonActionPerformed
+        OneFilter filter = FilterMaster.getInstance().getFilters().getFilter(
+                filtersTable.getSelectedRow());
+        filter.changeOptions(this);
+    }//GEN-LAST:event_optionsButtonActionPerformed
 
     private void toDefaultsButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_toDefaultsButtonActionPerformed
     {//GEN-HEADEREND:event_toDefaultsButtonActionPerformed
@@ -282,6 +318,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener
     private javax.swing.JTable filtersTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton okButton;
+    private javax.swing.JButton optionsButton;
     private javax.swing.JButton toDefaultsButton;
     // End of variables declaration//GEN-END:variables
     

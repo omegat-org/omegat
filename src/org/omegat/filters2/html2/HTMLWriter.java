@@ -70,16 +70,23 @@ public class HTMLWriter extends Writer
     /** Encoding to write this file in. null value means no encoding declaration. */
     private String encoding;
     
+    /** HTML filter options. */
+    private HTMLOptions options;
+    
     /**
      * Creates new HTMLWriter.
      *
      * @param fileName - file name to write to
      * @param encoding - the encoding to write HTML file in (null means OS-default encoding)
      */
-    public HTMLWriter(String fileName, String encoding) throws 
-            FileNotFoundException, UnsupportedEncodingException
+    public HTMLWriter(String fileName, String encoding, HTMLOptions options) 
+            throws FileNotFoundException, UnsupportedEncodingException
     {
         this.encoding = encoding;
+        if (options!=null)
+            this.options = options;
+        else
+            this.options = new HTMLOptions();
 
         writer = new StringWriter();
         FileOutputStream fos = new FileOutputStream(fileName);
@@ -141,35 +148,39 @@ public class HTMLWriter extends Writer
             signalAlreadyFlushed = true;
             
             String contents = buffer.toString();
-            Matcher matcher_header = PatternConsts.XML_HEADER.matcher(contents);
-            boolean xhtml = false;
-            if( matcher_header.find() )
-            {
-                XML_HEADER = "<?xml version=\"1.0\" encoding=\""+encoding+"\"?>";   // NOI18N
-                contents = matcher_header.replaceFirst(XML_HEADER);
-                xhtml = true;
-            }
 
-            HTML_META = "<meta http-equiv=\"content-type\" content=\"text/html; charset="+encoding+"\""; // NOI18N
-            if(xhtml)
-                HTML_META+="/>";                                           // NOI18N
-            else
-                HTML_META+=">";                                             // NOI18N
-            Matcher matcher_enc = PatternConsts.HTML_ENCODING.matcher(contents);
-            if( matcher_enc.find() )
-                contents = matcher_enc.replaceFirst(HTML_META);
-            else
+            if (options.getRewriteEncoding()!=HTMLOptions.REWRITE_NEVER)
             {
-                Matcher matcher_head = PatternConsts.HTML_HEAD.matcher(contents);
-                if( matcher_head.find() )
-                    contents = matcher_head.replaceFirst("<head>\n    "+HTML_META); // NOI18N
-                else
+                Matcher matcher_header = PatternConsts.XML_HEADER.matcher(contents);
+                boolean xhtml = false;
+                if( matcher_header.find() )
                 {
-                    Matcher matcher_html = PatternConsts.HTML_HTML.matcher(contents);
-                    if( matcher_html.find() )
-                        contents = matcher_html.replaceFirst("<html>\n<head>\n    "+HTML_META+"\n</head>\n"); // NOI18N
-                    else
-                        contents = "<html>\n<head>\n    "+HTML_META+"\n</head>\n"+contents;  // NOI18N
+                    XML_HEADER = "<?xml version=\"1.0\" encoding=\""+encoding+"\"?>";   // NOI18N
+                    contents = matcher_header.replaceFirst(XML_HEADER);
+                    xhtml = true;
+                }
+
+                HTML_META = "<meta http-equiv=\"content-type\" content=\"text/html; charset="+encoding+"\""; // NOI18N
+                if(xhtml)
+                    HTML_META+="/>";                                           // NOI18N
+                else
+                    HTML_META+=">";                                             // NOI18N
+                Matcher matcher_enc = PatternConsts.HTML_ENCODING.matcher(contents);
+                if( matcher_enc.find() )
+                    contents = matcher_enc.replaceFirst(HTML_META);
+                else if (options.getRewriteEncoding()!=HTMLOptions.REWRITE_IFMETA)
+                {
+                    Matcher matcher_head = PatternConsts.HTML_HEAD.matcher(contents);
+                    if( matcher_head.find() )
+                        contents = matcher_head.replaceFirst("<head>\n    "+HTML_META); // NOI18N
+                    else if (options.getRewriteEncoding()!=HTMLOptions.REWRITE_IFHEADER)
+                    {
+                        Matcher matcher_html = PatternConsts.HTML_HTML.matcher(contents);
+                        if( matcher_html.find() )
+                            contents = matcher_html.replaceFirst("<html>\n<head>\n    "+HTML_META+"\n</head>\n"); // NOI18N
+                        else
+                            contents = "<html>\n<head>\n    "+HTML_META+"\n</head>\n"+contents;  // NOI18N
+                    }
                 }
             }
 

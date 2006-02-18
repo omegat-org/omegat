@@ -21,10 +21,12 @@
 
 package org.omegat.filters2.html2;
 
+import java.awt.Dialog;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 
 import org.htmlparser.Parser;
@@ -34,6 +36,7 @@ import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
 
 /**
  * A filter to translate HTML and XHTML files.
@@ -78,11 +81,14 @@ public class HTMLFilter2 extends AbstractFilter
             throws UnsupportedEncodingException, IOException
     {
         HTMLWriter hwriter;
-        if( encoding==null )
-            hwriter = new HTMLWriter(outfile.getAbsolutePath(), sourceEncoding);
+        HTMLOptions options = (HTMLOptions) getOptions();
+        String theEncoding;
+        if (encoding==null)
+            theEncoding = sourceEncoding;
         else
-            hwriter = new HTMLWriter(outfile.getAbsolutePath(), encoding);
+            theEncoding = encoding;
         
+        hwriter = new HTMLWriter(outfile.getAbsolutePath(), theEncoding, options);
         return new BufferedWriter(hwriter);
     }
 
@@ -167,5 +173,41 @@ public class HTMLFilter2 extends AbstractFilter
     {
         return OStrings.getString("HTML_NOTE");
     }
+
+    /**
+     * Returns true to indicate that (X)HTML filter has options.
+     * @return True, because (X)HTML filter has options.
+     */
+    public boolean hasOptions()
+    {
+        return true;
+    }
+
+    /**
+     * (X)HTML Filter shows a <b>modal</b> dialog to edit its own options.
+     * 
+     * @param currentOptions Current options to edit.
+     * @return Updated filter options if user confirmed the changes, and current options otherwise.
+     */
+    public Serializable changeOptions(Dialog parent, Serializable currentOptions)
+    {
+        try
+        {
+            HTMLOptions options = (HTMLOptions) currentOptions;
+            EditOptionsDialog dialog = new EditOptionsDialog(parent, options);
+            dialog.setVisible(true);
+            if( EditOptionsDialog.RET_OK==dialog.getReturnStatus() )
+                return dialog.getOptions();
+            else
+                return currentOptions;
+        }
+        catch( Exception e )
+        {
+            StaticUtils.log("XHTML filter thrown an exception: " +              // NOI18N
+                    e.getMessage());
+            return currentOptions;
+        }
+    }
+
     
 }

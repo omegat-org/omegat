@@ -105,7 +105,11 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         loadWindowIcon();
         m_projWin = new ProjectFrame(this);
         matchWindow = new MatchGlossaryWindow(this);
+        
+        xlPane = new org.omegat.gui.main.MainPane();
+        mainScroller.setViewportView(xlPane);
         xlPane.setMainWindow(this);
+        
         initScreenLayout();
         updateCheckboxesOnStart();
         uiUpdateOnProjectClose();
@@ -1781,7 +1785,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         projectExitMenuItem = new javax.swing.JMenuItem();
         statusLabel = new javax.swing.JLabel();
         mainScroller = new javax.swing.JScrollPane();
-        xlPane = new org.omegat.gui.main.MainPane();
         mainMenu = new javax.swing.JMenuBar();
         projectMenu = new javax.swing.JMenu();
         projectNewMenuItem = new javax.swing.JMenuItem();
@@ -1844,8 +1847,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
 
         mainScroller.setBorder(null);
         mainScroller.setMinimumSize(new java.awt.Dimension(100, 100));
-        mainScroller.setViewportView(xlPane);
-
         getContentPane().add(mainScroller, java.awt.BorderLayout.CENTER);
 
         org.openide.awt.Mnemonics.setLocalizedText(projectMenu, OStrings.getString("TF_MENU_FILE"));
@@ -2562,9 +2563,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     private javax.swing.JCheckBoxMenuItem viewFileListCheckBoxMenuItem;
     private javax.swing.JCheckBoxMenuItem viewMatchWindowCheckBoxMenuItem;
     private javax.swing.JMenu viewMenu;
-    private org.omegat.gui.main.MainPane xlPane;
     // End of variables declaration//GEN-END:variables
     
+    private MainPane xlPane;
     private MatchGlossaryWindow matchWindow;
     private boolean screenLayoutLoaded = false;
 }

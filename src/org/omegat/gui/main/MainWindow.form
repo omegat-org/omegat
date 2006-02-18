@@ -586,10 +586,6 @@
       </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="org.omegat.gui.main.MainPane" name="xlPane">
-        </Component>
-      </SubComponents>
     </Container>
   </SubComponents>
 </Form>

@@ -2,30 +2,24 @@
  OmegaT 1.6 RC7 Changes
 ----------------------------------------------------------------------
 
-1.6.0 vs. 1.4.5.04
+1.6.0 RC7 vs. 1.4.5.04
  25 Enchancements
- 50 Bugfixes
+ 51 Bugfixes
 
 ----------------------------------------------------------------------
-
-Not yet fixed in full:
- - Performance issue with Huge files
-   http://sourceforge.net/support/tracker.php?aid=1427669
-
-1.6.RC7
 
  Enchancements:
  
  - Delete orphan segments from exported TMX file
    http://sourceforge.net/support/tracker.php?aid=1422364
 
- - Esc to cancel all dialogs
-   http://sourceforge.net/support/tracker.php?aid=1210444
-
  - Filters should be individually configured
    http://sourceforge.net/support/tracker.php?aid=1434121
 
  Bugfixes:
+
+ - Performance issue with Huge files
+   http://sourceforge.net/support/tracker.php?aid=1427669
 
  - Dialogs/windows do not close on Escape
    http://sourceforge.net/support/tracker.php?aid=1422959

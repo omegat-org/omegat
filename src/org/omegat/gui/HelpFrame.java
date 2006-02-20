@@ -1,8 +1,12 @@
 /**************************************************************************
- OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2005  Keith Godfrey et al
-                          keithgodfrey@users.sourceforge.net
-                          907.223.2039
+ OmegaT - Computer Assisted Translation (CAT) tool 
+          with fuzzy matching, translation memory, keyword search, 
+          glossaries, and translation leveraging into updated projects.
+
+ Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, 
+                            Sandra Jean Chua, and Henry Pijffers
+                         keithgodfrey@users.sourceforge.net
+                         907.223.2039
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by

@@ -26,23 +26,21 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
 import javax.swing.JTextPane;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.StyleContext;
 import javax.swing.undo.UndoManager;
-import org.omegat.gui.HelpFrame;
-import org.omegat.util.OConsts;
 
 import org.omegat.util.OStrings;
+
 
 /**
  * The main panel, where all the translation happens.
  *
  * @author Maxym Mykhalchuk
  */
-public class MainPane extends JTextPane implements MouseListener
+public class MainPane extends JTextPane implements MouseListener, DocumentListener
 {
     
     /** Creates new form BeanForm */
@@ -51,6 +49,8 @@ public class MainPane extends JTextPane implements MouseListener
         initComponents();
         
 		DefaultStyledDocument doc = new DefaultStyledDocument(new StyleContext());
+        doc.addDocumentListener(this);
+        
         undoManager = new UndoManager();
 		doc.addUndoableEditListener(undoManager);
 		setDocument(doc);
@@ -58,7 +58,7 @@ public class MainPane extends JTextPane implements MouseListener
         
         addMouseListener(this);
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -75,8 +75,9 @@ public class MainPane extends JTextPane implements MouseListener
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
     
-    /** Ctrl key mask. On MacOSX it's CMD key. */
-    private static final int CTRL_KEY_MASK = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+    ////////////////////////////////////////////////////////////////////////
+    // Managing Undo operations
+    ////////////////////////////////////////////////////////////////////////
     
     /** Undo Manager to store edits */
     private UndoManager	undoManager;
@@ -102,6 +103,10 @@ public class MainPane extends JTextPane implements MouseListener
     {
         mw = mainwindow;
     }
+    
+    ////////////////////////////////////////////////////////////////////////
+    // Mouse reaction
+    ////////////////////////////////////////////////////////////////////////
     
     /**
      * Reacts to double mouse clicks.
@@ -138,11 +143,10 @@ public class MainPane extends JTextPane implements MouseListener
                     }
                 }
             }
-            else if (pos > getText().length() - mw.m_segmentEndInset)
+            else if (pos > getTextLength() - mw.m_segmentEndInset)
             {
                 // after current entry
-                int inset = getText().length() -
-                        mw.m_segmentEndInset;
+                int inset = getTextLength() - mw.m_segmentEndInset;
                 for (i=mw.m_curEntryNum+1; i<=mw.m_xlLastEntry; i++)
                 {
                     docSeg = (DocumentSegment)mw.m_docSegList.get(i-mw.m_xlFirstEntry);
@@ -156,6 +160,20 @@ public class MainPane extends JTextPane implements MouseListener
             }
         }
     }    
+    // not used now
+    public void mouseReleased(MouseEvent e) { }
+    public void mousePressed(MouseEvent e)  { }
+    public void mouseExited(MouseEvent e)   { }
+    public void mouseEntered(MouseEvent e)  { }
+    
+    
+    /** Ctrl key mask. On MacOSX it's CMD key. */
+    private static final int CTRL_KEY_MASK = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+    
+
+    ////////////////////////////////////////////////////////////////////////
+    // Keyborad handling to protect text areas
+    ////////////////////////////////////////////////////////////////////////
     
     /**
      * Monitors key events - need to prevent text insertion
@@ -275,7 +293,7 @@ public class MainPane extends JTextPane implements MouseListener
         {
             int start = mw.m_segmentStartOffset + mw.m_sourceDisplayLength +
                     OStrings.TF_CUR_SEGMENT_START.length();
-            int end = getText().length() - mw.m_segmentEndInset -
+            int end = getTextLength() - mw.m_segmentEndInset -
                     OStrings.TF_CUR_SEGMENT_END.length();
             
             // selecting
@@ -378,8 +396,7 @@ public class MainPane extends JTextPane implements MouseListener
                 {
                     int pos = getCaretPosition();
                     // -1 for space before tag, -2 for newlines
-                    int end = getText().length() -
-                            mw.m_segmentEndInset-
+                    int end = getTextLength() - mw.m_segmentEndInset -
                             OStrings.TF_CUR_SEGMENT_END.length();
                     if (pos > end)
                         moveCaretPosition(end);
@@ -426,10 +443,39 @@ public class MainPane extends JTextPane implements MouseListener
         super.processKeyEvent(e);
     }
 
-    // not used now
-    public void mouseReleased(MouseEvent e) { }
-    public void mousePressed(MouseEvent e)  { }
-    public void mouseExited(MouseEvent e)   { }
-    public void mouseEntered(MouseEvent e)  { }
+
+    ////////////////////////////////////////////////////////////////////////
+    // getText().length() caching
+    ////////////////////////////////////////////////////////////////////////
+
+    /** Holds the length of the text in the underlying document. */
+    int textLength = 0;
+    
+    /** 
+     * Returns the length of the text in the underlying document.
+     * <p>
+     * This should replace all <code>getText().length()</code> calls,
+     * because this method does not count the length (costly operation),
+     * instead it accounts document length by listening to document updates.
+     */
+    public int getTextLength()
+    {
+        return textLength;
+    }
+    
+    /** Accounting text length. */
+    public void removeUpdate(javax.swing.event.DocumentEvent e)
+    {
+        textLength -= e.getLength();
+    }
+
+    /** Accounting text length. */
+    public void insertUpdate(javax.swing.event.DocumentEvent e)
+    {
+        textLength += e.getLength();
+    }
+
+    /** Attribute changes do not result in document length changes. Doing nothing. */
+    public void changedUpdate(javax.swing.event.DocumentEvent e) { }
     
 }

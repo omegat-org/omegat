@@ -22,6 +22,7 @@
 package org.omegat.core;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,7 +34,6 @@ import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.util.OConsts;
-import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 
 
@@ -44,25 +44,32 @@ import org.omegat.util.StaticUtils;
  * Multiple translations can still exist for the single string, however.
  *
  * @author Keith Godfrey
+ * @author Maxym Mykhalchuk
  */
 public class StringEntry
 {
+    /** Creates a new string entry for a unique translatable string. */
     public StringEntry(String srcText)
     {
-        m_parentList = new LinkedList();
+        m_parentList = new TreeSet(new STEComparator());
         m_nearList = new TreeSet();
         m_glosList = new LinkedList();
         m_srcText = srcText;
         m_srcTextLow = srcText.toLowerCase();
-        m_translation = ""; // NOI18N
+        m_translation = "";                                                     // NOI18N
     }
     
     /** Returns the source string */
     public String getSrcText()
-    { return m_srcText;	}
+    { 
+        return m_srcText;	
+    }
+    
     /** Retruns source string in lower case */
     public String getSrcTextLow()
-    { return m_srcTextLow; }
+    { 
+        return m_srcTextLow; 
+    }
     
     /** Returns the tokens of this entry's source string */
     public List getSrcTokenList()
@@ -74,13 +81,13 @@ public class StringEntry
         }
         return srcTokenList;
     }
-    
-    /** Returns the number of words in this string */
-    public int getWordCount()
-    { return srcTokenList.size(); }
-    
-    public LinkedList getParentList()
-    { return m_parentList;	}
+
+    /** List of SourceTextEntry-es this string entry belongs to. */
+    public SortedSet getParentList()
+    { 
+        return m_parentList;	
+    }
+    /** Add SourceTextEntry this string entry belongs to. */
     public void addParent(SourceTextEntry srcTextEntry)
     {
         m_parentList.add(srcTextEntry);
@@ -126,18 +133,12 @@ public class StringEntry
         {
             NearString last = (NearString)m_nearList.last();
             if( score>last.score )
-            {
                 m_nearList.remove(last);
-            }
             else
-            {
                 add = false;
-            }
         }
         if( add )
-        {
             m_nearList.add(new NearString(strEntry, score, nearData, nearProj));
-        }
     }
     
     /**
@@ -197,6 +198,7 @@ public class StringEntry
             // only if translation changed
             CommandThread.core.markAsDirty();
             m_translation = trans;
+            transTokenList = null;
             
             boolean is = !"".equals(m_translation);                             // NOI18N
             if( was && !is )
@@ -216,8 +218,11 @@ public class StringEntry
     
     // NOTE: references to these lists are returned through the above
     // access calls
-    private LinkedList	m_parentList;
+    /** Sorted set of parent source text entries. */
+    private SortedSet	m_parentList;
+    /** Sorted set of near matched strings. */
     private SortedSet	m_nearList;
+    /** List of glossary terms for this string. */
     private LinkedList	m_glosList;
     
     private String m_srcText;
@@ -226,4 +231,26 @@ public class StringEntry
     
     private List srcTokenList;
     private List transTokenList;
+}
+
+/**
+ * A comparator for SourceTextEntry classes,
+ * which sorts them according to their entryNum() descending.
+ */
+class STEComparator implements Comparator
+{
+    public int compare(Object o1, Object o2)
+    {
+        SourceTextEntry first = (SourceTextEntry) o1;
+        SourceTextEntry second = (SourceTextEntry) o2;
+        if (first == second)
+            return 0;
+        if (first.entryNum() == second.entryNum())
+            throw new RuntimeException("Should not happen!");                   // NOI18N
+        
+        if (first.entryNum() < second.entryNum())
+            return 1;
+        else
+            return -1;
+    }
 }

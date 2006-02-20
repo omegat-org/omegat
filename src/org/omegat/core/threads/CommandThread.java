@@ -59,6 +59,7 @@ import org.omegat.util.TMXReader;
  *
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
+ * @author Maxym Mykhalchuk
  */
 public class CommandThread extends Thread
 {
@@ -468,7 +469,7 @@ public class CommandThread extends Thread
         return suspects;
     }
     
-    // build all translated files and create a new TM file
+    /** Builds all translated files and creates fresh TM files. */
     public void compileProject()
             throws IOException, TranslationException
     {
@@ -555,6 +556,7 @@ public class CommandThread extends Thread
         m_modifiedFlag = true;
     }
     
+    /** Does actually save the Project's TMX file and preferences. */
     private void forceSave(boolean corruptionDanger)
     {
         Preferences.save();
@@ -622,11 +624,7 @@ public class CommandThread extends Thread
         if( srcText.length()==0 || srcText.trim().length()==0 )
             return;
         
-        SourceTextEntry srcTextEntry;
-        StringEntry strEntry;
-        
-        srcTextEntry = new SourceTextEntry();
-        strEntry = (StringEntry) m_strEntryHash.get(srcText);
+        StringEntry strEntry = (StringEntry) m_strEntryHash.get(srcText);
         if (strEntry == null)
         {
             // entry doesn't exist yet - create and store it
@@ -634,10 +632,8 @@ public class CommandThread extends Thread
             m_strEntryList.add(strEntry);
             m_strEntryHash.put(srcText, strEntry);
         }
-        
-        srcTextEntry.set(strEntry, m_curFile, numEntries());
+        SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, numEntries());
         m_srcTextEntryArray.add(srcTextEntry);
-        
     }
     
     public void createProject()
@@ -732,11 +728,11 @@ public class CommandThread extends Thread
     /////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////
     // protected functions
-    
+
+    /** Finds and loads project's TMX file with translations (project_save.tmx). */
     private void loadTranslations()
     {
         File proj;
-        // load translation file (project_name.bin)
         try
         {
             proj = new File(m_config.getProjectInternal() + OConsts.STATUS_EXTENSION);
@@ -860,6 +856,7 @@ public class CommandThread extends Thread
         }
     }
     
+    /** Locates and loads external TMX files with legacy translations. */
     private void loadTM() throws IOException
     {
         // build strEntryList for each file
@@ -900,6 +897,11 @@ public class CommandThread extends Thread
         }
     }
     
+    /** 
+     * Loads TMX file.
+     * Either the one of the project with project's translation,
+     * or the legacy ones.
+     */
     private void loadTMXFile(String fname, String encoding, boolean isProject)
             throws IOException
     {
@@ -1076,10 +1078,7 @@ public class CommandThread extends Thread
             file.firstEntry = 0;
             file.lastEntry = 0;
             
-            SourceTextEntry res = new SourceTextEntry();
-            res.set(str, file, 0);
-            
-            return res;
+            return new SourceTextEntry(str, file, 0);
         }
     }
     

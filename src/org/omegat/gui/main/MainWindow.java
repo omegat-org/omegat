@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import javax.swing.ImageIcon;
@@ -46,6 +47,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -106,7 +109,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         m_projWin = new ProjectFrame(this);
         matchWindow = new MatchGlossaryWindow(this);
         
-        xlPane = new org.omegat.gui.main.MainPane();
+        xlPane = new MainPane();
         mainScroller.setViewportView(xlPane);
         xlPane.setMainWindow(this);
         
@@ -521,7 +524,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     {
         if (!m_projectLoaded)
             return;
+        
         commitEntry();
+        
         m_curEntryNum++;
         if (m_curEntryNum > m_xlLastEntry)
         {
@@ -529,7 +534,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                 m_curEntryNum = 0;
             loadDocument();
         }
-
+        
         activateEntry();
     }
     
@@ -667,7 +672,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         // build local offsets
         int start = m_segmentStartOffset + m_sourceDisplayLength +
                 OStrings.TF_CUR_SEGMENT_START.length();
-        int end = xlPane.getText().length() - m_segmentEndInset -
+        int end = xlPane.getTextLength() - m_segmentEndInset -
                 OStrings.TF_CUR_SEGMENT_END.length();
         
         // remove text
@@ -1155,8 +1160,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             m_docSegList.add(docSeg);
         }
         xlPane.setText(textBuf.toString());
-        
-        setMessageText("");														// NOI18N
     }
     
     ///////////////////////////////////////////////////////////////
@@ -1212,9 +1215,10 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             ctr++;
         }
         
-        matchWindow.getMatchGlossaryPane().hiliteRange(start, end);
-        matchWindow.getMatchGlossaryPane().updateMatchText();
-        matchWindow.getMatchGlossaryPane().formatNearText(m_curNear.str.getSrcTokenList(), m_curNear.attr);
+        MatchGlossaryPane matchpane = matchWindow.getMatchGlossaryPane();
+        matchpane.hiliteRange(start, end);
+        matchpane.updateMatchText();
+        matchpane.formatNearText(m_curNear.str.getSrcTokenList(), m_curNear.attr);
     }
     
     /**
@@ -1248,6 +1252,22 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     /** Is any segment edited currently? */
     private boolean entryActivated = false;
     
+    /** Plain text. */
+    private final static AttributeSet PLAIN;
+    /** Bold text. */
+    private final static MutableAttributeSet BOLD;
+    /** Bold text on green background. */
+    private final static MutableAttributeSet GREEN;
+    static
+    {
+        PLAIN = SimpleAttributeSet.EMPTY;
+        BOLD = new SimpleAttributeSet();
+        StyleConstants.setBold(BOLD, true);
+        GREEN = new SimpleAttributeSet();
+        StyleConstants.setBold(GREEN, true);
+        StyleConstants.setBackground(GREEN, new Color(192, 255, 192));
+    }
+    
     /**
      * Commits the translation.
      * Reads current entry text and commit it to memory if it's changed.
@@ -1265,12 +1285,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             return;
         entryActivated = false;
         
-        // Making selection invisible for performance reasons
-        xlPane.getCaret().setSelectionVisible(false);
-        
         int start = m_segmentStartOffset + m_sourceDisplayLength +
                 OStrings.TF_CUR_SEGMENT_START.length();
-        int end = xlPane.getText().length() - m_segmentEndInset -
+        int end = xlPane.getTextLength() - m_segmentEndInset -
                 OStrings.TF_CUR_SEGMENT_END.length();
         String display_string;
         String new_translation;
@@ -1278,27 +1295,50 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             new_translation =  "";                                              // NOI18N
             display_string = m_curEntry.getSrcText();
-            xlPane.select(start, end);
-            xlPane.replaceSelection(display_string);
-            end += display_string.length();
         }
         else
         {
-            new_translation = xlPane.getText().substring(start, end);
+            try
+            {
+                new_translation = xlPane.getText(start, end - start);
+            }
+            catch(BadLocationException ble)
+            {
+                StaticUtils.log("Should not have happened, report to ???!");        // NOI18N
+                StaticUtils.log(ble.getMessage());
+                ble.printStackTrace();
+                ble.printStackTrace(StaticUtils.getLogStream());
+                new_translation = "";                                           // NOI18N
+            }
             display_string = new_translation;
         }
-
-        xlPane.select(end, xlPane.getText().length() - m_segmentEndInset);
-        xlPane.replaceSelection("");											// NOI18N
-        xlPane.select(m_segmentStartOffset, start);
-        xlPane.replaceSelection("");											// NOI18N
         
-        // update memory
-        if( !new_translation.equals(m_curEntry.getSrcText()) ||
-                Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC) )
+        int totalLen = m_sourceDisplayLength + OStrings.TF_CUR_SEGMENT_START.length() +
+                new_translation.length() + OStrings.TF_CUR_SEGMENT_END.length();
+        try
         {
-            m_curEntry.setTranslation(new_translation);
+            xlPane.getDocument().remove(m_segmentStartOffset, totalLen);
+            xlPane.getDocument().insertString(m_segmentStartOffset, display_string, PLAIN);
         }
+        catch(BadLocationException ble)
+        {
+            StaticUtils.log("Should not have happened, report to ???!");        // NOI18N
+            StaticUtils.log(ble.getMessage());
+            ble.printStackTrace();
+            ble.printStackTrace(StaticUtils.getLogStream());
+        }
+        
+        String old_translation = m_curEntry.getTranslation();
+        // update memory
+        if (new_translation.equals(m_curEntry.getSrcText()))
+        {
+            if  (Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC))
+                m_curEntry.setTranslation(new_translation);
+            else
+                m_curEntry.setTranslation("");                                  // NOI18N
+        }
+        else
+            m_curEntry.setTranslation(new_translation);
         
         DocumentSegment docSeg = (DocumentSegment)
         m_docSegList.get(m_curEntryNum - m_xlFirstEntry);
@@ -1306,50 +1346,53 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         
         // update the length parameters of all changed segments
         // update strings in display
-        if (!display_string.equals(m_curTrans))
+        if (!m_curEntry.getTranslation().equals(old_translation))
         {
-            // update display
             // find all identical strings and redraw them
-            SourceTextEntry ste = CommandThread.core.getSTE(m_curEntryNum);
-            StringEntry se = ste.getStrEntry();
-            ListIterator it = se.getParentList().listIterator();
-            int entry;
-            int offset;
-            int i;
+            
+            // build offsets of all strings
+            int[] offsets = new int[m_xlLastEntry-m_xlFirstEntry];
+            int currentOffset = 0;
+            for (int i=0; i<(m_xlLastEntry-m_xlFirstEntry); i++)
+            {
+                offsets[i]=currentOffset;
+                docSeg = (DocumentSegment) m_docSegList.get(i);
+                currentOffset += docSeg.length;
+            }
+
+            // starting from the last (guaranteed by sorting ParentList)
+            Iterator it = m_curEntry.getStrEntry().getParentList().iterator();
             while (it.hasNext())
             {
-                ste = (SourceTextEntry) it.next();
-                entry = ste.entryNum();
-                if (entry >= m_xlFirstEntry && entry <= m_xlLastEntry)
+                SourceTextEntry ste = (SourceTextEntry) it.next();
+                int entry = ste.entryNum();
+                if (entry>m_xlLastEntry)
+                    continue;
+                else if (entry<m_xlFirstEntry)
+                    break;
+                
+                int localEntry = entry-m_xlFirstEntry;
+                int offset = offsets[localEntry];
+                
+                // replace old text w/ new
+                docSeg = (DocumentSegment) m_docSegList.get(localEntry);
+                try
                 {
-                    // found something to update
-                    // find offset to this segment, remove it and
-                    //	replace the updated text
-                    offset = 0;
-                    // current entry is already handled
-                    if (entry == m_curEntryNum)
-                        continue;
-                    
-                    // build offset
-                    for (i=m_xlFirstEntry; i<entry; i++)
-                    {
-                        docSeg = (DocumentSegment) m_docSegList.get(
-                                i-m_xlFirstEntry);
-                        offset += docSeg.length;
-                    }
-                    // replace old text w/ new
-                    docSeg = (DocumentSegment) m_docSegList.get(
-                            entry - m_xlFirstEntry);
-                    xlPane.select(offset, offset+docSeg.length);
-                    xlPane.replaceSelection(display_string + "\n\n");						// NOI18N
-                    docSeg.length = display_string.length() + "\n\n".length();				// NOI18N
+                    xlPane.getDocument().remove(offset, docSeg.length);
+                    xlPane.getDocument().insertString(offset, 
+                            display_string + "\n\n", PLAIN);                    // NOI18N
                 }
+                catch(BadLocationException ble)
+                {
+                    StaticUtils.log("Should not have happened, report to ???!");     // NOI18N
+                    StaticUtils.log(ble.getMessage());
+                    ble.printStackTrace();
+                    ble.printStackTrace(StaticUtils.getLogStream());
+                }
+                docSeg.length = display_string.length() + "\n\n".length();      // NOI18N
             }
         }
         xlPane.cancelUndo();
-        
-        // Making selection visible again after updates for performance reasons
-        xlPane.getCaret().setSelectionVisible(true);
     }
     
     /**
@@ -1382,11 +1425,10 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             docSeg = (DocumentSegment) m_docSegList.get(i-m_xlFirstEntry);
             m_segmentStartOffset += docSeg.length; // length includes \n
         }
-
+        
         docSeg = (DocumentSegment) m_docSegList.get(m_curEntryNum - m_xlFirstEntry);
         // -2 to move inside newlines at end of segment
-        int paneLen = xlPane.getText().length();
-        m_segmentEndInset = paneLen - (m_segmentStartOffset + docSeg.length-2);
+        m_segmentEndInset = xlPane.getTextLength() - (m_segmentStartOffset + docSeg.length-2);
         
         // get label tags
         String startStr = OStrings.TF_CUR_SEGMENT_START;
@@ -1396,26 +1438,26 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             // put entry number in first tag
             String num = String.valueOf(m_curEntryNum + 1);
             int zero = startStr.lastIndexOf('0');
-            startStr = startStr.substring(0, zero-num.length()+1)
-            + num + startStr.substring(zero+1);
+            startStr = startStr.substring(0, zero-num.length()+1) + num + 
+                    startStr.substring(zero+1, startStr.length()-1);
         }
         
-        SimpleAttributeSet bold_attrs = new SimpleAttributeSet();
-        StyleConstants.setBold(bold_attrs, true);
-        
-        // Making selection invisible for performance reasons
-        xlPane.getCaret().setSelectionVisible(false);
-        
-        // append to end of segment first because this operation is done
-        //	by reference to end of file which will change after insert
-        int inset = paneLen-m_segmentEndInset;
-        xlPane.setCaretPosition(inset);
-        xlPane.replaceSelection(endStr);
-        xlPane.setCaretPosition(inset+1);
-        xlPane.moveCaretPosition(inset+endStr.length());
-        xlPane.setCharacterAttributes(bold_attrs, true);
-        
         String translation = m_curEntry.getTranslation();
+        
+        // append to end of segment first
+        try
+        {
+            xlPane.getDocument().insertString(m_segmentStartOffset + 
+                    docSeg.length - 2, endStr, BOLD);
+        }
+        catch(BadLocationException ble)
+        {
+            StaticUtils.log("Should not have happened, report to ???!");        // NOI18N
+            StaticUtils.log(ble.getMessage());
+            ble.printStackTrace();
+            ble.printStackTrace(StaticUtils.getLogStream());
+        }
+        
         if( translation==null || translation.length()==0 )
         {
             translation=m_curEntry.getSrcText();
@@ -1427,10 +1469,16 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             //      http://sourceforge.net/support/tracker.php?aid=1075972
             if( Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT) )
             {
-                if( translation.length()>0 )
+                try
                 {
-                    xlPane.select(m_segmentStartOffset, m_segmentStartOffset + translation.length());
-                    xlPane.replaceSelection("");                                    // NOI18N
+                    xlPane.getDocument().remove(m_segmentStartOffset, translation.length());
+                }
+                catch(BadLocationException ble)
+                {
+                    StaticUtils.log("Should not have happened, report to ???!");        // NOI18N
+                    StaticUtils.log(ble.getMessage());
+                    ble.printStackTrace();
+                    ble.printStackTrace(StaticUtils.getLogStream());
                 }
                 translation = "";                                               // NOI18N
             }
@@ -1448,34 +1496,54 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                     NearString thebest = (NearString)near.get(0);
                     if( thebest.score >= percentage )
                     {
-                        xlPane.setCaretPosition(m_segmentStartOffset);
-                        if( translation.length()>0 )
-                            xlPane.moveCaretPosition(m_segmentStartOffset + translation.length());
-                        String toinsert = Preferences.getPreferenceDefault(
+                        if(translation.length()>0)
+                        try
+                        {
+                            xlPane.getDocument().remove(m_segmentStartOffset, translation.length());
+                        }
+                        catch(BadLocationException ble)
+                        {
+                            StaticUtils.log("Should not have happened, report to ???!");        // NOI18N
+                            StaticUtils.log(ble.getMessage());
+                            ble.printStackTrace();
+                            ble.printStackTrace(StaticUtils.getLogStream());
+                        }
+                        
+                        translation = Preferences.getPreferenceDefault(
                                 Preferences.BEST_MATCH_EXPLANATORY_TEXT,
-                                OStrings.getString("WF_DEFAULT_PREFIX"));
-                        toinsert+=thebest.str.getTranslation();
-                        xlPane.replaceSelection(toinsert);
+                                OStrings.getString("WF_DEFAULT_PREFIX")) +
+                                thebest.str.getTranslation();
+                        try
+                        {
+                            xlPane.getDocument().insertString(
+                                    m_segmentStartOffset, translation, PLAIN);
+                        }
+                        catch(BadLocationException ble)
+                        {
+                            StaticUtils.log("Should not have happened, report to ???!");        // NOI18N
+                            StaticUtils.log(ble.getMessage());
+                            ble.printStackTrace();
+                            ble.printStackTrace(StaticUtils.getLogStream());
+                        }
                     }
                 }
             }
         }
         
-        xlPane.setCaretPosition(m_segmentStartOffset);
-        String insertText = srcText + startStr;
-        xlPane.replaceSelection(insertText);
+        try
+        {
+            xlPane.getDocument().insertString(m_segmentStartOffset, " ", PLAIN); // NOI18N
+            xlPane.getDocument().insertString(m_segmentStartOffset, startStr, BOLD);
+            xlPane.getDocument().insertString(m_segmentStartOffset, srcText, GREEN);
+        }
+        catch(BadLocationException ble)
+        {
+            StaticUtils.log("Should not have happened, report to ???!");        // NOI18N
+            StaticUtils.log(ble.getMessage());
+            ble.printStackTrace();
+            ble.printStackTrace(StaticUtils.getLogStream());
+        }
         
-        xlPane.select(m_segmentStartOffset, m_segmentStartOffset + insertText.length() - 1);
-        xlPane.setCharacterAttributes(bold_attrs, true);
-        
-        // other color options
-        xlPane.select(m_segmentStartOffset, m_segmentStartOffset + insertText.length() - startStr.length());
-        // background color
-        Color background = new Color(192, 255, 192);
-        SimpleAttributeSet bg_attrs = new SimpleAttributeSet();
-        StyleConstants.setBackground(bg_attrs, background);
-        xlPane.setCharacterAttributes(bg_attrs, false);
-
         if (m_curEntry.getSrcFile().name.compareTo(m_activeFile) != 0)
         {
             m_activeFile = m_curEntry.getSrcFile().name;
@@ -1484,7 +1552,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         
         updateFuzzyInfo(0);
         updateGlossaryInfo();
-
+        
         StringEntry curEntry = m_curEntry.getStrEntry();
         int nearLength = curEntry.getNearListTranslated().size();
         
@@ -1511,63 +1579,25 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         }
         else
             setMessageText("");													// NOI18N
-        
-        // TODO - hilite translation area in yellow
-        
-        // set caret position
-        
-        // try to scroll so next 3 entries are displayed after current entry
-        //	or first entry ending after the 500 characters mark
-        // to do this, set cursor 3 entries down, then reset it to
-        //	begging of source text in current entry, then finnaly into
-        //	editing region
-        int padding = 0;
-        int j;
-        for (i=m_curEntryNum+1-m_xlFirstEntry, j=0;
-        i<=m_xlLastEntry-m_xlFirstEntry;
-        i++, j++)
+
+        try
         {
-            docSeg = (DocumentSegment) m_docSegList.get(i);
-            padding += docSeg.length;
-            if (j > 2 || padding > 500)
-                break;
+            if( m_segmentStartOffset < 100)
+                xlPane.setCaretPosition(0);
+            
+            xlPane.setCaretPosition(m_segmentStartOffset + 
+                    srcText.length() + startStr.length() + 1 );
         }
-        // don't try to set caret after end of document
-        if (padding > m_segmentEndInset)
-            padding = m_segmentEndInset;
-        xlPane.setCaretPosition(xlPane.getText().length() -
-                m_segmentEndInset + padding);
-        
-        // try to make sure entire segment displays
-        SwingUtilities.invokeLater(new Runnable()
+        catch(IllegalArgumentException iae)
         {
-            public void run()
-            {
-                // make sure 2 newlines above current segment are visible
-                int loc = m_segmentStartOffset - 3;
-                if (loc < 0)
-                    loc = 0;
-                xlPane.setCaretPosition(loc);
-                SwingUtilities.invokeLater(new Runnable()
-                {
-                    public void run()
-                    {
-                        checkCaret();
-                    }
-                });
-                
-            }
-        });
-//
-//		checkCaret();
+            // it's OK
+        }
+        
         if (!m_docReady)
         {
             m_docReady = true;
         }
         xlPane.cancelUndo();
-        
-        // Making selection visible now for performance reasons
-        xlPane.getCaret().setSelectionVisible(true);
     }
     
     /**
@@ -1620,7 +1650,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             // make sure we're not at end of segment
             // -1 for space before tag, -2 for newlines
-            int end = xlPane.getText().length() - m_segmentEndInset -
+            int end = xlPane.getTextLength() - m_segmentEndInset -
                     OStrings.TF_CUR_SEGMENT_END.length();
             int spos = xlPane.getSelectionStart();
             int epos = xlPane.getSelectionEnd();
@@ -1652,7 +1682,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         int start = m_segmentStartOffset + m_sourceDisplayLength +
                 OStrings.TF_CUR_SEGMENT_START.length();
         // -1 for space before tag, -2 for newlines
-        int end = xlPane.getText().length() - m_segmentEndInset -
+        int end = xlPane.getTextLength() - m_segmentEndInset -
                 OStrings.TF_CUR_SEGMENT_END.length();
         
         if (spos != epos)
@@ -1763,7 +1793,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     private String	m_activeProj;
     public int m_curEntryNum;
     private NearString m_curNear;
-    private String	m_curTrans = "";										// NOI18N
     
     private ProjectFrame	m_projWin;
     public ProjectFrame getProjectFrame()

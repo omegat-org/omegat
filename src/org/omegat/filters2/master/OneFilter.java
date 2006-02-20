@@ -107,6 +107,11 @@ public class OneFilter extends AbstractTableModel implements Serializable
             return getClassName();
         }
     }
+    /**
+     * Sets the "human" name of the filter.
+     * Since 1.6.0 RC7 does nothing.
+     */
+    public void setHumanName(String value) {}
     
     /** If the filter is used. */
     private boolean on = true;
@@ -241,6 +246,11 @@ public class OneFilter extends AbstractTableModel implements Serializable
             return "";                                                          // NOI18N
         }
     }
+    /** 
+     * Sets the hint for editing the filter and adding/editing filter instance. 
+     * Since 1.6.0 RC7 does nothing.
+     */
+    public void setHint(String hint)  {}
     
     /** Holds options of the filter. */
     private Serializable options = null;

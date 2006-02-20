@@ -129,6 +129,11 @@ public abstract class XMLAbstractFilter extends AbstractFilter
                 }
                 else
                 {
+                    // adding shortcut
+                    int idx = m_formatList.indexOf(blk.getTagName());
+                    if (idx>=0)
+                        blk.setShortcut((String)m_formatDisplayList.get(idx));
+                    
                     // all tags before text are stored in pre list
                     target.add(blk);
                 }
@@ -141,48 +146,40 @@ public abstract class XMLAbstractFilter extends AbstractFilter
             {
                 // tag encountered
                 
-                // cycle through format tag list to see if match
-                for (i=0; i<m_formatList.size(); i++)
+                // adding shortcuts for format tags
+                int idx = m_formatList.indexOf(blk.getTagName());
+                if (idx>=0)
                 {
-                    s = (String) m_formatList.get(i);
-                    if (blk.getTagName().equals(s))
-                    {
-                        // give it a shortcut
-                        s = (String) m_formatDisplayList.get(i);
-                        blk.setShortcut(s);
-                        
-                        target.add(blk);
-                        break;
-                    }
+                    blk.setShortcut((String)m_formatDisplayList.get(idx));
+                    target.add(blk);
                 }
-                // block handled - continue fresh processing of next
-                if (i < m_formatList.size())
-                    continue;
-                
-                // if we've made it this far it must be a structural tag
-                // consolidate lists and write entry
-                // move empty blocks at end of text list to post list
-                XMLBlock end;
-                for (i=m_textList.size()-1; i>=0; i--)
+                else
                 {
-                    end = (XMLBlock) m_textList.get(i);
-                    if (!end.hasText())
+                    // if we've made it this far it must be a structural tag
+                    // consolidate lists and write entry
+                    // move empty blocks at end of text list to post list
+                    XMLBlock end;
+                    for (i=m_textList.size()-1; i>=0; i--)
                     {
-                        m_postTextList.add(0, end);
-                        m_textList.remove(i);
+                        end = (XMLBlock) m_textList.get(i);
+                        if (!end.hasText())
+                        {
+                            m_postTextList.add(0, end);
+                            m_textList.remove(i);
+                        }
+                        else
+                        {
+                            // last element is text - nothing there to move
+                            break;
+                        }
                     }
-                    else
-                    {
-                        // last element is text - nothing there to move
-                        break;
-                    }
+                    writeEntry(xml, outfile, blk);
+                    m_preTextList.clear();
+                    m_textList.clear();
+                    m_postTextList.clear();
+                    m_tagMap.clear();
+                    target = m_preTextList;
                 }
-                writeEntry(xml, outfile, blk);
-                m_preTextList.clear();
-                m_textList.clear();
-                m_postTextList.clear();
-                m_tagMap.clear();
-                target = m_preTextList;
             }
         }
         if (m_preTextList.size() > 0)

@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 
 1.6.0 RC7 vs. 1.4.5.04
- 25 Enchancements
+ 27 Enchancements
  51 Bugfixes
 
 ----------------------------------------------------------------------
@@ -15,6 +15,12 @@
 
  - Filters should be individually configured
    http://sourceforge.net/support/tracker.php?aid=1434121
+
+ - Option for Text filter: Non-segmenting filter
+   http://sourceforge.net/support/tracker.php?aid=1435349
+
+ - Save project's backup each reload (up to 10 backups)
+   http://sourceforge.net/support/tracker.php?aid=1435288
 
  Bugfixes:
 

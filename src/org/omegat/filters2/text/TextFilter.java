@@ -24,13 +24,18 @@
 
 package org.omegat.filters2.text;
 
+import com.sun.rsasign.s;
+import java.awt.Dialog;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.Serializable;
+import java.io.Writer;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
 
 /**
  * Filter to support plain text files (in various encodings).
@@ -67,17 +72,50 @@ public class TextFilter extends AbstractFilter
         return true;
     }
     
-    public void processFile(BufferedReader in, BufferedWriter outfile)
+    public void processFile(BufferedReader in, BufferedWriter out)
             throws IOException
     {
-		String s;
         // BOM (byte order mark) bugfix
         in.mark(1);
         int ch = in.read();
         if (ch!=0xFEFF)
             in.reset();
-
+        
+        TextOptions options = (TextOptions)getOptions();
+        if (options==null)
+            options = new TextOptions();
+        
+        switch (options.getSegmentOn())
+        {
+            case TextOptions.SEGMENT_BREAKS:
+                processSegLineBreaks(in, out);
+                break;
+            case TextOptions.SEGMENT_EMPTYLINES:
+                processSegEmptyLines(in, out);
+                break;
+            default:
+                processNonSeg(in, out);
+        }
+    }
+    
+    /** Process the file without segmenting it. */
+    private void processNonSeg(BufferedReader in, Writer out)
+            throws IOException
+    {
+        StringBuffer segment = new StringBuffer();
+        char[] buf = new char[4096];
+        int len;
+        while ((len=in.read(buf))>=0)
+            segment.append(buf, 0, len);
+        out.write(processEntry(segment.toString()));
+    }
+    
+    /** Processes the file segmenting on line breaks. */
+    private void processSegLineBreaks(BufferedReader in, Writer out)
+            throws IOException
+    {
         String nontrans = "";	                                                // NOI18N
+		String s;
 		while( (s=in.readLine())!=null )
 		{
 			if( s.trim().length()==0 )
@@ -87,17 +125,91 @@ public class TextFilter extends AbstractFilter
 			}
 			String srcText = s;
 			
-            outfile.write(nontrans);
+            out.write(nontrans);
             nontrans = "";	                                                    // NOI18N
 
             String translation = processEntry(srcText);
-            outfile.write(translation);
+            out.write(translation);
             
 			nontrans += "\n";	                                                // NOI18N
 		}
         
 		if( nontrans.length()!=0 )
-			outfile.write(nontrans);
+			out.write(nontrans);
+    }
+
+    /** Processes the file segmenting on line breaks. */
+    private void processSegEmptyLines(BufferedReader in, Writer out)
+            throws IOException
+    {
+        StringBuffer nontrans = new StringBuffer();
+        StringBuffer trans = new StringBuffer();
+		String s;
+		while( (s=in.readLine())!=null )
+		{
+            if (s.length()==0)
+            {
+                out.write(nontrans.toString());
+                nontrans.setLength(0);
+
+                out.write(processEntry(trans.toString()));
+                trans.setLength(0);
+                nontrans.append("\n");                                          // NOI18N
+            }
+            else
+            {
+                if( s.trim().length()==0 && trans.length()==0 )
+                {
+                    nontrans.append(s);
+                    nontrans.append("\n");                                      // NOI18N
+                }
+                else
+                {
+                    trans.append(s);
+                    trans.append("\n");                                         // NOI18N
+                }
+            }
+		}
+        
+		if( nontrans.length()>=0 )
+			out.write(nontrans.toString());
+		if( trans.length()>=0 )
+            out.write(processEntry(trans.toString()));
+    }
+
+    /**
+     * Text filter shows a <b>modal</b> dialog to edit its own options.
+     * 
+     * @param currentOptions Current options to edit.
+     * @return Updated filter options if user confirmed the changes, and current options otherwise.
+     */
+    public Serializable changeOptions(Dialog parent, Serializable currentOptions)
+    {
+        try
+        {
+            TextOptions options = (TextOptions) currentOptions;
+            TextOptionsDialog dialog = new TextOptionsDialog(parent, options);
+            dialog.setVisible(true);
+            if( TextOptionsDialog.RET_OK==dialog.getReturnStatus() )
+                return dialog.getOptions();
+            else
+                return currentOptions;
+        }
+        catch( Exception e )
+        {
+            StaticUtils.log("Text filter thrown an exception: " +              // NOI18N
+                    e.getMessage());
+            return currentOptions;
+        }
+    }
+
+    /**
+     * Returns true to indicate that Text filter has options.
+     * @return True, because Text filter has options.
+     */
+    public boolean hasOptions()
+    {
+        return true;
     }
 
 }

@@ -141,64 +141,6 @@ public abstract class XMLAbstractFilter extends AbstractFilter
             {
                 // tag encountered
                 
-                // not working in 1.4.5
-                /*
-                // first cycle through verbatum tag list to see if match
-                for (i=0; i<m_verbatumList.size(); i++)
-                {
-                    s = (String) m_verbatumList.get(i);
-                    if (blk.getTagName().equals(s))
-                    {
-                        // store the identifying tag
-                        target.add(blk);
-                        
-                        // give it a shortcut
-                        //! s = (String) m_verbatumDisplayList.get(i);
-                        blk.setShortcut(s);
-                        
-                        // copy everything until close block
-                        // give imbedded format tags a shortcut
-                        ArrayList lst = xml.closeBlock(blk, true);
-                        XMLBlock openBlock = blk;
-                        for (int j=0; j<lst.size(); j++)
-                        {
-                            blk = (XMLBlock) lst.get(j);
-                            // if format tag, write shortcut
-                            if (target == m_textList &&
-                                    (blk.isTag() || blk.isComment()))
-                            {
-                                for (int k=0; k<m_formatList.size(); k++)
-                                {
-                                    s = (String) m_formatList.get(k);
-                                    if (blk.getTagName().equals(s))
-                                    {
-                                        s = (String)
-                                        m_formatDisplayList.get(k);
-                                        blk.setShortcut(s);
-                                        break;
-                                    }
-                                }
-                            }
-                            
-                            target.add(blk);
-                            if (target == m_preTextList &&
-                                    blk.hasText())
-                            {
-                                // text encountered - switch to correct
-                                //	list (if not already done so)
-                                target = m_textList;
-                            }
-                        }
-                        blk.setShortcut(openBlock.getShortcut());
-                        
-                        break;
-                    }
-                }
-                // verbatum block handled - continue with new block
-                if (i < m_verbatumList.size())
-                    continue;
-                 */
-                
                 // cycle through format tag list to see if match
                 for (i=0; i<m_formatList.size(); i++)
                 {

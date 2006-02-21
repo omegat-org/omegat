@@ -24,7 +24,6 @@
 
 package org.omegat.filters2.text;
 
-import com.sun.rsasign.s;
 import java.awt.Dialog;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

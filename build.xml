@@ -65,7 +65,7 @@
         </copy>
         <copy todir="${l10n.min.dir}/source">
             <fileset dir="." 
-                    includes="docs/en/InstantStart_NoNav.html src/**/Bundle.properties"/>
+                    includes="release/readme.txt docs/en/InstantStart_NoNav.html src/**/Bundle.properties"/>
         </copy>
         <zip destfile="dist2/${l10n.min}.zip" 
                 basedir="${l10n.dir}" includes="${l10n.min}/**" />
@@ -79,7 +79,7 @@
         </copy>
         <copy todir="${l10n.max.dir}/source">
             <fileset dir="." 
-                    includes="docs/en/** src/**/Bundle.properties"/>
+                    includes="release/readme.txt docs/en/** src/**/Bundle.properties"/>
         </copy>
         <zip destfile="dist2/${l10n.max}.zip" 
                 basedir="${l10n.dir}" includes="${l10n.max}/**" />

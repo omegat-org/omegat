@@ -1,5 +1,5 @@
 ==============================================================================
-OmegaT 1.6.0 RC7 Read Me file
+  OmegaT 1.6.0 RC7 Read Me file
 
   1.  Information about OmegaT
   2.  What is OmegaT?
@@ -9,7 +9,7 @@ OmegaT 1.6.0 RC7 Read Me file
   6.  Release details
 
 ==============================================================================
-1.  Information about OmegaT
+  1.  Information about OmegaT
 
 The most current info about OmegaT can be found at:
       http://www.omegat.org/omegat/omegat.html
@@ -27,7 +27,7 @@ Bug reports, at the SourceForge site:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347
 
 ==============================================================================
-2.  What is OmegaT?
+  2.  What is OmegaT?
 
 OmegaT is a Computer Assisted Translation tool. It is free, in the meaning
 that you don't have to pay anything to be able to use it, even for
@@ -35,16 +35,16 @@ professional use, and in the meaning that you are free to modify it and/or
 re-distribute it as long as you respect the user license.
 
 OmegaT's main features are
-- ability to run on any operating system supporting Java
-- use of any valid TMX file as translation reference
-- flexible sentence segmenting (using an SRX-like method)
-- searches in the project and the reference translation memories
-- searches in any directory including OmegaT-readable files
-- fuzzy matching
-- smart handling of projects including complex directory hierarchies
-- support for glossaries (terminology checks)
-- easy to understand documentation and tutorial
-- localization in a number of languages.
+  - ability to run on any operating system supporting Java
+  - use of any valid TMX file as translation reference
+  - flexible sentence segmenting (using an SRX-like method)
+  - searches in the project and the reference translation memories
+  - searches in any directory including OmegaT-readable files
+  - fuzzy matching
+  - smart handling of projects including complex directory hierarchies
+  - support for glossaries (terminology checks)
+  - easy to understand documentation and tutorial
+  - localization in a number of languages.
 
 OmegaT supports OpenDocument files, Microsoft Office files (using
 OpenOffice.org as a conversion filter), OpenOffice.org or StarOffice files, as
@@ -54,14 +54,14 @@ OmegaT will automatically parse even the most complex source directory
 hierarchies, to access all the supported files, and produce a target directory
 with exactly the same structure, including copies of any non-supported files.
 
-For a quick-start tutorial, launch OmegaT and read the displayed
-  "Instant Start Tutorial".
+For a quick-start tutorial, launch OmegaT and read the displayed Instant Start 
+Tutorial.
 
 The user manual is in the package you just downloaded, you can access it from
 the [Help] menu after starting OmegaT.
 
 ==============================================================================
-3. General notes about Java & OmegaT
+ 3. General notes about Java & OmegaT
 
 OmegaT requires the Java Runtime Environment version 1.4 or higher be
 installed on your system. It is available from:
@@ -77,7 +77,7 @@ After installing java you may need to modify your system path variable so that
 it includes the directory where the 'java' application resides.
 
 ==============================================================================
-4. Contributions to OmegaT
+ 4. Contributions to OmegaT
 
 To contribute to OmegaT development, get in touch with the developers at:
     http://lists.sourceforge.net/lists/listinfo/omegat-development
@@ -94,41 +94,40 @@ For other kind of contributions, subscribe first to the user group at:
 
 And get a feel of what is going on in the OmegaT world...
 
-
-OmegaT is originally the work of Keith Godfrey.
-Marc Prior is the coordinator of the OmegaT project.
+  OmegaT is originally the work of Keith Godfrey.
+  Marc Prior is the coordinator of the OmegaT project.
 
 Previous contributors include:
 (alphabetical order)
 
 Code has been contributed by
-    Sacha Chua
-    Kim Bruning
-    Maxym Mykhalchuk (current lead developer)
-    Henry Pijffers
-    Benjamin Siband
+  Sacha Chua
+  Kim Bruning
+  Maxym Mykhalchuk (current lead developer)
+  Henry Pijffers
+  Benjamin Siband
 
 Localization contributed by
-    Alessandro Cattelan (Italian)
-    Sabine Cretella (German)
-    Cesar Escribano Esteban (Spanish)
-    Dmitri Gabinski (Belarusian, Esperanto, and Russian)
-    Jean-Christophe Helary (French)
-    Juan Salcines (Spanish)
-    Pablo Roca Santiagio (Spanish)
-    Martin Wunderlich (German)
-    Hisashi Yanagida (Japanese)
+  Alessandro Cattelan (Italian)
+  Sabine Cretella (German)
+  Cesar Escribano Esteban (Spanish)
+  Dmitri Gabinski (Belarusian, Esperanto, and Russian)
+  Jean-Christophe Helary (French)
+  Juan Salcines (Spanish)
+  Pablo Roca Santiagio (Spanish)
+  Martin Wunderlich (German)
+  Hisashi Yanagida (Japanese)
 
 Other contributions by
-    Sabine Cretella
-    Dmitri Gabinski
-    Jean-Christophe Helary (current documentation manager)
-    Samuel Murray
-    Marc Prior (current localization manager)
-    and many, many more very helpful people
+  Sabine Cretella
+  Dmitri Gabinski
+  Jean-Christophe Helary (current documentation manager)
+  Samuel Murray
+  Marc Prior (current localization manager)
+  and many, many more very helpful people
 
 ==============================================================================
-5.  Is OmegaT bugging you ? Do you need help ?
+ 5.  Is OmegaT bugging you ? Do you need help ?
 
 Before reporting a bug, make sure that you have thouroughly checked the
 documentation. What you see may instead be a characteristic of OmegaT that
@@ -167,27 +166,27 @@ Please see the file 'changes.txt' for detailed information about changes in
 this and all previous releases.
 
 New UI features (comparing to 1.0 OmegaT series):
-     Find interface rewritten with enhanced functionality
-     Main interface improved
-     Ability to select a display font
-     Full localization support
-     Ability to jump to the next untranslated segment
-     Rich customization of Format Filters behaviour
-     User-customizable Segmentation
-     Match/Glossary Window is united by a draggable split pane
+  - Find interface rewritten with enhanced functionality
+  - Main interface improved
+  - Ability to select a display font
+  - Full localization support
+  - Ability to jump to the next untranslated segment
+  - Rich customization of Format Filters behaviour
+  - User-customizable Segmentation
+  - Match/Glossary Window is united by a draggable split pane
 
 File formats supported:
-     Plain text
-     HTML and XHTML
-     OpenDocument / OpenOffice.org
-     Java resource bundles (.properties)
+  - Plain text
+  - HTML and XHTML
+  - OpenDocument / OpenOffice.org
+  - Java resource bundles (.properties)
 
 Core changes:
-     Flexible (Sentence) Segmentation
-     File format filters may be created as plugins
-     Refactored code with more comments
-     Windows installer
-     Attributes of HTML tags are translatable
-     Full TMX 1.1-1.4b Level 1 compatibility
+  - Flexible (Sentence) Segmentation
+  - File format filters may be created as plugins
+  - Refactored code with more comments
+  - Windows installer
+  - Attributes of HTML tags are translatable
+  - Full TMX 1.1-1.4b Level 1 compatibility
 
 ==============================================================================

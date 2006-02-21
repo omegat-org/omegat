@@ -56,11 +56,16 @@ public class DefaultRules
         srules.add(new Rule(false, "resp\\.", "\\s"));                          // NOI18N
         srules.add(new Rule(false, "tel\\.", "\\s"));                           // NOI18N
 
-        // here goes the rule
+        // here go the break rules
+        
         srules.add(new Rule(true, "[\\.\\?\\!]+", "\\s"));                      // NOI18N
         // special handling for BR tag to segmenent on it
         // idea by Jean-Christophe Helary
-        srules.add(new Rule(true, "<br\\d+/?>", "."));                            // NOI18N
+        srules.add(new Rule(true, "<br\\d+/?>", "."));                          // NOI18N
+        // special handling for Text files to break on empty indented lines
+        // idea by Jean-Christophe Helary
+        srules.add(new Rule(true, "\\n", " +"));                                // NOI18N
+        
         return srules;
     }
 

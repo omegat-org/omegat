@@ -1309,7 +1309,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             }
             catch(BadLocationException ble)
             {
-                StaticUtils.log("Should not have happened, report to ???!");        // NOI18N
+                StaticUtils.log("Should not have happened, report to https://sourceforge.net/tracker/?group_id=68187&atid=520347");        // NOI18N
                 StaticUtils.log(ble.getMessage());
                 ble.printStackTrace();
                 ble.printStackTrace(StaticUtils.getLogStream());
@@ -1327,7 +1327,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         }
         catch(BadLocationException ble)
         {
-            StaticUtils.log("Should not have happened, report to ???!");        // NOI18N
+            StaticUtils.log("Should not have happened, report to https://sourceforge.net/tracker/?group_id=68187&atid=520347");        // NOI18N
             StaticUtils.log(ble.getMessage());
             ble.printStackTrace();
             ble.printStackTrace(StaticUtils.getLogStream());
@@ -1389,7 +1389,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                 }
                 catch(BadLocationException ble)
                 {
-                    StaticUtils.log("Should not have happened, report to ???!");     // NOI18N
+                    StaticUtils.log("Should not have happened, report to https://sourceforge.net/tracker/?group_id=68187&atid=520347");     // NOI18N
                     StaticUtils.log(ble.getMessage());
                     ble.printStackTrace();
                     ble.printStackTrace(StaticUtils.getLogStream());
@@ -1414,9 +1414,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         
         entryActivated = true;
         
-        int i;
-        DocumentSegment docSeg;
-        
         // recover data about current entry
         m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
         String srcText = m_curEntry.getSrcText();
@@ -1425,13 +1422,13 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         
         // sum up total character offset to current segment start
         m_segmentStartOffset = 0;
-        for (i=m_xlFirstEntry; i<m_curEntryNum; i++)
+        for (int i=m_xlFirstEntry; i<m_curEntryNum; i++)
         {
-            docSeg = (DocumentSegment) m_docSegList.get(i-m_xlFirstEntry);
+            DocumentSegment docSeg = (DocumentSegment) m_docSegList.get(i-m_xlFirstEntry);
             m_segmentStartOffset += docSeg.length; // length includes \n
         }
         
-        docSeg = (DocumentSegment) m_docSegList.get(m_curEntryNum - m_xlFirstEntry);
+        DocumentSegment docSeg = (DocumentSegment) m_docSegList.get(m_curEntryNum - m_xlFirstEntry);
         // -2 to move inside newlines at end of segment
         m_segmentEndInset = xlPane.getTextLength() - (m_segmentStartOffset + docSeg.length-2);
         
@@ -1457,7 +1454,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         }
         catch(BadLocationException ble)
         {
-            StaticUtils.log("Should not have happened, report to ???!");        // NOI18N
+            StaticUtils.log("Should not have happened, report to https://sourceforge.net/tracker/?group_id=68187&atid=520347");        // NOI18N
             StaticUtils.log(ble.getMessage());
             ble.printStackTrace();
             ble.printStackTrace(StaticUtils.getLogStream());
@@ -1480,7 +1477,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                 }
                 catch(BadLocationException ble)
                 {
-                    StaticUtils.log("Should not have happened, report to ???!");        // NOI18N
+                    StaticUtils.log("Should not have happened, report to https://sourceforge.net/tracker/?group_id=68187&atid=520347");        // NOI18N
                     StaticUtils.log(ble.getMessage());
                     ble.printStackTrace();
                     ble.printStackTrace(StaticUtils.getLogStream());
@@ -1508,7 +1505,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                         }
                         catch(BadLocationException ble)
                         {
-                            StaticUtils.log("Should not have happened, report to ???!");        // NOI18N
+                            StaticUtils.log("Should not have happened, report to https://sourceforge.net/tracker/?group_id=68187&atid=520347");        // NOI18N
                             StaticUtils.log(ble.getMessage());
                             ble.printStackTrace();
                             ble.printStackTrace(StaticUtils.getLogStream());
@@ -1525,7 +1522,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                         }
                         catch(BadLocationException ble)
                         {
-                            StaticUtils.log("Should not have happened, report to ???!");        // NOI18N
+                            StaticUtils.log("Should not have happened, report to https://sourceforge.net/tracker/?group_id=68187&atid=520347");        // NOI18N
                             StaticUtils.log(ble.getMessage());
                             ble.printStackTrace();
                             ble.printStackTrace(StaticUtils.getLogStream());
@@ -1543,7 +1540,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         }
         catch(BadLocationException ble)
         {
-            StaticUtils.log("Should not have happened, report to ???!");        // NOI18N
+            StaticUtils.log("Should not have happened, report to https://sourceforge.net/tracker/?group_id=68187&atid=520347");        // NOI18N
             StaticUtils.log(ble.getMessage());
             ble.printStackTrace();
             ble.printStackTrace(StaticUtils.getLogStream());
@@ -1585,18 +1582,50 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         else
             setMessageText("");													// NOI18N
 
-        try
+        int offsetPrev = 0;
+        for (int i=Math.max(0, m_curEntryNum-3); i<m_curEntryNum; i++)
         {
-            if( m_segmentStartOffset < 100)
-                xlPane.setCaretPosition(0);
-            
-            xlPane.setCaretPosition(m_segmentStartOffset + 
-                    srcText.length() + startStr.length() + 1 );
+            docSeg = (DocumentSegment) m_docSegList.get(i);
+            offsetPrev += docSeg.length;
         }
-        catch(IllegalArgumentException iae)
+        final int lookPrev = m_segmentStartOffset - offsetPrev;
+        
+        int offsetNext = 0;
+        for (int i=m_curEntryNum+1; i<(m_curEntryNum+4) && i<=m_xlLastEntry; i++)
         {
-            // it's OK
+            docSeg = (DocumentSegment) m_docSegList.get(i);
+            offsetNext += docSeg.length;
         }
+        final int lookNext = m_segmentStartOffset + srcText.length() + startStr.length() + 1 + 
+                translation.length() + endStr.length() + offsetNext;
+        
+        SwingUtilities.invokeLater(new Runnable()
+        {
+            public void run()
+            {
+                SwingUtilities.invokeLater(new Runnable()
+                {
+                    public void run()
+                    {
+                        xlPane.setCaretPosition(lookNext);
+                        SwingUtilities.invokeLater(new Runnable()
+                        {
+                            public void run()
+                            {
+                                xlPane.setCaretPosition(lookPrev);
+                                SwingUtilities.invokeLater(new Runnable()
+                                {
+                                    public void run()
+                                    {
+                                        checkCaret();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
         
         if (!m_docReady)
         {

@@ -300,59 +300,6 @@ public class MatchGlossaryPane extends javax.swing.JPanel implements java.beans.
         m_hiliteEnd = end;
     }
     
-    public void storeScreenLayout()
-    {
-        Preferences.setPreference(Preferences.MATCHWINDOW_WIDTH, getWidth());
-        Preferences.setPreference(Preferences.MATCHWINDOW_HEIGHT, getHeight());
-        Preferences.setPreference(Preferences.MATCHWINDOW_X, getX());
-        Preferences.setPreference(Preferences.MATCHWINDOW_Y, getY());
-    }
-    
-    /**
-     * Initializes the screen layout.
-     * <p>
-     * KBG - assume screen size is 800x600 if width less than 900, and
-     * 1024x768 if larger.  assume task bar at bottom of screen.
-     * if screen size saved, recover that and use instead
-     * (18may04).
-     */
-    private void initScreenLayout()
-    {
-        boolean badSize = false;
-        try
-        {
-            String dw = Preferences.getPreference(Preferences.MATCHWINDOW_WIDTH);
-            String dh = Preferences.getPreference(Preferences.MATCHWINDOW_HEIGHT);
-            String dx = Preferences.getPreference(Preferences.MATCHWINDOW_X);
-            String dy = Preferences.getPreference(Preferences.MATCHWINDOW_Y);
-            int x = Integer.parseInt(dx);
-            int y = Integer.parseInt(dy);
-            int w = Integer.parseInt(dw);
-            int h = Integer.parseInt(dh);
-            setSize(w, h);
-            setLocation(x, y);
-        }
-        catch(Exception e)
-        {
-            // size info missing - put window in default position
-            GraphicsEnvironment env =
-                    GraphicsEnvironment.getLocalGraphicsEnvironment();
-            Rectangle scrSize = env.getMaximumWindowBounds();
-            if (scrSize.width < 900)
-            {
-                // assume 800x600
-                setSize(200, 536);
-                setLocation(590, 0);
-            }
-            else
-            {
-                // assume 1024x768 or larger
-                setSize(320, 700);
-                setLocation(680, 0);
-            }
-        }
-    }
-    
     private String m_matchDisplay = "";                                         // NOI18N
     private String m_glosDisplay = "";                                          // NOI18N
     private int    m_matchCount;

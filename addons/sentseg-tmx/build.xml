@@ -4,6 +4,7 @@
     <import file="nbproject/build-impl.xml"/>
 
     <target name="-pre-compile">
+        <mkdir dir="lib"/>
         <copy file="../../dist/OmegaT.jar" todir="lib" />
         <copy file="../../dist/lib-mnemonics.jar" todir="lib" />
     </target>

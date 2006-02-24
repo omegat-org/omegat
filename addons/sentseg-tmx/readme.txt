@@ -10,3 +10,5 @@ and type
 ----------------------------------------------------------------------
 
 Verison 1.0: Initial release
+
+Verison 1.1: Updated to work using OmegaT 1.6.0 RC7+ core classes

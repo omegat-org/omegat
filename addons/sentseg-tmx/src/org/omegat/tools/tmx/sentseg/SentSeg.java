@@ -21,6 +21,7 @@
 
 package org.omegat.tools.tmx.sentseg;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
@@ -31,6 +32,7 @@ import org.omegat.core.threads.CommandThread;
 import org.omegat.gui.OmegaTFileChooser;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
+import org.omegat.util.Language;
 import org.omegat.util.StaticUtils;
 
 /**
@@ -67,6 +69,7 @@ public class SentSeg extends javax.swing.JFrame
     {
         initComponents();
         initComponentsSomeMore();
+        invalidate();
         pack();
     }
 
@@ -132,6 +135,10 @@ public class SentSeg extends javax.swing.JFrame
         segmentButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         resultsTextArea = new javax.swing.JTextArea();
+        srcLangLabel = new javax.swing.JLabel();
+        tarLangLabel = new javax.swing.JLabel();
+        srcLang = new javax.swing.JComboBox();
+        tarLang = new javax.swing.JComboBox();
 
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -148,13 +155,14 @@ public class SentSeg extends javax.swing.JFrame
         hintTextArea.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 5);
         getContentPane().add(hintTextArea, gridBagConstraints);
 
+        selectTmxLabel.setLabelFor(tmxTextField);
         org.openide.awt.Mnemonics.setLocalizedText(selectTmxLabel, "Select a &TMX file to segment:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -187,10 +195,11 @@ public class SentSeg extends javax.swing.JFrame
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 5);
         getContentPane().add(browseButton, gridBagConstraints);
 
+        saveTmxLabel.setLabelFor(saveTmxTextField);
         org.openide.awt.Mnemonics.setLocalizedText(saveTmxLabel, "Save a &new TMX file as:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
@@ -198,7 +207,7 @@ public class SentSeg extends javax.swing.JFrame
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
@@ -215,7 +224,7 @@ public class SentSeg extends javax.swing.JFrame
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 5);
         getContentPane().add(browseSaveButton, gridBagConstraints);
 
@@ -262,7 +271,7 @@ public class SentSeg extends javax.swing.JFrame
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
@@ -279,13 +288,53 @@ public class SentSeg extends javax.swing.JFrame
         resultsTextArea.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 5);
         getContentPane().add(resultsTextArea, gridBagConstraints);
+
+        srcLangLabel.setLabelFor(srcLang);
+        org.openide.awt.Mnemonics.setLocalizedText(srcLangLabel, "So&urce Language:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        getContentPane().add(srcLangLabel, gridBagConstraints);
+
+        tarLangLabel.setLabelFor(tarLang);
+        org.openide.awt.Mnemonics.setLocalizedText(tarLangLabel, "&Target Language:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        getContentPane().add(tarLangLabel, gridBagConstraints);
+
+        srcLang.setModel(new DefaultComboBoxModel(Language.LANGUAGES));
+        srcLang.setSelectedItem(new Language("en-US"));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        getContentPane().add(srcLang, gridBagConstraints);
+
+        tarLang.setModel(new DefaultComboBoxModel(Language.LANGUAGES));
+        tarLang.setSelectedItem(new Language("en-GB"));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        getContentPane().add(tarLang, gridBagConstraints);
 
         pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -319,8 +368,11 @@ public class SentSeg extends javax.swing.JFrame
 
     private void segmentButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_segmentButtonActionPerformed
     {//GEN-HEADEREND:event_segmentButtonActionPerformed
-        TMXResegmenter resegmenter = new TMXResegmenter(tmxTextField.getText(),
-                saveTmxTextField.getText());
+        TMXResegmenter resegmenter = new TMXResegmenter(
+                tmxTextField.getText(),
+                saveTmxTextField.getText(),
+                srcLang.getSelectedItem(),
+                tarLang.getSelectedItem());
         try
         {
             resegmenter.resegment();
@@ -363,6 +415,10 @@ public class SentSeg extends javax.swing.JFrame
     private javax.swing.JTextField saveTmxTextField;
     private javax.swing.JButton segmentButton;
     private javax.swing.JLabel selectTmxLabel;
+    private javax.swing.JComboBox srcLang;
+    private javax.swing.JLabel srcLangLabel;
+    private javax.swing.JComboBox tarLang;
+    private javax.swing.JLabel tarLangLabel;
     private javax.swing.JTextField tmxTextField;
     // End of variables declaration//GEN-END:variables
     

@@ -43,12 +43,17 @@ public class TMXResegmenter
 {
     private String sourceTMX;
     private String targetTMX;
+    private Language srcLang;
+    private Language tarLang;
     
     /** Creates a new instance of TMXResegmenter */
-    public TMXResegmenter(String sourceTMX, String targetTMX)
+    public TMXResegmenter(String sourceTMX, String targetTMX, 
+            Object srcLang, Object tarLang)
     {
         this.sourceTMX = sourceTMX;
         this.targetTMX = targetTMX;
+        this.srcLang = new Language(srcLang.toString());
+        this.tarLang = new Language(tarLang.toString());
     }
     
     // post-resegmentation information
@@ -79,8 +84,8 @@ public class TMXResegmenter
      */
     public void resegment() throws IOException, TranslationException
     {
-        TMXReader tmx = new TMXReader("UTF-8");
-        tmx.loadFile(sourceTMX);
+        TMXReader tmx = new TMXReader("UTF-8", srcLang, tarLang);
+        tmx.loadFile(sourceTMX, true);
         String srclang = tmx.getSourceLanguage();
         String tarlang = tmx.getTargetLanguage();
         Writer writer = createWriter();

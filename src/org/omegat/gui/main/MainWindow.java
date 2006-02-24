@@ -596,8 +596,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             entry = CommandThread.core.getSTE(curEntryNum);
             
             // check if the entry is not null, and whether it contains a translation
-            if (   (entry != null)
-            && (entry.getTranslation().length() == 0))
+            if (entry!=null && entry.getTranslation().length()==0)
             {
                 // mark the entry
                 m_curEntryNum = curEntryNum;
@@ -1583,7 +1582,8 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             setMessageText("");													// NOI18N
 
         int offsetPrev = 0;
-        for (int i=Math.max(0, m_curEntryNum-3); i<m_curEntryNum; i++)
+        int localNum = m_curEntryNum-m_xlFirstEntry;
+        for (int i=Math.max(0, localNum-3); i<localNum; i++)
         {
             docSeg = (DocumentSegment) m_docSegList.get(i);
             offsetPrev += docSeg.length;
@@ -1591,7 +1591,8 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         final int lookPrev = m_segmentStartOffset - offsetPrev;
         
         int offsetNext = 0;
-        for (int i=m_curEntryNum+1; i<(m_curEntryNum+4) && i<=m_xlLastEntry; i++)
+        int localLast = m_xlLastEntry-m_xlFirstEntry;
+        for (int i=localNum+1; i<(localNum+4) && i<=localLast; i++)
         {
             docSeg = (DocumentSegment) m_docSegList.get(i);
             offsetNext += docSeg.length;

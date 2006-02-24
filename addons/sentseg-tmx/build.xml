@@ -9,15 +9,16 @@
     </target>
         
     <target name="-post-clean">
+        <delete dir="lib"/>
         <delete file="log.txt"/>
         <delete file="omegat.prefs"/>
         <delete file="segmentation.conf"/>
-        <delete file="sentseg_tmx_1.0.zip"/>
+        <delete file="sentseg_tmx_1.1.zip"/>
         <delete file="sentseg-tmx.jar"/>
     </target>
         
     <target name="dist" depends="jar" description="Creates a ZIP distro of TMX Sentence Segmenter">
-        <zip basedir="." destfile="sentseg_tmx_1.0.zip"
+        <zip basedir="." destfile="sentseg_tmx_1.1.zip"
                   includes="sentseg-tmx.jar lib/** readme.txt" />
     </target>
     

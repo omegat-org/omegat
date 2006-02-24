@@ -260,7 +260,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         m_curNear = null;
         m_activeProj = "";														// NOI18N
         m_activeFile = "";														// NOI18N
-        m_docSegList = new ArrayList();
         
         ////////////////////////////////
         
@@ -1134,21 +1133,22 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         
         // clear old text
         xlPane.setText("");													// NOI18N
-        m_docSegList.clear();
         
         m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
         
         m_xlFirstEntry = m_curEntry.getFirstInFile();
         m_xlLastEntry = m_curEntry.getLastInFile();
+        int xlEntries = 1+m_xlLastEntry-m_xlFirstEntry;
         
         DocumentSegment docSeg;
         StringBuffer textBuf = new StringBuffer();
+        m_docSegList = new DocumentSegment[xlEntries];
         
-        for (int entryNum=m_xlFirstEntry; entryNum<=m_xlLastEntry; entryNum++)
+        for (int i=0; i<xlEntries; i++)
         {
             docSeg = new DocumentSegment();
             
-            SourceTextEntry ste = CommandThread.core.getSTE(entryNum);
+            SourceTextEntry ste = CommandThread.core.getSTE(i+m_xlFirstEntry);
             String text = ste.getTranslation();
             // set text and font
             if( text.length()==0 )
@@ -1161,8 +1161,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             textBuf.append(text);
             
             docSeg.length = text.length();
-            m_docSegList.add(docSeg);
+            m_docSegList[i] = docSeg;
         }
+        
         xlPane.setText(textBuf.toString());
         Thread.yield();
     }
@@ -1235,7 +1236,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         StringEntry curEntry = m_curEntry.getStrEntry();
         if (curEntry.getGlossaryEntries().size() > 0)
         {
-            // TODO do something with glossary terms
             m_glossaryLength = curEntry.getGlossaryEntries().size();
             ListIterator li = curEntry.getGlossaryEntries().listIterator();
             while (li.hasNext())
@@ -1346,7 +1346,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             m_curEntry.setTranslation(new_translation);
         
         int localCur = m_curEntryNum - m_xlFirstEntry;
-        DocumentSegment docSeg = (DocumentSegment) m_docSegList.get(localCur);
+        DocumentSegment docSeg = m_docSegList[localCur];
         docSeg.length = display_string.length() + "\n\n".length();							// NOI18N
         
         // update the length parameters of all changed segments
@@ -1362,7 +1362,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             for (int i=0; i<localEntries; i++)
             {
                 offsets[i]=currentOffset;
-                docSeg = (DocumentSegment) m_docSegList.get(i);
+                docSeg = m_docSegList[i];
                 currentOffset += docSeg.length;
             }
 
@@ -1383,7 +1383,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                 int offset = offsets[localEntry];
                 
                 // replace old text w/ new
-                docSeg = (DocumentSegment) m_docSegList.get(localEntry);
+                docSeg = m_docSegList[localEntry];
                 try
                 {
                     xlPane.getDocument().remove(offset, docSeg.length);
@@ -1425,13 +1425,14 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         
         // sum up total character offset to current segment start
         m_segmentStartOffset = 0;
-        for (int i=m_xlFirstEntry; i<m_curEntryNum; i++)
+        int localCur = m_curEntryNum - m_xlFirstEntry;
+        for (int i=0; i<localCur; i++)
         {
-            DocumentSegment docSeg = (DocumentSegment) m_docSegList.get(i-m_xlFirstEntry);
+            DocumentSegment docSeg = m_docSegList[i];
             m_segmentStartOffset += docSeg.length; // length includes \n
         }
         
-        DocumentSegment docSeg = (DocumentSegment) m_docSegList.get(m_curEntryNum - m_xlFirstEntry);
+        DocumentSegment docSeg = m_docSegList[localCur];
         // -2 to move inside newlines at end of segment
         m_segmentEndInset = xlPane.getTextLength() - (m_segmentStartOffset + docSeg.length-2);
         
@@ -1589,7 +1590,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         int localNum = m_curEntryNum-m_xlFirstEntry;
         for (int i=Math.max(0, localNum-3); i<localNum; i++)
         {
-            docSeg = (DocumentSegment) m_docSegList.get(i);
+            docSeg = m_docSegList[i];
             offsetPrev += docSeg.length;
         }
         final int lookPrev = m_segmentStartOffset - offsetPrev;
@@ -1598,7 +1599,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         int localLast = m_xlLastEntry-m_xlFirstEntry;
         for (int i=localNum+1; i<(localNum+4) && i<=localLast; i++)
         {
-            docSeg = (DocumentSegment) m_docSegList.get(i);
+            docSeg = m_docSegList[i];
             offsetNext += docSeg.length;
         }
         final int lookNext = m_segmentStartOffset + srcText.length() + startStr.length() + 1 + 
@@ -1821,8 +1822,8 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     // indicates the document is loaded and ready for processing
     public boolean	m_docReady;
     
-    // list of text segments in current doc
-    public ArrayList	m_docSegList;
+    /** text segments in current document. */
+    public DocumentSegment[] m_docSegList;
     
     public char	m_advancer;
     

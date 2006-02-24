@@ -137,7 +137,7 @@ public class MainPane extends JTextPane implements MouseListener, DocumentListen
                 int offset = 0;
                 for (i=mw.m_xlFirstEntry; i<mw.m_curEntryNum; i++)
                 {
-                    docSeg = (DocumentSegment) mw.m_docSegList.get(i-mw.m_xlFirstEntry);
+                    docSeg = mw.m_docSegList[i-mw.m_xlFirstEntry];
                     offset += docSeg.length;
                     if (pos < offset)
                     {
@@ -152,7 +152,7 @@ public class MainPane extends JTextPane implements MouseListener, DocumentListen
                 int inset = getTextLength() - mw.m_segmentEndInset;
                 for (i=mw.m_curEntryNum+1; i<=mw.m_xlLastEntry; i++)
                 {
-                    docSeg = (DocumentSegment)mw.m_docSegList.get(i-mw.m_xlFirstEntry);
+                    docSeg = mw.m_docSegList[i-mw.m_xlFirstEntry];
                     inset += docSeg.length;
                     if (pos < inset)
                     {

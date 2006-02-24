@@ -1164,6 +1164,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             m_docSegList.add(docSeg);
         }
         xlPane.setText(textBuf.toString());
+        Thread.yield();
     }
     
     ///////////////////////////////////////////////////////////////
@@ -1344,8 +1345,8 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         else
             m_curEntry.setTranslation(new_translation);
         
-        DocumentSegment docSeg = (DocumentSegment)
-        m_docSegList.get(m_curEntryNum - m_xlFirstEntry);
+        int localCur = m_curEntryNum - m_xlFirstEntry;
+        DocumentSegment docSeg = (DocumentSegment) m_docSegList.get(localCur);
         docSeg.length = display_string.length() + "\n\n".length();							// NOI18N
         
         // update the length parameters of all changed segments
@@ -1355,9 +1356,10 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             // find all identical strings and redraw them
             
             // build offsets of all strings
-            int[] offsets = new int[m_xlLastEntry-m_xlFirstEntry];
+            int localEntries = 1+m_xlLastEntry-m_xlFirstEntry;
+            int[] offsets = new int[localEntries];
             int currentOffset = 0;
-            for (int i=0; i<(m_xlLastEntry-m_xlFirstEntry); i++)
+            for (int i=0; i<localEntries; i++)
             {
                 offsets[i]=currentOffset;
                 docSeg = (DocumentSegment) m_docSegList.get(i);
@@ -1374,6 +1376,8 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                     continue;
                 else if (entry<m_xlFirstEntry)
                     break;
+                else if (entry==m_curEntryNum)
+                    continue;
                 
                 int localEntry = entry-m_xlFirstEntry;
                 int offset = offsets[localEntry];

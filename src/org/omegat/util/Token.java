@@ -103,5 +103,10 @@ public class Token
     {
         return offset;
     }
+
+    public String toString()
+    {
+        return text+"@"+offset;
+    }
 }
 

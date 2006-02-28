@@ -154,7 +154,7 @@ public class MainPane extends JTextPane implements MouseListener, DocumentListen
                 {
                     docSeg = mw.m_docSegList[i-mw.m_xlFirstEntry];
                     inset += docSeg.length;
-                    if (pos < inset)
+                    if (pos <= inset)
                     {
                         mw.doGotoEntry(i+1);
                         return;

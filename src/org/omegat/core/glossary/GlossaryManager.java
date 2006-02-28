@@ -116,6 +116,13 @@ public class GlossaryManager
         }
 
         BufferedReader in = new BufferedReader(reader);
+        
+        // BOM (byte order mark) bugfix
+        in.mark(1);
+        int ch = in.read();
+        if (ch!=0xFEFF)
+            in.reset();
+        
         for( String s = in.readLine(); s!=null; s = in.readLine() )
 		{
 			// skip lines that start with '#'

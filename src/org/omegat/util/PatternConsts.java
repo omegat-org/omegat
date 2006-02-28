@@ -61,7 +61,7 @@ public class PatternConsts
      * omegat-specific tag (without leading &lt; and trailing &gt;).
      */
     public static final Pattern OMEGAT_TAG_ONLY = Pattern.compile(
-            "^\\/?[a-zA-Z]+[0-9]+$");                                           // NOI18N
+            "^\\/?[a-zA-Z]+[0-9]+\\/?$");                                           // NOI18N
 
     /** 
      * Pattern that matches omegat-specific tags 

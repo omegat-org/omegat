@@ -1609,14 +1609,14 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             public void run()
             {
-                SwingUtilities.invokeLater(new Runnable()
+                try
                 {
-                    public void run()
+                    xlPane.setCaretPosition(lookNext);
+                    SwingUtilities.invokeLater(new Runnable()
                     {
-                        xlPane.setCaretPosition(lookNext);
-                        SwingUtilities.invokeLater(new Runnable()
+                        public void run()
                         {
-                            public void run()
+                            try
                             {
                                 xlPane.setCaretPosition(lookPrev);
                                 SwingUtilities.invokeLater(new Runnable()
@@ -1627,9 +1627,13 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                                     }
                                 });
                             }
-                        });
-                    }
-                });
+                            catch(IllegalArgumentException iae)
+                            {} // eating silently
+                        }
+                    });
+                }
+                catch(IllegalArgumentException iae)
+                {} // eating silently
             }
         });
         
@@ -1797,7 +1801,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     
     /** Tells whether the project is loaded. */
     public boolean isProjectLoaded()
-    { 
+    {
         return m_projectLoaded;
     }
     

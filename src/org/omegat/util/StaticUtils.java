@@ -255,7 +255,7 @@ public class StaticUtils
             for (int i=0; i<tokenStr.length(); i++)
             {
                 char ch = tokenStr.charAt(i);
-                if (Character.isLetterOrDigit(ch))
+                if (Character.isLetter(ch))
                 {
                     word = true;
                     break;

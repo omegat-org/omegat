@@ -69,15 +69,10 @@ public class Token
     
     
     private static Pattern AMP = Pattern.compile("\\&");                        // NOI18N
-    private static Pattern LAST_AMPS = Pattern.compile("\\&+$");                // NOI18N
     
     private String stripAmpersand(String s)
     {
         return AMP.matcher(s).replaceAll("");                                   // NOI18N
-    }
-    private String stripLastAmpersands(String s)
-    {
-        return LAST_AMPS.matcher(s).replaceFirst("");                           // NOI18N
     }
     
     /**
@@ -87,7 +82,7 @@ public class Token
      */
     public Token(String _text, int _offset)
     {
-        length = stripLastAmpersands(_text).length();
+        length = _text.length();
         text = stripAmpersand(_text);
         offset = _offset;
     }

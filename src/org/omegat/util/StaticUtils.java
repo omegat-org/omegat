@@ -28,9 +28,11 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.text.BreakIterator;
 import java.util.List;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -193,7 +195,7 @@ public class StaticUtils
     private static SortedSet STOP_WORDS = new TreeSet();
     static
     {
-        // STOP_WORDS.add("a"); // words with length = 1 are stripped automatically
+        STOP_WORDS.add("a");                                                    // NOI18N
         STOP_WORDS.add("an");                                                   // NOI18N
         STOP_WORDS.add("for");                                                  // NOI18N
         STOP_WORDS.add("from");                                                 // NOI18N
@@ -203,14 +205,26 @@ public class StaticUtils
         STOP_WORDS.add("the");                                                  // NOI18N
     }
     
+    private static BreakIterator wordBreaker = null;
+    /** Returns an iterator to break sentences into words. */
+    private static BreakIterator getWordBreaker()
+    {
+        if (wordBreaker==null)
+            wordBreaker = new WordIterator();// BreakIterator.getWordInstance();
+        return wordBreaker;
+    }
+    
     /**
      * Builds a list of tokens and a list of their offsets w/in a file.
+     * <p>
      * It breaks string into tokens like in the following examples:
      * <ul>
      * <li> This is a semi-good way. -> "this", "is", "a", "semi-good", "way"
      * <li> Fine, thanks, and you? -> "fine", "thanks", "and", "you"
      * <li> C&all this action -> "call", "this", "action" ('&' is eaten)
      * </ul>
+     * <p>
+     * Also skips OmegaT tags.
      *
      * @param str string to tokenize
      * @param tokenList the list to add tokens to
@@ -223,94 +237,41 @@ public class StaticUtils
             return 0;  // fixes bug nr. 1382810 (StringIndexOutOfBoundsException)
         
         str = str.toLowerCase();
-        
-        boolean word = false;
-        boolean tagstart = false;
-        StringBuffer tokenBuff = new StringBuffer(len);
-        int tokenStart = 0;
         int nTokens = 0;
-        char ch = str.charAt(0);
-        for(int i=0; i<len; i++)
+        
+        BreakIterator breaker = getWordBreaker();
+        breaker.setText(str);
+        
+        String tokenPrev;
+        String tokenStr = new String();
+        
+        int start = breaker.first();
+        for (int end = breaker.next(); end!=BreakIterator.DONE; 
+                start = end, end = breaker.next())
         {
-            char pch = ch;
-            ch = str.charAt(i);
-            if( word )
+            tokenPrev = tokenStr;
+            tokenStr = str.substring(start,end);
+            boolean word = false;
+            for (int i=0; i<tokenStr.length(); i++)
             {
-                if( Character.isLetterOrDigit(ch) || 
-                        (ch=='&' && pch!='&') ) // "Bro&wse" is a single word
-                                                // but "Foo&&Foo" is not
+                char ch = tokenStr.charAt(i);
+                if (Character.isLetterOrDigit(ch))
                 {
-                    // word continues
-                    tokenBuff.append(ch);
-                }
-                else
-                {
-                    if( tokenBuff.length()<=1 )
-                    {
-                        // too short (one char) for a word
-                        word = false;
-                    }
-                    else if( STOP_WORDS.contains(tokenBuff.toString()) )
-                    {
-                        // is in a stop-words list
-                        word = false;
-                    }
-                    else if( ch=='>' && tagstart && Character.isDigit(pch) )
-                    {
-                        // this is an OmegaT tag!
-                        word = false;
-                    }
-                    else
-                    {
-                        // finally, it's really a word
-                        nTokens++;
-                        word = false;
-                        if( tokenList!=null )
-                        {
-                            Token token = new Token(tokenBuff.toString(), tokenStart);
-                            tokenList.add(token);
-                        }
-                    }
+                    word = true;
+                    break;
                 }
             }
-            else
+            if (word && !STOP_WORDS.contains(tokenStr) &&
+                    !PatternConsts.OMEGAT_TAG.matcher(tokenStr).matches())
             {
-                if( Character.isLetterOrDigit(ch) )
+                nTokens++;
+                if (tokenList!=null)
                 {
-                    if( !CJKUtils.isCJK(ch) )
-                    {
-                        word = true;
-                        tokenStart = i;
-                        tokenBuff.setLength(0);
-                        tokenBuff.append(ch);
-                    }
-                    else
-                    {
-                        nTokens++;
-                        if( tokenList!=null )
-                        {
-                            Token token = new Token(Character.toString(ch), i);
-                            tokenList.add(token);
-                        }
-                    }
-                }
-                else if( ch=='<' )
-                {
-                    tagstart = true;
+                    Token token = new Token(tokenStr, start);
+                    tokenList.add(token);
                 }
             }
         }
-        
-        if( word && tokenBuff.length()>1 && !STOP_WORDS.contains(tokenBuff.toString()) )
-        {
-            nTokens++;
-            if( tokenList!=null )
-            {
-                Token token = new Token(tokenBuff.toString(), tokenStart);
-                tokenList.add(token);
-            }
-        }
-        
         return nTokens;
     }
     

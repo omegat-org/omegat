@@ -26,8 +26,6 @@ package org.omegat.util;
 
 import java.text.BreakIterator;
 import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
 
 /**
  * BreakIterator for word-breaks with OmegaT heuristics,
@@ -78,7 +76,7 @@ public class WordIterator extends BreakIterator
         return breaker.current();
     }
     
-    Queue nextItems = new LinkedList();
+    LinkedList nextItems = new LinkedList();
     
     /**
      * Return the boundary of the word following the current boundary.
@@ -92,7 +90,7 @@ public class WordIterator extends BreakIterator
     public int next()
     {
         if (!nextItems.isEmpty())
-            return ((Integer)nextItems.poll()).intValue();
+            return ((Integer)nextItems.removeFirst()).intValue();
         
         int curr = current();
         int next = breaker.next();
@@ -110,7 +108,7 @@ public class WordIterator extends BreakIterator
             int next3 = breaker.next();
             if (DONE==next3)
             {
-                nextItems.offer(new Integer(next2));
+                nextItems.add(new Integer(next2));
                 return next;
             }
             // there're at least two maybe-words after "<"
@@ -131,8 +129,8 @@ public class WordIterator extends BreakIterator
                 int next4 = breaker.next();
                 if (DONE==next4)
                 {
-                    nextItems.offer(new Integer(next2));
-                    nextItems.offer(new Integer(next3));
+                    nextItems.add(new Integer(next2));
+                    nextItems.add(new Integer(next3));
                     return next;
                 }
                 // there're at least three maybe-words after "<"
@@ -162,8 +160,8 @@ public class WordIterator extends BreakIterator
                 int next4 = breaker.next();
                 if (DONE==next4)
                 {
-                    nextItems.offer(new Integer(next2));
-                    nextItems.offer(new Integer(next3));
+                    nextItems.add(new Integer(next2));
+                    nextItems.add(new Integer(next3));
                     return next;
                 }
                 // there're at least three maybe-words after "<"
@@ -219,7 +217,7 @@ public class WordIterator extends BreakIterator
                 if (DONE==next3)
                 {
                     // Something&
-                    nextItems.offer(new Integer(next2));
+                    nextItems.add(new Integer(next2));
                     return next;
                 }
                 

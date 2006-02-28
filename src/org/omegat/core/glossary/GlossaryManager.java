@@ -40,6 +40,7 @@ import java.util.regex.PatternSyntaxException;
 import org.omegat.core.StringEntry;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.Token;
 
 /**
  * Class that loads glossary files and adds glossary entries 
@@ -157,24 +158,16 @@ public class GlossaryManager
 		for(int i=0; i<glossaryEntries.size(); i++)
 		{
 			GlossaryEntry glosEntry = (GlossaryEntry)glossaryEntries.get(i);
-            String glosStrLow = glosEntry.getSrcText().toLowerCase();
-            Pattern pattern = null;
-            try
-            {
-                pattern = Pattern.compile("\\b"+glosStrLow+"\\b");      // NOI18N
-            }
-            catch( PatternSyntaxException pse )
-            {
-                StaticUtils.log(pse.toString());
+            String glosStr = glosEntry.getSrcText();
+            List glosTokens = new ArrayList();
+            int glosTokensN = StaticUtils.tokenizeText(glosStr, glosTokens);
+            if (glosTokensN==0)
                 continue;
-            }
-            
             for(int j=0; j<strEntryList.size(); j++)
             {
                 StringEntry strEntry = (StringEntry)strEntryList.get(j);
-                String strStrLow = strEntry.getSrcTextLow();
-
-                if( pattern.matcher(strStrLow).find() )
+                List strTokens = strEntry.getSrcTokenList();
+                if (strTokens.containsAll(glosTokens))
                     strEntry.addGlossaryEntry(glosEntry);
             }
 		}

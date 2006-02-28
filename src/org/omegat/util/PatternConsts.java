@@ -68,6 +68,6 @@ public class PatternConsts
      * (with leading &lt; and trailing &gt; in any place of a string).
      */
     public static final Pattern OMEGAT_TAG = Pattern.compile(
-            "<\\/?[a-zA-Z]+[0-9]+>");                                           // NOI18N
+            "<\\/?[a-zA-Z]+[0-9]+\\/?>");                                           // NOI18N
     
 }

@@ -1,12 +1,40 @@
 ----------------------------------------------------------------------
- OmegaT 1.6.0 RC7 Changes
+ OmegaT 1.6.0 RC8 Changes
 ----------------------------------------------------------------------
 
-1.6.0 RC7 vs. 1.4.5.04
- 27 Enchancements
- 51 Bugfixes
+1.6.0 RC8 vs. 1.4.5.04
+ 28 Enchancements
+ 57 Bugfixes
+    (around 5 being regressions of earlier 1.6.0 Beta/RC releases)
 
 ----------------------------------------------------------------------
+
+1.6.0 RC8
+
+ Enchancements:
+
+ - keeping Cursor at middle of working window
+   http://sourceforge.net/support/tracker.php?aid=1228857
+
+ Bugfixes:
+
+ - Problems with segments visibility (RC7 regression)
+   http://sourceforge.net/support/tracker.php?aid=1436607
+
+ - Japanese mismatches
+   http://sourceforge.net/support/tracker.php?aid=1392607
+
+ - Regex exception when loading glossary
+   http://sourceforge.net/support/tracker.php?aid=1438295
+
+ - BOM problem in UTF-8 glossaries
+   http://sourceforge.net/support/tracker.php?aid=1439547
+
+ - Upgrade segmentation defaults each new version
+   http://sourceforge.net/support/tracker.php?aid=1435711
+
+
+1.6.0 RC7
 
  Enchancements:
  

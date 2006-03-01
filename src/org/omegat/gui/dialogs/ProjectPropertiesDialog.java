@@ -574,7 +574,7 @@ public class ProjectPropertiesDialog extends JDialog
             JTextField m_tmRootField
             )
     {
-        if( !projectProperties.verifySingleLangCode(m_sourceLocaleField.getSelectedItem().toString()) )
+        if( !ProjectProperties.verifySingleLangCode(m_sourceLocaleField.getSelectedItem().toString()) )
         {
             JOptionPane.showMessageDialog(this, 
                     OStrings.getString("NP_INVALID_SOURCE_LOCALE") +
@@ -585,7 +585,7 @@ public class ProjectPropertiesDialog extends JDialog
         }
         projectProperties.setSourceLanguage(m_sourceLocaleField.getSelectedItem().toString());
         
-        if( !projectProperties.verifySingleLangCode(m_targetLocaleField.getSelectedItem().toString()) )
+        if( !ProjectProperties.verifySingleLangCode(m_targetLocaleField.getSelectedItem().toString()) )
         {
             JOptionPane.showMessageDialog(this, 
                     OStrings.getString("NP_INVALID_TARGET_LOCALE") +

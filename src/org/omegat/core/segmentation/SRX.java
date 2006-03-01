@@ -27,11 +27,14 @@ package org.omegat.core.segmentation;
 import java.beans.ExceptionListener;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -50,7 +53,7 @@ import org.omegat.util.StaticUtils;
  *
  * @author Maxym Mykhalchuk
  */
-public class SRX implements Serializable
+public class SRX implements Serializable, Cloneable
 {
     
     private static SRX srx = null;
@@ -125,6 +128,10 @@ public class SRX implements Serializable
     /**
      * Loads segmentation rules from an XML file.
      * If there's an error loading a file, it calls <code>initDefaults</code>.
+     * <p>
+     * Since 1.6.0 RC8 it also checks if the version of segmentation rules
+     * saved is older than that of the current OmegaT, and tries to merge
+     * the two sets of rules.
      */
     private static SRX load()
     {
@@ -151,18 +158,110 @@ public class SRX implements Serializable
                         MessageFormat.format("Exceptions occured while loading segmentation rules:\n{0}",  // NOI18N
                         new Object[] {sb.toString()} ) );
             }
+            
+            // checking the version
+            if (CURRENT_VERSION.compareTo(res.getVersion())>0)
+            {
+                // yeap, the segmentation config file is of the older version
+                
+                // initing defaults
+                SRX defaults = new SRX();
+                defaults.initDefaults();
+                // and merging them into loaded rules
+                res = merge(res, defaults);
+            }
         }
         catch( Exception e )
         {
             // silently ignoring FNF
             if( !(e instanceof FileNotFoundException) )
-                StaticUtils.log(e.toString());
+            {
+                StaticUtils.log(e.getMessage());
+                e.printStackTrace(StaticUtils.getLogStream());
+            }
             res = new SRX();
             res.initDefaults();
         }
         return res;
     }
-
+    
+    /** Merges two sets of segmnetation rules together. */
+    private static SRX merge(SRX current, SRX defaults)
+    {
+        int defaultMapRulesN = defaults.getMappingRules().size();
+        for (int i=0; i<defaultMapRulesN; i++)
+        {
+            MapRule dmaprule = (MapRule)defaults.getMappingRules().get(i);
+            String dpattern = dmaprule.getPattern();
+            // trying to find
+            boolean found = false;
+            int currentMapRulesN = current.getMappingRules().size();
+            MapRule cmaprule = null;
+            for (int j=0; j<currentMapRulesN; j++)
+            {
+                cmaprule = (MapRule)current.getMappingRules().get(j);
+                String cpattern = cmaprule.getPattern();
+                if (dpattern.equals(cpattern)) 
+                {
+                    found = true;
+                    break;
+                }
+            }
+                
+            if (found)
+            {
+                // merging -- adding those rules not there in current list
+                List crules = cmaprule.getRules();
+                List drules = dmaprule.getRules();
+                for (int j=0; j<drules.size(); j++)
+                {
+                    Rule drule = (Rule)drules.get(j);
+                    if (!crules.contains(drule))
+                    {
+                        if (drule.isBreakRule())
+                        {
+                            // breaks go to the end
+                            crules.add(drule);
+                        }
+                        else
+                        {
+                            // exceptions go before the first break rule
+                            int currentRulesN = crules.size();
+                            int firstBreakRuleN = currentRulesN;
+                            for (int k=0; k<currentRulesN; k++)
+                            {
+                                Rule crule = (Rule)crules.get(k);
+                                if (crule.isBreakRule())
+                                {
+                                    firstBreakRuleN = k;
+                                    break;
+                                }
+                            }
+                            crules.add(firstBreakRuleN, drule);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                // just adding before the default rules
+                int englishN = currentMapRulesN;
+                for (int j=0; j<currentMapRulesN; j++)
+                {
+                    cmaprule = (MapRule)current.getMappingRules().get(j);
+                    String cpattern = cmaprule.getPattern();
+                    if (DEFAULT_RULES_PATTERN.equals(cpattern))
+                    {
+                        englishN = j;
+                        break;
+                    }
+                }
+                current.getMappingRules().add(englishN, dmaprule);
+            }
+        }
+        return current;
+    }
+    
     /**
      * My Own Class to listen to exceptions, 
      * occured while loading filters configuration.
@@ -349,11 +448,14 @@ public class SRX implements Serializable
         this.includeIsolatedTags = includeIsolatedTags;
     }
     
-    /** Correspondences between languages and their segmentation rules. */
+    /** 
+     * Correspondences between languages and their segmentation rules. 
+     * Each element is of class {@link MapRule}. 
+     */
     private List mappingRules = new ArrayList();
 
     /**
-     * Returns all mapping rules at once: 
+     * Returns all mapping rules (of class {@link MapRule}) at once: 
      * correspondences between languages and their segmentation rules.
      */
     public List getMappingRules()
@@ -362,7 +464,7 @@ public class SRX implements Serializable
     }
 
     /**
-     * Sets all mapping rules at once: 
+     * Sets all mapping rules (of class {@link MapRule}) at once: 
      * correspondences between languages and their segmentation rules.
      */
     public void setMappingRules(List rules)
@@ -374,10 +476,12 @@ public class SRX implements Serializable
     // Versioning properties to detect version upgrades
     // and possibly do something if required
     
-    /** Version of OmegaT 1.4.6 segmentation support. */
-    public static String OT146_VERSION = "0.2";                                 // NOI18N
+    /** Initial version of segmentation support (1.4.6 beta 4 -- 1.6.0 RC7). */
+    public static String INITIAL_VERSION = "0.2";                               // NOI18N
+    /** Segmentation support of 1.6.0 RC8 (a bit more rules added). */
+    public static String OT160RC8_VERSION = "0.2.1";                            // NOI18N
     /** Currently supported segmentation support version. */
-    public static String CURRENT_VERSION =OT146_VERSION;
+    public static String CURRENT_VERSION = OT160RC8_VERSION;
     
     /** Version of OmegaT segmentation support. */
     private String version;
@@ -393,5 +497,5 @@ public class SRX implements Serializable
     {
         version = value;
     }
-    
+
 }

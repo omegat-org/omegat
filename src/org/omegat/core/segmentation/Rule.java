@@ -165,5 +165,34 @@ public class Rule implements Serializable
         else
             return Pattern.compile(pattern, Pattern.DOTALL);
     }
-        
+
+    /** Indicates whether some other Rule is "equal to" this one. */
+    public boolean equals(Object obj)
+    {
+        if (obj==null)
+            return false;
+        else
+        {
+            Rule that = (Rule)obj;
+            return this.breakRule==that.breakRule &&
+                    this.getBeforebreak().equals(that.getBeforebreak()) &&
+                    this.getAfterbreak().equals(that.getAfterbreak());
+        }
+    }
+
+    /** Returns a hash code value for the object. */
+    public int hashCode()
+    {
+        return (this.isBreakRule() ? 1 : -1) +
+                this.getBeforebreak().hashCode() -
+                this.getAfterbreak().hashCode();
+    }
+
+    /** Returns a string representation of the Rule for debugging purposes. */
+    public String toString()
+    {
+        return (isBreakRule() ? "Break " : "Exception ") +                      // NOI18N
+                "Before: " + getBeforebreak() +                                 // NOI18N
+                "After: " + getAfterbreak();                                    // NOI18N
+    }
 }

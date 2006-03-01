@@ -50,7 +50,7 @@ public class MapRule implements Serializable
 
     /** Language Name */
     private String language;
-    /** Returns Language Name */
+    /** Returns Language Name (to display it in a dialog). */
     public String getLanguage()
     {
         return language;
@@ -94,5 +94,34 @@ public class MapRule implements Serializable
     public void setRules(List rules)
     {
         this.rules = rules;
+    }
+    
+    /** Indicates whether some other MapRule is "equal to" this one. */
+    public boolean equals(Object obj)
+    {
+        if (obj==null)
+            return false;
+        else
+        {
+            MapRule that = (MapRule)obj;
+            return this.getPattern().equals(that.getPattern()) &&
+                    this.getLanguage().equals(that.getLanguage()) &&
+                    this.getRules().equals(that.getRules());
+        }
+    }
+
+    /** Returns a hash code value for the object. */
+    public int hashCode()
+    {
+        return this.getPattern().hashCode() +
+                this.getLanguage().hashCode() +
+                this.getRules().hashCode();
+    }
+
+    /** Returns a string representation of the MapRule for debugging purposes. */
+    public String toString()
+    {
+        return getLanguage() + " (" + getPattern() + ") " +                     // NOI18N
+                getRules().toString();
     }
 }

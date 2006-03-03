@@ -52,6 +52,8 @@ public class SearchThread extends Thread
 {
     public SearchThread(MainWindow par, String startText)
     {
+        setPriority(Thread.MIN_PRIORITY);
+        
         m_window = new SearchWindow(par, this, startText);
         m_searchDir = null;
         m_searchRecursive = false;

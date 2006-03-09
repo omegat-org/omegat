@@ -68,7 +68,9 @@ public class SearchWindow extends JFrame
     public SearchWindow(MainWindow par, SearchThread th, String startText)
     {
         //super(par, false);
-        setSize(650, 700);
+        
+        // set the position and size
+        initWindowLayout();
         
         m_thread = th;
         m_searchLabel = new JLabel();
@@ -202,7 +204,7 @@ public class SearchWindow extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
-                setVisible(false);
+                doCancel();
             }
         };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
@@ -292,6 +294,43 @@ public class SearchWindow extends JFrame
         m_searchField.requestFocus();
     }
     
+    /**
+      * Loads/sets the position and size of the search window.
+      */
+    private void initWindowLayout()
+    {
+        // main window
+        try
+        {
+            String dx = Preferences.getPreference(Preferences.SEARCHWINDOW_X);
+            String dy = Preferences.getPreference(Preferences.SEARCHWINDOW_Y);
+            int x = Integer.parseInt(dx);
+            int y = Integer.parseInt(dy);
+            setLocation(x, y);
+            String dw = Preferences.getPreference(Preferences.SEARCHWINDOW_WIDTH);
+            String dh = Preferences.getPreference(Preferences.SEARCHWINDOW_HEIGHT);
+            int w = Integer.parseInt(dw);
+            int h = Integer.parseInt(dh);
+            setSize(w, h);
+        }
+        catch (NumberFormatException nfe)
+        {
+            // set default size and position
+            setSize(650, 700);
+        }
+    }
+    
+    /**
+      * Saves the size and position of the search window
+      */
+    private void saveWindowLayout()
+    {
+        Preferences.setPreference(Preferences.SEARCHWINDOW_WIDTH, getWidth());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_HEIGHT, getHeight());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_X, getX());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_Y, getY());
+    }
+    
     ////////////////////////////////////////////////////////////////
     // interface for displaying text in viewer
     
@@ -333,6 +372,9 @@ public class SearchWindow extends JFrame
         int evt = w.getID();
         if (evt == WindowEvent.WINDOW_CLOSING || evt == WindowEvent.WINDOW_CLOSED)
         {
+            // save window size and position
+            saveWindowLayout();
+            
             if (m_thread != null)
                 m_thread.interrupt();
         }

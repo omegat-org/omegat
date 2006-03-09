@@ -150,8 +150,10 @@
     <target name="addons">
         <ant dir="addons/properties-import" target="dist" inheritall="false"/>
         <copy file="addons/properties-import/import_properties_1.2.zip" todir="dist2"/>
+	<!--
         <ant dir="addons/sentseg-tmx" target="dist" inheritall="false"/>
-        <copy file="addons/sentseg-tmx/sentseg_tmx_1.1.zip" todir="dist2"/>
+	<copy file="addons/sentseg-tmx/sentseg_tmx_1.1.zip" todir="dist2"/>
+	-->
 <!-- 
         <ant dir="addons/nbedge-filter" inheritAll="false" target="jar"/>
 -->

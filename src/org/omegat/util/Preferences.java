@@ -52,27 +52,33 @@ public class Preferences
     public static final String FILE_PREFERENCES	= "omegat.prefs";				// NOI18N
     
     // preference names
-    public static final String SOURCE_LOCALE	= "source_lang";                                // NOI18N
-    public static final String TARGET_LOCALE	= "target_lang";                                // NOI18N
+    public static final String SOURCE_LOCALE	= "source_lang";                // NOI18N
+    public static final String TARGET_LOCALE	= "target_lang";                // NOI18N
     public static final String CURRENT_FOLDER	= "current_folder";				// NOI18N
     public static final String SOURCE_FOLDER	= "source_folder";				// NOI18N
     public static final String TARGET_FOLDER	= "target_folder";				// NOI18N
-    public static final String TM_FOLDER		= "tm_folder";				// NOI18N
-    public static final String GLOSSARY_FOLDER	= "glossary_folder";                            // NOI18N
+    public static final String TM_FOLDER		= "tm_folder";                  // NOI18N
+    public static final String GLOSSARY_FOLDER	= "glossary_folder";            // NOI18N
     
-    public static final String MAINWINDOW_WIDTH	= "screen_width";				// NOI18N
-    public static final String MAINWINDOW_HEIGHT= "screen_height";				// NOI18N
-    public static final String MAINWINDOW_X     = "screen_x";					// NOI18N
-    public static final String MAINWINDOW_Y     = "screen_y";					// NOI18N
+    public static final String MAINWINDOW_WIDTH  = "screen_width";              // NOI18N
+    public static final String MAINWINDOW_HEIGHT = "screen_height";             // NOI18N
+    public static final String MAINWINDOW_X      = "screen_x";                  // NOI18N
+    public static final String MAINWINDOW_Y      = "screen_y";                  // NOI18N
     
-    public static final String MATCHWINDOW_WIDTH= "match_width";				// NOI18N
-    public static final String MATCHWINDOW_HEIGHT= "match_height";				// NOI18N
-    public static final String MATCHWINDOW_X	= "match_x";					// NOI18N
-    public static final String MATCHWINDOW_Y	= "match_y";					// NOI18N
+    public static final String MATCHWINDOW_WIDTH  = "match_width";              // NOI18N
+    public static final String MATCHWINDOW_HEIGHT = "match_height";             // NOI18N
+    public static final String MATCHWINDOW_X      = "match_x";                  // NOI18N
+    public static final String MATCHWINDOW_Y      = "match_y";                  // NOI18N
     
     /** Where the divider between Main area and Match/Glossary is */
     public static final String MATCHWINDOW_DIVIDER= "match_divider";            // NOI18N
 
+    // Search window size and position    
+    public static final String SEARCHWINDOW_WIDTH  = "search_window_width";     // NOI18N
+    public static final String SEARCHWINDOW_HEIGHT = "search_window_height";    // NOI18N
+    public static final String SEARCHWINDOW_X      = "search_window_x";         // NOI18N
+    public static final String SEARCHWINDOW_Y      = "search_window_y";         // NOI18N
+    
     /** Use the TAB button to advance to the next segment */
     public static final String USE_TAB_TO_ADVANCE     = "tab_advance";          // NOI18N
     /** Always confirm Quit, even if the project is saved */

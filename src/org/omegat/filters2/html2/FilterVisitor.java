@@ -596,8 +596,8 @@ class FilterVisitor extends NodeVisitor
         for(int i=0; i<s_shortcuts.size(); i++)
         {
             String shortcut = (String)s_shortcuts.get(i);
-            int pos;
-            while( (pos=str.indexOf(shortcut))>=0 )
+            int pos=-1;
+            while( (pos=str.indexOf(shortcut, pos+1))>=0 )
             {
                 Tag tag = (Tag)s_tags.get(i);
                 try

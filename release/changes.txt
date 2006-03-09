@@ -1,13 +1,30 @@
 ----------------------------------------------------------------------
- OmegaT 1.6.0 RC8 Changes
+ OmegaT 1.6.0 RC9 Changes
 ----------------------------------------------------------------------
 
-1.6.0 RC8 vs. 1.4.5.04
+1.6.0 RC9 vs. 1.4.5.04
  28 Enchancements
- 57 Bugfixes
+ 58 Bugfixes
     (around 5 being regressions of earlier 1.6.0 Beta/RC releases)
 
 ----------------------------------------------------------------------
+
+ - 
+   http://sourceforge.net/support/tracker.php?aid=
+
+1.6.0 RC9
+
+ Bugfixes:
+
+ - Problems with segments clickability (Java5+MacOSX-specific regression)
+   http://sourceforge.net/support/tracker.php?aid=1436607
+
+ - Windows closing/position problems/String problems 
+   http://sourceforge.net/support/tracker.php?aid=1386155
+
+ - Shortcuts active while menus are not
+   http://sourceforge.net/support/tracker.php?aid=1446521
+
 
 1.6.0 RC8
 

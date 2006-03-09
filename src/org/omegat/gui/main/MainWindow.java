@@ -51,6 +51,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.MutableAttributeSet;
@@ -711,7 +712,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     {
         projectNewMenuItem.setEnabled(true);
         projectOpenMenuItem.setEnabled(true);
-        projectNewMenuItem.setEnabled(true);
         
         projectImportMenuItem.setEnabled(false);
         projectReloadMenuItem.setEnabled(false);
@@ -721,7 +721,24 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         projectCompileMenuItem.setEnabled(false);
         
         editMenu.setEnabled(false);
+        editFindInProjectMenuItem.setEnabled(false);
+        editInsertSourceMenuItem.setEnabled(false);
+        editInsertTranslationMenuItem.setEnabled(false);
+        editOverwriteSourceMenuItem.setEnabled(false);
+        editOverwriteTranslationMenuItem.setEnabled(false);
+        editRedoMenuItem.setEnabled(false);
+        editSelectFuzzy1MenuItem.setEnabled(false);
+        editSelectFuzzy2MenuItem.setEnabled(false);
+        editSelectFuzzy3MenuItem.setEnabled(false);
+        editSelectFuzzy4MenuItem.setEnabled(false);
+        editSelectFuzzy5MenuItem.setEnabled(false);
+        editUndoMenuItem.setEnabled(false);
+        
         gotoMenu.setEnabled(false);
+        gotoNextSegmentMenuItem.setEnabled(false);
+        gotoNextUntranslatedMenuItem.setEnabled(false);
+        gotoPreviousSegmentMenuItem.setEnabled(false);
+        
         toolsValidateTagsMenuItem.setEnabled(false);
         
         xlPane.setEditable(false);
@@ -736,7 +753,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     {
         projectNewMenuItem.setEnabled(false);
         projectOpenMenuItem.setEnabled(false);
-        projectNewMenuItem.setEnabled(false);
         
         projectImportMenuItem.setEnabled(true);
         projectReloadMenuItem.setEnabled(true);
@@ -746,7 +762,24 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         projectCompileMenuItem.setEnabled(true);
         
         editMenu.setEnabled(true);
+        editFindInProjectMenuItem.setEnabled(true);
+        editInsertSourceMenuItem.setEnabled(true);
+        editInsertTranslationMenuItem.setEnabled(true);
+        editOverwriteSourceMenuItem.setEnabled(true);
+        editOverwriteTranslationMenuItem.setEnabled(true);
+        editRedoMenuItem.setEnabled(true);
+        editSelectFuzzy1MenuItem.setEnabled(true);
+        editSelectFuzzy2MenuItem.setEnabled(true);
+        editSelectFuzzy3MenuItem.setEnabled(true);
+        editSelectFuzzy4MenuItem.setEnabled(true);
+        editSelectFuzzy5MenuItem.setEnabled(true);
+        editUndoMenuItem.setEnabled(true);
+        
         gotoMenu.setEnabled(true);
+        gotoNextSegmentMenuItem.setEnabled(true);
+        gotoNextUntranslatedMenuItem.setEnabled(true);
+        gotoPreviousSegmentMenuItem.setEnabled(true);
+        
         toolsValidateTagsMenuItem.setEnabled(true);
         
         xlPane.setEditable(true);
@@ -1082,6 +1115,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     {
         if (!m_projectLoaded)
             return;
+        
         try
         {
             CommandThread.core.compileProject();
@@ -1098,6 +1132,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     
     private void doFind()
     {
+        if (!m_projectLoaded)
+            return;
+        
         String selection = xlPane.getSelectedText();
         if (selection != null)
         {
@@ -1281,7 +1318,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
      * Since 1.6: Translation equal to source may be validated as OK translation
      *            if appropriate option is set in Workflow options dialog.
      */
-    private void commitEntry()
+    private synchronized void commitEntry()
     {
         if (!m_projectLoaded)
             return;
@@ -1289,6 +1326,8 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         if (!entryActivated)
             return;
         entryActivated = false;
+
+        AbstractDocument xlDoc = (AbstractDocument)xlPane.getDocument();
         
         int start = m_segmentStartOffset + m_sourceDisplayLength +
                 OStrings.TF_CUR_SEGMENT_START.length();
@@ -1305,7 +1344,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             try
             {
-                new_translation = xlPane.getText(start, end - start);
+                new_translation = xlDoc.getText(start, end - start);
             }
             catch(BadLocationException ble)
             {
@@ -1322,8 +1361,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                 new_translation.length() + OStrings.TF_CUR_SEGMENT_END.length();
         try
         {
-            xlPane.getDocument().remove(m_segmentStartOffset, totalLen);
-            xlPane.getDocument().insertString(m_segmentStartOffset, display_string, PLAIN);
+            // see http://sourceforge.net/support/tracker.php?aid=1436607
+            // this method calls write locks / unlocks
+            xlDoc.replace(m_segmentStartOffset, totalLen, display_string, PLAIN);
         }
         catch(BadLocationException ble)
         {
@@ -1384,11 +1424,12 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                 
                 // replace old text w/ new
                 docSeg = m_docSegList[localEntry];
+                String ds_nn = display_string + "\n\n";                         // NOI18N
                 try
                 {
-                    xlPane.getDocument().remove(offset, docSeg.length);
-                    xlPane.getDocument().insertString(offset, 
-                            display_string + "\n\n", PLAIN);                    // NOI18N
+                    // see http://sourceforge.net/support/tracker.php?aid=1436607
+                    // this method calls write locks / unlocks
+                    xlDoc.replace(offset, docSeg.length, ds_nn, PLAIN);
                 }
                 catch(BadLocationException ble)
                 {
@@ -1397,7 +1438,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                     ble.printStackTrace();
                     ble.printStackTrace(StaticUtils.getLogStream());
                 }
-                docSeg.length = display_string.length() + "\n\n".length();      // NOI18N
+                docSeg.length = ds_nn.length();
             }
         }
         xlPane.cancelUndo();
@@ -1415,7 +1456,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         if (!m_projectLoaded)
             return;
         
-        entryActivated = true;
+        AbstractDocument xlDoc = (AbstractDocument)xlPane.getDocument();
         
         // recover data about current entry
         m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
@@ -1453,8 +1494,8 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         // append to end of segment first
         try
         {
-            xlPane.getDocument().insertString(m_segmentStartOffset + 
-                    docSeg.length - 2, endStr, BOLD);
+            int endStrPos = m_segmentStartOffset + docSeg.length - 2;
+            xlDoc.insertString(endStrPos, endStr, BOLD);
         }
         catch(BadLocationException ble)
         {
@@ -1477,7 +1518,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             {
                 try
                 {
-                    xlPane.getDocument().remove(m_segmentStartOffset, translation.length());
+                    xlDoc.remove(m_segmentStartOffset, translation.length());
                 }
                 catch(BadLocationException ble)
                 {
@@ -1502,27 +1543,14 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                     NearString thebest = (NearString)near.get(0);
                     if( thebest.score >= percentage )
                     {
-                        if(translation.length()>0)
-                        try
-                        {
-                            xlPane.getDocument().remove(m_segmentStartOffset, translation.length());
-                        }
-                        catch(BadLocationException ble)
-                        {
-                            StaticUtils.log("Should not have happened, report to https://sourceforge.net/tracker/?group_id=68187&atid=520347");        // NOI18N
-                            StaticUtils.log(ble.getMessage());
-                            ble.printStackTrace();
-                            ble.printStackTrace(StaticUtils.getLogStream());
-                        }
-                        
+                        int old_tr_len = translation.length();
                         translation = Preferences.getPreferenceDefault(
                                 Preferences.BEST_MATCH_EXPLANATORY_TEXT,
                                 OStrings.getString("WF_DEFAULT_PREFIX")) +
                                 thebest.str.getTranslation();
                         try
                         {
-                            xlPane.getDocument().insertString(
-                                    m_segmentStartOffset, translation, PLAIN);
+                            xlDoc.replace(m_segmentStartOffset, old_tr_len, translation, PLAIN);
                         }
                         catch(BadLocationException ble)
                         {
@@ -1538,9 +1566,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         
         try
         {
-            xlPane.getDocument().insertString(m_segmentStartOffset, " ", PLAIN); // NOI18N
-            xlPane.getDocument().insertString(m_segmentStartOffset, startStr, BOLD);
-            xlPane.getDocument().insertString(m_segmentStartOffset, srcText, GREEN);
+            xlDoc.insertString(m_segmentStartOffset, " ", PLAIN); // NOI18N
+            xlDoc.insertString(m_segmentStartOffset, startStr, BOLD);
+            xlDoc.insertString(m_segmentStartOffset, srcText, GREEN);
         }
         catch(BadLocationException ble)
         {
@@ -1642,6 +1670,8 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             m_docReady = true;
         }
         xlPane.cancelUndo();
+        
+        entryActivated = true;
     }
     
     /**

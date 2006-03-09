@@ -244,19 +244,19 @@ public class FilterMaster
     public boolean loadFile(String filename)
             throws IOException, TranslationException
     {
-        LookupInformation lookup = lookupFilter(filename);
-        if( lookup==null )
-            return false;
-        
-        setMemorizing(true);
-        
-        AbstractFilter filterObject = lookup.filterObject;
-        BufferedReader reader = lookup.reader;
-        
-        BufferedWriter writer = new BufferedWriter(new StringWriter());
-        
         try
         {
+            LookupInformation lookup = lookupFilter(filename);
+            if( lookup==null )
+                return false;
+
+            setMemorizing(true);
+
+            AbstractFilter filterObject = lookup.filterObject;
+            BufferedReader reader = lookup.reader;
+
+            BufferedWriter writer = new BufferedWriter(new StringWriter());
+        
             filterObject.processFile(reader, writer);
             reader.close();
         }

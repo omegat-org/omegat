@@ -28,6 +28,7 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -43,6 +44,7 @@ import org.omegat.core.StringEntry;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.filters2.xml.DefaultEntityFilter;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.openide.awt.Mnemonics;
 import org.omegat.gui.main.MainWindow;
 
@@ -57,6 +59,9 @@ public class TagValidationFrame extends JFrame
 	{
 		m_parent = parent;
 		m_srcLang = true;
+        
+        // set window size & position
+        initWindowLayout();
 
 		Container cp = getContentPane();
 		m_editorPane = new JEditorPane();
@@ -78,7 +83,6 @@ public class TagValidationFrame extends JFrame
 		bbut.add(Box.createHorizontalGlue());
 		cp.add(bbut, "South");	// NOI18N
 
-		setSize(500, 400);
 		m_editorPane.addHyperlinkListener(new HListener(m_parent, false));
 
 		// this only seems to work in 1.4, but at least it works there
@@ -101,8 +105,56 @@ public class TagValidationFrame extends JFrame
 		
 		updateUIText();
 	}
-
-	private void updateUIText()
+    
+    /**
+      * Loads/sets the position and size of the search window.
+      */
+    private void initWindowLayout()
+    {
+        // main window
+        try
+        {
+            String dx = Preferences.getPreference(Preferences.TAGVWINDOW_X);
+            String dy = Preferences.getPreference(Preferences.TAGVWINDOW_Y);
+            int x = Integer.parseInt(dx);
+            int y = Integer.parseInt(dy);
+            setLocation(x, y);
+            String dw = Preferences.getPreference(Preferences.TAGVWINDOW_WIDTH);
+            String dh = Preferences.getPreference(Preferences.TAGVWINDOW_HEIGHT);
+            int w = Integer.parseInt(dw);
+            int h = Integer.parseInt(dh);
+            setSize(w, h);
+        }
+        catch (NumberFormatException nfe)
+        {
+            // set default size and position
+            setSize(650, 700);
+        }
+    }
+    
+    /**
+      * Saves the size and position of the TAGV window
+      */
+    private void saveWindowLayout()
+    {
+        Preferences.setPreference(Preferences.TAGVWINDOW_WIDTH, getWidth());
+        Preferences.setPreference(Preferences.TAGVWINDOW_HEIGHT, getHeight());
+        Preferences.setPreference(Preferences.TAGVWINDOW_X, getX());
+        Preferences.setPreference(Preferences.TAGVWINDOW_Y, getY());
+    }
+    
+    public void processWindowEvent(WindowEvent w)
+    {
+        int evt = w.getID();
+        if (evt == WindowEvent.WINDOW_CLOSING || evt == WindowEvent.WINDOW_CLOSED)
+        {
+            // save window size and position
+            saveWindowLayout();
+        }
+        super.processWindowEvent(w);
+    }
+    
+    private void updateUIText()
 	{
 		Mnemonics.setLocalizedText(m_closeButton, OStrings.getString("BUTTON_CLOSE"));
 		if (m_srcLang)

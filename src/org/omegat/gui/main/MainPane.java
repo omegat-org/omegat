@@ -4,8 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-                         keithgodfrey@users.sourceforge.net
-                         907.223.2039
+               Home page: http://www.omegat.org/omegat/omegat.html
+               Support center: http://groups.yahoo.com/group/OmegaT/
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -480,5 +480,5 @@ public class MainPane extends JTextPane implements MouseListener, DocumentListen
 
     /** Attribute changes do not result in document length changes. Doing nothing. */
     public void changedUpdate(javax.swing.event.DocumentEvent e) { }
-    
+
 }

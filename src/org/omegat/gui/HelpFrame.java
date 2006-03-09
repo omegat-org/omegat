@@ -5,8 +5,8 @@
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, 
                             Sandra Jean Chua, and Henry Pijffers
-                         keithgodfrey@users.sourceforge.net
-                         907.223.2039
+               Home page: http://www.omegat.org/omegat/omegat.html
+               Support center: http://groups.yahoo.com/group/OmegaT/
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by

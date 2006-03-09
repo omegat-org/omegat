@@ -85,6 +85,12 @@ public class Preferences
     public static final String TAGVWINDOW_X      = "tagv_window_x";             // NOI18N
     public static final String TAGVWINDOW_Y      = "tagv_window_y";             // NOI18N
     
+    // Help window size and position    
+    public static final String HELPWINDOW_WIDTH  = "help_window_width";         // NOI18N
+    public static final String HELPWINDOW_HEIGHT = "help_window_height";        // NOI18N
+    public static final String HELPWINDOW_X      = "help_window_x";             // NOI18N
+    public static final String HELPWINDOW_Y      = "help_window_y";             // NOI18N
+    
     /** Use the TAB button to advance to the next segment */
     public static final String USE_TAB_TO_ADVANCE     = "tab_advance";          // NOI18N
     /** Always confirm Quit, even if the project is saved */

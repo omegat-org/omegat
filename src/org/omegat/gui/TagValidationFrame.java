@@ -107,7 +107,7 @@ public class TagValidationFrame extends JFrame
 	}
     
     /**
-      * Loads/sets the position and size of the search window.
+      * Loads/sets the position and size of the tag validation window.
       */
     private void initWindowLayout()
     {
@@ -133,7 +133,7 @@ public class TagValidationFrame extends JFrame
     }
     
     /**
-      * Saves the size and position of the TAGV window
+      * Saves the size and position of the tag validation window
       */
     private void saveWindowLayout()
     {

@@ -30,6 +30,7 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;        // HP
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -51,6 +52,7 @@ import javax.swing.event.HyperlinkListener;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.openide.awt.Mnemonics;
 
 /**
@@ -79,6 +81,9 @@ public class HelpFrame extends JFrame
         language = detectDocLanguage();
         
         m_historyList = new ArrayList();
+        
+        // set window size & position
+        initWindowLayout();
         
         Container cp = getContentPane();
         m_helpPane = new JEditorPane();
@@ -148,7 +153,6 @@ public class HelpFrame extends JFrame
         getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
         // END HP
         
-        setSize(600, 500);
         m_helpPane.addHyperlinkListener(new HyperlinkListener()
         {
             public void hyperlinkUpdate(HyperlinkEvent he)
@@ -314,6 +318,54 @@ public class HelpFrame extends JFrame
             return lang;
         else
             return "en";                                                        // NOI18N
+    }
+    
+    /**
+      * Loads/sets the position and size of the help window.
+      */
+    private void initWindowLayout()
+    {
+        // main window
+        try
+        {
+            String dx = Preferences.getPreference(Preferences.HELPWINDOW_X);
+            String dy = Preferences.getPreference(Preferences.HELPWINDOW_Y);
+            int x = Integer.parseInt(dx);
+            int y = Integer.parseInt(dy);
+            setLocation(x, y);
+            String dw = Preferences.getPreference(Preferences.HELPWINDOW_WIDTH);
+            String dh = Preferences.getPreference(Preferences.HELPWINDOW_HEIGHT);
+            int w = Integer.parseInt(dw);
+            int h = Integer.parseInt(dh);
+            setSize(w, h);
+        }
+        catch (NumberFormatException nfe)
+        {
+            // set default size and position
+            setSize(600, 500);
+        }
+    }
+    
+    /**
+      * Saves the size and position of the help window
+      */
+    private void saveWindowLayout()
+    {
+        Preferences.setPreference(Preferences.HELPWINDOW_WIDTH, getWidth());
+        Preferences.setPreference(Preferences.HELPWINDOW_HEIGHT, getHeight());
+        Preferences.setPreference(Preferences.HELPWINDOW_X, getX());
+        Preferences.setPreference(Preferences.HELPWINDOW_Y, getY());
+    }
+    
+    public void processWindowEvent(WindowEvent w)
+    {
+        int evt = w.getID();
+        if (evt == WindowEvent.WINDOW_CLOSING || evt == WindowEvent.WINDOW_CLOSED)
+        {
+            // save window size and position
+            saveWindowLayout();
+        }
+        super.processWindowEvent(w);
     }
     
     private JEditorPane m_helpPane;

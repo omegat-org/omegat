@@ -8,6 +8,7 @@
     </target>
     
     <target name="-post-clean">
+        <delete dir="lib"/>
         <delete file="import_properties_1.2.zip"/>
         <delete file="properties-import.jar"/>
     </target>

@@ -25,6 +25,8 @@
  - Shortcuts active while menus are not
    http://sourceforge.net/support/tracker.php?aid=1446521
 
+ - Go to next untranslated should cycle the project
+   http://sourceforge.net/support/tracker.php?aid=1447708
 
 1.6.0 RC8
 

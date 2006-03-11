@@ -565,11 +565,15 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     
     /**
      * Finds the next untranslated entry in the document.
+     * <p>
+     * Since 1.6.0 RC9 also looks from the beginning of the document
+     * if there're no untranslated till the end of document.
+     * This way it look at entire project like Go To Next Segment does.
      *
      * @author Henry Pjiffers
      * @author Maxym Mykhalchuk
      */
-    public void doNextUntranslatedEntry()
+    private void doNextUntranslatedEntry()
     {
         // check if a document is loaded
         if (m_projectLoaded == false)
@@ -578,39 +582,58 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         // save the current entry
         commitEntry();
         
-        // get the current entry number and the total number of entries
-        int curEntryNum = m_curEntryNum;
+        // get the total number of entries
         int numEntries = CommandThread.core.numEntries();
+        
+        boolean found = false;
+        int curEntryNum;
         
         // iterate through the list of entries,
         // starting at the current entry,
         // until an entry with no translation is found
-        //
-        // P.S. going to the next entry anyway, even if it's not translated
-        curEntryNum++;
-        
-        SourceTextEntry entry = null;
-        while (curEntryNum < numEntries)
+        for(curEntryNum = m_curEntryNum+1; curEntryNum < numEntries; curEntryNum++)
         {
             // get the next entry
-            entry = CommandThread.core.getSTE(curEntryNum);
+            SourceTextEntry entry = CommandThread.core.getSTE(curEntryNum);
             
             // check if the entry is not null, and whether it contains a translation
             if (entry!=null && entry.getTranslation().length()==0)
             {
-                // mark the entry
-                m_curEntryNum = curEntryNum;
-                
-                // load the document, if the segment is not in the current document
-                if (m_curEntryNum > m_xlLastEntry)
-                    loadDocument();
-                
+                // we've found it
+                found = true;
                 // stop searching
                 break;
             }
-            
-            // next entry
-            curEntryNum++;
+        }
+        
+        // if we haven't found untranslated entry till the end,
+        // trying to search for it from the beginning
+        if (!found)
+        {
+            for(curEntryNum = 0; curEntryNum < m_curEntryNum; curEntryNum++)
+            {
+                // get the next entry
+                SourceTextEntry entry = CommandThread.core.getSTE(curEntryNum);
+
+                // check if the entry is not null, and whether it contains a translation
+                if (entry!=null && entry.getTranslation().length()==0)
+                {
+                    // we've found it
+                    found = true;
+                    // stop searching
+                    break;
+                }
+            }
+        }
+        
+        if (found)
+        {
+            // mark the entry
+            m_curEntryNum = curEntryNum;
+
+            // load the document, if the segment is not in the current document
+            if (m_curEntryNum < m_xlFirstEntry || m_curEntryNum > m_xlLastEntry)
+                loadDocument();
         }
         
         // activate the entry
@@ -1838,8 +1861,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     /** The font for main window (source and target text) and for match and glossary windows */
     private Font m_font;
     
-    // first and last entry numbers in current file
+    /** first entry number in current file. */
     public int		m_xlFirstEntry;
+    /** last entry number in current file. */
     public int		m_xlLastEntry;
     
     // starting offset and length of source lang in current segment

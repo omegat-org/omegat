@@ -14,10 +14,20 @@
 
 1.6.0 RC9
 
+ Enchancements:
+ - New Filter for Key-Value text files (differently encoded)
+   http://sourceforge.net/support/tracker.php?aid=1462564
+
  Bugfixes:
 
  - Problems with segments clickability (Java5+MacOSX-specific regression)
    http://sourceforge.net/support/tracker.php?aid=1436607
+
+ - "Re-activate" output of word_count
+   http://sourceforge.net/support/tracker.php?aid=1447306
+
+ - OO: Don't segment on inline images, bookmarks, references
+   http://sourceforge.net/support/tracker.php?aid=1458673
 
  - Windows closing/position problems/String problems 
    http://sourceforge.net/support/tracker.php?aid=1386155
@@ -27,6 +37,10 @@
 
  - Go to next untranslated should cycle the project
    http://sourceforge.net/support/tracker.php?aid=1447708
+
+ - Previous segment shortcut should be CMD+Enter on MacOSX
+   http://sourceforge.net/support/tracker.php?aid=1468315
+
 
 1.6.0 RC8
 

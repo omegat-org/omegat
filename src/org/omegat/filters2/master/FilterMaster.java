@@ -30,36 +30,28 @@ import java.beans.XMLEncoder;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.jar.Attributes;
-import java.util.jar.JarFile;
-import java.util.jar.Manifest;
-import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 import org.omegat.core.StringEntry;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.SearchThread;
+import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.text.ini.INIFilter;
 import org.omegat.filters2.xml.openoffice.OOFilter;
-import org.omegat.gui.ProjectProperties;
 import org.omegat.util.LFileCopy;
-import org.omegat.filters2.*;
 import org.omegat.filters2.Instance;
+import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.html2.HTMLFilter2;
 import org.omegat.filters2.text.TextFilter;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
@@ -627,6 +619,7 @@ public class FilterMaster
         filters.addFilter(new OneFilter(new ResourceBundleFilter(), false));
         filters.addFilter(new OneFilter(new HTMLFilter2(), false));
         filters.addFilter(new OneFilter(new OOFilter(), false));
+        filters.addFilter(new OneFilter(new INIFilter(), false));
     }
     
     /**

@@ -231,20 +231,6 @@ public class MainPane extends JTextPane implements MouseListener, DocumentListen
             return;
         }
 
-        // handling Ctrl+1 - Ctrl+5 automatically too
-        // BUGFIX FOR: Changing the highlighted match types number on MacOSX
-        //             http://sourceforge.net/support/tracker.php?aid=1295936 
-        if( (e.getModifiers()&KeyEvent.CTRL_MASK)==KeyEvent.CTRL_MASK
-                && ( keyCode == KeyEvent.VK_1 
-                || keyCode == KeyEvent.VK_2
-                || keyCode == KeyEvent.VK_3
-                || keyCode == KeyEvent.VK_4
-                || keyCode == KeyEvent.VK_5 ) )
-        {
-            super.processKeyEvent(e);
-            return;
-        }
-        
         // if we've made it here, we have a keypressed or
         //	key-typed event of a (presumably) valid key
         //	and we're in an open project
@@ -334,7 +320,9 @@ public class MainPane extends JTextPane implements MouseListener, DocumentListen
         {
             if (mw.m_advancer == KeyEvent.VK_ENTER)
             {
-                if (e.isControlDown())
+                // Previous segment shortcut should be CMD+Enter on MacOSX
+                // http://sourceforge.net/support/tracker.php?aid=1468315
+                if( (e.getModifiers() & CTRL_KEY_MASK)==CTRL_KEY_MASK )
                 {
                     // go backwards on control return
                     if (e.getID() == KeyEvent.KEY_PRESSED)

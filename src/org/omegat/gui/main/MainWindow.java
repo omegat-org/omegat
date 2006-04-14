@@ -180,7 +180,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
      */
     private void initUIShortcuts()
     {
-        setAccelerator(projectNewMenuItem, KeyEvent.VK_N);
         setAccelerator(projectOpenMenuItem, KeyEvent.VK_O);
         setAccelerator(projectSaveMenuItem, KeyEvent.VK_S);
         setAccelerator(projectEditMenuItem, KeyEvent.VK_E);

@@ -26,6 +26,7 @@ package org.omegat.core.threads;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InterruptedIOException;
@@ -38,8 +39,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.SortedSet;
 
 import org.omegat.core.LegacyTM;
 import org.omegat.core.StringEntry;
@@ -229,9 +232,6 @@ public class CommandThread extends Thread
             m_projWin.reset();
         }
         
-        m_totalWords = 0;
-        m_partialWords = 0;
-        m_currentWords = 0;
         numberofTranslatedSegments = 0;
     }
     
@@ -284,6 +284,9 @@ public class CommandThread extends Thread
             
             // evaluate strings for fuzzy matching
             buildNearList();
+            
+            // build word count
+			buildWordCounts();
             
             // Project Loaded...
             MessageRelay.uiMessageSetMessageText(tf, "");  // NOI18N
@@ -1072,73 +1075,98 @@ public class CommandThread extends Thread
         if( m_transFrame!=null )
             MessageRelay.uiMessageDisplayError(m_transFrame, msg, e);
     }
-    
-    /*
-     temporary removed
-        private void buildWordCounts()
-        {
-                ListIterator it;
-                StringEntry se;
-                LinkedList pl;
-                m_totalWords = 0;
-                m_partialWords = 0;
-                int words;
-                it = m_strEntryList.listIterator();
-                while(it.hasNext())
-                {
-                        se = (StringEntry) it.next();
-                        pl = se.getParentList();
-                        words = se.getWordCount();
-                        m_partialWords += words;
-                        m_totalWords += words * pl.size();
-                }
-     
-                // now dump file based word counts to disk
-                String fn = m_config.getProjectInternal() + OConsts.WORD_CNT_FILE_EXT;
-                FileWriter ofp = null;
-                try
-                {
-                        ofp = new FileWriter(fn);
-                        ofp.write(OStrings.getString("CT_WORD_COUNT_UNIQUE")+
-                                        m_partialWords + "\n"); // NOI18N
-                        ofp.write(OStrings.getString("CT_WORD_COUNT_TOTAL")	+
-                                        m_totalWords + "\n"); // NOI18N
-                        it = m_srcTextEntryArray.listIterator();
-                        SourceTextEntry ste;
-                        String curFile = ""; // NOI18N
-                        String file;
-                        int totWords = 0;
-                        while(it.hasNext())
-                        {
-                            ste = (SourceTextEntry) it.next();
-                            file = ste.getSrcFile().name;
-                            if (curFile.compareTo(file) != 0)
-                            {
-                                if (curFile.length() > 0)
-                                    ofp.write(curFile + "\t" + totWords +"\n");// NOI18N
-                                curFile = file;
-                                totWords = 0;
-                            }
-                            words = ste.getStrEntry().getWordCount();
-                            totWords += words;
-                            m_currentWords += words;
-                        }
-                        if (curFile.length() > 0)
-                        {
-                                ofp.write(curFile + "\t" + totWords +"\n\n"); // NOI18N
-                        }
-                        ofp.write(OStrings.getString("CT_WORD_REMAINING") +
-                                        m_currentWords + "\n"); // NOI18N
-                        ofp.close();
-                }
-                catch (IOException e)
-                {
-                        try { if (ofp != null) ofp.close();	}
-                        catch (IOException e2) {
-            }
-                }
-        }
+
+    /**
+     * Builds a file "word_count" that gives the total word count 
+     * of the project, the total number of unique segments, 
+     * plus the details for each file.
      */
+    private void buildWordCounts()
+    {
+        int m_totalWords = 0;
+        int m_partialWords = 0;
+        Iterator i = m_strEntryList.iterator();
+        while( i.hasNext() )
+        {
+            StringEntry se = (StringEntry) i.next();
+            SortedSet parents = se.getParentList();
+            int words = se.getSrcTokenList().size();
+            m_partialWords += words;
+            m_totalWords += words * parents.size();
+        }
+        
+        // now dump file based word counts to disk
+        String fn = m_config.getProjectInternal() + OConsts.WORD_CNT_FILE_EXT;
+        FileWriter ofp = null;
+        try
+        {
+            ofp = new FileWriter(fn);
+            ofp.write(OStrings.getString("CT_WORD_COUNT_UNIQUE") + m_partialWords);
+            ofp.write("\n");                                                    // NOI18N
+            ofp.write(OStrings.getString("CT_WORD_COUNT_TOTAL")	+ m_totalWords);
+            ofp.write("\n");                                                    // NOI18N
+            
+            i = m_srcTextEntryArray.listIterator();
+            int remainingWords = 0;
+            HashMap wordCounts = new HashMap();
+            HashMap leftCounts = new HashMap();
+            while( i.hasNext() )
+            {
+                SourceTextEntry ste = (SourceTextEntry) i.next();
+                String fileName = ste.getSrcFile().name;
+                Integer oldN;
+                Integer left;
+                if( wordCounts.containsKey(fileName) )
+                {
+                    oldN = (Integer) wordCounts.get(fileName);
+                    left = (Integer) leftCounts.get(fileName);
+                }
+                else
+                {
+                    oldN = new Integer(0);
+                    left = new Integer(0);
+                }
+                
+                int words = ste.getStrEntry().getSrcTokenList().size();
+                Integer newN = new Integer(oldN.intValue() + words);
+                wordCounts.put(fileName, newN);
+                
+                if( !ste.isTranslated() )
+                {
+                    remainingWords+=words;
+                    left = new Integer( left.intValue() + words );
+                }
+                leftCounts.put(fileName, left);
+            }
+            
+            ofp.write(OStrings.getString("CT_WORD_REMAINING") + remainingWords);
+            ofp.write("\n");                                                    // NOI18N
+            ofp.write("\n");                                                    // NOI18N
+            ofp.write("Total\tRemaining\tFile name");
+            ofp.write("\n");                                                    // NOI18N
+            
+            i = wordCounts.keySet().iterator();
+            while( i.hasNext() )
+            {
+                String fileName = (String) i.next();
+                Integer n = (Integer) wordCounts.get(fileName);
+                Integer left = (Integer) leftCounts.get(fileName);
+                ofp.write(n.intValue() + "\t" + left.intValue() + "\t\t" + fileName);   // NOI18N
+                ofp.write("\n");                                                // NOI18N
+            }
+            
+            ofp.close();
+        }
+        catch (IOException e)
+        {
+            try
+            { 
+                if (ofp != null) 
+                    ofp.close();	
+            }
+            catch (IOException e2) { }
+        }
+    }
     
     /**
      * Returns a Source Text Entry of a certain number.
@@ -1274,10 +1302,6 @@ public class CommandThread extends Thread
     }
     
     private LinkedList m_requestQueue;
-    
-    private int m_totalWords;
-    private int m_partialWords;
-    private int m_currentWords;
     
     // project name of strings loaded from TM - store globally so to not
     // pass seperately on each function call

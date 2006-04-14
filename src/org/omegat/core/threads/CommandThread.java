@@ -1030,7 +1030,7 @@ public class CommandThread extends Thread
             {
                 public boolean accept(File dir, String name)
                 {
-                    return name.endsWith(".bak");
+                    return name.endsWith(".bak");                               // NOI18N
                 }
             }));
             
@@ -1142,7 +1142,11 @@ public class CommandThread extends Thread
             ofp.write(OStrings.getString("CT_WORD_REMAINING") + remainingWords);
             ofp.write("\n");                                                    // NOI18N
             ofp.write("\n");                                                    // NOI18N
-            ofp.write("Total\tRemaining\tFile name");
+            ofp.write(OStrings.getString("CT_WORD_COUNT_TOTAL_IN_FILE"));
+            ofp.write("\t");                                                    // NOI18N
+            ofp.write(OStrings.getString("CT_WORD_COUNT_REMAINS_IN_FILE"));
+            ofp.write("\t");                                                    // NOI18N
+            ofp.write(OStrings.getString("CT_WORD_COUNT_FILE_NAME"));
             ofp.write("\n");                                                    // NOI18N
             
             i = wordCounts.keySet().iterator();
@@ -1151,7 +1155,7 @@ public class CommandThread extends Thread
                 String fileName = (String) i.next();
                 Integer n = (Integer) wordCounts.get(fileName);
                 Integer left = (Integer) leftCounts.get(fileName);
-                ofp.write(n.intValue() + "\t" + left.intValue() + "\t\t" + fileName);   // NOI18N
+                ofp.write(n.intValue() + "\t" + left.intValue() + "\t" + fileName);   // NOI18N
                 ofp.write("\n");                                                // NOI18N
             }
             

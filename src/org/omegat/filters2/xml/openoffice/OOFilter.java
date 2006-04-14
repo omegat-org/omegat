@@ -162,8 +162,33 @@ public class OOFilter extends XMLAbstractFilter
         defineFormatTag("text:user-defined", "ud");                             // NOI18N
         defineFormatTag("text:sequence", "seq");                                // NOI18N
         
-        // not working in 1.4.5
-        // defineVerbatumTag("text:note-citation");                             // NOI18N
+        // Code donated by Didier Briel
+        // http://sourceforge.net/support/tracker.php?aid=1458673
+        defineFormatTag("draw:image", "di");                                    // NOI18N
+        defineFormatTag("draw:frame", "df");                                    // NOI18N
+        defineFormatTag("draw:object-ole", "do");                               // NOI18N
+        
+        defineFormatTag("text:bookmark", "bk");                                 // NOI18N
+        defineFormatTag("text:bookmark/", "bk/");                               // NOI18N
+        defineFormatTag("text:bookmark-start", "bs");                           // NOI18N
+        defineFormatTag("text:bookmark-start/", "bs/");                         // NOI18N
+        defineFormatTag("text:bookmark-end", "be");                             // NOI18N
+        defineFormatTag("text:bookmark-end/", "be/");                           // NOI18N
+        defineFormatTag("text:reference-mark", "rm");                           // NOI18N
+        defineFormatTag("text:reference-mark/", "rm/");                         // NOI18N
+        defineFormatTag("text:reference-mark-start", "rs");                     // NOI18N
+        defineFormatTag("text:reference-mark-start/", "rs/");                   // NOI18N
+        defineFormatTag("text:reference-mark-end", "re");                       // NOI18N
+        defineFormatTag("text:reference-mark-end/", "re/");                     // NOI18N
+        
+        defineFormatTag("text:change", "tc");                                   // NOI18N
+        defineFormatTag("text:change/", "tc/");                                 // NOI18N
+        defineFormatTag("text:change-start", "ts");                             // NOI18N
+        defineFormatTag("text:change-end", "te");                               // NOI18N
+        defineFormatTag("dc:creator", "dc");                                    // NOI18N
+        defineFormatTag("dc:date", "dd");                                       // NOI18N
+        // End of contribution
+        
     }
     
     

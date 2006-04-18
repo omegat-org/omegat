@@ -25,8 +25,10 @@
 package org.omegat.core.segmentation;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,7 +36,7 @@ import org.omegat.core.threads.CommandThread;
 import org.omegat.gui.ProjectProperties;
 
 import org.omegat.util.Language;
-import org.omegat.util.OConsts;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 
 /**
@@ -62,15 +64,15 @@ public final class Segmenter
      * between them as in original paragraph.
      *
      * @param paragraph the paragraph text
-     * @param spaces list to store information about spaces between sentences, may be null
+     * @param spaces    list to store information about spaces between sentences
+     * @param brules    list to store rules that account to breaks
      * @return list of sentences (String objects)
      */
-    public static List segment(String paragraph, List spaces)
+    public static List segment(String paragraph, List spaces, List brules)
     {
-        List segments = breakParagraph(paragraph);
+        List segments = breakParagraph(paragraph, brules);
         List sentences = new ArrayList(segments.size());
-        if( spaces!=null )
-            spaces.clear();
+        spaces.clear();
         for(int i=0; i<segments.size(); i++)
         {
             String one = (String)segments.get(i);
@@ -105,12 +107,17 @@ public final class Segmenter
     
     /**
      * Returns pre-sentences (sentences with spaces between), computed by 
-     * breaking paragraph into chunks of text.
+     * breaking paragraph into chunks of text. Also returns the list
+     * with "the reasons" why the breaks were made, i.e. the list of break rules
+     * that contributed to each of the breaks made.
      * <p>
      * If glued back together, these strings form the same paragraph text 
      * as this function was fed.
+     *
+     * @param paragraph the paragraph text
+     * @param brules    list to store rules that account to breaks
      */
-    private static List breakParagraph(String paragraph)
+    private static List breakParagraph(String paragraph, List brules)
     {
         Language srclang = new Language(Preferences.getPreference(Preferences.SOURCE_LOCALE));
         List rules = SRX.getSRX().lookupRulesForLanguage(srclang);
@@ -138,13 +145,15 @@ public final class Segmenter
         // and now breaking the string according to the positions
         Iterator posIterator = breakpositions.iterator();
         List segments = new ArrayList();
+        brules.clear();
         int prevpos = 0;
         while( posIterator.hasNext() )
         {
-            int pos = ((Integer)posIterator.next()).intValue();
-            String oneseg = paragraph.substring(prevpos, pos);
+            BreakPosition bposition = (BreakPosition)posIterator.next();
+            String oneseg = paragraph.substring(prevpos, bposition.position);
             segments.add(oneseg);
-            prevpos = pos;
+            brules.add(bposition.reason);
+            prevpos = bposition.position;
         }
         try
         {
@@ -198,7 +207,7 @@ public final class Segmenter
         {
             int bbe = bbm.end();
             if( abm==null )
-                res.add( new Integer(bbe) );
+                res.add( new BreakPosition(bbe, rule) );
             else
             {
                 int abs = abm.start();
@@ -210,13 +219,61 @@ public final class Segmenter
                     abs = abm.start();
                 }
                 if( abs==bbe )
-                    res.add( new Integer(bbe) );
+                    res.add( new BreakPosition(bbe, rule) );
             }
         }
-        
+
         return res;
     }
     
+    /** A class for a break position that knows which rule contributed to it. */
+    static class BreakPosition implements Comparable
+    {
+        /** Break/Exception position. */
+        int position;
+        /** Rule that contributed to the break. */
+        Rule reason;
+        
+        /** Creates a new break position. */
+        BreakPosition(int position, Rule reason)
+        {
+            this.position = position;
+            this.reason = reason;
+        }
+
+        /** Other BreakPosition is "equal to" this one iff it has the same position. */
+        public boolean equals(Object obj)
+        {
+            if( obj==null )
+                return false;
+            if( !(obj instanceof BreakPosition) )
+                return false;
+            BreakPosition that = (BreakPosition) obj;
+            
+            return this.position == that.position;
+        }
+
+        /** Returns a hash code == position for the object. */
+        public int hashCode()
+        {
+            return this.position;
+        }
+
+        /** 
+         * Compares this break position with another. 
+         *
+         * @return a negative integer if its position is less than the another's, 
+         *          zero if they are equal, or a positive integer 
+         *          as its position is greater than the another's.
+         * @throws ClassCastException if the specified object's type prevents it
+         *         from being compared to this Object.
+         */
+        public int compareTo(Object obj)
+        {
+            BreakPosition that = (BreakPosition) obj;
+            return this.position - that.position;
+        }
+    }
     
     /**
      * Glues the sentences back to paragraph.
@@ -225,26 +282,28 @@ public final class Segmenter
      * without spaces before and after them, this method adds 
      * spaces if needed:
      * <ul>
-     * <li>For translation to Japanese does <b>not</b> add any spaces
+     * <li>For translation to Japanese does <b>not</b> add any spaces.
+     * <br>
+     * A special exceptions are the Break SRX rules that break on space,
+     * i.e. before and after patterns consist of spaces 
+     * (they get trimmed to an empty string). For such rules all the spaces
+     * are added
      * <li>For translation from Japanese adds one space
      * <li>For all other language combinations adds those spaces as were in the
      *     paragraph before.
      * </ul>
      *
      * @param sentences list of translated sentences
-     * @param spaces information about spaces in original paragraph, may be null
+     * @param spaces    information about spaces in original paragraph
+     * @param brules    rules that account to breaks
      * @return glued translated paragraph
      */
-    public static String glue(List sentences, List spaces)
+    public static String glue(List sentences, List spaces, List brules)
     {
         if( sentences.size()<=0 )
             return "";                                                          // NOI18N
 	
-	ProjectProperties config;
-        if(CommandThread.core!=null)
-            config=CommandThread.core.getProjectProperties();
-        else
-            config = new ProjectProperties();
+        ProjectProperties config = CommandThread.core.getProjectProperties();
         
         StringBuffer res = new StringBuffer();
         res.append((String)sentences.get(0));
@@ -252,25 +311,32 @@ public final class Segmenter
         for(int i=1; i<sentences.size(); i++)
         {
             StringBuffer sp = new StringBuffer();
+            sp.append((StringBuffer)spaces.get(2*i-1));
+            sp.append((StringBuffer)spaces.get(2*i));
             
-            if( !"JA".equals(config.getTargetLanguage().getLanguageCode()) )    // NOI18N
+            if (CJK_LANGUAGES.contains(config.getTargetLanguage().getLanguageCode()))
             {
-                if( spaces!=null )
-                {
-                    sp.append((StringBuffer)spaces.get(2*i-1));
-                    sp.append((StringBuffer)spaces.get(2*i));
-                }
-                else
-                    sp.append(' ');
-
-                if( "JA".equals(config.getSourceLanguage().getLanguageCode())   // NOI18N
-                        && sp.length()==0 )
-                    sp.append(' ');
+                Rule rule = (Rule)brules.get(i-1);
+                if( !PatternConsts.SPACY_REGEX.matcher(rule.getBeforebreak()).matches() ||
+                        !PatternConsts.SPACY_REGEX.matcher(rule.getAfterbreak()).matches() )
+                    sp.setLength(0);
             }
+            else if (CJK_LANGUAGES.contains(config.getSourceLanguage().getLanguageCode()) && 
+                    sp.length()==0)
+                sp.append(" ");                                                 // NOI18N
 	    
-	    res.append(sp);
+            res.append(sp);
             res.append((String)sentences.get(i));
         }
         return res.toString();
+    }
+    
+    /** CJK languages. */
+    private static final Set CJK_LANGUAGES = new HashSet();
+    static
+    {
+        CJK_LANGUAGES.add("ZH");                                                // NOI18N
+        CJK_LANGUAGES.add("JA");                                                // NOI18N
+        CJK_LANGUAGES.add("KO");                                                // NOI18N
     }
 }

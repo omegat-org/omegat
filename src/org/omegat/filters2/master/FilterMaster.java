@@ -176,13 +176,14 @@ public class FilterMaster
         if( CommandThread.core.getProjectProperties().isSentenceSegmentingEnabled() )
         {
             List spaces = new ArrayList();
-            List segments = Segmenter.segment(src, spaces);
+            List brules = new ArrayList();
+            List segments = Segmenter.segment(src, spaces, brules);
             for(int i=0; i<segments.size(); i++)
             {
                 String onesrc = (String)segments.get(i);
                 segments.set(i, processSingleEntry(onesrc));
             }
-            res.append(Segmenter.glue(segments, spaces));
+            res.append(Segmenter.glue(segments, spaces, brules));
         }
         else
             res.append(processSingleEntry(src));

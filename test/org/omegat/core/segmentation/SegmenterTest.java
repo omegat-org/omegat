@@ -70,7 +70,7 @@ public class SegmenterTest extends TestCase
     public void testSegment()
     {
         List spaces = new ArrayList();
-        List segments = Segmenter.segment("<br7>\n\n<br5>\n\nother", spaces);
+        List segments = Segmenter.segment("<br7>\n\n<br5>\n\nother", spaces, new ArrayList());
         if(segments.size()!=3 || !segments.get(0).toString().equals("<br7>") || 
                 !segments.get(1).toString().equals("<br5>") ||
                 !segments.get(2).toString().equals("other"))
@@ -82,10 +82,12 @@ public class SegmenterTest extends TestCase
      */
     public void testGlue()
     {
+        CommandThread.core=new CommandThread(null);
         List spaces = new ArrayList();
+        List brules = new ArrayList();
         String oldString = "<br7>\n\n<br5>\n\nother";
-        List segments = Segmenter.segment(oldString, spaces);
-        String newString = Segmenter.glue(segments, spaces);
+        List segments = Segmenter.segment(oldString, spaces, brules);
+        String newString = Segmenter.glue(segments, spaces, brules);
         if(!newString.equals(oldString))
             fail("Glue failed.");
     }

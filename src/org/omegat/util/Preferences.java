@@ -69,6 +69,7 @@ public class Preferences
     public static final String MATCHWINDOW_HEIGHT = "match_height";             // NOI18N
     public static final String MATCHWINDOW_X      = "match_x";                  // NOI18N
     public static final String MATCHWINDOW_Y      = "match_y";                  // NOI18N
+    public static final String MATCHWINDOW_DOCKED = "match_docked";             // NOI18N
     
     /** Where the divider between Main area and Match/Glossary is */
     public static final String MATCHWINDOW_DIVIDER= "match_divider";            // NOI18N

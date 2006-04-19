@@ -45,6 +45,13 @@ public class MatchGlossaryWindow extends javax.swing.JFrame
         mainwindow = mw;
         initComponents();
         m_matchPane.setMainWindow(mainwindow);
+        m_matchPane.setDockButtonText("&<<<");                                  // NOI18N
+    }
+    
+    /** Is called when mathces are undocked. */
+    public void onUnDock()
+    {
+        getContentPane().add(m_matchPane, java.awt.BorderLayout.CENTER);
     }
     
     /** This method is called from within the constructor to

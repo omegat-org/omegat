@@ -47,7 +47,7 @@ import org.omegat.util.Token;
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  */
-public class MatchGlossaryPane extends javax.swing.JPanel implements java.beans.PropertyChangeListener
+public class MatchGlossaryPane extends javax.swing.JPanel implements java.beans.PropertyChangeListener, java.awt.event.ActionListener
 {
     
     /** main window holder */
@@ -57,6 +57,12 @@ public class MatchGlossaryPane extends javax.swing.JPanel implements java.beans.
     public void setMainWindow(MainWindow mw)
     {
         mainwindow = mw;
+    }
+    
+    /** Sets the text of dock/undock button. */
+    public void setDockButtonText(String label)
+    {
+        org.openide.awt.Mnemonics.setLocalizedText(dockButton, label);        
     }
     
     /** Creates new form MatchGlossaryPane */
@@ -80,6 +86,7 @@ public class MatchGlossaryPane extends javax.swing.JPanel implements java.beans.
         fuzzyMatchesLabel = new javax.swing.JLabel();
         matchScrollPane = new javax.swing.JScrollPane();
         m_matchPane = new javax.swing.JTextPane();
+        dockButton = new javax.swing.JButton();
         downPanel = new javax.swing.JPanel();
         glossaryLabel = new javax.swing.JLabel();
         glossaryScrollPane = new javax.swing.JScrollPane();
@@ -108,10 +115,18 @@ public class MatchGlossaryPane extends javax.swing.JPanel implements java.beans.
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         upPanel.add(matchScrollPane, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(dockButton, "&<<<");
+        dockButton.addActionListener(this);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        upPanel.add(dockButton, gridBagConstraints);
 
         matchSplitPane.setLeftComponent(upPanel);
 
@@ -143,6 +158,14 @@ public class MatchGlossaryPane extends javax.swing.JPanel implements java.beans.
 
     // Code for dispatching events from components to event handlers.
 
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (evt.getSource() == dockButton)
+        {
+            MatchGlossaryPane.this.dockButtonActionPerformed(evt);
+        }
+    }
+
     public void propertyChange(java.beans.PropertyChangeEvent evt)
     {
         if (evt.getSource() == matchSplitPane)
@@ -151,6 +174,11 @@ public class MatchGlossaryPane extends javax.swing.JPanel implements java.beans.
         }
     }
     // </editor-fold>//GEN-END:initComponents
+
+    private void dockButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_dockButtonActionPerformed
+    {//GEN-HEADEREND:event_dockButtonActionPerformed
+        mainwindow.dockMatches();
+    }//GEN-LAST:event_dockButtonActionPerformed
     
     private void matchSplitPanePropertyChange(java.beans.PropertyChangeEvent evt)//GEN-FIRST:event_matchSplitPanePropertyChange
     {//GEN-HEADEREND:event_matchSplitPanePropertyChange
@@ -160,6 +188,7 @@ public class MatchGlossaryPane extends javax.swing.JPanel implements java.beans.
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton dockButton;
     private javax.swing.JPanel downPanel;
     private javax.swing.JLabel fuzzyMatchesLabel;
     private javax.swing.JLabel glossaryLabel;

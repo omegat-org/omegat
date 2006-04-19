@@ -119,6 +119,11 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         mainScroller.setViewportView(xlPane);
         xlPane.setMainWindow(this);
         
+        dividerSize = mainSplitter.getDividerSize();
+        mainSplitter.setDividerSize(0);
+        mainSplitter.setDividerLocation(1.0);
+        mainSplitter.setRightComponent(null);
+        
         initScreenLayout();
         updateCheckboxesOnStart();
         uiUpdateOnProjectClose();
@@ -349,18 +354,13 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         }
         
         // match/glossary window
+        int x, y, w, h;
         try
         {
-            String dw = Preferences.getPreference(Preferences.MATCHWINDOW_WIDTH);
-            String dh = Preferences.getPreference(Preferences.MATCHWINDOW_HEIGHT);
-            int w = Integer.parseInt(dw);
-            int h = Integer.parseInt(dh);
-            matchWindow.setSize(w, h);
-            String dx = Preferences.getPreference(Preferences.MATCHWINDOW_X);
-            String dy = Preferences.getPreference(Preferences.MATCHWINDOW_Y);
-            int x = Integer.parseInt(dx);
-            int y = Integer.parseInt(dy);
-            matchWindow.setLocation(x, y);
+            x = Integer.parseInt(Preferences.getPreference(Preferences.MATCHWINDOW_X));
+            y = Integer.parseInt(Preferences.getPreference(Preferences.MATCHWINDOW_Y));
+            w = Integer.parseInt(Preferences.getPreference(Preferences.MATCHWINDOW_WIDTH));
+            h = Integer.parseInt(Preferences.getPreference(Preferences.MATCHWINDOW_HEIGHT));
         }
         catch (NumberFormatException nfe)
         {
@@ -371,15 +371,39 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             if (scrSize.width < 900)
             {
                 // assume 800x600
-                matchWindow.setSize(200, 536);
-                matchWindow.setLocation(590, 0);
+                x = 590;
+                y = 0;
+                w = 200;
+                h = 536;
             }
             else
             {
                 // assume 1024x768 or larger
-                matchWindow.setSize(300, 700);
-                matchWindow.setLocation(700, 0);
+                x = 700;
+                y = 0;
+                w = 300;
+                h = 700;
             }
+        }
+        
+        matchWindow.setLocation(x, y);
+        matchWindow.setSize(w, h);
+        
+        if( !Preferences.isPreference(Preferences.MATCHWINDOW_DOCKED) )
+        {
+            docked = false;
+            matchWindow.setVisible(true);
+            matchWindow.getMatchGlossaryPane().setDockButtonText("&<<<");       // NOI18N
+        }        
+        else
+        {
+            docked = true;
+            int split = mainSplitter.getWidth() - w;
+            matchWindow.setVisible(false);
+            matchWindow.getMatchGlossaryPane().setDockButtonText("&>>>");       // NOI18N
+            mainSplitter.setRightComponent(matchWindow.getMatchGlossaryPane());
+            mainSplitter.setDividerLocation(split);
+            mainSplitter.setDividerSize(dividerSize);
         }
         
         // match/glossary window divider
@@ -439,6 +463,47 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             Preferences.setPreference(Preferences.MATCHWINDOW_HEIGHT, matchWindow.getHeight());
             Preferences.setPreference(Preferences.MATCHWINDOW_X, matchWindow.getX());
             Preferences.setPreference(Preferences.MATCHWINDOW_Y, matchWindow.getY());
+
+            Preferences.setPreference(Preferences.MATCHWINDOW_DOCKED, docked);
+        }
+    }
+    
+    boolean docked = false;
+    int dividerSize;
+    
+    /**
+     * Docks/Undocks Matches/Glossary Pane.
+     */
+    public void dockMatches()
+    {
+        if( docked )
+        {
+            docked = false;
+            
+            int width = mainSplitter.getWidth()-mainSplitter.getDividerLocation();
+            mainSplitter.setRightComponent(null);
+            setSize(getWidth()-width, getHeight());
+            matchWindow.setBounds(getX()+getWidth(), getY(), width, getHeight());
+            matchWindow.onUnDock();
+            matchWindow.getMatchGlossaryPane().setDockButtonText("&<<<");       // NOI18N
+            dividerSize = mainSplitter.getDividerSize();
+            mainSplitter.setDividerSize(0);
+            
+            matchWindow.setVisible(true);
+        }
+        else
+        {
+            docked = true;
+            
+            matchWindow.setVisible(false);
+            
+            int width = matchWindow.getWidth();
+            int split = mainSplitter.getWidth();
+            setSize(getWidth()+width, getHeight());
+            matchWindow.getMatchGlossaryPane().setDockButtonText("&>>>");       // NOI18N
+            mainSplitter.setRightComponent(matchWindow.getMatchGlossaryPane());
+            mainSplitter.setDividerLocation(split);
+            mainSplitter.setDividerSize(dividerSize);
         }
     }
     
@@ -1846,7 +1911,8 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     public void setVisible(boolean b)
     {
         super.setVisible(b);
-        matchWindow.setVisible(b);
+        if( !docked )
+            matchWindow.setVisible(b);
         matchWindow.getMatchGlossaryPane().setFont(m_font);
         toFront();
     }
@@ -1910,6 +1976,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         separator2inProjectMenu = new javax.swing.JSeparator();
         projectExitMenuItem = new javax.swing.JMenuItem();
         statusLabel = new javax.swing.JLabel();
+        mainSplitter = new javax.swing.JSplitPane();
         mainScroller = new javax.swing.JScrollPane();
         mainMenu = new javax.swing.JMenuBar();
         projectMenu = new javax.swing.JMenu();
@@ -1971,9 +2038,14 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
 
         getContentPane().add(statusLabel, java.awt.BorderLayout.SOUTH);
 
+        mainSplitter.setResizeWeight(1.0);
+        mainSplitter.setContinuousLayout(true);
+        mainSplitter.setOneTouchExpandable(true);
         mainScroller.setBorder(null);
         mainScroller.setMinimumSize(new java.awt.Dimension(100, 100));
-        getContentPane().add(mainScroller, java.awt.BorderLayout.CENTER);
+        mainSplitter.setLeftComponent(mainScroller);
+
+        getContentPane().add(mainSplitter, java.awt.BorderLayout.CENTER);
 
         org.openide.awt.Mnemonics.setLocalizedText(projectMenu, OStrings.getString("TF_MENU_FILE"));
         org.openide.awt.Mnemonics.setLocalizedText(projectNewMenuItem, OStrings.getString("TF_MENU_FILE_CREATE"));
@@ -2579,19 +2651,35 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     /** Informs Main Window class that the user closed the Match/Glossary window */
     public void matchWindowClosed()
     {
-        viewMatchWindowCheckBoxMenuItem.setSelected(false);
+        if( !docked )
+            viewMatchWindowCheckBoxMenuItem.setSelected(false);
     }
     
     private void viewMatchWindowCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_viewMatchWindowCheckBoxMenuItemActionPerformed
     {//GEN-HEADEREND:event_viewMatchWindowCheckBoxMenuItemActionPerformed
         if( viewMatchWindowCheckBoxMenuItem.isSelected() )
         {
-            matchWindow.setVisible(true);
+            if( docked )
+            {
+                int width = matchWindow.getWidth();
+                mainSplitter.setRightComponent(matchWindow.getMatchGlossaryPane());
+                mainSplitter.setDividerLocation(mainSplitter.getWidth()-width);
+                mainSplitter.setDividerSize(dividerSize);
+            }
+            else
+                matchWindow.setVisible(true);
             toFront();
         }
         else
         {
-            matchWindow.setVisible(false);
+            if( docked )
+            {
+                mainSplitter.setRightComponent(null);
+                dividerSize = mainSplitter.getDividerSize();
+                mainSplitter.setDividerSize(0);
+            }
+            else
+                matchWindow.setVisible(false);
         }
     }//GEN-LAST:event_viewMatchWindowCheckBoxMenuItemActionPerformed
     
@@ -2657,6 +2745,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuBar mainMenu;
     private javax.swing.JScrollPane mainScroller;
+    private javax.swing.JSplitPane mainSplitter;
     private javax.swing.JCheckBoxMenuItem optionsAlwaysConfirmQuitCheckBoxMenuItem;
     private javax.swing.JMenuItem optionsFontSelectionMenuItem;
     private javax.swing.JMenu optionsMenu;

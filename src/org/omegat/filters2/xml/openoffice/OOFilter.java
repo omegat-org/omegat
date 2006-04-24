@@ -188,7 +188,11 @@ public class OOFilter extends XMLAbstractFilter
         defineFormatTag("dc:creator", "dc");                                    // NOI18N
         defineFormatTag("dc:date", "dd");                                       // NOI18N
         // End of contribution
-        
+
+        // http://sourceforge.net/support/tracker.php?aid=1461154
+        defineFormatTag("text:note", "note");
+        defineFormatTag("text:note-citation", "marker");
+        defineFormatTag("text:note-body", "body");
     }
     
     

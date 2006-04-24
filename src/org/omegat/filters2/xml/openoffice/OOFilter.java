@@ -190,9 +190,9 @@ public class OOFilter extends XMLAbstractFilter
         // End of contribution
 
         // http://sourceforge.net/support/tracker.php?aid=1461154
-        defineFormatTag("text:note", "note");
-        defineFormatTag("text:note-citation", "marker");
-        defineFormatTag("text:note-body", "body");
+        defineFormatTag("text:note", "n");                                      // NOI18N
+        defineFormatTag("text:note-citation", "nc");                            // NOI18N
+        defineFormatTag("text:note-body", "nb");                                // NOI18N
     }
     
     

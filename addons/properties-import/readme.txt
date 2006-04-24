@@ -15,6 +15,7 @@ The sources are supplied inside the OmegaT sources distribution.
 
 ----------------------------------------------------------------------
 
+Version 1.3: Fixed a filecase bug (occuring only on Unixes)
 Version 1.2: Make it look nicer
 Version 1.1: Some bugs fixed
 Verison 1.0: Initial release

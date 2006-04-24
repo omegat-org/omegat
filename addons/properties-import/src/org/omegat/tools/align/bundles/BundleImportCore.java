@@ -21,6 +21,7 @@
 package org.omegat.tools.align.bundles;
 
 import java.io.IOException;
+import org.omegat.util.Language;
 
 /**
  * The main static launch point
@@ -32,8 +33,10 @@ public class BundleImportCore
     
     public static void doImport(String sourcelang, String targetlang, String folder, String tmxfile) throws IOException
     {
-        TMXSaver saver = new TMXSaver(sourcelang, targetlang, tmxfile);
-        FolderScanner scanner = new FolderScanner(folder, targetlang, saver);
+        Language source = new Language(sourcelang);
+        Language target = new Language(targetlang);
+        TMXSaver saver = new TMXSaver(source.getLanguage(), target.getLanguage(), tmxfile);
+        FolderScanner scanner = new FolderScanner(folder, target.getLocale(), saver);
         scanner.scan();
         saver.save();
     }

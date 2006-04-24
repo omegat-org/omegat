@@ -63,7 +63,7 @@ public class TMXSaver
         buffer.append("<tmx version=\"1.1\">                        \n");       // NOI18N
         buffer.append("  <header                                    \n");       // NOI18N
         buffer.append("    creationtool=\"OTimp\"                   \n");       // NOI18N
-        buffer.append("    creationtoolversion=\"0.1.1\"            \n");       // NOI18N
+        buffer.append("    creationtoolversion=\"1.3\"              \n");       // NOI18N
         buffer.append("    segtype=\"paragraph\"                    \n");       // NOI18N
         buffer.append("    o-tmf=\"OmegaT TMX\"                     \n");       // NOI18N
         buffer.append("    adminlang=\"EN-US\"                      \n");       // NOI18N

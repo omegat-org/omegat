@@ -33,11 +33,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.gui.ProjectProperties;
+import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
 
 /**
+ * Tests for OmegaT segmentation.
  *
  * @author Maxym Mykhalchuk
  */
@@ -82,7 +84,8 @@ public class SegmenterTest extends TestCase
      */
     public void testGlue()
     {
-        CommandThread.core=new CommandThread(null);
+        MainWindow mw = new MainWindow();
+        CommandThread.core=new CommandThread(mw);
         List spaces = new ArrayList();
         List brules = new ArrayList();
         String oldString = "<br7>\n\n<br5>\n\nother";

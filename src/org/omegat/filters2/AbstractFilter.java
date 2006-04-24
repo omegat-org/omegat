@@ -42,6 +42,15 @@ import org.omegat.util.OStrings;
 /**
  * The base class for all filters (aka file handlers).
  * Each filter should extend this class or one of its decendants.
+
+The process how the filter works is the following:
+1. Source text is extracted
+2. Tags are converted into shortcuts and these shortcuts are temporarily stored
+3. Source text with shortened tags is sent to OmegaT core
+4. Core returns a translation (or the same text if there's no translation)
+5. Tags shortcuts are expanded in translated text
+6. Translated text is written into the output file
+
  * @author Maxym Mykhalchuk
  */
 public abstract class AbstractFilter

@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 /**
+ * Tests for (some) static utility methods.
  *
  * @author Maxym Mykhalchuk
  */

@@ -3,20 +3,21 @@
 ----------------------------------------------------------------------
 
 1.6.0 RC9 vs. 1.4.5.04
- 28 Enchancements
- 58 Bugfixes
-    (around 5 being regressions of earlier 1.6.0 Beta/RC releases)
+ >= 30 Enchancements
+ >  50 Bugfixes
+       (around 5 being regressions of earlier 1.6.0 Beta/RC releases)
 
 ----------------------------------------------------------------------
-
- - 
-   http://sourceforge.net/support/tracker.php?aid=
 
 1.6.0 RC9
 
  Enchancements:
- - New Filter for Key-Value text files (differently encoded)
+
+ - [Filters] New Filter for Key-Value text files (differently encoded)
    http://sourceforge.net/support/tracker.php?aid=1462564
+
+ - Match/Glossary pane may be docked to single main window
+   http://sourceforge.net/support/tracker.php?aid=1472196
 
  Bugfixes:
 
@@ -26,11 +27,20 @@
  - "Re-activate" output of word_count
    http://sourceforge.net/support/tracker.php?aid=1447306
 
- - OO: Don't segment on inline images, bookmarks, references
+ - [CJK] [1.6RC8] Translated text files miss line breaks in CJK
+   http://sourceforge.net/support/tracker.php?aid=1462938
+
+ - [OO] Don't segment on inline images, bookmarks, references
    http://sourceforge.net/support/tracker.php?aid=1458673
+
+ - [OO] Tracked changes add unnecessary data
+   http://sourceforge.net/support/tracker.php?aid=1461178
 
  - Windows closing/position problems/String problems 
    http://sourceforge.net/support/tracker.php?aid=1386155
+
+ - Language codes forced to uppercase
+   http://sourceforge.net/support/tracker.php?aid=1473713
 
  - Shortcuts active while menus are not
    http://sourceforge.net/support/tracker.php?aid=1446521

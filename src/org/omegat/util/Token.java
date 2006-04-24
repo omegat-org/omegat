@@ -106,7 +106,7 @@ public class Token
 
     public String toString()
     {
-        return text+"@"+offset;
+        return text+"@"+offset;                                                 // NOI18N
     }
 }
 

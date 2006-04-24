@@ -210,7 +210,7 @@ public class StaticUtils
     private static BreakIterator getWordBreaker()
     {
         if (wordBreaker==null)
-            wordBreaker = new WordIterator();// BreakIterator.getWordInstance();
+            wordBreaker = new WordIterator();
         return wordBreaker;
     }
     

@@ -37,7 +37,23 @@ import org.xml.sax.SAXParseException;
 import org.omegat.filters2.xml.XMLReader;
 
 /**
- * Class that load up TMX (Translation Memory) files (any version)
+ * Class that load up TMX (Translation Memory) files (any version).
+ * <p>
+ * TMX reader loads all TUVs in a TU first, then tries to decide 
+ * what's source and what's target, by first matching against the full 
+ * source/target language string, then against language codes only. 
+ * This improves TMX handling in a number of ways:
+ * <ol>
+ * <li>We now support multiple TUVs in a TU, which makes us more TMX compliant.
+ * <li>If a TU contains variants with different language variants, such as
+ *     EN-US and EN-GB, the one that best suits the required language variant
+ *     is loaded, not just the first non-source TUV encountered.
+ * <li>If an exact language match cannot be found, the best alternative is
+ *     loaded, if present. This means that if you set the source or target
+ *     language to EN-US, and all you have is EN-GB, EN-GB will be loaded. 
+ *     Or if you've set it to EN, and you have both, the first of either will 
+ *     be loaded.
+ * </ol>
  *
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)

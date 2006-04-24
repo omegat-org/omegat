@@ -72,6 +72,10 @@ public class PatternConsts
 
     /** Pattern that detects space-only regular expressions. */
     public static final Pattern SPACY_REGEX = Pattern.compile(
-            "((\\s|\\\\n|\\\\t|\\\\s)(\\+|\\*)?)+");                             // NOI18N
+            "((\\s|\\\\n|\\\\t|\\\\s)(\\+|\\*)?)+");                            // NOI18N
+    
+    /** Pattern that detects language and country. */
+    public static final Pattern LANG_AND_COUNTRY = Pattern.compile(
+            "([A-Za-z]{1,8})(?:(?:-|_)([A-Za-z0-9]{1,8}))?");                   // NOI18N
     
 }

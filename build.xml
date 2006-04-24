@@ -44,9 +44,9 @@
         <delete file="segmentation.conf"/>
         <delete file="log.txt"/>
         <delete dir="dist2"/>
-        <ant dir="addons/nbedge-filter" target="clean" inheritall="false" />
-        <ant dir="addons/properties-import" target="clean" inheritall="false" />
-        <ant dir="addons/sentseg-tmx" target="clean" inheritall="false" />
+        <ant antfile="addons/nbedge-filter/build.xml" target="clean" inheritall="false" />
+        <ant antfile="addons/properties-import/build.xml" target="clean" inheritall="false" />
+        <ant antfile="addons/sentseg-tmx/build.xml" target="clean" inheritall="false" />
     </target>
     
     <!-- Creates a zip with two localization packs -->
@@ -148,15 +148,13 @@
     
     <!-- Builds and copies to dist2 all addons -->
     <target name="addons">
-        <ant dir="addons/properties-import" target="dist" inheritall="false"/>
-        <copy file="addons/properties-import/import_properties_1.2.zip" todir="dist2"/>
+        <ant antfile="addons/properties-import/build.xml" target="dist" inheritall="false"/>
+        <copy file="addons/properties-import/import_properties_1.3.zip" todir="dist2"/>
 	<!--
-        <ant dir="addons/sentseg-tmx" target="dist" inheritall="false"/>
+        <ant antfile="addons/sentseg-tmx/build.xml" target="dist" inheritall="false"/>
 	<copy file="addons/sentseg-tmx/sentseg_tmx_1.1.zip" todir="dist2"/>
+        <ant antfile="addons/nbedge-filter/build.xml" target="jar" inheritall="false"/>
 	-->
-<!-- 
-        <ant dir="addons/nbedge-filter" inheritAll="false" target="jar"/>
--->
     </target>
         
     <!-- Builds all OmegaT products -->

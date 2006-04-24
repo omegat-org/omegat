@@ -1,5 +1,5 @@
 ==============================================================================
-  OmegaT 1.6.0 RC7 Read Me file
+  OmegaT 1.6.0 RC9 Read Me file
 
   1.  Information about OmegaT
   2.  What is OmegaT?

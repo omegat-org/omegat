@@ -121,7 +121,6 @@ public class MatchGlossaryPane extends javax.swing.JPanel implements java.beans.
         gridBagConstraints.weighty = 1.0;
         upPanel.add(matchScrollPane, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(dockButton, "&<<<");
         dockButton.addActionListener(this);
 
         gridBagConstraints = new java.awt.GridBagConstraints();

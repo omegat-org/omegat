@@ -19,6 +19,9 @@
  - Match/Glossary pane may be docked to single main window
    http://sourceforge.net/support/tracker.php?aid=1472196
 
+ - Separate language and formatting rules
+   http://sourceforge.net/support/tracker.php?aid=1475486
+
  Bugfixes:
 
  - Problems with segments clickability (Java5+MacOSX-specific regression)
@@ -41,6 +44,9 @@
 
  - Language codes forced to uppercase
    http://sourceforge.net/support/tracker.php?aid=1473713
+
+ - Language names in segmentation file are hardcoded
+   http://sourceforge.net/support/tracker.php?aid=1467200
 
  - Shortcuts active while menus are not
    http://sourceforge.net/support/tracker.php?aid=1446521

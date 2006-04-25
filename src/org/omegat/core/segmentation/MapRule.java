@@ -49,16 +49,25 @@ public class MapRule implements Serializable
     }                
 
     /** Language Name */
-    private String language;
+    private String languageCode;
     /** Returns Language Name (to display it in a dialog). */
     public String getLanguage()
     {
-        return language;
+        String res = LanguageCodes.getLanguageName(languageCode);
+        if( res==null || res.length()==0 )
+            res = languageCode;
+        return res;
     }
     /** Sets Language Name */
     public void setLanguage(String language)
     {
-        this.language = language;
+        this.languageCode = language;
+    }
+
+    /** Returns Language Code for programmatic usage. */
+    public String getLanguageCode()
+    {
+        return languageCode;
     }
 
     /** Pattern for the language/country ISO code (of a form LL-CC). */

@@ -35,12 +35,47 @@ import java.util.List;
  */
 public class DefaultRules
 {
-    /** Default (English) segmentation rules. */
+    /** Text files format-related rule. */
+    public static List textFormat()
+    {
+        List srules = new ArrayList();
+        
+        // special handling for Text files to break on empty indented lines
+        // idea by Jean-Christophe Helary
+        srules.add(new Rule(true, "\\n", " +"));                                // NOI18N
+        
+        return srules;
+    }
+
+    /** HTML format-related rule. */
+    public static List htmlFormat()
+    {
+        List srules = new ArrayList();
+        
+        // special handling for BR tag to segmenent on it
+        // idea by Jean-Christophe Helary
+        srules.add(new Rule(true, "<br\\d+/?>", "."));                          // NOI18N
+        
+        return srules;
+    }
+
+    /** Default language-related segmentation rules. */
+    public static List defaultLingual()
+    {
+        List srules = new ArrayList();
+        // ... exception
+        srules.add(new Rule(false, "\\.\\.\\.", "\\s+\\P{Lu}"));                // NOI18N
+        // .?! break rule
+        srules.add(new Rule(true, "[\\.\\?\\!]+", "\\s"));                      // NOI18N
+        
+        return srules;
+    }
+
+    /** English exceptions. */
     public static List english()
     {
-        // exceptions first
         List srules = new ArrayList();
-        srules.add(new Rule(false, "\\.\\.\\.", "\\s+\\P{Lu}"));                // NOI18N
+        
         srules.add(new Rule(false, "etc\\.", "\\s+\\P{Lu}"));                   // NOI18N
         
         srules.add(new Rule(false, "Dr\\.", "\\s"));                            // NOI18N
@@ -56,16 +91,6 @@ public class DefaultRules
         srules.add(new Rule(false, "resp\\.", "\\s"));                          // NOI18N
         srules.add(new Rule(false, "tel\\.", "\\s"));                           // NOI18N
 
-        // here go the break rules
-        
-        srules.add(new Rule(true, "[\\.\\?\\!]+", "\\s"));                      // NOI18N
-        // special handling for BR tag to segmenent on it
-        // idea by Jean-Christophe Helary
-        srules.add(new Rule(true, "<br\\d+/?>", "."));                          // NOI18N
-        // special handling for Text files to break on empty indented lines
-        // idea by Jean-Christophe Helary
-        srules.add(new Rule(true, "\\n", " +"));                                // NOI18N
-        
         return srules;
     }
 

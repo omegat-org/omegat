@@ -38,7 +38,9 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 
 import org.omegat.util.Language;
@@ -116,7 +118,8 @@ public class SRX implements Serializable, Cloneable
         catch( IOException ioe )
         {
             String message = 
-                    MessageFormat.format(OStrings.getString("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG"),
+                    MessageFormat.format(
+                    OStrings.getString("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG"),
                     new Object[] {ioe} );
             StaticUtils.log(message);
             JOptionPane.showMessageDialog(null, 
@@ -140,7 +143,8 @@ public class SRX implements Serializable, Cloneable
         {
             
             MyExceptionListener myel = new MyExceptionListener();
-            XMLDecoder xmldec = new XMLDecoder(new FileInputStream(configFile), null, myel);
+            XMLDecoder xmldec = new XMLDecoder(
+                    new FileInputStream(configFile), null, myel);
             res = (SRX)xmldec.readObject();
             xmldec.close();
             
@@ -155,7 +159,8 @@ public class SRX implements Serializable, Cloneable
                     sb.append("\n");                                            // NOI18N
                 }
                 throw new Exception(
-                        MessageFormat.format("Exceptions occured while loading segmentation rules:\n{0}",  // NOI18N
+                        MessageFormat.format(
+                        "Exceptions occured while loading segmentation rules:\n{0}",// NOI18N
                         new Object[] {sb.toString()} ) );
             }
             
@@ -188,11 +193,13 @@ public class SRX implements Serializable, Cloneable
     /** Merges two sets of segmnetation rules together. */
     private static SRX merge(SRX current, SRX defaults)
     {
+        current = upgrade(current, defaults);
+        
         int defaultMapRulesN = defaults.getMappingRules().size();
         for (int i=0; i<defaultMapRulesN; i++)
         {
             MapRule dmaprule = (MapRule)defaults.getMappingRules().get(i);
-            String dpattern = dmaprule.getPattern();
+            String dcode = dmaprule.getLanguageCode();
             // trying to find
             boolean found = false;
             int currentMapRulesN = current.getMappingRules().size();
@@ -200,8 +207,8 @@ public class SRX implements Serializable, Cloneable
             for (int j=0; j<currentMapRulesN; j++)
             {
                 cmaprule = (MapRule)current.getMappingRules().get(j);
-                String cpattern = cmaprule.getPattern();
-                if (dpattern.equals(cpattern)) 
+                String ccode = cmaprule.getLanguageCode();
+                if (dcode.equals(ccode)) 
                 {
                     found = true;
                     break;
@@ -262,6 +269,29 @@ public class SRX implements Serializable, Cloneable
         return current;
     }
     
+    /** Implements some upgrade heuristics. */
+    private static SRX upgrade(SRX current, SRX defaults)
+    {
+        // renaming "Default (English)" to "Default"
+        // and removing English/Text/HTML-specific rules from there
+        if( OT160RC9_VERSION.equals(CURRENT_VERSION) )
+        {
+            String DEF = "Default (English)";                                   // NOI18N
+            for(int i=0; i<current.getMappingRules().size(); i++)
+            {
+                MapRule maprule = (MapRule)current.getMappingRules().get(i);
+                if( DEF.equals(maprule.getLanguageCode()) )
+                {
+                    maprule.setLanguage(LanguageCodes.DEFAULT_CODE);
+                    maprule.getRules().removeAll(DefaultRules.english());
+                    maprule.getRules().removeAll(DefaultRules.textFormat());
+                    maprule.getRules().removeAll(DefaultRules.htmlFormat());
+                }
+            }
+        }
+        return current;
+    }
+    
     /**
      * My Own Class to listen to exceptions, 
      * occured while loading filters configuration.
@@ -292,10 +322,12 @@ public class SRX implements Serializable, Cloneable
         }
     }
 
+    // Patterns
     private static final String DEFAULT_RULES_PATTERN = ".*";                   // NOI18N
+    private static final String ENGLISH_RULES_PATTERN = "EN.*";                 // NOI18N
     private static final String JAPANESE_RULES_PATTERN = "JA.*";                // NOI18N
     private static final String RUSSIAN_RULES_PATTERN = "RU.*";                 // NOI18N
-    private static final String GERMAN_RULES_PATTERN = "DE.*";                 // NOI18N
+    private static final String GERMAN_RULES_PATTERN = "DE.*";                  // NOI18N
     
     /**
      * Initializes default rules.
@@ -306,28 +338,45 @@ public class SRX implements Serializable, Cloneable
 
         // Extensive set of German exceptions
         getMappingRules().add(new MapRule(
-                OStrings.getString("CORE_SRX_RULES_NAME_GERMAN"),
+                LanguageCodes.GERMAN_CODE,
                 GERMAN_RULES_PATTERN, 
                 DefaultRules.german()));
         
         // Russian as an example
         getMappingRules().add(new MapRule(
-                OStrings.getString("CORE_SRX_RULES_NAME_RUSSIAN"),
+                LanguageCodes.RUSSIAN_CODE,
                 RUSSIAN_RULES_PATTERN, 
                 DefaultRules.russian()));
         
         // now Japanese
         getMappingRules().add(new MapRule(
-                OStrings.getString("CORE_SRX_RULES_NAME_JAPANESE"),
+                LanguageCodes.JAPANESE_CODE,
                 JAPANESE_RULES_PATTERN, 
                 DefaultRules.japanese()));
 
-        // English (default) goes last
+        // now English
         getMappingRules().add(new MapRule(
-                OStrings.getString("CORE_SRX_DEFAULT_RULES_NAME"),
-                DEFAULT_RULES_PATTERN, 
+                LanguageCodes.ENGLISH_CODE,
+                ENGLISH_RULES_PATTERN, 
                 DefaultRules.english()));
 
+        // default lingual rules
+        getMappingRules().add(new MapRule(
+                LanguageCodes.DEFAULT_CODE,
+                DEFAULT_RULES_PATTERN, 
+                DefaultRules.defaultLingual()));
+
+        // segmentation for text files
+        getMappingRules().add(new MapRule(
+                LanguageCodes.F_TEXT_CODE,
+                DEFAULT_RULES_PATTERN, 
+                DefaultRules.textFormat()));
+
+        // segmentation for (X)HTML files
+        getMappingRules().add(new MapRule(
+                LanguageCodes.F_HTML_CODE,
+                DEFAULT_RULES_PATTERN, 
+                DefaultRules.htmlFormat()));
     }
         
     /**
@@ -480,8 +529,10 @@ public class SRX implements Serializable, Cloneable
     public static String INITIAL_VERSION = "0.2";                               // NOI18N
     /** Segmentation support of 1.6.0 RC8 (a bit more rules added). */
     public static String OT160RC8_VERSION = "0.2.1";                            // NOI18N
+    /** Segmentation support of 1.6.0 RC9 (rules separated). */
+    public static String OT160RC9_VERSION = "0.2.2";                            // NOI18N
     /** Currently supported segmentation support version. */
-    public static String CURRENT_VERSION = OT160RC8_VERSION;
+    public static String CURRENT_VERSION = OT160RC9_VERSION;
     
     /** Version of OmegaT segmentation support. */
     private String version;

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+ Portions Copyright 2006 Henry Pijffers
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -29,6 +30,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.omegat.core.TransMemory;
 import org.omegat.core.matching.SourceTextEntry;
@@ -47,6 +49,7 @@ import org.omegat.util.StaticUtils;
  * This prevents lockup of the UI during intensive searches
  *
  * @author Keith Godfrey
+ * @author Henry Pijffers
  */
 public class SearchThread extends Thread
 {
@@ -190,6 +193,10 @@ public class SearchThread extends Thread
     //////////////////////////////////////////////////////////////
     // internal functions
     
+    /**
+     * Queue found string.
+     * Since 1.6.0 RC9 removes duplicate segments (by Henry Pijffers)
+     */
     private void foundString(int entryNum, String intro, String src,
             String target)
     {
@@ -320,17 +327,22 @@ public class SearchThread extends Thread
         StaticUtils.buildFileList(fileList, new File(m_searchDir), m_searchRecursive);
         
         FilterMaster fm = FilterMaster.getInstance();
+        Set processedFiles = new HashSet();
         
         for (i=0; i<fileList.size(); i++)
         {
             String filename = (String) fileList.get(i);
+            File file = new File(filename);
+            if (processedFiles.contains(file))
+                continue;
+            
             // determine actual file name w/ no root path info
             m_curFileName = filename.substring(m_searchDir.length());
             
             // don't bother to tell handler what we're looking for -
             //	the search data is already known here (and the
             //	handler is in the same thread, so info is not volatile)
-            fm.searchFile(filename, this);
+            fm.searchFile(filename, this, processedFiles);
         }
     }
     

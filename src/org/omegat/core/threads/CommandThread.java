@@ -39,9 +39,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.SortedSet;
 
 import org.omegat.core.LegacyTM;
@@ -544,14 +546,19 @@ public class CommandThread extends Thread
         fileList.clear();
         StaticUtils.buildFileList(fileList, new File(srcRoot), true);
         
+        Set processedFiles = new HashSet();
+        
         for(int i=0; i<fileList.size(); i++)
         {
             String filename = (String) fileList.get(i);
+            File file = new File(filename);
+            if (processedFiles.contains(file))
+                continue;
             // shorten filename to that which is relative to src root
             String midName = filename.substring(srcRoot.length());
             m_transFrame.setMessageText(OStrings.CT_COMPILE_FILE_MX + midName);
             
-            fm.translateFile(srcRoot, midName, locRoot);
+            fm.translateFile(srcRoot, midName, locRoot, processedFiles);
         }
         m_transFrame.setMessageText(OStrings.CT_COMPILE_DONE_MX);
     }
@@ -793,8 +800,6 @@ public class CommandThread extends Thread
     private boolean loadProject(String projectRoot)
             throws IOException, InterruptedIOException, TranslationException
     {
-        int i;
-        int j;
         if (!m_config.loadExisting(projectRoot))
             return false;
         
@@ -807,27 +812,31 @@ public class CommandThread extends Thread
         // now open source files
         FilterMaster fm = FilterMaster.getInstance();
         
-        ArrayList srcFileList = new ArrayList(256);
+        ArrayList srcFileList = new ArrayList();
         File root = new File(m_config.getSourceRoot());
         StaticUtils.buildFileList(srcFileList, root, true);
         
-        // keep track of how many entries are in each file
-        for (i=0; i<srcFileList.size(); i++)
+        Set processedFiles = new HashSet();
+        
+        for (int i=0; i<srcFileList.size(); i++)
         {
             String filename = (String) srcFileList.get(i);
+            File file = new File(filename);
+            if (processedFiles.contains(file))
+                continue;
             
             // strip leading path information;
             // feed file name to project window
-            String filepath = filename.substring(
-            m_config.getSourceRoot().length());
-            
+            String filepath = filename.substring(m_config.getSourceRoot().length());
             
             m_transFrame.setMessageText(OStrings.CT_LOAD_FILE_MX + filepath);
             
             m_curFile = new ProjectFileData();
             m_curFile.name = filename;
             m_curFile.firstEntry = m_srcTextEntryArray.size();
-            boolean fileLoaded = fm.loadFile(filename);
+            
+            boolean fileLoaded = fm.loadFile(filename, processedFiles);
+            
             m_curFile.lastEntry = m_srcTextEntryArray.size()-1;
             // BUGFIX FOR: Empty files are displayed in a file list window
             //             http://sourceforge.net/support/tracker.php?aid=1256026
@@ -840,7 +849,6 @@ public class CommandThread extends Thread
         m_transFrame.setMessageText(OStrings.getString("CT_LOAD_SRC_COMPLETE"));
         m_curFile = null;
         loadTranslations();
-        m_projWin.setNumberofUniqueSegments(m_strEntryList.size());
         m_projWin.buildDisplay();
         m_projWin.setVisible(true);
         m_projWin.toFront();
@@ -1247,8 +1255,19 @@ public class CommandThread extends Thread
     {
         return m_modifiedFlag;
     }
-
     
+    /** Returns the total number of segments, including duplicates. */
+    public int getTotalNumberOfSegments()
+    {
+        return m_srcTextEntryArray.size();
+    }
+    
+    /** Returns the number of unique segments. */
+    public int getNumberOfUniqueSegments()
+    {
+        return m_strEntryList.size();
+    }
+
     /** The number of unique translated segments. */
     private int numberofTranslatedSegments;
     /** Signals that the next increase doesn't count -- it's orphane */

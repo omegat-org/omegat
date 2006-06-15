@@ -3,7 +3,9 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
+ Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk
+ Portions Copyright (C) 2005-06 Henry Pijffers
+ Portions Copyright (C) 2006 Martin Wunderlich
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -27,19 +29,17 @@ package org.omegat.filters2.master;
 import java.beans.ExceptionListener;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.swing.JOptionPane;
 
 import org.omegat.core.StringEntry;
@@ -47,16 +47,17 @@ import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.filters2.AbstractFilter;
-import org.omegat.filters2.text.ini.INIFilter;
-import org.omegat.filters2.xml.openoffice.OOFilter;
-import org.omegat.util.LFileCopy;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.html2.HTMLFilter2;
+import org.omegat.filters2.po.PoFilter;
 import org.omegat.filters2.text.TextFilter;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
+import org.omegat.filters2.text.ini.INIFilter;
+import org.omegat.filters2.xml.openoffice.OOFilter;
+import org.omegat.filters3.xml.docbook.DocBookFilter;
+import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -231,10 +232,11 @@ public class FilterMaster
      * OmegaT core calls this method to load a source file.
      *
      * @param filename  The name of the source file to load.
+     * @param processedFiles The set of already processed files.
      * @return          Whether the file was handled by one of OmegaT filters.
      * @see #translateFile(String, String, String)
      */
-    public boolean loadFile(String filename)
+    public boolean loadFile(String filename, Set processedFiles)
             throws IOException, TranslationException
     {
         try
@@ -245,13 +247,12 @@ public class FilterMaster
 
             setMemorizing(true);
 
+            File inFile = new File(filename);
+            String inEncoding = lookup.inEncoding;
             AbstractFilter filterObject = lookup.filterObject;
-            BufferedReader reader = lookup.reader;
-
-            BufferedWriter writer = new BufferedWriter(new StringWriter());
-        
-            filterObject.processFile(reader, writer);
-            reader.close();
+            List files = filterObject.processFile(inFile, inEncoding, null, null);
+            if (files!=null)
+                processedFiles.addAll(files);
         }
         catch( IOException ioe )
         {
@@ -290,13 +291,14 @@ public class FilterMaster
      * (used for source files outside project source dir)
      *
      * @param filename  The name of the source file to search.
+     * @param processedFiles Set of already searched files.
      * @see #translateFile(String, String, String)
      */
-    public void searchFile(String filename, SearchThread searchthread)
+    public void searchFile(String filename, SearchThread searchthread, Set processedFiles)
             throws IOException, TranslationException
     {
         setSearchMode(searchthread);
-        loadFile(filename);
+        loadFile(filename, processedFiles);
         cancelSearchMode();
     }
     
@@ -305,24 +307,24 @@ public class FilterMaster
      * <ul>
      * <li>OmegaT first looks through registered filter instances
      *     to find filter(s) that can handle this file.
-     * <li>Opens the file and tests if filter(s) want to handle it.
-     * <li>If the filter accepts the file, the appropriate target file is opened.
+     * <li>Tests if filter(s) want to handle it.
+     * <li>If the filter accepts the file,
      * <li>Filter is asked to process the file.
-     * <li>Target writer is closed.
      * </ul>
      * If no filter is found, that processes this file,
      * we simply copy it to target folder.
-     *
-     * @param sourcedir The folder of the source file.
-     * @param filename  The name of the source file to process (only the part, relative to source folder).
-     * @param targetdir The folder to place the translated file to.
+     * 
+     * @param sourcedir The folder of the source inFile.
+     * @param filename  The name of the source inFile to process (only the part, relative to source folder).
+     * @param targetdir The folder to place the translated inFile to.
+     * @param processedFiles Set of all already processed files not to redo them again.
      */
-    public void translateFile(String sourcedir, String filename, String targetdir)
+    public void translateFile(String sourcedir, String filename, String targetdir, Set processedFiles)
             throws IOException, TranslationException
     {
         setMemorizing(false);
         
-        LookupInformation lookup = lookupFilter(sourcedir+File.separatorChar+filename);
+        LookupInformation lookup = lookupFilter(sourcedir+File.separator+filename);
         if( lookup==null )
         {
             // The file is not supported by any of the filters.
@@ -332,27 +334,27 @@ public class FilterMaster
             return;
         }
         
-        File file = new File(sourcedir+File.separatorChar+filename);
-        String name = file.getName();
+        File inFile = new File(sourcedir+File.separator+filename);
+        String inEncoding = lookup.inEncoding;
+        
+        String name = inFile.getName();
         String path = filename.substring(0, filename.length()-name.length());
         
-        AbstractFilter filterObject = lookup.filterObject;
-        BufferedReader reader = lookup.reader;
         Instance instance = lookup.instance;
-        File outfile =
+        File outFile =
                 new File(
-                targetdir + File.separatorChar +
-                path + File.separatorChar +
+                targetdir + File.separator +
+                path + File.separator +
                 constructTargetFilename(
                 instance.getSourceFilenameMask(),
                 name,
                 instance.getTargetFilenamePattern()));
+        String outEncoding = instance.getTargetEncoding();
         
-        BufferedWriter writer = filterObject.createWriter(outfile, instance.getTargetEncoding());
-        
-        filterObject.processFile(reader, writer);
-        reader.close();
-        writer.close();
+        AbstractFilter filterObject = lookup.filterObject;
+        List files = filterObject.processFile(inFile, inEncoding, outFile, outEncoding);
+        if (files!=null)
+            processedFiles.addAll(files);
     }
     
     class LookupInformation
@@ -360,15 +362,15 @@ public class FilterMaster
         public OneFilter filter;
         public Instance instance;
         public AbstractFilter filterObject;
-        public BufferedReader reader;
+        public String inEncoding;
         
         public LookupInformation(OneFilter filter, Instance instance,
-                AbstractFilter filterObject, BufferedReader reader)
+                AbstractFilter filterObject, String inEncoding)
         {
             this.filter = filter;
             this.instance = instance;
             this.filterObject = filterObject;
-            this.reader = reader;
+            this.inEncoding = inEncoding;
         }
     }
     
@@ -377,25 +379,26 @@ public class FilterMaster
      * filename provided.
      * In case of failing to find a filter to handle the file
      * returns <code>null</code>.
-     *
+     * 
      * In case of finding an appropriate filter it
      * <ul>
      * <li>Creates the filter (use <code>OneFilter.getFilter()</code> to get it)
      * <li>Creates a reader (use <code>OneFilter.getReader()</code> to get it)
      * <li>Checks whether the filter supports the file.
      * </ul>
-     * It <b>does not</b> check whether the filter supports the file,
+     * It <b>does not</b> check whether the filter supports the inFile,
      * i.e. it doesn't call <code>isFileSupported</code>
-     *
+     * 
+     * 
      * @param filename    The source filename.
-     * @return            The filter to handle the file.
+     * @return The filter to handle the inFile.
      */
     private LookupInformation lookupFilter(String filename)
             throws TranslationException, IOException
     {
-        File file = new File(filename);
-        String name = file.getName();
-        String path = file.getParent();
+        File inFile = new File(filename);
+        String name = inFile.getName();
+        String path = inFile.getParent();
         if( path==null )
             path = "";                                                          // NOI18N
         
@@ -412,30 +415,13 @@ public class FilterMaster
                     AbstractFilter filterObject;
                     filterObject = PluginUtils.instantiateFilter(filter);
                     
-                    BufferedReader reader = filterObject.createReader(file, instance.getSourceEncoding());
-                    
-                    reader.mark(OConsts.READ_AHEAD_LIMIT);
-                    if( !filterObject.isFileSupported(reader) )
+                    String inEncoding = instance.getSourceEncoding();
+                    if( !filterObject.isFileSupported(inFile, inEncoding) )
                     {
                         break;
                     }
                     
-                    try
-                    {
-                        reader.reset();
-                    }
-                    catch( IOException e )
-                    {
-                        // it means that isFileSupported() have read more than the buffer was
-                        StaticUtils.log(filter.getClassName()+
-                                ".isFileSupported() violated the contract:\n " +        // NOI18N
-                                "It have read more than "+OConsts.READ_AHEAD_LIMIT+     // NOI18N
-                                " bytes from the reader.");                             // NOI18N
-                        // we need to reopen the reader
-                        reader = filterObject.createReader(file, instance.getSourceEncoding());
-                    }
-                    
-                    return new LookupInformation(filter, instance, filterObject, reader);
+                    return new LookupInformation(filter, instance, filterObject, inEncoding);
                 }
             }
         }
@@ -446,8 +432,9 @@ public class FilterMaster
     private static List supportedEncodings = null;
     /**
      * Queries JRE for the list of supported encodings.
-     * Also adds the human name for no/automatic encoding.
-     *
+     * Also adds the human name for no/automatic inEncoding.
+     * 
+     * 
      * @return names of all the encodings in an array
      */
     public static List getSupportedEncodings()
@@ -617,10 +604,12 @@ public class FilterMaster
     {
         filters = new Filters();
         filters.addFilter(new OneFilter(new TextFilter(), false));
+        filters.addFilter(new OneFilter(new PoFilter(), false));
         filters.addFilter(new OneFilter(new ResourceBundleFilter(), false));
         filters.addFilter(new OneFilter(new HTMLFilter2(), false));
         filters.addFilter(new OneFilter(new OOFilter(), false));
         filters.addFilter(new OneFilter(new INIFilter(), false));
+        filters.addFilter(new OneFilter(new DocBookFilter(), false));
     }
     
     /**

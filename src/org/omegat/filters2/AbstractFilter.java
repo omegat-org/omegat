@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+ Portions Copyright (C) 2006 Martin Wunderlich
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -27,6 +28,7 @@ package org.omegat.filters2;
 import java.awt.Dialog;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.StringWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -35,6 +37,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.OStrings;
@@ -42,16 +45,19 @@ import org.omegat.util.OStrings;
 /**
  * The base class for all filters (aka file handlers).
  * Each filter should extend this class or one of its decendants.
-
-The process how the filter works is the following:
-1. Source text is extracted
-2. Tags are converted into shortcuts and these shortcuts are temporarily stored
-3. Source text with shortened tags is sent to OmegaT core
-4. Core returns a translation (or the same text if there's no translation)
-5. Tags shortcuts are expanded in translated text
-6. Translated text is written into the output file
-
+ * <p>
+ * The process how the filter works is the following:
+ * <ol>
+ * <li>Source text is extracted.
+ * <li>Tags are converted into shortcuts and these shortcuts are temporarily stored
+ * <li>Source text with shortened tags is sent to OmegaT core
+ * <li>Core returns a translation (or the same text if there's no translation)
+ * <li>Tags shortcuts are expanded in translated text
+ * <li>Translated text is written into the output file
+ * </ol>
+ *
  * @author Maxym Mykhalchuk
+ * @author  Martin Wunderlich
  */
 public abstract class AbstractFilter
 {
@@ -145,12 +151,11 @@ public abstract class AbstractFilter
     public abstract boolean isTargetEncodingVariable();
     
     /**
-     * Returns whether the file is supported by the filter.
-     * <p>
-     * !!! 
-     * <br>It is recommended that for performance reasons you shouldn't read
-     * more than {@link org.omegat.util.OConsts#READ_AHEAD_LIMIT}.
-     * <br>And you surely must not close the reader.
+     * Returns whether the file is supported by the filter,
+     * given the reader with file's contents.
+     * There exists a version of this method that takes file and encoding
+     * {@link #isFileSupported(File,String)}. You should override
+     * only one of the two.
      * <p>
      * By default returns true, because this method should be overriden
      * only by filters that differentiate input files not by extensions,
@@ -158,18 +163,47 @@ public abstract class AbstractFilter
      * <p>
      * For example, DocBook files have .xml extension, as possibly many other 
      * XML files, so the filter should check a DTD of the document.
+     *
      * @param reader The reader of the source file
      * @return Does the filter support the file
      */
-    public boolean isFileSupported(BufferedReader reader)
+    protected boolean isFileSupported(BufferedReader reader)
     {
         return true;
+    }
+
+    /**
+     * Returns whether the file is supported by the filter,
+     * given the file and possible file's encoding 
+     * (<code>null</code> encoding means autodetect).
+     * Default implementation creates a reader and calls 
+     * {@link #isFileSupported(BufferedReader)}. You should override
+     * only one of the two.
+     * <p>
+     * For example, DocBook files have .xml extension, as possibly many other 
+     * XML files, so the filter should check a DTD of the document.
+     *
+     * @param inFile Source file.
+     * @param inEncoding Encoding of the source file.
+     * @return Does the filter support the file.
+     */
+    public boolean isFileSupported(File inFile, String inEncoding)
+    {
+        try
+        {
+            return isFileSupported(createReader(inFile, inEncoding));
+        }
+        catch (IOException e)
+        {
+            return false;
+        }
     }
 
     /**
      * Returns the hint displayed while the user edits the filter,
      * and when she adds/edits the instance of this filter.
      * The hint may be any string, preferably in a non-geek language.
+     *
      * @return The hint for editing the filter in a non-geek language.
      */
     public String getHint() 
@@ -181,6 +215,7 @@ public abstract class AbstractFilter
      * OmegaT calls this to see whether the filter has any options.
      * By default returns false, so filter authors should override this
      * to tell OmegaT core that this filter has options.
+     *
      * @return True if the filter has any options, and false otherwise.
      */
     public boolean hasOptions()
@@ -232,64 +267,121 @@ public abstract class AbstractFilter
     
     /**
      * Creates a reader of an input file.
-     *
-     * @param infile    The source file
-     * @param encoding  Encoding of the input file, if the filter supports it. Otherwise null.
+     * 
+     * @param inFile The source file.
+     * @param inEncoding Encoding of the input file, if the filter supports it. Otherwise null.
      * @return The reader for the source file
-     *
-     * @throws UnsupportedEncodingException Thrown if JVM doesn't support the specified encoding
+     * @throws UnsupportedEncodingException Thrown if JVM doesn't support the specified inEncoding
      * @throws IOException If any I/O Error occurs upon reader creation
      */
-    public BufferedReader createReader(File infile, String encoding)
+    protected BufferedReader createReader(File inFile, String inEncoding)
             throws UnsupportedEncodingException, IOException
     {
         InputStreamReader isr;
-        if( encoding==null )
-            isr = new InputStreamReader(new FileInputStream(infile));
+        if( inEncoding==null )
+            isr = new InputStreamReader(new FileInputStream(inFile));
         else
-            isr = new InputStreamReader(new FileInputStream(infile), encoding);
+            isr = new InputStreamReader(new FileInputStream(inFile), inEncoding);
         return new BufferedReader(isr);
     }
 
 	/**
      * Creates a writer of the translated file.
-     *
-     * @param outfile   The target file
-     * @param encoding  Encoding of the target file, if the filter supports it. Otherwise null.
+     * 
+     * @param outFile The target file
+     * @param outEncoding Encoding of the target file, if the filter supports it. Otherwise null.
      * @return The writer for the target file
-     *
-     * @throws UnsupportedEncodingException Thrown if JVM doesn't support the specified encoding
+     * @throws UnsupportedEncodingException Thrown if JVM doesn't support the specified outEncoding
      * @throws IOException If any I/O Error occurs upon writer creation
      */
-    public BufferedWriter createWriter(File outfile, String encoding)
+    protected BufferedWriter createWriter(File outFile, String outEncoding)
             throws UnsupportedEncodingException, IOException
     {
         OutputStreamWriter osw;
-        if( encoding==null )
-            osw = new OutputStreamWriter(new FileOutputStream(outfile));
+        if( outEncoding==null )
+            osw = new OutputStreamWriter(new FileOutputStream(outFile));
         else
-            osw = new OutputStreamWriter(new FileOutputStream(outfile), encoding);
+            osw = new OutputStreamWriter(new FileOutputStream(outFile), outEncoding);
         return new BufferedWriter(osw);
     }
     
     /**
-     * Processes a single file.
-     * Generally this method should read strings from the input file 
-     * and write them to the output file. In order to let OmegaT know
+     * Processes a single file given a reader and a writer.
+     * Generally this method should read strings from the input reader
+     * and write them to the output reader. In order to let OmegaT know
      * what strings are translatable and to get thair translation,
      * filter should call {@link #processEntry(String)} method.
      * <p>
-     * Note that outfile is never null, even when the project is loading.
+     * Note that outFile is never null, even when the project is loading.
      * (in this case it writes no nowhere, but anyway you may use it...)
+     * <p>
+     * If you need more control over processed files, override
+     * {@link #processFile(File,String,File,String)} instead.
      *
-     * @param infile Reader of the source file. It's the result of calling {@link #createReader(File,String)}.
-     * @param outfile Writer of the target file on compilation (the result of calling {@link #createWriter(File, String)}), or a fictive writer to /dev/null.
+     * @param inFile Reader of the source file. It's the result of calling {@link #createReader(File,String)}.
+     * @param outFile Writer of the target file on compilation (the result of calling {@link #createWriter(File, String)}), or a fictive writer to /dev/null.
      * @throws TranslationException Should be thrown when processed file has any format defects.
-     * @throws IOException Thrown in case of any I/O error.
+     * @throws IOException In case of any I/O error.
      */
-    public abstract void processFile(BufferedReader infile, BufferedWriter outfile)
+    protected abstract void processFile(BufferedReader inFile, BufferedWriter outFile)
             throws IOException, TranslationException;
 
+    /**
+     * Processes a single file given an input and output files 
+     * (output file may be null while loading files).
+     * This method can be used to create a filter that works with the 
+     * source/target files directly, rather than using 
+     * BufferedReader/BufferedWriter.
+     * <p>
+     * Generally this method should read strings from the input reader
+     * and write them to the output reader. In order to let OmegaT know
+     * what strings are translatable and to get thair translation,
+     * filter should call {@link #processEntry(String)} method.
+     * <p>
+     * If you override this method and do all the processing here,
+     * you should simply implement 
+     * {@link #processFile(BufferedReader,BufferedWriter)}
+     * with a stub.
+     * <p>
+     * Default implementation calls
+     * {@link #createReader(File,String)} to create a reader,
+     * <code>new BufferedWriter(new StringWriter())</code> to create a writer
+     * for <code>null</code> output file, or 
+     * {@link #createWriter(File,String)} to create a writer if output file
+     * is not <code>null</code>;
+     * then calls {@link #processFile(BufferedReader,BufferedWriter)}
+     * to process source file,
+     * and then closes reader and writer.
+     * 
+     * @param inFile The source file.
+     * @param inEncoding The encoding of the source file.
+     * @param outFile The target file.
+     * @param outEncoding The encoding of the target file.
+     * @returns List of processed files (each element of type {@link File}) 
+     *          or null if the filter can not/did not process multiple files.
+     *
+     * @throws IOException In case of any I/O error.
+     * @throws TranslationException Should be thrown when processed file has any format defects.
+     *
+     * @author Martin Wunderlich
+     */
+    public List processFile(File inFile, String inEncoding, File outFile, String outEncoding) throws IOException, TranslationException
+    {
+    	BufferedReader reader = createReader(inFile, inEncoding);
+    	BufferedWriter writer;
+    	
+    	if (outFile!=null) 
+    		writer = createWriter(outFile, outEncoding);
+    	else
+    		writer = new BufferedWriter(new StringWriter());
+    		
+    	processFile(reader, writer);
+        
+        reader.close();
+        writer.close();
+        return null;
+    }
+    
     /**
      * Call this method to:
      * <ul>

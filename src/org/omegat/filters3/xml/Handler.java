@@ -421,6 +421,34 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         currEntry().clear();
     }
 
+    ///////////////////////////////////////////////////////////////////////////
+    // Dialect Helper methods
+    ///////////////////////////////////////////////////////////////////////////
+    
+    /**
+     * Returns whether the tag starts a new paragraph. 
+     * Preformatting tags are also considered to start a new paragraph,
+     * so if {@link #isPreformattingTag(String)} returns true,
+     * this method will also return true.
+     */
+    private boolean isParagraphTag(String tag)
+    {
+        return dialect.getParagraphTags().contains(tag) ||
+                isPreformattingTag(tag);
+    }
+    
+    /** Returns whether the tag surrounds preformatted block of text. */
+    private boolean isPreformattingTag(String tag)
+    {
+        return dialect.getPreformatTags().contains(tag);
+    }
+    
+    /** Returns whether we face out of turn tag we should collect separately. */
+    private boolean isOutOfTurnTag(String tag)
+    {
+        return dialect.getOutOfTurnTags().contains(tag);
+    }
+    
     //////////////////////////////////////////////////////////////////////////
     // Callback methods
     //////////////////////////////////////////////////////////////////////////
@@ -532,18 +560,6 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     }
     
     /**
-     * Receive notification of a parser warning.
-     * Not used.
-     */
-    public void warning(org.xml.sax.SAXParseException e) { }
-
-    /**
-     * Receive notification of a recoverable parser error.
-     * Not used.
-     */
-    public void error(org.xml.sax.SAXParseException e) { }
-    
-    /**
      * Report a fatal XML parsing error.
      * Is used to provide feedback.
      */
@@ -552,72 +568,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         reportFatalError(e);
     }
 
-    ///////////////////////////////////////////////////////////////////////////
-    // Dialect Helper methods
-    ///////////////////////////////////////////////////////////////////////////
-    
-    /**
-     * Returns whether the tag starts a new paragraph. 
-     * Preformatting tags are also considered to start a new paragraph,
-     * so if {@link #isPreformattingTag(String)} returns true,
-     * this method will also return true.
-     */
-    private boolean isParagraphTag(String tag)
-    {
-        return dialect.getParagraphTags().contains(tag) ||
-                isPreformattingTag(tag);
-    }
-    
-    /** Returns whether the tag surrounds preformatted block of text. */
-    private boolean isPreformattingTag(String tag)
-    {
-        return dialect.getPreformatTags().contains(tag);
-    }
-    
-    /** Returns whether we face out of turn tag we should collect separately. */
-    private boolean isOutOfTurnTag(String tag)
-    {
-        return dialect.getOutOfTurnTags().contains(tag);
-    }
-
     /**
      * Report the start of DTD declarations, if any.
-     * 
-     * <p>This method is intended to report the beginning of the
-     * DOCTYPE declaration; if the document has no DOCTYPE declaration,
-     * this method will not be invoked.</p>
-     * 
-     * <p>All declarations reported through 
-     * {@link org.xml.sax.DTDHandler DTDHandler} or
-     * {@link org.xml.sax.ext.DeclHandler DeclHandler} events must appear
-     * between the startDTD and {@link #endDTD endDTD} events.
-     * Declarations are assumed to belong to the internal DTD subset
-     * unless they appear between {@link #startEntity startEntity}
-     * and {@link #endEntity endEntity} events.  Comments and
-     * processing instructions from the DTD should also be reported
-     * between the startDTD and endDTD events, in their original 
-     * order of (logical) occurrence; they are not required to
-     * appear in their correct locations relative to DTDHandler
-     * or DeclHandler events, however.</p>
-     * 
-     * <p>Note that the start/endDTD events will appear within
-     * the start/endDocument events from ContentHandler and
-     * before the first 
-     * {@link org.xml.sax.ContentHandler#startElement startElement}
-     * event.</p>
-     * 
-     * 
-     * @param name The document type name.
-     * @param publicId The declared public identifier for the
-     *        external DTD subset, or null if none was declared.
-     * @param systemId The declared system identifier for the
-     *        external DTD subset, or null if none was declared.
-     *        (Note that this is not resolved against the document
-     *        base URI.)
-     * @exception SAXException The application may raise an
-     *            exception.
-     * @see #endDTD
-     * @see #startEntity
      */
     public void startDTD(String name, String publicId, String systemId) throws SAXException
     {
@@ -626,14 +578,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
 
     /**
      * Report the end of DTD declarations.
-     * 
-     * <p>This method is intended to report the end of the
-     * DOCTYPE declaration; if the document has no DOCTYPE declaration,
-     * this method will not be invoked.</p>
-     * 
-     * 
-     * @exception SAXException The application may raise an exception.
-     * @see #startDTD
+     * Queues the DTD declaration with all the entities declared.
      */
     public void endDTD() throws SAXException
     {
@@ -658,12 +603,6 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     }
 
     /**
-     * Report the beginning of some internal and external XML entities.
-     * Not used.
-     */
-    public void startEntity(String name) throws SAXException { }
-
-    /**
      * Report the end of an entity.
      * 
      * @param name The name of the entity that is ending.
@@ -686,31 +625,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         }
     }
 
-    /** 
-     * Receive notification of a skipped entity.
-     * Not used.
-     */
-    public void skippedEntity(String name) throws SAXException { }
-
-    /**
-     * Receive notification of an unparsed entity declaration.
-     * Noy used.
-     */
-    public void unparsedEntityDecl(String name, String publicId, String systemId, String notationName) throws SAXException { }
-
     /**
      * Report an internal entity declaration.
-     * 
-     * <p>Only the effective (first) declaration for each entity
-     * will be reported.  All parameter entities in the value
-     * will be expanded, but general entities will not.</p>
-     * 
-     * @param name The name of the entity.  If it is a parameter
-     *        entity, the name will begin with '%'.
-     * @param value The replacement text of the entity.
-     * @exception SAXException The application may raise an exception.
-     * @see #externalEntityDecl
-     * @see org.xml.sax.DTDHandler#unparsedEntityDecl
      */
     public void internalEntityDecl(String name, String value) throws SAXException
     {
@@ -721,19 +637,6 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
 
     /**
      * Report a parsed external entity declaration.
-     * 
-     * <p>Only the effective (first) declaration for each entity
-     * will be reported.</p>
-     * 
-     * 
-     * @param name The name of the entity.  If it is a parameter
-     *        entity, the name will begin with '%'.
-     * @param publicId The declared public identifier of the entity, or
-     *        null if none was declared.
-     * @param systemId The declared system identifier of the entity.
-     * @exception SAXException The application may raise an exception.
-     * @see #internalEntityDecl
-     * @see org.xml.sax.DTDHandler#unparsedEntityDecl
      */
     public void externalEntityDecl(String name, String publicId, String systemId) throws SAXException
     {
@@ -744,6 +647,13 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
             externalEntities.add(entity);
         dtd.addEntity(entity);
     }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // unused callbacks
+    ///////////////////////////////////////////////////////////////////////////
+    
+    /** Not used: Report the beginning of some internal and external XML entities. */
+    public void startEntity(String name) throws SAXException { }
     
     /** Not used: An element type declaration. */
     public void elementDecl(String name, String model) { }

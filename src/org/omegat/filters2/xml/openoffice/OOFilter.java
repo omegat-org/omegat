@@ -174,12 +174,14 @@ public class OOFilter extends XMLAbstractFilter
         defineFormatTag("text:bookmark-start/", "bs/");                         // NOI18N
         defineFormatTag("text:bookmark-end", "be");                             // NOI18N
         defineFormatTag("text:bookmark-end/", "be/");                           // NOI18N
+        defineFormatTag("text:bookmark-ref", "bf");                             // NOI18N
         defineFormatTag("text:reference-mark", "rm");                           // NOI18N
         defineFormatTag("text:reference-mark/", "rm/");                         // NOI18N
         defineFormatTag("text:reference-mark-start", "rs");                     // NOI18N
         defineFormatTag("text:reference-mark-start/", "rs/");                   // NOI18N
         defineFormatTag("text:reference-mark-end", "re");                       // NOI18N
         defineFormatTag("text:reference-mark-end/", "re/");                     // NOI18N
+        defineFormatTag("text:reference-ref", "rf");                            // NOI18N
         
         defineFormatTag("text:change", "tc");                                   // NOI18N
         defineFormatTag("text:change/", "tc/");                                 // NOI18N

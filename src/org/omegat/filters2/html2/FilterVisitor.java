@@ -35,6 +35,7 @@ import org.htmlparser.Text;
 import org.htmlparser.visitors.NodeVisitor;
 
 import org.omegat.util.PatternConsts;
+import org.omegat.util.StaticUtils;
 
 /**
  * The part of HTML filter that actually does the job.
@@ -476,7 +477,7 @@ class FilterVisitor extends NodeVisitor
         // then we write out the uncompressed version,
         // as documented in http://sourceforge.net/support/tracker.php?aid=1364265
         if( !preformatting )
-            compressed = compressSpaces(uncompressed);
+            compressed = StaticUtils.compressSpaces(uncompressed);
 
         // getting the translation
         String translation = filter.privateProcessEntry(compressed);
@@ -696,32 +697,6 @@ class FilterVisitor extends NodeVisitor
         befors.clear();
     }
     
-    /** Compresses spaces in case of non-preformatting paragraph. */
-    private String compressSpaces(String str)
-    {
-        int strlen = str.length();
-        StringBuffer res = new StringBuffer(strlen);
-        boolean wasspace = true;
-        for(int i=0; i<strlen; i++)
-        {
-            char ch = str.charAt(i);
-            boolean space = Character.isWhitespace(ch);
-            if( space )
-            {
-                if( !wasspace )
-                    wasspace = true;
-            }
-            else
-            {
-                if( wasspace && res.length()>0 )
-                    res.append(' ');
-                res.append(ch);
-                wasspace = false;
-            }
-        }
-        return res.toString();
-    }
-
     /** Named HTML Entities and corresponding numeric character references */
     private static final Object ENTITIES[][] =
     {

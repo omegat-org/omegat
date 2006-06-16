@@ -1,192 +1,91 @@
-==============================================================================
-  OmegaT 1.6.0 RC9 Read Me file
+==============================================================================OmegaT 1.6.0 RC9 Read Me file
 
-  1.  Information about OmegaT
-  2.  What is OmegaT?
-  3.  General notes about Java & OmegaT
-  4.  Contributions to OmegaT
-  5.  Is OmegaT bugging you? Do you need help?
-  6.  Release details
+  1.OmegaTについて2.OmegaTとは？3.Java及びOmegaTに関する一般メモ4.OmegaTへの貢献5.OmegaTにお困りですか？ヘルプが必要な方はこちら6.リリースに関する詳細
 
-==============================================================================
-  1.  Information about OmegaT
+==============================================================================1.OmegaTについて
 
-The most current info about OmegaT can be found at:
-      http://www.omegat.org/omegat/omegat.html
+Omega Tに関する最新の情報は以下のページでご覧になれます：http://www.omegat.org/omegat/omegat.html
 
-More information can be found on the following pages:
+さらに多くの情報は以下のページでご覧ください。
 
-User support, at the Yahoo user group:
-     http://groups.yahoo.com/group/OmegaT/
-     Where the archives are searchable without subscription.
+ユーザーサポートはYahoo userグループへ：http://groups.yahoo.com/group/OmegaT/アーカイブの購読にはグループ参加の申し込みの必要はありません。
 
-Requests for Enhancements, at the SourceForge site:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520350
+拡張機能についてはSourceForgeへ：http://sourceforge.net/tracker/?group_id=68187&atid=520350
 
-Bug reports, at the SourceForge site:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+バグレポートはSourceForgeへ：http://sourceforge.net/tracker/?group_id=68187&atid=520347
 
-==============================================================================
-  2.  What is OmegaT?
+==============================================================================2.OmegaTとは？
 
-OmegaT is a Computer Assisted Translation tool. It is free, in the meaning
-that you don't have to pay anything to be able to use it, even for
-professional use, and in the meaning that you are free to modify it and/or
-re-distribute it as long as you respect the user license.
 
-OmegaT's main features are
-  - ability to run on any operating system supporting Java
-  - use of any valid TMX file as translation reference
-  - flexible sentence segmenting (using an SRX-like method)
-  - searches in the project and the reference translation memories
-  - searches in any directory including OmegaT-readable files
-  - fuzzy matching
-  - smart handling of projects including complex directory hierarchies
-  - support for glossaries (terminology checks)
-  - easy to understand documentation and tutorial
-  - localization in a number of languages.
+Omega Tとは、コンピュータを利用した翻訳ツールです。無料で使用することができます。それは、利用する際に利用料を支払う必要が無いと言うことを意味しています。商用利用であっても費用はかかりません。また、自由に使うこともできます。それは、ユーザーライセンスを遵守していただければ、修正を加えたり再配布したりすることもできるという意味です。
 
-OmegaT supports OpenDocument files, Microsoft Office files (using
-OpenOffice.org as a conversion filter), OpenOffice.org or StarOffice files, as
-well as (X)HTML, Java localization files or plain text files.
+OmegaTの主な特徴は以下の通りです。-Javaをサポートしているオペレーティングシステムであれば動作可能- 翻訳リファレンスとしてどんな種類のTMXファイルをも利用-SRXのような方法を用いたフレキシブルな文章の分割- 翻訳メモリのリファレンスやプロジェクトを検索- OmegaTが読み込み可能なファイルを含んだ全てのディレクトリの検索- ファジーマッチング- 複雑なディレクトリ構造になったプロジェクトの取り扱い- 用語集をサポート（用語チェック）- ドキュメントやチュートリアルがわかりやすい- 多種の言語へのローカライズ
 
-OmegaT will automatically parse even the most complex source directory
-hierarchies, to access all the supported files, and produce a target directory
-with exactly the same structure, including copies of any non-supported files.
+OmegaTは、OpenDocument形式、マイクロソフトオフィス形式（OpenOffice.orgを変換フィルタとして利用）、OpenOffice.orgまたはStarOffice形式、（X）HTMLやJava形式、それにプレーンテキスト形式のファイルをサポートしています。
 
-For a quick-start tutorial, launch OmegaT and read the displayed Instant Start 
-Tutorial.
+OmegaTはとても複雑な階層構造になったソースディレクトリであっても、サポートしているファイルにアクセスし、自動的に解析します。
+また、全く同じ構造のターゲットディレクトリを作成し、その中には非サポートのファイルコピーが含まれています。
 
-The user manual is in the package you just downloaded, you can access it from
-the [Help] menu after starting OmegaT.
+クイックスタートチュートリアルを始めるには、OmegaTを立ち上げ、「簡単な入門」をお読みください。
 
-==============================================================================
- 3. General notes about Java & OmegaT
+ユーザーマニュアルはダウンロードしたパッケージに含まれており、OmegaTを立ち上げ、［ヘルプ］メニューから読むことができます。
 
-OmegaT requires the Java Runtime Environment version 1.4 or higher be
-installed on your system. It is available from:
-      http://java.com
+==============================================================================3.Java及びOmegaTに関する一般メモ
 
-Windows and Linux users may need to install Java if it is not already done.
-MacOSX users have Java already installed on their machines.
+OmegaTをインストールするのに、Java Runtime Environment バージョン1.4またはそれ以上を必要とします。ダウンロードの場所は：http://java.com
 
-On a properly installed machine, you should be able to launch OmegaT by
-double-clicking the OmegaT.jar file.
+WindowsやLinuxのユーザーは、Javaがインストールされていない場合、インストールする必要があります。Mac OSXユーザーは既にJavaがインストールされています。
 
-After installing java you may need to modify your system path variable so that
-it includes the directory where the 'java' application resides.
+Javaがインストールされているパソコンであれば、OmegaT.jarファイルをダブルクリックしてOmegaTを起動させることができます。
 
-==============================================================================
- 4. Contributions to OmegaT
+場合によって、Javaインストール後、Javaアプリケーションがあるディレクトリを含むシステムパスの変数を変更する必要性があります。
 
-To contribute to OmegaT development, get in touch with the developers at:
-    http://lists.sourceforge.net/lists/listinfo/omegat-development
+==============================================================================4.OmegaTへの貢献
 
-To translate OmegaT's user interface, user manual or other related documents,
-read:
-      http://www.omegat.org/omegat/translation-info.html
+OmegaTの開発に協力したい場合、開発者たちと連絡を取ってください：http://lists.sourceforge.net/lists/listinfo/omegat-development
 
-And subscribe to the translators' list:
-      http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
+OmegaT ユーザーインターフェイスやマニュアル、または他の関連文書の翻訳に協力したい場合、下記のファイルを読んでください：http://www.omegat.org/omegat/translation-info.html
 
-For other kind of contributions, subscribe first to the user group at:
-      http://groups.yahoo.com/group/OmegaT/
+また、翻訳者リストに参加してください：http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
 
-And get a feel of what is going on in the OmegaT world...
+その他の貢献の方法に関して、ユーザーグループに参加してください：http://groups.yahoo.com/group/OmegaT/
 
-  OmegaT is originally the work of Keith Godfrey.
-  Marc Prior is the coordinator of the OmegaT project.
+そして、OmegaTの世界でどんなことが進行しているか、感じ取ってください…
 
-Previous contributors include:
-(alphabetical order)
+  OmegaTは元々Keith Godfreyの作品です。Marc PriorはOmegaTプロジェクトのコーディネーターです。
 
-Code has been contributed by
-  Sacha Chua
-  Kim Bruning
-  Maxym Mykhalchuk (current lead developer)
-  Henry Pijffers
-  Benjamin Siband
+これまでに貢献してくれた方々：
+（アルファベット順）
 
-Localization contributed by
-  Alessandro Cattelan (Italian)
-  Sabine Cretella (German)
-  Cesar Escribano Esteban (Spanish)
-  Dmitri Gabinski (Belarusian, Esperanto, and Russian)
-  Jean-Christophe Helary (French)
-  Juan Salcines (Spanish)
-  Pablo Roca Santiagio (Spanish)
-  Martin Wunderlich (German)
-  Hisashi Yanagida (Japanese)
+コードに関する貢献者Sacha ChuaKim BruningMaxym Mykhalchuk（現在の開発担当）Henry PijffersBenjamin Siband
 
-Other contributions by
-  Sabine Cretella
-  Dmitri Gabinski
-  Jean-Christophe Helary (current documentation manager)
-  Samuel Murray
-  Marc Prior (current localization manager)
-  and many, many more very helpful people
+多言語化の貢献者Alessandro Cattelan（イタリア語）Sabine Cretella（ドイツ語）Cesar Escribano Esteban（スペイン語）Dmitri Gabinski（ベラルーシ語、エスペラント語、ロシア語）Jean-Christophe Helary（フランス語）Juan Salcines（スペイン語）Pablo Roca Santiagio（スペイン語）Martin Wunderlich（ドイツ語）Hisashi Yanagida（日本語）
+
+上記以外の貢献者Sabine CretellaDmitri GabinskiJean-Christophe Helary（現在の文書作成担当）Samuel MurrayMarc Prior（現在の多言語化担当）そしてとても大変多くの非常に貢献してくださった方々。
+
+==============================================================================5.OmegaTにお困りですか？ヘルプが必要ですか？
+
+取り扱い説明書をじっくり確認してから、バグを報告してください。ちょうど発見した状態がOmegaTの特徴である可能性があります。OmegaTのログをチェックし「エラー（Error）」、「警告（Warning）」、「例外（Exception）」または「強制終了（died unexpectedly）」といった言葉があった場合、何か起こっています。（log.txtはユーザー設定ディレクトリに置かれています。その場所についてはマニュアルお読みください。）
+
+次に行うことは、他のユーザーの方々とあなたが発見した状態を確認しあい、その状態がそれまでに報告されていないバグであることを確認してください。またSourceForgeでもバグリポートのページで確認することができます。あなた自身が最初の発見者であり、且つ予想外の事象によって引き起こされる再現可能な問題である場合の時のみ、バグリポートを申請してください。
+
+良いバグリポートには次の3点が必ず含まれています。- 再現するまでの手順- その動作によって予想していた結果- 実際に表示された結果ファイルのコピーやログ、それに画面のスクリーンショットなどのディベロッパー側がバグを見つけることができ、修正をするのに役立つ資料を一緒につけて提出することができます。
+
+ユーザーグループのアーカイブを閲覧するには、下記のリンクへお進みください。http://groups.yahoo.com/group/OmegaT/
+
+バグリポートを閲覧したり、新しいバグリポートを提出する場合には、下記のリンクへお進みください。http://sourceforge.net/tracker/?group_id=68187&atid=520347
+
+自分が報告したバグリポートがどうなるか見守りたい場合には、Source Forgeユーザーとして登録してください。
 
 ==============================================================================
- 5.  Is OmegaT bugging you ? Do you need help ?
+6.リリースに関する詳細
 
-Before reporting a bug, make sure that you have thouroughly checked the
-documentation. What you see may instead be a characteristic of OmegaT that
-you have just discovered. If you check the OmegaT log and you see words like
-"Error", "Warning", "Exception", or "died unexpectedly" then you are on to
-something (the log.txt is located in the user preferences directory, see the
-manual for its location).
+このバージョンやこれまでにリリースされたバージョンの変更に関する詳細情報は、「changes.txt」ファイルをご覧ください。
 
-The next thing you do is confirm what you found with other users, to make sure
-this has not already been reported. You can verify the bug report page at
-SourceForge too. Only when you are sure you are the first to have found some
-reproductible sequence of event that triggered something not supposed to
-happen should you file a bug report.
+新しいUIの特徴（OmegaT 1.0シリーズとの比較）：- より一層機能性が拡張されて書き換えたインターフェイス- 改良されたメインインターフェイス- 表示フォントの変更- ローカリゼーションサポート- 次の未翻訳文節までジャンプする機能- ファイル形式フィルタの設定を詳細にカスタマイズ- ユーザーカスタマイズ可能な分節化- ファジー訳文／用語集ウィンドウがドラッグで大きさが可変できる分割ペインで統合
 
-Every good bug report needs exactly three things.
-  - Steps to reproduce,
-  - What you expected to see, and
-  - What you saw instead.
-  
-You can add copies of files, portions of the log, screenshots, anything that
-you think will help the developers with finding and fixing your bug.
+サポートしているファイルフォーマット- プレーンテキスト- HTML and XHTML- OpenDocument / OpenOffice.org- Java リソースバンドル（.properties）
 
-To browse the archives of the user group, go to:
-     http://groups.yahoo.com/group/OmegaT/
-
-To browse the bug report page and file a new bug report if necessary, go to:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
-
-To keep track of what is happening to your bug report you may want to register
-as a Source Forge user.
-
-==============================================================================
-6.   Release details
-
-Please see the file 'changes.txt' for detailed information about changes in
-this and all previous releases.
-
-New UI features (comparing to 1.0 OmegaT series):
-  - Find interface rewritten with enhanced functionality
-  - Main interface improved
-  - Ability to select a display font
-  - Full localization support
-  - Ability to jump to the next untranslated segment
-  - Rich customization of Format Filters behaviour
-  - User-customizable Segmentation
-  - Match/Glossary Window is united by a draggable split pane
-
-File formats supported:
-  - Plain text
-  - HTML and XHTML
-  - OpenDocument / OpenOffice.org
-  - Java resource bundles (.properties)
-
-Core changes:
-  - Flexible (Sentence) Segmentation
-  - File format filters may be created as plugins
-  - Refactored code with more comments
-  - Windows installer
-  - Attributes of HTML tags are translatable
-  - Full TMX 1.1-1.4b Level 1 compatibility
+コアの変更箇所- フレキシブルな（文章）文節化- プラグインとしてファイルフォーマットフィルタの作成- より多くのコメントでコードを再分解- ウィンドウズインストーラー- HTMLタグの属性の翻訳- TMX 1.1-1.4b Level 1との完全な互換性
 
 ==============================================================================

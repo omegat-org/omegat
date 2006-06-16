@@ -8,6 +8,23 @@
 
 ----------------------------------------------------------------------
 
+1.8.0 (or 2.0) will deliver important updates in fuzzy matching,
+solving multiple issues like CPU usage, memory footprint, 
+match percentages and ordering.
+
+----------------------------------------------------------------------
+
+Next 1.6.x releases will deviver smaller updates.
+
+1.6.1 will be a bugfix release
+
+1.6.2 will be dedicated to terminology management: 
+- more glossary formats (TBX for one), 
+- editing glossary from within OmegaT,
+- support for online dictionaries (wiktionaryZ for one)
+
+----------------------------------------------------------------------
+
 TODO Before Final 1.6.0 release.
 1.6.0 is a major release, and it's still missing:
 - Copyright issues free Users Guide

@@ -336,6 +336,32 @@ public class StaticUtils
         return out.toString();
     }
     
+    /** Compresses spaces in case of non-preformatting paragraph. */
+    public static String compressSpaces(String str)
+    {
+        int strlen = str.length();
+        StringBuffer res = new StringBuffer(strlen);
+        boolean wasspace = true;
+        for(int i=0; i<strlen; i++)
+        {
+            char ch = str.charAt(i);
+            boolean space = Character.isWhitespace(ch);
+            if( space )
+            {
+                if( !wasspace )
+                    wasspace = true;
+            }
+            else
+            {
+                if( wasspace && res.length()>0 )
+                    res.append(' ');
+                res.append(ch);
+                wasspace = false;
+            }
+        }
+        return res.toString();
+    }
+    
     /**
      * Returns a log stream.
      */
@@ -595,5 +621,14 @@ public class StaticUtils
     {
         return PatternConsts.OMEGAT_TAG.matcher(xml).replaceAll("");            // NOI18N
     }
+    
+    /**
+     * Compares two strings for equality.
+     * Handles nulls: if both strings are nulls they are considered equal.
+     */
+    public static boolean equal(String one, String two)
+    {
+        return (one==null && two==null) || (one!=null && one.equals(two));         
+    }
+    
 }
-

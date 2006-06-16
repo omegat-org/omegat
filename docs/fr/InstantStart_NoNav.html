@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+
+<head>
+<title>OmegaT: Pour commencer tout de suite</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="version" content="0.3.1">
+<meta name="copyright" content="Copyright (c) 2005 Samuel Murray, ajouts par Maxym Mykhalchuk, traduction française par Jean-Christophe Helary">
+<link rel="stylesheet" type="text/css" href="./omegat.css">
+</head>
+
+<body lang="fr" dir="LTR">
+<hr>
+<h1 align="center">Pour commencer tout de suite</h1>
+
+<ol>
+<li>Comment fonctionne OmegaT en quelques mots</li>
+<li>Comment traduire avec OmegaT</li>
+<li>Comment travailler avec un texte à balises</li>
+</ol>
+
+<p><strong>Ce tutoriel ne décrit que les fonctions de base de OmegaT. Pour avoir une idée de l'intégralité des fonctions offertes par OmegaT, consulter le manuel utilisateur.</strong></p>
+
+<h2>Comment fonctionne OmegaT en quelques mots</h2>
+
+<p>OmegaT se présente à vous sous la forme de deux fenêtres que vous pouvez déplacer indépendamment sur votre écran. La fenêtre de gauche est celle dans laquelle vous allez écrire votre traduction. Celle de droite affichera, quand c'est possible, des traductions correspondant à la phrase en cours de traduction : phrases (en haut) et termes (en bas).</p>
+
+<p>OmegaT extrait de vos textes source les segments à traduire, les affiche dans la fenêtre d'édition pour traduction, et enregistre vos traductions dans la mémoire du projet. Une fois la traduction terminée (ou bien en cours de traduction, comme vous le souhaitez), OmegaT peut créer les fichiers cibles en utilisant la structure des fichiers sources et en remplaçant les segments d'origine par les données présentes à ce moment dans la mémoire de traduction du projet.</p>
+
+<p>Une traduction dans OmegaT est organisée sous forme de «&nbsp;projet&nbsp;» de traduction. Chaque projet va se voir attribuer par OmegaT un ensemble de répertoires dans lesquels vous pourrez mettre les documents à traduire, les glossaires et éventuellement les mémoires de traduction de référence. OmegaT créera aussi un répertoire dans lequel il mettra lui-même les documents traduits.</p>
+
+<h2>Comment traduire avec OmegaT</h2>
+
+<h3>1. Créer un projet, ouvrir le projet créé.</h3>
+
+<p>A partir du menu, choisissez <strong>Projet -&gt; Nouveau...</strong>.</p>
+
+<p>OmegaT vous proposera de choisir un emplacement et un nom pour le projet que vous souhaitez créer. Le nom choisi pour le projet sera aussi le nom du répertoire qui contiendra tous les sous-répertoires du projet.</p>
+
+<p>OmegaT vous proposera ensuite une liste de sous-répertoires que vous pouvez soit modifier, soit accepter comme telle. L'écran vous proposant cette liste aura cet aspect :</p>
+
+<div align="center"><img src="createproj.png" width="398" height="428" alt="Créer un nouveau projet" border="0"></div>
+
+<p>Vous pouvez accepter l'emplacement des sous-répertoires, mais vous devez vous assurer que les codes langues pour votre projet sont corrects. Pour ceci, sélectionner les codes appropriés en utilisant les menus déroulants ou saisissez-les au clavier. Vous pouvez choisir soit un code générique (langue) soit un code spécifique (langue et pays). Mémorisez l'emplacement du sous-répertoire «&nbsp;target&nbsp;» qui contiendra vos fichiers traduits.</p>
+
+<p>Si vous souhaitez que OmegaT utilise une segmentation par phrase plutôt que par paragraphe, n'hésitez pas à vérifier les règles de segmentation.</p>
+
+<p>Une fois que les caractéristiques du projet sont confirmées en cliquant sur «&nbsp;OK&nbsp;», OmegaT vous proposera de copier des fichiers à traduire dans le répertoire «&nbsp;source&nbsp;». Il vous est possible de copier un fichier, plusieurs fichiers ou même des répertoires entiers (avec éventuellement leurs sous-répertoires). Si vous avez fait une erreur, il vous suffit d'ouvrir manuellement le répertoire «&nbsp;source&nbsp;» de votre projet et d'y ajouter ou d'en retirer des fichiers.</p>
+
+<p>N'oubliez pas que OmegaT ne peut traduire que des fichiers aux formats suivants : OpenDocument, OpenOffice.org, HTML, texte, fichiers de localisation Java. La version RC10 de OmegaT autorise les fichiers DocBook et PO (prototype). Tous les fichiers dans d'autres formats seront ignorés par OmegaT.</p>
+
+<p>Faites en sorte que la fonction <strong>Affichage -&gt; Fichiers du projet...</strong> soit activée et rechargez le projet avec <strong>Projet -&gt; Recharger</strong> pour que OmegaT affiche la liste mise à jour des fichiers à traduire. OmegaT vous proposera de traduire en premier le fichier figurant en tête de liste.</p>
+
+<h3>2. Traduire les segments un par un</h3>
+
+<p>Le segment en cours de traduction est affiché par OmegaT d'une manière spécifique : le texte d'origine est affiché en gras sur un fond vert pour référence. Sous celui-ci se trouve unu partie entre 2 balises : &lt;début&gt; et &lt;fin&gt;, qui inclut aussi le texte original. Votre traduction sera écrite dans cette partie, en remplaçant le texte original par le texte traduit.</p>
+
+<p>Pour passer au segment suivant il suffit de presser la touche «&nbsp;ENTRÉE&nbsp;».</p>
+
+<p>Quand la touche «&nbsp;ENTRÉE&nbsp;» est pressée, un certain nombre de processus sont activés : OmegaT va ajouter votre traduction à la mémoire du projet et il va rechercher dans celle-ci ainsi que dans les glossaires et les mémoires de référence des correspondances pour le segment qui va s'afficher bientôt.</p>
+
+<p>Si des segments correspondants sont trouvés, ils seront affichés dans la partie haute de la fenêtre «&nbsp;Correspondances et glossaires&nbsp;». Si des termes des glossaires sont trouvés dans le segment, ils seront affichées dans la partie basse de la fenêtre «&nbsp;Correspondances et glossaires&nbsp;».</p>
+
+<p>Si un segment correspondant est trouvé, il est possible de le réutiliser dans la fenêtre d'édition :</p>
+
+<ul><li>Sélectionner la correspondance la plus appropriée avec Ctrl+1, Ctrl+2 etc.</li>
+<li>Pressez Ctrl+I pour insérer la correspondance à la position du curseur, ou bien...</li>
+<li>Pressez Ctrl+R pour remplacer le segment à traduire avec la correspondance.</li>
+</ul>
+
+<p>Il est possible de régler OmegaT pour que le texte d'origine ne soit pas systématiquement présent dans la fenêtre d'édition. Il est aussi possible de le régler pour insérer automatiquement les meilleures correspondances dans la fenêtre d'édition. Ces réglages peuvent être effectués grâce au menu <strong>Options -&gt; Champ de saisie...</strong>.<h3>3. Créer les documents cibles</h3>
+
+<p>Une fois la traduction terminée (ou bien en cours de traduction, comme vous le souhaitez), OmegaT peut créer les fichiers cibles en utilisant la structure des fichiers sources et en remplaçant les segments d'origine par les données présentes à ce moment dans la mémoire de traduction du projet.</p>
+
+<p>A partir du menu, choisissez <strong>Projet -&gt; Créer les documents cibles</strong> pour créer les fichiers cibles. Quel que soit l'état d'avancement de la traduction, OmegaT va créer dans le répertoire «&nbsp;target&nbsp;» du projet une copie du contenu du répertoire «&nbsp;source&nbsp;» qui inclura tous les fichiers présents et tous les segments traduits dans les fichiers traduisibles.</p>
+
+<p>Il vous est donc possible de vérifier l'apparence des fichiers traduits à n'importe quel moment en demandant la création des documents cibles. Si une traduction ne vous satisfait pas, il est possible de la modifier dans OmegaT et de recréer les documents cibles aussi souvent que vous le souhaitez.</p>
+
+<p>Les fichiers traduits seront toujours créés dans le répertoire «&nbsp;target&nbsp;» spécifié lors du réglage des caractéristiques du projet.</p>
+
+<h2>Comment travailler avec un texte à balises</h2>
+
+<p>Les fichiers aux formats OpenDocument, OpenOffice.org, HTML ou DocBook peuvent contenir des parties de phrases pour lesquelles un format particulier a été spécifié. Une phrase en italique peut par exemple contenir un mot en caractères gras.</p>
+
+<p>Cette modification du format de la phrase est conservée par OmegaT qui va l'indiquer sous forme de balises que vous pourrez recopier dans le texte traduit. Consultez le manuel utilisateur pour plus d'informations à ce sujet.</p>
+
+<h3>Par exemple :</h3>
+
+<p>Cet exemple présente les balises en <font COLOR=#ff0000>rouge</font> pour les distinguer clairement du texte. Dans OmegaT les balises ne seront pas d'une couleur différente.</p>
+
+<p><strong>Exemple de segment de fichier HTML :</strong></p>
+
+<p><code><font COLOR=#ff0000>&lt;p&gt;</font>A different display font can be selected via the <font COLOR=#ff0000>&lt;b&gt;</font>Display Font<font COLOR=#ff0000>&lt;/b&gt;</font> dialog.  Open it via the <font COLOR=#ff0000>&lt;i&gt;</font>Settings<font COLOR=#ff0000>&lt;/i&gt;</font> &amp;gt; <font COLOR=#ff0000>&lt;i&gt;</font>Display Font...<font COLOR=#ff0000>&lt;/i&gt;</font> menu item.  The font type and size can be changed from the dialog.<font COLOR=#ff0000>&lt;/p&gt;</font></code></p>
+
+<p><strong>Voici comment OmegaT va afficher ce segment, (avec les balises affichées en rouge pour faciliter la lecture) :</strong></p>
+
+<p><code>A different display font can be selected via the <font COLOR=#ff0000>&lt;b0&gt;</font>Display Font<font COLOR=#ff0000>&lt;/b0&gt;</font> dialog. Open it via the <font COLOR=#ff0000>&lt;i1&gt;</font>Settings<font COLOR=#ff0000>&lt;/i1&gt;</font> &gt; <font COLOR=#ff0000>&lt;i2&gt;</font>Display Font...<font COLOR=#ff0000>&lt;/i2&gt;</font> menu item. The font type and size can be changed from the dialog.</code></p>
+
+<p><strong>Et voici comment vous traduiriez le segment (l'exemple est en afrikaans) :</strong></p>
+
+<p><code>'n Mens kan 'n ander vertoonfont kies met die <font COLOR=#ff0000>&lt;b0&gt;</font>Vertoonfont<font COLOR=#ff0000>&lt;/b0&gt;</font>-dialoogkassie. Kies <font COLOR=#ff0000>&lt;i1&gt;</font>Opstelling<font COLOR=#ff0000>&lt;/i1&gt;</font> &gt; <font COLOR=#ff0000>&lt;i2&gt;</font>Vertoonfont...<font COLOR=#ff0000>&lt;/i2&gt;</font> op die kieslys. Die lettertipe én die lettergrootte kan met dié dialoogkassie verander word.</code></p>
+
+<p><strong>Lorsque OmegaT créera le document cible, le balisage HTML sera comme ceci :</strong></p>
+
+<p><code><font COLOR=#ff0000>&lt;p&gt;</font>'n Mens kan 'n ander vertoonfont kies met die <font COLOR=#ff0000>&lt;b&gt;</font>Vertoonfont<font COLOR=#ff0000>&lt;/b&gt;</font>-dialoogkassie. Kies <font COLOR=#ff0000>&lt;i&gt;</font>Opstelling<font COLOR=#ff0000>&lt;/i&gt;</font> &amp;gt; <font COLOR=#ff0000>&lt;i&gt;</font>Vertoonfont...<font COLOR=#ff0000>&lt;/i&gt;</font> op die kieslys. Die lettertipe én die lettergrootte kan met dié dialoogkassie verander word.<font COLOR=#ff0000>&lt;/p&gt;</font></code></p>
+
+<p>OmegaT n'est pas capable de détecter automatiquement les erreurs de balises dans un fichier traduit. Avant de livrer les documents traduits, vérifier que ceux-ci ne contiennent pas d'erreurs de balises en exécutant <strong>Outils -&gt; Valider les balises</strong> à partir du menu. Vous pouvez aussi ouvrir le document dans l'application associée pour en vérifier le format et les styles.</p>
+
+<hr>
+</body>
+</html>

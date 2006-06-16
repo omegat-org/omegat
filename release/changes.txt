@@ -1,15 +1,84 @@
 ----------------------------------------------------------------------
- OmegaT 1.6.0 RC9 Changes
+ OmegaT 1.6.0 RC10 Changes
 ----------------------------------------------------------------------
 
-1.6.0 RC9 vs. 1.4.5.04
- >= 30 Enchancements
- >  50 Bugfixes
-       (around 5 being regressions of earlier 1.6.0 Beta/RC releases)
+1.6.0 RC10 vs. 1.4.5.04
+ > 30 Enchancements
+ > 50 Bugfixes
 
 ----------------------------------------------------------------------
 
-1.6.0 RC9
+TODO Before Final 1.6.0 release.
+1.6.0 is a major release, and it's still missing:
+- Copyright issues free Users Guide
+- XLIFF filter
+- Rewrite of the OpenDocument filter to new XML architecture
+ - [OO] Tracked changes add unnecessary data
+   http://sourceforge.net/support/tracker.php?aid=1461178
+- Separate XHTML filter from HTML (XHTML should be based on new XML)
+- Make segmentation and filter settings project-specific
+- Other bugfixes
+
+----------------------------------------------------------------------
+1.6.0 RC10
+
+ Enchancements:
+
+ - New filter: DocBook files
+   http://sourceforge.net/support/tracker.php?aid=991533
+
+ - New filter: PO files
+   no issue in issue tracker, the code was donated
+
+ - New Filter: Key-Value text files
+   http://sourceforge.net/support/tracker.php?aid=1462564
+
+ - Match/Glossary pane may be docked to single main window
+   http://sourceforge.net/support/tracker.php?aid=1472196
+
+ - Find function should not display identical segments
+   http://sourceforge.net/support/tracker.php?aid=1295940
+
+ - Separate language and formatting rules
+   http://sourceforge.net/support/tracker.php?aid=1475486
+
+ - Give total number of segments in Project Files window
+   http://sourceforge.net/support/tracker.php?aid=1500874
+
+ Bugfixes:
+
+ - Problems with segments clickability (Java5+MacOSX-specific regression)
+   http://sourceforge.net/support/tracker.php?aid=1436607
+
+ - "Re-activate" output of word_count
+   http://sourceforge.net/support/tracker.php?aid=1447306
+
+ - [CJK] [1.6RC8] Translated text files miss line breaks in CJK
+   http://sourceforge.net/support/tracker.php?aid=1462938
+
+ - [OO] Don't segment on inline images, bookmarks, references
+   http://sourceforge.net/support/tracker.php?aid=1458673
+
+ - Windows closing/position problems/String problems 
+   http://sourceforge.net/support/tracker.php?aid=1386155
+
+ - Language codes forced to uppercase
+   http://sourceforge.net/support/tracker.php?aid=1473713
+
+ - Language names in segmentation file are hardcoded
+   http://sourceforge.net/support/tracker.php?aid=1467200
+
+ - Shortcuts active while menus are not
+   http://sourceforge.net/support/tracker.php?aid=1446521
+
+ - Go to next untranslated should cycle the project
+   http://sourceforge.net/support/tracker.php?aid=1447708
+
+ - Previous segment shortcut should be CMD+Enter on MacOSX
+   http://sourceforge.net/support/tracker.php?aid=1468315
+
+
+1.6.0 RC9 - internal version that was never released
 
  Enchancements:
 

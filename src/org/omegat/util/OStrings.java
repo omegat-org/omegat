@@ -159,9 +159,6 @@ public class OStrings
     public static final String NDC_SELECT_UNIQUE = getString("NDC_SELECT_UNIQUE");
     public static final String NDC_SELECT_UNIQUE_TITLE	= getString("NDC_SELECT_UNIQUE_TITLE");
     
-    // FileHandler
-    public static final String FH_ERROR_WRITING_FILE = getString("FH_ERROR_WRITING_FILE");
-    
     // SearchWindow
     public static final String SW_SEARCH_TEXT	= getString("SW_SEARCH_TEXT");
     public static final String SW_WORD_SEARCH	= getString("SW_WORD_SEARCH");

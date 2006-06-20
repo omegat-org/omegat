@@ -153,14 +153,6 @@ public class ProjectFrame extends JFrame
     }
     
     /**
-     * Sets the number of unique translatable segments to display.
-     */
-    public void setNumberofUniqueSegments(int value)
-    {
-        numberofUniqueSegments = value;
-    }
-    
-    /**
      * Builds the table which lists all the project files.
      */
     public void buildDisplay()
@@ -198,21 +190,31 @@ public class ProjectFrame extends JFrame
             firstEntry = entriesUpToNow+1;
         }
         
+        if (m_nameList.size()>1)
+        {
+            output.append("<tr>\n");                                                // NOI18N
+            output.append("<td width=80%><b>");                                     // NOI18N
+            output.append(OStrings.getString("GUI_PROJECT_TOTAL_SEGMENTS"));
+            output.append("</b></td>\n");                                           // NOI18N
+            output.append("<td width=20% align=center><b>");                        // NOI18N
+            output.append(CommandThread.core.getTotalNumberOfSegments());
+            output.append("</b></td>\n");                                           // NOI18N
+            output.append("</tr>\n");                                               // NOI18N
+        }
         output.append("<tr>\n");                                                // NOI18N
         output.append("<td width=80%><b>");                                     // NOI18N
-        output.append(OStrings.getString("GUI_PROJECT_Total_number_of_segments"));
+        output.append(OStrings.getString("GUI_PROJECT_UNIQUE_SEGMENTS"));
         output.append("</b></td>\n");                                           // NOI18N
         output.append("<td width=20% align=center><b>");                        // NOI18N
-        output.append(numberofUniqueSegments);
+        output.append(CommandThread.core.getNumberOfUniqueSegments());
         output.append("</b></td>\n");                                           // NOI18N
         output.append("</tr>\n");                                               // NOI18N
         output.append("<tr>\n");                                                // NOI18N
         output.append("<td width=80%><b>");                                     // NOI18N
-        output.append(OStrings.getString("GUI_PROJECT_Of_which_translated_segments"));
+        output.append(OStrings.getString("GUI_PROJECT_TRANSLATED"));
         output.append("</b></td>\n");                                           // NOI18N
         output.append("<td width=20% align=center id=\"nts\"><b>");                        // NOI18N
-        int nts = CommandThread.core.getNumberofTranslatedSegments();
-        output.append(nts);
+        output.append(CommandThread.core.getNumberofTranslatedSegments());
         output.append("</b></td>\n");                                           // NOI18N
         output.append("</tr>\n");                                               // NOI18N
         

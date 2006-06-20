@@ -58,7 +58,6 @@ public class StringEntry
         m_nearList = new TreeSet();
         m_glosList = new LinkedList();
         m_srcText = srcText;
-        m_srcTextLow = srcText.toLowerCase();
         m_translation = "";                                                     // NOI18N
     }
     
@@ -66,12 +65,6 @@ public class StringEntry
     public String getSrcText()
     { 
         return m_srcText;	
-    }
-    
-    /** Retruns source string in lower case */
-    public String getSrcTextLow()
-    { 
-        return m_srcTextLow; 
     }
     
     /** Returns the tokens of this entry's source string */
@@ -229,7 +222,6 @@ public class StringEntry
     private LinkedList	m_glosList;
     
     private String m_srcText;
-    private String m_srcTextLow;
     private String m_translation;
     
     private List srcTokenList;

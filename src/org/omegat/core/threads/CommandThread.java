@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -61,11 +62,13 @@ import org.omegat.gui.messages.MessageRelay;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileData;
 import org.omegat.util.RequestPacket;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.TMXReader;
+import org.omegat.util.Token;
 
 
 /**
@@ -1084,6 +1087,43 @@ public class CommandThread extends Thread
             MessageRelay.uiMessageDisplayError(m_transFrame, msg, e);
     }
 
+    /** Computes the number of words in a string. */
+    private int numberOfWords(String str)
+    {
+        int len = str.length();
+        if (len==0)
+            return 0;
+        int nTokens = 0;
+        BreakIterator breaker = StaticUtils.getWordBreaker();
+        breaker.setText(str);
+        
+        String tokenPrev;
+        String tokenStr = new String();
+        
+        int start = breaker.first();
+        for (int end = breaker.next(); end!=BreakIterator.DONE; 
+                start = end, end = breaker.next())
+        {
+            tokenPrev = tokenStr;
+            tokenStr = str.substring(start,end);
+            boolean word = false;
+            for (int i=0; i<tokenStr.length(); i++)
+            {
+                char ch = tokenStr.charAt(i);
+                if (Character.isLetterOrDigit(ch))
+                {
+                    word = true;
+                    break;
+                }
+            }
+            if (word && !PatternConsts.OMEGAT_TAG.matcher(tokenStr).matches())
+            {
+                nTokens++;
+            }
+        }
+        return nTokens;
+    }
+    
     /**
      * Builds a file "word_count" that gives the total word count 
      * of the project, the total number of unique segments, 
@@ -1098,7 +1138,7 @@ public class CommandThread extends Thread
         {
             StringEntry se = (StringEntry) i.next();
             SortedSet parents = se.getParentList();
-            int words = se.getSrcTokenList().size();
+            int words = numberOfWords(se.getSrcText());
             m_partialWords += words;
             m_totalWords += words * parents.size();
         }
@@ -1135,7 +1175,7 @@ public class CommandThread extends Thread
                     left = new Integer(0);
                 }
                 
-                int words = ste.getStrEntry().getSrcTokenList().size();
+                int words = numberOfWords(ste.getSrcText());
                 Integer newN = new Integer(oldN.intValue() + words);
                 wordCounts.put(fileName, newN);
                 

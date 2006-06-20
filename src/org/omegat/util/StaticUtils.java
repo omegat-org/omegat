@@ -207,7 +207,7 @@ public class StaticUtils
     
     private static BreakIterator wordBreaker = null;
     /** Returns an iterator to break sentences into words. */
-    private static BreakIterator getWordBreaker()
+    public static BreakIterator getWordBreaker()
     {
         if (wordBreaker==null)
             wordBreaker = new WordIterator();
@@ -236,21 +236,18 @@ public class StaticUtils
         if (len==0)
             return 0;  // fixes bug nr. 1382810 (StringIndexOutOfBoundsException)
         
-        str = str.toLowerCase();
+        if (tokenList!=null)
+            str = str.toLowerCase();
         int nTokens = 0;
         
         BreakIterator breaker = getWordBreaker();
         breaker.setText(str);
         
-        String tokenPrev;
-        String tokenStr = new String();
-        
         int start = breaker.first();
         for (int end = breaker.next(); end!=BreakIterator.DONE; 
                 start = end, end = breaker.next())
         {
-            tokenPrev = tokenStr;
-            tokenStr = str.substring(start,end);
+            String tokenStr = str.substring(start,end);
             boolean word = false;
             for (int i=0; i<tokenStr.length(); i++)
             {

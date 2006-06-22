@@ -163,7 +163,7 @@ public class HTMLWriter extends Writer
 
                 HTML_META = "<meta http-equiv=\"content-type\" content=\"text/html; charset="+encoding+"\""; // NOI18N
                 if(xhtml)
-                    HTML_META+="/>";                                           // NOI18N
+                    HTML_META+=" />";                                           // NOI18N
                 else
                     HTML_META+=">";                                             // NOI18N
                 Matcher matcher_enc = PatternConsts.HTML_ENCODING.matcher(contents);

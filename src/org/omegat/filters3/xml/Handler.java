@@ -306,7 +306,11 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         }
         else
         {
-            return new InputSource(new java.io.StringReader(new String()));
+            InputSource source = dialect.resolveEntity(publicId, systemId);
+            if (source!=null)
+                return source;
+            else
+                return new InputSource(new java.io.StringReader(new String()));
         }
     }
     

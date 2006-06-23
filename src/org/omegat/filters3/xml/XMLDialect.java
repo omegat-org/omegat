@@ -101,4 +101,10 @@ public interface XMLDialect
      * regular expression for a specified constrained string.
      */
     Map getConstraints();
+    
+    /**
+     * Resolves external entites if child filter needs it.
+     * Should return <code>null</code> if it doesn't or cannot.
+     */
+    InputSource resolveEntity(String publicId, String systemId);
 }

@@ -211,4 +211,13 @@ public class DefaultXMLDialect implements XMLDialect
     {
         return constraints;
     }
+
+    /**
+     * Resolves external entites if child filter needs it.
+     * Default implementation returns <code>null</code>.
+     */
+    public InputSource resolveEntity(String publicId, String systemId)
+    {
+        return null;
+    }
 }

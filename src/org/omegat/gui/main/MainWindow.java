@@ -459,12 +459,21 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             
             Preferences.setPreference(Preferences.MATCHWINDOW_DIVIDER, matchWindow.getDividerLocation());
             
-            Preferences.setPreference(Preferences.MATCHWINDOW_WIDTH, matchWindow.getWidth());
-            Preferences.setPreference(Preferences.MATCHWINDOW_HEIGHT, matchWindow.getHeight());
-            Preferences.setPreference(Preferences.MATCHWINDOW_X, matchWindow.getX());
-            Preferences.setPreference(Preferences.MATCHWINDOW_Y, matchWindow.getY());
-
             Preferences.setPreference(Preferences.MATCHWINDOW_DOCKED, docked);
+            if( docked )
+            {
+                int width = mainSplitter.getWidth()-mainSplitter.getDividerLocation();
+                int height = getHeight();
+                Preferences.setPreference(Preferences.MATCHWINDOW_WIDTH, width);
+                Preferences.setPreference(Preferences.MATCHWINDOW_HEIGHT, height);
+            }
+            else
+            {
+                Preferences.setPreference(Preferences.MATCHWINDOW_WIDTH, matchWindow.getWidth());
+                Preferences.setPreference(Preferences.MATCHWINDOW_HEIGHT, matchWindow.getHeight());
+                Preferences.setPreference(Preferences.MATCHWINDOW_X, matchWindow.getX());
+                Preferences.setPreference(Preferences.MATCHWINDOW_Y, matchWindow.getY());
+            }
         }
     }
     
@@ -908,7 +917,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         boolean changed = false;
         try
         {
-            changed = config.editProject();
+            changed = config.editProject(this);
         }
         catch( IOException ioe )
         {

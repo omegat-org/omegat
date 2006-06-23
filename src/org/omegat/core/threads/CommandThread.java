@@ -664,7 +664,7 @@ public class CommandThread extends Thread
         // save project files (.proj .handlers .ignore)
         try
         {
-            if (!m_config.createNew())
+            if (!m_config.createNew(m_transFrame))
                 return;	// cancel pressed
             
             // create project root directory
@@ -803,7 +803,7 @@ public class CommandThread extends Thread
     private boolean loadProject(String projectRoot)
             throws IOException, InterruptedIOException, TranslationException
     {
-        if (!m_config.loadExisting(projectRoot))
+        if (!m_config.loadExisting(m_transFrame, projectRoot))
             return false;
         
         projectClosing = false;

@@ -24,6 +24,7 @@
 
 package org.omegat.gui;
 
+import java.awt.Frame;
 import java.io.File;
 import java.io.IOException;
 import java.io.InterruptedIOException;
@@ -209,7 +210,8 @@ public class ProjectProperties
      * @param projectRoot Project root. If null, brings up the file chooser 
      *                      so that the user chooses the project.
      */
-    public boolean loadExisting(String projectRoot) throws IOException, InterruptedIOException
+    public boolean loadExisting(Frame parentFrame, String projectRoot) 
+            throws IOException, InterruptedIOException
     {
         reset();
         
@@ -236,8 +238,7 @@ public class ProjectProperties
         }
         
         projectRoot = projectRootFolder.getAbsolutePath() + File.separator;
-        Preferences.setPreference(
-                Preferences.CURRENT_FOLDER, projectRootFolder.getParent());
+        Preferences.setPreference(Preferences.CURRENT_FOLDER, projectRootFolder.getParent());
         try
         {
             ProjectFileReader pfr = new ProjectFileReader();
@@ -265,7 +266,8 @@ public class ProjectProperties
             {
                 // something wrong with the project - display open dialog
                 //  to fix it
-                ProjectPropertiesDialog prj = new ProjectPropertiesDialog(this, getProjectFile(), ProjectPropertiesDialog.RESOLVE_DIRS);
+                ProjectPropertiesDialog prj = new ProjectPropertiesDialog(
+                        parentFrame, this, getProjectFile(), ProjectPropertiesDialog.RESOLVE_DIRS);
                 
                 // continue  until user fixes problem or cancels
                 boolean abort = false;
@@ -349,10 +351,14 @@ public class ProjectProperties
         return false;
     }
     
-    public boolean createNew()
+    /**
+     * Displays dialogs to create a new project.
+     */
+    public boolean createNew(Frame parentFrame)
     {
         // new project window; create project file
-        ProjectPropertiesDialog newProjDialog = new ProjectPropertiesDialog(this, null, ProjectPropertiesDialog.NEW_PROJECT);
+        ProjectPropertiesDialog newProjDialog = new ProjectPropertiesDialog(
+                parentFrame, this, null, ProjectPropertiesDialog.NEW_PROJECT);
         if( !newProjDialog.dialogCancelled() )
         {
             newProjDialog.setVisible(true);
@@ -383,14 +389,14 @@ public class ProjectProperties
      *
      * @return returns true if the project was edited by the user.
      */
-    public boolean editProject() throws IOException
+    public boolean editProject(Frame parentFrame) throws IOException
     {
         // backing up, as NewProjectDialog changes properties directly
         // it's a hack, but faster than refactoring ;-)
         ProjectProperties backup = createBackup();
         
         // displaying the dialog to change paths and other properties
-        ProjectPropertiesDialog prj = new ProjectPropertiesDialog(this, getProjectFile(), ProjectPropertiesDialog.EDIT_PROJECT);
+        ProjectPropertiesDialog prj = new ProjectPropertiesDialog(parentFrame, this, getProjectFile(), ProjectPropertiesDialog.EDIT_PROJECT);
         
         // continue until user changes correctly or cancels
         boolean abort = false;

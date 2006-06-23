@@ -105,10 +105,12 @@ public class ProjectPropertiesDialog extends JDialog
      * @param dialogTypeValue   type of the dialog ({@link #NEW_PROJECT}, 
      *                          {@link #RESOLVE_DIRS} or {@link #EDIT_PROJECT}).
      */
-    public ProjectPropertiesDialog(ProjectProperties projectProperties, 
+    public ProjectPropertiesDialog(
+            Frame parentFrame,
+            ProjectProperties projectProperties, 
             String projFileName, int dialogTypeValue)
     {
-        super((Frame)null, true);
+        super(parentFrame, true);
         this.projectProperties = projectProperties;
         this.dialogType = dialogTypeValue;
 
@@ -330,20 +332,18 @@ public class ProjectPropertiesDialog extends JDialog
         }
         );
         
-        // HP
         //  Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
         Action escapeAction = new AbstractAction()
         {
             public void actionPerformed(ActionEvent e)
             {
-                dispose();
+                doCancel();
             }
         };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
         put(escape, "ESCAPE");                                                  // NOI18N
         getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
-        // END HP
 
         // if no project file specified, ask user to create one
         if (projFileName == null)
@@ -376,8 +376,7 @@ public class ProjectPropertiesDialog extends JDialog
             projectProperties.setProjectRoot(ndc.getSelectedFile().getAbsolutePath()
                         + File.separator);
             projectProperties.setProjectFile(projectProperties.getProjectRoot() + OConsts.FILE_PROJECT);
-            Preferences.setPreference(Preferences.CURRENT_FOLDER,
-                        ndc.getSelectedFile().getParent());
+            Preferences.setPreference(Preferences.CURRENT_FOLDER, ndc.getSelectedFile().getParent());
             projectProperties.setProjectName(projectProperties.getProjectFile().substring(projectProperties.getProjectRoot().length()));
             projectProperties.setSourceRoot(projectProperties.getProjectRoot() + OConsts.DEFAULT_SRC
                 + File.separator);

@@ -35,7 +35,7 @@ import java.io.File;
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  */
-class OpenProjectFileChooser extends OmegaTFileChooser
+public class OpenProjectFileChooser extends OmegaTFileChooser
 {
     
     public OpenProjectFileChooser()

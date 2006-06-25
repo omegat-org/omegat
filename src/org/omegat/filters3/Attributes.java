@@ -60,11 +60,10 @@ public class Attributes
     public String toString()
     {
         StringBuffer buf = new StringBuffer();
-        if (list.size()>0)
+        for (int i=0; i<list.size(); i++)
         {
             buf.append(' ');
-            for (int i=0; i<list.size(); i++)
-                buf.append(((Attribute)list.get(i)).toString());
+            buf.append(((Attribute)list.get(i)).toString());
         }
         return buf.toString();
     }

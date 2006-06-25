@@ -123,7 +123,7 @@ public class Entity
         if (internal)
         {
             // <!ENTITY % name "value">
-            res.append("\""+value+"\"");                                        // NOI18N
+            res.append(" \""+value+"\"");                                       // NOI18N
         }
         else
         {

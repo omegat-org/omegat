@@ -32,7 +32,7 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.omegat.core.threads.CommandThread;
-import org.omegat.gui.ProjectProperties;
+import org.omegat.core.ProjectProperties;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;

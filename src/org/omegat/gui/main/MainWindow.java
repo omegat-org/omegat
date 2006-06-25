@@ -72,7 +72,7 @@ import org.omegat.gui.TagValidationFrame;
 import org.omegat.gui.HelpFrame;
 import org.omegat.gui.OmegaTFileChooser;
 import org.omegat.gui.ProjectFrame;
-import org.omegat.gui.ProjectProperties;
+import org.omegat.core.ProjectProperties;
 import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.WorkflowOptionsDialog;
 import org.omegat.gui.segmentation.SegmentationCustomizer;

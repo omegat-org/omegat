@@ -52,7 +52,7 @@ import javax.swing.border.EtchedBorder;
 
 import org.omegat.util.gui.LanguageComboBoxRenderer;
 import org.omegat.gui.OmegaTFileChooser;
-import org.omegat.gui.ProjectProperties;
+import org.omegat.core.ProjectProperties;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;

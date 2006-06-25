@@ -56,7 +56,7 @@ import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.ProjectFrame;
-import org.omegat.gui.ProjectProperties;
+import org.omegat.core.ProjectProperties;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.messages.MessageRelay;
 import org.omegat.util.LFileCopy;

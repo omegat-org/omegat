@@ -22,7 +22,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.gui;
+package org.omegat.core;
 
 import java.awt.Frame;
 import java.io.File;
@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.InterruptedIOException;
 
 import org.omegat.filters2.TranslationException;
+import org.omegat.gui.*;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;

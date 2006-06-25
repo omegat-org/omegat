@@ -43,10 +43,15 @@
         <delete file="filters.conf"/>
         <delete file="segmentation.conf"/>
         <delete file="log.txt"/>
+        <delete file="manifest.mf"/>
         <delete dir="dist2"/>
         <ant antfile="addons/nbedge-filter/build.xml" target="clean" inheritall="false" />
         <ant antfile="addons/properties-import/build.xml" target="clean" inheritall="false" />
         <ant antfile="addons/sentseg-tmx/build.xml" target="clean" inheritall="false" />
+    </target>
+    
+    <target name="-post-jar">
+        <delete file="${dist.dir}/README.TXT"/>
     </target>
     
     <!-- Creates a zip with two localization packs -->
@@ -97,7 +102,7 @@
     <target name="release">
         <mkdir dir="dist"/>
         <copy todir="dist">
-            <fileset dir="release" includes="*" excludes="win32-specific"/>
+            <fileset dir="release" includes="*" excludes="win32-specific l10n-project"/>
         </copy>
         <mkdir dir="dist/docs"/>
         <copy todir="dist/docs">
@@ -116,7 +121,7 @@
     <!-- Builds a ZIP distribution -->    
     <target name="zip" description="Build Zip distro" depends="jar,release">
         <mkdir dir="dist2"/>
-        <zip basedir="dist" destfile="dist2/OmegaT_${version}.zip" excludes="OmegaT.exe OmegaT.iss"/>
+        <zip basedir="dist" destfile="dist2/OmegaT_${version}.zip" excludes="OmegaT.exe OmegaT.iss l10n-project"/>
     </target>
 
     <!-- Creates a Windows Installer -->
@@ -150,15 +155,15 @@
     <target name="addons">
         <ant antfile="addons/properties-import/build.xml" target="dist" inheritall="false"/>
         <copy file="addons/properties-import/import_properties_1.3.zip" todir="dist2"/>
-	<!--
         <ant antfile="addons/sentseg-tmx/build.xml" target="dist" inheritall="false"/>
 	<copy file="addons/sentseg-tmx/sentseg_tmx_1.1.zip" todir="dist2"/>
+	<!--
         <ant antfile="addons/nbedge-filter/build.xml" target="jar" inheritall="false"/>
 	-->
     </target>
         
     <!-- Builds all OmegaT products -->
-    <target name="all" depends="l10n-pack,src,jar,zip,win,addons" />
+    <target name="all" depends="l10n-pack,src,jar,zip,win" />
     
 </project>
 

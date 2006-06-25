@@ -26,42 +26,55 @@ package org.omegat.filters3.xml;
 
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Attributes;
+import org.omegat.filters3.Element;
+import org.omegat.filters3.Entry;
 import org.omegat.filters3.Tag;
 import org.omegat.util.StaticUtils;
 
 /**
- * XML Tag.
+ * XML Tag that surrounds intact portions of XML document.
  *
  * @author Maxym Mykhalchuk
  */
-public class XMLTag extends Tag
+public class XMLIntactTag extends Tag
 {
-    /** Creates a new instance of XML Tag */
-    public XMLTag(String tag, int type, org.xml.sax.Attributes attributes)
+    private Entry intactContents = new Entry();
+    
+    /** Returns the entry to collect text surrounded by intact tag. */
+    public Entry getIntactContents()
     {
-        super(tag, type, XMLUtils.convertAttributes(attributes));
+        return intactContents;
+    }
+    
+    /** Creates a new instance of XML Tag */
+    public XMLIntactTag(String tag, org.xml.sax.Attributes attributes)
+    {
+        super(tag, TYPE_ALONE, XMLUtils.convertAttributes(attributes));
     }
     
     /**
-     * Returns the tag in its original form as it was in original document.
-     * E.g. for &lt;strong&gt; tag should return 
-     * &lt;strong&gt;.
+     * Returns this tag and the intact contents it surrounds.
+     * E.g. for 
+     * <pre>&lt;style&gt;<br>html {<br>&nbsp;&nbsp;&nbsp;background-color: white;<br>}<br>&lt;/style&gt;</pre>
+     * should return absolutely the same.
      */
     public String toOriginal() 
     {
         StringBuffer buf = new StringBuffer();
         
         buf.append("<");                                                        // NOI18N
-        if (TYPE_END == getType())
-            buf.append("/");                                                    // NOI18N
         buf.append(getTag());
         buf.append(getAttributes().toString());
-        if (TYPE_ALONE == getType())
-            buf.append("/");                                                    // NOI18N
+        buf.append(">");                                                        // NOI18N
+        
+        buf.append(intactContents.sourceToOriginal());
+        
+        buf.append("<");                                                        // NOI18N
+        buf.append("/");                                                        // NOI18N
+        buf.append(getTag());
         buf.append(">");                                                        // NOI18N
         
         return buf.toString();
     }
-
 }
 

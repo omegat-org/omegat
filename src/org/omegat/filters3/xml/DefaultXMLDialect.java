@@ -59,18 +59,33 @@ public class DefaultXMLDialect implements XMLDialect
     /** The set of defined tags that surround preformatted text. */
     private Set preformatTags = new HashSet();
     
-    /** Defines paragraph tag. Allows duplicates. */
+    /** Defines preformat tag. Allows duplicates. */
     public void definePreformatTag(String tag)
     {
         preformatTags.add(tag);
     }
-    /** Defines a set of paragraph tags from an array. Allows duplicates. */
+    /** Defines a set of preformat tags from an array. Allows duplicates. */
     public void definePreformatTags(String[] tags)
     {
         for (int i=0; i<tags.length; i++)
             definePreformatTag(tags[i]);
     }
 
+    /** The set of defined tags that surround intact text. */
+    private Set intactTags = new HashSet();
+    
+    /** Defines intact tag. Allows duplicates. */
+    public void defineIntactTag(String tag)
+    {
+        intactTags.add(tag);
+    }
+    /** Defines a set of intact tags from an array. Allows duplicates. */
+    public void defineIntactTags(String[] tags)
+    {
+        for (int i=0; i<tags.length; i++)
+            defineIntactTag(tags[i]);
+    }
+    
     /** The set of defined paragraph tags. */
     private MultiMap translatableTagAttributes = new MultiMap();
     
@@ -164,6 +179,18 @@ public class DefaultXMLDialect implements XMLDialect
     public Set getPreformatTags()
     {
         return preformatTags;
+    }
+    
+
+    /**
+     * Returns the set of tags that surround intact portions of document,
+     * that should not be translated at all.
+     * <p>
+     * Each entry in a set should be a String class.
+     */
+    public Set getIntactTags()
+    {
+        return intactTags;
     }
     
     /**

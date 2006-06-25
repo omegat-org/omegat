@@ -35,20 +35,9 @@ import org.omegat.filters3.Tag;
  */
 public abstract class XMLPseudoTag extends Tag
 {
-    
     /** Creates a new instance of XMLPseudoTag */
     public XMLPseudoTag()
     {
-        super("!", TYPE_BEGIN, new Attributes());                               // NOI18N
+        super("!", TYPE_ALONE, new Attributes());                               // NOI18N
     }
-
-    /**
-     * Pseudotags are not stored in TMX,
-     * so this method returns an empty string.
-     */
-    public String toTMX()
-    {
-        return new String();
-    }
-    
 }

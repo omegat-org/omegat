@@ -29,7 +29,10 @@ import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.xml.parsers.SAXParser;
+import org.omegat.filters3.Text;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -66,7 +69,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     private BufferedWriter mainWriter;
     /** Current writer for an external included file. */
     private BufferedWriter extWriter = null;
-    
+
     /**
      * Returns current writer we should write into.
      * If we're in main file, returns {@link #mainWriter},
@@ -87,13 +90,21 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     Entry entry;
     /** Current entry that collects out-of-turn text. */
     Entry outofturnEntry = null;
-
+    /** Current entry that collects the text surrounded by intact tag. */
+    Entry intacttagEntry = null;
+    
     /** Now we collect out-of-turn entry. */
     private boolean collectingOutOfTurnText()
     {
         return outofturnEntry!=null;
     }
 
+    /** Now we collect intact text. */
+    private boolean collectingIntactText()
+    {
+        return intacttagEntry!=null;
+    }
+    
     /**
      * Returns current entry we collect text into. 
      * If we collect normal text, returns {@link #entry},
@@ -101,7 +112,9 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
      */
     private Entry currEntry()
     {
-        if (collectingOutOfTurnText())
+        if (collectingIntactText())
+            return intacttagEntry;
+        else if (collectingOutOfTurnText())
             return outofturnEntry;
         else
             return entry;
@@ -112,6 +125,14 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
      * Each entry is of type {@link Entity}.
      */
     private ArrayList externalEntities = new ArrayList();
+    
+    /** 
+     * Internal entities declared in source file. 
+     * A {@link Map} from {@link String}/entity name/ to {@link Entity}.
+     */
+    private Map internalEntities = new HashMap();
+    /** Internal entity just started. */
+    private Entity internalEntityStarted = null;
     
     /** Currently collected text is wrapped in CDATA section. */
     private boolean inCDATA = false;
@@ -244,6 +265,20 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         return null;
     }
 
+
+    /** 
+     * Is called when the entity starts.
+     * Tries to find out whether it's an internal entity, and if so,
+     * turns on the trigger to queue entity, and not the text it represents,
+     * in {@link #characters(char[],int,int)}.
+     */
+    private void doStartEntity(String name)
+    {
+        if (inDTD)
+            return;
+        internalEntityStarted = (Entity) internalEntities.get(name);
+    }
+    
     /** 
      * Is called when the entity is ended.
      * Tries to find out whether it's an external entity 
@@ -316,12 +351,45 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     
     private void queueText(String s)
     {
-        currEntry().add(new XMLText(s, inCDATA));
+        if (internalEntityStarted!=null && s.equals(internalEntityStarted.getValue()))
+            currEntry().add(new XMLEntityText(internalEntityStarted));
+        else
+        {
+            boolean added = false;
+            if (currEntry().size()>0)
+            {
+                Element elem = currEntry().get(currEntry().size()-1);
+                if (elem instanceof XMLText)
+                {
+                    XMLText text = (XMLText) elem;
+                    if (text.isInCDATA()==inCDATA)
+                    {
+                        currEntry().remove(currEntry().size()-1);
+                        currEntry().add(new XMLText(text.getText()+s, inCDATA));
+                        added = true;
+                    }
+                }
+            }
+            if (!added)
+                currEntry().add(new XMLText(s, inCDATA));
+        }
     }
     private void queueTag(String tag, Attributes attributes)
     {
-        XMLTag xmltag = new XMLTag(tag, Tag.TYPE_BEGIN, attributes);
+        Tag xmltag;
+        XMLIntactTag intacttag = null;
+        if (isIntactTag(tag))
+        {
+            intacttag = new XMLIntactTag(tag, attributes);
+            xmltag = intacttag;
+        }
+        else
+            xmltag = new XMLTag(tag, Tag.TYPE_BEGIN, attributes);
+        
         currEntry().add(xmltag);
+        
+        if (intacttag!=null)
+            intacttagEntry = intacttag.getIntactContents();
         
         for (int i=0; i<xmltag.getAttributes().size(); i++) 
         {
@@ -366,6 +434,12 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     /** Is called when the tag is ended. */
     private void end(String tag) throws SAXException, TranslationException
     {
+        if (collectingIntactText() && isIntactTag(tag))
+        {
+            intacttagEntry = null;
+            return;
+        }
+        
         queueEndTag(tag);
         if (!collectingOutOfTurnText() && isParagraphTag(tag))
             translateAndFlush();
@@ -445,6 +519,12 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     private boolean isPreformattingTag(String tag)
     {
         return dialect.getPreformatTags().contains(tag);
+    }
+    
+    /** Returns whether the tag surrounds intact block of text which we shouldn't translate. */
+    private boolean isIntactTag(String tag)
+    {
+        return dialect.getIntactTags().contains(tag);
     }
     
     /** Returns whether we face out of turn tag we should collect separately. */
@@ -606,6 +686,12 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         inCDATA = false;
     }
 
+    /** Not used: Report the beginning of some internal and external XML entities. */
+    public void startEntity(String name) throws SAXException 
+    {
+        doStartEntity(name);
+    }
+    
     /**
      * Report the end of an entity.
      * 
@@ -636,7 +722,9 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     {
         if (inDTD)
             return;
-        dtd.addEntity(new Entity(name, value));
+        Entity entity = new Entity(name, value);
+        internalEntities.put(name, entity);
+        dtd.addEntity(entity);
     }
 
     /**
@@ -655,9 +743,6 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     ///////////////////////////////////////////////////////////////////////////
     // unused callbacks
     ///////////////////////////////////////////////////////////////////////////
-    
-    /** Not used: Report the beginning of some internal and external XML entities. */
-    public void startEntity(String name) throws SAXException { }
     
     /** Not used: An element type declaration. */
     public void elementDecl(String name, String model) { }

@@ -24,44 +24,42 @@
 
 package org.omegat.filters3.xml;
 
-import org.omegat.filters3.Attribute;
-import org.omegat.filters3.Attributes;
-import org.omegat.filters3.Tag;
+import org.omegat.filters3.Text;
 import org.omegat.util.StaticUtils;
 
 /**
- * XML Tag.
+ * Internal entity text in XML.
+ * Like, for example, in <code>&lt;title&gt;&amp;brandFullName; Credits&lt;/title&gt;</code>.
  *
  * @author Maxym Mykhalchuk
  */
-public class XMLTag extends Tag
+public class XMLEntityText extends Text
 {
-    /** Creates a new instance of XML Tag */
-    public XMLTag(String tag, int type, org.xml.sax.Attributes attributes)
+    private Entity entity;
+    
+    /** Creates a piece of XML text. */
+    public XMLEntityText(Entity entity)
     {
-        super(tag, type, XMLUtils.convertAttributes(attributes));
+        super(entity.getValue());
+        this.entity = entity;
     }
     
     /**
-     * Returns the tag in its original form as it was in original document.
-     * E.g. for &lt;strong&gt; tag should return 
-     * &lt;strong&gt;.
+     * Returns the text in its original form as it was in original document.
+     * E.g. for <code>Rock&Roll</code> should return 
+     * <code>Rock&amp;Roll</code>.
      */
     public String toOriginal() 
     {
-        StringBuffer buf = new StringBuffer();
-        
-        buf.append("<");                                                        // NOI18N
-        if (TYPE_END == getType())
-            buf.append("/");                                                    // NOI18N
-        buf.append(getTag());
-        buf.append(getAttributes().toString());
-        if (TYPE_ALONE == getType())
-            buf.append("/");                                                    // NOI18N
-        buf.append(">");                                                        // NOI18N
-        
-        return buf.toString();
+        return "&"+entity.getName()+";";                                        // NOI18N
     }
 
+    /**
+     * Creates a new instance of XMLText class.
+     * Because, well, translating internal entities is, hmm, too complex.
+     */
+    public Text createInstance(String text) 
+    {
+        return new XMLText(text, false);
+    }
 }
-

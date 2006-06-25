@@ -51,6 +51,14 @@ public interface XMLDialect
     Set getPreformatTags();
     
     /**
+     * Returns the set of tags that surround intact portions of document,
+     * that should not be translated at all.
+     * <p>
+     * Each entry in a set should be a String class.
+     */
+    Set getIntactTags();
+    
+    /**
      * Returns the set of "out-of-turn" tags.
      * Such tags specify chunks of text that should be translated separately,
      * not breaking currently collected text entry. 

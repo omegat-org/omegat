@@ -69,19 +69,4 @@ public class XMLText extends Text
     {
         return new XMLText(text, inCDATA);
     }
-
-    /**
-     * Returns long XML-encoded representation of the element.
-     * Basically, the XML-encoded text (&lt; -> &amp;lt; etc).
-     * E.g. for <code>Rock&Roll</code> should return 
-     * <code>Rock&amp;Roll</code>.
-     */
-    public String toTMX()
-    {
-        String retValue;
-        
-        retValue = super.toTMX();
-        return retValue;
-    }
-
 }

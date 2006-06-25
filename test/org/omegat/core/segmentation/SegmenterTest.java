@@ -26,17 +26,10 @@ package org.omegat.core.segmentation;
 
 import junit.framework.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.TreeSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 import org.omegat.core.threads.CommandThread;
-import org.omegat.core.ProjectProperties;
 import org.omegat.gui.main.MainWindow;
-import org.omegat.util.Language;
-import org.omegat.util.OConsts;
-import org.omegat.util.Preferences;
 
 /**
  * Tests for OmegaT segmentation.

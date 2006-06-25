@@ -191,20 +191,6 @@ public class StaticUtils
         }
     }
     
-    /** List with stop-words like "a", "the" in English. */
-    private static SortedSet STOP_WORDS = new TreeSet();
-    static
-    {
-        STOP_WORDS.add("a");                                                    // NOI18N
-        STOP_WORDS.add("an");                                                   // NOI18N
-        STOP_WORDS.add("for");                                                  // NOI18N
-        STOP_WORDS.add("from");                                                 // NOI18N
-        STOP_WORDS.add("of");                                                   // NOI18N
-        STOP_WORDS.add("out");                                                  // NOI18N
-        STOP_WORDS.add("to");                                                   // NOI18N
-        STOP_WORDS.add("the");                                                  // NOI18N
-    }
-    
     private static BreakIterator wordBreaker = null;
     /** Returns an iterator to break sentences into words. */
     public static BreakIterator getWordBreaker()
@@ -258,8 +244,7 @@ public class StaticUtils
                     break;
                 }
             }
-            if (word && !STOP_WORDS.contains(tokenStr) &&
-                    !PatternConsts.OMEGAT_TAG.matcher(tokenStr).matches())
+            if (word && !PatternConsts.OMEGAT_TAG.matcher(tokenStr).matches())
             {
                 nTokens++;
                 if (tokenList!=null)

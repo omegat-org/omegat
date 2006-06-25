@@ -26,9 +26,8 @@ package org.omegat.gui.dialogs;
 
 import javax.swing.JOptionPane;
 
-import org.omegat.gui.OmegaTFileChooser;
 import org.omegat.util.OStrings;
-
+import org.omegat.util.gui.OmegaTFileChooser;
 
 /**
  * A chooser for project's directory for a newly created project.

@@ -54,6 +54,7 @@ import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.OmegaTFileChooser;
 import org.openide.awt.Mnemonics;
 
 /**

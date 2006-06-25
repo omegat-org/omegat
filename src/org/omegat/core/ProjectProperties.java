@@ -30,7 +30,6 @@ import java.io.IOException;
 import java.io.InterruptedIOException;
 
 import org.omegat.filters2.TranslationException;
-import org.omegat.gui.*;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
@@ -38,6 +37,9 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileReader;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.OmegaTFileChooser;
+import org.omegat.util.gui.OpenProjectFileChooser;
+
 
 /**
  * Storage for project properties.

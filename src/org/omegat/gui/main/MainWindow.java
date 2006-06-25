@@ -59,6 +59,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
+import org.omegat.core.ProjectProperties;
 
 import org.omegat.core.StringEntry;
 import org.omegat.core.glossary.GlossaryEntry;
@@ -68,22 +69,21 @@ import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.gui.TagValidationFrame;
 import org.omegat.gui.HelpFrame;
-import org.omegat.gui.OmegaTFileChooser;
 import org.omegat.gui.ProjectFrame;
-import org.omegat.core.ProjectProperties;
+import org.omegat.gui.TagValidationFrame;
 import org.omegat.gui.dialogs.AboutDialog;
-import org.omegat.gui.dialogs.WorkflowOptionsDialog;
-import org.omegat.gui.segmentation.SegmentationCustomizer;
-import org.omegat.util.StaticUtils;
 import org.omegat.gui.dialogs.FontSelectionDialog;
+import org.omegat.gui.dialogs.WorkflowOptionsDialog;
 import org.omegat.gui.filters2.FiltersCustomizer;
+import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.RequestPacket;
+import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.OmegaTFileChooser;
 
 /**
  * The main window of OmegaT application.

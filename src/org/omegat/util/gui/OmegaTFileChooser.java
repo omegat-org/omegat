@@ -22,7 +22,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.gui;
+package org.omegat.util.gui;
 
 import java.io.File;
 import javax.swing.Icon;
@@ -32,7 +32,6 @@ import javax.swing.JFileChooser;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
 
 /**
  * Basic File Chooser for OmegaT, showing the icon for OmegaT projects

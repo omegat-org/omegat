@@ -31,35 +31,34 @@ import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;        // HP
+import java.awt.event.KeyEvent;
 import java.io.File;
-import javax.swing.AbstractAction;     // HP
-import javax.swing.Action;             // HP
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;         // HP
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;          // HP
+import javax.swing.KeyStroke;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-import org.omegat.util.gui.LanguageComboBoxRenderer;
-import org.omegat.gui.OmegaTFileChooser;
 import org.omegat.core.ProjectProperties;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.LanguageComboBoxRenderer;
+import org.omegat.util.gui.OmegaTFileChooser;
 import org.openide.awt.Mnemonics;
-
 
 /**
  * The dialog for customizing the OmegaT project

@@ -564,6 +564,13 @@ public class Entry
         tagsDetected = false;   // each addition of the new entry resets detected tags
     }
     
+    /** Removes an element from this entry. */
+    public void remove(int index)
+    {
+        elements.remove(index);
+        tagsDetected = false;   // each deletion of the entry resets detected tags
+    }
+    
     /** Gets an element. Can be either a {@link Text} or a {@link Tag}. */
     public Element get(int i)
     {

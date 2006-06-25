@@ -35,6 +35,11 @@ import org.omegat.util.StaticUtils;
 public class XMLText extends Text
 {
     private boolean inCDATA;
+    /** Whether this text is inside XDATA section. */
+    public boolean isInCDATA()
+    {
+        return inCDATA;
+    }
     
     /** Creates a piece of XML text. */
     public XMLText(String text, boolean inCDATA)

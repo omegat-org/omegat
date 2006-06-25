@@ -1,43 +1,78 @@
-
-p, a, li, dt, dd, table 
-{
-  font-family: "Times New Roman", "Times", "Sans Serif"
+body {
+	font-family: sans-serif;
+	margin: 1em;
 }
 
-h1
-{
-  font-family: "Arial", "Helvetica", "Serif"; 
-  color: navy;
-  margin-top: 0px;
-  margin-bottom: 5px
+h1, h2, table, dt {
+	color: navy;
 }
 
-h2
-{
-  font-family: "Arial", "Helvetica", "Serif";
-  color: navy;
-  margin-top: 15px;
-  margin-bottom: 0px
+h3, h4, ul a {
+	color: green;
 }
 
-h3, h4
-{
-  font-family: "Arial", "Helvetica", "Serif";
-  color: navy;
-  margin-top: 15px;
-  margin-bottom: 0px
+code, .code {
+	color: black;
+	background: #ffffcc;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #ffff66;
+	vertical-align: top;
 }
 
-div.navbar-bottom
-{
-  padding-top: 10px;
-  margin-bottom: 0px
+.new {
+	font-size: x-small;
+	color: red;
+	background: yellow;
 }
 
-div.shortcuts
-{
-  padding-top: 10px;
-  margin-bottom: 0px
+.updated {
+	font-size: x-small;
+	color: orange;
 }
 
+.note {
+	font-size: x-small;
+	color: red;
+	background: yellow;
+}
 
+.warning {
+	color: red;
+	background: yellow;
+}
+
+.chapter {
+	color: black;
+}
+
+.navbar-top, .navbar-bottom {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.rel-p {
+	width: 9%;
+	align: left;
+	valign: center;
+	font-weight: bold;
+}
+
+.rel-n {
+	width: 6%;
+	align: left;
+	valign: center;
+	font-weight: bold;
+} 
+
+.nav-link {
+	width: 39%;
+	align: left;
+	valign: center;
+}
+
+.toc-link {
+	 width: 7%;
+	 align: left;
+	 valign: center;
+}

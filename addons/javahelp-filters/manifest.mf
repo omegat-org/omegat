@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-OmegaT-Plugin: true
-
-Name: org.omegat.filters2.javahelp.helpset.HelpSetFilter
-OmegaT-Filter: true
-
-Name: org.omegat.filters2.javahelp.toc.TOCFilter
-OmegaT-Filter: true

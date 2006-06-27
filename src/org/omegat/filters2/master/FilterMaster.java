@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk
+ Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
  Portions Copyright (C) 2005-06 Henry Pijffers
  Portions Copyright (C) 2006 Martin Wunderlich
                Home page: http://www.omegat.org/omegat/omegat.html

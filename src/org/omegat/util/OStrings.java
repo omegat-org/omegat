@@ -85,10 +85,6 @@ public class OStrings
             " "                                                                 // NOI18N
             + getString("TF_CUR_SEGMENT_END");
     
-    // ContextFrame
-    public static final String CF_SEARCH_RESULTS_SRC = getString("CF_SEARCH_RESULTS_SRC");
-    public static final String CF_SEARCH_RESULTS_LOC = getString("CF_SEARCH_RESULTS_LOC");
-    
     // Project frame
     public static final String PF_WINDOW_TITLE	= getString("PF_WINDOW_TITLE");
     public static final String PF_FILENAME		= getString("PF_FILENAME");

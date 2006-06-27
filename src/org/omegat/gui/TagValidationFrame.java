@@ -58,7 +58,6 @@ public class TagValidationFrame extends JFrame
 	public TagValidationFrame(MainWindow parent)
 	{
 		m_parent = parent;
-		m_srcLang = true;
         
         // set window size & position
         initWindowLayout();
@@ -157,10 +156,6 @@ public class TagValidationFrame extends JFrame
     private void updateUIText()
 	{
 		Mnemonics.setLocalizedText(m_closeButton, OStrings.getString("BUTTON_CLOSE"));
-		if (m_srcLang)
-			m_searchResults = OStrings.CF_SEARCH_RESULTS_SRC;
-		else
-			m_searchResults = OStrings.CF_SEARCH_RESULTS_LOC;
 	}
 
 	private void doClose()
@@ -179,7 +174,7 @@ public class TagValidationFrame extends JFrame
     
     public void displayStringList(ArrayList stringList)
 	{
-		setTitle(m_searchResults + " " + OStrings.TF_NOTICE_BAD_TAGS);          // NOI18N
+		setTitle(OStrings.TF_NOTICE_BAD_TAGS);
 		String out;
 		String src;
 		String trans;
@@ -210,8 +205,6 @@ public class TagValidationFrame extends JFrame
 
     private JEditorPane m_editorPane;
 	private JButton		m_closeButton;
-	private String m_searchResults;
-	private boolean	m_srcLang;
 
 	private MainWindow m_parent;
 

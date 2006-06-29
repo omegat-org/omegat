@@ -197,7 +197,7 @@ public class ProjectFrame extends JFrame
             output.append(OStrings.getString("GUI_PROJECT_TOTAL_SEGMENTS"));
             output.append("</b></td>\n");                                           // NOI18N
             output.append("<td width=20% align=center><b>");                        // NOI18N
-            output.append(CommandThread.core.getTotalNumberOfSegments());
+            output.append(CommandThread.core.getNumberOfSegmentsTotal());
             output.append("</b></td>\n");                                           // NOI18N
             output.append("</tr>\n");                                               // NOI18N
         }

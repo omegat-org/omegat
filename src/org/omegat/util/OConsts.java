@@ -68,9 +68,9 @@ public class OConsts
     public static final String DEFAULT_TM       = "tm";                         // NOI18N
     public static final String DEFAULT_INTERNAL = "omegat";                     // NOI18N
     
-    public static final String DEFAULT_FOLDER_MARKER    = "__DEFAULT__";			// NOI18N
+    public static final String DEFAULT_FOLDER_MARKER    = "__DEFAULT__";		// NOI18N
     
-    public static final String WORD_CNT_FILE_EXT        = "word_counts";			// NOI18N
+    public static final String STATS_FILENAME   = "project_stats.txt";          // NOI18N
     
     /** The smallest threshold to detect a fuzzy match string */
     public static final int    FUZZY_MATCH_THRESHOLD    = 30;

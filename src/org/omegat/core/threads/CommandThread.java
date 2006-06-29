@@ -45,7 +45,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.SortedMap;
 import java.util.SortedSet;
+import java.util.TreeMap;
 
 import org.omegat.core.LegacyTM;
 import org.omegat.core.StringEntry;
@@ -291,7 +293,7 @@ public class CommandThread extends Thread
             buildNearList();
             
             // build word count
-			buildWordCounts();
+			buildProjectStats();
             
             // Project Loaded...
             MessageRelay.uiMessageSetMessageText(tf, "");  // NOI18N
@@ -1124,100 +1126,182 @@ public class CommandThread extends Thread
         return nTokens;
     }
     
-    /**
-     * Builds a file "word_count" that gives the total word count 
-     * of the project, the total number of unique segments, 
-     * plus the details for each file.
-     */
-    private void buildWordCounts()
+    /** Computes the number of characters excluding spaces in a string. */
+    private int numberOfCharactersWithoutSpaces(String str)
     {
-        int m_totalWords = 0;
-        int m_partialWords = 0;
-        Iterator i = m_strEntryList.iterator();
-        while( i.hasNext() )
+        int chars = 0;
+        for (int i=0; i<str.length(); i++)
         {
-            StringEntry se = (StringEntry) i.next();
-            SortedSet parents = se.getParentList();
-            int words = numberOfWords(se.getSrcText());
-            m_partialWords += words;
-            m_totalWords += words * parents.size();
+            if (!Character.isSpaceChar(str.charAt(i)))
+                chars++;
         }
+        return chars;
+    }
+    
+    /**
+     * Builds a file with statistic info about the project.
+     * The total word & character count of the project, the total number of 
+     * unique segments, plus the details for each file.
+     */
+    private void buildProjectStats()
+    {
+        int I_WORDS = 0, I_WORDSLEFT=1, I_CHARSNSP=2, I_CHARSNSPLEFT=3, I_CHARS=4, I_CHARSLEFT=5;
         
-        // now dump file based word counts to disk
-        String fn = m_config.getProjectInternal() + OConsts.WORD_CNT_FILE_EXT;
-        FileWriter ofp = null;
+        int totalWords = 0,
+                uniqueWords = 0,
+                totalCharsNoSpaces = 0,
+                uniqueCharsNoSpaces = 0,
+                totalChars = 0,
+                uniqueChars = 0;                
+        for (int i=0; i<m_strEntryList.size(); i++)
+        {
+            StringEntry se = (StringEntry) m_strEntryList.get(i);
+            String src = se.getSrcText();
+            int dups = se.getParentList().size();
+            
+            int words = numberOfWords(src);
+            uniqueWords += words;
+            totalWords += words * dups;
+            
+            int charsNoSpaces = numberOfCharactersWithoutSpaces(src);
+            uniqueCharsNoSpaces += charsNoSpaces;
+            totalCharsNoSpaces += charsNoSpaces * dups;
+            
+            int chars = src.length();
+            uniqueChars += chars;
+            totalChars += chars * dups;
+        }
+
+        int remainingSegments = getNumberOfUniqueSegments()-getNumberofTranslatedSegments(),
+                remainingWords = 0,
+                remainingCharsNoSpaces = 0,
+                remainingChars = 0;
+        SortedMap counts = new TreeMap();
+        for (int i = 0; i < m_srcTextEntryArray.size(); i++)
+        {
+            SourceTextEntry ste = (SourceTextEntry) m_srcTextEntryArray.get(i);
+            String fileName = ste.getSrcFile().name;
+            int[] numbers; // [0] - words, [1] - left words
+            if( counts.containsKey(fileName) )
+                numbers = (int[]) counts.get(fileName);
+            else
+                numbers = new int[] {0, 0, 0, 0, 0, 0};
+
+            String src = ste.getSrcText();
+            int words = numberOfWords(src);
+            numbers[I_WORDS] += words;
+            int charsNoSpaces = numberOfCharactersWithoutSpaces(src);
+            numbers[I_CHARSNSP] += charsNoSpaces;
+            int chars = src.length();
+            numbers[I_CHARS] += chars;
+
+            if( !ste.isTranslated() )
+            {
+                remainingWords += words;
+                numbers[I_WORDSLEFT] += words;
+                remainingCharsNoSpaces += charsNoSpaces;
+                numbers[I_CHARSNSPLEFT] += charsNoSpaces;
+                remainingChars += chars;
+                numbers[I_CHARSLEFT] += chars;
+            }
+            counts.put(fileName, numbers);
+        }
+
         try
         {
-            ofp = new FileWriter(fn);
-            ofp.write(OStrings.getString("CT_WORD_COUNT_UNIQUE") + m_partialWords);
-            ofp.write("\n");                                                    // NOI18N
-            ofp.write(OStrings.getString("CT_WORD_COUNT_TOTAL")	+ m_totalWords);
-            ofp.write("\n");                                                    // NOI18N
-            
-            i = m_srcTextEntryArray.listIterator();
-            int remainingWords = 0;
-            HashMap wordCounts = new HashMap();
-            HashMap leftCounts = new HashMap();
-            while( i.hasNext() )
+            // removing old stats
+            try
             {
-                SourceTextEntry ste = (SourceTextEntry) i.next();
-                String fileName = ste.getSrcFile().name;
-                Integer oldN;
-                Integer left;
-                if( wordCounts.containsKey(fileName) )
-                {
-                    oldN = (Integer) wordCounts.get(fileName);
-                    left = (Integer) leftCounts.get(fileName);
-                }
-                else
-                {
-                    oldN = new Integer(0);
-                    left = new Integer(0);
-                }
-                
-                int words = numberOfWords(ste.getSrcText());
-                Integer newN = new Integer(oldN.intValue() + words);
-                wordCounts.put(fileName, newN);
-                
-                if( !ste.isTranslated() )
-                {
-                    remainingWords+=words;
-                    left = new Integer( left.intValue() + words );
-                }
-                leftCounts.put(fileName, left);
+                File oldstats = new File(m_config.getProjectInternal()+"word_counts"); // NOI18N
+                if (oldstats.exists())
+                    oldstats.delete();
             }
+            catch (Exception e) {}
             
-            ofp.write(OStrings.getString("CT_WORD_REMAINING") + remainingWords);
-            ofp.write("\n");                                                    // NOI18N
-            ofp.write("\n");                                                    // NOI18N
-            ofp.write(OStrings.getString("CT_WORD_COUNT_TOTAL_IN_FILE"));
-            ofp.write("\t");                                                    // NOI18N
-            ofp.write(OStrings.getString("CT_WORD_COUNT_REMAINS_IN_FILE"));
-            ofp.write("\t");                                                    // NOI18N
-            ofp.write(OStrings.getString("CT_WORD_COUNT_FILE_NAME"));
-            ofp.write("\n");                                                    // NOI18N
+            // now dump file based word counts to disk
+            String fn = m_config.getProjectInternal() + OConsts.STATS_FILENAME;
+            FileWriter ofp = new FileWriter(fn);
+            ofp.write(OStrings.getString("CT_STATS_Project_Statistics") +
+                    "\n\n");                                                    // NOI18N
+
+            ofp.write(OStrings.getString("CT_STATS_Total") +
+                    "\n");                                                      // NOI18N
+            ofp.write("\t"+                                                     // NOI18N
+                    OStrings.getString("CT_STATS_Segments") +
+                    "\t"+getNumberOfSegmentsTotal()+"\n");                      // NOI18N
+            ofp.write("\t"+                                                     // NOI18N
+                    OStrings.getString("CT_STATS_Words") +
+                    "\t" +totalWords+ "\n");                                    // NOI18N
+            ofp.write("\t"+                                                     // NOI18N
+                    OStrings.getString("CT_STATS_Characters_NOSP") +
+                    "\t" +totalCharsNoSpaces+ "\n");                            // NOI18N
+            ofp.write("\t"+                                                     // NOI18N
+                    OStrings.getString("CT_STATS_Characters") +
+                    "\t" +totalChars+ "\n");                                    // NOI18N
+
+            ofp.write(OStrings.getString("CT_STATS_Unique") +
+                    "\n");                                                      // NOI18N
+            ofp.write("\t"+                                                     // NOI18N
+                    OStrings.getString("CT_STATS_Segments") +
+                    "\t"+getNumberOfUniqueSegments()+"\n");                     // NOI18N
+            ofp.write("\t"+                                                     // NOI18N
+                    OStrings.getString("CT_STATS_Words") +
+                    "\t" +uniqueWords+ "\n");                                   // NOI18N
+            ofp.write("\t"+                                                     // NOI18N
+                    OStrings.getString("CT_STATS_Characters_NOSP") +
+                    "\t" +uniqueCharsNoSpaces+ "\n");                           // NOI18N
+            ofp.write("\t"+                                                     // NOI18N
+                    OStrings.getString("CT_STATS_Characters") +
+                    "\t" +uniqueChars+ "\n");                                   // NOI18N
             
-            i = wordCounts.keySet().iterator();
-            while( i.hasNext() )
+            ofp.write(OStrings.getString("CT_STATS_Unique_Remaining"));
+            ofp.write("\t"+                                                     // NOI18N
+                    OStrings.getString("CT_STATS_Segments") +
+                    "\t"+remainingSegments+"\n");                               // NOI18N
+            ofp.write("\t"+                                                     // NOI18N
+                    OStrings.getString("CT_STATS_Words") +
+                    "\t" +remainingWords+ "\n");                                // NOI18N
+            ofp.write("\t"+                                                     // NOI18N
+                    OStrings.getString("CT_STATS_Characters_NOSP") +
+                    "\t" +remainingCharsNoSpaces+ "\n");                        // NOI18N
+            ofp.write("\t"+                                                     // NOI18N
+                    OStrings.getString("CT_STATS_Characters") +
+                    "\t" +remainingChars+ "\n");                                // NOI18N
+            
+            ofp.write("\n");                                                    // NOI18N
+            ofp.write(OStrings.getString("CT_STATS_FILE_Statistics") +
+                    "\n\n");                                                    // NOI18N
+            
+            ofp.write(OStrings.getString("CT_STATS_FILE_Name") +
+                    "\t" +                                                      // NOI18N
+                    OStrings.getString("CT_STATS_FILE_Total_Words") +
+                    "\t" +                                                      // NOI18N
+                    OStrings.getString("CT_STATS_FILE_Remaining_Words") +
+                    "\t" +                                                      // NOI18N
+                    OStrings.getString("CT_STATS_FILE_Total_Characters_NOSP") +
+                    "\t" +                                                      // NOI18N
+                    OStrings.getString("CT_STATS_FILE_Remaining_Characters_NOSP") +
+                    "\t" +                                                      // NOI18N
+                    OStrings.getString("CT_STATS_FILE_Total_Characters") +
+                    "\t" +                                                      // NOI18N
+                    OStrings.getString("CT_STATS_FILE_Remaining_Characters") +
+                    "\n");                                                      // NOI18N
+            
+            Iterator it = counts.keySet().iterator();
+            while( it.hasNext() )
             {
-                String fileName = (String) i.next();
-                Integer n = (Integer) wordCounts.get(fileName);
-                Integer left = (Integer) leftCounts.get(fileName);
-                ofp.write(n.intValue() + "\t" + left.intValue() + "\t" + fileName);   // NOI18N
-                ofp.write("\n");                                                // NOI18N
+                String filename = (String) it.next();
+                int[] numbers = (int[]) counts.get(filename);
+                ofp.write(filename + 
+                        "\t" + numbers[I_WORDS] + "\t" + numbers[I_WORDSLEFT] +         // NOI18N
+                        "\t" + numbers[I_CHARSNSP] + "\t" + numbers[I_CHARSNSPLEFT] +   // NOI18N
+                        "\t" + numbers[I_CHARS] + "\t" + numbers[I_CHARSLEFT] +         // NOI18N
+                        "\n");                                                          // NOI18N
             }
             
             ofp.close();
         }
-        catch (IOException e)
-        {
-            try
-            { 
-                if (ofp != null) 
-                    ofp.close();	
-            }
-            catch (IOException e2) { }
-        }
+        catch (IOException e) {}
     }
     
     /**
@@ -1297,7 +1381,7 @@ public class CommandThread extends Thread
     }
     
     /** Returns the total number of segments, including duplicates. */
-    public int getTotalNumberOfSegments()
+    public int getNumberOfSegmentsTotal()
     {
         return m_srcTextEntryArray.size();
     }

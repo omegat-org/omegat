@@ -37,14 +37,15 @@ import org.omegat.filters2.xml.XMLBlock;
 import org.omegat.filters2.xml.XMLStreamReader;
 
 /**
- * Class that reads project definition file and returns project's properties.
+ * Class that reads project definition file, returns project's properties,
+ * and can save projects.
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  */
-public class ProjectFileReader
+public class ProjectFileStorage
 {
-	public ProjectFileReader()
+	public ProjectFileStorage()
 	{
 		m_reader = new XMLStreamReader();
 		m_reader.killEmptyBlocks();
@@ -95,28 +96,28 @@ public class ProjectFileReader
 				if (++i >= lst.size())
 					break;
 				blk = (XMLBlock) lst.get(i);
-				m_target = translateBlock(blk, OConsts.DEFAULT_LOC);
+				m_target = computeAbsolutePath(blk.getText(), OConsts.DEFAULT_TARGET);
 			}
 			else if (blk.getTagName().equals("source_dir"))						// NOI18N
 			{
 				if (++i >= lst.size())
 					break;
 				blk = (XMLBlock) lst.get(i);
-				m_source = translateBlock(blk, OConsts.DEFAULT_SRC);
+				m_source = computeAbsolutePath(blk.getText(), OConsts.DEFAULT_SOURCE);
 			}
 			else if (blk.getTagName().equals("tm_dir"))							// NOI18N
 			{
 				if (++i >= lst.size())
 					break;
 				blk = (XMLBlock) lst.get(i);
-				m_tm = translateBlock(blk, OConsts.DEFAULT_TM);
+				m_tm = computeAbsolutePath(blk.getText(), OConsts.DEFAULT_TM);
 			}
 			else if (blk.getTagName().equals("glossary_dir"))					// NOI18N
 			{
 				if (++i >= lst.size())
 					break;
 				blk = (XMLBlock) lst.get(i);
-				m_glossary = translateBlock(blk, OConsts.DEFAULT_GLOS);
+				m_glossary = computeAbsolutePath(blk.getText(), OConsts.DEFAULT_GLOSSARY);
 			}
 			else if (blk.getTagName().equals("source_lang"))					// NOI18N
 			{
@@ -145,67 +146,98 @@ public class ProjectFileReader
 		}
     }
 
-	private String translateBlock(XMLBlock blk, String def)
+    /**
+     * Returns absolute path for any project's folder.
+     * Since 1.6.0 supports relative paths (RFE 1111956).
+     *
+     * @param relativePath relative path from project file.
+     * @param defaultName  default name for such a project's folder, if relativePath is "__DEFAULT__".
+     */
+	private String computeAbsolutePath(String relativePath, String defaultName)
 	{
-		if (blk == null)
-			return "";															// NOI18N
-		else if (blk.getText().equals(OConsts.DEFAULT_FOLDER_MARKER))
-			return m_root + def + File.separator;
+		if (OConsts.DEFAULT_FOLDER_MARKER.equals(relativePath))
+			return m_root + defaultName + File.separator;
 		else
-			return blk.getText();
+        {
+            try
+            {
+                return new File(m_root, relativePath).getCanonicalPath();
+            }
+            catch (IOException e)
+            {
+                return new File(m_root, relativePath).getAbsolutePath();
+            }
+        }
 	}
 
+    /**
+     * Returns relative path for any project's folder.
+     * If absolutePath has default location, returns "__DEFAULT__".
+     *
+     * @param absolutePath absolute path to project folder.
+     * @param defaultName  default name for such a project's folder.
+     * @since 1.6.0
+     */
+	private String computeRelativePath(String absolutePath, String defaultName)
+	{
+        if (absolutePath.equals(m_root + defaultName + File.separator))
+            return OConsts.DEFAULT_FOLDER_MARKER;
+        
+        try
+        {
+            // trying to look two folders up
+            String res = absolutePath;
+            File abs = new File(absolutePath).getCanonicalFile();
+            File root = new File(m_root).getCanonicalFile();
+            for (int i=0; i<2; i++)
+            {
+                if (abs.getPath().startsWith(root.getPath()))
+                {
+                    res = abs.getPath().substring(root.getPath().length());
+                    if (res.startsWith(File.separator))
+                        res = res.substring(1);
+                    break;
+                }
+            }
+            return res;
+        }
+        catch (IOException e)
+        {
+            return absolutePath;
+        }
+	}
+
+    /**
+     * Saves project file to disk.
+     */
 	public void writeProjectFile(String filename) throws IOException
 	{
+		m_root = filename.substring(0, filename.lastIndexOf(File.separator));
+		m_root += File.separator;
+
 		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(filename), "UTF-8"));                      // NOI18N
-		String str;
-
-		// if folders are in default locations, store name as 
-		//  __DEFAULT__
-		String root = filename.substring(0, 
-					filename.lastIndexOf(File.separator));
-		root += File.separator;
-
-		String source;														// NOI18N
-		String target;														// NOI18N
-		String tm;															// NOI18N
-		String glossary;													// NOI18N
-		if (m_source.equals(root + OConsts.DEFAULT_SRC + File.separator))
-			source = OConsts.DEFAULT_FOLDER_MARKER;
-		else
-			source = m_source;
-		
-		if (m_target.equals(root + OConsts.DEFAULT_LOC + File.separator))
-			target = OConsts.DEFAULT_FOLDER_MARKER;
-		else
-			target = m_target;
-		
-		if (m_glossary.equals(root + OConsts.DEFAULT_GLOS + File.separator))
-			glossary = OConsts.DEFAULT_FOLDER_MARKER;
-		else
-			glossary = m_glossary;
-		
-		if (m_tm.equals(root + OConsts.DEFAULT_TM + File.separator))
-			tm = OConsts.DEFAULT_FOLDER_MARKER;
-		else
-			tm = m_tm;
-		
-		str = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n";					// NOI18N
-		str += "<omegat>\n";													// NOI18N
-		str += "  <project version=\"1.0\">\n";									// NOI18N
-		str += "    <source_dir>" + source + "</source_dir>\n";					// NOI18N
-		str += "    <target_dir>" + target + "</target_dir>\n";					// NOI18N
-		str += "    <tm_dir>" + tm + "</tm_dir>\n";								// NOI18N
-		str += "    <glossary_dir>" + glossary + "</glossary_dir>\n";			// NOI18N
-		str += "    <source_lang>" + m_sourceLocale + "</source_lang>\n";			// NOI18N
-		str += "    <target_lang>" + m_targetLocale + "</target_lang>\n";			// NOI18N
-		str += "    <sentence_seg>" + m_sentenceSeg + "</sentence_seg>\n";			// NOI18N
-		str += "  </project>\n";												// NOI18N
-		str += "</omegat>\n";													// NOI18N
-
-		out.write(str, 0, str.length());
-		out.flush();
+                new FileOutputStream(filename), OConsts.UTF8));
+		out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");             // NOI18N
+		out.write("<omegat>\n");                                                // NOI18N
+		out.write("  <project version=\"1.0\">\n");                             // NOI18N
+		out.write("    <source_dir>" +                                          // NOI18N
+                computeRelativePath(m_source, OConsts.DEFAULT_SOURCE) + 
+                "</source_dir>\n");                                             // NOI18N
+		out.write("    <target_dir>" +                                          // NOI18N
+                computeRelativePath(m_target, OConsts.DEFAULT_TARGET) + 
+                "</target_dir>\n");                                             // NOI18N
+		out.write("    <tm_dir>" +                                              // NOI18N
+                computeRelativePath(m_tm, OConsts.DEFAULT_TM) + 
+                "</tm_dir>\n");                                                 // NOI18N
+		out.write("    <glossary_dir>" +                                        // NOI18N
+                computeRelativePath(m_glossary, OConsts.DEFAULT_GLOSSARY) + 
+                "</glossary_dir>\n");                                           // NOI18N
+		out.write("    <source_lang>" + m_sourceLocale + "</source_lang>\n");   // NOI18N
+		out.write("    <target_lang>" + m_targetLocale + "</target_lang>\n");   // NOI18N
+		out.write("    <sentence_seg>" + m_sentenceSeg + "</sentence_seg>\n");  // NOI18N
+		out.write("  </project>\n");                                            // NOI18N
+		out.write("</omegat>\n");                                               // NOI18N
+		out.close();
 	}
 	
 	private void reset()

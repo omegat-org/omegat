@@ -35,7 +35,7 @@ import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.ProjectFileReader;
+import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
@@ -244,7 +244,7 @@ public class ProjectProperties
         Preferences.setPreference(Preferences.CURRENT_FOLDER, projectRootFolder.getParent());
         try
         {
-            ProjectFileReader pfr = new ProjectFileReader();
+            ProjectFileStorage pfr = new ProjectFileStorage();
             setProjectName(projectRootFolder.getName());
             setProjectRoot(projectRoot);
             pfr.loadProjectFile(getProjectRoot() + OConsts.FILE_PROJECT);
@@ -373,7 +373,7 @@ public class ProjectProperties
     
     public void buildProjFile() throws IOException
     {
-        ProjectFileReader pfr = new ProjectFileReader();
+        ProjectFileStorage pfr = new ProjectFileStorage();
         
         pfr.setTarget(getTargetRoot());
         pfr.setSource(getSourceRoot());

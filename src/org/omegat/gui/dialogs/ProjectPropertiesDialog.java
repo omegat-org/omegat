@@ -377,11 +377,11 @@ public class ProjectPropertiesDialog extends JDialog
             projectProperties.setProjectFile(projectProperties.getProjectRoot() + OConsts.FILE_PROJECT);
             Preferences.setPreference(Preferences.CURRENT_FOLDER, ndc.getSelectedFile().getParent());
             projectProperties.setProjectName(projectProperties.getProjectFile().substring(projectProperties.getProjectRoot().length()));
-            projectProperties.setSourceRoot(projectProperties.getProjectRoot() + OConsts.DEFAULT_SRC
+            projectProperties.setSourceRoot(projectProperties.getProjectRoot() + OConsts.DEFAULT_SOURCE
                 + File.separator);
-            projectProperties.setTargetRoot(projectProperties.getProjectRoot() + OConsts.DEFAULT_LOC
+            projectProperties.setTargetRoot(projectProperties.getProjectRoot() + OConsts.DEFAULT_TARGET
                 + File.separator);
-            projectProperties.setGlossaryRoot(projectProperties.getProjectRoot() + OConsts.DEFAULT_GLOS
+            projectProperties.setGlossaryRoot(projectProperties.getProjectRoot() + OConsts.DEFAULT_GLOSSARY
                 + File.separator);
             projectProperties.setTMRoot(projectProperties.getProjectRoot() + OConsts.DEFAULT_TM
                 + File.separator);

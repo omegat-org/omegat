@@ -62,14 +62,21 @@ public class OConsts
     public static final String STATUS_RECOVER_EXTENSION	= ".recover";				// NOI18N
     public static final String BACKUP_EXTENSION	= ".backup";						// NOI18N
     
-    public static final String DEFAULT_SRC      = "source";                     // NOI18N
-    public static final String DEFAULT_LOC      = "target";                     // NOI18N
-    public static final String DEFAULT_GLOS     = "glossary";                   // NOI18N
-    public static final String DEFAULT_TM       = "tm";                         // NOI18N
-    public static final String DEFAULT_INTERNAL = "omegat";                     // NOI18N
+    /** Project subfolder for source files default name. */
+    public static final String DEFAULT_SOURCE       = "source";                 // NOI18N
+    /** Project subfolder for translated files default name. */
+    public static final String DEFAULT_TARGET       = "target";                 // NOI18N
+    /** Project subfolder for glossaries default name. */
+    public static final String DEFAULT_GLOSSARY     = "glossary";               // NOI18N
+    /** Project subfolder for legacy translation memories default name. */
+    public static final String DEFAULT_TM           = "tm";                     // NOI18N
+    /** Project subfolder for project's translation memory. */
+    public static final String DEFAULT_INTERNAL     = "omegat";                 // NOI18N
     
+    /** A marker that tells OmegaT that project's subfolder has default location. */
     public static final String DEFAULT_FOLDER_MARKER    = "__DEFAULT__";		// NOI18N
-    
+
+    /** The name of the file with project statistics: segments, words, chars count. */
     public static final String STATS_FILENAME   = "project_stats.txt";          // NOI18N
     
     /** The smallest threshold to detect a fuzzy match string */
@@ -107,4 +114,7 @@ public class OConsts
      * (in case of debugging -- the sources directory).
      */
     public static final String DEBUG_CLASSPATH = "build"+File.separator+"classes";           // NOI18N
+    
+    /** Encoding: "UTF-8". */
+    public static final String UTF8 = "UTF-8";                                  // NOI18N
 }

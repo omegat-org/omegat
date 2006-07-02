@@ -53,6 +53,11 @@ public abstract class Tag implements Element
     {
         return type;
     }
+    /** Sets type of this tag. */
+    public void setType(int type)
+    {
+        this.type = type;
+    }
     
     private Attributes attributes;
     /** Returns tag's attributes. */

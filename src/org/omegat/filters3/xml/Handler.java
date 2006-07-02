@@ -404,7 +404,17 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     }
     private void queueEndTag(String tag)
     {
-        currEntry().add(new XMLTag(tag, Tag.TYPE_END, null));
+        int len = currEntry().size();
+        if (len>0 && (currEntry().get(len-1) instanceof XMLTag) &&
+                ((XMLTag)currEntry().get(len-1)).getTag().equals(tag) &&
+                ((XMLTag)currEntry().get(len-1)).getType()==Tag.TYPE_BEGIN)
+        {
+            ((XMLTag)currEntry().get(len-1)).setType(Tag.TYPE_ALONE);
+        }
+        else
+        {
+            currEntry().add(new XMLTag(tag, Tag.TYPE_END, null));
+        }
     }
     private void queueComment(String comment)
     {
@@ -431,6 +441,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         
         queueTag(tag, attributes);
     }
+    
     /** Is called when the tag is ended. */
     private void end(String tag) throws SAXException, TranslationException
     {

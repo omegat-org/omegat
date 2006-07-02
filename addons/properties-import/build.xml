@@ -10,7 +10,7 @@
     </target>
         
     <target name="dist" depends="jar" description="Creates a ZIP distro of Properties Import">
-        <copy file="../../dist/lib-mnemonics.jar" todir="lib" />
+        <copy file="../../dist/lib/lib-mnemonics.jar" todir="lib" />
         <zip basedir="." destfile="import_properties_1.3.zip"
                   includes="properties-import.jar lib/** readme.txt" />
     </target>

@@ -64,16 +64,8 @@ public class Preferences
     public static final String MAINWINDOW_HEIGHT = "screen_height";             // NOI18N
     public static final String MAINWINDOW_X      = "screen_x";                  // NOI18N
     public static final String MAINWINDOW_Y      = "screen_y";                  // NOI18N
+    public static final String MAINWINDOW_LAYOUT = "dock_layout";               // NOI18N
     
-    public static final String MATCHWINDOW_WIDTH  = "match_width";              // NOI18N
-    public static final String MATCHWINDOW_HEIGHT = "match_height";             // NOI18N
-    public static final String MATCHWINDOW_X      = "match_x";                  // NOI18N
-    public static final String MATCHWINDOW_Y      = "match_y";                  // NOI18N
-    public static final String MATCHWINDOW_DOCKED = "match_docked";             // NOI18N
-    
-    /** Where the divider between Main area and Match/Glossary is */
-    public static final String MATCHWINDOW_DIVIDER= "match_divider";            // NOI18N
-
     // Search window size and position    
     public static final String SEARCHWINDOW_WIDTH  = "search_window_width";     // NOI18N
     public static final String SEARCHWINDOW_HEIGHT = "search_window_height";    // NOI18N

@@ -612,5 +612,44 @@ public class StaticUtils
     {
         return (one==null && two==null) || (one!=null && one.equals(two));         
     }
+
+    /**
+     * Encodes the array of bytes to store them in a plain text file.
+     */
+    public static String uuencode(byte[] buf)
+    {
+        if (buf.length<=0)
+            return new String();
+        
+        StringBuffer res = new StringBuffer();
+        res.append(buf[0]);
+        for (int i=1; i<buf.length; i++)
+        {
+            res.append('#');
+            res.append(buf[i]);
+        }
+        return res.toString();
+    }
     
+    /**
+     * Decodes the array of bytes that was stored in a plain text file
+     * as a string, back to array of bytes.
+     */
+    public static byte[] uudecode(String buf)
+    {
+        String[] bytes = buf.split("#");
+        byte[] res = new byte[bytes.length];
+        for (int i=0; i<bytes.length; i++)
+        {
+            try
+            {
+                res[i]=Byte.parseByte(bytes[i]);
+            }
+            catch (NumberFormatException e)
+            {
+                res[i]=0;
+            }
+        }
+        return res;
+    }
 }

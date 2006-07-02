@@ -25,8 +25,8 @@
 
 package org.omegat.gui.main;
 
-import java.awt.Color;
-import java.awt.Event;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
@@ -34,35 +34,49 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowListener;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.text.AbstractDocument;
-import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.MutableAttributeSet;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
-import org.omegat.core.ProjectProperties;
+import net.infonode.docking.DockingWindow;
+import net.infonode.docking.DockingWindowAdapter;
+import net.infonode.docking.RootWindow;
+import net.infonode.docking.SplitWindow;
+import net.infonode.docking.View;
+import net.infonode.docking.properties.RootWindowProperties;
+import net.infonode.docking.properties.TabWindowProperties;
+import net.infonode.docking.properties.WindowTabProperties;
+import net.infonode.docking.properties.WindowTabStateProperties;
+import net.infonode.docking.theme.LookAndFeelDockingTheme;
+import net.infonode.docking.util.DockingUtil;
+import net.infonode.docking.util.ViewMap;
+import net.roydesign.mac.MRJAdapter;
 
+import org.omegat.core.ProjectProperties;
 import org.omegat.core.StringEntry;
-import org.omegat.core.glossary.GlossaryEntry;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.threads.CommandThread;
@@ -84,6 +98,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.RequestPacket;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.OmegaTFileChooser;
+import org.omegat.util.gui.Styles;
 
 /**
  * The main window of OmegaT application.
@@ -93,15 +108,106 @@ import org.omegat.util.gui.OmegaTFileChooser;
  * @author Maxym Mykhalchuk
  * @author Kim Bruning
  */
-public class MainWindow extends JFrame implements java.awt.event.ActionListener, java.awt.event.WindowListener, java.awt.event.ComponentListener
+public class MainWindow extends JFrame implements ActionListener, WindowListener, ComponentListener
 {
     /** Creates new form MainWindow */
     public MainWindow()
     {
         initComponents();
+        createMainComponents();
+        initDockingPane();
         additionalUIInit();
         oldInit();
         loadInstantStart();
+    }
+
+    private void createMainComponents()
+    {
+        editorScroller = new JScrollPane();
+        editorScroller.setMinimumSize(new Dimension(100, 100));
+        
+        editor = new EditorTextArea(this);
+        
+        matches = new MatchesTextArea();
+        matchesScroller = new JScrollPane(matches);
+        
+        glossary = new GlossaryTextArea();
+        glossaryScroller = new JScrollPane(glossary);
+    }
+    
+    private void initDockingPane()
+    {
+        views = new ViewMap();
+        
+        editorView = new View(null, null, editorScroller);
+        editorView.getViewProperties().setAlwaysShowTitle(false);
+        views.addView(0, editorView);
+        
+        matchesView = new View(
+                OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches"), 
+                null, matchesScroller);
+        views.addView(1, matchesView);
+        
+        glossaryView = new View(
+                OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Glossary"), 
+                null, glossaryScroller);
+        views.addView(2, glossaryView);
+        
+        rootWindow = new RootWindow(views);
+        rootWindow.getWindowBar(net.infonode.util.Direction.DOWN).setEnabled(true);
+        rootWindow.setWindow(
+                new SplitWindow(true, 0.6f, 
+                    editorView, 
+                    new SplitWindow(false, 0.7f, 
+                        matchesView, 
+                        glossaryView)));
+        rootWindow.addListener(new DockingWindowAdapter()
+        {
+            public void windowClosed(DockingWindow dockingWindow)
+            {
+                if (matchesView.getRootWindow()==null)
+                    DockingUtil.addWindow(matchesView, rootWindow);
+                if (glossaryView.getRootWindow()==null)
+                    DockingUtil.addWindow(glossaryView, rootWindow);
+            }
+        });
+        
+        RootWindowProperties rwp = rootWindow.getRootWindowProperties();
+        rwp.addSuperObject(new LookAndFeelDockingTheme().getRootWindowProperties());
+        rwp.setRecursiveTabsEnabled(false);
+        rwp.getDockingWindowProperties().setMaximizeEnabled(false);
+        
+        TabWindowProperties twp = rwp.getTabWindowProperties();
+        twp.getCloseButtonProperties().setVisible(false);
+        twp.getDockButtonProperties().setToolTipText(OStrings.getString("DOCKING_HINT_DOCK"));
+        twp.getMinimizeButtonProperties().setToolTipText(OStrings.getString("DOCKING_HINT_MINIMIZE"));
+        twp.getRestoreButtonProperties().setToolTipText(OStrings.getString("DOCKING_HINT_RESTORE"));
+        twp.getUndockButtonProperties().setToolTipText(OStrings.getString("DOCKING_HINT_UNDOCK"));
+        
+        WindowTabStateProperties wtsp = rwp.getWindowBarProperties().
+                getTabWindowProperties().getTabProperties().getNormalButtonProperties();
+        wtsp.getCloseButtonProperties().setVisible(false);
+        wtsp.getDockButtonProperties().setToolTipText(OStrings.getString("DOCKING_HINT_DOCK"));
+        wtsp.getMinimizeButtonProperties().setToolTipText(OStrings.getString("DOCKING_HINT_MINIMIZE"));
+        wtsp.getRestoreButtonProperties().setToolTipText(OStrings.getString("DOCKING_HINT_RESTORE"));
+        wtsp.getUndockButtonProperties().setToolTipText(OStrings.getString("DOCKING_HINT_UNDOCK"));
+        
+        rwp.getTabWindowProperties().getTabbedPanelProperties().getTabAreaComponentsProperties().setStretchEnabled(true);
+        rwp.getTabWindowProperties().getTabbedPanelProperties().getContentPanelProperties().getComponentProperties().setBorder(null);
+        
+        WindowTabStateProperties noButtons = new WindowTabStateProperties();
+        noButtons.getCloseButtonProperties().setVisible(false);
+        noButtons.getDockButtonProperties().setVisible(false);
+        noButtons.getMinimizeButtonProperties().setVisible(false);
+        noButtons.getRestoreButtonProperties().setVisible(false);
+        noButtons.getUndockButtonProperties().setVisible(false);
+        
+        WindowTabProperties wtp = rwp.getTabWindowProperties().getTabProperties();
+        wtp.getFocusedButtonProperties().addSuperObject(noButtons);
+        wtp.getHighlightedButtonProperties().addSuperObject(noButtons);
+        wtp.getNormalButtonProperties().addSuperObject(noButtons);
+        
+        getContentPane().add(rootWindow, BorderLayout.CENTER);
     }
     
     /**
@@ -113,18 +219,10 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         updateTitle();
         loadWindowIcon();
         m_projWin = new ProjectFrame(this);
-        matchWindow = new MatchGlossaryWindow(this);
+
+        statusLabel.setText(" ");                                               // NOI18N
         
-        xlPane = new MainPane();
-        mainScroller.setViewportView(xlPane);
-        xlPane.setMainWindow(this);
-        
-        dividerSize = mainSplitter.getDividerSize();
-        mainSplitter.setDividerSize(0);
-        mainSplitter.setDividerLocation(1.0);
-        mainSplitter.setRightComponent(null);
-        
-        initScreenLayout();
+        loadScreenLayout();
         updateCheckboxesOnStart();
         uiUpdateOnProjectClose();
         initUIShortcuts();
@@ -132,14 +230,14 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         try
         {
             // MacOSX-specific
-            net.roydesign.mac.MRJAdapter.addQuitApplicationListener(new ActionListener()
+            MRJAdapter.addQuitApplicationListener(new ActionListener()
             {
                 public void actionPerformed(ActionEvent e)
                 {
                     doQuit();
                 }
             });
-            net.roydesign.mac.MRJAdapter.addAboutListener(new ActionListener()
+            MRJAdapter.addAboutListener(new ActionListener()
             {
                 public void actionPerformed(ActionEvent e)
                 {
@@ -207,8 +305,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         setAccelerator(gotoNextSegmentMenuItem , KeyEvent.VK_N);
         setAccelerator(gotoPreviousSegmentMenuItem , KeyEvent.VK_P);
         
-        setAccelerator(viewMatchWindowCheckBoxMenuItem , KeyEvent.VK_M);
-        setAccelerator(viewFileListCheckBoxMenuItem , KeyEvent.VK_L);
+        setAccelerator(viewFileListCheckBoxMenuItem, KeyEvent.VK_L);
         
         setAccelerator(toolsValidateTagsMenuItem , KeyEvent.VK_T);
     }
@@ -228,7 +325,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
      */
     private void setAccelerator(JMenuItem item, int key, boolean shift)
     {
-        int shiftmask = shift ? Event.SHIFT_MASK : 0;
+        int shiftmask = shift ? KeyEvent.SHIFT_MASK : 0;
         item.setAccelerator(KeyStroke.getKeyStroke(key,
                 shiftmask | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
     }
@@ -280,13 +377,14 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         catch (NumberFormatException nfe)
         {
         }
-        m_font = new Font(fontName, Font.PLAIN, fontSizeInt);
-        xlPane.setFont(m_font);
         
-        matchWindow.getMatchGlossaryPane().setFont(m_font);
+        m_font = new Font(fontName, Font.PLAIN, fontSizeInt);
+        editor.setFont(m_font);
+        matches.setFont(m_font);
+        glossary.setFont(m_font);
         
         // check this only once as it can be changed only at compile time
-        // should be OK, but customization might have messed it up
+        // should be OK, but localization might have messed it up
         String start = OStrings.TF_CUR_SEGMENT_START;
         int zero = start.lastIndexOf('0');
         m_segmentTagHasNumber = (zero > 4) && // 4 to reserve room for 10000 digit
@@ -310,6 +408,8 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                 Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT));
     }
     
+    private boolean layoutInitialized = false;
+    
     /**
      * Initialized the sizes of OmegaT window.
      * <p>
@@ -318,7 +418,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
      * If screen size saved, recover that and use instead
      * (18may04).
      */
-    private void initScreenLayout()
+    private void loadScreenLayout()
     {
         // main window
         try
@@ -352,75 +452,26 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                 setLocation(0, 0);
             }
         }
-        
-        // match/glossary window
-        int x, y, w, h;
-        try
+
+        String layout = Preferences.getPreference(Preferences.MAINWINDOW_LAYOUT);
+        if (layout.length()>0)
         {
-            x = Integer.parseInt(Preferences.getPreference(Preferences.MATCHWINDOW_X));
-            y = Integer.parseInt(Preferences.getPreference(Preferences.MATCHWINDOW_Y));
-            w = Integer.parseInt(Preferences.getPreference(Preferences.MATCHWINDOW_WIDTH));
-            h = Integer.parseInt(Preferences.getPreference(Preferences.MATCHWINDOW_HEIGHT));
-        }
-        catch (NumberFormatException nfe)
-        {
-            // size info missing - put window in default position
-            GraphicsEnvironment env =
-                    GraphicsEnvironment.getLocalGraphicsEnvironment();
-            Rectangle scrSize = env.getMaximumWindowBounds();
-            if (scrSize.width < 900)
+            byte[] bytes = StaticUtils.uudecode(layout);
+            try
             {
-                // assume 800x600
-                x = 590;
-                y = 0;
-                w = 200;
-                h = 536;
-            }
-            else
-            {
-                // assume 1024x768 or larger
-                x = 700;
-                y = 0;
-                w = 300;
-                h = 700;
-            }
+                ObjectInputStream in = new ObjectInputStream(
+                        new ByteArrayInputStream(bytes));
+                rootWindow.read(in, false);
+                in.close();
+            } catch (IOException e) { }
         }
         
-        matchWindow.setLocation(x, y);
-        matchWindow.setSize(w, h);
-        
-        if( !Preferences.isPreference(Preferences.MATCHWINDOW_DOCKED) )
-        {
-            docked = false;
-            matchWindow.setVisible(true);
-            matchWindow.getMatchGlossaryPane().setDockButtonText("&<<<");       // NOI18N
-        }        
-        else
-        {
-            docked = true;
-            int split = mainSplitter.getWidth() - w;
-            matchWindow.setVisible(false);
-            matchWindow.getMatchGlossaryPane().setDockButtonText("&>>>");       // NOI18N
-            mainSplitter.setRightComponent(matchWindow.getMatchGlossaryPane());
-            mainSplitter.setDividerLocation(split);
-            mainSplitter.setDividerSize(dividerSize);
-        }
-        
-        // match/glossary window divider
-        try
-        {
-            String divs = Preferences.getPreference(Preferences.MATCHWINDOW_DIVIDER);
-            int div = Integer.parseInt(divs);
-            matchWindow.setDividerLocation(div);
-        }
-        catch (NumberFormatException nfe)
-        {
-            // divider info missing - put in default position - middle
-            int div = matchWindow.getHeight() / 2;
-            matchWindow.setDividerLocation(div);
-        }
-        
-        screenLayoutLoaded = true;
+        layoutInitialized = true;
+    }
+    
+    public void filelistWindowClosed()
+    {
+        viewFileListCheckBoxMenuItem.setSelected(false);
     }
     
     /** Loads Instant start article */
@@ -437,83 +488,37 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             JTextPane instantArticlePane = new JTextPane();
             instantArticlePane.setEditable(false);
             instantArticlePane.setPage("file:///"+filepath);                    // NOI18N
-            mainScroller.setViewportView(instantArticlePane);
+            editorScroller.setViewportView(instantArticlePane);
         }
         catch (IOException e)
         {
-            mainScroller.setViewportView(xlPane);
+            editorScroller.setViewportView(editor);
         }
     }
     
     /**
      * Stores screen layout (width, height, position, etc).
      */
-    public void storeScreenLayout()
+    public void saveScreenLayout()
     {
-        if( screenLayoutLoaded )
+        if (!layoutInitialized)
+            return;
+        
+        Preferences.setPreference(Preferences.MAINWINDOW_WIDTH, getWidth());
+        Preferences.setPreference(Preferences.MAINWINDOW_HEIGHT, getHeight());
+        Preferences.setPreference(Preferences.MAINWINDOW_X, getX());
+        Preferences.setPreference(Preferences.MAINWINDOW_Y, getY());
+        
+        try
         {
-            Preferences.setPreference(Preferences.MAINWINDOW_WIDTH, getWidth());
-            Preferences.setPreference(Preferences.MAINWINDOW_HEIGHT, getHeight());
-            Preferences.setPreference(Preferences.MAINWINDOW_X, getX());
-            Preferences.setPreference(Preferences.MAINWINDOW_Y, getY());
-            
-            Preferences.setPreference(Preferences.MATCHWINDOW_DIVIDER, matchWindow.getDividerLocation());
-            
-            Preferences.setPreference(Preferences.MATCHWINDOW_DOCKED, docked);
-            if( docked )
-            {
-                int width = mainSplitter.getWidth()-mainSplitter.getDividerLocation();
-                int height = getHeight();
-                Preferences.setPreference(Preferences.MATCHWINDOW_WIDTH, width);
-                Preferences.setPreference(Preferences.MATCHWINDOW_HEIGHT, height);
-            }
-            else
-            {
-                Preferences.setPreference(Preferences.MATCHWINDOW_WIDTH, matchWindow.getWidth());
-                Preferences.setPreference(Preferences.MATCHWINDOW_HEIGHT, matchWindow.getHeight());
-                Preferences.setPreference(Preferences.MATCHWINDOW_X, matchWindow.getX());
-                Preferences.setPreference(Preferences.MATCHWINDOW_Y, matchWindow.getY());
-            }
-        }
-    }
-    
-    boolean docked = false;
-    int dividerSize;
-    
-    /**
-     * Docks/Undocks Matches/Glossary Pane.
-     */
-    public void dockMatches()
-    {
-        if( docked )
-        {
-            docked = false;
-            
-            int width = mainSplitter.getWidth()-mainSplitter.getDividerLocation();
-            mainSplitter.setRightComponent(null);
-            setSize(getWidth()-width, getHeight());
-            matchWindow.setBounds(getX()+getWidth(), getY(), width, getHeight());
-            matchWindow.onUnDock();
-            matchWindow.getMatchGlossaryPane().setDockButtonText("&<<<");       // NOI18N
-            dividerSize = mainSplitter.getDividerSize();
-            mainSplitter.setDividerSize(0);
-            
-            matchWindow.setVisible(true);
-        }
-        else
-        {
-            docked = true;
-            
-            matchWindow.setVisible(false);
-            
-            int width = matchWindow.getWidth();
-            int split = mainSplitter.getWidth();
-            setSize(getWidth()+width, getHeight());
-            matchWindow.getMatchGlossaryPane().setDockButtonText("&>>>");       // NOI18N
-            mainSplitter.setRightComponent(matchWindow.getMatchGlossaryPane());
-            mainSplitter.setDividerLocation(split);
-            mainSplitter.setDividerSize(dividerSize);
-        }
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ObjectOutputStream out = new ObjectOutputStream(bos);
+            rootWindow.write(out, false);
+            out.close();
+            byte[] buf = bos.toByteArray();
+            String layout = StaticUtils.uuencode(buf);
+            Preferences.setPreference(Preferences.MAINWINDOW_LAYOUT, layout);
+        } catch (IOException e) { }
     }
     
     ///////////////////////////////////////////////////////////////
@@ -529,7 +534,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     /** Shows About dialog */
     private void doQuit()
     {
-        storeScreenLayout();
+        saveScreenLayout();
         Preferences.save();
         
         if (m_projectLoaded)
@@ -721,9 +726,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             return;
         
         String s = m_curEntry.getSrcText();
-        int pos = xlPane.getCaretPosition();
-        xlPane.select(pos, pos);
-        xlPane.replaceSelection(s);
+        int pos = editor.getCaretPosition();
+        editor.select(pos, pos);
+        editor.replaceSelection(s);
     }
     
     /** replaces entire edited segment text with a the source text of a segment at cursor position */
@@ -747,9 +752,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         
         StringEntry se = m_curNear.str;
         String s = se.getTranslation();
-        int pos = xlPane.getCaretPosition();
-        xlPane.select(pos, pos);
-        xlPane.replaceSelection(s);
+        int pos = editor.getCaretPosition();
+        editor.select(pos, pos);
+        editor.replaceSelection(s);
     }
     
     
@@ -772,12 +777,12 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         // build local offsets
         int start = m_segmentStartOffset + m_sourceDisplayLength +
                 OStrings.TF_CUR_SEGMENT_START.length();
-        int end = xlPane.getTextLength() - m_segmentEndInset -
+        int end = editor.getTextLength() - m_segmentEndInset -
                 OStrings.TF_CUR_SEGMENT_END.length();
         
         // remove text
-        xlPane.select(start, end);
-        xlPane.replaceSelection(text);
+        editor.select(start, end);
+        editor.replaceSelection(text);
     }
     
     /** Closes the project. */
@@ -792,9 +797,10 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         }
         m_projWin.reset();
         m_projectLoaded = false;
-        xlPane.setText(OStrings.TF_INTRO_MESSAGE);                              // NOI18N
         
-        matchWindow.getMatchGlossaryPane().reset();
+        editor.setText(OStrings.TF_INTRO_MESSAGE);
+        matches.clear();
+        glossary.clear();
         
         updateTitle();
         uiUpdateOnProjectClose();
@@ -835,13 +841,13 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         gotoNextUntranslatedMenuItem.setEnabled(false);
         gotoPreviousSegmentMenuItem.setEnabled(false);
         
+        viewFileListCheckBoxMenuItem.setEnabled(false);
         toolsValidateTagsMenuItem.setEnabled(false);
         
-        xlPane.setEditable(false);
+        editor.setEditable(false);
         m_projWin.uiUpdateImportButtonStatus();
         
         m_projWin.setVisible(false);
-        viewFileListCheckBoxMenuItem.setSelected(false);
     }
     
     /** Updates UI (enables/disables menu items) upon <b>opening</b> project */
@@ -876,13 +882,14 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         gotoNextUntranslatedMenuItem.setEnabled(true);
         gotoPreviousSegmentMenuItem.setEnabled(true);
         
+        viewFileListCheckBoxMenuItem.setEnabled(true);
+        viewFileListCheckBoxMenuItem.setSelected(true);
         toolsValidateTagsMenuItem.setEnabled(true);
         
-        xlPane.setEditable(true);
+        editor.setEditable(true);
         m_projWin.uiUpdateImportButtonStatus();
         
         m_projWin.setVisible(true);
-        viewFileListCheckBoxMenuItem.setSelected(true);
     }
     
     /**
@@ -950,9 +957,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             // first commit current translation
             commitEntry();
             m_font = dlg.getSelectedFont();
-            xlPane.setFont(m_font);
-            
-            matchWindow.getMatchGlossaryPane().setFont(m_font);
+            editor.setFont(m_font);
+            matches.setFont(m_font);
+            glossary.setFont(m_font);
             
             Preferences.setPreference(OConsts.TF_SRC_FONT_NAME, m_font.getName());
             Preferences.setPreference(OConsts.TF_SRC_FONT_SIZE, m_font.getSize());
@@ -1063,8 +1070,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             return;
         }
         
-        matchWindow.getMatchGlossaryPane().reset();
-        mainScroller.setViewportView(xlPane);
+        matches.clear();
+        glossary.clear();
+        editorScroller.setViewportView(editor);
         
         RequestPacket load;
         load = new RequestPacket(RequestPacket.LOAD, this);
@@ -1083,8 +1091,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             return;
         }
         
-        matchWindow.getMatchGlossaryPane().reset();
-        mainScroller.setViewportView(xlPane);
+        matches.clear();
+        glossary.clear();
+        editorScroller.setViewportView(editor);
         
         RequestPacket load;
         load = new RequestPacket(RequestPacket.LOAD, this, projectRoot);
@@ -1231,7 +1240,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         if (!m_projectLoaded)
             return;
         
-        String selection = xlPane.getSelectedText();
+        String selection = editor.getSelectedText();
         if (selection != null)
         {
             selection.trim();
@@ -1265,7 +1274,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         m_docReady = false;
         
         // clear old text
-        xlPane.setText("");													// NOI18N
+        editor.setText("");													// NOI18N
         
         m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
         
@@ -1297,7 +1306,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             m_docSegList[i] = docSeg;
         }
         
-        xlPane.setText(textBuf.toString());
+        editor.setText(textBuf.toString());
         Thread.yield();
     }
     
@@ -1308,56 +1317,13 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     /**
      * Displays fuzzy matching info if it's available.
      */
-    public void updateFuzzyInfo(int nearNum)
+    public void updateFuzzyInfo()
     {
         if (!m_projectLoaded)
             return;
         
         StringEntry curEntry = m_curEntry.getStrEntry();
-        List nearList = curEntry.getNearListTranslated();
-        // see if there are any matches
-        if( nearList.size()<=0 )
-        {
-            m_curNear = null;
-            matchWindow.getMatchGlossaryPane().updateMatchText();
-            return;
-        }
-        
-        if( nearNum>=nearList.size() )
-            return;
-        
-        m_curNear = (NearString) nearList.get(nearNum);
-        
-        NearString ns;
-        int ctr = 0;
-        int offset;
-        int start = -1;
-        int end = -1;
-        ListIterator li = nearList.listIterator();
-        
-        while( li.hasNext() )
-        {
-            ns = (NearString) li.next();
-            
-            offset = matchWindow.getMatchGlossaryPane().addMatchTerm(
-                    ns.str.getSrcText(), ns.str.getTranslation(), ns.score, ns.proj);
-            
-            if( ctr==nearNum )
-            {
-                start = offset;
-            }
-            else if( ctr==nearNum + 1 )
-            {
-                end = offset;
-            }
-            
-            ctr++;
-        }
-        
-        MatchGlossaryPane matchpane = matchWindow.getMatchGlossaryPane();
-        matchpane.hiliteRange(start, end);
-        matchpane.updateMatchText();
-        matchpane.formatNearText(m_curNear.str.getSrcTokenList(), m_curNear.attr);
+        matches.setMatches(curEntry.getNearListTranslated());
     }
     
     /**
@@ -1365,46 +1331,15 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
      */
     private void updateGlossaryInfo()
     {
-        // add glossary terms and fuzzy match info to match window
         StringEntry curEntry = m_curEntry.getStrEntry();
-        if (curEntry.getGlossaryEntries().size() > 0)
-        {
-            m_glossaryLength = curEntry.getGlossaryEntries().size();
-            ListIterator li = curEntry.getGlossaryEntries().listIterator();
-            while (li.hasNext())
-            {
-                GlossaryEntry glos = (GlossaryEntry) li.next();
-                matchWindow.getMatchGlossaryPane().addGlosTerm(glos.getSrcText(), glos.getLocText(),
-                        glos.getCommentText());
-            }
-            
-        }
-        else
-        {
-            m_glossaryLength = 0;
-        }
-        
-        matchWindow.getMatchGlossaryPane().updateGlossaryText();
+        glossary.setGlossaryEntries(curEntry.getGlossaryEntries());
     }
     
     /** Is any segment edited currently? */
     private boolean entryActivated = false;
     
-    /** Plain text. */
-    private final static AttributeSet PLAIN;
-    /** Bold text. */
-    private final static MutableAttributeSet BOLD;
-    /** Bold text on green background. */
-    private final static MutableAttributeSet GREEN;
-    static
-    {
-        PLAIN = SimpleAttributeSet.EMPTY;
-        BOLD = new SimpleAttributeSet();
-        StyleConstants.setBold(BOLD, true);
-        GREEN = new SimpleAttributeSet();
-        StyleConstants.setBold(GREEN, true);
-        StyleConstants.setBackground(GREEN, new Color(192, 255, 192));
-    }
+    private static final String IMPOSSIBLE = "Should not have happened, " +     // NOI18N
+            "report to http://sf.net/tracker/?group_id=68187&atid=520347";      // NOI18N
     
     /**
      * Commits the translation.
@@ -1423,11 +1358,11 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             return;
         entryActivated = false;
 
-        AbstractDocument xlDoc = (AbstractDocument)xlPane.getDocument();
+        AbstractDocument xlDoc = (AbstractDocument)editor.getDocument();
         
         int start = m_segmentStartOffset + m_sourceDisplayLength +
                 OStrings.TF_CUR_SEGMENT_START.length();
-        int end = xlPane.getTextLength() - m_segmentEndInset -
+        int end = editor.getTextLength() - m_segmentEndInset -
                 OStrings.TF_CUR_SEGMENT_END.length();
         String display_string;
         String new_translation;
@@ -1444,11 +1379,11 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             }
             catch(BadLocationException ble)
             {
-                StaticUtils.log("Should not have happened, report to https://sourceforge.net/tracker/?group_id=68187&atid=520347");        // NOI18N
+                StaticUtils.log(IMPOSSIBLE);
                 StaticUtils.log(ble.getMessage());
                 ble.printStackTrace();
                 ble.printStackTrace(StaticUtils.getLogStream());
-                new_translation = "";                                           // NOI18N
+                new_translation = new String();
             }
             display_string = new_translation;
         }
@@ -1459,11 +1394,11 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             // see http://sourceforge.net/support/tracker.php?aid=1436607
             // this method calls write locks / unlocks
-            xlDoc.replace(m_segmentStartOffset, totalLen, display_string, PLAIN);
+            xlDoc.replace(m_segmentStartOffset, totalLen, display_string, Styles.PLAIN);
         }
         catch(BadLocationException ble)
         {
-            StaticUtils.log("Should not have happened, report to https://sourceforge.net/tracker/?group_id=68187&atid=520347");        // NOI18N
+            StaticUtils.log(IMPOSSIBLE);
             StaticUtils.log(ble.getMessage());
             ble.printStackTrace();
             ble.printStackTrace(StaticUtils.getLogStream());
@@ -1525,11 +1460,11 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                 {
                     // see http://sourceforge.net/support/tracker.php?aid=1436607
                     // this method calls write locks / unlocks
-                    xlDoc.replace(offset, docSeg.length, ds_nn, PLAIN);
+                    xlDoc.replace(offset, docSeg.length, ds_nn, Styles.PLAIN);
                 }
                 catch(BadLocationException ble)
                 {
-                    StaticUtils.log("Should not have happened, report to https://sourceforge.net/tracker/?group_id=68187&atid=520347");     // NOI18N
+                    StaticUtils.log(IMPOSSIBLE);
                     StaticUtils.log(ble.getMessage());
                     ble.printStackTrace();
                     ble.printStackTrace(StaticUtils.getLogStream());
@@ -1537,7 +1472,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                 docSeg.length = ds_nn.length();
             }
         }
-        xlPane.cancelUndo();
+        editor.cancelUndo();
     }
     
     /**
@@ -1552,7 +1487,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         if (!m_projectLoaded)
             return;
         
-        AbstractDocument xlDoc = (AbstractDocument)xlPane.getDocument();
+        AbstractDocument xlDoc = (AbstractDocument)editor.getDocument();
         
         // recover data about current entry
         m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
@@ -1571,7 +1506,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         
         DocumentSegment docSeg = m_docSegList[localCur];
         // -2 to move inside newlines at end of segment
-        m_segmentEndInset = xlPane.getTextLength() - (m_segmentStartOffset + docSeg.length-2);
+        m_segmentEndInset = editor.getTextLength() - (m_segmentStartOffset + docSeg.length-2);
         
         // get label tags
         String startStr = OStrings.TF_CUR_SEGMENT_START;
@@ -1591,11 +1526,11 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         try
         {
             int endStrPos = m_segmentStartOffset + docSeg.length - 2;
-            xlDoc.insertString(endStrPos, endStr, BOLD);
+            xlDoc.insertString(endStrPos, endStr, Styles.BOLD);
         }
         catch(BadLocationException ble)
         {
-            StaticUtils.log("Should not have happened, report to https://sourceforge.net/tracker/?group_id=68187&atid=520347");        // NOI18N
+            StaticUtils.log(IMPOSSIBLE);
             StaticUtils.log(ble.getMessage());
             ble.printStackTrace();
             ble.printStackTrace(StaticUtils.getLogStream());
@@ -1618,12 +1553,12 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                 }
                 catch(BadLocationException ble)
                 {
-                    StaticUtils.log("Should not have happened, report to https://sourceforge.net/tracker/?group_id=68187&atid=520347");        // NOI18N
+                    StaticUtils.log(IMPOSSIBLE);
                     StaticUtils.log(ble.getMessage());
                     ble.printStackTrace();
                     ble.printStackTrace(StaticUtils.getLogStream());
                 }
-                translation = "";                                               // NOI18N
+                translation = new String();
             }
             
             // if WORKFLOW_OPTION "Insert best fuzzy match into target field" is set
@@ -1631,7 +1566,8 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             //      http://sourceforge.net/support/tracker.php?aid=1075976
             if( Preferences.isPreference(Preferences.BEST_MATCH_INSERT) )
             {
-                String percentage_s = Preferences.getPreferenceDefault(Preferences.BEST_MATCH_MINIMAL_SIMILARITY, Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT);
+                String percentage_s = Preferences.getPreferenceDefault(
+                        Preferences.BEST_MATCH_MINIMAL_SIMILARITY, Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT);
                 int percentage = Integer.parseInt(percentage_s);
                 List near = m_curEntry.getStrEntry().getNearListTranslated();
                 if( near.size()>0 )
@@ -1646,11 +1582,11 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
                                 thebest.str.getTranslation();
                         try
                         {
-                            xlDoc.replace(m_segmentStartOffset, old_tr_len, translation, PLAIN);
+                            xlDoc.replace(m_segmentStartOffset, old_tr_len, translation, Styles.PLAIN);
                         }
                         catch(BadLocationException ble)
                         {
-                            StaticUtils.log("Should not have happened, report to https://sourceforge.net/tracker/?group_id=68187&atid=520347");        // NOI18N
+                            StaticUtils.log(IMPOSSIBLE);
                             StaticUtils.log(ble.getMessage());
                             ble.printStackTrace();
                             ble.printStackTrace(StaticUtils.getLogStream());
@@ -1662,13 +1598,13 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         
         try
         {
-            xlDoc.insertString(m_segmentStartOffset, " ", PLAIN); // NOI18N
-            xlDoc.insertString(m_segmentStartOffset, startStr, BOLD);
-            xlDoc.insertString(m_segmentStartOffset, srcText, GREEN);
+            xlDoc.insertString(m_segmentStartOffset, " ", Styles.PLAIN);        // NOI18N
+            xlDoc.insertString(m_segmentStartOffset, startStr, Styles.BOLD);
+            xlDoc.insertString(m_segmentStartOffset, srcText, Styles.GREEN);
         }
         catch(BadLocationException ble)
         {
-            StaticUtils.log("Should not have happened, report to https://sourceforge.net/tracker/?group_id=68187&atid=520347");        // NOI18N
+            StaticUtils.log(IMPOSSIBLE);
             StaticUtils.log(ble.getMessage());
             ble.printStackTrace();
             ble.printStackTrace(StaticUtils.getLogStream());
@@ -1680,7 +1616,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             updateTitle();
         }
         
-        updateFuzzyInfo(0);
+        updateFuzzyInfo();
         updateGlossaryInfo();
         
         StringEntry curEntry = m_curEntry.getStrEntry();
@@ -1726,8 +1662,9 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             docSeg = m_docSegList[i];
             offsetNext += docSeg.length;
         }
-        final int lookNext = m_segmentStartOffset + srcText.length() + startStr.length() + 1 + 
-                translation.length() + endStr.length() + offsetNext;
+        final int lookNext = m_segmentStartOffset + srcText.length() + 
+                OStrings.TF_CUR_SEGMENT_START.length() + 1 + translation.length() + 
+                OStrings.TF_CUR_SEGMENT_END.length() + offsetNext;
         
         SwingUtilities.invokeLater(new Runnable()
         {
@@ -1735,14 +1672,14 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             {
                 try
                 {
-                    xlPane.setCaretPosition(lookNext);
+                    editor.setCaretPosition(lookNext);
                     SwingUtilities.invokeLater(new Runnable()
                     {
                         public void run()
                         {
                             try
                             {
-                                xlPane.setCaretPosition(lookPrev);
+                                editor.setCaretPosition(lookPrev);
                                 SwingUtilities.invokeLater(new Runnable()
                                 {
                                     public void run()
@@ -1765,7 +1702,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             m_docReady = true;
         }
-        xlPane.cancelUndo();
+        editor.cancelUndo();
         
         entryActivated = true;
     }
@@ -1811,7 +1748,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
      */
     public boolean checkCaretForDelete(boolean forward)
     {
-        int pos = xlPane.getCaretPosition();
+        int pos = editor.getCaretPosition();
         
         // make sure range doesn't overlap boundaries
         checkCaret();
@@ -1820,10 +1757,10 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             // make sure we're not at end of segment
             // -1 for space before tag, -2 for newlines
-            int end = xlPane.getTextLength() - m_segmentEndInset -
+            int end = editor.getTextLength() - m_segmentEndInset -
                     OStrings.TF_CUR_SEGMENT_END.length();
-            int spos = xlPane.getSelectionStart();
-            int epos = xlPane.getSelectionEnd();
+            int spos = editor.getSelectionStart();
+            int epos = editor.getSelectionEnd();
             if( pos>=end && spos>=end && epos>=end )
                 return false;
         }
@@ -1832,8 +1769,8 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             // make sure we're not at start of segment
             int start = m_segmentStartOffset + m_sourceDisplayLength +
                     OStrings.TF_CUR_SEGMENT_START.length();
-            int spos = xlPane.getSelectionStart();
-            int epos = xlPane.getSelectionEnd();
+            int spos = editor.getSelectionStart();
+            int epos = editor.getSelectionEnd();
             if( pos<=start && epos<=start && spos<=start )
                 return false;
         }
@@ -1846,13 +1783,13 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
      */
     public void checkCaret()
     {
-        //int pos = m_xlPane.getCaretPosition();
-        int spos = xlPane.getSelectionStart();
-        int epos = xlPane.getSelectionEnd();
+        //int pos = m_editor.getCaretPosition();
+        int spos = editor.getSelectionStart();
+        int epos = editor.getSelectionEnd();
         int start = m_segmentStartOffset + m_sourceDisplayLength +
                 OStrings.TF_CUR_SEGMENT_START.length();
         // -1 for space before tag, -2 for newlines
-        int end = xlPane.getTextLength() - m_segmentEndInset -
+        int end = editor.getTextLength() - m_segmentEndInset -
                 OStrings.TF_CUR_SEGMENT_END.length();
         
         if (spos != epos)
@@ -1860,19 +1797,19 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             // dealing with a selection here - make sure it's w/in bounds
             if (spos < start)
             {
-                xlPane.setSelectionStart(start);
+                editor.setSelectionStart(start);
             }
             else if (spos > end)
             {
-                xlPane.setSelectionStart(end);
+                editor.setSelectionStart(end);
             }
             if (epos > end)
             {
-                xlPane.setSelectionEnd(end);
+                editor.setSelectionEnd(end);
             }
             else if (epos < start)
             {
-                xlPane.setSelectionStart(start);
+                editor.setSelectionStart(start);
             }
         }
         else
@@ -1880,11 +1817,11 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             // non selected text
             if (spos < start)
             {
-                xlPane.setCaretPosition(start);
+                editor.setCaretPosition(start);
             }
             else if (spos > end)
             {
-                xlPane.setCaretPosition(end);
+                editor.setCaretPosition(end);
             }
         }
     }
@@ -1911,19 +1848,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
             }
         }
         Runtime.getRuntime().halt(1);
-    }
-    
-    /**
-     * Overrides parent method to show Match/Glossary viewer
-     * simultaneously with the main frame.
-     */
-    public void setVisible(boolean b)
-    {
-        super.setVisible(b);
-        if( !docked )
-            matchWindow.setVisible(b);
-        matchWindow.getMatchGlossaryPane().setFont(m_font);
-        toFront();
     }
     
     /** Tells whether the project is loaded. */
@@ -1985,8 +1909,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         separator2inProjectMenu = new javax.swing.JSeparator();
         projectExitMenuItem = new javax.swing.JMenuItem();
         statusLabel = new javax.swing.JLabel();
-        mainSplitter = new javax.swing.JSplitPane();
-        mainScroller = new javax.swing.JScrollPane();
         mainMenu = new javax.swing.JMenuBar();
         projectMenu = new javax.swing.JMenu();
         projectNewMenuItem = new javax.swing.JMenuItem();
@@ -2000,6 +1922,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         projectCompileMenuItem = new javax.swing.JMenuItem();
         separator1inProjectMenu = new javax.swing.JSeparator();
         projectEditMenuItem = new javax.swing.JMenuItem();
+        viewFileListCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
         editMenu = new javax.swing.JMenu();
         editUndoMenuItem = new javax.swing.JMenuItem();
         editRedoMenuItem = new javax.swing.JMenuItem();
@@ -2021,9 +1944,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         gotoNextUntranslatedMenuItem = new javax.swing.JMenuItem();
         gotoNextSegmentMenuItem = new javax.swing.JMenuItem();
         gotoPreviousSegmentMenuItem = new javax.swing.JMenuItem();
-        viewMenu = new javax.swing.JMenu();
-        viewMatchWindowCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
-        viewFileListCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
         toolsMenu = new javax.swing.JMenu();
         toolsValidateTagsMenuItem = new javax.swing.JMenuItem();
         optionsMenu = new javax.swing.JMenu();
@@ -2046,15 +1966,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         addWindowListener(this);
 
         getContentPane().add(statusLabel, java.awt.BorderLayout.SOUTH);
-
-        mainSplitter.setResizeWeight(1.0);
-        mainSplitter.setContinuousLayout(true);
-        mainSplitter.setOneTouchExpandable(true);
-        mainScroller.setBorder(null);
-        mainScroller.setMinimumSize(new java.awt.Dimension(100, 100));
-        mainSplitter.setLeftComponent(mainScroller);
-
-        getContentPane().add(mainSplitter, java.awt.BorderLayout.CENTER);
 
         org.openide.awt.Mnemonics.setLocalizedText(projectMenu, OStrings.getString("TF_MENU_FILE"));
         org.openide.awt.Mnemonics.setLocalizedText(projectNewMenuItem, OStrings.getString("TF_MENU_FILE_CREATE"));
@@ -2102,6 +2013,11 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         projectEditMenuItem.addActionListener(this);
 
         projectMenu.add(projectEditMenuItem);
+
+        org.openide.awt.Mnemonics.setLocalizedText(viewFileListCheckBoxMenuItem, OStrings.getString("TF_MENU_FILE_PROJWIN"));
+        viewFileListCheckBoxMenuItem.addActionListener(this);
+
+        projectMenu.add(viewFileListCheckBoxMenuItem);
 
         mainMenu.add(projectMenu);
 
@@ -2193,20 +2109,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         gotoMenu.add(gotoPreviousSegmentMenuItem);
 
         mainMenu.add(gotoMenu);
-
-        org.openide.awt.Mnemonics.setLocalizedText(viewMenu, OStrings.getString("MW_VIEWMENU"));
-        viewMatchWindowCheckBoxMenuItem.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(viewMatchWindowCheckBoxMenuItem, OStrings.getString("TF_MENU_FILE_MATCHWIN"));
-        viewMatchWindowCheckBoxMenuItem.addActionListener(this);
-
-        viewMenu.add(viewMatchWindowCheckBoxMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(viewFileListCheckBoxMenuItem, OStrings.getString("TF_MENU_FILE_PROJWIN"));
-        viewFileListCheckBoxMenuItem.addActionListener(this);
-
-        viewMenu.add(viewFileListCheckBoxMenuItem);
-
-        mainMenu.add(viewMenu);
 
         org.openide.awt.Mnemonics.setLocalizedText(toolsMenu, OStrings.getString("TF_MENU_TOOLS"));
         org.openide.awt.Mnemonics.setLocalizedText(toolsValidateTagsMenuItem, OStrings.getString("TF_MENU_TOOLS_VALIDATE"));
@@ -2370,10 +2272,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
         {
             MainWindow.this.gotoPreviousSegmentMenuItemActionPerformed(evt);
         }
-        else if (evt.getSource() == viewMatchWindowCheckBoxMenuItem)
-        {
-            MainWindow.this.viewMatchWindowCheckBoxMenuItemActionPerformed(evt);
-        }
         else if (evt.getSource() == viewFileListCheckBoxMenuItem)
         {
             MainWindow.this.viewFileListCheckBoxMenuItemActionPerformed(evt);
@@ -2470,8 +2368,27 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
 
     public void windowOpened(java.awt.event.WindowEvent evt)
     {
-    }
-    // </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void viewFileListCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_viewFileListCheckBoxMenuItemActionPerformed
+    {//GEN-HEADEREND:event_viewFileListCheckBoxMenuItemActionPerformed
+        if( m_projWin==null )
+        {
+            viewFileListCheckBoxMenuItem.setSelected(false);
+            return;
+        }
+        
+        if( viewFileListCheckBoxMenuItem.isSelected() )
+        {
+            m_projWin.buildDisplay();
+            m_projWin.setVisible(true);
+            m_projWin.toFront();
+        }
+        else
+        {
+            m_projWin.setVisible(false);
+        }
+    }//GEN-LAST:event_viewFileListCheckBoxMenuItemActionPerformed
 
     private void optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed
@@ -2501,12 +2418,12 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     
     private void formComponentMoved(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentMoved
     {//GEN-HEADEREND:event_formComponentMoved
-        storeScreenLayout();
+        saveScreenLayout();
     }//GEN-LAST:event_formComponentMoved
     
     private void formComponentResized(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentResized
     {//GEN-HEADEREND:event_formComponentResized
-        storeScreenLayout();
+        saveScreenLayout();
     }//GEN-LAST:event_formComponentResized
     
     private void optionsWorkflowMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsWorkflowMenuItemActionPerformed
@@ -2558,27 +2475,27 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     
     private void editSelectFuzzy5MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy5MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy5MenuItemActionPerformed
-        updateFuzzyInfo(4);
+        matches.setActiveMatch(4);
     }//GEN-LAST:event_editSelectFuzzy5MenuItemActionPerformed
     
     private void editSelectFuzzy4MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy4MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy4MenuItemActionPerformed
-        updateFuzzyInfo(3);
+        matches.setActiveMatch(3);
     }//GEN-LAST:event_editSelectFuzzy4MenuItemActionPerformed
     
     private void editSelectFuzzy3MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy3MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy3MenuItemActionPerformed
-        updateFuzzyInfo(2);
+        matches.setActiveMatch(2);
     }//GEN-LAST:event_editSelectFuzzy3MenuItemActionPerformed
     
     private void editSelectFuzzy2MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy2MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy2MenuItemActionPerformed
-        updateFuzzyInfo(1);
+        matches.setActiveMatch(1);
     }//GEN-LAST:event_editSelectFuzzy2MenuItemActionPerformed
     
     private void editSelectFuzzy1MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy1MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy1MenuItemActionPerformed
-        updateFuzzyInfo(0);
+        matches.setActiveMatch(0);
     }//GEN-LAST:event_editSelectFuzzy1MenuItemActionPerformed
     
     private void editFindInProjectMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editFindInProjectMenuItemActionPerformed
@@ -2615,7 +2532,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     {//GEN-HEADEREND:event_editRedoMenuItemActionPerformed
         try
         {
-            xlPane.redoOneEdit();
+            editor.redoOneEdit();
         }
         catch (CannotRedoException cue)
         { }
@@ -2625,73 +2542,12 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     {//GEN-HEADEREND:event_editUndoMenuItemActionPerformed
         try
         {
-            xlPane.undoOneEdit();
+            editor.undoOneEdit();
         }
         catch( CannotUndoException cue )
         { }
     }//GEN-LAST:event_editUndoMenuItemActionPerformed
 
-    /** Informs Main Window class that the user closed the Match/Glossary window */
-    public void filelistWindowClosed()
-    {
-        viewFileListCheckBoxMenuItem.setSelected(false);
-    }
-    
-    private void viewFileListCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_viewFileListCheckBoxMenuItemActionPerformed
-    {//GEN-HEADEREND:event_viewFileListCheckBoxMenuItemActionPerformed
-        if( m_projWin==null )
-        {
-            viewFileListCheckBoxMenuItem.setSelected(false);
-            return;
-        }
-        
-        if( viewFileListCheckBoxMenuItem.isSelected() )
-        {
-            m_projWin.buildDisplay();
-            m_projWin.setVisible(true);
-            m_projWin.toFront();
-        }
-        else
-        {
-            m_projWin.setVisible(false);
-        }
-    }//GEN-LAST:event_viewFileListCheckBoxMenuItemActionPerformed
-    
-    /** Informs Main Window class that the user closed the Match/Glossary window */
-    public void matchWindowClosed()
-    {
-        if( !docked )
-            viewMatchWindowCheckBoxMenuItem.setSelected(false);
-    }
-    
-    private void viewMatchWindowCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_viewMatchWindowCheckBoxMenuItemActionPerformed
-    {//GEN-HEADEREND:event_viewMatchWindowCheckBoxMenuItemActionPerformed
-        if( viewMatchWindowCheckBoxMenuItem.isSelected() )
-        {
-            if( docked )
-            {
-                int width = matchWindow.getWidth();
-                mainSplitter.setRightComponent(matchWindow.getMatchGlossaryPane());
-                mainSplitter.setDividerLocation(mainSplitter.getWidth()-width);
-                mainSplitter.setDividerSize(dividerSize);
-            }
-            else
-                matchWindow.setVisible(true);
-            toFront();
-        }
-        else
-        {
-            if( docked )
-            {
-                mainSplitter.setRightComponent(null);
-                dividerSize = mainSplitter.getDividerSize();
-                mainSplitter.setDividerSize(0);
-            }
-            else
-                matchWindow.setVisible(false);
-        }
-    }//GEN-LAST:event_viewMatchWindowCheckBoxMenuItemActionPerformed
-    
     private void projectCompileMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectCompileMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectCompileMenuItemActionPerformed
         doCompileProject();
@@ -2730,7 +2586,7 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     private void helpAboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpAboutMenuItemActionPerformed
         doAbout();
     }//GEN-LAST:event_helpAboutMenuItemActionPerformed
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem editFindInProjectMenuItem;
     private javax.swing.JMenuItem editInsertSourceMenuItem;
@@ -2753,8 +2609,6 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     private javax.swing.JMenuItem helpContentsMenuItem;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuBar mainMenu;
-    private javax.swing.JScrollPane mainScroller;
-    private javax.swing.JSplitPane mainSplitter;
     private javax.swing.JCheckBoxMenuItem optionsAlwaysConfirmQuitCheckBoxMenuItem;
     private javax.swing.JMenuItem optionsFontSelectionMenuItem;
     private javax.swing.JMenu optionsMenu;
@@ -2785,11 +2639,20 @@ public class MainWindow extends JFrame implements java.awt.event.ActionListener,
     private javax.swing.JMenu toolsMenu;
     private javax.swing.JMenuItem toolsValidateTagsMenuItem;
     private javax.swing.JCheckBoxMenuItem viewFileListCheckBoxMenuItem;
-    private javax.swing.JCheckBoxMenuItem viewMatchWindowCheckBoxMenuItem;
-    private javax.swing.JMenu viewMenu;
     // End of variables declaration//GEN-END:variables
+
+    private RootWindow rootWindow;
+    private ViewMap views;
     
-    private MainPane xlPane;
-    private MatchGlossaryWindow matchWindow;
-    private boolean screenLayoutLoaded = false;
+    private View editorView;
+    private JScrollPane editorScroller;
+    private EditorTextArea editor;
+    
+    private View matchesView;
+    private JScrollPane matchesScroller;
+    private MatchesTextArea matches;
+    
+    private View glossaryView;
+    private JScrollPane glossaryScroller;
+    private GlossaryTextArea glossary;
 }

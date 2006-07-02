@@ -1,5 +1,5 @@
 ==============================================================================
-  OmegaT 1.6.0 RC10 Read Me file
+  OmegaT 1.6.0 RC11 Read Me file
 
   1.  Information about OmegaT
   2.  What is OmegaT?
@@ -129,6 +129,11 @@ Other contributions by
   Samuel Murray
   Marc Prior (current localization manager)
   and many, many more very helpful people
+
+OmegaT uses the following libraries:
+  HTMLParser by Somik Raha, Derrick Oswald and others.
+  Steve Roy MRJ Adapter.
+  InfoNode Docking Windows framework, GPL version.
 
 ==============================================================================
  5.  Is OmegaT bugging you ? Do you need help ?

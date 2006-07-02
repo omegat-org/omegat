@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------
- OmegaT 1.6.0 RC10 Changes
+ OmegaT 1.6.0 RC11 Changes
 ----------------------------------------------------------------------
 
 1.6.0 RC10 vs. 1.4.5.04
@@ -16,7 +16,7 @@ match percentages and ordering.
 
 Next 1.6.x releases will deviver smaller updates.
 
-1.6.1 will be a bugfix release
+1.6.1 will be a bugfix release, if required
 
 1.6.2 will be dedicated to terminology management: 
 - more glossary formats (TBX for one), 
@@ -27,14 +27,43 @@ Next 1.6.x releases will deviver smaller updates.
 
 TODO Before Final 1.6.0 release.
 1.6.0 is a major release, and it's still missing:
+
 - Copyright issues free Users Guide
-- XLIFF filter
+
+- XLIFF filter, if ready
+
 - Rewrite of the OpenDocument filter to new XML architecture
- - [OO] Tracked changes add unnecessary data
-   http://sourceforge.net/support/tracker.php?aid=1461178
-- Separate XHTML filter from HTML (XHTML should be based on new XML)
+  - **TODO** OpenDocument: Writer headers and footers not honored
+    http://sourceforge.net/support/tracker.php?aid=1111950
+  - **TODO** OpenDocument: Footnote markers break sentences
+    http://sourceforge.net/support/tracker.php?aid=1461154
+  - **TODO** OpenDocument: Tracked changes add unnecessary data
+    http://sourceforge.net/support/tracker.php?aid=1461178
+
 - Make segmentation and filter settings project-specific
-- Other bugfixes
+  - **TODO** Save segmentation rules for each project
+    http://sourceforge.net/support/tracker.php?aid=1467150
+
+- Other bugfixes, if found
+
+----------------------------------------------------------------------
+1.6.0 RC11
+
+ Enchancements:
+
+ - Enable relative paths in omegat.project
+   http://sourceforge.net/support/tracker.php?aid=1111956
+
+ - Match/Glossary pane may be docked to single main window, improved
+   http://sourceforge.net/support/tracker.php?aid=1472196
+
+ - Separate match and glossary window
+   http://sourceforge.net/support/tracker.php?aid=1374201
+
+ Bugfixes:
+
+ - HTML filter doesn't handle XHTML in full
+   http://sourceforge.net/support/tracker.php?aid=1468685
 
 ----------------------------------------------------------------------
 1.6.0 RC10
@@ -45,7 +74,7 @@ TODO Before Final 1.6.0 release.
    http://sourceforge.net/support/tracker.php?aid=991533
 
  - New filter: PO files
-   no issue in issue tracker, the code was donated
+   http://sourceforge.net/support/tracker.php?aid=1483316
 
  - New Filter: Key-Value text files
    http://sourceforge.net/support/tracker.php?aid=1462564

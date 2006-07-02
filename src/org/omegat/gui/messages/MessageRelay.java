@@ -40,44 +40,27 @@ public class MessageRelay
 
     public static void uiMessageDisplayEntry(MainWindow tf)
 	{
-		MMx msg = new MMx(tf, 5);
-		SwingUtilities.invokeLater(msg);
-	}
-
-	public static void uiMessageFuzzyInfo(MainWindow tf)
-	{
-		MMx msg = new MMx(tf, 10);
+		MMx msg = new MMx(tf, MMx.CMD_ACTIVATE_ENTRY);
 		SwingUtilities.invokeLater(msg);
 	}
 
 	public static void uiMessageDoGotoEntry(MainWindow tf, String str)
 	{
-		MMx msg = new MMx(tf, 6, str);
+		MMx msg = new MMx(tf, MMx.CMD_GOTO_ENTRY, str);
 		SwingUtilities.invokeLater(msg);
 	}
 
 	public static void uiMessageSetMessageText(MainWindow tf, String str)
 	{
-		MMx msg = new MMx(tf, 7, str);
+		MMx msg = new MMx(tf, MMx.CMD_SET_STATUS, str);
 		SwingUtilities.invokeLater(msg);
 	}
 
     public static void uiMessageDisplayError(MainWindow tf, 
 					String str, Throwable e)
 	{
-		MMx msg = new MMx(tf, str, e);
+		MMx msg = new MMx(tf, MMx.CMD_ERROR_MESSAGE, str, e);
 		SwingUtilities.invokeLater(msg);
 	}
-
-	// command codes
-	//		2		doNextEntry
-	//		3		doPrevEntry
-	//		4		doRecycleTrans
-	//		5		displayEntry(bool)
-	//		6		doGotoEntry(str)
-	//		7		setMessageText(str)
-	//		8		displayWarning(str, throwable)
-	//		9		displayError(str, throwable)
-	//		10		display fuzzy info
 }
 

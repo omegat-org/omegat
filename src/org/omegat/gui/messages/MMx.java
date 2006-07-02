@@ -33,41 +33,37 @@ import org.omegat.gui.main.MainWindow;
  */
 class MMx implements Runnable
 {
-	private String	m_msg = "";	// NOI18N
-	private int		m_cmdNum;
-	private Throwable	m_throw;
-	private MainWindow m_tf;
+    /** Tells OmegaT to activate the entry -- project is loaded OK. */
+    public static final int CMD_ACTIVATE_ENTRY = 5;
+    /** Tells OmegaT to display a certain entry. */
+    public static final int CMD_GOTO_ENTRY = 6;
+    /** Allows to set status. */
+    public static final int CMD_SET_STATUS = 7;
+    /** Displays an error message. */
+    public static final int CMD_ERROR_MESSAGE = 9;
+    
+    
+	private String      m_msg;
+	private int         m_cmdNum;
+	private Throwable   m_throw;
+	private MainWindow  m_tf;
 
 	public MMx(MainWindow tf, int cmd)
 	{
-		m_cmdNum = 0;
 		m_tf = tf;
-
-		// check for errors 
-		if (cmd >= 1 && cmd <= 5 || cmd == 10 || cmd == 11)
-			m_cmdNum = cmd;
+        m_cmdNum = cmd;
 	}
 
 	public MMx(MainWindow tf, int cmd, String msg)
 	{
-		m_cmdNum = 0;
 		m_tf = tf;
-
-		// check for errors 
-		if (cmd == 6 || cmd == 7)
-		{
-			m_cmdNum = cmd;
-			m_msg = msg;
-		}
+        m_cmdNum = cmd;
+        m_msg = msg;
 	}
 
-	public MMx(MainWindow tf, String msg, Throwable e)
+	public MMx(MainWindow tf, int cmd, String msg, Throwable e)
 	{
-		m_cmdNum = 0;
 		m_tf = tf;
-        int cmd = 9;
-
-		// check for errors
 		m_cmdNum = cmd;
 		m_msg = msg;
 		m_throw = e;
@@ -77,35 +73,17 @@ class MMx implements Runnable
 	{
 		switch (m_cmdNum)
 		{
-			case 2:
-				m_tf.doNextEntry();
-				break;
-			case 3:
-				m_tf.doPrevEntry();
-				break;
-			case 4:
-				m_tf.doRecycleTrans();
-				break;
-			case 5:
+			case CMD_ACTIVATE_ENTRY:
 				m_tf.activateEntry();
 				break;
-			case 6:
+			case CMD_GOTO_ENTRY:
 				m_tf.doGotoEntry(m_msg);
 				break;
-			case 7:
+			case CMD_SET_STATUS:
 				m_tf.setMessageText(m_msg);
 				break;
-			case 8:
-				m_tf.displayWarning(m_msg, m_throw);
-				break;
-			case 9:
+			case CMD_ERROR_MESSAGE:
 				m_tf.displayError(m_msg, m_throw);
-				break;
-			case 10:
-				m_tf.updateFuzzyInfo(0);
-				break;
-			default:
-				// do nothing
 				break;
 		}
     }

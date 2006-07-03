@@ -1254,7 +1254,8 @@ public class CommandThread extends Thread
                     OStrings.getString("CT_STATS_Characters") +
                     "\t" +uniqueChars+ "\n");                                   // NOI18N
             
-            ofp.write(OStrings.getString("CT_STATS_Unique_Remaining"));
+            ofp.write(OStrings.getString("CT_STATS_Unique_Remaining") +
+                    "\n");                                                      // NOI18N
             ofp.write("\t"+                                                     // NOI18N
                     OStrings.getString("CT_STATS_Segments") +
                     "\t"+remainingSegments+"\n");                               // NOI18N

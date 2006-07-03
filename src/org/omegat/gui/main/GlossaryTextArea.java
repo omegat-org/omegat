@@ -61,7 +61,7 @@ public class GlossaryTextArea extends javax.swing.JTextPane
         {
             GlossaryEntry entry = (GlossaryEntry) entries.get(i);
             buf.append("'" + entry.getSrcText() + "' = '" +                     // NOI18N
-                    entry.getSrcText() + "'");                                  // NOI18N
+                    entry.getLocText() + "'");                                  // NOI18N
             if (entry.getCommentText().length()>0)
                 buf.append("\n" + entry.getCommentText());                      // NOI18N
             buf.append("\n\n");                                                 // NOI18N

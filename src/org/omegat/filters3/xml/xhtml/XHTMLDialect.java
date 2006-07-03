@@ -26,6 +26,8 @@ package org.omegat.filters3.xml.xhtml;
 
 import java.net.URL;
 import java.util.regex.Pattern;
+import org.omegat.core.ProjectProperties;
+import org.omegat.core.threads.CommandThread;
 
 import org.xml.sax.InputSource;
 
@@ -57,6 +59,13 @@ public class XHTMLDialect extends DefaultXMLDialect
             "form", "textarea", "fieldset", "legend", "label",                  // NOI18N
             "select", "option",                                                 // NOI18N
         });
+        
+        try
+        {
+            if (CommandThread.core.getProjectProperties().isSentenceSegmentingEnabled())
+                defineParagraphTag("br");                                       // NOI18N
+        } catch (Exception e) { }
+        
         
         definePreformatTags(new String[]
         {

@@ -7,31 +7,18 @@
  > 50 Bugfixes
 
 ----------------------------------------------------------------------
-
 1.8.0 (or 2.0) will deliver important updates in fuzzy matching,
 solving multiple issues like CPU usage, memory footprint, 
 match percentages and ordering.
-
 ----------------------------------------------------------------------
-
-Next 1.6.x releases will deviver smaller updates.
-
-1.6.1 will be a bugfix release, if required
-
-1.6.2 will be dedicated to terminology management: 
+Next release in 1.6.x series will be dedicated to terminology management: 
 - more glossary formats (TBX for one), 
 - editing glossary from within OmegaT,
 - support for online dictionaries (wiktionaryZ for one)
-
 ----------------------------------------------------------------------
-
-TODO Before Final 1.6.0 release.
-1.6.0 is a major release, and it's still missing:
-
+1.6.0 is a fat release. Here's the TODO:
 - Copyright issues free Users Guide
-
 - XLIFF filter, if ready
-
 - Rewrite of the OpenDocument filter to new XML architecture
   - **TODO** OpenDocument: Writer headers and footers not honored
     http://sourceforge.net/support/tracker.php?aid=1111950
@@ -39,12 +26,21 @@ TODO Before Final 1.6.0 release.
     http://sourceforge.net/support/tracker.php?aid=1461154
   - **TODO** OpenDocument: Tracked changes add unnecessary data
     http://sourceforge.net/support/tracker.php?aid=1461178
-
 - Make segmentation and filter settings project-specific
   - **TODO** Save segmentation rules for each project
     http://sourceforge.net/support/tracker.php?aid=1467150
 
-- Other bugfixes, if found
+----------------------------------------------------------------------
+1.6.0 RC11a
+Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
+
+ Bugfixes:
+
+ - Glossary displays source=source
+   http://sourceforge.net/support/tracker.php?aid=1516395
+
+ - Insert/replace with match does not work
+   http://sourceforge.net/support/tracker.php?aid=1516807
 
 ----------------------------------------------------------------------
 1.6.0 RC11
@@ -64,6 +60,9 @@ TODO Before Final 1.6.0 release.
 
  - HTML filter doesn't handle XHTML in full
    http://sourceforge.net/support/tracker.php?aid=1468685
+
+ - "Re-activate" output of word_count
+   http://sourceforge.net/support/tracker.php?aid=1447306
 
 ----------------------------------------------------------------------
 1.6.0 RC10

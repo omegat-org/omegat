@@ -359,7 +359,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     public void oldInit()
     {
         m_curEntryNum = -1;
-        m_curNear = null;
+        m_activeMatch = -1;
         m_activeProj = "";														// NOI18N
         m_activeFile = "";														// NOI18N
         
@@ -725,10 +725,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         if (!m_projectLoaded)
             return;
         
-        String s = m_curEntry.getSrcText();
-        int pos = editor.getCaretPosition();
-        editor.select(pos, pos);
-        editor.replaceSelection(s);
+        doInsertText(m_curEntry.getSrcText());
     }
     
     /** replaces entire edited segment text with a the source text of a segment at cursor position */
@@ -737,8 +734,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         if (!m_projectLoaded)
             return;
         
-        String s = m_curEntry.getSrcText();
-        doReplaceEditText(s);
+        doReplaceEditText(m_curEntry.getSrcText());
     }
     
     /** insert current fuzzy match at cursor position */
@@ -747,16 +743,21 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         if (!m_projectLoaded)
             return;
         
-        if (m_curNear == null)
+        if (m_activeMatch < 0)
             return;
         
-        StringEntry se = m_curNear.str;
-        String s = se.getTranslation();
-        int pos = editor.getCaretPosition();
-        editor.select(pos, pos);
-        editor.replaceSelection(s);
+        NearString near = (NearString) m_curEntry.getStrEntry().
+                getNearListTranslated().get(m_activeMatch);
+        doInsertText(near.str.getTranslation());
     }
     
+    /** inserts text at the cursor position */
+    private void doInsertText(String text)
+    {
+        int pos = editor.getCaretPosition();
+        editor.select(pos, pos);
+        editor.replaceSelection(text);
+    }
     
     /** replace entire edit area with active fuzzy match */
     public void doRecycleTrans()
@@ -764,11 +765,12 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         if (!m_projectLoaded)
             return;
         
-        if (m_curNear == null)
+        if (m_activeMatch < 0)
             return;
         
-        StringEntry se = m_curNear.str;
-        doReplaceEditText(se.getTranslation());
+        NearString near = (NearString) m_curEntry.getStrEntry().
+                getNearListTranslated().get(m_activeMatch);
+        doReplaceEditText(near.str.getTranslation());
     }
     
     /** replaces the entire edit area with a given text */
@@ -1317,13 +1319,23 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     /**
      * Displays fuzzy matching info if it's available.
      */
-    public void updateFuzzyInfo()
+    private void updateFuzzyInfo()
     {
         if (!m_projectLoaded)
             return;
         
         StringEntry curEntry = m_curEntry.getStrEntry();
         matches.setMatches(curEntry.getNearListTranslated());
+        m_activeMatch = 0;
+    }
+    
+    /**
+     * Activate match by number.
+     */
+    private void activateMatch(int activeMatch)
+    {
+        m_activeMatch = activeMatch;
+        matches.setActiveMatch(activeMatch);
     }
     
     /**
@@ -1885,10 +1897,10 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     
     private SourceTextEntry		m_curEntry;
     
-    private String	m_activeFile;
-    private String	m_activeProj;
-    public int m_curEntryNum;
-    private NearString m_curNear;
+    private String  m_activeFile;
+    private String  m_activeProj;
+    public int      m_curEntryNum;
+    private int     m_activeMatch;
     
     private ProjectFrame	m_projWin;
     public ProjectFrame getProjectFrame()
@@ -2475,27 +2487,27 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     
     private void editSelectFuzzy5MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy5MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy5MenuItemActionPerformed
-        matches.setActiveMatch(4);
+        activateMatch(4);
     }//GEN-LAST:event_editSelectFuzzy5MenuItemActionPerformed
     
     private void editSelectFuzzy4MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy4MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy4MenuItemActionPerformed
-        matches.setActiveMatch(3);
+        activateMatch(3);
     }//GEN-LAST:event_editSelectFuzzy4MenuItemActionPerformed
     
     private void editSelectFuzzy3MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy3MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy3MenuItemActionPerformed
-        matches.setActiveMatch(2);
+        activateMatch(2);
     }//GEN-LAST:event_editSelectFuzzy3MenuItemActionPerformed
     
     private void editSelectFuzzy2MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy2MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy2MenuItemActionPerformed
-        matches.setActiveMatch(1);
+        activateMatch(1);
     }//GEN-LAST:event_editSelectFuzzy2MenuItemActionPerformed
     
     private void editSelectFuzzy1MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy1MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy1MenuItemActionPerformed
-        matches.setActiveMatch(0);
+        activateMatch(0);
     }//GEN-LAST:event_editSelectFuzzy1MenuItemActionPerformed
     
     private void editFindInProjectMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editFindInProjectMenuItemActionPerformed

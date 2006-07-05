@@ -55,7 +55,7 @@ public class StaticUtils
 	/**
 	 * Configuration directory on Windows platforms
 	 */
-	private final static String WINDOWS_CONFIG_DIR = "\\OmegaT\\";              // NOI18N
+	private final static String WINDOWS_CONFIG_DIR = "\\OmegaT\\1.6\\";              // NOI18N
 
 	/**
 	 * Configuration directory on UNIX platforms

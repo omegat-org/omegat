@@ -43,10 +43,22 @@ public final class Styles
     public final static AttributeSet PLAIN;
     /** Bold text. */
     public final static MutableAttributeSet BOLD;
-    /** Bold text on green background. */
+    /** Bold text on light green background. */
     public final static MutableAttributeSet GREEN;
     /** Disabled, i.e grayed out text. */
     public final static MutableAttributeSet DISABLED;
+    
+    /** 
+     * Extra text in fuzzy match that is not there in source segment.
+     * Blue by default.
+     */
+    public final static MutableAttributeSet TEXT_EXTRA;
+    /** 
+     * Borderline text of fuzzy match that is there in source segment, but 
+     * on the left or right there's some text that is missing from source segment. 
+     * Green by default.
+     */
+    public final static MutableAttributeSet TEXT_BORDER;
     
     static
     {
@@ -58,6 +70,10 @@ public final class Styles
         StyleConstants.setBackground(GREEN, new Color(192, 255, 192));
         DISABLED = new SimpleAttributeSet();
         StyleConstants.setForeground(DISABLED, javax.swing.UIManager.getDefaults().getColor("Label.disabledForeground"));
+        TEXT_EXTRA = new SimpleAttributeSet();
+        StyleConstants.setForeground(TEXT_EXTRA, Color.blue);
+        TEXT_BORDER = new SimpleAttributeSet();
+        StyleConstants.setForeground(TEXT_BORDER, Color.green);
     }
     
 }

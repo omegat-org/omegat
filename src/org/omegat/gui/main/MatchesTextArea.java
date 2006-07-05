@@ -26,7 +26,9 @@ package org.omegat.gui.main;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.omegat.core.StringData;
 import org.omegat.core.matching.NearString;
+import org.omegat.util.Token;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -93,6 +95,22 @@ public class MatchesTextArea extends javax.swing.JTextPane
         
         int start = ((Integer)delimiters.get(activeMatch)).intValue();
         int end = ((Integer)delimiters.get(activeMatch+1)).intValue();
+        
+        NearString match = (NearString) matches.get(activeMatch);
+        List tokens = match.str.getSrcTokenList();
+        byte[] attributes = match.attr;
+        for (int i=0; i<tokens.size(); i++)
+        {
+            Token token = (Token) tokens.get(i);
+            int tokstart = start + 3 + token.getOffset();
+            int tokend = start + 3 + token.getOffset() + token.getLength();
+            select(tokstart, tokend);
+            if ((attributes[i] & StringData.UNIQ) != 0)
+                setCharacterAttributes(Styles.TEXT_EXTRA, false);
+            else if ((attributes[i] & StringData.PAIR) != 0)
+                setCharacterAttributes(Styles.TEXT_BORDER, false);
+        }
+        
         select(start, end);
         setCharacterAttributes(Styles.BOLD, false);
         setCaretPosition(start);

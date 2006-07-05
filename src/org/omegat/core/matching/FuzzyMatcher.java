@@ -142,7 +142,7 @@ public class FuzzyMatcher
                 if( similarity<OConsts.FUZZY_MATCH_THRESHOLD )
                     continue;
                 
-                byte similarityData[] = buildSimilarityData(strTokens, candTokens);
+                byte[] similarityData = buildSimilarityData(strTokens, candTokens);
                 strEntry.addNearString(candEntry, similarity, similarityData, null);
                 
                 similarityData = buildSimilarityData(candTokens, strTokens);
@@ -199,7 +199,7 @@ public class FuzzyMatcher
                 if( similarity<OConsts.FUZZY_MATCH_THRESHOLD )
                     continue;
                 
-                byte similarityData[] = buildSimilarityData(candTokens, strTokens);
+                byte[] similarityData = buildSimilarityData(candTokens, strTokens);
                 candEntry.addNearString(strEntry, similarity, similarityData, tmxname);
             }
         }

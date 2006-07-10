@@ -31,8 +31,8 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 import javax.xml.parsers.SAXParser;
-import org.omegat.filters3.Text;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -88,15 +88,15 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
 
     /** Current entry that collects normal text. */
     Entry entry;
-    /** Current entry that collects out-of-turn text. */
-    Entry outofturnEntry = null;
+    /** Stack of entries that collect out-of-turn text. */
+    Stack outofturnEntries = new Stack();
     /** Current entry that collects the text surrounded by intact tag. */
     Entry intacttagEntry = null;
     
     /** Now we collect out-of-turn entry. */
     private boolean collectingOutOfTurnText()
     {
-        return outofturnEntry!=null;
+        return !outofturnEntries.empty();
     }
 
     /** Now we collect intact text. */
@@ -115,7 +115,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         if (collectingIntactText())
             return intacttagEntry;
         else if (collectingOutOfTurnText())
-            return outofturnEntry;
+            return (Entry) outofturnEntries.peek();
         else
             return entry;
     }
@@ -215,6 +215,10 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         if (sourceFolder==null)
         {
             String res = inFile.getAbsoluteFile().getParent();
+            try
+            {
+                res = inFile.getCanonicalFile().getParent();
+            } catch (IOException ex) { }
             if (res.charAt(res.length()-1)!=File.separatorChar)
                 res = res + File.separatorChar;
             sourceFolder = res;
@@ -222,13 +226,32 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         return sourceFolder;
     }
     
+    /** Converts System ID URL (starting from file:) into file name. */
+    private String systemId2fileName(String systemId)
+    {
+        if (systemId.startsWith(START_FILESCHEMA))
+        {
+            // Unix: file:/home/smth
+            // Windows: file:///D:\home\smth
+            systemId = systemId.replace(File.separatorChar, '/');
+            systemId = systemId.substring(START_FILESCHEMA.length());
+            while (systemId.startsWith("/"))
+                systemId = systemId.substring(1);
+            
+            if (systemId.charAt(0)>='A' && systemId.charAt(0)<='Z' && systemId.charAt(1)==':')
+                systemId = systemId.replace('/', File.separatorChar); // Windows
+            else
+                systemId = '/' + systemId; // Unix
+        }
+        return systemId;
+    }
+    
     /** Makes System ID not an absolute, but a relative one. */
     private String localizeSystemId(String systemId)
     {
         if (systemId.startsWith(START_FILESCHEMA))
         {
-            systemId = systemId.substring("file:///".length());                 // NOI18N
-            systemId = systemId.replace('/', File.separatorChar);
+            systemId = systemId2fileName(systemId);
             if (systemId.startsWith(getSourceFolder()))
                 systemId = systemId.substring(getSourceFolder().length());
         }
@@ -240,8 +263,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     {
         if (systemId.startsWith(START_FILESCHEMA))
         {
-            systemId = systemId.substring("file:///".length());                 // NOI18N
-            systemId = systemId.replace('/', File.separatorChar);
+            systemId = systemId2fileName(systemId);
             if (systemId.startsWith(getSourceFolder()))
                 return true;
         }
@@ -303,8 +325,9 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     public InputSource doResolve(String publicId, String systemId) throws SAXException, TranslationException, IOException
     {
         if (dtd!=null && 
-                StaticUtils.equal(publicId, dtd.getPublicId()) &&
-                StaticUtils.equal(systemId, dtd.getSystemId()))
+                StaticUtils.equal(publicId, dtd.getPublicId()) && 
+                ( StaticUtils.equal(systemId, dtd.getSystemId()) ||
+                  StaticUtils.equal(localizeSystemId(systemId), dtd.getSystemId()) ))
         {
             inDTD = true;
         }
@@ -314,6 +337,13 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
                  systemId.startsWith(START_FILESCHEMA)) )
         {
             InputSource entity = new InputSource(systemId);
+            // checking if f
+            if (systemId.startsWith(START_FILESCHEMA))
+            {
+                if (!new File(systemId2fileName(systemId)).exists())
+                    entity = null;
+            }
+            
             if (entity!=null)
             {
                 if (!inDTD && outFile!=null && isInSource(systemId) && extEntity==null)
@@ -391,16 +421,18 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         if (intacttag!=null)
             intacttagEntry = intacttag.getIntactContents();
         
-        for (int i=0; i<xmltag.getAttributes().size(); i++) 
+        if (!collectingIntactText())
         {
-            Attribute attr = xmltag.getAttributes().get(i);
-            if (dialect.getTranslatableAttributes().contains(attr.getName()) || 
-                    dialect.getTranslatableTagAttributes().containsPair(tag, attr.getName()))
+            for (int i=0; i<xmltag.getAttributes().size(); i++) 
             {
-                attr.setValue(translator.translate(attr.getValue()));
+                Attribute attr = xmltag.getAttributes().get(i);
+                if (dialect.getTranslatableAttributes().contains(attr.getName()) || 
+                        dialect.getTranslatableTagAttributes().containsPair(tag, attr.getName()))
+                {
+                    attr.setValue(translator.translate(attr.getValue()));
+                }
             }
         }
-
     }
     private void queueEndTag(String tag)
     {
@@ -428,18 +460,20 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     /** Is called when the tag is started. */
     private void start(String tag, Attributes attributes) throws SAXException, TranslationException
     {
-        if (!collectingOutOfTurnText() && isOutOfTurnTag(tag))
+        if (isOutOfTurnTag(tag))
         {
             XMLOutOfTurnTag ootTag = new XMLOutOfTurnTag(tag, attributes);
-            outofturnEntry = ootTag.getEntry();
-            entry.add(ootTag);
+            currEntry().add(ootTag);
+            outofturnEntries.push(ootTag.getEntry());
         }
-        if (!collectingOutOfTurnText() && isParagraphTag(tag))
+        else
         {
-            translateAndFlush();
+            if (!collectingOutOfTurnText() && isParagraphTag(tag))
+            {
+                translateAndFlush();
+            }
+            queueTag(tag, attributes);
         }
-        
-        queueTag(tag, attributes);
     }
     
     /** Is called when the tag is ended. */
@@ -448,16 +482,17 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         if (collectingIntactText() && isIntactTag(tag))
         {
             intacttagEntry = null;
-            return;
-        }
-        
-        queueEndTag(tag);
-        if (!collectingOutOfTurnText() && isParagraphTag(tag))
-            translateAndFlush();
-        if (collectingOutOfTurnText() && isOutOfTurnTag(tag))
+        } 
+        else if (collectingOutOfTurnText() && isOutOfTurnTag(tag))
         {
             translateButDontFlash();
-            outofturnEntry = null;
+            outofturnEntries.pop();
+        }
+        else
+        {
+            queueEndTag(tag);
+            if (isParagraphTag(tag) && !collectingOutOfTurnText())
+                translateAndFlush();
         }
     }
 

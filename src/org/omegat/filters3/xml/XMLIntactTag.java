@@ -38,10 +38,10 @@ import org.omegat.util.StaticUtils;
  */
 public class XMLIntactTag extends Tag
 {
-    private Entry intactContents = new Entry();
+    private XMLIntactEntry intactContents = new XMLIntactEntry();
     
     /** Returns the entry to collect text surrounded by intact tag. */
-    public Entry getIntactContents()
+    public XMLIntactEntry getIntactContents()
     {
         return intactContents;
     }

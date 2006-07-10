@@ -189,21 +189,27 @@ public class ProjectFileStorage
             String res = absolutePath;
             File abs = new File(absolutePath).getCanonicalFile();
             File root = new File(m_root).getCanonicalFile();
+            String prefix = new String();
             for (int i=0; i<2; i++)
             {
                 if (abs.getPath().startsWith(root.getPath()))
                 {
-                    res = abs.getPath().substring(root.getPath().length());
+                    res = prefix + abs.getPath().substring(root.getPath().length());
                     if (res.startsWith(File.separator))
                         res = res.substring(1);
                     break;
                 }
+                else
+                {
+                    root = root.getParentFile();
+                    prefix+= File.separator + "..";                             // NOI18N
+                }
             }
-            return res;
+            return res.replace(File.separatorChar, '/');
         }
         catch (IOException e)
         {
-            return absolutePath;
+            return absolutePath.replace(File.separatorChar, '/');
         }
 	}
 

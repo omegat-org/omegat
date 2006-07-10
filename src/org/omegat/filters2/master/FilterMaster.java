@@ -54,8 +54,9 @@ import org.omegat.filters2.po.PoFilter;
 import org.omegat.filters2.text.TextFilter;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 import org.omegat.filters2.text.ini.INIFilter;
-import org.omegat.filters2.xml.openoffice.OOFilter;
 import org.omegat.filters3.xml.docbook.DocBookFilter;
+import org.omegat.filters3.xml.opendoc.OpenDocFilter;
+import org.omegat.filters3.xml.opendoc.OpenDocXMLFilter;
 import org.omegat.filters3.xml.xhtml.XHTMLFilter;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
@@ -609,9 +610,11 @@ public class FilterMaster
         filters.addFilter(new OneFilter(new ResourceBundleFilter(), false));
         filters.addFilter(new OneFilter(new XHTMLFilter(), false));
         filters.addFilter(new OneFilter(new HTMLFilter2(), false));
-        filters.addFilter(new OneFilter(new OOFilter(), false));
+        //filters.addFilter(new OneFilter(new OOFilter(), false));
         filters.addFilter(new OneFilter(new INIFilter(), false));
         filters.addFilter(new OneFilter(new DocBookFilter(), false));
+        filters.addFilter(new OneFilter(new OpenDocFilter(), false));
+        filters.addFilter(new OneFilter(new OpenDocXMLFilter(), false));
     }
     
     /**

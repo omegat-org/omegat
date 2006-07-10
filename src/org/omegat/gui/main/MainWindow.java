@@ -25,6 +25,11 @@
 
 package org.omegat.gui.main;
 
+import com.vlsolutions.swing.docking.DockingConstants;
+import com.vlsolutions.swing.docking.DockingDesktop;
+import com.vlsolutions.swing.docking.event.DockableStateWillChangeEvent;
+import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
+import com.vlsolutions.swing.docking.ui.DockingUISettings;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -41,8 +46,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -51,28 +54,17 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.BadLocationException;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
-import net.infonode.docking.DockingWindow;
-import net.infonode.docking.DockingWindowAdapter;
-import net.infonode.docking.RootWindow;
-import net.infonode.docking.SplitWindow;
-import net.infonode.docking.View;
-import net.infonode.docking.properties.RootWindowProperties;
-import net.infonode.docking.properties.TabWindowProperties;
-import net.infonode.docking.properties.WindowTabProperties;
-import net.infonode.docking.properties.WindowTabStateProperties;
-import net.infonode.docking.theme.LookAndFeelDockingTheme;
-import net.infonode.docking.util.DockingUtil;
-import net.infonode.docking.util.ViewMap;
 import net.roydesign.mac.MRJAdapter;
 
 import org.omegat.core.ProjectProperties;
@@ -115,7 +107,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     {
         initComponents();
         createMainComponents();
-        initDockingPane();
+        initDocking();
         additionalUIInit();
         oldInit();
         loadInstantStart();
@@ -123,91 +115,110 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
     private void createMainComponents()
     {
-        editorScroller = new JScrollPane();
-        editorScroller.setMinimumSize(new Dimension(100, 100));
-        
         editor = new EditorTextArea(this);
-        
         matches = new MatchesTextArea();
-        matchesScroller = new JScrollPane(matches);
-        
         glossary = new GlossaryTextArea();
-        glossaryScroller = new JScrollPane(glossary);
+        
+        String fontName = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_NAME, OConsts.TF_FONT_DEFAULT);
+        int fontSize = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_SIZE, OConsts.TF_FONT_SIZE_DEFAULT);
+        
+        m_font = new Font(fontName, Font.PLAIN, fontSize);
+        editor.setFont(m_font);
+        matches.setFont(m_font);
+        glossary.setFont(m_font);
     }
     
-    private void initDockingPane()
+    private ImageIcon getIcon(String iconName)
     {
-        views = new ViewMap();
+        return new ImageIcon( getClass().getResource(
+                "/org/omegat/gui/resources/" +                                  // NOI18N
+                iconName) );        
+    }
+    
+    private void initDocking()
+    {
+        DockingUISettings.getInstance().installUI();
+        UIManager.put("DockViewTitleBar.minimizeButtonText", OStrings.getString("DOCKING_HINT_MINIMIZE"));  // NOI18N
+        UIManager.put("DockViewTitleBar.maximizeButtonText", OStrings.getString("DOCKING_HINT_MAXIMIZE"));  // NOI18N
+        UIManager.put("DockViewTitleBar.restoreButtonText", OStrings.getString("DOCKING_HINT_RESTORE"));    // NOI18N
+        UIManager.put("DockViewTitleBar.attachButtonText", OStrings.getString("DOCKING_HINT_DOCK"));        // NOI18N
+        UIManager.put("DockViewTitleBar.floatButtonText", OStrings.getString("DOCKING_HINT_UNDOCK"));       // NOI18N
+        UIManager.put("DockViewTitleBar.closeButtonText", null);                                            // NOI18N
+        UIManager.put("DockTabbedPane.minimizeButtonText", OStrings.getString("DOCKING_HINT_MINIMIZE"));    // NOI18N
+        UIManager.put("DockTabbedPane.maximizeButtonText", OStrings.getString("DOCKING_HINT_MAXIMIZE"));    // NOI18N
+        UIManager.put("DockTabbedPane.restoreButtonText", OStrings.getString("DOCKING_HINT_RESTORE"));      // NOI18N
+        UIManager.put("DockTabbedPane.floatButtonText", OStrings.getString("DOCKING_HINT_UNDOCK"));         // NOI18N
+        UIManager.put("DockTabbedPane.closeButtonText", null);
         
-        editorView = new View(null, null, editorScroller);
-        editorView.getViewProperties().setAlwaysShowTitle(false);
-        views.addView(0, editorView);
+        UIManager.put("DockViewTitleBar.titleFont", new JLabel().getFont());    // NOI18N
         
-        matchesView = new View(
-                OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches"), 
-                null, matchesScroller);
-        views.addView(1, matchesView);
+        UIManager.put("DockViewTitleBar.isCloseButtonDisplayed", Boolean.FALSE);// NOI18N
         
-        glossaryView = new View(
-                OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Glossary"), 
-                null, glossaryScroller);
-        views.addView(2, glossaryView);
+        UIManager.put("DockViewTitleBar.hide", getIcon("minimize.gif"));                    // NOI18N
+        UIManager.put("DockViewTitleBar.hide.rollover", getIcon("minimize.rollover.gif"));  // NOI18N
+        UIManager.put("DockViewTitleBar.hide.pressed", getIcon("minimize.pressed.gif"));    // NOI18N
+        UIManager.put("DockViewTitleBar.maximize", getIcon("maximize.gif"));                // NOI18N
+        UIManager.put("DockViewTitleBar.maximize.rollover", getIcon("maximize.rollover.gif"));// NOI18N
+        UIManager.put("DockViewTitleBar.maximize.pressed", getIcon("maximize.pressed.gif"));// NOI18N
+        UIManager.put("DockViewTitleBar.restore", getIcon("restore.gif"));                  // NOI18N
+        UIManager.put("DockViewTitleBar.restore.rollover", getIcon("restore.rollover.gif"));// NOI18N
+        UIManager.put("DockViewTitleBar.restore.pressed", getIcon("restore.pressed.gif"));  // NOI18N
+        UIManager.put("DockViewTitleBar.dock", getIcon("restore.gif"));                     // NOI18N
+        UIManager.put("DockViewTitleBar.dock.rollover", getIcon("restore.rollover.gif"));   // NOI18N
+        UIManager.put("DockViewTitleBar.dock.pressed", getIcon("restore.pressed.gif"));     // NOI18N
+        UIManager.put("DockViewTitleBar.float", getIcon("undock.gif"));                     // NOI18N
+        UIManager.put("DockViewTitleBar.float.rollover", getIcon("undock.rollover.gif"));   // NOI18N
+        UIManager.put("DockViewTitleBar.float.pressed", getIcon("undock.pressed.gif"));     // NOI18N
+        UIManager.put("DockViewTitleBar.attach", getIcon("dock.gif"));                      // NOI18N
+        UIManager.put("DockViewTitleBar.attach.rollover", getIcon("dock.rollover.gif"));    // NOI18N
+        UIManager.put("DockViewTitleBar.attach.pressed", getIcon("dock.pressed.gif"));      // NOI18N
         
-        rootWindow = new RootWindow(views);
-        rootWindow.getWindowBar(net.infonode.util.Direction.DOWN).setEnabled(true);
-        rootWindow.setWindow(
-                new SplitWindow(true, 0.6f, 
-                    editorView, 
-                    new SplitWindow(false, 0.7f, 
-                        matchesView, 
-                        glossaryView)));
-        rootWindow.addListener(new DockingWindowAdapter()
+        UIManager.put("DockViewTitleBar.menu.close", null);                     // NOI18N
+        UIManager.put("DockViewTitleBar.menu.hide", null);                      // NOI18N
+        UIManager.put("DockViewTitleBar.menu.maximize", null);                  // NOI18N
+        UIManager.put("DockViewTitleBar.menu.restore", null);                   // NOI18N
+        UIManager.put("DockViewTitleBar.menu.dock", null);                      // NOI18N
+        UIManager.put("DockViewTitleBar.menu.float", null);                     // NOI18N
+        UIManager.put("DockViewTitleBar.menu.attach", null);                    // NOI18N
+        UIManager.put("DockTabbedPane.close", null);                            // NOI18N
+        UIManager.put("DockTabbedPane.close.rollover", null);                   // NOI18N
+        UIManager.put("DockTabbedPane.close.pressed", null);                    // NOI18N
+        UIManager.put("DockTabbedPane.menu.close", null);                       // NOI18N
+        UIManager.put("DockTabbedPane.menu.hide", null);                        // NOI18N
+        UIManager.put("DockTabbedPane.menu.maximize", null);                    // NOI18N
+        UIManager.put("DockTabbedPane.menu.float", null);                       // NOI18N
+        UIManager.put("DockTabbedPane.menu.closeAll", null);                    // NOI18N
+        UIManager.put("DockTabbedPane.menu.closeAllOther", null);               // NOI18N
+        UIManager.put("DockingDesktop.closeActionAccelerator", null);           // NOI18N
+        UIManager.put("DockingDesktop.maximizeActionAccelerator", null);        // NOI18N
+        UIManager.put("DockingDesktop.dockActionAccelerator", null);            // NOI18N
+        UIManager.put("DockingDesktop.floatActionAccelerator", null);           // NOI18N
+
+        UIManager.put("DragControler.detachCursor", getIcon("undock.gif").getImage());  // NOI18N
+        
+        editorScroller = new DockableScrollPane("EDITOR", null, editor, false); // NOI18N
+        editorScroller.setMinimumSize(new Dimension(100, 100));
+        matchesScroller = new DockableScrollPane("MATCHES",                     // NOI18N
+                OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches"), matches, true);
+        glossaryScroller = new DockableScrollPane("GLOSSARY",                   // NOI18N
+                OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Glossary"), glossary, true);
+        
+        desktop = new DockingDesktop();
+        desktop.addDockableStateWillChangeListener(new DockableStateWillChangeListener()
         {
-            public void windowClosed(DockingWindow dockingWindow)
+            public void dockableStateWillChange(DockableStateWillChangeEvent event)
             {
-                if (matchesView.getRootWindow()==null)
-                    DockingUtil.addWindow(matchesView, rootWindow);
-                if (glossaryView.getRootWindow()==null)
-                    DockingUtil.addWindow(glossaryView, rootWindow);
+                if (event.getFutureState().isClosed())
+                    event.cancel();
             }
         });
+        desktop.addDockable(editorScroller);
+        desktop.split(editorScroller, matchesScroller, DockingConstants.SPLIT_RIGHT);
+        desktop.split(matchesScroller, glossaryScroller, DockingConstants.SPLIT_BOTTOM);
+        desktop.setDockableWidth(editorScroller, 0.6);
+        desktop.setDockableHeight(matchesScroller, 0.7);
         
-        RootWindowProperties rwp = rootWindow.getRootWindowProperties();
-        rwp.addSuperObject(new LookAndFeelDockingTheme().getRootWindowProperties());
-        rwp.setRecursiveTabsEnabled(false);
-        rwp.getDockingWindowProperties().setMaximizeEnabled(false);
-        
-        TabWindowProperties twp = rwp.getTabWindowProperties();
-        twp.getCloseButtonProperties().setVisible(false);
-        twp.getDockButtonProperties().setToolTipText(OStrings.getString("DOCKING_HINT_DOCK"));
-        twp.getMinimizeButtonProperties().setToolTipText(OStrings.getString("DOCKING_HINT_MINIMIZE"));
-        twp.getRestoreButtonProperties().setToolTipText(OStrings.getString("DOCKING_HINT_RESTORE"));
-        twp.getUndockButtonProperties().setToolTipText(OStrings.getString("DOCKING_HINT_UNDOCK"));
-        
-        WindowTabStateProperties wtsp = rwp.getWindowBarProperties().
-                getTabWindowProperties().getTabProperties().getNormalButtonProperties();
-        wtsp.getCloseButtonProperties().setVisible(false);
-        wtsp.getDockButtonProperties().setToolTipText(OStrings.getString("DOCKING_HINT_DOCK"));
-        wtsp.getMinimizeButtonProperties().setToolTipText(OStrings.getString("DOCKING_HINT_MINIMIZE"));
-        wtsp.getRestoreButtonProperties().setToolTipText(OStrings.getString("DOCKING_HINT_RESTORE"));
-        wtsp.getUndockButtonProperties().setToolTipText(OStrings.getString("DOCKING_HINT_UNDOCK"));
-        
-        rwp.getTabWindowProperties().getTabbedPanelProperties().getTabAreaComponentsProperties().setStretchEnabled(true);
-        rwp.getTabWindowProperties().getTabbedPanelProperties().getContentPanelProperties().getComponentProperties().setBorder(null);
-        
-        WindowTabStateProperties noButtons = new WindowTabStateProperties();
-        noButtons.getCloseButtonProperties().setVisible(false);
-        noButtons.getDockButtonProperties().setVisible(false);
-        noButtons.getMinimizeButtonProperties().setVisible(false);
-        noButtons.getRestoreButtonProperties().setVisible(false);
-        noButtons.getUndockButtonProperties().setVisible(false);
-        
-        WindowTabProperties wtp = rwp.getTabWindowProperties().getTabProperties();
-        wtp.getFocusedButtonProperties().addSuperObject(noButtons);
-        wtp.getHighlightedButtonProperties().addSuperObject(noButtons);
-        wtp.getNormalButtonProperties().addSuperObject(noButtons);
-        
-        getContentPane().add(rootWindow, BorderLayout.CENTER);
+        getContentPane().add(desktop, BorderLayout.CENTER);
     }
     
     /**
@@ -220,7 +231,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         loadWindowIcon();
         m_projWin = new ProjectFrame(this);
 
-        statusLabel.setText(" ");                                               // NOI18N
+        statusLabel.setText(new String()+' ');
         
         loadScreenLayout();
         updateCheckboxesOnStart();
@@ -339,16 +350,12 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         String s = OStrings.OMEGAT_VERSION;
         if( m_projectLoaded )
         {
+            s += " :: " + m_activeProj;                                         // NOI18N
             try
             {
-                String file = m_activeFile.substring(
-                        CommandThread.core.sourceRoot().length());
-                s += " :: " + m_activeProj + " :: " + file;							// NOI18N
-            }
-            catch( Exception e )
-            {
-                // nothing...
-            }
+                String file = m_activeFile.substring(CommandThread.core.sourceRoot().length());
+                editorScroller.setName(file);
+            } catch( Exception e ) { }
         }
         setTitle(s);
     }
@@ -360,28 +367,12 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     {
         m_curEntryNum = -1;
         m_activeMatch = -1;
-        m_activeProj = "";														// NOI18N
-        m_activeFile = "";														// NOI18N
+        m_activeProj = new String();
+        m_activeFile = new String();
         
         ////////////////////////////////
         
         enableEvents(0);
-        
-        String fontName = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_NAME, OConsts.TF_FONT_DEFAULT);
-        String fontSize = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_SIZE, OConsts.TF_FONT_SIZE_DEFAULT);
-        int fontSizeInt = 12;
-        try
-        {
-            fontSizeInt = Integer.parseInt(fontSize);
-        }
-        catch (NumberFormatException nfe)
-        {
-        }
-        
-        m_font = new Font(fontName, Font.PLAIN, fontSizeInt);
-        editor.setFont(m_font);
-        matches.setFont(m_font);
-        glossary.setFont(m_font);
         
         // check this only once as it can be changed only at compile time
         // should be OK, but localization might have messed it up
@@ -459,11 +450,10 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             byte[] bytes = StaticUtils.uudecode(layout);
             try
             {
-                ObjectInputStream in = new ObjectInputStream(
-                        new ByteArrayInputStream(bytes));
-                rootWindow.read(in, false);
+                ByteArrayInputStream in = new ByteArrayInputStream(bytes);
+                desktop.readXML(in);
                 in.close();
-            } catch (IOException e) { }
+            } catch (Exception e) { }
         }
         
         layoutInitialized = true;
@@ -489,6 +479,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             instantArticlePane.setEditable(false);
             instantArticlePane.setPage("file:///"+filepath);                    // NOI18N
             editorScroller.setViewportView(instantArticlePane);
+            editorScroller.setName(OStrings.getString("DOCKING_INSTANT_START_TITLE"));
         }
         catch (IOException e)
         {
@@ -511,14 +502,17 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         
         try
         {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            ObjectOutputStream out = new ObjectOutputStream(bos);
-            rootWindow.write(out, false);
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            desktop.writeXML(out);
             out.close();
-            byte[] buf = bos.toByteArray();
+            byte[] buf = out.toByteArray();
             String layout = StaticUtils.uuencode(buf);
             Preferences.setPreference(Preferences.MAINWINDOW_LAYOUT, layout);
-        } catch (IOException e) { }
+        } 
+        catch (Exception e) 
+        {
+            Preferences.setPreference(Preferences.MAINWINDOW_LAYOUT, new String());
+        }
     }
     
     ///////////////////////////////////////////////////////////////
@@ -1208,7 +1202,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             public void run()
             {
                 m_activeProj = CommandThread.core.getProjectProperties().getProjectName();
-                m_activeFile = "";														// NOI18N
+                m_activeFile = new String();
                 m_curEntryNum = 0;
                 loadDocument();
                 m_projectLoaded = true;
@@ -1255,8 +1249,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     /* updates status label */
     public void setMessageText(String str)
     {
-        if( str.equals("") )													// NOI18N
-            str = " ";															// NOI18N
+        if( str.length()==0 )
+            str = new String()+' ';
         statusLabel.setText(str);
     }
     
@@ -1276,7 +1270,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         m_docReady = false;
         
         // clear old text
-        editor.setText("");													// NOI18N
+        editor.setText(new String());
         
         m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
         
@@ -1380,7 +1374,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         String new_translation;
         if (start == end)
         {
-            new_translation =  "";                                              // NOI18N
+            new_translation =  new String();
             display_string = m_curEntry.getSrcText();
         }
         else
@@ -1423,14 +1417,14 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             if  (Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC))
                 m_curEntry.setTranslation(new_translation);
             else
-                m_curEntry.setTranslation("");                                  // NOI18N
+                m_curEntry.setTranslation(new String());
         }
         else
             m_curEntry.setTranslation(new_translation);
         
         int localCur = m_curEntryNum - m_xlFirstEntry;
         DocumentSegment docSeg = m_docSegList[localCur];
-        docSeg.length = display_string.length() + "\n\n".length();							// NOI18N
+        docSeg.length = display_string.length() + "\n\n".length();              // NOI18N
         
         // update the length parameters of all changed segments
         // update strings in display
@@ -1656,7 +1650,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                     OStrings.TF_NUM_GLOSSARY, obj));
         }
         else
-            setMessageText("");													// NOI18N
+            setMessageText(new String());                                       // NOI18N
 
         int offsetPrev = 0;
         int localNum = m_curEntryNum-m_xlFirstEntry;
@@ -2653,18 +2647,14 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private javax.swing.JCheckBoxMenuItem viewFileListCheckBoxMenuItem;
     // End of variables declaration//GEN-END:variables
 
-    private RootWindow rootWindow;
-    private ViewMap views;
-    
-    private View editorView;
-    private JScrollPane editorScroller;
+    private DockingDesktop desktop;
+
+    private DockableScrollPane editorScroller;
     private EditorTextArea editor;
     
-    private View matchesView;
-    private JScrollPane matchesScroller;
+    private DockableScrollPane matchesScroller;
     private MatchesTextArea matches;
     
-    private View glossaryView;
-    private JScrollPane glossaryScroller;
+    private DockableScrollPane glossaryScroller;
     private GlossaryTextArea glossary;
 }

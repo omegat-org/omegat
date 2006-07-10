@@ -87,7 +87,7 @@ public class OConsts
     public static final String TF_SRC_FONT_NAME		= "source_font";				// NOI18N
     public static final String TF_SRC_FONT_SIZE		= "source_font_size";			// NOI18N
     public static final String TF_FONT_DEFAULT		= "Dialog";					    // NOI18N
-    public static final String TF_FONT_SIZE_DEFAULT	= "12";							// NOI18N
+    public static final int TF_FONT_SIZE_DEFAULT	= 12;
     
     public static final String XB_COMMENT_SHORTCUT	= "!comment";					// NOI18N
     

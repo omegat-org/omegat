@@ -1326,7 +1326,7 @@ public class CommandThread extends Thread
             str.setTranslation(" ");                                            // NOI18N
             
             ProjectFileData file = new ProjectFileData();
-            file.name = OStrings.getString("TF_INTRO_EMPTYPROJECT_FILENAME");
+            file.name = sourceRoot() + OStrings.getString("TF_INTRO_EMPTYPROJECT_FILENAME");
             file.firstEntry = 0;
             file.lastEntry = 0;
             

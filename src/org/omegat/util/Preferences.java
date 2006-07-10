@@ -64,7 +64,7 @@ public class Preferences
     public static final String MAINWINDOW_HEIGHT = "screen_height";             // NOI18N
     public static final String MAINWINDOW_X      = "screen_x";                  // NOI18N
     public static final String MAINWINDOW_Y      = "screen_y";                  // NOI18N
-    public static final String MAINWINDOW_LAYOUT = "dock_layout";               // NOI18N
+    public static final String MAINWINDOW_LAYOUT = "docking_layout";            // NOI18N
     
     // Search window size and position    
     public static final String SEARCHWINDOW_WIDTH  = "search_window_width";     // NOI18N
@@ -173,6 +173,28 @@ public class Preferences
             setPreference(key, defaultValue);
         }
         return val;
+    }
+    
+    /**
+     * Returns the integer value of some preference out of OmegaT's 
+     * preferences file, if it exists.
+     * <p>
+     * If the key is not found, returns the default value provided
+     * and sets the preference to the default value.
+     *
+     * @param key           name of the key to look up, usually OConsts.PREF_...
+     * @param defaultValue  default value for the key
+     * @return              preference value as an integer
+     */
+    public static int getPreferenceDefault(String key, int defaultValue)
+    {
+        String val = getPreferenceDefault(key, Integer.toString(defaultValue));
+        int res = defaultValue;
+        try
+        {
+            res = Integer.parseInt(val);
+        } catch (NumberFormatException nfe) { }
+        return res;
     }
     
     /**

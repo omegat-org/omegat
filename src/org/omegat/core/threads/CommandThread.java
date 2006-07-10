@@ -26,12 +26,12 @@ package org.omegat.core.threads;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,7 +46,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
-import java.util.SortedSet;
 import java.util.TreeMap;
 
 import org.omegat.core.LegacyTM;
@@ -70,8 +69,6 @@ import org.omegat.util.ProjectFileData;
 import org.omegat.util.RequestPacket;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.TMXReader;
-import org.omegat.util.Token;
-
 
 /**
  * CommandThread is a thread to asynchronously do the stuff
@@ -1220,7 +1217,7 @@ public class CommandThread extends Thread
             
             // now dump file based word counts to disk
             String fn = m_config.getProjectInternal() + OConsts.STATS_FILENAME;
-            FileWriter ofp = new FileWriter(fn);
+            Writer ofp = new OutputStreamWriter(new FileOutputStream(fn), OConsts.UTF8);
             ofp.write(OStrings.getString("CT_STATS_Project_Statistics") +
                     "\n\n");                                                    // NOI18N
 

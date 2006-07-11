@@ -143,12 +143,12 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         UIManager.put("DockViewTitleBar.restoreButtonText", OStrings.getString("DOCKING_HINT_RESTORE"));    // NOI18N
         UIManager.put("DockViewTitleBar.attachButtonText", OStrings.getString("DOCKING_HINT_DOCK"));        // NOI18N
         UIManager.put("DockViewTitleBar.floatButtonText", OStrings.getString("DOCKING_HINT_UNDOCK"));       // NOI18N
-        UIManager.put("DockViewTitleBar.closeButtonText", null);                                            // NOI18N
+        UIManager.put("DockViewTitleBar.closeButtonText", new String());                                            // NOI18N
         UIManager.put("DockTabbedPane.minimizeButtonText", OStrings.getString("DOCKING_HINT_MINIMIZE"));    // NOI18N
         UIManager.put("DockTabbedPane.maximizeButtonText", OStrings.getString("DOCKING_HINT_MAXIMIZE"));    // NOI18N
         UIManager.put("DockTabbedPane.restoreButtonText", OStrings.getString("DOCKING_HINT_RESTORE"));      // NOI18N
         UIManager.put("DockTabbedPane.floatButtonText", OStrings.getString("DOCKING_HINT_UNDOCK"));         // NOI18N
-        UIManager.put("DockTabbedPane.closeButtonText", null);
+        UIManager.put("DockTabbedPane.closeButtonText", new String());
         
         UIManager.put("DockViewTitleBar.titleFont", new JLabel().getFont());    // NOI18N
         
@@ -173,22 +173,24 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         UIManager.put("DockViewTitleBar.attach.rollover", getIcon("dock.rollover.gif"));    // NOI18N
         UIManager.put("DockViewTitleBar.attach.pressed", getIcon("dock.pressed.gif"));      // NOI18N
         
-        UIManager.put("DockViewTitleBar.menu.close", null);                     // NOI18N
-        UIManager.put("DockViewTitleBar.menu.hide", null);                      // NOI18N
-        UIManager.put("DockViewTitleBar.menu.maximize", null);                  // NOI18N
-        UIManager.put("DockViewTitleBar.menu.restore", null);                   // NOI18N
-        UIManager.put("DockViewTitleBar.menu.dock", null);                      // NOI18N
-        UIManager.put("DockViewTitleBar.menu.float", null);                     // NOI18N
-        UIManager.put("DockViewTitleBar.menu.attach", null);                    // NOI18N
-        UIManager.put("DockTabbedPane.close", null);                            // NOI18N
-        UIManager.put("DockTabbedPane.close.rollover", null);                   // NOI18N
-        UIManager.put("DockTabbedPane.close.pressed", null);                    // NOI18N
-        UIManager.put("DockTabbedPane.menu.close", null);                       // NOI18N
-        UIManager.put("DockTabbedPane.menu.hide", null);                        // NOI18N
-        UIManager.put("DockTabbedPane.menu.maximize", null);                    // NOI18N
-        UIManager.put("DockTabbedPane.menu.float", null);                       // NOI18N
-        UIManager.put("DockTabbedPane.menu.closeAll", null);                    // NOI18N
-        UIManager.put("DockTabbedPane.menu.closeAllOther", null);               // NOI18N
+        UIManager.put("DockViewTitleBar.menu.hide", getIcon("minimize.gif"));                      // NOI18N
+        UIManager.put("DockViewTitleBar.menu.maximize", getIcon("maximize.gif"));                  // NOI18N
+        UIManager.put("DockViewTitleBar.menu.restore", getIcon("restore.gif"));                   // NOI18N
+        UIManager.put("DockViewTitleBar.menu.dock", getIcon("restore.gif"));                      // NOI18N
+        UIManager.put("DockViewTitleBar.menu.float", getIcon("undock.gif"));                     // NOI18N
+        UIManager.put("DockViewTitleBar.menu.attach", getIcon("dock.gif"));                    // NOI18N
+        
+        UIManager.put("DockViewTitleBar.menu.close", getIcon("empty.gif"));                     // NOI18N
+        UIManager.put("DockTabbedPane.close", getIcon("empty.gif"));                            // NOI18N
+        UIManager.put("DockTabbedPane.close.rollover", getIcon("empty.gif"));                   // NOI18N
+        UIManager.put("DockTabbedPane.close.pressed", getIcon("empty.gif"));                    // NOI18N
+        UIManager.put("DockTabbedPane.menu.close", getIcon("empty.gif"));                       // NOI18N
+        UIManager.put("DockTabbedPane.menu.hide", getIcon("empty.gif"));                        // NOI18N
+        UIManager.put("DockTabbedPane.menu.maximize", getIcon("empty.gif"));                    // NOI18N
+        UIManager.put("DockTabbedPane.menu.float", getIcon("empty.gif"));                       // NOI18N
+        UIManager.put("DockTabbedPane.menu.closeAll", getIcon("empty.gif"));                    // NOI18N
+        UIManager.put("DockTabbedPane.menu.closeAllOther", getIcon("empty.gif"));               // NOI18N
+        
         UIManager.put("DockingDesktop.closeActionAccelerator", null);           // NOI18N
         UIManager.put("DockingDesktop.maximizeActionAccelerator", null);        // NOI18N
         UIManager.put("DockingDesktop.dockActionAccelerator", null);            // NOI18N
@@ -196,7 +198,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
         UIManager.put("DragControler.detachCursor", getIcon("undock.gif").getImage());  // NOI18N
         
-        editorScroller = new DockableScrollPane("EDITOR", null, editor, false); // NOI18N
+        editorScroller = new DockableScrollPane("EDITOR", " ", editor, false);  // NOI18N
         editorScroller.setMinimumSize(new Dimension(100, 100));
         matchesScroller = new DockableScrollPane("MATCHES",                     // NOI18N
                 OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches"), matches, true);

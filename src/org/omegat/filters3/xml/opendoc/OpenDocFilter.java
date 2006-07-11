@@ -105,7 +105,10 @@ public class OpenDocFilter extends AbstractFilter
         while (zipcontents.hasMoreElements())
         {
             ZipEntry zipentry = (ZipEntry) zipcontents.nextElement();
-            if (TRANSLATABLE.contains(zipentry.getName()))
+            String shortname = zipentry.getName();
+            if (shortname.lastIndexOf('/')>=0)
+                shortname = shortname.substring(shortname.lastIndexOf('/')+1);
+            if (TRANSLATABLE.contains(shortname))
             {
                 File tmpin = tmp();
                 LFileCopy.copy(zipfile.getInputStream(zipentry), tmpin);

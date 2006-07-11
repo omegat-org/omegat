@@ -49,10 +49,13 @@ import org.omegat.util.LFileCopy;
  */
 public class OpenDocFilter extends AbstractFilter
 {
-    private static final String CONTENT_XML = "content.xml";                    // NOI18N
-    private static final String STYLES_XML = "styles.xml";                      // NOI18N
     private static final HashSet TRANSLATABLE = new HashSet(
-            Arrays.asList(new String[] { CONTENT_XML, STYLES_XML }));
+            Arrays.asList(new String[] 
+    { 
+        "content.xml",                                                          // NOI18N
+        "styles.xml",                                                           // NOI18N
+        "meta.xml",                                                             // NOI18N
+    }));
     
     /** Creates a new instance of OpenDocFilter */
     public OpenDocFilter()

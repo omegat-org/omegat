@@ -39,17 +39,38 @@ public class OpenDocDialect extends DefaultXMLDialect
     /** Creates a new instance of OpenDocDialect */
     public OpenDocDialect()
     {
-        defineParagraphTag("text:p");
+        defineParagraphTags(new String[]
+        {
+            "text:p",                                                           // NOI18N
+            "dc:title",                                                         // NOI18N
+            "dc:description",                                                   // NOI18N
+            "dc:subject",                                                       // NOI18N
+            "meta:keyword",                                                     // NOI18N
+            "dc:language",                                                      // NOI18N
+            "meta:user-defined",                                                // NOI18N
+        });
         defineOutOfTurnTags(new String[]
         {
-            "text:note",
+            "text:note",                                                        // NOI18N
         });
         defineIntactTags(new String[]
         {
-            "text:note-citation",
-            "office:master-styles",
-            "text:change",
-            "text:tracked-changes",
+            "text:note-citation",                                               // NOI18N
+            "office:master-styles",                                             // NOI18N
+            "text:change",                                                      // NOI18N
+            "text:tracked-changes",                                             // NOI18N
+            
+            "office:scripts",                                                   // NOI18N
+            "office:font-face-decls",                                           // NOI18N
+            "office:automatic-styles",                                          // NOI18N
+            
+            "meta:generator",                                                   // NOI18N
+            "meta:initial-creator",                                             // NOI18N
+            "meta:creation-date",                                               // NOI18N
+            "dc:creator",                                                       // NOI18N
+            "dc:date",                                                          // NOI18N
+            "meta:editing-cycles",                                              // NOI18N
+            "meta:editing-duration",                                            // NOI18N
         });
     }
 }

@@ -92,6 +92,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     Stack outofturnEntries = new Stack();
     /** Current entry that collects the text surrounded by intact tag. */
     Entry intacttagEntry = null;
+    /** Current entry that collects the text surrounded by intact tag. */
+    String intacttagName = null;
     
     /** Now we collect out-of-turn entry. */
     private boolean collectingOutOfTurnText()
@@ -408,10 +410,11 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     {
         Tag xmltag;
         XMLIntactTag intacttag = null;
-        if (isIntactTag(tag))
+        if (!collectingIntactText() && isIntactTag(tag))
         {
             intacttag = new XMLIntactTag(tag, attributes);
             xmltag = intacttag;
+            intacttagName = tag;
         }
         else
             xmltag = new XMLTag(tag, Tag.TYPE_BEGIN, attributes);
@@ -468,7 +471,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         }
         else
         {
-            if (!collectingOutOfTurnText() && isParagraphTag(tag))
+            if (isParagraphTag(tag) && !collectingOutOfTurnText() && !collectingIntactText())
             {
                 translateAndFlush();
             }
@@ -479,9 +482,10 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     /** Is called when the tag is ended. */
     private void end(String tag) throws SAXException, TranslationException
     {
-        if (collectingIntactText() && isIntactTag(tag))
+        if (collectingIntactText() && isIntactTag(tag) && tag.equals(intacttagName))
         {
             intacttagEntry = null;
+            intacttagName = null;
         } 
         else if (collectingOutOfTurnText() && isOutOfTurnTag(tag))
         {
@@ -491,7 +495,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         else
         {
             queueEndTag(tag);
-            if (isParagraphTag(tag) && !collectingOutOfTurnText())
+            if (isParagraphTag(tag) && !collectingOutOfTurnText() && !collectingIntactText())
                 translateAndFlush();
         }
     }

@@ -136,6 +136,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
             parser.setProperty("http://xml.org/sax/properties/lexical-handler", handler);     // NOI18N
             parser.setProperty("http://xml.org/sax/properties/declaration-handler", handler); // NOI18N
             parser.parse(source, handler);
+            inReader.close();
             return handler.getProcessedFiles();
         }
         catch(ParserConfigurationException e)

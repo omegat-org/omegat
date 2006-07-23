@@ -69,7 +69,8 @@ public final class Styles
         StyleConstants.setBold(GREEN, true);
         StyleConstants.setBackground(GREEN, new Color(192, 255, 192));
         DISABLED = new SimpleAttributeSet();
-        StyleConstants.setForeground(DISABLED, javax.swing.UIManager.getDefaults().getColor("Label.disabledForeground"));
+        StyleConstants.setForeground(DISABLED, 
+                javax.swing.UIManager.getDefaults().getColor("Label.disabledForeground"));  // NOI18N
         TEXT_EXTRA = new SimpleAttributeSet();
         StyleConstants.setForeground(TEXT_EXTRA, Color.blue);
         TEXT_BORDER = new SimpleAttributeSet();

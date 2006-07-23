@@ -100,6 +100,12 @@ public class DefaultXMLDialect implements XMLDialect
         for (int i=0; i<attributes.length; i++)
             defineTranslatableTagAttribute(tag, attributes[i]);
     }
+    /** Defines translatable attribute of several tags. */
+    public void defineTranslatableTagsAttribute(String[] tags, String attribute)
+    {
+        for (int i=0; i<tags.length; i++)
+            defineTranslatableTagAttribute(tags[i], attribute);
+    }
     
     /** The set of defined paragraph tags. */
     private Set translatableAttributes = new HashSet();

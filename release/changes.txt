@@ -37,10 +37,13 @@ fixes a few regressions of RC11.
   - [OpenDocument] Support for inserted OpenDocument files
     http://sourceforge.net/support/tracker.php?aid=1218002
 
+  - [OpenDocument] Localize Bookmarks and Index Entries
+    http://sourceforge.net/support/tracker.php?aid=1527251
+
   - [OpenDocument] Upgrade 1.6.0 RC7-R11 TMXs to new filter 
     http://sourceforge.net/support/tracker.php?aid=1523768
 
-  - [OpenDocument] Upgrade 1.4.x TMXs to new filter 
+  - Upgrade 1.4.x TMXs to new tag numbering and restore pair tags
     http://sourceforge.net/support/tracker.php?aid=1523773
 
   - Upgrade TMXs from paragraph to sentence segmentation

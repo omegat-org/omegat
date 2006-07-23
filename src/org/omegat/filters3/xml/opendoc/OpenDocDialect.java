@@ -24,9 +24,7 @@
 
 package org.omegat.filters3.xml.opendoc;
 
-import java.io.StringReader;
 import org.omegat.filters3.xml.DefaultXMLDialect;
-import org.xml.sax.InputSource;
 
 /**
  * Dialect of OpenDocument files.
@@ -72,5 +70,12 @@ public class OpenDocDialect extends DefaultXMLDialect
             "meta:editing-cycles",                                              // NOI18N
             "meta:editing-duration",                                            // NOI18N
         });
+        defineTranslatableTagAttributes(
+                "text:alphabetical-index-mark",                                 // NOI18N
+                new String[] { "text:string-value", "text:key1", "text:key2" });// NOI18N
+        defineTranslatableTagsAttribute(
+                new String[] {"text:bookmark", "text-bookmark-start", "text:bookmark-end"}, // NOI18N
+                "text:name");                                                   // NOI18N
+        defineTranslatableTagAttribute("text:bookmark-ref", "text:ref-name");   // NOI18N
     }
 }

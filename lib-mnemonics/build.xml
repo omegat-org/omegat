@@ -66,10 +66,4 @@
     nbproject/build-impl.xml file. 
 
     -->
-    
-    <target name="-post-jar">
-        <mkdir dir="../dist"/>
-        <copy file="${dist.jar}" todir="../dist/"/>
-    </target>
-    
 </project>

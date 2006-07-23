@@ -93,6 +93,21 @@ public class PatternConsts
     public static final Pattern OMEGAT_TAG = Pattern.compile(
             "<\\/?[a-zA-Z]+[0-9]+\\/?>");                                       // NOI18N
     
+    /**
+     * Pattern that matches omegat-specific tags 
+     * (with leading &lt; and trailing &gt; in any place of a string)
+     * and decompiles them into pieces:
+     * <ol>
+     * <li>leading /, if any
+     * <li>tag shortcut
+     * <li>tag number
+     * <li>trailing /, if any
+     * </ol>
+     * Call <code>matcher.group(n)</code> to get each piece.
+     */
+    public static final Pattern OMEGAT_TAG_DECOMPILE = Pattern.compile(
+            "<(\\/?)([a-zA-Z]+)([0-9]+)(\\/?)>");                               // NOI18N
+    
     /** Pattern that detects space-only regular expressions. */
     public static final Pattern SPACY_REGEX = Pattern.compile(
             "((\\s|\\\\n|\\\\t|\\\\s)(\\+|\\*)?)+");                            // NOI18N

@@ -359,7 +359,7 @@ public class CommandThread extends Thread
         out.println("<tmx version=\"1.1\">");                                   // NOI18N
         out.println("  <header");                                               // NOI18N
         out.println("    creationtool=\"OmegaT\"");                             // NOI18N
-        out.println("    creationtoolversion=\"1.6\"");                         // NOI18N
+        out.println("    creationtoolversion=\""+TMXReader.CTV_OMEGAT_1_6_RC12+"\"");  // NOI18N
         out.println("    segtype=\"" + segmenting + "\"");                      // NOI18N
         out.println("    o-tmf=\"OmegaT TMX\"");                                // NOI18N
         out.println("    adminlang=\"EN-US\"");                                 // NOI18N

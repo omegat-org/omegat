@@ -27,14 +27,20 @@ package org.omegat.util;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import org.omegat.core.segmentation.Segmenter;
+import org.omegat.core.threads.CommandThread;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
-import org.omegat.filters2.xml.XMLReader;
+import org.omegat.util.xml.XMLReader;
 
 /**
  * Class that load up TMX (Translation Memory) files (any version).
@@ -57,6 +63,7 @@ import org.omegat.filters2.xml.XMLReader;
  *
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
+ * @author Maxym Mykhalchuk
  */
 public class TMXReader extends org.xml.sax.helpers.DefaultHandler 
 {
@@ -71,8 +78,8 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                      Language targetLanguage) 
     {
         m_encoding = encoding;
-        m_srcList = new ArrayList(512);
-        m_tarList = new ArrayList(512);
+        m_srcList = new ArrayList();
+        m_tarList = new ArrayList();
         this.sourceLanguage = sourceLanguage.getLanguage();
         this.targetLanguage = targetLanguage.getLanguage();
     }
@@ -98,10 +105,8 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     /** Returns an original text of a source segment #n */
     public String getSourceSegment(int n) 
     {
-        if (n < 0)
-            return "";                              // NOI18N
-        else if (n >= m_srcList.size())
-            return "";                              // NOI18N
+        if (n < 0 || n >= numSegments())
+            return new String();
         else
             return (String) m_srcList.get(n);
     }
@@ -109,15 +114,13 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     /** Returns a translation of a target segment #n */
     public String getTargetSegment(int n) 
     {
-        if (n < 0)
-            return "";                              // NOI18N
-        else if (n >= m_tarList.size())
-            return "";                              // NOI18N
+        if (n < 0 || n >= numSegments())
+            return new String();
         else
             return (String) m_tarList.get(n);
     }
     
-    private String creationtool;
+    private String creationtool = null;
     /** Creation Tool attribute value of OmegaT TMXs: "OmegaT" */
     public static final String CT_OMEGAT = "OmegaT";                            // NOI18N
     /** Returns Creation Tool attribute of TMX file */
@@ -126,22 +129,379 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         return creationtool;
     }
     
-    private String creationtoolversion;
-    /** Creation Tool Version attribute value of OmegaT TMXs: "1" for 1.4.5 and earlier */
+    private String creationtoolversion = null;
+    /** "1" for OmegaT 1.4.5 and earlier (Creation Tool Version attribute). */
     public static final String CTV_OMEGAT_1 = "1";                              // NOI18N
-    /** Creation Tool Version attribute value of OmegaT TMXs: "1.6" for 1.6 */
-    public static final String CTV_OMEGAT_1_6 = "1.6";                          // NOI18N
+    /** "1.6" for OmegaT 1.6 RC3 to 1.6.0 RC11 (Creation Tool Version attribute). Pretty misleading. */
+    public static final String CTV_OMEGAT_1_6_RC3_RC11 = "1.6";                 // NOI18N
+    /** "1.6.0" for OmegaT 1.6 RC12 and up (Creation Tool Version attribute). */
+    public static final String CTV_OMEGAT_1_6_RC12 = "1.6 RC12";                      // NOI18N
     /** Returns Creation Tool attribute of TMX file */
     public String getCreationToolVersion() 
     {
         return creationtoolversion;
     }
     
+    ///////////////////////////////////////////////////////////////////////////
+    // TMX Upgrades between OmegaT versions
+    
+    boolean upgradeCheckComplete = false;
+    boolean upgrade16RC7_11 = false;
+    boolean upgrade14X = false;
+    boolean upgradeSentSeg = false;
+    
+    /** 
+     * Checks whether any compatibility upgrades are necessary for 
+     * OmegaT-generated TMX files.
+     */
+    private void checkForUpgrades()
+    {
+        if (!upgradeCheckComplete)
+        {
+            if (getCreationTool()==null || getCreationToolVersion()==null)
+                return; // we can't check
+            
+            if (CT_OMEGAT.equals(getCreationTool()))
+            {
+                upgrade14X = getCreationToolVersion().compareTo(CTV_OMEGAT_1) <= 0;
+                upgrade16RC7_11 = getCreationToolVersion().compareTo(CTV_OMEGAT_1_6_RC12) < 0;
+                upgradeSentSeg = SEG_PARAGRAPH.equals(getSegType()) && 
+                        CommandThread.core.getProjectProperties().isSentenceSegmentingEnabled();
+            }
+            upgradeCheckComplete = true;
+        }
+    }
+    
+    /** 
+     * Do we need to upgrade old TMX files with paragraph segmentation
+     * to new sentence segmentation.
+     * The upgrade simply breaks source and target segments into sentences,
+     * and if there's the same number of segments in target as in source,
+     * several segments are added to memory.
+     */
+    private boolean isUpgradeSentSeg()
+    {
+        checkForUpgrades();
+        return upgradeSentSeg;
+    }
+    
+    /** 
+     * Do we need to upgrade old TMX files from OmegaT 1.4.x series.
+     * The upgrade cannot be done absolutely reliably, but there're some
+     * heuristics there... For example,
+     * the old form can be "Bold&lt;/b1&gt; text here.", and the new form
+     * should be "&lt;b0&gt;Bold&lt;/b0&gt; text here.".
+     */
+    private boolean isUpgrade14X()
+    {
+        checkForUpgrades();
+        return upgrade14X;
+    }
+    
+    /** 
+     * Do we need to upgrade TMX files from 1.6.0 RC7-RC11 to the new XML 
+     * filter for OpenDocument files.
+     * The upgrade means replacing, e.g. &lt;brX&gt; for &lt;tX&gt; 
+     * (for OpenDocument tag &lt;text:line-break ...&gt;).
+     */
+    private boolean isUpgrade16RC7_11()
+    {
+        checkForUpgrades();
+        return upgrade16RC7_11;
+    }
+    
+    /** 
+     * Upgrades segment if required.
+     */
+    private String upgradeSegment(String segment)
+    {
+        if (isUpgrade14X()) // if that's 1.4.x, doing both upgrades...
+        {
+            segment = upgradeNewOpenDocumentFilter(segment);
+            segment = upgradeOldTagsNumberingAndPairs(segment);
+        }
+        else if (isUpgrade16RC7_11())
+        {
+            segment = upgradeNewOpenDocumentFilter(segment);
+        }
+        return segment;
+    }
+    
+    /** 
+     * Patterns and replacements to upgrade long old OO tags to new OpenDocument filter. 
+     * These are OO for sure, HTML filter did not output such fancy tags, except for "br".
+     */
+    private static final Object[] TAGS_LONG = new Object[]
+    {
+        Pattern.compile("<(/?)is(\\d+)>"),   "<$1t$2>",    // defineFormatTag("text:alphabetical-index-mark-start", "is");            // NOI18N
+        Pattern.compile("<(/?)ie(\\d+)>"),   "<$1t$2>",    // defineFormatTag("text:alphabetical-index-mark-end", "ie");              // NOI18N
+        Pattern.compile("<(/?)ud(\\d+)>"),   "<$1t$2>",    // defineFormatTag("text:user-defined", "ud");                             // NOI18N
+        Pattern.compile("<(/?)seq(\\d+)>"),  "<$1t$2>",    // defineFormatTag("text:sequence", "seq");                                // NOI18N
+        
+        Pattern.compile("<(/?)bk(\\d+/?)>"), "<$1t$2>",    // defineFormatTag("text:bookmark/", "bk/");                               // NOI18N
+        Pattern.compile("<(/?)bs(\\d+/?)>"), "<$1t$2>",    // defineFormatTag("text:bookmark-start/", "bs/");                         // NOI18N
+        Pattern.compile("<(/?)be(\\d+/?)>"), "<$1t$2>",    // defineFormatTag("text:bookmark-end/", "be/");                           // NOI18N
+        Pattern.compile("<(/?)bf(\\d+)>"),   "<$1t$2>",    // defineFormatTag("text:bookmark-ref", "bf");                             // NOI18N
+        Pattern.compile("<(/?)rm(\\d+/?)>"), "<$1t$2>",    // defineFormatTag("text:reference-mark/", "rm/");                         // NOI18N
+        Pattern.compile("<(/?)rs(\\d+/?)>"), "<$1t$2>",    // defineFormatTag("text:reference-mark-start/", "rs/");                   // NOI18N
+        Pattern.compile("<(/?)re(\\d+/?)>"), "<$1t$2>",    // defineFormatTag("text:reference-mark-end/", "re/");                     // NOI18N
+        Pattern.compile("<(/?)rf(\\d+)>"),   "<$1t$2>",    // defineFormatTag("text:reference-ref", "rf");                            // NOI18N
+        
+        Pattern.compile("<(/?)tc(\\d+/?)>"), "<$1t$2>",    // defineFormatTag("text:change/", "tc/");                                 // NOI18N
+        Pattern.compile("<(/?)ts(\\d+)>"),   "<$1t$2>",    // defineFormatTag("text:change-start", "ts");                             // NOI18N
+        Pattern.compile("<(/?)te(\\d+)>"),   "<$1t$2>",    // defineFormatTag("text:change-end", "te");                               // NOI18N
+
+        Pattern.compile("<(/?)nc(\\d+)>"),   "<$1t$2>",    // defineFormatTag("text:note-citation", "nc");                            // NOI18N
+        Pattern.compile("<(/?)nb(\\d+)>"),   "<$1t$2>",    // defineFormatTag("text:note-body", "nb");                                // NOI18N
+        
+        Pattern.compile("<(/?)di(\\d+)>"),   "<$1d$2>",    // defineFormatTag("draw:image", "di");                                    // NOI18N
+        Pattern.compile("<(/?)df(\\d+)>"),   "<$1d$2>",    // defineFormatTag("draw:frame", "df");                                    // NOI18N
+        Pattern.compile("<(/?)do(\\d+)>"),   "<$1d$2>",    // defineFormatTag("draw:object-ole", "do");                               // NOI18N
+        
+        Pattern.compile("<(/?)dc(\\d+)>"),   "<$1d$2>",    // defineFormatTag("dc:creator", "dc");                                    // NOI18N
+        Pattern.compile("<(/?)dd(\\d+)>"),   "<$1d$2>",    // defineFormatTag("dc:date", "dd");                                       // NOI18N
+    };
+    /** 
+     * Patterns and replacements to upgrade short old OO tags and "br" to new OpenDocument filter. 
+     * These are upgraded only if long ones were, otherwise it could be HTML tags.
+     */
+    private static final Object[] TAGS_SHORT = new Object[]
+    {
+        Pattern.compile("<(/?)a(\\d+)>"),    "<$1t$2>",    // defineFormatTag("text:a", "a");	                                        // NOI18N
+        Pattern.compile("<(/?)f(\\d+)>"),    "<$1t$2>",    // defineFormatTag("text:span", "f");                                      // NOI18N
+        Pattern.compile("<(/?)s(\\d+/?)>"),  "<$1t$2>",    // defineFormatTag("text:s/", "s/");                                       // NOI18N
+        Pattern.compile("<(/?)i(\\d+/?)>"),  "<$1t$2>",    // defineFormatTag("text:alphabetical-index-mark/", "i/");                 // NOI18N
+        Pattern.compile("<(/?)br(\\d+/?)>"), "<$1t$2>",    // defineFormatTag("text:line-break/", "br/");                             // NOI18N
+        Pattern.compile("<(/?)n(\\d+)>"),    "<$1t$2>",    // defineFormatTag("text:note", "n");                                      // NOI18N
+    };
+
+    /** Internal class for OmegaT tag */
+    class Tag
+    {
+        /** is this an ending tag, e.g. &lt;/b4&gt; */
+        public boolean end;
+        /** name of the tag, e.g. "b" for &lt;/b4&gt; */
+        public String name;
+        /** number of the tag, e.g. 4 for &lt;/b4&gt; */
+        public int num;
+        /** is this a standalone tag, e.g. &lt;br4/&gt; */
+        public boolean alone;
+        
+        /** Creates a tag */
+        public Tag(boolean end, String name, int num, boolean alone)
+        {
+            this.end = end;
+            this.name = name;
+            this.num = num;
+            this.alone = alone;
+        }
+        
+        /** String form. */
+        public String toString()
+        {
+            return
+                    "<" +                                                       // NOI18N
+                    (end ? "/" : "") +                                          // NOI18N
+                    name +
+                    num +
+                    (alone ? "/" : "") +                                        // NOI18N
+                    ">";                                                        // NOI18N
+        }
+        
+        /** 
+         * String form of a paired tag: if this is a start tag,
+         * returns corresponding end tag, if this is an end tag,
+         * returns corresponding start tag, if this is a standalone tag,
+         * returns the same as {@link #toString()}.
+         */
+        public String toStringPaired()
+        {
+            if (alone)
+                return toString();
+            else
+                return
+                        "<" +                                                   // NOI18N
+                        (end ? "" : "/") +                                      // NOI18N
+                        name +
+                        num +
+                        ">";                                                   // NOI18N
+        }
+    }
+    
+    /** 
+     * Upgrades segments of OmegaT's 1.4.x series to new tag numbering,
+     * and to new paired tag policy.
+     */
+    private String upgradeOldTagsNumberingAndPairs(String segment)
+    {
+        if (!PatternConsts.OMEGAT_TAG.matcher(segment).find())
+            return segment;
+        
+        StringBuffer buf = new StringBuffer(segment);
+        Matcher matcher = PatternConsts.OMEGAT_TAG_DECOMPILE.matcher(segment);
+        
+        int tagstart = matcher.start();
+        int tagend = matcher.end();
+        boolean end = matcher.group(1).length()>0;
+        String name = matcher.group(2);
+        int num = Integer.parseInt(matcher.group(3));
+        boolean alone = matcher.group(4).length()>0;
+
+        if (num==1)
+            num = 0;
+        
+        Tag tag = new Tag(end, name, num, alone);
+
+        ArrayList unclosedTags = new ArrayList();
+        ArrayList unopenedTags = new ArrayList();
+        
+        HashMap unclosedTagsNames = new HashMap();
+        HashMap unopenedTagsNames = new HashMap();
+        if (end)
+        {
+            unopenedTags.add(tag);
+            unopenedTagsNames.put(name, tag);
+        }
+        else if (!alone)
+        {
+            unclosedTags.add(tag);
+            unclosedTagsNames.put(name, tag);
+        }
+        int maxnum = num;
+        
+        buf.replace(tagstart, tagend, tag.toString());
+        
+        while (matcher.find())
+        {
+            tagstart = matcher.start();
+            tagend = matcher.end();
+            end = matcher.group(1).length()>0;
+            name = matcher.group(2);
+            alone = matcher.group(4).length()>0;
+            tag = new Tag(end, name, num, alone);
+
+            if (end && unclosedTagsNames.containsKey(name))
+            {
+                Tag starttag = (Tag) unclosedTagsNames.get(name);
+                num = starttag.num;
+                unclosedTagsNames.remove(name);
+                unclosedTags.remove(starttag);
+            }
+            else
+            {
+                num = maxnum + 1;
+                if (end)
+                {
+                    unopenedTags.add(tag);
+                    unopenedTagsNames.put(name, tag);
+                }
+                else if (!alone)
+                {
+                    unclosedTags.add(tag);
+                    unclosedTagsNames.put(name, tag);
+                }
+            }
+            if (maxnum < num)
+                maxnum = num;
+
+            buf.replace(tagstart, tagend, tag.toString());
+        }
+        
+        StringBuffer res = new StringBuffer();
+        for (int i = unopenedTags.size()-1; i>0; i--)
+        {
+            tag = (Tag) unopenedTags.get(i);
+            res.append(tag.toStringPaired());
+        }
+        res.append(buf);
+        for (int i = unclosedTags.size()-1; i>0; i--)
+        {
+            tag = (Tag) unclosedTags.get(i);
+            res.append(tag.toStringPaired());
+        }
+        
+        return res.toString();
+    }
+
+    /** 
+     * Upgrades segments of OmegaT's before 1.6.0 RC11 to new 
+     * OpenDocument filter appearing in RC12.
+     */
+    private String upgradeNewOpenDocumentFilter(String segment)
+    {
+        if (!PatternConsts.OMEGAT_TAG.matcher(segment).find())
+            return segment;
+        
+        String res = segment;
+        boolean foundLongOOTag = false;
+        for (int i = 0; i < TAGS_LONG.length/2; i++)
+        {
+            Pattern pattern = (Pattern) TAGS_LONG[2*i];
+            String replace = (String) TAGS_LONG[2*i+1];
+            Matcher matcher = pattern.matcher(res);
+            if (matcher.find())
+            {
+                foundLongOOTag = true;
+                res = matcher.replaceAll(replace);
+            }
+        }
+        if (foundLongOOTag)
+        {
+            for (int i = 0; i < TAGS_SHORT.length/2; i++)
+            {
+                Pattern pattern = (Pattern) TAGS_LONG[2*i];
+                String replace = (String) TAGS_LONG[2*i+1];
+                Matcher matcher = pattern.matcher(res);
+                res = matcher.replaceAll(replace);
+            }
+        }
+        return res;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+
+    /** Collects a segment from TMX. Performs upgrades of a segment if needed. */
+    private void storeSegment(String source, String translation)
+    {
+        source = upgradeSegment(source);
+        translation = upgradeSegment(translation);
+        
+        if (isUpgradeSentSeg())
+        {
+            List srcSegments = Segmenter.segment(source, null, null);
+            List tarSegments = Segmenter.segment(translation, null, null);
+
+            int n = srcSegments.size();
+            if( n==tarSegments.size() )
+            {
+                for(int j=0; j<n; j++)
+                {
+                    String srcseg = (String)srcSegments.get(j);
+                    String tarseg = (String)tarSegments.get(j);
+                    m_srcList.add(srcseg);
+                    m_tarList.add(tarseg);
+                }
+            }
+            else
+            {
+                m_srcList.add(source);
+                m_tarList.add(translation);
+            }
+        }
+        else
+        {
+            m_srcList.add(source);
+            m_tarList.add(translation);
+        }
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////
+    
     private String segtype;
     /** Segment Type attribute value: "paragraph" */
-    public static final String SEG_PARAGRAPH = "paragraph";                    // NOI18N
+    public static final String SEG_PARAGRAPH = "paragraph";                     // NOI18N
     /** Segment Type attribute value: "sentence" */
-    public static final String SEG_SENTENCE = "sentence";                      // NOI18N
+    public static final String SEG_SENTENCE = "sentence";                       // NOI18N
     /** Returns Segment Type attribute of TMX file */
     public String getSegType() 
     {
@@ -196,7 +556,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             
             // log the fact that parsing is done
             StaticUtils.log(OStrings.getString("TMXR_INFO_READING_COMPLETE"));
-            StaticUtils.log("");                                                // NOI18N
+            StaticUtils.log(new String());
         }
         catch (Exception exception) 
         {
@@ -394,8 +754,20 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         {
             StaticUtils.log(MessageFormat.format(
                 OStrings.getString("TMXR_WARNING_INCORRECT_SOURCE_LANG"),
-                new Object[]{sourceLanguage}));
+                new Object[]{tmxSourceLanguage, sourceLanguage}));
         }
+        
+        // give a warning that TMX file will be upgraded from 1.6.0 RC7-RC11
+        if (isUpgrade16RC7_11())
+            StaticUtils.log(OStrings.getString("TMXR_WARNING_UPGRADE_RC7_11"));
+        
+        // give a warning that TMX file will be upgraded from 1.4.x
+        if (isUpgrade14X())
+            StaticUtils.log(OStrings.getString("TMXR_WARNING_UPGRADE_14X"));
+        
+        // give a warning that TMX file will be upgraded to sentence segmentation
+        if (isUpgradeSentSeg())
+            StaticUtils.log(OStrings.getString("TMXR_WARNING_UPGRADE_SENTSEG"));
     }
 
     /**
@@ -491,12 +863,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             sourceNotFound = true;
             return;
         }
-        
-        // store the source segment and sub segments
-        m_srcList.add(source.text.toString());
-        for (int i = 0; i < source.subSegments.size(); i++)
-            m_srcList.add(source.subSegments.get(i).toString());
-        
+
         // determine what target TUV to use
         // if none was found, create a temporary, empty one, for ease of coding
         if (target == null)
@@ -504,19 +871,19 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         if (target == null)
             target = new TUV();
             
-        // store the target segment
-        m_tarList.add(target.text.toString());
+        // store the source & target segment
+        storeSegment(source.text.toString(), target.text.toString());
         
-        // store the target sub segments
+        // store the source & target sub segments
         // create exactly as many target subs as there are source subs
         // "pad" with empty strings, or ommit segments if necessary
         // NOTE: this is not the most ideal solution, but the best possible
         for (int i = 0; i < source.subSegments.size(); i++) 
         {
+            String starget = new String();
             if (i < target.subSegments.size())
-                m_tarList.add(target.subSegments.get(i).toString());
-            else
-                m_tarList.add("");                                              // NOI18N
+                starget = target.subSegments.get(i).toString();
+            storeSegment(source.subSegments.get(i).toString(), starget);
         }
     }
 

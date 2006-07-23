@@ -1,37 +1,79 @@
 ----------------------------------------------------------------------
- OmegaT 1.6.0 RC11 Changes
+ OmegaT 1.6.0 RC12 Changes
 ----------------------------------------------------------------------
 
-1.6.0 RC10 vs. 1.4.5.04
+1.6.0 RC12 vs. 1.4.5.04
  > 30 Enchancements
  > 50 Bugfixes
 
 ----------------------------------------------------------------------
-1.8.0 (or 2.0) will deliver important updates in fuzzy matching,
-solving multiple issues like CPU usage, memory footprint, 
-match percentages and ordering.
+PLANNING:
 ----------------------------------------------------------------------
-Next release in 1.6.x series will be dedicated to terminology management: 
-- more glossary formats (TBX for one), 
+Next release will be dedicated to terminology management: 
+- more glossary formats (at least TBX and CVS), 
 - editing glossary from within OmegaT,
-- support for online dictionaries (wiktionaryZ for one)
+- support for online dictionaries (at least WiktionaryZ)
+
+2.0 release will deliver important updates in fuzzy matching, 
+solving multiple issues like CPU usage, memory footprint, 
+match similarity and match ordering.
+
 ----------------------------------------------------------------------
-1.6.0 is a fat release. Here's the TODO:
+TODO for 1.6.0:
+----------------------------------------------------------------------
 - Copyright issues free Users Guide
 - XLIFF filter, if ready
-- Rewrite of the OpenDocument filter to new XML architecture
-  - **TODO** OpenDocument: Writer headers and footers not honored
-    http://sourceforge.net/support/tracker.php?aid=1111950
-  - **TODO** OpenDocument: Footnote markers break sentences
-    http://sourceforge.net/support/tracker.php?aid=1461154
-  - **TODO** OpenDocument: Tracked changes add unnecessary data
-    http://sourceforge.net/support/tracker.php?aid=1461178
 - Make segmentation and filter settings project-specific
   - **TODO** Save segmentation rules for each project
     http://sourceforge.net/support/tracker.php?aid=1467150
 
 ----------------------------------------------------------------------
-1.6.0 RC11a
+1.6.0 RC12
+Contains new Open Document filter, replaces a docking library, and
+fixes a few regressions of RC11.
+
+ Enchancements:
+
+  - [OpenDocument] Support for inserted OpenDocument files
+    http://sourceforge.net/support/tracker.php?aid=1218002
+
+  - [OpenDocument] Upgrade 1.6.0 RC7-R11 TMXs to new filter 
+    http://sourceforge.net/support/tracker.php?aid=1523768
+
+  - [OpenDocument] Upgrade 1.4.x TMXs to new filter 
+    http://sourceforge.net/support/tracker.php?aid=1523773
+
+  - Upgrade TMXs from paragraph to sentence segmentation
+    http://sourceforge.net/support/tracker.php?aid=1527082
+
+  - Individual file statistics should list relative file paths
+    http://sourceforge.net/support/tracker.php?aid=1518109
+
+  - Exact OmegaT version in TMX
+    http://sourceforge.net/support/tracker.php?aid=1436563
+
+ Bugfixes:
+
+  - [OpenDocument] Writer headers and footers not honored
+    http://sourceforge.net/support/tracker.php?aid=1111950
+
+  - [OpenDocument] Footnote markers break sentences
+    http://sourceforge.net/support/tracker.php?aid=1461154
+
+  - [OpenDocument] Tracked changes add unnecessary data
+    http://sourceforge.net/support/tracker.php?aid=1461178
+
+  - [Regression] Wrong saved path for project folders
+    http://sourceforge.net/support/tracker.php?aid=1519052
+
+  - [Regression] Buggy Docking Library
+    http://sourceforge.net/support/tracker.php?aid=1518026
+
+  - Encoding problem with project_stats.txt file
+    http://sourceforge.net/support/tracker.php?aid=1518101
+
+----------------------------------------------------------------------
+1.6.0 RC11b
 Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 
  Bugfixes:
@@ -41,6 +83,9 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 
  - Insert/replace with match does not work
    http://sourceforge.net/support/tracker.php?aid=1516807
+
+ - No colouring in matches window
+   http://sourceforge.net/support/tracker.php?aid=1516936
 
 ----------------------------------------------------------------------
 1.6.0 RC11

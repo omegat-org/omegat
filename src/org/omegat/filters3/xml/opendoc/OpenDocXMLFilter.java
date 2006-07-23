@@ -43,17 +43,17 @@ public class OpenDocXMLFilter extends XMLFilter
         super(new OpenDocDialect());
     }
 
-    public String getFileFormatName()
-    {
-        return "Uncompressed OpenDocument files";
-    }
-
     public Instance[] getDefaultInstances()
     {
         return new Instance[]
         {
             new Instance("*.xml", OConsts.UTF8, OConsts.UTF8),                  // NOI18N
         };
+    }
+
+    public String getFileFormatName()
+    {
+        throw new RuntimeException("Not implemented!");                         // NOI18N
     }
     
 }

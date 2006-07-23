@@ -41,6 +41,7 @@ import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.LFileCopy;
+import org.omegat.util.OStrings;
 
 /**
  * Filter for Open Document file format.
@@ -90,7 +91,7 @@ public class OpenDocFilter extends AbstractFilter
     /** Makes all path separators UNIX-like: '/' */
     private File tmp() throws IOException
     {
-        return File.createTempFile("ot-oo-", ".xml");
+        return File.createTempFile("ot-oo-", ".xml");                           // NOI18N
     }
     
     /**
@@ -126,8 +127,8 @@ public class OpenDocFilter extends AbstractFilter
                 catch (Exception e)
                 {
                     throw new TranslationException(e.getLocalizedMessage() +
-                            "\n" +
-                            "Error in file "+inFile);
+                            "\n" +                                              // NOI18N
+                            OStrings.getString("OpenDoc_ERROR_IN_FILE")+inFile);
                 }
                 
                 if (zipout!=null)
@@ -164,7 +165,7 @@ public class OpenDocFilter extends AbstractFilter
     /** Human-readable OpenDocument filter name. */
     public String getFileFormatName()
     {
-        return "OpenDocument files";
+        return OStrings.getString("OpenDoc_FILTER_NAME");
     }
 
     /** Extensions... */

@@ -33,8 +33,8 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 
 import org.omegat.filters2.TranslationException;
-import org.omegat.filters2.xml.XMLBlock;
-import org.omegat.filters2.xml.XMLStreamReader;
+import org.omegat.util.xml.XMLBlock;
+import org.omegat.util.xml.XMLStreamReader;
 
 /**
  * Class that reads project definition file, returns project's properties,

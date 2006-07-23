@@ -22,7 +22,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.filters2.xml;
+package org.omegat.util.xml;
 
 import java.util.HashMap;
 import org.omegat.util.StaticUtils;

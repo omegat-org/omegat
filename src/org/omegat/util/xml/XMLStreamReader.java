@@ -22,7 +22,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.filters2.xml;
+package org.omegat.util.xml;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import org.omegat.filters2.TranslationException;
-import org.omegat.filters2.xml.XMLReader;
+import org.omegat.util.xml.XMLReader;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 

@@ -610,11 +610,9 @@ public class FilterMaster
         filters.addFilter(new OneFilter(new ResourceBundleFilter(), false));
         filters.addFilter(new OneFilter(new XHTMLFilter(), false));
         filters.addFilter(new OneFilter(new HTMLFilter2(), false));
-        //filters.addFilter(new OneFilter(new OOFilter(), false));
         filters.addFilter(new OneFilter(new INIFilter(), false));
         filters.addFilter(new OneFilter(new DocBookFilter(), false));
         filters.addFilter(new OneFilter(new OpenDocFilter(), false));
-        filters.addFilter(new OneFilter(new OpenDocXMLFilter(), false));
     }
     
     /**

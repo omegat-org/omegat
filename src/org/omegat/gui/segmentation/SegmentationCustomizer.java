@@ -80,7 +80,7 @@ public class SegmentationCustomizer extends JDialog
         {
             public void actionPerformed(ActionEvent e)
             {
-                dispose();
+                cancelButtonActionPerformed(null);
             }
         };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
@@ -89,6 +89,7 @@ public class SegmentationCustomizer extends JDialog
         // END HP
     
         initComponents();
+        hintTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background")); // NOI18N
         
         getRootPane().setDefaultButton(okButton);
         
@@ -311,7 +312,7 @@ public class SegmentationCustomizer extends JDialog
 
         mapPanel.setLayout(new java.awt.GridBagLayout());
 
-        mapPanel.setBorder(new javax.swing.border.TitledBorder(OStrings.getString("GUI_SEGMENTATION_RULESETS")));
+        mapPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("GUI_SEGMENTATION_RULESETS")));
         mapScrollPane.setPreferredSize(new java.awt.Dimension(300, 100));
         mapTable.setModel(new MappingRulesModel(SRX.getSRX()));
         mapScrollPane.setViewportView(mapTable);
@@ -397,7 +398,6 @@ public class SegmentationCustomizer extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         mapPanel.add(mapDownButton, gridBagConstraints);
 
-        hintTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         hintTextArea.setEditable(false);
         hintTextArea.setFont(new JLabel().getFont());
         hintTextArea.setLineWrap(true);
@@ -431,7 +431,7 @@ public class SegmentationCustomizer extends JDialog
 
         rulePanel.setLayout(new java.awt.GridBagLayout());
 
-        rulePanel.setBorder(new javax.swing.border.TitledBorder(OStrings.getString("GUI_SEGMENTATION_RULEORDER")));
+        rulePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("GUI_SEGMENTATION_RULEORDER")));
         ruleScrollPane.setPreferredSize(new java.awt.Dimension(300, 120));
         ruleScrollPane.setViewportView(ruleTable);
 
@@ -535,8 +535,7 @@ public class SegmentationCustomizer extends JDialog
         gridBagConstraints.weighty = 1.0;
         getContentPane().add(rulePanel, gridBagConstraints);
 
-    }
-    // </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>//GEN-END:initComponents
 
     private void toDefaultsButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_toDefaultsButtonActionPerformed
     {//GEN-HEADEREND:event_toDefaultsButtonActionPerformed

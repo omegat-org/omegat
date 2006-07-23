@@ -178,9 +178,6 @@
         </Component>
         <Component class="javax.swing.JTextArea" name="hintTextArea">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="e3" green="df" id="Label.background" palette="3" red="e0" type="palette"/>
-            </Property>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="new JLabel().getFont()" type="code"/>

@@ -112,17 +112,12 @@ public class OStrings
     public static final String CT_LOADING_PROJECT	= getString("CT_LOADING_PROJECT");
     public static final String CT_LOADING_GLOSSARY	= getString("CT_LOADING_GLOSSARY");
     public static final String CT_CANCEL_LOAD = getString("CT_CANCEL_LOAD");
-    public static final String CT_LOADING_WORDCOUNT	= getString("CT_LOADING_WORDCOUNT");
     public static final String CT_ERROR_SAVING_PROJ	= getString("CT_ERROR_SAVING_PROJ");
     public static final String CT_ERROR_CREATE	= getString("CT_ERROR_CREATE");
     public static final String CT_FATAL_ERROR	= getString("CT_FATAL_ERROR");
-    public static final String CT_DONT_RECOGNIZE_GLOS_FILE = getString("CT_DONT_RECOGNIZE_GLOS_FILE");
-    public static final String CT_NO_FILE_HANDLER = getString("CT_NO_FILE_HANDLER");
     public static final String CT_LOAD_FILE_MX	= getString("CT_LOAD_FILE_MX");
     public static final String CT_COMPILE_FILE_MX	= getString("CT_COMPILE_FILE_MX");
     public static final String CT_COMPILE_DONE_MX	= getString("CT_COMPILE_DONE_MX");
-    public static final String CT_COPY_FILE	= getString("CT_COPY_FILE");
-    
     
     // ProjectProperties
     public static final String PP_CREATE_PROJ	= getString("PP_CREATE_PROJ");
@@ -141,7 +136,6 @@ public class OStrings
     public static final String PP_BROWSE_TITLE_TARGET	= getString("PP_BROWSE_TITLE_TARGET");
     public static final String PP_BROWSE_TITLE_GLOS		= getString("PP_BROWSE_TITLE_GLOS");
     public static final String PP_BROWSE_TITLE_TM		= getString("PP_BROWSE_TITLE_TM");
-    public static final String PP_MESSAGE_BADLANG		= getString("PP_MESSAGE_BADLANG");
     public static final String PP_MESSAGE_BADPROJ		= getString("PP_MESSAGE_BADPROJ");
     public static final String PP_MESSAGE_CONFIGPROJ	= getString("PP_MESSAGE_CONFIGPROJ");
     public static final String PP_SAVE_PROJECT_FILE		= getString("PP_SAVE_PROJECT_FILE");

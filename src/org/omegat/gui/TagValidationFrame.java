@@ -42,7 +42,6 @@ import javax.swing.KeyStroke;
 
 import org.omegat.core.StringEntry;
 import org.omegat.core.matching.SourceTextEntry;
-import org.omegat.filters2.xml.DefaultEntityFilter;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.openide.awt.Mnemonics;

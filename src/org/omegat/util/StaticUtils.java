@@ -637,7 +637,7 @@ public class StaticUtils
      */
     public static byte[] uudecode(String buf)
     {
-        String[] bytes = buf.split("#");
+        String[] bytes = buf.split("#");                                        // NOI18N
         byte[] res = new byte[bytes.length];
         for (int i=0; i<bytes.length; i++)
         {
@@ -651,5 +651,16 @@ public class StaticUtils
             }
         }
         return res;
+    }
+
+    /**
+     * Makes the file name relative to the given path.
+     */
+    public static String makeFilenameRelative(String filename, String path)
+    {
+        if (filename.toLowerCase().startsWith(path.toLowerCase()))
+            return filename.substring(path.length());
+        else
+            return filename;
     }
 }

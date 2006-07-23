@@ -1178,6 +1178,7 @@ public class CommandThread extends Thread
         {
             SourceTextEntry ste = (SourceTextEntry) m_srcTextEntryArray.get(i);
             String fileName = ste.getSrcFile().name;
+            fileName = StaticUtils.makeFilenameRelative(fileName, getProjectProperties().getSourceRoot());
             int[] numbers; // [0] - words, [1] - left words
             if( counts.containsKey(fileName) )
                 numbers = (int[]) counts.get(fileName);

@@ -60,7 +60,8 @@ public class INIFilter extends AbstractFilter
     {
         return new Instance[]
         {
-            new Instance("*.ini")                                              // NOI18N
+            new Instance("*.ini"),                                              // NOI18N
+            new Instance("*.lng"),                                              // NOI18N
         };
     }
     

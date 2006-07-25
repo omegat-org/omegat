@@ -26,6 +26,7 @@ package org.omegat.gui.main;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.SwingUtilities;
 import org.omegat.core.StringData;
 import org.omegat.core.matching.NearString;
 import org.omegat.util.Token;
@@ -113,7 +114,15 @@ public class MatchesTextArea extends javax.swing.JTextPane
         
         select(start, end);
         setCharacterAttributes(Styles.BOLD, false);
-        setCaretPosition(start);
+        setCaretPosition(end);
+        final int fstart = start;
+        SwingUtilities.invokeLater(new Runnable()
+        {
+            public void run()
+            {
+                setCaretPosition(fstart);
+            }
+        });
     }
     
     /** Clears up the pane. */

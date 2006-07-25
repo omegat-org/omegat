@@ -61,7 +61,7 @@ public class MatchesTextArea extends javax.swing.JTextPane
         this.matches = matches;
         activeMatch = -1;
         delimiters = new ArrayList(matches.size()+1);
-        delimiters.add(0, new Integer(0));
+        delimiters.add(new Integer(0));
         displayBuffer = new StringBuffer();
         
         for (int i=0; i<matches.size(); i++)
@@ -69,7 +69,9 @@ public class MatchesTextArea extends javax.swing.JTextPane
             NearString match = (NearString) matches.get(i);
             displayBuffer.append((i+1)+") " + match.str.getSrcText() + "\n" +   // NOI18N
                     match.str.getTranslation() + "\n< " + match.score + "% " +  // NOI18N
-                    match.proj + " >\n\n");                                     // NOI18N
+                    match.proj + " >");                                         // NOI18N
+            if (i < (matches.size()-1))
+                displayBuffer.append("\n\n");                                   // NOI18N
             delimiters.add(new Integer(displayBuffer.length()));
         }
         

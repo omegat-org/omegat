@@ -114,7 +114,7 @@ public class MatchesTextArea extends javax.swing.JTextPane
         
         select(start, end);
         setCharacterAttributes(Styles.BOLD, false);
-        setCaretPosition(end);
+        setCaretPosition(end-2); // two newlines
         final int fstart = start;
         SwingUtilities.invokeLater(new Runnable()
         {

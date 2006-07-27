@@ -161,11 +161,14 @@ public class ProjectFileStorage
         {
             try
             {
-                return new File(m_root, relativePath).getCanonicalPath();
+                if (relativePath.startsWith(".."))                              // NOI18N
+                    return new File(m_root, relativePath).getCanonicalPath();
+                else
+                    return new File(relativePath).getCanonicalPath();
             }
             catch (IOException e)
             {
-                return new File(m_root, relativePath).getAbsolutePath();
+                return relativePath;
             }
         }
 	}

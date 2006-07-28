@@ -337,90 +337,97 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         if (!PatternConsts.OMEGAT_TAG.matcher(segment).find())
             return segment;
         
-        StringBuffer buf = new StringBuffer(segment);
-        Matcher matcher = PatternConsts.OMEGAT_TAG_DECOMPILE.matcher(segment);
-        
-        int tagstart = matcher.start();
-        int tagend = matcher.end();
-        boolean end = matcher.group(1).length()>0;
-        String name = matcher.group(2);
-        int num = Integer.parseInt(matcher.group(3));
-        boolean alone = matcher.group(4).length()>0;
-
-        if (num==1)
-            num = 0;
-        
-        Tag tag = new Tag(end, name, num, alone);
-
-        ArrayList unclosedTags = new ArrayList();
-        ArrayList unopenedTags = new ArrayList();
-        
-        HashMap unclosedTagsNames = new HashMap();
-        HashMap unopenedTagsNames = new HashMap();
-        if (end)
+        try
         {
-            unopenedTags.add(tag);
-            unopenedTagsNames.put(name, tag);
-        }
-        else if (!alone)
-        {
-            unclosedTags.add(tag);
-            unclosedTagsNames.put(name, tag);
-        }
-        int maxnum = num;
-        
-        buf.replace(tagstart, tagend, tag.toString());
-        
-        while (matcher.find())
-        {
-            tagstart = matcher.start();
-            tagend = matcher.end();
-            end = matcher.group(1).length()>0;
-            name = matcher.group(2);
-            alone = matcher.group(4).length()>0;
-            tag = new Tag(end, name, num, alone);
+            StringBuffer buf = new StringBuffer(segment);
+            Matcher matcher = PatternConsts.OMEGAT_TAG_DECOMPILE.matcher(segment);
 
-            if (end && unclosedTagsNames.containsKey(name))
+            int tagstart = matcher.start();
+            int tagend = matcher.end();
+            boolean end = matcher.group(1).length()>0;
+            String name = matcher.group(2);
+            int num = Integer.parseInt(matcher.group(3));
+            boolean alone = matcher.group(4).length()>0;
+
+            if (num==1)
+                num = 0;
+
+            Tag tag = new Tag(end, name, num, alone);
+
+            ArrayList unclosedTags = new ArrayList();
+            ArrayList unopenedTags = new ArrayList();
+
+            HashMap unclosedTagsNames = new HashMap();
+            HashMap unopenedTagsNames = new HashMap();
+            if (end)
             {
-                Tag starttag = (Tag) unclosedTagsNames.get(name);
-                num = starttag.num;
-                unclosedTagsNames.remove(name);
-                unclosedTags.remove(starttag);
+                unopenedTags.add(tag);
+                unopenedTagsNames.put(name, tag);
             }
-            else
+            else if (!alone)
             {
-                num = maxnum + 1;
-                if (end)
-                {
-                    unopenedTags.add(tag);
-                    unopenedTagsNames.put(name, tag);
-                }
-                else if (!alone)
-                {
-                    unclosedTags.add(tag);
-                    unclosedTagsNames.put(name, tag);
-                }
+                unclosedTags.add(tag);
+                unclosedTagsNames.put(name, tag);
             }
-            if (maxnum < num)
-                maxnum = num;
+            int maxnum = num;
 
             buf.replace(tagstart, tagend, tag.toString());
+
+            while (matcher.find())
+            {
+                tagstart = matcher.start();
+                tagend = matcher.end();
+                end = matcher.group(1).length()>0;
+                name = matcher.group(2);
+                alone = matcher.group(4).length()>0;
+                tag = new Tag(end, name, num, alone);
+
+                if (end && unclosedTagsNames.containsKey(name))
+                {
+                    Tag starttag = (Tag) unclosedTagsNames.get(name);
+                    num = starttag.num;
+                    unclosedTagsNames.remove(name);
+                    unclosedTags.remove(starttag);
+                }
+                else
+                {
+                    num = maxnum + 1;
+                    if (end)
+                    {
+                        unopenedTags.add(tag);
+                        unopenedTagsNames.put(name, tag);
+                    }
+                    else if (!alone)
+                    {
+                        unclosedTags.add(tag);
+                        unclosedTagsNames.put(name, tag);
+                    }
+                }
+                if (maxnum < num)
+                    maxnum = num;
+
+                buf.replace(tagstart, tagend, tag.toString());
+            }
+
+            StringBuffer res = new StringBuffer();
+            for (int i = unopenedTags.size()-1; i>0; i--)
+            {
+                tag = (Tag) unopenedTags.get(i);
+                res.append(tag.toStringPaired());
+            }
+            res.append(buf);
+            for (int i = unclosedTags.size()-1; i>0; i--)
+            {
+                tag = (Tag) unclosedTags.get(i);
+                res.append(tag.toStringPaired());
+            }
+
+            return res.toString();
         }
-        
-        StringBuffer res = new StringBuffer();
-        for (int i = unopenedTags.size()-1; i>0; i--)
+        catch (Exception e)
         {
-            tag = (Tag) unopenedTags.get(i);
-            res.append(tag.toStringPaired());
+            return segment;
         }
-        res.append(buf);
-        for (int i = unclosedTags.size()-1; i>0; i--)
-        {
-            tag = (Tag) unclosedTags.get(i);
-            res.append(tag.toStringPaired());
-        }
-        
-        return res.toString();
     }
 
     /** 

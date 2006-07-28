@@ -120,6 +120,36 @@ public class Filters extends AbstractTableModel implements Serializable
         filters.remove(index);
     }
 
+    //////////////////////////////////////////////////////////////////
+    // Versioning properties to detect version upgrades
+    // and possibly do something if required
+    //////////////////////////////////////////////////////////////////////////
+    
+    /** There was no version of file filters support (1.4.5 Beta 1 -- 1.6.0 RC12). */
+    public static String INITIAL_VERSION = new String();
+    /** File filters support of 1.6.0 RC12a: now upgrading the configuration. */
+    public static String OT160RC12a_VERSION = "1.6 RC12a";                        // NOI18N
+    /** Currently file filters support version. */
+    public static String CURRENT_VERSION = OT160RC12a_VERSION;
+    
+    /** Version of OmegaT segmentation support. */
+    private String version;
+
+    /** Returns segmentation support version. */
+    public String getVersion()
+    {
+        if (version==null)
+            return INITIAL_VERSION;
+        else
+            return version;
+    }
+
+    /** Sets segmentation support version. */
+    public void setVersion(String value)
+    {
+        version = value;
+    }
+    
     //////////////////////////////////////////////////////////////////////////
     //  TableModel implementation
     //////////////////////////////////////////////////////////////////////////

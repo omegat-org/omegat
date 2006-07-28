@@ -38,6 +38,7 @@ import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JOptionPane;
@@ -93,7 +94,7 @@ public class FilterMaster
         if( configFile.exists() )
             loadConfig();
         else
-            setupBuiltinFilters();
+            filters = setupBuiltinFilters();
         loadFilterClassesFromPlugins();
         saveConfig();
     }
@@ -466,7 +467,7 @@ public class FilterMaster
      */
     public void revertFiltersConfigToDefaults()
     {
-        setupBuiltinFilters();
+        filters = setupBuiltinFilters();
         PluginUtils.loadPlugins();
         loadFilterClassesFromPlugins();
         saveConfig();
@@ -532,12 +533,69 @@ public class FilterMaster
             }
             
             checkIfAllFilterPluginsAreAvailable();
+            
+            // checking the version
+            if (Filters.CURRENT_VERSION.compareTo(filters.getVersion())>0)
+            {
+                // yeap, the config file with filters settings is of the older version
+                
+                // initing defaults
+                Filters defaults = setupBuiltinFilters();
+                // and merging them into loaded settings
+                filters = upgradeFilters(filters, defaults);
+            }
         }
         catch( Exception e )
         {
             StaticUtils.log(OStrings.getString("FILTERMASTER_ERROR_LOADING_FILTERS_CONFIG") + e);
-            setupBuiltinFilters();
+            filters = setupBuiltinFilters();
         }
+    }
+    
+
+    /** Upgrades current filters settings using current defaults. */
+    private Filters upgradeFilters(Filters filters, Filters defaults)
+    {
+        if (Filters.OT160RC12a_VERSION.compareTo(filters.getVersion())>0)
+        {
+            // removing old OO filter but moving all its instances to new OpenDoc one
+            for (int i = 0; i < filters.getFilter().length; i++)
+            {
+                OneFilter oo = filters.getFilter(i);
+                if (oo.getClassName().equals("org.omegat.filters2.xml.openoffice.OOFilter")) // NOI18N
+                {
+                    OneFilter opendoc = new OneFilter(new OpenDocFilter(), false);
+                    for (int j = 0; j < oo.getInstance().length; j++)
+                    {
+                        Instance ooi = oo.getInstance(j);
+                        for (int k = 0; k < opendoc.getInstance().length; k++)
+                        {
+                            Instance odi = opendoc.getInstance(k);
+                            if (odi.getSourceFilenameMask().equals(ooi.getSourceFilenameMask()))
+                            {
+                                opendoc.setInstance(k, ooi);
+                                break;
+                            }
+                        }
+                    }
+                    filters.setFilter(i, opendoc);
+                    break;
+                }
+            }
+        }
+        
+        // now adding those filters from defaults which appeared in new version only
+        HashSet existing = new HashSet();
+        for (int i = 0; i < filters.getFilter().length; i++)
+            existing.add(filters.getFilter(i).getClassName());
+        for (int i = 0; i < defaults.getFilter().length; i++)
+        {
+            OneFilter deffilter = defaults.getFilter(i);
+            if (!existing.contains(deffilter.getClassName()))
+                filters.addFilter(deffilter);
+        }
+        
+        return filters;
     }
     
     /**
@@ -602,17 +660,18 @@ public class FilterMaster
      * Initializes Filter Master defaults
      * by re-creating all information about built-in file filters.
      */
-    private void setupBuiltinFilters()
+    private Filters setupBuiltinFilters()
     {
-        filters = new Filters();
-        filters.addFilter(new OneFilter(new TextFilter(), false));
-        filters.addFilter(new OneFilter(new PoFilter(), false));
-        filters.addFilter(new OneFilter(new ResourceBundleFilter(), false));
-        filters.addFilter(new OneFilter(new XHTMLFilter(), false));
-        filters.addFilter(new OneFilter(new HTMLFilter2(), false));
-        filters.addFilter(new OneFilter(new INIFilter(), false));
-        filters.addFilter(new OneFilter(new DocBookFilter(), false));
-        filters.addFilter(new OneFilter(new OpenDocFilter(), false));
+        Filters res = new Filters();
+        res.addFilter(new OneFilter(new TextFilter(), false));
+        res.addFilter(new OneFilter(new PoFilter(), false));
+        res.addFilter(new OneFilter(new ResourceBundleFilter(), false));
+        res.addFilter(new OneFilter(new XHTMLFilter(), false));
+        res.addFilter(new OneFilter(new HTMLFilter2(), false));
+        res.addFilter(new OneFilter(new INIFilter(), false));
+        res.addFilter(new OneFilter(new DocBookFilter(), false));
+        res.addFilter(new OneFilter(new OpenDocFilter(), false));
+        return res;
     }
     
     /**
@@ -666,6 +725,7 @@ public class FilterMaster
     {
         try
         {
+            filters.setVersion(Filters.CURRENT_VERSION);
             XMLEncoder xmlenc = new XMLEncoder(new FileOutputStream(configFile));
             xmlenc.writeObject(filters);
             xmlenc.close();

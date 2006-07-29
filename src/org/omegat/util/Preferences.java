@@ -102,6 +102,14 @@ public class Preferences
     public static final String BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT = "80";                    // NOI18N
     /** Workflow Option: Insert Explanatory Text before the Best Fuzzy Match */
     public static final String BEST_MATCH_EXPLANATORY_TEXT = "wf_explanatoryText";              // NOI18N
+
+    /** 
+     * Version of file filters. 
+     * Unfortunately cannot put it into filters itself for backwards 
+     * compatibility reasons.
+     */
+    public static final String FILTERS_VERSION = "filters_version";             // NOI18N
+    
     
     /** Private constructor, because this file is singleton */
     static

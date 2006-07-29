@@ -77,6 +77,13 @@ public class FilterMaster
 	/** name of the filter configuration file */
 	private final static String FILE_FILTERS = "filters.conf";                  // NOI18N
 
+    /** There was no version of file filters support (1.4.5 Beta 1 -- 1.6.0 RC12). */
+    public static String INITIAL_VERSION = new String();
+    /** File filters support of 1.6.0 RC12a: now upgrading the configuration. */
+    public static String OT160RC12a_VERSION = "1.6 RC12a";                        // NOI18N
+    /** Currently file filters support version. */
+    public static String CURRENT_VERSION = OT160RC12a_VERSION;
+    
     /** Wrapper around filters storage in an XML file */
     private Filters  filters;
     /** Returns Wrapper around filters storage in an XML file */
@@ -535,7 +542,7 @@ public class FilterMaster
             checkIfAllFilterPluginsAreAvailable();
             
             // checking the version
-            if (Filters.CURRENT_VERSION.compareTo(filters.getVersion())>0)
+            if (CURRENT_VERSION.compareTo(Preferences.getPreference(Preferences.FILTERS_VERSION))>0)
             {
                 // yeap, the config file with filters settings is of the older version
                 
@@ -556,7 +563,7 @@ public class FilterMaster
     /** Upgrades current filters settings using current defaults. */
     private Filters upgradeFilters(Filters filters, Filters defaults)
     {
-        if (Filters.OT160RC12a_VERSION.compareTo(filters.getVersion())>0)
+        if (OT160RC12a_VERSION.compareTo(Preferences.getPreference(Preferences.FILTERS_VERSION))>0)
         {
             // removing old OO filter but moving all its instances to new OpenDoc one
             for (int i = 0; i < filters.getFilter().length; i++)
@@ -725,10 +732,10 @@ public class FilterMaster
     {
         try
         {
-            filters.setVersion(Filters.CURRENT_VERSION);
             XMLEncoder xmlenc = new XMLEncoder(new FileOutputStream(configFile));
             xmlenc.writeObject(filters);
             xmlenc.close();
+            Preferences.setPreference(Preferences.FILTERS_VERSION, CURRENT_VERSION);
         }
         catch( FileNotFoundException fnfe )
         {

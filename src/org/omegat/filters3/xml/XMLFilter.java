@@ -194,7 +194,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
      */
     public boolean isFileSupported(BufferedReader reader) 
     {
-        if (dialect.getConstraints().size()==0)
+        if (dialect.getConstraints()==null || dialect.getConstraints().size()==0)
             return true;
         
         try
@@ -206,13 +206,16 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
             if (matcher.find())
             {
                 Pattern doctype = (Pattern) dialect.getConstraints().get(XMLDialect.CONSTRAINT_DOCTYPE);
-                if (doctype!=null && !doctype.matcher(matcher.group(1)).matches())
+                if (doctype!=null && 
+                        (matcher.group(1)==null || !doctype.matcher(matcher.group(1)).matches()))
                     return false;
                 Pattern publicc = (Pattern) dialect.getConstraints().get(XMLDialect.CONSTRAINT_PUBLIC_DOCTYPE);
-                if (publicc!=null && !publicc.matcher(matcher.group(3)).matches())
+                if (publicc!=null && 
+                        (matcher.group(3)==null || !publicc.matcher(matcher.group(3)).matches()))
                     return false;
                 Pattern system = (Pattern) dialect.getConstraints().get(XMLDialect.CONSTRAINT_SYSTEM_DOCTYPE);
-                if (system!=null && !system.matcher(matcher.group(5)).matches())
+                if (system!=null && 
+                        (matcher.group(5)==null || !system.matcher(matcher.group(5)).matches()))
                     return false;
             }
             else if (dialect.getConstraints().containsKey(XMLDialect.CONSTRAINT_DOCTYPE) || 
@@ -226,7 +229,8 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
             if (matcher.find())
             {
                 Pattern root = (Pattern) dialect.getConstraints().get(XMLDialect.CONSTRAINT_ROOT);
-                if (root!=null && !root.matcher(matcher.group(1)).matches())
+                if (root!=null && 
+                        (matcher.group(1)==null || !root.matcher(matcher.group(1)).matches()))
                     return false;
             }
             else if (dialect.getConstraints().containsKey(XMLDialect.CONSTRAINT_ROOT))
@@ -235,7 +239,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
             }
             return true;
         }
-        catch(IOException e)
+        catch(Exception e)
         {
             return false;
         }

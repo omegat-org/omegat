@@ -1,15 +1,19 @@
 ----------------------------------------------------------------------
- OmegaT 1.6.0 RC12 Changes
+ OmegaT 1.6.0 RC12a Changes
 ----------------------------------------------------------------------
 
-1.6.0 RC12 vs. 1.4.5.04
+1.6.0 RC12a vs. 1.4.5.04
  46 Enchancements
  78 Bugfixes
 
 ----------------------------------------------------------------------
 PLANNING:
 ----------------------------------------------------------------------
-Next release will be dedicated to terminology management: 
+XLIFF filter won't go into 1.6.0 because it's not fully tested 
+at the moment, most probably it will be included into one of bugfix 
+releases in 1.6.0 line.
+
+Next "fat" release will be dedicated to terminology management: 
 - more glossary formats (at least TBX and CVS), 
 - editing glossary from within OmegaT,
 - support for online dictionaries (at least WiktionaryZ)
@@ -21,16 +25,12 @@ match similarity and match ordering.
 ----------------------------------------------------------------------
 TODO for 1.6.0:
 ----------------------------------------------------------------------
-- Copyright issues free Users Guide
-- XLIFF filter, if ready
-- Make segmentation and filter settings project-specific
-  - **TODO** Save segmentation rules for each project
-    http://sourceforge.net/support/tracker.php?aid=1467150
+- Users Guide
 
 ----------------------------------------------------------------------
 1.6.0 RC12a
 Contains new Open Document filter, replaces a docking library, and
-fixes a few regressions of RC11.
+fixes a few regressions of RC11 and RC12.
 
  Enchancements:
 

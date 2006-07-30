@@ -47,9 +47,9 @@ public class XMLIntactTag extends Tag
     }
     
     /** Creates a new instance of XML Tag */
-    public XMLIntactTag(String tag, org.xml.sax.Attributes attributes)
+    public XMLIntactTag(String tag, String shortcut, org.xml.sax.Attributes attributes)
     {
-        super(tag, TYPE_ALONE, XMLUtils.convertAttributes(attributes));
+        super(tag, shortcut, TYPE_ALONE, XMLUtils.convertAttributes(attributes));
     }
     
     /**

@@ -82,6 +82,17 @@ public interface XMLDialect
      */
     Set getTranslatableAttributes();
     
+    /**
+     * Returns the map of tags to their shortcuts.
+     * Shortcut is a short form of a tag visible to translator,
+     * and stored in OmegaT's flavor of TMX files.
+     * <p>
+     * Each entry should map a {@link String} to a {@link String} -- 
+     * a tag to its shortcut.
+     */
+    Map getShortcuts();
+
+    
     /** Unboxed (of primitive type </code>int</code>) constraint on Doctype name. */
     static final int CONSTRAINT_DOCTYPE_UNBOXED = 1;
     /** Unboxed (of primitive type </code>int</code>) constraint on PUBLIC Doctype declaration. */
@@ -115,4 +126,5 @@ public interface XMLDialect
      * Should return <code>null</code> if it doesn't or cannot.
      */
     InputSource resolveEntity(String publicId, String systemId);
+    
 }

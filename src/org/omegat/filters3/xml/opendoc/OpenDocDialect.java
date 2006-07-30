@@ -24,6 +24,7 @@
 
 package org.omegat.filters3.xml.opendoc;
 
+import org.omegat.core.threads.CommandThread;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
@@ -37,16 +38,59 @@ public class OpenDocDialect extends DefaultXMLDialect
     /** Creates a new instance of OpenDocDialect */
     public OpenDocDialect()
     {
+        defineShortcuts(new String[]{
+            "text:line-break", "br",                                            // NOI18N
+            "text:a", "a",                                                      // NOI18N
+            "text:span", "f",                                                   // NOI18N
+            "text:s", "s",                                                      // NOI18N
+            "text:alphabetical-index-mark", "i",                                // NOI18N
+            "text:alphabetical-index-mark-start", "is",                         // NOI18N
+            "text:alphabetical-index-mark-end", "ie",                           // NOI18N
+            "text:tab-stop", "t",                                               // NOI18N
+            "text:line-break", "br",                                            // NOI18N
+            "text:user-defined", "ud",                                          // NOI18N
+            "text:sequence", "seq",                                             // NOI18N
+        
+            // Donated by Didier Briel
+            // http://sourceforge.net/support/tracker.php?aid=1458673
+            "draw:image", "di",                                                 // NOI18N
+            "draw:frame", "df",                                                 // NOI18N
+            "draw:object-ole", "do",                                            // NOI18N
+
+            "text:bookmark", "bk",                                              // NOI18N
+            "text:bookmark-start", "bs",                                        // NOI18N
+            "text:bookmark-end", "be",                                          // NOI18N
+            "text:bookmark-ref", "bf",                                          // NOI18N
+            "text:reference-mark", "rm",                                        // NOI18N
+            "text:reference-mark-start", "rs",                                  // NOI18N
+            "text:reference-mark-end", "re",                                    // NOI18N
+            "text:reference-ref", "rf",                                         // NOI18N
+        
+            "text:change", "tc",                                                // NOI18N
+            "text:change-start", "ts",                                          // NOI18N
+            "text:change-end", "te",                                            // NOI18N
+            "dc:creator", "dc",                                                 // NOI18N
+            "dc:date", "dd",                                                    // NOI18N
+            // End of contribution
+
+            // http://sourceforge.net/support/tracker.php?aid=1461154
+            "text:note-citation", "nc",                                         // NOI18N
+            "text:note-body", "nb",                                             // NOI18N
+        });
+        
         defineParagraphTags(new String[]
         {
             "text:p",                                                           // NOI18N
+            "text:h",                                                           // NOI18N
             "dc:title",                                                         // NOI18N
             "dc:description",                                                   // NOI18N
             "dc:subject",                                                       // NOI18N
             "meta:keyword",                                                     // NOI18N
             "dc:language",                                                      // NOI18N
             "meta:user-defined",                                                // NOI18N
+            "text:tab",                                                         // NOI18N
         });
+        
         defineOutOfTurnTags(new String[]
         {
             "text:note",                                                        // NOI18N
@@ -54,7 +98,6 @@ public class OpenDocDialect extends DefaultXMLDialect
         defineIntactTags(new String[]
         {
             "text:note-citation",                                               // NOI18N
-            "office:master-styles",                                             // NOI18N
             "text:change",                                                      // NOI18N
             "text:tracked-changes",                                             // NOI18N
             

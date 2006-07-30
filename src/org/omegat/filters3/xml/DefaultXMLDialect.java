@@ -163,6 +163,34 @@ public class DefaultXMLDialect implements XMLDialect
         constraints.put(constraintType, template);
     }
     
+    HashMap shortcuts = new HashMap();
+    
+    /** 
+     * Defines a shortcut for a tag, useful for formatting tags.
+     * Shortcut is a short form of a tag visible to translator,
+     * and stored in OmegaT's flavor of TMX files.
+     *
+     * @param tag       Tag name.
+     * @param shortcut  The shortcut for a tag.
+     */
+    public void defineShortcut(String tag, String shortcut)
+    {
+        shortcuts.put(tag, shortcut);
+    }
+    /** 
+     * Defines shortcuts for formatting tags.
+     * An alternative to calling {@link #defineShortcut(String,String)} 
+     * multiple times.
+     *
+     * @param mappings  Array of strings, where even elements (0th, 2nd, etc) are tags,
+     *  and odd elements are their corresponding shortcuts.
+     */
+    public void defineShortcuts(String[] mappings)
+    {
+        for (int i = 0; i < mappings.length/2; i++)
+            defineShortcut(mappings[2*i], mappings[2*i+1]);
+    }
+    
     ///////////////////////////////////////////////////////////////////////////
     // XMLDialect Interface Implementation
     ///////////////////////////////////////////////////////////////////////////
@@ -252,5 +280,16 @@ public class DefaultXMLDialect implements XMLDialect
     public InputSource resolveEntity(String publicId, String systemId)
     {
         return null;
+    }
+
+    /**
+     * Returns the map of tags to their shortcuts.
+     * <p>
+     * Each entry should map a {@link String} to a {@link String} -- 
+     * a tag to its shortcut.
+     */
+    public Map getShortcuts()
+    {
+        return shortcuts;
     }
 }

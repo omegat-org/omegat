@@ -134,7 +134,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     public static final String CTV_OMEGAT_1 = "1";                              // NOI18N
     /** "1.6" for OmegaT 1.6 RC3 to 1.6.0 RC11 (Creation Tool Version attribute). Pretty misleading. */
     public static final String CTV_OMEGAT_1_6_RC3_RC11 = "1.6";                 // NOI18N
-    /** "1.6.0" for OmegaT 1.6 RC12 and up (Creation Tool Version attribute). */
+    /** "1.6 RC12" for OmegaT 1.6 RC12 and up (Creation Tool Version attribute). */
     public static final String CTV_OMEGAT_1_6_RC12 = "1.6 RC12";                      // NOI18N
     /** Returns Creation Tool attribute of TMX file */
     public String getCreationToolVersion() 
@@ -146,7 +146,6 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     // TMX Upgrades between OmegaT versions
     
     boolean upgradeCheckComplete = false;
-    boolean upgrade16RC7_11 = false;
     boolean upgrade14X = false;
     boolean upgradeSentSeg = false;
     
@@ -164,7 +163,6 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             if (CT_OMEGAT.equals(getCreationTool()))
             {
                 upgrade14X = getCreationToolVersion().compareTo(CTV_OMEGAT_1) <= 0;
-                upgrade16RC7_11 = getCreationToolVersion().compareTo(CTV_OMEGAT_1_6_RC12) < 0;
                 upgradeSentSeg = SEG_PARAGRAPH.equals(getSegType()) && 
                         CommandThread.core.getProjectProperties().isSentenceSegmentingEnabled();
             }
@@ -199,82 +197,15 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     }
     
     /** 
-     * Do we need to upgrade TMX files from 1.6.0 RC7-RC11 to the new XML 
-     * filter for OpenDocument files.
-     * The upgrade means replacing, e.g. &lt;brX&gt; for &lt;tX&gt; 
-     * (for OpenDocument tag &lt;text:line-break ...&gt;).
-     */
-    private boolean isUpgrade16RC7_11()
-    {
-        checkForUpgrades();
-        return upgrade16RC7_11;
-    }
-    
-    /** 
      * Upgrades segment if required.
      */
     private String upgradeSegment(String segment)
     {
         if (isUpgrade14X()) // if that's 1.4.x, doing both upgrades...
-        {
-            segment = upgradeNewOpenDocumentFilter(segment);
             segment = upgradeOldTagsNumberingAndPairs(segment);
-        }
-        else if (isUpgrade16RC7_11())
-        {
-            segment = upgradeNewOpenDocumentFilter(segment);
-        }
         return segment;
     }
     
-    /** 
-     * Patterns and replacements to upgrade long old OO tags to new OpenDocument filter. 
-     * These are OO for sure, HTML filter did not output such fancy tags, except for "br".
-     */
-    private static final Object[] TAGS_LONG = new Object[]
-    {
-        Pattern.compile("<(/?)is(\\d+)>"),   "<$1t$2>",    // defineFormatTag("text:alphabetical-index-mark-start", "is");            // NOI18N
-        Pattern.compile("<(/?)ie(\\d+)>"),   "<$1t$2>",    // defineFormatTag("text:alphabetical-index-mark-end", "ie");              // NOI18N
-        Pattern.compile("<(/?)ud(\\d+)>"),   "<$1t$2>",    // defineFormatTag("text:user-defined", "ud");                             // NOI18N
-        Pattern.compile("<(/?)seq(\\d+)>"),  "<$1t$2>",    // defineFormatTag("text:sequence", "seq");                                // NOI18N
-        
-        Pattern.compile("<(/?)bk(\\d+/?)>"), "<$1t$2>",    // defineFormatTag("text:bookmark/", "bk/");                               // NOI18N
-        Pattern.compile("<(/?)bs(\\d+/?)>"), "<$1t$2>",    // defineFormatTag("text:bookmark-start/", "bs/");                         // NOI18N
-        Pattern.compile("<(/?)be(\\d+/?)>"), "<$1t$2>",    // defineFormatTag("text:bookmark-end/", "be/");                           // NOI18N
-        Pattern.compile("<(/?)bf(\\d+)>"),   "<$1t$2>",    // defineFormatTag("text:bookmark-ref", "bf");                             // NOI18N
-        Pattern.compile("<(/?)rm(\\d+/?)>"), "<$1t$2>",    // defineFormatTag("text:reference-mark/", "rm/");                         // NOI18N
-        Pattern.compile("<(/?)rs(\\d+/?)>"), "<$1t$2>",    // defineFormatTag("text:reference-mark-start/", "rs/");                   // NOI18N
-        Pattern.compile("<(/?)re(\\d+/?)>"), "<$1t$2>",    // defineFormatTag("text:reference-mark-end/", "re/");                     // NOI18N
-        Pattern.compile("<(/?)rf(\\d+)>"),   "<$1t$2>",    // defineFormatTag("text:reference-ref", "rf");                            // NOI18N
-        
-        Pattern.compile("<(/?)tc(\\d+/?)>"), "<$1t$2>",    // defineFormatTag("text:change/", "tc/");                                 // NOI18N
-        Pattern.compile("<(/?)ts(\\d+)>"),   "<$1t$2>",    // defineFormatTag("text:change-start", "ts");                             // NOI18N
-        Pattern.compile("<(/?)te(\\d+)>"),   "<$1t$2>",    // defineFormatTag("text:change-end", "te");                               // NOI18N
-
-        Pattern.compile("<(/?)nc(\\d+)>"),   "<$1t$2>",    // defineFormatTag("text:note-citation", "nc");                            // NOI18N
-        Pattern.compile("<(/?)nb(\\d+)>"),   "<$1t$2>",    // defineFormatTag("text:note-body", "nb");                                // NOI18N
-        
-        Pattern.compile("<(/?)di(\\d+)>"),   "<$1d$2>",    // defineFormatTag("draw:image", "di");                                    // NOI18N
-        Pattern.compile("<(/?)df(\\d+)>"),   "<$1d$2>",    // defineFormatTag("draw:frame", "df");                                    // NOI18N
-        Pattern.compile("<(/?)do(\\d+)>"),   "<$1d$2>",    // defineFormatTag("draw:object-ole", "do");                               // NOI18N
-        
-        Pattern.compile("<(/?)dc(\\d+)>"),   "<$1d$2>",    // defineFormatTag("dc:creator", "dc");                                    // NOI18N
-        Pattern.compile("<(/?)dd(\\d+)>"),   "<$1d$2>",    // defineFormatTag("dc:date", "dd");                                       // NOI18N
-    };
-    /** 
-     * Patterns and replacements to upgrade short old OO tags and "br" to new OpenDocument filter. 
-     * These are upgraded only if long ones were, otherwise it could be HTML tags.
-     */
-    private static final Object[] TAGS_SHORT = new Object[]
-    {
-        Pattern.compile("<(/?)a(\\d+)>"),    "<$1t$2>",    // defineFormatTag("text:a", "a");	                                        // NOI18N
-        Pattern.compile("<(/?)f(\\d+)>"),    "<$1t$2>",    // defineFormatTag("text:span", "f");                                      // NOI18N
-        Pattern.compile("<(/?)s(\\d+/?)>"),  "<$1t$2>",    // defineFormatTag("text:s/", "s/");                                       // NOI18N
-        Pattern.compile("<(/?)i(\\d+/?)>"),  "<$1t$2>",    // defineFormatTag("text:alphabetical-index-mark/", "i/");                 // NOI18N
-        Pattern.compile("<(/?)br(\\d+/?)>"), "<$1t$2>",    // defineFormatTag("text:line-break/", "br/");                             // NOI18N
-        Pattern.compile("<(/?)n(\\d+)>"),    "<$1t$2>",    // defineFormatTag("text:note", "n");                                      // NOI18N
-    };
-
     /** Internal class for OmegaT tag */
     class Tag
     {
@@ -428,41 +359,6 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         {
             return segment;
         }
-    }
-
-    /** 
-     * Upgrades segments of OmegaT's before 1.6.0 RC11 to new 
-     * OpenDocument filter appearing in RC12.
-     */
-    private String upgradeNewOpenDocumentFilter(String segment)
-    {
-        if (!PatternConsts.OMEGAT_TAG.matcher(segment).find())
-            return segment;
-        
-        String res = segment;
-        boolean foundLongOOTag = false;
-        for (int i = 0; i < TAGS_LONG.length/2; i++)
-        {
-            Pattern pattern = (Pattern) TAGS_LONG[2*i];
-            String replace = (String) TAGS_LONG[2*i+1];
-            Matcher matcher = pattern.matcher(res);
-            if (matcher.find())
-            {
-                foundLongOOTag = true;
-                res = matcher.replaceAll(replace);
-            }
-        }
-        if (foundLongOOTag)
-        {
-            for (int i = 0; i < TAGS_SHORT.length/2; i++)
-            {
-                Pattern pattern = (Pattern) TAGS_LONG[2*i];
-                String replace = (String) TAGS_LONG[2*i+1];
-                Matcher matcher = pattern.matcher(res);
-                res = matcher.replaceAll(replace);
-            }
-        }
-        return res;
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -763,10 +659,6 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                 OStrings.getString("TMXR_WARNING_INCORRECT_SOURCE_LANG"),
                 new Object[]{tmxSourceLanguage, sourceLanguage}));
         }
-        
-        // give a warning that TMX file will be upgraded from 1.6.0 RC7-RC11
-        if (isUpgrade16RC7_11())
-            StaticUtils.log(OStrings.getString("TMXR_WARNING_UPGRADE_RC7_11"));
         
         // give a warning that TMX file will be upgraded from 1.4.x
         if (isUpgrade14X())

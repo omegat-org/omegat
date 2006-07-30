@@ -37,9 +37,9 @@ import org.omegat.util.StaticUtils;
 public class XMLOutOfTurnTag extends OutOfTurnTag
 {
     /** Creates a new instance of XML Tag */
-    public XMLOutOfTurnTag(String tag, org.xml.sax.Attributes attributes)
+    public XMLOutOfTurnTag(String tag, String shortcut, org.xml.sax.Attributes attributes)
     {
-        super(tag, XMLUtils.convertAttributes(attributes));
+        super(tag, shortcut, XMLUtils.convertAttributes(attributes));
     }
     
     /**

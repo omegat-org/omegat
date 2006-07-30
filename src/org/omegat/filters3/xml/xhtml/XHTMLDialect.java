@@ -60,12 +60,7 @@ public class XHTMLDialect extends DefaultXMLDialect
             "select", "option",                                                 // NOI18N
         });
         
-        try
-        {
-            if (CommandThread.core.getProjectProperties().isSentenceSegmentingEnabled())
-                defineParagraphTag("br");                                       // NOI18N
-        } catch (Exception e) { }
-        
+        defineShortcut("br", "br");                                             // NOI18N
         
         definePreformatTags(new String[]
         {

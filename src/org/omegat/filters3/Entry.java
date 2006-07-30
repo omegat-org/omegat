@@ -250,12 +250,12 @@ public class Entry
                 Tag tag = (Tag)elem;
                 if (Tag.TYPE_ALONE==tag.getType() || Tag.TYPE_BEGIN==tag.getType())
                 {
-                    tag.setShortcut(n);
+                    tag.setIndex(n);
                     n++;
                 }
                 else if (Tag.TYPE_END==tag.getType())
                 {
-                    tag.setShortcut(-1); // indication of an error
+                    tag.setIndex(-1); // indication of an error
                     // trying to lookup for appropriate starting tag
                     int recursion = 1;
                     for(int j=i-1; j>=getFirstGood(); j--)
@@ -273,16 +273,16 @@ public class Entry
                                     recursion--;
                                     if (recursion == 0)
                                     {
-                                        tag.setShortcut(other.getShortcut());
+                                        tag.setIndex(other.getIndex());
                                         break;
                                     }
                                 }
                             }
                         }
                     }
-                    if (tag.getShortcut()<0) // ending tag without a starting one
+                    if (tag.getIndex()<0) // ending tag without a starting one
                     {
-                        tag.setShortcut(n);
+                        tag.setIndex(n);
                         n++;
                     }
                 }

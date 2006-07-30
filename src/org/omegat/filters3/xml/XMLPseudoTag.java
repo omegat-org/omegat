@@ -38,6 +38,6 @@ public abstract class XMLPseudoTag extends Tag
     /** Creates a new instance of XMLPseudoTag */
     public XMLPseudoTag()
     {
-        super("!", TYPE_ALONE, new Attributes());                               // NOI18N
+        super("!", null, TYPE_ALONE, new Attributes());                         // NOI18N
     }
 }

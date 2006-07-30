@@ -48,9 +48,9 @@ public abstract class OutOfTurnTag extends Tag
      * This tag wraps around a chunk of text that should be translated separately, 
      * not breaking currently collected text.
      */
-    public OutOfTurnTag(String tag, Attributes attributes)
+    public OutOfTurnTag(String tag, String shortcut, Attributes attributes)
     {
-        super(tag, Tag.TYPE_ALONE, attributes);
+        super(tag, shortcut, Tag.TYPE_ALONE, attributes);
         entry = new Entry();
     }
 

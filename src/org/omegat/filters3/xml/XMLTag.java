@@ -37,9 +37,9 @@ import org.omegat.util.StaticUtils;
 public class XMLTag extends Tag
 {
     /** Creates a new instance of XML Tag */
-    public XMLTag(String tag, int type, org.xml.sax.Attributes attributes)
+    public XMLTag(String tag, String shortcut, int type, org.xml.sax.Attributes attributes)
     {
-        super(tag, type, XMLUtils.convertAttributes(attributes));
+        super(tag, shortcut, type, XMLUtils.convertAttributes(attributes));
     }
     
     /**

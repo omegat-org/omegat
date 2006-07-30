@@ -46,6 +46,16 @@ public abstract class Tag implements Element
     {
         return tag;
     }
+
+    private String shortcut;
+    /** Returns the short form of this tag, most often -- the first letter. */
+    public String getShortcut() 
+    {
+        if (shortcut!=null)
+            return shortcut;
+        else
+            return Character.toString(getTag().charAt(0));
+    }
     
     private int type;
     /** Returns type of this tag. */
@@ -66,11 +76,11 @@ public abstract class Tag implements Element
         return attributes;
     }
     
-    private int shortcut;
+    private int index;
     /** Returns the index of this tag in the entry. */
-    public int getShortcut()
+    public int getIndex()
     {
-        return shortcut;
+        return index;
     }
     /**
      * Sets the index of the tag in the entry for proper shortcutization.
@@ -78,15 +88,16 @@ public abstract class Tag implements Element
      * {@link #toShortcut()} will return &lt;s3&gt; and {@link #toTMX()}
      * will return &lt;bpt i="3"&gt;&amp;lt;strong&amp;gt;&lt;/bpt&gt;.
      */
-    public void setShortcut(int shortcut)
+    public void setIndex(int shortcut)
     {
-        this.shortcut = shortcut;
+        this.index = shortcut;
     }
 
     /** Creates a new instance of Tag */
-    public Tag(String tag, int type, Attributes attributes)
+    public Tag(String tag, String shortcut, int type, Attributes attributes)
     {
         this.tag = tag;
+        this.shortcut = shortcut;
         this.type = type;
         this.attributes = attributes;
     }
@@ -104,7 +115,7 @@ public abstract class Tag implements Element
     public String toTMX() 
     {
         String tmxtag;
-        switch(type)
+        switch(getType())
         {
             case TYPE_BEGIN:
                 tmxtag = "bpt";                                                 // NOI18N
@@ -124,7 +135,7 @@ public abstract class Tag implements Element
         buf.append("<");                                                        // NOI18N
         buf.append(tmxtag);
         buf.append(" i=\"");                                                    // NOI18N
-        buf.append(shortcut);
+        buf.append(getIndex());
         buf.append("\">");                                                      // NOI18N
 
         buf.append(toPartialTMX());
@@ -148,11 +159,11 @@ public abstract class Tag implements Element
         StringBuffer buf = new StringBuffer();
         
         buf.append("&amp;lt;");                                                 // NOI18N
-        if (TYPE_END==type)
+        if (TYPE_END==getType())
             buf.append("/");                                                    // NOI18N
-        buf.append(tag);
-        buf.append(attributes.toString());
-        if (TYPE_ALONE==type)
+        buf.append(getTag());
+        buf.append(getAttributes().toString());
+        if (TYPE_ALONE==getType())
             buf.append("/");                                                    // NOI18N
         buf.append("&amp;gt;");                                                 // NOI18N
         
@@ -168,11 +179,11 @@ public abstract class Tag implements Element
         StringBuffer buf = new StringBuffer();
         
         buf.append("<");                                                        // NOI18N
-        if (TYPE_END==type)
+        if (TYPE_END==getType())
             buf.append("/");                                                    // NOI18N
-        buf.append(tag.charAt(0));
-        buf.append(shortcut);
-        if (TYPE_ALONE==type)
+        buf.append(getShortcut());
+        buf.append(getIndex());
+        if (TYPE_ALONE==getType())
             buf.append("/");                                                    // NOI18N
         buf.append(">");                                                        // NOI18N
         

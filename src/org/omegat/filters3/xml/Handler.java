@@ -412,12 +412,12 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         XMLIntactTag intacttag = null;
         if (!collectingIntactText() && isIntactTag(tag))
         {
-            intacttag = new XMLIntactTag(tag, attributes);
+            intacttag = new XMLIntactTag(tag, getShortcut(tag), attributes);
             xmltag = intacttag;
             intacttagName = tag;
         }
         else
-            xmltag = new XMLTag(tag, Tag.TYPE_BEGIN, attributes);
+            xmltag = new XMLTag(tag, getShortcut(tag), Tag.TYPE_BEGIN, attributes);
         
         currEntry().add(xmltag);
         
@@ -448,7 +448,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         }
         else
         {
-            currEntry().add(new XMLTag(tag, Tag.TYPE_END, null));
+            currEntry().add(new XMLTag(tag, getShortcut(tag), Tag.TYPE_END, null));
         }
     }
     private void queueComment(String comment)
@@ -465,7 +465,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     {
         if (isOutOfTurnTag(tag))
         {
-            XMLOutOfTurnTag ootTag = new XMLOutOfTurnTag(tag, attributes);
+            XMLOutOfTurnTag ootTag = new XMLOutOfTurnTag(tag, getShortcut(tag), attributes);
             currEntry().add(ootTag);
             outofturnEntries.push(ootTag.getEntry());
         }
@@ -561,26 +561,35 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
      */
     private boolean isParagraphTag(String tag)
     {
-        return dialect.getParagraphTags().contains(tag) ||
-                isPreformattingTag(tag);
+        return (dialect.getParagraphTags()!=null && dialect.getParagraphTags().contains(tag)) 
+                || isPreformattingTag(tag);
     }
     
     /** Returns whether the tag surrounds preformatted block of text. */
     private boolean isPreformattingTag(String tag)
     {
-        return dialect.getPreformatTags().contains(tag);
+        return dialect.getPreformatTags()!=null && dialect.getPreformatTags().contains(tag);
     }
     
     /** Returns whether the tag surrounds intact block of text which we shouldn't translate. */
     private boolean isIntactTag(String tag)
     {
-        return dialect.getIntactTags().contains(tag);
+        return dialect.getIntactTags()!=null && dialect.getIntactTags().contains(tag);
     }
     
     /** Returns whether we face out of turn tag we should collect separately. */
     private boolean isOutOfTurnTag(String tag)
     {
-        return dialect.getOutOfTurnTags().contains(tag);
+        return dialect.getOutOfTurnTags()!=null && dialect.getOutOfTurnTags().contains(tag);
+    }
+    
+    /** Returns a shortcut for a tag. Queries dialect first, else returns null. */
+    private String getShortcut(String tag)
+    {
+        if (dialect.getShortcuts()!=null)
+            return (String) dialect.getShortcuts().get(tag);
+        else
+            return null;
     }
     
     //////////////////////////////////////////////////////////////////////////

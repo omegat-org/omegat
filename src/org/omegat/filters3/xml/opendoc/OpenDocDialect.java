@@ -104,14 +104,17 @@ public class OpenDocDialect extends DefaultXMLDialect
             "office:scripts",                                                   // NOI18N
             "office:font-face-decls",                                           // NOI18N
             "office:automatic-styles",                                          // NOI18N
+            "office:styles",                                                    // NOI18N
             
             "meta:generator",                                                   // NOI18N
             "meta:initial-creator",                                             // NOI18N
             "meta:creation-date",                                               // NOI18N
+            "meta:print-date",                                                  // NOI18N
             "dc:creator",                                                       // NOI18N
             "dc:date",                                                          // NOI18N
             "meta:editing-cycles",                                              // NOI18N
             "meta:editing-duration",                                            // NOI18N
+            
         });
         defineTranslatableTagAttributes(
                 "text:alphabetical-index-mark",                                 // NOI18N

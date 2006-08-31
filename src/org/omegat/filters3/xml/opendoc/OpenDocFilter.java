@@ -88,7 +88,7 @@ public class OpenDocFilter extends AbstractFilter
         return xmlfilter;
     }
     
-    /** Makes all path separators UNIX-like: '/' */
+    /** Returns a temporary file for OpenOffice XML. A nasty hack, to say polite way. */
     private File tmp() throws IOException
     {
         return File.createTempFile("ot-oo-", ".xml");                           // NOI18N

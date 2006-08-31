@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<title>OmegaT: Ukážkový projekt</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="changed" content="20051001">
+<link rel="stylesheet" type="text/css" href="./omegat.css">
+</head>
+
+<body lang="sk" dir="LTR">
+
+<div class="navbar-top">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigačná lišta">
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Obsah"><img src="OmegaT.png" border="0" alt="Logo OmegaT"></a></td>
+<td class="rel-p">Predchádzajúce</td>
+<td class="nav-link"><a href="./InstantStart.html">Rýchly úvodný tutoriál</a></td>
+<td class="rel-n">Nasledujúce</td>
+<td class="nav-link"><a href="./UserInterface.html">Používateľské rozhranie</a></td></tr>
+</table>
+
+</div>
+
+<div class="content">
+
+<a name=""></a>
+<h1 align="center" name="" id="">Začíname s ukážkovým projektom</h1>
+
+<p>Postup, ktorý je tu popísaný slúži iba na účely vsvetľovania; v praxi bude pravdepodobne potrebné v tomto postupe urobiť nejaké zmeny.</p>
+
+<a name=""></a>
+<h2 name="" id="">Vytvoriť nový projekt</h2>
+
+<ol><li>Spustite OmegaT.</li>
+<li>Vytvorte nový projekt vybratím <strong>Nový projekt...</strong> z menu <strong>Súbor</strong> na lište menu editora.</li>
+<li>V dialógovom okne pre výber súboru, ktoré sa objaví, prejdite do vhodného adresára kde sa má vytvoriť nový adresár projektu a jeho súbory.</li>
+<li>V oblasti pre zadanie textu <strong>Názov súboru</strong>, zadajte názov projektu (napr. <strong>ABC</strong>), potom stlačte <strong>Uložiť</strong> pre potvrdenie.</li>
+<li>Otvorí sa ďalšie dialógové okno ukazjuúce cesty k adresárom pre projekt. V dialógovom okne, OmegaT navrhne vytvorenie nového adresára s názvom projektu,  <strong>ABC</strong> ktorý bol vybraný. Päť iných predvolených podadresárov sa tiež zobrazí. Umiestnenia týchto predvolených adresárov môžu byť zmenené, ale kvôli tomuto príkladu iba prijmite navrhované hodnoty (tie sú vysvetlené v manuálovej stránke <a href="./FilesProjDirs.html">Súbory a adresáre OmegaT</a>).</li>
+<li>Zadajte kódy jazyka pre zdrojové a cieľové súbory alebo ich vyberte z rozbaľovacieho menu. Tieto kódy sú vyžadované štandardom <strong>TMX</strong>. Ako je to použité v OmegaT, kód jazyka pozostáva z  2 znakového kódu jazyka (ISO 639), malými písmenami, a z voliteľného 2 znakového kódu krajiny (ISO 3166), veľkými písmenami. Kódy musia byť oddelené pomlčkou ako to vyžaduje štandard.</p><p>Je tiež možné použiť kódy locale namiesto už uvedených kódov jazyka. Kódy locale tiež pozostávajú z kódu jazyka a kódu krajiny. Rozdiel medzi tymito dvoma typmi kódov je v ich použití a v syntaxi. Kódy locale sa vežnejšie spájajú s lokalizáciou softvéru a s počítačovými systémami a inými softvérovými záležitosťami. Kód locale má svoje kódy oddelené podčiarkovníkom namiesto pomlčky.</p><p>Samotné kódy sú obzvlášť dôležité ak posielate, prijímate, alebo si vymieňate prekaldové pamäte s niekým iným (zákazníkmi, kolegami, organizáciami, atď.); v tom prípade by ste mali byť opartní aby ste dodržiavali požadované štandardy pre daný formát a aplikáciu. V každom prípade, kódy jazyka budú použité v TMX; kódy locale sa do TMX automaticky zapisujú ako kódy jazyka.<!--See <a href="./Codes.html">Codes: Language and Locale</a> for further details.--></li>
+<li>Adresár projektu (nazývyný aj <strong>koreňový adresár projektu</strong>), s názvom <strong>ABC</strong> vybraným predtým, bude teraz vytvorený. V koreňovom adresári projektu je päť podadresárov:</p>
+
+<ol><li><strong>/glossary</strong> - súbory <a href="./Glossary.html">slovníka</a>;</li>
+<li><strong>/source</strong>. - súbory zdrojových dokumentov;</li>
+<li><strong>/omegat</strong>. - súbory projektu;</li>
+<li><strong>/target</strong>. - súbory cieľových dokumentov;</li>
+<li><strong>/tm</strong>. - súbory prekladovej pamäte.</li></ol>
+
+<br>
+
+<p>Pozri tiež <a href="./FilesProjDirs.html">Súbory a adresáre OmegaT</a>.</li></ol>
+
+<a name=""></a>
+<h2 name="" id="">Preložiť súbor</h2>
+
+<ol><li>Umiestnite textový súbor (s príponou <strong>.txt</strong>. na preklad do adresára <strong>/source</strong>. Textový súbor <strong>.txt</strong> musí byť v predvolenom kódovaní operačného systému. Pre použitie súboru v kódovaní Unicode (UTF-8) premenujte súbor s <strong>.utf8</strong>. ako príponou namiesto toho.</li>
+<li>Otvorte novo vytvorený projekt. Vyberte <strong>Otvoriť projekt...</strong> v menu <strong>Súbor</strong> v editore (OmegaT bude automaticky hľadať v naposledy otvorenom adresári). Koreňový adresár projektu sa zobrazí s ikonou OmegaT--to označuje, že je to projekt prekladovej pamäte.</li>
+<li>Otvorte projekt vybratím adresára projektu označeného ikonou OmegaT (dvojkliknite alebo vyberte a potvrdite pomocou <strong>Otvoriť</strong>). Nepokúšajte sa otvoriť súbor, nebude to fungovať! Tiež by to mohlo spôsobiť pád OmegaT.</li>
+<li>Projekt je teraz otvorený a text súboru je zobrazený v okne editora.</li>
+<li>Umiestnite kurzor do cieľového poľa prvého segmentu, medzi tagy <strong>&lt;segment 0001&gt;</strong> a <strong>&lt;end segment&gt;</strong>. Napíšte prekald a zmažte pôvodný text. Stlačte <strong>&lt;Enter&gt;</strong> pre prijatie zmeny.</li>
+<li>Proces opakujte pre každý segment dokiaľ nie je preklad hotový.</li></ol>
+
+<a name=""></a>
+<h2 name="" id="">Vytvoriť preložený súbor</h2>
+
+<ol><li>Vyberte <strong>Uložiť prekladovú pamäť</strong> a následne <strong>Vytvoriť cieľové dokumenty</strong> z menu <strong>Súbor</strong>. V tomto bode môžeme program OmegaT zatvoriť, ak chceme. Iba veberte <strong>Koniec</strong> z toho istého menu.</li>
+<li>Preložený súbor bude umiestnený v adresári <strong>/target</strong>.</li></ol>
+
+</div>
+
+<div class="navbar-bottom">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigačná lišta">
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Obsah"><img src="OmegaT.png" border="0" alt="Logo OmegaT"></a></td>
+<td class="rel-p">Predchádzajúce</td>
+<td class="nav-link"><a href="./InstantStart.html">Rýchly úvodný tutoriál</a></td>
+<td class="rel-n">Nasledujúce</td>
+<td class="nav-link"><a href="./UserInterface.html">Používateľské rozhranie</a></td></tr>
+</table>
+
+</div>
+
+</body>
+</html>

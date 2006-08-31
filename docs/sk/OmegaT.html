@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><!-- alph order for contributors, change "preliminaries" to "general information", "introduction" to "what is OmegaT", remove ref to Japanese in News, add languages to localization contributors, edited a few things here and there, removed reference to "Sample Project" since it is redundant with "Instant Start". -->
+
+
+
+<html>
+<head>
+<title>OmegaT: Používateľská príručka</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="changed" content="20051103">
+<link rel="stylesheet" type="text/css" href="./omegat.css">
+</head>
+
+<body lang="sk" dir="LTR">
+
+<div class="navbar-top">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigačná lišta">
+<tr><td class="toc-link"><img src="OmegaT.png" alt="Obsah"></td>
+<td class="rel-p">Predchádzajúce</td>
+<td class="nav-link"><a href="./links">Užitočné odkazy</a></td>
+<td class="rel-n">Nasledujúce</td>
+<td class="nav-link"><a href="./Introduction.html">Čo je OmegaT</a></td></tr>
+</table>
+
+
+</div>
+
+<div class="content">
+
+<a name="0"></a>
+<h1 align="center" name="0" id="0">OmegaT: Používateľská príručka (Verzia 1.6)</h1>
+
+<a name="0.1"></a>
+<h2 name="0.1" id="0.1">Prečítajte najprv!</h2>
+
+<ul><li><a href="./Introduction.html#1">Čo je OmegaT</a> <span class="updated">Aktualizované!</span></li>
+<li><a href="./InstallConfig.html#2">Systémové požiadavky a inštalácia</a></li>
+<li><a href="./Important.html#3">Dôležité poznámky</a> <span class="updated">Aktualizované!</span></li>
+<li><a href="./InstantStart.html#4">Rýchly úvodný tutoriál</a> <span class="new">nové!</span></li></ul>
+
+<a name="0.2"></a>
+<h2 name="0.2" id="0.2">Základné funkcie</h2>
+
+<ul><li><a href="./UserInterface.html#5">Používateľské rozhranie</a> <span class="updated">Aktualizované!</span></li>
+<li><a href="./Segmentation.html#6">Základná segmentácia</a></li>
+<li><a href="./Translation.html#7">Priebeh prekladu</a> <span class="updated">Aktualizované!</span></li>
+<li><a href="./SaveRevComp.html#8">Uložiť, revidovať a kompilovať</a></li></ul>
+
+<a name="0.3"></a>
+<h2 name="0.3" id="0.3">Stredne pokročilé funkcie</h2>
+
+<ul><li><a href="./SentSeg.html#9">Vetná segmentácia</a> <span class="new">nové!</span></li>
+<li><a href="./Searches.html#10">Vyhľadávanie: Kľúčové slová a presné</a> <span class="updated">Aktualizované!</span></li>
+<li><a href="./Matches.html#11">Zhody a položky slovníka</a> <span class="updated">Aktualizované!</span></li>
+<li><a href="./FilesEditingTagged.html#12">Editácia textu tagovaných (formátovaných) súborov</a> <span class="updated">Aktualizované!</span></li>
+</ul>
+
+<a name="0.4"></a>
+<h2 name="0.4" id="0.4">Súbory a projekty</h2>
+
+<ul><li><a href="./Filters.html#13">Filtre súborov</a> <span class="updated">Aktualizované!</span></li>
+<li><a href="./FilesProjDirs.html#14">Súbory a adresáre OmegaT</a> <span class="updated">Aktualizované!</span></li>
+<li><a href="./FilesSourceDoc.html#15">Súbory zdrojových dokumentov</a> <span class="updated">Aktualizované!</span></li>
+<li><a href="./FilesTMGloss.html#16">Súbory prekladovej pamäte a slovníka</a></li></ul>
+
+<a name="0.5"></a>
+<h2 name="0.5" id="0.5">Príloha</h2>
+
+<ul><li><a href="./TOC.html">Podrobný obsah, index tém</a></li>
+<li><a href="./OOoOmegaT.html#17">OpenOffice.org a OmegaT</a></li>
+<li>./FilesODOOoSO.html: SPOJIŤ S "Zdrojové súbory" a OOo&amp;OmT</li>
+<li><a href="./Localizing.html#18">Lokalizovanie OmegaT</a></li>
+<li><a href="./Links.html#19">Užitočné odkazy</a></li></ul>
+
+<p><span class="note">Poznámka!</span> V príručke, sú odkazy na slobodnú a open source kancelársku aplikáciu <strong>OpenOffice.org</strong>. Podľa kontextu, zmienky poukazujú na rôzne veci.<ul><li>V kontexte <strong>formátu súborov</strong>, odkaz ukazuje na formát súboru používaného programom OpenOffice.org pred verziou 2.0 (v súčasnosti verzia 1.1.5). Štandardný formát súboru OpenOffice.org vo verzii 2.0 je štandard OASIS OpenDocument. Obidva formáty sú extrémne podobné a OmegaT ich obidva rovnako podporuje.</li>
+<li>V kontexte <strong>aplikácií</strong>, odkaz ukazuje na aplikácie, ktorých kódová základňa je prepožičaná z OpenOffice.org a ktoré tak ponúkajú extrémne podobné funkcie. Kým OpenOffice.org je dostupný na veľkom množstve operačných systémov (vrátane Windows, Linux a MacOSX) "sesterské" aplikácie majú niekedy užšiu podporu operačných systémov. Dve najznámejšie sesterské aplikácie sú <strong>StarOffice</strong> (dostupný pre Windows a Linux) a <strong>NeoOffice</strong> (dostupný pre MacOSX).</li></ul></p>
+
+<a name="0.6"></a>
+<h2 name="0.6" id="0.6">Hlavné novinky v posledných verziách</h2>
+
+<ul>
+<li>Vetná segmentácia, poskytujúce lepšie znovuvyužitie prekladov cez dôkladnejšiu segmentáciu.</li>
+<li>Masívne prepísanie filtrov pre súbory HTML a XHTML, poskytujúce vám istý zážitok z prekladu HTML/XHTML.</li>
+<li>Súborové filtre nastaviteľné používateľom pre pokročilú kontrolu konverzie kódovania zo zdrojového do cieľového (preloženého) súboru a premenovania.</li>
+<li>Oddeľovacia hranica v <strong>Okne zhody/slovníka</strong> ktorá umožňuje prispôsobiť veľkosť pomocou potiahnutia alebo kliknutia myši.</li>
+<li>Lišta menu a zmeny menu. Niektoré premenovania a preusporiadanie pre lepšiu použiteľnosť. Menu Pomocník obsahuje prístup k novému dialógu <strong>O aplikácii</strong> ako aj k <strong>Používateľskej príručke</strong>.</li>
+<li>Zlepšené textové reťazce v celom používateľskom rozhraní.</li>
+<li>Súbor log (<code>log.txt</code>) pre hľadanie operácií a chýb.</li></ul>
+
+<a name="0.7"></a>
+<h2 name="0.7" id="0.7">Poďakovanie</h2>
+
+<p><strong>Softvér:</strong> <strong>Keith Godfrey (autor)</strong>, s prispením Kima Bruninga, Sacha Chua, Maxyma Mykhalchuka, Henryho Pijffersa a Benjamina Sibanda.</p>
+<p><strong>Dokumentácia:</strong> <strong>Marc Prior (autor)</strong>, s prispením Suzanne Bolduc, Dmitriho Gabinskiho, Jeana-Christophea Helaryho, Samuela Murraya, Maxyma Mykhalchuka a Henryho Pijffersa.</p>
+<p><strong>Lokalizácia:</strong> Alessandro Cattelan (taliančina), Sabine Cretella (nemčina), César Escribano Esteban (španielčina), Dmitri Gabinski (ruština, bieloruština, esperanto), Jean-Christophe Helary (francúzština, japončina), Juán Sacines (španielčina), Pablo Roca Santiago (španielčina), Martin Wunderlich (nemčina), Hisashi Yanagida (japončina), a Erhan Yükselci (turečtina).</p>
+<p><strong>Iné príspevky:</strong> Sabine Cretella, Dmitri Gabinski, Jean-Christophe Helary, Samuel Murray, Marc Prior.</p>
+
+<p>OmegaT používa <a href="http://htmlparser.sourceforge.net/">HTMLParser</a> na spracovanie HTML a XHTML. Vďaka Somikovi Rahaovi, Derrickovi Oswaldovi a <a href="http://htmlparser.sourceforge.net/contributors.html">všetkým prispievateľom aplikácie HTMLParser</a> za napísanie tohto úžasného kusu softvéru.</p>
+
+<p>Program OmegaT tiež používa <a href="http://homepage.mac.com/sroy/mrjadapter/">MRJ Adapter</a> aby sa správal prirodzenejšie na platformách Apple. Chceli by sme sa poďakovať Steveovi Royovi za vytvorenie tejto užitočnej knižnice.</p>
+
+<p>Vďaka aj všetkým ostatným ľuďom, ktorých príspevky urobili z OmegaT to čím je dnes!</p>
+
+<p>Používateľská príručka (anglická verzia): Posledná úprava: 22. november 2005.</p>
+
+<a name="0.8"></a>
+<h2 name="0.8" id="0.8">Právna poznámka</h2>
+
+<p>Tento dokument je šírený v nádeji, že bude užitočný, ale BEZ AKEJKOĽVEK ZÁRUKY; dokonca bez implicitnej záruky PREDAJNOSTI alebo VHODNOSTI NA KONKRÉTNY ÚČEL.</p>
+<p>Tento dokument je povolené kopírovať, distribuovať a/alebo modifikovať za podmienok uvedených v licencii GNU Free Documentation License, verzie 1.2 alebo akejkoľvek novšej verzie uverejnenej od Free Software Foundation; s žiadnými nemennými sekciami, žiadnymi textami na prednom obale, a žiadnymi textami na zadnom obale.</p>
+<p>Kópia licencie <a href="../fdl.html">GNU Free Documentation License</a> je priložená.</p>
+<p>Všetky obchodné značky spomínané vtejto príručke sú vlastníctvom ich príslušných vlastníkov.</p>
+<p>Túto príručku pôvodne napísal Marc Prior, ale potom na nej pracovalo mnoho ľudí.</p>
+<ul>
+<li>Používateľská príručka je Copyright © 2003-2005 Marc Prior</li><li><a href="./Segmentation.html">Zákldaná segmentácia</a> je Copyright © 2005 Jean-Christophe Helary</li>
+<li><a href="./InstantStart.html">Úvodný tutoriál</a> a <a href="./LocalizationGuide.html">lokalizačný sprievodca OmegaT</a> sú Copyright © 2005 Samuel Murray</li>
+<li><a href="./Filters.html">Súborové filtre</a> a <a href="./SentSeg.html">Vetná segmentácia</a> sú Copyright © 2005 Maxym Mykhalchuk</li>
+</ul>
+
+</div>
+
+<div class="navbar-bottom">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigačná lišta">
+<tr><td class="toc-link"><img src="OmegaT.png" alt="Obsah"></td>
+<td class="rel-p">Predchádzajúce</td>
+<td class="nav-link"><a href="./links">Užitočné odkazy</a></td>
+<td class="rel-n">Nasledujúce</td>
+<td class="nav-link"><a href="./Introduction.html">Čo je OmegaT</a></td></tr>
+</table>
+
+</div>
+
+</body>
+</html>

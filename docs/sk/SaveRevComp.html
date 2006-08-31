@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<title>OmegaT: Uloženie, revízia a kompilácia</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="changed" content="20051103">
+<link rel="stylesheet" type="text/css" href="./omegat.css">
+</head>
+
+<body lang="sk" dir="LTR">
+
+<div class="navbar-top">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigačná lišta">
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Obsah"><img src="OmegaT.png" border="0" alt="Logo OmegaT"></a></td>
+<td class="rel-p">Predchádzajúce</td>
+<td class="nav-link"><a href="./Translation.html">Postup prekladu</a></td>
+<td class="rel-n">Nasledujúce</td>
+<td class="nav-link"><a href="./SentSeg.html">Vetná segmentácia</a></td></tr>
+</table>
+
+</div>
+
+<div class="content">
+
+<a name="8"></a>
+<h1 align="center" name="8" id="8">Uloženie, revízia a kompilácia</h1>
+
+	<ol><li><a href="#8.1">Uloženie</a></li>
+	<li><a href="#8.2">Revízia</a></li>
+	<li><a href="#8.3">Kompilácia</a></li>
+	<li><a href="#8.4">Opatrenia</a></li></ol>
+
+
+<a name="8.1"></a>
+<h2 name="8.1" id="8.1">Uloženie</h2>
+
+<p>OmegaT automaticaky ukladá preložené segmenty vo veľmi krátkych časových intervaloch. Napriek tomu, nikdy nezabudnite svoju prácu pravidelne ukladať. Pre to, vyberte <strong>Uložiť prekladovú pamäť</strong> z menu <strong>Súbor</strong>, alebo stlačte <strong>&lt;Ctrl+S&gt;</strong>.</p>
+<p>Toto uloží váš preklad ako pracovnú prekaldovú pamäť, do súboru <strong>/omegat/project_save.tmx</strong>.</p>
+<p>Pre vygenerovanie aktuálnej prekladovej pamäte pre projekt, alebo cieľových preložených dokumentov, projekt skompilujte (pozri sekciu <strong>Kompilácia</strong>).</p>
+
+<a name="8.2"></a>
+<h2 name="8.2" id="8.2">Revízia</h2>
+
+<p>Pre revíziu prekladu, vyberte jeho zdrojový súbor z okna <strong>Súbory projektu</strong> a prejdite cez každý segment, zastaviac sa v segmente pre jeho revíziu ak je to potrebné. Keď všetky segmenty sú zrevidované OmegaT automaticky prejde do ďalšieho súboru v zozname.</p>
+
+<p>Prekladatelia ktorí poznajú iné aplikácie pre prácu s prekaldovými pamäťami ocenia túto vhodnú metódu revízie.</p>
+
+<a name="8.3"></a>
+<h2 name="8.3" id="8.3">Kompilácia</h2>
+
+<p>Neľakajte sa počítačového jazyka!</p>
+<p>Počas prekladu pomocou OmegaT nie je pôvodný zdrojový text prepísaný. Po každom prijatí nového prekladu (napr. stlačením <strong>&lt;Enter&gt;</strong>) je uložený v počítačovej pamäti dokiaľ nie je automaticky uložená prekladová pamäť projektu (<strong>project_save.tmx</strong>), alebo dokiaľ používateľ alebo vykoná kompiláciu pre vytvorenie cieľových dokumentov alebo uloží prekladovú pamäť.</p>
+
+<p>Ak je aplikácia zatvorená pred akoukoľvek z týchto činností všetky neuložené preklady budú stratené.</p>
+<p>Proces kompilácie, robený pomocou <strong>Vytvoriť cieľové dokumenty</strong> z menu <strong>Súbor</strong>, spôsobuje to, že OmegaT generuje preložené dokumenty a projekt TMX z dát v dočasnej prekladovej pamäti (<strong>project_save.tmx</strong>).</p>
+<p>Kompletný preklad textu nemisí byť urobený pred tým ako sa vykoná kompilácia. Je možné kompilovať kedykoľvek. Samozrejme, výsledné cieľové dokumenty budú v tomto prípade preložené iba čiastočne.</p>
+<p>Použitie <strong>Uložiť prekladovú pamäť</strong> z menu <strong>Súbor</strong> funguje rovnako ako pre kompiláciu, s výnimkou tohom, že cieľové dokumenty nie sú vytvorené.</p>
+
+<a name="8.4"></a>
+<h2 name="8.4" id="8.4">Opatrenia</h2>
+
+<p>Aby ste sa vyhli možnej strate dát alebo katastrofe, tu je zopár návrhov:</p>
+
+<ul><li>Robte pravidelné záložné kópie súboru <strong>/omegat/project_save.tmx</strong>. Dobrý nápad je pridávať sériové číslo alebo dátum každej kópie, napríklad, <strong>/omegat/project_save.tmx-01</strong>. alebo <strong>/omegat/project_save.tmx-07-06-05</strong>. Zálohy môžu byť prenesené na iné média ako sú disketa, CD-RW, alebo iný pevný disk ak sú k dispozícii. Potom môže byť súbor project_save.tmx v prípade potreby obnovený zo zálohy ak sa niečo stane zle.</li>
+<li>Pravidelne robte kompiláciu a kontrolujte, že skompilovaný súbor obsahuje najnovšiu verziu prekladu. Obzvlášť, by sa to malo robiť pri prvom začínaní s OmegaT.</li>
+<li>Obzvlášť dávajte pozor pri robení akýchkoľvek zmien v súboroch v adresári <strong>/source</strong>. uprostred projektu. Niekedy môže byť potrebné urobiť zmeny v zdrojových súboroch, napríklad odstrániť pevné zlomy riadkov v strede viet. Avšak, ak je zdrojový súbor zmenený po začatí prekladu, program OmegaT možno nebude môcť nájsť segment, ktorý už bol preložený. Vždy robte zálohy samotného zdrojového súboru, alebo celého projektu, pred tým ako urobíte akékoľvek zmeny v zdrojových súboroch.</li>
+</ul>
+
+<p>Prosím majte na mysli, že OmegaT vytvára zálohu prekladovej pamäte projektu v súbore <strong>project_save.tmx.bak</strong> v podadresári projektu <strong>/omegat</strong> kedykoľvek je projekt otvorený a pred tým ako sú urobené akékoľvek zmeny.</p>
+
+<p>OmegaT je robustná aplikácia. nie je odolná voči zlyhaniam alebo strate či poškodeniu údajov. Avšak, mali by ste urobiť opatrenia proti strate údajov pri používaní programu OmegaT, práve tak ako pri každej inej aplikácii.</p>
+
+
+</div>
+
+<div class="navbar-bottom">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigačná lišta">
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Obsah"><img src="OmegaT.png" border="0" alt="Logo OmegaT"></a></td>
+<td class="rel-p">Predchádzajúce</td>
+<td class="nav-link"><a href="./Translation.html">Postup prekladu</a></td>
+<td class="rel-n">Nasledujúce</td>
+<td class="nav-link"><a href="./SentSeg.html">Vetná segmentácia</a></td></tr>
+</table>
+
+</div>
+
+</body>
+</html>

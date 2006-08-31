@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><!-- included "Editing.html" and "Navigation.html" for information redundancy and clarity, a part of "Matches.html" and a part of "InstantTutorial.html" for completeness, included Workflow options info for updateness -->
+
+
+
+<html>
+<head>
+<title>OmegaT: Postup prekladu</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="generator" content="Kate (Linux)">
+<meta name="changed" content="20051001">
+<link rel="stylesheet" type="text/css" href="./omegat.css">
+</head>
+
+<body lang="sk" dir="LTR">
+
+<div class="navbar-top">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigačná lišta">
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Obsah"><img src="OmegaT.png" border="0" alt="Logo OmegaT"></a></td>
+<td class="rel-p">Predchádzajúce</td>
+<td class="nav-link"><a href="./Segmentation.html">Základná segmentácia</a></td>
+<td class="rel-n">Nasledujúce</td>
+<td class="nav-link"><a href="./SaveRevComp.html">Uloženie, revízia, kompilácia</a></td></tr>
+</table>
+
+</div>
+
+<div class="content">
+
+<a name="7"></a>
+<h1 align="center" name="7" id="7">Postup prekladu</h1>
+
+	<ol><li><a href="#7.1">Vytvorenie nového projektu</a></li>
+	<li><a href="#7.2">alebo Otvorenie už existujúceho projektu</a></li>
+	<li><a href="#7.3">Základy OmegaT</a></li>
+	<li><a href="#7.4">Navigácia</a></li>
+	<li><a href="#7.5">Editovanie</a></li>
+	<li><a href="#7.6">Zodpovedajúce výrazy</a></li>
+	<li><a href="#7.7">Preložené súbory</a></li>
+	<li><a href="#7.8">Nastavenie poľa editácie</a></li>
+	<li><a href="#7.9">Problémy!</a></li></ol>
+
+
+<a name="7.1"></a>
+<h2 name="7.1" id="7.1">Vytvorenie nového projektu</h2>
+
+<p>Z menu vyberte <strong>Projekt -&gt; Nový...</strong>.</p>
+
+<p>Prejdite do priečinka kde by ste chceli uložiť súbory projektu a napíšte názov pre prekladový projekt. Tento názov bude aj názvom priečinka projektu, a všetky súbory projektu budú uložené v tom priečinku.</p>
+
+<p>OmegaT vás požiada o zmenu alebo prijatie vytváraných priečinkov projektu.</p>
+
+<p>Môžete jednoducho prijať umiestnenie podpriečinkov (adresárov), ale mali by ste sa uistiť, že kódy zdrojového a cieľového jazyka sú správne. Vyberte kódy jazyka alebo jazyka-a-krajiny zo zoznamu alebo ich napíšte ručne. Zapamätejte si umiestnenie podpriečinka "target", lebo tam budú exportované cieľové dokumenty.</p>
+
+
+
+<p>Ak chcete aby program OmegaT segmentoval podľa viet namiesto podľa "odstavcov", je dobrý prekontrolovať Pravidlá segmentácie.</p>
+
+<a name="7.1.1"></a>
+<h3 name="7.1.1" id="7.1.1">Načítanie projektu a súborov</h3>
+
+<p>Keď kliknete OK pre prijatie nastavenia projektu, OmegaT vás požiada o import zdrojových dokumentov. Môžete importovať jednotlivé súbory, ale môžete tiež importovať celé adresárové stromy (so všetkými súbormy vo všetkých podpriečinkoch). Ak ste náhodou importovali nesprávne dokumenty alebo príliš veľa dokumentov, môžete ich jednoducho odstrániť z priečinka "source" vášho projektu OmegaT.</p>
+
+<p>Pamätajte, že OmegaT môže prekladať iba súbory OpenDocument, dokumenty OpenOffice.org, HTML, obyčajný text a určité súbory Java. OmegaT bude ostatné súbory ignorovať.</p>
+
+<p>Uistite sa, že je zapnuté <strong>Zobraziť -&gt; Súbory projektu...</strong>, a potom vyberte <strong>Projekt -&gt; Znovunačítať</strong> pre zobrazenie zoznamu všetkých súborov na preklad. OmegaT predvolene načíta prvý súbor v zozname projektu.</p>
+
+<p>Ak OmegaT indikuje, že novovytvorený projekt je prázdny po tom ako boli do adresára <strong>/source</strong> nakopírované zdrojové súbory na preklad, potom sú súbory pravdepodobne v nepodporovanom formáte (<strong>MS Word</strong>. atď.). Všetky súbory nusia byť prevedené do podporovaného formátu, ako je OpenDocument text alebo OpenOffice.org writer, nato aby s nimi mohol program OmegaT pracovať. Podrobnosti nájdete v časti <a href="./FilesSourceDoc.html#">Súbory zdrojových dokumentov</a>.</p>
+
+<p>Ak sú pôvodné zdrojové súbory určené na preklad v nepodporovanom formáte súborov nezabudnite ich previesť do formátu OpenDocument alebo iného podporovaného formátu a uložte ich do podadresára projektu <strong>/source</strong>. Zvyčajne je potrebné iba umiestniť skonvertované zdrojové dokumenty do tohto adresára.</p>
+
+<p>Originály môžu byť ponechané v inom adresári. Akékoľvek dokumenty, ktoré sa nachádzajú v tomto adresári a sú v nepodporovanom formáte budú skopírované do adresára <strong>/target</strong> bez zmeny pri kompilácii projektu.</p>
+
+<p>Ak nemôžete otvoriť prekladovú pamäť prijatú z externého zdroja (kolegu, zákazníka atď.) môže byť v nepodporovanom formáte prekladovej pamäte. Ak to je TMX súbor (prípona súboru <strong>.tmx</strong>), je pravdepodobne vo vyššej verzii ako je v súčasnosti podporovaná. OmegaT v súčasnosti podporuje iba <strong>TMX Version 1.1 (Level 1)</strong>. Najnovšia verzia TMX je 1.4b. Viac informácií nájdete v časti <a href="FilesTMGloss.html#16">Súbory prekladovej pamäte a slovníka</a>.<p>
+
+<a name="7.2"></a>
+<h2 name="7.2" id="7.2">alebo Otvorenie už existujúceho projektu</h2>
+
+<p>Z menu vyberte <strong>Projekt -&gt; Otvoriť...</strong>.</p>
+
+<p>Prejdite do priečinka kde uvidíte ikonu OmegaT asociovanú s priečinkom pomenovanom po vašom projekte. Kliknite na ten priečinok. Projekt sa automaticky načíta.</p>
+
+<a name="7.3"></a>
+<h2 name="7.3" id="7.3">Základy OmegaT</h2>
+
+<p>Pre preklad textu ho iba prepíšte v editovacom poli aktívneho segmentu.</p>
+<p>Stlačte <strong>&lt;Enter&gt;</strong>, <strong>&lt;Return&gt;</strong> alebo <strong>&lt;Ctrl+N&gt;</strong> pre prijatie prekladu a prejdite na ďalší segment. Ako alternatívu je možné použiť <strong>&lt;Tab&gt;</strong>. Pre aktiváciu tejto funkcie, zapnite položku menu <strong>Použiť TAB pre postup</strong> v menu <strong>Voľby</strong>.</p>
+<p>Keď je projekt otvorený aktívnym segmentom je predvolene prvý segment prvého súboru v zozname <strong>Súbory projektu</strong>. Pre rýchly prechod na nasledujúci nepreložený segment projektu, stlačte <strong>&lt;Ctrl+U&gt;</strong> alebo vyberte položku menu <strong>Nasledujúci nepreložený segment</strong> z menu <strong>Upraviť</strong>.</p>
+
+<p>Prechod na:</p>
+
+<ul><li>nasledujúci segment stlačením <strong>&lt;Enter&gt;</strong>, <strong>&lt;Return&gt;</strong>, <strong>&lt;Ctrl+N&gt;</strong>, alebo <strong>&lt;Tab&gt;</strong> <br> (Prechod pomocou Tab musí byť zapnutý v menu <strong>Nastavenia</strong> pre používanie);</li>
+<li>predchádzajúci segment stlačením <strong>&lt;Ctrl+P&gt;</strong>;</li>
+<li>nasledujúci nepreložený segment stlačením <strong>&lt;Ctrl+U&gt;</strong>.</li></ul>
+
+<p>V niektorých prípadoch budú zdrojový a cieľový segment rovnaké dokonaca aj po preklade. V takýchto prípadoch bude OmegaT považovať tieto segmenty za nepreložené keďže nie je žiaden spôsob ako zistiť či bolo preklady segmentov ukončené. Segmenty sú považované za nepreložené keď zdrojový a cieľový segment sú rovnaké. Aj tak sa však takéto segmenty budú nachádzať v konečnom preklade.</p>
+
+<p>Otvorte príslušnú aplikáciu a v nej pôvodný zdrojový text aby ste videli rozloženie textu počas prekladu.</li>
+
+<a name="7.4"></a>
+<h2 name="7.4" id="7.4">Navigácia</h2>
+
+<p>Presun na iný segment v tom istom súbore sa vykoná potiahnutím vertikálneho posuvníka okna hore alebo dolu, potom kliknite myšou do požadovaného segmentu pre jeho aktiváciu.</p>
+<p>Pre prístup k inému súboru v tom istom rojekte, vyberte ho v okne <strong>Súbory projektu</strong> kliknutím na názov požadovaného súboru pre otvorenie v editore. Predvolene, prvý segment na začiatku súboru bude aktívny. Otvorte okno zoznamu súborov projektu pomocou <strong>Súbor</strong> &gt; <strong>Súbory projektu...</strong>, ak ešte nie je viditeľné.</p>
+<p>Pre neskorší návrat k segmentu vložte do segmentu značku. Potom bude možné ho nájsť pomocou funkcie hľadania. Je dobrý nápad aby značka obsahovala číslo segmentu. Dôvodom je, že ak segment je 100% presná zhoda s inými segmentmi značka bude zopakovaná vo všetkých podobných segmentoch kvôli automatickému vkladaniu. Jediný spôsob ako nájsť správny segment je porovnať značku, ktorá teraz obsahuje číslo, s číslom aktívneho segmentu (pozri <a href="./Searches.html">Vyhľadávanie: kľúčové slovo a presne</a>).</p>
+<p>Pozri tiež: <a href="./HintsTips.html">Všeobecné rady a tipy</a>.</p>
+
+<a name="7.5"></a>
+<h2 name="7.5" id="7.5">Editovanie</h2>
+
+<p>Editovacie funkcie OmegaT sa vzťahujú iba na cieľový text aktívneho segmentu. Toto je jediný text ktorý sa dá editovať. Avšak, text v akomkoľvek segmente mimo aktívneho môže byť označený, kopírovaný alebo prilepený.</p>
+<p>Zvyčajné operácie myši, kurzorových kláves, skratky kurzorových kľúčov, a skratky (vybrať, vystrihnúť, a prilepiť) sú podporované. Avšak tieto sa pravdepodobne líšia medzi rôznymi operačnými systémami.</p>
+<p>Operácie <strong>Krok späť</strong> a <strong>Krok dopredu</strong> sú možné s <strong>&lt;Ctrl-Z&gt;</strong> a <strong>&lt;Ctrl-Y&gt;</strong>, respektíve.</p>
+
+<p>Pri práci s formátovaným súborom, pole editora bude obsahovať značky (tagy) špecifické pre OmegaT, ktoré sa vzťahujú na vnútornú štruktúru formátovania súboru.</p>
+
+<p>Nie je možné pridať alebo zmeniť textové formátovanie počas prekladu. Formátovanie základného formátu štruktúrovaného súboru, ako je OpenDocument, OpenOffice.org, XHTML, alebo HTML (v súčasnosti jediné podporované), je ponechané. Dá sa tu použiť iba minimálny stupeň kontroly. Podrobnosti nájdete v časti <a href="./FilesEditingTagged.html">Editácia textu tagovaných (formátovaných) súborov</a>.</p>
+
+<a name="7.5.1"></a>
+<h3 name="7.5.1" id="7.5.1">Značky, "edícia" a navigácia</h3>
+
+<p>Jeden spôsob ako pridať formátovanie je vložiť do textu vlastné označenie, kde je potrebné formátovanie (použiť napríklad "##") a potom text sformátovať v inej aplikácii (napr. OpenOffice.org) s použitím cieľových dokumentov, ktoré czniknú kompiláciou projektu.</p>
+
+<p>Po presunutí na segment v inej časti veľkého projektu, môže byť ťažké nájsť umiestnenie predchádzajúceho segmentu, na ktorom sa pracovalo aby sme sa k nemu vrátili. Pre zapnutie rýchleho nájdenia segmentu, umiestnite do aktuálneho pracovného segmentu unikátnu značku, ako je <strong>'###xxxx'</strong> (kde <strong>xxxx</strong>. je jedinečná hodnota, ako číslo aktuálneho segmentu) potom stlačte <strong>&lt;Enter&gt;</strong>, pre potvrdenie zmeny segmentu, pred presunom na iné miesto. Hľadanie unikátnej značky spôsobí, že sa stane znova aktívnym segmentom.</li>
+
+<p>Pre vloženie značky do vášho prekladu, na označenie nevyriešeného problému alebo kvôli inému dôvodu, nepoužívajte <strong>?</strong>. alebo <strong>*</strong>. Tieto znaky sú používané pi vyhľadávaní (ako zástupné znaky) a preto je nemožné ich nájsť pomocou <strong>&lt;Ctrl-F&gt;</strong>.</p>
+
+
+<a name="7.6"></a>
+<h2 name="7.6" id="7.6">Zodpovedajúce výrazy</h2>
+
+<p>Keď sa segment stane aktívnym, OmegaT prehľadá súbor prekladovaj pamäte aktuálneho projektu a akékoľvek ďalšie nájdené prekladové pamäte v adresári projektu /tm pre zhodné výrazy.</p>
+
+<p>Ak sa nájde presná zhoda v TMX projektu automaticky sa vloží do cieľového textového poľa aktívneho segmentu a akýchkoľvek zhodných segmentov v tom istom dokumente. Musíme chápať, že blízke zhody ako "Hi!" a "Hi" sú 100% zhody (slová sú rovnaké), ale nie presné zhody a preto nebudú vložené automaticky. Najlepších päť nepresných zhôd, ktoré sú nájdené bude zobrazených v časti Zhody okna Zobrazovač zhody a slovníka.</p>
+
+<p>Ak pre aktuálny segment existujú nepresné preklady je možné:</p>
+
+<ul><li>vybrať najužitočnejší nepresný preklad pomocou <strong>&lt;Ctrl-(ci)&gt;</strong> kde (ci) je číslo nepresného prekladuako je zobrazené v <strong>Zobrazovači zhody a slovníka</strong></li>
+<li>vložiť vybraný nepresný preklad do poľa editora pomocou <strong>&lt;Ctrl-I&gt;</strong></li>
+<li>prepísať celé pole s vybraným nepresným prekladom pomocou <strong>&lt;Ctrl-R&gt;</strong></li></ul>
+
+<a name="7.7"></a>
+<h2 name="7.7" id="7.7">Nastavenie poľa editácie</h2>
+
+<p>Od OmegaT 1.6 môžete konfigurovať obsah cieľového editovacieho poľa.<p>
+
+<p>Položka menu <strong>Voľby</strong> <strong>Pole editácie</strong> umožňuje nasledujúce nastavenia:<dl><dt><strong>Obsah cieľového poľa</strong></dt><dd>Máte na výber zo sady troch prepínacích tlačidiel s možnými hodnotami:<ul><li>Ponechať segment prázdny</li>
+<li>Zdrojový text</li>
+<li>Najlepší nepresný preklad</li></ul>
+<strong>Zdrojový text</strong> bol predvoleným správaním do verzie OmegaT 1.6. Teraz môžete vyberať medzi prázdnym poľom editácie alebo poľom s vloženým nepresným prekladom.<br> Ak vyberiete <strong>Najlepší nepresný preklad</strong>, bude vložený iba najlepší nepresný preklad so skóre podobnosti nad nastavenou úrovňou. Nepresné preklady pod touto úrovňou, dokonca aj keď existujú, nebudú vložené a pole bude ponechané prázdne.</dd>
+<dt><strong>Minimálna podobnosť</strong></dt><dd>Toto nastavenie vám dovolí nastaviť úroveň od ktorej OmegaT považuje nepresnú zhodu za platnú pre vloženie do cieľového poľa. Čím vyššie je číslo, tým podobnejší bude segment s ktorým sa robí zhoda, najpodobnejší bude aktuálny zdrojový segment.</dd>
+<dt><strong>Prefix</strong></dt><dd>Aby ste sa uistili že si všimnete automatické vloženie "najlepšej zhody " do vášho cieľového poľa, OmegaT vkladá reťazec na začiatok najlepšej zhody. Tu môžete nastaviť hodnotu reťazca ale nemôže byť nastavený na prázdny reťazec. Keďže nejlepšia zhoda je vždy predvolene vybratá (je prvá), môžete používať <strong>Ctrl+R</strong> na prepísanie automaticky vloženého reťazca samotnou zhodou, čo odstráni časť prefixu "najlepšia nepresná zhoda".</dd>
+<dt>Povoliť cieľ rovnajúci sa zdroju</dt><dd>Toto nastavenie vám umožní vytvárať prekladové jednotky s cieľovou časťou rovnajúcou sa zdrojovej časti. Toto môže byť užitočné keď segment nepotrebuje byť preložený ale aj tak ho chcete vložiť do prekladovej pamäte. Predvolené správanie je považovať segmanty kde cieľ je identický so zdrojom za nepreložený. Pozri <a href="#7.3">Základy OmegaT</a> vyššie.</dd></dl>
+
+<a name="7.8"></a>
+<h2 name="7.8" id="7.8">Preložené súbory</h2>
+
+<p>Vytvorte preložené súbory kedykoľvek počas procesu prekladu kompiláciou dokumentov projektu cez položku menu <strong>Vytvoriť cieľové dokumenty</strong> z menu <strong>Projekt</strong>. Nie je potrebné mať všetky súbory a segmenty preložené pred použitím tejto funkcie. Preložené segmenty budú zapísané do súborov a akékoľvek zostávajúce nepreložené segmenty budú prepísané nedotknuté.</p>
+
+<p>Toto môže byť užitočné, napríklad, na vykonanie čiastočnej revízie prekladu. Cieľové súbory sú vytvorené v podadresári projektu <strong>/target</strong> (podrobnosti o súboroch a adresároch nájdete v časti <a href="./FilesProjDirs.html">Súbory a adresáre OmegaT</a>).</p>
+<p>Akékoľvek zmeny urobené externe v súboroch v <strong>/target</strong> budú prepísané a stratené pri ďalšom vytvorení. Ak nie je preklad cieľových súborov uspokojivý, prerobte preklad v OmegaT (pozri tiež <a href="./SaveRevComp.html">Preklad: uloženie, revízia a kompilácia</a>, <a href="./HintsTips.html">Všeobecné rady a tipy</a> a <a href="./Shortcuts.html">Klávesové skratky</a>).</p>
+
+<a name="7.9"></a>
+<h2 name="7.9" id="7.9">Problémy!</h2>
+<p><strong>Chyby:</strong> vo všeobecnosti, ak sa objavia chyby alebo nedostatky programu alebo o nich máte podozrenie, je tu zaznamenávací súbor (<strong>log.txt</strong>. v koreňovom adresári projektu, do ktorého sa môžeme pozrieť. Chyby a nedostatky môžu byť hlásené používateľským skupinám alebo vývojárskemu tímu. Viac informácií nájdete v časti <a href="./Important.html#3">Dôležité poznámky</a>.</p>
+
+</div>
+
+<div class="navbar-bottom">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigačná lišta">
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Obsah"><img src="OmegaT.png" border="0" alt="Logo OmegaT"></a></td>
+<td class="rel-p">Predchádzajúce</td>
+<td class="nav-link"><a href="./Segmentation.html">Základná segmentácia</a></td>
+<td class="rel-n">Nasledujúce</td>
+<td class="nav-link"><a href="./SaveRevComp.html">Uloženie, revízia, kompilácia</a></td></tr>
+</table>
+
+</div>
+
+</body>
+</html>pridať mini obsah spojiť info o "všeobecné trady a tipy" kde je to podstatné.

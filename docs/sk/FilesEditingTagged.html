@@ -1,0 +1,352 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<title>OmegaT: Editácia textu tagovaných (formátovaných) súborov</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="changed" content="20051001">
+<link rel="stylesheet" type="text/css" href="./omegat.css">
+</head>
+
+<body lang="sk" dir="LTR">
+
+<div class="navbar-top">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigačná lišta">
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Obsah"><img src="OmegaT.png" border="0" alt="Logo OmegaT"></a></td>
+<td class="rel-p">Predchádzajúce</td>
+<td class="nav-link"><a href="./Matches.html">Zhody a položky slovníka</a></td>
+<td class="rel-n">Nasledujúce</td>
+<td class="nav-link"><a href="./Filters.html">Filtre súborov</a></td></tr>
+</table>
+
+</div>
+
+<div class="content">
+
+<a name="12"></a>
+<h1 align="center" name="12" id="12">Editácia textu tagovaných (formátovaných) súborov</h1>
+
+	<ol><li><a href="#12.1">značky (tagy) OmegaT</a></li>
+	<li><a href="#12.2">Operácie s tagmi</a></li>
+	<li><a href="#12.3">Overenie tagov</a></li>
+	<li><a href="#12.4">Lokalizačné balíčky Java</a></li></ol>
+
+<p>Obyčajné textové súbory vyžadujú iba napísanie správneho prekladu do poľa editácie. Ostatné typy súborov, ktoré OmegaT natívne podporuje niekedy vyžadujú špecifické znalosti toho ako s nimi OmegaT zaobchádza. Táto kapitola opisuje ako OmegaT zaobchádza s (X)HTML súbormi, súbormi OpenOffice.org a a lokalizačnými balíčkami Java.</p>
+
+<a name="12.1"></a>
+<h2 name="12.1" id="12.1">značky (tagy) OmegaT</h2>
+
+<p>Formátovacie informácie nachádzajúce sa v zdrojovom súbore je potrebné preniesť do cieľového súboru. OmegaT zobrazuje informácie o in-line formrmátovaní podporovaných formátov (v súčasnosti HTML, XHTML, OpenDocument, a OpenOffice.org) ako tagy. Tagy sa zvyčajne neberú do úvahy, pri zvažovaní podobnosti reťazcov pre účely nájdenia zhody. Tagy, ktoré ste reprodukovali v preloženom segmente budú prítomné v preloženom dokumente.</p>
+
+<p>Príklady v tejto kapitole sú prevzaté z tejto používateľskej príručky ako sa zobrazia v OmegaT. Niektoré súbory boli zámerne prevedené do formátu OpenOffice.org aby sa zaistila komplexnosť príkladov. Používame pojem <strong>HTML tagy</strong> na označenie <strong>HTML</strong> a <strong>XHTML</strong> tagov, a <strong>OOo tagy</strong> na označenie tagov <strong>OpenDocument</strong>, a <strong>OpenOffice.org</strong>.</p>
+
+<a name="12.1.1"></a>
+<h3 name="12.1.1" id="12.1.1">Páry a samostatné jednotky</h3>
+
+<p>Tagy môžu byť alebo v pároch alebo ako samostatné jednotky.</p>
+
+<ul><li>Samostatné tagy označujú formátovacie informácie, ktoré neovplyvňujú okolitý text (napríklad extra medzera alebo zlom riadku).<dl><dt>Samostatné tagy:</dt><dd><code><strong>&lt;segment 2132&gt;</strong>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;, <br>&lt;b4&gt;&lt;Tab&gt;&lt;/b4&gt;<strong>*</strong><strong>&lt;end segment&gt;</strong></code><br> <strong>&lt;br1&gt;</strong> a <strong><br></strong> sú samostatné tagy a neovplyvňujú okolitý text.</dd></dl></li>
+
+<li>Párové tagy zvyčajne označujú informácie o štýle, ktoré sa vzťahujú na text medzi otváracím tagom a zatváracím tagom páru.<dl><dt>Párové tagy:</dt><dd><code><strong>&lt;segment 3167&gt;</strong>Log súbor (&lt;f1&gt;log.txt&lt;/f2&gt;) pre záznam operácií a chýb.<strong>&lt;end segment&gt;</strong></code><br> <strong>&lt;f1&gt;</strong> a <strong>&lt;/f2&gt;</strong> sú v páre a ovplyvňujú <strong>log.txt</strong></dd></dl></li></ul>
+
+
+<a name="12.1.2"></a>
+<h3 name="12.1.2" id="12.1.2">Číslovanie tagov</h3>
+
+<p>Tagy v OmegaT sú číslované. Číslovanie závisí na formáte zdrojového súboru.</p>
+
+<dl><dt>HTML tagy:</dt><dd><code><strong>&lt;segment 2132&gt;</strong>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;, <br>&lt;b4&gt;&lt;Tab&gt;&lt;/b4&gt;<strong>*</strong><strong>&lt;end segment&gt;</strong></code><br> Tagy v zdrojových súboroch HTML sú číslované vzostupne podľa skupiny tagov. Prvá skupiny (pár alebo samostatný) dostane číslo <strong>0</strong>, druhá číslo <strong>1</strong> atď.<br> Tu, skupiny (párov) <strong>&lt;b0&gt; &lt;/b0&gt;</strong> dostane číslo 0 a  (samostatná) skupina <strong>&lt;br1&gt;</strong> dostane číslo 1.</dd></dl></li>
+
+<dl><dt>Tagy OOo:</dt><dd><code><strong>&lt;segment 3167&gt;</strong>Log súbor (&lt;f1&gt;log.txt&lt;/f2&gt;) pre záznam operácií a chýb.<strong>&lt;end segment&gt;</strong></code><br> Tagy v zdrojových súboroch OOo sú číslované vzostupne podľa tagov. Prvý tag (tag v páre alebo samostatný) dostane číslo <strong>1</strong>, druhý číslo <strong>2</strong> atď.<br> Tu, tag <strong>&lt;f1&gt;</strong>, otvárací pár, dostane číslo 1 a tag <strong>&lt;/f2&gt;</strong>, uzatvárajúcí pár, dostane číslo 2.</dd></dl></li></ul>
+
+<p>Odlišný systém číslovania vám pomáha si pamätať, že v HTML súboroch, sa musíte sústrediť na párovanie tagov, kým v súboroch OOo, je dôležitejšie poradie tagov.</p>
+
+<a name="12.1.3"></a>
+<h3 name="12.1.3" id="12.1.3">Tagy a vetná segmentácia</h3>
+
+<p>OmegaT vytvára svoje tagy pred tým ako sa aplikuje vetná segmentácia. V závislosti od pravidiel segmentácie, tagy môžu vyzerať ako keby nerešpektovali vyššie uvedené pravidlá párovania a číslovania.</p>
+
+<p>Pozrime sa na nasledujúci segment bez vetnej segmentácie:</p>
+
+<code><strong>&lt;segment 1554&gt;</strong> &lt;c0&gt;Pred: \. Po: \s&lt;/c0&gt;&lt;br1&gt; &lt;b2&gt;Poznámka:&lt;/b2&gt; "\." znamená znak "."&lt;br3&gt; "\s" znamená akýkoľvek biely znak <strong>&lt;end segment&gt;</strong></code>
+
+<p>Zdá sa, že tu nie je žiaden problém. Teraz, ak použijeme predvolené pravidlá segmentovania na tento segment (predvolené správanie sa OmegaT) dostaneme nasledujúci výsledok:</p>
+
+
+<code><strong>&lt;segment 1990&gt;</strong> &lt;c0&gt;Pred: \. <strong>&lt;end segment&gt;</strong><br> <strong>&lt;segment 1991&gt;</strong> Po: \s&lt;/c0&gt;&lt;br1&gt; <strong>&lt;end segment&gt;</strong><br> <strong>&lt;segment 1992&gt;</strong> &lt;b2&gt;Poznámka:&lt;/b2&gt; "\." znamená znak "."&lt;br3&gt; <strong>&lt;end segment&gt;</strong><br> <strong>&lt;segment 1993&gt;</strong> "\s" predstavuje akýkoľvek biely znak <strong>&lt;end segment&gt;</strong></code>
+
+<p>Tu vidíme, že segmenty vzaté samostatne nerešpektujú pravidlá párovania a číslovania. V niektorých prípadoch to môže dokonca spôsobiť problémy pri preklade, keď tagy musia byť v cieľovom jazyku premiestnené aby odrážali slovosled toho jazyka.</p>
+
+<a name="12.1.4"></a>
+<h3 name="12.1.4" id="12.1.4">Tagy OOo a hranice segmentov</h3>
+
+<p>Táto položka platí iba pre tagy <strong>OOo</strong>. Nie pre tagy <strong>HTML</strong>.</p>
+
+<p>Tagy môžu niekedy pripadnúť na hranice segmentu (tj. hneď za <code><strong>&lt;segment nnnn&gt;</strong> alebo tesne pred <strong>&lt;end segment&gt;</strong></code>). OmegaT zvyčajne nezobrazuje tagy OOo, ktoré sa objavia na hraniciach segmentu.</p>
+
+<p>Keď štruktúra cieľového jazyka vyžaduje zmenu slovosledu, niekedy môže byť ťažké premiestniť formátovacie informácie tak aby sa zhodovali s formátovaným reťazcom keďže jeden z tagov chýba. Tento problém je dobre známy a bude odstránený v niektorej budúcej verzii OmegaT.</p>
+
+<p>Ak nepremiestnené tagy musia byť odstránené vložte do cieľového segmentu označenie a opravte formátovanie v cieľovo dokumente pomocou príslušnej aplikácie.</p>
+
+<dl><dt>Tagy pripadajúce na hranice segmentov (aktuálne, chybné, správanie):</dt><dd><code><strong>&lt;segment 3134&gt;</strong>Rýchly úvodný tutoriál&lt;/a1&gt; &lt;f2&gt;nové!<strong>&lt;end segment&gt;</strong></code></dd></dl>
+
+<p>Správna podpora pre tagy pripadajúce na hranice segmentov by mala spôsobiť, že OmegaT zobrazí predchádzajúci segment nasledujúcim spôsobom:</p>
+
+<dl><dt>Tagy pripadajúce na hranice segmentu (budúce, správne, správanie):</dt><dd><code><strong>&lt;segment 3134&gt;</strong>&lt;a1&gt;Rýchly úvodný tutoriál&lt;/a2&gt; &lt;f3&gt;nové!&lt;/f4&gt;<strong>&lt;end segment&gt;</strong></code></dd></dl>
+
+<a name="12.2"></a>
+<h2 name="12.2" id="12.2">Operácie s tagmi</h2>
+
+<p>Na tagy treba dávať pozor. Ak sú náhodne zmenené, formátovane finálneho súboru môže byť poškodené. V najhoršom prípade scenára sa súbor vôbec nemusí dať otvoriť; toto sa deje zvlášť u súborov OpenOffice.org.</p>
+
+<p>Hoci nemôže byť z OmegaT urobené vlastné formátovanie, je možné aplikovať istý stupeň kontroly nad existujúcim formátom.</p>
+
+<a name="12.2.1"></a>
+<h3 name="12.2.1" id="12.2.1">Manipulácia s tagmi OOo</h3>
+
+
+<p>Tagy OpenDocument a OpenOffice.org musia byť zachované tak ako sú. Tieto tagy nemôžu byť zmazané ani nemôže byť zmenené ich poradie. Avšak, je možné:</p>
+
+<ul><li>presúvať tagy do inej časti segmentu; pokiaľ zostanú v rovnakom poradí;</li>
+<li>rušiť tagy tým, že ich umiestníme jeden vedľa druhého.</li></ul>
+
+<p>Napríklad, ak tagovaná veta</p>
+<p><code><strong>&lt;segment 3270&gt;</strong> Log súbor (<strong>&lt;f1&gt;</strong>log.txt<strong>&lt;/f2&gt;</strong>) pre zaznamenávanie operácií a chýb. <strong>&lt;end segment&gt;</strong></code></p>
+<p>sa zmení na</p>
+<p><code><strong>&lt;segment 3270&gt;</strong> Log súbor (<strong>&lt;f1&gt;&lt;/f2&gt;</strong>log.txt) pre zaznamenávanie operácií a chýb. <strong>&lt;end segment&gt;</strong></code></p>
+<p>a formátovanie <strong>log.txt</strong> je prakticky odstránené.</p>
+
+<a name="12.2.2"></a>
+<h3 name="12.2.2" id="12.2.2">Manipulácia s tagmi HTML</h3>
+
+<p>V HTML alebo XHTML platia nasledujúce pravidlá pre tagy:</p>
+
+<dl><dt>Duplikácia je povolená napr.:</dt>
+<dd><code><strong>&lt;segment 3116&gt;</strong> Menu Pomocník obsahuje prístup k novému dialógu &lt;b0&gt;O programe&lt;/b0&gt; ako aj k &lt;b1&gt;Používateľskej príručke&lt;/b1&gt;. <strong>&lt;end segment&gt;</strong></code>
+
+<p>pre duplikovanie tagov, iba ich prekopírujte na pozíciu kam chcete (pamätejte, že preplietanie párovaných tagov nie je nikdy dovolené, pozri <strong>Preplietanie</strong> nižšie):</p>
+
+<code><strong>&lt;segment 3116&gt;</strong> Menu Pomocník <strong>&lt;b0&gt;</strong>obsahuje<strong>&lt;/b0&gt;</strong> prístup k novému dialógu &lt;b0&gt;O programe&lt;/b0&gt; ako aj k &lt;b1&gt;Používateľskej príručke&lt;/b1&gt;. <strong>&lt;end segment&gt;</strong></code></dd></dl>
+
+<dl><dt>Zmazanie je povolené napr.:</dt>
+<dd><code><strong>&lt;segment 3116&gt;</strong> Menu Pomocník obsahuje prístup k novému dialógu &lt;b0&gt;O programe&lt;/b0&gt; ako aj k &lt;b1&gt;Používateľskej príručke&lt;/b1&gt;. <strong>&lt;end segment&gt;</strong></code>
+
+<p>pre odstránenie formátovania ktoré nepotrebujete, iba zmažte príslušný pár tagov:</p>
+
+<code><strong>&lt;segment 3116&gt;</strong> Menu Pomocník obsahuje prístup k novému dialógu <strong><s>&lt;b0&gt;</s></strong>O programe<strong><s>&lt;/b0&gt;</s></strong> ako aj k &lt;b1&gt;Používateľskej príručke&lt;/b1&gt;. <strong>&lt;end segment&gt;</strong></code></dd></dl>
+
+
+<dl><dt>Zmena poradia je povolená:</dt>
+<dd><code><strong>&lt;segment 3116&gt;</strong> Menu Pomocník obsahuje prístup k novému dialógu &lt;b0&gt;O programe&lt;/b0&gt; ako aj k &lt;b1&gt;Používateľskej príručke&lt;/b1&gt;. <strong>&lt;end segment&gt;</strong></code>
+<p>môže byť zmenené na:</p>
+<code><strong>&lt;segment 3116&gt;</strong> Menu pomocník obsahuje prístup k novému dialógu <u><strong>&lt;b1&gt;</strong></u>O programe<u><strong>&lt;/b1&gt;</strong></u> ako aj k <u><strong>&lt;b0&gt;</strong></u>Používateľskej príručke<u><strong>&lt;/b0&gt;</strong></u>. <strong>&lt;end segment&gt;</strong></code></dd></dl>
+
+<dl><dt>Hniezdenie je povolené napr.</dt>
+<dd><code><strong>&lt;segment 3116&gt;</strong> Menu Pomocník obsahuje prístup k novému dialógu &lt;b0&gt;O programe&lt;/b0&gt; ako aj k &lt;b1&gt;Používateľskej príručke&lt;/b1&gt;. <strong>&lt;end segment&gt;</strong></code>
+<p>môže byť zmenené na</p>
+<code><strong>&lt;segment 3116&gt;</strong> Menu Pomocník obsahuje prístup k novému dialógu <u><strong>&lt;b0&gt;</strong></u>O programe ako aj k &lt;b1&gt;Používateľskej príručke&lt;/b1&gt;.<u><strong>&lt;/b0&gt;</strong></u> <strong>&lt;end segment&gt;</strong></code></dd></dl>
+
+<dl><dt>Preplietanie <strong>nie</strong> je povolené. Takéto označenie tagmi:</dt>
+<dd><code><strong>&lt;segment 3116&gt;</strong> Menu Pomocník obsahuje prístup k novému dialógu <u><strong>&lt;b1&gt;</strong></u>O programe ako aj k <u><strong>&lt;b0&gt;</strong></u>používateľskej<u><strong>&lt;/b1&gt;</strong></u> príručke<u><strong>&lt;/b0&gt;</strong></u>. <strong>&lt;end segment&gt;</strong></code></dd></dl>
+
+<p>nie je povolené a poškodí súbor. Vloženie otváracieho tagu nasledované druhým otváracím tagom vyžaduje aby zatvárací tag druhého otváracieho tagu prišiel pred zatvárací tag prvého.</li></ul>
+
+<a name="12.3"></a>
+<h2 name="12.3" id="12.3">Overenie tagov</h2>
+
+<p>Funkcia overenia tagov ( <strong>Nástroje</strong> &gt; <strong>Overiť tagy</strong>) detekuje zmenené tagy (či už úmyselne alebo náhodou), a označí postihnuté segmenty. Použitie tejto funkcie otvorí dialóg a podozrivými porušenými alebo zlými tagmi v dokumente.</p>
+<p>Táto funkcia môže byť užitočná pri hľadaní chýb v preložených tagovaných textoch. Toto je často problémom v súboroch OpenDocument alebo OpenOffice.org, ktoré sa neotvoria kvôli problémom s tagmi vytvorenými v procese prekladu. Opravenie tagov a znovuvytvorenie cieľových dokumentov môže často vyliečiť problém.</p>
+
+<a name="12.4"></a>
+<h2 name="12.4" id="12.4">Lokalizačné balíčky Java</h2>
+
+<p>Lokalizačné balíčky Java sa nepovažujú za tagované súbory. Aj tak, nie je ich preklad taký priamy ako pri obyčajných textových súboroch takže tu uvádzame primerane podrobnú sekciu o ich špecifikách. Väčšina príkladov je prevzatých z grafického (GUI) balíčka OmegaT.</p>
+
+<p><span class="warning">Varovanie!</span> V balíškoch sa používajú špeciálne znaky na označenie prístupových akcelerátorov používateľského prostredia, premenných, citovaných znakov (koniec riadku atď.), tieto znaky musíte reprodukovať na relevantnej pozícii vo vašom preklade.</p>
+
+<a name="12.4.1"></a>
+<h3 name="12.4.1" id="12.4.1">Kontext prekladu</h3>
+
+<p>Hoci vnútorná štruktúra balíčka je pomerne zložitá, OmegaT skrýva zložitosť a dáva vám prístup iba k reťazcu určenému na preklad. Ak si nie ste istí kontextom reťazca, ktorý prekladáte, otvorte súbor v textovom editore a v prípade potreby doňho nazrite, pri prekladaní v OmegaT.</p>
+
+<strong>Niekoľko riadkov z balíčka OmegaT</strong>:<p><code># The version number is taken from Version.properties, key 'version'<br>
+# and inserted into the following template<br>
+version-template=OmegaT-{0}<br>
+# buttons<br>
+BUTTON_OK=&amp;OK<br>
+BUTTON_CANCEL=&amp;Cancel</code></p>
+
+<p>OmegaT zobrazí iba časť za znakom rovnosti "=":</p>
+
+<p><code>OmegaT-{0}<br>
+<strong>&lt;segment 4345&gt;</strong> OmegaT-{0} <strong>&lt;end segment&gt;</strong></code></p>
+
+<p><code>&amp;OK<br>
+<strong>&lt;segment 4346&gt;</strong> &amp;Ok <strong>&lt;end segment&gt;</strong></code></p>
+
+<a name="12.4.2"></a>
+<h3 name="12.4.2" id="12.4.2">Komentáre</h3>
+
+<p>Komentáre sa v OmegaT nezobrazujú, ale môžete ich chcieť prečítať pri prekladaní (pozri <a href="#12.4.1">Kontext prekladu</a> vyššie).</p>
+
+<p>Tu sú dva príklady komentárov:</p>
+
+<p><code># MainWindow TF_INTRO_MESSAGE=OmegaT Translation Memory CAT Tool</code></p>
+
+<p><code># NOTE: segment start is assumed to end with "0000" string to overwrite<br>
+# with entry number. If zeros not detected, entry number will not be<br>
+# displayed TF_CUR_SEGMENT_START=&lt;segment 0000&gt;</code></p>
+
+<p>Akýkoľvek riadok v súbore .properties, ktorý sa začínaj znakom mriežky (#) (v Spojených štátoch známym ako znak libry), je komentár. Tieto komentáre sú pre pomoc prekladateľovi a programátorovi, a netreba ich prekaldať. Žiaden z komentárov sa nezobrazí nikde v používateľskom rozhraní, takže nie je potrebné ich prekladať.</p>
+
+<a name="12.4.3"></a>
+<h3 name="12.4.3" id="12.4.3">Klávesové skratky</h3>
+
+<p>Klávesová skratka umožňuje používateľovi pohybovať sa po menu pomocou klávesnice. Klávesové skratky sú písmená v názve funkcie, ktoré sú prístupné priamo z klávesnice a spúšťajú danú funkciu. V balíčkoch Java sú označené pomocou "<strong>&amp;</strong>". Takýto prístup ku klávesnici nespĺňa pokyny GUI MacOSX ale je bežný na systémoch Windows lebo Linux.</p>
+
+<p>Tu sú dva príklady s klávesovými skratkami:</p>
+
+<p><code>BUTTON_SEARCH=&amp;Search</code><br> klávesová skratka pre "<strong>Search</strong>" je nastavená na písmeno "<strong>s</strong>".</p>
+<p><code>BUTTON_TO_DEFAULTS=De&amp;faults</code><br> klávesová skratka pre "<strong>Defaults</strong>" je nastavená na písmeno "<strong>f</strong>".</p>
+
+<p>Skúste používať rôzne písmená pre klávesovú skratku v za sebou nasledujúcich raťazcoch, pretože tieto reťazce sa často objavujú spolu v menu alebo v dialógu. Skúste používať rovnaké písmeno pre klávesovú skratku ako je použité v angličtine.</p>
+
+<p>Príklady:</p>
+
+<p>V afrikánčine, preklad slov "Search" a "Defaults" je "Deursoek" a "Verstek".</p>
+
+<p>Nesprávne:<br> <code>* BUTTON_SEARCH=Deur&amp;Soek</code> (nie je potrebné písať písemno "s" veľkým písmenom).<br> <code>* BUTTON_SEARCH=Deur &amp;soek</code> (nie je treba vkladať medzeru).<br> <code>* BUTTON_SEARCH=Deursoek&amp;</code> ("&amp;" nie je nastavené na žiadne písmeno).<br> <code>* BUTTON_SEARCH=&amp; Deursoek</code> ("&amp;" nie je nastavené na žiadne písmeno).</p>
+
+<p>Správne:</p>
+
+<code>* BUTTON_SEARCH=Deur&amp;soek<br>
+* BUTTON_SEARCH=&amp;Deursoek</code>
+
+<p>Nesprávne:</p>
+
+<code>* BUTTON_TO_DEFAULTS=Ver&amp;Stek</code> (nie je potrebné písať "s" veľkým písmenom).<br> <code>* BUTTON_TO_DEFAULTS=&amp;fVerstek</code> (pridanie "f" urobí preklad nesprávnym).<br> <code>* BUTTON_TO_DEFAULTS=Verstek&amp;f</code> (pridanie "f" urobí preklad nesprávnym).</p>
+
+<p>Správne:</p>
+
+<code>* BUTTON_TO_DEFAULTS=&amp;Verstek<br>
+* BUTTON_TO_DEFAULTS=Ver&amp;stek</code>
+
+<a name="12.4.4"></a>
+<h3 name="12.4.4" id="12.4.4">Premenné</h3>
+
+<p>Tu sú tri príklady premenných:</p>
+
+<p><code>HF_ERROR_EXTLINK_TITLE=Cannot open the link <strong>{0}</strong><br>
+CT_FUZZY_X_OF_Y=Analyzing strings - <strong>{0}</strong> of <strong>{1}</strong> completed<br>
+SOME_FICTICIOUS_EXAMPLE=Project saved on <strong>{0}</strong> at <strong>{1}</strong> by <strong>{2}</strong></code></p>
+
+<p>Znaky <strong>{0}</strong>, <strong>{1}</strong> a <strong>{2}</strong> sú náhradou za premenné. Keď OmegaT zobrazí tento reťazec používateľovi, automaticky pridá čísla alebo kúsky textu namiesto {0}, {1} alebo {2}.</p>
+
+<p>Príklady:</p>
+
+<p>V afrikánčine, sa reťazce zvyčajne prekladajú nasledovne (všimnite si posledný príklad, v ktorom je poradie premenných odlišné kvôli odlišnej gramatickej štruktúre afrikánčiny):</p>
+
+<p><code>HF_ERROR_EXTLINK_TITLE=Cannot open the link <strong>{0}</strong></code><br> vytvorí nasledujúci reťazec: <code>Cannot open the link <strong>foo.bar</strong></code><br> čo by malo byť preložené: <code>Kon nie die skakel <strong>foo.bar</strong> open nie</code></p>
+<p>Segment OmegaT by tak mal byť:<br> <code>HF_ERROR_EXTLINK_TITLE=Kon nie die skakel <strong>{0}</strong> open nie</code></p>
+
+<p>Podobne:</p>
+
+<p><code>CT_FUZZY_X_OF_Y=Analyzing strings - <strong>{0}</strong> of <strong>{1}</strong> completed</code><br> vytvorí nasledujúci reťazec: <code>Analyzing stings - <strong>23</strong> of <strong>100</strong> completed</code><br> čo by malo byť preložené: <code>Ontleed tans stringe - <strong>23</strong> van <strong>100</strong> afgehandel</code></p>
+<p>Segment OmegaT by tak mal byť:<br> <code>CT_FUZZY_X_OF_Y=Ontleed tans stringe - <strong>{0}</strong> van <strong>{1}</strong> afgehandel</code></p>
+
+<p>A:</p>
+
+<p><code>SOME_FICTICIOUS_EXAMPLE=Project saved on <strong>{0}</strong> at <strong>{1}</strong> by <strong>{2}</strong></code><br> vytvorí nasledujúci reťazec: <code>Project saved on <strong>2005-11-23</strong> at <strong>23:55</strong> by <strong>John Doe</strong></code><br> čo by malo byť preložené: <code>Projek om <strong>23:55</strong> op <strong>2005-11-23</strong> deur <strong>John Doe</strong> gestoor</code></p>
+<p>Segment OmegaT by tak mal byť:<br> <code>SOME_FICTICIOUS_EXAMPLE=Projek om <strong>{1}</strong> op <strong>{0}</strong> deur <strong>{2}</strong> gestoor</code></p>
+
+<a name="12.4.5"></a>
+<h3 name="12.4.5" id="12.4.5">Citované znaky</h3>
+
+<p>Niektoré písmená alebo znaky používané pri obyčajnom, ľudskom písaní majú pre počítač špeciálny význam, a kvôli tomu musia byť tieto znaky citované aby s nimi program OmegaT zaobchádzal správne a aby ich správne zobrazil.</p>
+
+<p>Niektoré znaky sú citované tak aby sa zobrazili (napríklad, dvojbodka). Niektoré znaky sú citované aby sa nezobrazovali (napríklad, nový riadok-n).</p>
+
+<p>Tu je niekoľko príkladov citovaných znakov (v súbore .properties, znaky sú citované pomocou spätného lomítka):</p>
+
+<p><code>HF_CANT_FIND_HELP=Cannot locate help file<strong>\:</strong></code><br>sa na obrazovke zobrazí ako:<br> <code>Cannot locate help file:</code></p>
+
+<p><code>RBFH_ERROR_ILLEGAL_U_SEQUENCE=Encountered illegal <strong>\\u</strong> sequence</code><br>sa na obrazovke zobrazí ako:<br> <code>Encountered illegal \u sequence</code></p>
+
+<p><code>SOME_FICTITIOUS_STRING=Hello<strong>\n</strong>world!</code><br>sa na obrazovke zobrazí ako:<br><code>Hello<br>world!</code></p>
+
+<a name="12.4."></a>
+<h3 name="12.4." id="12.4.">HTML v reťazcoch</h3>
+
+<p>Väčšina reťazcov v súbore .properties sa v OmegaT zobrazí ako položky menu alebo dialógové okná. Avšak, niekoľko z nich sa zobrazí v zobrazovacom okne, ktoré používa  HTML (chybové hlásenia haiku sú jedným príkladom).</p>
+
+<p>Tu je príklad takého reťazca (všimnite si aj citovanú dvojbodku):</p>
+
+<p><code>HF_HAIKU_2=Wind catches lily<strong>&lt;p&gt;</strong>Scatt'ring petals to the wind \:<strong>&lt;p&gt;</strong>Your page is not found</code></p>
+
+<p>Tento raťazec sa v zobrazovacom okne zobrazí ako:</p>
+
+<p><code>Wind catches lily<br>Scatt'ring petals to the wind:<br>Your page is not found</code></p>
+
+<a name="12.4.6"></a>
+<h3 name="12.4.6" id="12.4.6">Zaobchádzanie s novými riadkami</h3>
+
+<p>Na zobrazenie viacerých riadkov v používateľskom rozhraní OmegaT, sa používajú citované znaky nového riadku-n pre vynútenie zlomu riadku. Nepoužívajte znaky nového riadka v preklade ak v anglickom texte žiadne nie sú, a pokúste sa dodržať toľko riadkov v preklade ako je v anglickom texte.</p>
+
+<p>Tu je príkllad nových riadkov a ich účinok:</p>
+
+<p><code>SOME_FAKE_STRING=This<strong>\n</strong>is<strong>\n</strong>my<strong>\n</strong>life</code></p>
+
+<p>Toto sa zobrazí ako:</p>
+
+<p><code>This<br>is<br>my<br>life</code></p>
+
+<p>Všimnite si, že pred a po znakoch nového riadka-n nie sú žiadne medzery. Ak vlžíte medzery, OmegaT zobrazí medzery.</p>
+
+<p>Tu je príklad nesprávne vložených medzier:</p>
+
+<p><code>SOME_FAKE_STRING=This<strong>\n</strong> is<strong>\n</strong> my<strong>\n</strong> life</code></p>
+
+<p>Toto sa zobrazí ako:</p>
+
+<p><code>This<br>&nbsp;is<br>&nbsp;my<br>&nbsp;life</code></p>
+
+<a name="12.4.7"></a>
+<h3 name="12.4.7" id="12.4.7">Viacriadkové reťazce</h3>
+
+<p>Kvôli čitateľnosti, mohol programátor v súbore .properties rozdeliť dlhý reťazec na niekoľko riadkov. Zlomy riadkov v súbore .properties neovplyvnia spôsob akým sa reťazec zobrazí na obrazovke.</p>
+
+<p>Tu sú dva príklady viacriadkových reťazcov:</p>
+
+<p><code>YET_ANOTHER_FAKE_STRING=This is an example of<strong>\</strong><br>
+how one would write a multiline string<strong>\</strong><br>
+and how one would write it.</code></p>
+
+<p>sa zobrazí: <code>This is an example of<strong>\</strong>how one would write a multiline string<strong>\</strong>and how one would write it.</code></p>
+
+<p><code>STILL_ANOTHER_FAKE_STRING=<strong>\</strong><br>
+&nbsp;This is another example of how one would write<strong>\</strong><br>
+&nbsp;a multiline string and how one would write it.</code></p>
+
+<p>sa zobrazí: <code>STILL_ANOTHER_FAKE_STRING=<strong>\</strong> This is another example of how one would write<strong>\</strong> a multiline string and how one would write it.</code></p>
+
+<p>Viacriadkový reťazec sa končí spätným lomítkom a môže ale nemusí byť odsadený.</p>
+
+<p>Niektoré viacriadkové raťazce sa končia znakom nového riadka-n aj spätným lomítkom. Tie reťazce budú aj v skutočnosti v používateľskom rozhraní OmegaT zobrazené ako viaceré riadky, kvôli znakom nového riadka-n.</p>
+
+</div>
+
+<div class="navbar-bottom">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigačná lišta">
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Obsah"><img src="OmegaT.png" border="0" alt="Logo OmegaT"></a></td>
+<td class="rel-p">Predchádzajúce</td>
+<td class="nav-link"><a href="./Matches.html">Zhody a položky slovníka</a></td>
+<td class="rel-n">Nasledujúce</td>
+<td class="nav-link"><a href="./Filters.html">Filtre súborov</a></td></tr>
+</table>
+
+</div>
+
+</body>
+</html>

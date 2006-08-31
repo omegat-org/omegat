@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><!-- changed the order of info, removed "Credits" and put the missing parts on top page, some editing here and there, especially "what is a TM" -->
+
+
+
+<html>
+<head>
+<title>OmegaT: Úvod</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="changed" content="20051103">
+<link rel="stylesheet" type="text/css" href="./omegat.css">
+</head>
+
+<body lang="sk" dir="LTR">
+
+<div class="navbar-top">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigačná lišta">
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Obsah"><img src="OmegaT.png" border="0" alt="Logo OmegaT"></a></td>
+<td class="rel-p">Predchádzajúce</td>
+<td class="nav-link"><a href="./OmegaT.html">Obsah</a></td>
+<td class="rel-n">Nasledujúce</td>
+<td class="nav-link"><a href="./InstallConfig.html">Systémové požiadavky a inštalácia</a></td></tr>
+</table>
+
+</div>
+
+<div class="content">
+
+<a name="1"></a>
+<h1 align="center" name="1" id="1">Čo je OmegaT</h1>
+
+<ol><li><a href="#1.1">Prehľad</a></li>
+<li><a href="#1.2">Čo je na OmegaT zvláštne?</a></li>
+<li><a href="#1.3">Čo je prekladová pamäť</a></li>
+<li><a href="#1.4">Terminológia používaná v tejto príručke</a></li>
+<li><a href="#1.5">Zapojenie sa do projektu OmegaT</a></li>
+<li><a href="#1.6">O tejto príručke</a></li></ol>
+
+<a name="1.1"></a>
+<h2 name="1.1" id="1.1">Prehľad</h2>
+
+<p>OmegaT medzi-platformová aplikácia pre Preklad podporovaný počítačom (Computer Assisted Translation - CAT) s hľadaním nepresných prekladov, prekladovou pamäťou, vyhľadávaním kľúčových slov, identifikáciou pojmov v slovníku a mnohými ďalšími užitočnými funkciami.</p>
+
+<a name="1.2"></a>
+<h2 name="1.2" id="1.2">Čo je na OmegaT zvláštne?</h2>
+
+<p>Na trhu je mnoho programov využívajúcich prekladovú pamäť. Medzi zvláštne črty programu OmegaT patrí to, že je:</p>
+
+<ul><li><strong>nezávislý na platforme</strong>. na fungovanie používa prostredie Java Runtime Environment, takže môže byť použitý na množstve operačných systémov vrátane: Linux, Mac OS X, a Windows;</li>
+<li><strong>zdarma</strong>;</li>
+<li><strong>open-source softvér</strong>. čo znamená, že používatelia ho môžu slobodne distrubuovať a modifikovať;</li>
+<li>distribuovaný s <strong>podporou formátu súborov OpenDocument/OpenOffice.org</strong>.</li>
+<li>produktívny pri <strong>webovej lokalizácii XHMTL alebo HTML súborov</strong>.</li>
+<li>užitočný pre <strong>softvérovú lokalizáciu programov Java</strong>.</li></ul></p>
+
+
+<a name="1.3"></a>
+<h2 name="1.3" id="1.3">Čo je prekladová pamäť?</h2>
+
+<p>Pojem “prekladová pamäť” označuje program, ktorý pracuje s prekladovou pamäťou aj samotnú prekladovú pamäť. Program prekladovaj pamäte, nástroj pre <strong>Preklad Podporovaný počítačom (Computer Assisted Translation - CAT)</strong>, sa používa počas prekladu dokumentov a asistuje prekladateľovi ukladaním kúskov textu do databázy (tj. prekladovej pamäte) tak, že keď sa rovnaký kúsok textu (segment) alebo časť z neho objaví nabudúce je ihneď viditeľné ako bol predtým preložený.</p>
+
+<p>OmegaT ukladá informácie o preklade do 3 osobitných prekladových pamätí, a môže používať už existujúce informácie o preklade z viacerých prekladových pamätí.<dl>
+<dt><strong>&lt;projectname&gt;.tmx</strong></dt><dd>Toto je prekladová pamäť projektu. Je uložená v hlavnom adresári projektu a je automaticky aktualizovaná pri každej kompilácii projektu.</dd>
+<dt><strong>project_save.tmx</strong></dt><dd>Toto je TMX súbor, ktorý je vytvorený v <strong>/omegat</strong> keď je projekt uložený po prvýkrát. Aktualizuje sa pri každom uložení projektu.</dd>
+<dt><strong>project_save.tmx.bak</strong></dt><dd>Toto je TMX súbor, ktorý je vytvorený v <strong>/omegat</strong> keď je projekt prvýkrát znovuotvorený. Slúži ako záloha súboru <strong>project_save.tmx:</strong> a aktualizuje sa pri každom znovuotvorení projektu, predtým ako sa urobí akákoľvek možná zmena v prekladovej pamäti projektu.</dd>
+<dt><strong>*.tmx</strong> v <strong>/tm</strong></dt><dd>Výmenné súbory prekladových pamätí vytvorené predtým. Tieto súbory musia byť vo formáte TMX Level 1.1.</dd></dl>
+
+<p>Viac informácií o formáte prekladových pamätí nájdete v: <a href="./FilesTMGloss.html">Súbory prekladovej pamäte a slovníka</a>.</p>
+
+
+<a name="1.4"></a>
+<h2 name="1.4" id="1.4">Terminológia používaná v tejto príručke</h2>
+
+<p>OmegaT funguje na systémoch Linux, Windows ako aj na MacOSX. Každá platforma používa špecifické pojmy na popis prvkov používateľského prostredia. V tejto príručke sme sa pokúsili dodržať generický spôsob pre popis používateľského prostredia.</p>
+<p>Pri popise hierarchie adresárov (alebo priečinkov) sme použili Unix-ový zápis: <strong>/project/</strong> znamená adresár pomenovaný “project”, <strong>/project/omegat/file.txt</strong> predstavuje súbor “file.txt” umiestnený v adresári s názvom “omegat” adresára “project”.</p>
+<p>Podobne, skratky sa píšu <strong>Ctrl+</strong>(písmeno alebo číslo), ale skutočný kláves bude závisieť od vášho operačného systému. Používatelia MacOSX to budú musieť v mysli previesť na <strong>Cmd+</strong>(písmeno alebo číslo).<a name="1.5"></a>
+<h2 name="1.5" id="1.5">Zapojenie sa do projektu OmegaT</h2>
+
+<p>OmegaT nie je iba produkt; je to vzrušujúci projekt, a vy môžete byť jeho súčasťou. OmegaT je slobodný softvér. To znamená, že používatelia ako vy si ho môžu slobodne stiahnuť a používať len s veľmi malými obmedzeniami. Môžete ho tiež slobodne kopírovať a poskytovať iným ľuďom.</p>
+<p>OmegaT je open-source softvér. To znamená, že ak sa na to cítite, môžete modifikovať program OmegaT aby vyhovoval vaším vlastným požiadavkám. Pre podporovateľov open-source softvéru je táto sloboda dokonca dôležitejšia než výnimka z toho, že musíte za niečo platiť.</p>
+<p>Podľa rovnakej zásady, je projekt OmegaT udržiavaný dobrovoľníkmi, ktorí nedostávajú žiadnu finančnú odmenu za prácu ktorú robia a za čas, ktorý strávia na projekte. Ak považujete program OmegaT za užitočný, môžete sa skontaktovať s vývojarským tímom a finančne ich podporiť. Avšak, projekt sa spolieha pri svojom prežití a rozvoji oveľa viac na používateľov OmegaT poskytujúcich podporu inými formami ako sú finančné príspevky.</p>
+<p>Projekt OmegaT by profitoval z väčšej podpory od dobrovoľníkov v takmer všetkých oblastiach. Hoci mnoho používateľov si je toho vedomých, ich reakcia je často “Ale ja neviem programovať!”. Programovanie je určite najdôležitejšou funkciou, a bez programovania, nie je žiaden program. Ale programovanie nie je jediná vec ktorú treba robiť. Nižšie je zoznam oblastí pre ktoré by boli ďalší dobrovoľníci viac než vítaní!</p>
+
+<a name="1.5.1"></a>
+<h3 name="1.5.1" id="1.5.1">Tvorba dokumentácie</h3>
+
+<p>Dokumentácia je veľmi dôležitá. Mnohí z vás ktorí toto čítate budete prekladateľmi, ktorí prekladali množstvo dokumentácie pre používateľov. Uvažovali sami ste nad napísaním nejakej dokumentácie pre používateľov? Je to skutočne vec na otvorenie očí!</p>
+
+<a name="1.5.2"></a>
+<h3 name="1.5.2" id="1.5.2">Lokalizácia</h3>
+
+<p>Vďaka práci prekaldateľov v minulosti, bolo používateľské rozhranie a/alebo texty Pomocníka programu OmegaT preložené do niekoľkých jazykov. To znamená, že ich už zostalo iba niekoľko tisíc! Lokalizovanie OmegaT do iných jazykov je tiež dlhotrvajúca úloha, keďže sa po celý čas pridávajú nové vlastnosti a funkcie.</p>
+
+<a name="1.5.3"></a>
+<h3 name="1.5.3" id="1.5.3">Testovanie</h3>
+
+<p>Jednou z najužitočnejších vecí, ktoré môžu používatelia OmegaT robiť je... používať OmegaT. A keď nájdú veci, ktoré nefungujú, alebo nedostatky v dokumentácii, oznámiť nám ich.</p>
+
+<a name="1.5.4"></a>
+<h3 name="1.5.4" id="1.5.4">Programovanie (Java)</h3>
+
+<p>Program OmegaT je napísaný v jazyku Java. Ak ste programátor a ovládate jazyk Java, radi o vás budeme počuť. Ak nie...</p>
+
+<a name="1.5.5"></a>
+<h3 name="1.5.5" id="1.5.5">Programovanie (nie Java)</h3>
+
+<p>... v žiadnom prípade nie je potrebné aby všetko programovanie bolo urobené v Jave. Ak viete programovať v inom jazyku, môžete napísať kód pre podporu základnej aplikácie. Taký pomocný kód už bol napísaný napríklad v jazykoch StarBasic, Python a Tcl/Tk. Ale ja vôbec neviem programovať, počujem ako to vravíte. Nuž, uvažovali ste nad tým, že sa naučíte? Ak ste už dosť oboznámení s počítačmi vo všeobecnosti a vyberiete si jednoduchý skriptovací jazyk ako je Tcl/Tk, mohli by ste sa naučiť dosť aby ste boli schopní napísať jednoduché ale užitočné skripty dokonca len do niekoľkých týždňov. Stály profesionálny rozvoj je v súčasnosti nevyhnutný!</p>
+
+<a name="1.5.6"></a>
+<h3 name="1.5.6" id="1.5.6">Publicita</h3>
+
+<p>Napísali ste niekedy článok pre časopis vašej profesionálnej asociácie? Ak nie, prečo nenapísať článok o používaní OmegaT?</p>
+
+<a name="1.5.7"></a>
+<h3 name="1.5.7" id="1.5.7">Buďte v kontakte!</h3>
+
+<p>Používateľská skupina OmegaT, kde môžete robiť návrhy, vymieňať si nápady, dostať odpovede, je na adrese:<br><a href="http://groups.yahoo.com/group/OmegaT/">http://groups.yahoo.com/group/OmegaT/</a>.</p>
+<p>Ľudia, ktorí majú záujem o lokalizáciu sa môžu prihlásiť na mailing list venovaný OmegaT na adrese:<br><a href="http://lists.sourceforge.net/lists/listinfo/omegat-l10n">http://lists.sourceforge.net/lists/listinfo/omegat-l10n</a>.<br>Archívy mailing listu sú na:<br><a href="http://sourceforge.net/mailarchive/forum.php?forum_id=44900">http://sourceforge.net/mailarchive/forum.php?forum_id=44900</a>.<p>Potencionálni vývojári sa môžu prihlásiť na mailing list venovaný OmegaT na adrese:<br><a href="http://lists.sourceforge.net/mailman/listinfo/omegat-development">http://lists.sourceforge.net/mailman/listinfo/omegat-development</a>.<br>Archívy mailing listu sú na:<br><a href="http://sourceforge.net/mailarchive/forum.php?forum_id=40737">http://sourceforge.net/mailarchive/forum.php?forum_id=40737</a>.<a name="1.6"></a>
+<h2 name="1.6" id="1.6">O tejto príručke</h2>
+
+<p>Ďalšie informácie presahujúce to čo je obsiahnuté v tejto príručke nájdete na oficiálnej domovskej stránke <a href="./http://www.omegat.org">OmegaT</a>. Ak by ste mali akékoľvek otázky alebo komentáre k príručke prosím posšlite ich autorovi (e-mail: <a href="./mailto:lin4trans@users.sourceforge.net?subject=OmegaT%20documentation"> lin4trans at users dot sourceforge dot net</a> s predmetom “OmegaT documentation”). Odozva je vítaná!</p>
+
+</div>
+
+
+<div class="navbar-bottom">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigačná lišta">
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Obsah"><img src="OmegaT.png" border="0" alt="Logo OmegaT"></a></td>
+<td class="rel-p">Predchádzajúce</td>
+<td class="nav-link"><a href="./OmegaT.html">Obsah</a></td>
+<td class="rel-n">Nasledujúce</td>
+<td class="nav-link"><a href="./InstallConfig.html">Systémové požiadavky a inštalácia</a></td></tr>
+</table>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<title>OmegaT: Súbory prekladovej pamäte a slovníka</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="generator" content="Kate (Linux)">
+<meta name="changed" content="20051001">
+<link rel="stylesheet" type="text/css" href="./omegat.css">
+</head>
+
+<body lang="sk" dir="LTR">
+
+<div class="navbar-top">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigačná lišta">
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Obsah"><img src="OmegaT.png" border="0" alt="Logo OmegaT"></a></td>
+<td class="rel-p">Predchádzajúce</td>
+<td class="nav-link"><a href="./FilesSourceDoc.html">Súbory zdrojových dokumentov</a></td>
+<td class="rel-n">Nasledujúce</td>
+<td class="nav-link"><a href="./FilesODOOoSO.html">OpenOffice.org a OmegaT</a></td></tr>
+</table>
+
+
+</div>
+
+<div class="content">
+
+<a name="16"></a>
+<h1 align="center" name="16" id="16">Súbory prekladovej pamäte a slovníka</h1>
+
+	<ol><li><a href="#16.1">Súbory prekladovej pamäte</a></li>
+	<li><a href="#16.2">Slovníkové súbory</a></li></ol>
+	
+<p>Súbory prekladovej pamäte vytvorené pomocou OmegaT sú štandardné súbory TMX 1.1.<br> Viac informácií o špecifikácii TMX nájdete na <a href="http://www.lisa.org/standards/tmx/specification.html">http://www.lisa.org/standards/tmx/specification.html</a>.</p>
+
+<p><span class="note">Poznámka!</span> OmegaT 1.6 je prechodná verzia k plnej podpore TMX 1.4b v OmegaT 2.0.</p>
+
+<a name="16.1"></a>
+<h2 name="16.1" id="16.1">Súbory prekladovej pamäte</h2>
+
+<a name="16.1.1"></a>
+<h3 name="16.1.1" id="16.1.1">Súbory vytvorené pomocou OmegaT</h3>
+
+<p>OmegaT generuje súbory prekladovej pamäte, ktoré používajú iba podmnožinu špecifikácie TMX.</p>
+
+<p>Súbory TMX generované pomocou OmegaT pre špecifický projekt sú popísané v časti <a href="./FilesProjDirs.html#14.1">Súbory prekaldového projektu</a>.<p>Štandardný TMX súbor OmegaT vyzerá nasledujúco:</p>
+
+<table border="0">
+<tr><th>OmegaT tmx pred-1.6 (iba odstavcová segmentácia)</th><td></td><th>OmegaT tmx 1.6 (predvolene zapnutá vetná segmentácia)</th></tr>
+<tr><td class="code"><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE tmx SYSTEM "tmx11.dtd"&gt;
+&lt;tmx version="1.1"&gt;
+  &lt;header
+    creationtool="OmegaT"
+    creationtoolversion="1"
+    <b>segtype="paragraph"</b>
+    o-tmf="OmegaT TMX"
+    adminlang="EN-US"
+    srclang="EN-US"
+    datatype="plaintext"
+  &gt;
+  &lt;/header&gt;
+  &lt;body&gt;
+    &lt;tu&gt;
+      &lt;tuv lang="EN-US"&gt;
+        &lt;seg&gt;&amp;Cancel&lt;/seg&gt;
+      &lt;/tuv&gt;
+      &lt;tuv lang="FR-FR"&gt;
+        &lt;seg&gt;&amp;Annuler&lt;/seg&gt;
+      &lt;/tuv&gt;
+    &lt;/tu&gt;
+</pre></td>
+<td>&nbsp;</td>
+<td class="code"><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE tmx SYSTEM "tmx11.dtd"&gt;
+&lt;tmx version="1.1"&gt;
+  &lt;header
+    creationtool="OmegaT"
+    creationtoolversion="1.6"
+    <b>segtype="sentence"</b>
+    o-tmf="OmegaT TMX"
+    adminlang="EN-US"
+    srclang="EN-US"
+    datatype="plaintext"
+  &gt;
+  &lt;/header&gt;
+  &lt;body&gt;
+    &lt;tu&gt;
+      &lt;tuv lang="EN-US"&gt;
+        &lt;seg&gt;OmegaT: Language Character Sets and Fonts&lt;/seg&gt;
+      &lt;/tuv&gt;
+      &lt;tuv lang="FR-FR"&gt;
+        &lt;seg&gt;OmegaT: Langues et fontes&lt;/seg&gt;
+      &lt;/tuv&gt;
+    &lt;/tu&gt;
+</pre></td></tr></table>
+
+<p>Keď chcete pracovať s TMX súbormi vytvorenými staršími verziami OmegaT uistite sa, že beriete do úvahy segmentáciu: buď používate odstavcovú segmentáciu v OmegaT 1.6 alebo manuálne (alebo s použitím konverzného nástroja) prekonvertujte prekladové jednotky (&lt;tu&gt;) z odtavcovaj segmentácie do prekladových jednotiek vetnej segmentácie.</p>
+
+<a name="16.1.2"></a>
+<h3 name="16.1.2" id="16.1.2">Informačná podpora o riadkovom formátovaní</h3>
+
+<p>Ako je popísané v časti <a href="./FilesEditingTagged.html#12.1">Tagy OmegaT</a>, OmegaT berie pri prekladaní do úvahy formátovacie informácie. Tagy OmegaT sú špecifické pre OmegaT, keďže odkazujú iba na kúsky informácií nachádzajúce sa interne v OmegaT, iba ukazujú na kúsky, nezobrazujú ich.</p>
+
+<p>Kým toto správanie bohato stačí pre projekty, ktoré narábajú iba s prekladovými pamäťami OmegaT, znižuje to schopnosť progarmu OmegaT exportovať tmx súbory, ktoré sú úplne pochopiteľné pre ostatné nástroje prekladových pamätí.</p>
+
+<p>Pre použitie tmx súborov programu OmegaT 1.6 v iných nástrojoch, sa odporúča odstrániť tagy špecifické pre OmegaT. Jednoduché techniky konverzie nájdete v časti <a href="#16.1">Podpora textových informácií</a>.<p>Pozrime sa na nasledujúci segment z HTML súboru:</p>
+
+<code>&lt;b&gt;&lt;a href="http://www.omegat.org/EN/home.html"&gt;English&lt;/a&gt; | &lt;a href="http://www.omegat.org/ES/home.html"&gt;Spanish&lt;/a&gt;&lt;/b&gt;</code>
+
+<p>V OmegaT sa zobrazí nasledovne:</p>
+
+<code><strong>&lt;segment nnnn&gt;</strong>&lt;a0&gt;English&lt;/a0&gt; | &lt;a1&gt;Spanish&lt;/a1&gt;<strong>&lt;end segment&gt;</strong></code>
+
+<p><strong>&lt;b&gt;</strong> a <strong>&lt;/b&gt;</strong> sa neberú do úvahy, pretože iba <strong>riadkové</strong> formátovanie ktoré ovplyvňuje časti segmentu sa berie do úvahy v OmegaT. <strong>Tučný</strong> pár tagov ovplyvňuje celý segment a tak sa v OmegaT 1.6 nepovažuje za riadkovú informáciu.</p>
+
+<p>Zodpovedajúca prekladová jednotka tmx v OmegaT by vyzerala takto:</p>
+
+<table border="0"><tr><td class="code">
+<pre>
+ &lt;tu&gt;
+  &lt;tuv lang="EN-US"&gt;
+    &lt;seg&gt;&amp;lt;a0&amp;gt;English&amp;lt;/a0&amp;gt; | &amp;lt;a1&amp;gt;Spanish&amp;lt;/a1&amp;gt;&lt;/seg&gt;
+  &lt;/tuv&gt;
+  &lt;tuv lang="JA-JA"&gt;
+    &lt;seg&gt;&amp;lt;a0&amp;gt;英語&amp;lt;/a0&amp;gt; | &amp;lt;a1&amp;gt;スペイン語&amp;lt;/a1&amp;gt;&lt;/seg&gt;
+  &lt;/tuv&gt;
+ &lt;/tu&gt;
+</pre>
+</td></tr></table>
+
+<p>Toto značenie je špecifické pre OmegaT ale dovoľuje reprodukovať úplnosť formátovania v cieľovom segmente. Preložený html segment zreprodukuje štruktúru pôvodného html segmentu:</p>
+
+<code>&lt;b&gt;&lt;a href="http://www.omegat.org/EN/home.html"&gt;英語&lt;/a&gt; | &lt;a href="http://www.omegat.org/ES/home.html"&gt;スペイン語&lt;/a&gt;&lt;/b&gt;</code>
+
+<p><strong>Interne</strong>, program OmegaT 1.6 podporuje riadkové formátovanie, ale nie je schopný vytvoriť preekladové jednotky podľa TMX level 2 pre použitie v iných nástrojoch dodržiavajúcich TMX level 2.</p>
+
+<p>Predchádzajúca prekladová jednotka by vyzerala nasledovne, ak by bol program OmegaT plne kompatibilný s TMX level 2:</p>
+
+<table border="0"><tr><td class="code">
+<pre>
+ &lt;tu&gt;
+  &lt;tuv lang="EN-US"&gt;
+    &lt;seg&gt;<strong>&lt;bpt&gt;</strong>&lt;b&gt;<strong>&lt;/bpt&gt;</strong>
+    　　　<strong>&lt;bpt&gt;</strong>&lt;a href="http://www.omegat.org/EN/home.html"&gt;<strong>&lt;/bpt&gt;</strong>English<strong>&lt;ept&gt;</strong>&lt;/a&gt;<strong>&lt;/ept&gt;</strong> |　
+    　　　<strong>&lt;bpt&gt;</strong>&lt;a href="http://www.omegat.org/ES/home.html"&gt;<strong>&lt;/bpt&gt;</strong>Spanish<strong>&lt;ept&gt;</strong>&lt;/a&gt;<strong>&lt;/ept&gt;</strong>
+    　　　<strong>&lt;ept&gt;</strong>&lt;/b&gt;<strong>&lt;/ept&gt;</strong>&lt;/seg&gt;
+  &lt;/tuv&gt;
+  &lt;tuv lang="JA-JA"&gt;
+    &lt;seg&gt;&lt;bpt&gt;&lt;b&gt;&lt;/bpt&gt;
+    　　　&lt;bpt&gt;&lt;a href="http://www.omegat.org/EN/home.html"&gt;&lt;/bpt&gt;英語&lt;ept&gt;&lt;/a&gt;&lt;/ept&gt; |　
+    　　　&lt;bpt&gt;&lt;a href="http://www.omegat.org/ES/home.html"&gt;&lt;/bpt&gt;スペイン語&lt;ept&gt;&lt;/a&gt;&lt;/ept&gt;&lt;ept&gt;
+    　　　&lt;/b&gt;&lt;/ept&gt;&lt;/seg&gt;
+  &lt;/tuv&gt;
+ &lt;/tu&gt;
+</pre>
+</td></tr></table>
+
+<p>Kde <strong>bpt</strong> je pár tagov, ktorý označuje kde je začiatočný tag informácie o riadkovom formátovaní (<strong>bpt</strong> znamená <strong>b</strong>egin <strong>p</strong>aired <strong>t</strong>ag - začína párový tag), a <strong>ept</strong> je pár tagov, ktorý označuje, kde je koncový tag informácie o riadkovom formátovaní (<strong>ept</strong> znamená <strong>e</strong>nd <strong>p</strong>aired <strong>t</strong>ag - končí sa párový tag).</p>
+
+<a name="16.1.3"></a>
+<h3 name="16.1.3" id="16.1.3">Podpora textových informácií</h3>
+
+<p>Je možné odstrániť všetky informácie o riadkovom formátovaní aby sa ponechali iba textové informácie (podpora TMX <strong>level 1</strong>).</p>
+
+<p>V tom prípade, odstránenie extra tagov OmegaT pomocou jednoduchej operácie hľadanie/nahradenie pomocou regulárnych výrazov by vytvorila uspokojivý súbor tmx.</p>
+
+<p>S použitím regulárnych výrazov popísaných v časti <a href="./SentSeg.html#9.3">Regulárne výrazy</a> v textovom editore, by sme hľadali <code>&amp;lt;/?[a-z]+\d+&amp;gt;</code> a nahradili to <strong>ničím</strong> ny vytvorenie nasledujúceho tmx súboru OmegaT:</p>
+
+<table border="0"><tr><td class="code">
+<pre>
+ &lt;tu&gt;
+  &lt;tuv lang="EN-US"&gt;
+    &lt;seg&gt;English | Spanish&lt;/seg&gt;
+  &lt;/tuv&gt;
+  &lt;tuv lang="JA-JA"&gt;
+    &lt;seg&gt;英語 | スペイン語&lt;/seg&gt;
+  &lt;/tuv&gt;
+ &lt;/tu&gt;
+</pre>
+</td></tr></table>
+
+<p>S modernými textovými editormi, takáto operácia ny viacerých riadkoch naraz je jednoduchá a umožní vám exportovať OmegaT tmx súbory tak aby boli ľahko použiteľné inými nástrojmi prekladových pamätí.</p>
+
+<p>Viac informácií o formáte tmx a kompatibilite s tmx nájdete v <a href="http://www.lisa.org/standards/tmx/tmx.html">Špecifikácii TMX</a>.</p>
+
+<a name="16.1.4"></a>
+<h3 name="16.1.4" id="16.1.4">Importovanie prekladových pamätí</h3>
+
+<p>Program OmegaT 1.6 je schopný používať akúkoľvek prekladovú pamäť, ktorá vyhovuje štandardu TMX.</p>
+
+<p>Robí to tak, že ignoruje časti, ktoré nemôže využívať, špecificky <strong>atribúty TMX tagov</strong> a <strong>riadkové tagy TMX</strong>, ako aj tmx tagy ako sú <strong>&lt;prop&gt;</strong> a <strong>&lt;note&gt;</strong>.</p>
+
+<p>Nasledujúce tmx súbory sú spracované pomocou OmegaT, ale sekcie označené <strong>tučnými</strong> znakmi nebudú mať pre OmegaT význym. V prípade súboru programu Trados, obsah páru <strong>&lt;seg&gt;</strong> bude zobrazený v okne zhody so všetkými riadkovými znakmi.</p>
+
+<table border="0">
+<tr><th>Súbor tmx vygenerovaný programom CVSConvertor<br>(časti boli odstránené)</th><td></td><th>Súbor tmx vygenerovaný programom Trado<br>(časti boli odstránené)</th></tr>
+<tr><td class="code"><pre>
+&lt;tmx version="1.1"&gt;
+&lt;header 
+      creationtool="CSVConverter" 
+      creationtoolversion="1.0"  
+      srclang="*all*" 
+      adminlang="en"  
+      datatype="xml" 
+      o-tmf="CSV" 
+      segtype="block"
+&gt;
+&lt;/header&gt;
+&lt;body&gt;
+&lt;tu <strong>tuid="1132875702667"</strong>&gt;
+&lt;tuv xml:lang="en"&gt;
+&lt;seg&gt;Table Of Contents&lt;/seg&gt;
+&lt;/tuv&gt;
+&lt;tuv xml:lang="fr"&gt;
+&lt;seg&gt;Table des matières&lt;/seg&gt;
+&lt;/tuv&gt;
+&lt;/tu&gt;
+</pre></td>
+<td>&nbsp;</td>
+<td class="code"><pre>
+&lt;tmx version="1.1"&gt;
+&lt;header
+	 creationtool="TRADOS Translator's Workbench for Windows"
+	 creationtoolversion="Edition 6 Build 417"
+	 segtype="sentence"
+	 o-tmf="TW4Win 2.0 Format"
+	 adminlang="EN-US"
+	 srclang="EN-US"
+	 datatype="rtf"
+&gt;
+<strong>&lt;prop type="RTFFontTable"&gt;
+{\fonttbl 
+{\f1 \fmodern\fprq1 \fcharset0 Courier New;}&lt;/prop&gt;</strong>
+&lt;/header&gt;
+
+&lt;body&gt;
+&lt;tu <strong>creationdate="20050428T232332Q" creationid="JC"</strong>&gt;
+&lt;tuv lang="EN-US"&gt;
+&lt;seg&gt;Table Of Contents&lt;/seg&gt;
+&lt;/tuv&gt;
+&lt;tuv lang="FR-FR"&gt;
+&lt;seg&gt;<strong>&lt;ut&gt;{\f2 &lt;/ut&gt;</strong>T<strong>&lt;ut&gt;}{\f3 &lt;/ut&gt;</strong>able des matières:<strong>&lt;ut&gt;}&lt;/ut&gt;</strong>&lt;/seg&gt;
+&lt;/tuv&gt;
+&lt;/tu&gt;
+</pre></td></tr></table>
+
+<a name="16.2"></a>
+<h2 name="16.2" id="16.2">Slovníkové súbory</h2>
+
+<p>V súčasnosti, OmegaT neposkytuje operácie pre slovníkové termíny. Okno slovníka ukazuje slovníkové termíny, ktoré sa nachádzajú v aktuálnom segmente. Slovníkové operácie budú pridané do novších verzií OmegaT</p>
+
+<a name="16.2.1"></a>
+<h3 name="16.2.1" id="16.2.1">Generovanie slovníkových súborov</h3>
+
+<p>Slovníkové súbory sú obyčajné textové súbory. Tieto súbory obsahujú riadky pozostávajúce z troch stĺpcov oddelených tabulátormi so zdrojovým a cieľovým termínom v prvom a druhom stĺpci, respektíve. Tretí stĺpec v každom riadku môže byť použitý na dodatočné informácie (napr. comentáre, popisy, odkazy, atď.). Kódovanie použité v týchto súboroch je buď predvolené kódovanie systému (s príponou názvu súboru <strong>.tab</strong>) alebo UTF-8 (s príponou súboru <strong>.utf8</strong>).</p>
+<p>Používatelia s prístupom k slovníkom vytvorených pomocou funkcie textového exportu Trados Multiterm ich môžu používať priamo bez zmeny, s podmienkou, že im dajú požadovanú príponu súboru <strong>.tab</strong> a polia zdrojového a cieľového pojmu sú prevé dve polia ako je to požadované.</p>
+
+</div>
+
+<div class="navbar-bottom">
+
+<table border="0" cellpadding="2" width="100%" summary="Navigačná lišta">
+<tr><td class="toc-link"><a href="./OmegaT.html" title="Obsah"><img src="OmegaT.png" border="0" alt="Logo OmegaT"></a></td>
+<td class="rel-p">Predchádzajúce</td>
+<td class="nav-link"><a href="./FilesSourceDoc.html">Súbory zdrojových dokumentov</a></td>
+<td class="rel-n">Nasledujúce</td>
+<td class="nav-link"><a href="./FilesODOOoSO.html">OpenOffice.org a OmegaT</a></td></tr>
+</table>
+
+</div>
+
+</body>
+</html>

@@ -47,6 +47,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.omegat.core.LegacyTM;
 import org.omegat.core.StringEntry;
@@ -334,7 +336,12 @@ public class CommandThread extends Thread
     /**
      * Saves a TMX file to disk
      */
-    private void buildTMXFile(String filename, boolean forceValidTMX, boolean addOrphans) 
+    private void buildTMXFile(String filename, boolean forceValidTMX, boolean addOrphans)
+            throws IOException {
+        buildTMXFile(filename, forceValidTMX, addOrphans, false);
+    }
+
+    private void buildTMXFile(String filename, boolean forceValidTMX, boolean addOrphans, boolean levelTwo) 
             throws IOException
     {
         // build translation database files
@@ -383,6 +390,13 @@ public class CommandThread extends Thread
                 continue;
             source = StaticUtils.makeValidXML(source);
             target = StaticUtils.makeValidXML(target);
+
+            // TO DO: This *possibly* converts occurrences in the actual text of &lt;fX&gt;
+            //        which it should not.
+            if (levelTwo) {
+               source = makeLevelTwo(source);
+               target = makeLevelTwo(target);
+            }
             out.println("    <tu>");                                            // NOI18N
             out.println("      <tuv lang=\"" + sourceLocale + "\">");           // NOI18N
             out.println("        <seg>" + source + "</seg>");                   // NOI18N
@@ -405,6 +419,10 @@ public class CommandThread extends Thread
                                        : transMem.source;
                 target = forceValidTMX ? StaticUtils.stripTags(transMem.target)
                                        : transMem.target;
+                if (levelTwo) {
+                    source = makeLevelTwo(source);
+                    target = makeLevelTwo(target);
+                }
                 if (target.length() == 0)
                     continue;
                 source = StaticUtils.makeValidXML(source);
@@ -426,6 +444,152 @@ public class CommandThread extends Thread
         
         // Close output stream
         out.close();
+    }
+
+    /**
+      * Creates three-quarted-assed TMX level 2 segments from OmegaT internal segments
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    private String makeLevelTwo(String segment) {
+       // Create a storage buffer for the result
+       StringBuffer result = new StringBuffer(segment.length() * 2);
+
+       // Create a pattern matcher for numbers
+       Matcher numberMatch = Pattern.compile("\\d+").matcher("");
+
+       // Find all start tags
+       Matcher match = Pattern.compile("&lt;[\\S+&&[^/\\d]]\\d+&gt;").matcher(segment);
+       int previousMatchEnd = 0;
+       while (match.find()) {
+          // Get the OmegaT tag and tag number
+          String tag = match.group();
+          numberMatch.reset(tag);
+          numberMatch.find();
+          String tagNumber = numberMatch.group(); // Should *always* find one, but test this
+
+          // Check if the corresponding end tag is in this segment too
+          String endTag = "&lt;/" + tag.substring(4);
+          boolean paired = segment.contains(endTag);
+
+          // Wrap the OmegaT tag in TMX tags in the result
+          result.append(segment.substring(previousMatchEnd, match.start())); // text betw. prev. & cur. match
+          if (paired) {
+             result.append("<bpt i='"); // TMX start tag + i attribute
+             result.append(tagNumber);  // OmegaT tag number used as i attribute
+             result.append("'");
+          }
+          else {
+             result.append("<it pos='begin'"); // TMX start tag
+          }
+          result.append(" x='");    // TMX x attribute
+          result.append(tagNumber); // OmegaT tag number used as x attribute
+          result.append("'>");
+          result.append(tag);       // OmegaT tag
+          result.append(paired ? "</bpt>" : "</it>"); // TMX end tag
+
+          // Store the current match's end positions
+          previousMatchEnd = match.end();
+       }
+
+       // Append the text from the last match (start tag) to the end of the segment
+       result.append(segment.substring(previousMatchEnd, segment.length()));
+       segment = result.toString(); // Store intermediate result back in segment
+       result.setLength(0); // Clear result buffer
+
+       // Find all end tags
+       match = Pattern.compile("&lt;/[\\S+&&[^\\d]]\\d+&gt;").matcher(segment);
+       previousMatchEnd = 0;
+       while (match.find()) {
+          // Get the OmegaT tag and tag number
+          String tag = match.group();
+          numberMatch.reset(tag);
+          numberMatch.find();
+          String tagNumber = numberMatch.group(); // Should *always* find one, but test this
+
+          // Check if the corresponding start tag is in this segment too
+          String startTag = "&lt;" + tag.substring(5);
+          boolean paired = segment.contains(startTag);
+
+          // Wrap the OmegaT tag in TMX tags in the result
+          result.append(segment.substring(previousMatchEnd, match.start())); // text betw. prev. & cur. match
+          result.append(paired ? "<ept i='" : "<it pos='end' x='"); // TMX start tag + i/x attribute
+          result.append(tagNumber);                                 // OmegaT tag number used as i/x attribute
+          result.append("'>");
+          result.append(tag);                                       // OmegaT tag
+          result.append(paired ? "</ept>" : "</it>");               // TMX end tag
+
+          // Store the current match's end positions
+          previousMatchEnd = match.end();
+       }
+
+       // Append the text from the last match (end tag) to the end of the segment
+       result.append(segment.substring(previousMatchEnd, segment.length()));
+       segment = result.toString(); // Store intermediate result back in segment
+       result.setLength(0); // Clear result buffer
+
+       // Find all single tags
+       match = Pattern.compile("&lt;[\\S+&&[^\\d]]\\d+/&gt;").matcher(segment);
+       previousMatchEnd = 0;
+       while (match.find()) {
+          // Get the OmegaT tag number
+          numberMatch.reset(match.group());
+          numberMatch.find();
+          String tagNumber = numberMatch.group(); // Should *always* find one, but test this
+
+          // Wrap the OmegaT tag in TMX tags in the result
+          result.append(segment.substring(previousMatchEnd, match.start())); // text betw. prev. & cur. match
+          result.append("<ph x='");    // TMX start tag + i attribute
+          result.append(tagNumber);    // OmegaT tag number used as x attribute
+          result.append("'>");
+          result.append(match.group()); // OmegaT tag
+          result.append("</ph>");      // TMX end tag
+
+          // Store the current match's end positions
+          previousMatchEnd = match.end();
+       }
+
+       // Append the text from the last match (single tag) to the end of the segment
+       result.append(segment.substring(previousMatchEnd, segment.length()));
+
+       // Done, return result
+       return result.toString();
+    }
+
+    /**
+      * Replaces the tag by its proper TMX level 2 representation, even if three-quarter-assed
+      */
+    private String replaceDual(String text, String tag) {
+       // NOTE: This implementation may be only half-assed. Please consider making
+       //       it at least three-quarter-assed, of fully-assed if possible :)
+
+       String result = text;
+
+       // Replace all occurrences of <fX> / </fX>, where X is any number
+       // TO DO/NOTE/FIX: 50 is an arbitrary number, chosen simply because
+       //                 currently I can't think of a better way to detect
+       //                 the end of all possible occurrences. Please improve.
+       for (int i = 0; i <= 50; i++) {
+          // Check for occurrences of <fI>, where I = i and f = tag
+          int location = result.indexOf("&lt;" + tag + i + "&gt;");
+          if (location > -1) {
+             int locationEnd = result.indexOf(';', location + 5);
+             result =   result.substring(0, location)                      // start of string, up to <fI>
+                      + "<bpt i='" + i + "'>&lt;" + tag + i + "&gt;</bpt>" // replacement for <fI>
+                      + result.substring(locationEnd + 1);                 // end of string, after <fI>
+          }
+
+          // Check for occurrences of </fI>, where I = i
+          location = result.indexOf("&lt;/" + tag + i + "&gt;");
+          if (location > -1) {
+             int locationEnd = result.indexOf(';', location + 5);
+             result =   result.substring(0, location)                       // start of string, up to </fI>
+                      + "<ept i='" + i + "'>&lt;/" + tag + i + "&gt;</ept>" // replacement for <fI>
+                      + result.substring(locationEnd + 1);                  // end of string, after </fI>
+          }
+       }
+
+       return result;
     }
     
     /**
@@ -508,6 +672,11 @@ public class CommandThread extends Thread
             fname = m_config.getProjectRoot() + m_config.getProjectName() +
                 OConsts.LEVEL1_TMX + OConsts.TMX_EXTENSION;
             buildTMXFile(fname, true, false);
+
+            // build three-quarter-assed TMX level 2 file
+            fname = m_config.getProjectRoot() + m_config.getProjectName() +
+                OConsts.LEVEL2_TMX + OConsts.TMX_EXTENSION;
+            buildTMXFile(fname, false, false, true);
         }
         catch (IOException e)
         {

@@ -428,10 +428,12 @@ public class CommandThread extends Thread
                 source = StaticUtils.makeValidXML(source);
                 target = StaticUtils.makeValidXML(target);
                 out.println("    <tu>");                                            // NOI18N
-                out.println("      <tuv lang=\"" + sourceLocale + "\">");           // NOI18N
+                //out.println("      <tuv lang=\"" + sourceLocale + "\">");           // NOI18N
+                out.println("      <tuv xml:lang=\"" + sourceLocale + "\">");           // NOI18N
                 out.println("        <seg>" + source + "</seg>");                   // NOI18N
                 out.println("      </tuv>");                                        // NOI18N
-                out.println("      <tuv lang=\"" + targetLocale + "\">");           // NOI18N
+                //out.println("      <tuv lang=\"" + targetLocale + "\">");           // NOI18N
+                out.println("      <tuv xml:lang=\"" + targetLocale + "\">");           // NOI18N
                 out.println("        <seg>" + target + "</seg>");                   // NOI18N
                 out.println("      </tuv>");                                        // NOI18N
                 out.println("    </tu>");                                           // NOI18N
@@ -529,7 +531,8 @@ public class CommandThread extends Thread
        result.setLength(0); // Clear result buffer
 
        // Find all single tags
-       match = Pattern.compile("&lt;[\\S+&&[^\\d]]\\d+/&gt;").matcher(segment);
+       //match = Pattern.compile("&lt;[\\S+&&[^\\d]]\\d+/&gt;").matcher(segment);
+       match = Pattern.compile("&lt;[\\S+&&[^&]]\\d+/&gt;").matcher(segment);
        previousMatchEnd = 0;
        while (match.find()) {
           // Get the OmegaT tag number

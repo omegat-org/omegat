@@ -461,9 +461,36 @@ public class CommandThread extends Thread
        // Create a pattern matcher for numbers
        Matcher numberMatch = Pattern.compile("\\d+").matcher("");
 
-       // Find all start tags
-       Matcher match = Pattern.compile("&lt;[\\S+&&[^/\\d]]\\d+&gt;").matcher(segment);
+       // Find all single tags
+       //Matcher match = Pattern.compile("&lt;[\\S+&&[^\\d]]\\d+/&gt;").matcher(segment); // Why doesn't this work???
+       Matcher match = Pattern.compile("&lt;[a-z]+\\d+/&gt;").matcher(segment); // This reduces tag options, but works
        int previousMatchEnd = 0;
+       while (match.find()) {
+          // Get the OmegaT tag number
+          numberMatch.reset(match.group());
+          numberMatch.find();
+          String tagNumber = numberMatch.group(); // Should *always* find one, but test this
+
+          // Wrap the OmegaT tag in TMX tags in the result
+          result.append(segment.substring(previousMatchEnd, match.start())); // text betw. prev. & cur. match
+          result.append("<ph x='");    // TMX start tag + i attribute
+          result.append(tagNumber);    // OmegaT tag number used as x attribute
+          result.append("'>");
+          result.append(match.group()); // OmegaT tag
+          result.append("</ph>");      // TMX end tag
+
+          // Store the current match's end positions
+          previousMatchEnd = match.end();
+       }
+
+       // Append the text from the last match (single tag) to the end of the segment
+       result.append(segment.substring(previousMatchEnd, segment.length()));
+       segment = result.toString(); // Store intermediate result back in segment
+       result.setLength(0); // Clear result buffer
+
+       // Find all start tags
+       match = Pattern.compile("&lt;[\\S+&&[^/\\d]]\\d+&gt;").matcher(segment);
+       previousMatchEnd = 0;
        while (match.find()) {
           // Get the OmegaT tag and tag number
           String tag = match.group();
@@ -528,33 +555,8 @@ public class CommandThread extends Thread
 
        // Append the text from the last match (end tag) to the end of the segment
        result.append(segment.substring(previousMatchEnd, segment.length()));
-       segment = result.toString(); // Store intermediate result back in segment
-       result.setLength(0); // Clear result buffer
-
-       // Find all single tags
-       //match = Pattern.compile("&lt;[\\S+&&[^\\d]]\\d+/&gt;").matcher(segment);
-       match = Pattern.compile("&lt;[\\S+&&[^&]]\\d+/&gt;").matcher(segment);
-       previousMatchEnd = 0;
-       while (match.find()) {
-          // Get the OmegaT tag number
-          numberMatch.reset(match.group());
-          numberMatch.find();
-          String tagNumber = numberMatch.group(); // Should *always* find one, but test this
-
-          // Wrap the OmegaT tag in TMX tags in the result
-          result.append(segment.substring(previousMatchEnd, match.start())); // text betw. prev. & cur. match
-          result.append("<ph x='");    // TMX start tag + i attribute
-          result.append(tagNumber);    // OmegaT tag number used as x attribute
-          result.append("'>");
-          result.append(match.group()); // OmegaT tag
-          result.append("</ph>");      // TMX end tag
-
-          // Store the current match's end positions
-          previousMatchEnd = match.end();
-       }
-
-       // Append the text from the last match (single tag) to the end of the segment
-       result.append(segment.substring(previousMatchEnd, segment.length()));
+       //segment = result.toString(); // Store intermediate result back in segment
+       //result.setLength(0); // Clear result buffer
 
        // Done, return result
        return result.toString();

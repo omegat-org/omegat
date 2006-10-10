@@ -578,8 +578,12 @@ class FilterVisitor extends NodeVisitor
             result.append(Character.toLowerCase(tag.getTagName().charAt(0)));
         
         result.append(n);
-        if(tag.isEmptyXmlTag())
-            result.append('/');
+        if(tag.isEmptyXmlTag()) // This only detects tags that already have a slash in the source,
+            result.append('/'); // but ignores HTML 4.x style <br>, <img>, and similar tags without one
+                                // The code below would fix that, but breaks backwards compatibility
+                                // with previously translated HTML files
+        // if (tag.isEmptyXmlTag() || tag.getTagName().equals("BR") || tag.getTagName().equals("IMG"))
+        //   result.append('/');
         result.append('>');
         
         String shortcut = result.toString();

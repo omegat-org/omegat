@@ -399,10 +399,12 @@ public class CommandThread extends Thread
                target = makeLevelTwo(target);
             }
             out.println("    <tu>");                                            // NOI18N
-            out.println("      <tuv lang=\"" + sourceLocale + "\">");           // NOI18N
+            //out.println("      <tuv lang=\"" + sourceLocale + "\">");           // NOI18N
+            out.println("      <tuv xml:lang=\"" + sourceLocale + "\">");           // NOI18N
             out.println("        <seg>" + source + "</seg>");                   // NOI18N
             out.println("      </tuv>");                                        // NOI18N
-            out.println("      <tuv lang=\"" + targetLocale + "\">");           // NOI18N
+            //out.println("      <tuv lang=\"" + targetLocale + "\">");           // NOI18N
+            out.println("      <tuv xml:lang=\"" + targetLocale + "\">");           // NOI18N
             out.println("        <seg>" + target + "</seg>");                   // NOI18N
             out.println("      </tuv>");                                        // NOI18N
             out.println("    </tu>");                                           // NOI18N
@@ -462,8 +464,8 @@ public class CommandThread extends Thread
        Matcher numberMatch = Pattern.compile("\\d+").matcher("");
 
        // Find all single tags
-       //Matcher match = Pattern.compile("&lt;[\\S+&&[^\\d]]\\d+/&gt;").matcher(segment); // Why doesn't this work???
-       Matcher match = Pattern.compile("&lt;[a-z]+\\d+/&gt;").matcher(segment); // This reduces tag options, but works
+       //Matcher match = Pattern.compile("&lt;[a-zA-Z\-]+\\d+/&gt;").matcher(segment);
+       Matcher match = Pattern.compile("&lt;[\\S&&[^/\\d]]+\\d+/&gt;").matcher(segment);
        int previousMatchEnd = 0;
        while (match.find()) {
           // Get the OmegaT tag number
@@ -489,7 +491,7 @@ public class CommandThread extends Thread
        result.setLength(0); // Clear result buffer
 
        // Find all start tags
-       match = Pattern.compile("&lt;[\\S+&&[^/\\d]]\\d+&gt;").matcher(segment);
+       match = Pattern.compile("&lt;[\\S&&[^/\\d]]+\\d+&gt;").matcher(segment);
        previousMatchEnd = 0;
        while (match.find()) {
           // Get the OmegaT tag and tag number
@@ -528,7 +530,7 @@ public class CommandThread extends Thread
        result.setLength(0); // Clear result buffer
 
        // Find all end tags
-       match = Pattern.compile("&lt;/[\\S+&&[^\\d]]\\d+&gt;").matcher(segment);
+       match = Pattern.compile("&lt;/[\\S&&[^\\d]]+\\d+&gt;").matcher(segment);
        previousMatchEnd = 0;
        while (match.find()) {
           // Get the OmegaT tag and tag number

@@ -465,20 +465,24 @@ public class CommandThread extends Thread
 
        // Find all single tags
        //Matcher match = Pattern.compile("&lt;[a-zA-Z\-]+\\d+/&gt;").matcher(segment);
-       Matcher match = Pattern.compile("&lt;[\\S&&[^/\\d]]+\\d+/&gt;").matcher(segment);
+       Matcher match = Pattern.compile("&lt;[\\S&&[^/\\d]]+(\\d+)/&gt;").matcher(segment);
        int previousMatchEnd = 0;
        while (match.find()) {
+          // get the OmegaT tag and tag number
+          String tag = match.group();
+          String tagNumber = match.group(1);
+
           // Get the OmegaT tag number
-          numberMatch.reset(match.group());
-          numberMatch.find();
-          String tagNumber = numberMatch.group(); // Should *always* find one, but test this
+          //numberMatch.reset(match.group());
+          //numberMatch.find();
+          //String tagNumber = numberMatch.group(); // Should *always* find one, but test this
 
           // Wrap the OmegaT tag in TMX tags in the result
           result.append(segment.substring(previousMatchEnd, match.start())); // text betw. prev. & cur. match
           result.append("<ph x='");    // TMX start tag + i attribute
           result.append(tagNumber);    // OmegaT tag number used as x attribute
           result.append("'>");
-          result.append(match.group()); // OmegaT tag
+          result.append(tag); // OmegaT tag
           result.append("</ph>");      // TMX end tag
 
           // Store the current match's end positions
@@ -491,14 +495,18 @@ public class CommandThread extends Thread
        result.setLength(0); // Clear result buffer
 
        // Find all start tags
-       match = Pattern.compile("&lt;[\\S&&[^/\\d]]+\\d+&gt;").matcher(segment);
+       match = Pattern.compile("&lt;[\\S&&[^/\\d]]+(\\d+)&gt;").matcher(segment);
        previousMatchEnd = 0;
        while (match.find()) {
-          // Get the OmegaT tag and tag number
+          // get the OmegaT tag and tag number
           String tag = match.group();
-          numberMatch.reset(tag);
-          numberMatch.find();
-          String tagNumber = numberMatch.group(); // Should *always* find one, but test this
+          String tagNumber = match.group(1);
+
+          // Get the OmegaT tag and tag number
+          //String tag = match.group();
+          //numberMatch.reset(tag);
+          //numberMatch.find();
+          //String tagNumber = numberMatch.group(); // Should *always* find one, but test this
 
           // Check if the corresponding end tag is in this segment too
           String endTag = "&lt;/" + tag.substring(4);
@@ -530,14 +538,18 @@ public class CommandThread extends Thread
        result.setLength(0); // Clear result buffer
 
        // Find all end tags
-       match = Pattern.compile("&lt;/[\\S&&[^\\d]]+\\d+&gt;").matcher(segment);
+       match = Pattern.compile("&lt;/[\\S&&[^\\d]]+(\\d+)&gt;").matcher(segment);
        previousMatchEnd = 0;
        while (match.find()) {
-          // Get the OmegaT tag and tag number
+          // get the OmegaT tag and tag number
           String tag = match.group();
-          numberMatch.reset(tag);
-          numberMatch.find();
-          String tagNumber = numberMatch.group(); // Should *always* find one, but test this
+          String tagNumber = match.group(1);
+
+          // Get the OmegaT tag and tag number
+          //String tag = match.group();
+          //numberMatch.reset(tag);
+          //numberMatch.find();
+          //String tagNumber = numberMatch.group(); // Should *always* find one, but test this
 
           // Check if the corresponding start tag is in this segment too
           String startTag = "&lt;" + tag.substring(5);

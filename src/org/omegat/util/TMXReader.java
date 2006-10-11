@@ -410,6 +410,43 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     {
         return segtype;
     }
+    
+    /**
+      * Determins if TMX level 2 codes should be included or skipped.
+      * These will only be included if the creation tool is OmegaT,
+      * version 1.6 RC13 or higher.
+      */
+    private void checkLevel2() {
+        // set inclusion of TMX level 2 codes to false by default
+        includeLevel2 = false;
+        
+        // ignore the codes if the TMX has been created by another tool
+        if (!creationtool.equals(CT_OMEGAT))
+            return;
+        
+        // get the version number
+        Matcher matcher = Pattern.compile("\\d.\\d").matcher(creationtoolversion);
+        if (!matcher.find()) { // if no version number can be retrieved, don't include the codes
+           return;
+        }
+        else {
+            // ignore the codes if the TMX has been created by a version earlier than 1.6
+            double omtVersionNumber = Double.parseDouble(matcher.group());
+            if (omtVersionNumber < 1.6)
+               return;
+            
+            // ignore the codes if the TMX has been created by a version earlier than RC13
+            matcher = Pattern.compile("RC(\\d+)").matcher(creationtoolversion);
+            if (matcher.find()) { // only test this if there's an RC number at all
+               int omtRCNumber = Integer.parseInt(matcher.group(1));
+               if (omtRCNumber < 12) // FIX: this should be 13, but the RC number is still defined as 12
+                  return;
+            }
+        }
+        
+        // if all tests have been passed, TMX level 2 codes must be included
+        includeLevel2 = true;
+    }
 
     /**
       * Loads the specified TMX file by using a SAX parser.
@@ -587,7 +624,8 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                            int    length) throws SAXException 
     {
         // if not in a segment, or when in an inline element other than sub, do nothing
-        if (!inSegment || ((String)currentElement.peek()).equals(TMX_TAG_INLINE))
+        // if (!inSegment || ((String)currentElement.peek()).equals(TMX_TAG_INLINE))
+        if (!inSegment || (!includeLevel2 && ((String)currentElement.peek()).equals(TMX_TAG_INLINE)))
             return;
             
         // determine the correct buffer to add the data to
@@ -609,7 +647,8 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                                     int    length) throws SAXException 
     {
         // if not in a segment, or when in an inline element other than sub, do nothing
-        if (!inSegment || ((String)currentElement.peek()).equals(TMX_TAG_INLINE))
+        // if (!inSegment || ((String)currentElement.peek()).equals(TMX_TAG_INLINE))
+        if (!inSegment || (!includeLevel2 && ((String)currentElement.peek()).equals(TMX_TAG_INLINE)))
             return;
         
         // determine the correct buffer to add the data to
@@ -667,6 +706,9 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         // give a warning that TMX file will be upgraded to sentence segmentation
         if (isUpgradeSentSeg())
             StaticUtils.log(OStrings.getString("TMXR_WARNING_UPGRADE_SENTSEG"));
+        
+        // check if level 2 codes should be included (only for OmegaT 1.6 RC13 and higher)
+        checkLevel2();
     }
 
     /**
@@ -947,6 +989,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     private String    sourceLanguage;    // Language/country code set by OmT: LL(-CC)
     private String    targetLanguage;    // Language/country code set by OmT: LL(-CC)
     private String    tmxSourceLanguage; // Language/country code as specified in TMX header: LL(-CC)
+    private boolean   includeLevel2;     // True if TMX level 2 markup must be interpreted
     private boolean   isProjectTMX;      // True if the TMX file being loaded is the project TMX
     private boolean   headerParsed;      // True if the TMX header has been parsed correctly
     private boolean   inTU;              // True if the current parsing point is in a TU element
@@ -956,6 +999,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     private ArrayList tuvs;              // Contains all TUVs of the current TU
     private Stack     currentElement;    // Stack of tag names up to the current parsing point
     private Stack     currentSub;        // Stack of sub segment buffers
+
     
     /**
       * Internal class to represent translation unit variants

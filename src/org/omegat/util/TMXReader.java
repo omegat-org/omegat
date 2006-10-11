@@ -485,7 +485,6 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             parser.getXMLReader().setEntityResolver(this);
             
             // parse the TM, provide the current TMX reader as notification handler
-            //parser.parse(new java.io.File(filename), this);
             InputSource is = new InputSource(new XMLReader(filename, m_encoding));
             is.setSystemId("");                                                 // NOI18N
             parser.parse(is, this);
@@ -624,7 +623,6 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                            int    length) throws SAXException 
     {
         // if not in a segment, or when in an inline element other than sub, do nothing
-        // if (!inSegment || ((String)currentElement.peek()).equals(TMX_TAG_INLINE))
         if (!inSegment || (!includeLevel2 && ((String)currentElement.peek()).equals(TMX_TAG_INLINE)))
             return;
             
@@ -647,7 +645,6 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                                     int    length) throws SAXException 
     {
         // if not in a segment, or when in an inline element other than sub, do nothing
-        // if (!inSegment || ((String)currentElement.peek()).equals(TMX_TAG_INLINE))
         if (!inSegment || (!includeLevel2 && ((String)currentElement.peek()).equals(TMX_TAG_INLINE)))
             return;
         

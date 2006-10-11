@@ -260,8 +260,6 @@ public class CommandThread extends Thread
                 MessageRelay.uiMessageSetMessageText(tf, evtStr);
                 return;
             }
-//			if (numEntries() <= 0)
-//				throw new IOException("The project is empty");
             tf.finishLoadProject();
             MessageRelay.uiMessageDisplayEntry(tf);
             if (m_saveCount == -1)
@@ -363,7 +361,6 @@ public class CommandThread extends Thread
         // Write TMX header
         out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");              // NOI18N
         out.println("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">");                     // NOI18N
-        //out.println("<tmx version=\"1.1\">");                                   // NOI18N
         out.println(levelTwo ? "<tmx version=\"1.4\">" : "<tmx version=\"1.1\">"); // NOI18N
         out.println("  <header");                                               // NOI18N
         out.println("    creationtool=\"OmegaT\"");                             // NOI18N
@@ -399,11 +396,9 @@ public class CommandThread extends Thread
                target = makeLevelTwo(target);
             }
             out.println("    <tu>");                                            // NOI18N
-            //out.println("      <tuv lang=\"" + sourceLocale + "\">");           // NOI18N
             out.println("      <tuv xml:lang=\"" + sourceLocale + "\">");           // NOI18N
             out.println("        <seg>" + source + "</seg>");                   // NOI18N
             out.println("      </tuv>");                                        // NOI18N
-            //out.println("      <tuv lang=\"" + targetLocale + "\">");           // NOI18N
             out.println("      <tuv xml:lang=\"" + targetLocale + "\">");           // NOI18N
             out.println("        <seg>" + target + "</seg>");                   // NOI18N
             out.println("      </tuv>");                                        // NOI18N
@@ -431,11 +426,9 @@ public class CommandThread extends Thread
                 source = StaticUtils.makeValidXML(source);
                 target = StaticUtils.makeValidXML(target);
                 out.println("    <tu>");                                            // NOI18N
-                //out.println("      <tuv lang=\"" + sourceLocale + "\">");           // NOI18N
                 out.println("      <tuv xml:lang=\"" + sourceLocale + "\">");           // NOI18N
                 out.println("        <seg>" + source + "</seg>");                   // NOI18N
                 out.println("      </tuv>");                                        // NOI18N
-                //out.println("      <tuv lang=\"" + targetLocale + "\">");           // NOI18N
                 out.println("      <tuv xml:lang=\"" + targetLocale + "\">");           // NOI18N
                 out.println("        <seg>" + target + "</seg>");                   // NOI18N
                 out.println("      </tuv>");                                        // NOI18N
@@ -472,11 +465,6 @@ public class CommandThread extends Thread
           String tag = match.group();
           String tagNumber = match.group(1);
 
-          // Get the OmegaT tag number
-          //numberMatch.reset(match.group());
-          //numberMatch.find();
-          //String tagNumber = numberMatch.group(); // Should *always* find one, but test this
-
           // Wrap the OmegaT tag in TMX tags in the result
           result.append(segment.substring(previousMatchEnd, match.start())); // text betw. prev. & cur. match
           result.append("<ph x='");    // TMX start tag + i attribute
@@ -501,12 +489,6 @@ public class CommandThread extends Thread
           // get the OmegaT tag and tag number
           String tag = match.group();
           String tagNumber = match.group(1);
-
-          // Get the OmegaT tag and tag number
-          //String tag = match.group();
-          //numberMatch.reset(tag);
-          //numberMatch.find();
-          //String tagNumber = numberMatch.group(); // Should *always* find one, but test this
 
           // Check if the corresponding end tag is in this segment too
           String endTag = "&lt;/" + tag.substring(4);
@@ -545,12 +527,6 @@ public class CommandThread extends Thread
           String tag = match.group();
           String tagNumber = match.group(1);
 
-          // Get the OmegaT tag and tag number
-          //String tag = match.group();
-          //numberMatch.reset(tag);
-          //numberMatch.find();
-          //String tagNumber = numberMatch.group(); // Should *always* find one, but test this
-
           // Check if the corresponding start tag is in this segment too
           String startTag = "&lt;" + tag.substring(5);
           boolean paired = segment.contains(startTag);
@@ -569,49 +545,11 @@ public class CommandThread extends Thread
 
        // Append the text from the last match (end tag) to the end of the segment
        result.append(segment.substring(previousMatchEnd, segment.length()));
-       //segment = result.toString(); // Store intermediate result back in segment
-       //result.setLength(0); // Clear result buffer
 
        // Done, return result
        return result.toString();
     }
 
-    /**
-      * Replaces the tag by its proper TMX level 2 representation, even if three-quarter-assed
-      */
-    private String replaceDual(String text, String tag) {
-       // NOTE: This implementation may be only half-assed. Please consider making
-       //       it at least three-quarter-assed, of fully-assed if possible :)
-
-       String result = text;
-
-       // Replace all occurrences of <fX> / </fX>, where X is any number
-       // TO DO/NOTE/FIX: 50 is an arbitrary number, chosen simply because
-       //                 currently I can't think of a better way to detect
-       //                 the end of all possible occurrences. Please improve.
-       for (int i = 0; i <= 50; i++) {
-          // Check for occurrences of <fI>, where I = i and f = tag
-          int location = result.indexOf("&lt;" + tag + i + "&gt;");
-          if (location > -1) {
-             int locationEnd = result.indexOf(';', location + 5);
-             result =   result.substring(0, location)                      // start of string, up to <fI>
-                      + "<bpt i='" + i + "'>&lt;" + tag + i + "&gt;</bpt>" // replacement for <fI>
-                      + result.substring(locationEnd + 1);                 // end of string, after <fI>
-          }
-
-          // Check for occurrences of </fI>, where I = i
-          location = result.indexOf("&lt;/" + tag + i + "&gt;");
-          if (location > -1) {
-             int locationEnd = result.indexOf(';', location + 5);
-             result =   result.substring(0, location)                       // start of string, up to </fI>
-                      + "<ept i='" + i + "'>&lt;/" + tag + i + "&gt;</ept>" // replacement for <fI>
-                      + result.substring(locationEnd + 1);                  // end of string, after </fI>
-          }
-       }
-
-       return result;
-    }
-    
     /**
      * Scans project and builds the list of entries which are suspected of
      * having changed (possibly invalid) tag structures.

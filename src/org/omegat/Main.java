@@ -52,6 +52,11 @@ public class Main
                 "\n");                                                                    // NOI18N
         try
         {
+            // Workaround for JDK bug 6389282 (OmegaT bug bug 1555809)
+            // it should be called before setLookAndFeel() for GTK LookandFeel
+            // Contributed by Masaki Katakai (SF: katakai)
+            UIManager.getInstalledLookAndFeels();
+
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             
             // MacOSX-specfic

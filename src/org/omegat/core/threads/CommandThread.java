@@ -1296,10 +1296,10 @@ public class CommandThread extends Thread
             totalChars += chars * dups;
         }
 
-        int remainingSegments = getNumberOfUniqueSegments()-getNumberofTranslatedSegments(),
-                remainingWords = 0,
-                remainingCharsNoSpaces = 0,
-                remainingChars = 0;
+        int remainingSegments = getNumberOfUniqueSegments()-getNumberofTranslatedSegments();
+        int remainingWords = 0;
+        int remainingCharsNoSpaces = 0;
+        int remainingChars = 0;
         SortedMap counts = new TreeMap();
         for (int i = 0; i < m_srcTextEntryArray.size(); i++)
         {

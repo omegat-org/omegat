@@ -515,7 +515,15 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             StaticUtils.log(OStrings.getString("TMXR_INFO_READING_COMPLETE"));
             StaticUtils.log("");
         }
-        catch (Exception exception) 
+        catch (SAXParseException exception) {
+            StaticUtils.log(MessageFormat.format(
+                OStrings.getString("TMXR_FATAL_ERROR_WHILE_PARSING"), 
+                new Object[]{String.valueOf(exception.getLineNumber()),
+                             String.valueOf(exception.getColumnNumber()),
+                             exception.getLocalizedMessage()}));
+                exception.printStackTrace(StaticUtils.getLogStream());
+        }
+        catch (Exception exception)
         {
             StaticUtils.log(MessageFormat.format(
                 OStrings.getString("TMXR_EXCEPTION_WHILE_PARSING"), 
@@ -531,7 +539,10 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     {
         StaticUtils.log(MessageFormat.format(
             OStrings.getString("TMXR_WARNING_WHILE_PARSING"), 
-            new Object[]{exception.getLocalizedMessage()}));
+            new Object[]{String.valueOf(exception.getLineNumber()),
+                         String.valueOf(exception.getColumnNumber()),
+                         exception.getLocalizedMessage()}));
+            exception.printStackTrace(StaticUtils.getLogStream());
     }
 
     /**
@@ -541,7 +552,10 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     {
         StaticUtils.log(MessageFormat.format(
             OStrings.getString("TMXR_RECOVERABLE_ERROR_WHILE_PARSING"), 
-            new Object[]{exception.getLocalizedMessage()}));
+            new Object[]{String.valueOf(exception.getLineNumber()),
+                         String.valueOf(exception.getColumnNumber()),
+                         exception.getLocalizedMessage()}));
+            exception.printStackTrace(StaticUtils.getLogStream());
     }
     
     /**
@@ -551,7 +565,10 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     {
         StaticUtils.log(MessageFormat.format(
             OStrings.getString("TMXR_FATAL_ERROR_WHILE_PARSING"), 
-            new Object[]{exception.getLocalizedMessage()}));
+            new Object[]{String.valueOf(exception.getLineNumber()),
+                         String.valueOf(exception.getColumnNumber()),
+                         exception.getLocalizedMessage()}));
+            exception.printStackTrace(StaticUtils.getLogStream());
     }
 
     /**

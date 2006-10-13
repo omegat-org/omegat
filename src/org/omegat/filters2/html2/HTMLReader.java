@@ -133,22 +133,26 @@ public class HTMLReader extends Reader
                     encoding = matcher_xml.group(1);
             }
         }
-        
+
+        // reset the inputstream to its start
         is.reset();
-        if( encoding!=null )
-        {
-            return new InputStreamReader(is, encoding);
-        }
-        
-        // default encoding if we couldn't detect it ourselves
-        try
-        {
-            return new InputStreamReader(is, defaultEncoding);
-        }
-        catch( Exception e )
-        {
-            return new InputStreamReader(is);
-        }
+
+        // create an inputstream reader
+        InputStreamReader isr = null;
+
+        // try the encoding specified in the file first
+        if(encoding != null)
+            try {isr = new InputStreamReader(is, encoding);} catch (Exception e) {}
+
+        // if there's no reader yet, try the default encoding
+        if (isr == null)
+            try {isr = new InputStreamReader(is, defaultEncoding);} catch (Exception e) {}
+
+        // just create one without an encoding and cross fingers
+        if (isr == null)
+            isr = new InputStreamReader(is);
+
+        return isr;
     }
     
     public void close() throws IOException

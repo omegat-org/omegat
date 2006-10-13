@@ -120,7 +120,7 @@ public class OpenDocDialect extends DefaultXMLDialect
                 "text:alphabetical-index-mark",                                 // NOI18N
                 new String[] { "text:string-value", "text:key1", "text:key2" });// NOI18N
         defineTranslatableTagsAttribute(
-                new String[] {"text:bookmark", "text-bookmark-start", "text:bookmark-end"}, // NOI18N
+                new String[] {"text:bookmark", "text:bookmark-start", "text:bookmark-end"}, // NOI18N
                 "text:name");                                                   // NOI18N
         defineTranslatableTagAttribute("text:bookmark-ref", "text:ref-name");   // NOI18N
     }

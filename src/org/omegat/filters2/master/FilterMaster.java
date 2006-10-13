@@ -158,6 +158,7 @@ public class FilterMaster
     public String processEntry(String entry)
     {
         // ugly hack, to say the truth
+        // HP: may be, but for what purpose???
         String src = removeLineFeed(entry);
         
         // some special space handling

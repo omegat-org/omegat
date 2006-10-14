@@ -317,6 +317,57 @@ public class CommandThread extends Thread
             else
                 StaticUtils.log("Project Load aborted by user.");               // NOI18N
         }
+        catch (OutOfMemoryError oome) {
+            // Oh shit, we're all out of storage space!
+            m_strEntryHash.clear();
+            m_strEntryHash = null;
+            m_strEntryList.clear();
+            m_strEntryList = null;
+            m_srcTextEntryArray.clear();
+            m_srcTextEntryArray = null;
+            m_legacyTMs.clear();
+            m_legacyTMs = null;
+            m_tmList.clear();
+            m_tmList = null;
+            m_orphanedList.clear();
+            m_orphanedList = null;
+            m_extensionList.clear();
+            m_extensionList = null;
+            m_extensionMapList.clear();
+            m_extensionMapList = null;
+            m_glossary = null;
+
+            // Well, that cleared up some, GC to the rescue!
+            System.gc();
+
+            // There, that should do it, now inform the user
+            m_transFrame.displayError(
+               "We are sorry to inform you that your computer is lacking sufficient\n" +
+               "storage space for OmegaT to do it's thing (if your name is Raymond,\n" +
+               "either fix it or quit whining).\n" +
+               "\n" +
+               "There are a number of approaches you can take to correct this\n" +
+               "deplorable situation:\n"  +
+               "\n" +
+               "1) Insert 1 or more memory chips into your computer's motherboard\n" +
+               "(if your name is Raymond, ask for donations first)\n" +
+               "\n" +
+               "2) Cut some of that documentation you are translating\n" +
+               "(if your name is Raymond, nobody's reading it anyway)\n" +
+               "\n" +
+               "3) Buy a new computer\n" +
+               "(if your name is Raymond, beg for donations)\n" +
+               "\n" +
+               "4) Stop translating\n" +
+               "(if your name is Raymond, you probably have no serious translation\n" +
+               "work anyway).\n" +
+               "\n" +
+               "Oh, by the way, OmegaT is now quitting.\n",
+               oome);
+
+            // Just quit, we can't help it anyway
+            System.exit(0);
+        }
     }
     
     

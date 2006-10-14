@@ -66,6 +66,12 @@ public class Preferences
     public static final String MAINWINDOW_Y      = "screen_y";                  // NOI18N
     public static final String MAINWINDOW_LAYOUT = "docking_layout";            // NOI18N
     
+    // Project files window size and position    
+    public static final String PROJECT_FILES_WINDOW_WIDTH  = "project_files_window_width";  // NOI18N
+    public static final String PROJECT_FILES_WINDOW_HEIGHT = "project_files_window_height"; // NOI18N
+    public static final String PROJECT_FILES_WINDOW_X      = "project_files_window_x";      // NOI18N
+    public static final String PROJECT_FILES_WINDOW_Y      = "project_files_window_y";      // NOI18N
+    
     // Search window size and position    
     public static final String SEARCHWINDOW_WIDTH  = "search_window_width";     // NOI18N
     public static final String SEARCHWINDOW_HEIGHT = "search_window_height";    // NOI18N

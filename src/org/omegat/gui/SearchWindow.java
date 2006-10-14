@@ -47,6 +47,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.undo.UndoManager;
+import javax.swing.text.Document;
 
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.SearchThread;
@@ -76,6 +78,7 @@ public class SearchWindow extends JFrame
         m_thread = th;
         m_searchLabel = new JLabel();
         m_searchField = new MFindField();
+
         if (startText != null)
             m_searchField.setText(startText);
         m_searchButton = new JButton();

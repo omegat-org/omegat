@@ -32,6 +32,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,6 +55,7 @@ import org.openide.awt.Mnemonics;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 
 /**
  * A frame for project,
@@ -71,7 +73,10 @@ public class ProjectFrame extends JFrame
         
         m_nameList = new ArrayList(256);
         m_offsetList = new ArrayList(256);
-        
+
+        // set the position and size
+        initWindowLayout();
+
         Container cp = getContentPane();
         m_editorPane = new JEditorPane();
         m_editorPane.setEditable(false);
@@ -89,15 +94,30 @@ public class ProjectFrame extends JFrame
                 doImportSourceFiles();
             }
         });
-        
+
+        // Configure close button
         m_closeButton = new JButton();
         m_closeButton.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                setVisible(false);
+                doCancel();
             }
         });
+
+        //  Handle escape key to close the window
+        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
+        Action escapeAction = new AbstractAction()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                doCancel();
+            }
+        };
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
+        put(escape, "ESCAPE");                                                  // NOI18N
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+
         
         Box bbut = Box.createHorizontalBox();
         bbut.add(Box.createHorizontalGlue());
@@ -107,19 +127,6 @@ public class ProjectFrame extends JFrame
         cp.add(bbut, "South");                                                  // NOI18N
         
         m_editorPane.addHyperlinkListener(new HListener(m_parent, true));
-        
-        //  Handle escape key to close the window
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                setVisible(false);
-            }
-        };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
-        put(escape, "ESCAPE");                                                  // NOI18N
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
         
         addComponentListener(new java.awt.event.ComponentAdapter()
         {
@@ -133,10 +140,63 @@ public class ProjectFrame extends JFrame
         setTitle(OStrings.PF_WINDOW_TITLE);
         uiUpdateImportButtonStatus();
         
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-600)/2, (screenSize.height-500)/2, 600, 400);
+//        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//        setBounds((screenSize.width-600)/2, (screenSize.height-500)/2, 600, 400);
     }
-    
+
+    /**
+      * Loads/sets the position and size of the search window.
+      */
+    private void initWindowLayout()
+    {
+        // main window
+        try
+        {
+            String dx = Preferences.getPreference(Preferences.PROJECT_FILES_WINDOW_X);
+            String dy = Preferences.getPreference(Preferences.PROJECT_FILES_WINDOW_Y);
+            int x = Integer.parseInt(dx);
+            int y = Integer.parseInt(dy);
+            setLocation(x, y);
+            String dw = Preferences.getPreference(Preferences.PROJECT_FILES_WINDOW_WIDTH);
+            String dh = Preferences.getPreference(Preferences.PROJECT_FILES_WINDOW_HEIGHT);
+            int w = Integer.parseInt(dw);
+            int h = Integer.parseInt(dh);
+            setSize(w, h);
+        }
+        catch (NumberFormatException nfe)
+        {
+            // set default size and position
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            setBounds((screenSize.width - 600) / 2, (screenSize.height - 400) / 2, 600, 400);
+        }
+    }
+
+    /**
+      * Saves the size and position of the search window
+      */
+    private void saveWindowLayout()
+    {
+        Preferences.setPreference(Preferences.PROJECT_FILES_WINDOW_WIDTH, getWidth());
+        Preferences.setPreference(Preferences.PROJECT_FILES_WINDOW_HEIGHT, getHeight());
+        Preferences.setPreference(Preferences.PROJECT_FILES_WINDOW_X, getX());
+        Preferences.setPreference(Preferences.PROJECT_FILES_WINDOW_Y, getY());
+    }
+
+    public void processWindowEvent(WindowEvent w)
+    {
+        int evt = w.getID();
+        if (evt == WindowEvent.WINDOW_CLOSING || evt == WindowEvent.WINDOW_CLOSED) {
+            // save window size and position
+            saveWindowLayout();
+        }
+        super.processWindowEvent(w);
+    }
+
+    private void doCancel()
+    {
+        dispose();
+    }
+
     public void reset()
     {
         m_nameList.clear();

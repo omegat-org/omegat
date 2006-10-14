@@ -54,55 +54,52 @@ import org.omegat.gui.main.MainWindow;
  */
 public class TagValidationFrame extends JFrame
 {
-	public TagValidationFrame(MainWindow parent)
-	{
-		m_parent = parent;
-        
+    public TagValidationFrame(MainWindow parent)
+    {
+        m_parent = parent;
+
         // set window size & position
         initWindowLayout();
 
-		Container cp = getContentPane();
-		m_editorPane = new JEditorPane();
-		m_editorPane.setEditable(false);
-		JScrollPane scroller = new JScrollPane(m_editorPane);
-		cp.add(scroller, "Center");	// NOI18N
+        Container cp = getContentPane();
+        m_editorPane = new JEditorPane();
+        m_editorPane.setEditable(false);
+        JScrollPane scroller = new JScrollPane(m_editorPane);
+        cp.add(scroller, "Center");    // NOI18N
 
-		m_closeButton = new JButton();
-		m_closeButton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				doClose();
-			}
-		});
-		Box bbut = Box.createHorizontalBox();
-		bbut.add(Box.createHorizontalGlue());
-		bbut.add(m_closeButton);
-		bbut.add(Box.createHorizontalGlue());
-		cp.add(bbut, "South");	// NOI18N
+        Box bbut = Box.createHorizontalBox();
+        bbut.add(Box.createHorizontalGlue());
+        bbut.add(m_closeButton);
+        bbut.add(Box.createHorizontalGlue());
+        cp.add(bbut, "South");    // NOI18N
 
-		m_editorPane.addHyperlinkListener(new HListener(m_parent, false));
+        m_editorPane.addHyperlinkListener(new HListener(m_parent, false));
 
-		// this only seems to work in 1.4, but at least it works there
-		// throws exceptions in 1.2
-		{
-			KeyStroke escKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE,
-						0, false);
-			Action escAction = new AbstractAction()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					doClose();
-				}
-			};
-			//getRootPane().getInputMap(JComponent.WHEN_FOCUSED).put(         // HP
-            getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put( // HP
-					escKeyStroke, "ESCAPE");						// NOI18N
-			getRootPane().getActionMap().put("ESCAPE", escAction);	// NOI18N
-		}
-		
-		updateUIText();
-	}
+        // Configure close button
+        m_closeButton = new JButton();
+        m_closeButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                doCancel();
+            }
+        });
+
+        //  Handle escape key to close the window
+        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
+        Action escapeAction = new AbstractAction()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                doCancel();
+            }
+        };
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
+        put(escape, "ESCAPE");                                                  // NOI18N
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+
+        updateUIText();
+    }
     
     /**
       * Loads/sets the position and size of the tag validation window.
@@ -144,23 +141,22 @@ public class TagValidationFrame extends JFrame
     public void processWindowEvent(WindowEvent w)
     {
         int evt = w.getID();
-        if (evt == WindowEvent.WINDOW_CLOSING || evt == WindowEvent.WINDOW_CLOSED)
-        {
+        if (evt == WindowEvent.WINDOW_CLOSING || evt == WindowEvent.WINDOW_CLOSED) {
             // save window size and position
             saveWindowLayout();
         }
         super.processWindowEvent(w);
     }
-    
-    private void updateUIText()
-	{
-		Mnemonics.setLocalizedText(m_closeButton, OStrings.getString("BUTTON_CLOSE"));
-	}
 
-	private void doClose()
-	{
-		dispose();
-	}
+    private void doCancel()
+    {
+        dispose();
+    }
+
+    private void updateUIText()
+    {
+        Mnemonics.setLocalizedText(m_closeButton, OStrings.getString("BUTTON_CLOSE"));
+    }
 
     /** replaces all &lt; and &gt; with &amp;lt; and &amp;gt; */
     private String htmlize(String str)
@@ -172,40 +168,39 @@ public class TagValidationFrame extends JFrame
     }
     
     public void displayStringList(ArrayList stringList)
-	{
-		setTitle(OStrings.TF_NOTICE_BAD_TAGS);
-		String out;
-		String src;
-		String trans;
-		SourceTextEntry ste;
-		StringEntry se;
+    {
+        setTitle(OStrings.TF_NOTICE_BAD_TAGS);
+        String out;
+        String src;
+        String trans;
+        SourceTextEntry ste;
+        StringEntry se;
 
-		out = "<table BORDER COLS=3 WIDTH=\"100%\" NOSAVE>";                    // NOI18N
-		for (int i=0; i<stringList.size(); i++)
-		{
-			ste = (SourceTextEntry) stringList.get(i);
-			se = ste.getStrEntry();
-			src = se.getSrcText();
-			trans = se.getTranslation();
-			if (!src.equals("") && !trans.equals(""))		// NOI18N
-			{
-				out += "<tr>";													// NOI18N
-				out += "<td><a href=\"" + (ste.entryNum()+ 1) + "\">";			// NOI18N
-				out += (ste.entryNum() + 1) + "</a></td>";						// NOI18N
-				out += "<td>" + htmlize(src) + "</td>";							// NOI18N
-				out += "<td>" + htmlize(trans) + "</td>";						// NOI18N
-				out += "</tr>";													// NOI18N
-			}
-		}
-		out += "</table>";														// NOI18N
-		m_editorPane.setContentType("text/html");								// NOI18N
-		m_editorPane.setText(out);
-	}
+        out = "<table BORDER COLS=3 WIDTH=\"100%\" NOSAVE>";                    // NOI18N
+        for (int i=0; i<stringList.size(); i++)
+        {
+            ste = (SourceTextEntry) stringList.get(i);
+            se = ste.getStrEntry();
+            src = se.getSrcText();
+            trans = se.getTranslation();
+            if (!src.equals("") && !trans.equals(""))        // NOI18N
+            {
+                out += "<tr>";                                                    // NOI18N
+                out += "<td><a href=\"" + (ste.entryNum()+ 1) + "\">";            // NOI18N
+                out += (ste.entryNum() + 1) + "</a></td>";                        // NOI18N
+                out += "<td>" + htmlize(src) + "</td>";                            // NOI18N
+                out += "<td>" + htmlize(trans) + "</td>";                        // NOI18N
+                out += "</tr>";                                                    // NOI18N
+            }
+        }
+        out += "</table>";                                                        // NOI18N
+        m_editorPane.setContentType("text/html");                                // NOI18N
+        m_editorPane.setText(out);
+    }
 
     private JEditorPane m_editorPane;
-	private JButton		m_closeButton;
+    private JButton        m_closeButton;
 
-	private MainWindow m_parent;
+    private MainWindow m_parent;
 
 }
-

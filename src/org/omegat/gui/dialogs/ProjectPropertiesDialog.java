@@ -478,24 +478,37 @@ public class ProjectPropertiesDialog extends JDialog
         // browser.setApproveButtonText(str);
         browser.setDialogTitle(title);
         browser.setFileSelectionMode(OmegaTFileChooser.DIRECTORIES_ONLY);
-        String curDir = "";                                                     // NOI18N
-        switch (browseTarget)
-        {
-            case 1:
-                curDir = Preferences.getPreference(Preferences.SOURCE_FOLDER);
-                break;
 
-            case 2:
-                curDir = Preferences.getPreference(Preferences.TARGET_FOLDER);
-                break;
+        // check if the current directory as specified by the field exists
+        String curDir = (field != null) ? field.getText() : ""; // NOI18N
+        File curDirCheck = new File(curDir);
 
-            case 3:
-                curDir = Preferences.getPreference(Preferences.GLOSSARY_FOLDER);
-                break;
+        // if the dir doesn't exist, use project dir and check if that exists
+        if (!curDirCheck.exists() || !curDirCheck.isDirectory()) {
+            curDir = projectProperties.getProjectRoot();
+            curDirCheck = new File(curDir);
+        }
 
-            case 4:
-                curDir = Preferences.getPreference(Preferences.TM_FOLDER);
-                break;
+        // if all fails, get last used dir from preferences
+        if (!curDirCheck.exists() || !curDirCheck.isDirectory()) {
+            switch (browseTarget)
+            {
+                case 1:
+                    curDir = Preferences.getPreference(Preferences.SOURCE_FOLDER);
+                    break;
+
+                case 2:
+                    curDir = Preferences.getPreference(Preferences.TARGET_FOLDER);
+                    break;
+
+                case 3:
+                    curDir = Preferences.getPreference(Preferences.GLOSSARY_FOLDER);
+                    break;
+
+                case 4:
+                    curDir = Preferences.getPreference(Preferences.TM_FOLDER);
+                    break;
+            }
         }
 
         if (curDir.equals(""))                                                  // NOI18N

@@ -663,4 +663,20 @@ public class StaticUtils
         else
             return filename;
     }
+
+    /**
+      * Escapes the passed string for use in regex matching,
+      * so special regex characters are interpreted as normal characters.
+      */
+    public static String escapeNonRegex(String text) {
+        // handle backslash
+        text = text.replaceAll("\\\\", "\\\\\\\\"); // yes, that's the correct nr of backslashes
+
+        // handle rest of characters to be escaped
+        String escape = "^.*+[]{}()&|-:=?!<>";
+        for (int i = 0; i < escape.length(); i++)
+           text = text.replaceAll("\\" + escape.charAt(i), "\\\\" + escape.charAt(i));
+
+        return text;
+    }
 }

@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.omegat.core.TransMemory;
 import org.omegat.core.matching.SourceTextEntry;
@@ -87,7 +89,7 @@ public class SearchThread extends Thread
      * @param keyword search for keywords
      */
     public void requestSearch(String text, String rootDir,
-            boolean recursive, boolean exact, boolean tm, boolean keyword)
+            boolean recursive, boolean exact, boolean tm, boolean keyword, boolean regex)
     {
         if (!m_searching)
         {
@@ -97,6 +99,7 @@ public class SearchThread extends Thread
             m_exactSearch = exact;
             m_tmSearch = tm;
             m_keywordSearch = keyword;
+            m_regexSearch = regex;
             m_searching = true;
             m_entrySet = new HashSet(); // HP
         }
@@ -227,7 +230,7 @@ public class SearchThread extends Thread
     private void searchProject()
     {
         m_numFinds = 0;
-        if (m_exactSearch)
+        if (m_exactSearch || m_regexSearch)
         {
             int i;
             for (i=0; i<CommandThread.core.numEntries(); i++)
@@ -235,8 +238,8 @@ public class SearchThread extends Thread
                 SourceTextEntry ste = CommandThread.core.getSTE(i);
                 String srcText = ste.getSrcText();
                 String locText = ste.getTranslation();
-                if (searchString(srcText, m_searchText) ||
-                        searchString(locText, m_searchText))
+                if (   searchString(srcText, m_searchText, m_regexSearch)
+                    || searchString(locText, m_searchText, m_regexSearch))
                 {
                     // found a match - relay source and trans text
                     foundString(i, null, srcText, locText);
@@ -255,8 +258,8 @@ public class SearchThread extends Thread
                     tm = (TransMemory) tmList.get(i);
                     String srcText = tm.source;
                     String locText = tm.target;
-                    if (searchString(srcText, m_searchText) ||
-                            searchString(locText, m_searchText))
+                    if (   searchString(srcText, m_searchText, m_regexSearch)
+                        || searchString(locText, m_searchText, m_regexSearch))
                     {
                         // found a match - relay source and trans text
                         foundString(-1, tm.file, srcText, locText);
@@ -349,9 +352,29 @@ public class SearchThread extends Thread
     ///////////////////////////////////////////////////////////////////////
     // search algorithm
     
+    // looks for the search string in the text string
+    private boolean searchString(String text, String search) {
+        return searchString(text, search, false);
+    }
+    
+    // looks for the search string in the text string
+    // if regex is true, the search string is expected to contain a regular expression
+    private boolean searchString(String text, String search, boolean regex) {
+        if (text == null || search == null)
+            return false;
+
+        // escape the search string, if it's not supposed to be a regular expression
+        if (!regex)
+            search = StaticUtils.escapeNonRegex(search);
+
+        // do the search
+        Matcher matcher = Pattern.compile(search).matcher(text);
+        return matcher.find();
+    }
+
     // look for the search text in the specified text
     // search supports wildcards * and ?
-    private boolean searchString(String text, String search)
+    private boolean searchStringOld(String text, String search)
     {
         if (text == null || search == null)
             return false;
@@ -544,6 +567,7 @@ public class SearchThread extends Thread
     private boolean		 m_searchRecursive;
     private String		 m_curFileName;
     private boolean		 m_exactSearch;
+    private boolean		 m_regexSearch;
     private boolean		 m_tmSearch;
     private boolean      m_keywordSearch;
     private HashSet      m_entrySet; // HP: keeps track of previous results, to avoid duplicate entries

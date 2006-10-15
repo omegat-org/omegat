@@ -150,17 +150,18 @@ public class OStrings
     public static final String NDC_SELECT_UNIQUE_TITLE	= getString("NDC_SELECT_UNIQUE_TITLE");
     
     // SearchWindow
-    public static final String SW_SEARCH_TEXT	= getString("SW_SEARCH_TEXT");
-    public static final String SW_WORD_SEARCH	= getString("SW_WORD_SEARCH");
-    public static final String SW_EXACT_SEARCH	= getString("SW_EXACT_SEARCH");
-    public static final String SW_SEARCH_TM		= getString("SW_SEARCH_TM");
-    public static final String SW_LOCATION		= getString("SW_LOCATION");
-    public static final String SW_BROWSE		= getString("SW_BROWSE");
-    public static final String SW_DIR_SEARCH	= getString("SW_DIR_SEARCH");
-    public static final String SW_DIR_RECURSIVE	= getString("SW_DIR_RECURSIVE");
-    public static final String SW_TITLE			= getString("SW_TITLE");
-    public static final String SW_VIEWER_TEXT	= getString("SW_VIEWER_TEXT");
-    public static final String SW_MAX_FINDS_REACHED	= getString("SW_MAX_FINDS_REACHED") +
+    public static final String SW_SEARCH_TEXT       = getString("SW_SEARCH_TEXT");
+    public static final String SW_WORD_SEARCH       = getString("SW_WORD_SEARCH");
+    public static final String SW_EXACT_SEARCH	    = getString("SW_EXACT_SEARCH");
+    public static final String SW_REGEX_SEARCH	    = getString("SW_REGEX_SEARCH");
+    public static final String SW_SEARCH_TM         = getString("SW_SEARCH_TM");
+    public static final String SW_LOCATION          = getString("SW_LOCATION");
+    public static final String SW_BROWSE            = getString("SW_BROWSE");
+    public static final String SW_DIR_SEARCH        = getString("SW_DIR_SEARCH");
+    public static final String SW_DIR_RECURSIVE     = getString("SW_DIR_RECURSIVE");
+    public static final String SW_TITLE             = getString("SW_TITLE");
+    public static final String SW_VIEWER_TEXT       = getString("SW_VIEWER_TEXT");
+    public static final String SW_MAX_FINDS_REACHED = getString("SW_MAX_FINDS_REACHED") +
             " ("+OConsts.ST_MAX_SEARCH_RESULTS+")."; // NOI18N
     
     public static final String ST_FILE_SEARCH_ERROR = getString("ST_FILE_SEARCH_ERROR");

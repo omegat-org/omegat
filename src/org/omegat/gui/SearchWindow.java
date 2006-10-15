@@ -91,6 +91,9 @@ public class SearchWindow extends JFrame
         m_exactSearchRB = new JRadioButton();
         m_exactSearchRB.setSelected(true);
         
+        m_regexSearchRB = new JRadioButton();
+        m_regexSearchRB.setSelected(false);
+        
         m_keywordSearchRB = new JRadioButton();
         m_keywordSearchRB.setSelected(false);
         
@@ -100,10 +103,13 @@ public class SearchWindow extends JFrame
         
         ButtonGroup bg = new ButtonGroup();
         bg.add(m_exactSearchRB);
+        bg.add(m_regexSearchRB);
         bg.add(m_keywordSearchRB);
         
         Box bRB = Box.createHorizontalBox();
         bRB.add(m_exactSearchRB);
+        bRB.add(Box.createHorizontalStrut(10));
+        bRB.add(m_regexSearchRB);
         bRB.add(Box.createHorizontalStrut(10));
         bRB.add(m_keywordSearchRB);
         bRB.add(Box.createHorizontalStrut(10));
@@ -448,7 +454,8 @@ public class SearchWindow extends JFrame
                     m_recursiveCB.isSelected(),
                     m_exactSearchRB.isSelected(),
                     m_tmSearchCB.isSelected(),
-                    m_keywordSearchRB.isSelected());
+                    m_keywordSearchRB.isSelected(),
+                    m_regexSearchRB.isSelected());
         }
     }
     
@@ -465,8 +472,9 @@ public class SearchWindow extends JFrame
         Mnemonics.setLocalizedText(m_searchButton, OStrings.getString("BUTTON_SEARCH"));
         
         Mnemonics.setLocalizedText(m_exactSearchRB, OStrings.SW_EXACT_SEARCH);
-        Mnemonics.setLocalizedText(m_tmSearchCB, OStrings.SW_SEARCH_TM);
+        Mnemonics.setLocalizedText(m_regexSearchRB, OStrings.SW_REGEX_SEARCH);
         Mnemonics.setLocalizedText(m_keywordSearchRB, OStrings.SW_WORD_SEARCH);
+        Mnemonics.setLocalizedText(m_tmSearchCB, OStrings.SW_SEARCH_TM);
         
         Mnemonics.setLocalizedText(m_dirLabel, OStrings.SW_LOCATION);
         Mnemonics.setLocalizedText(m_dirCB, OStrings.SW_DIR_SEARCH);
@@ -499,6 +507,7 @@ public class SearchWindow extends JFrame
     
     private JRadioButton	m_keywordSearchRB;
     private JRadioButton	m_exactSearchRB;
+    private JRadioButton	m_regexSearchRB;
     private JCheckBox		m_tmSearchCB;
     
     private boolean		m_tmSearch = true;

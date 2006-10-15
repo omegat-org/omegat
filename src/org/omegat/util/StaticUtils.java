@@ -43,7 +43,7 @@ import java.util.TreeSet;
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
- * @author Henry Pijffers
+ * @author Henry Pijffers (henry.pijffers@saxnot.com)
  */
 public class StaticUtils
 {
@@ -472,7 +472,7 @@ public class StaticUtils
      * @return The full path of the directory containing the OmegaT
      *         configuration files, including trailing path separator.
      *
-     * @author Henry Pijffers (henry@saxnot.com)
+     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public static String getConfigDir()
     {
@@ -666,7 +666,17 @@ public class StaticUtils
 
     /**
       * Escapes the passed string for use in regex matching,
-      * so special regex characters are interpreted as normal characters.
+      * so special regex characters are interpreted as normal
+      * characters during regex searches.
+      *
+      * This is done by prepending a backslash before each
+      * occurrence of the following characters: \^.*+[]{}()&|-:=?!<>
+      *
+      * @param text The text to escape
+      *
+      * @return The escaped text
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
     public static String escapeNonRegex(String text) {
         // handle backslash

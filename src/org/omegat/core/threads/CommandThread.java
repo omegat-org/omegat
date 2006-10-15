@@ -317,6 +317,7 @@ public class CommandThread extends Thread
             else
                 StaticUtils.log("Project Load aborted by user.");               // NOI18N
         }
+        // Fix for bug 1571944 @author Henry Pijffers (henry.pijffers@saxnot.com)
         catch (OutOfMemoryError oome) {
             // Oh shit, we're all out of storage space!
             m_strEntryHash.clear();
@@ -342,27 +343,18 @@ public class CommandThread extends Thread
 
             // There, that should do it, now inform the user
             m_transFrame.displayError(
-               "We are sorry to inform you that your computer is lacking sufficient\n" +
-               "storage space for OmegaT to do it's thing (if your name is Raymond,\n" +
-               "either fix it or quit whining).\n" +
+               "OmegaT ran out of memory, and will quit when you press OK.\n" +
+               "You may try to solve this problem in one of the following ways:\n" +
                "\n" +
-               "There are a number of approaches you can take to correct this\n" +
-               "deplorable situation:\n"  +
+               "1) Reduce the number of source files and translate in batches;\n" +
                "\n" +
-               "1) Insert 1 or more memory chips into your computer's motherboard\n" +
-               "(if your name is Raymond, ask for donations first)\n" +
+               "2) Increase the amount of memory available to OmegaT, by\n" +
+               "specifying \"java -Xmx<size-in-MB>M -jar OmegaT.jar\" on the\n
+               "command line or in the OmegaT start script;\n" +
                "\n" +
-               "2) Cut some of that documentation you are translating\n" +
-               "(if your name is Raymond, nobody's reading it anyway)\n" +
+               "3) File a bug report at http://sourceforge.net/projects/omegat\n" +
                "\n" +
-               "3) Buy a new computer\n" +
-               "(if your name is Raymond, beg for donations)\n" +
-               "\n" +
-               "4) Stop translating\n" +
-               "(if your name is Raymond, you probably have no serious translation\n" +
-               "work anyway).\n" +
-               "\n" +
-               "Oh, by the way, OmegaT is now quitting.\n",
+               "OmegaT shall now quit.\n",
                oome);
 
             // Just quit, we can't help it anyway
@@ -383,13 +375,22 @@ public class CommandThread extends Thread
     }
     
     /**
-     * Saves a TMX file to disk
-     */
+      * Saves a TMX file to disk
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      * @author Maxym Mykhalchuk
+      */
     private void buildTMXFile(String filename, boolean forceValidTMX, boolean addOrphans)
             throws IOException {
         buildTMXFile(filename, forceValidTMX, addOrphans, false);
     }
 
+    /**
+      * Saves a TMX file to disk
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      * @author Maxym Mykhalchuk
+      */
     private void buildTMXFile(String filename, boolean forceValidTMX, boolean addOrphans, boolean levelTwo) 
             throws IOException
     {

@@ -73,6 +73,7 @@ import org.openide.awt.Mnemonics;
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
+ * @author Henry Pijffers (henry.pijffers@saxnot.com)
  */
 public class ProjectPropertiesDialog extends JDialog
 {

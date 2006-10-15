@@ -64,6 +64,7 @@ import org.omegat.util.Preferences;
  * @author Keith Godfrey
  * @author Kim Bruning
  * @author Maxym Mykhalchuk
+ * @author Henry Pijffers (henry.pijffers@saxnot.com)
  */
 public class ProjectFrame extends JFrame
 {

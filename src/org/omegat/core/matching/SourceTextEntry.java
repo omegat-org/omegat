@@ -38,7 +38,7 @@ import org.omegat.core.*;
 public class SourceTextEntry
 {
     /** 
-     * Creates a new source text entry. 
+     * Creates a new source text entry.
      *
      * @param str       unique StringEntry that holds source and translation of 
      *                      this entry.

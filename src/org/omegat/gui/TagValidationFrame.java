@@ -51,6 +51,7 @@ import org.omegat.gui.main.MainWindow;
  * A frame to display the tags with errors during tag validation.
  *
  * @author Keith Godfrey
+ * @author Henry Pijffers (henry.pijffers@saxnot.com)
  */
 public class TagValidationFrame extends JFrame
 {

@@ -65,6 +65,7 @@ import org.openide.awt.Mnemonics;
  * Actual search is done by SearchThread.
  *
  * @author Keith Godfrey
+ * @author Henry Pijffers (henry.pijffers@saxnot.com)
  */
 public class SearchWindow extends JFrame
 {

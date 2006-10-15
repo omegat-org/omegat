@@ -352,13 +352,33 @@ public class SearchThread extends Thread
     ///////////////////////////////////////////////////////////////////////
     // search algorithm
     
-    // looks for the search string in the text string
+    /**
+      * Looks for a fully identical occurrence of the search string in the text string.
+      *
+      * @param text   The text string to search in
+      * @param search The string to search for
+      *
+      * @return True if the text string contains the search string
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
     private boolean searchString(String text, String search) {
         return searchString(text, search, false);
     }
     
-    // looks for the search string in the text string
-    // if regex is true, the search string is expected to contain a regular expression
+    /**
+      * Looks for a fully identical occurrence of the search string in the text string.
+      *
+      * @param text   The text string to search in
+      * @param search The string to search for
+      * @param regex  If true, the method will use the search string as a regular
+      *               expression; if false, it will look for an identical occurrence
+      *               of the search string in the text string
+      *
+      * @return True if the text string contains the search string
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
     private boolean searchString(String text, String search, boolean regex) {
         if (text == null || search == null)
             return false;

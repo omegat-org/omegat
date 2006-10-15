@@ -1265,6 +1265,19 @@ public class CommandThread extends Thread
             MessageRelay.uiMessageDisplayError(m_transFrame, msg, e);
     }
 
+    /**
+      * Displays an error message
+      *
+      * @param message The message to display
+      * @param error   The error that caused the message to be displayed (may be null)
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    public void displayErrorMessage(String message, Throwable error) {
+        if (m_transFrame != null)
+            m_transFrame.displayError(message, error);
+    }
+
     /** Computes the number of words in a string. */
     private int numberOfWords(String str)
     {

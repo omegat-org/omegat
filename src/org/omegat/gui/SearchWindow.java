@@ -85,25 +85,17 @@ public class SearchWindow extends JFrame
         bSearch.add(m_searchField);
         bSearch.add(Box.createHorizontalStrut(10));
         bSearch.add(m_searchButton);
-        
-        m_exactSearchRB = new JRadioButton();
-        //m_exactSearchRB.setSelected(true);
-        
-        m_regexSearchRB = new JRadioButton();
-        //m_regexSearchRB.setSelected(false);
-        
+
+        m_exactSearchRB   = new JRadioButton();
+        m_regexSearchRB   = new JRadioButton();
         m_keywordSearchRB = new JRadioButton();
-        //m_keywordSearchRB.setSelected(false);
-        
-        m_tmSearchCB = new JCheckBox();
-        //m_tmSearchCB.setSelected(true);
-        //m_tmSearch = true;
-        
+        m_tmSearchCB      = new JCheckBox();
+
         ButtonGroup bg = new ButtonGroup();
         bg.add(m_exactSearchRB);
         bg.add(m_regexSearchRB);
         bg.add(m_keywordSearchRB);
-        
+
         Box bRB = Box.createHorizontalBox();
         bRB.add(m_exactSearchRB);
         bRB.add(Box.createHorizontalStrut(10));
@@ -218,7 +210,7 @@ public class SearchWindow extends JFrame
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
         put(escape, "ESCAPE");                                                  // NOI18N
         getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
-        
+
         // need to control check boxes and radio buttons manually
         //
         // keyword search can only be used when searching current project
@@ -226,7 +218,7 @@ public class SearchWindow extends JFrame
         // file search only works with exact search
         //
         // keep track of settings and only show what are valid choices
-        
+
         m_exactSearchRB.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)

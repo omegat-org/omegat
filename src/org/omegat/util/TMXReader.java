@@ -43,6 +43,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+import org.omegat.core.threads.CommandThread;
 import org.omegat.util.xml.XMLReader;
 
 /**
@@ -516,19 +517,36 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             StaticUtils.log("");
         }
         catch (SAXParseException exception) {
+            // log error
             StaticUtils.log(MessageFormat.format(
-                OStrings.getString("TMXR_FATAL_ERROR_WHILE_PARSING"), 
+                OStrings.getString("TMXR_FATAL_ERROR_WHILE_PARSING"),
                 new Object[]{String.valueOf(exception.getLineNumber()),
                              String.valueOf(exception.getColumnNumber()),
                              exception.getLocalizedMessage()}));
                 exception.printStackTrace(StaticUtils.getLogStream());
+
+            // display error
+            CommandThread.core.displayErrorMessage(MessageFormat.format(
+                OStrings.getString("TMXR_FATAL_ERROR_WHILE_PARSING__DISPLAY"),
+                new Object[]{filename,
+                             String.valueOf(exception.getLineNumber()),
+                             String.valueOf(exception.getColumnNumber()),
+                             exception.getLocalizedMessage()}),
+                exception);
         }
         catch (Exception exception)
         {
+            // log exception
             StaticUtils.log(MessageFormat.format(
                 OStrings.getString("TMXR_EXCEPTION_WHILE_PARSING"), 
                 new Object[]{exception.getLocalizedMessage()}));
             exception.printStackTrace(StaticUtils.getLogStream());
+
+            // display error
+            CommandThread.core.displayErrorMessage(MessageFormat.format(
+                OStrings.getString("TMXR_EXCEPTION_WHILE_PARSING__DISPLAY"),
+                new Object[]{filename, exception.getLocalizedMessage()}),
+                exception);
         }
     }
 

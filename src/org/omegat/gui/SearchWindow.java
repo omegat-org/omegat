@@ -73,9 +73,6 @@ public class SearchWindow extends JFrame
     {
         //super(par, false);
         
-        // set the position and size
-        initWindowLayout();
-        
         m_thread = th;
         m_searchLabel = new JLabel();
         m_searchField = new MFindField();
@@ -90,17 +87,17 @@ public class SearchWindow extends JFrame
         bSearch.add(m_searchButton);
         
         m_exactSearchRB = new JRadioButton();
-        m_exactSearchRB.setSelected(true);
+        //m_exactSearchRB.setSelected(true);
         
         m_regexSearchRB = new JRadioButton();
-        m_regexSearchRB.setSelected(false);
+        //m_regexSearchRB.setSelected(false);
         
         m_keywordSearchRB = new JRadioButton();
-        m_keywordSearchRB.setSelected(false);
+        //m_keywordSearchRB.setSelected(false);
         
         m_tmSearchCB = new JCheckBox();
-        m_tmSearchCB.setSelected(true);
-        m_tmSearch = true;
+        //m_tmSearchCB.setSelected(true);
+        //m_tmSearch = true;
         
         ButtonGroup bg = new ButtonGroup();
         bg.add(m_exactSearchRB);
@@ -280,17 +277,18 @@ public class SearchWindow extends JFrame
                 }
             }
         });
-        
+
         String searchDir = Preferences.getPreference(Preferences.SEARCH_FOLDER);
         if (!searchDir.equals(""))                                              // NOI18N
         {
             m_dirField.setText(searchDir);
         }
-        
+
         updateUIText();
-        
+        loadPreferences();
+
         m_viewer.setText(OStrings.SW_VIEWER_TEXT);
-        
+
         if (!par.isProjectLoaded())
         {
             // restrict user to file only access
@@ -301,18 +299,17 @@ public class SearchWindow extends JFrame
             m_keywordSearchRB.setEnabled(false);
             m_dirField.setEditable(true);
         }
-        
+
         m_searchField.requestFocus();
     }
     
     /**
-      * Loads/sets the position and size of the search window.
+      * Loads the position and size of the search window and the button selection state.
       */
-    private void initWindowLayout()
+    private void loadPreferences()
     {
-        // main window
-        try
-        {
+        // window size and position
+        try {
             String dx = Preferences.getPreference(Preferences.SEARCHWINDOW_X);
             String dy = Preferences.getPreference(Preferences.SEARCHWINDOW_Y);
             int x = Integer.parseInt(dx);
@@ -324,24 +321,47 @@ public class SearchWindow extends JFrame
             int h = Integer.parseInt(dh);
             setSize(w, h);
         }
-        catch (NumberFormatException nfe)
-        {
+        catch (NumberFormatException nfe) {
             // set default size and position
             setSize(650, 700);
         }
+
+        // button selection state
+        String searchType = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE);
+        if ((searchType == null) || (searchType.length() == 0))
+            searchType = SEARCH_TYPE_EXACT;
+        m_exactSearchRB.setSelected(searchType.equals(SEARCH_TYPE_EXACT));
+        m_regexSearchRB.setSelected(searchType.equals(SEARCH_TYPE_REGEX));
+        m_keywordSearchRB.setSelected(searchType.equals(SEARCH_TYPE_KEYWORD));
+        String tmSearch = Preferences.getPreference(Preferences.SEARCHWINDOW_TM_SEARCH);
+        if ((tmSearch == null) || (tmSearch.length() == 0))
+            tmSearch = "true"; // NOI18N
+        m_tmSearchCB.setSelected(Boolean.valueOf(tmSearch).booleanValue());
+        m_tmSearch = Boolean.valueOf(tmSearch).booleanValue();
     }
-    
+
     /**
-      * Saves the size and position of the search window
+      * Saves the size and position of the search window and the button selection state
       */
-    private void saveWindowLayout()
+    private void savePreferences()
     {
+        // window size and position
         Preferences.setPreference(Preferences.SEARCHWINDOW_WIDTH, getWidth());
         Preferences.setPreference(Preferences.SEARCHWINDOW_HEIGHT, getHeight());
         Preferences.setPreference(Preferences.SEARCHWINDOW_X, getX());
         Preferences.setPreference(Preferences.SEARCHWINDOW_Y, getY());
+
+        // button selection state
+        if (m_exactSearchRB.isSelected())
+            Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE, SEARCH_TYPE_EXACT);
+        else if (m_regexSearchRB.isSelected())
+            Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE, SEARCH_TYPE_REGEX);
+        else if (m_keywordSearchRB.isSelected())
+            Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE, SEARCH_TYPE_KEYWORD);
+        Preferences.setPreference(Preferences.SEARCHWINDOW_TM_SEARCH,
+                                  Boolean.toString(m_tmSearchCB.isSelected()));
     }
-    
+
     ////////////////////////////////////////////////////////////////
     // interface for displaying text in viewer
     
@@ -383,8 +403,8 @@ public class SearchWindow extends JFrame
         int evt = w.getID();
         if (evt == WindowEvent.WINDOW_CLOSING || evt == WindowEvent.WINDOW_CLOSED)
         {
-            // save window size and position
-            saveWindowLayout();
+            // save user preferences
+            savePreferences();
             
             if (m_thread != null)
                 m_thread.interrupt();
@@ -525,5 +545,8 @@ public class SearchWindow extends JFrame
     private EntryListPane	m_viewer;
     
     private SearchThread	m_thread;
-    
+
+    private final static String SEARCH_TYPE_EXACT   = "EXACT";
+    private final static String SEARCH_TYPE_REGEX   = "REGEX";
+    private final static String SEARCH_TYPE_KEYWORD = "KEYWORD";
 }

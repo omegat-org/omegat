@@ -349,7 +349,7 @@ public class CommandThread extends Thread
                "1) Reduce the number of source files and translate in batches;\n" +
                "\n" +
                "2) Increase the amount of memory available to OmegaT, by\n" +
-               "specifying \"java -Xmx<size-in-MB>M -jar OmegaT.jar\" on the\n
+               "specifying \"java -Xmx<size-in-MB>M -jar OmegaT.jar\" on the\n" +
                "command line or in the OmegaT start script;\n" +
                "\n" +
                "3) File a bug report at http://sourceforge.net/projects/omegat\n" +

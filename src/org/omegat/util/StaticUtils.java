@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.Random;
 
 
 /**
@@ -343,26 +344,42 @@ public class StaticUtils
         }
         return res.toString();
     }
-    
+
+private static SessionPrintStream log = null;
     /**
      * Returns a log stream.
      */
-    public static PrintStream getLogStream()
-    {
-        try
-        {
-            return new PrintStream(
-                    new FileOutputStream(getConfigDir() + FILE_LOG, true), 
-                    true, "UTF-8");                                             // NOI18N
+    public static PrintStream getLogStream() {
+        if (log == null) {
+            try {
+                // create a new session print stream for the log file
+                log = new SessionPrintStream( // encapsulated to output session ID
+                    new PrintStream(
+                        new FileOutputStream(getConfigDir() + FILE_LOG, true), 
+                        true, "UTF-8")); // NOI18N
+            }
+            catch(Exception e) {
+                // in case we cannot create a log file on dist,
+                // redirect to system out
+               log = new SessionPrintStream(System.out);
+            }
+
+            // get the session ID from the log session print stream
+            String sessionID = log.getSessionID();
+
+            // also encapsulate the system out and err in a session print stream
+            // make sure they use the same session ID
+            SessionPrintStream sessionOut = new SessionPrintStream(System.out);
+            sessionOut.setSessionID(sessionID);
+            System.setOut(sessionOut);
+            //SessionPrintStream sessionErr = new SessionPrintStream(System.err);
+            //sessionErr.setSessionID(sessionID);
+            //System.setErr(sessionErr);
         }
-        catch( Exception e )
-        {
-            // in case we cannot create a log file on dist,
-            // redirect to single out
-            return System.out;
-        }
+
+        return log;
     }
-    
+
     /**
      * Logs what otherwise would go to System.out
      */
@@ -372,16 +389,17 @@ public class StaticUtils
         {
             PrintStream fout = getLogStream();
             fout.println(s);
-            fout.close();
+            //fout.close();
+            fout.flush(); // don't close it, otherwise the session ID is lost
         }
         catch( Exception e )
         {
             // doing nothing
         }
-        
+
         System.out.println(s);
     }
-    
+
     /**
      * Extracts an element of a class path.
      *
@@ -689,4 +707,193 @@ public class StaticUtils
 
         return text;
     }
-}
+
+    /**
+      * Print stream that writes a session ID before each line of output
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    private static class SessionPrintStream extends PrintStream {
+
+        /**
+          * Print stream to write all output to.
+          */
+        //private PrintStream out;
+
+        /**
+          * Session ID
+          */
+        String sessionID;
+
+        /**
+          * Indicates whether the last character output was a newline.
+          */
+        private boolean lastIsNewline = false;
+
+        /**
+          * Constructs a new SessionPrintStream
+          *
+          * @param out The print stream to write all output to
+          */
+        public SessionPrintStream(PrintStream out) {
+            super(out);
+
+            // get a positive random number
+            Random generator = new Random();
+            generator.setSeed(System.currentTimeMillis()); // use current time as seed
+            int random = Math.abs(generator.nextInt());
+
+            // convert the number to string, 5 chars max, pad with zero's if necessary
+            sessionID = String.valueOf(random);
+            if (sessionID.length() > 5)
+                sessionID = sessionID.substring(0, 5);
+            else if (sessionID.length() < 5)
+                for (int i = 5; i > sessionID.length(); i++)
+                    sessionID = "0" + sessionID;
+        }
+
+        /**
+          * Retrieves the session ID.
+          *
+          * @return The session ID of this SessionPrintStream
+          */
+        public String getSessionID() {
+            return sessionID;
+        }
+
+        /**
+          * Overrides the generated session ID.
+          *
+          * @param sessionID The session ID to use
+          */
+        public void setSessionID(String sessionID) {
+            this.sessionID = sessionID;
+        }
+
+        /**
+          * Writes the session ID to the output stream when at the start of a new line.
+          */
+        void printSessionID() {
+            printSessionID(false);
+        }
+
+        /**
+          * Writes the session ID to the output stream when at the start of a new line.
+          *
+          * @param forceWrite When true, the session ID is always writen,
+          *                   even if not at the start of a new line.
+          */
+        void printSessionID(boolean forceWrite) {
+            if (forceWrite || lastIsNewline)
+                super.print(sessionID + ": ");
+        }
+
+        public void print(boolean b) {
+            print(String.valueOf(b));
+        }
+
+        public void print(char c) {
+            print(String.valueOf(c));
+        }
+
+        public void print(char[] s) {
+            for (int i = 0; i < s.length; i++)
+                print(s[i]);
+        }
+
+        public void print(double d) {
+            print(String.valueOf(d));
+        }
+
+        public void print(float f) {
+            print(String.valueOf(f));
+        }
+
+        public void print(int i) {
+            print(String.valueOf(i));
+        }
+
+        public void print(long l) {
+            print(String.valueOf(l));
+        }
+
+        public void print(Object o) {
+            print(String.valueOf(o));
+        }
+
+        public void print(String s) {
+            if (s == null)
+                s = "null";
+            byte[] bytes = s.getBytes();
+            for (int i = 0; i < bytes.length; i++)
+                write((int)bytes[i]);
+        }
+
+        public void println() {
+            printSessionID();
+            super.println();
+            lastIsNewline = true;
+        }
+
+        public void println(boolean b) {
+            print(b);
+            println();
+        }
+
+        public void println(char c) {
+            print(c);
+            println();
+        }
+
+        public void println(char[] s) {
+            print(s);
+            println();
+        }
+
+        public void println(double d) {
+            print(d);
+            println();
+        }
+
+        public void println(float f) {
+            print(f);
+            println();
+        }
+
+        public void println(int i) {
+            print(i);
+            println();
+        }
+
+        public void println(long l) {
+            print(l);
+            println();
+        }
+
+        public void println(Object o) {
+            print(o);
+            println();
+        }
+
+        public void println(String s) {
+            print(s);
+            println();
+        }
+
+        /*
+        public void write(byte[] bytes, int off, int len) {
+            len = Math.min(off + len, bytes.length);
+            for (int i = off; i < len; i++)
+                write((int)bytes[i]);
+        }
+        */
+
+        public void write(int b) {
+            printSessionID();
+            super.write(b);
+            lastIsNewline = (((char)b) == '\n');
+        }
+
+    } // SessionPrintStream
+
+} // StaticUtils

@@ -121,8 +121,9 @@ public class FuzzyMatcher
             StringEntry strEntry = (StringEntry) strings.get(i);
             List strTokens = strEntry.getSrcTokenList();
             int strTokensSize = strTokens.size();
-            if( strTokensSize==0 )
-                continue;
+            if( strTokensSize==0 ) // HP: maybe also test on strTokensComplete.size(), if strTokensSize is 0
+                continue;          // HP: perhaps that would result in better number/non-word matching too
+            List strTokensAll = strEntry.getSrcTokenListAll(); // HP: includes non-word tokens
             
             for(int j=i+1; j<total; j++)
             {
@@ -141,12 +142,21 @@ public class FuzzyMatcher
                 
                 if( similarity<OConsts.FUZZY_MATCH_THRESHOLD )
                     continue;
-                
+
+                // determine Levenshtein distance/adjusted similarity across the complete
+                // list of tokens, including numbers, tags, and other non-word tokens
+                List candTokensAll = candEntry.getSrcTokenListAll();
+                int ldAll = LevenshteinDistance.compute(strTokensAll, candTokensAll);
+                int simAdjusted = (100 * (Math.max(strTokensAll.size(), candTokensAll.size()) - ldAll)) /
+                        Math.max(strTokensAll.size(), candTokensAll.size());
+
                 byte[] similarityData = buildSimilarityData(strTokens, candTokens);
-                strEntry.addNearString(candEntry, similarity, similarityData, null);
-                
+                //strEntry.addNearString(candEntry, similarity, similarityData, null);
+                strEntry.addNearString(candEntry, similarity, simAdjusted, similarityData, null);
+
                 similarityData = buildSimilarityData(candTokens, strTokens);
-                candEntry.addNearString(strEntry, similarity, similarityData, null);
+                //candEntry.addNearString(strEntry, similarity, similarityData, null);
+                candEntry.addNearString(strEntry, similarity, simAdjusted, similarityData, null);
             }
         }
         updateStatus(total, total);
@@ -181,8 +191,9 @@ public class FuzzyMatcher
             StringEntry strEntry = (StringEntry) tmstrings.get(i);
             List strTokens = strEntry.getSrcTokenList();
             int strTokensSize = strTokens.size();
-            if( strTokensSize==0 )
-                continue;
+            if( strTokensSize==0 ) // HP: maybe also test on strTokensComplete.size(), if strTokensSize is 0
+                continue;          // HP: perhaps that would result in better number/non-word matching too
+            List strTokensAll = strEntry.getSrcTokenListAll(); // HP: includes non-word tokens
             
             for(int j=0; j<total; j++)
             {
@@ -198,9 +209,17 @@ public class FuzzyMatcher
                 
                 if( similarity<OConsts.FUZZY_MATCH_THRESHOLD )
                     continue;
-                
+
+                // determine Levenshtein distance/adjusted similarity across the complete
+                // list of tokens, including numbers, tags, and other non-word tokens
+                List candTokensAll = candEntry.getSrcTokenListAll();
+                int ldAll = LevenshteinDistance.compute(strTokensAll, candTokensAll);
+                int simAdjusted = (100 * (Math.max(strTokensAll.size(), candTokensAll.size()) - ldAll)) /
+                        Math.max(strTokensAll.size(), candTokensAll.size());
+
                 byte[] similarityData = buildSimilarityData(candTokens, strTokens);
-                candEntry.addNearString(strEntry, similarity, similarityData, tmxname);
+                //candEntry.addNearString(strEntry, similarity, similarityData, tmxname);
+                candEntry.addNearString(strEntry, similarity, simAdjusted, similarityData, tmxname);
             }
         }
         updateStatus(tmtotal, tmtotal);

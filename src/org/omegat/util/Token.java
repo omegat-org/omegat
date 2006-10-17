@@ -55,7 +55,7 @@ public class Token
         }
         return false;
     }
-    
+
     /**
      * -1 if text is null,
      * text's hashcode otherwise.
@@ -66,15 +66,15 @@ public class Token
             return -1;
         return text.hashCode();
     }
-    
-    
+
+
     private static Pattern AMP = Pattern.compile("\\&");                        // NOI18N
-    
+
     private String stripAmpersand(String s)
     {
         return AMP.matcher(s).replaceAll("");                                   // NOI18N
     }
-    
+
     /**
      * Creates a new token.
      * @param _text the text of the token
@@ -86,7 +86,7 @@ public class Token
         text = stripAmpersand(_text);
         offset = _offset;
     }
-    
+
     private int length;
     /** Text without '&' */
     private String text;
@@ -108,5 +108,6 @@ public class Token
     {
         return text+"@"+offset;                                                 // NOI18N
     }
+
 }
 

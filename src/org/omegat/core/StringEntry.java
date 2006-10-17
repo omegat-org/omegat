@@ -70,12 +70,24 @@ public class StringEntry
     /** Returns the tokens of this entry's source string */
     public List getSrcTokenList()
     {
-        if( srcTokenList==null )
+        if(srcTokenList == null )
         {
             srcTokenList = new ArrayList();
             StaticUtils.tokenizeText(m_srcText, srcTokenList);
         }
         return srcTokenList;
+    }
+    
+    /**
+      * Returns all tokens of this entry's source string,
+      * including numbers, tags, and other non-word tokens.
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    public List getSrcTokenListAll() {
+        ArrayList result = new ArrayList();
+        StaticUtils.tokenizeText(m_srcText, result, true);
+        return result;
     }
 
     /** List of SourceTextEntry-es this string entry belongs to. */
@@ -119,22 +131,25 @@ public class StringEntry
      *
      * @param strEntry actual near string
      * @param score similarity score
+     * @param adjustedScore similarity score adjusted for full string, including non-word tokens
      * @param nearData coloring data
      * @param nearProj the TMX origin of the string, null for project's TMX
      */
-    public void addNearString(StringEntry strEntry, int score, byte[] nearData, String nearProj)
+    //public void addNearString(StringEntry strEntry, int score, byte[] nearData, String nearProj)
+    public void addNearString(StringEntry strEntry, int score, int adjustedScore, byte[] nearData, String nearProj)
     {
-        boolean add = true;
+        // if list is full, remove last entry if its score is lower than the new entry's score
         if( m_nearList.size()>=OConsts.MAX_STORED_NEAR_STRINGS )
         {
             NearString last = (NearString)m_nearList.last();
-            if( score>last.score )
+            //if( score>last.score )
+            if((score > last.score) || ((score == last.score) && (adjustedScore > last.adjustedScore)))
                 m_nearList.remove(last);
             else
-                add = false;
+                return;
         }
-        if( add )
-            m_nearList.add(new NearString(strEntry, score, nearData, nearProj));
+        //m_nearList.add(new NearString(strEntry, score, nearData, nearProj));
+        m_nearList.add(new NearString(strEntry, score, adjustedScore, nearData, nearProj));
     }
     
     /**

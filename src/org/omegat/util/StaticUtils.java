@@ -217,8 +217,28 @@ public class StaticUtils
      * @param tokenList the list to add tokens to
      * @return number of tokens
      */
-    public static int tokenizeText(String str, List tokenList)
-    {
+    public static int tokenizeText(String str, List tokenList) {
+        return tokenizeText(str, tokenList, false);
+    }
+    
+    /**
+     * Builds a list of tokens and a list of their offsets w/in a file.
+     * <p>
+     * It breaks string into tokens like in the following examples:
+     * <ul>
+     * <li> This is a semi-good way. -> "this", "is", "a", "semi-good", "way"
+     * <li> Fine, thanks, and you? -> "fine", "thanks", "and", "you"
+     * <li> C&all this action -> "call", "this", "action" ('&' is eaten)
+     * </ul>
+     * <p>
+     * Only skips OmegaT tags and other non-word tokens if the parameter "all" is false.
+     *
+     * @param str string to tokenize
+     * @param tokenList the list to add tokens to
+     * @param all If true, numbers, tags, and other non-word tokens are included in the list
+     * @return number of tokens
+     */
+    public static int tokenizeText(String str, List tokenList, boolean all) {
         int len = str.length();
         if (len==0)
             return 0;  // fixes bug nr. 1382810 (StringIndexOutOfBoundsException)
@@ -245,7 +265,8 @@ public class StaticUtils
                     break;
                 }
             }
-            if (word && !PatternConsts.OMEGAT_TAG.matcher(tokenStr).matches())
+            //if (word && !PatternConsts.OMEGAT_TAG.matcher(tokenStr).matches())
+            if (all || (word && !PatternConsts.OMEGAT_TAG.matcher(tokenStr).matches()))
             {
                 nTokens++;
                 if (tokenList!=null)

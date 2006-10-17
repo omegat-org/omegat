@@ -342,20 +342,9 @@ public class CommandThread extends Thread
             System.gc();
 
             // There, that should do it, now inform the user
-            m_transFrame.displayError(
-               "OmegaT ran out of memory, and will quit when you press OK.\n" +
-               "You may try to solve this problem in one of the following ways:\n" +
-               "\n" +
-               "1) Reduce the number of source files and translate in batches;\n" +
-               "\n" +
-               "2) Increase the amount of memory available to OmegaT, by\n" +
-               "specifying \"java -Xmx<size-in-MB>M -jar OmegaT.jar\" on the\n" +
-               "command line or in the OmegaT start script;\n" +
-               "\n" +
-               "3) File a bug report at http://sourceforge.net/projects/omegat\n" +
-               "\n" +
-               "OmegaT shall now quit.\n",
-               oome);
+            String msg = OStrings.getString("OUT_OF_MEMORY");
+            StaticUtils.log(msg);
+            m_transFrame.displayError(msg, oome);
 
             // Just quit, we can't help it anyway
             System.exit(0);

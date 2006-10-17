@@ -290,7 +290,7 @@ public class CommandThread extends Thread
             buildNearList();
             
             // build word count
-			buildProjectStats();
+            buildProjectStats();
             
             // Project Loaded...
             MessageRelay.uiMessageSetMessageText(tf, "");  // NOI18N
@@ -344,6 +344,7 @@ public class CommandThread extends Thread
             // There, that should do it, now inform the user
             String msg = OStrings.getString("OUT_OF_MEMORY");
             StaticUtils.log(msg);
+            oome.printStackTrace(StaticUtils.getLogStream());
             m_transFrame.displayError(msg, oome);
 
             // Just quit, we can't help it anyway
@@ -799,6 +800,9 @@ public class CommandThread extends Thread
             if (backup.exists())
                 backup.delete();
         }
+
+        // update statistics
+        buildProjectStats();
     }
     
     /**

@@ -145,17 +145,17 @@ public class FuzzyMatcher
 
                 // determine Levenshtein distance/adjusted similarity across the complete
                 // list of tokens, including numbers, tags, and other non-word tokens
+                // fix for bug 1449988
                 List candTokensAll = candEntry.getSrcTokenListAll();
                 int ldAll = LevenshteinDistance.compute(strTokensAll, candTokensAll);
                 int simAdjusted = (100 * (Math.max(strTokensAll.size(), candTokensAll.size()) - ldAll)) /
                         Math.max(strTokensAll.size(), candTokensAll.size());
+                // end fix 1449988
 
                 byte[] similarityData = buildSimilarityData(strTokens, candTokens);
-                //strEntry.addNearString(candEntry, similarity, similarityData, null);
                 strEntry.addNearString(candEntry, similarity, simAdjusted, similarityData, null);
 
                 similarityData = buildSimilarityData(candTokens, strTokens);
-                //candEntry.addNearString(strEntry, similarity, similarityData, null);
                 candEntry.addNearString(strEntry, similarity, simAdjusted, similarityData, null);
             }
         }
@@ -212,13 +212,14 @@ public class FuzzyMatcher
 
                 // determine Levenshtein distance/adjusted similarity across the complete
                 // list of tokens, including numbers, tags, and other non-word tokens
+                // fix for bug 1449988
                 List candTokensAll = candEntry.getSrcTokenListAll();
                 int ldAll = LevenshteinDistance.compute(strTokensAll, candTokensAll);
                 int simAdjusted = (100 * (Math.max(strTokensAll.size(), candTokensAll.size()) - ldAll)) /
                         Math.max(strTokensAll.size(), candTokensAll.size());
+                // end fix 1449988
 
                 byte[] similarityData = buildSimilarityData(candTokens, strTokens);
-                //candEntry.addNearString(strEntry, similarity, similarityData, tmxname);
                 candEntry.addNearString(strEntry, similarity, simAdjusted, similarityData, tmxname);
             }
         }

@@ -142,13 +142,11 @@ public class StringEntry
         if( m_nearList.size()>=OConsts.MAX_STORED_NEAR_STRINGS )
         {
             NearString last = (NearString)m_nearList.last();
-            //if( score>last.score )
             if((score > last.score) || ((score == last.score) && (adjustedScore > last.adjustedScore)))
                 m_nearList.remove(last);
             else
                 return;
         }
-        //m_nearList.add(new NearString(strEntry, score, nearData, nearProj));
         m_nearList.add(new NearString(strEntry, score, adjustedScore, nearData, nearProj));
     }
     

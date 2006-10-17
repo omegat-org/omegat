@@ -49,8 +49,6 @@ public class NearString implements Comparable
     
     public int compareTo(Object object)
     {
-        //NearString visitor = (NearString)object;
-        //return (visitor.score<score) ? -1 : 1 ;
         NearString o = (NearString)object;
         if (o.score == score)
             return (o.adjustedScore < adjustedScore) ? -1 : 1;

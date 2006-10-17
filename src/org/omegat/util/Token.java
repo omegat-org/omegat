@@ -39,38 +39,28 @@ import java.util.regex.Pattern;
 public class Token
 {
     /**
-     * Two tokens are thought equal if their text is equal.
+     * Two tokens are thought equal if their hash code is equal.
+     *
+     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
-    public boolean equals(Object obj)
-    {
-        if( this==obj )
-            return true;
-        if( obj instanceof Token )
-        {
-            Token tok = (Token)obj;
-            if( text==null )
-                return tok.text==null;
-            else
-                return text.equals(tok.text);
-        }
-        return false;
+    public boolean equals(Object other) {
+        return (   (this == other)
+                || (   (other instanceof Token)
+                    && (hash == ((Token)other).hash)));
     }
 
     /**
      * -1 if text is null,
      * text's hashcode otherwise.
      */
-    public int hashCode()
-    {
-        if( text==null )
-            return -1;
-        return text.hashCode();
+    private int hash;
+    public int hashCode() {
+        return hash;
     }
-
 
     private static Pattern AMP = Pattern.compile("\\&");                        // NOI18N
 
-    private String stripAmpersand(String s)
+    private final String stripAmpersand(String s)
     {
         return AMP.matcher(s).replaceAll("");                                   // NOI18N
     }
@@ -83,30 +73,28 @@ public class Token
     public Token(String _text, int _offset)
     {
         length = _text.length();
-        text = stripAmpersand(_text);
+        hash = (_text == null) ? -1 : stripAmpersand(_text).hashCode();
         offset = _offset;
     }
 
     private int length;
-    /** Text without '&' */
-    private String text;
     private int offset;
 
     /** Returns the length of a token. */
-    public int getLength()
+    public final int getLength()
     {
         return length;
     }
 
     /** Returns token's offset in a source string. */
-    public int getOffset()
+    public final int getOffset()
     {
         return offset;
     }
 
-    public String toString()
+    public final String toString()
     {
-        return text+"@"+offset;                                                 // NOI18N
+        return hash+"@"+offset;                                                 // NOI18N
     }
 
 }

@@ -535,7 +535,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         
         if (m_projectLoaded)
         {
-            commitEntry();
+            commitEntry(false); // part of fix for bug 1409309
         }
         
         boolean projectModified = false;
@@ -796,7 +796,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         
         if (m_projectLoaded)
         {
-            commitEntry();
+            commitEntry(false); // part of fix for bug 1409309
             doSave();
         }
         m_projWin.reset();
@@ -914,7 +914,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         {
             public void run()
             {
-                commitEntry();
+                commitEntry(false); // part of fix for bug 1409309
                 activateEntry();
             }
         };
@@ -959,7 +959,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         {
             // fonts have changed
             // first commit current translation
-            commitEntry();
+            commitEntry(false); // part of fix for bug 1409309
             m_font = dlg.getSelectedFont();
             editor.setFont(m_font);
             matches.setFont(m_font);
@@ -1363,8 +1363,22 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      * Since 1.6: Translation equal to source may be validated as OK translation
      *            if appropriate option is set in Workflow options dialog.
      */
-    private synchronized void commitEntry()
-    {
+    private synchronized void commitEntry() {
+        commitEntry(true);
+    }
+    
+    /**
+     * Commits the translation.
+     * Reads current entry text and commit it to memory if it's changed.
+     * Also clears out segment markers while we're at it.
+     * <p>
+     * Since 1.6: Translation equal to source may be validated as OK translation
+     *            if appropriate option is set in Workflow options dialog.
+     *
+     * @param forceCommit If false, the entry will not be committed if the entry
+     *                    is the first and its translation equals the source text
+     */
+    private synchronized void commitEntry(boolean forceCommit) {
         if (!m_projectLoaded)
             return;
         
@@ -1422,10 +1436,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         // update memory
         if (new_translation.equals(m_curEntry.getSrcText()))
         {
-            if  (Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC))
+            if  (   Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)
+                 && (forceCommit || (m_curEntryNum != 0))) // fix for bug 1409309
                 m_curEntry.setTranslation(new_translation);
             else
-                m_curEntry.setTranslation(new String());
+                m_curEntry.setTranslation(new String()); 
         }
         else
             m_curEntry.setTranslation(new_translation);

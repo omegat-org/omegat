@@ -53,12 +53,12 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
         this.mw = mainwindow;
         DefaultStyledDocument doc = new DefaultStyledDocument(new StyleContext());
         doc.addDocumentListener(this);
-        
+
         undoManager = new UndoManager();
         doc.addUndoableEditListener(undoManager);
         setDocument(doc);
         setText(OStrings.TF_INTRO_MESSAGE);
-        
+
         addMouseListener(this);
     }
 

@@ -31,6 +31,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.InputEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.text.MessageFormat;
@@ -48,7 +49,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.undo.UndoManager;
+import javax.swing.text.AbstractDocument;
 import javax.swing.text.Document;
+import javax.swing.text.PlainDocument;
+import javax.swing.text.StringContent;
+import javax.swing.undo.UndoManager;
 
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.SearchThread;
@@ -499,6 +504,36 @@ public class SearchWindow extends JFrame
     
     class MFindField extends JTextField
     {
+        public MFindField() {
+            //  Handle undo (CtrlCmd+Z);
+            KeyStroke undo = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK, false);
+            Action undoAction = new AbstractAction() {
+                public void actionPerformed(ActionEvent e) {
+                    undo();
+                }
+            };
+            getInputMap().put(undo, "UNDO");                                                  // NOI18N
+            getActionMap().put("UNDO", undoAction);               // NOI18N
+
+            //  Handle redo (CtrlCmd+Y);
+            KeyStroke redo = KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.CTRL_MASK, false);
+            Action redoAction = new AbstractAction() {
+                public void actionPerformed(ActionEvent e) {
+                    redo();
+                }
+            };
+            getInputMap().put(redo, "REDO");                                                  // NOI18N
+            getActionMap().put("REDO", redoAction);               // NOI18N
+        }
+
+        protected Document createDefaultModel() {
+            PlainDocument doc = new PlainDocument(new StringContent());
+            //doc.addDocumentListener(this);
+            undoManager = new UndoManager();
+            doc.addUndoableEditListener(undoManager);
+            return doc;
+        }
+
         protected void processKeyEvent(KeyEvent e)
         {
             if (e.getKeyCode() == KeyEvent.VK_ENTER &&
@@ -512,6 +547,18 @@ public class SearchWindow extends JFrame
                 super.processKeyEvent(e);
             }
         }
+
+        protected void undo() {
+            if (undoManager.canUndo())
+                undoManager.undo();
+        }
+
+        protected void redo() {
+            if (undoManager.canRedo())
+                undoManager.redo();
+        }
+
+        private UndoManager undoManager;
     }
     
     private JLabel		m_searchLabel;

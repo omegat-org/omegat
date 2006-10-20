@@ -62,20 +62,6 @@ public class TagValidationFrame extends JFrame
         // set window size & position
         initWindowLayout();
 
-        Container cp = getContentPane();
-        m_editorPane = new JEditorPane();
-        m_editorPane.setEditable(false);
-        JScrollPane scroller = new JScrollPane(m_editorPane);
-        cp.add(scroller, "Center");    // NOI18N
-
-        Box bbut = Box.createHorizontalBox();
-        bbut.add(Box.createHorizontalGlue());
-        bbut.add(m_closeButton);
-        bbut.add(Box.createHorizontalGlue());
-        cp.add(bbut, "South");    // NOI18N
-
-        m_editorPane.addHyperlinkListener(new HListener(m_parent, false));
-
         // Configure close button
         m_closeButton = new JButton();
         m_closeButton.addActionListener(new ActionListener()
@@ -98,6 +84,22 @@ public class TagValidationFrame extends JFrame
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
         put(escape, "ESCAPE");                                                  // NOI18N
         getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+
+
+        Container cp = getContentPane();
+        m_editorPane = new JEditorPane();
+        m_editorPane.setEditable(false);
+        JScrollPane scroller = new JScrollPane(m_editorPane);
+        cp.add(scroller, "Center");    // NOI18N
+
+        Box bbut = Box.createHorizontalBox();
+        bbut.add(Box.createHorizontalGlue());
+        bbut.add(m_closeButton);
+        bbut.add(Box.createHorizontalGlue());
+        cp.add(bbut, "South");    // NOI18N
+
+        //m_editorPane.addHyperlinkListener(new HListener(m_parent, false));
+        m_editorPane.addHyperlinkListener(new HListener(m_parent, true)); // fix for bug 1542937
 
         updateUIText();
     }

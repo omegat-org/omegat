@@ -159,8 +159,9 @@ public class FilterMaster
     {
         // ugly hack, to say the truth
         // HP: may be, but for what purpose???
+        // HP: this also introduces bug 1462566 !!!
         String src = removeLineFeed(entry);
-        
+
         // some special space handling
         int len = src.length();
         int b = 0;

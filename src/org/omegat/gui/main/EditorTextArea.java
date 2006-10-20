@@ -24,6 +24,7 @@
 
 package org.omegat.gui.main;
 
+import java.awt.ComponentOrientation;
 import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;

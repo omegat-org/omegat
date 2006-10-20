@@ -1,10 +1,10 @@
 ----------------------------------------------------------------------
- OmegaT 1.6.0 RC12a Changes
+ OmegaT 1.6.0 RC13 Changes
 ----------------------------------------------------------------------
 
-1.6.0 RC12a vs. 1.4.5.04
- 46 Enchancements
- 78 Bugfixes
+1.6.0 RC13 vs. 1.4.5.04
+ 48 Enchancements
+ 94 Bugfixes
 
 ----------------------------------------------------------------------
 PLANNING:
@@ -26,6 +26,69 @@ match similarity and match ordering.
 TODO for 1.6.0:
 ----------------------------------------------------------------------
 - Users Guide
+
+----------------------------------------------------------------------
+1.6.0 RC13
+Contains a form of TMX level 2 export sufficiently compatible with
+other CAT tools, and supports regular expression searches.
+
+ Enhancements:
+
+  - Sufficient TMX level 2 support
+  [No RFE filed]
+
+  - Regular expression search
+  http://sourceforge.net/support/tracker.php?aid=1506640
+
+ Bugfixes:
+
+  - Multiple instances of OmegaT and log file
+  http://sourceforge.net/support/tracker.php?aid=1392639
+
+  - Untranslated segment marked as translated
+  http://sourceforge.net/support/tracker.php?aid=1409309
+
+  - Search options persistence
+  http://sourceforge.net/support/tracker.php?aid=1447698
+
+  - Match ordering
+  http://sourceforge.net/support/tracker.php?aid=1449988
+
+  - [MacOSX] Browsing wrong folders from project properties
+  http://sourceforge.net/support/tracker.php?aid=1476591
+
+  - Search function should differentiate accented letters
+  http://sourceforge.net/support/tracker.php?aid=1506640
+
+  - Tag validation window does not remember position
+  http://sourceforge.net/support/tracker.php?aid=1542937
+
+  - Log display bug when parsing TMX
+  http://sourceforge.net/support/tracker.php?aid=1549088
+
+  - Trados TMX import bug
+  http://sourceforge.net/support/tracker.php?aid=1549926
+
+  - project_stats.txt not updated
+  http://sourceforge.net/support/tracker.php?aid=1553115
+
+  - Can't start on Fedore Core 5 with JDK1.6
+  http://sourceforge.net/support/tracker.php?aid=1555809
+
+  - Project files window position
+  http://sourceforge.net/support/tracker.php?aid=1558328
+
+  - [OpenDocument] One bookmark attribute not translatable
+  http://sourceforge.net/support/tracker.php?aid=1569874
+
+  - Out of memory error
+  http://sourceforge.net/support/tracker.php?aid=1571944
+
+  - Charset definition in HTML files
+  http://sourceforge.net/support/tracker.php?aid=1575761
+
+  - Ctrl+z (cancel) does not work in the search window
+  http://sourceforge.net/support/tracker.php?aid=1567480
 
 ----------------------------------------------------------------------
 1.6.0 RC12a

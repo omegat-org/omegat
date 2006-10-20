@@ -583,14 +583,21 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     {
         ArrayList suspects = CommandThread.core.validateTags();
         if (suspects.size() > 0)
-        {
+        { // HP change this section, show only one dialog
             // create list of suspect strings - use org.omegat.gui.TagValidationFrame for now
-            TagValidationFrame cf = new TagValidationFrame(this);
-            cf.setVisible(true);
-            cf.displayStringList(suspects);
+            if (m_tagWin == null) {
+                m_tagWin = new TagValidationFrame(this);
+                m_tagWin.addWindowListener(this);
+            }
+            m_tagWin.setVisible(true);
+            m_tagWin.displayStringList(suspects);
         }
         else
         {
+            // close tag window
+            if (m_tagWin != null)
+                m_tagWin.dispose();
+
             // show dialog saying all is OK
             JOptionPane.showMessageDialog(this,
                     OStrings.TF_NOTICE_OK_TAGS,
@@ -598,7 +605,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
+
     public void doNextEntry()
     {
         if (!m_projectLoaded)
@@ -1918,15 +1925,13 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private String  m_activeProj;
     public int      m_curEntryNum;
     private int     m_activeMatch;
-    
-    private ProjectFrame	m_projWin;
-    public ProjectFrame getProjectFrame()
-    {
-        return m_projWin;
-    }
-    
+
+    // other windows
+    private TagValidationFrame m_tagWin;
+    private ProjectFrame       m_projWin;
+
     public boolean m_projectLoaded;
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -2373,6 +2378,10 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
     public void windowClosed(java.awt.event.WindowEvent evt)
     {
+        if (evt.getWindow() == m_tagWin)
+            m_tagWin = null;
+        // else if (evt.getWindow() == m_projWin)
+        //     m_projWin = null;
     }
 
     public void windowClosing(java.awt.event.WindowEvent evt)

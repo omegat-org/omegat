@@ -55,11 +55,11 @@ import org.omegat.util.StaticUtils;
  */
 public class SearchThread extends Thread
 {
-    public SearchThread(MainWindow par, String startText)
+    public SearchThread(MainWindow par, SearchWindow window, String startText)
     {
         setPriority(Thread.MIN_PRIORITY);
         
-        m_window = new SearchWindow(par, this, startText);
+        m_window = window;
         m_searchDir = null;
         m_searchRecursive = false;
         m_searchText = "";	// NOI18N
@@ -109,12 +109,6 @@ public class SearchThread extends Thread
     // thread main loop
     public void run()
     {
-        // have search thread control search window to allow parent
-        //	window to avoid blocking
-        // need to spawn subthread so we don't block either
-        DialogThread dlgThread = new DialogThread(m_window);
-        dlgThread.start();
-        
         boolean firstPass = true;
         try
         {

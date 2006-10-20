@@ -195,7 +195,8 @@ public class ProjectFrame extends JFrame
 
     private void doCancel()
     {
-        dispose();
+        //dispose();
+        setVisible(false);
     }
 
     public void reset()

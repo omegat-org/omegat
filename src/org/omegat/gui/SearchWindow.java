@@ -74,11 +74,11 @@ import org.openide.awt.Mnemonics;
  */
 public class SearchWindow extends JFrame
 {
-    public SearchWindow(MainWindow par, SearchThread th, String startText)
+    //public SearchWindow(MainWindow par, SearchThread th, String startText)
+    public SearchWindow(MainWindow par, String startText)
     {
         //super(par, false);
         
-        m_thread = th;
         m_searchLabel = new JLabel();
         m_searchField = new MFindField();
 
@@ -298,6 +298,10 @@ public class SearchWindow extends JFrame
         }
 
         m_searchField.requestFocus();
+
+        // start the search in a separate thread
+        m_thread = new SearchThread(par, this, startText);
+        m_thread.start();
     }
     
     /**
@@ -390,6 +394,7 @@ public class SearchWindow extends JFrame
     public void threadDied()
     {
         m_thread = null;
+        dispose();
     }
     
     ///////////////////////////////////////////////////////////////

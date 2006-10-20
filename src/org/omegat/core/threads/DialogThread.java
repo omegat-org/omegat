@@ -33,7 +33,7 @@ import javax.swing.*;
  * 
  * @author Maxym Mykhalchuk
  */
-class DialogThread extends Thread
+public class DialogThread extends Thread
 {
     public DialogThread(JFrame win)
     {

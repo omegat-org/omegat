@@ -37,6 +37,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentListener;
@@ -49,8 +50,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -72,11 +75,13 @@ import org.omegat.core.StringEntry;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.threads.CommandThread;
+import org.omegat.core.threads.DialogThread;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.HelpFrame;
 import org.omegat.gui.ProjectFrame;
+import org.omegat.gui.SearchWindow;
 import org.omegat.gui.TagValidationFrame;
 import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.FontSelectionDialog;
@@ -105,6 +110,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     /** Creates new form MainWindow */
     public MainWindow()
     {
+        m_searches = new HashSet();
         initComponents();
         createMainComponents();
         initDocking();
@@ -583,18 +589,20 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     {
         ArrayList suspects = CommandThread.core.validateTags();
         if (suspects.size() > 0)
-        { // HP change this section, show only one dialog
-            // create list of suspect strings - use org.omegat.gui.TagValidationFrame for now
+        {
+            // create a tag validation window if necessary
             if (m_tagWin == null) {
                 m_tagWin = new TagValidationFrame(this);
                 m_tagWin.addWindowListener(this);
             }
+
+            // display list of suspect strings
             m_tagWin.setVisible(true);
             m_tagWin.displayStringList(suspects);
         }
         else
         {
-            // close tag window
+            // close tag validation window if present
             if (m_tagWin != null)
                 m_tagWin.dispose();
 
@@ -605,7 +613,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }
-
+    
     public void doNextEntry()
     {
         if (!m_projectLoaded)
@@ -856,9 +864,19 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         toolsValidateTagsMenuItem.setEnabled(false);
         
         editor.setEditable(false);
+
+        // hide project file list
         m_projWin.uiUpdateImportButtonStatus();
-        
         m_projWin.setVisible(false);
+
+        // dispose other windows
+        if (m_tagWin != null)
+            m_tagWin.dispose();
+        for (Iterator i = m_searches.iterator(); i.hasNext();) {
+            SearchWindow sw = (SearchWindow)i.next();
+            sw.dispose();
+        }
+        m_searches.clear();
     }
     
     /** Updates UI (enables/disables menu items) upon <b>opening</b> project */
@@ -1257,8 +1275,13 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             selection.trim();
         }
         
-        SearchThread srch = new SearchThread(this, selection);
-        srch.start();
+        //SearchThread srch = new SearchThread(this, selection);
+        //srch.start();
+        SearchWindow search = new SearchWindow(this, selection);
+        search.addWindowListener(this);
+        DialogThread dt = new DialogThread(search);
+        dt.start();
+        m_searches.add(search);
     }
     
     /* updates status label */
@@ -1926,12 +1949,17 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     public int      m_curEntryNum;
     private int     m_activeMatch;
 
-    // other windows
-    private TagValidationFrame m_tagWin;
-    private ProjectFrame       m_projWin;
-
+    private TagValidationFrame  m_tagWin;
+    private ProjectFrame	m_projWin;
+    public ProjectFrame getProjectFrame()
+    {
+        return m_projWin;
+    }
+    
+    private Set m_searches; // set of all open search windows
+    
     public boolean m_projectLoaded;
-
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -2378,10 +2406,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
     public void windowClosed(java.awt.event.WindowEvent evt)
     {
-        if (evt.getWindow() == m_tagWin)
+        Window window = evt.getWindow();
+        if (window == m_tagWin)
             m_tagWin = null;
-        // else if (evt.getWindow() == m_projWin)
-        //     m_projWin = null;
+        else if (m_searches.contains(window))
+            m_searches.remove(window);
     }
 
     public void windowClosing(java.awt.event.WindowEvent evt)

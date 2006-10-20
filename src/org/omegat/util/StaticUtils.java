@@ -636,6 +636,28 @@ private static SessionPrintStream log = null;
     }
     
     /**
+      * Returns true if running on Mac OS X
+      */
+    public static boolean onMacOSX() {
+        // get os property
+        String os;   // name of operating system
+        try
+        {
+            // get the name of the operating system
+            os = System.getProperty("os.name");                                 // NOI18N
+        }
+        catch (SecurityException e)
+        {
+            // access to the os property is restricted,
+            // assume we're not on a Mac
+            return false;
+        }
+
+        return os.equals("Mac OS X");
+
+    }
+    
+    /**
      * Strips all XML tags (converts to plain text).
      */
     public static String stripTags(String xml)

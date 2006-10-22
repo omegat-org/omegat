@@ -161,12 +161,16 @@ public class ProjectFileStorage
         {
             try
             {
-                if (relativePath.startsWith(".."))                              // NOI18N
-                    //return new File(m_root, relativePath).getCanonicalPath();
-                    return new File(m_root, relativePath).getCanonicalPath() + File.separator; // fix for bug 1581379
-                else
-                    //return new File(relativePath).getCanonicalPath();
-                    return new File(relativePath).getCanonicalPath() + File.separator; // fix for bug 1581379
+                // check if path starts with a system root
+                File[] roots = File.listRoots();
+                for (int i = 0; i < roots.length; i++) {
+                    if (relativePath.startsWith(roots[i].getCanonicalPath()))
+                        // path starts with a root --> path is already absolute
+                        return new File(relativePath).getCanonicalPath() + File.separator;
+                }
+
+                // path does not start with a system root --> relative to project root
+                return new File(m_root, relativePath).getCanonicalPath() + File.separator;
             }
             catch (IOException e)
             {
@@ -216,7 +220,7 @@ public class ProjectFileStorage
         {
             return absolutePath.replace(File.separatorChar, '/');
         }
-	}
+    }
 
     /**
      * Saves project file to disk.

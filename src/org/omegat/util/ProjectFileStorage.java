@@ -162,9 +162,11 @@ public class ProjectFileStorage
             try
             {
                 if (relativePath.startsWith(".."))                              // NOI18N
-                    return new File(m_root, relativePath).getCanonicalPath();
+                    //return new File(m_root, relativePath).getCanonicalPath();
+                    return new File(m_root, relativePath).getCanonicalPath() + File.separator; // fix for bug 1581379
                 else
-                    return new File(relativePath).getCanonicalPath();
+                    //return new File(relativePath).getCanonicalPath();
+                    return new File(relativePath).getCanonicalPath() + File.separator; // fix for bug 1581379
             }
             catch (IOException e)
             {

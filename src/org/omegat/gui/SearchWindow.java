@@ -511,7 +511,9 @@ public class SearchWindow extends JFrame
     {
         public MFindField() {
             //  Handle undo (CtrlCmd+Z);
-            KeyStroke undo = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK, false);
+            KeyStroke undo = StaticUtils.onMacOSX()
+                                 ? KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK, false)
+                                 : KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.META_MASK, false);
             Action undoAction = new AbstractAction() {
                 public void actionPerformed(ActionEvent e) {
                     undo();

@@ -522,7 +522,7 @@ public class SearchWindow extends JFrame
 
             //  Handle redo (CtrlCmd+Y);
             KeyStroke redo = StaticUtils.onMacOSX()
-                                 ? KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.CTRL_MASK, false);
+                                 ? KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.CTRL_MASK, false)
                                  : KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.META_MASK, false);
             Action redoAction = new AbstractAction() {
                 public void actionPerformed(ActionEvent e) {

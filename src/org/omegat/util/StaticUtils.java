@@ -366,7 +366,11 @@ public class StaticUtils
         return res.toString();
     }
 
-private static SessionPrintStream log = null;
+    public static String getLogLocation() {
+        return getConfigDir() + FILE_LOG;
+    }
+
+    private static SessionPrintStream log = null;
     /**
      * Returns a log stream.
      */

@@ -3,8 +3,8 @@
 ----------------------------------------------------------------------
 
 1.6.0 RC13 vs. 1.4.5.04
- 48 Enchancements
- 94 Bugfixes
+ 49 Enchancements
+ 98 Bugfixes
 
 ----------------------------------------------------------------------
 PLANNING:
@@ -35,6 +35,9 @@ other CAT tools, and supports regular expression searches.
  Enhancements:
 
   - Sufficient TMX level 2 support
+  [No RFE filed]
+
+  - Alternate translations in TMX files are no longer skipped
   [No RFE filed]
 
   - Regular expression search
@@ -89,6 +92,18 @@ other CAT tools, and supports regular expression searches.
 
   - Ctrl+z (cancel) does not work in the search window
   http://sourceforge.net/support/tracker.php?aid=1567480
+
+  - Cancel button not working
+  http://sourceforge.net/support/tracker.php?aid=1583109
+
+  - Project files window dismissal
+  http://sourceforge.net/support/tracker.php?aid=1581385
+
+  - Folder selection in properties dialog
+  http://sourceforge.net/support/tracker.php?aid=1581379
+
+  - Closing a project and the related windows
+  http://sourceforge.net/support/tracker.php?aid=1560724
 
 ----------------------------------------------------------------------
 1.6.0 RC12a

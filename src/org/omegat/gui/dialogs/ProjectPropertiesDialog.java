@@ -524,7 +524,14 @@ public class ProjectPropertiesDialog extends JDialog
             }
         }
 
-        browser.showOpenDialog(this);
+        // show the browser
+        int action = browser.showOpenDialog(this);
+
+        // check if the selection has been approved
+        if (action != javax.swing.JFileChooser.APPROVE_OPTION)
+            return;
+
+        // get the selected folder
         File dir = browser.getSelectedFile();
         if (dir == null)
             return;

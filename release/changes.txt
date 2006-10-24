@@ -4,7 +4,7 @@
 
 1.6.0 RC13 vs. 1.4.5.04
  49 Enchancements
- 98 Bugfixes
+ 99 Bugfixes
 
 ----------------------------------------------------------------------
 PLANNING:
@@ -104,6 +104,9 @@ other CAT tools, and supports regular expression searches.
 
   - Closing a project and the related windows
   http://sourceforge.net/support/tracker.php?aid=1560724
+
+  - [Mac] "new folder" button missing from "Browse" dialogs
+  http://sourceforge.net/support/tracker.php?aid=1556293
 
 ----------------------------------------------------------------------
 1.6.0 RC12a

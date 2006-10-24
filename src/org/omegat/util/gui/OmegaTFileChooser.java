@@ -24,14 +24,23 @@
 
 package org.omegat.util.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.IOException;
+import javax.swing.Action;
+import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
+import javax.swing.KeyStroke;
 
+import org.omegat.core.threads.CommandThread;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
 
 /**
  * Basic File Chooser for OmegaT, showing the icon for OmegaT projects
@@ -67,8 +76,62 @@ public class OmegaTFileChooser extends JFileChooser
         {
             // do nothing
         }
+
+        /* Handle Cmd+N key on Mac OSX to create new directories
+         * Fix for bug 1556293
+         * (Note: Windows and Linux already have functionality for this)
+         *
+         * @author Henry Pijffers (henry.pijffers@saxnot.com)
+         */
+        if (StaticUtils.onMacOSX()) {
+            KeyStroke newDirKey = KeyStroke.getKeyStroke(KeyEvent.VK_N, java.awt.event.InputEvent.META_MASK);
+            Action newDirAction = new AbstractAction() {
+                public void actionPerformed(ActionEvent e) {
+                    createNewDir();
+                }
+            };
+            getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(newDirKey, "NEW DIRECTORY"); // NOI18N
+            getActionMap().put("NEW DIRECTORY", newDirAction); // NOI18N
+        }
     }
-    
+
+    /**
+      * Creates a new directory/folder in the current directory/folder.
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    private void createNewDir() {
+        // get the current directory (file chooser)
+        File currentDirectory = getCurrentDirectory();
+
+        File newFolder = null;
+        try {
+            // create a new directory in the current directory
+            newFolder = getFileSystemView().createNewFolder(currentDirectory);
+
+            // select (visually) the newly created directory
+            if (isMultiSelectionEnabled()) {
+                setSelectedFiles(new File[]{newFolder});
+            } else {
+                setSelectedFile(newFolder);
+            }
+        } catch (IOException exception) {
+            // log the error
+            StaticUtils.log(OStrings.getString("OFC_NEW_DIR_ERROR"));
+            StaticUtils.log(exception.getLocalizedMessage());
+            exception.printStackTrace(StaticUtils.getLogStream());
+
+            // display the error
+            CommandThread.core.displayErrorMessage(OStrings.getString("OFC_NEW_DIR_ERROR"), exception);
+
+            // give up
+            return;
+        }
+
+        // redisplay the current directory (so the new dir is displayed correctly)
+        rescanCurrentDirectory();
+    }
+
     /** OmegaT project icon */
     private static ImageIcon omegatIcon = null;
 

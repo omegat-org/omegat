@@ -3,8 +3,8 @@
 ----------------------------------------------------------------------
 
 1.6.0 RC13 vs. 1.4.5.04
- 49 Enchancements
- 99 Bugfixes
+  49 Enchancements
+ 100 Bugfixes
 
 ----------------------------------------------------------------------
 PLANNING:
@@ -107,6 +107,9 @@ other CAT tools, and supports regular expression searches.
 
   - [Mac] "new folder" button missing from "Browse" dialogs
   http://sourceforge.net/support/tracker.php?aid=1556293
+
+  - Filters Configuration is not persistent under Turkish locale
+  http://sourceforge.net/support/tracker.php?aid=1207296
 
 ----------------------------------------------------------------------
 1.6.0 RC12a

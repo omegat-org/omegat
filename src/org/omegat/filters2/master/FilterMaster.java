@@ -523,10 +523,18 @@ public class FilterMaster
     {
         try
         {
+// fix for bug 1207296
+// this is only a quick hack to enable reading/writing of the filter config file
+// on problematic locales (Turkish), and should be replaced by a proper implementation
+// of reading/writing files without using XMLDecoder/XMLEncoder
+java.util.Locale curDefLocale = java.util.Locale.getDefault();
+java.util.Locale.setDefault(new java.util.Locale("en", "us"));
             MyExceptionListener myel = new MyExceptionListener();
             XMLDecoder xmldec = new XMLDecoder(new FileInputStream(configFile), this, myel);
             filters = (Filters)xmldec.readObject();
             xmldec.close();
+// restore hacked locale
+java.util.Locale.setDefault(new java.util.Locale(curDefLocale.getLanguage(), curDefLocale.getCountry()));
             
             if( myel.isExceptionOccured() )
             {

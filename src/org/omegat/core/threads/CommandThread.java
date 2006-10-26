@@ -403,7 +403,7 @@ public class CommandThread extends Thread
         // Write TMX header
         out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");              // NOI18N
         out.println("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">");                     // NOI18N
-        out.println(levelTwo ? "<tmx version=\"1.4\">" : "<tmx version=\"1.1\">"); // NOI18N
+        out.println("<tmx version=\"1.4\">");                                   // NOI18N
         out.println("  <header");                                               // NOI18N
         out.println("    creationtool=\"OmegaT\"");                             // NOI18N
         out.println("    creationtoolversion=\""+TMXReader.CTV_OMEGAT_1_6_RC12+"\"");  // NOI18N

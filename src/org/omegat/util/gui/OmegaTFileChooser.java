@@ -83,7 +83,7 @@ public class OmegaTFileChooser extends JFileChooser
          *
          * @author Henry Pijffers (henry.pijffers@saxnot.com)
          */
-        if (StaticUtils.onMacOSX()) {
+        /*if (StaticUtils.onMacOSX()) {
             KeyStroke newDirKey = KeyStroke.getKeyStroke(KeyEvent.VK_N, java.awt.event.InputEvent.META_MASK);
             Action newDirAction = new AbstractAction() {
                 public void actionPerformed(ActionEvent e) {
@@ -92,7 +92,7 @@ public class OmegaTFileChooser extends JFileChooser
             };
             getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(newDirKey, "NEW DIRECTORY"); // NOI18N
             getActionMap().put("NEW DIRECTORY", newDirAction); // NOI18N
-        }
+        }*/
     }
 
     /**
@@ -100,7 +100,7 @@ public class OmegaTFileChooser extends JFileChooser
       *
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
-    private void createNewDir() {
+    /*private void createNewDir() {
         // get the current directory (file chooser)
         File currentDirectory = getCurrentDirectory();
 
@@ -130,7 +130,7 @@ public class OmegaTFileChooser extends JFileChooser
 
         // redisplay the current directory (so the new dir is displayed correctly)
         rescanCurrentDirectory();
-    }
+    }*/
 
     /** OmegaT project icon */
     private static ImageIcon omegatIcon = null;

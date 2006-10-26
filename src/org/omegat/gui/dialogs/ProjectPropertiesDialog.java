@@ -373,6 +373,14 @@ public class ProjectPropertiesDialog extends JDialog
                 m_dialogCancelled = true;
                 return;
             }
+
+            // create project dir (and higher dirs) if it doesn't exist yet
+            // fix for bug 1476591 (wrong folders are used if project dir doesn't exist)
+            File projectDir = ndc.getSelectedFile();
+            if (!projectDir.exists())
+                projectDir.mkdirs();
+
+            // set project and relative dirs
             projectProperties.setProjectRoot(ndc.getSelectedFile().getAbsolutePath()
                         + File.separator);
             projectProperties.setProjectFile(projectProperties.getProjectRoot() + OConsts.FILE_PROJECT);
@@ -475,7 +483,7 @@ public class ProjectPropertiesDialog extends JDialog
         }
 
         OmegaTFileChooser browser = new OmegaTFileChooser();
-        String str = OStrings.getString("BUTTON_SELECT_NO_MNEMONIC");
+        // String str = OStrings.getString("BUTTON_SELECT_NO_MNEMONIC");
         // browser.setApproveButtonText(str);
         browser.setDialogTitle(title);
         browser.setFileSelectionMode(OmegaTFileChooser.DIRECTORIES_ONLY);
@@ -536,7 +544,7 @@ public class ProjectPropertiesDialog extends JDialog
         if (dir == null)
             return;
 
-        str = dir.getAbsolutePath() + File.separator;
+        String str = dir.getAbsolutePath() + File.separator;
         // reset appropriate path - store preferred directory
         switch (browseTarget)
         {
@@ -676,6 +684,13 @@ public class ProjectPropertiesDialog extends JDialog
 
     private void doCancel()
     {
+        // delete project dir in case of a new project
+        // to fix bug 1476591 the project root is created before everything else
+        // and if the new project is cancelled, the project root still exists,
+        // so it must be deleted
+        if (dialogType == NEW_PROJECT)
+            new File(projectProperties.getProjectRoot()).delete();
+
         m_dialogCancelled = true;
         setVisible(false);
     }

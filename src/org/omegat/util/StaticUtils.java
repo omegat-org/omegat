@@ -392,14 +392,11 @@ public class StaticUtils
             // get the session ID from the log session print stream
             String sessionID = log.getSessionID();
 
-            // also encapsulate the system out and err in a session print stream
+            // also encapsulate the system out in a session print stream
             // make sure they use the same session ID
             SessionPrintStream sessionOut = new SessionPrintStream(System.out);
             sessionOut.setSessionID(sessionID);
             System.setOut(sessionOut);
-            //SessionPrintStream sessionErr = new SessionPrintStream(System.err);
-            //sessionErr.setSessionID(sessionID);
-            //System.setErr(sessionErr);
         }
 
         return log;

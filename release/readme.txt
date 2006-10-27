@@ -47,8 +47,9 @@ OmegaT's main features are
   - localization in a number of languages.
 
 OmegaT supports OpenDocument files, Microsoft Office files (using
-OpenOffice.org as a conversion filter), OpenOffice.org or StarOffice files, as
-well as (X)HTML, Java localization files or plain text files.
+OpenOffice.org as a conversion filter, or by conversion to HTML),
+OpenOffice.org or StarOffice files, as well as (X)HTML, Java localization
+files or plain text files.
 
 OmegaT will automatically parse even the most complex source directory
 hierarchies, to access all the supported files, and produce a target directory
@@ -68,7 +69,8 @@ installed on your system. It is available from:
       http://java.com
 
 Windows and Linux users may need to install Java if it is not already done.
-MacOSX users have Java already installed on their machines.
+The OmegaT project also offers versions with Java included. MacOSX users have
+Java already installed on their machines.
 
 On a properly installed machine, you should be able to launch OmegaT by
 double-clicking the OmegaT.jar file.
@@ -200,6 +202,7 @@ Core changes:
   - Windows installer
   - Attributes of HTML tags are translatable
   - Full TMX 1.1-1.4b Level 1 compatibility
+  - Partial TMX 1.4b Level 2 support
 
 ==============================================================================
 

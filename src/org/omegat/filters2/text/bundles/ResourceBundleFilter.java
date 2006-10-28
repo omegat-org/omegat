@@ -36,6 +36,7 @@ import java.io.UnsupportedEncodingException;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
+import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.OStrings;
 
 /**
@@ -106,7 +107,8 @@ public class ResourceBundleFilter extends AbstractFilter
      * Also contains some code to keep a backspace in '\ '
      * (non-trimmable space).
      */
-    protected String getNextLine(BufferedReader reader) throws IOException
+    //protected String getNextLine(BufferedReader reader) throws IOException
+    protected String getNextLine(LinebreakPreservingReader reader) throws IOException // fix for bug 1462566
     {
         String ascii = reader.readLine();
         if( ascii==null )
@@ -198,23 +200,26 @@ public class ResourceBundleFilter extends AbstractFilter
     public void processFile(BufferedReader reader, BufferedWriter outfile)
     throws IOException
     {
+        LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix for bug 1462566
         String str;
         boolean noi18n=false;
-        while( (str=getNextLine(reader))!=null )
+        while( (str=getNextLine(lbpr))!=null )
         {
             String trimmed = str.trim();
             
             // skipping empty strings
             if( trimmed.length()==0 )
             {
-                outfile.write(formatString(str)+"\n");                          // NOI18N
+                //outfile.write(formatString(str)+"\n");                          // NOI18N
+                outfile.write(formatString(str)+lbpr.getLinebreak());// fix for bug 1462566 // NOI18N
                 continue;
             }
             
             // skipping comments
             if( trimmed.charAt(0)=='#' )
             {
-                outfile.write(formatString(str)+"\n");                          // NOI18N
+                //outfile.write(formatString(str)+"\n");                          // NOI18N
+                outfile.write(formatString(str)+lbpr.getLinebreak()); // fix for bug 1462566 // NOI18N
                 
                 // checking if the next string shouldn't be internationalized
                 if( trimmed.indexOf("NOI18N")>=0 )                              // NOI18N
@@ -226,7 +231,7 @@ public class ResourceBundleFilter extends AbstractFilter
             // reading the glued lines
             while( str.charAt(str.length()-1)=='\\' )
             {
-                String next = getNextLine(reader);
+                String next = getNextLine(lbpr);
                 if( next==null )
                     next="";                                                    // NOI18N
                 
@@ -267,7 +272,8 @@ public class ResourceBundleFilter extends AbstractFilter
                 outfile.write(trans);
             }
             
-            outfile.write("\n");                                                // NOI18N
+            //outfile.write("\n");                                                // NOI18N
+            outfile.write(lbpr.getLinebreak()); // fix for bug 1462566            // NOI18N
         }
     }
 }

@@ -31,6 +31,7 @@ import java.io.IOException;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.util.OStrings;
+import org.omegat.util.LinebreakPreservingReader;
 
 /**
  * Filter to support Files with Key=Value pairs,
@@ -81,8 +82,10 @@ public class INIFilter extends AbstractFilter
     public void processFile(BufferedReader reader, BufferedWriter outfile)
     throws IOException
     {
+        LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix for bug 1462566
         String str;
-        while( (str=reader.readLine())!=null )
+        //while( (str=reader.readLine())!=null )
+        while( (str=lbpr.readLine())!=null )
         {
             String trimmed = str.trim();
             
@@ -90,7 +93,8 @@ public class INIFilter extends AbstractFilter
             if( trimmed.length()==0 || 
                     trimmed.charAt(0)=='#' || trimmed.charAt(0)==';' )
             {
-                outfile.write(str+"\n");                          // NOI18N
+                //outfile.write(str+"\n");                          // NOI18N
+                outfile.write(str+lbpr.getLinebreak()); // fix for bug 1462566 // NOI18N
                 continue;
             }
             
@@ -114,7 +118,8 @@ public class INIFilter extends AbstractFilter
             String trans=processEntry(value);
             outfile.write(trans);
             
-            outfile.write("\n");                                                // NOI18N
+            //outfile.write("\n");                                                // NOI18N
+            outfile.write(lbpr.getLinebreak()); // fix for bug 1462566            // NOI18N
         }
     }
 }

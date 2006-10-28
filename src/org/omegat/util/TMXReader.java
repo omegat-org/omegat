@@ -433,7 +433,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     /**
       * Determins if TMX level 2 codes should be included or skipped.
       * These will only be included if the creation tool is OmegaT,
-      * version 1.6 RC13 or higher.
+      * version 1.6.0-final or higher.
       */
     private void checkLevel2() {
         // set inclusion of TMX level 2 codes to false by default
@@ -454,11 +454,14 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             if (omtVersionNumber < 1.6)
                return;
             
-            // ignore the codes if the TMX has been created by a version earlier than RC13
+            // ignore the codes if the TMX has been created by any RC version earlier than RC12
+            // only versions built from CVS code after RC12a support TMXL2
+            // but it doesn't hurt checking for level 2 codes in any version
+            // it's smarter not to do so, but we can't make the test any better
             matcher = Pattern.compile("RC(\\d+)").matcher(creationtoolversion);
             if (matcher.find()) { // only test this if there's an RC number at all
                int omtRCNumber = Integer.parseInt(matcher.group(1));
-               if (omtRCNumber < 12) // FIX: this should be 13, but the RC number is still defined as 12
+               if (omtRCNumber < 12)
                   return;
             }
         }

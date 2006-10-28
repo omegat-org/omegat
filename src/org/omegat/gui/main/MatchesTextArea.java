@@ -100,7 +100,8 @@ public class MatchesTextArea extends javax.swing.JTextPane
         int end = ((Integer)delimiters.get(activeMatch+1)).intValue();
         
         NearString match = (NearString) matches.get(activeMatch);
-        List tokens = match.str.getSrcTokenList();
+        // List tokens = match.str.getSrcTokenList();
+        List tokens = match.str.getSrcTokenListAll(); // fix for bug 1586397
         byte[] attributes = match.attr;
         for (int i=0; i<tokens.size(); i++)
         {

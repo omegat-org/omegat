@@ -4,7 +4,7 @@
 
 1.6.0 RC13 vs. 1.4.5.04
    49 Enchancements
-  100 Bugfixes
+  101 Bugfixes
 
 ----------------------------------------------------------------------
 PLANNING:
@@ -110,6 +110,9 @@ other CAT tools, and supports regular expression searches.
 
   - Respect original CR/LF of plain text files
   http://sourceforge.net/support/tracker.php?aid=1462566
+
+  - Numbers not coloured in match
+  http://sourceforge.net/support/tracker.php?aid=1586397
 
 ----------------------------------------------------------------------
 1.6.0 RC12a

@@ -85,9 +85,9 @@ public class StringEntry
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
     public List getSrcTokenListAll() {
-        ArrayList result = new ArrayList();
-        StaticUtils.tokenizeText(m_srcText, result, true);
-        return result;
+        ArrayList tokenList = new ArrayList();
+        StaticUtils.tokenizeText(m_srcText, tokenList, true);
+        return tokenList;
     }
 
     /** List of SourceTextEntry-es this string entry belongs to. */

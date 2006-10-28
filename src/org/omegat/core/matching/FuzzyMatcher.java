@@ -152,10 +152,12 @@ public class FuzzyMatcher
                         Math.max(strTokensAll.size(), candTokensAll.size());
                 // end fix 1449988
 
-                byte[] similarityData = buildSimilarityData(strTokens, candTokens);
+                //byte[] similarityData = buildSimilarityData(strTokens, candTokens);
+                byte[] similarityData = buildSimilarityData(strTokensAll, candTokensAll); // fix for bug 1586397
                 strEntry.addNearString(candEntry, similarity, simAdjusted, similarityData, null);
 
-                similarityData = buildSimilarityData(candTokens, strTokens);
+                //similarityData = buildSimilarityData(candTokens, strTokens);
+                similarityData = buildSimilarityData(candTokensAll, strTokensAll); // fix for bug 1586397
                 candEntry.addNearString(strEntry, similarity, simAdjusted, similarityData, null);
             }
         }
@@ -219,7 +221,8 @@ public class FuzzyMatcher
                         Math.max(strTokensAll.size(), candTokensAll.size());
                 // end fix 1449988
 
-                byte[] similarityData = buildSimilarityData(candTokens, strTokens);
+                //byte[] similarityData = buildSimilarityData(candTokens, strTokens);
+                byte[] similarityData = buildSimilarityData(candTokensAll, strTokensAll); // fix for bug 1586397
                 candEntry.addNearString(strEntry, similarity, simAdjusted, similarityData, tmxname);
             }
         }

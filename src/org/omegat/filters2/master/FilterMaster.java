@@ -138,14 +138,6 @@ public class FilterMaster
     }
     
     /**
-     * Ugly hack to remove Windows Line Feed "\r".
-     */
-    private String removeLineFeed(String s)
-    {
-        return s.replaceAll("\r", "");                                          // NOI18N
-    }
-    
-    /**
      * This method is called by filters to:
      * <ul>
      * <li>Instruct OmegaT what source strings are translatable.
@@ -157,31 +149,36 @@ public class FilterMaster
      */
     public String processEntry(String entry)
     {
-        // ugly hack, to say the truth
-        // HP: may be, but for what purpose???
-        // HP: this also introduces bug 1462566 !!!
-        String src = removeLineFeed(entry);
+        // replacing all occurrences of single CR (\r) or CRLF (\r\n) by LF (\n)
+        // this is reversed at the end of the method
+        // fix for bug 1462566
+        boolean crlf = entry.indexOf("\r\n") > 0;
+        if (crlf)
+            entry = entry.replaceAll("\\r\\n", "\n");
+        boolean cr = entry.indexOf("\r") > 0;
+        if (cr)
+            entry = entry.replaceAll("\\r", "\n");
 
         // some special space handling
-        int len = src.length();
+        int len = entry.length();
         int b = 0;
         StringBuffer bs = new StringBuffer();
-        while( b<len && Character.isWhitespace(src.charAt(b)) )
+        while( b<len && Character.isWhitespace(entry.charAt(b)) )
         {
-            bs.append(src.charAt(b));
+            bs.append(entry.charAt(b));
             b++;
         }
 
         int e = len-1;
         StringBuffer es = new StringBuffer();
-        while( e>=b && Character.isWhitespace(src.charAt(e)) )
+        while( e>=b && Character.isWhitespace(entry.charAt(e)) )
         {
-            es.append(src.charAt(e));
+            es.append(entry.charAt(e));
             e--;
         }
         es.reverse();
 
-        src = src.substring(b, e+1);
+        entry = entry.substring(b, e+1);
         
         StringBuffer res = new StringBuffer();
         res.append(bs);
@@ -190,7 +187,7 @@ public class FilterMaster
         {
             List spaces = new ArrayList();
             List brules = new ArrayList();
-            List segments = Segmenter.segment(src, spaces, brules);
+            List segments = Segmenter.segment(entry, spaces, brules);
             for(int i=0; i<segments.size(); i++)
             {
                 String onesrc = (String)segments.get(i);
@@ -199,10 +196,20 @@ public class FilterMaster
             res.append(Segmenter.glue(segments, spaces, brules));
         }
         else
-            res.append(processSingleEntry(src));
+            res.append(processSingleEntry(entry));
         
         res.append(es);
-        return res.toString();
+
+        // replacing all occurrences of LF (\n) by either single CR (\r) or CRLF (\r\n)
+        // this is a reversal of the process at the beginning of this method
+        // fix for bug 1462566
+        String result = res.toString();
+        if (crlf)
+            result = result.replaceAll("\\n", "\r\n");
+        else if (cr)
+            result = result.replaceAll("\\n", "\r");
+
+        return result;
     }
     
     /**
@@ -523,18 +530,10 @@ public class FilterMaster
     {
         try
         {
-// fix for bug 1207296
-// this is only a quick hack to enable reading/writing of the filter config file
-// on problematic locales (Turkish), and should be replaced by a proper implementation
-// of reading/writing files without using XMLDecoder/XMLEncoder
-java.util.Locale curDefLocale = java.util.Locale.getDefault();
-java.util.Locale.setDefault(new java.util.Locale("en", "us"));
             MyExceptionListener myel = new MyExceptionListener();
             XMLDecoder xmldec = new XMLDecoder(new FileInputStream(configFile), this, myel);
             filters = (Filters)xmldec.readObject();
             xmldec.close();
-// restore hacked locale
-java.util.Locale.setDefault(new java.util.Locale(curDefLocale.getLanguage(), curDefLocale.getCountry()));
             
             if( myel.isExceptionOccured() )
             {

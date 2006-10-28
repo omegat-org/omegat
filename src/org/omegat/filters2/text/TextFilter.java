@@ -33,6 +33,7 @@ import java.io.Writer;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
+import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 
@@ -44,7 +45,7 @@ import org.omegat.util.StaticUtils;
  */
 public class TextFilter extends AbstractFilter
 {
-    
+
     public String getFileFormatName()
     {
         return OStrings.getString("TEXTFILTER_FILTER_NAME");
@@ -113,39 +114,41 @@ public class TextFilter extends AbstractFilter
     private void processSegLineBreaks(BufferedReader in, Writer out)
             throws IOException
     {
-        String nontrans = "";	                                                // NOI18N
-		String s;
-		while( (s=in.readLine())!=null )
-		{
-			if( s.trim().length()==0 )
-			{
-				nontrans += s + "\n";	                                        // NOI18N
-				continue;
-			}
-			String srcText = s;
-			
+        LinebreakPreservingReader lpin = new LinebreakPreservingReader(in);
+        String nontrans = "";                                                    // NOI18N
+        String s;
+        while( (s=lpin.readLine())!=null )
+        {
+            if( s.trim().length()==0 )
+            {
+                nontrans += s + lpin.getLinebreak();                                            // NOI18N
+                continue;
+            }
+            String srcText = s;
+
             out.write(nontrans);
-            nontrans = "";	                                                    // NOI18N
+            nontrans = "";                                                        // NOI18N
 
             String translation = processEntry(srcText);
             out.write(translation);
-            
-			nontrans += "\n";	                                                // NOI18N
-		}
-        
-		if( nontrans.length()!=0 )
-			out.write(nontrans);
+
+            nontrans += lpin.getLinebreak();                                                    // NOI18N
+        }
+
+        if( nontrans.length()!=0 )
+            out.write(nontrans);
     }
 
     /** Processes the file segmenting on line breaks. */
     private void processSegEmptyLines(BufferedReader in, Writer out)
             throws IOException
     {
+        LinebreakPreservingReader lpin = new LinebreakPreservingReader(in);
         StringBuffer nontrans = new StringBuffer();
         StringBuffer trans = new StringBuffer();
-		String s;
-		while( (s=in.readLine())!=null )
-		{
+        String s;
+        while( (s=lpin.readLine())!=null )
+        {
             if (s.length()==0)
             {
                 out.write(nontrans.toString());
@@ -153,26 +156,26 @@ public class TextFilter extends AbstractFilter
 
                 out.write(processEntry(trans.toString()));
                 trans.setLength(0);
-                nontrans.append("\n");                                          // NOI18N
+                nontrans.append(lpin.getLinebreak());                                          // NOI18N
             }
             else
             {
                 if( s.trim().length()==0 && trans.length()==0 )
                 {
                     nontrans.append(s);
-                    nontrans.append("\n");                                      // NOI18N
+                    nontrans.append(lpin.getLinebreak());                                      // NOI18N
                 }
                 else
                 {
                     trans.append(s);
-                    trans.append("\n");                                         // NOI18N
+                    trans.append(lpin.getLinebreak());                                         // NOI18N
                 }
             }
-		}
-        
-		if( nontrans.length()>=0 )
-			out.write(nontrans.toString());
-		if( trans.length()>=0 )
+        }
+
+        if( nontrans.length()>=0 )
+            out.write(nontrans.toString());
+        if( trans.length()>=0 )
             out.write(processEntry(trans.toString()));
     }
 

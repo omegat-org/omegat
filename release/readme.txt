@@ -1,5 +1,5 @@
 ==============================================================================
-  OmegaT 1.6.0 RC12 Read Me file
+  OmegaT 1.6.0 Read Me file
 
   1.  Information about OmegaT
   2.  What is OmegaT?
@@ -157,7 +157,7 @@ Every good bug report needs exactly three things.
   - Steps to reproduce,
   - What you expected to see, and
   - What you saw instead.
-  
+
 You can add copies of files, portions of the log, screenshots, anything that
 you think will help the developers with finding and fixing your bug.
 

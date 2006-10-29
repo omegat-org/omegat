@@ -1,15 +1,15 @@
 ----------------------------------------------------------------------
- OmegaT 1.6.0 RC13 Changes
+ OmegaT 1.6.0 Changes
 ----------------------------------------------------------------------
 
-1.6.0 RC13 vs. 1.4.5.04
+1.6.0 vs. 1.4.5.04
    49 Enchancements
   101 Bugfixes
 
 ----------------------------------------------------------------------
 PLANNING:
 ----------------------------------------------------------------------
-XLIFF filter won't go into 1.6.0 because it's not fully tested 
+XLIFF filter didn't go into 1.6.0 because it's not fully tested 
 at the moment, most probably it will be included into one of bugfix 
 releases in 1.6.0 line.
 
@@ -23,12 +23,7 @@ solving multiple issues like CPU usage, memory footprint,
 match similarity and match ordering.
 
 ----------------------------------------------------------------------
-TODO for 1.6.0:
-----------------------------------------------------------------------
-- Users Guide
-
-----------------------------------------------------------------------
-1.6.0 RC13
+1.6.0
 Contains a form of TMX level 2 export sufficiently compatible with
 other CAT tools, and supports regular expression searches.
 

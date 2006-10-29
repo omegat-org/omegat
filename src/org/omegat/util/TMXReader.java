@@ -47,7 +47,7 @@ import org.omegat.core.threads.CommandThread;
 import org.omegat.util.xml.XMLReader;
 
 /**
- * Class that load up TMX (Translation Memory) files (any version).
+ * Class that loads TMX (Translation Memory Exchange) files (any version, we're cool).
  * <p>
  * TMX reader loads all TUVs in a TU first, then tries to decide 
  * what's source and what's target, by first matching against the full 
@@ -55,9 +55,6 @@ import org.omegat.util.xml.XMLReader;
  * This improves TMX handling in a number of ways:
  * <ol>
  * <li>We now support multiple TUVs in a TU, which makes us more TMX compliant.
- * <li>If a TU contains variants with different language variants, such as
- *     EN-US and EN-GB, the one that best suits the required language variant
- *     is loaded, not just the first non-source TUV encountered.
  * <li>If an exact language match cannot be found, the best alternative is
  *     loaded, if present. This means that if you set the source or target
  *     language to EN-US, and all you have is EN-GB, EN-GB will be loaded. 
@@ -140,8 +137,12 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     public static final String CTV_OMEGAT_1 = "1";                              // NOI18N
     /** "1.6" for OmegaT 1.6 RC3 to 1.6.0 RC11 (Creation Tool Version attribute). Pretty misleading. */
     public static final String CTV_OMEGAT_1_6_RC3_RC11 = "1.6";                 // NOI18N
-    /** "1.6 RC12" for OmegaT 1.6 RC12 and up (Creation Tool Version attribute). */
+    /** "1.6 RC12" for OmegaT 1.6 RC12 and later RCs (Creation Tool Version attribute). */
     public static final String CTV_OMEGAT_1_6_RC12 = "1.6 RC12";                      // NOI18N
+    /** "1.6.0 for OmegaT 1.6.0-final */
+    public static final String CTV_OMEGAT_1_6_0_FINAL = "1.6.0";                      // NOI18N
+    /** Current version */
+    public static final String CTV_OMEGAT_CURRENT = CTV_OMEGAT_1_6_0_FINAL;           // NOI18N
     /** Returns Creation Tool attribute of TMX file */
     public String getCreationToolVersion() 
     {
@@ -432,42 +433,9 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     
     /**
       * Determins if TMX level 2 codes should be included or skipped.
-      * These will only be included if the creation tool is OmegaT,
-      * version 1.6.0-final or higher.
       */
     private void checkLevel2() {
-        // set inclusion of TMX level 2 codes to false by default
-        includeLevel2 = false;
-        
-        // ignore the codes if the TMX has been created by another tool
-        if (!creationtool.equals(CT_OMEGAT))
-            return;
-        
-        // get the version number
-        Matcher matcher = Pattern.compile("\\d.\\d").matcher(creationtoolversion);
-        if (!matcher.find()) { // if no version number can be retrieved, don't include the codes
-           return;
-        }
-        else {
-            // ignore the codes if the TMX has been created by a version earlier than 1.6
-            double omtVersionNumber = Double.parseDouble(matcher.group());
-            if (omtVersionNumber < 1.6)
-               return;
-            
-            // ignore the codes if the TMX has been created by any RC version earlier than RC12
-            // only versions built from CVS code after RC12a support TMXL2
-            // but it doesn't hurt checking for level 2 codes in any version
-            // it's smarter not to do so, but we can't make the test any better
-            matcher = Pattern.compile("RC(\\d+)").matcher(creationtoolversion);
-            if (matcher.find()) { // only test this if there's an RC number at all
-               int omtRCNumber = Integer.parseInt(matcher.group(1));
-               if (omtRCNumber < 12)
-                  return;
-            }
-        }
-        
-        // if all tests have been passed, TMX level 2 codes must be included
-        includeLevel2 = true;
+        includeLevel2 = creationtool.equals(CT_OMEGAT);
     }
 
     /**

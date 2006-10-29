@@ -95,13 +95,18 @@ public class SearchThread extends Thread
         {
             m_searchDir = rootDir;
             m_searchRecursive = recursive;
-            m_searchText = text;
             m_exactSearch = exact;
             m_tmSearch = tm;
             m_keywordSearch = keyword;
             m_regexSearch = regex;
             m_searching = true;
             m_entrySet = new HashSet(); // HP
+
+            // escape the search string, if it's not supposed to be a regular expression
+            m_searchText = regex ? text : StaticUtils.escapeNonRegex(text);
+
+            // create a matcher to do the actual searching
+            m_matcher = Pattern.compile(m_searchText).matcher("");
         }
     }
     
@@ -232,8 +237,8 @@ public class SearchThread extends Thread
                 SourceTextEntry ste = CommandThread.core.getSTE(i);
                 String srcText = ste.getSrcText();
                 String locText = ste.getTranslation();
-                if (   searchString(srcText, m_searchText, m_regexSearch)
-                    || searchString(locText, m_searchText, m_regexSearch))
+                if (   searchString(srcText)
+                    || searchString(locText))
                 {
                     // found a match - relay source and trans text
                     foundString(i, null, srcText, locText);
@@ -252,8 +257,8 @@ public class SearchThread extends Thread
                     tm = (TransMemory) tmList.get(i);
                     String srcText = tm.source;
                     String locText = tm.target;
-                    if (   searchString(srcText, m_searchText, m_regexSearch)
-                        || searchString(locText, m_searchText, m_regexSearch))
+                    if (   searchString(srcText)
+                        || searchString(locText))
                     {
                         // found a match - relay source and trans text
                         foundString(-1, tm.file, srcText, locText);
@@ -347,43 +352,21 @@ public class SearchThread extends Thread
     // search algorithm
     
     /**
-      * Looks for a fully identical occurrence of the search string in the text string.
+      * Looks for an occurrence of the search string in the supplied text string.
       *
       * @param text   The text string to search in
-      * @param search The string to search for
       *
       * @return True if the text string contains the search string
       *
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
-    private boolean searchString(String text, String search) {
-        return searchString(text, search, false);
-    }
-    
-    /**
-      * Looks for a fully identical occurrence of the search string in the text string.
-      *
-      * @param text   The text string to search in
-      * @param search The string to search for
-      * @param regex  If true, the method will use the search string as a regular
-      *               expression; if false, it will look for an identical occurrence
-      *               of the search string in the text string
-      *
-      * @return True if the text string contains the search string
-      *
-      * @author Henry Pijffers (henry.pijffers@saxnot.com)
-      */
-    private boolean searchString(String text, String search, boolean regex) {
-        if (text == null || search == null)
+    //private boolean searchString(String text, String search, boolean regex) {
+    private boolean searchString(String text) {
+        if (text == null || m_searchText == null)
             return false;
 
-        // escape the search string, if it's not supposed to be a regular expression
-        if (!regex)
-            search = StaticUtils.escapeNonRegex(search);
-
-        // do the search
-        Matcher matcher = Pattern.compile(search).matcher(text);
-        return matcher.find();
+        m_matcher.reset(text);
+        return m_matcher.find();
     }
 
     /////////////////////////////////////////////////////////////////
@@ -392,32 +375,29 @@ public class SearchThread extends Thread
     public void searchText(String seg)
     {
         if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS)
-        {
             return;
-        }
-        
-        if (searchString(seg, m_searchText))
-        {
+
+        if (searchString(seg))
             // found a match - do something about it
             foundString(-1, m_curFileName, seg, null);
-        }
     }
-    
+
     private SearchWindow m_window;
-    private boolean		 m_searching;
-    private String		 m_searchText;
-    private String		 m_searchDir;
-    private boolean		 m_searchRecursive;
-    private String		 m_curFileName;
-    private boolean		 m_exactSearch;
-    private boolean		 m_regexSearch;
-    private boolean		 m_tmSearch;
-    private boolean      m_keywordSearch;
-    private HashSet      m_entrySet; // HP: keeps track of previous results, to avoid duplicate entries
-    
-    private int			m_numFinds;
-    
-    private ArrayList		m_extList;
-    private ArrayList		m_extMapList;
+    private boolean m_searching;
+    private String  m_searchText;
+    private String  m_searchDir;
+    private boolean m_searchRecursive;
+    private String  m_curFileName;
+    private boolean m_exactSearch;
+    private boolean m_regexSearch;
+    private boolean m_tmSearch;
+    private boolean m_keywordSearch;
+    private HashSet m_entrySet; // HP: keeps track of previous results, to avoid duplicate entries
+    private Matcher m_matcher;
+
+    private int m_numFinds;
+
+    private ArrayList m_extList;
+    private ArrayList m_extMapList;
 }
 

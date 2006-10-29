@@ -219,59 +219,38 @@ public class SearchWindow extends JFrame
         // need to control check boxes and radio buttons manually
         //
         // keyword search can only be used when searching current project
-        // TM search only works with exact search on current project
-        // file search only works with exact search
+        // TM search only works with exact/regex search on current project
+        // file search only works with exact/regex search
         //
         // keep track of settings and only show what are valid choices
 
-        m_exactSearchRB.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                if (m_exactSearchRB.isSelected())
-                {
-                    m_tmSearchCB.setEnabled(true);
-                    if (!m_dirCB.isSelected())
-                        m_tmSearchCB.setSelected(m_tmSearch);
-                }
+        m_exactSearchRB.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateOptionStatus();
             }
         });
-        
-        m_tmSearchCB.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+
+        m_regexSearchRB.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateOptionStatus();
+            }
+        });
+
+        m_keywordSearchRB.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateOptionStatus();
+            }
+        });
+
+        m_tmSearchCB.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 m_tmSearch = m_tmSearchCB.isSelected();
             }
         });
-        
-        m_dirCB.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                if (m_dirCB.isSelected())
-                {
-                    m_recursiveCB.setEnabled(true);
-                    m_dirField.setEditable(true);
-                    m_dirField.requestFocus();
-                    m_tmSearchCB.setEnabled(false);
-                    m_tmSearchCB.setSelected(false);
-                    m_keywordSearch = m_keywordSearchRB.isSelected();
-                    m_keywordSearchRB.setSelected(false);
-                    m_keywordSearchRB.setEnabled(false);
-                    m_exactSearchRB.setSelected(true);
-                }
-                else
-                {
-                    m_recursiveCB.setEnabled(false);
-                    m_dirField.setEditable(false);
-                    m_tmSearchCB.setEnabled(true);
-                    m_tmSearchCB.setSelected(m_tmSearch);
-                    m_keywordSearchRB.setSelected(m_keywordSearch);
-                    m_keywordSearchRB.setEnabled(true);
-                    m_exactSearchRB.setSelected(!m_keywordSearch);
-                    m_exactSearchRB.setSelected(true);
-                }
+
+        m_dirCB.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateOptionStatus();
             }
         });
 
@@ -289,6 +268,9 @@ public class SearchWindow extends JFrame
             m_tmSearchCB.setEnabled(false);
             m_keywordSearchRB.setEnabled(false);
             m_dirField.setEditable(true);
+
+            // update enabled/selected status of options
+            updateOptionStatus();
         }
 
         m_searchField.requestFocus();
@@ -321,19 +303,6 @@ public class SearchWindow extends JFrame
             setSize(650, 700);
         }
 
-        // button selection state
-        String searchType = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE);
-        if ((searchType == null) || (searchType.length() == 0))
-            searchType = SEARCH_TYPE_EXACT;
-        m_exactSearchRB.setSelected(searchType.equals(SEARCH_TYPE_EXACT));
-        m_regexSearchRB.setSelected(searchType.equals(SEARCH_TYPE_REGEX));
-        m_keywordSearchRB.setSelected(searchType.equals(SEARCH_TYPE_KEYWORD));
-        String tmSearch = Preferences.getPreference(Preferences.SEARCHWINDOW_TM_SEARCH);
-        if ((tmSearch == null) || (tmSearch.length() == 0))
-            tmSearch = "true"; // NOI18N
-        m_tmSearchCB.setSelected(Boolean.valueOf(tmSearch).booleanValue());
-        m_tmSearch = Boolean.valueOf(tmSearch).booleanValue();
-
         // search dir options
         String searchFiles = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_FILES);
         if ((searchFiles == null) || (searchFiles.length() == 0))
@@ -348,6 +317,22 @@ public class SearchWindow extends JFrame
             recursive = "true";
         m_recursiveCB.setSelected(Boolean.valueOf(recursive).booleanValue());
         m_recursiveCB.setEnabled(m_dirCB.isSelected());
+
+        // button selection state
+        String searchType = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE);
+        if ((searchType == null) || (searchType.length() == 0))
+            searchType = SEARCH_TYPE_EXACT;
+        m_exactSearchRB.setSelected(searchType.equals(SEARCH_TYPE_EXACT));
+        m_regexSearchRB.setSelected(searchType.equals(SEARCH_TYPE_REGEX));
+        m_keywordSearchRB.setSelected(searchType.equals(SEARCH_TYPE_KEYWORD));
+        String tmSearch = Preferences.getPreference(Preferences.SEARCHWINDOW_TM_SEARCH);
+        if ((tmSearch == null) || (tmSearch.length() == 0))
+            tmSearch = "true"; // NOI18N
+        m_tmSearchCB.setSelected(Boolean.valueOf(tmSearch).booleanValue());
+        m_tmSearch = Boolean.valueOf(tmSearch).booleanValue();
+
+        // update the enabled/selected status of all options
+        updateOptionStatus();
     }
 
     /**
@@ -369,7 +354,8 @@ public class SearchWindow extends JFrame
         else if (m_keywordSearchRB.isSelected())
             Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE, SEARCH_TYPE_KEYWORD);
         Preferences.setPreference(Preferences.SEARCHWINDOW_TM_SEARCH,
-                                  Boolean.toString(m_tmSearchCB.isSelected()));
+                                  Boolean.toString(m_tmSearch)); // don't use radio button status!
+                                  // Boolean.toString(m_tmSearchCB.isSelected()));
 
         // search dir options
         Preferences.setPreference(Preferences.SEARCHWINDOW_DIR, m_dirField.getText());
@@ -382,6 +368,42 @@ public class SearchWindow extends JFrame
         // because project might not be open
         Preferences.save();
     }
+
+    /**
+      * Updates the enabled/selected status of the options in the dialog.
+      *
+      * Called when the search type (exact/regex/keyword) is changed, when
+      * the "search files" option is (de)selected, or when the preferences
+      * have been loaded after the search dialog is first shown.
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    private void updateOptionStatus() {
+        // disable TM search when searching through dirs
+        // or when keyword search is selected
+        m_tmSearchCB.setEnabled(   !m_dirCB.isSelected()
+                                && !m_keywordSearchRB.isSelected());
+        m_tmSearchCB.setSelected(   !m_dirCB.isSelected()
+                                 && !m_keywordSearchRB.isSelected()
+                                 && m_tmSearch);
+
+        // disable keyword search when searching through dirs
+        m_keywordSearchRB.setEnabled(!m_dirCB.isSelected());
+
+        // switch search option to exact if both dir search and
+        // keyword search were selected; otherwise don't touch it
+        if (m_keywordSearchRB.isSelected() && m_dirCB.isSelected()) {
+            m_keywordSearchRB.setSelected(false);
+            m_exactSearchRB.setSelected(true);
+        }
+
+        // set dir search options
+        m_recursiveCB.setEnabled(m_dirCB.isSelected());
+        m_dirField.setEditable(m_dirCB.isSelected());
+        if (m_dirCB.isSelected())
+            m_dirField.requestFocus();
+    }
+
 
     ////////////////////////////////////////////////////////////////
     // interface for displaying text in viewer
@@ -600,7 +622,6 @@ public class SearchWindow extends JFrame
     private JCheckBox		m_tmSearchCB;
     
     private boolean		m_tmSearch = true;
-    private boolean		m_keywordSearch;
     
     private JLabel		m_dirLabel;
     private JTextField	m_dirField;

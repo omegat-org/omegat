@@ -324,7 +324,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         setAccelerator(gotoNextSegmentMenuItem , KeyEvent.VK_N);
         setAccelerator(gotoPreviousSegmentMenuItem , KeyEvent.VK_P);
         
-        setAccelerator(viewFileListCheckBoxMenuItem, KeyEvent.VK_L);
+        //setAccelerator(viewFileListCheckBoxMenuItem, KeyEvent.VK_L);
+        setAccelerator(viewFileListMenuItem, KeyEvent.VK_L);
         
         setAccelerator(toolsValidateTagsMenuItem , KeyEvent.VK_T);
     }
@@ -469,7 +470,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     
     public void filelistWindowClosed()
     {
-        viewFileListCheckBoxMenuItem.setSelected(false);
+        //viewFileListCheckBoxMenuItem.setSelected(false);
     }
     
     /** Loads Instant start article */
@@ -659,7 +660,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      * if there're no untranslated till the end of document.
      * This way it look at entire project like Go To Next Segment does.
      *
-     * @author Henry Pjiffers
+     * @author Henry Pijffers
      * @author Maxym Mykhalchuk
      */
     private void doNextUntranslatedEntry()
@@ -860,7 +861,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         gotoNextUntranslatedMenuItem.setEnabled(false);
         gotoPreviousSegmentMenuItem.setEnabled(false);
         
-        viewFileListCheckBoxMenuItem.setEnabled(false);
+        //viewFileListCheckBoxMenuItem.setEnabled(false);
+        viewFileListMenuItem.setEnabled(false);
         toolsValidateTagsMenuItem.setEnabled(false);
         
         editor.setEditable(false);
@@ -911,8 +913,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         gotoNextUntranslatedMenuItem.setEnabled(true);
         gotoPreviousSegmentMenuItem.setEnabled(true);
         
-        viewFileListCheckBoxMenuItem.setEnabled(true);
-        viewFileListCheckBoxMenuItem.setSelected(true);
+        //viewFileListCheckBoxMenuItem.setEnabled(true);
+        viewFileListMenuItem.setEnabled(true);
+        //viewFileListCheckBoxMenuItem.setSelected(true);
         toolsValidateTagsMenuItem.setEnabled(true);
         
         editor.setEditable(true);
@@ -1984,7 +1987,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         projectCompileMenuItem = new javax.swing.JMenuItem();
         separator1inProjectMenu = new javax.swing.JSeparator();
         projectEditMenuItem = new javax.swing.JMenuItem();
-        viewFileListCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
+        //viewFileListCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
+        viewFileListMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         editUndoMenuItem = new javax.swing.JMenuItem();
         editRedoMenuItem = new javax.swing.JMenuItem();
@@ -2076,10 +2080,14 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
         projectMenu.add(projectEditMenuItem);
 
-        org.openide.awt.Mnemonics.setLocalizedText(viewFileListCheckBoxMenuItem, OStrings.getString("TF_MENU_FILE_PROJWIN"));
-        viewFileListCheckBoxMenuItem.addActionListener(this);
+        //org.openide.awt.Mnemonics.setLocalizedText(viewFileListCheckBoxMenuItem,
+        org.openide.awt.Mnemonics.setLocalizedText(viewFileListMenuItem,
+                                                   OStrings.getString("TF_MENU_FILE_PROJWIN"));
+        //viewFileListCheckBoxMenuItem.addActionListener(this);
+        viewFileListMenuItem.addActionListener(this);
 
-        projectMenu.add(viewFileListCheckBoxMenuItem);
+        //projectMenu.add(viewFileListCheckBoxMenuItem);
+        projectMenu.add(viewFileListMenuItem);
 
         mainMenu.add(projectMenu);
 
@@ -2334,9 +2342,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         {
             MainWindow.this.gotoPreviousSegmentMenuItemActionPerformed(evt);
         }
-        else if (evt.getSource() == viewFileListCheckBoxMenuItem)
+        //else if (evt.getSource() == viewFileListCheckBoxMenuItem)
+        else if (evt.getSource() == viewFileListMenuItem)
         {
-            MainWindow.this.viewFileListCheckBoxMenuItemActionPerformed(evt);
+            //MainWindow.this.viewFileListCheckBoxMenuItemActionPerformed(evt);
+            MainWindow.this.viewFileListMenuItemActionPerformed(evt);
         }
         else if (evt.getSource() == toolsValidateTagsMenuItem)
         {
@@ -2437,25 +2447,28 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     {
     }// </editor-fold>//GEN-END:initComponents
 
-    private void viewFileListCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_viewFileListCheckBoxMenuItemActionPerformed
-    {//GEN-HEADEREND:event_viewFileListCheckBoxMenuItemActionPerformed
+    //private void viewFileListCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_viewFileListCheckBoxMenuItemActionPerformed
+    private void viewFileListMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_viewFileListMenuItemActionPerformed
+    {//GEN-HEADEREND:event_viewFileListMenuItemActionPerformed
         if( m_projWin==null )
         {
-            viewFileListCheckBoxMenuItem.setSelected(false);
+            //viewFileListCheckBoxMenuItem.setSelected(false);
+            viewFileListMenuItem.setSelected(false);
             return;
         }
-        
-        if( viewFileListCheckBoxMenuItem.isSelected() )
-        {
+
+        // if the project window is not shown or in the background, show it
+        //if (viewFileListCheckBoxMenuItem.isSelected() || !m_projWin.isActive()) {
+        if (!m_projWin.isActive()) {
             m_projWin.buildDisplay();
             m_projWin.setVisible(true);
             m_projWin.toFront();
         }
-        else
-        {
+        // otherwise hide it
+        else {
             m_projWin.setVisible(false);
         }
-    }//GEN-LAST:event_viewFileListCheckBoxMenuItemActionPerformed
+    }//GEN-LAST:event_viewFileListMenuItemActionPerformed
 
     private void optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed
@@ -2705,7 +2718,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private javax.swing.JLabel statusLabel;
     private javax.swing.JMenu toolsMenu;
     private javax.swing.JMenuItem toolsValidateTagsMenuItem;
-    private javax.swing.JCheckBoxMenuItem viewFileListCheckBoxMenuItem;
+    //private javax.swing.JCheckBoxMenuItem viewFileListCheckBoxMenuItem;
+    private javax.swing.JMenuItem viewFileListMenuItem;
     // End of variables declaration//GEN-END:variables
 
     private DockingDesktop desktop;

@@ -73,12 +73,16 @@ public class Preferences
     public static final String PROJECT_FILES_WINDOW_Y      = "project_files_window_y";      // NOI18N
     
     // Search window size and position    
-    public static final String SEARCHWINDOW_WIDTH       = "search_window_width";       // NOI18N
-    public static final String SEARCHWINDOW_HEIGHT      = "search_window_height";      // NOI18N
-    public static final String SEARCHWINDOW_X           = "search_window_x";           // NOI18N
-    public static final String SEARCHWINDOW_Y           = "search_window_y";           // NOI18N
-    public static final String SEARCHWINDOW_SEARCH_TYPE = "search_window_search_type"; // NOI18N
-    public static final String SEARCHWINDOW_TM_SEARCH   = "search_window_tm_search";   // NOI18N
+    public static final String SEARCHWINDOW_WIDTH        = "search_window_width";            // NOI18N
+    public static final String SEARCHWINDOW_HEIGHT       = "search_window_height";           // NOI18N
+    public static final String SEARCHWINDOW_X            = "search_window_x";                // NOI18N
+    public static final String SEARCHWINDOW_Y            = "search_window_y";                // NOI18N
+    public static final String SEARCHWINDOW_SEARCH_TYPE  = "search_window_search_type";      // NOI18N
+    public static final String SEARCHWINDOW_TM_SEARCH    = "search_window_tm_search";        // NOI18N
+    public static final String SEARCHWINDOW_DIR          = "search_window_dir";              // NOI18N
+    public static final String SEARCHWINDOW_SEARCH_FILES = "search_window_search_files";     // NOI18N
+    public static final String SEARCHWINDOW_RECURSIVE    = "search_window_search_recursive"; // NOI18N
+
     
     // Tag validation window size and position    
     public static final String TAGVWINDOW_WIDTH  = "tagv_window_width";         // NOI18N
@@ -96,7 +100,6 @@ public class Preferences
     public static final String USE_TAB_TO_ADVANCE     = "tab_advance";          // NOI18N
     /** Always confirm Quit, even if the project is saved */
     public static final String ALWAYS_CONFIRM_QUIT     = "always_confirm_quit"; // NOI18N
-    public static final String SEARCH_FOLDER	= "search_dir";                 // NOI18N
     
     /** Workflow Option: Don't Insert Source Text Into Translated Segment */
     public static final String DONT_INSERT_SOURCE_TEXT = "wf_noSourceText";                     // NOI18N

@@ -275,12 +275,6 @@ public class SearchWindow extends JFrame
             }
         });
 
-        String searchDir = Preferences.getPreference(Preferences.SEARCH_FOLDER);
-        if (!searchDir.equals(""))                                              // NOI18N
-        {
-            m_dirField.setText(searchDir);
-        }
-
         updateUIText();
         loadPreferences();
 
@@ -339,6 +333,21 @@ public class SearchWindow extends JFrame
             tmSearch = "true"; // NOI18N
         m_tmSearchCB.setSelected(Boolean.valueOf(tmSearch).booleanValue());
         m_tmSearch = Boolean.valueOf(tmSearch).booleanValue();
+
+        // search dir options
+        String searchFiles = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_FILES);
+        if ((searchFiles == null) || (searchFiles.length() == 0))
+            searchFiles = "true";
+        m_dirCB.setSelected(Boolean.valueOf(searchFiles).booleanValue());
+        String searchDir = Preferences.getPreference(Preferences.SEARCHWINDOW_DIR);
+        if (!searchDir.equals(""))
+            m_dirField.setText(searchDir);
+        m_dirField.setEditable(m_dirCB.isSelected());
+        String recursive = Preferences.getPreference(Preferences.SEARCHWINDOW_RECURSIVE);
+        if ((recursive == null) || (recursive.length() == 0))
+            recursive = "true";
+        m_recursiveCB.setSelected(Boolean.valueOf(recursive).booleanValue());
+        m_recursiveCB.setEnabled(m_dirCB.isSelected());
     }
 
     /**
@@ -361,6 +370,17 @@ public class SearchWindow extends JFrame
             Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE, SEARCH_TYPE_KEYWORD);
         Preferences.setPreference(Preferences.SEARCHWINDOW_TM_SEARCH,
                                   Boolean.toString(m_tmSearchCB.isSelected()));
+
+        // search dir options
+        Preferences.setPreference(Preferences.SEARCHWINDOW_DIR, m_dirField.getText());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_FILES,
+                                  Boolean.toString(m_dirCB.isSelected()));
+        Preferences.setPreference(Preferences.SEARCHWINDOW_RECURSIVE,
+                                  Boolean.toString(m_recursiveCB.isSelected()));
+
+        // need to explicitly save preferences
+        // because project might not be open
+        Preferences.save();
     }
 
     ////////////////////////////////////////////////////////////////
@@ -417,8 +437,8 @@ public class SearchWindow extends JFrame
     private void doBrowseDirectory()
     {
         OmegaTFileChooser browser = new OmegaTFileChooser();
-        String str = OStrings.getString("BUTTON_SELECT");
-        browser.setApproveButtonText(str);
+        //String str = OStrings.getString("BUTTON_SELECT");
+        //browser.setApproveButtonText(str);
         browser.setDialogTitle(OStrings.SW_TITLE);
         browser.setFileSelectionMode(OmegaTFileChooser.DIRECTORIES_ONLY);
         String curDir = m_dirField.getText();
@@ -437,7 +457,7 @@ public class SearchWindow extends JFrame
         if (dir == null)
             return;
         
-        str = dir.getAbsolutePath() + File.separator;
+        String str = dir.getAbsolutePath() + File.separator;
         m_dirField.setText(str);
     }
     
@@ -467,7 +487,7 @@ public class SearchWindow extends JFrame
                 }
                 if (CommandThread.core != null && m_dirCB.isSelected())
                 {
-                    Preferences.setPreference(Preferences.SEARCH_FOLDER, root);
+                    Preferences.setPreference(Preferences.SEARCHWINDOW_DIR, root);
                     // need to explicitly save preferences because project
                     //	might not be open
                     Preferences.save();

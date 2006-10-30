@@ -30,13 +30,16 @@ other CAT tools, and supports regular expression searches.
  Enhancements:
 
   - Sufficient TMX level 2 support
-  [No RFE filed]
+  [No RFE submitted]
 
   - Alternate translations in TMX files are no longer skipped
-  [No RFE filed]
+  [No RFE submitted]
 
   - Regular expression search
   http://sourceforge.net/support/tracker.php?aid=1506640
+
+  - More search options with greater flexibility
+  [No RFE submitted]
 
  Bugfixes:
 

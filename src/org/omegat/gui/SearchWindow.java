@@ -533,12 +533,13 @@ public class SearchWindow extends JFrame
                     Preferences.save();
                 }
             }
-            m_thread.requestSearch(m_searchField.getText(), root,
-                    m_recursiveCB.isSelected(),
-                    m_exactSearchRB.isSelected(),
-                    m_tmSearchCB.isSelected(),
-                    m_keywordSearchRB.isSelected(),
-                    m_regexSearchRB.isSelected());
+            m_thread.requestSearch(m_searchField.getText(),
+                                   root,
+                                   m_recursiveCB.isSelected(),
+                                   m_exactSearchRB.isSelected(),
+                                   m_tmSearchCB.isSelected(),
+                                   m_keywordSearchRB.isSelected(),
+                                   m_regexSearchRB.isSelected());
         }
     }
     

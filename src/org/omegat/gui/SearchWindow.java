@@ -227,30 +227,50 @@ public class SearchWindow extends JFrame
         m_exactSearchRB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 updateOptionStatus();
+
+                // move focus to search edit field
+                m_searchField.requestFocus();
+
             }
         });
 
         m_regexSearchRB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 updateOptionStatus();
+
+                // move focus to search edit field
+                m_searchField.requestFocus();
             }
         });
 
         m_keywordSearchRB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 updateOptionStatus();
+
+                // move focus to search edit field
+                m_searchField.requestFocus();
             }
         });
 
         m_tmSearchCB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 m_tmSearch = m_tmSearchCB.isSelected();
+
+                // move focus to search edit field
+                m_searchField.requestFocus();
             }
         });
 
         m_dirCB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 updateOptionStatus();
+
+                // move focus to dir edit field if dir search is selected
+                // otherwise move focus to search field
+                if (m_dirCB.isSelected())
+                    m_dirField.requestFocus();
+                else
+                    m_searchField.requestFocus();
             }
         });
 
@@ -400,8 +420,6 @@ public class SearchWindow extends JFrame
         // set dir search options
         m_recursiveCB.setEnabled(m_dirCB.isSelected());
         m_dirField.setEditable(m_dirCB.isSelected());
-        if (m_dirCB.isSelected())
-            m_dirField.requestFocus();
     }
 
 

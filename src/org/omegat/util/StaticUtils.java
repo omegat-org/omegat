@@ -741,13 +741,52 @@ public class StaticUtils
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
     public static String escapeNonRegex(String text) {
+        return escapeNonRegex(text, true);
+    }
+
+    /**
+      * Escapes the passed string for use in regex matching,
+      * so special regex characters are interpreted as normal
+      * characters during regex searches.
+      *
+      * This is done by prepending a backslash before each
+      * occurrence of the following characters: \^.+[]{}()&|-:=!<>
+      *
+      * If the parameter escapeWildcards is true, asterisks (*) and
+      * questions marks (?) will also be escaped. If false, these
+      * will be converted to regex tokens (* -> 
+      *
+      * @param text            The text to escape
+      * @param escapeWildcards If true, asterisks and question marks are also escaped.
+      *                        If false, these are converted to there regex equivalents.
+      *
+      * @return The escaped text
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    public static String escapeNonRegex(String text, boolean escapeWildcards) {
         // handle backslash
         text = text.replaceAll("\\\\", "\\\\\\\\"); // yes, that's the correct nr of backslashes
 
         // handle rest of characters to be escaped
-        String escape = "^.*+[]{}()&|-:=?!<>";
+        //String escape = "^.*+[]{}()&|-:=?!<>";
+        String escape = "^.+[]{}()&|-:=!<>";
         for (int i = 0; i < escape.length(); i++)
-           text = text.replaceAll("\\" + escape.charAt(i), "\\\\" + escape.charAt(i));
+            text = text.replaceAll("\\" + escape.charAt(i), "\\\\" + escape.charAt(i));
+
+        // handle "wildcard characters" ? and * (only if requested)
+        // do this last, or the additional period (.) will cause trouble
+        if (escapeWildcards) {
+            // simply escape * and ?
+            text = text.replaceAll("\\?", "\\\\?");
+            text = text.replaceAll("\\*", "\\\\*");
+        }
+        else {
+            // convert * (0 or more characters) and ? (0 or 1 character)
+            // to their regex equivalents (.*? and .?? respectively)
+            text = text.replaceAll("\\?", ".?"); // do ? first, or * will be converted twice
+            text = text.replaceAll("\\*", ".*");
+        }
 
         return text;
     }

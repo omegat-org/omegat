@@ -103,7 +103,7 @@ public class SearchThread extends Thread
             m_entrySet = new HashSet(); // HP
 
             // escape the search string, if it's not supposed to be a regular expression
-            m_searchText = regex ? text : StaticUtils.escapeNonRegex(text);
+            m_searchText = regex ? text : StaticUtils.escapeNonRegex(text, false);
 
             // create a matcher to do the actual searching
             m_matcher = Pattern.compile(m_searchText).matcher("");

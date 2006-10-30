@@ -153,7 +153,8 @@ public class OStrings
     public static final String SW_SEARCH_TEXT       = getString("SW_SEARCH_TEXT");
     public static final String SW_WORD_SEARCH       = getString("SW_WORD_SEARCH");
     public static final String SW_EXACT_SEARCH	    = getString("SW_EXACT_SEARCH");
-    public static final String SW_REGEX_SEARCH	    = getString("SW_REGEX_SEARCH");
+    public static final String SW_CASE_SENSITIVE    = getString("SW_CASE_SENSITIVE");
+    public static final String SW_REG_EXPRESSIONS   = getString("SW_REG_EXPRESSIONS");
     public static final String SW_SEARCH_TM         = getString("SW_SEARCH_TM");
     public static final String SW_LOCATION          = getString("SW_LOCATION");
     public static final String SW_BROWSE            = getString("SW_BROWSE");

@@ -92,27 +92,31 @@ public class SearchWindow extends JFrame
         bSearch.add(m_searchButton);
 
         m_exactSearchRB   = new JRadioButton();
-        m_regexSearchRB   = new JRadioButton();
         m_keywordSearchRB = new JRadioButton();
-        m_tmSearchCB      = new JCheckBox();
 
         ButtonGroup bg = new ButtonGroup();
         bg.add(m_exactSearchRB);
-        bg.add(m_regexSearchRB);
         bg.add(m_keywordSearchRB);
 
         Box bRB = Box.createHorizontalBox();
         bRB.add(m_exactSearchRB);
         bRB.add(Box.createHorizontalStrut(10));
-        bRB.add(m_regexSearchRB);
-        bRB.add(Box.createHorizontalStrut(10));
         bRB.add(m_keywordSearchRB);
-        bRB.add(Box.createHorizontalStrut(10));
-        bRB.add(m_tmSearchCB);
-        
+
+        m_caseCB          = new JCheckBox();
+        m_regexCB         = new JCheckBox();
+        m_tmSearchCB      = new JCheckBox();
+
+        Box bOB = Box.createHorizontalBox();
+        bOB.add(m_caseCB);
+        bOB.add(Box.createHorizontalStrut(10));
+        bOB.add(m_regexCB);
+        bOB.add(Box.createHorizontalStrut(10));
+        bOB.add(m_tmSearchCB);
+
         m_viewer = new EntryListPane(par);
         JScrollPane viewerScroller = new JScrollPane(m_viewer);
-        
+
         m_dirLabel = new JLabel();
         m_dirField = new JTextField();
         m_dirField.setEditable(false);
@@ -122,22 +126,22 @@ public class SearchWindow extends JFrame
         bDir.add(m_dirField);
         bDir.add(Box.createHorizontalStrut(10));
         bDir.add(m_dirButton);
-        
+
         m_dirCB = new JCheckBox();
         m_dirCB.setSelected(false);
         m_recursiveCB = new JCheckBox();
         m_recursiveCB.setSelected(true);
         m_recursiveCB.setEnabled(false);
-        
+
         m_dismissButton = new JButton();
-        
+
         Box bCB = Box.createHorizontalBox();
         bCB.add(m_dirCB);
         bCB.add(Box.createHorizontalStrut(10));
         bCB.add(m_recursiveCB);
         bCB.add(Box.createHorizontalGlue());
         bCB.add(m_dismissButton);
-        
+
         //////////////////////////////////////
         // layout container
         Container cp = getContentPane();
@@ -159,7 +163,11 @@ public class SearchWindow extends JFrame
         // search type
         gridbag.setConstraints(bRB, c);
         cp.add(bRB);
-        
+
+        // search options (case/regex/TM)
+        gridbag.setConstraints(bOB, c);
+        cp.add(bOB);
+
         // view pane
         c.weighty = 3.0;
         c.fill = GridBagConstraints.BOTH;
@@ -226,27 +234,28 @@ public class SearchWindow extends JFrame
 
         m_exactSearchRB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                updateOptionStatus();
-
                 // move focus to search edit field
                 m_searchField.requestFocus();
 
-            }
-        });
-
-        m_regexSearchRB.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                updateOptionStatus();
-
-                // move focus to search edit field
-                m_searchField.requestFocus();
             }
         });
 
         m_keywordSearchRB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                updateOptionStatus();
+                // move focus to search edit field
+                m_searchField.requestFocus();
+            }
+        });
 
+        m_caseCB.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // move focus to search edit field
+                m_searchField.requestFocus();
+            }
+        });
+
+        m_regexCB.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 // move focus to search edit field
                 m_searchField.requestFocus();
             }
@@ -286,7 +295,6 @@ public class SearchWindow extends JFrame
             m_dirCB.setEnabled(false);
             m_tmSearchCB.setSelected(false);
             m_tmSearchCB.setEnabled(false);
-            m_keywordSearchRB.setEnabled(false);
             m_dirField.setEditable(true);
 
             // update enabled/selected status of options
@@ -338,13 +346,26 @@ public class SearchWindow extends JFrame
         m_recursiveCB.setSelected(Boolean.valueOf(recursive).booleanValue());
         m_recursiveCB.setEnabled(m_dirCB.isSelected());
 
-        // button selection state
+        // search type
         String searchType = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE);
         if ((searchType == null) || (searchType.length() == 0))
             searchType = SEARCH_TYPE_EXACT;
         m_exactSearchRB.setSelected(searchType.equals(SEARCH_TYPE_EXACT));
-        m_regexSearchRB.setSelected(searchType.equals(SEARCH_TYPE_REGEX));
         m_keywordSearchRB.setSelected(searchType.equals(SEARCH_TYPE_KEYWORD));
+
+        // case sensitivity
+        String caseSens = Preferences.getPreference(Preferences.SEARCHWINDOW_CASE_SENSITIVE);
+        if ((caseSens == null) || (caseSens.length() == 0))
+            caseSens = "false";
+        m_caseCB.setSelected(Boolean.valueOf(caseSens).booleanValue());
+
+        // regular expressions
+        String regex = Preferences.getPreference(Preferences.SEARCHWINDOW_REG_EXPRESSIONS);
+        if ((regex == null) || (regex.length() == 0))
+            regex = "false";
+        m_regexCB.setSelected(Boolean.valueOf(regex).booleanValue());
+
+        // TM search
         String tmSearch = Preferences.getPreference(Preferences.SEARCHWINDOW_TM_SEARCH);
         if ((tmSearch == null) || (tmSearch.length() == 0))
             tmSearch = "true"; // NOI18N
@@ -366,16 +387,19 @@ public class SearchWindow extends JFrame
         Preferences.setPreference(Preferences.SEARCHWINDOW_X, getX());
         Preferences.setPreference(Preferences.SEARCHWINDOW_Y, getY());
 
-        // button selection state
+        // search type
         if (m_exactSearchRB.isSelected())
             Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE, SEARCH_TYPE_EXACT);
-        else if (m_regexSearchRB.isSelected())
-            Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE, SEARCH_TYPE_REGEX);
         else if (m_keywordSearchRB.isSelected())
             Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE, SEARCH_TYPE_KEYWORD);
+
+        // search options
+        Preferences.setPreference(Preferences.SEARCHWINDOW_CASE_SENSITIVE,
+                                  Boolean.toString(m_caseCB.isSelected()));
+        Preferences.setPreference(Preferences.SEARCHWINDOW_REG_EXPRESSIONS,
+                                  Boolean.toString(m_regexCB.isSelected()));
         Preferences.setPreference(Preferences.SEARCHWINDOW_TM_SEARCH,
                                   Boolean.toString(m_tmSearch)); // don't use radio button status!
-                                  // Boolean.toString(m_tmSearchCB.isSelected()));
 
         // search dir options
         Preferences.setPreference(Preferences.SEARCHWINDOW_DIR, m_dirField.getText());
@@ -400,22 +424,9 @@ public class SearchWindow extends JFrame
       */
     private void updateOptionStatus() {
         // disable TM search when searching through dirs
-        // or when keyword search is selected
-        m_tmSearchCB.setEnabled(   !m_dirCB.isSelected()
-                                && !m_keywordSearchRB.isSelected());
+        m_tmSearchCB.setEnabled(!m_dirCB.isSelected());
         m_tmSearchCB.setSelected(   !m_dirCB.isSelected()
-                                 && !m_keywordSearchRB.isSelected()
                                  && m_tmSearch);
-
-        // disable keyword search when searching through dirs
-        m_keywordSearchRB.setEnabled(!m_dirCB.isSelected());
-
-        // switch search option to exact if both dir search and
-        // keyword search were selected; otherwise don't touch it
-        if (m_keywordSearchRB.isSelected() && m_dirCB.isSelected()) {
-            m_keywordSearchRB.setSelected(false);
-            m_exactSearchRB.setSelected(true);
-        }
 
         // set dir search options
         m_recursiveCB.setEnabled(m_dirCB.isSelected());
@@ -537,9 +548,10 @@ public class SearchWindow extends JFrame
                                    root,
                                    m_recursiveCB.isSelected(),
                                    m_exactSearchRB.isSelected(),
-                                   m_tmSearchCB.isSelected(),
                                    m_keywordSearchRB.isSelected(),
-                                   m_regexSearchRB.isSelected());
+                                   m_caseCB.isSelected(),
+                                   m_regexCB.isSelected(),
+                                   m_tmSearchCB.isSelected());
         }
     }
     
@@ -551,15 +563,17 @@ public class SearchWindow extends JFrame
     private void updateUIText()
     {
         setTitle(OStrings.SW_TITLE);
-        
+
         Mnemonics.setLocalizedText(m_searchLabel, OStrings.SW_SEARCH_TEXT);
         Mnemonics.setLocalizedText(m_searchButton, OStrings.getString("BUTTON_SEARCH"));
-        
+
         Mnemonics.setLocalizedText(m_exactSearchRB, OStrings.SW_EXACT_SEARCH);
-        Mnemonics.setLocalizedText(m_regexSearchRB, OStrings.SW_REGEX_SEARCH);
         Mnemonics.setLocalizedText(m_keywordSearchRB, OStrings.SW_WORD_SEARCH);
+
+        Mnemonics.setLocalizedText(m_caseCB, OStrings.SW_CASE_SENSITIVE);
+        Mnemonics.setLocalizedText(m_regexCB, OStrings.SW_REG_EXPRESSIONS);
         Mnemonics.setLocalizedText(m_tmSearchCB, OStrings.SW_SEARCH_TM);
-        
+
         Mnemonics.setLocalizedText(m_dirLabel, OStrings.SW_LOCATION);
         Mnemonics.setLocalizedText(m_dirCB, OStrings.SW_DIR_SEARCH);
         Mnemonics.setLocalizedText(m_recursiveCB, OStrings.SW_DIR_RECURSIVE);
@@ -630,31 +644,32 @@ public class SearchWindow extends JFrame
 
         private UndoManager undoManager;
     }
-    
-    private JLabel		m_searchLabel;
-    private JTextField	m_searchField;
-    private JButton		m_searchButton;
-    
-    private JRadioButton	m_keywordSearchRB;
-    private JRadioButton	m_exactSearchRB;
-    private JRadioButton	m_regexSearchRB;
-    private JCheckBox		m_tmSearchCB;
-    
-    private boolean		m_tmSearch = true;
-    
-    private JLabel		m_dirLabel;
-    private JTextField	m_dirField;
-    private JButton		m_dirButton;
-    private JCheckBox	m_dirCB;
-    private JCheckBox	m_recursiveCB;
-    
-    private JButton		m_dismissButton;
-    
-    private EntryListPane	m_viewer;
-    
-    private SearchThread	m_thread;
+
+    private JLabel      m_searchLabel;
+    private JTextField  m_searchField;
+    private JButton     m_searchButton;
+
+    private JRadioButton m_exactSearchRB;
+    private JRadioButton m_keywordSearchRB;
+
+    private JCheckBox m_caseCB;
+    private JCheckBox m_regexCB;
+    private JCheckBox m_tmSearchCB;
+
+    private boolean m_tmSearch = true;
+
+    private JLabel     m_dirLabel;
+    private JTextField m_dirField;
+    private JButton    m_dirButton;
+    private JCheckBox  m_dirCB;
+    private JCheckBox  m_recursiveCB;
+
+    private JButton m_dismissButton;
+
+    private EntryListPane m_viewer;
+
+    private SearchThread m_thread;
 
     private final static String SEARCH_TYPE_EXACT   = "EXACT";
-    private final static String SEARCH_TYPE_REGEX   = "REGEX";
     private final static String SEARCH_TYPE_KEYWORD = "KEYWORD";
 }

@@ -62,7 +62,6 @@ public class SearchThread extends Thread
         m_window = window;
         m_searchDir = null;
         m_searchRecursive = false;
-        m_searchText = "";	// NOI18N
         m_searching = false;
         m_tmSearch = false;
         m_entrySet = null; // HP
@@ -85,35 +84,44 @@ public class SearchThread extends Thread
      * @param rootDir folder to search in
      * @param recursive search in subfolders of rootDir too
      * @param exact search for a substring
-     * @param tm search in legacy and orphan TM strings too
      * @param keyword search for keywords
+     * @param caseSensitive search case sensitive
+     * @param regex enable regular expressions, otherwise just use wildcards (*?)
+     * @param tm search in legacy and orphan TM strings too
      */
-    public void requestSearch(String text, String rootDir,
-            boolean recursive, boolean exact, boolean tm, boolean keyword, boolean regex)
+    public void requestSearch(String  text,
+                              String  rootDir,
+                              boolean recursive,
+                              boolean exact,
+                              boolean keyword,
+                              boolean caseSensitive,
+                              boolean regex,
+                              boolean tm)
     {
         if (!m_searching)
         {
             m_searchDir = rootDir;
             m_searchRecursive = recursive;
-            m_exactSearch = exact;
             m_tmSearch = tm;
-            m_keywordSearch = keyword;
-            m_regexSearch = regex;
             m_searching = true;
             m_entrySet = new HashSet(); // HP
 
             // create a list of matchers
             m_matchers = new ArrayList();
 
-            // if exact or regex search, just use the entire search string as a single
-            // search string; otherwise, if keyword, break up the string into separate
-            // words (= multiple search strings)
-            if (exact || regex) {
+            // determine pattern matching flags
+            int flags = caseSensitive ? 0 : Pattern.CASE_INSENSITIVE + Pattern.UNICODE_CASE;
+
+            // if exact search, just use the entire search string as a single
+            // search string; otherwise, if keyword, break up the string into
+            // separate words (= multiple search strings)
+            if (exact) {
                 // escape the search string, if it's not supposed to be a regular expression
-                text = regex ? text : StaticUtils.escapeNonRegex(text, false);
+                if (!regex)
+                    text = StaticUtils.escapeNonRegex(text, false);
 
                 // create a matcher for the search string
-                m_matchers.add(Pattern.compile(m_searchText).matcher(""));
+                m_matchers.add(Pattern.compile(text, flags).matcher(""));
             }
             else {
                 // break the search string into keywords,
@@ -130,9 +138,14 @@ public class SearchThread extends Thread
                                           ? text.substring(wordStart, text.length()).trim()
                                           : text.substring(wordStart, spacePos).trim();
 
-                        // create a matcher for the word
-                        if (word.length() > 0)
-                            m_matchers.add(Pattern.compile(word).matcher(""));
+                        if (word.length() > 0) {
+                            // escape the word, if it's not supposed to be a regular expression
+                            if (!regex)
+                                word = StaticUtils.escapeNonRegex(word, false);
+
+                            // create a matcher for the word
+                            m_matchers.add(Pattern.compile(word, flags).matcher(""));
+                        }
 
                         // set the position for the start of the next word
                         wordStart = (spacePos == -1) ? text.length() : spacePos + 1;
@@ -384,14 +397,10 @@ public class SearchThread extends Thread
 
     private SearchWindow m_window;
     private boolean   m_searching;
-    private String    m_searchText;
     private String    m_searchDir;
     private boolean   m_searchRecursive;
     private String    m_curFileName;
-    private boolean   m_exactSearch;
-    private boolean   m_regexSearch;
     private boolean   m_tmSearch;
-    private boolean   m_keywordSearch;
     private HashSet   m_entrySet; // HP: keeps track of previous results, to avoid duplicate entries
     private ArrayList m_matchers; // HP: contains a matcher for each search string
                                   //     (multiple if keyword search)

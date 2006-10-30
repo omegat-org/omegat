@@ -783,9 +783,9 @@ public class StaticUtils
         }
         else {
             // convert * (0 or more characters) and ? (0 or 1 character)
-            // to their regex equivalents (.*? and .?? respectively)
-            text = text.replaceAll("\\?", ".?"); // do ? first, or * will be converted twice
-            text = text.replaceAll("\\*", ".*");
+            // to their regex equivalents (\S* and \S? respectively)
+            text = text.replaceAll("\\?", "\\S?"); // do ? first, or * will be converted twice
+            text = text.replaceAll("\\*", "\\S*");
         }
 
         return text;

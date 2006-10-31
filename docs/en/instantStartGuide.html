@@ -1,0 +1,282 @@
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <title>Instant Start Guide - OmegaT 1.6.0 User Manual</title>
+</head>
+<body>
+
+<h1>Instant Start Guide</h1>
+<p><small>or start using OmegaT in 5 minutes</small></p>
+
+<p><strong>
+This instant start guide covers only the very basics. Ideally, all users should read the user manual to familiarise themselves with everything OmegaT has to offer.
+</strong></p>
+
+<h2>Contents</h2>
+
+<ul type="none">
+   <li>1. <a href="#Briefly.2C_how_OmegaT_works">Briefly, how OmegaT works</a></li>
+
+   <li>
+      2. <a href="#How_to_translate_using_OmegaT">How to translate using OmegaT</a>
+
+      <ul>
+         <li><a href="#Create_and_open_a_new_project">Create and open a new project</a></li>
+         <li><a href="#Translate_the_segments_one_by_one">Translate the segments one by one</a></li>
+         <li><a href="#Create_the_translated_documents">Create the translated documents</span></a></li>
+      </ul>
+   </li>
+
+   <li>
+      3. <a href="#Dealing_with_tagged_text">Dealing with tagged text</a>
+
+      <ul>
+         <li><a href="#An_example...">An example...</a></li>
+      </ul>
+   </li>
+</ul>
+
+<a name="Briefly.2C_how_OmegaT_works"></a>
+<h2>Briefly, how OmegaT works</h2>
+
+<p>
+OmegaT consists of three dockable panes: the edit pane where you will type 
+your translation, the Fuzzy Matches pane where translation memory matches 
+are displayed, and the Glossary pane, where glossary matches are displayed.
+</p>
+
+<p>
+OmegaT extracts segments from the source document, displays them in the edit 
+pane for you to translate, and adds your translations to a translation memory.  
+After the translation is done (or at any time requested by you), OmegaT 
+creates translated documents by rebuilding the source documents using the 
+segments from the translation memory.
+</p>
+
+<p>
+OmegaT organises your translation work into so-called translation projects. 
+For each project, OmegaT creates a set of folders (directories) into which 
+you should copy the source documents, any glossaries and existing translation 
+memories. OmegaT also creates a folder which will contain the translated 
+documents.
+</p>
+
+<a name="How_to_translate_using_OmegaT"></a>
+<h2>How to translate using OmegaT</h2>
+
+<a name="Create_and_open_a_new_project"></a>
+<h3>Create and open a new project</h3>
+
+<p>
+Select <strong>Project -&gt; New...</strong> from the menu.
+</p>
+
+<p>
+Navigate to the folder where you'd like to save the project files, and type in 
+a name for the translation project.  This name will also be the name of the 
+project folder, and all project files will be stored in that folder.
+</p>
+
+<p>
+OmegaT will prompt you to change or accept the project folders to be created.  
+It will look similar to this picture:
+</p>
+
+<center><img src="images/NewProject.png" alt="Image:NewProject.png" width="398" height="428" /></center>
+
+<p>
+You may simply accept the location of the subfolders (in OmegaT called
+"directories"), but you should make sure that source and target language codes 
+are correct.  Select the language or language-and-country codes from the 
+dropdown-list or type them in by hand.  Make a mental note of the location of 
+the "translated files" subfolder, for this is where translated documents will 
+be exported to.
+</p>
+
+<p>
+If you want OmegaT to segment by sentence instead of by "paragraph", it's a 
+good idea to double-check the Segmentation Rules.
+</p>
+
+<p>
+When you click OK to accept the project setup, OmegaT will prompt you to import 
+source documents.  You can import individual files, but you can also import 
+entire directory trees (with all files in all subfolders).  If you've 
+accidentally imported the wrong documents or too many documents, you can simply 
+remove them from the "source" folder of your OmegaT project.
+</p>
+
+<p>
+Remember, OmegaT can only translate plaintext, HTML and XHTML files,
+OpenDocument files, OpenOffice.org documents, DocBook and certain other text files.
+Other files will be ignored by OmegaT.
+</p>
+
+<p>
+Select <strong>Project -&gt; Reload</strong> to view a list of all files to be 
+translated.  OmegaT loads the first file on the project list by default.
+</p>
+
+<a name="Translate_the_segments_one_by_one"></a>
+<h3>Translate the segments one by one</h3>
+
+<p>
+For the current segment, OmegaT highlights the source text in green and 
+displays a copy of the source text between two tags &lt;segment 0001&gt; and 
+&lt;end segment&gt;.  Type your translation between the two tags by overwriting 
+the text.
+</p>
+
+<p>
+Press "ENTER" to advance to the next segment.
+</p>
+
+<p>
+When you press "ENTER", several things happen invisibly:  OmegaT adds the 
+translated segment to the translation memory, and it searches the translation 
+memory and glossary for matches for the untranslated segment.
+</p>
+
+<p>
+If the next segment has a fuzzy match from the translation memory, it would 
+be displayed in the Fuzzy Match pane.  If that segment matched 
+any terms in the glossary, it would be displayed in the Glossary pane.
+</p>
+
+<p>
+If there is a fuzzy match, you can insert the fuzzy match text into the edit 
+window as follows:
+</p>
+
+<ul>
+   <li>Select the correct fuzzy match using <code>Ctrl+1</code>, <code>Ctrl+2</code> etc.</li>
+   <li>Press <code>Ctrl+I</code> to insert it at the cursor's current position, or...</li>
+   <li>Press <code>Ctrl+R</code> to overwrite the entire current segment by it.</li>
+</ul>
+
+<p>
+If you want OmegaT not to copy the source text into the target field, or if 
+you'd prefer matches with a high fuzzy percentage to be automatically inserted 
+into the target field, you can set these options using 
+<strong>Options -&gt; Editing Behaviour...</strong>.
+</p>
+
+<a name="Create_the_translated_documents"></a>
+<h3>Create the translated documents</h3>
+
+<p>
+After the translation is done (or at any time, when you request it), OmegaT 
+can create the translated documents by rebuilding the source document using the 
+segments from the translation memory.
+</p>
+
+<p>
+To create the target documents, select <strong>Project -&gt; Create Translated 
+Documents</strong> from the menu.  OmegaT will build translated versions of 
+all valid documents in the "source" folder of the project, regardless of how 
+much of it is translated.
+</p>
+
+<p>
+You can check at any time what the translated document currently looks like 
+by simply invoking Create Translated Documents.  You can alter existing 
+translations in your translation project and then recreate the translated 
+documents as often as you like.
+</p>
+
+<p>
+The translated files can now be found in the project's "target" folder.
+</p>
+
+<a name="Dealing_with_tagged_text"></a>
+<h2>Dealing with tagged text</h2>
+
+<p>
+In OpenDocument files, OpenOffice.org documents, HTML or DocBook files, certain 
+words within a sentence often have special formatting of their own.  
+For example, a sentence may be in italic font but a word in the middle of the 
+sentence might be in bold font.
+</p>
+
+<p>
+OmegaT marks up these format changes using special tags, which you must 
+transfer to the translated version of the text.  
+OmegaT doesn't automatically detect mistakes in a tagged translation.  Before 
+you deliver the target document to your client, you should check your tags for 
+errors, by selecting <strong>Tools -&gt; Validate Tags</strong> from the menu.  
+Ideally you should open the document in its associated viewer or editor to 
+double-check the formatting.
+See the OmegaT User Manual for advanced tag editing.
+</p>
+
+<a name="An_example..."></a>
+<h3>An example...</h3>
+
+<p>
+In these examples we've highlighted the tags in <font color="#ff0000">red</font> 
+to make them easier to see, but in OmegaT they will not be highlighted.
+</p>
+
+<p>
+<strong>Here is an example of a segment in HTML:</strong>
+</p>
+
+<p>
+<code><font color="#ff0000">&lt;p&gt;</font>A different display font can be 
+selected via the <font color="#ff0000">&lt;b&gt;</font>Display 
+Font<font color="#ff0000">&lt;/b&gt;</font> dialog.  Open it via the 
+
+<font color="#ff0000">&lt;i&gt;</font>Settings<font color="#ff0000">&lt;/i&gt;</font> 
+&amp;gt; <font color="#ff0000">&lt;i&gt;</font>Display 
+Font...<font color="#ff0000">&lt;/i&gt;</font> menu item.  The font type and 
+size can be changed from the dialog.<font color="#ff0000">&lt;/p&gt;</font></code>
+</p>
+
+<p>
+<strong>Here is how OmegaT will display it, highlighted in red:</strong>
+</p>
+
+<p>
+<code>A different display font can be selected via the 
+<font color="#ff0000">&lt;b0&gt;</font>Display 
+Font<font color="#ff0000">&lt;/b0&gt;</font> dialog.  Open it via the 
+
+<font color="#ff0000">&lt;i1&gt;</font>Settings<font color="#ff0000">&lt;/i1&gt;</font> 
+&gt; <font color="#ff0000">&lt;i2&gt;</font>Display 
+Font...<font color="#ff0000">&lt;/i2&gt;</font> menu item.  The font type and 
+size can be changed from the dialog.</code>
+</p>
+
+<p>
+<strong>And here is how you would translate it (this example is in Afrikaans):</strong>
+</p>
+
+<p>
+<code>'n Mens kan 'n ander vertoonfont kies met die 
+<font color="#ff0000">&lt;b0&gt;</font>Vertoonfont<font color="#ff0000">&lt;/b0&gt;</font>-dialoogkassie. 
+Kies <font color="#ff0000">&lt;i1&gt;</font>Opstelling<font color="#ff0000">&lt;/i1&gt;</font> 
+
+&gt; <font color="#ff0000">&lt;i2&gt;</font>Vertoonfont...<font color="#ff0000">&lt;/i2&gt;</font> 
+op die kieslys. Die lettertipe &eacute;n die lettergrootte kan met di&eacute; 
+dialoogkassie verander word.</code>
+</p>
+
+<p>
+<strong>When OmegaT creates the translated document, the HTML will look like this:</strong>
+</p>
+
+<p>
+<code><font color="#ff0000">&lt;p&gt;</font>'n Mens kan 'n ander vertoonfont kies 
+met die <font color="#ff0000">&lt;b&gt;</font>Vertoonfont<font color="#ff0000">&lt;/b&gt;</font>-dialoogkassie. 
+Kies <font color="#ff0000">&lt;i&gt;</font>Opstelling<font color="#ff0000">&lt;/i&gt;</font> 
+
+&amp;gt; <font color="#ff0000">&lt;i&gt;</font>Vertoonfont...<font color="#ff0000">&lt;/i&gt;</font> 
+op die kieslys. Die lettertipe &eacute;n die lettergrootte kan met di&eacute; 
+dialoogkassie verander word.<font color="#ff0000">&lt;/p&gt;</font></code>
+</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Legal Notices">Legal Notices</a></p>
+
+</body>
+</html>

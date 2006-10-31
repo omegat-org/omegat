@@ -1,0 +1,52 @@
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <title>Glossaries - OmegaT 1.6.0 User Manual</title>
+</head>
+<body>
+
+<h1>Glossaries</h1>
+
+<p>
+The glossary function is automatic. To use an existing glossary, simply place it in the
+<code>/glossary</code> directory after creating the project. OmegaT automatically detects 
+glossary files in this directory when a project is opened. Terms in the active segment 
+which OmegaT finds in the glossary file(s) are displayed in the Glossary window.
+</p>
+
+<p>
+The glossary function only finds exact matches with the glossary entry 
+(i.e. not inflected forms etc.).
+</p>
+
+<p>
+New terms can be added manually to the glossary file(s) during translation (for example 
+in a text editor), but newly added terms will not be recognized until the project is reloaded.
+</p>
+
+<a name="File_Format"></a>
+<h2>File Format</h2>
+
+<p>
+Glossary files are simply plain text files containing three-column, tab-delimited lists 
+with the source and target terms in the first and second columns respectively. The third 
+column can be used for additional information.
+</p>
+
+<p>
+Glossary files can be either in system default encoding (in that case, the files should
+have <code>.tab</code> extensions) or in UTF-8 (in that case, they should have 
+<code>.utf8</code> extensions).
+</p>
+
+<p>
+For example, glossaries created using Trados Multiterm's text export function can be used as OmegaT 
+glossaries without further modification, provided they are given the file extension <code>.tab</code>
+and the source and target term fields are the first two fields respectively.
+</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Legal Notices">Legal Notices</a></p>
+
+</body>
+</html>

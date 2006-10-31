@@ -1,0 +1,276 @@
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <title>Main Menu - OmegaT 1.6.0 User Manual</title>
+</head>
+<body>
+
+<h1>Main Menu</h1>
+
+<p>
+All of OmegaT's functionality is available through the menu
+bar at the top of the Editor window. Most functions are also
+available via <a href="keyboardShortcuts.html">keyboard shortcuts</a>.
+</p>
+
+<p>
+The shortcuts with <strong><code>Ctrl</code></strong> listed
+are for Windows, UNIX and UNIX-like operating systems with
+keyboards featuring a <strong><code>Ctrl</code></strong> or
+<strong><code>Control</code></strong> key. Users of Mac OS X
+should use the Apple key
+<img src="images/AppleKey.gif" alt="Apple key" width="19" height="19" />
+instead.
+</p>
+
+<h2>Contents</h2>
+<ul type="none">
+   <li>1. <a href="#Project_Menu">Project Menu</a></li>
+   <li>2. <a href="#Edit_Menu">Edit Menu</a></li>
+   <li>3. <a href="#Go_to_Menu">Go to Menu</a></li>
+   <li>4. <a href="#Tools_Menu">Tools Menu</a></li>
+   <li>5. <a href="#Options_Menu">Options Menu</a></li>
+   <li>6. <a href="#Help_Menu">Help Menu</a></li>
+</ul>
+
+<a name="Project_Menu"></a>
+<h4>Project Menu</h4>
+
+<p>
+<dl>
+   <dt>New</dt>
+   <dd>
+      Creates and opens a new project. The dialog to create a project
+      is the same as to <a href="projectProperties.html">edit the project</a>.
+   </dd>
+
+   <dt>Open <code>&lt;Ctrl+O&gt;</code></dt>
+   <dd>Opens a previously created project.</dd>
+
+   <dt>Import Source Files...</dt>
+   <dd>
+      Copies the selected files to the <code>/source</code>
+      directory and reloads the project to load the new files.
+   </dd>
+
+   <dt>Reload</dt>
+   <dd>
+      Reloads the project to take external changes in source
+      files, legacy translation memories or glossaries into account.
+   </dd>
+
+   <dt>Close</dt>
+   <dd>Saves the translation and closes the project.</dd>
+
+   <dt>Save <code>&lt;Ctrl+S&gt;</code></dt>
+   <dd>
+      Saves the translation to project's translation memory.
+      OmegaT automatically saves the translation every 10
+      minutes or when you close the project or quit OmegaT.
+   </dd>
+
+   <dt>Create Translated Documents</dt>
+   <dd>
+      Creates the target documents based on your translation
+      of documents' text. The documents will be located in
+      the <code>/target</code> directory.
+   </dd>
+
+   <dt>Properties <code>&lt;Ctrl+E&gt;</code></dt>
+   <dd>
+      Displays <a href="projectProperties.html">Project Properties</a>
+      dialog to edit project languages and folder locations.
+   </dd>
+
+   <dt>Project Files... <code>&lt;Ctrl+L&gt;</code></dt>
+   <dd>
+      Closes or opens
+      <a href="userInterface.html#Project_Files">Project Files Window</a>
+      (depending whether it is opened or closed).
+   </dd>
+
+   <dt>Quit <code>&lt;Ctrl+Q&gt;</code></dt>
+   <dd>
+      Saves the project and quits OmegaT. If you haven't yet
+      saved the project manually confirms whether you would
+      really like to quit.
+   </dd>
+</dl>
+</p>
+
+<a name="Edit_Menu"></a>
+<h4>Edit Menu</h4>
+
+<p>
+Items that one can find in most applications (copy/cut/paste) are not displayed
+in this menu but are available with your system shorcuts. For example, on Windows:
+</p>
+
+<p>
+<dl>
+   <dt>Copy <code>&lt;Ctrl+C&gt;</code></dt>
+   <dd>Copies selected text to clipboard.</dd>
+
+   <dt>Cut <code>&lt;Ctrl+X&gt;</code></dt>
+   <dd>Copies selected text to clipboard and deletes selected text.</dd>
+
+   <dt>Paste <code>&lt;Ctrl+V&gt;</code></dt>
+   <dd>Pastes the text from clipboard at cursor.</dd>
+</dl>
+</p>
+
+<p>
+The menu itself contains the following items:
+</p>
+
+<p>
+<dl>
+   <dt>Undo Last Action <code>&lt;Ctrl+Z&gt;</code></dt>
+   <dd>
+      Goes back to the status before the last editing action was taken.
+      Does not work once the modified segment has been validated.
+   </dd>
+
+   <dt>Redo Last Action <code>&lt;Ctrl+Y&gt;</code></dt>
+   <dd>
+      Goes back to the status before the last editing action was cancelled.
+      Does not work once  the modified segment has been validated.
+   </dd>
+
+   <dt>Overwrite Translation <code>&lt;Ctrl+R&gt;</code></dt>
+   <dd>
+      Overwrites the whole target segment with the currently selected fuzzy
+      match (by default the first match is selected).
+   </dd>
+
+   <dt>Insert Translation <code>&lt;Ctrl+I&gt;</code></dt>
+   <dd>
+      Inserts currently selected fuzzy match at the cursor position.
+      This function will never overwrite a portion of the target
+      segment, even if it is selected.
+   </dd>
+
+   <dt>Overwrite Source <code>&lt;Shift+Ctrl+R&gt;</code></dt>
+   <dd>Overwrites the whole target segment with the source.</dd>
+
+   <dt>Insert Source <code>&lt;Shift+Ctrl+I&gt;</code></dt>
+   <dd>Inserts the source at the cursor position.</dd>
+
+   <dt>Search Project... <code>&lt;Ctrl+F&gt;</code></dt>
+   <dd>Opens a new <a href="userInterface.html#Search_Window">Search Window</a>.</dd>
+
+   <dt>Select Fuzzy Match #N <code>&lt;Ctrl+N&gt;</code> (N is from 1 to 5)</dt>
+   <dd>
+      Selects the Nth fuzzy match displayed in the match viewer to replace or insert
+      it to the segment. The <a href="userInterface.html#Fuzzy_Matches">Fuzzy Matches</a>
+      section describes the color coding in detail.
+   </dd>
+</dl>
+</p>
+
+<a name="Go_to_Menu"></a>
+<h4>Go to Menu</h4>
+
+<p>
+<dl>
+   <dt>Next Untranslated Segment <code>&lt;Ctrl+U&gt;</code></dt>
+   <dd>Moves to the next segment that has no equivalent in the translation memory.</dd>
+
+   <dt>
+      Next Segment <code>&lt;Ctrl+N&gt;</code>,
+      <code>&lt;Enter&gt;</code> / <code>&lt;Tab&gt;</code>
+   </dt>
+   <dd>
+      Moves to the next segment. If current segment is the last one in a file,
+      moves to the first segment of the next file.
+   </dd>
+
+   <dt>
+      Previous Segment <code>&lt;Ctrl+P&gt;</code>,
+      <code>&lt;Ctrl+Enter&gt;</code> / <code>&lt;Ctrl+Tab&gt;</code>
+   </dt>
+   <dd>
+      Moves to the previous segment. Moves to the last segment of the
+      previous file, if current segment is the first one one in a file.
+   </dd>
+</dl>
+</p>
+
+<a name="Tools_Menu"></a>
+<h4>Tools Menu</h4>
+
+<p>
+<dl>
+   <dt>Validate Tags <code>&lt;Ctrl+T&gt;</code></dt>
+   <dd>
+      Checks for missing or displaced tags in formatted files.
+      Will display a list of segments with tag mistakes. The
+      <a href="userInterface.html#Tag_Validation">Tag Validation window</a>
+      section lists what you see there, and
+      <a href="formattedText.html">Working with Formatted Text</a>
+      tells you why.
+   </dd>
+</dl>
+</p>
+
+<a name="Options_Menu"></a>
+<h4>Options Menu</h4>
+
+<p>
+<dl>
+   <dt>Use Tab To Advance</dt>
+   <dd>
+      Sets segment validation key to <code>&lt;Tab&gt;</code> instead of
+      the default <code>&lt;Enter&gt;</code>. This option is useful for
+      some of Chinese, Japanese or Korean character input systems.
+   </dd>
+
+   <dt>Font...</dt>
+   <dd>
+      Shows <a href="fontSettings.html">Font Settings</a> dialog to modify
+      the text display font. Users of old computers should better change
+      font before opening a project or face performance penalty. The penalty
+      is most painful on G4 + Mac OS X + Japanese combination.
+   </dd>
+
+   <dt>File Filters...</dt>
+   <dd>
+      Displays <a href="fileFilters.html">File Filters</a> dialog to
+      configure file handling and parsing. 
+   </dd>
+
+   <dt>Segmentation...</dt>
+   <dd>
+      Opens <a href="segmentation.html">Source Segmentation</a>
+      dialog to configure text segmentation. 
+   </dd>
+
+   <dt>Editing Behaviour...</dt>
+   <dd>
+      Displays a <a href="translationEditing.html">Translation Editing</a>
+      dialog to configure target field contents for not yet translated segments.
+   </dd>
+</dl>
+</p>
+
+<a name="Help_Menu"></a>
+<h4>Help Menu</h4>
+
+<p>
+<dl>
+   <dt>User Manual... <code>&lt;F1&gt;</code></dt>
+   <dd>
+      Opens <a href="userInterface.html#Help_Browser">Help Browser</a>
+      with this manual in a separate window.
+   </dd>
+
+   <dt>About...</dt>
+   <dd>Displays copyright, credits and license information.</dd>
+</dl>
+</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Legal Notices">Legal Notices</a></p>
+
+</body>
+</html>

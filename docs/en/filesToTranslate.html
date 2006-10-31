@@ -1,0 +1,119 @@
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <title>Files to Translate - OmegaT 1.6.0 User Manual</title>
+</head>
+<body>
+
+<h1>Files to translate</h1>
+
+<p>
+With OmegaT you can directly translate a number of file formats. There are basically two types of file format. The <strong>plain text</strong> formats and the <strong>formatted text</strong> formats.
+</p>
+
+<h2>Contents</h2>
+
+<ul type="none">
+   <li>1. <a href="#Plain_text_files">Plain text files</a></li>
+   <li>2. <a href="#Formatted_text_files">Formatted text files</a></li>
+   <li>3. <a href="#File_formats_specifics">File formats specifics</a></li>
+   <li>4. <a href="#Other_file_formats">Other file formats</a></li>
+</ul>
+
+<a name="Plain_text_files"></a>
+<h3>Plain text files</h3>
+
+<p>
+Plain text files contain text only, so their translation is as simple as typing the translation.
+</p>
+
+<p>
+Currently, OmegaT supports the following plain text formats:
+</p>
+
+<ul>
+   <li>ASCII text (.txt, etc.)</li>
+   <li>Encoded text</li>
+   <li>Java resource bundles (.properties)</li>
+   <li>PO files (.po)</li>
+   <li> INI (key=value) files (.ini)
+</ul>
+
+<p>
+Such files are not considered as containing more format than "white space" for indentation/alignement purposes.
+</p>
+
+<p>
+They are usually modified in text editors and it is generally not possible to have such format retain font/color/margin etc information.
+</p>
+
+<a name="Formatted_text_files"></a>
+<h3>Formatted text files</h3>
+
+<p>
+Formatted text files contain text as well as information such as font type, size, color etc. They are commonly created in word processors or home page editors.
+</p>
+
+<p>
+Currently, OmegaT support the following formatted text formats:
+</p>
+
+<ul>
+   <li>OpenOffice.org files</li>
+   <li>OpenDocument files</li>
+   <li>(X)HTML files</li>
+   <li>DocBook files</li>
+</ul>
+
+<p>
+Such file formats are conceived so that they retain formatting information. Such formatting information can be as simple as <strong>this is bold</strong> or as complex as table data with different font size, color, position etc.
+</p>
+
+<p>
+In most translation jobs it is considered important to have the translated document look similar to the original. OmegaT allows you to do this by marking the characters/words that have a special formatting with easy to manipulate tags.
+</p>
+
+<p>
+Simplifying the original text formating greatly contributes to reducing the number of tags. Unifying used fonts, font sizes, colors etc should be considered if possible, to simplify the translation and reduce the number of possible tag errors.
+</p>
+
+<a name="File_formats_specifics"></a>
+<h3>File formats specifics</h3>
+
+<p>
+Most of the above file formats are subject to specific handling.
+</p>
+
+<p>
+Refer to <a href="fileFormats.html" title="Supported File Formats">Supported File Formats</a> and
+<a href="fileFilters.html" title="File Filters">File Filters</a> for specific information related
+to the handling of all the above file formats.
+</p>
+
+<a name="Other_file_formats"></a>
+<h3>Other file formats</h3>
+
+<p>
+Other plain text or formatted text file formats may be accessible in OmegaT
+</p>
+
+<p>
+Roughly speaking, a number of plain text formats (including LaTex etc)
+can be translated in OmegaT through conversion to the PO format.
+</p>
+
+<p>
+Similarly, a number of formatted text formats (including Microsoft Office files)
+can be  translated in OmegaT through conversion to the Open Document format.
+</p>
+
+<p>
+For more information, refer to
+<a href="fileFormats.html" title="Supported File Formats">Supported File Formats</a>.
+</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Legal Notices">Legal Notices</a></p>
+
+</body>
+</html>

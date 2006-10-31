@@ -1,0 +1,192 @@
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <title>Translation Memories - OmegaT 1.6.0 User Manual</title>
+</head>
+<body>
+
+<h1>Translation Memories</h1>
+
+<h2>Contents</h2>
+
+<ul type="none">
+   <li>
+      1. <a href="#OmegaT_and_TMX_files">OmegaT and TMX files</a>
+
+      <ul type="none">
+         <li><a href="#TMX_files_location_and_purpose">TMX files location and purpose</a></li>
+         <li><a href="#TMX_files_and_language">TMX files and language</span></a></li>
+      </ul>
+   </li>
+
+   <li>2. <a href="#Keeping_a_memory_of_your_translation_with_OmegaT">Keeping a memory of your translation with OmegaT</a></li>
+
+   <li>
+      5. <a href="#Using_memories_created_by_other_translation_tools">Using memories created by other translation tools</span></a>
+
+      <ul type="none">
+         <li>5.1. <a href="#Importing_files">Importing files</a></li>
+         <li>5.2. <a href="#Imported_files_handling">Imported files handling</a></li>
+      </ul>
+   </li>
+
+   <li>6. <a href="#Using_OmegaT_translation_memories_in_other_translation_tools">Using OmegaT translation memories in other translation tools</a></li>
+   <li>7. <a href="#Upgrading_Translation_Memories">Upgrading Translation Memories</a></li>
+</ul>
+
+<a name="OmegaT_and_TMX_files"></a>
+<h2>OmegaT and TMX files</h2>
+
+<a name="TMX_files_location_and_purpose"></a>
+<h3>TMX files location and purpose</h3>
+
+<p>
+OmegaT uses TMX files in 3 separate locations.
+</p>
+
+<ul>
+   <li>
+      The /omegat/ folder contains <strong>project_save.tmx</strong> and eventually
+      a number of backup TMX files. The file project_save.tmx contains
+      <strong>all</strong> the segments that have been memorized since you started
+      the project.
+   </li>
+
+   <li>
+      The project main folder will contain 3 TMX files:
+      <strong>&lt;project_name&gt;-omegat.tmx</strong>,
+      <strong>&lt;project_name&gt;-level1.tmx</strong>, and
+      <strong>&lt;project_name&gt;-level2.tmx</strong>, where
+      <code>&lt;project_name&gt;</code> is simply the name of your project.
+      These files are exported TMX files and contain only the translated pairs.
+
+      <ul>
+         <li>
+            &lt;project_name&gt;-level1.tmx is a TMX that contains only textual information.
+         </li>
+
+         <li>
+            &lt;project_name&gt;-level2.tmx is a TMX that encapsulates OmegaT specific tags
+            in correct TMX tags so that the file can be used with its formatting information
+            in a translation tool that supports TMX level 2 memories, or OmegaT itself.
+         </li>
+
+         <li>
+            &lt;project_name&gt;-omegat.tmx is a TMX that contains OmegaT specific formating
+            tags so that the file can be used with its formatting information in another
+            OmegaT project.
+         </li>
+      </ul>
+   </li>
+
+   <li>
+      The /tm/ folder can contain any number of TMX files. Such files must be correct TMX files
+      and can either contain only textual information (level 1 TMX), OmegaT textual and
+      formatting information (omegat TMX) or TMX textual and formatting information (level 2 TMX).
+   </li>
+</ul>
+
+<a name="TMX_files_and_language"></a>
+<h3>TMX files and language</h3>
+
+<p>
+TMX files contain <i>translation units</i> that are made of a number of equivalent segments in different languages. A translation unit is made of at least two <i>translation unit variation</i> (tuv). Either can be used as source or target.
+</p>
+
+<p>
+The settings in your project will indicate which is the source language and which is the target language. OmegaT will thus take the <strong>tuv</strong> corresponding to the project source language code and use that segment as the source segment, and it will take the <strong>tuv</strong> corresponding to the project target language code and use that segment as the target segment.
+</p>
+
+<p>
+Language codes come in a number of shapes. OmegaT currently recognizes only codes that show:
+</p>
+
+<ul><li>The language code in 2 letters (ex: <strong>JA</strong> for Japanese)</li></ul>
+
+<p>or</p>
+
+<ul><li>The language code in two letters and the country code in two letters, separated by a hyphen (ex: <strong>JA-JP</strong> for Japanese as it is used in Japan)</li></ul>
+
+<p>
+If the project language codes and the TMX language codes fully match, the segments are loaded in memory.
+If the codes match only the language but not the country, the segments are also loaded in memory.
+If neither the language code not the country code match, the segments are not loaded in memory.
+</p>
+
+<a name="Keeping_a_memory_of_your_translation_with_OmegaT"></a>
+<h2>Keeping a memory of your translation with OmegaT</h2>
+
+<p>
+The file project_save.tmx contains <strong>all</strong> the segments that have been memorized since you started the project. If you do any modification on the project segmentation for example, project_save.tmx will record new translation pairs but will retain all the previous information. This will occasionally lead to the display of <strong>orphan strings</strong> in the Match Viewer. Such matches no longer refer to existing segments, but to segments recorded before the modifications took place. If the modification was a mistake, revert to the previous settings and the older recordings will reappear.
+</p>
+
+<a name="Using_memories_created_by_other_translation_tools"></a>
+<h2>Using memories created by other translation tools</h2>
+
+<a name="Importing_files"></a>
+<h3>Importing files</h3>
+
+<p>
+OmegaT supports importing TMX versions 1.1-1.4b (both level 1 and level 2).
+This enables the translation memories produced by other tools to be read by OmegaT.
+</p>
+
+<p>
+However, OmegaT does not <i>fully</i> support imported level 2 TMX files
+(that store not only the translation, but also the formatting), so the
+quality of fuzzy matches will be a bit lower when importing level 2 TMX files.
+</p>
+
+<a name="Imported_files_handling"></a>
+<h3>Imported files handling</h3>
+
+<p>
+OmegaT follows very strict procedures when handling translation memory files (TMX files).
+</p>
+
+<p>
+If any mistake is found in such a file, OmegaT will simply not load it.
+</p>
+
+<p>
+Some tools are known to produce invalid TMX files in some cases. If you want to use such files as reference translations in OmegaT, they will require to be fixed if OmegaT refuses them. Fixes are trivial operations and OmegaT will give you indications in the related error message. You can ask for advice on the user group if you feel overwhelmed.
+</p>
+
+<a name="Using_OmegaT_translation_memories_in_other_translation_tools"></a>
+<h2>Using OmegaT translation memories in other translation tools</h2>
+
+<p>
+OmegaT exports TMX files version 1.4 (both level 1 and level 2).
+The level 2 export is not a standard level 2 but is enough to
+generate correct matches in TMX Level 2 supporting translation tools.
+</p>
+
+<p>
+If you only need textual information (and not formatting information),
+use the level 1 file that OmegaT has created.
+</p>
+
+<a name="Upgrading_Translation_Memories"></a>
+<h2>Upgrading Translation Memories</h2>
+
+<p>
+Previous versions of OmegaT were capable of segmenting your source files 
+into paragraphs only, and were inconsistently numbering formatting tags 
+in HTML and Open Document files. OmegaT 1.6.0 can detect and upgrade such 
+TMX files on the fly to increase fuzzy matching quality and leverage
+your existing translation better -- so that you don't have to redo it.
+</p>
+
+<p>
+A project's TMX will be upgraded only once, and will be written in upgraded 
+form, and legacy TMX files will be upgraded on the fly each time the project is loaded.
+Note that some changes in file filters in OmegaT 1.6.0 may lead to totally 
+different segmentation, thus in rare cases you will have to upgrade your 
+translation manually.
+</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Legal Notices">Legal Notices</a></p>
+
+</body>
+</html>

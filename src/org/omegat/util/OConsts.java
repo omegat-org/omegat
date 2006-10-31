@@ -54,8 +54,8 @@ public class OConsts
     public static final String TMW_EXTENSION	= ".wf";	// for wordfast			// NOI18N
     
     // help
-    public static final String HELP_HOME            = "OmegaT.html";            // NOI18N
-    public static final String HELP_INSTANT_START   = "InstantStart_NoNav.html";// NOI18N
+    public static final String HELP_HOME            = "index.html";            // NOI18N
+    public static final String HELP_INSTANT_START   = "instantStartGuide.html";// NOI18N
     public static final String HELP_DIR             = "docs";                   // NOI18N
     
     // status file consts

@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 
 1.6.0 vs. 1.4.5.04
-   49 Enchancements
+   50 Enchancements
   101 Bugfixes
 
 ----------------------------------------------------------------------
@@ -28,6 +28,9 @@ Contains a form of TMX level 2 export sufficiently compatible with
 other CAT tools, and supports regular expression searches.
 
  Enhancements:
+
+  - Fully overhauled user manual
+  [No RFE submitted]
 
   - Sufficient TMX level 2 support
   [No RFE submitted]

@@ -72,6 +72,8 @@ public final class Segmenter
     {
         List segments = breakParagraph(paragraph, brules);
         List sentences = new ArrayList(segments.size());
+        if (spaces == null)
+            spaces = new ArrayList();
         spaces.clear();
         for(int i=0; i<segments.size(); i++)
         {
@@ -121,6 +123,8 @@ public final class Segmenter
     {
         Language srclang = new Language(Preferences.getPreference(Preferences.SOURCE_LOCALE));
         List rules = SRX.getSRX().lookupRulesForLanguage(srclang);
+        if (brules == null)
+            brules = new ArrayList();
 
         // determining the applicable break positions
         TreeSet dontbreakpositions = new TreeSet();

@@ -510,13 +510,14 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             // log exception
             StaticUtils.log(MessageFormat.format(
                 OStrings.getString("TMXR_EXCEPTION_WHILE_PARSING"), 
-                new Object[]{exception.getLocalizedMessage(), StaticUtils.getLogLocation()}));
-            exception.printStackTrace(StaticUtils.getLogStream());
+                new Object[]{exception.getLocalizedMessage()}));
+            //exception.printStackTrace(StaticUtils.getLogStream());
+exception.printStackTrace(System.err);
 
             // display error
             CommandThread.core.displayErrorMessage(MessageFormat.format(
                 OStrings.getString("TMXR_EXCEPTION_WHILE_PARSING__DISPLAY"),
-                new Object[]{filename, exception.getLocalizedMessage()}),
+                new Object[]{filename, StaticUtils.getLogLocation()}),
                 exception);
         }
     }

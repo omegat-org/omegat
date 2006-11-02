@@ -19,7 +19,7 @@ is divided into following sections:
   - cleanup
 
 -->
-<project xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:j2seproject2="http://www.netbeans.org/ns/j2se-project/2" xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1" name="OmegaT-impl" default="default" basedir="..">
+<project name="OmegaT-impl" default="default" basedir=".." xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:j2seproject2="http://www.netbeans.org/ns/j2se-project/2" xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1">
     <target name="default" depends="test,jar,javadoc" description="Build and test whole project."/>
     <!-- 
     ======================
@@ -37,20 +37,50 @@ is divided into following sections:
         <property file="${user.properties.file}"/>
         <!-- The two properties below are usually overridden -->
         <!-- by the active platform. Just a fallback. -->
-        <property value="1.4" name="default.javac.source"/>
-        <property value="1.4" name="default.javac.target"/>
+        <property name="default.javac.source" value="1.4"/>
+        <property name="default.javac.target" value="1.4"/>
     </target>
     <target name="-init-project" depends="-pre-init,-init-private,-init-user">
         <property file="nbproject/project.properties"/>
     </target>
     <target name="-do-init" depends="-pre-init,-init-private,-init-user,-init-project,-init-macrodef-property">
-        <available property="manifest.available" file="${manifest.file}"/>
+        <j2seproject1:property name="platform.home" value="platforms.${platform.active}.home"/>
+        <j2seproject1:property name="platform.bootcp" value="platforms.${platform.active}.bootclasspath"/>
+        <j2seproject1:property name="platform.compiler" value="platforms.${platform.active}.compile"/>
+        <j2seproject1:property name="platform.javac.tmp" value="platforms.${platform.active}.javac"/>
+        <condition property="platform.javac" value="${platform.home}/bin/javac">
+            <equals arg1="${platform.javac.tmp}" arg2="$${platforms.${platform.active}.javac}"/>
+        </condition>
+        <property name="platform.javac" value="${platform.javac.tmp}"/>
+        <j2seproject1:property name="platform.java.tmp" value="platforms.${platform.active}.java"/>
+        <condition property="platform.java" value="${platform.home}/bin/java">
+            <equals arg1="${platform.java.tmp}" arg2="$${platforms.${platform.active}.java}"/>
+        </condition>
+        <property name="platform.java" value="${platform.java.tmp}"/>
+        <j2seproject1:property name="platform.javadoc.tmp" value="platforms.${platform.active}.javadoc"/>
+        <condition property="platform.javadoc" value="${platform.home}/bin/javadoc">
+            <equals arg1="${platform.javadoc.tmp}" arg2="$${platforms.${platform.active}.javadoc}"/>
+        </condition>
+        <property name="platform.javadoc" value="${platform.javadoc.tmp}"/>
+        <condition property="platform.invalid" value="true">
+            <or>
+                <contains string="${platform.javac}" substring="$${platforms."/>
+                <contains string="${platform.java}" substring="$${platforms."/>
+                <contains string="${platform.javadoc}" substring="$${platforms."/>
+            </or>
+        </condition>
+        <fail unless="platform.home">Must set platform.home</fail>
+        <fail unless="platform.bootcp">Must set platform.bootcp</fail>
+        <fail unless="platform.java">Must set platform.java</fail>
+        <fail unless="platform.javac">Must set platform.javac</fail>
+        <fail if="platform.invalid">Platform is not correctly set up</fail>
+        <available file="${manifest.file}" property="manifest.available"/>
         <condition property="manifest.available+main.class">
             <and>
                 <isset property="manifest.available"/>
                 <isset property="main.class"/>
                 <not>
-                    <equals trim="true" arg2="" arg1="${main.class}"/>
+                    <equals arg1="${main.class}" arg2="" trim="true"/>
                 </not>
             </and>
         </condition>
@@ -79,16 +109,16 @@ is divided into following sections:
         <condition property="no.javadoc.preview">
             <isfalse value="${javadoc.preview}"/>
         </condition>
-        <property value="" name="run.jvmargs"/>
-        <property value="" name="javac.compilerargs"/>
-        <property value="${basedir}" name="work.dir"/>
+        <property name="run.jvmargs" value=""/>
+        <property name="javac.compilerargs" value=""/>
+        <property name="work.dir" value="${basedir}"/>
         <condition property="no.deps">
             <and>
                 <istrue value="${no.dependencies}"/>
             </and>
         </condition>
-        <property value="true" name="javac.debug"/>
-        <property value="true" name="javadoc.preview"/>
+        <property name="javac.debug" value="true"/>
+        <property name="javadoc.preview" value="true"/>
     </target>
     <target name="-post-init">
         <!-- Empty placeholder for easier customization. -->
@@ -111,7 +141,7 @@ is divided into following sections:
             <attribute name="name"/>
             <attribute name="value"/>
             <sequential>
-                <property value="${@{value}}" name="@{name}"/>
+                <property name="@{name}" value="${@{value}}"/>
             </sequential>
         </macrodef>
     </target>
@@ -123,7 +153,7 @@ is divided into following sections:
             <attribute name="debug" default="${javac.debug}"/>
             <element name="customize" optional="true"/>
             <sequential>
-                <javac srcdir="@{srcdir}" destdir="@{destdir}" debug="@{debug}" deprecation="${javac.deprecation}" source="${javac.source}" target="${javac.target}" includeantruntime="false">
+                <javac srcdir="@{srcdir}" destdir="@{destdir}" debug="@{debug}" deprecation="${javac.deprecation}" source="${javac.source}" target="${javac.target}" fork="yes" executable="${platform.javac}" tempdir="${java.io.tmpdir}" includeantruntime="false">
                     <classpath>
                         <path path="@{classpath}"/>
                     </classpath>
@@ -137,7 +167,7 @@ is divided into following sections:
         <macrodef name="junit" uri="http://www.netbeans.org/ns/j2se-project/3">
             <attribute name="includes" default="**/*Test.java"/>
             <sequential>
-                <junit showoutput="true" fork="true" dir="${basedir}" failureproperty="tests.failed" errorproperty="tests.failed">
+                <junit showoutput="true" fork="true" dir="${basedir}" failureproperty="tests.failed" errorproperty="tests.failed" jvm="${platform.java}">
                     <batchtest todir="${build.test.results.dir}">
                         <fileset dir="${test.test.dir}" includes="@{includes}"/>
                     </batchtest>
@@ -146,9 +176,9 @@ is divided into following sections:
                     </classpath>
                     <syspropertyset>
                         <propertyref prefix="test-sys-prop."/>
-                        <mapper to="*" from="test-sys-prop.*" type="glob"/>
+                        <mapper type="glob" from="test-sys-prop.*" to="*"/>
                     </syspropertyset>
-                    <formatter usefile="false" type="brief"/>
+                    <formatter type="brief" usefile="false"/>
                     <formatter type="xml"/>
                     <jvmarg line="${run.jvmargs}"/>
                 </junit>
@@ -161,10 +191,13 @@ is divided into following sections:
             <attribute name="classpath" default="${debug.classpath}"/>
             <attribute name="stopclassname" default=""/>
             <sequential>
-                <nbjpdastart stopclassname="@{stopclassname}" name="@{name}" addressproperty="jpda.address" transport="dt_socket">
+                <nbjpdastart transport="dt_socket" addressproperty="jpda.address" name="@{name}" stopclassname="@{stopclassname}">
                     <classpath>
                         <path path="@{classpath}"/>
                     </classpath>
+                    <bootclasspath>
+                        <path path="${platform.bootcp}"/>
+                    </bootclasspath>
                 </nbjpdastart>
             </sequential>
         </macrodef>
@@ -172,7 +205,7 @@ is divided into following sections:
             <attribute name="dir" default="${build.classes.dir}"/>
             <sequential>
                 <nbjpdareload>
-                    <fileset dir="@{dir}" includes="${fix.includes}*.class"/>
+                    <fileset includes="${fix.includes}*.class" dir="@{dir}"/>
                 </nbjpdareload>
             </sequential>
         </macrodef>
@@ -183,7 +216,7 @@ is divided into following sections:
             <attribute name="classpath" default="${debug.classpath}"/>
             <element name="customize" optional="true"/>
             <sequential>
-                <java classname="@{classname}" fork="true" dir="${work.dir}">
+                <java fork="true" classname="@{classname}" dir="${work.dir}" jvm="${platform.java}">
                     <jvmarg value="-Xdebug"/>
                     <jvmarg value="-Xnoagent"/>
                     <jvmarg value="-Djava.compiler=none"/>
@@ -194,7 +227,7 @@ is divided into following sections:
                     </classpath>
                     <syspropertyset>
                         <propertyref prefix="run-sys-prop."/>
-                        <mapper to="*" from="run-sys-prop.*" type="glob"/>
+                        <mapper type="glob" from="run-sys-prop.*" to="*"/>
                     </syspropertyset>
                     <customize/>
                 </java>
@@ -206,14 +239,14 @@ is divided into following sections:
             <attribute name="classname" default="${main.class}"/>
             <element name="customize" optional="true"/>
             <sequential>
-                <java classname="@{classname}" fork="true" dir="${work.dir}">
+                <java fork="true" classname="@{classname}" dir="${work.dir}" jvm="${platform.java}">
                     <jvmarg line="${run.jvmargs}"/>
                     <classpath>
                         <path path="${run.classpath}"/>
                     </classpath>
                     <syspropertyset>
                         <propertyref prefix="run-sys-prop."/>
-                        <mapper to="*" from="run-sys-prop.*" type="glob"/>
+                        <mapper type="glob" from="run-sys-prop.*" to="*"/>
                     </syspropertyset>
                     <customize/>
                 </java>
@@ -222,7 +255,7 @@ is divided into following sections:
     </target>
     <target name="-init-presetdef-jar">
         <presetdef name="jar" uri="http://www.netbeans.org/ns/j2se-project/1">
-            <jar compress="${jar.compress}" jarfile="${dist.jar}">
+            <jar jarfile="${dist.jar}" compress="${jar.compress}">
                 <j2seproject1:fileset dir="${build.classes.dir}"/>
             </jar>
         </presetdef>
@@ -234,7 +267,7 @@ is divided into following sections:
     ===================
     -->
     <target name="deps-jar" depends="init" unless="no.deps">
-        <ant antfile="${project.lib-mnemonics}/build.xml" inheritall="false" target="jar"/>
+        <ant target="jar" inheritall="false" antfile="${project.lib-mnemonics}/build.xml"/>
     </target>
     <target name="-pre-pre-compile" depends="init,deps-jar">
         <mkdir dir="${build.classes.dir}"/>
@@ -277,7 +310,7 @@ is divided into following sections:
     ====================
     -->
     <target name="-pre-pre-jar" depends="init">
-        <dirname file="${dist.jar}" property="dist.jar.dir"/>
+        <dirname property="dist.jar.dir" file="${dist.jar}"/>
         <mkdir dir="${dist.jar.dir}"/>
     </target>
     <target name="-pre-jar">
@@ -293,42 +326,42 @@ is divided into following sections:
     <target name="-do-jar-with-mainclass" depends="init,compile,-pre-pre-jar,-pre-jar" if="manifest.available+main.class" unless="manifest.available+main.class+mkdist.available">
         <j2seproject1:jar manifest="${manifest.file}">
             <j2seproject1:manifest>
-                <j2seproject1:attribute value="${main.class}" name="Main-Class"/>
+                <j2seproject1:attribute name="Main-Class" value="${main.class}"/>
             </j2seproject1:manifest>
         </j2seproject1:jar>
         <echo>To run this application from the command line without Ant, try:</echo>
-        <property location="${build.classes.dir}" name="build.classes.dir.resolved"/>
-        <property location="${dist.jar}" name="dist.jar.resolved"/>
+        <property name="build.classes.dir.resolved" location="${build.classes.dir}"/>
+        <property name="dist.jar.resolved" location="${dist.jar}"/>
         <pathconvert property="run.classpath.with.dist.jar">
             <path path="${run.classpath}"/>
-            <map to="${dist.jar.resolved}" from="${build.classes.dir.resolved}"/>
+            <map from="${build.classes.dir.resolved}" to="${dist.jar.resolved}"/>
         </pathconvert>
-        <echo>java -cp "${run.classpath.with.dist.jar}" ${main.class}</echo>
+        <echo>${platform.java} -cp "${run.classpath.with.dist.jar}" ${main.class}</echo>
     </target>
     <target name="-do-jar-with-libraries" depends="init,compile,-pre-pre-jar,-pre-jar" if="manifest.available+main.class+mkdist.available">
-        <property location="${build.classes.dir}" name="build.classes.dir.resolved"/>
+        <property name="build.classes.dir.resolved" location="${build.classes.dir}"/>
         <pathconvert property="run.classpath.without.build.classes.dir">
             <path path="${run.classpath}"/>
-            <map to="" from="${build.classes.dir.resolved}"/>
+            <map from="${build.classes.dir.resolved}" to=""/>
         </pathconvert>
-        <pathconvert pathsep=" " property="jar.classpath">
+        <pathconvert property="jar.classpath" pathsep=" ">
             <path path="${run.classpath.without.build.classes.dir}"/>
             <chainedmapper>
                 <flattenmapper/>
-                <globmapper to="lib/*" from="*"/>
+                <globmapper from="*" to="lib/*"/>
             </chainedmapper>
         </pathconvert>
-        <taskdef classpath="${libs.CopyLibs.classpath}" name="copylibs" classname="org.netbeans.modules.java.j2seproject.copylibstask.CopyLibs"/>
-        <copylibs compress="${jar.compress}" jarfile="${dist.jar}" runtimeclasspath="${run.classpath.without.build.classes.dir}" manifest="${manifest.file}">
+        <taskdef classname="org.netbeans.modules.java.j2seproject.copylibstask.CopyLibs" name="copylibs" classpath="${libs.CopyLibs.classpath}"/>
+        <copylibs manifest="${manifest.file}" runtimeclasspath="${run.classpath.without.build.classes.dir}" jarfile="${dist.jar}" compress="${jar.compress}">
             <fileset dir="${build.classes.dir}"/>
             <manifest>
-                <attribute value="${main.class}" name="Main-Class"/>
-                <attribute value="${jar.classpath}" name="Class-Path"/>
+                <attribute name="Main-Class" value="${main.class}"/>
+                <attribute name="Class-Path" value="${jar.classpath}"/>
             </manifest>
         </copylibs>
         <echo>To run this application from the command line without Ant, try:</echo>
-        <property location="${dist.jar}" name="dist.jar.resolved"/>
-        <echo>java -jar "${dist.jar.resolved}"</echo>
+        <property name="dist.jar.resolved" location="${dist.jar}"/>
+        <echo>${platform.java} -jar "${dist.jar.resolved}"</echo>
     </target>
     <target name="-post-jar">
         <!-- Empty placeholder for easier customization. -->
@@ -378,7 +411,7 @@ is divided into following sections:
     <target name="debug-single" if="netbeans.home" depends="init,compile-single,-debug-start-debugger,-debug-start-debuggee-single"/>
     <target name="-pre-debug-fix" depends="init">
         <fail unless="fix.includes">Must set fix.includes</fail>
-        <property value="${fix.includes}.java" name="javac.includes"/>
+        <property name="javac.includes" value="${fix.includes}.java"/>
     </target>
     <target name="-do-debug-fix" if="netbeans.home" depends="init,-pre-debug-fix,compile-single">
         <j2seproject1:nbjpdareload/>
@@ -391,7 +424,7 @@ is divided into following sections:
     -->
     <target name="-javadoc-build" depends="init">
         <mkdir dir="${dist.javadoc.dir}"/>
-        <javadoc destdir="${dist.javadoc.dir}" source="${javac.source}" notree="${javadoc.notree}" use="${javadoc.use}" nonavbar="${javadoc.nonavbar}" noindex="${javadoc.noindex}" splitindex="${javadoc.splitindex}" author="${javadoc.author}" version="${javadoc.version}" windowtitle="${javadoc.windowtitle}" private="${javadoc.private}" additionalparam="${javadoc.additionalparam}" failonerror="true" useexternalfile="true">
+        <javadoc destdir="${dist.javadoc.dir}" source="${javac.source}" notree="${javadoc.notree}" use="${javadoc.use}" nonavbar="${javadoc.nonavbar}" noindex="${javadoc.noindex}" splitindex="${javadoc.splitindex}" author="${javadoc.author}" version="${javadoc.version}" windowtitle="${javadoc.windowtitle}" private="${javadoc.private}" additionalparam="${javadoc.additionalparam}" failonerror="true" useexternalfile="true" executable="${platform.javadoc}">
             <classpath>
                 <path path="${javac.classpath}"/>
             </classpath>
@@ -484,14 +517,14 @@ is divided into following sections:
     -->
     <target name="-debug-start-debuggee-test" if="have.tests" depends="init,compile-test">
         <fail unless="test.class">Must select one file in the IDE or set test.class</fail>
-        <j2seproject3:debug classpath="${debug.test.classpath}" classname="junit.textui.TestRunner">
+        <j2seproject3:debug classname="junit.textui.TestRunner" classpath="${debug.test.classpath}">
             <customize>
                 <arg line="${test.class}"/>
             </customize>
         </j2seproject3:debug>
     </target>
     <target name="-debug-start-debugger-test" if="netbeans.home+have.tests" depends="init,compile-test">
-        <j2seproject1:nbjpdastart classpath="${debug.test.classpath}" name="${test.class}"/>
+        <j2seproject1:nbjpdastart name="${test.class}" classpath="${debug.test.classpath}"/>
     </target>
     <target name="debug-test" depends="init,compile-test,-debug-start-debugger-test,-debug-start-debuggee-test"/>
     <target name="-do-debug-fix-test" if="netbeans.home" depends="init,-pre-debug-fix,compile-test-single">
@@ -531,7 +564,7 @@ is divided into following sections:
     ===============
     -->
     <target name="deps-clean" depends="init" unless="no.deps">
-        <ant antfile="${project.lib-mnemonics}/build.xml" inheritall="false" target="clean"/>
+        <ant target="clean" inheritall="false" antfile="${project.lib-mnemonics}/build.xml"/>
     </target>
     <target name="-do-clean" depends="init">
         <delete dir="${build.dir}"/>

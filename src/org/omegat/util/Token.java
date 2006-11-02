@@ -65,6 +65,7 @@ public class Token
         return AMP.matcher(s).replaceAll("");                                   // NOI18N
     }
 
+public String text;
     /**
      * Creates a new token.
      * @param _text the text of the token
@@ -72,6 +73,7 @@ public class Token
      */
     public Token(String _text, int _offset)
     {
+this.text = _text;
         length = _text.length();
         hash = (_text == null) ? -1 : stripAmpersand(_text).hashCode();
         offset = _offset;

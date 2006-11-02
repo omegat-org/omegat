@@ -976,6 +976,9 @@ public class CommandThread extends Thread
     {
         if (!m_config.loadExisting(m_transFrame, projectRoot))
             return false;
+
+        // reset token list cache
+        StaticUtils.clearTokenCache();
         
         projectClosing = false;
         
@@ -1284,6 +1287,7 @@ public class CommandThread extends Thread
         String tokenPrev;
         String tokenStr = new String();
         
+try {
         int start = breaker.first();
         for (int end = breaker.next(); end!=BreakIterator.DONE; 
                 start = end, end = breaker.next())
@@ -1306,6 +1310,39 @@ public class CommandThread extends Thread
             }
         }
         return nTokens;
+}
+catch (IllegalArgumentException exception) {
+    String message =   "IllegalArgumentException caught!\n"
+                     + "Please report this to the OmegaT team, by going to the bug report at:\n"
+                     + "http://sourceforge.net/support/tracker.php?aid=1589484\n"
+                     + "and a comment containing the details below (location, string, memory, stack trace)\n"
+                     + "Location: CommandThread.numberOfWords\n"
+                     + "String: [" + str + "]\n"
+                     + "Available memory: " + Runtime.getRuntime().freeMemory() + " bytes\n";
+    System.err.println(message + "Stack trace (below):");
+    System.err.println(exception.getMessage());
+    exception.printStackTrace(System.err);
+
+    displayErrorMessage(message + "Stack trace: see log file (" + StaticUtils.getLogLocation() + ")", exception);
+
+    return nTokens;
+}
+catch (StringIndexOutOfBoundsException exception) {
+    String message =   "StringIndexOutOfBoundsException caught!\n"
+                     + "Please report this to the OmegaT team, by going to the bug report at:\n"
+                     + "http://sourceforge.net/support/tracker.php?aid=1589484\n"
+                     + "and a comment containing the details below (location, string, memory, stack trace)\n"
+                     + "Location: CommandThread.numberOfWords\n"
+                     + "String: [" + str + "]\n"
+                     + "Available memory: " + Runtime.getRuntime().freeMemory() + " bytes\n";
+    System.err.println(message + "Stack trace (below):");
+    System.err.println(exception.getMessage());
+    exception.printStackTrace(System.err);
+
+    displayErrorMessage(message + "Stack trace: see log file (" + StaticUtils.getLogLocation() + ")", exception);
+
+    return nTokens;
+}
     }
     
     /** Computes the number of characters excluding spaces in a string. */

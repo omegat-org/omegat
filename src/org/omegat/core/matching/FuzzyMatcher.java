@@ -104,11 +104,20 @@ public class FuzzyMatcher
      */
     public void match(List strings) throws InterruptedException
     {
+//System.err.println("Matching segments...");
+//long timeStart = System.currentTimeMillis();
+
         int total = strings.size();
         
         statusTemplate = OStrings.CT_FUZZY_X_OF_Y;
         updateStatus(0, total);
         
+//long timeTLTotal  = 0;
+//long timeTLATotal  = 0;
+//long timeLDTotal  = 0;
+//long timeLDATotal  = 0;
+//long timeBSDTotal = 0;
+//long timeBSDATotal = 0;
         for(int i=0; i<total; i++)
         {
             if( i%20==0 )
@@ -131,12 +140,18 @@ public class FuzzyMatcher
                 // don't know why, but it happened once
                 if( candEntry==null )
                     continue;
+//long timeTLStart = System.currentTimeMillis();
                 List candTokens = candEntry.getSrcTokenList();
+//long timeTLEnd = System.currentTimeMillis();
+//timeTLTotal += (timeTLEnd - timeTLStart);
                 int candTokensSize = candTokens.size();
                 if( candTokensSize==0 )
                     continue;
                 
+//long timeLDStart = System.currentTimeMillis();
                 int ld = LevenshteinDistance.compute(strTokens, candTokens);
+//long timeLDEnd = System.currentTimeMillis();
+//timeLDTotal += (timeLDEnd - timeLDStart);
                 int similarity = (100 * (Math.max(strTokensSize, candTokensSize) - ld)) /
                         Math.max(strTokensSize, candTokensSize);
                 
@@ -146,22 +161,43 @@ public class FuzzyMatcher
                 // determine Levenshtein distance/adjusted similarity across the complete
                 // list of tokens, including numbers, tags, and other non-word tokens
                 // fix for bug 1449988
+//long timeTLAStart = System.currentTimeMillis();
                 List candTokensAll = candEntry.getSrcTokenListAll();
+//long timeTLAEnd = System.currentTimeMillis();
+//timeTLATotal += (timeTLAEnd - timeTLAStart);
+//long timeLDAStart = System.currentTimeMillis();
                 int ldAll = LevenshteinDistance.compute(strTokensAll, candTokensAll);
+//long timeLDAEnd = System.currentTimeMillis();
+//timeLDATotal += (timeLDAEnd - timeLDAStart);
                 int simAdjusted = (100 * (Math.max(strTokensAll.size(), candTokensAll.size()) - ldAll)) /
                         Math.max(strTokensAll.size(), candTokensAll.size());
                 // end fix 1449988
 
                 //byte[] similarityData = buildSimilarityData(strTokens, candTokens);
+//long timeBSDStart = System.currentTimeMillis();
                 byte[] similarityData = buildSimilarityData(strTokensAll, candTokensAll); // fix for bug 1586397
+//long timeBSDEnd = System.currentTimeMillis();
+//timeBSDTotal += (timeBSDEnd - timeBSDStart);
                 strEntry.addNearString(candEntry, similarity, simAdjusted, similarityData, null);
 
                 //similarityData = buildSimilarityData(candTokens, strTokens);
+//long timeBSDAStart = System.currentTimeMillis();
                 similarityData = buildSimilarityData(candTokensAll, strTokensAll); // fix for bug 1586397
+//long timeBSDAEnd = System.currentTimeMillis();
+//timeBSDATotal += (timeBSDEnd - timeBSDStart);
                 candEntry.addNearString(strEntry, similarity, simAdjusted, similarityData, null);
             }
         }
         updateStatus(total, total);
+//long timeEnd = System.currentTimeMillis();
+//System.err.println("Segments matched in " + ((timeEnd - timeStart) / 1000) + " seconds");
+//System.err.println("Time breakdown follows:");
+//System.err.println("Retrieving token lists:           " + timeTLTotal   + " milliseconds");
+//System.err.println("Retrieving full token lists:      " + timeTLATotal  + " milliseconds");
+//System.err.println("Calculating Levenshtein distance: " + timeLDTotal   + " milliseconds");
+//System.err.println("Calculating adjusted LD:          " + timeLDATotal  + " milliseconds");
+//System.err.println("Building similarity data:         " + timeBSDTotal  + " milliseconds");
+//System.err.println("Building adjusted SD:             " + timeBSDATotal + " milliseconds");
     }
     
     

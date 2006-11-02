@@ -70,12 +70,13 @@ public class StringEntry
     /** Returns the tokens of this entry's source string */
     public List getSrcTokenList()
     {
-        if(srcTokenList == null )
+        /*if(srcTokenList == null )
         {
             srcTokenList = new ArrayList();
             StaticUtils.tokenizeText(m_srcText, srcTokenList);
         }
-        return srcTokenList;
+        return srcTokenList;*/
+        return StaticUtils.tokenizeText(m_srcText);
     }
     
     /**
@@ -85,9 +86,10 @@ public class StringEntry
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
     public List getSrcTokenListAll() {
-        ArrayList tokenList = new ArrayList();
+        /*ArrayList tokenList = new ArrayList();
         StaticUtils.tokenizeText(m_srcText, tokenList, true);
-        return tokenList;
+        return tokenList;*/
+        return StaticUtils.tokenizeText(m_srcText, true);
     }
 
     /** List of SourceTextEntry-es this string entry belongs to. */
@@ -113,6 +115,9 @@ public class StringEntry
         List res = new ArrayList(OConsts.MAX_NEAR_STRINGS);
         int size;
         Iterator i;
+        // HP: this code can sometimes cause a ConcurrentModificationException 
+        // HP: because m_nearList is not thread-safe
+        // HP: please make it thread-safe, but test for performance issues
         for(size=0, i=m_nearList.iterator(); i.hasNext() && res.size()<OConsts.MAX_NEAR_STRINGS; )
         {
             NearString next = (NearString) i.next();
@@ -173,12 +178,13 @@ public class StringEntry
     /** Returns the tokens of this entry's translation */
     public List getTransTokenList()
     {
-        if( transTokenList==null )
+        /*if( transTokenList==null )
         {
             transTokenList = new ArrayList();
             StaticUtils.tokenizeText(m_translation, transTokenList);
         }
-        return transTokenList;
+        return transTokenList;*/
+        return StaticUtils.tokenizeText(m_translation);
     }
     
     /**

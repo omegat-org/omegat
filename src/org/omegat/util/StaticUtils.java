@@ -200,7 +200,111 @@ public class StaticUtils
             wordBreaker = new WordIterator();
         return wordBreaker;
     }
-    
+
+    /**
+      * Contains a list of tokens for each *unique* string.
+      * By not storing a list of tokens for every string,
+      * memory is saved. Token lists are not saved when
+      * all tokens are requested. Again to save memory.
+      */
+    private static java.util.Map tokenCache    = new java.util.Hashtable();
+
+    /** Removes all token lists from the cache. */
+    public static void clearTokenCache() {
+        tokenCache.clear();
+    }
+
+    public static List tokenizeText(String str) {
+        return tokenizeText(str, false);
+    }
+
+    public static List tokenizeText(String str, boolean all) {
+        // check if we've already tokenized this string
+        // no sense in retokenizing identical strings
+        // don't check if the caller wants all tokens
+        List tokens = null;
+        if (!all) {
+            tokens = (List)tokenCache.get(str);
+            if (tokens != null)
+                return tokens;
+        }
+
+        // create a new token list
+        // and put it in the cache if not all tokens are requested
+        tokens = new ArrayList();
+        if (!all)
+            tokenCache.put(str, tokens);
+
+        // fixes bug nr. 1382810 (StringIndexOutOfBoundsException)
+        if (str.length() == 0)
+            return tokens;
+
+        // get a word breaker
+        str = str.toLowerCase(); // HP: possible error, this makes "A" and "a" match, CHECK AND FIX
+        BreakIterator breaker = getWordBreaker();
+        breaker.setText(str);
+
+try {
+        int start = breaker.first();
+        for (int end = breaker.next();
+             end!=BreakIterator.DONE; 
+             start = end, end = breaker.next())
+        {
+            String tokenStr = str.substring(start,end);
+            boolean word = false;
+            for (int i=0; i<tokenStr.length(); i++)
+            {
+                char ch = tokenStr.charAt(i);
+                if (Character.isLetter(ch))
+                {
+                    word = true;
+                    break;
+                }
+            }
+
+            if (all || (word && !PatternConsts.OMEGAT_TAG.matcher(tokenStr).matches()))
+            {
+                Token token = new Token(tokenStr, start);
+                tokens.add(token);
+            }
+        }
+}
+catch (IllegalArgumentException exception) {
+    String message =   "IllegalArgumentException caught!\n"
+                     + "Please report this to the OmegaT team, by going to the bug report at:\n"
+                     + "http://sourceforge.net/support/tracker.php?aid=1589484\n"
+                     + "and a comment containing the details below (location, string, memory, stack trace)\n"
+                     + "Location: StaticUtils.tokenizeText\n"
+                     + "String: [" + str + "]\n"
+                     + "Available memory: " + Runtime.getRuntime().freeMemory() + " bytes\n";
+    System.err.println(message + "Stack trace (below):");
+    System.err.println(exception.getMessage());
+    exception.printStackTrace(System.err);
+
+    org.omegat.core.threads.CommandThread.core.displayErrorMessage(message + "Stack trace: see log file (" + StaticUtils.getLogLocation() + ")", exception);
+
+    return tokens;
+}
+catch (StringIndexOutOfBoundsException exception) {
+    String message =   "StringIndexOutOfBoundsException caught!\n"
+                     + "Please report this to the OmegaT team, by going to the bug report at:\n"
+                     + "http://sourceforge.net/support/tracker.php?aid=1589484\n"
+                     + "and a comment containing the details below (location, string, memory, stack trace)\n"
+                     + "Location: StaticUtils.tokenizeText\n"
+                     + "String: [" + str + "]\n"
+                     + "Available memory: " + Runtime.getRuntime().freeMemory() + " bytes\n";
+    System.err.println(message + "Stack trace (below):");
+    System.err.println(exception.getMessage());
+    exception.printStackTrace(System.err);
+
+    org.omegat.core.threads.CommandThread.core.displayErrorMessage(message + "Stack trace: see log file (" + StaticUtils.getLogLocation() + ")", exception);
+
+    return tokens;
+}
+
+        return tokens;
+    }
+
     /**
      * Builds a list of tokens and a list of their offsets w/in a file.
      * <p>
@@ -217,9 +321,9 @@ public class StaticUtils
      * @param tokenList the list to add tokens to
      * @return number of tokens
      */
-    public static int tokenizeText(String str, List tokenList) {
-        return tokenizeText(str, tokenList, false);
-    }
+    /*public static int tokenizeTextOld(String str, List tokenList) {
+        return tokenizeTextOld(str, tokenList, false);
+    }*/
     
     /**
      * Builds a list of tokens and a list of their offsets w/in a file.
@@ -238,7 +342,8 @@ public class StaticUtils
      * @param all If true, numbers, tags, and other non-word tokens are included in the list
      * @return number of tokens
      */
-    public static int tokenizeText(String str, List tokenList, boolean all) {
+    /*public static int tokenizeTextOld(String str, List tokenList, boolean all) {
+
         int len = str.length();
         if (len==0)
             return 0;  // fixes bug nr. 1382810 (StringIndexOutOfBoundsException)
@@ -277,7 +382,7 @@ public class StaticUtils
             }
         }
         return nTokens;
-    }
+    }*/
     
     /**
      * Returns the names of all font families available.

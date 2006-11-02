@@ -166,8 +166,10 @@ public class GlossaryManager
 		{
 			GlossaryEntry glosEntry = (GlossaryEntry)glossaryEntries.get(i);
             String glosStr = glosEntry.getSrcText();
-            List glosTokens = new ArrayList();
-            int glosTokensN = StaticUtils.tokenizeText(glosStr, glosTokens);
+            //List glosTokens = new ArrayList();
+            //int glosTokensN = StaticUtils.tokenizeText(glosStr, glosTokens);
+            List glosTokens = StaticUtils.tokenizeText(glosStr);
+            int glosTokensN = glosTokens.size();
             if (glosTokensN==0)
                 continue;
             for(int j=0; j<strEntryList.size(); j++)

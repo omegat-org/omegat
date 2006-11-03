@@ -139,8 +139,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     /** Currently collected text is wrapped in CDATA section. */
     private boolean inCDATA = false;
     
-    /** Whether we're curren
-    private boolean inPreformattingTag = false;
+    /** Whether we're curren */
+    //private boolean inPreformattingTag = false;
 
     /** SAX parser encountered DTD declaration, so probably it will parse DTD
      * next, but some nice things may happen before. */

@@ -54,6 +54,7 @@ public class WordIterator extends BreakIterator
     {
         text = newText;
         breaker.setText(newText);
+        nextItems.clear();
     }
 
     /**
@@ -96,8 +97,9 @@ public class WordIterator extends BreakIterator
         int next = breaker.next();
         if (DONE==next)
             return DONE;
-        
+
         String str = text.substring(curr, next);
+
         // grouping OmegaT tags
         if (str.equals("<"))                                                    // NOI18N
         {

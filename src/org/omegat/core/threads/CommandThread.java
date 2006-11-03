@@ -1287,7 +1287,7 @@ public class CommandThread extends Thread
         String tokenPrev;
         String tokenStr = new String();
         
-try {
+/* try { // FIX: remove this when bug 1589484 is fixed */
         int start = breaker.first();
         for (int end = breaker.next(); end!=BreakIterator.DONE; 
                 start = end, end = breaker.next())
@@ -1310,14 +1310,15 @@ try {
             }
         }
         return nTokens;
-}
-catch (IllegalArgumentException exception) {
+/* }
+catch (IllegalArgumentException exception) { // FIX: remove this when bug 1589484 is fixed
     String message =   "IllegalArgumentException caught!\n"
                      + "Please report this to the OmegaT team, by going to the bug report at:\n"
                      + "http://sourceforge.net/support/tracker.php?aid=1589484\n"
-                     + "and a comment containing the details below (location, string, memory, stack trace)\n"
+                     + "and report the details below (location, string, breaker string, memory, stack trace)\n"
                      + "Location: CommandThread.numberOfWords\n"
                      + "String: [" + str + "]\n"
+                     + "Breaker string: [" + ((org.omegat.util.WordIterator)breaker).getString() + "]\n"
                      + "Available memory: " + Runtime.getRuntime().freeMemory() + " bytes\n";
     System.err.println(message + "Stack trace (below):");
     System.err.println(exception.getMessage());
@@ -1327,13 +1328,14 @@ catch (IllegalArgumentException exception) {
 
     return nTokens;
 }
-catch (StringIndexOutOfBoundsException exception) {
+catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug 1589484 is fixed
     String message =   "StringIndexOutOfBoundsException caught!\n"
                      + "Please report this to the OmegaT team, by going to the bug report at:\n"
                      + "http://sourceforge.net/support/tracker.php?aid=1589484\n"
-                     + "and a comment containing the details below (location, string, memory, stack trace)\n"
+                     + "and report the details below (location, string, breaker string, memory, stack trace)\n"
                      + "Location: CommandThread.numberOfWords\n"
                      + "String: [" + str + "]\n"
+                     + "Breaker string: [" + ((org.omegat.util.WordIterator)breaker).getString() + "]\n"
                      + "Available memory: " + Runtime.getRuntime().freeMemory() + " bytes\n";
     System.err.println(message + "Stack trace (below):");
     System.err.println(exception.getMessage());
@@ -1342,7 +1344,7 @@ catch (StringIndexOutOfBoundsException exception) {
     displayErrorMessage(message + "Stack trace: see log file (" + StaticUtils.getLogLocation() + ")", exception);
 
     return nTokens;
-}
+} */
     }
     
     /** Computes the number of characters excluding spaces in a string. */

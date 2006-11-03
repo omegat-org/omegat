@@ -196,9 +196,20 @@ public class StaticUtils
     /** Returns an iterator to break sentences into words. */
     public static BreakIterator getWordBreaker()
     {
-        if (wordBreaker==null)
-            wordBreaker = new WordIterator();
-        return wordBreaker;
+        //if (wordBreaker==null)
+        //    wordBreaker = new WordIterator();
+        //return wordBreaker;
+
+        return new WordIterator();
+
+        // HP: This is a fix for bug 1589484. If you use only one
+        // WordIterator instance, it will lead to problems when
+        // using multiple threads, as OmegaT does. Sometimes, in
+        // the middle of breaking a string, another thread may set
+        // a different text, and then you get index out of bounds
+        // exceptions. By returning a new WordIterator each time
+        // one is requested, this problem is solved, and it doesn't
+        // hurt performance either.
     }
 
     /**
@@ -244,7 +255,7 @@ public class StaticUtils
         BreakIterator breaker = getWordBreaker();
         breaker.setText(str);
 
-try {
+/*try { // FIX: remove this when bug 1589484 is fixed */
         int start = breaker.first();
         for (int end = breaker.next();
              end!=BreakIterator.DONE; 
@@ -268,14 +279,15 @@ try {
                 tokens.add(token);
             }
         }
-}
-catch (IllegalArgumentException exception) {
+/*}
+catch (IllegalArgumentException exception) { // FIX: remove this when bug 1589484 is fixed
     String message =   "IllegalArgumentException caught!\n"
                      + "Please report this to the OmegaT team, by going to the bug report at:\n"
                      + "http://sourceforge.net/support/tracker.php?aid=1589484\n"
-                     + "and a comment containing the details below (location, string, memory, stack trace)\n"
+                     + "and report the details below (location, string, breaker string, memory, stack trace)\n"
                      + "Location: StaticUtils.tokenizeText\n"
                      + "String: [" + str + "]\n"
+                     + "Breaker string: [" + ((org.omegat.util.WordIterator)breaker).getString() + "]\n"
                      + "Available memory: " + Runtime.getRuntime().freeMemory() + " bytes\n";
     System.err.println(message + "Stack trace (below):");
     System.err.println(exception.getMessage());
@@ -285,13 +297,14 @@ catch (IllegalArgumentException exception) {
 
     return tokens;
 }
-catch (StringIndexOutOfBoundsException exception) {
+catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug 1589484 is fixed
     String message =   "StringIndexOutOfBoundsException caught!\n"
                      + "Please report this to the OmegaT team, by going to the bug report at:\n"
                      + "http://sourceforge.net/support/tracker.php?aid=1589484\n"
-                     + "and a comment containing the details below (location, string, memory, stack trace)\n"
+                     + "and report the details below (location, string, breaker string, memory, stack trace)\n"
                      + "Location: StaticUtils.tokenizeText\n"
                      + "String: [" + str + "]\n"
+                     + "Breaker string: [" + ((org.omegat.util.WordIterator)breaker).getString() + "]\n"
                      + "Available memory: " + Runtime.getRuntime().freeMemory() + " bytes\n";
     System.err.println(message + "Stack trace (below):");
     System.err.println(exception.getMessage());
@@ -300,7 +313,7 @@ catch (StringIndexOutOfBoundsException exception) {
     org.omegat.core.threads.CommandThread.core.displayErrorMessage(message + "Stack trace: see log file (" + StaticUtils.getLogLocation() + ")", exception);
 
     return tokens;
-}
+}*/
 
         return tokens;
     }

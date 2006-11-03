@@ -70,13 +70,7 @@ public class StringEntry
     /** Returns the tokens of this entry's source string */
     public List getSrcTokenList()
     {
-        /*if(srcTokenList == null )
-        {
-            srcTokenList = new ArrayList();
-            StaticUtils.tokenizeText(m_srcText, srcTokenList);
-        }
-        return srcTokenList;*/
-        return StaticUtils.tokenizeText(m_srcText);
+        return StaticUtils.tokenizeText(m_srcText); // HP: using cache in StaticUtils now
     }
     
     /**
@@ -86,9 +80,6 @@ public class StringEntry
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
     public List getSrcTokenListAll() {
-        /*ArrayList tokenList = new ArrayList();
-        StaticUtils.tokenizeText(m_srcText, tokenList, true);
-        return tokenList;*/
         return StaticUtils.tokenizeText(m_srcText, true);
     }
 
@@ -115,6 +106,7 @@ public class StringEntry
         List res = new ArrayList(OConsts.MAX_NEAR_STRINGS);
         int size;
         Iterator i;
+        // FIX:
         // HP: this code can sometimes cause a ConcurrentModificationException 
         // HP: because m_nearList is not thread-safe
         // HP: please make it thread-safe, but test for performance issues
@@ -167,7 +159,7 @@ public class StringEntry
     {
         m_glosList.add(glosEntry);
     }
-    
+
     // these methods aren't sychronized - thought about doing so, but
     //	as the translation is set by user action, any race condition
     //	would be the same as user pressing 'enter' key a few milliseconds
@@ -178,12 +170,6 @@ public class StringEntry
     /** Returns the tokens of this entry's translation */
     public List getTransTokenList()
     {
-        /*if( transTokenList==null )
-        {
-            transTokenList = new ArrayList();
-            StaticUtils.tokenizeText(m_translation, transTokenList);
-        }
-        return transTokenList;*/
         return StaticUtils.tokenizeText(m_translation);
     }
     
@@ -213,8 +199,7 @@ public class StringEntry
             // only if translation changed
             CommandThread.core.markAsDirty();
             m_translation = trans;
-            transTokenList = null;
-            
+
             boolean is = !"".equals(m_translation);                             // NOI18N
             if( was && !is )
                 CommandThread.core.decreaseTranslated();
@@ -242,9 +227,6 @@ public class StringEntry
     
     private String m_srcText;
     private String m_translation;
-    
-    private List srcTokenList;
-    private List transTokenList;
 }
 
 /**

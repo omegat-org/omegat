@@ -451,14 +451,20 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             throws IOException 
     {
         this.isProjectTMX = isProjectTMX;
-    
+
+        // Hack to ommit .tmp extensions from displayed file names,
+        // so we don't confuse the user. Part of a quick fix for 1583560
+        String displayFilename = filename.endsWith(".tmp")
+                                     ? filename.substring(0, filename.length() -4)
+                                     : filename;
+
         // parse the TMX file
         try 
         {
             // log the parsing attempt
             StaticUtils.log(MessageFormat.format(
                 OStrings.getString("TMXR_INFO_READING_FILE"), 
-                new Object[]{filename}));
+                new Object[]{displayFilename}));
         
             // create a new SAX parser factory
             javax.xml.parsers.SAXParserFactory parserFactory =
@@ -499,7 +505,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             // display error
             CommandThread.core.displayErrorMessage(MessageFormat.format(
                 OStrings.getString("TMXR_FATAL_ERROR_WHILE_PARSING__DISPLAY"),
-                new Object[]{filename,
+                new Object[]{displayFilename,
                              String.valueOf(exception.getLineNumber()),
                              String.valueOf(exception.getColumnNumber()),
                              exception.getLocalizedMessage()}),
@@ -516,7 +522,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             // display error
             CommandThread.core.displayErrorMessage(MessageFormat.format(
                 OStrings.getString("TMXR_EXCEPTION_WHILE_PARSING__DISPLAY"),
-                new Object[]{filename, StaticUtils.getLogLocation()}),
+                new Object[]{displayFilename, StaticUtils.getLogLocation()}),
                 exception);
         }
     }

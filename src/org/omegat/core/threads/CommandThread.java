@@ -1104,7 +1104,17 @@ public class CommandThread extends Thread
     {
         TMXReader tmx = new TMXReader(encoding, 
                 m_config.getSourceLanguage(), m_config.getTargetLanguage());
-        tmx.loadFile(fname, isProject);
+
+        // Fix for bug 1583560 - force kill causes project_save.tmx destruction
+        // Copy TMX file to temp file, so we can read the temp file,
+        // and then it doesn't matter if it gets destroyed when doing force kills
+        LFileCopy.copy(fname, fname + ".tmp");
+
+        // Load the TMX from the temp file
+        tmx.loadFile(fname + ".tmp", isProject);
+
+        // Delete the temp file
+        new File(fname + ".tmp").delete();
 
         int num = tmx.numSegments();
         ArrayList strEntryList = new ArrayList(num);

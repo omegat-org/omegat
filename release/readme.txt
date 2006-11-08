@@ -78,6 +78,12 @@ double-clicking the OmegaT.jar file.
 After installing java you may need to modify your system path variable so that
 it includes the directory where the 'java' application resides.
 
+Linux users should pay attention to the fact that OmegaT won't work with free/
+open-source Java implementations that can be found in many Linux distros (for
+example, Ubuntu). Download and install Sun's JRE via the link above, or
+download and install OmegaT bundled with JRE (the .tar.gz bundle marked
+"Linux").
+
 ==============================================================================
  4. Contributions to OmegaT
 

@@ -244,8 +244,7 @@ public class SearchThread extends Thread
      * Queue found string.
      * Since 1.6.0 RC9 removes duplicate segments (by Henry Pijffers)
      */
-    private void foundString(int entryNum, String intro, String src,
-            String target)
+    private void foundString(int entryNum, String intro, String src, String target)
     {
         if (m_numFinds++ > OConsts.ST_MAX_SEARCH_RESULTS)
         {
@@ -256,6 +255,7 @@ public class SearchThread extends Thread
         {
             if (!m_entrySet.contains(src + target)) { // HP, duplicate entry prevention
                 // entries are referenced at offset 1 but stored at offset 0
+                //m_window.addEntry(entryNum+1, null, (entryNum+1)+"> "+src, target);	// NOI18N
                 m_window.addEntry(entryNum+1, null, (entryNum+1)+"> "+src, target);	// NOI18N
                 m_entrySet.add(src + target); // HP
             }
@@ -308,7 +308,7 @@ public class SearchThread extends Thread
                 // search strings, report the hit
                 if (   searchString(srcText)
                     || searchString(locText))
-                    foundString(i, null, srcText, locText);
+                    foundString(-1, tm.file, srcText, locText);
 
                 // stop searching if the max. nr of hits has been reached
                 if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS)

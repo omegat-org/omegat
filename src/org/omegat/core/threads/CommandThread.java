@@ -402,9 +402,14 @@ public class CommandThread extends Thread
         
         // Write TMX header
         out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");              // NOI18N
-        //out.println("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">");                     // NOI18N
-        out.println("<!DOCTYPE tmx SYSTEM \"tmx14.dtd\">");                     // NOI18N
-        out.println("<tmx version=\"1.4\">");                                   // NOI18N
+        if (levelTwo)
+            out.println("<!DOCTYPE tmx SYSTEM \"tmx14.dtd\">");                 // NOI18N
+        else
+            out.println("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">");                 // NOI18N
+        if (levelTwo)
+            out.println("<tmx version=\"1.4\">");                               // NOI18N
+        else
+            out.println("<tmx version=\"1.1\">");                               // NOI18N
         out.println("  <header");                                               // NOI18N
         out.println("    creationtool=\"OmegaT\"");                             // NOI18N
         out.println("    creationtoolversion=\"" + TMXReader.CTV_OMEGAT_CURRENT + "\""); // NOI18N
@@ -416,6 +421,9 @@ public class CommandThread extends Thread
         out.println("  >");                                                     // NOI18N
         out.println("  </header>");                                             // NOI18N
         out.println("  <body>");                                                // NOI18N
+
+        // Determine language attribute to use
+        String langAttr = levelTwo ? "xml:lang" : "lang";
 
         // Write TUs
         String source = null;
@@ -438,14 +446,14 @@ public class CommandThread extends Thread
                source = makeLevelTwo(source);
                target = makeLevelTwo(target);
             }
-            out.println("    <tu>");                                            // NOI18N
-            out.println("      <tuv xml:lang=\"" + sourceLocale + "\">");           // NOI18N
-            out.println("        <seg>" + source + "</seg>");                   // NOI18N
-            out.println("      </tuv>");                                        // NOI18N
-            out.println("      <tuv xml:lang=\"" + targetLocale + "\">");           // NOI18N
-            out.println("        <seg>" + target + "</seg>");                   // NOI18N
-            out.println("      </tuv>");                                        // NOI18N
-            out.println("    </tu>");                                           // NOI18N
+            out.println("    <tu>");                                              // NOI18N
+            out.println("      <tuv " + langAttr + "=\"" + sourceLocale + "\">"); // NOI18N
+            out.println("        <seg>" + source + "</seg>");                     // NOI18N
+            out.println("      </tuv>");                                          // NOI18N
+            out.println("      <tuv " + langAttr + "=\"" + targetLocale + "\">"); // NOI18N
+            out.println("        <seg>" + target + "</seg>");                     // NOI18N
+            out.println("      </tuv>");                                          // NOI18N
+            out.println("    </tu>");                                             // NOI18N
         }
         
         // Write orphan strings
@@ -468,14 +476,14 @@ public class CommandThread extends Thread
                     continue;
                 source = StaticUtils.makeValidXML(source);
                 target = StaticUtils.makeValidXML(target);
-                out.println("    <tu>");                                            // NOI18N
-                out.println("      <tuv xml:lang=\"" + sourceLocale + "\">");           // NOI18N
-                out.println("        <seg>" + source + "</seg>");                   // NOI18N
-                out.println("      </tuv>");                                        // NOI18N
-                out.println("      <tuv xml:lang=\"" + targetLocale + "\">");           // NOI18N
-                out.println("        <seg>" + target + "</seg>");                   // NOI18N
-                out.println("      </tuv>");                                        // NOI18N
-                out.println("    </tu>");                                           // NOI18N
+                out.println("    <tu>");                                              // NOI18N
+                out.println("      <tuv " + langAttr + "=\"" + sourceLocale + "\">"); // NOI18N
+                out.println("        <seg>" + source + "</seg>");                     // NOI18N
+                out.println("      </tuv>");                                          // NOI18N
+                out.println("      <tuv " + langAttr + "=\"" + targetLocale + "\">"); // NOI18N
+                out.println("        <seg>" + target + "</seg>");                     // NOI18N
+                out.println("      </tuv>");                                          // NOI18N
+                out.println("    </tu>");                                             // NOI18N
             }
         }
         

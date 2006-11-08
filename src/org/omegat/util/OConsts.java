@@ -55,7 +55,7 @@ public class OConsts
     
     // help
     public static final String HELP_HOME            = "index.html";            // NOI18N
-    public static final String HELP_INSTANT_START   = "instantStartGuide.html";// NOI18N
+    public static final String HELP_INSTANT_START   = "instantStartGuideNoTOC.html";// NOI18N
     public static final String HELP_DIR             = "docs";                   // NOI18N
     
     // status file consts

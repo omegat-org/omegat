@@ -334,7 +334,7 @@ public class SearchWindow extends JFrame
         // search dir options
         String searchFiles = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_FILES);
         if ((searchFiles == null) || (searchFiles.length() == 0))
-            searchFiles = "true";
+            searchFiles = "false";
         m_dirCB.setSelected(Boolean.valueOf(searchFiles).booleanValue());
         String searchDir = Preferences.getPreference(Preferences.SEARCHWINDOW_DIR);
         if (!searchDir.equals(""))

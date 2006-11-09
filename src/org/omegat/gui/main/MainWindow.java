@@ -534,23 +534,13 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         new AboutDialog(this).setVisible(true);        
     }
     
-    /** Shows About dialog */
+    /** Quits OmegaT */
     private void doQuit()
     {
-        saveScreenLayout();
-        Preferences.save();
-        
-        if (m_projectLoaded)
-        {
-            commitEntry(false); // part of fix for bug 1409309
-        }
-        
         boolean projectModified = false;
         if (m_projectLoaded)
-        {
             projectModified = CommandThread.core.isProjectModified();
-            doSave();
-        }
+
         // RFE 1302358
         // Add Yes/No Warning before OmegaT quits
         if (projectModified ||
@@ -561,16 +551,28 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                     OStrings.getString("CONFIRM_DIALOG_TITLE"),
                     JOptionPane.YES_NO_OPTION) )
             {
-                if(m_projectLoaded)
-                    activateEntry();
+//                if(m_projectLoaded)
+//                    activateEntry();
                 return;
             }
         }
-        
+
+        saveScreenLayout();
+        Preferences.save();
+/*
+        if (m_projectLoaded)
+        {
+            commitEntry(false); // part of fix for bug 1409309
+        }
+*/
+
+        if (m_projectLoaded)
+            doSave();
+
         // shut down
         if( CommandThread.core!=null )
             CommandThread.core.interrupt();
-        
+
         // waiting for CommandThread to finish for 1 minute
         for( int i=0; i<600 && CommandThread.core!=null; i++ )
         {
@@ -582,7 +584,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             {
             }
         }
-        
+
         System.exit(0);
     }
     
@@ -812,7 +814,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         
         if (m_projectLoaded)
         {
-            commitEntry(false); // part of fix for bug 1409309
+//            commitEntry(false); // part of fix for bug 1409309
             doSave();
         }
         m_projWin.reset();
@@ -1408,19 +1410,18 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      * Since 1.6: Translation equal to source may be validated as OK translation
      *            if appropriate option is set in Workflow options dialog.
      *
-     * @param forceCommit If false, the entry will not be committed if the entry
-     *                    is the first and its translation equals the source text
+     * @param forceCommit If false, the translation will not be saved
      */
     private synchronized void commitEntry(boolean forceCommit) {
         if (!m_projectLoaded)
             return;
-        
+
         if (!entryActivated)
             return;
         entryActivated = false;
 
         AbstractDocument xlDoc = (AbstractDocument)editor.getDocument();
-        
+
         int start = m_segmentStartOffset + m_sourceDisplayLength +
                 OStrings.TF_CUR_SEGMENT_START.length();
         int end = editor.getTextLength() - m_segmentEndInset -
@@ -1429,8 +1430,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         String new_translation;
         if (start == end)
         {
-            new_translation =  new String();
-            display_string = m_curEntry.getSrcText();
+            new_translation = new String();
+            display_string  = m_curEntry.getSrcText();
         }
         else
         {
@@ -1448,7 +1449,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             }
             display_string = new_translation;
         }
-        
+
         int totalLen = m_sourceDisplayLength + OStrings.TF_CUR_SEGMENT_START.length() +
                 new_translation.length() + OStrings.TF_CUR_SEGMENT_END.length();
         try
@@ -1464,74 +1465,71 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             ble.printStackTrace();
             ble.printStackTrace(StaticUtils.getLogStream());
         }
-        
-        String old_translation = m_curEntry.getTranslation();
-        // update memory
-        if (new_translation.equals(m_curEntry.getSrcText()))
-        {
-            if  (   Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)
-                 && (forceCommit || (m_curEntryNum != 0))) // fix for bug 1409309
-                m_curEntry.setTranslation(new_translation);
-            else
-                m_curEntry.setTranslation(new String()); 
-        }
-        else
-            m_curEntry.setTranslation(new_translation);
-        
+
         int localCur = m_curEntryNum - m_xlFirstEntry;
         DocumentSegment docSeg = m_docSegList[localCur];
         docSeg.length = display_string.length() + "\n\n".length();              // NOI18N
-        
-        // update the length parameters of all changed segments
-        // update strings in display
-        if (!m_curEntry.getTranslation().equals(old_translation))
-        {
-            // find all identical strings and redraw them
-            
-            // build offsets of all strings
-            int localEntries = 1+m_xlLastEntry-m_xlFirstEntry;
-            int[] offsets = new int[localEntries];
-            int currentOffset = 0;
-            for (int i=0; i<localEntries; i++)
-            {
-                offsets[i]=currentOffset;
-                docSeg = m_docSegList[i];
-                currentOffset += docSeg.length;
-            }
 
-            // starting from the last (guaranteed by sorting ParentList)
-            Iterator it = m_curEntry.getStrEntry().getParentList().iterator();
-            while (it.hasNext())
+        if (forceCommit) { // fix for 
+            String old_translation = m_curEntry.getTranslation();
+            // update memory
+            if (   new_translation.equals(m_curEntry.getSrcText())
+                && !Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC))
+                m_curEntry.setTranslation(new String());
+            else
+                m_curEntry.setTranslation(new_translation);
+
+            // update the length parameters of all changed segments
+            // update strings in display
+            if (!m_curEntry.getTranslation().equals(old_translation))
             {
-                SourceTextEntry ste = (SourceTextEntry) it.next();
-                int entry = ste.entryNum();
-                if (entry>m_xlLastEntry)
-                    continue;
-                else if (entry<m_xlFirstEntry)
-                    break;
-                else if (entry==m_curEntryNum)
-                    continue;
-                
-                int localEntry = entry-m_xlFirstEntry;
-                int offset = offsets[localEntry];
-                
-                // replace old text w/ new
-                docSeg = m_docSegList[localEntry];
-                String ds_nn = display_string + "\n\n";                         // NOI18N
-                try
+                // find all identical strings and redraw them
+
+                // build offsets of all strings
+                int localEntries = 1+m_xlLastEntry-m_xlFirstEntry;
+                int[] offsets = new int[localEntries];
+                int currentOffset = 0;
+                for (int i=0; i<localEntries; i++)
                 {
-                    // see http://sourceforge.net/support/tracker.php?aid=1436607
-                    // this method calls write locks / unlocks
-                    xlDoc.replace(offset, docSeg.length, ds_nn, Styles.PLAIN);
+                    offsets[i]=currentOffset;
+                    docSeg = m_docSegList[i];
+                    currentOffset += docSeg.length;
                 }
-                catch(BadLocationException ble)
+
+                // starting from the last (guaranteed by sorting ParentList)
+                Iterator it = m_curEntry.getStrEntry().getParentList().iterator();
+                while (it.hasNext())
                 {
-                    StaticUtils.log(IMPOSSIBLE);
-                    StaticUtils.log(ble.getMessage());
-                    ble.printStackTrace();
-                    ble.printStackTrace(StaticUtils.getLogStream());
+                    SourceTextEntry ste = (SourceTextEntry) it.next();
+                    int entry = ste.entryNum();
+                    if (entry>m_xlLastEntry)
+                        continue;
+                    else if (entry<m_xlFirstEntry)
+                        break;
+                    else if (entry==m_curEntryNum)
+                        continue;
+
+                    int localEntry = entry-m_xlFirstEntry;
+                    int offset = offsets[localEntry];
+
+                    // replace old text w/ new
+                    docSeg = m_docSegList[localEntry];
+                    String ds_nn = display_string + "\n\n";                         // NOI18N
+                    try
+                    {
+                        // see http://sourceforge.net/support/tracker.php?aid=1436607
+                        // this method calls write locks / unlocks
+                        xlDoc.replace(offset, docSeg.length, ds_nn, Styles.PLAIN);
+                    }
+                    catch(BadLocationException ble)
+                    {
+                        StaticUtils.log(IMPOSSIBLE);
+                        StaticUtils.log(ble.getMessage());
+                        ble.printStackTrace();
+                        ble.printStackTrace(StaticUtils.getLogStream());
+                    }
+                    docSeg.length = ds_nn.length();
                 }
-                docSeg.length = ds_nn.length();
             }
         }
         editor.cancelUndo();
@@ -2640,6 +2638,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     
     private void projectSaveMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectSaveMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectSaveMenuItemActionPerformed
+        // commit the current entry first
+        commitEntry();
+        activateEntry();
         doSave();
     }//GEN-LAST:event_projectSaveMenuItemActionPerformed
     

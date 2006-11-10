@@ -11,7 +11,7 @@ PLANNING:
 ----------------------------------------------------------------------
 XLIFF filter didn't go into 1.6.0 because it's not fully tested 
 at the moment, most probably it will be included into one of bugfix 
-releases in 1.6.0 line.
+releases in 1.6.x line.
 
 Next "fat" release will be dedicated to terminology management: 
 - more glossary formats (at least TBX and CVS), 
@@ -24,7 +24,7 @@ match similarity and match ordering.
 
 ----------------------------------------------------------------------
 1.6.0_02
-Contains a number of quick bug fixes.
+Contains a number of quick bug fixes and a documentation enhancement.
 
  Enhancements:
 

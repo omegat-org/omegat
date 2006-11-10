@@ -3,8 +3,8 @@
 ----------------------------------------------------------------------
 
 1.6.0 vs. 1.4.5.04
-   50 Enchancements
-  101 Bugfixes
+   51 Enchancements
+  111 Bugfixes
 
 ----------------------------------------------------------------------
 PLANNING:
@@ -21,6 +21,48 @@ Next "fat" release will be dedicated to terminology management:
 2.0 release will deliver important updates in fuzzy matching, 
 solving multiple issues like CPU usage, memory footprint, 
 match similarity and match ordering.
+
+----------------------------------------------------------------------
+1.6.0_02
+Contains a number of quick bug fixes.
+
+ Enhancements:
+
+  - [Doc] readme.txt: some clarification on Java
+  http://sourceforge.net/support/tracker.php?aid=1592468
+
+ Bug fixes:
+
+  -Incorreft referral in index.html in root dir
+  http://sourceforge.net/support/tracker.php?aid=1591028
+
+  - Links not working in instant start guide
+  http://sourceforge.net/support/tracker.php?aid=1591025
+
+  - Search in files shouldn't be checked by default
+  http://sourceforge.net/support/tracker.php?aid=1590209
+
+  - Incorrect display in search function
+  http://sourceforge.net/support/tracker.php?aid=1590208
+
+  - Force kill causes project_save.tmx destruction
+  http://sourceforge.net/support/tracker.php?aid=1583560
+
+  - First segment validation persistence issue
+  http://sourceforge.net/support/tracker.php?aid=1587606
+
+  - Project TM not read by older versions
+  http://sourceforge.net/support/tracker.php?aid=1592377
+
+  - TMX 1.4 files output by OmegaT refer to TMX 1.1 DTD
+  http://sourceforge.net/support/tracker.php?aid=1592375
+
+  - Suprefluous 'while parsing' in bundle.properties
+  http://sourceforge.net/support/tracker.php?aid=1591888
+
+----------------------------------------------------------------------
+1.6.0_01
+Contains a number of quick bug fixes.
 
 ----------------------------------------------------------------------
 1.6.0

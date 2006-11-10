@@ -80,9 +80,11 @@ it includes the directory where the 'java' application resides.
 
 Linux users should pay attention to the fact that OmegaT won't work with free/
 open-source Java implementations that can be found in many Linux distros (for
-example, Ubuntu). Download and install Sun's JRE via the link above, or
-download and install OmegaT bundled with JRE (the .tar.gz bundle marked
-"Linux").
+example, Ubuntu), as these are either outdated, or incomplete. Download and
+install Sun's Java Runtime Environment (JRE) via the link above, or download
+and install OmegaT bundled with JRE (the .tar.gz bundle marked "Linux"). When
+running Linux on PowerPC systems, users will need to download IBM's JRE, as
+Sun does not provide a JRE for PPC systems.
 
 ==============================================================================
  4. Contributions to OmegaT

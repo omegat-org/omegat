@@ -66,7 +66,7 @@ the [Help] menu after starting OmegaT.
 
 OmegaT requires the Java Runtime Environment version 1.4 or higher be
 installed on your system. It is available from:
-      http://java.com
+    http://java.com
 
 Windows and Linux users may need to install Java if it is not already done.
 The OmegaT project also offers versions with Java included. MacOSX users have
@@ -82,9 +82,11 @@ Linux users should pay attention to the fact that OmegaT won't work with free/
 open-source Java implementations that can be found in many Linux distros (for
 example, Ubuntu), as these are either outdated, or incomplete. Download and
 install Sun's Java Runtime Environment (JRE) via the link above, or download
-and install OmegaT bundled with JRE (the .tar.gz bundle marked "Linux"). When
-running Linux on PowerPC systems, users will need to download IBM's JRE, as
-Sun does not provide a JRE for PPC systems.
+and install OmegaT bundled with JRE (the .tar.gz bundle marked "Linux").
+
+When running Linux on PowerPC systems, users will need to download IBM's JRE,
+as Sun does not provide a JRE for PPC systems. Download one from:
+    http://www-128.ibm.com/developerworks/java/jdk/linux/download.html
 
 ==============================================================================
  4. Contributions to OmegaT

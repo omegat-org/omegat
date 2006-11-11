@@ -1550,6 +1550,18 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         AbstractDocument xlDoc = (AbstractDocument)editor.getDocument();
         
         // recover data about current entry
+        // <HP-experiment>
+        if (m_curEntryNum < m_xlFirstEntry) {
+            StaticUtils.log("ERROR: Current entry # lower than first entry #");
+            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            // FIX: m_curEntryNum = m_xlFirstEntry;
+        }
+        if (m_curEntryNum > m_xlLastEntry) {
+            StaticUtils.log("ERROR: Current entry # greater than last entry #");
+            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            // FIX: m_curEntryNum = m_xlLastEntry;
+        }
+        // </HP-experiment>
         m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
         String srcText = m_curEntry.getSrcText();
         
@@ -1558,27 +1570,55 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         // sum up total character offset to current segment start
         m_segmentStartOffset = 0;
         int localCur = m_curEntryNum - m_xlFirstEntry;
-        for (int i=0; i<localCur; i++)
-        {
-            DocumentSegment docSeg = m_docSegList[i];
-            m_segmentStartOffset += docSeg.length; // length includes \n
+        // <HP-experiment>
+        DocumentSegment docSeg = null; // <HP-experiment> remove once done experimenting
+        try {
+            for (int i=0; i<localCur; i++)
+            {
+                //DocumentSegment // <HP-experiment> re-join with next line once done experimenting
+                docSeg = m_docSegList[i];
+                m_segmentStartOffset += docSeg.length; // length includes \n
+            }
+
+            //DocumentSegment // <HP-experiment> re-join with next line once done experimenting
+            docSeg = m_docSegList[localCur];
         }
+        catch (Exception exception) {
+            StaticUtils.log("ERROR: exception while calculating character offset:");
+            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            StaticUtils.log(exception.getMessage());
+            exception.printStackTrace(StaticUtils.getLogStream());
+            return; // deliberately breaking, to simulate previous behaviour
+            // FIX: for (int i=0; i<localCur && i < m_docSegList.length; i++)
+        }
+        // </HP-experiment>
         
-        DocumentSegment docSeg = m_docSegList[localCur];
         // -2 to move inside newlines at end of segment
         m_segmentEndInset = editor.getTextLength() - (m_segmentStartOffset + docSeg.length-2);
         
         // get label tags
         String startStr = OStrings.TF_CUR_SEGMENT_START;
         String endStr = OStrings.TF_CUR_SEGMENT_END;
-        if (m_segmentTagHasNumber)
-        {
-            // put entry number in first tag
-            String num = String.valueOf(m_curEntryNum + 1);
-            int zero = startStr.lastIndexOf('0');
-            startStr = startStr.substring(0, zero-num.length()+1) + num + 
-                    startStr.substring(zero+1, startStr.length()-1);
+        // <HP-experiment>
+        try {
+            if (m_segmentTagHasNumber)
+            {
+                // put entry number in first tag
+                String num = String.valueOf(m_curEntryNum + 1);
+                int zero = startStr.lastIndexOf('0');
+                startStr = startStr.substring(0, zero-num.length()+1) + num + 
+                        startStr.substring(zero+1, startStr.length()-1);
+            }
         }
+        catch (Exception exception) {
+            StaticUtils.log("ERROR: exception while putting segment # in start tag:");
+            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            StaticUtils.log(exception.getMessage());
+            exception.printStackTrace(StaticUtils.getLogStream());
+            return; // deliberately breaking, to simulate previous behaviour
+            // FIX: since these are localised, don't assume number appears, keep try/catch block
+        }
+        // </HP-experiment>
         
         String translation = m_curEntry.getTranslation();
         
@@ -1595,6 +1635,16 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             ble.printStackTrace();
             ble.printStackTrace(StaticUtils.getLogStream());
         }
+        // <HP-experiment>
+        catch (Exception exception) {
+            StaticUtils.log("ERROR: exception while inserting end tag:");
+            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            StaticUtils.log(exception.getMessage());
+            exception.printStackTrace(StaticUtils.getLogStream());
+            return; // deliberately breaking, to simulate previous behaviour
+            // FIX: unknown
+        }
+        // </HP-experiment>
         
         if( translation==null || translation.length()==0 )
         {
@@ -1618,6 +1668,16 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                     ble.printStackTrace();
                     ble.printStackTrace(StaticUtils.getLogStream());
                 }
+                // <HP-experiment>
+                catch (Exception exception) {
+                    StaticUtils.log("ERROR: exception while removing source text:");
+                    StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                    StaticUtils.log(exception.getMessage());
+                    exception.printStackTrace(StaticUtils.getLogStream());
+                    return; // deliberately breaking, to simulate previous behaviour
+                    // FIX: unknown
+                }
+                // </HP-experiment>
                 translation = new String();
             }
             
@@ -1628,7 +1688,21 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             {
                 String percentage_s = Preferences.getPreferenceDefault(
                         Preferences.BEST_MATCH_MINIMAL_SIMILARITY, Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT);
-                int percentage = Integer.parseInt(percentage_s);
+                // <HP-experiment>
+                int percentage = 0;
+                try {
+                    //int
+                    percentage = Integer.parseInt(percentage_s);
+                }
+                catch (Exception exception) {
+                    StaticUtils.log("ERROR: exception while parsing percentage:");
+                    StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                    StaticUtils.log(exception.getMessage());
+                    exception.printStackTrace(StaticUtils.getLogStream());
+                    return; // deliberately breaking, to simulate previous behaviour
+                    // FIX: unknown, but expect number parsing errors
+                }
+                // </HP-experiment>
                 List near = m_curEntry.getStrEntry().getNearListTranslated();
                 if( near.size()>0 )
                 {
@@ -1651,6 +1725,16 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                             ble.printStackTrace();
                             ble.printStackTrace(StaticUtils.getLogStream());
                         }
+                        // <HP-experiment>
+                        catch (Exception exception) {
+                            StaticUtils.log("ERROR: exception while inserting translation:");
+                            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                            StaticUtils.log(exception.getMessage());
+                            exception.printStackTrace(StaticUtils.getLogStream());
+                            return; // deliberately breaking, to simulate previous behaviour
+                            // FIX: unknown
+                        }
+                        // </HP-experiment>
                     }
                 }
             }
@@ -1669,59 +1753,129 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             ble.printStackTrace();
             ble.printStackTrace(StaticUtils.getLogStream());
         }
-        
-        if (m_curEntry.getSrcFile().name.compareTo(m_activeFile) != 0)
-        {
-            m_activeFile = m_curEntry.getSrcFile().name;
-            updateTitle();
+        // <HP-experiment>
+        catch (Exception exception) {
+            StaticUtils.log("ERROR: exception while inserting translation:");
+            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            StaticUtils.log(exception.getMessage());
+            exception.printStackTrace(StaticUtils.getLogStream());
+            return; // deliberately breaking, to simulate previous behaviour
+            // FIX: unknown
         }
+        // </HP-experiment>
         
-        updateFuzzyInfo();
-        updateGlossaryInfo();
+        // <HP-experiment>
+        try {
+            if (m_curEntry.getSrcFile().name.compareTo(m_activeFile) != 0)
+            {
+                m_activeFile = m_curEntry.getSrcFile().name;
+                updateTitle();
+            }
+        }
+        catch (Exception exception) {
+            StaticUtils.log("ERROR: exception while updating title:");
+            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            StaticUtils.log(exception.getMessage());
+            exception.printStackTrace(StaticUtils.getLogStream());
+            return; // deliberately breaking, to simulate previous behaviour
+            // FIX: unknown
+        }
+        // </HP-experiment>
+        
+        // <HP-experiment>
+        try {
+            updateFuzzyInfo();
+            updateGlossaryInfo();
+        }
+        catch (Exception exception) {
+            StaticUtils.log("ERROR: exception while updating match and glossary info:");
+            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            StaticUtils.log(exception.getMessage());
+            exception.printStackTrace(StaticUtils.getLogStream());
+            return; // deliberately breaking, to simulate previous behaviour
+            // FIX: unknown
+        }
+        // </HP-experiment>
         
         StringEntry curEntry = m_curEntry.getStrEntry();
         int nearLength = curEntry.getNearListTranslated().size();
         
-        if (nearLength > 0 && m_glossaryLength > 0)
-        {
-            // display text indicating both categories exist
-            Object obj[] = {
-                new Integer(nearLength),
-                        new Integer(m_glossaryLength) };
-                        setMessageText(MessageFormat.format(
-                                OStrings.TF_NUM_NEAR_AND_GLOSSARY, obj));
+        // <HP-experiment>
+        try {
+            if (nearLength > 0 && m_glossaryLength > 0)
+            {
+                // display text indicating both categories exist
+                Object obj[] = {
+                    new Integer(nearLength),
+                            new Integer(m_glossaryLength) };
+                            setMessageText(MessageFormat.format(
+                                    OStrings.TF_NUM_NEAR_AND_GLOSSARY, obj));
+            }
+            else if (nearLength > 0)
+            {
+                Object obj[] = { new Integer(nearLength) };
+                setMessageText(MessageFormat.format(
+                        OStrings.TF_NUM_NEAR, obj));
+            }
+            else if (m_glossaryLength > 0)
+            {
+                Object obj[] = { new Integer(m_glossaryLength) };
+                setMessageText(MessageFormat.format(
+                        OStrings.TF_NUM_GLOSSARY, obj));
+            }
+            else
+                setMessageText(new String());                                       // NOI18N
         }
-        else if (nearLength > 0)
-        {
-            Object obj[] = { new Integer(nearLength) };
-            setMessageText(MessageFormat.format(
-                    OStrings.TF_NUM_NEAR, obj));
+        catch (Exception exception) {
+            StaticUtils.log("ERROR: exception while setting message text:");
+            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            StaticUtils.log(exception.getMessage());
+            exception.printStackTrace(StaticUtils.getLogStream());
+            return; // deliberately breaking, to simulate previous behaviour
+            // FIX: unknown
         }
-        else if (m_glossaryLength > 0)
-        {
-            Object obj[] = { new Integer(m_glossaryLength) };
-            setMessageText(MessageFormat.format(
-                    OStrings.TF_NUM_GLOSSARY, obj));
-        }
-        else
-            setMessageText(new String());                                       // NOI18N
+        // </HP-experiment>
 
         int offsetPrev = 0;
         int localNum = m_curEntryNum-m_xlFirstEntry;
-        for (int i=Math.max(0, localNum-3); i<localNum; i++)
-        {
-            docSeg = m_docSegList[i];
-            offsetPrev += docSeg.length;
+        // <HP-experiment>
+        try {
+            for (int i=Math.max(0, localNum-3); i<localNum; i++)
+            {
+                docSeg = m_docSegList[i];
+                offsetPrev += docSeg.length;
+            }
         }
+        catch (Exception exception) {
+            StaticUtils.log("ERROR: exception while calculating previous offset:");
+            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            StaticUtils.log(exception.getMessage());
+            exception.printStackTrace(StaticUtils.getLogStream());
+            return; // deliberately breaking, to simulate previous behaviour
+            // FIX: unknown
+        }
+        // </HP-experiment>
         final int lookPrev = m_segmentStartOffset - offsetPrev;
         
         int offsetNext = 0;
         int localLast = m_xlLastEntry-m_xlFirstEntry;
-        for (int i=localNum+1; i<(localNum+4) && i<=localLast; i++)
-        {
-            docSeg = m_docSegList[i];
-            offsetNext += docSeg.length;
+        // <HP-experiment>
+        try {
+            for (int i=localNum+1; i<(localNum+4) && i<=localLast; i++)
+            {
+                docSeg = m_docSegList[i];
+                offsetNext += docSeg.length;
+            }
         }
+        catch (Exception exception) {
+            StaticUtils.log("ERROR: exception while calculating next offset:");
+            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            StaticUtils.log(exception.getMessage());
+            exception.printStackTrace(StaticUtils.getLogStream());
+            return; // deliberately breaking, to simulate previous behaviour
+            // FIX: unknown
+        }
+        // </HP-experiment>
         final int lookNext = m_segmentStartOffset + srcText.length() + 
                 OStrings.TF_CUR_SEGMENT_START.length() + 1 + translation.length() + 
                 OStrings.TF_CUR_SEGMENT_END.length() + offsetNext;

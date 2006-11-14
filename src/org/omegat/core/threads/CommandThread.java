@@ -668,8 +668,10 @@ public class CommandThread extends Thread
         // save project first
         save();
 
-        // build 2 TMX files, one with OmegaT formatting tags,
-        // one without, making it TMX level 1 compliant        
+        // build 3 TMX files:
+        // - OmegaT-specific, with inline OmegaT formatting tags
+        // - TMX Level 1, without formatting tags
+        // - TMX Level 2, with OmegaT formatting tags wrapped in TMX inline tags
         try
         {
             // build TMX with OmegaT tags
@@ -800,7 +802,7 @@ public class CommandThread extends Thread
                     backup.renameTo(orig);
             }
         }
-        
+
         // if successful, delete backup file
         if (!m_modifiedFlag && !corruptionDanger)
         {

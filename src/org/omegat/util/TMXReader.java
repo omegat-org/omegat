@@ -732,7 +732,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         if (isUpgradeSentSeg())
             StaticUtils.log(OStrings.getString("TMXR_WARNING_UPGRADE_SENTSEG"));
 
-        // check if level 2 codes should be included (only for OmegaT 1.6 RC13 and higher)
+        // check if level 2 codes should be included (only for OmegaT 1.6.0-final and higher)
         checkLevel2();
     }
 
@@ -859,6 +859,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         TUV targetC  = null; // candidate for target TUV according to target language set by OmT
         TUV sourceT  = null; // source TUV according to TMX source language
         TUV sourceTC = null; // candidate for source TUV according to TMX source language
+        TUV targetT  = null; // target TUV according to TMX source language
         for (int i = 0; i < tuvs.size(); i++) 
         {
             // get the next TUV
@@ -885,8 +886,8 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             {
                 // match against entire TMX source language
                 if (   (sourceT == null)
-                         && (   tuv.language.equalsIgnoreCase(tmxSourceLanguage)
-                             || tmxSourceLanguage.equalsIgnoreCase("*all*")))   // NOI18N
+                    && (   tuv.language.equalsIgnoreCase(tmxSourceLanguage)
+                        || tmxSourceLanguage.equalsIgnoreCase("*all*")))   // NOI18N
                     // the current TUV is the source according to the TMX source language
                     sourceT = tuv;
                 // match against TMX source language code only
@@ -894,6 +895,10 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                          && tuv.language.regionMatches(true, 0, tmxSourceLanguage, 0, 2))
                     // the current TUV is a candidate for the source according to the TMX source language
                     sourceTC = tuv;
+ 
+                if (   (targetT == null)
+                    && !tuv.language.equalsIgnoreCase(tmxSourceLanguage))
+                    targetT = tuv;
             }
 
             // stop looking for source and target if both have been located
@@ -919,9 +924,11 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         // determine what target TUV to use
         // if none was found, create a temporary, empty one, for ease of coding
         if (target == null)
-            target = targetC;
+            target = targetC; // try target candidate
         if (target == null)
-            target = new TUV();
+            target = targetT; // try target according to TMX
+        if (target == null)
+            target = new TUV(); // empty target
 
         // store the source & target segment
         storeSegment(source.text.toString(), target.text.toString());

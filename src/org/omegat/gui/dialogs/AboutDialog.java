@@ -24,15 +24,15 @@
 
 package org.omegat.gui.dialogs;
 
-import java.awt.event.ActionEvent;     // HP
-import java.awt.event.KeyEvent;        // HP
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.Frame;
-import javax.swing.AbstractAction;     // HP
-import javax.swing.Action;             // HP
-import javax.swing.JComponent;         // HP
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;          // HP
+import javax.swing.KeyStroke;
 
 import org.omegat.util.OStrings;
 
@@ -40,6 +40,7 @@ import org.omegat.util.OStrings;
  * About dialog, showing OmegaT version and information on contributors.
  *
  * @author Maxym Mykhalchuk
+ * @author Henry Pijffers (henry.pijffers@saxnot.com)
  */
 public class AboutDialog extends JDialog
 {

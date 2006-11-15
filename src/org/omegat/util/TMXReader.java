@@ -139,10 +139,12 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     public static final String CTV_OMEGAT_1_6_RC3_RC11 = "1.6";                 // NOI18N
     /** "1.6 RC12" for OmegaT 1.6 RC12 and later RCs (Creation Tool Version attribute). */
     public static final String CTV_OMEGAT_1_6_RC12 = "1.6 RC12";                      // NOI18N
-    /** "1.6.0 for OmegaT 1.6.0-final */
+    /** 1.6.0 for OmegaT 1.6.0-final */
     public static final String CTV_OMEGAT_1_6_0_FINAL = "1.6.0";                      // NOI18N
+    /** 1.6.1 for OmegaT 1.6.1 */
+    public static final String CTV_OMEGAT_1_6_1 = "1.6.1"; // NOI18N
     /** Current version */
-    public static final String CTV_OMEGAT_CURRENT = CTV_OMEGAT_1_6_0_FINAL;           // NOI18N
+    public static final String CTV_OMEGAT_CURRENT = CTV_OMEGAT_1_6_1;           // NOI18N
     /** Returns Creation Tool attribute of TMX file */
     public String getCreationToolVersion() 
     {

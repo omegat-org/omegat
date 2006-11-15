@@ -559,12 +559,12 @@ public class FilterMaster
  // DB Begin
             if (CURRENT_VERSION.compareTo(Preferences.getPreference(Preferences.FILTERS_VERSION))>0)
             {
-                String filtersVersion = Preferences.getPreference(Preferences.FILTERS_VERSION);
-//            if (   !filtersVersion.equals(OT160FINAL_VERSION)
-//                && (filtersVersion.compareTo(OT160RC12a_VERSION) < 0))
-//            {
+//                String filtersVersion = Preferences.getPreference(Preferences.FILTERS_VERSION);
+//                if (   !filtersVersion.equals(OT160FINAL_VERSION)
+//                    && (filtersVersion.compareTo(OT160RC12a_VERSION) < 0))
+//                {
 // DB End
-               // yep, the config file with filters settings is of the older version
+                // yep, the config file with filters settings is of the older version
 
                 // initing defaults
                 Filters defaults = setupBuiltinFilters();

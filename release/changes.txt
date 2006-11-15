@@ -1,26 +1,24 @@
 ----------------------------------------------------------------------
- OmegaT 1.6.0 Changes
+ OmegaT 1.6.1 Changes
 ----------------------------------------------------------------------
 
-1.6.0 vs. 1.4.5.04
-   51 Enchancements
-  112 Bugfixes
+1.6.1 vs. 1.4.5.04
+   52 Enchancements
+  113 Bugfixes
 
 ----------------------------------------------------------------------
-PLANNING:
-----------------------------------------------------------------------
-XLIFF filter didn't go into 1.6.0 because it's not fully tested 
-at the moment, most probably it will be included into one of bugfix 
-releases in 1.6.x line.
+1.6.1
+Contains a new HTML Help Compiler (HCC) filter
 
-Next "fat" release will be dedicated to terminology management: 
-- more glossary formats (at least TBX and CVS), 
-- editing glossary from within OmegaT,
-- support for online dictionaries (at least WiktionaryZ)
+ Enhancements:
 
-2.0 release will deliver important updates in fuzzy matching, 
-solving multiple issues like CPU usage, memory footprint, 
-match similarity and match ordering.
+  - HTML Help Compiler filter
+  http://sourceforge.net/support/tracker.php?aid=1592946
+
+ Bug fixes:
+
+  - Arbitrary modification of project_save.tmx
+  http://sourceforge.net/support/tracker.php?aid=1594483
 
 ----------------------------------------------------------------------
 1.6.0_02

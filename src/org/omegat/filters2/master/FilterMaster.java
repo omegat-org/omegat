@@ -6,7 +6,9 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
  Portions Copyright (C) 2005-06 Henry Pijffers
  Portions Copyright (C) 2006 Martin Wunderlich
-               Home page: http://www.omegat.org/omegat/omegat.html
+ Portions Copyright (C) 2006 Didier Briel
+
+                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
  This program is free software; you can redistribute it and/or modify
@@ -51,6 +53,7 @@ import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.html2.HTMLFilter2;
+import org.omegat.filters2.hhc.HHCFilter2;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.filters2.text.TextFilter;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
@@ -82,9 +85,10 @@ public class FilterMaster
     /** File filters support of 1.6.0 RC12a: now upgrading the configuration. */
     public static String OT160RC12a_VERSION = "1.6 RC12a";                        // NOI18N
     public static String OT160FINAL_VERSION = "1.6.0";                        // NOI18N
+    public static String OT161_VERSION      = "1.6.1";                    // NOI18N
     /** Currently file filters support version. */
-    public static String CURRENT_VERSION = OT160FINAL_VERSION;
-    
+    public static String CURRENT_VERSION = OT161_VERSION;
+
     /** Wrapper around filters storage in an XML file */
     private Filters  filters;
     /** Returns Wrapper around filters storage in an XML file */
@@ -552,12 +556,15 @@ public class FilterMaster
             checkIfAllFilterPluginsAreAvailable();
             
             // checking the version
-            //if (CURRENT_VERSION.compareTo(Preferences.getPreference(Preferences.FILTERS_VERSION))>0)
-            String filtersVersion = Preferences.getPreference(Preferences.FILTERS_VERSION);
-            if (   !filtersVersion.equals(OT160FINAL_VERSION)
-                && (filtersVersion.compareTo(OT160RC12a_VERSION) < 0))
+ // DB Begin
+            if (CURRENT_VERSION.compareTo(Preferences.getPreference(Preferences.FILTERS_VERSION))>0)
             {
-                // yep, the config file with filters settings is of the older version
+                String filtersVersion = Preferences.getPreference(Preferences.FILTERS_VERSION);
+//            if (   !filtersVersion.equals(OT160FINAL_VERSION)
+//                && (filtersVersion.compareTo(OT160RC12a_VERSION) < 0))
+//            {
+// DB End
+               // yep, the config file with filters settings is of the older version
 
                 // initing defaults
                 Filters defaults = setupBuiltinFilters();
@@ -576,9 +583,10 @@ public class FilterMaster
     /** Upgrades current filters settings using current defaults. */
     private Filters upgradeFilters(Filters filters, Filters defaults)
     {
-        // upgrade if filters version is from before 1.6 RC12a/1.6.0-final
+        // upgrade if filters version is from before 1.6 RC12a/1.6.0/1.6.1
         String filtersVersion = Preferences.getPreference(Preferences.FILTERS_VERSION);
-        if (   !filtersVersion.equals(OT160FINAL_VERSION)
+        if (   !filtersVersion.equals(OT160FINAL_VERSION) // FIX: this is getting messier with each version...
+            && !filtersVersion.equals(OT161_VERSION)
             && (filtersVersion.compareTo(OT160RC12a_VERSION) < 0))
         {
             // removing old OO filter but moving all its instances to new OpenDoc one
@@ -606,7 +614,7 @@ public class FilterMaster
                 }
             }
         }
-        
+
         // now adding those filters from defaults which appeared in new version only
         HashSet existing = new HashSet();
         for (int i = 0; i < filters.getFilter().length; i++)
@@ -617,7 +625,7 @@ public class FilterMaster
             if (!existing.contains(deffilter.getClassName()))
                 filters.addFilter(deffilter);
         }
-        
+
         return filters;
     }
     
@@ -691,6 +699,7 @@ public class FilterMaster
         res.addFilter(new OneFilter(new ResourceBundleFilter(), false));
         res.addFilter(new OneFilter(new XHTMLFilter(), false));
         res.addFilter(new OneFilter(new HTMLFilter2(), false));
+        res.addFilter(new OneFilter(new HHCFilter2(), false));
         res.addFilter(new OneFilter(new INIFilter(), false));
         res.addFilter(new OneFilter(new DocBookFilter(), false));
         res.addFilter(new OneFilter(new OpenDocFilter(), false));

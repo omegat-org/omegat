@@ -42,8 +42,10 @@ import org.omegat.util.StaticUtils;
  * This class is called back by HTMLParser (http://sf.net/projects/htmlparser/).
  *
  * @author Maxym Mykhalchuk
+ * @author Didier Briel
+ * @author Henry Pijffers (henry.pijffers@saxnot.com)
  */
-class FilterVisitor extends NodeVisitor
+public class FilterVisitor extends NodeVisitor
 {
     private HTMLFilter2 filter;
     private BufferedWriter writer;
@@ -165,7 +167,7 @@ class FilterVisitor extends NodeVisitor
      * @param tag the tag object
      * @param key the name of the attribute
      */
-    private void maybeTranslateAttribute(Tag tag, String key)
+    protected void maybeTranslateAttribute(Tag tag, String key)
     {
         String attr = tag.getAttribute(key);
         if( attr!=null )
@@ -338,7 +340,7 @@ class FilterVisitor extends NodeVisitor
      * to OmegaT core,
      * and some extra tags to writer.
      */
-    private void endup()
+    protected void endup()
     {
         // detecting the first starting tag in 'befors'
         // that has its ending in the paragraph
@@ -662,7 +664,7 @@ class FilterVisitor extends NodeVisitor
      * otherwise it's collected to a special list that is inspected
      * when the translatable text is sent to OmegaT core.
      */
-    private void queuePrefix(Tag tag)
+    protected void queuePrefix(Tag tag)
     {
         if( text )
             queueTranslatable(tag);

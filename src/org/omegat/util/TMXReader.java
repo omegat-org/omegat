@@ -486,7 +486,8 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             parser.parse(is, this);
             
             // if no source could be found for 1 or more TUs, log this fact
-            if (sourceNotFound)
+            // don't do this if the TMX file is the project TM
+            if (!isProjectTMX && sourceNotFound)
                 StaticUtils.log(OStrings.getString("TMXR_WARNING_SOURCE_NOT_FOUND"));
             
             // log the fact that parsing is done

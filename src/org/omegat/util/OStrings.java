@@ -24,8 +24,12 @@
 
 package org.omegat.util;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
+import java.util.PropertyResourceBundle;
 
 /**
  * Localizable strings.
@@ -35,13 +39,44 @@ import java.util.ResourceBundle;
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
+ * @author Henry Pijffers (henry.pijffers@saxnot.com)
  */
 public class OStrings
 {
     
     /** Resource bundle that contains all the strings */
-    private static final ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/Bundle");
-    
+//    private static final ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/Bundle");
+    private static ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/Bundle");
+
+    /**
+      * Loads resources from the specified file.
+      * If the file cannot be loaded, resources are reverted to the default locale.
+      * Useful when testing localisations outside the jar file.
+      */
+    public static void loadBundle(String filename) {
+        boolean loaded = false;
+        try {
+            // Load the resource bundle
+            FileInputStream in = new FileInputStream(filename);
+            bundle = new PropertyResourceBundle(in);
+            loaded = true;
+            in.close();
+        }
+        catch (FileNotFoundException exception) {
+            System.err.println("Resource bundle file not found: " + filename); // NOI18N
+        }
+        catch (IOException exception) {
+            System.err.println("Error while reading resource bundle file: " + filename); // NOI18N
+        }
+
+        // Check if the resource bundle has been successfully
+        // loaded, and if not, revert to the default
+        if (!loaded) {
+            System.err.println("Reverting to resource bundle for the default locale"); // NOI18N
+            bundle = ResourceBundle.getBundle("org/omegat/Bundle");
+        }
+    }
+
     /** Returns a localized String for a key */
     public static String getString(String key)
     {

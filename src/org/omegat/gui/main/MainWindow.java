@@ -104,6 +104,7 @@ import org.omegat.util.gui.Styles;
  * @author Benjamin Siband
  * @author Maxym Mykhalchuk
  * @author Kim Bruning
+ * @author Henry Pijffers (henry.pijffers@saxnot.com)
  */
 public class MainWindow extends JFrame implements ActionListener, WindowListener, ComponentListener
 {
@@ -124,10 +125,10 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         editor = new EditorTextArea(this);
         matches = new MatchesTextArea();
         glossary = new GlossaryTextArea();
-        
+
         String fontName = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_NAME, OConsts.TF_FONT_DEFAULT);
         int fontSize = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_SIZE, OConsts.TF_FONT_SIZE_DEFAULT);
-        
+
         m_font = new Font(fontName, Font.PLAIN, fontSize);
         editor.setFont(m_font);
         matches.setFont(m_font);
@@ -268,15 +269,15 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         {
             e.printStackTrace(StaticUtils.getLogStream());
         }
-        
+
         // all except MacOSX
-		if( !System.getProperty("os.name").toLowerCase().startsWith("mac os x") )   // NOI18N
+        if(!StaticUtils.onMacOSX())   // NOI18N
         {
             projectMenu.add(separator2inProjectMenu);
             projectMenu.add(projectExitMenuItem);
         }
     }
-    
+
     /**
      * Loads and set main window's icon.
      */
@@ -1288,7 +1289,17 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         dt.start();
         m_searches.add(search);
     }
-    
+
+    /**
+      * Restores most user interface defaults.
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    public void restoreGUI() {
+        // Tell all windows to reset themselves
+        // TODO
+    }
+
     /* updates status label */
     public void setMessageText(String str)
     {
@@ -2172,6 +2183,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         optionsSetupFileFiltersMenuItem = new javax.swing.JMenuItem();
         optionsSentsegMenuItem = new javax.swing.JMenuItem();
         optionsWorkflowMenuItem = new javax.swing.JMenuItem();
+        optionsRestoreGUIMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         helpContentsMenuItem = new javax.swing.JMenuItem();
         helpAboutMenuItem = new javax.swing.JMenuItem();
@@ -2373,6 +2385,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
         optionsMenu.add(optionsWorkflowMenuItem);
 
+        org.openide.awt.Mnemonics.setLocalizedText(optionsRestoreGUIMenuItem, OStrings.getString("MW_OPTIONSMENU_RESTORE_GUI"));
+        optionsRestoreGUIMenuItem.addActionListener(this);
+
+        optionsMenu.add(optionsRestoreGUIMenuItem);
+
         mainMenu.add(optionsMenu);
 
         org.openide.awt.Mnemonics.setLocalizedText(helpMenu, OStrings.getString("TF_MENU_HELP"));
@@ -2528,6 +2545,10 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         {
             MainWindow.this.optionsWorkflowMenuItemActionPerformed(evt);
         }
+        else if (evt.getSource() == optionsRestoreGUIMenuItem)
+        {
+            MainWindow.this.optionsRestoreGUIMenuItemActionPerformed(evt);
+        }
         else if (evt.getSource() == helpContentsMenuItem)
         {
             MainWindow.this.helpContentsMenuItemActionPerformed(evt);
@@ -2662,6 +2683,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     {//GEN-HEADEREND:event_optionsWorkflowMenuItemActionPerformed
         setupWorkflow();
     }//GEN-LAST:event_optionsWorkflowMenuItemActionPerformed
+    
+    private void optionsRestoreGUIMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsRestoreGUIMenuItemActionPerformed
+    {//GEN-HEADEREND:event_optionsRestoreGUIMenuItemActionPerformed
+        restoreGUI();
+    }//GEN-LAST:event_optionsRestoreGUIMenuItemActionPerformed
     
     private void optionsSentsegMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsSentsegMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsSentsegMenuItemActionPerformed
@@ -2851,6 +2877,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private javax.swing.JMenuItem optionsSetupFileFiltersMenuItem;
     private javax.swing.JCheckBoxMenuItem optionsTabAdvanceCheckBoxMenuItem;
     private javax.swing.JMenuItem optionsWorkflowMenuItem;
+    private javax.swing.JMenuItem optionsRestoreGUIMenuItem;
     private javax.swing.JMenuItem projectCloseMenuItem;
     private javax.swing.JMenuItem projectCompileMenuItem;
     private javax.swing.JMenuItem projectEditMenuItem;

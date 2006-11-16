@@ -42,6 +42,19 @@ public class Main
 {
     public static void main(String[] args)
     {
+        for (int i = 0; i < args.length; i++) {
+            String arg = args[i];
+            if (arg.startsWith("locale=")) {
+                String language = arg.substring(7, 9);
+                String country  = arg.length() > 10 ? arg.substring(10, 12) : null;
+                Locale.setDefault(country != null ? new Locale(language, country) : new Locale(language));
+            }
+            else if (arg.startsWith("resource-bundle=")) {
+                String filename = arg.substring(16);
+                OStrings.loadBundle(filename);
+            }
+        }
+
         StaticUtils.log(
                 "\n" +                                                                    // NOI18N
                 "===================================================================" +   // NOI18N
@@ -50,6 +63,7 @@ public class Main
                 " ("+new Date()+") " +                                                    // NOI18N
                 " Locale "+Locale.getDefault()+                                           // NOI18N
                 "\n");                                                                    // NOI18N
+
         try
         {
             // Workaround for JDK bug 6389282 (OmegaT bug bug 1555809)

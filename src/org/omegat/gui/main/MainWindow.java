@@ -27,6 +27,7 @@ package org.omegat.gui.main;
 
 import com.vlsolutions.swing.docking.DockingConstants;
 import com.vlsolutions.swing.docking.DockingDesktop;
+import com.vlsolutions.swing.docking.DockableState;
 import com.vlsolutions.swing.docking.event.DockableStateWillChangeEvent;
 import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
 import com.vlsolutions.swing.docking.ui.DockingUISettings;
@@ -552,20 +553,12 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                     OStrings.getString("CONFIRM_DIALOG_TITLE"),
                     JOptionPane.YES_NO_OPTION) )
             {
-//                if(m_projectLoaded)
-//                    activateEntry();
                 return;
             }
         }
 
         saveScreenLayout();
         Preferences.save();
-/*
-        if (m_projectLoaded)
-        {
-            commitEntry(false); // part of fix for bug 1409309
-        }
-*/
 
         if (m_projectLoaded)
             doSave();
@@ -1291,13 +1284,24 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     }
 
     /**
-      * Restores most user interface defaults.
+      * Restores defaults for all dockable parts.
+      * May be expanded in the future to reset the entire GUI to its defaults.
+      *
+      * Note: The current implementation is just a quick hack, due to
+      *       insufficient knowledge of the docking framework library.
       *
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
     public void restoreGUI() {
-        // Tell all windows to reset themselves
-        // TODO
+        try {
+            String layout = "60#63#120#109#108#32#118#101#114#115#105#111#110#61#34#49#46#48#34#63#62#10#60#68#111#99#107#105#110#103#68#101#115#107#116#111#112#32#118#101#114#115#105#111#110#61#34#50#46#48#34#62#10#60#68#111#99#107#105#110#103#80#97#110#101#108#62#10#60#83#112#108#105#116#32#111#114#105#101#110#116#97#116#105#111#110#61#34#49#34#32#108#111#99#97#116#105#111#110#61#34#48#46#53#57#53#51#48#55#57#49#55#56#56#56#53#54#51#49#34#62#10#60#68#111#99#107#97#98#108#101#62#10#60#75#101#121#32#100#111#99#107#78#97#109#101#61#34#69#68#73#84#79#82#34#47#62#10#60#47#68#111#99#107#97#98#108#101#62#10#60#83#112#108#105#116#32#111#114#105#101#110#116#97#116#105#111#110#61#34#48#34#32#108#111#99#97#116#105#111#110#61#34#48#46#54#57#55#52#53#50#50#50#57#50#57#57#51#54#51#34#62#10#60#68#111#99#107#97#98#108#101#62#10#60#75#101#121#32#100#111#99#107#78#97#109#101#61#34#77#65#84#67#72#69#83#34#47#62#10#60#47#68#111#99#107#97#98#108#101#62#10#60#68#111#99#107#97#98#108#101#62#10#60#75#101#121#32#100#111#99#107#78#97#109#101#61#34#71#76#79#83#83#65#82#89#34#47#62#10#60#47#68#111#99#107#97#98#108#101#62#10#60#47#83#112#108#105#116#62#10#60#47#83#112#108#105#116#62#10#60#47#68#111#99#107#105#110#103#80#97#110#101#108#62#10#60#84#97#98#71#114#111#117#112#115#62#10#60#47#84#97#98#71#114#111#117#112#115#62#10#60#47#68#111#99#107#105#110#103#68#101#115#107#116#111#112#62#10";
+            byte[] bytes = StaticUtils.uudecode(layout);
+            ByteArrayInputStream in = new ByteArrayInputStream(bytes);
+            desktop.readXML(in);
+            in.close();
+        } catch (Exception exception) {
+            // eat silently, probably a bug in the docking framework
+        }
     }
 
     /* updates status label */

@@ -3,17 +3,26 @@
 ----------------------------------------------------------------------
 
 1.6.1 vs. 1.4.5.04
-   52 Enchancements
+   54 Enchancements
   113 Bugfixes
 
 ----------------------------------------------------------------------
 1.6.1
 Contains a new HTML Help Compiler (HCC) filter
 
- Enhancements:
+ Implemented requests:
 
   - HTML Help Compiler filter
   http://sourceforge.net/support/tracker.php?aid=1592946
+
+  - Restore GUI widget
+   http://sourceforge.net/support/tracker.php?aid=1557794
+
+ Other enhancements:
+
+  - Command line option to select a different locale than the default
+
+  - Command line option to load an external resource bundle file
 
  Bug fixes:
 

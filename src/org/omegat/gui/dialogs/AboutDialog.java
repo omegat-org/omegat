@@ -71,7 +71,6 @@ public class AboutDialog extends JDialog
         // END HP
 
         initComponents();
-        //versionLabel.setText(  OStrings.getString("ABOUTDIALOG_VERSION_PREFIX")+OStrings.VERSION);
         if ((OStrings.UPDATE != null) && !OStrings.UPDATE.equals("0")) {
             versionLabel.setText(
                 MessageFormat.format(OStrings.getString("ABOUTDIALOG_VERSION_UPDATE"),
@@ -154,7 +153,6 @@ public class AboutDialog extends JDialog
         getContentPane().add(buttonPanel, java.awt.BorderLayout.SOUTH);
 
         versionLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/omegat/gui/resources/OmegaT.gif")));
-        //org.openide.awt.Mnemonics.setLocalizedText(versionLabel, OStrings.getString("ABOUTDIALOG_VERSION_PREFIX"));
         versionLabel.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(5, 5, 5, 5)));
         getContentPane().add(versionLabel, java.awt.BorderLayout.NORTH);
 

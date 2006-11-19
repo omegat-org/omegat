@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 
 1.6.1 vs. 1.4.5.04
-   54 Enchancements
+   56 Enchancements
   113 Bugfixes
 
 ----------------------------------------------------------------------
@@ -22,7 +22,9 @@ Contains a new HTML Help Compiler (HCC) filter
 
   - Command line option to select a different locale than the default
 
-  - Command line option to load an external resource bundle file
+  - Command line option to load an external resource bundle
+
+  - Improved display of OmegaT version. Now includes update number.
 
  Bug fixes:
 

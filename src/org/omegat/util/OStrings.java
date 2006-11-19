@@ -52,6 +52,8 @@ public class OStrings
       * Loads resources from the specified file.
       * If the file cannot be loaded, resources are reverted to the default locale.
       * Useful when testing localisations outside the jar file.
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
     public static void loadBundle(String filename) {
         boolean loaded = false;
@@ -84,16 +86,23 @@ public class OStrings
     }
     
     private static String __VERSION_KEY = "version";                            // NOI18N
+    private static String __UPDATE_KEY  = "update";                             // NOI18N
     
     /** Just a version, e.g. "1.6" */
     public static final String VERSION =
             ResourceBundle.getBundle("org/omegat/Version").getString(__VERSION_KEY);
+
+    /** Update number, e.g. 2, for 1.6.0_02 */
+    public static final String UPDATE =
+            ResourceBundle.getBundle("org/omegat/Version").getString(__UPDATE_KEY);
     
-    /** OmegaT + version, e.g. "OmegaT-1.6" */
+    /** OmegaT + version, e.g. "OmegaT-1.6.0_02" */
     public static final String OMEGAT_VERSION =
-            MessageFormat.format(getString("version-template"),
-            new Object[] {VERSION}
-    );
+            ((UPDATE != null) && !UPDATE.equals("0"))
+                ? MessageFormat.format(getString("version-update-template"),
+                                       new Object[] {VERSION, UPDATE})
+                : MessageFormat.format(getString("version-template"),
+                                       new Object[] {VERSION});
     
     // MainWindow (was called TransFrame, that's why TF_ prefix)
     public static final String TF_NUM_NEAR_AND_GLOSSARY	= getString("TF_NUM_NEAR_AND_GLOSSARY");

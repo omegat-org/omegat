@@ -1,5 +1,5 @@
 ==============================================================================
-  OmegaT 1.6.0 Read Me file
+  OmegaT 1.6.1 Read Me file
 
   1.  Information about OmegaT
   2.  What is OmegaT?
@@ -145,7 +145,7 @@ Other contributions by
 OmegaT uses the following libraries:
   HTMLParser by Somik Raha, Derrick Oswald and others.
   Steve Roy MRJ Adapter.
-  InfoNode Docking Windows framework, GPL version.
+  VLDocking Framework.
 
 ==============================================================================
  5.  Is OmegaT bugging you ? Do you need help ?

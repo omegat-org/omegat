@@ -113,26 +113,39 @@ Previous contributors include:
 (alphabetical order)
 
 Code has been contributed by
-  Sacha Chua
   Kim Bruning
+  Sacha Chua
   Maxym Mykhalchuk (current lead developer)
   Henry Pijffers
   Benjamin Siband
 
 Localization contributed by
+  Roberto Argus (Portugese-Brazil)
   Alessandro Cattelan (Italian)
   Sabine Cretella (German)
+  Suzanne Bolduc (Esperanto)
+  Didier Briel (French)
+  Frederik De Vos (Dutch)
   Cesar Escribano Esteban (Spanish)
   Dmitri Gabinski (Belarusian, Esperanto, and Russian)
-  Jean-Christophe Helary (French)
+  Takayuki Hayashi (Japanese)
+  Jean-Christophe Helary (French and Japanese)
+  Yutaka Kachi (Japanese)
+  Elina Lagoudaki (Greek)
+  Martin Lukac (Slovak)
+  Samuel Murray (Afrikaans)
+  Yoshi Nakayama (Japanese)
+  David Olveira (Portugese)
+  Ronaldo Radunz (Portugese-Brazil)
+  Thelma L. Sabim (Portugese-Brazil)
   Juan Salcines (Spanish)
   Pablo Roca Santiagio (Spanish)
+  Karsten Voss (Polish)
+  Gerard van der Weyde (Dutch)
   Martin Wunderlich (German)
   Hisashi Yanagida (Japanese)
-  Yoshi Nakayama (Japanese)
-  Takayuki Hayashi (Japanese)
   Kunihiko Yokota (Japanese)
-  Yutaka Kachi (Japanese)
+  Erhan Yukselci (Turkish)
 
 Other contributions by
   Sabine Cretella
@@ -143,9 +156,9 @@ Other contributions by
   and many, many more very helpful people
 
 OmegaT uses the following libraries:
-  HTMLParser by Somik Raha, Derrick Oswald and others.
-  Steve Roy MRJ Adapter.
-  VLDocking Framework.
+  HTMLParser by Somik Raha, Derrick Oswald and others (Common Public License).
+  MRJ Adapter by Steve Roy (LGPL License).
+  VLDocking Framework by VLSolutions (CeCILL License).
 
 ==============================================================================
  5.  Is OmegaT bugging you ? Do you need help ?
@@ -186,19 +199,10 @@ as a Source Forge user.
 Please see the file 'changes.txt' for detailed information about changes in
 this and all previous releases.
 
-New UI features (comparing to 1.0 OmegaT series):
-  - Find interface rewritten with enhanced functionality
-  - Main interface improved
-  - Ability to select a display font
-  - Full localization support
-  - Ability to jump to the next untranslated segment
-  - Rich customization of Format Filters behaviour
-  - User-customizable Segmentation
-  - Match/Glossary Window is united by a draggable split pane
-
 File formats supported:
   - Plain text
   - HTML and XHTML
+  - HTML Help Compiler (HCC)
   - OpenDocument / OpenOffice.org
   - Java resource bundles (.properties)
   - INI files (files with key=value pairs of any encoding)
@@ -213,6 +217,10 @@ Core changes:
   - Attributes of HTML tags are translatable
   - Full TMX 1.1-1.4b Level 1 compatibility
   - Partial TMX 1.4b Level 2 support
+
+New UI features (comparing to 1.4 OmegaT series):
+  - Find interface rewritten with enhanced functionality
+  - Main interface improved by using dockable windows
 
 ==============================================================================
 

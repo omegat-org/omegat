@@ -484,11 +484,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     {
         try
         {
-            String lang = HelpFrame.detectDocLanguage();
+            String language = detectInstantStartLanguage();
             String filepath =
                     StaticUtils.installDir()
                     + File.separator + OConsts.HELP_DIR + File.separator
-                    + lang + File.separator
+                    + language + File.separator
                     + OConsts.HELP_INSTANT_START;
             JTextPane instantArticlePane = new JTextPane();
             instantArticlePane.setEditable(false);
@@ -500,6 +500,28 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         {
             editorScroller.setViewportView(editor);
         }
+    }
+    
+    /**
+      * Detects the language of the instant start guide
+      * (checks if present in default locale's language).
+      *
+      * If there is no instant start guide in the default
+      * locale's language, "en" (English) is returned, otherwise
+      * the acronym for the default locale's language.
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    private String detectInstantStartLanguage() {
+        String language = java.util.Locale.getDefault().getLanguage();
+        File isg = new File(StaticUtils.installDir()
+            + File.separator + OConsts.HELP_DIR
+            + File.separator + language
+            + File.separator + OConsts.HELP_INSTANT_START);
+        if (isg.exists())
+            return language;
+        else
+            return "en"; // NOI18N
     }
     
     /**

@@ -169,7 +169,7 @@ public class HelpFrame extends JFrame
         updateUIText();
         displayFile(OConsts.HELP_HOME);
     }
-    
+
     /**
      * Gets the only instance of Help Frame
      */
@@ -309,12 +309,14 @@ public class HelpFrame extends JFrame
     /**
      * Detects the documentation language to use.
      */
-    public static String detectDocLanguage()
+    private static String detectDocLanguage()
     {
         String lang = java.util.Locale.getDefault().getLanguage();
-        File docsFolder = new File(StaticUtils.installDir()
-        + File.separator + OConsts.HELP_DIR + File.separator + lang);
-        if( docsFolder.exists() )
+        File index = new File(StaticUtils.installDir()
+            + File.separator + OConsts.HELP_DIR
+            + File.separator + lang
+            + File.separator + OConsts.HELP_HOME);
+        if(index.exists())
             return lang;
         else
             return "en";                                                        // NOI18N

@@ -67,8 +67,7 @@ class SaveThread extends Thread
                                     OStrings.getString("ST_PROJECT_AUTOSAVED"),
                                     new Object[]
                                     {
-                                        DateFormat.getTimeInstance(DateFormat.SHORT).
-                                        format(new Date())
+                                        DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date())
                                     } ));
                 }
             }

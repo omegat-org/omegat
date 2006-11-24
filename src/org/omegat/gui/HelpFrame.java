@@ -308,16 +308,18 @@ public class HelpFrame extends JFrame
     
     /**
      * Detects the documentation language to use.
+     *
+     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     private static String detectDocLanguage()
     {
-        String lang = java.util.Locale.getDefault().getLanguage();
+        String language = java.util.Locale.getDefault().getLanguage();
         File index = new File(StaticUtils.installDir()
             + File.separator + OConsts.HELP_DIR
-            + File.separator + lang
+            + File.separator + language
             + File.separator + OConsts.HELP_HOME);
         if(index.exists())
-            return lang;
+            return language;
         else
             return "en";                                                        // NOI18N
     }

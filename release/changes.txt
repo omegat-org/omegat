@@ -4,7 +4,7 @@
 
 1.6.1 vs. 1.4.5.04
    57 Enchancements
-  114 Bugfixes
+  115 Bugfixes
 
 ----------------------------------------------------------------------
 1.6.1_01
@@ -22,6 +22,9 @@ Contains localisations plus minor fixes for localisations
 
   - Localisation errors
   http://sourceforge.net/support/tracker.php?aid=1598209
+
+  - Insert best match (% setting)
+  http://sourceforge.net/support/tracker.php?aid=1599127
 
 ----------------------------------------------------------------------
 1.6.1

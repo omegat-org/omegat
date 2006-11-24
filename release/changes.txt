@@ -1,10 +1,39 @@
 ----------------------------------------------------------------------
- OmegaT 1.6.1 Changes
+ OmegaT 1.7.0 Changes
 ----------------------------------------------------------------------
 
-1.6.1 vs. 1.4.5.04
+1.7.0 vs. 1.6.1_01
+
+  1 Enhancements
+  0 Bugfixes
+
+----------------------------------------------------------------------
+1.7.0
+SAY SOMETHING USEFUL
+
+ Enhancements:
+
+  - Jump to segment #
+   http://sourceforge.net/support/tracker.php?aid=1086959
+
+ Bug fixes:
+
+  -
+
+----------------------------------------------------------------------
+
+1.6.1_01 vs. 1.4.5.04
    56 Enchancements
-  113 Bugfixes
+  114 Bugfixes
+
+----------------------------------------------------------------------
+1.6.1_01
+Contains a single fix for localisations
+
+ Bug fixes:
+
+  - Localisation errors
+  http://sourceforge.net/support/tracker.php?aid=1598209
 
 ----------------------------------------------------------------------
 1.6.1

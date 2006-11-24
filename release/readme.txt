@@ -1,5 +1,5 @@
 ==============================================================================
-  OmegaT 1.6.1 Read Me file
+  OmegaT 1.7.0 Read Me file
 
   1.  Information about OmegaT
   2.  What is OmegaT?
@@ -210,17 +210,10 @@ File formats supported:
   - DocBook documentation file format
 
 Core changes:
-  - Flexible (Sentence) Segmentation
-  - File format filters may be created as plugins
-  - Refactored code with more comments
-  - Windows installer
-  - Attributes of HTML tags are translatable
-  - Full TMX 1.1-1.4b Level 1 compatibility
-  - Partial TMX 1.4b Level 2 support
+  TO BE DETERMINED
 
 New UI features (comparing to 1.4 OmegaT series):
-  - Find interface rewritten with enhanced functionality
-  - Main interface improved by using dockable windows
+  TO BE DETERMINED
 
 ==============================================================================
 

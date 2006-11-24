@@ -311,7 +311,7 @@ public class HelpFrame extends JFrame
      */
     public static String detectDocLanguage()
     {
-        String lang = System.getProperty("user.language", "en");                // NOI18N
+        String lang = java.util.Locale.getDefault().getLanguage();
         File docsFolder = new File(StaticUtils.installDir()
         + File.separator + OConsts.HELP_DIR + File.separator + lang);
         if( docsFolder.exists() )

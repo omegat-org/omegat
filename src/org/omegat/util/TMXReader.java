@@ -25,7 +25,6 @@
 package org.omegat.util;
 
 import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
@@ -35,14 +34,13 @@ import java.util.HashSet;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.omegat.core.segmentation.Segmenter;
-import org.omegat.core.threads.CommandThread;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.util.xml.XMLReader;
 
@@ -464,7 +462,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         try 
         {
             // log the parsing attempt
-            StaticUtils.log(MessageFormat.format(
+            StaticUtils.log(StaticUtils.format(
                 OStrings.getString("TMXR_INFO_READING_FILE"), 
                 new Object[]{displayFilename}));
         
@@ -498,7 +496,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         }
         catch (SAXParseException exception) {
             // log error
-            StaticUtils.log(MessageFormat.format(
+            StaticUtils.log(StaticUtils.format(
                 OStrings.getString("TMXR_FATAL_ERROR_WHILE_PARSING"),
                 new Object[]{String.valueOf(exception.getLineNumber()),
                              String.valueOf(exception.getColumnNumber()),
@@ -506,7 +504,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                 exception.printStackTrace(StaticUtils.getLogStream());
 
             // display error
-            CommandThread.core.displayErrorMessage(MessageFormat.format(
+            CommandThread.core.displayErrorMessage(StaticUtils.format(
                 OStrings.getString("TMXR_FATAL_ERROR_WHILE_PARSING__DISPLAY"),
                 new Object[]{displayFilename,
                              String.valueOf(exception.getLineNumber()),
@@ -517,13 +515,13 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         catch (Exception exception)
         {
             // log exception
-            StaticUtils.log(MessageFormat.format(
+            StaticUtils.log(StaticUtils.format(
                 OStrings.getString("TMXR_EXCEPTION_WHILE_PARSING"), 
                 new Object[]{exception.getLocalizedMessage()}));
             exception.printStackTrace(StaticUtils.getLogStream());
 
             // display error
-            CommandThread.core.displayErrorMessage(MessageFormat.format(
+            CommandThread.core.displayErrorMessage(StaticUtils.format(
                 OStrings.getString("TMXR_EXCEPTION_WHILE_PARSING__DISPLAY"),
                 new Object[]{displayFilename, StaticUtils.getLogLocation()}),
                 exception);
@@ -535,7 +533,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
       */
     public void warning(SAXParseException exception) throws SAXException 
     {
-        StaticUtils.log(MessageFormat.format(
+        StaticUtils.log(StaticUtils.format(
             OStrings.getString("TMXR_WARNING_WHILE_PARSING"), 
             new Object[]{String.valueOf(exception.getLineNumber()),
                          String.valueOf(exception.getColumnNumber()),
@@ -548,7 +546,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
       */
     public void error(SAXParseException exception) throws SAXException 
     {
-        StaticUtils.log(MessageFormat.format(
+        StaticUtils.log(StaticUtils.format(
             OStrings.getString("TMXR_RECOVERABLE_ERROR_WHILE_PARSING"), 
             new Object[]{String.valueOf(exception.getLineNumber()),
                          String.valueOf(exception.getColumnNumber()),
@@ -561,7 +559,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
       */
     public void fatalError(SAXParseException exception) throws SAXException 
     {
-        StaticUtils.log(MessageFormat.format(
+        StaticUtils.log(StaticUtils.format(
             OStrings.getString("TMXR_FATAL_ERROR_WHILE_PARSING"), 
             new Object[]{String.valueOf(exception.getLineNumber()),
                          String.valueOf(exception.getColumnNumber()),
@@ -705,16 +703,16 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         tmxSourceLanguage   = attributes.getValue(TMX_ATTR_SRCLANG);
 
         // log some details
-        StaticUtils.log(MessageFormat.format(
+        StaticUtils.log(StaticUtils.format(
             OStrings.getString("TMXR_INFO_CREATION_TOOL"), 
             new Object[]{creationtool}));
-        StaticUtils.log(MessageFormat.format(
+        StaticUtils.log(StaticUtils.format(
             OStrings.getString("TMXR_INFO_CREATION_TOOL_VERSION"), 
             new Object[]{creationtoolversion}));
-        StaticUtils.log(MessageFormat.format(
+        StaticUtils.log(StaticUtils.format(
             OStrings.getString("TMXR_INFO_SEG_TYPE"), 
             new Object[]{segtype}));
-        StaticUtils.log(MessageFormat.format(
+        StaticUtils.log(StaticUtils.format(
           OStrings.getString("TMXR_INFO_SOURCE_LANG"), 
           new Object[]{tmxSourceLanguage}));
 
@@ -722,7 +720,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         // different from the project source language
         if (!tmxSourceLanguage.equalsIgnoreCase(sourceLanguage)) 
         {
-            StaticUtils.log(MessageFormat.format(
+            StaticUtils.log(StaticUtils.format(
                 OStrings.getString("TMXR_WARNING_INCORRECT_SOURCE_LANG"),
                 new Object[]{tmxSourceLanguage, sourceLanguage}));
         }
@@ -779,7 +777,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
 
             // Log presence of preferred variant languages
             
-            StaticUtils.log(MessageFormat.format(
+            StaticUtils.log(StaticUtils.format(
                 OStrings.getString("TMXR_INFO_VARIANT_LANGUAGES_DISPLAYED"),
                 new Object[]{languages.toString()}));
         }

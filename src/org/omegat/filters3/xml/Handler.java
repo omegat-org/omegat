@@ -27,7 +27,6 @@ package org.omegat.filters3.xml;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -181,7 +180,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         }
         else
             filename = inFile.getAbsolutePath();
-        throw new SAXException("\n"+MessageFormat.format(e.getMessage()+"\n" +       // NOI18N
+        throw new SAXException("\n"+StaticUtils.format(e.getMessage()+"\n" +       // NOI18N
                 OStrings.getString("XML_FATAL_ERROR"), 
                 new Object[] {filename, new Integer(linenum)}));
     }

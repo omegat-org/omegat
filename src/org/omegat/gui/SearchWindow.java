@@ -34,7 +34,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.text.MessageFormat;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Box;
@@ -529,7 +528,7 @@ public class SearchWindow extends JFrame
                 File f = new File(root);
                 if (!f.exists() || !f.isDirectory())
                 {
-                    String error = MessageFormat.format(
+                    String error = StaticUtils.format(
                             OStrings.getString("SW_ERROR_BAD_DIR"), 
                             new Object[] {m_dirField.getText()} );
                     m_viewer.setText(error);

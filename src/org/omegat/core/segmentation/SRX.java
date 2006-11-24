@@ -36,7 +36,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -118,7 +117,7 @@ public class SRX implements Serializable, Cloneable
         catch( IOException ioe )
         {
             String message = 
-                    MessageFormat.format(
+                    StaticUtils.format(
                     OStrings.getString("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG"),
                     new Object[] {ioe} );
             StaticUtils.log(message);
@@ -159,7 +158,7 @@ public class SRX implements Serializable, Cloneable
                     sb.append("\n");                                            // NOI18N
                 }
                 throw new Exception(
-                        MessageFormat.format(
+                        StaticUtils.format(
                         "Exceptions occured while loading segmentation rules:\n{0}",// NOI18N
                         new Object[] {sb.toString()} ) );
             }

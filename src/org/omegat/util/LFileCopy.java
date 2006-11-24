@@ -30,7 +30,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.text.MessageFormat;
 
 /**
  * Utility class for copying untranslatable files.
@@ -57,7 +56,7 @@ public class LFileCopy
         if (!src.exists())
         {
             throw new IOException(
-                    MessageFormat.format(OStrings.getString("LFC_ERROR_FILE_DOESNT_EXIST"), new Object[] {src.getAbsolutePath()}));
+                    StaticUtils.format(OStrings.getString("LFC_ERROR_FILE_DOESNT_EXIST"), new Object[] {src.getAbsolutePath()}));
         }
         FileInputStream fis = new FileInputStream(src);
         dest.getParentFile().mkdirs();
@@ -97,7 +96,7 @@ public class LFileCopy
         if (!src.exists())
         {
             throw new IOException(
-                    MessageFormat.format(OStrings.getString("LFC_ERROR_FILE_DOESNT_EXIST"), new Object[] {src.getAbsolutePath()}));
+                    StaticUtils.format(OStrings.getString("LFC_ERROR_FILE_DOESNT_EXIST"), new Object[] {src.getAbsolutePath()}));
         }
         FileInputStream fis = new FileInputStream(src);
         byte [] b = new byte[BUFSIZE];

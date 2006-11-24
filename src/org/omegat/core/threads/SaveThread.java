@@ -25,11 +25,11 @@
 package org.omegat.core.threads;
 
 import java.text.DateFormat;
-import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
 
 /**
  * An independent stream to save project,
@@ -63,7 +63,7 @@ class SaveThread extends Thread
                 {
                     CommandThread.core.save();
                     CommandThread.core.m_transFrame.setMessageText(
-                            MessageFormat.format(
+                            StaticUtils.format(
                                     OStrings.getString("ST_PROJECT_AUTOSAVED"),
                                     new Object[]
                                     {

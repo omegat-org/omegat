@@ -29,7 +29,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -116,7 +115,7 @@ public class XMLStreamReader
             {
                 throw new IOException(OStrings.getString("XSR_ERROR_NONVALID_XML") +
                         "\n" +                                                  // NOI18N
-                        MessageFormat.format(OStrings.getString("XSR_ERROR_UNSUPPORTED_XML_VERSION"),
+                        StaticUtils.format(OStrings.getString("XSR_ERROR_UNSUPPORTED_XML_VERSION"),
                         new Object[] {ver}));
             }
             m_headBlock = blk;
@@ -527,7 +526,7 @@ public class XMLStreamReader
                             
                         default:
                             err = true;
-                            msg = MessageFormat.format( OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                            msg = StaticUtils.format( OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                                     new Object[] {""+c, ""+state} );	// NOI18N
                     }
                     break;
@@ -616,7 +615,7 @@ public class XMLStreamReader
                             
                         default:
                             err = true;
-                            msg = MessageFormat.format( OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                            msg = StaticUtils.format( OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                                     new Object[] {""+c, ""+state} );	// NOI18N
                     }
                     break;
@@ -795,7 +794,7 @@ public class XMLStreamReader
                             
                         default:
                             throwErrorInGetNextTag(blk, 
-                                    MessageFormat.format( 
+                                    StaticUtils.format( 
                                     OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                                     new Object[] {""+c, ""+state}));	// NOI18N
                     }
@@ -831,7 +830,7 @@ public class XMLStreamReader
                             
                         default:
                             throwErrorInGetNextTag(blk, 
-                                    MessageFormat.format( 
+                                    StaticUtils.format( 
                                     OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                                     new Object[] {""+c, ""+state}));	// NOI18N
                     }
@@ -852,7 +851,7 @@ public class XMLStreamReader
                             
                         default:
                             throwErrorInGetNextTag(blk, 
-                                    MessageFormat.format( 
+                                    StaticUtils.format( 
                                     OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                                     new Object[] {""+c, ""+state}));	// NOI18N
                     }
@@ -872,7 +871,7 @@ public class XMLStreamReader
                             
                         default:
                             throwErrorInGetNextTag(blk, 
-                                    MessageFormat.format( 
+                                    StaticUtils.format( 
                                     OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                                     new Object[] {""+c, ""+state}));	// NOI18N
                     }
@@ -905,7 +904,7 @@ public class XMLStreamReader
                             
                         default:
                             throwErrorInGetNextTag(blk, 
-                                    MessageFormat.format( 
+                                    StaticUtils.format( 
                                     OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                                     new Object[] {""+c, ""+state}));	// NOI18N
                     }
@@ -939,7 +938,7 @@ public class XMLStreamReader
                             
                         default:
                             throwErrorInGetNextTag(blk, 
-                                    MessageFormat.format( 
+                                    StaticUtils.format( 
                                     OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                                     new Object[] {""+c, ""+state}));	// NOI18N
                     }
@@ -957,7 +956,7 @@ public class XMLStreamReader
                             
                         default:
                             throwErrorInGetNextTag(blk, 
-                                    MessageFormat.format( 
+                                    StaticUtils.format( 
                                     OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                                     new Object[] {""+c, ""+state}));	// NOI18N
                     }
@@ -1024,7 +1023,7 @@ public class XMLStreamReader
                             
                         default:
                             throwErrorInGetNextTag(blk, 
-                                    MessageFormat.format( 
+                                    StaticUtils.format( 
                                     OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                                     new Object[] {""+c, ""+state}));	// NOI18N
                     }
@@ -1329,7 +1328,7 @@ public class XMLStreamReader
                 }
                 else
                 {
-                    throw new TranslationException(MessageFormat.format(OStrings.getString("XSR_ERROR_BAD_BINARY_CHAR"), new Object[] {val}) );
+                    throw new TranslationException(StaticUtils.format(OStrings.getString("XSR_ERROR_BAD_BINARY_CHAR"), new Object[] {val}) );
                 }
             }
             else
@@ -1339,7 +1338,7 @@ public class XMLStreamReader
                     c += b - '0';
                 else
                 {
-                    throw new TranslationException(MessageFormat.format(OStrings.getString("XSR_ERROR_BAD_DECIMAL_CHAR"), new Object[] {val}) );
+                    throw new TranslationException(StaticUtils.format(OStrings.getString("XSR_ERROR_BAD_DECIMAL_CHAR"), new Object[] {val}) );
                 }
             }
         }

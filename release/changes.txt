@@ -23,17 +23,11 @@ SAY SOMETHING USEFUL
 ----------------------------------------------------------------------
 
 1.6.1_01 vs. 1.4.5.04
-   56 Enchancements
-  114 Bugfixes
+ !!!COPY FROM 1.6.1_01 RELEASE!!!
 
 ----------------------------------------------------------------------
 1.6.1_01
-Contains a single fix for localisations
-
- Bug fixes:
-
-  - Localisation errors
-  http://sourceforge.net/support/tracker.php?aid=1598209
+ !!!COPY FROM 1.6.1_01 RELEASE!!!
 
 ----------------------------------------------------------------------
 1.6.1

@@ -115,8 +115,8 @@ Previous contributors include:
 Code has been contributed by
   Kim Bruning
   Sacha Chua
-  Maxym Mykhalchuk (current lead developer)
-  Henry Pijffers
+  Maxym Mykhalchuk (lead developer)
+  Henry Pijffers (1.6, 1.7 series release manager)
   Benjamin Siband
 
 Localization contributed by
@@ -150,15 +150,20 @@ Localization contributed by
 Other contributions by
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (current documentation manager)
+  Jean-Christophe Helary (documentation manager)
   Samuel Murray
-  Marc Prior (current localization manager)
+  Marc Prior (localization manager)
   and many, many more very helpful people
 
 OmegaT uses the following libraries:
-  HTMLParser by Somik Raha, Derrick Oswald and others (Common Public License).
+  HTMLParser by Somik Raha, Derrick Oswald and others (LGPL License).
+  http://sourceforge.net/projects/htmlparser
+
   MRJ Adapter by Steve Roy (LGPL License).
+  http://homepage.mac.com/sroy/mrjadapter/
+
   VLDocking Framework by VLSolutions (CeCILL License).
+  http://www.vlsolutions.com/en/products/docking/
 
 ==============================================================================
  5.  Is OmegaT bugging you ? Do you need help ?
@@ -212,7 +217,7 @@ File formats supported:
 Core changes:
   TO BE DETERMINED
 
-New UI features (comparing to 1.4 OmegaT series):
+New UI features (compared to OmegaT 1.6 series):
   TO BE DETERMINED
 
 ==============================================================================

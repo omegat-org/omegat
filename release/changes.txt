@@ -3,8 +3,25 @@
 ----------------------------------------------------------------------
 
 1.6.1 vs. 1.4.5.04
-   56 Enchancements
-  113 Bugfixes
+   57 Enchancements
+  114 Bugfixes
+
+----------------------------------------------------------------------
+1.6.1_01
+Contains localisations plus minor fixes for localisations
+
+ Implemented requests:
+
+  -
+
+ Other enhancements:
+
+  - French UI localisation + instant start guide translation
+
+ Bug fixes:
+
+  - Localisation errors
+  http://sourceforge.net/support/tracker.php?aid=1598209
 
 ----------------------------------------------------------------------
 1.6.1

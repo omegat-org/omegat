@@ -31,7 +31,6 @@ import java.awt.event.ActionEvent;     // HP
 import java.awt.event.KeyEvent;        // HP
 import java.awt.Frame;
 import java.beans.ExceptionListener;
-import java.text.MessageFormat;
 import javax.swing.AbstractAction;     // HP
 import javax.swing.Action;             // HP
 import javax.swing.JComponent;         // HP
@@ -55,6 +54,7 @@ import org.omegat.core.segmentation.datamodels.MappingRulesModel;
 import org.omegat.core.segmentation.datamodels.SegmentationRulesModel;
 import org.omegat.core.segmentation.datamodels.SRXOptionsModel;
 import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
 
 /**
  * Main dialog for for setting up sentence segmenting.
@@ -606,7 +606,7 @@ public class SegmentationCustomizer extends JDialog
         MappingRulesModel model = (MappingRulesModel)mapTable.getModel();
         String set = model.getValueAt(mapTable.getSelectedRow(), 0).toString();
         String title = OStrings.getString("CONFIRM_DIALOG_TITLE");
-        String message = MessageFormat.format(
+        String message = StaticUtils.format(
                 OStrings.getString("SEG_CONFIRM_REMOVE_SENTSEG_SET"),
                 new Object[] { set } );
         if( JOptionPane.showConfirmDialog(this, message , title, JOptionPane.YES_NO_OPTION)

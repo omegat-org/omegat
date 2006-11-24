@@ -34,7 +34,6 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import javax.swing.AbstractAction;     // HP
 import javax.swing.Action;             // HP
@@ -207,10 +206,10 @@ public class HelpFrame extends JFrame
             String link = "<b>" + file + "</b>";                                // NOI18N
             StringBuffer buf = new StringBuffer();
             buf.append("<html><body><p>");                                      // NOI18N
-            buf.append( MessageFormat.format(OStrings.getString("HF_ERROR_EXTLINK_TITLE"),
+            buf.append( StaticUtils.format(OStrings.getString("HF_ERROR_EXTLINK_TITLE"),
                     new Object[] {link}) );
             buf.append("<p>");                                                  // NOI18N
-            buf.append( MessageFormat.format(OStrings.getString("HF_ERROR_EXTLINK_MSG"),
+            buf.append( StaticUtils.format(OStrings.getString("HF_ERROR_EXTLINK_MSG"),
                     new Object[] {"<b>"+StaticUtils.installDir()+File.separator+"docs"+File.separator+"index.html</b>"}) ); // NOI18N
             buf.append("</body></html>");                                       // NOI18N
             

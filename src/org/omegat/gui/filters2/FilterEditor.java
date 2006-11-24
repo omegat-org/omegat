@@ -30,7 +30,6 @@ import java.awt.event.ActionEvent;     // HP
 import java.awt.event.KeyEvent;        // HP
 import java.awt.Toolkit;
 import java.lang.reflect.Constructor;
-import java.text.MessageFormat;
 import java.util.Vector;
 import javax.swing.AbstractAction;     // HP
 import javax.swing.Action;             // HP
@@ -51,6 +50,7 @@ import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.OneFilter;
 import org.omegat.filters2.master.Filters;
 import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
 
 /**
  * Editor for a single filter.
@@ -373,7 +373,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener
         Instance instance = filter.getInstance(row);
         if( JOptionPane.YES_OPTION ==
                 JOptionPane.showConfirmDialog(this, 
-                MessageFormat.format( OStrings.getString("FILTEREDITOR_really_delete_filter_instance"), new Object[] { instance.getSourceFilenameMask() }),
+                StaticUtils.format( OStrings.getString("FILTEREDITOR_really_delete_filter_instance"), new Object[] { instance.getSourceFilenameMask() }),
                         OStrings.getString("FILTEREDITOR_Confirm_deletion_TITLE"),
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE) )

@@ -49,7 +49,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -1295,7 +1294,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             private void displayErrorMessage() {
                 JOptionPane.showMessageDialog(
                     dialog,
-                    MessageFormat.format(OStrings.getString("MW_SEGMENT_NUMBER_ERROR"),
+                    StaticUtils.format(OStrings.getString("MW_SEGMENT_NUMBER_ERROR"),
                                          new Object[] {new Integer(CommandThread.core.numEntries())}),
                     OStrings.TF_ERROR,
                     JOptionPane.ERROR_MESSAGE
@@ -1956,19 +1955,19 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                 Object obj[] = {
                     new Integer(nearLength),
                             new Integer(m_glossaryLength) };
-                            setMessageText(MessageFormat.format(
+                            setMessageText(StaticUtils.format(
                                     OStrings.TF_NUM_NEAR_AND_GLOSSARY, obj));
             }
             else if (nearLength > 0)
             {
                 Object obj[] = { new Integer(nearLength) };
-                setMessageText(MessageFormat.format(
+                setMessageText(StaticUtils.format(
                         OStrings.TF_NUM_NEAR, obj));
             }
             else if (m_glossaryLength > 0)
             {
                 Object obj[] = { new Integer(m_glossaryLength) };
-                setMessageText(MessageFormat.format(
+                setMessageText(StaticUtils.format(
                         OStrings.TF_NUM_GLOSSARY, obj));
             }
             else

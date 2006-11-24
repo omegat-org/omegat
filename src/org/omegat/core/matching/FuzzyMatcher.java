@@ -24,7 +24,6 @@
 
 package org.omegat.core.matching;
 
-import java.text.MessageFormat;
 import java.util.List;
 
 import org.omegat.core.StringData;
@@ -34,6 +33,7 @@ import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.messages.MessageRelay;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
 
 /**
@@ -51,7 +51,7 @@ public class FuzzyMatcher
     private void updateStatus(int index, int total)
     {
         Object[] obj = { new Integer(index), new Integer(total) };
-        MessageRelay.uiMessageSetMessageText(tf, MessageFormat.format(statusTemplate, obj));
+        MessageRelay.uiMessageSetMessageText(tf, StaticUtils.format(statusTemplate, obj));
         Thread.yield();
     }
     

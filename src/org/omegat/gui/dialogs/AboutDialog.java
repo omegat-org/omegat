@@ -27,7 +27,6 @@ package org.omegat.gui.dialogs;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Frame;
-import java.text.MessageFormat;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
@@ -36,6 +35,7 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
 
 /**
  * About dialog, showing OmegaT version and information on contributors.
@@ -73,11 +73,11 @@ public class AboutDialog extends JDialog
         initComponents();
         if ((OStrings.UPDATE != null) && !OStrings.UPDATE.equals("0")) {
             versionLabel.setText(
-                MessageFormat.format(OStrings.getString("ABOUTDIALOG_VERSION_UPDATE"),
+                StaticUtils.format(OStrings.getString("ABOUTDIALOG_VERSION_UPDATE"),
                                      new Object[]{OStrings.VERSION, OStrings.UPDATE}));
         } else {
             versionLabel.setText(
-                MessageFormat.format(OStrings.getString("ABOUTDIALOG_VERSION"),
+                StaticUtils.format(OStrings.getString("ABOUTDIALOG_VERSION"),
                                      new Object[]{OStrings.VERSION}));
         }
         invalidate();

@@ -27,7 +27,6 @@ package org.omegat.util;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import java.util.PropertyResourceBundle;
 
@@ -99,9 +98,9 @@ public class OStrings
     /** OmegaT + version, e.g. "OmegaT-1.6.0_02" */
     public static final String OMEGAT_VERSION =
             ((UPDATE != null) && !UPDATE.equals("0"))
-                ? MessageFormat.format(getString("version-update-template"),
+                ? StaticUtils.format(getString("version-update-template"),
                                        new Object[] {VERSION, UPDATE})
-                : MessageFormat.format(getString("version-template"),
+                : StaticUtils.format(getString("version-template"),
                                        new Object[] {VERSION});
     
     // MainWindow (was called TransFrame, that's why TF_ prefix)

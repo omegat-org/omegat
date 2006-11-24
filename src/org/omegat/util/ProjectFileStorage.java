@@ -29,7 +29,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 
 import org.omegat.filters2.TranslationException;
@@ -73,7 +72,7 @@ public class ProjectFileStorage
 		if (ver != null && !ver.equals(OConsts.PROJ_CUR_VERSION))
 		{
 			throw new TranslationException(
-                    MessageFormat.format(OStrings.getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"), 
+                    StaticUtils.format(OStrings.getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"), 
                     new Object[]{ver}));
 		}
 		

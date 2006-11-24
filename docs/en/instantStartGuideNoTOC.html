@@ -6,11 +6,10 @@
 <body>
 
 <h1>Instant Start Guide</h1>
-<p>or <strong>Start using OmegaT in 5 minutes
-</strong></p>
+<p>or <strong>Start using OmegaT in 5 minutes</strong></p>
 
 <p><strong>
-This instant start guide covers only the very basics. Ideally, all users should read the user manual to familiarise themselves with everything OmegaT has to offer.
+This instant start guide covers only the very basics. Ideally, all users should read the user manual to familiarise themselves with everything OmegaT has to offer. It is also available in the User Manual. To display the User Manual, press "F1".
 </strong></p>
 
 <h2>Contents</h2>
@@ -28,7 +27,7 @@ The OmegaT screen consists of three distinct windows. Each of these can be resiz
 </p>
 
 <p>
-In the Editor window OmegaT presents the source text 'segmented' into sentences (or paragraphs – see Manual). You translate these segments one by one. As you pass from segment to segment your translations are recorded in a translation memory. Once all the segments have been translated (or before, if you request) OmegaT will use the translation memory to generate the translated document(s) in a “Target” folder.
+In the Editor window OmegaT presents the source text 'segmented' into sentences (or paragraphs – see Manual by pressing "<strong>F1</strong>"). You translate these segments one by one. As you pass from segment to segment your translations are recorded in a translation memory. Once all the segments have been translated (or before, if you request) OmegaT will use the translation memory to generate the translated document(s) in a “Target” folder.
 </p>
 
 <p>
@@ -43,7 +42,7 @@ OmegaT organises your translation work in so-called translation projects. For ea
 <h3>a. Create and open a new project</h3>
 
 <p>
-Select <strong>Project -&gt; New...</strong> from the menu.
+Select <strong>Project → New...</strong> from the menu.
 </p>
 
 <p>
@@ -54,7 +53,7 @@ Navigate to the folder where you wish to save the project files, and type in a n
 OmegaT will prompt you to confirm or change the project folders to be created, using the dialog below:
 </p>
 
-<center><img src="images/NewProject.png" alt="Image:NewProject.png" width="398" height="428" ></center>
+<center><img src="images/NewProject.png" alt="Project settings window" ></center>
 
 <p>
 You can simply accept the location of the subfolders, but make sure first that the source and translation language codes are correct. Select the language code (2 letters) or language-and-country code (2 + 2 letters) from the drop-down list, or type them in by hand (stick to the 2-letter pattern). Make a mental note of the location of the Target subfolder (for your translated documents).
@@ -69,15 +68,15 @@ When you click OK to accept the project set-up, OmegaT will prompt you to select
 </p>
 
 <p>
-To check your list of files to be translated, consult the Project Files window (Menu: View -> Project Files, if it does not open automatically). If you have had to change the contents of the Source folder, remember to reload the project first (Menu: Project -> Reload). OmegaT opens the first file in the project list by default.
+To check your list of files to be translated, consult the <strong>Project Files</strong> window (Menu: <strong>Project → Project Files...</strong>, if it does not open automatically). If you have had to change the contents of the Source folder, remember to reload the project first (Menu: <strong>Project → Reload</strong>). OmegaT opens the first file in the project list by default.
 </p>
 
 <p>
 Remember, OmegaT can only translate files in the formats below. Any other files will be ignored.
 <ul>
-<li>Open Document Format</li>
+<li>Open Document Format (ODF ISO/IEC 26300)</li>
 <li>OpenOffice.org </li>
-<li>(X)HTML </li>
+<li>XHTML, HTML </li>
 <li>HTML Help Compiler (HCC)</li>
 <li>DocBook </li>
 <li>plaintext </li>
@@ -97,17 +96,17 @@ You must type your translation between the tags &lt;segment 0001&gt; and &lt;end
 </p>
 
 <p>
-Press "ENTER" to advance to the next segment.
+Press "<strong>ENTER</strong>" to advance to the next segment.
 </p>
 
 <p>
 Note:<br> 
 - To move to any other part of the text, whether above or below, double-click on the sentence or paragraph you wish to open. <br>
-- If you prefer to translate into an empty target field, set this option in Options -> Editing Behavior.
+- If you prefer to translate into an empty target field, set this option in <strong>Options → Editing Behavior...</strong>.
 </p>
 
 <p>
-When you press "ENTER", several things happen invisibly: <br>
+When you press "<strong>ENTER</strong>", several things happen invisibly: <br>
 OmegaT adds the segment pair (the source segment and its translation) to the translation memory and also automatically translates any other identical segments that it detects in the other project files. It also scans the translation memory and glossary in search of matches for the next untranslated segment.
 </p>
 
@@ -129,7 +128,7 @@ To insert translation memory matches from the Match Viewer into your target fiel
 </p>
 
 <p>
-If several matches have been found and you prefer not to use the match pre-selected:<br>
+If several matches have been found and you prefer not to use the pre-selected match:<br>
 <ul>
 	<li>Select the match you prefer in the Match Viewer: <code>Ctrl+2</code> for the second match displayed, <code>Ctrl+3</code> for the third match, etc. </li>
 	<li>Then use the <code>Ctrl+I</code> or <code>Ctrl+R</code> shortcuts as above.</li>
@@ -137,7 +136,7 @@ If several matches have been found and you prefer not to use the match pre-selec
 </p>
 
 <p>
-(You can tell OmegaT to insert any first match above a specified matching percentage automatically into the target field whenever the segment opens. Set this option using <strong>Options -&gt; Editing Behaviour...</strong>)
+(You can tell OmegaT to insert any first match above a specified matching percentage automatically into the target field whenever the segment opens. Set this option using <strong>Options → Editing Behaviour...</strong>)
 </p>
 
 <a name="Glossary_matches"></a>
@@ -155,7 +154,7 @@ When you have translated all the segments (or earlier if you wish), OmegaT will 
 </p>
 
 <p>
-To do so, select <strong>Project -&gt; Create Translated 
+To do so, select <strong>Project → Create Translated 
 Documents</strong> from the menu.
 </p>
 
@@ -172,7 +171,7 @@ To finalise your translation,open the target files in their associated applicati
 <h2>3. Dealing with tagged text</h2>
 
 <p>
-OmegaT ensures that the formatting of the source documents (bold, italic etc.) is not lost by marking it with special tags; these will be visible in the target field.
+OmegaT ensures that the formatting of the source documents (bold, italic etc.) is not lost by marking it with special tags. OmegaT tags are composed of one or more letters followed by one or more digit and sometimes use a "/" character (for exemple: &lt;f0&gt;, &lt;br10/&gt;, &lt;/s2&gt; etc.).
 </p>
 
 <p>
@@ -253,7 +252,7 @@ OmegaT doesn't automatically detect faulty tagging in the translated document. B
 </p>
 
 <p>
-Select <strong>Tools -&gt; Validate Tags</strong> from the menu. A table will be displayed showing the segments where the source and target tags do not correspond. Click on the segment number.</p>
+Select <strong>Tools → Validate Tags</strong> from the menu. A table will be displayed showing the segments where the source and target tags do not correspond. Click on the segment number.</p>
 
 <p>
 You will be taken automatically to the faulty segment in the Editor, where you can correct the tagging.

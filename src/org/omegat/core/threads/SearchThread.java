@@ -267,8 +267,9 @@ public class SearchThread extends Thread
 
         if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS)
         {
-            m_window.postMessage(  OStrings.getString("SW_MAX_FINDS_REACHED")
-                                 + " ("+ OConsts.ST_MAX_SEARCH_RESULTS + ").");
+            m_window.postMessage(StaticUtils.format(
+                OStrings.getString("SW_MAX_FINDS_REACHED"),
+                new Object[] {new Integer(OConsts.ST_MAX_SEARCH_RESULTS)}));
         }
     }
 

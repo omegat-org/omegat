@@ -59,7 +59,7 @@ public class Main
                 "\n" +                                                                    // NOI18N
                 "===================================================================" +   // NOI18N
                 "\n" +                                                                    // NOI18N
-                OStrings.OMEGAT_VERSION+                                                         // NOI18N
+                OStrings.getDisplayVersion() +                                            // NOI18N
                 " ("+new Date()+") " +                                                    // NOI18N
                 " Locale "+Locale.getDefault()+                                           // NOI18N
                 "\n");                                                                    // NOI18N

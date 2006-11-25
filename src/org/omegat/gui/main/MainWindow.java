@@ -361,7 +361,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      */
     private void updateTitle()
     {
-        String s = OStrings.OMEGAT_VERSION;
+        String s = OStrings.getDisplayVersion();
         if( m_projectLoaded )
         {
             s += " :: " + m_activeProj;                                         // NOI18N
@@ -390,7 +390,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         
         // check this only once as it can be changed only at compile time
         // should be OK, but localization might have messed it up
-        String start = OStrings.TF_CUR_SEGMENT_START;
+        String start = OStrings.getSegmentStartMarker();
         int zero = start.lastIndexOf('0');
         m_segmentTagHasNumber = (zero > 4) && // 4 to reserve room for 10000 digit
                 (start.charAt(zero - 1) == '0') &&
@@ -630,8 +630,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
             // show dialog saying all is OK
             JOptionPane.showMessageDialog(this,
-                    OStrings.TF_NOTICE_OK_TAGS,
-                    OStrings.TF_NOTICE_TITLE_TAGS,
+                    OStrings.getString("TF_NOTICE_OK_TAGS"),
+                    OStrings.getString("TF_NOTICE_TITLE_TAGS"),
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }
@@ -819,10 +819,10 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     {
         // build local offsets
         int start = m_segmentStartOffset + m_sourceDisplayLength +
-                OStrings.TF_CUR_SEGMENT_START.length();
+                OStrings.getSegmentStartMarker().length() + 1;
         int end = editor.getTextLength() - m_segmentEndInset -
-                OStrings.TF_CUR_SEGMENT_END.length();
-        
+                OStrings.getSegmentEndMarker().length() - 1;
+
         // remove text
         editor.select(start, end);
         editor.replaceSelection(text);
@@ -841,7 +841,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         m_projWin.reset();
         m_projectLoaded = false;
         
-        editor.setText(OStrings.TF_INTRO_MESSAGE);
+        editor.setText(OStrings.getString("TF_INTRO_MESSAGE"));
         matches.clear();
         glossary.clear();
         
@@ -1296,7 +1296,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                     dialog,
                     StaticUtils.format(OStrings.getString("MW_SEGMENT_NUMBER_ERROR"),
                                          new Object[] {new Integer(CommandThread.core.numEntries())}),
-                    OStrings.TF_ERROR,
+                    OStrings.getString("TF_ERROR"),
                     JOptionPane.ERROR_MESSAGE
                 );
             }
@@ -1387,11 +1387,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         }
         catch(IOException e)
         {
-            displayError(OStrings.TF_COMPILE_ERROR, e);
+            displayError(OStrings.getString("TF_COMPILE_ERROR"), e);
         }
         catch(TranslationException te)
         {
-            displayError(OStrings.TF_COMPILE_ERROR, te);
+            displayError(OStrings.getString("TF_COMPILE_ERROR"), te);
         }
     }
     
@@ -1570,9 +1570,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         AbstractDocument xlDoc = (AbstractDocument)editor.getDocument();
 
         int start = m_segmentStartOffset + m_sourceDisplayLength +
-                OStrings.TF_CUR_SEGMENT_START.length();
+                OStrings.getSegmentStartMarker().length();
         int end = editor.getTextLength() - m_segmentEndInset -
-                OStrings.TF_CUR_SEGMENT_END.length();
+                OStrings.getSegmentEndMarker().length();
         String display_string;
         String new_translation;
         if (start == end)
@@ -1597,8 +1597,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             display_string = new_translation;
         }
 
-        int totalLen = m_sourceDisplayLength + OStrings.TF_CUR_SEGMENT_START.length() +
-                new_translation.length() + OStrings.TF_CUR_SEGMENT_END.length();
+        int totalLen = m_sourceDisplayLength + OStrings.getSegmentStartMarker().length() +
+                new_translation.length() + OStrings.getSegmentEndMarker().length();
         try
         {
             // see http://sourceforge.net/support/tracker.php?aid=1436607
@@ -1744,8 +1744,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         m_segmentEndInset = editor.getTextLength() - (m_segmentStartOffset + docSeg.length-2);
         
         // get label tags
-        String startStr = OStrings.TF_CUR_SEGMENT_START;
-        String endStr = OStrings.TF_CUR_SEGMENT_END;
+        String startStr = OStrings.getSegmentStartMarker();
+        String endStr = OStrings.getSegmentEndMarker();
         // <HP-experiment>
         try {
             if (m_segmentTagHasNumber)
@@ -1956,19 +1956,19 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                     new Integer(nearLength),
                             new Integer(m_glossaryLength) };
                             setMessageText(StaticUtils.format(
-                                    OStrings.TF_NUM_NEAR_AND_GLOSSARY, obj));
+                                    OStrings.getString("TF_NUM_NEAR_AND_GLOSSARY"), obj));
             }
             else if (nearLength > 0)
             {
                 Object obj[] = { new Integer(nearLength) };
                 setMessageText(StaticUtils.format(
-                        OStrings.TF_NUM_NEAR, obj));
+                        OStrings.getString("TF_NUM_NEAR"), obj));
             }
             else if (m_glossaryLength > 0)
             {
                 Object obj[] = { new Integer(m_glossaryLength) };
                 setMessageText(StaticUtils.format(
-                        OStrings.TF_NUM_GLOSSARY, obj));
+                        OStrings.getString("TF_NUM_GLOSSARY"), obj));
             }
             else
                 setMessageText(new String());                                       // NOI18N
@@ -2024,8 +2024,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         }
         // </HP-experiment>
         final int lookNext = m_segmentStartOffset + srcText.length() + 
-                OStrings.TF_CUR_SEGMENT_START.length() + 1 + translation.length() + 
-                OStrings.TF_CUR_SEGMENT_END.length() + offsetNext;
+                OStrings.getSegmentStartMarker().length() + 1 + translation.length() + 
+                OStrings.getSegmentEndMarker().length() + offsetNext;
         
         SwingUtilities.invokeLater(new Runnable()
         {
@@ -2080,7 +2080,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         String fulltext = msg;
         if( e!=null )
             fulltext+= "\n" + e.toString();                                     // NOI18N
-        JOptionPane.showMessageDialog(this, fulltext, OStrings.TF_WARNING,
+        JOptionPane.showMessageDialog(this, fulltext, OStrings.getString("TF_WARNING"),
                 JOptionPane.WARNING_MESSAGE);
     }
     
@@ -2096,7 +2096,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         String fulltext = msg;
         if( e!=null )
             fulltext+= "\n" + e.toString();                                     // NOI18N
-        JOptionPane.showMessageDialog(this, fulltext, OStrings.TF_ERROR,
+        JOptionPane.showMessageDialog(this, fulltext, OStrings.getString("TF_ERROR"),
                 JOptionPane.ERROR_MESSAGE);
     }
     
@@ -2119,7 +2119,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             // make sure we're not at end of segment
             // -1 for space before tag, -2 for newlines
             int end = editor.getTextLength() - m_segmentEndInset -
-                    OStrings.TF_CUR_SEGMENT_END.length();
+                    OStrings.getSegmentEndMarker().length();
             int spos = editor.getSelectionStart();
             int epos = editor.getSelectionEnd();
             if( pos>=end && spos>=end && epos>=end )
@@ -2129,7 +2129,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         {
             // make sure we're not at start of segment
             int start = m_segmentStartOffset + m_sourceDisplayLength +
-                    OStrings.TF_CUR_SEGMENT_START.length();
+                    OStrings.getSegmentStartMarker().length();
             int spos = editor.getSelectionStart();
             int epos = editor.getSelectionEnd();
             if( pos<=start && epos<=start && spos<=start )
@@ -2148,10 +2148,10 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         int spos = editor.getSelectionStart();
         int epos = editor.getSelectionEnd();
         int start = m_segmentStartOffset + m_sourceDisplayLength +
-                OStrings.TF_CUR_SEGMENT_START.length();
+                OStrings.getSegmentStartMarker().length();
         // -1 for space before tag, -2 for newlines
         int end = editor.getTextLength() - m_segmentEndInset -
-                OStrings.TF_CUR_SEGMENT_END.length();
+                OStrings.getSegmentEndMarker().length();
         
         if (spos != epos)
         {
@@ -2232,7 +2232,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     // text length of glossary, if displayed
     private int		m_glossaryLength;
     
-    // boolean set after safety check that org.omegat.OStrings.TF_CUR_SEGMENT_START
+    // boolean set after safety check that org.omegat.OStrings.getSegmentStartMarker()
     //	contains empty "0000" for segment number
     private boolean	m_segmentTagHasNumber;
     

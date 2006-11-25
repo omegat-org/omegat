@@ -204,14 +204,14 @@ public class SearchThread extends Thread
                         {
                             // something bad happened
                             // alert user to badness
-                            String msg = OStrings.ST_FILE_SEARCH_ERROR;
+                            String msg = OStrings.getString("ST_FILE_SEARCH_ERROR");
                             CommandThread.core.displayError(msg, e);
                         }
                         catch (TranslationException te)
                         {
                             // something bad happened
                             // alert user to badness
-                            String msg = OStrings.ST_FILE_SEARCH_ERROR;
+                            String msg = OStrings.getString("ST_FILE_SEARCH_ERROR");
                             CommandThread.core.displayError(msg, te);
                         }
                     }
@@ -221,7 +221,7 @@ public class SearchThread extends Thread
                     if (m_numFinds == 0)
                     {
                         // no match
-                        m_window.postMessage(OStrings.ST_NOTHING_FOUND);
+                        m_window.postMessage(OStrings.getString("ST_NOTHING_FOUND"));
                     }
                     m_window.displayResults();
                     m_searching = false;
@@ -231,7 +231,7 @@ public class SearchThread extends Thread
         }
         catch (RuntimeException re)
         {
-            String msg = OStrings.ST_FATAL_ERROR;
+            String msg = OStrings.getString("ST_FATAL_ERROR");
             CommandThread.core.displayError(msg, re);
             m_window.threadDied();
         }
@@ -250,7 +250,7 @@ public class SearchThread extends Thread
         {
             return;
         }
-        
+
         if (entryNum >= 0)
         {
             if (!m_entrySet.contains(src + target)) { // HP, duplicate entry prevention
@@ -264,13 +264,14 @@ public class SearchThread extends Thread
         {
             m_window.addEntry(entryNum, intro, src, target);
         }
-        
+
         if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS)
         {
-            m_window.postMessage(OStrings.SW_MAX_FINDS_REACHED);
+            m_window.postMessage(  OStrings.getString("SW_MAX_FINDS_REACHED")
+                                 + " ("+ OConsts.ST_MAX_SEARCH_RESULTS + ").");
         }
     }
-    
+
     private void searchProject()
     {
         // reset the number of search hits

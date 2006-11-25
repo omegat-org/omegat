@@ -108,11 +108,11 @@ public class WorkflowOptionsDialog extends JDialog
 
         ourButtonGroup = new javax.swing.ButtonGroup();
         similarityLabel = new javax.swing.JLabel();
-        similaritySpinner = new javax.swing.JSpinner(
-            new javax.swing.SpinnerNumberModel(new Integer(90),
-                                               new Integer(1),
-                                               new Integer(100),
-                                               new Integer(1)));
+        similaritySpinner = new javax.swing.JSpinner( // create spinner with minimum and maximum
+            new javax.swing.SpinnerNumberModel(new Integer(90),  // default value, doesn't matter which
+                                               new Integer(1),   // minimum 1
+                                               new Integer(100), // maximum 100
+                                               new Integer(1))); // in-/decrement value by 1%
         descriptionTextArea = new javax.swing.JTextArea();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();

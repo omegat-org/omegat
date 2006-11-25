@@ -321,8 +321,10 @@ public final class Segmenter
             if (CJK_LANGUAGES.contains(config.getTargetLanguage().getLanguageCode()))
             {
                 Rule rule = (Rule)brules.get(i-1);
-                if( !PatternConsts.SPACY_REGEX.matcher(rule.getBeforebreak()).matches() ||
-                        !PatternConsts.SPACY_REGEX.matcher(rule.getAfterbreak()).matches() )
+                char lastChar = res.charAt(res.length() - 1);
+                if(   (lastChar != '.')
+                   && (   !PatternConsts.SPACY_REGEX.matcher(rule.getBeforebreak()).matches()
+                       || !PatternConsts.SPACY_REGEX.matcher(rule.getAfterbreak()).matches()))
                     sp.setLength(0);
             }
             else if (CJK_LANGUAGES.contains(config.getSourceLanguage().getLanguageCode()) && 

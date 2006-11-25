@@ -58,7 +58,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
         undoManager = new UndoManager();
         doc.addUndoableEditListener(undoManager);
         setDocument(doc);
-        setText(OStrings.TF_INTRO_MESSAGE);
+        setText(OStrings.getString("TF_INTRO_MESSAGE"));
 
         addMouseListener(this);
     }
@@ -262,9 +262,9 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                 e.getKeyCode()==KeyEvent.VK_A )
         {
             int start = mw.m_segmentStartOffset + mw.m_sourceDisplayLength +
-                    OStrings.TF_CUR_SEGMENT_START.length();
+                    OStrings.getSegmentStartMarker().length();
             int end = getTextLength() - mw.m_segmentEndInset -
-                    OStrings.TF_CUR_SEGMENT_END.length();
+                    OStrings.getSegmentEndMarker().length();
             
             // selecting
             setSelectionStart(start);
@@ -353,7 +353,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                     int pos = getCaretPosition();
                     int start = mw.m_segmentStartOffset +
                             mw.m_sourceDisplayLength +
-                            OStrings.TF_CUR_SEGMENT_START.length();
+                            OStrings.getSegmentStartMarker().length();
                     if (pos < start)
                         moveCaretPosition(start);
                 }
@@ -369,7 +369,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                     int pos = getCaretPosition();
                     // -1 for space before tag, -2 for newlines
                     int end = getTextLength() - mw.m_segmentEndInset -
-                            OStrings.TF_CUR_SEGMENT_END.length();
+                            OStrings.getSegmentEndMarker().length();
                     if (pos > end)
                         moveCaretPosition(end);
                 }

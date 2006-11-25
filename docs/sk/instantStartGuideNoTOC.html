@@ -1,0 +1,186 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Rýchly úvodný sprievodca - Používateľská príručka OmegaT 1.6.1</title>
+</head>
+<body>
+
+<h1>Rýchly úvodný sprievodca</h1>
+<p>alebo <strong>začnite používať OmegaT za 5 minút</strong></p>
+
+<p><strong>Tento sprievodca rýchlym začiatkom obsahuje iba úplné základy. Ideálne, by si všetci používatelia mali prečítať Používateľskú príručku OmegaT aby sa oboznámili so všetkým čo môže OmegaT ponúknuť.</strong></p>
+
+<h2>Obsah</h2>
+   <ol><li>Stručne, ako OmegaT funguje</li>
+   <li>Ako prekladať pomocou OmegaT</li>
+   <li>Práca so značkovaných (tagged) textom</li></ol>
+
+<hr>
+
+<a name="Briefly.2C_how_OmegaT_works"></a>
+<h2>1. Stručne, ako OmegaT funguje</h2>
+
+<p>Obrazovka OmegaT pozostáva z troch osobitných okien. Veľkosť každého z týchto okien môže byť zmenená pomocou myši. Vľavo je Editor, kde píšete váš preklad. Vpravo, hore, je Zobrazovač zhody, kde sa zobrazia zhodné položky z prekladovej pamäte. Pod tým je Zobrazovač slovníka, kde sa zobrazia zhodné položky zo slovníka.</p>
+
+<p>V okne Editora zobrazuje OmegaT zdrojový text 'segmentovaný' do viet (alebo odstavcov – pozri Manuál). Tieto segmenty prekladáte jeden za druhým. Ako prechádzate od segmentu k segmentu vaše preklady sa zaznamenávajú v prekladovej pamäti. Keď sú už všetky segmenty preložené (alebo predtým, ak to chcete) OmegaT použije prekladovú pamäť na vytvorenie preloženého dokumentu (preložených dokumentov) v priečinku “Target”.</p>
+
+<p>OmegaT organizuje vašu prekladateľskú prácu v takzvaných prekladových projektoch. Pre každý projekt vytvorí OmegaT sadu priečinkov. Tie sa používajú pre uloženie zdrojových dokumentov určených na preklad, slovníkov, ktoré môžete chcieť použiť, a akýchkoľvek prekladových pamätí, ktoré môžete chcieť použiť. OmegaT tiež vytvorí priečinok “Target”, ktorý bude obsahovať výsledné preložené dokumenty.</p>
+
+<hr>
+<a name="How_to_translate_using_OmegaT"></a>
+<h2>2. Ako prekladať pomocou OmegaT</h2>
+
+<a name="Create_and_open_a_new_project"></a>
+<h3>a. Vytvorte a otvorte nový projekt</h3>
+
+<p>Z menu vyberte <strong>Projekt -&gt; Nový...</strong>.</p>
+
+<p>Prejdite do priečinka kde chcete uložiť súbory projektu a napíšte názov pre prekladový projekt. Tento názov bude použité pre hlavný priečinok projektu; všetky súbory projektu budú uložené v tom priečinku alebo v jeho podpriečinkoch.</p>
+
+<p>OmegaT vás požiada o potvrdenie alebo zmenu vytváraných priečinkov projektu, pomocou nasledujúceho dialógového okna:</p>
+
+<center><img src="images/NewProject.png" alt="Image:NewProject.png" width="398" height="428" ></center>
+
+<p>Môžete jednoducho prijať umiestnenie podpriečinkov, ale uistite sa, že kódy zdrojového a cieľového jazyka sú správne. Vyberte kódy jazyka (2 písmená) alebo jazyka-a-krajiny (2 + 2 písmená) z rozbaľovacieho zoznamu alebo ich napíšte ručne (pridržiavajte sa 2 písmenového vzoru). Zapamätejte si umiestnenie cieľového podpriečinka ("target") (pre vaše preložené cieľové dokumenty).</p>
+
+<p>Ak chcete aby program OmegaT segmentoval podľa viet namiesto podľa "odstavcov", je dobré prekontrolovať Pravidlá segmentácie.</p>
+
+<p>Keď kliknete OK pre prijatie nastavenia projektu, OmegaT vás požiada o vybratie zdrojových dokumentov pre import. Môžete importovať jednotlivé súbory, ale môžete tiež importovať celé adresárové stromy (so všetkými súbormi vo všetkých podpriečinkoch). Ak ste náhodou importovali nesprávne dokumenty alebo príliš veľa dokumentov, môžete ich jednoducho odstrániť z zo zdrojového priečinka ("source") vášho projektu OmegaT (napríklad pomocou správcu súboru vášho systému).</p>
+
+<p>Pre kontrolu zoznamu súborov určených na preklad môžete použiť okno Súbory projektu (Menu: Zobraziť -&gt; Súbory projektu, ak sa neotvoria automaticky). Ak ste museli zmeniť obsah zdrojového priečinka, nezabudnite najprv znovu načítať projekt (Menu: Projekt -&gt; Znovu načítať). OmegaT predvolene otvorí prvý súbor v zozname projektu.</p>
+
+<p>Pamätajte, že OmegaT môže prekladať iba súbory v nasledujúcich formátoch. Akékoľvek iné súbory budú ignorované.<ul>
+<li>Open Document Format</li>
+<li>OpenOffice.org </li>
+<li>(X)HTML </li>
+<li>HTML Help Compiler (HCC)</li>
+<li>DocBook </li>
+<li>obyčajný text</li>
+<li>bundle.properties Java </li>
+<li>jednojazyčné .po</li>
+<li>INI (formát 'kľúč=hodnota')</li>
+</ul>
+</p>
+
+<a name="Translate_the_segments_one_by_one"></a>
+<h3>b. Prekladajte segmenty jeden za druhým</h3>
+
+<p>Keď ste už definovali projekt a súbory určené na preklad, OmegaT otvorí prvý zdrojový súbor v Editore. Prvý segment je zvýraznený zelenou farbou; kópia zdrojového textu je zobrazená pod ním, v “cieľovom poli”. (V tomto bode, všetok text mimo cieľového poľa je chránený a nemôže byť zmenený.) Musíte napísať váš preklad medzi tagy &lt;segment 0001&gt; a &lt;end segment&gt;, prepísaním zdrojového textu.</p>
+
+<p>Stlačte "ENTER" pre prechod na nasledujúci segment.</p>
+
+<p>Poznámka:<br> - Pre prechod na akúkoľvek inú časť textu, či už vyššie alebo nižšie, dvojkliknite na vetu alebo odstavec, ktorý chcete otvoriť. <br> - Ak chcete radšej prekladať do prázdneho cieľového poľa, nastavte túto voľbu v Voľby -&gt; Správanie sa editácie.</p>
+
+<p>Keď stlačíte "ENTER", neviditeľne sa odohrá niekoľko vecí: <br> OmegaT pridá preložený pár segmentov (zdrojový segment a jeho preklad) do prekladovej pamäte a tiež automaticky prekladá akékoľvek identické segmenty, ktoré nájde v iných súboroch projektu. Tiež hľadá v prekladovej pamäti a v slovníku zhodu s nasledujúcim nepreloženým segmentom.</p>
+
+<a name="Use_TM_and_glossary_matches"></a>
+<h3>c. Používajte položky z prekladovej pamäte a slovníka</h3>
+
+<a name="TM_matches"></a>
+<h4>1. Položky z prekladovej pamäte</h4>
+
+<p>Ak OmegaT nájde nejaké približné preklady (30% alebo vyššie – pozri príručku) pre nasledujúci segment v prekladovej pamäti, zobrazí ich v Okne zhody. Prvá zhoda je predvolene vybratá v Okne zhody.</p>
+<p>Pre vloženie zhodnej položky prekladovej pamäte z Okna zhody do vášho cieľového poľa, môžete použiť klávesové skratky:<br>
+<ul>
+   <li>Stlačte <code>Ctrl+I</code> pre vloženie predvybranej zhodnej položky na aktuálnu pozíciu kurzora, alebo...</li>
+   <li>Stlačte <code>Ctrl+R</code> pre prepísanie celého segmentu predvybranou položkou.</li>
+</ul>
+</p>
+
+<p>Ak bolo nájdených niekoľko zhodných položiek a chcete použiť inú ako predvybranú:<br>
+<ul>
+	<li>Vyberte zhodnú položku, ktorú chcete v Okne zhody: <code>Ctrl+2</code> pre druhú zobrazenú zhodnú položku, <code>Ctrl+3</code> pre tretiu zhodnú položku, atď.</li>
+	<li>Potom použite <code>Ctrl+I</code> alebo <code>Ctrl+R</code> skratky ako vyššie.</li>
+</ul>
+</p>
+
+<p>(Môžete povedať OmegaT aby vložil akúkoľvek prvú zhodnú položku nad zadané percento zhody automaticky do cieľového poľa pri otvorení segmentu. Nastavte si túto voľbu pomocou <strong>Voľby -&gt; Nastavenie editácie...</strong>)</p>
+
+<a name="Glossary_matches"></a>
+<h4>2. Položky zo slovníka</h4>
+
+<p>Ak OmageT nájde 100% zhodné pojmy v slovníku, tieto sa zobrazia ako referencia v Okne slovníka. Nemôžu byť prenesené pomocou klávesových skratiek.</p>
+
+<a name="Create_the_translated_documents"></a>
+<h3>d. Vytvoriť preložené dokumenty</h3>
+
+<p>Keď ste preložili všetky segmenty (alebo skôr ak chcete), OmegaT aktualizuje cieľové dokumenty pomocou prekladov uložených v prekladovej pamäti.</p>
+
+<p>Aby ste tak urobili, vyberte <strong>Projekt -&gt; Vytvoriť preložené dokumenty</strong> z menu.</p>
+
+<p>OmegaT vytvorí preložené verzie všetkých preložiteľných dokumentov v zdrojovom priečinku ("source") projektu, bez ohľadu na či boli úplne preložené. Úplne alebo čiastočne preložené súbory budú uložené v cieľovom projektovom priečinku ("target").</p>
+
+<p>Pre konečnú úpravu vášho prekladu,otvorte cieľové súbory v príslušných aplikáciách (prehliadač, textový procesor...) pre kontrolu obsahu a formátovania vášho prekladu. Potom sa môžete vrátiť k OmegaT pre urobenie potrebných úprav; nezabudnite znovu vytvoriť preložené dokumenty.</p>
+
+<hr>
+<a name="Dealing_with_tagged_text"></a>
+<h2>3. Práca so značkovaných (tagged) textom</h2>
+
+<p>OmegaT zaistí, že formátovanie zdrojových dokumentov (tučné, kurzíva atď.) sa nestratí tak, že to označí špeciálnymi značkami; tie budú viditeľné v cieľovom poli.</p>
+
+<p>S týmito značkami musíte narábať opatrne a uistiť sa, že sa správne nachádzajú v cieľových segmentoch. (Viac o pokročilej editácii značiek - tagov nájdete v Používateľskej príručke OmegaT.)</p>
+
+<a name="An_example..."></a>
+<h3>a. Príklad...</h3>
+
+<p>V týchto príkladoch sme zvýraznili značky (tagy) <font color="#ff0000">červenou farbou</font> aby sme ich urobili viditeľnejšími, ale v OmegaT nebudú zvýraznené.</p>
+
+<p>
+<strong>Tu je príklad segmentu v HTML:</strong>
+</p>
+
+<p>
+<code><font color="#ff0000">&lt;p&gt;</font>Iné písmo zobrazenia môže byť vybraté cez dialógové okno <font color="#ff0000">&lt;b&gt;</font>Písmo zobrazenia<font color="#ff0000">&lt;/b&gt;</font>. Otvorte ho cez položku <font color="#ff0000">&lt;i&gt;</font>Nastavenia<font color="#ff0000">&lt;/i&gt;</font> &amp;gt; <font color="#ff0000">&lt;i&gt;</font>Písmo zobrazenia...<font color="#ff0000">&lt;/i&gt;</font> v menu. Typ písma a veľkosť môžu byť zmenené z dialógového okna.<font color="#ff0000">&lt;/p&gt;</font></code>
+</p>
+
+<p>
+<strong>Takto to zobrazí OmegaT, zvýraznené červeným:</strong>
+</p>
+
+<p>
+<code>Iné písmo zobrazovania môže byť vybraté cez dialógové okno <font color="#ff0000">&lt;b0&gt;</font>Písmo zobrazenia<font color="#ff0000">&lt;/b0&gt;</font>. Otvorte ho cez položku v menu <font color="#ff0000">&lt;i1&gt;</font>Nastavenia<font color="#ff0000">&lt;/i1&gt;</font> &gt; <font color="#ff0000">&lt;i2&gt;</font>Písmo zobrazenia...<font color="#ff0000">&lt;/i2&gt;</font>. Typ písma a veľkosť môžu byť zmenené z dialógového okna.</code>
+</p>
+
+<p>
+<strong>A tu je ako by ste to preložili (tento príklad je v Afrikánčine):</strong>
+</p>
+
+<p>
+<code>'n Mens kan 'n ander vertoonfont kies met die 
+<font color="#ff0000">&lt;b0&gt;</font>Vertoonfont<font color="#ff0000">&lt;/b0&gt;</font>-dialoogkassie. 
+Kies <font color="#ff0000">&lt;i1&gt;</font>Opstelling<font color="#ff0000">&lt;/i1&gt;</font> 
+
+&gt; <font color="#ff0000">&lt;i2&gt;</font>Vertoonfont...<font color="#ff0000">&lt;/i2&gt;</font> 
+op die kieslys. Die lettertipe én die lettergrootte kan met dié 
+dialoogkassie verander word.</code>
+</p>
+
+<p>
+<strong>Keď OmegaT vytvorí preložený dokument, HTML bude vyzerať takto:</strong>
+</p>
+
+<p>
+<code><font color="#ff0000">&lt;p&gt;</font>'n Mens kan 'n ander vertoonfont kies 
+met die <font color="#ff0000">&lt;b&gt;</font>Vertoonfont<font color="#ff0000">&lt;/b&gt;</font>-dialoogkassie. 
+Kies <font color="#ff0000">&lt;i&gt;</font>Opstelling<font color="#ff0000">&lt;/i&gt;</font> 
+
+&amp;gt; <font color="#ff0000">&lt;i&gt;</font>Vertoonfont...<font color="#ff0000">&lt;/i&gt;</font> 
+op die kieslys. Die lettertipe én die lettergrootte kan met dié 
+dialoogkassie verander word.<font color="#ff0000">&lt;/p&gt;</font></code>
+</p>
+
+<a name="Tag_verification"></a>
+<h3>b. Overenie tagov</h3>
+
+<p>OmegaT nedetekuje automaticky chybné tagovanie v preloženom dokumente. Preto, pred tým ako dodáte cieľový dokument vášmu klientovi, mali by ste skontrolovať, či vaše tagy neobsahujú chyby.</p>
+
+<p>Vyberte <strong>Nástroje -&gt; Overiť tagy</strong> z menu. Zobrazí sa tabuľka ukazujúca kde sa zdrojové a cieľové tagy nezhodujú. Kliknite na číslo segmentu.</p>
+
+<p>V Editore budete automaticky premiestnený na chybný segment, kde môžete opraviť značkovanie (tagging).</p>
+
+<p>V niektorých prípadoch môžu chyby značiek (tagov) spôsobiť dokonca to, že sa dokument nebude dať otvoriť. Preto by ste sa mali uistiť, že ste opravili všetky chyby značiek pred tým ako vytvoríte preložené súbory.</p>
+
+<p>Nakoniec, vždy by ste mali prekontrolovať konečné formátovanie otvorením preloženého dokumentu v príslušnej aplikácii alebo editore.</p>
+<hr>
+</body>
+</html>

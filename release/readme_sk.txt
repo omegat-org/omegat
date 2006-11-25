@@ -1,9 +1,9 @@
 ==============================================================================
-  OmegaT 1.6.0 RC12 súbor Read Me
+  OmegaT 1.6.1 súbor Čítaj ma
 
   1.  Informácie o OmegaT
   2.  Čo je OmegaT?
-  3.  Všeobecné poznámky o Jave & OmegaT
+  3.  Všeobecné poznámky o Jave a OmegaT
   4.  Príspevky do OmegaT
   5.  Máte s OmegaT problémy? Potrebujete pomoc?
   6.  Podrobnosti o vydaní
@@ -34,7 +34,7 @@ OmegaT je nástroj na preklad podporovaný počítačom (CAT). Je slobodný, v t
 profesionálne používanie, a vo význame, že máte slobodu pre jeho modifikáciu a/alebo
 šírenie pokiaľ rešpektujete používateľskú licenciu.
 
-Hlavné vlastnosti OmegaT's sú
+Hlavné vlastnosti OmegaT sú
   - schopnosť bežať na akomkoľvek operačnom systéme podporujúcom Javu
   - používanie akéhokoľvek platného TMX súboru ako prekladovej príručky
   - flexibilné segmentovanie viet (využívaním metódy podobnej SRX)
@@ -47,8 +47,9 @@ Hlavné vlastnosti OmegaT's sú
   - lokalizácia do množstva jazykov.
 
 OmegaT podporuje súbory OpenDocument, súbory Microsoft Office (pomocou
-OpenOffice.org ako filtra pre konverziu), súbory OpenOffice.org alebo StarOffice, ako
-aj (X)HTML, lokalizačné súbory Javy alebo súbory v obyčajnom texte.
+OpenOffice.org ako filtra pre konverziu, alebo konverziou do HTML),
+súbory OpenOffice.org alebo StarOffice, ako aj (X)HTML, lokalizačné súbory
+Javy alebo obyčajné textové súbory.
 
 OmegaT automaticky spracuje dokonca aj najkomplexnejšie hierarchie zdrojových adresárov,
 pre prístup k všetkým podporovaným súborom, a vytvára cieľový adresár
@@ -60,13 +61,14 @@ Používateľská príručka je v balíčku, ktorý ste si práve stiahli, môž
 menu [Pomocník] po spustení OmegaT.
 
 ==============================================================================
- 3. Všeobecné poznámky o Jave & OmegaT
+ 3. Všeobecné poznámky o Jave a OmegaT
 
 OmegaT vyžaduje aby na vašom systéme bolo nainštalované prostredie Java Runtime Environment verzie 1.4 alebo vyššej. Dá sa získať z:
-      http://java.com
+    http://java.com
 
 Používatelia Windows a Linux možno budú potrebovať nainštalovať Javu ak ju ešte nemajú.
-Používatelia MacOSX už na svojich strojoch majú Javu nainštalovanú.
+Projekt OmegaT tiež ponúka verzie obsahujúce prostredie Java. Používatelia MacOSX už majú
+na svojich strojoch prostredie Java nainštalované.
 
 Na správne nainštalovanom stroji, by ste mali byť schopní spustiť OmegaT
 dvojkliknutím na súbor OmegaT.jar.
@@ -74,17 +76,27 @@ dvojkliknutím na súbor OmegaT.jar.
 Po inštalácii javy možno budete potrebovať zmeniť systémovú premennú path, aby
 obsahovala adresár, kde sa aplikácia 'java' nachádza.
 
+Používatelia Linuxu by mali dávať pozor na fakt, že OmegaT nebude fungovať so slobodnými/
+open-sourceovými implementáciami prostredia Java, ktoré možno nájsť v mnohých distribúciách Linuxu (napríklad,
+Ubuntu), keďže tieto sú buď zastaralé, alebo nekompletné. Stiahnite si a
+nainštalujte Java Runtime Environment (JRE) firmy Sun cez vyššieuvedený odkaz, alebo si stiahnite
+a nainštalujte OmegaT dodávané s JRE (balík .tar.gz označený "Linux").
+
+Keď používate Linux na systémoch PowerPC, používatelia si budú musieť stiahnuť JRE od firmy IBM, keďže
+Sun neposkytuje JRE pre systémy PPC. Stiahnite si ho z:
+    http://www-128.ibm.com/developerworks/java/jdk/linux/download.html
+
 ==============================================================================
  4. Príspevky do OmegaT
 
-Aby ste prispeli k vývoju OmegaT, spojte sa s vývojármi na:
+Ak chcete prispieť k vývoju OmegaT, spojte sa s vývojármi na:
     http://lists.sourceforge.net/lists/listinfo/omegat-development
 
-Pre preklad používateľského rozhrania OmegaT, používateľskej príručky alebo iných príbuzných dokumentov,
-si prečítajte:
+Ak chcete pomôcť pri preklade používateľského rozhrania OmegaT, používateľskej príručky alebo iných príbuzných dokumentov,
+prečítajte si:
       http://www.omegat.org/omegat/translation-info.html
 
-A prihláste sa do zoznamu prekladateľov:
+A prihláste sa do konferencie pre prekladateľov:
       http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
 
 Pre akýkoľvek iný príspevok sa najprv prihláste do používateľskej skupiny na:
@@ -99,26 +111,39 @@ Predchádzajúci prispievatelia sú:
 (v abecednom poradí)
 
 Do kódu prispeli
-  Sacha Chua
   Kim Bruning
+  Sacha Chua
   Maxym Mykhalchuk (súčasný vedúci vývojár)
   Henry Pijffers
   Benjamin Siband
 
 K lokalizácii prispeli
+  Roberto Argus (Brazílska portugalčina)
   Alessandro Cattelan (Taliančina)
   Sabine Cretella (Nemčina)
+  Suzanne Bolduc (Esperanto)
+  Didier Briel (Francúzština)
+  Frederik De Vos (Holandčina)
   Cesar Escribano Esteban (Španielčina)
   Dmitri Gabinski (Bieloruština, Esperanto, a Ruština)
-  Jean-Christophe Helary (Francúzština)
+  Takayuki Hayashi (Japončina)
+  Jean-Christophe Helary (Francúzština a japončina)
+  Yutaka Kachi (Japončina)
+  Elina Lagoudaki (Gréčtina)
+  Martin Lukáč (Slovenčina)
+  Samuel Murray (Afrikánčina)
+  Yoshi Nakayama (Japončina)
+  David Olveira (Portugalčina)
+  Ronaldo Radunz (Brazílska portugalčina)
+  Thelma L. Sabim (Brazílska portugalčina)
   Juan Salcines (Španielčina)
   Pablo Roca Santiagio (Španielčina)
+  Karsten Voss (Poľština)
+  Gerard van der Weyde (Holandčina)
   Martin Wunderlich (Nemčina)
   Hisashi Yanagida (Japončina)
-  Yoshi Nakayama (Japončina)
-  Takayuki Hayashi (Japončina)
   Kunihiko Yokota (Japončina)
-  Yutaka Kachi (Japončina)
+  Erhan Yukselci (Turečtina)
 
 Ďalej prispeli
   Sabine Cretella
@@ -129,12 +154,12 @@ K lokalizácii prispeli
   a mnoho, mnoho ďalších veľmi nápomocných ľudí
 
 OmegaT používa nasledujúce knižnice:
-  HTMLParser od Somika Rahu, Derricka Oswalda a iných.
-  Steve Roy MRJ Adapter.
-  InfoNode Docking Windows framework, GPL version.
+  HTMLParser od Somika Rahu, Derricka Oswalda a iných (Common Public License).
+  MRJ Adapter od Steva Roya (licencia LGPL).
+  VLDocking Framework od VLSolutions (licencia CeCILL).
 
 ==============================================================================
- 5.  Máte s OmegaT problémy? Potrebujete pomoc?
+ 5.  Máte s OmegaT problémy ? Potrebujete pomoc ?
 
 Pred ohlásením akejkoľvek chyby sa uistite, že ste dôkladne skontrolovali
 dokumentáciu. To čo vidíte môže byť vlastnosťou OmegaT
@@ -144,16 +169,16 @@ niečomu (log.txt sa nachádza v adresári predvolieb používateľa, jeho
 umiestnenie nájdete v príručke).
 
 Ďalšia vec, ktorú urobíte je overiť si to čo ste našli u ostatných používateľov, aby ste sa uistili,
-že toto už niekedy nebolo hlásené. Môžete si to overiť na stránke hlásení chýb tiež na
+že toto už niekedy nebolo hlásené. Môžete si to overiť aj na stránke hlásení chýb na
 SourceForge. Iba keď ste si istí, že ste prvý kto našiel nejakú
-zopakovateľnú sekvenciu udalostí ktorá spustila niečo čo sa nemalo
-stať tak by ste mali podať hlásenie o chybe.
+zopakovateľnú sekvenciu udalostí, ktorá spustila niečo čo sa nemalo
+stať, tak by ste mali podať hlásenie o chybe.
 
 Každé dobré hlásenie o chybe potrebuje presne tri veci.
   - Kroky, ktoré treba zopakovať,
   - Čo ste čakali, že uvidíte, a
   - Čo ste videli namiesto toho.
-  
+
 Môžete pridať kópie súborov, časti logu, snímky obrazovky, čokoľvek o čom
 si myslíte, že pomôže vývojárom nájsť a opraviť vašu chybu.
 
@@ -172,19 +197,10 @@ ako používateľ Source Forge.
 Podrobné informácie o zmenách v tomto
 a všetkých predchádzajúcich vydaniach nájdete v súbore 'changes.txt'.
 
-Nové vlastnosti používateľského rozhrania (v porovnaní so sériou OmegaT 1.0):
-  - Vyhľadávacie rozhranie prepísané s rozšírenou funkčnosťou
-  - Hlavné rozhranie vylepšené
-  - Schopnosť vybrať písmo zobrazenia
-  - Plná podpora lokalizácií
-  - Schopnosť prejsť na nasledujúci nepreložený segment
-  - Bohaté prispôsobenie správania sa Filtrov formátov
-  - Segmentácia upraviteľná používateľom
-  - Okno zhody/slovníka je spojené pohyblivým oddeľovačom
-
 Podporované formáty súborov:
   - Obyčajný text
   - HTML a XHTML
+  - HTML Help Compiler (HCC)
   - OpenDocument / OpenOffice.org
   - Zdrojové balíčky Java (.properties)
   - INI súbory (súbory s pármi kľúč=hodnota v akomkoľvek kódovaní)
@@ -198,6 +214,11 @@ Zmeny v jadre:
   - Inštalátor pre Windows
   - Možno prekladať atribúty HTML značiek (tagov)
   - Plná kompatibilita s TMX 1.1-1.4b Level 1
+  - Čiastočná podpora TMX 1.4b Level 2
+
+Nové vlastnosti používateľského rozhrania (v porovnaní so sériou OmegaT 1.4):
+  - Vyhľadávacie rozhranie prepísané s rozšírenou funkčnosťou
+  - Hlavné rozhranie vylepšené pomocou odpájateľných okien
 
 ==============================================================================
 

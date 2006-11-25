@@ -92,6 +92,7 @@ public class SearchWindow extends JFrame
 
         m_exactSearchRB   = new JRadioButton();
         m_keywordSearchRB = new JRadioButton();
+        m_resultsLabel    = new JLabel();
 
         ButtonGroup bg = new ButtonGroup();
         bg.add(m_exactSearchRB);
@@ -101,6 +102,8 @@ public class SearchWindow extends JFrame
         bRB.add(m_exactSearchRB);
         bRB.add(Box.createHorizontalStrut(10));
         bRB.add(m_keywordSearchRB);
+        bRB.add(Box.createHorizontalStrut(10));
+        bRB.add(m_resultsLabel);
 
         m_caseCB          = new JCheckBox();
         m_regexCB         = new JCheckBox();
@@ -439,6 +442,10 @@ public class SearchWindow extends JFrame
     public void displayResults()
     {
         m_viewer.finalize();
+        m_resultsLabel.setText(
+            StaticUtils.format(OStrings.getString("SW_NR_OF_RESULTS"),
+                               new Object[] {new Integer(m_viewer.getNrEntries())})
+        );
     }
     
     public void addEntry(int num, String preamble, String src, String tar)
@@ -650,6 +657,7 @@ public class SearchWindow extends JFrame
 
     private JRadioButton m_exactSearchRB;
     private JRadioButton m_keywordSearchRB;
+    private JLabel       m_resultsLabel;
 
     private JCheckBox m_caseCB;
     private JCheckBox m_regexCB;

@@ -46,95 +46,99 @@ import org.omegat.gui.main.MainWindow;
  */
 class EntryListPane extends JTextPane
 {
-	public EntryListPane(MainWindow trans)
-	{
-		m_transFrame = trans;
-		m_offsetList = new ArrayList();
-		m_entryList = new ArrayList();
-		m_stringBuf = new StringBuffer();
+    public EntryListPane(MainWindow trans)
+    {
+        m_transFrame = trans;
+        m_offsetList = new ArrayList();
+        m_entryList = new ArrayList();
+        m_stringBuf = new StringBuffer();
 
-		addMouseListener(new MouseAdapter()
-		{
-			public void mouseClicked(MouseEvent e)
-			{
-				super.mouseClicked(e);
-				if (e.getClickCount() == 2)
-				{
-					// user double clicked on viewer pane - send message
-					//	to org.omegat.gui.TransFrame to jump to this entry
-					int pos = getCaretPosition();
-					Integer off;
-					Integer entry;
-					for (int i=0; i<m_offsetList.size(); i++)
-					{
-						off = (Integer) m_offsetList.get(i);
-						if (off.intValue() >= pos)
-						{
-							entry = (Integer) m_entryList.get(i);
-							if (entry.intValue() >= 0)
-							{
-								MessageRelay.uiMessageDoGotoEntry(
-										m_transFrame, entry.toString());
-							}
-							break;
-						}
-					}
-				}
-			}
-		});
+        addMouseListener(new MouseAdapter()
+        {
+            public void mouseClicked(MouseEvent e)
+            {
+                super.mouseClicked(e);
+                if (e.getClickCount() == 2)
+                {
+                    // user double clicked on viewer pane - send message
+                    //    to org.omegat.gui.TransFrame to jump to this entry
+                    int pos = getCaretPosition();
+                    Integer off;
+                    Integer entry;
+                    for (int i=0; i<m_offsetList.size(); i++)
+                    {
+                        off = (Integer) m_offsetList.get(i);
+                        if (off.intValue() >= pos)
+                        {
+                            entry = (Integer) m_entryList.get(i);
+                            if (entry.intValue() >= 0)
+                            {
+                                MessageRelay.uiMessageDoGotoEntry(
+                                        m_transFrame, entry.toString());
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        });
 
-		setEditable(false);
-	}
+        setEditable(false);
+    }
 
-	// add entry text - remember what it's number is and where it ends
-	public void addEntry(int num, String preamble, String src, String loc)
-	{
-		if (m_stringBuf.length() > 0)
-			m_stringBuf.append("---------\n");									// NOI18N
+    // add entry text - remember what it's number is and where it ends
+    public void addEntry(int num, String preamble, String src, String loc)
+    {
+        if (m_stringBuf.length() > 0)
+            m_stringBuf.append("---------\n");                                    // NOI18N
 
-		if (preamble != null && !preamble.equals(""))				// NOI18N
-			m_stringBuf.append(preamble + "\n");								// NOI18N
-		if (src != null && !src.equals(""))							// NOI18N
-		{
-			m_stringBuf.append("-- "+src + "\n");								// NOI18N
-		}
-		if (loc != null && !loc.equals(""))							// NOI18N
-		{
-			m_stringBuf.append("-- "+loc + "\n");								// NOI18N
-		}
+        if (preamble != null && !preamble.equals(""))                // NOI18N
+            m_stringBuf.append(preamble + "\n");                                // NOI18N
+        if (src != null && !src.equals(""))                            // NOI18N
+        {
+            m_stringBuf.append("-- "+src + "\n");                                // NOI18N
+        }
+        if (loc != null && !loc.equals(""))                            // NOI18N
+        {
+            m_stringBuf.append("-- "+loc + "\n");                                // NOI18N
+        }
 
-		m_entryList.add(new Integer(num));
-		m_offsetList.add(new Integer(m_stringBuf.length()));
-	}
+        m_entryList.add(new Integer(num));
+        m_offsetList.add(new Integer(m_stringBuf.length()));
+    }
 
-	public void finalize()
-	{
-		String srcFont = Preferences.getPreference(OConsts.TF_SRC_FONT_NAME);
-		if (!srcFont.equals(""))										// NOI18N
-		{
-			int fontsize;
-			try 
-			{
-				fontsize = Integer.valueOf(
+    public void finalize()
+    {
+        String srcFont = Preferences.getPreference(OConsts.TF_SRC_FONT_NAME);
+        if (!srcFont.equals(""))                                        // NOI18N
+        {
+            int fontsize;
+            try 
+            {
+                fontsize = Integer.valueOf(
                         Preferences.getPreference(OConsts.TF_SRC_FONT_SIZE)).
                         intValue();
-			}
-			catch (NumberFormatException nfe) { fontsize = 12; }
-			setFont(new Font(srcFont, Font.PLAIN, fontsize));
-		}
-		setText(m_stringBuf.toString());
-	}
+            }
+            catch (NumberFormatException nfe) { fontsize = 12; }
+            setFont(new Font(srcFont, Font.PLAIN, fontsize));
+        }
+        setText(m_stringBuf.toString());
+    }
 
-	public void reset()	
-	{
-		m_entryList.clear();
-		m_offsetList.clear();
-		m_stringBuf.setLength(0);
-		setText("");															// NOI18N
-	}
+    public void reset()    
+    {
+        m_entryList.clear();
+        m_offsetList.clear();
+        m_stringBuf.setLength(0);
+        setText("");                                                            // NOI18N
+    }
 
- 	private StringBuffer	m_stringBuf;
-	private ArrayList		m_entryList;
-	private ArrayList		m_offsetList;
-	private MainWindow	m_transFrame;
+    public int getNrEntries() {
+        return m_entryList.size();
+    }
+
+    private StringBuffer    m_stringBuf;
+    private ArrayList        m_entryList;
+    private ArrayList        m_offsetList;
+    private MainWindow    m_transFrame;
 }

@@ -327,7 +327,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         setAccelerator(gotoNextUntranslatedMenuItem , KeyEvent.VK_U);
         setAccelerator(gotoNextSegmentMenuItem , KeyEvent.VK_N);
         setAccelerator(gotoPreviousSegmentMenuItem , KeyEvent.VK_P);
-        setAccelerator(gotoSegmentMenuItem, KeyEvent.VK_G);
+        setAccelerator(gotoSegmentMenuItem, KeyEvent.VK_J);
         
         //setAccelerator(viewFileListCheckBoxMenuItem, KeyEvent.VK_L);
         setAccelerator(viewFileListMenuItem, KeyEvent.VK_L);

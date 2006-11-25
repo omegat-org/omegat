@@ -106,7 +106,7 @@ public final class Segmenter
         }
         return sentences;
     }
-    
+
     /**
      * Returns pre-sentences (sentences with spaces between), computed by 
      * breaking paragraph into chunks of text. Also returns the list

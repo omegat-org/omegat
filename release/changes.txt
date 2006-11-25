@@ -21,6 +21,8 @@ Contains new localisations plus a couple bug fixes
   - Brazilian Portugese UI localisation + instant start guide
   translation
 
+  - Slovak UI localisation + full manual translation
+
  Bug fixes:
 
    - Localisation errors

@@ -1,0 +1,328 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>A interface do usuário - OmegaT 1.6.1 Manual do Usuário</title>
+</head>
+<body>
+
+<h1>A interface do usuário</h1>
+
+<h2>Índice</h2>
+
+<ul type="none">
+   <li>1. <a href="#User_Interface_Items">Itens da interface do usuário</a>
+
+      <ul type="none">
+         <li>1.1. <a href="#Windows_you.27ll_use_most_of_the_time">Janelas que você usará freqüentemente</a></li>
+         <li>1.2. <a href="#Windows_you.27ll_use_sometimes">Janelas que você usará esporadicamente</a></li>
+         <li>1.3. <a href="#Dialogs_you.27ll_use_to_change_your_project_settings">Caixas de diálogo que você usará para modificar as definições do projeto</a></li>
+      </ul>
+   </li>
+
+   <li>2. <a href="#OmegaT_Main_Window">Janela principal do OmegaT</a>
+
+      <ul>
+         <li>2.1. <a href="#Editor_Pane">Painel Editor</a></li>
+         <li>2.2. <a href="#Fuzzy_Matches">Correspondências imperfeitas</a></li>
+         <li>2.3. <a href="#Glossary">Glossário</a></li>
+         <li>2.4. <a href="#Main_Menu">Menu principal</a></li>
+         <li>2.5. <a href="#Status_Bar">Barra de status</a></li>
+      </ul>
+   </li>
+
+   <li>3. <a href="#Other_Windows">Outras janelas</a>
+
+      <ul>
+         <li>3.1. <a href="#Project_Files">Arquivos do projeto</a></li>
+         <li>3.2. <a href="#Search_Window">Janela de busca</a></li>
+
+         <li>3.3. <a href="#Tag_Validation">Validação de tags</a>
+
+            <ul>
+               <li>3.3.1. <a href="#Tag_validation_window">janela Validação de tags</a></li>
+               <li>3.3.2. <a href="#Tag_errors">Erros de tags</a></li>
+               <li>3.3.3. <a href="#Hints_for_tags_management">Dicas para controle de tags</a></li>
+            </ul>
+         </li>
+
+         <li>3.4. <a href="#Help_Browser">Navegador da Ajuda</a></li>
+      </ul>
+   </li>
+
+   <li>4. <a href="#Dialogs">Caixas de diálogos</a></li>
+</ul>
+
+<a name="User_Interface_Items"></a>
+<h2>Itens da interface do usuário</h2>
+
+<p>A interface do usuário do OmegaT consiste de diversos itens. Abaixo está um resumo de todos e depois aparecem descritos em mais detalhes.</p>
+
+<a name="Windows_you.27ll_use_most_of_the_time"></a>
+<h3>Janelas que você usará freqüentemente</h3>
+
+<ul>
+   <li>
+      <strong>Janela principal do OmegaT</strong>com três painéis:<ul>
+         <li><i>Editor</i> onde você digita e revisa a tradução</li>
+         <li><i>Visualizador de correspondências</i> que mostra os segmentos mais similares das memórias de tradução</li>
+         <li><i>Visualizador de glossário</i> com a tradução da terminologia</li>
+         <li>E também o <i>Menu principal</i> onde você pode acessar a maioria das funções do OmegaT</li>
+         <li>Além da <i>Barra de status</i> na parte inferior da janela para ver as mensagens relacionadas ao fluxo do trabalho</li>
+      </ul>
+   </li>
+
+   <li><strong>Janela Arquivos do projeto</strong> com a lista de seus arquivos traduzíveis</li>
+   <li><strong>Janela Busca</strong> usada para localizar segmentos específicos no projeto</li>
+</ul>
+
+<a name="Windows_you.27ll_use_sometimes"></a>
+<h3>Janelas que você usará esporadicamente</h3>
+
+<ul>
+   <li><strong>Validação de tags</strong> para detectar erros na formatação de documentos traduzidos</li>
+   <li><strong>Navegador da Ajuda</strong> para ler o manual do usuário</li>
+</ul>
+
+<a name="Dialogs_you.27ll_use_to_change_your_project_settings"></a>
+<h3>Caixas de diálogo que você usará para modificar as definições do projeto</h3>
+
+<ul>
+   <li><strong>Propriedades do projeto</strong> para modificar as pastas e idiomas do projeto</li>
+   <li><strong>Fonte</strong> para modificar a fonte que o OmegaT usa para exibir o texto fonte, a tradução, as correspondências e os termos do glossário</li>
+   <li><strong>Filtro de arquivo</strong> para ajustar a forma de processamento dos formatos de arquivos compatíveis</li>
+   <li><strong>Segmentação</strong> para modificar a segmentação do texto em sentenças</li>
+   <li><strong>Modo de trabalho</strong> para modificar as ações do OmegaT na sua interação com os segmentos</li>
+</ul>
+
+<a name="OmegaT_Main_Window"></a>
+<h2>Janela principal do OmegaT</h2>
+
+<p>A janela principal é formada por três painéis, menu principal e uma barra de status.</p>
+
+<p>As janelas podem ser posicionadas de acordo com sua preferência ou então desconectadas; basta arrastar o painel pelo nome. Dependendo do status no painel, este pode exibir 5 ícones diferentes no topo direito. Coloque o ponteiro do mouse sobre cada ícone para ver a descrição.</p>
+
+<p>
+<img src="images/Minimize.gif" alt="Minimizar" width="18" height="18">reduz o painel para mostrar somente o nome na parte inferior, perto da barra de status. <br> &lt;i1/&gt;faz com que o painel ocupe todo o espaço disponível na janela. <br> &lt;i3/&gt; coloca o painel na posição onde estava antes de ser minimizado ou maximizado. <br> &lt;i5/&gt; desconecta o painel da janela principal para uma janela separada. <br> &lt;i7/&gt; recoloca o painel dentro da janela principal.</p>
+
+<p>É possível também dispor os painéis de forma que se sobreponham. Neste caso os painéis exibirão uma guia na parte superior. Clique na guia para colocar o painel no primeiro plano. Os separadores entre os painéis podem ser arrastados para redimensionar os painéis.</p>
+
+<a name="Editor_Pane"></a>
+<h3>Painel Editor</h3>
+
+<p>Aqui você digitará e editará a tradução. O painel Editor exibe o texto do documento com a sua tradução nos segmentos já traduzidos e o texto original nos segmentos pendentes de tradução.</p>
+
+<p>O texto exibido é dividido em segmentos; você pode se movimentar pelo documento com a barra de rolagem e clicar duas vezes em qualquer segmento para abri-lo.</p>
+
+<p>Um dos segmentos aparece aberto, ou ativo. É o único exibido em duas partes: a parte superior é o texto original, em negrito com um fundo verde; a parte inferior é o campo de edição, delimitado por dois marcadores - o da esquerda, "&lt;segmento nnnn&gt;" onde "nnnn" indica o número do segmento no projeto e o marcador da direita é o "&lt;fim do segmento&gt;". Use a parte superior como referência e digite sobre ou modifique o conteúdo do campo de edição para conter sua tradução.</p>
+
+<pre>Esta frase foi traduzida.
+
+Esta frase também foi traduzida.
+
+<strong>Cette phrase est en train d'être traduite.</strong>
+&lt;segmento 0003&gt;[Aqui você deve digitar: Esta frase está sendo traduzida]&lt;fim do segmento&gt;</pre>
+
+<p>Dependendo das definições em <a href="translationEditing.html" title="Tradução e edição">Modo de trabalho</a> o campo de edição para segmentos não traduzidos pode ficar em branco ou conter texto diferente quando você acessá-lo:</p>
+
+<ul>
+   <li>O texto fonte</li>
+   <li>A tradução do segmento que está na memória com maior semelhança ao que você vai traduzir</li>
+</ul>
+
+<p>Ao passar para um outro segmento, a tradução é validada e guardada.</p>
+
+<p>Se quiser que o segmento permanece sem tradução, basta deixá-lo em branco apagando todo o texto (selecione tudo com <code>Ctrl+A</code> e apague com <code>Del</code>).</p>
+
+<p>Dependendo das opções defindas em <a href="translationEditing.html" title="Tradução e edição">Modo de trabalho</a>, o OmegaT pode lembrar uma tradução quando ela for idêntica ao texto original. Isto é um recurso útil em documentos que contêm marcas comerciais, nomes próprios e outros nomes ou partes em um terceiro idioma que não requerem tradução.</p>
+
+<p>Veja <a href="translationEditing.html" title="Tradução e edição">Tradução e edição</a> para obter mais detalhes.</p>
+
+<a name="Fuzzy_Matches"></a>
+<h3>Correspondências imperfeitas</h3>
+
+<p>O visualizador de correspondência mostra os segmentos das <a href="translationMemories.html" title="Memórias de tradução">memórias de tradução</a> que mais se assemelham ao segmento ativo; pode ser a memória criada durante a tradução, as memórias já existentes importadas de trabalhos anteriores ou então as que o cliente enviar.</p>
+
+<p>Ao passar para o próximo segmento, a primeira correspondência imperfeita (a que tiver melhor porcentagem de semelhança) é selecionada automaticamente. Pode-se selecionar uma outra correspondência; para isso basta <a href="keyboardShortcuts.html" title="Atalhos de teclado do OmegaT">pressionar <code>Ctrl+2</code>, <code>3</code>, <code>4</code>, ou <code>5</code></a>, dependendo de quantas forem apresentadas.</p>
+
+<p>Para usar na sua tradução a correspondência <strong>selecionada</strong>, pressione <a href="keyboardShortcuts.html" title="Atalhos de teclado do OmegaT"><code>Ctrl+R</code></a> para substituir o campo destino com a correspondência, ou  <a href="keyboardShortcuts.html" title="Atalhos de teclado do OmegaT"><code>Ctrl+I</code></a> para inseri-la na posição onde está o cursor.</p>
+
+<p>A porcentagem de correspondência é calculada aproximadamente considerando-se o número de palavras comuns nos segmentos 'casados' que é dividido pelo número de palavras no segmento mais longo dos dois.</p>
+
+<p>Correspondência imperfeita selecionada</p>
+
+<ul>
+   <li>Estará destacada em <strong>negrito</strong></li>
+   <li>Palavras que estão faltando no segmento a ser traduzido estarão marcadas em  <font color="blue"><strong>azul</strong></font></li>
+   <li>Essas palavras perto das azuis ou em posições que não são similares ao original estarão em <font color="green"><strong>verde</strong></font></li>
+</ul>
+
+<p>Considere o segmento:</p>
+
+<pre>   <strong>Informações sobre Java e OmegaT</strong></pre>
+
+<p>O segmento correspondente:</p>
+
+<pre>   <strong>Observações gerais sobre Java e OmegaT</strong></pre>
+
+<p>estará colorido:</p>
+
+<pre>   <strong><font color="blue">Observações gerais</font> <font color="green">sobre</font> Java e OmegaT</strong></pre>
+
+<p>e a porcentagem deve ser cerca de 3/5=<strong>60%</strong>
+</p>
+
+<a name="Glossary"></a>
+<h3>Glossário</h3>
+
+<p>O painel Glossário apresenta a tradução da terminologia carregada dos <a href="glossaries.html" title="Glossários">arquivos de glossários</a>. Ele mostra a tradução dos termos encontrados no segmento aberto, mas somente para fins de referência e não permite nenhuma inserção ou substituição na sua tradução. O OmegaT também suporta termos compostos de diversas palavras, mas em uma forma muito básica: se duas palavras de um termo são encontradas no segmento aberto, o termo é exibido.</p>
+
+<p>O formato para a terminologia no painel Glossário é</p>
+
+<pre>
+   'termo fonte' = 'tradução do termo'
+   Comentário geral sobre o termo, se houver
+</pre>
+
+<a name="Main_Menu"></a>
+<h3>Menu principal</h3>
+
+<p>Obviamente você pode usar o menu principal para acessar todas as funções do OmegaT. As funções mais usadas podem ser acessadas através de <a href="keyboardShortcuts.html" title="Atalhos de teclado do OmegaT">atalhos de teclado</a>, assim quando você estiver acostumado com eles, não precisará mais navegar até os menus durante a tradução.</p>
+
+<p>Veja o anexo <a href="menu.html" title="Menu principal">Menu principal</a> para obter uma descrição completa de todos os menus e seus itens.</p>
+
+<a name="Status_Bar"></a>
+<h3>Barra de status</h3>
+
+<p>A barra de status mostra, na parte inferior da janela principal, as mensagens relacionadas ao fluxo de trabalho. Esta barra mostra mensagens de feedback ao usuário sobre operações específicas que estão em andamento. Também mostra o número de correspondências imperfeitas da memória e equivalentes no glossário para o segmento aberto.</p>
+
+<a name="Other_Windows"></a>
+<h2>Outras janelas</h2>
+
+<a name="Project_Files"></a>
+<h3>Arquivos do projeto</h3>
+
+<p>A janela 'Arquivos do projeto' relaciona os arquivos do projeto e exibe outras informações a ele relacionadas. É exibida automaticamente quando OmegaT carrega um projeto. Quando o projeto é aberto, pode-se usar o <a href="keyboardShortcuts.html" title="Atalhos de teclado do OmegaT">atalho <code>Ctrl+L</code></a> na janela principal para abrir e fechar esta janela.</p>
+
+<p>A janela 'Arquivos do projeto' apresenta:</p>
+
+<ul>
+   <li>Lista de todos os arquivos traduzíveis (acessíveis com um clique no link) que compõem o projeto. Esses arquivos estão na pasta Source que o <a href="fileFormats.html" title="Formatos de arquivos compatíveis">OmegaT pode processar</a>. Clique no nome de qualquer arquivo que quer traduzir e ele será exibido na janela Editor.</li>
+   <li>O número de segmentos em cada arquivo é exibido próximo ao seu nome.</li>
+   <li>Número de segmentos únicos (diferentes) em todo o projeto.</li>
+   <li>Número de segmentos únicos que você já traduziu. É atualizado sempre após a tradução de um segmento.</li>
+</ul>
+
+<p>O conjunto de segmentos <strong>Únicos</strong> é computado considerando-se todos os segmentos, deduzindo todos os segmentos duplicados que são semelhantes até nas letras maiúsculas e minúsculas ("Rodar" e "rodar" são consideradas diferentes).</p>
+
+<p>A diferença entre "Números de segmentos" e "Número de segmentos únicos" dá uma idéia aproximada das repetições de segmentos no texto. Esses números não dão uma indicação clara da importância das repetições: segmentos podem ser longas frases repetidas diversas vezes (muita sorte!) ou simplismente palavras-chaves preenchendo uma tabela (que azar....)</p>
+
+<p>É possível modificar o número de segmentos/segmentos únicos com a modificação das regras de segmentação. Tais modificações "nunca" devem ser executadas após o início da tradução do projeto. Veja as <a href="segmentation.html" title="Segmentação do texto fonte">regras de segmentação</a> para obter mais informações.</p>
+
+<p>Para acrescentar arquivos fonte ao projeto, basta clicar no botão "Importar arquivos fonte...". Ele copia os arquivos selecionados para o diretório <code>/source</code> e recarrega o projeto com os novos arquivos.</p>
+
+<a name="Search_Window"></a>
+<h3>Janela de busca</h3>
+
+<p>A janela de busca é usada para localizar segmentos específicos no projeto. Podem existir diversas janelas de busca abertas simultaneamente. Para abrir uma nova, use <a href="keyboardShortcuts.html" title="Atalhos de teclado do OmegaT"><code>Ctrl+F</code></a> na janela principal.</p>
+
+<p>A janela de busca apresenta:</p>
+
+<ul>
+   <li>Campo de busca para entrada da palavra-chave ou da string de busca</li>
+   <li>Algumas opções para modificar os critérios de busca</li>
+   <li>Espaço para exibição dos resultados, acessíveis com um clique</li>
+</ul>
+
+<p>Após digitar a palavra ou string e clicar no botão Buscar, o campo de busca exibirá todos os segmentos correspondentes que encontrar no projeto. Visto que o OmegaT considera todos os segmentos iguais como uma única entidade  -- se você modificar um deles, todos os segmentos iguais serão atualizados, embora apenas o primeiro segmento único seja exibido.</p>
+
+<p>Os segmentos são exibidos na seqüência em que aparecem no projeto. Os segmentos traduzidos serão exibidos na parte superior com o texto original e a tradução na parte inferior; os segmentos não traduzidos aparecerão apenas com o texto original.</p>
+
+<p>Se a string for encontrada em um dos arquivos do projeto, basta clicar nela para abri-la no Editor e fazer as modificações necessárias. Depois, é só voltar à janela de busca e ir ao próximo segmento, repetindo o processo. Este recurso é útil para atualizações de terminologia em todo o projeto.</p>
+
+<p>Existem dois tipos de busca disponíveis:</p>
+
+<ul>
+   <li>A busca exata procura pela seqüência de palavras (string) consultadas dentro do projeto atual ou em qualquer diretório ou árvore de diretórios. A busca exata aceita os curingas * e ?. O caractere '<strong>*'</strong> corresponde a zero ou mais caracteres (por exemplo, a busca por '<strong>corre*'</strong> encontraria '<strong>corre'</strong>, '<strong>correm'</strong> e '<strong>correndo'</strong>). O caractere '<strong>?'</strong> corresponde exatamente a um carectere ('<strong>corre?'</strong> encontraria '<strong>correm'</strong> e '<strong>correr'</strong>, por exemplo, mas não  '<strong>corre'</strong> ou '<strong>correndo'</strong>). Esta operação faz a busca nos dois idiomas: fonte e destino.</li>
+
+   <li>As buscas de palavra-chave examina o projeto atual e retorna todos os segmentos que contêm todas as palavras consultadas, em qualquer ordem.</li>
+</ul>
+
+<p>A busca também pode ser feita em qualquer diretório, mas considere que o OmegaT só pode fazer pesquisas em <a href="fileFormats.html" title="Formatos de arquivos compatíveis">arquivos compatíveis</a>.</p>
+
+<a name="Tag_Validation"></a>
+<h3>Validação de tags</h3>
+
+<a name="Tag_validation_window"></a>
+<h4>Janela Validação de tags</h4>
+
+<p>A janela de validação de tags é usada para detectar problemas na formatação dos documentos traduzidos. Para abrir a janela, use <a href="keyboardShortcuts.html" title="Atalhos de teclado do OmegaT"><code>Ctrl+T</code></a>.</p>
+
+<p>A janela abre uma tabela de três colunas com:</p>
+
+<ul>
+   <li>Um link para o segmento com um provável erro de tag</li>
+   <li>Conteúdo do segmento original</li>
+   <li>Conteúdo do segmento traduzido</li>
+</ul>
+
+<p>Clique no link para trazer o segmento no Editor.</p>
+
+<a name="Tag_errors"></a>
+<h4>Erros de tags</h4>
+
+<p>Aqui estão alguns erros prováveis com tags:</p>
+
+<ul>
+   <li>Uma tag estava no segmento fonte mas foi apagada no segmento traduzido.</li>
+   <li>Uma tag não estava no segmento fonte mas foi inserida por engano na tradução.</li>
+   <li>A seqüência das tags foi modificada no segmento traduzido.</li>
+</ul>
+
+<a name="Hints_for_tags_management"></a>
+<h4>Dicas para controle de tags</h4>
+
+<p>As tags geralmente representam algum tipo de formatação no texto original. <strong>Simplificar a formatação do texto original </strong> ajuda bastante na redução do número de tags. Se possível, considere unificar as fontes usadas, os tamanhos e cores, etc. para simplificar a tradução e reduzir o número de possíveis erros de tags.</p>
+
+<p>Dê uma olhada na seção <a href="formattedText.html#Tag_operations" title="Trabalhar com texto formatado">Trabalhar com tags</a> para ver o que pode ser feito com tags.</p>
+
+<p>Lembre-se de que se as tags dificultarem seu trabalho e a formatação não for extremamente importante para o trabalho a ser traduzido, remover a formatação do documento fonte facilitará bastante a tradução.</p>
+
+<p>Se precisar ver as tags no OmegaT, mas não precisar reter a maioria do formato no documento traduzido, você pode optar por não acrescentar as tags na tradução. Neste caso, <strong>preste bastante atenção aos pares de tags</strong>. Se sobrar uma tag do par que foi apagado, ela corromperá a formatação do documento e invalidará o documento OpenOffice.org traduzido ou não lerá um arquivo HTML traduzido.</p>
+
+<p>Já que há tags inseridas no próprio documento, é possível usar as <a href="segmentation.html" title="Segmentação do texto fonte">regras de segmentação</a> para criar segmentos que incluam menos tags. Esta é uma função avançada e não deve ser usada por usuários iniciantes.</p>
+
+<a name="Help_Browser"></a>
+<h3>Navegador da Ajuda</h3>
+
+<p>O navegador da Ajuda (que exibe este manual) pode ser ativado pressionando a tecla <a href="keyboardShortcuts.html" title="Atalhos de teclado do OmegaT">F1</a> ou com um clique em <strong>Ajuda -&gt; Manual do Usuário...</strong> no <a href="menu.html" title="Menu principal">menu principal</a>.</p>
+
+<p>Na janela aparecerá o manual e dois botões: <strong>Voltar</strong> e <strong>Conteúdo</strong>.</p>
+
+<p>O manual do usuário é um documento HTML com links para os diversos capítulos. Clique em um link, como faria em um navegador da Internet, para acessar a página desejada.</p>
+
+<p>O manual do usuário está localizado na subpasta <code>doc</code> na pasta de instalação do OmegaT, portanto, se quiser ver a documentação em português, clique no arquivo <code>doc/por/index.hmtl</code> no navegador. Dessa forma você poderá seguir os links externos também, pois o navegador da ajuda incluído aqui não aceita links externos da Internet.</p>
+
+<a name="Dialogs"></a>
+<h2>Caixas de diálogos</h2>
+
+<p>As caixas de diálogo são usadas para modificar as definições do projeto. Todas elas estão descritas em seções separadas; abaixo está um resumo sobre sua utilização e como podem ser acionadas.</p>
+
+<ul>
+   <li>
+      <a href="projectProperties.html" title="Propriedades do projeto">Propriedades do projeto</a> é usada para modificar as pastas e idiomas do projeto. Para abri-la, pressione <a href="keyboardShortcuts.html" title="Atalhos de teclado do OmegaT"><code>Ctrl+E</code></a> ou clique em <strong>Projeto -&gt; Propriedades...</strong> no <a href="menu.html" title="Menu principal">menu principal</a>.</li>
+
+   <li>
+      <a href="fontSettings.html" title="Definições de fontes">Definições de fontes</a> serve para modificar a fonte que o OmegaT usa para exibir o texto fonte, a tradução, as correspondências e os termos do glossário. Para abri-la, acesse <strong>Opções -&gt; Fonte...</strong> no <a href="menu.html" title="Menu principal">menu principal</a>.</li>
+
+   <li>Use <a href="fileFilters.html" title="Filtros de arquivos">Opções de Filtros de arquivos</a> para modificar os arquivos que devem ser processados por cada um dos <a href="fileFormts.html" title="Formatos de arquivos compatíveis">filtros disponíveis</a>.</li>
+
+   <li>A caixa de diálogo <a href="segmentation.html" title="Segmentação do texto fonte">Definição de segmentação</a> possibilita-lhe modificar a forma que o texto é segmentado em sentenças. Observe que a segmentação de sentença é ativada/desativada na caixa de diálogo <a href="projectProperties.html" title="Propriedades do projeto">Propriedades do projeto</a>.</li>
+
+   <li>A caixa de diálogo <a href="translationEditing.html" title="Tradução e edição">Modo de trabalho</a> modifica as ações do OmegaT na sua interação com os segmentos.</li>
+</ul>
+
+<hr>
+<p><a href="legalNotices.html" title="Avisos legais">Avisos legais</a></p>
+
+</body>
+</html>

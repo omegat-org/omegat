@@ -1,0 +1,117 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Prekladové pamäte - Používateľská príručka OmegaT 1.6.1</title>
+</head>
+<body>
+
+<h1>Prekladové pamäte</h1>
+
+<h2>Obsah</h2>
+
+<ul type="none">
+   <li>1. <a href="#OmegaT_and_TMX_files">OmegaT a súbory TMX</a>
+
+      <ul type="none">
+         <li><a href="#TMX_files_location_and_purpose">Umiestnenie a účel súborov TMX</a></li>
+         <li><a href="#TMX_files_and_language">Súbory TMX a jazyk</span></a></li>
+      </ul>
+   </li>
+
+   <li>2. <a href="#Keeping_a_memory_of_your_translation_with_OmegaT">Udržiavanie pamäte vášho prekladu pomocou OmegaT</a></li>
+
+   <li>5. <a href="#Using_memories_created_by_other_translation_tools">Používanie pamätí vytvorených inými prekladateľskými nástrojmi</span></a>
+
+      <ul type="none">
+         <li>5.1. <a href="#Importing_files">Importovanie súborov</a></li>
+         <li>5.2. <a href="#Imported_files_handling">Zaobchádzanie s importovanými súbormi</a></li>
+      </ul>
+   </li>
+
+   <li>6. <a href="#Using_OmegaT_translation_memories_in_other_translation_tools">Používanie prekladových pamätí OmegaT v iných prekladateľských nástrojoch</a></li>
+   <li>7. <a href="#Upgrading_Translation_Memories">Aktualizácia prekladových pamätí</a></li>
+</ul>
+
+<a name="OmegaT_and_TMX_files"></a>
+<h2>OmegaT a súbory TMX</h2>
+
+<a name="TMX_files_location_and_purpose"></a>
+<h3>Umiestnenie a účel súborov TMX</h3>
+
+<p>OmegaT používa súbory TMX na 3 samostatných umiestneniach.</p>
+
+<ul>
+   <li>Priečinok /omegat/ obsahuje <strong>project_save.tmx</strong> a prípadne niekoľko záložných súborov TMX. Súbor project_save.tmx obsahuje <strong>všetky</strong> segmenty, ktoré boli uložené do pamäti odkedy ste začali projekt.</li>
+
+   <li>Hlavný priečinok projektu bude obsahovať 3 súbory TMX: <strong>&lt;project_name&gt;-omegat.tmx</strong>, <strong>&lt;project_name&gt;-level1.tmx</strong>, a <strong>&lt;project_name&gt;-level2.tmx</strong>, kde <code>&lt;project_name&gt;</code> je jednoducho názov vášho projektu. Tieto súbory sú exportované súbory TMX a obsahujú iba preložené páry.<ul>
+         <li>&lt;project_name&gt;-level1.tmx je TMX, ktorý obsahuje iba textové informácie.</li>
+
+         <li>&lt;project_name&gt;-level2.tmx je TMX, ktorý obsahuje znyčky špecifické pre OmegaT v správnych značkách TMX tak, že súbor môže byť použitý s jeho formátovacími informáciami v prekladateľskom nástroji, ktorý podporuje pamäte TMX level 2, alebo samotným OmegaT.</li>
+
+         <li>&lt;project_name&gt;-omegat.tmx je TMX, ktorý obsahuje formátovacie značky špecifické pre OmegaT tak, že súbor môže byť použitý s jeho formátovacími informáciami v inom projekte OmegaT.</li>
+      </ul>
+   </li>
+
+   <li>Priečinok /tm/ môže obsahovať akékoľvek množstvo súborov TMX. Také súbory musia byť správnymi súbormi TMX a môžu obsahovať buď iba textové informácie (level 1 TMX), textové a formátovacie informácie OmegaT (omegat TMX) alebo textové a formátovacie informácie TMX (level 2 TMX).</li>
+</ul>
+
+<a name="TMX_files_and_language"></a>
+<h3>Súbory TMX a jazyk</h3>
+
+<p>Súbory TMX obsahujú <i>prekladové jednotky</i>, ktoré sú vytvorené z množstva ekvivalentných segmentov v rôznych jazykoch. Prekladová jednotka je vytvorená z aspoň dvoch <i>variácií prekladovej jednotky</i> (tuv). Obidve môžu byť použité ako zdroj alebo cieľ.</p>
+
+<p>Nastavenia vo vašom projekte budú označovať, ktorý je zdrojový jazyk a ktorý je cieľový jazyk. OmegaT tak vezme <strong>tuv</strong> zodpovedajúce kódu zdrojového jazyka projektu a použije ten segment ako zdrojový segment, a vezme <strong>tuv</strong> zodpovedajúce kódu cieľového jazyka projektu a použije ten segment ako cieľový segment.</p>
+
+<p>Kódy jazykov môžu mať množstvo tvarov. OmegaT v súčasnosti rozoznáva iba kódy, ktoré ukazujú:</p>
+
+<ul><li>2-písmenový kód jazyka (napr.: <strong>JA</strong> pre japončinu)</li></ul>
+
+<p>alebo</p>
+
+<ul><li>Dvopísmenový kód jazyka a dvojpísmenový kód krajiny, oddelené pomlčkou (napr.: <strong>JA-JP</strong> pre japončinu používanú v Japonsku)</li></ul>
+
+<p>Ak sa kódy jazyka projektu a kódy jazyka TMX úplne zhodujú, segmenty sa načítajú do pamäte. Ak sa zhodujú iba kódy jazyka ale nie krajiny, segmenty sa tiež načítajú do pamäte. Ak sa nezhodujú ani kódy jazyka ani krajiny, segmenty sa do pamäte nenačítajú.</p>
+
+<a name="Keeping_a_memory_of_your_translation_with_OmegaT"></a>
+<h2>Udržiavanie pamäte vášho prekladu pomocou OmegaT</h2>
+
+<p>Súbor project_save.tmx obsahuje <strong>všetky</strong> segmenty, ktoré boli uložené do pamäti odkedy ste začali projekt. Ak napríklad urobíte akúkoľvek zmenu v segmentácii projektu, project_save.tmx zaznamená nové prekladové páry ale ponechá všetky predchádzajúce informácie. Toto občas povedie k zobrazeniu <strong>opustených reťazcov</strong> v Okne zhody. Takéto zhodné výrazy už neodkazujú na existujúce segmenty, ale na segmenty zaznamenané pred tým ako sa udiali zmeny. Ak bola zmena chybou, vráťte sa k predchádzajúcim nastaveniam a staršie záznamy zmiznú.</p>
+
+<a name="Using_memories_created_by_other_translation_tools"></a>
+<h2>Používanie pamätí vytvorených inými prekladateľskými nástrojmi</h2>
+
+<a name="Importing_files"></a>
+<h3>Importovanie súborov</h3>
+
+<p>OmegaT podporuje importovanie TMX verzií 1.1-1.4b (level 1 aj level 2). Toto umožňuje v OmegaT používať prekladové pamäte vytvorené inými nástrojmi.</p>
+
+<p>Avšak, OmegaT nepodporuje <i>úplne</i> importované súbory TMX level 2 (ktoré ukladajú nielen preklad, ale aj formátovanie), takže kvalita približných prekladov bude trocha nižšia pri importovaní súborov TMX level 2.</p>
+
+<a name="Imported_files_handling"></a>
+<h3>Zaobchádzanie s importovanými súbormi</h3>
+
+<p>OmegaT používa veľmi prísne stanovené procedúry pri narábaní so súbormi prekladových pamätí (súbormi TMX).</p>
+
+<p>Ak sa v takomto súbore nájde nejaká chyba, OmegaT ho jednoducho nenačíta.</p>
+
+<p>O niektorých nástrojoch je známe, že v niektorých prípadoch vytvárajú neplatné súbory TMX. Ak chcate používať takéto súbory ako referenčné preklady v OmegaT, je potrebné ich opraviť ak ich OmegaT odmietne. Opravy sú jednoduché operácie a OmegaT vám napovie v príslušnej chbovej správe. Môžete požiadať o radu v používateľskej skupine ak cítite, že to je nad vaše sily.</p>
+
+<a name="Using_OmegaT_translation_memories_in_other_translation_tools"></a>
+<h2>Používanie prekladových pamätí OmegaT v iných prekladateľských nástrojoch</h2>
+
+<p>OmegaT exportije súbory TMX verzie 1.4 (level 1 aj level 2). Export level 2 nie je štandardné level 2 ale postačuje na vytvorenie správnych zhôd v prekladateľských nástrojoch podporujúcich TMX Level 2.</p>
+
+<p>Ak potrebujete iba textové informácie (a nie informácie o formátovaní), použite súbor level 1, ktorý bol vytvorený pomocou OmegaT.</p>
+
+<a name="Upgrading_Translation_Memories"></a>
+<h2>Aktualizácia prekladových pamätí</h2>
+
+<p>Predchádzajúce verzie OmegaT boli schopné segmentovať vaše zdrojové súbory iba podľa odstavcov, a nečíslovali formátovacie značky konzistentne v súboroch HTML a Open Document. OmegaT 1.6.0 môže detekovať a aktualizovať takéto súbory TMX za behu pre zvýšenie kvality približne zhodných výrazov a využiť váš existujúci preklad lepšie -- takže ho nemusíte znova robiť.</p>
+
+<p>TMX projektu bude aktualizované iba raz, a bude zapísané v aktualizovanom tvare, a staré súbory TMX budú prevedené na vyššiu verziu za behu pri každom načítaní projektu. Všimnite si, že niektoré zmeny vo filtroch súborov v OmegaT 1.6.0 môžu viesť k úplne inej segmentácii, takže v zriedkavých prípadoch budete musieť aktualizovať preklad ručne.</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Právne poznámky">Právne poznámky</a></p>
+
+</body>
+</html>

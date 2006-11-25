@@ -1,0 +1,214 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Práca s formátovaným textom - Používateľská príručka OmegaT 1.6.1</title>
+</head>
+<body>
+
+<h1>Práca s formátovaným textom</h1>
+
+<h2>Obsah</h2>
+
+<ul type="none">
+   <li>1. <a href="#Formatted_Text_in_OmegaT">Formátovaný text v OmegaT</a>
+
+      <ul type="none">
+         <li>1.1. <a href="#Tag_naming">Pomenovanie tagov</a></li>
+         <li>1.2. <a href="#Tag_numbering">Číslovanie tagov</a></li>
+         <li>1.3. <a href="#Pairs_and_singletons">Páry a samostatné jednotky</a></li>
+         <li>1.4. <a href="#Tags_and_sentence_segmenting">Tagy a vetná segmentácia</a></li>
+
+         <li>1.5. <a href="#Tag_operations">Operácie s tagmi</a>
+
+            <ul type="none">
+               <li>1.5.1. <a href="#Tag_group_duplication">Duplikácia skupiny tagov</a></li>
+               <li>1.5.2. <a href="#Tag_group_deletion">Zmazanie skupiny tagov</a></li>
+               <li>1.5.3. <a href="#Tag_group_order_modification">Modifikácia poradia skupiny tagov</a></li>
+               <li>1.5.4. <a href="#Tag_group_nesting">Vnáranie skupiny tagov</a></li>
+            </ul>
+         </li>
+
+         <li>1.6. <a href="#Tag_group_overlapping">Prekrývanie skupiny tagov</a></li>
+         <li>1.7. <a href="#Tag_group_validation">Overenie skupiny tagov</a></li>
+         <li>1.8. <a href="#Hints_for_tags_management">Tipy pre správu tagov</a></li>
+         <li>1.9. <a href="#Important">Dôležité</a></li>
+      </ul>
+   </li>
+</ul>
+
+<a name="Formatted_Text_in_OmegaT"></a>
+<h2>Formátovaný text v OmegaT</h2>
+
+<p>Formátovacie informácie nachádzajúce sa v zdrojovom súbore je potrebné preniesť do cieľového súboru. OmegaT zobrazuje informácie o in-line formrmátovaní podporovaných formátov (v súčasnosti DocBook, HTML, XHTML, OpenDocument, a OpenOffice.org) ako tagy. Tagy sa zvyčajne neberú do úvahy, pri zvažovaní podobnosti reťazcov pre účely nájdenia zhody. Tagy, ktoré ste reprodukovali v preloženom segmente budú prítomné v preloženom dokumente.</p>
+
+<a name="Tag_naming"></a>
+<h3>Pomenovanie tagov</h3>
+
+<p>Tagy pozostávajú z jedného až troch znakov a čísla. Jedinečné číslo umožňuje zoskupiť tie tagy, ktoré si zodpovedajú, a rozlišovať tagy, ktoré môžu mať rovnaký znak skratky, ale v skutočnosti sú rozličné.</p>
+
+<p>Znaky môžu alebo nemusia odrážať hodnotu formátovania, ktoré značka predstavuje (napr. tučné, kurzíva, atď.)</p>
+
+<a name="Tag_numbering"></a>
+<h3>Číslovanie tagov</h3>
+
+<p>Tagy sú číslované vzostupne podľa <strong>skupiny tagov</strong>.</p>
+
+<p>To čo nazývame "skupinami tagov" tu je buď jednotlivý tag (ako <code>&lt;br1&gt;</code>), samotný, alebo 2 tagy tvoriace pár (ako <code>&lt;f3&gt;</code> a <code>&lt;/f3&gt;</code>).</p>
+
+<p>V rámci segmentu, prvá skupina (pár alebo samostatný) dostane číslo <strong>0</strong>, druhá číslo <strong>1</strong> atď.</p>
+
+<p>Prvý príklad nižšie má 3 skupiny tagov (pár, samostatný a potom ďalší pár), druhý príklad má iba jednu skupinu (pár).</p>
+
+<a name="Pairs_and_singletons"></a>
+<h3>Páry a samostatné jednotky</h3>
+
+<p>Tagy môžu byť buď ako samostatné jednotky alebo v pároch.</p>
+
+<p>
+<strong>Samostatné tagy</strong> označujú formátovacie informácie, ktoré neovplyvňujú okolitý text (napríklad extra medzera alebo zlom riadku).</p>
+
+<pre>   <strong>&lt;segment 2132&gt;</strong>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;<strong>&lt;end segment&gt;</strong></pre>
+
+<p>
+<code><strong>&lt;br1&gt;</strong></code> je samostatný tag a neovplyvňuje žiaden okolitý text.</p>
+
+<p>
+<strong>Párové tagy</strong> zvyčajne označujú informácie o štýle, ktoré sa vzťahujú na text medzi otváracím tagom a uzatváracím tagom páru. Čokoľvek sa stane páru, otvárací tag by sa mal vždy nachádzať pred uzatváracím tagom.</p>
+
+<pre>   <strong>&lt;segment 3167&gt;</strong>Log súbor (&lt;f1&gt;log.txt&lt;/f1&gt;) pre záznam operácií a chýb.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>
+<code><strong>&lt;f1&gt;</strong></code> a <code><strong>&lt;/f1&gt;</strong></code> sú v páre a ovplyvňujú <code><strong>log.txt</strong></code>.</p>
+
+<a name="Tags_and_sentence_segmenting"></a>
+<h3>Tagy a vetná segmentácia</h3>
+
+<p>OmegaT vytvára svoje tagy pred tým ako sa aplikuje vetná segmentácia. V závislosti od pravidiel segmentácie, tagy môžu vyzerať ako keby nerešpektovali vyššie uvedené pravidlá číslovania a zoskupovania.</p>
+
+<pre>   <strong>&lt;segment 1554&gt;</strong> &lt;c0&gt;Pred: \. Po: \s&lt;/c0&gt;<br> &lt;b2&gt;Poznámka:&lt;/b2&gt;<br>
+"\." znamená znak "."&lt;br3&gt; "\s" znamená akýkoľvek biely znak <strong>&lt;end segment&gt;</strong></pre>
+
+<p>Zdá sa, že tu nie je žiaden problém. Teraz, ak použijeme predvolené pravidlá segmentovania na tento segment (predvolené správanie sa OmegaT) dostaneme nasledujúci výsledok:</p>
+
+<pre>   <strong>&lt;segment 1990&gt;</strong> &lt;c0&gt;Pred: \. <strong>&lt;end segment&gt;</strong>
+
+   <strong>&lt;segment 1991&gt;</strong> Po: \s&lt;/c0&gt;&lt;br1&gt; <strong>&lt;end segment&gt;</strong>
+
+   <strong>&lt;segment 1992&gt;</strong> &lt;b2&gt;Poznámka:&lt;/b2&gt; "\." znamená znak "."&lt;br3&gt;<strong>&lt;end segment&gt;</strong>
+
+   <strong>&lt;segment 1993&gt;</strong> "\s" predstavuje akýkoľvek biely znak <strong>&lt;end segment&gt;</strong></pre>
+
+<p>(Pravidlá segmentácie, ktoré sa použijú sú: <i>segment po bodke nasledovaný medzerou</i> a <i>segment po tagu zlome riadku</i>.)</p>
+
+<p>Tu vidíme, že segmenty vzaté samostatne nerešpektujú pravidlá párovania a číslovania: <code><code></code> a <code>&lt;/co&gt;</code> by mali byť spárované v rovnakom segmente, ale sú oddelené pravidlami segmentácie.</p>
+
+<p>V niektorých prípadoch to môže dokonca spôsobiť problémy pri preklade, keď tagy musia byť v cieľovom jazyku premiestnené aby odrážali slovosled toho jazyka (pozri <a href="#Tag_operations" title="Práca s formátovaným textom">Operácie s tagmi</a> nižšie).</p>
+
+<a name="Tag_operations"></a>
+<h3>Operácie s tagmi</h3>
+
+<p>Na tagy treba dávať pozor. Ak sú náhodne zmenené, formátovane koncového súboru môže byť poškodené. V najhoršom prípade scenára sa súbor vôbec nemusí dať otvoriť; toto sa deje zvlášť u súborov OpenOffice.org.</p>
+
+<a name="Tag_group_duplication"></a>
+<h4>Duplikácia skupiny tagov</h4>
+
+<p>Pre duplikáciu skupín tagov ich iba skopírujte na ľubovoľnú pozíciu. Majte na pamäti, že v párovej skupine sa otvárací tag musí nachádzať pred uzatváracím tagom.</p>
+
+<p>Formátovanie predstavované skupinou, ktorú ste duplikovali bude použité na sekciu, kde ste ho použili.</p>
+
+<p>Príklad:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Toto formátovanie&lt;/f0&gt; bude duplikované tu.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>Po duplikácii:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Ce format&lt;/f0&gt; a été &lt;f0&gt;copié ici&lt;/f0&gt;.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_deletion"></a>
+<h4>Zmazanie skupiny tagov</h4>
+
+<p>Pre zmazanie skupín tagov ich iba odstráňte zo segmentu. Majte na pamäti, že párová skupina musí mať svoj otvárací ako aj svoj utatvárací tag zmazaný aby sme zaistili, že všetky stopy formátovania sú správne vymazané, ináč by mohol byť preložený súbor poškodený a nemusel by sa dať otvoriť.</p>
+
+<p>Zmazaním skupiny tagov odstránite príslušné formátovanie z preloženého súboru.</p>
+
+<p>Príklad:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Toto formátovanie&lt;/f0&gt; bude vymazané.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>Po zmazaní:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>Ce format a été effacé.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_order_modification"></a>
+<h4>Modifikácia poradia skupiny tagov</h4>
+
+<p>Pre zmenu poradia skupiny tagov aby odrážalo inú štruktúru jazyka v preklade, jednoducho umiestnite skupinu tagov tam kde by mala byť v preklade.</p>
+
+<p>Formátovanie bude nasledovať časť na ktorú sa vzťahuje.</p>
+
+<p>Príklad:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Formátovanie tu&lt;/f0&gt; a &lt;f1&gt;formátovanie tu&lt;/f1&gt; budú vzájomne presunuté.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>Po zmene poradia:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f1&gt;Ce format&lt;/f1&gt; et &lt;f0&gt;ce format&lt;/f0&gt; ont été inversés.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_nesting"></a>
+<h4>Vnáranie skupiny tagov</h4>
+
+<p>Modifikácia poradia skupiny tagov môže vyústiť do vnorenia skupiny tagov do inej skupiny tagov. Toto je možné pokiaľ uzatvárajúca skupina úplne uzatvára uzatvorenú skupinu. Zvláštnu pozornosť treba dávať pri vnáraní obzvlášť v prípade párov tagov, ktoré nie sú úplne presunuté do uzatváracej skupiny, ináč by mohol byť preložený súbor poškodený a nemusel by sa dať otvoriť.</p>
+
+<p>Na vnorenú časť sa budú vzťahovať obidve formátovania.</p>
+
+<p>Príklad:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Formátovanie&lt;/f0&gt; &lt;f1&gt;tu&lt;/f1&gt; bude vnorené.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>Po vnorení:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Le format &lt;f1&gt;ici&lt;/f1&gt;&lt;/f0&gt; a été emboité dans le premier format.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_overlapping"></a>
+<h3>Prekrývanie skupiny tagov</h3>
+
+<p>Prekrývanie je výsledkom zlej manupuláciem s pármi tagov a určite bude mať za následok poškodenie formátovania a niekedy spôsobí, že sa preložený súbor vôvec nebude dať otvoriť.</p>
+
+<p>Príklad:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;formátovanie&lt;/f0&gt; &lt;f1&gt;tu&lt;/f1&gt; bude poškodené.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>Po nesprávnej manupulácii:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;formátovanien &lt;f1&gt;tu&lt;/f0&gt; &lt;/f1&gt;je teraz veľmi poškodené.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_validation"></a>
+<h3>Overenie skupiny tagov</h3>
+
+<p>Funkcia overenia tagov (<a href="userInterface.html#Tag_Validation" title="Používateľské rozhranie">Overiť tagy</a>) detekuje zmenené tagy (či už úmyselne alebo náhodou), a označí postihnuté segmenty. Použitie tejto funkcie otvorí dialógové okno s podozrivými porušenými alebo zlými tagmi v dokumente.</p>
+
+<p>Táto funkcia môže byť užitočná pri hľadaní chýb v preložených tagovaných textoch. Toto je často problémom v súboroch OpenDocument alebo OpenOffice.org, ktoré sa neotvoria kvôli problémom s tagmi vytvorenými v procese prekladu. Opravenie tagov a znovuvytvorenie cieľových dokumentov môže často vyliečiť problém.</p>
+
+<a name="Hints_for_tags_management"></a>
+<h3>Tipy pre správu tagov</h3>
+
+<p>Tagy vo všeobecnosti predstavujú nejaký druh formátovania v pôvodnom texte. <strong>Zjednodušenie formátovania pôvodného textu</strong> vo veľkej miere prispieva k zníženiu počtu značiek. Zjednotenie použitých písem, veľkostí písem, farieb atď by malo byť brané do úvahy ak to je možné, pre zjdenodušenie prekladu a zníženie počtu možných chýb značiek.</p>
+
+<p>Pozrite sa na sekciu <a href="#Tag_operations" title="Práca s formátovaným textom">Operácie s tagmi</a> aby ste videli, čo sa môže robiť s tagmi.</p>
+
+<p>Pamätejte, že ak vás tagy obťažujú a formátovanie nie je extrémne dôležité pre aktuálnu prácu, odstránenie väčšiny formátovania zo zdrojového dokumentu veľmi uľahčí preklad.</p>
+
+<p>Ak potrebujete vidieť tagy v OmegaT ale nepotrebujete ponechať väčšinu formátovania v preloženom dokumente nemusíte tagy do prekladu pridávať. V tom prípade <strong>dávajte osobitnú pozornosť na páry tagov</strong> keďže zabudnutie vymazania jednej časti páru poškodí formátovanie vášho dokumentu, čo spôsobí otváranie vášho dokumentu OpenOffice.org.</p>
+
+<p>Keďže tagy sú zahrnuté v samotnom texte, je možné použiť <a href="segmentation.html" title="Segmentácia zdroja">pravidlá segmentácie</a> na opätovné vytvorenie segmentov, ktoré obsahujú menej tagov. toto je pokročilá vlastnosť a začínajúci používatelia by ju nemali používať.</p>
+
+<a name="Important"></a>
+<h3>Dôležité</h3>
+
+<p>Program OmegaT ešte nie je schopný detekovať chyby vo formátovaní plne automaticky, takže vás nemusí upozorniť ak urobíte chybu alebo zmeníte formátovanie aby lepšie vyhovovalo vášmu cieľovému jazyku. Avšak, niekedy bude váš preložený súbor vyzerať skomolený, a v prípade súborov OpenDocument / OpenOffice.org sa dokonca nebude dať otvoriť.</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Právne poznámky">Právne poznámky</a></p>
+
+</body>
+</html>

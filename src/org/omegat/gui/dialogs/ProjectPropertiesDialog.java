@@ -149,7 +149,7 @@ public class ProjectPropertiesDialog extends JDialog
         localesBox.setBorder(new EtchedBorder());
         
         JLabel m_sourceLocaleLabel = new JLabel();
-        Mnemonics.setLocalizedText(m_sourceLocaleLabel, OStrings.PP_SRC_LANG);
+        Mnemonics.setLocalizedText(m_sourceLocaleLabel, OStrings.getString("PP_SRC_LANG"));
         Box bSL = Box.createHorizontalBox();
         bSL.setBorder(emptyBorder);
         bSL.add(m_sourceLocaleLabel);
@@ -165,7 +165,7 @@ public class ProjectPropertiesDialog extends JDialog
         localesBox.add(m_sourceLocaleField);
 
         JLabel m_targetLocaleLabel = new JLabel();
-        Mnemonics.setLocalizedText(m_targetLocaleLabel, OStrings.PP_LOC_LANG);
+        Mnemonics.setLocalizedText(m_targetLocaleLabel, OStrings.getString("PP_LOC_LANG"));
         Box bLL = Box.createHorizontalBox();
         bLL.setBorder(emptyBorder);
         bLL.add(m_targetLocaleLabel);
@@ -202,52 +202,52 @@ public class ProjectPropertiesDialog extends JDialog
         dirsBox.setBorder(new EtchedBorder());
         
         JLabel m_srcRootLabel = new JLabel();
-        Mnemonics.setLocalizedText(m_srcRootLabel, OStrings.PP_SRC_ROOT);
+        Mnemonics.setLocalizedText(m_srcRootLabel, OStrings.getString("PP_SRC_ROOT"));
         Box bSrc = Box.createHorizontalBox();
         bSrc.setBorder(emptyBorder);
         bSrc.add(m_srcRootLabel);
         bSrc.add(Box.createHorizontalGlue());
         JButton m_srcBrowse = new JButton();
-        Mnemonics.setLocalizedText(m_srcBrowse, OStrings.PP_BUTTON_BROWSE_SRC);
+        Mnemonics.setLocalizedText(m_srcBrowse, OStrings.getString("PP_BUTTON_BROWSE_SRC"));
         bSrc.add(m_srcBrowse);
         final JTextField m_srcRootField = new JTextField();
         dirsBox.add(bSrc);
         dirsBox.add(m_srcRootField);
 
         JLabel m_tmRootLabel = new JLabel();
-        Mnemonics.setLocalizedText(m_tmRootLabel, OStrings.PP_TM_ROOT);
+        Mnemonics.setLocalizedText(m_tmRootLabel, OStrings.getString("PP_TM_ROOT"));
         Box bTM = Box.createHorizontalBox();
         bTM.setBorder(emptyBorder);
         bTM.add(m_tmRootLabel);
         bTM.add(Box.createHorizontalGlue());
         JButton m_tmBrowse = new JButton();
-        Mnemonics.setLocalizedText(m_tmBrowse, OStrings.PP_BUTTON_BROWSE_TM);
+        Mnemonics.setLocalizedText(m_tmBrowse, OStrings.getString("PP_BUTTON_BROWSE_TM"));
         bTM.add(m_tmBrowse);
         final JTextField m_tmRootField = new JTextField();
         dirsBox.add(bTM);
         dirsBox.add(m_tmRootField);
         
         JLabel m_glosRootLabel = new JLabel();
-        Mnemonics.setLocalizedText(m_glosRootLabel, OStrings.PP_GLOS_ROOT);
+        Mnemonics.setLocalizedText(m_glosRootLabel, OStrings.getString("PP_GLOS_ROOT"));
         Box bGlos = Box.createHorizontalBox();
         bGlos.setBorder(emptyBorder);
         bGlos.add(m_glosRootLabel);
         bGlos.add(Box.createHorizontalGlue());
         JButton m_glosBrowse = new JButton();
-        Mnemonics.setLocalizedText(m_glosBrowse, OStrings.PP_BUTTON_BROWSE_GL);
+        Mnemonics.setLocalizedText(m_glosBrowse, OStrings.getString("PP_BUTTON_BROWSE_GL"));
         bGlos.add(m_glosBrowse);
         final JTextField m_glosRootField = new JTextField();
         dirsBox.add(bGlos);
         dirsBox.add(m_glosRootField);
 
         JLabel m_locRootLabel = new JLabel();
-        Mnemonics.setLocalizedText(m_locRootLabel, OStrings.PP_LOC_ROOT);
+        Mnemonics.setLocalizedText(m_locRootLabel, OStrings.getString("PP_LOC_ROOT"));
         Box bLoc = Box.createHorizontalBox();
         bLoc.setBorder(emptyBorder);
         bLoc.add(m_locRootLabel);
         bLoc.add(Box.createHorizontalGlue());
         JButton m_locBrowse = new JButton();
-        Mnemonics.setLocalizedText(m_locBrowse, OStrings.PP_BUTTON_BROWSE_TAR);
+        Mnemonics.setLocalizedText(m_locBrowse, OStrings.getString("PP_BUTTON_BROWSE_TAR"));
         bLoc.add(m_locBrowse);
         final JTextField m_locRootField = new JTextField();
         dirsBox.add(bLoc);
@@ -354,7 +354,7 @@ public class ProjectPropertiesDialog extends JDialog
             // open save dialog
             NewProjectFileChooser ndc = new NewProjectFileChooser();
             String label;
-            label = OStrings.PP_SAVE_PROJECT_FILE;
+            label = OStrings.getString("PP_SAVE_PROJECT_FILE");
             ndc.setDialogTitle(label);
 
             String curDir = Preferences.getPreference(Preferences.CURRENT_FOLDER);
@@ -463,19 +463,19 @@ public class ProjectPropertiesDialog extends JDialog
         switch (browseTarget)
         {
             case 1:
-                title = OStrings.PP_BROWSE_TITLE_SOURCE;
+                title = OStrings.getString("PP_BROWSE_TITLE_SOURCE");
                 break;
 
             case 2:
-                title = OStrings.PP_BROWSE_TITLE_TARGET;
+                title = OStrings.getString("PP_BROWSE_TITLE_TARGET");
                 break;
 
             case 3:
-                title = OStrings.PP_BROWSE_TITLE_GLOS;
+                title = OStrings.getString("PP_BROWSE_TITLE_GLOS");
                 break;
 
             case 4:
-                title = OStrings.PP_BROWSE_TITLE_TM;
+                title = OStrings.getString("PP_BROWSE_TITLE_TM");
                 break;
 
             default:
@@ -605,8 +605,9 @@ public class ProjectPropertiesDialog extends JDialog
         {
             JOptionPane.showMessageDialog(this, 
                     OStrings.getString("NP_INVALID_SOURCE_LOCALE") +
-                    OStrings.getString("NP_LOCALE_SUGGESTION"), 
-                    OStrings.TF_ERROR, JOptionPane.ERROR_MESSAGE);
+                    OStrings.getString("NP_LOCALE_SUGGESTION"),
+                    OStrings.getString("TF_ERROR"),
+                    JOptionPane.ERROR_MESSAGE);
             m_sourceLocaleField.requestFocusInWindow();
             return;
         }
@@ -616,8 +617,9 @@ public class ProjectPropertiesDialog extends JDialog
         {
             JOptionPane.showMessageDialog(this, 
                     OStrings.getString("NP_INVALID_TARGET_LOCALE") +
-                    OStrings.getString("NP_LOCALE_SUGGESTION"), 
-                    OStrings.TF_ERROR, JOptionPane.ERROR_MESSAGE);
+                    OStrings.getString("NP_LOCALE_SUGGESTION"),
+                    OStrings.getString("TF_ERROR"),
+                    JOptionPane.ERROR_MESSAGE);
             m_targetLocaleField.requestFocusInWindow();
             return;
         }
@@ -634,7 +636,8 @@ public class ProjectPropertiesDialog extends JDialog
         {
             JOptionPane.showMessageDialog(this, 
                     OStrings.getString("NP_SOURCEDIR_DOESNT_EXIST"),
-                    OStrings.TF_ERROR, JOptionPane.ERROR_MESSAGE);
+                    OStrings.getString("TF_ERROR"),
+                    JOptionPane.ERROR_MESSAGE);
             m_srcRootField.requestFocusInWindow();
             return;
         }
@@ -647,7 +650,8 @@ public class ProjectPropertiesDialog extends JDialog
         {
             JOptionPane.showMessageDialog(this, 
                     OStrings.getString("NP_TRANSDIR_DOESNT_EXIST"),
-                    OStrings.TF_ERROR, JOptionPane.ERROR_MESSAGE);
+                    OStrings.getString("TF_ERROR"),
+                    JOptionPane.ERROR_MESSAGE);
             m_locRootField.requestFocusInWindow();
             return;
         }
@@ -660,7 +664,8 @@ public class ProjectPropertiesDialog extends JDialog
         {
             JOptionPane.showMessageDialog(this, 
                     OStrings.getString("NP_GLOSSDIR_DOESNT_EXIST"),
-                    OStrings.TF_ERROR, JOptionPane.ERROR_MESSAGE);
+                    OStrings.getString("TF_ERROR"),
+                    JOptionPane.ERROR_MESSAGE);
             m_glosRootField.requestFocusInWindow();
             return;
         }
@@ -673,7 +678,8 @@ public class ProjectPropertiesDialog extends JDialog
         {
             JOptionPane.showMessageDialog(this, 
                     OStrings.getString("NP_TMDIR_DOESNT_EXIST"),
-                    OStrings.TF_ERROR, JOptionPane.ERROR_MESSAGE);
+                    OStrings.getString("TF_ERROR"),
+                    JOptionPane.ERROR_MESSAGE);
             m_tmRootField.requestFocusInWindow();
             return;
         }
@@ -700,12 +706,12 @@ public class ProjectPropertiesDialog extends JDialog
         switch( dialogType )
         {
             case NEW_PROJECT:
-                setTitle(OStrings.PP_CREATE_PROJ);
-                m_messageArea.setText(OStrings.PP_MESSAGE_CONFIGPROJ);
+                setTitle(OStrings.getString("PP_CREATE_PROJ"));
+                m_messageArea.setText(OStrings.getString("PP_MESSAGE_CONFIGPROJ"));
                 break;
             case RESOLVE_DIRS:
-                setTitle(OStrings.PP_OPEN_PROJ);
-                m_messageArea.setText(OStrings.PP_MESSAGE_BADPROJ);
+                setTitle(OStrings.getString("PP_OPEN_PROJ"));
+                m_messageArea.setText(OStrings.getString("PP_MESSAGE_BADPROJ"));
                 break;
             case EDIT_PROJECT:
                 setTitle(OStrings.getString("PP_EDIT_PROJECT"));

@@ -109,7 +109,7 @@ public class FuzzyMatcher
 
         int total = strings.size();
         
-        statusTemplate = OStrings.CT_FUZZY_X_OF_Y;
+        statusTemplate = OStrings.getString("CT_FUZZY_X_OF_Y");
         updateStatus(0, total);
         
 //long timeTLTotal  = 0;
@@ -214,7 +214,7 @@ public class FuzzyMatcher
         int tmtotal = tmstrings.size();
         int total = strings.size();
         
-        statusTemplate = OStrings.CT_FUZZY_X_OF_Y + " (" + tmxname + ")";       // NOI18N
+        statusTemplate = OStrings.getString("CT_FUZZY_X_OF_Y") + " (" + tmxname + ")";       // NOI18N
         updateStatus(0, tmtotal);
         
         for(int i=0; i<tmtotal; i++)

@@ -288,7 +288,7 @@ public class SearchWindow extends JFrame
         updateUIText();
         loadPreferences();
 
-        m_viewer.setText(OStrings.SW_VIEWER_TEXT);
+        m_viewer.setText(OStrings.getString("SW_VIEWER_TEXT"));
 
         if (!par.isProjectLoaded())
         {
@@ -496,7 +496,7 @@ public class SearchWindow extends JFrame
         OmegaTFileChooser browser = new OmegaTFileChooser();
         //String str = OStrings.getString("BUTTON_SELECT");
         //browser.setApproveButtonText(str);
-        browser.setDialogTitle(OStrings.SW_TITLE);
+        browser.setDialogTitle(OStrings.getString("SW_TITLE"));
         browser.setFileSelectionMode(OmegaTFileChooser.DIRECTORIES_ONLY);
         String curDir = m_dirField.getText();
         
@@ -568,22 +568,22 @@ public class SearchWindow extends JFrame
     
     private void updateUIText()
     {
-        setTitle(OStrings.SW_TITLE);
+        setTitle(OStrings.getString("SW_TITLE"));
 
-        Mnemonics.setLocalizedText(m_searchLabel, OStrings.SW_SEARCH_TEXT);
+        Mnemonics.setLocalizedText(m_searchLabel, OStrings.getString("SW_SEARCH_TEXT"));
         Mnemonics.setLocalizedText(m_searchButton, OStrings.getString("BUTTON_SEARCH"));
 
-        Mnemonics.setLocalizedText(m_exactSearchRB, OStrings.SW_EXACT_SEARCH);
-        Mnemonics.setLocalizedText(m_keywordSearchRB, OStrings.SW_WORD_SEARCH);
+        Mnemonics.setLocalizedText(m_exactSearchRB, OStrings.getString("SW_EXACT_SEARCH"));
+        Mnemonics.setLocalizedText(m_keywordSearchRB, OStrings.getString("SW_WORD_SEARCH"));
 
-        Mnemonics.setLocalizedText(m_caseCB, OStrings.SW_CASE_SENSITIVE);
-        Mnemonics.setLocalizedText(m_regexCB, OStrings.SW_REG_EXPRESSIONS);
-        Mnemonics.setLocalizedText(m_tmSearchCB, OStrings.SW_SEARCH_TM);
+        Mnemonics.setLocalizedText(m_caseCB, OStrings.getString("SW_CASE_SENSITIVE"));
+        Mnemonics.setLocalizedText(m_regexCB, OStrings.getString("SW_REG_EXPRESSIONS"));
+        Mnemonics.setLocalizedText(m_tmSearchCB, OStrings.getString("SW_SEARCH_TM"));
 
-        Mnemonics.setLocalizedText(m_dirLabel, OStrings.SW_LOCATION);
-        Mnemonics.setLocalizedText(m_dirCB, OStrings.SW_DIR_SEARCH);
-        Mnemonics.setLocalizedText(m_recursiveCB, OStrings.SW_DIR_RECURSIVE);
-        Mnemonics.setLocalizedText(m_dirButton, OStrings.SW_BROWSE);
+        Mnemonics.setLocalizedText(m_dirLabel, OStrings.getString("SW_LOCATION"));
+        Mnemonics.setLocalizedText(m_dirCB, OStrings.getString("SW_DIR_SEARCH"));
+        Mnemonics.setLocalizedText(m_recursiveCB, OStrings.getString("SW_DIR_RECURSIVE"));
+        Mnemonics.setLocalizedText(m_dirButton, OStrings.getString("SW_BROWSE"));
         
         Mnemonics.setLocalizedText(m_dismissButton, OStrings.getString("BUTTON_CLOSE"));
     }

@@ -251,38 +251,38 @@ public class HelpFrame extends JFrame
         switch( (int) (Math.random() * 11) )
         {
             case 0:
-                s=OStrings.HF_HAIKU_1;
+                s=OStrings.getString("HF_HAIKU_1");
                 break;
             case 1:
-                s=OStrings.HF_HAIKU_2;
+                s=OStrings.getString("HF_HAIKU_2");
                 break;
             case 2:
-                s=OStrings.HF_HAIKU_3;
+                s=OStrings.getString("HF_HAIKU_3");
                 break;
             case 3:
-                s=OStrings.HF_HAIKU_4;
+                s=OStrings.getString("HF_HAIKU_4");
                 break;
             case 4:
-                s=OStrings.HF_HAIKU_5;
+                s=OStrings.getString("HF_HAIKU_5");
                 break;
             case 5:
-                s=OStrings.HF_HAIKU_6;
+                s=OStrings.getString("HF_HAIKU_6");
                 break;
             case 6:
-                s=OStrings.HF_HAIKU_7;
+                s=OStrings.getString("HF_HAIKU_7");
                 break;
             case 7:
-                s=OStrings.HF_HAIKU_8;
+                s=OStrings.getString("HF_HAIKU_8");
                 break;
             case 8:
-                s=OStrings.HF_HAIKU_9;
+                s=OStrings.getString("HF_HAIKU_9");
                 break;
             case 9:
-                s=OStrings.HF_HAIKU_10;
+                s=OStrings.getString("HF_HAIKU_10");
                 break;
             case 10:
             default:
-                s=OStrings.HF_HAIKU_11;
+                s=OStrings.getString("HF_HAIKU_11");
                 break;
         }
         
@@ -294,7 +294,7 @@ public class HelpFrame extends JFrame
         Mnemonics.setLocalizedText(m_closeButton, OStrings.getString("BUTTON_CLOSE"));
         Mnemonics.setLocalizedText(m_homeButton, OStrings.getString("BUTTON_HOME"));
         Mnemonics.setLocalizedText(m_backButton, OStrings.getString("BUTTON_BACK"));
-        setTitle(OStrings.HF_WINDOW_TITLE);
+        setTitle(OStrings.getString("HF_WINDOW_TITLE"));
     }
     
     private String absolutePath(String file)

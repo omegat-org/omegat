@@ -81,12 +81,13 @@ public class ProjectFrame extends JFrame
         Container cp = getContentPane();
         m_editorPane = new JEditorPane();
         m_editorPane.setEditable(false);
-        m_editorPane.setContentType("text/html");								// NOI18N
+        m_editorPane.setContentType("text/html");                     // NOI18N
         JScrollPane scroller = new JScrollPane(m_editorPane);
-        cp.add(scroller, "Center");												// NOI18N
+        cp.add(scroller, "Center");                                   // NOI18N
         
         m_addNewFileButton = new JButton();
-        org.openide.awt.Mnemonics.setLocalizedText(m_addNewFileButton, OStrings.getString("TF_MENU_FILE_IMPORT"));
+        org.openide.awt.Mnemonics.setLocalizedText(m_addNewFileButton,
+                                                   OStrings.getString("TF_MENU_FILE_IMPORT"));
         uiUpdateImportButtonStatus();
         m_addNewFileButton.addActionListener(new ActionListener()
         {
@@ -138,7 +139,7 @@ public class ProjectFrame extends JFrame
         });        
 
         Mnemonics.setLocalizedText(m_closeButton, OStrings.getString("BUTTON_CLOSE"));
-        setTitle(OStrings.PF_WINDOW_TITLE);
+        setTitle(OStrings.getString("PF_WINDOW_TITLE"));
         uiUpdateImportButtonStatus();
         
 //        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -226,10 +227,10 @@ public class ProjectFrame extends JFrame
         output.append("<table align=center width=95% border=0>\n");             // NOI18N
         output.append("<tr>\n");                                                // NOI18N
         output.append("<th width=80% align=center>");                           // NOI18N
-        output.append(OStrings.PF_FILENAME);                                    // NOI18N
+        output.append(OStrings.getString("PF_FILENAME"));                       // NOI18N
         output.append("</th>\n");                                               // NOI18N
         output.append("<th width=20% align=center>");                           // NOI18N
-        output.append(OStrings.PF_NUM_SEGMENTS);                                // NOI18N
+        output.append(OStrings.getString("PF_NUM_SEGMENTS"));                   // NOI18N
         output.append("</th>\n");                                               // NOI18N
         output.append("</tr>\n");                                               // NOI18N
         int firstEntry = 1;

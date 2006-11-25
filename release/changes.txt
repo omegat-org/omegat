@@ -8,7 +8,7 @@
 
 ----------------------------------------------------------------------
 1.6.1_01
-Contains localisations plus minor fixes for localisations
+Contains new localisations plus a couple bug fixes
 
  Implemented requests:
 
@@ -18,13 +18,22 @@ Contains localisations plus minor fixes for localisations
 
   - French UI localisation + instant start guide translation
 
+  - Brazilian Portugese UI localisation + instant start guide
+  translation
+
  Bug fixes:
 
-  - Localisation errors
-  http://sourceforge.net/support/tracker.php?aid=1598209
+   - Localisation errors
+   http://sourceforge.net/support/tracker.php?aid=1598209
 
-  - Insert best match (% setting)
-  http://sourceforge.net/support/tracker.php?aid=1599127
+   - Some texts not loaded from external resource bundle
+   http://sourceforge.net/support/tracker.php?aid=1602787
+
+   - [target=japanese] some trailing spaces are not reproduced
+   http://sourceforge.net/support/tracker.php?aid=1599209
+
+   - Insert best match (% setting)
+   http://sourceforge.net/support/tracker.php?aid=1599127
 
 ----------------------------------------------------------------------
 1.6.1

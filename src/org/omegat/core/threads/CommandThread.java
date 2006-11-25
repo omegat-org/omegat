@@ -168,7 +168,7 @@ public class CommandThread extends Thread
         catch (RuntimeException re)
         {
             forceSave(true);
-            String msg = OStrings.CT_FATAL_ERROR;
+            String msg = OStrings.getString("CT_FATAL_ERROR");
             m_transFrame.fatalError(msg, re);
         }
     }
@@ -251,12 +251,12 @@ public class CommandThread extends Thread
             
             String evtStr;
             
-            evtStr = OStrings.CT_LOADING_PROJECT;
+            evtStr = OStrings.getString("CT_LOADING_PROJECT");
             MessageRelay.uiMessageSetMessageText(tf, evtStr);
             if (!loadProject((String)pack.parameter))
             {
                 // loading of project cancelled
-                evtStr = OStrings.CT_CANCEL_LOAD;
+                evtStr = OStrings.getString("CT_CANCEL_LOAD");
                 MessageRelay.uiMessageSetMessageText(tf, evtStr);
                 return;
             }
@@ -269,10 +269,10 @@ public class CommandThread extends Thread
             }
             
             // Building up glossary
-            evtStr = OStrings.CT_LOADING_GLOSSARY;
+            evtStr = OStrings.getString("CT_LOADING_GLOSSARY");
             MessageRelay.uiMessageSetMessageText(tf, evtStr);
             m_glossary.buildGlossary(m_strEntryList);
-            MessageRelay.uiMessageSetMessageText(tf, OStrings.CT_LOADING_PROJECT);
+            MessageRelay.uiMessageSetMessageText(tf, OStrings.getString("CT_LOADING_PROJECT"));
             
             // load in translation database files
             try
@@ -281,7 +281,7 @@ public class CommandThread extends Thread
             }
             catch (IOException e)
             {
-                String msg = OStrings.TF_TM_LOAD_ERROR;
+                String msg = OStrings.getString("TF_TM_LOAD_ERROR");
                 displayError(msg, e);
                 // allow project load to resume
             }
@@ -313,7 +313,7 @@ public class CommandThread extends Thread
         {
             // any error
             if( !projectClosing )
-                displayError(OStrings.TF_LOAD_ERROR, e);
+                displayError(OStrings.getString("TF_LOAD_ERROR"), e);
             else
                 StaticUtils.log("Project Load aborted by user.");               // NOI18N
         }
@@ -738,11 +738,11 @@ public class CommandThread extends Thread
                 continue;
             // shorten filename to that which is relative to src root
             String midName = filename.substring(srcRoot.length());
-            m_transFrame.setMessageText(OStrings.CT_COMPILE_FILE_MX + midName);
+            m_transFrame.setMessageText(OStrings.getString("CT_COMPILE_FILE_MX") + midName);
             
             fm.translateFile(srcRoot, midName, locRoot, processedFiles);
         }
-        m_transFrame.setMessageText(OStrings.CT_COMPILE_DONE_MX);
+        m_transFrame.setMessageText(OStrings.getString("CT_COMPILE_DONE_MX"));
     }
     
     /** Saves the translation memory and preferences */
@@ -790,7 +790,7 @@ public class CommandThread extends Thread
         }
         catch (IOException e)
         {
-            String msg = OStrings.CT_ERROR_SAVING_PROJ;
+            String msg = OStrings.getString("CT_ERROR_SAVING_PROJ");
             displayError(msg, e);
             // try to rename backup file to original name
             if (!corruptionDanger)
@@ -855,7 +855,7 @@ public class CommandThread extends Thread
             {
                 if (!proj.mkdirs())
                 {
-                    String msg = OStrings.CT_ERROR_CREATE;
+                    String msg = OStrings.getString("CT_ERROR_CREATE");
                     throw new IOException(msg);
                 }
             }
@@ -866,7 +866,7 @@ public class CommandThread extends Thread
             {
                 if (!internal.mkdirs())
                 {
-                    String msg = OStrings.CT_ERROR_CREATE;
+                    String msg = OStrings.getString("CT_ERROR_CREATE");
                     throw new IOException(msg);
                 }
             }
@@ -881,7 +881,7 @@ public class CommandThread extends Thread
             {
                 if (!src.mkdirs())
                 {
-                    String msg = OStrings.CT_ERROR_CREATE + " (.../src/)";      // NOI18N
+                    String msg = OStrings.getString("CT_ERROR_CREATE") + " (.../src/)";      // NOI18N
                     throw new IOException(msg);
                 }
             }
@@ -892,7 +892,7 @@ public class CommandThread extends Thread
             {
                 if (!glos.mkdirs())
                 {
-                    String msg = OStrings.CT_ERROR_CREATE + " (.../glos/)";     // NOI18N
+                    String msg = OStrings.getString("CT_ERROR_CREATE") + " (.../glos/)";     // NOI18N
                     throw new IOException(msg);
                 }
             }
@@ -903,7 +903,7 @@ public class CommandThread extends Thread
             {
                 if (!tm.mkdirs())
                 {
-                    String msg = OStrings.CT_ERROR_CREATE + " (.../tm/)";       // NOI18N
+                    String msg = OStrings.getString("CT_ERROR_CREATE") + " (.../tm/)";       // NOI18N
                     throw new IOException(msg);
                 }
             }
@@ -914,7 +914,7 @@ public class CommandThread extends Thread
             {
                 if (!loc.mkdirs())
                 {
-                    String msg = OStrings.CT_ERROR_CREATE + " (.../target/)"; // NOI18N
+                    String msg = OStrings.getString("CT_ERROR_CREATE") + " (.../target/)"; // NOI18N
                     throw new IOException(msg);
                 }
             }
@@ -1017,7 +1017,7 @@ public class CommandThread extends Thread
             // feed file name to project window
             String filepath = filename.substring(m_config.getSourceRoot().length());
             
-            m_transFrame.setMessageText(OStrings.CT_LOAD_FILE_MX + filepath);
+            m_transFrame.setMessageText(OStrings.getString("CT_LOAD_FILE_MX") + filepath);
             
             m_curFile = new ProjectFileData();
             m_curFile.name = filename;
@@ -1274,7 +1274,7 @@ public class CommandThread extends Thread
      */
     void displayError(String msg, Throwable e)
     {
-        StaticUtils.log(OStrings.LD_ERROR + " " + msg); // NOI18N
+        StaticUtils.log(OStrings.getString("LD_ERROR") + " " + msg); // NOI18N
         e.printStackTrace(StaticUtils.getLogStream());
         e.printStackTrace();
         StaticUtils.log("----------------------------"); // NOI18N
@@ -1564,8 +1564,7 @@ catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug
         }
         catch( IndexOutOfBoundsException iobe )
         {
-            StringEntry str = new StringEntry(
-                    OStrings.getString("TF_INTRO_EMPTYPROJECT"));
+            StringEntry str = new StringEntry(OStrings.getString("TF_INTRO_EMPTYPROJECT"));
             str.setTranslation(" ");                                            // NOI18N
             
             ProjectFileData file = new ProjectFileData();

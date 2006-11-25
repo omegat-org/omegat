@@ -49,9 +49,10 @@ public class NewProjectFileChooser extends OmegaTFileChooser
         if (getSelectedFile().exists())
         {
             // must select non-existing name for project
-            JOptionPane.showMessageDialog(this, OStrings.NDC_SELECT_UNIQUE,
-                    OStrings.NDC_SELECT_UNIQUE_TITLE, 
-                    JOptionPane.ERROR_MESSAGE); 
+            JOptionPane.showMessageDialog(this,
+                OStrings.getString("NDC_SELECT_UNIQUE"),
+                OStrings.getString("NDC_SELECT_UNIQUE_TITLE"), 
+                JOptionPane.ERROR_MESSAGE); 
         }
         else
         {

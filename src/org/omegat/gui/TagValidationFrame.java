@@ -172,7 +172,7 @@ public class TagValidationFrame extends JFrame
     
     public void displayStringList(ArrayList stringList)
     {
-        setTitle(OStrings.TF_NOTICE_BAD_TAGS);
+        setTitle(OStrings.getString("TF_NOTICE_BAD_TAGS"));
         String out;
         String src;
         String trans;

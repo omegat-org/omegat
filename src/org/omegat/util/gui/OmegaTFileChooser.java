@@ -148,7 +148,7 @@ public class OmegaTFileChooser extends JFileChooser
     public String getTypeDescription(File f)
     {
         if (isProjectDir(f))
-            return OStrings.PFC_OMEGAT_PROJECT;
+            return OStrings.getString("PFC_OMEGAT_PROJECT");
         else
             return super.getTypeDescription(f);
     }

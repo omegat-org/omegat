@@ -465,10 +465,27 @@ public class StaticUtils
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
     public static void logRB(String key) {
+        logRB(key, null);
+    }
+
+    /**
+      * Logs a message, retrieved from the resource bundle.
+      *
+      * @param key        The key of the message in the resource bundle.
+      * @param parameters Parameters for the message. These are inserted by
+      *                   using StaticUtils.format.
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    public static void logRB(String key, Object[] parameters) {
         // Retrieve the message
         String message = OStrings.getString(key);
 
-        // Log it
+        // Format the message, if there are parameters
+        if (parameters != null)
+            message = format(message, parameters);
+
+        // Write the message to the log
         log(message);
     }
 

@@ -116,12 +116,12 @@ public class SRX implements Serializable, Cloneable
         }
         catch( IOException ioe )
         {
-            String message = 
-                    StaticUtils.format(
-                    OStrings.getString("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG"),
-                    new Object[] {ioe} );
-            StaticUtils.log(message);
-            JOptionPane.showMessageDialog(null, 
+            String message = StaticUtils.format(
+                "CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG",
+                new Object[] {ioe});
+            StaticUtils.logError("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG", message);
+            ioe.printStackTrace(StaticUtils.getLogStream());
+            JOptionPane.showMessageDialog(null,
                     message,
                     OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
         }
@@ -157,10 +157,12 @@ public class SRX implements Serializable, Cloneable
                     sb.append(exceptions.get(i));
                     sb.append("\n");                                            // NOI18N
                 }
-                throw new Exception(
-                        StaticUtils.format(
-                        "Exceptions occured while loading segmentation rules:\n{0}",// NOI18N
-                        new Object[] {sb.toString()} ) );
+                StaticUtils.logErrorRB(
+                    "CORE_SRX_EXC_LOADING_SEG_RULES",
+                    new Object[] {sb.toString()});
+                res = new SRX();
+                res.initDefaults();
+                return res;
             }
             
             // checking the version

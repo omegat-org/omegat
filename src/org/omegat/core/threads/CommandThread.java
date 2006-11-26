@@ -315,11 +315,14 @@ public class CommandThread extends Thread
             if( !projectClosing )
                 displayError(OStrings.getString("TF_LOAD_ERROR"), e);
             else
-                StaticUtils.log("Project Load aborted by user.");               // NOI18N
+                StaticUtils.logRB("CT_CANCEL_LOAD");               // NOI18N
         }
         // Fix for bug 1571944 @author Henry Pijffers (henry.pijffers@saxnot.com)
         catch (OutOfMemoryError oome) {
             // Oh shit, we're all out of storage space!
+            // Of course we should've cleaned up after ourselves earlier,
+            // but since we didn't, do a bit of cleaning up now, otherwise
+            // we can't even inform the user about our slacking off.
             m_strEntryHash.clear();
             m_strEntryHash = null;
             m_strEntryList.clear();
@@ -343,7 +346,7 @@ public class CommandThread extends Thread
 
             // There, that should do it, now inform the user
             String msg = OStrings.getString("OUT_OF_MEMORY");
-            StaticUtils.log(msg);
+            StaticUtils.logError("OUT_OF_MEMORY", msg);
             oome.printStackTrace(StaticUtils.getLogStream());
             m_transFrame.displayError(msg, oome);
 
@@ -691,7 +694,7 @@ public class CommandThread extends Thread
         }
         catch (IOException e)
         {
-            StaticUtils.log(OStrings.getString("CT_ERROR_CREATING_TMX"));
+            StaticUtils.logErrorRB("CT_ERROR_CREATING_TMX");
             StaticUtils.log(e.getMessage());
             e.printStackTrace(StaticUtils.getLogStream());
             throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") +
@@ -943,8 +946,7 @@ public class CommandThread extends Thread
             proj = new File(m_config.getProjectInternal() + OConsts.STATUS_EXTENSION);
             if (!proj.exists())
             {
-                StaticUtils.log(StaticUtils.format(
-                    OStrings.getString("CT_ERROR_CANNOT_FIND_TMX"), new Object[] {proj})); // NOI18N
+                StaticUtils.logErrorRB("CT_ERROR_CANNOT_FIND_TMX", new Object[] {proj}); // NOI18N
                 // nothing to do here
                 return;
             }
@@ -1276,7 +1278,7 @@ public class CommandThread extends Thread
      */
     void displayError(String msg, Throwable e)
     {
-        StaticUtils.log(OStrings.getString("LD_ERROR") + " " + msg); // NOI18N
+        StaticUtils.logRB("LD_ERROR", new Object[] {msg}); // NOI18N
         e.printStackTrace(StaticUtils.getLogStream());
         e.printStackTrace();
         StaticUtils.log("----------------------------"); // NOI18N

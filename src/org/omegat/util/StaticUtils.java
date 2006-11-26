@@ -458,6 +458,82 @@ public class StaticUtils
     }
 
     /**
+      * Writes an error message to the log, to be retrieved from the
+      * resource bundle.
+      *
+      * @param errorID      The key of the error message in the resource bundle
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    public static void logError(String errorID) {
+        // Retrieve and log the error message
+        String message = OStrings.getString(errorID);
+
+        // Log it
+        logError(errorID, message, null);
+    }
+
+    /**
+      * Writes an error message to the log, to be retrieved from the
+      * resource bundle.
+      *
+      * @param errorID      The key of the error message in the resource bundle
+      * @param parameters   Parameters for the error message. These are
+      *                     inserted by using StaticUtils.format.
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    public static void logError(String errorID, Object[] parameters) {
+        // Retrieve the error message
+        String message = OStrings.getString(errorID);
+
+        // Log it
+        logError(errorID, message, parameters);
+    }
+
+    /**
+      * Writes the specified error message to the log, preceded by a line
+      * containing the error ID. While the error message can be localised,
+      * the error ID should not, so developers can determine what error
+      * happened by looking at the error ID, instead of trying to interpret
+      * localised messages.
+      *
+      * @param errorID      An identification string for the error
+      * @param errorMessage The actual error message
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    public static void logError(String errorID, String errorMessage) {
+        logError(errorID, errorMessage, null);
+    }
+
+    /**
+      * Writes the specified error message to the log, preceded by a line
+      * containing the error ID. While the error message can be localised,
+      * the error ID should not, so developers can determine what error
+      * happened by looking at the error ID, instead of trying to interpret
+      * localised messages.
+      *
+      * @param errorID      An identification string for the error
+      * @param errorMessage The actual error message
+      * @param parameters   Parameters for the error message. These are
+      *                     inserted by using StaticUtils.format.
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    public static void logError(String errorID, String errorMessage, Object[] parameters) {
+        // First write the error ID to the log
+        log(format(OStrings.getString("LOG_ERROR_ID"), new Object[] {errorID}));
+
+        // Format the message, if there are parameters
+        if (parameters != null)
+            errorMessage = format(errorMessage, parameters);
+
+        // Write the message to the log
+        log(errorMessage);
+    }
+
+    /**
      * Extracts an element of a class path.
      *
      * @param fullcp the classpath

@@ -265,7 +265,9 @@ public class ResourceBundleFilter extends AbstractFilter
             else
             {
                 value = leftTrim(value);
+                value = value.replaceAll("\\n\\n", "\n \n");
                 String trans=processEntry(value);
+                trans = trans.replaceAll("\\n\\s\\n", "\n\n");
                 trans = formatString(trans);
                 if( trans.length()>0 && trans.charAt(0)==' ' )
                     trans = '\\'+trans;

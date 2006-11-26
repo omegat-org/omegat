@@ -3,8 +3,8 @@
 ----------------------------------------------------------------------
 
 1.6.1 vs. 1.4.5.04
-   57 Enchancements
-  115 Bugfixes
+   59 Enchancements
+  118 Bugfixes
 
 ----------------------------------------------------------------------
 1.6.1_01
@@ -36,6 +36,9 @@ Contains new localisations plus a couple bug fixes
 
    - Insert best match (% setting)
    http://sourceforge.net/support/tracker.php?aid=1599127
+
+   - Segmentation of bundles on empty lines
+   http://sourceforge.net/support/tracker.php?aid=1577534
 
 ----------------------------------------------------------------------
 1.6.1

@@ -219,17 +219,48 @@ public class StaticUtils
       * memory is saved. Token lists are not saved when
       * all tokens are requested. Again to save memory.
       */
-    private static java.util.Map tokenCache    = new java.util.Hashtable();
+    private static java.util.Map tokenCache = new java.util.Hashtable();
 
     /** Removes all token lists from the cache. */
     public static void clearTokenCache() {
         tokenCache.clear();
     }
 
+    /**
+      * Breaks a string into tokens.
+      * <p>
+      * Examples:
+      * <ul>
+      * <li> This is a semi-good way. -> "this", "is", "a", "semi-good", "way"
+      * <li> Fine, thanks, and you? -> "fine", "thanks", "and", "you"
+      * <li> C&all this action -> "call", "this", "action" ('&' is eaten)
+      * </ul>
+      * <p>
+      * Also skips OmegaT tags.
+      *
+      * @param str string to tokenize
+      * @return List of all tokens (words only)
+      */
     public static List tokenizeText(String str) {
         return tokenizeText(str, false);
     }
 
+    /**
+      * Breaks a string into tokens.
+      * <p>
+      * Examples:
+      * <ul>
+      * <li> This is a semi-good way. -> "this", "is", "a", "semi-good", "way"
+      * <li> Fine, thanks, and you? -> "fine", "thanks", "and", "you"
+      * <li> C&all this action -> "call", "this", "action" ('&' is eaten)
+      * </ul>
+      * <p>
+      * OmegaT tags and other non-word tokens are skipped if the parameter "all" is false.
+      *
+      * @param str string to tokenize
+      * @param all If true, numbers, tags, and other non-word tokens are included in the list
+      * @return List of tokens (all)
+      */
     public static List tokenizeText(String str, boolean all) {
         // check if we've already tokenized this string
         // no sense in retokenizing identical strings
@@ -256,7 +287,6 @@ public class StaticUtils
         BreakIterator breaker = getWordBreaker();
         breaker.setText(str);
 
-/*try { // FIX: remove this when bug 1589484 is fixed */
         int start = breaker.first();
         for (int end = breaker.next();
              end!=BreakIterator.DONE; 
@@ -280,124 +310,10 @@ public class StaticUtils
                 tokens.add(token);
             }
         }
-/*}
-catch (IllegalArgumentException exception) { // FIX: remove this when bug 1589484 is fixed
-    String message =   "IllegalArgumentException caught!\n"
-                     + "Please report this to the OmegaT team, by going to the bug report at:\n"
-                     + "http://sourceforge.net/support/tracker.php?aid=1589484\n"
-                     + "and report the details below (location, string, breaker string, memory, stack trace)\n"
-                     + "Location: StaticUtils.tokenizeText\n"
-                     + "String: [" + str + "]\n"
-                     + "Breaker string: [" + ((org.omegat.util.WordIterator)breaker).getString() + "]\n"
-                     + "Available memory: " + Runtime.getRuntime().freeMemory() + " bytes\n";
-    System.err.println(message + "Stack trace (below):");
-    System.err.println(exception.getMessage());
-    exception.printStackTrace(System.err);
-
-    org.omegat.core.threads.CommandThread.core.displayErrorMessage(message + "Stack trace: see log file (" + StaticUtils.getLogLocation() + ")", exception);
-
-    return tokens;
-}
-catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug 1589484 is fixed
-    String message =   "StringIndexOutOfBoundsException caught!\n"
-                     + "Please report this to the OmegaT team, by going to the bug report at:\n"
-                     + "http://sourceforge.net/support/tracker.php?aid=1589484\n"
-                     + "and report the details below (location, string, breaker string, memory, stack trace)\n"
-                     + "Location: StaticUtils.tokenizeText\n"
-                     + "String: [" + str + "]\n"
-                     + "Breaker string: [" + ((org.omegat.util.WordIterator)breaker).getString() + "]\n"
-                     + "Available memory: " + Runtime.getRuntime().freeMemory() + " bytes\n";
-    System.err.println(message + "Stack trace (below):");
-    System.err.println(exception.getMessage());
-    exception.printStackTrace(System.err);
-
-    org.omegat.core.threads.CommandThread.core.displayErrorMessage(message + "Stack trace: see log file (" + StaticUtils.getLogLocation() + ")", exception);
-
-    return tokens;
-}*/
 
         return tokens;
     }
 
-    /**
-     * Builds a list of tokens and a list of their offsets w/in a file.
-     * <p>
-     * It breaks string into tokens like in the following examples:
-     * <ul>
-     * <li> This is a semi-good way. -> "this", "is", "a", "semi-good", "way"
-     * <li> Fine, thanks, and you? -> "fine", "thanks", "and", "you"
-     * <li> C&all this action -> "call", "this", "action" ('&' is eaten)
-     * </ul>
-     * <p>
-     * Also skips OmegaT tags.
-     *
-     * @param str string to tokenize
-     * @param tokenList the list to add tokens to
-     * @return number of tokens
-     */
-    /*public static int tokenizeTextOld(String str, List tokenList) {
-        return tokenizeTextOld(str, tokenList, false);
-    }*/
-    
-    /**
-     * Builds a list of tokens and a list of their offsets w/in a file.
-     * <p>
-     * It breaks string into tokens like in the following examples:
-     * <ul>
-     * <li> This is a semi-good way. -> "this", "is", "a", "semi-good", "way"
-     * <li> Fine, thanks, and you? -> "fine", "thanks", "and", "you"
-     * <li> C&all this action -> "call", "this", "action" ('&' is eaten)
-     * </ul>
-     * <p>
-     * Only skips OmegaT tags and other non-word tokens if the parameter "all" is false.
-     *
-     * @param str string to tokenize
-     * @param tokenList the list to add tokens to
-     * @param all If true, numbers, tags, and other non-word tokens are included in the list
-     * @return number of tokens
-     */
-    /*public static int tokenizeTextOld(String str, List tokenList, boolean all) {
-
-        int len = str.length();
-        if (len==0)
-            return 0;  // fixes bug nr. 1382810 (StringIndexOutOfBoundsException)
-        
-        if (tokenList!=null)
-            str = str.toLowerCase();
-        int nTokens = 0;
-        
-        BreakIterator breaker = getWordBreaker();
-        breaker.setText(str);
-        
-        int start = breaker.first();
-        for (int end = breaker.next(); end!=BreakIterator.DONE; 
-                start = end, end = breaker.next())
-        {
-            String tokenStr = str.substring(start,end);
-            boolean word = false;
-            for (int i=0; i<tokenStr.length(); i++)
-            {
-                char ch = tokenStr.charAt(i);
-                if (Character.isLetter(ch))
-                {
-                    word = true;
-                    break;
-                }
-            }
-            //if (word && !PatternConsts.OMEGAT_TAG.matcher(tokenStr).matches())
-            if (all || (word && !PatternConsts.OMEGAT_TAG.matcher(tokenStr).matches()))
-            {
-                nTokens++;
-                if (tokenList!=null)
-                {
-                    Token token = new Token(tokenStr, start);
-                    tokenList.add(token);
-                }
-            }
-        }
-        return nTokens;
-    }*/
-    
     /**
      * Returns the names of all font families available.
      */

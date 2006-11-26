@@ -48,6 +48,7 @@ import org.omegat.util.StaticUtils;
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
+ * @author Henry Pijffers (henry.pijffers@saxnot.com)
  */
 public class StringEntry
 {

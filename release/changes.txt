@@ -4,8 +4,8 @@
 
 1.7.0 vs. 1.6.1_01
 
-  1 Enhancements
-  0 Bugfixes
+  2 Enhancements
+  1 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.0
@@ -21,7 +21,8 @@ SAY SOMETHING USEFUL
 
  Bug fixes:
 
-  -
+  - Hardcoded bits of text unlocalisable
+  http://sourceforge.net/support/tracker.php?aid=1602798
 
 ----------------------------------------------------------------------
 

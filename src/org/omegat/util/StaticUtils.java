@@ -458,79 +458,205 @@ public class StaticUtils
     }
 
     /**
-      * Writes an error message to the log, to be retrieved from the
-      * resource bundle.
+      * Logs a message, retrieved from the resource bundle.
       *
-      * @param errorID      The key of the error message in the resource bundle
+      * @param key The key of the message in the resource bundle.
       *
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
-    public static void logError(String errorID) {
+    public static void logRB(String key) {
+        // Retrieve the message
+        String message = OStrings.getString(key);
+
+        // Log it
+        log(message);
+    }
+
+    /**
+      * Writes a warning message to the log (to be retrieved from the
+      * resource bundle), preceded by a lie containing the warning ID.
+      *
+      * While the warning message can be localised, the warning ID should not,
+      * so developers can determine what warning was given by looking at the
+      * warning ID, instead of trying to interpret localised messages.
+      *
+      * @param id The key of the warning message in the resource bundle
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    public static void logWarningRB(String key) {
+        // Retrieve the waring message
+        String message = OStrings.getString(key);
+
+        // Log it
+        logWarning(key, message, null);
+    }
+
+    /**
+      * Writes a warning message to the log (to be retrieved from the
+      * resource bundle), preceded by a line containing the warning ID.
+      *
+      * While the warning message can be localised, the warning ID should not,
+      * so developers can determine what warning was given by looking at the
+      * warning ID, instead of trying to interpret localised messages.
+      *
+      * @param key        The key of the warning message in the resource bundle
+      * @param parameters Parameters for the warning message. These are
+      *                   inserted by using StaticUtils.format.
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    public static void logWarningRB(String key, Object[] parameters) {
+        // Retrieve the warning message
+        String message = OStrings.getString(key);
+
+        // Log it
+        logWarning(key, message, parameters);
+    }
+
+    /**
+      * Writes the specified warning message to the log, preceded by a line
+      * containing the warning ID.
+      *
+      * While the warning message can be localised, the warning ID should not,
+      * so developers can determine what warning was given by looking at the
+      * warning ID, instead of trying to interpret localised messages.
+      *
+      * @param id      An identification string for the warning
+      * @param message The actual warning message
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    public static void logWarning(String id, String message) {
+        logWarning(id, message, null);
+    }
+
+    /**
+      * Writes the specified warning message to the log, preceded by a line
+      * containing the warning ID.
+      *
+      * While the warning message can be localised, the warning ID should not,
+      * so developers can determine what warning was given by looking at the
+      * warning ID, instead of trying to interpret localised messages.
+      *
+      * @param id         An identification string for the warning
+      * @param message    The actual warning message
+      * @param parameters Parameters for the warning message. These are
+      *                   inserted by using StaticUtils.format.
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    public static void logWarning(String id, String message, Object[] parameters) {
+        logIdentifiableMessage(
+            format(OStrings.getString("LOG_WARNING_ID"), new Object[] {id}),
+            message,
+            parameters);
+    }
+
+    /**
+      * Writes an error message to the log (to be retrieved from the
+      * resource bundle), preceded by a line containing the error ID.
+      *
+      * While the error message can be localised, the error ID should not,
+      * so developers can determine what error was given by looking at the
+      * error ID, instead of trying to interpret localised messages.
+      *
+      * @param key The key of the error message in the resource bundle
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    public static void logErrorRB(String key) {
         // Retrieve and log the error message
-        String message = OStrings.getString(errorID);
+        String message = OStrings.getString(key);
 
         // Log it
-        logError(errorID, message, null);
+        logError(key, message, null);
     }
 
     /**
-      * Writes an error message to the log, to be retrieved from the
-      * resource bundle.
+      * Writes an error message to the log (to be retrieved from the
+      * resource bundle), preceded by a line containing the error ID.
       *
-      * @param errorID      The key of the error message in the resource bundle
-      * @param parameters   Parameters for the error message. These are
-      *                     inserted by using StaticUtils.format.
+      * While the error message can be localised, the error ID should not,
+      * so developers can determine what error was given by looking at the
+      * error ID, instead of trying to interpret localised messages.
+      *
+      * @param id         The key of the error message in the resource bundle
+      * @param parameters Parameters for the error message. These are
+      *                   inserted by using StaticUtils.format.
       *
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
-    public static void logError(String errorID, Object[] parameters) {
+    public static void logErrorRB(String key, Object[] parameters) {
         // Retrieve the error message
-        String message = OStrings.getString(errorID);
+        String message = OStrings.getString(key);
 
         // Log it
-        logError(errorID, message, parameters);
+        logError(key, message, parameters);
     }
 
     /**
       * Writes the specified error message to the log, preceded by a line
-      * containing the error ID. While the error message can be localised,
-      * the error ID should not, so developers can determine what error
-      * happened by looking at the error ID, instead of trying to interpret
-      * localised messages.
+      * containing the error ID.
       *
-      * @param errorID      An identification string for the error
-      * @param errorMessage The actual error message
+      * While the error message can be localised, the error ID should not,
+      * so developers can determine what error was given by looking at the
+      * error ID, instead of trying to interpret localised messages.
+      *
+      * @param id      An identification string for the error
+      * @param message The actual error message
       *
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
-    public static void logError(String errorID, String errorMessage) {
-        logError(errorID, errorMessage, null);
+    public static void logError(String id, String message) {
+        logError(id, message, null);
     }
 
     /**
       * Writes the specified error message to the log, preceded by a line
-      * containing the error ID. While the error message can be localised,
-      * the error ID should not, so developers can determine what error
-      * happened by looking at the error ID, instead of trying to interpret
-      * localised messages.
+      * containing the error ID.
       *
-      * @param errorID      An identification string for the error
-      * @param errorMessage The actual error message
-      * @param parameters   Parameters for the error message. These are
-      *                     inserted by using StaticUtils.format.
+      * While the error message can be localised, the error ID should not,
+      * so developers can determine what error was given by looking at the
+      * error ID, instead of trying to interpret localised messages.
+      *
+      * @param id         An identification string for the error
+      * @param message    The actual error message
+      * @param parameters Parameters for the error message. These are
+      *                   inserted by using StaticUtils.format.
       *
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
-    public static void logError(String errorID, String errorMessage, Object[] parameters) {
-        // First write the error ID to the log
-        log(format(OStrings.getString("LOG_ERROR_ID"), new Object[] {errorID}));
+    public static void logError(String id, String message, Object[] parameters) {
+        logIdentifiableMessage(
+            format(OStrings.getString("LOG_ERROR_ID"), new Object[] {id}),
+            message,
+            parameters);
+    }
+
+    /**
+      * Writes the specified message to the log, preced by a line containing
+      * an identification for the message.
+      *
+      * While the message can be localised, the ID should not, so developers
+      * can determine what message was given by looking at the error ID,
+      * instead of trying to interpret localised messages.
+      *
+      * @param idLine     The identification line for the message
+      * @param message    The actual message
+      * @param parameters Parameters for the message. These are
+      *                   inserted by using StaticUtils.format.
+      */
+    protected static void logIdentifiableMessage(String idLine, String message, Object[] parameters) {
+        // First write the ID line to the log
+        log(idLine);
 
         // Format the message, if there are parameters
         if (parameters != null)
-            errorMessage = format(errorMessage, parameters);
+            message = format(message, parameters);
 
         // Write the message to the log
-        log(errorMessage);
+        log(message);
     }
 
     /**

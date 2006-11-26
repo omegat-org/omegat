@@ -565,7 +565,7 @@ public class StaticUtils
       */
     public static void logWarning(String id, String message, Object[] parameters) {
         logIdentifiableMessage(
-            format(OStrings.getString("LOG_WARNING_ID"), new Object[] {id}),
+            format(OStrings.getString("SU_LOG_WARNING_ID"), new Object[] {id}),
             message,
             parameters);
     }
@@ -646,7 +646,7 @@ public class StaticUtils
       */
     public static void logError(String id, String message, Object[] parameters) {
         logIdentifiableMessage(
-            format(OStrings.getString("LOG_ERROR_ID"), new Object[] {id}),
+            format(OStrings.getString("SU_LOG_ERROR_ID"), new Object[] {id}),
             message,
             parameters);
     }
@@ -782,7 +782,7 @@ public class StaticUtils
         {
             // get the name of the operating system
             os = System.getProperty("os.name");                                 // NOI18N
-            
+
             // get the user's home directory
             home = System.getProperty("user.home");                             // NOI18N
         }
@@ -792,15 +792,16 @@ public class StaticUtils
             // the location of the config dir cannot be determined,
             // set the config dir to the current working dir
             m_configDir = new File(".").getAbsolutePath();                      // NOI18N
-            
+
             // log the exception, only do this after the config dir
             // has been set to the current working dir, otherwise
             // the log method will probably fail
+            logErrorRB("SU_USERHOME_PROP_ACCESS_ERROR");
             log(e.toString());
-            
+
             return m_configDir;
         }
-        
+
         // if os or user home is null or empty, we cannot reliably determine
         // the config dir, so we use the current working dir (= empty string)
         if ( (os == null) || (os.length() == 0) ||
@@ -871,8 +872,10 @@ public class StaticUtils
                     
                     // if the dir could not be created,
                     // set the config dir to the current working dir
-                    if (!created)
+                    if (!created) {
+                        logErrorRB("SU_CONFIG_DIR_CREATE_ERROR");
                         m_configDir = new File(".").getAbsolutePath();          // NOI18N
+                    }
                 }
             }
             catch (SecurityException e)
@@ -882,6 +885,7 @@ public class StaticUtils
                 m_configDir = new File(".").getAbsolutePath();                  // NOI18N
                 
                 // log the exception, but only after the config dir has been reset
+                logErrorRB("SU_CONFIG_DIR_CREATE_ERROR");
                 log(e.toString());
             }
         }

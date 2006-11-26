@@ -277,7 +277,9 @@ public class Preferences
         }
         catch (IOException e)
         {
-            StaticUtils.log(OStrings.getString("PM_ERROR_SAVE") + e);
+            StaticUtils.logErrorRB("PM_ERROR_SAVE");
+            StaticUtils.log(e.getMessage());
+            e.printStackTrace(StaticUtils.getLogStream());
         }
     }
     
@@ -350,7 +352,8 @@ public class Preferences
             // error loading preference file - keep whatever was
             //  loaded then return gracefully to calling function
             // print an error to the console as an FYI
-            StaticUtils.log(OStrings.getString("PM_WARNING_PARSEERROR_ON_READ") + te);
+            StaticUtils.logWarningRB("PM_WARNING_PARSEERROR_ON_READ");
+            StaticUtils.log(te.getMessage());
             te.printStackTrace(StaticUtils.getLogStream());
         }
         catch (IndexOutOfBoundsException e3)
@@ -358,19 +361,23 @@ public class Preferences
             // error loading preference file - keep whatever was
             //  loaded then return gracefully to calling function
             // print an error to the console as an FYI
-            StaticUtils.log(OStrings.getString("PM_WARNING_PARSEERROR_ON_READ") + e3);
+            StaticUtils.logWarningRB("PM_WARNING_PARSEERROR_ON_READ");
+            StaticUtils.log(e3.getMessage());
             e3.printStackTrace(StaticUtils.getLogStream());
         }
         catch (UnsupportedEncodingException e3)
         {
-            // unrecognized file - forget about it
-            StaticUtils.log("Unrecognized file's encoding"); // NOI18N
+            // unsupported encoding - forget about it
+            StaticUtils.logErrorRB("PM_UNSUPPORTED_ENCODING"); // NOI18N
+            StaticUtils.log(e3.getMessage());
             e3.printStackTrace(StaticUtils.getLogStream());
         }
         catch (IOException e4)
         {
             // can't read file - forget about it and move on
-            // e4.printStackTrace();
+            StaticUtils.logErrorRB("PM_ERROR_READING_FILE"); // NOI18N
+            StaticUtils.log(e4.getMessage());
+            e4.printStackTrace(StaticUtils.getLogStream());
         }
     }
     

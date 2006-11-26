@@ -75,24 +75,24 @@ public class GlossaryManager
      */
     public void loadGlossaryFiles(File folder)  throws IOException
     {
-		if (folder.isDirectory())
-		{
-			String fileList[] = folder.list();
-			for (int i=0; i<fileList.length; i++)
-			{
-				String fname = folder.getAbsolutePath() + File.separator + fileList[i];
-				StaticUtils.log(OStrings.getString("CT_LOADING_GLOSSARY") + fname);
+        if (folder.isDirectory())
+        {
+            String fileList[] = folder.list();
+            for (int i=0; i<fileList.length; i++)
+            {
+                String fname = folder.getAbsolutePath() + File.separator + fileList[i];
+                StaticUtils.logRB("CT_LOADING_GLOSSARY", new Object[] {fname});
                 String fname_lower=fname.toLowerCase();
                 // ignoring files with unrecognized extensions - http://sf.net/tracker/index.php?func=detail&aid=1088247&group_id=68187&atid=520347
                 if( fname_lower.endsWith(EXT_DEF_ENC) || fname_lower.endsWith(EXT_UTF8_ENC) )
                     loadGlossaryFile(new File(fname));
-			}
-		}
-		else
-		{
-			// uh oh - something is screwed up here
-			throw new IOException(OStrings.getString("CT_ERROR_ACCESS_GLOSSARY_DIR"));
-		}
+            }
+        }
+        else
+        {
+            // uh oh - something is screwed up here
+            throw new IOException(OStrings.getString("CT_ERROR_ACCESS_GLOSSARY_DIR"));
+        }
         
     }
 
@@ -124,14 +124,14 @@ public class GlossaryManager
             in.reset();
         
         for( String s = in.readLine(); s!=null; s = in.readLine() )
-		{
-			// skip lines that start with '#'
-			if( s.startsWith("#") ) // NOI18N
-				continue;
+        {
+            // skip lines that start with '#'
+            if( s.startsWith("#") ) // NOI18N
+                continue;
             
             // divide lines on tabs
             String tokens[] = s.split("\t");                                    // NOI18N
-			// check token list to see if it has a valid string
+            // check token list to see if it has a valid string
             if( tokens.length<2 || tokens[0].length()==0 )
                 continue;
             
@@ -142,9 +142,9 @@ public class GlossaryManager
                 comment=tokens[2];
             GlossaryEntry glosEntry = new GlossaryEntry(tokens[0], tokens[1], comment);
             glossaryEntries.add(glosEntry);
-		}
-		in.close();
-	}
+        }
+        in.close();
+    }
 
     /**
      * Builds the Glossary.
@@ -161,10 +161,10 @@ public class GlossaryManager
      * </ul>
      */
     public void buildGlossary(List strEntryList)
-	{
-		for(int i=0; i<glossaryEntries.size(); i++)
-		{
-			GlossaryEntry glosEntry = (GlossaryEntry)glossaryEntries.get(i);
+    {
+        for(int i=0; i<glossaryEntries.size(); i++)
+        {
+            GlossaryEntry glosEntry = (GlossaryEntry)glossaryEntries.get(i);
             String glosStr = glosEntry.getSrcText();
             //List glosTokens = new ArrayList();
             //int glosTokensN = StaticUtils.tokenizeText(glosStr, glosTokens);
@@ -179,9 +179,9 @@ public class GlossaryManager
                 if (strTokens.containsAll(glosTokens))
                     strEntry.addGlossaryEntry(glosEntry);
             }
-		}
-	}
+        }
+    }
 
-	private List glossaryEntries;
+    private List glossaryEntries;
     
 }

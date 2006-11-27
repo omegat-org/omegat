@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 
 1.6.1 vs. 1.4.5.04
-   59 Enchancements
+   60 Enchancements
   118 Bugfixes
 
 ----------------------------------------------------------------------
@@ -22,6 +22,8 @@ Contains new localisations plus a couple bug fixes
   translation
 
   - Slovak UI localisation + full manual translation
+
+  - Italian instant start guide translation
 
  Bug fixes:
 

@@ -1,0 +1,187 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Guida di avvio rapido - Manuale per l'Utente di OmegaT 1.6.1</title>
+</head>
+<body>
+
+<h1>Guida di avvio rapido</h1>
+<p>ovvero, come <strong>Iniziare a usare OmegaT in 5 minuti</strong></p>
+
+<p><strong>Questa Guida di avvio rapido si occupa solo delle funzioni basilari principali. Per familiarizzare in modo completo con tutte le funzioni messe a disposizione da OmegaT, si consiglia di leggere il Manuale per l'Utente di OmegaT completo.</strong></p>
+
+<h2>Sommario</h2>
+   <ol><li>In breve: come funziona OmegaT</li>
+   <li>Come tradurre con OmegaT</li>
+   <li>Come gestire il testo con tag</li></ol>
+
+<hr>
+
+<a name="Briefly.2C_how_OmegaT_works"></a>
+<h2>1. In breve: come funziona OmegaT</h2>
+
+<p>La schermata di lavoro di OmegaT è composta da tre finestre distinte. Ogni finestra può essere ridimensionata servendosi del mouse. La parte sinistra della schermata principale è la finestra dell'“Editor”, nella quale si eseguirà la traduzione. A destra, in alto, vi è la finestra delle “Corrispondenze fuzzy”, nella quale vengono visualizzate le corrispondenze con la memoria di traduzione (TM). Immediatamente sotto si trova la finestra “Glossario”, nella quale vengono visualizzate le corrispondenze con il glossario.</p>
+
+<p>Nella finestra dell'Editor OmegaT presenta il testo di partenza, “segmentato” in frasi (o paragrafi – si veda il Manuale). I segmenti verranno tradotti singolarmente. Quando si passa da un segmento all'altro, ogni frase precedentemente tradotta verrà memorizzata nella memoria di traduzione. Al termine della traduzione di tutti i segmenti (o prima, quando necessario), OmegaT utilizzerà la memoria di traduzione per creare, nella cartella “Target”, i documenti tradotti.</p>
+
+<p>OmegaT organizza il lavoro di traduzione in “Progetti di traduzione”. Per ogni progetto, OmegaT creerà una serie di cartelle. Queste cartelle verranno utilizzate per memorizzare i documenti di partenza che dovranno essere tradotti, i glossari che si desiderano utilizzare e ogni memoria di traduzione che si vorrà adottare. OmegaT crea anche una cartella “Target” nella quale verranno memorizzati i documenti finali tradotti.</p>
+
+<hr>
+<a name="How_to_translate_using_OmegaT"></a>
+<h2>2. Come tradurre con OmegaT</h2>
+
+<a name="Create_and_open_a_new_project"></a>
+<h3>a. Creazione e apertura di un nuovo progetto</h3>
+
+<p>Dalla barra dei menu, selezionare <strong>Progetto -&gt; Nuovo...</strong></p>
+
+<p>Accedere alla cartella nella quale si desidera salvare i file progetto e inserire un nome da assegnare al progetto di traduzione. Il nome immesso verrà assegnato alla cartella del progetto, e tutti i file che fanno parte del progetto verranno memorizzati in questa cartella, oppure nelle sottocartelle dalla stessa dipendenti.</p>
+
+<p>OmegaT richiederà di confermare, o di modificare, le cartelle del progetto che dovranno essere create, visualizzando la seguente finestra di dialogo:</p>
+
+<center><img src="images/NewProject.png" alt="Image:NewProject.png" width="875" height="419" >
+</center>
+
+<p>A questo punto si potrà semplicemente accettare il percorso di memorizzazione suggerito per le sottocartelle, accertandosi, però, che i codici della lingua di partenza e di quella di arrivo siano corretti. Selezionare il codice della lingua (2 caratteri) o della lingua e del paese (2 + 2 caratteri) dall'elenco a cascata, oppure digitarli manualmente all'interno del campo (in questo caso attenersi al modello di 2 caratteri). Tenere a mente il percorso di memorizzazione della sottocartella “Target” (nella quale verranno memorizzati i documenti tradotti).</p>
+
+<p>Se si desidera che OmegaT segmenti il documento per “frasi”, invece che per “paragrafi” si deve accedere alla finestra di dialogo “Regole di segmentazione”.</p>
+
+<p>Quando si farà clic su OK per accettare l'impostazione del progetto, OmegaT richiederà di selezionare la serie di documenti da importare nel progetto. Si ha la possibilità di importare singoli file oppure, in alternativa, un'intera struttura di directory (con tutti i file contenuti nelle sottocartelle dipendenti). Se si sono erroneamente importati documenti non corretti, oppure un numero maggiore di documenti rispetto a quello necessario, i file in eccesso potranno essere semplicemente rimossi dalla cartella sorgente del progetto OmegaT (servendosi, per esempio, del gestore dei file del sistema in uso).</p>
+
+<p>Per verificare l'elenco dei file da tradurre, accedere alla finestra “File del progetto” (se la finestra non viene visualizzata automaticamente avviare, dalla barra dei menu, il comando Progetto -&gt; File del progetto). Se è necessario modificare il contenuto della cartella sorgente, ricordare di ricaricare prima il progetto (dalla barra dei menu, selezionare il comando Progetto -&gt; Ricarica). Per default, OmegaT apre il primo file dell'elenco del progetto.</p>
+
+<p>Ricordare che OmegaT è in grado di tradurre i file dei formati qui sotto indicati. Qualsiasi altro tipo di file verrà ignorato.<ul>
+<li>Open Document</li>
+<li>OpenOffice.org </li>
+<li>(X)HTML </li>
+<li>HTML Help Compiler (HCC)</li>
+<li>DocBook </li>
+<li>File di solo testo</li>
+<li>Java bundle.properties</li>
+<li>.po monolingua</li>
+<li>INI (formato "codice=value")</li>
+</ul>
+</p>
+
+<a name="Translate_the_segments_one_by_one"></a>
+<h3>b. Traduzione dei singoli segmenti</h3>
+
+<p>Al termine della definizione del progetto, e dopo aver deciso quali file devono essere tradotti, OmegaT aprirà, nella finestra dell'Editor, il primo file di partenza dell'elenco del progetto. Il primo segmento da tradurre verrà evidenziato in verde; subito sotto compare una copia del testo di partenza, inserito nel “campo di arrivo”. (A questo punto tutto il testo che si trova all'esterno del campo di destinazione non potrà essere in alcun modo modificato). Il testo sul quale intervenire è quello racchiuso tra i tag &lt;segmento 0001&gt; e &lt;fine segmento&gt; e quanto viene digitato dovrà sovrascrivere il testo di partenza inserito nel “campo di arrivo”.</p>
+
+<p>Per passare alla traduzione del segmento successivo, premere semplicemente “INVIO”.</p>
+
+<p>Nota:<br> – Per trasferirsi a un qualsiasi altro segmento all'interno del documento, sia esso precedente o successivo quello attivo, fare doppio clic sulla frase, o sul paragrafo, da aprire. <br> – Se si preferisce inserire la traduzione in un campo di destinazione vuoto, impostare tale opzione utilizzando il comando Opzioni -&gt; Campo di modifica.</p>
+
+<p>Quando si premerà “INVIO”, vengono eseguite alcune operazioni “invisibili”: <br> OmegaT aggiunge la coppia di segmenti (il segmento di partenza e quello della traduzione) alla memoria di traduzione e avvia automaticamente la traduzione di tutti gli altri segmenti identici che vengono rilevati in tutti gli altri file del progetto. Viene eseguita anche una scansione della memoria di traduzione e del glossario, alla ricerca di concordanze per i segmenti successivi non ancora tradotti.</p>
+
+<a name="Use_TM_and_glossary_matches"></a>
+<h3>c. Uso delle corrispondenze della memoria di traduzione (TM) e del glossario</h3>
+
+<a name="TM_matches"></a>
+<h4>1. Corrispondenze della memoria di traduzione (TM)</h4>
+
+<p>Se OmegaT rileva, per il segmento successivo, la presenza nella memoria di traduzione di una concordanza parziale (fuzzy match) (pari o superiore al 30% – si veda il Manuale), tale concordanza viene riportata all'interno della finestra “Corrispondenze fuzzy”. Per default, nella finestra “Corrispondenze fuzzy” viene pre-selezionata la prima concordanza rilevata.</p>
+<p>Per inserire nel campo di arrivo la corrispondenza della memoria di traduzione, prelevandola dalla finestra “Corrispondenze fuzzy”, si può utilizzare uno dei sistemi rapidi da tastiera:<br>
+<ul>
+   <li>Premere <code>Ctrl+I</code> per inserire, alla posizione del cursore, la concordanza preselezionata, oppure...</li>
+   <li>premere <code>Ctrl+R</code> per sovrascrivere l'intero segmento con il contenuto della corrispondenza preselezionata.</li>
+</ul>
+</p>
+
+<p>Se sono state rilevate più concordanze, e si preferisce non utilizzare quella preselezionata:<br>
+<ul>
+	<li>selezionare la concordanza più apprppriata all'interno della finestra “Corrispondenze fuzzy”: premere <code>Ctrl+2</code> per la seconda concordanza proposta, <code>Ctrl+3</code> per la terza, e così via.</li>
+	<li>Quindi premere <code>Ctrl+I</code>, oppure <code>Ctrl+R</code> come sopra indicato.</li>
+</ul>
+</p>
+
+<p>(Si può indicare a OmegaT di inserire automaticamente, all'interno del campo di arrivo e quando il segmento viene aperto, una qualsiasi delle prime concordanze che abbiano una corrispondenza parziale (fuzzy) superiore a un valore percentuale specificato. Questa opzione viene definita con il comando <strong>Opzioni -&gt; Campo di modifica...</strong>)</p>
+
+<a name="Glossary_matches"></a>
+<h4>2. Corrispondenze del glossario</h4>
+
+<p>Se OmegaT rileva la presenza nel glossario di singoli termini con una corrispondenza del 100%, questi vengono visualizzati, come riferimento, all'interno della finestra “Glossario”. Questi termini, tuttavia, non possono venire inseriti nel campo di destinazione servendosi di sistemi rapidi da tastiera.</p>
+
+<a name="Create_the_translated_documents"></a>
+<h3>d. Creazione dei documenti tradotti</h3>
+
+<p>Quando si è conclusa la traduzione di tutti i segmenti (o anche prima, se necessario), OmegaT aggiornerà il/i documento/i di arrivo utilizzando le traduzioni memorizzate all'interno della memoria di traduzione.</p>
+
+<p>Per avviare questa operazione, dalla barra dei menu avviare il comando <strong>Progetto -&gt; Crea i documenti di arrivo</strong>.</p>
+
+<p>OmegaT genererà una versione tradotta di tutti i documenti traducibili contenuti nella carlella “Source” del progetto, sia che siano stati completamente o parzialmente tradotti. I documenti completamente, o parzialmente, tradotti verranno memorizzati nella cartella “Target” del progetto.</p>
+
+<p>Per concludere l'operazione di traduzione, aprire i documenti di arrivo con l'applicazione corrispondente (navigatore, elaboratore di testi ecc.) per verificare il contenuto e la corrtetta formattazione del documento finale. A questo punto si potrà tornare a OmegaT per apportare tutte le modifiche e le correzioni necessarie, alla fine delle quali non si deve dimenticare di creare di nuovo i documenti di arrivo tradotti.</p>
+
+<hr>
+<a name="Dealing_with_tagged_text"></a>
+<h2>3. Come gestire il testo con tag</h2>
+
+<p>OmegaT assicura che la formattazione presente nei documenti di partenza (neretti, corsivi ecc.) venga conservata anche nel documento finale, utilizzando, a questo scopo, opportuni tag, visibili anche all'interno del campo di arrivo.</p>
+
+<p>È necessario gestire questi tag con attenzione e accertarsi che compaiano correttamente anche all'interno dei segmenti di arrivo. (Si veda il Manuale per l'Utente di OmegaT, dove si descrive la modifica avanzata dei tag di formattazione).</p>
+
+<a name="An_example..."></a>
+<h3>a. Un esempio...</h3>
+
+<p>Negli esempi seguenti i tag sono stati evidenziati in <font color="#ff0000">rosso</font> per renderli più immediatamente visibili, anche se OmegaT, in effetti, non li segnala nello stesso modo.</p>
+
+<p>
+<strong>Qui di seguito viene fornito un esempio di un segmento di un file HTML:</strong>
+</p>
+
+<p>
+<code><font color="#ff0000">&lt;p&gt;</font>Tramite la finestra di dialogo <font color="#ff0000">&lt;b&gt;</font>Anteprima caratteri<font color="#ff0000">&lt;/b&gt;</font> può essere selezionata una diversa dimensione del carattere. Aprire la finestra avviando, dalla barra dei menu, il comando <font color="#ff0000">&lt;i&gt;</font>Opzioni<font color="#ff0000">&lt;/i&gt;</font> &amp;gt; <font color="#ff0000">&lt;i&gt;</font>Caratteri...<font color="#ff0000">&lt;/i&gt;</font>. Da questa finestra di dialogo si potrà modificare sia il tipo sia la dimensione del carattere.<font color="#ff0000">&lt;/p&gt;</font></code>
+</p>
+
+<p>
+<strong>Qui viene mostrato come OmegaT visualizzerà il segmento, con i tag riportati in rosso:</strong>
+</p>
+
+<p>
+<code>Tramite la finestra di dialogo <font color="#ff0000">&lt;b0&gt;</font>Anteprima caratteri<font color="#ff0000">&lt;/b0&gt;</font> può essere selezionata una diversa dimensione del carattere. Aprire la finestra avviando, dalla barra dei menu, il comando <font color="#ff0000">&lt;i1&gt;</font>Opzioni<font color="#ff0000">&lt;/i1&gt;</font> &gt; <font color="#ff0000">&lt;i2&gt;</font>Caratteri...<font color="#ff0000">&lt;/i2&gt;</font> Da questa finestra di dialogo si potrà modificare sia il tipo sia la dimensione del carattere.</code>
+</p>
+
+<p>
+<strong>E qui viene mostrato come si dovrebbe tradurre il segmento (per l'esempio si è utilizzato l'Afrikaans):</strong>
+</p>
+
+<p>
+<code>'n Mens kan 'n ander vertoonfont kies met die 
+<font color="#ff0000">&lt;b0&gt;</font>Vertoonfont<font color="#ff0000">&lt;/b0&gt;</font>-dialoogkassie. 
+Kies <font color="#ff0000">&lt;i1&gt;</font>Opstelling<font color="#ff0000">&lt;/i1&gt;</font> 
+
+&gt; <font color="#ff0000">&lt;i2&gt;</font>Vertoonfont...<font color="#ff0000">&lt;/i2&gt;</font> 
+op die kieslys. Die lettertipe én die lettergrootte kan met dié 
+dialoogkassie verander word.</code>
+</p>
+
+<p>
+<strong>Quando OmegaT crea il documento tradotto, il file HTML apparirà come quello qui riportato:</strong>
+</p>
+
+<p>
+<code><font color="#ff0000">&lt;p&gt;</font>'n Mens kan 'n ander vertoonfont kies 
+met die <font color="#ff0000">&lt;b&gt;</font>Vertoonfont<font color="#ff0000">&lt;/b&gt;</font>-dialoogkassie. 
+Kies <font color="#ff0000">&lt;i&gt;</font>Opstelling<font color="#ff0000">&lt;/i&gt;</font> 
+
+&amp;gt; <font color="#ff0000">&lt;i&gt;</font>Vertoonfont...<font color="#ff0000">&lt;/i&gt;</font> 
+op die kieslys. Die lettertipe én die lettergrootte kan met dié 
+dialoogkassie verander word.<font color="#ff0000">&lt;/p&gt;</font></code>
+</p>
+
+<a name="Tag_verification"></a>
+<h3>b. Verifica dei tag</h3>
+
+<p>OmegaT non rileva automaticamente i tag errati all'interno del documento tradotto. Prima di inviare il documento finale al vostro cliente, sarebbe quindi opportuno verificare la possibile presenza di errori all'interno del documento.</p>
+
+<p>Dalla barra dei menu selezionare il comando <strong>Strumenti -&gt; Convalida i tag</strong>. Viene aperta una tabella nella quale sono riportati i segmenti nei quali non vi è corrispondenza dei tag tra i segmenti di partenza e quelli di arrivo. Fare clic sul numero del segmento.</p>
+
+<p>Si verrà automaticamente riportati al segmento scorretto all'interno della finestra dell'Editor, dove si potrà correggere l'errore.</p>
+
+<p>In alcuni casi, gli errori dei tag possono anche determinare la mancata apertura del documento finale. Prima di creare il documento finale, sarebbe quindi opportuno verificare di aver appropriatamente corretto ogni possibile errore dei tag.</p>
+
+<p>Infine, si dovrebbe sempre effettuare una verifica finale della formattazione aprendo il documento tradotto con l'applicazione di visualizzazione o di modifica adatta.</p>
+<hr>
+</body>
+</html>

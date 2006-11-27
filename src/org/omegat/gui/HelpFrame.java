@@ -312,15 +312,28 @@ public class HelpFrame extends JFrame
      */
     private static String detectDocLanguage()
     {
-        String language = java.util.Locale.getDefault().getLanguage();
+        // Get the system language and country
+        String language = java.util.Locale.getDefault().getLanguage().toLowerCase();
+        String country  = java.util.Locale.getDefault().getCountry().toUpperCase();
+
+        // Check if there's a translation for the full locale (lang + country)
         File index = new File(StaticUtils.installDir()
+            + File.separator + OConsts.HELP_DIR
+            + File.separator + language + "_" + country
+            + File.separator + OConsts.HELP_HOME);
+        if (index.exists())
+            return language + "_" + country;
+
+        // Check if there's a translation for the language only
+        index = new File(StaticUtils.installDir()
             + File.separator + OConsts.HELP_DIR
             + File.separator + language
             + File.separator + OConsts.HELP_HOME);
         if(index.exists())
             return language;
-        else
-            return "en";                                                        // NOI18N
+
+        // Default to English, if no translation exists
+        return "en";                                                        // NOI18N
     }
     
     /**

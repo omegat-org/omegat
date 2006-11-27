@@ -33,6 +33,9 @@ Contains new localisations plus a couple bug fixes
    - Some texts not loaded from external resource bundle
    http://sourceforge.net/support/tracker.php?aid=1602787
 
+   - Incorrect manual language detection
+   [No bug report submitted]
+
    - [target=japanese] some trailing spaces are not reproduced
    http://sourceforge.net/support/tracker.php?aid=1599209
 

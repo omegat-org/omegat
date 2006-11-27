@@ -512,15 +512,28 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
     private String detectInstantStartLanguage() {
-        String language = java.util.Locale.getDefault().getLanguage();
+        // Get the system language and country
+        String language = java.util.Locale.getDefault().getLanguage().toLowerCase();
+        String country  = java.util.Locale.getDefault().getCountry().toUpperCase();
+
+        // Check if there's a translation for the full locale (lang + country)
         File isg = new File(StaticUtils.installDir()
+            + File.separator + OConsts.HELP_DIR
+            + File.separator + language + "_" + country
+            + File.separator + OConsts.HELP_INSTANT_START);
+        if (isg.exists())
+            return language + "_" + country;
+
+        // Check if there's a translation for the language only
+        isg = new File(StaticUtils.installDir()
             + File.separator + OConsts.HELP_DIR
             + File.separator + language
             + File.separator + OConsts.HELP_INSTANT_START);
-        if (isg.exists())
+        if(isg.exists())
             return language;
-        else
-            return "en"; // NOI18N
+
+        // Default to English, if no translation exists
+        return "en";                                                        // NOI18N
     }
     
     /**

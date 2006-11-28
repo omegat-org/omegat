@@ -1,5 +1,5 @@
 ==============================================================================
-  OmegaT 1.6.1 Read Me file
+  OmegaT 1.6.1 update 2, Read Me file
 
   1.  Information about OmegaT
   2.  What is OmegaT?
@@ -11,19 +11,22 @@
 ==============================================================================
   1.  Information about OmegaT
 
-The most current info about OmegaT can be found at:
+
+The most current info about OmegaT can be found at
+(in English, Slovak, Dutch, Portugese):
       http://www.omegat.org/omegat/omegat.html
 
 More information can be found on the following pages:
 
-User support, at the Yahoo user group:
+User support, at the Yahoo user group (multilingual), where the archives are
+searchable without subscription:
      http://groups.yahoo.com/group/OmegaT/
-     Where the archives are searchable without subscription.
+     .
 
-Requests for Enhancements, at the SourceForge site:
+Requests for Enhancements (in English), at the SourceForge site:
      http://sourceforge.net/tracker/?group_id=68187&atid=520350
 
-Bug reports, at the SourceForge site:
+Bug reports (in English), at the SourceForge site:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347
 
 ==============================================================================

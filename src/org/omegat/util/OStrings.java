@@ -85,7 +85,7 @@ public class OStrings
     private static String __VERSION_KEY = "version";                            // NOI18N
     private static String __UPDATE_KEY  = "update";                             // NOI18N
 
-    /** Just a version, e.g. "1.6" */
+    /** Just a version, e.g. "1.6" or "1.6.1" */
     public static final String VERSION =
             ResourceBundle.getBundle("org/omegat/Version").getString(__VERSION_KEY);
 

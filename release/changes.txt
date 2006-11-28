@@ -2,9 +2,27 @@
  OmegaT 1.6.1 Changes
 ----------------------------------------------------------------------
 
-1.6.1 vs. 1.4.5.04
-   60 Enchancements
+1.6.1_02 vs. 1.4.5.04
+   62 Enchancements
   118 Bugfixes
+
+----------------------------------------------------------------------
+1.6.1_02
+Contains new localisations plus a couple bug fixes
+
+ Implemented requests:
+
+  -
+
+ Other enhancements:
+
+  - French localisation updated
+
+  - Serbo-Croation UI localisation + instant start guide translation
+
+ Bug fixes:
+
+  -
 
 ----------------------------------------------------------------------
 1.6.1_01
@@ -18,10 +36,9 @@ Contains new localisations plus a couple bug fixes
 
   - French UI localisation + instant start guide translation
 
-  - Brazilian Portugese UI localisation + instant start guide
-  translation
+  - Brazilian Portugese full localisation
 
-  - Slovak UI localisation + full manual translation
+  - Slovak full localisation
 
   - Italian instant start guide translation
 
@@ -32,9 +49,6 @@ Contains new localisations plus a couple bug fixes
 
    - Some texts not loaded from external resource bundle
    http://sourceforge.net/support/tracker.php?aid=1602787
-
-   - Incorrect manual language detection
-   [No bug report submitted]
 
    - [target=japanese] some trailing spaces are not reproduced
    http://sourceforge.net/support/tracker.php?aid=1599209

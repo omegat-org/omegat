@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 
 1.6.1_02 vs. 1.4.5.04
-   62 Enchancements
+   64 Enchancements
   118 Bugfixes
 
 ----------------------------------------------------------------------
@@ -19,6 +19,10 @@ Contains new localisations plus a couple bug fixes
   - French localisation updated
 
   - Serbo-Croation UI localisation + instant start guide translation
+
+  - Manual language selection screen (if translation is unavail.)
+
+  - User manual translations of legacy versions re-introduced
 
  Bug fixes:
 

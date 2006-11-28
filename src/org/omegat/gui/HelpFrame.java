@@ -31,10 +31,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;        // HP
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.Properties;
 import javax.swing.AbstractAction;     // HP
 import javax.swing.Action;             // HP
 import javax.swing.Box;
@@ -77,8 +83,6 @@ public class HelpFrame extends JFrame
     /** Creates the Help Frame */
     private HelpFrame()
     {
-        language = detectDocLanguage();
-        
         m_historyList = new ArrayList();
         
         // set window size & position
@@ -97,7 +101,7 @@ public class HelpFrame extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 m_historyList.add(m_filename);
-                displayFile(OConsts.HELP_HOME);
+                displayHome();
                 m_backButton.setEnabled(true);
             }
         });
@@ -161,12 +165,13 @@ public class HelpFrame extends JFrame
                     m_historyList.add(m_filename);
                     displayFile(he.getDescription());
                     m_backButton.setEnabled(true);
+
                 }
             }
         });
-        
+
         updateUIText();
-        displayFile(OConsts.HELP_HOME);
+        displayHome();
     }
 
     /**
@@ -181,6 +186,94 @@ public class HelpFrame extends JFrame
         return singleton;
     }
     
+    public void displayHome() {
+        // If not set, get the language (according to
+        // the system locale) to display the manual in
+        if (m_language == null) {
+            m_language = detectDocLanguage();
+
+            // If the manual is not available in the system locale language,
+            // show a language selection screen
+            if (m_language == null) {
+                displayLanguageIndex();
+                return;
+            }
+        }
+
+        // Display the manual's index page
+        displayFile(OConsts.HELP_HOME);
+    }
+
+    public void displayLanguageIndex() {
+        // Read template from docs/languageIndex.html
+        StringBuffer templateText = new StringBuffer(1024);
+        try {
+            BufferedReader templateFile = new BufferedReader(new FileReader(
+                  StaticUtils.installDir() + File.separator
+                + OConsts.HELP_DIR + File.separator
+                + OConsts.HELP_LANG_INDEX));
+            for (String line = templateFile.readLine();
+                 line != null;
+                 line = templateFile.readLine()) {
+                templateText.append(line);
+                templateText.append('\n');
+            }
+        }
+        catch (IOException exception) {
+            StaticUtils.log(exception.getMessage());
+            exception.printStackTrace(StaticUtils.getLogStream());
+            return;
+        }
+
+        // Get available translations and their versions
+        StringBuffer translations = new StringBuffer(1024);
+        translations.append("<table>\n");
+        File docDir = new File(
+            StaticUtils.installDir() + File.separator + OConsts.HELP_DIR);
+        File[] subDirs = docDir.listFiles();
+        Arrays.sort(subDirs); // sort on alphabetical order
+        for (int i = 0; i < subDirs.length; i++) {
+            // Get the next subdir
+            File subDir = subDirs[i];
+
+            // Skip normal files
+            if (!subDir.isDirectory())
+                continue;
+
+            // We got a translation dir, get its name (= locale)
+            String locale = subDir.getName();
+
+            // Get the locale name and translation version
+            String localeName   = getLocaleName(locale);
+            String transVersion = getDocVersion(locale);
+
+            // Skip incomplete translations
+            if (transVersion == null)
+                continue;
+
+            // Add some HTML for the translation
+            translations.append("<tr><td><a href=\"omegat:select-lang?lang=");
+            translations.append(locale);
+            translations.append("\">");
+            translations.append(localeName);
+            translations.append("</a></td><td>(");
+            translations.append(transVersion);
+            translations.append(")</td></tr>\n");
+        }
+        translations.append("</table>");
+
+        // Insert the translations table in the right place
+        String index = templateText.toString().replaceFirst("\\$INDEX", translations.toString());
+
+        // Display the language selection page
+        m_helpPane.setContentType("text/plain"); // workaround for Java (?) bug
+        m_helpPane.setContentType("text/html");  // workaround for Java (?) bug
+        m_helpPane.setText(index);
+
+        // Mark the current page, so we can get back to it
+        m_filename = "omegat:lang-index";
+    }
+
     /**
      * Displays some file in Online Help.
      * <p>
@@ -215,9 +308,12 @@ public class HelpFrame extends JFrame
             
             m_helpPane.setText(buf.toString());
         }
+        else if (file.startsWith("omegat:"))
+        {
+            handleCommand(file);
+        }
         else
         {
-            
             if(file.startsWith("#"))                                            // NOI18N
                 file = m_filename_nosharp+file;
             String fullname = absolutePath(file);
@@ -243,7 +339,34 @@ public class HelpFrame extends JFrame
             }
         }
     }
-    
+
+    private void handleCommand(String command) {
+        // Check if the command is really a command
+        if (!command.startsWith("omegat:"))
+            throw new IllegalArgumentException("Command must start with 'omegat:'");
+
+        // Extract the actual command string
+        command = command.substring(7, command.length());
+
+        // Handle the command
+        if (command.startsWith("select-lang")) { // Language selection command
+            // Get the language
+            int langPos = command.indexOf("lang=");
+            m_language = command.substring(langPos + 5, command.length());
+
+            // Display the user manual index
+            displayHome();
+        }
+        else if (command.startsWith("lang-index")) { // Display language index command
+            // Display the language index page
+            displayLanguageIndex();
+        }
+        else {
+            // We don't support the given command
+            throw new IllegalArgumentException("Unrecognized command");
+        }
+    }
+
     // immortalize the BeOS 404 messages (some modified a bit for context)
     private String errorHaiku()
     {
@@ -302,7 +425,7 @@ public class HelpFrame extends JFrame
         return "file:"                                                          // NOI18N
                 + StaticUtils.installDir()
                 + File.separator + OConsts.HELP_DIR + File.separator
-                + language + File.separator + file;
+                + m_language + File.separator + file;
     }
     
     /**
@@ -312,30 +435,80 @@ public class HelpFrame extends JFrame
      */
     private static String detectDocLanguage()
     {
-        // Get the system language and country
+        // Get the system locale (language and country)
         String language = java.util.Locale.getDefault().getLanguage().toLowerCase();
         String country  = java.util.Locale.getDefault().getCountry().toUpperCase();
 
         // Check if there's a translation for the full locale (lang + country)
-        File index = new File(StaticUtils.installDir()
-            + File.separator + OConsts.HELP_DIR
-            + File.separator + language + "_" + country
-            + File.separator + OConsts.HELP_HOME);
-        if (index.exists())
-            return language + "_" + country;
+        String locale = language + "_" + country;
+        String version = getDocVersion(locale);
+        if (version != null && version.equals(OStrings.VERSION))
+            return locale;
 
         // Check if there's a translation for the language only
-        index = new File(StaticUtils.installDir()
-            + File.separator + OConsts.HELP_DIR
-            + File.separator + language
-            + File.separator + OConsts.HELP_HOME);
-        if(index.exists())
-            return language;
+        locale = language;
+        version = getDocVersion(locale);
+        if (version != null && version.equals(OStrings.VERSION))
+            return locale;
 
-        // Default to English, if no translation exists
-        return "en";                                                        // NOI18N
+        // No suitable translation found
+        return null;
     }
-    
+
+    /**
+      * Returns the version of (a translation of) the user manual.
+      * If there is no translation for the specified locale, null is returned.
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    private static String getDocVersion(String locale) {
+        // Check if there's a manual for the specified locale
+        // (Assume yes if the index file is there)
+        File index = new File(StaticUtils.installDir()
+            + File.separator + OConsts.HELP_DIR
+            + File.separator + locale
+            + File.separator + OConsts.HELP_HOME);
+        if (!index.exists())
+            return null;
+
+        // Check if the doc dir for the specified locale
+        // contains a file containing the doc version
+        File v = new File(StaticUtils.installDir()
+            + File.separator + OConsts.HELP_DIR
+            + File.separator + locale
+            + File.separator + "version.properties");
+        if (!v.exists())
+            return null;
+
+        // Load the property file containing the doc version
+        Properties prop = new Properties();
+        try {
+            prop.load(new FileInputStream(v));
+        }
+        catch (IOException exception) {
+            StaticUtils.log(exception.getMessage());
+            exception.printStackTrace(StaticUtils.getLogStream());
+            return null;
+        }
+
+        // Get the doc version and return it
+        // (null if the version entry is not present)
+        return prop.getProperty("version");
+    }
+
+    /**
+      * Returns the full locale name for a locale tag.
+      *
+      * @see Locale.getDisplayName(Locale inLocale)
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    private String getLocaleName(String localeTag) {
+        String language = localeTag.substring(0, 2);
+        String country  = localeTag.length() >= 5 ? localeTag.substring(3, 5) : "";
+        Locale locale = new Locale(language, country);
+        return locale.getDisplayName(locale);
+    }
+
     /**
       * Loads/sets the position and size of the help window.
       */
@@ -399,6 +572,6 @@ public class HelpFrame extends JFrame
     private String	m_filename = ""; // NOI18N
     
     /** The language of the help files, English by default */
-    private String language;
+    private String m_language;
 }
 

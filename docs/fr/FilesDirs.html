@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Fichiers du projet et répertoires</title>
+<link rel="stylesheet" type="text/css" href="./omegat.css"></head>
+<body lang="en-US" dir="LTR">
+<table border="0" cellpadding="2" width="100%">
+<tr><td><img src="./OmegaT.png"></td>
+<th><a href="./index.html">Table des matières</a></th>
+<td>précédent: <a href="./TMFormats.html">Mémoire de traduction et format du glossaire</a></td>
+<td>suivant: <a href="./Shortcuts.html">Raccourcis clavier</a></td></tr></table>
+<h1>Fichiers du projet et répertoires</h1>
+
+<h2>Présentation des fichiers et répertoires du projet</h2>
+
+<p>Un projet OmegaT est composé des fichiers et répertoires suivants:</p>
+<p>Le <i>répertoire principal</i> du projet. Ce répertoire est créé quand le projet est créé.<br>Il a pour nom celui que l'utilisateur lui a donné.</p>
+<ul><li><i>omegat.project.</i> Quand un projet est créé, OmegaT crée ce fichier automatiquement et le place dans ce répertoire. Pour ouvrir un projet il est nécessaire d'ouvrir son fichier <i>omegat.project</i> en le sélectionnant par l'option de menu Fichier/Ouvrir un Projet.</li>
+
+<li><i><nom_de_projet>.tmx</i>. Ce fichier est la mémoire de traduction créée par le projet. OmegaT la crée automatiquement et la place dans ce répertoire à chaque fois que le projet est compilé.
+Cette mémoire de traduction ne contient que les segments du projet au moment de la compilation. Elle ne contient pas de segments importés des mémoires de traduction situées dans le répertoire <i>/tm</i>.</li>
+
+<li>Répertoire <i>/source</i>. Tous les fichiers à traduire sont à mettre dans ce répertoire une fois que le projet a été créé et avant d'ouvrir celui-ci. Tous les fichiers inclus dans ce répertoire et dans les éventuels sous-répertoires sont inclus dans le projet de traduction tant que leur format est acceptable pour OmegaT et que leur extension de fichier est reconnue.</li>
+
+<ul><li><i>*.txt</i>,</li>
+	<li><i>*.xhtml, *.html</i>,</li>
+	<li><i>*.properties</i>,</li>
+	<li><i>*.sxw, *.swi, *.swd, *.swc etc.</i></li></ul>
+
+	<p>Des fichiers avec des extensions différentes peuvent aussi être importés à condition que leur extension soit associée à une extension reconnue.</p>
+<p>Les fichiers inclus dans <i>/source</i> dont l'extension ne correspond à aucun format accepté ne sont pas importés dans le projet et sont transférés sans modifications vers le répertoire <i>/target</i> quand vous compilez le projet. Cette fonction vous autorise à reproduire des sites internet complets du répertoire <i>/source</i> vers le répertoire <i>/target</i> avec l'intégralité de leurs fichiers images en formats  GIF ou JPEG.</p></li>
+
+<li>Répertoire <i>/glossary</i>. Vous pouvez y placer les  <a href="./Gloss.html">glossaires</a> que vous souhaitez utiliser avant d'ouvrir le projet.
+<ul><li><i>*.tab, *.utf8</i>: fichiers glossaires.</li></ul></li>
+
+<li>Répertoire <i>/omegat</i>. OmegaT y inclut automatiquement les fichiers suivants à la création du projet:</li>
+
+<ul><li><i>project_save.tmx:</i> Ce fichier est créé quand le projet est sauvegardé pour la première fois. Il est en format TMX et est la mémoire de traduction active du projet. Il est modifié à chaque sauvegarde.</li>
+
+<li><i>word_counts: </i> Ce fichier inclut deux comptages du projet complet: un incluant les correspondances exactes (100%) et l'autre les excluant.</li></ul>
+
+<li>Répertoire <i>/target</i>. OmegaT y place les fichiers traduits après compilation.<br>
+<ul><li><i>*.txt, *.xhtml, *.html, *.properties, *.sxw, *.swi, *.swd, *.swc</i>: fichiers traduits</li>
+<li>Fichiers non traduits transférés à partir du répertoire <i>/source</i> à la compilation.</li></ul></li>
+<li>Répertoire <i>/tm</i>. Avant l'ouverture du projet, mettez dans ce répertoire les mémoires de traduction que vous souhaitez utiliser .
+Que vous utilisiez d'autres mémoires de traduction ou non, OmegaT va en créer une pour le projet: <i>project_save.tmx</i> dans le répertoire <i>/omegat</i> à chaque sauvegarde du projet et va aussi placer une mémoire de traduction dans le répertoire racine du projet à chaque compilation.
+<ul><li><i>*.tmx</i>: fichiers de mémoire de traduction créés par d'autres projets.  OmegaT 1.4.4 n'accepte que les fichiers <i>*.tmx</i> au format TMX 1.1.</li></ul></li>
+</ul>
+
+<h2>Modifier l'emplacement des fichiers et répertoires du projet</h2>
+
+<p>Les répertoires d'un projet sont créés à la création de celui-ci. Par défaut ils sont tous regroupés sous le répertoire racine du projet mais il est possible de spécifier leur emplacement en cliquant sur le bouton <i>Choix du répertoire</i>. Vous pouvez donc conserver vos mémoires de traduction dans des répertoires différents et sélectionner le répertoire correspondant lorsque vous créez  un nouveau projet plutôt que de copier les mémoires nécessaires dans le répertoire <i>/tm</i>.</p>
+
+<p>Pour modifier l'emplacement d'un répertoire après que celui-ci ai été déterminé il est nécessaire de fermer le projet puis d'effacer le répertoire concerné. Ne faites jamais ça si le projet est ouvert. Lors de l'ouverture suivante du projet, OmegaT va détecter une modification de la structure de celui-ci et vous demandera de localiser les répertoires que vous souhaitez utiliser.</p>
+
+<p>&nbsp;</p>
+<table border="0" cellpadding="2" width="100%">
+<tr><td><img src="./OmegaT.png"></td>
+<th><a href="./index.html">Table des matières</a></th>
+<td>précédent: <a href="./TMFormats.html">Mémoire de traduction et format du glossaire</a></td>
+<td>suivant: <a href="./Shortcuts.html">Raccourcis clavier</a></td></tr></table>
+</body>
+</html>

@@ -257,8 +257,14 @@ public class HelpFrame extends JFrame
             translations.append("\">");
             translations.append(localeName);
             translations.append("</a></td><td>(");
+            if (transVersion.equals(OStrings.VERSION))
+                translations.append("<font color=\"green\"><strong>");
+            else
+                translations.append("<font color=\"red\">");
             translations.append(transVersion);
-            translations.append(")</td></tr>\n");
+            if (transVersion.equals(OStrings.VERSION))
+                translations.append("</strong>");
+            translations.append("</font>)</td></tr>\n");
         }
         translations.append("</table>");
 

@@ -422,10 +422,17 @@ public class HelpFrame extends JFrame
     
     private String absolutePath(String file)
     {
-        return "file:"                                                          // NOI18N
-                + StaticUtils.installDir()
-                + File.separator + OConsts.HELP_DIR + File.separator
-                + m_language + File.separator + file;
+        try {
+            return   "file:"                                                          // NOI18N
+                   + (new File(  StaticUtils.installDir()
+                              + File.separator + OConsts.HELP_DIR + File.separator
+                              + m_language + File.separator + file)).getCanonicalPath();
+        }
+        catch (IOException exception) {
+            StaticUtils.log(exception.getMessage());
+            exception.printStackTrace(StaticUtils.getLogStream());
+            return null;
+        }
     }
     
     /**

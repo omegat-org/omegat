@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+  "http://www.w3.org/TR/html4/strict.dtd">
+  
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Instalación y configuración</title>
+  <link rel="stylesheet" type="text/css" href="omegat.css">
+</head>
+<body lang="en-US" dir="ltr">
+<table border="0" cellpadding="2" width="100%">
+  <tbody>
+    <tr>
+      <td><img src="OmegaT.png"></td>
+      <th><a href="index.html">Índice</a></th>
+      <td>anterior:&nbsp;<a href="SysReqs.html">Requisitos del
+sistema</a></td>
+      <td>siguiente:&nbsp;<a href="Important.html">Importante</a></td>
+    </tr>
+  </tbody>
+</table>
+<h1>Instalación y configuración</h1>
+<h2>Instalación</h2>
+<p>La instalación consta de tres pasos. Uno, instalar el J2RE (si no lo
+está ya). Dos, instalar OmegaT. Tres, configurar (sólo es necesario en
+Linux). La instalación del J2RE y de OmegaT puede realizarse en
+cualquier orden. La configuración no es esencial, pero permite ejecutar
+la aplicación con mayor facilidad.</p>
+<h3>El entorno de ejecución Java (Java Runtime Environment)</h3>
+<p>El entorno de ejecución java (Java Runtime Environment, J2RE) le
+permite ejecutar en su sistema cualquier programa escrito en Java. Está
+disponible tanto como producto independiente como formando parte del
+kit de desarrollo de Java.</p>
+<p>Java está asimismo disponible como complemento para los navegadores
+de Internet. Esta versión de Java <b>no</b> le permite ejecutar OmegaT.</p>
+<p>JavaScript es un producto totalmente diferente y técnicamente no
+está en modo alguno relacionado con Java.</p>
+<p>Si desea utilizar OmegaT, el J2RE <b>debe</b> estar instalado en su
+sistema. OmegaT no funcionará sin él. No intente que OmegaT funcione
+sin el J2RE. ¡Estará perdiendo el tiempo!</p>
+<p>Si no está seguro de que el J2RE esté instalado en su sistema,
+pruebe simplemente a instalar OmegaT para ver si funciona (consulte más
+abajo la instalación de OmegaT). Si no ocurre nada, o si recibe
+mensajes de error, es casi seguro que el entorno de ejecución Java no
+está instalado. En este caso, consígalo e instálelo.</p>
+<p><i>(Nota: a fin de confundir a sus clientes, Sun cambia con
+regularidad el nombre de sus productos. Así, todas las versiones del
+JRE posteriores a la 1 se conocen como "Java 2", de ahí que el Java
+Runtime Environment sea ahora el J2RE. El Java Runtime Environment
+puede ser asimismo conocido como Java Virtual Machine, o JVM, y en
+Macintosh, puede conocerse como MRJ. El kit de desarrollo ha sido
+conocido como Java Developer's Kit (JDK), Software Developer's Kit
+(SDK), y ahora también como J2SE, J2EE y J2ME, según la versión. Al
+menos, eso es lo que creo. Pero soy uno de los confundidos).</i></p>
+<h3>Instalación del entorno de ejecución Java<br>
+</h3>
+<p>La única plataforma que no requiere la instalación del entorno de
+ejecución Java es MacOSX. En MacOSX, el JRE viene preinstalado y
+preconfigurado. Este es asimismo el caso en algunas distribuciones de
+Linux.<br>
+</p>
+<p>Usuarios de Windows: pueden comprobar qué versión del entorno de
+ejecución Java está instalada (caso de estarlo) con <span
+ style="font-style: italic;">Inicio</span> &gt; <i>Configuración</i>
+&gt; <i>Panel de control</i>. Si el J2RE está ya instalado, verán un
+panel de control denominado "Java(TM)2 Runtime Environment, Standard
+Edition 1.3.0_01" o similar.</p>
+<p>Usuarios de Linux: tecleen simplemente <i>java -version</i> en la
+línea de mandatos. Se obtendrá la versión instalada (suponiendo por
+supuesto que esté instalada en el sistema).</p>
+<p>Se puede descargar el J2RE de los enlaces que se encuentran más
+abajo. Es gratuito (observe las condiciones de la licencia), pero las
+convenciones de denominación pueden hacer que el encontrar la versión
+adecuada resulte un tanto confuso. Necesitará la versión indicada para
+su plataforma (Linux, Windows, etc.). El tamaño del J2RE es de unos 14
+MB.</p>
+<p>OmegaT 1.4.4 debería funcionar con cualquier versión del J2RE a
+partir de la 1.2. Sin embargo, recomendamos obtener la última versión
+del J2RE, ya que las versiones más antiguas de Java pueden no soportar
+ciertas características.</p>
+<p>Como alternativa al J2RE, puede instalarse el kit de desarrollo. El
+kit de desarrollo contiene su propia copia del J2RE, y también permite
+modificar OmegaT.</p>
+<p><i>Los usuarios de Windows y Linux pueden descargar el Java Runtime
+Environment de:</i></p>
+<p><a href="http://java.sun.com/getjava/index.html">Sun</a> (todas las
+plataformas)</p>
+<p><a href="http://www.blackdown.org/java-linux.html">Blackdown</a>
+(Linux)</p>
+<p>Se sabe que las versiones anteriores de OmegaT pueden ejecutarse en
+el MRJ para Macintosh OS 9. La versión 1.4.4 <i>puede</i> que funcione
+pero no se ha probado en esta plataforma. Puede descargarse el MRJ del
+sitio en Internet de Apple.</p>
+<p>Instale el J2RE siguiendo las instrucciones que lo acompañan.</p>
+<h3>Instalación de OmegaT</h3>
+<h4>Todas las plataformas </h4>
+<p>Extraiga simplemente los contenidos del archivo en el directorio de
+su elección. El archivo puede estar en formato *.zip o *.tar.gzip. Los
+usuarios de Linux y de Mac (Stuffit) no deberían tener problemas con
+ninguno de los dos; los usuarios de Windows pueden no tener una
+utilidad para el último.</p>
+<h4>Sólo Windows</h4>
+<p>Los usuarios de Windows pueden descargar el instalador binario para
+Windows OmegaT_1.4.4_setup.exe y ejecutarlo. En este caso, el
+instalador crea un acceso directo para ejecutar OmegaT en el menú <i>Inicio
+&gt; Programas</i>.</p>
+<h3>Configuración (sólo Linux)</h3>
+<p>Si está utilizando Linux pero no se encuentra aún muy familiarizado
+con este sistema operativo, puede hacer que la ejecución de OmegaT sea
+más fácil de la siguiente forma:</p>
+<p>Cree un guión de shell en un archivo de texto con el siguiente
+contenido:</p>
+<p>#!/bin/bash<br>
+cd <i>&lt;OmegaT&gt;</i><i><br>
+&lt;java&gt;/</i>java -jar OmegaT.jar</p>
+<p>en donde <i><omegat></omegat></i><i>&lt;OmegaT&gt;</i> es el
+directorio que contiene el archivo <i>OmegaT.jar</i> y <i><java></java></i><i>&lt;java&gt;</i>
+es el directorio que contiene el binario del J2RE (el archivo
+denominado <i>java</i>). Si ha configurado la ruta de acceso a Java,
+no necesita especificar este directorio, y <i>java -jar OmegaT.jar</i>
+es suficiente. Es necesario especificar el directorio si no se ha
+configurado la ruta de acceso a Java, y también si su sistema tiene más
+de una versión de Java instalada y desea asegurarse de que OmegaT sea
+ejecutado por la versión adecuada.</p>
+<p>Guarde el archivo de texto en su escritorio como <i>OmegaT</i>, y
+cambie los permisos del mismo para hacerlo ejecutable (en GNOME y KDE,
+por ejemplo, menú contextual &gt; <i>Propiedades</i> &gt; <i>Permisos</i>
+&gt; <i>Ejecutar</i>). Ahora puede lanzar OmegaT simplemente haciendo
+clic sobre el archivo <i>OmegaT</i>. Si quiere utilizar el icono del
+programa, lo encontrará en /OmegaT/images.</p>
+<h2>Ejecutar la aplicación</h2>
+<h3>Macintosh OS X</h3>
+<p>Haga clic en el archivo <i>OmegaT.jar</i> en el administrador de
+archivos.</p>
+<h3>Windows</h3>
+<p>Si se ha instalado OmegaT con ayuda del instalador para Windows (ver
+más arriba), puede ejecutarse seleccionando el acceso directo a OmegaT
+1.4.4 situado en el menú <i>Inicio &gt; Programas &gt; OmegaT</i>.
+Puede también hacer clic en los archivos <i>OmegaT.exe</i>, <i>OmegaT.bat</i>
+o <i>OmegaT.jar</i> en el administrador de archivos.</p>
+<h3>Linux</h3>
+<p>Si no ha realizado el proceso de configuración arriba indicado,
+ejecute <i>java -jar OmegaT.jar</i> desde la línea de mandatos.
+Observe la tipografía de OmegaT: las mayúsculas son importantes.</p>
+<p>Si no ha configurado Java para detectar la ubicación de los archivos
+de OmegaT, debe en primer lugar desplazarse al directorio que contiene
+el archivo <span style="font-style: italic;">OmegaT.jar</span>.</p>
+<p>Si no configurado la ruta de acceso a Java, debe especificar la ruta
+completa. Si no ha hecho nada de lo anterior, su procedimiento de
+ejecución podría parecerse al siguiente:</p>
+<p>cd /home/usuario/OmegaT<br>
+/usr/java/j2re1.4.2/bin/java -jar OmegaT</p>
+<p>&nbsp;</p>
+<table border="0" cellpadding="2" width="100%">
+  <tbody>
+    <tr>
+      <td><img src="OmegaT.png"></td>
+      <th><a href="index.html">Índice</a></th>
+      <td>anterior:&nbsp;<a href="SysReqs.html">Requisitos del
+sistema</a></td>
+      <td>siguiente:&nbsp;<a href="Important.html">Importante</a></td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

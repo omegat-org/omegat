@@ -53,7 +53,7 @@
 
 <p>Po tom ako program OmegaT rozdelil zdrojový súbor na segmenty podľa logických jednotiek, pre formátované súbory zvyčajne zodpovedajúcim odstavcom, bude ďalej segmentovať tieto bloky do viet ak nevypnete Vetnú segmentáciu Vo všeobecnosti, môže OmegaT segmentovať logické bloky zdrojového súboru na akékoľvek segmenty aké nastavíte. Avšak keďže <strong>predvolene</strong> OmegaT segmentuje do viet, budeme to nazývať <strong>vetná</strong> segmentácia.</p>
 
-<p>Vetná segmentácia bola vytvorená pomocou štandardu <a href="http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX, Výmena pravidiel segmentácie))</a> v mysli, hoci v čase písania tohto, program OmegaT ani nepodporuje všetky vlastnosti SRX, ani nie je schopný importovať/exportovať pravidlá definované vo formáte SRX. Ale ak viete ako SRX funguje, už viete ako funguje OmegaT, keďže sú viacmenej rovnaké.</p>
+<p>Vetná segmentácia bola vytvorená s ohľadom na štandard <a href="http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX, Výmena pravidiel segmentácie)</a>, hoci v čase písania tohoto, program OmegaT ani nepodporuje všetky vlastnosti SRX, ani nie je schopný importovať/exportovať pravidlá definované vo formáte SRX. Ale ak viete ako SRX funguje, už viete ako funguje OmegaT, keďže sú viacmenej rovnaké.</p>
 
 <a name="About_Rules"></a>
 <h3>O pravidlách</h3>
@@ -69,7 +69,7 @@
 
 <p>Príklad pravidla segmentácie: <i>"Kto sa bojí p. Woolfovej?"</i> nemôže byť segmentované po "<code>.</code>". Malo by existovať pravidlo výnimky pre "<code>Mrs.</code>".</p>
 
-<p>Preddefinované pravidlá rozdeľovania by mali byť dostatočné pre väčšinu európskych jazykov a japončinu, ale odporúčame definovať viac pravidiel výnimiek pre jazyk z ktorého prekladáte, keďže je jasne nemožné preddefinovať všetky možné výnimky pre všetky možné jazyky.</p>
+<p>Preddefinované pravidlá rozdeľovania by mali byť dostatočné pre väčšinu európskych jazykov a japončinu, ale odporúčame definovať viac pravidiel výnimiek pre jazyk z ktorého prekladáte, keďže je jasné že nie je možné preddefinovať všetky možné výnimky pre všetky možné jazyky.</p>
 
 <a name="Rules_Setup"></a>
 <h3>Nastavenie pravidiel</h3>
@@ -79,19 +79,19 @@
 <a name="Sets_of_Rules"></a>
 <h4>Sady pravidiel</h4>
 
-<p>Všetky sady pravidiel segmentácie so zodpovedajúcim Jazykovým vzorom sú použité v danom poradí priority, takže pravidlá pre špecifický jazyk by mali byť vyššie než predvolené.</p>
+<p>Všetky sady pravidiel segmentácie so zodpovedajúcim Vzorom jazyka sú použité v danom poradí priority, takže pravidlá pre konkrétny jazyk by mali byť vyššie než predvolené.</p>
 
 <p>Napríklad, pravidlá pre kanadskú francúzštinu (FR-CA) by mali byť vyššie než pravidlá pre francúzštinu (FR.*), a vyššie než Predvolené (Default) (.*). Potom počas prekladu z kanadskej francúzštiny bude váš projekt používať pravidlá definované pre tento jazyk, pravidlá pre francúzštinu, a predvolené pravidlá v správnom poradí.</p>
 
 <p>Na vytvorenie prázdnej sady pravidiel, kliknite na <strong>Pridať</strong> v hornej polovici dialógového okna. V spodnej časti tabuľky sa objaví prázdny riadok. Zmeňte názov sady pravidiel a vzor jazyka. Syntax vzoru jazyka zodpovedá syntaxi regulárnych výrazov. Pozri sekciu <a href="#Short_summary_of_regular-expression_constructs">Krátky prehľad konštrukcií regulárnych výrazov</a> nižšie.</p>
 
-<p>Ak vaša sada pravidiel platí pre pár jazyk-krajina, odporúčame vám posunúť ju nahor pomocou tlačidla <strong>Presunúť vyššie</strong>.</p>
+<p>Ak vaša sada pravidiel platí pre pár jazyk-krajina, odporúčame vám posunúť ju nahor pomocou tlačidla <strong>Presunúť hore</strong>.</p>
 
 <p>Pre editáciu sady pravidiel, jednoducho na ňu kliknite v tabuľke, pravidlá sady sa objavia v spodnej polovici okna.</p>
 
-<p>Zaškrtávacie tlačidlo Rozdeľovanie/Výnimka určuje, či je to pravidlo pre rozdeľovanie (políčko je zaškrtnuté) alebo pravidlo pre výnimku (políčko nie je zaškrtnuté). Dva pravidelné výrazy Pred a Po špecifikujú čo musí byť pred a po nejakej pozícii tak aby sa na ňu vzťahovalo pravidlo výnimky alebo rozdeľovania.</p>
+<p>Zaškrtávacie tlačidlo Zlom/Výnimka určuje, či je to pravidlo pre rozdeľovanie (políčko je zaškrtnuté) alebo pravidlo pre výnimku (políčko nie je zaškrtnuté). Dva regulárne výrazy Pred a Za špecifikujú čo musí byť pred a po nejakej pozícii tak aby sa na ňu vzťahovalo pravidlo výnimky alebo rozdeľovania.</p>
 
-<p>Proces segmentácie môže byť zjednodušený na nasledovné. Predstavte si kurzor pohybujúci sa z pozície pred prvým do pozície po poslednom symbole textu. Pre každú pozíciu kurzora vezmeme každé pravidlo v zadanom poradí a skúsime aplikovať vzor <strong>Pred</strong> na celý text, ktorý je vľavo od kurzora a vzor <strong>Po</strong> na text vpravo takže sa dotýkajú kurzora.</p>
+<p>Proces segmentácie môže byť zjednodušený na nasledovné. Predstavte si kurzor pohybujúci sa z pozície pred prvým do pozície po poslednom symbole textu. Pre každú pozíciu kurzora vezmeme každé pravidlo v zadanom poradí a skúsime aplikovať vzor <strong>Pred</strong> na celý text, ktorý je vľavo od kurzora a vzor <strong>Za</strong> na text vpravo takže sa dotýkajú kurzora.</p>
 
 <p>Ak je aplikácia niektorého pravidla úspešná, pre pravidlá výnimiek nerobíme nič iba prestaneme skúmať ďalšie pravidlá, a pre pravidlá výnimiek vezmeme text naľavo ako osobitný segment, pre každú pozíciu kurzoru v texte.</p>
 
@@ -108,7 +108,7 @@
    </dd>
 
    <dt><strong>Cieľ:</strong> nastaviť segment po "。" (japonskej bodke)</dt>
-   <dd>Pred: 。 Po: (prázdne) <br> <strong>Poznámka:</strong> Môžete nechať políčko prázdne</dd>
+   <dd>Pred: 。 Po: (prázdne) <br> <strong>Poznámka:</strong> Políčko môžete nechať prázdne</dd>
 </dl>
 </p>
 
@@ -172,7 +172,7 @@
 
     <tr><th>&nbsp;</th></tr>
     <tr align="left"><th colspan="2" id="greedy">Viacnásobné kvantifikátory</th></tr>
-    <tr><td colspan="2">Tieto budú hľadať toľko koľko len môžu. Napríklad, <code>a+</code> bude zodpovedať <code>aaa</code> v <code>aaabbb</code></td></tr>
+    <tr><td colspan="2">Tieto budú predstavovať toľko, koľko len môžu. Napríklad, <code>a+</code> bude zodpovedať <code>aaa</code> v <code>aaabbb</code></td></tr>
     <tr><td><strong>X</strong><tt>?</tt></td><td><strong>X</strong>, raz alebo vôbec</td></tr>
 
     <tr><td><strong>X</strong><tt>*</tt></td><td><strong>X</strong>, nula alebo viackrát</td></tr>
@@ -180,7 +180,7 @@
     <tr><th>&nbsp;</th></tr>
     <tr align="left"><th colspan="2" id="reluc">Nedobrovoľné kvantifikátory</th></tr>
 
-    <tr><td colspan="2">Tieto budú hľadať tak málo ako len môžu. Napríklad, <code>a+?</code> bude zodpovedať prvému <code>a</code> v <code>aaabbb</code></td></tr>
+    <tr><td colspan="2">Tieto budú predstavovať tak málo, ako len môžu. Napríklad, <code>a+?</code> bude zodpovedať prvému <code>a</code> v <code>aaabbb</code></td></tr>
     <tr><td><strong>X</strong><tt>??</tt></td><td><strong>X</strong>, raz alebo vôbec</td></tr>
     <tr><td><strong>X</strong><tt>*?</tt></td><td><strong>X</strong>, nula alebo viackrát</td></tr>
 
@@ -189,7 +189,7 @@
     <tr align="left"><th colspan="2" id="logical">Logické operátory</th></tr>
     <tr><td><strong>XY</strong></td><td><strong>X</strong> nasledované <strong>Y</strong></td></tr>
 
-    <tr><td><strong>X</strong><tt>|</tt><strong>Y</strong></td><td>Buď <strong>X</strong> alebo <strong>Y</strong></td></tr>
+    <tr><td><strong>X</strong><tt>|</tt><strong>Y</strong></td><td>Buď <strong>X</strong>, alebo <strong>Y</strong></td></tr>
     <tr><td><tt>(</tt><strong>XY</strong><tt>)</tt></td><td><strong>XY</strong> ako jediná skupina</td></tr>
 
 </table>

@@ -41,7 +41,7 @@
 
 <p>Alebo, Vyberte slovo alebo frázu v editovacom poli (cieľový text aktívneho segmentu) a stlačte <code>Ctrl+F</code>. Slovo alebo fráza je v tomto prípade zadané do poľa "Hľadať" automaticky.</p>
 
-<p>Spustenie okna Hľadanie stále vytvorí jeho novú inštanciu. Môžete skončiť s množstvom okien Hľadanie ak ich zabudnete zatvárať.</p>
+<p>Spustenie okna Hľadanie stále vytvorí jeho novú inštanciu. Ak ich zabudnete zatvárať, môžete skončiť s množstvom otvorených okien Hľadanie.</p>
 
 <p>Hľadania sa uskutočňujú v zdrojovej aj v cieľovej sekcii projektu.</p>
 
@@ -88,7 +88,7 @@
 <a name="Exact_searches"></a>
 <h2>Presné hľadanie</h2>
 
-<p>Presné hľadanie hľadá frázu, tj. ak je zadaných niekoľko slov, nájdu sa iba ak sa objavia v presne rovnakom poradí. Presné hľadania sú podobné hľadanie "presná fráza" na internetovom vyhľadávači ako Google.</p>
+<p>Presné hľadanie hľadá výraz, tj. ak je zadaných niekoľko slov, budú nájdené iba ak sa nachádzajú v presne rovnakom poradí. Presné hľadania sú podobné hľadanie "presného výrazu" v internetovom vyhľadávači ako Google.</p>
 
 <a name="Keyword_searches"></a>
 <h2>Hľadanie kľúčových slov</h2>
@@ -98,19 +98,19 @@
 <a name="Searching_using_wildcards"></a>
 <h2>Hľadanie pomocou zástupných znakov</h2>
 
-<p>V presnom vyhľadávaní aj v hľadaní kľúčových slov, môžu byť použité zástupné vyhľadávacie znaky '<code>*</code>' a '<code>?</code>'. Pre použitie zástupných znakov sa uistize, že nie je vybraná voľba <strong>regulárne výrazy</strong>, ináč sú tieto znaky interpretované ako špeciálne znaky regulárnych výrazov.</p>
+<p>V presnom vyhľadávaní aj v hľadaní kľúčových slov, môžu byť použité zástupné vyhľadávacie znaky '<code>*</code>' a '<code>?</code>'. Pre použitie zástupných znakov sa uistite, že nie je vybratá voľba <strong>regulárne výrazy</strong>, ináč sú tieto znaky interpretované ako špeciálne znaky regulárnych výrazov.</p>
 
 <p>Zástupný znak '<code>?</code>' predstavuje akýkoľvek jediný znak, tj. '<code>b?d</code>' nájde výskyty '<code>bad</code>' a '<code>bid</code>'. Zástupný znak '<code>*</code>' predstavuje akýkoľvek znak alebo niekoľko znakov, tj. '<code>b*d</code>' nájde výskyty '<code>bad</code>', '<code>bid</code>', '<code>bold</code>' a '<code>band</code>'.</p>
 
-<p>Ak chcete vyhľadať segmenty obsahujúce tieto znaky, budete potrebovať zapnúť regulárne výrazy, a escapovať ich tak, že pred nich pridáte spätné lomítko ('<code>\</code>'), tj. '<code>x\*y</code>' pre nájdenie výskytov '<code>x*y</code>' a '<code>x\?y</code>' pre nájdenie výskytov '<code>x?y</code>'.</p>
+<p>Ak chcete vyhľadať segmenty obsahujúce tieto znaky, budete potrebovať zapnúť regulárne výrazy, a citovať ich tak, že pred nich pridáte spätné lomítko ('<code>\</code>'), tj. '<code>x\*y</code>' pre nájdenie výskytov '<code>x*y</code>' a '<code>x\?y</code>' pre nájdenie výskytov '<code>x?y</code>'.</p>
 
 <a name="Searching_using_regular_expressions"></a>
 <h2>Hľadanie pomocou regulárnych výrazov</h2>
 
-<p>Hľadanie regulárnych výrazov je mocný spôsob pre hľadanie výskytov reťazca. Je podobné ako normálne hľadanie, ale umožňuje oveľa väčšiu flexibilitu. Na webe môžete nájsť tutoriály (<a href="http://www.regular-expressions.info/quickstart.html" title="http://www.regular-expressions.info/quickstart.html" rel="nofollow">http://www.regular-expressions.info/quickstart.html</a>, napríklad.)</p>
+<p>Hľadanie regulárnych výrazov je mocný spôsob pre hľadanie výskytov reťazca. Je podobné ako normálne hľadanie, ale umožňuje oveľa väčšiu flexibilitu. Na webe môžete nájsť tutoriály (napríklad <a href="http://www.regular-expressions.info/quickstart.html" title="http://www.regular-expressions.info/quickstart.html" rel="nofollow">http://www.regular-expressions.info/quickstart.html</a>.)</p>
 
 <a name="Regular_Expressions_to_use_in_searches"></a>
-<h3>Regulárne výrazy používané pri vyhľadávaní</h3>
+<h3>Regulárne výrazy pre použitie pri vyhľadávaní</h3>
 
 <p>Regulárne výrazy použité pri vyhľadávaní sú tie, ktoré podporuje Java. Ak potrebujete špecifickejšie informácie, prosím prezrite si <a href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
 
@@ -166,7 +166,7 @@
     <tr><td><tt>\B</tt></td><td>Nie hranica slova</td></tr>
     <tr><th>&nbsp;</th></tr>
     <tr align="left"><th colspan="2" id="greedy">Viacnásobné kvantifikátory</th></tr>
-    <tr><td colspan="2">Tieto budú hľadať toľko koľko len môžu. Napríklad, <code>a+</code> bude zodpovedať <code>aaa</code> v <code>aaabbb</code></td></tr>
+    <tr><td colspan="2">Tieto budú predstavovať toľko, koľko len môžu. Napríklad, <code>a+</code> bude zodpovedať <code>aaa</code> v <code>aaabbb</code></td></tr>
 
     <tr><td><strong>X</strong><tt>?</tt></td><td><strong>X</strong>, raz alebo vôbec</td></tr>
     <tr><td><strong>X</strong><tt>*</tt></td><td><strong>X</strong>, nula alebo viackrát</td></tr>
@@ -174,7 +174,7 @@
 
     <tr><th>&nbsp;</th></tr>
     <tr align="left"><th colspan="2" id="reluc">Nedobrovoľné kvantifikátory</th></tr>
-    <tr><td colspan="2">Tieto budú hľadať tak málo ako len môžu. Napríklad, <code>a+?</code> bude zodpovedať prvému <code>a</code> v <code>aaabbb</code></td></tr>
+    <tr><td colspan="2">Tieto budú predstavovať tak málo, ako len môžu. Napríklad, <code>a+?</code> bude zodpovedať prvému <code>a</code> v <code>aaabbb</code></td></tr>
     <tr><td><strong>X</strong><tt>??</tt></td><td><strong>X</strong>, raz alebo vôbec</td></tr>
 
     <tr><td><strong>X</strong><tt>*?</tt></td><td><strong>X</strong>, nula alebo viackrát</td></tr>
@@ -183,7 +183,7 @@
     <tr align="left"><th colspan="2" id="logical">Logické operátory</th></tr>
 
     <tr><td><strong>XY</strong></td><td><strong>X</strong> nasledované <strong>Y</strong></td></tr>
-    <tr><td><strong>X</strong><tt>|</tt><strong>Y</strong></td><td>Buď <strong>X</strong> alebo <strong>Y</strong></td></tr>
+    <tr><td><strong>X</strong><tt>|</tt><strong>Y</strong></td><td>Buď <strong>X</strong>, alebo <strong>Y</strong></td></tr>
 
     <tr><td><tt>(</tt><strong>XY</strong><tt>)</tt></td><td><strong>XY</strong> ako jediná skupina</td></tr>
 </table>

@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+  "http://www.w3.org/TR/html4/strict.dtd">
+  
+<html>
+  <head>
+    <title>OmegaT: Speichern, Bearbeitung und Export</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="Kate (Linux)">
+    <meta name="changed" content="20050607">
+    <link rel="stylesheet" type="text/css" href="omegat.css">
+  </head>
+
+  <body lang="en" dir="LTR">
+
+    <div class="navbar-top">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="index.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Zurück</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="Navigation.html">Textnavigation</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Weiter</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="Matches.html">Matches: Exakt und Fuzzy</a>
+        </td>
+      </tr>
+    </table>
+    </div>
+    
+    <div class="content">
+
+    <h1 align="center">Übersetzung: Speichern, Bearbeitung und Export</h1>
+
+    <h2>Speichern</h2>
+    
+    <p>
+      Um Ihre Arbeit zu einem beliebigen Zeitpunkt zu speichern, klicken Sie auf <i>Translation Memory speichern</i> im Menü <i>Datei</i> oder drücken Sie <i>&lt;Strg+S&gt;</i>. 
+    </p>
+    
+    <p>
+      Damit speichern Sie Ihre Übersetzung als Zwischenschritt in einem Translation Memory und zwar in der Datei <b>/omegat/project_save.tmx</b>. Um ein aktuelles Translation Memory für das Projekt zu erstellen oder um die übersetzten Zieldokumente zu exportieren, verwenden Sie die entsprechende Funktion (siehe Kapitel <i>Exportieren</i>).
+    </p>
+       
+    <h2>Überarbeitung</h2>
+
+    <p>
+      Um eine Übersetzung zu bearbeiten, wählen Sie die entsprechende Ausgangsdatei im Fenster <i>Projektdateien</i> aus und gehen Sie durch die einzelnen Segmente, indem Sie <i>&lt;Enter&gt;</i> drücken. Bearbeiten Sie das aktuelle Segment je nach Bedarf. Wenn alle Segmente einer Datei überarbeitet worden sind, dann geht OmegaT automatisch zur nächsten Datei in der Liste. Übersetzer, die bereits mit anderen TM-Programmen gearbeitet haben, werden diese einfach Art der Bearbeitung zu schätzen wissen.
+    </p>
+
+    <h2>Export</h2>
+
+    <p>
+      (eigentlich Erzeugen bzw. Erstellen der Zieldateien) 
+    </p>
+
+    <p>
+      Während der Übersetzung mit OmegaT wird der ursprüngliche Ausgangstext nicht überschrieben. Jedes Mal, wenn eine neue Übersetzung angenommen wird (z.B. indem man die <i>&lt;Enter&gt;</i>-Taste drückt), dann wird sie im Speicher des Computers zusammen mit allen anderen nicht gespeicherten Übersetzungen abgelegt, bis das Translation Memory  des Projekts (<b>project_save.tmx</b>) automatisch gespeichert wird (in Abständen von etwa 20 Minuten). Der Benutzer kann auch die Zieldokumente exportieren oder das Translation Memory speichern. Falls das Programm beendet wird, ohne vorher zu speichern, dann sind alle nicht gespeicherten Übersetzungen verloren.
+    </p>
+
+    <p>      
+      Beim Export der Zieldokumente, der über den Menüpunkt <i>Zieldokumente eportieren</i> im Menü <i>Datei</i> aufgerufen wird, erzeugt OmegaT die übersetzten Zieldokumente und die TMX-Datei des Projekts. Hierbei werden all neuen, noch nicht gespeicherten Übersetzungen zusammen mit den bereits gespeicherten in der Datei <b>project_save.tmx</b> abgelegt. Anschließend werden die Segmente des Ausgangstexts in den Zieldokumenten durch deren Übersetzungen ersetzt.      
+    </p>
+
+    <p>  
+      Die Zieldokumente können auch schon dann exportiert werden, wenn noch keine vollständige Übersetzung vorliegt. Dieser Vorgang kann jederzeit ausgeführt werden. Natürlich sind die Zieldokumente in diesem Fall auch nur teilweise übersetzt.
+    </p>
+
+    <p>  
+      Der Menüpunkt <i>Translation Memory speichern</i> im Menü <i>Datei</i> führt die gleiche Funktion aus, wie Zieldokumente exportieren, abgesehen davon dass keine Zieldokumente exportiert werden.
+    </p>
+    
+    <h2>Vorsichtsmaßnahmen</h2>
+    
+    <p>      
+      Um einem möglichen Datenverlust oder anderen Katastrophen vorzubeugen, bitte folgende Vorschläge beachten:
+    </p>
+    
+    <ul>
+      <li>
+        <p>
+          Erstellen Sie regelmäßige Sicherungskopien der Datei <b>/omegat/project_save.tmx</b>. Zum Beispiel könnte man auch eine Seriennummer oder das aktuelle Datum an jede Kopie anfügen, etwa <b>/omegat/project_save.tmx-01</b> oder <b>/omegat/project_save.tmx-05-05-05</b>. Die Sicherungskopien können auf anderen Medien gespeichert werden, wie zum Beispiel Diskette, CD-RW oder eine andere Festplatte, falls vorhanden. Bei einem Fehler oder Datenverlust kann die Datei project_save.tmx dann einfach mithilfe der Sicherungskopie wieder erstellt werden. 
+        </p>  
+          
+        <p>
+          Bitte beachten Sie, dass bei der Übersetzung von formatierten Dateien (OpenDocument, OpenOffice.org, StarOffice, XHTML oder HTML) die Datei <b>project_save.tmx</b> wahrscheinlich viel kleiner ist als das Original oder die fertigen Zieltexte. 
+        </p>
+      </li>  
+      <li>
+        <p>
+          Exportieren Sie die Zieldokumente in regelmäßigen Abständen und überprüfen Sie, ob die erzeugten Dateien die neueste Version der Übersetzung enthalten. Dies ist vor allem dann wichtig, wenn Sie gerade erst anfangen mit OmegaT zu arbeiten.
+        </p>
+      </li>  
+      <li>
+        <p>
+          Achten Sie besonders darauf, wenn Sie mitten im Projekt an den Dateien im Verzeichnis <b>/source</b> Änderungen vornehmen. Manchmal kann es notwendig sein, Änderungen an den Ausgangsdokumenten vorzunehmen, zum Beispiel um manuelle Zeilenwechsel in der Mitte eines Satzes zu entfernen. Wenn allerdings die Ausgangsdatei verändert wird, nachdem mit der Übersetzung bereits begonnen wurde, dann kann es sein, dass OmegaT ein bereits übersetztes Segment nicht mehr findet. Legen Sie immer Sicherungskopien der einzelnen Ausgangsdateien oder des gesamten Projekts an, bevor Sie Änderungen an der oder den Ausgangsdatei(en) vornehmen.
+        </p>
+      </li>
+      <li>
+        <p>          
+          Denken Sie beim Erstellen eines neuen Projekts daran, dass im entsprechenden Dialogfenster von OmegaT der zuletzt verwendete Speicherort angezeigt wird. In den meisten Fällen wird dies ein Projektverzeichnis sein, von wo aus die Datei <b>omegat.project</b> geöffnet werden kann. Achten Sie darauf, dass das ausgewählte Verzeichnis sich nicht in einem vorhandenen Projekt befindet.          
+        </p>
+      </li>  
+    </ul>
+    </div>
+
+    <div class="navbar-bottom">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="index.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Zurück</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="Navigation.html">Textnavigation</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Weiter</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="Matches.html">Matches: Exakt und Fuzzy</a>
+        </td>
+      </tr>
+    </table>
+    </div>
+    
+  </body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+  "http://www.w3.org/TR/html4/strict.dtd">
+  
+<html>
+  <head>
+    <title>OmegaT: Bearbeitung von Dateien mit Tags (formatiert) </title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="Kate (Linux)">
+    <meta name="changed" content="20050514">
+    <link rel="stylesheet" type="text/css" href="omegat.css">
+  </head>
+
+  <body lang="en" dir="LTR">
+  
+    <div class="navbar-top">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="index.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Zurück</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="FilesTMGloss.html">Translation Memory und Glossardateien</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Weiter</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="FilesFilters.html">Dateifilter</a>
+        </td>
+      </tr>
+    </table>
+    </div>
+    
+    <div class="content">
+
+    <h1 align="center">Bearbeitung von Dateien mit Tags (formatiert)</h1>
+
+    <h2>Arbeiten mit Tags</h2>
+    
+    <p>
+      OmegaT zeigt die eingebetteten Formatierungsinformationen ("inline") bei unterstützten Formaten als Tags an (derzeit also HTML, XHTML, OpenDocument und OpenOffice.org/StarOffice). Die Tags, die in OmegaT angezeigt werden, sind andere als im Original. OmegaT konvertiert die ursprünglichen Tags intern und konvertiert sie bei der Erstellung der Zieldokumente zurück. 
+    </p>
+    
+    <p>
+      Beim Umgang mit den Tags muss man Vorsicht walten lassen. Wenn sie aus Versehen geändert werden, dann wird die Formatierung der Zieldatei beschädigt. Im schlimmsten Falle lässt sich die Datei nicht öffnen, was besonders bei OpenOffice.org-Dateien passieren kann. 
+    </p>
+
+    <p>
+      Obwohl das Format innerhalb von OmegaT nicht geändert werden kann, so kann man das Ausgangsformat doch bis zu einem gewissen Grad kontrollieren. 
+    </p>
+
+    
+    <h3>Änderung der Tags bei OpenDocument und OpenOffice.org</h3>
+
+    <p>
+      Die Tags von OpenDocument und OpenOffice.org müssen unverändert belassen werden. Tags treten als nummerierte Paare auf, mit einem öffnenden (<code>&lt;f&gt;</code>) und einem schließenden (<code>&lt;/f&gt;</code>) Tag. Die Nummern sind dabei in einem Segment aufsteigend. Diese Tags können nicht gelöscht, dupliziert oder in der Reihenfolge geändert werden. Allerdings ist folgendes möglich:     
+    </p>
+
+    <ul>
+      <li>
+        Tags an eine andere Stelle im Segment bewegen, solange die Reihenfolge beibehalten wird;
+      </li>
+      <li>
+        Die Wirkung der Tags aufheben, indem sie nebeneinander platziert werden. 
+      </li>
+    </ul>
+          
+    <p>        
+      Wenn der Satz beispielsweise wie folgt aussieht: 
+    </p>
+    
+    <p>
+      <code>      
+        Dieser Text hat &lt;f1&gt;kursive&lt;/f2&gt; Schrift.
+      </code>  
+    </p>
+          
+    <p>
+      Und geändert wird in: 
+    </p>
+    
+    <p>
+      <code>      
+        Dieser Text hat &lt;f1&gt;&lt;/f2&gt;kursive Schrift.
+      </code>  
+    </p>
+      
+    <p>
+      Dann wird die kursive Formatierung entfernt.
+    </p>
+
+    <h3>Änderung der Tags bei HTML-/XHTML-Dateien </h3>
+
+    <p>
+      Bei HTML oder XHTML wird der Beginn einer Formatierung von einem Tag wie <code>      
+        &lt;x&gt;, </code>  
+          
+      markiert und das Ende der Formatierung mit einem entsprechenden schließenden Tag <code>      
+        &lt;/x&gt; </code>  
+      
+      (wobei x für die Zeichen eines bestimmten Tag-Elements steht). Diese Tags haben übereinstimmende Nummern, in jedem Segment beginnend mit 0. Alle Änderungen an Tags müssen an beiden Tags des Paares vorgenommen werden.
+    </p>
+    
+    <p>
+      Es treffen die folgenden Regeln auf die Tags zu:
+    </p>
+
+    <ul>
+      <li>
+        <p>
+          Löschen ist zulässig (um z.B. die kursive Formatierung aus dem Satz 
+        </p>
+        <p>
+          <code>
+            Dieser Text hat &lt;x0&gt;kursive&lt;/x0&gt; Schrift.
+          </code>
+        </p>        
+        <p>              
+          löschen Sie einfach die Tags &lt;x0&gt; und &lt;/x0&gt;).
+        </p>
+      </li>
+    </ul>
+    
+    <ul>
+      <li>
+        <p>
+          Vedoppelung ist zulässig (z.B. in          
+        </p>
+        <p>  
+          <code>
+            Dieser Text hat &lt;x0&gt;kursive&lt;/x0&gt; Schrift und &lt;x1&gt;hier&lt;/x1&gt; gleich nochmal. 
+          </code>  
+        </p>  
+        <p>
+          wird auch "hier" kursiv angezeigt).
+        </p>      
+      </li>  
+    </ul>
+   
+    <ul>
+      <li>
+        <p>
+          Die Reihenfolge kann geändert werden (z.B. 
+        </p>
+        <p>      
+          <code>
+            Dieser Text hat &lt;x0&gt;kursive&lt;/x0&gt; Schrift und auch &lt;x1&gt;unterstrichene&lt;/x1&gt;. 
+          </code>
+        </p>      
+        <p>
+          kann geändert werden in  
+        </p>
+        <p>   
+          <code>
+            Dieser Text hat &lt;x1&gt;unterstrichene&lt;/x1&gt; Schrift und auch &lt;x0&gt;kursive&lt;/x0&gt; </code>. 
+        </p>        
+      </li>
+    </ul>
+
+    <ul>
+      <li>
+        <p>
+          Verschachtelung ist zulässig (z.B. 
+        </p>  
+        <p>   
+          <code>
+            Dieser Text hat &lt;x0&gt;kursive&lt;/x0&gt; Schrift und auch &lt;x1&gt;unterstrichene&lt;/x1&gt;. 
+          </code>
+        </p>   
+        <p>   
+          kann geändert werden in  
+        </p>   
+        <p>   
+          <code>
+            Dieser Text hat &lt;x0&gt;kursive Schrift und auch &lt;x1&gt;hier gleichzeitig unterstrichene&lt;/x1&gt;&lt;/x0&gt; </code>. 
+        </p>
+      </li>
+    </ul>
+       
+    <ul>
+      <li>
+        <p>
+          Ein Überlappen ist nicht zulässig (Tags wie diese 
+        </p>
+        <p>   
+          <code>
+            Dieser Text hat &lt;x0&gt;kursive Schrift, auch &lt;x1&gt;unterstrichene&lt;/x0&gt; und unterstrichene, aber nicht kursive Schrift&lt;/x1&gt;. 
+          </code>
+        </p>
+        <p>   
+          ist nicht zulässig und wird die Datei beschädigen. Wenn ein öffnender Tag eingesetzt wird, gefolgt von einem zweiten öffnenden Tag, dann muss der zweite vor dem ersten wieder geschlossen werden.
+        </p>    
+      </li>  
+    </ul>        
+    
+    <h2>Tag-Validierung</h2>
+
+    <p>
+      Die Funktion zur Validierung der Tags (<i>Extras</i> > <i>Tags validieren</i>) erkennt geänderte Tags (egal, ob dies aus Versehen oder absichtlich geschah), und zeigt die betroffenen Segmente an. Mit dieser Funktion wird ein Dialogfenster geöffnet, das alle beschädigten Tags in einem Dokument anzeigt.      
+    </p>
+    
+    <p>
+      Diese Funktion kann dazu dienen, in einem fehlerhaften übersetzten Text beschädigte Tags ausfindig machen. Dies ist oft ein Problem bei OpenDocument- oder OpenOffice.org-Dateien, die sich aufgrund von bei der Übersetzung beschädigten Tags nicht öffnen lassen. Dieses Problem kann oft behoben werden, indem man die Tags repariert und die Zieldokumente erneut exportiert. 
+    </p>
+    </div>
+    
+    <div class="navbar-bottom">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="index.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Zurück</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="FilesTMGloss.html">Translation Memory und Glossardateien</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Weiter</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="FilesFilters.html">Dateifilter</a>
+        </td>
+      </tr>
+    </table>
+    </div>
+    
+  </body>
+</html>
+

@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+  "http://www.w3.org/TR/html4/strict.dtd">
+  
+<html>
+  <head>
+    <title>OmegaT: Allgemeine Hinweise und Tipps</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="Kate (Linux)">
+    <meta name="changed" content="20050517">
+    <link rel="stylesheet" type="text/css" href="omegat.css">
+  </head>
+
+  <body lang="en" dir="LTR">
+
+    <div class="navbar-top">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="index.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Zurück</b>
+        </td>
+        <td width="39%" align="left" valign="center">        
+          <a href="FilesProjDirs.html">Projektdateien und -verzeichnisse</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Weiter</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="Shortcuts.html">Tastenkombinationen ("Shortcuts")</a>
+        </td>
+      </tr>
+    </table>    
+    </div>
+    
+    <div class="content">
+    
+    <h1 align="center">Allgemeine Hinweise und Tipps</h1>
+ 
+    <ul>  
+      <li>
+        <p>
+          <b>Fehler:</b> Wenn Fehler oder Programmfehler auftreten oder vermutet werden, so befindet sich für solche Fälle im Hauptverzeichnis eines Projekts eine Protokolldatei (<b>log.txt</b>), die zurate gezogen werden kann. Fehler können auch der Benutzergruppe oder dem Entwicklungs-Team gemeldet werden (siehe <a href="Important.html">Wichtige Hinweise</a>).
+        </p>
+      </li>
+      
+      <li>
+        <p>
+          <b>Dateikonvertierung und -platzierung:</b> Wenn die zu übersetzenden Ausgangsdokumente ein nicht unterstütztes Format aufweisen, dann müssen Sie sie zunächst in das OpenDocument-Format oder ein anderes unterstütztes Format konvertieren und anschließend im Unterverzeichnis <b>/source</b> des Projekts platzieren. Normalerweise müssen nur die konvertierten Ausgangsdokumente in diesem Verzeichnis abgelegt werden. Die Originale können sich in einem anderen Verzeichnis befinden. Alle Dokumente in diesem Verzeichnis, deren Format nicht unterstützt wird, werden ohne Änderung in das Verzeichnis <b>/target</b> kopiert, wenn die Zieldokumente exportiert werden.   
+
+        </p>
+      </li>
+
+      <li>
+        <p>
+          <b>Markierungen:</b> Um eine Markierung in die Übersetzung einzufügen, die auf eine noch nicht gelöste Frage oder ähnliches hinweist, verwenden Sie nicht die Zeichen <b>?</b> oder <b>*</b>. Diese Zeichen werden bei der Suche als Joker-Zeichen verwendet und können somit nicht mit <i><Strg+F></i> gefunden werden.
+        </p>
+      </li>      
+      
+      <li>
+        <p>
+          <b>Speicherort, an dem das Projekt erstellt wird:</b> Denken Sie daran, dass OmegaT bei der Erstellung eines neuen Projekts den Dialog zur Auswahl des Speicherorts mit dem zuletzt verwendeten Verzeichnis öffnet. Dies liegt höchstwahrscheinlich innerhalb eines Projektverzeichnisses. Es ist nicht ratsam, ein Projekt innerhalb eines anderen zu erstellen. Achten Sie deshalb darauf, dass das Hauptverzeichnis eines Projekts sich bei der Erstellung nicht innerhalb eines vorhandenen Projekts befindet.          
+        </p>
+      </li>      
+      
+      <li>
+        <p>
+          <b>Nach der Erstellung des Projekts ist dieses leer:</b> Falls OmegaT anzeigt, dass ein neu erstelltes Projekt leer ist, nachdem die Ausgangsdateien der Übersetzung in das Verzeichnis <b>/source</b> kopiert worden sind, dann haben diese Dateien wahrscheinlich ein nicht unterstütztes Format (z.B. <b>MS Word</b> usw.). Alle Dateien müssen in ein unterstütztes Format konvertiert werden, wie z. B. OpenDocument oder OpenOffice.org, damit OmegaT mit ihnen arbeiten kann. Einzelheiten siehe <a href="FilesSourceDoc.html">Ausgangsdateien</a>.
+        </p>
+      </li>
+      
+      <li>
+        <p>
+        
+          <b>Segmente finden:</b> Wenn Sie in einem großen Projekt die Segmente bearbeiten, dann kann es sein, dass es schwierig wird, ein zuvor bearbeitetes Segment wiederzufinden. Um ein Segment schnell wiederzufinden, platzieren Sie eine eindeutige Markierung in dem Segment, wie zum Beispiel <b>'###xxxx'</b> (wobei <b>xxxx</b> ein eindeutiger Wert ist, wie etwa die Nummer des Segments), und drücken Sie dann <i>&lt;Enter&gt;</i>, um die Änderung am Segment zu bestätigen, bevor Sie weiterarbeiten. Wenn Sie nach der eindeutigen Markierung suchen, dann wird das ursprüngliche Segment wieder aktiviert.
+        </p>
+      </li>
+      
+      <li>
+        <p>
+          <b>Anzeige des Textlayouts:</b> Öffnen Sie das Ausgangsdokument in einer Textverarbeitung, um während der Übersetzung das Layout des Textes sehen zu können.
+        </p>
+      </li>
+      
+      <li>
+        <p>
+          <b>Translation Memory wird nicht geöffnet:</b> Falls Sie ein Translation Memory nicht öffnen können, das Sie von anderen erhalten haben (Kollegen, Kunden usw.), dann kann es sein, dass das Format nicht unterstützt wird. Falls es sich um eine TMX-Datei handelt (Dateierweiterung <b>.tmx</b>), dann ist es möglicherweise eine höhere Version als die derzeit unterstützte. OmegaT (Version 1.4.5) unterstützt derzeit nur <b>TMX Version 1.1 (Level 1)</b>. Die neueste TMX-Version ist 1.4b.
+        </p>
+      </li>  
+    </ul>
+    </div>
+    
+    <div class="navbar-bottom">
+    
+    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+      <tr>
+        <td width="7%" align="left" valign="center">
+          <a href="index.html" title="Table of Contents">
+            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
+          </a>
+        </td>
+        <td width="9%" align="left" valign="center">
+          <b>Zurück</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="FilesProjDirs.html">Projektdateien und -verzeichnisse</a>
+        </td>
+        <td width="6%" align="left" valign="center">
+          <b>Weiter</b>
+        </td>
+        <td width="39%" align="left" valign="center">
+          <a href="Shortcuts.html">Tastenkombinationen ("Shortcuts")</a>
+        </td>
+      </tr>
+    </table>    
+    </div>
+    
+  </body>
+</html>
+

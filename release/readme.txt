@@ -153,6 +153,7 @@ Localization contributed by
   Kunihiko Yokota (Japanese)
   Erhan Yukselci (Turkish)
   Claudio Nasso (Italian)
+  Dragomir Kovacevic (Serbo-Croation)
 
 Other contributions by
   Sabine Cretella

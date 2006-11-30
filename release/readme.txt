@@ -116,11 +116,14 @@ Previous contributors include:
 (alphabetical order)
 
 Code has been contributed by
+  Didier Briel
   Kim Bruning
   Sacha Chua
+  Thomas Huriaux
   Maxym Mykhalchuk (lead developer)
-  Henry Pijffers (1.6, 1.7 series release manager)
+  Henry Pijffers (release manager)
   Benjamin Siband
+  Martin Wunderlich
 
 Localization contributed by
   Roberto Argus (Portugese-Brazil)
@@ -149,6 +152,7 @@ Localization contributed by
   Hisashi Yanagida (Japanese)
   Kunihiko Yokota (Japanese)
   Erhan Yukselci (Turkish)
+  Claudio Nasso (Italian)
 
 Other contributions by
   Sabine Cretella

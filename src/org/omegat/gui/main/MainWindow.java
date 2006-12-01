@@ -843,7 +843,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         if (isProjectLoaded())
             doSave();
         m_projWin.reset();
-        m_projectLoaded = false;
+        synchronized (this) {m_projectLoaded = false;}
         
         editor.setText(OStrings.getString("TF_INTRO_MESSAGE"));
         matches.clear();
@@ -1270,7 +1270,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                 m_activeFile = new String();
                 m_curEntryNum = 0;
                 loadDocument();
-                m_projectLoaded = true;
+                synchronized (this) {m_projectLoaded = true;}
                 
                 uiUpdateOnProjectOpen();
             }

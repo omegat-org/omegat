@@ -345,10 +345,9 @@ public class CommandThread extends Thread
             System.gc();
 
             // There, that should do it, now inform the user
-            String msg = OStrings.getString("OUT_OF_MEMORY");
-            StaticUtils.logError("OUT_OF_MEMORY", msg);
-            oome.printStackTrace(StaticUtils.getLogStream());
-            m_transFrame.displayError(msg, oome);
+            StaticUtils.logErrorRB("OUT_OF_MEMORY");
+            StaticUtils.log(oome);
+            m_transFrame.displayError(OStrings.getString("OUT_OF_MEMORY"), oome);
 
             // Just quit, we can't help it anyway
             System.exit(0);
@@ -697,8 +696,7 @@ public class CommandThread extends Thread
         catch (IOException e)
         {
             StaticUtils.logErrorRB("CT_ERROR_CREATING_TMX");
-            StaticUtils.log(e.getMessage());
-            e.printStackTrace(StaticUtils.getLogStream());
+            StaticUtils.log(e);
             throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") +
                     "\n" +                                                      // NOI18N
                     e.getMessage());
@@ -1281,8 +1279,7 @@ public class CommandThread extends Thread
     void displayError(String msg, Throwable e)
     {
         StaticUtils.logRB("LD_ERROR", new Object[] {msg}); // NOI18N
-        e.printStackTrace(StaticUtils.getLogStream());
-        e.printStackTrace();
+        StaticUtils.log(e);
         StaticUtils.log("----------------------------"); // NOI18N
         if( m_transFrame!=null )
             MessageRelay.uiMessageDisplayError(m_transFrame, msg, e);

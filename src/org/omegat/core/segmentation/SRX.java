@@ -119,8 +119,8 @@ public class SRX implements Serializable, Cloneable
             StaticUtils.logErrorRB("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG");
             StaticUtils.log(ioe);
             JOptionPane.showMessageDialog(null,
-                  OStrings.getString("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG")
-                + "\n" + ioe,
+                OStrings.getString("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG")
+                    + "\n" + ioe,
                 OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -179,10 +179,7 @@ public class SRX implements Serializable, Cloneable
         {
             // silently ignoring FNF
             if( !(e instanceof FileNotFoundException) )
-            {
-                StaticUtils.log(e.getMessage());
-                e.printStackTrace(StaticUtils.getLogStream());
-            }
+                StaticUtils.log(e);
             res = new SRX();
             res.initDefaults();
         }

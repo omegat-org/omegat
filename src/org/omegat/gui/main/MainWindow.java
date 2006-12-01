@@ -358,7 +358,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private void updateTitle()
     {
         String s = OStrings.getDisplayVersion();
-        if( m_projectLoaded )
+        if( isProjectLoaded() )
         {
             s += " :: " + m_activeProj;                                         // NOI18N
             try
@@ -574,7 +574,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private void doQuit()
     {
         boolean projectModified = false;
-        if (m_projectLoaded)
+        if (isProjectLoaded())
             projectModified = CommandThread.core.isProjectModified();
 
         // RFE 1302358
@@ -594,7 +594,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         saveScreenLayout();
         Preferences.save();
 
-        if (m_projectLoaded)
+        if (isProjectLoaded())
             doSave();
 
         // shut down
@@ -645,9 +645,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         }
     }
     
-    public void doNextEntry()
+    public synchronized void doNextEntry()
     {
-        if (!m_projectLoaded)
+        if (!isProjectLoaded())
             return;
         
         commitEntry();
@@ -663,9 +663,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         activateEntry();
     }
     
-    public void doPrevEntry()
+    public synchronized void doPrevEntry()
     {
-        if (!m_projectLoaded)
+        if (!isProjectLoaded())
             return;
         
         commitEntry();
@@ -693,7 +693,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      * @author Henry Pijffers
      * @author Maxym Mykhalchuk
      */
-    private void doNextUntranslatedEntry()
+    private synchronized void doNextUntranslatedEntry()
     {
         // check if a document is loaded
         if (m_projectLoaded == false)
@@ -762,27 +762,27 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     
     
     /** inserts the source text of a segment at cursor position */
-    private void doInsertSource()
+    private synchronized void doInsertSource()
     {
-        if (!m_projectLoaded)
+        if (!isProjectLoaded())
             return;
         
         doInsertText(m_curEntry.getSrcText());
     }
     
     /** replaces entire edited segment text with a the source text of a segment at cursor position */
-    private void doOverwriteSource()
+    private synchronized void doOverwriteSource()
     {
-        if (!m_projectLoaded)
+        if (!isProjectLoaded())
             return;
         
         doReplaceEditText(m_curEntry.getSrcText());
     }
     
     /** insert current fuzzy match at cursor position */
-    private void doInsertTrans()
+    private synchronized void doInsertTrans()
     {
-        if (!m_projectLoaded)
+        if (!isProjectLoaded())
             return;
         
         if (m_activeMatch < 0)
@@ -797,7 +797,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     }
     
     /** inserts text at the cursor position */
-    private void doInsertText(String text)
+    private synchronized void doInsertText(String text)
     {
         int pos = editor.getCaretPosition();
         editor.select(pos, pos);
@@ -805,9 +805,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     }
     
     /** replace entire edit area with active fuzzy match */
-    public void doRecycleTrans()
+    public synchronized void doRecycleTrans()
     {
-        if (!m_projectLoaded)
+        if (!isProjectLoaded())
             return;
         
         if (m_activeMatch < 0)
@@ -822,7 +822,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     }
     
     /** replaces the entire edit area with a given text */
-    private void doReplaceEditText(String text)
+    private synchronized void doReplaceEditText(String text)
     {
         // build local offsets
         int start = m_segmentStartOffset + m_sourceDisplayLength +
@@ -840,11 +840,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     {
         Preferences.save();
         
-        if (m_projectLoaded)
-        {
-//            commitEntry(false); // part of fix for bug 1409309
+        if (isProjectLoaded())
             doSave();
-        }
         m_projWin.reset();
         m_projectLoaded = false;
         
@@ -966,14 +963,16 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      * <a href="http://sourceforge.net/support/tracker.php?aid=1370838">[1370838]
      * First segment does not trigger matches after load</a>.
      */
-    public void projectLoaded()
+    public synchronized void projectLoaded()
     {
         Thread runlater = new Thread()
         {
             public void run()
             {
-                commitEntry(false); // part of fix for bug 1409309
-                activateEntry();
+                updateFuzzyInfo();    // just display the matches, don't commit/activate!
+                updateGlossaryInfo(); // and glossary matches
+                // commitEntry(false); // part of fix for bug 1409309
+                // activateEntry();
             }
         };
         SwingUtilities.invokeLater(runlater);
@@ -1093,7 +1092,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     
     private void doSave()
     {
-        if (!m_projectLoaded)
+        if (!isProjectLoaded())
             return;
         
         setMessageText( OStrings.getString("MW_STATUS_SAVING"));
@@ -1126,7 +1125,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      */
     private void doLoadProject()
     {
-        if (m_projectLoaded)
+        if (isProjectLoaded())
         {
             displayError( "Please close the project first!", new Exception( "Another project is open")); // NOI18N
             return;
@@ -1147,7 +1146,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      */
     public void doLoadProject(String projectRoot)
     {
-        if (m_projectLoaded)
+        if (isProjectLoaded())
         {
             displayError( "Please close the project first!", new Exception( "Another project is open")); // NOI18N
             return;
@@ -1225,9 +1224,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         
     }
     
-    public void doGotoEntry(int entryNum)
+    public synchronized void doGotoEntry(int entryNum)
     {
-        if (!m_projectLoaded)
+        if (!isProjectLoaded())
             return;
         
         commitEntry();
@@ -1248,7 +1247,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         activateEntry();
     }
     
-    public void doGotoEntry(String str)
+    public synchronized void doGotoEntry(String str)
     {
         int num;
         try
@@ -1261,11 +1260,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         }
     }
     
-    public void finishLoadProject()
+    public synchronized void finishLoadProject()
     {
         SwingUtilities.invokeLater(new Runnable()
         {
-            public void run()
+            public synchronized void run()
             {
                 m_activeProj = CommandThread.core.getProjectProperties().getProjectName();
                 m_activeFile = new String();
@@ -1280,7 +1279,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     
     private void doCompileProject()
     {
-        if (!m_projectLoaded)
+        if (!isProjectLoaded())
             return;
         
         try
@@ -1299,7 +1298,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     
     private void doFind()
     {
-        if (!m_projectLoaded)
+        if (!isProjectLoaded())
             return;
         
         String selection = editor.getSelectedText();
@@ -1357,7 +1356,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      * otherwise displays source text.
      * Also stores length of each displayed segment plus its starting offset.
      */
-    private void loadDocument()
+    private synchronized void loadDocument()
     {
         m_docReady = false;
         
@@ -1407,7 +1406,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      */
     private void updateFuzzyInfo()
     {
-        if (!m_projectLoaded)
+        if (!isProjectLoaded())
             return;
         
         StringEntry curEntry = m_curEntry.getStrEntry();
@@ -1462,7 +1461,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      * @param forceCommit If false, the translation will not be saved
      */
     private synchronized void commitEntry(boolean forceCommit) {
-        if (!m_projectLoaded)
+        if (!isProjectLoaded())
             return;
 
         if (!entryActivated)
@@ -1593,7 +1592,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      */
     public synchronized void activateEntry()
     {
-        if (!m_projectLoaded)
+        if (!isProjectLoaded())
             return;
         
         AbstractDocument xlDoc = (AbstractDocument)editor.getDocument();
@@ -2009,7 +2008,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      * @param forward
      * @return true if space is available
      */
-    public boolean checkCaretForDelete(boolean forward)
+    public synchronized boolean checkCaretForDelete(boolean forward)
     {
         int pos = editor.getCaretPosition();
         
@@ -2044,7 +2043,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      * Checks whether the selection & caret is inside editable text,
      * and changes their positions accordingly if not.
      */
-    public void checkCaret()
+    public synchronized void checkCaret()
     {
         //int pos = m_editor.getCaretPosition();
         int spos = editor.getSelectionStart();
@@ -2114,7 +2113,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     }
     
     /** Tells whether the project is loaded. */
-    public boolean isProjectLoaded()
+    public synchronized boolean isProjectLoaded()
     {
         return m_projectLoaded;
     }

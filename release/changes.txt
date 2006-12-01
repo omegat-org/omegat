@@ -4,11 +4,11 @@
 
 1.6.1_02 vs. 1.4.5.04
    64 Enchancements
-  118 Bugfixes
+  119 Bugfixes
 
 ----------------------------------------------------------------------
 1.6.1_02
-Contains new localisations plus a couple bug fixes
+Contains new and legacy localisations plus one critical bug fix
 
  Implemented requests:
 
@@ -20,13 +20,16 @@ Contains new localisations plus a couple bug fixes
 
   - Serbo-Croation UI localisation + instant start guide translation
 
-  - Manual language selection screen (if translation is unavail.)
+  - User manual language selection screen (displays only if a
+  translation in the system language is unavailable)
 
-  - User manual translations of legacy versions re-introduced
+  - Legacy user manual translations re-introduced for Belo-Russian,
+  German, Esperanto, Spanish, French, Japanese, and Russian.
 
  Bug fixes:
 
-  -
+  - Corrupted TMX after weird GUI interaction
+  http://sourceforge.net/support/tracker.php?aid=1604963
 
 ----------------------------------------------------------------------
 1.6.1_01

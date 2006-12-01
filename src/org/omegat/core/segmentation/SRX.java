@@ -116,14 +116,12 @@ public class SRX implements Serializable, Cloneable
         }
         catch( IOException ioe )
         {
-            String message = StaticUtils.format(
-                "CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG",
-                new Object[] {ioe});
-            StaticUtils.logError("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG", message);
-            ioe.printStackTrace(StaticUtils.getLogStream());
+            StaticUtils.logErrorRB("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG");
+            StaticUtils.log(ioe);
             JOptionPane.showMessageDialog(null,
-                    message,
-                    OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+                  OStrings.getString("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG")
+                + "\n" + ioe,
+                OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
         }
     }
     

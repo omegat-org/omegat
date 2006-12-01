@@ -28,6 +28,8 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.text.BreakIterator;
 import java.text.MessageFormat;
 import java.util.List;
@@ -442,6 +444,7 @@ public class StaticUtils
      */
     public static void log(String s)
     {
+        // Write to log
         try
         {
             PrintStream fout = getLogStream();
@@ -454,6 +457,7 @@ public class StaticUtils
             // doing nothing
         }
 
+        // Write to System.out
         System.out.println(s);
     }
 
@@ -487,6 +491,23 @@ public class StaticUtils
 
         // Write the message to the log
         log(message);
+    }
+
+    /**
+      * Writes an exception message plus stack trace to the log.
+      *
+      * @param exception The exception to log
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    public static void logException(Exception exception) {
+        // Log the exception message
+        log(exception.getMessage());
+
+        // Log the stack trace
+        StringWriter stackTrace = new StringWriter();
+        exception.printStackTrace(new PrintWriter(stackTrace));
+        log(stackTrace.toString());
     }
 
     /**

@@ -177,17 +177,17 @@ public class CommandThread extends Thread
     //////////////////////////////////////////////////////
     // message handling for external requests
     
-    public void messageBoardPost(RequestPacket pack)
+    public synchronized void messageBoardPost(RequestPacket pack)
     {
         messageBoard(true, pack);
     }
     
-    private void messageBoardCheck(RequestPacket pack)
+    private synchronized void messageBoardCheck(RequestPacket pack)
     {
         messageBoard(false, pack);
     }
     
-    private void messageBoard(boolean post, RequestPacket pack)
+    private synchronized void messageBoard(boolean post, RequestPacket pack)
     {
         if (CommandThread.core == null)
             return;
@@ -373,7 +373,8 @@ public class CommandThread extends Thread
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       * @author Maxym Mykhalchuk
       */
-    private void buildTMXFile(String filename, boolean forceValidTMX, boolean addOrphans)
+    private synchronized void buildTMXFile(
+        String filename, boolean forceValidTMX, boolean addOrphans)
             throws IOException {
         buildTMXFile(filename, forceValidTMX, addOrphans, false);
     }
@@ -384,7 +385,8 @@ public class CommandThread extends Thread
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       * @author Maxym Mykhalchuk
       */
-    private void buildTMXFile(String filename, boolean forceValidTMX, boolean addOrphans, boolean levelTwo) 
+    private synchronized void buildTMXFile(
+        String filename, boolean forceValidTMX, boolean addOrphans, boolean levelTwo) 
             throws IOException
     {
         // build translation database files
@@ -756,7 +758,7 @@ public class CommandThread extends Thread
             forceSave(false);
     }
     
-    public void markAsDirty()
+    public synchronized void markAsDirty()
     {
         m_modifiedFlag = true;
     }
@@ -826,7 +828,7 @@ public class CommandThread extends Thread
      * Also if there's no entry for <code>srcText</code> string yet,
      * then adds a new String Entry to internal in-memory TM.
      */
-    public void addEntry(String srcText)
+    public synchronized void addEntry(String srcText)
     {
         // if the source string is empty, don't add it to TM
         if( srcText.length()==0 || srcText.trim().length()==0 )
@@ -1645,7 +1647,7 @@ catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug
     private boolean _dontCountNext = false;
     
     /** Returns the number of unique translated segments. */
-    public int getNumberofTranslatedSegments()
+    public synchronized int getNumberofTranslatedSegments()
     {
         return numberofTranslatedSegments;
     }

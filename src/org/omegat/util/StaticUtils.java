@@ -494,19 +494,24 @@ public class StaticUtils
     }
 
     /**
-      * Writes an exception message plus stack trace to the log.
+      * Writes an exception or error message plus stack trace to the log.
       *
-      * @param exception The exception to log
+      * @param throwable The exception or error to log
       *
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
-    public static void logException(Exception exception) {
-        // Log the exception message
-        log(exception.getMessage());
+    public static void log(Throwable throwable) {
+        // Log the throwable class
+        log(throwable.getClass().getName() + ":");
+
+        // Log the message, if any
+        String message = throwable.getMessage();
+        if ((message != null) && (message.length() > 0))
+            log(message);
 
         // Log the stack trace
         StringWriter stackTrace = new StringWriter();
-        exception.printStackTrace(new PrintWriter(stackTrace));
+        throwable.printStackTrace(new PrintWriter(stackTrace));
         log(stackTrace.toString());
     }
 

@@ -301,7 +301,7 @@ public class ProjectProperties
         catch( TranslationException te )
         {
             reset();
-            Log.log(e);
+            Log.log(te);
             throw new IOException(OStrings.getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));
         }
     }

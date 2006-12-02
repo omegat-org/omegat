@@ -277,9 +277,8 @@ public class Preferences
         }
         catch (IOException e)
         {
-            StaticUtils.logErrorRB("PM_ERROR_SAVE");
-            StaticUtils.log(e.getMessage());
-            e.printStackTrace(StaticUtils.getLogStream());
+            Log.logErrorRB("PM_ERROR_SAVE");
+            Log.log(e);
         }
     }
     
@@ -352,32 +351,28 @@ public class Preferences
             // error loading preference file - keep whatever was
             //  loaded then return gracefully to calling function
             // print an error to the console as an FYI
-            StaticUtils.logWarningRB("PM_WARNING_PARSEERROR_ON_READ");
-            StaticUtils.log(te.getMessage());
-            te.printStackTrace(StaticUtils.getLogStream());
+            Log.logWarningRB("PM_WARNING_PARSEERROR_ON_READ");
+            Log.log(te);
         }
         catch (IndexOutOfBoundsException e3)
         {
             // error loading preference file - keep whatever was
             //  loaded then return gracefully to calling function
             // print an error to the console as an FYI
-            StaticUtils.logWarningRB("PM_WARNING_PARSEERROR_ON_READ");
-            StaticUtils.log(e3.getMessage());
-            e3.printStackTrace(StaticUtils.getLogStream());
+            Log.logWarningRB("PM_WARNING_PARSEERROR_ON_READ");
+            Log.log(e3);
         }
         catch (UnsupportedEncodingException e3)
         {
             // unsupported encoding - forget about it
-            StaticUtils.logErrorRB("PM_UNSUPPORTED_ENCODING"); // NOI18N
-            StaticUtils.log(e3.getMessage());
-            e3.printStackTrace(StaticUtils.getLogStream());
+            Log.logErrorRB("PM_UNSUPPORTED_ENCODING"); // NOI18N
+            Log.log(e3);
         }
         catch (IOException e4)
         {
             // can't read file - forget about it and move on
-            StaticUtils.logErrorRB("PM_ERROR_READING_FILE"); // NOI18N
-            StaticUtils.log(e4.getMessage());
-            e4.printStackTrace(StaticUtils.getLogStream());
+            Log.logErrorRB("PM_ERROR_READING_FILE"); // NOI18N
+            Log.log(e4);
         }
     }
     

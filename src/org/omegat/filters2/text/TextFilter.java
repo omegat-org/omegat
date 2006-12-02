@@ -34,8 +34,8 @@ import java.io.Writer;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.util.LinebreakPreservingReader;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 
 /**
  * Filter to support plain text files (in various encodings).
@@ -199,8 +199,8 @@ public class TextFilter extends AbstractFilter
         }
         catch( Exception e )
         {
-            StaticUtils.log("Text filter thrown an exception: " +              // NOI18N
-                    e.getMessage());
+            Log.log("Text filter threw an exception:");
+            Log.log(e);
             return currentOptions;
         }
     }

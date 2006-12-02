@@ -43,6 +43,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 
@@ -116,8 +117,8 @@ public class SRX implements Serializable, Cloneable
         }
         catch( IOException ioe )
         {
-            StaticUtils.logErrorRB("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG");
-            StaticUtils.log(ioe);
+            Log.logErrorRB("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG");
+            Log.log(ioe);
             JOptionPane.showMessageDialog(null,
                 OStrings.getString("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG")
                     + "\n" + ioe,
@@ -155,7 +156,7 @@ public class SRX implements Serializable, Cloneable
                     sb.append(exceptions.get(i));
                     sb.append("\n");                                            // NOI18N
                 }
-                StaticUtils.logErrorRB(
+                Log.logErrorRB(
                     "CORE_SRX_EXC_LOADING_SEG_RULES",
                     new Object[] {sb.toString()});
                 res = new SRX();
@@ -179,7 +180,7 @@ public class SRX implements Serializable, Cloneable
         {
             // silently ignoring FNF
             if( !(e instanceof FileNotFoundException) )
-                StaticUtils.log(e);
+                Log.log(e);
             res = new SRX();
             res.initDefaults();
         }

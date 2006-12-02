@@ -62,8 +62,9 @@ import org.omegat.filters3.xml.docbook.DocBookFilter;
 import org.omegat.filters3.xml.opendoc.OpenDocFilter;
 import org.omegat.filters3.xml.opendoc.OpenDocXMLFilter;
 import org.omegat.filters3.xml.xhtml.XHTMLFilter;
-import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
+import org.omegat.util.LFileCopy;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -574,9 +575,8 @@ public class FilterMaster
         }
         catch( Exception e )
         {
-            StaticUtils.logErrorRB("FILTERMASTER_ERROR_LOADING_FILTERS_CONFIG");
-            StaticUtils.log(e.getMessage());
-            e.printStackTrace(StaticUtils.getLogStream());
+            Log.logErrorRB("FILTERMASTER_ERROR_LOADING_FILTERS_CONFIG");
+            Log.log(e);
             filters = setupBuiltinFilters();
         }
     }
@@ -744,7 +744,7 @@ public class FilterMaster
                 {
                     // couldn't load one of filters
                     // eat (almost) silently
-                    StaticUtils.logErrorRB("FILTERMASTER_ERROR_LOADING_FILTER",
+                    Log.logErrorRB("FILTERMASTER_ERROR_LOADING_FILTER",
                         new Object[]{filterList.get(j), ((URL)filterList.get(0)).getFile()});
                 }
             }
@@ -765,9 +765,8 @@ public class FilterMaster
         }
         catch( FileNotFoundException fnfe )
         {
-            StaticUtils.logErrorRB("FILTERMASTER_ERROR_SAVING_FILTERS_CONFIG");
-            StaticUtils.log(fnfe.getMessage());
-            fnfe.printStackTrace(StaticUtils.getLogStream());
+            Log.logErrorRB("FILTERMASTER_ERROR_SAVING_FILTERS_CONFIG");
+            Log.log(fnfe);
             JOptionPane.showMessageDialog(null,
                     OStrings.getString("FILTERMASTER_ERROR_SAVING_FILTERS_CONFIG") + "\n" + fnfe,
                     OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);

@@ -92,6 +92,7 @@ import org.omegat.gui.dialogs.WorkflowOptionsDialog;
 import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.LFileCopy;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -270,7 +271,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         }
         catch(NoClassDefFoundError e)
         {
-            e.printStackTrace(StaticUtils.getLogStream());
+            Log.log(e);
         }
 
         // all except MacOSX
@@ -295,7 +296,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         }
         catch( Exception e )
         {
-            e.printStackTrace(StaticUtils.getLogStream());
+            Log.log(e);
         }
     }
     
@@ -1600,10 +1601,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             }
             catch(BadLocationException ble)
             {
-                StaticUtils.log(IMPOSSIBLE);
-                StaticUtils.log(ble.getMessage());
-                ble.printStackTrace();
-                ble.printStackTrace(StaticUtils.getLogStream());
+                Log.log(IMPOSSIBLE);
+                Log.log(ble);
                 new_translation = new String();
             }
             display_string = new_translation;
@@ -1619,10 +1618,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         }
         catch(BadLocationException ble)
         {
-            StaticUtils.log(IMPOSSIBLE);
-            StaticUtils.log(ble.getMessage());
-            ble.printStackTrace();
-            ble.printStackTrace(StaticUtils.getLogStream());
+            Log.log(IMPOSSIBLE);
+            Log.log(ble);
         }
 
         int localCur = m_curEntryNum - m_xlFirstEntry;
@@ -1682,10 +1679,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                     }
                     catch(BadLocationException ble)
                     {
-                        StaticUtils.log(IMPOSSIBLE);
-                        StaticUtils.log(ble.getMessage());
-                        ble.printStackTrace();
-                        ble.printStackTrace(StaticUtils.getLogStream());
+                        Log.log(IMPOSSIBLE);
+                        Log.log(ble);
                     }
                     docSeg.length = ds_nn.length();
                 }
@@ -1711,13 +1706,13 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         // recover data about current entry
         // <HP-experiment>
         if (m_curEntryNum < m_xlFirstEntry) {
-            StaticUtils.log("ERROR: Current entry # lower than first entry #");
-            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            Log.log("ERROR: Current entry # lower than first entry #");
+            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
             // FIX: m_curEntryNum = m_xlFirstEntry;
         }
         if (m_curEntryNum > m_xlLastEntry) {
-            StaticUtils.log("ERROR: Current entry # greater than last entry #");
-            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            Log.log("ERROR: Current entry # greater than last entry #");
+            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
             // FIX: m_curEntryNum = m_xlLastEntry;
         }
         // </HP-experiment>
@@ -1743,10 +1738,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             docSeg = m_docSegList[localCur];
         }
         catch (Exception exception) {
-            StaticUtils.log("ERROR: exception while calculating character offset:");
-            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            StaticUtils.log(exception.getMessage());
-            exception.printStackTrace(StaticUtils.getLogStream());
+            Log.log("ERROR: exception while calculating character offset:");
+            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            Log.log(exception);
             return; // deliberately breaking, to simulate previous behaviour
             // FIX: for (int i=0; i<localCur && i < m_docSegList.length; i++)
         }
@@ -1770,10 +1764,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             }
         }
         catch (Exception exception) {
-            StaticUtils.log("ERROR: exception while putting segment # in start tag:");
-            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            StaticUtils.log(exception.getMessage());
-            exception.printStackTrace(StaticUtils.getLogStream());
+            Log.log("ERROR: exception while putting segment # in start tag:");
+            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            Log.log(exception);
             return; // deliberately breaking, to simulate previous behaviour
             // FIX: since these are localised, don't assume number appears, keep try/catch block
         }
@@ -1789,17 +1782,14 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         }
         catch(BadLocationException ble)
         {
-            StaticUtils.log(IMPOSSIBLE);
-            StaticUtils.log(ble.getMessage());
-            ble.printStackTrace();
-            ble.printStackTrace(StaticUtils.getLogStream());
+            Log.log(IMPOSSIBLE);
+            Log.log(ble);
         }
         // <HP-experiment>
         catch (Exception exception) {
-            StaticUtils.log("ERROR: exception while inserting end tag:");
-            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            StaticUtils.log(exception.getMessage());
-            exception.printStackTrace(StaticUtils.getLogStream());
+            Log.log("ERROR: exception while inserting end tag:");
+            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            Log.log(exception);
             return; // deliberately breaking, to simulate previous behaviour
             // FIX: unknown
         }
@@ -1822,17 +1812,14 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                 }
                 catch(BadLocationException ble)
                 {
-                    StaticUtils.log(IMPOSSIBLE);
-                    StaticUtils.log(ble.getMessage());
-                    ble.printStackTrace();
-                    ble.printStackTrace(StaticUtils.getLogStream());
+                    Log.log(IMPOSSIBLE);
+                    Log.log(ble);
                 }
                 // <HP-experiment>
                 catch (Exception exception) {
-                    StaticUtils.log("ERROR: exception while removing source text:");
-                    StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                    StaticUtils.log(exception.getMessage());
-                    exception.printStackTrace(StaticUtils.getLogStream());
+                    Log.log("ERROR: exception while removing source text:");
+                    Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                    Log.log(exception);
                     return; // deliberately breaking, to simulate previous behaviour
                     // FIX: unknown
                 }
@@ -1854,10 +1841,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                     percentage = Integer.parseInt(percentage_s);
                 }
                 catch (Exception exception) {
-                    StaticUtils.log("ERROR: exception while parsing percentage:");
-                    StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                    StaticUtils.log(exception.getMessage());
-                    exception.printStackTrace(StaticUtils.getLogStream());
+                    Log.log("ERROR: exception while parsing percentage:");
+                    Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                    Log.log(exception);
                     return; // deliberately breaking, to simulate previous behaviour
                     // FIX: unknown, but expect number parsing errors
                 }
@@ -1879,17 +1865,14 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                         }
                         catch(BadLocationException ble)
                         {
-                            StaticUtils.log(IMPOSSIBLE);
-                            StaticUtils.log(ble.getMessage());
-                            ble.printStackTrace();
-                            ble.printStackTrace(StaticUtils.getLogStream());
+                            Log.log(IMPOSSIBLE);
+                            Log.log(ble);
                         }
                         // <HP-experiment>
                         catch (Exception exception) {
-                            StaticUtils.log("ERROR: exception while inserting translation:");
-                            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                            StaticUtils.log(exception.getMessage());
-                            exception.printStackTrace(StaticUtils.getLogStream());
+                            Log.log("ERROR: exception while inserting translation:");
+                            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                            Log.log(exception);
                             return; // deliberately breaking, to simulate previous behaviour
                             // FIX: unknown
                         }
@@ -1907,17 +1890,14 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         }
         catch(BadLocationException ble)
         {
-            StaticUtils.log(IMPOSSIBLE);
-            StaticUtils.log(ble.getMessage());
-            ble.printStackTrace();
-            ble.printStackTrace(StaticUtils.getLogStream());
+            Log.log(IMPOSSIBLE);
+            Log.log(ble);
         }
         // <HP-experiment>
         catch (Exception exception) {
-            StaticUtils.log("ERROR: exception while inserting translation:");
-            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            StaticUtils.log(exception.getMessage());
-            exception.printStackTrace(StaticUtils.getLogStream());
+            Log.log("ERROR: exception while inserting translation:");
+            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            Log.log(exception);
             return; // deliberately breaking, to simulate previous behaviour
             // FIX: unknown
         }
@@ -1932,10 +1912,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             }
         }
         catch (Exception exception) {
-            StaticUtils.log("ERROR: exception while updating title:");
-            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            StaticUtils.log(exception.getMessage());
-            exception.printStackTrace(StaticUtils.getLogStream());
+            Log.log("ERROR: exception while updating title:");
+            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            Log.log(exception);
             return; // deliberately breaking, to simulate previous behaviour
             // FIX: unknown
         }
@@ -1947,10 +1926,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             updateGlossaryInfo();
         }
         catch (Exception exception) {
-            StaticUtils.log("ERROR: exception while updating match and glossary info:");
-            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            StaticUtils.log(exception.getMessage());
-            exception.printStackTrace(StaticUtils.getLogStream());
+            Log.log("ERROR: exception while updating match and glossary info:");
+            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            Log.log(exception);
             return; // deliberately breaking, to simulate previous behaviour
             // FIX: unknown
         }
@@ -1986,10 +1964,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                 setMessageText(new String());                                       // NOI18N
         }
         catch (Exception exception) {
-            StaticUtils.log("ERROR: exception while setting message text:");
-            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            StaticUtils.log(exception.getMessage());
-            exception.printStackTrace(StaticUtils.getLogStream());
+            Log.log("ERROR: exception while setting message text:");
+            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            Log.log(exception);
             return; // deliberately breaking, to simulate previous behaviour
             // FIX: unknown
         }
@@ -2006,10 +1983,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             }
         }
         catch (Exception exception) {
-            StaticUtils.log("ERROR: exception while calculating previous offset:");
-            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            StaticUtils.log(exception.getMessage());
-            exception.printStackTrace(StaticUtils.getLogStream());
+            Log.log("ERROR: exception while calculating previous offset:");
+            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            Log.log(exception);
             return; // deliberately breaking, to simulate previous behaviour
             // FIX: unknown
         }
@@ -2027,10 +2003,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             }
         }
         catch (Exception exception) {
-            StaticUtils.log("ERROR: exception while calculating next offset:");
-            StaticUtils.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            StaticUtils.log(exception.getMessage());
-            exception.printStackTrace(StaticUtils.getLogStream());
+            Log.log("ERROR: exception while calculating next offset:");
+            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+            Log.log(exception);
             return; // deliberately breaking, to simulate previous behaviour
             // FIX: unknown
         }
@@ -2201,13 +2176,10 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     
     public void fatalError(String msg, Throwable re)
     {
-        StaticUtils.log(msg);
+        Log.log(msg);
         if (re != null)
-        {
-            re.printStackTrace(StaticUtils.getLogStream());
-            re.printStackTrace();
-        }
-        
+            Log.log(re);
+
         // try for 10 seconds to shutdown gracefully
         CommandThread.core.interrupt();
         for( int i=0; i<100 && CommandThread.core!=null; i++ )

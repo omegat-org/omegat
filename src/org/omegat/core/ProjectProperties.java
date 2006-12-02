@@ -300,9 +300,8 @@ public class ProjectProperties
         catch( TranslationException te )
         {
             reset();
-            te.printStackTrace();
-            te.printStackTrace(StaticUtils.getLogStream());
-            throw new IOException(OStrings.getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE") + te);
+            Log.log(e);
+            throw new IOException(OStrings.getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));
         }
     }
     

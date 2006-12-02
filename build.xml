@@ -85,6 +85,10 @@
         <copy todir="${l10n.max.dir}/source">
             <fileset dir="." 
                     includes="release/readme.txt docs/en/** src/**/Bundle.properties"/>
+            <filterset begintoken="@@" endtoken="@@">
+                <filter token="TRANSLATION_NOTICE"
+                        value="&lt;p&gt;This translation is the work of [insert your name], copyright© [insert year].&lt;/p&gt;"/>
+            </filterset>
         </copy>
         <zip destfile="dist2/${l10n.max}.zip" 
                 basedir="${l10n.dir}" includes="${l10n.max}/**" />
@@ -107,6 +111,10 @@
         <mkdir dir="dist/docs"/>
         <copy todir="dist/docs">
             <fileset dir="docs"/>
+            <!-- Remove TRANSLATION_NOTICE placeholder (from English manual) -->
+            <filterset begintoken="@@" endtoken="@@">
+                <filter token="TRANSLATION_NOTICE" value=""/>
+            </filterset>
         </copy>
         <mkdir dir="dist/images"/>
         <copy todir="dist/images">

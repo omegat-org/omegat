@@ -57,6 +57,7 @@ import javax.swing.undo.UndoManager;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.gui.main.MainWindow;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -539,7 +540,7 @@ public class SearchWindow extends JFrame
                             OStrings.getString("SW_ERROR_BAD_DIR"), 
                             new Object[] {m_dirField.getText()} );
                     m_viewer.setText(error);
-                    StaticUtils.log(error);
+                    Log.log(error);
                     return;
                 }
                 if (CommandThread.core != null && m_dirCB.isSelected())

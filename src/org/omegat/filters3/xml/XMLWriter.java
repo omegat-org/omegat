@@ -35,8 +35,8 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.regex.Matcher;
 
+import org.omegat.util.Log;
 import org.omegat.util.PatternConsts;
-import org.omegat.util.StaticUtils;
 
 /**
  * This class writes out the XML files, intercepting the output.
@@ -135,7 +135,7 @@ public class XMLWriter extends Writer
             }
             else
             {
-                StaticUtils.log("Shouldn't happen! " +                          // NOI18N
+                Log.log("Shouldn't happen! " +                          // NOI18N
                         "XMLWriter: XML File does not contain XML header:\n" +  // NOI18N
                         buffer.substring(0, Math.min(buffer.length(), 80))); 
                 realWriter.write(XML_HEADER);

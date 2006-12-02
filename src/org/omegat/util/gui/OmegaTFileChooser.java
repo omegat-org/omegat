@@ -40,7 +40,6 @@ import org.omegat.core.threads.CommandThread;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
 
 /**
  * Basic File Chooser for OmegaT, showing the icon for OmegaT projects

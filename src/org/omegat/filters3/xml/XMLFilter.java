@@ -39,9 +39,9 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.TranslationException;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
-import org.omegat.util.StaticUtils;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXNotRecognizedException;
@@ -145,8 +145,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
         }
         catch(SAXException e)
         {
-            e.printStackTrace(StaticUtils.getLogStream());
-            e.printStackTrace();
+            Log.log(e);
             throw new TranslationException(e.getLocalizedMessage());
         }
     }

@@ -63,6 +63,7 @@ import org.omegat.core.ProjectProperties;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.messages.MessageRelay;
 import org.omegat.util.LFileCopy;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
@@ -315,7 +316,7 @@ public class CommandThread extends Thread
             if( !projectClosing )
                 displayError(OStrings.getString("TF_LOAD_ERROR"), e);
             else
-                StaticUtils.logRB("CT_CANCEL_LOAD");               // NOI18N
+                Log.logRB("CT_CANCEL_LOAD");               // NOI18N
         }
         // Fix for bug 1571944 @author Henry Pijffers (henry.pijffers@saxnot.com)
         catch (OutOfMemoryError oome) {
@@ -345,8 +346,8 @@ public class CommandThread extends Thread
             System.gc();
 
             // There, that should do it, now inform the user
-            StaticUtils.logErrorRB("OUT_OF_MEMORY");
-            StaticUtils.log(oome);
+            Log.logErrorRB("OUT_OF_MEMORY");
+            Log.log(oome);
             m_transFrame.displayError(OStrings.getString("OUT_OF_MEMORY"), oome);
 
             // Just quit, we can't help it anyway
@@ -695,8 +696,8 @@ public class CommandThread extends Thread
         }
         catch (IOException e)
         {
-            StaticUtils.logErrorRB("CT_ERROR_CREATING_TMX");
-            StaticUtils.log(e);
+            Log.logErrorRB("CT_ERROR_CREATING_TMX");
+            Log.log(e);
             throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") +
                     "\n" +                                                      // NOI18N
                     e.getMessage());
@@ -946,7 +947,7 @@ public class CommandThread extends Thread
             proj = new File(m_config.getProjectInternal() + OConsts.STATUS_EXTENSION);
             if (!proj.exists())
             {
-                StaticUtils.logErrorRB("CT_ERROR_CANNOT_FIND_TMX", new Object[] {proj}); // NOI18N
+                Log.logErrorRB("CT_ERROR_CANNOT_FIND_TMX", new Object[] {proj}); // NOI18N
                 // nothing to do here
                 return;
             }
@@ -1278,9 +1279,9 @@ public class CommandThread extends Thread
      */
     void displayError(String msg, Throwable e)
     {
-        StaticUtils.logRB("LD_ERROR", new Object[] {msg}); // NOI18N
-        StaticUtils.log(e);
-        StaticUtils.log("----------------------------"); // NOI18N
+        Log.logRB("LD_ERROR", new Object[] {msg}); // NOI18N
+        Log.log(e);
+        Log.log("----------------------------"); // NOI18N
         if( m_transFrame!=null )
             MessageRelay.uiMessageDisplayError(m_transFrame, msg, e);
     }

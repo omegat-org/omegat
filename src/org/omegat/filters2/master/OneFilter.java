@@ -31,8 +31,8 @@ import javax.swing.table.AbstractTableModel;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 
 /**
  * Wrapper around a single file filter class
@@ -103,7 +103,7 @@ public class OneFilter extends AbstractTableModel implements Serializable
         }
         catch (Exception e)
         {
-            StaticUtils.log(e.getMessage());
+            Log.log(e);
             return getClassName();
         }
     }
@@ -242,7 +242,7 @@ public class OneFilter extends AbstractTableModel implements Serializable
         }
         catch (Exception e)
         {
-            StaticUtils.log(e.getMessage());
+            Log.log(e);
             return "";                                                          // NOI18N
         }
     }
@@ -287,7 +287,7 @@ public class OneFilter extends AbstractTableModel implements Serializable
         }
         catch (Exception e)
         {
-            StaticUtils.log(e.getMessage());
+            Log.log(e);
             return false;
         }
     }
@@ -302,7 +302,7 @@ public class OneFilter extends AbstractTableModel implements Serializable
         }
         catch (Exception e)
         {
-            StaticUtils.log(e.getMessage());
+            Log.log(e);
         }
     }
     

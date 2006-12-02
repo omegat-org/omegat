@@ -41,7 +41,7 @@ import java.util.jar.Manifest;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.TranslationException;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.Log;
 
 /**
  * Static utilities for OmegaT filter plugins.
@@ -92,15 +92,14 @@ public final class PluginUtils
                 {
                     // nothing is really wrong
                     // strange exception
-                    StaticUtils.log("Couldn't access local file system " +      // NOI18N
+                    Log.log("Couldn't access local file system " +      // NOI18N
                             "to get '"+filters[i]+"' !");                       // NOI18N
-                    mue.printStackTrace(StaticUtils.getLogStream());
                 }
                 catch( IOException ioe )
                 {
                     // nothing is really wrong
                     // we just couldn't load one JAR
-                    StaticUtils.log("Couldn't load plugin JAR '"+               // NOI18N
+                    Log.log("Couldn't load plugin JAR '"+               // NOI18N
                             filters[i]+"' !");                                  // NOI18N
                 }
             }

@@ -71,18 +71,18 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
     private UndoManager	undoManager;
     
     /** Orders to cancel all Undoable edits. */
-    public void cancelUndo()
+    public synchronized void cancelUndo()
     {
         undoManager.die();
     }
     /** Orders to undo a single edit. */
-    public void undoOneEdit()
+    public synchronized void undoOneEdit()
     {
         if (undoManager.canUndo())
             undoManager.undo();
     }
     /** Orders to redo a single edit. */
-    public void redoOneEdit()
+    public synchronized void redoOneEdit()
     {
         if (undoManager.canRedo())
             undoManager.redo();
@@ -95,7 +95,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
     /**
      * Reacts to double mouse clicks.
      */
-    public void mouseClicked(MouseEvent e)
+    public synchronized void mouseClicked(MouseEvent e)
     {
         // design-time
         if (mw==null)
@@ -164,7 +164,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
      * outside of edit zone while maintaining normal functionality
      * across jvm versions.
      */
-    protected void processKeyEvent(KeyEvent e)
+    protected synchronized void processKeyEvent(KeyEvent e)
     {
         // design-time
         if (mw==null)
@@ -430,19 +430,19 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
      * because this method does not count the length (costly operation),
      * instead it accounts document length by listening to document updates.
      */
-    public int getTextLength()
+    public synchronized int getTextLength()
     {
         return textLength;
     }
     
     /** Accounting text length. */
-    public void removeUpdate(javax.swing.event.DocumentEvent e)
+    public synchronized void removeUpdate(javax.swing.event.DocumentEvent e)
     {
         textLength -= e.getLength();
     }
 
     /** Accounting text length. */
-    public void insertUpdate(javax.swing.event.DocumentEvent e)
+    public synchronized void insertUpdate(javax.swing.event.DocumentEvent e)
     {
         textLength += e.getLength();
     }

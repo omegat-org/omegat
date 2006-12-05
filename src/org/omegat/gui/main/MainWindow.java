@@ -806,9 +806,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     /** inserts text at the cursor position */
     private synchronized void doInsertText(String text)
     {
-        int pos = editor.getCaretPosition();
-        editor.select(pos, pos);
-        editor.replaceSelection(text);
+        synchronized (editor) {
+            int pos = editor.getCaretPosition();
+            editor.select(pos, pos);
+            editor.replaceSelection(text);
+        }
     }
     
     /** replace entire edit area with active fuzzy match */
@@ -831,15 +833,17 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     /** replaces the entire edit area with a given text */
     private synchronized void doReplaceEditText(String text)
     {
-        // build local offsets
-        int start = m_segmentStartOffset + m_sourceDisplayLength +
-                OStrings.getSegmentStartMarker().length() + 1;
-        int end = editor.getTextLength() - m_segmentEndInset -
-                OStrings.getSegmentEndMarker().length() - 1;
+        synchronized (editor) {
+            // build local offsets
+            int start = m_segmentStartOffset + m_sourceDisplayLength +
+                    OStrings.getSegmentStartMarker().length() + 1;
+            int end = editor.getTextLength() - m_segmentEndInset -
+                    OStrings.getSegmentEndMarker().length() - 1;
 
-        // remove text
-        editor.select(start, end);
-        editor.replaceSelection(text);
+            // remove text
+            editor.select(start, end);
+            editor.replaceSelection(text);
+        }
     }
     
     /** Closes the project. */
@@ -851,8 +855,10 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             doSave();
         m_projWin.reset();
         synchronized (this) {m_projectLoaded = false;}
-        
-        editor.setText(OStrings.getString("TF_INTRO_MESSAGE"));
+
+        synchronized (this) {
+            editor.setText(OStrings.getString("TF_INTRO_MESSAGE"));
+        }
         matches.clear();
         glossary.clear();
         
@@ -889,18 +895,20 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         editSelectFuzzy4MenuItem.setEnabled(false);
         editSelectFuzzy5MenuItem.setEnabled(false);
         editUndoMenuItem.setEnabled(false);
-        
+
         gotoMenu.setEnabled(false);
         gotoNextSegmentMenuItem.setEnabled(false);
         gotoNextUntranslatedMenuItem.setEnabled(false);
         gotoPreviousSegmentMenuItem.setEnabled(false);
         gotoSegmentMenuItem.setEnabled(false);
-        
+
         //viewFileListCheckBoxMenuItem.setEnabled(false);
         viewFileListMenuItem.setEnabled(false);
         toolsValidateTagsMenuItem.setEnabled(false);
-        
-        editor.setEditable(false);
+
+        synchronized (editor) {
+            editor.setEditable(false);
+        }
 
         // hide project file list
         m_projWin.uiUpdateImportButtonStatus();
@@ -954,7 +962,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         //viewFileListCheckBoxMenuItem.setSelected(true);
         toolsValidateTagsMenuItem.setEnabled(true);
         
-        editor.setEditable(true);
+        synchronized (editor) {
+            editor.setEditable(true);
+        }
         m_projWin.uiUpdateImportButtonStatus();
         
         m_projWin.setVisible(true);
@@ -1011,7 +1021,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                 doReloadProject();
         }
     }
-    
+
     /**
      * Displays the font dialog to allow selecting
      * the font for source, target text (in main window)
@@ -1027,10 +1037,12 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             // first commit current translation
             commitEntry(false); // part of fix for bug 1409309
             m_font = dlg.getSelectedFont();
-            editor.setFont(m_font);
+            synchronized (editor) {
+                editor.setFont(m_font);
+            }
             matches.setFont(m_font);
             glossary.setFont(m_font);
-            
+
             Preferences.setPreference(OConsts.TF_SRC_FONT_NAME, m_font.getName());
             Preferences.setPreference(OConsts.TF_SRC_FONT_SIZE, m_font.getSize());
             activateEntry();
@@ -1139,11 +1151,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             displayError( "Please close the project first!", new Exception( "Another project is open")); // NOI18N
             return;
         }
-        
+
         matches.clear();
         glossary.clear();
         editorScroller.setViewportView(editor);
-        
+
         RequestPacket load;
         load = new RequestPacket(RequestPacket.LOAD, this);
         CommandThread.core.messageBoardPost(load);
@@ -1160,16 +1172,16 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             displayError( "Please close the project first!", new Exception( "Another project is open")); // NOI18N
             return;
         }
-        
+
         matches.clear();
         glossary.clear();
         editorScroller.setViewportView(editor);
-        
+
         RequestPacket load;
         load = new RequestPacket(RequestPacket.LOAD, this, projectRoot);
         CommandThread.core.messageBoardPost(load);
     }
-    
+
     /**
      * Reloads, i.e. closes and loads the same project.
      */
@@ -1412,20 +1424,20 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     {
         if (!isProjectLoaded())
             return;
-        
-        String selection = editor.getSelectedText();
-        if (selection != null)
-        {
-            selection.trim();
+
+        synchronized (editor) {
+            String selection = editor.getSelectedText();
+            if (selection != null)
+                selection.trim();
+
+            //SearchThread srch = new SearchThread(this, selection);
+            //srch.start();
+            SearchWindow search = new SearchWindow(this, selection);
+            search.addWindowListener(this);
+            DialogThread dt = new DialogThread(search);
+            dt.start();
+            m_searches.add(search);
         }
-        
-        //SearchThread srch = new SearchThread(this, selection);
-        //srch.start();
-        SearchWindow search = new SearchWindow(this, selection);
-        search.addWindowListener(this);
-        DialogThread dt = new DialogThread(search);
-        dt.start();
-        m_searches.add(search);
     }
 
     /**
@@ -1456,11 +1468,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             str = new String()+' ';
         statusLabel.setText(str);
     }
-    
+
     /////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////
     // internal routines
-    
+
     /**
      * Displays all segments in current document.
      * <p>
@@ -1471,41 +1483,44 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private synchronized void loadDocument()
     {
         m_docReady = false;
-        
-        // clear old text
-        editor.setText(new String());
-        
-        m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
-        
-        m_xlFirstEntry = m_curEntry.getFirstInFile();
-        m_xlLastEntry = m_curEntry.getLastInFile();
-        int xlEntries = 1+m_xlLastEntry-m_xlFirstEntry;
-        
-        DocumentSegment docSeg;
-        StringBuffer textBuf = new StringBuffer();
-        m_docSegList = new DocumentSegment[xlEntries];
-        
-        for (int i=0; i<xlEntries; i++)
-        {
-            docSeg = new DocumentSegment();
-            
-            SourceTextEntry ste = CommandThread.core.getSTE(i+m_xlFirstEntry);
-            String text = ste.getTranslation();
-            // set text and font
-            if( text.length()==0 )
+
+        synchronized (editor) {
+            // clear old text
+            editor.setText(new String());
+
+            m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
+
+            m_xlFirstEntry = m_curEntry.getFirstInFile();
+            m_xlLastEntry = m_curEntry.getLastInFile();
+            int xlEntries = 1+m_xlLastEntry-m_xlFirstEntry;
+
+            DocumentSegment docSeg;
+            StringBuffer textBuf = new StringBuffer();
+            m_docSegList = new DocumentSegment[xlEntries];
+
+            for (int i=0; i<xlEntries; i++)
             {
-                // no translation available - use source text
-                text = ste.getSrcText();
+                docSeg = new DocumentSegment();
+
+                SourceTextEntry ste = CommandThread.core.getSTE(i+m_xlFirstEntry);
+                String text = ste.getTranslation();
+                // set text and font
+                if( text.length()==0 )
+                {
+                    // no translation available - use source text
+                    text = ste.getSrcText();
+                }
+                text += "\n\n";														// NOI18N
+
+                textBuf.append(text);
+
+                docSeg.length = text.length();
+                m_docSegList[i] = docSeg;
             }
-            text += "\n\n";														// NOI18N
-            
-            textBuf.append(text);
-            
-            docSeg.length = text.length();
-            m_docSegList[i] = docSeg;
-        }
-        
-        editor.setText(textBuf.toString());
+
+            editor.setText(textBuf.toString());
+        } // synchronized (editor)
+
         Thread.yield();
     }
     
@@ -1580,115 +1595,117 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             return;
         entryActivated = false;
 
-        AbstractDocument xlDoc = (AbstractDocument)editor.getDocument();
+        synchronized (editor) {
+            AbstractDocument xlDoc = (AbstractDocument)editor.getDocument();
 
-        int start = m_segmentStartOffset + m_sourceDisplayLength +
+            int start = m_segmentStartOffset + m_sourceDisplayLength +
                 OStrings.getSegmentStartMarker().length();
-        int end = editor.getTextLength() - m_segmentEndInset -
+            int end = editor.getTextLength() - m_segmentEndInset -
                 OStrings.getSegmentEndMarker().length();
-        String display_string;
-        String new_translation;
-        if (start == end)
-        {
-            new_translation = new String();
-            display_string  = m_curEntry.getSrcText();
-        }
-        else
-        {
+            String display_string;
+            String new_translation;
+            if (start == end)
+            {
+                new_translation = new String();
+                display_string  = m_curEntry.getSrcText();
+            }
+            else
+            {
+                try
+                {
+                    new_translation = xlDoc.getText(start, end - start);
+                }
+                catch(BadLocationException ble)
+                {
+                    Log.log(IMPOSSIBLE);
+                    Log.log(ble);
+                    new_translation = new String();
+                }
+                display_string = new_translation;
+            }
+
+            int totalLen = m_sourceDisplayLength + OStrings.getSegmentStartMarker().length() +
+                    new_translation.length() + OStrings.getSegmentEndMarker().length();
             try
             {
-                new_translation = xlDoc.getText(start, end - start);
+                // see http://sourceforge.net/support/tracker.php?aid=1436607
+                // this method calls write locks / unlocks
+                xlDoc.replace(m_segmentStartOffset, totalLen, display_string, Styles.PLAIN);
             }
             catch(BadLocationException ble)
             {
                 Log.log(IMPOSSIBLE);
                 Log.log(ble);
-                new_translation = new String();
             }
-            display_string = new_translation;
-        }
 
-        int totalLen = m_sourceDisplayLength + OStrings.getSegmentStartMarker().length() +
-                new_translation.length() + OStrings.getSegmentEndMarker().length();
-        try
-        {
-            // see http://sourceforge.net/support/tracker.php?aid=1436607
-            // this method calls write locks / unlocks
-            xlDoc.replace(m_segmentStartOffset, totalLen, display_string, Styles.PLAIN);
-        }
-        catch(BadLocationException ble)
-        {
-            Log.log(IMPOSSIBLE);
-            Log.log(ble);
-        }
-
-        int localCur = m_curEntryNum - m_xlFirstEntry;
-        DocumentSegment docSeg = m_docSegList[localCur];
-        docSeg.length = display_string.length() + "\n\n".length();              // NOI18N
-
-        if (forceCommit) { // fix for 
-            String old_translation = m_curEntry.getTranslation();
-            // update memory
-            if (   new_translation.equals(m_curEntry.getSrcText())
-                && !Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC))
-                m_curEntry.setTranslation(new String());
-            else
-                m_curEntry.setTranslation(new_translation);
-
-            // update the length parameters of all changed segments
-            // update strings in display
-            if (!m_curEntry.getTranslation().equals(old_translation))
-            {
-                // find all identical strings and redraw them
-
-                // build offsets of all strings
-                int localEntries = 1+m_xlLastEntry-m_xlFirstEntry;
-                int[] offsets = new int[localEntries];
-                int currentOffset = 0;
-                for (int i=0; i<localEntries; i++)
-                {
-                    offsets[i]=currentOffset;
-                    docSeg = m_docSegList[i];
-                    currentOffset += docSeg.length;
-                }
-
-                // starting from the last (guaranteed by sorting ParentList)
-                Iterator it = m_curEntry.getStrEntry().getParentList().iterator();
-                while (it.hasNext())
-                {
-                    SourceTextEntry ste = (SourceTextEntry) it.next();
-                    int entry = ste.entryNum();
-                    if (entry>m_xlLastEntry)
-                        continue;
-                    else if (entry<m_xlFirstEntry)
-                        break;
-                    else if (entry==m_curEntryNum)
-                        continue;
-
-                    int localEntry = entry-m_xlFirstEntry;
-                    int offset = offsets[localEntry];
-
-                    // replace old text w/ new
-                    docSeg = m_docSegList[localEntry];
-                    String ds_nn = display_string + "\n\n";                         // NOI18N
-                    try
-                    {
-                        // see http://sourceforge.net/support/tracker.php?aid=1436607
-                        // this method calls write locks / unlocks
-                        xlDoc.replace(offset, docSeg.length, ds_nn, Styles.PLAIN);
-                    }
-                    catch(BadLocationException ble)
-                    {
-                        Log.log(IMPOSSIBLE);
-                        Log.log(ble);
-                    }
-                    docSeg.length = ds_nn.length();
-                }
-            }
-        }
-        editor.cancelUndo();
-    }
+            int localCur = m_curEntryNum - m_xlFirstEntry;
+            DocumentSegment docSeg = m_docSegList[localCur];
+            docSeg.length = display_string.length() + "\n\n".length();              // NOI18N
     
+            if (forceCommit) { // fix for 
+                String old_translation = m_curEntry.getTranslation();
+                // update memory
+                if (   new_translation.equals(m_curEntry.getSrcText())
+                    && !Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC))
+                    m_curEntry.setTranslation(new String());
+                else
+                    m_curEntry.setTranslation(new_translation);
+    
+                // update the length parameters of all changed segments
+                // update strings in display
+                if (!m_curEntry.getTranslation().equals(old_translation))
+                {
+                    // find all identical strings and redraw them
+    
+                    // build offsets of all strings
+                    int localEntries = 1+m_xlLastEntry-m_xlFirstEntry;
+                    int[] offsets = new int[localEntries];
+                    int currentOffset = 0;
+                    for (int i=0; i<localEntries; i++)
+                    {
+                        offsets[i]=currentOffset;
+                        docSeg = m_docSegList[i];
+                        currentOffset += docSeg.length;
+                    }
+    
+                    // starting from the last (guaranteed by sorting ParentList)
+                    Iterator it = m_curEntry.getStrEntry().getParentList().iterator();
+                    while (it.hasNext())
+                    {
+                        SourceTextEntry ste = (SourceTextEntry) it.next();
+                        int entry = ste.entryNum();
+                        if (entry>m_xlLastEntry)
+                            continue;
+                        else if (entry<m_xlFirstEntry)
+                            break;
+                        else if (entry==m_curEntryNum)
+                            continue;
+    
+                        int localEntry = entry-m_xlFirstEntry;
+                        int offset = offsets[localEntry];
+    
+                        // replace old text w/ new
+                        docSeg = m_docSegList[localEntry];
+                        String ds_nn = display_string + "\n\n";                         // NOI18N
+                        try
+                        {
+                            // see http://sourceforge.net/support/tracker.php?aid=1436607
+                            // this method calls write locks / unlocks
+                            xlDoc.replace(offset, docSeg.length, ds_nn, Styles.PLAIN);
+                        }
+                        catch(BadLocationException ble)
+                        {
+                            Log.log(IMPOSSIBLE);
+                            Log.log(ble);
+                        }
+                        docSeg.length = ds_nn.length();
+                    }
+                }
+            }
+            editor.cancelUndo();
+        } // synchronize (editor)
+    }
+
     /**
      * Activates the current entry by displaying source text and embedding
      * displayed text in markers.
@@ -1700,361 +1717,363 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     {
         if (!isProjectLoaded())
             return;
-        
-        AbstractDocument xlDoc = (AbstractDocument)editor.getDocument();
-        
-        // recover data about current entry
-        // <HP-experiment>
-        if (m_curEntryNum < m_xlFirstEntry) {
-            Log.log("ERROR: Current entry # lower than first entry #");
-            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            // FIX: m_curEntryNum = m_xlFirstEntry;
-        }
-        if (m_curEntryNum > m_xlLastEntry) {
-            Log.log("ERROR: Current entry # greater than last entry #");
-            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            // FIX: m_curEntryNum = m_xlLastEntry;
-        }
-        // </HP-experiment>
-        m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
-        String srcText = m_curEntry.getSrcText();
-        
-        m_sourceDisplayLength = srcText.length();
-        
-        // sum up total character offset to current segment start
-        m_segmentStartOffset = 0;
-        int localCur = m_curEntryNum - m_xlFirstEntry;
-        // <HP-experiment>
-        DocumentSegment docSeg = null; // <HP-experiment> remove once done experimenting
-        try {
-            for (int i=0; i<localCur; i++)
-            {
-                //DocumentSegment // <HP-experiment> re-join with next line once done experimenting
-                docSeg = m_docSegList[i];
-                m_segmentStartOffset += docSeg.length; // length includes \n
-            }
 
-            //DocumentSegment // <HP-experiment> re-join with next line once done experimenting
-            docSeg = m_docSegList[localCur];
-        }
-        catch (Exception exception) {
-            Log.log("ERROR: exception while calculating character offset:");
-            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            Log.log(exception);
-            return; // deliberately breaking, to simulate previous behaviour
-            // FIX: for (int i=0; i<localCur && i < m_docSegList.length; i++)
-        }
-        // </HP-experiment>
-        
-        // -2 to move inside newlines at end of segment
-        m_segmentEndInset = editor.getTextLength() - (m_segmentStartOffset + docSeg.length-2);
-        
-        // get label tags
-        String startStr = OStrings.getSegmentStartMarker();
-        String endStr = OStrings.getSegmentEndMarker();
-        // <HP-experiment>
-        try {
-            if (m_segmentTagHasNumber)
-            {
-                // put entry number in first tag
-                String num = String.valueOf(m_curEntryNum + 1);
-                int zero = startStr.lastIndexOf('0');
-                startStr = startStr.substring(0, zero-num.length()+1) + num + 
-                        startStr.substring(zero+1, startStr.length()-1);
+        synchronized (editor) {
+            AbstractDocument xlDoc = (AbstractDocument)editor.getDocument();
+
+            // recover data about current entry
+            // <HP-experiment>
+            if (m_curEntryNum < m_xlFirstEntry) {
+                Log.log("ERROR: Current entry # lower than first entry #");
+                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                // FIX: m_curEntryNum = m_xlFirstEntry;
             }
-        }
-        catch (Exception exception) {
-            Log.log("ERROR: exception while putting segment # in start tag:");
-            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            Log.log(exception);
-            return; // deliberately breaking, to simulate previous behaviour
-            // FIX: since these are localised, don't assume number appears, keep try/catch block
-        }
-        // </HP-experiment>
-        
-        String translation = m_curEntry.getTranslation();
-        
-        // append to end of segment first
-        try
-        {
-            int endStrPos = m_segmentStartOffset + docSeg.length - 2;
-            xlDoc.insertString(endStrPos, endStr, Styles.BOLD);
-        }
-        catch(BadLocationException ble)
-        {
-            Log.log(IMPOSSIBLE);
-            Log.log(ble);
-        }
-        // <HP-experiment>
-        catch (Exception exception) {
-            Log.log("ERROR: exception while inserting end tag:");
-            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            Log.log(exception);
-            return; // deliberately breaking, to simulate previous behaviour
-            // FIX: unknown
-        }
-        // </HP-experiment>
-        
-        if( translation==null || translation.length()==0 )
-        {
-            translation=m_curEntry.getSrcText();
-            
-            // if "Leave translation empty" is set
-            // then we don't insert a source text into target
-            //
-            // RFE "Option: not copy source text into target field"
-            //      http://sourceforge.net/support/tracker.php?aid=1075972
-            if( Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT) )
-            {
-                try
-                {
-                    xlDoc.remove(m_segmentStartOffset, translation.length());
-                }
-                catch(BadLocationException ble)
-                {
-                    Log.log(IMPOSSIBLE);
-                    Log.log(ble);
-                }
-                // <HP-experiment>
-                catch (Exception exception) {
-                    Log.log("ERROR: exception while removing source text:");
-                    Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                    Log.log(exception);
-                    return; // deliberately breaking, to simulate previous behaviour
-                    // FIX: unknown
-                }
-                // </HP-experiment>
-                translation = new String();
+            if (m_curEntryNum > m_xlLastEntry) {
+                Log.log("ERROR: Current entry # greater than last entry #");
+                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                // FIX: m_curEntryNum = m_xlLastEntry;
             }
-            
-            // if WORKFLOW_OPTION "Insert best fuzzy match into target field" is set
-            // RFE "Option: Insert best match (80%+) into target field"
-            //      http://sourceforge.net/support/tracker.php?aid=1075976
-            if( Preferences.isPreference(Preferences.BEST_MATCH_INSERT) )
-            {
-                String percentage_s = Preferences.getPreferenceDefault(
-                        Preferences.BEST_MATCH_MINIMAL_SIMILARITY, Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT);
-                // <HP-experiment>
-                int percentage = 0;
-                try {
-                    //int
-                    percentage = Integer.parseInt(percentage_s);
-                }
-                catch (Exception exception) {
-                    Log.log("ERROR: exception while parsing percentage:");
-                    Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                    Log.log(exception);
-                    return; // deliberately breaking, to simulate previous behaviour
-                    // FIX: unknown, but expect number parsing errors
-                }
-                // </HP-experiment>
-                List near = m_curEntry.getStrEntry().getNearListTranslated();
-                if( near.size()>0 )
+            // </HP-experiment>
+            m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
+            String srcText = m_curEntry.getSrcText();
+
+            m_sourceDisplayLength = srcText.length();
+
+            // sum up total character offset to current segment start
+            m_segmentStartOffset = 0;
+            int localCur = m_curEntryNum - m_xlFirstEntry;
+            // <HP-experiment>
+            DocumentSegment docSeg = null; // <HP-experiment> remove once done experimenting
+            try {
+                for (int i=0; i<localCur; i++)
                 {
-                    NearString thebest = (NearString)near.get(0);
-                    if( thebest.score >= percentage )
+                    //DocumentSegment // <HP-experiment> re-join with next line once done experimenting
+                    docSeg = m_docSegList[i];
+                    m_segmentStartOffset += docSeg.length; // length includes \n
+                }
+
+                //DocumentSegment // <HP-experiment> re-join with next line once done experimenting
+                docSeg = m_docSegList[localCur];
+            }
+            catch (Exception exception) {
+                Log.log("ERROR: exception while calculating character offset:");
+                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                Log.log(exception);
+                return; // deliberately breaking, to simulate previous behaviour
+                // FIX: for (int i=0; i<localCur && i < m_docSegList.length; i++)
+            }
+            // </HP-experiment>
+
+            // -2 to move inside newlines at end of segment
+            m_segmentEndInset = editor.getTextLength() - (m_segmentStartOffset + docSeg.length-2);
+
+            // get label tags
+            String startStr = OStrings.getSegmentStartMarker();
+            String endStr = OStrings.getSegmentEndMarker();
+            // <HP-experiment>
+            try {
+                if (m_segmentTagHasNumber)
+                {
+                    // put entry number in first tag
+                    String num = String.valueOf(m_curEntryNum + 1);
+                    int zero = startStr.lastIndexOf('0');
+                    startStr = startStr.substring(0, zero-num.length()+1) + num + 
+                            startStr.substring(zero+1, startStr.length()-1);
+                }
+            }
+            catch (Exception exception) {
+                Log.log("ERROR: exception while putting segment # in start tag:");
+                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                Log.log(exception);
+                return; // deliberately breaking, to simulate previous behaviour
+                // FIX: since these are localised, don't assume number appears, keep try/catch block
+            }
+            // </HP-experiment>
+
+            String translation = m_curEntry.getTranslation();
+
+            // append to end of segment first
+            try
+            {
+                int endStrPos = m_segmentStartOffset + docSeg.length - 2;
+                xlDoc.insertString(endStrPos, endStr, Styles.BOLD);
+            }
+            catch(BadLocationException ble)
+            {
+                Log.log(IMPOSSIBLE);
+                Log.log(ble);
+            }
+            // <HP-experiment>
+            catch (Exception exception) {
+                Log.log("ERROR: exception while inserting end tag:");
+                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                Log.log(exception);
+                return; // deliberately breaking, to simulate previous behaviour
+                // FIX: unknown
+            }
+            // </HP-experiment>
+
+            if( translation==null || translation.length()==0 )
+            {
+                translation=m_curEntry.getSrcText();
+
+                // if "Leave translation empty" is set
+                // then we don't insert a source text into target
+                //
+                // RFE "Option: not copy source text into target field"
+                //      http://sourceforge.net/support/tracker.php?aid=1075972
+                if( Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT) )
+                {
+                    try
                     {
-                        int old_tr_len = translation.length();
-                        translation = Preferences.getPreferenceDefault(
-                                Preferences.BEST_MATCH_EXPLANATORY_TEXT,
-                                OStrings.getString("WF_DEFAULT_PREFIX")) +
-                                thebest.str.getTranslation();
-                        try
+                        xlDoc.remove(m_segmentStartOffset, translation.length());
+                    }
+                    catch(BadLocationException ble)
+                    {
+                        Log.log(IMPOSSIBLE);
+                        Log.log(ble);
+                    }
+                    // <HP-experiment>
+                    catch (Exception exception) {
+                        Log.log("ERROR: exception while removing source text:");
+                        Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                        Log.log(exception);
+                        return; // deliberately breaking, to simulate previous behaviour
+                        // FIX: unknown
+                    }
+                    // </HP-experiment>
+                    translation = new String();
+                }
+
+                // if WORKFLOW_OPTION "Insert best fuzzy match into target field" is set
+                // RFE "Option: Insert best match (80%+) into target field"
+                //      http://sourceforge.net/support/tracker.php?aid=1075976
+                if( Preferences.isPreference(Preferences.BEST_MATCH_INSERT) )
+                {
+                    String percentage_s = Preferences.getPreferenceDefault(
+                            Preferences.BEST_MATCH_MINIMAL_SIMILARITY, Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT);
+                    // <HP-experiment>
+                    int percentage = 0;
+                    try {
+                        //int
+                        percentage = Integer.parseInt(percentage_s);
+                    }
+                    catch (Exception exception) {
+                        Log.log("ERROR: exception while parsing percentage:");
+                        Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                        Log.log(exception);
+                        return; // deliberately breaking, to simulate previous behaviour
+                        // FIX: unknown, but expect number parsing errors
+                    }
+                    // </HP-experiment>
+                    List near = m_curEntry.getStrEntry().getNearListTranslated();
+                    if( near.size()>0 )
+                    {
+                        NearString thebest = (NearString)near.get(0);
+                        if( thebest.score >= percentage )
                         {
-                            xlDoc.replace(m_segmentStartOffset, old_tr_len, translation, Styles.PLAIN);
+                            int old_tr_len = translation.length();
+                            translation = Preferences.getPreferenceDefault(
+                                    Preferences.BEST_MATCH_EXPLANATORY_TEXT,
+                                    OStrings.getString("WF_DEFAULT_PREFIX")) +
+                                    thebest.str.getTranslation();
+                            try
+                            {
+                                xlDoc.replace(m_segmentStartOffset, old_tr_len, translation, Styles.PLAIN);
+                            }
+                            catch(BadLocationException ble)
+                            {
+                                Log.log(IMPOSSIBLE);
+                                Log.log(ble);
+                            }
+                            // <HP-experiment>
+                            catch (Exception exception) {
+                                Log.log("ERROR: exception while inserting translation:");
+                                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                                Log.log(exception);
+                                return; // deliberately breaking, to simulate previous behaviour
+                                // FIX: unknown
+                            }
+                            // </HP-experiment>
                         }
-                        catch(BadLocationException ble)
-                        {
-                            Log.log(IMPOSSIBLE);
-                            Log.log(ble);
-                        }
-                        // <HP-experiment>
-                        catch (Exception exception) {
-                            Log.log("ERROR: exception while inserting translation:");
-                            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                            Log.log(exception);
-                            return; // deliberately breaking, to simulate previous behaviour
-                            // FIX: unknown
-                        }
-                        // </HP-experiment>
                     }
                 }
             }
-        }
-        
-        try
-        {
-            xlDoc.insertString(m_segmentStartOffset, " ", Styles.PLAIN);        // NOI18N
-            xlDoc.insertString(m_segmentStartOffset, startStr, Styles.BOLD);
-            xlDoc.insertString(m_segmentStartOffset, srcText, Styles.GREEN);
-        }
-        catch(BadLocationException ble)
-        {
-            Log.log(IMPOSSIBLE);
-            Log.log(ble);
-        }
-        // <HP-experiment>
-        catch (Exception exception) {
-            Log.log("ERROR: exception while inserting translation:");
-            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            Log.log(exception);
-            return; // deliberately breaking, to simulate previous behaviour
-            // FIX: unknown
-        }
-        // </HP-experiment>
-        
-        // <HP-experiment>
-        try {
-            if (m_curEntry.getSrcFile().name.compareTo(m_activeFile) != 0)
-            {
-                m_activeFile = m_curEntry.getSrcFile().name;
-                updateTitle();
-            }
-        }
-        catch (Exception exception) {
-            Log.log("ERROR: exception while updating title:");
-            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            Log.log(exception);
-            return; // deliberately breaking, to simulate previous behaviour
-            // FIX: unknown
-        }
-        // </HP-experiment>
-        
-        // <HP-experiment>
-        try {
-            updateFuzzyInfo();
-            updateGlossaryInfo();
-        }
-        catch (Exception exception) {
-            Log.log("ERROR: exception while updating match and glossary info:");
-            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            Log.log(exception);
-            return; // deliberately breaking, to simulate previous behaviour
-            // FIX: unknown
-        }
-        // </HP-experiment>
-        
-        StringEntry curEntry = m_curEntry.getStrEntry();
-        int nearLength = curEntry.getNearListTranslated().size();
-        
-        // <HP-experiment>
-        try {
-            if (nearLength > 0 && m_glossaryLength > 0)
-            {
-                // display text indicating both categories exist
-                Object obj[] = {
-                    new Integer(nearLength),
-                            new Integer(m_glossaryLength) };
-                            setMessageText(StaticUtils.format(
-                                    OStrings.getString("TF_NUM_NEAR_AND_GLOSSARY"), obj));
-            }
-            else if (nearLength > 0)
-            {
-                Object obj[] = { new Integer(nearLength) };
-                setMessageText(StaticUtils.format(
-                        OStrings.getString("TF_NUM_NEAR"), obj));
-            }
-            else if (m_glossaryLength > 0)
-            {
-                Object obj[] = { new Integer(m_glossaryLength) };
-                setMessageText(StaticUtils.format(
-                        OStrings.getString("TF_NUM_GLOSSARY"), obj));
-            }
-            else
-                setMessageText(new String());                                       // NOI18N
-        }
-        catch (Exception exception) {
-            Log.log("ERROR: exception while setting message text:");
-            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            Log.log(exception);
-            return; // deliberately breaking, to simulate previous behaviour
-            // FIX: unknown
-        }
-        // </HP-experiment>
 
-        int offsetPrev = 0;
-        int localNum = m_curEntryNum-m_xlFirstEntry;
-        // <HP-experiment>
-        try {
-            for (int i=Math.max(0, localNum-3); i<localNum; i++)
+            try
             {
-                docSeg = m_docSegList[i];
-                offsetPrev += docSeg.length;
+                xlDoc.insertString(m_segmentStartOffset, " ", Styles.PLAIN);        // NOI18N
+                xlDoc.insertString(m_segmentStartOffset, startStr, Styles.BOLD);
+                xlDoc.insertString(m_segmentStartOffset, srcText, Styles.GREEN);
             }
-        }
-        catch (Exception exception) {
-            Log.log("ERROR: exception while calculating previous offset:");
-            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            Log.log(exception);
-            return; // deliberately breaking, to simulate previous behaviour
-            // FIX: unknown
-        }
-        // </HP-experiment>
-        final int lookPrev = m_segmentStartOffset - offsetPrev;
-        
-        int offsetNext = 0;
-        int localLast = m_xlLastEntry-m_xlFirstEntry;
-        // <HP-experiment>
-        try {
-            for (int i=localNum+1; i<(localNum+4) && i<=localLast; i++)
+            catch(BadLocationException ble)
             {
-                docSeg = m_docSegList[i];
-                offsetNext += docSeg.length;
+                Log.log(IMPOSSIBLE);
+                Log.log(ble);
             }
-        }
-        catch (Exception exception) {
-            Log.log("ERROR: exception while calculating next offset:");
-            Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-            Log.log(exception);
-            return; // deliberately breaking, to simulate previous behaviour
-            // FIX: unknown
-        }
-        // </HP-experiment>
-        final int lookNext = m_segmentStartOffset + srcText.length() + 
-                OStrings.getSegmentStartMarker().length() + 1 + translation.length() + 
-                OStrings.getSegmentEndMarker().length() + offsetNext;
-        
-        SwingUtilities.invokeLater(new Runnable()
-        {
-            public void run()
-            {
-                try
+            // <HP-experiment>
+            catch (Exception exception) {
+                Log.log("ERROR: exception while inserting translation:");
+                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                Log.log(exception);
+                return; // deliberately breaking, to simulate previous behaviour
+                // FIX: unknown
+            }
+            // </HP-experiment>
+
+            // <HP-experiment>
+            try {
+                if (m_curEntry.getSrcFile().name.compareTo(m_activeFile) != 0)
                 {
-                    editor.setCaretPosition(lookNext);
-                    SwingUtilities.invokeLater(new Runnable()
-                    {
-                        public void run()
-                        {
-                            try
-                            {
-                                editor.setCaretPosition(lookPrev);
-                                SwingUtilities.invokeLater(new Runnable()
-                                {
-                                    public void run()
-                                    {
-                                        checkCaret();
-                                    }
-                                });
-                            }
-                            catch(IllegalArgumentException iae)
-                            {} // eating silently
-                        }
-                    });
+                    m_activeFile = m_curEntry.getSrcFile().name;
+                    updateTitle();
                 }
-                catch(IllegalArgumentException iae)
-                {} // eating silently
             }
-        });
-        
-        if (!m_docReady)
-        {
-            m_docReady = true;
-        }
-        editor.cancelUndo();
-        
+            catch (Exception exception) {
+                Log.log("ERROR: exception while updating title:");
+                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                Log.log(exception);
+                return; // deliberately breaking, to simulate previous behaviour
+                // FIX: unknown
+            }
+            // </HP-experiment>
+
+            // <HP-experiment>
+            try {
+                updateFuzzyInfo();
+                updateGlossaryInfo();
+            }
+            catch (Exception exception) {
+                Log.log("ERROR: exception while updating match and glossary info:");
+                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                Log.log(exception);
+                return; // deliberately breaking, to simulate previous behaviour
+                // FIX: unknown
+            }
+            // </HP-experiment>
+
+            StringEntry curEntry = m_curEntry.getStrEntry();
+            int nearLength = curEntry.getNearListTranslated().size();
+
+            // <HP-experiment>
+            try {
+                if (nearLength > 0 && m_glossaryLength > 0)
+                {
+                    // display text indicating both categories exist
+                    Object obj[] = {
+                        new Integer(nearLength),
+                                new Integer(m_glossaryLength) };
+                                setMessageText(StaticUtils.format(
+                                        OStrings.getString("TF_NUM_NEAR_AND_GLOSSARY"), obj));
+                }
+                else if (nearLength > 0)
+                {
+                    Object obj[] = { new Integer(nearLength) };
+                    setMessageText(StaticUtils.format(
+                            OStrings.getString("TF_NUM_NEAR"), obj));
+                }
+                else if (m_glossaryLength > 0)
+                {
+                    Object obj[] = { new Integer(m_glossaryLength) };
+                    setMessageText(StaticUtils.format(
+                            OStrings.getString("TF_NUM_GLOSSARY"), obj));
+                }
+                else
+                    setMessageText(new String());                                       // NOI18N
+            }
+            catch (Exception exception) {
+                Log.log("ERROR: exception while setting message text:");
+                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                Log.log(exception);
+                return; // deliberately breaking, to simulate previous behaviour
+                // FIX: unknown
+            }
+            // </HP-experiment>
+
+            int offsetPrev = 0;
+            int localNum = m_curEntryNum-m_xlFirstEntry;
+            // <HP-experiment>
+            try {
+                for (int i=Math.max(0, localNum-3); i<localNum; i++)
+                {
+                    docSeg = m_docSegList[i];
+                    offsetPrev += docSeg.length;
+                }
+            }
+            catch (Exception exception) {
+                Log.log("ERROR: exception while calculating previous offset:");
+                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                Log.log(exception);
+                return; // deliberately breaking, to simulate previous behaviour
+                // FIX: unknown
+            }
+            // </HP-experiment>
+            final int lookPrev = m_segmentStartOffset - offsetPrev;
+
+            int offsetNext = 0;
+            int localLast = m_xlLastEntry-m_xlFirstEntry;
+            // <HP-experiment>
+            try {
+                for (int i=localNum+1; i<(localNum+4) && i<=localLast; i++)
+                {
+                    docSeg = m_docSegList[i];
+                    offsetNext += docSeg.length;
+                }
+            }
+            catch (Exception exception) {
+                Log.log("ERROR: exception while calculating next offset:");
+                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                Log.log(exception);
+                return; // deliberately breaking, to simulate previous behaviour
+                // FIX: unknown
+            }
+            // </HP-experiment>
+            final int lookNext = m_segmentStartOffset + srcText.length() + 
+                    OStrings.getSegmentStartMarker().length() + 1 + translation.length() + 
+                    OStrings.getSegmentEndMarker().length() + offsetNext;
+
+            SwingUtilities.invokeLater(new Runnable()
+            {
+                public void run()
+                {
+                    try
+                    {
+                        editor.setCaretPosition(lookNext);
+                        SwingUtilities.invokeLater(new Runnable()
+                        {
+                            public void run()
+                            {
+                                try
+                                {
+                                    editor.setCaretPosition(lookPrev);
+                                    SwingUtilities.invokeLater(new Runnable()
+                                    {
+                                        public void run()
+                                        {
+                                            checkCaret();
+                                        }
+                                    });
+                                }
+                                catch(IllegalArgumentException iae)
+                                {} // eating silently
+                            }
+                        });
+                    }
+                    catch(IllegalArgumentException iae)
+                    {} // eating silently
+                }
+            });
+
+            if (!m_docReady)
+            {
+                m_docReady = true;
+            }
+            editor.cancelUndo();
+        } // synchronize (editor)
+
         entryActivated = true;
     }
-    
+
     /**
      * Displays a warning message.
      *
@@ -2096,84 +2115,89 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      */
     public synchronized boolean checkCaretForDelete(boolean forward)
     {
-        int pos = editor.getCaretPosition();
-        
-        // make sure range doesn't overlap boundaries
-        checkCaret();
-        
-        if (forward)
-        {
-            // make sure we're not at end of segment
-            // -1 for space before tag, -2 for newlines
-            int end = editor.getTextLength() - m_segmentEndInset -
-                    OStrings.getSegmentEndMarker().length();
-            int spos = editor.getSelectionStart();
-            int epos = editor.getSelectionEnd();
-            if( pos>=end && spos>=end && epos>=end )
-                return false;
-        }
-        else
-        {
-            // make sure we're not at start of segment
-            int start = m_segmentStartOffset + m_sourceDisplayLength +
-                    OStrings.getSegmentStartMarker().length();
-            int spos = editor.getSelectionStart();
-            int epos = editor.getSelectionEnd();
-            if( pos<=start && epos<=start && spos<=start )
-                return false;
-        }
+        synchronized (editor) {
+            int pos = editor.getCaretPosition();
+
+            // make sure range doesn't overlap boundaries
+            checkCaret();
+
+            if (forward)
+            {
+                // make sure we're not at end of segment
+                // -1 for space before tag, -2 for newlines
+                int end = editor.getTextLength() - m_segmentEndInset -
+                        OStrings.getSegmentEndMarker().length();
+                int spos = editor.getSelectionStart();
+                int epos = editor.getSelectionEnd();
+                if( pos>=end && spos>=end && epos>=end )
+                    return false;
+            }
+            else
+            {
+                // make sure we're not at start of segment
+                int start = m_segmentStartOffset + m_sourceDisplayLength +
+                        OStrings.getSegmentStartMarker().length();
+                int spos = editor.getSelectionStart();
+                int epos = editor.getSelectionEnd();
+                if( pos<=start && epos<=start && spos<=start )
+                    return false;
+            }
+        } // synchronized (editor)
+
         return true;
     }
-    
+
     /**
      * Checks whether the selection & caret is inside editable text,
      * and changes their positions accordingly if not.
      */
     public synchronized void checkCaret()
     {
-        //int pos = m_editor.getCaretPosition();
-        int spos = editor.getSelectionStart();
-        int epos = editor.getSelectionEnd();
-        int start = m_segmentStartOffset + m_sourceDisplayLength +
-                OStrings.getSegmentStartMarker().length();
-        // -1 for space before tag, -2 for newlines
-        int end = editor.getTextLength() - m_segmentEndInset -
-                OStrings.getSegmentEndMarker().length();
-        
-        if (spos != epos)
-        {
-            // dealing with a selection here - make sure it's w/in bounds
-            if (spos < start)
-            {
-                editor.setSelectionStart(start);
-            }
-            else if (spos > end)
-            {
-                editor.setSelectionStart(end);
-            }
-            if (epos > end)
-            {
-                editor.setSelectionEnd(end);
-            }
-            else if (epos < start)
-            {
-                editor.setSelectionStart(start);
-            }
-        }
-        else
-        {
-            // non selected text
-            if (spos < start)
-            {
-                editor.setCaretPosition(start);
-            }
-            else if (spos > end)
-            {
-                editor.setCaretPosition(end);
-            }
-        }
-    }
+        synchronized (editor) {
+            //int pos = m_editor.getCaretPosition();
+            int spos = editor.getSelectionStart();
+            int epos = editor.getSelectionEnd();
+            int start = m_segmentStartOffset + m_sourceDisplayLength +
+                    OStrings.getSegmentStartMarker().length();
+            // -1 for space before tag, -2 for newlines
+            int end = editor.getTextLength() - m_segmentEndInset -
+                    OStrings.getSegmentEndMarker().length();
     
+            if (spos != epos)
+            {
+                // dealing with a selection here - make sure it's w/in bounds
+                if (spos < start)
+                {
+                    editor.setSelectionStart(start);
+                }
+                else if (spos > end)
+                {
+                    editor.setSelectionStart(end);
+                }
+                if (epos > end)
+                {
+                    editor.setSelectionEnd(end);
+                }
+                else if (epos < start)
+                {
+                    editor.setSelectionStart(start);
+                }
+            }
+            else
+            {
+                // non selected text
+                if (spos < start)
+                {
+                    editor.setCaretPosition(start);
+                }
+                else if (spos > end)
+                {
+                    editor.setCaretPosition(end);
+                }
+            }
+        } // synchronized (editor)
+    }
+
     public void fatalError(String msg, Throwable re)
     {
         Log.log(msg);
@@ -2924,7 +2948,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     {//GEN-HEADEREND:event_editRedoMenuItemActionPerformed
         try
         {
-            editor.redoOneEdit();
+            synchronized (editor) {editor.redoOneEdit();}
         }
         catch (CannotRedoException cue)
         { }
@@ -2934,7 +2958,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     {//GEN-HEADEREND:event_editUndoMenuItemActionPerformed
         try
         {
-            editor.undoOneEdit();
+            synchronized (editor) {editor.undoOneEdit();}
         }
         catch( CannotUndoException cue )
         { }

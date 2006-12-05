@@ -836,9 +836,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         synchronized (editor) {
             // build local offsets
             int start = m_segmentStartOffset + m_sourceDisplayLength +
-                    OStrings.getSegmentStartMarker().length() + 1;
+                    OStrings.getSegmentStartMarker().length();
             int end = editor.getTextLength() - m_segmentEndInset -
-                    OStrings.getSegmentEndMarker().length() - 1;
+                    OStrings.getSegmentEndMarker().length();
 
             // remove text
             editor.select(start, end);

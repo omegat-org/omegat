@@ -167,7 +167,7 @@ OmegaT uses the following libraries:
   HTMLParser by Somik Raha, Derrick Oswald and others (LGPL License).
   http://sourceforge.net/projects/htmlparser
   
-  MRJ Adapter by Steve Roy (LGPL License).
+  MRJ Adapter by Steve Roy (Artistic License).
   http://homepage.mac.com/sroy/mrjadapter/
   
   VLDocking Framework by VLSolutions (CeCILL License).

@@ -140,7 +140,7 @@ Ostali doprinosi
 
 OmegaT koristi sljede?e biblioteke:
   HTML Parser autora Somik Raha, Derrick Oswald-a i drugih (Common Public License).
-  MRJ Adapter Steve Roy-a (LGPL License).
+  MRJ Adapter Steve Roy-a (Artistic License).
   VLDocking Framework od strane VLSolutions (CeCILL License).
 
 ==============================================================================

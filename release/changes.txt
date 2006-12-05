@@ -4,14 +4,14 @@
 
 1.7.0 vs. 1.6.1_01
 
-  2 Enhancements
-  1 Bugfixes
+  4 Enhancements
+  2 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.0
 SAY SOMETHING USEFUL
 
- Enhancements:
+ Implemented requests:
 
   - Jump to segment #
   http://sourceforge.net/support/tracker.php?aid=1086959
@@ -19,10 +19,20 @@ SAY SOMETHING USEFUL
   - Indicate number of results in search window
   http://sourceforge.net/support/tracker.php?aid=1427915
 
+  - Log file l10n and debugging
+  http://sourceforge.net/support/tracker.php?aid=1209835
+
+ Other enhancements:
+
+  - New logging API
+
  Bug fixes:
 
   - Hardcoded bits of text unlocalisable
   http://sourceforge.net/support/tracker.php?aid=1602798
+
+  - log.txt encoding
+  http://sourceforge.net/support/tracker.php?aid=1600139
 
 ----------------------------------------------------------------------
 

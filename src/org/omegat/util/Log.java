@@ -50,7 +50,7 @@ public class Log {
         return StaticUtils.getConfigDir() + FILE_LOG;
     }
 
-    private static PrintWriter log = null;
+    private static PrintWriter log = getLogWriter();
     /**
       * Returns a writer for writing to the log.
       *

@@ -244,7 +244,7 @@ public class Log {
       */
     public static void logWarning(String id, String message, Object[] parameters) {
         logIdentifiableMessage(
-            StaticUtils.format(OStrings.getString("SU_LOG_WARNING_ID"),
+            StaticUtils.format(OStrings.getString("LOG_WARNING_ID"),
                                new Object[] {id}),
             message,
             parameters);
@@ -326,7 +326,7 @@ public class Log {
       */
     public static void logError(String id, String message, Object[] parameters) {
         logIdentifiableMessage(
-            StaticUtils.format(OStrings.getString("SU_LOG_ERROR_ID"),
+            StaticUtils.format(OStrings.getString("LOG_ERROR_ID"),
                                new Object[] {id}),
             message,
             parameters);

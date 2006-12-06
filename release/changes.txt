@@ -4,7 +4,7 @@
 
 1.6.1_02 vs. 1.4.5.04
    64 Enchancements
-  119 Bugfixes
+  120 Bugfixes
 
 ----------------------------------------------------------------------
 1.6.1_02
@@ -31,6 +31,9 @@ and an important bug fix
 
   - Corrupted TMX after weird GUI interaction
   http://sourceforge.net/support/tracker.php?aid=1604963
+
+  - Inconsistent license information
+  http://sourceforge.net/support/tracker.php?aid=1609275
 
 ----------------------------------------------------------------------
 1.6.1_01

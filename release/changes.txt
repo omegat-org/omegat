@@ -27,6 +27,10 @@ and an important bug fix
   - Legacy user manual translations re-introduced for Belo-Russian,
   German, Esperanto, Spanish, French, Japanese, and Russian.
 
+  - Italian user manual translation
+
+  - Albanian UI localisation + instant start guide translation
+
  Bug fixes:
 
   - Corrupted TMX after weird GUI interaction

@@ -1,0 +1,214 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Lavorazione di testi formattati - Manuale per l'Utente di OmegaT 1.6.1</title>
+</head>
+<body>
+
+<h1>Lavorazione di testi formattati</h1>
+
+<h2>Sommario</h2>
+
+<ul type="none">
+   <li>1. <a href="#Formatted_Text_in_OmegaT">Testo formattato in OmegaT</a>
+
+      <ul type="none">
+         <li>1.1. <a href="#Tag_naming">Assegnazione di nomi ai tag</a></li>
+         <li>1.2. <a href="#Tag_numbering">Numerazione dei tag</a></li>
+         <li>1.3. <a href="#Pairs_and_singletons">Tag in coppia e tag singoli</a></li>
+         <li>1.4. <a href="#Tags_and_sentence_segmenting">Tag e segmentazione della frase</a></li>
+
+         <li>1.5. <a href="#Tag_operations">Operazioni sui tag</a>
+
+            <ul type="none">
+               <li>1.5.1. <a href="#Tag_group_duplication">Duplicazione di un gruppo di tag</a></li>
+               <li>1.5.2. <a href="#Tag_group_deletion">Eliminazione di un gruppo di tag</a></li>
+               <li>1.5.3. <a href="#Tag_group_order_modification">Modifica dell'ordine di un gruppo di tag</a></li>
+               <li>1.5.4. <a href="#Tag_group_nesting">Annidamento di un gruppo di tag</a></li>
+            </ul>
+         </li>
+
+         <li>1.6. <a href="#Tag_group_overlapping">Sovrapposizione di un gruppo di tag</a></li>
+         <li>1.7. <a href="#Tag_group_validation">Convalida di un gruppo di tag</a></li>
+         <li>1.8. <a href="#Hints_for_tags_management">Consigli per la gestione dei tag</a></li>
+         <li>1.9. <a href="#Important">Importante</a></li>
+      </ul>
+   </li>
+</ul>
+
+<a name="Formatted_Text_in_OmegaT"></a>
+<h2>Testo formattato in OmegaT</h2>
+
+<p>Le informazioni di formattazione che si trovano nel file di partenza, di solito, dovrebbero anche essere trasferite al file di arrivo. OmegaT visualizza le informazioni di formattazione all'interno dei segmenti dei file riconosciuti (attualmente DocBook, HTML, XHTML, Open Document e OpenOffice.org) sotto forma di tag. I tag non vengono di solito presi in considerazione nelle operazioni di confronto della similitudine fra due stringhe per l'analisi delle corrispondenze parziali. I tag che appaiono all'interno del segmento tradotto saranno presenti anche all'interno del documento finale tradotto.</p>
+
+<a name="Tag_naming"></a>
+<h3>Assegnazione di nomi ai tag</h3>
+
+<p>I tag sono composti da uno a tre caratteri e da un numero. I numeri identificativi consentono di raggruppare quei tag che hanno fra di loro una corrispondenza e differenziano i tag che possono essere associati allo stesso carattere rapido, anche se, in effetti, sono diversi.</p>
+
+<p>I caratteri possono, o meno, riflettere il valore della formattazione rappresentato dal tag stesso (per esempio: neretto, corsivo ecc.)</p>
+
+<a name="Tag_numbering"></a>
+<h3>Numerazione dei tag</h3>
+
+<p>I tag sono numerati, in modo incrementale, in base al <strong>gruppo di tag</strong>.</p>
+
+<p>Ciò che qui viene chiamato “gruppo di tag” si riferisce sia a un tag singolo (come nel caso di <code>&lt;br1&gt;</code>), a se stante, sia a 2 tag, sotto forma di coppia (come nel caso di <code>&lt;f3&gt;</code> e <code>&lt;/f3&gt;</code>).</p>
+
+<p>All'interno di un segmento, il primo gruppo (in coppia o singolo) è associato al numero <strong>0</strong>, il secondo al numero <strong>1</strong> ecc.</p>
+
+<p>Il primo esempio qui sotto riportato è composto da 3 gruppi di tag (una coppia, un singolo e, quindi, un'altra coppia) mentre il secondo esempio ne contiene solo uno (una coppia).</p>
+
+<a name="Pairs_and_singletons"></a>
+<h3>Tag in coppia e tag singoli</h3>
+
+<p>I tag sono sempre singoli o in coppia.</p>
+
+<p>
+<strong>I tag singoli</strong> indicano le informazioni di formattazione che non coinvolgono il testo circostante (per esempio, inserimento di spazi aggiuntivi o di interruzioni di riga).</p>
+
+<pre>   <strong>&lt;segmento 2132&gt;</strong>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;<strong>&lt;fine segmento&gt;</strong></pre>
+
+<p>
+<code><strong>&lt;br1&gt;</strong></code> è un tag singolo e non influisce sul testo circostante.</p>
+
+<p>
+<strong>I tag accoppiati</strong>, di solito, indicano informazioni di stile che verranno applicate al testo contenuto tra il tag di apertura e quello di chiusura della coppia. Qualsiasi cosa accada a una coppia, il tag di apertura dovrà sempre precedere quello di chiusura.</p>
+
+<pre>   <strong>&lt;segmento 3167&gt;</strong>File di log (&lt;f1&gt;log.txt&lt;/f1&gt;) per la registrazione delle operazioni e degli errori.<strong>&lt;fine segmento&gt;</strong></pre>
+
+<p>
+<code><strong>&lt;f1&gt;</strong></code> e <code><strong>&lt;/f1&gt;</strong></code> sono tag accoppiati e influiscono su <code><strong>log.txt</strong></code>.</p>
+
+<a name="Tags_and_sentence_segmenting"></a>
+<h3>Tag e segmentazione della frase</h3>
+
+<p>OmegaT, prima di procedere con la segmentazione delle frasi, crea i propri tag. In base alle regole di segmentazione, i tag potrebbero comparire come se non venissero rispettate le regole di numerazione e di raggruppamento qui sopra espresse.</p>
+
+<pre>   <strong>&lt;segmento 1554&gt;</strong> &lt;c0&gt;Prima: \. Dopo: \s&lt;/c0&gt;<br> &lt;b2&gt;Nota:&lt;/b2&gt;<br>
+“\.” corrisponde al carattere del punto (“.”)&lt;br3&gt; “\s” corrisponde a un carattere di spazio bianco<strong>&lt;fine segmento&gt;</strong></pre>
+
+<p>Qui non sembra che vi siano problemi. Ora, se a questo segmento vengono applicate le regole predefinite della segmentazione (ovvero il comportamento predefinito di OmegaT) otterremo il seguente risultato:</p>
+
+<pre>   <strong>&lt;segmento 1990&gt;</strong> &lt;c0&gt;Prima: \. <strong>&lt;fine segmento&gt;</strong>
+
+   <strong>&lt;segmento 1991&gt;</strong> Dopo: \s&lt;/c0&gt;&lt;br1&gt; <strong>&lt;fine segmento&gt;</strong>
+
+   <strong>&lt;segmento 1992&gt;</strong> &lt;b2&gt;Nota:&lt;/b2&gt; "\." corrisponde al carattere del punto (“.”)&lt;br3&gt;<strong>&lt;fine segmento&gt;</strong>
+
+   <strong>&lt;segmento 1993&gt;</strong> “\s” corrisponde a un carattere di spazio bianco<strong>&lt;fine segmento&gt;</strong></pre>
+
+<p>(Le regole di segmentazione adottate sono: <i>segmento dopo un punto seguito da uno spazio</i> e <i>segmento dopo un tag di interruzione di riga</i>.)</p>
+
+<p>Qui, si può notare che i singoli segmenti non rispettano le regole di accoppiamento e di numerazione: <code>&lt;cO&gt;</code> e <code>&lt;/cO&gt;</code> dovrebbero essere accoppiati sullo stesso segmento ma, in effetti, vengono separati dalle regole di segmentazione.</p>
+
+<p>Vi sono alcune occasioni nelle quali potrebbero sorgere problemi nel testo finale tradotto, ovvero quando i tag devono essere spostati all'interno del documento di arrivo per riflettere l'ordine delle parole della lingua di destinazione (si veda, più sotto, la sezione <a href="#Tag_operations" title="Lavorazione di testi formattati">Operazioni sui tag</a>).</p>
+
+<a name="Tag_operations"></a>
+<h3>Operazioni sui tag</h3>
+
+<p>Quando si agisce su tag è necessario prestare una particolare attenzione. Se vengono accidentalmente cambiati, la formattazione del documento finale potrebbe presentare problemi. Nello scenario peggiore, un errore potrebbe anche portare alla mancata apertura del file, e ciò è particolarmente vero per quanto riguarda i file OpenOffice.org.</p>
+
+<a name="Tag_group_duplication"></a>
+<h4>Duplicazione di un gruppo di tag</h4>
+
+<p>Per duplicare gruppi di tag sarà sufficiente copiarli nella posizione finale corretta. Si tenga a mente che in un gruppo accoppiato, il tag di apertura deve sempre precedere quello di chiusura.</p>
+
+<p>La formattazione associata al gruppo duplicato verrà applicata alla sezione nella quale si è effettuata la duplicazione.</p>
+
+<p>Esempio:</p>
+
+<pre>   <strong>&lt;segmento 0001&gt;</strong>&lt;f0&gt;This formatting&lt;/f0&gt; is going to be duplicated here.<strong>&lt;fine segmento&gt;</strong></pre>
+
+<p>Dopo aver effettuato la duplicazione si otterrà:</p>
+
+<pre>   <strong>&lt;segmento 0001&gt;</strong>&lt;f0&gt;Questa formattazione&lt;/f0&gt; è stata &lt;f0&gt;duplicata qui&lt;/f0&gt;.<strong>&lt;fine segmento&gt;</strong></pre>
+
+<a name="Tag_group_deletion"></a>
+<h4>Eliminazione di un gruppo di tag</h4>
+
+<p>Per eliminare gruppi di tag sarà sufficiente cancellarli dall'interno del segmento. Si tenga però presente che, per eliminare tutte le tracce della formattazione, sarà necessario eliminare sia il tag di apertura sia quello di chiusura; in caso contrario il file tradotto potrebbe risultare danneggiato e potrebbe anche non essere possibile aprirlo.</p>
+
+<p>L'eliminazione di un gruppo di tag rimuoverà dal file finale tradotto tutte le informazioni di formattazione correlate.</p>
+
+<p>Esempio:</p>
+
+<pre>   <strong>&lt;segmento 0001&gt;</strong>&lt;f0&gt;This formatting&lt;/f0&gt; is going to be deleted.<strong>&lt;fine segmento&gt;</strong></pre>
+
+<p>Dopo l'eliminazione si otterrà:</p>
+
+<pre>   <strong>&lt;segmento 0001&gt;</strong>Questa formattazione è stata eliminata.<strong>&lt;fine segmento&gt;</strong></pre>
+
+<a name="Tag_group_order_modification"></a>
+<h4>Modifica dell'ordine di un gruppo di tag</h4>
+
+<p>Per modificare l'ordine di un gruppo di tag in modo da riflettere nella traduzione la corretta struttura linguistica sequenziale delle parole, sarà sufficiente inserire il gruppo di tag dove questo dovrebbe correttamente apparire all'interno del documento finale tradotto.</p>
+
+<p>La formattazione verrà applicata alla parte corrispondente.</p>
+
+<p>Esempio:</p>
+
+<pre>   <strong>&lt;segmento 0001&gt;</strong>&lt;f0&gt;The formatting here&lt;/f0&gt; and &lt;f1&gt;the formatting here&lt;/f1&gt; are going to be moved around.<strong>&lt;fine segmento&gt;</strong></pre>
+
+<p>Dopo la modifica dell'ordine si otterrà:</p>
+
+<pre>   <strong>&lt;segmento 0001&gt;</strong>&lt;f1&gt;Questa formattazione&lt;/f1&gt; e &lt;f0&gt;questa formattazione&lt;/f0&gt; sono state ribaltate.<strong>&lt;fine segmento&gt;</strong></pre>
+
+<a name="Tag_group_nesting"></a>
+<h4>Annidamento di un gruppo di tag</h4>
+
+<p>La modifica dell'ordine del gruppo di tag potrebbe anche portare all'annidamento di un gruppo di tag all'interno di un altro gruppo di tag. Si tratta di una condizione possibile fintanto che il gruppo di tag esterno comprende completamente il gruppo di tag annidato. Quando deve effettuare un annidamento è necessario prestare un'attenzione particolare, specialmente nelle occasioni in cui le coppie di tag non vengono completamente spostate all'interno di un gruppo di contenimento; in questo caso il documento finale potrebbe risultare danneggiato e potrebbe anche non essere possibile aprirlo.</p>
+
+<p>La parte annidata dovrà prevedere la presenza di entrambi i tag di formattazione.</p>
+
+<p>Esempio:</p>
+
+<pre>   <strong>&lt;segmento 0001&gt;</strong>&lt;f0&gt;The formatting&lt;/f0&gt; &lt;f1&gt;here&lt;/f1&gt; is going to be nested.<strong>&lt;fine segmento&gt;</strong></pre>
+
+<p>Dopo l'annidamento si otterrà:</p>
+
+<pre>   <strong>&lt;segmento 0001&gt;</strong>&lt;f0&gt;&lt;f1&gt;Questa&lt;/f1&gt; formattazione&lt;/f0&gt; è stata annidata nel primo gruppo di tag di formattazione.<strong>&lt;fine segmento&gt;</strong></pre>
+
+<a name="Tag_group_overlapping"></a>
+<h3>Sovrapposizione di un gruppo di tag</h3>
+
+<p>La sovrapposizione è il risultato della scorretta manipolazione della coppie di tag e porterà certamente a un danneggiamento della formattazione e, a volte, all'impossibilità di aprire il file tradotto.</p>
+
+<p>Esempio:</p>
+
+<pre>   <strong>&lt;segmento 0001&gt;</strong>&lt;f0&gt;The formatting&lt;/f0&gt; &lt;f1&gt;here&lt;/f1&gt; is going to be messed up.<strong>&lt;fine segmento&gt;</strong></pre>
+
+<p>Dopo la manipolazione non corretta si potrebbe ottenere:</p>
+
+<pre>   <strong>&lt;segmento 0001&gt;</strong>&lt;f0&gt;the formatting &lt;f1&gt;here&lt;/f0&gt; &lt;/f1&gt;is very messed up now.<strong>&lt;fine segmento&gt;</strong></pre>
+
+<a name="Tag_group_validation"></a>
+<h3>Convalida di un gruppo di tag</h3>
+
+<p>La funzione di convalida dei tag (<a href="userInterface.html#Tag_Validation" title="Interfaccia utente">Convalida i tag</a>) rileva i tag che sono stati modificati (sia in modo deliberato sia accidentalmente), e indica i segmenti coinvolti. L'uso di questa funzione apre una finestra di dialogo nella quale vengono riportati tutti i tag sospetti o scorretti all'interno di un documento.</p>
+
+<p>Questa funzione potrebbe risultare particolarmente utile per rilevare gli errori presenti all'interno del testo tradotto contenente tag. Spesso questo è un problema per i file OpenDocument od OpenOffice.org in quanto potrebbe accadere che non sia possibile aprirli a causa di problemi correlati ai tag generati nel corso del processo di traduzione. Per risolvere il problema si può correggere gli errori dei tag e ricreare di nuovo il documento finale tradotto.</p>
+
+<a name="Hints_for_tags_management"></a>
+<h3>Consigli per la gestione dei tag</h3>
+
+<p>I tag, di solito, rappresentano elementi di formattazione presenti nel testo originale. <strong>La semplicità della formattazione del testo originale</strong> contribuisce in modo sostanziale alla riduzione del numero dei tag. Quando è possibile, si dovrebbe prendere in considerazione l'uniformazione dei caratteri utilizzati, della loro dimensione, dei loro colori ecc. Ciò semplificherà il processo di traduzione e ridurrà la quantità di possibili errori nei tag.</p>
+
+<p>Si consiglia di leggere la sezione <a href="#Tag_operations" title="Lavorazione di testi formattati">Operazioni con i tag</a> per capire come è possibile intervenire su questi elementi.</p>
+
+<p>Si ricordi che se si ha difficoltà nella gestione dei tag e se la formattazione non ha un'importanza primaria per il lavoro che si sta eseguendo, si ha sempre la possibilità di rimuovere da un testo originale la maggior parte della formattazione, semplificando, in questo modo, il lavoro di traduzione.</p>
+
+<p>Se si vogliono visualizzare i tag in OmegaT ma non si ha la necessità di conservarli all'interno del documento tradotto, si potrà anche evitare di inserirli nella versione finale del documento. In questo caso <strong>si consiglia di prestare ulteriore attenzione alle coppie di tag</strong> poiché la mancata eliminazione di un elemento della coppia potrebbe portare a una scorretta formattazione del documento e anche impedire ad OpenOffice.org di aprire il documento finale tradotto.</p>
+
+<p>Poiché i tag fanno parte del testo, è possibile adottare <a href="segmentation.html" title="Segmentazione del documento originale">regole di segmentazione</a> in modo da creare segmenti che contengano un numero inferiore di tag. Si tratta, in questo caso, di una funzione di tipo avanzato e che non dovrebbe venire utilizzata dagli utenti principianti.</p>
+
+<a name="Important"></a>
+<h3>Importante</h3>
+
+<p>OmegaT non è ancora in grado di rilevare in modo completamente automatico gli errori di formattazione, pertanto non segnalerà eventuali errori o modifiche di formattazione applicate al documento finale per adattarlo alla lingua di destinazione. A volte, tuttavia, il file tradotto potrebbe apparire non corretto e, nel caso di file OpenDocument / OpenOffice.org, ciò potrebbe anche determinare l'impossibilità dell'apertura del file stesso.</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Avvertenze legali">Avvertenze legali</a></p>
+
+</body>
+</html>

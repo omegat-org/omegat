@@ -1,0 +1,195 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Ricerche - Manuale per l'Utente di OmegaT 1.6.1</title>
+</head>
+<body>
+
+<h1>Ricerche</h1>
+
+<h2>Sommario</h2>
+
+<ul type="none">
+   <li>1. <a href="#Search_window">Finestra “Cerca”</a></li>
+   <li>2. <a href="#Search_locations">Posizioni di ricerca</a></li>
+
+   <li>3. <a href="#Search_methods">Metodi di ricerca</a>
+
+      <ul type="none">
+         <li>3.1. <a href="#Exact searches">Ricerca esatta</a></li>
+         <li>3.2. <a href="#Keyword_searches">Ricerca con parole chiave</a></li>
+      </ul>
+   </li>
+
+   <li>4. <a href="#Searching_using_wildcards">Ricerca con caratteri jolly</a></li>
+
+   <li>5. <a href="#Searching_using_regular_expressions">Ricerca tramite espressioni</a>
+
+      <ul>
+         <li>5.1. <a href="#Regular_Expressions_to_use_in_searches">Espressioni ammesse nelle operazioni di ricerca</a></li>
+         <li>5.2. <a href="#Short_summary_of_regular-expression_constructs">Breve riepilogo della creazione di espressioni per la ricerca</a></li>
+      </ul>
+   </li>
+</ul>
+
+<a name="Search_window"></a>
+<h2>Finestra “Cerca”</h2>
+
+<p>OmegaT mette a disposizione un'ampia gamma di funzioni di ricerca.</p>
+
+<p>Richiamare la finestra “Cerca” tramite la combinazione rapida da tastiera <code>Ctrl+F</code> e inserire nel campo “Cerca” la parola o la frase che si desidera reperire.</p>
+
+<p>In alternativa, selezionare una parola o una frase da un campo di modifica (campo nel quale si scrive il testo di arrivo del segmento attivo) e premere <code>Ctrl+F</code>. La parola o la frase selezionata viene automaticamente immessa all'interno del campo “Cerca”.</p>
+
+<p>Quando si richiama la finestra “Cerca” ne viene sempre aperta una nuova. Il risultato potrebbe essere che, se si dimentica di chiudere le finestre di ricerca precedentemente aperte, vi saranno varie finestre “Cerca” aperte.</p>
+
+<p>La ricerca viene avviata sia sul testo di partenza sia su quello di arrivo di un progetto.</p>
+
+<a name="Search_locations"></a>
+<h2>Posizioni di ricerca</h2>
+
+<p>Selezionare la posizione di ricerca attivando le opportune caselle di opzione.</p>
+
+<p>La ricerca può essere avviata su varie posizioni:</p>
+
+<ul>
+   <li>Solo all'interno del progetto (condizione predefinita);</li>
+   <li>Nel progetto e all'interno delle memorie di traduzione di riferimento contenute nella directory /tm/ (in questo caso attivare la casella di controllo <i>Ricerca nella TM</i>);</li>
+   <li>In un singolo file o in una particolare cartella che contiene una serie di file (in questo caso attivare la casella di controllo <i>Ricerca file</i>).</li>
+</ul>
+
+<p>In quest'ultimo caso, OmegaT avvierà la ricerca solo all'interno dei file che è in grado di riconoscere (si veda <a href="fileFormats.html">Formati di file riconosciuti</a>).</p>
+
+<a name="Search_methods"></a>
+<h2>Metodi di ricerca</h2>
+
+<p>Selezionare il metodo di ricerca attivando l'opportuno pulsante di opzione.</p>
+
+<p>Si ha la possibilità di attivare due metodi di ricerca:</p>
+
+<ul>
+   <li><strong>Ricerca esatta</strong>: avvia la ricerca dei segmenti contenenti esattamente la stringa immessa nel campo “Cerca”;</li>
+   <li><strong>Ricerca parola chiave</strong>: avvia la ricerca dei segmenti contenenti tutte le parole immesse all'interno del campo “Cerca”, indipendentemente dall'ordine di immissione.</li>
+</ul>
+
+<p>Per entrambi questi metodi si avrà la possibilità di selezionare una delle tre opzioni seguenti:</p>
+
+<ul>
+   <li>
+      <strong>Case sensitive</strong>: la selezione di questa casella di opzione farà sì che venga ricercata l'esatta corrispondenza (comprese le lettere maiuscole e minuscole) della stringa immessa nel campo “Cerca”; in caso contrario la ricerca verrà avviata ignorando la presenza di lettere maiuscole e minuscole.</li>
+
+   <li>
+      <strong>Regular expressions</strong>: se si seleziona questa casella di opzione, la stringa immessa nel campo “Cerca” verrà considerata come un'espressione (nel caso di una ricerca di più parole chiave, queste verranno considerate come più espressioni).</li>
+
+   <li>
+      <strong>Ricerca nella TM</strong>: la selezione di questa casella di opzione farà si che la ricerca venga avviata in tutte le memorie di traduzione.</li>
+</ul>
+
+<a name="Exact_searches"></a>
+<h2>Ricerca esatta</h2>
+
+<p>Una ricerca esatta di una frase, ovvero della sequenza di parole immessa nel campo “Cerca”, darà un risultato solo se le parole immesse verranno reperite nella medesima sequenza. Le ricerche esatte sono simili alla funzione “frase esatta” di un motore di ricerca Internet, come Google.</p>
+
+<a name="Keyword_searches"></a>
+<h2>Ricerca con parole chiave</h2>
+
+<p>Selezionare il pulsante di opzione “Ricerca parole chiave” e immettere nel campo “Cerca” una serie di parole singole, separate da uno spazio e in un qualsiasi ordine; OmegaT visualizzerà un elenco di tutti i segmenti nei quali compaiono tutte le parole immesse. Le ricerche di parole chiave sono simili alle ricerche di “tutte le parole” di un motore di ricerca Internet, come Google (in base a un operatore logico AND).</p>
+
+<a name="Searching_using_wildcards"></a>
+<h2>Ricerca con caratteri jolly</h2>
+
+<p>Sia le ricerche esatte, sia quelle di parole chiave consentono di utilizzare i caratteri jolly “<code>*</code>” e “<code>?</code>”. Quando si usano i caratteri jolly accertarsi di non selezionare la casella di opzione <strong>Regular expressions</strong>, perché l'attivazione di questa casella farebbe sì che i caratteri jolly vengano interpretati come operatori di un'espressione.</p>
+
+<p>Il carattere jolly “<code>?</code>” corrisponde all'indicazione di un singolo carattere nella posizione specificata (ovvero, l'immissione di “<code>ca?a</code>” estrarrà le corrispondenze contenenti, per esempio, “<code>casa</code>” e “<code>cara</code>”. Il carattere jolly “<code>*</code>” corrisponde a un qualsiasi carattere e a un qualsiasi numero di caratteri a partire dalla posizione di immissione (ovvero, l'immissione di “<code>ca*a</code>” estrarrà, per esempio, le corrispondenze contenenti “<code>casa</code>”, “<code>cara</code>” ma anche “<code>caserma</code>” e “<code>campata</code>”.</p>
+
+<p>Se si desidera ricercare segmenti contenenti questi caratteri (in modo che non vengano interpretati come caratteri jolly) sarà necessario avviare una ricerca per espressioni e associare questi caratteri a una barra rovesciata (“<code>\</code>”); per esempio, se nel campo “Cerca” viene immessa la stringa “<code>x\*y</code>” verranno estratti i segmenti contenenti “<code>x*y</code>”, mentre “<code>x\?y</code>” estrae quelli contenenti “<code>x?y</code>”.</p>
+
+<a name="Searching_using_regular_expressions"></a>
+<h2>Ricerca tramite espressioni</h2>
+
+<p>La ricerca tramite espressioni è un sistema particolarmente valido per reperire alcuni elementi di un segmento. È simile a una ricerca normale, ma consente una flessibilità maggiore. Il Web mette a disposizione varie spiegazioni semplificate sull'uso delle espressioni (si acceda, per esempio, a <a href="http://www.regular-expressions.info/quickstart.html" title="http://www.regular-expressions.info/quickstart.html" rel="nofollow">http://www.regular-expressions.info/quickstart.html</a>).</p>
+
+<a name="Regular_Expressions_to_use_in_searches"></a>
+<h3>Espressioni ammesse nelle operazioni di ricerca</h3>
+
+<p>Le espressioni ammesse per le operazioni di ricerca sono quelle riconosciute da Java. Se si desiderano ulteriori informazioni, si consiglia di accedere alla pagina <a href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+
+<a name="Short_summary_of_regular-expression_constructs"></a>
+<h4>Breve riepilogo della creazione di espressioni</h4>
+
+<table border="0" width="80%" cellpadding="1" cellspacing="0" summary="Creazione di un'espressione e risultati ottenuti">
+    <tr bgcolor="#DDEEFF"><th width="10%" align="left" id="construct">Espressione&nbsp;</th><th align="left">Risultato</th></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="flags">Flag</th></tr>
+    <tr><td><tt>(?i)</tt></td><td>Consente di avviare una ricerca che tenga in considerazione lettere maiuscole e minuscole (per default, il modello riconosce le maiuscole e le minuscole).</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr><th align="left" colspan="2" id="characters">Caratteri</th></tr>
+
+    <tr><td><strong>x</strong></td><td>Viene rilevato il carattere corrispondente a “<strong>x</strong>”, ma con le seguenti eccezioni...</td></tr>
+    <tr><td><tt>\u</tt><strong>hhhh</strong></td><td>Carattere associato a un valore esadecimale&nbsp;<tt>0x</tt><strong>hhhh</strong></td></tr>
+    <tr><td><tt>\t</tt></td><td>Carattere di tabulazione (<tt>'\u0009'</tt>)</td></tr>
+
+    <tr><td><tt>\n</tt></td><td>Carattere corrispondente a un avanzamento di riga (line feed, LF) (<tt>'\u000A'</tt>)</td></tr>
+    <tr><td><tt>\r</tt></td><td>Carattere corrispondente a un ritorno di carrello (carriage-return, CR) (<tt>'\u000D'</tt>)</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="quot">Citazioni</th></tr>
+
+    <tr><td><tt>\</tt></td><td>Nulla, se non il carattere immediatamente successivo. È necessario quando si desidera usare i metacaratteri <code>!$()*+.&lt;&gt;?[\]^{|}</code> in modo che vengano rilevati come caratteri e non come operatori.</td></tr>
+    <tr><td><tt>\\</tt></td><td>Per esempio, questa combinazione corrisponde al carattere della barra rovesciata (“ \ ”).</td></tr>
+    <tr><td><tt>\Q</tt></td><td>Nulla, ma indica tutti i caratteri fino a <tt>\E</tt></td></tr>
+
+    <tr><td><tt>\E</tt></td><td>Nulla, ma conclude la citazione iniziata da <tt>\Q</tt>.</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="classes">Classi di caratteri</th></tr>
+    <tr><td><tt>[abc]</tt></td><td><tt>a</tt>, <tt>b</tt>, o <tt>c</tt> (classe semplice).</td></tr>
+
+    <tr><td><tt>[^abc]</tt></td><td>Qualsiasi carattere, eccetto <tt>a</tt>, <tt>b</tt>, o <tt>c</tt> (negazione).</td></tr>
+    <tr><td><tt>[a-zA-Z]</tt></td><td>Da <tt>a</tt> a <tt>z</tt> o da <tt>A</tt> a <tt>Z</tt>, compresi (intervallo).</td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="predef">Classi di carattere predefinite</th></tr>
+    <tr><td><tt>.</tt></td><td>Qualsiasi carattere (con eccezione dei terminatori di riga).</td></tr>
+    <tr><td><tt>\d</tt></td><td>Una cifra: <tt>[0-9]</tt></td></tr>
+    <tr><td><tt>\D</tt></td><td>Un carattere non numerico: <tt>[^0-9]</tt></td></tr>
+
+    <tr><td><tt>\s</tt></td><td>Un carattere di spazio bianco: <tt>[ \t\n\x0B\f\r]</tt></td></tr>
+    <tr><td><tt>\S</tt></td><td>Un carattere che non sia uno spazio bianco: <tt>[^\s]</tt></td></tr>
+    <tr><td><tt>\w</tt></td><td>Un carattere parola: <tt>[a-zA-Z_0-9]</tt></td></tr>
+    <tr><td><tt>\W</tt></td><td>Un carattere non-parola: <tt>[^\w]</tt></td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="bounds">Rilevatori di limitazione</th></tr>
+    <tr><td><tt>^</tt></td><td>Inizio di una riga</td></tr>
+    <tr><td><tt>$</tt></td><td>Fine di una riga</td></tr>
+    <tr><td><tt>\b</tt></td><td>Limite di una parola</td></tr>
+
+    <tr><td><tt>\B</tt></td><td>Limite di una non-parola</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="greedy">Quantificatori di ripetizione</th></tr>
+    <tr><td colspan="2">Rileveranno tutte le ripetizioni possibili. Per esempio, <code>a+</code> rileverà <code>aaa</code> in <code>aaabbb</code></td></tr>
+
+    <tr><td><strong>X</strong><tt>?</tt></td><td><strong>X</strong>, una sola volta, oppure nessuna</td></tr>
+    <tr><td><strong>X</strong><tt>*</tt></td><td><strong>X</strong>, zero o più volte</td></tr>
+    <tr><td><strong>X</strong><tt>+</tt></td><td><strong>X</strong>, una o più volte</td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="reluc">Quantificatori riluttanti (non ripetitivi)</th></tr>
+    <tr><td colspan="2">Rileveranno il numero minimo possibile. Per esempio, <code>a+?</code> rileverà la prima <code>a</code> in <code>aaabbb</code></td></tr>
+    <tr><td><strong>X</strong><tt>??</tt></td><td><strong>X</strong>, una sola volta, oppure nessuna</td></tr>
+
+    <tr><td><strong>X</strong><tt>*?</tt></td><td><strong>X</strong>, zero o più volte</td></tr>
+    <tr><td><strong>X</strong><tt>+?</tt></td><td><strong>X</strong>, una o più volte</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="logical">Operatori logici</th></tr>
+
+    <tr><td><strong>XY</strong></td><td><strong>X</strong> seguito da <strong>Y</strong></td></tr>
+    <tr><td><strong>X</strong><tt>|</tt><strong>Y</strong></td><td><strong>X</strong> oppure <strong>Y</strong></td></tr>
+
+    <tr><td><tt>(</tt><strong>XY</strong><tt>)</tt></td><td><strong>XY</strong> come gruppo singolo</td></tr>
+</table>
+
+<hr>
+<p><a href="legalNotices.html" title="Avvertenze legali">Avvertenze legali</a></p>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Barra dei menu - Manuale per l'Utente di OmegaT 1.6.1</title>
+</head>
+<body>
+
+<h1>Barra dei menu</h1>
+
+<p>Tutte le funzioni di OmegaT sono accessibili tramite la barra dei menu, posta  sopra la finestra dell'Editor. Molte funzioni sono anche accessibili utilizzando i corrispondenti <a href="keyboardShortcuts.html">sistemi rapidi da tastiera</a>.</p>
+
+<p>I sistemi rapidi da tastiera associati al tasto <strong><code>Ctrl</code></strong> sono per i sistemi operativi Windows, UNIX e tipo-UNIX, dotati di tastiere che contengono il tasto <strong><code>Ctrl</code></strong> oppure <strong><code>Control</code></strong>. Gli utenti del sistema operativo Mac OS X devono invece utilizzare il tasto Apple (Mela) <img src="images/AppleKey.gif" alt="Tasto Apple (Mela)" width="19" height="19">.</p>
+
+<h2>Sommario</h2>
+<ul type="none">
+   <li>1. <a href="#Project_Menu">Menu Progetto</a></li>
+   <li>2. <a href="#Edit_Menu">Menu Modifica</a></li>
+   <li>3. <a href="#Go_to_Menu">Menu Vai</a></li>
+   <li>4. <a href="#Tools_Menu">Menu Strumenti</a></li>
+   <li>5. <a href="#Options_Menu">Menu Opzioni</a></li>
+   <li>6. <a href="#Help_Menu">Menu ? (Guida)</a></li>
+</ul>
+
+<a name="Project_Menu"></a>
+<h4>Menu Progetto</h4>
+
+<p>
+<dl>
+   <dt>Nuovo...</dt>
+   <dd>Crea e apre un nuovo progetto. La finestra di dialogo per la creazione di un progetto è la stessa di quella per la <a href="projectProperties.html">modifica del progetto</a>.</dd>
+
+   <dt>Apri... <code>&lt;Ctrl+O&gt;</code></dt>
+   <dd>Apre un progetto esistente.</dd>
+
+   <dt>Importa i file di partenza...</dt>
+   <dd>Copia i file selezionati nella cartella <code>Source</code> e ricarica il progetto per riflettere l'aggiunta dei nuovi file.</dd>
+
+   <dt>Ricarica</dt>
+   <dd>Ricarica il progetto per riflettere le modifiche esterne nei file di partenza, nelle memorie di traduzione consegnate o nei glossari.</dd>
+
+   <dt>Chiudi</dt>
+   <dd>Salva la traduzione e chiude il progetto.</dd>
+
+   <dt>Salva <code>&lt;Ctrl+S&gt;</code></dt>
+   <dd>Salva la traduzione nella memoria di traduzione del progetto. OmegaT salva automaticamente la traduzione ogni 10 minuti, oppure tutte le volte che si chiude un progetto o che si esce da OmegaT.</dd>
+
+   <dt>Crea i documenti di arrivo</dt>
+   <dd>Crea i documenti finali inserendo negli stessi la traduzione del testo dei documenti. I documenti verranno salvati nella directory <code>/target</code>.</dd>
+
+   <dt>Proprietà... <code>&lt;Ctrl+E&gt;</code></dt>
+   <dd>Visualizza la finestra di dialogo <a href="projectProperties.html">Proprietà del progetto</a> nella quale si potranno modificare le lingue del progetto e il percorso di memorizzazione delle directory.</dd>
+
+   <dt>File di progetto... <code>&lt;Ctrl+L&gt;</code></dt>
+   <dd>Chiude, o apre, la finestra <a href="userInterface.html#Project_Files">File del progetto</a> (a seconda che questa sia aperta o chiusa).</dd>
+
+   <dt>Esci <code>&lt;Ctrl+Q&gt;</code></dt>
+   <dd>Salva il progetto ed esce da OmegaT. Se il progetto non è ancora stato salvato manualmente, verrà richiesto se si desidera davvero uscire dall'applicazione.</dd>
+</dl>
+</p>
+
+<a name="Edit_Menu"></a>
+<h4>Menu Modifica</h4>
+
+<p>In questo menu non si trovano i comandi che appaiono comunemente nello stesso menu delle altre applicazioni (Taglia / Copia / Incolla), anche se tali comandi saranno comunque disponibili tramite i sistemi rapidi da tastiera tradizionali. Per esempio, in ambiente Windows:</p>
+
+<p>
+<dl>
+   <dt>Copia <code>&lt;Ctrl+C&gt;</code></dt>
+   <dd>Copia il testo selezionato nella memoria di transito.</dd>
+
+   <dt>Taglia <code>&lt;Ctrl+X&gt;</code></dt>
+   <dd>Copia il testo selezionato nella memoria di transito e lo elimina dal documento.</dd>
+
+   <dt>Incolla <code>&lt;Ctrl+V&gt;</code></dt>
+   <dd>Incolla il contenuto della memoria di transito alla posizione del cursore.</dd>
+</dl>
+</p>
+
+<p>Il menu. quindi, contiene i seguenti comandi:</p>
+
+<p>
+<dl>
+   <dt>Annulla l'ultima azione <code>&lt;Ctrl+Z&gt;</code></dt>
+   <dd>Riporta il segmento allo stato immediatamente precedente l'ultima azione eseguita. Non funziona dopo che il segmento modificato sarà stato convalidato.</dd>
+
+   <dt>Ripristina l'ultima azione <code>&lt;Ctrl+Y&gt;</code></dt>
+   <dd>Riporta allo stato immediatamente precedente l'annullamento dell'ultima azione eseguita. Non funziona dopo che il segmento modificato sarà stato convalidato.</dd>
+
+   <dt>Sovrascrivi la traduzione <code>&lt;Ctrl+R&gt;</code></dt>
+   <dd>Sovrascrive l'intero segmento di arrivo con il contenuto della corrispondenza fuzzy selezionata (per default viene selezionata la prima corrispondenza dell'elenco).</dd>
+
+   <dt>Inserisci la traduzione <code>&lt;Ctrl+I&gt;</code></dt>
+   <dd>Inserisce, alla posizione del cursore, la concordanza fuzzy selezionata. Questa funzione non sovrascriverà mai una parte del segmento di arrivo, anche nel caso in cui la si sia selezionata</dd>
+
+   <dt>Sovrascrivi il testo di partenza <code>&lt;Ctrl+Maiusc+R&gt;</code></dt>
+   <dd>Sovrascrive l'intero segmento di arrivo con il contenuto del segmento di partenza.</dd>
+
+   <dt>Inserisci il testo di partenza <code>&lt;Ctrl+Maiusc+I&gt;</code></dt>
+   <dd>Inserisce il testo di partenza alla posizione del cursore.</dd>
+
+   <dt>Cerca nel progetto... <code>&lt;Ctrl+F&gt;</code></dt>
+   <dd>Apre una nuova finestra <a href="userInterface.html#Search_Window">Cerca</a>.</dd>
+
+   <dt>Seleziona corrispondenza fuzzy #N <code>&lt;Ctrl+N&gt;</code> (dove “N” corrisponde a un valore da 1 a 5)</dt>
+   <dd>Seleziona la corrispondenza fuzzy “N” visualizzata nella finestra delle corrispondenze fuzzy per sostituirla, o inserirla, all'interno del segmento di arrivo. La sezione <a href="userInterface.html#Fuzzy_Matches">Corrispondenze parziali (fuzzy)</a> descrive in dettaglio la codifica dei colori.</dd>
+</dl>
+</p>
+
+<a name="Go_to_Menu"></a>
+<h4>Menu Vai</h4>
+
+<p>
+<dl>
+   <dt>Prossimo segmento non tradotto <code>&lt;Ctrl+U&gt;</code></dt>
+   <dd>Attiva il segmento successivo che non presenta equivalenti nella memoria di traduzione (ovvero il successivo segmento non ancora tradotto).</dd>
+
+   <dt>Segmento successivo <code>&lt;Ctrl+N&gt;</code>, <code>&lt;Invio&gt;</code> / <code>&lt;Tab&gt;</code>
+   </dt>
+   <dd>Attiva il segmento immediatamente successivo a quello attivo Se il segmentoi attivo è l'ultimo di un file, verrà attivato il primo segmento del file successivo.</dd>
+
+   <dt>Segmento precedente <code>&lt;Ctrl+P&gt;</code>, <code>&lt;Ctrl+Invio&gt;</code> / <code>&lt;Ctrl+Tab&gt;</code>
+   </dt>
+   <dd>Attiva il segmento immediatamente precedente a quello attivo. Se il segmento attivo è il primo di un file, verrà attivato l'ultimo segmento del file precedente.</dd>
+</dl>
+</p>
+
+<a name="Tools_Menu"></a>
+<h4>Menu Strumenti</h4>
+
+<p>
+<dl>
+   <dt>Convalida i tag <code>&lt;Ctrl+T&gt;</code></dt>
+   <dd>Avvia il controllo della mancanza, o utilizzo scorretto di tag nei file formattati. Verrà proposto un elenco dei segmenti contenenti errori di tag. La sezione <a href="userInterface.html#Tag_Validation">Convalida dei tag</a> descrive che cosa viene visualizzato, mentre quella <a href="formattedText.html">Lavorazione di testi formattati</a> ne spiega la ragione.</dd>
+</dl>
+</p>
+
+<a name="Options_Menu"></a>
+<h4>Menu Opzioni</h4>
+
+<p>
+<dl>
+   <dt>Avanza con il tasto TAB</dt>
+   <dd>Imposta la convalida di un segmento con il tasto <code>&lt;TAB&gt;</code> invece che con il tasto di default <code>&lt;Invio&gt;</code>. Questa opzione potrebbe risultare utile per i sistemi di input di caratteri cinesi, giapponesi o coreani.</dd>
+
+   <dt>Caratteri...</dt>
+   <dd>Apre la finestra di dialogo <a href="fontSettings.html">Anteprima caratteri</a> nella quale si potrà modificare il carattere in cui verrà visualizzato il testo. Gli utenti con computer “datati” dovrebbero modificare il carattere prima di aprire un progetto, in caso contrario si potrebbero verificare rallentamenti nelle prestazioni. Il rallentamento è particolarmente evidente sui sistemi con combinazione G4 + OSX + Giapponese.</dd>
+
+   <dt>Filtri dei file...</dt>
+   <dd>Apre la finestra di dialogo <a href="fileFilters.html">Filtri dei file</a> nella quale è possibile configurare la gestione e la suddivisione dei file.</dd>
+
+   <dt>Segmentazione...</dt>
+   <dd>Apre la finestra di dialogo <a href="segmentation.html">Configura la segmentazione</a> nella quale si potrà configurare la segmentazione del testo.</dd>
+
+   <dt>Campo di modifica...</dt>
+   <dd>Apre la finestra di dialogo <a href="translationEditing.html">Impostazioni del campo di modifica</a> nella quale si può configurare il contenuto dei campi di arrivo per i segmenti non ancora tradotti.</dd>
+
+   <dt>Restore Main Window</dt>
+   <dd>Riporta i componenti della schermata principale di OmegaT (finestra dell'Editor, finestra Corrispondenze fuzzy e finestra Glossario) alla loro condizione di default. Utilizzare questa funzione quando si sono sbloccate, spostate o nascoste una i più componenti e non si riesce più a sistemarle come si vorrebbe.</dd>
+</dl>
+</p>
+
+<a name="Help_Menu"></a>
+<h4>Menu ? (Guida)</h4>
+
+<p>
+<dl>
+   <dt>Manuale dell'Utente... <code>&lt;F1&gt;</code></dt>
+   <dd>Apre una finestra di navigazione separata per la <a href="userInterface.html#Help_Browser">Guida</a>, contenente questo manuale.</dd>
+
+   <dt>Informazioni su OmegaT...</dt>
+   <dd>Visualizza le informazioni di copyright, i crediti e le informazioni di licenza.</dd>
+</dl>
+</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Avvertenze legali">Avvertenze legali</a></p>
+
+</body>
+</html>

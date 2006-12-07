@@ -1,0 +1,328 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Interfaccia utente - Manuale per l'Utente di OmegaT 1.6.1</title>
+</head>
+<body>
+
+<h1>Interfaccia utente</h1>
+
+<h2>Sommario</h2>
+
+<ul type="none">
+   <li>1. <a href="#User_Interface_Items">Elementi dell'interfaccia utente</a>
+
+      <ul type="none">
+         <li>1.1. <a href="#Windows_you.27ll_use_most_of_the_time">Finestre più comunemente utilizzate</a></li>
+         <li>1.2. <a href="#Windows_you.27ll_use_sometimes">Finestre utilizzate meno frequentemente</a></li>
+         <li>1.3. <a href="#Dialogs_you.27ll_use_to_change_your_project_settings">Finestre di dialogo utilizzate per modificare le impostazioni del progetto</a></li>
+      </ul>
+   </li>
+
+   <li>2. <a href="#OmegaT_Main_Window">Finestra principale di OmegaT</a>
+
+      <ul>
+         <li>2.1. <a href="#Editor_Pane">Finestra dell'Editor</a></li>
+         <li>2.2. <a href="#Fuzzy_Matches">Corrispondenze parziali (fuzzy)</a></li>
+         <li>2.3. <a href="#Glossary">Glossario</a></li>
+         <li>2.4. <a href="#Main_Menu">Barra dei menu</a></li>
+         <li>2.5. <a href="#Status_Bar">Barra di stato</a></li>
+      </ul>
+   </li>
+
+   <li>3. <a href="#Other_Windows">Altre finestre</a>
+
+      <ul>
+         <li>3.1. <a href="#Project_Files">File del progetto</a></li>
+         <li>3.2. <a href="#Search_Window">Finestra “Cerca”</a></li>
+
+         <li>3.3. <a href="#Tag_Validation">Convalida dei tag</a>
+
+            <ul>
+               <li>3.3.1. <a href="#Tag_validation_window">Finestra “Convalida dei tag”</a></li>
+               <li>3.3.2. <a href="#Tag_errors">Errori dei tag</a></li>
+               <li>3.3.3. <a href="#Hints_for_tags_management">Consigli per la gestione dei tag</a></li>
+            </ul>
+         </li>
+
+         <li>3.4. <a href="#Help_Browser">Sistema di guida</a></li>
+      </ul>
+   </li>
+
+   <li>4. <a href="#Dialogs">Finestre di dialogo</a></li>
+</ul>
+
+<a name="User_Interface_Items"></a>
+<h2>Elementi dell'interfaccia utente</h2>
+
+<p>L'interfaccia utente (UI) di OmegaT è composta da diversi elementi. Questi elementi vengono prima riepilogati e successivamente si passerà alla loro descrizione più dettagliata.</p>
+
+<a name="Windows_you.27ll_use_most_of_the_time"></a>
+<h3>Finestre più comunemente utilizzate</h3>
+
+<ul>
+   <li>
+      <strong>Schermata principale di OmegaT</strong> composta da tre finestre:<ul>
+         <li><i>Finestra dell'Editor</i> nel quale si immette e si modifica la traduzione.</li>
+         <li><i>Finestra Corrispondenze fuzzy</i> che visualizza i segmenti più simili al segmento in corso di traduzione, estratti dalla memoria di traduzione.</li>
+         <li><i>Finestra Glossario</i> contenente la traduzione della terminologia specifica.</li>
+         <li><i>Barra dei menu</i> dalla quale si può accedere alla maggior parte delle funzioni di OmegaT.</li>
+         <li><i>Barra di stato</i>, nella parte inferiore della schermata principale, nella quale compaiono i messaggi correlati al flusso di lavoro.</li>
+      </ul>
+   </li>
+
+   <li><strong>Finestra File del progetto</strong> contenente l'elenco dei file da tradurre.</li>
+   <li><strong>Finestra Cerca</strong> utilizzata per cercare segmenti specifici all'interno del progetto.</li>
+</ul>
+
+<a name="Windows_you.27ll_use_sometimes"></a>
+<h3>Finestre utilizzate meno frequentemente</h3>
+
+<ul>
+   <li><strong>Finestra Convalida dei tag</strong> per la rilevazione di possibili errori nella formattazione dei documenti tradotti.</li>
+   <li><strong>Finestra della Guida</strong> dalla quale si potrà accedere al Manuale per l'Utente.</li>
+</ul>
+
+<a name="Dialogs_you.27ll_use_to_change_your_project_settings"></a>
+<h3>Finestre di dialogo utilizzate per modificare le impostazioni del progetto</h3>
+
+<ul>
+   <li><strong>Finestra Modifica il progetto</strong> per modificare la struttura delle cartelle e delle lingue del progetto</li>
+   <li><strong>Finestra Anteprima caratteri</strong> che consente di modificare il tipo di carattere che OmegaT utilizza per visualizzare il testo di partenza, la traduzione, le concordanze e i termini del glossario.</li>
+   <li><strong>Finestra Filtri dei file</strong> per la definizione e la gestione dei formati di file riconosciuti.</li>
+   <li><strong>Finestra Configura la segmentazione</strong> per modificare il modo il cui il testo verrà suddiviso in “segmenti”.</li>
+   <li><strong>Finestra Impostazioni del campo di modifica</strong> per intervenire su come OmegaT si comporterà quando viene trovata una concordanza con quanto contenuto nella memoria di traduzione.</li>
+</ul>
+
+<a name="OmegaT_Main_Window"></a>
+<h2>Schermata principale di OmegaT</h2>
+
+<p>La schermata principale di OmegaT è composta da tre finestre, dalla barra dei menu e dalla barra di stato.</p>
+
+<p>Si può intervenire sulla posizione e dimensione di ogni finestra e sbloccarla in modo da poterla riposizionare trascinando con il mouse la sua barra del titolo. In base al suo stato, in corrispondenza dell'angolo superiore destro di ogni finestra possono comparire fino a 5 diversi indicatori. Quando si porta il puntatore del mouse su ogni indicatore verrà visualizzata la didascalia corrispondente.</p>
+
+<p>
+<img src="images/Minimize.gif" alt="Minimize" width="18" height="18">riduce la finestra in modo che nella parte inferiore della schermata principale, vicino alla barra di stato, venga riportata solo la sua barra del titolo. <br> <img src="images/Maximize.gif" alt="Maximize" width="18" height="18"> ingrandisce la finestra a pieno schermo. <br> <img src="images/Restore.gif" alt="Restore" width="18" height="18"> riporta la finestra alla sua dimensione originaria dopo averla ridotta a icona o ingrandita a pieno schermo. <br> <img src="images/Undock.gif" alt="Undock" width="18" height="18"> sblocca la finestra dalla disposizione della schermata principale per poterla gestire singolarmente come finestra mobile. <br> <img src="images/Dock.gif" alt="Dock" width="18" height="18"> riporta di nuovo la finestra all'interno della schermata principale.</p>
+
+<p>È anche possibile disporre le varie finestre in modo che risultino sovrapposte. In questo caso, le finestre verranno associate a un indicatore di scheda. Facendo clic su tale indicatore si porterà la finestra in primo piano. I separatori che suddividono le finestre della schermata principale possono essere spostati per ridimensionare le singole finestre.</p>
+
+<a name="Editor_Pane"></a>
+<h3>Finestra dell'Editor</h3>
+
+<p>Si tratta dell'area principale nella quale viene eseguita, o modificata, la traduzione. La finestra dell'Editor visualizza il testo del documento parzialmente tradotto: il testo già tradotto viene visualizzato nella lingua di arrivo, mentre il testo non ancora tradotto viene visualizzato nella lingua di partenza originaria.</p>
+
+<p>Il testo visualizzato è suddiviso in segmenti e ogni singolo segmento potrà essere modificato facendo doppio clic al suo interno.</p>
+
+<p>Viene attivato un solo segmento alla volta. Il segmento sul quale si deve operare è suddiviso in due parti; la parte superiore riporta, in neretto ed evidenziato in verde, il testo di partenza (il testo da tradurre), mentre la parte inferiore corrisponde al “campo di modifica” (ovvero dove si dovrà scrivere, o modificare, la traduzione) racchiuso tra due marcatori: a sinistra “&lt;segmento nnnn&gt;”, dove “nnnn” corrisponde al numero del segmento attivo, e a destra “&lt;fine segmento&gt;”. La parte superiore del segmento verrà utilizzata come riferimento del testo da tradurre, mentre la parte inferiore (il “campo di modifica”) sarà quella dove verrà scritta, o modificata, la traduzione.</p>
+
+<pre>Questa frase è stata tradotta.
+
+Anche questa frase è stata tradotta.
+
+<strong>Cette phrase est en train d'être traduite.</strong>
+&lt;segmento 0003&gt;[Qui si dovrebbe scrivere la traduzione: Questa frase è in corso di traduzione]&lt;fine segmento&gt;</pre>
+
+<p>A seconda di come si sono impostate le opzioni della finestra <a href="translationEditing.html" title="Modifica della traduzione">Impostazioni del campo di modifica</a> il campo di modifica di un segmento non ancora tradotto potrà risultare vuoto, oppure contenere un testo:</p>
+
+<ul>
+   <li>Il testo di partenza</li>
+   <li>La traduzione della stringa più simile a quella che si deve tradurre</li>
+</ul>
+
+<p>Quando ci si sposta a un altro segmento, il contenuto del “campo di modifica” verrà confermato e memorizzato.</p>
+
+<p>Se si desidera che il segmento rimanga nella sua versione originaria (non tradotto), sarà sufficiente svuotare il campo di modifica, rimuovendo tutto il testo (selezionare il contenuto del campo di modifica con <code>Ctrl+A</code> e, quindi, eliminarlo con <code>Del</code>).</p>
+
+<p>A seconda delle impostazioni delle opzioni della finestra <a href="translationEditing.html" title="Modifica della traduzione">Impostazioni del campo di modifica</a>, OmegaT sarà in grado di ricordare una traduzione quando il segmento originario è identico a un segmento già tradotto. Si tratta di una funzione particolarmente utile quando i documenti contengono marchi di fabbrica, nomi o altri nomi propri, oppure parti che devono rimanere nella loro lingua originaria e non richiedono, quindi, traduzione.</p>
+
+<p>Per ulteriori informazioni si veda <a href="translationEditing.html" title="Modifica della traduzione">Modifica della traduzione</a>.</p>
+
+<a name="Fuzzy_Matches"></a>
+<h3>Corrispondenze parziali (fuzzy)</h3>
+
+<p>La finestra “Concordanze fuzzy” visualizza i segmenti più simili a quelli contenuti nelle <a href="translationMemories.html" title="Memorie di traduzione">memorie di traduzione</a>, estratti sia dalla memoria di traduzione del progetto creata nel corso della traduzione stessa del progetto, sia dalle memorie di traduzione importate da altri lavori precedentemente eseguiti, oppure ricevute dal cliente o dall'agenzia di traduzione.</p>
+
+<p>Quando ci si sposta a un segmento successivo, nella finestra “Corrispondenza fuzzy” verrà automaticamente selezionata la prima corrispondenza parziale (ovvero quella con la percentuale di concordanza più alta). La selezione di una corrispondenza diversa da quella selezionata automaticamente, viene effettuata <a href="keyboardShortcuts.html" title="Sistemi rapidi da tastiera di OmegaT">premendo <code>Ctrl+2</code>, <code>3</code>, <code>4</code>, o <code>5</code></a>, a seconda del numero associato alla corrispondenza disponibile.</p>
+
+<p>Per utilizzare nella traduzione la corrispondenza <strong>selezionata</strong>, premere <a href="keyboardShortcuts.html" title="Sistemi rapidi da tastiera di OmegaT"><code>Ctrl+R</code></a> per sovrascrivere completamente il contenutoi del “campo di modifica”, oppure <a href="keyboardShortcuts.html" title="Sistemi rapidi da tastiera di OmegaT"><code>Ctrl+I</code></a> per inserire il testo della concordanza in corrispondenza della posizione del cursore.</p>
+
+<p>La percentuale di concordanza viene calcolata approssimativamente prendendo in esame il numero delle parole uguali presenti nel segmento corrispondente e in quello al quale applicare la concordanza e dividendo tale valore per il numero di parole presenti nel più lungo dei due segmenti.</p>
+
+<p>Concordanza parziale selezionata</p>
+
+<ul>
+   <li>Verrà visualizzata in <strong>neretto</strong>.</li>
+   <li>Le parole che non appaiono nel segmento che si sta traducendo verranno segnalate il <font color="blue"><strong>blu</strong></font>.</li>
+   <li>Le parole vicine a quelle in blu, o in una posizione non uguale all'originale verranno segnalate in <font color="green"><strong>verde</strong></font>.</li>
+</ul>
+
+<p>Si prenda ad esempio il seguente segmento:</p>
+
+<pre>   <strong>Information about Java &amp; OmegaT</strong></pre>
+
+<p>Il segmento parzialmente concordante è:</p>
+
+<pre>   <strong>Note generali su Java e OmegaT</strong></pre>
+
+<p>nella finestra delle concordanze il segmento parzialmente corrispondente apparirà con i seguenti colori:</p>
+
+<pre>   <strong><font color="blue">General notes</font> <font color="green">about</font> Java &amp; OmegaT</strong></pre>
+
+<p>e il valore percentuale della corrispondenza parziale dovrebbe essere pari a circa 3/5 = <strong>60%</strong>
+</p>
+
+<a name="Glossary"></a>
+<h3>Glossario</h3>
+
+<p>La finestra “Glossario” visualizza le traduzioni terminologiche estratte dai <a href="glossaries.html" title="Glossari">file di glossario</a>. Vengono riportate le traduzioni di termini reperiti all'interno del segmento attivo, ma la loro visualizzazione ha solo scopo di riferimento, in quanto non è possibile inserirli automaticamente all'interno del segmento in corso di traduzione. OmegaT è in grado anche di gestire termini multipli, ma questa è una funzione molto basilare: se all'interno del segmento in corso di traduzione vengono reperite due traduzioni per lo stesso termine, verrà visualizzato il termine originario.</p>
+
+<p>Il formato della terminologia all'interno della finestra “Glossario” è il seguente:</p>
+
+<pre>
+   “termine di partenza” = “traduzione del termine”
+   Commenti generali sul termine (quando disponibili).
+</pre>
+
+<a name="Main_Menu"></a>
+<h3>Barra dei menu</h3>
+
+<p>Ovviamente, per accedere alle varie funzioni di OmegaT ci si potrà basare sulla barra dei menu. Tuttavia, le funzioni più comunemente utilizzate sono attivabili anche con <a href="keyboardShortcuts.html" title="Sistemi rapidi da tastiera di OmegaT">sistemi rapidi da tastiera</a>; pertanto, dopo averli imparati, non sarà più necessario accedere alla barra dei menu per attivarne la funzione corrispondente.</p>
+
+<p>Per una descrizione completa di tutte le voci di menu e dei corrispondenti comandi si faccia riferimento all'appendice <a href="menu.html" title="Barra dei menu">Barra dei menu</a>.</p>
+
+<a name="Status_Bar"></a>
+<h3>Barra di stato</h3>
+
+<p>La barra di stato è destinata a contenere i messaggi relativi al flusso di lavoro e si trova nella parte inferiore della schermata principale. Questa barra comunica all'utente quali sono le operazioni specifiche in corso di esecuzione. Riporta anche il numero delle corrispondenze parziali e di glossario rilevate per il segmento attivo.</p>
+
+<a name="Other_Windows"></a>
+<h2>Altre finestre</h2>
+
+<a name="Project_Files"></a>
+<h3>File del progetto</h3>
+
+<p>La finestra “File del progetto” visualizza l'elenco dei file del progetto, con indicazione di altre informazioni relative al progetto stesso. Questa finestra viene aperta automaticamente ogni volta che OmegaT carica un progetto. Quando il progetto è aperto, dalla schermata principale di OmegaT si potrà usare il <a href="keyboardShortcuts.html" title="Sistemi rapidi da tastiera di OmegaT">sistema rapido da tastiera <code>Ctrl+L</code></a> per chiuderla, quando è visibile, oppure per visualizzarla, quando è nascosta.</p>
+
+<p>Caratteristiche della finestra “File del progetto”:</p>
+
+<ul>
+   <li>Elenco cliccabile di tutti i file da tradurre che compongono il progetto. Si tratta dei file contenuti nella cartella dei file di partenza che <a href="fileFormats.html" title="Formati di file riconosciuti">OmegaT sarà in grado di gestire</a>. Quando si fa clic su uno dei file, questo verrà aperto all'interno della finestra dell'Editor e su di esso si potrà immediatamente iniziare a lavorare.</li>
+   <li>A fianco del nome del file viene riportato il numero dei segmenti contenuti all'interno del file stesso.</li>
+   <li>Numero dei singoli segmenti (diversi) contenuti all'interno del progetto (Number of unique segments).</li>
+   <li>Numero dei singoli segmenti che sono già stati tradotti (Translated unique segments). Questo valore viene aggiornato ogni volta che si conclude la traduzione di un segmento.</li>
+</ul>
+
+<p>La serie dei <strong>singoli</strong> segmenti (diversi) viene calcolato prendendo in esame tutti i segmenti del progetto e sottraendo i segmenti duplicati, in base alla presenza di maiuscole o minuscole (“Oggetto” e “oggetto” sono considerati due segmenti diversi).</p>
+
+<p>Se si osserva la differenza fra i valori associati a “ Numero dei segmenti totali (Total number of segments)” e a “Numero dei segmenti diversi (Number of unique segments)” si potrà avere un'idea generale del numero delle ripetizioni contenute nell'intero progetto. Il numero non è una indicazione precisa di quanto importanti siano le ripetizioni: i segmenti possono corrispondere a frasi relativamente lunghe che vengono ripetute per più volte (in questo caso si sarà fortunati!), oppure a semplici parole singole inserite in una tabella (e in questo caso la fortuna non c'entra nulla...).</p>
+
+<p>Intervenendo sulle regole di segmentazione si potrà modificare il numero dei segmenti/segmenti diversi di un progetto. Queste modifiche non dovrebbero mai essere apportate dopo aver iniziato la traduzione di un progetto. Per ulteriori informazioni si veda quanto riportato nelle <a href="segmentation.html" title="Segmentazione del documento originale">regole di segmentazione</a>.</p>
+
+<p>Facendo clic sul pulsante “Importa file di partenza...” si ha la possibilità di aggiungere nuovi file al progetto. Questa funzione copierà i file selezionati nella directory <code>/source</code> e ricaricherà il progetto per riflettere l'aggiunta dei nuovi file.</p>
+
+<a name="Search_Window"></a>
+<h3>Finestra “Cerca”</h3>
+
+<p>La finestra “Cerca” viene utilizzata per trovare segmenti specifici all'interno di un progetto. Si potranno aprire simultaneamente più finestre “Cerca”. Per aprire una nuova finestra “Cerca”, dalla schermata principale utilizzare la combinazione rapida da tastiera <a href="keyboardShortcuts.html" title="Sistemi rapidi da tastiera di OmegaT"><code>Ctrl+F</code></a>.</p>
+
+<p>La finestra è composta dai seguenti elementi:</p>
+
+<ul>
+   <li>Un campo nel quale inserire la stringa o le parola chiave per avviare la ricerca.</li>
+   <li>Una serie di caselle e di pulsanti di opzione per modificare le impostazioni di ricerca.</li>
+   <li>Un'area cliccabile per la visualizzazione dei risultati.</li>
+</ul>
+
+<p>La pressione del pulsante “Cerca”, dopo aver immesso una stringa nel campo del testo da trovare, genererà la visualizzazione di tutti i segmenti del progetto contenenti la stringa di ricerca. Dato che OmegaT gestisce tutti i segmenti uguali come un singolo elemento – se si cambia uno di questi, la modifica viene riflessa a tutti i segmenti identici – verrà visualizzata solo un segmento di quelli identici.</p>
+
+<p>I segmenti vengono visualizzati in ordine di comparsa all'interno del progetto. I segmenti tradotti verranno visualizzati con sopra il testo originale e sotto il testo tradotto; per i segmenti non tradotti verrà, invece, visualizzato solo il testo originale.</p>
+
+<p>Se all'interno di uno dei file del progetto viene reperita la stringa, vi si potrà fare sopra clic per visualizzarla all'interno della finestra dell'Editor dove la si potrà modificare. A questo punto si può tornare alla finestra “Cerca” e passare al successivo segmento estratto per apportare, anche a questo, le opportune modifiche. Si tratta di una condizione che risulta particolarmente utile quando si devono apportare modifiche terminologiche di tipo massivo.</p>
+
+<p>Vi sono a disposizione due tipologie di ricerca:</p>
+
+<ul>
+   <li>La ricerca esatta che troverà la stringa digitata nel campo di ricerca all'interno del progetto attivo o all'interno di una qualsiasi struttura di directory. La ricerca esatta è in grado di riconoscere i caratteri jolly * e ?. Il carattere jolly “<strong>*</strong>” viene utilizzato per la ricerca di più caratteri consecutivi (per esempio, l'avvio di una ricerca con la stringa “<strong>mobil*</strong>” potrebbe estrarre le stringhe che contengono le parole “<strong>mobili</strong>”, “<strong>mobilità</strong>” e “<strong>mobilitazione</strong>”). Al contrario, l'uso del carattere jolly “<strong>?</strong>” estrarrà solo le parole con un singolo carattere sostitutivo del punto interrogativo (per esempio, la ricerca per “<strong>mobil?</strong>” potrebbe estrarre le stringhe che contengono le parole “<strong>mobile</strong>” e “<strong>mobili</strong>”, ma non “<strong>mobilità</strong>” o “<strong>mobilitazione</strong>”). Questa operazione di ricerca viene avviata sia sul testo di partenza sia su quello tradotto.</li>
+
+   <li>Le ricerche per parole chiave esaminano il progetto attivo e restituiscono tutti i segmenti contenenti tutte le parole chiave immesse, in qualsiasi ordine queste si trovino all'interno dei segmenti stessi.</li>
+</ul>
+
+<p>Si ha anche la possibilità di avviare una ricerca all'interno di una qualsiasi directory, ma si tenga presente che OmegaT può effettuare la ricerca solo all'interno dei <a href="fileFormats.html" title="Formati di file riconosciuti">file riconosciuti</a>.</p>
+
+<a name="Tag_Validation"></a>
+<h3>Convalida dei tag</h3>
+
+<a name="Tag_validation_window"></a>
+<h4>Finestra “Convalida dei tag”</h4>
+
+<p>La finestra per la convalida dei tag viene utilizzata per rilevare possibili errori di formattazione all'interno dei documenti tradotti. Per aprire la finestra si può utilizzare il sistema rapido da tastiera <a href="keyboardShortcuts.html" title="Sistemi rapidi da tastiera di OmegaT"><code>Ctrl+T</code></a>.</p>
+
+<p>La finestra presenta una tabella di tre colonne contenente:</p>
+
+<ul>
+   <li>Un link cliccabile per accedere al segmento contenente il possibile errore.</li>
+   <li>Il testo del segmento originale.</li>
+   <li>Il testo del segmento tradotto.</li>
+</ul>
+
+<p>Quando si fa clic sul link, il segmento verrà aperto nella finestra dell'Editor.</p>
+
+<a name="Tag_errors"></a>
+<h4>Errori dei tag</h4>
+
+<p>Tra i possibili errori dei tag vi sono i seguenti:</p>
+
+<ul>
+   <li>Nel segmento originale vi è un tag che è stato eliminato nel segmento tradotto.</li>
+   <li>Un segmento originale non conteneva un tag, ma questo compare nel segmento tradotto.</li>
+   <li>Nel segmento tradotto è stato modificato l'ordine dei tag.</li>
+</ul>
+
+<a name="Hints_for_tags_management"></a>
+<h4>Consigli per la gestione dei tag</h4>
+
+<p>I tag, di solito, rappresentano elementi di formattazione presenti nel testo originale. <strong>La semplicità della formattazione del testo originale</strong> contribuisce in modo sostanziale alla riduzione del numero dei tag. Quando è possibile, si dovrebbe prendere in considerazione l'uniformazione dei caratteri utilizzati, della loro dimensione, dei loro colori ecc. Ciò semplificherà il processo di traduzione e ridurrà la quantità di possibili errori nei tag.</p>
+
+<p>Si consiglia di leggere la sezione <a href="formattedText.html#Tag_operations" title="Lavorazione di testi formattati">Operazioni con i tag</a> per capire come è possibile intervenire su questi elementi.</p>
+
+<p>Si ricordi che se si ha difficoltà nella gestione dei tag e se la formattazione non ha un'importanza primaria per il lavoro che si sta eseguendo, si ha sempre la possibilità di rimuovere da un testo originale la maggior parte della formattazione, semplificando, in questo modo, il lavoro di traduzione.</p>
+
+<p>Se si vogliono visualizzare i tag in OmegaT ma non si ha la necessità di conservarli all'interno del documento tradotto, si potrà anche evitare di inserirli nella versione finale del documento. In questo caso, <strong>prestare particolare attenzione alle coppie di tag</strong>. Nel caso in cui venga utilizzato uno solo dei tag, che devono essere sempre in coppia, si potrebbe rischiare di danneggiare la formattazione del documento e ciò potrebbe anche fare sì che un documento OpenOffice.org tradotto non venga riconosciuto, oppure che non sia possibile aprire un documento HTML tradotto.</p>
+
+<p>Poiché i tag fanno parte del testo, è possibile adottare <a href="segmentation.html" title="Segmentazione del documento originale">regole di segmentazione</a> in modo da creare segmenti che contengano un numero inferiore di tag. Si tratta, in questo caso, di una funzione di tipo avanzato e che non dovrebbe venire utilizzata dagli utenti principianti.</p>
+
+<a name="Help_Browser"></a>
+<h3>Sistema di guida</h3>
+
+<p>Il sistema di guida (che contiene questo manuale) può essere richiamato premendo <a href="keyboardShortcuts.html" title="Sistemi rapidi da tastiera di OmegaT">F1</a>, oppure avviando il comando <strong>? -&gt; Manuale dell'Utente...</strong> della <a href="menu.html" title="Barra dei menu">barra dei menu</a>.</p>
+
+<p>La finestra che viene aperta contiene il manuale e due pulsanti: <strong>Torna</strong> e <strong>Indice</strong>.</p>
+
+<p>Il manuale dell'Utente è un documento HTML contenente i link ai vari capitoli. Quando si fa clic su un link, proprio come si farebbe all'interno di una comune pagina Web, si accederà direttamente alla prima pagina del capitolo.</p>
+
+<p>Il manuale per l'utente è contenuto nella sottocartella <code>doc</code> della cartella di installazione di OmegaT e, pertanto, si potrà anche consultare, per esempio, la documentazione in inglese aprendo nel proprio navigatore il file <code>doc/en/index.hmtl</code>. In questo modo si sarà in grado di accedere anche ai link esterni in quanto il navigatore interno integrato in OmegaT non è in grado di gestire i link esterni di Internet.</p>
+
+<a name="Dialogs"></a>
+<h2>Finestre di dialogo</h2>
+
+<p>Per modificare le impostazioni di OmegaT e del progetto si utilizzeranno le finestre di dialogo seguenti. Tutte queste finestre vengono descritte in sezioni separate e qui sotto viene solo accennato come utilizzarle e come richiamarle a video.</p>
+
+<ul>
+   <li>
+      <a href="projectProperties.html" title="Proprietà del progetto">Modifica del progetto</a> viene utilizzata per modificare il percorso di memorizzazione delle cartelle e le lingue. La si può aprire con la combinazione rapida da tastiera <a href="keyboardShortcuts.html" title="Sistemi rapidi da tastiera di OmegaT"><code>Ctrl+E</code></a> oppure richiamandola con il comando <strong>Progetto -&gt; Proprietà...</strong> dalla <a href="menu.html" title="Barra dei menu">barra dei menu</a>.</li>
+
+   <li>
+      <a href="fontSettings.html" title="Anteprima caratteri">Anteprima caratteri</a> è una finestra di dialogo che consente di modificare il tipo di carattere utilizzato da OmegaT per visualizzare il testo di partenza, il testo della traduzione, le concordanze e i termini di glossario. Può essere richiamata tramite il comando <strong>Opzioni -&gt; Caratteri...</strong> dalla <a href="menu.html" title="Barra dei menu">barra dei menu</a>.</li>
+
+   <li>La finestra per le <a href="fileFilters.html" title="Filtri dei file">opzioni dei filtri dei file</a> consente di modificare i file che dovranno essere gestiti da ciascuno dei <a href="fileFormts.html" title="Formati di file riconosciuti">filtri disponibili</a>.</li>
+
+   <li>La finestra di dialogo <a href="segmentation.html" title="Segmentazione del documento originale">Configura la segmentazione</a> permette di cambiare il modo in cui il testo viene segmentato in frasi. Si noti che una segmentazione in frasi viene attivata/disattivata a livello della finestra di dialogo <a href="projectProperties.html" title="Proprietà del progetto">Modifica il progetto</a>.</li>
+
+   <li>La finestra di dialogo <a href="translationEditing.html" title="Modifica della traduzione">Impostazioni del campo di modifica</a> cambia il modo in cui OmegaT si comporta quando si passa dalla traduzione di un segmento all'altro.</li>
+</ul>
+
+<hr>
+<p><a href="legalNotices.html" title="Avvertenze legali">Avvertenze legali</a></p>
+
+</body>
+</html>

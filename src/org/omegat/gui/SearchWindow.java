@@ -78,7 +78,8 @@ public class SearchWindow extends JFrame
     public SearchWindow(MainWindow par, String startText)
     {
         //super(par, false);
-        
+        m_parent = par;
+
         m_searchLabel = new JLabel();
         m_searchField = new MFindField();
 
@@ -485,7 +486,10 @@ public class SearchWindow extends JFrame
         {
             // save user preferences
             savePreferences();
-            
+
+            // notify main window
+            m_parent.searchWindowClosed(this);
+
             if (m_thread != null)
                 m_thread.interrupt();
         }
@@ -651,6 +655,8 @@ public class SearchWindow extends JFrame
 
         private UndoManager undoManager;
     }
+
+    private MainWindow m_parent;
 
     private JLabel      m_searchLabel;
     private JTextField  m_searchField;

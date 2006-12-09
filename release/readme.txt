@@ -1,5 +1,5 @@
 ==============================================================================
-  OmegaT 1.7.0 Read Me file
+  OmegaT 1.6.1 update 2, Read Me file
 
   1.  Information about OmegaT
   2.  What is OmegaT?
@@ -138,7 +138,7 @@ Localization contributed by
   Jean-Christophe Helary (French and Japanese)
   Yutaka Kachi (Japanese)
   Elina Lagoudaki (Greek)
-  Martin Lukac (Slovak)
+  Martin Lukáč (Slovak)
   Samuel Murray (Afrikaans)
   Yoshi Nakayama (Japanese)
   David Olveira (Portugese)
@@ -158,18 +158,18 @@ Localization contributed by
 Other contributions by
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (documentation manager)
+  Jean-Christophe Helary (current documentation manager)
   Samuel Murray
-  Marc Prior (localization manager)
+  Marc Prior (current localization manager)
   and many, many more very helpful people
 
 OmegaT uses the following libraries:
   HTMLParser by Somik Raha, Derrick Oswald and others (LGPL License).
   http://sourceforge.net/projects/htmlparser
-
-  MRJ Adapter by Steve Roy (LGPL License).
+  
+  MRJ Adapter by Steve Roy (Artistic License).
   http://homepage.mac.com/sroy/mrjadapter/
-
+  
   VLDocking Framework by VLSolutions (CeCILL License).
   http://www.vlsolutions.com/en/products/docking/
 
@@ -221,13 +221,19 @@ File formats supported:
   - INI files (files with key=value pairs of any encoding)
   - PO files
   - DocBook documentation file format
-  - UPDATE
 
-Core changes (compared to OmegaT 1.6 series):
-  UPDATE
+Core changes:
+  - Flexible (Sentence) Segmentation
+  - File format filters may be created as plugins
+  - Refactored code with more comments
+  - Windows installer
+  - Attributes of HTML tags are translatable
+  - Full TMX 1.1-1.4b Level 1 compatibility
+  - Partial TMX 1.4b Level 2 support
 
-New UI features (compared to OmegaT 1.6 series):
-  UPDATE
+New UI features (comparing to 1.4 OmegaT series):
+  - Find interface rewritten with enhanced functionality
+  - Main interface improved by using dockable windows
 
 ==============================================================================
 

@@ -1,179 +1,179 @@
 ============================================================================== 
   OmegaT 1.6.1 Arquivo Leiame
 
-  1.  Informações sobre o OmegaT
-  2.  O que é OmegaT?
-  3.  Observações gerais sobre Java e OmegaT
-  4.  Contribuições para o OmegaT
-  5.  Você tem problemas com o OmegaT? Precisa de ajuda?
-  6.  Detalhes da versão
+  1.  Informaï¿½es sobre o OmegaT
+  2.  O que ï¿½OmegaT?
+  3.  Observaï¿½es gerais sobre Java e OmegaT
+  4.  Contribuiï¿½es para o OmegaT
+  5.  Vocï¿½tem problemas com o OmegaT? Precisa de ajuda?
+  6.  Detalhes da versï¿½
 
 ============================================================================== 
-  1.  Informações sobre o OmegaT
+  1.  Informaï¿½es sobre o OmegaT
 
-As informações mais atualizadas sobre o OmegaT estão disponíveis no:
+As informaï¿½es mais atualizadas sobre o OmegaT estï¿½ disponï¿½eis no:
       http://www.omegat.org/omegat/omegat.html
 
-As páginas a seguir contêm mais informações:
+As pï¿½inas a seguir contï¿½ mais informaï¿½es:
 
-Suporte ao usuário no grupo de usuários do Yahoo:
+Suporte ao usuï¿½io no grupo de usuï¿½ios do Yahoo:
      http://groups.yahoo.com/group/OmegaT/
-     Lá os arquivos podem ser pesquisados sem ser preciso fazer a inscrição no grupo.
+     Lï¿½os arquivos podem ser pesquisados sem ser preciso fazer a inscriï¿½o no grupo.
 
 Os pedidos para melhorias, no site da SourceForge:
      http://sourceforge.net/tracker/?group_id=68187&atid=520350
 
-Os relatórios de 'bugs', no site da SourceForge:
+Os relatï¿½ios de 'bugs', no site da SourceForge:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347
 
 ============================================================================== 
-  2.  O que é OmegaT?
+  2.  O que ï¿½OmegaT?
 
-OmegaT é uma ferramenta de tradução com auxílio do computador. É gratuito, isto é, você não precisa pagar nada para usar o programa, mesmo se usá-lo profissionalmente; também poderá modificar e redistribuir o programa, desde que respeite os termos da licença de usuário.
+OmegaT ï¿½uma ferramenta de traduï¿½o com auxï¿½io do computador. ï¿½gratuito, isto ï¿½ vocï¿½nï¿½ precisa pagar nada para usar o programa, mesmo se usï¿½lo profissionalmente; tambï¿½ poderï¿½modificar e redistribuir o programa, desde que respeite os termos da licenï¿½ de usuï¿½io.
 
-Os principais recursos do OmegaT são
+Os principais recursos do OmegaT sï¿½
   - pode ser executado em qualquer sistema operacional que suporta Java
-  - usa qualquer arquivo TMX válido como referência de tradução
-  - flexibilidade de segmentação de frases (usando um método como SRX)
-  - buscas no projeto e nas memórias de tradução de referência
-  - buscas em qualquer diretório inclusive em arquivos que são lidos pelo OmegaT
-  - correspondência imperfeita
-  - processamento inteligente de projetos, inclusive hierarquias complexas de diretórios
-  - suporte para glossários (verificações de terminologia)
-  - documentação e tutorial fácil de entender
-  - localização em diversas línguas.
+  - usa qualquer arquivo TMX vï¿½ido como referï¿½cia de traduï¿½o
+  - flexibilidade de segmentaï¿½o de frases (usando um mï¿½odo como SRX)
+  - buscas no projeto e nas memï¿½ias de traduï¿½o de referï¿½cia
+  - buscas em qualquer diretï¿½io inclusive em arquivos que sï¿½ lidos pelo OmegaT
+  - correspondï¿½cia imperfeita
+  - processamento inteligente de projetos, inclusive hierarquias complexas de diretï¿½ios
+  - suporte para glossï¿½ios (verificaï¿½es de terminologia)
+  - documentaï¿½o e tutorial fï¿½il de entender
+  - localizaï¿½o em diversas lï¿½guas.
 
-OmegaT é compatível com arquivos OpenDocument files, arquivos Microsoft Office (usando o 
-OpenOffice.org como um filtro de conversão, ou pela conversão para  HTML),
-arquivos OpenOffice.org ou StarOffice, bem como (X)HTML, arquivos de localização Java e arquivos em formato de texto simples.
+OmegaT ï¿½compatï¿½el com arquivos OpenDocument files, arquivos Microsoft Office (usando o 
+OpenOffice.org como um filtro de conversï¿½, ou pela conversï¿½ para  HTML),
+arquivos OpenOffice.org ou StarOffice, bem como (X)HTML, arquivos de localizaï¿½o Java e arquivos em formato de texto simples.
 
-OmegaT analisará automaticamente até mesmo as hierarquias mais complexas de diretório fonte para acessar todos os formatos de arquivos suportados e produzirá um diretório destino exatamente com a mesma estrutura, incluindo cópias de arquivos em formatos para os quais não oferece suporte.
+OmegaT analisarï¿½automaticamente atï¿½mesmo as hierarquias mais complexas de diretï¿½io fonte para acessar todos os formatos de arquivos suportados e produzirï¿½um diretï¿½io destino exatamente com a mesma estrutura, incluindo cï¿½ias de arquivos em formatos para os quais nï¿½ oferece suporte.
 
-Para acessar as instruções básicas, inicie o OmegaT e leia o tutorial do Início Rápido.
+Para acessar as instruï¿½es bï¿½icas, inicie o OmegaT e leia o tutorial do Inï¿½io Rï¿½ido.
 
-O manual do usuário está no pacote de arquivos que você acabou de baixar; ele está disponível no menu [Ajuda], após iniciar o OmegaT.
+O manual do usuï¿½io estï¿½no pacote de arquivos que vocï¿½acabou de baixar; ele estï¿½disponï¿½el no menu [Ajuda], apï¿½ iniciar o OmegaT.
 
 ============================================================================== 
- 3. Observações gerais sobre Java e OmegaT
+ 3. Observaï¿½es gerais sobre Java e OmegaT
 
-OmegaT requer que o Java Runtime Environment versão 1.4 ou mais recente esteja instalado no seu computador. Ele está disponível no site:
+OmegaT requer que o Java Runtime Environment versï¿½ 1.4 ou mais recente esteja instalado no seu computador. Ele estï¿½disponï¿½el no site:
     http://java.com
 
-Os usuários do Windows e Linux precisam instalar o Java, caso já não esteja instalado.
-O projeto OmegaT também oferece versões com Java incluído. Os usuários do MacOSX já têm
+Os usuï¿½ios do Windows e Linux precisam instalar o Java, caso jï¿½nï¿½ esteja instalado.
+O projeto OmegaT tambï¿½ oferece versï¿½s com Java incluï¿½o. Os usuï¿½ios do MacOSX jï¿½tï¿½
 o Java instalado nos seus computadores.
 
 Se o OmegaT foi corretamente instalado, basta clicar no arquivo OmegaT.jar para iniciar o programa.
 
-Após instalar java, pode ser que você tenha que modificar a variável do caminho do seu sistema de forma que inclua o diretório onde o aplicativo 'java' esteja instalado.
+Apï¿½ instalar java, pode ser que vocï¿½tenha que modificar a variï¿½el do caminho do seu sistema de forma que inclua o diretï¿½io onde o aplicativo 'java' esteja instalado.
 
-Os usuários do Linux devem prestar atenção ao fato de que o OmegaT não funcionará em implementações Java de código aberto/gratuitas que podem ser encontradas em muitas distribuições Linux (por exemplo, Ubuntu), pois elas são incompletas ou desatualizadas. Baixe e instale o Java Runtime Environment (JRE) da Sun usando o link abaixo, ou baixe e instale o OmegaT empacotado com o JRE (o pacote .tar.gz marcado para "Linux").
+Os usuï¿½ios do Linux devem prestar atenï¿½o ao fato de que o OmegaT nï¿½ funcionarï¿½em implementaï¿½es Java de cï¿½igo aberto/gratuitas que podem ser encontradas em muitas distribuiï¿½es Linux (por exemplo, Ubuntu), pois elas sï¿½ incompletas ou desatualizadas. Baixe e instale o Java Runtime Environment (JRE) da Sun usando o link abaixo, ou baixe e instale o OmegaT empacotado com o JRE (o pacote .tar.gz marcado para "Linux").
 
-Ao rodarem o Linux em sistemas PowerPC, os usuários precisarão baixar o JRE da IBM, pois a Sun não oferece JRE para sistemas PPC. Site para baixar:
+Ao rodarem o Linux em sistemas PowerPC, os usuï¿½ios precisarï¿½ baixar o JRE da IBM, pois a Sun nï¿½ oferece JRE para sistemas PPC. Site para baixar:
     http://www-128.ibm.com/developerworks/java/jdk/linux/download.html
 
 ============================================================================== 
- 4. Contribuições para o OmegaT
+ 4. Contribuiï¿½es para o OmegaT
 
 Para contribuir para o desenvolvimento do OmegaT, entre em contato com os desenvolvedores no:
     http://lists.sourceforge.net/lists/listinfo/omegat-development
 
-Para traduzir a interface de usuário do OmegaT, manual do usuário e outros documentos relacionados, leia:
+Para traduzir a interface de usuï¿½io do OmegaT, manual do usuï¿½io e outros documentos relacionados, leia:
       http://www.omegat.org/omegat/translation-info.html
 
 E inscreva-se na lista de tradutores:
       http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
 
-Para outros tipos de constribuidores, inscreva-se primeiro no grupo de usuários no:
+Para outros tipos de constribuidores, inscreva-se primeiro no grupo de usuï¿½ios no:
       http://groups.yahoo.com/group/OmegaT/
 
 E fique por dentro do que acontece no mundo do OmegaT...
 
   OmegaT originou-se do trabalho de Keith Godfrey.
-  Marc Prior é o coordenador do projeto OmegaT.
+  Marc Prior ï¿½o coordenador do projeto OmegaT.
 
 Contribuidores anteriores:
-(ordem alfabética)
+(ordem alfabï¿½ica)
 
-O código é uma contribuição de
+O cï¿½igo ï¿½uma contribuiï¿½o de
   Kim Bruning
   Sacha Chua
   Maxym Mykhalchuk (atual coordenador dos desenvolvedores)
-  Henry Pijffers (gerente de divulgação da versão 1.6)
+  Henry Pijffers (gerente de divulgaï¿½o da versï¿½ 1.6)
   Benjamin Siband
 
-Contribuição para localização de
-  Roberto Argus (português-Brasil)
+Contribuiï¿½o para localizaï¿½o de
+  Roberto Argus (portuguï¿½-Brasil)
   Alessandro Cattelan (italiano)
-  Sabine Cretella (alemão)
+  Sabine Cretella (alemï¿½)
   Suzanne Bolduc (esperanto)
-  Didier Briel (francês)
-  Frederik De Vos (holandês)
+  Didier Briel (francï¿½)
+  Frederik De Vos (holandï¿½)
   Cesar Escribano Esteban (espanhol)
   Dmitri Gabinski (bielorusso, esperanto e russo)
-  Takayuki Hayashi (japonês)
-  Jean-Christophe Helary (francês e japonês)
-  Yutaka Kachi (japonês)
+  Takayuki Hayashi (japonï¿½)
+  Jean-Christophe Helary (francï¿½ e japonï¿½)
+  Yutaka Kachi (japonï¿½)
   Elina Lagoudaki (grego)
-  Martin Lukac (eslovaco)
-  Samuel Murray (africâner)
-  Yoshi Nakayama (japonês)
-  David Olveira (português)
-  Ronaldo Radunz (português-Brasil)
-  Thelma L. Sabim (português-Brasil)
+  Martin LukÃ¡Ä (eslovaco)
+  Samuel Murray (africï¿½er)
+  Yoshi Nakayama (japonï¿½)
+  David Olveira (portuguï¿½)
+  Ronaldo Radunz (portuguï¿½-Brasil)
+  Thelma L. Sabim (portuguï¿½-Brasil)
   Juan Salcines (espanhol)
   Pablo Roca Santiagio (espanhol)
-  Karsten Voss (polonês)
-  Gerard van der Weyde (holandês)
-  Martin Wunderlich (alemão)
-  Hisashi Yanagida (japonês)
-  Kunihiko Yokota (japonês)
+  Karsten Voss (polonï¿½)
+  Gerard van der Weyde (holandï¿½)
+  Martin Wunderlich (alemï¿½)
+  Hisashi Yanagida (japonï¿½)
+  Kunihiko Yokota (japonï¿½)
   Erhan Yukselci (turco)
 
-Outras contribuições de
+Outras contribuiï¿½es de
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (atual gerente de documentação)
+  Jean-Christophe Helary (atual gerente de documentaï¿½o)
   Samuel Murray
-  Marc Prior (atual gerente de localização)
+  Marc Prior (atual gerente de localizaï¿½o)
   e muitos outros colaboradores
 
 OmegaT usa as seguintes bibliotecas:
-  HTMLParser por Somik Raha, Derrick Oswald e outros (Licença LGPL).
+  HTMLParser por Somik Raha, Derrick Oswald e outros (Licenï¿½ LGPL).
   http://sourceforge.net/projects/htmlparser
   
-  MRJ Adapter por Steve Roy (Licença LGPL).
+  MRJ Adapter por Steve Roy (Licenï¿½ LGPL).
   http://homepage.mac.com/sroy/mrjadapter/
   
-  VLDocking Framework por VLSolutions (Licença CeCILL).
+  VLDocking Framework por VLSolutions (Licenï¿½ CeCILL).
   http://www.vlsolutions.com/en/products/docking/
 
 ============================================================================== 
- 5.  Você tem problemas com o OmegaT ? Precisa de ajuda?
+ 5.  Vocï¿½tem problemas com o OmegaT ? Precisa de ajuda?
 
-Antes de relatar um erro, assegure-se de ter verificado detalhadamente a documentação. O que você vê pode ser que seja uma característica do OmegaT que acabou de descobrir. Se verificar o arquivo de registro do OmegaT e lá encontrar palavras como "Erro", "Aviso", "Exceção" ou "morreu inesperadamente", então realmente aconteceu algo (o log.txt está localizado no diretório de preferências do usuário; consulte o manual para sua localização).
+Antes de relatar um erro, assegure-se de ter verificado detalhadamente a documentaï¿½o. O que vocï¿½vï¿½pode ser que seja uma caracterï¿½tica do OmegaT que acabou de descobrir. Se verificar o arquivo de registro do OmegaT e lï¿½encontrar palavras como "Erro", "Aviso", "Exceï¿½o" ou "morreu inesperadamente", entï¿½ realmente aconteceu algo (o log.txt estï¿½localizado no diretï¿½io de preferï¿½cias do usuï¿½io; consulte o manual para sua localizaï¿½o).
 
-A próxima coisa que você deve fazer é confirmar o que encontrou com outros usuários, para ter certeza de que o problema ainda não foi relatado. Você também pode verificar a página de relatório de 'bugs' no site da SourceForge. Envie um relatório de erro somente quando você tiver certeza de que é o primeiro a encontrar uma seqüência de evento reproduzível que causou algum problema.
+A prï¿½ima coisa que vocï¿½deve fazer ï¿½confirmar o que encontrou com outros usuï¿½ios, para ter certeza de que o problema ainda nï¿½ foi relatado. Vocï¿½tambï¿½ pode verificar a pï¿½ina de relatï¿½io de 'bugs' no site da SourceForge. Envie um relatï¿½io de erro somente quando vocï¿½tiver certeza de que ï¿½o primeiro a encontrar uma seqï¿½cia de evento reproduzï¿½el que causou algum problema.
 
-O relatório de 'bugs' deve conter três informações.
+O relatï¿½io de 'bugs' deve conter trï¿½ informaï¿½es.
   - Passos para reproduzir,
-  O que você esperava ver, e
+  O que vocï¿½esperava ver, e
   O que viu em vez disso.
 
-Você pode acrescentar cópias de arquivos, partes do registro, capturas de tela, qualquer coisa que achar que possa ajudar os desenvolvedores a localizar e consertar o problema.
+Vocï¿½pode acrescentar cï¿½ias de arquivos, partes do registro, capturas de tela, qualquer coisa que achar que possa ajudar os desenvolvedores a localizar e consertar o problema.
 
-Para fazer uma busca nos arquivos do grupo de usuários, acess:
+Para fazer uma busca nos arquivos do grupo de usuï¿½ios, acess:
      http://groups.yahoo.com/group/OmegaT/
 
-Para ver a página de relatório de erros e enviar um relatório sobre um problema novo, se necessário, acesse:
+Para ver a pï¿½ina de relatï¿½io de erros e enviar um relatï¿½io sobre um problema novo, se necessï¿½io, acesse:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347
 
-Para fazer o acompanhamento do relatório enviado, faça seu registro como usuário na Source Forge.
+Para fazer o acompanhamento do relatï¿½io enviado, faï¿½ seu registro como usuï¿½io na Source Forge.
 
 ==============================================================================
-6.   Detalhes da versão
+6.   Detalhes da versï¿½
 
-Veja o arquivo 'changes.txt' para obter informações detalhadas sobre as modificações nesta e em versões anteriores.
+Veja o arquivo 'changes.txt' para obter informaï¿½es detalhadas sobre as modificaï¿½es nesta e em versï¿½s anteriores.
 
 Formatos de arquivos suportados:
   - Texto simples
@@ -181,22 +181,22 @@ Formatos de arquivos suportados:
   - Compilador de Ajuda HTML (HCC)
   - OpenDocument / OpenOffice.org
   - Pacotes de recursos Java (.properties)
-  - Arquivos INI (arquivos com pares key=value valor de qualquer codificação)
+  - Arquivos INI (arquivos com pares key=value valor de qualquer codificaï¿½o)
   - Arquivos PO
-  - Formato de arquivo de documentação DocBook
+  - Formato de arquivo de documentaï¿½o DocBook
 
-Modificações principais:
-  - Segmentação flexível (sentença)
+Modificaï¿½es principais:
+  - Segmentaï¿½o flexï¿½el (sentenï¿½)
   - Filtros de formato de arquivo podem ser criados como plugins
-  - Código refeito com mais comentários
+  - Cï¿½igo refeito com mais comentï¿½ios
   - Instalador do Windows
-  - Atributos de tags HTML são traduzíveis
-  - Compatibilidade total de  TMX 1.1-1.4b nível 1
-  - Compatibilidade parcial de TMX 1.4b nível 1
+  - Atributos de tags HTML sï¿½ traduzï¿½eis
+  - Compatibilidade total de  TMX 1.1-1.4b nï¿½el 1
+  - Compatibilidade parcial de TMX 1.4b nï¿½el 1
 
-Novos recursos da Interface do Usuário (em comparação à série 1.4 do OmegaT):
-  - A interface de localização refeita com melhor funcionalidade
-  - A interface principal melhorada com janelas encaixáveis
+Novos recursos da Interface do Usuï¿½io (em comparaï¿½o ï¿½sï¿½ie 1.4 do OmegaT):
+  - A interface de localizaï¿½o refeita com melhor funcionalidade
+  - A interface principal melhorada com janelas encaixï¿½eis
 
 ============================================================================== 
 

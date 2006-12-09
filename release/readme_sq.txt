@@ -1,117 +1,114 @@
 ==============================================================================
-  OmegaT 1.6.1 Skedari Më Lexo
+  OmegaT 1.6.1 Skedari Mï¿½Lexo
 
-  1.  Informata për OmegaT
-  2.  Çfarë është OmegaT?
-  3.  Shënime gjeneral për Java & OmegaT
+  1.  Informata pï¿½ OmegaT
+  2.  ï¿½arï¿½ï¿½htï¿½OmegaT?
+  3.  Shï¿½ime gjeneral pï¿½ Java & OmegaT
   4.  Kontributet te OmegaT
-  5.  A është OmegaT duke ju bërë gabime juve? A ju duhet ndihmë?
-  6.  Detaje të plasimit
+  5.  A ï¿½htï¿½OmegaT duke ju bï¿½ï¿½gabime juve? A ju duhet ndihmï¿½
+  6.  Detaje tï¿½plasimit
 
 ==============================================================================
-  1.  Informata për OmegaT
+  1.  Informata pï¿½ OmegaT
 
-Informatat më të fundme për OmegaT mund t'i gjeni te:
+Informatat mï¿½tï¿½fundme pï¿½ OmegaT mund t'i gjeni te:
       http://www.omegat.org/omegat/omegat.html
 
-Më tepër informata mund të gjeni te faqet në vijim:
+Mï¿½tepï¿½ informata mund tï¿½gjeni te faqet nï¿½vijim:
 
 User support, at the Yahoo user group:
      http://groups.yahoo.com/group/OmegaT/
-     Ku arkivat janë të kërkueshme pa abonim.
+     Ku arkivat janï¿½tï¿½kï¿½kueshme pa abonim.
 
-Kërkesat për Përmirësime, te faqja e SourceForge-it:
+Kï¿½kesat pï¿½ Pï¿½mirï¿½ime, te faqja e SourceForge-it:
      http://sourceforge.net/tracker/?group_id=68187&atid=520350
 
 Raportet e gabimeve, te faqja e SourceForge-it:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347
 
 ==============================================================================
-  2.  Çfarë është OmegaT?
+  2.  ï¿½arï¿½ï¿½htï¿½OmegaT?
 
-OmegaT është një mjet Përkthimi I Asistuar Nga Kompjuteri. Është falas, në kuptim që ju nuk duhet të paguani asgjë
-që ta jeni në gjendje ta shfrytëzoni atë, madje edhe për shfrytëzim profesional, dhe në kuptimin që ju jeni të lirë ta ndryshoni atë dhe/ose ta rishpërndani atë përderisa ju i respektoni licencat e shfrytëzuesit.
+OmegaT ï¿½htï¿½njï¿½mjet Pï¿½kthimi I Asistuar Nga Kompjuteri. ï¿½htï¿½falas, nï¿½kuptim qï¿½ju nuk duhet tï¿½paguani asgjï¿½qï¿½ta jeni nï¿½gjendje ta shfrytï¿½oni atï¿½ madje edhe pï¿½ shfrytï¿½im profesional, dhe nï¿½kuptimin qï¿½ju jeni tï¿½lirï¿½ta ndryshoni atï¿½dhe/ose ta rishpï¿½ndani atï¿½pï¿½derisa ju i respektoni licencat e shfrytï¿½uesit.
 
-Tiparet kryesore të OmegaT-së janë
-  - në gjendje të ekzekutohet në çfarëdor sistemi operative që përkrah Java-n supporting Java
-  - shfrytëzimi i çdo TMX valide si referencë përkthimi
-  - segmentim fleksibil i fjalive (duke përdorur metodë të ngjashme me SRX)
-  - kërkon në projekt  dhe memoriet referente të përkthimit
-  - kërkon në çfarëdo dosje duke përfshirë skedarët e lexueshëm nga OmegaT
-  - përputhje e trubullt
-  - manipulim i mençur i projekteve duke përfshirë hierarkitë komplekse të dosjeve
-  - përkrahje për fjalorthët (kontrollet terminologjike)
-  - e lehtë për ta kuptuar dokumentimin dhe tutorialin
-  - lokalizimi në një numër të gjuhëve.
+Tiparet kryesore tï¿½OmegaT-sï¿½janï¿½  - nï¿½gjendje tï¿½ekzekutohet nï¿½ï¿½arï¿½or sistemi operative qï¿½pï¿½krah Java-n supporting Java
+  - shfrytï¿½imi i ï¿½o TMX valide si referencï¿½pï¿½kthimi
+  - segmentim fleksibil i fjalive (duke pï¿½dorur metodï¿½tï¿½ngjashme me SRX)
+  - kï¿½kon nï¿½projekt  dhe memoriet referente tï¿½pï¿½kthimit
+  - kï¿½kon nï¿½ï¿½arï¿½o dosje duke pï¿½fshirï¿½skedarï¿½ e lexueshï¿½ nga OmegaT
+  - pï¿½puthje e trubullt
+  - manipulim i menï¿½r i projekteve duke pï¿½fshirï¿½hierarkitï¿½komplekse tï¿½dosjeve
+  - pï¿½krahje pï¿½ fjalorthï¿½ (kontrollet terminologjike)
+  - e lehtï¿½pï¿½ ta kuptuar dokumentimin dhe tutorialin
+  - lokalizimi nï¿½njï¿½numï¿½ tï¿½gjuhï¿½e.
 
-OmegaT përkrah skedarët OpenDocument, skedarët Microsoft Office (duke përdorur
-OpenOffice.org si një filtër konvertimi, ose duke konvertuar në HTML),
-skedarët OpenOffice.org ose StarOffice, si dhe (X)HTML, skedarët e lokalizimit të Java-s ose skedarët e thjeshtë tekstual.
+OmegaT pï¿½krah skedarï¿½ OpenDocument, skedarï¿½ Microsoft Office (duke pï¿½dorur
+OpenOffice.org si njï¿½filtï¿½ konvertimi, ose duke konvertuar nï¿½HTML),
+skedarï¿½ OpenOffice.org ose StarOffice, si dhe (X)HTML, skedarï¿½ e lokalizimit tï¿½Java-s ose skedarï¿½ e thjeshtï¿½tekstual.
 
-OmegaT do të parsoj automatikisht madje edhe hierarki më komplekse të 
-dosjeve burimore, për tu qasur në të gjithë skedarët e përkrahur, dhe të prodhoj një dosje 
-shënjestër me strukturë të njëjtëm duke përfshirë kopje të çdo skedari që nuk përkrahet.
+OmegaT do tï¿½parsoj automatikisht madje edhe hierarki mï¿½komplekse tï¿½
+dosjeve burimore, pï¿½ tu qasur nï¿½tï¿½gjithï¿½skedarï¿½ e pï¿½krahur, dhe tï¿½prodhoj njï¿½dosje 
+shï¿½jestï¿½ me strukturï¿½tï¿½njï¿½tï¿½ duke pï¿½fshirï¿½kopje tï¿½ï¿½o skedari qï¿½nuk pï¿½krahet.
 
-Për nj tutorial të nisjes së shpejtë, nise OmegaT dhe lexo Tutorialin e Nisjes Së Çastit.
+Pï¿½ nj tutorial tï¿½nisjes sï¿½shpejtï¿½ nise OmegaT dhe lexo Tutorialin e Nisjes Sï¿½ï¿½stit.
 
-Doracaku i shfryëzuesit është në pakon që sapo e shkarkuat, ju mund t'i qaseni asaj nga menyja
-[Ndihma] pasi që ta nisni OmegaT-në.
+Doracaku i shfryï¿½uesit ï¿½htï¿½nï¿½pakon qï¿½sapo e shkarkuat, ju mund t'i qaseni asaj nga menyja
+[Ndihma] pasi qï¿½ta nisni OmegaT-nï¿½
 
 ==============================================================================
- 3. Shënime gjeneral për Java & OmegaT
+ 3. Shï¿½ime gjeneral pï¿½ Java & OmegaT
 
-OmegaT kërkon që në sistemin tuaj të jetë e instaluar Java Runtime Environment të verzionit 1.4 ose më të lartë. Është e gatshme nga:
+OmegaT kï¿½kon qï¿½nï¿½sistemin tuaj tï¿½jetï¿½e instaluar Java Runtime Environment tï¿½verzionit 1.4 ose mï¿½tï¿½lartï¿½ ï¿½htï¿½e gatshme nga:
     http://java.com
 
-Shfrytëzuesit e Windows-it dhe Linux-it duhet ta instalojnë Java-n nëse tanimë nuk është e bërë instalimi i tij.
-Projekti OmegaT gjithashtu ofron verzione me Java-n të përfshirë. Shfrytëzuesit e MacOSX tanimë e kanë
-të instaluar Java-n në makinat e tyre.
+Shfrytï¿½uesit e Windows-it dhe Linux-it duhet ta instalojnï¿½Java-n nï¿½e tanimï¿½nuk ï¿½htï¿½e bï¿½ï¿½instalimi i tij.
+Projekti OmegaT gjithashtu ofron verzione me Java-n tï¿½pï¿½fshirï¿½ Shfrytï¿½uesit e MacOSX tanimï¿½e kanï¿½tï¿½instaluar Java-n nï¿½makinat e tyre.
 
-Në makinat e instaluar me përpikëri, ju do të jeni në gjendje ta ekzekutoni OmegaT duke shtypur 
-dy herë në skedarin OmegaT.jar.
+Nï¿½makinat e instaluar me pï¿½pikï¿½i, ju do tï¿½jeni nï¿½gjendje ta ekzekutoni OmegaT duke shtypur 
+dy herï¿½nï¿½skedarin OmegaT.jar.
 
-Pasi që të keni instaluar Java-n ju duhet të ndryshoni ndryshoren sistemit tuaj të shtegut ashtu që do të përfshij
-dosjen se ku qëndron java aplikacioni.
+Pasi qï¿½tï¿½keni instaluar Java-n ju duhet tï¿½ndryshoni ndryshoren sistemit tuaj tï¿½shtegut ashtu qï¿½do tï¿½pï¿½fshij
+dosjen se ku qï¿½dron java aplikacioni.
 
-Shfrytëzuesit e Linux-it duhet të keni më tepër kujdes për faktin që 
-OmegaT nuk do të punoj me Java zbatimet e lira/me-kod-të-hapur që mund të 
-gjenden në shumë shpërndarje të Linux-it  (për shembull, Ubuntu), pasi që ato
-ose janë të vjetëruara, ose janë jo-komplete. Shkarko dhe instalo 
-install Sun's Java Runtime Environment (JRE) përmes vjegëzës më lart, ose shkarko
-dhe instalo me OmegaT që përfshinë edhe JRE-në(.tar.gz tufa e shënuar "Linux").
+Shfrytï¿½uesit e Linux-it duhet tï¿½keni mï¿½tepï¿½ kujdes pï¿½ faktin qï¿½
+OmegaT nuk do tï¿½punoj me Java zbatimet e lira/me-kod-tï¿½hapur qï¿½mund tï¿½
+gjenden nï¿½shumï¿½shpï¿½ndarje tï¿½Linux-it  (pï¿½ shembull, Ubuntu), pasi qï¿½ato
+ose janï¿½tï¿½vjetï¿½uara, ose janï¿½jo-komplete. Shkarko dhe instalo 
+install Sun's Java Runtime Environment (JRE) pï¿½mes vjegï¿½ï¿½ mï¿½lart, ose shkarko
+dhe instalo me OmegaT qï¿½pï¿½fshinï¿½edhe JRE-nï¿½.tar.gz tufa e shï¿½uar "Linux").
 
-Në rast se Linux vepron në sistemet PowerPC, shfrytëzuesit do të duhet të shkarkojnë IBM's JRE,
-pasi që Sun nuk ofron një JRE përr sistemet PPC. Shkarko njërën nga:
+Nï¿½rast se Linux vepron nï¿½sistemet PowerPC, shfrytï¿½uesit do tï¿½duhet tï¿½shkarkojnï¿½IBM's JRE,
+pasi qï¿½Sun nuk ofron njï¿½JRE pï¿½r sistemet PPC. Shkarko njï¿½ï¿½ nga:
     http://www-128.ibm.com/developerworks/java/jdk/linux/download.html
 
 ==============================================================================
  4. Kontributet te OmegaT
 
-Për të kontribuar në zhvillimin e OmegaT, kontakto me zhvilluesit tjerë në:
+Pï¿½ tï¿½kontribuar nï¿½zhvillimin e OmegaT, kontakto me zhvilluesit tjerï¿½nï¿½
     http://lists.sourceforge.net/lists/listinfo/omegat-development
 
-Për ta përkthyer ndërfaqësin e shfrytëzuesit të OmegaT-së, doracakut të shfrytëzuesit ose dokumente të tjeranë lidhje me to,
+Pï¿½ ta pï¿½kthyer ndï¿½faqï¿½in e shfrytï¿½uesit tï¿½OmegaT-sï¿½ doracakut tï¿½shfrytï¿½uesit ose dokumente tï¿½tjeranï¿½lidhje me to,
 lexo:
       http://www.omegat.org/omegat/omegat_en/translation-info.html
 
-Dhe abonohu te lista e përthyesëve:
+Dhe abonohu te lista e pï¿½thyesï¿½e:
       http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
 
-Për kontribute të tjera, abonohu së pari të grupi i shfrytëzuesve në:
+Pï¿½ kontribute tï¿½tjera, abonohu sï¿½pari tï¿½grupi i shfrytï¿½uesve nï¿½
       http://groups.yahoo.com/group/OmegaT/
 
-Dhe për të ndjerë se çfarë po ndodhë në botën OmegaT...
+Dhe pï¿½ tï¿½ndjerï¿½se ï¿½arï¿½po ndodhï¿½nï¿½botï¿½ OmegaT...
 
-  OmegaT është punë origjinale e Keith Godfrey.
-  Marc Prior është koordinator i projektit OmegaT.
+  OmegaT ï¿½htï¿½punï¿½origjinale e Keith Godfrey.
+  Marc Prior ï¿½htï¿½koordinator i projektit OmegaT.
 
-Kontrubuesit paraprak përfshijnë:
-(në renditje alfabetike)
+Kontrubuesit paraprak pï¿½fshijnï¿½
+(nï¿½renditje alfabetike)
 
-Kodi është kontribuar nga
+Kodi ï¿½htï¿½kontribuar nga
   Kim Bruning
   Sacha Chua
-  Maxym Mykhalchuk (udhëheqësi i tanishëm i zhvillimit)
+  Maxym Mykhalchuk (udhï¿½eqï¿½i i tanishï¿½ i zhvillimit)
   Henry Pijffers (menagjer plasimi i verzionit 1.6 )
   Benjamin Siband
 
@@ -120,15 +117,15 @@ Localization contributed by
   Alessandro Cattelan (Italiane)
   Sabine Cretella (Gjermane)
   Suzanne Bolduc (Esperanto)
-  Didier Briel (Frënge)
+  Didier Briel (Frï¿½ge)
   Frederik De Vos (Holandeze)
   Cesar Escribano Esteban (Spanjolle)
   Dmitri Gabinski (Belaruse, Esperanto, dhe Ruse)
   Takayuki Hayashi (Japoneze)
-  Jean-Christophe Helary (Frënge dhe Japoneze)
+  Jean-Christophe Helary (Frï¿½ge dhe Japoneze)
   Yutaka Kachi (Japoneze)
   Elina Lagoudaki (Greke)
-  Martin Lukac (Sllovake)
+  Martin LukÃ¡Ä (Sllovake)
   Samuel Murray (Afrikaanse)
   Yoshi Nakayama (Japoneze)
   David Olveira (Portugeze)
@@ -144,16 +141,15 @@ Localization contributed by
   Erhan Yukselci (Turke)
   Ahmet N Murati (Shqip)
 
-Kontribute të tjera nga
+Kontribute tï¿½tjera nga
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (menagjer i tanishëm i dokumentimit)
+  Jean-Christophe Helary (menagjer i tanishï¿½ i dokumentimit)
   Samuel Murray
-  Marc Prior (menagjer i tanishëm i lokalizimit)
-  dhe shumë e shumë njerëz që kanë ndihmuar shumë
-
-OmegaT përdor bibliotekat në vijim:
-  HTMLParser nga Somik Raha, Derrick Oswald dhe të tjerë (LGPL Licenca).
+  Marc Prior (menagjer i tanishï¿½ i lokalizimit)
+  dhe shumï¿½e shumï¿½njerï¿½ qï¿½kanï¿½ndihmuar shumï¿½
+OmegaT pï¿½dor bibliotekat nï¿½vijim:
+  HTMLParser nga Somik Raha, Derrick Oswald dhe tï¿½tjerï¿½(LGPL Licenca).
   http://sourceforge.net/projects/htmlparser
   
   MRJ Adapter nga Steve Roy (LGPL Licenca).
@@ -163,65 +159,62 @@ OmegaT përdor bibliotekat në vijim:
   http://www.vlsolutions.com/en/products/docking/
 
 ==============================================================================
- 5.  A është OmegaT duke ju bërë gabime juve? A ju duhet ndihmë?
+ 5.  A ï¿½htï¿½OmegaT duke ju bï¿½ï¿½gabime juve? A ju duhet ndihmï¿½
 
-Para se të raportoni një gabim, bëhuni të sigurtë që ju jeni kontrolluar në tërësi 
-dokumentacionin. Çfarë ju shihni mund të jetë një karakteristikë e OmegaT që
-ju sapo e keni zbuluar. Nëse kontrolloni OmegaT llog dhe ju i shihni fjalët si
-"Error", "Warning", "Exception", ose "died unexpectedly" atëhetë ju  jeni në
-diçka si (log.txt gjendet të dosje të parapëlqyerave të shfrytëzuesit, shiko doracakun
-për këtë vend).
+Para se tï¿½raportoni njï¿½gabim, bï¿½uni tï¿½sigurtï¿½qï¿½ju jeni kontrolluar nï¿½tï¿½ï¿½i 
+dokumentacionin. ï¿½arï¿½ju shihni mund tï¿½jetï¿½njï¿½karakteristikï¿½e OmegaT qï¿½ju sapo e keni zbuluar. Nï¿½e kontrolloni OmegaT llog dhe ju i shihni fjalï¿½ si
+"Error", "Warning", "Exception", ose "died unexpectedly" atï¿½etï¿½ju  jeni nï¿½diï¿½a si (log.txt gjendet tï¿½dosje tï¿½parapï¿½qyerave tï¿½shfrytï¿½uesit, shiko doracakun
+pï¿½ kï¿½ï¿½vend).
 
-Gjëja tjerët që ju bëni është të miratoni atë që ju e keni gjetur me shfrytëzuesit tjerë,
-për të qenë e sigurtë që nuk është raportuar paraprakisht. Ju gjithashut mund ta vërtetoni faqen e raporteve të gabimeve te 
-SourceForge. Vetëm kur ju jeni të sigurtë që ju jeni i pari që ju keni gjetur disa 
-sekuenca të riprodhueshme të ngjarjeve që kanë shkaktuar diçka që nuk ësht dashur
-të ndodh atëherë ju do të dërgoni një raport gabimi.
+Gjï¿½a tjerï¿½ qï¿½ju bï¿½i ï¿½htï¿½tï¿½miratoni atï¿½qï¿½ju e keni gjetur me shfrytï¿½uesit tjerï¿½
+pï¿½ tï¿½qenï¿½e sigurtï¿½qï¿½nuk ï¿½htï¿½raportuar paraprakisht. Ju gjithashut mund ta vï¿½tetoni faqen e raporteve tï¿½gabimeve te 
+SourceForge. Vetï¿½ kur ju jeni tï¿½sigurtï¿½qï¿½ju jeni i pari qï¿½ju keni gjetur disa 
+sekuenca tï¿½riprodhueshme tï¿½ngjarjeve qï¿½kanï¿½shkaktuar diï¿½a qï¿½nuk ï¿½ht dashur
+tï¿½ndodh atï¿½erï¿½ju do tï¿½dï¿½goni njï¿½raport gabimi.
 
-Çdo raport i mirë i gabimit duhet t'i përmbaj saktësisht tri gjëra.
-  - Hapat se si do të ribëhet,
-  - Çfarë keni pritur të shikoni, si dhe
-  - Çfarë keni parë në vend të saj.
+ï¿½o raport i mirï¿½i gabimit duhet t'i pï¿½mbaj saktï¿½isht tri gjï¿½a.
+  - Hapat se si do tï¿½ribï¿½et,
+  - ï¿½arï¿½keni pritur tï¿½shikoni, si dhe
+  - ï¿½arï¿½keni parï¿½nï¿½vend tï¿½saj.
 
-Ju mund të shtoni kopje të skedarëve, pjesë të llogut, pamje të kapura, ose çfarëdo që ju
-mendoni që do tu ndihmone zhvilluesve të gjejn dhe të përmirësojnë gabimin tuaj.
+Ju mund tï¿½shtoni kopje tï¿½skedarï¿½e, pjesï¿½tï¿½llogut, pamje tï¿½kapura, ose ï¿½arï¿½o qï¿½ju
+mendoni qï¿½do tu ndihmone zhvilluesve tï¿½gjejn dhe tï¿½pï¿½mirï¿½ojnï¿½gabimin tuaj.
 
-Për të shfletuar arkivat e grupit të shfrytëzuesve, shko te:
+Pï¿½ tï¿½shfletuar arkivat e grupit tï¿½shfrytï¿½uesve, shko te:
      http://groups.yahoo.com/group/OmegaT/
 
-Për ta shfletuar faqen e raportimit të gabimeve dhe për të dërguar një raport të ri të gabim nëse është e nevojshme, shko te:
+Pï¿½ ta shfletuar faqen e raportimit tï¿½gabimeve dhe pï¿½ tï¿½dï¿½guar njï¿½raport tï¿½ri tï¿½gabim nï¿½e ï¿½htï¿½e nevojshme, shko te:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347
 
-Për të përcjallë se çfarë po ndodh me raportin tuaj të gabimin ju mund të doni të regjistroheni si një shfrytëzues i Source Forge.
+Pï¿½ tï¿½pï¿½cjallï¿½se ï¿½arï¿½po ndodh me raportin tuaj tï¿½gabimin ju mund tï¿½doni tï¿½regjistroheni si njï¿½shfrytï¿½ues i Source Forge.
 
 ==============================================================================
-6.   Detaje të plasimit
+6.   Detaje tï¿½plasimit
 
-Ju lutemi shihni skedarin 'changes.txt' për informatat e detajuara për ndryshimet 
-këtë dhe të gjitha plasimet paraprake.
+Ju lutemi shihni skedarin 'changes.txt' pï¿½ informatat e detajuara pï¿½ ndryshimet 
+kï¿½ï¿½dhe tï¿½gjitha plasimet paraprake.
 
-Formatet e përkrahuar të skedarëve:
-  - Skedar tekstual të thjeshtë
-  dhe- HTML and XHTML
+Formatet e pï¿½krahuar tï¿½skedarï¿½e:
+  - Skedar tekstual tï¿½thjeshtï¿½  dhe- HTML and XHTML
   - HTML Help Compiler (HCC)
   - OpenDocument / OpenOffice.org
   - Java tufa resurcesje (.properties)
-  - INI skedarët (skedarët me çifte çelësi=vlera të çfarëdo enkodimi)
-  - PO skedarët
-  - Formati i skedarit të dokumentimit DocBook 
+  - INI skedarï¿½ (skedarï¿½ me ï¿½fte ï¿½lï¿½i=vlera tï¿½ï¿½arï¿½o enkodimi)
+  - PO skedarï¿½
+  - Formati i skedarit tï¿½dokumentimit DocBook 
 
 Ndryshime kryesore:
   - Segmentim Fleksibil (Fjali)
-  - Filtrat e formateve të skedarëve mund të krijohen si shtojca
-  - Kod i refaktorizuar me më tepër komente
+  - Filtrat e formateve tï¿½skedarï¿½e mund tï¿½krijohen si shtojca
+  - Kod i refaktorizuar me mï¿½tepï¿½ komente
   - Windows instaluesi
-  - Atributet e HTML tagjeve janë të përkthyeshme
-  - Përshtatshmëri E Plotë me TMX 1.1-1.4b Level 
-  - Përrkahje Pjesërishme e Partial TMX 1.4b Level 2
+  - Atributet e HTML tagjeve janï¿½tï¿½pï¿½kthyeshme
+  - Pï¿½shtatshmï¿½i E Plotï¿½me TMX 1.1-1.4b Level 
+  - Pï¿½rkahje Pjesï¿½ishme e Partial TMX 1.4b Level 2
 
-Veçori të reja të UI-së(në krahasim me serinë 1.4 OmegaT):
-  - Ndërfaqësi i kërkimit është rishkruar me funskionalitet të përparuar
-  - Ndërfaqësi kryesor është përmirësuar duke përdorur dritare të dokueshme
+Veï¿½ri tï¿½reja tï¿½UI-sï¿½nï¿½krahasim me serinï¿½1.4 OmegaT):
+  - Ndï¿½faqï¿½i i kï¿½kimit ï¿½htï¿½rishkruar me funskionalitet tï¿½pï¿½paruar
+  - Ndï¿½faqï¿½i kryesor ï¿½htï¿½pï¿½mirï¿½uar duke pï¿½dorur dritare tï¿½dokueshme
 
 ==============================================================================
 

@@ -16,7 +16,7 @@ Najaktuálnejšie informácie o OmegaT môžete nájsť na:
 
 Viac informácií môžete získať na nasledujúcich stránkach:
 
-Používateľská podpora, v používateľskej skupine Yahoo:
+Používateľská podpora, v používateľskej skupine na Yahoo:
      http://groups.yahoo.com/group/OmegaT/
      Kde sú k dispozícii archívy na prehliadanie bez potreby prihlásenia.
 
@@ -66,20 +66,20 @@ menu [Pomocník] po spustení OmegaT.
 OmegaT vyžaduje aby na vašom systéme bolo nainštalované prostredie Java Runtime Environment verzie 1.4 alebo vyššej. Dá sa získať z:
     http://java.com
 
-Používatelia Windows a Linux možno budú potrebovať nainštalovať Javu ak ju ešte nemajú.
+Používatelia Windows a Linux možno budú potrebovať nainštalovať prostredie Java ak ho ešte nemajú.
 Projekt OmegaT tiež ponúka verzie obsahujúce prostredie Java. Používatelia MacOSX už majú
 na svojich strojoch prostredie Java nainštalované.
 
 Na správne nainštalovanom stroji, by ste mali byť schopní spustiť OmegaT
 dvojkliknutím na súbor OmegaT.jar.
 
-Po inštalácii javy možno budete potrebovať zmeniť systémovú premennú path, aby
+Po inštalácii prostredia java možno budete potrebovať zmeniť systémovú premennú path, aby
 obsahovala adresár, kde sa aplikácia 'java' nachádza.
 
 Používatelia Linuxu by mali dávať pozor na fakt, že OmegaT nebude fungovať so slobodnými/
-open-sourceovými implementáciami prostredia Java, ktoré možno nájsť v mnohých distribúciách Linuxu (napríklad,
-Ubuntu), keďže tieto sú buď zastaralé, alebo nekompletné. Stiahnite si a
-nainštalujte Java Runtime Environment (JRE) firmy Sun cez vyššieuvedený odkaz, alebo si stiahnite
+open-source implementáciami prostredia Java, ktoré možno nájsť v mnohých distribúciách Linuxu (napríklad,
+Ubuntu), keďže tieto sú buď zastaralé, alebo neúplné. Stiahnite si a
+nainštalujte Java Runtime Environment (JRE) firmy Sun cez vyššie uvedený odkaz, alebo si stiahnite
 a nainštalujte OmegaT dodávané s JRE (balík .tar.gz označený "Linux").
 
 Keď používate Linux na systémoch PowerPC, používatelia si budú musieť stiahnuť JRE od firmy IBM, keďže
@@ -107,43 +107,43 @@ A zistite čo sa deje vo svete OmegaT...
   OmegaT je pôvodne prácou Keitha Godfreyho.
   Marc Prior je koordinátorom projektu OmegaT.
 
-Predchádzajúci prispievatelia sú:
+Medzi predchádzajúcich prispievateľov patria:
 (v abecednom poradí)
 
 Do kódu prispeli
   Kim Bruning
   Sacha Chua
   Maxym Mykhalchuk (súčasný vedúci vývojár)
-  Henry Pijffers
+  Henry Pijffers (vedúci vydávania verzie 1.6)
   Benjamin Siband
 
 K lokalizácii prispeli
-  Roberto Argus (Brazílska portugalčina)
-  Alessandro Cattelan (Taliančina)
-  Sabine Cretella (Nemčina)
-  Suzanne Bolduc (Esperanto)
-  Didier Briel (Francúzština)
-  Frederik De Vos (Holandčina)
-  Cesar Escribano Esteban (Španielčina)
-  Dmitri Gabinski (Bieloruština, Esperanto, a Ruština)
-  Takayuki Hayashi (Japončina)
-  Jean-Christophe Helary (Francúzština a japončina)
-  Yutaka Kachi (Japončina)
-  Elina Lagoudaki (Gréčtina)
-  Martin Lukáč (Slovenčina)
-  Samuel Murray (Afrikánčina)
-  Yoshi Nakayama (Japončina)
-  David Olveira (Portugalčina)
-  Ronaldo Radunz (Brazílska portugalčina)
-  Thelma L. Sabim (Brazílska portugalčina)
-  Juan Salcines (Španielčina)
-  Pablo Roca Santiagio (Španielčina)
-  Karsten Voss (Poľština)
-  Gerard van der Weyde (Holandčina)
-  Martin Wunderlich (Nemčina)
-  Hisashi Yanagida (Japončina)
-  Kunihiko Yokota (Japončina)
-  Erhan Yukselci (Turečtina)
+  Roberto Argus (brazílska portugalčina)
+  Alessandro Cattelan (taliančina)
+  Sabine Cretella (nemčina)
+  Suzanne Bolduc (esperanto)
+  Didier Briel (francúzština)
+  Frederik De Vos (holandčina)
+  Cesar Escribano Esteban (španielčina)
+  Dmitri Gabinski (bieloruština, esperanto, a ruština)
+  Takayuki Hayashi (japončina)
+  Jean-Christophe Helary (francúzština a japončina)
+  Yutaka Kachi (japončina)
+  Elina Lagoudaki (gréčtina)
+  Martin Lukáč (slovenčina)
+  Samuel Murray (afrikánčina)
+  Yoshi Nakayama (japončina)
+  David Olveira (portugalčina)
+  Ronaldo Radunz (brazílska portugalčina)
+  Thelma L. Sabim (brazílska portugalčina)
+  Juan Salcines (španielčina)
+  Pablo Roca Santiagio (španielčina)
+  Karsten Voss (poľština)
+  Gerard van der Weyde (holandčina)
+  Martin Wunderlich (nemčina)
+  Hisashi Yanagida (japončina)
+  Kunihiko Yokota (japončina)
+  Erhan Yukselci (turečtina)
 
 Ďalej prispeli
   Sabine Cretella
@@ -154,9 +154,14 @@ K lokalizácii prispeli
   a mnoho, mnoho ďalších veľmi nápomocných ľudí
 
 OmegaT používa nasledujúce knižnice:
-  HTMLParser od Somika Rahu, Derricka Oswalda a iných (Common Public License).
+  HTMLParser od Somika Rahu, Derricka Oswalda a iných (licencia LGPL).
+  http://sourceforge.net/projects/htmlparser
+  
   MRJ Adapter od Steva Roya (licencia LGPL).
+  http://homepage.mac.com/sroy/mrjadapter/
+  
   VLDocking Framework od VLSolutions (licencia CeCILL).
+  http://www.vlsolutions.com/en/products/docking/
 
 ==============================================================================
  5.  Máte s OmegaT problémy ? Potrebujete pomoc ?
@@ -205,16 +210,16 @@ Podporované formáty súborov:
   - Zdrojové balíčky Java (.properties)
   - INI súbory (súbory s pármi kľúč=hodnota v akomkoľvek kódovaní)
   - PO súbory
-  - formát dokumentačných súborov DocBook
+  - Formát dokumentačných súborov DocBook
 
 Zmeny v jadre:
   - Flexibilná (vetná) segmentácia
-  - Filtre formátov súborov môžu byť vytvárané ako zásuvné moduly (pluginy)
+  - Filtre formátov súborov môžu byť vytvárané ako doplnky/zásuvné moduly (pluginy)
   - Prerobený kód s viacerými komentármi
   - Inštalátor pre Windows
   - Možno prekladať atribúty HTML značiek (tagov)
-  - Plná kompatibilita s TMX 1.1-1.4b Level 1
-  - Čiastočná podpora TMX 1.4b Level 2
+  - Plná kompatibilita s TMX 1.1-1.4b Level 1 (tj. Úroveň 1)
+  - Čiastočná podpora TMX 1.4b Level 2 (tj. Úroveň 2)
 
 Nové vlastnosti používateľského rozhrania (v porovnaní so sériou OmegaT 1.4):
   - Vyhľadávacie rozhranie prepísané s rozšírenou funkčnosťou

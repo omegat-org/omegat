@@ -138,7 +138,7 @@ Localization contributed by
   Jean-Christophe Helary (French and Japanese)
   Yutaka Kachi (Japanese)
   Elina Lagoudaki (Greek)
-  Martin Lukac (Slovak)
+  Martin Lukáč (Slovak)
   Samuel Murray (Afrikaans)
   Yoshi Nakayama (Japanese)
   David Olveira (Portugese)

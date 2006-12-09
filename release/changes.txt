@@ -3,13 +3,13 @@
 ----------------------------------------------------------------------
 
 1.6.1_02 vs. 1.4.5.04
-   64 Enchancements
+   67 Enchancements
   120 Bugfixes
 
 ----------------------------------------------------------------------
 1.6.1_02
-Contains new localisations, legacy manual translations,
-and an important bug fix
+Contains new and updated localisations, legacy manual translations,
+and two bug fixes
 
  Implemented requests:
 
@@ -30,6 +30,8 @@ and an important bug fix
   - Italian user manual translation
 
   - Albanian UI localisation + instant start guide translation
+
+  - Belarusian UI localisation updated
 
  Bug fixes:
 

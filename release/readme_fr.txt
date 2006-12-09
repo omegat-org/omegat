@@ -116,7 +116,7 @@ Contributions aux traductions:
   Jean-Christophe Helary (français et japonais)
   Yutaka Kachi (japonais)
   Elina Lagoudaki (greque)
-  Martin Lukac (slovaque)
+  Martin Lukáč (slovaque)
   Samuel Murray (afrikaans)
   Yoshi Nakayama (japonais)
   David Olveira (portugais)

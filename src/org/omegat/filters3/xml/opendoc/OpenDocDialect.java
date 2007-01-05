@@ -47,7 +47,6 @@ public class OpenDocDialect extends DefaultXMLDialect
             "text:alphabetical-index-mark-start", "is",                         // NOI18N
             "text:alphabetical-index-mark-end", "ie",                           // NOI18N
             "text:tab-stop", "t",                                               // NOI18N
-            "text:line-break", "br",                                            // NOI18N
             "text:user-defined", "ud",                                          // NOI18N
             "text:sequence", "seq",                                             // NOI18N
         
@@ -94,6 +93,8 @@ public class OpenDocDialect extends DefaultXMLDialect
         defineOutOfTurnTags(new String[]
         {
             "text:note",                                                        // NOI18N
+            // Commments [1628890]
+            "office:annotation",                                                // NOI18N
         });
         defineIntactTags(new String[]
         {

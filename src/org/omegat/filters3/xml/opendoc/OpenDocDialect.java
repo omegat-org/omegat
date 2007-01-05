@@ -93,7 +93,7 @@ public class OpenDocDialect extends DefaultXMLDialect
         defineOutOfTurnTags(new String[]
         {
             "text:note",                                                        // NOI18N
-            // Commments [1628890]
+            // Comments [1628890]
             "office:annotation",                                                // NOI18N
         });
         defineIntactTags(new String[]

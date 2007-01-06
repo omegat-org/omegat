@@ -53,7 +53,6 @@ public class OpenDocDialect extends DefaultXMLDialect
             // Donated by Didier Briel
             // http://sourceforge.net/support/tracker.php?aid=1458673
             "draw:image", "di",                                                 // NOI18N
-            "draw:frame", "df",                                                 // NOI18N
             "draw:object-ole", "do",                                            // NOI18N
 
             "text:bookmark", "bk",                                              // NOI18N
@@ -95,6 +94,25 @@ public class OpenDocDialect extends DefaultXMLDialect
             "text:note",                                                        // NOI18N
             // Comments [1628890]
             "office:annotation",                                                // NOI18N
+            // Drawing Shapes from OO specifications
+            // Correction for [ 1541277 ] OO: Segmenting on inline drawings
+            "draw:rect",                                                        // NOI18N
+            "draw:line",                                                        // NOI18N
+            "draw:polyline",                                                    // NOI18N
+            "draw:polygon",                                                     // NOI18N
+            "draw:regular-polygon",                                             // NOI18N
+            "draw:path",                                                        // NOI18N
+            "draw:circle",                                                      // NOI18N
+            "draw:ellipse",                                                     // NOI18N 
+            "draw:g",                                                           // NOI18N
+            "draw:page-thumbnail",                                              // NOI18N
+            "draw:frame",                                                       // NOI18N
+            "draw:measure",                                                     // NOI18N    
+            "draw:caption",                                                     // NOI18N
+            "draw:connector",                                                   // NOI18N
+            "draw:control",                                                     // NOI18N
+            "dr3d:scene",                                                       // NOI18N
+            "draw:custom-shape",                                                // NOI18N
         });
         defineIntactTags(new String[]
         {

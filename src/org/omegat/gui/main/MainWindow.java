@@ -812,8 +812,10 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private synchronized void doInsertText(String text)
     {
         synchronized (editor) {
-            int pos = editor.getCaretPosition();
-            editor.select(pos, pos);
+//            int pos = editor.getCaretPosition();
+//            editor.select(pos, pos);
+// Removing the two lines above implements:
+// RFE [ 1579488 ] overwriting with Ctrl+i
             editor.replaceSelection(text);
         }
     }

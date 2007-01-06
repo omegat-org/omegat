@@ -35,6 +35,8 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.StyleContext;
 import javax.swing.undo.UndoManager;
+import javax.swing.text.Utilities;
+import javax.swing.text.BadLocationException;
 
 import org.omegat.util.OStrings;
 
@@ -224,13 +226,74 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
             case KeyEvent.VK_BACK_SPACE:
                 if (mw.checkCaretForDelete(false))
                 {
-                    super.processKeyEvent(e);
+                    // RFE [ 1579488 ] Ctrl+Backspace
+                    if (e.getModifiers()==CTRL_KEY_MASK &&
+                            e.getKeyCode()== KeyEvent.VK_BACK_SPACE) 
+                    {// e.getKeyCode() == KeyEvent.VK_BACK_SPACE has to be 
+                     // retested, otherwise the code is triggered twice   
+                        try
+                        {
+                            int offset = getCaretPosition();
+                            int prevWord = Utilities.getPreviousWord(this, offset);
+                            int endPrevWord = Utilities.getWordEnd(this, prevWord);
+                            int wordBefore = Utilities.getPreviousWord(this, prevWord);
+                            int wordBeforeEnd = Utilities.getWordEnd(this, wordBefore);
+                            setSelectionEnd(offset);
+                            if (endPrevWord != offset &&
+                                endPrevWord < offset) 
+                            // There's space on the left of the cursor              
+                                setSelectionStart(prevWord);
+                            else
+                                setSelectionStart(wordBeforeEnd);
+                            // Check selection is within segment
+                            mw.checkCaret(); 
+                            // Remove selection
+                            replaceSelection("");                               // NOI18N
+                            // Swallow key event
+                            return; 
+                        }
+                        catch(BadLocationException ble)
+                        {
+                            // Nothing
+                        }
+                    }
+                    else
+                        super.processKeyEvent(e);
                 }
                 return;
             case KeyEvent.VK_DELETE:
                 if (mw.checkCaretForDelete(true))
                 {
-                    super.processKeyEvent(e);
+                    // RFE [ 1579488 ] Ctrl+Delete
+                    if (e.getModifiers()==CTRL_KEY_MASK &&
+                            e.getKeyCode()== KeyEvent.VK_DELETE) 
+                    {// e.getKeyCode() == KeyEvent.VK_DELETE has to be retested,
+                     // otherwise the code is triggered twice   
+                        try
+                        {
+                            int offset = getCaretPosition();
+                            int nextWord = Utilities.getNextWord(this, offset);
+                            int wordEnd = Utilities.getWordEnd(this, offset);
+                            setSelectionStart(offset);
+                            if (nextWord == wordEnd) 
+                            // There's space on the right of the cursor              
+                                setSelectionEnd(wordEnd);
+                            else
+                                setSelectionEnd(nextWord);
+                            // Check selection is within segment
+                            mw.checkCaret(); 
+                            // Remove selection
+                            replaceSelection("");                               // NOI18N
+                            // Swallow key event
+                            return; 
+                        }
+                        catch(BadLocationException ble)
+                        {
+                            // Nothing
+                        }
+                    }
+                    else
+                        super.processKeyEvent(e);
                 }
                 return;
         }

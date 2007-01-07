@@ -1,0 +1,494 @@
+<html xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<link rel=Edit-Time-Data href="segmentation_files/editdata.mso">
+<title>Source Segmentation - OmegaT 1.6.1 User Manual</title>
+<style>
+<!--
+h1
+	{font-size:24.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h2
+	{font-size:18.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h3
+	{font-size:13.5pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h4
+	{font-size:12.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+p
+	{font-size:12.0pt;
+	font-family:"Times New Roman";}
+code
+	{font-family:"Courier New";}
+tt
+	{font-family:"Courier New";}
+ol
+	{ul
+	{-->
+</style>
+</head>
+<body bgcolor="#FFFFFF" link=blue vlink=blue lang=EN-US>
+<div class=Section1>
+  <h1><span lang=SQ>Segmentimi i Burimit</span></h1>
+  <h2><span lang=SQ>Përmbajtja</span></h2>
+  <ul type=disc>
+    <li><span lang=SQ>1. <a href="#Segmentation_Basics">Bazat e
+      Segmentimit</a></span></li>
+    <li><span lang=SQ>2. <a href="#Sentence_Segmentation">Segmentimi
+      i Fjalive</a> </span></li>
+    <ul type=circle>
+      <li><span lang=SQ>2.1. <a href="#About_Rules">Për Rregullat</a></span></li>
+      <li><span lang=SQ>2.2. <a href="#Rules_Setup">Vënia e
+        Rregullave</a> </span></li>
+      <ul type=square>
+        <li><span lang=SQ>2.2.1. <a href="#Sets_of_Rules">Bashkësitë
+          e Rregullave</a></span></li>
+        <li><span lang=SQ>2.2.2. <a href="#Simple_examples">Shembuj
+          të thjeshtë</a></span></li>
+      </ul>
+      <li><span lang=SQ>2.3. <a
+      href="#Regular_Expressions_to_use_in_segmentat">Shprehjet Regulare  që përdoren në rregullat e segmentimit</a> </span></li>
+      <ul type=square>
+        <li><span lang=SQ>2.3.1. <a
+       href="#Short_summary_of_regular-expression_con">Përmbledhje e shkurtë e
+          konstrukteve shprehje-regulare</a></span></li>
+      </ul>
+    </ul>
+  </ul>
+  <h2><a name="Segmentation_Basics"></a><span lang=SQ>Bazat e Segmentimit</span></h2>
+  <p><span lang=SQ>Mjetet e memories së përkthimit
+    punojnë me njësitë e tekstuale të quajtura segmente. Ka shumë mënyra për te
+    segmentuar një tekst.</span></p>
+  <p><span lang=SQ>OmegaT së pari e përgatit tekstin
+    për segmentimin në nivel strukture. Gjatë këtij procesi është vetëm struktura e
+    skedarit burimor që përdoret për të prodhuar segmentet. Për shembull, skedarët
+    tekstual mund të segmentohen thyes rreshtash, rreshta bosh, ose nuk mund të segmentohet
+    fare në nivelin e strukturës. Skedarët me formatim (dokumentet OpenOffice.org,
+    OpenDocument, XHTML dhe HTML) segmentohen në tagje nivelesh blloku (paragraf).</span></p>
+  <p><span lang=SQ>Atributet e objekteve të
+    përkthyeshme (në skedarët XHTML ose HTML) janë gjithashtu të përftuara për tu
+    ndarë në segmente.</span></p>
+  <p><span lang=SQ>OmegaT mund t'i segmentoj edhe sipas
+    fjalive. Segmentimi i fjalive bëhet vetëm pas segmentimit strukturor. Segmentet
+    e krijuara gjatë procesit tjetër fatkeqësisht nuk mund të ndryshohen (të ndahen
+    ose të bashkohen) gjatë përkthimit. Ky është kufizimi i OmegaT që ne e njohim.</span></p>
+  <p><span lang=SQ>Nëse nuk jeni të kënaqur me
+    segmentimin ju ose duhet ta ndryshoni prej nga jashtë skedarin burimor dhe/ose
+    të ndryshoni rregullat e segmentimit. Pasi të keni bërë këtë ju duhet ta
+    ringarkoni projektin që ndryshimet tuaja të merren parasysh.</span></p>
+  <h2><a name="Sentence_Segmentation"></a><span lang=SQ>Segmentimi i fjalive</span></h2>
+  <p><span lang=SQ>Pasi që OmegaT të ketë segmentuar
+    skedarët burimor në njësitë logjike, për skedarët e formatuar rëndom
+    korrespondon me paragrafët, do të segmentoj ende këto blloqe në fjali nëse ju
+    nuk e fikni Segmentimin e Fjalive. Duke folur në përgjithësi, OmegaT mund të
+    segmentoj blloqet logjike të skedarit burimor në çfarëdo segmente që ju i
+    caktoni. Sidoqoftë është <strong>rëndomtë</strong> OmegaT segmenton në fjali,
+    ne e quajmë segmentim <strong>fjalie</strong> .</span></p>
+  <p><span lang=SQ>Segmentimi i fjalive është
+    ndërtuar duke pasur në mend standardin <a
+href="http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a>,
+    megjithatë shkrimit të tanishëm, OmegaT as nuk i përkrah të gjitha veçoritë e
+    SRX, as nuk është në gjendje të eksportoj/importoj rregulla të përcaktuara në
+    formatin SRX. Për më tepër nëse e dini se si punon SRX, ju tani dini se si
+    punon OmegaT, pasi që ato janë pak a shumë të ngjashme.</span></p>
+  <h3><a name="About_Rules"></a><span lang=SQ>Për
+    rregullat</span></h3>
+  <p><span lang=SQ>Ka dy lloje të rregullave të
+    mundshme.</span></p>
+  <ul type=disc>
+    <li><span lang=SQ>Rregulla të thyerjes që e thyejnë tekstin në
+      segmente.</span></li>
+    <li><span lang=SQ>Rregulla të përjashtimi që përcaktojnë cilat
+      pjesë të tekstit nuk duhet të ndahet nga të tjerat.</span></li>
+  </ul>
+  <p><span lang=SQ>Shembull i rregullit të thyerjes: <i>&quot;A pati kuptim? Nuk jam i sigurt.&quot;</i> mund të segmentohet si dy
+    fjali pas &quot;</span><code><span lang=SQ style='font-size:10.0pt;'>?</span></code><span lang=SQ>&quot;. Duhet të
+    ketë një rregull thyerje për &quot;</span><code><span lang=SQ style='font-size:
+10.0pt;'>?</span></code><span lang=SQ>&quot;.</span></p>
+  <p><span lang=SQ>Shembull rregulli të
+    përjashtimit: <i>&quot;Kush i frikësohet znj. Woolf?&quot;</i> nuk mund të
+    segmentohet pas &quot;</span><code><span lang=SQ style='font-size:10.0pt;
+'>.</span></code><span lang=SQ>&quot;. Duhet të ketë një rregull përjashtimi për &quot;</span><code><span
+lang=SQ style='font-size:10.0pt;'>znj.</span></code><span
+lang=SQ>&quot;.</span></p>
+  <p><span lang=SQ>Rregullat e paracaktuar të
+    thyerjes duhet të jenë të mjaftueshme për shumicën e gjuhëve Evropiane dhe
+    Japoneze, por ne rekomandojmë të përcaktoni më tepër rregulla përjashtimi për
+    gjuhën që ju do të përktheni nga, pasi është e qartë e pamundshme të përcaktohen
+    të gjitha përjashtimet e mundshme për të gjitha gjuhët e mundshme.</span></p>
+  <h3><a name="Rules_Setup"></a><span lang=SQ>Vënia
+    e Rregullave</span></h3>
+  <p><span lang=SQ>Që të vëni rregulla,përzgjidh nga
+    menyja kryesore <strong>Opsionet -&gt; Segmentimi...</strong>. Vini re që nëse
+    ju ndërroni opsionet e segmentimit përgjatë çfarëdo projekti që është i hapur,
+    ju duhet ta ringarkoni projektin që të ndikojnë ndryshimet në rregulla.</span></p>
+  <h4><a name="Sets_of_Rules"></a><span lang=SQ>Bashkësitë
+    e Rregullave</span></h4>
+  <p><span lang=SQ>Të gjitha bashkësitë e rregullat
+    e segmentimit me një Model Të Gjuhës janë të zbatuara në renditje të
+    prioritetit, kështu që për një gjuhë të veçantë do të jenë më të larta të
+    rëndomtat.</span></p>
+  <p><span lang=SQ>Për shembull, rregullat për
+    Frëngjishten Kanadeze (FR-CA) duhet të jenë më të larta se rregullat për Frëngjishten  (FR.*), dhe më të larta se sa për të
+    rëndomtat. Pastaj gjatë përkthimit nga Frëngjishtja Kanadeze projekti i juaj do
+    të përdor rregullat e përcaktuara për këtë gjuhë, rregullat për frëngjisht, dhe
+    rregullat e Rëndomta në një renditje të përpiktë.</span></p>
+  <p><span lang=SQ>Që të shtoni një bashkësi boshe
+    të rregullave, shtyp <strong>Shto</strong> në gjysmën e sipërme të dialogut.
+    Një rresht bosh do të paraqitet në fund të tabelës. Ndërro emrin e bashkësisë
+    së rregullave dhe modelin e gjuhës. Sintaksa e modeleve të gjuhës konform
+    sintaksës së shprehjeve regulare. Shiko seksionin <a
+href="#Short_summary_of_regular-expression_con">Përmbledhje e shkurtë e
+    konstrukteve shprehje-regulare</a> në vijim.</span></p>
+  <p><span lang=SQ>Nëse bashkësia jote e rregullave
+    manipulon një çift gjuhë-shtet, ne ju këshillojmë ta kaloni atë në krye duke
+    përdorur pullën <strong>Lëviz lart</strong>.</span></p>
+  <p><span lang=SQ>Që të redaktoni një bashkësi të
+    rregullave, thjeshtë shtyp në të në tabelë, bashkësia e rregullave do të
+    paraqitet në gjysmën e poshtme të dritares.</span></p>
+  <p><span lang=SQ>Kutikontrolla /Përjashtim
+    përcaktojnë nëse ajo është rregull thyerje (kutikontrolla e vënë) ose një
+    rregull përjashtimi (kutikontrolla e pa vënë). Dy shprehjet regulare Përpara
+    dhe Pas përcaktojnë se çfarë duhet që para dhe pas që ajo të kualifikohet për
+    një rregull përjashtimi ose një rregull thyerje.</span></p>
+  <p><span lang=SQ>Procesi i segmentimit mund të
+    thjeshtohet si në vijim. Imagjino kursorin duke lëvizur nga pas shifrës së parë
+    deri te shifra e fundit e tekstit. Për secilën pozitë të kursorit zbatohet
+    secila rregull në renditjen e dhënë dhe provo duke zbatuar modelin <strong>Përpara</strong> në tërë tekstin që është në të majtë të kursorit dhe modeli <strong>Prapa</strong> në tekstin në të djathtë që mund ta preken nga kursori.</span></p>
+  <p><span lang=SQ>Nëse zbatimi i disa rregullave
+    është i suksesshëm, për shembull rregullat e përjashtimit ne nuk bëjmë asgjë
+    por ndalim shqyrtimin e më tepër rregullave dhe marrim tekstin në të majtë si
+    segment në vete, për secilën pozitë të kursorit në tekst.</span></p>
+  <h4><a name="Simple_examples"></a><span lang=SQ>Shembull
+    të thjeshtë</span></h4>
+  <p><strong><span lang=SQ>Tentimi:</span></strong><span
+lang=SQ> që të segmentohet pas pikë ('</span><code><span
+lang=SQ style='font-size:10.0pt;'>.</span></code><span
+lang=SQ>') dhe para një hapësire</span></p>
+  <p><span lang=SQ>Përpara: </span><code><span lang=SQ style='font-size:10.0pt;'>\.</span></code><span lang=SQ> Prapa: </span><code><span
+lang=SQ style='font-size:10.0pt;'>\s</span></code><span
+lang=SQ> <br>
+    <strong>Shënim:</strong> &quot;</span><code><span lang=SQ style='font-size:
+10.0pt;'>\.</span></code><span lang=SQ>&quot; nënkupton karakterin &quot;</span><code><span lang=SQ
+style='font-size:10.0pt;'>.</span></code><span lang=SQ>&quot; <br>
+    &quot;</span><code><span lang=SQ style='font-size:10.0pt;'>\s</span></code><span lang=SQ>&quot; nënkupton
+    sado karaktere të hapësirës boshe </span></p>
+  <p><strong><span lang=SQ>Tentimi:</span></strong><span
+lang=SQ> që të mos segmentohet pas &quot;</span><code><span
+lang=SQ style='font-size:10.0pt;'>Mr.
+    <c/code>
+    &quot;</span></code></p>
+  <p><span lang=SQ style='font-size:
+10.0pt;font-family:&quot;Courier New&quot;;'>Përpara: <code>Mr\.</code> Prapa: <code>\s</code> <br>
+    <strong><span style='font-family:"Courier New"'>Shënim:</span></strong> Mos
+    harroni që ta lëni kutinë e rregullit të <strong><span style='font-family:"Courier New"'>pacaktuar</span></strong> </span></p>
+  <p><strong><span lang=SQ style='font-size:10.0pt;font-family:
+&quot;Courier New&quot;;'>Tentimi:</span></strong><span lang=SQ
+style='font-size:10.0pt;font-family:"Courier New";'> që të
+    segmentohet pas &quot;</span><span style='font-size:10.0pt;font-family:&quot;Arial Unicode MS&quot;;
+'>。</span><span lang=SQ style='font-size:10.0pt;font-family:
+&quot;Courier New&quot;;'>&quot; (pikës Japoneze)</span></p>
+  <p><span lang=SQ style='font-size:
+10.0pt;font-family:&quot;Courier New&quot;;'>Përpara: </span><span
+style='font-size:10.0pt;font-family:"Arial Unicode MS";'>。</span><span
+lang=SQ style='font-size:10.0pt;font-family:"Courier New";'> Prapa: (bosh) <br>
+    <strong><span style='font-family:"Courier New"'>Shënim:</span></strong> Ju mund
+    ta lëni ndonjë fushë boshe</span></p>
+  <h3><a name="Regular_Expressions_to_use_in_segmentati"></a><span lang=SQ
+style='font-family:"Courier New";'>Shprehjet Regulare që
+    përdoren në rregullat e segmentimit</span></h3>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Rregullat e segmentimit tani për tani paraqiten përmes shprehjeve regulare.
+    Kjo lejon fleksibilitetin më të madh në përcaktimin e rregullave dhe konforme
+    me SRX.</span></p>
+  <h4><a name="Short_summary_of_regular-expression_cons"></a><span lang=SQ
+style='font-family:"Courier New";'>Një përmbledhje e
+    shkurtë e konstrukteve të shprehjeve regulare</span></h4>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Këtë nuk konstruktet e vetme që OmegaT mund t'i përdor në rregullat e
+    segmentimit, por ato përdoren më së shumti. OmegaT përkrah të gjitha veçoritë e
+    shprehjeve regulare të përshkruara në <a
+href="http://www.lisa.org/standards/srx/">standardin SRX</a>.</span></p>
+  <table border=0 cellspacing=0 cellpadding=0 width="80%"
+ summary="Konstrukte Shprehjesh Regulare, dhe çfarë përputhin ato">
+    <tr>
+      <td width="10%" bgcolor="#DDEEFF"><p><b><span lang=SQ>Konstrukti </span></b></p></td>
+      <td bgcolor="#DDEEFF"><p><b><span lang=SQ>Përputhjet</span></b></p></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan=2><p align=center style='text-align:center'><b><span lang=SQ>Flamujt</span></b></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>(?i)</span></tt></p></td>
+      <td><p><span lang=SQ>Aftëson
+          përputhjen e ndjeshme me rastin e shkronjave (rëndom, modeli është i ndjeshëm
+          në shkronja).</span></p></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan=2><p><b><span lang=SQ>Karakteret</span></b></p></td>
+    </tr>
+    <tr>
+      <td><p><strong><span lang=SQ>x</span></strong></p></td>
+      <td><p><strong><span lang=SQ>x</span></strong><span
+  lang=SQ>, përveç këtyre në vijim...</span></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>\u</span></tt><strong><span lang=SQ>hhhh</span></strong></p></td>
+      <td><p><span lang=SQ>Karakter me
+          vlerë heksadecimale&nbsp;</span><tt><span lang=SQ style='font-size:10.0pt;
+  '>0x</span></tt><strong><span lang=SQ>hhhh</span></strong></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>\t</span></tt></p></td>
+      <td><p><span lang=SQ>Karakteri tab (</span><tt><span
+  lang=SQ style='font-size:10.0pt;'>'\u0009'</span></tt><span
+  lang=SQ>)</span></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>\n</span></tt></p></td>
+      <td><p><span lang=SQ>Karakteri
+          rreshti ri (line feed) (</span><tt><span lang=SQ style='font-size:10.0pt;
+  '>'\u000A'</span></tt><span lang=SQ>)</span></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>\r</span></tt></p></td>
+      <td><p><span lang=SQ>Karakteri
+          karrocë-kthimi (</span><tt><span lang=SQ style='font-size:10.0pt;'>'\u000D'</span></tt><span lang=SQ>)</span></p></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan=2><p align=center style='text-align:center'><b><span lang=SQ>Citatet</span></b></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>\</span></tt></p></td>
+      <td><p><span lang=SQ>Asgjë, por
+          citon karakterin në vijim. Kjo kërkohet nëse ju doni të jepni metakarakteret </span><code><span
+  lang=SQ style='font-size:10.0pt;'>!$()*+.&lt;&gt;?[\]^{|}</span></code><span
+  lang=SQ> që të përputhe si me vet-veten.</span></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>\\</span></tt></p></td>
+      <td><p><span lang=SQ>Për shembull,
+          ky është një karakter prapathyes</span></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>\Q</span></tt></p></td>
+      <td><p><span lang=SQ>Asgjë, por
+          citon të gjitha karakteret deri te </span><tt><span lang=SQ style='font-size:
+  10.0pt;'>\E</span></tt></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>\E</span></tt></p></td>
+      <td><p><span lang=SQ>Asgjë, por
+          mbaron citimin e filluar nga </span><tt><span lang=SQ style='font-size:10.0pt;
+  '>\Q</span></tt></p></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan=2><p align=center style='text-align:center'><b><span lang=SQ>Klasat e karaktereve</span></b></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>[abc]</span></tt></p></td>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>a</span></tt><span lang=SQ>, </span><tt><span
+  lang=SQ style='font-size:10.0pt;'>b</span></tt><span
+  lang=SQ>, ose </span><tt><span lang=SQ
+  style='font-size:10.0pt;'>c</span></tt><span lang=SQ> (klasë e thjeshtë)</span></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>[^abc]</span></tt></p></td>
+      <td><p><span lang=SQ>Të gjitha
+          karakteret përveç </span><tt><span lang=SQ style='font-size:10.0pt;
+  '>a</span></tt><span lang=SQ>, </span><tt><span lang=SQ style='font-size:10.0pt;'>b</span></tt><span lang=SQ>, ose </span><tt><span
+  lang=SQ style='font-size:10.0pt;'>c</span></tt><span
+  lang=SQ> (negacion)</span></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>[a-zA-Z]</span></tt></p></td>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>A </span></tt><span lang=SQ>deri në </span><tt><span
+  lang=SQ style='font-size:10.0pt;'>z</span></tt><span
+  lang=SQ> ose </span><tt><span lang=SQ
+  style='font-size:10.0pt;'>A</span></tt><span lang=SQ> deri në </span><tt><span lang=SQ
+  style='font-size:10.0pt;'>Z</span></tt><span lang=SQ>, inkluziv (rang)</span></p></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan=2><p align=center style='text-align:center'><b><span lang=SQ>Klase e paracaktuara të karaktereve</span></b></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>.</span></tt></p></td>
+      <td><p><span lang=SQ>Çdo karakter
+          (përveç përfundues të rreshtave)</span></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>\d</span></tt></p></td>
+      <td><p><span lang=SQ>Shifër: </span><tt><span
+  lang=SQ style='font-size:10.0pt;'>[0-9]</span></tt></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>\D</span></tt></p></td>
+      <td><p><span lang=SQ>Një jo shifër: </span><tt><span
+  lang=SQ style='font-size:10.0pt;'>[^0-9]</span></tt></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>\s</span></tt></p></td>
+      <td><p><span lang=SQ>Një karakter
+          hapësirë boshe: </span><tt><span lang=SQ style='font-size:10.0pt;'>[ \t\n\x0B\f\r]</span></tt></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>\S</span></tt></p></td>
+      <td><p><span lang=SQ>Një karakter jo
+          hapësirë boshe: </span><tt><span lang=SQ style='font-size:10.0pt;'>[^\s]</span></tt></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>\w</span></tt></p></td>
+      <td><p><span lang=SQ>Karakter fjalë: </span><tt><span lang=SQ style='font-size:10.0pt;'>[a-zA-Z_0-9]</span></tt></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>\W</span></tt></p></td>
+      <td><p><span lang=SQ>Karakter jo
+          fjalë: </span><tt><span lang=SQ style='font-size:10.0pt;'>[^\w]</span></tt></p></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan=2><p align=center style='text-align:center'><b><span lang=SQ>Përputhësit kufitar</span></b></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>^</span></tt></p></td>
+      <td><p><span lang=SQ>Fillimi i
+          rreshtit</span></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>$</span></tt></p></td>
+      <td><p><span lang=SQ>Fundi i
+          rreshtit</span></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>\b</span></tt></p></td>
+      <td><p><span lang=SQ>Kufi fjalësh</span></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>\B</span></tt></p></td>
+      <td><p><span lang=SQ>Kufi jo-fjalësh</span></p></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan=2><p align=center style='text-align:center'><b><span lang=SQ>Kuantifikatorët lakmitar</span></b></p></td>
+    </tr>
+    <tr>
+      <td colspan=2><p><span lang=SQ>Këto do të
+          përputhin sa më shumë që munden. Për shembull, </span><code><span lang=SQ
+  style='font-size:10.0pt;'>a+</span></code><span lang=SQ> do të përputh </span><code><span lang=SQ
+  style='font-size:10.0pt;'>aaa</span></code><span lang=SQ> në </span><code><span lang=SQ style='font-size:
+  10.0pt;'>aaabbb</span></code></p></td>
+    </tr>
+    <tr>
+      <td><p><strong><span lang=SQ>X</span></strong><tt><span
+  lang=SQ style='font-size:10.0pt;'>?</span></tt></p></td>
+      <td><p><strong><span lang=SQ>X</span></strong><span
+  lang=SQ>, njëherë ose asnjëherë</span></p></td>
+    </tr>
+    <tr>
+      <td><p><strong><span lang=SQ>X</span></strong><tt><span
+  lang=SQ style='font-size:10.0pt;'>*</span></tt></p></td>
+      <td><p><strong><span lang=SQ>X</span></strong><span
+  lang=SQ>, zero ose më tepër herë</span></p></td>
+    </tr>
+    <tr>
+      <td><p><strong><span lang=SQ>X</span></strong><tt><span
+  lang=SQ style='font-size:10.0pt;'>+</span></tt></p></td>
+      <td><p><strong><span lang=SQ>X</span></strong><span
+  lang=SQ>, një ose më tepër herë</span></p></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan=2><p align=center style='text-align:center'><b><span lang=SQ>Kuantifikatorët jo-lakmues </span></b></p></td>
+    </tr>
+    <tr>
+      <td colspan=2><p><span lang=SQ>Këto do të
+          përputhin sa më pak që ato munden. Për shembull, </span><code><span lang=SQ
+  style='font-size:10.0pt;'>a+?</span></code><span lang=SQ> do të përputh të parë në </span><code><span
+  lang=SQ style='font-size:10.0pt;'>a</span></code><span
+  lang=SQ> in </span><code><span lang=SQ
+  style='font-size:10.0pt;'>aaabbb</span></code></p></td>
+    </tr>
+    <tr>
+      <td><p><strong><span lang=SQ>X</span></strong><tt><span
+  lang=SQ style='font-size:10.0pt;'>??</span></tt></p></td>
+      <td><p><strong><span lang=SQ>X</span></strong><span
+  lang=SQ>, njëherë ose asnjëherë</span></p></td>
+    </tr>
+    <tr>
+      <td><p><strong><span lang=SQ>X</span></strong><tt><span
+  lang=SQ style='font-size:10.0pt;'>*?</span></tt></p></td>
+      <td><p><strong><span lang=SQ>X</span></strong><span
+  lang=SQ>, zero ose më tepër herë</span></p></td>
+    </tr>
+    <tr>
+      <td><p><strong><span lang=SQ>X</span></strong><tt><span
+  lang=SQ style='font-size:10.0pt;'>+?</span></tt></p></td>
+      <td><p><strong><span lang=SQ>X</span></strong><span
+  lang=SQ>, një ose më tepër herë</span></p></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan=2><p align=center style='text-align:center'><b><span lang=SQ>Operatorët logjik</span></b></p></td>
+    </tr>
+    <tr>
+      <td><p><strong><span lang=SQ>XY</span></strong></p></td>
+      <td><p><strong><span lang=SQ>X</span></strong><span
+  lang=SQ> ndjekur nga <strong>Y</strong></span></p></td>
+    </tr>
+    <tr>
+      <td><p><strong><span lang=SQ>X</span></strong><tt><span
+  lang=SQ style='font-size:10.0pt;'>|</span></tt><strong><span
+  lang=SQ>Y</span></strong></p></td>
+      <td><p><span lang=SQ>Ose <strong>X</strong> ose <strong>Y</strong></span></p></td>
+    </tr>
+    <tr>
+      <td><p><tt><span lang=SQ style='font-size:10.0pt;'>(</span></tt><strong><span lang=SQ>XY</span></strong><tt><span
+  lang=SQ style='font-size:10.0pt;'>)</span></tt></p></td>
+      <td><p><strong><span lang=SQ>XY</span></strong><span
+  lang=SQ> si një grup i veçantë</span></p></td>
+    </tr>
+  </table>
+  <div align=center style='text-align:center'><code><span
+lang=SQ style='font-size:10.0pt;'>
+    <hr size=2 width="100%" align=center>
+    </span></code></div>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'><a href="legalNotices.html" title="Njoftimet Legale">Njoftimet Legale</a></span></p>
+</div>
+</body>
+</html>

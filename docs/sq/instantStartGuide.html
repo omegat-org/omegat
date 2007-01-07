@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/TR/REC-html40">
 <head>
 <meta http-equiv=Content-Type content="text/html; charset=utf-8">
-<link rel=Edit-Time-Data href="instantStartGuideNoTOC_files/editdata.mso">
+<link rel=Edit-Time-Data href="instantStartGuide_files/editdata.mso">
 <title>Udhërrëfyesi Nisjes së Çastit- OmegaT 1.6.1 Doracaku i Shfrytëzuesit</title>
 <style>
 <!--
@@ -31,26 +31,44 @@ ol
 	{-->
 </style>
 </head>
-<body bgcolor="#FFFFFF" lang=EN-US>
+<body bgcolor="#FFFFFF" link=blue vlink=blue lang=EN-US>
 <div class=Section1>
   <h1><span lang=SQ>Udhërrëfyesi Nisjes Së Çastit</span></h1>
-  <p><span lang=SQ>ose <strong>Fillo të përdorësh
-    OmegaT brenda 5 minutash</strong></span></p>
+  <p><span lang=SQ style='font-size:10.0pt;'>ose fillo të
+    përdorësh OmegaT brenda 5 minutash</span></p>
   <p><strong><span lang=SQ>Ky udhërrëfyesi nisjes së
     çastit mbulon vetëm ato që janë bazike. Idealisht, të gjithë shfrytëzuesit
     duhet ta lexojnë doracakun e shfrytëzuesit që të njihet me çdo gjë që OmegaT ka
-    për ta ofruar. Gjithashtu është e gatshme në Doracakun e Shfrytëzuesit. Për të
-    shfaqur Doracakun e Shfrytëzuesit, shtyp &quot;F1&quot;.</span></strong></p>
+    për ta ofruar.</span></strong></p>
   <h2><span lang=SQ>Përmbajtja</span></h2>
-  <ol start=1 type=1>
-    <li><span lang=SQ>Shkurt, si punon OmegaT</span></li>
-    <li><span lang=SQ>Si të përkthehet duke përdorur OmegaT</span></li>
-    <li><span lang=SQ>Manipulimi me skedarët me tagje</span></li>
+  <ol start=1 type=I>
+    <li><span lang=SQ><a href="#Briefly.2C_how_OmegaT_works">Shkurt,
+      si punon OmegaT</a></span></li>
+    <li><span lang=SQ><a href="#How_to_translate_using_OmegaT">Si
+      të përkthehet duke përdorur OmegaT</a> </span></li>
+    <ol start=1 type=a>
+      <li><span lang=SQ><a href="#Create_and_open_a_new_project">Krijo
+        dhe hap një projekt të ri</a></span></li>
+      <li><span lang=SQ><a href="#Translate_the_segments_one_by_one">Përkthe
+        segmentet një nga një</a></span></li>
+      <li><span lang=SQ><a href="#Use_TM_and_glossary_matches">Përdor
+        përputhjet e memories së përkthimit dhe të përmbledhjes</a></span></li>
+      <ol start=1 type=1>
+        <li><span lang=SQ><a href="#TM_matches">Përputhje të memories
+          së përkthimit</a></span></li>
+        <li><span lang=SQ><a href="#Glossary_matches">Përputhje të Fjalorthit</a></span></li>
+      </ol>
+      <li><span lang=SQ><a href="#Create_the_translated_documents">Krijo
+        dokumentet e përkthyera</a></span></li>
+    </ol>
+    <li><span lang=SQ><a href="#Dealing_with_tagged_text">Manipulimi
+      me skedarët me tagje</a> </span></li>
+    <ol start=1 type=a>
+      <li><span lang=SQ><a href="#An_example...">Një shembull...</a></span></li>
+      <li><span lang=SQ><a href="#Tag_verification">Verifikimi i tagjeve</a></span></li>
+    </ol>
   </ol>
-  <div align=center style='text-align:center'><span lang=SQ>
-    <hr size=2 width="100%" align=center>
-    </span></div>
-  <h2><a name="Briefly.2C_how_OmegaT_works"></a><span lang=SQ>1. Shkurt, si punon OmegaT</span></h2>
+  <h2><a name="Briefly.2C_how_OmegaT_works"></a><span lang=SQ>I. Shkurt, si punon OmegaT</span></h2>
   <p><span lang=SQ>Ekrani i OmegaT përmban tri
     dritare distinkte. Secila nga këto mund të ndryshohet madhësia me anë të miut.
     Në të majtë është Redaktori ku ju shkruani përkthimin tuaj. Në të djathtë, në
@@ -58,22 +76,19 @@ ol
     përkthimit. Në vijim është Vështruesi i Fjalorthit, ku paraqiten e përputhjet e
     përmbledhjes.</span></p>
   <p><span lang=SQ>Në dritaren e Redaktorit OmegaT
-    paraqet tekstin burimor 'të segmentuar' në fjali (ose paragrafë – shiko
-    &lt;a0&gt;Segmentimi i Burimit&lt;/a0&gt;!). Ju mund të përktheni këto segmente
-    një nga një. Duke kaluar nga segmenti në segment përkthimet tuaja ruhet në një
-    memorie përkthimi. Njëherë pasi që të gjithë segmente të jenë të përkthyera
-    (ose më herët nëse ju kërkoni ) OmegaT do të përdor memorien e përkthimi për të
-    krijuar dokument(et) të përkthyera në dosjen “Target”.</span></p>
+    paraqet tekstin burimor 'të segmentuar' në fjali (ose paragrafë – shiko <a
+href="segmentation.html">Segmentimi i Burimit</a>!). Ju mund të përktheni këto
+    segmente një nga një. Duke kaluar nga segmenti në segment përkthimet tuaja
+    ruhet në një memorie përkthimi. Njëherë pasi që të gjithë segmente të jenë të
+    përkthyera (ose më herët nëse ju kërkoni ) OmegaT do të përdor memorien e
+    përkthimi për të krijuar dokument(et) të përkthyera në dosjen “Target”.</span></p>
   <p><span lang=SQ>OmegaT organizon punon tuaj në të
     ashtuquajturën projekte përkthimi. Për çdo projekt OmegaT do të krijoj një
     bashkësi dosjes. Këto përdoren për të ruajtur dokumentet burimore që do të
     përkthehen, përmbledhje që do të donit t'i përdorni, dhe çfarëdo memorie
     përkthimi që ju doni ta përdorni. OmegaT gjithashtu krijon një dosje “Target”
     që do të përmban dokumentet përfundimtare të përkthyera.</span></p>
-  <div align=center style='text-align:center'><span lang=SQ>
-    <hr size=2 width="100%" align=center>
-    </span></div>
-  <h2><a name="How_to_translate_using_OmegaT"></a><span lang=SQ>2. Si të përkthehet duke përdorur OmegaT</span></h2>
+  <h2><a name="How_to_translate_using_OmegaT"></a><span lang=SQ>II. Si të përkthehet duke përdorur OmegaT</span></h2>
   <h3><a name="Create_and_open_a_new_project"></a><span lang=SQ>a. Krijo dhe hap një projekt të ri</span></h3>
   <p><span lang=SQ>Përzgjedh <strong>Projekt →
     Krijo...</strong> nga menyja.</span></p>
@@ -83,8 +98,9 @@ ol
     projektit do të ruhen në atë dosje ose nëndosjet e tij.</span></p>
   <p><span lang=SQ>OmegaT do t'iu pyes juve për të
     miratuar ose ndërruar dosjet që do të krijohen duke përdorur dialogun në vijim:</span></p>
-  <p align=center style='text-align:center'><span lang=SQ><img width=347 height=400 id="_x0000_i1027"
-src="images/NewProject.png" alt="Dritarja e përcaktimeve të projektit"></span></p>
+  <p align=center style='text-align:center'><span lang=SQ><img border=0 width=347 height=400
+id="_x0000_i1025" src="images/NewProject.png"
+alt="Dritarja e përcaktimeve të projektit"></span></p>
   <p><span lang=SQ>Ju thjeshtë mund të përdorni
     vendin e nëndosjeve, por sigurohuni së pari që kodet e gjuhës burimore dhe të
     përkthimit janë të sakta. -Përzgjedh kodin e gjuhës (2 shkronja) ose kodin
@@ -94,13 +110,13 @@ src="images/NewProject.png" alt="Dritarja e përcaktimeve të projektit"></span>
   <p><span lang=SQ>Nëse ju doni që OmegaT të
     segmentoj sipas fjalive në vend të sipas &quot;paragrafëve&quot;, është ide e
     mirë të kontroll të dyfishtë në Rregullat e Segmentimit .</span></p>
-  <p><span lang=SQ>Kur të shtypni Mirë për të
-    pranuar krijimin e projektit, OmegaT do t'iu pyes të përzgjidhni dokumentet
-    burimore për tu importuar. Ju mund të importoni skedar individual, ose të
-    importoni trungje të tëra dosjesh (me të gjithë skedarët në të gjithën
-    nëndosjet). Nëse ju aksidentalisht keni importuar dokumente të gabuara, ose
-    tepër dokumente ju thjeshtë mund t'i hiqni ato nga dosja Source të OmegaT
-    projektit (duke përdorur drejtuesin e sistemit të skedarëve, për shembull).</span></p>
+  <p><span lang=SQ>Kur të shtypni Mirë për të pranuar
+    krijimin e projektit, OmegaT do t'iu pyes të përzgjidhni dokumentet burimore
+    për tu importuar. Ju mund të importoni skedar individual, ose të importoni
+    trungje të tëra dosjesh (me të gjithë skedarët në të gjithën nëndosjet). Nëse
+    ju aksidentalisht keni importuar dokumente të gabuara, ose tepër dokumente ju
+    thjeshtë mund t'i hiqni ato nga dosja Source të OmegaT projektit (duke përdorur
+    drejtuesin e sistemit të skedarëve, për shembull).</span></p>
   <p><span lang=SQ>Për të kontrolluar listën e
     skedarëve që do të përkthehen, konsultoni dritaren <strong>Skedarët e Projektit</strong> (Menyja: <strong>Projekt → Skedarët e Projektit...</strong>, nëse ajo nuk hapet
     automatikisht). Nëse ju është dashur ta ndërroni përmbajtjen e dosjes Burimore,
@@ -130,16 +146,16 @@ src="images/NewProject.png" alt="Dritarja e përcaktimeve të projektit"></span>
     burimor.</span></p>
   <p><span lang=SQ>Shtyp &quot;<strong>ENTER</strong>&quot;
     për të avancuar te segmenti pasues.</span></p>
-  <p><span lang=SQ>Shënim:<br>
+  <p><span lang=SQ>Vini re:<br>
     - Për të lëvizur nga pjesët tjera të tekstit, ose më lart ose më poshtë shtyp
     dy herë në fjalinë ose paragrafin cilin ju doni ta hapni. <br>
     - Nëse ju parapëlqeni të përktheni në një fushë të zbraztë, vëre këtë opsion te <strong>Opsionet → Sjellja e Redaktimit...</strong>.</span></p>
   <p><span lang=SQ>Kur të shtypni &quot;<strong>ENTER</strong>&quot;,
-    ndodhin disa gjëra që nuk shihen: <br>
-    OmegaT shton qiftin e segmenteve (segmentin burimor dhe përkthimin e tij) në
-    memorien e përkthimit dhe automatikisht i përkthen çdo segment identi në
-    skedarët e projekteve tjera. Gjithashtu skanon memorien e përkthimin dhe
-    përmbledhje për përputhjen e segmentit pasues të pa përkthyer.</span></p>
+    ndodhin disa gjëra që nuk shihen: &lt;br1&gt; OmegaT shton qiftin e segmenteve
+    (segmentin burimor dhe përkthimin e tij) në memorien e përkthimit dhe
+    automatikisht i përkthen çdo segment identi në skedarët e projekteve tjera. Gjithashtu
+    skanon memorien e përkthimin dhe përmbledhjen për përputhjen e segmentit pasues
+    të pa përkthyer.</span></p>
   <h3><a name="Use_TM_and_glossary_matches"></a><span lang=SQ>c. Përdor përputhjet e memories së përkthimit dhe të përmbledhjes</span></h3>
   <h4><a name="TM_matches"></a><span lang=SQ>1.
     Përputhje të memories së përkthimit</span></h4>
@@ -198,15 +214,12 @@ src="images/NewProject.png" alt="Dritarja e përcaktimeve të projektit"></span>
     word processor...) për të kontrolluar përmbajtjen dhe formatimin e përkthimit
     tuaj. Ju mund t'i ktheheni OmegaT-së për të bërë përmirësimet e nevojshme; por
     mos harroni të rikrijoni dokumentet e përkthyera.</span></p>
-  <div align=center style='text-align:center'><span lang=SQ>
-    <hr size=2 width="100%" align=center>
-    </span></div>
-  <h2><a name="Dealing_with_tagged_text"></a><span lang=SQ>3. Manipulimi me skedarët me tagje</span></h2>
+  <h2><a name="Dealing_with_tagged_text"></a><span lang=SQ>III. Manipulimi me skedarët me tagje</span></h2>
   <p><span lang=SQ>OmegaT siguron formatimin e
     dokumenteve burimore (të trasha, italike etj.) nuk humbet gjatë shënimit të
     tyre me tagje speciale. Tagjet e OmegaT përbëhen nga një ose më tepër shkronja
-    të vazhduara nga një numër dhe ndonjëherë përdorin karakterin &quot;/&quot;
-    (për shembull: &lt;f0&gt;, &lt;br10/&gt;, &lt;/s2&gt; etj.).</span></p>
+    të vazhduara nga një numër dhe ndonjëherë përdorin karakterin &quot;/&quot; (për
+    shembu: &lt;f0&gt;, &lt;br10/&gt;, &lt;/s2&gt; etj.).</span></p>
   <p><span lang=SQ>Ju duhet të merreni me kujdes dhe
     të sigurohuni që ato përfshihet me përpikëri në segmentet shënjestër. (Shiko
     OmegaT Doracakun e shfrytëzuesit për redaktimin e avancuar të tagjeve.)</span></p>
@@ -215,8 +228,8 @@ src="images/NewProject.png" alt="Dritarja e përcaktimeve të projektit"></span>
   <p><span lang=SQ>Në këtë shembull ne kemi ndriçuar
     tagjet në <span style='color:red'>kuq</span> për të bërë më të lehtë të shihen,
     por në OmegaT ato nuk do të jenë të ndriçuara.</span></p>
-  <p><strong><span lang=SQ>Këtu është një shembull
-    në HTML:</span></strong><span lang=SQ> </span></p>
+  <p><strong><span lang=SQ>Këtu është një shembu në
+    HTML:</span></strong><span lang=SQ> </span></p>
   <p><code><span lang=SQ style='font-size:10.0pt;color:red;'>&lt;p&gt;</span></code><code><span lang=SQ style='font-size:10.0pt;
 '>Një font i paraqitjes nuk të përzgjidhet përmes dialogut <span
 style='color:red'>&lt;b&gt;</span>Font i paraqitjes<span style='color:red'>&lt;/b&gt;</span>.
@@ -273,6 +286,8 @@ lang=SQ> </span></p>
   <div align=center style='text-align:center'><span lang=SQ>
     <hr size=2 width="100%" align=center>
     </span></div>
+  <p><span lang=SQ><a href="legalNotices.html"
+title="Njoftimet Legale">Njoftimet Legale</a></span></p>
 </div>
 </body>
 </html>

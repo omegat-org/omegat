@@ -1,0 +1,307 @@
+<html xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<link rel=Edit-Time-Data href="formattedText_files/editdata.mso">
+<title>Duke punuar me Tekst të Formatuar- OmegaT 1.6.1 Doracaku I Shfrytëzuesit</title>
+<style>
+<!--
+h1
+	{font-size:24.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h2
+	{font-size:18.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h3
+	{font-size:13.5pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+p
+	{font-size:12.0pt;
+	font-family:"Times New Roman";}
+code
+	{font-family:"Courier New";}
+pre
+	{font-size:10.0pt;
+	font-family:"Courier New";}
+ol
+	{ul
+	{-->
+</style>
+</head>
+<body bgcolor="#FFFFFF" link=blue vlink=blue lang=SQ>
+<div class=Section1>
+  <h1><span lang=SQ>Puna me Tekst Të Formatuar</span></h1>
+  <h2><span lang=SQ>Përmbajtja</span></h2>
+  <ul type=disc>
+    <li><span lang=SQ>1. <a href="#Formatted_Text_in_OmegaT">Tekst
+      I Formatuar në OmegaT</a> </span></li>
+    <ul type=circle>
+      <li><span lang=SQ>1.1. <a href="#Tag_naming">Emërtimi i
+        tagjeve</a></span></li>
+      <li><span lang=SQ>1.2. <a href="#Tag_numbering">Numërimi i
+        tagjeve</a></span></li>
+      <li><span lang=SQ>1.3. <a href="#Pairs_and_singletons">Çiftet
+        dhe njëshet</a></span></li>
+      <li><span lang=SQ>1.4. <a href="#Tags_and_sentence_segmenting">Segmentimi
+        i tagjeve dhe fjalive</a></span></li>
+      <li><span lang=SQ>1.5. <a href="#Tag_operations">Operacionet e
+        tagjeve</a> </span></li>
+      <ul type=square>
+        <li><span lang=SQ>1.5.1. <a href="#Tag_group_duplication">Dyfishimi
+          i grupit të tagjeve</a></span></li>
+        <li><span lang=SQ>1.5.2. <a href="#Tag_group_deletion">Fshirja
+          e grupit të tagjeve</a></span></li>
+        <li><span lang=SQ>1.5.3. <a
+       href="#Tag_group_order_modification">Ndryshimi i renditjes së tagjeve në
+          grup</a></span></li>
+        <li><span lang=SQ>1.5.4. <a href="#Tag_group_nesting">Ndërthurja
+          e grupit të tagjeve</a></span></li>
+      </ul>
+      <li><span lang=SQ>1.6. <a href="#Tag_group_overlapping">Shtrirja
+        e grupi të tagjeve</a></span></li>
+      <li><span lang=SQ>1.7. <a href="#Tag_group_validation">Validimi
+        i grupit të tagjeve</a></span></li>
+      <li><span lang=SQ>1.8. <a href="#Hints_for_tags_management">Këshilla
+        për menaxhimin e tagjeve</a></span></li>
+      <li><span lang=SQ>1.9. <a href="#Important">Të rëndësishme</a></span></li>
+    </ul>
+  </ul>
+  <h2><a name="Formatted_Text_in_OmegaT"></a><span lang=SQ>Teksti I Formatuar Në OmegaT</span></h2>
+  <p><span lang=SQ>Informatat prezente të formatimit
+    në skedarin burimor rëndom duhet të ri-prodhohen edhe në skedarin shënjestër.
+    OmegaT shfaq informatat e formatimit në-vijë të formateve të përkrahura (tani
+    për tani DocBook, HTML, XHTML, Open Document, dhe OpenOffice.org) si tagje.
+    Tagjet rëndom nuk mirren parasysh kur ata konsiderohen për ngjashmërinë e
+    vargjeve për qëllime të përputhjes. Tagjet që ju i keni riprodhuar në segmentin
+    e përkthyer do të jenë prezente në dokumentin e përkthyer.</span></p>
+  <h3><a name="Tag_naming"></a><span lang=SQ>Emërtimi
+    i tagjeve</span></h3>
+  <p><span lang=SQ>Tagje përbëhen nga në deri tre
+    karaktere dhe një numër. Numri unik ju lejon të grupohen këto tagje që i
+    korrespondojnë secili tjetrit, asi dhe tagjet që kanë karakter shkurtesë
+    tjetër,por ato në fakt janë krej ndryshe.</span></p>
+  <p><span lang=SQ>Karakteret mund ose nuk mund të
+    reflektojnë vlerën e formatimit për tagun që e prezantojnë (p.sh., të trasha,
+    italike, etje.)</span></p>
+  <h3><a name="Tag_numbering"></a><span lang=SQ>Numërimi
+    i tagjeve</span></h3>
+  <p><span lang=SQ>Tagjet janë të numëruar në një
+    mënyrë rritëse sipas <strong>grupit të tagjeve</strong>.</span></p>
+  <p><span lang=SQ>Se çfarë quajmë &quot;grupe
+    tagjesh&quot; këtu është ose një tag i vetëm (sikurse </span><code><span
+lang=SQ style='font-size:10.0pt;'>&lt;br1&gt;</span></code><span
+lang=SQ>), në vete, ose 2 tagje që e bëjnë një
+    qift (sikurse </span><code><span lang=SQ style='font-size:10.0pt;'>&lt;f3&gt;</span></code><span lang=SQ> dhe </span><code><span
+lang=SQ style='font-size:10.0pt;'>&lt;/f3&gt;</span></code><span
+lang=SQ>).</span></p>
+  <p><span lang=SQ>Brenda segmentit, grupi i parë
+    (qift ose njësh) e merr numrin <strong>0</strong>, i dyti numrin <strong>1</strong> etj.</span></p>
+  <p><span lang=SQ>Shembulli i parë në vijim ka 3
+    grupe tagjesh (një qift, një njëshe, dhe pastaj një qift tjetër), i dyti ka
+    vetëm një (një qift).</span></p>
+  <h3><a name="Pairs_and_singletons"></a><span lang=SQ>Qiftet dhe njëshet</span></h3>
+  <p><span lang=SQ>Tagjet gjithnjë vijnë ose njëshe
+    ose në qifte.</span></p>
+  <p><strong><span lang=SQ>Tagjet njëshe</span></strong><span
+lang=SQ> tregojnë informata të formatimit që nuk e
+    ndikojnë tekstin përreth (për shembull më tepër hapësirë ose në thyes rreshti).</span></p>
+  <pre><span lang=SQ>   <strong><span
+style='font-family:"Courier New"'>&lt;segmenti 2132&gt;</span></strong>&lt;b0&gt;&lt;Ctrl+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;<strong><span
+style='font-family:"Courier New"'>&lt;mbarimi i segmentit&gt;</span></strong></span></pre>
+  <p><strong><span lang=SQ style='font-size:10.0pt;font-family:&quot;Courier New&quot;;
+'>&lt;br1&gt;</span></strong><span lang=SQ> është një tag i vetë dhe nuk ndikon ndonjë tekst
+    përreth. </span></p>
+  <p><strong><span lang=SQ>Tagjet e Çiftëzuara</span></strong><span
+lang=SQ> rëndom tregojnë për informata të stilit
+    që zbatohet në tekst brenda tagut të hapjes dhe tagut të mbyllje të një qifti.
+    Çfarëdo që ndodh në qift, tagu i hapjes gjithnjë duhet të vij para tagut
+    mbyllës.</span></p>
+  <pre><span lang=SQ>   <strong><span
+style='font-family:"Courier New"'>&lt;segmenti 3167&gt;</span></strong>Skedar logu (&lt;f1&gt;log.txt&lt;/f1&gt;) për të përcjell operacionet dhe gabimet.<strong><span
+style='font-family:"Courier New"'>&lt;mbarimi i segmentit&gt;</span></strong></span></pre>
+  <p><strong><span lang=SQ style='font-size:10.0pt;font-family:&quot;Courier New&quot;;
+'>&lt;f1&gt;</span></strong><span lang=SQ> dhe </span><strong><span lang=SQ style='font-size:10.0pt;font-family:&quot;Courier New&quot;;
+'>&lt;/f1&gt;</span></strong><span lang=SQ> janë të çiftëzuara dhe ndikojnë </span><strong><span
+lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>log.txt</span></strong><span lang=SQ>. </span></p>
+  <h3><a name="Tags_and_sentence_segmenting"></a><span lang=SQ>Tagjet dhe segmentimi i fjalive</span></h3>
+  <p><span lang=SQ>OmegaT krijon tagjet e tij para
+    se të zbatohet segmentimi i fjalisë. Varësisht nga rregulli i segmentimit,
+    tagjet mund të duket se ato nuk i respektojnë rregullat të cekura më lart të
+    numërimit dhe grupimit.</span></p>
+  <pre><span lang=SQ>   <strong><span
+style='font-family:"Courier New"'>&lt;segmenti 1554&gt;</span></strong> &lt;c0&gt;Para: \. Pas: \s&lt;/c0&gt;<br>
+ &lt;b2&gt;Note:&lt;/b2&gt;<br>
+<br>
+</span></pre>
+  <pre><span lang=SQ>&quot;\.&quot; nënkupton karakterin &quot;.&quot;&lt;br3&gt; &quot;\s&quot; <strong><span
+style='font-family:"Courier New"'>&lt;end segment&gt;</span></strong></span></pre>
+  <p><span lang=SQ>Këtu duket se nuk kemi problem.
+    Tani, nëse zbatojmë rregullin e rëndomtë në këtë segment (sjellja e rëndomtë e
+    OmegaT) ne do të kemi rezultatin në vijim:</span></p>
+  <pre><span lang=SQ>   <strong><span
+style='font-family:"Courier New"'>&lt;segment 1990&gt;</span></strong> &lt;c0&gt;Para: \. <strong><span
+style='font-family:"Courier New"'>&lt;mbarim i segmentit&gt;</span></strong></span></pre>
+  <pre><span
+lang=SQ>&nbsp;</span></pre>
+  <pre><span
+lang=SQ>   <strong><span
+style='font-family:"Courier New"'>&lt;segment 1991&gt;</span></strong> Pas: \s&lt;/c0&gt;&lt;br1&gt; <strong><span
+style='font-family:"Courier New"'>&lt;mbarimi i segmentit&gt;</span></strong></span></pre>
+  <pre><span
+lang=SQ>&nbsp;</span></pre>
+  <pre><span
+lang=SQ>   <strong><span
+style='font-family:"Courier New"'>&lt;segment 1992&gt;</span></strong> &lt;b2&gt;Shënim:&lt;/b2&gt; &quot;\.&quot; nënkupton karakterin &quot;.&quot;&lt;br3&gt;<strong><span
+style='font-family:"Courier New"'>&lt;mbarimi i segmentit&gt;</span></strong></span></pre>
+  <pre><span
+lang=SQ>&nbsp;</span></pre>
+  <pre><span
+lang=SQ>   <strong><span
+style='font-family:"Courier New"'>&lt;segment 1993&gt;</span></strong> &quot;\s&quot; nënkupton sado karaktere hapësira boshe <strong><span
+style='font-family:"Courier New"'>&lt;mbarimi i segmentit&gt;</span></strong></span></pre>
+  <p><span lang=SQ>(Rregullat e segmentimit që
+    zbatohen janë: <i>segmenti pas një periudhe e vazhduar me hapësirë </i>dhe <i>segmenti
+    pas një tagu thyes rreshti</i>.)</span></p>
+  <p><span lang=SQ>Këto, ne shohim që segmentet e
+    marra një nga një nuk respektojnë rregullat e çiftëzimit edhe të numërimit: </span><code><span
+lang=SQ style='font-size:10.0pt;'>dhe&lt;/co&gt; duhet të çiftëzohen
+    në segmente të njëjta, por janë të ndara nga rregullat e segmentimit. </span></code></p>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Në disa raste mund të shkaktoj probleme në përkthim, kur tagjet duhet të
+    zhvendosen në gjuhën shënjestër për të reflektuar renditjen e fjalive të asaj
+    gjuhe (shiko <a href="#Tag_operations" title="Puna me Tekst Të Formatuar">Operacionet
+    e tagjeve</a> në vijim).</span></p>
+  <h3><a name="Tag_operations"></a><span lang=SQ style='font-family:&quot;Courier New&quot;;
+'>Operacionet e tagjeve</span></h3>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Duhet të keni kujdes me tagje. Nëse ato aksidentalisht ndërrohen, formatimi
+    i skedarit final mund të jetë i dëmtuar. Në skenarët e rastit më të keq një
+    skedar të mos mund të hapet fare; kjo ndodh në veçanti me skedarët e
+    OpenOffice.org.</span></p>
+  <h4><a name="Tag_group_duplication"></a><span lang=SQ style='font-family:&quot;Courier New&quot;;
+'>Dyfishimi i grupit të tagjeve</span></h4>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Për të dyfishuar grupin e tagjeve, vetëm kopjoj ato dhe ngjiti aty ku ju
+    doni t'i keni. Mbani në mend që në grupin e qifteve tagu hapës duhet të jetë
+    para tagut mbyllës.</span></p>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Formatimi i paraqitur nga një grup që ju e keni dyfishuar do të zbatohet në
+    seksion kur ju e dyfishoni atë.</span></p>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Shembull:</span></p>
+  <pre><span lang=SQ>   <strong><span
+style='font-family:"Courier New"'>&lt;segment 0001&gt;</span></strong>&lt;f0&gt;Ky formatim &lt;/f0&gt; do të dyfishohet këtu.<strong><span
+style='font-family:"Courier New"'>&lt;mbarimi i segmentit&gt;</span></strong></span></pre>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Pas dyfishimit:</span></p>
+  <pre><span lang=SQ>   <strong><span
+style='font-family:"Courier New"'>&lt;segment 0001&gt;</span></strong>&lt;f0&gt;Ce format&lt;/f0&gt; a été &lt;f0&gt;copié ici&lt;/f0&gt;.<strong><span
+style='font-family:"Courier New"'>&lt;mbarimi i segmentit&gt;</span></strong></span></pre>
+  <h4><a name="Tag_group_deletion"></a><span lang=SQ style='font-family:&quot;Courier New&quot;;
+'>Fshirja e grupit të tagjeve</span></h4>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Për të fshirë grupet e tagjeve, ju thjeshtë i hiqni ato nga segmenti. Mbani
+    në mend se një grup i qiftëzuar duhet të ketë tagun hapës dhe atë mbyllës të
+    fshirë që të sigurohemi që të gjitha gjurmët e formatimit janë të fshira me
+    përpikëri, përndryshe skedarët e përkthyer mund të jenë të korruptuara dhe mund
+    të mos hapen.</span></p>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Duke fshirë një grup tagjesh ju do të fshini formatimin e lidhur me të nga
+    skedari i përkthyer.</span></p>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Shembull:</span></p>
+  <pre><span lang=SQ>   <strong><span
+style='font-family:"Courier New"'>&lt;segment 0001&gt;</span></strong>&lt;f0&gt;Ky formatim &lt;/f0&gt; është duke u bërë gati për tu fshirë.<strong><span
+style='font-family:"Courier New"'>&lt;end segment&gt;</span></strong>&lt;mbarim i segmentit&gt;</span></pre>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Pas fshirjes:</span></p>
+  <pre><span lang=SQ>   <strong><span
+style='font-family:"Courier New"'>&lt;segment 0001&gt;</span></strong>Ce format a été effacé.<strong><span
+style='font-family:"Courier New"'>&lt;mbarimi i segmentit&gt;</span></strong></span></pre>
+  <h4><a name="Tag_group_order_modification"></a><span lang=SQ style='font-family:
+&quot;Courier New&quot;;'>Ndryshimi i renditjes së tagjeve në grup</span></h4>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Për të ndërruar renditjen e një grupit të tagut për tu reflektuar në një
+    strukturë tjetër të gjuhës ë përkthim, thjeshtë vë grupin e tagut ku ai duhet
+    të jetë në përkthim.</span></p>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Formatimi do të ndjek pjesën se ku është zbatuar.</span></p>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Shembull:</span></p>
+  <pre><span lang=SQ>   <strong><span
+style='font-family:"Courier New"'>&lt;segment 0001&gt;</span></strong>&lt;f0&gt;Formatimi këtu&lt;/f0&gt; dhe &lt;f1&gt;formatimi atje&lt;/f1&gt; do të zhvendosen nga këtu.<strong><span
+style='font-family:"Courier New"'>&lt;mbarimi i segmentit&gt;</span></strong></span></pre>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Pas ndryshimit të renditjes:</span></p>
+  <pre><span lang=SQ>   <strong><span
+style='font-family:"Courier New"'>&lt;segment 0001&gt;</span></strong>&lt;f1&gt;Ce format&lt;/f1&gt; et &lt;f0&gt;ce format&lt;/f0&gt; ont été inversés.<strong><span
+style='font-family:"Courier New"'>&lt;end segment&gt;</span></strong></span></pre>
+  <h4><a name="Tag_group_nesting"></a><span lang=SQ style='font-family:&quot;Courier New&quot;;
+'>Ndërthurja e grupit te tagjeve</span></h4>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Ndryshimi i renditjes grupit të tagjeve mund të rezultojë në ndërthurjen e
+    grupit të tagjeve në një grupi tagu tjetër. Kjo është e mundshme përderisa
+    grupi mbyllës e përmbyll në tërësi grupin e përmbyllur. Kujdes i shtuar duhet
+    të keni gjatë ndërthurjes në veçanti në rastin e qifteve të tagjeve që nuk janë
+    të zhvendosur brenda grupit përmbyllës përndryshe skedari i përkthyer mund të
+    mos hapet.</span></p>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Pjesa e ndërthurur do ti ketë të zbatuara në të që të dy formatimet.</span></p>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Shembull:</span></p>
+  <pre><span lang=SQ>   <strong><span
+style='font-family:"Courier New"'>&lt;segment 0001&gt;</span></strong>&lt;f0&gt;Formatimi&lt;/f0&gt; &lt;f1&gt;këtu&lt;/f1&gt; do të ndërthuret.<strong><span
+style='font-family:"Courier New"'>&lt;mbarimi i segmentit&gt;</span></strong></span></pre>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Pas ndërthurjes:</span></p>
+  <pre><span lang=SQ>   <strong><span
+style='font-family:"Courier New"'>&lt;segment 0001&gt;</span></strong>&lt;f0&gt;Le format &lt;f1&gt;ici&lt;/f1&gt;&lt;/f0&gt; a été emboité dans le premier format.<strong><span
+style='font-family:"Courier New"'>&lt;mbarimi i segmentit&gt;</span></strong></span></pre>
+  <h3><a name="Tag_group_overlapping"></a><span lang=SQ style='font-family:&quot;Courier New&quot;;
+'>Mbi-shtrirja e grupi të tagjeve</span></h3>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Mbi-shtrirja është rezultat i manipulimit të keq të qifteve të tagjeve dhe
+    me siguri do të rezultojë në dëmtim dhe ndonjëherë në mos hapjen e skedarit të
+    përkthyer.</span></p>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Shembull:</span></p>
+  <pre><span lang=SQ>   <strong><span
+style='font-family:"Courier New"'>&lt;segment 0001&gt;</span></strong>&lt;f0&gt;formatimi &lt;/f0&gt; &lt;f1&gt;këtu&lt;/f1&gt; do të ngatërrohet.<strong><span
+style='font-family:"Courier New"'>&lt;mbarimi i segmenti&gt;</span></strong></span></pre>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Pas manipulimit të keq:</span></p>
+  <pre><span lang=SQ>   <strong><span
+style='font-family:"Courier New"'>&lt;segment 0001&gt;</span></strong>&lt;f0&gt;formatimi &lt;f1&gt;këtu&lt;/f0&gt; &lt;/f1&gt;tani është shumë i ngatërruar.<strong><span
+style='font-family:"Courier New"'>&lt;mbarimi i segmentit&gt;</span></strong></span></pre>
+  <h3><a name="Tag_group_validation"></a><span lang=SQ style='font-family:&quot;Courier New&quot;;
+'>Validimi i grupit të tagjeve</span></h3>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Funksioni i validimit të tagjeve (<a
+href="userInterface.html#Tag_Validation" title="Ndërfaqësi i shfrytëzuesit">Validimi
+    i tagjeve</a>) gjen tagjet e ndërruar (të bëra ose me qëllim ose
+    aksidentalisht), dhe tregon për segmentet e prekura. Përdorimi i këtij
+    funksioni do të hap në dialog me çdo tag të dyshuar të dëmtuar ose të keq në
+    dokument.</span></p>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Ky funksion është i mirë për përcjelljen e gabimeve në tekstin me tagje të
+    përkthyer. Kjo shpesh është një problem në skedarët OpenDocument ose
+    OpenOffice.org që nuk mund të hapen për shkak të problemeve me tagje gjatë
+    procesit të përkthimit. Riparim i tagjeve dhe rikrijimi i dokumenteve përkthimi
+    shpesh mund ta eliminoj problemin.</span></p>
+  <h3><a name="Hints_for_tags_management"></a><span lang=SQ style='font-family:
+&quot;Courier New&quot;;'>Këshilla për menaxhimin e tagjeve</span></h3>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Tagjet në përgjithësi paraqesin disa lloje të formatimit të në tekstin
+    origjinal. <strong><span style='font-family:"Courier New"'>Thjeshtimi i
+    formatimit të tekstit origjinal</span></strong> shumë i kontribuon në
+    zvogëlimin e numrit të tagjeve. Unifikimi i fonteve të përdorura, madhësive të
+    fonteve, ngjyrave etj duhet të konsiderohet nëse e mundshme si, për të
+    thjeshtuar përkthimin si dhe për të zvogëluar numrin e gabimeve të mundshme.</span></p>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Kaloni kah seksioni <a href="#Tag_operations"
+title="Puna me Tekst Të Formatuar">Operacionet me tagje</a> për të parë se
+    çfarë mund të bëhet me tagje.</span></p>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Mbani mend që nëse tagjet ju pengojnë dhe se formatimi nuk është i lidhur
+    ekstremisht me punën tuaj që e keni në dorë, heqja e shumicës së formatimit nga
+    dokumenti burim shumë do ta lehtësoj përkthimin.</span></p>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Në ju duhet të shihni tagjet në OmegaT po ju nuk ju nevojitet shumë të
+    mbani formatin në dokumentin e përkthyer jeni të lirë të mos shtoni tagje në
+    përkthim. Në këtë rast <strong><span style='font-family:"Courier New"'>të keni
+    shumë më tepër kujdes te qiftet e tagjeve</span></strong> pasi që ju duke
+    harruar fshirjen e njërës pjesë do të dëmtoni shumë formatimin e dokumentit
+    tuaj, që do ta mbaj një OpenOffice dokument të përkthyer në hapjen e tij.</span></p>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>Pasi që tagjet janë të përfshira në tekst, është e mund të të përdoren <a
+href="segmentation.html" title="Segmentimi i Burimit">rregullat e segmentimit</a> për të krijuar segmente që përfshijnë më pak tagje. Kjo është një veçori e
+    avancuar nuk duhet të përdoret nga shfrytëzuesit fillestar.</span></p>
+  <h3><a name=Important></a><span lang=SQ style='font-family:&quot;Courier New&quot;;
+'>Të rëndësishme</span></h3>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'>OmegaT ende nuk është në gjendje të gjet gabimet në mënyrë tërësisht
+    automatike, kështu që ju nuk do të lajmëroheni nëse ju bëni ndonjë gabim ose
+    ndërroni formatimin për tu përshtatur më mirë në gjuhën shënjestër. Ndonjëherë,
+    sidoqoftë, skedarët tuaj të përkthyer do të duken të shtrembëruara, dhe në rast
+    të skedarëve OpenDocument / OpenOffice.org çdo të refuzohet të hapen.</span></p>
+  <div align=center style='text-align:center'><code><span
+lang=SQ style='font-size:10.0pt;'>
+    <hr size=2 width="100%" align=center>
+    </span></code></div>
+  <p><span lang=SQ style='font-size:10.0pt;font-family:"Courier New";'><a href="legalNotices.html" title="Njoftimet Legale">Njoftimet Legale</a></span></p>
+</div>
+</body>
+</html>

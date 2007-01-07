@@ -1,0 +1,181 @@
+<html xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<link rel=Edit-Time-Data href="translationMemories_files/editdata.mso">
+<title>Translation Memories - OmegaT 1.6.1 User Manual</title>
+<style>
+<!--
+h1
+	{font-size:24.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h2
+	{font-size:18.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h3
+	{font-size:13.5pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+p
+	{font-size:12.0pt;
+	font-family:"Times New Roman";}
+code
+	{font-family:"Courier New";}
+ol
+	{ul
+	{-->
+</style>
+</head>
+<body bgcolor="#FFFFFF" link=blue vlink=blue lang=SQ>
+<div class=Section1>
+  <h1><span lang=SQ>Memoriet e Përkthimit</span></h1>
+  <h2><span lang=SQ>Përmbajtja</span></h2>
+  <ul type=disc>
+    <li><span lang=SQ>1. <a href="#OmegaT_and_TMX_files">OmegaT dhe
+      skedarët TMX</a> </span></li>
+    <ul type=circle>
+      <li><span lang=SQ><a href="#TMX_files_location_and_purpose">Vendi
+        i skedarëve TMX dhe qëllimi</a></span></li>
+      <li><span lang=SQ><a href="#TMX_files_and_language">Skedarët
+        TMX dhe gjuhët</a></span></li>
+    </ul>
+    <li><span lang=SQ>2. <a
+     href="#Keeping_a_memory_of_your_translation_wi">Mbajtje në memorie
+      përkthimin tuaj me OmegaT</a></span></li>
+    <li><span lang=SQ>5. <a
+     href="#Using_memories_created_by_other_transla">Shfrytëzimi i memorieve të
+      krijuara nga mjete tjera të përkthimit</a> </span></li>
+    <ul type=circle>
+      <li><span lang=SQ>5.1. <a href="#Importing_files">Importimi i
+        skedarëve</a></span></li>
+      <li><span lang=SQ>5.2. <a href="#Imported_files_handling">Manipulimi
+        i me skedarët e importuar</a></span></li>
+    </ul>
+    <li><span lang=SQ>6. <a
+     href="#Using_OmegaT_translation_memories_in_ot">Shfrytëzim i memorieve të
+      përkthimit të OmegaT-së në mjetet tjera të përkthimit</a></span></li>
+    <li><span lang=SQ>7. <a href="#Upgrading_Translation_Memories">Mbindërtimi
+      I Memorieve Të Përkthimit</a></span></li>
+  </ul>
+  <h2><a name="OmegaT_and_TMX_files"></a><span lang=SQ>OmegaT dhe skedarët TMX</span></h2>
+  <h3><a name="TMX_files_location_and_purpose"></a><span lang=SQ>Vendi i skedarëve TMX dhe qëllimi</span></h3>
+  <p><span lang=SQ>OmegaT përdor skedarët TMX në tre
+    vende të ndara.</span></p>
+  <ul type=disc>
+    <li><span lang=SQ>Dosja /omegat/ përmban <strong>project_save.tmx</strong> dhe eventualisht një numër të rezervimeve të skedarëve TMX. Skedari
+      project_save.tmx përmban <strong>të gjitha</strong> segmentet që janë
+      memorizuar që kur keni filluar projektin.</span></li>
+    <li><span lang=SQ>Dosja kryesore e projektit përmban 3 skedarë
+      TMX: <strong>&lt;project_name&gt;-omegat.tmx</strong>, <strong>&lt;project_name&gt;-level1.tmx</strong>,
+      si dhe <strong>&lt;project_name&gt;-level2.tmx</strong>, ku </span><code><span
+     lang=SQ style='font-size:10.0pt;'>&lt;project_name&gt;</span></code><span
+     lang=SQ> është thjeshtë emri i projektit
+      tuaj. Këta skedar janë skedarë TMX që përmbajnë vetë çiftet e përkthyera.</span></li>
+    <ul type=circle>
+      <li><span lang=SQ>&lt;project_name&gt;-level1.tmx është TMX që
+        përmban vetëm informatat tekstuale.</span></li>
+      <li><span lang=SQ>&lt;project_name&gt;-level2.tmx është një
+        TMX që përmbledh tagje specifike të OmegaT-së në TMX tagje korrekte ashtu
+        që skedari mund të shfrytëzohet me formatimin e tij në një mjet përkthimi
+        që përkrah TMX memoriet e nivelit 2, ose vet OmegaT.</span></li>
+      <li><span lang=SQ>&lt;project_name&gt;-omegat.tmx është një
+        TMX që përmban tagje të veçanta formatimi të OmegaT-së ashtu që skedari
+        të mund të përdoret me informatat e formatimit në ndonjë projekt tjetër
+        të OmegaT-së.</span></li>
+    </ul>
+    <li><span lang=SQ>Skedari /tm/ mund të përmbajë një nuk të
+      skedarëve TMX. Skedarët e tillë dhe të jenë skedarë korrekt TMX dhe ata
+      mund të përmbajnë ose vetëm informata tekstuale (TMX niveli 1), OmegaT
+      Informatat tekstuale dhe të formatimit (omegat TMX) ose TMX informata tekstual
+      formatimi (TMX niveli 2).</span></li>
+  </ul>
+  <h3><a name="TMX_files_and_language"></a><span lang=SQ>Skedarët TMX dhe gjuhët</span></h3>
+  <p><span lang=SQ>Skedarët TMX përmbajnë <i>njësi
+    përkthimi</i> që janë të bëra nga një numër i segmente ekuivalente më gjuhët e
+    ndryshme. Një njësi përkthimi është e bërë nga të paktën dy <i>variacione
+    njësish përkthimit</i> (tuv). Ose mund të jetë burim ose shënjestër.</span></p>
+  <p><span lang=SQ>Përcaktimet në projektin tuaj do
+    të tregojnë se cila është gjuha burimore dhe cila është gjuha shënjestër.
+    OmegaT do të merr në këtë mënyrë <strong>tuv </strong>korresponduese me kodin e
+    gjuhës së projektit burimor dhe do të atij segmenti sikurse segmenti burimor,
+    dhe do ta marrë <strong>tuv</strong> në korrespondencë me kodin e gjuhës së
+    projektit shënjestër dhe do të përdor atë segment si segment shënjestër.</span></p>
+  <p><span lang=SQ>Kodet e gjuhës janë një numër të
+    formave. OmegaT tani për tani njeh vetëm kodet që shfaqin:</span></p>
+  <ul type=disc>
+    <li><span lang=SQ>Kodin e gjuhës në dy shkronja (p.sh: <strong>JA</strong> për Japonisht)</span></li>
+  </ul>
+  <p><span lang=SQ>ose</span></p>
+  <ul type=disc>
+    <li><span lang=SQ>Kodi i gjuhës në dy shkronja dhe kodi i
+      shtetit në dy shkronja, të ndara nga një vijë ndarëse (p.sh: <strong>JA-JP</strong> për Japonishte dhe pasi që është përdorur në Japoni)</span></li>
+  </ul>
+  <p><span lang=SQ>Nëse kodet e gjuhës së projektit
+    dhe kodet e gjuhës së TMX përputhen në tërësi, segmentet do të ngarkohen në
+    memorie. Nëse përputhet vetëm kodi i gjuhës por jo edhe i vendit, segmentet do
+    të ngarkohen në memorie. Nëse nuk përputhen as kodi i gjuhës e as kodi i
+    shtetit segmentet nuk do të ngarkohen në memorie.</span></p>
+  <h2><a name="Keeping_a_memory_of_your_translation_wit"></a><span lang=SQ>Mbajtje në memorie përkthimin tuaj me OmegaT</span></h2>
+  <p><span lang=SQ>Skedari project_save.tmx përmban <strong>të
+    gjitha </strong>segmentet që janë ruajtur që kur keni filluar projektin. Për
+    shembull nëse ju bëni ndonjë ndryshim në segmentimin e projektit,
+    project_save.tmx do t'i ruaj çiftet e përkthimit të ri po do të mbaj informatat
+    paraprake. Kjo rastësisht do të na çoj në ekranin e <strong>vargjeve bonjake</strong> në Vështruesin e Përputhjeve. Përputhje të tilla tanimë nuk i referojnë asnjë
+    segmenti ekzistues, por segmentet e regjistruara para ndryshimin bëhen. Nëse
+    ndryshimi ka qenë një gabim, rikthehu në përcaktimet paraprake dhe një regjistrim
+    i vjetër do të paraqitet.</span></p>
+  <h2><a name="Using_memories_created_by_other_translat"></a><span lang=SQ>Shfrytëzimi i memorieve të krijuara nga mjete
+    tjera të përkthimit</span></h2>
+  <h3><a name="Importing_files"></a><span lang=SQ>Importimi
+    i skedarëve</span></h3>
+  <p><span lang=SQ>OmegaT përkrah importimin e TMX
+    të versioneve 1.1-1.4b (nivelin 1 dhe nivelin 2). Kjo mundëson memoriet e
+    përkthimit të prodhuara nga mjetet tjera që janë prodhuar nga mjetet tjera të lexohen
+    nga OmegaT.</span></p>
+  <p><span lang=SQ>Sidoqoftë, OmegaT nuk përkrah <i>në
+    tërësi</i> skedarë TMX të nivelit 2(që ruajnë jo vetëm përkthimin por edhe
+    formatimin), kështu që kualiteti i përputhjeve të turbullta do të jenë më i
+    ultë kur të importohen skedarë TMX të nivelit 2.</span></p>
+  <h3><a name="Imported_files_handling"></a><span lang=SQ>Manipulimi me skedarët e importuar</span></h3>
+  <p><span lang=SQ>OmegaT ndjek procedurat shumë
+    strikte gjatë manipulimit me skedarët e memories së përkthimit(skedarët TMX).</span></p>
+  <p><span lang=SQ>Nëse është gjetur ndonjë gabim në
+    atë skedar, OmegaT thjeshtë nuk do ta ngarkoj atë.</span></p>
+  <p><span lang=SQ>Në disa raste disa mjete janë të
+    njohura më prodhimin të skedarëve jo të vlefshëm TMX. Nëse doni që një skedar
+    të tillë ta shfrytëzoni si referencë e OmegaT, ato duhet të riparohen nëse
+    OmegaT i refuzon ato. Riparimet janë operacione triviale OmegaT do t’iu jep
+    informatën në lidhje me mesazhin e gabimit. Ju mund të kërkoni ndihmë në grupin
+    e shfrytëzuesve nëse ju ndiheni të zhytur.</span></p>
+  <h2><a name="Using_OmegaT_translation_memories_in_oth"></a><span lang=SQ>Shfrytëzim i memorieve të përkthimit të OmegaT-së
+    në mjetet tjera të përkthimit</span></h2>
+  <p><span lang=SQ>\OmegaT eksporton skedarët TMX
+    versioni 1.4 (niveli 1dhe niveli 2). Eksporti i nivelit 2 nuk është një nivel 2
+    standard por është i mjaftueshëm që të gjeneroj përputhje të sakta kur
+    përkrahjen në mjete tjera të përkthimit që përkrahin TMX Niveli 2.</span></p>
+  <p><span lang=SQ>Nëse juve ju duhet informatat
+    tekstuale (dhe jo informatat e formatimit), thjeshtë përdorni skedarët e
+    nivelit 2 që OmegaT ka krijuar.</span></p>
+  <h2><a name="Upgrading_Translation_Memories"></a><span lang=SQ>Mbindërtimi I Memorieve Të Përkthimit</span></h2>
+  <p><span lang=SQ>Versionet paraprake kanë qenë në
+    gjendje që të segmentojnë skedarët tuaj burimor vetëm në paragrafë, dhe ka pas
+    një numër jo të qëndrueshëm të tagjeve të formatimit në skedarët HTML dhe Open
+    Document. OmegaT 1.6.1 mund të gjej dhe të mbindërtoj skedarë TMX të tillë
+    shpejtë për të rritur kualitetin e përputhjeve të turbullta dhe të ndikohen në
+    kualitetin e përkthimeve ekzistuese -- ashtu që juve nuk ju duhet ta bëni atë
+    përsëri.</span></p>
+  <p><span lang=SQ>TMX-ët e projektit do të
+    mbindërtohen vetëm njëherë, dhe do të shkruhet në formën e mbindërtuar, si dhe
+    TMX skedarët trashëgues do të mbindërohet përnjëherë sa herë që të ngarkohet
+    projekti. Vini re që disa ndryshim në filtrat në OmegaT 1.6.1 mund të dërgojnë
+    tërësisht në segmente tjera, kështu që në rastet e rralla ju duhet të
+    mbindërtoni përkthimet tuaja në mënyrë manuale.</span></p>
+  <div align=center style='text-align:center'><span lang=SQ>
+    <hr size=2 width="100%" align=center>
+    </span></div>
+  <p><span lang=SQ><a href="legalNotices.html"
+title="Njoftimet Legale">Njoftimet Legale</a></span></p>
+</div>
+</body>
+</html>

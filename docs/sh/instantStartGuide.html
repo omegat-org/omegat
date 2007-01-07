@@ -6,19 +6,36 @@
 <body>
 
 <h1>Vodič za brzi početak</h1>
-<p>ili <strong>kako početi s korišćenjem OmegaT u roku od 5 minuta </strong></p>
+<p><small>ili kako početi s korišćenjem OmegaT u roku od 5 minuta</small></p>
 
 <p><strong>Ovaj vodič za brzi početak predstavlja samo najosnovnije uputstvo. U idealnom slučaju, svi korisnici bi trebalo da se upoznaju i savladaju sve mogućnosti koje pruža OmegaT.</strong></p>
 
 <h2>Sadržaj</h2>
-   <ol><li>Način rada OmegaT u kratkim crtama</li>
-   <li>Prevođenje pomoću OmegaT</li>
-   <li>Radnje s tagovanim tekstom</li></ol>
 
-<hr>
+<ol type="I">
+   <li><a href="#Briefly.2C_how_OmegaT_works">Način rada OmegaT u kratkim crtama</a></li>
+   <li><a href="#How_to_translate_using_OmegaT">Prevođenje pomoću OmegaT</a>
+      <ol type="a">
+         <li><a href="#Create_and_open_a_new_project">Stvori i otvori novi projekt</a></li>
+         <li><a href="#Translate_the_segments_one_by_one">Segmente prevodiš postupno, jedan iza drugog.</a></li>
+         <li><a href="#Use_TM_and_glossary_matches">Koristi podudarnosti iz memorije prevoda i rječnika</a></li>
+         	<ol type="1">
+         		<li><a href="#TM_matches">Podudarnosti sa memorijom prevoda (TM)</a></li>
+         		<li><a href="#Glossary_matches">Podudarnosti sa rječnikom</a></li>
+         	</ol>
+         <li><a href="#Create_the_translated_documents">Sačini prevedene dokumente</span></a></li>
+      </ol>
+   </li>
+   <li><a href="#Dealing_with_tagged_text">Radnje s tagovanim tekstom</a>
+      <ol type="a">
+         <li><a href="#An_example...">Evo jednog primjera...</a></li>
+         <li><a href="#Tag_verification">Provjera tagova</a></li>
+      </ol>
+   </li>
+</ol>
 
 <a name="Briefly.2C_how_OmegaT_works"></a>
-<h2>1. Način rada OmegaT u kratkim crtama</h2>
+<h2>I. Način rada OmegaT u kratkim crtama</h2>
 
 <p>Polje rada OmegaT sastoji se od tri odvojena okna. Veličina svakoga od njih dade se mijenjati pomoću miša. Na lijevoj strani nalazi se Editor u kome ukucavaš svoj prevod. Na desnoj strani u gornjem uglu, nalazi se Prikazivač podudarnosti, gdje su predstavljene podudarnosti iz prevodne memorije. Ispod njega stoji Prikazivač rječnika, gdje su predstavljene terminološke podudarnosti.</p>
 
@@ -26,9 +43,8 @@
 
 <p>Tvoj rad na prevođenju, OmegaT organizuje u takozvane projekte. Za svaki od projekata OmegaT će načiniti jedan skup direktorijuma. U njima se arhiviraju izvorni dokumenti namjenjeni prevođenju, rječnici koje ev. želiš koristiti i bilo koja memorija prevoda koju takođe želiš upotrijebiti. OmegaT takođe stvara direktorijum pod nazivom “Target” koji će sadržati sve finalne prevedene dokumente.</p>
 
-<hr>
 <a name="How_to_translate_using_OmegaT"></a>
-<h2>2. Prevođenje pomoću OmegaT</h2>
+<h2>II. Prevođenje pomoću OmegaT</h2>
 
 <a name="Create_and_open_a_new_project"></a>
 <h3>a. Stvori i otvori novi projekt</h3>
@@ -39,7 +55,7 @@
 
 <p>OmegaT će te preko donjeg dijaloga pitati da potvrdiš ili promijeniš direktorijume projekta koje treba stvoriti:</p>
 
-<center><img src="images/NewProject.png" alt="Image:NewProject.png" width="398" height="428" ></center>
+<center><img src="images/NewProject.png" alt="Image:NewProject.png" width="398" height="428" /></center>
 
 <p>Možeš jednostavno prihvatiti mjesto pod-direktorijuma, ali se prvo postaraj da šifre izvornog jezika i jezika prevoda, budu ispravne. Izaberi šifru jezika (od 2 slova) ili šifru za jezik-i-zemlju (2 + 2 slova) iz drop-down liste, ili ih ukucaj ručno (pridržavaj se forme od 2 slova). Zapamti lokaciju Target pod-direktorijuma (onog za prevedene dokumente).</p>
 
@@ -69,9 +85,9 @@
 
 <p>Radi prelaska u sljedeći segment, pritisni "ENTER".</p>
 
-<p>Napomena:<br> - Radi pomjeranja u bilo koji drugi dio sa tekstom, gore ili dolje, klikni dva puta na rečenicu ili odjeljak koje želiš otvoriti. <br> - Ukoliko ti više odgovara da prevodiš u prazno target polje, ovu opciju podesićeš preko Opcije -&gt; Ponašanje uređivanja.</p>
+<p>Napomena:<br/> - Radi pomjeranja u bilo koji drugi dio sa tekstom, gore ili dolje, klikni dva puta na rečenicu ili odjeljak koje želiš otvoriti. <br/> - Ukoliko ti više odgovara da prevodiš u prazno target polje, ovu opciju podesićeš preko Opcije -&gt; Ponašanje uređivanja.</p>
 
-<p>Poslije pritiska na "ENTER", odigrava se nekoliko nevidljivih radnji: <br> OmegaT dodaje par segmenata (izvorni segment i njegov prevod) u memoriju prevoda i takođe automatski prevodi sve identične segmente koje pronađe u ostalih datotekama projekta. Program takođe skenira memoriju prevoda u potrazi za podudarnostima koje se odnose na sljedeći neprevedeni segment.</p>
+<p>Poslije pritiska na "ENTER", odigrava se nekoliko nevidljivih radnji: <br/> OmegaT dodaje par segmenata (izvorni segment i njegov prevod) u memoriju prevoda i takođe automatski prevodi sve identične segmente koje pronađe u ostalih datotekama projekta. Program takođe skenira memoriju prevoda u potrazi za podudarnostima koje se odnose na sljedeći neprevedeni segment.</p>
 
 <a name="Use_TM_and_glossary_matches"></a>
 <h3>c. Koristi podudarnosti iz memorije prevoda i rječnika</h3>
@@ -80,14 +96,14 @@
 <h4>1. Podudarnosti sa memorijom prevoda (TM)</h4>
 
 <p>Ukoliko OmegaT za naredni segment u memoriji prevoda pronađe bilo kakva podudaranja (od 30% ili više – pogledaj priručnik) prikazaće ih u Prikazivaču podudarnosti. Prva podudarnost je u Prikazivaču podudarnosti automatski pre-selektovana.</p>
-<p>Radi umetanja podudarnosti iz memorije prevoda u Prikazivaču podudarnosti u tvoje target polje, možeš koristiti kratice na tastaturi:<br>
+<p>Radi umetanja podudarnosti iz memorije prevoda u Prikazivaču podudarnosti u tvoje target polje, možeš koristiti kratice na tastaturi:<br/>
 <ul>
    <li>Radi umetanja pre-selektovane podudarnosti na mjesto pozicije kursora, pritisni <code>Ctrl+I</code> , ili...</li>
    <li>Pritisni <code>Ctrl+R</code> da prepišeš cijeli segment sa pre-selektovanom podudarnošću.</li>
 </ul>
 </p>
 
-<p>Ukoliko postoji nekoliko podudarnosti, dok ti međutim ne želiš da koristiš onu koja je pre-selektovana:<br>
+<p>Ukoliko postoji nekoliko podudarnosti, dok ti međutim ne želiš da koristiš onu koja je pre-selektovana:<br/>
 <ul>
 	<li>U Prikazivaču podudarnosti izaberi podudarnost koja ti se najviše dopada: <code>Ctrl+2</code> za drugu po redu prikazanu podudarnost, <code>Ctrl+3</code> za treću, itd.</li>
 	<li>Potom, kako smo gore naveli, koristi kratice <code>Ctrl+I</code> ili <code>Ctrl+R</code>.</li>
@@ -112,9 +128,9 @@
 
 <p>Radi finalizacije tvog prevoda, otvori target datoteke u za to pogodnim aplikacijama (pretraživaču, tekst procesoru...) kako bi se provjerio sadržaj i formatacija tvog prevoda. Nakon toga možeš se, radi potrebnih korekcija, vratiti na OmegaT; ne zaboravi da ponovo sačiniš prevedene dokumente.</p>
 
-<hr>
+
 <a name="Dealing_with_tagged_text"></a>
-<h2>3. Radnje s tagovanim tekstom</h2>
+<h2>III. Radnje s tagovanim tekstom</h2>
 
 <p>OmegaT svojim posebnim tagovima markira tekst kako bi se sačuvala formatacija izvornih dokumenata (podebljana slova, kurziv, itd.); isti su vidni u target polju.</p>
 
@@ -181,6 +197,9 @@ dialoogkassie verander word.<font color="#ff0000">&lt;/p&gt;</font></code>
 <p>Ponekad se desi da se uslijed grešaka u tagovima dokument ne može ni otvoriti. Stoga se, prije nego sačiniš prevedene datoteke, moraš postarati oko popravke svih grešaka u tagovima.</p>
 
 <p>I na kraju, uvek dva puta provjeri definitivno stanje formatacije, tako što ćeš prevedeni dokument otvoriti u odgovarajućem prikazivaču ili editoru.</p>
+
 <hr>
+<p><a href="legalNotices.html" title="Napomene pravne prirode">Napomene pravne prirode</a></p>
+
 </body>
 </html>

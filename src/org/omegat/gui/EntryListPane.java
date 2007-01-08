@@ -43,6 +43,7 @@ import org.omegat.gui.main.MainWindow;
  * flexible in the fonts it displays than the HTML text
  *
  * @author Keith Godfrey
+ * @author Henry Pijffers (henry.pijffers@saxnot.com)
  */
 class EntryListPane extends JTextPane
 {
@@ -105,6 +106,23 @@ class EntryListPane extends JTextPane
 
         m_entryList.add(new Integer(num));
         m_offsetList.add(new Integer(m_stringBuf.length()));
+    }
+
+    /**
+      * Adds a message text to be displayed.
+      * Used for displaying messages that aren't results.
+      *
+      * @param message The message to display
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    public void addMessage(String message) {
+        // Insert entry/message separator if necessary
+        if (m_stringBuf.length() > 0)
+            m_stringBuf.append("---------\n");                                    // NOI18N
+
+        // Insert the essage text
+        m_stringBuf.append(message);
     }
 
     public void finalize()

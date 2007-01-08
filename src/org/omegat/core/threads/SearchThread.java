@@ -255,7 +255,6 @@ public class SearchThread extends Thread
         {
             if (!m_entrySet.contains(src + target)) { // HP, duplicate entry prevention
                 // entries are referenced at offset 1 but stored at offset 0
-                //m_window.addEntry(entryNum+1, null, (entryNum+1)+"> "+src, target);	// NOI18N
                 m_window.addEntry(entryNum+1, null, (entryNum+1)+"> "+src, target);	// NOI18N
                 m_entrySet.add(src + target); // HP
             }

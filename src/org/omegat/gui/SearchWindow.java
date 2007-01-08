@@ -455,9 +455,9 @@ public class SearchWindow extends JFrame
         m_viewer.addEntry(num, preamble, src, tar);
     }
     
-    public void postMessage(String str)
+    public void postMessage(String message)
     {
-        m_viewer.addEntry(-1, str, null, null);
+        m_viewer.addMessage(message);
     }
     
     /////////////////////////////////////////////////////////////////

@@ -82,11 +82,12 @@ public class GlossaryManager
             for (int i=0; i<fileList.length; i++)
             {
                 String fname = folder.getAbsolutePath() + File.separator + fileList[i];
-                Log.logRB("CT_LOADING_GLOSSARY", new Object[] {fname});
                 String fname_lower=fname.toLowerCase();
                 // ignoring files with unrecognized extensions - http://sf.net/tracker/index.php?func=detail&aid=1088247&group_id=68187&atid=520347
-                if( fname_lower.endsWith(EXT_DEF_ENC) || fname_lower.endsWith(EXT_UTF8_ENC) )
+                if( fname_lower.endsWith(EXT_DEF_ENC) || fname_lower.endsWith(EXT_UTF8_ENC) ) {
+                    Log.logRB("CT_LOADING_GLOSSARY", new Object[] {fname});
                     loadGlossaryFile(new File(fname));
+                }
             }
         }
         else

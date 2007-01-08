@@ -270,7 +270,7 @@ public class CommandThread extends Thread
             }
             
             // Building up glossary
-            evtStr = OStrings.getString("CT_LOADING_GLOSSARY");
+            evtStr = OStrings.getString("CT_LOADING_GLOSSARIES");
             MessageRelay.uiMessageSetMessageText(tf, evtStr);
             m_glossary.buildGlossary(m_strEntryList);
             MessageRelay.uiMessageSetMessageText(tf, OStrings.getString("CT_LOADING_PROJECT"));

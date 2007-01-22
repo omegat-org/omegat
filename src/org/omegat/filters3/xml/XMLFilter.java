@@ -152,7 +152,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
     
     protected void processFile(BufferedReader inFile, BufferedWriter outFile) throws IOException, TranslationException
     {
-        throw new IOException("XMLFilter.processFile(BufferedReader,BufferedWriter) should never be called!");  // NOI18N
+        throw new UnsupportedOperationException("XMLFilter.processFile(BufferedReader,BufferedWriter) should never be called!");  // NOI18N
     }
 
     /** 

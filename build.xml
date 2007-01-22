@@ -62,7 +62,7 @@
         <mkdir dir="${l10n.dir}"/>
         
         <!-- minimal -->
-        <property name="l10n.min" value="OmegaT_l10n_${version}_minimal"/>
+        <property name="l10n.min" value="OmegaT_${version}_L10N_Minimal"/>
         <property name="l10n.min.dir" value="${l10n.dir}/${l10n.min}"/>
         <mkdir dir="${l10n.min.dir}"/>
         <copy todir="${l10n.min.dir}">
@@ -70,21 +70,40 @@
         </copy>
         <copy todir="${l10n.min.dir}/source">
             <fileset dir="." 
-                    includes="release/readme.txt docs/en/instantStartGuideNoTOC.html src/**/Bundle.properties"/>
+                    includes="docs/en/instantStartGuideNoTOC.html src/**/Bundle.properties"/>
+        </copy>
+        <copy file="release/readme.txt"
+              tofile="${l10n.min.dir}/source/readme.utf8">
+            <filterset begintoken="@@" endtoken="@@">
+                <filter token="TRANSLATION_NOTICE"
+                        value="This translation is the work of [insert your name], copyright© [insert year]."/>
+            </filterset>
         </copy>
         <zip destfile="dist2/${l10n.min}.zip" 
                 basedir="${l10n.dir}" includes="${l10n.min}/**" />
                 
         <!-- full -->
-        <property name="l10n.max" value="OmegaT_l10n_${version}_full"/>
+        <property name="l10n.max" value="OmegaT_${version}_L10N_Full"/>
         <property name="l10n.max.dir" value="${l10n.dir}/${l10n.max}"/>
         <mkdir dir="${l10n.max.dir}"/>
         <copy todir="${l10n.max.dir}">
             <fileset dir="${l10n.project.dir}"/>
         </copy>
+        <copy todir="${l10n.max.dir}/source"> <!-- Copy all files except legalNotices.html -->
+            <fileset dir="."
+                    includes="docs/en/** src/**/Bundle.properties"
+                    excludes="docs/en/legalNotices.html"/>
+        </copy>
+        <copy file="release/readme.txt"
+              tofile="${l10n.max.dir}/source/readme.utf8">
+            <filterset begintoken="@@" endtoken="@@">
+                <filter token="TRANSLATION_NOTICE"
+                        value="This translation is the work of [insert your name], copyright© [insert year]."/>
+            </filterset>
+        </copy>
         <copy todir="${l10n.max.dir}/source">
             <fileset dir="." 
-                    includes="release/readme.txt docs/en/** src/**/Bundle.properties"/>
+                     includes="docs/en/legalNotices.html"/>
             <filterset begintoken="@@" endtoken="@@">
                 <filter token="TRANSLATION_NOTICE"
                         value="&lt;p&gt;This translation is the work of [insert your name], copyright© [insert year].&lt;/p&gt;"/>
@@ -97,7 +116,7 @@
     <!-- Builds a source distribution -->    
     <target name="src" depends="init" description="Build source distribution">
         <mkdir dir="dist2"/>
-        <zip destfile="dist2/OmegaT_src_${version}.zip" basedir="." 
+        <zip destfile="dist2/OmegaT_${version}_Source.zip" basedir="." 
                 includes="addons/** docs/** images/** lib/** nbproject/** lib-mnemonics/** release/** src/** test/** manifest-template.mf build.xml"
                 excludes="**/nbproject/private/** **/build/** **/dist/**" />
     </target>
@@ -106,11 +125,21 @@
     <target name="release">
         <mkdir dir="dist"/>
         <copy todir="dist">
-            <fileset dir="release" includes="*" excludes="win32-specific l10n-project"/>
+            <fileset dir="release" includes="*" excludes="readme.txt win32-specific l10n-project"/>
+        </copy>
+        <copy todir="dist"
+              file="release/readme.txt">
+            <!-- Remove TRANSLATION_NOTICE placeholder (from English readme) -->
+            <filterset begintoken="@@" endtoken="@@">
+                <filter token="TRANSLATION_NOTICE" value=""/>
+            </filterset>
         </copy>
         <mkdir dir="dist/docs"/>
-        <copy todir="dist/docs">
-            <fileset dir="docs"/>
+        <copy todir="dist/docs"> <!-- copy all files except English legalNotices.html -->
+            <fileset dir="docs" excludes="en/legalNotices.html"/>
+        </copy>
+        <copy todir="dist/docs"> <!-- copy just English legalNotices.html -->
+            <fileset dir="docs" includes="en/legalNotices.html"/>
             <!-- Remove TRANSLATION_NOTICE placeholder (from English manual) -->
             <filterset begintoken="@@" endtoken="@@">
                 <filter token="TRANSLATION_NOTICE" value=""/>
@@ -174,4 +203,3 @@
     <target name="all" depends="l10n-pack,src,jar,zip,win" />
     
 </project>
-

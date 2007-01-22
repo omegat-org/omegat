@@ -1,3 +1,5 @@
+@@TRANSLATION_NOTICE@@
+
 ==============================================================================
   OmegaT 1.6.1 update 2, Read Me file
 
@@ -16,12 +18,9 @@ The most current info about OmegaT can be found at
 (in English, Slovak, Dutch, Portugese):
       http://www.omegat.org/omegat/omegat.html
 
-More information can be found on the following pages:
-
 User support, at the Yahoo user group (multilingual), where the archives are
 searchable without subscription:
      http://groups.yahoo.com/group/OmegaT/
-     .
 
 Requests for Enhancements (in English), at the SourceForge site:
      http://sourceforge.net/tracker/?group_id=68187&atid=520350
@@ -52,7 +51,7 @@ OmegaT's main features are
 OmegaT supports OpenDocument files, Microsoft Office files (using
 OpenOffice.org as a conversion filter, or by conversion to HTML),
 OpenOffice.org or StarOffice files, as well as (X)HTML, Java localization
-files or plain text files.
+files, plain text files, and more.
 
 OmegaT will automatically parse even the most complex source directory
 hierarchies, to access all the supported files, and produce a target directory
@@ -99,17 +98,17 @@ To contribute to OmegaT development, get in touch with the developers at:
 
 To translate OmegaT's user interface, user manual or other related documents,
 read:
-      http://www.omegat.org/omegat/translation-info.html
+      http://www.omegat.org/omegat/omegat_en/translation-info.html
 
 And subscribe to the translators' list:
       http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
 
 For other kind of contributions, subscribe first to the user group at:
-      http://groups.yahoo.com/group/OmegaT/
+      http://tech.groups.yahoo.com/group/omegat/
 
 And get a feel of what is going on in the OmegaT world...
 
-  OmegaT is originally the work of Keith Godfrey.
+  OmegaT is the original work of Keith Godfrey.
   Marc Prior is the coordinator of the OmegaT project.
 
 Previous contributors include:
@@ -151,9 +150,10 @@ Localization contributed by
   Martin Wunderlich (German)
   Hisashi Yanagida (Japanese)
   Kunihiko Yokota (Japanese)
-  Erhan Yukselci (Turkish)
+  Erhan Yükselci (Turkish)
+  Dragomir Kovacevic (Serbo-Croat)
   Claudio Nasso (Italian)
-  Dragomir Kovacevic (Serbo-Croation)
+  Ahmet Murati (Albanian)
 
 Other contributions by
   Sabine Cretella
@@ -163,13 +163,15 @@ Other contributions by
   Marc Prior (current localization manager)
   and many, many more very helpful people
 
+(If you think you have significantly contributed to the OmegaT Project but you don't see your name on the lists, feel free to contact us.)
+
 OmegaT uses the following libraries:
   HTMLParser by Somik Raha, Derrick Oswald and others (LGPL License).
   http://sourceforge.net/projects/htmlparser
-  
-  MRJ Adapter by Steve Roy (Artistic License).
+
+  MRJ Adapter by Steve Roy (LGPL License).
   http://homepage.mac.com/sroy/mrjadapter/
-  
+
   VLDocking Framework by VLSolutions (CeCILL License).
   http://www.vlsolutions.com/en/products/docking/
 
@@ -199,6 +201,41 @@ you think will help the developers with finding and fixing your bug.
 
 To browse the archives of the user group, go to:
      http://groups.yahoo.com/group/OmegaT/
+
+To browse the bug report page and file a new bug report if necessary, go to:
+     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+
+To keep track of what is happening to your bug report you may want to register
+as a Source Forge user.
+
+==============================================================================
+6.   Release details
+
+5.  Is OmegaT bugging you ? Do you need help ?
+
+Before reporting a bug, make sure that you have thoroughly checked the
+documentation. What you see may instead be a characteristic of OmegaT that
+you have just discovered. If you check the OmegaT log and you see words like
+"Error", "Warning", "Exception", or "died unexpectedly" then you are on to
+something (the log.txt is located in the user preferences directory, see the
+manual for its location).
+
+The next thing you do is confirm what you found with other users, to make sure
+this has not already been reported. You can verify the bug report page at
+SourceForge too. Only when you are sure you are the first to have found some
+reproductible sequence of event that triggered something not supposed to
+happen should you file a bug report.
+
+Every good bug report needs exactly three things.
+  - Steps to reproduce,
+  - What you expected to see, and
+  - What you saw instead.
+
+You can add copies of files, portions of the log, screenshots, anything that
+you think will help the developers with finding and fixing your bug.
+
+To browse the archives of the user group, go to:
+     http://tech.groups.yahoo.com/group/omegat/
 
 To browse the bug report page and file a new bug report if necessary, go to:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347

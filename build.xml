@@ -33,6 +33,17 @@
         <property file="src/org/omegat/Version.properties"/>
         <filter filtersfile="src/org/omegat/Version.properties"/>
         <copy file="manifest-template.mf" tofile="manifest.mf" filtering="true"/>
+        <condition property="updatenr"
+                   value="0${update}"
+                   else="${update}">
+           <length string="${update}"
+                   length="1"/>
+        </condition>
+        <condition property="distversion"
+                   value="${version}"
+                   else="${version}_${updatenr}">
+           <equals arg1="${updatenr}" arg2="00"/>
+        </condition>
     </target>
 
     <target name="-post-clean">
@@ -62,7 +73,7 @@
         <mkdir dir="${l10n.dir}"/>
         
         <!-- minimal -->
-        <property name="l10n.min" value="OmegaT_${version}_L10N_Minimal"/>
+        <property name="l10n.min" value="OmegaT_${distversion}_L10N_Minimal"/>
         <property name="l10n.min.dir" value="${l10n.dir}/${l10n.min}"/>
         <mkdir dir="${l10n.min.dir}"/>
         <copy todir="${l10n.min.dir}">
@@ -83,7 +94,7 @@
                 basedir="${l10n.dir}" includes="${l10n.min}/**" />
                 
         <!-- full -->
-        <property name="l10n.max" value="OmegaT_${version}_L10N_Full"/>
+        <property name="l10n.max" value="OmegaT_${distversion}_L10N_Full"/>
         <property name="l10n.max.dir" value="${l10n.dir}/${l10n.max}"/>
         <mkdir dir="${l10n.max.dir}"/>
         <copy todir="${l10n.max.dir}">
@@ -116,7 +127,7 @@
     <!-- Builds a source distribution -->    
     <target name="src" depends="init" description="Build source distribution">
         <mkdir dir="dist2"/>
-        <zip destfile="dist2/OmegaT_${version}_Source.zip" basedir="." 
+        <zip destfile="dist2/OmegaT_${distversion}_Source.zip" basedir="." 
                 includes="addons/** docs/** images/** lib/** nbproject/** lib-mnemonics/** release/** src/** test/** manifest-template.mf build.xml"
                 excludes="**/nbproject/private/** **/build/** **/dist/**" />
     </target>
@@ -158,14 +169,14 @@
     <!-- Builds a ZIP distribution -->    
     <target name="zip" description="Build Zip distro" depends="jar,release">
         <mkdir dir="dist2"/>
-        <zip basedir="dist" destfile="dist2/OmegaT_${version}.zip" excludes="OmegaT.exe OmegaT.iss l10n-project"/>
+        <zip basedir="dist" destfile="dist2/OmegaT_${distversion}.zip" excludes="OmegaT.exe OmegaT.iss l10n-project"/>
     </target>
 
     <!-- Creates a Windows Installer -->
     <target name="do-win" depends="init,jar,zip">
         <copy todir="dist" file="release/win32-specific/OmegaT.exe"/>
 
-        <filter token="VERSION_NUMBER_SUBST" value="${version}"/>
+        <filter token="VERSION_NUMBER_SUBST" value="${distversion}"/>
         <copy todir="dist" file="release/win32-specific/OmegaT.iss" filtering="on"/>
         
         <mkdir dir="dist2"/>

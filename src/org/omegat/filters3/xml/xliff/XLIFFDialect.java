@@ -47,5 +47,23 @@ public class XLIFFDialect extends DefaultXMLDialect
             "source",                                                           // NOI18N
             "target",                                                           // NOI18N
         });
+        
+        defineOutOfTurnTags(new String[]
+        {
+            "sub",                                                               // NOI18N
+        });
+      
+        defineIntactTags(new String[]
+        {
+            "source",                                                           // NOI18N
+            "header",                                                           // NOI18N
+            "bin-unit",                                                         // NOI18N
+            "prop-group",                                                       // NOI18N
+            "count-group",                                                      // NOI18N
+            "ph",                                                               // NOI18N
+            "bpt",                                                              // NOI18N
+            "ept",                                                              // NOI18N
+            "it",                                                               // NOI18N
+        });
     }
 }

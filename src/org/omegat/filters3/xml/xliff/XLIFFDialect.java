@@ -60,6 +60,8 @@ public class XLIFFDialect extends DefaultXMLDialect
             "bin-unit",                                                         // NOI18N
             "prop-group",                                                       // NOI18N
             "count-group",                                                      // NOI18N
+            "alt-trans",                                                        // NOI18N
+            "mrk",                                                              // NOI18N
             "ph",                                                               // NOI18N
             "bpt",                                                              // NOI18N
             "ept",                                                              // NOI18N

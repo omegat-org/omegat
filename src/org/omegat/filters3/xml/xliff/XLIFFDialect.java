@@ -61,6 +61,7 @@ public class XLIFFDialect extends DefaultXMLDialect
             "prop-group",                                                       // NOI18N
             "count-group",                                                      // NOI18N
             "alt-trans",                                                        // NOI18N
+            "note",                                                             // NOI18N
             "mrk",                                                              // NOI18N
             "ph",                                                               // NOI18N
             "bpt",                                                              // NOI18N

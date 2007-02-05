@@ -154,13 +154,14 @@ Localization contributed by
   Dragomir Kovacevic (Serbo-Croat)
   Claudio Nasso (Italian)
   Ahmet Murati (Albanian)
+  Sonja Tomaskovic (German)
 
 Other contributions by
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (current documentation manager)
+  Jean-Christophe Helary (documentation manager)
   Samuel Murray
-  Marc Prior (current localization manager)
+  Marc Prior (localization manager)
   and many, many more very helpful people
 
 (If you think you have significantly contributed to the OmegaT Project but you don't see your name on the lists, feel free to contact us.)
@@ -258,19 +259,14 @@ File formats supported:
   - INI files (files with key=value pairs of any encoding)
   - PO files
   - DocBook documentation file format
+  - Microsoft OpenXML files
+  - Okapi monolingual XLIFF files
 
 Core changes:
-  - Flexible (Sentence) Segmentation
-  - File format filters may be created as plugins
-  - Refactored code with more comments
-  - Windows installer
-  - Attributes of HTML tags are translatable
-  - Full TMX 1.1-1.4b Level 1 compatibility
-  - Partial TMX 1.4b Level 2 support
+  -
 
 New UI features (comparing to 1.4 OmegaT series):
-  - Find interface rewritten with enhanced functionality
-  - Main interface improved by using dockable windows
+  -
 
 ==============================================================================
 

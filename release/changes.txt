@@ -4,7 +4,7 @@
 
 1.7.0 vs. 1.6.1_02
 
-  4 Enhancements
+  5 Enhancements
   2 Bugfixes
 
 ----------------------------------------------------------------------
@@ -22,6 +22,12 @@ SAY SOMETHING USEFUL
   - Log file l10n and debugging
   http://sourceforge.net/support/tracker.php?aid=1209835
 
+  - Ctrl+Delete, Ctrl+Backspace, and overwriting with Ctrl+i
+  http://sourceforge.net/support/tracker.php?aid=1579488
+
+  - Monolingual XLIFF (Okapi) filter
+  http://sourceforge.net/support/tracker.php?aid=1649067
+
  Other enhancements:
 
   - New logging API
@@ -36,9 +42,104 @@ SAY SOMETHING USEFUL
 
 ----------------------------------------------------------------------
 
-1.6.1 vs. 1.4.5.04
-   60 Enchancements
-  118 Bugfixes
+1.6.2 vs. 1.4.5.04
+   73 Enchancements
+  125 Bugfixes
+
+----------------------------------------------------------------------
+1.6.2
+Contains a new file filter and a number of bug fixes
+
+ Implemented requests:
+
+  - Add direct support for Office 2007 XML
+  http://sourceforge.net/support/tracker.php?aid=1589239
+
+ Other enhancements:
+
+  - German instant start tutorial
+
+ Bug fixes:
+
+  - 1618742 - Ctrl+Z in search window is hard coded
+  http://sourceforge.net/support/tracker.php?aid=1618742
+
+  - 1612550 - Localization projects glitches
+  http://sourceforge.net/support/tracker.php?aid=1612550
+
+  - 1541277 - OO: Segmenting on inline drawings
+  http://sourceforge.net/support/tracker.php?aid=1541277
+
+  - 1628890 - Sentence break on comments in OOo documents
+  http://sourceforge.net/support/tracker.php?aid=1628890
+
+----------------------------------------------------------------------
+1.6.1_04
+Fixes a licensing issue with the MRJAdapter lib
+
+Version 1.09 of the MRJAdapter library is licensed under the
+Artistic License, which is incompatible with the GPL, the license
+OmegaT uses. The effect of this is that redistribution of OmegaT
+is not allowed. We have fixed this by reverting to version 1.08
+of the MRJAdapter library, licensed under the LGPL, which is
+GPL-compatible.
+
+----------------------------------------------------------------------
+1.6.1_03
+Contains new and updated localisations.
+
+ Implemented requests:
+
+  -
+
+ Other enhancements:
+
+  - Italian instant start guide updated
+
+  - Serbo-Croation user manual translation
+
+  - Albanian user manual translation
+
+ Bug fixes:
+
+  -
+
+----------------------------------------------------------------------
+1.6.1_02
+Contains new and updated localisations, legacy manual translations,
+and two bug fixes
+
+ Implemented requests:
+
+  -
+
+ Other enhancements:
+
+  - French localisation updated
+
+  - Japanese localisation updated
+
+  - Serbo-Croation UI localisation + instant start guide translation
+
+  - User manual language selection screen (displays only if a
+  translation in the system language is unavailable)
+
+  - Legacy user manual translations re-introduced for Belo-Russian,
+  German, Esperanto, Spanish, French, Japanese, and Russian.
+
+  - Italian user manual translation
+
+  - Albanian UI localisation + instant start guide translation
+
+  - Belarusian UI localisation updated
+
+ Bug fixes:
+
+  - Corrupted TMX after weird GUI interaction
+  http://sourceforge.net/support/tracker.php?aid=1604963
+
+  - Inconsistent license information
+  http://sourceforge.net/support/tracker.php?aid=1609275
 
 ----------------------------------------------------------------------
 1.6.1_01

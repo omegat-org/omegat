@@ -25,12 +25,6 @@
 
 package org.omegat.gui.main;
 
-import com.vlsolutions.swing.docking.DockingConstants;
-import com.vlsolutions.swing.docking.DockingDesktop;
-import com.vlsolutions.swing.docking.DockableState;
-import com.vlsolutions.swing.docking.event.DockableStateWillChangeEvent;
-import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
-import com.vlsolutions.swing.docking.ui.DockingUISettings;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -99,6 +93,15 @@ import org.omegat.util.RequestPacket;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.Styles;
+
+import com.vlsolutions.swing.docking.DockingConstants;
+import com.vlsolutions.swing.docking.DockingDesktop;
+import com.vlsolutions.swing.docking.DockableState;
+import com.vlsolutions.swing.docking.event.DockableStateWillChangeEvent;
+import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
+import com.vlsolutions.swing.docking.ui.DockingUISettings;
+
+import net.roydesign.mac.MRJAdapter;
 
 /**
  * The main window of OmegaT application.

@@ -71,7 +71,6 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.BadLocationException;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
-import net.roydesign.mac.MRJAdapter;
 
 import org.omegat.core.ProjectProperties;
 import org.omegat.core.StringEntry;

@@ -35,7 +35,6 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
 /**
  * This class specifies XLIFF XML Dialect.
  *
- * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
 public class XLIFFDialect extends DefaultXMLDialect

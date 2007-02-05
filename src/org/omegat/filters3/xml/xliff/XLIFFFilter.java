@@ -34,7 +34,7 @@ import org.omegat.util.OStrings;
 /**
  * Filter for XLIFF files.
  *
- * @author Maxym Mykhalchuk
+ * @author Didier Briel
  */
 public class XLIFFFilter extends XMLFilter
 {

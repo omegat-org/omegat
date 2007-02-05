@@ -9,7 +9,7 @@
 
 ----------------------------------------------------------------------
 1.7.0
-SAY SOMETHING USEFUL
+Contains many bug fixes, new features, and general improvements
 
  Implemented requests:
 

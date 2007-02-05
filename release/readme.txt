@@ -265,7 +265,7 @@ File formats supported:
 Core changes:
   -
 
-New UI features (comparing to 1.4 OmegaT series):
+New UI features (compared to 1.6 OmegaT series):
   -
 
 ==============================================================================

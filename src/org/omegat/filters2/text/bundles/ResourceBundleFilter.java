@@ -104,10 +104,9 @@ public class ResourceBundleFilter extends AbstractFilter
     
     /**
      * Converts ascii-encoded \\uxxxx to normal string.
-     * Also contains some code to keep a backspace in '\ '
-     * (non-trimmable space).
+     * Also contains some code to keep a backspace in '\ ', '\=', '\:' etc
+     * (non-trimmable space or non-key-value-breaking :-) equals).
      */
-    //protected String getNextLine(BufferedReader reader) throws IOException
     protected String getNextLine(LinebreakPreservingReader reader) throws IOException // fix for bug 1462566
     {
         String ascii = reader.readLine();
@@ -122,9 +121,11 @@ public class ResourceBundleFilter extends AbstractFilter
             {
                 i++;
                 ch = ascii.charAt(i);
-                if( ch==' ' )
+                if( ch!='u' )
+                {
                     result.append('\\');
-                else if( ch == 'u' )
+                }
+                else
                 {
                     // checking if the string is long enough
                     if( ascii.length() >= i+1+4 )
@@ -136,12 +137,6 @@ public class ResourceBundleFilter extends AbstractFilter
                         throw new IOException(
                                 OStrings.getString("RBFH_ERROR_ILLEGAL_U_SEQUENCE"));
                 }
-                else if( ch=='n' )
-                    ch='\n';
-                else if( ch=='r')
-                    ch='\r';
-                else if( ch=='t')
-                    ch='\t';
             }
             result.append(ch);
         }
@@ -150,9 +145,14 @@ public class ResourceBundleFilter extends AbstractFilter
     }
     
     /**
-     * Converts normal strings to ascii-encoded ones
+     * Converts normal strings to ascii-encoded ones.
+     *
+     * @param text  Text to convert.
+     * @param key   Whether it's a key of the key-value pair 
+     *              (' ', ':', '=' MUST be escaped in a key 
+     *               and MAY be escaped in value, but we don't escape these).
      */
-    public String formatString(String text)
+    private String toAscii(String text, boolean key)
     {
         StringBuffer result = new StringBuffer();
         
@@ -167,6 +167,12 @@ public class ResourceBundleFilter extends AbstractFilter
                 result.append("\\r");                                           // NOI18N
             else if( ch=='\t' )
                 result.append("\\t");                                           // NOI18N
+            else if( key && ch==' ' )
+                result.append("\\ ");                                           // NOI18N
+            else if( key && ch=='=' )
+                result.append("\\=");                                           // NOI18N
+            else if( key && ch==':' )
+                result.append("\\:");                                           // NOI18N
             else if( ch>=32 && ch<127 )
                 result.append(ch);
             else
@@ -178,6 +184,29 @@ public class ResourceBundleFilter extends AbstractFilter
             }
         }
         
+        return result.toString();
+    }
+    
+    /** 
+     * Removes extra slashes from, e.g. "\ ", "\=" and "\:" typical in 
+     * machine-generated resource bundles.
+     * <p>
+     * See also bugreport 
+     * <a href="http://sourceforge.net/support/tracker.php?aid=1606595">#1606595</a>.
+     */
+    private String removeExtraSlashes(String string)
+    {
+        StringBuffer result = new StringBuffer(string.length());
+        for(int i=0; i<string.length(); i++)
+        {
+            char ch = string.charAt(i);
+            if (ch=='\\')
+            {
+                i++;
+                ch = string.charAt(i);
+            }
+            result.append(ch);
+        }
         return result.toString();
     }
     
@@ -210,16 +239,15 @@ public class ResourceBundleFilter extends AbstractFilter
             // skipping empty strings
             if( trimmed.length()==0 )
             {
-                //outfile.write(formatString(str)+"\n");                          // NOI18N
-                outfile.write(formatString(str)+lbpr.getLinebreak());// fix for bug 1462566 // NOI18N
+                outfile.write(toAscii(str, false)+lbpr.getLinebreak());
                 continue;
             }
             
             // skipping comments
-            if( trimmed.charAt(0)=='#' )
+            char firstChar = trimmed.charAt(0);
+            if( firstChar=='#' || firstChar=='!' )
             {
-                //outfile.write(formatString(str)+"\n");                          // NOI18N
-                outfile.write(formatString(str)+lbpr.getLinebreak()); // fix for bug 1462566 // NOI18N
+                outfile.write(toAscii(str, false)+lbpr.getLinebreak());
                 
                 // checking if the next string shouldn't be internationalized
                 if( trimmed.indexOf("NOI18N")>=0 )                              // NOI18N
@@ -241,41 +269,97 @@ public class ResourceBundleFilter extends AbstractFilter
             }
             
             // key=value pairs
-            int equalsPos = str.indexOf('=');
+            int equalsPos = searchEquals(str);
             
-            // if there's no separator, assume it's a key w/o a value
-            if( equalsPos==-1 )
-                equalsPos = str.length()-1;
-            
-            // advance if there're spaces after =
-            while( (equalsPos+1)<str.length() && str.charAt(equalsPos+1)==' ' )
-                equalsPos++;
-            
-            // writing out everything before = (and = itself)
-            outfile.write(formatString(str.substring(0,equalsPos+1)));
-            
-            String value=str.substring(equalsPos+1);
-            
-            if( noi18n )
-            {
-                // if we don't need to internationalize
-                outfile.write(formatString(value));
-                noi18n = false;
-            }
+            // writing out key
+            String key;
+            if (equalsPos>=0)
+                key = str.substring(0, equalsPos);
             else
+                key = str;
+            key = removeExtraSlashes(key);
+            outfile.write(toAscii(key, true));
+            
+            // advance if there're spaces or tabs after =
+            if (equalsPos>=0)
             {
-                value = leftTrim(value);
-                value = value.replaceAll("\\n\\n", "\n \n");
-                String trans=processEntry(value);
-                trans = trans.replaceAll("\\n\\s\\n", "\n\n");
-                trans = formatString(trans);
-                if( trans.length()>0 && trans.charAt(0)==' ' )
-                    trans = '\\'+trans;
-                outfile.write(trans);
+                int equalsEnd = equalsPos+1;
+                while(equalsEnd<str.length())
+                {
+                    char ch = str.charAt(equalsEnd);
+                    if (ch!=' ' && ch!='\t')
+                        break;
+                    equalsEnd++;
+                }
+                String equals = str.substring(equalsPos, equalsEnd);
+                outfile.write(equals);
+            
+                // value, if any
+                String value;
+                if (equalsEnd<str.length())
+                    value = removeExtraSlashes(str.substring(equalsEnd));
+                else
+                    value = "";
+
+                if( noi18n )
+                {
+                    // if we don't need to internationalize
+                    outfile.write(toAscii(value, false));
+                    noi18n = false;
+                }
+                else
+                {
+                    value = value.replaceAll("\\n\\n", "\n \n");                    // NOI18N
+                    String trans=processEntry(value);
+                    trans = trans.replaceAll("\\n\\s\\n", "\n\n");                  // NOI18N
+                    trans = toAscii(trans, false);
+                    if( trans.length()>0 && trans.charAt(0)==' ' )
+                        trans = '\\'+trans;
+                    outfile.write(trans);
+                }
             }
             
-            //outfile.write("\n");                                                // NOI18N
-            outfile.write(lbpr.getLinebreak()); // fix for bug 1462566            // NOI18N
+            outfile.write(lbpr.getLinebreak()); // fix for bug 1462566
         }
+    }
+
+    /** 
+     * Looks for the key-value separator (=,: or ' ') in the string. 
+     * <p>
+     * See also bugreport 
+     * <a href="http://sourceforge.net/support/tracker.php?aid=1606595">#1606595</a>.
+     *
+     * @return
+     *      The char number of key-value separator in a string.
+     *      Not that if the string does not contain any separator this string
+     *      is considered to be a key with empty string value, and this method
+     *      returns <code>-1</code> to indicate there's no equals.
+     */
+    private int searchEquals(String str)
+    {
+        char prevChar = 'a';
+        for(int i=0; i<str.length(); i++)
+        {
+            char ch = str.charAt(i);
+            if (prevChar!='\\')
+            {
+                if (ch=='=' || ch==':')
+                    return i;
+                else if (ch==' ' || ch=='\t')
+                {
+                    for (int j=i+1; j<str.length(); j++)
+                    {
+                        char c2 = str.charAt(j);
+                        if (c2==':' || c2=='=')
+                            return j;
+                        if (c2!=' ' && c2!='\t')
+                            return i;
+                    }
+                    return i;
+                }
+            }
+            prevChar = ch;
+        }
+        return -1;
     }
 }

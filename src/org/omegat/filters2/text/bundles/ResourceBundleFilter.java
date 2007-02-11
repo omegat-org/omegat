@@ -103,9 +103,13 @@ public class ResourceBundleFilter extends AbstractFilter
     }
     
     /**
-     * Converts ascii-encoded \\uxxxx to normal string.
-     * Also contains some code to keep a backspace in '\ ', '\=', '\:' etc
-     * (non-trimmable space or non-key-value-breaking :-) equals).
+     * Reads next line from the input and:
+     * <ul>
+     * <li>Converts ascii-encoded \\uxxxx chars to normal characters.
+     * <li>Converts \r, \n and \t to CR, line feed and tab.
+     * <li>But! Keeps a backspace in '\ ', '\=', '\:' etc
+     *     (non-trimmable space or non-key-value-breaking :-) equals).
+     * <ul>
      */
     protected String getNextLine(LinebreakPreservingReader reader) throws IOException // fix for bug 1462566
     {
@@ -123,7 +127,14 @@ public class ResourceBundleFilter extends AbstractFilter
                 ch = ascii.charAt(i);
                 if( ch!='u' )
                 {
-                    result.append('\\');
+                    if( ch=='n' )
+                        ch='\n';
+                    else if( ch=='r')
+                        ch='\r';
+                    else if( ch=='t')
+                        ch='\t';
+                    else
+                        result.append('\\');
                 }
                 else
                 {
@@ -148,8 +159,8 @@ public class ResourceBundleFilter extends AbstractFilter
      * Converts normal strings to ascii-encoded ones.
      *
      * @param text  Text to convert.
-     * @param key   Whether it's a key of the key-value pair 
-     *              (' ', ':', '=' MUST be escaped in a key 
+     * @param key   Whether it's a key of the key-value pair
+     *              (' ', ':', '=' MUST be escaped in a key
      *               and MAY be escaped in value, but we don't escape these).
      */
     private String toAscii(String text, boolean key)
@@ -187,11 +198,11 @@ public class ResourceBundleFilter extends AbstractFilter
         return result.toString();
     }
     
-    /** 
-     * Removes extra slashes from, e.g. "\ ", "\=" and "\:" typical in 
+    /**
+     * Removes extra slashes from, e.g. "\ ", "\=" and "\:" typical in
      * machine-generated resource bundles.
      * <p>
-     * See also bugreport 
+     * See also bugreport
      * <a href="http://sourceforge.net/support/tracker.php?aid=1606595">#1606595</a>.
      */
     private String removeExtraSlashes(String string)
@@ -293,14 +304,14 @@ public class ResourceBundleFilter extends AbstractFilter
                 }
                 String equals = str.substring(equalsPos, equalsEnd);
                 outfile.write(equals);
-            
+                
                 // value, if any
                 String value;
                 if (equalsEnd<str.length())
                     value = removeExtraSlashes(str.substring(equalsEnd));
                 else
                     value = "";
-
+                
                 if( noi18n )
                 {
                     // if we don't need to internationalize
@@ -322,11 +333,11 @@ public class ResourceBundleFilter extends AbstractFilter
             outfile.write(lbpr.getLinebreak()); // fix for bug 1462566
         }
     }
-
-    /** 
-     * Looks for the key-value separator (=,: or ' ') in the string. 
+    
+    /**
+     * Looks for the key-value separator (=,: or ' ') in the string.
      * <p>
-     * See also bugreport 
+     * See also bugreport
      * <a href="http://sourceforge.net/support/tracker.php?aid=1606595">#1606595</a>.
      *
      * @return

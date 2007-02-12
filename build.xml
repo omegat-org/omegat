@@ -3,9 +3,9 @@
 <!--
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2002-2004  Keith Godfrey et al
-                          keithgodfrey@users.sourceforge.net
-                          907.223.2039
+ Copyright (C) 2000-2007 Keith Godfrey and Maxym Mykhalchuk
+               Home page: http://www.omegat.org/omegat/omegat.html
+               Support center: http://groups.yahoo.com/group/OmegaT/
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -92,7 +92,7 @@
         </copy>
         <zip destfile="dist2/${l10n.min}.zip" 
                 basedir="${l10n.dir}" includes="${l10n.min}/**" />
-                
+               
         <!-- full -->
         <property name="l10n.max" value="OmegaT_${distversion}_L10N_Full"/>
         <property name="l10n.max.dir" value="${l10n.dir}/${l10n.max}"/>
@@ -165,7 +165,7 @@
             <fileset dir="lib"/>
         </copy>
     </target>
-    
+   
     <!-- Builds a ZIP distribution -->    
     <target name="zip" description="Build Zip distro" depends="jar,release">
         <mkdir dir="dist2"/>
@@ -212,5 +212,5 @@
         
     <!-- Builds all OmegaT products -->
     <target name="all" depends="l10n-pack,src,jar,zip,win" />
-    
+
 </project>

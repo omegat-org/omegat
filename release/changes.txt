@@ -43,6 +43,9 @@ Contains many bug fixes, new features, and general improvements
   - log.txt encoding
   http://sourceforge.net/support/tracker.php?aid=1600139
 
+  - Incorrect XHTML file not parsed at all
+  http://sourceforge.net/support/tracker.php?aid=1590169
+
 ----------------------------------------------------------------------
 
 1.6.2 vs. 1.4.5.04

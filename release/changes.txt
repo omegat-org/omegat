@@ -28,6 +28,9 @@ Contains many bug fixes, new features, and general improvements
   - Monolingual XLIFF (Okapi) filter
   http://sourceforge.net/support/tracker.php?aid=1649067
 
+  - Apply font to Tag Verification and Project Files windows
+  http://sourceforge.net/support/tracker.php?aid=1545636
+
  Other enhancements:
 
   - New logging API

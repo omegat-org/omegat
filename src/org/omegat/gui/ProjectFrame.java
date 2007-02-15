@@ -26,6 +26,7 @@ package org.omegat.gui;
 
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -224,6 +225,21 @@ public class ProjectFrame extends JFrame
             return;
         
         StringBuffer output = new StringBuffer();
+        
+        output.append("<html>\n");                                              // NOI18N
+        output.append("<head>\n");                                              // NOI18N
+        output.append("<style>\n");                                             // NOI18N
+        output.append("<style type=\"text/css\">\n");                           // NOI18N
+        output.append("    <!--\n");                                            // NOI18N
+        output.append("    body {\n");                                          // NOI18N
+        output.append("            font-family: "+getFont().getName()+";\n");   // NOI18N
+        output.append("            font-size: "+getFont().getSize()+"pt;\n");   // NOI18N
+        output.append("    }\n");                                               // NOI18N
+        output.append("    -->\n");                                             // NOI18N
+        output.append("</style>\n");                                            // NOI18N
+        output.append("</head>\n");                                             // NOI18N
+        output.append("<body>\n");                                              // NOI18N
+        
         output.append("<table align=center width=95% border=0>\n");             // NOI18N
         output.append("<tr>\n");                                                // NOI18N
         output.append("<th width=80% align=center>");                           // NOI18N
@@ -255,14 +271,14 @@ public class ProjectFrame extends JFrame
         
         if (m_nameList.size()>1)
         {
-            output.append("<tr>\n");                                                // NOI18N
-            output.append("<td width=80%><b>");                                     // NOI18N
+            output.append("<tr>\n");                                            // NOI18N
+            output.append("<td width=80%><b>");                                 // NOI18N
             output.append(OStrings.getString("GUI_PROJECT_TOTAL_SEGMENTS"));
-            output.append("</b></td>\n");                                           // NOI18N
-            output.append("<td width=20% align=center><b>");                        // NOI18N
+            output.append("</b></td>\n");                                       // NOI18N
+            output.append("<td width=20% align=center><b>");                    // NOI18N
             output.append(CommandThread.core.getNumberOfSegmentsTotal());
-            output.append("</b></td>\n");                                           // NOI18N
-            output.append("</tr>\n");                                               // NOI18N
+            output.append("</b></td>\n");                                       // NOI18N
+            output.append("</tr>\n");                                           // NOI18N
         }
         output.append("<tr>\n");                                                // NOI18N
         output.append("<td width=80%><b>");                                     // NOI18N
@@ -276,12 +292,14 @@ public class ProjectFrame extends JFrame
         output.append("<td width=80%><b>");                                     // NOI18N
         output.append(OStrings.getString("GUI_PROJECT_TRANSLATED"));
         output.append("</b></td>\n");                                           // NOI18N
-        output.append("<td width=20% align=center id=\"nts\"><b>");                        // NOI18N
+        output.append("<td width=20% align=center id=\"nts\"><b>");             // NOI18N
         output.append(CommandThread.core.getNumberofTranslatedSegments());
         output.append("</b></td>\n");                                           // NOI18N
         output.append("</tr>\n");                                               // NOI18N
         
         output.append("</table>\n");                                            // NOI18N
+        output.append("</body>\n");                                             // NOI18N
+        output.append("</html>\n");                                             // NOI18N
         
         m_editorPane.setText(output.toString());
         uiUpdateImportButtonStatus();
@@ -303,8 +321,6 @@ public class ProjectFrame extends JFrame
         catch( Exception e ) { }
     }
     
-    
-    
     /**
      * Imports the file/files/folder into project's source files.
      * @author Kim Bruning
@@ -321,6 +337,13 @@ public class ProjectFrame extends JFrame
         m_addNewFileButton.setEnabled(m_parent.isProjectLoaded());
     }
 
+    /** Call this to set OmegaT-wide font for this window. */
+    public void setFont(Font f)
+    {
+        super.setFont(f);
+        buildDisplay();
+    }
+    
     private JEditorPane m_editorPane;
     private JButton     m_addNewFileButton;
     private JButton     m_closeButton;
@@ -330,6 +353,5 @@ public class ProjectFrame extends JFrame
     private int         numberofUniqueSegments;
     
     private MainWindow  m_parent;
-    
 }
 

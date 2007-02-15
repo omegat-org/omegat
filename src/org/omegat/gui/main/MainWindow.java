@@ -245,6 +245,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         updateTitle();
         loadWindowIcon();
         m_projWin = new ProjectFrame(this);
+        m_projWin.setFont(m_font);
 
         statusLabel.setText(new String()+' ');
         
@@ -633,6 +634,10 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             if (m_tagWin == null) {
                 m_tagWin = new TagValidationFrame(this);
                 m_tagWin.addWindowListener(this);
+                m_tagWin.setFont(m_font);
+            } else {
+                // close tag validation window if present
+                m_tagWin.dispose();
             }
 
             // display list of suspect strings
@@ -651,10 +656,6 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                     OStrings.getString("TF_NOTICE_TITLE_TAGS"),
                     JOptionPane.INFORMATION_MESSAGE);
         }
-    }
-
-    public void tagValidationWindowClosed() {
-        m_tagWin = null;
     }
 
     public synchronized void doNextEntry()
@@ -1048,6 +1049,10 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             }
             matches.setFont(m_font);
             glossary.setFont(m_font);
+            if (m_tagWin!=null)
+                m_tagWin.setFont(m_font);
+            if (m_projWin!=null)
+                m_projWin.setFont(m_font);
 
             Preferences.setPreference(OConsts.TF_SRC_FONT_NAME, m_font.getName());
             Preferences.setPreference(OConsts.TF_SRC_FONT_SIZE, m_font.getSize());

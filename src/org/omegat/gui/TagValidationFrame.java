@@ -24,9 +24,9 @@
 
 package org.omegat.gui;
 
-import java.awt.Container;
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -57,20 +57,10 @@ public class TagValidationFrame extends JFrame
 {
     public TagValidationFrame(MainWindow parent)
     {
-        m_parent = parent;
-
+        setTitle(OStrings.getString("TF_NOTICE_BAD_TAGS"));
+        
         // set window size & position
         initWindowLayout();
-
-        // Configure close button
-        m_closeButton = new JButton();
-        m_closeButton.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                doCancel();
-            }
-        });
 
         //  Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
@@ -85,23 +75,32 @@ public class TagValidationFrame extends JFrame
         put(escape, "ESCAPE");                                                  // NOI18N
         getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
 
+        // Configure close button
+        JButton closeButton = new JButton();
+        Mnemonics.setLocalizedText(closeButton, OStrings.getString("BUTTON_CLOSE"));
+        closeButton.addActionListener(escapeAction);
 
-        Container cp = getContentPane();
         m_editorPane = new JEditorPane();
         m_editorPane.setEditable(false);
+        m_editorPane.addHyperlinkListener(new HListener(parent, true)); // fix for bug 1542937
         JScrollPane scroller = new JScrollPane(m_editorPane);
-        cp.add(scroller, "Center");    // NOI18N
 
         Box bbut = Box.createHorizontalBox();
         bbut.add(Box.createHorizontalGlue());
-        bbut.add(m_closeButton);
+        bbut.add(closeButton);
         bbut.add(Box.createHorizontalGlue());
-        cp.add(bbut, "South");    // NOI18N
 
-        //m_editorPane.addHyperlinkListener(new HListener(m_parent, false));
-        m_editorPane.addHyperlinkListener(new HListener(m_parent, true)); // fix for bug 1542937
-
-        updateUIText();
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(scroller, BorderLayout.CENTER);
+        getContentPane().add(bbut, BorderLayout.SOUTH);
+    }
+    
+    /** Call this to set OmegaT-wide font for the Tag Validation window. */
+    public void setFont(Font f)
+    {
+        super.setFont(f);
+        if (isVisible())
+            update();
     }
     
     /**
@@ -147,9 +146,6 @@ public class TagValidationFrame extends JFrame
         if (evt == WindowEvent.WINDOW_CLOSING || evt == WindowEvent.WINDOW_CLOSED) {
             // save window size and position
             saveWindowLayout();
-
-            // notify main window
-            m_parent.tagValidationWindowClosed();
         }
         super.processWindowEvent(w);
     }
@@ -157,11 +153,6 @@ public class TagValidationFrame extends JFrame
     private void doCancel()
     {
         dispose();
-    }
-
-    private void updateUIText()
-    {
-        Mnemonics.setLocalizedText(m_closeButton, OStrings.getString("BUTTON_CLOSE"));
     }
 
     /** replaces all &lt; and &gt; with &amp;lt; and &amp;gt; */
@@ -175,38 +166,65 @@ public class TagValidationFrame extends JFrame
     
     public void displayStringList(ArrayList stringList)
     {
-        setTitle(OStrings.getString("TF_NOTICE_BAD_TAGS"));
-        String out;
-        String src;
-        String trans;
-        SourceTextEntry ste;
-        StringEntry se;
+        this.stringList = stringList;
+        update();
+    }
 
-        out = "<table BORDER COLS=3 WIDTH=\"100%\" NOSAVE>";                    // NOI18N
+    private void update()
+    {
+        StringBuffer output = new StringBuffer();
+        
+        output.append("<html>\n");                                              // NOI18N
+        output.append("<head>\n");                                              // NOI18N
+        output.append("<style>\n");                                             // NOI18N
+        output.append("<style type=\"text/css\">\n");                           // NOI18N
+        output.append("    <!--\n");                                            // NOI18N
+        output.append("    body {\n");                                          // NOI18N
+        output.append("            font-family: "+getFont().getName()+";\n");   // NOI18N
+        output.append("            font-size: "+getFont().getSize()+"pt;\n");   // NOI18N
+        output.append("    }\n");                                               // NOI18N
+        output.append("    -->\n");                                             // NOI18N
+        output.append("</style>\n");                                            // NOI18N
+        output.append("</head>\n");                                             // NOI18N
+        output.append("<body>\n");                                              // NOI18N
+        
+        output.append("<table BORDER COLS=3 WIDTH=\"100%\" NOSAVE>\n");         // NOI18N
         for (int i=0; i<stringList.size(); i++)
         {
-            ste = (SourceTextEntry) stringList.get(i);
-            se = ste.getStrEntry();
-            src = se.getSrcText();
-            trans = se.getTranslation();
-            if (!src.equals("") && !trans.equals(""))        // NOI18N
+            SourceTextEntry ste = (SourceTextEntry) stringList.get(i);
+            StringEntry se = ste.getStrEntry();
+            String src = se.getSrcText();
+            String trans = se.getTranslation();
+            if (src.length()>0 && trans.length()>0)
             {
-                out += "<tr>";                                                    // NOI18N
-                out += "<td><a href=\"" + (ste.entryNum()+ 1) + "\">";            // NOI18N
-                out += (ste.entryNum() + 1) + "</a></td>";                        // NOI18N
-                out += "<td>" + htmlize(src) + "</td>";                            // NOI18N
-                out += "<td>" + htmlize(trans) + "</td>";                        // NOI18N
-                out += "</tr>";                                                    // NOI18N
+                int entryNum = ste.entryNum() + 1;
+                output.append("<tr>");                                          // NOI18N
+                output.append("<td>");                                          // NOI18N
+                output.append("<a href=");                                      // NOI18N
+                output.append("\"");                                            // NOI18N
+                output.append(entryNum);
+                output.append("\"");                                            // NOI18N
+                output.append(">");                                             // NOI18N
+                output.append(entryNum);
+                output.append("</a>");                                          // NOI18N
+                output.append("</td>");                                         // NOI18N
+                output.append("<td>");                                          // NOI18N
+                output.append(htmlize(src));
+                output.append("</td>");                                         // NOI18N
+                output.append("<td>");                                          // NOI18N
+                output.append(htmlize(trans));
+                output.append("</td>");                                         // NOI18N
+                output.append("</tr>\n");                                       // NOI18N
             }
         }
-        out += "</table>";                                                        // NOI18N
-        m_editorPane.setContentType("text/html");                                // NOI18N
-        m_editorPane.setText(out);
+        output.append("</table>\n");                                            // NOI18N
+        output.append("</body>\n");                                             // NOI18N
+        output.append("</html>\n");                                             // NOI18N
+        
+        m_editorPane.setContentType("text/html");                               // NOI18N
+        m_editorPane.setText(output.toString());
     }
 
     private JEditorPane m_editorPane;
-    private JButton        m_closeButton;
-
-    private MainWindow m_parent;
-
+    private ArrayList stringList;
 }

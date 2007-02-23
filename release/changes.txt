@@ -49,7 +49,7 @@ Contains many bug fixes, new features, and general improvements
 ----------------------------------------------------------------------
 
 1.6.2 vs. 1.4.5.04
-   73 Enchancements
+   74 Enchancements
   132 Bugfixes
 
 ----------------------------------------------------------------------
@@ -64,6 +64,8 @@ Contains a new file filter and a number of bug fixes
  Other enhancements:
 
   - German instant start tutorial
+
+  - Slovenian UI localisation + manual translation
 
  Bug fixes:
 

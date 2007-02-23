@@ -195,39 +195,6 @@ z vašim poročilom o napaki dogaja
 ==============================================================================
 6.   Podatki o izdajah
 
-5.  Vas OmegaT spravlja ob živce?  Potrebujete pomoč?
-
-Preden pošljete sporočilo o napaki, se prepričajte, da ste
-temeljito preverili dokumentacijo.  Lahko da boste tako odkrili kako lastnost OmegaT,
-ki vam je bila doslej skrita. Če pri pregledu log datoteke OmegaT log naletite na besede,
-kot so "Error", "Warning", "Exception", ali pa "died unexpectedly", potem ste znabiti 
-naleteli na kaj resnega (datoteka log.txt se nahaja v imeniku z uporabnikovimi
-nastavitvami, poglejte v priročnik za natančnejšo lokacijo..
-
-Kot naslednje lahko preverite odkrito nepravilnost  z drugimi uporabniki
-in se prepričate, da napake še ni bila javljena. Ogledate si lahko tudi stran s poročili o napakah na SourceForge. Sporočilo o napaki pošljite samo, če ste prepričani, da ste
-kot prvi odkrili ponovljivo zaporedje korakov, ki vodijo do nezaželjenh oziroma
-nepričakovanih posledic.
-
-Dobro poročilo o napaki vedno vsebuje tri stvari.
-  - korake, ki do napake vodijo,
-  - kaj je bilo pričakovati, da se pripeti, in
-  - kaj se je v resnici dogodilo.
-
-Priložite lahko kopije datotek, izreze iz log datoteke, posnetke zaslona, vse, kar mislite, da bo razvijalcem pomagalo napako najti in popraviti.
-
-Po arhivih uporabniške skupine lahko brskate na naslednjem naslovu:
-     http://tech.groups.yahoo.com/group/omegat/
-
-Naslov za  brskanje po poročilih o napakah in za prijavo novih napak: :
-     http://sourceforge.net/tracker/?group_id=68187&atid=520350
-
-Včlanite se v  Source Forge, da boste lahko zasledovali, kaj se
-z vašim poročilom o napaki dogaja
-
-==============================================================================
-6.   Podatki o izdajah
-
 Podrobne podatke o spremembah v tej in v prejšnjih izdajah najdete
 v datoteki  'changes.txt'.
 

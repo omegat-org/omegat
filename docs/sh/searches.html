@@ -1,7 +1,7 @@
 <html>
 <head>
    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Pretraživanje - Priručnik za korisnike OmegaT 1.6.1</title>
+   <title>Pretraživanje - Priručnik za korisnike OmegaT 1.6.2</title>
 </head>
 <body>
 
@@ -54,11 +54,11 @@
 
 <ul>
    <li>samo projekat (namješteno pod default)</li>
-   <li>Projekat kao i refernentne memorije prevoda u /tm/ (klikni u poljce <i>Traži u TM</i>)</li>
+   <li>Projekat kao i referentne memorije prevoda u /tm/ (klikni u poljce <i>Traži u TM</i>)</li>
    <li>jednu datoteku ili direktorijum koji sadrže set datoteka (klikni u poljce <i>Pretražuj datoteke</i>)</li>
 </ul>
 
-<p>U potonjem slučaju, OmegaT će jedino tragati po datotekama koje može učitati (pogledaj <a href="formatiDatoteka">Podržane formate datoteka</a>).</p>
+<p>U potonjem slučaju, OmegaT će jedino tragati po datotekama koje može učitati (pogledaj <a href="fileFormats">Podržane formate datoteka</a>).</p>
 
 <a name="Search_methods"></a>
 <h2>Metodi pretraživanja</h2>
@@ -86,19 +86,19 @@
 </ul>
 
 <a name="Exact_searches"></a>
-<h2>Pretraživanja po tačnom terminu</h2>
+<h2>Pretraživanje po tačnom terminu</h2>
 
-<p>Pretraživanjem po tačnom terminu traži se fraza, tj. ukoliko je unijeto nekoliko riječi, biće pronađene samo ukoliko stoje u identičnom nizu. Pretraživanja po tačnom terminu liče na pretraživanja po "tačnom izrazu" pretraživačkih internet mašina kao što je Google.</p>
+<p>Pretraživanjem po tačnom terminu traži se fraza, tj. ukoliko je unijeto nekoliko riječi, one će biti pronađene samo ukoliko stoje u identičnom nizu. Pretraživanja po tačnom terminu liče na pretraživanja po "tačnom izrazu" pretraživačkih internet mašina kao što je Google.</p>
 
 <a name="Keyword_searches"></a>
 <h2>Pretraživanje po ključnoj riječi</h2>
 
-<p>Izaberi "Pretraživanje po ključnoj riječi" i unesi bilo koju količinu pojedinačnih riječi odvojenih razmacima i u bilo kojem rasporedu i OmegaT će prikazati listu svih segmenata u kojima te riječi postoje. Pretraživanje po ključnoj riječi liče na pretraživanja po "svim riječima" pretraživačkih internet mašina kao što je Google.</p>
+<p>Izaberi "Pretraživanje po ključnoj riječi" i unesi bilo koju količinu pojedinačnih riječi odvojenih razmacima i u bilo kojem rasporedu. OmegaT će prikazati listu svih segmenata u kojima postoje te riječi. Pretraživanje po ključnoj riječi liče na pretraživanja po "svim riječima" u pretraživačkim internet motorima kao što je Google.</p>
 
 <a name="Searching_using_wildcards"></a>
 <h2>Pretraživanje pomoću džoker znakova</h2>
 
-<p>Džoker znaci '<code>*</code>' i '<code>?</code>' mogu se koristiti kod pretraživanja po tačnom terminu kao i po po ključnoj riječi. Da bi se koristili džoker znaci, opcija <strong>obični izrazi</strong> ne sme biti selektovana, jer će se u suprotnom slučaju ovi znaci interpretirati kao specijalni znaci kod običnih izraza.</p>
+<p>Džoker znaci '<code>*</code>' i '<code>?</code>' mogu se koristiti kod pretraživanja po tačnom terminu kao i po po ključnoj riječi. Da bi se koristili džoker znaci, opcija <strong>obični izrazi</strong> ne smije biti selektovana, jer će se u suprotnom slučaju ovi znaci interpretirati kao specijalni znaci kod običnih izraza.</p>
 
 <p>Džoker znakom '<code>?</code>' pronalazi se bilo koji pojedinačni znak, tj. pomoću '<code>b?d</code>' pronalaze se '<code>bad</code>' i '<code>bid</code>'. Džoker znakom '<code>*</code>' pronalazi se bilo koji pojedinačni znak ili određen broj znakova, tj. '<code>b*d</code>' pronalazi se '<code>bad</code>', '<code>bid</code>', '<code>bold</code>' i '<code>band</code>'.</p>
 
@@ -107,7 +107,7 @@
 <a name="Searching_using_regular_expressions"></a>
 <h2>Pretraživanje pomoću običnih izraza</h2>
 
-<p>Pretraživanje pomoću običnih izraza predstavlja moćno sredstvo za nalaženje više lokacija određene niske. Sličnoj je običnom pretraživanju, ali je fleksibilnije. Jednostavne savjete možeš naći na internetu (na primjer <a href="http://www.regular-expressions.info/quickstart.html" title="http://www.regular-expressions.info/quickstart.html" rel="nofollow">http://www.regular-expressions.info/quickstart.html</a>.)</p>
+<p>Pretraživanje pomoću običnih izraza predstavlja moćno sredstvo za nalaženje više lokacija određene niske. Slično je običnom pretraživanju, ali je fleksibilnije. Jednostavne savjete možeš naći na internetu (na primjer <a href="http://www.regular-expressions.info/quickstart.html" title="http://www.regular-expressions.info/quickstart.html" rel="nofollow">http://www.regular-expressions.info/quickstart.html</a>.)</p>
 
 <a name="Regular_Expressions_to_use_in_searches"></a>
 <h3>Obični izrazi za upotrebu u pretraživanju</h3>
@@ -119,10 +119,10 @@
 
 <table border="0" width="80%" cellpadding="1" cellspacing="0" summary="Konstrukcije običnih izraza i koje podudarnosti se pomoću njih mogu pronaći">
     <tr bgcolor="#DDEEFF"><th width="10%" align="left" id="construct">Konstrukcija</th><th align="left">Podudarnosti</th></tr>
-    <tr><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
     <tr align="left"><th colspan="2" id="flags">Zastavice</th></tr>
     <tr><td><tt>(?i)</tt></td><td>Omogućuje traganje za podudarnostima bez razlikovanja malih i velikih slova (podrazumijevana vrijednost je namještena da postoji razlikovanje između malih i velikih slova).</td></tr>
-    <tr><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
     <tr><th align="left" colspan="2" id="characters">Znaci</th></tr>
 
     <tr><td><strong>x</strong></td><td>Znak <strong>x</strong>, osim sljedećega...</td></tr>
@@ -131,7 +131,7 @@
 
     <tr><td><tt>\n</tt></td><td>Znak za novi red (line feed) (<tt>'\u000A'</tt>)</td></tr>
     <tr><td><tt>\r</tt></td><td>Znak za povratak na početak reda (<tt>'\u000D'</tt>)</td></tr>
-    <tr><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
     <tr align="left"><th colspan="2" id="quot">Citiranje</th></tr>
 
     <tr><td><tt>\</tt></td><td>Samo citira sljedeći znak. Ovo je potrebno kad hoćeš unijeti metaznake <code>!$()*+.&lt;&gt;?[\]^{|}</code> koji u konkretnom slučaju predstavljaju sami sebe.</td></tr>
@@ -139,14 +139,14 @@
     <tr><td><tt>\Q</tt></td><td>Samo citira sve znake ispred <tt>\E</tt></td></tr>
 
     <tr><td><tt>\E</tt></td><td>Samo završava citiranje koje je otpočelo pomoću znaka <tt>\Q</tt></td></tr>
-    <tr><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
     <tr align="left"><th colspan="2" id="classes">Klase znakova</th></tr>
     <tr><td><tt>[abc]</tt></td><td><tt>a</tt>, <tt>b</tt>, ili <tt>c</tt> (prosta klasa)</td></tr>
 
     <tr><td><tt>[^abc]</tt></td><td>Bilo koji znak osim <tt>a</tt>, <tt>b</tt>, ili <tt>c</tt> (negacija)</td></tr>
     <tr><td><tt>[a-zA-Z]</tt></td><td><tt>a</tt> do <tt>z</tt> ili <tt>A</tt> do zaključno sa <tt>Z</tt>, (opseg)</td></tr>
 
-    <tr><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
     <tr align="left"><th colspan="2" id="predef">Unaprijed definisane klase znakova</th></tr>
     <tr><td><tt>.</tt></td><td>Bilo koji znak (izuzev onih koji označavaju kraj reda)</td></tr>
     <tr><td><tt>\d</tt></td><td>Brojka: <tt>[0-9]</tt></td></tr>
@@ -157,14 +157,14 @@
     <tr><td><tt>\w</tt></td><td>Znak za riječ: <tt>[a-zA-Z_0-9]</tt></td></tr>
     <tr><td><tt>\W</tt></td><td>Znak za ne-riječ: <tt>[^\w]</tt></td></tr>
 
-    <tr><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
     <tr align="left"><th colspan="2" id="bounds">Granični znaci</th></tr>
     <tr><td><tt>^</tt></td><td>Početak retka</td></tr>
     <tr><td><tt>$</tt></td><td>Kraj retka</td></tr>
     <tr><td><tt>\b</tt></td><td>Graničnik za riječ</td></tr>
 
     <tr><td><tt>\B</tt></td><td>Graničnik za ne-riječ</td></tr>
-    <tr><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
     <tr align="left"><th colspan="2" id="greedy">Lakomi kvantifikatori</th></tr>
     <tr><td colspan="2">Oni će pronalaziti podudarnosti koliko god mogu. Na primjer, <code>a+</code> će naći <code>aaa</code> u <code>aaabbb</code></td></tr>
 
@@ -172,14 +172,14 @@
     <tr><td><strong>X</strong><tt>*</tt></td><td><strong>X</strong>, nula ili više puta</td></tr>
     <tr><td><strong>X</strong><tt>+</tt></td><td><strong>X</strong>, jednom ili više puta</td></tr>
 
-    <tr><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
     <tr align="left"><th colspan="2" id="reluc">Oprezni (nelakomi) kvantifikatori</th></tr>
     <tr><td colspan="2">Oni će pronalaziti podudarnosti u što manjoj mjeri. Na primjer, <code>a+?</code> će naći prvo <code>a</code> u <code>aaabbb</code></td></tr>
     <tr><td><strong>X</strong><tt>??</tt></td><td><strong>X</strong>, jednom, ili uopšte ne</td></tr>
 
     <tr><td><strong>X</strong><tt>*?</tt></td><td><strong>X</strong>, nula ili više puta</td></tr>
     <tr><td><strong>X</strong><tt>+?</tt></td><td><strong>X</strong>, jednom ili više puta</td></tr>
-    <tr><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
     <tr align="left"><th colspan="2" id="logical">Logički operatori</th></tr>
 
     <tr><td><strong>XY</strong></td><td><strong>X</strong> iza koga slijedi <strong>Y</strong></td></tr>

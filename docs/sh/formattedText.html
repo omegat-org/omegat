@@ -1,7 +1,7 @@
 <html>
 <head>
    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Radnje s formatiranim tekstom - Priručnik za korisnike OmegaT 1.6.1</title>
+   <title>Radnje s formatiranim tekstom - Priručnik za korisnike OmegaT 1.6.2</title>
 </head>
 <body>
 
@@ -24,7 +24,7 @@
                <li>1.5.1. <a href="#Tag_group_duplication">Dupliciranje grupa tagova</a></li>
                <li>1.5.2. <a href="#Tag_group_deletion">Brisanje grupa tagova</a></li>
                <li>1.5.3. <a href="#Tag_group_order_modification">Modifikacija rasporeda grupa tagova</a></li>
-               <li>1.5.4. <a href="#Tag_group_nesting">Ugniježđivanje grupa tagova</a></li>
+               <li>1.5.4. <a href="#Tag_group_nesting">Ugnježđivanje grupa tagova</a></li>
             </ul>
          </li>
 
@@ -39,7 +39,7 @@
 <a name="Formatted_Text_in_OmegaT"></a>
 <h2>Formatirani tekst u OmegaT</h2>
 
-<p>Informacija o formataciji koja postoji u izvornoj datoteci obično se mora prenijeti u prevedeni tekst. OmegaT u vidu tagova prikazuje in-line informaciju o formataciji podržanih datoteka (za sada: DocBook, HTML, XHTML, Open Document i OpenOffice.org). Kad se u svrhe utvrđivanja podudarnosti upoređuju niske, tagovi najčešće ne ulaze u obračun. Tagove koje si reprodukovao/la u prevedenom segmentu, postojaće i u prevedenom dokumentu.</p>
+<p>U prevedeni tekst obično se mora prenijeti informacija o formataciji koja postoji u izvornoj datoteci. OmegaT u vidu tagova prikazuje in-line informaciju o formataciji podržanih datoteka (za sada: DocBook, HTML, XHTML, Open Document i OpenOffice.org). Kad se upoređuju niske u svrhe utvrđivanja podudarnosti, tagovi najčešće ne ulaze u obračun. Tagove koje si reprodukovao/la u prevedenom segmentu, postojaće i u prevedenom dokumentu.</p>
 
 <a name="Tag_naming"></a>
 <h3>Imenovanje tagova</h3>
@@ -65,7 +65,7 @@
 <p>Tagovi uvijek postoje kao samostalni tagovi ili u paru.</p>
 
 <p>
-<strong>Samostalni tagovi</strong> pokazuju informaciju o formatiranju koje ne utiče na okolni tekst (dodatni bijeli prostor ili prelom linije, na primjer).</p>
+<strong>Samostalni tagovi</strong> pokazuju informaciju o formatiranju koje ne utiče na okolni tekst (dodatni bijeli prostor ili prijelom linije, na primjer).</p>
 
 <pre>   <strong>&lt;segment 2132&gt;</strong>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;<strong>&lt;kraj segmenta&gt;</strong></pre>
 
@@ -73,7 +73,7 @@
 <code><strong>&lt;br1&gt;</strong></code> je samostalni tag koji ne utiče na okolni tekst.</p>
 
 <p>
-<strong>Upareni tagovi</strong> obično ukazuju na informaciju o formatiranju koje se odnosi na tekst između otvarajućeg taga i zatvarajućeg taga u paru. Nezavisno od mogućeg dešavanja s parom, otvarajući tag mora uvijek stajati ispred zatvarajućeg.</p>
+<strong>Upareni tagovi</strong> obično ukazuju na informaciju o formatiranju koje se odnosi na tekst između otvarajućeg taga i zatvarajućeg taga u paru. Nezavisno od toga šta se dešava s parom, otvarajući tag mora uvijek stajati ispred zatvarajućeg.</p>
 
 <pre>   <strong>&lt;segment 3167&gt;</strong>Log datoteka (&lt;f1&gt;log.txt&lt;/f1&gt;) za praćenje radnih operacija i grešaka.<strong>&lt;kraj segmenta&gt;</strong></pre>
 
@@ -127,9 +127,9 @@
 <a name="Tag_group_deletion"></a>
 <h4>Brisanje grupa tagova</h4>
 
-<p>Da bi obrisao/la grupu tagova, dovoljno je da ih ukloniš iz segmenta. Imaj u vidu da se otvarajući i zatvarajući tag u grupi tagova moraju obrisati kako bi se svi tragovi formatiranja bili zasigurno uklonjeni. U suprotnom slučaju, prevedeni dokument može se oštetiti i čak ga se neće moći otvoriti.</p>
+<p>Da bi obrisao/la grupu tagova, dovoljno je da ih ukloniš iz segmenta. Imaj u vidu da se otvarajući i zatvarajući tag u grupi tagova moraju obrisati kako bi svi tragovi formatiranja bili zasigurno uklonjeni. U suprotnom slučaju, prevedeni dokument se može oštetiti i čak ga se neće moći ni otvoriti.</p>
 
-<p>Brisanjem određene grupe tagova, u prevedenoj datoteci uklanja se i formatacija koju ona predstavlja.</p>
+<p>Brisanjem određene grupe tagova, u prevedenoj datoteci uklanja se i formatacija koju oni predstavljaju.</p>
 
 <p>Evo jednog primjera:</p>
 
@@ -142,9 +142,9 @@
 <a name="Tag_group_order_modification"></a>
 <h4>Modifikacija rasporeda grupa tagova</h4>
 
-<p>Radi promene rasporeda grupe tagova u svrhe boljeg odražavanja strukture drugog jezika pri prevođenju, jednostavno postavi grupu tagova tamo gdje bi u prevodu i trebala stajati.</p>
+<p>Radi promene rasporeda grupe tagova u svrhe boljeg odražavanja strukture drugog jezika pri prevođenju, jednostavno postavi grupu tagova tamo gdje bi u prevodu ona i trebala stajati.</p>
 
-<p>Formatacija djela teksta na koji se tag odnosi, će se potom i obaviti.</p>
+<p>Potom će se obaviti i formatacija djela teksta na koji se tag odnosi.</p>
 
 <p>Evo jednog primjera:</p>
 
@@ -155,24 +155,24 @@
 <pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f1&gt;Ce format&lt;/f1&gt; et &lt;f0&gt;ce format&lt;/f0&gt; ont été inversés.<strong>&lt;kraj segmenta&gt;</strong></pre>
 
 <a name="Tag_group_nesting"></a>
-<h4>Ugniježđivanje grupa tagova</h4>
+<h4>Ugnježđivanje grupa tagova</h4>
 
-<p>Modifikacija rasporeda grupe tagova može za rezultat imati njihovo ugniježđivanje u drugu grupu tagova. Ono je moguće sve dok zatvarajuća grupa potpuno zatvara zatvorenu grupu. Pri ugniježđivanju mora se obratiti posebna pažnja, što posebno važi kod parova tagova koji nisu u cjelini unijeti u zatvarajuću grupu. U suprotnom slučaju, prevedeni dokument može se oštetiti i čak ga se neće moći otvoriti.</p>
+<p>Modifikacija rasporeda grupe tagova može za rezultat imati njihovo ugnježđivanje u drugu grupu tagova. Ono je moguće sve dok zatvarajuća grupa potpuno zatvara zatvorenu grupu. Pri ugnježđivanju mora se obratiti posebna pažnja, što posebno važi kod parova tagova koji nisu u cjelini unijeti u zatvarajuću grupu. U suprotnom slučaju, prevedeni dokument može se oštetiti i čak ga se neće moći niti otvoriti.</p>
 
-<p>Na ugniježđeni dio primjeniće se oba tipa formatacije.</p>
+<p>Na ugnježđeni dio primjeniće se oba tipa formatacije.</p>
 
 <p>Evo jednog primjera:</p>
 
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Ova formatacija&lt;/f0&gt; &lt;f1&gt;ovdje&lt;/f1&gt; biće ugniježđena.<strong>&lt;kraj segmenta&gt;</strong></pre>
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Ova formatacija&lt;/f0&gt; &lt;f1&gt;ovdje&lt;/f1&gt; biće ugnježđena.<strong>&lt;kraj segmenta&gt;</strong></pre>
 
-<p>Poslije ugniježđivanja:</p>
+<p>Poslije ugnježđivanja:</p>
 
 <pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Le format &lt;f1&gt;ici&lt;/f1&gt;&lt;/f0&gt; a été emboité dans le premier format.<strong>&lt;kraj segmenta&gt;</strong></pre>
 
 <a name="Tag_group_overlapping"></a>
 <h3>Preklapanje grupa tagova</h3>
 
-<p>Preklapanje je rezultat loše manipulacije s grupama tagova i ono će zasigurno poremetiti formataciju te se ponekad prevedena datoteka neće moći uopšte otvoriti.</p>
+<p>Preklapanje je rezultat loše manipulacije s grupama tagova i ono će zasigurno poremetiti formataciju, te se ponekad prevedena datoteka neće moći uopšte otvoriti.</p>
 
 <p>Evo jednog primjera:</p>
 
@@ -192,20 +192,20 @@
 <a name="Hints_for_tags_management"></a>
 <h3>Savjeti za rad s tagovima</h3>
 
-<p>U opštem smislu, tagovi predstavljaju znakove formatacije koja postoji u izvornom tekstu. <strong>Pojednostavljenje formatacije</strong> originalnog teksta značajno doprinosi smanjenju broja tagova. Radi pojednostavljenja procesa prevođenja i smanjenja mogućih grešaka u tagovima, bilo bi, po mogućnosti, potrebno razmotriti ujednačavanje korišćenog tipa fonta, veličine, boje, itd.</p>
+<p>U opštem smislu, tagovi predstavljaju znakove za formataciju izvornog teksta. <strong>Pojednostavljenje formatacije</strong> originalnog teksta značajno doprinosi smanjenju broja tagova. Radi pojednostavljenja procesa prevođenja i smanjenja mogućih grešaka u tagovima, bilo bi, po mogućnosti, potrebno razmotriti ujednačavanje korišćenog tipa fonta, veličine, boje, itd.</p>
 
 <p>Radi uvida u sve mogućnosti rada s tagovima, pogledaj u odjeljak <a href="#Tag_operations" title="Radnje s formatiranim tekstom">Radnje s tagovima</a>.</p>
 
-<p>Imaj na umu da ako ti tagovi smetaju i formatacija nije odviše važna za prevod u toku, da ćeš uklanjanjem većine tagova u izvornom dokumentu, sebi značajno olakšati prevođenje.</p>
+<p>Imaj na umu da ako ti tagovi smetaju i formatacija nije odviše važna za prevod koji je u toku, da ćeš sebi značajno olakšati prevođenje, uklanjanjem većine tagova u izvornom dokumentu.</p>
 
-<p>Ako imaš potrebu da u OmegaT vidiš postojeće tagove, ali nemaš neke posebne potrebe da ih i sačuvaš u prevedenom dokumentu, slobodno ih možeš izostaviti tokom prevođenja. U tom slučaju <strong>dodatno obrati pažnju na parove tagova</strong>, pošto ćeš, ako zaboraviš da obrišeš dio para tagova, pokvariti formatacija dokumenta, što će, u slučaju da se radi o datoteci prevedenoj u formatu OpenOffice.org document, onemogućiti da se ova poslije otvori u predmetnoj aplikaciji.</p>
+<p>Ako imaš potrebu da vidiš postojeće tagove u OmegaT, ali nemaš neke posebne potrebe i da ih sačuvaš u prevedenom dokumentu, slobodno ih tokom prevođenja možeš izostaviti. U tom slučaju <strong>dodatno obrati pažnju na parove tagova</strong>, pošto ćeš, ako zaboraviš da obrišeš dio para tagova, pokvariti formatacija dokumenta, što će, u slučaju da se radi o datoteci prevedenoj u formatu OpenOffice.org document, onemogućiti da se ova poslije otvori u predmetnoj aplikaciji.</p>
 
-<p>Pošto su tagovi sami po sebi, uključeni u tekst, radi stvaranja dokumenata koji sadrže manje tagova, moguće je koristiti <a href="segmentation.html" title="Segmentacija izvornih datoteka">pravila segmentacije</a>. Radi se o naprednoj mogućnosti koju pruža ova prevodilačka alatka, te je početnici još ne bi trebali koristiti.</p>
+<p>Pošto su tagovi, sami po sebi, uključeni u tekst, radi stvaranja dokumenata koji sadrže manje tagova, moguće je koristiti <a href="segmentation.html" title="Segmentacija izvornih datoteka">pravila segmentacije</a>. Radi se o naprednoj mogućnosti koju pruža ova prevodilačka alatka, te je početnici još ne bi trebali koristiti.</p>
 
 <a name="Important"></a>
 <h3>Važno</h3>
 
-<p>OmegaT još uvijek ne može automatski otkrivati greške u formatiranju, tako da nećeš primiti povratni signal u slučaju neke tvoje greške ili izmjene formatacije koju činiš radi prilagođavanja tvom jeziku prevoda. Ponekad će međutim, tvoja datoteka imati malo iskrivljen izgled. U slučaju datoteka tipa OpenDocument / OpenOffice.org, iste neće biti moguće otvoriti.</p>
+<p>OmegaT još uvijek ne može automatski otkrivati greške u formatiranju, tako da u slučaju neke tvoje greške ili izmjene formatacije koju činiš radi prilagođavanja tvom jeziku prevoda, nećeš primiti povratni signal. Ponekad će međutim, tvoja datoteka imati malo iskrivljen izgled. U slučaju datoteka tipa OpenDocument / OpenOffice.org, iste neće biti moguće otvoriti.</p>
 
 <hr>
 <p><a href="legalNotices.html" title="Napomene pravne prirode">Napomene pravne prirode</a></p>

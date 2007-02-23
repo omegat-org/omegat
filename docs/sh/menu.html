@@ -1,7 +1,7 @@
 <html>
 <head>
    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Glavni meni - Priručnik za korisnike OmegaT 1.6.1</title>
+   <title>Glavni meni - Priručnik za korisnike OmegaT 1.6.2</title>
 </head>
 <body>
 
@@ -9,7 +9,7 @@
 
 <p>Svi funkcionalni djelovi OmegaT dostupni su sa trake menija pri vrhu Okna editora. Većina funkcija takođe je dostupna preko <a href="keyboardShortcuts.html">kratica na tastaturi</a>.</p>
 
-<p>Kratice sa <strong><code>Ctrl</code></strong> su na spisku operativnih sistema Windows, UNIX ili iz porodice UNIX, gdje tastature imaju dirku <strong><code>Ctrl</code></strong> ili dirku <strong><code>Control</code></strong> . Korisnici Mac OS X bi, umjesto nje, trebalo da koriste taster Apple <img src="images/AppleKey.gif" alt="Taster Apple" width="19" height="19"> .</p>
+<p>Kratice sa <strong><code>Ctrl</code></strong> su na spisku operativnih sistema Windows, UNIX ili iz porodice UNIX, gdje tastature imaju dirku <strong><code>Ctrl</code></strong> ili dirku <strong><code>Control</code></strong> . Korisnici Mac OS X bi, umjesto nje, trebalo da koriste Apple <img src="images/AppleKey.gif" alt="Dirka Apple" width="19" height="19"> key.</p>
 
 <h2>Sadržaj</h2>
 <ul type="none">
@@ -29,11 +29,11 @@
    <dt>Novi</dt>
    <dd>Stvara i otvari novi projekat. Dijalog za stvaranje projekta je isti kao <a href="projectProperties.html">uredi projekat</a>.</dd>
 
-   <dt>Otvori<code>&lt;Ctrl+O&gt;</code></dt>
+   <dt>Otvori <code>&lt;Ctrl+O&gt;</code></dt>
    <dd>Otvara ranije stvoreni projekat.</dd>
 
    <dt>Uvezi izvorne datoteke...</dt>
-   <dd>Kroz njega se izabrane datoteke kopiraju u <code>/source</code> direktorijum i ponovno se učitava projekt radi učitavanja dodanih datoteka.</dd>
+   <dd>Kroz njega se izabrane datoteke kopiraju u <code>/source</code> direktorijum i radi učitavanja dodanih datoteka ponovno se učitava projekat.</dd>
 
    <dt>Učitaj iznova</dt>
    <dd>Učitava iznova projekat radi ažuriranja nastalih promjena u izvornim datotekama, arhivskim memorijama prevoda ili u rječnicima.</dd>
@@ -42,7 +42,7 @@
    <dd>Spašava prevod i zatvara projekat.</dd>
 
    <dt>Spasi <code>&lt;Ctrl+S&gt;</code></dt>
-   <dd>Spašava prevod u memoriju prevoda projekta. OmegaT automatski spašava prevod svakih 10 minuta ili to uradi prilikom zatvaranja projekta i izlaska iz aplikacije OmegaT.</dd>
+   <dd>Spašava prevod u memoriju prevoda projekta. OmegaT svakih 10 minuta automatski spašava prevod ili to uradi prilikom zatvaranja projekta i izlaska iz aplikacije.</dd>
 
    <dt>Sačini prevedene dokumente</dt>
    <dd>Sačinjava target dokumente koji predstavljaju tvoj prevod teksta dokumenata. Dokumenti će se nalaziti u direktorijumu <code>/target</code>.</dd>
@@ -54,14 +54,14 @@
    <dd>Zatvara ili otvara <a href="userInterface.html#Project_Files">Okno projektnih datoteka</a> (zavisno od toga da li je otvoreno ili zatvoreno).</dd>
 
    <dt>Zatvori program <code>&lt;Ctrl+Q&gt;</code></dt>
-   <dd>Spašava projekat i zatvara program OmegaT. Ako do sada nisi manuelnim putem spasio/la projekt, biće ti postavljeno pitanje da li zaista želiš da zatvoriš program.</dd>
+   <dd>Spašava projekat i zatvara program OmegaT. Ako do sada nisi manuelnim putem spasio/la projekat, biće ti postavljeno pitanje da li zaista želiš da zatvoriš program.</dd>
 </dl>
 </p>
 
 <a name="Edit_Menu"></a>
 <h4>Meni Uredi</h4>
 
-<p>Stavke koje postoje u većini aplikacija (kopiraj/isijeci/nalijepi) nisu prikazane u ovom meniju ali su dostupne preko kratica u tvom operativnom sistemu. Na primjer, na Windows-u:</p>
+<p>Stavke koje postoje u većini aplikacija (kopiraj/isijeci/nalijepi) u ovom meniju nisu prikazane, ali su dostupne preko kratica u tvom operativnom sistemu. Na primjer, na Windows-ima:</p>
 
 <p>
 <dl>
@@ -90,7 +90,7 @@
    <dd>Prepisuje trenutno izabranu podudarnost preko cijelog tekućeg target segmenta (prva podudarnost je automatski pre-selektovana)</dd>
 
    <dt>Umetni prevod <code>&lt;Ctrl+I&gt;</code></dt>
-   <dd>Umeće na položaju kursora trenutno izabranu podudarnost. Ova funkcija neće nikad prebrisati dio target segmenta, čak i kad je on selektovan.</dd>
+   <dd>Na položaju kursora umeće  trenutno izabranu podudarnost. Ova funkcija neće nikad prebrisati dio target segmenta, čak i kad je on selektovan.</dd>
 
    <dt>Prepiši izvorni tekst <code>&lt;Shift+Ctrl+R&gt;</code></dt>
    <dd>Sadržaj izvornog teksta prepisuje u cijeli target segment.</dd>
@@ -102,7 +102,7 @@
    <dd>Otvara novo <a href="userInterface.html#Search_Window">Okno za pretraživanje</a>.</dd>
 
    <dt>Izaberi podudarnost #N <code>&lt;Ctrl+N&gt;</code> (N od 1 do 5)</dt>
-   <dd>Izabira N podudarnost prikazanu u oknu podudarnosti radi zamjenjivanja fraze u segmentu, ili umetanja fraze. Odjeljak <a href="userInterface.html#Fuzzy_Matches">Podudarnosti</a> detaljno opisuje kodiranje pomoću boja.</dd>
+   <dd>Radi zamjenjivanja fraze u segmentu ili umetanja fraze, izabira N-tu podudarnost prikazanu u oknu podudarnosti. Odjeljak <a href="userInterface.html#Fuzzy_Matches">Podudarnosti</a> detaljno opisuje kodiranje pomoću boja.</dd>
 </dl>
 </p>
 
@@ -120,7 +120,7 @@
 
    <dt>Prethodni segment <code>&lt;Ctrl+P&gt;</code>, <code>&lt;Ctrl+Enter&gt;</code> / <code>&lt;Ctrl+Tab&gt;</code>
    </dt>
-   <dd>Premješta polje rada na prethodni. Ako je tekući segment prvi u određenoj datoteci, polje rada premješta se na poslednji segment prethodne datoteke.</dd>
+   <dd>Premješta polje rada na prethodni segment. Ako je tekući segment prvi u određenoj datoteci, polje rada premješta se na poslednji segment prethodne datoteke.</dd>
 </dl>
 </p>
 
@@ -130,7 +130,7 @@
 <p>
 <dl>
    <dt>Provjeri valjanost tagova <code>&lt;Ctrl+T&gt;</code></dt>
-   <dd>Provjerava nedostajuće ili pogrešno smještene tagove u formatiranim datotekama. Prikazaće popis segmenata sa greškama u tagovima. Odjeljak <a href="userInterface.html#Tag_Validation">Okno za provjeru valjanosti tagova</a> daje popis, a <a href="formattedText.html">Radnje sa formatiranim tekstom</a> ti pruža objašnjenja.</dd>
+   <dd>U formatiranim datotekama provjerava nedostajuće ili pogrešno smještene tagove. Prikazaće popis segmenata sa greškama u tagovima. Odjeljak <a href="userInterface.html#Tag_Validation">Okno za provjeru valjanosti tagova</a> daje popis, a <a href="formattedText.html">Radnje sa formatiranim tekstom</a> ti pruža objašnjenja.</dd>
 </dl>
 </p>
 
@@ -139,14 +139,14 @@
 
 <p>
 <dl>
-   <dt>Koristi TAB za premještanje</dt>
-   <dd>Ovime se za ovjeru segmenta i premještanje u naredni, koristi taster <code>&lt;Tab&gt;</code>  umjesto default-a <code>&lt;Enter&gt;</code>. Ova opcija je od koristi za neke vidove unošenja kineskih, japanskih i korejskih znakova.</dd>
+   <dt>Za premještanje unaprijed, koristi TAB </dt>
+   <dd>Ovime se za ovjeru segmenta i premještanje u naredni, koristi dirka <code>&lt;Tab&gt;</code>  umjesto pod default, <code>&lt;Enter&gt;</code>. Ova opcija je od koristi za neke vidove unošenja kineskih, japanskih i korejskih znakova.</dd>
 
    <dt>Font...</dt>
    <dd>Prikazuje dijalog za <a href="fontSettings.html">Setting fontova</a> u kome se može promjeniti font za prikazivanje teksta. Korisnici starijih računara bi prije otvaranja projekta morali pažljivo izabrati font, jer u suprotnom slučaju, aplikacija može slabije funkcionisati. Reperkusija u vidu dugog iščekivanja da se ažurira displej, se najsnažnije iskazuje  na kombinaciji G4 + Mac OS X + japanski jezik.</dd>
 
    <dt>Filtri datoteka...</dt>
-   <dd>Prikazuje dijalog <a href="fileFilters.html">Filtri datoteka</a> radi uređivanja načina rukovanja i pročešljavanja datoteka.</dd>
+   <dd>Prikazuje dijalog <a href="fileFilters.html">Filtri datoteka</a> koji služi za uređivanja načina rukovanja i pročešljavanja datoteka.</dd>
 
    <dt>Segmentacija...</dt>
    <dd>Otvara dijalog <a href="segmentation.html">Segmentacija izvornih datoteka</a> radi uređivanja segmentacije teksta.</dd>
@@ -155,7 +155,7 @@
    <dd>Prikazuje dijalog <a href="translationEditing.html">Uređivanje prevoda</a> radi uređivanja sadržaja prevodnih polja još neprevedenih segmenata.</dd>
 
    <dt>Povrati prethodno stanje glavnog prozora</dt>
-   <dd>Vraća u polazno stanje komponente (editor, prikazivač podudarnosti i prikazivač rječnika) glavnog prozora OmegaT. Koristi ove mogućnosti kada si odvojila/o, premjestila/o, ili sakrila/o jednu ili više komponenti, a nisi u stanju da ih vratiš u prijethodno stanje na zadovoljavajući način.</dd>
+   <dd>Vraća u polazno stanje komponente glavnog prozora OmegaT (editor, prikazivač podudarnosti i prikazivač rječnika). Koristi ove mogućnosti kada si odvojila/o, premjestila/o, ili sakrila/o jednu ili više komponenti, a nisi u stanju da ih vratiš u prijethodno stanje na zadovoljavajući način.</dd>
 </dl>
 </p>
 
@@ -165,7 +165,7 @@
 <p>
 <dl>
    <dt>Priručnik za korisnike... <code>&lt;F1&gt;</code></dt>
-   <dd>Otvara <a href="userInterface.html#Help_Browser">Pretraživač help priručnika</a> tj. ovaj priručnik, u posebnom oknu.</dd>
+   <dd>U  posebnom oknu otvara <a href="userInterface.html#Help_Browser">Pretraživač help priručnika</a> tj. ovaj priručnik.</dd>
 
    <dt>O programu...</dt>
    <dd>Prikazana su autorska prava, zahvalnice i napomene u vezi licenci.</dd>

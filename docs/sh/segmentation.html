@@ -1,7 +1,7 @@
 <html>
 <head>
    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Segmentacija izvornih datoteka - Priručnik za korisnike OmegaT 1.6.1</title>
+   <title>Segmentacija izvornih datoteka - Priručnik za korisnike OmegaT 1.6.2</title>
 </head>
 <body>
 
@@ -40,20 +40,20 @@
 
 <p>Alatke s memorijama prevoda rade sa jedinicama teksta: segmentima. Postoji više načina segmentacije teksta.</p>
 
-<p>OmegaT isprava pročešljava tekst radi segmentacije na strukturnoj razini. Tokom ovog procesa samo struktura izvorne datoteke stvara segmente. Na primjer, kod strukturne segmentacije, text datoteke mogu biti izsegmentirane na prijelomu redova, na praznim redovima ili pak nesegmentirane uopšte. Datoteke s formatacijom u sebi (OpenOffice.org, OpenDocument, XHTML i HTML dokumenti) bivaju segmentirane pomoću tagova na blok-razini (po odjeljcima).</p>
+<p>OmegaT isprva pročešljava tekst radi segmentacije na strukturnoj razini. Tokom ovog procesa samo struktura izvorne datoteke stvara segmente. Na primjer, kod strukturne segmentacije, text datoteke mogu biti izsegmentirane na prijelomu redova, na praznim redovima ili pak nesegmentirane uopšte. Datoteke s formatacijom u sebi (OpenOffice.org, OpenDocument, XHTML i HTML dokumenti) bivaju segmentirane pomoću tagova na blok-razini (po odjeljcima).</p>
 
 <p>Prevodivi atributi objekata  (u datotekama XHTML ili HTML) se ekstrahuju u odvojene segmente.</p>
 
-<p>OmegaT takođe može segmentirati i na razini rečenice. Rečenična segmentacija se odvija poslije segmentacije na strukturnoj razini. Segmenti koji tom prilikom nastanu, nažalost se ne mogu naknadno dijeliti ili ujedinjavati tokom prevođenja. Ovo predstavlja jedno ograničenje u sofveru OmegaT kojega smo svjesni.</p>
+<p>OmegaT može takođe segmentirati i na razini rečenice. Rečenična segmentacija se odvija poslije segmentacije na strukturnoj razini. Segmenti koji tom prilikom nastanu, nažalost se, tokom prevođenja, ne mogu naknadno dijeliti ili ujedinjavati. Ovo predstavlja jedno ograničenje u softveru OmegaT kojega smo svjesni.</p>
 
 <p>Ako nisi zadovolj/a/n/a sa segmentiranjem, moraćeš ili modifikovati izvornu datoteku ručno, i/ili mijenjati pravila rečenične segmentacije. Po obavljanju tih operacija, moraš ponovno učitati projekat da bi softver zabilježio nastale promjene.</p>
 
 <a name="Sentence_Segmentation"></a>
 <h2>Rečenična segmentacija</h2>
 
-<p>Pošto je program OmegaT izsegmentirao izvornu datoteku u logičke jedinice što kod formatiranih datoteka najčešće pretpostavlja odjeljke, on će, pod uslovom da je rečenična segmentacija aktivirana, nastaviti s daljom segmentacijom tih blokova u rečenice. Općenito govoreći, OmegaT može segmentirati logičke blokove u izvornoj datoteci u bilo kakav vid segmenta koji podesiš po svom nahođenju. Ali ćemo je, pošto OmegaT u svom <strong>podrazumijevanom ponašanju</strong> segmentira u rečenice, nazivati <strong>rečeničnom</strong> segmentacijom.</p>
+<p>Pošto je program OmegaT izsegmentirao izvornu datoteku u logičke jedinice, što kod formatiranih datoteka najčešće pretpostavlja odjeljke, on će, pod uslovom da je rečenična segmentacija aktivirana, nastaviti s daljom segmentacijom tih blokova u rečenice. Općenito govoreći, OmegaT može segmentirati logičke blokove u izvornoj datoteci u bilo kakav vid segmenta koji podesiš po svom nahođenju. Ali ćemo je, pošto OmegaT u svom <strong>podrazumijevanom ponašanju</strong> segmentira u rečenice, nazivati <strong>rečeničnom</strong> segmentacijom.</p>
 
-<p>Rečenična segmentacija sagrađena je po standardima <a href="http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a> , iako u momentu pisanja ovog Priručnika, OmegaT ne podržava sve mogućnosti SRX, niti može uvoziti/izvoziti pravila definisana formatom SRX. Međutim, ako ti već poznaš način funkcionisanja SRX pravila, tada će ti biti jasno kako radi softver OmegaT, pošto su primjenjena pravila, manje-više, identična.</p>
+<p>Rečenična segmentacija sagrađena je po standardima <a href="http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a>, iako u momentu pisanja ovog Priručnika, OmegaT ne podržava sve mogućnosti SRX, niti može uvoziti/izvoziti pravila definisana formatom SRX. Međutim, ako ti već poznaš način funkcionisanja SRX pravila, tada će ti biti jasno kako radi softver OmegaT, pošto su primjenjena pravila, manje-više, identična.</p>
 
 <a name="About_Rules"></a>
 <h3>Pravila</h3>
@@ -69,7 +69,7 @@
 
 <p>Primjer pravila o izuzetku: <i>"Who is afraid of Mrs. Woolf?"</i> gdje poslije "<code>.</code>" nije potrebna segmentacija. Znači da bi trebalo napraviti pravilo o izuzetku za "<code>Mrs.</code>".</p>
 
-<p>Unaprijed podešeno pravilo prijeloma (default) trebalo bi biti dovoljno za većinu evropskih jezika i japanski, ali ti preporučujemo da za jezik iz koga prevađaš, sačiniš nešto više pravila o izuzetku, pošto je očigledno za sve jezike nemoguće unaprijed definisati sve moguće izuzetke.</p>
+<p>Unaprijed podešeno pravilo prijeloma (default) trebalo bi biti dovoljno za većinu evropskih jezika i japanski, ali ti preporučujemo sačiniš nešto više pravila o izuzetku za jezik iz koga prevađaš, pošto je očigledno da je sve jezike nemoguće unaprijed definisati sve moguće izuzetke.</p>
 
 <a name="Rules_Setup"></a>
 <h3>Setup pravila</h3>
@@ -91,9 +91,9 @@
 
 <p>Kućica Prijelom/Izuzetak određuje da li se radi o pravilu prijeloma (kliknuta kućica) ili o pravilu o izuzetku (ne-kliknuta kućica). Dva obična izraza Prije i Poslije određuju šta se mora nalaziti prije i poslije određenog položaja, tako da se, shodno tome, tretira kao pravilo o izuzetku ili o prijelomu.</p>
 
-<p>Proces segmentacije može se prikazati uprošćeno na sljedeći način. Zamislimo da se poslije prvog znaka, kursor pomjeri do ispred zadnjeg znaka u tekstu. Za svaki položaj kursora uzimamo pravilo u datom redoslijedu i pokušavamo primijeniti oblik <strong>Prije</strong> na cijeli tekst na lijevo od kursora i oblik <strong>Poslije</strong> na tekst koji se nalazi desno od njega, tako da oni dodiruju kursor.</p>
+<p>Proces segmentacije može se prikazati uprošćeno na sljedeći način. Zamislimo da se poslije prvog znaka, kursor pomjeri do ispred zadnjeg znaka u tekstu. Za svaki položaj kursora uzimamo pravilo u datom redoslijedu i pokušavamo primijeniti oblik <strong>Prije</strong> na cijeli tekst koji se nazi lijevo od kursora i oblik <strong>Poslije</strong> na tekst koji se nalazi desno od njega, tako da oni dodiruju kursor.</p>
 
-<p>Ako se uspješno primijeni neko pravilo, mi, što se tiče pravila o izuzetku, prestajemo s propitivanjem preko daljih pravila, a kod za pravila o prijelomu, smatramo tekst s lijeve strane odvojenim segmentom za svaki položaj kursora u tekstu.</p>
+<p>Ako se uspješno primijeni neko pravilo, mi tada, što se tiče pravila o izuzetku, prestajemo s propitivanjem daljih pravila, a kod pravila o prijelomu, smatramo tekst s lijeve strane odvojenim segmentom za svaki položaj kursora u tekstu.</p>
 
 <a name="Simple_examples"></a>
 <h4>Jednostavni primjeri</h4>
@@ -108,7 +108,7 @@
    </dd>
 
    <dt><strong>Cilj nam je:</strong> da se poslije "。" (japanska tačka) ne napravi segment</dt>
-   <dd>Prije: 。 Poslije: (prazno) <br> <strong>Napomena:</strong> polje možeš ostaviti praznim</dd>
+   <dd>Prije: 。 Poslije: (prazno) <br> <strong>Napomena:</strong> polje možeš ostaviti prazno</dd>
 </dl>
 </p>
 
@@ -120,15 +120,15 @@
 <a name="Short_summary_of_regular-expression_constructs"></a>
 <h4>Kratak pregled konstrukcija običnih izraza</h4>
 
-<p>One ne predstavljaju jedine konstrukcije koje se mogu koristiti u pravilima segmentacije u OmegaT, već se radi o onima koje se najčešće koriste. OmegaT podržava karakteristike običnih izraza prema <a href="http://www.lisa.org/standards/srx/">SRX standardima</a>.</p>
+<p>One ne predstavljaju jedine konstrukcije koje se mogu koristiti u pravilima segmentacije u OmegaT, već se samo radi o onima koje se najčešće koriste. OmegaT podržava karakteristike običnih izraza prema <a href="http://www.lisa.org/standards/srx/">SRX standardima</a>.</p>
 
 <table border="0" width="80%" cellpadding="1" cellspacing="0" summary="Konstrukcije običnih izraza i koje podudarnosti se pomoću njih mogu pronaći">
     <tr bgcolor="#DDEEFF"><th width="10%" align="left" id="construct">Konstrukcija</th><th align="left">Podudarnosti</th></tr>
 
-    <tr><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
     <tr align="left"><th colspan="2" id="flags">Zastavice</th></tr>
     <tr><td><tt>(?i)</tt></td><td>Omogućuje traganje za podudarnostima bez razlikovanja malih i velikih slova (podrazumijevana vrijednost je namještena da postoji razlikovanje između malih i velikih slova).</td></tr>
-    <tr><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
     <tr><th align="left" colspan="2" id="characters">Znaci</th></tr>
     <tr><td><strong>x</strong></td><td>Znak <strong>x</strong>, osim sljedećega...</td></tr>
 
@@ -137,21 +137,21 @@
     <tr><td><tt>\n</tt></td><td>Znak za novi red (line feed) (<tt>'\u000A'</tt>)</td></tr>
 
     <tr><td><tt>\r</tt></td><td>Znak za povratak na početak reda (<tt>'\u000D'</tt>)</td></tr>
-    <tr><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
     <tr align="left"><th colspan="2" id="quot">Citiranje</th></tr>
     <tr><td><tt>\</tt></td><td>Samo citira sljedeći znak. Ovo je potrebno kad hoćeš unijeti metaznake <code>!$()*+.&lt;&gt;?[\]^{|}</code> koji u konkretnom slučaju predstavljaju sami sebe.</td></tr>
 
     <tr><td><tt>\\</tt></td><td>Na primjer, ovo je znak za obrnutu kosu crtu</td></tr>
     <tr><td><tt>\Q</tt></td><td>Samo citira sve znake ispred <tt>\E</tt></td></tr>
     <tr><td><tt>\E</tt></td><td>Samo završava citiranje koje je otpočelo pomoću znaka <tt>\Q</tt></td></tr>
-    <tr><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
     <tr align="left"><th colspan="2" id="classes">Klase znakova</th></tr>
 
     <tr><td><tt>[abc]</tt></td><td><tt>a</tt>, <tt>b</tt>, ili <tt>c</tt> (prosta klasa)</td></tr>
     <tr><td><tt>[^abc]</tt></td><td>Bilo koji znak osim <tt>a</tt>, <tt>b</tt>, ili <tt>c</tt> (negacija)</td></tr>
 
     <tr><td><tt>[a-zA-Z]</tt></td><td><tt>a</tt> do <tt>z</tt> ili <tt>A</tt> do zaključno sa <tt>Z</tt>, (opseg)</td></tr>
-    <tr><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
     <tr align="left"><th colspan="2" id="predef">Unaprijed definisane klase znakova</th></tr>
 
     <tr><td><tt>.</tt></td><td>Bilo koji znak (izuzev onih koji označavaju kraj reda)</td></tr>
@@ -162,7 +162,7 @@
     <tr><td><tt>\S</tt></td><td>Ne-blanko znak: <tt>[^\s]</tt></td></tr>
     <tr><td><tt>\w</tt></td><td>Znak za riječ: <tt>[a-zA-Z_0-9]</tt></td></tr>
     <tr><td><tt>\W</tt></td><td>Znak za ne-riječ: <tt>[^\w]</tt></td></tr>
-    <tr><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
 
     <tr align="left"><th colspan="2" id="bounds">Granični znaci</th></tr>
     <tr><td><tt>^</tt></td><td>Početak retka</td></tr>
@@ -170,14 +170,14 @@
     <tr><td><tt>\b</tt></td><td>Graničnik za riječ</td></tr>
     <tr><td><tt>\B</tt></td><td>Graničnik za ne-riječ</td></tr>
 
-    <tr><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
     <tr align="left"><th colspan="2" id="greedy">Lakomi kvantifikatori</th></tr>
     <tr><td colspan="2">Oni će pronalaziti podudarnosti koliko god mogu. Na primjer, <code>a+</code> će naći <code>aaa</code> u <code>aaabbb</code></td></tr>
     <tr><td><strong>X</strong><tt>?</tt></td><td><strong>X</strong>, jednom, ili uopšte ne</td></tr>
 
     <tr><td><strong>X</strong><tt>*</tt></td><td><strong>X</strong>, nula ili više puta</td></tr>
     <tr><td><strong>X</strong><tt>+</tt></td><td><strong>X</strong>, jednom ili više puta</td></tr>
-    <tr><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
     <tr align="left"><th colspan="2" id="reluc">Oprezni (nelakomi) kvantifikatori</th></tr>
 
     <tr><td colspan="2">Oni će pronalaziti podudarnosti u što manjoj mjeri. Na primjer, <code>a+?</code> će naći prvo <code>a</code> u <code>aaabbb</code></td></tr>
@@ -185,7 +185,7 @@
     <tr><td><strong>X</strong><tt>*?</tt></td><td><strong>X</strong>, nula ili više puta</td></tr>
 
     <tr><td><strong>X</strong><tt>+?</tt></td><td><strong>X</strong>, jednom ili više puta</td></tr>
-    <tr><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
     <tr align="left"><th colspan="2" id="logical">Logički operatori</th></tr>
     <tr><td><strong>XY</strong></td><td><strong>X</strong> iza koga slijedi <strong>Y</strong></td></tr>
 

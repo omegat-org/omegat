@@ -1,7 +1,7 @@
 <html>
 <head>
    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Vodič za brzi početak - Priručnik za korisnike OmegaT 1.6.1</title>
+   <title>Vodič za brzi početak - Priručnik za korisnike OmegaT 1.6.2</title>
 </head>
 <body>
 
@@ -39,7 +39,7 @@
 
 <p>Polje rada OmegaT sastoji se od tri odvojena okna. Veličina svakoga od njih dade se mijenjati pomoću miša. Na lijevoj strani nalazi se Editor u kome ukucavaš svoj prevod. Na desnoj strani u gornjem uglu, nalazi se Prikazivač podudarnosti, gdje su predstavljene podudarnosti iz prevodne memorije. Ispod njega stoji Prikazivač rječnika, gdje su predstavljene terminološke podudarnosti.</p>
 
-<p>U oknu editora OmegaT prikazuje izvorni tekst 'segmentiran' u rečenice (ili odjeljke – pogledaj Priručnik). Predmetne segmente prevodiš postupno, jedan iza drugog. Kako se premještaš iz segmenta u novi segment, tvoj prevod se registruje u memoriju prevoda. Po obavljenom prevođenju svih segmenata (ili i prije, ako tako želiš), OmegaT će upotrijebiti memoriju prevoda kako bi u direktorijumu “Target” generisala prevedene dokumente.</p>
+<p>U oknu editora OmegaT prikazuje izvorni tekst 'segmentiran' u rečenice (ili odjeljke – pogledaj u <a href="./segmentation.html">Segmentacija izvornih datoteka</a>!). Predmetne segmente prevodiš postupno, jedan iza drugog. Kako se premještaš iz segmenta u novi segment, tvoj prevod se registruje u memoriju prevoda. Po obavljenom prevođenju svih segmenata (ili i prije, ako tako želiš), OmegaT će upotrijebiti memoriju prevoda kako bi u direktorijumu “Target” generisala prevedene dokumente.</p>
 
 <p>Tvoj rad na prevođenju, OmegaT organizuje u takozvane projekte. Za svaki od projekata OmegaT će načiniti jedan skup direktorijuma. U njima se arhiviraju izvorni dokumenti namjenjeni prevođenju, rječnici koje ev. želiš koristiti i bilo koja memorija prevoda koju takođe želiš upotrijebiti. OmegaT takođe stvara direktorijum pod nazivom “Target” koji će sadržati sve finalne prevedene dokumente.</p>
 
@@ -49,13 +49,13 @@
 <a name="Create_and_open_a_new_project"></a>
 <h3>a. Stvori i otvori novi projekt</h3>
 
-<p>Iz menija izaberi <strong>Projekat -&gt; Novi..</strong>.</p>
+<p>Iz menija izaberi <strong>Projekat -&gt; Novi...</strong>.</p>
 
 <p>Naviguj do direktorijuma gdje želiš spašavati datoteke projekta i ukucaj naziv prevodnog projekta. Ovaj naziv će se koristiti za glavni projektni direktorijum; sve datoteke projekta biće arhivirane u ovom direktorijumu i ispod njega.</p>
 
 <p>OmegaT će te preko donjeg dijaloga pitati da potvrdiš ili promijeniš direktorijume projekta koje treba stvoriti:</p>
 
-<center><img src="images/NewProject.png" alt="Image:NewProject.png" width="398" height="428" /></center>
+<center><img src="images/NewProject.png" alt="Okno za podešavanje settinga projekta " /></center>
 
 <p>Možeš jednostavno prihvatiti mjesto pod-direktorijuma, ali se prvo postaraj da šifre izvornog jezika i jezika prevoda, budu ispravne. Izaberi šifru jezika (od 2 slova) ili šifru za jezik-i-zemlju (2 + 2 slova) iz drop-down liste, ili ih ukucaj ručno (pridržavaj se forme od 2 slova). Zapamti lokaciju Target pod-direktorijuma (onog za prevedene dokumente).</p>
 
@@ -63,12 +63,12 @@
 
 <p>Kad klikneš na OK za prihvat setup-a projekta, OmegaT će ti tražiti da odabereš izvorne dokumente za uvoz. Možeš uvoziti pojedinačne datoteke, ili čitava stabla direktorijuma (sa svim datotekama u pod-direktorijumima). Ukoliko si slučajno uvezao/la pogrešna dokumenta ili previše njih, možeš ih jednostavno ukloniti iz izvornog direktorijuma tvog OmegaT projekta (na primjer, tako što ćeš koristiti tvoj sistemski file manager).</p>
 
-<p>Radi provjere liste datoteka namjenjenih prevođenju, razgledaj okno sa projektnim datotekama (Meni: Prikaži -&gt; Projektne datoteke, ukoliko se isti ne otvori automatski). Ako je u međuvremenu došlo do promjene sadržaja Izvornog direktorijuma, ne zaboravi da prvo ponovno učitaš projekt (Meni: Projekat -&gt; Učitaj iznova). OmegaT će pod "default" otvoriti prvu datoteku u listi projekta.</p>
+<p>Radi provjere liste datoteka namjenjenih prevođenju, razgledaj okno sa <strong>Projektnim datotekama</strong> (Meni: <strong>Projekat → Projektne datoteke...</strong>, ukoliko se isti ne otvori automatski). Ako je u međuvremenu došlo do promjene sadržaja Izvornog direktorijuma, ne zaboravi da prvo ponovno učitaš projekt (Meni: <strong>Projekat -&gt; Učitaj iznova</strong>). OmegaT će pod "default" otvoriti prvu datoteku u listi projekta.</p>
 
 <p>Imaj u vidu da se pomoću OmegaT mogu jedino prevoditi datoteke u dolje pomenutim formatima. Datoteke u drugim formatima će biti zanemarene.<ul>
-<li>Open Document Format</li>
+<li>Open Document Format (ODF ISO/IEC 26300)</li>
 <li>OpenOffice.org </li>
-<li>(X)HTML </li>
+<li>XHTML, HTML </li>
 <li>HTML Help Compiler (HCC)</li>
 <li>DocBook </li>
 <li>plaintext </li>
@@ -83,11 +83,11 @@
 
 <p>Pošto su definisani projekt i datoteke namjenjene prevođenju, OmegaT će u editoru otvoriti prvu izvornu datoteku. Prvi segment ispisan je na zelenoj podlozi; ispod njega, u polju “target”, prikazan je isti izvorni tekst. (U ovoj poziciji, sav tekst izvan polja target je protektovan i ne može ga se mijenjati.) Svoj prevod moraš ispisati između tagova &lt;segment 0001&gt; i &lt;kraj segmenta&gt;, tako što ćeš pisati preko izvornog teksta.</p>
 
-<p>Radi prelaska u sljedeći segment, pritisni "ENTER".</p>
+<p>Radi prelaska u sljedeći segment, pritisni "<strong>ENTER</strong>".</p>
 
-<p>Napomena:<br/> - Radi pomjeranja u bilo koji drugi dio sa tekstom, gore ili dolje, klikni dva puta na rečenicu ili odjeljak koje želiš otvoriti. <br/> - Ukoliko ti više odgovara da prevodiš u prazno target polje, ovu opciju podesićeš preko Opcije -&gt; Ponašanje uređivanja.</p>
+<p>Napomena:<br/> - Radi pomjeranja u bilo koji drugi dio sa tekstom, gore ili dolje, klikni dva puta na rečenicu ili odjeljak koje želiš otvoriti. <br/> - Ukoliko ti više odgovara da prevodiš u prazno target polje, ovu opciju podesićeš preko <strong>Opcije -&gt; Ponašanje uređivanja...</strong></p>
 
-<p>Poslije pritiska na "ENTER", odigrava se nekoliko nevidljivih radnji: <br/> OmegaT dodaje par segmenata (izvorni segment i njegov prevod) u memoriju prevoda i takođe automatski prevodi sve identične segmente koje pronađe u ostalih datotekama projekta. Program takođe skenira memoriju prevoda u potrazi za podudarnostima koje se odnose na sljedeći neprevedeni segment.</p>
+<p>Poslije pritiska na "<strong>ENTER</strong>", odigrava se nekoliko nevidljivih radnji: <br/> OmegaT dodaje par segmenata (izvorni segment i njegov prevod) u memoriju prevoda i takođe automatski prevodi sve identične segmente koje pronađe u ostalih datotekama projekta. Program takođe skenira memoriju prevoda u potrazi za podudarnostima koje se odnose na sljedeći neprevedeni segment.</p>
 
 <a name="Use_TM_and_glossary_matches"></a>
 <h3>c. Koristi podudarnosti iz memorije prevoda i rječnika</h3>
@@ -95,11 +95,11 @@
 <a name="TM_matches"></a>
 <h4>1. Podudarnosti sa memorijom prevoda (TM)</h4>
 
-<p>Ukoliko OmegaT za naredni segment u memoriji prevoda pronađe bilo kakva podudaranja (od 30% ili više – pogledaj priručnik) prikazaće ih u Prikazivaču podudarnosti. Prva podudarnost je u Prikazivaču podudarnosti automatski pre-selektovana.</p>
+<p>Ukoliko OmegaT za naredni segment u memoriji prevoda pronađe bilo kakva podudaranja (od 30% ili više – pogledaj priručnik), prikazaće ih u Prikazivaču podudarnosti. Prva podudarnost je u Prikazivaču podudarnosti automatski pre-selektovana.</p>
 <p>Radi umetanja podudarnosti iz memorije prevoda u Prikazivaču podudarnosti u tvoje target polje, možeš koristiti kratice na tastaturi:<br/>
 <ul>
    <li>Radi umetanja pre-selektovane podudarnosti na mjesto pozicije kursora, pritisni <code>Ctrl+I</code> , ili...</li>
-   <li>Pritisni <code>Ctrl+R</code> da prepišeš cijeli segment sa pre-selektovanom podudarnošću.</li>
+   <li>Da prepišeš cijeli segment sa pre-selektovanom podudarnošću, pritisni <code>Ctrl+R</code> .</li>
 </ul>
 </p>
 
@@ -126,13 +126,13 @@
 
 <p>OmegaT će od svih prevodivih dokumenata iz izvornog direktorijuma projekta, bez obzira da li su oni prevedeni u cijelosti ili djelimično, sagraditi njihove prevedene verzije. Cjelovito ili djelimično prevedene datoteke se spasavaju u projektnom Target direktorijumu.</p>
 
-<p>Radi finalizacije tvog prevoda, otvori target datoteke u za to pogodnim aplikacijama (pretraživaču, tekst procesoru...) kako bi se provjerio sadržaj i formatacija tvog prevoda. Nakon toga možeš se, radi potrebnih korekcija, vratiti na OmegaT; ne zaboravi da ponovo sačiniš prevedene dokumente.</p>
+<p>Radi finalizacije tvog prevoda, otvori target datoteke u za to pogodnim aplikacijama (pretraživaču, tekst procesoru...) kako bi se provjerili sadržaj i formatacija tvog prevoda. Moćeš se nakon toga, radi potrebnih korekcija, ponovo vratiti na OmegaT; ne zaboravi da ponovo sačiniš prevedene dokumente.</p>
 
 
 <a name="Dealing_with_tagged_text"></a>
 <h2>III. Radnje s tagovanim tekstom</h2>
 
-<p>OmegaT svojim posebnim tagovima markira tekst kako bi se sačuvala formatacija izvornih dokumenata (podebljana slova, kurziv, itd.); isti su vidni u target polju.</p>
+<p>OmegaT svojim posebnim tagovima markira tekst kako bi se sačuvala formatacija izvornih dokumenata (podebljana slova, kurziv, itd.); Tagove u OmegaT sačinjavaju jedno ili više slova iza kojih slijedi jedna ili više brojki. U tagovima se ponekad koristi i znak "/" (na primjer: &lt;f0&gt;, &lt;br10/&gt;, &lt;/s2&gt; itd.).</p>
 
 <p>Moraš obratiti pažnju na ove tagove i voditi računa da su u target dokumenta uvršteni na pravilan način. (Za napredno uređivanje tagova, pogledaj Priručnik za korisnike OmegaT.)</p>
 
@@ -190,7 +190,7 @@ dialoogkassie verander word.<font color="#ff0000">&lt;/p&gt;</font></code>
 
 <p>OmegaT loše tagove u prevedenim dokumentima ne može otkriti automatski. Pre nego što isporučiš dokument svom klijentu, trebalo bi da provjeriš da li tagovi eventualno imaju grešaka u sebi.</p>
 
-<p>Izaberi sa menija <strong>Alatke -&gt; Provjeri valjanost tagova</strong>. Ukazaće se jedna tabela sa segmentima kod kojih tagovi u izvornom i završnom dokumentu nisu saglasni. Klikni na broj segmenta.</p>
+<p>Izaberi sa menija <strong>Alatke -&gt; Provjeri valjanost tagova</strong>. Ukazaće se jedna tabela sa segmentima u kojima nisu saglasni tagovi u izvornom i završnom dokumentu. Klikni na broj segmenta.</p>
 
 <p>Automatski ćeš se u Editoru naći u području lošeg segmenta, te možeš popraviti tagove.</p>
 

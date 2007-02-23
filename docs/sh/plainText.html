@@ -1,7 +1,7 @@
 <html>
 <head>
    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Rad sa plain text-om - Priručnik za korisnike OmegaT 1.6.1</title>
+   <title>Rad sa plain text-om - Priručnik za korisnike OmegaT 1.6.2</title>
 </head>
 <body>
 
@@ -15,7 +15,7 @@
    <li>2. <a href="#Garbled_displays_.3F">Iskrivljeno prikazivanje?</a>
 
       <ul type="none">
-         <li>2.1. <a href="#Character_sets_and_encodings">Setovi slova i enkodinzi</a></li>
+         <li>2.1. <a href="#Character_sets_and_encodings">Setovi slova i kodni rasporedi</a></li>
          <li>2.2. <a href="#The_OmegaT_solution">Rješenje koje pruža OmegaT</a></li>
       </ul>
    </li>
@@ -43,12 +43,12 @@
 
 <pre>   OmegaTВ∆ВЌБAГRГУГsГЕБ[Г^ВрЧШЧpВµВљЦ|ЦуГcБ[ГЛВ≈ВЈБB</pre>
 
-<p>Razlog za to je što prirodno očekuje da obrađuje sadržaj na ruskom jeziku... Dok ti znaci, međutim, nisi ruski. To su japanski znaci pogrešno prikazani kao ruska slova.</p>
+<p>Razlog za to je što prirodno očekuje da obrađuje sadržaj na ruskom jeziku... Dok ti znaci, međutim, nisu ruski. To su japanski znaci pogrešno prikazani kao ruska slova.</p>
 
-<p>Ni OmegaT ne ponaša se drugačije. OmegaT smatra da se <strong>plain text</strong> datoteke koje sadrže tekst mogu automatski prikazati na način kako je računar unaprijed podešen. Ovaj sistem dobro funkcioniše kad računar radi pod francuskim jezikom a ti na obradu primiš datoteke na engleskom, ili u slučaju kad imaš računar s njemačkim a trebaš prevoditi datoteke s talijanskog jezika.</p>
+<p>Ni OmegaT ne ponaša se drugačije. OmegaT smatra da se <strong>plain text</strong> datoteke koje sadrže tekst, mogu automatski prikazati na način unaprijed podešen na računaru. Ovaj sistem dobro funkcioniše kad računar radi pod francuskim jezikom a ti na obradu primiš datoteke na engleskom, ili u slučaju kad imaš računar s njemačkim a trebaš prevoditi datoteke s talijanskog jezika.</p>
 
 <a name="Character_sets_and_encodings"></a>
-<h3>Setovi slova i enkodinzi</h3>
+<h3>Setovi slova i kodni rasporedi</h3>
 
 <p>Zašto ovaj sistem funkcioniše s engleskim i francuskim ali ne i sa ruskim i japanskim jezikom? Razlog tome je što engleski i francuski koriste zajednički <strong>set slova</strong>. Tačnije, <strong>Latin-1</strong>, ili neku njegovu varijantu.</p>
 
@@ -56,7 +56,7 @@
 
 <p>Naručilac prevoda u Japanu koristi japanski računar i sačinjava datoteke na japanskom jeziku. Set slova koji je japanski naručilac prevoda izabrao, zavisiće od operativnog sistema i drugih settinga, ali je malo vjerovatno da će se izabrani (japanski) set slova, ispravno interpretirati na nekom ruskom računaru.</p>
 
-<p>Način fizičkog prenosa tekstualne informacije u određenom setu slova, tj.  način <strong>pisanja</strong> u datoteci namjenjenoj interpretaciji i učitavanju) zavisi od <strong>enkodinga</strong>. Kad računar učitava datoteku, on "dekodira" informaciju shodno enkodingu i prikazuje je saglasnim setom slova. Prostim riječima, svaki enkoding ima svoj set slova...</p>
+<p>Način fizičkog prenosa tekstualne informacije u određenom setu slova, tj.  način <strong>pisanja</strong> u datoteci namjenjenoj interpretaciji i učitavanju) zavisi od <strong>kodnog rasporeda (encoding)</strong>. Kad računar učitava datoteku, on "dekodira" informaciju shodno dotičnom kodnom rasporedu i prikazuje je saglasnim setom slova. Prostim riječima, svaki kodni raspored ima svoj set slova...</p>
 
 <a name="The_OmegaT_solution"></a>
 <h3>Rješenje koje pruža OmegaT</h3>
@@ -65,21 +65,21 @@
 
 <ol>
    <li>Drastičan način:<ul>
-         <li>Kada "kažeš" softeru OmegaT da tvoje <strong>plain text</strong> datoteke sa sufiksom <strong>.txt</strong> moraju biti interpretirane u enkodingu koji ti odrediš.</li>
+         <li>Kada "kažeš" softweru OmegaT da tvoje <strong>plain text</strong> datoteke sa sufiksom <strong>.txt</strong> moraju biti interpretirane u kodnom rasporedu koji ti odrediš.</li>
       </ul>
    </li>
 
    <li>Selektivan način:<ul>
          <li>Kada promijeniš nazive tvojih "inostranih" datoteka u neki oblik sličan ovome (na primjer tematika.japanski);</li>
 
-         <li>Tada zapovijediš softveru da se datoteke koje završavaju sufiksom ".japanski" imaju interpretirati u enkodingu koji ti odrediš.</li>
+         <li>Tada zapovijediš softveru da se datoteke koje završavaju sufiksom ".japanski" imaju interpretirati u kodnom rasporedu koji ti odrediš.</li>
       </ul>
    </li>
 
-   <li>Način pod "Unicode":<ul>
-         <li>Otvori tvoju "stranu" datoteku u tekst editoru koji ispravno interpretira njen enkoding (ili nastaviš sa probom i sa greškama);</li>
+   <li>"Unicode" način:<ul>
+         <li>Otvori tvoju "stranu" datoteku u tekst editoru koji ispravno interpretira njen kodni raspored (ili nastaviš sa probom i sa greškama);</li>
 
-         <li>Spasiš datoteku pod enkodingom "UTF-8";</li>
+         <li>Spasiš datoteku pod kodiranjem "UTF-8";</li>
 
          <li>Promijeniš joj ime iz <strong>tematika.txt</strong> u <strong>tematika.utf8</strong>. OmegaT će ovu datoteku interpretirati kao datoteku UTF-8.</li>
       </ul>
@@ -90,16 +90,16 @@
 
 <ul>
    <li>
-      <strong>.txt</strong> datoteke se u OmegaT (<strong>auto</strong>) interpretiraju pod enkodingom operativnog sistema računara.</li>
+      <strong>.txt</strong> datoteke se u OmegaT (<strong>automatski</strong>) interpretiraju pod kodnim rasporedom operativnog sistema računara.</li>
 
    <li>
-      <strong>.txt1</strong> datoteke se u OmegaT interpretiraju kao da su enkodirane pod ISO-8859-1 (enkoding koji pokriva najveći dio  <strong>zapadnoevropskih</strong> jezika).</li>
+      <strong>.txt1</strong> datoteke se u OmegaT interpretiraju kao da su kodirane pod ISO-8859-1 (kodni raspored koji pokriva najveći dio  <strong>zapadnoevropskih</strong> jezika).</li>
 
    <li>
-      <strong>.txt2</strong> datoteke se u OmegaT interpretiraju kao da su enkodirane pod ISO-8859-2 (enkoding koji pokriva najveći dio <strong>srednjeevropskih i istočnoevropskih</strong> jezika).</li>
+      <strong>.txt2</strong> datoteke se u OmegaT interpretiraju kao da su kodirane pod ISO-8859-2 (kodni raspored koji pokriva najveći dio <strong>srednjeevropskih i istočnoevropskih</strong> jezika).</li>
 
    <li>
-      <strong>.utf8</strong> datoteke se u OmegaT interpretiraju kao da su enkodirane pod UTF-8 (enkoding koji pokriva gotovo <strong>sve</strong> svjetske jezike).</li>
+      <strong>.utf8</strong> datoteke se u OmegaT interpretiraju kao da su kodirane pod UTF-8 (kodni raspored koji pokriva gotovo <strong>sve</strong> svjetske jezike).</li>
 </ul>
 
 <p>Naravno, sufiksi datoteka <strong>.txt1</strong>, <strong>.txt2</strong> i <strong>utf8</strong> , ne postoje u stvarnosti. OmegaT softver ti je pripremio kratak popis koji će ti pomoći pri obradi nekih <strong>inostranih</strong> datoteka.</p>

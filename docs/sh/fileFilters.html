@@ -1,7 +1,7 @@
 <html>
 <head>
    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Filtri datoteka - Priručnik za korisnike OmegaT 1.6.1</title>
+   <title>Filtri datoteka - Priručnik za korisnike OmegaT 1.6.2</title>
 </head>
 <body>
 
@@ -14,7 +14,7 @@
 
       <ul type="none">
          <li>1.1. <a href="#File_types">Tipovi datoteka</a></li>
-         <li>1.2. <a href="#File_encodings">Enkoding datoteka</a></li>
+         <li>1.2. <a href="#File_encodings">Kodni rasporedi datoteka</a></li>
          <li>1.3. <a href="#Renaming_Translated_Files">Preimenovanje prevedenih datoteka</a></li>
       </ul>
    </li>
@@ -23,7 +23,7 @@
 
       <ul type="none">
          <li><a href="#File_Filters_Dialog">Dijalog filtera datoteka</a></li>
-         <li><a href="#dit_Filter_Dialog">Dijalog filtera uredi</a></li>
+         <li><a href="#Edit_Filter_Dialog">Dijalog filtera uredi</a></li>
          <li><a href="#Add.2FEdit_Pattern_Dialog">Dijalog Dodaj/Uredi oblik</a></li>
       </ul>
    </li>
@@ -32,12 +32,12 @@
 <a name="Introduction"></a>
 <h2>Uvod</h2>
 
-<p>OmegaT se odlikuje filterima koji se mogu podešavati u izrazitoj mjeri, što će ti omogućiti da podesiš većinu njihovih operativnih funkcija.</p>
+<p>OmegaT se odlikuje filterima koji se mogu podešavati u izrazitoj mjeri. To će ti omogućiti da podesiš većinu njihovih operativnih funkcija.</p>
 
-<p>Filtri datoteka su delići sofvera koji su u stanju da:</p>
+<p>Filtri datoteka su djelići softvera koji su u stanju da:</p>
 
 <ul>
-   <li>Iščitavaju dokument određenog formata. Kao što su na, primjer, plaintext datoteke.</li>
+   <li>Iščitavaju dokument određenog formata. Kao što su, na primjer, plaintext datoteke.</li>
    <li>Ekstrahuju prevodivi sadržaj iz datoteke.</li>
    <li>Automatski izmjene nazive prevedenih datoteka postupkom zamjene prevodivog sadržaja sa njegovim prevodom.</li>
 </ul>
@@ -45,51 +45,51 @@
 <a name="File_types"></a>
 <h3>Tipovi datoteka</h3>
 
-<p>Kad Omegat nađe datoteku u svom izvornom direktorijumu, pokušava na bazi sufiksa datoteke izabrati filter. Preciznije rečeno, OmegaT pokušava da s nazivom datoteke sravni oblike naziva izvornih datoteka iz filtera. Na primjer, oblik <code>*.xhtml</code> podudariće se s bilo kojom datotekom koja ima sufiks <code>.xhtml</code> . Ako odgovarajući filter bude nađen, njemu se dodjeljuje datoteka na obradu. Na primjer, XHTML filter će pod "default" biti korišćen za obradu datoteka sa sufiksom <code>.xhtml</code>. Oblike naziva datoteka koje bi svaki od filtera trebalo da obrađuje, možeš mijenjati ili dodavati.</p>
+<p>Kad Omegat nađe datoteku u svom izvornom direktorijumu, pokušava na bazi sufiksa datoteke izabrati filter. Preciznije rečeno, OmegaT pokušava da s nazivom datoteke sravni oblike naziva izvornih datoteka iz filtera. Na primjer, oblik <code>*.xhtml</code> podudariće se s bilo kojom datotekom koja ima sufiks <code>.xhtml</code> . Ako odgovarajući filter bude nađen, njemu se dodijeljuje datoteka na obradu. Na primjer, za obradu datoteka sa sufiksom <code>.xhtml</code>, pod "default" će biti korišćen filter XHTML. Možeš mijenjati ili dodavati oblike naziva datoteka koje bi svaki od filtera trebalo da obrađuje.</p>
 
 <a name="File_encodings"></a>
-<h3>Enkoding datoteka</h3>
+<h3>Kodni raspored datoteka</h3>
 
-<p>Plaintext i HTML datoteke mogu, kao što svi znamo, biti spasavane pod raznolikim enkodinzima. Dok s jedne strane, HTML datoteke u sebi mogu sadržavati i meta-direktivu koju će OmegaT iskoristiti za čitanje datoteke, kod tekst datoteka nema dogovorenih načina o njegovom određivanju. Za tekst i HTML datoteke koji nemaju deklaraciju enkodinga, OmegaT će koristiti enkoding koji ti postaviš za određeni sufiks. Na primjer, <code>.txt</code> datoteke će se učitavati pomoću default enkodinga na tvom OS-u. Za svaki od oblika naziva izvornih datoteka, možeš promijeniti izvorni enkoding.</p>
+<p>Kao što znamo, plaintext i HTML datoteke mogu biti spasavane pod raznolikim kodnim rasporedima. Dok s jedne strane, HTML datoteke u sebi mogu sadržavati i kodnu meta-direktivu koju će OmegaT iskoristiti za čitanje datoteke, kod tekst datoteka nema dogovorenih načina o njegovom određivanju. Za tekst i HTML datoteke koji nemaju deklaraciju o kodnom rasporedu, OmegaT će koristiti kodni raspored koji ti postaviš za određeni sufiks. Na primjer, <code>.txt</code> datoteke će se učitavati pomoću default kodnog rasporeda na tvom OS-u. Možeš promijeniti izvorni kodni raspored za svaki od oblika naziva izvornih datoteka.</p>
 
-<p>HTML i plaintext mogu biti napisane u bilo kojem enkodingu. Na primjer, ako prevodiš sa francuskog na japanski, imaš izbor da filter podesiš tako da koristi jedan od japanskih enkodinga za target jezik, ili da koristiš enkodinge Unicode UTF-8, UTF-16, ili UTF-32. Za tekstualne datoteke, pod "default" se enkoding datoteke spasava u istom enkodingu koji je bio korišćen pri učitavanju tekstualne datoteke, dok se za HTML koristi UTF-8. Imaj u vidu da HTML filter u target datoteku dodaje enkoding deklaraciju, te će je pretraživač dobro vidjeti i neće uopšte prikazivati čudna slova.</p>
+<p>HTML i plaintext mogu biti napisane u bilo kojem kodnom rasporedu. Na primjer, ako prevodiš sa francuskog na japanski, imaš izbor da filter podesiš tako da koristi jedan od japanskih kodnih rasporeda za target jezik, ili da koristiš kodiranje pod Unicode UTF-8, UTF-16, ili UTF-32. Za tekstualne datoteke, pod "default" se kodni raspored datoteke spasava u onome koji je bio korišćen pri učitavanju tekstualne datoteke, dok se za HTML koristi UTF-8. Imaj u vidu da HTML filter dodaje deklaraciju kodnog rasporeda u target datoteku, te će je pretraživač dobro vidjeti i neće uopšte prikazivati čudna slova.</p>
 
 <a name="Renaming_Translated_Files"></a>
 <h3>Preimenovanje prevedenih datoteka</h3>
 
-<p>Ponekad ćeš morati da automatskim putem preimenuješ datoteke. Na primjer, kad dodaješ jezički kod posle imena datoteke. To takođe možeš učiniti i kroz jedan dijalog filtara datoteka tako što koristiš oblik naziva datoteke za prevedenu datoteku.</p>
+<p>Ponekad ćeš morati da automatskim putem preimenuješ datoteke. Na primjer, kad dodaješ jezički kod posle imena datoteke. To takođe možeš učiniti i kroz dijalog filtara datoteka, tako što ćeš za prevedenu datoteku koristiti oblik naziva datoteke.</p>
 
 <a name="File_Filters_Setup"></a>
 <h2>Setup filtera datoteka</h2>
 
-<p>Većini korisnika će odgovarati nivo opcija koje pruža "default" filter datoteka. Ako ti nisi jedan od njih, sa glavnog menija otvori glavni dijalog preko <strong>Opcije -&gt; Filtri datoteka...</strong> Imaj u vidu da opcije filtera smiješ mijenjati samo kada projekat nije otvoren, jer one utiču na način sačinjavanja datoteka.</p>
+<p>Većini korisnika će odgovarati nivo opcija koje pruža "default" filter datoteka. Ako nisi jedan/na od njih, sa glavnog menija otvori glavni dijalog preko <strong>Opcije -&gt; Filtri datoteka...</strong> Imaj u vidu da opcije filtera smiješ mijenjati samo kada projekat nije otvoren, jer oni utiču na način sačinjavanja datoteka.</p>
 
 <a name="File_Filters_Dialog"></a>
 <h3>Dijalog filtera datoteka</h3>
 
 <p>Dijalog prikazuje različite raspoložive filtere.</p>
 
-<p>Ako ne želiš da program OmegaT koristiš za prevođenje datoteka određenog tipa, možeš dezaktivirati filter tako što ćeš ukloniti «klik» znak pored tipa datoteke. OmegaT će prilikom učitavanja projekata, tada izostavljati dotične datoteke i iskopiraće ih u momentu sačinjavanja target dokumenata u neizmjenjenom obliku. Nekom kasnijom prilikom, kad odlučiš da ponovno počneš koristiti filter, potrebno je samo da umetneš «klik» znak u kućicu.</p>
+<p>Ako za prevođenje datoteka određenog tipa ne želiš koristiti program OmegaT, možeš dezaktivirati filter tako što ćeš ukloniti «klik» znak pored tipa datoteke. OmegaT će prilikom učitavanja projekata, izostavljati dotične datoteke i u momentu sačinjavanja target dokumenata iskopiraće ih u neizmjenjenom obliku. Nekom kasnijom prilikom, kad odlučiš ponovno koristiti filter, potrebno je samo da umetneš «klik» znak u kućicu.</p>
 
-<p>Ako se desi da pokvariš cjelokupnu konfiguraciju, klikni na <strong>Podrazumijevane vrijednosti</strong> kako bi se konfiguracija filtara datoteka vratila u radno stanje default.</p>
+<p>Ako se desi da pokvariš cjelokupnu konfiguraciju, klikni na <strong>Podrazumijevane vrijednosti</strong>. Tako se konfiguracija filtara datoteka vraća u radno stanje default.</p>
 
-<p>Radi odabiranja u kom će enkodingu filter djelovati tokom obrade datoteke, izaberi filter sa liste i klikni na <strong>Uredi</strong>.</p>
+<p>Radi odabiranja u kom će kodnom rasporedu djelovati filter tokom obrade datoteke, izaberi filter sa liste i klikni na <strong>Uredi</strong>.</p>
 
 <a name="Edit_Filter_Dialog"></a>
 <h3>Dijalog filtera uredi</h3>
 
-<p>Dijalog ti omogućava podešavanje oblike naziva izvornih datoteka za datoteke koje će filter preraditi, podešavanje naziva datoteka za prevedene datoteke, a možeš i  birati koje će enkodinge koristiti za učitavanje datoteke i spasavanje njenog prevoda.</p>
+<p>Dijalog ti omogućava podešavanje oblika naziva izvornih datoteka za datoteke koje će filter preraditi, podešavanje naziva datoteka za prevedene datoteke, a možeš i birati koje će kodne rasporede koristiti za učitavanje datoteke i spasavanje njenog prevoda.</p>
 
-<p>Oblik naziva izvorne datoteke koristi pravila DOS filemask. Znak <code>*</code> može zamijeniti bilo koji zbir bilo kakvih znakova, <code>?</code> supstituše bilo koji pojedinačni znak, dok svi drugi znakovi predstavljaju sami sebe. Na primjer, ako želiš da text filter obrađuje datoteke tipa «readme» (<code>readme</code>, <code>read.me</code>, i <code>readme.txt</code>) trebalo bi da koristiš oblik <code>read*</code>.</p>
+<p>Oblik naziva izvorne datoteke koristi pravila DOS filemask. Znak <code>*</code> može zamijeniti bilo koji zbir bilo kakvih znakova, <code>?</code> supstituiše bilo koji pojedinačni znak, dok svi drugi znakovi predstavljaju sami sebe. Na primjer, ako želiš da text filter obrađuje datoteke tipa «readme» (<code>readme</code>, <code>read.me</code>, i <code>readme.txt</code>) trebalo bi da koristiš oblik <code>read*</code>.</p>
 
-<p>Polja za izvorni (source) i target enkoding, koriste kućice combo sa uključenim svim enkodinzima za koje postoji podrška. Imaj u vidu da svi filteri ne omogućuju biranje određenog enkodinga, pošto filtri rade na formatu datoteke koja može postojati u jednom jedinom enkodingu. Podešavanjem enkoding na "&lt;auto&gt;" za formate koji dozvoljavaju odabir enkodinga, podrazumijeva se da povjeravaš programu OmegaT da sam odluči. Evo kako to program obavlja:</p>
+<p>Polja za izvorni (source) i target encoding, koriste kućice combo sa uključenim svim kodnim rasporedima za koje postoji podrška. Imaj u vidu da svi filteri ne omogućuju biranje određenog kodnog rasporeda, pošto filtri rade na formatu datoteke koja može postojati samo u jednom kodnom rasporedu. Za formate koji dozvoljavaju odabir kodnog rasporeda, podešavanjem istoga na "&lt;auto&gt;", podrazumijeva se da odluku povjeravaš programu OmegaT. Evo kako to program obavlja:</p>
 
 <ul>
-   <li>Za datoteke tipa HTML/XHTML, OmegaT će pokušati pogoditi o kom enkodingu izvorne datoteke se radi.</li>
-   <li>Kod text datoteka OmegaT će koristiti default enkoding operativnog sistema.</li>
+   <li>Za datoteke tipa HTML/XHTML, OmegaT će pokušati pogoditi o kom kodnom rasporedu izvorne datoteke se radi.</li>
+   <li>Kod text datoteka OmegaT će koristiti default kodni raspored operativnog sistema.</li>
 </ul>
 
-<p>Oblik naziv datoteke za target prevedenu datoteku koristi posebnu sintaksu. Tako da, ako želiš urediti ovo polje, bi bilo poželjnije da klikneš na <strong>Uredi...</strong> radi ulaska u Dijalog uredi oblik.</p>
+<p>Oblik naziv datoteke za target prevedenu datoteku koristi posebnu sintaksu. Tako da, ako želiš urediti ovo polje, bilo bi poželjnije da radi ulaska u Dijalog uredi oblik, klikneš na <strong>Uredi...</strong>.</p>
 
 <p>Ako hoćeš da filter obrađuje datoteke koje se podudaraju s još jednim od oblika naziva izvorne datoteke, radi ulaska u Dijalog dodaj oblik, klikni na <strong>Dodaj...</strong>. </p>
 
@@ -100,10 +100,10 @@
 
 <p>Isti dijalog pojavljuje se bilo da želiš dodati oblik ili urediti neki određeni oblik. Jedina novina u njemu je njegov posebni editor oblika naziva datoteke za prevedenu datoteku, dok su sva druga polja već opisana kao gore.</p>
 
-<p>Ovaj odjeljak za oblik naziva datoteke za prevedenu datoteku omogućuje ti da komponuješ nazive datoteka prevedenih datoteka iz različitih dijelova.</p>
+<p>Ovaj odjeljak za oblik naziva datoteke za prevedenu datoteku omogućuje ti da  iz različitih dijelova sastavljaš nazive datoteka prevedenih datoteka.</p>
 
 <ul>
-   <li>Pod default stoji <code>${naziv datoteke}</code> -- puni naziv datoteke izvorne datoteke sa sufiksom, tako da je ime prevedene isto kao ime izvorne datoteke.</li>
+   <li>Pod default stoji <code>${naziv datoteke}</code> -- puni naziv datoteke izvorne datoteke sa sufiksom, tako da je ime prevedene, isto kao ime izvorne datoteke.</li>
    <li><code>${samoNaziv}</code> omogućuje ti da umetneš ime izvorne datoteke bez sufiksa.</li>
    <li><code>${sufiks}</code> -- sufiks izvorne datoteke.</li>
    <li><code>${targetLokal}</code> - target lokalni kod (u obliku "xx_YY").</li>

@@ -1,0 +1,121 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title> Filtri za datoteke -  Priročnik za uporabnika OmegaT 1.6.2</title>
+</head>
+<body>
+
+<h1>Filtri za datoteke</h1>
+
+<h2>Vsebina</h2></div>
+
+<ul type="none">
+   <li>1. <a href="#Introduction">Uvod</a>
+
+      <ul type="none">
+         <li>1.1. <a href="#File_types">Vrste datotek</a></li>
+         <li>1.2. <a href="#File_encodings">Kodiranje datotek</a></li>
+         <li>1.3. <a href="#Renaming_Translated_Files">Kako preimenovati prevedene datoteke</a></li>
+      </ul>
+   </li>
+
+   <li>2. <a href="#File_Filters_Setup">Kako nastaviti filter  za datoteke</a>
+
+      <ul type="none">
+         <li><a href="#File_Filters_Dialog">Dvogovor za datotečne filtre</a></li>
+         <li><a href="#Edit_Filter_Dialog">Dvogovor za urejanje filtrov</a></li>
+         <li><a href="#Add.2FEdit_Pattern_Dialog">Dvogovor za dodajanje/urejanje vzorca</a></li>
+      </ul>
+   </li>
+</ul>
+
+<a name="Introduction"></a>
+<h2>Uvod</h2>
+
+<p>OmegaT vsebuje filtre, ki jih lahko v veliki meri spreminjate v skladu z  vašimi potrebami in s tem  prilagajate večino pogojev za vaše delo</p>
+
+<p> Datotečni filtri so segmenti programske kode, ki so sposobni:</p>
+
+<ul>
+   <li>Prebrati dokument, ki je shranjen v določenem datotečnem formatu Na primer, datoteke z navadnim besedilom.</li>
+   <li>izvleči iz datoteke sestavne dele, ki jih je treba prevajati.</li>
+   <li>avtomatizirati spremembe v imenih prevedenih dokumentov, to je prevedeljivo vsebino zamenjavati z njenim prevodom.</li>
+</ul>
+
+<a name="File_types"></a>
+<h3>Vrste datotek</h3>
+
+<p>Ko OmegaT v izvornem imeniku naleti na novo datoteko, skuša na osnovi njene pripone izbrati najprimernejši  filter. Natančneje rečeno, OmegaT preveri za vsak filter, kako se njegovi vzorci za imena datotek ujemajo z novo datoteko. Na primer, vzorec <code>*.xhtml</code> bo odgovarjal vsem datotekam s pripono  <code>.xhtml</code>. V kolikor se  za datoteko  najde ustrezen filter , se ga uporabi za nadaljnje delo z datoteko. Na primer,  za datoteke s pripono <code>.xhtml</code> se bo privzelko filter XHTML. Vzorce za datoteke, ki jih filter obdeluje,  lahko spreminjate, prav tako lahko filtru dodajate tudi nove vzorce. .</p>
+
+<a name="File_encodings"></a>
+<h3>Kodiranja datotek</h3>
+
+<p>Enostavna besedila in datoteke  HTML je mogoče shranjevati kodirane na številne načine. Datoteke HTML lahko vsebujejo meta ukaz za kodiranje, ki ga bo OmegaT pri branju datoteke upošteval, pri datotekah za enostavna besedila pa takega dogovora ni. Tako za enostavna besedila kot za datoteke HTML brez deklaracije kodiranja bo OmegaT uporabil kodiranje, ki ste ga navedli za  konkretno pripono. Na primer, za datoteke s pripono <code>.txt</code> se  bo uporabilo kodiranje, ki ga je privzel operacijski sistem. Izvorno kodiranje lahko nastavite posebej za vsak vzorec za izvorne datoteke.</p>
+
+<p>Datoteke HTML in enostavna besedila lahko ravno tako izpišete s poljubnim kodiranjem. Če na primer prevajate iz slovenščine v japonščino, lahko nastavite izhodno kodiranje na eno od japonskih kod, ali pa uporabite kodiranje  UTF-8, UTF-16, ali UTF-32. Če ne zahtevate drugače, se bo datoteke z besedilom shranjevalo v isti kodi, kot jo ima vhodna datoteka, pri datotekah HTML pa se bo uporabljalo UTF-8. Pomnite, da bo HTML filter ciljni datoteki dodal deklaracijo za kodiranje, tako da bo lahko brskalnik datoteko prikazal na pravilen način, to je brez kakšnih čudnih znakov.</p>
+
+<a name="Renaming_Translated_Files"></a>
+<h3>Kako preimenovati prevedene datoteke</h3>
+
+<p>Včasih bi hoteli datoteke, ki jih prevajate,  avtomatično preimenovati, imenu bi na primer želeli dodati kodo za ciljni jezik. V ta namen uporabite vzorec za ciljne datoteke v dvogovoru za datotečne filtre</p>
+
+<a name="File_Filters_Setup"></a>
+<h2>Kako nastaviti filter za datoteke</h2>
+
+<p>Za večino uporabnikov bodo privzete nastavitve za datotečne filtre zadoščale.. Če jih želite spremeniti, izberite v glavnem meniju <strong>Možnosti -&gt; Filtri za datoteke...</strong>. Pomnite, da lahko nastavitve za filtre spreminjate samo, če ni odprtega projekta, saj s temi spremembami vplivate na to, kako se prevedene datoteke tvori.</p>
+
+<a name="File_Filters_Dialog"></a>
+<h3>Dvogovor za datotečne filtre</h3>
+
+<p>Dvogovr navaja seznam datotečnih filtrov, ki so na razpolago.</p>
+
+<p>Če kako vrsto datoteke ne želite, da jo OmegaT prevaja, kliknite na potrditveno polje pred njenim imenom, da odklopite filter zanjo OmegaT bo ustrezne datoteke pri nalaganju projekta prezrl in jih, ko bo tvoril ciljne dokumente, prepisal take kot so. Če se kasneje odločite, da boste filter znova uporabljali, samo odkljukajte potrditveno polje zanj. </p>
+
+<p>Če se vam pripeti, da ste konfiguracijo dodobra zmešali, tako da ne veste ne kod ne kam, lahko kliknete na <strong>Privzeto</strong> in filtri bodo spet v privzetem stanju.</p>
+
+<p>Če želite spremeniti način, katere datoteke in s katero kodo bo kak filter obdeloval, ga izberite v seznamu in kliknite na  <strong>Uredi</strong>.</p>
+
+<a name="Edit_Filter_Dialog"></a>
+<h3>Dvogovor za urejanje filtrov</h3>
+
+<p>V tem dvogovoru lahko urejate vzorce za imena datotek, ki jih filter obdeluje, prirejate lahko imena prevedenih datotek in navedete kodiranja, ki veljajo pri branju originalnih datotek in pri shranjevanju njihovih prevodov.</p>
+
+<p>Za vnos vzorcev se uporablja pravila DOS za maske datotek. Znak <code>*</code> nadomešča poljubno število poljubnih znakov, <code>?</code> nadomešča en sam poljubni znak, vsi ostali znaki pa pomenijo same sebe. Na primer, če hočete, da filter velja za berime  datoteke (<code>berime</code>, <code>BeriMe</code>, and <code>berime.txt</code>), boste uporabiti  <code>?eri?e.*</code>.</p>
+
+<p>Polja za kodiranje izvornih in ciljnih datotek uporabljajo  kombinirana polja s seznamom vseh kodiranj, ki se jih podpira. Upoštevajte pri tem, da pri filtrih za datoteke, pri katerih je kodiranje predpisano oziroma enolično določeno,  kodiranja ni mogoče izbirati. Če zaupate OmegaT, da bo znal izbrati prvo kodiranje, lahko za filtre, pri katerih je kodiranje mogoče nastavljati, uporabite "&lt;avto&gt;". Postopek je kot sledi:</p>
+
+<ul>
+   <li>OmegaT bo lahko do skušal uganiti kodiranje izvornih datotek za HTML/XHTML.</li>
+   <li>Za datoteke z besedilom bo OmegaT uporabljal privzeto kodiranje operacijskega sistema.</li>
+</ul>
+
+<p>Vzorec za ciljno ime datoteke uporablja posebno sitaksto, tako da je bolje,da kliknete <strong>Uredi..</strong>  za dvogovor za urejanje vzorca, če ga želite spreminjati.</p>
+
+<p>Če hočete, da se filter ukvarja z datotekami, ki odgovarjajo več kot enem samem vzorcu za imena, kliknite na  <strong>Dodaj...</strong>, ki odpre dvogovor za dodajanje vzorcev.</p>
+
+<p>Nazaj na privzeto konfiguracijo filtre se lahko vrnete vedno, v ta namen kliknite na <strong>Privzeto</strong>.</p>
+
+<a name="Add.2FEdit_Pattern_Dialog"></a>
+<h3>Dvogovor za dodajanje/urejanje vzorca</h3>
+
+<p>Isti dvogovor vam je tudi na razpolago  tako za dodajanje kot za urejanje danega vzorca. Kar je novega pri tem, je poseben urejevalnik vzorcev za ciljne datoteke, vsa ostala polja so opisana že zgoraj.</p>
+
+<p>S pomočjo odseka za vzorce za ciljne datoteke lahko ime datoteke s prevedenim besedilom sestavite iz več različnih delov.</p>
+
+<ul>
+   <li>Privzeta vrednost je <code>${filename}</code> -- polno ime izvorne datoteke s pripono, z drugo besedo, ciljno ime je enako izvornemu imenu.</li>
+   <li><code>${nameOnly}</code> vam omogoča, da vstavite samo ime datoteke, brez pripone.</li>
+   <li><code>${extension}</code> --pripona izvorne datoteke.</li>
+   <li><code>${targetLocale}</code> - lokalna koda za cilj (v obliki  "xx_YY").</li>
+   <li><code>${targetLanguage}</code> - ciljni jezik in ciljna država skupaj (v obliki "XX-YY").</li>
+   <li><code>${targetLanguageCode}</code> - samo ciljni jezik ("XX").</li>
+   <li><code>${targetCoutryCode}</code> - samo ciljna država ("YY").</li>
+</ul>
+
+<p>Dodamo lahko brez težav še druge možnosti, oglasite se, da vemo, katero spremenljivko pogrešate. Oglasite se enostavno v naši <a href="http://groups.yahoo.com/group/OmegaT/">skupini uporabnikov</a>.</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Pravni poduk">Pravni poduk</a></p>
+
+</body>
+</html>

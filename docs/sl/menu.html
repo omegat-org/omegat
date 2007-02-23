@@ -1,0 +1,179 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Glavni meni  - Priročnik za uporabnika OmegaT 1.6.2 </title>
+</head>
+<body>
+
+<h1>Glavni meni</h1>
+
+<p>Vse funkcije OmegaT se da izvesti preko glavnega menija vrh okna z urejevalnikom. Večino funkcij je mogoče izvesti tudi s pomočjo <a href="keyboardShortcuts.html">bližnjic</a>.</p>
+
+<p>Bližnjice z <strong><code>Ctrl</code></strong> uporabljajo  Windows, UNIX in izvedenke  UNIXa, s tipkovnicami, na katerih se nahaja tipka   <strong><code>Ctrl</code></strong> or <strong><code>Control</code></strong> . Uporabniki  Mac OS X naj namesto tega uporabljajo tipko Apple<img src="images/AppleKey.gif" alt="Tipka Apple" width="19" height="19">.</p>
+
+<h2>Vsebina</h2>
+<ul type="none">
+   <li>1. <a href="#Project_Menu">Meni Projekt</a></li>
+   <li>2. <a href="#Edit_Menu">Meni Uredi</a></li>
+   <li>3. <a href="#Go_to_Menu">Meni Pojdi</a></li>
+   <li>4. <a href="#Tools_Menu">Meni Orodja</a></li>
+   <li>5. <a href="#Options_Menu">Meni Možnosti</a></li>
+   <li>6. <a href="#Help_Menu">Meni Pomoč</a></li>
+</ul>
+
+<a name="Project_Menu"></a>
+<h4>Meni Projekt</h4>
+
+<p>
+<dl>
+   <dt>&amp;Nov ...</dt>
+   <dd>Ustvari in odpre nov projekt Uporablja se isti dvogovor kot za  <a href="projectProperties.html">uredi projekt</a>.</dd>
+
+   <dt>Odpri <code>&lt;Ctrl+O&gt;</code></dt>
+   <dd>Odpre obstoječ projekt.</dd>
+
+   <dt>Uvozi izvorne datoteke...</dt>
+   <dd>Kopira izbrane datoteke v imenik <code>/source</code> in projekt ponovno naloži, tako da vsebuje tudi dodane datoteke</dd>
+
+   <dt>Ponovno naloži</dt>
+   <dd>Ponovno naloži projekt, tako da upošteva tudi spremembe v izvornih datotekah, .podedovanih prevodnih  spominih ali slovarjih. </dd>
+
+   <dt>Zapri</dt>
+   <dd>Shrani prevod in projekt zapre.</dd>
+
+   <dt>Shrani <code>&lt;Ctrl+S&gt;</code></dt>
+   <dd>Shrani prevod v prevodni spomin projekta. OmegaT sam od sebe prevod vsakih 10 minut  shranjuje, poleg tega tudi ko projekt odprete ali ko OmegaT zapustite.</dd>
+
+   <dt>Ustvari prevedene dokumente</dt>
+   <dd>Ustvari na osnovi vašega prevoda besedila dokumente v ciljnem jeziku.  Dokumenti se nahajajo v imeniku  <code>/target</code>.</dd>
+
+   <dt> Lastnosti <code>&lt;Ctrl+E&gt;</code></dt>
+   <dd>Odpre dvogovor <a href="projectProperties.html">Lastnosti projekta</a>, v katerem lahko prilagodite  imenike in jezike projekta.</dd>
+
+   <dt>Projektne datoteke... <code>&lt;Ctrl+L&gt;</code></dt>
+   <dd>Odpre oziroma zapre <a href="userInterface.html#Project_Files">okno s projektnimi datotekami</a> (odpre, če je zaprto, zapre pa, če je okno odprto).</dd>
+
+   <dt>Prekini <code>&lt;Ctrl+Q&gt;</code></dt>
+   <dd>Shrani prevod in prekine OmegaT. V kolikor projekta niste ročno shranili, vas program vpraša, če želite projekt res prekiniti.</dd>
+</dl>
+</p>
+
+<a name="Edit_Menu"></a>
+<h4>Meni Uredi</h4>
+
+<p>Funkcij, ki so splošno znane (kopiraj/izreži/prilepi) , se ne kaže izrecno, so pa na razpolago kot bližnjice.  Na primer v  Windows:</p>
+
+<p>
+<dl>
+   <dt>Kopiraj <code>&lt;Ctrl+C&gt;</code></dt>
+   <dd>kopira izbrano besedilo v odlagališče.</dd>
+
+   <dt>Izreži <code>&lt;Ctrl+X&gt;</code></dt>
+   <dd>Izbrano besedilo kopira v odlagališče in ga zbriše.</dd>
+
+   <dt>Prilepi <code>&lt;Ctrl+V&gt;</code></dt>
+   <dd>Besedilo prilepi iz odlagališča na mesto, kjer se nahaja kazalka.</dd>
+</dl>
+</p>
+
+<p>Meni sam vsebuje naslednje postavke:</p>
+
+<p>
+<dl>
+   <dt>Razveljavi zadnje dejanje <code>&lt;Ctrl+Z&gt;</code></dt>
+   <dd>Vrne trenutni segment v stanje pred zadnjim korakom pri urejanju.  V kolikor je spremenjeni segment bil potrjen, ta operacija ni več mogoča. </dd>
+
+   <dt>Ponovi zadnje dejanje <code>&lt;Ctrl+Y&gt;</code></dt>
+   <dd>Vrne se nazaj na stanje pred zadnjo razveljavitvijo. . V kolikor je spremenjeni segment bil potrjen, ta operacija ni več mogoča. </dd>
+
+   <dt>Prepiši prevod <code>&lt;Ctrl+R&gt;</code></dt>
+   <dd>Zamenja cilj trenutnega segmenta z izbranim zadetkom (zadetek na prvem mestu je izbran sam po sebi)</dd>
+
+   <dt>Vstavi zadetek  <code>&lt;Ctrl+I&gt;</code></dt>
+   <dd>Vstavi trenutno izbrani zadetek na mesto, kjer se trenutno nahaja kazalka. Ta funkcija nikoli ne bo spremenila izvornega segmenta, tudi če se kazalka nahaja v njem.</dd>
+
+   <dt>Prepiši z izvorom <code>&lt;Ctrl+R&gt;</code></dt>
+   <dd>Prepiše  cilj trenutnega segmenta z izvornim besedilom.</dd>
+
+   <dt>Vstavi izvor <code>&lt;Ctrl+Shift+I&gt;</code></dt>
+   <dd>Vstavi izvor na mesto, kjer se trenutno nahaja kazalka.</dd>
+
+   <dt>Preišči projekt<code>&lt;Ctrl+F&gt;</code></dt>
+   <dd>Odpre novo <a href="userInterface.html#Search_Window">Okno za iskanje</a>.</dd>
+
+   <dt>Izberi zadetek  #N <code>&lt;Ctrl+N&gt;</code> (N od 1 do 5)</dt>
+   <dd>Izbere Nti  zadetek  v oknu z zadetki  (zadetek na prvem mestu je izbran sam po sebi) Pomen barv je podrobno opisan v poglavju <a href="userInterface.html#Fuzzy_Matches">Mehki zadetki</a>.</dd>
+</dl>
+</p>
+
+<a name="Go_to_Menu"></a>
+<h4>Meni Pojdi</h4>
+
+<p>
+<dl>
+   <dt>Naslednji nepreveden segment <code>&lt;Ctrl+U&gt;</code></dt>
+   <dd>Premakne urejevalno polje na naslednji segment, ki še ni registriran v prevodnem spominu projekta.</dd>
+
+   <dt>Naslednji segment <code>&lt;Ctrl+N&gt;</code>, <code>&lt;Enter&gt;</code> / <code>&lt;Tab&gt;</code>
+   </dt>
+   <dd>Premakne urejevalno polje na naslednji segment  Če je trenutni segment zadnji segment v vhodni datoteki, se pri tem odpre prvi segment naslednje datoteke. </dd>
+
+   <dt>Prejšnji segment  <code>&lt;Ctrl+P&gt;</code>, <code>&lt;Ctrl+Enter&gt;</code> / <code>&lt;Ctrl+Tab&gt;</code>
+   </dt>
+   <dd>Premakne urejevalno polje na predhodni segment Če je trenutni segment prvi segment v datoteki, bo program odprl zadnji segment v predhodni datoteki.</dd>
+</dl>
+</p>
+
+<a name="Tools_Menu"></a>
+<h4>Meni Orodja</h4>
+
+<p>
+<dl>
+   <dt>Preveri oznake <code>&lt;Ctrl+T&gt;</code></dt>
+   <dd>Preveri formatirane datoteke na manjkajoče oziroma napačno postavljene oznake.. Prikazal se bo seznam segmentov, ki vsebujejo napake. V poglavju <a href="userInterface.html#Tag_Validation">Okno za preverjanje oznak</a> navaja, kaj je v seznamu videti, poglavje  <a href="formattedText.html">Kako delati s formatiranim  besedilom</a> pa, zakaj.</dd>
+</dl>
+</p>
+
+<a name="Options_Menu"></a>
+<h4>Meni Možnosti</h4>
+
+<p>
+<dl>
+   <dt>Uporabi Tab za pomikanje</dt>
+   <dd>Določi  to <code>&lt;Tab&gt;</code> . kot tipko za potrditev segmenta namesto <code>&lt;Enter&gt;</code>. Ta možnost je koristna za nekatere kitajske, japonske in korejske sisteme za vnos znakov. </dd>
+
+   <dt>Pisava…</dt>
+   <dd>Shows <a href="fontSettings.html">Font Settings</a> dialog to modify the text display font. Za uporabnike starejših računalnikov je pametneje, če pisavo spremenijo, preden projekt odprejo.   Kazen v času je najbolj boleče čutiti pri kombinaciji G4 + Mac OS X + japonščina.</dd>
+
+   <dt>Filtri za datoteke…</dt>
+   <dd>Odpre dvogovor <a href="fileFilters.html">Lastnosti projekta</a>, v katerem lahko prilagodite  imenike in jezike projekta.</dd>
+
+   <dt>Segmentiranje...</dt>
+   <dd>Odpre dvogovor <a href="./segmentation.html">Segmentacija izvora</a>, v katerem lahko prilagodite  segmentacijo izvornega besedila.</dd>
+
+   <dt>Vedenje ob  urejanju…</dt>
+   <dd>Odpre dvogovor <a href="translationEditing.html">Urejanje prevod</a>, v katerem lahko odločite, kako inicializirati polje za prevod pri segmentih, ki še niso prevedeni.</dd>
+
+   <dt>žObnovi glavno okno</dt>
+   <dd>Obnovi dele (urejevalnik, okni za prikaz zadetkov in izrazov)  glavnega okna OmegaT v njihovem privzetem stanju. Uporabite to funkcijo, če ste odklopili, premaknili, skrili eno ali več komponent, pa vam zamotane situacije ne uspe popraviti. </dd>
+</dl>
+</p>
+
+<a name="Help_Menu"></a>
+<h4> Meni Pomoč</h4>
+
+<p>
+<dl>
+   <dt>Priročnik za uporabnika... <code>&lt;F1&gt;</code></dt>
+   <dd>Odpre posebno okno za <a href="userInterface.html#Help_Browser">brskalnik za pomoč</a> , ki kaže tale priročnik. </dd>
+
+   <dt>Vizitka ...</dt>
+   <dd>Prikaže avtorske pravice,  zahvale in licenčno informacijo</dd>
+</dl>
+</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Pravni poduk">Pravni poduk</a></p>
+
+</body>
+</html>

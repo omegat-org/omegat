@@ -1,0 +1,201 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Segmetiranje izvora - OmegaT 1.6.2 User Manual</title>
+</head>
+<body>
+
+<h1>Segmetiranje izvora</h1>
+
+<h2>Vsebina</h2></div>
+
+<ul type="none">
+   <li>1. <a href="#Segmentation_Basics">Osnove segmentacije</a></li>
+
+   <li>2. <a href="#Sentence_Segmentation">Segmentacija stavkov</a>
+
+      <ul>
+         <li>2.1. <a href="#About_Rules">O pravilih</a></li>
+
+         <li>2.2. <a href="#Rules_Setup">Zasnova pravil</a>
+
+            <ul>
+               <li>2.2.1. <a href="#Sets_of_Rules">Nizi pravil</a></li>
+               <li>2.2.2. <a href="#Simple_examples">Enostavni primeri</a></li>
+            </ul>
+         </li>
+
+         <li>2.3. <a href="#Regular_Expressions_to_use_in_segmentation_rules"> Regularni izrazi, ki se jih uporablja v pravilih za segmentiranje</a>
+
+            <ul>
+               <li>2.3.1. <a href="#Short_summary_of_regular-expression_constructs">Kratek povzetek sestavkov iz regularnih izrazov</a></li>
+            </ul>
+         </li>
+      </ul>
+   </li>
+</ul>
+
+<a name="Segmentation_Basics"></a>
+<h2>Osnove segmentacije</h2>
+
+<p>Orodja za prevodni spomin obdelujejo tekstualne enote, ki jih imenujemo segmenti.  Besedila je na segmente mogoče razstaviti na mnogotere načine. </p>
+
+<p>OmegaT besedilo najprej razgradi s pomočjo segmentacije na nivoju strukture. Med tem procesom se za tvorbo segmentov uporablja samo struktura izvorne datoteke. Na primer, datoteke z enostavnim besedilom se da segmentirati na osnovi novih ali praznih vrstic,  ali pa je segmentiranje na osnovi strukture nemogoče.. Datoteke, ki so formatirane (OpenOffice.org, OpenDocument, XHTML  in dokumenti HTML),se segmentira s pomočjo znak na nivoju bloka (odstavkov).  </p>
+
+<p>Ravno tako se za ločitev v segmente ekstrahira prevedljive prilastke objektov (v datotekah XHTML ali HTML).</p>
+
+<p>OmegaT lahko tudi segmentira na osnovi stavkov. Segmentiranje v stavke sledi segmentiranju po odstavkih. Segmentov, ki nastanejo z enim od teh dveh procesov med prevajanjem ni mogoče spreminjati (zdfruževati ali ločevati). Gre za omejitev  OmegaT, ki se je zavedamo.</p>
+
+<p>V kolikor s segmentacijo niste zadovoljni, boste morali ali spremeniti - izven OmegaT - izvorno besedilo, ali pa prilagoditi pravila za stavčno segmentacijo. Ko je to enkrat opravljeno, morate projekt ponovno naložiti, tako da spremembe pridejo do veljave.</p>
+
+<a name="Sentence_Segmentation"></a>
+<h2>Segmentacija stavkov</h2>
+
+<p>Potem ko je segmentiral izvorne datoteke v logične enote, v primeru formatiranih datotek v odstavke, bo OmegaT te bloke dodatno razbil na stavčne segmente - v kolikor segmentacije po stavkih niste odklopili -. V splošnem bo OmegaT sposoben logične enote v datotekah segmentirati v poljubne elemente, ki jih lahko določite sami. Pri segmentih OmegaT pa gre <strong>samo po sebi</strong> za stavke, tako da bomo te vrste segmentacije imenovali <strong>stavčno segmentacijo</strong>.</p>
+
+<p>Stavčno segmentacijo smo zgradili z vidika <a href="http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a> , četudi v tem trenutku OmegaT ne podpira vseh potez SRX in tudi ni sposobna uvažati/izvažati pravil, definiranih v formatu SRX. Vendar pa boste, v kolikor veste, kako SRX deluje, tudi vedeli, kako dela OmegaT, ker gre za več ali manj isto stvar.</p>
+
+<a name="About_Rules"></a>
+<h3>O pravilih</h3>
+
+<p>Obstaja dvoje vrst pravil.</p>
+
+<ul>
+   <li>Prelomna pravila lomijo besedilo v segmente. </li>
+   <li>Pravila za izjeme določajo, kateri kosi besedila morajo ostati skupaj.</li>
+</ul>
+
+<p>Primer za prelomno pravilo: <i>"Ali je v redu? Nimam pojma."</i> lahko segmentiramo kot dva stavka, s tem da ju ločimo za  "<code>?</code>". Za znak "<code>?</code>" bi moralo obstajati prelomno pravilo.</p>
+
+<p>Primer izjeme: <i>"Kdo se boji gč. Woolf?"</i> se za "<code>.</code>" ne sme segmentirati. Za  "<code>gč.</code>" bi v tem kontekstu morala biti izjema. </p>
+
+<p>Obstoječa prelomna pravila bi morala zadostovati za večino evropskih jezikov in za japonščino, bi pa svetovali, da za jezik, iz katerega prevajate, definirati še dodatne izjeme, saj očitno ni mogoče za vse jezike določiti vse možne izjeme.</p>
+
+<a name="Rules_Setup"></a>
+<h3>Zasnova pravil</h3>
+
+<p>Da postavite pravila, izberite v glavnem meniju <strong>Možnosti -&gt; Segmentacija...</strong>. Pomnite, da morate po spremembi segmentacijskih pravil  odprt projekt zapreti in ponovno odpreti, ker sicer nova pravila ne bodo veljala.</p>
+
+<a name="Sets_of_Rules"></a>
+<h4>Nizi pravil</h4>
+
+<p>¨Vsa pravila za segmentacijo z ujemajočim jezikovnim vzorcem se uporablja v zahtevanem zaporedju, tako da se  morajo pravila za določen jezik nahajati  više kot samoprivzeta pravila.</p>
+
+<p>Na primer, pravila za kanadsko francoščino (FR-CA) naj bodo  više kot pravila za francoščino (FR.*), in više kot privzeta (.*) pravila  Tako bo vaš projekt, če prevajate iz kanadske francoščine, uporabljal  pravila, ki so za verigo jezikov definirana, v pravilnem zaporedju.</p>
+
+<p>Da odprete prazen komplet pravil, kliknite na <strong>Dodaj</strong> v zgornji polovici dvogovora. Na dnu tabele se prikaže prazna vrstica. Spremenite ime kompleta pravil in jezikovni vzorec. Sintaksa za jezikovni vzorec se ravna po pravilih za regularne izraze. Poglejte poglavje <a href="#Short_summary_of_regular-expression_constructs"> Kratek povzetek sestavkov iz regularnih izrazov</a> spodaj.</p>
+
+<p>Če se vaš komplet pravil tiče jezikovnega para, vam svetujemo, da ga z gumbom  <strong>Premakni navzgor</strong> prestavite na vrh.</p>
+
+<p>Da komplet pravil uredite, enostavno kliknite na tabelo, in dotični komplet se bo prikazal v spodnjem delu okna.</p>
+
+<p>Potrdilno polje prelom/izjema določa, ali gre za prelomno pravilo (polje označeno) ali pa za izjemo (polje ni označeno) . Regularna izraza pred in po določata, kaj se mora pred in po dani točki v besedilu nahajati, da bo pravilo (prelom ali pa izjema) obveljalo.</p>
+
+<p>Proces segmentiranja si lahko takole poenostavite. Predstavljajte si, da se kazalka premika od prvega do zadnjega znaka (izključujoč prvi in zadnji znak) v besedilu.  Za vsak položaj kazalke vzamemo vsa pravila v danem vrstnem redu in skušamo prilagoditi njihov vzorec <strong>pred</strong>  besedilu  tik na levi strani in vzorec  <strong>po</strong> besedilu tik na desni strani kazalke..</p>
+
+<p>Če je eno od pravil uspešno, pri izjemah ne naredimo drugega kot da s preverjanjem pravil nehamo, pri prelomnih pravilih pa besedilo na levi strani kazalke  prisodimo  trenutnemu segmentu.</p>
+
+<a name="Simple_examples"></a>
+<h4>Enostavni primeri</h4>
+
+<p>
+<dl>
+   <dt><strong>cilj:</strong> segmentirati za piko ('<code>.</code>') in pred presledkom</dt>
+   <dd>Pred: <code>\.</code> Po: <code>\s</code> <br> <strong>Opomba:</strong> "<code>\.</code>" pomeni znak  "<code>.</code>" <br> "<code>\s</code>" pomeni katerikoli beli presledek</dd>
+
+   <dt><strong>cilj:</strong> ne segmentirati za "<code>gp.<c/code>"</dt>
+   <dd>Pred: <code>gp\.</code> Za: <code>\s</code> <br> <strong>Pripomba:</strong> Pazite, da izbirno polje za pravilo  <strong>ne bo označeno</strong>
+   </dd>
+
+   <dt><strong>cilj:</strong> končaj segment nar "。" (japonska pika)</dt>
+   <dd>Pred: 。 Za: (prazno) <br> <strong>Opomba:</strong> Polje lahko pustite prazno</dd>
+</dl>
+</p>
+
+<a name="Regular_Expressions_to_use_in_segmentation_rules"></a>
+<h3> Regularni izrazi, ki se jih uporablja v pravilih za segmentiranje</h3>
+
+<p>Že sama segmentacijska pravila se navaja v obliki regularnih izrazov. Tako je zagotovljeno, da je definicija pravil kolikor mogoče fleksibilna, poleg tega pa je v skladu s SRX. </p>
+
+<a name="Short_summary_of_regular-expression_constructs"></a>
+<h4>Kratek povzetek sestavkov iz regularnih izrazov</h4>
+
+<p>Tu ne gre za edine sestavke, ki jih lahko uporabljate v OmegaT, ampak za najbolj pogosto uporabljene.  OmegaT podpira vse lastnosti regularnih izrazov, ki so opisani v  <a href="http://www.lisa.org/standards/srx/">standardu SRX</a>.</p>
+
+<table border="0" width="80%" cellpadding="1" cellspacing="0" summary="Sestavki iz regularnih izrazov in čemu odgovarjajo">
+    <tr bgcolor="#DDEEFF"><th width="10%" align="left" id="construct">Sestavek&nbsp;</th><th align="left">Ustreza</th></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="flags">Zastavice</th></tr>
+    <tr><td><tt>(?i)</tt></td><td>Omogoči iskanje, ne glede na velike ali male črke (sam po sebi je vzorec na velike in male črke občutljiv).</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr><th align="left" colspan="2" id="characters">Znaki</th></tr>
+    <tr><td><strong>x</strong></td><td>Znak <strong>x</strong>, razen v primeru...</td></tr>
+
+    <tr><td><tt>\u</tt><strong>hhhh</strong></td><td>Znak s heksadecimalno vrednostjo <tt>0x</tt><strong>hhhh</strong></td></tr>
+    <tr><td><tt>\t</tt></td><td>Tabulator (<tt>'\u0009'</tt>)</td></tr>
+    <tr><td><tt>\n</tt></td><td>Znak za novo vrstico - line feed -(<tt>'\u000A'</tt>)</td></tr>
+
+    <tr><td><tt>\r</tt></td><td>Znak za prehod v novo vrstico- carriage return - (<tt>'\u000D'</tt>)</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="quot">Narekovaj</th></tr>
+    <tr><td><tt>\</tt></td><td>Nič, le da citira naslednji znak. Potrebno, kadar želite enega od metaznakov <code>!$()*+.&lt;&gt;?[\]^{|}</code>navesti dobesedno.</td></tr>
+
+    <tr><td><tt>\\</tt></td><td>Na primer, to je poševnica nazaj</td></tr>
+    <tr><td><tt>\Q</tt></td><td>Nič, citira pa vse znake do <tt>\E</tt></td></tr>
+    <tr><td><tt>\E</tt></td><td>Nič, vendar konča s citiranjem, ki se je začelo z <tt>\Q</tt></td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="classes">Znakovni razredi </th></tr>
+
+    <tr><td><tt>[abc]</tt></td><td><tt>a</tt>, <tt>b</tt>, or <tt>c</tt> (enostavni razred)</td></tr>
+    <tr><td><tt>[^abc]</tt></td><td>Katerikoli znak z izjemo <tt>a</tt>, <tt>b</tt>, or <tt>c</tt> (zanikanje)</td></tr>
+
+    <tr><td><tt>[a-zA-Z]</tt></td><td><tt>a</tt> do <tt>z</tt> ali <tt>A</tt> do <tt>Z</tt>, vključno (obseg)</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="predef">Vnaprej definirani znakovni razredi </th></tr>
+
+    <tr><td><tt>.</tt></td><td>Katerikoli znak (z izjemo konca vrstice)</td></tr>
+    <tr><td><tt>\d</tt></td><td>Cifra: <tt>[0-9]</tt></td></tr>
+    <tr><td><tt>\D</tt></td><td>Ne-cifra: <tt>[^0-9]</tt></td></tr>
+    <tr><td><tt>\s</tt></td><td>Znak za beli presledek: <tt>[ \t\n\x0B\f\r]</tt></td></tr>
+
+    <tr><td><tt>\S</tt></td><td>Znaki, ki so beli presledek: <tt>[^\s]</tt></td></tr>
+    <tr><td><tt>\w</tt></td><td>Besedni znak: <tt>[a-zA-Z_0-9]</tt></td></tr>
+    <tr><td><tt>\W</tt></td><td>Nebesedni znak: <tt>[^\w]</tt></td></tr>
+    <tr><th>&nbsp;</th></tr>
+
+    <tr align="left"><th colspan="2" id="bounds">Zadetki za meje</th></tr>
+    <tr><td><tt>^</tt></td><td>Začetek vrstice</td></tr>
+    <tr><td><tt>$</tt></td><td>Konec vrstice</td></tr>
+    <tr><td><tt>\b</tt></td><td>Meja besede</td></tr>
+    <tr><td><tt>\B</tt></td><td>Meja nebesede</td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="greedy">Požrešni kvantifikatorji</th></tr>
+    <tr><td colspan="2">Skušali bodo najti, kolikor veliko le morejo. Na primer, <code>a+</code> bo ustrezalo <code>aaa</code> v <code>aaabbb</code></td></tr>
+    <tr><td><strong>X</strong><tt>?</tt></td><td><strong>X</strong>, nič- ali večkrat</td></tr>
+
+    <tr><td><strong>X</strong><tt>*</tt></td><td><strong>X</strong>, nič- ali večkrat</td></tr>
+    <tr><td><strong>X</strong><tt>+</tt></td><td><strong>X</strong>, najmanj enkrat</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="reluc">Nezahtevni kvantifikatorji (ki niso požrešni) </th></tr>
+
+    <tr><td colspan="2">Našli bodo tako malo, kot se le da.  Na primer, <code>a+?</code> bo našel prvi <code>a</code> v <code>aaabbb</code></td></tr>
+    <tr><td><strong>X</strong><tt>??</tt></td><td><strong>X</strong>, nič- ali večkrat</td></tr>
+    <tr><td><strong>X</strong><tt>*?</tt></td><td><strong>X</strong>, nič- ali večkrat</td></tr>
+
+    <tr><td><strong>X</strong><tt>+?</tt></td><td><strong>X</strong>, najmanj enkrat</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="logical">Logični operatorji</th></tr>
+    <tr><td><strong>XY</strong></td><td><strong>X</strong>, ki mu sledi <strong>Y</strong></td></tr>
+
+    <tr><td><strong>X</strong><tt>|</tt><strong>Y</strong></td><td>Ali <strong>X</strong> ali <strong>Y</strong></td></tr>
+    <tr><td><tt>(</tt><strong>XY</strong><tt>)</tt></td><td><strong>XY</strong> kot ena sama skupina</td></tr>
+
+</table>
+
+<hr>
+<p><a href="legalNotices.html" title="Pravni poduk">Pravni poduk</a></p>
+
+</body>
+</html>

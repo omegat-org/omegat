@@ -212,41 +212,6 @@ as a Source Forge user.
 ==============================================================================
 6.   Release details
 
-5.  Is OmegaT bugging you ? Do you need help ?
-
-Before reporting a bug, make sure that you have thoroughly checked the
-documentation. What you see may instead be a characteristic of OmegaT that
-you have just discovered. If you check the OmegaT log and you see words like
-"Error", "Warning", "Exception", or "died unexpectedly" then you are on to
-something (the log.txt is located in the user preferences directory, see the
-manual for its location).
-
-The next thing you do is confirm what you found with other users, to make sure
-this has not already been reported. You can verify the bug report page at
-SourceForge too. Only when you are sure you are the first to have found some
-reproductible sequence of event that triggered something not supposed to
-happen should you file a bug report.
-
-Every good bug report needs exactly three things.
-  - Steps to reproduce,
-  - What you expected to see, and
-  - What you saw instead.
-
-You can add copies of files, portions of the log, screenshots, anything that
-you think will help the developers with finding and fixing your bug.
-
-To browse the archives of the user group, go to:
-     http://tech.groups.yahoo.com/group/omegat/
-
-To browse the bug report page and file a new bug report if necessary, go to:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
-
-To keep track of what is happening to your bug report you may want to register
-as a Source Forge user.
-
-==============================================================================
-6.   Release details
-
 Please see the file 'changes.txt' for detailed information about changes in
 this and all previous releases.
 

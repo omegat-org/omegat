@@ -4,7 +4,7 @@
 
 1.7.0 vs. 1.6.1_02
 
-  6 Enhancements
+  7 Enhancements
   2 Bugfixes
 
 ----------------------------------------------------------------------
@@ -50,7 +50,7 @@ Contains many bug fixes, new features, and general improvements
 
 1.6.2 vs. 1.4.5.04
    73 Enchancements
-  125 Bugfixes
+  132 Bugfixes
 
 ----------------------------------------------------------------------
 1.6.2
@@ -78,6 +78,31 @@ Contains a new file filter and a number of bug fixes
 
   - 1628890 - Sentence break on comments in OOo documents
   http://sourceforge.net/support/tracker.php?aid=1628890
+
+  - 1606595 - Resource bundle filter incomplete
+  http://sourceforge.net/support/tracker.php?aid=1606595
+
+  - 1609275 - License incompatibility
+  (Inconsistent license information)
+  http://sourceforge.net/support/tracker.php?aid=1609275
+
+  - 1541277 - OO: Segmenting on inline drawings
+  http://sourceforge.net/support/tracker.php?aid=1541277
+
+  - 1628890 - Sentence break on comments in OOo documents
+  http://sourceforge.net/support/tracker.php?aid=1628890
+
+  - 1664523 - FF character in license.txt
+  http://sourceforge.net/support/tracker.php?aid=1664523
+
+  - 1657233 - Can not build on Windows XP
+  http://sourceforge.net/support/tracker.php?aid=1657233
+
+  - 1652221 - Wrong auto encoding for XML documents
+  http://sourceforge.net/support/tracker.php?aid=1652221
+
+  1657547 - Wrong link in legalNotices.html
+  http://sourceforge.net/support/tracker.php?aid=1657547
 
 ----------------------------------------------------------------------
 1.6.1_04

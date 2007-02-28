@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+           (C) 2007 Didier Briel
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -34,6 +35,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  * This class specifies DocBook XML Dialect.
  *
  * @author Maxym Mykhalchuk
+ * @author Didier Briel
  */
 public class DocBookDialect extends DefaultXMLDialect
 {
@@ -86,6 +88,11 @@ public class DocBookDialect extends DefaultXMLDialect
             "listitem",                                                         // NOI18N
         });
         
+        defineOutOfTurnTags(new String[]
+        {
+            "indexterm",                                                        // NOI18N
+        });
+
         definePreformatTag("screen");                                           // NOI18N
         
         defineTranslatableAttribute("url");                                     // NOI18N

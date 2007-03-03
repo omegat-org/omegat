@@ -5,7 +5,7 @@
 1.7.0 vs. 1.6.1_02
 
   7 Enhancements
-  2 Bugfixes
+  5 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.0
@@ -36,7 +36,7 @@ Contains many bug fixes, new features, and general improvements
   - New logging API
 
  Bug fixes:
-
+  
   - Hardcoded bits of text unlocalisable
   http://sourceforge.net/support/tracker.php?aid=1602798
 
@@ -45,7 +45,13 @@ Contains many bug fixes, new features, and general improvements
 
   - Incorrect XHTML file not parsed at all
   http://sourceforge.net/support/tracker.php?aid=1590169
+  
+  - DocBook: indexterm not recognised as sub text
+  http://sourceforge.net/support/tracker.php?aid=1670754
 
+  - DocBook: <member> should create a new segment
+  http://sourceforge.net/support/tracker.php?aid=1672849
+  
 ----------------------------------------------------------------------
 
 1.6.2 vs. 1.4.5.04

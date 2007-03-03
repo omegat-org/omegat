@@ -86,6 +86,7 @@ public class DocBookDialect extends DefaultXMLDialect
             "revremark",                                                        // NOI18N
             "itemizedlist",                                                     // NOI18N
             "listitem",                                                         // NOI18N
+            "member",                                                           // NOI18N
         });
         
         defineOutOfTurnTags(new String[]

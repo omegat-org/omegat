@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+           (C) 2007 Didier Briel
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -30,6 +31,7 @@ import java.util.regex.Pattern;
  * Constant patterns, used in dirrerent other classes.
  *
  * @author Maxym Mykhalchuk
+ * @author Didier Briel
  */
 public class PatternConsts
 {
@@ -107,6 +109,14 @@ public class PatternConsts
      */
     public static final Pattern OMEGAT_TAG_DECOMPILE = Pattern.compile(
             "<(\\/?)([a-zA-Z]+)([0-9]+)(\\/?)>");                               // NOI18N
+    
+    /** 
+     * Pattern that matches OmegaT-specific tags in the HTML form
+     * i.e, with &amp;lt; instead of &lt; and &amp;gt instead of &gt;.
+     * The pattern is also a capturing group.
+    */
+    public static final Pattern OMEGAT_HTML_TAG = Pattern.compile(              // NOI18N
+            "(&lt;\\/?[a-zA-Z]+[0-9]+\\/?&gt;)");  
     
     /** Pattern that detects space-only regular expressions. */
     public static final Pattern SPACY_REGEX = Pattern.compile(

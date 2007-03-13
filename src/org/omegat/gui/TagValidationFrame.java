@@ -3,7 +3,8 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+ Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers
+           (C) 2007  Didier Briel
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -30,6 +31,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.regex.*;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Box;
@@ -44,14 +46,17 @@ import org.omegat.core.StringEntry;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.PatternConsts;
 import org.openide.awt.Mnemonics;
 import org.omegat.gui.main.MainWindow;
+
 
 /**
  * A frame to display the tags with errors during tag validation.
  *
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
+ * @author Didier Briel
  */
 public class TagValidationFrame extends JFrame
 {
@@ -163,7 +168,18 @@ public class TagValidationFrame extends JFrame
         htmld = htmld.replaceAll("\\>", "&gt;");                                // NOI18N
         return htmld;
     }
-    
+                   
+   /** Replace tags with 
+     * &lt;font color="color"&gt;&lt;b&gt;&lt;tag&gt;&lt;/b&gt;&lt;/font&gt; 
+     */
+    private String colorTags(String str, String color)
+    {
+        Matcher tagMatch = PatternConsts.OMEGAT_HTML_TAG.matcher(str);
+        str = tagMatch.replaceAll(
+                "<font color=\"" + color + "\"><b>$1</b></font>");              // NOI18N
+        return str;
+    }
+   
     public void displayStringList(ArrayList stringList)
     {
         this.stringList = stringList;
@@ -209,10 +225,10 @@ public class TagValidationFrame extends JFrame
                 output.append("</a>");                                          // NOI18N
                 output.append("</td>");                                         // NOI18N
                 output.append("<td>");                                          // NOI18N
-                output.append(htmlize(src));
+                output.append(colorTags(htmlize(src), "blue"));                 // NOI18N     
                 output.append("</td>");                                         // NOI18N
                 output.append("<td>");                                          // NOI18N
-                output.append(htmlize(trans));
+                output.append(colorTags(htmlize(trans), "blue"));               // NOI18N
                 output.append("</td>");                                         // NOI18N
                 output.append("</tr>\n");                                       // NOI18N
             }

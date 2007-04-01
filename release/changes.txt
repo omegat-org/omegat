@@ -4,8 +4,8 @@
 
 1.7.0 vs. 1.6.1_02
 
-  8 Enhancements
-  5 Bugfixes
+  9 Enhancements
+  6 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.0
@@ -34,6 +34,9 @@ Contains many bug fixes, new features, and general improvements
   - Simplified coloring tags in tag validation window
   http://sourceforge.net/support/tracker.php?aid=1679619
 
+  - Executable alternative to OmegaT.bat
+  http://sourceforge.net/support/tracker.php?aid=1692363
+
  Other enhancements:
 
   - New logging API
@@ -54,6 +57,9 @@ Contains many bug fixes, new features, and general improvements
 
   - DocBook: <member> should create a new segment
   http://sourceforge.net/support/tracker.php?aid=1672849
+
+  - OmegaT.exe not compatible with Java 1.6
+  http://sourceforge.net/support/tracker.php?aid=1692362 
   
 ----------------------------------------------------------------------
 

@@ -4,7 +4,7 @@
 
 1.7.0 vs. 1.6.1_02
 
-  9 Enhancements
+  10 Enhancements
   6 Bugfixes
 
 ----------------------------------------------------------------------
@@ -36,6 +36,9 @@ Contains many bug fixes, new features, and general improvements
 
   - Executable alternative to OmegaT.bat
   http://sourceforge.net/support/tracker.php?aid=1692363
+
+  - HTML filters->translatable contents in attribute
+  http://sourceforge.net/support/tracker.php?aid=1436569
 
  Other enhancements:
 

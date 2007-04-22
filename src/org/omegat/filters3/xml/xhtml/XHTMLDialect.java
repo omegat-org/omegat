@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2007 Didier Briel
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -37,15 +38,47 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  * This class specifies XHTML dialect of XML.
  *
  * @author Maxym Mykhalchuk
+ * @author Didier Briel
  */
 public class XHTMLDialect extends DefaultXMLDialect
 {
-    private static final Pattern DOCBOOK_PUBLIC_DTD = 
+    private static final Pattern XHTML_PUBLIC_DTD = 
             Pattern.compile("-//W3C//DTD XHTML.*");                             // NOI18N
-    
+       
     public XHTMLDialect()
+    {     
+        defineConstraint(CONSTRAINT_PUBLIC_DOCTYPE, XHTML_PUBLIC_DTD);                    
+    }   
+
+    private static final Pattern PUBLIC_XHTML = 
+            Pattern.compile("-//W3C//DTD XHTML 1\\..//.*");                     // NOI18N
+    private static final 
+            String DTD = "/org/omegat/filters3/xml/xhtml/res/xhtml11-flat.dtd"; // NOI18N
+    
+    /**
+     * Resolves external entites if child filter needs it.
+     * Default implementation returns <code>null</code>.
+     */
+    public InputSource resolveEntity(String publicId, String systemId)
     {
-        defineConstraint(CONSTRAINT_PUBLIC_DOCTYPE, DOCBOOK_PUBLIC_DTD);                    
+        if (publicId!=null && PUBLIC_XHTML.matcher(publicId).matches())
+        {
+            URL dtdresource = getClass().getResource(DTD);
+            return new InputSource(dtdresource.toExternalForm());
+        }
+        else
+            return null;
+    }
+  
+    /**
+     * Actually defines the dialect.
+     * It cannot be done during creation, because options are not known
+     * at that step.
+     */
+    public void defineDialect(XHTMLOptions options)
+    {
+        if (options == null)
+            options = new XHTMLOptions();
         
         defineParagraphTags(new String[]
         {
@@ -77,33 +110,22 @@ public class XHTMLDialect extends DefaultXMLDialect
             "abbr",                                                             // NOI18N
             "alt",                                                              // NOI18N
             "content",                                                          // NOI18N
-            "href",                                                             // NOI18N
-            "lang",                                                             // NOI18N
-            "xml:lang",                                                         // NOI18N
             "summary",                                                          // NOI18N
             "title",                                                            // NOI18N
         });
         
-        defineTranslatableTagAttribute("img", "src");                           // NOI18N
-        defineTranslatableTagAttribute("input", "value");                       // NOI18N
-    }
-
-    private static final Pattern PUBLIC_XHTML = 
-            Pattern.compile("-//W3C//DTD XHTML 1\\..//.*");                     // NOI18N
-    private static final String DTD = "/org/omegat/filters3/xml/xhtml/res/xhtml11-flat.dtd"; // NOI18N
-    
-    /**
-     * Resolves external entites if child filter needs it.
-     * Default implementation returns <code>null</code>.
-     */
-    public InputSource resolveEntity(String publicId, String systemId)
-    {
-        if (publicId!=null && PUBLIC_XHTML.matcher(publicId).matches())
-        {
-            URL dtdresource = getClass().getResource(DTD);
-            return new InputSource(dtdresource.toExternalForm());
-        }
-        else
-            return null;
+        if (options.getTranslateHref())
+            defineTranslatableAttribute("href");                                // NOI18N
+        if (options.getTranslateSrc())
+            defineTranslatableTagAttribute("img", "src");                       // NOI18N
+        if (options.getTranslateLang())
+            defineTranslatableAttributes(new String[]{
+                "lang",                                                         // NOI18N
+                "xml:lang",                                                     // NOI18N
+            });      
+        if (options.getTranslateHreflang())
+            defineTranslatableAttribute("hreflang");                            // NOI18N       
+        
+        defineTranslatableTagAttribute("input", "value");                        // NOI18N  
     }
 }

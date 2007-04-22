@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2007 Didier Briel 
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -27,6 +28,7 @@ package org.omegat.filters2.html2;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.io.Serializable;
 
 import org.htmlparser.Node;
 import org.htmlparser.Remark;
@@ -36,7 +38,20 @@ import org.htmlparser.visitors.NodeVisitor;
 
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
+import org.omegat.filters2.AbstractFilter;
 
+import java.awt.Dialog;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.Serializable;
+import java.io.Writer;
+
+import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.Instance;
+import org.omegat.util.LinebreakPreservingReader;
+import org.omegat.util.Log;
+import org.omegat.util.OStrings;
 /**
  * The part of HTML filter that actually does the job.
  * This class is called back by HTMLParser (http://sf.net/projects/htmlparser/).
@@ -49,9 +64,17 @@ public class FilterVisitor extends NodeVisitor
 {
     private HTMLFilter2 filter;
     private BufferedWriter writer;
+    private HTMLOptions options;
+    
     public FilterVisitor(HTMLFilter2 htmlfilter, BufferedWriter bufwriter)
     {
         this.filter = htmlfilter;
+        if (this.filter.hasOptions()) // HHC filter has no options
+        {
+            this.options = (HTMLOptions) this.filter.getOptions();
+            if (this.options == null)
+                this.options = new HTMLOptions();
+        }
         this.writer = bufwriter;
     }
 
@@ -61,7 +84,7 @@ public class FilterVisitor extends NodeVisitor
     
     /** Should the parser call us for this tag's ending tag and its inner tags. */
     boolean recurse = true;
-    
+        
     /** Do we collect the translatable text now. */
     boolean text = false;
     /** The translatable text being collected. */
@@ -99,7 +122,7 @@ public class FilterVisitor extends NodeVisitor
     ArrayList s_shortcuts;
     /** The number of shortcuts stored */
     int s_nshortcuts;
-    
+
     /**
      * Self traversal predicate.
      * @return <code>true</code> if a node itself is to be visited.
@@ -124,6 +147,7 @@ public class FilterVisitor extends NodeVisitor
      */
     public void visitTag(Tag tag)
     {
+      
         if( isIntactTag(tag) )
         {
             if( text )
@@ -146,10 +170,14 @@ public class FilterVisitor extends NodeVisitor
             maybeTranslateAttribute(tag, "abbr");                               // NOI18N
             maybeTranslateAttribute(tag, "alt");                                // NOI18N
             maybeTranslateAttribute(tag, "content");                            // NOI18N
-            maybeTranslateAttribute(tag, "href");                               // NOI18N
-            maybeTranslateAttribute(tag, "hreflang");                           // NOI18N
-            maybeTranslateAttribute(tag, "lang");                               // NOI18N
-            if( "IMG".equals(tag.getTagName()) )                                // NOI18N
+            if (options.getTranslateHref())
+                maybeTranslateAttribute(tag, "href");                           // NOI18N
+            if (options.getTranslateHreflang())
+                maybeTranslateAttribute(tag, "hreflang");                       // NOI18N
+            if (options.getTranslateLang())
+                maybeTranslateAttribute(tag, "lang");                           // NOI18N
+            if( "IMG".equals(tag.getTagName()) &&                               // NOI18N
+                options.getTranslateSrc() )                                      
                 maybeTranslateAttribute(tag, "src");                            // NOI18N
             maybeTranslateAttribute(tag, "summary");                            // NOI18N
             maybeTranslateAttribute(tag, "title");                              // NOI18N

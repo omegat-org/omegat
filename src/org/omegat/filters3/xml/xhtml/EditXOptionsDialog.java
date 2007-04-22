@@ -23,7 +23,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.filters2.html2;
+package org.omegat.filters3.xml.xhtml;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -38,9 +38,9 @@ import org.omegat.util.OStrings;
  * Modal dialog to edit (X)HTML filter options.
  *
  * @author Maxym Mykhalchuk
- * @author Didier Briel  
+ * @author Didier Briel
  */
-public class EditOptionsDialog extends javax.swing.JDialog
+public class EditXOptionsDialog extends javax.swing.JDialog
 {
     /** A return status code - returned if Cancel button has been pressed */
     public static final int RET_CANCEL = 0;
@@ -48,30 +48,13 @@ public class EditOptionsDialog extends javax.swing.JDialog
     public static final int RET_OK = 1;
     
     /** Creates new form EditOptionsDialog */
-    public EditOptionsDialog(java.awt.Dialog parent, 
-                             HTMLOptions options)
+    public EditXOptionsDialog(java.awt.Dialog parent, XHTMLOptions options)
     {
         super(parent, true);
         this.options = options;
         initComponents();
-             
         if (options!=null)
         {
-            switch (options.getRewriteEncoding())
-            {
-                case HTMLOptions.REWRITE_ALWAYS:
-                    alwaysRB.setSelected(true);
-                    break;
-                case HTMLOptions.REWRITE_IFHEADER:
-                    ifHasHeaderRB.setSelected(true);
-                    break;
-                case HTMLOptions.REWRITE_IFMETA:
-                    ifHasMetaRB.setSelected(true);
-                    break;
-                case HTMLOptions.REWRITE_NEVER:
-                    neverRB.setSelected(true);
-                    break;
-            }
             translateHrefCB.setSelected(options.getTranslateHref());
             translateSrcCB.setSelected(options.getTranslateSrc());
             translateLangCB.setSelected(options.getTranslateLang());
@@ -93,8 +76,8 @@ public class EditOptionsDialog extends javax.swing.JDialog
     }
     
     
-    private HTMLOptions options;
-    public HTMLOptions getOptions()
+    private XHTMLOptions options;
+    public XHTMLOptions getOptions()
     {
         return options;
     }
@@ -118,18 +101,13 @@ public class EditOptionsDialog extends javax.swing.JDialog
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        alwaysRB = new javax.swing.JRadioButton();
-        ifHasHeaderRB = new javax.swing.JRadioButton();
-        ifHasMetaRB = new javax.swing.JRadioButton();
-        neverRB = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         translateHrefCB = new javax.swing.JCheckBox();
         translateSrcCB = new javax.swing.JCheckBox();
         translateLangCB = new javax.swing.JCheckBox();
         translateHreflangCB = new javax.swing.JCheckBox();
 
-        setTitle(OStrings.getString("HTML_Filter_Options"));
+        setTitle(OStrings.getString("XHTML_Filter_Options"));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -162,26 +140,7 @@ public class EditOptionsDialog extends javax.swing.JDialog
         jPanel1.setLayout(new java.awt.GridLayout(0, 1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, OStrings.getString("HTML_OPTION_REWRITE_ENC"));
-        jPanel1.add(jLabel1);
-
-        buttonGroup1.add(alwaysRB);
-        org.openide.awt.Mnemonics.setLocalizedText(alwaysRB, OStrings.getString("HTML_REWRITE_ENC_ALWAYS"));
-        jPanel1.add(alwaysRB);
-
-        buttonGroup1.add(ifHasHeaderRB);
-        ifHasHeaderRB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(ifHasHeaderRB, OStrings.getString("HTML_REWRITE_ENC_IF_HAS_HEADER"));
-        jPanel1.add(ifHasHeaderRB);
-
-        buttonGroup1.add(ifHasMetaRB);
-        org.openide.awt.Mnemonics.setLocalizedText(ifHasMetaRB, OStrings.getString("HTML_REWRITE_ENC_IF_HAS_META"));
-        jPanel1.add(ifHasMetaRB);
-
-        buttonGroup1.add(neverRB);
-        org.openide.awt.Mnemonics.setLocalizedText(neverRB, OStrings.getString("HTML_REWRITE_ENC_NEVER"));
-        jPanel1.add(neverRB);
-
+        jPanel1.setMinimumSize(new java.awt.Dimension(167, 121));
         org.openide.awt.Mnemonics.setLocalizedText(jLabel2, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("HTML_TRANSLATE_ATTRIBUTES"));
         jPanel1.add(jLabel2);
 
@@ -250,15 +209,7 @@ public class EditOptionsDialog extends javax.swing.JDialog
     
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_okButtonActionPerformed
     {
-        options = new HTMLOptions();
-        if (alwaysRB.isSelected())
-            options.setRewriteEncoding(HTMLOptions.REWRITE_ALWAYS);
-        else if (ifHasHeaderRB.isSelected())
-            options.setRewriteEncoding(HTMLOptions.REWRITE_IFHEADER);
-        else if (ifHasMetaRB.isSelected())
-            options.setRewriteEncoding(HTMLOptions.REWRITE_IFMETA);
-        else if (neverRB.isSelected())
-            options.setRewriteEncoding(HTMLOptions.REWRITE_NEVER);
+        options = new XHTMLOptions();
         
         options.setTranslateHref(translateHrefCB.isSelected());
         options.setTranslateSrc(translateSrcCB.isSelected());
@@ -287,16 +238,11 @@ public class EditOptionsDialog extends javax.swing.JDialog
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton alwaysRB;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JRadioButton ifHasHeaderRB;
-    private javax.swing.JRadioButton ifHasMetaRB;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton neverRB;
     private javax.swing.JButton okButton;
     private javax.swing.JCheckBox translateHrefCB;
     private javax.swing.JCheckBox translateHreflangCB;

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2007 Didier Briel
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -24,10 +25,13 @@
 
 package org.omegat.filters3.xml.xhtml;
 
+import java.awt.Dialog;
 import java.io.File;
+import java.io.Serializable;
 
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
+import org.omegat.filters3.xml.XMLDialect;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
@@ -35,12 +39,13 @@ import org.omegat.util.OStrings;
  * Filter for XHTML files.
  *
  * @author Maxym Mykhalchuk
+ * @author Didier Briel
  */
 public class XHTMLFilter extends XMLFilter
 {
     
     /**
-     * Creates a new instance of DocBookFilter
+     * Creates a new instance of XHTMLFilter
      */
     public XHTMLFilter()
     {
@@ -77,7 +82,7 @@ public class XHTMLFilter extends XMLFilter
     }
     
     /**
-     * Yes, DocBook may be read in a variety of encodings.
+     * Yes, XHTML may be read in a variety of encodings.
      * @return <code>true</code>
      */
     public boolean isSourceEncodingVariable()
@@ -86,7 +91,7 @@ public class XHTMLFilter extends XMLFilter
     }
     
     /**
-     * Yes, DocBook may be written out in a variety of encodings.
+     * Yes, XHTML may be written out in a variety of encodings.
      * @return <code>true</code>
      */
     public boolean isTargetEncodingVariable()
@@ -109,6 +114,10 @@ public class XHTMLFilter extends XMLFilter
             try
             {
                 do_not_send_to_core = true;
+                // Defining the actual dialect, because at this step 
+                // we have the options
+                XHTMLDialect dialect = (XHTMLDialect) this.getDialect();
+                dialect.defineDialect((XHTMLOptions) this.getOptions());
                 super.processFile(inFile, inEncoding, null, null);
             }
             catch (Exception e)
@@ -133,5 +142,41 @@ public class XHTMLFilter extends XMLFilter
             return entry;
         else
             return super.translate(entry);
+    }
+    
+    /**
+     * Returns true to indicate that the XHTML filter has options.
+     * @return True, because the XHTML filter has options.
+     */
+    public boolean hasOptions()
+    {
+        return true;
+    }
+    
+    /**
+     * XHTML Filter shows a <b>modal</b> dialog to edit its own options.
+     * 
+     * @param currentOptions Current options to edit.
+     * @return Updated filter options if user confirmed the changes, 
+     * and current options otherwise.
+     */
+    public Serializable changeOptions(Dialog parent, Serializable currentOptions)
+    {
+        try
+        {
+            XHTMLOptions options = (XHTMLOptions) currentOptions;
+            EditXOptionsDialog dialog = new EditXOptionsDialog(parent, options);
+            dialog.setVisible(true);
+            if( EditXOptionsDialog.RET_OK==dialog.getReturnStatus() )
+                return dialog.getOptions();
+            else
+                return currentOptions;
+        }
+        catch( Exception e )
+        {
+            Log.logErrorRB("HTML_EXC_EDIT_OPTIONS");
+            Log.log(e);
+            return currentOptions;
+        }
     }
 }

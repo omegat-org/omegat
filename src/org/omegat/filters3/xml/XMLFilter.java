@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2007 Didier Briel
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -54,6 +55,7 @@ import org.xml.sax.SAXNotSupportedException;
  * specifying translatable tags and attributes.
  *
  * @author Maxym Mykhalchuk
+ * @author Didier Briel
  */
 public abstract class XMLFilter extends AbstractFilter implements Translator
 {
@@ -63,7 +65,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
     /** XML dialect this filter handles. */
     private XMLDialect dialect;
     
-    /** Creates a new instance of XMLFilter2 */
+    /** Creates a new instance of XMLFilter */
     public XMLFilter(XMLDialect dialect)
     {
         parserFactory = SAXParserFactory.newInstance();
@@ -76,6 +78,12 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
         this.dialect = dialect;
     }
 
+    /** Gives the dialect */
+    public XMLDialect getDialect()
+    {
+        return dialect;
+    }
+    
     /** Detected encoding of the input XML file. */
     private String encoding;
     

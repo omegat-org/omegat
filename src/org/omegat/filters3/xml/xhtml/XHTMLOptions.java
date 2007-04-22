@@ -3,8 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007 Didier Briel
+ Copyright (C) 2007 Didier Briel
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -23,66 +22,29 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.filters2.html2;
+package org.omegat.filters3.xml.xhtml;
 
+import java.awt.Dialog;
 import java.io.Serializable;
 
+
 /**
- * Options for (X)HTML filter.
+ * * Options for XHTML filter.
  * Serializable to allow saving to / reading from configuration file.
  * <p>
- * HTML filter would have the following options
+ * XHTML filter have the following options
  * ([+] means default on).
- * Add or rewrite encoding declaration in HTML and XHTML files:
- * <ul>
- * <li>[] Always
- * <li>[+] Only if HTML file has a header
- * <li>[]  Only if HTML file has an encoding declaration
- * <li>[] Never
- * </ul>
  * Translatable attributes:
  * <ul>[+] href
  * <ul>[+] src
  * <ul>[+] lang
  * <ul>[+] hreflang
  * </ul>
- * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
-public class HTMLOptions implements Serializable
-{
-    /** (X)HTML filter should always add/rewrite encoding declaration. */
-    public static final int REWRITE_ALWAYS = 1;
-    /** Default. (X)HTML filter should rewrite encoding declaration if HTML file has a header. */
-    public static final int REWRITE_IFHEADER = 2;
-    /** (X)HTML filter should rewrite encoding declaration meta-tag if HTML file has one. */
-    public static final int REWRITE_IFMETA = 3;
-    /** (X)HTML filter should never rewrite encoding declaration. */
-    public static final int REWRITE_NEVER = 4;
-
-    /** Holds value of property. */
-    private int rewriteEncoding = REWRITE_IFHEADER;
-
-    /**
-     * Returns whether and when (X)HTML filter adds/rewrites encoding declaration.
-     * @return One of {@link #REWRITE_ALWAYS}, {@link #REWRITE_IFHEADER}, 
-     *                  {@link #REWRITE_IFMETA}, {@link #REWRITE_NEVER}.
-     */
-    public int getRewriteEncoding()
-    {
-        return this.rewriteEncoding;
-    }
-
-    /**
-     * Sets when (X)HTML filter should add/rewrite encoding declaration.
-     * @param rewriteEncoding One of {@link #REWRITE_ALWAYS}, {@link #REWRITE_IFHEADER}, 
-     *                                  {@link #REWRITE_IFMETA}, {@link #REWRITE_NEVER}.
-     */
-    public void setRewriteEncoding(int rewriteEncoding)
-    {
-        this.rewriteEncoding = rewriteEncoding;
-    }
-    
+public class XHTMLOptions implements Serializable
+{    
+     
     /** Hold value of properties. */
     private boolean translateHref = true;
     private boolean translateSrc = true;

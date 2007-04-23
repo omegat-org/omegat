@@ -96,6 +96,8 @@ public class OpenDocDialect extends DefaultXMLDialect
             "office:annotation",                                                // NOI18N
             // Drawing Shapes from OO specifications
             // Correction for [ 1541277 ] OO: Segmenting on inline drawings
+            // Commented until [ 1642994 ] Subtexts are not segmented is solved
+/*
             "draw:rect",                                                        // NOI18N
             "draw:line",                                                        // NOI18N
             "draw:polyline",                                                    // NOI18N
@@ -113,6 +115,7 @@ public class OpenDocDialect extends DefaultXMLDialect
             "draw:control",                                                     // NOI18N
             "dr3d:scene",                                                       // NOI18N
             "draw:custom-shape",                                                // NOI18N
+ */
         });
         defineIntactTags(new String[]
         {

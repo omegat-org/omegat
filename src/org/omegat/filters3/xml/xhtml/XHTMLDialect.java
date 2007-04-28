@@ -92,6 +92,9 @@ public class XHTMLDialect extends DefaultXMLDialect
             "form", "textarea", "fieldset", "legend", "label",                  // NOI18N
             "select", "option", "hr"                                            // NOI18N
         });
+        // Optional paragraph on BR
+        if (options.getParagraphOnBr())
+            defineParagraphTag("br");
         
         defineShortcut("br", "br");                                             // NOI18N
         

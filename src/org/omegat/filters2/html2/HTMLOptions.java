@@ -46,6 +46,7 @@ import java.io.Serializable;
  * <ul>[+] lang
  * <ul>[+] hreflang
  * </ul>
+ * Start a new paragraph on breaks (<br>: [ ]
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
@@ -88,6 +89,7 @@ public class HTMLOptions implements Serializable
     private boolean translateSrc = true;
     private boolean translateLang = true;
     private boolean translateHreflang = true;
+    private boolean paragraphOnBr = false;
     
     /**
      * Returns whether href attributes should be translated.
@@ -151,5 +153,21 @@ public class HTMLOptions implements Serializable
     public void setTranslateHreflang(boolean translateHreflang)
     {
         this.translateHreflang = translateHreflang;
+    }
+   
+   /**
+     * Returns whether a new paragraph should be started on BR.
+     */
+    public boolean getParagraphOnBr()
+    {
+        return this.paragraphOnBr;
+    }
+
+    /**
+     * Sets whether a new paragraph should be started on BR.
+     */
+    public void setParagraphOnBr(boolean paragraphOnBr)
+    {
+        this.paragraphOnBr = paragraphOnBr;
     }
 }

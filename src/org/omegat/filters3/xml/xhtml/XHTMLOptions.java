@@ -50,6 +50,7 @@ public class XHTMLOptions implements Serializable
     private boolean translateSrc = true;
     private boolean translateLang = true;
     private boolean translateHreflang = true;
+    private boolean paragraphOnBr = false;
     
     /**
      * Returns whether href attributes should be translated.
@@ -114,4 +115,21 @@ public class XHTMLOptions implements Serializable
     {
         this.translateHreflang = translateHreflang;
     }
+ 
+   /**
+     * Returns whether a new paragraph should be started on BR.
+     */
+    public boolean getParagraphOnBr()
+    {
+        return this.paragraphOnBr;
+    }
+
+    /**
+     * Sets whether a new paragraph should be started on BR.
+     */
+    public void setParagraphOnBr(boolean paragraphOnBr)
+    {
+        this.paragraphOnBr = paragraphOnBr;
+    }
+
 }

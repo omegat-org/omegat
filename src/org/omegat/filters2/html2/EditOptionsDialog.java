@@ -76,6 +76,7 @@ public class EditOptionsDialog extends javax.swing.JDialog
             translateSrcCB.setSelected(options.getTranslateSrc());
             translateLangCB.setSelected(options.getTranslateLang());
             translateHreflangCB.setSelected(options.getTranslateHreflang());
+            paragraphOnBrCB.setSelected(options.getParagraphOnBr());
         }
         
         //  Handle escape key to close the window
@@ -128,6 +129,8 @@ public class EditOptionsDialog extends javax.swing.JDialog
         translateSrcCB = new javax.swing.JCheckBox();
         translateLangCB = new javax.swing.JCheckBox();
         translateHreflangCB = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
+        paragraphOnBrCB = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("HTML_Filter_Options"));
         setResizable(false);
@@ -225,6 +228,18 @@ public class EditOptionsDialog extends javax.swing.JDialog
 
         jPanel1.add(translateHreflangCB);
 
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("HTML_PARAGRAPH_ON"));
+        jPanel1.add(jLabel3);
+
+        org.openide.awt.Mnemonics.setLocalizedText(paragraphOnBrCB, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("HTML_PARAGRAPH_ON_BR"));
+        paragraphOnBrCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paragraphOnBrCBradiosActionPerformed(evt);
+            }
+        });
+
+        jPanel1.add(paragraphOnBrCB);
+
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -232,6 +247,10 @@ public class EditOptionsDialog extends javax.swing.JDialog
         java.awt.Dimension dialogSize = getSize();
         setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void paragraphOnBrCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paragraphOnBrCBradiosActionPerformed
+// TODO add your handling code here:
+    }//GEN-LAST:event_paragraphOnBrCBradiosActionPerformed
 
     private void translateHreflangCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateHreflangCBradiosActionPerformed
 // TODO add your handling code here:
@@ -264,7 +283,8 @@ public class EditOptionsDialog extends javax.swing.JDialog
         options.setTranslateSrc(translateSrcCB.isSelected());
         options.setTranslateLang(translateLangCB.isSelected());
         options.setTranslateHreflang(translateHreflangCB.isSelected());
-        
+        options.setParagraphOnBr(paragraphOnBrCB.isSelected());
+                
         doClose(RET_OK);
     }//GEN-LAST:event_okButtonActionPerformed
     
@@ -295,9 +315,11 @@ public class EditOptionsDialog extends javax.swing.JDialog
     private javax.swing.JRadioButton ifHasMetaRB;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton neverRB;
     private javax.swing.JButton okButton;
+    private javax.swing.JCheckBox paragraphOnBrCB;
     private javax.swing.JCheckBox translateHrefCB;
     private javax.swing.JCheckBox translateHreflangCB;
     private javax.swing.JCheckBox translateLangCB;

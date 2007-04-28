@@ -315,12 +315,13 @@ public class FilterVisitor extends NodeVisitor
                 tagname.equals("DL") ||                                         // NOI18N
                      tagname.equals("DT") || tagname.equals("DD") ||            // NOI18N
                 // End of JC's contribution
-
                 tagname.equals("FORM") || tagname.equals("TEXTAREA") ||         // NOI18N
                 tagname.equals("FIELDSET") || tagname.equals("LEGEND") ||       // NOI18N
                 tagname.equals("LABEL")                                         // NOI18N
                 || tagname.equals("SELECT") || tagname.equals("OPTION") ||      // NOI18N
-                tagname.equals("HR");                                           // NOI18N
+                tagname.equals("HR") ||                                         // NOI18N
+                // Optional paragraph on BR
+                (tagname.equals("BR") && options.getParagraphOnBr());           // NOI18N
                 
     }
     

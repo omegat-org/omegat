@@ -90,7 +90,7 @@ public class XHTMLDialect extends DefaultXMLDialect
             "ol", "ul", "li",                                                   // NOI18N
             "dl", "dt", "dd",                                                   // NOI18N
             "form", "textarea", "fieldset", "legend", "label",                  // NOI18N
-            "select", "option",                                                 // NOI18N
+            "select", "option", "hr"                                            // NOI18N
         });
         
         defineShortcut("br", "br");                                             // NOI18N

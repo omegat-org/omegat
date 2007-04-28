@@ -4,8 +4,8 @@
 
 1.7.0 vs. 1.6.1_02
 
-  10 Enhancements
-  6 Bugfixes
+  11 Enhancements
+  7 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.0
@@ -40,6 +40,9 @@ Contains many bug fixes, new features, and general improvements
   - HTML filters->translatable contents in attribute
   http://sourceforge.net/support/tracker.php?aid=1436569
 
+  - (X)HTML: Optional paragraph on BR
+  http://sourceforge.net/support/tracker.php?aid=1709400
+
  Other enhancements:
 
   - New logging API
@@ -63,6 +66,9 @@ Contains many bug fixes, new features, and general improvements
 
   - OmegaT.exe not compatible with Java 1.6
   http://sourceforge.net/support/tracker.php?aid=1692362 
+
+  - (X)HTML: HR not defined as a paragraph tag
+  http://sourceforge.net/support/tracker.php?aid=1709373  
   
 ----------------------------------------------------------------------
 

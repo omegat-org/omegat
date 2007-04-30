@@ -53,6 +53,7 @@ public class OpenDocDialect extends DefaultXMLDialect
             // Donated by Didier Briel
             // http://sourceforge.net/support/tracker.php?aid=1458673
             "draw:image", "di",                                                 // NOI18N
+            "draw:frame", "df",                                                 // NOI18N
             "draw:object-ole", "do",                                            // NOI18N
 
             "text:bookmark", "bk",                                              // NOI18N
@@ -115,7 +116,7 @@ public class OpenDocDialect extends DefaultXMLDialect
             "draw:control",                                                     // NOI18N
             "dr3d:scene",                                                       // NOI18N
             "draw:custom-shape",                                                // NOI18N
- */
+*/ 
         });
         defineIntactTags(new String[]
         {

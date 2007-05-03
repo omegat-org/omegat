@@ -135,6 +135,7 @@ public class OpenDocDialect extends DefaultXMLDialect
             "meta:print-date",                                                  // NOI18N
             "dc:creator",                                                       // NOI18N
             "dc:date",                                                          // NOI18N
+            "dc:language",                                                      // NOI18N
             "meta:editing-cycles",                                              // NOI18N
             "meta:editing-duration",                                            // NOI18N
             

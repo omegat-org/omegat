@@ -4,7 +4,7 @@
 
 1.7.0 vs. 1.6.1_02
 
-  11 Enhancements
+  12 Enhancements
   7 Bugfixes
 
 ----------------------------------------------------------------------
@@ -42,6 +42,9 @@ Contains many bug fixes, new features, and general improvements
 
   - (X)HTML: Optional paragraph on BR
   http://sourceforge.net/support/tracker.php?aid=1709400
+
+  - OOo documents, do not show "default language"
+  http://sourceforge.net/support/tracker.php?aid=1711953
 
  Other enhancements:
 
@@ -113,12 +116,6 @@ Contains a new file filter and a number of bug fixes
   - 1609275 - License incompatibility
   (Inconsistent license information)
   http://sourceforge.net/support/tracker.php?aid=1609275
-
-  - 1541277 - OO: Segmenting on inline drawings
-  http://sourceforge.net/support/tracker.php?aid=1541277
-
-  - 1628890 - Sentence break on comments in OOo documents
-  http://sourceforge.net/support/tracker.php?aid=1628890
 
   - 1664523 - FF character in license.txt
   http://sourceforge.net/support/tracker.php?aid=1664523

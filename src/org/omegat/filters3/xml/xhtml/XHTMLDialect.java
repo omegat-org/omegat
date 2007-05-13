@@ -94,7 +94,7 @@ public class XHTMLDialect extends DefaultXMLDialect
         });
         // Optional paragraph on BR
         if (options.getParagraphOnBr())
-            defineParagraphTag("br");
+            defineParagraphTag("br");                                           // NOI18N
         
         defineShortcut("br", "br");                                             // NOI18N
         

@@ -2,14 +2,15 @@
  OmegaT 1.7.0 Changes
 ----------------------------------------------------------------------
 
-1.7.0 vs. 1.6.1_02
+1.7.0 vs. 1.6.1_04
 
-  12 Enhancements
-  7 Bugfixes
+  16 Enhancements
+  15 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.0
-Contains many bug fixes, new features, and general improvements
+
+Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new features, and general improvements
 
  Implemented requests:
 
@@ -46,7 +47,16 @@ Contains many bug fixes, new features, and general improvements
   - OOo documents, do not show "default language"
   http://sourceforge.net/support/tracker.php?aid=1711953
 
+  - Add direct support for Office 2007 XML
+  http://sourceforge.net/support/tracker.php?aid=1589239
+
  Other enhancements:
+
+  - German instant start tutorial
+
+  - Slovenian UI localisation + manual translation
+
+  - Basque UI localisation + instant start guide translation
 
   - New logging API
 
@@ -73,60 +83,28 @@ Contains many bug fixes, new features, and general improvements
   - (X)HTML: HR not defined as a paragraph tag
   http://sourceforge.net/support/tracker.php?aid=1709373  
   
-----------------------------------------------------------------------
-
-1.6.2 vs. 1.4.5.04
-   75 Enchancements
-  132 Bugfixes
-
-----------------------------------------------------------------------
-1.6.2
-Contains a new file filter and a number of bug fixes
-
- Implemented requests:
-
-  - Add direct support for Office 2007 XML
-  http://sourceforge.net/support/tracker.php?aid=1589239
-
- Other enhancements:
-
-  - German instant start tutorial
-
-  - Slovenian UI localisation + manual translation
-
-  - Basque UI localisation + instant start guide translation
-
- Bug fixes:
-
-  - 1618742 - Ctrl+Z in search window is hard coded
+  - Ctrl+Z in search window is hard coded
   http://sourceforge.net/support/tracker.php?aid=1618742
 
-  - 1612550 - Localization projects glitches
+  - Localization projects glitches
   http://sourceforge.net/support/tracker.php?aid=1612550
 
-  - 1541277 - OO: Segmenting on inline drawings
-  http://sourceforge.net/support/tracker.php?aid=1541277
-
-  - 1628890 - Sentence break on comments in OOo documents
+  - Sentence break on comments in OOo documents
   http://sourceforge.net/support/tracker.php?aid=1628890
 
-  - 1606595 - Resource bundle filter incomplete
+  - Resource bundle filter incomplete
   http://sourceforge.net/support/tracker.php?aid=1606595
 
-  - 1609275 - License incompatibility
-  (Inconsistent license information)
-  http://sourceforge.net/support/tracker.php?aid=1609275
-
-  - 1664523 - FF character in license.txt
+  - FF character in license.txt
   http://sourceforge.net/support/tracker.php?aid=1664523
 
-  - 1657233 - Can not build on Windows XP
+  - Can not build on Windows XP
   http://sourceforge.net/support/tracker.php?aid=1657233
 
-  - 1652221 - Wrong auto encoding for XML documents
+  - Wrong auto encoding for XML documents
   http://sourceforge.net/support/tracker.php?aid=1652221
 
-  1657547 - Wrong link in legalNotices.html
+  - Wrong link in legalNotices.html
   http://sourceforge.net/support/tracker.php?aid=1657547
 
 ----------------------------------------------------------------------
@@ -139,6 +117,12 @@ OmegaT uses. The effect of this is that redistribution of OmegaT
 is not allowed. We have fixed this by reverting to version 1.08
 of the MRJAdapter library, licensed under the LGPL, which is
 GPL-compatible.
+
+ Bug fixes:
+ 
+  - License incompatibility
+  (Inconsistent license information)
+  http://sourceforge.net/support/tracker.php?aid=1609275
 
 ----------------------------------------------------------------------
 1.6.1_03

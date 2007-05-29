@@ -4,7 +4,7 @@
 
 1.7.0 vs. 1.6.1_04
 
-  16 Enhancements
+  17 Enhancements
   15 Bugfixes
 
 ----------------------------------------------------------------------
@@ -49,6 +49,9 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
 
   - Add direct support for Office 2007 XML
   http://sourceforge.net/support/tracker.php?aid=1589239
+
+  - Do not show quotation marks in glossary pane
+  http://sourceforge.net/support/tracker.php?aid=1727409
 
  Other enhancements:
 

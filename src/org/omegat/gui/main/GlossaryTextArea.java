@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2007 Didier Briel
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -41,6 +42,7 @@ import org.omegat.util.Token;
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
+ * @author Didier Briel
  */
 public class GlossaryTextArea extends javax.swing.JTextPane
 {
@@ -60,8 +62,8 @@ public class GlossaryTextArea extends javax.swing.JTextPane
         for (int i=0; i<entries.size(); i++)
         {
             GlossaryEntry entry = (GlossaryEntry) entries.get(i);
-            buf.append("'" + entry.getSrcText() + "' = '" +                     // NOI18N
-                    entry.getLocText() + "'");                                  // NOI18N
+            buf.append(entry.getSrcText() + " = " +                             // NOI18N
+                    entry.getLocText());                                        // NOI18N
             if (entry.getCommentText().length()>0)
                 buf.append("\n" + entry.getCommentText());                      // NOI18N
             buf.append("\n\n");                                                 // NOI18N

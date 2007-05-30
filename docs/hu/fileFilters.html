@@ -1,0 +1,121 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Állományszűrők - OmegaT 1.6.2 felhasználói kézikönyv</title>
+</head>
+<body>
+
+<h1>Állományszűrők</h1>
+
+<h2>Tartalomjegyzék</h2></div>
+
+<ul type="none">
+   <li>1. <a href="#Introduction">Bevezetés</a>
+
+      <ul type="none">
+         <li>1.1. <a href="#File_types">Állományfajták</a></li>
+         <li>1.2. <a href="#File_encodings">Állományok kódolása</a></li>
+         <li>1.3. <a href="#Renaming_Translated_Files">Lefordított állományok átnevezése</a></li>
+      </ul>
+   </li>
+
+   <li>2. <a href="#File_Filters_Setup">Állományszűrők beállítása</a>
+
+      <ul type="none">
+         <li><a href="#File_Filters_Dialog">Az Állományszűrők párbeszédablak</a></li>
+         <li><a href="#Edit_Filter_Dialog">A Szűrőszerkesztés párbeszédablak</a></li>
+         <li><a href="#Add.2FEdit_Pattern_Dialog">A Minta hozzáadása/szerkesztése párbeszédablak</a></li>
+      </ul>
+   </li>
+</ul>
+
+<a name="Introduction"></a>
+<h2>Bevezetés</h2>
+
+<p>Az OmegaT rugalmasan alakítható szűrőket tartalmaz, amelyekkel működésük zömét önmaga határozhatja meg.</p>
+
+<p>Az állományszűrők olyan programrészek, amelyekkel:</p>
+
+<ul>
+   <li>A dokumentumot meghatározott állományformátumban olvashatja be. Ilyen például az egyszerű szöveg.</li>
+   <li>A fordítandó tartalmat kiemelheti az állományból.</li>
+   <li>Automatizálhatja a lefordított dokumentumok nevének módosítását, miközben a fordítandó szöveg helyére annak fordítása kerül.</li>
+</ul>
+
+<a name="File_types"></a>
+<h3>Állományfajták</h3>
+
+<p>Amikor az OmegaT a forráskönyvtárban egy fájlt észlel, megpróbálja a kiterjesztésének megfelelő szűrőt használni. Pontosabban fogalmazva, az OmegaT megkísérli a forrásállományok nevének mintáját a fájlnévhez illeszteni. Például az <code>*.xhtml</code> minta illeni fog minden <code>.xhtml</code> kiterjesztésű állományra.é Ha sikerül a megfelelő szűrőt fellelni, akkor az állomány feldolgozása ennek segítségével történik. Például alaphelyzetben a rendszer az XHMTL-szűrőt használja az <code>xhtml</code> kiterjesztésű állományok esetén. Az egyes állományszűrőkhöz tartozó állománynevek mintáit módosíthatja, illetve újakat adhat hozzájuk.</p>
+
+<a name="File_encodings"></a>
+<h3>Állományok kódolása</h3>
+
+<p>Az egyszerű szöveges és a HTML-állományok egy sor különféle kódolásban fordulhatnak elő. Míg a HTML-fájlok tartalmazhatnak kódolási utasítást, melyet az OmegaT felhasználhat az állomány beolvasására, szöveges állományok esetén nincs egyezményes mód a szöveg kódolásának jelölésére. Akár szöveges, akár kódolási utasítást nem tartalmazó HTML-állományokat fordít, az OmegaT azt a kódolást fogja használni, amelyet az adott kiterjesztéshez részére megszab. Például alapbeállításban a <code>.txt</code> fájlok betöltése az adott operációs rendszerben alapértelmezettként beállított kódolással megy végbe. A forrásszöveg kódolását bármely állománynévmintához külön-külön megadhatja.</p>
+
+<p>A HTML- és a szöveges állományokat bármely kódolás szerint ki is írathatja. Ha például franciáról fordít japánra, beállíthat egy szűrőt, amellyel a célszövegben valamelyik japán kódolást alkalmazza, vagy használhatja az UTF-8, UTF-16 vagy UTF-32 unikódos kódolás valamelyikét. Alapbeállításban a mentendő állomány kódolása szöveg esetén megegyezik a szöveges állományéval, HTML esetén pedig UTF-8 lesz. Ne feledje, hogy a HTML-szűrő a célállományba beírja a kódolási utasítást, így a böngészőben nem jelennek meg krikszkrakszok.</p>
+
+<a name="Renaming_Translated_Files"></a>
+<h3>Lefordított állományok átnevezése</h3>
+
+<p>Vannak helyzetek, amikor hasznos lehet, ha a fordított állományok automatikusan más nevet kapnak, például úgy, hogy a nevük után beszúródik a célnyelv kódja. Ez elvégezhető az állományszűrők párbeszédablakán keresztül is, ahol megadhatja a célnyelvi állománynevek mintáját.</p>
+
+<a name="File_Filters_Setup"></a>
+<h2>Állományszűrők beállítása</h2>
+
+<p>Az állományszűrők alapbeállításai a legtöbb felhasználó igényeinek megfelelnek. Ha változtatni szeretne a beállításokon, a főmenü <strong>Beállítások -&gt; Állományszűrők...</strong> pontját kiválasztva nyissa ki a fő párbeszédablakot. Ne feledje, hogy a szűrő beállításait csak akkor módosíthatja, ha nincs nyitva projekt, mivel a beállítások befolyásolják a lefordított szövegek előállításának mikéntjét.</p>
+
+<a name="File_Filters_Dialog"></a>
+<h3>Az Állományszűrők párbeszédablak</h3>
+
+<p>A párbeszédablak a meglévő állományszűrők felsorolását tartalmazza.</p>
+
+<p>Ha valamilyen típusú állományokat nem szeretne az OmegaT-vel lefordítani, a mellette lévő név bejelölésének megszüntetésével kikapcsolhatja az adott szűrőt. Ekkor az OmegaT a projekt betöltésekor a bejelöletlen állományfajtákat kihagyja és a célállományok létrehozásakor módosítás nélkül átmásolja őket. Ha a későbbiek folyamán mégis a szűrő használata mellett dönt, mindössze jelölje be a négyzetet.</p>
+
+<p>Ha netán sikerül az egész beállítást összekavarni, kattintson az <strong>Eredeti</strong> pontra, mellyel visszatérhet az állományszűrők eredeti beállításához.</p>
+
+<p>Ha be akarja állítani, hogy az adott szűrő mely állományokat milyen kódolásban dolgozzon fel, válassza ki a szűrőt a listáról és kattintson a <strong>Szerkesztés</strong> pontra.</p>
+
+<a name="Edit_Filter_Dialog"></a>
+<h3>A Szűrőszerkesztés párbeszédablak</h3>
+
+<p>A párbeszédablakban beállíthatja a szűrő által feldolgozandó forrásfájlok nevének mintáit, testre szabhatja a fordított állományok fájlnevét, valamint kiválaszthatja, milyen kódolásokat fog használni az állományok betöltésére és fordításaik mentésére.</p>
+
+<p>Forrásállományok nevének mintái a DOS állomány-elnevezési szabályai alapján. A <code>*</code> tetszőleges számú karaktert helyettesít, a <code>?</code> tetszőleges, de csak egyetlen karaktert helyettesít, a többi szimbólum pedig azzal a jelentéssel szerepel, amelyben látható. Ha például azt szeretné, hogy az egyszerű szöveg szűrője az (<code>olvassel</code>, <code>olvass.el</code> és <code>olvassel.txt</code>) elolvasandó állományokat egyaránt kezelje, használja az <code>olvass*</code> mintát.</p>
+
+<p>A forrásszövegek és a célnyelvi szövegek kódmezői lenyíló elemeket tartalmaznak, melyekben megjelenik az összes támogatott kódolás. Nem minden szűrővel választhat a kódolások közül, mivel némelyikük csak egyetlen kódolással használható. Ha a kódolást a választásos esetekben "&lt;auto&gt;"-ra állítja, ezzel a döntést az OmegaT "belátására" bízza. Ez esetben így jár el:</p>
+
+<ul>
+   <li>Az OmegaT HTML/XHTML típusú forrásállományok esetén megpróbálja kitalálni kódolásukat.</li>
+   <li>Az OmegaT szöveges állományok esetén az operációs rendszer alapértelmezett kódolását használja.</li>
+</ul>
+
+<p>A célnyelvi állománynév sajátos szerkezetű, ezért ha ezt kívánja szerkeszteni, kattintson inkább a <strong>Szerkesztés...</strong> pontra és térjen át a Mintaszerkesztés párbeszédablakra.</p>
+
+<p>Ha a szűrővel egy másik forrásnyelvi mintát is szeretne kezelni, kattintson a <strong>Hozzáadás...</strong> gombra és térjen át a Minta hozzáadása párbeszédablakra.</p>
+
+<p>Ha a szűrő alapbeállítását szeretné visszaállítani, kattintson az <strong>Eredeti</strong> gombra.</p>
+
+<a name="Add.2FEdit_Pattern_Dialog"></a>
+<h3>A Minta hozzáadása/szerkesztése párbeszédablak</h3>
+
+<p>Ugyanaz a párbeszédablak jelenik meg minta hozzáadása és minta szerkesztése esetén. Az egyetlen különbség a sajátos célállomány mintaszerkesztője, az összes többi mező megegyezik a fentiekben leírtakkal.</p>
+
+<p>A célállomány mintájával kapcsolatos részben különböző elemekből összeállíthatja a lefordított állomány nevét.</p>
+
+<ul>
+   <li>Az alapbeállítás a <code>${filename}</code> -- a forrásállomány teljes neve kiterjesztéssel együtt, így a lefordított állomány neve azonos a forrásállományéval.</li>
+   <li>A <code>${nameOnly}</code> segítségével csak a forrásállomány nevét szúrja be kiterjesztése nélkül.</li>
+   <li><code>${extension}</code> -- a forrásállomány kiterjesztése.</li>
+   <li><code>${targetLocale}</code> - célnyelvi környezet kódja ("xx_YY" alakban).</li>
+   <li><code>${targetLanguage}</code> - a célnyelv és az ország kódja ("XX-YY" alakban).</li>
+   <li><code>${targetLanguageCode}</code> - csak a célnyelv ("XX").</li>
+   <li><code>${targetCoutryCode}</code> - csak a célország ("YY").</li>
+</ul>
+
+<p>Ha kéri, további változókat tudunk beszúrni, ha tájékoztat bennünket kedvenc változója mibenlétéről. Keresse fel <a href="http://groups.yahoo.com/group/OmegaT/">felhasználói csoportunkat</a>.</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Jogi tudnivalók">Jogi tudnivalók</a></p>
+
+</body>
+</html>

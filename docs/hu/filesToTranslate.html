@@ -1,0 +1,84 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Fordítandó állományok - OmegaT 1.6.2 felhasználói kézikönyv</title>
+</head>
+<body>
+
+<h1>Fordítandó állományok</h1>
+
+<p>Az OmegaT egy sor formátumú fájl közvetlen fordítását tesz lehetővé. Ezek alapvetően kétféle formátumúak. <strong>Egyszerű szöveg</strong> vagy <strong>formázott szöveg</strong>.</p>
+
+<h2>Tartalomjegyzék</h2>
+
+<ul type="none">
+   <li>1. <a href="#Plain_text_files">Egyszerű szövegek</a></li>
+   <li>2. <a href="#Formatted_text_files">Formázott szövegek</a></li>
+   <li>3. <a href="#File_formats_specifics">Az állományformátumok adatai</a></li>
+   <li>4. <a href="#Other_file_formats">Egyéb állományformátumok</a></li>
+</ul>
+
+<a name="Plain_text_files"></a>
+<h3>Egyszerű szöveg</h3>
+
+<p>Az egyszerű szöveg csak szöveget tartalmaz, ezért fordítása megegyezik a fordított szöveg begépelésével.</p>
+
+<p>Jelenleg az OmegaT az alábbi formátumú egyszerű szöveges állományokat támogatja:</p>
+
+<ul>
+   <li>ASCII-szöveg (.txt stb.)</li>
+   <li>Kódot tartalmazó szöveg</li>
+   <li>Java nyelvi forrásszövegek (.properties)</li>
+   <li>PO-állományok (.po)</li>
+   <li>INI (kulcs=érték) szövegek (.ini)</li>
+</ul>
+
+<p>Ezeket az állományokat a rendszer olyannak tekinti, amelyekben csak szóközöket használnak beljebb kezdés vagy igazítás céljára.</p>
+
+<p>Ezeket rendszerint szövegszerkesztőkkel módosítják, továbbá nem lehet bennük olyan formázási információkat megadni, mint a betűtípus, a szín vagy a margó.</p>
+
+<a name="Formatted_text_files"></a>
+<h3>Formázott szöveges állományok</h3>
+
+<p>A formázott szöveges állományok szövegen kívül olyan formázási információkat is tartalmaznak, mint a betűtípus, a méret, a szín stb. Ezeket rendszerint szövegszerkesztőkkel vagy honlapszerkesztőkkel hozzák létre.</p>
+
+<p>Jelenleg az OmegaT az alábbi formázott szöveges állományokat támogatja:</p>
+
+<ul>
+   <li>Microsoft Open XML állományok</li>
+   <li>OpenOffice.org állományok</li>
+   <li>OpenDocument állományok</li>
+   <li>(X)HTML-állományok</li>
+   <li>HTML Help Compiler (HCC) állományok</li>
+   <li>DocBook állományok</li>
+</ul>
+
+<p>Ezen állományok esetén a rendszer megőrzi a formázási információkat. Ezek a formázási információk lehetnek egyszerűek, mint pl. <strong>ez a szöveg vastag</strong>, vagy lehetnek összetettek, mint pl. eltérő betűméretű, -színű, elrendezésű táblázatbeli adatok stb.</p>
+
+<p>A fordítási feladatok többségénél elvárás, hogy a fordítás hasonlítson az eredetire. Az OmegaT ezt a sajátos formázású karakterek/szavak könnyen kezelhető jelölőkkel való megkülönböztetésével teszi lehetővé.</p>
+
+<p>Az eredeti szöveg formázásának egyszerűsítése nagy mértékben csökkenti a használandó jelölők számát. Ha lehetséges, célszerű megfontolni a használt betűtípusok, -méretek, -színek egységesítését a fordítás egyszerűbbé tétele és a jelölők használatával összefüggő hibák mennyiségének a csökkentése érdekében.</p>
+
+<a name="File_formats_specifics"></a>
+<h3>Az állományformátumok adatai</h3>
+
+<p>A fenti állományformátumok többsége külön kezelést igényel.</p>
+
+<p>A fenti állományformátumok kezelésére vonatkozó információkat lásd a <a href="fileFormats.html" title="Támogatott állományformátumok">Támogatott állományformátumok</a> és az <a href="fileFilters.html" title="Állományszűrők">Állományszűrők</a> alatt.</p>
+
+<a name="Other_file_formats"></a>
+<h3>Egyéb állományformátumok</h3>
+
+<p>Más egyszerű szövegtípusok és formázott szövegek szintén fordíthatók az OmegaT segítségével.</p>
+
+<p>Egy sor egyszerű szövegfajta fordítható az OmegaT-vel (pl. LaTex stb.) PO-formájúra való átalakítás után.</p>
+
+<p>Hasonlóképpen egy sor formázott állományfajta (ideértve a Microsoft Office állományokat) fordítható az OmegaT segítségével Open Document formájúra alakítás után.</p>
+
+<p>További információkért lásd: <a href="fileFormats.html" title="Támogatott állományformátumok">Támogatott állományformátumok</a>.</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Jogi tudnivalók">Jogi tudnivalók</a></p>
+
+</body>
+</html>

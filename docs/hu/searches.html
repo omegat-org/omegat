@@ -1,0 +1,195 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Keresési lehetőségek - OmegaT 1.6.2 felhasználói kézikönyv</title>
+</head>
+<body>
+
+<h1>Keresési lehetőségek</h1>
+
+<h2>Tartalomjegyzék</h2>
+
+<ul type="none">
+   <li>1. <a href="#Search_window">Keresőablak</a></li>
+   <li>2. <a href="#Search_locations">Keresési helyek</a></li>
+
+   <li>3. <a href="#Search_methods">Keresési módszerek</a>
+
+      <ul type="none">
+         <li>3.1. <a href="#Exact searches">Pontos keresés</a></li>
+         <li>3.2. <a href="#Keyword_searches">Keresés kulcsszavakkal</a></li>
+      </ul>
+   </li>
+
+   <li>4. <a href="#Searching_using_wildcards">Keresés helyettesítő karakterekkel</a></li>
+
+   <li>5. <a href="#Searching_using_regular_expressions">Keresés reguláris kifejezésekkel</a>
+
+      <ul>
+         <li>5.1. <a href="#Regular_Expressions_to_use_in_searches">Keresésekben használható reguláris kifejezések</a></li>
+         <li>5.2. <a href="#Short_summary_of_regular-expression_constructs">A reguláris kifejezések rövid összegzése</a></li>
+      </ul>
+   </li>
+</ul>
+
+<a name="Search_window"></a>
+<h2>Keresőablak</h2>
+
+<p>Az OmegaT kiterjedt keresési lehetőségeket biztosít.</p>
+
+<p>A Keresés ablakot hívja elő a <code>Ctrl+F</code>-fel és a "Keresendő" mezőbe írja be a megkeresendő szót vagy kifejezést.</p>
+
+<p>Másik megoldásként jelölje ki a szerkesztő mezőben (az éppen fordítandó szöveg célnyelvi mezőjében) a megkeresendő szót vagy kifejezést, majd nyomja meg a <code>Ctrl+F</code>-et. A kijelölt szó vagy kifejezés ekkor automatikusan belekerül a "Keresendő" mezőbe.</p>
+
+<p>A keresőablak minden egyes előhívásával új keresést indít el. Ha elfelejti bezárni őket, rövid idő alatt egy sor nyitott keresőablaka lesz.</p>
+
+<p>A keresés vonatkozhat mind a forrás-, mind a célnyelvre.</p>
+
+<a name="Search_locations"></a>
+<h2>Keresési helyek</h2>
+
+<p>A jelölőnégyzetekkel válassza ki a helyet.</p>
+
+<p>Több keresési hely közül választhat:</p>
+
+<ul>
+   <li>Csak a projekten belül (alapbeállítás)</li>
+   <li>A projektben és a /tm/ mappában a referencia fordítási memóriákban (bejelölendő a <i>Keresés a FM-kban</i>)</li>
+   <li>Egyetlen állományban vagy több állományt tartalmazó könyvtárban (bejelölendő a <i>Keresés állományokban</i>)</li>
+</ul>
+
+<p>Ez utóbbi esetben az OmegaT csak azokban a fájlokban keres, amelyeket el tud olvasni (lásd: <a href="fileFormats">Támogatott állományformátumok</a>).</p>
+
+<a name="Search_methods"></a>
+<h2>Keresési módszerek</h2>
+
+<p>A választógombokkal válassza ki a megfelelő módszert.</p>
+
+<p>Kétféle keresési módszer közül választhat:</p>
+
+<ul>
+   <li><strong>Pontos keresés</strong>: a megadott szöveget tartalmazó szövegdarabokra keres.</li>
+   <li><strong>Kulcsszavas keresés</strong>: a megadott összes kulcsszót tartalmazó szövegdarabokra keres bármely sorrendben.</li>
+</ul>
+
+<p>Mindkét módszer esetén az alábbi három lehetőség közül választhat:</p>
+
+<ul>
+   <li>
+      <strong>Betűérzékeny</strong>: bejelölésekor a keresés pontosan a megadott szövegre irányul; ellenkező esetben a kis- és nagybetűk között nem tesz különbséget.</li>
+
+   <li>
+      <strong>Reguláris kifejezések</strong>: bejelölésekor a keresendő szöveget reguláris kifejezésnek tekinti (kulcsszavas keresés esetén többszörös kifejezésként kezeli).</li>
+
+   <li>
+      <strong>Keresés a FM-kban</strong>: bejelölésekor a keresés minden fordítási memóriára kiterjed.</li>
+</ul>
+
+<a name="Exact_searches"></a>
+<h2>Pontos keresés</h2>
+
+<p>A pontos kereséssel kifejezésre, azaz több egymás utáni szóra kereshet, melyeket viszont csak akkor találja meg a program, ha pontosan ugyanabban a rendben következnek egymás után. A pontos keresés hasonlít a "pontos kifejezés" keresésére olyan internetes keresőgépek esetén, mint a Google.</p>
+
+<a name="Keyword_searches"></a>
+<h2>Keresés kulcsszavakkal</h2>
+
+<p>A "Kulcsszavas keresés" kiválasztása után tetszőleges számú és elrendezésű, egymástól szóközökkel elválasztott szavakat adhat meg. Az OmegaT kijelzi az összes olyan szövegdarabot, amelyben mindezek a szavak előfordulnak. A kulcsszavas keresés hasonlít az internetes keresőkben alkalmazott "mindegyik szóra keresésre", például a Google esetén (logikai ÉS).</p>
+
+<a name="Searching_using_wildcards"></a>
+<h2>Keresés helyettesítő karakterekkel</h2>
+
+<p>Mind pontos, mind kulcsszavas keresés esetén használhatók a '<code>*</code>' és '<code>?</code>' helyettesítő karakterek. A helyettesítő karakterek használatánál ügyeljen arra, hogy a <strong>reguláris kifejezések</strong> ne legyen bejelölve, ellenkező esetben ezeket a karaktereket a rendszer speciális, reguláris kifejezésekben használt karakterekként fogja értelmezni.</p>
+
+<p>A '<code>?</code>' helyettesítő karakter bármely karakter helyettesítésére használható. Pl. a '<code>h?t</code>'-vel rákereshet mind a '<code>hat</code>', mind a '<code>hét</code>' szóra. A '<code>*</code>' helyettesítő karakterrel tetszőleges számú bármely karakterre kereshet rá. Pl. a '<code>h*t</code>' megtalálja a '<code>hat</code>' és a '<code>hét</code>' mellett a '<code>húrt</code>' és a '<code>halott</code>' alakokat is.</p>
+
+<p>Ha olyan szövegdarabokban kíván keresni, amelyek ezeket a karaktereket tartalmazzák, be kell kapcsolnia a reguláris kifejezésekkel végzett keresést és visszaperjelt ('<code>\</code>') kell elébük írnia, azaz: '<code>x\*y</code>', ha a keresett kifejezés az '<code>x*y</code>', és '<code>x\?y</code>', ha a '<code>x?y</code>' betűsorra keres rá.</p>
+
+<a name="Searching_using_regular_expressions"></a>
+<h2>Keresés reguláris kifejezésekkel</h2>
+
+<p>A reguláris kifejezéssel hatékony keresést hajthat végre. A szokásos kereséshez képest sokkal rugalmasabb lehetőséget biztosít. Egyszerű oktatóprogramot számos helyen találhat a neten (pl. <a href="http://www.regular-expressions.info/quickstart.html" title="http://www.regular-expressions.info/quickstart.html" rel="nofollow">http://www.regular-expressions.info/quickstart.html</a>.)</p>
+
+<a name="Regular_Expressions_to_use_in_searches"></a>
+<h3>Keresésekben használható reguláris kifejezések</h3>
+
+<p>A keresésekben használatos reguláris kifejezések megegyeznek a Java által támogatottakkal. További információkat talál itt: <a href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+
+<a name="Short_summary_of_regular-expression_constructs"></a>
+<h4>A reguláris kifejezések rövid összegzése</h4>
+
+<table border="0" width="80%" cellpadding="1" cellspacing="0" summary="A reguláris kifejezések és a kapcsolódó egyezések">
+    <tr bgcolor="#DDEEFF"><th width="10%" align="left" id="construct">Kifejezés&nbsp;</th><th align="left">Egyezések</th></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="flags">Beállítás</th></tr>
+    <tr><td><tt>(?i)</tt></td><td>Kikapcsolja a nagy- és kisbetűk közötti különbségtételt (alaphelyzetben a minta érzékeny a kis-/nagybetűkre).</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr><th align="left" colspan="2" id="characters">Karakterek</th></tr>
+
+    <tr><td><strong>x</strong></td><td>Az <strong>x</strong> karakter, kivéve az alábbiakat...</td></tr>
+    <tr><td><tt>\u</tt><strong>hhhh</strong></td><td>A hexadecimális&nbsp;&nbsp;<tt>0x</tt><strong>hhhh</strong> karakter</td></tr>
+    <tr><td><tt>\t</tt></td><td>A tabulátor (<tt>'\u0009'</tt>)</td></tr>
+
+    <tr><td><tt>\n</tt></td><td>Az új sor (soremelés) (<tt>'\u000A'</tt>)</td></tr>
+    <tr><td><tt>\r</tt></td><td>A kocsivissza (<tt>'\u000D'</tt>)</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="quot">Idézőkarakter</th></tr>
+
+    <tr><td><tt>\</tt></td><td>Semmi, mindössze eredeti jelentésében idézi a következő karaktert. Erre akkor van szükség, ha a <code>!$()*+.&lt;&gt;?[\]^{|}</code> metakaraktereket önmagukban szeretné megkeresni.</td></tr>
+    <tr><td><tt>\\</tt></td><td>Ezzel kereshet magára a visszaperjelre</td></tr>
+    <tr><td><tt>\Q</tt></td><td>Semmi, csak idéz minden karaktert az <tt>\E</tt>-ig</td></tr>
+
+    <tr><td><tt>\E</tt></td><td>Semmi, csak lezárja a <tt>\Q</tt>-val megkezdett idézést</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="classes">Karakterosztályok</th></tr>
+    <tr><td><tt>[abc]</tt></td><td>az <tt>a</tt>, <tt>b</tt> vagy <tt>c</tt> alkotta osztály (egyszerű osztály)</td></tr>
+
+    <tr><td><tt>[^abc]</tt></td><td>Az <tt>a</tt>, <tt>b</tt> vagy <tt>c</tt> kivételével bármely karakter (tagadás)</td></tr>
+    <tr><td><tt>[a-zA-Z]</tt></td><td><tt>a</tt>-tól <tt>z</tt>-ig vagy <tt>A</tt>-tól <tt>Z</tt>-it terjedő tartomány</td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="predef">Sajátos jelentésű karakterek</th></tr>
+    <tr><td><tt>.</tt></td><td>Bármely karakter (kivéve a sort lezárókat)</td></tr>
+    <tr><td><tt>\d</tt></td><td>Számjegy: <tt>[0-9]</tt></td></tr>
+    <tr><td><tt>\D</tt></td><td>Nem számjegy (betű): <tt>[^0-9]</tt></td></tr>
+
+    <tr><td><tt>\s</tt></td><td>Nem nyomtatott karakter (szóköz, tabulátor stb.): <tt>[ \t\n\x0B\f\r]</tt></td></tr>
+    <tr><td><tt>\S</tt></td><td>Nyomtatott karakter: <tt>[^\s]</tt></td></tr>
+    <tr><td><tt>\w</tt></td><td>Szó: <tt>[a-zA-Z_0-9]</tt></td></tr>
+    <tr><td><tt>\W</tt></td><td>Nemszó: <tt>[^\w]</tt></td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="bounds">Határolók</th></tr>
+    <tr><td><tt>^</tt></td><td>Sor eleje</td></tr>
+    <tr><td><tt>$</tt></td><td>Sor vége</td></tr>
+    <tr><td><tt>\b</tt></td><td>Szóhatár</td></tr>
+
+    <tr><td><tt>\B</tt></td><td>Nem szóhatár</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="greedy">Tág kvantorok</th></tr>
+    <tr><td colspan="2">A lehető legtágabb egyezéssel keresnek. Például az <code>a+</code> megtalálja az <code>aaa</code>-t az <code>aaabbb</code>-ben</td></tr>
+
+    <tr><td><strong>X</strong><tt>?</tt></td><td><strong>X</strong> nulla vagy egy előfordulása</td></tr>
+    <tr><td><strong>X</strong><tt>*</tt></td><td><strong>X</strong> nulla vagy több előfordulása</td></tr>
+    <tr><td><strong>X</strong><tt>+</tt></td><td><strong>X</strong> legalább egy előfordulása</td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="reluc">Szűk kvantorok</th></tr>
+    <tr><td colspan="2">A lehető legszűkebb egyezéssel keresnek. Például az <code>a+?</code> az <code>a</code> első előfordulását találja meg az <code>aaabbb</code>-ben</td></tr>
+    <tr><td><strong>X</strong><tt>??</tt></td><td><strong>X</strong> nulla vagy egy előfordulása</td></tr>
+
+    <tr><td><strong>X</strong><tt>*?</tt></td><td><strong>X</strong> nulla vagy több előfordulása</td></tr>
+    <tr><td><strong>X</strong><tt>+?</tt></td><td><strong>X</strong> legalább egy előfordulása</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="logical">Logikai operátorok</th></tr>
+
+    <tr><td><strong>XY</strong></td><td><strong>X</strong>, utána <strong>Y</strong></td></tr>
+    <tr><td><strong>X</strong><tt>|</tt><strong>Y</strong></td><td>Vagy <strong>X</strong>, vagy <strong>Y</strong></td></tr>
+
+    <tr><td><tt>(</tt><strong>XY</strong><tt>)</tt></td><td><strong>XY</strong> egyetlen csoportként</td></tr>
+</table>
+
+<hr>
+<p><a href="legalNotices.html" title="Jogi tudnivalók">Jogi tudnivalók</a></p>
+
+</body>
+</html>

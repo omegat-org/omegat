@@ -1,9 +1,11 @@
+Itzulpen hau Asier Sarasua Garmendiaren lana da, creative commons 2007.
+
 ==============================================================================
-  OmegaT 1.6.1 bertsioaren "Irakurri" fitxategia
+  OmegaT 1.6.2, "Readme" fitxategia
 
   1.  OmegaT-ri buruzko informazioa
   2.  Zer da OmegaT?
-  3.  Java eta OmegaT-ri buruzko ohar orokorrak
+  3.  Esaldi hau ez da hirugarrena
   4.  OmegaT-ri laguntzeko
   5.  OmegaT-k erroreren bat al dauka? Laguntzarik behar al duzu?
   6.  Bertsioaren xehetasunak
@@ -11,19 +13,17 @@
 ==============================================================================
   1.  OmegaT-ri buruzko informazioa
 
-OmegaT-ri buruzko informaziorik eguneratuena hemen aurki daiteke:
+
+OmegaT-ri buruzko informaziorik eguneratuena hemen aurkitu daiteke (ingelesez, eslovakieraz, nederlanderaz eta portugesez):
       http://www.omegat.org/omegat/omegat.html
 
-Informazio gehiagora, ondoko orrietara jo daiteke:
-
-Erabiltzaileentzako laguntza, Yahoo-ren erabiltzaile taldean:
+Erabiltzaileentzako laguntza, Yahoo-ren erabiltzaile-taldean (eleanitza). Mezuak arakatzeko ez da harpidetu behar:
      http://groups.yahoo.com/group/OmegaT/
-     Hemen ez da beharrezkoa harpidetzea fitxategiak arakatzeko.
 
-Hobekuntza-eskaerak, SourceForge-ko gunean:
+Hobekuntzen eskaera (ingelesez), SourceForge-ko gunean:
      http://sourceforge.net/tracker/?group_id=68187&atid=520350
 
-Programazio-erroreen jakinarazpena, SourceForge-ko gunean:
+Erroreen jakinarazpenak (ingelesez), SourceForge-ko gunean:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347
 
 ==============================================================================
@@ -39,11 +39,11 @@ OmegaT-ren ezaugarri nagusiak ondokoak dira:
   - OmegaT-k irakurri ditzakeen fitxategiak dituen edozein direktoriotan egiten ditu bilaketak
   - parekatze lausoa
   - proiektuen kudeaketa adimentsua, baita direktorioen hierarkia konplexuak dituztenean ere
-  - glosarioak erabil daitezke (terminologiaren egiaztapena)
+  - glosarioak erabili daitezke (terminologiaren egiaztapena)
   - dokumentazio eta tutorial ulerterraza
-  - lokalizazioa hainbat hizkuntzatara.
+  - lokalizazioa hainbat hizkuntzatara
 
-OmegaT-k ondoko formatuak onartzen ditu: OpenDocument fitxategiak, Microsoft Office fitxategiak (OpenOffice.org konbertsio-iragazki gisa erabiliz, edo HTMLra bihurtuz), OpenOffice.org edo StarOffice fitxategiak eta (x)HTML, Javaren lokalizazio-fitxategiak edo testu-fitxategi arruntak.
+OmegaT-k ondoko formatuak onartzen ditu: OpenDocument fitxategiak, Microsoft Office fitxategiak (OpenOffice.org konbertsio-iragazki gisa erabiliz, edo HTMLra bihurtuz), OpenOffice.org edo StarOffice fitxategiak eta (x)HTML, Javaren lokalizazio-fitxategiak, testu hutseko fitxategiak eta beste hainbat.
 
 OmegaT-k automatikoki eskaneatuko ditu direktorio-hierarkia konplexuenak, onartzen dituen fitxategi guztiak atzituko ditu, eta egitura berdina duen "helburu" direktorio bat sortuko du, onartzen ez dituen fitxategien kopiak barne.
 
@@ -52,7 +52,7 @@ Tutorial azkar bat nahi izanez gero, ireki OmegaT eta irakurri pantailan ageri d
 Erabiltzailearen eskuliburua deskargatu berri duzun paketean dago. [Laguntza] menua erabiliz atzitu dezakezu, OmegaT ireki ondoren.
 
 ==============================================================================
- 3. Java eta OmegaT-ri buruzko ohar orokorrak
+ 3. Esaldi hau ez da hirugarrena
 
 OmegaT-k Java Runtime Environment 1.4 edo altuagoa behar du zure sisteman instalatu ahal izateko. Java ondoko helbidean eskuratu daiteke:
     http://java.com
@@ -64,7 +64,7 @@ OmegaT ongi instalaturik daukan makina batean, aski da klik bikoitza egitea Omeg
 
 Java instalatu ondoren, agian zure sistemaren path aldagaia aldatu beharko duzu, 'java' aplikazioa zein direktoriotan dagoen kontuan har dezan.
 
-Linux erabiltzaileek kontuan hartu behar dute OmegaT-k ez duela funtzionatuko hainbat Linux banaketatan (esaterako, Ubuntun) aurki daitezkeen Java inplementazio libreetan, garapen hauek eguneratu edo osatuu gabe baitaude. Deskargatu eta instalatu Java Runtime Environment (JRE) goian duzun esteka erabiliz, edo deskargatu eta instalatu JRE-rekin paketaturik datorren OmegaT bertsioa ("Linux" izena daukan .tar.gz paketea).
+Linux erabiltzaileek kontuan hartu behar dute OmegaT-k ez duela funtzionatuko hainbat Linux banaketatan (esaterako, Ubuntun) aurkitu daitezkeen Java inplementazio libreetan, garapen hauek eguneratu edo osatuu gabe baitaude. Deskargatu eta instalatu Java Runtime Environment (JRE) goian duzun esteka erabiliz, edo deskargatu eta instalatu JRE-rekin paketaturik datorren OmegaT bertsioa ("Linux" izena daukan .tar.gz paketea).
 
 Linux PowerPC sistematan exekutatzen bada, erabiltzaileek IBM-ren JRE-a deskargatu beharko dute, Sun-ek ez baitu PPC sistementzako JRE-rik eskaintzen. Deskargatu bat hemendik:
     http://www-128.ibm.com/developerworks/java/jdk/linux/download.html
@@ -76,43 +76,62 @@ OmegaT-ren garapenean laguntzeko, jarri harremanetan garatzaileekin ondoko helbi
     http://lists.sourceforge.net/lists/listinfo/omegat-development
 
 OmegaT-ren interfazea, erabiltzailearen eskuliburua edo beste edozein dokumentu itzultzeko, irakurri:
-      http://www.omegat.org/omegat/translation-info.html
+      http://www.omegat.org/omegat/omegat_en/translation-info.html
 
 Eta harpidetu itzultzaileen zerrendara:
       http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
 
 Beste mota bateko ekarpenak egiteko, harpidetu erabiltzaile-taldera lehenengo:
-      http://groups.yahoo.com/group/OmegaT/
+      http://tech.groups.yahoo.com/group/omegat/
 
 Eta hasi begiratzen OmegaT-ren munduan zer ari den gertatzen...
 
-  OmegaT, jatorriz, Keith Godfreyren lana da.
+  OmegaT Keith Godfreyren lana da jatorriz.
   Marc Prior OmegaT proiektuaren koordinatzailea da.
 
 Ondoko hauek ekarpenak egin dituzte:
 
-Kodea ondoko hauek garatu dute
-
-  Sacha Chua
+Kodearen garatzaileak
+  Didier Briel
   Kim Bruning
-  Maxym Mykhalchuk (egungo garatzaile nagusia)
-  Henry Pijffers
+  Sacha Chua
+  Thomas Huriaux
+  Maxym Mykhalchuk (garatzaile nagusia)
+  Henry Pijffers (bertsio kudeatzailea)
   Benjamin Siband
+  Martin Wunderlich
 
-Lokalizazioan ondoko hauek lagundu dute
+Lokalizazioa
+  Roberto Argus (Portugesa-Brasiliera)
   Alessandro Cattelan (Italiera)
   Sabine Cretella (Alemaniera)
+  Suzanne Bolduc (Esperantoa)
+  Didier Briel (Frantsesa)
+  Frederik De Vos (Nederlandera)
   Cesar Escribano Esteban (Espainiera)
   Dmitri Gabinski (Belarusiera, Esperantoa, eta Errusiera)
-  Jean-Christophe Helary (Frantsesa)
+  Takayuki Hayashi (Japoniera)
+  Jean-Christophe Helary (Frantsesa eta Japoniera)
+  Yutaka Kachi (Japoniera)
+  Elina Lagoudaki (Grekera)
+  Martin Lukáč (Eslovakiera)
+  Samuel Murray (Afrikaans-a)
+  Yoshi Nakayama (Japoniera)
+  David Olveira (Portugesa)
+  Ronaldo Radunz (Portugesa-Brasiliera)
+  Thelma L. Sabim (Portugesa-Brasiliera)
   Juan Salcines (Espainiera)
   Pablo Roca Santiagio (Espainiera)
+  Karsten Voss (Poloniera)
+  Gerard van der Weyde (Nederlandera)
   Martin Wunderlich (Alemaniera)
   Hisashi Yanagida (Japoniera)
-  Yoshi Nakayama (Japoniera)
-  Takayuki Hayashi (Japoniera)
   Kunihiko Yokota (Japoniera)
-  Yutaka Kachi (Japoniera)
+  Erhan Yükselci (Turkiera)
+  Dragomir Kovacevic (Serbokroaziera)
+  Claudio Nasso (Italiera)
+  Ahmet Murati (Albaniera)
+  Sonja Tomaskovic (Alemaniera)
 
 Beste ekarpen batzuk
   Sabine Cretella
@@ -122,17 +141,24 @@ Beste ekarpen batzuk
   Marc Prior (egungoo lokalizazio kudeatzailea)
   eta beste lagun asko eta asko
 
+(OmegaT proiektuari iekarpen esanguratsua egin diozula uste baduzu eta zure izena hemen agertzen ez bada, mesedez hitz egin gurekin.)
+
 OmegaT-k ondoko liburutegiak erabiltzen ditu:
-  HTMLParser: Somik Raha, Derrick Oswald eta beste batzuk, GNU Lesser Public License, 2.1. bertsioa
-  Steve Roy MRJ Adapter.
-  VLDocking Framework.
+  HTMLParser by Somik Raha, Derrick Oswald and others (LGPL License).
+  http://sourceforge.net/projects/htmlparser
+
+  MRJ Adapter by Steve Roy (LGPL License).
+  http://homepage.mac.com/sroy/mrjadapter/
+
+  VLDocking Framework by VLSolutions (CeCILL License).
+  http://www.vlsolutions.com/en/products/docking/
 
 ==============================================================================
  5.  OmegaT-k erroreren bat al dauka? Laguntzarik behar al duzu?
 
 Errore baten berri eman baino lehen, ziurtatu dokumentazioa sakonki aztertu duzula. Beharbada, ikusi duzuna OmegaT-k daukan ezaugarri bat besterik ez da. OmegaT-ren egunkaria aztertzen baduzu eta "Error", "Warning", "Exception" edo "died unexpectedly" bezalako hitzak ikusten badituzu, orduan erroreren bat daukazu (log.txt fitxategia erabiltzaile-hobespenen direktorioan dago, ikusi eskuliburua bere kokapena ezagutzeko).
 
-Egin behar duzun hurrengo gauza, beste erabiltzaile batzuekin aurkitu duzuna baieztatzea da, arazoa jada jakinarazi ez dela ziurtatzeko. Erroreak jakinarazteko orria ondoko helbidean ikus dezakezu: Soilik seguru dakizunean gertatu behar izango ez lukeen zerbait eragin duen sekuentzia edo gertaera bat aurkitu duzula bete beharko zenuke errore-jakinarazpen bat.
+Egin behar duzun hurrengo gauza, beste erabiltzaile batzuekin aurkitu duzuna baieztatzea da, arazoa jada jakinarazi ez dela ziurtatzeko. Erroreak jakinarazteko orria ere SourceForge-n aurkituko duzu. Seguru dakizunean gertatu behar izango ez lukeen zerbait eragin duen sekuentzia edo gertaera bat aurkitu duzula soilik bete beharko zenuke errore-jakinarazpen bat.
 
 Errore-jakinarazpen egokiek hiru gauza behar dituzte.
   - Urratsak errorea errepikatzeko,
@@ -152,26 +178,42 @@ Zure errore-jakinarazpenarekin zer ari den gertatzen jakin nahi baduzu, SourceFo
 ==============================================================================
 6.   Bertsioaren xehetasunak
 
+5.  OmegaT-k erroreren bat al dauka? Laguntzarik behar al duzu?
+
+Errore baten berri eman baino lehen, ziurtatu dokumentazioa sakonki aztertu duzula. Beharbada, ikusi duzuna OmegaT-k daukan ezaugarri bat besterik ez da. OmegaT-ren egunkaria aztertzen baduzu eta "Error", "Warning", "Exception" edo "died unexpectedly" bezalako hitzak ikusten badituzu, orduan erroreren bat daukazu (log.txt fitxategia erabiltzaile-hobespenen direktorioan dago, ikusi eskuliburua bere kokapena ezagutzeko).
+
+Egin behar duzun hurrengo gauza, beste erabiltzaile batzuekin aurkitu duzuna baieztatzea da, arazoa jada jakinarazi ez dela ziurtatzeko. Erroreak jakinarazteko orria ere SourceForge-n aurkituko duzu. Seguru dakizunean gertatu behar izango ez lukeen zerbait eragin duen sekuentzia edo gertaera bat aurkitu duzula soilik bete beharko zenuke errore-jakinarazpen bat.
+
+Errore-jakinarazpen egokiek hiru gauza behar dituzte.
+  - Urratsak errorea errepikatzeko,
+  - Zer espero zenuen ikustea, eta
+  - Zer ikusi zenuen.
+
+Fitxategien kopiak, egunkariaren zatiak, pantaila-argazkiak... edozer gauza gehitu diezaiokezu errore-jakinarazpenari, horrela garatzaileek errorea errazago aurkitu eta konponduko dutela uste baduzu.
+
+Erabiltzaile-taldearen fitxategiak arakatzeko, joan hona:
+     http://tech.groups.yahoo.com/group/omegat/
+
+Errore-jakinarazpenen orria arakatzeko eta, beharrezkoa bada, errore bat jakinarazteko, joan hona:
+     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+
+Zure errore-jakinarazpenarekin zer ari den gertatzen jakin nahi baduzu, SourceForge-ko erabiltzaile gisa erregistratu zaitezke.
+
+==============================================================================
+6.   Bertsioaren xehetasunak
+
 Mesedez, ikusi 'changes.txt' fitxategia bertsio honetan zein aurrekoetan egon diren aldaketei buruzko informazio zehatza nahi baduzu.
 
-Erabiltzaile-interfazearen ezaugarri berriak (OmegaT 1.0 seriearekin konparatuz)
-  - Bilaketak egiteko interfazea berridatzi da eta funtzionalitate gehiago eman zaio
-  - Interfaze nagusia hobetu da
-  - Testuak bistaratzeko letra-tipoa hautatzeko aukera
-  - Lokalizazioetarako laguntza osoa
-  - Itzuli gabeko hurrengo segmentura jauzi egiteko aukera
-  - Fitxategi-formatuen iragazkiak pertsonalizatzeko aukera ugari
-  - Erabiltzaileak pertsonalizatu dezakeen segmentazioa
-  - Parekatzeen eta Glosarioen leihoak panel zatitu arrastagarri baten bidez elkarri lotuta daude
-
 Onartutako fitxategi-formatuak:
-  - Testu arrunta
+  - Testu hutsa
   - HTML eta XHTML
+  - HTML Help Compiler (HCC)
   - OpenDocument / OpenOffice.org
   - Javaren baliabide-paketeak (.properties)
   - INI fitxategiak (edozein kodeketarekin gordetako gako=balio bikotedun fitxategiak)
   - PO fitxategiak
   - DocBook dokumentazioko fitxategi-formatua
+  - Microsoft OpenXML fitxategiak
 
 Nukleoaren aldaketak:
   - (Esaldien) segmentazio malgua
@@ -181,6 +223,10 @@ Nukleoaren aldaketak:
   - HTML etiketen atributuak itzuli egin daitezke
   - TMX 1.1-1.4b Level 1 formatuarekin erabateko bateragarritasuna
   - TMX 1.4b Level 2 formatuaren onarpen partziala
+
+Erabiltzaile-interfazearen ezaugarri berriak (OmegaT 1.4 bertsioekin alderatuta):
+  - Bilaketak egiteko interfazea berridatzi da eta funtzionalitate gehiago eman zaio
+  - Interfaze nagusia hobetu da leiho atrakagarrien bidez
 
 ==============================================================================
 

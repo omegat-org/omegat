@@ -6,29 +6,45 @@
 <body>
 
 <h1>Hasteko gida azkarra</h1>
-<p>edo <strong>Hasi OmegaT erabiltzen 5 minututan</strong></p>
+<p><small>edo Hasi OmegaT erabiltzen 5 minututan</small></p>
 
-<p><strong>Gida azkar honek oinarrizkoa azaltzen du soilik. Aukeran, erabiltzaile guztiek erabiltzailearen eskuliburua irakurri beharko lukete OmegaT-k eskaintzen duen guztira ohitzeko. Erabiltzailearen eskuliburua erakusteko, sakatu "F1". Hemen deskribatutako lasterteklek "Ktrl+tekla" konbentzioa erabiltzen dute, baina Mac erabiltzaileek "Cmd+tekla" erabili beharko lukete. "Cmd" tekla "sagarraren" marka duena da Apple-en teklatuetan.</strong></p>
+<p><strong>Gida azkar honek oinarrizkoa azaltzen du soilik. Aukeran, erabiltzaile guztiek erabiltzailearen eskuliburu hau irakurri beharko lukete OmegaT-k eskaintzen duen guztira ohitzeko.</strong></p>
 
 <h2>Edukiak</h2>
-   <ol><li>OmegaT-ren funtzionamendua, hitz gutxitan</li>
-   <li>Nola egin itzulpenak OmegaT erabiliz</li>
-   <li>Nola erabili etiketadun testua</li></ol>
 
-<hr>
+<ol type="I">
+   <li><a href="#Briefly.2C_how_OmegaT_works">OmegaT-ren funtzionamendua, hitz gutxitan</a></li>
+   <li><a href="#How_to_translate_using_OmegaT">Nola egin itzulpenak OmegaT erabiliz</a>
+      <ol type="a">
+         <li><a href="#Create_and_open_a_new_project">Proiektu berria sortu eta ireki</a></li>
+         <li><a href="#Translate_the_segments_one_by_one">Segmentuak banaka itzuli</a></li>
+         <li><a href="#Use_TM_and_glossary_matches">Itzulpen-memoriak eta glosario-parekatzeak erabili</a></li>
+         	<ol type="1">
+         		<li><a href="#TM_matches">Itzulpen-memorien parekatzeak</a></li>
+         		<li><a href="#Glossary_matches">Glosario-parekatzeak</a></li>
+         	</ol>
+         <li><a href="#Create_the_translated_documents">Dokumentu itzuliak sortu</span></a></li>
+      </ol>
+   </li>
+   <li><a href="#Dealing_with_tagged_text">Nola erabili etiketadun testua</a>
+      <ol type="a">
+         <li><a href="#An_example...">Adibide bat...</a></li>
+         <li><a href="#Tag_verification">Etiketen egiaztapena</a></li>
+      </ol>
+   </li>
+</ol>
 
 <a name="Briefly.2C_how_OmegaT_works"></a>
-<h2>1. OmegaT-ren funtzionamendua, hitz gutxitan</h2>
+<h2>I. OmegaT-ren funtzionamendua, hitz gutxitan</h2>
 
 <p>OmegaT-ren pantaila hiru leihoz osaturik dago. Horietako bakoitzaren tamaina aldatzeko sagua erabili daiteke. Ezkerrean Editorea dago, itzulpenak idazteko erabiltzen dena. Eskuinean, goian, Parekatzeen Bisorea, itzulpen-memorien parekatzeak erakusten den lekua. Azpian, Glosarioen Bisorea dago, glosario mailako parekatzeak erakusten den lekua.</p>
 
-<p>Editorearen leihoan OmegaT-k sorburu-testua esalditan 'segmentatuta' (edo paragrafotan - ikusi eskuliburua <strong>F1</strong> sakatuz) erakusten du. Segmentuak banaka itzultzen dira. Segmentu batetik bestera igarotzerakoan, itzulpenak itzulpen-memoria batean gordetzen dira. Segmentu guztiak itzuli ondoren (edo lehenago, nahi izanez gero), OmegaT-k dokumentu itzuliak sortzen ditu, itzulpen-memoria erabiliz, "helburu" karpeta batean.</p>
+<p>Editorearen leihoan OmegaT-k sorburu-testua aurkezten du, esalditan 'segmentatuta' (edo paragrafotan - ikusi <a href="./segmentation.html">Sorburuaren segmentazioa</a>!). Segmentuak banaka itzultzen dira. Segmentu batetik bestera igarotzerakoan, itzulpenak itzulpen-memoria batean gordetzen dira. Segmentu guztiak itzuli ondoren (edo lehenago, nahi izanez gero), OmegaT-k dokumentu itzuliak sortzen ditu, itzulpen-memoria erabiliz, "helburu" karpeta batean.</p>
 
 <p>OmegaT-k itzulpen-proiektuak deiturikoetan antolatzen ditu itzulpen-lanak. Proiektu bakoitzerako, OmegaT-k karpeta-multzo bat sortzen du. Karpeta hauetan gordeko dira itzuli nahi diren sorburu-dokumentuak, erabili nahi diren glosarioak eta erabili nahi diren itzulpen-memoriak. Era berean, OmegaT-k "helburu" karpeta bat sortzen du azkenean lortuko diren dokumentu itzuliak gordetzeko.</p>
 
-<hr>
 <a name="How_to_translate_using_OmegaT"></a>
-<h2>2. Nola egin itzulpenak OmegaT erabiliz</h2>
+<h2>II. Nola egin itzulpenak OmegaT erabiliz</h2>
 
 <a name="Create_and_open_a_new_project"></a>
 <h3>a. Proiektu berria sortu eta ireki</h3>
@@ -39,9 +55,9 @@
 
 <p>OmegaT-k proiektuaren karpetaren sorrera baieztatzea edo aldatzea eskatuko dizu, ondoko koadroaren bidez:</p>
 
-<center><img src="images/NewProject.png" alt="Proiektuaren propietateen leihoa" ></center>
+<center><img src="images/NewProject.png" alt="Proiektuaren propietateen leihoa" /></center>
 
-<p>Sinpleena azpikarpeten kokapena dagoen bezala utzi eta "Onartu" sakatzea da, baina lehenengo egiaztatu sorburuaren eta itzulpenaren hizkuntza-kodeak zuzenak direla. Hautatu hizkuntza-kodea (2 letra) edo hizkuntza- eta eskualde-kodeak (2+2 letra) goitibeherako koadroa erabiliz, edo tekleatu eskuz (jarraitu 2 letren eredua). Ez ahaztu "helburu" azpikarpeta (zure dokumentu itzuliak gordetzen den lekua) non dagoen kokatuta.</p>
+<p>Sinpleena azpikarpeten kokapena dagoen bezala utzi eta "Onartu" sakatzea da, baina lehenengo egiaztatu sorburuaren eta itzulpenaren hizkuntza-kodeak zuzenak direla. Hautatu hizkuntza-kodea (2 letra) edo hizkuntza- eta herrialde-kodeak (2+2 letra) goitibeherako koadroa erabiliz, edo tekleatu eskuz (jarraitu 2 letren eredua). Ez ahaztu "helburu" azpikarpeta (zure dokumentu itzuliak gordetzen den lekua) non dagoen kokatuta.</p>
 
 <p>OmegaT-k paragrafoak segmentatu ordez esaldiak segmenta ditzan ezartzen badudu, ideia ona izaten da segmentazio-arauak birritan aztertzea.</p>
 
@@ -69,9 +85,9 @@
 
 <p>Sakatu "<strong>ENTER</strong>" hurrengo segmentura mugitzeko.</p>
 
-<p>Oharra:<br> - Testuaren beste edozein atalera mugitzeko, gora zein behera, egin klik bikoitza ireki nahi duzun esaldi edo paragrafoan. <br> - Hutsik dagoen helburu-eremu batean itzuli nahi izanez gero, hautatu aukera hori <strong>Aukerak → Editatu portaera</strong> leihoan.</p>
+<p>Oharra:<br/> - Testuaren beste edozein atalera mugitzeko, gora zein behera, egin klik bikoitza ireki nahi duzun esaldi edo paragrafoan. <br/> - Hutsik dagoen helburu-eremu batean itzuli nahi izanez gero, hautatu aukera hori <strong>Aukerak → Editatu portaera</strong> leihoan.</p>
 
-<p>"<strong>ENTER</strong>" sakatzean hainbat gauza gertatzen dira ezkutuan:<br> OmegaT-k segmentu-bikotea (sorburu-segmentua eta bere itzulpena) gehitzen dio itzulpen-memoriari, eta automatikoki proiektuaren beste fitxategietan detektatzen dituen segmentu berdinak itzultzen ditu. Era berean, itzulpen-memoria eta glosarioa eskaneatzen ditu itzuli gabeko hurrengo segmentuarentzako parekoak aurkitzeko.</p>
+<p>"<strong>ENTER</strong>" sakatzean hainbat gauza gertatzen dira ezkutuan:<br/> OmegaT-k segmentu-bikotea (sorburu-segmentua eta bere itzulpena) gehitzen dio itzulpen-memoriari, eta automatikoki proiektuaren beste fitxategietan detektatzen dituen segmentu berdinak itzultzen ditu. Era berean, itzulpen-memoria eta glosarioa eskaneatzen ditu itzuli gabeko hurrengo segmentuarentzako parekoak aurkitzeko.</p>
 
 <a name="Use_TM_and_glossary_matches"></a>
 <h3>c. Itzulpen-memoriak eta glosario-parekatzeak erabili</h3>
@@ -80,14 +96,14 @@
 <h4>1. Itzulpen-memorien parekatzeak</h4>
 
 <p>OmegaT-k hurrengo segmentuarentzako parekatze lausoak (%30etik gorakoak - ikusi eskuliburua) aurkitzen baditu itzulpen-memorian, horiek parekatzeen bisorean erakusten ditu. Parekatzeen bisorearen portaera lehenetsia lehen parekatzea aurrehautatzea da.</p>
-<p>Itzulpen-memorien parekatzeak parekatzeen bisoretik hartu eta helburu-eremuan txertatzeko, lasterteklak erabili daitezke:<br>
+<p>Itzulpen-memorien parekatzeak parekatzeen bisoretik hartu eta helburu-eremuan txertatzeko, lasterteklak erabili daitezke:<br/>
 <ul>
    <li>Sakatu <code>Ktrl+I</code> aurrehautatutako parekatzea kurtsorearen kokapenean txertatzeko, edo...</li>
    <li>Sakatu <code>Ktrl+R</code> segmentu osoa haurreautatutako parekatzearekin ordezteko.</li>
 </ul>
 </p>
 
-<p>Parekatze bat baino gehiago aurkitu bada, eta aurrehautatutako parekatzea erabili nahi ez bada:<br>
+<p>Parekatze bat baino gehiago aurkitu bada, eta aurrehautatutako parekatzea erabili nahi ez bada:<br/>
 <ul>
 	<li>Hautatu nahi duzun parekatzea parekatzeen bisorean: <code>Ktrl+2</code> bisorean erakusten den bigarren parekatzea hautatzeko, <code>Ktrl+3</code> hirugarren parekatzerako, etab.</li>
 	<li>Ondoren, erabili <code>Ktrl+I</code> edo <code>Ktrl+R</code> lasterteklak lehen adierazi den bezala.</li>
@@ -112,9 +128,9 @@
 
 <p>Itzulpena amaitzeko, ireki helburu-fitxategi bakoitza bere aplikazio elkartuan (nabigatzailea, testu-prozesadorea...) eta itzulpenaren edukia eta formatua berrikusi. Gero, itzuli OmegaT-ra, beharrezkoak diren zuzenketak egiteko; ez ahaztu dokumentu itzulia berriro birsortu behar duzula.</p>
 
-<hr>
+
 <a name="Dealing_with_tagged_text"></a>
-<h2>3. Nola erabili etiketadun testua</h2>
+<h2>III. Nola erabili etiketadun testua</h2>
 
 <p>OmegaT-k etiketa bereziak erabiltzen ditu sorburu-dokumentuen formatua (lodia, etzana, etab.) galtzen ez dela segurtatzeko. OmegaT-ren etiketen osaera hau da: letra bat edo gehiago eta ondoren digitu bat edo gehiago, eta zenbaitetan "/" karakterea erabiltzen dute (esaterako: &lt;f0&gt;, &lt;br10/&gt;), &lt;/s2&gt; etab.).</p>
 
@@ -183,6 +199,9 @@ size can be changed from the dialog.</code>
 <p>Zenbait kasutan, etiketa-akatsek dokumentu bat ireki dadin eragotzi dezakete. Hortaz, dokumentu itzuliak sortu baino lehen, etiketa-akats guztiak zuzendu dituzula segurtatu beharko zenuke.</p>
 
 <p>Azkenik, birritan egiaztatu beharko zenuke azken formatua, dokumentu itzulia bere bisore edo editore elkartuan irekiz.</p>
+
 <hr>
+<p><a href="legalNotices.html" title="Legezko oharrak">Legezko oharrak</a></p>
+
 </body>
 </html>

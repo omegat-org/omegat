@@ -1,0 +1,201 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Sorburuaren segmentazioa - OmegaT 1.6.2 erabiltzailearen eskuliburua</title>
+</head>
+<body>
+
+<h1>Sorburuaren segmentazioa</h1>
+
+<h2>Edukiak</h2></div>
+
+<ul type="none">
+   <li>1. <a href="#Segmentation_Basics">Segmentazioaren oinarriak</a></li>
+
+   <li>2. <a href="#Sentence_Segmentation">Esaldien segmentazioa</a>
+
+      <ul>
+         <li>2.1. <a href="#About_Rules">Arauei buruz</a></li>
+
+         <li>2.2. <a href="#Rules_Setup">Arauen konfigurazioa</a>
+
+            <ul>
+               <li>2.2.1. <a href="#Sets_of_Rules">Arauen multzoak</a></li>
+               <li>2.2.2. <a href="#Simple_examples">Adibide sinpleak</a></li>
+            </ul>
+         </li>
+
+         <li>2.3. <a href="#Regular_Expressions_to_use_in_segmentation_rules">Segmentazio-arauetan erabili daitezkeen adierazpen erregularrak</a>
+
+            <ul>
+               <li>2.3.1. <a href="#Short_summary_of_regular-expression_constructs">Adierazpen erregularren laburpena</a></li>
+            </ul>
+         </li>
+      </ul>
+   </li>
+</ul>
+
+<a name="Segmentation_Basics"></a>
+<h2>Segmentazioaren oinarriak</h2>
+
+<p>Itzulpen-memoriak kudeatzeko tresnek segmentu deritzen testu-unitateekin egiten dute lan. Testu bat segmentatzeko hainbat modu dago.</p>
+
+<p>OmegaT-k, hasteko, testua egitura-mailan segmentatzen du. Prozesu honetan zehar, sorburu-fitxategiaren egitura erabiltzen da soilik segmentuak sortzeko. Esaterako, testu-fitxategiak segmentatzeko lerro-jauziak, lerro hutsak eta antzekoak erabiltzen dira. Gertatu daiteke egitura-mailako segmentaziorik ez sortzea. Formatudun fitxategiak (OpenOffice.org, OpenDocument, XHTML eta HTML dokumentuak) paragrafo-mailako etiketak erabiliz segmentatzen dira.</p>
+
+<p>Itzulgai diren objektuen atributuak ere (XHTML edo HTML fitxategietan) segmentuak banatzeko erauzten dira.</p>
+
+<p>OmegaT-k esaldiz esaldi ere segmentatu dezake. Esaldien segmentazioa egitura-mailako segmentazioaren ondoren gauzatzen da. Zoritxarrez, prozesu hauetan sortutako segmentuak ezin dira aldatu (zatitu edo batu) itzulpena egiten ari den bitartean. Hau OmegaT-k daukan eta onartzen dugun muga bat da.</p>
+
+<p>Segmentazioa ez bada zure gustukoa, sorburu-fitxategia OmegaT-tik kanpo aldatu beharko duzu edota esaldien segmentazio-arauak aldatu beharko dituzu. Aldaketa horiek egin ondoren, proiektua birkargatu behar izango duzu OmegaT-k aldaketak kontuan har ditzan.</p>
+
+<a name="Sentence_Segmentation"></a>
+<h2>Esaldien segmentazioa</h2>
+
+<p>Sorburu-fitxategia unitate logikoetan segmentatu ondoren (formatudun fitxategietan unitate hau paragrafoa da), OmegaT-k bloke hauek esaldietan segmentatuko ditu esaldien mailako segmentazioa desaktibatzen ez bada. Oro har, OmegaT-k zuk erabakitzen duzun edozein modutan segmentatu ditzake sorburu-fitxategien blokeak. Hala ere, OmegaT-ren <strong>portaera lehenetsia</strong> segmentuak esaldika sortzea denez, <strong>esaldien</strong> segmentazioa deitzen diogu.</p>
+
+<p>Esaldiak segmentatzeko funtzioa eraikitzeko, <a href="http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a> estandarra jarraitu nahi izan genuen, nahiz eta, momentuz, OmegaT-k ez dituen onartzen SRX estandarraren ezaugarri guztiak eta SRX formatuan definitutako arauak inportatu eta esportatzeko gai ez den. Hala ere, SRX-a ezagutzen baduzu, orduan badakizu OmegaT-k nola egiten duen lan, biak ala biak ia parekoak baitira.</p>
+
+<a name="About_Rules"></a>
+<h3>Arauei buruz</h3>
+
+<p>Bi arau-mota daude.</p>
+
+<ul>
+   <li>Eten-arauek testua segmentuetan banatzen dute.</li>
+   <li>Salbuespen-arauek banatu behar ez diren testu-zatiak zehazten dituzte.</li>
+</ul>
+
+<p>Eten-arauen adibidea: <i>"Ba al zuen zentzurik? Ez nago ziur."</i> esaldia bi segmentutan banatu daiteke <code>?</code> ikurraren ondoren. Eten-arau bat egon beharko litzateke "<code>?</code>" ikurrerako.</p>
+
+<p>Salbuespen-arauen adibidea: <i>""Who is afraid of Mrs. Woolf?"</i> ez da segmentatu behar "<code>.</code>" ondoren.  Salbuespen-arau bat egon beharko litzateke "<code>Mrs.</code>" ikurrerako.</p>
+
+<p>Aurredefinitutako eten-arauek aski izan beharko lukete Europako hizkuntza gehienetan eta japonieran; hala ere, itzulpenaren sorburu-hizkuntzarako salbuespen-arau gehiago definitzea gomendatzen dugu, ezinezkoa baitzaigu hizkuntza posibe guztietako salbuespen posible guztiak aurrez definitzea.</p>
+
+<a name="Rules_Setup"></a>
+<h3>Arauen konfigurazioa</h3>
+
+<p>Arauak ezartzeko, hautatu <strong>Aukerak -&gt; Segmentazioa</strong> menu nagusian. Kontuan izan segmentazio-ezarpenak proiektua hasi ondoren aldatzen badituzu, proiektua birkargatu egin beharko duzula aldaketak indarrean sartzeko.</p>
+
+<a name="Sets_of_Rules"></a>
+<h4>Arauen multzoak</h4>
+
+<p>Hizkuntza-eredu bati dagozkion segmentazio-arauen multzoak hizkuntzaren lehentasun ordenan aplikatzen dira, alegia, hizkuntza espezifikoetarako arauak lehenetsitako hizkuntzetarako arauen gainetik egongo dira.</p>
+
+<p>Esaterako, Kanadako frantsesaren (FR-CA) arauek lehentasuna izango dute frantsesaren (FR.*) arauen gainetik, eta azken hau, lehenetsitakoen (.*) gainetik egongo da. Beraz, Kanadako frantsesetik itzultzen bada, proiektuak hizkuntza horretarako definitutako arauak, frantseserako definitutakoak eta lehenetsitakoak erabiliko ditu, ordena horretan.</p>
+
+<p>Arauen multzo hutsa sortzeko, sakatu koadroaren goiko aldean ageri den <strong>Gehitu...</strong> botoia. Lerro hutsa ageriko da taularen behealdean. Aldatu arauen multzoaren izena eta hizkuntza-eredua. Hizkuntza-ereduaren sintaxia adierazpen erregularren sintaxiaren moldekoa da. Ikusi <a href="#Short_summary_of_regular-expression_constructs">Adierazpen erregularren laburpena</a>.</p>
+
+<p>Zure arauen multzoa hizkuntza-herrialdea bikote bati badagokio, <strong>Mugitu gora</strong> botoia erabiliz taularen goialdera eraman dezazun gomendatzen dizugu.</p>
+
+<p>Arauen multzo bat editatzeko sakatu bere gainean, hautatutako multzoaren arauak koadroaren azpiko leihoan agertuko dira.</p>
+
+<p>Etena/Salbuespena zutabeko kontrol-laukiak arauaren izaera ezartzen du: kontrol-laukia markatuta badago, arauak etenak sortuko ditu, eta markatu gabe badago, salbuespenak sortuko ditu. Bi adierazpen erregularrek, Aurretik eta Ondoren zutabeetan adierazten direnek, kokapen baten aurretik eta ondoren zerk egon behar duen zehazten dute, eten- edo salbuespen-araua eratuz.</p>
+
+<p>Segmentazio-prozesua honela laburbildu daiteke. Irudika ezazu testuaren lehen sinboloaren ondoren azken sinboloaren aurrera mugitzen den kurtsore bat. Kurtsorearen posizio bakoitzerako arau bakoitza hartzen dugu, taulan adierazitako ordenan, eta <strong>Aurretik</strong> eredua aplikatzen saiatzen gara kurtsorearen ezkerraldean dagoen testuari eta <strong>Ondoren</strong> eredua kurtsoaren eskuinaldean dagoenari.</p>
+
+<p>Arauren bat arrakastaz aplikatzen bada, salbuespen-araua bada prozesua gelditzen dugu eta arau gehiago aztertzeari uzten diogu, eta eten-araua bada ezkerreko testua segmentutzat hartzen dugu, kurtsoreak testuan duen posizio bakoitzerako.</p>
+
+<a name="Simple_examples"></a>
+<h4>Adibide sinpleak</h4>
+
+<p>
+<dl>
+   <dt><strong>Helburua:</strong> segmentu bat sortzea puntu baten ('<code>.</code>') eta zuriune baten artean</dt>
+   <dd>Aurretik: <code>\.</code> Ondoren: <code>\s</code> <br> <strong>Oharra:</strong> "<code>\.</code>" zeinuak "<code>.</code>" ordezkatzen du <br> "<code>\s</code>" zeinuak edozein espazio zuri ordezkatzen du</dd>
+
+   <dt><strong>Helburua:</strong> segmentu bat ez sortzea "<code>Mr.<c/code>" ondoren</dt>
+   <dd>Aurretik: <code>Mr\.</code> Ondoren: <code>\s</code> <br> <strong>Oharra:</strong> Ez ahaztu arauaren kontrol-laukia <strong>markatu gabe</strong> uztea
+   </dd>
+
+   <dt><strong>Helburua:</strong> segmentu bat sortzea "。" ondoren (japonierako puntua)</dt>
+   <dd>Aurretik: 。 Ondoren: (hutsik) <br> <strong>Oharra:</strong> Eremua hutsik utzi dezakezu</dd>
+</dl>
+</p>
+
+<a name="Regular_Expressions_to_use_in_segmentation_rules"></a>
+<h3>Segmentazio-arauetan erabili daitezkeen adierazpen erregularrak</h3>
+
+<p>Segmentazio-arauak irudikatzeko, adierazpen erregularrak erabiltzen dira. Honek malgutasun handia ahalbidetzen du arauak definitzerakoan eta SRX estandarrarekin bat dator.</p>
+
+<a name="Short_summary_of_regular-expression_constructs"></a>
+<h4>Adierazpen erregularren laburpena</h4>
+
+<p>Ondoko formak OmegaT-n segmentazio-arauak sortzeko gehien erabiltzen direnak dira, baina ez dira erabili daitezkeen bakarrak. OmegaT-k <a href="http://www.lisa.org/standards/srx/">SRX estandarrean</a> deskribaturik dauden adierazpen erregular guztiak onartzen ditu.</p>
+
+<table border="0" width="80%" cellpadding="1" cellspacing="0" summary="Adierazpen erregularren formak, eta beren baliokideak">
+    <tr bgcolor="#DDEEFF"><th width="10%" align="left" id="construct">Forma</th><th align="left">Baliokidea</th></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="flags">Banderak</th></tr>
+    <tr><td><tt>(?i)</tt></td><td>Maiuskulak/minuskulak bereizten ez dituen bilaketa ahalbidetzen du (portaera lehenetsia bereiztea da)</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr><th align="left" colspan="2" id="characters">Karaktereak</th></tr>
+    <tr><td><strong>x</strong></td><td><strong>x</strong> karakterea, ondokoak salbu...</td></tr>
+
+    <tr><td><tt>\u</tt><strong>hhhh</strong></td><td><tt>0x</tt><strong>hhhh</strong> balio hamaseitarra duen karakterea</td></tr>
+    <tr><td><tt>\t</tt></td><td>Tabuladore karakterea (<tt>'\u0009'</tt>)</td></tr>
+    <tr><td><tt>\n</tt></td><td>Lerro berria sortzeko karakterea (<tt>'\u000A'</tt>)</td></tr>
+
+    <tr><td><tt>\r</tt></td><td>Orga-itzuleraren karakterea (<tt>'\u000D'</tt>)</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="quot">Komatxoak</th></tr>
+    <tr><td><tt>\</tt></td><td>Ondoren datorren karakterea komatxo artean jartzen du. Hau derrigorrezkoa da <code>!$()*+.&lt;&gt;?[\]^{|}</code> metakaraktereak bilatu nahi badituzu. </td></tr>
+
+    <tr><td><tt>\\</tt></td><td>Esaterako, hau alderantzizko barra da.</td></tr>
+    <tr><td><tt>\Q</tt></td><td><tt>\E</tt> dagoen tokira arteko karaktere guztiak komatxo artean jartzen ditu</td></tr>
+    <tr><td><tt>\E</tt></td><td><tt>\Q</tt> bidez hasi diren komatxoen amaiera</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="classes">Karaktere-klaseak</th></tr>
+
+    <tr><td><tt>[abc]</tt></td><td><tt>a</tt>, <tt>b</tt>, edo <tt>c</tt> (klase sinplea)</td></tr>
+    <tr><td><tt>[^abc]</tt></td><td>Edozein karaktere, <tt>a</tt>, <tt>b</tt>, edo <tt>c</tt> salbu (ezeztapena)</td></tr>
+
+    <tr><td><tt>[a-zA-Z]</tt></td><td><tt>a</tt>-tik <tt>z</tt>-ra edo <tt>A</tt>-tik <tt>Z</tt>-ra, (tartea)</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="predef">Aurredefinitutako karaktere-klaseak</th></tr>
+
+    <tr><td><tt>.</tt></td><td>Edozein karaktere (lerro-amaierak salbu)</td></tr>
+    <tr><td><tt>\d</tt></td><td>Digitu bat: <tt>[0-9]</tt></td></tr>
+    <tr><td><tt>\D</tt></td><td>Digitua ez den karaktere bat: <tt>[^0-9]</tt></td></tr>
+    <tr><td><tt>\s</tt></td><td>Zuriune bat: <tt>[ \t\n\x0B\f\r]</tt></td></tr>
+
+    <tr><td><tt>\S</tt></td><td>Zuriunea ez den karaktere bat: <tt>[^\s]</tt></td></tr>
+    <tr><td><tt>\w</tt></td><td>Hizki bat: <tt>[a-zA-Z_0-9]</tt></td></tr>
+    <tr><td><tt>\W</tt></td><td>Hizkia ez den karaktere bat: <tt>[^\w]</tt></td></tr>
+    <tr><th>&nbsp;</th></tr>
+
+    <tr align="left"><th colspan="2" id="bounds">Muga-formak</th></tr>
+    <tr><td><tt>^</tt></td><td>Lerroaren hasiera</td></tr>
+    <tr><td><tt>$</tt></td><td>Lerroaren amaiera</td></tr>
+    <tr><td><tt>\b</tt></td><td>Hitz-muga</td></tr>
+    <tr><td><tt>\B</tt></td><td>Hitzak ez diren karaktere-multzoen muga</td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="greedy">Zenbatzaile asezinak</th></tr>
+    <tr><td colspan="2">Hauek ahalik eta baliokide gehien bilatuko dituzte. Esaterako, <code>a+</code> formak <code>aaa</code> aurkituko du <code>aaabbb</code> katean</td></tr>
+    <tr><td><strong>X</strong><tt>?</tt></td><td><strong>X</strong>, zero edo bat</td></tr>
+
+    <tr><td><strong>X</strong><tt>*</tt></td><td><strong>X</strong>, zero edo gehiago</td></tr>
+    <tr><td><strong>X</strong><tt>+</tt></td><td><strong>X</strong>, bat edo gehiago</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="reluc">Zenbatzailea motelak (aseak)</th></tr>
+
+    <tr><td colspan="2">Hauek ahalik eta baliokide gutxien bilatuko dituzte. Esaterako, <code>a+?</code> formak lehen <code>a</code> aurkituko du <code>aaabbb</code> katean</td></tr>
+    <tr><td><strong>X</strong><tt>??</tt></td><td><strong>X</strong>, zero edo bat</td></tr>
+    <tr><td><strong>X</strong><tt>*?</tt></td><td><strong>X</strong>, zero edo gehiago</td></tr>
+
+    <tr><td><strong>X</strong><tt>+?</tt></td><td><strong>X</strong>, bat edo gehiago</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="logical">Eragile logikoak</th></tr>
+    <tr><td><strong>XY</strong></td><td><strong>X</strong> eta ondoren <strong>Y</strong></td></tr>
+
+    <tr><td><strong>X</strong><tt>|</tt><strong>Y</strong></td><td><strong>X</strong> zein <strong>Y</strong></td></tr>
+    <tr><td><tt>(</tt><strong>XY</strong><tt>)</tt></td><td><strong>XY</strong> multzo bakar gisa</td></tr>
+
+</table>
+
+<hr>
+<p><a href="legalNotices.html" title="Legezko oharrak">Legezko oharrak</a></p>
+
+</body>
+</html>

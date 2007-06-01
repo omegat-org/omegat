@@ -1,0 +1,214 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Testu formatudunarekin lanean - OmegaT 1.6.2 erabiltzailearen eskuliburua</title>
+</head>
+<body>
+
+<h1>Testu formatudunarekin lanean</h1>
+
+<h2>Edukiak</h2>
+
+<ul type="none">
+   <li>1. <a href="#Formatted_Text_in_OmegaT">Testu formatuduna OmegaT-n</a>
+
+      <ul type="none">
+         <li>1.1. <a href="#Tag_naming">Etiketen izenak</a></li>
+         <li>1.2. <a href="#Tag_numbering">Etiketen zenbakitzea</a></li>
+         <li>1.3. <a href="#Pairs_and_singletons">Etiketa bikoteak eta etiketa bakarrak</a></li>
+         <li>1.4. <a href="s">Etiketak eta esaldien segmentazioa</a></li>
+
+         <li>1.5. <a href="#Tag_operations">Eragiketak etiketekin</a>
+
+            <ul type="none">
+               <li>1.5.1. <a href="#Tag_group_duplication">Etiketa-taldeen bikoizketa</a></li>
+               <li>1.5.2. <a href="#Tag_group_deletion">Etiketa-taldeen ezabaketa</a></li>
+               <li>1.5.3. <a href="#Tag_group_order_modification">Etiketa-taldeen ordenaren aldaketa</a></li>
+               <li>1.5.4. <a href="#Tag_group_nesting">Etiketa-taldeen habiraketa</a></li>
+            </ul>
+         </li>
+
+         <li>1.6. <a href="#Tag_group_overlapping">Etiketa-taldeen teilakapena</a></li>
+         <li>1.7. <a href="#Tag_group_validation">Etiketa-taldeen balidazioa</a></li>
+         <li>1.8. <a href="#Hints_for_tags_management">Etiketak kudeatzeko aholkuak</a></li>
+         <li>1.9. <a href="#Important">Garrantzitsua</a></li>
+      </ul>
+   </li>
+</ul>
+
+<a name="Formatted_Text_in_OmegaT"></a>
+<h2>Testu formatuduna OmegaT-n</h2>
+
+<p>Sorburu-fitxategiak izan ohi duen formatua normalean gorde egin behar izaten da helburu-fitxategirako. OmegaT-k etiketak erabiltzen ditu fitxategi-formatu onartuen (gaur egun DocBook, HTML, XHTML, Open Document eta OpenOffice.org) formatua erakusteko. Normalean, etiketak ez dira kontuan hartzen parekatzeak kalkulatzeko erabiltzen diren kate-antzekotasunetan. Itzulitako segmentuetan kopiatu diren etiketak itzulitako dokumentuan agertuko dira.</p>
+
+<a name="Tag_naming"></a>
+<h3>Etiketen izenak</h3>
+
+<p>Etiketak hainbat karakterez (batetik hirura) eta zenbaki batez osaturik daude. Zenbaki bakarrek elkarrekin joan behar duten etiketak taldekatzeko balio dute, bai eta lasterbide bera eduki dezaketen etiketak baina izatez desberdinak direnak bereizteko ere.</p>
+
+<p>Karaktereek ez dute zertan islatu etiketak ordezkatzen duen formatu-tipoa (ad. lodia, etzana, etab.)</p>
+
+<a name="Tag_numbering"></a>
+<h3>Etiketen zenbakitzea</h3>
+
+<p>Etiketen zenbakiak modu inkrementalean hazten dira <strong>etiketa-taldeak</strong> sortu ahala.</p>
+
+<p>"Etiketa-talde" deitzen dena etiketa bakarra izan daiteke (esaterako, <code>&lt;br1&gt;</code>, edo bikote bat osatzen duten 2 etiketa (esaterako, <code>&lt;f3&gt;</code> eta <code>&lt;/f3&gt;</code>).</p>
+
+<p>Segmentu baten baitan, lehen taldeari (bikotea zein bakarra) <strong>0</strong> zenbakia eransten zaio, bigarrenari <strong>1</strong>, etab.</p>
+
+<p>Azpiko lehen etsenpluak 3 etiketa-talde dauzka (bikote bat, bakar bat eta gero beste bikote bat), bigarren etsenpluak talde bakarra dauka (bikote bat).</p>
+
+<a name="Pairs_and_singletons"></a>
+<h3>Etiketa bikoteak eta etiketa bakarrak</h3>
+
+<p>Etiketak beti ageri dira binaka edo banaka.</p>
+
+<p>
+<strong>Etiketa bakarrek</strong> inguruko testuan eraginik ez duen formatua adierazten dute (esaterako, espazio hutsa edo lerro-jauzia).</p>
+
+<pre>   <strong>&lt;segment 2132&gt;</strong>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;<strong>&lt;end segment&gt;</strong></pre>
+
+<p>
+<code><strong>&lt;br1&gt;</strong></code> etiketa bakarra da eta ez du eraginik bere inguruko testuan.</p>
+
+<p>
+<strong>Etiketa bikoteek</strong> gehienetan estiloari buruzko informazioa adierazten dute, eta bikotearen hasierako etiketaren eta amaierako etiketaren artean dagoen testua formateatzen du. Bikote baten hasierako etiketak amaierako etiketaren aurretik geratu behar du beti.</p>
+
+<pre>   <strong>&lt;segment 3167&gt;</strong>Log fitxategia (&lt;f1&gt;log.txt&lt;/f1&gt;), eragiketa eta erroreen jarraipena egiteko.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>
+<code><strong>&lt;f1&gt;</strong></code> eta <code><strong>&lt;/f1&gt;</strong></code> bikote bat dira eta <code><strong>log.txt</strong></code> testuan eragiten dute.</p>
+
+<a name="Tags_and_sentence_segmenting"></a>
+<h3>Etiketak eta esaldien segmentazioa</h3>
+
+<p>OmegaT-k segmentazioa aplikatu baino lehenago sortzen ditu etiketak. Segmentazio-arauak zeintzuk diren, batzuetan iruditu dezake etiketek ez dutela errespetatzen goian aipatu diren zenbakitzeari eta taldekatzeari buruzko arauak.</p>
+
+<pre>   <strong>&lt;segment 1554&gt;</strong> &lt;c0&gt;Aurretik: \. Ondoren: \s&lt;/c0&gt;<br> &lt;b2&gt;Oharra:&lt;/b2&gt;<br>
+"\." zeinuak "." karakterea ordezkatzen du&lt;br3&gt; eta "\s" zeinuak edozein espazio zuri ordezkatzen du <strong>&lt;end segment&gt;</strong></pre>
+
+<p>Itxura batean, aurreko kodean ez dago arazorik. Lehenetsitako segmentazio-arauak (OmegaT-ren lehenetsitako portaera) aplikatzen baditugu segmentu honetan, ondoko emaitza izango dugu:</p>
+
+<pre>   <strong>&lt;segment 1990&gt;</strong> &lt;c0&gt;Aurretik: \. <strong>&lt;end segment&gt;</strong>
+
+   <strong>&lt;segment 1991&gt;</strong> Ondoren: \s&lt;/c0&gt;&lt;br1&gt; <strong>&lt;end segment&gt;</strong>
+
+   <strong>&lt;segment 1992&gt;</strong>&lt;b2&gt;Oharra:&lt;/b2&gt; "\." zeinuak "." karakterea ordezkatzen du&lt;br3&gt;<strong>&lt;end segment&gt;</strong>
+
+   <strong>&lt;segment 1993&gt;</strong>eta "\s" zeinuak edozein espazio zuri ordezkatzen du <strong>&lt;end segment&gt;</strong></pre>
+
+<p>(Lehenetsitako segmentazio-arauak hauek dira: <i>sortu segmentua puntu eta jarrai baten ondoren</i> eta <i>segmentua lerro-jauzia adierazten duen etiketa baten ondoren</i>.)</p>
+
+<p>Hemen ikusi dezakegunez, segmentuek, banaka hartuta, ez dituzte taldekatze eta zenbakitze arauak errespetatzen: <code>&lt;cO&gt;</code> eta <code>&lt;/cO&gt;</code> segmentu berean egon behar lukete, baina segmentazio-arauen ondorioz banatuta ageri dira.</p>
+
+<p>Zenbait kasutan horrek arazoak eragin ditzake itzulpenean, etiketak lekuz aldatu behar izaten baitira helburu-hizkuntzaren hitz-ordena islatzeko (ikusi <a href="#Tag_operations" title="Testu formatudunarekin lanean">Eragiketak etiketekin</a> beherago).</p>
+
+<a name="Tag_operations"></a>
+<h3>Eragiketak etiketekin</h3>
+
+<p>Etiketak kontu handiz maneiatu behar dira. Hutsegite baten ondorioz aldatzen badira, behin-betiko fitxategiaren formatua hondatu egin daiteke. Kasurik okerrenean, fitxategia ireki ere ez da egingo; hau maizago gertatzen da OpenOffice.org-eko fitxategiekin.</p>
+
+<a name="Tag_group_duplication"></a>
+<h4>Etiketa-taldeen bikoizketa</h4>
+
+<p>Etiketa-taldeak bikoizteko, kopiatu taldea nahi duzun tokira. Gogoan izan bikote baten hasierako etiketa amaierako etiketaren aurrean geratu behar dela beti.</p>
+
+<p>Kopiatu duzun taldeak ordezkatzen duen formatua kopia sortu duzun sekzioan errepikatuko da.</p>
+
+<p>Adibidea:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Formatu hau&lt;/f0&gt; hemen errepikatuko da.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>Aldaketaren ondoren:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Ce format&lt;/f0&gt; a été &lt;f0&gt;copié ici&lt;/f0&gt;.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_deletion"></a>
+<h4>Etiketa-taldeen ezabaketa</h4>
+
+<p>Etiketa-taldeak ezabatzeko, berauek segmentutik kendu besterik ez da egin behar. Gogoan izan bikote-talde batean hasierako eta amaierako etiketak, biak ezabatu behar direla formatuaren aztarna guztiak erabat ezabatzeko, bestela fitxategi itzulia hondatu eta irekiezin bilaka baitaiteke.</p>
+
+<p>Etiketa-talde bat ezabatzean berari lotutako formatua fitxategi itzulitik desagertu egingo da.</p>
+
+<p>Adibidea:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Formatu hau&lt;/f0&gt; ezabatu egingo da.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>Ezabaketaren ondoren:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>Ce format a été effacé.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_order_modification"></a>
+<h4>Etiketa-taldeen ordenaren aldaketa</h4>
+
+<p>Etiketa-talde baten ordena aldatu nahi bada, esaterako helburu-hizkuntzaren egitura desberdina delako, aski da etiketa-taldea itzulpenean egon behar lukeen tokian jartzearekin.</p>
+
+<p>Formatua etiketa-taldea jarri den sekzioan aplikatuko da.</p>
+
+<p>Adibidea:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Hemengo formatua&lt;/f0&gt; eta &lt;f1&gt;hemengo formatua&lt;/f1&gt; mugitu egingo dira.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>Aldaketaren ondoren:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f1&gt;Ce format&lt;/f1&gt; et &lt;f0&gt;ce format&lt;/f0&gt; ont été inversés.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_nesting"></a>
+<h4>Etiketa-taldeen habiraketa</h4>
+
+<p>Etiketa-talde baten ordena aldatzean, gerta daiteke etiketa-talde bat beste talde baten baitan habiratzen dela. Hau posible da talde batek bestea guztiz habiratzen badu soilik. Habiratzeari dagokionez, arreta berezia jarri eta etiketa-bikoteak osorik mugitu behar dira beste taldearen barrura, bestela fitxategi itzulia hondatu eta irekiezin bilaka baitaiteke.</p>
+
+<p>Habiratutako atalari bi formatuak aplikatuko zaizkio.</p>
+
+<p>Adibidea:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Hemengo&lt;/f0&gt; &lt;f1&gt;formatua&lt;/f1&gt; habiratu egingo da.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>Habiraketaren ondoren:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Le format &lt;f1&gt;ici&lt;/f1&gt;&lt;/f0&gt; a été emboité dans le premier format.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_overlapping"></a>
+<h3>Etiketa-taldeen teilakapena</h3>
+
+<p>Etiketa-bikoteak gaizki maneiatzen direnean teilakapena gertatzen da. Ondorioz, formatua hondatu egiten da eta zenbaitetan fitxategi itzulia ezin da ireki.</p>
+
+<p>Adibidea:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Hemengo&lt;/f0&gt; &lt;f1&gt;formatua&lt;/f1&gt; nahastu egingo da.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>Maneiu okerraren ondoren:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Hemengo &lt;f1&gt;formatua&lt;/f0&gt; &lt;/f1&gt;oso nahastua dago orain.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_validation"></a>
+<h3>Etiketa-taldeen balidazioa</h3>
+
+<p>Etiketak balidatzeko funtzioak (<a href="userInterface.html#Tag_Validation" title="Erabiltzaile-interfazea">Balidatu etiketak</a>) etiketa aldatuak detektatzen ditu (bai nahita egindakoak bai nahigabe sortutakoak), eta zein segmentutan dauden adierazten ditu. Funtzio hau erabiltzean, dokumentu batean dauden etiketa okerrak edo hautsiak erakusten dituen koadro bat irekitzen da.</p>
+
+<p>Funtzio hau etiketadun testu itzuli batean dauden akatsen jarraipena egiteko erabili daiteke. Zenbaitetan, OpenDocument edo OpenOffice.org-en fitxategiak ezin dira ireki itzulpen prozesuan akatsak sortu direlako etiketak erabiltzean. Sarritan, etiketak konpontzen badira eta helburu-dokumentuak birsortzen badira, arazoa konpondu egiten da.</p>
+
+<a name="Hints_for_tags_management"></a>
+<h3>Etiketak kudeatzeko aholkuak</h3>
+
+<p>Gehienetan etiketek jatorrizko testuan dagoen formatu-motaren bat ordezkatzen dute. <strong>Jatorrizko testuaren formatu-ezaugarriak sinplifikatuz</strong>, etiketa-kopurua txikiagoa izatea lortzen da. Posible bada, komenigarria da letra-tipoak, letra-tamainak, koloreak, etab. ahalik eta gehien bateratzea, itzulpena sinplifikatzeko eta balizko etiketa-erroreak murrizteko.</p>
+
+<p>Begiratu <a href="#Tag_operations" title="Testu formatudunarekin lanean">Eragiketak etiketekin</a> atala etiketekin zer egin daitekeen ikusi nahi baduzu.</p>
+
+<p>Gogoan izan etiketek traba egiten badizute eta formatuak garrantzi berezirik ez badauka egiten ari zaren lanerako, sorburu-fitxategiko formatua kentzeak asko lagunduko dizula itzulpena errazago egiten.</p>
+
+<p>Etiketak OmegaT-n ikusi behar badituzu, baina formatuaren gehiena dokumentu itzulian gorde behar ez baduzu, etiketak ezabatu egin ditzakezu. Kasu horretan <strong>arreta berezia jarri beharko diezu etiketa-bikoteei</strong>, bikotearen etiketa bat ezabatzea ahazten baduzu dokumentuaren formatua hondatu egingo baita eta OpenOffice.org-eko dokumentuak irekiezin bilakatuko baitira.</p>
+
+<p>Etiketak testuan txertaturik daudenez, posible da <a href="segmentation.html" title="Sorburuaren segmentazioa">segmentazio-arauak</a> erabiltzea etiketa gutxiago dituzten segmentuak sortzeko. Hau ezaugarri aurreratu bat da eta hasiberriek ez lukete erabili behar.</p>
+
+<a name="Important"></a>
+<h3>Garrantzitsua</h3>
+
+<p>OmegaT-k ezin ditu oraindik formatu-akatsak guztiz modu automatikoan detektatu. Beraz, ez dizu ohartaraziko akatsen bat egiten baduzu edo formatua zure hizkuntzara hobeto moldatzeko aldatzen baduzu. Hala ere, zenbaitetan fitxategi itzuliek desitxuratuak dirudite, eta OpenDocument / OpenOffice.org-en fitxategien kasuan ireki ere ez dira egingo.</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Legezko oharrak">Legezko oharrak</a></p>
+
+</body>
+</html>

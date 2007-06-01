@@ -59,7 +59,7 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
 
   - Slovenian UI localisation + manual translation
 
-  - Basque UI localisation + instant start guide translation
+  - Basque UI localisation + manual translation
 
   - Hungarian UI localisation + manual translation
 

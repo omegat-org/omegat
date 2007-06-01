@@ -1,0 +1,179 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Menu nagusia - OmegaT 1.6.2 erabiltzailearen eskuliburua</title>
+</head>
+<body>
+
+<h1>Menu nagusia</h1>
+
+<p>OmegaT-ren funtzionaltasun guztiak Editore leihoaren goialdean dagoen menuan bildu dira. Funtzio gehienak <a href="keyboardShortcuts.html">lasterteklak</a> erabiliz ere eskuragarri daude. </p>
+
+<p><strong><code>Ktrl</code></strong> agindua daukaten lasterteklak, <strong><code>Ktrl</code></strong> edo <strong><code>Kontrol</code></strong> tekladun teklatua daukaten Windows, UNIX eta UNIXen antzeko sistema eragileetan erabili daitezke. Mac OS X sistemaren erabiltzaileek Apple-n <img src="images/AppleKey.gif" alt="Apple key" width="19" height="19"> tekla erabili behar dute.</p>
+
+<h2>Edukiak</h2>
+<ul type="none">
+   <li>1. <a href="#Project_Menu">Proiektua menua</a></li>
+   <li>2. <a href="#Edit_Menu">Editatu menua</a></li>
+   <li>3. <a href="#Go_to_Menu">Joan menua</a></li>
+   <li>4. <a href="#Tools_Menu">Tresnak menua</a></li>
+   <li>5. <a href="#Options_Menu">Aukerak menua</a></li>
+   <li>6. <a href="#Help_Menu">Laguntza menua</a></li>
+</ul>
+
+<a name="Project_Menu"></a>
+<h4>Proiektua menua</h4>
+
+<p>
+<dl>
+   <dt>Berria...</dt>
+   <dd>Proiektu berria sortu eta irekitzen du. Proiektua sortzeko koadroa, <a href="projectProperties.html">proiektua editatzeko koadro</a> bera da.</dd>
+
+   <dt>Ireki... <code>&lt;Ktrl+O&gt;</code></dt>
+   <dd>Existitzen den proiektu bat irekitzen du.</dd>
+
+   <dt>Inportatu sorburu-fitxategiak...</dt>
+   <dd>Fitxategi hautatuak <code>/source/</code> direktoriora kopiatzen ditu eta proiektua birkargatzen du fitxategi berriak kargatzeko.</dd>
+
+   <dt>Birkargatu</dt>
+   <dd>Proiektua birkargatzen du sorburu-fitxategietan, itzulpen-memoria erantsi berrietan edo glosarioetan egon diren aldaketak kargatzeko.</dd>
+
+   <dt>Itxi</dt>
+   <dd>Itzulpena gorde eta proiektua ixten du.</dd>
+
+   <dt>Gorde <code>&lt;Ktrl+S&gt;</code></dt>
+   <dd>Proiektuaren itzulpen-memoriak sortzen ditu egindako itzulpenetik abiatuz. OmegaT-k 10 minutuan behin automatikoki gordetzen du itzulpena. Proiektutik irtetean ere itzulpena automatikoki gordetzen da.</dd>
+
+   <dt>Sortu dokumentu itzuliak</dt>
+   <dd>Helburu-dokumentuak sortzen ditu zure itzulpenean oinarrituz. Dokumentuak <code>/target/</code> direktorioan gordeko dira.</dd>
+
+   <dt>Propietateak <code>&lt;Ktrl+E&gt;</code></dt>
+   <dd><a href="projectProperties.html">Proiektuaren propietateak</a> koadroa erakusten du, proiektuaren hizkuntzak eta direktorioen kokapena zehazteko.</dd>
+
+   <dt>Proiektuaren fitxategiak... <code>&lt;Ktrl+L&gt;</code></dt>
+   <dd><a href="userInterface.html#Project_Files">Proiektuaren fitxategiak</a> leihoa itxi edo irekitzen du (irekita edo itxita badago, hurrenez hurren).</dd>
+
+   <dt>Irten <code>&lt;Ktrl+Q&gt;</code></dt>
+   <dd>Proiektua gorde eta OmegaT-tik irteten da. Proiektua eskuz gorde ez baduzu, benetan irten nahi duzun baieztatzeko eskatzen du.</dd>
+</dl>
+</p>
+
+<a name="Edit_Menu"></a>
+<h4>Editatu menua</h4>
+
+<p>Aplikazio gehienetan agertzen diren hainbat agindu (kopiatu/ebaki/itsatsi) ez dira agertzen menu honetan, baina sistemaren lasterteklen bitartez erabili daitezke. Esaterako, Windowsen:</p>
+
+<p>
+<dl>
+   <dt>Kopiatu <code>&lt;Ktrl+C&gt;</code></dt>
+   <dd>Testu hautatua arbelean kopiatzen du.</dd>
+
+   <dt>Ebaki <code>&lt;Ktrl+X&gt;</code></dt>
+   <dd>Testu hautatua arbelean kopiatzen du eta jatorrizko lekutik ezabatzen du.</dd>
+
+   <dt>Itsatsi <code>&lt;Ktrl+V&gt;</code></dt>
+   <dd>Testua arbeletik kurtsorea dagoen tokira kopiatzen du.</dd>
+</dl>
+</p>
+
+<p>Editatu menuak ondoko elementuak dauzka:</p>
+
+<p>
+<dl>
+   <dt>Desegin azken ekintza <code>&lt;Ktrl+Z&gt;</code></dt>
+   <dd>Azken edizioa egin baino lehen zegoen egoerara itzultzen da. Ez du funtzionatzen aldatutako segmentua balidatu bada.</dd>
+
+   <dt>Berregin azken ekintza <code>&lt;Ktrl+Y&gt;</code></dt>
+   <dd>Azken edizioa desegin baino lehen zegoen egoerara itzultzen da. Ez du funtzionatzen aldatutako segmentua balidatu bada.</dd>
+
+   <dt>Ordezkatu parekatze honekin <code>&lt;Ktrl+R&gt;</code></dt>
+   <dd>Helburu-segmentuaren ordez, uneko parekatze hautatua jartzen du (portaera lehenetsia lehen parekatzea hautatzea da).</dd>
+
+   <dt>Txertatu parekatzea <code>&lt;ktrl+I&gt;</code></dt>
+   <dd>Uneko parekatze hautatua txertatzen du kurtsorea dagoen tokian. Funtzio honek ez du inoiz helburu-segmentua gainidatziko, ezta hautatua badago ere.</dd>
+
+   <dt>Ordezkatu sorburu honekin<code>&lt;Shift+Ktrl+R&gt;</code></dt>
+   <dd>Helburu-segmentuaren ordez sorburua idazten du.</dd>
+
+   <dt>Txertatu sorburua <code>&lt;ktrl+Shift+I&gt;</code></dt>
+   <dd>Sorburua txertatzen du kurtsorea dagoen tokian.</dd>
+
+   <dt>Bilatu proiektuan... <code>&lt;Ktrl+F&gt;</code></dt>
+   <dd><a href="userInterface.html#Search_Window">Bilaketa-leiho</a> berri bat irekitzen du.</dd>
+
+   <dt>Hautatu #N parekatzea <code>&lt;Ktrl+N&gt;</code> (N = 1etik 5era)</dt>
+   <dd>Parekatzeen leihoan erakusten ari den N-garren parekatzea hautatzen du eta segmentuan txertatu edo hura ordezkatzen du. <a href="userInterface.html#Fuzzy_Matches">Parekatze lausoen</a> atalak kolore bidezko kodeketa xehetasun gehiagoz deskribatzen du.</dd>
+</dl>
+</p>
+
+<a name="Go_to_Menu"></a>
+<h4>Joan menua</h4>
+
+<p>
+<dl>
+   <dt>Itzuli gabeko hurrengo segmentura <code>&lt;Ktrl+U&gt;</code></dt>
+   <dd>Itzulpen-memorian baliokiderik ez daukan hurrengo segmentura mugitzen du edizio-eremua.</dd>
+
+   <dt>Hurrengo segmentura <code>&lt;Ktrl+N&gt;</code>, <code>&lt;Enter&gt;</code> / <code>&lt;Tab&gt;</code>
+   </dt>
+   <dd>Edizio-eremua hurrengo segmentura mugitzen du. Uneko segmentua fitxategi bateko azkena bada, hurrengo fitxategiko lehen segmentura mugitzen du.</dd>
+
+   <dt>Aurreko segmentura <code>&lt;Ktrl+P&gt;</code>, <code>&lt;Ktrl+Enter&gt;</code> / <code>&lt;Ktrl+Tab&gt;</code>
+   </dt>
+   <dd>Edizio-eremua aurreko segmentura mugitzen du. Aurreko fitxategiaren azken segmentura mugitzen du, uneko segmentua fitxategi bateko lehena bada.</dd>
+</dl>
+</p>
+
+<a name="Tools_Menu"></a>
+<h4>Tresnak menua</h4>
+
+<p>
+<dl>
+   <dt>Balidatu etiketak <code>&lt;Ktrl+T&gt;</code></dt>
+   <dd>Etiketa galduak edo okerrak bilatzen ditu formatudun testuetan. Etiketa-erroreak dituzten segmentuen zerrenda bat erakusten du. <a href="userInterface.html#Tag_Validation">Etiketak balidatzeko leihoa</a> atalak leiho horretan zer erakusten den azaltzen du eta <a href="formattedText.html">Testu formatudunarekin lanean</a> atalak zergatia azaltzen du.</dd>
+</dl>
+</p>
+
+<a name="Options_Menu"></a>
+<h4>Aukerak menua</h4>
+
+<p>
+<dl>
+   <dt>Erabili TAB aurrera joateko</dt>
+   <dd>Segmentua balidatzeko tekla <code>&lt;Tab&gt;</code> dela ezartzen du, lehenetsitako <code>&lt;Enter&gt;</code> ordez. Aukera hau karaktereak idazteko zenbait sistema txinatar, japoniar eta korearretan erabiltzen da.</dd>
+
+   <dt>Letra-tipoa</dt>
+   <dd><a href="fontSettings.html">Letra-tipoen</a> koadroa erakusten du, testua erakusteko erabiltzen den letra-tipoa aldatzeko. Ordenagailu zaharren erabiltzaileek letra-tipoa aldatu beharko lukete proiektu bat ireki baino lehen, bestela performantzia-galera jasango dute. Galera handiagoa izan ohi da G4 + Mac OS X +  Japoniera konbinazioa erabiltzen denean.</dd>
+
+   <dt>Fitxategi-iragazkiak</dt>
+   <dd><a href="fileFilters.html">Fitxategi-iragazkien</a> koadroa erakusten du, fitxategien maneiua eta analisia konfiguratzeko.</dd>
+
+   <dt>Segmentazioa</dt>
+   <dd><a href="segmentation.html">Sorburuaren segmentaziorako</a> koadroa irekitzen du, testua nola segmentatzen den konfiguratzeko.</dd>
+
+   <dt>Editatu portaera</dt>
+   <dd><a href="translationEditing.html">Itzulpenaren ediziorako</a> koadroa irekitzen du, itzuli gabe dauden segmentuen eremuan agertuko diren edukiak konfiguratzeko.</dd>
+
+   <dt>Berrezarri leiho nagusia</dt>
+   <dd>OmegaT-ren leiho nagusiaren osagaiak (editorea, parekatzeen bisorea eta glosarioaren bisorea) lehenetsitako egoerara leheneratzen ditu. Erabili ezaugarri hau osagai bat edo gehiago desatrakatu, mugitu edo ezkutatu baduzu eta hasieran zeuden kokapenean berrezarri nahi badituzu.</dd>
+</dl>
+</p>
+
+<a name="Help_Menu"></a>
+<h4>Laguntza menua</h4>
+
+<p>
+<dl>
+   <dt>Erabiltzailearen eskuliburua<code>&lt;F1&gt;</code></dt>
+   <dd>Eskuliburu hau erakusten duen <a href="userInterface.html#Help_Browser">Laguntza-arakatzailea</a> irekitzen du beste leiho batean.</dd>
+
+   <dt>Honi buruz...</dt>
+   <dd>Copyright-ari, kredituei eta lizentziari buruzko informazioa erakusten du.</dd>
+</dl>
+</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Legezko oharrak">Legezko oharrak</a></p>
+
+</body>
+</html>

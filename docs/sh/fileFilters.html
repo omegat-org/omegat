@@ -45,14 +45,14 @@
 <a name="File_types"></a>
 <h3>Tipovi datoteka</h3>
 
-<p>Kad Omegat nađe datoteku u svom izvornom direktorijumu, pokušava na bazi sufiksa datoteke izabrati filter. Preciznije rečeno, OmegaT pokušava da s nazivom datoteke sravni oblike naziva izvornih datoteka iz filtera. Na primjer, oblik <code>*.xhtml</code> podudariće se s bilo kojom datotekom koja ima sufiks <code>.xhtml</code> . Ako odgovarajući filter bude nađen, njemu se dodijeljuje datoteka na obradu. Na primjer, za obradu datoteka sa sufiksom <code>.xhtml</code>, pod "default" će biti korišćen filter XHTML. Možeš mijenjati ili dodavati oblike naziva datoteka koje bi svaki od filtera trebalo da obrađuje.</p>
+<p>Kad Omegat nađe datoteku u svom izvornom direktorijumu, pokušava na bazi sufiksa datoteke izabrati filter. Preciznije rečeno, OmegaT pokušava da s nazivom datoteke sravni oblike naziva izvornih datoteka iz filtera. Na primjer, oblik <code>*.xhtml</code> podudariće se s bilo kojom datotekom koja ima sufiks <code>.xhtml</code> . Ako odgovarajući filter bude nađen, njemu se dodjeljuje datoteka na obradu. Na primjer, za obradu datoteka sa sufiksom <code>.xhtml</code>, pod "default" će biti korišten filter XHTML. Možeš mijenjati ili dodavati oblike naziva datoteka koje bi svaki od filtera trebalo da obrađuje.</p>
 
 <a name="File_encodings"></a>
 <h3>Kodni raspored datoteka</h3>
 
-<p>Kao što znamo, plaintext i HTML datoteke mogu biti spasavane pod raznolikim kodnim rasporedima. Dok s jedne strane, HTML datoteke u sebi mogu sadržavati i kodnu meta-direktivu koju će OmegaT iskoristiti za čitanje datoteke, kod tekst datoteka nema dogovorenih načina o njegovom određivanju. Za tekst i HTML datoteke koji nemaju deklaraciju o kodnom rasporedu, OmegaT će koristiti kodni raspored koji ti postaviš za određeni sufiks. Na primjer, <code>.txt</code> datoteke će se učitavati pomoću default kodnog rasporeda na tvom OS-u. Možeš promijeniti izvorni kodni raspored za svaki od oblika naziva izvornih datoteka.</p>
+<p>Kao što znamo, plaintext i HTML datoteke mogu biti spašavane pod raznolikim kodnim rasporedima. Dok s jedne strane, HTML datoteke u sebi mogu sadržavati i kodnu meta-direktivu koju će OmegaT iskoristiti za čitanje datoteke, kod tekst datoteka nema dogovorenih načina o njegovom određivanju. Za tekst i HTML datoteke koji nemaju deklaraciju o kodnom rasporedu, OmegaT će koristiti kodni raspored koji ti postaviš za određeni sufiks. Na primjer, <code>.txt</code> datoteke će se učitavati pomoću default kodnog rasporeda na tvom OS-u. Možeš promijeniti izvorni kodni raspored za svaki od oblika naziva izvornih datoteka.</p>
 
-<p>HTML i plaintext mogu biti napisane u bilo kojem kodnom rasporedu. Na primjer, ako prevodiš sa francuskog na japanski, imaš izbor da filter podesiš tako da koristi jedan od japanskih kodnih rasporeda za target jezik, ili da koristiš kodiranje pod Unicode UTF-8, UTF-16, ili UTF-32. Za tekstualne datoteke, pod "default" se kodni raspored datoteke spasava u onome koji je bio korišćen pri učitavanju tekstualne datoteke, dok se za HTML koristi UTF-8. Imaj u vidu da HTML filter dodaje deklaraciju kodnog rasporeda u target datoteku, te će je pretraživač dobro vidjeti i neće uopšte prikazivati čudna slova.</p>
+<p>HTML i plaintext mogu biti napisane u bilo kojem kodnom rasporedu. Na primjer, ako prevodiš sa francuskog na japanski, imaš izbor da filter podesiš tako da koristi jedan od japanskih kodnih rasporeda za target jezik, ili da koristiš kodiranje pod Unicode UTF-8, UTF-16, ili UTF-32. Za tekstualne datoteke, pod "default" se kodni raspored datoteke spašava u onome koji je bio korišten pri učitavanju tekstualne datoteke, dok se za HTML koristi UTF-8. Imaj u vidu da HTML filter dodaje deklaraciju kodnog rasporeda u target datoteku, te će je pretraživač dobro vidjeti i neće uopšte prikazivati čudna slova.</p>
 
 <a name="Renaming_Translated_Files"></a>
 <h3>Preimenovanje prevedenih datoteka</h3>
@@ -69,7 +69,7 @@
 
 <p>Dijalog prikazuje različite raspoložive filtere.</p>
 
-<p>Ako za prevođenje datoteka određenog tipa ne želiš koristiti program OmegaT, možeš dezaktivirati filter tako što ćeš ukloniti «klik» znak pored tipa datoteke. OmegaT će prilikom učitavanja projekata, izostavljati dotične datoteke i u momentu sačinjavanja target dokumenata iskopiraće ih u neizmjenjenom obliku. Nekom kasnijom prilikom, kad odlučiš ponovno koristiti filter, potrebno je samo da umetneš «klik» znak u kućicu.</p>
+<p>Ako za prevođenje datoteka određenog tipa ne želiš koristiti program OmegaT, možeš dezaktivirati filter tako što ćeš ukloniti «klik» znak pored tipa datoteke. OmegaT će prilikom učitavanja projekata, izostavljati dotične datoteke i u momentu sačinjavanja target dokumenata iskopiraće ih u neizmijenjenom obliku. Nekom kasnijom prilikom, kad odlučiš ponovno koristiti filter, potrebno je samo da umetneš «klik» znak u kućicu.</p>
 
 <p>Ako se desi da pokvariš cjelokupnu konfiguraciju, klikni na <strong>Podrazumijevane vrijednosti</strong>. Tako se konfiguracija filtara datoteka vraća u radno stanje default.</p>
 
@@ -78,7 +78,7 @@
 <a name="Edit_Filter_Dialog"></a>
 <h3>Dijalog filtera uredi</h3>
 
-<p>Dijalog ti omogućava podešavanje oblika naziva izvornih datoteka za datoteke koje će filter preraditi, podešavanje naziva datoteka za prevedene datoteke, a možeš i birati koje će kodne rasporede koristiti za učitavanje datoteke i spasavanje njenog prevoda.</p>
+<p>Dijalog ti omogućava podešavanje oblika naziva izvornih datoteka za datoteke koje će filter preraditi, podešavanje naziva datoteka za prevedene datoteke, a možeš i birati koje će kodne rasporede koristiti za učitavanje datoteke i spašavanje njenog prevoda.</p>
 
 <p>Oblik naziva izvorne datoteke koristi pravila DOS filemask. Znak <code>*</code> može zamijeniti bilo koji zbir bilo kakvih znakova, <code>?</code> supstituiše bilo koji pojedinačni znak, dok svi drugi znakovi predstavljaju sami sebe. Na primjer, ako želiš da text filter obrađuje datoteke tipa «readme» (<code>readme</code>, <code>read.me</code>, i <code>readme.txt</code>) trebalo bi da koristiš oblik <code>read*</code>.</p>
 

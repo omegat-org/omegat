@@ -158,7 +158,7 @@ OmegaT koristi sljedeće biblioteke:
 ==============================================================================
  5.  Da li te OmegaT zamara zbog bug-ova? Treba li ti pomoć?
 
-Pre nego prijaviš bug, provjeri da li si detaljno pregledao/la dokumentaciju. Ono što zapažaš, u stvari može biti neka od odlika OmegaT koju si upravo otkrio/la. Ako provjeriš log datoteku OmegaT i zapaziš riječi "Greška", "Upozorenje", "Izuzetak", ili "iznenadno se prekinula", onda si na tragu nečemu (log.txt nalazi se u 'user preferences' direktorijumu, radi određivanja njegove pozicije pogledaj u priručnik).
+Prije nego prijaviš bug, provjeri da li si detaljno pregledao/la dokumentaciju. Ono što zapažaš, u stvari može biti neka od odlika OmegaT koju si upravo otkrio/la. Ako provjeriš log datoteku OmegaT i zapaziš riječi "Greška", "Upozorenje", "Izuzetak", ili "iznenadno se prekinula", onda si na tragu nečemu (log.txt nalazi se u 'user preferences' direktorijumu, radi određivanja njegove pozicije pogledaj u priručnik).
 
  Sljedeće što bi trebalo da uradiš je da svoje nalaze potvrdiš kroz kontakte sa ostalim korisnicima. Ovo stoga da ne bi prijavljivao/la nešto o čemu od ranije postoje podaci. Radi provjere, možeš posjetiti i stranicu za prijavu bug-ova, na SourceForge. Tek kada si siguran/na da si prvi korisnik koji otkriva neku sekvencu događaja koja se dade reprodukovati a koja je prouzrokovala nepredviđeno ponašanje, trebalo bi da priložiš svoj izvještaj.
 
@@ -180,9 +180,33 @@ Radi praćenja zbivanja u vezi izvještaja o bug-u, možeš se kao korisnik regi
 ==============================================================================
 6.   Detalji o ovoj verziji
 
+5.  Da li te OmegaT zamara zbog bug-ova? Treba li ti pomoć?
+
+Prije nego prijaviš bug, provjeri da li si detaljno pregledao/la dokumentaciju. Ono što zapažaš, u stvari može biti neka od odlika OmegaT koju si upravo otkrio/la. Ako provjeriš log datoteku OmegaT i zapaziš riječi "Greška", "Upozorenje", "Izuzetak", ili "iznenadno se prekinula", onda si na tragu nečemu (log.txt nalazi se u 'user preferences' direktorijumu, radi određivanja njegove pozicije pogledaj u priručnik).
+
+ Sljedeće što bi trebalo da uradiš je da svoje nalaze potvrdiš kroz kontakte sa ostalim korisnicima. Ovo stoga da ne bi prijavljivao/la nešto o čemu od ranije postoje podaci. Radi provjere, možeš posjetiti i stranicu za prijavu bug-ova, na SourceForge. Tek kada si siguran/na da si prvi korisnik koji otkriva neku sekvencu događaja koja se dade reprodukovati a koja je prouzrokovala nepredviđeno ponašanje, trebalo bi da priložiš svoj izvještaj.
+
+Svaki valjan izvještaj o bug-u mora ispunjavati tri uslova.
+  - Proceduru za njegovo reprodukovanje,
+  - Stav o onome što se trebalo dobiti određenom komandom, i
+  - Šta se s njom doista dobilo.
+
+Takođe možeš pridodati i kopije datoteka, dijelove log-a, snimke sa monitora, i bilo šta što smatraš da će informatičarima za razvoj, pomoći u pronalaženju i popravci nađenog bug-a.
+
+Radi uvida u arhivu mailing liste korisnika, idi na:
+     http://tech.groups.yahoo.com/group/omegat/
+
+Radi uvida u izvještaje o bug-ovima i prilaganja svog ev. potrebnog bug izvještaja, idi na:
+     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+
+Radi praćenja zbivanja u vezi izvještaja o bug-u, možeš se kao korisnik registrovati na Source Forge.
+
+==============================================================================
+6.   Detalji o ovoj verziji
+
 Radi detaljnijih obavještenja o promjenama kod ove i svih prethodnih verzija, pogledaj datoteku 'changes.txt'.
 
-Podržani formati datoteka obuhvataju:
+Podržani formati datoteka obuhvaćaju:
   - Plain text
   - HTML i XHTML
   - HTML Help Compiler (HCC)

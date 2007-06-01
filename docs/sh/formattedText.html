@@ -88,7 +88,7 @@
 <pre>   <strong>&lt;segment 1554&gt;</strong> &lt;c0&gt;Prije: \. Poslije: \s&lt;/c0&gt;<br> &lt;b2&gt;Napomena:&lt;/b2&gt;<br>
 "\." predstavlja znak "."&lt;br3&gt; "\s" predstavlja bilo koji znak za bijeli prostor <strong>&lt;kraj segmenta&gt;</strong></pre>
 
-<p>Čini se da ovdje nema problema. Ako sada na ovom segmentu primjenimo default pravila segmentacije  (podrazumijevano ponašanje OmegaT) imaćemo sljedeći rezultat:</p>
+<p>Čini se da ovdje nema problema. Ako sada na ovom segmentu primijenimo default pravila segmentacije  (podrazumijevano ponašanje OmegaT) imaćemo sljedeći rezultat:</p>
 
 <pre>   <strong>&lt;segment 1990&gt;</strong> &lt;c0&gt;Prije: \. <strong>&lt;kraj segmenta&gt;</strong>
 
@@ -114,7 +114,7 @@
 
 <p>Da bi duplicirao/la grupe tagova, dovoljno je da ih ukopiraš na mjesto po tvom izboru. Imaj na umu da u tom paru, otvarajući tag mora uvijek stajati ispred zatvarajućeg.</p>
 
-<p>Formatacija koju sobom nosi duplicirana grupa tagova, primeniće se na dio u koji si ih duplicirao/la.</p>
+<p>Formatacija koju sobom nosi duplicirana grupa tagova, primijeniće se na dio u koji si ih duplicirao/la.</p>
 
 <p>Evo jednog primjera:</p>
 
@@ -142,13 +142,13 @@
 <a name="Tag_group_order_modification"></a>
 <h4>Modifikacija rasporeda grupa tagova</h4>
 
-<p>Radi promene rasporeda grupe tagova u svrhe boljeg odražavanja strukture drugog jezika pri prevođenju, jednostavno postavi grupu tagova tamo gdje bi u prevodu ona i trebala stajati.</p>
+<p>Radi promjene rasporeda grupe tagova u svrhe boljeg odražavanja strukture drugog jezika pri prevođenju, jednostavno postavi grupu tagova tamo gdje bi u prevodu ona i trebala stajati.</p>
 
 <p>Potom će se obaviti i formatacija djela teksta na koji se tag odnosi.</p>
 
 <p>Evo jednog primjera:</p>
 
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Ova formatacija ovdje&lt;/f0&gt; i &lt;f1&gt;ova formatacija ovdje&lt;/f1&gt; će promjeniti mjesto.<strong>&lt;kraj segmenta&gt;</strong></pre>
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Ova formatacija ovdje&lt;/f0&gt; i &lt;f1&gt;ova formatacija ovdje&lt;/f1&gt; će promijeniti mjesto.<strong>&lt;kraj segmenta&gt;</strong></pre>
 
 <p>Poslije modifikacije rasporeda grupe tagova:</p>
 
@@ -159,7 +159,7 @@
 
 <p>Modifikacija rasporeda grupe tagova može za rezultat imati njihovo ugnježđivanje u drugu grupu tagova. Ono je moguće sve dok zatvarajuća grupa potpuno zatvara zatvorenu grupu. Pri ugnježđivanju mora se obratiti posebna pažnja, što posebno važi kod parova tagova koji nisu u cjelini unijeti u zatvarajuću grupu. U suprotnom slučaju, prevedeni dokument može se oštetiti i čak ga se neće moći niti otvoriti.</p>
 
-<p>Na ugnježđeni dio primjeniće se oba tipa formatacije.</p>
+<p>Na ugnježđeni dio primijeniće se oba tipa formatacije.</p>
 
 <p>Evo jednog primjera:</p>
 
@@ -185,14 +185,14 @@
 <a name="Tag_group_validation"></a>
 <h3>Provjera valjanosti grupa tagova</h3>
 
-<p>Funkcijom za provjeru valjanosti tagova (<a href="userInterface.html#Tag_Validation" title="Korisnička radna površina">Provjera valjanosti tagova</a>) pronalaze se (namjerno ili slučajno) izmjenjeni tagovi, i naznačuju se segmenti sa izmjenama. Kod upotrebe ove funkcije, otvara se dijalog u kome se ukažu svi sumnjivi - razbijeni ili loši tagovi u dokumentu.</p>
+<p>Funkcijom za provjeru valjanosti tagova (<a href="userInterface.html#Tag_Validation" title="Korisnička radna površina">Provjera valjanosti tagova</a>) pronalaze se (namjerno ili slučajno) izmijenjeni tagovi, i naznačuju se segmenti sa izmjenama. Kod upotrebe ove funkcije, otvara se dijalog u kome se ukažu svi sumnjivi - razbijeni ili loši tagovi u dokumentu.</p>
 
 <p>Ova funkcija je korisna za otkrivanje grešaka u prevedenom tagovanom dokumentu. Ovo je čest slučaj sa OpenDocument ili OpenOffice.org datotekama koje se ne mogu otvoriti uslijed problema nastalih u tagovima tokom prevođenja. Ispravljanje tagova i ponovno sačinjavanje target dokumenata u najvećem broju slučajeva će riješiti ovaj problem.</p>
 
 <a name="Hints_for_tags_management"></a>
 <h3>Savjeti za rad s tagovima</h3>
 
-<p>U opštem smislu, tagovi predstavljaju znakove za formataciju izvornog teksta. <strong>Pojednostavljenje formatacije</strong> originalnog teksta značajno doprinosi smanjenju broja tagova. Radi pojednostavljenja procesa prevođenja i smanjenja mogućih grešaka u tagovima, bilo bi, po mogućnosti, potrebno razmotriti ujednačavanje korišćenog tipa fonta, veličine, boje, itd.</p>
+<p>U opštem smislu, tagovi predstavljaju znakove za formataciju izvornog teksta. <strong>Pojednostavljenje formatacije</strong> originalnog teksta značajno doprinosi smanjenju broja tagova. Radi pojednostavljenja procesa prevođenja i smanjenja mogućih grešaka u tagovima, bilo bi, po mogućnosti, potrebno razmotriti ujednačavanje korištenog tipa fonta, veličine, boje, itd.</p>
 
 <p>Radi uvida u sve mogućnosti rada s tagovima, pogledaj u odjeljak <a href="#Tag_operations" title="Radnje s formatiranim tekstom">Radnje s tagovima</a>.</p>
 

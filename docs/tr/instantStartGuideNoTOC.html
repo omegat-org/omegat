@@ -1,0 +1,200 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Hızlı Başlangıç Kılavuzu - OmegaT 1.6.2 Kullanıcı Kılavuzu</title>
+</head>
+<body>
+
+<h1>Hızlı Başlangıç Kılavuzu</h1>
+<p>ya da <strong>5 dakikada OmegaT kullanmaya başlayın</strong></p>
+
+<p><strong>Bu hızlı başlangıç kılavuzu sadece son derece temel hususları içerir. İdeal olarak tüm kullanıcılar OmegaT'nin tüm özellikleriyle tanışmak için kullanıcı kılavuzunu okumalıdır. Kullanıcı Kılavuzunu görüntülemek için "F1" tuşuna başın. Bu belgede anlatılan kısayollarda "ctrl+tuş" ifadeleri kullanılmaktadır; Mac kullanıcıları bunu "cmd+tuş" şeklinde okumalıdır. "cmd" tuşu Apple klavyelerinde üzerinde "elma" işareti olan tuştur.</strong></p>
+
+<h2>İçindekiler</h2>
+   <ol><li>Kısaca, OmegaT nasıl çalışır</li>
+   <li>OmegaT kullanılarak nasıl çeviri yapılır</li>
+   <li>Etiketli metinlerle nasıl çalışılır</li></ol>
+
+<hr>
+
+<a name="Briefly.2C_how_OmegaT_works"></a>
+<h2>1. Kısaca, OmegaT nasıl çalışır</h2>
+
+<p>OmegaT ekranı üç ana pencereden oluşur. Bu üçe pencerenin her biri fare kullanılarak istenilen şekilde boyutlandırılabilir. Sol kısımda çevirilerinizi girdiğiniz Düzenleyici vardır. Sağ kısımda üste Eşleşme Göstericisi bulunur; be pencerede çeviri belleğinden gelen eşleşmeler görüntülenir. Altta Sözlükçe Göstericisi vardır; bu pencerede sözlükçeden gelen eşleşmeler görüntüler.</p>
+
+<p>Düzenleyicisi penceresinde OmegaT, cümleler (ya da paragraflar - "<strong>F1</strong>" tuşuna basarak Kılavuza bakınız) halinde 'dilimlendirilmiş' kaynak metni gösterir. Bu dilimler tek tek tercüme edilir. Bir dilimden diğerine geçerken çevirileriniz çeviri belleğine kaydedilir. Tüm dilimler tercüme edildikten sonra (ya da isterseniz daha önce) OmegaT çeviri belleğini kullanarak çeviri belgelerinizi "target" dizininde oluşturur.</p>
+
+<p>OmegaT, çeviri çalışmalarınız çeviri projeleri halinde düzenler. Her proje için bir dizi dizin oluşturulur. Bu dizinler tercüme edilecek kaynak belgelerini, kullanmak istediğiniz sözlükçeleri ve yararlanmak istediğiniz çeviri bellekleri saklamakta kullanılır. OmegaT ayrıca tercümesi yapılmış nihai belgeleri içeren bir "target" dizini de oluşturur.</p>
+
+<hr>
+<a name="How_to_translate_using_OmegaT"></a>
+<h2>2. OmegaT kullanılarak nasıl çeviri yapılır</h2>
+
+<a name="Create_and_open_a_new_project"></a>
+<h3>a. Yeni bir proje oluşturun ve açın.</h3>
+
+<p>Menüden <strong>Proje → Yeni...</strong> başlıklarını seçin.</p>
+
+<p>Proje dosyalarını kaydetmek istediğiniz dizine gidin ve çeviri projeniz için bir ad girin. Bu ad ana proje dizininin de adı olarak kullanılacaktır; tüm proje dosyaları bu dizinin ya da altdizinlerinin içinde saklanacaktır.</p>
+
+<p>OmegaT, aşağıdaki diyalog kutucuğunu gösterecek ve sizden oluşturulacak proje dosyalarını teyit etmenizi ya da değiştirmenizi isteyecektir.</p>
+
+<center><img src="images/NewProject.png" alt="Proje ayarları penceresi" ></center>
+
+<p>Altdizinlerin konumunu kabul edebilirsiniz, ancak öncelikle kaynak ve çeviri dili kodlarının doğru olduğundan emin olun. Listeden dil kodunu (iki harfli) ya da dil ve bölge kodunu (iki + iki harfli) seçin ya da kendiniz girin (iki harfli örüntüye riayet edin). Hedef altdizininin (target) konumunu unutmayın (tercüme yapılmış dosyaları buradan alacaksınız).</p>
+
+<p>Eğer OmegaT'nin paragraf temelli değil de cümle temelli dilimlendirme yapmasını istiyorsanız, Dilimlendirme Kurallarını kontrol etmeniz iyi olur.</p>
+
+<p>Proje ayarlarını kabul etmek için Tamam tuşuna tıkladığınızda OmegaT sizde projenize ekleyeceğiniz dosyaları seçmenizi isteyecektir. Tek tek dosyaları ya da tüm bir dizini (içindeki tüm dosyalar ve alt dosyalarla) projenize ekleyebilirsiniz. Eğer yanlış belgeleri eklemişseniz ya da çok fazla belge eklemişseniz OmegaT  projesinin kaynak altdizininden (source) istediğiniz belgeleri silebilirsiniz (sözgelimi işletim sisteminizin dosya yöneticisini kullanarak).</p>
+
+<p>Tercümesi yapılacak dosyaların listesini kontrol etmek için <strong>Proje Dosyaları</strong> penceresine bakın (Otomatik olarak açılmazsa menü: <strong>Proje → Proje Dosyaları...</strong>). Kaynak altdizininin içeriğini değiştirmek zorunda kalmışsanız projenizi yeniden yüklemeyi unutmayın (Menü: <strong>Proje → Yeniden Yükle</strong>). OmegaT varsayılan olarak projedeki ilk dosyayı açar.</p>
+
+<p>Unutmayın, OmegaT sadece aşağıdaki formatlardaki dosyaları tercüme edebilir. Diğer dosyalar gözardı edilir.<ul>
+<li>Açık Belge Formatı (ODF ISO/IEC 26300)</li>
+<li>OpenOffice.org </li>
+<li>XHTML, HTML </li>
+<li> HTML Yardım Derleyicisi (HHC)</li>
+<li>DocBook </li>
+<li>düz metin</li>
+<li>bundle.properties Java </li>
+<li>tek dilli .po</li>
+<li>INI ('anahtar=değer' formatı)</li>
+</ul>
+</p>
+
+<a name="Translate_the_segments_one_by_one"></a>
+<h3>b. Dilimleri tek tek tercüme edin.</h3>
+
+<p>Projeyi ve tercümesi yapılacak dosyaları belirledikten sonra OmegaT, birinci kaynak dosyayı Düzenleyicide açar. Birinci dilim yeşil bir fonda gösterilir; kaynak metnin bir kopyası da hemen onun altında "hedef alanında" gösterilir. (Bu noktada, hedef alanı dışındaki tüm metin korunmuştur ve değiştirilemez). Kaynak metni silerek, tercümenizi &lt;dilim 0001&gt; ile &lt;dilim sonu&gt; etiketleri arasına girmeniz gereklidir.</p>
+
+<p>Bir sonraki dilime gitmek için "<strong>ENTER</strong>" tuşuna basın.</p>
+
+<p>Not:<br> - Metnin herhangi bir bölümüne gitmek için açmak isteğiniz cümle ya da paragraf üzerinde fareye çift tıklayın." <br> - Hedef alanının boş olmasını tercih ediyorsanız  <strong>Seçenekler → Düzenleme Seçenekleri...</strong> alt-menüsünden ayarlama yapabilirsiniz.</p>
+
+<p>"<strong>ENTER</strong>" tuşuna bastığınızda arkaplanda gerçekleşen şeyler vardır: <br> OmegaT, dilim çiftini (kaynak dilim ve çevirisi) çeviri belleğine ekler ve diğer proje dosyalarında tespit ettiği özdeş dilimleri de otomatik olarak tercüme eder. Ayrıca bir sonraki tercüme edilmemiş dilim için eşleşme olup olmadığını bulmak için çeviri belleğini ve sözlükçeyi de tarar.</p>
+
+<a name="Use_TM_and_glossary_matches"></a>
+<h3>c. Çeviri belleği ve sözlükçe eşleşmelerini kullanın.</h3>
+
+<a name="TM_matches"></a>
+<h4>1. Çeviri belleği eşleşmeleri</h4>
+
+<p>Eğer OmegaT bir sonraki dilim için çeviri belleğinden herhangi bir bulanık eşleşme (%30 ve üzer - kılavuza bakın), bu eşleşmeyi Eşleşme Göstericisinde görüntüler. Eşleşme Göstericisinde birinci eşleşme varsayılan olarak seçili durumdadır.</p>
+<p>Eşleşme Göstericisinden hedef alanına çeviri belleğinden gelen eşleşmeleri eklemek için klavye kısayollarını kullanabilirsiniz:<br>
+<ul>
+   <li>Seçili durumdaki eşleşmeyi imleç konumundan eklemek için <code>Ctrl+I</code> tuşlarına basın...</li>
+   <li>Seçili durumdaki eşleşmeyi tüm dilimin üzerine yazmak için <code>Ctrl+R</code> tuşlarına basın.</li>
+</ul>
+</p>
+
+<p>Eğer birkaç eşleşme varsa ve seçili durumdaki eşleşmeyi kullanmak istemiyorsanız:<br>
+<ul>
+	<li>Eşleşme Göstericisinde tercih ettiğiniz eşleşmeyi seçin: ikinci eşleşme için <code>Ctrl+2</code>, üçüncü eşleşme için <code>Ctrl+3</code>, hakeza.</li>
+	<li>Sonra yukarıdaki anlatıldığı üzere <code>Ctrl+I</code> ya da <code>Ctrl+R</code> kısayollarını kullanın.</li>
+</ul>
+</p>
+
+<p>(OmegaT'nin bir dilim açıldığında belirtilen bir eşleşme yüzdesinin üzerinde olan birinci eşleşmeyi otomatik olarak hedef alanına eklemesini sağlayabilirsiniz. Bu seçeneği <strong>Seçenekler → Düzenleme Seçenekleri...</strong> alt-menüsünden ayarlayabilirsiniz)</p>
+
+<a name="Glossary_matches"></a>
+<h4>2. Sözlükçe eşleşmeleri</h4>
+
+<p>Eğer OmegaT sözlükçede %100 eşleşen terimler bulursa bunları Sözlükçe Göstericisinde referans amaçlı olarak görüntüler. Bu eşleşmeleri kısayollar kullanarak aktarmak mümkün değildir.</p>
+
+<a name="Create_the_translated_documents"></a>
+<h3>d. Çeviri belgelerini oluşturun.</h3>
+
+<p>Tüm dilimleri tercüme ettikten sonra (ya da isterseniz daha önce) OmegaT çeviri belleğinden saklanan çevirileri kullanarak hedef belgelerini güncelleyecektir.</p>
+
+<p>Bunun için menüden <strong>Proje → Çeviri Belgelerini Oluştur</strong> alt-menüsünü seçin.</p>
+
+<p>OmegaT, ister tamamen isterse kısmen tercüme edilmiş olsun projenin kaynak dizininde bulunan tercüme edilebilir tüm dosyaların tercüme edilmiş hallerini oluşturacaktır. Dosyaların tercüme edilmiş halleri projenin hedef (target) dizinine kaydedilecektir.</p>
+
+<p>Tercüme işlemine son vermeden önce hedef dizinindeki dosyaları ilişkili uygulamalarla (web tarayıcı, kelime işlemci, ...) açarak tercümenizin formatını ve içeriğini kontrol edin. OmegaT'ye geri dönüp gerekli düzeltmeleri yapabilirsiniz; çeviri belgelerini yeniden oluşturmayı unutmayın.</p>
+
+<hr>
+<a name="Dealing_with_tagged_text"></a>
+<h2>3. Etiketli metinlerle nasıl çalışılır</h2>
+
+<p>OmegaT, kaynak belgelerin formatının (kalın, italik, vb.) kaybolmaması için özel etiketler kullanır. OmegaT'nin kullandığı etiketler bir ya da birkaç harften ve bunlarında ardından gelen bir ya da birkaç rakamdan oluşur ve zaman zaman "/" karakteri kullanılır (sözgelimi: &lt;f0&gt;, &lt;br10/&gt;, &lt;/s2&gt; gibi).</p>
+
+<p>Bu etiketler konusunda dikkatli olmalısınız ve bu etiketlerin hedef dilimlerde bulunduğundan emin olmalısınız. (Etiketlerin düzenlenmesi konusunda daha fazla bilgi için OmegaT Kullanıcı Kılavuzuna başvurun).</p>
+
+<a name="An_example..."></a>
+<h3>a. Bir örnek...</h3>
+
+<p>Bu örneklerde kolay görülmesi için etiketleri <font color="#ff0000">kırmızı</font> olarak belirttik, ancak OmegaT'de etiketler bu şekilde gösterilmemektedir.</p>
+
+<p>
+<strong>Aşağıda HTML'deki bir dilime örnek görülmektedir:</strong>
+</p>
+
+<p>
+<code><font color="#ff0000">&lt;p&gt;</font>A different display font can be 
+selected via the <font color="#ff0000">&lt;b&gt;</font>Display 
+Font<font color="#ff0000">&lt;/b&gt;</font> dialog.  Open it via the 
+
+<font color="#ff0000">&lt;i&gt;</font>Settings<font color="#ff0000">&lt;/i&gt;</font> 
+&amp;gt; <font color="#ff0000">&lt;i&gt;</font>Display 
+Font...<font color="#ff0000">&lt;/i&gt;</font> menu item.  The font type and 
+size can be changed from the dialog.<font color="#ff0000">&lt;/p&gt;</font></code>
+</p>
+
+<p>
+<strong>Aşağıda OmegaT'de bu dilimin nasıl görüneceği görülmektedir (kırmızıyla işaretli):</strong>
+</p>
+
+<p>
+<code>A different display font can be selected via the 
+<font color="#ff0000">&lt;b0&gt;</font>Display 
+Font<font color="#ff0000">&lt;/b0&gt;</font> dialog.  Open it via the 
+
+<font color="#ff0000">&lt;i1&gt;</font>Settings<font color="#ff0000">&lt;/i1&gt;</font> 
+&gt; <font color="#ff0000">&lt;i2&gt;</font>Display 
+Font...<font color="#ff0000">&lt;/i2&gt;</font> menu item.  The font type and 
+size can be changed from the dialog.</code>
+</p>
+
+<p>
+<strong>Burada ise dilimin nasıl tercüme edileceği görülmektedir (bu örnek Afrikaanca'dır):</strong>
+</p>
+
+<p>
+<code>'n Mens kan 'n ander vertoonfont kies met die 
+<font color="#ff0000">&lt;b0&gt;</font>Vertoonfont<font color="#ff0000">&lt;/b0&gt;</font>-dialoogkassie. 
+Kies <font color="#ff0000">&lt;i1&gt;</font>Opstelling<font color="#ff0000">&lt;/i1&gt;</font> 
+
+&gt; <font color="#ff0000">&lt;i2&gt;</font>Vertoonfont...<font color="#ff0000">&lt;/i2&gt;</font> 
+op die kieslys. Die lettertipe én die lettergrootte kan met dié 
+dialoogkassie verander word.</code>
+</p>
+
+<p>
+<strong>OmegaT çeviri belgeyi oluşturduğunda HTML şu şekilde görünecektir:</strong>
+</p>
+
+<p>
+<code><font color="#ff0000">&lt;p&gt;</font>'n Mens kan 'n ander vertoonfont kies 
+met die <font color="#ff0000">&lt;b&gt;</font>Vertoonfont<font color="#ff0000">&lt;/b&gt;</font>-dialoogkassie. 
+Kies <font color="#ff0000">&lt;i&gt;</font>Opstelling<font color="#ff0000">&lt;/i&gt;</font> 
+
+&amp;gt; <font color="#ff0000">&lt;i&gt;</font>Vertoonfont...<font color="#ff0000">&lt;/i&gt;</font> 
+op die kieslys. Die lettertipe én die lettergrootte kan met dié 
+dialoogkassie verander word.<font color="#ff0000">&lt;/p&gt;</font></code>
+</p>
+
+<a name="Tag_verification"></a>
+<h3>b. Etiketlerin doğrulanması</h3>
+
+<p>Hatalı etiket kullanımı durumunda OmegaT bunu otomatik olarak tespit edememektedir. Tercüme ettiğiniz belgeyi müşterinize teslim etmeden önce etiketlerde hata olup olmadığını kontrol etmelisiniz.</p>
+
+<p>Menüden <strong>Araçlar → Etiketleri Doğrula</strong> alt-menüsünü seçin. Kaynak ve hedef etiketlerinin birbiriyle örtüşmediği dilimleri içeren bir tablo görüntülenecektir. Dilim numarasına tıklayın.</p>
+
+<p>Otomatik olarak Düzenleyicide hatalı dilime gideceksiniz; burada etiketlemeyi düzeltebilirsiniz.</p>
+
+<p>Bazı durumda etiket hataları belgenin açılmasını bir engelleyebilir. Bu yüzden çeviri belgelerini oluşturmadan önce etiket hatalarını düzeltmiş olmalısınız.</p>
+
+<p>Son olarak tercüme edilmiş belgeyi ilgili görüntüleyici ya da düzenleyicide açmak suretiyle nihai formatlamayı da mutlaka kontrol etmelisiniz.</p>
+<hr>
+</body>
+</html>

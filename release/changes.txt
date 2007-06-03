@@ -38,7 +38,7 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
   - Executable alternative to OmegaT.bat
   http://sourceforge.net/support/tracker.php?aid=1692363
 
-  - HTML filters->translatable contents in attribute
+  - HTML filters->optional translatable contents in attribute
   http://sourceforge.net/support/tracker.php?aid=1436569
 
   - (X)HTML: Optional paragraph on BR

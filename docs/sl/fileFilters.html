@@ -1,121 +1,278 @@
 <html>
+
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title> Filtri za datoteke -  Priročnik za uporabnika OmegaT 1.6.2</title>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta name=Generator content="Microsoft Word 11 (filtered)">
+<title>Datotečni filtri - Priročnik za uporabnika OmegaT 1.6.2</title>
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+h1
+	{margin-right:0cm;
+	margin-left:0cm;
+	font-size:24.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h2
+	{margin-right:0cm;
+	margin-left:0cm;
+	font-size:18.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h3
+	{margin-right:0cm;
+	margin-left:0cm;
+	font-size:13.5pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;}
+p
+	{margin-right:0cm;
+	margin-left:0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+code
+	{font-family:"Courier New";}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:8.0pt;
+	font-family:Tahoma;}
+span.msoins0
+	{text-decoration:underline;}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:70.85pt 70.85pt 2.0cm 70.85pt;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+
 </head>
-<body>
 
-<h1>Filtri za datoteke</h1>
+<body lang=DE link=blue vlink=blue>
 
-<h2>Vsebina</h2></div>
+<div class=Section1>
 
-<ul type="none">
-   <li>1. <a href="#Introduction">Uvod</a>
+<h1><span class=msoins0><span lang=SL style='text-decoration:none'>Datotečni
+filtri</span></span></h1>
 
-      <ul type="none">
-         <li>1.1. <a href="#File_types">Vrste datotek</a></li>
-         <li>1.2. <a href="#File_encodings">Kodiranje datotek</a></li>
-         <li>1.3. <a href="#Renaming_Translated_Files">Kako preimenovati prevedene datoteke</a></li>
-      </ul>
-   </li>
+<h2><span lang=SL>Vsebina</span></h2>
 
-   <li>2. <a href="#File_Filters_Setup">Kako nastaviti filter  za datoteke</a>
-
-      <ul type="none">
-         <li><a href="#File_Filters_Dialog">Dvogovor za datotečne filtre</a></li>
-         <li><a href="#Edit_Filter_Dialog">Dvogovor za urejanje filtrov</a></li>
-         <li><a href="#Add.2FEdit_Pattern_Dialog">Dvogovor za dodajanje/urejanje vzorca</a></li>
-      </ul>
-   </li>
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><span lang=SL>1. <a href="#Introduction">Uvod</a> </span></li>
+ <ul style='margin-top:0cm' type=circle>
+  <li class=MsoNormal><span lang=SL>1.1. <a href="#File_types">Vrste datotek</a></span></li>
+  <li class=MsoNormal><span lang=SL>1.2. <a href="#File_encodings">Kodiranje
+      datotek</a></span></li>
+  <li class=MsoNormal><span lang=SL>1.3. <a href="#Renaming_Translated_Files">Kako
+      preimenovati prevedene datoteke</a></span></li>
+ </ul>
+ <li class=MsoNormal><span lang=SL>2. <a href="#File_Filters_Setup">Kako
+     nastaviti filter za datoteke</a> </span></li>
+ <ul style='margin-top:0cm' type=circle>
+  <li class=MsoNormal><span lang=SL><a href="#File_Filters_Dialog"><span
+      class=msoins0>Pogovorno okno</span> za datotečne filtre</a></span></li>
+  <li class=MsoNormal><span lang=SL><a href="#Edit_Filter_Dialog"><span
+      class=msoins0>Pogovorno okno</span> za urejanje filtrov</a></span></li>
+  <li class=MsoNormal><span lang=SL><a href="#Add.2FEdit_Pattern_Dialog"><span
+      class=msoins0>Pogovorno okno</span> za dodajanje/urejanje vzorca</a></span></li>
+ </ul>
 </ul>
 
-<a name="Introduction"></a>
-<h2>Uvod</h2>
+<h2><a name=Introduction></a><span lang=SL>Uvod</span></h2>
 
-<p>OmegaT vsebuje filtre, ki jih lahko v veliki meri spreminjate v skladu z  vašimi potrebami in s tem  prilagajate večino pogojev za vaše delo</p>
+<p><span lang=SL>OmegaT vsebuje filtre, ki jih lahko v veliki meri spreminjate
+v skladu s potrebami in s tem prilagajate večino pogojev za vaše delo.</span></p>
 
-<p> Datotečni filtri so segmenti programske kode, ki so sposobni:</p>
+<p><span lang=SL>Datotečni filtri so deli programske kode, katerih funkcija je:</span></p>
 
-<ul>
-   <li>Prebrati dokument, ki je shranjen v določenem datotečnem formatu Na primer, datoteke z navadnim besedilom.</li>
-   <li>izvleči iz datoteke sestavne dele, ki jih je treba prevajati.</li>
-   <li>avtomatizirati spremembe v imenih prevedenih dokumentov, to je prevedeljivo vsebino zamenjavati z njenim prevodom.</li>
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><span lang=SL>prebrati dokument, shranjen v določenem
+     datotečnem zapisu, npr. datoteke z navadnim besedilom,</span></li>
+ <li class=MsoNormal><span lang=SL>izvleči iz datoteke sestavne dele, ki jih je
+     treba prevesti,</span></li>
+ <li class=MsoNormal><span lang=SL>avtomatizirati spremembe v imenih prevedenih
+     dokumentov, in sicer besedilo zamenjati z njegovim prevodom.</span></li>
 </ul>
 
-<a name="File_types"></a>
-<h3>Vrste datotek</h3>
+<h3><a name="File_types"></a><span lang=SL>Vrste datotek</span></h3>
 
-<p>Ko OmegaT v izvornem imeniku naleti na novo datoteko, skuša na osnovi njene pripone izbrati najprimernejši  filter. Natančneje rečeno, OmegaT preveri za vsak filter, kako se njegovi vzorci za imena datotek ujemajo z novo datoteko. Na primer, vzorec <code>*.xhtml</code> bo odgovarjal vsem datotekam s pripono  <code>.xhtml</code>. V kolikor se  za datoteko  najde ustrezen filter , se ga uporabi za nadaljnje delo z datoteko. Na primer,  za datoteke s pripono <code>.xhtml</code> se bo privzelko filter XHTML. Vzorce za datoteke, ki jih filter obdeluje,  lahko spreminjate, prav tako lahko filtru dodajate tudi nove vzorce. .</p>
+<p><span lang=SL>Ko OmegaT v izvornem imeniku naleti na novo datoteko, skuša na
+osnovi njene pripone izbrati najprimernejši filter. Podrobneje, OmegaT za vsak
+filter preveri, kako se njegovi vzorci za imena datotek ujemajo z novo
+datoteko. Primer: vzorec </span><code><span lang=SL style='font-size:10.0pt'>*.xhtml</span></code><span
+lang=SL> bo odgovarjal vsem datotekam s pripono </span><code><span lang=SL
+style='font-size:10.0pt'>.xhtml</span></code><span lang=SL>. Če za datoteko
+najde ustrezen filter, ga uporabi za nadaljnje delo z datoteko. Za datoteke s
+pripono </span><code><span lang=SL style='font-size:10.0pt'>.xhtml</span></code><span
+lang=SL> bo tako postal privzeti filter XHTML. Vzorce za datoteke, ki jih
+filter obdeluje, lahko spreminjate, dodajate pa mu lahko tudi nove vzorce.</span></p>
 
-<a name="File_encodings"></a>
-<h3>Kodiranja datotek</h3>
+<h3><a name="File_encodings"></a><span lang=SL>Kodiranja datotek</span></h3>
 
-<p>Enostavna besedila in datoteke  HTML je mogoče shranjevati kodirane na številne načine. Datoteke HTML lahko vsebujejo meta ukaz za kodiranje, ki ga bo OmegaT pri branju datoteke upošteval, pri datotekah za enostavna besedila pa takega dogovora ni. Tako za enostavna besedila kot za datoteke HTML brez deklaracije kodiranja bo OmegaT uporabil kodiranje, ki ste ga navedli za  konkretno pripono. Na primer, za datoteke s pripono <code>.txt</code> se  bo uporabilo kodiranje, ki ga je privzel operacijski sistem. Izvorno kodiranje lahko nastavite posebej za vsak vzorec za izvorne datoteke.</p>
+<p><span lang=SL>Enostavna besedila in datoteke HTML je mogoče shranjevati kot
+kodirane na številne načine. Datoteke HTML lahko vsebujejo meta ukaz za
+kodiranje, ki ga bo OmegaT pri branju datoteke upošteval, pri datotekah za
+enostavna besedila pa takega dogovora ni. Tako za enostavna besedila kot za
+datoteke HTML brez deklaracije kodiranja bo OmegaT uporabil kodiranje, ki ste
+ga navedli za določeno pripono. Za datoteke s pripono </span><code><span
+lang=SL style='font-size:10.0pt'>.txt</span></code><span lang=SL> se bo torej
+uporabilo kodiranje, ki ga je privzel operacijski sistem. Izvorno kodiranje
+lahko nastavite posebej za vsak vzorec izvorne datoteke.</span></p>
 
-<p>Datoteke HTML in enostavna besedila lahko ravno tako izpišete s poljubnim kodiranjem. Če na primer prevajate iz slovenščine v japonščino, lahko nastavite izhodno kodiranje na eno od japonskih kod, ali pa uporabite kodiranje  UTF-8, UTF-16, ali UTF-32. Če ne zahtevate drugače, se bo datoteke z besedilom shranjevalo v isti kodi, kot jo ima vhodna datoteka, pri datotekah HTML pa se bo uporabljalo UTF-8. Pomnite, da bo HTML filter ciljni datoteki dodal deklaracijo za kodiranje, tako da bo lahko brskalnik datoteko prikazal na pravilen način, to je brez kakšnih čudnih znakov.</p>
+<p><span lang=SL>Datoteke HTML in enostavna besedila lahko ravno tako izpišete
+s poljubnim kodiranjem. Če na primer prevajate iz slovenščine v japonščino,
+lahko za izhodno kodiranje izberete japonsko, ali pa uporabite kodiranje UTF-8,
+UTF-16, ali UTF-32. Če nimate drugačnih zahtev, bodo datoteke z besedilom shranjene
+v istem kodiranju kot vhodna datoteka, pri datotekah HTML pa bo uporabljeno
+kodiranje UTF-8. Poleg tega bo filter HTML končni datoteki dodal deklaracijo za
+kodiranje, zato bo lahko brskalnik datoteko prikazal na pravilen način, torej
+brez nesmiselnih znakov.</span></p>
 
-<a name="Renaming_Translated_Files"></a>
-<h3>Kako preimenovati prevedene datoteke</h3>
+<h3><a name="Renaming_Translated_Files"></a><span lang=SL>Kako preimenovati
+prevedene datoteke</span></h3>
 
-<p>Včasih bi hoteli datoteke, ki jih prevajate,  avtomatično preimenovati, imenu bi na primer želeli dodati kodo za ciljni jezik. V ta namen uporabite vzorec za ciljne datoteke v dvogovoru za datotečne filtre</p>
+<p><span lang=SL>Včasih želimo, da se prevajane datoteke preimenujejo
+samodejno, imenu bi na primer želeli dodati kodo za ciljni jezik. V ta namen
+uporabite vzorec za ciljne datoteke v pogovornem oknu za datotečne filtre.</span></p>
 
-<a name="File_Filters_Setup"></a>
-<h2>Kako nastaviti filter za datoteke</h2>
+<h2><a name="File_Filters_Setup"></a><span lang=SL>Kako nastaviti datotečni
+filter</span></h2>
 
-<p>Za večino uporabnikov bodo privzete nastavitve za datotečne filtre zadoščale.. Če jih želite spremeniti, izberite v glavnem meniju <strong>Možnosti -&gt; Filtri za datoteke...</strong>. Pomnite, da lahko nastavitve za filtre spreminjate samo, če ni odprtega projekta, saj s temi spremembami vplivate na to, kako se prevedene datoteke tvori.</p>
+<p><span lang=SL>Za večino uporabnikov bodo privzete nastavitve za datotečne
+filtre zadoščale. Če jih želite spremeniti, v glavnem meniju izberite <strong>Možnosti
+-&gt; Filtri za datoteke ...</strong>. Ne pozabite, da lahko nastavitve za
+filtre spreminjate samo, če ni odprtega projekta, saj s temi spremembami
+vplivate na to, kako se tvorijo prevedene datoteke.</span></p>
 
-<a name="File_Filters_Dialog"></a>
-<h3>Dvogovor za datotečne filtre</h3>
+<h3><a name="File_Filters_Dialog"></a><span lang=SL>Pogovorno okno za datotečne
+filtre</span></h3>
 
-<p>Dvogovr navaja seznam datotečnih filtrov, ki so na razpolago.</p>
+<p><span lang=SL>Pogovorno okno vsebuje seznam datotečnih filtrov, ki so na
+voljo.</span></p>
 
-<p>Če kako vrsto datoteke ne želite, da jo OmegaT prevaja, kliknite na potrditveno polje pred njenim imenom, da odklopite filter zanjo OmegaT bo ustrezne datoteke pri nalaganju projekta prezrl in jih, ko bo tvoril ciljne dokumente, prepisal take kot so. Če se kasneje odločite, da boste filter znova uporabljali, samo odkljukajte potrditveno polje zanj. </p>
+<p><span lang=SL>Če za katero vrsto datoteko želite, da je OmegaT ne prevaja,
+kliknite na potrditveno polje pred njenim imenom, s čimer izklopite filter
+zanjo OmegaT bo te datoteke med nalaganjem projekta prezrl in jih, ko bo tvoril
+ciljne dokumente, prepisal v isti obliki. Če se pozneje odločite, da boste
+filter uporabljali, samo označite potrditveno polje pred njegovim imenom. </span></p>
 
-<p>Če se vam pripeti, da ste konfiguracijo dodobra zmešali, tako da ne veste ne kod ne kam, lahko kliknete na <strong>Privzeto</strong> in filtri bodo spet v privzetem stanju.</p>
+<p><span lang=SL>Če se vam zgodi, da ste nastavitev zmešali tako, da ne veste
+ne kod ne kam, kliknite gumb <strong>Privzeto</strong> in nastavitve filtrov se
+bodo ponastavile na privzete.</span></p>
 
-<p>Če želite spremeniti način, katere datoteke in s katero kodo bo kak filter obdeloval, ga izberite v seznamu in kliknite na  <strong>Uredi</strong>.</p>
+<p><span lang=SL>Če želite spremeniti nastavitev datotek in kodiranja za
+posamezni filter, ga izberite na seznamu in kliknite <strong>Uredi</strong>.</span></p>
 
-<a name="Edit_Filter_Dialog"></a>
-<h3>Dvogovor za urejanje filtrov</h3>
+<h3><a name="Edit_Filter_Dialog"></a><span lang=SL>Pogovorno okno za urejanje
+filtrov</span></h3>
 
-<p>V tem dvogovoru lahko urejate vzorce za imena datotek, ki jih filter obdeluje, prirejate lahko imena prevedenih datotek in navedete kodiranja, ki veljajo pri branju originalnih datotek in pri shranjevanju njihovih prevodov.</p>
+<p><span lang=SL>V tem pogovornem oknu lahko urejate vzorce imen datotek, ki
+jih filter obdeluje, prirejate lahko imena prevedenih datotek in izberete
+kodiranje za branje izvirnih datotek in shranjevanje njihovih prevodov.</span></p>
 
-<p>Za vnos vzorcev se uporablja pravila DOS za maske datotek. Znak <code>*</code> nadomešča poljubno število poljubnih znakov, <code>?</code> nadomešča en sam poljubni znak, vsi ostali znaki pa pomenijo same sebe. Na primer, če hočete, da filter velja za berime  datoteke (<code>berime</code>, <code>BeriMe</code>, and <code>berime.txt</code>), boste uporabiti  <code>?eri?e.*</code>.</p>
+<p><span lang=SL>Za vnos vzorcev se uporabljajo pravila DOS za maske datotek.
+Znak </span><code><span lang=SL style='font-size:10.0pt'>*</span></code><span
+lang=SL> nadomešča poljubno število poljubnih znakov, </span><code><span
+lang=SL style='font-size:10.0pt'>?</span></code><span lang=SL> nadomešča en sam
+poljuben znak, vsi ostali znaki pa predstavljajo same sebe. Če na primer želite,
+da filter upošteva datoteke berime (</span><code><span lang=SL
+style='font-size:10.0pt'>berime</span></code><span lang=SL>, </span><code><span
+lang=SL style='font-size:10.0pt'>BeriMe</span></code><span lang=SL>, and </span><code><span
+lang=SL style='font-size:10.0pt'>berime.txt</span></code><span lang=SL>),
+vnesite </span><code><span lang=SL style='font-size:10.0pt'>?eri?e.*</span></code><span
+lang=SL>.</span></p>
 
-<p>Polja za kodiranje izvornih in ciljnih datotek uporabljajo  kombinirana polja s seznamom vseh kodiranj, ki se jih podpira. Upoštevajte pri tem, da pri filtrih za datoteke, pri katerih je kodiranje predpisano oziroma enolično določeno,  kodiranja ni mogoče izbirati. Če zaupate OmegaT, da bo znal izbrati prvo kodiranje, lahko za filtre, pri katerih je kodiranje mogoče nastavljati, uporabite "&lt;avto&gt;". Postopek je kot sledi:</p>
+<p><span lang=SL>Kodiranje izvirnih in končnih datotek določite v kombiniranih
+poljih s seznamom vseh podprtih kodiranj. Pri tem velja, da za datoteke, pri
+katerih je kodiranje predpisano oziroma enolično določeno, drugega kodiranja ni
+mogoče izbirati. Če zaupate izbiri programa OmegaT, lahko za filtre, pri
+katerih je kodiranje mogoče nastaviti, uporabite možnost samodejne izbire
+&quot;&lt;avto&gt;&quot;. Postopek je naslednji:</span></p>
 
-<ul>
-   <li>OmegaT bo lahko do skušal uganiti kodiranje izvornih datotek za HTML/XHTML.</li>
-   <li>Za datoteke z besedilom bo OmegaT uporabljal privzeto kodiranje operacijskega sistema.</li>
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><span lang=SL>OmegaT bo poskušal uganiti kodiranje
+     izvirnih datotek HTML/XHTML.</span></li>
+ <li class=MsoNormal><span lang=SL>Za datoteke z besedilom bo OmegaT uporabil
+     privzeto kodiranje operacijskega sistema.</span></li>
 </ul>
 
-<p>Vzorec za ciljno ime datoteke uporablja posebno sitaksto, tako da je bolje,da kliknete <strong>Uredi..</strong>  za dvogovor za urejanje vzorca, če ga želite spreminjati.</p>
+<p><span lang=SL>Vzorec za ciljno ime datoteke uporablja posebno skladnjo,
+poimenovalni vzorec pa lahko spremenite v pogovornem oknu, če kliknete <strong>Uredi
+...</strong>.</span></p>
 
-<p>Če hočete, da se filter ukvarja z datotekami, ki odgovarjajo več kot enem samem vzorcu za imena, kliknite na  <strong>Dodaj...</strong>, ki odpre dvogovor za dodajanje vzorcev.</p>
+<p><span lang=SL>Če želite, da filter upošteva datoteke, ki odgovarjajo več
+poimenovalnim vzorcem, kliknite <strong>Dodaj ...</strong>, da odprete
+pogovorno okno za dodajanje vzorcev.</span></p>
 
-<p>Nazaj na privzeto konfiguracijo filtre se lahko vrnete vedno, v ta namen kliknite na <strong>Privzeto</strong>.</p>
+<p><span lang=SL>Privzete nastavitve filtrov lahko kadar koli ponastavite, če
+kliknete <strong>Privzeto</strong>.</span></p>
 
-<a name="Add.2FEdit_Pattern_Dialog"></a>
-<h3>Dvogovor za dodajanje/urejanje vzorca</h3>
+<h3><a name="Add.2FEdit_Pattern_Dialog"></a><span lang=SL>Pogovorno okno za
+dodajanje/urejanje vzorca</span></h3>
 
-<p>Isti dvogovor vam je tudi na razpolago  tako za dodajanje kot za urejanje danega vzorca. Kar je novega pri tem, je poseben urejevalnik vzorcev za ciljne datoteke, vsa ostala polja so opisana že zgoraj.</p>
+<p><span lang=SL>Dodajanje in urejanje poimenovalnega vzorca lahko opravite v
+istem pogovornem oknu. Omeniti je treba dodatni urejevalnik vzorcev za ciljne
+datoteke, ostala polja pa so opisana zgoraj.</span></p>
 
-<p>S pomočjo odseka za vzorce za ciljne datoteke lahko ime datoteke s prevedenim besedilom sestavite iz več različnih delov.</p>
+<p><span lang=SL>V podoknu z vzorci za ciljne datoteke lahko ime prevedene
+datoteke sestavite iz več različnih elementov:</span></p>
 
-<ul>
-   <li>Privzeta vrednost je <code>${filename}</code> -- polno ime izvorne datoteke s pripono, z drugo besedo, ciljno ime je enako izvornemu imenu.</li>
-   <li><code>${nameOnly}</code> vam omogoča, da vstavite samo ime datoteke, brez pripone.</li>
-   <li><code>${extension}</code> --pripona izvorne datoteke.</li>
-   <li><code>${targetLocale}</code> - lokalna koda za cilj (v obliki  "xx_YY").</li>
-   <li><code>${targetLanguage}</code> - ciljni jezik in ciljna država skupaj (v obliki "XX-YY").</li>
-   <li><code>${targetLanguageCode}</code> - samo ciljni jezik ("XX").</li>
-   <li><code>${targetCoutryCode}</code> - samo ciljna država ("YY").</li>
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><span lang=SL>Privzeta vrednost je </span><code><span
+     lang=SL style='font-size:10.0pt'>${filename}</span></code><span lang=SL>
+     -- polno ime izvorne datoteke s pripono - ciljno ime je enako izvornemu
+     imenu</span></li>
+ <li class=MsoNormal><code><span lang=SL style='font-size:10.0pt'>${nameOnly}</span></code><span
+     lang=SL> -- samo ime datoteke, brez pripone</span></li>
+ <li class=MsoNormal><code><span lang=SL style='font-size:10.0pt'>${extension}</span></code><span
+     lang=SL> -- pripona izvirne datoteke</span></li>
+ <li class=MsoNormal><code><span lang=SL style='font-size:10.0pt'>${targetLocale}</span></code><span
+     lang=SL> -- področna koda prevedene datoteke (v obliki &quot;xx_YY&quot;)</span></li>
+ <li class=MsoNormal><code><span lang=SL style='font-size:10.0pt'>${targetLanguage}</span></code><span
+     lang=SL> -- ciljni jezik in ciljna država skupaj (v obliki
+     &quot;XX-YY&quot;)</span></li>
+ <li class=MsoNormal><code><span lang=SL style='font-size:10.0pt'>${targetLanguageCode}</span></code><span
+     lang=SL> -- samo ciljni jezik (&quot;XX&quot;)</span></li>
+ <li class=MsoNormal><code><span lang=SL style='font-size:10.0pt'>${targetCoutryCode}</span></code><span
+     lang=SL> -- samo ciljna država (&quot;YY&quot;)</span></li>
 </ul>
 
-<p>Dodamo lahko brez težav še druge možnosti, oglasite se, da vemo, katero spremenljivko pogrešate. Oglasite se enostavno v naši <a href="http://groups.yahoo.com/group/OmegaT/">skupini uporabnikov</a>.</p>
+<p><span lang=SL>Dodamo lahko tudi druge možnosti, zato se nam oglasite in
+povejte, katero spremenljivko pogrešate. Na voljo vam je naša <a
+href="http://groups.yahoo.com/group/OmegaT/">skupina uporabnikov</a>.</span></p>
 
-<hr>
-<p><a href="legalNotices.html" title="Pravni poduk">Pravni poduk</a></p>
+<div class=MsoNormal align=center style='text-align:center'><span lang=SL>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<p><span lang=SL><a href="sl/legalNotices.html" title="Pravni poduk">Pravni
+poduk</a></span></p>
+
+</div>
 
 </body>
+
 </html>

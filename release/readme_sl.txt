@@ -1,4 +1,4 @@
-  Ta prevod je opravil Vito Smolej, copyright © 2007.
+﻿  Ta prevod je opravil Vito Smolej, copyright © 2007.
 
 ==============================================================================
    BeriMe datoteka OmegaT 1.6.2
@@ -6,7 +6,7 @@
   1.  Informacija o OmegaT
   2.  Kaj je OmegaT?
   3.  Splošne opombe o Javi in OmegaT
-  4.  Kako lahko pripevate k OmegaT
+  4.  Kako lahko prispevate k OmegaT
   5.  Vas OmegaT spravlja ob živce?  Potrebujete pomoč?
   6.  Podatki o izdajah
 
@@ -30,10 +30,10 @@ Napake sporočajte (v angleščini) na stran SourceForge:
 ==============================================================================
   2.  Kaj je OmegaT?
 
-OmegaT je orodje za računalniško podprto prevajanje. Z OmegaT lahko svobodno razpolagate, v smislu, da ga lahko uporabljatebrezplačno, tudi če gre za poslovno uporabo, in v smislu, da ga lahko po +svoji volj spreminjate in/ali delite naprej, pod pogojem, da pri tem spoštujete pogoje uporabniške licence
+OmegaT je orodje za računalniško podprto prevajanje. Z OmegaT lahko svobodno razpolagate, v smislu, da ga lahko uporabljate brezplačno, tudi če gre za poslovno uporabo, in v smislu, da ga lahko po svoji volj spreminjate in/ali dajete na razpolago, pod pogojem, da pri tem spoštujete pogoje uporabniške licence
 
 Glavne poteze OmegaT so
-  - uporablja se ga lahzko na kateremkoli operacijskem sistemu, ki podpira  Javo
+  - uporablja se ga lahko na kateremkoli operacijskem sistemu, ki podpira  Javo
   - za referenco pri prevajanju uporablja kakršnokoli veljavno datoteko TMX
   - za segmentiranje stavkov uporablja prilagodljivo metodo (ki je podobna metodi SRX)
   - išče po projektu iin po referenčnih prevodnioh spominih
@@ -78,7 +78,7 @@ Uporabniki, ki delajo z  Linuxom na sistemih PowerPC, si morajo preskrbetiJRE fi
     http://www-128.ibm.com/developerworks/java/jdk/linux/download.html
 
 ==============================================================================
- 4. Kako lahko pripevate k OmegaT
+ 4. Kako lahko prispevate k OmegaT
 
 Že želite sodelovati v razvoju OmegaT, se obrnite na razvijalce pri
     http://lists.sourceforge.net/lists/listinfo/omegat-development
@@ -94,7 +94,7 @@ Za druge vrste sodelovanja se najprej prijavite v uporabniško skupino::
 
  kjer boste dobili občutek, kako se pri OmegaT svet vrti...
 
-  OmegaT je provtno delo Keitha Godfreya.
+  OmegaT je prvotno delo Keitha Godfreya.
   Marc Prior je koordinator projekta  OmegaT.
 
 Doslej so k projektu prispevali (v abecednem vrstnem redu):)
@@ -105,7 +105,7 @@ Kodo so prispevali
   Sacha Chua
   Thomas Huriaux
   Maxym Mykhalchuk (glavni razvijalec)
-  Henry Pijffers (odgovorni za verzije)
+  Henry Pijffers (odgovoren za verzije)
   Benjamin Siband
   Martin Wunderlich
 
@@ -210,7 +210,7 @@ Podprti formati datotek:
   - Microsoft OpenXML files
 
 Spremembe jedra:
-  - fleksibilna  (stavčna) segmentacija
+  - fleksibilno  (stavčno) segmentiranje
   - filtre za datotečne formate je mogoče ustvarjati v obliki vtičnikov 
   - kodarefaktorirana, z dodatnimi komentarji 
   - program za nameščanje pod Windows
@@ -223,4 +223,5 @@ novosti v uporabniškem vmesniku (v primerjavi s serijo 1.4 OmegaT):
   - glavni vmesnik izboljšan, s pomočjo plavajočih oken
 
 ==============================================================================
+
 

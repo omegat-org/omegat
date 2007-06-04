@@ -5,7 +5,7 @@
 1.7.0 vs. 1.6.1_04
 
   19 Enhancements
-  15 Bugfixes
+  16 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.0
@@ -113,6 +113,9 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
 
   - Wrong link in legalNotices.html
   http://sourceforge.net/support/tracker.php?aid=1657547
+
+  - Search: simple wilcards do not work
+  http://sourceforge.net/support/tracker.php?aid=1680081
 
 ----------------------------------------------------------------------
 1.6.1_04

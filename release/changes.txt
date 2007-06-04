@@ -4,7 +4,7 @@
 
 1.7.0 vs. 1.6.1_04
 
-  19 Enhancements
+  20 Enhancements
   16 Bugfixes
 
 ----------------------------------------------------------------------
@@ -64,6 +64,8 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
   - Hungarian UI localisation + manual translation
 
   - Turkish UI localisation + instant start tutorial
+  
+  - Catalan UI localisation + manual translation
 
   - New logging API
 

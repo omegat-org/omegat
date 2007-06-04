@@ -1,0 +1,179 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Menú principal - Manual d'usuari de l'OmegaT 1.6.2</title>
+</head>
+<body>
+
+<h1>Menú principal</h1>
+
+<p>Tota la funcionalitat de l'OmegaT està disponible a la barra de menú de la part superior de la finestra de l'editor. La majoria de les funcions també estan disponibles mitjançant <a href="keyboardShortcuts.html">dreceres de teclat</a>.</p>
+
+<p>Les dreceres de tipus <strong><code>Ctrl</code></strong> s'utilitzen en sistemes operatius Windows, UNIX i derivats de UNIX que tenen teclats amb la tecla <strong><code>Ctrl</code></strong> o <strong><code>Control</code></strong>. Enlloc d'aquesta, els usuaris del Mac OS X han d'utilitzar la tecla d'Apple <img src="images/AppleKey.gif" alt="Tecla d'Apple" width="19" height="19">.</p>
+
+<h2>Contingut</h2>
+<ul type="none">
+   <li>1. <a href="#Project_Menu">Menú Projecte</a></li>
+   <li>2. <a href="#Edit_Menu">Menú Edita</a></li>
+   <li>3. <a href="#Go_to_Menu">Menú Vés a</a></li>
+   <li>4. <a href="#Tools_Menu">Menú Eines</a></li>
+   <li>5. <a href="#Options_Menu">Menú Opcions</a></li>
+   <li>6. <a href="#Help_Menu">Menú Ajuda</a></li>
+</ul>
+
+<a name="Project_Menu"></a>
+<h4>Menú Projecte</h4>
+
+<p>
+<dl>
+   <dt>Nou</dt>
+   <dd>Crea i obre un projecte nou. El diàleg per a crear un projecte és el mateix que per a <a href="projectProperties.html">editar-lo</a>.</dd>
+
+   <dt>Obre <code>&lt;Ctrl+O&gt;</code></dt>
+   <dd>Obre un projecte creat prèviament.</dd>
+
+   <dt>Importa fitxers de partida...</dt>
+   <dd>Copia els fitxers seleccionats al directori dels fitxers de partida (per defecte, "<code>/source</code>") i torna a carregar el projecte per tal de carregar els nous fitxers.</dd>
+
+   <dt>Torna a carregar</dt>
+   <dd>Torna a carregar el projecte per tal d'aplicar els canvis externs que s'hagin realitzat als fitxers de partida, a les memòries de traducció de referència o als glossaris.</dd>
+
+   <dt>Tanca</dt>
+   <dd>Desa la traducció i tanca el projecte.</dd>
+
+   <dt>Desa <code>&lt;Ctrl+S&gt;</code></dt>
+   <dd>Desa la traducció a la memòria de traducció del projecte. L'OmegaT desa automàticament la traducció cada 10 minuts, quan tanqueu el projecte o quan sortiu de l'OmegaT.</dd>
+
+   <dt>Crea els documents traduïts</dt>
+   <dd>Crea els documents d'arribada a partir de la traducció del text dels documents que heu realitzat. Els documents es desaran al directori <code>/target</code>.</dd>
+
+   <dt>Propietats <code>&lt;Ctrl+E&gt;</code></dt>
+   <dd>Mostra el diàleg <a href="projectProperties.html">Edita el projecte</a>, que us permet editar les llengües del projecte i les ubicacions de les carpetes.</dd>
+
+   <dt>Fitxers del projecte... <code>&lt;Ctrl+L&gt;</code></dt>
+   <dd>Tanca o obre la finestra <a href="userInterface.html#Project_Files">Fitxers del projecte</a> (en funció de si està oberta o tancada).</dd>
+
+   <dt>Surt <code>&lt;Ctrl+Q&gt;</code></dt>
+   <dd>Desa el projecte i surt de l'OmegaT. Si no heu desat el projecte manualment, us demanarà que confirmeu si realment voleu sortir.</dd>
+</dl>
+</p>
+
+<a name="Edit_Menu"></a>
+<h4>Menú Edita</h4>
+
+<p>Els elements que habitualment es troben a la majoria de les aplicacions (copia/retalla/enganxa) no es mostren en aquest menú, però estan disponibles mitjançant les dreceres del vostre sistema. Per exemple, al Windows:</p>
+
+<p>
+<dl>
+   <dt>Copia <code>&lt;Ctrl+C&gt;</code></dt>
+   <dd>Copia el text seleccionat al porta-retalls.</dd>
+
+   <dt>Retalla <code>&lt;Ctrl+X&gt;</code></dt>
+   <dd>Copia el text seleccionat al porta-retalls i el suprimeix.</dd>
+
+   <dt>Enganxa <code>&lt;Ctrl+V&gt;</code></dt>
+   <dd>Enganxa el text del porta-retalls a la posició del cursor.</dd>
+</dl>
+</p>
+
+<p>El menú Edita conté els elements següents:</p>
+
+<p>
+<dl>
+   <dt>Desfés l'última acció <code>&lt;Ctrl+Z&gt;</code></dt>
+   <dd>Torna a l'estat en què us trobàveu abans de realitzar l'última acció d'edició. Aquesta acció no funciona un cop validat el segment modificat.</dd>
+
+   <dt>Refés l'última acció <code>&lt;Ctrl+Y&gt;</code></dt>
+   <dd>Torna a l'estat en què us trobàveu abans de cancel·lar l'última acció d'edició. Aquesta acció no funciona un cop validat el segment modificat.</dd>
+
+   <dt>Reemplaça per la coincidència <code>&lt;Ctrl+R&gt;</code></dt>
+   <dd>Sobreescriu tot el segment d'arribada amb la coincidència parcial seleccionada (per defecte, se selecciona la primera coincidència).</dd>
+
+   <dt>Insereix la coincidència <code>&lt;Ctrl+I&gt;</code></dt>
+   <dd>Insereix la coincidència parcial seleccionada a la posició del cursor. Aquesta funció mai no sobreescriurà cap fragment del segment d'arribada, fins i tot si està seleccionat.</dd>
+
+   <dt>Reemplaça pel text de partida <code>&lt;Ctrl+Maj+R&gt;</code></dt>
+   <dd>Sobreescriu tot el segment d'arribada amb el text de partida.</dd>
+
+   <dt>Insereix el text de partida <code>&lt;Ctrl+Maj+I&gt;</code></dt>
+   <dd>Insereix el text de partida a la posició del cursor.</dd>
+
+   <dt>Cerca al projecte... <code>&lt;Ctrl+F&gt;</code></dt>
+   <dd>Obre una finestra <a href="userInterface.html#Search_Window">Cerca de text</a> nova.</dd>
+
+   <dt>Selecciona la coincidència núm. N <code>&lt;Ctrl+N&gt;</code> (N de l'1 al 5)</dt>
+   <dd>Selecciona la coincidència parcial número N mostrada a la finestra de coincidències, per tal d'inserir-la al segment o de reemplaçar el segment per la coincidència. L'apartat <a href="userInterface.html#Fuzzy_Matches">Coincidències parcials</a> descriu la codificació de colors en detall.</dd>
+</dl>
+</p>
+
+<a name="Go_to_Menu"></a>
+<h4>Menú Vés a</h4>
+
+<p>
+<dl>
+   <dt>Segment següent sense traduir <code>&lt;Ctrl+U&gt;</code></dt>
+   <dd>Avança fins al següent segment que no té equivalent a la memòria de traducció</dd>
+
+   <dt>Següent segment <code>&lt;Ctrl+N&gt;</code>, <code>&lt;Retorn&gt;</code> / <code>&lt;Tab&gt;</code>
+   </dt>
+   <dd>Avança fins al segment següent. Si el segment actual és l'últim del fitxer, avança fins al primer segment del següent fitxer.</dd>
+
+   <dt>Segment anterior <code>&lt;Ctrl+P&gt;</code>, <code>&lt;Ctrl+Retorn&gt;</code> / <code>&lt;Ctrl+Tab&gt;</code>
+   </dt>
+   <dd>Avança fins al segment anterior. Si el segment actual és el primer del fitxer, avança fins a l'últim segment del fitxer anterior.</dd>
+</dl>
+</p>
+
+<a name="Tools_Menu"></a>
+<h4>Menú Eines</h4>
+
+<p>
+<dl>
+   <dt>Valida les etiquetes <code>&lt;Ctrl+T&gt;</code></dt>
+   <dd>Comprova que no faltin etiquetes ni s'hagin modificat etiquetes en fitxers formatats. Mostra una llista dels segments que contenen errors d'etiquetes. L'apartat <a href="userInterface.html#Tag_Validation">Finestra de validació de les etiquetes</a> en descriu el contingut i l'apartat <a href="formattedText.html">Com treballar amb text formatat</a> n'explica el motiu.</dd>
+</dl>
+</p>
+
+<a name="Options_Menu"></a>
+<h4>Menú Opcions</h4>
+
+<p>
+<dl>
+   <dt>Utilitza TAB per a avançar</dt>
+   <dd>Estableix la tecla de validació de segments en <code>&lt;Tab&gt;</code>, enlloc de la tecla per defecte <code>&lt;Retorn&gt;</code>. Aquesta opció és útil en alguns sistemes d'entrada de caràcters xinesos, japonesos o coreans.</dd>
+
+   <dt>Tipus de lletra...</dt>
+   <dd>Mostra el diàleg <a href="fontSettings.html">Tipus de lletra de visualització</a>, que us permet modificar el tipus de lletra de visualització del text. És millor que els usuaris d'ordinadors antics canviïn el tipus de lletra abans d'obrir un projecte, ja que el rendiment se'n pot ressentir. Aquest problema afecta de manera més negativa la combinació de G4 + Mac OS X + japonès.</dd>
+
+   <dt>Filtres de fitxers...</dt>
+   <dd>Mostra el diàleg <a href="fileFilters.html">Filtres de fitxers</a>, que us permet configurar la manera en què l'OmegaT analitzarà i processarà els fitxers.</dd>
+
+   <dt>Segmentació...</dt>
+   <dd>Mostra el diàleg <a href="segmentation.html">Configuració de la segmentació</a>, que us permet configurar la segmentació del text de partida.</dd>
+
+   <dt>Comportament de l'edició...</dt>
+   <dd>Mostra el diàleg <a href="translationEditing.html">Opcions de comportament de l'edició</a>, que us permet configurar el contingut del camp de traducció dels segments que encara no s'han traduït.</dd>
+
+   <dt>Restaura la finestra principal</dt>
+   <dd>Restaura els components (l'editor, el visualitzador de coincidències i el visualitzador de glossaris) de la finestra principal de l'OmegaT al seu estat per defecte. Utilitzeu aquesta funció si heu desacoblat, mogut o amagat algun component i no el podeu tornar a col·locar on voleu.</dd>
+</dl>
+</p>
+
+<a name="Help_Menu"></a>
+<h4>Menú Ajuda</h4>
+
+<p>
+<dl>
+   <dt>Manual d'usuari... <code>&lt;F1&gt;</code></dt>
+   <dd>Obre el <a href="userInterface.html#Help_Browser">Navegador de l'ajuda</a> amb aquest manual en una finestra separada.</dd>
+
+   <dt>Quant a...</dt>
+   <dd>Mostra la informació de copyright, crèdits i llicència.</dd>
+</dl>
+</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Avisos legals">Avisos legals</a></p>
+
+</body>
+</html>

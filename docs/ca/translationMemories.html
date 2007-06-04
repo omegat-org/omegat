@@ -1,0 +1,117 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Memòries de traducció - Manual d'usuari de l'OmegaT 1.6.2</title>
+</head>
+<body>
+
+<h1>Memòries de traducció</h1>
+
+<h2>Contingut</h2>
+
+<ul type="none">
+   <li>1. <a href="#OmegaT_and_TMX_files">L'OmegaT i els fitxers TMX</a>
+
+      <ul type="none">
+         <li><a href="#TMX_files_location_and_purpose">Ubicació i finalitat dels fitxers TMX</a></li>
+         <li><a href="#TMX_files_and_language">Fitxers TMX i llengua</span></a></li>
+      </ul>
+   </li>
+
+   <li>2. <a href="#Keeping_a_memory_of_your_translation_with_OmegaT">Com conservar una memòria de la traducció amb l'OmegaT</a></li>
+
+   <li>5. <a href="#Using_memories_created_by_other_translation_tools">Ús de memòries creades amb altres eines de traducció</span></a>
+
+      <ul type="none">
+         <li>5.1. <a href="#Importing_files">Importació de fitxers</a></li>
+         <li>5.2. <a href="#Imported_files_handling">Procés dels fitxers importats</a></li>
+      </ul>
+   </li>
+
+   <li>6. <a href="#Using_OmegaT_translation_memories_in_other_translation_tools">Ús de memòries de traducció de l'OmegaT en altres eines de traducció</a></li>
+   <li>7. <a href="#Upgrading_Translation_Memories">Actualització de les memòries de traducció</a></li>
+</ul>
+
+<a name="OmegaT_and_TMX_files"></a>
+<h2>L'OmegaT i els fitxers TMX</h2>
+
+<a name="TMX_files_location_and_purpose"></a>
+<h3>Ubicació i finalitat dels fitxers TMX</h3>
+
+<p>L'OmegaT utilitza fitxers TMX en 3 ubicacions diferents.</p>
+
+<ul>
+   <li>La carpeta /omegat/ conté el fitxer <strong>project_save.tmx</strong> i segurament una sèrie de fitxers TMX de còpia de seguretat. El fitxer project_save.tmx conté <strong>tots</strong> els segments que s'han afegir a la memòria des que heu iniciat el projecte.</li>
+
+   <li>La carpeta principal del projecte contindrà 3 fitxers TMX: <strong>&lt;nom_projecte&gt;-omegat.tmx</strong>, <strong>&lt;nom_projecte&gt;-level1.tmx</strong> i <strong>&lt;nom_projecte&gt;-level2.tmx</strong>, on <code>&lt;nom_projecte&gt;</code> és el nom del projecte. Aquests fitxers són fitxers TMX exportats i contenen únicament els parells traduïts.<ul>
+         <li>&lt;nom_projecte&gt;-level1.tmx és un fitxer TMX que conté només informació textual.</li>
+
+         <li>&lt;nom_projecte&gt;-level2.tmx és un fitxer TMX que encapsula les etiquetes específiques de l'OmegaT dins d'etiquetes de TMX correctes, de manera que es pot utilitzar amb tota la informació de format en una eina de traducció que admeti memòries TMX de nivell 2, o bé en el propi OmegaT.</li>
+
+         <li>&lt;nom_projecte&gt;-omegat.tmx és un fitxer TMX que conté les etiquetes de format específiques de l'OmegaT, de manera que es pot utilitzar amb tota la informació de format en un altre projecte de l'OmegaT.</li>
+      </ul>
+   </li>
+
+   <li>La carpeta de les memòries de traducció (per defecte, "/tm") pot contenir un nombre qualsevol de fitxers TMX. Cal que aquests fitxers siguin fitxers TMX correctes, que poden contenir únicament informació textual (TMX de nivell 1), informació textual i de format de l'OmegaT (TMX de l'OmegaT) o bé informació textual i de format de TMX (TMX de nivell 2).</li>
+</ul>
+
+<a name="TMX_files_and_language"></a>
+<h3>Fitxers TMX i llengua</h3>
+
+<p>Els fitxers TMX contenen <i>unitats de traducció</i>, que estan formades per diversos segments equivalents en llengües diferents. Una unitat de traducció està formada, com a mínim, per dues <i>variacions d'unitat de traducció</i> (tuv). Qualsevol de les dues es pot utilitzar com a segment de partida o d'arribada.</p>
+
+<p>La configuració del projecte indicarà quina és la llengua de partida i quina la d'arribada. Així doncs, l'OmegaT obtindrà el segment <strong>tuv</strong> corresponent al codi de llengua de partida del projecte i l'utilitzarà com a segment de partida, i obtindrà el segment <strong>tuv</strong> corresponent al codi de llengua d'arribada del projecte i l'utilitzarà com a segment d'arribada.</p>
+
+<p>Els codis de llengua poden tenir diverses formes. Actualment, només l'OmegaT reconeix els codis següents:</p>
+
+<ul><li>El codi de llengua de 2 lletres (per exemple: <strong>JA</strong> per al japonès)</li></ul>
+
+<p>o bé</p>
+
+<ul><li>El codi de llengua de dues lletres més el codi de país de dues lletres, separats per un guió (per exemple: <strong>JA-JP</strong> per al japonès de Japó)</li></ul>
+
+<p>Si els codis de llengua del projecte i els codis de llengua del fitxer TMX coincideixen totalment, els segments es carreguen a la memòria. Si els codis només coincideixen amb la llengua, però no amb el país, els segments també es carreguen a la memòria. Si no coincideixen ni el codi de llengua ni el de país, els segments no es carreguen a la memòria.</p>
+
+<a name="Keeping_a_memory_of_your_translation_with_OmegaT"></a>
+<h2>Com conservar una memòria de la traducció amb l'OmegaT</h2>
+
+<p>El fitxer project_save.tmx conté <strong>tots</strong> els segments que s'han afegir a la memòria des que heu iniciat el projecte. Si feu qualsevol modificació de la segmentació del projecte, per exemple, el fitxer project_save.tmx emmagatzemarà els nous parells de traducció, però conservarà tota la informació prèvia. Això pot fer que es mostrin <strong>cadenes orfes</strong> al visualitzador de coincidències. Aquestes coincidències ja no fan referència a segments existents, sinó als segments emmagatzemats abans de realitzar les modificacions. Si la modificació s'ha fet per error, restabliu la configuració anterior i els segments emmagatzemats antics tornaran a aparèixer.</p>
+
+<a name="Using_memories_created_by_other_translation_tools"></a>
+<h2>Ús de memòries creades amb altres eines de traducció</h2>
+
+<a name="Importing_files"></a>
+<h3>Importació de fitxers</h3>
+
+<p>L'OmegaT admet la importació de fitxers TMX versions 1.1-1.4b (tant de nivell 1 com de nivell 2). Això permet que l'OmegaT pugui llegir les memòries de traducció generades amb altres eines.</p>
+
+<p>No obstant, l'OmegaT no és <i>totalment</i> compatible amb els fitxers TMX de nivell 2 (que no només emmagatzemen la traducció, sinó també el format) i, per tant, és possible que la qualitat de les coincidències parcials sigui una mica més baixa quan s'importen fitxers TMX de nivell 2.</p>
+
+<a name="Imported_files_handling"></a>
+<h3>Procés dels fitxers importats</h3>
+
+<p>L'OmegaT segueix uns procediments molt estrictes a l'hora de processar els fitxers de memòria de traducció (fitxers TMX).</p>
+
+<p>Si l'OmegaT troba cap error en algun fitxer, senzillament no el carregarà.</p>
+
+<p>Se sap que algunes eines produeixen fitxers TMX no vàlids en alguns casos. Si voleu utilitzar aquests fitxers com a traduccions de referència amb l'OmegaT, caldrà que n'arregleu els errors si l'OmegaT no els pot obrir. Les solucions solen ser operacions força trivials i l'OmegaT us en mostrarà indicacions al missatge d'error relacionat. Si no us en sortiu, podeu demanar consell al grup d'usuaris.</p>
+
+<a name="Using_OmegaT_translation_memories_in_other_translation_tools"></a>
+<h2>Ús de memòries de traducció de l'OmegaT en altres eines de traducció</h2>
+
+<p>L'OmegaT exporta fitxers TMX versió 1.4 (tant de nivell 1 com de nivell 2). L'exportació de nivell 2 no és un nivell 2 estàndard, però és suficient per a generar coincidències correctes en eines de traducció compatibles amb TMX de nivell 2.</p>
+
+<p>Si només us cal informació textual (i no informació de format), utilitzeu el fitxer de nivell 1 que l'OmegaT ha creat.</p>
+
+<a name="Upgrading_Translation_Memories"></a>
+<h2>Actualització de les memòries de traducció</h2>
+
+<p>En les versions anteriors de l'OmegaT, els fitxers de partida només es podien segmentar per paràgrafs, i les etiquetes de format dels documents HTML i Open Document rebien una numeració incoherent. L'OmegaT 1.6.2 pot detectar i actualitzar automàticament aquests fitxers TMX per tal d'augmentar la qualitat de les coincidències parcials i d'aprofitar millor la traducció existent.</p>
+
+<p>El fitxer TMX d'un projecte s'actualitzarà una sola vegada i s'escriurà amb el format actualitzat, mentre que els fitxers TMX heretats s'actualitzaran automàticament cada vegada que s'obri el projecte. Tingueu en compte que alguns canvis als filtres de fitxers de l'OmegaT 1.6.2 poden provocar una segmentació totalment diferent, i per tant, en casos aïllats és possible que hagueu d'actualitzar la memòria de traducció manualment.</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Avisos legals">Avisos legals</a></p>
+
+</body>
+</html>

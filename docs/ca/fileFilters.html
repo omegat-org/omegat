@@ -1,0 +1,121 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Filtres de fitxers - Manual d'usuari de l'OmegaT 1.6.2</title>
+</head>
+<body>
+
+<h1>Filtres de fitxers</h1>
+
+<h2>Contingut</h2></div>
+
+<ul type="none">
+   <li>1. <a href="#Introduction">Introducció</a>
+
+      <ul type="none">
+         <li>1.1. <a href="#File_types">Tipus de fitxers</a></li>
+         <li>1.2. <a href="#File_encodings">Codificació dels fitxers</a></li>
+         <li>1.3. <a href="#Renaming_Translated_Files">Canvi del nom dels fitxers traduïts</a></li>
+      </ul>
+   </li>
+
+   <li>2. <a href="#File_Filters_Setup">Configuració dels filtres de fitxers</a>
+
+      <ul type="none">
+         <li><a href="#File_Filters_Dialog">Diàleg Filtres de fitxers</a></li>
+         <li><a href="#Edit_Filter_Dialog">Diàleg Edita el filtre</a></li>
+         <li><a href="#Add.2FEdit_Pattern_Dialog">Diàleg Afegeix un patró/Edita el patró</a></li>
+      </ul>
+   </li>
+</ul>
+
+<a name="Introduction"></a>
+<h2>Introducció</h2>
+
+<p>L'OmegaT inclou filtres completament configurables, cosa que us permet configurar la major part dels aspectes del seu funcionament.</p>
+
+<p>Els filtres de fitxers són parts de codi que permeten:</p>
+
+<ul>
+   <li>Llegir el document en una sèrie de formats de fitxer específics. Per exemple, els fitxers de text net.</li>
+   <li>Extreure el contingut traduïble del fitxer.</li>
+   <li>Automatitzar la modificació dels noms de fitxer dels documents traduïts, mitjançant la substitució del contingut traduïble per la seva traducció.</li>
+</ul>
+
+<a name="File_types"></a>
+<h3>Tipus de fitxers</h3>
+
+<p>Quan l'OmegaT detecta un fitxer dins del directori del fitxers de partida del projecte (per defecte, "source"), intenta seleccionar el filtre a partir de l'extensió del fitxer. Concretament, l'OmegaT compara els patrons de nom de fitxer de partida de cada filtre amb el nom del fitxer. Per exemple, el patró <code>*.xhtml</code> coincidirà amb qualsevol fitxer que tingui l'extensió <code>.xhtml</code>. Si es troba un filtre adient, s'utilitzarà per a processar el fitxer. Per exemple, per defecte s'utilitzarà el filtre XHTML per a processar els fitxers que tinguin l'extensió <code>.xhtml</code>. Podeu canviar o afegir patrons de nom de fitxer per als fitxers que gestionarà cada filtre de fitxer.</p>
+
+<a name="File_encodings"></a>
+<h3>Codificació dels fitxers</h3>
+
+<p>Els fitxers de text net i HTML poden desar-se en un gran nombre de codificacions diferents. Els fitxers HTML poden contenir una declaració meta de codificació, que l'OmegaT utilitzarà per a llegir el fitxer. No obstant, en el cas dels fitxers de text, no hi ha cap manera establerta d'especificar la codificació. En els fitxers de text i HTML que no continguin la declaració de codificació, l'OmegaT utilitzarà la codificació que hàgiu definit per a una extensió en concret. Per exemple, per defecte els fitxers <code>.txt</code> es carregaran mitjançant la codificació per defecte del sistema operatiu. La codificació dels fitxers de partida es pot canviar per cada patró de nom de fitxer de partida.</p>
+
+<p>A més, els fitxers de text net i HTML també es poden desar en qualsevol codificació. Per exemple, si traduïu del francès al japonès, podeu configurar un filtre de manera que utilitzi alguna de les codificacions del japonès, o bé que utilitzi la codificació Unicode UTF-8, UTF-16 o UTF-32. Per defecte, la codificació en la qual es desa el fitxer és la mateixa que la utilitzada per a carregar el fitxer (en fitxers de text) i és UTF-8 en fitxers HTML. Tingueu en compte que el filtre HTML afegeix una declaració de codificació dins del fitxer traduït, per tal que el navegador la pugui detectar i mostri els caràcters correctament.</p>
+
+<a name="Renaming_Translated_Files"></a>
+<h3>Canvi del nom dels fitxers traduïts</h3>
+
+<p>A vegades, és possible que vulgueu canviar automàticament el nom dels fitxers que traduïu; per exemple, per a afegir el codi de llengua al final del nom de fitxer. Això també ho podeu fer mitjançant el patró de nom de fitxer traduït del diàleg de filtre de fitxers.</p>
+
+<a name="File_Filters_Setup"></a>
+<h2>Configuració dels filtres de fitxers</h2>
+
+<p>Per a la majoria d'usuaris, les opcions de filtres de fitxers per defecte seran suficients. Si us calgués modificar-les, seleccioneu <strong>Opcions -&gt; Filtres de fitxers...</strong> al menú principal. Tingueu en compte que només podeu canviar les opcions de filtres quan no hi ha cap projecte obert, ja que afecten la manera com es creen els fitxers traduïts.</p>
+
+<a name="File_Filters_Dialog"></a>
+<h3>Diàleg Filtres de fitxers</h3>
+
+<p>Aquest diàleg mostra els filtres de fitxers disponibles.</p>
+
+<p>Si no voleu que l'OmegaT tradueixi fitxers d'un tipus determinat, podeu desactivar el filtre fent clic a la casella de selecció corresponent al nom del filtre. Així, l'OmegaT ometrà els fitxers d'aquest tipus quan carregui el projecte, i els copiarà íntegrament quan creï els documents traduïts. Si més tard decidiu que voleu tornar a utilitzar el filtre, torneu a activar la casella de selecció.</p>
+
+<p>Si per alguna raó la configuració s'ha malmès i no us funciona com esperàveu, feu clic a <strong>Valors per defecte</strong> per a restablir la configuració dels filtres a l'estat de inicial per defecte.</p>
+
+<p>Per a editar quins fitxers i quines codificacions processarà el filtre, seleccioneu un filtre de la llista i feu clic a <strong>Edita</strong>.</p>
+
+<a name="Edit_Filter_Dialog"></a>
+<h3>Diàleg Edita el filtre</h3>
+
+<p>Aquest diàleg us permet configurar els patrons de noms de fitxer de partida dels fitxers que el filtre processarà, personalitzar el nom de fitxer dels fitxers traduïts i seleccionar la codificació que s'utilitzarà per a carregar el fitxer i desar el respectiu fitxer traduït.</p>
+
+<p>El patró de nom de fitxer de partida utilitza les regles de màscara de fitxers del DOS. El comodí <code>*</code> representa qualsevol nombre de caràcters, <code>?</code> representa un sol caràcter qualsevol i la resta de caràcters representa els propis caràcters. Per exemple, si voleu que el filtre de text gestioni els fitxers "readme"  (<code>readme</code>, <code>read.me</code> i <code>readme.txt</code>), utilitzeu el patró <code>read*</code>.</p>
+
+<p>Els camps de codificació dels fitxers de partida i d'arribada inclouen llistes desplegables amb totes les codificacions admeses. Tingueu en compte que no tots els filtres permeten seleccionar una codificació determinada, ja que és possible que el format de fitxer només pugui tenir una sola codificació. Si voleu deixar que l'OmegaT prengui la decisió de quina codificació cal utilitzar en un format de fitxer determinat, seleccioneu "&lt;automàtic&gt;" a la llista desplegable. La decisió es pren d'aquesta manera:</p>
+
+<ul>
+   <li>L'OmegaT intentarà detectar la codificació dels fitxers HTML/XHTML de partida.</li>
+   <li>En fitxers de text, l'OmegaT utilitzarà la codificació per defecte del sistema operatiu.</li>
+</ul>
+
+<p>El patró de nom de fitxer traduït utilitza una sintaxi especial; per tant, si voleu editar aquest cap, feu clic a <strong>Edita...</strong> per a obrir el diàleg Edita el patró.</p>
+
+<p>Si voleu que el filtre gestioni els fitxers que coincideixin amb un altre patró de nom de fitxer de partida addicional, feu clic a <strong>Afegeix...</strong> per a obrir el diàleg Afegeix un patró.</p>
+
+<p>Si voleu restablir la configuració per defecte del filtre, feu clic a <strong>Valors per defecte</strong>.</p>
+
+<a name="Add.2FEdit_Pattern_Dialog"></a>
+<h3>Diàleg Afegeix un patró/Edita el patró</h3>
+
+<p>El diàleg és el mateix tant si voleu afegir un patró com si voleu editar-ne un en concret. L'única diferència és que inclou un editor de patrons de nom de fitxer traduït especial; apart d'això, la resta de camps ja s'han descrit més amunt.</p>
+
+<p>La secció de patró de nom de fitxer traduït us permet compondre el nom de fitxer del fitxer traduït a partir de parts diferents.</p>
+
+<ul>
+   <li><code>${filename}</code> (valor per defecte): El nom de fitxer complet del fitxer de partida amb l'extensió, de manera que el nom del fitxer traduït és el mateix que el del fitxer de partida.</li>
+   <li><code>${nameOnly}</code>: La part del nom del fitxer de partida, sense l'extensió.</li>
+   <li><code>${extension}</code>: L'extensió del fitxer de partida.</li>
+   <li><code>${targetLocale}</code>: El codi de l'idioma d'arribada (amb el format "xx_YY").</li>
+   <li><code>${targetLanguage}</code>: El codi de llengua i país d'arribada (amb el format "XX-YY").</li>
+   <li><code>${targetLanguageCode}</code>: La llengua d'arribada ("XX").</li>
+   <li><code>${targetCoutryCode}</code>: El país d'arribada ("YY").</li>
+</ul>
+
+<p>Es poden afegir més variables amb relativa facilitat si ho demaneu i n'especifiqueu la finalitat. Ho podeu fer a través del <a href="http://groups.yahoo.com/group/OmegaT/">grup d'usuaris de l'OmegaT</a>.</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Avisos legals">Avisos legals</a></p>
+
+</body>
+</html>

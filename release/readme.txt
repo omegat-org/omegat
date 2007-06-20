@@ -1,4 +1,4 @@
-@@TRANSLATION_NOTICE@@
+﻿@@TRANSLATION_NOTICE@@
 
 ==============================================================================
   OmegaT 1.7.0, Read Me file
@@ -64,31 +64,83 @@ The user manual is in the package you just downloaded, you can access it from
 the [Help] menu after starting OmegaT.
 
 ==============================================================================
- 3. General notes about Java & OmegaT
+ 3. Installing OmegaT
 
-OmegaT requires the Java Runtime Environment version 1.4 or higher be
-installed on your system. It is available from:
-    http://java.com
+3.1 General
+In order to run, OmegaT requires the Java Runtime Environment (JRE) version 
+1.4 or higher to be installed on your system. OmegaT is now supplied as 
+standard with the Java Runtime Environment to save users the trouble of 
+selecting, obtaining and installing it. Windows and Linux users: if you are 
+confident that your system already has a suitable version of the JRE 
+installed, you can install the version of OmegaT without the JRE (this is 
+indicated in the name of the version, "Without_JRE"). If you are in any 
+doubt, we recommend that you use the "standard" version, i.e. with JRE. This 
+is safe, since even if the JRE is already installed on your system, this 
+version will not interfere with it.
+Linux users: note that OmegaT does not work with the free/open-source Java 
+implementations that are packaged with many Linux distributions (for example, 
+Ubuntu), as these are either outdated or incomplete. Download and install 
+Sun's Java Runtime Environment (JRE) via the link above, or download and and 
+install the OmegaT package bundled with JRE (the .tar.gz bundle marked 
+"Linux").
+Mac users: the JRE is already installed on Mac OS X.
+Linux on PowerPC systems: users will need to download IBM's JRE, as Sun does 
+not provide a JRE for PPC systems. Download in this case from:
+    http://www-128.ibm.com/developerworks/java/jdk/linux/download.html 
 
-Windows and Linux users may need to install Java if it is not already done.
-The OmegaT project also offers versions with Java included. MacOSX users have
-Java already installed on their machines.
+3.2 Installation
+To install OmegaT, simply create a suitable folder for OmegaT (e.g. C:\Program 
+Files\OmegaT on Windows or /usr/local/lib on Linux). Copy the OmegaT zip 
+archive to this folder and unpack it there.
 
-On a properly installed machine, you should be able to launch OmegaT by
-double-clicking the OmegaT.jar file.
+3.3 Launching OmegaT
+OmegaT can be launched in a number of ways.
 
-After installing java you may need to modify your system path variable so that
-it includes the directory where the 'java' application resides.
+* Windows users: by double-clicking on the file OmegaT-JRE.exe, if you are
+using the version with the JRE included, or on OmegaT.exe otherwise.
 
-Linux users should pay attention to the fact that OmegaT won't work with free/
-open-source Java implementations that can be found in many Linux distros (for
-example, Ubuntu), as these are either outdated, or incomplete. Download and
-install Sun's Java Runtime Environment (JRE) via the link above, or download
-and install OmegaT bundled with JRE (the .tar.gz bundle marked "Linux").
+* By double-clicking on the file OmegaT.bat. If you can see the file
+OmegaT but not OmegaT.bat in your File Manager (Windows Explorer), change
+the settings so that file extensions are displayed.
 
-When running Linux on PowerPC systems, users will need to download IBM's JRE,
-as Sun does not provide a JRE for PPC systems. Download one from:
-    http://www-128.ibm.com/developerworks/java/jdk/linux/download.html
+* By double-clicking on the file OmegaT.jar. This will work only if the .jar
+file type is associated with Java on your system.
+
+* From the command line. The command to launch OmegaT is:
+
+cd <folder where the file OmegaT.jar is located>
+
+<name and path of the Java executable file> -jar OmegaT.jar
+
+(The Java executable file is the file java on Linux and java.exe on Windows.
+If Java is installed at system level, the full path need not be entered.)
+
+* Windows users: you can drag the files OmegaT-JRE.exe, OmegaT.exe or
+OmegaT.bat to the desktop or Start menu to link it from there.
+
+* Linux KDE users: you can add OmegaT to your menus as follows:
+
+Control Center - Desktop - Panels - Menus - Edit K Menu - File - New Item/New 
+Submenu.
+
+Then, after selecting a suitable menu, add a submenu/item with File - New 
+Submenu and File - New Item. Enter OmegaT as the name of the new item.
+
+In the "Command" field, use the navigation button to find your OmegaT launch 
+script,and select it. 
+
+Click on the icon button (to the right of the Name/Description/Comment fields) 
+- Other Icons - Browse, and navigate to the /images subfolder in the OmegaT 
+application folder. Select the OmegaT.png icon.
+
+Finally, save the changes with File - Save.
+
+* Linux GNOME users: you can add OmegaT to your panel (the bar at the top of 
+the screen) as follows:
+
+Right-click on the panel - Add New Launcher. Enter "OmegaT" in the "Name" 
+field; in the "Command" field, use the navigation button to find your OmegaT 
+launch script. Select it and confirm with OK.
 
 ==============================================================================
  4. Contributions to OmegaT
@@ -164,7 +216,8 @@ Other contributions by
   Marc Prior (localization manager)
   and many, many more very helpful people
 
-(If you think you have significantly contributed to the OmegaT Project but you don't see your name on the lists, feel free to contact us.)
+(If you think you have significantly contributed to the OmegaT Project 
+but you don't see your name on the lists, feel free to contact us.)
 
 OmegaT uses the following libraries:
   HTMLParser by Somik Raha, Derrick Oswald and others (LGPL License).

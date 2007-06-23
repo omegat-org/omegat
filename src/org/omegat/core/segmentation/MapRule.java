@@ -89,7 +89,10 @@ public class MapRule implements Serializable
     /** Sets Pattern for the language/country ISO code (of a form LL-CC). */
     public void setPattern(String pattern) throws PatternSyntaxException
     {
-        this.pattern = Pattern.compile(pattern);
+        // Fix for bug [1643500]
+        // language code in segmentation rule is case sensitive
+        // Correction contributed by Tiago Saboga.
+        this.pattern = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
     }
 
     /** List of rules (of class {@link Rule}) for the language */

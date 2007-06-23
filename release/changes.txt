@@ -5,7 +5,7 @@
 1.7.0 vs. 1.6.1_04
 
   23 Enhancements
-  16 Bugfixes
+  17 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.0
@@ -124,6 +124,10 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
 
   - Search: simple wilcards do not work
   http://sourceforge.net/support/tracker.php?aid=1680081
+  
+  - Language code in segmentation rule is case sensitive
+  http://sourceforge.net/support/tracker.php?aid=1643500
+
 
 ----------------------------------------------------------------------
 1.6.1_04

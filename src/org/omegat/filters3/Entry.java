@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2007 Didier Briel
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -36,6 +37,7 @@ import org.omegat.util.PatternConsts;
  * in source and in target.
  *
  * @author Maxym Mykhalchuk
+ * @author Didier Briel
  */
 public class Entry
 {
@@ -449,8 +451,7 @@ public class Entry
     private List listShortTags(String str)
     {
         final int STATE_NORMAL = 1;
-        final int STATE_FOUND_LT = 2;
-        final int STATE_COLLECT_TAG = 3;
+        final int STATE_COLLECT_TAG = 2;
         
         int state = STATE_NORMAL;
         
@@ -458,40 +459,27 @@ public class Entry
         StringBuffer tag = new StringBuffer(str.length());
         for (int i=0; i<str.length(); i++)
         {
-            char c = str.charAt(i);
-            switch (state)
-            {
-                case STATE_NORMAL:
-                    if (c == '<')
-                    {
-                        tag.setLength(0);
-                        tag.append(c);
-                        state = STATE_FOUND_LT;
-                    }
-                    break;
-                case STATE_FOUND_LT:
-                    if (c == '<')
-                        state = STATE_NORMAL;
-                    else
-                    {
-                        tag.append(c);
-                        state = STATE_COLLECT_TAG;
-                    }
-                    break;
-                case STATE_COLLECT_TAG:
-                    if (c == '>')
-                    {
-                        // checking if the tag looks like OmegaT tag, 
-                        // not 100% correct, but is the best what I can think of now
-                        tag.append(c);
-                        if (PatternConsts.OMEGAT_TAG.matcher(tag).matches())
-                            res.add(new ShortTag(tag.toString(), 1+i-tag.length()));
-                        state = STATE_NORMAL;
-                    }
-                    else
-                        tag.append(c);
-                    break;
-            }
+             char c = str.charAt(i);
+             if (c == '<') // Possible start of a tag
+             {
+                 tag.setLength(0);
+                 tag.append(c);
+                 state = STATE_COLLECT_TAG;
+             }
+             else if (c == '>') // Possible end of a tag
+             {
+                 // checking if the tag looks like OmegaT tag, 
+                 // not 100% correct, but is the best what I can think of now
+                 tag.append(c);
+                 if (PatternConsts.OMEGAT_TAG.matcher(tag).matches())
+                 {
+                     res.add(new ShortTag(tag.toString(), 1+i-tag.length()));
+                     tag.setLength(0);
+                     state = STATE_NORMAL;
+                 }
+             }
+             else if (state == STATE_COLLECT_TAG)
+                 tag.append(c);
         }
         return res;
     }

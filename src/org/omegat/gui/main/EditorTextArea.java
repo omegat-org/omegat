@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2007 Didier Briel and Tiago Saboga
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -45,6 +46,8 @@ import org.omegat.util.OStrings;
  * The main panel, where all the translation happens.
  *
  * @author Maxym Mykhalchuk
+ * @author Didier Briel
+ * @author Tiago Saboga
  */
 public class EditorTextArea extends JTextPane implements MouseListener, DocumentListener
 {
@@ -512,5 +515,13 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
 
     /** Attribute changes do not result in document length changes. Doing nothing. */
     public void changedUpdate(javax.swing.event.DocumentEvent e) { }
+
+    // [ 1743100 ] Pasting with middle mouse button allowed anywhere in editor
+    /** When replacing selection, first check caret */
+    public void replaceSelection(String string) 
+    {
+        mw.checkCaret();
+        super.replaceSelection(string);
+    }
 
 }

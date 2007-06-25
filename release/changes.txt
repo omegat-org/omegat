@@ -5,7 +5,7 @@
 1.7.0 vs. 1.6.1_04
 
   23 Enhancements
-  18 Bugfixes
+  19 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.0
@@ -130,6 +130,10 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
 
   - Less than sign causes problems in HTML and OpenOffice
   http://sourceforge.net/support/tracker.php?aid=1176585
+
+  - Pasting with middle mouse button allowed anywhere in editor
+  http://sourceforge.net/support/tracker.php?aid=1743100
+
 
 
 ----------------------------------------------------------------------

@@ -40,6 +40,7 @@ import javax.swing.text.Utilities;
 import javax.swing.text.BadLocationException;
 
 import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
 
 
 /**
@@ -159,9 +160,15 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
     /** Ctrl key mask. On MacOSX it's CMD key. */
     private static final int CTRL_KEY_MASK = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
     
-
+    /** 
+     * The key mask of the modifier used for Ctrl+Delete / Ctrl+Backspace.
+     * It's Ctrl on a PC, Alt on a Mac
+     */
+    private static final int CTRL_DEL_MASK = 
+            StaticUtils.onMacOSX() ? KeyEvent.ALT_MASK : CTRL_KEY_MASK;
+    
     ////////////////////////////////////////////////////////////////////////
-    // Keyborad handling to protect text areas
+    // Keyboard handling to protect text areas
     ////////////////////////////////////////////////////////////////////////
     
     /**
@@ -230,7 +237,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                 if (mw.checkCaretForDelete(false))
                 {
                     // RFE [ 1579488 ] Ctrl+Backspace
-                    if (e.getModifiers()==CTRL_KEY_MASK &&
+                    if (e.getModifiers() == CTRL_DEL_MASK &&
                             e.getKeyCode()== KeyEvent.VK_BACK_SPACE) 
                     {// e.getKeyCode() == KeyEvent.VK_BACK_SPACE has to be 
                      // retested, otherwise the code is triggered twice   
@@ -268,7 +275,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                 if (mw.checkCaretForDelete(true))
                 {
                     // RFE [ 1579488 ] Ctrl+Delete
-                    if (e.getModifiers()==CTRL_KEY_MASK &&
+                    if (e.getModifiers()== CTRL_DEL_MASK &&
                             e.getKeyCode()== KeyEvent.VK_DELETE) 
                     {// e.getKeyCode() == KeyEvent.VK_DELETE has to be retested,
                      // otherwise the code is triggered twice   

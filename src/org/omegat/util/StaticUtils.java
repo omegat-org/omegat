@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
+               2007 Didier Briel
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -43,6 +44,7 @@ import java.util.TreeSet;
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
+ * @author Didier Briel
  */
 public class StaticUtils
 {
@@ -72,51 +74,35 @@ public class StaticUtils
      */
     public static void buildTagList(String str, ArrayList tagList)
     {
-        String tag = "";														// NOI18N
+        // The code is nearly the same as in listShortTags in Entry.java
+        final int STATE_NORMAL = 1;
+        final int STATE_COLLECT_TAG = 2;
+
+        String tag = "";							// NOI18N
         char c;
-        int state = 1;
+        
+        int state = STATE_NORMAL;
+        
         // extract tags from source string
         for (int j=0; j<str.length(); j++)
         {
             c = str.charAt(j);
-            switch (state)
+            if (c == '<') // Possible start of a tag
             {
-                // 'normal' mode
-                case 1:
-                    if (c == '<')
-                        state = 2;
-                    break;
-                    
-                    // found < - see if double or single
-                case 2:
-                    if (c == '<')
-                    {
-                        // "<<" - let it slide
-                        state = 1;
-                    }
-                    else
-                    {
-                        tag = "";												// NOI18N
-                        tag += c;
-                        state = 3;
-                    }
-                    break;
-                    
-                    // copy tag
-                case 3:
-                    if (c == '>')
-                    {
-                        // checking if the tag looks like OmegaT tag, 
-                        // not 100% correct, but is the best what I can think of now
-                        if(PatternConsts.OMEGAT_TAG_ONLY.matcher(tag).matches())
-                            tagList.add(tag);
-                        state = 1;
-                        tag = "";												// NOI18N
-                    }
-                    else
-                        tag += c;
-                    break;
+                tag="";                                                         // NOI18N
+                state = STATE_COLLECT_TAG;
             }
+            else if (c == '>') // Possible end of a tag
+            {
+                // checking if the tag looks like OmegaT tag, 
+                // not 100% correct, but is the best what I can think of now
+                if(PatternConsts.OMEGAT_TAG_ONLY.matcher(tag).matches())
+                    tagList.add(tag);
+                state = STATE_NORMAL;
+                tag = "";												// NOI18N
+            }
+            else if (state == STATE_COLLECT_TAG)
+                tag += c;
         }
     }
     

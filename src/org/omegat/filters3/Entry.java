@@ -450,6 +450,7 @@ public class Entry
      */
     private List listShortTags(String str)
     {
+        // The code is nearly the same as in buildTagList in StaticUtils.java
         final int STATE_NORMAL = 1;
         final int STATE_COLLECT_TAG = 2;
         

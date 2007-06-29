@@ -4,7 +4,7 @@
 
 1.7.0 vs. 1.6.1_04
 
-  23 Enhancements
+  24 Enhancements
   19 Bugfixes
 
 ----------------------------------------------------------------------
@@ -52,6 +52,10 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
 
   - Do not show quotation marks in glossary pane
   http://sourceforge.net/support/tracker.php?aid=1727409
+
+  - Import MediaWiki source page
+  http://sourceforge.net/support/tracker.php?aid=1745384
+
 
  Other enhancements:
 

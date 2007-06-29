@@ -89,7 +89,6 @@ public class ProjectFrame extends JFrame
         m_addNewFileButton = new JButton();
         org.openide.awt.Mnemonics.setLocalizedText(m_addNewFileButton,
                                                    OStrings.getString("TF_MENU_FILE_IMPORT"));
-        uiUpdateImportButtonStatus();
         m_addNewFileButton.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -97,6 +96,18 @@ public class ProjectFrame extends JFrame
                 doImportSourceFiles();
             }
         });
+	m_wikiImportButton = new JButton();
+        org.openide.awt.Mnemonics.setLocalizedText(m_wikiImportButton,
+                                                   OStrings.getString("TF_MENU_WIKI_IMPORT"));
+        m_wikiImportButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                doWikiImport();
+            }
+        });
+
+        uiUpdateImportButtonStatus();
 
         // Configure close button
         m_closeButton = new JButton();
@@ -125,6 +136,7 @@ public class ProjectFrame extends JFrame
         Box bbut = Box.createHorizontalBox();
         bbut.add(Box.createHorizontalGlue());
         bbut.add(m_addNewFileButton);
+        bbut.add(m_wikiImportButton);
         bbut.add(m_closeButton);
         bbut.add(Box.createHorizontalGlue());
         cp.add(bbut, "South");                                                  // NOI18N
@@ -331,10 +343,15 @@ public class ProjectFrame extends JFrame
         m_parent.doImportSourceFiles();
     }
     
+    private void doWikiImport()
+    {
+        m_parent.doWikiImport();
+    }
     /** Updates the Import Files button status. */
     public void uiUpdateImportButtonStatus()
     {
         m_addNewFileButton.setEnabled(m_parent.isProjectLoaded());
+        m_wikiImportButton.setEnabled(m_parent.isProjectLoaded());
     }
 
     /** Call this to set OmegaT-wide font for this window. */
@@ -346,6 +363,7 @@ public class ProjectFrame extends JFrame
     
     private JEditorPane m_editorPane;
     private JButton     m_addNewFileButton;
+    private JButton     m_wikiImportButton;
     private JButton     m_closeButton;
     private ArrayList   m_nameList;
     private ArrayList   m_offsetList;

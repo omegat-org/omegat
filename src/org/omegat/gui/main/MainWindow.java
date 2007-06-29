@@ -91,6 +91,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.RequestPacket;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.WikiGet;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.Styles;
 
@@ -886,6 +887,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         projectOpenMenuItem.setEnabled(true);
         
         projectImportMenuItem.setEnabled(false);
+        projectWikiImportMenuItem.setEnabled(false);
         projectReloadMenuItem.setEnabled(false);
         projectCloseMenuItem.setEnabled(false);
         projectSaveMenuItem.setEnabled(false);
@@ -940,6 +942,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         projectOpenMenuItem.setEnabled(false);
         
         projectImportMenuItem.setEnabled(true);
+        projectWikiImportMenuItem.setEnabled(true);
         projectReloadMenuItem.setEnabled(true);
         projectCloseMenuItem.setEnabled(true);
         projectSaveMenuItem.setEnabled(true);
@@ -1256,6 +1259,22 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         
     }
 
+    /** 
+    * Does wikiread 
+    * @author Kim Bruning
+    */
+    public void doWikiImport()
+    {
+        String remote_url = JOptionPane.showInputDialog(this,
+                OStrings.getString("TF_WIKI_IMPORT_PROMPT"), 
+		OStrings.getString("TF_WIKI_IMPORT_TITLE"),
+		JOptionPane.OK_CANCEL_OPTION);
+        String projectsource = 
+                CommandThread.core.getProjectProperties().getSourceRoot();
+        WikiGet.doWikiGet(remote_url, projectsource);
+        doReloadProject();
+    }
+	    
     /**
       * Asks the user for a segment number and then displays the segment.
       *
@@ -2300,6 +2319,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         projectNewMenuItem = new javax.swing.JMenuItem();
         projectOpenMenuItem = new javax.swing.JMenuItem();
         projectImportMenuItem = new javax.swing.JMenuItem();
+        projectWikiImportMenuItem = new javax.swing.JMenuItem();
         projectReloadMenuItem = new javax.swing.JMenuItem();
         projectCloseMenuItem = new javax.swing.JMenuItem();
         separator4inProjectMenu = new javax.swing.JSeparator();
@@ -2371,6 +2391,10 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
         projectMenu.add(projectImportMenuItem);
 
+        org.openide.awt.Mnemonics.setLocalizedText(projectWikiImportMenuItem, OStrings.getString("TF_MENU_WIKI_IMPORT"));
+        projectWikiImportMenuItem.addActionListener(this);
+
+        projectMenu.add(projectWikiImportMenuItem);
         org.openide.awt.Mnemonics.setLocalizedText(projectReloadMenuItem, OStrings.getString("TF_MENU_PROJECT_RELOAD"));
         projectReloadMenuItem.addActionListener(this);
 
@@ -2585,6 +2609,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         else if (evt.getSource() == projectImportMenuItem) {
             MainWindow.this.projectImportMenuItemActionPerformed(evt);
         }
+        else if (evt.getSource() == projectWikiImportMenuItem) {
+            MainWindow.this.projectWikiImportMenuItemActionPerformed(evt);
+        }
         else if (evt.getSource() == projectReloadMenuItem) {
             MainWindow.this.projectReloadMenuItemActionPerformed(evt);
         }
@@ -2769,6 +2796,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     {//GEN-HEADEREND:event_projectImportMenuItemActionPerformed
         doImportSourceFiles();
     }//GEN-LAST:event_projectImportMenuItemActionPerformed
+    
+    private void projectWikiImportMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectWikiImportMenuItemActionPerformed
+    {//GEN-HEADEREND:event_projectWikiImportMenuItemActionPerformed
+        doWikiImport();
+    }//GEN-LAST:event_projectWikiImportMenuItemActionPerformed
     
     private void projectReloadMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectReloadMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectReloadMenuItemActionPerformed
@@ -2990,6 +3022,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private javax.swing.JMenuItem projectEditMenuItem;
     private javax.swing.JMenuItem projectExitMenuItem;
     private javax.swing.JMenuItem projectImportMenuItem;
+    private javax.swing.JMenuItem projectWikiImportMenuItem;
     private javax.swing.JMenu projectMenu;
     private javax.swing.JMenuItem projectNewMenuItem;
     private javax.swing.JMenuItem projectOpenMenuItem;

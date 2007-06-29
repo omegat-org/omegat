@@ -40,7 +40,7 @@ public class WikiGet
      * ~inverse of String.split() 
      * refactor note: In future releases, this might best be moved to a different file 
      */
-    private static String joinString(String separator,String[] items) 
+    public static String joinString(String separator,String[] items) 
     {
         if (items.length < 1) 
             return "";                                                          // NOI18N
@@ -109,7 +109,7 @@ public class WikiGet
      * (useful for debugging) 
      * @param output  The UTF-8 format string to be printed.
      */
-    private static void printUTF8(String output) 
+    public static void printUTF8(String output) 
     {
         try 
         {
@@ -129,7 +129,7 @@ public class WikiGet
      * to an OutputStream
      * @param out  Outputstream to connect to.
      */
-    private static BufferedWriter UTF8WriterBuilder(OutputStream out) throws Exception 
+    public static BufferedWriter UTF8WriterBuilder(OutputStream out) throws Exception 
     {
         return new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));        // NOI18N
     }	
@@ -141,7 +141,7 @@ public class WikiGet
      * @param filename filename of file to write.
      * @param output  UTF-8 format text to write
      */
-    private static void saveUTF8(String dir, String filename, String output) 
+    public static void saveUTF8(String dir, String filename, String output) 
     {
         try 
         {
@@ -162,7 +162,7 @@ public class WikiGet
      * Obtain UTF-8 format text from remote URL.
      * @param target  String representation of well-formed URL.
      */
-    private static String getURL(String target) 
+    public static String getURL(String target) 
     {
         StringBuffer page = new StringBuffer();
         try 

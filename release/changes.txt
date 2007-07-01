@@ -4,7 +4,7 @@
 
 1.7.0 vs. 1.6.1_04
 
-  24 Enhancements
+  25 Enhancements
   19 Bugfixes
 
 ----------------------------------------------------------------------
@@ -74,6 +74,8 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
   - Ukrainian UI localisation
 
   - French UI localisation (update) + instant start tutorial
+
+  - Japanese UI localisation + manual translation
 
   - New logging API
 
@@ -1044,8 +1046,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
    OmegaT now may load filter plugins dynamically.
    Filter plugins should be situated in [OmegaT-install-dir]/plugins 
    and should be packed as JAR files with manifest stating:
-   * OmegaT-Plugin: true
-   and then for each filter in a plugin (each plugin may have more than one filter)
+   * OmegaT-Plugin: true   and then for each filter in a plugin (each plugin may have more than one filter)
    * Name: the.package.name.TheFilterName
    * OmegaT-Filter: true
 

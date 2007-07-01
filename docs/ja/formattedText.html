@@ -1,0 +1,209 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>フォーマット付きテキストの翻訳 - OmegaT 1.6.1 取扱説明ガイド</title>
+</head>
+<body>
+
+<h1>フォーマット付きテキストの翻訳</h1>
+
+<h2>目次</h2>
+
+<ul type="none">
+   <li>1. <a href="#Formatted_Text_in_OmegaT">OmegaT でのフォーマット付きテキスト</a>
+
+      <ul type="none">
+         <li>1.1. <a href="#Tag_naming">タグの名前</a></li>
+         <li>1.2. <a href="#Tag_numbering">タグの番号</a></li>
+         <li>1.3. <a href="#Pairs_and_singletons">組タグと単純タグ</a></li>
+         <li>1.4. <a href="#Tags_and_sentence_segmenting">タグと文単位の分節化</a></li>
+
+         <li>1.5. <a href="#Tag_operations">タグ操作</a>
+
+            <ul type="none">
+               <li>1.5.1. <a href="#Tag_group_duplication">タググループの複製</a></li>
+               <li>1.5.2. <a href="#Tag_group_deletion">タググループの削除</a></li>
+               <li>1.5.3. <a href="#Tag_group_order_modification">タググループの順序変更</a></li>
+               <li>1.5.4. <a href="#Tag_group_nesting">タググループのネスト</a></li>
+            </ul>
+         </li>
+
+         <li>1.6. <a href="#Tag_group_overlapping">タググループの重複</a></li>
+         <li>1.7. <a href="#Tag_group_validation">タググループの検証</a></li>
+         <li>1.8. <a href="#Hints_for_tags_management">タグ管理のヒント</a></li>
+         <li>1.9. <a href="#Important">重要事項</a></li>
+      </ul>
+   </li>
+</ul>
+
+<a name="Formatted_Text_in_OmegaT"></a>
+<h2>OmegaT でのフォーマット付きテキスト</h2>
+
+<p>原文ファイルに現れるフォーマット情報は通常訳文ファイルに再現される必要があります。OmegaT は対応している形式(現在のところ DocBook, HTML, XHTML, Open Document, OpenOffice.org)の組み込みフォーマット情報をタグとして表示します。タグは普通マッチング処理で文字列の類似度を考えるときには考慮に入りません。タグを翻訳された分節に再現すれば、翻訳されたドキュメントにも現れます。</p>
+
+<a name="Tag_naming"></a>
+<h3>タグの名前</h3>
+
+<p>タグは 1 から 3 文字の英文字と番号からなります。ユニークな番号によってそれぞれ対応するタグを結びつけ、同じショートカット文字を持つが実際には違うタグを区分けします。</p>
+
+<p>英文字はタグが表現しているフォーマットの値(太字、斜体など)を反映しているかもしれませんし、していないかもしれません。 </p>
+
+<a name="Tag_numbering"></a>
+<h3>タグの番号</h3>
+
+<p>タグには<strong>タググループ</strong>毎に昇順で番号付けされます。</p>
+
+<p>ここで言う「タググループ」とは、単一のタグ(<code>&lt;br1&gt;</code>)ならばそれ自身、組となるタグならその 2 つの組(<code>&lt;f3&gt;</code>と<code>&lt;/f3&gt;</code>など)を意味します。</p>
+
+<p>一つの分節の中では、最初のグループ(組タグまたは単純タグ)が番号<strong>0</strong>を、次が番号<strong>1</strong>となります。</p>
+
+<p>以下の最初の例では 3 つのタググループ(組タグ、単純タグ、もう一つの組タグ)があり、次の例では 1 つだけｄのグループ(組タグ)があります。</p>
+
+<a name="Pairs_and_singletons"></a>
+<h3>組タグと単純タグ</h3>
+
+<p>タグは常に単純タグか組タグとして現れます。</p>
+
+<p>
+<strong>単純タグ</strong>は周りの文章に影響を与えないフォーマット情報(追加の空白や改行など)を示します。</p>
+
+<pre>   <strong>&lt;分節 2132&gt;</strong>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;<strong>&lt;/分節&gt;</strong></pre>
+
+<p>
+<code><strong>&lt;br1&gt;</strong></code>は単純タグであり、周りの文章には影響を与えません。</p>
+
+<p>
+<strong>組タグ</strong>は普通開きタグと閉じタグの間の文章に適用されるスタイル情報を示します。いかなる場合でも、組タグは常に開きタグが閉じタグの前に現れます。</p>
+
+<pre>   <strong>&lt;分節 3167&gt;</strong>Log file (&lt;f1&gt;log.txt&lt;/f1&gt;) for tracking operations and errors.<strong>&lt;/分節&gt;</strong></pre>
+
+<p>
+<code><strong>&lt;f1&gt;</strong></code>と<code><strong>&lt;/f1&gt;</strong></code>は組タグで、<code><strong>log.txt</strong></code>に影響を与えます。</p>
+
+<a name="Tags_and_sentence_segmenting"></a>
+<h3>タグと文単位の分節化</h3>
+
+<p>OmegaT は文単位の分節化を行なう前にタグを作成します。分節化ルールに依存して、タグは上記の番号とグループ化に従わない形で現れることもあります。</p>
+
+<pre>   <strong>&lt;分節 1554&gt;</strong> &lt;f0&gt;Before: \. After: \s&lt;/f0&gt;<strong>&lt;/分節&gt;</strong></pre>
+
+<p>ここには問題はないように見えます。ここで、この分節にデフォルトの分節化規則を適用する(これが OmegaT のデフォルトの振る舞いです)と、以下のような結果になります:</p>
+
+<pre>   <strong>&lt;分節 1990&gt;</strong> &lt;f0&gt;Before: \. <strong>&lt;/分節&gt;</strong>
+
+   <strong>&lt;分節 1991&gt;</strong> After: \s&lt;/f0&gt;<strong>&lt;/分節&gt;</strong></pre>
+
+<p>（ここで適用された分節化規則は: <i>ピリオドの後ろ、スペースの前で分節を作る</i>）</p>
+
+<p>ここで、分節が組と番号付けルールに従っていないことがわかります: <code>&lt;f0&gt;</code>と<code>&lt;/f0&gt;</code>は同じ分節で組になるべきですが、分節化ルールによって分割されています。</p>
+
+<p>訳文言語での語順を反映させるためにタグを移動させないといけない場合、翻訳で問題が発生する場合があります(後述する<a href="#Tag_operations" title="フォーマット付きテキストの翻訳">タグ操作</a>を参照してください)。</p>
+
+<a name="Tag_operations"></a>
+<h3>タグ操作</h3>
+
+<p>タグについて練習するには注意が必要です。もし間違って変更してしまうと、最終的なファイルのフォーマットが壊れてしまうかもしれません。最悪の場合には、ファイルそのものが全く開けなくなります;これは特に OpenOffice.org ファイルで発生します。</p>
+
+<a name="Tag_group_duplication"></a>
+<h4>タググループの複製</h4>
+
+<p>タググループを複製するには、好きな位置に単にコピーして下さい。組タグは常に開きタグが閉じタグの前に現れることを忘れないで下さい。</p>
+
+<p>複製するグループによって表現されているフォーマットは複製された場所にある項目に適用されます。</p>
+
+<p>例:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;This formatting&lt;/f0&gt; is going to be duplicated here.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>複製後:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Ce format&lt;/f0&gt; a été &lt;f0&gt;copié ici&lt;/f0&gt;.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_deletion"></a>
+<h4>タググループの削除</h4>
+
+<p>タググループを削除するには、単に分節から取り除いて下さい。フォーマットが適切に削除されるように、組タグの場合は開きタグと閉じタグを両方削除しなければなりません;さもないと翻訳ファイルが壊れたり、開けなくなったりします。</p>
+
+<p>タググループを削除することで、翻訳したファイルから関係するフォーマットを削除できます。</p>
+
+<p>例:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;This formatting&lt;/f0&gt; is going to be deleted.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>削除後:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>Ce format a été effacé.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_order_modification"></a>
+<h4>タググループの順序変更</h4>
+
+<p>翻訳において異なる言語構造を反映させるためにタググループの順番を変える場合、単にタググループを翻訳であるべき場所に置いてください。</p>
+
+<p>フォーマットは適用された部分に従います。</p>
+
+<p>例:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;The formatting here&lt;/f0&gt; and &lt;f1&gt;the formatting here&lt;/f1&gt; are going to be moved around.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>順序変更後:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f1&gt;Ce format&lt;/f1&gt; et &lt;f0&gt;ce format&lt;/f0&gt; ont été inversés.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_nesting"></a>
+<h4>タググループのネスト</h4>
+
+<p>タググループの順序変更によって、タググループが他のタググループの中にネストすることがあります。これは外側のグループが内側のグループを完全に包む限り可能です。ネストにおいては、内側のグループが不完全に外側のグループの内側に入らない場合に特に注意してください;さもないと翻訳したファイルが壊れたり、開けなくなったりします。</p>
+
+<p>ネスとした部分は両方のフォーマットが適用されます。</p>
+
+<p>例:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;The formatting&lt;/f0&gt; &lt;f1&gt;here&lt;/f1&gt; is going to be nested.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>ネスト後:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Le format &lt;f1&gt;ici&lt;/f1&gt;&lt;/f0&gt; a été emboité dans le premier format.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_overlapping"></a>
+<h3>タググループの重複</h3>
+
+<p>重複はタグペアの間違った操作の結果として起こり、確実にフォーマットが壊れてしまい、翻訳したファイルが全く開けなくなることもあります。</p>
+
+<p>例:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;the formatting&lt;/f0&gt; &lt;f1&gt;here&lt;/f1&gt; is going to be messed up.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>間違った操作後:</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;the formatting &lt;f1&gt;here&lt;/f0&gt; &lt;/f1&gt;is very messed up now.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_validation"></a>
+<h3>タググループの検証</h3>
+
+<p>タグ検証機能(<a href="userInterface.html#Tag_Validation" title="ユーザーインターフェース">タグ検証</a>)はタグの変更(故意と過失とに関わらず)を検出し、影響のある分節を表示します。この機能を使うと文書中にある、壊れているか間違っていると考えられるタグを表示したダイアログを開きます。</p>
+
+<p>この機能はタグ付きテキストを翻訳した時の間違いを発見するのに便利です。これは翻訳中に発生したタグの問題によって開けなくなった OpenDocument やOpenOffice.org ファイルの問題です。この問題は、タグを修正して訳文文書を再作成することでしばしば修正されます。</p>
+
+<a name="Hints_for_tags_management"></a>
+<h3>タグ管理のヒント</h3>
+
+<p>タグは一般的に元の文書のある種のフォーマッティングを表現しています。<strong>元の文書フォーマッティングの単純化</strong>はタグの数の削減に大きく貢献しています。使用フォント、フォントサイズ、色などを可能ならば統一することで、翻訳を単純化し、起こりうるタグエラーの数を減らします。</p>
+
+<p>タグに対して出来ることについては、<a href="#Tag_operations" title="フォーマット付きテキストの翻訳">タグ操作</a>の項目を参照してください。</p>
+
+<p>タグが悩みの種で、フォーマットが今の作業にとても重要というわけではないのなら、ほとんどのフォーマットを原文から取り除くことで翻訳が非常に簡単になることを憶えておいて下さい。</p>
+
+<p>OmegaT でタグは表示されてほしいけれどもほとんどのフォーマットが訳文文書には不要の場合、自由に訳文からタグを取り除いてください。この場合、<strong>組タグには特に注意してください</strong>;組タグの片方を消すのを忘れると文書フォーマットが壊れてしまい、翻訳した OpenOffice.org 文書が開けなくなります。</p>
+
+<p>タグはテキスト自身に含まれているので、より少ないタグが含まれる分節を作るために<a href="segmentation.html" title="翻訳対象ファイルの分節化">分節化規則</a>を使うことも可能です。これは上級者向け機能で、初心者は使うべきではありません。</p>
+
+<a name="Important"></a>
+<h3>重要事項</h3>
+
+<p>OmegaT はまだフォーマットのミスを完全に自動的に検出することはできないので、間違いを犯したり訳文言語によりよくなじませるためにフォーマットを変えたときに警告しません。しかし、時々翻訳したファイルがおかしくなったり、OpenDocument / OpenOffice.org ファイルの場合は開くことすら出来なくなることもあります。</p>
+
+<hr>
+<p><a href="legalNotices.html" title="特記事項">特記事項</a></p>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>データ損失対策 - OmegaT 1.6.2 User Manual</title>
+</head>
+<body>
+
+<h1>データ損失対策</h1>
+
+<p>OmegaT は堅固なアプリケーションです。しかし、他のアプリケーションと同様に、OmegaT を使っている間のデータ損失に対して予防するべきです。</p>
+
+<p>ファイルを翻訳したとき、OmegaT は使用中の全ての翻訳メモリをプロジェクトの<code>/omegat</code>サブディレクトリに保存します。OmegaT はまた、プロジェクトを開いたときと再読み込みしたときに毎回同じサブディレクトリに<code>project_save.tmx.YEARMMDDHHNN.bak</code>という名前で翻訳メモリのバックアップを取ります。前回翻訳メモリが保存された時刻を基にして、<code>YEAR</code>は4桁の年、<code>MM</code>は月、<code>DD</code>は日、<code>HH</code>と<code>NN</code>は時と分を表します。</p>
+
+<p>災害を避けるために:</p>
+
+<ul>
+   <li>定期的に<code>/omegat/project_save.tmx</code>を CD や DVD などのバックアップメディアにコピーします。</li>
+
+   <li>OmegaT に慣れるまで、定期的に翻訳ファイルを生成して、翻訳ファイルに最新の翻訳が含まれているかをチェックしてください。</li>
+
+   <li>プロジェクトの途中で<code>/source</code>にあるファイルを変更した場合は特に注意してください。翻訳を開始した後に原文ファイルを変更すると、OmegaT は既に翻訳した分節を見つけられなくなるかもしれません。</li>
+
+   <li>これらのヘルプ文書の助けを借りながら始めてみて下さい。問題が発生したら、<a href="http://groups.yahoo.com/group/omegat" >OmegaT ユーザーグループ</a>にメッセージを投稿して下さい。遠慮せずに自分が一番親しんでいる言語で投稿して下さい。</li>
+</ul>
+
+<hr>
+<p><a href="legalNotices.html" title="特記事項">特記事項</a></p>
+
+</body>
+</html>

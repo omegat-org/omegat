@@ -1,0 +1,179 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>メインメニュー - OmegaT 1.6.2 取扱説明ガイド</title>
+</head>
+<body>
+
+<h1>メインメニュー</h1>
+
+<p>OmegaT の全ての機能はエディタウィンドウの上にあるメニューバーから利用可能です。ほとんどの機能は<a href="keyboardShortcuts.html">キーボードショートカット</a>経由でも利用可能です。</p>
+
+<p><strong><code>Ctrl</code></strong> は Windows, UNIX, UNIX 風のオペレーティングシステムでは<strong><code>Ctrl</code></strong> / <strong><code>Control</code></strong>キーを使います。Mac OS X ユーザーは代わりに Apple key <img src="images/AppleKey.gif" alt="Apple key" width="19" height="19">を使うことになるでしょう。</p>
+
+<h2>目次</h2>
+<ul type="none">
+   <li>1. <a href="#Project_Menu">プロジェクトメニュー</a></li>
+   <li>2. <a href="#Edit_Menu">編集メニュー</a></li>
+   <li>3. <a href="#Go_to_Menu">Go to Menu移動メニュー</a></li>
+   <li>4. <a href="#Tools_Menu">ツールメニュー</a></li>
+   <li>5. <a href="#Options_Menu">設定メニュー</a></li>
+   <li>6. <a href="#Help_Menu">ヘルプメニュー</a></li>
+</ul>
+
+<a name="Project_Menu"></a>
+<h4>プロジェクトメニュー</h4>
+
+<p>
+<dl>
+   <dt>新規作成</dt>
+   <dd>新しいプロジェクトを作成して、開きます。プロジェクトを作成するためのダイアログは<a href="projectProperties.html">プロジェクトの編集</a>のためのものと同じです。</dd>
+
+   <dt>プロジェクトを開く <code>&lt;Ctrl+O&gt;</code></dt>
+   <dd>以前に作成したプロジェクトを開きます。</dd>
+
+   <dt>原文ファイルを追加</dt>
+   <dd>選択したファイルを<code>/source</code>ディレクトリにコピーし、新しいファイルを読み込むためにプロジェクトを再読み込みします。</dd>
+
+   <dt>再読み込み</dt>
+   <dd>原文ファイル、参考用翻訳メモリ、用語集の外部での変化を取り込むために、プロジェクトを再読み込みします。</dd>
+
+   <dt>閉じる</dt>
+   <dd>翻訳を保存し、プロジェクトを閉じます。</dd>
+
+   <dt>保存 <code>&lt;Ctrl+S&gt;</code></dt>
+   <dd>翻訳をプロジェクトの翻訳メモリに保存します。10 分毎、またはプロジェクトを閉じるか OmegaT を終了させたときに、OmegaT は自動的に翻訳を保存します。</dd>
+
+   <dt>訳文ファイル生成</dt>
+   <dd>翻訳を基にした訳文を生成します。翻訳されたファイルは、<code>/target</code>ディレクトリに配置されます。</dd>
+
+   <dt>設定 <code>&lt;Ctrl+E&gt;</code></dt>
+   <dd>プロジェクト言語とフォルダ位置を編集するための<a href="projectProperties.html">プロジェクト設定</a>ダイアログを表示します。</dd>
+
+   <dt>翻訳対象ファイル一覧... <code>&lt;Ctrl+L&gt;</code></dt>
+   <dd><a href="userInterface.html#Project_Files">翻訳対象ファイル一覧ウィンドウ</a>を閉じるか開くかします(現在開いているか閉じているかに依存します)。</dd>
+
+   <dt>終了 <code>&lt;Ctrl+Q&gt;</code></dt>
+   <dd>プロジェクトを保存し、OmegaT を終了します。もしプロジェクトを手動で保存していなかった場合、本当に終了していいか確認します。</dd>
+</dl>
+</p>
+
+<a name="Edit_Menu"></a>
+<h4>編集メニュー</h4>
+
+<p>ほとんどのアプリケーションで見つけられる機能(コピー/切り取り/貼り付け)はこのメニューには表示されていませんが、システムショートカットを使うことで利用可能です。例えば、 Windows では:</p>
+
+<p>
+<dl>
+   <dt>コピー <code>&lt;Ctrl+C&gt;</code></dt>
+   <dd>選択した文章をクリップボードにコピーします。</dd>
+
+   <dt>切り取り <code>&lt;Ctrl+X&gt;</code></dt>
+   <dd>選択した文章をクリップボードにコピーし、選択した文章を削除します。</dd>
+
+   <dt>貼り付け <code>&lt;Ctrl+V&gt;</code></dt>
+   <dd>クリップボードからカーソル位置に文章を貼り付けます。</dd>
+</dl>
+</p>
+
+<p>メニュー自身には以下の項目があります:</p>
+
+<p>
+<dl>
+   <dt>操作取り消し &amp;U <code>&lt;Ctrl+Z&gt;</code></dt>
+   <dd>直前に行なった編集動作の前の状態に戻ります。修正された分節が検証されてしまうと動作しません。</dd>
+
+   <dt>操作繰り返し <code>&lt;Ctrl+Y&gt;</code></dt>
+   <dd>直前の編集動作を取り消す前の状態に戻ります。修正された分節が検証されてしまうと動作しません。</dd>
+
+   <dt>参考訳文に置換 <code>&lt;Ctrl+R&gt;</code></dt>
+   <dd>現在注目している分節の内容を選択した参考訳文で置き換えます(デフォルトでは 1 番目の参考訳文が選択されています)</dd>
+
+   <dt>参考訳文を挿入 <code>&lt;Ctrl+I&gt;</code></dt>
+   <dd>カーソル位置に選択した参考訳文を挿入します。この機能は、たとえ文章が選択状態でも、訳文分節は上書きしません。</dd>
+
+   <dt>原文に置換 <code>&lt;Shift+Ctrl+R&gt;</code></dt>
+   <dd>現在注目している分節の内容を原文で置き換えます。</dd>
+
+   <dt>原文を挿入 <code>&lt;Shift+Ctrl+I&gt;</code></dt>
+   <dd>カーソル位置に原文を挿入します。</dd>
+
+   <dt>プロジェクトを検索... <code>&lt;Ctrl+F&gt;</code></dt>
+   <dd>新しい<a href="userInterface.html#Search_Window">検索ウィンドウ</a>を開きます。</dd>
+
+   <dt>参考訳文 #N を選択<code>&lt;Ctrl+N&gt;</code> (N は 1 から 5)</dt>
+   <dd>分節に置換または挿入するために、参考訳文ウィンドウに表示されているN番目の参考訳文を選択します。<a href="userInterface.html#Fuzzy_Matches">参考訳文</a>の項目に色の意味に関する詳細が記述されています。</dd>
+</dl>
+</p>
+
+<a name="Go_to_Menu"></a>
+<h4>移動メニュー</h4>
+
+<p>
+<dl>
+   <dt>次の未翻訳分節 <code>&lt;Ctrl+U&gt;</code></dt>
+   <dd>翻訳メモリに対応するものがない次の分節に移動します。</dd>
+
+   <dt>次の分節<code>&lt;Ctrl+N&gt;</code>, <code>&lt;Enter&gt;</code> / <code>&lt;Tab&gt;</code>
+   </dt>
+   <dd>次の分節に移動します。現在の分節がファイルの最後の場合、次のファイルの最初の分節に移動します。</dd>
+
+   <dt>前の分節<code>&lt;Ctrl+P&gt;</code>, <code>&lt;Ctrl+Enter&gt;</code> / <code>&lt;Ctrl+Tab&gt;</code>
+   </dt>
+   <dd>前の分節に移動します。現在の分節がファイルの最初の場合、前のファイルの最後の分節に移動します。</dd>
+</dl>
+</p>
+
+<a name="Tools_Menu"></a>
+<h4>ツールメニュー</h4>
+
+<p>
+<dl>
+   <dt>タグ検証 <code>&lt;Ctrl+T&gt;</code></dt>
+   <dd>フォーマット化ファイルでタグがなくなったり位置が変わったりしていないかを調べます。タグを間違えている分節の一覧を表示します。<a href="userInterface.html#Tag_Validation">タグ検証ウィンドウ</a>の項目に、ここで何が表示されているかが説明されていて、<a href="formattedText.html">フォーマット付きテキストの翻訳</a>でなぜかを説明しています。</dd>
+</dl>
+</p>
+
+<a name="Options_Menu"></a>
+<h4>設定メニュー</h4>
+
+<p>
+<dl>
+   <dt>TABで進む</dt>
+   <dd>分節検証キーをデフォルトの<code>&lt;Enter&gt;</code>から<code>&lt;Tab&gt;</code>に変更します。このオプションは中国、日本、韓国の文字入力システムで便利です。</dd>
+
+   <dt>フォント...</dt>
+   <dd>文書表示用フォントを変更するための<a href="fontSettings.html">フォント設定</a>ダイアログを表示します。古いコンピューターのユーザーは、プロジェクトを開く前にフォントを変更した方が良いでしょう。このペナルティは G4 + Mac OS X + 日本語の組み合わせのときに最大になります。</dd>
+
+   <dt>ファイルフィルタ...</dt>
+   <dd>ファイルの扱いと解析の設定のための<a href="fileFilters.html">ファイルフィルタ</a>ダイアログを表示します。</dd>
+
+   <dt>分節化...</dt>
+   <dd>文書分節化を設定するために<a href="segmentation.html">翻訳文書分節化</a>ダイアログを表示します。</dd>
+
+   <dt>翻訳入力行...</dt>
+   <dd>まだ翻訳されていない分節の訳文フィールドを設定するための<a href="translationEditing.html">翻訳入力行設定</a>ダイアログを表示します。</dd>
+
+   <dt>ウィンドウ初期設定に戻す</dt>
+   <dd>メイン OmegaT ウィンドウのコンポーネント(エディタ、参考訳文、用語集)をデフォルトの状態に戻します。これらのコンポーネントを結合解除したり移動したり他のコンポーネントで隠したりして、元の状態に戻せなくなったときにこの機能を使ってください。</dd>
+</dl>
+</p>
+
+<a name="Help_Menu"></a>
+<h4>ヘルプメニュー</h4>
+
+<p>
+<dl>
+   <dt>取り扱い説明ガイド... <code>&lt;F1&gt;</code></dt>
+   <dd>このガイドを別のウィンドウで表示する為の<a href="userInterface.html#Help_Browser">ヘルプブラウザ</a>を開きます。</dd>
+
+   <dt>OmegaTについて...</dt>
+   <dd>著作権、クレジット、ライセンス情報を表示します。</dd>
+</dl>
+</p>
+
+<hr>
+<p><a href="legalNotices.html" title="特記事項">特記事項</a></p>
+
+</body>
+</html>

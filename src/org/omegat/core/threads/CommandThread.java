@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
+               2007 Bartko Zoltan
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -79,6 +80,7 @@ import org.omegat.util.TMXReader;
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Maxym Mykhalchuk
+ * @author Bartko Zoltan
  */
 public class CommandThread extends Thread
 {
@@ -1393,12 +1395,18 @@ catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug
     {
         int I_WORDS = 0, I_WORDSLEFT=1, I_CHARSNSP=2, I_CHARSNSPLEFT=3, I_CHARS=4, I_CHARSLEFT=5;
         
-        int totalWords = 0,
-                uniqueWords = 0,
-                totalCharsNoSpaces = 0,
-                uniqueCharsNoSpaces = 0,
-                totalChars = 0,
-                uniqueChars = 0;                
+        int     totalWords                      = 0,
+                uniqueWords                     = 0,
+                totalCharsNoSpaces              = 0,
+                uniqueCharsNoSpaces             = 0,
+                totalChars                      = 0,
+                uniqueChars                     = 0,
+                remainingUniqueWords            = 0,
+                remainingUniqueCharsNoSpaces    = 0,
+                remainingUniqueChars            = 0,
+                remainingSegments               = 0
+                ;
+        
         for (int i=0; i<m_strEntryList.size(); i++)
         {
             StringEntry se = (StringEntry) m_strEntryList.get(i);
@@ -1416,9 +1424,19 @@ catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug
             int chars = src.length();
             uniqueChars += chars;
             totalChars += chars * dups;
+            
+            if (!se.isTranslated()) 
+            {
+                remainingUniqueWords += words;
+                remainingUniqueCharsNoSpaces += charsNoSpaces;
+                remainingUniqueChars += chars;
+                remainingSegments += dups;
+            }
         }
 
-        int remainingSegments = getNumberOfUniqueSegments()-getNumberofTranslatedSegments();
+        int remainingUniqueSegments = 
+                getNumberOfUniqueSegments()-getNumberofTranslatedSegments();
+        
         int remainingWords = 0;
         int remainingCharsNoSpaces = 0;
         int remainingChars = 0;
@@ -1471,6 +1489,8 @@ catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug
             ofp.write(OStrings.getString("CT_STATS_Project_Statistics") +
                     "\n\n");                                                    // NOI18N
 
+            // TOTAL
+            
             ofp.write(OStrings.getString("CT_STATS_Total") +
                     "\n");                                                      // NOI18N
             ofp.write("\t"+                                                     // NOI18N
@@ -1486,6 +1506,25 @@ catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug
                     OStrings.getString("CT_STATS_Characters") +
                     "\t" +totalChars+ "\n");                                    // NOI18N
 
+            // REMAINING
+            
+            ofp.write(OStrings.getString("CT_STATS_Remaining") +
+                    "\n");                                                      // NOI18N
+            ofp.write("\t"+                                                     // NOI18N
+                    OStrings.getString("CT_STATS_Segments") +
+                    "\t"+remainingSegments+"\n");                               // NOI18N
+            ofp.write("\t"+                                                     // NOI18N
+                    OStrings.getString("CT_STATS_Words") +
+                    "\t" +remainingWords+ "\n");                                // NOI18N
+            ofp.write("\t"+                                                     // NOI18N
+                    OStrings.getString("CT_STATS_Characters_NOSP") +
+                    "\t" +remainingCharsNoSpaces+ "\n");                        // NOI18N
+            ofp.write("\t"+                                                     // NOI18N
+                    OStrings.getString("CT_STATS_Characters") +
+                    "\t" +remainingChars+ "\n");                                // NOI18N
+            
+            // UNIQUE
+            
             ofp.write(OStrings.getString("CT_STATS_Unique") +
                     "\n");                                                      // NOI18N
             ofp.write("\t"+                                                     // NOI18N
@@ -1501,22 +1540,26 @@ catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug
                     OStrings.getString("CT_STATS_Characters") +
                     "\t" +uniqueChars+ "\n");                                   // NOI18N
             
+            // UNIQUE REMAINING
+            
             ofp.write(OStrings.getString("CT_STATS_Unique_Remaining") +
                     "\n");                                                      // NOI18N
             ofp.write("\t"+                                                     // NOI18N
                     OStrings.getString("CT_STATS_Segments") +
-                    "\t"+remainingSegments+"\n");                               // NOI18N
+                    "\t"+remainingUniqueSegments+"\n");                         // NOI18N
             ofp.write("\t"+                                                     // NOI18N
                     OStrings.getString("CT_STATS_Words") +
-                    "\t" +remainingWords+ "\n");                                // NOI18N
+                    "\t" +remainingUniqueWords + "\n");                         // NOI18N
             ofp.write("\t"+                                                     // NOI18N
                     OStrings.getString("CT_STATS_Characters_NOSP") +
-                    "\t" +remainingCharsNoSpaces+ "\n");                        // NOI18N
+                    "\t" +remainingUniqueCharsNoSpaces+ "\n");                  // NOI18N
             ofp.write("\t"+                                                     // NOI18N
                     OStrings.getString("CT_STATS_Characters") +
-                    "\t" +remainingChars+ "\n");                                // NOI18N
-            
+                    "\t" +remainingUniqueChars+ "\n");
             ofp.write("\n");                                                    // NOI18N
+            
+            // STATISTICS BY FILE
+            
             ofp.write(OStrings.getString("CT_STATS_FILE_Statistics") +
                     "\n\n");                                                    // NOI18N
             

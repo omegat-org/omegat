@@ -1,14 +1,15 @@
 ----------------------------------------------------------------------
- OmegaT 1.7.0 Changes
+ OmegaT 1.7.1 Changes
 ----------------------------------------------------------------------
 
-1.7.0 vs. 1.6.1_04
+1.7.1 vs. 1.6.1_04
 
   25 Enhancements
   19 Bugfixes
 
 ----------------------------------------------------------------------
-1.7.0
+1.7.1
+
 
 Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new features, and general improvements
 

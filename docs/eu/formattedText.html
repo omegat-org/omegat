@@ -85,22 +85,23 @@
 
 <p>OmegaT-k segmentazioa aplikatu baino lehenago sortzen ditu etiketak. Segmentazio-arauak zeintzuk diren, batzuetan iruditu dezake etiketek ez dutela errespetatzen goian aipatu diren zenbakitzeari eta taldekatzeari buruzko arauak.</p>
 
-<pre>   <strong>&lt;segment 1554&gt;</strong> &lt;c0&gt;Aurretik: \. Ondoren: \s&lt;/c0&gt;<br> &lt;b2&gt;Oharra:&lt;/b2&gt;<br>
-"\." zeinuak "." karakterea ordezkatzen du&lt;br3&gt; eta "\s" zeinuak edozein espazio zuri ordezkatzen du <strong>&lt;end segment&gt;</strong></pre>
+<pre>   <strong>&lt;segment 1554&gt;</strong> &lt;f0&gt;Before: \. After: \s&lt;/f0&gt;<strong>&lt;end segment&gt;</strong></pre>
 
 <p>Itxura batean, aurreko kodean ez dago arazorik. Lehenetsitako segmentazio-arauak (OmegaT-ren lehenetsitako portaera) aplikatzen baditugu segmentu honetan, ondoko emaitza izango dugu:</p>
 
-<pre>   <strong>&lt;segment 1990&gt;</strong> &lt;c0&gt;Aurretik: \. <strong>&lt;end segment&gt;</strong>
+<pre>   <strong>&lt;segment 1990&gt;</strong> &lt;f0&gt;Before: \. <strong>&lt;end segment&gt;</strong>
 
-   <strong>&lt;segment 1991&gt;</strong> Ondoren: \s&lt;/c0&gt;&lt;br1&gt; <strong>&lt;end segment&gt;</strong>
+   <strong>&lt;segment 1991&gt;</strong> After: \s&lt;/f0&gt;<strong>&lt;end segment&gt;</strong></pre>
 
-   <strong>&lt;segment 1992&gt;</strong>&lt;b2&gt;Oharra:&lt;/b2&gt; "\." zeinuak "." karakterea ordezkatzen du&lt;br3&gt;<strong>&lt;end segment&gt;</strong>
+<p>
+(Segmenting rules that apply are: <i>segment after a period followed by a space</i>.)
+</p>
 
-   <strong>&lt;segment 1993&gt;</strong>eta "\s" zeinuak edozein espazio zuri ordezkatzen du <strong>&lt;end segment&gt;</strong></pre>
-
-<p>(Lehenetsitako segmentazio-arauak hauek dira: <i>sortu segmentua puntu eta jarrai baten ondoren</i> eta <i>segmentua lerro-jauzia adierazten duen etiketa baten ondoren</i>.)</p>
-
-<p>Hemen ikusi dezakegunez, segmentuek, banaka hartuta, ez dituzte taldekatze eta zenbakitze arauak errespetatzen: <code>&lt;cO&gt;</code> eta <code>&lt;/cO&gt;</code> segmentu berean egon behar lukete, baina segmentazio-arauen ondorioz banatuta ageri dira.</p>
+<p>
+Here, we see that segments taken one by one do not respect the pairing
+and numbering rules:<code>&lt;f0&gt;</code> and
+<code>&lt;/f0&gt;</code> should be paired in the same segment, but are separated by the segmentation rules.
+</p>
 
 <p>Zenbait kasutan horrek arazoak eragin ditzake itzulpenean, etiketak lekuz aldatu behar izaten baitira helburu-hizkuntzaren hitz-ordena islatzeko (ikusi <a href="#Tag_operations" title="Testu formatudunarekin lanean">Eragiketak etiketekin</a> beherago).</p>
 

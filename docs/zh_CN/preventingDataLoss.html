@@ -1,0 +1,30 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>防止数据丢失 - OmegaT 1.6.1 用户手册</title>
+</head>
+<body>
+
+<h1>防止数据丢失</h1>
+
+<p>OmegaT 是一种健壮的应用程序。然而，当你使用OmegaT时你还是应该对数据丢失保持警惕，就像使用其他任何程序一样。</p>
+
+<p>当进行文件翻译时，OmegaT在项目的<code>/omegat</code>目录的翻译记忆中储存你所有的进度。OmegaT 每次项目被打开或重新载入时，OmegaT同时也将翻译记忆备份到同一子目录下的 <code>project_save.tmx.YEARMMDDHHNN.bak</code> 文件中。<code>YEAR</code> 是4位数的年份； <code>MM</code> 是月份； <code>DD</code>是日期； <code>HH</code> 和 <code>NN</code> 是前一个翻译内存保存时的小时和分钟。</p>
+
+<p>为了避免灾难性后果：</p>
+
+<ul>
+   <li>必须有规律地将 <code>/omegat/project_save.tmx</code> 拷贝到备份如：CD或DVD之类的备份介质上。</li>
+
+   <li>在熟悉OmegaT之前，应该以规律性的时间间隔创建已译文件，并查看已译文件是否包含了你所翻译的最新版本。</li>
+
+   <li>在项目进行过程中，对<code>/source</code> 目录中的文件进行修改要特别小心。如果在开始翻译后对源文件进行了修改，OmegaT也许会找不到你已经翻译的某个片段。</li>
+
+   <li>阅读这些帮助文本来入门。如果遇到了问题，请在 <a href="http://groups.yahoo.com/group/omegat" >OmegaT 用户组</a>发帖。请使用你感觉最熟悉的语言发帖。</li>
+</ul>
+
+<hr>
+<p><a href="legalNotices.html" title="法律注意事项">法律注意事项</a></p>
+
+</body>
+</html>

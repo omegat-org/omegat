@@ -1,0 +1,201 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>源片段 - OmegaT 1.6.1 用户手册</title>
+</head>
+<body>
+
+<h1>源片段</h1>
+
+<h2>内容</h2></div>
+
+<ul type="none">
+   <li>1. <a href="#Segmentation_Basics">片段基础</a></li>
+
+   <li>2. <a href="#Sentence_Segmentation">句子片段</a>
+
+      <ul>
+         <li>2.1. <a href="#About_Rules">关于规则</a></li>
+
+         <li>2.2. <a href="#Rules_Setup">规则设置</a>
+
+            <ul>
+               <li>2.2.1. <a href="#Sets_of_Rules">规则集合</a></li>
+               <li>2.2.2. <a href="#Simple_examples">单个例子</a></li>
+            </ul>
+         </li>
+
+         <li>2.3. <a href="#Regular_Expressions_to_use_in_segmentation_rules"> 片段规则中使用的正则表达式</a>
+
+            <ul>
+               <li>2.3.1. <a href="#Short_summary_of_regular-expression_constructs"> 正则表达式构造概要</a></li>
+            </ul>
+         </li>
+      </ul>
+   </li>
+</ul>
+
+<a name="Segmentation_Basics"></a>
+<h2>片段基础</h2>
+
+<p>翻译记忆工具使用成为片段的文本单位运作。有很多中途径将一个文本切割成片段</p>
+
+<p>OmegaT首先将文本分割成结构级别的片段。在这个过程中，只有源文本的结构被用来创建片段。例如：文本文件可能会在行终止、空行进行片段切割或者根本不在结构级别进行片段切割。带有格式的文件（OpenOffice.org, OpenDocument, XHTML 和 HTML文档）根据块级别（段落）标签进行片段切割。</p>
+
+<p>可翻译的对象属性（对XHTML 或 HTML 文件）也被提取出来进行片段分割。</p>
+
+<p>OmegaT 也根据句子进行分割。句子片段分割在结构级片段切割之后进行。很不幸的是，在翻译过程中，在两者过程间创建的片段都不能修改（分割或者合并）。我们当然认识到这是OmegaT的一大局限。</p>
+
+<p>如果你对分割不满意，你需要从外部对源文件进行编辑，或者（和）修改句子片段分割规则。完成这些之后，你需要重新载入项目使你的修改生效。</p>
+
+<a name="Sentence_Segmentation"></a>
+<h2>句子片段分割</h2>
+
+<p>在OmegaT将源文件分割成逻辑单位——片段之后，对于格式化文件来说通常片段对应的就是段落，如果你不将句子片段分割关闭的话，它将进一步将这些块分割成句子。总体上来说，OmegaT将会把源文件逻辑块分割成你设置的任意片段。然而，在 <strong>缺省情况下</strong>， OmegaT 片段分割将会分割成句子，我们称之为： <strong>句子</strong> 片段。</p>
+
+<p>理论上，句子片段的创建使用的是 <a href="http://www.lisa.org/standards/srx/">片段切割规则交换 (SRX)</a>标准。但到本手册写作时为止，OmegaT既不完全支持所有的SRX功能，也不能导入或导出用SRX格式定义的规则。然而如果你懂得SRX是如何运行的，你也就知道OmegaT是如何工作的，因为它们或多或少是一样的。</p>
+
+<a name="About_Rules"></a>
+<h3>关于规则</h3>
+
+<p>存在两种可能的规则</p>
+
+<ul>
+   <li>切割规则将文本分割成片段。</li>
+   <li>例外规则指出哪些文本不应该从其他文本中分离出来。</li>
+</ul>
+
+<p>切割规则例子：<i>"Did it make sense?I was not sure."</i> 在 "<code>?</code>"之后的部分可以被切割成两个片段。这是因为有一个为 "<code>?</code>"创建的规则。</p>
+
+<p>例外规则举例： <i>"Who is afraid of Mrs. Woolf?"</i> 不能在"<code>.</code>"之后进行片段分割。因为存在一个 "<code>Mrs.</code>"的例外规则。</p>
+
+<p>预定义的分割规则对多数欧洲语言和日语来说已经足够了，但是我们推荐你为要翻译的语言定义更多的例外规则，因为显而易见的是我们无法为所有的语言预定义所有可能的例外。</p>
+
+<a name="Rules_Setup"></a>
+<h3>规则设置</h3>
+
+<p>要想设置规则，从主菜单选择 <strong>选项 -&gt; 片段……</strong>。请注意：如果你在项目打开的时候改变片段分割选项，你必须重新导入项目以使改变生效。</p>
+
+<a name="Sets_of_Rules"></a>
+<h4>规则集</h4>
+
+<p>所有为匹配的语言模式定义的片段分割规则会以规定的优先级别得到应用，因此为特定语言定义的规则优先级会比缺省规则要高。</p>
+
+<p>例如，为 Canadian French (FR-CA) 创建的规则优先级应该比为法语 (FR.*)创见规则的优先级要高，也比缺省规则(.*) 要高。当你的项目对加拿大法语进行翻译时，你的项目将会按照正确的顺序使用为加拿大法语定义的规则，为法语定义的规则和缺省的规则。</p>
+
+<p>要创建空规则集合，可以点击对话框上半部的 <strong>新增</strong>按钮。一个空行将出现在表格的底部。改变规则的名称和语言模式语言模式的语法遵守正则表达式的语法规则。参阅下面的 <a href="#Short_summary_of_regular-expression_constructs"> 正则表达式构造概要</a> 章节。</p>
+
+<p>如果你设置的规则处理语言——国家对，我们建议你使用<strong>上移</strong>按钮将它移到顶部。</p>
+
+<p>要对规则集合进行编辑，只需在表格中点击它，该规则集合将会出现在窗口的底部。</p>
+
+<p>中断/例外 检查框决定该规则是一条中断规则（勾上检查框）还是一条意外规则（不勾上检查框）。之前和之后两条正则表达式指定了意外规则和中断规则必须符合的条件。</p>
+
+<p>片段分割的过程可以简化成如下所述：想象一个光标从第一个之后一到文本的最后一个符号之前。对于每个光标位置，我们按照给出的顺序应用每条规则，并将尝试将<strong>之前</strong> 模式匹配当前光标左边所有的文本，将<strong>之后</strong> 模式对右边的文本进行匹配，使之能够接触光标。</p>
+
+<p>对于文本中的每个光标位置，如果程序的某些规则应用成功，如果是意外规则我们除了停止检查更多规则不做更多的事情；对于中断规则我们将左边的文本作为一个独立的片段。</p>
+
+<a name="Simple_examples"></a>
+<h4>一个简单的例子</h4>
+
+<p>
+<dl>
+   <dt><strong>目标：</strong> 将句点('<code>.</code>')之后空格之前的片段设置为片段</dt>
+   <dd>之前： <code>\.</code> 之后： <code>\s</code> <br><strong>注意：</strong> "<code>\.</code>" 指的是字符 "<code>.</code>" <br>"<code>\s</code>" 指的是任何空白字符</dd>
+
+   <dt><strong>目的：</strong>  "<code>Mr.<c/code>"之后不设置为新片段</dt>
+   <dd>之前：<code>Mr\.</code> 之后： <code>\s</code> <br><strong>注意：</strong> 不要忘记将规则检查框设置为 <strong>未选中状态</strong>
+   </dd>
+
+   <dt><strong>目的：</strong> 将 "。"之后的文本设置为片段 (日文句点)</dt>
+   <dd>之前： 。 之后： (空) <br><strong>注意：</strong> 你可以保留一个字段为空</dd>
+</dl>
+</p>
+
+<a name="Regular_Expressions_to_use_in_segmentation_rules"></a>
+<h3>片段规则中使用的正则表达式</h3>
+
+<p>片段规则自身就是用正则表达式表述的。这为规则的定义和对SRX的遵守保留了最大的灵活性。</p>
+
+<a name="Short_summary_of_regular-expression_constructs"></a>
+<h4>正则表达式构造的简要介绍</h4>
+
+<p>这些不是你在OmegaT中能够使用的唯一结构，但却是最常用的。OmegaT 支持 <a href="http://www.lisa.org/standards/srx/">SRX 标准</a>中描述的所有正则表达式特性。</p>
+
+<table border="0" width="80%" cellpadding="1" cellspacing="0" summary="正则表达式的构造以及所匹配的内容">
+    <tr bgcolor="#DDEEFF"><th width="10%" align="left" id="construct">构造&nbsp;</th><th align="left">匹配</th></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="flags">标志</th></tr>
+    <tr><td><tt>(?i)</tt></td><td>激活大小写不敏感匹配（缺省模式为大小写敏感）</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr><th align="left" colspan="2" id="characters">字符</th></tr>
+    <tr><td><strong>x</strong></td><td>字符 <strong>x</strong>, 除了以下内容……</td></tr>
+
+    <tr><td><tt>\u</tt><strong>hhhh</strong></td><td>以十六进制数值表示的字符<tt>0x</tt><strong>hhhh</strong></td></tr>
+    <tr><td><tt>\t</tt></td><td>制表符 (<tt>'\u0009'</tt>)</td></tr>
+    <tr><td><tt>\n</tt></td><td>新行 (换行) 字符 (<tt>'\u000A'</tt>)</td></tr>
+
+    <tr><td><tt>\r</tt></td><td>回车字符(<tt>'\u000D'</tt>)</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="quot">引用</th></tr>
+    <tr><td><tt>\</tt></td><td>什么都不是，但对以下字符进行引用。当你需要对 <code>!$()*+.&lt;&gt;?[\]^{|}</code> 进行匹配时需要使用它。</td></tr>
+
+    <tr><td><tt>\\</tt></td><td>这是反斜杠字符</td></tr>
+    <tr><td><tt>\Q</tt></td><td>什么都没有，但是引用 <tt>\E</tt>之前的所有字符</td></tr>
+    <tr><td><tt>\E</tt></td><td>什么都没有，但是结束由 <tt>\Q</tt>开始的引用</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="classes">字符分类</th></tr>
+
+    <tr><td><tt>[abc]</tt></td><td><tt>a</tt>, <tt>b</tt>或者 <tt>c</tt> (简单分类)</td></tr>
+    <tr><td><tt>[^abc]</tt></td><td>除了 <tt>a</tt>, <tt>b</tt>, or <tt>c</tt> (否定)之外的任何字符。</td></tr>
+
+    <tr><td><tt>[a-zA-Z]</tt></td><td><tt>a</tt> 到 <tt>z</tt> 并且 <tt>A</tt> 到 <tt>Z</tt>, 包含（范围）</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="predef">预定义字符类</th></tr>
+
+    <tr><td><tt>.</tt></td><td>任何字符 （除了行结束符之外）</td></tr>
+    <tr><td><tt>\d</tt></td><td>单个数字： <tt>[0-9]</tt></td></tr>
+    <tr><td><tt>\D</tt></td><td>一个非数字字符： <tt>[^0-9]</tt></td></tr>
+    <tr><td><tt>\s</tt></td><td>一个空白字符： <tt>[ \t\n\x0B\f\r]</tt></td></tr>
+
+    <tr><td><tt>\S</tt></td><td>一个非空白字符： <tt>[^\s]</tt></td></tr>
+    <tr><td><tt>\w</tt></td><td>一个单词字符： <tt>[a-zA-Z_0-9]</tt></td></tr>
+    <tr><td><tt>\W</tt></td><td>一个非单词字符： <tt>[^\w]</tt></td></tr>
+    <tr><th>&nbsp;</th></tr>
+
+    <tr align="left"><th colspan="2" id="bounds">边界匹配</th></tr>
+    <tr><td><tt>^</tt></td><td>行开始</td></tr>
+    <tr><td><tt>$</tt></td><td>行结束</td></tr>
+    <tr><td><tt>\b</tt></td><td>单词边界</td></tr>
+    <tr><td><tt>\B</tt></td><td>非单词边界</td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="greedy">贪婪量词</th></tr>
+    <tr><td colspan="2">这些符号将可能进行匹配。例如，<code>a+</code> 将会匹配<code>aaabbb</code>中的<code>aaa</code></td></tr>
+    <tr><td><strong>X</strong><tt>?</tt></td><td><strong>X</strong>一次或根本不出现</td></tr>
+
+    <tr><td><strong>X</strong><tt>*</tt></td><td><strong>X</strong>出现0次或多次</td></tr>
+    <tr><td><strong>X</strong><tt>+</tt></td><td><strong>X</strong>出现1次以上</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="reluc">勉强 (非贪婪) 量词</th></tr>
+
+    <tr><td colspan="2">这些字符将会尽可能少地进行匹配。例如： <code>a+?</code> 将会匹配<code>aaabbb</code>中的 <code>a</code></td></tr>
+    <tr><td><strong>X</strong><tt>??</tt></td><td><strong>X</strong>一次或根本不出现</td></tr>
+    <tr><td><strong>X</strong><tt>*?</tt></td><td><strong>X</strong>出现0次或多次</td></tr>
+
+    <tr><td><strong>X</strong><tt>+?</tt></td><td><strong>X</strong>出现1次以上</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="logical">逻辑操作符</th></tr>
+    <tr><td><strong>XY</strong></td><td><strong>X</strong> 后面紧跟一个<strong>Y</strong></td></tr>
+
+    <tr><td><strong>X</strong><tt>|</tt><strong>Y</strong></td><td> <strong>X</strong> 或 <strong>Y</strong></td></tr>
+    <tr><td><tt>(</tt><strong>XY</strong><tt>)</tt></td><td><strong>XY</strong> 作为单个组出现</td></tr>
+
+</table>
+
+<hr>
+<p><a href="legalNotices.html" title="法律注意事项">法律注意事项</a></p>
+
+</body>
+</html>

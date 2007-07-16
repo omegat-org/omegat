@@ -1,0 +1,83 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>要翻译的文件 - OmegaT 1.6.1 用户手册</title>
+</head>
+<body>
+
+<h1>要翻译的文件</h1>
+
+<p>使用 OmegaT 对一些格式的文件直接进行翻译。主要包括两类文件格式。 <strong>纯文本文件</strong> 格式和 <strong>带格式文本</strong> 格式。</p>
+
+<h2>内容</h2>
+
+<ul type="none">
+   <li>1. <a href="#Plain_text_files">纯文本文件</a></li>
+   <li>2. <a href="#Formatted_text_files">带格式文本格式</a></li>
+   <li>3. <a href="#File_formats_specifics">特定文件格式</a></li>
+   <li>4. <a href="#Other_file_formats">其他文件格式</a></li>
+</ul>
+
+<a name="Plain_text_files"></a>
+<h3>纯文本文件</h3>
+
+<p>纯文本文件中只含有文本，因为对它们的翻译工作就像输入翻译一样简单。</p>
+
+<p>目前， OmegaT 支持以下纯文本格式：</p>
+
+<ul>
+   <li>ASCII 文本（.txt等）</li>
+   <li>编码文本</li>
+   <li>Java 资源文件（.properties）</li>
+   <li>PO 文件 （.po）</li>
+   <li>INI (key=value) 文件（.ini）</li>
+</ul>
+
+<p>一般认为这些文件除了包含用来缩进和对齐用的“空白”之外没有其它的格式。</p>
+
+<p>它们一般可以在文本编辑器中进行修改，通常不可能保留字体、颜色和页边距等信息。</p>
+
+<a name="Formatted_text_files"></a>
+<h3>带格式文本文件</h3>
+
+<p>带格式文本文件除了包含文本之外，还包括字体类型、大小、颜色等信息。通常使用文字处理器和页面编辑器来创建它们。</p>
+
+<p>目前，OmegaT 支持下列带格式文本格式：</p>
+
+<ul>
+   <li>OpenOffice.org 文件</li>
+   <li>开放文档文件</li>
+   <li>(X)HTML 文件</li>
+   <li>HTML 帮助编译器 (HCC) 文件</li>
+   <li>DocBook 文件</li>
+</ul>
+
+<p>这些文件格式是经过构造的，因此保留了格式信息。这些格式信息可能就像 <strong>这是加粗字体</strong>一样简单，也可能是包含了不同的字体大小、颜色和位置等信息的表格数据一样复杂。</p>
+
+<p>在大多数翻译工作中，将经翻译的文档看起来和原始文档和基本相似是非常重要的事情。OmegaT 通过将拥有特殊格式的字符和单词做一个易于维护的标签来帮助你做到这一点。</p>
+
+<p>对源文本格式的简化很大程度上有助于减少标签的数量。如果有可能应该考虑使用统一的字体、字体大小、颜色等，以此简化翻译工作和减少可能的标签错误。</p>
+
+<a name="File_formats_specifics"></a>
+<h3>特定文件格式</h3>
+
+<p>上面多数的文件格式都可以进行特别处理。</p>
+
+<p>参考 <a href="fileFormats.html" title="支持的文件格式">支持的文件格式</a> 和 <a href="fileFilters.html" title="文件过滤器">文件过滤器</a> 了解处理上述所有文件格式的相关信息。</p>
+
+<a name="Other_file_formats"></a>
+<h3>其他文件格式</h3>
+
+<p>其他的纯文本或者带格式文本文件格式应该也可以使用 OmegaT 访问。</p>
+
+<p>总体上，一些纯文本格式（例如包括：LaTex 等）可以通过转换为PO格式在OmegaT中进行翻译。</p>
+
+<p>同样，一些带格式文本格式（包括微软的Office文件）也可以通过转换为开放文档格式在OmegaT中进行翻译。</p>
+
+<p>如果想了解更多信息，请参阅 <a href="fileFormats.html" title="支持的文件格式">支持的文件格式</a>.</p>
+
+<hr>
+<p><a href="legalNotices.html" title="法律注意事项">法律注意事项</a></p>
+
+</body>
+</html>

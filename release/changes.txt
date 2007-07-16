@@ -4,7 +4,7 @@
 
 1.7.1 vs. 1.6.1_04
 
-  25 Enhancements
+  26 Enhancements
   19 Bugfixes
 
 ----------------------------------------------------------------------
@@ -77,6 +77,8 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
   - French UI localisation (update) + instant start tutorial
 
   - Japanese UI localisation + manual translation
+
+  - Simplified Chinese UI localisation + manual translation
 
   - New logging API
 

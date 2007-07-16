@@ -1,0 +1,214 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>处理格式化文本- OmegaT 1.6.1 用户手册</title>
+</head>
+<body>
+
+<h1>处理格式化文本</h1>
+
+<h2>内容</h2>
+
+<ul type="none">
+   <li>1. <a href="#Formatted_Text_in_OmegaT">OemgaT 中的格式化文本</a>
+
+      <ul type="none">
+         <li>1.1. <a href="#Tag_naming">标签命名</a></li>
+         <li>1.2. <a href="#Tag_numbering">标签编号</a></li>
+         <li>1.3. <a href="#Pairs_and_singletons">Pairs and singletons</a></li>
+         <li>1.4. <a href="#Tags_and_sentence_segmenting">标签和句子分段</a></li>
+
+         <li>1.5. <a href="#Tag_operations">标签操作</a>
+
+            <ul type="none">
+               <li>1.5.1. <a href="#Tag_group_duplication">标签组复制</a></li>
+               <li>1.5.2. <a href="#Tag_group_deletion">标签组删除</a></li>
+               <li>1.5.3. <a href="#Tag_group_order_modification">标签组顺序修改</a></li>
+               <li>1.5.4. <a href="#Tag_group_nesting">标签组嵌套</a></li>
+            </ul>
+         </li>
+
+         <li>1.6. <a href="#Tag_group_overlapping">标签组重叠</a></li>
+         <li>1.7. <a href="#Tag_group_validation">标签组验证</a></li>
+         <li>1.8. <a href="#Hints_for_tags_management">标签组管理的提示</a></li>
+         <li>1.9. <a href="#Important">重要信息</a></li>
+      </ul>
+   </li>
+</ul>
+
+<a name="Formatted_Text_in_OmegaT"></a>
+<h2>OmegaT中的格式化文本</h2>
+
+<p>在源文件中表示的格式化信息通常需要在目标文中重新创建。OmegaT 将支持的格式（目前包括DocBook、HTML、XHTML、开放文档和OpenOffice.org）的内嵌格式化信息以标签的形式显示。当为了匹配的目的考虑字符串的相似程度时，标签通常不会被纳入考虑只列。你在已译片段中重新创建的标签将会出现在已译文档中。</p>
+
+<a name="Tag_naming"></a>
+<h3>标签命名</h3>
+
+<p>标签由一到三个字符和一个数字组成。唯一的数字允许我们将这些标签和相对应的标签组织在一起，不同的标签允许有相同的快捷字符，但实际上并不一样。</p>
+
+<p>所用的字符可以也可以不反映出标签所代表的格式的值。（例如：加粗、斜体等等）</p>
+
+<a name="Tag_numbering"></a>
+<h3>标签编号</h3>
+
+<p>标签以<strong>标签组</strong>增长方式进行编号。</p>
+
+<p>我们这里所说的“标签组”指的是单个存在的标签（如<code>&lt;br1&gt;</code>)，或者是2个成对的标签，像（ <code>&lt;f3&gt;</code> 和 <code>&lt;/f3&gt;</code>）。</p>
+
+<p>在片段中，第一个组（成对或者单个的）获得编号 <strong>0</strong>，第二个编号为<strong>1</strong> ，以此类推。</p>
+
+<p>下面的第一个例子中有3个标签组（一组成对的，一组单个，另一组成对的），第二个例子中只有一组（成对的）。</p>
+
+<a name="Pairs_and_singletons"></a>
+<h3>成对和单个</h3>
+
+<p>标签通常以成对或者单个的形式出现。</p>
+
+<p>
+<strong>单个标签</strong> 指的是对周边文本没有影响的格式化信息。（例如：额外的空格或者行终止）。</p>
+
+<pre>   <strong>&lt;segment 2132&gt;</strong>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;<strong>&lt;end segment&gt;</strong></pre>
+
+<p>
+<code><strong>&lt;br1&gt;</strong></code> 是单个的标签，对周边的文本不产生任何影响。</p>
+
+<p>
+<strong>成对标签</strong>通常指对开标签和闭标签之间的文本使用的标签对。无论标签对发生什么情况，开标签总是在闭标签之前出现。</p>
+
+<pre>   <strong>&lt;segment 3167&gt;</strong>Log file (&lt;f1&gt;log.txt&lt;/f1&gt;) for tracking operations and errors.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>
+<code><strong>&lt;f1&gt;</strong></code> and <code><strong>&lt;/f1&gt;</strong></code> are paired and affect <code><strong>log.txt</strong></code>.
+</p>
+
+<a name="Tags_and_sentence_segmenting"></a>
+<h3>标签和句子分割</h3>
+
+<p>OmegaT 在句子分割之前进行标签创建工作。根据分段规则，标签看起来也许并不遵守上面的编号和分组规则。</p>
+
+<pre>   <strong>&lt;segment 1554&gt;</strong> &lt;c0&gt;Before: \. After: \s&lt;/c0&gt;<br>&lt;b2&gt;Note:&lt;/b2&gt;<br>"\." means the character "."&lt;br3&gt;"\s" means any white space character <strong>&lt;end segment&gt;</strong></pre>
+
+<p>看起来这里没有任何问题。现在，如果我们将缺省的片段分割规则应用到该段（缺省的OmegaT行为），我们将获得如下结果：</p>
+
+<pre>   <strong>&lt;segment 1990&gt;</strong> &lt;c0&gt;Before: \. <strong>&lt;end segment&gt;</strong>
+
+   <strong>&lt;segment 1991&gt;</strong> After: \s&lt;/c0&gt;&lt;br1&gt;<strong>&lt;end segment&gt;</strong>
+
+   <strong>&lt;segment 1992&gt;</strong> &lt;b2&gt;Note:&lt;/b2&gt; "\." means the character "."&lt;br3&gt;<strong>&lt;end segment&gt;</strong>
+
+   <strong>&lt;segment 1993&gt;</strong> "\s" means any white space character <strong>&lt;end segment&gt;</strong></pre>
+
+<p>（上例中使用的片段分割规则是： <i>在一个句点紧跟一个空格之后的片段</i> 和 <i>行终止标签之后的片段</i>）</p>
+
+<p>从这里我们可以看出：片段被一段段地切割，而并不遵守成对和编号规则。 <code>＜Ｃ０＞</code> 和 <code>＜／Ｃ０＞</code> 本应在同一片段中成对出现，但它们却被片段分割规则所分开。</p>
+
+<p>当在目标语言中标签必须移位以顺应该语种的词序时，这一情况甚至会导致翻译出现问题，（查阅后面的<a href="#Tag_operations" title="处理格式化文本">标签操作</a> ）.</p>
+
+<a name="Tag_operations"></a>
+<h3>标签操作</h3>
+
+<p>对于标签的操作必须谨慎。如果它们被意外地改变，最终的文件格式也许会被破坏。在最坏的情况下，文件根本无法打开。这种情况对于OpenOffice.org文件特别常见。</p>
+
+<a name="Tag_group_duplication"></a>
+<h4>标签组复制</h4>
+
+<p>要想复制标签组，只需将它们拷贝至你所选择的位置。请记住：成对的标签组中开标签必须出现在闭标签之前。</p>
+
+<p>你复制的标签所代表的格式将会应用到你所复制的部分。</p>
+
+<p>例如：</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;This formatting&lt;/f0&gt; is going to be duplicated here.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>复制后：</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Ce format&lt;/f0&gt; a été &lt;f0&gt;copié ici&lt;/f0&gt;.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_deletion"></a>
+<h4>标签组删除</h4>
+
+<p>要删除标签组，只需将它们从片段中删去。请记住：必须同时删去一个标签组的开标签和闭标签，以确保它们所进行的格式化操作被完全清除，否则已译文件可能会被破坏且无法打开。</p>
+
+<p>删除一个标签组的同时，你将会从已译文件中删除相关的格式。</p>
+
+<p>例如：</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;This formatting&lt;/f0&gt; is going to be deleted.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>删除后：</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>Ce format a été effacé.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_order_modification"></a>
+<h4>标签组顺序修改</h4>
+
+<p>在翻译中，要改变标签组的顺序来对应不同的语言结构，只需在翻译本文中将标签组放到它应该在的位置。</p>
+
+<p>格式将会紧随它所属的部分。</p>
+
+<p>例如：</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;The formatting here&lt;/f0&gt; and &lt;f1&gt;the formatting here&lt;/f1&gt; are going to be moved around.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>修改顺序后：</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f1&gt;Ce format&lt;/f1&gt; et &lt;f0&gt;ce format&lt;/f0&gt; ont été inversés.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_nesting"></a>
+<h4>标签组嵌套</h4>
+
+<p>对标签组的顺序进行修改也许会导致一个标签组嵌套在另一个标签组中。当封闭的组完全将另一个封闭组封装在里面的时候，这是完全有可能的。对于嵌套必须非常小心，尤其是当标签组没有被完整转移到一个封闭组中时，否则已译文件可能被破坏并且无法打开。</p>
+
+<p>嵌套的部分将会拥有应用到它身上的两种格式。</p>
+
+<p>例如：</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;The formatting&lt;/f0&gt; &lt;f1&gt;here&lt;/f1&gt; is going to be nested.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>嵌套后：</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Le format &lt;f1&gt;ici&lt;/f1&gt;&lt;/f0&gt; a été emboité dans le premier format.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_overlapping"></a>
+<h3>标签组重叠</h3>
+
+<p>对标签对的错误维护将会导致重叠，当然也会导致格式破坏以及某些情况下已译文件根本无法打开。</p>
+
+<p>例如：</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;the formatting&lt;/f0&gt; &lt;f1&gt;here&lt;/f1&gt; is going to be messed up.<strong>&lt;end segment&gt;</strong></pre>
+
+<p>错误维护后：</p>
+
+<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;the formatting &lt;f1&gt;here&lt;/f0&gt; &lt;/f1&gt;is very messed up now.<strong>&lt;end segment&gt;</strong></pre>
+
+<a name="Tag_group_validation"></a>
+<h3>标签组检验</h3>
+
+<p>验证标签功能(<a href="userInterface.html#Tag_Validation" title="用户界面">标签验证</a>) 检测变化了的标签（无论是有意的还是无意的），并指出收到影响的片段。使用该功能将会打开一个对话框，显示出文档中任何可疑的断裂或者被破获的标签。</p>
+
+<p>该项功能对跟踪已译标签文本中的BUG是非常有用的。在对OpenDocument或者OpenOffice.org文件的翻译过程中，经常会因为标签问题导致会导致文件无法打开。修正标签然后重新创建目标文档可以解决该问题。</p>
+
+<a name="Hints_for_tags_management"></a>
+<h3>标签管理的提示</h3>
+
+<p>标签通常代表了原始文本中的某种格式。<strong>简化原始文本格式</strong> 很大程度上有助于减少标签的数量。如果有可能应该考虑使用统一的字体、字体大小、颜色等，以此简化翻译工作和减少可能的标签错误。</p>
+
+<p>查阅 <a href="#Tag_operations" title="处理格式化文本">标签操作</a> 部分了解可以对标签做那些处理。</p>
+
+<p>记住：如果标签使你困扰，而格式又不是手头的工作最至关紧要的事情的话，将源文档中的绝大多数格式删除将会大大降低翻译工作的难度。</p>
+
+<p>如果你需要在OmegaT中看到标签，但是却不需要在已译文档中保留绝大多数格式的话，你可以不向翻译中添加任何标签。在这种情况下， <strong>要对标签对格外小心</strong>，因为忘记删除成对标签中的一个的话将会破坏你的文档格式，这可能会导致一个已译的OpenOffice.org文档无法打开。</p>
+
+<p>因为标签自己就被包含在文档中，因此无法使用 <a href="segmentation.html" title="源片段">片段规则</a>来创建包含更含更少标签的片段。这是入门用户不应该使用的高级功能。</p>
+
+<a name="Important"></a>
+<h3>重要内容</h3>
+
+<p>OmegaT 目前还无法自动检测格式错误，因此如果犯了错误或者改变格式以更好适应你使用的目标语言时，它不会对你作任何提示。然而有时，这些错误会导致你翻译出的文件看起来不正常，如果是开放文档或者OpenOffice.org文件，甚至可能无法打开。</p>
+
+<hr>
+<p><a href="legalNotices.html" title="法律注意事项">法律注意事项</a></p>
+
+</body>
+</html>

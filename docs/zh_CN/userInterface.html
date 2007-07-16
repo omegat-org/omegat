@@ -1,0 +1,328 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>The User Interface - OmegaT 1.6.1 User Manual</title>
+</head>
+<body>
+
+<h1>用户界面</h1>
+
+<h2>内容</h2>
+
+<ul type="none">
+   <li>1. <a href="#User_Interface_Items">用户界面条目</a>
+
+      <ul type="none">
+         <li>1.1. <a href="#Windows_you.27ll_use_most_of_the_time">多数时候你将用到的窗口</a></li>
+         <li>1.2. <a href="#Windows_you.27ll_use_sometimes">某些时候你将使用的窗口</a></li>
+         <li>1.3. <a href="#Dialogs_you.27ll_use_to_change_your_project_settings">用来改变项目设置的对话框</a></li>
+      </ul>
+   </li>
+
+   <li>2. <a href="#OmegaT_Main_Window">OmegaT 主窗口</a>
+
+      <ul>
+         <li>2.1. <a href="#Editor_Pane">编辑器面板</a></li>
+         <li>2.2. <a href="#Fuzzy_Matches">模糊匹配</a></li>
+         <li>2.3. <a href="#Glossary">词汇表</a></li>
+         <li>2.4. <a href="#Main_Menu">主菜单</a></li>
+         <li>2.5. <a href="#Status_Bar">状态栏</a></li>
+      </ul>
+   </li>
+
+   <li>3. <a href="#Other_Windows">其他窗口</a>
+
+      <ul>
+         <li>3.1. <a href="#Project_Files">项目文件</a></li>
+         <li>3.2. <a href="#Search_Window">搜索窗口</a></li>
+
+         <li>3.3. <a href="#Tag_Validation">标签确认</a>
+
+            <ul>
+               <li>3.3.1. <a href="#Tag_validation_window">标签确认窗口</a></li>
+               <li>3.3.2. <a href="#Tag_errors">标签错误</a></li>
+               <li>3.3.3. <a href="#Hints_for_tags_management">标签组管理的提示</a></li>
+            </ul>
+         </li>
+
+         <li>3.4. <a href="#Help_Browser">帮助浏览器</a></li>
+      </ul>
+   </li>
+
+   <li>4. <a href="#Dialogs">对话框</a></li>
+</ul>
+
+<a name="User_Interface_Items"></a>
+<h2>用户界面项目</h2>
+
+<p>OmegaT的用户界面由许多项目组成。下面我们首先对它们进行总体概述，然后对每个项目的内容进行细述。</p>
+
+<a name="Windows_you.27ll_use_most_of_the_time"></a>
+<h3>多数时候你将用到的窗口</h3>
+
+<ul>
+   <li>
+      <strong>OmegaT主窗口</strong> 由三块面板组成:<ul>
+         <li><i>编辑器面板</i>中你可以输入和编辑翻译</li>
+         <li><i>匹配查阅面板</i>显示从翻译记忆中找出的最接近的片段</li>
+         <li><i>词汇表查看面板</i>显示术语的译法</li>
+         <li>以及你可以访问OmegaT多数功能的 <i>主菜单</i>。</li>
+         <li>在窗口底部的 <i>状态栏</i>中可以查看工作流程相关的信息。</li>
+      </ul>
+   </li>
+
+   <li><strong>项目文件窗口</strong> 显示你可以翻译的文件。</li>
+   <li><strong>搜索窗口</strong> 用来在项目中查找指定的片段。</li>
+</ul>
+
+<a name="Windows_you.27ll_use_sometimes"></a>
+<h3>某些时候用到的窗口</h3>
+
+<ul>
+   <li><strong>标签确认窗口</strong>用来检查已译文件的格式错误。</li>
+   <li><strong>帮助浏览器</strong> 用来阅读帮助文档。</li>
+</ul>
+
+<a name="Dialogs_you.27ll_use_to_change_your_project_settings"></a>
+<h3>用来改变项目设置的对话框</h3>
+
+<ul>
+   <li><strong>项目属性</strong> 用来编辑项目的文件夹和语言。</li>
+   <li><strong>字体</strong> 用来修改OmegaT用来显示源、翻译、匹配和词汇表的字体。</li>
+   <li><strong>文件过滤器</strong> 用来调整所支持的文件格式。</li>
+   <li><strong>片段</strong> 用来改变文本切割成句子的方式。</li>
+   <li><strong>编辑行为</strong> 用来改变在片段间往返移动时的OmegaT的行为。</li>
+</ul>
+
+<a name="OmegaT_Main_Window"></a>
+<h2>OmegaT 主窗口</h2>
+
+<p>主窗口由三个面板、主菜单和状态栏组成。</p>
+
+<p>你可以改变任何一个面板的位置，甚至通过拖动它们的名字使它们游离成独立的窗口。取决于面板状态的不同，在面板右上方的可能会显示5种不同的标记。将鼠标移动到每个标上将会显示一个工具提示。</p>
+
+<p>
+<img src="images/Minimize.gif" alt="最小化" width="18" height="18">缩小面板只在底部状态栏附近显示它的名字。<br><img src="images/Maximize.gif" alt="最大化" width="18" height="18"> 使面板占据所有的窗口空间。<br><img src="images/Restore.gif" alt="还原" width="18" height="18"> 使面板回到最小化或者最大化之前的位置。<br><img src="images/Undock.gif" alt="游离" width="18" height="18"> 使面板从主窗口游离成为一个自己的独立窗口。<br><img src="images/Dock.gif" alt="停靠" width="18" height="18"> 使面板回到主窗口中。</p>
+
+<p>也可以使面板重叠放置。此时，面板将在顶部显示一个标签。点击标签将会使该面板来到最前端。面板之间的分割线可以拖动来改变面板的尺寸。</p>
+
+<a name="Editor_Pane"></a>
+<h3>编辑器面板</h3>
+
+<p>你可以在这里输入和编辑翻译。编辑面板显示部分被翻译的文本：已经被翻译好的文本将会显示为已翻译，而未被翻译的文本以原始语种显示。</p>
+
+<p>显示文本被分成片段，你可以在文档中上下移动或者双击某个片段进行编辑。</p>
+
+<p>其中一个片段将处于激活状态。这将是唯一倍分成两部分显示的片段：上面部分是原始语种，使用绿色背景并加粗字体显示；下面部分是编辑区域，使用两个标记分割：最左边的是"&lt;segment nnnn&gt;"，其中"nnnn" 是项目的片段编号；最右边的标记是"&lt;end segment&gt;"。你可以使用上面部分作为参考，覆盖或者修改编辑区域的内容以使它包括译文。</p>
+
+<pre>This sentence has been translated.
+
+This sentence has been translated too.
+
+<strong>Cette phrase est en train d'être traduite.</strong>
+&lt;segment 0003&gt;[这里你应该输入： This sentence is being translated]&lt;end segment&gt;</pre>
+
+<p>当你移动到未翻译文本编辑区域时，根据<a href="translationEditing.html" title="翻译编辑">编辑行为</a>的设置情况，该区域可能为空也可能包含不同的文本。</p>
+
+<ul>
+   <li>源文本</li>
+   <li>字符串译文的情况和你要翻译的非常类似。</li>
+</ul>
+
+<p>当你移动到另一个片段，译文将的到验证并保存。</p>
+
+<p>如果你想让片段保持未翻译状态，只需将所有文本删除，使编辑区域为空。（使用<code>Ctrl+A</code>选择所有并按<code>Del</code>删除）。</p>
+
+<p>根据所设置的<a href="translationEditing.html" title="翻译编辑">编辑行为</a> 不同，当译文和源文相同时，OmegaT可能会记住译文。该功能对翻译包含商标、姓名或专用名词以及不须翻译的第三方语言的文档非常有用。</p>
+
+<p>参阅 <a href="translationEditing.html" title="翻译编辑">译文编辑</a> 了解更多信息</p>
+
+<a name="Fuzzy_Matches"></a>
+<h3>模糊匹配</h3>
+
+<p>匹配查阅器 <a href="translationMemories.html" title="翻译记忆">译法记忆</a>中最相似的片段，包括你在项目翻译过程中创建的项目译法记忆，也包括从你早起工作中导入的继承记忆，或者是你从客户或翻译带中得到的。</p>
+
+<p>当你进入下一片段，第一个模糊匹配（拥有最高匹配百分比的一个）自动被选中。你也可以通过<a href="keyboardShortcuts.html" title="OmegaT 键盘快捷方式">按 <code>Ctrl+2</code>, <code>3</code>, <code>4</code>或 <code>5</code>键</a>选择其他的，根据可用匹配的编号。</p>
+
+<p>要在译文中使用 <strong>选中</strong> 的匹配，使用<a href="keyboardShortcuts.html" title="OmegaT 键盘快捷方式"><code>Ctrl+R</code></a>用匹配替换目标区域，或者使用 <a href="keyboardShortcuts.html" title="OmegaT 键盘快捷方式"><code>Ctrl+I</code></a> 将它插入到当前光标位置。</p>
+
+<p>匹配百分比使用进行匹配片段中匹配中的单词数量处以两者中较长的那句中单词的数量来进行估算。</p>
+
+<p>选中的模糊匹配</p>
+
+<ul>
+   <li>将以<strong>加粗字体</strong>高亮度显示。</li>
+   <li>你要翻译的片段中没有找到的单词将会以 <font color="blue"><strong>蓝色</strong></font>显示。</li>
+   <li>蓝色单词周边的词汇或者与源文本位置不同的词汇将会以<font color="green"><strong>绿色</strong></font>显示。</li>
+</ul>
+
+<p>思考以下片段：</p>
+
+<pre>   <strong>Information about Java &amp; OmegaT</strong></pre>
+
+<p>匹配片段：</p>
+
+<pre>   <strong>Java &amp; OmegaT的常见注意事项</strong></pre>
+
+<p>将会以下列方式着色：</p>
+
+<pre>   <strong><font color="blue">General notes</font> <font color="green">about</font> Java &amp; OmegaT</strong></pre>
+
+<p>匹配百分比大概是： 3/5=<strong>60%</strong>
+</p>
+
+<a name="Glossary"></a>
+<h3>词汇表</h3>
+
+<p>词汇表面板的功能是从<a href="glossaries.html" title="词汇表">词汇表文件</a>中载入的术语的译法。它显示当前片段中找到的术语，但只用来做参考之用，不能以它的译文插入或替换术语。OmegaT 也支持多单词术语，但只以非常基础的方式：如果两个单词都在当前片段中找到了，则显示该条术语。</p>
+
+<p>词汇表面板显示术语的格式是：</p>
+
+<pre>
+   '源术语' = '术语译文'
+   关于术语的一般注册，如果有的话。
+</pre>
+
+<a name="Main_Menu"></a>
+<h3>主菜单</h3>
+
+<p>很明显，你可以使用注菜单访问OmegaT所有的功能。最常用的功能可以使用 <a href="keyboardShortcuts.html" title="OmegaT 键盘快捷方式">键盘快捷方式</a>访问，因此当你习惯了使用它们之后，在翻译的时候根本不需要使用菜单。</p>
+
+<p>参阅 <a href="menu.html" title="主菜单">主菜单</a>附件了解所有菜单和菜单项的完整描述。</p>
+
+<a name="Status_Bar"></a>
+<h3>状态栏</h3>
+
+<p>状态栏在主窗口底部显示和工作流相关的信息。这个栏目向用户给出仅在进行的某个操作的反馈信息。它也会显示和当前片段匹配的模糊和术语的数量。</p>
+
+<a name="Other_Windows"></a>
+<h2>其他窗口</h2>
+
+<a name="Project_Files"></a>
+<h3>项目文件</h3>
+
+<p>项目文件窗口显示所有的项目文件并显示其他项目的信息当OmegaT载入项目时这个窗口自动出现。如果项目处于打开状态，如果它处于可见状态你可以使用 <a href="keyboardShortcuts.html" title="OmegaT 键盘快捷方式"><code>Ctrl+L</code> 快捷键</a>关闭它，或者如果它处于隐藏状态你可以打开它。</p>
+
+<p>项目文件窗口特性：</p>
+
+<ul>
+   <li>项目中所有可翻译文件的可点击列表。这是目前在源文件文件夹中 <a href="fileFormats.html" title="支持的文件格式">OmegaT 能够处理</a>的文件。点击其中任何一个文件将打开编辑窗口进行翻译。</li>
+   <li>每个文件包含的片段数量现在在文件名的右边。</li>
+   <li>整个项目中独立（不同）片段的数量。</li>
+   <li>你已经翻译的独特片段数量。每次你译好一个片段，这个数字将会进行更新。</li>
+</ul>
+
+<p> <strong>独特</strong> 片段的数量的计算方法为统计所有的片段，并出去所有小写形态为重复片段（尽管"Run"和"run"本来是不同的。）</p>
+
+<p>通过查看“片段数量”和“独特片段数量”，你可以了解当前文本中有多少重复部分。该数字并不表现重复的部分有多么重要：片段也许是相对长的句子重复了数遍（非常走运！）也可能是一个简单的关键字填满了某个表格（没有那么幸运了）</p>
+
+<p>可以通过修改片段规则来改变/独特片段的数量。当你开始翻译项目之后，这样的修改永远也不会起作用。参阅 <a href="segmentation.html" title="源片段">分段规则</a> 了解更多信息。</p>
+
+<p>你可以通过点击“载入源文件”按钮将源文件增加到项目中。它将选中的文件拷贝到 <code>/source</code> 目录并将新的文件导入到项目中。</p>
+
+<a name="Search_Window"></a>
+<h3>搜索窗口</h3>
+
+<p>你可以用使用搜索窗口在项目查找某个片段。可以同时打开多个搜索窗口。在主窗口使用<a href="keyboardShortcuts.html" title="OmegaT 键盘快捷方式"><code>Ctrl+F</code></a>可以打开一个新的搜索窗口。</p>
+
+<p>该窗口有下列部分组成：</p>
+
+<ul>
+   <li>用来输入搜索字符串或关键字的搜索字段</li>
+   <li>用来改变搜索设置的一系列标志和无线按钮</li>
+   <li>可点击的结果显示空间</li>
+</ul>
+
+<p>在搜索字段输入一个字符串然后点击搜索按钮，将会把项目中所有包含搜索字段的片段显示出来。由于OmegaT将所有相同的片段作为一个实体来对待——如果你改变了其中之一，所有同样的片段将被更新，所以至显示第一个的独特的片段。</p>
+
+<p>片段以在项目中出现的顺序显示。译好的片段将会以上面显示原始文本下面显示翻译文本的形式显示，未译片段将至显示原始文本。</p>
+
+<p>如果在某个项目文件中找到了字符串，你可以通过点击它在编辑器中进行修改。然后你可以转回到搜索窗口进入下一条找到的片段进行修改。too. 这样的方式对修改大量术语更新非常有用。</p>
+
+<p>可以使用两种类型的搜索：</p>
+
+<ul>
+   <li>精确搜索在当前项目的目录和子目录中对指定查询字符串进行查找。精确搜索支持通配符 * 和 ?。字符 '<strong>*'</strong> 匹配0个或多个字符串（例如：搜索条件 '<strong>run*'</strong> 将会匹配 '<strong>run'</strong>、 '<strong>runs'</strong>和 '<strong>running'</strong>）。字符 '<strong>?'</strong> 匹配任何单个的字符串（例如'<strong>run?'</strong> 将会匹配'<strong>runs'</strong> 和 '<strong>rung'</strong>，但是不匹配 '<strong>run'</strong> 或 '<strong>running'</strong>）。这种操作既搜索源文又搜索译文。</li>
+
+   <li>关键词搜索对当前项目进行检查，并以任意顺序返回所有包含查询词汇的片段。</li>
+</ul>
+
+<p>你可以在任何目录中进行搜索，但是要记住OmegaT只搜索<a href="fileFormats.html" title="支持的文件格式">它支持的文件</a>.</p>
+
+<a name="Tag_Validation"></a>
+<h3>标签验证</h3>
+
+<a name="Tag_validation_window"></a>
+<h4>标签验证窗口</h4>
+
+<p>标签验证窗口用来检测已译文档的格式错误。使用<a href="keyboardShortcuts.html" title="OmegaT 键盘快捷方式"><code>Ctrl+T</code></a>打开该窗口。</p>
+
+<p>该窗口提供一个3列表格，分别是： with:</p>
+
+<ul>
+   <li>可能有标签错误的可点击链接。</li>
+   <li>源文片段内容</li>
+   <li>已译片段内容</li>
+</ul>
+
+<p>点击链接可以在当前编辑器中打开该片段。</p>
+
+<a name="Tag_errors"></a>
+<h4>标签错误</h4>
+
+<p>标签错误可能是有以下几种：</p>
+
+<ul>
+   <li>原文中有标签但是在译好的片段中被删除了。</li>
+   <li>原文中没有标签但是已译的片段中被错误地插入了标签。</li>
+   <li>已译文档中的标签顺序被改变了。</li>
+</ul>
+
+<a name="Hints_for_tags_management"></a>
+<h4>标签管理的提示</h4>
+
+<p>标签通常代表了原始文本中的某种格式。<strong>简化原始文本格式</strong> 很大程度上有助于减少标签的数量。如果有可能应该考虑使用统一的字体、字体大小、颜色等，以此简化翻译工作和减少可能的标签错误。</p>
+
+<p>查阅 <a href="formattedText.html#Tag_operations" title="处理格式化文本">标签操作</a> 部分了解可以对标签做那些处理。</p>
+
+<p>记住：如果标签使你困扰，而格式又不是手头的工作最至关紧要的事情的话，将源文档中的绝大多数格式删除将会大大降低翻译工作的难度。</p>
+
+<p>如果你需要在OmegaT中看到标签，但是却不需要在已译文档中保留绝大多数格式的话，你可以不向翻译中添加任何标签。在这种情况下，要 <strong>特别小心标签对</strong>。如果只保留了标签对中的一个标签，它将会破坏文档的格式，使得一个译好的OpenOffice.org文档格式被破坏，或者使一份HTML文件变得不可读。</p>
+
+<p>因为标签自己就被包含在文档中，因此无法使用 <a href="segmentation.html" title="源片段">片段规则</a>来创建包含更含更少标签的片段。这是入门用户不应该使用的高级功能。</p>
+
+<a name="Help_Browser"></a>
+<h3>帮助浏览器</h3>
+
+<p>帮助浏览器（显示本手册）可以通过 按<a href="keyboardShortcuts.html" title="OmegaT 键盘快捷方式">F1</a> 或者调用  <a href="menu.html" title="主菜单">主菜单</a>的<strong>帮助 -&gt; 用户手……</strong> 条目来打开。</p>
+
+<p>在该窗口中你将看到手册和两个按钮： <strong>后退</strong> 和 <strong>内容</strong>。</p>
+
+<p>用户手册是一份包含各个不同章节链接的HTML文档。像在网页浏览器中那样点击一个链接将会打开要看的页面。</p>
+
+<p>用户手册存放在 OmegaT安装目录的<code>doc</code> 子目录中，因此加入在浏览器中打开 <code>doc/en/index.hmtl</code> 文件，你将看到的是英文的文档。用这种方法，你也可以打开外部的链接，因为内建的帮助浏览器并不接受外部互联网链接。</p>
+
+<a name="Dialogs"></a>
+<h2>对话框</h2>
+
+<p>你将使用改变OmegaT和项目设置的对话框。每个对话框都在独立的章节中有描述，下面我们只简单讲述它们的用途和如何调用它们。</p>
+
+<ul>
+   <li>
+      <a href="projectProperties.html" title="项目属性">项目属性</a> 用来修改项目文件夹和语种。可以通过按 <a href="keyboardShortcuts.html" title="OmegaT 键盘快捷方式"><code>Ctrl+E</code></a> 或者在<a href="menu.html" title="主菜单">主菜单</a>中调用 <strong>项目 -&gt; 属性……</strong>来打开它。</li>
+
+   <li>
+      <a href="fontSettings.html" title="字体设置">字体对话框</a>是用来修改 OmegaT 用来显示源文本、翻译、匹配和词汇表的的字体的对话框。可以通过 <a href="menu.html" title="主菜单">主菜单</a>的<strong>选项 -&gt; 字体……</strong>  项来调用该对话框。</li>
+
+   <li>你可以使用 <a href="fileFilters.html" title="文件过滤器">文件过滤器选项<a href="fileFilters.html" title="文件过滤器">来修改每个<a href="fileFormts.html" title="支持的文件格式">可用过滤器</a>应该处理的文件。</li>
+
+   <li><a href="segmentation.html" title="源片段">片段设置对话框</a> 用来设置将文本分割成句子的方式。注意：在 <a href="projectProperties.html" title="项目属性">项目属性</a>对话框中可以激活或关闭句子分割。</li>
+
+   <li><a href="translationEditing.html" title="翻译编辑">编辑行为对话框</a> 用来改变在片段间往返移动时的OmegaT的行为。</li>
+</ul>
+
+<hr>
+<p><a href="legalNotices.html" title="法律注意事项">法律注意事项</a></p>
+
+</body>
+</html>

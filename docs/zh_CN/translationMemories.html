@@ -1,0 +1,117 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>翻译记忆 - OmegaT 1.6.1 用户手册</title>
+</head>
+<body>
+
+<h1>翻译记忆</h1>
+
+<h2>内容</h2>
+
+<ul type="none">
+   <li>1. <a href="#OmegaT_and_TMX_files">OmegaT 和 TMX 文件</a>
+
+      <ul type="none">
+         <li><a href="#TMX_files_location_and_purpose">TMX 文件所在位置及其用途</a></li>
+         <li><a href="#TMX_files_and_language">TMX 文件和语种</span></a></li>
+      </ul>
+   </li>
+
+   <li>2. <a href="#Keeping_a_memory_of_your_translation_with_OmegaT">使用OmegaT对译文进行记忆</a></li>
+
+   <li>5. <a href="#Using_memories_created_by_other_translation_tools">使用其他翻译工具创建的记忆</span></a>
+
+      <ul type="none">
+         <li>5.1. <a href="#Importing_files">导入文件</a></li>
+         <li>5.2. <a href="#Imported_files_handling">导入文件的处理</a></li>
+      </ul>
+   </li>
+
+   <li>6. <a href="#Using_OmegaT_translation_memories_in_other_translation_tools">在其他翻译工具中使用OmegaT的翻译记忆</a></li>
+   <li>7. <a href="#Upgrading_Translation_Memories">更新翻译记忆</a></li>
+</ul>
+
+<a name="OmegaT_and_TMX_files"></a>
+<h2>OmegaT 和 TMX 文件</h2>
+
+<a name="TMX_files_location_and_purpose"></a>
+<h3>TMX 文件所在位置及其用途</h3>
+
+<p>OmegaT 在3个不同地方使用了 TMX 文件。</p>
+
+<ul>
+   <li> /omegat/ 文件夹包含了 <strong>project_save.tmx</strong> 文件，最后也会包括一定数量的 TMX 备份文件。project_save.tmx 文件包含了自从项目开始以来<strong>所有</strong>被保存的片段。</li>
+
+   <li>项目的主文件夹有 3 个 TMX 文件： <strong>&lt;project_name&gt;-omegat.tmx</strong>、 <strong>&lt;project_name&gt;-level1.tmx</strong> 和 <strong>&lt;project_name&gt;-level2.tmx</strong>, 其中 <code>&lt;project_name&gt;</code> 就是项目的名称。这些文件是导出的 TMX 文件，只包括已译文本对。<ul>
+         <li>&lt;project_name&gt;-level1.tmx 为只包含文本信息的 TMX 文件。</li>
+
+         <li>&lt;project_name&gt;-level2.tmx 这种 TMX 文件以恰当的TMX 标签封装了OmegaT的特殊标签，因此它可以在支持 TMX 级别2 记忆的翻译工具或 OmegaT 自己当中使用格式信息。</li>
+
+         <li>&lt;project_name&gt;-omegat.tmx 是包含了OmegaT特定格式标签的TMX文件，因此该文件中的格式信息可以在其他OmegaT项目中使用。</li>
+      </ul>
+   </li>
+
+   <li>/tm/ 文件夹可以包含任何数量的TMX文件。这些文件必须是正确的TMX文件，可以只包含文本信息（TMX级别1）、OmegaT文本和格式信息（OmegaT TMX），或者TMX文本和格式信息（TMX级别2）。</li>
+</ul>
+
+<a name="TMX_files_and_language"></a>
+<h3>TMX 文件和语种</h3>
+
+<p>TMX 文件包含的 <i>翻译单元</i> 由许多不同语言的对应片段组成。一个翻译单元至少由两个 <i>翻译单元变量</i> (tuv)组成。每个都可以当作源或者目标使用。</p>
+
+<p>项目的设置可以指出哪个是源语言，哪个是目标语言。因此 OmegaT 将会根据项目的源语种代码 提取<strong>tuv</strong>，并将该片段作为源片段使用，然后根据项目的目标语种代码提取 <strong>tuv</strong> 作为目标片段使用。</p>
+
+<p>语种代码以多种形式出现。OmegaT 目前仅识别以下代码：</p>
+
+<ul><li>以2个字母组成的语种代码：（例如： <strong>JA</strong> 代表日语）</li></ul>
+
+<p>或者</p>
+
+<ul><li>以2个字母组成的语种代码加上2个字母组成的国家代码，中间以连字符相隔（如：<strong>JA-JP</strong> 代表日本使用的日语）。</li></ul>
+
+<p>如果项目语种代码和TMX语种代码完全相符，该片段将会被导入内存中。如果代码只和语种代码相符，但和国家代码不相符，片段也会载入内存中。如果语言代码和国家代码都不符合，片段将不会载入内存中。</p>
+
+<a name="Keeping_a_memory_of_your_translation_with_OmegaT"></a>
+<h2>使用OmegaT记住你的译文。</h2>
+
+<p>文件 project_save.tmx 包含了从项目开始以来 <strong>所有</strong>被记忆的片段。假如你对项目的片段进行了修改，project_save.tmx 将会记录新的译文对，但同时也会保留之前的信息。有时这将造成在匹配查阅器中出现 <strong>独孤字符串</strong>。这样的匹配不再和现存片段对应，而是对应修改发生之前记录的片段。如果该修改行为是一次错误，恢复到之前的设置后，旧的记录将会重新出现。</p>
+
+<a name="Using_memories_created_by_other_translation_tools"></a>
+<h2>使用其他翻译工具创建的记忆。</h2>
+
+<a name="Importing_files"></a>
+<h3>导入文件</h3>
+
+<p>OmegaT 支持导入 TMX 的 1.1-1.4b 版本（包括级别1和级别2）。这使得其它工具创建的翻译记忆也可以被OmegaT使用。</p>
+
+<p>然而，OmegaT不<i>完全</i> 支持导入级别2TMX文件（既保存了译文又保存了格式），因此当导入级别2的TMX文件时，模糊匹配的质量将会有所下降。</p>
+
+<a name="Imported_files_handling"></a>
+<h3>处理导入的文件</h3>
+
+<p>OmegaT在处理翻译记忆文件（TMX文件）时遵循非常严格的程序。</p>
+
+<p>如果在该文件中发现了任何错误，OmegaT将不导入该文件。</p>
+
+<p>已知有些工具在某些情况下会产生非法的TMX文件。如果你想在OmegaT中使用这样的文件作为参考翻译而遭到OmegaT拒绝的话，你必须对它们进行修补。修补是琐碎的操作，OmegaT将会在相关的错误信息中给你提示。如果你感到力不从心的话，可以向用户组询问相关的建议。</p>
+
+<a name="Using_OmegaT_translation_memories_in_other_translation_tools"></a>
+<h2>在其他翻译工具中使用OmegaT翻译记忆</h2>
+
+<p>OmegaT 导出1.4版本的TMX文件（包括级别1和级别2）。级别2的导出并不是标准的级别2，但是足以在支持TMX级别2的翻译工具中产生正确的匹配。</p>
+
+<p>如果你只需要文本信息（而不是格式信息），可以使用OmegaT创建的级别1文件。</p>
+
+<a name="Upgrading_Translation_Memories"></a>
+<h2>更新译文记忆</h2>
+
+<p>OmegaT的之前版本只能将源文本按照段落切割成片段，而且对HTML和开放文档文件的格式标签编号时会出现前后不一致。OmegaT 1.6.1 可以检测并更新这样的TMX文件，以此提高模糊匹配的质量、提高现有翻译的水平——因此你并不需要重新完成它。</p>
+
+<p>项目的TMX只会更新一次，且会以更新过的格式写入，而每次项目被载入时都会对所继承的TMX文件进行更新。所在注意：在OmegaT1.6.1中对文件过滤器的一些修改可能会导致完全不同的片段分割，因此在少数情况下你必须手动更新译文。</p>
+
+<hr>
+<p><a href="legalNotices.html" title="法律注意事项">法律注意事项</a></p>
+
+</body>
+</html>

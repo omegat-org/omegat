@@ -1,15 +1,13 @@
-This translation is the work of [insert your name], copyright© 2007.
+本翻译工作由 Cliff Peng 完成，版权© [2007].
 
 
 ==============================================================================
   OmegaT 1.7.1, 读我文件
 
   1.  关于 OmegaT 的信息
-  2.  什么是 OmegaT？  
-  3.  Java 和 OmegaT的常见注意事项
+  2.  什么是 OmegaT？  3.  Java 和 OmegaT的常见注意事项
   4.  OmegaT的致谢
-  5.  使用OmegaT遇到Bug？需要帮助吗？  
-  6.  版本细节
+  5.  使用OmegaT遇到Bug？需要帮助吗？  6.  版本细节
 
 ==============================================================================
   1.  关于 OmegaT 的信息
@@ -145,7 +143,7 @@ OmegaT.bat 拖放到桌面或开始菜单中，将其链接到该处。
   Yutaka Kachi （日语）
   Dragomir Kovacevic （塞尔维亚——克罗地亚语）
   Elina Lagoudaki （希腊语）
-  Martin Luká? (Slovak)
+  Martin Lukáč (Slovak)
   Ahmet Murati （阿拉伯语）
   Samuel Murray （斐语）
   Yoshi Nakayama （日语）
@@ -188,8 +186,7 @@ OmegaT 使用下列程序库：
 
 接下来要做的事情是让其他用户确认你所发现的问题，以确保它之前没有被报告过。你也可以查阅SourceForge的Bug报告页面。只有在确认自己是第一个发现某些可再现的事件序列会触发不该发生的情况时，你才应该撰写一份Bug报告。
 
-一份好的Bug报告书应该完整地包括三个内容：  
-  - 再现Bug的步骤
+一份好的Bug报告书应该完整地包括三个内容：  - 再现Bug的步骤
   -你所期望看到的情况
   -你预期之外的情况
 

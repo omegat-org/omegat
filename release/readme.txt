@@ -272,7 +272,7 @@ this and all previous releases.
 File formats supported:
   - Plain text
   - HTML and XHTML
-  - HTML Help Compiler (HCC)
+  - HTML Help Compiler
   - OpenDocument / OpenOffice.org
   - Java resource bundles (.properties)
   - INI files (files with key=value pairs of any encoding)

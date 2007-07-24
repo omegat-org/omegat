@@ -1,4 +1,4 @@
-﻿Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007.
+Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007.
 
 ==============================================================================
   OmegaT 1.7.1 Fichier « Lisez-moi »

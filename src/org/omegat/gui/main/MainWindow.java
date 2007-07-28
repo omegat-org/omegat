@@ -1271,8 +1271,12 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 		JOptionPane.OK_CANCEL_OPTION);
         String projectsource = 
                 CommandThread.core.getProjectProperties().getSourceRoot();
-        WikiGet.doWikiGet(remote_url, projectsource);
-        doReloadProject();
+         // [1762625] Only try to get MediaWiki page if a string has been entered 
+        if ( (remote_url != null ) && (remote_url.trim().length() > 0) )
+        {
+            WikiGet.doWikiGet(remote_url, projectsource);
+            doReloadProject();
+        }
     }
 	    
     /**

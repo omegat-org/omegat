@@ -1,10 +1,45 @@
 ----------------------------------------------------------------------
+ OmegaT 1.7.2 Changes
+----------------------------------------------------------------------
+
+1.7.1 vs. 1.7.2
+
+  4 Enhancements
+  3 Bugfixes
+
+----------------------------------------------------------------------
+1.7.2
+
+
+Contains a new localisation (Simplified Chinese) and bug fixes
+
+ Implemented requests:
+  
+  Have a more complete ISO 639 list in the UI
+  http://sourceforge.net/support/tracker.php?aid=1755240
+
+ Other enhancements:
+
+  - Simplified Chinese UI localisation + manual translation
+  - French localisation updated to 1.7.1
+  - Basque localisation updated to 1.7.1
+ 
+ Bug fixes:
+  
+  Incorrect/unclear data in project_save.txt  
+  http://sourceforge.net/support/tracker.php?aid=1616247
+  - regression in the JA UI strings 1.7.1 test
+  http://sourceforge.net/support/tracker.php?aid=1749787
+  - Only try to get MediaWiki page if a string has been entered
+  http://sourceforge.net/support/tracker.php?aid=1762625
+
+----------------------------------------------------------------------
  OmegaT 1.7.1 Changes
 ----------------------------------------------------------------------
 
 1.7.1 vs. 1.6.1_04
 
-  26 Enhancements
+  25 Enhancements
   19 Bugfixes
 
 ----------------------------------------------------------------------

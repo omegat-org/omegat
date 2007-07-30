@@ -24,7 +24,7 @@
       <ul type="none">
          <li><a href="#File_Filters_Dialog">Dialógové okno Filtre súborov</a></li>
          <li><a href="#Edit_Filter_Dialog">Dialógové okno Upraviť filter</a></li>
-         <li><a href="#Add.2FEdit_Pattern_Dialog">Dialógové okno Pridať/Upraviť vzor</a></li>
+         <li><a href="#Add.2FEdit_Pattern_Dialog">Dialógové okno Pridať/upraviť vzor</a></li>
       </ul>
    </li>
 </ul>
@@ -39,7 +39,7 @@
 <ul>
    <li>Čítať dokument v nejakom špecifickom formáte súborov. Napríklad, obyčajné textové súbory.</li>
    <li>Extrahovať zo súboru preložiteľný obsah.</li>
-   <li>Automatizovať modifikácie názvov súborov preložených dokumentov nahradením preložiteľného obsahu jeho prekladom.</li>
+   <li>Automatizovať zmeny názvov súborov preložených dokumentov nahradením preložiteľného obsahu jeho prekladom.</li>
 </ul>
 
 <a name="File_types"></a>
@@ -50,9 +50,9 @@
 <a name="File_encodings"></a>
 <h3>Kódovania súborov</h3>
 
-<p>Obyčajné textové a HTML súbory môžu byť uložené v množstve kódovaní. Kým HTML súbory môžu obsahovať meta údaj o kódovaní a OmegaT ho použije na prečítanie súboru, textové súbory nemajú žiaden univerzálny spôsob ako to uviesť. Pre textové aj HTML súbory bez deklarácie kódovania použije OmegaT kódovanie, ktoré nastavíte pre konkrétnu príponu. Napríklad, predvolene súbory <code>.txt</code> budú načítané s použitím predvoleného kódovania operačného systému. Môžete zmeniť kódovanie zdroja pre každý odlišný vzor názvu zdrojového súboru.</p>
+<p>Obyčajné textové a HTML súbory môžu byť uložené v množstve kódovaní. Kým HTML súbory môžu obsahovať meta údaj o kódovaní a OmegaT ho použije na prečítanie súboru, textové súbory nemajú žiaden univerzálny spôsob ako to uviesť. Pre textové aj HTML súbory bez deklarácie kódovania použije OmegaT kódovanie, ktoré nastavíte pre konkrétnu príponu. Napríklad, predvolene budú súbory <code>.txt</code> načítané s použitím predvoleného kódovania operačného systému. Môžete zmeniť kódovanie zdroja pre každý odlišný vzor názvu zdrojového súboru.</p>
 
-<p>HTML a obyčajné textové súbory môžu byť tiež napísané v akomkoľvek kódovaní. Nparíklad, ak prekladáte z francúzštiny do japončiny môžete buď nastaviť filter na používanie jedného z japonských cieľových kódovaní, alebo použite kódovania Unicode UTF-8, UTF-16, alebo UTF-32. Predvolene, kódovanie v ktorom je uložený súbor je rovnaké kódovanie ako bolo použité pre načítanie súboru pre textové súbory, a UTF-8 pre HTML súbory. Všimnite si, že HTML filter pridá do cieľového súboru deklaráciu kódovania, takže prehliadač ho bude vidieť a nebude zobrazovať žiadne nezmyselné znaky.</p>
+<p>HTML a obyčajné textové súbory môžu byť tiež napísané v akomkoľvek kódovaní. Napríklad, ak prekladáte z francúzštiny do japončiny môžete, buď nastaviť filter na používanie jedného z japonských cieľových kódovaní, alebo použiť kódovania Unicode UTF-8, UTF-16, alebo UTF-32. Predvolene, kódovanie v ktorom je uložený súbor je rovnaké kódovanie, ako bolo použité pre načítanie súboru pre textové súbory, a UTF-8 pre HTML súbory. Všimnite si, že HTML filter pridá do cieľového súboru deklaráciu kódovania, takže prehliadač ho bude vidieť a nebude zobrazovať žiadne nevhodné znaky.</p>
 
 <a name="Renaming_Translated_Files"></a>
 <h3>Premenovanie preložených súborov</h3>
@@ -69,11 +69,11 @@
 
 <p>Dialógové okno vypisuje dostupné filtre súborov.</p>
 
-<p>Ak nechcete používať OmegaT na preklad súborov nejakého typu, môžete filter vypnúť odznačením zaškrtávacieho políčka vedľa jeho názvu. OmegaT potom pri načítavaní projektov vynechá všetky príslušné súbory, a pri vytváraní cieľových dokumentov ich skopíruje nedotknuté. Neskôr, keď sa rozhodnete použiť filter znova, iba zaškrtnite príslušné políčko.</p>
+<p>Ak nechcete používať OmegaT na preklad súborov nejakého typu, môžete filter vypnúť odznačením zaškrtávacieho políčka vedľa jeho názvu. OmegaT potom pri načítavaní projektov vynechá všetky príslušné súbory, a pri vytváraní cieľových dokumentov ich skopíruje nedotknuté. Neskôr, keď sa rozhodnete použiť filter znova, stačí zaškrtnúť príslušné políčko.</p>
 
 <p>Ak si náhodou pokazíte celú konfiguráciu, kliknite na <strong>Predvolené</strong> pre návrat konfigurácie filtrov súborov do predvoleného funkčného stavu.</p>
 
-<p>Pre editáciu toho v akých kódovaniach bude filter fungovať, vyberte filter zo zoznamu akliknite na <strong>Upraviť</strong>.</p>
+<p>Pre úpravu toho, v akých kódovaniach bude filter fungovať, vyberte filter zo zoznamu a kliknite na <strong>Upraviť</strong>.</p>
 
 <a name="Edit_Filter_Dialog"></a>
 <h3>Dialógové okno Upraviť filter</h3>
@@ -82,10 +82,10 @@
 
 <p>Vzor názvu zdrojového súboru používa pravidlá masky súborov DOS. Symbol <code>*</code> môže nahradiť akékoľvek množstvo akýchkoľvek symbolov, <code>?</code> nahradzuje akýkoľvek jeden symbol, a všetky ostatné symboly majú svoj pôvodný význam. Napríklad, ak chcete aby bol textový filter použitý na súbory čítajma (<code>readme</code>, <code>read.me</code>, a <code>readme.txt</code>) mali by ste použiť vzor <code>read*</code>.</p>
 
-<p>Polia zdrojového a cieľového kódovania používajú combo boxy obsahujúce všetky podporované kódovania. Všimnite si, že nie všetky filtre vám dovoľujú výber kódovania, pretože fungujú s formátom súborov, ktorý umožňuje iba jediné kódovanie. Nastavenie kódovania na "&lt;auto&gt;" pre tie súbory formátov, ktoré vám dovoľujú výber kódovania by znamenalo, že veríte programu OmegaT ohľadom rozhodnutia. Takto to robí:</p>
+<p>Polia zdrojového a cieľového kódovania používajú kombinované polia obsahujúce všetky podporované kódovania. Všimnite si, že nie všetky filtre vám dovoľujú výber kódovania, pretože fungujú s formátom súborov, ktorý umožňuje iba jediné kódovanie. Nastavenie kódovania na "&lt;auto&gt;" pre tie súbory formátov, ktoré vám dovoľujú výber kódovania by znamenalo, že pri rozhodovaní dôverujete programu OmegaT. Robí to takto:</p>
 
 <ul>
-   <li>OmegaT sa môže pokúšať uhádnuť kódovanie zdrojového súboru HTML/XHTML súborov.</li>
+   <li>OmegaT sa môže pokúšať uhádnuť kódovanie zdrojového súboru súborov HTML/XHTML.</li>
    <li>OmegaT použije predvolené kódovanie operačného systému pre textové súbory.</li>
 </ul>
 
@@ -96,9 +96,9 @@
 <p>Ak chcete vrátiť filter na predvolené nastavenia, kliknite na <strong>Predvolené</strong>.</p>
 
 <a name="Add.2FEdit_Pattern_Dialog"></a>
-<h3>Dialógové okno Pridať/Upraviť vzor</h3>
+<h3>Dialógové okno Pridať/upraviť vzor</h3>
 
-<p>Rovnaké dialógové okno sa objaví či už chcete pridať vzor alebo editovať nejaký konkrétny vzor. Jediná nová vec v ňom je špeciálny editor vzoru názvu cieľového súboru, všetky ostatné políčka boli popísané vyššie.</p>
+<p>Rovnaké dialógové okno sa objaví, či už chcete pridať vzor, alebo upraviť nejaký konkrétny vzor. Jediná nová vec v ňom je špeciálny editor vzoru názvu cieľového súboru, všetky ostatné políčka boli popísané vyššie.</p>
 
 <p>Sekcia Vzor názvu cieľového súboru vám umožňuje vytvoriť názov preloženého súboru z rôznych častí.</p>
 
@@ -106,13 +106,13 @@
    <li>Predvolené je <code>${filename}</code> -- celý názov zdrojového súboru s príponou, takže názov preloženého súboru je rovnaký ako názov zdrojového súboru.</li>
    <li><code>${nameOnly}</code> vám umožní vložiť iba názov zdrojového súboru bez prípony.</li>
    <li><code>${extension}</code> -- prípona zdrojového súboru.</li>
-   <li><code>${targetLocale}</code> - kód cieľového locale (v tvare "xx_YY").</li>
+   <li><code>${targetLocale}</code> - kód cieľového locale (miestnych nastavení) (v tvare "xx_YY").</li>
    <li><code>${targetLanguage}</code> - kód cieľového jazyka a krajiny spolu (v tvare "XX-YY").</li>
    <li><code>${targetLanguageCode}</code> - iba cieľový jazyk ("XX").</li>
    <li><code>${targetCoutryCode}</code> - iba cieľová krajina ("YY").</li>
 </ul>
 
-<p>Môžeme jednoducho pridať viac premenných ak nás požiadate a poviete čoho sa týka vaša obľúbená premenná. Iba navštívte <a href="http://groups.yahoo.com/group/OmegaT/">našu používateľskú skupinu</a>.</p>
+<p>Môžeme jednoducho pridať viac premenných, ak nás požiadate a poviete, čoho sa týka vaša obľúbená premenná. Stačí navštíviť <a href="http://groups.yahoo.com/group/OmegaT/">našu používateľskú skupinu</a>.</p>
 
 <hr>
 <p><a href="legalNotices.html" title="Právne poznámky">Právne poznámky</a></p>

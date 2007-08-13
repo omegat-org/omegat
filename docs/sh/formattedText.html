@@ -1,7 +1,7 @@
 <html>
 <head>
    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Radnje s formatiranim tekstom - Priručnik za korisnike OmegaT 1.6.2</title>
+   <title>Radnje s formatiranim tekstom - Priručnik za korisnike OmegaT 1.6.1</title>
 </head>
 <body>
 
@@ -85,22 +85,17 @@
 
 <p>OmegaT stvara tagove prije primjene rečenične segmentacije. Zavisno od pravila segmentacije, može se desiti da tagovi naizgled ne slijede gornja pravila numeracije i grupisanja.</p>
 
-<pre>   <strong>&lt;segment 1554&gt;</strong> &lt;c0&gt;Prije: \. Poslije: \s&lt;/c0&gt;<br> &lt;b2&gt;Napomena:&lt;/b2&gt;<br>
-"\." predstavlja znak "."&lt;br3&gt; "\s" predstavlja bilo koji znak za bijeli prostor <strong>&lt;kraj segmenta&gt;</strong></pre>
+<pre>   <strong>&lt;segment 1554&gt;</strong> &lt;f0&gt;Prije: \. Poslije: \s&lt;/f0&gt;<strong>&lt;end segment&gt;</strong></pre>
 
 <p>Čini se da ovdje nema problema. Ako sada na ovom segmentu primijenimo default pravila segmentacije  (podrazumijevano ponašanje OmegaT) imaćemo sljedeći rezultat:</p>
 
-<pre>   <strong>&lt;segment 1990&gt;</strong> &lt;c0&gt;Prije: \. <strong>&lt;kraj segmenta&gt;</strong>
+<pre>   <strong>&lt;segment 1990&gt;</strong> &lt;f0&gt;Prije: \. <strong>&lt;kraj segmenta&gt;</strong>
 
-   <strong>&lt;segment 1991&gt;</strong> Poslije: \s&lt;/c0&gt;&lt;br1&gt; <strong>&lt;kraj segmenta&gt;</strong>
+   <strong>&lt;segment 1991&gt;</strong> Poslije: \s&lt;/f0&gt;<strong>&lt;end segment&gt;</strong></pre>
 
-   <strong>&lt;segment 1992&gt;</strong> &lt;b2&gt;Napomena:&lt;/b2&gt; "\." predstavlja znak "."&lt;br3&gt;<strong>&lt;kraj segmenta&gt;</strong>
+<p>(Pravila segmentacije koja se primjenjuju, su sljedeća: <i>segment poslije tačke iza koje slijedi razmak</i>.)</p>
 
-   <strong>&lt;segment 1993&gt;</strong> "\s" predstavlja bilo koji znak za bijeli prostor <strong>&lt;kraj segmenta&gt;</strong></pre>
-
-<p>(Pravila segmentacije koja se primjenjuju, su sljedeća: <i>segment poslije tačke iza koje slijedi razmak</i> i <i>segment poslije taga za prelom reda</i>.)</p>
-
-<p>Primjećujemo da ovi segmenti, kad ih se pojedinačno posmatra, ne slijede pravila za uparivanje i numeraciju: <code><code></code> i <code>&lt;/co&gt;</code> bi morali biti upareni u istom segmentu, ali su podijeljeni uslijed pravila segmentacije.</p>
+<p>Primjećujemo da ovi segmenti, kad ih se pojedinačno posmatra, ne slijede pravila za uparivanje i numeraciju:<code>&lt;f0&gt;</code> i <code>&lt;/f0&gt;</code> bi morali biti upareni u istom segmentu, ali su podijeljeni uslijed pravila segmentacije.</p>
 
 <p>U nekim slučajevima to može stvoriti probleme pri prevođenju tj. kad se tagovi u jeziku prevoda moraju razmjestititi tako da odgovaraju redu riječi koji odgovara tom jeziku (pogledaj dolje <a href="#Tag_operations" title="Radnje s formatiranim tekstom">Radnje s tagovima</a> ).</p>
 

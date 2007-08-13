@@ -1,7 +1,7 @@
 <html>
 <head>
    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Segmentacija izvornih datoteka - Priručnik za korisnike OmegaT 1.6.2</title>
+   <title>Segmentacija izvornih datoteka - Priručnik za korisnike OmegaT 1.6.1</title>
 </head>
 <body>
 
@@ -46,7 +46,7 @@
 
 <p>OmegaT može takođe segmentirati i na razini rečenice. Rečenična segmentacija se odvija poslije segmentacije na strukturnoj razini. Segmenti koji tom prilikom nastanu, nažalost se, tokom prevođenja, ne mogu naknadno dijeliti ili ujedinjavati. Ovo predstavlja jedno ograničenje u softveru OmegaT kojega smo svjesni.</p>
 
-<p>Ako nisi zadovolj/a/n/a sa segmentiranjem, moraćeš ili modifikovati izvornu datoteku ručno, i/ili mijenjati pravila rečenične segmentacije. Po obavljanju tih operacija, moraš ponovno učitati projekat da bi softver zabilježio nastale promjene.</p>
+<p>Ako nisi zadovolj/a/n/a sa segmentiranjem, moraćeš ili modifikovati izvornu datoteku ručno, i/ili mijenjati pravila rečenične segmentacije. Po obavljanju tih operacija, moraš ponovno učitati projekt da bi softver zabilježio nastale promjene.</p>
 
 <a name="Sentence_Segmentation"></a>
 <h2>Rečenična segmentacija</h2>
@@ -74,14 +74,14 @@
 <a name="Rules_Setup"></a>
 <h3>Setup pravila</h3>
 
-<p>Radi podešavanja pravila, s glavnog menija izaberi <strong>Opcije -&gt; Segmentacija...</strong> . Imaj u vidu da ako pri otvorenom projektu promijeniš neke od opcija segmentacije, da ćeš morati iznova učitati projekat, kako bi softver prihvatio promjene.</p>
+<p>Radi podešavanja pravila, s glavnog menija izaberi <strong>Opcije -&gt; Segmentacija...</strong> . Imaj u vidu da ako pri otvorenom projektu promijeniš neke od opcija segmentacije, da ćeš morati iznova učitati projekt, kako bi softver prihvatio promjene.</p>
 
 <a name="Sets_of_Rules"></a>
 <h4>Setovi pravila</h4>
 
 <p>Svi setovi pravila segmentacije s podudarnim jezičkim oblikom, primjenjuju se u datom redoslijedu, tako da bi pravila za određeni jezik, morala biti viša od onih pod "default".</p>
 
-<p>Tako bi na primjer, pravila za kanadski francuski (FR-CA) trebalo da budu viša od pravila za francuski (FR.*) te viša od pravila Default (.*). Time će projekat prevođenja s kanadskog francuskog, koristiti definisana pravila za dotični jezik, potom za francuski, i na kraju pravila pod default, u pravilnom redoslijedu.</p>
+<p>Tako bi na primjer, pravila za kanadski francuski (FR-CA) trebalo da budu viša od pravila za francuski (FR.*) te viša od pravila Default (.*). Time će projekt prevođenja s kanadskog francuskog, koristiti definisana pravila za dotični jezik, potom za francuski, i na kraju pravila pod default, u pravilnom redoslijedu.</p>
 
 <p>Radi stvaranja praznog seta pravila, u gornjoj polovini dijaloga, klikni na <strong>Add</strong> . U dnu tabele pojaviće se jedan prazan redak. Setu pravila i jezičkom obliku promijeni naziv. Sintaksa jezičkog oblika odgovara sintaksi običnih izraza. Pogledaj donji odjeljak <a href="#Short_summary_of_regular-expression_constructs"> Kratak pregled konstrukcija običnih izraza</a> .</p>
 

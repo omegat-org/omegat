@@ -4,7 +4,7 @@
 
 1.7.1 vs. 1.7.2
 
-  5 Enhancements
+  6 Enhancements
   4 Bugfixes
 
 ----------------------------------------------------------------------
@@ -24,6 +24,7 @@ Contains a new localisation (Simplified Chinese) and bug fixes
   - French localisation updated to 1.7.1
   - Basque localisation updated to 1.7.1
   - Slovac localisation updated to 1.7.1
+  - Serbo-Croatian localisation updated to 1.7.1
  
  Bug fixes:
   

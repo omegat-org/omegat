@@ -1,7 +1,8 @@
-Ovaj prevod sačinio je Dragomir Kovačević, copyright© 2007.
+﻿Ovaj prevod sačinio je Dragomir Kovačević, copyright © 2007.
+
 
 ==============================================================================
-  OmegaT 1.6.2, datoteka Read Me
+  OmegaT 1.7.1, datoteka Read Me
 
   1.  Obavještenja o OmegaT
   2.  Šta je OmegaT?
@@ -53,22 +54,57 @@ Ako želiš da u kratkom roku sagledaš OmegaT, pokreni je i pročitaj Vodič za
 Priručnik za upotrebu nalazi se u paketu koji si upravo preuzeo/la s Interneta. Možeš mu pristupiti preko menija [Pomoć] pošto pokreneš OmegaT.
 
 ==============================================================================
- 3. Opšte napomene o Java & OmegaT
+ 3. Način instalacije OmegaT
 
-Za funkcionisanje OmegaT traži da tvom sistemu postoji instalisano okruženje Java Runtime Environment, verzija 1.4 ili viša. Ono se može preuzeti sa:
-    http://java.com
+3.1 Opšte napomene
+Za funkcionisanje OmegaT, potrebno je da u tvom sistemu postoji instalisano okruženje Java Runtime Environment, verzija 1.4 ili viša. Sada se OmegaT standardno isporučuje s ugrađenim Java Runtime Environment. Na taj način korisnici su pošteđeni svake brige oko izabiranja, pronalaženja i instalacije. Za korisnike na Windows-ima i Linux-u: Ako pouzdano znate da u vašem sistemu već postoji neka od pogodnih verzija JRE, možete u tom slučaju, staviti OmegaT bez JRE (ova naznaka postoji i u nazivu same verzije, tj. "Without_JRE"). Ako ste u dilemi, savjetujemo vam da koristite "standardnu" verziju, tj. sa JRE. Ovakvo rješenje je sasvim sigurno, jer, čak i da je JRE već instalirana na vašem sistemu, ova verzija njoj neće smetati.
+Korisnici na Linux-u: imajte u vidu da OmegaT ne radi pod implementacijama Java free/open-source, kakve se nalaze u mnogima distribucijama Linux-a (na primjer, u Ubuntu), pošto su one ili zastarjele ili nepotpune. Sa gornje poveznice preuzmite i instalirajte Java Runtime Environment (JRE), ili pak, preuzmite i instalirajte OmegaT s ugrađenim JRE (tar.gz bundle pod oznakom "Linux").
+Korisnici na Mac-u: JRE je već instalirana u operativnom sistemu Mac OS X.
+Linux na sistemima PowerPC: korisnici bi trebalo da preuzmu IBM JRE, pošto kompanija Sun ne proizvodi JRE za sisteme PPC. U ovom slučaju, preuzimajte sa:
+    http://www-128.ibm.com/developerworks/java/jdk/linux/download.html 
 
-Ukoliko to već nisu učinili, korisnici operativnih sistema Windows i Linux moraće instalisati Java-u.
-Projekt OmegaT takođe nudi i verzije sa uključenom Java-om. Korisnici MacOSX na svojim mašinama već imaju instalisanu Java-u.
+3.2 Instalacija
+Radi instalacije OmegaT, jednostavno napravite neki pogodni direktorijum za OmegaT (na pr. Na Windowsima: C:\Program 
+Files\OmegaT, ili na Linuxu: /usr/local/lib). Iskopirajte zipovanu arhivu OmegaT u ovaj direktorijum, i tamo je otpakujte.
 
-Na pravilno instalisanoj mašini OmegaT se može pokrenuti duplim klikom na datoteku OmegaT.jar.
+3.3 Pozivanje OmegaT
+OmegaT se može pozvati na više načina.
 
-Po instalaciji java-e, može se ukazati potreba za izmjenom varijable sistemske putanje kako bi ona uključila direktorijum u koji je smještena aplikacija 'java'.
+* Korisnici na Windows-ima: Ukoliko koristite verziju sa uključenim JRE, duplim klikom na datoteku OmegaT-JRE.exe, ili u suprotnom slučaju, na OmegaT.exe.
 
-Korisnici Linux-a moraju obratiti pažnju na činjenicu da OmegaT neće funkcionisati sa Java implementacijama free/open-source koja postoji u mnogim distribucijama Linux-a (na primjer u Ubuntu), pošto su one ili zastarjele ili su nekompletne. Preko gornjeg linka preuzmi s Interneta i instališi Sun's Java Runtime Environment (JRE), ili preuzmi OmegaT sa ugrađenim paketom JRE (tar.gz bundle s oznakom "Linux").
+* Duplim klikom na datoteku OmegaT.bat. Ako u vašem File Manager-u (Windows Explorer) vidite datoteku OmegaT, ali ne i OmegaT.bat, omogućite da se vide suifiksi datoteka u vašem sistemu.
 
-Na sistemima Linuxa pod sistemima PowerPC, korisnici će morati preuzeti IBM JRE, pošto kompanija Sun ne proizvodi JRE za PPC sisteme. Preuzimanje je moguće sa:
-    http://www-128.ibm.com/developerworks/java/jdk/linux/download.html
+* Duplim klikom na datoteku OmegaT.jar. Ovo će imati efekta samo ukoliko je u vašem sistemu, tip datoteke .jar, asociran sa Java-om.
+
+* S komandne linije. Komanda za pozivanje OmegaT je:
+
+cd <direktorijum gdje je locirana datoteka OmegaT.jar>
+
+<ime i putanja izvršne datoteke Java> -jar OmegaT.jar
+
+(izvršna datoteka Java u Linux-u je datoteka java, a na Windows-ima, java.exe.
+Akoje Java instalirana na sistemskom nivou, cijela putanja se i ne mora unositi.)
+
+* Korisnici na Windows-ima: Za datoteke OmegaT-JRE.exe, OmegaT.exe ili OmegaT.bat možete načiniti link na desktop ili Meni Start.
+
+* Korisnici Linux-a KDE: možete dodati OmegaT vašim menijima na slijedeći način:
+
+Control Center - Desktop - Panels - Menus - Edit K Menu - File - New Item/New 
+Submenu.
+
+Pošto ste odabrali pogodan meni, tada možete dodati submenu/item pomoću File - New 
+Submenu i File - New Item. Za ime novog "item" stavite OmegaT.
+
+U polju "Command", koristite navigaciono dugme za nalaženje vašeg skripta za pozivanje OmegaT, te ga selektujte. 
+
+Kliknite na dugme ikonice (s desne strane od Name/Description/Comment fields) 
+- Other Icons - Browse, te pronađite pod-direktorijum /images subfolder u aplikacijskom direktorijumu OmegaT. Odaberite ikonicu OmegaT.png.
+
+I na kraju, spasite promjene pomoću File - Save.
+
+* korisnici Linux GNOME: OmegaT možete dodati vašem panelu (traka pri vrhu ekrana) na slijedeći način:
+
+Desni-klik na panel - Add New Launcher. Unesite "OmegaT" u polje "Name"; U "Command" field-u,koristite navigaciono dugme za  nalaženje vašeg skripta za pozivanje OmegaT. Selektujte fa i potvrdite sa OK.
 
 ==============================================================================
  4. Doprinos razvoju OmegaT
@@ -104,7 +140,7 @@ Za razvoj koda
   Martin Wunderlich
 
 Lokalizaciju su potpomogli
-  Roberto Argus (brazilski portugalski)
+ Roberto Argus (brazilski portugalski)
   Alessandro Cattelan (talijanski)
   Sabine Cretella (njemački)
   Suzanne Bolduc (esperanto)
@@ -115,32 +151,33 @@ Lokalizaciju su potpomogli
   Takayuki Hayashi (japanski)
   Jean-Christophe Helary (francuski i japanski)
   Yutaka Kachi (japanski)
+  Dragomir Kovačević (srpskohrvatski)
   Elina Lagoudaki (grčki)
-  Martin Lukáč (slovački)
+  Martin LukÃ¡č (slovački)
+  Ahmet Murati (albanski)
   Samuel Murray (afrikaans)
   Yoshi Nakayama (japanski)
+  Claudio Nasso (italijanski)
   David Olveira (portugalski)
   Ronaldo Radunz (brazilski portugalski)
   Thelma L. Sabim (brazilski portugalski)
   Juan Salcines (španski)
   Pablo Roca Santiagio (španski)
+  Sonja Tomašković (njemački)
   Karsten Voss (poljski)
   Gerard van der Weyde (holandski)
   Martin Wunderlich (njemački)
   Hisashi Yanagida (japanski)
   Kunihiko Yokota (japanski)
-  Erhan Yükselci (turski)
-  Dragomir Kovačević (srpskohrvatski)
-  Claudio Nasso (italijanski)
-  Ahmet Murati (albanski)
-  Sonja Tomašković (njemački)
+  Erhan YÃ¼kselci (turski)
+  Mikel Forcada Zubizarreta (Catalan) 
 
 Ostali doprinosi
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (sadašnji vođa za dokumentaciju)
+  Jean-Christophe Helary (documentation manager)
   Samuel Murray
-  Marc Prior (sadašnji vođa za lokalizaciju)
+  Marc Prior (localization manager)
   i mnogi, mnogi drugi ljudi koji su bili od velike pomoći
 
 (Ako smatraš da je i tvoj doprinos Projektu OmegaT bio od značaja, a ne vidiš, pak, svoje ime na listi, molimo te, stupi s nama u vezu oko toga.)
@@ -180,30 +217,6 @@ Radi praćenja zbivanja u vezi izvještaja o bug-u, možeš se kao korisnik regi
 ==============================================================================
 6.   Detalji o ovoj verziji
 
-5.  Da li te OmegaT zamara zbog bug-ova? Treba li ti pomoć?
-
-Prije nego prijaviš bug, provjeri da li si detaljno pregledao/la dokumentaciju. Ono što zapažaš, u stvari može biti neka od odlika OmegaT koju si upravo otkrio/la. Ako provjeriš log datoteku OmegaT i zapaziš riječi "Greška", "Upozorenje", "Izuzetak", ili "iznenadno se prekinula", onda si na tragu nečemu (log.txt nalazi se u 'user preferences' direktorijumu, radi određivanja njegove pozicije pogledaj u priručnik).
-
- Sljedeće što bi trebalo da uradiš je da svoje nalaze potvrdiš kroz kontakte sa ostalim korisnicima. Ovo stoga da ne bi prijavljivao/la nešto o čemu od ranije postoje podaci. Radi provjere, možeš posjetiti i stranicu za prijavu bug-ova, na SourceForge. Tek kada si siguran/na da si prvi korisnik koji otkriva neku sekvencu događaja koja se dade reprodukovati a koja je prouzrokovala nepredviđeno ponašanje, trebalo bi da priložiš svoj izvještaj.
-
-Svaki valjan izvještaj o bug-u mora ispunjavati tri uslova.
-  - Proceduru za njegovo reprodukovanje,
-  - Stav o onome što se trebalo dobiti određenom komandom, i
-  - Šta se s njom doista dobilo.
-
-Takođe možeš pridodati i kopije datoteka, dijelove log-a, snimke sa monitora, i bilo šta što smatraš da će informatičarima za razvoj, pomoći u pronalaženju i popravci nađenog bug-a.
-
-Radi uvida u arhivu mailing liste korisnika, idi na:
-     http://tech.groups.yahoo.com/group/omegat/
-
-Radi uvida u izvještaje o bug-ovima i prilaganja svog ev. potrebnog bug izvještaja, idi na:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
-
-Radi praćenja zbivanja u vezi izvještaja o bug-u, možeš se kao korisnik registrovati na Source Forge.
-
-==============================================================================
-6.   Detalji o ovoj verziji
-
 Radi detaljnijih obavještenja o promjenama kod ove i svih prethodnih verzija, pogledaj datoteku 'changes.txt'.
 
 Podržani formati datoteka obuhvaćaju:
@@ -216,19 +229,13 @@ Podržani formati datoteka obuhvaćaju:
   - PO datoteke
   - DocBook documentation datotečki format
   - datoteke Microsoft OpenXML
+  - Okapi monolingual XLIFF datoteke
 
 Izmjene u core djelu softvera:
-  - Fleksibilna (rečenična) segmentacija
-  - Formati filtera za datoteke mogu se napraviti u vidu plugins
-  - Prerađeni kod sa mnogo više komentara
-  - Windows instaler
-  - Atributi HTML tagova mogu se prevoditi
-  - Puna kompatibilnost sa TMX 1.1-1.4b Level 1
-  - Djelimična podrška TMX 1.4b Level 2
+  -
 
-Nove odlike korisničke radne površine (u odnosu na seriju OmegaT 1.4):
-  - Iznova napisana radna površina pojačane funkcionalnosti
-  - Glavna radna površina je poboljšana zahvaljujući oknima koji se mogu pripojiti
+Nove odlike korisničke površine (u odnosu na seriju OmegaT 1.6):
+  -
 
 ==============================================================================
 

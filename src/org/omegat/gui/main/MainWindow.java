@@ -378,6 +378,12 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                 editorScroller.setName(file);
             } catch( Exception e ) { }
         }
+        // Fix for bug [1730935] Editor window still shows filename after closing project and
+        // RFE [1604238]: instant start display in the main window
+        else
+        {
+            loadInstantStart();
+        }
         setTitle(s);
     }
     

@@ -4,8 +4,8 @@
 
 1.7.1 vs. 1.7.2
 
-  6 Enhancements
-  4 Bugfixes
+  7 Enhancements
+  5 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.2
@@ -17,6 +17,8 @@ Contains a new localisation (Simplified Chinese) and bug fixes
   
   - Have a more complete ISO 639 list in the UI
   http://sourceforge.net/support/tracker.php?aid=1755240
+  - instant start display in the main window
+  http://sourceforge.net/support/tracker.php?aid=1604238
 
  Other enhancements:
 
@@ -36,6 +38,8 @@ Contains a new localisation (Simplified Chinese) and bug fixes
   http://sourceforge.net/support/tracker.php?aid=1762625
   - readme_pt_BR.txt is garbled (incorrect encoding?)
   http://sourceforge.net/support/tracker.php?aid=1631735
+  - Editor window still shows filename after closing project
+  http://sourceforge.net/support/tracker.php?aid=1730935 
 
 ----------------------------------------------------------------------
  OmegaT 1.7.1 Changes

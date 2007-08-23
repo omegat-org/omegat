@@ -2,21 +2,23 @@
  OmegaT 1.7.2 Changes
 ----------------------------------------------------------------------
 
-1.7.1 vs. 1.7.2
+1.7.2 vs. 1.7.1
 
-  7 Enhancements
+
+  8 Enhancements
   5 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.2
 
 
-Contains a new localisation (Simplified Chinese) and bug fixes
+Contains two new localisations (Simplified Chinese and Traditional Chinese) and bug fixes
 
  Implemented requests:
   
   - Have a more complete ISO 639 list in the UI
   http://sourceforge.net/support/tracker.php?aid=1755240
+
   - instant start display in the main window
   http://sourceforge.net/support/tracker.php?aid=1604238
 
@@ -27,17 +29,22 @@ Contains a new localisation (Simplified Chinese) and bug fixes
   - Basque localisation updated to 1.7.1
   - Slovac localisation updated to 1.7.1
   - Serbo-Croatian localisation updated to 1.7.1
+  - Traditional Chinese 1.6.2 localisation
  
  Bug fixes:
   
   - Incorrect/unclear data in project_save.txt  
   http://sourceforge.net/support/tracker.php?aid=1616247
+
   - regression in the JA UI strings 1.7.1 test
   http://sourceforge.net/support/tracker.php?aid=1749787
+
   - Only try to get MediaWiki page if a string has been entered
   http://sourceforge.net/support/tracker.php?aid=1762625
+
   - readme_pt_BR.txt is garbled (incorrect encoding?)
   http://sourceforge.net/support/tracker.php?aid=1631735
+
   - Editor window still shows filename after closing project
   http://sourceforge.net/support/tracker.php?aid=1730935 
 

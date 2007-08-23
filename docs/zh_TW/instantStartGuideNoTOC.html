@@ -1,0 +1,188 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>快速指南 - OmegaT使用手冊1.6.2版</title>
+</head>
+<body>
+
+<h1>快速指南</h1>
+<p>或<strong> OmegaT五分鐘即上手</strong></p>
+
+<p><strong>快速指南只涵蓋基礎內容。理論上，所有使用者應閱讀使用手冊，以熟悉OmegaT的所有功能及使用方法。欲讀取使用手冊，請按F1鍵。以下所提的捷徑是採用「ctrl+指定鍵」，Mac使用者應使用「cmd+指定鍵」。「cmd」鍵即Apple鍵盤上標有蘋果圖標的按鍵。</strong></p>
+
+<h2>內容</h2>
+   <ol><li>簡介OmegaT</li>
+   <li>如何用OmegaT翻譯</li>
+   <li>處理標記文字</li></ol>
+
+<hr>
+
+<a name="Briefly.2C_how_OmegaT_works"></a>
+<h2>1. 簡介OmegaT</h2>
+
+<p>OmegaT顯示螢幕有三個不同視窗。 每個視窗可用滑鼠調整大小。左側為編輯視窗，即您鍵入翻譯的地方。右上角為配對視窗，即呈現翻譯記憶配對的地方。右下角為單字庫視窗，即呈現單字配對的地方。</p>
+
+<p>在編輯視窗中，OmegaT將原文按「句子」或「段落」分節（見手冊請按<strong>F1</strong>）。您逐一翻譯這些分節（segments）。在您處理這些分節時，翻譯結果即記錄至翻譯記憶中。所有分節翻譯完畢之後（或之前，若您要求的話），OmegaT會使用翻譯記憶在「目標」資料夾中產生翻譯過的文件。</p>
+
+<p>OmegaT將您的翻譯作品組織成「翻譯方案」。OmegaT會在每個方案中建立一組資料夾。這些資料夾用來儲存要進行翻譯的原文、您也許會希望使用的單字庫、以及您也許會想使用的翻譯記憶。OmegaT也會建立一個「目標」資料夾來儲存最終翻譯稿。</p>
+
+<hr>
+<a name="How_to_translate_using_OmegaT"></a>
+<h2>2. 如何用OmegaT翻譯</h2>
+
+<a name="Create_and_open_a_new_project"></a>
+<h3>a. 建立及開啟新方案</h3>
+
+<p>由功能表選取 <strong>方案-&gt; 新增方案</strong></p>
+
+<p>瀏覽至您希望儲存專案檔案的資料夾，鍵入此翻譯專案的名稱。您所命名的資料夾將用作方案的主要資料夾；所有方案檔案將儲存在這個資料夾或子資料夾。</p>
+
+<p>OmegaT將會提示您確認或改變您要建立的方案資料夾，對話框內容如下：</p>
+
+<center><img src="images/NewProject.png" alt="方案設定視窗" ></center>
+
+<p>您可以直接接受子資料夾的儲存位置，但請先確定原文和翻譯語言代碼是正確的。從下拉選單中選取語言代碼（2字母）或語言-地區代碼（2+2字母），或手動輸入代碼（請按照2字母原則）。請記住目標子資料夾（即儲存翻譯稿的資料夾）的儲存位置。</p>
+
+<p>若您要OmegaT逐句而非逐段分節，請再次確認「分節原則」。</p>
+
+<p>當您按「確認」接受方案的設定後，OmegaT會提示您選取欲匯入的原文檔案。您可匯入個別檔案或整個目錄階層（即所有子資料夾中的所有檔案）。若您意外匯入不正確的文件或過多文件，可直接從您建立的方案中的原文資料夾中移除文件（例如：使用系統檔案管理員）。</p>
+
+<p>若要檢查您要翻譯的檔案清單，請查閱<strong>方案檔案</strong>視窗（若該視窗無自動開啟，請找功能表：<strong>方案 → 方案檔案...</strong>）。若您已改變原文資料夾的內容，請記得重新開啟該方案（功能表：<strong>方案 → 重新開啟</strong>）。OmegaT會開啟方案中預設的第一個檔案。</p>
+
+<p>請記住，OmegaT只能翻譯以下幾種檔案格式。其他各類檔案將被忽略。<ul>
+<li>Open Document Format (ODF ISO/IEC 26300)</li>
+<li>OpenOffice.org </li>
+<li>XHTML, HTML </li>
+<li>HTML說明編譯器（HCC）</li>
+<li>DocBook </li>
+<li>純文字檔</li>
+<li>bundle.properties Java </li>
+<li>monolingual .po </li>
+<li>INI 組態設定檔('key=value' 格式)</li>
+</ul>
+</p>
+
+<a name="Translate_the_segments_one_by_one"></a>
+<h3>b. 逐一翻譯分節</h3>
+
+<p>您定義需要翻譯的方案和檔案後，OmegaT會在編輯視窗中開啟第一個原文檔案。第一個分節以綠底強調；原文會複製在下方的「目標欄位」中。（目標欄位外的所有文字都受到保護且無法更改。）您必須在標記&lt;分節0001&gt;和&lt;分節端&gt;之間覆寫原文並輸入您的翻譯。</p>
+
+<p>按「<strong>輸入（Enter）</strong>」鍵至下一個分節。</p>
+
+<p>注意：<br>若要移動至文體的任何其他部分，不管是往上或往下，在您要開啟的句子或段落按兩下。<br>若您偏好在空白的目標欄位內翻譯，請設定以下選項：<strong>選項 → 編輯行為...</strong></p>
+
+<p>當您按「<strong>輸入</strong>」時，軟體即在幕後進行多項作業： <br>OmegaT會將「分節對」（原文及其翻譯）加入翻譯記憶，若偵測到其他方案檔案中任何完全相符的分節，OmegaT會自動插入翻譯。OmegaT也會為下一個未翻譯分節進行掃瞄翻譯記憶和單字庫，以尋找配對。</p>
+
+<a name="Use_TM_and_glossary_matches"></a>
+<h3>c. 使用翻譯記憶和單字庫配對</h3>
+
+<a name="TM_matches"></a>
+<h4>1. 翻譯記憶配對</h4>
+
+<p>若OmegaT從翻譯記憶找到下個分節的任何模糊配對（30%或以上；見使用手冊），OmegaT會將配對呈現在配對視窗。在配對視窗中的第一個配對會預設為預先選擇。</p>
+<p>若要將翻譯記憶配對從配對視窗插入您的目標欄位中，您可使用鍵盤捷徑：<br>
+<ul>
+   <li>按 <code>Ctrl+I</code>將預先選擇配對插入游標位置，或...</li>
+   <li>按<code>Ctrl+R</code>讓預先選擇配對覆寫整個分節。</li>
+</ul>
+</p>
+
+<p>若找到數個配對，而您不想使用預先選擇配對：<br>
+<ul>
+	<li>在配對視窗中選取您要的配對：按<code>Ctrl+2</code>設定為第二配對，<code>Ctrl+3</code>設定第三配對，以此類推。 </li>
+	<li>然後使用<code>Ctrl+I</code> 或 <code>Ctrl+R</code>捷徑，如上述。 </li>
+</ul>
+</p>
+
+<p>（您可指定OmegaT，每當分節開啟時，自動將配對比例超出特定值的第一個配對，插入目標欄位中。設定此功能項，請至 <strong>選項 → 編輯行為...</strong>）</p>
+
+<a name="Glossary_matches"></a>
+<h4>2. 單字庫配對</h4>
+
+<p>若OmegaT在單字庫找到100%符合的名詞，這些名詞會顯示在單字庫視窗中，以供參考。這些名詞無法用捷徑轉移至翻譯中。</p>
+
+<a name="Create_the_translated_documents"></a>
+<h3>d. 建立翻譯文件</h3>
+
+<p>當您翻譯完所有分節（或在完成翻譯前），OmegaT會使用儲存在翻譯記憶的翻譯內容來更新目標文件。</p>
+
+<p>方法如下：從功能表選取<strong>方案 → 建立翻譯文件</strong> </p>
+
+<p>OmegaT會將方案的原文資料夾中所有可翻譯文件建立為翻譯版本，無論是否已完成翻譯。完全或部分已翻譯檔案將儲存於方案的目標資料夾中。</p>
+
+<p>欲檢視翻譯檔案，可用相關應用程式（如：瀏覽器、文書處理器）開啟目標檔案來檢查翻譯內容及格式。您可回到OmegaT做任何必要的修正。請記得重新建立翻譯文件。</p>
+
+<hr>
+<a name="Dealing_with_tagged_text"></a>
+<h2>3. 處理標記文字</h2>
+
+<p>OmegaT使用特殊標記保留原文文件格式（如：粗體、斜體），確保格式不會流失。OmegaT標記由一個或多個字母組成，其後附加一個或多個數字，有時也會使用「/」記號（如：&lt;f0&gt;, &lt;br10/&gt;, &lt;/s2&gt;）。</p>
+
+<p>您必須謹慎處理這些標記，並確保標記能正確地包含在目標分節中。（請閱讀OmegaT使用手冊以取得進一步標記編輯說明。）</p>
+
+<a name="An_example..."></a>
+<h3>a. 舉例：</h3>
+
+<p>以下範例中，我們將標記呈現為<font color="#ff0000">紅色</font>以利閱讀，但在OmegaT的正常操作中，標記不會呈現為紅色。</p>
+
+<p>
+<strong>以下是一個翻譯分節，格式為HTML：</strong>
+</p>
+
+<p>
+<code><font color="#ff0000">&lt;p&gt;</font>A different display font can be 
+selected via the <font color="#ff0000">&lt;b&gt;</font>Display 
+Font<font color="#ff0000">&lt;/b&gt;</font> dialog.  Open it via the 
+
+<font color="#ff0000">&lt;i&gt;</font>Settings<font color="#ff0000">&lt;/i&gt;</font> 
+&amp;gt; <font color="#ff0000">&lt;i&gt;</font>Display 
+Font...<font color="#ff0000">&lt;/i&gt;</font> menu item.  The font type and 
+size can be changed from the dialog.<font color="#ff0000">&lt;/p&gt;</font></code>
+</p>
+
+<p>
+<strong>以下是OmegaT的顯示方式，標記以紅色強化：</strong>
+</p>
+
+<p>
+<code>A different display font can be selected via the 
+<font color="#ff0000">&lt;b0&gt;</font>Display 
+Font<font color="#ff0000">&lt;/b0&gt;</font> dialog.  Open it via the 
+
+<font color="#ff0000">&lt;i1&gt;</font>Settings<font color="#ff0000">&lt;/i1&gt;</font> 
+&gt; <font color="#ff0000">&lt;i2&gt;</font>Display 
+Font...<font color="#ff0000">&lt;/i2&gt;</font> menu item.  The font type and 
+size can be changed from the dialog.</code>
+</p>
+
+<p>
+<strong>以下是您進行翻譯的格式：</strong>
+</p>
+
+<p>
+<code>透過<font color="#ff0000">&lt;b0&gt;</font>顯示字體<font color="#ff0000">&lt;/b0&gt;</font>對話框可選取不同的顯示字體。請由功能表項目中選取 <font color="#ff0000">&lt;i1&gt;</font>設定<font color="#ff0000">&lt;/i1&gt;</font> &gt; <font color="#ff0000">&lt;i2&gt;</font>顯示字體<font color="#ff0000">&lt;/i2&gt;</font>來開啟對話框。字體種類及大小可在對話框中更改。</code>
+</p>
+
+<p>
+<strong>OmegaT建立翻譯文件時，HTML會呈現如下：</strong>
+</p>
+
+<p>
+<code><font color="#ff0000">&lt;p&gt;</font>透過<font color="#ff0000">&lt;b&gt;</font>顯示字體<font color="#ff0000">&lt;/b&gt;</font>對話框可選取不同的顯示字體。 請由功能表項目中選取<font color="#ff0000">&lt;i&gt;</font>設定<font color="#ff0000">&lt;/i&gt;</font> &amp;gt; <font color="#ff0000">&lt;i&gt;</font>顯示字體<font color="#ff0000">&lt;/i&gt;</font> 來開啟對話框。 字體種類及大小可在對話框中更改。<font color="#ff0000">&lt;/p&gt;</font> </code>
+</p>
+
+<a name="Tag_verification"></a>
+<h3>b. 驗證標記</h3>
+
+<p>OmegaT不會自動偵測翻譯文件中的標記是否有誤。因此在您傳遞文件給您的客戶前，應先檢查標記是否有誤。</p>
+
+<p>請由功能表選取<strong>工具 → 驗證標記</strong>。表格中會顯示原文檔和目標檔出現不相符的分節。在分節號碼上按一下。</p>
+
+<p>OmegaT將在編輯器裡自動跳至錯誤分節處，方便您修正標記。</p>
+
+<p>有時標記出現錯誤可能會導致檔案無法開啟。因此，您必須在建立翻譯文件前修正任何不正確的標記。</p>
+
+<p>最後，您一定要在相關的編輯器或檢視器中開啟翻譯文件，並重新檢查最終翻譯格式。</p>
+<hr>
+</body>
+</html>

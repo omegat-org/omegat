@@ -1,0 +1,117 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Vertaalgeheugens - OmegaT 1.6.2 Gebruikershandleiding</title>
+</head>
+<body>
+
+<h1>Vertaalgeheugens</h1>
+
+<h2>Inhoud</h2>
+
+<ul type="none">
+   <li>1. <a href="#OmegaT_en_TMXbestanden">OmegaT en TMX-bestanden</a>
+
+      <ul type="none">
+         <li><a href="#TMX_bestandlocatie_en_doel">TMX-bestandlocatie en doel</a></li>
+         <li><a href="#TMXbestanden_en_taal">TMX-bestanden en taal</span></a></li>
+      </ul>
+   </li>
+
+   <li>2. <a href="#Een_geheugen_van_uw_vertaling_bijhouden_met_OmegaT">Een geheugen van uw vertaling bijhouden met OmegaT</a></li>
+
+   <li>5. <a href="#Geheugens_gebruiken_gemaakt_met_andere_vertaalprogrammas">Geheugens gebruiken die gemaakt zijn met andere vertaalprogramma's</span></a>
+
+      <ul type="none">
+         <li>5.1. <a href="#Bestanden_importeren">Bestanden importeren</a></li>
+         <li>5.2. <a href="#Geïmporteerde_bestanden_afhandelen">Geïmporteerde bestanden afhandelen</a></li>
+      </ul>
+   </li>
+
+   <li>6. <a href="#OmegaT_vertaalgeheugens_gebruiken_in_andere_vertaalprogrammas">OmegaT vertaalgeheugens gebruiken in andere vertaalprogramma's</a></li>
+   <li>7. <a href="#Vertaalgeheugens_bijwerken">Vertaalgeheugens bijwerken</a></li>
+</ul>
+
+<a name="OmegaT_and_TMX_files"></a>
+<h2>OmegaT en TMX-bestanden</h2>
+
+<a name="TMX_files_location_and_purpose"></a>
+<h3>TMX-bestandlocatie en doel</h3>
+
+<p>OmegaT gebruikt TMX-bestanden op 3 afzonderlijke locaties.</p>
+
+<ul>
+   <li>De map /omegat/ bevat <strong>project_save.tmx</strong> en eventueel een aantal backups van TMX-bestanden. Het bestand project_save.tmx bevat <strong>alle</strong> segmenten die zijn onthouden sinds u het project startte.</li>
+
+   <li>De hoofdmap van het project zal 3 TMX-bestanden bevatten: <strong>&lt;project_naam&gt;-omegat.tmx</strong>, <strong>&lt;project_naam&gt;-level1.tmx</strong> en <strong>&lt;project_naam&gt;-level2.tmx</strong>, waar <code>&lt;project_naam&gt;</code> eenvoudigweg de naam van uw project is. Deze bestanden worden geëxporteerd als TMX-bestanden en bevatten alleen de vertaalde paren.<ul>
+         <li>&lt;project_naam&gt;-level1.tmx is een TMX die alleen tekstuele informatie bevat.</li>
+
+         <li>&lt;project_naam&gt;-level2.tmx is een TMX die OmegaT-specifieke tags opneemt binnen correcte TMX-tags zodat het bestand in een vertaalprogramma, dat TMX-niveau 2 ondersteunt, kan worden gebruikt met zijn opmaakinformatie of in OmegaT zelf.</li>
+
+         <li>&lt;project_naam&gt;-omegat.tmx is een TMX die OmegaT-specifieke opmaaktags bevat zodat het bestand met zijn opmaakinformatie kan worden gebruikt in een ander OmegaT-project.</li>
+      </ul>
+   </li>
+
+   <li>De map /tm/ kan elk aantal TMX-bestanden bevatten. Zulke bestanden moeten correcte TMX-bestanden zijn en kunnen ofwel alleen tekstuele informatie bevatten (niveau 1 TMX), OmegaT tekstuele en opmaakinformatie (omegat TMX) of TMX tekstuele en opmaakinformatie (niveau 2 TMX).</li>
+</ul>
+
+<a name="TMX_files_and_language"></a>
+<h3>TMX-bestanden en taal</h3>
+
+<p>TMX-bestanden bevatten <i>vertaaleenheden</i> die zijn gemaakt van een aantal equivalente segmenten in verschillende talen. Een vertaaleenheid is ten minste gemaakt uit twee <i>vertaaleenheid variaties</i> (tuv). Beide kunnen als bron of doel worden gebruikt.</p>
+
+<p>De instellingen in uw project zullen aangeven wat de bron- en wat de doeltaal is. OmegaT zal dus de <strong>tuv</strong> nemen die overeenkomt met project brontaalcode en dat segment gebruiken als het bronsegment en het zal de <strong>tuv</strong> nemen die overeenkomt met de project doeltaalcode en dat segment gebruiken als het doelsegment.</p>
+
+<p>Taalcodes bestaan in een aantal vormen. OmegaT herkent momenteel alleen codes die er uitzien als:</p>
+
+<ul><li>De taalcode in 2 letters (bijvoorbeeld: <strong>JA</strong> voor Japans)</li></ul>
+
+<p>of</p>
+
+<ul><li>De taalcode in twee letters en de landcode in twee letters, gescheiden door een afbreekstreepje (bijvoorbeel: <strong>JA-JP</strong> voor Japans zoals het wordt gebruikt in Japan)</li></ul>
+
+<p>Als de projecttaalcodes en de TMX-taalcodes volledig overeenkomen worden de segmenten in het geheugen geladen. Als codes alleen met de taal overeekomen, maar niet de landcode worden de segmenten ook in het geheugen geladen. Als de taalcode, noch de landcode overeenkomen worden de segmenten niet in het geheugen geladen.</p>
+
+<a name="Keeping_a_memory_of_your_translation_with_OmegaT"></a>
+<h2>Een geheugen van uw vertaling bijhouden met OmegaT</h2>
+
+<p>Het bestand project_save.tmx bevat <strong>alle</strong> segmenten die zijn onthouden sinds u het project startte. Als u bijvoorbeeld een aanpassing doet aan de projectsegmentatie,zal project_save.tmx nieuwe vertalingsparen maken maar zal alle eerder informatie behouden. Dit zal af en toe leiden tot het weergeven van <strong>wezen tekenreeksen</strong> in het venster Overeenkomsten. Zulke overeenkomsten verwijzen niet langer naar bestaande segmenten, maar naar segmenten die werden opgenomen vóór de aanpassingen plaatsvonden. Als de aanpassing een vergissing was, ga dan terug naar de eerdere instellingen en de oudere opnamen zullen weer verschijnen.</p>
+
+<a name="Using_memories_created_by_other_translation_tools"></a>
+<h2>Geheugens gebruiken die gemaakt zijn met andere vertaalprogramma's</h2>
+
+<a name="Importing_files"></a>
+<h3>Bestanden importeren</h3>
+
+<p>OmegaT ondersteunt de import van TMX versies 1.1-1.4b (zowel niveau 1 als niveau 2). Dit maakt het mogelijk dat de vertaalgeheugens die zijn gemaakt door andere programma's kunnen worden gelezen door OmegaT.</p>
+
+<p>OmegaT ondersteunt echter niet <i>volledig</i> geïmporteerde niveau 2 TMX-bestanden (die niet alleen de vertaling opslaan, maar ook de opmaak), dus zal de kwaliteit van de fuzzy overeenkomsten iets minder zijn bij het importeren van niveau 2 TMX-bestanden.</p>
+
+<a name="Imported_files_handling"></a>
+<h3>Geïmporteerde bestanden afhandelen</h3>
+
+<p>OmegaT volgt zeer strikte procedures bij de afhandeling van bestanden van vertaalgeheugens (TMX-bestanden).</p>
+
+<p>Als een fout in een dergelijk bestand wordt gevonden zal OmegaT het eenvoudigweg niet laden.</p>
+
+<p>Sommige programma's staan er om bekend dat zij in enkele gevallen ongeldige TMX-bestanden maken. Als u dergelijke bestanden als verwijzingen voor vertalingen in OmegaT wilt gebruiken, moeten zij worden gerepareerd als OmegaT ze weigert. Reparaties zijn kleine bewerkingen en OmegaT zal indicaties geven in het gerelateerde foutbericht. U kunt advies aan de gebruikersgroep vragen als u zich overweldigd voelt.</p>
+
+<a name="Using_OmegaT_translation_memories_in_other_translation_tools"></a>
+<h2>OmegaT vertaalgeheugens gebruiken in andere vertaalprogramma's</h2>
+
+<p>OmegaT exporteert TMX-bestanden versie 1.4 (zowel niveau 1 als niveau 2). De export van niveau 2 is geen standaard niveau 2 maar is goed genoeg om correcte overeenkomsten te genereren in TMX niveau 2 ondersteunende vertaalprogramma's.</p>
+
+<p>Als u alleen tekstuele informatie wilt (en geen opmaakinformatie), gebruik dan het niveau 1-bestand dat OmegaT heeft gemaakt.</p>
+
+<a name="Upgrading_Translation_Memories"></a>
+<h2>Vertaalgeheugens bijwerken</h2>
+
+<p>Eerdere versies van OmegaT waren slechts in staat uw bronbestanden in alinea's te segmenteren en nummerden de opmaaktags in HTML en Open Document files niet consistent. OmegaT 1.6.2 kan dergelijke TMX-bestanden herkennen en direct bijwerken om de kwaliteit van de fuzzy overeenkomsten te vergroten en uw vertaling op peil te brengen -- zodat u niet alles over hoeft te doen.</p>
+
+<p>De TMX van een project wordt maar één keer bijgewerkt en zal in de bijgewerkte vorm worden weggeschreven en eerder gemaakte TMX-bestanden worden direct bijgewerkt, elke keer als het project wordt geladen. Wees er attent op dat sommige wijzigingen in bestandsfilters in OmegaT 1.6.2 zouden kunnen leiden tot totaal afwijkende segmentatie. Dus in zeer uitzonderlijke gevallen moet u uw vertaling handmatig bijwerken.</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Auteursrechten">Auteursrechten</a></p>
+
+</body>
+</html>

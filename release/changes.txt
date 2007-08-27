@@ -5,7 +5,7 @@
 1.7.2 vs. 1.7.1
 
 
-  8 Enhancements
+  9 Enhancements
   5 Bugfixes
 
 ----------------------------------------------------------------------
@@ -30,6 +30,7 @@ Contains two new localisations (Simplified Chinese and Traditional Chinese) and 
   - Slovac localisation updated to 1.7.1
   - Serbo-Croatian localisation updated to 1.7.1
   - Traditional Chinese 1.6.2 localisation
+  - Dutch 1.6.2 localisation
  
  Bug fixes:
   

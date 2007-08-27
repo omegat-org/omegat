@@ -1,0 +1,121 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Bestandsfilters - OmegaT 1.6.2 Gebruikershandleiding</title>
+</head>
+<body>
+
+<h1>Bestandsfilters</h1>
+
+<h2>Inhoud</h2></div>
+
+<ul type="none">
+   <li>1. <a href="#Introductie">Introductie</a>
+
+      <ul type="none">
+         <li>1.1. <a href="#Bestandstypen">Bestandstypen</a></li>
+         <li>1.2. <a href="#Bestandscoderingen">Bestandscoderingen</a></li>
+         <li>1.3. <a href="#Vertaalde_bestanden_hernoemen">Vertaalde bestanden hernoemen</a></li>
+      </ul>
+   </li>
+
+   <li>2. <a href="#Instellen_van_bestandsfilters">Instellen van bestandsfilters</a>
+
+      <ul type="none">
+         <li><a href="#dialoogvenster_Bestandsfilters">dialoogvenster Bestandsfilters</a></li>
+         <li><a href="#dialoogvenster_Filter_bewerken">dialoogvenster Filter bewerken</a></li>
+         <li><a href="#dialoogvenster_Patroon_toevoegen_bewerken">dialoogvenster Patroon toevoegen/bewerken</a></li>
+      </ul>
+   </li>
+</ul>
+
+<a name="Introduction"></a>
+<h2>#Introductie</h2>
+
+<p>OmegaT omvat zeer aanpasbare filters die u in staat stellen de meeste aspecten van hun werking in te stellen.</p>
+
+<p>Bestandsfilters zijn gedeelten van code die in staat zijn om:</p>
+
+<ul>
+   <li>Het document in enkele specifieke bestandsformaten te lezen. Bijvoorbeeld platte tekst-bestanden.</li>
+   <li>De te vertalen inhoud uit het bestand te halen.</li>
+   <li>Automatische wijzigingen in de vertaalde bestandsnamen van de documenten te maken door de te vertalen inhoud te vervangen door de vertaling.</li>
+</ul>
+
+<a name="File_types"></a>
+<h3>Bestandstypen</h3>
+
+<p>Als OmegaT een bestand tegenkomt in zijn bronmap, probeert dat het filter te selecteren met behulp van de extensie van het bestand. Meer precies: OmegaT probeert of van elk filter het patroon van de bestandnaam overeenkomt met de bestandsnaam. Het <code>*.xhtml</code>-patroon zal bijvoorbeeld overeenkomen met elk bestand met de extensie <code>.xhtml</code>. Als het juiste filter is gevonden wordt dat voor verdere verwerking toegepast op het betreffende bestand. Standaard zal bijvoorbeeld het XHTML-filter worden gebruikt bij het verwerken van bestanden met de extensie <code>.xhtml</code>. U kunt bestandsnaam-patronen toevoegen of wijzigen aan elk bestandsfilter dat u bestanden wilt laten afhandelen.</p>
+
+<a name="File_encodings"></a>
+<h3>Bestandscoderingen</h3>
+
+<p>Platte tekst- en HTML-bestanden kunnen in een grote verscheidenheid aan coderingen worden opgeslagen. Waar HTML-bestanden een ingestelde regel hebben voor codering en OmegaT die zal gebruiken om het bestand te lezen, hebben tekstbestanden geen vastgestelde wijze om dat te specificeren. Voor zowel tekst- als HTML-bestanden zonder vermelding van de coderingsregel zal OmegaT de codering gebruiken die u instelt voor een specifieke extensie. Standaard worden bijvoorbeeld <code>.txt</code>-bestanden geladen met behulp van de standaardcodering van het besturingssysteem. U kunt de broncodering voor elk verschillend bronbestandsnaam-patroon wijzigen.</p>
+
+<p>HTML en platte tekst-bestanden kunnen ook in elke codering worden weggeschreven. Als u bijvoorbeeld vanuit het Frans naar het Japans vertaald kunt u een filter instellen om één van de Japanse doelcoderingen te gebruiken, of UTF-8, UTF-16 of UTF-32 Unicode coderingen gebruiken. Standaard is de codering waarin het bestand wordt opgeslagen dezelfde codering als die welke werd gebruikt bij het laden van tekstbestanden en UTF-8 voor HTML-bestanden. Merk op dat het HTML-filter een vermelding van de codering aan het doelbestand toevoegt zodat de browser het zal zien en geen vervormde tekens zal weergeven.</p>
+
+<a name="Renaming_Translated_Files"></a>
+<h3>Vertaalde bestanden hernoemen</h3>
+
+<p>Soms wilt u misschien de bestanden die u vertaalde automatisch hernoemen, bijvoorbeeld door een taalcode achter de bestandsnaam te zetten. U kunt dit ook doen in een dialoogvenster voor bestandsfilters met behulp van het doelbestandsnaam-patroon.</p>
+
+<a name="File_Filters_Setup"></a>
+<h2>Instellen van bestandsfilters</h2>
+
+<p>De meeste gebruikers zullen tevreden zijn met de standaard ingestelde opties voor de bestandsfilters. Als u dat niet bent opent u het hoofddialoogvenster door in het hoofdmenu <strong>Opties -&gt; Bestandsfilters...</strong> te selecteren. Merk op dat u de filteropties alleen kunt wijzigen indien er geen project geopend is, omdat zij de manier beïnvloeden waarop de vertaalde bestanden worden gemaakt.</p>
+
+<a name="File_Filters_Dialog"></a>
+<h3>dialoogvenster Bestandsfilters</h3>
+
+<p>Het dialoogvenster toont de beschikbare bestandsfilters.</p>
+
+<p>Als u OmegaT niet wilt gebruiken om bepaalde bestandstypen te vertalen, kunt u het filter uitschakelen door het keuzevak naast de naam niet te selecteren. OmegaT zal dan de overeenkomstige bestanden weglaten bij het laden van projecten en zal ze ongewijzigd kopiëren bij het maken van de doeldocumenten. Als u later besluit het filter opnieuw te gebruiken, selecteer dan het keuzevak.</p>
+
+<p>Als u per ongeluk de gehele configuratie in de war schopt, klik dan op <strong>Defaults</strong> om de instellingen van de bestandsfilters terug te zetten naar de standaardstatus.</p>
+
+<p>Selecteer het filter uit de lijst en klik op <strong>Bewerken</strong> om te bewerken welke bestanden in welke coderingen het filter zal verwerken.</p>
+
+<a name="Edit_Filter_Dialog"></a>
+<h3>dialoogvenster Filter bewerken</h3>
+
+<p>Het dialoogvenster stelt u in staat om de bronbestandsnaam-patronen te bewerken van de bestanden die het filter zal verwerken, de ebstandsnamen van vertaalde bestanden aan te passen en te selecteren welke coderingen het zal gebruiken bij het laden van het bestand en zijn vertaalde tegenhanger.</p>
+
+<p>Bronbestandsnaam-patronen gebruiken de DOS-regels voor bestandsmaskers. Het teken <code>*</code> kan elk aantal van elk teken vervangen, <code>?</code> vervangt één enkel teken en alle andere tekens staan voor dat teken. Als u bijvoorbeeld wilt dat het tekstfilter readme-bestanden (<code>readme</code>, <code>read.me</code> en <code>readme.txt</code>) afhandelt, zou u het patroon <code>read*</code> moeten gebruiken.</p>
+
+<p>Bron- en doelcoderingvelden gebruiken combinatievakken waarin alle ondersteunde coderingen zijn opgenomen. Merk op dat niet alle filters u in staat stellen een codering te selecteren omdat die slechts werken met een bestandsformaat dat slechts één mogelijke codering heeft. Instellen van de codering op "&lt;auto&gt;" voor die bestandsformaten die u in staat stellen een codering te kiezen betekent dat u het OmegaT toevertrouwt om een keuze te maken. Zo doet die dat:</p>
+
+<ul>
+   <li>OmegaT zal proberen de codering van het bronbestand te raden van HTML/XHTML-bestanden.</li>
+   <li>OmegaT zal de standaardcodering van het besturingssysteem gebruiken voor tekstbestanden.</li>
+</ul>
+
+<p>Doelbestandsnaam-patronen gebruiken een speciale syntaxis, dus als u dit veld zou willen bewerken, kunt u beter klikken op <strong>Bewerken...</strong> om naar het dialoogvenster Patroon bewerken te gaan.</p>
+
+<p>Als u wilt dat het filter bestanden afhandelt die overeenkomen met meer dan één bronbestandsnaam-patroon, klik op <strong>Toevoegen...</strong> om naar het dialoogvenster Patroon toevoegen te gaan.</p>
+
+<p>Als u terug wilt vallen op de standaardconfiguratie van het filter, klik op <strong>Standaardinstellingen</strong>.</p>
+
+<a name="Add.2FEdit_Pattern_Dialog"></a>
+<h3>dialoogvenster Patroon toevoegen/bewerken</h3>
+
+<p>Hetzelfde dialoogvenster verschijnt als u een patroon wilt toevoegen of als u een bepaald patroon wilt bewerken. Het enige nieuwe daarin is een speciale verwerker voor het doelbestandsnaam-patroon, de overige velden werden hierboven al beschreven.</p>
+
+<p>De sectie Doelbestandsnaam-patroon stelt u in staat om de bestandsnaam van het vertaalde bestand samen te stellen uit verschillende delen.</p>
+
+<ul>
+   <li>Standaard is <code>${filename}</code> -- volledige bestandsnaam van het bronbestand met extensie, zodat de naam van het vertaalde bestand hetzelfde is als dat van het bronbestand.</li>
+   <li><code>${nameOnly}</code> laat u alleen de naam van het bronbestand invoegen zonder extensie.</li>
+   <li><code>${extension}</code> -- de extensie van het bronbestand.</li>
+   <li><code>${targetLocale}</code> - locale-code voor doel (in de vorm "xx_YY").</li>
+   <li><code>${targetLanguage}</code> - de doeltaal en landcode samen (in de vorm "XX-YY").</li>
+   <li><code>${targetLanguageCode}</code> - alleen de doeltaal ("XX").</li>
+   <li><code>${targetCoutryCode}</code> - aleen de doel-landcode ("YY").</li>
+</ul>
+
+<p>We kunnen eenvoudig meer variabelen toevoegen als u ons dat vraagt en ons laat weten waar uw favoriete variabele over gaat. Bezoek <a href="http://groups.yahoo.com/group/OmegaT/">onze gebruikersgroep</a> eens.</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Auteursrechten">Auteursrechten</a></p>
+
+</body>
+</html>

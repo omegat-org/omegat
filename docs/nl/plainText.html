@@ -1,0 +1,113 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Werken met platte tekst - OmegaT 1.6.2 Gebruikershandleiding</title>
+</head>
+<body>
+
+<h1>Werken met platte tekst</h1>
+
+<h2>Inhoud</h2>
+
+<ul type="none">
+   <li>1. <a href="#Platte_tekst_in_OmegaT">Platte tekst in OmegaT</a></li>
+
+   <li>2. <a href="#Verminkte_weergaven_.3F">Verminkte weergaven?</a>
+
+      <ul type="none">
+         <li>2.1. <a href="#Tekensets_en_coderingen">Tekensets en coderingen</a></li>
+         <li>2.2. <a href="#De_OmegaT_oplossing">De OmegaT-oplossing</a></li>
+      </ul>
+   </li>
+</ul>
+
+<a name="Plain_Text_in_OmegaT"></a>
+<h2>Platte tekst in OmegaT</h2>
+
+<p>Platte tekstbestanden bevatten uitsluitend tekstuele informatie. Platte tekstbestanden hebben geen helder gedefineerde manier om de computer te vertellen welke taal zij bevatten. Algemeen gesproken betekent dit dat de computer als standaard er van uitgaat dat de bestandsinhoud dezelfde taal heeft als de computer zelf.</p>
+
+<p>Een platte tekstbestand is in de meste gevallen een bestand met een naam die eindigt op <strong>.txt</strong>.</p>
+
+<a name="Garbled_displays_.3F"></a>
+<h2>Verminkte weergaven?</h2>
+
+<p>Als u Russisch bent is het zeer waarschijnlijk dat uw computer ook in het Russisch werkt: de menu's zijn in het Russisch, de bestanden die u opent zijn in het Russisch etc. In de meeste gevallen maakt de computer de juiste aanname met betrekking tot bestanden in het algemeen: zij bevatten allemaal Russisch en niet-Russische tekens kunnen niet worden weergegeven.</p>
+
+<p>Maar als u een Russische vertaler bent die vertaalt vanuit het Japans, zullen de Japanse bestanden die u zult krijgen, als zij <strong>platte tekst</strong>-bestanden zijn, door de computer waaarschijnlijk worden geïnterpreteerd als zijnde bestanden die Russisch bevatten. Omdat er in het bestand zelf geen informatie aanwezig is die aan de computer duidelijk maakt in welke taal zij zijn geschreven.</p>
+
+<p>De Japanse bestandsinhoud zou kunnen zijn:</p>
+
+<pre>   OmegaTとは、コンピュータを利用した翻訳ツールです。</pre>
+
+<p>Maar uw tekstverwerkingsprogramma zou dit zeer goed weer kunnen geven als:</p>
+
+<pre>   OmegaTВ∆ВЌБAГRГУГsГЕБ[Г^ВрЧШЧpВµВљЦ|ЦуГcБ[ГЛВ≈ВЈБB</pre>
+
+<p>Omdat het verwacht dat de inhoud Russisch is... Maar dit is geen Russisch. Dit zijn Japanse tekens die foutief worden weergegeven als Russische tekens.</p>
+
+<p>OmegaT is niet anders. OmegaT gaat er van uit dat <strong>platte tekst</strong>-bestanden tekst bevatten die automatisch kan worden weergegeven met behulp van de standaardinstellingen van de computer. Dat werkt prima als de computer werkt in het Frans en als u Engelse bestanden krijgt of als de computer Duits is en u Italiaanse bestanden krijgt.</p>
+
+<a name="Character_sets_and_encodings"></a>
+<h3>Tekensets en coderingen</h3>
+
+<p>Waarom zou dat wel werken met Engels en Frans maar niet met Russisch en Japans? Omdat Engels en Frans een algemene <strong>tekenset</strong> delen. Namelijk <strong>Latijns-1</strong> of een variatie daarop.</p>
+
+<p>Tot voor kort deelden Russisch en Japans geen tekensets. De meeste huidige Russische tekensets kunnen niet overweg met Japans en andersom. Het resultaat ziet eruit zoals hiervoor getoond.</p>
+
+<p>De Japanse cliënt werkt met een Japanse computer en maakt tekstbestanden die Japans bevatten. De tekenset die werd geselecteerd door de computer van de cliënt zal afhankelijk zijn van het besturingssysteem en van andere instellingen, maar het is zeer onwaarschijnlijk dat de gekozen (Japanse) tekenset juist zal worden geïnterpreteerd door de Russische computer.</p>
+
+<p>En dan nu, hoe de tekstuele informatie in de gespecifieerde tekenset fysiek wordt verzonden (dat is: hoe wordt het in het bestand <strong>geschreven</strong> zodat de computer het kan interpreteren en weergeven) is afhankelijk van een <strong>codering</strong>. Als de computer het bestand leest, "decodeert" het de informatie overeenkomstig de codering en geeft het die weer overeenkomstig de tekenset. Algemeen gesproken correspondeert één codering met één tekenset...</p>
+
+<a name="The_OmegaT_solution"></a>
+<h3>De OmegaT-oplossing</h3>
+
+<p>Er bestaan in principe 3 manieren om dit op te lossen in OmegaT.</p>
+
+<ol>
+   <li>De drastische manier:<ul>
+         <li>Vertel OmegaT dat uw <strong>platte tekst</strong>-bestanden die eindigen op <strong>.txt</strong> moeten worden geïnterpreteerd in de codering die u specificeert.</li>
+      </ul>
+   </li>
+
+   <li>De selectieve manier:<ul>
+         <li>Wijzig de namen van uw platte tekst "buitenlandse" bestandsnamen naar iets dat u begrijpt (dit_is.japans bijvoorbeeld);</li>
+
+         <li>Vertel OmegaT dat bestanden die eindigen op ".japans" moeten worden geïnterpreteerd met de codering die u specificeert.</li>
+      </ul>
+   </li>
+
+   <li>De "Unicode"-manier:<ul>
+         <li>Open uw "buitenlandse" bestand in een tekstverwerkingsprogramma dat de codering correct interpreteert (of ga door met proberen tot het goed gaat);</li>
+
+         <li>Sla het bestand op in de codering "UTF-8";</li>
+
+         <li>Wijzig de naam van <strong>dit_is.txt</strong> naar <strong>dit_is.utf8</strong>. OmegaT zal het bestand interpreteren als een UTF-8 bestand.</li>
+      </ul>
+   </li>
+</ol>
+
+<p>Momenteel is OmegaT ingesteld om platte tekstbestanden te herkennen op de volgende manier: (u kunt dat zelf controleren door het item <strong>Bestandsfilters</strong> te selecteren in het menu <strong>Opties</strong>. Klik op de rij <strong>Tekstbestanden</strong> en dan op de knop <strong>Bewerken</strong>.)</p>
+
+<ul>
+   <li>
+      <strong>.txt</strong>-bestanden worden automatisch (<strong>auto</strong>) geïnterpreteerd door OmegaT als zijnde gecodeerd in de standaardcodering van de computer.</li>
+
+   <li>
+      <strong>.txt1</strong>-bestanden worden door OmegaT geïnterpreteerd als zijnde gecodeerd in ISO-8859-1 (een codering die de meeste <strong>West-Europese</strong> talen ondervangt).</li>
+
+   <li>
+      <strong>.txt2</strong>-bestanden worden door OmegaT geïnterpreteerd als zijnde gecodeerd in ISO-8859-2 (een codering die de meeste <strong>Centraal en Oost-Europese</strong> talen ondervangt).</li>
+
+   <li>
+      <strong>.utf8</strong> bestanden worden door OmegaT geïnterpreteerd als zijnde gecodeerd in UTF-8 (een codering die bijna <strong>alle</strong> talen in de wereld ondervangt).</li>
+</ul>
+
+<p>Natuurlijk bestaan de <strong>.txt1</strong>, <strong>.txt2</strong> en <strong>.utf8</strong> bestandsnaameinden niet in het echte leven. OmegaT heeft voor u een keuzelijstje gemaakt dat het u gemakkelijker zal maken om sommige <strong>buitenlandse</strong> bestanden af te handelen.</p>
+
+<p>Dus als u nu een Frans bestand heeft (bijvoorbeeld <strong>in_frans.txt</strong>) om te vertalen op een Japanse computer en het zeer wel aannemelijk is dat bestand is gemaakt als een <strong>ISO-8859-1</strong> gecodeerd bestand, weet u nu dat u door slechts een <strong>1</strong> toe te voegen aan het einde van de naam (<strong>in_frans.txt1</strong>) OmegaT de inhoud juist zal interpreten als zijnde in ISO-8859-1... Et voilà!</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Auteursrechten">Auteursrechten</a></p>
+
+</body>
+</html>

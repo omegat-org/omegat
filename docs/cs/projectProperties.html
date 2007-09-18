@@ -1,0 +1,44 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Vlastnosti projektu - OmegaT 1.6.2 Uživatelská příručka</title>
+</head>
+<body>
+
+<h1>Vlastnosti projektu</h1>
+
+<p>Toto dialogové okno se používá pro úpravu adresářů a jazyků projektu. Lze jej otevřít stiskem <a href="keyboardShortcuts.html" title="Klávesové zkratky pro OmegaT
+"><code>Ctrl+E</code></a> nebo volbou <strong>Projekt -&gt; Vlastnosti ...</strong> v rámci <a href="menu.html" title="Hlavní menu">hlavního menu</a>.</p>
+
+<p>Dialogové okno obsahuje:</p>
+
+<ul>
+   <li>Oblast s rozbalovacím menu pro nastavení zdrojového a cílového jazyka projektu </li>
+   <li>Označení nastavení segmentace</li>
+   <li>Oblast pro nastavení adresářů projektu</li>
+</ul>
+
+<p>Všechna pole lze editovat. Jazyky můžete zadat buď ručně nebo použít rozbalovací menu. Můžete napsat názvy adresářů, které zatím nebyly vytvořeny, a OmegaT je vytvoří za Vás.</p>
+
+<a name="Modifying_Project_Properties_Half-Way"></a>
+<h3>Úprava vlastností projektu v průběhu práce</h3>
+
+<p>Vždy je možné, ale nedoporučuje se to, upravovat vlastnosti projektu v průběhu překladu. Když už je překlad zahájen, měla by být veškerá nastavení považována za konečná, až na případ, že byste si uvědomili, že při nastavení vyvstala zásadní chyba.</p>
+
+<p>Konkrétně:</p>
+
+<ul>
+   <li>Změna jazyků může způsobit, že aktuálně používané překladové paměti budou nepoužitelné, pokud se už neshodují s nově nastavenými jazyky.</li>
+
+   <li>Změna nastavení segmentace může zapříčinit rozdělení nebo sloučení některých přeložených segmentů, což je doslova vrátí zpět do  "nepřeloženého" stavu, dokonce i tehdy, když je starý a teď už neshodný překlad stále v překladové paměti. OmegaT může <a href="translationMemories.html#Upgrading_Translation_Memories" title="Překladové paměti">upgradovat staré překladové paměti</a>, které nepoužívali segmentaci podle vět, ale ne naopak, a nemůže upgradovat překladovou paměť projektu, jak si rozmyslíte v průběhu překladu.</li>
+
+   <li>Změna adresářů nepřesune soubory ze starých adresářů do nových, takže riskujete, že se dostanete do situace, kdy ani Vy ani OmegaT nebude vědět, které z adresářů se vůbec používají.</li>
+</ul>
+
+<p>Způsoby jak ochránit Vaši práci naleznete v sekci <a href="preventingDataLoss.html" title="Prevence ztráty dat">Prevence ztráty dat</a>.</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Právní poznámky">Právní poznámky</a></p>
+
+</body>
+</html>

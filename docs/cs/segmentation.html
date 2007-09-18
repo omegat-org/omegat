@@ -1,0 +1,201 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Segmentace zdroje - OmegaT 1.6.2 Uživatelská příručka</title>
+</head>
+<body>
+
+<h1>Segmentace zdroje</h1>
+
+<h2>Obsah</h2></div>
+
+<ul type="none">
+   <li>1. <a href="#Segmentation_Basics">Základy segmentace</a></li>
+
+   <li>2. <a href="#Sentence_Segmentation">Segmentace do vět</a>
+
+      <ul>
+         <li>2.1. <a href="#About_Rules">O pravidlech</a></li>
+
+         <li>2.2. <a href="#Rules_Setup">Nastavení pravidel</a>
+
+            <ul>
+               <li>2.2.1. <a href="#Sets_of_Rules">Sady pravidel</a></li>
+               <li>2.2.2. <a href="#Simple_examples">Jednoduché příklady</a></li>
+            </ul>
+         </li>
+
+         <li>2.3. <a href="#Regular_Expressions_to_use_in_segmentation_rules">Regulární výrazy pro použití v pravidlech segmentace</a>
+
+            <ul>
+               <li>2.3.1. <a href="#Short_summary_of_regular-expression_constructs">Krátký přehled konstrukcí regulárních výrazů</a></li>
+            </ul>
+         </li>
+      </ul>
+   </li>
+</ul>
+
+<a name="Segmentation_Basics"></a>
+<h2>Základy segmentace</h2>
+
+<p>Nástroje pro práci s překladovými paměťmi pracují s textovými jednotkami nazývanými segmenty. Existuje vícero způsobů jak segmentovat text.</p>
+
+<p>OmegaT nejprve zpracuje text pomocí segmentace na úrovni struktur. Během tohoto procesu je to jen struktura zdrojového souboru, která je použitá na vytvoření segmentů. Například textové soubory mohou být segmentované podle zlomů řádků, prázdných řádků nebo vůbec nemusí být segmentované na strukturální úrovni. Soubory s formátováním (dokumenty OpenOffice.org, OpenDocument, XHTML a HTML) jsou segmentované podle blokových tagů (na odstavce).</p>
+
+<p>Přeložitelné atributy objektů (v XHTML nebo HTML souborech) jsou také vytažené do vlastních segmentů.</p>
+
+<p>OmegaT může také segmentovat podle vět. Segmentace podle vět se odehrává při segmentaci na úrovni struktury. Segmenty vytvořené v průběhu kteréhokoliv procesu naneštěstí nemohou být během překladu změněny (rozděleny nebo sloučeny). O tomto omezení u aplikace OmegaT se ví.</p>
+
+<p>Pokud nejste spokojeni se segmentací, budete potřebovat nebo modifikovat zdrojový soubor externě a/nebo modifikovat pravidla pro větnou segmentaci. Když je toto hotovo, budete muset znovu projekt načíst, aby se Vaše změny projevily.</p>
+
+<a name="Sentence_Segmentation"></a>
+<h2>Segmentace podle vět</h2>
+
+<p>Po té, co program OmegaT rozdělil zdrojový soubor na segmenty podle logických jednotek, pro formátované soubory obyčejně dle odpovídajících odstavců, bude dále segmentovat tyto bloky do vět pokud nevypnete Segmentaci na úrovni vět. Všeobecně řečeno, může OmegaT segmentovat logické bloky zdrojového souboru na jakékoliv segmenty jaké nastavíte. Nicméně, když ve <strong>výchozím nastavení</strong> OmegaT segmentuje do vět, budeme to nazývat segmentace <strong>na úrovni vět</strong>.</p>
+
+<p>Segmentace podle vět byla vytvořená s ohledem na standard <a href="http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX, tj. Výměna pravidel segmentace)</a>, avšak v době psaní tohoto, program OmegaT ani nepodporuje všechny vlastnosti SRX, ani není schopný importovat/exportovat pravidla definovaná ve formátu SRX. Pokud víte jak SRX funguje, už víte jak funguje OmegaT, protože pravidla fungování jsou víceméně stejná.</p>
+
+<a name="About_Rules"></a>
+<h3>O pravidlech</h3>
+
+<p>Existují dva druhy možných pravidel.</p>
+
+<ul>
+   <li>Pravidla rozdělování rozdělují text do segmentů.</li>
+   <li>Pravidla výjimek specifikují, které kusy textu by neměly být oddělené od ostatních.</li>
+</ul>
+
+<p>Příklad pravidla rozdělování: <i>"Did it make sense? I was not sure."</i> může být segmentované jako dvě věty po "<code>?</code>". Mělo by zde být pravidlo rozdělování pro "<code>?</code>".</p>
+
+<p>Příklad pravidla výjimek: <i>"Who is afraid of Mrs. Woolf?"</i> nemůže být segmentované po "<code>.</code>". Mělo by tu být pravidlo výjimky pro  "<code>Mrs.</code>".</p>
+
+<p>Předdefinovaná pravidla rozdělování by měla být dostatečná pro většinu evropských jazyků a japonštinu, ale doporučujeme definovat více pravidel výjimek pro jazyk ze kterého překládáte, pokud je jasné, že není možné předdefinovat všechny možné výjimky pro všechny možné jazyky.</p>
+
+<a name="Rules_Setup"></a>
+<h3>Nastavení pravidel</h3>
+
+<p>Abyste nastavili pravidla vyberte v hlavním menu položku <strong>Možnosti -&gt; Segmentace...</strong>. Povšimněte si, že když změníte volby segmentace když je otevřený nějaký projekt, budete muset projekt znovu načíst, aby se změny projevily.</p>
+
+<a name="Sets_of_Rules"></a>
+<h4>Sady pravidel</h4>
+
+<p>Všechny sady pravidel segmentace s odpovídajícím vzorem jazyka jsou použité v daném pořadí priority, takže pravidla pro konkrétní jazyk by měla být vyšší než ta z výchozího nastavení.</p>
+
+<p>Tak například, pravidla pro kanadskou francouzštinu (FR-CA) by měla být ve výchozím nastavení výše než pravidla pro francouzštinu (FR.*), a výše než (.*). Potom v průběhu překladu z kanadské francouzštiny bude Váš projekt používat pravidla definované pro tento jazyk, pravidla pro francouzštinu, a předvolená pravidla ve správném pořadí.</p>
+
+<p>Pro vytvoření prázdné sady pravidel, klikněte na <strong>Přidat</strong> v horní polovině dialogového okna. Ve spodní části tabulky se objeví prázdný řádek. Změňte název sady pravidel a vzor jazyka. Syntaxe vzoru jazyka odpovídá syntaxi regulárních výrazů. Viz sekci <a href="#Short_summary_of_regular-expression_constructs">Krátký přehled konstrukcí regulárních výrazů</a>.</p>
+
+<p>Pokud vaše sada pravidel platí pro pár jazyk-země, doporučujeme Vám posunout ji nahoru pomocí tlačítka <strong>Přesunout nahoru</strong>.</p>
+
+<p>Pro editaci sady pravidel, jednoduše na ni klikněte v tabulce, pravidla sady se objeví ve spodní polovině okna.</p>
+
+<p>Zaškrtávací políčko Zlom/Výjimka určuje, zda je pravidlo pro rozdělení (políčko je zaškrtnuté), nebo pravidlo pro výjimku (políčko není zaškrtnuté). Dva regulární výrazy 'Vzor před' a 'Vzor za' specifikují, co by před a po nějaké pozici mělo stát, aby se na ni vztahovalo pravidlo výjimky nebo rozdělení.</p>
+
+<p>Proces segmentace může být zjednodušený na následovné. Představte si kurzor pohybující se z pozice před prvním do pozice za posledním symbolem textu. Pro každou pozici kurzoru vezměme každé pravidlo v zadaném pořadí a zkusme aplikovat vzor <strong>Před</strong> na celý text, který je vlevo od kurzoru a vzor <strong>Za</strong> na text vpravo, takže se dotýkají kurzoru.</p>
+
+<p>Pokud je aplikace některého pravidla úspěšná, pro pravidla výjimek neuděláme nic, jen přestaneme zkoumat další pravidla, a pro pravidla zlomu vezměme text vlevo jako samostatný segment, pro každou pozici kurzoru v textu.</p>
+
+<a name="Simple_examples"></a>
+<h4>Jednoduché příklady</h4>
+
+<p>
+<dl>
+   <dt><strong>Cíl:</strong> nastavit segment po jisté periodě (v tomto případě tečka '<code>.</code>') a před mezerou</dt>
+   <dd>Před: <code>\.</code> Za: <code>\s</code> <br> <strong>Poznámka:</strong> "<code>\.</code>" představuje znak "<code>.</code>" <br> "<code>\s</code>" představuje jakýkoliv bílý znak</dd>
+
+   <dt><strong>Cíl:</strong> nastavit segment po "<code>Mr.<c/code>"</dt>
+   <dd>Před: <code>Mr\.</code> Za: <code>\s</code> <br> <strong>Poznámka:</strong> Nezapomeňte nechat políčko pravidla <strong>nezaškrtnuté</strong>
+   </dd>
+
+   <dt><strong>Cíl:</strong> nastavit segment "。" (japonská tečka)</dt>
+   <dd>Před: 。 Za: (prázdné) <br> <strong>Poznámka:</strong> Políčko můžete nechat prázdné </dd>
+</dl>
+</p>
+
+<a name="Regular_Expressions_to_use_in_segmentation_rules"></a>
+<h3>Regulární výrazy pro použití v pravidlech segmentace</h3>
+
+<p>Samotná pravidla segmentace jsou reprezentována pomocí regulárních výrazů. To umožňuje maximální flexibilitu při definování pravidel a vyhovuje SRX.</p>
+
+<a name="Short_summary_of_regular-expression_constructs"></a>
+<h4>Krátký přehled konstrukcí regulárních výrazů</h4>
+
+<p>Toto nejsou jediné konstrukce, které můžete používat pro pravidla segmentace v OmegaT, ale spíše takové, které jsou nejvíce používané. OmegaT podporuje všechny vlastnosti regulárních výrazů tak, jak jsou popsány ve <a href="http://www.lisa.org/standards/srx/">standardu SRX</a>.</p>
+
+<table border="0" width="80%" cellpadding="1" cellspacing="0" summary="Konstrukce regulárních výrazů a čemu odpovídají">
+    <tr bgcolor="#DDEEFF"><th width="10%" align="left" id="construct">Pojem</th><th align="left">Odpovídající výrazy</th></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="flags">Označení</th></tr>
+    <tr><td><tt>(?i)</tt></td><td>Umožňuje hledání bez ohledu na velikost písmen (ve výchozím nastavení se rozlišují velká a malá písmena).</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr><th align="left" colspan="2" id="characters">Znaky</th></tr>
+    <tr><td><strong>x</strong></td><td>Znak <strong>x</strong>, s výjimkou následujících...</td></tr>
+
+    <tr><td><tt>\u</tt><strong>hhhh</strong></td><td>Znak s hexadecimální hodnotou&nbsp;<tt>0x</tt><strong>hhhh</strong></td></tr>
+    <tr><td><tt>\t</tt></td><td>Znak tabulátoru (<tt>'\u0009'</tt>)</td></tr>
+    <tr><td><tt>\n</tt></td><td>Znak nového řádku (konce řádku) (<tt>'\u000A'</tt>)</td></tr>
+
+    <tr><td><tt>\r</tt></td><td>Znak návratu vozíku (<tt>'\u000D'</tt>)</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="quot">Uvozující znaky</th></tr>
+    <tr><td><tt>\</tt></td><td>Lomítko samo o sobě neznamená nic, ale uvozuje následující znak. Toto se vyžaduje, pokud byste chtěli zadání metaznaků <code>!$()*+.&lt;&gt;?[\]^{|}</code> tak, aby odpovídaly samy sobě.</td></tr>
+
+    <tr><td><tt>\\</tt></td><td>Například toto je znak pro hledání zpětného lomítka</td></tr>
+    <tr><td><tt>\Q</tt></td><td>Nic neznamená, ale vymezuje všechny znaky až po <tt>\E</tt></td></tr>
+    <tr><td><tt>\E</tt></td><td>Nic neznamená, ale končí vymezení započaté pomocí <tt>\Q</tt></td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="classes">Třídy znaků</th></tr>
+
+    <tr><td><tt>[abc]</tt></td><td><tt>a</tt>, <tt>b</tt> nebo <tt>c</tt> (jednoduchá třída)</td></tr>
+    <tr><td><tt>[^abc]</tt></td><td>Jakýkoliv znak mimo <tt>a</tt>, <tt>b</tt> nebo <tt>c</tt> (negace)</td></tr>
+
+    <tr><td><tt>[a-zA-Z]</tt></td><td><tt>a</tt> až po <tt>z</tt> nebo <tt>A</tt> až po <tt>Z</tt>, včetně (rozsah)</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="predef">Předdefinované třídy znaků</th></tr>
+
+    <tr><td><tt>.</tt></td><td>Jakýkoliv znak (kromě znaků ukončujících řádek)</td></tr>
+    <tr><td><tt>\d</tt></td><td>Číslo: <tt>[0-9]</tt></td></tr>
+    <tr><td><tt>\D</tt></td><td>Ne-číslo: <tt>[^0-9]</tt></td></tr>
+    <tr><td><tt>\s</tt></td><td>Znak mezery: <tt>[ \t\n\x0B\f\r]</tt></td></tr>
+
+    <tr><td><tt>\S</tt></td><td>Znak ne-mezery: <tt>[^\s]</tt></td></tr>
+    <tr><td><tt>\w</tt></td><td>Znak slova: <tt>[a-zA-Z_0-9]</tt></td></tr>
+    <tr><td><tt>\W</tt></td><td>Znak ne-slova: <tt>[^\w]</tt></td></tr>
+    <tr><th>&nbsp;</th></tr>
+
+    <tr align="left"><th colspan="2" id="bounds">Označení hranic</th></tr>
+    <tr><td><tt>^</tt></td><td>Začátek řádku</td></tr>
+    <tr><td><tt>$</tt></td><td>Konec řádku</td></tr>
+    <tr><td><tt>\b</tt></td><td>Hranice slova</td></tr>
+    <tr><td><tt>\B</tt></td><td>Hranice ne-slova</td></tr>
+
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="greedy">Vícenásobné kvantifikátory</th></tr>
+    <tr><td colspan="2">Tyto budou představovat tolik, kolik jen mohou. Například: <code>a+</code> bude odpovídat <code>aaa</code> v <code>aaabbb</code></td></tr>
+    <tr><td><strong>X</strong><tt>?</tt></td><td><strong>X</strong>, jednou nebo vůbec</td></tr>
+
+    <tr><td><strong>X</strong><tt>*</tt></td><td><strong>X</strong>, nula- nebo vícekrát</td></tr>
+    <tr><td><strong>X</strong><tt>+</tt></td><td><strong>X</strong>, jednou nebo vícekrát</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="reluc">Líné kvantifikátory</th></tr>
+
+    <tr><td colspan="2">Tyto budou představovat tak málo, jak jen mohou. Například: <code>a+?</code> bude odpovídat prvnímu <code>a</code> v <code>aaabbb</code></td></tr>
+    <tr><td><strong>X</strong><tt>??</tt></td><td><strong>X</strong>, jednou nebo vůbec</td></tr>
+    <tr><td><strong>X</strong><tt>*?</tt></td><td><strong>X</strong>, nula- nebo vícekrát</td></tr>
+
+    <tr><td><strong>X</strong><tt>+?</tt></td><td><strong>X</strong>, jednou nebo vícekrát</td></tr>
+    <tr><th>&nbsp;</th></tr>
+    <tr align="left"><th colspan="2" id="logical">Logické operátory</th></tr>
+    <tr><td><strong>XY</strong></td><td><strong>X</strong> následované <strong>Y</strong></td></tr>
+
+    <tr><td><strong>X</strong><tt>|</tt><strong>Y</strong></td><td>Buď <strong>X</strong> a nebo <strong>Y</strong></td></tr>
+    <tr><td><tt>(</tt><strong>XY</strong><tt>)</tt></td><td><strong>XY</strong> jako samostatná skupina</td></tr>
+
+</table>
+
+<hr>
+<p><a href="legalNotices.html" title="Právní poznámky">Právní poznámky</a></p>
+
+</body>
+</html>

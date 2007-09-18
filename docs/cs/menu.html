@@ -1,0 +1,179 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Hlavní menu - OmegaT 1.6.2 Uživatelská příručka</title>
+</head>
+<body>
+
+<h1>Hlavní menu</h1>
+
+<p>Všechny funkce OmegaT jsou dostupné přes lištu menu v horní části okna Editoru. Většina funkcí je také dostupná přes <a href="keyboardShortcuts.html">klávesové zkratky</a>.</p>
+
+<p>Zkratky zobrazené s <strong><code>Ctrl</code></strong> jsou pro Windows, UNIX a UNIXu podobné operační systémy s klávesami typu <strong><code>Ctrl</code></strong> nebo <strong><code>Control</code></strong>. Uživatelé Mac OS X používají namísto toho Apple klávesu <img src="images/AppleKey.gif" alt="Klávesa Apple" width="19" height="19">.</p>
+
+<h2>Obsah</h2>
+<ul type="none">
+   <li>1. <a href="#Project_Menu">Menu Projekt</a></li>
+   <li>2. <a href="#Edit_Menu">Menu Úpravy</a></li>
+   <li>3. <a href="#Go_to_Menu">Menu Přejít na</a></li>
+   <li>4. <a href="#Tools_Menu">Tools Menu</a></li>
+   <li>5. <a href="#Options_Menu">Menu Možnosti</a></li>
+   <li>6. <a href="#Help_Menu">Menu Nápověda</a></li>
+</ul>
+
+<a name="Project_Menu"></a>
+<h4>Menu Projekt</h4>
+
+<p>
+<dl>
+   <dt>Nový</dt>
+   <dd>Vytvoří a otevře nový projekt. Dialogové okno pro vytvoření projektu je stejný jako u <a href="projectProperties.html">editace projektu</a>.</dd>
+
+   <dt>Otevřít <code>&lt;Ctrl+O&gt;</code></dt>
+   <dd>Otevírá předchozí vytvořený projekt.</dd>
+
+   <dt>Importovat zdrojové soubory ...</dt>
+   <dd>Zkopíruje vybrané soubory do adresáře <code>/source</code> a znovu načte projekt pro načtení nových souborů.</dd>
+
+   <dt>Znovu načíst</dt>
+   <dd>Znovu načte projekt, aby se zohlednily externí úpravy ve zdrojových souborech, starších překladových pamětech nebo slovnících.</dd>
+
+   <dt>Zavřít</dt>
+   <dd>Uloží překlad a zavře projekt.</dd>
+
+   <dt>Uložit <code>&lt;Ctrl+S&gt;</code></dt>
+   <dd>Uloží překlad do překladové paměti projektu. OmegaT automaticky uloží překlad každých 10 minut, nebo  při zavření projektu, nebo při ukončení OmegaT.</dd>
+
+   <dt>Vytvořit přeložené dokumenty</dt>
+   <dd>Vytvoří cílové dokumenty založené na Vašem překladu dokumentu. Dokumenty budou umístěné v adresáři <code>/target</code>.</dd>
+
+   <dt>Vlastnosti ... <code>&lt;Ctrl+E&gt;</code></dt>
+   <dd>Zobrazí dialogové okno <a href="projectProperties.html">Vlastnosti projektu</a> pro úpravu jazyků projektu a umístění projektu.</dd>
+
+   <dt>Soubory projektu <code>&lt;Ctrl+L&gt;</code></dt>
+   <dd>Zavře nebo otevře okno <a href="userInterface.html#Project_Files">Soubory projektu</a> (záleží to na tom, zda je otevřené či zavřené).</dd>
+
+   <dt>Konec <code>&lt;Ctrl+Q&gt;</code></dt>
+   <dd>Uloží projekt a ukončí OmegaT. Pokud jste neuložili projekt ručně, budete dotázáni, jestli  program opravdu chcete ukončit.</dd>
+</dl>
+</p>
+
+<a name="Edit_Menu"></a>
+<h4>Menu Úpravy</h4>
+
+<p>Položky, které lze nalézt ve většině aplikací (kopírovat/vyjmout/vložit) nejsou v tomto menu zobrazeny, ale jsou přístupné prostřednictvím klávesových zkratek Vašeho operačního systému. Například, ve Windows:</p>
+
+<p>
+<dl>
+   <dt>Kopírovat <code>&lt;Ctrl+C&gt;</code></dt>
+   <dd>Zkopíruje vybraný text do schránky.</dd>
+
+   <dt>Vyjmout <code>&lt;Ctrl+X&gt;</code></dt>
+   <dd>Zkopíruje vybraný text do schránky a týž vybraný text v dokumentu smaže.</dd>
+
+   <dt>Vložit <code>&lt;Ctrl+V&gt;</code></dt>
+   <dd>Vloží text ze schránky na pozici kurzoru.</dd>
+</dl>
+</p>
+
+<p>Samo menu obsahuje následující položky:</p>
+
+<p>
+<dl>
+   <dt>Zpět <code>&lt;Ctrl+Z&gt;</code></dt>
+   <dd>Vrátí se zpět do stavu před posledním krokem editační činnosti. Nefunguje v případě, že byl upravovaný segment již potvrzen.</dd>
+
+   <dt>Znovu <code>&lt;Ctrl+Y&gt;</code></dt>
+   <dd>Vrátí se zpět do stavu před zrušením posledního kroku editační činnosti. Nefunguje v případě, že byl upravovaný segment již potvrzen.</dd>
+
+   <dt>Přepsat nalezeným překladem <code>&lt;Ctrl+R&gt;</code></dt>
+   <dd>Přepíše celý cílový segment s aktuálně vybraným přibližným překladem (když je v předvolbě označená první přibližná shoda).</dd>
+
+   <dt>Vložit nalezený překlad <code>&lt;Ctrl+I&gt;</code></dt>
+   <dd>Vloží aktuálně vybraný přibližný překlad na pozici kurzoru. Tato funkce nikdy nepřepíše část cílového segmentu, dokonce ani když je označená.</dd>
+
+   <dt>Přepsat zdrojem<code>&lt;Shift+Ctrl+R&gt;</code></dt>
+   <dd>Přepíše celý cílový segment zdrojem.</dd>
+
+   <dt>Vložit zdroj <code>&lt;Shift+Ctrl+I&gt;</code></dt>
+   <dd>Vloží zdroj na pozici kurzoru.</dd>
+
+   <dt>Hledat v projektu <code>&lt;Ctrl+F&gt;</code></dt>
+   <dd>Otevře nové okno <a href="userInterface.html#Search_Window">Hledat</a>.</dd>
+
+   <dt>Označit přibližný překlad #N <code>&lt;Ctrl+N&gt;</code> (N je od 1 do 5)</dt>
+   <dd>Vybere N-tý přibližný překlad zobrazený v okně shody pro nahrazení nebo vložení do segmentu. Sekce <a href="userInterface.html#Fuzzy_Matches">Přibližné překlady</a> podrobně popisuje kódování barvy.</dd>
+</dl>
+</p>
+
+<a name="Go_to_Menu"></a>
+<h4>Menu Přejít na</h4>
+
+<p>
+<dl>
+   <dt>Další nepřeložený segment <code>&lt;Ctrl+U&gt;</code></dt>
+   <dd>Přesune se na následující segment, který nemá v překladové paměti žádný ekvivalent.</dd>
+
+   <dt>Další segment <code>&lt;Ctrl+N&gt;</code>, <code>&lt;Enter&gt;</code> / <code>&lt;Tab&gt;</code>
+   </dt>
+   <dd>Přesune se na další segment. Pokud je aktuální segment posledním v souboru, přesune se na první segment dalšího souboru.</dd>
+
+   <dt>Předchozí segment <code>&lt;Ctrl+P&gt;</code>, <code>&lt;Ctrl+Enter&gt;</code> / <code>&lt;Ctrl+Tab&gt;</code>
+   </dt>
+   <dd>Přesune se na předchozí segment. Přesune se na poslední segment předcházejícího souboru, pokud je aktuální segment prvním v souboru.</dd>
+</dl>
+</p>
+
+<a name="Tools_Menu"></a>
+<h4>Menu Nástroje</h4>
+
+<p>
+<dl>
+   <dt>Ověření tagů <code>&lt;Ctrl+T&gt;</code></dt>
+   <dd>Zkontroluje chybějící nebo nesprávně umístěné tagy (značky) ve formátovaných souborech. Zobrazí seznam segmentů s chybnými tagy (značkami). Sekce okna <a href="userInterface.html#Tag_Validation">Ověření tagů</a> obsahuje seznam zobrazeného, a <a href="formattedText.html">Práce s formátovaným textem</a> prozradí proč byla ta která položka zobrazena.</dd>
+</dl>
+</p>
+
+<a name="Options_Menu"></a>
+<h4>Menu Možnosti</h4>
+
+<p>
+<dl>
+   <dt>Použít TAB pro postup</dt>
+   <dd>Nastaví klíč potvrzení segmentu na <code>&lt;Tab&gt;</code> místo přednastaveného <code>&lt;Enter&gt;</code>. Tato možnost je užitečná pro některé čínské, japonské nebo korejské znakové vstupní systémy.</dd>
+
+   <dt>Písmo...</dt>
+   <dd>Zobrazí dialogové okno <a href="fontSettings.html">Nastavení písma</a> pro změnu písma zobrazování textu. Uživatelé starších počítačů by měli raději měnit písmo před otevřením projektu, jinak pocítí snížení výkonu. Snížení výkonu je nejzřetelnější v kombinaci G4 + Mac OS X + japonština.</dd>
+
+   <dt>Filtry souborů...</dt>
+   <dd>Zobrazí dialogové okno <a href="fileFilters.html">Filtry souborů</a> pro konfiguraci práce se soubory a jejich zpracování.</dd>
+
+   <dt>Segmentace ...</dt>
+   <dd>Otevře dialogové okno <a href="segmentation.html">Nastavení segmentace</a> pro nastavení segmentace textu.</dd>
+
+   <dt>Nastavení editace ...</dt>
+   <dd>Zobrazí dialogové okno <a href="translationEditing.html">Volby nastavení editace</a> pro nastavení obsahu cílového pole pro dosud nepřeložené segmenty.</dd>
+
+   <dt>Obnovit Hlavní okno</dt>
+   <dd>Obnoví komponenty (editor, zobrazovač shody a zobrazovač slovníku) Hlavního okna OmegaT zpět na výchozí nastavení. Použije tuto vlastnost v případě, že jste odpojili, přesunuli nebo skryli jednu nebo více součástí, a nemůžete je dostat zpět do stavu, v jakém je chcete mít.</dd>
+</dl>
+</p>
+
+<a name="Help_Menu"></a>
+<h4>Menu Nápověda</h4>
+
+<p>
+<dl>
+   <dt>Uživatelská příručka... <code>&lt;F1&gt;</code></dt>
+   <dd>V samostatném okně otevře prohlížeč <a href="userInterface.html#Help_Browser">Uživatelskou příručku</a>.</dd>
+
+   <dt>O programu...</dt>
+   <dd>Zobrazí informace o autorských právech, poděkování a licenci.</dd>
+</dl>
+</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Právní poznámky">Právní poznámky</a></p>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <title>Práce s prostým textem - OmegaT 1.6.2 Uživatelská příručka</title>
+</head>
+<body>
+
+<h1>Práce s prostým textem</h1>
+
+<h2>Obsah</h2>
+
+<ul type="none">
+   <li>1. <a href="#Plain_Text_in_OmegaT">Prostý text v OmegaT</a></li>
+
+   <li>2. <a href="#Garbled_displays_.3F">Nesprávně se zobrazují znaky?</a>
+
+      <ul type="none">
+         <li>2.1. <a href="#Character_sets_and_encodings">Znakové sady a kódování</a></li>
+         <li>2.2. <a href="#The_OmegaT_solution">Řešení pomocí OmegaT</a></li>
+      </ul>
+   </li>
+</ul>
+
+<a name="Plain_Text_in_OmegaT"></a>
+<h2>Prostý text v OmegaT</h2>
+
+<p>Prosté textové soubory obsahují jen textové informace. Tyto soubory nemají žádnou možnost jak jednoznačně informovat počítač o tom, který jazyk obsahují. Globálně řečeno to znamená, že počítač implicitně předpokládá, že obsah souboru je ve stejném jazyce, který tento počítač používá.</p>
+
+<p>Prostý textový soubor je ve většině případů souborem s názvem zakončeným <strong>.txt</strong>.</p>
+
+<a name="Garbled_displays_.3F"></a>
+<h2>Nesprávné zobrazování znaků?</h2>
+
+<p>Pokud jste Rus, je velmi pravděpodobné, že Váš počítač pracuje též v ruštině: menu jsou v ruštině, soubory, které otevíráte budou v ruštině atd. Ve většině případů počítač správně předpokládá s ohledem na obsah souborů zhruba toto: všechny tyto soubory obsahují ruštinu a neobsahují nic, co by ruské znaky nemohli zobrazit.</p>
+
+<p>Nyní, pokud jste ruský překladatel, který překládá z japonštiny, dostanete japonské soubory, pokud jsou to soubory s <strong>prostým textem</strong>, tak budou s největší pravděpodobností počítačem považované za soubory, které obsahují ruštinu. Protože zde chybí informace v samotném souboru, která by počítači prozradila, ve kterém jazyce jsou napsané.</p>
+
+<p>Obsah japonského souboru by mohl být následující:</p>
+
+<pre>   OmegaTとは、コンピュータを利用した翻訳ツールです。</pre>
+
+<p>Ale váš textový editor by to mohl klidně interpretovat následovně:</p>
+
+<pre>   OmegaTВ∆ВЌБAГRГУГsГЕБ[Г^ВрЧШЧpВµВљЦ|ЦуГcБ[ГЛВ≈ВЈБB</pre>
+
+<p>Protože očekává, že obsah je ruština ... Ale není to ruština. Toto jsou japonské znaky nesprávně zobrazené jako znaky ruské.</p>
+
+<p>Program OmegaT není jiný. OmegaT předpokládá, že soubory s <strong>prostým textem</strong> obsahují text, který může být automaticky zobrazený pomocí výchozích nastavení počítače. Toto funguje bezchybně, když počítač pracuje ve francouzštině a když dostanete anglické soubory, nebo když počítač je německý a pokud dostanete italské soubory.</p>
+
+<a name="Character_sets_and_encodings"></a>
+<h3>Znakové sady a kódování</h3>
+
+<p>Proč by to fungovalo s angličtinou a francouzštinou, ale ne s ruštinou a japonštinou? Protože angličtina a francouzština používají společnou <strong>znakovou sadu</strong>. Jmenovitě <strong>Latin-1</strong> nebo variaci.</p>
+
+<p>Ruština a japonština ještě donedávna nepoužívali žádné společné znakové sady. Většina současných ruských znakových sad nepokrývá japonštinu a opačně. Výsledek je tedy takový, jak bylo ukázáno výše.</p>
+
+<p>Japonský klient pracuje s japonským počítačem a vytváří textové soubory, které obsahují japonštinu. Výběr znakové sady počítačem klienta bude záležet na operačním systému a na jiných nastaveních, ale je velmi nepravděpodobné, že vybraná (japonská) znaková sada bude správně interpretovaná ruským počítačem.</p>
+
+<p>Takže způsob jak budou textové informace v zadané znakové sadě fyzicky přenesené (tj. jak je to <strong>napsáno</strong> v souboru pro počítač na interpretaci a zobrazení) záleží právě na <strong>kódování</strong>. Když počítač čte soubor, "dekóduje" informace podle kódování a zobrazí je podle znakové sady. Podtrženo sečteno, jedno kódování odpovídá jedné znakové sadě ...</p>
+
+<a name="The_OmegaT_solution"></a>
+<h3>Řešení pomocí OmegaT</h3>
+
+<p>V programu OmegaT jsou v podstatě k dispozici 3 způsoby jak na věc.</p>
+
+<ol>
+   <li>Drastický způsob:<ul>
+         <li>Zadejte programu OmegaT, že vaše soubory s <strong>prostým textem</strong> mající koncovku <strong>.txt</strong> by měly být interpretovány jako kódování, které uvedete.</li>
+      </ul>
+   </li>
+
+   <li>Výběrový způsob:<ul>
+         <li>Změňte názvy "cizích" souborů s prostým textem na něco, co chcete (např. neco.japonstina);</li>
+
+         <li>Zadejte programu OmegaT, že soubory končící na ".japonstina" by měly být interpretované jako kódování, které uvedete.</li>
+      </ul>
+   </li>
+
+   <li>Řešení za pomoci "Unicode":<ul>
+         <li>Otevřete svůj "cizí" soubor v textovém editoru, který správně interpretuje jeho kódování (nebo postupujte pomocí metody pokus - omyl);</li>
+
+         <li>Uložte soubor v kódování "UTF-8";</li>
+
+         <li>Změňte jeho název z <strong>neco.txt</strong> na <strong>neco.utf8</strong>. OmegaT bude soubor interpretovat jako soubor UTF-8.</li>
+      </ul>
+   </li>
+</ol>
+
+<p>V současnosti je program OmegaT nastavený tak, aby rozuměl prostému textovému souboru následovně: (můžete si to sami zkontrolovat vybráním položky <strong>Filtry souborů</strong> v menu <strong>Možnosti</strong>. Klikněte na řádek <strong>Textové soubory</strong> a potom na tlačítko <strong>Editovat</strong>.)</p>
+
+<ul>
+   <li>
+      Soubory s koncovkou <strong>.txt</strong> jsou v OmegaT automaticky (<strong>auto</strong>) interpretované jako kódované v předvoleném kódování počítače.</li>
+
+   <li>
+      Soubory s koncovkou <strong>.txt1</strong> jsou v OmegaT interpretované jako v kódování ISO-8859-1 (kódování, které pokrývá většinu <strong>západoevropských</strong> jazyků).</li>
+
+   <li>
+      Soubory s koncovkou <strong>.txt2</strong> jsou v OmegaT interpretované jako v kódování ISO-8859-2 (kódování, které pokrývá většinu jazyků <strong>střední a východní Evropy</strong>).</li>
+
+   <li>
+      Soubory s koncovkou <strong>.utf8</strong> jsou v OmegaT interpretované jako v kódování UTF-8 (kódování, které pokrývá téměř <strong>všechny</strong> jazyky světa).</li>
+</ul>
+
+<p>Jistě že přípony <strong>.txt1</strong>, <strong>.txt2</strong> a <strong>.utf8</strong> v reále neexistují. Program OmegaT právě pro Vás připravil krátký seznam, který Vám pomůže v této věci, jak si poradit s některými <strong>cizími</strong> soubory.</p>
+
+<p>Představte si, že máte na japonském počítači přeložit francouzský soubor (např. <strong>ve_francouzstine.txt</strong>). Je velmi pravděpodobné, že soubor byl vytvořen  jako soubor v kódování <strong>ISO-8859-1</strong>. Vy teď víte, že jednoduchým přidáním <strong>1</strong> na konec jeho názvu (<strong>ve_francouzstine.txt1</strong>) bude OmegaT správně interpretovat jeho obsah, jako by byl v ISO-8859-1... A je to!</p>
+
+<hr>
+<p><a href="legalNotices.html" title="Právní poznámky">Právní poznámky</a></p>
+
+</body>
+</html>

@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers, 
                             Benjamin Siband, and Kim Bruning
+           (C)   2007 Zoltan Bartko
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -112,6 +113,7 @@ import net.roydesign.mac.MRJAdapter;
  * @author Maxym Mykhalchuk
  * @author Kim Bruning
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
+ * @author Zoltan Bartko - bartkozoltan@bartkozoltan.com
  */
 public class MainWindow extends JFrame implements ActionListener, WindowListener, ComponentListener
 {
@@ -374,9 +376,12 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             s += " :: " + m_activeProj;                                         // NOI18N
             try
             {
-                String file = m_activeFile.substring(CommandThread.core.sourceRoot().length());
-                editorScroller.setName(file);
-            } catch( Exception e ) { }
+                //String file = m_activeFile.substring(CommandThread.core.sourceRoot().length());
+                String file = getActiveFileName();
+//                Log.log("file = "+file);
+//                      editorScroller.setName(file);
+            } 
+            catch( Exception e ) { }
         }
         // Fix for bug [1730935] Editor window still shows filename after closing project and
         // RFE [1604238]: instant start display in the main window
@@ -395,7 +400,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         m_curEntryNum = -1;
         m_activeMatch = -1;
         m_activeProj = new String();
-        m_activeFile = new String();
+        //m_activeFile = new String();
         
         ////////////////////////////////
         
@@ -981,7 +986,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         synchronized (editor) {
             editor.setEditable(true);
         }
-        m_projWin.uiUpdateImportButtonStatus();
+
+         updateTitle();
+         m_projWin.buildDisplay();
+ 
+         m_projWin.uiUpdateImportButtonStatus();
         
         m_projWin.setVisible(true);
     }
@@ -1431,7 +1440,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             public synchronized void run()
             {
                 m_activeProj = CommandThread.core.getProjectProperties().getProjectName();
-                m_activeFile = new String();
+                //m_activeFile = new String();
                 m_curEntryNum = 0;
                 loadDocument();
                 synchronized (this) {m_projectLoaded = true;}
@@ -1532,6 +1541,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             // clear old text
             editor.setText(new String());
 
+            // update the title and the project window
+            if (isProjectLoaded())
+                updateTitle();
+            m_projWin.buildDisplay();
+            
             m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
 
             m_xlFirstEntry = m_curEntry.getFirstInFile();
@@ -1967,23 +1981,6 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
             // <HP-experiment>
             try {
-                if (m_curEntry.getSrcFile().name.compareTo(m_activeFile) != 0)
-                {
-                    m_activeFile = m_curEntry.getSrcFile().name;
-                    updateTitle();
-                }
-            }
-            catch (Exception exception) {
-                Log.log("ERROR: exception while updating title:");
-                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                Log.log(exception);
-                return; // deliberately breaking, to simulate previous behaviour
-                // FIX: unknown
-            }
-            // </HP-experiment>
-
-            // <HP-experiment>
-            try {
                 updateFuzzyInfo();
                 updateGlossaryInfo();
             }
@@ -2298,7 +2295,20 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     
     private SourceTextEntry		m_curEntry;
     
-    private String  m_activeFile;
+   //private String  m_activeFile;
+    
+    private String getActiveFileFullPath() 
+    {
+        return CommandThread.core.getSTE(m_curEntryNum).getSrcFile().name;
+    }
+    
+    public String getActiveFileName() 
+    {
+        String result = getActiveFileFullPath().substring(
+                CommandThread.core.sourceRoot().length());
+ //       Log.log("active file name="+result);
+        return result;
+    }    
     private String  m_activeProj;
     public int      m_curEntryNum;
     private int     m_activeMatch;

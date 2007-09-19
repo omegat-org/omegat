@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Kim Bruning
+           (C) 2007 Zoltan Bartko
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -66,6 +67,7 @@ import org.omegat.util.Preferences;
  * @author Kim Bruning
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
+ * @author Zoltan Bartko
  */
 public class ProjectFrame extends JFrame
 {
@@ -263,13 +265,21 @@ public class ProjectFrame extends JFrame
         output.append("</tr>\n");                                               // NOI18N
         int firstEntry = 1;
         int entriesUpToNow = 0;
+        String currentFile = m_parent.getActiveFileName();
+ 
         for (int i=0; i<m_nameList.size(); i++)
         {
             String name = (String) m_nameList.get(i);
             entriesUpToNow = ((Integer)m_offsetList.get(i)).intValue();
             int size = 1+entriesUpToNow-firstEntry;
             
-            output.append("<tr>\n");                                            // NOI18N
+            String tableRowTag;
+            if (name.equals(currentFile))
+                tableRowTag = "<tr bgcolor=\"#C8DDF2\">\n";                     // NOI18N
+            else
+                tableRowTag = "<tr>\n";                                         // NOI18N
+            
+            output.append(tableRowTag);                                         // NOI18N
             output.append("<td width=80%>");                                    // NOI18N
             output.append("<a href=\""+firstEntry+"\">"+name+"</a>");           // NOI18N
             output.append("</td>\n");                                           // NOI18N

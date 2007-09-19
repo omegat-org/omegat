@@ -5,8 +5,8 @@
 1.7.2 vs. 1.7.1
 
 
-  9 Enhancements
-  5 Bugfixes
+  11 Enhancements
+   5 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.2
@@ -21,6 +21,9 @@ Contains three new localisations (Simplified Chinese, Traditional Chinese and Cz
 
   - instant start display in the main window
   http://sourceforge.net/support/tracker.php?aid=1604238
+
+  - Current file highlighted in Project Files Window
+  http://sourceforge.net/support/tracker.php?aid=1766670 
 
  Other enhancements:
 

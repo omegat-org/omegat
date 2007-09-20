@@ -379,7 +379,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                 //String file = m_activeFile.substring(CommandThread.core.sourceRoot().length());
                 String file = getActiveFileName();
 //                Log.log("file = "+file);
-//                      editorScroller.setName(file);
+                editorScroller.setName(file);
             } 
             catch( Exception e ) { }
         }

@@ -1044,7 +1044,9 @@ public class CommandThread extends Thread
         m_transFrame.setMessageText(OStrings.getString("CT_LOAD_SRC_COMPLETE"));
         m_curFile = null;
         loadTranslations();
-        m_projWin.buildDisplay();
+//                                  Call is too early 
+//        m_projWin.buildDisplay(); for MainWindow.getActiveFileName() 
+//                                  and doesn't seem useful
         m_projWin.setVisible(true);
         m_projWin.toFront();
         return true;

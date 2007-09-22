@@ -6,7 +6,7 @@
 
 
   11 Enhancements
-   5 Bugfixes
+   6 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.2
@@ -52,6 +52,10 @@ Contains three new localisations (Simplified Chinese, Traditional Chinese and Cz
 
   - Editor window still shows filename after closing project
   http://sourceforge.net/support/tracker.php?aid=1730935 
+
+  - omegat version nb in project_save.tmx
+  http://sourceforge.net/support/tracker.php?aid=1774398 
+
 
 ----------------------------------------------------------------------
  OmegaT 1.7.1 Changes

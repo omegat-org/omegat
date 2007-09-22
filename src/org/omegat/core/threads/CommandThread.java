@@ -407,6 +407,9 @@ public class CommandThread extends Thread
         OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");          // NOI18N
         PrintWriter out = new PrintWriter(osw); // PW is easier to use than Buff.Writer
         
+        String version = OStrings.VERSION;
+        if ( !OStrings.UPDATE.equals("0") )                                     // NOI18N
+            version = version + "_" + OStrings.UPDATE;
         // Write TMX header
         out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");              // NOI18N
         if (levelTwo)
@@ -419,7 +422,7 @@ public class CommandThread extends Thread
             out.println("<tmx version=\"1.1\">");                               // NOI18N
         out.println("  <header");                                               // NOI18N
         out.println("    creationtool=\"OmegaT\"");                             // NOI18N
-        out.println("    creationtoolversion=\"" + TMXReader.CTV_OMEGAT_CURRENT + "\""); // NOI18N
+        out.println("    creationtoolversion=\"" + version + "\"");             // NOI18N
         out.println("    segtype=\"" + segmenting + "\"");                      // NOI18N
         out.println("    o-tmf=\"OmegaT TMX\"");                                // NOI18N
         out.println("    adminlang=\"EN-US\"");                                 // NOI18N

@@ -6,7 +6,7 @@
 
 
   11 Enhancements
-   6 Bugfixes
+   7 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.2
@@ -55,6 +55,9 @@ Contains three new localisations (Simplified Chinese, Traditional Chinese and Cz
 
   - omegat version nb in project_save.tmx
   http://sourceforge.net/support/tracker.php?aid=1774398 
+
+  - sh language is not expanded in the manual
+  http://sourceforge.net/support/tracker.php?aid=1748552
 
 
 ----------------------------------------------------------------------

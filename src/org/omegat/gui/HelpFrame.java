@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, 
                             Sandra Jean Chua, and Henry Pijffers
+               2007 Didier Briel
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -511,12 +512,19 @@ public class HelpFrame extends JFrame
       *
       * @see Locale.getDisplayName(Locale inLocale)
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      * @author Didier Briel 
       */
     private String getLocaleName(String localeTag) {
         String language = localeTag.substring(0, 2);
         String country  = localeTag.length() >= 5 ? localeTag.substring(3, 5) : "";
         Locale locale = new Locale(language, country);
-        return locale.getDisplayName(locale);
+        // The following test is necessary to fix
+        // [1748552] sh language is not expanded in the manual
+        // since Java does not display correctly the "sh" langage name
+        if (language.equalsIgnoreCase("sh"))
+            return "srpskohrvatski";
+        else
+            return locale.getDisplayName(locale);
     }
 
     /**

@@ -176,39 +176,6 @@ Code has been contributed by
   Benjamin Siband
   Martin Wunderlich
 
-Localization contributed by
- Roberto Argus (Portugese-Brazil)
-  Alessandro Cattelan (Italian)
-  Sabine Cretella (German)
-  Suzanne Bolduc (Esperanto)
-  Didier Briel (French)
-  Frederik De Vos (Dutch)
-  Cesar Escribano Esteban (Spanish)
-  Dmitri Gabinski (Belarusian, Esperanto, and Russian)
-  Takayuki Hayashi (Japanese)
-  Jean-Christophe Helary (French and Japanese)
-  Yutaka Kachi (Japanese)
-  Dragomir Kovacevic (Serbo-Croat)
-  Elina Lagoudaki (Greek)
-  Martin Lukáč (Slovak)
-  Ahmet Murati (Albanian)
-  Samuel Murray (Afrikaans)
-  Yoshi Nakayama (Japanese)
-  Claudio Nasso (Italian)
-  David Olveira (Portugese)
-  Ronaldo Radunz (Portugese-Brazil)
-  Thelma L. Sabim (Portugese-Brazil)
-  Juan Salcines (Spanish)
-  Pablo Roca Santiagio (Spanish)
-  Sonja Tomaskovic (German)
-  Karsten Voss (Polish)
-  Gerard van der Weyde (Dutch)
-  Martin Wunderlich (German)
-  Hisashi Yanagida (Japanese)
-  Kunihiko Yokota (Japanese)
-  Erhan Yükselci (Turkish)
-  Mikel Forcada Zubizarreta (Catalan) 
-
 Other contributions by
   Sabine Cretella
   Dmitri Gabinski

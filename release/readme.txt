@@ -1,7 +1,7 @@
 ﻿@@TRANSLATION_NOTICE@@
 
 ==============================================================================
-  OmegaT 1.7.1, Read Me file
+  OmegaT 1.7.2, Read Me file
 
   1.  Information about OmegaT
   2.  What is OmegaT?

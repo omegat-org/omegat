@@ -65,7 +65,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="projectImportMenuItemActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="wikiImportMenuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="projectWikiImportMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_WIKI_IMPORT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
@@ -565,6 +565,11 @@
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
   <SubComponents>
     <Component class="javax.swing.JLabel" name="statusLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="MS Sans Serif" size="11" style="0"/>
+        </Property>
+      </Properties>
       <AuxValues>
         <AuxValue name="generateMnemonicsCode" type="java.lang.Boolean" value="true"/>
       </AuxValues>

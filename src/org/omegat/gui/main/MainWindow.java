@@ -2396,6 +2396,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         addComponentListener(this);
         addWindowListener(this);
 
+        statusLabel.setFont(new java.awt.Font("MS Sans Serif", 0, 11));
         getContentPane().add(statusLabel, java.awt.BorderLayout.SOUTH);
 
         org.openide.awt.Mnemonics.setLocalizedText(projectMenu, OStrings.getString("TF_MENU_FILE"));
@@ -2418,6 +2419,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         projectWikiImportMenuItem.addActionListener(this);
 
         projectMenu.add(projectWikiImportMenuItem);
+
         org.openide.awt.Mnemonics.setLocalizedText(projectReloadMenuItem, OStrings.getString("TF_MENU_PROJECT_RELOAD"));
         projectReloadMenuItem.addActionListener(this);
 
@@ -3045,12 +3047,12 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private javax.swing.JMenuItem projectEditMenuItem;
     private javax.swing.JMenuItem projectExitMenuItem;
     private javax.swing.JMenuItem projectImportMenuItem;
-    private javax.swing.JMenuItem projectWikiImportMenuItem;
     private javax.swing.JMenu projectMenu;
     private javax.swing.JMenuItem projectNewMenuItem;
     private javax.swing.JMenuItem projectOpenMenuItem;
     private javax.swing.JMenuItem projectReloadMenuItem;
     private javax.swing.JMenuItem projectSaveMenuItem;
+    private javax.swing.JMenuItem projectWikiImportMenuItem;
     private javax.swing.JSeparator separator1inEditMenu;
     private javax.swing.JSeparator separator1inOptionsMenu;
     private javax.swing.JSeparator separator1inProjectMenu;

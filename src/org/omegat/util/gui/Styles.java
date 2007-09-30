@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+ Portions copyright 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,6 +26,8 @@
 package org.omegat.util.gui;
 
 import java.awt.Color;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
@@ -40,11 +43,17 @@ public final class Styles
     private Styles() { }
     
     /** Plain text. */
-    public final static AttributeSet PLAIN;
+    public final static MutableAttributeSet PLAIN;
     /** Bold text. */
     public final static MutableAttributeSet BOLD;
     /** Bold text on light green background. */
     public final static MutableAttributeSet GREEN;
+    /** Red text */
+    public final static MutableAttributeSet TRANSLATED;
+    
+    /** misspelled text */
+    public final static MutableAttributeSet MISSPELLED;
+    
     /** Disabled, i.e grayed out text. */
     public final static MutableAttributeSet DISABLED;
     
@@ -62,19 +71,45 @@ public final class Styles
     
     static
     {
-        PLAIN = SimpleAttributeSet.EMPTY;
+        UIDefaults uidefaults = UIManager.getDefaults();
+        
+        PLAIN = new SimpleAttributeSet();
+        StyleConstants.setBackground(PLAIN, 
+                uidefaults.getColor("TextPane.background"));                    // NOI18N
+        StyleConstants.setForeground(PLAIN,
+                uidefaults.getColor("TextPane.foreground"));                    // NOI18N
         BOLD = new SimpleAttributeSet();
         StyleConstants.setBold(BOLD, true);
         GREEN = new SimpleAttributeSet();
         StyleConstants.setBold(GREEN, true);
         StyleConstants.setBackground(GREEN, new Color(192, 255, 192));
+        TRANSLATED = new SimpleAttributeSet();
+        StyleConstants.setBackground(TRANSLATED, new Color(255, 255, 99));
         DISABLED = new SimpleAttributeSet();
         StyleConstants.setForeground(DISABLED, 
-                javax.swing.UIManager.getDefaults().getColor("Label.disabledForeground"));  // NOI18N
+                uidefaults.getColor("Label.disabledForeground"));               // NOI18N
         TEXT_EXTRA = new SimpleAttributeSet();
         StyleConstants.setForeground(TEXT_EXTRA, Color.blue);
         TEXT_BORDER = new SimpleAttributeSet();
         StyleConstants.setForeground(TEXT_BORDER, Color.green);
+        
+        MISSPELLED = new SimpleAttributeSet();
+        StyleConstants.setForeground(MISSPELLED, Color.red);
+        StyleConstants.setUnderline(MISSPELLED,true);
+        
     }
     
+    /**
+     * return a new MutableAttributeSet with the background color of the base and
+     * all other attributes of toApply (currently: foreground, bold, underline)
+     */
+    public static MutableAttributeSet applyStyles(AttributeSet base, AttributeSet toApply) {
+        MutableAttributeSet result = new SimpleAttributeSet();
+        StyleConstants.setBackground(result, StyleConstants.getBackground(base));
+        StyleConstants.setForeground(result, StyleConstants.getForeground(toApply));
+        StyleConstants.setBold(result, StyleConstants.isBold(toApply));
+        StyleConstants.setUnderline(result, StyleConstants.isUnderline(toApply));
+        
+        return result;
+}
 }

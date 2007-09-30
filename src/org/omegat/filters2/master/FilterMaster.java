@@ -881,7 +881,7 @@ public class FilterMaster
                 Preferences.getPreference(Preferences.TARGET_LOCALE));
         
         res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LOCALE),
-                targetLang.getLocale());
+                targetLang.getLocaleCode());
         res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LANGUAGE),
                 targetLang.getLanguage());
         res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LANG_CODE),

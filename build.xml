@@ -63,6 +63,10 @@
     
     <target name="-post-jar">
         <delete file="${dist.dir}/README.TXT"/>
+        <!-- copy the native libraries to the distribution directory -->
+        <copy todir="dist/native">
+            <fileset dir="native"/>
+        </copy>
     </target>
     
     <!-- Creates a zip with two localization packs -->

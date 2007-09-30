@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
-               2007 Bartko Zoltan
+ Portions copyright 2007 Zoltan Bartko - bartkozoltan@bartkozoltan.com
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -63,6 +63,7 @@ import org.omegat.gui.ProjectFrame;
 import org.omegat.core.ProjectProperties;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.messages.MessageRelay;
+import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -93,6 +94,18 @@ public class CommandThread extends Thread
      * </small>
      */
     public static CommandThread core;
+    
+    /**
+     * the spell checker instance
+     */
+    private static final SpellChecker m_spellchecker = SpellChecker.getInstance();
+    
+    /**
+     * return the spell checker instance
+     */
+    public SpellChecker getSpellchecker() {
+        return m_spellchecker;
+    }
     
     public CommandThread(MainWindow tf)
     {
@@ -242,6 +255,9 @@ public class CommandThread extends Thread
         }
         
         numberofTranslatedSegments = 0;
+        
+        // clean up the spell checker
+        m_spellchecker.destroy();
     }
     
     private void requestLoad(RequestPacket pack)
@@ -1052,6 +1068,10 @@ public class CommandThread extends Thread
 //                                  and doesn't seem useful
         m_projWin.setVisible(true);
         m_projWin.toFront();
+        
+        // initialize the spell checker
+        m_spellchecker.initialize();
+        
         return true;
     }
     

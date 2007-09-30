@@ -33,7 +33,6 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentListener;
@@ -50,8 +49,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import javax.swing.ImageIcon;
-import javax.swing.InputVerifier;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -73,7 +70,6 @@ import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.DialogThread;
-import org.omegat.core.threads.SearchThread;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.HelpFrame;
@@ -85,6 +81,7 @@ import org.omegat.gui.dialogs.FontSelectionDialog;
 import org.omegat.gui.dialogs.WorkflowOptionsDialog;
 import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
+import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -98,12 +95,14 @@ import org.omegat.util.gui.Styles;
 
 import com.vlsolutions.swing.docking.DockingConstants;
 import com.vlsolutions.swing.docking.DockingDesktop;
-import com.vlsolutions.swing.docking.DockableState;
 import com.vlsolutions.swing.docking.event.DockableStateWillChangeEvent;
 import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
 import com.vlsolutions.swing.docking.ui.DockingUISettings;
+import javax.swing.text.AttributeSet;
 
 import net.roydesign.mac.MRJAdapter;
+import org.omegat.gui.dialogs.SpellcheckerConfigurationDialog;
+import org.omegat.util.Token;
 
 /**
  * The main window of OmegaT application.
@@ -142,6 +141,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         editor.setFont(m_font);
         matches.setFont(m_font);
         glossary.setFont(m_font);
+        m_autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
     }
     
     private ImageIcon getIcon(String iconName)
@@ -339,6 +339,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         setAccelerator(gotoPreviousSegmentMenuItem , KeyEvent.VK_P);
         setAccelerator(gotoSegmentMenuItem, KeyEvent.VK_J);
         
+        setAccelerator(gotoHistoryForwardMenuItem, KeyEvent.VK_N, true);
+        setAccelerator(gotoHistoryBackMenuItem, KeyEvent.VK_P, true);
+        
         setAccelerator(viewFileListMenuItem, KeyEvent.VK_L);
         
         setAccelerator(toolsValidateTagsMenuItem , KeyEvent.VK_T);
@@ -378,13 +381,12 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             {
                 //String file = m_activeFile.substring(CommandThread.core.sourceRoot().length());
                 String file = getActiveFileName();
-//                Log.log("file = "+file);
-                // RFE [1764103] Editor window name
-                 editorScroller.setName(StaticUtils.format(
-                         OStrings.getString("GUI_SUBWINDOWTITLE_Editor"),
-                         new Object[] {file}));
-            } 
-            catch( Exception e ) { }
+ //               Log.log("file = "+file);
+                // RFE [1764103] Editor window name 
+                editorScroller.setName(StaticUtils.format( 
+                OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), 
+                                   new Object[] {file})); 
+            } catch( Exception e ) { }
         }
         // Fix for bug [1730935] Editor window still shows filename after closing project and
         // RFE [1604238]: instant start display in the main window
@@ -432,6 +434,20 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         
         optionsAlwaysConfirmQuitCheckBoxMenuItem.setSelected(
                 Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT));
+        
+         if (Preferences.isPreference(Preferences.MARK_TRANSLATED_SEGMENTS))
+        {
+            viewMarkTranslatedSegmentsCheckBoxMenuItem.setSelected(true);
+            m_translatedAttributeSet = Styles.TRANSLATED;
+    }
+        else
+            m_translatedAttributeSet = Styles.PLAIN;
+    
+        if (Preferences.isPreference(Preferences.DISPLAY_SEGMENT_SOURCES)) {
+            viewDisplaySegmentSourceCheckBoxMenuItem.setSelected(true);
+            m_displaySegmentSources = true;
+        }
+            
     }
     
     private boolean layoutInitialized = false;
@@ -810,6 +826,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     }
     
     /** insert current fuzzy match at cursor position */
+
     private synchronized void doInsertTrans()
     {
         if (!isProjectLoaded())
@@ -860,10 +877,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     {
         synchronized (editor) {
             // build local offsets
-            int start = m_segmentStartOffset + m_sourceDisplayLength +
-                    OStrings.getSegmentStartMarker().length();
-            int end = editor.getTextLength() - m_segmentEndInset -
-                    OStrings.getSegmentEndMarker().length();
+            int start = getTranslationStart();
+            int end = getTranslationEnd();
 
             // remove text
             editor.select(start, end);
@@ -931,6 +946,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         viewFileListMenuItem.setEnabled(false);
         toolsValidateTagsMenuItem.setEnabled(false);
 
+        switchCaseSubMenu.setEnabled(false);
+        
         synchronized (editor) {
             editor.setEditable(false);
         }
@@ -986,14 +1003,16 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         viewFileListMenuItem.setEnabled(true);
         toolsValidateTagsMenuItem.setEnabled(true);
         
+        switchCaseSubMenu.setEnabled(true);
+        
         synchronized (editor) {
             editor.setEditable(true);
         }
-
-         updateTitle();
-         m_projWin.buildDisplay();
- 
-         m_projWin.uiUpdateImportButtonStatus();
+        
+        updateTitle();
+        m_projWin.buildDisplay();
+        
+        m_projWin.uiUpdateImportButtonStatus();
         
         m_projWin.setVisible(true);
     }
@@ -1186,6 +1205,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
         matches.clear();
         glossary.clear();
+        history.clear();
         editorScroller.setViewportView(editor);
 
         RequestPacket load;
@@ -1207,6 +1227,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
         matches.clear();
         glossary.clear();
+        history.clear();
         editorScroller.setViewportView(editor);
 
         RequestPacket load;
@@ -1445,6 +1466,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                 m_activeProj = CommandThread.core.getProjectProperties().getProjectName();
                 //m_activeFile = new String();
                 m_curEntryNum = 0;
+                
                 loadDocument();
                 synchronized (this) {m_projectLoaded = true;}
                 
@@ -1556,30 +1578,75 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             int xlEntries = 1+m_xlLastEntry-m_xlFirstEntry;
 
             DocumentSegment docSeg;
-            StringBuffer textBuf = new StringBuffer();
             m_docSegList = new DocumentSegment[xlEntries];
 
+            int totalLength = 0;
+            
+            AbstractDocument xlDoc = (AbstractDocument)editor.getDocument();
+            AttributeSet attributes = m_translatedAttributeSet;
+            
+            // if the source should be displayed, too
+            AttributeSet srcAttributes = Styles.PLAIN;
+            
+            // how to display the source segment
+            if (m_displaySegmentSources)
+                srcAttributes = Styles.GREEN;
+            
             for (int i=0; i<xlEntries; i++)
             {
                 docSeg = new DocumentSegment();
 
                 SourceTextEntry ste = CommandThread.core.getSTE(i+m_xlFirstEntry);
+                String sourceText = ste.getSrcText();
                 String text = ste.getTranslation();
+                
+                boolean doSpellcheck = false;
                 // set text and font
                 if( text.length()==0 )
                 {
+                    if (!m_displaySegmentSources) {
                     // no translation available - use source text
                     text = ste.getSrcText();
+                        attributes = Styles.PLAIN;
                 }
-                text += "\n\n";														// NOI18N
+                } else {
+                   doSpellcheck = true;
+                   attributes = m_translatedAttributeSet;
+                }
+                try {
+                    if (m_displaySegmentSources) {
+                        xlDoc.insertString(totalLength, sourceText+"\n", srcAttributes);
+                        totalLength += sourceText.length()+1;
+                    }
 
-                textBuf.append(text);
+                    xlDoc.insertString(totalLength,text,attributes);
+
+                    // mark the incorrectly set words, if needed
+                    if (doSpellcheck && m_autoSpellChecking) {
+                        checkSpelling(totalLength, text);
+                    }
+                    
+                    totalLength += text.length();
+                    													// NOI18N
+                    xlDoc.insertString(totalLength, "\n\n", Styles.PLAIN);
+                    
+                    totalLength += 2;
+                    
+                    if (m_displaySegmentSources) {
+                        text = sourceText + "\n" + text;
+                    }
+                    
+                    text += "\n\n";	
+
+                } catch(BadLocationException ble)
+                {
+                    Log.log(IMPOSSIBLE);
+                    Log.log(ble);
+                }
 
                 docSeg.length = text.length();
                 m_docSegList[i] = docSeg;
             }
-
-            editor.setText(textBuf.toString());
         } // synchronized (editor)
 
         Thread.yield();
@@ -1659,50 +1726,81 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         synchronized (editor) {
             AbstractDocument xlDoc = (AbstractDocument)editor.getDocument();
 
-            int start = m_segmentStartOffset + m_sourceDisplayLength +
-                OStrings.getSegmentStartMarker().length();
-            int end = editor.getTextLength() - m_segmentEndInset -
-                OStrings.getSegmentEndMarker().length();
+            AttributeSet attributes = m_translatedAttributeSet;
+            
+            int start = getTranslationStart();
+            int end = getTranslationEnd();
             String display_string;
             String new_translation;
+            
+            boolean doCheckSpelling = true;
+            
+            // the list of incorrect words returned eventually by the 
+            // spellchecker
+            List wordList = null;
+            int flags = IS_NOT_TRANSLATED;
+            
             if (start == end)
             {
                 new_translation = new String();
+                doCheckSpelling = false;
+                
+                if (!m_displaySegmentSources) {    
                 display_string  = m_curEntry.getSrcText();
+                    attributes = Styles.PLAIN;    
+                } else {
+                    display_string = new String();
+            }
             }
             else
             {
                 try
                 {
                     new_translation = xlDoc.getText(start, end - start);
+                    if (   new_translation.equals(m_curEntry.getSrcText())
+                        && !Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)) {
+                        attributes = Styles.PLAIN;
+                        doCheckSpelling = false;  
+                    } else {
+                        attributes = m_translatedAttributeSet;
+                        flags = 0;
+                }
                 }
                 catch(BadLocationException ble)
                 {
                     Log.log(IMPOSSIBLE);
                     Log.log(ble);
                     new_translation = new String();
+                    doCheckSpelling = false;
                 }
                 display_string = new_translation;
             }
 
+            int startOffset = m_segmentStartOffset;
             int totalLen = m_sourceDisplayLength + OStrings.getSegmentStartMarker().length() +
-                    new_translation.length() + OStrings.getSegmentEndMarker().length();
-            try
-            {
-                // see http://sourceforge.net/support/tracker.php?aid=1436607
-                // this method calls write locks / unlocks
-                xlDoc.replace(m_segmentStartOffset, totalLen, display_string, Styles.PLAIN);
-            }
-            catch(BadLocationException ble)
-            {
-                Log.log(IMPOSSIBLE);
-                Log.log(ble);
-            }
+                    new_translation.length() + OStrings.getSegmentEndMarker().length() + 2;
 
             int localCur = m_curEntryNum - m_xlFirstEntry;
             DocumentSegment docSeg = m_docSegList[localCur];
             docSeg.length = display_string.length() + "\n\n".length();              // NOI18N
+            String segmentSource = null;
     
+            if (m_displaySegmentSources) {
+                int increment = m_sourceDisplayLength + 1; 
+                startOffset += increment;
+                //totalLen -= increment;
+                docSeg.length += increment;
+                segmentSource = m_curEntry.getSrcText();
+            }
+            
+            docSeg.length = replaceEntry(m_segmentStartOffset, totalLen, 
+                    segmentSource, display_string, flags);
+            System.out.println("flags:"+flags);
+            
+            if (doCheckSpelling && m_autoSpellChecking) {
+                wordList = checkSpelling(startOffset, display_string);
+            }
+
             if (forceCommit) { // fix for 
                 String old_translation = m_curEntry.getTranslation();
                 // update memory
@@ -1744,29 +1842,118 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     
                         int localEntry = entry-m_xlFirstEntry;
                         int offset = offsets[localEntry];
+                        int replacementLength = docSeg.length;
     
                         // replace old text w/ new
                         docSeg = m_docSegList[localEntry];
-                        String ds_nn = display_string + "\n\n";                         // NOI18N
-                        try
-                        {
-                            // see http://sourceforge.net/support/tracker.php?aid=1436607
-                            // this method calls write locks / unlocks
-                            xlDoc.replace(offset, docSeg.length, ds_nn, Styles.PLAIN);
+                        docSeg.length = replaceEntry(offset, docSeg.length, 
+                                segmentSource, display_string, flags);
+                        
+                        int supplement = 0;
+                        
+                        if (m_displaySegmentSources) {
+                            supplement = ste.getSrcText().length() + "\n".length();
                         }
-                        catch(BadLocationException ble)
-                        {
-                            Log.log(IMPOSSIBLE);
+                        
+                        if (doCheckSpelling && wordList != null) {
+                            Iterator iter = wordList.iterator();
+
+                            while (iter.hasNext()) {
+                                Token token = (Token) iter.next();
+                                int tokenStart = token.getOffset();
+                                int tokenEnd = tokenStart + token.getLength();
+                                String word = token.getTextFromString(display_string);
+
+                                try {
+                                    xlDoc.replace(
+                                            offset+supplement+tokenStart,
+                                            token.getLength(),
+                                            word,
+                                            Styles.applyStyles(attributes,Styles.MISSPELLED)
+                                            );
+                                } catch (BadLocationException ble) {
+                                    //Log.log(IMPOSSIBLE);
                             Log.log(ble);
                         }
-                        docSeg.length = ds_nn.length();
                     }
+                }
+            }
                 }
             }
             editor.cancelUndo();
         } // synchronize (editor)
     }
 
+    public final int WITH_END_MARKERS = 1;
+    public final int IS_NOT_TRANSLATED = 2;
+    
+    /**
+     * replace the text in the editor and return the new length
+     */
+    public synchronized int replaceEntry(int offset, int length, 
+            String source, String translation, int flags) {
+        synchronized(editor) {
+            AbstractDocument xlDoc = (AbstractDocument) editor.getDocument();
+            
+            int result = 0;
+            
+            AttributeSet attr = 
+                    ((flags & IS_NOT_TRANSLATED) == IS_NOT_TRANSLATED ?
+                        Styles.PLAIN : m_translatedAttributeSet);
+            
+            try {
+                xlDoc.remove(offset, length);
+                
+                xlDoc.insertString(offset,"\n\n",Styles.PLAIN);
+                result = 2;
+                if ((flags & WITH_END_MARKERS) == WITH_END_MARKERS) {
+                    String endStr = OStrings.getSegmentEndMarker();
+                    xlDoc.insertString(offset, endStr, Styles.BOLD);
+                    result += endStr.length(); 
+                }
+                xlDoc.insertString(offset, translation, attr);
+                result += translation.length();
+                
+                if ((flags & WITH_END_MARKERS) == WITH_END_MARKERS) {
+                    String startStr = new String(OStrings.getSegmentStartMarker());
+                    // <HP-experiment>
+                    
+                            try {
+                        if (m_segmentTagHasNumber)
+                        {
+                            // put entry number in first tag
+                            String num = String.valueOf(m_curEntryNum + 1);
+                            int zero = startStr.lastIndexOf('0');
+                            startStr = startStr.substring(0, zero-num.length()+1) + num + 
+                                    startStr.substring(zero+1, startStr.length());
+                        }
+                    }
+                    catch (Exception exception) {
+                        Log.log("ERROR: exception while putting segment # in start tag:");
+                        Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                        Log.log(exception);
+                        // FIX: since these are localised, don't assume number appears, keep try/catch block
+                    }
+                    // </HP-experiment>
+                    /*startStr = "<segment "+Integer.toString(m_curEntryNum + 1)+">";*/
+                    xlDoc.insertString(offset, startStr, Styles.BOLD);
+                    result += startStr.length();
+                }
+                if (source != null) {
+                    if ((flags & WITH_END_MARKERS) != WITH_END_MARKERS) {
+                        source += "\n";
+                    }
+                    xlDoc.insertString(offset, source, Styles.GREEN);
+                    result += source.length();
+                }
+            } catch (BadLocationException ble) {
+                Log.log(IMPOSSIBLE);
+                Log.log(ble);
+            }
+            
+            return result;
+        }
+    }
     /**
      * Activates the current entry by displaying source text and embedding
      * displayed text in markers.
@@ -1780,7 +1967,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             return;
 
         synchronized (editor) {
-            AbstractDocument xlDoc = (AbstractDocument)editor.getDocument();
+            history.insertNew(m_curEntryNum);
+
+            // update history menu items
+            gotoHistoryBackMenuItem.setEnabled(history.hasPrev());
+            gotoHistoryForwardMenuItem.setEnabled(history.hasNext());
 
             // recover data about current entry
             // <HP-experiment>
@@ -1828,51 +2019,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             // -2 to move inside newlines at end of segment
             m_segmentEndInset = editor.getTextLength() - (m_segmentStartOffset + docSeg.length-2);
 
-            // get label tags
-            String startStr = OStrings.getSegmentStartMarker();
-            String endStr = OStrings.getSegmentEndMarker();
-            // <HP-experiment>
-            try {
-                if (m_segmentTagHasNumber)
-                {
-                    // put entry number in first tag
-                    String num = String.valueOf(m_curEntryNum + 1);
-                    int zero = startStr.lastIndexOf('0');
-                    startStr = startStr.substring(0, zero-num.length()+1) + num + 
-                            startStr.substring(zero+1, startStr.length()-1);
-                }
-            }
-            catch (Exception exception) {
-                Log.log("ERROR: exception while putting segment # in start tag:");
-                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                Log.log(exception);
-                return; // deliberately breaking, to simulate previous behaviour
-                // FIX: since these are localised, don't assume number appears, keep try/catch block
-            }
-            // </HP-experiment>
-
             String translation = m_curEntry.getTranslation();
-
-            // append to end of segment first
-            try
-            {
-                int endStrPos = m_segmentStartOffset + docSeg.length - 2;
-                xlDoc.insertString(endStrPos, endStr, Styles.BOLD);
-            }
-            catch(BadLocationException ble)
-            {
-                Log.log(IMPOSSIBLE);
-                Log.log(ble);
-            }
-            // <HP-experiment>
-            catch (Exception exception) {
-                Log.log("ERROR: exception while inserting end tag:");
-                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                Log.log(exception);
-                return; // deliberately breaking, to simulate previous behaviour
-                // FIX: unknown
-            }
-            // </HP-experiment>
 
             if( translation==null || translation.length()==0 )
             {
@@ -1885,24 +2032,6 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                 //      http://sourceforge.net/support/tracker.php?aid=1075972
                 if( Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT) )
                 {
-                    try
-                    {
-                        xlDoc.remove(m_segmentStartOffset, translation.length());
-                    }
-                    catch(BadLocationException ble)
-                    {
-                        Log.log(IMPOSSIBLE);
-                        Log.log(ble);
-                    }
-                    // <HP-experiment>
-                    catch (Exception exception) {
-                        Log.log("ERROR: exception while removing source text:");
-                        Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                        Log.log(exception);
-                        return; // deliberately breaking, to simulate previous behaviour
-                        // FIX: unknown
-                    }
-                    // </HP-experiment>
                     translation = new String();
                 }
 
@@ -1938,49 +2067,13 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                                     Preferences.BEST_MATCH_EXPLANATORY_TEXT,
                                     OStrings.getString("WF_DEFAULT_PREFIX")) +
                                     thebest.str.getTranslation();
-                            try
-                            {
-                                xlDoc.replace(m_segmentStartOffset, old_tr_len, translation, Styles.PLAIN);
                             }
-                            catch(BadLocationException ble)
-                            {
-                                Log.log(IMPOSSIBLE);
-                                Log.log(ble);
                             }
-                            // <HP-experiment>
-                            catch (Exception exception) {
-                                Log.log("ERROR: exception while inserting translation:");
-                                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                                Log.log(exception);
-                                return; // deliberately breaking, to simulate previous behaviour
-                                // FIX: unknown
                             }
-                            // </HP-experiment>
                         }
-                    }
-                }
-            }
 
-            try
-            {
-                xlDoc.insertString(m_segmentStartOffset, " ", Styles.PLAIN);        // NOI18N
-                xlDoc.insertString(m_segmentStartOffset, startStr, Styles.BOLD);
-                xlDoc.insertString(m_segmentStartOffset, srcText, Styles.GREEN);
-            }
-            catch(BadLocationException ble)
-            {
-                Log.log(IMPOSSIBLE);
-                Log.log(ble);
-            }
-            // <HP-experiment>
-            catch (Exception exception) {
-                Log.log("ERROR: exception while inserting translation:");
-                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                Log.log(exception);
-                return; // deliberately breaking, to simulate previous behaviour
-                // FIX: unknown
-            }
-            // </HP-experiment>
+            int replacedLength = replaceEntry(m_segmentStartOffset, 
+                    docSeg.length, srcText, translation, WITH_END_MARKERS);
 
             // <HP-experiment>
             try {
@@ -2072,9 +2165,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                 // FIX: unknown
             }
             // </HP-experiment>
-            final int lookNext = m_segmentStartOffset + srcText.length() + 
-                    OStrings.getSegmentStartMarker().length() + 1 + translation.length() + 
-                    OStrings.getSegmentEndMarker().length() + offsetNext;
+            final int lookNext = m_segmentStartOffset + replacedLength + offsetNext;
 
             SwingUtilities.invokeLater(new Runnable()
             {
@@ -2113,6 +2204,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                 m_docReady = true;
             }
             editor.cancelUndo();
+            
+            editor.checkSpelling(true);
         } // synchronize (editor)
 
         entryActivated = true;
@@ -2179,8 +2272,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             else
             {
                 // make sure we're not at start of segment
-                int start = m_segmentStartOffset + m_sourceDisplayLength +
-                        OStrings.getSegmentStartMarker().length();
+                int start = getTranslationStart();
                 int spos = editor.getSelectionStart();
                 int epos = editor.getSelectionEnd();
                 if( pos<=start && epos<=start && spos<=start )
@@ -2192,6 +2284,66 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     }
 
     /**
+     * Calculate the position of the start of the current translation
+     */
+    public synchronized int getTranslationStart() {
+        synchronized(editor) {
+            return m_segmentStartOffset + m_sourceDisplayLength +
+                   OStrings.getSegmentStartMarker().length(); 
+        }
+    }
+    
+    /**
+     * Calculcate the position of the end of the current translation
+     */
+    public synchronized int getTranslationEnd() {
+        synchronized(editor) {
+           return editor.getTextLength() - m_segmentEndInset -
+                    OStrings.getSegmentEndMarker().length();
+        }
+    }
+    
+    /**
+     * Checks the spelling of the segment.
+     * @param start : the starting position
+     * @param text : the text to check
+     */
+    private synchronized ArrayList checkSpelling(int start, String text) {
+        // we have the translation and it should be spellchecked
+        List wordlist = StaticUtils.tokenizeText(text);
+        ArrayList wrongWordList = new ArrayList();
+        Iterator iter = wordlist.iterator();
+        
+        AbstractDocument xlDoc = (AbstractDocument)editor.getDocument();
+        AttributeSet attributes = m_translatedAttributeSet;
+
+        SpellChecker spellchecker = CommandThread.core.getSpellchecker();
+
+        while (iter.hasNext()) {
+            Token token = (Token) iter.next();
+            int tokenStart = token.getOffset();
+            int tokenEnd = tokenStart + token.getLength();
+            String word = text.substring(tokenStart, tokenEnd);
+
+            if (!spellchecker.isCorrect(word)) {
+                try {
+                    xlDoc.replace(
+                            start+tokenStart,
+                            token.getLength(),
+                            word,
+                            Styles.applyStyles(attributes,Styles.MISSPELLED)
+                            );
+                } catch (BadLocationException ble) {
+                    //Log.log(IMPOSSIBLE);
+                    Log.log(ble);
+                }
+                wrongWordList.add(token);
+            }
+        }
+        return wrongWordList;
+    }
+    
+    /**
      * Checks whether the selection & caret is inside editable text,
      * and changes their positions accordingly if not.
      */
@@ -2201,11 +2353,13 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             //int pos = m_editor.getCaretPosition();
             int spos = editor.getSelectionStart();
             int epos = editor.getSelectionEnd();
-            int start = m_segmentStartOffset + m_sourceDisplayLength +
-                    OStrings.getSegmentStartMarker().length();
+            /*int start = m_segmentStartOffset + m_sourceDisplayLength +
+                    OStrings.getSegmentStartMarker().length();*/
+            int start = getTranslationStart();
             // -1 for space before tag, -2 for newlines
-            int end = editor.getTextLength() - m_segmentEndInset -
-                    OStrings.getSegmentEndMarker().length();
+            /*int end = editor.getTextLength() - m_segmentEndInset -
+                    OStrings.getSegmentEndMarker().length();*/
+            int end = getTranslationEnd();
     
             if (spos != epos)
             {
@@ -2323,6 +2477,27 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         return m_projWin;
     }
     
+    /**
+     * the attribute set used for translated segments
+     */
+    private AttributeSet m_translatedAttributeSet;
+    
+    /**
+     * return the attribute set of translated segments
+     */
+    public AttributeSet getTranslatedAttributeSet() {
+        return m_translatedAttributeSet;
+    }
+    
+    /**
+     * display the segmetn sources or not
+     */
+    private boolean m_displaySegmentSources;
+    
+    public boolean displaySegmentSources() {
+        return m_displaySegmentSources;
+    }
+    
     private Set m_searches; // set of all open search windows
     
     public boolean m_projectLoaded;
@@ -2364,6 +2539,13 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         separator2inEditMenu = new javax.swing.JSeparator();
         editFindInProjectMenuItem = new javax.swing.JMenuItem();
         separator3inEditMenu = new javax.swing.JSeparator();
+        switchCaseSubMenu = new javax.swing.JMenu();
+        lowerCaseMenuItem = new javax.swing.JMenuItem();
+        upperCaseMenuItem = new javax.swing.JMenuItem();
+        titleCaseMenuItem = new javax.swing.JMenuItem();
+        separatorInSwitchCaseSubMenu = new javax.swing.JSeparator();
+        cycleSwitchCaseMenuItem = new javax.swing.JMenuItem();
+        separator5inEditMenu = new javax.swing.JSeparator();
         editSelectFuzzy1MenuItem = new javax.swing.JMenuItem();
         editSelectFuzzy2MenuItem = new javax.swing.JMenuItem();
         editSelectFuzzy3MenuItem = new javax.swing.JMenuItem();
@@ -2374,6 +2556,12 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         gotoNextSegmentMenuItem = new javax.swing.JMenuItem();
         gotoPreviousSegmentMenuItem = new javax.swing.JMenuItem();
         gotoSegmentMenuItem = new javax.swing.JMenuItem();
+        separatorInGoToMenu = new javax.swing.JSeparator();
+        gotoHistoryForwardMenuItem = new javax.swing.JMenuItem();
+        gotoHistoryBackMenuItem = new javax.swing.JMenuItem();
+        viewMenu = new javax.swing.JMenu();
+        viewMarkTranslatedSegmentsCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
+        viewDisplaySegmentSourceCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
         toolsMenu = new javax.swing.JMenu();
         toolsValidateTagsMenuItem = new javax.swing.JMenuItem();
         optionsMenu = new javax.swing.JMenu();
@@ -2383,6 +2571,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         optionsFontSelectionMenuItem = new javax.swing.JMenuItem();
         optionsSetupFileFiltersMenuItem = new javax.swing.JMenuItem();
         optionsSentsegMenuItem = new javax.swing.JMenuItem();
+        optionsSpellCheckMenuItem = new javax.swing.JMenuItem();
         optionsWorkflowMenuItem = new javax.swing.JMenuItem();
         optionsRestoreGUIMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
@@ -2393,8 +2582,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         projectExitMenuItem.addActionListener(this);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        addComponentListener(this);
         addWindowListener(this);
+        addComponentListener(this);
 
         statusLabel.setFont(new java.awt.Font("MS Sans Serif", 0, 11));
         getContentPane().add(statusLabel, java.awt.BorderLayout.SOUTH);
@@ -2502,6 +2691,34 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
         editMenu.add(separator3inEditMenu);
 
+        org.openide.awt.Mnemonics.setLocalizedText(switchCaseSubMenu, OStrings.getString("TF_EDIT_MENU_SWITCH_CASE"));
+        org.openide.awt.Mnemonics.setLocalizedText(lowerCaseMenuItem, OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_LOWER"));
+        lowerCaseMenuItem.addActionListener(this);
+
+        switchCaseSubMenu.add(lowerCaseMenuItem);
+
+        org.openide.awt.Mnemonics.setLocalizedText(upperCaseMenuItem, OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_UPPER"));
+        upperCaseMenuItem.addActionListener(this);
+
+        switchCaseSubMenu.add(upperCaseMenuItem);
+
+        org.openide.awt.Mnemonics.setLocalizedText(titleCaseMenuItem, OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_TITLE"));
+        titleCaseMenuItem.addActionListener(this);
+
+        switchCaseSubMenu.add(titleCaseMenuItem);
+
+        switchCaseSubMenu.add(separatorInSwitchCaseSubMenu);
+
+        cycleSwitchCaseMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, java.awt.event.InputEvent.SHIFT_MASK));
+        org.openide.awt.Mnemonics.setLocalizedText(cycleSwitchCaseMenuItem, OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_CYCLE"));
+        cycleSwitchCaseMenuItem.addActionListener(this);
+
+        switchCaseSubMenu.add(cycleSwitchCaseMenuItem);
+
+        editMenu.add(switchCaseSubMenu);
+
+        editMenu.add(separator5inEditMenu);
+
         org.openide.awt.Mnemonics.setLocalizedText(editSelectFuzzy1MenuItem, OStrings.getString("TF_MENU_EDIT_COMPARE_1"));
         editSelectFuzzy1MenuItem.addActionListener(this);
 
@@ -2550,7 +2767,32 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
         gotoMenu.add(gotoSegmentMenuItem);
 
+        gotoMenu.add(separatorInGoToMenu);
+
+        org.openide.awt.Mnemonics.setLocalizedText(gotoHistoryForwardMenuItem, OStrings.getString("TF_MENU_GOTO_FORWARD_IN_HISTORY"));
+        gotoHistoryForwardMenuItem.addActionListener(this);
+
+        gotoMenu.add(gotoHistoryForwardMenuItem);
+
+        org.openide.awt.Mnemonics.setLocalizedText(gotoHistoryBackMenuItem, OStrings.getString("TF_MENU_GOTO_BACK_IN_HISTORY"));
+        gotoHistoryBackMenuItem.addActionListener(this);
+
+        gotoMenu.add(gotoHistoryBackMenuItem);
+
         mainMenu.add(gotoMenu);
+
+        org.openide.awt.Mnemonics.setLocalizedText(viewMenu, OStrings.getString("MW_VIEW_MENU"));
+        org.openide.awt.Mnemonics.setLocalizedText(viewMarkTranslatedSegmentsCheckBoxMenuItem, OStrings.getString("TF_MENU_DISPLAY_MARK_TRANSLATED"));
+        viewMarkTranslatedSegmentsCheckBoxMenuItem.addActionListener(this);
+
+        viewMenu.add(viewMarkTranslatedSegmentsCheckBoxMenuItem);
+
+        org.openide.awt.Mnemonics.setLocalizedText(viewDisplaySegmentSourceCheckBoxMenuItem, OStrings.getString("MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES"));
+        viewDisplaySegmentSourceCheckBoxMenuItem.addActionListener(this);
+
+        viewMenu.add(viewDisplaySegmentSourceCheckBoxMenuItem);
+
+        mainMenu.add(viewMenu);
 
         org.openide.awt.Mnemonics.setLocalizedText(toolsMenu, OStrings.getString("TF_MENU_TOOLS"));
         org.openide.awt.Mnemonics.setLocalizedText(toolsValidateTagsMenuItem, OStrings.getString("TF_MENU_TOOLS_VALIDATE"));
@@ -2561,6 +2803,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         mainMenu.add(toolsMenu);
 
         org.openide.awt.Mnemonics.setLocalizedText(optionsMenu, OStrings.getString("MW_OPTIONSMENU"));
+        optionsMenu.addActionListener(this);
+
         org.openide.awt.Mnemonics.setLocalizedText(optionsTabAdvanceCheckBoxMenuItem, OStrings.getString("TF_MENU_DISPLAY_ADVANCE"));
         optionsTabAdvanceCheckBoxMenuItem.addActionListener(this);
 
@@ -2587,6 +2831,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         optionsSentsegMenuItem.addActionListener(this);
 
         optionsMenu.add(optionsSentsegMenuItem);
+
+        org.openide.awt.Mnemonics.setLocalizedText(optionsSpellCheckMenuItem, OStrings.getString("MW_OPTIONSMENU_SPELLCHECK"));
+        optionsSpellCheckMenuItem.addActionListener(this);
+
+        optionsMenu.add(optionsSpellCheckMenuItem);
 
         org.openide.awt.Mnemonics.setLocalizedText(optionsWorkflowMenuItem, OStrings.getString("MW_OPTIONSMENU_WORKFLOW"));
         optionsWorkflowMenuItem.addActionListener(this);
@@ -2676,6 +2925,18 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         else if (evt.getSource() == editFindInProjectMenuItem) {
             MainWindow.this.editFindInProjectMenuItemActionPerformed(evt);
         }
+        else if (evt.getSource() == lowerCaseMenuItem) {
+            MainWindow.this.lowerCaseMenuItemActionPerformed(evt);
+        }
+        else if (evt.getSource() == upperCaseMenuItem) {
+            MainWindow.this.upperCaseMenuItemActionPerformed(evt);
+        }
+        else if (evt.getSource() == titleCaseMenuItem) {
+            MainWindow.this.titleCaseMenuItemActionPerformed(evt);
+        }
+        else if (evt.getSource() == cycleSwitchCaseMenuItem) {
+            MainWindow.this.cycleSwitchCaseMenuItemActionPerformed(evt);
+        }
         else if (evt.getSource() == editSelectFuzzy1MenuItem) {
             MainWindow.this.editSelectFuzzy1MenuItemActionPerformed(evt);
         }
@@ -2703,8 +2964,23 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         else if (evt.getSource() == gotoSegmentMenuItem) {
             MainWindow.this.gotoSegmentMenuItemActionPerformed(evt);
         }
+        else if (evt.getSource() == gotoHistoryForwardMenuItem) {
+            MainWindow.this.gotoHistoryForwardMenuItemActionPerformed(evt);
+        }
+        else if (evt.getSource() == gotoHistoryBackMenuItem) {
+            MainWindow.this.gotoHistoryBackMenuItemActionPerformed(evt);
+        }
+        else if (evt.getSource() == viewMarkTranslatedSegmentsCheckBoxMenuItem) {
+            MainWindow.this.viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed(evt);
+        }
+        else if (evt.getSource() == viewDisplaySegmentSourceCheckBoxMenuItem) {
+            MainWindow.this.viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed(evt);
+        }
         else if (evt.getSource() == toolsValidateTagsMenuItem) {
             MainWindow.this.toolsValidateTagsMenuItemActionPerformed(evt);
+        }
+        else if (evt.getSource() == optionsMenu) {
+            MainWindow.this.optionsMenuActionPerformed(evt);
         }
         else if (evt.getSource() == optionsTabAdvanceCheckBoxMenuItem) {
             MainWindow.this.optionsTabAdvanceCheckBoxMenuItemActionPerformed(evt);
@@ -2720,6 +2996,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         }
         else if (evt.getSource() == optionsSentsegMenuItem) {
             MainWindow.this.optionsSentsegMenuItemActionPerformed(evt);
+        }
+        else if (evt.getSource() == optionsSpellCheckMenuItem) {
+            MainWindow.this.optionsSpellCheckMenuItemActionPerformed(evt);
         }
         else if (evt.getSource() == optionsWorkflowMenuItem) {
             MainWindow.this.optionsWorkflowMenuItemActionPerformed(evt);
@@ -2776,6 +3055,72 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
     public void windowOpened(java.awt.event.WindowEvent evt) {
     }// </editor-fold>//GEN-END:initComponents
+
+    private void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed
+        commitEntry(false);
+        
+        m_displaySegmentSources = 
+                viewDisplaySegmentSourceCheckBoxMenuItem.isSelected();
+        
+        Preferences.setPreference(Preferences.DISPLAY_SEGMENT_SOURCES,
+                m_displaySegmentSources);
+        
+        loadDocument();
+        activateEntry();
+    }//GEN-LAST:event_viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed
+
+    private void cycleSwitchCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cycleSwitchCaseMenuItemActionPerformed
+        synchronized(editor) {
+            editor.changeCase(EditorTextArea.CASE_CYCLE);
+        }
+    }//GEN-LAST:event_cycleSwitchCaseMenuItemActionPerformed
+
+    private void titleCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleCaseMenuItemActionPerformed
+        synchronized(editor) {
+            editor.changeCase(EditorTextArea.CASE_TITLE);
+        }
+    }//GEN-LAST:event_titleCaseMenuItemActionPerformed
+
+    private void upperCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upperCaseMenuItemActionPerformed
+        synchronized(editor) {
+            editor.changeCase(EditorTextArea.CASE_UPPER);
+        }
+    }//GEN-LAST:event_upperCaseMenuItemActionPerformed
+
+    private void lowerCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lowerCaseMenuItemActionPerformed
+        synchronized(editor) {
+            editor.changeCase(EditorTextArea.CASE_LOWER);
+        }
+    }//GEN-LAST:event_lowerCaseMenuItemActionPerformed
+
+    private void gotoHistoryBackMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoHistoryBackMenuItemActionPerformed
+        doGotoHistoryBack();
+    }//GEN-LAST:event_gotoHistoryBackMenuItemActionPerformed
+
+    private void gotoHistoryForwardMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoHistoryForwardMenuItemActionPerformed
+        doGotoHistoryForward();
+    }//GEN-LAST:event_gotoHistoryForwardMenuItemActionPerformed
+
+    private void optionsSpellCheckMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsSpellCheckMenuItemActionPerformed
+        doSpellCheckSettings();
+    }//GEN-LAST:event_optionsSpellCheckMenuItemActionPerformed
+
+    private void optionsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsMenuActionPerformed
+// TODO add your handling code here:
+    }//GEN-LAST:event_optionsMenuActionPerformed
+
+    private void viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed
+        Preferences.setPreference(Preferences.MARK_TRANSLATED_SEGMENTS,
+                viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected());
+        if( viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected() )
+            m_translatedAttributeSet = Styles.TRANSLATED;
+        else
+            m_translatedAttributeSet = Styles.PLAIN;
+        
+        commitEntry(false);
+        loadDocument();
+        activateEntry();
+    }//GEN-LAST:event_viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed
 
     private void optionsRestoreGUIMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsRestoreGUIMenuItemActionPerformed
         restoreGUI();
@@ -3011,7 +3356,49 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         doAbout();
     }//GEN-LAST:event_helpAboutMenuItemActionPerformed
 
+    /**
+     * Opens the spell checking window
+     */
+    private void doSpellCheckSettings() {
+        SpellcheckerConfigurationDialog sd = new SpellcheckerConfigurationDialog(this, 
+                CommandThread.core.getProjectProperties().getTargetLanguage());
+        sd.setVisible(true);
+        if (sd.getReturnStatus() == SpellcheckerConfigurationDialog.RET_OK) {
+            m_autoSpellChecking = 
+                    Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
+            if (m_autoSpellChecking) {
+                SpellChecker sc = CommandThread.core.getSpellchecker();
+                sc.destroy();
+                sc.initialize();
+            }
+            commitEntry(false);
+            int thisEntry = m_curEntryNum;
+            loadDocument();
+            activateEntry();
+        }
+    }
+
+    private boolean m_autoSpellChecking;
+    
+    public boolean autoSpellCheckingOn() {
+        return m_autoSpellChecking;
+    }
+
+    private synchronized void doGotoHistoryBack() {
+        int prevValue = history.back();
+        if (prevValue != -1)
+            doGotoEntry(prevValue+1);
+    }
+
+    private synchronized void doGotoHistoryForward() {
+        int nextValue = history.forward();
+        if (nextValue != -1)
+            doGotoEntry(nextValue+1);
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem cycleSwitchCaseMenuItem;
     private javax.swing.JMenuItem editFindInProjectMenuItem;
     private javax.swing.JMenuItem editInsertSourceMenuItem;
     private javax.swing.JMenuItem editInsertTranslationMenuItem;
@@ -3025,6 +3412,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private javax.swing.JMenuItem editSelectFuzzy4MenuItem;
     private javax.swing.JMenuItem editSelectFuzzy5MenuItem;
     private javax.swing.JMenuItem editUndoMenuItem;
+    private javax.swing.JMenuItem gotoHistoryBackMenuItem;
+    private javax.swing.JMenuItem gotoHistoryForwardMenuItem;
     private javax.swing.JMenu gotoMenu;
     private javax.swing.JMenuItem gotoNextSegmentMenuItem;
     private javax.swing.JMenuItem gotoNextUntranslatedMenuItem;
@@ -3033,6 +3422,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private javax.swing.JMenuItem helpAboutMenuItem;
     private javax.swing.JMenuItem helpContentsMenuItem;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenuItem lowerCaseMenuItem;
     private javax.swing.JMenuBar mainMenu;
     private javax.swing.JCheckBoxMenuItem optionsAlwaysConfirmQuitCheckBoxMenuItem;
     private javax.swing.JMenuItem optionsFontSelectionMenuItem;
@@ -3040,6 +3430,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private javax.swing.JMenuItem optionsRestoreGUIMenuItem;
     private javax.swing.JMenuItem optionsSentsegMenuItem;
     private javax.swing.JMenuItem optionsSetupFileFiltersMenuItem;
+    private javax.swing.JMenuItem optionsSpellCheckMenuItem;
     private javax.swing.JCheckBoxMenuItem optionsTabAdvanceCheckBoxMenuItem;
     private javax.swing.JMenuItem optionsWorkflowMenuItem;
     private javax.swing.JMenuItem projectCloseMenuItem;
@@ -3061,11 +3452,20 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private javax.swing.JSeparator separator3inEditMenu;
     private javax.swing.JSeparator separator4inEditMenu;
     private javax.swing.JSeparator separator4inProjectMenu;
+    private javax.swing.JSeparator separator5inEditMenu;
     private javax.swing.JSeparator separator5inProjectMenu;
+    private javax.swing.JSeparator separatorInGoToMenu;
+    private javax.swing.JSeparator separatorInSwitchCaseSubMenu;
     private javax.swing.JLabel statusLabel;
+    private javax.swing.JMenu switchCaseSubMenu;
+    private javax.swing.JMenuItem titleCaseMenuItem;
     private javax.swing.JMenu toolsMenu;
     private javax.swing.JMenuItem toolsValidateTagsMenuItem;
+    private javax.swing.JMenuItem upperCaseMenuItem;
+    private javax.swing.JCheckBoxMenuItem viewDisplaySegmentSourceCheckBoxMenuItem;
     private javax.swing.JMenuItem viewFileListMenuItem;
+    private javax.swing.JCheckBoxMenuItem viewMarkTranslatedSegmentsCheckBoxMenuItem;
+    private javax.swing.JMenu viewMenu;
     // End of variables declaration//GEN-END:variables
 
     private DockingDesktop desktop;
@@ -3078,4 +3478,6 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     
     private DockableScrollPane glossaryScroller;
     private GlossaryTextArea glossary;
+    
+    private SegmentHistory history = SegmentHistory.getInstance();
 }

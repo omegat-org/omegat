@@ -470,8 +470,8 @@ public class ProjectProperties
     protected Object clone() throws CloneNotSupportedException
     {
         ProjectProperties res = (ProjectProperties)super.clone();
-        res.sourceLanguage = new Language(sourceLanguage.getLocale());
-        res.targetLanguage = new Language(targetLanguage.getLocale());
+        res.sourceLanguage = new Language(sourceLanguage.getLocaleCode());
+        res.targetLanguage = new Language(targetLanguage.getLocaleCode());
         return res;
     }
     

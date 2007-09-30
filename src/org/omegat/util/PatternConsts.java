@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
            (C) 2007 Didier Briel
+ Portions copyright 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -126,4 +127,7 @@ public class PatternConsts
     public static final Pattern LANG_AND_COUNTRY = Pattern.compile(
             "([A-Za-z]{1,8})(?:(?:-|_)([A-Za-z0-9]{1,8}))?");                   // NOI18N
     
+    /** Pattern for detecting remote dictionary file archives */
+    public static final Pattern DICTIONARY_ZIP = Pattern.compile(
+            "\"([a-z]{1,8})(_([A-Z]{1,8})?)?\\.zip\"");
 }

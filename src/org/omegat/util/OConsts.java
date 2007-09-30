@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+ Portions copyright 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -81,6 +82,24 @@ public class OConsts
     /** The name of the file with project statistics: segments, words, chars count. */
     public static final String STATS_FILENAME   = "project_stats.txt";          // NOI18N
     
+    /** The name of the file with the ignored words: one ignored word per line */
+    public static final String IGNORED_WORD_LIST_FILE_NAME = "ignored_words.txt";   // NOI18N
+    
+    /** The name of the file with the correct (learned) words: one word per line */
+    public static final String LEARNED_WORD_LIST_FILE_NAME = "learned_words.txt";   // NOI18N
+    
+    /** The name of the spell checking library */
+    public static final String SPELLCHECKER_LIBRARY_NAME = "hunspell";  // NOI18N
+    
+    /** the native library directory */
+    public static final String NATIVE_LIBRARY_DIR = "native";   // NOI18N
+    
+    /** affix file extension */
+    public static final String SC_AFFIX_EXTENSION = ".aff";     // NOI18N
+    
+    /** dictionary file extension */
+    public static final String SC_DICTIONARY_EXTENSION = ".dic";    // NOI18N
+    
     /** The smallest threshold to detect a fuzzy match string */
     public static final int    FUZZY_MATCH_THRESHOLD    = 30;
     
@@ -119,4 +138,7 @@ public class OConsts
     
     /** Encoding: "UTF-8". */
     public static final String UTF8 = "UTF-8";                                  // NOI18N
+    
+    public static final String REMOTE_SC_DICTIONARY_LIST_LOCATION = 
+            "http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/";  // NOI18N
 }

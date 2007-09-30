@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2007 Didier Briel
+ Portions copyright 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -27,15 +28,21 @@ package org.omegat.util;
 
 import java.io.File;
 import java.awt.GraphicsEnvironment;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
 import java.text.BreakIterator;
 import java.text.MessageFormat;
 import java.util.List;
 import java.lang.reflect.Array;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 /**
  * Static functions taken from
@@ -780,6 +787,104 @@ public class StaticUtils
         // by duplicating them, otherwise the string will not be formatted
         str = str.replaceAll("'", "''");
         return MessageFormat.format(str, arguments);
+    }
+
+    /**
+     * dowload a file from the internet
+     */
+    public static String downloadFileToString(String urlString) throws IOException {
+        URLConnection urlConn = null;
+        InputStream in = null;
+        StringBuffer sb = new StringBuffer();
+        
+        URL url = new URL(urlString);
+        urlConn = url.openConnection();
+        in = urlConn.getInputStream();
+
+        byte[] byteBuffer = new byte[1024];
+
+        int offset = 0;
+        while ((offset = in.read(byteBuffer)) != -1) {
+            sb.append(new String(byteBuffer));
+        }
+        
+        if (in != null) {
+            try {
+                in.close();
+            } catch (IOException ex) {
+                // munch this
+            }
+        }
+
+        return sb.toString();
+    }
+    
+    /**
+     * dowload a file to the disk
+     */
+    public static void downloadFileToDisk(String address, String filename) 
+    throws MalformedURLException {
+        URLConnection urlConn = null;
+        InputStream in = null;
+        OutputStream out = null;
+        StringBuffer sb = new StringBuffer();
+        try {
+            URL url = new URL(address);
+            urlConn = url.openConnection();
+            in = urlConn.getInputStream();
+            out = new BufferedOutputStream(new FileOutputStream(filename));
+            
+            byte[] byteBuffer = new byte[1024];
+            
+            int numRead;
+            while ((numRead = in.read(byteBuffer)) != -1) {
+                    out.write(byteBuffer, 0, numRead);
+            }
+        } catch (IOException ex) {
+            Log.logErrorRB("IO exception");
+            Log.log(ex);
+        } finally {
+            try {
+                if (in != null) {
+                    in.close(); 
+                }
+                
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException ex) {
+                    // munch this
+            }
+        }
+    }
+
+    public static void extractFileFromJar(String archive, ArrayList filenames,
+            String destination) throws IOException {
+        // open the jar (zip) file
+        JarFile jar = new JarFile(archive);
+        
+        // parse the entries
+        java.util.Enumeration entryEnum = jar.entries();
+        while (entryEnum.hasMoreElements()) {
+            JarEntry file = (JarEntry) entryEnum.nextElement();
+            if (filenames.contains(file.getName())) {
+                // match found
+                File f = new File(destination + File.separator + file.getName());
+                InputStream in = jar.getInputStream(file);
+                BufferedOutputStream out = new BufferedOutputStream(
+                        new FileOutputStream(f));
+            
+                byte[] byteBuffer = new byte[1024];
+
+                int numRead = 0;
+                while ((numRead = in.read(byteBuffer)) != -1) {
+                    out.write(byteBuffer, 0, numRead);
+                }
+                
+                in.close();
+                out.close();
+            }
+        }
     }
 
 } // StaticUtils

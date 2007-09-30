@@ -266,7 +266,6 @@ public class ProjectFrame extends JFrame
         int firstEntry = 1;
         int entriesUpToNow = 0;
         String currentFile = m_parent.getActiveFileName();
- 
         for (int i=0; i<m_nameList.size(); i++)
         {
             String name = (String) m_nameList.get(i);
@@ -281,7 +280,7 @@ public class ProjectFrame extends JFrame
             
             output.append(tableRowTag);                                         // NOI18N
             output.append("<td width=80%>");                                    // NOI18N
-            output.append("<a href=\""+firstEntry+"\">"+name+"</a>");           // NOI18N
+            output.append("<a href=\""+firstEntry+"\">"+name+"</a>");       // NOI18N
             output.append("</td>\n");                                           // NOI18N
             output.append("<td width=20% align=center>");                       // NOI18N
             output.append(size);                                                // NOI18N

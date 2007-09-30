@@ -5,7 +5,7 @@
 x.x.x vs. 1.7.2
 
 
-  1 Enhancements
+  6 Enhancements
   1 Bugfixes
 
 ----------------------------------------------------------------------
@@ -15,8 +15,23 @@ x.x.x
   
   - Editor window name
   http://sourceforge.net/support/tracker.php?aid=1764103
- 
- Bug fixes:
+
+  - Tool: Spellchecker
+  http://sourceforge.net/support/tracker.php?aid=991510 
+
+  - Letter case change in editing field 
+  http://sourceforge.net/support/tracker.php?aid=1386063  
+
+  - Display source segments 
+  http://sourceforge.net/support/tracker.php?aid=1805172   
+
+  - Mark translated segments 
+  http://sourceforge.net/support/tracker.php?aid=1805173    
+
+  - Navigation history  
+  http://sourceforge.net/support/tracker.php?aid=1805175     
+
+  Bug fixes:
   
   - <context> should be ignored in XLIFF files  
   http://sourceforge.net/support/tracker.php?aid=1800677

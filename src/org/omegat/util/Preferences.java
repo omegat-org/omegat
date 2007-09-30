@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
+ Portions copyright 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -103,6 +104,9 @@ public class Preferences
     /** Always confirm Quit, even if the project is saved */
     public static final String ALWAYS_CONFIRM_QUIT     = "always_confirm_quit"; // NOI18N
     
+    /** Mark the translated segments with a different color */
+    public static final String MARK_TRANSLATED_SEGMENTS = "mark_translated_segments";   // NOI18N
+    
     /** Workflow Option: Don't Insert Source Text Into Translated Segment */
     public static final String DONT_INSERT_SOURCE_TEXT = "wf_noSourceText";                     // NOI18N
     /** Workflow Option: Allow translation to be equal to source */
@@ -116,6 +120,22 @@ public class Preferences
     /** Workflow Option: Insert Explanatory Text before the Best Fuzzy Match */
     public static final String BEST_MATCH_EXPLANATORY_TEXT = "wf_explanatoryText";              // NOI18N
 
+    
+    /** 
+     * allow automatic spell checking or not
+     */
+    public static final String ALLOW_AUTO_SPELLCHECKING = "allow_auto_spellchecking";   // NOI18N
+    
+    /**
+     * The location of the spell checker dictionaries
+     */
+    public static final String SPELLCHECKER_DICTIONARY_DIRECTORY = "spellcheker_dir";   // NOI18N
+    
+    /**
+     * display the segment sources
+     */
+    public static final String DISPLAY_SEGMENT_SOURCES = "display_segment_sources";     // NOI18N
+    
     /** 
      * Version of file filters. 
      * Unfortunately cannot put it into filters itself for backwards 

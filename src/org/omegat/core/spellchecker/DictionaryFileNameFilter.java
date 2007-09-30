@@ -1,9 +1,18 @@
+/*
+ * DictionaryFileNameFilter.java
+ *
+ * Created on Piatok, 2007, august 3, 18:00
+ *
+ * To change this template, choose Tools | Template Manager
+ * and open the template in the editor.
+ */
+
 /**************************************************************************
  OmegaT - Computer Assisted Translation (CAT) tool 
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+ Copyright (C) 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -22,26 +31,37 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.gui.main;
+package org.omegat.core.spellchecker;
+
+import java.io.File;
+import java.io.FilenameFilter;
 
 /**
- * Tiny class to represent one document segment.
- * As of now, only the display length is stored, maybe will be more in the future.
- *
- * @author Keith Godfrey
- * @author Maxym Mykhalchuk
+ * A file name filter for use when searching for dictionary files
+ * @author bartkoz
  */
-class DocumentSegment
-{
+public class DictionaryFileNameFilter implements FilenameFilter {
+    
     /**
-     * Display Length -- the char count of the display value of the segment,
-     * i.e. translation if it exists, else source.
-     * It also includes the 2 newlines used for spacing
+     * the file name extension
      */
-     public int length;
-     
-     public String toString(){
-         return "length:"+length;
-}
-}
+    private String extension;
+    
+    /** Creates a new instance of DictionaryFileNameFilter */
+    public DictionaryFileNameFilter(String extension) {
+        this.extension = extension;
+    }
 
+    /**
+     * What to accept. The file should have the specified extension.
+     */
+    public boolean accept(File dir, String name) {
+        boolean result = true;
+        
+        if (extension != null)
+            result &= name.endsWith(extension);
+        
+        return result;
+    }
+    
+}

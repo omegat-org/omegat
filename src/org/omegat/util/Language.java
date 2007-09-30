@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Didier Briel
+ Portions copyright 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -125,12 +126,19 @@ public class Language
      * Returns a string representation
      * as an Java locale (xx_YY).
      */
-    public String getLocale()
+    public String getLocaleCode()
     {
         if( locale==null )
             return "";                                                          // NOI18N
         else
             return locale.toString();
+    }
+    
+    /**
+     * returns the Java locale
+     */
+    public Locale getLocale() {
+        return locale;
     }
     
     /**
@@ -598,7 +606,7 @@ public class Language
         if( !(lang instanceof Language) )
             return false;
         Language that = (Language) lang;
-        return this.getLocale().equals(that.getLocale());
+        return this.getLocaleCode().equals(that.getLocaleCode());
     }
 
     /**

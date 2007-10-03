@@ -5,7 +5,7 @@
 x.x.x vs. 1.7.2
 
 
-  6 Enhancements
+  7 Enhancements
   1 Bugfixes
 
 ----------------------------------------------------------------------
@@ -30,6 +30,9 @@ x.x.x
 
   - Navigation history  
   http://sourceforge.net/support/tracker.php?aid=1805175     
+
+  - HTML, skip extraction of messages matching regxep
+  http://sourceforge.net/support/tracker.php?aid=1787085     
 
   Bug fixes:
   

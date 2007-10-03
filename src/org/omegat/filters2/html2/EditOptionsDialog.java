@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007 Didier Briel
+               2007 Didier Briel, Martin Fleurke
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -39,6 +39,7 @@ import org.omegat.util.OStrings;
  *
  * @author Maxym Mykhalchuk
  * @author Didier Briel  
+ * @author Martin Fleurke
  */
 public class EditOptionsDialog extends javax.swing.JDialog
 {
@@ -77,6 +78,7 @@ public class EditOptionsDialog extends javax.swing.JDialog
             translateLangCB.setSelected(options.getTranslateLang());
             translateHreflangCB.setSelected(options.getTranslateHreflang());
             paragraphOnBrCB.setSelected(options.getParagraphOnBr());
+            skipRegExpTF.setText(options.getskipRegExp());
         }
         
         //  Handle escape key to close the window
@@ -131,6 +133,8 @@ public class EditOptionsDialog extends javax.swing.JDialog
         translateHreflangCB = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         paragraphOnBrCB = new javax.swing.JCheckBox();
+        jLabel4 = new javax.swing.JLabel();
+        skipRegExpTF = new javax.swing.JTextField();
 
         setTitle(OStrings.getString("HTML_Filter_Options"));
         setResizable(false);
@@ -237,8 +241,21 @@ public class EditOptionsDialog extends javax.swing.JDialog
                 paragraphOnBrCBradiosActionPerformed(evt);
             }
         });
-
+        
         jPanel1.add(paragraphOnBrCB);
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("HTML_SKIPREGEXP"));
+        jPanel1.add(jLabel4);
+
+
+        skipRegExpTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                skipRegExpTFActionPerformed(evt);
+            }
+        });
+
+        jPanel1.add(skipRegExpTF);
+        
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -267,6 +284,9 @@ public class EditOptionsDialog extends javax.swing.JDialog
     private void translateHrefCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateHrefCBradiosActionPerformed
     }//GEN-LAST:event_translateHrefCBradiosActionPerformed
     
+    private void skipRegExpTFActionPerformed(java.awt.event.ActionEvent evt) {                                                      
+    }                                                     
+    
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_okButtonActionPerformed
     {
         options = new HTMLOptions();
@@ -284,6 +304,7 @@ public class EditOptionsDialog extends javax.swing.JDialog
         options.setTranslateLang(translateLangCB.isSelected());
         options.setTranslateHreflang(translateHreflangCB.isSelected());
         options.setParagraphOnBr(paragraphOnBrCB.isSelected());
+        options.setSkipRegExp(skipRegExpTF.getText());
                 
         doClose(RET_OK);
     }//GEN-LAST:event_okButtonActionPerformed
@@ -316,6 +337,7 @@ public class EditOptionsDialog extends javax.swing.JDialog
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton neverRB;
     private javax.swing.JButton okButton;
@@ -324,5 +346,6 @@ public class EditOptionsDialog extends javax.swing.JDialog
     private javax.swing.JCheckBox translateHreflangCB;
     private javax.swing.JCheckBox translateLangCB;
     private javax.swing.JCheckBox translateSrcCB;
+    private javax.swing.JTextField skipRegExpTF;
     // End of variables declaration//GEN-END:variables
 }

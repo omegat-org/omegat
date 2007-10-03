@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007 Didier Briel
+               2007 Didier Briel, Martin Fleurke
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -47,8 +47,10 @@ import java.io.Serializable;
  * <ul>[+] hreflang
  * </ul>
  * Start a new paragraph on breaks (<br>: [ ]
+ * Skip text matchin regExp []
  * @author Maxym Mykhalchuk
  * @author Didier Briel
+ * @author Martin Fleurke
  */
 public class HTMLOptions implements Serializable
 {
@@ -170,4 +172,23 @@ public class HTMLOptions implements Serializable
     {
         this.paragraphOnBr = paragraphOnBr;
     }
+    
+    private String skipRegExp="";
+    
+    /**
+     * Returns the regular expression that matches text not to be translated
+     */
+    public String getskipRegExp()
+    {
+        return this.skipRegExp;
+    }
+
+    /**
+     * Sets whether a new paragraph should be started on BR.
+     */
+    public void setSkipRegExp(String skipRegExp)
+    {
+        this.skipRegExp = skipRegExp;
+    }
+    
 }

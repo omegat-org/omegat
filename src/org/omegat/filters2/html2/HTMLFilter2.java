@@ -65,6 +65,9 @@ public class HTMLFilter2 extends AbstractFilter
 
     /** Stores the source encoding of HTML file. */
     private String sourceEncoding;
+
+    /** Stores the target encoding of HTML file. */
+    private String targetEncoding;
     
     /** A regular Expression Pattern to be matched to the strings to be translated.
      * If there is a match, the string should not be translated
@@ -99,13 +102,13 @@ public class HTMLFilter2 extends AbstractFilter
     {
         HTMLWriter hwriter;
         HTMLOptions options = (HTMLOptions) getOptions();
-        String theEncoding;
         if (encoding==null)
-            theEncoding = sourceEncoding;
+            this.targetEncoding = sourceEncoding;            
         else
-            theEncoding = encoding;
+            this.targetEncoding = encoding;
         
-        hwriter = new HTMLWriter(outfile.getAbsolutePath(), theEncoding, options);
+        hwriter = new HTMLWriter(outfile.getAbsolutePath(), 
+                this.targetEncoding, options);
         return new BufferedWriter(hwriter);
     }
 
@@ -260,5 +263,12 @@ public class HTMLFilter2 extends AbstractFilter
         }
     }
 
-    
+    /**
+     * Returns the encoding of the html writer (if already set) 
+     * @return the target encoding
+     */
+    public String getTargetEncoding() 
+    {
+        return this.targetEncoding;
+    }
 }

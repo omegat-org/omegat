@@ -46,6 +46,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
+
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
@@ -1230,9 +1233,45 @@ public class FilterVisitor extends NodeVisitor
                     res.append(ch);
             }
         }
-        return res.toString();
-    }
-    
+        String contents = res.toString();
+        // Rewrite characters that cannot be encoded to html character strings.
+        // Each character in the contents-string is checked. If a character
+        // can't be encoded, all its occurrences are replaced with the 
+        // html-equivalent string.
+        // Then, the next character is checked. 
+        // (The loop over the contents-string is restarted for the modified 
+        // content, but the starting-position will be the position where the 
+        // last unencodable character was found)
+        // [1802000] HTML filter loses html-encoded characters if not supported
+        String encoding = this.filter.getTargetEncoding();
+        if (encoding != null) {
+            CharsetEncoder charsetEncoder = 
+                    Charset.forName(encoding).newEncoder();
+            int i=0;
+            boolean notfinished = true;
+            while (notfinished) {
+        	for (;i< contents.length(); i++) {
+                    char x = contents.charAt(i);
+        	    if (!charsetEncoder.canEncode(x)) {
+                        String regexp;
+                        if (x=='[' || x=='\\' ||
+                            x=='^'||x=='$'||x=='.'||x=='|'||x=='?'||x=='*'||
+                            x=='+'||x=='('||x==')') {
+        		    // escape special regexp characters
+        		    regexp = "\\"+x;
+        		 } else 
+                             regexp = ""+x;
+        	        String replacement= "&#"+(int)x+';';
+        	        contents = contents.replaceAll(regexp, replacement);
+        		break;
+        	    }
+                }
+                if (i == contents.length()) 
+                    notfinished = false;
+            }
+        }
+        return contents;
+    } 
     
 }
 

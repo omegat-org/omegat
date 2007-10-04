@@ -39,6 +39,7 @@ import java.io.Serializable;
  * <ul>[+] src
  * <ul>[+] lang
  * <ul>[+] hreflang
+ * <ul>[+] value
  * </ul>
  * @author Didier Briel
  */
@@ -50,6 +51,7 @@ public class XHTMLOptions implements Serializable
     private boolean translateSrc = true;
     private boolean translateLang = true;
     private boolean translateHreflang = true;
+    private boolean translateValue = true;
     private boolean paragraphOnBr = false;
     
     /**
@@ -115,7 +117,23 @@ public class XHTMLOptions implements Serializable
     {
         this.translateHreflang = translateHreflang;
     }
- 
+
+   /**
+     * Returns whether value attributes should be translated.
+     */
+    public boolean getTranslateValue()
+    {
+        return this.translateValue;
+    }
+
+    /**
+     * Sets whether value attributes should be translated.
+     */
+    public void setTranslateValue(boolean translateValue)
+    {
+        this.translateValue = translateValue;
+    }   
+    
    /**
      * Returns whether a new paragraph should be started on BR.
      */

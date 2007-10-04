@@ -5,7 +5,7 @@
 x.x.x vs. 1.7.2
 
 
-  7 Enhancements
+  8 Enhancements
   1 Bugfixes
 
 ----------------------------------------------------------------------
@@ -33,6 +33,9 @@ x.x.x
 
   - HTML, skip extraction of messages matching regxep
   http://sourceforge.net/support/tracker.php?aid=1787085     
+
+  - (X)HTML filter: do not translate input VALUE attribute
+  http://sourceforge.net/support/tracker.php?aid=1787153     
 
   Bug fixes:
   

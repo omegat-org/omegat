@@ -128,7 +128,7 @@ public class XHTMLDialect extends DefaultXMLDialect
             });      
         if (options.getTranslateHreflang())
             defineTranslatableAttribute("hreflang");                            // NOI18N       
-        
-        defineTranslatableTagAttribute("input", "value");                        // NOI18N  
+        if (options.getTranslateValue())
+            defineTranslatableTagAttribute("input", "value");                   // NOI18N  
     }
 }

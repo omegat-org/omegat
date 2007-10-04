@@ -45,6 +45,7 @@ import java.io.Serializable;
  * <ul>[+] src
  * <ul>[+] lang
  * <ul>[+] hreflang
+ * <ul>[+] value
  * </ul>
  * Start a new paragraph on breaks (<br>: [ ]
  * Skip text matchin regExp []
@@ -91,6 +92,7 @@ public class HTMLOptions implements Serializable
     private boolean translateSrc = true;
     private boolean translateLang = true;
     private boolean translateHreflang = true;
+    private boolean translateValue = true;
     private boolean paragraphOnBr = false;
     
     /**
@@ -155,6 +157,22 @@ public class HTMLOptions implements Serializable
     public void setTranslateHreflang(boolean translateHreflang)
     {
         this.translateHreflang = translateHreflang;
+    }
+
+    /**
+     * Sets whether value attributes should be translated.
+     */
+    public void setTranslateValue(boolean translateValue)
+    {
+        this.translateValue = translateValue;
+    }
+
+    /**
+     * Returns whether value attributes should be translated.
+     */
+    public boolean getTranslateValue()
+    {
+        return this.translateValue;
     }
    
    /**

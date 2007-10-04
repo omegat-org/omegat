@@ -77,6 +77,7 @@ public class EditOptionsDialog extends javax.swing.JDialog
             translateSrcCB.setSelected(options.getTranslateSrc());
             translateLangCB.setSelected(options.getTranslateLang());
             translateHreflangCB.setSelected(options.getTranslateHreflang());
+            translateValueCB.setSelected(options.getTranslateValue());
             paragraphOnBrCB.setSelected(options.getParagraphOnBr());
             skipRegExpTF.setText(options.getskipRegExp());
         }
@@ -131,6 +132,7 @@ public class EditOptionsDialog extends javax.swing.JDialog
         translateSrcCB = new javax.swing.JCheckBox();
         translateLangCB = new javax.swing.JCheckBox();
         translateHreflangCB = new javax.swing.JCheckBox();
+        translateValueCB = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         paragraphOnBrCB = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
@@ -232,6 +234,16 @@ public class EditOptionsDialog extends javax.swing.JDialog
 
         jPanel1.add(translateHreflangCB);
 
+        translateValueCB.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(translateValueCB, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("HTML_TRANSLATE_VALUE"));
+        translateValueCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                translateValueCBradiosActionPerformed(evt);
+            }
+        });
+
+        jPanel1.add(translateValueCB);
+
         org.openide.awt.Mnemonics.setLocalizedText(jLabel3, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("HTML_PARAGRAPH_ON"));
         jPanel1.add(jLabel3);
 
@@ -241,12 +253,11 @@ public class EditOptionsDialog extends javax.swing.JDialog
                 paragraphOnBrCBradiosActionPerformed(evt);
             }
         });
-        
+
         jPanel1.add(paragraphOnBrCB);
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel4, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("HTML_SKIPREGEXP"));
         jPanel1.add(jLabel4);
-
 
         skipRegExpTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,7 +266,6 @@ public class EditOptionsDialog extends javax.swing.JDialog
         });
 
         jPanel1.add(skipRegExpTF);
-        
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -265,9 +275,13 @@ public class EditOptionsDialog extends javax.swing.JDialog
         setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void paragraphOnBrCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paragraphOnBrCBradiosActionPerformed
+    private void paragraphOnBrCBradiosActionPerformed(java.awt.event.ActionEvent evt) {                                                      
 // TODO add your handling code here:
-    }//GEN-LAST:event_paragraphOnBrCBradiosActionPerformed
+    }
+    private void translateValueCBradiosActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+// TODO add your handling code here:
+    }                                                         
+                                                         
 
     private void translateHreflangCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateHreflangCBradiosActionPerformed
 // TODO add your handling code here:
@@ -302,6 +316,7 @@ public class EditOptionsDialog extends javax.swing.JDialog
         options.setTranslateHref(translateHrefCB.isSelected());
         options.setTranslateSrc(translateSrcCB.isSelected());
         options.setTranslateLang(translateLangCB.isSelected());
+        options.setTranslateValue(translateValueCB.isSelected());
         options.setTranslateHreflang(translateHreflangCB.isSelected());
         options.setParagraphOnBr(paragraphOnBrCB.isSelected());
         options.setSkipRegExp(skipRegExpTF.getText());
@@ -342,10 +357,11 @@ public class EditOptionsDialog extends javax.swing.JDialog
     private javax.swing.JRadioButton neverRB;
     private javax.swing.JButton okButton;
     private javax.swing.JCheckBox paragraphOnBrCB;
+    private javax.swing.JTextField skipRegExpTF;
     private javax.swing.JCheckBox translateHrefCB;
     private javax.swing.JCheckBox translateHreflangCB;
     private javax.swing.JCheckBox translateLangCB;
     private javax.swing.JCheckBox translateSrcCB;
-    private javax.swing.JTextField skipRegExpTF;
+    private javax.swing.JCheckBox translateValueCB;
     // End of variables declaration//GEN-END:variables
 }

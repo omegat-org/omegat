@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007 Didier Briel 
+               2007 Didier Briel, Martin Fleurke 
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -59,6 +59,7 @@ import org.omegat.util.OStrings;
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
+ * @author Martin Fleurke
  */
 public class FilterVisitor extends NodeVisitor
 {
@@ -181,7 +182,8 @@ public class FilterVisitor extends NodeVisitor
                 maybeTranslateAttribute(tag, "src");                            // NOI18N
             maybeTranslateAttribute(tag, "summary");                            // NOI18N
             maybeTranslateAttribute(tag, "title");                              // NOI18N
-            if( "INPUT".equals(tag.getTagName()) )                              // NOI18N
+            if( "INPUT".equals(tag.getTagName()) &&
+            		options.getTranslateValue() )                           // NOI18N
                 maybeTranslateAttribute(tag, "value");                          // NOI18N
 
             queuePrefix(tag);
@@ -374,7 +376,7 @@ public class FilterVisitor extends NodeVisitor
     {
         // detecting the first starting tag in 'befors'
         // that has its ending in the paragraph
-        // all before this "first good" are simply writen out
+        // all before this "first good" are simply written out
         ArrayList all = new ArrayList();
         all.addAll(befors);
         all.addAll(translatable);
@@ -417,7 +419,7 @@ public class FilterVisitor extends NodeVisitor
                     }
                 }
             }
-            // if we coud find an ending, 
+            // if we could find an ending, 
             // this is a "good one"
             if( found )
                 break;

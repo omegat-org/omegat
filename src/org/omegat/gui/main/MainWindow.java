@@ -1795,7 +1795,6 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             
             docSeg.length = replaceEntry(m_segmentStartOffset, totalLen, 
                     segmentSource, display_string, flags);
-            System.out.println("flags:"+flags);
             
             if (doCheckSpelling && m_autoSpellChecking) {
                 wordList = checkSpelling(startOffset, display_string);

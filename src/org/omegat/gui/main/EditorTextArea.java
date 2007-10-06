@@ -58,6 +58,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
+import org.omegat.util.gui.ExtendedEditorKit;
 import org.omegat.util.gui.Styles;
 
 
@@ -76,6 +77,10 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
     public EditorTextArea(MainWindow mainwindow)
     {
         this.mw = mainwindow;
+        
+        // allow custom editor kit to make custom underlines
+        setEditorKit(new ExtendedEditorKit());
+        
         DefaultStyledDocument doc = new DefaultStyledDocument(new StyleContext());
         doc.addDocumentListener(this);
 

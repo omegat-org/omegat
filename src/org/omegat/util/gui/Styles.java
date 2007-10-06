@@ -84,7 +84,7 @@ public final class Styles
         StyleConstants.setBold(GREEN, true);
         StyleConstants.setBackground(GREEN, new Color(192, 255, 192));
         TRANSLATED = new SimpleAttributeSet();
-        StyleConstants.setBackground(TRANSLATED, new Color(255, 255, 99));
+        StyleConstants.setBackground(TRANSLATED, new Color(255, 255, 153));
         DISABLED = new SimpleAttributeSet();
         StyleConstants.setForeground(DISABLED, 
                 uidefaults.getColor("Label.disabledForeground"));               // NOI18N
@@ -93,9 +93,12 @@ public final class Styles
         TEXT_BORDER = new SimpleAttributeSet();
         StyleConstants.setForeground(TEXT_BORDER, Color.green);
         
+        // using red custom jagged underline, as seen in fine word processors
+        // and IDEs.
         MISSPELLED = new SimpleAttributeSet();
-        StyleConstants.setForeground(MISSPELLED, Color.red);
-        StyleConstants.setUnderline(MISSPELLED,true);
+        StyleConstants.setForeground(MISSPELLED, Color.black);
+        ExtendedLabelView.setCustomUnderline(MISSPELLED, 
+                ExtendedLabelView.RED_JAGGED_UNDERLINE);
         
     }
     
@@ -109,6 +112,9 @@ public final class Styles
         StyleConstants.setForeground(result, StyleConstants.getForeground(toApply));
         StyleConstants.setBold(result, StyleConstants.isBold(toApply));
         StyleConstants.setUnderline(result, StyleConstants.isUnderline(toApply));
+        // make sure the custom underlining is copied, too
+        ExtendedLabelView.setCustomUnderline(result, 
+                ExtendedLabelView.getCustomUnderline(toApply));
         
         return result;
 }

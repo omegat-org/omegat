@@ -107,6 +107,9 @@ public class Preferences
     /** Mark the translated segments with a different color */
     public static final String MARK_TRANSLATED_SEGMENTS = "mark_translated_segments";   // NOI18N
     
+    /** Mark the untranslated segments with a different color */
+    public static final String MARK_UNTRANSLATED_SEGMENTS = "mark_untranslated_segments";   // NOI18N
+    
     /** Workflow Option: Don't Insert Source Text Into Translated Segment */
     public static final String DONT_INSERT_SOURCE_TEXT = "wf_noSourceText";                     // NOI18N
     /** Workflow Option: Allow translation to be equal to source */

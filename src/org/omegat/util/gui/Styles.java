@@ -48,8 +48,12 @@ public final class Styles
     public final static MutableAttributeSet BOLD;
     /** Bold text on light green background. */
     public final static MutableAttributeSet GREEN;
-    /** Red text */
+    
+    /** translated text */
     public final static MutableAttributeSet TRANSLATED;
+    
+    /** untranslated text */
+    public final static MutableAttributeSet UNTRANSLATED;
     
     /** misspelled text */
     public final static MutableAttributeSet MISSPELLED;
@@ -85,6 +89,10 @@ public final class Styles
         StyleConstants.setBackground(GREEN, new Color(192, 255, 192));
         TRANSLATED = new SimpleAttributeSet();
         StyleConstants.setBackground(TRANSLATED, new Color(255, 255, 153));
+        
+        UNTRANSLATED = new SimpleAttributeSet();
+        StyleConstants.setBackground(UNTRANSLATED, new Color(0xCC, 0xCC, 0xFF));
+        
         DISABLED = new SimpleAttributeSet();
         StyleConstants.setForeground(DISABLED, 
                 uidefaults.getColor("Label.disabledForeground"));               // NOI18N

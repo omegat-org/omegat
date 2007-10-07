@@ -422,32 +422,29 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     }
     
     /** Updates menu checkboxes from preferences on start */
-    private void updateCheckboxesOnStart()
-    {
-        if (Preferences.isPreference(Preferences.USE_TAB_TO_ADVANCE))
-        {
+    private void updateCheckboxesOnStart() {
+        if (Preferences.isPreference(Preferences.USE_TAB_TO_ADVANCE)) {
             optionsTabAdvanceCheckBoxMenuItem.setSelected(true);
             m_advancer = KeyEvent.VK_TAB;
-        }
-        else
+        } else {
             m_advancer = KeyEvent.VK_ENTER;
+        }
+        optionsAlwaysConfirmQuitCheckBoxMenuItem.setSelected(Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT));
         
-        optionsAlwaysConfirmQuitCheckBoxMenuItem.setSelected(
-                Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT));
-        
-         if (Preferences.isPreference(Preferences.MARK_TRANSLATED_SEGMENTS))
-        {
+        if (Preferences.isPreference(Preferences.MARK_TRANSLATED_SEGMENTS)) {
             viewMarkTranslatedSegmentsCheckBoxMenuItem.setSelected(true);
             m_translatedAttributeSet = Styles.TRANSLATED;
-    }
-        else
+        } else if (Preferences.isPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS)) {
+            viewMarkUntranslatedSegmentsCheckBoxMenuItem.setSelected(true);
+            m_unTranslatedAttributeSet = Styles.UNTRANSLATED;
+        } else {
             m_translatedAttributeSet = Styles.PLAIN;
-    
+            m_unTranslatedAttributeSet = Styles.PLAIN;
+        }
         if (Preferences.isPreference(Preferences.DISPLAY_SEGMENT_SOURCES)) {
             viewDisplaySegmentSourceCheckBoxMenuItem.setSelected(true);
             m_displaySegmentSources = true;
         }
-            
     }
     
     private boolean layoutInitialized = false;
@@ -1586,7 +1583,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             AttributeSet attributes = m_translatedAttributeSet;
             
             // if the source should be displayed, too
-            AttributeSet srcAttributes = Styles.PLAIN;
+            AttributeSet srcAttributes = m_unTranslatedAttributeSet;
             
             // how to display the source segment
             if (m_displaySegmentSources)
@@ -1607,7 +1604,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                     if (!m_displaySegmentSources) {
                     // no translation available - use source text
                     text = ste.getSrcText();
-                        attributes = Styles.PLAIN;
+                        attributes = m_unTranslatedAttributeSet;
                 }
                 } else {
                    doSpellcheck = true;
@@ -1747,7 +1744,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                 
                 if (!m_displaySegmentSources) {    
                 display_string  = m_curEntry.getSrcText();
-                    attributes = Styles.PLAIN;    
+                    attributes = m_unTranslatedAttributeSet;    
                 } else {
                     display_string = new String();
             }
@@ -1759,7 +1756,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                     new_translation = xlDoc.getText(start, end - start);
                     if (   new_translation.equals(m_curEntry.getSrcText())
                         && !Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)) {
-                        attributes = Styles.PLAIN;
+                        attributes = m_unTranslatedAttributeSet;
                         doCheckSpelling = false;  
                     } else {
                         attributes = m_translatedAttributeSet;
@@ -1898,7 +1895,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             
             AttributeSet attr = 
                     ((flags & IS_NOT_TRANSLATED) == IS_NOT_TRANSLATED ?
-                        Styles.PLAIN : m_translatedAttributeSet);
+                        m_unTranslatedAttributeSet : m_translatedAttributeSet);
             
             try {
                 xlDoc.remove(offset, length);
@@ -2482,6 +2479,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private AttributeSet m_translatedAttributeSet;
     
     /**
+     * the attribute set used for translated segments
+     */
+    private AttributeSet m_unTranslatedAttributeSet;
+    
+    /**
      * return the attribute set of translated segments
      */
     public AttributeSet getTranslatedAttributeSet() {
@@ -2560,6 +2562,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         gotoHistoryBackMenuItem = new javax.swing.JMenuItem();
         viewMenu = new javax.swing.JMenu();
         viewMarkTranslatedSegmentsCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
+        viewMarkUntranslatedSegmentsCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
         viewDisplaySegmentSourceCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
         toolsMenu = new javax.swing.JMenu();
         toolsValidateTagsMenuItem = new javax.swing.JMenuItem();
@@ -2786,6 +2789,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
         viewMenu.add(viewMarkTranslatedSegmentsCheckBoxMenuItem);
 
+        org.openide.awt.Mnemonics.setLocalizedText(viewMarkUntranslatedSegmentsCheckBoxMenuItem, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("TF_MENU_DISPLAY_MARK_UNTRANSLATED"));
+        viewMarkUntranslatedSegmentsCheckBoxMenuItem.addActionListener(this);
+
+        viewMenu.add(viewMarkUntranslatedSegmentsCheckBoxMenuItem);
+
         org.openide.awt.Mnemonics.setLocalizedText(viewDisplaySegmentSourceCheckBoxMenuItem, OStrings.getString("MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES"));
         viewDisplaySegmentSourceCheckBoxMenuItem.addActionListener(this);
 
@@ -2971,6 +2979,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         }
         else if (evt.getSource() == viewMarkTranslatedSegmentsCheckBoxMenuItem) {
             MainWindow.this.viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed(evt);
+        }
+        else if (evt.getSource() == viewMarkUntranslatedSegmentsCheckBoxMenuItem) {
+            MainWindow.this.viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed(evt);
         }
         else if (evt.getSource() == viewDisplaySegmentSourceCheckBoxMenuItem) {
             MainWindow.this.viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed(evt);
@@ -3355,6 +3366,19 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         doAbout();
     }//GEN-LAST:event_helpAboutMenuItemActionPerformed
 
+    private void viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed
+       Preferences.setPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS,
+                viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
+        if( viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected() )
+            m_unTranslatedAttributeSet = Styles.UNTRANSLATED;
+        else
+            m_unTranslatedAttributeSet = Styles.PLAIN;
+        
+        commitEntry(false);
+        loadDocument();
+        activateEntry();
+    }//GEN-LAST:event_viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed
+
     /**
      * Opens the spell checking window
      */
@@ -3464,6 +3488,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private javax.swing.JCheckBoxMenuItem viewDisplaySegmentSourceCheckBoxMenuItem;
     private javax.swing.JMenuItem viewFileListMenuItem;
     private javax.swing.JCheckBoxMenuItem viewMarkTranslatedSegmentsCheckBoxMenuItem;
+    private javax.swing.JCheckBoxMenuItem viewMarkUntranslatedSegmentsCheckBoxMenuItem;
     private javax.swing.JMenu viewMenu;
     // End of variables declaration//GEN-END:variables
 

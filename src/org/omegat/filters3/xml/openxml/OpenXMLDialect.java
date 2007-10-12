@@ -39,8 +39,19 @@ public class OpenXMLDialect extends DefaultXMLDialect
  
     /** Creates a new instance of OpenXML */
     public OpenXMLDialect()
-    {
-       
+    {     
+    }
+
+    /**
+     * Actually defines the dialect.
+     * It cannot be done during creation, because options are not known
+     * at that step.
+     */
+    public void defineDialect(OpenXMLOptions options)
+    {    
+        if (options == null)
+            options = new OpenXMLOptions();
+        
         defineParagraphTags(new String[]
         {
             // Word
@@ -52,16 +63,15 @@ public class OpenXMLDialect extends DefaultXMLDialect
             "a:p",                                                              // NOI18N
         });
         
-        defineOutOfTurnTags(new String[]
-        {
-            // Word
-            "w:instrText",                                                      // NOI18N
-        });
+        if (options.getTranslateHiddenText()) // Word
+            defineOutOfTurnTag("w:instrText");                                  // NOI18N
+        else
+            defineIntactTag("w:instrText");                                     // NOI18N
         
         defineIntactTags(new String[]
         {
             // Excel
             "authors",                                                          // NOI18N
-        });
-   }
+        });        
+    }
 }

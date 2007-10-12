@@ -5,8 +5,8 @@
 x.x.x vs. 1.7.2
 
 
-  9 Enhancements
-  3 Bugfixes
+  10 Enhancements
+   3 Bugfixes
 
 ----------------------------------------------------------------------
 x.x.x
@@ -39,6 +39,9 @@ x.x.x
 
   - (X)HTML filter: do not translate input VALUE attribute
   http://sourceforge.net/support/tracker.php?aid=1787153     
+
+  - Select elements to translate in office documents
+  http://sourceforge.net/support/tracker.php?aid=1812565     
 
   Bug fixes:
   

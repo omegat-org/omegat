@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2007 Didier Briel
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -31,6 +32,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  * Dialect of OpenDocument files.
  *
  * @author Maxym Mykhalchuk
+ * @author Didier Briel
  */
 public class OpenDocDialect extends DefaultXMLDialect
 {
@@ -38,6 +40,18 @@ public class OpenDocDialect extends DefaultXMLDialect
     /** Creates a new instance of OpenDocDialect */
     public OpenDocDialect()
     {
+    }
+ 
+    /**
+     * Actually defines the dialect.
+     * It cannot be done during creation, because options are not known
+     * at that step.
+     */
+    public void defineDialect(OpenDocOptions options)
+    {
+        if (options == null)
+            options = new OpenDocOptions();
+
         defineShortcuts(new String[]{
             "text:line-break", "br",                                            // NOI18N
             "text:a", "a",                                                      // NOI18N
@@ -92,9 +106,6 @@ public class OpenDocDialect extends DefaultXMLDialect
         
         defineOutOfTurnTags(new String[]
         {
-            "text:note",                                                        // NOI18N
-            // Comments [1628890]
-            "office:annotation",                                                // NOI18N
             // Drawing Shapes from OO specifications
             // Correction for [ 1541277 ] OO: Segmenting on inline drawings
             // Commented until [ 1642994 ] Subtexts are not segmented is solved
@@ -140,12 +151,29 @@ public class OpenDocDialect extends DefaultXMLDialect
             "meta:editing-duration",                                            // NOI18N
             
         });
-        defineTranslatableTagAttributes(
+        if (options.getTranslateNotes())
+            defineOutOfTurnTag("text:note");                                    // NOI18N
+        else
+            defineIntactTag("text:note");                                       // NOI18N
+        if (options.getTranslateComments())
+            defineOutOfTurnTag("office:annotation");                            // NOI18N
+        else    
+            defineIntactTag("office:annotation");                               // NOI18N        
+   
+        if (options.getTranslateIndexes())
+            defineTranslatableTagAttributes(
                 "text:alphabetical-index-mark",                                 // NOI18N
                 new String[] { "text:string-value", "text:key1", "text:key2" });// NOI18N
-        defineTranslatableTagsAttribute(
-                new String[] {"text:bookmark", "text:bookmark-start", "text:bookmark-end"}, // NOI18N
-                "text:name");                                                   // NOI18N
-        defineTranslatableTagAttribute("text:bookmark-ref", "text:ref-name");   // NOI18N
+        if (options.getTranslateBookmarks())
+        {
+            defineTranslatableTagsAttribute(
+                new String[] 
+                    {"text:bookmark", "text:bookmark-start",                    // NOI18N
+                     "text:bookmark-end"},                                      // NOI18N
+                     "text:name");                                              // NOI18N
+            defineTranslatableTagAttribute("text:bookmark-ref", "text:ref-name");// NOI18N
+        }
+    
     }
+
 }

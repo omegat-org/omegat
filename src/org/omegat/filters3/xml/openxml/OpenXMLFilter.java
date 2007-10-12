@@ -25,11 +25,13 @@
 
 package org.omegat.filters3.xml.openxml;
 
+import java.awt.Dialog;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -49,7 +51,7 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.xml.openxml.*;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.OStrings;
-
+import org.omegat.util.Log;
 
 /**
  * Filter for Open XML file format.
@@ -59,18 +61,48 @@ import org.omegat.util.OStrings;
  */
 public class OpenXMLFilter extends AbstractFilter
 {
-    private static final String DOCUMENTS = 
-    // Word
-    "(document\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)" +    // NOI18N                
-    "|(header\\d+\\.xml)|(footer\\d+\\.xml)" +                                  // NOI18N
-    // Excel
-    "|(sharedStrings\\.xml)|(comments\\d+\\.xml)" +                             // NOI18N
-    // PowerPoint
-    "|(slide\\d+\\.xml)|(notesSlide\\d+\\.xml)"                                 // NOI18N
-    ;            
-    private static final Pattern TRANSLATABLE = Pattern.compile(DOCUMENTS);
-    
+    private String DOCUMENTS = "(document\\.xml)";                              // NOI18N 
+    private Pattern TRANSLATABLE; 
     private static final Pattern DIGITS = Pattern.compile("(\\d+)\\.xml");      // NOI18N
+
+    
+    /**
+     * Defines the documents to read according to options
+     */
+    private void defineDOCUMENTSOptions()
+    {
+/*    
+    // Complete string when all options are enabled
+    // Word
+    "(document\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)" +    
+    "|(header\\d+\\.xml)|(footer\\d+\\.xml)" +                                  
+    // Excel
+    "|(sharedStrings\\.xml)|(comments\\d+\\.xml)" +                             
+    // PowerPoint
+    "|(slide\\d+\\.xml)|(notesSlide\\d+\\.xml)"                                 
+*/          
+        OpenXMLOptions options = (OpenXMLOptions) this.getOptions();
+        if (options == null)
+            options = new OpenXMLOptions();
+        
+        if (options.getTranslateComments())
+            DOCUMENTS += "|(comments\\.xml)";                                   // NOI18N
+        if (options.getTranslateFootnotes())
+            DOCUMENTS += "|(footnotes\\.xml)";                                  // NOI18N
+        if (options.getTranslateEndnotes())
+            DOCUMENTS += "|(endnotes\\.xml)";                                   // NOI18N
+        if (options.getTranslateHeaders())
+            DOCUMENTS += "|(header\\d+\\.xml)";                                 // NOI18N
+        if (options.getTranslateFooters())
+            DOCUMENTS += "|(footer\\d+\\.xml)";                                 // NOI18N
+        DOCUMENTS += "|(sharedStrings\\.xml)";                                  // NOI18N    
+        if (options.getTranslateExcelComments())
+            DOCUMENTS += "|(comments\\d+\\.xml)";                               // NOI18N
+        DOCUMENTS += "|(slide\\d+\\.xml)";                                      // NOI18N
+        if (options.getTranslateSlideComments())
+            DOCUMENTS += "|(notesSlide\\d+\\.xml)";                             // NOI18N
+        TRANSLATABLE = Pattern.compile(DOCUMENTS);
+    }       
     
     /** Creates a new instance of OpenXMLFilter */
     public OpenXMLFilter()
@@ -82,6 +114,8 @@ public class OpenXMLFilter extends AbstractFilter
     {
         try
         {
+            defineDOCUMENTSOptions(); // Define the documents to read
+            
             ZipFile file = new ZipFile(inFile);
             Enumeration entries = file.entries();
             while (entries.hasMoreElements())
@@ -91,7 +125,7 @@ public class OpenXMLFilter extends AbstractFilter
                 shortname = removePath(shortname);
                 Matcher filematch = TRANSLATABLE.matcher(shortname);
                 if (filematch.matches())
-                  return true;
+                    return true;
             }
         } catch (IOException e) {}
         return false;
@@ -102,6 +136,11 @@ public class OpenXMLFilter extends AbstractFilter
     {
         if (xmlfilter==null)
             xmlfilter = new OpenXMLXMLFilter();
+        // Defining the actual dialect, because at this step 
+        // we have the options
+        OpenXMLDialect dialect = (OpenXMLDialect) xmlfilter.getDialect();
+        dialect.defineDialect((OpenXMLOptions) this.getOptions());
+        
         return xmlfilter;
     }
     
@@ -128,8 +167,8 @@ public class OpenXMLFilter extends AbstractFilter
      */
     private String removeXML(String fileName)
     {
-        if ( fileName.endsWith(".xml") ) 
-            fileName = fileName.substring(0, fileName.lastIndexOf(".xml"));
+        if ( fileName.endsWith(".xml") )                                        // NOI18N
+            fileName = fileName.substring(0, fileName.lastIndexOf(".xml"));     // NOI18N
         return fileName;
     }
    
@@ -190,7 +229,7 @@ public class OpenXMLFilter extends AbstractFilter
                      shortname2 = removeXML(shortname2);
                                        
                      // Specific case for Excel
-                     // because "contents" is present twice in DOCUMENTS
+                     // because "comments" is present twice in DOCUMENTS
                      if ( shortname1.indexOf("sharedStrings")>=0 ||             // NOI18N
                           shortname2.indexOf("sharedStrings")>=0 )              // NOI18N
                      {
@@ -290,13 +329,13 @@ public class OpenXMLFilter extends AbstractFilter
         };
     }
 
-    /** Source encoding can not be varied by the user. */
+    /** Source encoding cannot be varied by the user. */
     public boolean isSourceEncodingVariable()
     {
         return false;
     }
 
-    /** Target encoding can not be varied by the user. */
+    /** Target encoding cannot be varied by the user. */
     public boolean isTargetEncodingVariable()
     {
         return false;
@@ -308,5 +347,41 @@ public class OpenXMLFilter extends AbstractFilter
     {
         throw new IOException("Not Implemented!");                              // NOI18N
     }
+
+    /**
+     * Returns true to indicate that the OpenXML filter has options.
+     * @return True, because the OpenXML filter has options.
+     */
+    public boolean hasOptions()
+    {
+        return true;
+    }
     
+    /**
+     * OpenXML Filter shows a <b>modal</b> dialog to edit its own options.
+     * 
+     * @param currentOptions Current options to edit.
+     * @return Updated filter options if user confirmed the changes, 
+     * and current options otherwise.
+     */
+    public Serializable changeOptions(Dialog parent, Serializable currentOptions)
+    {
+        try
+        {
+            OpenXMLOptions options = (OpenXMLOptions) currentOptions;
+            EditOpenXMLOptionsDialog dialog = 
+                    new EditOpenXMLOptionsDialog(parent, options);
+            dialog.setVisible(true);
+            if( EditOpenXMLOptionsDialog.RET_OK==dialog.getReturnStatus() )
+                return dialog.getOptions();
+            else
+                return currentOptions;
+        }
+        catch( Exception e )
+        {
+            Log.logErrorRB("HTML_EXC_EDIT_OPTIONS");
+            Log.log(e);
+            return currentOptions;
+        }
+    }
 }

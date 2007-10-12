@@ -24,11 +24,13 @@
 
 package org.omegat.filters3.xml.opendoc;
 
+import java.awt.Dialog;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -42,6 +44,7 @@ import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.OStrings;
+import org.omegat.util.Log;
 
 /**
  * Filter for Open Document file format.
@@ -85,6 +88,11 @@ public class OpenDocFilter extends AbstractFilter
     {
         if (xmlfilter==null)
             xmlfilter = new OpenDocXMLFilter();
+        // Defining the actual dialect, because at this step 
+        // we have the options
+        OpenDocDialect dialect = (OpenDocDialect) xmlfilter.getDialect();
+        dialect.defineDialect((OpenDocOptions) this.getOptions());
+  
         return xmlfilter;
     }
     
@@ -198,4 +206,40 @@ public class OpenDocFilter extends AbstractFilter
         throw new IOException("Not Implemented!");                              // NOI18N
     }
     
+    /**
+     * Returns true to indicate that the OpenDoc filter has options.
+     * @return True, because the OpenDoc filter has options.
+     */
+    public boolean hasOptions()
+    {
+        return true;
+    }
+    
+    /**
+     * OpenDoc Filter shows a <b>modal</b> dialog to edit its own options.
+     * 
+     * @param currentOptions Current options to edit.
+     * @return Updated filter options if user confirmed the changes, 
+     * and current options otherwise.
+     */
+    public Serializable changeOptions(Dialog parent, Serializable currentOptions)
+    {
+        try
+        {
+            OpenDocOptions options = (OpenDocOptions) currentOptions;
+            EditOpenDocOptionsDialog dialog = 
+                    new EditOpenDocOptionsDialog(parent, options);
+            dialog.setVisible(true);
+            if( EditOpenDocOptionsDialog.RET_OK==dialog.getReturnStatus() )
+                return dialog.getOptions();
+            else
+                return currentOptions;
+        }
+        catch( Exception e )
+        {
+            Log.logErrorRB("HTML_EXC_EDIT_OPTIONS");
+            Log.log(e);
+            return currentOptions;
+        }
+    }
 }

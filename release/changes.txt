@@ -6,7 +6,7 @@ x.x.x vs. 1.7.2
 
 
   9 Enhancements
-  2 Bugfixes
+  3 Bugfixes
 
 ----------------------------------------------------------------------
 x.x.x
@@ -47,6 +47,9 @@ x.x.x
 
   - <context> should be ignored in XLIFF files  
   http://sourceforge.net/support/tracker.php?aid=1802000
+
+  - Properties: space before "=" shouldn't be part of the key  
+  http://sourceforge.net/support/tracker.php?aid=1812183
 
 ----------------------------------------------------------------------
  OmegaT 1.7.2 Changes

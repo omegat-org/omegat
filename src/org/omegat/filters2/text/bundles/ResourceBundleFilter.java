@@ -200,7 +200,8 @@ public class ResourceBundleFilter extends AbstractFilter
     
     /**
      * Removes extra slashes from, e.g. "\ ", "\=" and "\:" typical in
-     * machine-generated resource bundles.
+     * machine-generated resource bundles.  A slash at the end of a string
+     * means a mandatory space has been trimmed.
      * <p>
      * See also bugreport
      * <a href="http://sourceforge.net/support/tracker.php?aid=1606595">#1606595</a>.
@@ -213,8 +214,15 @@ public class ResourceBundleFilter extends AbstractFilter
             char ch = string.charAt(i);
             if (ch=='\\')
             {
-                i++;
-                ch = string.charAt(i);
+            	// Fix for [ 1812183 ] Properties: space before "=" shouldn't 
+                // be part of the key, contributed by Arno Peters
+                if (i+1 < string.length()) 
+            	{      
+            	    i++;
+            	    ch = string.charAt(i);
+            	}
+            	else
+            	    ch = ' ';
             }
             result.append(ch);
         }
@@ -285,9 +293,9 @@ public class ResourceBundleFilter extends AbstractFilter
             // writing out key
             String key;
             if (equalsPos>=0)
-                key = str.substring(0, equalsPos);
+                key = str.substring(0, equalsPos).trim();
             else
-                key = str;
+                key = str.trim();
             key = removeExtraSlashes(key);
             outfile.write(toAscii(key, true));
             

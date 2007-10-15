@@ -1,7 +1,7 @@
 <html>
 <head>
    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Com treballar amb text formatat - Manual d'usuari de l'OmegaT 1.6.2</title>
+   <title>Com treballar amb text formatat - Manual d'usuari de l'OmegaT 1.6.1</title>
 </head>
 <body>
 
@@ -46,7 +46,7 @@
 
 <p>Les etiquetes estan formades per tres caràcters i un número. El número únic us permet agrupar aquelles etiquetes que s'emparellen l'una amb l'altra i distingir les etiquetes que puguin tenir el mateix caràcter abreujat, però que de fet són diferents.</p>
 
-<p>Els caràcters poden reflectir o no el valor del format que l'etiqueta representa (per exemple, negreta, cursiva, etc.)</p>
+<p>Els caràcters poden reflectir o no el valor del format que l'etiqueta representa (per exemple,negreta, cursiva, etc.)</p>
 
 <a name="Tag_numbering"></a>
 <h3>Numeració de les etiquetes</h3>
@@ -67,7 +67,7 @@
 <p>
 Les <strong>etiquetes soles</strong> indiquen informació de format que no afecta el text que l'envolta (un espai addicional o un salt de línia, per exemple).</p>
 
-<pre>   <strong>&lt;segment 2132&gt;</strong>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Retorn&gt;&lt;/b2&gt;<strong>&lt;fi del segment&gt;</strong></pre>
+<pre>   <strong>&lt;segment 2132&gt;</strong>&lt;b0&gt;&lt;Ctrl+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Retorn&gt;&lt;/b2&gt;<strong>&lt;fi del segment&gt;</strong></pre>
 
 <p>
 <code><strong>&lt;br1&gt;</strong></code> és una etiqueta sola i no afecta el text que l'envolta.</p>
@@ -85,22 +85,17 @@ Les <strong>etiquetes emparellades</strong> normalment indiquen informació d'es
 
 <p>L'OmegaT crea les etiquetes abans d'aplicar la segmentació per frases. En funció de les regles de segmentació, pot donar la sensació que les etiquetes no respectin les regles de numeració ni d'agrupament anteriors.</p>
 
-<pre>   <strong>&lt;segment 1554&gt;</strong> &lt;c0&gt;Abans: \. Després: \s&lt;/c0&gt;<br> &lt;b2&gt;Nota:&lt;/b2&gt;<br>
-"\." representa el caràcter "."&lt;br3&gt; "\s" representa qualsevol caràcter d'espai en blanc <strong>&lt;fi del segment&gt;</strong></pre>
+<pre>   <strong>&lt;segment 1554&gt;</strong> &lt;f0&gt;Abans: \. Després: \s&lt;/f0&gt;<strong>&lt;fi del segment&gt;</strong></pre>
 
 <p>Sembla que aquí no hi ha cap problema. Ara bé, si apliqueu les regles de segmentació per defecte en aquest segment (el comportament per defecte de l'OmegaT), obtindreu el resultat següent:</p>
 
-<pre>   <strong>&lt;segment 1990&gt;</strong> &lt;c0&gt;Abans: \. <strong>&lt;fi del segment&gt;</strong>
+<pre>   <strong>&lt;segment 1990&gt;</strong> &lt;f0&gt;Abans: \. <strong>&lt;fi del segment&gt;</strong>
 
-   <strong>&lt;segment 1991&gt;</strong> Després: \s&lt;/c0&gt;&lt;br1&gt; <strong>&lt;fi del segment&gt;</strong>
+   <strong>&lt;segment 1991&gt;</strong> Després: \s&lt;/f0&gt;<strong>&lt;fi del segment&gt;</strong></pre>
 
-   <strong>&lt;segment 1992&gt;</strong> &lt;b2&gt;Nota:&lt;/b2&gt; "\." representa el caràcter "."&lt;br3&gt;<strong>&lt;fi del  segment&gt;</strong>
+<p>Les regles de segmentació que s'apliquen aquí són: <i>segment després d'un punt seguit d'un espai</i>.)</p>
 
-   <strong>&lt;segment 1993&gt;</strong> "\s" representa qualsevol caràcter d'espai en blanc <strong>&lt;fi del segment&gt;</strong></pre>
-
-<p>(Les regles de segmentació que s'apliquen aquí són: <i>segment després d'un punt seguit d'un espai</i> i <i>segment després d'una etiqueta de salt de línia</i>.)</p>
-
-<p>En aquest cas, podeu comprovar que els segments, agafats un per un, no respecten les regles de numeració ni d'agrupament: les etiquetes <code><code></code> i <code>&lt;/co&gt;</code> haurien d'estar emparellades dins del mateix segment, però estan separades degut a les regles de segmentació.</p>
+<p>En aquest cas, podeu comprovar que els segments, agafats un per un, no respecten les regles de numeració ni d'agrupament: les etiquetes <code>&lt;f0&gt;</code> i <code>&lt;/f0&gt;</code> haurien d'estar emparellades dins del mateix segment, però estan separades degut a les regles de segmentació.</p>
 
 <p>En alguns casos, això pot arribar a provocar problemes en la traducció, com per exemple, si s'ha de canviar la posició de les etiquetes en la llengua d'arribada per tal de reflectir l'ordre de les paraules d'aquesta llengua (vegeu l'apartat <a href="#Tag_operations" title="Com treballar amb text formatat">Operacions amb etiquetes</a> a continuació).</p>
 

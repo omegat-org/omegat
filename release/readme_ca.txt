@@ -1,4 +1,4 @@
-Aquesta traducció és obra d'en Jordi Serratosa, copyright© 2007.
+﻿Aquesta traducció és obra d'en Jordi Serratosa, copyright© 2007.
 Han participat en la localització de l'OmegaT al català:
 Mikel Forcada Zubizarreta (versió 1.4)
 Jordi Serratosa Quintana (versió 1.6 a l'actual)

@@ -45,6 +45,7 @@ x.x.x
 
   Other enhancements:
   - Catalan localisation updated to 1.7.2
+  - Belarusian UI updated to 1.7.+
 
   Bug fixes:
   

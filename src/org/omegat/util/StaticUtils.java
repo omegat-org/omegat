@@ -4,8 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
-               2007 Didier Briel
- Portions copyright 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
+               2007 Didier Briel, Zoltan Bartko 
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -52,6 +51,7 @@ import java.util.jar.JarFile;
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Didier Briel
+ * @author Zoltan Bartko - bartkozoltan@bartkozoltan.com
  */
 public class StaticUtils
 {
@@ -885,6 +885,16 @@ public class StaticUtils
                 out.close();
             }
         }
+    }
+    
+     /* remove leading whitespace */
+    public static String ltrim(String source) {
+        return source.replaceAll("^\\s+", "");  // NOI18N
+    }
+
+    /* remove trailing whitespace */
+    public static String rtrim(String source) {
+        return source.replaceAll("\\s+$", "");  // NOI18N
     }
 
 } // StaticUtils

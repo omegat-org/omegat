@@ -5,7 +5,7 @@
 x.x.x vs. 1.7.2
 
 
-  12 Enhancements
+  13 Enhancements
    3 Bugfixes
 
 ----------------------------------------------------------------------
@@ -42,6 +42,10 @@ x.x.x
 
   - Select elements to translate in office documents
   http://sourceforge.net/support/tracker.php?aid=1812565   
+
+  - Clickable match window
+  http://sourceforge.net/support/tracker.php?aid=1297188
+
 
   Other enhancements:
   - Catalan localisation updated to 1.7.2

@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
- Portions copyright 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
+               2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -37,6 +37,7 @@ import java.io.File;
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
+ * @author Zoltan Bartko
  */
 public class OConsts
 {
@@ -141,4 +142,12 @@ public class OConsts
     
     public static final String REMOTE_SC_DICTIONARY_LIST_LOCATION = 
             "http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/";  // NOI18N
+    
+    public static final String segmentStartString = 
+            StaticUtils.rtrim(OStrings.getSegmentStartMarker());
+    public static final String segmentStartStringFull = OStrings.getSegmentStartMarker();
+    public static final String segmentEndString = 
+            StaticUtils.ltrim(OStrings.getSegmentEndMarker());
+    public static final String segmentEndStringFull = OStrings.getSegmentEndMarker();
+    
 }

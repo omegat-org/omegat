@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Didier Briel and Tiago Saboga
- Portions copyright 2007 Zoltan Bartko - bartkozoltan@bartkozoltan.com
+               2007 Zoltan Bartko - bartkozoltan@bartkozoltan.com
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -54,6 +54,7 @@ import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
@@ -68,6 +69,7 @@ import org.omegat.util.gui.Styles;
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Tiago Saboga
+ * @author Zoltan Bartko
  */
 public class EditorTextArea extends JTextPane implements MouseListener, DocumentListener
 {
@@ -348,9 +350,9 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                 e.getKeyCode()==KeyEvent.VK_A )
         {
             int start = mw.m_segmentStartOffset + mw.m_sourceDisplayLength +
-                    OStrings.getSegmentStartMarker().length();
+                    OConsts.segmentStartStringFull.length();
             int end = getTextLength() - mw.m_segmentEndInset -
-                    OStrings.getSegmentEndMarker().length();
+                    OConsts.segmentEndStringFull.length();
             
             // selecting
             setSelectionStart(start);
@@ -439,7 +441,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                     int pos = getCaretPosition();
                     int start = mw.m_segmentStartOffset +
                             mw.m_sourceDisplayLength +
-                            OStrings.getSegmentStartMarker().length();
+                            OConsts.segmentStartStringFull.length();
                     if (pos < start)
                         moveCaretPosition(start);
                 }
@@ -455,7 +457,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                     int pos = getCaretPosition();
                     // -1 for space before tag, -2 for newlines
                     int end = getTextLength() - mw.m_segmentEndInset -
-                            OStrings.getSegmentEndMarker().length();
+                            OConsts.segmentEndStringFull.length();
                     if (pos > end)
                         moveCaretPosition(end);
                 }
@@ -768,8 +770,8 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
             // which is the current segment in the document and what is the length?
             int startOffset = mw.m_segmentStartOffset;
             int currentTrLen = mw.getTranslationEnd() - mw.getTranslationStart();
-            int totalLen = mw.m_sourceDisplayLength + OStrings.getSegmentStartMarker().length() +
-                    currentTrLen + OStrings.getSegmentEndMarker().length() + 2;
+            int totalLen = mw.m_sourceDisplayLength + OConsts.segmentStartStringFull.length() +
+                    currentTrLen + OConsts.segmentEndStringFull.length() + 2;
             
             int localCur = mw.m_curEntryNum - mw.m_xlFirstEntry;
             DocumentSegment docSeg = mw.m_docSegList[localCur];
@@ -830,8 +832,8 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
     private synchronized boolean createGoToSegmentPopUp(Point point) {
         final int mousepos = this.viewToModel(point);
         
-        if (mousepos >= mw.getTranslationStart() - OStrings.getSegmentStartMarker().length()
-            && mousepos <= mw.getTranslationEnd() + OStrings.getSegmentStartMarker().length())
+        if (mousepos >= mw.getTranslationStart() - OConsts.segmentStartStringFull.length()
+            && mousepos <= mw.getTranslationEnd() + OConsts.segmentStartStringFull.length())
             return false;
 
         popup = new JPopupMenu();

@@ -131,7 +131,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private void createMainComponents()
     {
         editor = new EditorTextArea(this);
-        matches = new MatchesTextArea();
+        matches = new MatchesTextArea(this);
         glossary = new GlossaryTextArea();
 
         String fontName = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_NAME, OConsts.TF_FONT_DEFAULT);
@@ -403,7 +403,6 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     public void oldInit()
     {
         m_curEntryNum = -1;
-        m_activeMatch = -1;
         m_activeProj = new String();
         //m_activeFile = new String();
         
@@ -413,7 +412,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         
         // check this only once as it can be changed only at compile time
         // should be OK, but localization might have messed it up
-        String start = OStrings.getSegmentStartMarker();
+        String start = OConsts.segmentStartStringFull;
         int zero = start.lastIndexOf('0');
         m_segmentTagHasNumber = (zero > 4) && // 4 to reserve room for 10000 digit
                 (start.charAt(zero - 1) == '0') &&
@@ -824,19 +823,20 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     
     /** insert current fuzzy match at cursor position */
 
-    private synchronized void doInsertTrans()
+    public synchronized void doInsertTrans()
     {
         if (!isProjectLoaded())
             return;
         
-        if (m_activeMatch < 0)
+        int activeMatch = matches.getActiveMatch();
+        if (activeMatch < 0)
             return;
         
-        if (m_activeMatch >= m_curEntry.getStrEntry().getNearListTranslated().size())
+        if (activeMatch >= m_curEntry.getStrEntry().getNearListTranslated().size())
             return;
         
         NearString near = (NearString) m_curEntry.getStrEntry().
-                getNearListTranslated().get(m_activeMatch);
+                getNearListTranslated().get(activeMatch);
         doInsertText(near.str.getTranslation());
     }
     
@@ -858,14 +858,15 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         if (!isProjectLoaded())
             return;
         
-        if (m_activeMatch < 0)
+        int activeMatch = matches.getActiveMatch();
+        if (activeMatch < 0)
             return;
 
-        if (m_activeMatch >= m_curEntry.getStrEntry().getNearListTranslated().size())
+        if (activeMatch >= m_curEntry.getStrEntry().getNearListTranslated().size())
             return;
         
         NearString near = (NearString) m_curEntry.getStrEntry().
-                getNearListTranslated().get(m_activeMatch);
+                getNearListTranslated().get(activeMatch);
         doReplaceEditText(near.str.getTranslation());
     }
     
@@ -1663,16 +1664,6 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         
         StringEntry curEntry = m_curEntry.getStrEntry();
         matches.setMatches(curEntry.getNearListTranslated());
-        m_activeMatch = 0;
-    }
-    
-    /**
-     * Activate match by number.
-     */
-    private void activateMatch(int activeMatch)
-    {
-        m_activeMatch = activeMatch;
-        matches.setActiveMatch(activeMatch);
     }
     
     /**
@@ -1774,8 +1765,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             }
 
             int startOffset = m_segmentStartOffset;
-            int totalLen = m_sourceDisplayLength + OStrings.getSegmentStartMarker().length() +
-                    new_translation.length() + OStrings.getSegmentEndMarker().length() + 2;
+            int totalLen = m_sourceDisplayLength + OConsts.segmentStartStringFull.length() +
+                    new_translation.length() + OConsts.segmentEndStringFull.length() + 2;
 
             int localCur = m_curEntryNum - m_xlFirstEntry;
             DocumentSegment docSeg = m_docSegList[localCur];
@@ -1903,15 +1894,24 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                 xlDoc.insertString(offset,"\n\n",Styles.PLAIN);
                 result = 2;
                 if ((flags & WITH_END_MARKERS) == WITH_END_MARKERS) {
-                    String endStr = OStrings.getSegmentEndMarker();
-                    xlDoc.insertString(offset, endStr, Styles.BOLD);
+                    String endStr = OConsts.segmentEndStringFull;
+                    xlDoc.insertString(offset, endStr, Styles.PLAIN);
+                    // make the text bold
+                    xlDoc.replace(offset+endStr.indexOf(OConsts.segmentEndString),
+                            OConsts.segmentEndString.length(),
+                            OConsts.segmentEndString, Styles.BOLD);
                     result += endStr.length(); 
                 }
-                xlDoc.insertString(offset, translation, attr);
-                result += translation.length();
+                // modify the attributes only if absolutely necessary
+                if (translation != null && !translation.equals("")) {
+                    xlDoc.insertString(offset, translation, attr);
+                    result += translation.length();
+                }
                 
                 if ((flags & WITH_END_MARKERS) == WITH_END_MARKERS) {
-                    String startStr = new String(OStrings.getSegmentStartMarker());
+                    // insert a plain space
+                    xlDoc.insertString(offset," ",Styles.PLAIN);
+                    String startStr = new String(OConsts.segmentStartString);
                     // <HP-experiment>
                     
                             try {
@@ -2259,7 +2259,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                 // make sure we're not at end of segment
                 // -1 for space before tag, -2 for newlines
                 int end = editor.getTextLength() - m_segmentEndInset -
-                        OStrings.getSegmentEndMarker().length();
+                        OConsts.segmentEndStringFull.length();
                 int spos = editor.getSelectionStart();
                 int epos = editor.getSelectionEnd();
                 if( pos>=end && spos>=end && epos>=end )
@@ -2285,7 +2285,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     public synchronized int getTranslationStart() {
         synchronized(editor) {
             return m_segmentStartOffset + m_sourceDisplayLength +
-                   OStrings.getSegmentStartMarker().length(); 
+                   OConsts.segmentStartStringFull.length(); 
         }
     }
     
@@ -2295,7 +2295,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     public synchronized int getTranslationEnd() {
         synchronized(editor) {
            return editor.getTextLength() - m_segmentEndInset -
-                    OStrings.getSegmentEndMarker().length();
+                    OConsts.segmentEndStringFull.length();
         }
     }
     
@@ -2350,11 +2350,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             int spos = editor.getSelectionStart();
             int epos = editor.getSelectionEnd();
             /*int start = m_segmentStartOffset + m_sourceDisplayLength +
-                    OStrings.getSegmentStartMarker().length();*/
+                    OConsts.segmentStartStringFull.length();*/
             int start = getTranslationStart();
             // -1 for space before tag, -2 for newlines
             /*int end = editor.getTextLength() - m_segmentEndInset -
-                    OStrings.getSegmentEndMarker().length();*/
+                    OConsts.segmentEndStringFull.length();*/
             int end = getTranslationEnd();
     
             if (spos != epos)
@@ -2434,7 +2434,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     // text length of glossary, if displayed
     private int		m_glossaryLength;
     
-    // boolean set after safety check that org.omegat.OStrings.getSegmentStartMarker()
+    // boolean set after safety check that org.omegat.OConsts.segmentStartStringFull
     //	contains empty "0000" for segment number
     private boolean	m_segmentTagHasNumber;
     
@@ -2464,7 +2464,6 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     }    
     private String  m_activeProj;
     public int      m_curEntryNum;
-    private int     m_activeMatch;
 
     private TagValidationFrame  m_tagWin;
     private ProjectFrame	m_projWin;
@@ -3246,27 +3245,27 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     
     private void editSelectFuzzy5MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy5MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy5MenuItemActionPerformed
-        activateMatch(4);
+        matches.setActiveMatch(4);
     }//GEN-LAST:event_editSelectFuzzy5MenuItemActionPerformed
     
     private void editSelectFuzzy4MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy4MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy4MenuItemActionPerformed
-        activateMatch(3);
+        matches.setActiveMatch(3);
     }//GEN-LAST:event_editSelectFuzzy4MenuItemActionPerformed
     
     private void editSelectFuzzy3MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy3MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy3MenuItemActionPerformed
-        activateMatch(2);
+        matches.setActiveMatch(2);
     }//GEN-LAST:event_editSelectFuzzy3MenuItemActionPerformed
     
     private void editSelectFuzzy2MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy2MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy2MenuItemActionPerformed
-        activateMatch(1);
+        matches.setActiveMatch(1);
     }//GEN-LAST:event_editSelectFuzzy2MenuItemActionPerformed
     
     private void editSelectFuzzy1MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy1MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy1MenuItemActionPerformed
-        activateMatch(0);
+        matches.setActiveMatch(0);
     }//GEN-LAST:event_editSelectFuzzy1MenuItemActionPerformed
     
     private void editFindInProjectMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editFindInProjectMenuItemActionPerformed

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2007 Zoltan Bartko
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -24,11 +25,19 @@
 
 package org.omegat.gui.main;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 import org.omegat.core.StringData;
 import org.omegat.core.matching.NearString;
+import org.omegat.core.matching.SourceTextEntry;
+import org.omegat.util.OStrings;
 import org.omegat.util.Token;
 import org.omegat.util.gui.Styles;
 
@@ -37,19 +46,24 @@ import org.omegat.util.gui.Styles;
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
+ * @author Zoltan Bartko
  */
-public class MatchesTextArea extends javax.swing.JTextPane
+public class MatchesTextArea extends javax.swing.JTextPane implements MouseListener
 {
     private List matches;
     private List delimiters;
     private int activeMatch;
     private StringBuffer displayBuffer;
     
+    private MainWindow mw;
+    
     /** Creates new form MatchGlossaryPane */
-    public MatchesTextArea()
+    public MatchesTextArea(MainWindow mw)
     {
+        this.mw = mw;
         setEditable(false);
         setMinimumSize(new java.awt.Dimension(100, 50));
+        addMouseListener(this);
     }
     
     /** 
@@ -133,5 +147,96 @@ public class MatchesTextArea extends javax.swing.JTextPane
     {
         matches = null;
         setText(new String());
+    }
+
+    public void mouseClicked(MouseEvent e) {
+        // is there anything?
+        if (matches == null || matches.size() == 0)
+            return;
+        
+        // set up the menu
+        if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
+            // find out the clicked item
+            int clickedItem = -1;
+            
+            // where did we click?
+            int mousepos = this.viewToModel(e.getPoint());
+            
+            int i;
+            for (i = 0; i < delimiters.size()-1; i++) {
+                int start = ((Integer) delimiters.get(i)).intValue();
+                int end = ((Integer) delimiters.get(i+1)).intValue();
+                
+                if (mousepos >= start && mousepos< end) {
+                    clickedItem = i;
+                    break;
+                }
+            }
+            
+            if (clickedItem == -1)
+                clickedItem = delimiters.size()-1;
+            
+            final int clicked = clickedItem;
+            
+            // create the menu
+            JPopupMenu popup = new JPopupMenu();
+            
+            JMenuItem item = popup.add(OStrings.getString("MATCHES_INSERT"));
+            item.addActionListener(new ActionListener() {
+                // the action: insert this match
+                public synchronized void actionPerformed(ActionEvent e) {
+                    setActiveMatch(clicked);
+                    mw.doInsertTrans();
+                }
+            });
+            
+            item = popup.add(OStrings.getString("MATCHES_REPLACE"));
+            item.addActionListener(new ActionListener() {
+                public synchronized void actionPerformed(ActionEvent e) {
+                    setActiveMatch(clicked);
+                    mw.doRecycleTrans();
+                }
+            });
+            
+            popup.addSeparator();
+            
+            if (clicked >= matches.size())
+                return;
+            
+            final NearString ns = (NearString) matches.get(clicked);
+            String project = ns.proj;
+            
+            item = popup.add(OStrings.getString("MATCHES_GO_TO_SEGMENT_SOURCE"));
+            
+            if (project == null || project.equals("")) {
+                item.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        mw.doGotoEntry(
+                                ((SourceTextEntry) ns.str.getParentList().first()).entryNum() 
+                                + 1);
+                    }
+                });
+            } else {
+                item.setEnabled(false);
+            }
+            
+            popup.show(this, e.getX(), e.getY());
+        }
+    }
+
+    public void mousePressed(MouseEvent e) {
+    }
+
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    public void mouseExited(MouseEvent e) {
+    }
+
+    public int getActiveMatch() {
+        return activeMatch;
     }
 }

@@ -6,7 +6,7 @@ x.x.x vs. 1.7.2
 
 
   13 Enhancements
-   3 Bugfixes
+   4 Bugfixes
 
 ----------------------------------------------------------------------
 x.x.x
@@ -61,6 +61,10 @@ x.x.x
 
   - Properties: space before "=" shouldn't be part of the key  
   http://sourceforge.net/support/tracker.php?aid=1812183
+
+  - Footnotes break segments in OOo 1.x documents  
+  http://sourceforge.net/support/tracker.php?aid=1812385
+
 
 ----------------------------------------------------------------------
  OmegaT 1.7.2 Changes

@@ -152,9 +152,17 @@ public class OpenDocDialect extends DefaultXMLDialect
             
         });
         if (options.getTranslateNotes())
+        {
             defineOutOfTurnTag("text:note");                                    // NOI18N
+            // OOo 1.x
+            defineOutOfTurnTag("text:footnote");                                // NOI18N
+        }
         else
+        {
             defineIntactTag("text:note");                                       // NOI18N
+            // OOo 1.x
+            defineIntactTag("text:footnote");                                   // NOI18N
+        }
         if (options.getTranslateComments())
             defineOutOfTurnTag("office:annotation");                            // NOI18N
         else    

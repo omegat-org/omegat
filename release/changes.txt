@@ -5,18 +5,26 @@
 1.7.3 vs. 1.7.2
 
 
-  1 Enhancement
-  0 Bugfixes
+  2 Enhancement
+s
+
+  1 Bugfixe
 
 ----------------------------------------------------------------------
 1.7.3
 
 
-Contains one new localisation (Danish)
+Contains two new localisations (Danish, polish) and bug fixes
 
  Other enhancements:
  
  - Danish 1.6.2 localisation + instant start
+ - Polish 1.6.2 localisation + partial manual
+
+ Bug fixes:
+  
+  - Properties: space before "=" shouldn't be part of the key  
+  http://sourceforge.net/support/tracker.php?aid=1812183
 
 ----------------------------------------------------------------------
  OmegaT 1.7.2 Changes

@@ -6,8 +6,7 @@
 
 
   2 Enhancements
-
-  2 Bugfixes
+  3 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.3
@@ -27,6 +26,9 @@ Contains two new localisations (Danish, polish) and bug fixes
 
   - <context> should be ignored in XLIFF files  
   http://sourceforge.net/support/tracker.php?aid=1802000
+
+  - Footnotes break segments in OOo 1.x documents  
+  http://sourceforge.net/support/tracker.php?aid=1812385
 
 ----------------------------------------------------------------------
  OmegaT 1.7.2 Changes

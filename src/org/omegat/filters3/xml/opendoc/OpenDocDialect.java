@@ -93,6 +93,8 @@ public class OpenDocDialect extends DefaultXMLDialect
         defineOutOfTurnTags(new String[]
         {
             "text:note",                                                        // NOI18N
+            // [ 1812385 ] Footnotes break segments in OOo 1.x documents
+            "text:footnote",                                                    // NOI18N          
             // Comments [1628890]
             "office:annotation",                                                // NOI18N
             // Drawing Shapes from OO specifications

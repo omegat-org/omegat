@@ -5,10 +5,9 @@
 1.7.3 vs. 1.7.2
 
 
-  2 Enhancement
-s
+  2 Enhancements
 
-  1 Bugfixe
+  2 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.3
@@ -25,6 +24,9 @@ Contains two new localisations (Danish, polish) and bug fixes
   
   - Properties: space before "=" shouldn't be part of the key  
   http://sourceforge.net/support/tracker.php?aid=1812183
+
+  - <context> should be ignored in XLIFF files  
+  http://sourceforge.net/support/tracker.php?aid=1802000
 
 ----------------------------------------------------------------------
  OmegaT 1.7.2 Changes

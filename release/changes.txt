@@ -2,7 +2,7 @@
  OmegaT x.x.x Changes
 ----------------------------------------------------------------------
 
-x.x.x vs. 1.7.2
+x.x.x vs. 1.7.3
 
 
   13 Enhancements
@@ -65,6 +65,26 @@ x.x.x
   - Footnotes break segments in OOo 1.x documents  
   http://sourceforge.net/support/tracker.php?aid=1812385
 
+
+----------------------------------------------------------------------
+ OmegaT 1.7.3 Changes
+----------------------------------------------------------------------
+
+1.7.3 vs. 1.7.2
+
+
+  1 Enhancement
+  0 Bugfixes
+
+----------------------------------------------------------------------
+1.7.3
+
+
+Contains one new localisation (Danish)
+
+ Other enhancements:
+ 
+ - Danish 1.6.2 localisation + instant start
 
 ----------------------------------------------------------------------
  OmegaT 1.7.2 Changes

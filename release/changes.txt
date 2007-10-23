@@ -6,7 +6,7 @@ x.x.x vs. 1.7.3
 
 
   13 Enhancements
-   2 Bugfixes
+   1 Bugfixe
 
 ----------------------------------------------------------------------
 x.x.x
@@ -56,10 +56,6 @@ x.x.x
   - HTML filter loses html-encoded characters if not supported
   http://sourceforge.net/support/tracker.php?aid=1800677
 
-  - Footnotes break segments in OOo 1.x documents  
-  http://sourceforge.net/support/tracker.php?aid=1812385
-
-
 ----------------------------------------------------------------------
  OmegaT 1.7.3 Changes
 ----------------------------------------------------------------------
@@ -76,7 +72,7 @@ s
 1.7.3
 
 
-Contains one new localisation (Danish)
+Contains two new localisations (Danish and Polish) and bug fixes
 
  Other enhancements:
  
@@ -90,6 +86,9 @@ Contains one new localisation (Danish)
 
   - <context> should be ignored in XLIFF files  
   http://sourceforge.net/support/tracker.php?aid=1802000
+
+  - Footnotes break segments in OOo 1.x documents  
+  http://sourceforge.net/support/tracker.php?aid=1812385
 
 ----------------------------------------------------------------------
  OmegaT 1.7.2 Changes

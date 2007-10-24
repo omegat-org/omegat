@@ -104,7 +104,7 @@ public class OpenDocOptions implements Serializable
     
     public boolean getTranslateComments()
     {
-        return this.translateNotes;
+        return this.translateComments;
     }
 
     /**

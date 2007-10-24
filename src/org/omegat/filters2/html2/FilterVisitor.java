@@ -185,8 +185,11 @@ public class FilterVisitor extends NodeVisitor
                 maybeTranslateAttribute(tag, "src");                            // NOI18N
             maybeTranslateAttribute(tag, "summary");                            // NOI18N
             maybeTranslateAttribute(tag, "title");                              // NOI18N
-            if( "INPUT".equals(tag.getTagName()) &&
-            		options.getTranslateValue() )                           // NOI18N
+            if( "INPUT".equals(tag.getTagName()) && (
+               options.getTranslateValue() 
+               || "submit".equalsIgnoreCase(tag.getAttribute("type"))           // NOI18N 
+               || "button".equalsIgnoreCase(tag.getAttribute("type"))           // NOI18N 
+               && options.getTranslateButtonValue() ) )                                            
                 maybeTranslateAttribute(tag, "value");                          // NOI18N
 
             queuePrefix(tag);

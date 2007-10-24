@@ -46,8 +46,9 @@ import java.io.Serializable;
  * <ul>[+] lang
  * <ul>[+] hreflang
  * <ul>[+] value
+ * <ul>[+] value (of buttons)
  * </ul>
- * Start a new paragraph on breaks (<br>: [ ]
+ * Start a new paragraph on breaks (<br>): [ ]
  * Skip text matchin regExp []
  * @author Maxym Mykhalchuk
  * @author Didier Briel
@@ -93,6 +94,7 @@ public class HTMLOptions implements Serializable
     private boolean translateLang = true;
     private boolean translateHreflang = true;
     private boolean translateValue = true;
+    private boolean translateButtonValue = true;
     private boolean paragraphOnBr = false;
     
     /**
@@ -174,6 +176,22 @@ public class HTMLOptions implements Serializable
     {
         return this.translateValue;
     }
+    /**
+     * Sets whether button value attributes should be translated.
+     */
+    public void setTranslateButtonValue(boolean translateButtonValue)
+    {
+        this.translateButtonValue = translateButtonValue;
+    }
+    
+    /**
+     * Returns whether button value attributes should be translated.
+     */
+    public boolean getTranslateButtonValue()
+    {
+        return this.translateButtonValue;
+    }
+
    
    /**
      * Returns whether a new paragraph should be started on BR.

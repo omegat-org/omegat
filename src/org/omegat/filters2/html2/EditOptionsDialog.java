@@ -78,6 +78,7 @@ public class EditOptionsDialog extends javax.swing.JDialog
             translateLangCB.setSelected(options.getTranslateLang());
             translateHreflangCB.setSelected(options.getTranslateHreflang());
             translateValueCB.setSelected(options.getTranslateValue());
+            translateButtonValueCB.setSelected(options.getTranslateButtonValue());
             paragraphOnBrCB.setSelected(options.getParagraphOnBr());
             skipRegExpTF.setText(options.getskipRegExp());
         }
@@ -133,6 +134,7 @@ public class EditOptionsDialog extends javax.swing.JDialog
         translateLangCB = new javax.swing.JCheckBox();
         translateHreflangCB = new javax.swing.JCheckBox();
         translateValueCB = new javax.swing.JCheckBox();
+        translateButtonValueCB = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         paragraphOnBrCB = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
@@ -243,6 +245,16 @@ public class EditOptionsDialog extends javax.swing.JDialog
         });
 
         jPanel1.add(translateValueCB);
+        
+        translateButtonValueCB.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(translateButtonValueCB, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("HTML_TRANSLATE_BUTTON_VALUE"));
+        translateButtonValueCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                translateButtonValueCBradiosActionPerformed(evt);
+            }
+        });
+
+        jPanel1.add(translateButtonValueCB);        
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel3, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("HTML_PARAGRAPH_ON"));
         jPanel1.add(jLabel3);
@@ -285,7 +297,11 @@ public class EditOptionsDialog extends javax.swing.JDialog
 
     private void translateHreflangCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateHreflangCBradiosActionPerformed
 // TODO add your handling code here:
-    }//GEN-LAST:event_translateHreflangCBradiosActionPerformed
+       }//GEN-LAST:event_translateValueCBradiosActionPerformed
+    
+    private void translateButtonValueCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateValueCBradiosActionPerformed
+   // TODO add your handling code here:
+       }//GEN-LAST:event_translateButtonValueCBradiosActionPerformed
 
     private void translateLangCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateLangCBradiosActionPerformed
 // TODO add your handling code here:
@@ -317,6 +333,7 @@ public class EditOptionsDialog extends javax.swing.JDialog
         options.setTranslateSrc(translateSrcCB.isSelected());
         options.setTranslateLang(translateLangCB.isSelected());
         options.setTranslateValue(translateValueCB.isSelected());
+        options.setTranslateButtonValue(translateButtonValueCB.isSelected());
         options.setTranslateHreflang(translateHreflangCB.isSelected());
         options.setParagraphOnBr(paragraphOnBrCB.isSelected());
         options.setSkipRegExp(skipRegExpTF.getText());
@@ -363,5 +380,6 @@ public class EditOptionsDialog extends javax.swing.JDialog
     private javax.swing.JCheckBox translateLangCB;
     private javax.swing.JCheckBox translateSrcCB;
     private javax.swing.JCheckBox translateValueCB;
+    private javax.swing.JCheckBox translateButtonValueCB;
     // End of variables declaration//GEN-END:variables
 }

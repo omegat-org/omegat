@@ -5,7 +5,7 @@
 1.7.3 vs. 1.7.2
 
 
-  3 Enhancements
+  4 Enhancements
   3 Bugfixes
 
 ----------------------------------------------------------------------
@@ -19,6 +19,7 @@ Contains two new localisations (Danish, polish) and bug fixes
  - Danish 1.6.2 localisation + instant start
  - Polish 1.6.2 localisation + partial manual
  - Catalan localisation updated to 1.7.2
+ - Belarusian UI updated to 1.7.2
 
  Bug fixes:
   

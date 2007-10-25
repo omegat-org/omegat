@@ -1,12 +1,3 @@
-/*
- * Platform.java
- *
- * Created on Pondelok, 2007, júl 30, 20:51
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 /**************************************************************************
  OmegaT - Computer Assisted Translation (CAT) tool 
           with fuzzy matching, translation memory, keyword search, 

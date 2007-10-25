@@ -1,12 +1,3 @@
-/*
- * ExtendedEditorKit.java
- *
- * Created on Wed, 2007, october 3, 14:04
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 /**************************************************************************
  OmegaT - Computer Assisted Translation (CAT) tool 
           with fuzzy matching, translation memory, keyword search, 

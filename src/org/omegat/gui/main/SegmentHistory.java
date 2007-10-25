@@ -1,12 +1,3 @@
-/*
- * SegmentHistory.java
- *
- * Created on Nede?a, 2007, august 5, 8:11
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 /**************************************************************************
  OmegaT - Computer Assisted Translation (CAT) tool 
           with fuzzy matching, translation memory, keyword search, 

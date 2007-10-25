@@ -189,6 +189,7 @@ public class FilterVisitor extends NodeVisitor
                options.getTranslateValue() 
                || "submit".equalsIgnoreCase(tag.getAttribute("type"))           // NOI18N 
                || "button".equalsIgnoreCase(tag.getAttribute("type"))           // NOI18N 
+               || "reset".equalsIgnoreCase(tag.getAttribute("type"))            // NOI18N 
                && options.getTranslateButtonValue() ) )                                            
                 maybeTranslateAttribute(tag, "value");                          // NOI18N
 

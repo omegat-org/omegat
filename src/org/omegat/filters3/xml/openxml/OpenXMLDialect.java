@@ -36,7 +36,7 @@ import org.omegat.filters3.xml.openxml.*;
  */
 public class OpenXMLDialect extends DefaultXMLDialect
 {
-    
+ 
     /** Creates a new instance of OpenXML */
     public OpenXMLDialect()
     {

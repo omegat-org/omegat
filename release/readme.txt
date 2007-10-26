@@ -1,7 +1,7 @@
 ﻿@@TRANSLATION_NOTICE@@
 
 ==============================================================================
-  OmegaT 1.7.2, Read Me file
+  OmegaT 1.8.0, Read Me file
 
   1.  Information about OmegaT
   2.  What is OmegaT?
@@ -167,12 +167,15 @@ Previous contributors include:
 (alphabetical order)
 
 Code has been contributed by
-  Didier Briel
+  Zoltan Bartko
+  Didier Briel (release manager)
   Kim Bruning
-  Sacha Chua
+  Sandra Jean Chua
+  Martin Fleurke  
   Thomas Huriaux
-  Maxym Mykhalchuk (lead developer)
-  Henry Pijffers (release manager)
+  Maxym Mykhalchuk 
+  Henry Pijffers 
+  Tiago Saboga
   Benjamin Siband
   Martin Wunderlich
 
@@ -188,14 +191,21 @@ Other contributions by
 but you don't see your name on the lists, feel free to contact us.)
 
 OmegaT uses the following libraries:
+
   HTMLParser by Somik Raha, Derrick Oswald and others (LGPL License).
   http://sourceforge.net/projects/htmlparser
 
-  MRJ Adapter by Steve Roy (LGPL License).
+  MRJ Adapter 1.0.8 by Steve Roy (LGPL License).
   http://homepage.mac.com/sroy/mrjadapter/
 
-  VLDocking Framework by VLSolutions (CeCILL License).
+  VLDocking Framework 2.0.6d by VLSolutions (CeCILL License).
   http://www.vlsolutions.com/en/products/docking/
+
+  Hunspell 1.1.12 by László Németh and others (LGPL License).
+
+  JNA by Todd Fast, Timothy Wall and others (LGPL License).
+
+  Swing-Layout 1.0.2 (LGPL License).
 
 ==============================================================================
  5.  Is OmegaT bugging you ? Do you need help ?

@@ -1,8 +1,7 @@
-﻿Ovaj prevod sačinio je Dragomir Kovačević, copyright © 2007.
-
+Ovaj prevod sačinio je Dragomir Kovačević, copyright© 2007.
 
 ==============================================================================
-  OmegaT 1.7.1, datoteka Read Me
+  OmegaT 1.7.2, datoteka Read Me
 
   1.  Obavještenja o OmegaT
   2.  Šta je OmegaT?
@@ -39,7 +38,7 @@ Glavne odlike OmegaT su da
   - pretražuje po projektu i u memorijama prevoda za podršku
   - pretražuje u bilo kom direktorijumu u kom postoje datoteke koje OmegaT može očitavati
   - koristi tehniku podudarnosti
-  - pametno upravlja projektima uključivo i s onim koji imaju složenu strukturu direktorijuma
+  - pametno upravlja projektima uključivo i onima sa složenom strukturom direktorijuma
   - podržava rječnike (terminološka provjera)
   - postoji lakoća u razumjevanju dokumentacije i uputstva
   - postoji lokalizacija na veći broj jezika.
@@ -139,39 +138,6 @@ Za razvoj koda
   Benjamin Siband
   Martin Wunderlich
 
-Lokalizaciju su potpomogli
- Roberto Argus (brazilski portugalski)
-  Alessandro Cattelan (talijanski)
-  Sabine Cretella (njemački)
-  Suzanne Bolduc (esperanto)
-  Didier Briel (francuski)
-  Frederik De Vos (holandski)
-  Cesar Escribano Esteban (španski)
-  Dmitri Gabinski (bjeloruski, esperanto i ruski)
-  Takayuki Hayashi (japanski)
-  Jean-Christophe Helary (francuski i japanski)
-  Yutaka Kachi (japanski)
-  Dragomir Kovačević (srpskohrvatski)
-  Elina Lagoudaki (grčki)
-  Martin LukÃ¡č (slovački)
-  Ahmet Murati (albanski)
-  Samuel Murray (afrikaans)
-  Yoshi Nakayama (japanski)
-  Claudio Nasso (italijanski)
-  David Olveira (portugalski)
-  Ronaldo Radunz (brazilski portugalski)
-  Thelma L. Sabim (brazilski portugalski)
-  Juan Salcines (španski)
-  Pablo Roca Santiagio (španski)
-  Sonja Tomašković (njemački)
-  Karsten Voss (poljski)
-  Gerard van der Weyde (holandski)
-  Martin Wunderlich (njemački)
-  Hisashi Yanagida (japanski)
-  Kunihiko Yokota (japanski)
-  Erhan YÃ¼kselci (turski)
-  Mikel Forcada Zubizarreta (Catalan) 
-
 Ostali doprinosi
   Sabine Cretella
   Dmitri Gabinski
@@ -201,7 +167,7 @@ Prije nego prijaviš bug, provjeri da li si detaljno pregledao/la dokumentaciju.
 
 Svaki valjan izvještaj o bug-u mora ispunjavati tri uslova.
   - Proceduru za njegovo reprodukovanje,
-  - Stav o onome što se trebalo dobiti određenom komandom, i
+  - Svijest o onome što se trebalo dobiti određenom komandom, i
   - Šta se s njom doista dobilo.
 
 Takođe možeš pridodati i kopije datoteka, dijelove log-a, snimke sa monitora, i bilo šta što smatraš da će informatičarima za razvoj, pomoći u pronalaženju i popravci nađenog bug-a.
@@ -222,7 +188,7 @@ Radi detaljnijih obavještenja o promjenama kod ove i svih prethodnih verzija, p
 Podržani formati datoteka obuhvaćaju:
   - Plain text
   - HTML i XHTML
-  - HTML Help Compiler (HCC)
+  - HTML Help Compiler
   - OpenDocument / OpenOffice.org
   - Java resource bundles (.properties)
   - INI datoteke (datoteke sa key=parovi vrijednosti s bilo kojim kodnim rasporedom)

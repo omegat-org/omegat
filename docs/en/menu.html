@@ -1,284 +1,603 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
 <html>
 <head>
-   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-   <title>Main Menu - OmegaT 1.6.1 User Manual</title>
+  <meta name="generator" content="HTML Tidy for Windows (vers 13 April 2006), see www.w3.org">
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+
+  <title>Main Menu - OmegaT 1.7.3 User Manual</title>
+  <style type="text/css">
+      <!--
+                P.c8 { margin-left: 0.29cm }
+                H3.c6 { margin-left: 0.3cm; margin-top: 0cm }
+                P.c4 { margin-bottom: 0cm }
+                H2.c3 { margin-left: 1cm; margin-top: 0cm; margin-bottom: 0cm }
+                P.c2 { margin-left: 1cm; margin-bottom: 0cm }
+                H1.c1 { margin-left: 1cm; margin-top: 0cm; margin-bottom: 0cm }
+        -->
+  </style>
 </head>
 <body>
 
-<h1>Main Menu</h1>
+  <h1 class="c1" style="margin-left: 0cm; margin-bottom: 0.5cm">Main menu</h1>
 
-<p>
-All of OmegaT's functionality is available through the menu
-bar at the top of the Editor window. Most functions are also
-available via <a href="keyboardShortcuts.html">keyboard shortcuts</a>.
-</p>
+  <p class="c2" style="margin-bottom: 0.5cm">All of OmegaT's functionality is available through the menu bar at the top of the Editor window. Most functions are also available via <a href=
+  "keyboardShortcuts.html">keyboard shortcuts</a>.</p>
 
-<p>
-The shortcuts with <strong><code>Ctrl</code></strong> listed
-are for Windows, UNIX and UNIX-like operating systems with
-keyboards featuring a <strong><code>Ctrl</code></strong> or
-<strong><code>Control</code></strong> key. Users of Mac OS X
-should use the Apple key
-<img src="images/AppleKey.gif" alt="Apple key" width="19" height="19">
-instead.
-</p>
+  <p class="c2" style="margin-bottom: 0.5cm"><a name="graphics1" id="graphics1"></a>The shortcuts with <strong><code>Ctrl</code></strong> listed are for Windows, UNIX and UNIX-like operating systems
+  with keyboards featuring a <strong><code>Ctrl</code></strong> or <strong><code>Control</code></strong> key. Users of Mac OS X should use the Apple key <img src="images/AppleKey.gif" name=
+  "graphics1" alt="Apple key" align="bottom" width="19" height="19" border="0" id="graphics1"> instead.</p>
 
-<h2>Contents</h2>
-<ul type="none">
-   <li>1. <a href="#Project_Menu">Project Menu</a></li>
-   <li>2. <a href="#Edit_Menu">Edit Menu</a></li>
-   <li>3. <a href="#Go_to_Menu">Go to Menu</a></li>
-   <li>4. <a href="#Tools_Menu">Tools Menu</a></li>
-   <li>5. <a href="#Options_Menu">Options Menu</a></li>
-   <li>6. <a href="#Help_Menu">Help Menu</a></li>
-</ul>
+  <h2>Contents</h2>
 
-<a name="Project_Menu"></a>
-<h4>Project Menu</h4>
+  <ul>
+    <li><a href="#ProjectMenu">Project menu</a></li>
 
-<p>
-<dl>
-   <dt>New</dt>
-   <dd>
-      Creates and opens a new project. The dialog to create a project
-      is the same as to <a href="projectProperties.html">edit the project</a>.
-   </dd>
+    <li><a href="#EditMenu">Edit menu</a></li>
 
-   <dt>Open <code>&lt;Ctrl+O&gt;</code></dt>
-   <dd>Opens a previously created project.</dd>
+    <li><a href="#GoToMenu">Goto menu</a></li>
 
-   <dt>Import Source Files...</dt>
-   <dd>
-      Copies the selected files to the <code>/source</code>
-      directory and reloads the project to load the new files.
-   </dd>
+    <li><a href="#ToolsMenu">Tools menu</a></li>
 
-   <dt>Reload</dt>
-   <dd>
-      Reloads the project to take external changes in source
-      files, legacy translation memories or glossaries into account.
-   </dd>
+    <li><a href="#OptionsMenu">Options menu</a></li>
 
-   <dt>Close</dt>
-   <dd>Saves the translation and closes the project.</dd>
+    <li><a href="#HelpMenu">Help menu</a></li>
+  </ul>
 
-   <dt>Save <code>&lt;Ctrl+S&gt;</code></dt>
-   <dd>
-      Saves the translation to project's translation memory.
-      OmegaT automatically saves the translation every 10
-      minutes or when you close the project or quit OmegaT.
-   </dd>
+  <h3><a name="ProjectMenu" id="ProjectMenu"></a>Project menu</h3>
 
-   <dt>Create Translated Documents</dt>
-   <dd>
-      Creates the target documents based on your translation
-      of documents' text. The documents will be located in
-      the <code>/target</code> directory.
-   </dd>
+  <table width="100%">
+    <tr>
+      <td width="17%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">New</p>
+      </td>
 
-   <dt>Properties <code>&lt;Ctrl+E&gt;</code></dt>
-   <dd>
-      Displays <a href="projectProperties.html">Project Properties</a>
-      dialog to edit project languages and folder locations.
-   </dd>
+      <td width="14%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"></p>
+      </td>
 
-   <dt>Project Files... <code>&lt;Ctrl+L&gt;</code></dt>
-   <dd>
-      Closes or opens
-      <a href="userInterface.html#Project_Files">Project Files Window</a>
-      (depending whether it is opened or closed).
-   </dd>
+      <td width="69%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Creates and opens a new project. The dialog to create a project is the same as to <a href="projectProperties.html">edit the
+        project</a>.</p>
+      </td>
+    </tr>
 
-   <dt>Quit <code>&lt;Ctrl+Q&gt;</code></dt>
-   <dd>
-      Saves the project and quits OmegaT. If you haven't yet
-      saved the project manually confirms whether you would
-      really like to quit.
-   </dd>
-</dl>
-</p>
+    <tr>
+      <td width="17%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Open</p>
+      </td>
 
-<a name="Edit_Menu"></a>
-<h4>Edit Menu</h4>
+      <td width="14%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Ctrl+O&gt;</code></p>
+      </td>
 
-<p>
-Items that one can find in most applications (copy/cut/paste) are not displayed
-in this menu but are available with your system shorcuts. For example, on Windows:
-</p>
+      <td width="69%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Opens a previously created project.</p>
+      </td>
+    </tr>
 
-<p>
-<dl>
-   <dt>Copy <code>&lt;Ctrl+C&gt;</code></dt>
-   <dd>Copies selected text to clipboard.</dd>
+    <tr>
+      <td width="17%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Import Source Files...</p>
+      </td>
 
-   <dt>Cut <code>&lt;Ctrl+X&gt;</code></dt>
-   <dd>Copies selected text to clipboard and deletes selected text.</dd>
+      <td width="14%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"></p>
+      </td>
 
-   <dt>Paste <code>&lt;Ctrl+V&gt;</code></dt>
-   <dd>Pastes the text from clipboard at cursor.</dd>
-</dl>
-</p>
+      <td width="69%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Copies the selected files to the <code>/source</code> directory and reloads the project to load the new files.</p>
+      </td>
+    </tr>
 
-<p>
-The menu itself contains the following items:
-</p>
+    <tr>
+      <td width="17%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Import From MediaWiki...</p>
+      </td>
 
-<p>
-<dl>
-   <dt>Undo Last Action <code>&lt;Ctrl+Z&gt;</code></dt>
-   <dd>
-      Goes back to the status before the last editing action was taken.
-      Does not work once the modified segment has been validated.
-   </dd>
+      <td width="14%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"></p>
+      </td>
 
-   <dt>Redo Last Action <code>&lt;Ctrl+Y&gt;</code></dt>
-   <dd>
-      Goes back to the status before the last editing action was cancelled.
-      Does not work once  the modified segment has been validated.
-   </dd>
+      <td width="69%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Imports units from MediaWiki pages, based on the URL entered</p>
+      </td>
+    </tr>
 
-   <dt>Overwrite Translation <code>&lt;Ctrl+R&gt;</code></dt>
-   <dd>
-      Overwrites the whole target segment with the currently selected fuzzy
-      match (by default the first match is selected).
-   </dd>
+    <tr>
+      <td width="17%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Reload</p>
+      </td>
 
-   <dt>Insert Translation <code>&lt;Ctrl+I&gt;</code></dt>
-   <dd>
-      Inserts currently selected fuzzy match at the cursor position.
-      This function will never overwrite a portion of the target
-      segment, even if it is selected.
-   </dd>
+      <td width="14%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"></p>
+      </td>
 
-   <dt>Overwrite Source <code>&lt;Shift+Ctrl+R&gt;</code></dt>
-   <dd>Overwrites the whole target segment with the source.</dd>
+      <td width="69%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Reloads the project to take external changes in source files, legacy translation memories or glossaries into account.</p>
+      </td>
+    </tr>
 
-   <dt>Insert Source <code>&lt;Shift+Ctrl+I&gt;</code></dt>
-   <dd>Inserts the source at the cursor position.</dd>
+    <tr>
+      <td width="17%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Close</p>
+      </td>
 
-   <dt>Search Project... <code>&lt;Ctrl+F&gt;</code></dt>
-   <dd>Opens a new <a href="userInterface.html#Search_Window">Search Window</a>.</dd>
+      <td width="14%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"></p>
+      </td>
 
-   <dt>Select Fuzzy Match #N <code>&lt;Ctrl+N&gt;</code> (N is from 1 to 5)</dt>
-   <dd>
-      Selects the Nth fuzzy match displayed in the match viewer to replace or insert
-      it to the segment. The <a href="userInterface.html#Fuzzy_Matches">Fuzzy Matches</a>
-      section describes the color coding in detail.
-   </dd>
-</dl>
-</p>
+      <td width="69%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Saves the translation and closes the project.</p>
+      </td>
+    </tr>
 
-<a name="Go_to_Menu"></a>
-<h4>Go to Menu</h4>
+    <tr>
+      <td width="17%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Save</p>
+      </td>
 
-<p>
-<dl>
-   <dt>Next Untranslated Segment <code>&lt;Ctrl+U&gt;</code></dt>
-   <dd>Moves to the next segment that has no equivalent in the translation memory.</dd>
+      <td width="14%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Ctrl+S&gt;</code></p>
+      </td>
 
-   <dt>
-      Next Segment <code>&lt;Ctrl+N&gt;</code>,
-      <code>&lt;Enter&gt;</code> / <code>&lt;Tab&gt;</code>
-   </dt>
-   <dd>
-      Moves to the next segment. If current segment is the last one in a file,
-      moves to the first segment of the next file.
-   </dd>
+      <td width="69%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Saves the translation to project's translation memory. OmegaT automatically saves the translation every 10 minutes or when you
+        close the project or quit OmegaT.</p>
+      </td>
+    </tr>
 
-   <dt>
-      Previous Segment <code>&lt;Ctrl+P&gt;</code>,
-      <code>&lt;Ctrl+Enter&gt;</code> / <code>&lt;Ctrl+Tab&gt;</code>
-   </dt>
-   <dd>
-      Moves to the previous segment. Moves to the last segment of the
-      previous file, if current segment is the first one one in a file.
-   </dd>
-</dl>
-</p>
+    <tr>
+      <td width="17%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Create Translated Documents</p>
+      </td>
 
-<a name="Tools_Menu"></a>
-<h4>Tools Menu</h4>
+      <td width="14%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"></p>
+      </td>
 
-<p>
-<dl>
-   <dt>Validate Tags <code>&lt;Ctrl+T&gt;</code></dt>
-   <dd>
-      Checks for missing or displaced tags in formatted files.
-      Will display a list of segments with tag mistakes. The
-      <a href="userInterface.html#Tag_Validation">Tag Validation window</a>
-      section lists what you see there, and
-      <a href="formattedText.html">Working with Formatted Text</a>
-      tells you why.
-   </dd>
-</dl>
-</p>
+      <td width="69%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Creates the target documents based on your translation of documents' text. The documents will be located in the
+        <code>/target</code> directory.</p>
+      </td>
+    </tr>
 
-<a name="Options_Menu"></a>
-<h4>Options Menu</h4>
+    <tr>
+      <td width="17%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Properties</p>
+      </td>
 
-<p>
-<dl>
-   <dt>Use Tab To Advance</dt>
-   <dd>
-      Sets segment validation key to <code>&lt;Tab&gt;</code> instead of
-      the default <code>&lt;Enter&gt;</code>. This option is useful for
-      some of Chinese, Japanese or Korean character input systems.
-   </dd>
+      <td width="14%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Ctrl+E&gt;</code></p>
+      </td>
 
-   <dt>Font...</dt>
-   <dd>
-      Shows <a href="fontSettings.html">Font Settings</a> dialog to modify
-      the text display font. Users of old computers should better change
-      font before opening a project or face performance penalty. The penalty
-      is most painful on G4 + Mac OS X + Japanese combination.
-   </dd>
+      <td width="69%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Displays <a href="projectProperties.html">Project properties</a> dialog to edit project languages and folder locations.</p>
+      </td>
+    </tr>
 
-   <dt>File Filters...</dt>
-   <dd>
-      Displays <a href="fileFilters.html">File Filters</a> dialog to
-      configure file handling and parsing. 
-   </dd>
+    <tr>
+      <td width="17%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Project Files...</p>
+      </td>
 
-   <dt>Segmentation...</dt>
-   <dd>
-      Opens <a href="segmentation.html">Source Segmentation</a>
-      dialog to configure text segmentation. 
-   </dd>
+      <td width="14%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Ctrl+L&gt;</code></p>
+      </td>
 
-   <dt>Editing Behaviour...</dt>
-   <dd>
-      Displays a <a href="translationEditing.html">Translation Editing</a>
-      dialog to configure target field contents for not yet translated segments.
-   </dd>
+      <td width="69%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Closes or opens <a href="userInterface.html#Project_Files">Project files window</a> (depending whether it is opened or closed).</p>
+      </td>
+    </tr>
 
-   <dt>Restore Main Window</dt>
-   <dd>
-      Restores the components (editor, match viewer, and glossary viewer) of the
-      main OmegaT window to their default state. Use this feature in case you
-      have undocked, moved, or hidden one or more components, and you cannot get
-      them back the way you want them.
-   </dd>
-</dl>
-</p>
+    <tr>
+      <td width="17%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Quit</p>
+      </td>
 
-<a name="Help_Menu"></a>
-<h4>Help Menu</h4>
+      <td width="14%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Ctrl+Q&gt;</code></p>
+      </td>
 
-<p>
-<dl>
-   <dt>User Manual... <code>&lt;F1&gt;</code></dt>
-   <dd>
-      Opens <a href="userInterface.html#Help_Browser">Help Browser</a>
-      with this manual in a separate window.
-   </dd>
+      <td width="69%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Saves the project and quits OmegaT. If you haven't yet saved the project manually confirms whether you would really like to
+        quit.</p>
+      </td>
+    </tr>
+  </table>
 
-   <dt>About...</dt>
-   <dd>Displays copyright, credits and license information.</dd>
-</dl>
-</p>
+  <h3 class="c6" style="margin-left: 0cm"><br>
+  <br></h3>
 
-<hr>
-<p><a href="legalNotices.html" title="Legal Notices">Legal Notices</a></p>
+  <h3 class="c6" style="margin-left: -0.03cm"><a name="EditMenu" id="EditMenu"></a>Edit menu</h3>
 
+  <p class="c2" style="margin-left: 0.42cm; margin-bottom: 0.5cm">Items that one can find in most applications (copy/cut/paste) are not displayed in this menu but are available with your system
+  shorcuts. For example, on Windows:</p>
+
+  <table width="100%">
+    <tr>
+      <td width="17%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Copy</p>
+      </td>
+
+      <td width="14%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Ctrl+C&gt;</code></p>
+      </td>
+
+      <td width="69%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Copies selected text to clipboard.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Cut</p>
+      </td>
+
+      <td width="14%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Ctrl+X&gt;</code></p>
+      </td>
+
+      <td width="69%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Copies selected text to clipboard and deletes selected text.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Paste</p>
+      </td>
+
+      <td width="14%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Ctrl+V&gt;</code></p>
+      </td>
+
+      <td width="69%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Pastes the text from clipboard at cursor.</p>
+      </td>
+    </tr>
+  </table>
+
+  <p class="c2" style="margin-left: 0.3cm; margin-top: 0.2cm; margin-bottom: 0.1cm"><br>
+  The menu itself contains the following items:</p>
+
+  <table width="100%">
+    <tr>
+      <td width="17%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Undo Last Action</p>
+      </td>
+
+      <td width="14%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Ctrl+Z&gt;</code></p>
+      </td>
+
+      <td width="69%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Goes back to the status before the last editing action was taken. Does not work once the modified segment has been validated.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Redo Last Action</p>
+      </td>
+
+      <td width="14%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Ctrl+Y&gt;</code></p>
+      </td>
+
+      <td width="69%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Goes back to the status before the last editing action was cancelled. Does not work once the modified segment has been
+        validated.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Overwrite Translation</p>
+      </td>
+
+      <td width="14%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Ctrl+R&gt;</code></p>
+      </td>
+
+      <td width="69%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Overwrites the whole target segment with the currently selected fuzzy match (by default the first match is selected).</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Insert Translation</p>
+      </td>
+
+      <td width="14%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Ctrl+I&gt;</code></p>
+      </td>
+
+      <td width="69%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Inserts currently selected fuzzy match at the cursor position. This function will never overwrite a portion of the target segment,
+        even if it is selected.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Overwrite Source</p>
+      </td>
+
+      <td width="14%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Shift+Ctrl+R&gt;</code></p>
+      </td>
+
+      <td width="69%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Overwrites the whole target segment with the source.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Insert Source</p>
+      </td>
+
+      <td width="14%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Shift+Ctrl+I&gt;</code></p>
+      </td>
+
+      <td width="69%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Inserts the source at the cursor position.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Search Project...</p>
+      </td>
+
+      <td width="14%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Ctrl+F&gt;</code></p>
+      </td>
+
+      <td width="69%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Opens a new <a href="userInterface.html#Search_Window">Search window</a>.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Select Fuzzy Match #N</p>
+      </td>
+
+      <td width="14%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Ctrl+#N&gt;</code></p>
+      </td>
+
+      <td width="69%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">(#N is a digit from 1 to 5) - Selects the Nth fuzzy match displayed in the match viewer to replace or insert it to the segment. The <a href=
+        "userInterface.html#Fuzzy_Matches">Fuzzy matches</a> section describes the color coding in detail.</p>
+      </td>
+    </tr>
+  </table>
+
+  <h3 class="c6" style="margin-top: 0.2cm; margin-bottom: 0.1cm"></h3>
+
+  <h3 class="c6" style="margin-top: 0.2cm; margin-bottom: 0.1cm"></h3>
+
+  <h3 class="c6" style="margin-top: 0.2cm; margin-bottom: 0.1cm"><a name="GoToMenu" id="GoToMenu"></a> Go to menu</h3>
+
+  <table width="100%">
+    <tr>
+      <td width="17%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Next Untranslated Segment</p>
+      </td>
+
+      <td width="14%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Ctrl+U&gt;</code></p>
+      </td>
+
+      <td width="69%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Moves to the next segment that has no equivalent in the translation memory.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Next Segment</p>
+      </td>
+
+      <td width="14%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Ctrl+N&gt;</code> or <code>&lt;Enter&gt;</code> or <code>&lt;Tab&gt;</code></p>
+      </td>
+
+      <td width="69%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Moves to the next segment. If current segment is the last one in a file, moves to the first segment of the next file.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Previous Segment</p>
+      </td>
+
+      <td width="14%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Ctrl+P&gt;</code> or <code>&lt;Ctrl+Enter&gt;</code> or <code>&lt;Ctrl+Tab&gt;</code></p>
+      </td>
+
+      <td width="69%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Moves to the previous segment. Moves to the last segment of the previous file, if current segment is the first one one in a
+        file.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Segment number...</p>
+      </td>
+
+      <td width="14%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Ctrl+J&gt;</code></p>
+      </td>
+
+      <td width="69%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">The segment is opened on entering itssegment number</p>
+      </td>
+    </tr>
+  </table>
+
+  <p style="margin-left: 0.3cm; margin-top: 0.2cm; margin-bottom: 0.1cm"></p>
+
+  <p style="margin-left: 0.3cm; margin-top: 0.2cm; margin-bottom: 0.1cm"></p>
+
+  <h3 class="c6" style="margin-top: 0.2cm; margin-bottom: 0.1cm"><a name="ToolsMenu" id="ToolsMenu"></a> Tools menu</h3>
+
+  <table width="100%">
+    <tr>
+      <td width="17%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Validate Tags</p>
+      </td>
+
+      <td width="14%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;Ctrl+T&gt;</code></p>
+      </td>
+
+      <td width="69%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Checks for missing or displaced tags in formatted files. Will display a list of segments with tag mistakes. The <a href=
+        "userInterface.html#Tag_Validation">Tag validation window</a> section lists what you see there, and <a href="formattedText.html">Working with formatted texts</a> tells you why.</p>
+      </td>
+    </tr>
+  </table>
+
+  <p style="margin-top: 0.2cm; margin-bottom: 0.1cm"></p>
+
+  <p style="margin-top: 0.2cm; margin-bottom: 0.1cm"></p>
+
+  <h3 class="c6" style="margin-top: 0.2cm; margin-bottom: 0.1cm"><a name="OptionsMenu" id="OptionsMenu"></a> Options menu</h3>
+
+  <table width="100%">
+    <tr>
+      <td width="17%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Use Tab To Advance</p>
+      </td>
+
+      <td width="14%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"></p>
+      </td>
+
+      <td width="69%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Sets segment validation key to <code>&lt;Tab&gt;</code> instead of the default <code>&lt;Enter&gt;</code>. This option is useful
+        for some of Chinese, Japanese or Korean character input systems.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Font...</p>
+      </td>
+
+      <td width="14%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"></p>
+      </td>
+
+      <td width="69%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Shows <a href="fontSettings.html">Font settings</a> dialog to modify the text display font. Users of old computers should better
+        change font before opening a project or face performance penalty. The penalty is most painful on G4 + Mac OS X + Japanese combination.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">File Filters..</p>
+      </td>
+
+      <td width="14%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"></p>
+      </td>
+
+      <td width="69%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Displays <a href="fileFilters.html">File filters</a> dialog to configure file handling and parsing.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Segmentation...</p>
+      </td>
+
+      <td width="14%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"></p>
+      </td>
+
+      <td width="69%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Opens <a href="segmentation.html">Source segmentation</a> dialog to configure text segmentation.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Editing Behavior...</p>
+      </td>
+
+      <td width="14%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"></p>
+      </td>
+
+      <td width="69%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Displays a <a href="translationEditing.html">Translation editing</a> dialog to configure target field Contents for not yet
+        translated segments.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Restore Main Window</p>
+      </td>
+
+      <td width="14%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"></p>
+      </td>
+
+      <td width="69%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Restores the components (editor, match viewer, and glossary viewer) of the main OmegaT window to their default state. Use this
+        feature in case you have undocked, moved, or hidden one or more components, and you cannot get them back the way you want them.</p>
+      </td>
+    </tr>
+  </table>
+
+  <p style="margin-top: 0.2cm; margin-bottom: 0.1cm"></p>
+
+  <p style="margin-top: 0.2cm; margin-bottom: 0.1cm"></p>
+
+  <h3 class="c6" style="margin-top: 0.2cm; margin-bottom: 0.1cm"><a name="HelpMenu" id="HelpMenu"></a> Help menu</h3>
+
+  <table width="100%">
+    <tr>
+      <td width="17%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">User Manual...</p>
+      </td>
+
+      <td width="14%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"><code>&lt;F1&gt;</code></p>
+      </td>
+
+      <td width="69%"  bgcolor="#DDDDDD">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Opens <a href="userInterface.html#Help_Browser">Help browser</a> with this manual in a separate window.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">About...</p>
+      </td>
+
+      <td width="14%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm"></p>
+      </td>
+
+      <td width="69%">
+        <p class="c8" style="margin-left: 0.3cm; margin-top: 0.2cm">Displays copyright, credits and license information.</p>
+      </td>
+    </tr>
+  </table>
+
+  <p><a href="legalNotices.html">Legal notices</a></p>
 </body>
 </html>

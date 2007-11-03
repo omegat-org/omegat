@@ -1,121 +1,89 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
 <html>
 <head>
-   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-   <title>Files to Translate - OmegaT 1.6.2 User Manual</title>
+  <meta name="generator" content="HTML Tidy for Windows (vers 13 April 2006), see www.w3.org">
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+
+  <title>Files to Translate - OmegaT 1.7.3 User Manual</title>
 </head>
 <body>
 
-<h1>Files to translate</h1>
+  <h1>Files to translate</h1>
 
-<p>
-With OmegaT you can directly translate a number of file formats. There are basically two types of file format. The <strong>plain text</strong> formats and the <strong>formatted text</strong> formats.
-</p>
+  <h2>Contents</h2>
 
-<h2>Contents</h2>
+  <ul>
+    <li style="margin-bottom: 0cm"><a href="/filesToTranslate.html#Plain_text_files">Plain text files</a></li>
 
-<ul type="none">
-   <li>1. <a href="#Plain_text_files">Plain text files</a></li>
-   <li>2. <a href="#Formatted_text_files">Formatted text files</a></li>
-   <li>3. <a href="#File_formats_specifics">File formats specifics</a></li>
-   <li>4. <a href="#Other_file_formats">Other file formats</a></li>
-</ul>
+    <li style="margin-bottom: 0cm"><a href="/filesToTranslate.html#Formatted_text_files">Formatted text files</a></li>
 
-<a name="Plain_text_files"></a>
-<h3>Plain text files</h3>
+    <li style="margin-bottom: 0cm"><a href="/filesToTranslate.html#File_formats_specifics">File formats specifics</a></li>
 
-<p>
-Plain text files contain text only, so their translation is as simple as typing the translation.
-</p>
+    <li><a href="/filesToTranslate.html#Other_file_formats">Other file formats</a></li>
+  </ul>
 
-<p>
-Currently, OmegaT supports the following plain text formats:
-</p>
+  <p style="margin-left: 1.03cm; margin-bottom: 0cm">With OmegaT you can translate files in a number of file formats. There are basically two types of file formats, the <strong>plain text</strong>
+  and the <strong>formatted text</strong> formats.</p>
 
-<ul>
-   <li>ASCII text (.txt, etc.)</li>
-   <li>Encoded text</li>
-   <li>Java resource bundles (.properties)</li>
-   <li>PO files (.po)</li>
-   <li> INI (key=value) files (.ini)</li>
-</ul>
+  <h3 style="margin-left: 0.05cm">Plain text files</h3>
 
-<p>
-Such files are not considered as containing more format than "white space" for indentation/alignement purposes.
-</p>
+  <p style="margin-left: 1.03cm; margin-bottom: 0cm">Plain text files contain text only, so their translation is as simple as typing the translation. Currently, OmegaT supports the following plain
+  text formats:</p>
 
-<p>
-They are usually modified in text editors and it is generally not possible to have such format retain font/color/margin etc information.
-</p>
+  <ul>
+    <li style="margin-left: 1.03cm; margin-bottom: 0cm">ASCII text (.txt, etc.)</li>
 
-<a name="Formatted_text_files"></a>
-<h3>Formatted text files</h3>
+    <li style="margin-left: 1.03cm; margin-bottom: 0cm">Encoded text</li>
 
-<p>
-Formatted text files contain text as well as information such as font type, size, color etc. They are commonly created in word processors or home page editors.
-</p>
+    <li style="margin-left: 1.03cm; margin-bottom: 0cm">Java resource bundles (.properties)</li>
 
-<p>
-Currently, OmegaT support the following formatted text formats:
-</p>
+    <li style="margin-left: 1.03cm; margin-bottom: 0cm">PO files (.po)</li>
 
-<ul>
-   <li>Microsoft Open XML files</li>
-   <li>OpenOffice.org files</li>
-   <li>OpenDocument files</li>
-   <li>(X)HTML files</li>
-   <li>HTML Help Compiler (HCC) files</li>
-   <li>DocBook files</li>
-</ul>
+    <li style="margin-left: 1.03cm; margin-bottom: 0cm">INI (key=value) files (.ini)</li>
+  </ul>
 
-<p>
-Such file formats are conceived so that they retain formatting information. Such formatting information can be as simple as <strong>this is bold</strong> or as complex as table data with different font size, color, position etc.
-</p>
+  <p style="margin-left: 1.00cm">Such files are not considered as containing more format than "white space" for indentation/alignment purposes. They are usually modified in text editors and it is
+  generally not possible to have such format retain font/color/margin etc information.</p>
 
-<p>
-In most translation jobs it is considered important to have the translated document look similar to the original. OmegaT allows you to do this by marking the characters/words that have a special formatting with easy to manipulate tags.
-</p>
+  <h3 style="margin-left: 0.11cm">Formatted text files</h3>
 
-<p>
-Simplifying the original text formating greatly contributes to reducing the number of tags. Unifying used fonts, font sizes, colors etc should be considered if possible, to simplify the translation and reduce the number of possible tag errors.
-</p>
+  <p style="margin-left: 1.00cm">Formatted text files contain text as well as information such as font type, size, color etc. They are commonly created in word processors or home page editors.
+  Currently, OmegaT support the following formatted text formats:</p>
 
-<a name="File_formats_specifics"></a>
-<h3>File formats specifics</h3>
+  <ul>
+    <li style="margin-left: 1.00cm">OpenOffice.org</li>
 
-<p>
-Most of the above file formats are subject to specific handling.
-</p>
+    <li style="margin-left: 1.00cm">OpenDocument</li>
 
-<p>
-Refer to <a href="fileFormats.html" title="Supported File Formats">Supported File Formats</a> and
-<a href="fileFilters.html" title="File Filters">File Filters</a> for specific information related
-to the handling of all the above file formats.
-</p>
+    <li style="margin-left: 1.00cm">Microsoft Open XML</li>
 
-<a name="Other_file_formats"></a>
-<h3>Other file formats</h3>
+    <li style="margin-left: 1.00cm">(X)HTML</li>
 
-<p>
-Other plain text or formatted text file formats may be accessible in OmegaT
-</p>
+    <li style="margin-left: 1.00cm">HTML Help Compiler (HCC)</li>
 
-<p>
-Roughly speaking, a number of plain text formats (including LaTex etc)
-can be translated in OmegaT through conversion to the PO format.
-</p>
+    <li style="margin-left: 1.00cm">DocBook</li>
 
-<p>
-Similarly, a number of formatted text formats (including Microsoft Office files)
-can be  translated in OmegaT through conversion to the Open Document format.
-</p>
+    <li style="margin-left: 1.00cm">Okapi monolingual XLIFF</li>
+  </ul>
 
-<p>
-For more information, refer to
-<a href="fileFormats.html" title="Supported File Formats">Supported File Formats</a>.
-</p>
+  <p style="margin-left: 1.00cm">Such file formats are conceived so that they retain formatting information. Such formatting information can be as simple as <strong>this is bold</strong> or as
+  complex as table data with different font size, color, position etc. In most translation jobs it is considered important to have the translated document look similar to the original. OmegaT allows
+  you to do this by marking the characters/words that have a special formatting with easy to manipulate tags. Simplifying the original text formating greatly contributes to reducing the number of
+  tags. Unifying used fonts, font sizes, colors etc should be considered if possible, to simplify the translation and reduce the number of possible tag errors.</p>
 
-<hr>
-<p><a href="legalNotices.html" title="Legal Notices">Legal Notices</a></p>
+  <h3 style="margin-left: 0.08cm">File formats specifics</h3>
 
+  <p style="margin-left: 1.00cm">Most of the above file formats are subject to specific handling. Refer to <a href="fileFormats.html">Supported file formats</a> and <a href="fileFilters.html">File
+  filters</a> for specific information related to the handling of all the above file formats.</p>
+
+  <h3 style="margin-left: 0.08cm">Other file formats</h3>
+
+  <p style="margin-left: 1.00cm">Other plain text or formatted text file formats may be accessible in OmegaT .Roughly speaking, a number of plain text formats (including LaTex etc) can be translated
+  in OmegaT through conversion to the PO format. Similarly, a number of formatted text formats (including Microsoft Office files) can be translated in OmegaT through conversion to the Open Document
+  format. For more information, refer to <a href="fileFormats.html">Supported file formats</a>.</p>
+  <hr>
+
+  <p><a href="legalNotices.html">Legal notices</a></p>
 </body>
 </html>

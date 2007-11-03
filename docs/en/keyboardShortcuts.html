@@ -1,133 +1,361 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
 <html>
 <head>
-   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-   <title>Keyboard Shortcuts - OmegaT 1.6.1 User Manual</title>
+  <meta name="generator" content="HTML Tidy for Windows (vers 13 April 2006), see www.w3.org">
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+
+  <title>Keyboard Shortcuts - OmegaT 1.7.3 User Manual</title>
 </head>
 <body>
 
-<h1>Keyboard Shortcuts</h1>
+  <h1>Keyboard shortcuts</h1>
 
-<p>
-The following shortcuts are available from the main window. When
-another window is on the foreground, click on the main window to put
-it on the foreground or press <strong><code>Esc</code></strong> to
-close that window.
-</p>
+  <p style="margin-left: 1.03cm">The following shortcuts are available from the main window. When another window is on the foreground, click on the main window to put it on the foreground or press
+  <strong><code>Esc</code></strong> to close that window.</p>
 
-<p>
-Shortcuts are activated by pressing <strong><code>Ctrl</code></strong>
-and a letter. For readability purposes, letters are written in uppercase
-here. Some shortcuts involve other keys. <strong><code>Ctrl</code></strong>
-is used on Windows, UNIX and UNIX-like operating systems with keyboards
-featuring a <strong><code>Ctrl</code></strong> / <strong><code>Control<code></strong>
-key. Users of Mac OS X should use the Apple key
-<img src="images/AppleKey.gif" alt="Apple Key" width="19" height="19">
-instead.
-</p>
+  <p style="margin-left: 1.03cm"><a name="graphics2" id="graphics2"></a>Shortcuts are activated by pressing <strong><code>Ctrl</code></strong> and a letter. For readability purposes, letters are
+  written in uppercase here. Some shortcuts involve other keys. <strong><code>Ctrl</code></strong> is used on Windows, UNIX and UNIX-like operating systems with keyboards featuring a
+  <strong><code>Ctrl</code></strong> / <strong><code>Control</code></strong> key. Users of Mac OS X should use the Apple key <img src="images/AppleKey.gif" name="graphics2" alt="Apple Key" align=
+  "bottom" width="19" height="19" border="0" id="graphics2"> instead.</p>
 
-<h2>Contents</h2>
+  <h2 style="margin-left: 0.05cm">Contents</h2>
 
-<ul type="none">
-   <li>1. <a href="#Project_management">Project management</a></li>
-   <li>2. <a href="#Editing">Editing</a></li>
-   <li>3. <a href="#Moving_around">Moving around</a></li>
-   <li>4. <a href="#Reference_windows">Reference windows</a></li>
-   <li>5. <a href="#Other">Other</a></li>
-</ul>
+  <ul>
+    <li>
+      <p style="margin-bottom: 0cm"><a href="#Project_management">Project management</a></p>
+    </li>
 
-<a name="Project_management"></a>
-<h4>Project management</h4>
+    <li>
+      <p style="margin-bottom: 0cm"><a href="#Editing">Editing</a></p>
+    </li>
 
-<p>
-<dl>
-   <dt>Open project <code>&lt;Ctrl+O&gt;</code></dt>
-   <dd>Displays a dialog to locate an already existing project</dd>
+    <li>
+      <p style="margin-bottom: 0cm"><a href="#Moving_around">Moving around</a></p>
+    </li>
 
-   <dt>Save <code>&lt;Ctrl+S&gt;</code></dt>
-   <dd>Saves the current work to the file project_save.tmx located in the project's /omegat/ directory</dd>
+    <li>
+      <p style="margin-bottom: 0cm"><a href="#Reference_windows">Reference windows</a></p>
+    </li>
 
-   <dt>Project properties <code>&lt;Ctrl+E&gt;</code></dt>
-   <dd>Displays the project's settings for eventual modification</dd>
-</dl>
-</p>
+    <li>
+      <p><a href="#Other">Other</a></p>
+    </li>
+  </ul>
 
-<a name="Editing"></a>
-<h4>Editing</h4>
+  <p style="margin-left: 1.03cm; margin-bottom: 0cm"><a name="Project_management" id="Project_management"></a><br></p>
 
-<p>
-<dl>
-   <dt>Undo last action <code>&lt;Ctrl+Z&gt;</code></dt>
-   <dd>Undoes the last editing actions, in the current target segment</dd>
+  <h3>Project management</h3>
 
-   <dt>Redo last action <code>&lt;Ctrl+Y&gt;</code></dt>
-   <dd>Redoes the editing actions that have just been undone, in the
-   current target segment</dd>
+  <table width="100%" border="0" cellpadding="2" cellspacing="0" style="page-break-before: always">
+    <col width="33*">
+    <col width="42*">
+    <col width="182*">
 
-   <dt>Select match #N <code>&lt;Ctrl+N&gt;</code> (N from 1 to 5)</dt>
-   <dd>Selects the N<sup>th</sup> match displayed in the match window
-   (the first match is selected by default)</dd>
+    <tr>
+      <td width="13%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.19cm">Open project</p>
+      </td>
 
-   <dt>Replace with match <code>&lt;Ctrl+R&gt;</code></dt>
-   <dd>Replaces the current target segment contents with the selected
-   match (the first match is selected by default)</dd>
+      <td width="16%" bgcolor="#DDDDDD">
+        <p align="center" style="margin-left: 0.05cm"><code>&lt;Ctrl+O&gt;</code></p>
+      </td>
 
-   <dt>Insert match <code>&lt;Ctrl+I&gt;</code></dt>
-   <dd>Inserts the selected match at the cursor position in the current
-   target segment (the first match is inserted by default)</dd>
+      <td width="71%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.24cm">Displays a dialog to locate an already existing project</p>
+      </td>
+    </tr>
 
-   <dt>Replace with source <code>&lt;Ctrl+Shift+R&gt;</code></dt>
-   <dd>Replaces the current target segment contents with the source text contents</dd>
+    <tr>
+      <td width="13%" bgcolor="#FFFFFF">
+        <p style="margin-left: 0.19cm">Save</p>
+      </td>
 
-   <dt>Insert source <code>&lt;Ctrl+Shift+I&gt;</code></dt>
-   <dd>Inserts the source text contents at the cursor position in the current target segment</dd>
+      <td width="16%" bgcolor="#FFFFFF">
+        <p align="center" style="margin-left: 0.05cm"><code>&lt;Ctrl+S&gt;</code></p>
+      </td>
 
-   <dt>Search project <code>&lt;Ctrl+F&gt;</code></dt>
-   <dd>Displays a dialog to conduct searches in the project</dd>
-</dl>
-</p>
+      <td width="71%" bgcolor="#FFFFFF">
+        <p style="margin-left: 0.24cm">Saves the current work to the file project_save.tmx located in the project's /omegat/ directory</p>
+      </td>
+    </tr>
 
-<a name="Moving_around"></a>
-<h4>Moving around</h4>
+    <tr>
+      <td width="13%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.19cm">Project properties</p>
+      </td>
 
-<p>
-<dl>
-   <dt>Next untranslated segment <code>&lt;Ctrl+U&gt;</code></dt>
-   <dd>Moves the editing field to the next segment that is not
-   registered in the project's translation memory</dd>
+      <td width="16%" bgcolor="#DDDDDD">
+        <p align="center" style="margin-left: 0.05cm"><code>&lt;Ctrl+E&gt;</code></p>
+      </td>
 
-   <dt>Next segment <code>&lt;Ctrl+N&gt;/Enter/Return</code></dt>
-   <dd>Moves the editing field to the next segment</dd>
+      <td width="71%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.24cm"><a name="Editing" id="Editing"></a>Displays the project's settings for eventual modification</p>
+      </td>
+    </tr>
 
-   <dt>Previous segment <code>&lt;Ctrl+P&gt;</code></dt>
-   <dd>Moves the editing field to the previous segment</dd>
-</dl>
-</p>
+    <tr>
+      <td width="13%">
+        <h3 style="margin-left: 0.19cm"></h3>
 
-<a name="Reference_windows"></a>
-<h4>Reference windows</h4>
+        <h3 style="margin-left: 0.19cm">Editing</h3>
+      </td>
 
-<p>
-<dl>
-   <dt>Project files listing <code>&lt;Ctrl+L&gt;</code></dt>
-   <dd>Displays the Project files listing</dd>
-</dl>
-</p>
+      <td width="16%"></td>
 
-<a name="Other"></a>
-<h4>Other</h4>
+      <td width="71%"></td>
+    </tr>
 
-<p>
-<dl>
-   <dt>Validate tags <code>&lt;Ctrl+T&gt;</code></dt>
-   <dd>Verifies if all the tags present in the source text are also present in the target text.</dd>
+    <tr>
+      <td width="13%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.19cm">Undo last action</p>
+      </td>
 
-   <dt>Help files <code>&lt;F1&gt;</code></dt>
-   <dd>Displays the OmegaT help files in a separate window</dd>
-</dl>
-</p>
+      <td width="16%" bgcolor="#DDDDDD">
+        <p align="center" style="margin-left: 0.05cm"><code>&lt;Ctrl+Z&gt;</code></p>
+      </td>
 
-<hr>
-<p><a href="legalNotices.html" title="Legal Notices">Legal Notices</a></p>
+      <td width="71%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.24cm">Undoes the last editing actions, in the current target segment</p>
+      </td>
+    </tr>
 
+    <tr>
+      <td width="13%" bgcolor="#FFFFFF">
+        <p style="margin-left: 0.19cm">Redo last action</p>
+      </td>
+
+      <td width="16%" bgcolor="#FFFFFF">
+        <p align="center" style="margin-left: 0.05cm"><code>&lt;Ctrl+Y&gt;</code></p>
+      </td>
+
+      <td width="71%" bgcolor="#FFFFFF">
+        <p style="margin-left: 0.24cm">Redoes the editing actions that have just been undone, in the current target segment</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="13%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.19cm">Select match #N<br>
+        </p>
+      </td>
+
+      <td width="16%" bgcolor="#DDDDDD">
+        <p align="center" style="margin-left: 0.05cm"><code>&lt;Ctrl+#N&gt;</code></p>
+      </td>
+
+      <td width="71%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.24cm">#N is a digit from 1 to 5. The shortcut selects the N<sup>th</sup> match displayed in the match window (the first match is selected by default)</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="13%" bgcolor="#FFFFFF">
+        <p style="margin-left: 0.19cm">Replace with match</p>
+      </td>
+
+      <td width="16%" bgcolor="#FFFFFF">
+        <p align="center" style="margin-left: 0.05cm"><code>&lt;Ctrl+R&gt;</code></p>
+      </td>
+
+      <td width="71%" bgcolor="#FFFFFF">
+        <p style="margin-left: 0.24cm">Replaces the current target segment Contents with the selected match (the first match is selected by default)</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="13%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.19cm">Insert match</p>
+      </td>
+
+      <td width="16%" bgcolor="#DDDDDD">
+        <p align="center" style="margin-left: 0.05cm"><code>&lt;Ctrl+I&gt;</code></p>
+      </td>
+
+      <td width="71%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.24cm">Inserts the selected match at the cursor position in the current target segment (the first match is inserted by default)</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="13%" bgcolor="#FFFFFF">
+        <p style="margin-left: 0.19cm">Replace with source</p>
+      </td>
+
+      <td width="16%" bgcolor="#FFFFFF">
+        <p align="center" style="margin-left: 0.05cm"><code>&lt;Ctrl+Shift+R&gt;</code></p>
+      </td>
+
+      <td width="71%" bgcolor="#FFFFFF">
+        <p style="margin-left: 0.24cm">Replaces the current target segment Contents with the source text Contents</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="13%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.19cm">Insert source</p>
+      </td>
+
+      <td width="16%" bgcolor="#DDDDDD">
+        <p align="center" style="margin-left: 0.05cm"><code>&lt;Ctrl+Shift+I&gt;</code></p>
+      </td>
+
+      <td width="71%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.24cm">Inserts the source text Contents at the cursor position in the current target segment</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="13%" bgcolor="#FFFFFF">
+        <p style="margin-left: 0.19cm">Search project</p>
+      </td>
+
+      <td width="16%" bgcolor="#FFFFFF">
+        <p align="center" style="margin-left: 0.05cm"><code>&lt;Ctrl+F&gt;</code></p>
+      </td>
+
+      <td width="71%" bgcolor="#FFFFFF">
+        <p style="margin-left: 0.24cm"><a name="Moving_around" id="Moving_around"></a>Displays a dialog to conduct searches in the project</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="13%" bgcolor="#FFFFFF">
+        <h3 style="margin-left: 0.19cm"></h3>
+
+        <h3 style="margin-left: 0.19cm">Moving around</h3>
+      </td>
+
+      <td width="16%" bgcolor="#FFFFFF"></td>
+
+      <td width="71%" bgcolor="#FFFFFF"></td>
+    </tr>
+
+    <tr>
+      <td width="13%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.19cm">Next untranslated segment</p>
+      </td>
+
+      <td width="16%" bgcolor="#DDDDDD">
+        <p align="center" style="margin-left: 0.05cm"><code>&lt;Ctrl+U&gt;</code></p>
+      </td>
+
+      <td width="71%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.24cm">Moves the editing field to the next segment that is not registered in the project's translation memory</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="13%" bgcolor="#FFFFFF">
+        <p style="margin-left: 0.19cm">Next segment</p>
+      </td>
+
+      <td width="16%" bgcolor="#FFFFFF">
+        <p align="center" style="margin-left: 0.05cm"><code>&lt;Ctrl+N&gt;<br>
+        Enter Return</code></p>
+      </td>
+
+      <td width="71%" bgcolor="#FFFFFF">
+        <p style="margin-left: 0.24cm">Moves the editing field to the next segment</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="13%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.19cm">Previous segment</p>
+      </td>
+
+      <td width="16%" bgcolor="#DDDDDD">
+        <p align="center" style="margin-left: 0.05cm"><code>&lt;Ctrl+P&gt;</code></p>
+      </td>
+
+      <td width="71%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.24cm"><a name="Reference_windows" id="Reference_windows"></a>Moves the editing field to the previous segment</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="13%">
+        <p style="margin-left: 0.19cm">Segment number...</p>
+      </td>
+
+      <td width="16%">
+        <p align="center" style="margin-left: 0.05cm"><code>&lt;Ctrl+J&gt;</code></p>
+      </td>
+
+      <td width="71%">
+        <p style="margin-left: 0.24cm">moves to the segment number provided</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="13%">
+        <h3 style="margin-left: 0.19cm"></h3>
+
+        <h3 style="margin-left: 0.19cm">Reference windows</h3>
+      </td>
+
+      <td width="16%"></td>
+
+      <td width="71%"></td>
+    </tr>
+
+    <tr>
+      <td width="13%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.19cm">Project files listing</p>
+      </td>
+
+      <td width="16%" bgcolor="#DDDDDD">
+        <p align="center" style="margin-left: 0.05cm">&lt;Ctrl+L&gt;</p>
+      </td>
+
+      <td width="71%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.24cm"><a name="Other" id="Other"></a>Displays the Project files listing</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="13%" bgcolor="#FFFFFF">
+        <h3 style="margin-left: 0.19cm"></h3>
+
+        <h3 style="margin-left: 0.19cm">Other</h3>
+      </td>
+
+      <td width="16%" bgcolor="#FFFFFF"></td>
+
+      <td width="71%" bgcolor="#FFFFFF"></td>
+    </tr>
+
+    <tr>
+      <td width="13%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.19cm">Validate tags</p>
+      </td>
+
+      <td width="16%" bgcolor="#DDDDDD">
+        <p align="center" style="margin-left: 0.05cm"><code>&lt;Ctrl+T&gt;</code></p>
+      </td>
+
+      <td width="71%" bgcolor="#DDDDDD">
+        <p style="margin-left: 0.24cm">Verifies if all the tags present in the source text are also present in the target text.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="13%" bgcolor="#FFFFFF">
+        <p style="margin-left: 0.19cm">Help files</p>
+      </td>
+
+      <td width="16%" bgcolor="#FFFFFF">
+        <p align="center" style="margin-left: 0.05cm"><code>&lt;F1&gt;</code></p>
+      </td>
+
+      <td width="71%" bgcolor="#FFFFFF">
+        <p style="margin-left: 0.24cm">Displays the OmegaT help files in a separate window</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <p><a href="legalNotices.html">Legal notices</a></p>
 </body>
 </html>

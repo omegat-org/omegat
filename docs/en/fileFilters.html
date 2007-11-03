@@ -1,214 +1,161 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
 <html>
 <head>
-   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-   <title>File Filters - OmegaT 1.6.1 User Manual</title>
+  <meta name="generator" content="HTML Tidy for Windows (vers 13 April 2006), see www.w3.org">
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+
+  <title>File Filters - OmegaT 1.7.3 User Manual</title>
+  <style type="text/css">
+  <!--
+  h2.c4 {margin-left: 0.11cm}
+  h3.c1 {margin-left: 1.00cm}
+  p.c1{margin-left: 1.00cm}
+  -->
+  </style>
 </head>
+
 <body>
+  <h1>File Filters</h1>
 
-<h1>File Filters</h1>
+  <h2>Contents</h2>
 
-<h2>Contents</h2></div>
-
-<ul type="none">
-   <li>
-      1. <a href="#Introduction">Introduction</a>
-
-      <ul type="none">
-         <li>1.1. <a href="#File_types">File types</a></li>
-         <li>1.2. <a href="#File_encodings">File encodings</a></li>
-         <li>1.3. <a href="#Renaming_Translated_Files">Renaming Translated Files</a></li>
+  <div style="margin-left: 2em">
+    <div>
+      <ul>
+        <li><a href="#Introduction">Introduction</a></li>
       </ul>
-   </li>
+    </div>
 
-   <li>
-      2. <a href="#File_Filters_Setup">File Filters Setup</a>
+    <div style="margin-left: 2em">
+      <div>
+        <ul>
+          <li type="disc"><a href="#File_types">File types</a></li>
 
-      <ul type="none">
-         <li><a href="#File_Filters_Dialog">File Filters Dialog</a></li>
-         <li><a href="#Edit_Filter_Dialog">Edit Filter Dialog</a></li>
-         <li><a href="#Add.2FEdit_Pattern_Dialog">Add/Edit Pattern Dialog</a></li>
+          <li type="disc"><a href="#File_encodings">File encodings</a>.</li>
+
+          <li type="disc"><a href="#Renaming_Translated_Files">Renaming translated files</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <ul>
+        <li><a href="#File_Filters_Setup">File filters setup</a></li>
       </ul>
-   </li>
-</ul>
+    </div>
 
-<a name="Introduction"></a>
-<h2>Introduction</h2>
+    <div style="margin-left: 2em">
+      <div>
+        <ul>
+          <li><a href="#File_Filters_Dialog">File filters dialog</a></li>
 
-<p>
-OmegaT features highly customizable filters, enabling you to setup most of the 
-aspects of their work.
-</p>
+          <li><a href="#Edit_Filter_Dialog">Edit filter dialog</a></li>
 
-<p>
-File filters are pieces of code capable of:
-</p>
+          <li><a href="#Add.2FEdit_Pattern_Dialog">Add/edit pattern dialog</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
+  <div>
+    <h2>Introduction</h2>
+
+    <p class="c1">OmegaT features highly customizable filters, enabling you to setup most of the aspects of their work. File filters are pieces of code capable of:</p>
+
+    <ul>
 <ul>
-   <li>Reading the document in some specific file format. For instance, plaintext files.</li>
-   <li>Extracting the translatable content out of the file.</li>
-   <li>Automating modifications of the translated document file names by replacing translatable contents with its translation.</li>
+      <li>Reading the document in some specific file format. For instance, plaintext files.</li>
+
+      <li>Extracting the translatable content out of the file.</li>
+
+      <li>Automating modifications of the translated document file names by replacing translatable Contents with its translation.</li>
+    </ul>
 </ul>
 
-<a name="File_types"></a>
-<h3>File types</h3>
+    <h3 class="c1">File types</h3>
 
-<p>
-When an OmegaT encounters a file in its source directory, it tries to select
-the filter using file's extension. More precisely, OmegaT tries to match each
-filter's source filename patterns against the filename.
-For example, <code>*.xhtml</code> pattern will match against any file
-with <code>.xhtml</code> extension. If the appropriate filter is found,
-it is given the file for processing. For example, by default XHTML filter
-will be used for processing files with <code>.xhtml</code> extension.
-You may change or add filename patterns of files each file filter will handle.
-</p>
+    <p class="c1">When an OmegaT encounters a file in its source directory, it tries to select the filter using file's extension. More precisely, OmegaT tries to match each filter's source filename
+    patterns against the filename. For example, <code>*.xhtml</code> pattern will match against any file with <code>.xhtml</code> extension. If the appropriate filter is found, it is given the file
+    for processing. For example, by default XHTML filter will be used for processing files with <code>.xhtml</code> extension. You may change or add filename patterns of files each file filter will
+    handle.</p>
 
-<a name="File_encodings"></a>
-<h3>File encodings</h3>
+    <h3 class="c1">File encodings</h3>
 
-<p>
-Plaintext and HTML files may be stored in a full variety of encodings. While 
-HTML files may contain an encoding meta directive and OmegaT will use it to 
-read the file, text files have no agreed way to specify it. For both text files 
-and HTML files without encoding declaration OmegaT will use the encoding you 
-set up for a specific extension. For example, by default 
-<code>.txt</code> files will be loaded using OS-default encoding. You may 
-change the source encoding for each different source filename pattern.
-</p>
+    <p class="c1">Plain text and HTML files may be stored in a full variety of encodings. While HTML files may contain an encoding meta directive and OmegaT will use it to read the file, text files
+    have no agreed way to specify it. For both text files and HTML files without encoding declaration OmegaT will use the encoding you set up for a specific extension. For example, by default
+    <code>.txt</code> files will be loaded using OS-default encoding. You may change the source encoding for each different source filename pattern.</p>
 
-<p>
-HTML and plaintext files may also be written out in any encoding. For example, 
-if you translate from French to Japanese you may either setup a filter to use 
-one of Japanese target encodings, or use UTF-8, UTF-16, or UTF-32 Unicode 
-encoding. By default, the encoding the file is saved in is the same encoding 
-as was used for loading the file for text files, and UTF-8 for HTML files. 
-Note that HTML filter adds an encoding declaration to the target file, so the 
-browser will see it, and will not display any clumsy characters.
-</p>
+    <p class="c1">HTML and plain text files may also be written out in any encoding. For example, if you translate from French to Japanese you may either setup a filter to use one of Japanese target
+    encodings, or use UTF-8, UTF-16, or UTF-32 Unicode encoding. By default, the encoding the file is saved in is the same encoding as was used for loading the file for text files, and UTF-8 for HTML
+    files. Note that HTML filter adds an encoding declaration to the target file, so the browser will see it, and will not display any clumsy characters.</p>
 
-<a name="Renaming_Translated_Files"></a>
-<h3>Renaming Translated Files</h3>
+    <h3 class="c1">Renaming translated Files</h3>
 
-<p>
-Sometimes you may like to rename the files you translate automatically, for
-example adding a language code after file name. You may also do it in a file
-filters dialog using target filename pattern.
-</p>
+    <p class="c1">Sometimes you may like to rename the files you translate automatically, for example adding a language code after file name. You may also do it in a file filters dialog using target
+    filename pattern.</p>
 
-<a name="File_Filters_Setup"></a>
-<h2>File Filters Setup</h2>
+    <h2 class="c1">File filters setup</h2>
 
-<p>
-Most of the users should be happy with default file filter options.
-If you are not, open the main dialog by selecting <strong>Options -&gt; File
-Filters...</strong> from the main menu. Note that you may change filters
-options only when there is no project open, as they affect the way the
-translated files are created.
-</p>
+    <p class="c1">Most of the users should be happy with default file filter options. If you are not, open the main dialog by selecting <strong>Options -&gt; File Filters...</strong> from the main
+    menu. Note that you may change filters options only when there is no project open, as they affect the way the translated files are created.</p>
 
-<a name="File_Filters_Dialog"></a>
-<h3>File Filters Dialog</h3>
+    <h3 class="c1">File filters dialog</h3>
 
-<p>
-The dialog lists available file filters.
-</p>
+    <p class="c1">The dialog lists available file filters. If you don't want to use OmegaT to translate the files of some type, you may turn off the filter by unticking the check box near its name.
+    OmegaT will then omit the appropriate files while loading projects, and will copy them untouched while creating target documents. Later when you decide to use the filter again, just tick the
+    check box.</p>
 
-<p>
-If you don't want to use OmegaT to translate the files of some type, you may 
-turn off the filter by unticking the checkbox near its name. OmegaT will then 
-omit the appropriate files while loading projects, and will copy them untouched 
-while creating target documents. Later when you decide to use the filter again, 
-just tick the checkbox.
-</p>
+    <p class="c1">To return back to the starting situation, click <strong>Defaults</strong> to reset the file filters to the default condition.</p>
 
-<p>
-If you happen to screw up all the configuration, click <strong>Defaults</strong>
-to revert file filters configuration to default working state.
-</p>
+    <p class="c1">To edit what files in what encodings the filter will process, select the filter from the list and click <strong>Edit</strong>.</p>
 
-<p>
-To edit what files in what encodings the filter will process, select the filter
-from the list and click <strong>Edit</strong>.
-</p>
+    <h3 class="c1">Edit filter dialog</h3>
 
-<a name="Edit_Filter_Dialog"></a>
-<h3>Edit Filter Dialog</h3>
+    <p class="c1">The dialog allows you to setup the source filename patterns of files the filter will process, customize the filenames of translated files, and select what encodings it will use for
+    loading the file and saving its translated counterpart.</p>
 
-<p>
-The dialog allows you to setup the source filename patterns of files the filter 
-will process, customize the filenames of translated files, and select what 
-encodings it will use for loading the file and saving its translated counterpart.
-</p>
+    <p class="c1">Source filename pattern use DOS file mask rules. Symbol <code>*</code> may substitute any amount of any symbols, <code>?</code> substitutes any single symbol, and all other symbols
+    mean themselves. For example, if you want the text filter to handle readme files (<code>readme</code>, <code>read.me</code>, and <code>readme.txt</code>) you should use the pattern
+    <code>read*</code>.</p>
 
-<p>
-Source filename pattern use DOS filemask rules. Symbol <code>*</code> may 
-substitute any amount of any symbols, <code>?</code> substitutes any single 
-symbol, and all other symbols mean themselves. For example, if you want the 
-text filter to handle readme files (<code>readme</code>, <code>read.me</code>, 
-and <code>readme.txt</code>) you should use the pattern <code>read*</code>.
-</p>
+    <p class="c1">Source and target encoding fields use combo boxes with all supported encodings included. Note that not all filters allow you to select an encoding because they work on a file format
+    having only a single encoding possible. Setting encoding to "&lt;auto&gt;" for those file formats that allow you to choose encoding would mean that you trust OmegaT to make a decision. Here's how
+    it does:</p>
 
-<p>
-Source and target encoding fields use combo boxes with all supported encodings 
-included. Note that not all filters allow you to select an encoding because 
-they work on a file format having only a single encoding possible. Setting 
-encoding to "&lt;auto&gt;" for those file formats that allow you to choose 
-encoding would mean that you trust OmegaT to make a decision. Here's how it 
-does:
-</p>
+    <ul><ul>
+      <li class="c1">OmegaT may try to guess the source file encoding of HTML/XHTML files.</li>
 
-<ul>
-   <li>OmegaT may try to guess the source file encoding of HTML/XHTML files.</li>
-   <li>OmegaT will use the default encoding of the operating system for text files.</li>
-</ul>
+      <li>OmegaT will use the default encoding of the operating system for text files.</li>
+    </ul></ul>
 
-<p>
-Target filename pattern uses a special syntax, so if you wish to edit this
-field, you should better click <strong>Edit...</strong> to go to the Edit
-Pattern Dialog.
-</p>
+    <p class="c1">Target filename pattern uses a special syntax, so if you wish to edit this field, you should better click <strong>Edit...</strong> to go to the Edit Pattern Dialog. If you want the
+    filter to handle files matching one more source filename pattern, click <strong>Add...</strong> to go to Add Pattern Dialog. If you want to fall back to default configuration of the filter, click
+    <strong>Defaults</strong>.</p>
 
-<p>
-If you want the filter to handle files matching one more source filename 
-pattern, click <strong>Add...</strong> to go to Add Pattern Dialog.
-</p>
+    <h3 class="c1">Add/edit pattern dialog</h3>
 
-<p>
-If you want to fall back to default configuration of the filter, click 
-<strong>Defaults</strong>.
-</p>
+    <p class="c1">The same dialog is used to add a pattern or to edit a particular pattern. A special target filename pattern editor allows you to customize the names of output files. The target
+    filename pattern section allows you to construct names for translated files from items as follows:</p>
 
-<a name="Add.2FEdit_Pattern_Dialog"></a>
-<h3>Add/Edit Pattern Dialog</h3>
+    <ul><ul>
+      <li class="c1">Default is <code>${filename}</code> -- full filename of the source file with extension, so that the name of the translated file is the same as the name of the source file.</li>
 
-<p>
-The same dialog appears whether you want to add a pattern or edit one 
-particular pattern. The only novel thing in it is a special target filename 
-pattern editor, all other fields were described above.
-</p>
+      <li class="c1"><code>${nameOnly}</code> allows you to insert only the name of the source file without the extension.</li>
 
-<p>
-Target filename pattern section allows you to compose the filename of the 
-translated file from different parts.
-</p>
+      <li class="c1"><code>${extension}</code> -- the extension of the source file.</li>
 
-<ul>
-   <li>Default is <code>${filename}</code> -- full filename of the source file with extension, so that the name of the translated file is the same as the name of the source file.</li>
-   <li><code>${nameOnly}</code> allows you to insert only the name of the source file without the extension.</li>
-   <li><code>${extension}</code> -- the extension of the source file.</li>
-   <li><code>${targetLocale}</code> - target locale code (of a form "xx_YY").</li>
-   <li><code>${targetLanguage}</code> - the target language and country code together (of a form "XX-YY").</li>
-   <li><code>${targetLanguageCode}</code> - the target language only ("XX").</li>
-   <li><code>${targetCoutryCode}</code> - the target country only ("YY").</li>
-</ul>
+      <li class="c1"><code>${targetLocale}</code> - target locale code (of a form "xx_YY").</li>
 
-<p>
-We can easily add more variables if you ask us and say what your pet variable 
-is about. Just come to <a href="http://groups.yahoo.com/group/OmegaT/">our user group</a>.
-</p>
+      <li class="c1"><code>${targetLanguage}</code> - the target language and country code together (of a form "XX-YY").</li>
 
-<hr>
-<p><a href="legalNotices.html" title="Legal Notices">Legal Notices</a></p>
+      <li class="c1"><code>${targetLanguageCode}</code> - the target language only ("XX").</li>
 
+      <li><code>${targetCoutryCode}</code> - the target country only ("YY").</li>
+    </ul></ul>
+    <hr>
+
+    <p><a href="legalNotices.html">Legal notices</a></p>
+  </div>
 </body>
 </html>

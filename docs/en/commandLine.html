@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+  <meta name="generator" content="HTML Tidy for Windows (vers 12 April 2005), see www.w3.org">
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+
+  <title>Command Line - OmegaT 1.7.3 User Manual</title>
+<style type="text/css">
+        <!--
+                P.courier-code-western { font-family: "Courier New", monospace; font-weight: bold }
+                P.courier-code-cjk { font-weight: bold }
+                P.courier-code-ctl { font-weight: bold }
+                P.indent { margin-left: 1cm }
+        -->
+</style>
+</head>
+
+<body>
+  <h1>Command line</h1>
+
+  <p class="indent">Normally, it is not necessary to launch OmegaT from the command line. However, the command-line
+  method of launching OmegaT enables aspects of the program's behaviour to be controlled by means of modifications.
+  There are two ways of launching OmegaT using the command line.</p>
+
+  <h3>Method 1: opening a command-line window</h3>
+
+  <p class="indent">Method 1: Open a command-line window. A command-line window is also referred to as a "terminal
+  window" or, on Windows, an "MS-DOS window". The procedure for opening a command-line window on Windows XP is as
+  follows:</p>
+
+  <ul>
+    <li>
+      <p style="margin-bottom: 0cm">Open the Start menu, select "Programs", and then "MS-DOS".</p>
+    </li>
+
+    <li>
+      <p style="margin-bottom: 0cm">A window appears containing a black screen, into which you type the actual
+      commands.</p>
+    </li>
+
+    <li>
+      <p>To launch OmegaT, you must normally type two commands. The first of these is:</p>
+    </li>
+  </ul>
+
+  <p class="courier-code-western" style="margin-left: 1cm">cd {folder}</p>
+
+  <p class="indent">where {folder} is the name of the folder, with complete path, in which your OmegaT program -
+  specifically, the file OmegaT.jar - is located. In practice, this command will therefore be something like this:</p>
+
+  <p class="courier-code-western" style="margin-left: 1cm">cd C:\Program Files\OmegaT</p>
+
+  <p class="indent">This command changes the folder to the folder containing the executable OmegaT file. The second
+  command is the command which actually launches OmegaT. In its most basic form, this command is:</p>
+
+  <p class="courier-code-western" style="margin-left: 1cm">java -jar OmegaT.jar</p>
+
+  <p class="indent">Pay attention to the capitalization - it is important.</p>
+
+  <p class="indent">This method has a particular benefit of being suitable for debugging: if an error occurs during use
+  of the program, an error message is output in the terminal (MS-DOS) window which may contain useful information on
+  the cause.</p>
+
+  <h3>Method 2: changing the .bat file/launch script</h3>
+
+  <p class="indent">Method 1 is a somewhat impractical way of launching a program routinely. For this reason, the two
+  commands described above are contained in a file (a "script", also called a ".bat file" on Windows systems). When
+  this file is executed, the commands within it are automatically carried out. Consequently, to make changes to the
+  launch command, it is sufficient to modify the file OmegaT.bat. When OmegaT is launched (for example by the user
+  clicking on OmegaT.bat), the new commands are then executed.</p>
+
+  <h3>Launch command arguments</h3>
+
+  <p class="indent">The basic command has already been mentioned above. Changes to this command involve the addition of
+  "arguments" to it. Arguments are added after the initial "java", and before the "-jar OmegaT.jar" part. A list of
+  possible arguments follows.</p>
+
+  <p class="courier-code-western">-Duser.language=XX</p>
+
+  <p class="indent">Normally, i.e. when OmegaT is launched without any arguments, the program first detects the
+  language of the user's operating system. If a user interface in this language is available, OmegaT uses it. So, if
+  the user's operating system is Russian and OmegaT has been localized in Russian, OmegaT is displayed with a Russian
+  user interface, Russian menus, etc. If the language of the user's system is not available, OmegaT defaults to
+  English. This is the standard behaviour.</p>
+
+  <p class="indent">The "-Duser.language=XX" argument causes OmegaT to use the language specified rather than the
+  language of the user's operating system. "XX" in the command stands for the two-digit code of the desired language.
+  To launch OmegaT with a French interface (for example on a Russian operating system), the command would therefore
+  be:</p>
+
+  <p class="courier-code-western" style="margin-left: 1cm">java -Duser.language=fr -jar OmegaT.jar</p>
+
+  <p class="courier-code-western">-Duser.country=XX</p>
+
+  <p style="margin-left: 1.06cm; margin-bottom: 0cm">Next to the language, you can also specify the country, for
+  example CN or TW in case of the Chinese language. To get the correct Instant start guide, you need to specify both
+  the language and the country. This is necessary even if there's only one combination available, like pt_BR in case of
+  Portuguese / Brasil. .</p>
+
+  <p style="margin-left: 1.03cm; margin-bottom: 0cm"><br></p>
+
+  <p class="courier-code-western">-Dswing.aatext=true</p>
+
+  <p class="indent">This argument effects anti-aliasing of the fonts, thereby improving their appearance.</p>
+
+  <p class="courier-code-western">-XmxZZM</p>
+
+  <p class="indent">This command assigns more memory to OmegaT. By default, 256 MB are assigned, so there is no
+  advantage in assigning less than this figure. "ZZ" stands for the amount of memory assigned, in megabytes. The
+  command to launch OmegaT with assignment of 1024 MB (1 gigabyte) of memory is therefore:</p>
+
+  <p class="courier-code-western" style="margin-left: 1cm">java -Xmx1024M -jar OmegaT.jar</p>
+
+  <p class="indent">Arguments can be combined. To launch OmegaT with all the examples described above, the command
+  would be:</p>
+
+  <p class="courier-code-western" style="margin-left: 1cm">java -Dswing.aatext=true -Duser.language=pt
+  -Duser.country=BR -Xmx1024M -jar OmegaT.jar</p>
+  <hr>
+
+  <p><a href="legalNotices.html">Legal notices</a></p>
+</body>
+</html>

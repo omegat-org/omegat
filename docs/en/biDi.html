@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <title>Right-to-left languages - OmegaT 1.7.3 User Manual</title>
+  <meta name="generator" content="HTML Tidy for Windows (vers 13 April 2006), see www.w3.org">
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <style type="text/css">
+<!--
+                H1.heading-2-western { font-family: "Times New Roman, serif", font-size: 18pt, margin-left: 0.0cm }
+                H1.heading-2-cjk { font-family: "Bitstream Vera Sans"; font-size: 18pt }
+                H1.heading-2-ctl { font-family: "Tahoma"; font-size: 18pt }
+                p.indent {margin-left: 1.0cm}
+         -->
+  </style>
+</head>
+<body>
+  <h1>Bidirectional languages</h1>
+
+  <h1>Translating</h1>
+
+  <p class="indent">When translating to bidirectional languages in OmegaT there are two issues to consider: 1) text input and 2) text display. When writing RTL text (e.g. Urdu, Arabic etc.) and using
+  the LTR view, which is the default view, text will not always be displayed in the order in which it was entered. This is not obvious when purely RTL text is being input, and in cases like this the
+  default (LTR) view can be used.</p>
+
+  <p class="indent">In many cases however, when the target language is an RTL language, it becomes necessary to embed LTR text. For example, some product names have to remain in English, or place
+  holders have to remain in their original form during the localization of GUI strings.</p>
+
+  <p class="indent">When LTR text is embedded in RTL text, it is not displayed in the order in which it was input. For OmegaT to do this, the view is toggled using Ctrl+Shift+O. It is also easier to
+  input RTL text when the view has been toggled to RTL, because in the default view, when RTL text is entered, spaces entered first appear to the right of the input text, and the next RTL character
+  then appears to the left.</p>
+
+  <p class="indent"><font face="Times New Roman, serif">Using Ctrl+Shift+O causes both text input and display in OmegaT to be changed to RTL. It can be used separately for all three panes (Editing,
+  Fuzzy Matches and Glossary).</font></p>
+
+  <h1><font face="Times New Roman, serif">Creating documents</font></h1>
+
+  <p class="indent"><font face="Times New Roman, serif">When the translation is complete and the translated document is created, its display direction will be LTR, like the original document. This
+  must be changed manually. In the case of HTML documents, for example, the text display direction for the final translated text can be changed to RTL by setting the DIR attribute to rtl.</font></p>
+
+  <p class="indent"><font face="Times New Roman, serif">For the translation of simple text files, the text display direction for the document can be changed, e.g. in Notepad, by right-clicking on the
+  text and selecting "Right to Left Reading Order".</font></p>
+  <hr>
+
+  <p><font face="Times New Roman, serif"><a href="legalNotices.html">Legal notices</a></font></p>
+</body>
+</html>

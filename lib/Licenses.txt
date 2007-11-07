@@ -2,18 +2,12 @@ Licenses:
 
 htmlparser.jar version 1.6 is distributed under the GNU Lesser  
 General Public License version 2.1 and greater
-
-jna.jar is distributed under the GNU Lesser General Public License  
-version 2.1 and greater
+Sources are available in OmegaT sources, in the directory lib/sources
 
 MRJAdapter.jar 1.0.8 is distributed under the GNU Lesser General  
 Public License version 2.1 and greater
+Sources are available in OmegaT sources, in the directory lib/sources
 
-vldocking_2.0.6d.jar is distributed under the CeCILL license version 2.0
-
-Hunspell is distributed  under the GNU Lesser General Public License  
-version 2.1 and greater, the GNU Public License version 2.0 and  
-greater or the Mozilla Public License version 1.1
-
-swing-layout-1.0.2.jar is distributed under the GNU Lesser General  
-Public License version 2.1 and greater
+vldocking_2.0.6d.jar is distributed under the CeCILL license version 1.1
+Sources are available from VLSolutions, at 
+http://www.vlsolutions.com

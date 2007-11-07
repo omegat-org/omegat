@@ -162,7 +162,7 @@
         </copy>
         <mkdir dir="dist/lib"/>
         <copy todir="dist/lib">
-            <fileset dir="lib"/>
+            <fileset dir="lib" excludes="sources/**"/>
         </copy>
     </target>
    

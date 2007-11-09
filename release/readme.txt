@@ -112,14 +112,14 @@ archive to this folder and unpack it there.
 OmegaT can be launched in a number of ways.
 
 * Double-click on the file OmegaT-JRE.exe, if you are using the version 
-  with the JRE included, or on OmegaT.exe otherwise.
+with the JRE included, or on OmegaT.exe otherwise.
 
 * Double-click on the file OmegaT.bat. If you can see the file OmegaT but 
-  not OmegaT.bat in your File Manager (Windows Explorer), change settings 
-  so that file extensions are displayed.
+not OmegaT.bat in your File Manager (Windows Explorer), change settings 
+so that file extensions are displayed.
 
 * Double-click on the file OmegaT.jar. This will work only if the .jar
-  file type is associated with Java on your system.
+file type is associated with Java on your system.
 
 * From the command line. The command to launch OmegaT is:
 
@@ -127,12 +127,12 @@ OmegaT can be launched in a number of ways.
 
   <name and path of the Java executable file> -jar OmegaT.jar
 
-  (The Java executable file is the file java.exe.
-  If Java is installed and configured at system level, the full path need not 
-  be entered.)
+(The Java executable file is the file java.exe.
+If Java is installed and configured at system level, the full path need not 
+be entered.)
 
-  You can drag the files OmegaT-JRE.exe, OmegaT.exe or
-  OmegaT.bat to the desktop or Start menu to link it from there.
+You can drag the files OmegaT-JRE.exe, OmegaT.exe or
+OmegaT.bat to the desktop or Start menu to link it from there.
 
 3.3.2 Linux users
 
@@ -142,8 +142,8 @@ OmegaT can be launched in a number of ways.
 
   <name and path of the Java executable file> -jar OmegaT.jar
 
-  (The Java executable file is the file java. If Java is installed and 
-  configured at system level, the full path need not be entered.)
+(The Java executable file is the file java. If Java is installed and 
+configured at system level, the full path need not be entered.)
 
 
 3.3.2.1 Linux KDE users

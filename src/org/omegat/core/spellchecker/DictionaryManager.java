@@ -114,29 +114,31 @@ public class DictionaryManager {
                 OConsts.SC_DICTIONARY_EXTENSION));
         
         // match them
-        for (int i = 0; i < affixFiles.length; i++) {
-            boolean match = false;
-            
-            // get the affix file name
-            String affixName = getFileNameOnly(affixFiles[i]);
-            if (affixName == null || affixName.equals(""))
-                continue;
-            
-            // cycle through the dictionary names
-            for (int j = 0; j < dictionaryFiles.length; j++) {
-                // get the dic file name
-                String dicName = getFileNameOnly(dictionaryFiles[j]);
-                if (dicName == null || dicName.equals(""))
+        if (affixFiles != null && dictionaryFiles != null) {
+            for (int i = 0; i < affixFiles.length; i++) {
+                boolean match = false;
+
+                // get the affix file name
+                String affixName = getFileNameOnly(affixFiles[i]);
+                if (affixName == null || affixName.equals(""))
                     continue;
-                
-                if (affixName.equals(dicName)) {
-                    match = true;
-                    break;
+
+                // cycle through the dictionary names
+                for (int j = 0; j < dictionaryFiles.length; j++) {
+                    // get the dic file name
+                    String dicName = getFileNameOnly(dictionaryFiles[j]);
+                    if (dicName == null || dicName.equals(""))
+                        continue;
+
+                    if (affixName.equals(dicName)) {
+                        match = true;
+                        break;
+                    }
                 }
+
+                if (match)
+                    result.add(affixName);
             }
-            
-            if (match)
-                result.add(affixName);
         }
         
         return result;
@@ -243,6 +245,7 @@ public class DictionaryManager {
         filenames.add(langCode + OConsts.SC_AFFIX_EXTENSION);
         filenames.add(langCode + OConsts.SC_DICTIONARY_EXTENSION);
         
+        dir.mkdirs();
         StaticUtils.extractFileFromJar(to,filenames,dir.getAbsolutePath());
     }
 }

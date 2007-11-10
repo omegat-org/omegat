@@ -1,7 +1,7 @@
 Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007.
 
 ==============================================================================
-  OmegaT 1.7.1 Fichier « Lisez-moi »
+  OmegaT 1.7.3 Fichier « Lisez-moi »
 
   1.  Informations à propos d'OmegaT
   2.  Qu'est ce qu'OmegaT ?
@@ -14,8 +14,8 @@ Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyrigh
   1.  Informations à propos d'OmegaT
 
 
-Les informations les plus récentes au sujet d'OmegaT sont (en anglais, hollandais, portugais, slovaque) à :
-      http://www.omegat.org/omegat/omegat.html
+Les informations les plus récentes au sujet d'OmegaT sont à :
+      http://www.omegat.org/
 
 Aide utilisateur sur le groupe Yahoo. Vous pouvez y consulter les archives sans vous inscrire au groupe :
      http://groups.yahoo.com/group/OmegaT/
@@ -29,23 +29,35 @@ Rapports de bogues (en anglais), sur le site de SourceForge :
 ==============================================================================
   2.  Qu'est ce qu'OmegaT ?
 
-OmegaT est un outil d'aide à la traduction. OmegaT est distribué gratuitement, il n'est donc pas nécessaire de payer de licence d'utilisation même pour un usage professionnel. OmegaT est une application libre, vous avez donc le droit de la modifier et/ou de la redistribuer tant que vous respectez les termes de la licence utilisateur.
+OmegaT est un outil de Traduction assistée par ordinateur (TAO). OmegaT est distribué gratuitement, il n'est donc pas nécessaire de payer de licence d'utilisation même pour un usage professionnel. OmegaT est une application libre, vous avez donc le droit de la modifier et/ou de la redistribuer tant que vous respectez les termes de la licence utilisateur.
 
 Les principales fonctions d'OmegaT sont :
   - capacité à fonctionner sur n'importe quel système d'exploitation compatible avec Java
   - utilisation de n'importe quel type de fichier TMX conforme comme mémoire de traduction de référence
   - système de segmentation de texte flexible (basé sur la norme SRX)
   - recherche de termes dans le projet et dans les mémoires de référence
-  - recherche de termes dans n'importe quel répertoire incluant des fichiers lisibles par OmegaT
+  - recherche de fichiers dans les formats acceptés dans n'importe quel dossier 
   - correspondances automatiques
-  - gestion intelligente des projets incluant des structures complexes de répertoires
+  - gestion intelligente des projets incluant des structures complexes de dossiers
   - glossaires (vérifications terminologiques)
-  - documentation facile à lire et tutoriel simple
+  - documentation et tutoriel clairs et détaillés
   - localisation dans de nombreuses langues
 
-OmegaT peut vous aider à traduire des fichiers aux formats suivants : OpenDocument, Microsoft Office (à l'aide d'OpenOffice.org utilisé comme filtre de conversion, ou après conversion en HTML), OpenOffice.org ou StarOffice, (X)HTML, fichiers de localisation Java, fichiers textes, DocBook et PO.
+OmegaT prend en charge directement les formats de fichier suivants :
+  - texte pur
+  - HTML et XHTML
+  HTML Help Compiler
+  - OpenDocument/OpenOffice.org
+  - ensemble de ressources Java (Bundle.properties)
+  - fichiers INI (fichiers dans un encodage quelconque constitués de paires clé=valeur)
+  - fichiers PO monolingues (après passage par msgcat)
+  - fichiers de documentation format DocBook
+  - Fichiers Microsoft Open XML
+  - Fichiers XLIFF Okapi monolingues
 
-OmegaT est capable d'analyser les structures de répertoires les plus complexes pour y retrouver tous les fichiers lisibles. OmegaT recréera la même structure de répertoire pour vos documents traduits et y inclura une copie de tous les fichiers qu'il ne peut pas lire.
+Il est également possible de personnaliser OmegaT pour accepter d'autres formats.
+
+OmegaT est capable d'analyser les structures de dossiers les plus complexes pour y retrouver tous les fichiers lisibles. OmegaT recréera la même structure de dossiers pour vos documents traduits et y inclura une copie de tous les fichiers qu'il ne peut pas lire.
 
 Pour commencer à utiliser OmegaT tout de suite, lancez OmegaT et lisez le tutoriel qui s'affiche dans la fenêtre principale : « OmegaT : Tutoriel premiers pas ».
 
@@ -55,9 +67,15 @@ Le manuel utilisateur se trouve dans le paquet que vous avez téléchargé, vous
  3. Installer OmegaT
 
 3.1 Informations générales
-Pour fonctionner, OmegaT a besoin d'un environnement d'exécution Java (JRE) de version 1.4 ou supérieure. Le JRE est maintenant fourni en standard avec OmegaT, afin d'éviter aux utilisateurs d'avoir à le sélectionner, l'obtenir et l'installer. Utilisateurs de Windows et Linux : si vous êtes certains qu'une version convenable du JRE est déjà installée, vous pouvez installer une version d'OmegaT sans le JRE (cela est indiqué par le nom de la version, « Without_JRE »). Si vous avez un doute quelconque, nous vous recommandons d'utiliser la version « standard », c'est à dire avec un JRE. Cela est sûr, puisque même si le JRE est déjà installé, cette version n'interférera pas avec la version système.
+Pour fonctionner, OmegaT a besoin d'un environnement d'exécution Java (JRE) de version 1.4 ou supérieure. Le JRE est maintenant fourni en standard avec OmegaT, afin d'éviter aux utilisateurs d'avoir à le sélectionner, l'obtenir et l'installer. 
+
+Utilisateurs de Windows et Linux : si vous êtes certain qu'une version convenable du JRE est déjà installée, vous pouvez installer une version d'OmegaT sans le JRE (cela est indiqué par le nom de la version, « Without_JRE »). 
+Si vous avez un doute quelconque, nous vous recommandons d'utiliser la version « standard », c'est à dire avec un JRE. Cela est sûr, puisque même si le JRE est déjà installé, cette version n'interférera pas avec la version système.
+
 Utilisateurs de Linux : notez qu'OmegaT ne fonctionne pas avec les implémentations libres de Java incluses dans de nombres distributions. Celles-ci sont obsolètes ou incomplètes. Téléchargez un JRE de Sun à partir du lien ci-dessus, ou téléchargez et installez OmegaT fourni avec son JRE (le paquet .tar.gz marqué « Linux »).
+
 Utilisateurs de Mac : le JRE est déjà installé sur Mac OX X.
+
 Linux sur des architectures Power PC :  les utilisateurs devront télécharger le JRE d'IBM, puisque Sun ne fournit pas de JRE pour les systèmes PPC. Dans ce cas, téléchargez à partir de :
     http://www-128.ibm.com/developerworks/java/jdk/linux/download.html 
 
@@ -66,26 +84,42 @@ Pour installer OmegaT, créez simplement un dossier approprié pour OmegaT (ex. 
 Files\OmegaT sous Windows ou /usr/local/lib sous Linux). Copiez l'archive zip d'OmegaT dans ce dossier, et décompactez-la.
 
 3.3 Exécuter OmegaT
+
+3.3.1 Utilisateurs de Windows
+
 OmegaT peut être exécuté de différentes façons.
 
-* Utilisateurs de Windows : En double-cliquant sur le fichier OmegaT-JRE.exe, si vous utilisez la version avec le  JRE inclus, ou sinon sur OmegaT.exe.
+* * Double-cliquez sur le fichier OmegaT-JRE.exe, si vous utilisez la version avec le  JRE inclus, ou sinon sur OmegaT.exe.
 
-* En double-cliquant sur le fichier OmegaT.bat. Si vous pouvez voir le fichier OmegaT mais pas le fichier OmegaT.bat dans votre gestionnaire de fichier (Explorateur Windows), modifiez la configuration afin que les extensions soient affichées.
+* Double-cliquez sur le fichier OmegaT.bat. Si vous pouvez voir le fichier OmegaT mais pas le fichier OmegaT.bat dans votre gestionnaire de fichier (Explorateur Windows), modifiez la configuration afin que les extensions soient affichées.
 
-* En double-cliquant sur le fichier OmegaT.jar. Cela ne fonctionnera que le type de fichier .jar est associé à Java dans votre système.
+* Double-cliquez sur le fichier OmegaT.jar. Cela ne fonctionnera que le type de fichier .jar est associé à Java dans votre système.
 
 * À partir de la ligne de commande. La commande pour exécuter OmegaT est :
 
-cd <dossier dans lequel le fichier OmegaT.jar est situé>
+  cd <dossier dans lequel le fichier OmegaT.jar est situé>
 
-<nom et chemin du fichier exécutable Java> -jar OmegaT.jar
+  <nom et chemin du fichier exécutable Java> -jar OmegaT.jar
 
-(Le fichier exécutable Java est le fichier java sous Linux et java.exe sous Windows.
-Si Java est installé au niveau système, il n'est pas nécessaire d'entrer le chemin complet.)
+(Le fichier exécutable Java est le fichier java.exe.
+Si Java est installé et configuré au niveau système, il n'est pas nécessaire d'entrer le chemin complet.)
 
-* Utilisateurs de Windows : vous pouvez faire glisser les fichiers OmegaT-JRE.exe, OmegaT.exe ou OmegaT.bat sur le bureau ou dans le menu démarrer afin d'y créer un raccourci.
+Vous pouvez faire glisser les fichiers OmegaT-JRE.exe, OmegaT.exe ou OmegaT.bat sur le bureau ou dans le menu démarrer afin d'y créer un raccourci.
 
-* Utilisateurs de KDE Linux : vous pouvez ajouter OmegaT dans vos menus comme suit :
+3.3.2 Utilisateurs de Linux
+
+* À partir de la ligne de commande, exécutez :
+
+  cd <dossier dans lequel le fichier OmegaT.jar est situé>
+
+  <nom et chemin du fichier exécutable Java> -jar OmegaT.jar
+
+(Le fichier exécutable Java est le fichier java. Si Java est installé et configuré au niveau système, il n'est pas nécessaire d'entrer le chemin complet.)
+
+
+3.3.2.1 Utilisateurs de KDE sous Linux
+
+Vous pouvez ajouter OmegaT dans vos menus comme suit :
 
 Centre de configuration - Bureau - Tableau de bord - Menus - Éditer le menu K - Fichier - Nouvel élément/Nouveau sous-menu.
 
@@ -98,18 +132,21 @@ Cliquez sur le bouton icône (à droite des champs Nom/Description/Commentaire)
 
 Enregistrez enfin les modifications avec Fichier - Enregistrer.
 
-* Utilisateurs de KDE Gnome : vous pouvez ajouter OmegaT dans vos menus comme suit :
+3.3.2.2 Utilisateurs de GNOME sous Linux
+
+Vous pouvez ajouter OmegaT dans vos menus comme suit :
 
 Effectuez un clic droit dans le tableau de bord - Créer un lanceur. Entrez « OmegaT » dans le champ « Nom » ; dans le champ « Commande », utilisez le bouton « Parcourir... » pour localiser votre script de lancement d'OmegaT. Sélectionnez-le et confirmez avec « Valider ».
 
 ==============================================================================
- 4. Contribuer à OmegaT
+ 4. S'impliquer dans le projet OmegaT
 
-Pour contribuer au développement d'OmegaT, prenez contact avec les développeurs à :
+Pour participer au développement d'OmegaT, prenez contact avec les développeurs à :
     http://lists.sourceforge.net/lists/listinfo/omegat-development
 
 Pour traduire l'interface utilisateur, le manuel ou d'autres documents, lisez :
-      http://www.omegat.org/omegat/omegat_en/translation-info.html
+      
+      http://www.omegat.org/en/translation-info.html
 
 Et inscrivez vous à la liste des traducteurs (multilingue) :
       http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
@@ -126,52 +163,22 @@ Les personnes qui ont contribué incluent :
 (ordre alphabétique)
 
 Contributions au code :
-  Didier Briel
+  Zoltan Bartko
+  Didier Briel (responsable de version)
   Kim Bruning
   Sacha Chua
   Thomas Huriaux
-  Maxym Mykhalchuk (responsable du développement)
-  Henry Pijffers (contrôle de version)
+  Maxym Mykhalchuk
+  Henry Pijffers
+  Tiago Saboga
   Benjamin Siband
   Martin Wunderlich
-
-Contributions aux traductions :
- Roberto Argus (portugais-Brésil)
-  Alessandro Cattelan (italien)
-  Sabine Cretella (allemand)
-  Suzanne Bolduc (espéranto)
-  Didier Briel (français)
-  Frederik De Vos (néerlandais)
-  Cesar Escribano Esteban (espagnol)
-  Dmitri Gabinski (biélorusse, espéranto et russe)
-  Takayuki Hayashi (japonais)
-  Jean-Christophe Helary (français et japonais)
-  Yutaka Kachi (japonais)
-  Dragomir Kovacevic (serbo-croate)
-  Elina Lagoudaki (grec)
-  Martin Lukáč (slovaque)
-  Ahmet Murati (albanais)
-  Samuel Murray (afrikaans)
-  Yoshi Nakayama (japonais)
-  Claudio Nasso (italien)
-  David Olveira (portugais)
-  Ronaldo Radunz (portugais-Brésil)
-  Thelma L. Sabim (portugais-Brésil)
-  Juan Salcines (espagnol)
-  Pablo Roca Santiagio (espagnol)
-  Sonja Tomaskovic (allemand)
-  Karsten Voss (polonais)
-  Gerard van der Weyde (néerlandais)
-  Martin Wunderlich (allemand)
-  Hisashi Yanagida (japonais)
-  Kunihiko Yokota (japonais)
-  Erhan Yükselci (turc)
-  Mikel Forcada Zubizarreta (Catalan) 
 
 Autres contributions par :
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (responsable documentation)
+  Jean-Christophe Helary
+  Vito Smolej (responsable documentation)
   Samuel Murray
   Marc Prior (responsable localisations)
   ainsi que beaucoup d'autres personnes.
@@ -215,23 +222,6 @@ Il sera nécessaire de procéder à un enregistrement en tant qu'utilisateur de 
 
 Consultez « changes.txt » pour avoir des informations détaillées sur les modifications incluses dans cette version ainsi que les précédentes.
 
-Formats de fichiers acceptés:
-  - texte pur
-  - HTML et XHTML
-  - HTML Help Compiler (HCC)
-  - OpenDocument / OpenOffice.org
-  - ensemble de ressources Java (Bundle.properties)
-  - fichiers INI (fichiers dans un encodage quelconque constitués de paires clé=valeur)
-  - fichiers PO monolingues (après passage par msgcat)
-  - fichiers de documentation format DocBook
-  - Fichiers Microsoft Open XML
-  - Fichiers XLIFF Okapi monolingues
-
-Modification principales :
-  -
-
-Nouvelles fonctions de l'interface utilisateur (comparaison avec la série 1.6) :
-  -
 
 ==============================================================================
 

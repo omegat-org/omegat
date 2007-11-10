@@ -5,17 +5,19 @@
 1.7.3 vs. 1.7.2
 
 
-  4 Enhancements
+  6 Enhancements
   3 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.3
 
 
-Contains two new localisations (Danish, polish) and bug fixes
+Contains a revised manual, two new localisations (Danish, polish) and bug fixes
 
  Other enhancements:
  
+ - Revised manual
+
  - Danish 1.6.2 localisation + instant start
  - Polish 1.6.2 localisation + partial manual
  - Catalan localisation updated to 1.7.2

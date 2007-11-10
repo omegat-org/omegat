@@ -84,7 +84,9 @@
                     includes="docs/en/instantStartGuideNoTOC.html src/**/Bundle.properties"/>
         </copy>
         <copy file="release/readme.txt"
-              tofile="${l10n.min.dir}/source/readme.utf8">
+              tofile="${l10n.min.dir}/source/readme.utf8"
+              encoding="UTF-8"
+              outputencoding="UTF-8">
             <filterset begintoken="@@" endtoken="@@">
                 <filter token="TRANSLATION_NOTICE"
                         value="This translation is the work of [insert your name], copyright© [insert year]."/>
@@ -106,13 +108,17 @@
                     excludes="docs/en/legalNotices.html"/>
         </copy>
         <copy file="release/readme.txt"
-              tofile="${l10n.max.dir}/source/readme.utf8">
+              tofile="${l10n.max.dir}/source/readme.utf8"
+              encoding="UTF-8"
+              outputencoding="UTF-8">
             <filterset begintoken="@@" endtoken="@@">
                 <filter token="TRANSLATION_NOTICE"
                         value="This translation is the work of [insert your name], copyright© [insert year]."/>
             </filterset>
         </copy>
-        <copy todir="${l10n.max.dir}/source">
+        <copy todir="${l10n.max.dir}/source"
+              encoding="UTF-8"
+              outputencoding="UTF-8">
             <fileset dir="." 
                      includes="docs/en/legalNotices.html"/>
             <filterset begintoken="@@" endtoken="@@">

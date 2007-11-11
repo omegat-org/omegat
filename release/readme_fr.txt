@@ -1,4 +1,4 @@
-Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007.
+﻿Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007.
 
 ==============================================================================
   OmegaT 1.7.3 Fichier « Lisez-moi »
@@ -193,7 +193,7 @@ OmegaT utilise les bibliothèques suivantes :
   http://homepage.mac.com/sroy/mrjadapter/
 
   VLDocking Framework 2.0 par VLSolutions (licence CeCILL).
-  http://www.vlsolutions.com/en/products/docking/
+  http://www.vlsolutions.com/fr/products/docking/
 
 ==============================================================================
  5.  Est-ce qu'OmegaT vous pose problème ? Avez-vous besoin d'aide ?

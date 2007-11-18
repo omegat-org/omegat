@@ -1,655 +1,147 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-
 <html>
 <head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
-
-  <title>Source Segmentation - OmegaT 1.7.3 User Manual</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>Source Segmentation - OmegaT 1.7.3 User Manual</title>
 </head>
 
 <body>
-  <h1 style="margin-left: 0.08cm">Source segmentation</h1>
-
-  <h2>Contents</h2>
-
-  <p style="margin-bottom: 0cm"><a href="#introduction">Introduction</a></p>
-
-  <p style="margin-bottom: 0cm"><a href="#about">About the rules</a></p>
-
-  <p style="margin-bottom: 0cm"><a href="#rules">Rules setup</a></p>
-
-  <p style="margin-bottom: 0cm"><a href="#regex">Regular-expression constructs</a></p>
-
-  <h2 style="margin-left: 0.03cm"><a name="introduction" id="introduction"></a>Introduction</h2>
-
-  <p style="margin-left: 0.93cm">Translation memory tools work with textual units called segments. There are multiple ways to segment a text.</p>
-
-  <p style="margin-left: 0.93cm">OmegaT first parses the text for structure-level segmentation. During this process it is only the structure of the source file that is used to produce segments. For
-  example, text files may be segmented on line breaks, empty lines, or not be segmented on a structure level at all. Files with formatting (OpenOffice.org, OpenDocument, XHTML and HTML documents) are
-  segmented on block-level (paragraph) tags. Translatable object attributes (in XHTML or HTML files) are also extracted to separate segments.</p>
-
-  <p style="margin-left: 0.93cm">After segmenting the source file into logical units, normally corresponding to paragraphs in case of formatted text, OmegaT will further segment these blocks into
-  sentences (you may turn the sentence segmenting off by ticking off the corresponding check box). The Sentence Segmentation has been implemented with the help of the <a href=
-  "http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a> standard - please note that not all SRX features are supported. And it is not possible to import/export rules defined in
-  SRX format. However, if you know how SRX works, you will already know a lot about how OmegaT does the segmentation.</p>
-
-  <p style="margin-left: 0.93cm">Note that a good part of the development has been spent in developing dependable segmentation rules, so in a majority of cases you will not need to get involved with
-  writing your own segmentation rules. On the other hand this functionality can be very useful in special cases, allowing you to translate what needs to be translated without running the danger of
-  changing, what needs to stay as is.</p>
-
-  <h3><a name="about" id="about"></a>About the rules</h3>
-
-  <p style="margin-left: 0.93cm">There's two kinds of rules:</p>
-
-  <ul><ul>
-    <li>
-      <p style="margin-bottom: 0cm"><b>Break rules</b> separate the source text into segments. Example: <i>"Did it make sense? I was not sure."</i> should be separated in two segments. There should
-      be a break rule for "<code>?</code>".</p>
-    </li>
-
-    <li>
-      <p><b>Exception rules</b> specify what parts of text should NOT be separated. Example: <i>"Mrs. Dalloway "</i> should not be separated, so an exception rule should be established for Mrs (and
-      Mr and Dr and prof etc), followed by a period.</p>
-    </li>
-  </ul></ul>
-
-  <p style="margin-left: 0.93cm">The predefined break rules should be sufficient for most European languages and Japanese. Given the flexibility you may consider defining more exception rules for the
-  language you translate from, to give you more meaningful and coherent segments.</p>
-
-  <h3 style="margin-left: 0.03cm"><a name="rules" id="rules"></a>Rules setup</h3>
-
-  <p style="margin-left: 0.93cm">In order to setup the rules, select <strong>Options -&gt; Segmentation...</strong> from the main menu. Note that if you change segmentation options when any project
-  is open, you will have to reload the project for the changes to take effect.</p>
-
-  <h4 style="margin-left: 0.93cm">Sets of rules</h4>
-
-  <p style="margin-left: 0.93cm">All the segmentation rule sets with a matching Language Pattern are applied in the given order of priority, so rules for specific language should be higher than
-  default ones. For example, rules for Canadian French (FR-CA) should be higher than rules for French (FR.*), and higher than Default (.*) ones. Then while translating from Canadian French your
-  project will use the rules defined for this language, the rules for French, and the Default rules in a correct order.</p>
-
-  <p style="margin-left: 0.93cm">In order to create an empty set of rules, click <strong>Add</strong> in the upper half of the dialog. An empty line appears at the bottom of a table. Change the name
-  of the rule set and the language pattern. Syntax of the language pattern conforms to regular expression syntax. See the section <a href="#Short_summary_of_regular-expression_constructs">Short
-  summary of regular-expression constructs</a> below. If your set of rules handles a language-country pair, we advise you to move it to the top using <strong>Move Up</strong> button. In order to edit
-  a set of rules, simply click on it in a table, the rules of the set will appear in the bottom half of the window.</p>
-
-  <p style="margin-left: 0.93cm">The Break/Exception check box determines whether it is a break rule (check box set) or an exception rule (check box unset). Two regular expressions Before and After
-  specify what must be before and after some position so that it qualifies for exception rule or for break rule.</p>
-
-  <p style="margin-left: 0.93cm">The process of segmenting can be pictured as follows: imagine the cursor move along the text, one character at a time. For each cursor position each rule is applied
-  in the given order to see if the <strong>Before</strong> pattern applies the text on the left and the <strong>After</strong> pattern to the text on the right of the cursor. If the rule matches, the
-  program stops the rules examination (&acute;for the exception rule) or creates a new segment (for the break rule):.</p>
-
-  <h4 style="margin-left: 0.93cm">A&nbsp;few simple examples</h4>
-
-  <div align="right">
-    <table width="97%" border="1" cellpadding="4" cellspacing="0" frame="HSIDES" rules="ROWS">
-      <col width="81*">
-      <col width="36*">
-      <col width="27*">
-      <col width="113*">
-
-      <tr valign="top">
-        <td width="32%" height="15" bgcolor="#83CAFF">
-          <p style="margin-left: 0.34cm; margin-top: 0.2cm"><b>Intention</b></p>
-        </td>
-
-        <td width="14%" bgcolor="#83CAFF">
-          <p align="center" style="margin-right: 0.11cm; margin-top: 0.2cm"><b>Before</b></p>
-        </td>
-
-        <td width="11%" bgcolor="#83CAFF">
-          <p align="center" style="margin-left: 0.03cm; margin-top: 0.2cm"><b>After</b></p>
-        </td>
-
-        <td width="44%" bgcolor="#83CAFF">
-          <p style="margin-left: 0.56cm; margin-top: 0.2cm"><b>Note</b></p>
-        </td>
-      </tr>
-
-      <tr valign="top">
-        <td width="32%">
-          <dl>
-            <dt style="margin-left: 0.34cm; margin-top: 0.2cm; background: transparent">set a segment after a period ('<code>.</code>') and before a space</dt>
-          </dl>
-        </td>
-
-        <td width="14%">
-          <dl>
-            <dd style="margin-right: 0.11cm; margin-top: 0.2cm; background: transparent; text-align: center"><code>\.</code></dd>
-          </dl>
-        </td>
-
-        <td width="11%">
-          <dl>
-            <dd style="margin-left: 1.05cm; margin-top: 0.2cm; background: transparent; text-align: center"><code>\s</code></dd>
-          </dl>
-        </td>
-
-        <td width="44%">
-          <dl>
-            <dd>
-              <dl>
-                <dd style="margin-left: 0.56cm; margin-top: 0.2cm; background: transparent">"<code>\.</code>" means the character "<code>.</code>" "<code>\s</code>" means any white space
-                character</dd>
-              </dl>
-            </dd>
-          </dl>
-        </td>
-      </tr>
-
-      <tr valign="top">
-        <td width="32%">
-          <dl>
-            <dt style="margin-left: 0.34cm; margin-top: 0.2cm; background: transparent">do not segment after Mr.</dt>
-          </dl>
-        </td>
-
-        <td width="14%">
-          <dl>
-            <dd style="margin-right: 0.11cm; margin-top: 0.2cm; background: transparent; text-align: center"><code>Mr\.</code></dd>
-          </dl>
-        </td>
-
-        <td width="11%">
-          <dl>
-            <dd style="margin-left: 1.05cm; margin-top: 0.2cm; background: transparent; text-align: center"><code>\s</code></dd>
-          </dl>
-        </td>
-
-        <td width="44%">
-          <dl>
-            <dd>
-              <dl>
-                <dd style="margin-left: 0.56cm; margin-top: 0.2cm; background: transparent">It's an exception rule, so the rule check box must be unchecked</dd>
-              </dl>
-            </dd>
-          </dl>
-        </td>
-      </tr>
-
-      <tr valign="top">
-        <td width="32%">
-          <dl>
-            <dt style="margin-left: 0.34cm; margin-top: 0.2cm; background: transparent"><code><font face="Times, serif">set a segment after</font></code> <code>"</code><font face=
-            "Arial Unicode MS"><span lang="zxx"><code><font face="Arial Unicode MS"><span lang="zxx">&#12290;</span></font></code></span></font><code>"</code> <code><font face=
-            "Times New Roman, serif">(Japanese period)</font></code></dt>
-          </dl>
-        </td>
-
-        <td width="14%">
-          <dl>
-            <dd style="margin-right: 0.11cm; margin-top: 0.2cm; background: transparent; text-align: center"><font face="Arial Unicode MS"><span lang="zxx"><code><font face=
-            "Arial Unicode MS"><span lang="zxx">&#12290;</span></font></code> </span></font></dd>
-          </dl>
-        </td>
-
-        <td width="11%"></td>
-
-        <td width="44%">
-          <dl>
-            <dd>
-              <dl>
-                <dd style="margin-left: 0.56cm; margin-top: 0.2cm; background: transparent">Note that <i>after</i> is empty</dd>
-              </dl>
-            </dd>
-          </dl>
-        </td>
-      </tr>
-
-      <tr valign="top">
-        <td width="32%">
-          <dl>
-            <dt style="margin-left: 0.34cm; margin-top: 0.2cm; background: transparent">do not segment after M. Mr. Mrs. and Ms.</dt>
-          </dl>
-        </td>
-
-        <td width="14%">
-          <dl>
-            <dd style="margin-right: 0.11cm; margin-top: 0.2cm; background: transparent; text-align: center"><code>Mr??s??\.</code></dd>
-          </dl>
-        </td>
-
-        <td width="11%">
-          <dl>
-            <dd style="margin-left: 1.05cm; margin-top: 0.2cm; background: transparent; text-align: center"><code>\s</code></dd>
-          </dl>
-        </td>
-
-        <td width="44%">
-          <dl>
-            <dd>
-              <dl>
-                <dd style="margin-left: 0.56cm; margin-top: 0.2cm; background: transparent">exception rule - see the use of ? in regular expressions (non-greedy identifier)</dd>
-              </dl>
-            </dd>
-          </dl>
-        </td>
-      </tr>
-    </table>
-  </div>
-
-  <h3><a name="regex" id="regex"></a>Summary of regular-expression constructs</h3>
-
-  <p style="margin-left: 1cm">This table the most commonly used constructs that may be useful in building OmegaT segmentation rules. See <a href="http://www.lisa.org/standards/srx/">SRX standard</a>.
-  for the complete list of regular expression features, supported by OmegaT.</p>
-
-  <div align="right">
-    <table width="96%" border="1" cellpadding="4" cellspacing="0" frame="HSIDES" rules="ROWS" style="page-break-before: always">
-      <col width="40*">
-      <col width="216*">
-
-      <tr bgcolor="#DDEEFF">
-        <th width="16%" bgcolor="#83CAFF">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><a name="construct" id="construct"></a> Construct&nbsp;</p>
-        </th>
-
-        <th width="84%" bgcolor="#83CAFF">
-          <p align="left" style="margin-left: 0.1cm; margin-top: 0.2cm">Matches</p>
-        </th>
-      </tr>
-
-      <tr>
-        <th colspan="2" width="100%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm">Flags</p>
-        </th>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>(?i)</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">Enables case-insensitive matching (note that patterns are case-sensitive per default).</p>
-        </td>
-      </tr>
-
-      <tr>
-        <th colspan="2" width="100%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm">Characters</p>
-        </th>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><strong>x</strong></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">The character <strong>x</strong> <strong><span style="font-weight: medium">itself</span></strong><span style="font-weight: medium">,</span>
-          except the following...</p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>\u</tt><strong>hhhh</strong></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">The character with hexadecimal&nbsp;value&nbsp;<tt>0x</tt><strong>hhhh</strong></p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>\t</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">The tab character (<tt>'\u0009'</tt>)</p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>\n</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">The newline (line feed) character (<tt>'\u000A'</tt>)</p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>\r</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">The carriage-return character (<tt>'\u000D'</tt>)</p>
-        </td>
-      </tr>
-
-      <tr>
-        <th colspan="2" width="100%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm">Quotation</p>
-        </th>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>\</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">Nothing, but quotes the following character. This is required if you would like to enter of the meta characters
-          <code>!$()*+.&lt;&gt;?[\]^{|}</code> to match as themselves.</p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>\\</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">For example, this is the backslash character</p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>\Q</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">Nothing, but quotes all characters until <tt>\E</tt></p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>\E</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">Nothing, but ends quoting started by <tt>\Q</tt></p>
-        </td>
-      </tr>
-
-      <tr>
-        <th colspan="2" width="100%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm">Character classes</p>
-        </th>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>[abc]</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>a</tt>, <tt>b</tt>, or <tt>c</tt> (simple class)</p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>[^abc]</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">Any character except <tt>a</tt>, <tt>b</tt>, or <tt>c</tt> (negation)</p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>[a-zA-Z]</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>a</tt> through <tt>z</tt> or <tt>A</tt> through <tt>Z</tt>, inclusive (range)</p>
-        </td>
-      </tr>
-
-      <tr>
-        <th colspan="2" width="100%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm">Predefined character classes</p>
-        </th>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>.</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">Any character (except for line terminators)</p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>\d</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">A digit: <tt>[0-9]</tt></p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>\D</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">A non-digit: <tt>[^0-9]</tt></p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>\s</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">A whitespace character: <tt>[ \t\n\x0B\f\r]</tt></p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>\S</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">A non-whitespace character: <tt>[^\s]</tt></p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>\w</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">A word character: <tt>[a-zA-Z_0-9]</tt></p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>\W</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">A non-word character: <tt>[^\w]</tt></p>
-        </td>
-      </tr>
-
-      <tr>
-        <th colspan="2" width="100%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm">Boundary matchers</p>
-        </th>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>^</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">The beginning of a line</p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>$</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">The end of a line</p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>\b</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">A word boundary</p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>\B</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">A non-word boundary</p>
-        </td>
-      </tr>
-
-      <tr>
-        <th colspan="2" width="100%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm">Greedy quantifiers</p>
-        </th>
-      </tr>
-
-      <tr>
-        <td colspan="2" width="100%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm">They will match as much as they can. For example, <code>a+</code> will match <code>aaa</code> in
-          <code>aaabbb</code></p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><strong>X</strong><tt>?</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong>, once or not at all</p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><strong>X</strong><tt>*</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong>, zero or more times</p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><strong>X</strong><tt>+</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong>, one or more times</p>
-        </td>
-      </tr>
-
-      <tr>
-        <th colspan="2" width="100%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm">Reluctant (non-greedy) quantifiers</p>
-        </th>
-      </tr>
-
-      <tr>
-        <td colspan="2" width="100%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm">They will match as little as they can. For example, <code>a+?</code> will match the first
-          <code>a</code> in <code>aaabbb</code></p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><strong>X</strong><tt>??</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong>, once or not at all</p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><strong>X</strong><tt>*?</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong>, zero or more times</p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><strong>X</strong><tt>+?</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong>, one or more times</p>
-        </td>
-      </tr>
-
-      <tr>
-        <th colspan="2" width="100%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm">Logical operators</p>
-        </th>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><strong>XY</strong></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong> followed by <strong>Y</strong></p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><strong>X</strong><tt>|</tt><strong>Y</strong></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm">Either <strong>X</strong> or <strong>Y</strong></p>
-        </td>
-      </tr>
-
-      <tr>
-        <td width="16%">
-          <p align="left" style="margin-left: 0.29cm; margin-right: -0.11cm; margin-top: 0.2cm"><tt>(</tt><strong>XY</strong><tt>)</tt></p>
-        </td>
-
-        <td width="84%">
-          <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>XY</strong> as a single group</p>
-        </td>
-      </tr>
-    </table>
-  </div>
-
-  <p><code><a href="legalNotices.html"><font face="Times, serif">Legal notices</font></a></code></p>
+	<h1>Source segmentation</h1>
+
+	<ul>
+		<li><a href="#structure">Structure level segmentation</a></li>
+		<li><a href="#sentence">Sentence level segmentation</a>
+			<ul>
+				<li><a href="#about">Segmentation rules</a></li>
+				<li><a href="#setup">Rules setup</a>
+					<ul>
+						<li><a href="#priority">Priority</a></li>
+						<li><a href="#creation">Rules creation</a></li>
+						<li><a href="#breal">Break/Exception</a></li>
+						<li><a href="#setup">Simple examples</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="regexp.html">Regular expression constructs</a></li>
+	</ul>
+	
+	<p>Translation memory tools work with textual units called segments. OmegaT has 2 ways to segment a text: paragraph segmentation and sentence segmentation.</p>
+
+	<p>In order to select the type of segmentation, select <strong>Project → Properties...</strong> from the main menu and use the available check box.</p>
+
+	<p>If sentence segmentation has been selected, you can setup the rules by selecting <strong>Options → Segmentation...</strong> from the main menu.</p>
+
+	<p>Note that a good part of the development has been spent in developing dependable segmentation rules, so in a majority of cases you will not need to get involved with writing your own segmentation rules. On the other hand this functionality can be very useful in special cases, allowing you to translate what needs to be translated without running the danger of changing, what needs to stay as is.</p>
+	
+	<p><strong>Warning!</strong> Changing the filters options when a project is open may cause data loss. If you change segmentation options when a project is open, you will have to reload the project for the changes to take effect.</p>
+
+
+	<hr>
+	<a name="structure" id="structure"></a>
+	<h1>Structure level segmentation</h1>
+
+	<p>OmegaT first parses the text for structure-level segmentation. During this process it is only the structure of the source file that is used to produce segments.</p>
+	
+	<p>For example, <a href="fileFilters.html#filter_options">text files</a> may be segmented on line breaks, empty lines, or not be segmented at all. Files with formatting (OpenOffice.org documents, HTML documents, etc.) are segmented on block-level (paragraph) tags. Translatable object <a href="fileFilters.html#filter_options">attributes</a> in XHTML or HTML files can be extracted as separate segments.</p>
+
+	<hr>
+	<a name="sentence" id="sentence"></a>
+	<h1>Sentence level segmentation</h1>
+
+	<p>After segmenting the source file into logical units, OmegaT will further segment these blocks into sentences.</p>
+	
+	<a name="about" id="about"></a>
+	<h2>Segmentation rules</h2>
+
+	<p>The process of segmenting can be pictured as follows: imagine the cursor move along the text, one character at a time. For each cursor position each rule is applied in the given order to see if the <strong>Before</strong> pattern applies the text on the left and the <strong>After</strong> pattern to the text on the right of the cursor. If the rule matches, the program stops the rules examination (&acute;for the exception rule) or creates a new segment (for the break rule).</p>
+
+	<p>The Sentence Segmentation has been implemented with the help of the <a href= "http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a> standard - please note that not all SRX features are supported. And it is not possible to import/export rules defined in SRX format. However, if you know how SRX works, you will already know a lot about how OmegaT does the segmentation.</p>
+
+	<p>There's two kinds of rules:</p>
+
+	<ul>
+		<li><strong>Break rules</strong> separate the source text into segments.
+		<p><strong>Example</strong>: <i>"Did it make sense? I was not sure."</i> should be separated in two segments.<br>
+		There should be a break rule for "<code>?</code>".</p></li>
+		<li><strong>Exception rules</strong> specify what parts of text should NOT be separated.
+		<p><strong>Example</strong>: <i>"Mrs. Dalloway "</i> should not be separated, so an exception rule should be established for Mrs (and Mr and Dr and prof etc), followed by a period.</p></li>
+	</ul>
+
+	<p>The predefined break rules should be sufficient for most European languages and Japanese. Given the flexibility you may consider defining more exception rules for the language you translate from, to give you more meaningful and coherent segments.</p>
+
+	<a name="setup" id="setup"></a>
+	<h2>Rules setup</h2>
+
+
+	<a name="priority" id="priority"></a>
+	<h3>Priority</h3>
+
+	<p>All the segmentation rule sets with a matching Language Pattern are applied in the given order of priority, so rules for specific language should be higher than default ones.</p>
+	
+	<p>For example, rules for Canadian French (FR-CA) should be higher than rules for French (FR.*), and higher than Default (.*) ones. Then while translating from Canadian French your project will use the rules defined for this language, the rules for French, and the Default rules in a correct order.</p>
+
+	<a name="creation" id="creation"></a>
+	<h3>Rules creation</h3>
+	
+	<p>In order to create an empty set of rules, click <strong>Add</strong> in the upper half of the dialog. An empty line appears at the bottom of a table.</p>
+	
+	<p>Change the name of the rule set and the language pattern. Syntax of the language pattern conforms to <a href="regexp.html">regular expression</a> syntax. If your set of rules handles a language-country pair, we advise you to move it to the top using <strong>Move Up</strong> button. In order to edit a set of rules, simply click on it in a table, the rules of the set will appear in the bottom half of the window.</p>
+
+	<a name="break" id="break"></a>
+	<h3>Break/Exception</h3>
+	
+	<p>The Break/Exception check box determines whether it is a break rule (check box set) or an exception rule (check box unset). Two regular expressions Before and After specify what must be before and after some position so that it qualifies for exception rule or for break rule.</p>
+
+
+	<a name="examples" id="examples"></a>
+	<h3>A few simple examples</h3>
+
+	<table border="0" cellpadding="4" cellspacing="0">
+		<tr bgcolor="#DDDDDD">
+			<td width="25%"><strong>Intention</strong></td>
+			<td><strong>Before</strong></td>
+			<td><strong>After</strong></td>
+			<td width="50%"><strong>Note</strong></td>
+		</tr>
+		<tr>
+			<td>set a segment after a period ('<code>.</code>') and before a space</td>
+			<td><code>\.</code></td>
+			<td><code>\s</code></td>
+			<td>"<code>\.</code>" means the character "<code>.</code>" "<code>\s</code>" means any white space character</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td>do not segment after Mr.</td>
+			<td><code>Mr\.</code></td>
+			<td><code>\s</code></td>
+			<td>It's an exception rule, so the rule check box must be unchecked</td>
+		</tr>
+		<tr>
+			<td><code>set a segment after</code> <code>"</code><code>&#12290;</code><code>"</code> <code>(Japanese period)</code></td>
+			<td><code>&#12290;</code> </td>
+			<td></td>
+			<td>Note that <i>after</i> is empty</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td>do not segment after M. Mr. Mrs. and Ms.</td>
+			<td><code>Mr??s??\.</code></td>
+			<td><code>\s</code></td>
+			<td>exception rule - see the use of ? in regular expressions (non-greedy identifier)</td>
+		</tr>
+	</table>
+
+	<hr>
+	<a name="regex" id="regex"></a>
+	<h1>Summary of regular-expression constructs</h1>
+
+	<p>The regular expressions used in segmentation rules are those supported by Java. A short summary is available in the <a href="regexp.html">Regular Expressions Constructs</a> appendix.</p>
+	
+	<p>If you need more specific information, please consult <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+		
+	<p>You can find simple tutorials on the web (<a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>, for example.)</p>
+
+	<hr>
+
+	<p><code><a href="legalNotices.html">Legal notices</a></code></p>
 </body>
 </html>

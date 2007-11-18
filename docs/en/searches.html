@@ -1,611 +1,124 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-
 <html>
 <head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
-
-  <title>Searches - OmegaT 1.7.3 User Manual</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>Searches - OmegaT 1.7.3 User Manual</title>
 </head>
 <body>
 
-  <h1 style="margin-left: 0.03cm">Searches</h1>
+	<h1>Searches</h1>
 
-  <h2 style="margin-left: 0.03cm">Contents</h2>
+	<ul>
+		<li><a href="#searchwindow">Search window</a>
+			<ul>
+				<li><a href="#calling">Calling up a search</a></li>
+				<li><a href="#location">Search location</a></li>
+			</ul>
+		</li>
+		<li><a href="#searchmethods">Search methods</a></li>
+		<li><a href="#usingwildcards">Using wild cards</a></li>
+		<li><a href="#usingregularexpressions">Using regular expressions</a></li>
+		<li><a href="#display">Search results display</a></li>
+	</ul>
 
-  <p style="margin-left: 0.11cm; margin-top: 0.2cm; margin-bottom: 0cm"><a href="#searchwindow">Search window</a></p>
 
-  <p style="margin-left: 0.11cm; margin-top: 0.2cm; margin-bottom: 0cm"><a href="#searchmethods">Search methods</a></p>
 
-  <p style="margin-left: 0.11cm; margin-top: 0.2cm; margin-bottom: 0cm"><a href="#usingwildcards">Using wild cards</a></p>
+<hr>
 
-  <p style="margin-left: 0.11cm; margin-top: 0.2cm; margin-bottom: 0cm"><a href="#usingregularexpressions">Using regular expressions</a></p>
+	<a name="searchwindow" id="searchwindow"></a>
+	<h1>Search window</h1>
 
-  <p style="margin-left: 0.11cm; margin-top: 0.2cm; margin-bottom: 0cm"><a href="#regexconstructs">Regular-expression constructs</a></p>
+	<a name="calling" id="calling"></a>
+	<h2>Calling up a search</h2>
+	
+	<p>OmegaT provides a powerful range of search functions. Call up the <strong>Search</strong> window with <code>Ctrl+F</code> and enter the word or phrase you wish to search for in the <strong>Search for</strong> box.</p>
+	
+	<p>Alternatively, in the Editor window, select a word or phrase in the editing field (target text of the active segment) and hit <code>Ctrl+F</code>. The word or phrase is entered in the <strong>Search for</strong> box automatically in this case.</p>
 
-  <h2 style="margin-left: 0.08cm"><a name="searchwindow" id="searchwindow"></a>Search window</h2>
+	<p>Calling up the <strong>Search</strong> window anew will create a new instance of the window. You may end up with a number of Search windows if you forget to close them.</p>
+	
+	<a name="location" id="location"></a>
+	<h2>Search location</h2>
+	
+	<p>Searches occur both in the source as well as in the target section of the project. You may search in</p>
 
-  <p style="margin-left: 1cm">OmegaT provides a powerful range of search functions. Call up the Search window with <code>Ctrl+F</code> and enter the word or phrase you wish to search for in the
-  "Search for" box. Alternatively, select a word or phrase in the editing field (target text of the active segment) and hit <code>Ctrl+F</code>. The word or phrase is entered in the "Search for" box
-  automatically in this case.</p>
+	<ul>
+		<li>the project only (default setting)</li>
+		<li>the project as well as in the reference translation memories in /tm/ (check <i>Search TMs</i>)</li>
+		<li>a single file or a folder containing a set of files (check <i>Search files</i>)</li>
+	</ul>
 
-  <p style="margin-left: 1cm">Calling up the Search window anew will create a new instance of the window. You may end up with a number of Search windows if you forget to close them. Searches occur
-  both in the source as well as in the target section of the project. You may search in</p>
+	<p>In the latter case, OmegaT will only search the files it can read (See <a href="filesToTranslate.html">Supported File Formats</a>).</p>
 
-  <ul>
-    <li>
-      <p style="margin-bottom: 0cm">the project only (default setting)</p>
-    </li>
 
-    <li>
-      <p style="margin-bottom: 0cm">the project as well as in the reference translation memories in /tm/ (check <i>Search TMs</i>)</p>
-    </li>
 
-    <li>
-      <p>a single file or a folder containing a set of files (check <i>Search files</i>)</p>
-    </li>
-  </ul>
+<hr>
 
-  <p style="margin-left: 1cm; margin-top: 0.5cm; margin-bottom: 0cm">In the latter case, OmegaT will only search the files it can read (See <a href="fileFormats.html">Supported File Formats</a>).</p>
+	<a name="searchmethods" id="searchmethods"></a>
+	<h1>Search methods</h1>
 
-  <h2><a name="searchmethods" id="searchmethods"></a>Search methods</h2>
+	<p>Select the method using the radio buttons. You can choose between two methods to search:</p>
 
-  <p style="margin-left: 1cm">Select the method using the radio buttons. You can choose between two methods to search:</p>
+	<dl>
+		<dt><strong>exact search</strong></dt><dd>Search for segments containing of the string you specified.</dd>
+		<dt><strong>keyword search</strong></dt><dd>Search for segments containing all keywords you specified, in any order.</dd>
+	</dl>
 
-  <ul>
-    <li>
-      <p style="margin-bottom: 0cm"><strong>exact search</strong>: Search for segments containing of the string you specified.</p>
-    </li>
+	<p>For either of these two methods you can select the following three options:</p>
 
-    <li>
-      <p><strong>keyword search</strong>: Search for segments containing all keywords you specified, in any order.</p>
-    </li>
-  </ul>
+	<dl>
+		<dt><strong>case sensitive</strong></dt><dd>If selected, the search will be performed for the exact string specified; otherwise capitals will be ignored.</dd>
+		<dt><strong>regular expressions</strong></dt><dd>If selected, the search string will be treated as a regular expression (in case of a keyword search it will be treated as multiple expressions).</dd>
+		<dt><strong>search TMs</strong></dt><dd>if selected, all translation memories are included in the search.</dd>
+	</dl>
 
-  <p style="margin-left: 1cm">For either of these two methods you can select the following three options:</p>
+	<p>An <strong>exact search</strong> looks for a phrase, i.e. if several words are entered, they are found only if they occur in exactly the same sequence. Exact searches are similar to an "exact phrase" search in an Internet search engine such as Google.</p>
 
-  <ul>
-    <li>
-      <p style="margin-bottom: 0cm"><strong>case sensitive</strong>: If selected, the search will be performed for the exact string specified; otherwise capitals will be ignored.</p>
-    </li>
+	<p>Select <strong>keyword search</strong> to search for any number of individual words, separated by spaces and in any order. OmegaT will display a list of all segments in which all the words occur. Keyword searches are similar to a search "with all of the words" in an Internet search engine such as Google (AND logic).</p>
 
-    <li>
-      <p style="margin-bottom: 0cm"><strong>regular expressions</strong>: If selected, the search string will be treated as a regular expression (in case of a keyword search it will be treated as
-      multiple expressions).</p>
-    </li>
 
-    <li>
-      <p><strong>search TMs</strong>: if selected, all translation memories are included in the search.</p>
-    </li>
-  </ul>
-
-  <p style="margin-left: 1cm; margin-bottom: 0cm">An exact search looks for a phrase, i.e. if several words are entered, they are found only if they occur in exactly the same sequence. Exact searches
-  are similar to an "exact phrase" search in an Internet search engine such as Google.</p>
-
-  <p style="margin-left: 1cm; margin-bottom: 0cm">Select "Keyword search" to search for any number of individual words, separated by spaces and in any order. OmegaT will display a list of all
-  segments in which all the words occur. Keyword searches are similar to a search "with all of the words" in an Internet search engine such as Google (AND logic).</p>
-
-  <h2 style="margin-left: 0.05cm"><a name="usingwildcards" id="usingwildcards"></a>Using wild cards</h2>
-
-  <p style="margin-left: 1cm">In both exact and keyword searches, the wild card search characters '<code>*</code>' and '<code>?</code>' can be used. To use wild cards, make sure the option
-  <strong>regular expressions</strong> is not selected, otherwise these characters are interpreted as special regular expression characters. The wild card character '<code>?</code>' matches any
-  single character, i.e. '<code>b?d</code>' finds instances of '<code>bad</code>' and '<code>bid</code>'. The wild card character '<code>*</code>' matches any character or number of characters, i.e.
-  '<code>b*d</code>' finds instances of '<code>bad</code>', '<code>bid</code>', '<code>bold</code>' and '<code>band</code>'.</p>
-
-  <p style="margin-left: 1cm">If you wish to search for segments containing these characters, you will need to switch on regular expressions, and escape these characters by prefixing a backslash
-  ('\') to them, i.e. 'x\*y' to find instances of 'x*y' and 'x\?<code>y</code>' to find instances of '<code>x?y</code>'.</p>
-
-  <h2 style="margin-left: 0.03cm"><a name="usingregularexpressions" id="usingregularexpressions"></a> Using regular expressions</h2>
-
-  <p style="margin-left: 1cm">A regular expression search is a powerful way to look for instances of a string. It is similar to a normal search, but allows far more flexibility. You can find simple
-  tutorials on the web (<a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>, for example.) The regular expressions used in searches
-  are those supported by Java. If you need more specific information, please consult <a href=
-  "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
-
-  <h2><a name="regexconstructs" id="regexconstructs"></a>Regular-expression constructs</h2>
-
-  <dl>
-    <dd>
-      <table width="70%" border="1" cellpadding="2" cellspacing="0" frame="BELOW" rules="GROUPS">
-        <col width="36*">
-        <col width="220*">
-
-        <tbody>
-          <tr bgcolor="#DDEEFF">
-            <th width="14%">
-              <p align="left" style="margin-left: 0.1cm; margin-top: 0.2cm">Construct&nbsp;</p>
-            </th>
-
-            <th width="86%">
-              <p align="left" style="margin-left: 0.1cm; margin-top: 0.2cm">Matches</p>
-            </th>
-          </tr>
-
-          <tr>
-            <th colspan="2" width="100%">
-              <p align="left" style="margin-left: 0.1cm; margin-top: 0.2cm">Flags</p>
-            </th>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>(?i)</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">Enables case-insensitive matching (by default, the pattern is case-sensitive).</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <th colspan="2" width="100%">
-              <p align="left" style="margin-left: 0.1cm; margin-top: 0.2cm">Characters</p>
-            </th>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>x</strong></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">The character <strong>x</strong>, except the following...</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>\u</tt><strong>hhhh</strong></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">The character with hexadecimal&nbsp;value&nbsp;<tt>0x</tt><strong>hhhh</strong></p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>\t</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">The tab character (<tt>'\u0009'</tt>)</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>\n</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">The newline (line feed) character (<tt>'\u000A'</tt>)</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>\r</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">The carriage-return character (<tt>'\u000D'</tt>)</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <th colspan="2" width="100%">
-              <p align="left" style="margin-left: 0.1cm; margin-top: 0.2cm">Quotation</p>
-            </th>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>\</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">Nothing, but quotes the following character. This is required if you would like to enter of the meta characters
-              <code>!$()*+.&lt;&gt;?[\]^{|}</code> to match as themselves.</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>\\</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">For example, this is the backslash character</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>\Q</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">Nothing, but quotes all characters until <tt>\E</tt></p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>\E</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">Nothing, but ends quoting started by <tt>\Q</tt></p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <th colspan="2" width="100%">
-              <p align="left" style="margin-left: 0.1cm; margin-top: 0.2cm">Character classes</p>
-            </th>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>[abc]</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>a</tt>, <tt>b</tt>, or <tt>c</tt> (simple class)</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>[^abc]</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">Any character except <tt>a</tt>, <tt>b</tt>, or <tt>c</tt> (negation)</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>[a-zA-Z]</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>a</tt> through <tt>z</tt> or <tt>A</tt> through <tt>Z</tt>, inclusive (range)</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <th colspan="2" width="100%">
-              <p align="left" style="margin-left: 0.1cm; margin-top: 0.2cm">Predefined character classes</p>
-            </th>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>.</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">Any character (except for line terminators)</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>\d</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">A digit: <tt>[0-9]</tt></p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>\D</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">A non-digit: <tt>[^0-9]</tt></p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>\s</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">A whitespace character: <tt>[ \t\n\x0B\f\r]</tt></p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>\S</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">A non-whitespace character: <tt>[^\s]</tt></p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>\w</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">A word character: <tt>[a-zA-Z_0-9]</tt></p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>\W</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">A non-word character: <tt>[^\w]</tt></p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <th colspan="2" width="100%">
-              <p align="left" style="margin-left: 0.1cm; margin-top: 0.2cm">Boundary matchers</p>
-            </th>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>^</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">The beginning of a line</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>$</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">The end of a line</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>\b</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">A word boundary</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>\B</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">A non-word boundary</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <th colspan="2" width="100%">
-              <p align="left" style="margin-left: 0.1cm; margin-top: 0.2cm">Greedy quantifiers</p>
-            </th>
-          </tr>
-
-          <tr>
-            <td colspan="2" width="100%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">These will match as much as they can. For example, <code>a+</code> will match <code>aaa</code> in <code>aaabbb</code></p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong><tt>?</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong>, once or not at all</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong><tt>*</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong>, zero or more times</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong><tt>+</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong>, one or more times</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <th colspan="2" width="100%">
-              <p align="left" style="margin-left: 0.1cm; margin-top: 0.2cm">Reluctant (non-greedy) quantifiers</p>
-            </th>
-          </tr>
-
-          <tr>
-            <td colspan="2" width="100%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">These will match as little as they can. For example, <code>a+?</code> will match the first <code>a</code> in <code>aaabbb</code></p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong><tt>??</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong>, once or not at all</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong><tt>*?</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong>, zero or more times</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong><tt>+?</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong>, one or more times</p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <th colspan="2" width="100%">
-              <p align="left" style="margin-left: 0.1cm; margin-top: 0.2cm">Logical operators</p>
-            </th>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>XY</strong></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong> followed by <strong>Y</strong></p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>X</strong><tt>|</tt><strong>Y</strong></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm">Either <strong>X</strong> or <strong>Y</strong></p>
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <td width="14%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><tt>(</tt><strong>XY</strong><tt>)</tt></p>
-            </td>
-
-            <td width="86%">
-              <p style="margin-left: 0.1cm; margin-top: 0.2cm"><strong>XY</strong> as a single group</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </dd>
-  </dl>
-
-  <p style="margin-left: 1cm"><br>
-  <br></p>
-
-  <p style="margin-left: 1cm"><a href="legalNotices.html">Legal notices</a></p>
+
+<hr>
+
+	<a name="usingwildcards" id="usingwildcards"></a>
+	<h1>Using wild cards</h1>
+
+	<p>In both exact and keyword searches, the wild card search characters '<code>*</code>' and '<code>?</code>' can be used. To use wild cards, make sure the option <strong>regular expressions</strong> is not selected, otherwise these characters are interpreted as special regular expression characters.</p>
+	
+	<p>The '<strong>*</strong>' character matches zero or more characters (the search term '<strong>run*</strong>' would match '<strong>run</strong>', '<strong>runs</strong>', and '<strong>running</strong>', for example).</p>
+	
+	<p>The '<strong>?</strong>' character matches exactly one character ('<strong>run?</strong>' would match '<strong>runs</strong>' and '<strong>rung</strong>', for example, but not '<strong>run</strong>' or '<strong>running</strong>').</p>
+
+	<p>If you wish to search for segments containing either <strong>*</strong> or <strong>?</strong>, you will need to switch on regular expressions, and escape these characters by prefixing a backslash ('\') to them, i.e. 'x\*y' to find instances of 'x*y' and 'x\?<code>y</code>' to find instances of '<code>x?y</code>'.</p>
+
+
+
+<hr>
+
+	<a name="usingregularexpressions" id="usingregularexpressions"></a>
+	<h1> Using regular expressions</h1>
+
+	<p>A regular expression search is a powerful way to look for instances of a string. It is similar to a wild card search, but allows far more flexibility.</p>
+	
+	<p>The regular expressions used in searches are those supported by Java. A short summary is available in the <a href="regexp.html">Regular Expressions Constructs</a> appendix.</p>
+	
+	<p>If you need more specific information, please consult <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+		
+	<p>You can find simple tutorials on the web (<a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>, for example.)</p>
+	
+<hr>
+
+	<a name="display" id="display"></a>
+	<h1>Search results display</h1>
+	
+	<p>Pressing the search button after entering a string in the search field will display all the segments in the project that include the searched string. As OmegaT handles all the identical segments as one entity, only the first unique segment is shown.</p>
+	
+	<p>The segments are displayed in order of appearance in the project. Translated segments will be displayed with the original text at the top and the translated text at the bottom, non translated segments will be displayed in original text only.</p>
+
+	<p>You may click on a segment to bring it up in the Editor for modification. Then you may switch back to Search window and go to the next found segment to modify it too. Such a pattern is useful to do terminology updates.</p>
+
+	<hr>
+	
+	<p><a href="legalNotices.html">Legal notices</a></p>
 </body>
 </html>

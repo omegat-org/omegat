@@ -1,103 +1,93 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-
 <html>
 <head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
-
-  <title>Working with Plain Text - OmegaT 1.7.3 User Manual</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>Working with Plain Text - OmegaT 1.7.3 User Manual</title>
 </head>
 
 <body>
-  <h1>Working with plain text</h1>
+	<h1>Working with plain text</h1>
 
-  <h2 style="margin-left: 0.08cm">Contents</h2>
+	<ul>
+		<li><a href="#Plain_Text_in_OmegaT">Default encoding</a></li>
+		<li><a href="#Garbled_displays_3F">Garbled displays</a></li>
+		<li><a href="#Character_sets_and_encodings">Character sets and encodings</a></li>
+		<li><a href="#The_OmegaT_solution">The OmegaT solution</a></li>
+	</ul>
 
-  <ul>
-    <li>
-      <p style="margin-bottom: 0cm"><a href="#Plain_Text_in_OmegaT">Plain text in OmegaT</a></p>
-    </li>
+<hr>
 
-    <li>
-      <p style="margin-bottom: 0cm"><a href="#Garbled_displays_3F">Languages and character sets</a></p>
-    </li>
+	<a name="Plain_Text_in_OmegaT" id="Plain_Text_in_OmegaT"></a>
+	<h1>Default encoding</h1>
 
-    <li>
-      <p style="margin-bottom: 0cm"><a href="#Character_sets_and_encodings">Character sets and encodings</a></p>
-    </li>
+	<p>Plain text files - in most of the cases with a <code>.txt</code>. extension - contain exclusively textual information. There is no clearly defined way to inform the computer which language they contain. In (very) simple terms, that means the computer will per default assume the text is written in the same language the computer itself uses.</p>
 
-    <li>
-      <p><a href="#The_OmegaT_solution">The OmegaT solution</a></p>
-    </li>
-  </ul>
+<hr>
 
-  <h3><a name="Plain_Text_in_OmegaT" id="Plain_Text_in_OmegaT"></a>Plain text in OmegaT</h3>
+	<a name="Garbled_displays_3F" id="Garbled_displays_3F"></a>
+	<h1>Garbled displays</h1>
 
-  <p style="margin-left: 0.9cm">Plain text files - in most of the cases with a <strong>.txt</strong>. extension - contain exclusively textual information. There's no clearly defined way to inform the
-  computer which language they contain. In (very) simple terms, that means the computer will per default assume the text is written in the same language the computer itself uses.</p>
+	<p>If you are Russian, it is very likely that your computer works in Russian too: the menus are in Russian, the files you open will be in Russian etc. In most cases, the computer makes the right assumption regarding the Contents of files in general: they all contain Russian and nothing Russian characters could not display.</p>
 
-  <h3><a name="Garbled_displays_3F" id="Garbled_displays_3F"></a>Languages and character sets</h3>
+	<p>Now, if you are a Russian translator who translates from Japanese, the Japanese files you will get, if they are <strong>plain text</strong> files will most probably be considered by the computer to be files containing Russian. Because there is no information in the file itself that indicates to the computer in which language they are written.</p>
 
-  <p style="margin-left: 0.9cm">If you are Russian, it is very likely that your computer works in Russian too: the menus are in Russian, the files you open will be in Russian etc. In most cases, the
-  computer makes the right assumption regarding the Contents of files in general: they all contain Russian and nothing Russian characters could not display.</p>
+	<p>The Japanese file Contents could be:</p>
 
-  <p style="margin-left: 0.9cm">Now, if you are a Russian translator who translates from Japanese, the Japanese files you will get, if they are <strong>plain text</strong> files will most probably be
-  considered by the computer to be files containing Russian. Because there is no information in the file itself that indicates to the computer in which language they are written.</p>
+	<p>OmegaT&#12392;&#12399;&#12289;&#12467;&#12531;&#12500;&#12517;&#12540;&#12479;&#12434;&#21033;&#29992;&#12375;&#12383;&#32763;&#35379;&#12484;&#12540;&#12523;&#12391;&#12377;&#12290;</p>
 
-  <p style="margin-left: 0.9cm">The Japanese file Contents could be:</p>
-  <pre style="margin-left: 0.9cm; margin-bottom: 0.5cm">
-   OmegaT<span lang=
-"zxx">&#12392;&#12399;&#12289;&#12467;&#12531;&#12500;&#12517;&#12540;&#12479;&#12434;&#21033;&#29992;&#12375;&#12383;&#32763;&#35379;&#12484;&#12540;&#12523;&#12391;&#12377;&#12290;</span>
-</pre>
+	<p>But your text editor could very well display it like this:</p>
+	<p>OmegaT&#1042;&#8710;&#1042;&#1036;&#1041;A&#1043;R&#1043;&#1059;&#1043;s&#1043;&#1045;&#1041;[&#1043;^&#1042;&#1088;&#1063;&#1064;&#1063;p&#1042;&micro;&#1042;&#1113;&#1062;|&#1062;&#1091;&#1043;c&#1041;[&#1043;&#1051;&#1042;&asymp;&#1042;&#1032;&#1041;B</p>
 
-  <p style="margin-left: 0.9cm">But your text editor could very well display it like this:</p>
-  <pre style="margin-left: 0.9cm; margin-bottom: 0.5cm">
-   OmegaT&#1042;&#8710;&#1042;&#1036;&#1041;A&#1043;R&#1043;&#1059;&#1043;s&#1043;&#1045;&#1041;[&#1043;^&#1042;&#1088;&#1063;&#1064;&#1063;p&#1042;&micro;&#1042;&#1113;&#1062;|&#1062;&#1091;&#1043;c&#1041;[&#1043;&#1051;&#1042;&asymp;&#1042;&#1032;&#1041;B
-</pre>
+	<p>Because it expects the Contents to be Russian... But this is not Russian. This is Japanese characters wrongly displayed as Russian characters.</p>
+	
+	<p>OmegaT is no different. OmegaT considers that <strong>plain text</strong> files contain text that can automatically be displayed by using the computer's defaults. That works well when the computer works in French and if you get English files, or when the computer is German and if you get Italian files.</p>
 
-  <p style="margin-left: 0.9cm">Because it expects the Contents to be Russian... But this is not Russian. This is Japanese characters wrongly displayed as Russian characters. OmegaT is no different.
-  OmegaT considers that <strong>plain text</strong> files contain text that can automatically displayed by using the computer's defaults. That works well when the computer works in French and if you
-  get English files, or when the computer is German and if you get Italian files.</p>
+<hr>
 
-  <h3 style="margin-left: 0.08cm"><a name="Character_sets_and_encodings" id="Character_sets_and_encodings"></a> Character sets and encodings</h3>
+	<a name="Character_sets_and_encodings" id="Character_sets_and_encodings"></a>
+	<h1>Character sets and encodings</h1>
 
-  <p style="margin-left: 0.9cm">Why would that work with English and French but not with Russian and Japanese? Because English and French share a common <strong>character set</strong>. Namely
-  <strong>Latin-1</strong>, or a variation. Until recently, Russian and Japanese have not shared any character sets. Most current Russian characters sets do not cover Japanese and reciprocally. The
-  result is as shown above.</p>
+	<p>Why would that work with English and French but not with Russian and Japanese? Because English and French share a common <strong>character set</strong>. Namely <strong>Latin-1</strong>, or a variation. Until recently, Russian and Japanese have not shared any character sets. Most current Russian characters sets do not cover Japanese and reciprocally. The result is as shown above.</p>
 
-  <p style="margin-left: 0.9cm">The Japanese client works with a Japanese computer and creates text files that contain Japanese. The character set selected by the client computer will depend on the
-  operating system and of other settings, but it is very unlikely that the chosen (Japanese) character set will be correctly interpreted by the Russian computer.</p>
+	<p>The Japanese client works with a Japanese computer and creates text files that contain Japanese. The character set selected by the client computer will depend on the operating system and of other settings, but it is very unlikely that the chosen (Japanese) character set will be correctly interpreted by the Russian computer.</p>
 
-  <p style="margin-left: 0.9cm">Now, how the textual information in the specified character set is physically transmitted (i.e. how is it <strong>written</strong> in the file for the computer to
-  interpret and display) depends on an <strong>encoding</strong>. When the computer reads the file, it "decodes" the information according to the encoding and displays it according to the character
-  set. Roughly speaking, one encoding corresponds to one character set...</p>
+	<p>Now, how the textual information in the specified character set is physically transmitted (i.e. how is it <strong>written</strong> in the file for the computer to interpret and display) depends on an <strong>encoding</strong>. When the computer reads the file, it "decodes" the information according to the encoding and displays it according to the character set. Roughly speaking, one encoding corresponds to one character set...</p>
 
-  <h3 style="margin-left: 0.05cm"><a name="The_OmegaT_solution" id="The_OmegaT_solution"></a>The OmegaT solution</h3>
+<hr>
 
-  <p style="margin-left: 0.9cm">There are basically 3 ways to fix this in OmegaT. The <i>drastic way</i> is specify the encoding for your <strong>plain text</strong> files - i.e. files with
-  <strong>txt</strong> extension. The alternative , the <i>selective way</i>, is to: change extensions of your plain text "foreign" files &ndash; to JP for Japanese plain texts for instance - and
-  specify how files with the new extension are to be interpreted. The proper, long-term alternative is the <i>"Unicode" way</i>: open your "foreign" file in a text editor that correctly interprets
-  its encoding and save the file in the "UTF-8" encoding, using the extension <strong>utf8</strong>. OmegaT will interpret the file as a UTF-8 file.</p>
+	<a name="The_OmegaT_solution" id="The_OmegaT_solution"></a>
+	<h1>The OmegaT solution</h1>
 
-  <p style="margin-left: 0.9cm; margin-bottom: 0cm">Currently, OmegaT is set to understand plain text files as follows</p>
+	<p>There are basically 3 ways to fix this in OmegaT. The 3 ways all involve using the <a href="fileFilters.html">file filters</a> in the <strong>Options</strong> menu.</p>
+	
+	<ol>
+		<li>Specify the encoding for your <strong>plain text</strong> files - i.e. files with <code>.txt</code> extension.<br>
+		In the <strong>Text files</strong> section of the <a href="fileFilters.html">file filters</a> dialog, change the <strong>Source File Encoding</strong> from <strong>&lt;auto&gt;</strong> to the encoding that corresponds to your source <code>.txt</code> file.
 
-  <ul>
-    <li style="margin-left: 0.9cm; margin-bottom: 0cm"><strong>.txt</strong> files are automatically (<strong>auto</strong>) interpreted by OmegaT as being encoded in the computer's default
-    encoding.</li>
+		<li>Change the extensions of your plain text source files - from <code>.txt</code> to <code>.jp</code> for Japanese plain texts for instance.<br>
+		In the <strong>Text files</strong> section of the <a href="fileFilters.html">file filters</a> dialog, add the <code>*.jp</code> <strong>Source Filename Pattern</strong> and select the appropriate parameters for the source and target encoding.</li>
 
-    <li style="margin-left: 0.9cm; margin-bottom: 0cm"><strong>.txt1</strong> files are files in ISO-8859-1, covering most <strong>Western Europe</strong> languages.</li>
+		<li>Open your source file in a text editor that correctly interprets its encoding and save the file in the "UTF-8" encoding.<br>
+		Change the file extension from <code>.txt</code> to <code>.utf8</code>.<br>
+		OmegaT will automatically interpret the file as a UTF-8 file.</li>
+    </ol>
+	<p>Currently, OmegaT is set to understand plain text files as follows</p>
 
-    <li style="margin-left: 0.9cm; margin-bottom: 0cm"><strong>.txt2</strong> files are files in ISO-8859-2, that covers most <strong>Central and Eastern Europe</strong> languages)</li>
+	<ul>
+		<li><code>.txt</code> files are automatically (<strong>&lt;auto&gt;</strong>) interpreted by OmegaT as being encoded in the computer's default encoding.</li>
+		<li><code>.txt1</code> files are files in ISO-8859-1, covering most <strong>Western Europe</strong> languages.</li>
+		<li><code>.txt2</code> files are files in ISO-8859-2, that covers most <strong>Central and Eastern Europe</strong> languages)</li>
+		<li><code>.utf8</code> files are interpreted by OmegaT as being encoded in UTF-8 (an encoding that covers almost <strong>all</strong> languages in the world).</li>
+	</ul>
 
-    <li style="margin-left: 0.9cm; margin-bottom: 0cm"><strong>.utf8</strong> files are interpreted by OmegaT as being encoded in UTF-8 (an encoding that covers almost <strong>all</strong> languages
-    in the world).</li>
-  </ul>
+	<p>You can check that yourself by selecting the item <strong>File Filters</strong> in the menu <strong>Options</strong>.</p>
 
-  <p style="margin-left: 0.9cm">You can check that yourself by selecting the item <strong>File Filters</strong> in the menu <strong>Options</strong>. Click on the <strong>Text Files</strong> row and
-  then on the <strong>Edit</strong> button.:The <strong>.txt1</strong>, <strong>.txt2</strong>, and <strong>.utf8</strong> convention is internal, OmegaT solution - OmegaT just keeps a short list
-  ready to make it easier for you to deal with some <strong>foreign</strong> files. So, for example, when you have a Czech file (very probably written in the <strong>ISO-8859-2</strong> code) you
-  just need to change the extension to <strong>txt2</strong> and OmegaT will interpret its Contents correctly.</p>
-  <hr>
+	<p>OmegaT just keeps this short list ready to make it easier for you to deal with some plain text files.</p>
+	
+	<p>For example, when you have a Czech text file (very probably written in the <strong>ISO-8859-2</strong> code) you just need to change the extension <code>.txt</code> to <code>.txt2</code> and OmegaT will interpret its contents correctly.</p>
 
-  <p><a href="legalNotices.html">Legal notices</a></p>
+	<hr>
+
+	<p><a href="legalNotices.html">Legal notices</a></p>
 </body>
 </html>

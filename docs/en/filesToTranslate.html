@@ -1,88 +1,164 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-
 <html>
 <head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
-
-  <title>Files to Translate - OmegaT 1.7.3 User Manual</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>Files to Translate - OmegaT 1.7.3 User Manual</title>
 </head>
 <body>
 
-  <h1>Files to translate</h1>
+	<h1>Files to translate</h1>
 
-  <h2>Contents</h2>
+	<ul>
+		<li><a href="#bidi">Right-to left languages</a>
+			<ul>
+				<li><a href="#bidi_transl">Translation</a></li>
+				<li><a href="#bidi_create">Translated documents creation</a></li>
+			</ul>
+		</li>
+		 <li>
+		    <a href="#formats">File formats</a>
+			<ul>
+				<li><a href="#plaintext">Plain text files</a></li>
+				<li><a href="#tagged">Formatted text files</a></li>
+				<li><a href="#specifics">File formats specifics</a></li>
+				<li><a href="#others">Other file formats</a>
+					<ul>
+						<li><a href="#ooo">OpenOffice.org</a></li>
+						<li><a href="#okapi">Okapi Framework</a></li>
+						<li><a href="#tt">Translate Toolkit</a></li>
+						<li><a href="#po4a">po4a</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
 
-  <ul>
-    <li style="margin-bottom: 0cm"><a href="/filesToTranslate.html#Plain_text_files">Plain text files</a></li>
+	<hr>
 
-    <li style="margin-bottom: 0cm"><a href="/filesToTranslate.html#Formatted_text_files">Formatted text files</a></li>
+	<a name="bidi" id="bidi"></a>
+	<h1>Right to left languages</h1>
+	
+	<a name="bidi_transl" id="bidi_transl"></a>
+	<h2>Translation</h2>
 
-    <li style="margin-bottom: 0cm"><a href="/filesToTranslate.html#File_formats_specifics">File formats specifics</a></li>
+	<p>When translating to bidirectional languages in OmegaT there are two issues to consider: 1) text input and 2) text display. When writing RTL text (e.g. Urdu, Arabic etc.) and using the LTR view, which is the default view, text will not always be displayed in the order in which it was entered. This is not obvious when purely RTL text is being input, and in cases like this the default (LTR) view can be used.</p>
 
-    <li><a href="/filesToTranslate.html#Other_file_formats">Other file formats</a></li>
-  </ul>
+	<p>In many cases however, when the target language is an RTL language, it becomes necessary to embed LTR text. For example, some product names have to remain in English, or place holders have to remain in their original form during the localization of GUI strings.</p>
 
-  <p style="margin-left: 1.03cm; margin-bottom: 0cm">With OmegaT you can translate files in a number of file formats. There are basically two types of file formats, the <strong>plain text</strong>
-  and the <strong>formatted text</strong> formats.</p>
+	<p>When LTR text is embedded in RTL text, it is not displayed in the order in which it was input. For OmegaT to do this, the view is toggled using <code>Ctrl+Shift+O</code>.</p>
+	
+	<p><strong>Note:</strong> The same shortcut can be used on Mac OSX.</p>
+	
+	<p>It is also easier to input RTL text when the view has been toggled to RTL, because in the default view, when RTL text is entered, spaces entered first appear to the right of the input text, and the next RTL character then appears to the left.</p>
 
-  <h3 style="margin-left: 0.05cm">Plain text files</h3>
+	<p>Using <code>Ctrl+Shift+O</code> causes both text input and display in OmegaT to be changed to RTL. It can be used separately for all three panes (Editing, Fuzzy Matches and Glossary).</p>
 
-  <p style="margin-left: 1.03cm; margin-bottom: 0cm">Plain text files contain text only, so their translation is as simple as typing the translation. Currently, OmegaT supports the following plain
-  text formats:</p>
+	<a name="bidi_create" id="bidi_create"></a>
+	<h2>Translated documents creation</h2>
+	
+	<p>When the translated document is created, its display direction will be LTR, like the original document. This must be changed manually. Each output format has specific ways to deal with RTL display, check the relevant application manuals for details.
 
-  <ul>
-    <li style="margin-left: 1.03cm; margin-bottom: 0cm">ASCII text (.txt, etc.)</li>
+	<hr>
+	
+	<a name="formats" id="formats"></a>
+	<h1>File formats</h1>
 
-    <li style="margin-left: 1.03cm; margin-bottom: 0cm">Encoded text</li>
+	<p>With OmegaT you can translate files in a number of file formats. There are basically two types of file formats, the <strong>plain text</strong> and the <strong>formatted text</strong> formats.</p>
 
-    <li style="margin-left: 1.03cm; margin-bottom: 0cm">Java resource bundles (.properties)</li>
+	<a name="plaintext" id="plaintext"></a>
+	<h2>Plain text files</h2>
 
-    <li style="margin-left: 1.03cm; margin-bottom: 0cm">PO files (.po)</li>
+	<p>Plain text files contain text only, so their translation is as simple as typing the translation.</p>
+	
+	<p>There are several <a href="plainText.html">methods</a> to specify the file's encoding so that its contents is not garbled when opened in OmegaT.</p>
 
-    <li style="margin-left: 1.03cm; margin-bottom: 0cm">INI (key=value) files (.ini)</li>
-  </ul>
+	<p>Such files are not considered as containing more format than "white space" for indentation/alignment purposes. They are usually modified in text editors and it is generally not possible to have such format retain font/color/margin etc information.</p>
 
-  <p style="margin-left: 1.00cm">Such files are not considered as containing more format than "white space" for indentation/alignment purposes. They are usually modified in text editors and it is
-  generally not possible to have such format retain font/color/margin etc information.</p>
+	<p>Currently, OmegaT supports the following plain text formats:</p>
 
-  <h3 style="margin-left: 0.11cm">Formatted text files</h3>
+	<ul>
+		<li>ASCII text (.txt, etc.)</li>
+		<li>Encoded text</li>
+		<li>Java resource bundles (.properties)</li>
+		<li>PO files (.po)</li>
+		<li>INI (key=value) files (.ini)</li>
+	</ul>
 
-  <p style="margin-left: 1.00cm">Formatted text files contain text as well as information such as font type, size, color etc. They are commonly created in word processors or home page editors.
-  Currently, OmegaT support the following formatted text formats:</p>
+	<p>Other plain text file types can be handled by OmegaT by <a href="fileFilters.html">associating</a> their file extension to a supported file type (for example, <code>.pod</code> files could be associated to the ASCII text filter) and by pre-processing them with specific <a href="segmentation.html">segmentation</a> rules.</p>
 
-  <ul>
-    <li style="margin-left: 1.00cm">OpenOffice.org</li>
 
-    <li style="margin-left: 1.00cm">OpenDocument</li>
+	<a name="tagged" id="tagged"></a>
+	<h2>Formatted text files</h2>
 
-    <li style="margin-left: 1.00cm">Microsoft Open XML</li>
+	<p>Formatted text files contain text as well as information such as font type, size, color etc. They are commonly created in word processors or home page editors.</p>
+	
+	<p>Such file formats are conceived so that they retain formatting information. Such formatting information can be as simple as <strong>this is bold</strong> or as complex as table data with different font size, color, position etc.</p>
+	
+	<p>In most translation jobs it is considered important to have the translated document look similar to the original. OmegaT allows you to do this by marking the characters/words that have a special formatting with easy to manipulate <a href="formattedText.html">tags</a>.</p>
+	
+	<p>Simplifying the original text formating greatly contributes to reducing the number of tags. Unifying used fonts, font sizes, colors etc should be considered if possible, to simplify the translation and reduce the number of possible <a href="userInterface.html#tags">tag errors</a>.</p>
 
-    <li style="margin-left: 1.00cm">(X)HTML</li>
+	<p>Currently, OmegaT support the following formatted text formats:</p>
 
-    <li style="margin-left: 1.00cm">HTML Help Compiler (HCC)</li>
+	<ul>
+		<li>OpenOffice.org</li>
+		<li>OpenDocument</li>
+		<li>Microsoft Open XML</li>
+		<li>(X)HTML</li>
+		<li>HTML Help Compiler</li>
+		<li>DocBook</li>
+		<li>Okapi monolingual XLIFF</li>
+	</ul>
 
-    <li style="margin-left: 1.00cm">DocBook</li>
+	<p>Other formatted text file types can be handled by OmegaT by <a href="fileFilters.html">associating</a> their file extension to a supported file type and by pre-processing them with specific <a href="segmentation.html">segmentation</a> rules.</p>
 
-    <li style="margin-left: 1.00cm">Okapi monolingual XLIFF</li>
-  </ul>
+	
+	<a name="specifics" id="specifics"></a>
+	<h2>File format specifics</h2>
 
-  <p style="margin-left: 1.00cm">Such file formats are conceived so that they retain formatting information. Such formatting information can be as simple as <strong>this is bold</strong> or as
-  complex as table data with different font size, color, position etc. In most translation jobs it is considered important to have the translated document look similar to the original. OmegaT allows
-  you to do this by marking the characters/words that have a special formatting with easy to manipulate tags. Simplifying the original text formating greatly contributes to reducing the number of
-  tags. Unifying used fonts, font sizes, colors etc should be considered if possible, to simplify the translation and reduce the number of possible tag errors.</p>
+	<p>Each file type is handled differently in OmegaT. Specific behaviour can be setup in the <a href="fileFilters.html">file filters</a>.
+	
+	<a name="others" id="others"></a>
+	<h2>Other file formats</h2>
 
-  <h3 style="margin-left: 0.08cm">File formats specifics</h3>
+	<p>Other plain text or formatted text file formats may be accessible in OmegaT.</p>
+	
+	<p>External tools can be used to convert non supported files files to supported formats. The translated file will need to be converted back to the original format. This way, a number of plain text formats (including LaTex etc) can be translated in OmegaT through conversion to the PO format. Similarly, a number of formatted text formats (including Microsoft Office files) can be translated in OmegaT through conversion to the Open Document format.</p>
+	
+	<p>The quality of the translated file will depend on the quality of the round-trip conversion. Make sure you have tested all your options before proceeding with such conversions.</p>
+	
+	<p>Available free conversion tools include:</p>
+	
+	<a name="ooo" id="ooo"></a>
+	<h3>OpenOffice.org</h3>
 
-  <p style="margin-left: 1.00cm">Most of the above file formats are subject to specific handling. Refer to <a href="fileFormats.html">Supported file formats</a> and <a href="fileFilters.html">File
-  filters</a> for specific information related to the handling of all the above file formats.</p>
+	<p>OmegaT does not offer direct support for Microsoft Office formats Word, Excel and PowerPoint. However, OpenOffice.org (and variants) can be used to convert such formats to OpenDocument, that OmegaT natively supports.</p>
+	
+	<p><a href="http://www.openoffice.org/">OpenOffice.org official page</a></p>
 
-  <h3 style="margin-left: 0.08cm">Other file formats</h3>
+	<a name="okapi" id="okapi"></a>
+	<h3>Okapi Framework</h3>
 
-  <p style="margin-left: 1.00cm">Other plain text or formatted text file formats may be accessible in OmegaT .Roughly speaking, a number of plain text formats (including LaTex etc) can be translated
-  in OmegaT through conversion to the PO format. Similarly, a number of formatted text formats (including Microsoft Office files) can be translated in OmegaT through conversion to the Open Document
-  format. For more information, refer to <a href="fileFormats.html">Supported file formats</a>.</p>
-  <hr>
+	<p>The Text Extraction Utility from the Okapi Framework has an option for creating an OmegaT project folder tree. It is also possible to create an OmegaT specific XLIFF file. Okapi has recently released tools that run under Mono, a free platform available on most operating systems.</p>
 
-  <p><a href="legalNotices.html">Legal notices</a></p>
+	<p><a href="http://okapi.sourceforge.net/Release/Tikal/ReadMe_ForMono.htm">Okapi for Mono release page</a>, <a href="http://okapi.sourceforge.net/Release/Shared/Help/tutorial_02.htm">tutorial</a></p>
+
+	<a name="tt" id="tt"></a>
+	<h3>Translate Toolkit</h3>
+	
+	<p>The Translate Toolkit, a python tool set, provides users with a number of converters to and from Portable Object, including Mozilla .properties and dtd files, CSV files, Qt .ts files, XLIFF files. It includes a number of tools to manipulate such files before or after their translation in OmegaT.</p>
+
+	<p><a href="http://translate.sourceforge.net/wiki/toolkit/index">Translate Toolkit official page</a></p>
+
+	<a name="po4a" id="po4a"></a>
+	<h3>po4a</h3>
+
+	<p>po4a is a Debian perl tool. It can convert files formats such as LaTeX, TeX, POD etc to and from Portable Object.</p>
+
+	<p><a href="http://po4a.alioth.debian.org/">po4a official page</a></p>
+	
+	<hr>
+
+	<p><a href="legalNotices.html">Legal notices</a></p>
 </body>
 </html>

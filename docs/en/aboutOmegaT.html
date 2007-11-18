@@ -1,50 +1,51 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-
 <html>
 <head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
-
-  <title>About OmegaT - OmegaT 1.7.3 User Manual</title>
-  <style type="text/css">
-  <!--
-  p.indent {margin-left: 1.0cm}
-  -->
-  </style>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>About OmegaT - OmegaT 1.7.3 User Manual</title>
 </head>
 <body>
-  <h1>About OmegaT</h1>
 
-  <p>OmegaT is a free multiplatform Computer Aided Translation tool.</p>
+	<h1>About OmegaT</h1>
 
-  <h3>Translation memory</h3>
+	<ul>
+		<li><a href="#tm">Translation memory</a></li>
+		<li><a href="#glossary">Terminology management</a></li>
+		<li><a href="#process">Translation process</a></li>
+	</ul>
+	
+	<p>OmegaT is a free multiplatform Computer Aided Translation tool.</p>
 
-  <p class="indent">OmegaT memorizes your translations in a translation memory and can at the same time use memories from previous translations for reference.</p>
+<hr>
 
-  <p class="indent">Translation memories can be very useful for a translation with a number of repetitions or reasonably similar segments of text. OmegaT uses translation memories to remember your
-  previous translations and suggest to you the most probable translations for the text you are working on.</p>
+	<a name="tm" id="tm"></a>
+	<h2>Translation memory</h2>
 
-  <p class="indent">The translation memories can be very useful when a document, that's been already translated, needs to be updated. Unchanged sentences will remain as translated, and updated
-  sentences will be shown with an older version of the same sentence as the most probable translation. Modifications to the original document will thus be handled with greater ease.</p>
+	<p>OmegaT memorizes your translations in a translation memory and can at the same time use memories from previous translations for reference.</p>
 
-  <p class="indent">If you are using previously created translation memories, for example given to you by translation agency or your client, OmegaT will be able to use them as a reference
-  memories.</p>
+	<p>Translation memories can be very useful for a translation with a number of repetitions or reasonably similar segments of text. OmegaT uses translation memories to remember your previous translations and suggest to you the most probable translations for the text you are working on.</p>
 
-  <h3>Terminology management</h3>
+	<p>The translation memories can be very useful when a document, that's been already translated, needs to be updated. Unchanged sentences will remain as translated, and updated sentences will be shown with an older version of the same sentence as the most probable translation. Modifications to the original document will thus be handled with greater ease.</p>
 
-  <p class="indent">Terminology management is important for translation consistency. OmegaT uses glossaries that contain translations of single words or small phrases, a sort of simplified bilingual
-  dictionary for a specific domain. OmegaT displays the translation of those words that happen to be present in the current segment for your reference.</p>
+	<p>If you are using previously created translation memories, for example given to you by translation agency or your client, OmegaT will be able to use them as a reference memories.</p>
 
-  <h3>Translation process</h3>
+	<a name="glossary" id="glossary"></a>
+	<h2>Terminology management</h2>
 
-  <p class="indent">Think of having to translate anything from a single file to a directory full of files organized with subdirectories. The files come in a variety of formats. When you let OmegaT
-  know that you need to translate those files it will look for the included <a href="fileFormats.html">files it supports</a>, according to <a href="fileFilters.html">file filtering rules</a>,
-  recognize the text parts in them, split the biggest text groups according to <a href="segmentation.html">segmentation rules</a>, and display the segments one by one so that you can proceed with the
-  translation.</p>
+	<p>Terminology management is important for translation consistency. OmegaT uses glossaries that contain translations of single words or small phrases, a sort of simplified bilingual dictionary for a specific domain. OmegaT displays the translation of those words that happen to be present in the current segment for your reference.</p>
 
-  <p class="indent">If you want to see how the files would look once translated, you can <a href="userInterface.html">create the translated files</a>, open them in the appropriate application and see
-  what your translation looks like.</p>
-  <hr>
+	<a name="process" id="process"></a>
+	<h2>Translation process</h2>
 
-  <p><a href="legalNotices.html">Legal notices</a></p>
+	<p>Think of having to translate anything from a single file to a directory full of files organized with subdirectories. The files come in a variety of formats.</p>
+	
+	<p>When you let OmegaT know that you need to translate those files it will look for the included <a href="filesAndDirectories.html">files it supports</a>, according to <a href="fileFilters.html">file filtering rules</a>, recognize the text parts in them, split the biggest text groups according to <a href="segmentation.html">segmentation rules</a>, and display the segments one by one so that you can proceed with the translation.</p>
+
+	<p>OmegaT will memorize your translations and will propose you translation candidates for segments similar to those recorded in memory.</p>
+
+	<p>If you want to see how the files would look once translated, you can <a href="userInterface.html">create the translated files</a>, open them in the appropriate application and see what your translation looks like.</p>
+	<hr>
+
+	<p><a href="legalNotices.html">Legal notices</a></p>
 </body>
 </html>

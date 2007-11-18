@@ -1,0 +1,233 @@
+<html>
+<head>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>Files and directories - OmegaT 1.7.3 User Manual</title>
+</head>
+<body>
+
+	<h1>OmegaT Files and Directories</h1>
+
+	<ul>
+		<li><a href="#project">Translation project files</a>
+			<ul>
+				<li><a href="#project_location">Project files location</a></li>
+				<li><a href="#project_list">Project files list</a></li>
+			</ul>
+		</li>
+		<li><a href="#user">User files</a>
+			<ul>
+				<li><a href="#user_location">User files location</a></li>
+				<li><a href="#user_list">User files list</a></li>
+			</ul>
+		</li>
+		<li><a href="#application">Application files</a>
+			<ul>
+				<li><a href="#application_list">Application files list</a></li>
+			</ul>
+		</li>
+	</ul>
+
+	<p>OmegaT works with three types of files.</p>
+
+	<dl>
+		<dt>Translation project files</dt><dd>They constitute a translation project. Loosing them may affect the project's integrity and your ability to complete a job. Project files are the most important files in OmegaT. They are the files you will deal with on a daily basis while translating.</dd>
+		<dt>User setting files</dt><dd>They are created when OmegaT's behavior is modified by user accessible preference settings. Loosing them will usually result in having OmegaT work with "factory" settings. This can sometimes cause a little trouble when you are in the middle of a translation.</dd>
+		<dt>Application files</dt><dd>They are included in the package you download, most of them are necessary to have OmegaT function properly. If for some reason such files are lost, just download and/or reinstall OmegaT to restore them all.</dd>
+	</dl>
+
+<hr>
+
+	<a name="project"></a>
+	<h1>Translation project files</h1>
+
+	<p>An OmegaT translation project is comprised of a number of files and directories.</p>
+
+	<a name="project_location"></a>
+	<h2>Translation project files location</h2>
+
+	<p>When you create a translation project, OmegaT automatically creates a list of directories that will later serve as files repositories, as well as a number of files that will be used to set some project preferences and to keep the project translation emory.</p>
+
+	<p>By default, a translation project directories are all grouped under the main project directory. Alternate locations for the directories can be chosen at project creation or during the translation. This way it is possible to select existing directories or create directories in locations that reflect your workflow habits.</p>
+
+	<p>To change the location of directories after a project has been <a href="instantStartGuide.html#create">created</a> open <strong>Project → Properties...</strong> and do the necessary <a href="projectProperties.html">modifications</a>.</p>
+
+	<a name="project_list"></a>
+	<h2>Translation project files list</h2>
+
+	<p>From a file browser, a translation project looks like just any other directory. From OmegaT dialogs, a translation project looks like a file with an OmegaT icon associated to it. OmegaT does not need to enter the hierarchy of the project to open it. Selecting the item with the OmegaT icon is enough.
+
+	<p>A translation project created with the default settings will have the following structure:</p>
+
+	<dl>
+		<dt>/project_name/</dt>
+		<dd>
+			<dl>
+				<dt>/omegat/</dt>
+				<dd>
+					<dl>
+						<dt>project_save.tmx (<a href="translationMemories.html">...</a>)</dt>
+						<dd>This TMX file is created when the project is saved for the first time. This serves as the working translation memory for the project. With the autosave function implemented, it will be automatically updated when you quit. It is the translation memory used to create the translated files.</dd>
+						<dt>project_save.tmx.YEARMMDDHHNN.bak (<a href="translationMemories.html#TMX_backup">...</a>)</dt>
+						<dd>A number of TMX files following this pattern will be here. They serve as a backup of <strong>project_save.tmx</strong> and are updated each time you reopen a project to reflect the contents of <strong>project_save.tmx</strong>, before any possible change has modified this file.</dd>
+						<dt>project_stats.txt (<a href="userInterface.html#files">...</a>)</dt>
+						<dd>This text file can be opened in a spreadsheet application to display segment and word count information. The information it contains is more detailed that what is displayed in the Project Files window.</dd>
+					</dl>
+				</dd>
+				<dt>/source/</dt>
+				<dd><a href="filesToTranslate.html">Files</a> to be included into the project for translation. It is possible to put directories including files or other directories here.</dd>
+				<dt>/target/</dt>
+				<dd>When <strong>Project → Create Translated Documents</strong> is selected while a project is opened, all the files in <strong>/source/</strong>, translated or not, will be reproduced here with the same directory hierarchy to reflect the current state of the translation. Practically speaking, OmegaT merges the translation information saved in <strong>/omegat/project_save.tmx</strong> with the source documents to produce the <strong>/target/</strong> contents.</dd>
+				<dt>/tm/</dt>
+				<dd>Any external <a href="translationMemories.html">translation memories</a> to be used are placed in this directory before loading a project.</dd>
+				<dt>/glossary/</dt>
+				<dd>Contains <a href="glossaries.html">glossary files</a> to be used, if any. The user must place glossary files in this directory before opening a project.</dd>
+				<dt>omegat.project</dt>
+				<dd>OmegaT automatically creates this file when the project is created. It contains the <a href="projectProperties.html">project parameters</a>. The parameters included in this file can be modified from the Project properties window.</dd>
+				<dt>project_name-omegat.tmx (<a href="translationMemories.html#TMX_files_location_and_purpose">...</a>)<br>
+				project_name-level1.tmx<br>
+				project_name-level2.tmx</dt>
+				<dd>These files contain the source and target segments corresponding to the contents of the /source/ folder at the time of their creation (usually when the translated files have been created).</dd>
+			</dl>
+		</dd>
+	</dl>
+
+<hr>
+
+	<a name="user"></a>
+	<h1>User files</h1>
+
+	<a name="user_location"></a>
+	<h2>User files location</h2>
+
+	<p>Starting with OmegaT 1.6, user files are stored in a separate location where they can be accessed by any version of OmegaT. The location depends on the platform you use:</p>
+
+	<dl>
+		<dt>On Windows:</dt>
+		<dd><strong>C:\Documentation and Settings\&lt;User Name&gt;\Application Data\OmegaT</strong>. The bit before &lt;User Name&gt; might be different on some systems, but usually it's there. The entire application data path is retrieved through the environment variable %APPDATA%.</dd>
+		<dt>On Linux/Solaris/FreeBSD:</dt>
+		<dd><strong>&lt;User Home&gt;/.omegat</strong> (.omegat is a directory, the dot preceding its name makes it invisible unless you type <code>ls -a</code> or an equivalent command.)</dd>
+		<dt>On MacOSX:</dt>
+		<dd><strong>&lt;User Home&gt;/Library/Preferences/OmegaT</strong></dd>
+	</dl>
+
+
+	<a name="user_list"></a>
+	<h2>User files list</h2>
+
+	<p>User files are:</p>
+
+	<dl>
+		<dt>log.txt</dt>
+		<dd>This file records Java error messages while OmegaT is running. When you think OmegaT is behaving erratically it is important to include this file or the relevant part in any <a href="website.html">trouble report</a>.</dd>
+		<dt>omegat.prefs</dt>
+		<dd>This file is an xml file. It includes all the GUI accessible option settings, as well as window position data.</dd>
+		<dt>filters.conf</dt>
+		<dd>This file is an xml file. It includes all the data set by the <a href="fileFilters.html">file filters</a> preferences.</dd>
+		<dt>segmentation.conf</dt>
+		<dd>This file is an xml file. It includes all the data set by the <a href="segmentation.html">sentence segmentation</a> preferences.</dd>
+	</dl>
+
+<hr>
+
+	<a name="applications"></a>
+	<h1>Application files</h1>
+
+	<p>OmegaT comes as a package you can download from SourceForge. In this chapter we will consider the <a href="installingAndRunning.html#Other_systems">platform independent package</a> that contains the application in a standard Java form. Other packages include a Linux <code>.tar</code> package, a Windows installer -with or without a Java Runtime Environment, a MacOSX installer and a source code package for developers.</p>
+	
+	<p>This platform independent package can be used on <strong>any</strong> platform with a running Java 1.4.2 runtime environment, including the platforms for which there is a specific package.</p>
+
+	<p>The platform independent package comes as a compressed file that you need to decompress in the directory of your choice for install. Decompression is usually done by double clicking on the downloaded package. Once decompressed, a directory containing OmegaT related files will be created:</p>
+
+	<dl>
+		<dt>Downloaded file:</dt>
+		<dd>OmegaT_1.7.3_Without_JRE.zip</dd>
+		<dt>Decompressed directory:</dt>
+		<dd>/OmegaT_1.7.3_Without_JRE/</dd>
+	</dl>
+
+	<a name="application_list"></a>
+	<h2>Application files list</h2>
+
+	<p>The OmegaT directory will contain the following files:</p>
+
+	<dl>
+		<dt>/OmegaT_1.7.3_Without_JRE/</dt>
+		<dd>
+			<dl>
+				<dt>/docs/</dt>
+				<dd>All the user manual files are in this directory. You can open them in an internet browser to have access to external links.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>/images/</dt>
+				<dd>Icons and logo graphics are included here.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>/lib/</dt>
+				<dd>Java files are included here. They are necessary to the well functioning of OmegaT.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>join.html</dt>
+				<dd>This is a normal html file that once opened in your internet browser will redirect you to the OmegaT user group hosted on Yahoo Groups. Joining is not necessary but will give you access to some extra services like access to some files and irregular polls, besides for being able to join in OmegaT related discussions. The group archives are public and consultation does not require subscription to the group.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>changes.txt</dt>
+				<dd>A relatively detailed list of modifications between this version and the preceding versions.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>license.txt</dt>
+				<dd>The GNU GENERAL PUBLIC LICENSE. This license allows you to do certain things with OmegaT, including modifying and distributing it. If you are interested in modifying or distributing OmegaT, take a good look at this document and make sure you are aware of all its implications before doing anything. In case you are in doubt, don't hesitate to ask project members directly either by sending them a mail from the Source Forge page or by sending a public mail to the user group.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>doc-license.txt</dt>
+				<dd>The GNU GENERAL PUBLIC LICENSE. This license covers the documentation. See above.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>readme.txt</dt>
+				<dd>This file is very important and you should make sure you read it before starting OmegaT. It includes general information about OmegaT, where to find more information, how to contribute etc. It is translated to a number of languages.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>OmegaT</dt>
+				<dd>This is a normal text file that contains two lines:<br>
+				<code>#!/bin/bash</code><br>
+				<code>java -jar OmegaT.jar $*</code><br>
+				You may find this file useful if you make it executable (<code>chmod +x OmegaT</code>) from the <a href="installingAndRunning.html#command_line">command line</a> after making sure you are in the <code>/OmegaT_1.7.3/</code> directory. From now on you'll be able to start OmegaT by calling this file from the command line.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>OmegaT.bat</dt>
+				<dd>This is a normal text file that contains only one line:<br>
+				<code>java -jar OmegaT.jar %*</code><br>
+				It is used to launch OmegaT from the Windows <a href="installingAndRunning.html#command_line">command line</a>.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>OmegaT.jar</dt>
+				<dd>This file is the main application. To launch OmegaT you have to either call this file from the command line or launch it from your file manager (usually by double-clicking it).</dd>
+			</dl>
+		</dd>
+	</dl>
+
+<hr>
+
+	<p><a href="legalNotices.html">Legal notices</a></p>
+</body>
+</html>

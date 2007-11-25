@@ -1,5 +1,0 @@
-Manifest-Version: 1.0
-OmegaT-Plugin: true
-
-Name: org.omegat.filters2.xml.edge.NBEdgeFilter
-OmegaT-Filter: true

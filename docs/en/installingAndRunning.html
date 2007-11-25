@@ -11,52 +11,52 @@
 	<ul>
 		<li><a href="#Linux_users">Linux (Intel) users</a>
 			<ul>
-				<li><a href="#">Package to download</a></li>
-				<li><a href="#">Installation</a></li>
-				<li><a href="#">OS menu setup</a>
+				<li><a href="#linux_which">Package to download</a></li>
+				<li><a href="#linux_install">Installation</a></li>
+				<li><a href="#linux_menu">OS menu setup</a>
 					<ul>
-						<li><a href="#">in KDE</a></li>
-						<li><a href="#">in GNOME</a></li>
+						<li><a href="#menu_kde">in KDE</a></li>
+						<li><a href="#menu_gnome">in GNOME</a></li>
 					</ul>
 				</li>
-				<li><a href="#">Running OmegaT</a></li>
+				<li><a href="#linux_running">Running OmegaT</a></li>
 			</ul>
 		</li>
 		<li><a href="#Windows_users">Windows users</a>
 			<ul>
-				<li><a href="#">Package to download</a></li>
-				<li><a href="#">Installation</a></li>
-				<li><a href="#">Windows menu setup</a></li>
-				<li><a href="#">Running OmegaT</a></li>
+				<li><a href="#windows_which">Package to download</a></li>
+				<li><a href="#windows_install">Installation</a></li>
+				<li><a href="#windows_menu">Windows menu setup</a></li>
+				<li><a href="#windows_running">Running OmegaT</a></li>
 			</ul>
 		</li>
 		<li><a href="#MacOSX_users">MacOSX users</a>
 			<ul>
-				<li><a href="#">Package to download</a></li>
-				<li><a href="#">Installation</a></li>
-				<li><a href="#">Dock setup</a></li>
-				<li><a href="#">Running OmegaT</a></li>
+				<li><a href="#osx_which">Package to download</a></li>
+				<li><a href="#osx_install">Installation</a></li>
+				<li><a href="#osx_dock">Dock setup</a></li>
+				<li><a href="#osx_running">Running OmegaT</a></li>
 			</ul>
 		</li>
 		<li><a href="#Other_systems">Other systems (Solaris SPARC/x86/x64, Linux x64/PowerPC, Windows x64)</a>
 			<ul>
-				<li><a href="#">Package to download</a></li>
-				<li><a href="#">Installation</a></li>
-				<li><a href="#">OS menu setup</a></li>
-				<li><a href="#">Running OmegaT</a></li>
+				<li><a href="#other_which">Package to download</a></li>
+				<li><a href="#other_install">Installation</a></li>
+				<li><a href="#other_menu">OS menu setup</a></li>
+				<li><a href="#other_running">Running OmegaT</a></li>
 			</ul>
 		</li>
-		<li><a href="#Command_line">Command line launching</a>
+		<li><a href="#command_line">Command line launching</a>
 			<ul>
-				<li><a href="#">Opening a command-line window</a></li>
-				<li><a href="#">Changing the launch script</a></li>
-				<li><a href="#">Launch command arguments</a></li>
+				<li><a href="#terminal">Opening a command-line window</a></li>
+				<li><a href="#script">Changing the launch script</a></li>
+				<li><a href="#arguments">Launch command arguments</a></li>
 			</ul>
 		</li>
 		<li><a href="#source_build">Building OmegaT from source</a>
 			<ul>
-				<li><a href="#">Package to download</a></li>
-				<li><a href="#">Build process</a></li>
+				<li><a href="#build_which">Package to download</a></li>
+				<li><a href="#ant">Build process</a></li>
 			</ul>
 		</li>
 	</ul>
@@ -206,12 +206,11 @@
 
 	<p>Follow the installation instructions of the package you need.</p>
 
-	<a name="others_install" id="others_install"></a>
+	<a name="other_install" id="other_install"></a>
 	<h2>OmegaT installation</h2>
 
 	<p>To install OmegaT, simply unpack the <strong><code>OmegaT_1.7.3_Without_JRE.zip</code></strong> file. This creates an <code>./OmegaT_1.7.3_Without_JRE/</code> directory in the working directory in which you will find all the files necessary to run OmegaT.</p>
 
-	<a name="other_install" id="other_install"></a>
 	<h2>Installing convenient shortcuts</h2>
 
 	<p>Follow your system's instructions to install OmegaT shortcuts in convenient places.</p>
@@ -230,6 +229,7 @@
 	
 	<p>Users of the Mac OSX package who want to control OmegaT from the command line are advised to use the package available for "Other systems". See above.
 
+	<a name="terminal" id="terminal"></a>
 	<h2>Method 1: opening a command-line window</h2>
 
 	<p>A command-line window is also referred to as a "terminal window". On Windows it is called an "MS-DOS window" and is available from the Start Menu, inside Programs, through the "MS-DOS" item. The Mac OSX equivalent is the application Terminal located in Applications → Utilities.</p>
@@ -295,7 +295,6 @@
 	<p><code>java -Dswing.aatext=true -Duser.language=pt -Duser.country=BR -Xmx1024M -jar OmegaT.jar</code></p>
 
 	<hr>
-
 
 	<a name="build" id="build"></a>
 	<h1>Building OmegaT from source</h1>

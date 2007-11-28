@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
+ Copyright (C) 2007 Zoltan Bartko, Alex Buloichik
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -42,6 +42,9 @@ import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.util.ArrayList;
+import org.dts.spell.dictionary.OpenOfficeSpellDictionary;
+import org.dts.spell.dictionary.SpellDictionary;
+
 import org.omegat.core.threads.CommandThread;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -52,6 +55,7 @@ import org.omegat.util.Preferences;
 /**
  * The singleton spell checker class. Use getInstance() to retrieve the instance.
  * @author Zoltan Bartko (bartkozoltan at bartkozoltan dot com)
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SpellChecker {
     
@@ -64,6 +68,8 @@ public class SpellChecker {
      * The spell checking interface
      */
     private Hunspell hunspell;
+    
+    private org.dts.spell.SpellChecker jmyspell;
     
     /** the list of ignored words */
     private ArrayList ignoreList = new ArrayList();
@@ -107,7 +113,13 @@ public class SpellChecker {
             + File.separator
             + mapLibraryName(OConsts.SPELLCHECKER_LIBRARY_NAME);
         
-        hunspell = (Hunspell) Native.loadLibrary(libraryPath, Hunspell.class);
+        try {
+            hunspell = (Hunspell) Native.loadLibrary(libraryPath, Hunspell.class);
+        } catch (Exception ex) {
+            Log.log("Error loading hunspell: "+ex.getMessage());
+        } catch (Error err) {
+            Log.log("Error loading hunspell: "+err.getMessage());
+        }
     }
     
     /**
@@ -132,10 +144,19 @@ public class SpellChecker {
             String dictionaryName = dictionaryDir + File.separator + language +
                     OConsts.SC_DICTIONARY_EXTENSION;
 
-            pHunspell = hunspell.Hunspell_create(affixName, dictionaryName);
-            
-            encoding = hunspell.Hunspell_get_dic_encoding(pHunspell);
-            
+            if (hunspell != null) {
+                pHunspell = hunspell.Hunspell_create(affixName, dictionaryName);
+                encoding = hunspell.Hunspell_get_dic_encoding(pHunspell);
+            } else {
+                try {
+                    SpellDictionary dict = new OpenOfficeSpellDictionary(new File(dictionaryName), new File(affixName), false);
+                    jmyspell = new org.dts.spell.SpellChecker(dict);
+                    jmyspell.setCaseSensitive(false);
+                } catch (Exception ex) {
+                    Log.log("Error loading jmyspell: " + ex.getMessage());
+                    return;
+                }
+            }            
             // find out the internal project directory
             String projectDir = 
                     CommandThread.core.getProjectProperties().getProjectInternal();
@@ -151,14 +172,15 @@ public class SpellChecker {
             learnedFileName = projectDir + OConsts.LEARNED_WORD_LIST_FILE_NAME;
 
             fillWordList(learnedFileName, learnedList);
-            try {
-                // load the learned words into the spell checker
-                for (int i = 0; i < learnedList.size(); i++) {
-                    hunspell.Hunspell_put_word(pHunspell, 
-                            prepareString((String) learnedList.get(i)));
+            if (hunspell != null) {
+                try {
+                    // load the learned words into the spell checker
+                    for (int i = 0; i < learnedList.size(); i++) {
+                        hunspell.Hunspell_put_word(pHunspell, prepareString((String) learnedList.get(i)));
+                    }
+                } catch (UnsupportedEncodingException ex) {
+                    Log.log("Unsupported encoding " + encoding);
                 }
-            } catch (UnsupportedEncodingException ex) {
-                Log.logRB("Unsupported encoding " + encoding);
             }
         }
     }
@@ -176,6 +198,10 @@ public class SpellChecker {
             
             pHunspell = null;
         }
+        if (jmyspell != null) {
+            jmyspell = null;
+        }
+
     }
     
     /**
@@ -239,15 +265,19 @@ public class SpellChecker {
         // if it is valid (learned), it is ok
         if (learnedList.contains(word) || ignoreList.contains(word))
             return true;
-        try {
-       
-            if (0 != hunspell.Hunspell_spell(pHunspell, prepareString(word)))
-                return true;
-        } catch (UnsupportedEncodingException ex) {
-            Log.log("Unsupported encoding "+encoding);
+        if (hunspell != null) {
+            try {
+                if (0 != hunspell.Hunspell_spell(pHunspell, prepareString(word)))
+                    return true;
+            } catch (UnsupportedEncodingException ex) {
+                Log.log("Unsupported encoding " + encoding);
+            }
+            return false;
+        } else if (jmyspell != null) {
+            return jmyspell.isCorrect(word);
+        } else {
+            return false;
         }
-        
-        return false;
     }
     
     /**
@@ -259,45 +289,49 @@ public class SpellChecker {
         if (isCorrect(word))
             return aList;
         
-        // the pointer to the string reference to be sent
-        PointerByReference strings = new PointerByReference();
-        
-        String[] strings2 = new String[100];
-        
-        // total suggestions
-        int total = 0;
-        try {
-            // try some wrong word
-            total = hunspell.Hunspell_suggest(
-                    pHunspell, strings, prepareString(word));
-        } catch (UnsupportedEncodingException ex) {
-            Log.log("Unsupported encoding "+encoding);
-        }
-        
-        Pointer pointer = strings.getValue();
-        Pointer[] pointerArray = pointer.getPointerArray(0,total);
-        
-        // convert it back
-        Charset charset = Charset.forName(encoding);
-        CharsetDecoder decoder = charset.newDecoder();
-        
-        for (int i = 0; i < total; i++) {
+        if (hunspell!=null) {        
+            // the pointer to the string reference to be sent
+            PointerByReference strings = new PointerByReference();
+
+            String[] strings2 = new String[100];
+
+            // total suggestions
+            int total = 0;
             try {
-                // get the string
-                int bufferCursor = 0;
-                byte[] buffer = new byte[100];
-                byte current;
-                while (bufferCursor < 100 && 
-                        (current = pointerArray[i].getByte(bufferCursor)) != 0) {
-                    buffer[bufferCursor]=current;
-                    bufferCursor++;
-                }
-                
-                CharBuffer cbuf = decoder.decode(ByteBuffer.wrap(buffer));
-                aList.add(cbuf.toString().trim());
-            } catch (CharacterCodingException ex) {
+                // try some wrong word
+                total = hunspell.Hunspell_suggest(
+                        pHunspell, strings, prepareString(word));
+            } catch (UnsupportedEncodingException ex) {
                 Log.log("Unsupported encoding "+encoding);
             }
+
+            Pointer pointer = strings.getValue();
+            Pointer[] pointerArray = pointer.getPointerArray(0,total);
+
+            // convert it back
+            Charset charset = Charset.forName(encoding);
+            CharsetDecoder decoder = charset.newDecoder();
+
+            for (int i = 0; i < total; i++) {
+                try {
+                    // get the string
+                    int bufferCursor = 0;
+                    byte[] buffer = new byte[100];
+                    byte current;
+                    while (bufferCursor < 100 && 
+                            (current = pointerArray[i].getByte(bufferCursor)) != 0) {
+                        buffer[bufferCursor]=current;
+                        bufferCursor++;
+                    }
+
+                    CharBuffer cbuf = decoder.decode(ByteBuffer.wrap(buffer));
+                    aList.add(cbuf.toString().trim());
+                } catch (CharacterCodingException ex) {
+                    Log.log("Unsupported encoding "+encoding);
+                }
+            }
+        } else if (jmyspell != null) {
+            aList.addAll(jmyspell.getDictionary().getSuggestions(word, 20));
         }
         
         return aList;
@@ -318,10 +352,12 @@ public class SpellChecker {
     public void learnWord(String word) {
         if (!learnedList.contains(word)) {
             learnedList.add(word);
-            try {
-                hunspell.Hunspell_put_word(pHunspell, prepareString(word));
-            } catch (UnsupportedEncodingException ex) {
-                Log.log("Unsupported encoding "+encoding);
+            if (hunspell != null) {
+                try {
+                    hunspell.Hunspell_put_word(pHunspell, prepareString(word));
+                } catch (UnsupportedEncodingException ex) {
+                    Log.log("Unsupported encoding " + encoding);
+                }            
             }
         }
     }

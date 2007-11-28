@@ -1,0 +1,192 @@
+<html>
+<head>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>Regular Expressions - OmegaT 1.7.3 User Manual</title>
+</head>
+<body>
+
+	<h1>Regular-expression constructs</h1>
+
+	<p>The regular expressions used in searches and segmentation rules are those supported by Java. If you need more specific information, please consult <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+		
+	<p>You can find simple tutorials on the web (<a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>, for example.)</p>
+
+
+	<table border="0" cellpadding="3" cellspacing="0">
+
+		<tr>
+			<td width="40%"><h2>The following construct:</h2></td>
+			<td><h2>Matches the following sequence:</h2></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Flags</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>(?i)</code></td>
+			<td>Enables case-insensitive matching (by default, the pattern is case-sensitive).</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Characters</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>x</strong></td>
+			<td>The character <strong>x</strong>, except the following...</td>
+		</tr>
+		<tr>
+			<td><code>\u</code><strong>hhhh</strong></td>
+			<td>The character with hexadecimal&nbsp;value&nbsp;<code>0x</code><strong>hhhh</strong></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\t</code></td>
+			<td>The tab character (<code>'\u0009'</code>)</td>
+		</tr>
+		<tr>
+			<td><code>\n</code></td>
+			<td>The newline (line feed) character (<code>'\u000A'</code>)</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\r</code></td>
+			<td>The carriage-return character (<code>'\u000D'</code>)</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Quotation</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\</code></td>
+			<td>Nothing, but quotes the following character. This is required if you would like to enter of the meta characters <code>!$()*+.&lt;&gt;?[\]^{|}</code> to match as themselves.</td>
+		</tr>
+		<tr>
+			<td><code>\\</code></td>
+			<td>For example, this is the backslash character</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\Q</code></td>
+			<td>Nothing, but quotes all characters until <code>\E</code></td>
+		</tr>
+		<tr>
+			<td><code>\E</code></td>
+			<td>Nothing, but ends quoting started by <code>\Q</code></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Character classes</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>[abc]</code></td>
+			<td><code>a</code>, <code>b</code>, or <code>c</code> (simple class)</td>
+		</tr>
+		<tr>
+			<td><code>[^abc]</code></td>
+			<td>Any character except <code>a</code>, <code>b</code>, or <code>c</code> (negation)</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>[a-zA-Z]</code></td>
+			<td><code>a</code> through <code>z</code> or <code>A</code> through <code>Z</code>, inclusive (range)</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Predefined character classes</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>.</code></td>
+			<td>Any character (except for line terminators)</td>
+		</tr>
+		<tr>
+			<td><code>\d</code></td>
+			<td>A digit: <code>[0-9]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\D</code></td>
+			<td>A non-digit: <code>[^0-9]</code></td>
+		</tr>
+		<tr>
+			<td><code>\s</code></td>
+			<td>A whitespace character: <code>[ \t\n\x0B\f\r]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\S</code></td>
+			<td>A non-whitespace character: <code>[^\s]</code></td>
+		</tr>
+		<tr>
+			<td><code>\w</code></td>
+			<td>A word character: <code>[a-zA-Z_0-9]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\W</code></td>
+			<td>A non-word character: <code>[^\w]</code></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Boundary matchers</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>^</code></td>
+			<td>The beginning of a line</td>
+		</tr>
+		<tr>
+			<td><code>$</code></td>
+			<td>The end of a line</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\b</code></td>
+			<td>A word boundary</td>
+		</tr>
+		<tr>
+			<td><code>\B</code></td>
+			<td>A non-word boundary</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Greedy quantifiers</h3></td>
+		</tr>
+		<tr>
+			<td colspan="2">These will match as much as they can. For example, <code>a+</code> will match <code>aaa</code> in <code>aaabbb</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>?</code></td>
+			<td><strong>X</strong>, once or not at all</td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>*</code></td>
+			<td><strong>X</strong>, zero or more times</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>+</code></td>
+			<td><strong>X</strong>, one or more times</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Reluctant (non-greedy) quantifiers</h3></td>
+		</tr>
+		<tr>
+			<td colspan="2">These will match as little as they can. For example, <code>a+?</code> will match the first <code>a</code> in <code>aaabbb</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>??</code></td>
+			<td><strong>X</strong>, once or not at all</td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>*?</code></td>
+			<td><strong>X</strong>, zero or more times</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>+?</code></td>
+			<td><strong>X</strong>, one or more times</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Logical operators</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>XY</strong></td>
+			<td><strong>X</strong> followed by <strong>Y</strong></td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>|</code><strong>Y</strong></td>
+			<td>Either <strong>X</strong> or <strong>Y</strong></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>(</code><strong>XY</strong><code>)</code></td>
+			<td><strong>XY</strong> as a single group</td>
+		</tr></table>
+
+	<hr>
+
+	<a href="legalNotices.html">Legal notices</a>
+</body>
+</html>

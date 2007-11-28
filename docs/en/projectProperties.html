@@ -1,80 +1,71 @@
 <html>
 <head>
-   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-   <title>Project Properties - OmegaT 1.6.1 User Manual</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>Project Properties - OmegaT 1.7.3 User Manual</title>
 </head>
 <body>
 
-<h1>Project Properties</h1>
+	<h1>Project properties</h1>
 
-<p>
-This dialog is used to modify the project folders and languages.
-It may be opened by pressing
-<a href="keyboardShortcuts.html" title="OmegaT Keyboard Shortcuts"><code>Ctrl+E</code></a>
-or by calling <strong>Project -> Properties...</strong> from the
-<a href="menu.html" title="Main Menu">main menu</a>.
-</p>
+	<ul>
+		<li><a href="#dialog">Properties dialog</a>
+			<ul>
+				<li><a href="#language">Language modifications</a></li>
+				<li><a href="#segments">Segmentation modifications</a></li>
+				<li><a href="#folder">Folder structure modifications</a></li>
+			</ul>
+		</li>
+		<li><a href="#warning">Modifying project properties during the session</a></li>
+	</ul>
+	
+<hr>
 
-<p>
-The dialog contains:
-</p>
+	<a name="dialog" id="dialog"></a>
+	<h1>Properties dialog</h1>
 
-<ul>
-   <li>Area for setting project source and target languages with drop-down menus</li>
-   <li>Segmentation settings flag</li>
-   <li>Area for setting project folders</li>
-</ul>
+	<p>This dialog is used to modify the project folders and languages. It may be opened by pressing <code><a href= "menu.html#shortcuts">Ctrl+E</a></code> or by calling <strong>Project → Properties...</strong> from the <a href="menu.html">main menu</a>. The dialog contains:</p>
 
-<p>
-All the fields are editable. You can either enter the languages by hand or use the
-drop down menu. You can type names of folders that do not exist yet, and OmegaT will
-create them for you.
-</p>
+	<ul>
+		<li>Area for setting project source and target languages with drop-down menus</li>
+		<li>Segmentation settings flag</li>
+		<li>Area for setting project folders</li>
+	</ul>
 
-<a name="Modifying_Project_Properties_Half-Way"></a>
-<h3>Modifying Project Properties Half-Way</h3>
+	<p>All the fields are editable. You can either enter the languages by hand or use the drop down menu. You can type names of folders that do not exist yet, and OmegaT will create them for you.</p>
+	
 
-<p>
-It is always possible, but not encouraged, to modify the project properties 
-during a translation. All the settings should be considered final once the 
-translation has started, unless you realize a major mistake has been made.
-</p>
+	<a name="language" id="language"></a>
+	<h2>Language modification</h2>
+	
+	<p>You have to bear in mind that changing the languages may render the currently used translation memories useless since their language may not match new languages anymore.</p>
+	
+	<a name="segments" id="segments"></a>
+	<h2>Segmentation modifications</h2>
+	
+	<p>The segmentation settings only modify the way the source files are handled by OmegaT. They do not modify the segmentation of the already existing translation memories.</p>
+	
+	<p>If you change the segmentation settings, some already translated segments may get split or merged. This will practically return them to the "untranslated" status because they do not match segments recorded in the project memory, even though the old and now not-matching translation is still there.</p>
+	
+	<p>OmegaT may <a href= "translationMemories.html#Upgrading_Translation_Memories">upgrade old translation memories</a> that did not use sentence segmentation, but not vice versa, and not the project's translation memory if you change your mind in the middle of the translation.</p>
 
-<p>
-Specifically:
-</p>
-
-<ul>
-   <li>
-      Modifying the languages may render the currently used translation
-      memories useless since their language may not match new languages.
-   </li>
-
-   <li>
-      Changing segmentation settings may result in some already translated
-      segments being split or merged which will litterally revert them to
-      "untranslated" status, even though the old and now not-matching
-      translation is still in the translation memory. OmegaT may
-      <a href="translationMemories.html#Upgrading_Translation_Memories" title="Translation Memories">
-      upgrade old translation memories</a> that did not use sentence
-      segmentation, but not vice versa, and not the project's translation
-      memory if you change your mind in the middle of the translation.
-   </li>
-
-   <li>
-      Modifying project folders will not move the files from old folders
-      to new ones, so you risk ending up in a situation neither you or
-      OmegaT know what the folders really mean, and which of them are used.
-   </li>
-</ul>
-
-<p>
-See the <a href="preventingDataLoss.html" title="Preventing Data Loss">Preventing Data Loss</a>
-section for ways to protect your work.
-</p>
+	<a name="folder" id="folder"></a>
+	<h2>Folder structure modifications</h2>
+	
+	<p>In case you intend to modify project folders, remember that this will not move the contained files from old folders to new ones. You risk ending up in a situation neither you or OmegaT know what the folders really mean, and which of them are used.</p>
 
 <hr>
-<p><a href="legalNotices.html" title="Legal Notices">Legal Notices</a></p>
 
+	<a name="warning" id="warning"></a>
+	<h1>Modifying project properties during the session</h1>
+
+	<p>It is possible to modify the project properties during a translation session.</p>
+	
+	<p>However, the safest way is to consider all settings as final once the translation has started - unless of course you realize a major mistake has been made. See the <a href= "preventingDataLoss.html">Preventing data loss</a> section for ways to protect your work.</p>
+
+
+	<hr>
+
+	<p><a href="legalNotices.html">Legal notices</a></p>
 </body>
 </html>

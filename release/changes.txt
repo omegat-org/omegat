@@ -53,7 +53,7 @@
   Bug fixes:
   
   - HTML filter loses html-encoded characters if not supported
-  http://sourceforge.net/support/tracker.php?aid=1800677
+  http://sourceforge.net/support/tracker.php?aid=1802000
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 Changes

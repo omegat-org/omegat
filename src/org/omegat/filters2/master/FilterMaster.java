@@ -188,7 +188,7 @@ public class FilterMaster
         }
         es.reverse();
 
-        entry = entry.substring(b, e+1);
+        entry = StaticUtils.fixChars(entry.substring(b, e+1));
         
         StringBuffer res = new StringBuffer();
         res.append(bs);

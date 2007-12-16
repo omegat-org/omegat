@@ -63,7 +63,7 @@
 
 
   0 Enhancement
-  1 Bugfixe
+  2 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.3 update 1
@@ -73,6 +73,8 @@
   - HTML entities not resolved in the XHTML filter 
   http://sourceforge.net/support/tracker.php?aid=1844968 
 
+  - Prevent non-XML characters from entering the TMX 
+  http://sourceforge.net/support/tracker.php?aid=1684825 
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 Changes

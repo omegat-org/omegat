@@ -170,6 +170,7 @@ Code has been contributed by
   Zoltan Bartko
   Didier Briel (release manager)
   Kim Bruning
+  Alex Buloichik
   Sandra Jean Chua
   Martin Fleurke  
   Thomas Huriaux

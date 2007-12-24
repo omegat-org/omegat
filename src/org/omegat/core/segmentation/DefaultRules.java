@@ -90,6 +90,11 @@ public class DefaultRules
         srules.add(new Rule(false, "(?i)i\\.e\\.", "\\s"));                     // NOI18N
         srules.add(new Rule(false, "resp\\.", "\\s"));                          // NOI18N
         srules.add(new Rule(false, "tel\\.", "\\s"));                           // NOI18N
+        // Following rules contributed by Jean-Christophe Helary
+        // http://sourceforge.net/support/tracker.php?aid=1856354 
+        srules.add(new Rule(false, "(?i)fig\\.", "\\s"));                       // NOI18N
+        srules.add(new Rule(false, "St\\.", "\\s"));                            // NOI18N
+        srules.add(new Rule(false, "\\s[A-Z]\\.", "\\s"));                      // NOI18N
 
         return srules;
     }

@@ -1,0 +1,192 @@
+<html>
+<head>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Uobičajeni izrazi - OmegaT 1.7.3 User Manual</title>
+</head>
+<body>
+
+	<h1>Kratak pregled konstrukcija uobičajeni izraza</h1>
+
+	<p>Uobičajeni izrazi za upotrebu u pretraživanju su oni koje podržava Java. Za bliže informacije, konsultuj <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+		
+	<p>Jednostavne savjete možeš naći na internetu (na primjer <a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)</p>
+
+
+	<table border="0" cellpadding="3" cellspacing="0">
+
+		<tr>
+			<td width="40%"><h2>Slijedeća konstrukcija:</h2></td>
+			<td><h2>Podudar se sa slijedećom rečenicom:</h2></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Zastavice</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>(?i)</code></td>
+			<td>Omogućuje traganje za podudarnostima bez razlikovanja malih i velikih slova (podrazumijevana vrijednost je namještena da postoji razlikovanje između malih i velikih slova).</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Znaci</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>x</strong></td>
+			<td>Znak <strong>x</strong>, osim sljedećega...</td>
+		</tr>
+		<tr>
+			<td><code>\u</code><strong>hhhh</strong></td>
+			<td>Znak sa heksadecimalnom vrijednošću&nbsp;<code>0x</code><strong>hhhh</strong></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\t</code></td>
+			<td>Tab znak (<code>'\u0009'</code>)</td>
+		</tr>
+		<tr>
+			<td><code>\n</code></td>
+			<td>Znak za novi red (line feed) (<code>'\u000A'</code>)</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\r</code></td>
+			<td>Znak za povratak na početak reda (<code>'\u000D'</code>)</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Citiranje</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\</code></td>
+			<td>Samo citira sljedeći znak. Ovo je potrebno kad hoćeš unijeti metaznake <code>!$()*+.&lt;&gt;?[\]^{|}</code> koji u konkretnom slučaju predstavljaju sami sebe.</td>
+		</tr>
+		<tr>
+			<td><code>\\</code></td>
+			<td>Na primjer, ovo je znak za obrnutu kosu crtu</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\Q</code></td>
+			<td>Samo citira sve znake ispred <code>\E</code></td>
+		</tr>
+		<tr>
+			<td><code>\E</code></td>
+			<td>Samo završava citiranje koje je otpočelo pomoću znaka <code>\Q</code></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Klase znakova</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>[abc]</code></td>
+			<td><code>a</code>, <code>b</code>, ili <code>c</code> (prosta klasa)</td>
+		</tr>
+		<tr>
+			<td><code>[^abc]</code></td>
+			<td>Bilo koji znak osim <code>a</code>, <code>b</code>, ili <code>c</code> (negacija)</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>[a-zA-Z]</code></td>
+			<td><code>a</code> do <code>z</code> ili <code>A</code> do zaključno sa <code>Z</code>, (opseg)</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Unaprijed definisane klase znakova</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>.</code></td>
+			<td>Bilo koji znak (izuzev onih koji označavaju kraj reda)</td>
+		</tr>
+		<tr>
+			<td><code>\d</code></td>
+			<td>Brojka: <code>[0-9]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\D</code></td>
+			<td>Ne-brojka: <code>[^0-9]</code></td>
+		</tr>
+		<tr>
+			<td><code>\s</code></td>
+			<td>Blanko znak: <code>[ \t\n\x0B\f\r]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\S</code></td>
+			<td>Ne-blanko znak: <code>[^\s]</code></td>
+		</tr>
+		<tr>
+			<td><code>\w</code></td>
+			<td>Znak za riječ: <code>[a-zA-Z_0-9]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\W</code></td>
+			<td>Znak za ne-riječ: <code>[^\w]</code></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Granični znaci</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>^</code></td>
+			<td>Početak retka</td>
+		</tr>
+		<tr>
+			<td><code>$</code></td>
+			<td>Kraj retka</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\b</code></td>
+			<td>Graničnik za riječ</td>
+		</tr>
+		<tr>
+			<td><code>\B</code></td>
+			<td>Graničnik za ne-riječ</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Lakomi kvantifikatori</h3></td>
+		</tr>
+		<tr>
+			<td colspan="2">Oni će pronalaziti podudarnosti koliko god mogu. Na primjer, <code>a+</code> će naći <code>aaa</code> u <code>aaabbb</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>?</code></td>
+			<td><strong>X</strong>, jednom, ili uopšte ne</td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>*</code></td>
+			<td><strong>X</strong>, nula ili više puta</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>+</code></td>
+			<td><strong>X</strong>, jednom ili više puta</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Oprezni (nelakomi) kvantifikatori</h3></td>
+		</tr>
+		<tr>
+			<td colspan="2">Oni će pronalaziti podudarnosti u što manjoj mjeri. Na primjer, <code>a+?</code> će naći prvo <code>a</code> u <code>aaabbb</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>??</code></td>
+			<td><strong>X</strong>, jednom, ili uopšte ne</td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>*?</code></td>
+			<td><strong>X</strong>, nula ili više puta</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>+?</code></td>
+			<td><strong>X</strong>, jednom ili više puta</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Logički operatori</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>XY</strong></td>
+			<td><strong>X</strong> iza koga slijedi <strong>Y</strong></td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>|</code><strong>Y</strong></td>
+			<td>Ili pak <strong>X</strong> ili <strong>Y</strong></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>(</code><strong>XY</strong><code>)</code></td>
+			<td><strong>XY</strong> kao solo grupa</td>
+		</tr></table>
+
+	<hr>
+
+	<a href="legalNotices.html">Napomene pravne prirode</a>
+</body>
+</html>

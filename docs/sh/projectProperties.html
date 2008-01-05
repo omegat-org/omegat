@@ -1,43 +1,71 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Svojstva projekta - Priručnik za korisnike OmegaT 1.6.1</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Svojstva projekta - Priručnik za korisnike OmegaT 1.7.3</title>
 </head>
 <body>
 
-<h1>Svojstva projekta</h1>
+	<h1>Svojstva projekta</h1>
 
-<p>Ovaj dijalog služi za izmjenu direktorijuma projekta kao i jezika. On se otvara pritiskom na <a href="keyboardShortcuts.html" title="Kratice na tastaturi za OmegaT"><code>Ctrl+E</code></a> ili pozivajući <strong>Projekt -&gt; Svojstva...</strong> sa <a href="menu.html" title="Glavni meni">glavnog menija</a>.</p>
+	<ul>
+		<li><a href="#dialog">Dijalog Svojstva</a>
+			<ul>
+				<li><a href="#language">Izmjene jezika</a></li>
+				<li><a href="#segments">Izmjene segmentacije</a></li>
+				<li><a href="#folder">Izmjene strukture direktorijuma</a></li>
+			</ul>
+		</li>
+		<li><a href="#warning">Izmjena svojstava projekta tokom procesa prevođenja</a></li>
+	</ul>
+	
+<hr>
 
-<p>Dijalog sadrži:</p>
+	<a name="dialog" id="dialog"></a>
+	<h1>Dijalog Svojstva</h1>
 
-<ul>
-   <li>Dio za namještanje jezika izvornih i prevedenih dokumenata sa drop-down menijima</li>
-   <li>Zastavicu za namještanje segmentacije</li>
-   <li>Dio za namještanje projektnih direktorijuma</li>
-</ul>
+	<p>Ovaj dijalog služi za izmjenu direktorijuma projekta kao i jezika. On se otvara pritiskom na <code><a href= "menu.html#shortcuts">Ctrl+E</a></code> ili pozivajući <strong>Projekt -&gt; Svojstva...</strong> sa <a href="menu.html">glavnog menija</a>. Dijalog sadrži:</p>
 
-<p>Uređivanje je moguće u svim poljima. Jezike možeš unositi ručno ili biranjem sa drop down menija. Možeš ukucavati nazive direktorijuma koji će tek biti sačinjeni a OmegaT će ti ih stvoriti.</p>
+	<ul>
+		<li>Dio za namještanje jezika izvornih i prevedenih dokumenata sa drop-down menijima</li>
+		<li>Zastavicu za namještanje segmentacije</li>
+		<li>Dio za namještanje projektnih direktorijuma</li>
+	</ul>
 
-<a name="Modifying_Project_Properties_Half-Way"></a>
-<h3>Modifikacija svojstava projekta u toku</h3>
+	<p>Uređivanje je moguće u svim poljima. Jezike možeš unositi ručno ili biranjem sa drop down menija. Možeš ukucavati nazive direktorijuma koji će tek biti sačinjeni a OmegaT će ti ih stvoriti.</p>
+	
 
-<p>Tokom prevođenja uvijek je moguće što ne znači da je i preporučljivo, modifikovati svojstva projekta. Po otpočinjanju s prevođenjem, sva podešavanja bi se već morala smatrati definitivnim, osim u slučaju da osjetiš da si napravio/la neku krupniju grešku pri stvaranju projekta.</p>
+	<a name="language" id="language"></a>
+	<h2>Izmjena jezika</h2>
+	
+	<p>Moraš imati u vidu da, uslijed promjene jezika, tvoje prevodne memorije mogu postati sasvim beskorisne, pošto njihov jezik više ne odgovara novim jezicima.</p>
+	
+	<a name="segments" id="segments"></a>
+	<h2>Izmjene segmentacije</h2>
+	
+	<p>Podešavanje segmentacije jedino modifikuje način rukovanja sa izvornim datotekama u OmegaT. Ta podešavanja ne mijenjaju segmentaciju več postojećih memorija prevoda.</p>
+	
+	<p>Ako promijeniš settinge segmentacije, neki već prevedeni segmenti mogu se usitniti ili ujediniti međusobno. Uslijed ovoga praktično će se vratiti u "neprevedeno" stanje, pošto se više neće podudarati sa zabilježenim segmentima u memoriji projekta, iako stari prevod i dalje postoji, samo što više nije podudaran.</p>
+	
+	<p>Ako ti potreba za izmjenama padne na um usred prevođenja, OmegaT može <a href= "translationMemories.html#Upgrading_Translation_Memories"> aktualizirati stare memorije prevoda</a> kod kojih nije bila korištena rečenična segmentacija, ali ne i obrnuto. Dočim, prevodnu memoriju projekta, softver ne može aktualizirati.</p>
 
-<p>To se posebno odnosi na:</p>
-
-<ul>
-   <li>Izmjenu jezika uslijed čega postojeće memorije prevoda mogu postati nevažeće, pošto jezičke naznake u njima više ne odgovaraju novim jezicima.</li>
-
-   <li>Izmjena pravila segmentacije može dovesti do situacija gdje se već postojeći segmenti dijele ili spajaju, što će od njih doslovce napraviti "neprevedene" segmente, usprkos činjenici da se stari prevod koji više nije adekvatan, i dalje nalazi u memoriji prevoda. Ako ti potreba za izmjenama padne na um u sred prevođenja, OmegaT može <a href="translationMemories.html#Upgrading_Translation_Memories" title="Memorije prevoda"> aktualizirati stare memorije prevoda</a> kod kojih nije bila korištena rečenična segmentacija, ali ne i obrnuto. Dočim, prevodnu memoriju projekta, softver ne može aktualizirati.</li>
-
-   <li>Izmjene kod projektnih direktorijuma neće premjestiti datoteke iz starih u nove, tako da rizikuješ situaciju gdje ni ti a ni softver OmegaT više nećete znati šta se podrazumijeva pod kojim direktorijumom i koji od njih su u stvarnoj upotrebi.</li>
-</ul>
-
-<p>U vezi načina zaštite svog posla, pogledaj odjeljak <a href="preventingDataLoss.html" title="Obezbjeđivanje protiv gubitka podataka">Obezbjeđivanje protiv gubitka podataka</a> .</p>
+	<a name="folder" id="folder"></a>
+	<h2>Izmjene strukture direktorijuma</h2>
+	
+	<p>Ukoliko imaš namjeru da promjeniš projektne direktorijume, imaj u vidu da se datoteke sadržane u starim direktorijumima neće premjestiti. Rizikuješ situaciju gdje ni ti, a ni softver OmegaT više nećete znati šta se podrazumijeva pod kojim direktorijumom i koji od njih je u stvarnoj upotrebi.</p>
 
 <hr>
-<p><a href="legalNotices.html" title="Napomene pravne prirode">Napomene pravne prirode</a></p>
 
+	<a name="warning" id="warning"></a>
+	<h1>Izmjena svojstava projekta tokom procesa prevođenja</h1>
+
+	<p>Za vrijeme prevodnog procesa moguće je modifikovati svojstva projekta.</p>
+	
+	<p>Međutim, najsigurnije bi bilo da, po otpočinjanju s prevođenjem, sva podešavanja već smatraš definitivnim - osim u slučaju da osjetiš da si napravio/la neku krupniju grešku pri stvaranju projekta. U vezi načina zaštite svog posla, pogledaj odjeljak <a href= "preventingDataLoss.html">Obezbjeđivanje protiv gubitka podataka</a> .</p>
+
+
+	<hr>
+
+	<p><a href="legalNotices.html">Napomene pravne prirode</a></p>
 </body>
 </html>

@@ -1,0 +1,226 @@
+<html>
+<head>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Datoteke i direktorijumi - Priručnik za korisnike OmegaT 1.7.3</title>
+</head>
+<body>
+
+	<h1>OmegaT datoteke i direktorijumi</h1>
+
+	<ul>
+		<li><a href="#project">Datoteke prevodnog projekta</a>
+			<ul>
+				<li><a href="#project_location">Lokacija projektnih datoteka</a></li>
+				<li><a href="#project_list">Popis projektnih datoteka</a></li>
+			</ul>
+		</li>
+		<li><a href="#user">Korisnikove datoteke</a>
+			<ul>
+				<li><a href="#user_location">Lokacija korisnikovih datoteka</a></li>
+				<li><a href="#user_list">Popis korisnikovih datoteka</a></li>
+			</ul>
+		</li>
+		<li><a href="#application">Datoteke aplikacije</a>
+			<ul>
+				<li><a href="#application_list">Popis datoteka aplikacije</a></li>
+			</ul>
+		</li>
+	</ul>
+
+	<p>OmegaT radi s tri tipa datoteka.</p>
+
+	<dl>
+		<dt>Datoteke prevodnog projekta</dt><dd>One čine prevodni projekt. Njihov gubitak može uticati na integritet projekta i može umanjiti šanse za obavljanje prevodnog zadatka. Projektne datoteke predstavljaju najvažnije datoteke u OmegaT. Radi se o datotekama s kojima, tok,om prevođenja, radiš svakodnevno.</dd>
+		<dt>Datoteke korisnikovih setovanja</dt><dd>One nastaju kad se preko preferencijskih setovanja kojima može pristupiti korisnik, mijenja ponašanje OmegaT. Kad se one pogube, tada će OmegaT koristiti "tvornička" setovanja. Ako se nalaziš usred rada na prevodu, ovo može napraviti i poneku sitnu nevolju.</dd>
+		<dt>Datoteke aplikacije</dt><dd>One su uključene u paketu programa koji preuzimaš, i najveći njihov dio je potreban za pravilno funkcionisanje OmegaT. Ako se iz nekog razloga pogube ove datoteke, dovoljno je da iznova preuzmeš i/ili reinstaliraš OmegaT, i one će se sve povratiti.</dd>
+	</dl>
+
+<hr>
+
+	<a name="project"></a>
+	<h1>Datoteke prevodnog projekta</h1>
+
+	<p>Svaki prevodni projekt u OmegaT, sastoji se od određenog broja datoteka i direktorijuma.</p>
+
+	<a name="project_location"></a>
+	<h2>Lokacija datoteka prevodnog projekta</h2>
+
+	<p>Po sačinjavanju prevodnog projekta, OmegaT automatski pravi listu direktorijuma koji će docnije služiti za pohranjivanje datoteka. Takođe se stvara i jedan niz datoteka koji služe za podešavanje određenih preferencija samog projekta prevođenja, te radi pohranjivanja prevodne memorije samog projekta.</p>
+
+	<p>Pod default, svi su direktorijumi prevodnog projekta smješteni ispod onog osnovnog direktorijuma projekta. Neke druge lokacije za te direktorijume mogu se birati u trenutku sačinjavanja projekta ili tokom prevođenja. Na ovaj je način moguće izabrati postojeće direktorijume ili ih pak, napraviti na mjestima koji više leže tvojim radnim navikama.</p>
+
+	<p>Radi izmjene lokacije direktorijuma, a pošto je projekt već <a href="instantStartGuide.html#create">sačinjen</a> otvori <strong>Projekt → Svojstva...</strong> i tamo učini potrebne <a href="projectProperties.html">izmjene</a>.</p>
+
+	<a name="project_list"></a>
+	<h2>Popis datoteka prevodnog projekta</h2>
+
+	<p>Kad se posmatra iz nekog fajl menadžera, prevodni projekt izgleda kao svaki drugi direktorijum. Gledano kroz dijaloge OmegaT, prevodni projekt izgleda kao jedna datoteka s asociranom ikonicom od OmegaT. Sam program OmegaT, radi otvaranja projekta, ne traži unošenje njegovog stabla. Dovoljno je izabrati ikonicu OmegaT.<p>Prevodni projekt sačinjen prema default-podrazumijevanim vrijednostima, imaće slijedeću strukturu:</p>
+
+	<dl>
+		<dt>project_name/</dt>
+		<dd>
+			<dl>
+				<dt>/omegat/</dt>
+				<dd>
+					<dl>
+						<dt>project_save.tmx (<a href="translationMemories.html">...</a>)</dt>
+						<dd>Ova TMX datoteka se stvara po prvom spašavanju projekta tokom prevođenja. Ona predstavlja radnu prevodnu memoriju za predmetni projekt. Zahvaljujući ugrađenoj autosave funkciji, ona će se automatski ažurirati u momentu izlaska iz aplikacije. Ona predstavlja prevodnu memoriju iz koje se prave prevedene datoteke.</dd>
+						<dt>project_save.tmx.YEARMMDDHHNN.bak (<a href="translationMemories.html#TMX_backup">...</a>)</dt>
+						<dd>Na ovoj lokaciji nalaziće se izvjestan broj TMX datoteka s navedenom formom naziva. One služe za backup datoteke <strong>project_save.tmx</strong> i ažuriraju se svakog puta kad ponovo otvaraš projekt, kako bi ovome dale potreban sadržaj iz datoteke <strong>project_save.tmx</strong>, i to prije nego se dese bilo kakve nove moguće izmjene na potonjoj.</dd>
+						<dt>project_stats.txt (<a href="userInterface.html#files">...</a>)</dt>
+						<dd>Ova se tekstualna datoteka može otvoriti u tabelarnoj aplikaciji radi prikaza informacije o broju segmenata i riječi. Ta je informacija dosta detaljnija od one koja se vidi u prozoru Projektne datoteke.</dd>
+					</dl>
+				</dd>
+				<dt>/source/</dt>
+				<dd><a href="filesToTranslate.html">Datoteke</a> koje će radi prevođenja biti uključene u projekt. Ovdje se mogu umetnuti i direktorijumi koji u sebi sadrže datoteke ili dodatne direktorijume.</dd>
+				<dt>/target/</dt>
+				<dd>Kad se pri otvorenom projektu, izabere <strong>Projekt → Sačini prevedene dokumentes</strong>, sve datoteke iz <strong>/source/</strong>, bilo da su prevedene ili ne, ovdje se reprodukuju sa istom hijerarhijom direktorijuma, i dali tekuću sliku prevođenja koje je u toku. Praktično govoreći, OmegaT umješa prevodne informacije iz <strong>/omegat/project_save.tmx</strong> sa izvornim dokumentima i kreira sadržaje u <strong>/target/</strong>.</dd>
+				<dt>/tm/</dt>
+				<dd>U ovaj se direktorijum, pre otvaranja projekta, smještaju bilo kakve vanjske <a href="translationMemories.html">prevodne memorije</a> .</dd>
+				<dt>/glossary/</dt>
+				<dd>Sadrži <a href="glossaries.html">datoteke rječnika</a> ako se iste eventualno koriste. Prije otvaranja projekata, korisnik mora unijeti rječničke datoteke u ovaj direktorijum.</dd>
+				<dt>omegat.project</dt>
+				<dd>Pri stvaranju projekta, OmegaT automatski stvara ovu datoteku. Ona sadrži <a href="projectProperties.html">parametre projekta</a>. Ovi parametri u datoteci, mogu se mijenjati kroz prozor Svojstava projekta.</dd>
+				<dt>project_name-omegat.tmx (<a href="translationMemories.html#TMX_files_location_and_purpose">...</a>)<br>
+				project_name-level1.tmx<br>
+				project_name-level2.tmx</dt>
+				<dd>Ove datoteke sadrže source i target segmente koji odgovaraju sadržini /source/ direktorijuma u vreme njihovog stvaranja (obično od momenta kad su sačinjeni prevedeni dokumenti).</dd>
+			</dl>
+		</dd>
+	</dl>
+
+<hr>
+
+	<a name="user"></a>
+	<h1>Korisnikove datoteke</h1>
+
+	<a name="user_location"></a>
+	<h2>Lokacija korisnikovih datoteka</h2>
+
+	<p>Počev od serije OmegaT 1.6, korisnikove datoteke se smeštaju na posebnu lokaciju kojoj se može pristupiti bilo kojom verzijom OmegaT. Ta lokacija ovisi od platforme OS-a koju koristite:</p>
+
+	<dl>
+		<dt>Na Windows-ima:</dt>
+		<dd><strong>C:\Documentation and Settings\&lt;User Name&gt;\Application Data\OmegaT</strong>. Dio ispred &lt;User Name&gt; može varirati ovisno od sistema, ali obično se radi o ovoj lokaciji. Cjelokupna aplikacijska putanja se može otkriti putem environment varijable %APPDATA%.</dd>
+		<dt>na Linux/Solaris/FreeBSD:</dt>
+		<dd><strong>&lt;User Home&gt;/.omegat</strong> (.omegat je direktorijum, tačka ispred čini ga nevidljivim, osim ako ne ukucaš <code>ls -a</code> ili neku ekvivalentnu komandu.)</dd>
+		<dt>Na MacOSX:</dt>
+		<dd><strong>&lt;User Home&gt;/Library/Preferences/OmegaT</strong></dd>
+	</dl>
+
+
+	<a name="user_list"></a>
+	<h2>Popis korisnikovih datoteka</h2>
+
+	<p>Korisnikove datoteke su:</p>
+
+	<dl>
+		<dt>log.txt</dt>
+		<dd>Ova datoteka pamti Java error poruke dok je OmegaT aktivna. Kad ti se čini da OmegaT čini greške, važno je da u svaki <a href="website.html">trouble report</a> uključiš ovu datoteku ili njen potreban dio.</dd>
+		<dt>omegat.prefs</dt>
+		<dd>Radi se o datoteci xml. Ona sadrži sva pristupačna setovanja opcija korisničke radne površine, kao i podatke o položaju okana.</dd>
+		<dt>filters.conf</dt>
+		<dd>Radi se o datoteci xml. Ona sadrži sve podatke nameštene preko preferencija za <a href="fileFilters.html">filtre datoteka</a> .</dd>
+		<dt>segmentation.conf</dt>
+		<dd>Radi se o datoteci xml. Ona sadrži sve podatke nameštene preko preferencija za <a href="segmentation.html">rečeničnu segmentaciju</a> .</dd>
+	</dl>
+
+<hr>
+
+	<a name="applications"></a>
+	<h1>Datoteke aplikacije</h1>
+
+	<p>OmegaT je "upakovana" u paket-datoteku koju možeš preuzeti sa sajta SourceForge. U ovom odeljku razmatraćemo <a href="installingAndRunning.html#Other_systems">paket neovisan od platforme</a> koji sadrži aplikaciju u standardnoj Java formi. Preostali paketi sadrže Linux <code>.tar</code> paket, Windows installer -sa ili bez Java Runtime Environment, MacOSX installer i paket sa source kodovima za razvojne informatičare.</p>
+	
+	<p>Ovaj se paket neovisan od platforme može koristiti na <strong>bilo kojoj</strong> platformi koja ima aktivan Java 1.4.2 runtime environment, uključivo i na platformama za koje postoji specifičan paket.</p>
+
+	<p>Paket neovisan od platforme je u vidu komprimovane datoteke koja se, radi instalacije, mora raspakovati u direktorijum po tvom izboru. Raspakovanje se obično čini putem desnog klika na preuzeti paket. Po raspakovanju, biće stvoren direktorijum sa datotekama koje pripadaju OmegaT:</p>
+
+	<dl>
+		<dt>Preuzeta datoteka:</dt>
+		<dd>OmegaT_1.7.3_Without_JRE.zip</dd>
+		<dt>Direktorijum za raspakiranje:</dt>
+		<dd>/OmegaT_1.7.3_Without_JRE/</dd>
+	</dl>
+
+	<a name="application_list"></a>
+	<h2>Popis datoteka aplikacije</h2>
+
+	<p>Direktorijum OmegaT sadržaće slijedeće datoteke:</p>
+
+	<dl>
+		<dt>/OmegaT_1.7.3_Without_JRE/</dt>
+		<dd>
+			<dl>
+				<dt>/docs/</dt>
+				<dd>Sve datoteke priručnika sa uputstvima se nalaze u ovom direktorijumu. Da bi se imao pristup vanjskim poveznicama, možeš ih otvarati u internet pretraživaču.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>/images/</dt>
+				<dd>Ovdje stoje ikonice i logo grafika.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>/lib/</dt>
+				<dd>Ovdje stoje Java datoteke. One su potrebne za dobro funkcionisanje OmegaT.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>join.html</dt>
+				<dd>Ovo je jedna normalna html datoteka koja, kad se otvori u internet pretraživaču, te prenapućuje na korisničku grupu OmegaT na Yahoo Groups. Upisivanje na ovu mejling listu nije obavezno, ali ako to učiniš, osim što ćeš se pridružiti diskusiji u vezi OmegaT, imaćeš i pristup i nekim datotekama, upitnicima. Arhiva grupe je javna i može se pretraživati i bez obaveze upisa na listu.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>changes.txt</dt>
+				<dd>Radi se o relativno detaljnom popisu modifikacija od ranijih verzija do najnovije.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>license.txt</dt>
+				<dd>The GNU GENERAL PUBLIC LICENSE. This license allows you to do certain things with OmegaT, including modifying and distributing it. If you are interested in modifying or distributing OmegaT, take a good look at this document and make sure you are aware of all its implications before doing anything. In case you are in doubt, don't hesitate to ask project members directly either by sending them a mail from the Source Forge page or by sending a public mail to the user group.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>doc-license.txt</dt>
+				<dd>The GNU GENERAL PUBLIC LICENSE. Ova licenca se odnosi na dokumentaciju. Pogledaj gore.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>readme.txt</dt>
+				<dd>Ova je datoteka jako važna i morao/la bi je pročitati prije nego pokreneš OmegaT. U njoj su prezentirane opšte informacije o OmegaT, te uputstva o nalaženju obavještenja, načini kako da doprineseš projektu, itd. Prevedena je na izvjestan broj jezika.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>OmegaT</dt>
+				<dd>Ovo je jedna normalna tekst datoteka koja sadrži dvije linije:<br> <code>#!/bin/bash</code><br> <code>java -jar OmegaT.jar $*</code><br> Ova datoteka postaje korisna kad je napraviš izvršnom (<code>chmod +x OmegaT</code>) sa <a href="installingAndRunning.html#command_line">komandne linije</a> , ali, pošto se prethodno uvjeriš da se nalaziš u direktorijumu <code>/OmegaT_1.7.3/</code>. Od tog momenta moći ćeš pokretati OmegaT pozivanjem ove datoteke preko komandne linije.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>OmegaT.bat</dt>
+				<dd>Ovo je jedna normalna tekst datoteka koja sadrži samo jednu liniju:<br> <code>java -jar OmegaT.jar %*</code><br> Koristi se za pokretanje OmegaT sa <a href="installingAndRunning.html#command_line">komandne linije</a> u Windows-ima.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>OmegaT.jar</dt>
+				<dd>Ova datoteka predstavlja glavnu aplikaciju. Radi pokretanja OmegaT možeš pozvati ovu datoteku s komandne linije, ili je pokrenuti kroz tvoj file manager (obično duplim klikom po njoj).</dd>
+			</dl>
+		</dd>
+	</dl>
+
+<hr>
+
+	<p><a href="legalNotices.html">Napomene pravne prirode</a></p>
+</body>
+</html>

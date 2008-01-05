@@ -1,29 +1,110 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Rječnici - Priručnik za korisnike OmegaT 1.6.1</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Rječnici - Priručnik za korisnike OmegaT 1.7.3</title>
 </head>
 <body>
 
-<h1>Rječnici</h1>
+	<h1>Rječnici</h1>
 
-<p>Funkcija rječnika je automatska. Ukoliko želiš koristiti tvoj postojeći rječnik, dovoljno je da ga poslije stvaranja novog projekta, postaviš u direktorijum <code>/glossary</code>. Pri otvaranju projekta, OmegaT automatski registruje postojeće datoteke rječnika. u Oknu rječnika prikazani su termini u aktivnom segmentu koje je OmegaT pronašao u rječni/ku/cima.</p>
+	<ul>
+		<li><a href="#usage">Upotreba</a></li>
+		<li><a href="#fileformat">Format datoteke</a></li>
+		<li><a href="#howtocreate">Način pravljenja rječnika</a>
+			<ul>
+				<li><a href="#text_editor">Korištenje tekst editora</a></li>
+				<li><a href="#spreadsheet">Korištenje tabelarnog programa</a></li>
+				<li><a href="#multiterm">Korištenje Trados Multiterm</a></li>
+			</ul>
+		</li>
+		<li><a href="#commonglossaryproblems">Najčešći problemi oko rječnika</a></li>
+	</ul>
 
-<p>Funkcija rječnika jedino pronalazi istovjetne podudarnosti s pojmom iz rječnika (tj. oblike bez fleksije, itd.).</p>
-
-<p>Tokom prevođenja novi pojmovi se u rječnik/e dodaju ručno, (na primjer kroz neki text editor), ali ih program neće prepoznati odmah, već pri ponovnom učitavanju projekta.</p>
-
-<a name="File_Format"></a>
-<h2>Format datoteke</h2>
-
-<p>Rječničke datoteke su naprosto plain text datoteke koje sadrže trostupčane liste omeđene TAB znakom, gdje se u prvoj koloni nalaze izvorni, a u drugoj, target pojmovi. Treći stubac može se koristiti za dodatne napomene.</p>
-
-<p>Rječničke datoteke mogu biti u default kodnom rasporedu sistema (u tom slučaju, datoteke moraju imati sufikse <code>.tab</code> ) ili u UTF-8 (u tom slučaju, one bi morali imati sufikse <code>.utf8</code>).</p>
-
-<p>Na primjer, rječnici stvoreni kroz funkciju text export u Trados Multiterm-u, mogu se koristiti kao rječnici u OmegaT bez ikakvih daljih modifikacija, pod uslovom da im se dade sufiks <code>.tab</code> te da izvorni i završni termin stoje u poljima prve dvije kolone.</p>
+	<p>Rječnici-glosari predstavljaju datoteke koji se za upotrebu u OmegaT stvaraju i ažuriraju manuelno.</p>
+	
+	<p>Ukoliko projekt u OmegaT sadrži jedan ili više glosara, svi termini iz istih će se pronalaziti u aktivnom segmentu i automatski će se prikazati u  <a href="userInterface.html#Glossary">Prikazivaču rječnika</a>.</p>
 
 <hr>
-<p><a href="legalNotices.html" title="Napomene pravne prirode">Napomene pravne prirode</a></p>
 
+	<a name="usage" id="usage"></a>
+	<h1>Upotreba</h1>
+
+	<p>Da bi se koristio postojeći glosar, jednostavno ga, po pravljenju projekta, smjesti u direktorijum <code>/glossary</code> . Kad se otvori projekt, OmegaT automatski detektuje datoteke glosara.</p>
+	
+	<p>u Oknu rječnika prikazani su termini u aktivnom segmentu koje je OmegaT pronašao u rječni/ku/cima. Funkcija rječnika jedino pronalazi istovjetne podudarnosti s pojmom iz rječnika (tj. oblike bez fleksije, itd.).</p>
+
+	<p>Tokom prevođenja novi pojmovi se u rječnik/e dodaju ručno, (na primjer kroz neki text editor), ali ih program neće prepoznati odmah, već pri ponovnom učitavanju projekta.</p>
+
+<hr>
+
+	<a name="fileformat" id="fileformat"></a>
+	<h1>Format datoteke</h1>
+
+	<p>Rječničke datoteke su naprosto plain text datoteke koje sadrže trostupčane liste omeđene TAB znakom, gdje se u prvoj koloni nalaze izvorni, a u drugoj, target pojmovi. Treći stubac može se koristiti za dodatne napomene.</p>
+
+	<p>Rječničke datoteke mogu biti u default kodnom rasporedu sistema (u tom slučaju, datoteke moraju imati sufikse <code>.tab</code> ) ili u UTF-8 (u tom slučaju, one bi morali imati sufikse <code>.utf8</code>).</p>
+
+<hr>
+
+	<a name="howtocreate" id="howtocreate"></a>
+	<h1>Način pravljenja rječnika</h1>
+
+	<a name="text_editor" id="text_editor"></a>
+	<h2>Korištenje tekst editora</h2>
+
+	<p>U svom uobičajenom tekst editoru napravi datoteku, daj joj potrebno ime sa ekstenzijom <code>.tab</code> na pr. <code>moj_glosar.tab</code> .</p>
+
+	<p>Unesi riječ u izvornom jeziku, potom pritisni dirku <code>tab</code>, te zatim, prevod iste riječi u ciljnom jeziku. Možeš dodati dodatni komentar pošto prvo dodaš još jedan <code>tab</code>. Za novi unos pritisni <code>Enter</code>.</p>
+	
+	<p>Kad su svi podaci unijeti, spasi dokument. Ako dva predmetna jezika međusobno ne koriste jedan isti slovni poredak, tada se datoteka glosara mora spasiti sa kodiranjem UTF-8. U tom slučaju, (pre)imenuj je u <code>moj_glosar.utf8</code>.</p>
+
+	<a name="spreadsheet" id="spreadsheet"></a>
+	<h2>Korištenje tabelarnog programa</h2>
+
+	<p>Za one koji koriste Excel ili Calc, ovaj će metod biti sasvim zgodan, jer će moći sortirati riječi u glosaru, pod uslovom da ne koriste UTF-8.</p>
+
+	<p>Otvori praznu tabelarnu datoteku. Unosi svoje podatke, red po red. Izvorne izraze u prvu kolonu, a ciljne izraze u drugu; komentare po izboru možeš unositi u treću kolonu.</p>
+	
+	<p>Po obavljenom unosu, spasi dokument: korištenje File/Save as.</p>
+	
+	<p>Za vrstu datoteke, izaberi Text (tab delimited, ili CSV), postavi <strong>field delimiter</strong> na <strong>tabulation</strong>, a <strong>word separator</strong> na prazno (obriši sve u tom polju). Za ekstenziju datoteke koristi <code>.tab</code>.</p>
+	
+	<p>Softver će te pitati nekoliko pitanja oko gubitka formatiranja ili spašenog pregleda, ali ti samo pritisni OK.</p>
+	
+	<p>Preko file manager-a provjeri da li je datoteka dobro imenovana <code>moj_glosar.tab</code>, a ne <code>moj_glosar.tab.csv</code>. Popravi ako treba.</p>
+	
+	<p>Pre spašavanja, možeš izabrati kodiranje "UTF-8", ako ti je ono potrebno. U tom slučaju, preimenuj datoteku u <code>moj_glosar.utf8</code>.<a name="multiterm" id="multiterm"></a>
+	<h2>Korištenje Trados Multiterm</h2>
+	
+	<p>Glosari napravljeni kroz Trados Multiterm export funkciju teksta, na primjer, mogu se u OmegaT glosarima koristiti bez dalje modifikacije, pod uslovom da im se dâ ekstenzija <code>.tab</code>, a da su polja termina source i target, prva dva polja.</p>
+
+<hr>
+
+	<a name="commonglossaryproblems" id="commonglossaryproblems"></a>
+	<h1>Najčešći problemi oko rječnika</h1>
+
+	<dl>
+		<dt>Problem: Ne prikazuje se nikakav glosar.</dt>
+		<dd>Mogući uzroci:<ul>
+			<li>u "glossary" direktorijumu nema datoteke sa glosarom</li>
+			<li>datoteka s glosarom je prazna</li>
+			<li>datoteka glosara nema dobru ekstenziju (.tab ili .utf8)</li>
+			<li>datoteka glosara nema dobar kodni raspored</li>
+			<li>u aktivnom segmentu ne postoji termin koji se podudara s bilo kojim terminom u glosaru</li>
+			<li>jedan ili više gornjih problema su sređeni, ali se projekt nije mogao pozvati.</li>
+		</ul>
+		</dd>
+
+		<dt>Problem: U oknu rječnika, neka slova nisu ispravno prikazana (ali su, s druge strane, u Oknu editora prikazana kako treba).</dt>
+		<dd>Mogući uzroci:<ul>
+			<li>ekstenzija ne odgovara kodnom rasporedu datoteke.</li>
+		</ul>
+		</dd>
+	</dl>
+	
+	<hr>
+
+	<p><a href="legalNotices.html">Napomene pravne prirode</a></p>
 </body>
 </html>

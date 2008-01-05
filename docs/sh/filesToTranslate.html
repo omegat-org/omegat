@@ -1,84 +1,160 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Datoteke namijenjene prevođenju - Priručnik za korisnike OmegaT 1.6.2</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Datoteke namijenjene prevođenju - Priručnik za korisnike OmegaT 1.7.3</title>
 </head>
 <body>
 
-<h1>Datoteke namijenjene prevođenju</h1>
+	<h1>Datoteke namijenjene prevođenju</h1>
 
-<p>Pomoću programa OmegaT možeš direktno prevoditi jedan niz formata datoteka. U osnovi, postoje dva tipa formata datoteka. Formati <strong>Plain text</strong>  i formati <strong>formatted text</strong>.</p>
+	<ul>
+		<li><a href="#bidi">Jezici s desna na lijevo</a>
+			<ul>
+				<li><a href="#bidi_transl">Prevod</a></li>
+				<li><a href="#bidi_create">Sačinjavanje prevedenih dokumenata</a></li>
+			</ul>
+		</li>
+		 <li>
+		    <a href="#formats">Formati datoteka</a>
+			<ul>
+				<li><a href="#plaintext">Plain text datoteke</a></li>
+				<li><a href="#tagged">Formatted text datoteke</a></li>
+				<li><a href="#specifics">Specifikacije formata datoteka</a></li>
+				<li><a href="#others">Ostali formati datoteka</a>
+					<ul>
+						<li><a href="#ooo">OpenOffice.org</a></li>
+						<li><a href="#okapi">Okapi Framework</a></li>
+						<li><a href="#tt">Translate Toolkit</a></li>
+						<li><a href="#po4a">po4a</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
 
-<h2>Sadržaj</h2>
+	<hr>
 
-<ul type="none">
-   <li>1. <a href="#Plain_text_files">Plain text datoteke</a></li>
-   <li>2. <a href="#Formatted_text_files">Formatted text datoteke</a></li>
-   <li>3. <a href="#File_formats_specifics">Specifikacije formata datoteka</a></li>
-   <li>4. <a href="#Other_file_formats">Ostali formati datoteka</a></li>
-</ul>
+	<a name="bidi" id="bidi"></a>
+	<h1>Jezici s desna na lijevo</h1>
+	
+	<a name="bidi_transl" id="bidi_transl"></a>
+	<h2>Prevod</h2>
 
-<a name="Plain_text_files"></a>
-<h3>Plain text datoteke</h3>
+	<p>Kad se pomoću OmegaT obavlja prevođenje u dvosmjerne jezike, trebalo bi da se imaju u vidu dvije stvari: 1) unos teksta i 2) prikazivanje teksta. Kad se ispisuje RTL tekst (na pr. Urdu, Arapski, itd.), a koristi se prikazivanje LTR koje je namešteno pod default, tekst se neće uvijek prikazati po redu kako je unijet. Ovo nije baš očigledno kad se unosi čisti RTL tekst, pa se u mnogim od tih slučajeva može koristiti default prikaz (LTR).</p>
 
-<p>Plain text datoteke sadrže samo tekst, pa je njihovo prevođenje jednostavno. Dovoljno je kucanje prevoda na tastaturi.</p>
+	<p>U mnogim slučajevima, međutim, kad je ciljni jezik od RTL vrste, potrebno je ugraditi (to embed) LTR tekst. Primjera radi, neke vrste proizvoda moraju ostati na engleskom, ili pak, otvori za 'form' moraju ostati u prvobitnom obliku tokom lokalizacije niski korisničke (GUI) radne površine.</p>
 
-<p>OmegaT za sada podržava sljedeće plain text formate:</p>
+	<p>Kad se LTR tekst ugrađuje u RTL tekst, on neće biti prikazan po redu kako je bio unošen. Da bi OmegaT ovo mogla obaviti, prikazivanje se mijenja putem <code>Ctrl+Shift+O</code>.</p>
+	
+	<p><strong>Napomena:</strong> Ista kratica može se koristiti i na Mac OSX.</p>
+	
+	<p>Unošenje RTL teksta je olakšano kad je prikazivanje prebačeno na RTL, pošto se kod default prikazivanja, kad se unosi RTL tekst, isprva unijeti prostor pojavljuje na desnoj strani od unijetog teksta, a dalja RTL slova će se tada pojaviti sa lijeva.</p>
 
-<ul>
-   <li>ASCII tekst (.txt, itd.)</li>
-   <li>Encoded text</li>
-   <li>Java resource bundles (.properties)</li>
-   <li>PO datoteke (.po)</li>
-   <li> INI (key=value) files (.ini)</li>
-</ul>
+	<p>Pritiskanjem komande <code>Ctrl+Shift+O</code> tekstuelni unos i prikazivanje se u OmegaT mijenjaju u RTL. On se može koristiti odvojeno za svaki od tri okna (Uređivanje, Podudarnosti i Rječnik).</p>
 
-<p>Ove datoteke po pravilu ne sadrže ikakvo dodatno formatiranje osim "bijelog prostora" za pomicanje/poravnavanje.</p>
+	<a name="bidi_create" id="bidi_create"></a>
+	<h2>Sačinjavanje prevedenih dokumenata</h2>
+	
+	<p>Po sačinjavanju prevedenog dokumenta, on će biti prikazan sa smjerom LTR, kao originalni dokument. Ovo se mora manuelno promijeniti. Svaki output format posjeduje svoj poseban način prikazivanja RTL display.a. Radi detalja o ovome, ispitaj priručnike za rukovanje u tvojoj relevantnoj aplikaciji.<hr>
+	
+	<a name="formats" id="formats"></a>
+	<h1>Formati datoteka</h1>
 
-<p>Njih se obično modificira u tekst editorima. Uglavnom, ovaj format u sebi ne može sačuvati informacije o fontu/boji/marginama.</p>
+	<p>Pomoću programa OmegaT možeš prevoditi jedan niz formata datoteka. U osnovi, postoje dva tipa formata datoteka, <strong>plain text</strong> i <strong>formatted text</strong> formati.</p>
 
-<a name="Formatted_text_files"></a>
-<h3>Formatted text datoteke</h3>
+	<a name="plaintext" id="plaintext"></a>
+	<h2>Plain text datoteke</h2>
 
-<p>Formatted text datoteke u sebi sadržavaju informacije kao što su tip fonta, veličina, boja, itd. Njih se najčešće stvara pomoću word procesora ili home page editora.</p>
+	<p>Plain text datoteke sadrže samo tekst, pa je njihovo prevođenje jednostavno. Dovoljno je kucanje prevoda na tastaturi.</p>
+	
+	<p>Postoji nekoliko <a href="plainText.html">metoda</a> za specificiranje kodnog rasporeda, kako njegova sadržina ne bi bila iskaširana kad se otvori kroz OmegaT.</p>
 
-<p>OmegaT za sada podržava sljedeće formated text formate:</p>
+	<p>Smatra se da ove datoteke ne sadrže nikakav dodatni format osim "bijelog prostora" za pomicanje/poravnavanje. Njih se obično modificira u tekst editorima. Uglavnom, ovaj format u sebi ne može sačuvati informacije o fontu/boji/marginama.</p>
 
-<ul>
-   <li>datoteke Microsoft OpenXML</li>
-   <li>OpenOffice.org datoteke</li>
-   <li>OpenDocument datoteke</li>
-   <li>(X)HTML datoteke</li>
-   <li>HTML Help Compiler (HCC) datoteke</li>
-   <li>DocBook datoteke</li>
-</ul>
+	<p>OmegaT za sada podržava sljedeće plain text formate:</p>
 
-<p>Ovi formati datoteka bivaju spašeni uz zadržavanje informacije o načinu formatiranja. Takva informacija o formatiranju može biti vrlo jednostavna, na pr.  <strong>ovo su podebljana slova</strong> ili pak složena, kao u slučaju tabelarnih podataka sa različitim veličinama fonta, bojom, položajem, itd.</p>
+	<ul>
+		<li>ASCII tekst (.txt, itd.)</li>
+		<li>Encoded text</li>
+		<li>Java resource bundles (.properties)</li>
+		<li>PO datoteke (.po)</li>
+		<li>INI (key=value) datoteke (.ini)</li>
+	</ul>
 
-<p>Kod većine prevodilačkih poslova, sličnost prevedenog dokumenta sa izvornim, smatra se vrlo važnim elementom. OmegaT uz pomoć tagova kojima je lako rukovati, omogućuje očuvanje sličnosti, tako što označava slova/riječi koje su formatirane na neki poseban način.</p>
+	<p>Ostale datoteke tipa "plain text" mogu se obrađivati u OmegaT putem <a href="fileFilters.html">asociranja</a> njihove ekestenzije u tip datoteke koji je podržan (na primjer, <code>.pod</code> datoteka može se asocirati sa ASCII text filterom), te pred-obradom putem posebnih pravila <a href="segmentation.html">segmentacije</a>.</p>
 
-<p>Pojednostavljenje formatacije originalnog teksta značajno doprinosi smanjenju broja tagova. Radi pojednostavljenja procesa prevođenja i smanjenja mogućih grešaka u tagovima, bilo bi, po mogućnosti, potrebno razmotriti ujednačavanje korištenog tipa fonta, veličine, boje, itd.</p>
 
-<a name="File_formats_specifics"></a>
-<h3>Specifikacije formata datoteka</h3>
+	<a name="tagged" id="tagged"></a>
+	<h2>Formatted text datoteke</h2>
 
-<p>Najveći dio gore spomenutih formata datoteka podliježu posebnom načinu obrade.</p>
+	<p>Formatted text datoteke u sebi sadržavaju informacije kao što su tip fonta, veličina, boja, itd. Njih se najčešće stvara pomoću word procesora ili home page editora.</p>
+	
+	<p>Ovi formati datoteka bivaju spašeni uz zadržavanje informacije o načinu formatiranja. Takva informacija o formatiranju može biti vrlo jednostavna, na pr.  <strong>ovo su podebljana slova</strong> ili pak složena, kao u slučaju tabelarnih podataka sa različitim veličinama fonta, bojom, položajem, itd.</p>
+	
+	<p>Kod većine prevodilačkih poslova, sličnost prevedenog dokumenta sa izvornim, smatra se vrlo važnim elementom. OmegaT uz pomoć <a href="formattedText.html">tagova</a> kojima je lako rukovati, omogućuje očuvanje sličnosti, tako što označava slova/riječi koje su formatirane na neki poseban način.</p>
+	
+	<p>Pojednostavljenje formatacije originalnog teksta značajno doprinosi smanjenju broja tagova. Radi pojednostavljenja procesa prevođenja i smanjenja mogućih <a href="userInterface.html#tags">grešaka u tagovima</a>, bilo bi, po mogućnosti, potrebno razmotriti ujednačavanje korištenog tipa fonta, veličine, boje, itd.</p>
 
-<p>Radi nekih specifičnijih informacija o načinu obrade svih gore spomenutih formata, drži se napomena iz <a href="fileFormats.html" title="Podržani formati datoteka">Podržani formati datoteka</a> i <a href="fileFilters.html" title="Filtri datoteka">Filtri datoteka</a>.</p>
+	<p>OmegaT za sada podržava sljedeće formatted text formate:</p>
 
-<a name="Other_file_formats"></a>
-<h3>Ostali formati datoteka</h3>
+	<ul>
+		<li>OpenOffice.org</li>
+		<li>OpenDocument</li>
+		<li>Microsoft Open XML</li>
+		<li>(X)HTML</li>
+		<li>HTML Help Compiler</li>
+		<li>DocBook</li>
+		<li>Okapi monolingual XLIFF</li>
+	</ul>
 
-<p>U OmegaT mogu se obrađivati i neki drugi formati plain text ili formatted text datoteka.</p>
+	<p>Ostale datoteke tipa "plain text" mogu se obrađivati u OmegaT putem <a href="fileFilters.html">asociranja</a> njihove ekestenzije u tip datoteke koji je podržan, te pred-obradom putem posebnih pravila <a href="segmentation.html">segmentacije</a>.</p>
 
-<p>Općenito govoreći, izvjestan broj formata tipa plain text (uključujući i LaTex datoteke, itd.) u OmegaT mogu se prevađati putem njihove konverzije u format Open Document.</p>
+	
+	<a name="specifics" id="specifics"></a>
+	<h2>Specifikacije formata datoteka</h2>
 
-<p>Slično je i sa izvjesnim brojem formata tipa formatted text (uključujući i Microsoft Office datoteke) koje se mogu prevađati u OmegaT putem njihove konverzije u format Open Document.</p>
+	<p>Svaki tip datoteke se drugačije tretira u OmegaT. Specifično ponašanje može se namjestiti u <a href="fileFilters.html">filtrima datoteka</a>.<a name="others" id="others"></a>
+	<h2>Ostali formati datoteka</h2>
 
-<p>Radi dodatnih obavještenja, pogledaj <a href="fileFormats.html" title="Podržani formati datoteka">Podržani formati datoteka</a>.</p>
+	<p>U OmegaT mogu se obrađivati i neki drugi formati plain text ili formatted text datoteka.</p>
+	
+	<p>Za konvertovanje ne-podržanih u podržane formate, mogu se koristiti dodatne alatke. Prevedena datoteka će se poslije morati prebaciti u prvobitni format. Na ovaj način se izvjestan broj formata tipa plain text (uključujući i LaTex datoteke, itd.) u OmegaT mogu prevađati putem njihove konverzije u PO. Slično je i sa izvjesnim brojem formata tipa formatted text (uključujući i Microsoft Office datoteke) koje se mogu prevađati u OmegaT putem njihove konverzije u format Open Document.</p>
+	
+	<p>Kvalitet prevedene datoteke zavisiće od kvaliteta "zaokolne" konverzije. Postaraj se da isprobaš sve opcije u testovima prije nego pristupiš takvim konverzijama.</p>
+	
+	<p>Raspoložive slobodne alatke za konverziju:</p>
+	
+	<a name="ooo" id="ooo"></a>
+	<h3>OpenOffice.org</h3>
 
-<hr>
-<p><a href="legalNotices.html" title="Napomene pravne prirode">Napomene pravne prirode</a></p>
+	<p>OmegaT ne pruža direktnu podršku za Microsoft Office formate: Word, Excel i PowerPoint. Međutim, OpenOffice.org (i njegove varijante) mogu se koristiti za konvertovanje tih formata u OpenDocument, koji OmegaT izvorno podržava.</p>
+	
+	<p><a href="http://www.openoffice.org/">OpenOffice.org zvanična stranica</a></p>
 
+	<a name="okapi" id="okapi"></a>
+	<h3>Okapi Framework</h3>
+
+	<p>Alatka za ekstrakciju teksta u kreaciji Okapi Framework, posjeduje opciju za pravljenje stabla direktorijuma za projekt OmegaT. Takođe je moguće načiniti i specifičnu XLIFF datoteku koja odgovara za OmegaT. Okapi je nedavno stavio na raspolaganje i alatke koje funkcionišu pod "Mono", slobodnom platformom za mnoge operativne sisteme.</p>
+
+	<p><a href="http://okapi.sourceforge.net/Release/Tikal/ReadMe_ForMono.htm">Okapi Mono release page</a>, <a href="http://okapi.sourceforge.net/Release/Shared/Help/tutorial_02.htm">uputstvo</a></p>
+
+	<a name="tt" id="tt"></a>
+	<h3>Translate Toolkit</h3>
+	
+	<p>Translate Toolkit, skup alatki urađen u "python", korisniku pruže veći broj konvertera iz/sa Portable Object, uključujući i Mozilla .properties i datoteke dtd, CSV, Qt .ts, XLIFF. U njega je uključen izvjestan broj alatki za manipulaciju tih datoteka prije ili poslije njihovog prevođenja u OmegaT.</p>
+
+	<p><a href="http://translate.sourceforge.net/wiki/toolkit/index">Translate Toolkit zvanična stranica</a></p>
+
+	<a name="po4a" id="po4a"></a>
+	<h3>po4a</h3>
+
+	<p>po4a je Debian perl alatka. Konvertuje formate datoteka kao što su LaTeX, TeX, POD, itd., u/iz Portable Object.</p>
+
+	<p><a href="http://po4a.alioth.debian.org/">po4a zvanična stranica</a></p>
+	
+	<hr>
+
+	<p><a href="legalNotices.html">Napomene pravne prirode</a></p>
 </body>
 </html>

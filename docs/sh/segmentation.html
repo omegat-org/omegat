@@ -1,201 +1,144 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Segmentacija izvornih datoteka - Priručnik za korisnike OmegaT 1.6.1</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Segmentacija izvornih datoteka - Priručnik za korisnike OmegaT 1.7.3</title>
 </head>
+
 <body>
+	<h1>Segmentacija izvornih datoteka</h1>
 
-<h1>Segmentacija izvornih datoteka</h1>
+	<ul>
+		<li><a href="#structure">Segmentacija na strukturnom nivou</a></li>
+		<li><a href="#sentence">Segmentacija na rečeničnom nivou</a>
+			<ul>
+				<li><a href="#about">Pravila segmentacije</a></li>
+				<li><a href="#setup">Setup pravila</a>
+					<ul>
+						<li><a href="#priority">Prioritet</a></li>
+						<li><a href="#creation">Stvaranje pravila</a></li>
+						<li><a href="#breal">Prijelom/Izuzetak</a></li>
+						<li><a href="#setup">Jednostavni primjeri</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="regexp.html">Konstrukcije uobičajenih izraza</a></li>
+	</ul>
+	
+	<p>Alatke s memorijama prevoda rade sa jedinicama teksta: segmentima. OmegaT segmentira tekst na dva moguća načina: segmentacija po odjeljcima i rečenična segmentacija.</p>
 
-<h2>Sadržaj</h2></div>
+	<p>Radi izbora vrste segmentacije, izaberi <strong>Projekt → Svojstva...</strong> sa glavnog menija i koristi za to predviđenu kućicu.</p>
 
-<ul type="none">
-   <li>1. <a href="#Segmentation_Basics">Osnove segmentacije</a></li>
+	<p>Ako je izabrana rečenična segmentacija, pravila za istu možeš napraviti idući na <strong>Opcije → Segmentacija...</strong> na glavnom meniju.</p>
 
-   <li>2. <a href="#Sentence_Segmentation">Rečenična segmentacija</a>
+	<p>Imaj u vidu da je dosta razvojnog rada provedeno na sačinjavanju pogodnih pravila segmentacije, tako da u većini slučajeva nećeš se morati odviše napinjati oko pisanja svojih pravila segmentacije. Opet, ova funkcija u nekim slučajevima može biti od velike koristi, tako da ćeš moći prevoditi željeni tekst bez rizika da će doći do neželjenih prelamanja teksta, te će sve ostati na svom mjestu.</p>
+	
+	<p><strong>Upozorenje!</strong> Promena opcija filtera dok je projekt otvoren može dovesti do gubitka podataka. Imaj u vidu da ako pri otvorenom projektu promijeniš neke od opcija segmentacije, da ćeš morati iznova učitati projekt, kako bi softver prihvatio promjene.</p>
 
-      <ul>
-         <li>2.1. <a href="#About_Rules">Pravila</a></li>
 
-         <li>2.2. <a href="#Rules_Setup">Setup pravila</a>
+	<hr>
+	<a name="structure" id="structure"></a>
+	<h1>Segmentacija na strukturnom nivou</h1>
 
-            <ul>
-               <li>2.2.1. <a href="#Sets_of_Rules">Setovi pravila</a></li>
-               <li>2.2.2. <a href="#Simple_examples">Jednostavni primjeri</a></li>
-            </ul>
-         </li>
+	<p>OmegaT isprva pročešljava tekst radi segmentacije na strukturnoj razini. Tokom ovog procesa samo struktura izvorne datoteke stvara segmente.</p>
+	
+	<p>Na primjer, <a href="fileFilters.html#filter_options">text datoteke</a> mogu biti izsegmentirane na prijelomu redova, na praznim redovima ili pak potpuno nesegmentirane. Datoteke s formatacijom u sebi (OpenOffice.org, OpenDocument, XHTML i HTML dokumenti) bivaju segmentirane pomoću tagova na blok-razini (po odjeljcima). Prevodivi <a href="fileFilters.html#filter_options">atributi</a> objekata  (u datotekama XHTML ili HTML) se mogu ekstrahovati u odvojene segmente.</p>
 
-         <li>2.3. <a href="#Regular_Expressions_to_use_in_segmentation_rules"> Upotreba običnih izraza u pravilima segmentacije</a>
+	<hr>
+	<a name="sentence" id="sentence"></a>
+	<h1>Segmentacija na rečeničnom nivou</h1>
 
-            <ul>
-               <li>2.3.1. <a href="#Short_summary_of_regular-expression_constructs"> Kratak pregled konstrukcija običnih izraza</a></li>
-            </ul>
-         </li>
-      </ul>
-   </li>
-</ul>
+	<p>Pošto je program OmegaT izsegmentirao izvornu datoteku u logičke jedinice, OmegaT će nastaviti s daljom segmentacijom tih blokova u rečenice.</p>
+	
+	<a name="about" id="about"></a>
+	<h2>Pravila segmentacije</h2>
 
-<a name="Segmentation_Basics"></a>
-<h2>Osnove segmentacije</h2>
+	<p>Proces segmentacije može se prikazati uprošćeno na sljedeći način. zamislite da se kursor kreće po tekstu, slovo po slovo. Za svaki položaj kursora uzimamo pravilo u datom redoslijedu i pokušavamo primijeniti oblik <strong>Prije</strong> na cijeli tekst koji se nalazi lijevo od kursora i oblik <strong>Poslije</strong> na tekst koji se nalazi desno od njega. Ako se pronađe podudaranje, program prestaje sa provjerom pravila (za pravilo izuzetka) ili pravi novi segment (za pravilo prijeloma).</p>
 
-<p>Alatke s memorijama prevoda rade sa jedinicama teksta: segmentima. Postoji više načina segmentacije teksta.</p>
+	<p>Rečenična segmentacja je implementirana putem standarda <a href= "http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a>  - napominjemo da ne postoji podrška za cjelokupne mogućnosti SRX. Kao što nije moguće importovati/eksportovati definisana pravila u SRX formatu. Međutim, ako ti već poznaš način funkcionisanja SRX pravila, tada će ti biti jasno kako OmegaT segmentira.</p>
 
-<p>OmegaT isprva pročešljava tekst radi segmentacije na strukturnoj razini. Tokom ovog procesa samo struktura izvorne datoteke stvara segmente. Na primjer, kod strukturne segmentacije, text datoteke mogu biti izsegmentirane na prijelomu redova, na praznim redovima ili pak nesegmentirane uopšte. Datoteke s formatacijom u sebi (OpenOffice.org, OpenDocument, XHTML i HTML dokumenti) bivaju segmentirane pomoću tagova na blok-razini (po odjeljcima).</p>
+	<p>Postoje dvije vrste pravila:</p>
 
-<p>Prevodivi atributi objekata  (u datotekama XHTML ili HTML) se ekstrahuju u odvojene segmente.</p>
+	<ul>
+		<li><strong>Pravila prijeloma</strong> dijele izvorni tekst u segmente.<p><strong>Primjer</strong>: <i>"Da li je to bilo pametno? Nisam bila sigurna."</i> trebalo je biti izdijeljeno u dva segmenta.<br> Znači da bi trebalo da postoji pravilo prijeloma za "<code>?</code>".</p></li>
+		<li><strong>Pravila o izuzetku</strong> specificiraju koji dijelovi teksta se NE BI trebali odvajati jedan od drugog.<p><strong>Primjer</strong>: <i>"Mrs. Dalloway "</i> se ne bi trebalo razdvajati između, tako da se, znači, mora načiniti pravilo o izuzetku za Mrs (i Mr. Dr, prof, itd), iza koga slijedi tačka.</p></li>
+	</ul>
 
-<p>OmegaT može takođe segmentirati i na razini rečenice. Rečenična segmentacija se odvija poslije segmentacije na strukturnoj razini. Segmenti koji tom prilikom nastanu, nažalost se, tokom prevođenja, ne mogu naknadno dijeliti ili ujedinjavati. Ovo predstavlja jedno ograničenje u softveru OmegaT kojega smo svjesni.</p>
+	<p>Unaprijed podešeno pravilo prijeloma (default) trebalo bi biti dovoljno za većinu evropskih jezika i japanski. S obzirom na tu fleksibilnost, možeš napraviti još pravila o izuzetku za tvoj prevodni jezik. Na taj način će segmenti dobiti na značenju i smislu.</p>
 
-<p>Ako nisi zadovolj/a/n/a sa segmentiranjem, moraćeš ili modifikovati izvornu datoteku ručno, i/ili mijenjati pravila rečenične segmentacije. Po obavljanju tih operacija, moraš ponovno učitati projekt da bi softver zabilježio nastale promjene.</p>
+	<a name="setup" id="setup"></a>
+	<h2>Setup pravila</h2>
 
-<a name="Sentence_Segmentation"></a>
-<h2>Rečenična segmentacija</h2>
 
-<p>Pošto je program OmegaT izsegmentirao izvornu datoteku u logičke jedinice, što kod formatiranih datoteka najčešće pretpostavlja odjeljke, on će, pod uslovom da je rečenična segmentacija aktivirana, nastaviti s daljom segmentacijom tih blokova u rečenice. Općenito govoreći, OmegaT može segmentirati logičke blokove u izvornoj datoteci u bilo kakav vid segmenta koji podesiš po svom nahođenju. Ali ćemo je, pošto OmegaT u svom <strong>podrazumijevanom ponašanju</strong> segmentira u rečenice, nazivati <strong>rečeničnom</strong> segmentacijom.</p>
+	<a name="priority" id="priority"></a>
+	<h3>Prioritet</h3>
 
-<p>Rečenična segmentacija sagrađena je po standardima <a href="http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a>, iako u momentu pisanja ovog Priručnika, OmegaT ne podržava sve mogućnosti SRX, niti može uvoziti/izvoziti pravila definisana formatom SRX. Međutim, ako ti već poznaš način funkcionisanja SRX pravila, tada će ti biti jasno kako radi softver OmegaT, pošto su primjenjena pravila, manje-više, identična.</p>
+	<p>Svi setovi pravila segmentacije s podudarnim jezičkim oblikom, primjenjuju se u datom redoslijedu, tako da bi pravila za određeni jezik, morala biti viša od onih pod "default".</p>
+	
+	<p>Tako bi na primjer, pravila za kanadski francuski (FR-CA) trebalo da budu viša od pravila za francuski (FR.*) te viša od pravila Default (.*). Time će projekt prevođenja s kanadskog francuskog, koristiti definisana pravila za dotični jezik, potom za francuski, i na kraju pravila pod default, u pravilnom redoslijedu.</p>
 
-<a name="About_Rules"></a>
-<h3>Pravila</h3>
+	<a name="creation" id="creation"></a>
+	<h3>Stvaranje pravila</h3>
+	
+	<p>Radi stvaranja praznog seta pravila, u gornjoj polovini dijaloga, klikni na <strong>Add</strong> . U dnu tabele pojaviće se jedan prazan redak.</p>
+	
+	<p>Setu pravila i jezičkom obliku promijeni naziv. Sintaksa jezičkog oblika odgovara sintaksi <a href="regexp.html">uobičajenih</a> izraza. Ako tvoj set pravila barata sa parom jezik-država, savjetujemo ti da ga pomjeriš na vrh pomoću dugmeta <strong>Pomjeri gore</strong>. Radi uređivanja seta pravila, jednostavno klikni po njemu i pravila seta će se pojaviti u donjoj polovini okna.</p>
 
-<p>Postoje dvije vrste mogućih pravila.</p>
+	<a name="break" id="break"></a>
+	<h3>Prijelom/Izuzetak</h3>
+	
+	<p>Kućica Prijelom/Izuzetak određuje da li se radi o pravilu prijeloma (kliknuta kućica) ili o pravilu o izuzetku (ne-kliknuta kućica). Dva uobičajena izraza Prije i Poslije određuju šta se mora nalaziti prije i poslije određenog položaja, tako da se, shodno tome, tretira kao pravilo o izuzetku ili o prijelomu.</p>
 
-<ul>
-   <li>Pravila prijeloma dijele tekst u segmente.</li>
-   <li>Pravila o izuzetku specificiraju da se određene cjeline teksta ne odvajaju jedna od druge.</li>
-</ul>
 
-<p>Primjer prijeloma: <i>"Da li je to bilo pametno? Nisam bila sigurna."</i> poslije "<code>?</code>" može se segmentirati u dvije rečenice. Znači da bi trebalo napraviti pravilo prijeloma za "<code>?</code>".</p>
+	<a name="examples" id="examples"></a>
+	<h3>Nekoliko jednostavnih primjera</h3>
 
-<p>Primjer pravila o izuzetku: <i>"Who is afraid of Mrs. Woolf?"</i> gdje poslije "<code>.</code>" nije potrebna segmentacija. Znači da bi trebalo napraviti pravilo o izuzetku za "<code>Mrs.</code>".</p>
+	<table border="0" cellpadding="4" cellspacing="0">
+		<tr bgcolor="#DDDDDD">
+			<td width="25%"><strong>Namjera</strong></td>
+			<td><strong>Prije</strong></td>
+			<td><strong>Poslije</strong></td>
+			<td width="50%"><strong>Napomena</strong></td>
+		</tr>
+		<tr>
+			<td>da se segment napravi poslije tačke ('<code>.</code>') ali prije razmaka</td>
+			<td><code>\.</code></td>
+			<td><code>\s</code></td>
+			<td>"<code>\.</code>" predstavlja znak "<code>.</code>" "<code>\s</code>" predstavlja bilo kakav znak za bijeli prostor</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td>ne segmentiraj poslije Mr.</td>
+			<td><code>Mr\.</code></td>
+			<td><code>\s</code></td>
+			<td>Radi se o pravilu o izuzetku, pa stoga kućica mora biti od-kliknuta.</td>
+		</tr>
+		<tr>
+			<td><code>napravi segment poslije</code> <code>"</code><code>。</code><code>"</code> <code>(japanska tačka)</code></td>
+			<td><code>。</code> </td>
+			<td></td>
+			<td>Zapazi da je <i>poslije</i> prazno</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td>ne segmentiraj poslije M. Mr. Mrs. i Ms.</td>
+			<td><code>Mr??s??\.</code></td>
+			<td><code>\s</code></td>
+			<td>pravilo o izuzetku - pogledaj o upotrebi ? u uobičajenim izrazima (ne-lakomi identifier)</td>
+		</tr>
+	</table>
 
-<p>Unaprijed podešeno pravilo prijeloma (default) trebalo bi biti dovoljno za većinu evropskih jezika i japanski, ali ti preporučujemo sačiniš nešto više pravila o izuzetku za jezik iz koga prevađaš, pošto je očigledno da je sve jezike nemoguće unaprijed definisati sve moguće izuzetke.</p>
+	<hr>
+	<a name="regex" id="regex"></a>
+	<h1>Rezime konstrukcija uobičajenih izraza</h1>
 
-<a name="Rules_Setup"></a>
-<h3>Setup pravila</h3>
+	<p>Uobičajeni izrazi za upotrebu ko pravila segmentacije su oni koje podržava Java. Kratak pregled se nalazi u dodatku <a href="regexp.html">Konstrukcije uobičajenih izraza</a>.</p>
+	
+	<p>Za bliže informacije, konsultuj <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+		
+	<p>Jednostavne savjete možeš naći na internetu (na primjer <a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)</p>
 
-<p>Radi podešavanja pravila, s glavnog menija izaberi <strong>Opcije -&gt; Segmentacija...</strong> . Imaj u vidu da ako pri otvorenom projektu promijeniš neke od opcija segmentacije, da ćeš morati iznova učitati projekt, kako bi softver prihvatio promjene.</p>
+	<hr>
 
-<a name="Sets_of_Rules"></a>
-<h4>Setovi pravila</h4>
-
-<p>Svi setovi pravila segmentacije s podudarnim jezičkim oblikom, primjenjuju se u datom redoslijedu, tako da bi pravila za određeni jezik, morala biti viša od onih pod "default".</p>
-
-<p>Tako bi na primjer, pravila za kanadski francuski (FR-CA) trebalo da budu viša od pravila za francuski (FR.*) te viša od pravila Default (.*). Time će projekt prevođenja s kanadskog francuskog, koristiti definisana pravila za dotični jezik, potom za francuski, i na kraju pravila pod default, u pravilnom redoslijedu.</p>
-
-<p>Radi stvaranja praznog seta pravila, u gornjoj polovini dijaloga, klikni na <strong>Add</strong> . U dnu tabele pojaviće se jedan prazan redak. Setu pravila i jezičkom obliku promijeni naziv. Sintaksa jezičkog oblika odgovara sintaksi običnih izraza. Pogledaj donji odjeljak <a href="#Short_summary_of_regular-expression_constructs"> Kratak pregled konstrukcija običnih izraza</a> .</p>
-
-<p>Ako tvoj set pravila barata sa parom jezik-država, savjetujemo ti da ga pomjeriš na vrh pomoću dugmeta <strong>Pomjeri gore</strong> .</p>
-
-<p>Radi uređivanja seta pravila, jednostavno klikni po njemu i pravila seta će se pojaviti u donjoj polovini okna.</p>
-
-<p>Kućica Prijelom/Izuzetak određuje da li se radi o pravilu prijeloma (kliknuta kućica) ili o pravilu o izuzetku (ne-kliknuta kućica). Dva obična izraza Prije i Poslije određuju šta se mora nalaziti prije i poslije određenog položaja, tako da se, shodno tome, tretira kao pravilo o izuzetku ili o prijelomu.</p>
-
-<p>Proces segmentacije može se prikazati uprošćeno na sljedeći način. Zamislimo da se poslije prvog znaka, kursor pomjeri do ispred zadnjeg znaka u tekstu. Za svaki položaj kursora uzimamo pravilo u datom redoslijedu i pokušavamo primijeniti oblik <strong>Prije</strong> na cijeli tekst koji se nalazi lijevo od kursora i oblik <strong>Poslije</strong> na tekst koji se nalazi desno od njega, tako da oni dodiruju kursor.</p>
-
-<p>Ako se uspješno primijeni neko pravilo, mi tada, što se tiče pravila o izuzetku, prestajemo s propitivanjem daljih pravila, a kod pravila o prijelomu, smatramo tekst s lijeve strane odvojenim segmentom za svaki položaj kursora u tekstu.</p>
-
-<a name="Simple_examples"></a>
-<h4>Jednostavni primjeri</h4>
-
-<p>
-<dl>
-   <dt><strong>Cilj nam je:</strong> da se segment napravi poslije tačke ('<code>.</code>') ali prije razmaka</dt>
-   <dd>Prije: <code>\.</code> Poslije: <code>\s</code> <br> <strong>Napomena:</strong> "<code>\.</code>" predstavlja znak "<code>.</code>" <br> "<code>\s</code>" predstavlja bilo koji znak za bijeli prostor</dd>
-
-   <dt><strong>Cilj nam je:</strong> da se poslije "<code>Mr.<c/code>" ne napravi segment</dt>
-   <dd>Prije: <code>Mr\.</code> Poslije: <code>\s</code> <br> <strong>Napomena:</strong> ne zaboravi da kućicu pravila ostaviš <strong>nekliknutu</strong>
-   </dd>
-
-   <dt><strong>Cilj nam je:</strong> da se poslije "。" (japanska tačka) ne napravi segment</dt>
-   <dd>Prije: 。 Poslije: (prazno) <br> <strong>Napomena:</strong> polje možeš ostaviti prazno</dd>
-</dl>
-</p>
-
-<a name="Regular_Expressions_to_use_in_segmentation_rules"></a>
-<h3>Upotreba običnih izraza u pravilima segmentacije</h3>
-
-<p>Sama po sebi, pravila segmentacije prikazuju se putem običnih izraza. Stoga je moguća maksimalna fleksibilnost u definisanju pravila i saglasja s pravilima SRX.</p>
-
-<a name="Short_summary_of_regular-expression_constructs"></a>
-<h4>Kratak pregled konstrukcija običnih izraza</h4>
-
-<p>One ne predstavljaju jedine konstrukcije koje se mogu koristiti u pravilima segmentacije u OmegaT, već se samo radi o onima koje se najčešće koriste. OmegaT podržava karakteristike običnih izraza prema <a href="http://www.lisa.org/standards/srx/">SRX standardima</a>.</p>
-
-<table border="0" width="80%" cellpadding="1" cellspacing="0" summary="Konstrukcije običnih izraza i koje podudarnosti se pomoću njih mogu pronaći">
-    <tr bgcolor="#DDEEFF"><th width="10%" align="left" id="construct">Konstrukcija</th><th align="left">Podudarnosti</th></tr>
-
-    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="flags">Zastavice</th></tr>
-    <tr><td><tt>(?i)</tt></td><td>Omogućuje traganje za podudarnostima bez razlikovanja malih i velikih slova (podrazumijevana vrijednost je namještena da postoji razlikovanje između malih i velikih slova).</td></tr>
-    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
-    <tr><th align="left" colspan="2" id="characters">Znaci</th></tr>
-    <tr><td><strong>x</strong></td><td>Znak <strong>x</strong>, osim sljedećega...</td></tr>
-
-    <tr><td><tt>\u</tt><strong>hhhh</strong></td><td>Znak sa heksadecimalnom vrijednošću&nbsp;<tt>0x</tt><strong>hhhh</strong></td></tr>
-    <tr><td><tt>\t</tt></td><td>Tab znak (<tt>'\u0009'</tt>)</td></tr>
-    <tr><td><tt>\n</tt></td><td>Znak za novi red (line feed) (<tt>'\u000A'</tt>)</td></tr>
-
-    <tr><td><tt>\r</tt></td><td>Znak za povratak na početak reda (<tt>'\u000D'</tt>)</td></tr>
-    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="quot">Citiranje</th></tr>
-    <tr><td><tt>\</tt></td><td>Samo citira sljedeći znak. Ovo je potrebno kad hoćeš unijeti metaznake <code>!$()*+.&lt;&gt;?[\]^{|}</code> koji u konkretnom slučaju predstavljaju sami sebe.</td></tr>
-
-    <tr><td><tt>\\</tt></td><td>Na primjer, ovo je znak za obrnutu kosu crtu</td></tr>
-    <tr><td><tt>\Q</tt></td><td>Samo citira sve znake ispred <tt>\E</tt></td></tr>
-    <tr><td><tt>\E</tt></td><td>Samo završava citiranje koje je otpočelo pomoću znaka <tt>\Q</tt></td></tr>
-    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="classes">Klase znakova</th></tr>
-
-    <tr><td><tt>[abc]</tt></td><td><tt>a</tt>, <tt>b</tt>, ili <tt>c</tt> (prosta klasa)</td></tr>
-    <tr><td><tt>[^abc]</tt></td><td>Bilo koji znak osim <tt>a</tt>, <tt>b</tt>, ili <tt>c</tt> (negacija)</td></tr>
-
-    <tr><td><tt>[a-zA-Z]</tt></td><td><tt>a</tt> do <tt>z</tt> ili <tt>A</tt> do zaključno sa <tt>Z</tt>, (opseg)</td></tr>
-    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="predef">Unaprijed definisane klase znakova</th></tr>
-
-    <tr><td><tt>.</tt></td><td>Bilo koji znak (izuzev onih koji označavaju kraj reda)</td></tr>
-    <tr><td><tt>\d</tt></td><td>Brojka: <tt>[0-9]</tt></td></tr>
-    <tr><td><tt>\D</tt></td><td>Ne-brojka: <tt>[^0-9]</tt></td></tr>
-    <tr><td><tt>\s</tt></td><td>Blanko znak: <tt>[ \t\n\x0B\f\r]</tt></td></tr>
-
-    <tr><td><tt>\S</tt></td><td>Ne-blanko znak: <tt>[^\s]</tt></td></tr>
-    <tr><td><tt>\w</tt></td><td>Znak za riječ: <tt>[a-zA-Z_0-9]</tt></td></tr>
-    <tr><td><tt>\W</tt></td><td>Znak za ne-riječ: <tt>[^\w]</tt></td></tr>
-    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
-
-    <tr align="left"><th colspan="2" id="bounds">Granični znaci</th></tr>
-    <tr><td><tt>^</tt></td><td>Početak retka</td></tr>
-    <tr><td><tt>$</tt></td><td>Kraj retka</td></tr>
-    <tr><td><tt>\b</tt></td><td>Graničnik za riječ</td></tr>
-    <tr><td><tt>\B</tt></td><td>Graničnik za ne-riječ</td></tr>
-
-    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="greedy">Lakomi kvantifikatori</th></tr>
-    <tr><td colspan="2">Oni će pronalaziti podudarnosti koliko god mogu. Na primjer, <code>a+</code> će naći <code>aaa</code> u <code>aaabbb</code></td></tr>
-    <tr><td><strong>X</strong><tt>?</tt></td><td><strong>X</strong>, jednom, ili uopšte ne</td></tr>
-
-    <tr><td><strong>X</strong><tt>*</tt></td><td><strong>X</strong>, nula ili više puta</td></tr>
-    <tr><td><strong>X</strong><tt>+</tt></td><td><strong>X</strong>, jednom ili više puta</td></tr>
-    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="reluc">Oprezni (nelakomi) kvantifikatori</th></tr>
-
-    <tr><td colspan="2">Oni će pronalaziti podudarnosti u što manjoj mjeri. Na primjer, <code>a+?</code> će naći prvo <code>a</code> u <code>aaabbb</code></td></tr>
-    <tr><td><strong>X</strong><tt>??</tt></td><td><strong>X</strong>, jednom, ili uopšte ne</td></tr>
-    <tr><td><strong>X</strong><tt>*?</tt></td><td><strong>X</strong>, nula ili više puta</td></tr>
-
-    <tr><td><strong>X</strong><tt>+?</tt></td><td><strong>X</strong>, jednom ili više puta</td></tr>
-    <tr><th>&nbsp;&nbsp;&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="logical">Logički operatori</th></tr>
-    <tr><td><strong>XY</strong></td><td><strong>X</strong> iza koga slijedi <strong>Y</strong></td></tr>
-
-    <tr><td><strong>X</strong><tt>|</tt><strong>Y</strong></td><td>Ili pak <strong>X</strong> ili <strong>Y</strong></td></tr>
-    <tr><td><tt>(</tt><strong>XY</strong><tt>)</tt></td><td><strong>XY</strong> kao solo grupa</td></tr>
-
-</table>
-
-<hr>
-<p><a href="legalNotices.html" title="Napomene pravne prirode">Napomene pravne prirode</a></p>
-
+	<p><code><a href="legalNotices.html">Napomene pravne prirode</a></code></p>
 </body>
 </html>

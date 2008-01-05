@@ -1,57 +1,87 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Pregled sadržaja - Priručnik za korisnike OmegaT 1.6.1</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>OmegaT 1.7.3 - Pregled sadržaja</title>
 </head>
 <body>
 
-<h1>Priručnik za korisnike OmegaT 1.6.0</h1>
-<h3>Pregled sadržaja</h3>
 
-<p>
-<ol>
-   <li><a href="aboutOmegaT.html" title="O programu OmegaT">O programu OmegaT</a></li>
-
-   <li>Osnovno u vezi OmegaT<ul>
-         <li><a href="instantStartGuide.html" title="Vodič za brzi početak">Vodič za brzi početak</a></li>
-         <li><a href="userInterface.html" title="Korisnička radna površina">Korisnička radna površina</a></li>
-         <li><a href="filesToTranslate.html" title="Datoteke namijenjene prevođenju">Datoteke namijenjene prevođenju</a></li>
-         <li><a href="plainText.html" title="Rad sa plain text-om">Rad sa plain text-om</a></li>
-         <li><a href="formattedText.html" title="Radnje s formatiranim tekstom">Radnje s formatiranim tekstom</a></li>
-         <li><a href="translationMemories.html" title="Memorije prevoda">Memorije prevoda</a></li>
-         <li><a href="glossaries.html" title="Rječnici">Rječnici</a></li>
-         <li><a href="searches.html" title="Pretraživanje">Pretraživanje</a></li>
-         <li><a href="preventingDataLoss.html" title="Obezbjeđivanje protiv gubitka podataka">Obezbjeđivanje protiv gubitka podataka</a></li>
-      </ul>
-   </li>
-
-   <li>Podešavanje programa OmegaT<ul>
-         <li><a href="projectProperties.html" title="Svojstva projekta">Svojstva projekta</a></li>
-         <li><a href="fontSettings.html" title="Setting fontova">Setting fontova</a></li>
-         <li><a href="fileFilters.html" title="Filtri datoteka">Filtri datoteka</a></li>
-         <li><a href="segmentation.html" title="Segmentacija izvornih datoteka">Segmentacija izvornih datoteka</a></li>
-         <li><a href="translationEditing.html" title="Uređivanje prevoda">Uređivanje prevoda</a></li>
-      </ul>
-   </li>
-
-   <li>Prilozi<ul>
-         <li><a href="fileFormats.html" title="Podržani formati datoteka">Podržani formati datoteka</a></li>
-         <li><a href="menu.html" title="Glavni meni">Glavni meni</a></li>
-         <li><a href="keyboardShortcuts.html" title="Kratice na tastaturi za OmegaT">Kratice na tastaturi za OmegaT</a></li>
-         <li><a href="website.html" title="Projekt OmegaT na Internetu, prijavljivanje grešaka i doprinošenje projektu">Projekt OmegaT na Internetu, prijavljivanje grešaka i doprinošenje projektu</a></li>
-      </ul>
-   </li>
-</ol>
-</p>
-
-<p>Jean-Christophe Helary, Samuel Murray, Maxym Mykhalchuk i Henry Pijffers, su svojim zajedničkim radom doprinijeli stvaranju ovog priručnika.</p>
-
-<p>Bilo bi nemoguće iznova napisati ovaj priručnik da ga prethodno njegov izvorni tvorac Marc Prior nije realizovao i održavao dokumentaciju za njega sve do verzije OmegaT 1.4.2 i da ga Dmitri Gabinski nije ažurirao za verziju OmegaT 1.4.4, ili da je ev. izostao input savjeta sa korisničke mailing liste, ili podrška mnogih koji doprinose razvoju programa OmegaT. Zahvaljujemo se svima u društvenoj zajednici OmegaT na ličnoj energiji i nadahnuću.</p>
-
-<p>Ovaj priručnik nije savršen i u narednom periodu biće mijenjan, shodno evolutivnom razvoju OmegaT. Ako primijetiš neslaganja između opisa u njemu i ponašanja OmegaT, nemoj oklijevati, kontaktiraj: Jean-Christophe Helary at brandelune AT users DOT sourceforge DOT net.</p>
+<h1>Priručnik za korisnike OmegaT 1.7.3 - Pregled sadržaja</h1>
 
 <hr>
-<p><a href="legalNotices.html">Napomene pravne prirode</a></p>
 
+	<h2><a href="./aboutOmegaT.html">O programu OmegaT</a><br> <a href="./installingAndRunning.html">Instalacija i pokretanje OmegaT</a></h2>
+
+	<table border="0" width="100%">
+		<tr><td valign="top">
+			<h2>Osnove</h2>
+			<dl>
+				<dt><a href="./instantStartGuide.html">Počni koristiti OmegaT već poslije 5 minuta!</a></dt>
+				<dd>→ uputstvo sa poveznicama ka svim drugim dijelovima priručnika.</dd>
+				<dt><a href="./userInterface.html">Korisnička radna površina</a></dt>
+				<dd>→ Svi prozori i dijalozi</dd>
+				<dt><a href="./menu.html">Glavni meni i kratice</a></dt>
+				<dd>→ sve funkcije dostupne sa glavnog menija i njihove kratice</dd>
+				<dt><a href="./filesToTranslate.html">Datoteke namijenjene prevođenju</a></dt>
+				<dd>→ podržani formati datoteka, konverteri, problematika jezika s desna na lijevo</dd>
+				<dt><a href="./plainText.html">Rad sa plain text-om</a></dt>
+				<dd>→ specifična pitanja oko kodiranja datoteka plain text</dd>
+				<dt><a href="./formattedText.html">Radnje s formatiranim tekstom</a></dt>
+				<dd>→ tagovi, radnje s tagovima i provjera njihove valjanosti</dd>
+				<dt><a href="./translationMemories.html">Memorije prevoda</a></dt>
+				<dd>→ memorije prevodnog projekta, vanjske memorije, razmjena memorija</dd>
+				<dt><a href="./glossaries.html">Rječnici</a></dt>
+				<dd>→ korištenje i pravljenje glosara</dd>
+				<dt><a href="./searches.html">Pretraživanje</a></dt>
+				<dd>→ parametri pretraživanja i korištenje džokera</dd>
+				<dt><a href="./preventingDataLoss.html">Obezbjeđivanje protiv gubitka podataka</a></dt>
+				<dd>→ backup i povraćaj podataka</dd>
+			</dl>
+		</td>
+
+		<td valign="top">
+			<h2>Podešavanje programa OmegaT</h2>
+			<dl>
+				<dt><a href="./projectProperties.html">Svojstva projekta</a></dt>
+				<dd>→ organizacija direktorijuma, podešavanje jezika</dd>
+				<dt><a href="./fontSettings.html">Setovanje fontova</a></dt>
+				<dd>→ font u glavnim oknima</dd>
+				<dt><a href="./fileFilters.html">Filtri datoteka</a></dt>
+				<dd>→ rukovanje sa izvornim i ciljnim datotekama</dd>
+				<dt><a href="./segmentation.html">Segmentacija izvornih datoteka</a></dt>
+				<dd>→ prema izvornom jeziku, segmentacija opšteg tipa</dd>
+				<dt><a href="./translationEditing.html">Ponašanje polja za uređivanje</a></dt>
+				<dd>→ automatsko umetanje ciljnog podatka</dd>
+			</dl>
+
+			<h2>Prilozi</h2>
+			<dl>
+				<dt><a href="filesAndDirectories.html">Datoteke i direktorijumi</a></dt>
+				<dd>→ sve datoteke i direktorijumi koji se koriste u OmegaT</dd>
+				<dt><a href="./languages.html">Jezici i jezički kodovi</a></dt>
+				<dd>→ za jezička svojstva projekta kao i za pravila za uređivanje</dd>
+				<dt><a href="./regexp.html">Uobičajeni izrazi</a></dt>
+				<dd>→ za pretraživanje kao i za pravila segmentacije</dd>
+				<dt><a href="./website.html">OmegaT na internetu</a></dt>
+				<dd>→ podrška za korisnike, razvoj, doprinosi</dd>
+			</dl>
+		</td></tr>
+	</table>
+
+<hr>
+
+	<h2>Zahvalnice</h2>
+	
+	<p>Ovaj priručnik za korisnike predstavlja zajednički rad kolega: Jean-Christophe Helary, Samuel Murray, Maxym Mykhalchuk, Henry Pijffers i Vito Smolej.</p>
+
+	<p>Bilo bi nemoguće iznova napisati ovaj priručnik da ga prethodno njegov izvorni tvorac Marc Prior nije realizovao i održavao dokumentaciju za njega sve do verzije OmegaT 1.4.2 i da ga Dmitri Gabinski nije ažurirao za verziju OmegaT 1.4.4, ili da je ev. izostao input savjeta sa korisničke mailing liste, ili podrška mnogih koji doprinose razvoju programa OmegaT. Zahvaljujemo se svima u društvenoj zajednici OmegaT na ličnoj energiji i nadahnuću.</p>
+
+	<h2>Kontakt</h2>
+
+	<p>Ovaj priručnik nije savršen i u narednom periodu biće mijenjan, shodno evolutivnom razvoju OmegaT. Ako primijetiš neslaganja između opisa u njemu i ponašanja OmegaT, nemoj oklijevati, kontaktiraj: Vito Smolej preko e-pošte: vitosmolej AT users DOT sourceforge DOT net.</p>
+	<hr>
+
+	<p><a href="./legalNotices.html">Napomene pravne prirode</a></p>
 </body>
 </html>

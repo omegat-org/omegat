@@ -1,0 +1,192 @@
+<html>
+<head>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Regularni izrazi -  Priročnik za uporabnika OmegaT 1.7.3</title>
+</head>
+<body>
+
+	<h1>Sestavki iz regularnih izrazov</h1>
+
+	<p>The regular expressions used in searches and segmentation rules are those supported by Java. Če potrebujete bolj konkretno informacijo, si prosimo oglejte <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+		
+	<p>Enostavne primere lahko najdete na mreži (recimo <a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>e.)</p>
+
+
+	<table border="0" cellpadding="3" cellspacing="0">
+
+		<tr>
+			<td width="40%"><h2>Naslednji sestavek:</h2></td>
+			<td><h2>ustreza naslednjemu zaporedju:</h2></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Zastavice</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>(?i)</code></td>
+			<td>Omogoči iskanje brez razlikovanja velikih ali malih črk (privzeto vzorec ločuje velike in male črke).</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Znaki</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>x</strong></td>
+			<td>Znak <strong>x</strong>, razen v primeru...</td>
+		</tr>
+		<tr>
+			<td><code>\u</code><strong>hhhh</strong></td>
+			<td>Znak s heksadecimalno vrednostjo <code>0x</code><strong>hhhh</strong></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\t</code></td>
+			<td>Tabulator (<code>'\u0009'</code>)</td>
+		</tr>
+		<tr>
+			<td><code>\n</code></td>
+			<td>Znak za novo vrstico - line feed -(<code>'\u000A'</code>)</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\r</code></td>
+			<td>Znak za povratek voza - carriage return - (<code>'\u000D'</code>)</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Citiranje</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\</code></td>
+			<td>Nič, vendar citira naslednji znak. Potrebno, kadar želite enega od metaznakov <code>!$()*+.&lt;&gt;?[\]^{|}</code>navesti dobesedno.</td>
+		</tr>
+		<tr>
+			<td><code>\\</code></td>
+			<td>Na primer išče poševnico nazaj.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\Q</code></td>
+			<td>Nič, citira pa vse znake do <code>\E</code></td>
+		</tr>
+		<tr>
+			<td><code>\E</code></td>
+			<td>Nič, vendar konča s citiranjem, ki se je začelo z <code>\Q</code></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Znakovni nizi</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>[abc]</code></td>
+			<td><code>a</code>, <code>b</code>, or <code>c</code> (enostavni razred)</td>
+		</tr>
+		<tr>
+			<td><code>[^abc]</code></td>
+			<td>Katerikoli znak z izjemo <code>a</code>, <code>b</code>, or <code>c</code> (zanikanje)</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>[a-zA-Z]</code></td>
+			<td><code>a</code> do <code>z</code> ali <code>A</code> do <code>Z</code>, vključno (obseg)</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Vnaprej definirani znakovni razredi</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>.</code></td>
+			<td>Katerikoli znak (z izjemo konca vrstice)</td>
+		</tr>
+		<tr>
+			<td><code>\d</code></td>
+			<td>Cifra: <code>[0-9]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\D</code></td>
+			<td>Ne-cifra: <code>[^0-9]</code></td>
+		</tr>
+		<tr>
+			<td><code>\s</code></td>
+			<td>Znak za beli presledek: <code>[ \t\n\x0B\f\r]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\S</code></td>
+			<td>Znaki, ki so beli presledek: <code>[^\s]</code></td>
+		</tr>
+		<tr>
+			<td><code>\w</code></td>
+			<td>Besedni znak: <code>[a-zA-Z_0-9]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\W</code></td>
+			<td>Nebesedni znak: <code>[^\w]</code></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Zadetki za meje</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>^</code></td>
+			<td>Začetek vrstice</td>
+		</tr>
+		<tr>
+			<td><code>$</code></td>
+			<td>Konec vrstice</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\b</code></td>
+			<td>Besedna meja</td>
+		</tr>
+		<tr>
+			<td><code>\B</code></td>
+			<td>Nebesedna meja</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Požrešni kvantifikatorji</h3></td>
+		</tr>
+		<tr>
+			<td colspan="2">Skušali bodo najti kolikor morejo. Na primer, <code>a+</code> bo ustrezalo <code>aaa</code> v <code>aaabbb</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>?</code></td>
+			<td><strong>X</strong>, enkrat ali nikoli</td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>*</code></td>
+			<td><strong>X</strong>, nič- ali večkrat</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>+</code></td>
+			<td><strong>X</strong>, najmanj enkrat</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Nezahtevni kvantifikatorji (ki niso požrešni)</h3></td>
+		</tr>
+		<tr>
+			<td colspan="2">Našli bodo tako malo, kot se le da. Na primer, <code>a+?</code> bo našel prvi <code>a</code> v <code>aaabbb</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>??</code></td>
+			<td><strong>X</strong>, enkrat ali nikoli</td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>*?</code></td>
+			<td><strong>X</strong>, nič- ali večkrat</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>+?</code></td>
+			<td><strong>X</strong>, najmanj enkrat</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Logični operatorji</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>XY</strong></td>
+			<td><strong>X</strong>, ki mu sledi <strong>Y</strong></td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>|</code><strong>Y</strong></td>
+			<td>Ali <strong>X</strong> ali <strong>Y</strong></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>(</code><strong>XY</strong><code>)</code></td>
+			<td><strong>XY</strong> kot ena sama skupina</td>
+		</tr></table>
+
+	<hr>
+
+	<a href="legalNotices.html">Pravni poduk</a>
+</body>
+</html>

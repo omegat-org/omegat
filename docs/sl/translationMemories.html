@@ -1,253 +1,142 @@
-﻿<html>
-
+<html>
 <head>
-<meta http-equiv=Content-Type content="text/html; charset=utf-8">
-<meta name=Generator content="Microsoft Word 11 (filtered)">
-<title>Spomini prevodov - Priročnik za uporabnika OmegaT 1.6.2</title>
-<style>
-<!--
- /* Font Definitions */
- @font-face
-	{font-family:Tahoma;
-	panose-1:2 11 6 4 3 5 4 4 2 4;}
- /* Style Definitions */
- p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0cm;
-	margin-bottom:.0001pt;
-	font-size:12.0pt;
-	font-family:"Times New Roman";}
-h1
-	{margin-right:0cm;
-	margin-left:0cm;
-	font-size:24.0pt;
-	font-family:"Times New Roman";
-	font-weight:bold;}
-h2
-	{margin-right:0cm;
-	margin-left:0cm;
-	font-size:18.0pt;
-	font-family:"Times New Roman";
-	font-weight:bold;}
-h3
-	{margin-right:0cm;
-	margin-left:0cm;
-	font-size:13.5pt;
-	font-family:"Times New Roman";
-	font-weight:bold;}
-a:link, span.MsoHyperlink
-	{color:blue;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{color:blue;
-	text-decoration:underline;}
-p
-	{margin-right:0cm;
-	margin-left:0cm;
-	font-size:12.0pt;
-	font-family:"Times New Roman";}
-code
-	{font-family:"Courier New";}
-p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
-	{margin:0cm;
-	margin-bottom:.0001pt;
-	font-size:8.0pt;
-	font-family:Tahoma;}
-@page Section1
-	{size:595.3pt 841.9pt;
-	margin:70.85pt 70.85pt 2.0cm 70.85pt;}
-div.Section1
-	{page:Section1;}
- /* List Definitions */
- ol
-	{margin-bottom:0cm;}
-ul
-	{margin-bottom:0cm;}
--->
-</style>
-
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Prevodni spomini - Priročnik za uporabnika OmegaT 1.7.3</title>
 </head>
+<body>
 
-<body lang=DE link=blue vlink=blue>
+	<h1> Prevodni spomini</h1>
 
-<div class=Section1>
+	<ul>
+		<li><a href="#OmegaT_and_TMX_files">OmegaT in datoteke TMX</a>
+			<ul>
+				<li><a href="#TMX_files_location_and_purpose">Mesto in namen datotek TMX</a></li>
+				<li><a href="#TMX_backup">Kako zavarovati TMX</a></li>
+				<li><a href="#TMX_files_and_language">Datoteke TMX in jezik</a></li>
+			</ul>
+		</li>
+		<li><a href="#keeping_a_memory">Kako si  OmegaT zapomni vaše prevode</a></li>
+		<li><a href="#using_memories">Kako uporabljati spomine, ki so ustvarjeni z drugimi orodji za prevajanje</a>
+			<ul>
+				<li><a href="#importing_files">Kako uvažati datoteke</a></li>
+				<li><a href="#imported_files_handling">Kako obravnavati uvožene datoteke</a></li>
+			</ul>
+		</li>
+		<li><a href="#using_OmegaT_TM">Kako uporabljati spomine prevodov OmegaT v drugih orodjih za prevajanje</a></li>
+		<li><a href="#upgrading_TM">Kako posodobiti prevodne spomine</a></li>
+	</ul>
 
-<h1><span lang=SL>Prevodni spomini</span></h1>
 
-<h2><span lang=SL>Vsebina</span></h2>
+<hr>
 
-<ul style='margin-top:0cm' type=disc>
- <li class=MsoNormal><span lang=SL>1. <a href="#OmegaT_and_TMX_files">OmegaT in
-     datoteke TMX </a></span></li>
- <ul style='margin-top:0cm' type=circle>
-  <li class=MsoNormal><span lang=SL><a href="#TMX_files_location_and_purpose">Mesto
-      in namen datotek TMX</a></span></li>
-  <li class=MsoNormal><span lang=SL><a href="#TMX_files_and_language">Datoteke
-      TMX in jezik</a></span></li>
- </ul>
- <li class=MsoNormal><span lang=SL>2. <a
-     href="#Keeping_a_memory_of_your_translation_wi">Kako si OmegaT zapomni
-     prevod</a></span></li>
- <li class=MsoNormal><span lang=SL>5. <a
-     href="#Using_memories_created_by_other_translat">Kako uporabljati spomine,
-     ki so ustvarjeni z drugimi orodji za prevajanje</a> </span></li>
- <ul style='margin-top:0cm' type=circle>
-  <li class=MsoNormal><span lang=SL>5.1. <a href="#Importing_files">Kako
-      uvažati datoteke</a></span></li>
-  <li class=MsoNormal><span lang=SL>5.2. <a href="#Imported_files_handling">Kako
-      obravnavati uvožene datoteke</a></span></li>
- </ul>
- <li class=MsoNormal><span lang=SL>6. <a
-     href="#Using_OmegaT_translation_memories_in_ot">Kako uporabljati spomine
-     prevodov OmegaT v drugih orodjih za prevajanje</a></span></li>
- <li class=MsoNormal><span lang=SL>7. <a href="#Upgrading_Translation_Memories">Kako
-     posodobiti prevodne spomine</a></span></li>
-</ul>
+	<a name="OmegaT_and_TMX_files" id="OmegaT_and_TMX_files"></a>
+	<h1>OmegaT in datoteke TMX</h1>
 
-<h2><a name="OmegaT_and_TMX_files"></a><span lang=SL>OmegaT in datoteke TMX</span></h2>
+	<a name="TMX_files_location_and_purpose" id="TMX_files_location_and_purpose"></a>
+	<h2>Datoteke TMX - mesto in namen </h2>
 
-<h3><a name="TMX_files_location_and_purpose"></a><span lang=SL>Mesto in namen
-datotek TMX</span></h3>
+	<p>OmegaT uporablja datoteke TMX na treh različnih mestih.</p>
 
-<p><span lang=SL>OmegaT uporablja datoteke TMX na treh različnih mestih.</span></p>
+	<ul>
+		<li><p>Imenik <code>/omegat/</code> vsebuje datoteko <code>project_save.tmx</code> in s časom vrsto njenih varnostnih kopij.</p>
+		<p>Datoteka <code>project_save.tmx</code> vse segmente, ki si jih je program zapomnil od začetka projekta.</p></li>
+		<li><p>Glavni imenik projekta vsebuje 3 datoteke TMX:<ol>
+				<li><code>ime_projekta-omegat.tmx</code></li>
+				<li><code>ime_projekta-level1.tmx</code></li>
+				<li><code>ime_projekta-level2.tmx</code></li>
+			</ol>(<i>ime_projekta</i> je ime, ki ste ga dali svojemu projektu..<p>Te datoteke vsebujejo segmente v  izvornem in ciljnem jeziku, ki ustrezajo vsebini podimenika  /source/ ob času njihovega nastanka (običajno takrat, ko se ustvarja prevedene datoteke).</p>
+				<ul>
+				<li>Datoteka <code>level1</code> vsebuje samo informacijo o besedilu.</li>
+				<li>Datoteka <code>level2</code>  enkapsulira za  OmegaT tipične oznake kot oznake TMX, tako da je mogoče datoteko z njeno oblikovalno vsebino  uporabljati v prevajalnem orodju, ki pozna dvonivojske spomine TMX,  in pa v OmegaT samem.</li>
+				<li>Datoteka <code>omegat</code> vsebuje za  OmegaT tipične oznake, tako da je mogoče datoteko z njeno oblikovalno vsebino  uporabljati v kakem drugem projektu  v OmegaT.</li>
+			</ul>
 
-<ul style='margin-top:0cm' type=disc>
- <li class=MsoNormal><span lang=SL>Imenik /omegat/ vsebuje datoteko <b>project<strong>_save.tmx</strong></b>
-     in pozneje več njenih varnostnih kopij. Datoteka project_save.tmx vsebuje <strong>vse</strong>
-     segmente, ki si jih je program zapomnil od začetka projekta..</span></li>
- <li class=MsoNormal><span lang=SL>Glavni imenik projekta vsebuje 3 datoteke
-     TMX: <strong>&lt;ime_projekta&gt;-omegat.tmx</strong>, <strong>&lt;ime_projekta&gt;-level1.tmx</strong>
-     in <strong>&lt;ime_projekta&gt;-level2.tmx</strong>, kjer je </span><code><span
-     lang=SL style='font-size:10.0pt'>&lt;ime_projekta&gt;</span></code><span
-     lang=SL> enostavno ime vašega projekta. Te datoteke so izvožene datoteke
-     TMX in vsebujejo samo prevedene pare. </span></li>
- <ul style='margin-top:0cm' type=circle>
-  <li class=MsoNormal><span lang=SL>Datoteka &lt;ime_projekta&gt;-level1.tmx
-      vsebuje samo informacijo o besedilu.</span></li>
-  <li class=MsoNormal><span lang=SL>Datoteka &lt;ime_projekta&gt;-level2.tmx
-      vdela OmegaT oznake kot oznake TMX, tako da je mogoče datoteko
-      uporabljati v prevajalnem orodju, ki pozna dvonivojske spomine TMX in pa
-      v programu OmegaT.</span></li>
-  <li class=MsoNormal><span lang=SL>&lt;ime_projekta&gt;-omegat.tmx vsebuje
-      oznake OmegaT, tako da je mogoče datoteko uporabljati v drugih projektih
-      OmegaT.</span></li>
- </ul>
- <li class=MsoNormal><span lang=SL>Imenik /tm/ lahko vsebuje poljubno število
-     datotek TMX. Te datoteke morajo biti skladenjsko pravilne datoteke TMX, ki
-     lahko vsebujejo samo besedilno informacijo (TMX ravni 1), besedilno in
-     oblikovalno informacijo OmegaT (omegat TMX) ali pa besedilno in
-     oblikovalno informacijo TMX (TMX ravni 2).</span></li>
-</ul>
 
-<h3><a name="TMX_files_and_language"></a><span lang=SL>Datoteke TMX in jezik</span></h3>
+		</li><li><p>Imenik  <code>/tm/</code> lahko vsebuje poljubno število datotek TMX.</p>
+		
+		<p>Te datoteke morajo biti skladenjsko pravilne datoteke TMX, ki lahko vsebujejo samo besedilno informacijo (TMX ravni 1), besedilno in oblikovalno informacijo OmegaT (omegat TMX) ali pa besedilno in oblikovalno informacijo TMX (TMX ravni 2).</p></li>
+	</ul>
 
-<p><span lang=SL>TMX vsebujejo <i>prevodne enote</i>, ki jih sestavljajo
-enakovredni segmenti v različnih jezikih. Prevodno enoto sestavljata najmanj
-dve <i>varianti prevodne enote</i> (translation unit variation - tuv). Tako ena
-kot druga sta lahko bodisi izvirni ali ciljni segment.</span></p>
+	<a name="TMX_backup" id="TMX_backup"></a>
+	<h2>Kako zavarovati TMX</h2>
+	
+	<p>Medtem ko prevajate svoje datoteke, shranjuje OmegaT vaše dodatke prevodnemu spominu v projektni podimenik  <code>/omegat</code>.</p>
+	
+	<p>OmegaT shrani vedno, ko projekt odprete ali zaprete, prevodni spomin v isti podimenik v datoteke oblike  <code>project_save.tmx.LETOMMDDHHNN.bak</code>. <code>LETO</code> je 4-mestno leto, <code>MM</code> je mesec, <code>DD</code> dan v mescu, <code>HH</code> in <code>NN</code> so ure in minute, ko se je datoteko s prevodnim spominom shranilo.</p>
+	
+	<p>Če sumite, da je prišlo do izgube podatkov, postopajte kot sledi::<ol>
+			<li>zaprite projekt</li>
+			<li>preimenujte trenutno datoteko <code>project_save.tmx</code> tako, da si boste ime lahko zapomnili,  (kot recimo <code>project_save.tmx.začasno</code>)</li>
+			<li>poiščite kopijo prevodnega spomina, ki je še najbolj verjetno v redu</li>
+			<li>preimenujte jo v <code>project_save.tmx</code></li>
+			<li>ponovno odprite projekt</li>
+		</ol>
 
-<p><span lang=SL>Nastavitve projekta določajo, katera od variant predstavlja
-izvirni in katera ciljni jezik. OmegaT vzame <strong>tuv</strong>, ki glede na
-definicijo projekta odgovarja kodi za izvirni jezik, in ga uporabila za izvirni
-segment, <strong>tuv</strong> s kodo ciljnega jezika pa bo uporabila kot ciljni
-segment. </span></p>
 
-<p><span lang=SL>Jezikovne kode nastopajo v številnih oblikah. OmegaT trenutno
-prepoznava samo kode, ki kažejo:</span></p>
+	<a name="TMX_files_and_language" id="TMX_files_and_language"></a>
+	<h2>Datoteke TMX in jezik</h2>
 
-<ul style='margin-top:0cm' type=disc>
- <li class=MsoNormal><span lang=SL>jezikovno kodo v obliki dveh črk (npr.: <strong>SL</strong>
-     za slovenščino)</span></li>
-</ul>
+	<p>TMX vsebujejo <i>prevodne enote</i>, ki jih sestavljajo enakovredni segmenti v različnih jezikih. Prevodno enoto sestavljata najmanj dve <i>varianti prevodne enote</i> (translation unit variation - tuv). Tako ena kot druga sta lahko bodisi izvirni ali ciljni segment.</p>
 
-<p><span lang=SL>ali pa</span></p>
+	<p>Nastavitve projekta določajo, katera od variant bo izvirni in katera ciljni jezik. OmegaT bo tako vzela <strong>tuv</strong> , ki po definiciji projekta odgovarja kodi za izvorni jezik in  ga uporabila za izvorni segment,  <strong>tuv</strong> s kodo ciljnega jezika pa bo uporabila kot ciljni segment.  OmegaT ju prepozna na osnovi naslednjih dveh standardnih konvencij::</p>
 
-<ul style='margin-top:0cm' type=disc>
- <li class=MsoNormal><span lang=SL>jezikovno kodo z dvema črkama in državno
-     kodo z dvema črkama, oba dela ločena s pomišljajem (na primer: <strong>EN-GB</strong>
-     za angleški jezik v Veliki Britaniji)</span></li>
-</ul>
+	<ul>
+		<li>v obliki dveh črk (npr.: <strong>SL</strong> za slovenščino, ali </li>
+		<li>v obliki dveh črk za jezikovno kodo, ki jima sledita dve črki za državo  (npr. <strong>EN-US</strong>)</li>
+	</ul>
 
-<p><span lang=SL>Če se jezikovni kodi v projektu in v TMX popolnoma ujemata, se
-segmenti naložijo v spomin. To se zgodi tudi, če se jezika ujemata, državi pa
-ne. Če se ne ujemata niti jezikovni kodi niti državni kodi, segmenti ne bodo
-naloženi v spomin. </span></p>
+	<p>Glejte <a href="languages.html">jeziki</a>za seznam kod za jezike in države..</p>
 
-<h2><a name="Keeping_a_memory_of_your_translation_wit"></a><span lang=SL>Kako
-si OmegaT zapomni prevod</span></h2>
+	<p>Če se jezikovni kodi v projektu in v TMX popolnoma ujemata, se segmenti naložijo v spomin. To se zgodi tudi, če se jezika ujemata, državi pa ne. Če se ne ujemata niti jezikovni kodi niti državni kodi, segmenti ne bodo naloženi v spomin.</p>
 
-<p><span lang=SL>Datoteka project_save.tmx vsebuje <strong>vse</strong>
-segmente, ki si jih je program zapomnil od začetka projekta. Če v projektu
-karkoli spremenite, na primer pravila za segmentiranje, se bodo v
-project_save.tmx shranjevali novi prevedeni pari, shranjene pa bodo tudi vse
-prejšnje informacije. To lahko včasih pripelje do opozorila o <strong>Nizih
-sirotah</strong> v prikazovalniku zadetkov. Taki zadetki ne pripadajo več
-obstoječim segmentom, temveč tistim pred spremembo. Če gre pri spremembi za
-napako, ponastavite prejšnje stanje, da se vnovič prikažejo stari zapisi. </span></p>
 
-<h2><a name="Using_memories_created_by_other_translat"></a><span lang=SL>Kako
-uporabljati spomine, ki so ustvarjeni z drugimi orodji za prevajanje</span></h2>
+<hr>
 
-<h3><a name="Importing_files"></a><span lang=SL>Kako uvažati datoteke</span></h3>
+	<a name="keeping_a_memory" id="keeping_a_memory"></a>
+	<h1>Kako si  OmegaT zapomni vaše prevode</h1>
 
-<p><span lang=SL>OmegaT podpira uvoz datotek TMX različic 1.1-1.4b (ravni 1 in
-2). Tako lahko z OmegaT berete spomine prevodov, ki izvirajo iz drugih orodij
-za prevajanje.</span></p>
+	<p>Datoteka <code>project_save.tmx</code> vse segmente, ki si jih je program zapomnil od začetka projekta. Če v projektu karkoli spremenite, na primer pravila za segmentiranje, se bodo v <code>project_save.tmx</code> shranjevali novi prevedeni pari, shranjene pa bodo tudi vse prejšnje informacije.</p>
+	
+	<p>To lahko sem in tja pripelje do  opombe <strong>Nizi sirote</strong> v prikazovalniku zadetkov. Taki zadetki ne pripadajo več obstoječim segmentom, temveč tistim pred spremembo. Če gre pri spremembi za napako, ponastavite prejšnje stanje, da se vnovič prikažejo stari zapisi.</p>
 
-<p><span lang=SL>OmegaT pa ne podpira <i>v celoti</i> datotek TMX ravni 2 (te
-ne shranjujejo samo prevoda, ampak tudi oblikovanje), zato je pri uvozu datotek
-TMX ravni 2 kakovost ohlapnih zadetkov malce slabša.</span></p>
 
-<h3><a name="Imported_files_handling"></a><span lang=SL>Kako obravnavati
-uvožene datoteke</span></h3>
+<hr>
 
-<p><span lang=SL>OmegaT ravna z uvoženim spominom prevodov (datoteke TMX) zelo
-strogo.</span></p>
+	<a name="using_memories" id="using_memories"></a>
+	<h1>Kako uporabljati spomine, ki so ustvarjeni z drugimi orodji za prevajanje</h1>
 
-<p><span lang=SL>Če v kateri od datotek odkrije napako, program datoteke ne bo
-naložil.</span></p>
+	<a name="importing_files" id="importing_files"></a>
+	<h2>Kako uvažati datoteke</h2>
 
-<p><span lang=SL>Znano je, da nekatera orodja v nekaterih primerih ustvarijo
-okvarjene datoteke TMX. Če boste take datoteke potrebovali kot referenčen
-material v OmegaT, jih boste prej morali popraviti. Popravki niso zahtevni in
-OmegaT vam bo jasno pokazal, kaj morate storiti. Če se vam zdi naloga pretežka,
-se obrnite na skupino uporabnikov.</span></p>
+	<p>OmegaT podpira uvoz datotek TMX različic 1.1-1.4b (ravni 1 in 2). Tako lahko z OmegaT berete spomine prevodov, ki izvirajo iz drugih orodij za prevajanje.{\cs6\f1\cf6\lang1024  &lt;/span&gt;} Vendar OmegaT ne podpira  <i>v celoti</i> datotek TMX nivoja 2  (ki ne shranjujejo samo prevoda, temveč tudi formatiranje), tako da bo pri uvozu datotek TMX nivoja 2 kvaliteta mehkih zadetkov malce nižja.</p>
 
-<h2><a name="Using_OmegaT_translation_memories_in_ot"></a><span lang=SL>Kako
-uporabljati spomine prevodov OmegaT v drugih orodjih za prevajanje</span></h2>
+	<a name="imported_files_handling" id="imported_files_handling"></a>
+	<h2>Kako obravnavati uvožene datoteke</h2>
 
-<p><span lang=SL>OmegaT podpira izvoz datotek TMX različic 1.1-1.4b (ravni 1 in
-2). Izvoz na ravni 2 ni značilni za to raven, vendar zadostuje, da orodja za
-prevajanje z njimi tvorijo pravilne zadetke.</span></p>
+	<p>OmegaT ravna z uvoženim spominom prevodov (datoteke TMX) zelo strogo. Če v kateri od datotek odkrije napako, program datoteke ne bo naložil.</p>
 
-<p><span lang=SL>Če potrebujete samo besedilno informacijo (brez informacije o
-oblikovanju), izvozite datoteko TMX ravni 1.</span></p>
+	<p>Ve se, da nekatera orodja v nekaterih primerih generirajo napačne datoteke TMX. V kolikor boste take datoteke potrebovali kot referenčen material v OmegaT,  jih bo treba popraviti, če se jim OmegaT upira. Popravki niso zahtevni in OmegaT vam bo jasno pokazal, kaj morate storiti. Če se vam zdi ta naloga pretežka, se s problemom obrnite na <a href="http://groups.yahoo.com/group/OmegaT/">skupino uporabnikov</a>.</p>
 
-<h2><a name="Upgrading_Translation_Memories"></a><span lang=SL>Kako posodobiti
-prevodne spomine </span></h2>
 
-<p><span lang=SL>Prejšnje različice programa OmegaT so izvirne datoteke
-segmentirale samo na odstavke, težave pa so imele tudi s številčenjem oznak v
-datotekah HTML in Open Document. OmegaT 1.6.2 take datoteke TMX zazna in jih
-mimogrede posodobi, s čimer poviša kakovost ohlapnih zadetkov in izboljša
-kakovost spomina, za kar vam ni treba niti migniti s prstom. </span></p>
+<hr>
 
-<p><span lang=SL>Datoteka TMX projekta se posodobi &nbsp;enkrat samkrat, nakar
-se jo shrani in uporablja v posodobljeni obliki, pridruženi spomini TMX pa se posodabljajo
-sproti ob vsakim nalaganjem projekta. Vedeti je treba tudi, da lahko v OmegaT
-1.6.2 zaradi nekaterih sprememb v datotečnih filtrih pride do popolnoma
-drugačnega segmentiranja, obstaja tudi - zelo majhna - možnosti, da boste svoj
-prevod morali posodobiti ročno.</span></p>
+	<a name="using_OmegaT_TM" id="using_OmegaT_TM"></a>
+	<h1>Kako uporabljati spomine prevodov OmegaT v drugih orodjih za prevajanje</h1>
 
-<div class=MsoNormal align=center style='text-align:center'><span lang=SL>
+	<p>OmegaT podpira izvoz datotek TMX različic 1.1-1.4b (ravni 1 in 2). Izvoz na ravni 2 ni značilni za to raven, vendar zadostuje, da orodja za prevajanje z njimi tvorijo pravilne zadetke. Če potrebujete samo besedilno informacijo (brez informacije o oblikovanju), izvozite datoteko TMX ravni 1.</p>
 
-<hr size=2 width="100%" align=center>
 
-</span></div>
+<hr>
 
-<p><span lang=SL><a href="legalNotices.html" title="Pravni poduk">Pravni poduk</a></span></p>
+	<a name="upgrading_TM" id="upgrading_TM"></a>
+	<h1>Kako posodobiti prevodne spomine</h1>
 
-</div>
+	<p>Prejšnje verzije OmegaT so vaše izvorne datoteke znale segmentirati samo po odstavkih, poleg tega pa so v datotekah HTML in Open Document oznake številčile na nekonsistenten način. OmegaT 1.7.3 take datoteke TMX zazna in jih mimogrede posodobi, s čimer zveča kvaliteto mehkih zadetkov in izboljša kvaliteto vašega spomina - ne da bi vam pri tem bilo treba migniti s prstom. </p>
 
+	<p>Datoteka TMX projekta se posodobi &nbsp;enkrat samkrat, nakar se jo shrani in uporablja v posodobljeni obliki, pridruženi spomini TMX pa se posodabljajo sproti ob vsakim nalaganjem projekta. Zavedajte se, da je pri  OmegaT 1.7.3 zaradi nekaterih sprememb v filtrih za datoteke  mogoče, da pride do popolnoma drugačnega segmentiranja tako da se lahko v redkih primerih pripeti, da boste svoj prevod morali posodabljati ročno.</p>
+	<hr>
+
+	<p><a href="legalNotices.html">Pravni poduk</a></p>
 </body>
-
 </html>

@@ -1,221 +1,195 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Kako delati z oblikovanim besedilom - Priročnik za uporabnika
-OmegaT 1.6.2</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Kako delati s formatiranim  besedilom - Priročnik za uporabnika OmegaT 1.7.3</title>
 </head>
+
 <body>
-<h1>Kako delati z oblikovanim besedilom</h1>
-<h2>Vsebina</h2>
-<ul type="none">
-  <li>1. <a href="#Formatted_Text_in_OmegaT">Oblikovano besedilo v
-OmegaT</a>
-    <ul type="none">
-      <li>1.1. <a href="#Tag_naming">Kako poimenujete oznake</a></li>
-      <li>1.2. <a href="#Tag_numbering">Kako številčite oznake</a></li>
-      <li>1.3. <a href="#Pairs_and_singletons"> Pari in samci</a></li>
-      <li>1.4. <a href="#Tags_and_sentence_segmenting"> Oznake in
-segmentiranje povedi</a></li>
-      <li>1.5. <a href="#Tag_operations"> Operacije z oznakami</a>
-        <ul type="none">
-          <li>1.5.1. <a href="#Tag_group_duplication">Podvojevanje
-skupin oznak</a></li>
-          <li>1.5.2. <a href="#Tag_group_deletion">Brisanje skupin
-oznak</a></li>
-          <li>1.5.3. <a href="#Tag_group_order_modification">Spreminjanje
-vrstnega reda skupin oznak</a></li>
-          <li>1.5.4. <a href="#Tag_group_nesting">Gnezdenje skupin
-oznak</a></li>
-        </ul>
-      </li>
-      <li>1.6. <a href="#Tag_group_overlapping">Prekrivanje skupin
-oznak</a></li>
-      <li>1.7. <a href="#Tag_group_validation">Preverjanje skupin oznak</a></li>
-      <li>1.8. <a href="#Hints_for_tags_management">Nasveti za
-ravnanje z oznakami</a></li>
-      <li>1.9. <a href="#Important">Pomembno</a></li>
-    </ul>
-  </li>
-</ul>
-<a name="Formatted_Text_in_OmegaT"></a>
-<h2>Oblikovano besedilo v OmegaT</h2>
-<p>Podatki o oblikovanju, ki so shranjeni v izvirni datoteki, se
-navadno potrebujejo tudi v datoteki s prevodom. OmegaT sproti prikazuje
-informacije o oblikovanju (trenutno za datoteke vrste DocBook, HTML,
-XHTML, Open Document in OpenOffice.org) v obliki oznak. Kadar pri
-iskanju zadetkov program primerja segmente, primerjava navadno ne
-vključuje oznak. Oznake, ki jih prenesete v prevedeni segment,&nbsp;
-bodo shranjene tudi v prevedenem dokumentu.</p>
-<a name="Tag_naming"></a>
-<h3>Kako poimenujete oznake</h3>
-<p>Oznake so sestavljene iz enega do treh znakov in števil. Na osnovi
-enolične številke je mogoče zbrati v skupino tiste oznake, ki spadajo
-skupaj, oziroma razlikovati med oznakami, ki imajo sicer isto kratico,
-pa se kljub temu med seboj razlikujejo.</p>
-<p>Znaki včasih nakazujejo vrsto oblikovanja, ki ga oznaka predstavlja
-(npr. krepko, ležeče itd.).</p>
-<a name="Tag_numbering"></a>
-<h3>Kako številčite oznake</h3>
-<p>Oznake so številčene po <strong>skupinah oznak</strong>, in sicer
-naraščajoče.</p>
-<p>Skupina oznak je lahko ena samostojna oznaka (npr. <code>&lt;br1&gt;</code>)
-ali dve oznaki, ki tvorita par (npr. <code>&lt;f3&gt;</code> in <code>&lt;/f3&gt;</code>).</p>
-<p>Znotraj segmenta dobi prva skupina (par ali samec) številko <strong>0</strong>,
-druga številko <strong>1</strong> itd.</p>
-<p>Prvi primer spodaj ima 3 skupine oznak (par, samca in spet par),
-drugi primer pa ima eno skupino (par).</p>
-<a name="Pairs_and_singletons"></a>
-<h3>Pari in samci</h3>
-<p>Oznake se vedno pojavljajo v parih ali kot samci.</p>
-<p>
-<strong>Posamezne oznake</strong> se nanašajo na oblikovalno
-informacijo, ki ne vpliva na okolišnje besedilo (npr. dodaten presledek
-ali nova vrstica).</p>
-<pre>   <strong>&lt;segment 2132&gt;</strong>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;<strong>&lt;end segment&gt;</strong></pre>
-<p>
-<code><strong>&lt;br1&gt;</strong></code> je samec in na besedilo pred
-in za seboj nima vpliva.</p>
-<p>
-<strong>Pari oznak</strong> običajno predstavljajo oblikovalno
-informacijo, ki velja za besedilo med začetno in končno oznako v paru.
-Začetna oznaka para mora vedno stati <span
- style="text-decoration: underline;">pred</span> oznako, ki par zapre.</p>
-<pre>   <strong>&lt;segment 3167&gt;</strong>Dnevniška datoteka (&lt;f1&gt;log.txt&lt;/f1&gt;), s katero spremljamo operacije in napake<strong>.&lt;end segment&gt;</strong></pre>
-<p>
-<code><strong>&lt;f1&gt;</strong></code> in <code><strong>&lt;/f1&gt;</strong></code>
-sta par, ki vpliva na oblikovanje besedila <code><strong>log.txt</strong></code>.</p>
-<a name="Tags_and_sentence_segmenting"></a>
-<h3>Oznake in segmentiranje povedi</h3>
-<p>OmegaT ustvari oznake, preden začne segmentirati besedilo. Glede na
-pravila segmentiranja bo morda videti, da oznake ne spoštujejo pravil
-za parjenje in številčenje, ki smo jih opisali zgoraj.</p>
-<pre>   <strong>&lt;segment 1554&gt;</strong> &lt;c0&gt;Pred: \. Po: \s&lt;/c0&gt;<br> &lt;b2&gt;Opomba:&lt;/b2&gt;<br>
-"\." predstavlja znak "."&lt;br3&gt; "\s" predstavlja znak za presledek <strong>&lt;end segment&gt;</strong></pre>
-<p>Videti je v redu. Če pa razdelimo segment po pravilih (kot jih pozna
-OmegaT), pridemo do naslednjega rezultata:</p>
-<pre>   <strong>&lt;segment 1990&gt;</strong> &lt;c0&gt;Pred: \. <strong>&lt;end segment&gt;</strong>
+	<h1>Kako delati z oblikovanim besedilom</h1>
 
-   <strong>&lt;segment 1991&gt;</strong> Po: \s&lt;/c0&gt;&lt;br1&gt; <strong>&lt;end segment&gt;</strong>
+	<ul>
+		<li><a href="#intro">Kako oblikovati oznake</a>
+			<ul>
+				<li><a href="#naming">Kako poimenovati oznake</a>
+				</li><li><a href="#numbering">Kako številčiti oznake</a>
+				</li><li><a href="#pairs">Pari in samci</a>
+			</li></ul>
+		</li>
+		<li><a href="#tag_segmenting">Oznake in segmentiranje povedi</a></li>
+		<li><a href="#tag_operation">Operacije z oznakami</a>
+			<ul>
+				<li><a href="#duplication">Podvojevanje skupin oznak</a>
+				</li><li><a href="#deletion">Brisanje skupin oznak</a>
+				</li><li><a href="#order">Spreminjanje vrstnega reda skupin oznak</a>
+				</li><li><a href="#nesting">Gnezdenje skupin oznak</a>
+			</li></ul>
+		</li>
+		<li><a href="#tag-overlapping">Prekrivanje skupin oznak</a></li>
+		<li><a href="#tag_validation">Preverjanje skupin oznak</a></li>
+		<li><a href="#tag_hints">Nasveti za ravnanje z oznakami</a></li>
+	</ul>
 
-   <strong>&lt;segment 1992&gt;</strong> &lt;b2&gt;Opomba:&lt;/b2&gt; "\." pomeni znak "."&lt;br3&gt;<strong>&lt;end segment&gt;</strong>
+	<p>Podatki o oblikovanju, ki so shranjeni v izvirni datoteki, se navadno potrebujejo tudi v datoteki s prevodom. OmegaT sproti prikazuje informacije o oblikovanju (trenutno za datoteke vrste DocBook, HTML, XHTML, Open Document in OpenOffice.org) v obliki oznak. Kadar pri iskanju zadetkov program primerja segmente, primerjava navadno ne vključuje oznak. Oznake, ki jih prenesete v prevedeni segment,&nbsp; bodo shranjene tudi v prevedenem dokumentu.</p>
 
-    <strong>&lt;segment 1993&gt;</strong> "\s" predstavlja znak za presledek <strong>&lt;end segment&gt;</strong></pre>
-<p>(Uporabljena so naslednja pravila za segmentiranje: <i>segment za
-piko, ki ji sledi presledek</i> in <i>segment za oznako za prelom
-vrstice</i>.)</p>
-<p>Primer kaže, da posamični segmenti pravil za parjenje in številčenje
-ne spoštujejo: <code>&lt;co&gt;</code> in <code>&lt;/co&gt;</code> bi
-morala biti par znotraj istega segmenta, vendar ju pravila za
-segmentiranje ločijo.</p>
-<p>V nekaterih primerih lahko to povzroči težave, na primer kadar je
-oznake zaradi slovničnih pravil v ciljnem besedilu treba postaviti na
-drugo mesto (glej <a href="#Tag_operations"
- title="Kako delati s formatiranim  besedilom">Operacije z oznakami</a>
-spodaj).</p>
-<a name="Tag_operations"></a>
-<h3>Operacije z oznakami</h3>
-<p>Pri delu z oznakami je treba biti pazljiv. Če jih nehote spremenite,
-se lahko zgodi, da izhodni dokument ne bo pravilno oblikovan. V
-najslabšem primeru se lahko zgodi, da datoteke ne bo mogoče več
-odpreti, kar je posebej pogosta težava z datotekami OpenOffice.org.</p>
-<a name="Tag_group_duplication"></a>
-<h4>Podvojevanje skupin oznak</h4>
-<p>Če želite oznake podvojiti, jih enostavno kopirajte na mesto, kjer
-jih potrebujete. Ne pozabite, da mora začetna oznaka nastopiti pred
-oznako, ki par zapira.</p>
-<p>Oblikovanje, ki ga predstavlja kopirana skupina oznak, bo veljalo za
-segment, v katerega ste skupino kopirali. </p>
-<p>Primer:</p>
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;To oblikovanje&lt;/f0&gt; bomo podvojili tukaj.<strong>&lt;end segment&gt;</strong></pre>
-<p>Po podvojitvi:</p>
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;To oblikovanje&lt;/f0&gt; bomo podvojili &lt;f0&gt;tukaj&lt;/f0&gt;.<strong>&lt;end segment&gt;</strong></pre>
-<a name="Tag_group_deletion"></a>
-<h4>Brisanje skupin oznak</h4>
-<p>Skupino oznak odstranite iz segmenta tako, da jo izbrišete. Paziti
-morate, da izbrišete tako začetno kot končno oznako, saj lahko sicer
-prevedeno datoteko pokvarite do take mere, da je ne bo mogoče več
-odpreti.</p>
-<p>Z brisanjem skupine oznak odstranite to oblikovanje iz datoteke s
-prevodom. </p>
-<p>Primer:</p>
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;To oblikovanje&lt;/f0&gt; bomo izbrisali.<strong>&lt;end segment&gt;</strong></pre>
-<p>Po brisanju:</p>
-<pre>   <strong>&lt;segment 0001&gt;</strong>To oblikovanje smo izbrisali.<strong>&lt;end segment&gt;</strong></pre>
-<a name="Tag_group_order_modification"></a>
-<h4> Spreminjanje vrstnega reda skupin oznak</h4>
-<p>Če morate zaradi drugačne stavčne strukture v ciljnem jeziku
-spremeniti vrstni red oznak, prestavite skupino oznak na želeno mesto v
-prevodu.</p>
-<p>Oblikovanje bo veljalo za besedilo, kamor ste ga prestavili.<br>
-</p>
-<p>Primer:</p>
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Oblikovanje tu&lt;/f0&gt; in &lt;f1&gt;oblikovanje tu&lt;/f1&gt; bomo zamenjali.<strong>&lt;end segment&gt;</strong></pre>
-<p>Po spremembi vrstnega reda:</p>
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f1&gt;To oblikovanje&lt;/f1&gt; in &lt;f0&gt;to oblikovanje&lt;/f0&gt; smo zamenjali.<strong>&lt;end segment&gt;</strong></pre>
-<a name="Tag_group_nesting"></a>
-<h4>Gnezdenje skupin oznak</h4>
-<p>Če spremenite vrstni red skupin z oznakami, se lahko pripeti, da se
-ena skupina vgnezdi v drugo. Če se vgnezdena skupina v celoti nahaja v
-prvotni skupini, ne bo težav. Paziti pa morate, da pri prenašanju
-notranje skupine oznak ne pozabite česa na prvotnem mestu; saj se lahko
-zgodi, da bo izhodna datoteka okvarjena in je ne bo mogoče več odpreti.</p>
-<p>Vgnezdeni del besedila bo oblikovan v skladu z obema skupinama.</p>
-<p>Primer:</p>
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Oblikovanje&lt;/f0&gt; &lt;f1&gt;tukaj&lt;/f1&gt; bo vgnezdeno.<strong>&lt;end segment&gt;</strong></pre>
-<p>Po gnezdenju:</p>
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Oblikovanje &lt;f1&gt;tukaj&lt;/f1&gt;&lt;/f0&gt; je vgnezdeno v prvo oblikovanje.<strong>&lt;end segment&gt;</strong></pre>
-<a name="Tag_group_overlapping"></a>
-<h3>Prekrivanje skupin oznak</h3>
-<p>Prekrivanje se lahko zgodi zaradi napačnega spreminjanja parov oznak
-in vedno povzroči okvarjen zapis besedila, zaradi česar datoteke včasih
-ni mogoče odpreti .</p>
-<p>Primer:</p>
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Oblikovanje&lt;/f0&gt; &lt;f1&gt;tukaj&lt;/f1&gt; bomo okvarili.<strong>&lt;end segment&gt;</strong></pre>
-<p>Po napaki:</p>
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Oblikovanje &lt;f1&gt;tukaj&lt;/f0&gt; &lt;/f1&gt;je precej okvarjeno<strong>.&lt;end segment&gt;</strong></pre>
-<a name="Tag_group_validation"></a>
-<h3>Preverjanje skupin oznak</h3>
-<p>Funkcija <a href="userInterface.html#Tag_Validation"
- title="Uporabniški vmesnik">preverjanja oznak</a> odkrije (namenoma
-ali naključno) spremenjene oznake in prikaže prizadete segmente.
-Funkcija drugega za drugim odpre vse segmente, v katerih odkrije
-nesoglasja v oznakah.</p>
-<p>Funkcija je koristna pri iskanju napak v oznakah prevedenih besedil,
-pogosti težavi datotek OpenDocument in OpenOffice.org , ki jih zaradi
-težav z oznakami ni več mogoče odpreti. Težavo lahko pogostor rešite
-tako, da oznake popravite in vnovič ustvarite izhodni dokument.</p>
-<a name="Hints_for_tags_management"></a>
-<h3>Nasveti za ravnanje z oznakami</h3>
-<p>Oznake navadno predstavljajo ukaz za oblikovanje izvirnega besedila.
-Če je mogoče, <strong>poenostavite oblikovanje izvornega besedila</strong>,
-da bo delo z oznakami pozneje lažje. Poizkusite uskladiti uporabljene
-pisave, njihove velikosti, barve itd, saj s tem poenostavite prevajanje
-in zmanjšate število možnih napak v oznakah.</p>
-<p>Oglejte si poglavje <a href="#Tag_operations"
- title="Kako delati s formatiranim  besedilom">Operacije z oznakami</a>,
-da vidite, kaj lahko storite z oznakami.</p>
-<p>Če vas oznake motijo in v trenutnem besedilu oblikovanje ni zelo
-pomembno, lahko prevajanje olajšate tudi tako, da iz izvirnega besedila
-odstranite čim več ukazov za oblikovanje.</p>
-<p>Če želite videti oznake v programu OmegaT, v izhodnem dokumentu pa
-večine oblikovanja ne potrebujete, lahko v prevedenih segmentih oznake
-izpustite. V tem primeru <strong>pazite predvsem na pare oznak</strong>,
-saj lahko, če pozabite izbrisati eno oznako, okvarite oblikovanje
-svojega dokumenta toliko, da prevedenega besedila v OpenOffice.org ne
-bo več mogoče odpreti. </p>
-<p>Ker že samo besedilo vključuje oznake, je mogoče prilagoditi <a
- href="segmentation.html" title="Segmetiranje izvora">pravila za
-segmentiranje</a> tako, da tvorijo segmente z manj oznakami. Gre za
-napredno možnost programa, ki je začetnikom ne priporočamo. </p>
-<a name="Important"></a>
-<h3>Pomembno</h3>
-<p>Program OmergaT ne odkrije vseh napak v oblikovanju samodejno, zato
-vas morda o kakšni napaki ali spremenjenem oblikovanju v ciljnem
-dokumentu ne bo opozoril. Lahko se tudi zgodi, da bo prevedena datoteka
-videti polomljena, datoteka OpenDocument oziroma OpenOffice.org morda
-celo toliko, da je ne boste mogli več odpreti.</p>
 <hr>
-<p><a href="legalNotices.html" title="Pravni poduk">Pravni poduk</a></p>
+
+	<a name="intro" id="intro"></a>
+	<h1>Kako oblikovati oznake</h1>
+
+
+	<a name="naming" id="naming"></a>
+	<h2>Kako poimenovati oznake</h2>
+
+	<p>Oznake so sestavljene iz enega do treh znakov in števil. Na osnovi enolične številke je mogoče zbrati v skupino tiste oznake, ki spadajo skupaj, oziroma razlikovati med oznakami, ki imajo sicer isto kratico, pa se kljub temu med seboj razlikujejo. Znaki včasih nakazujejo vrsto oblikovanja, ki ga oznaka predstavlja (npr. krepko, ležeče itd.).</p>
+
+	<a name="numbering" id="numbering"></a>
+	<h2>Kako številčiti oznake</h2>
+
+	<p>Oznake se številči v rastočem vrstnem redu za <strong>skupine oznak</strong>. Pod izrazom "skupne oznak" je razumeti bodisi eno samo oznako  (kot recimo <code><font color="red">&lt;br1&gt;</font></code>),  ki stoji sama zase, ali pa 2 oznaki, ki tvorita par  (kot na primer <code><font color="red">&lt;f3&gt;</font></code> in <code><font color="red">&lt;/f3&gt;</font></code>). Znotraj segmenta dobi prva skupina (par ali samec) številko <strong>0</strong>, druga številko  <strong>1</strong> itd. Prvi primer spodaj ima 3 skupine oznak (par, samca in spet par), drugi primer pa ima eno skupino (par).</p>
+
+	<a name="pairs" id="pairs"></a>
+	<h2>Pari in samci</h2>
+
+	<p>Oznake se vedno pojavljajo v parih ali kot samci. <strong>Posamezne oznake</strong> se nanašajo na oblikovalno informacijo, ki ne vpliva na okoliško besedilo  (primer za to bi bil dodaten presledek ali pa nova vrstica).</p>
+
+	<pre>	<strong>&lt;segment 2132&gt;</strong><font color="red">&lt;b0&gt;</font>&lt;Ctrl+N&gt;<font color="red">&lt;/b0&gt;</font>, <font color="red">&lt;br1&gt;</font><font color="red">&lt;b2&gt;</font>&lt;Enter&gt;<font color="red">&lt;/b2&gt;</font><strong>&lt;end segment&gt;</strong></pre>
+
+	<p><code><strong><font color="red">&lt;br1&gt;</font></strong></code> je oznaka samec in na besedilo pred sabo in za sabo nima vpliva. <strong>Pari oznak</strong> običajno predstavljajo oblikovalno informacijo, ki se tiče besedila med začetno in končno oznako v paru.  Začetna oznaka para mora vedno stati pred oznako, ki par zapre.</p>
+
+	<pre>	<strong>&lt;segment 3167&gt;</strong>Datoteka log(<font color="red"><font color="red"></font>log.txt<font color="red"></font></font>), s katero. se zasleduje operacije in napake<strong>&lt;end segment&gt;</strong></pre>
+
+	<p><code><strong><font color="red">&lt;f1&gt;</font></strong></code> in <code><strong><font color="red">&lt;/f1&gt;</font></strong></code> sta par, ki vpliva na <code><strong>log.txt</strong></code>.</p>
+
+<hr>
+
+	<a name="tag_segmenting" id="tag_segmenting"></a>
+	<h1>Oznake in segmentiranje povedi</h1>
+
+	<p>OmegaT ustvari oznake, preden začne segmentirati besedilo. Glede na pravila segmentiranja bo morda videti, da oznake ne spoštujejo pravil za parjenje in številčenje, ki smo jih opisali zgoraj.</p>
+
+	<pre>	<strong>&lt;segment 1554&gt;</strong> <font color="red">&lt;f0&gt;</font> Pred: \. Po: \s<font color="red">&lt;/f0&gt;</font><strong>&lt;end segment&gt;</strong></pre>
+
+	<p>Videti je vse v redu. Če pa razdelimo segment po pravilih (kot jih pozna OmegaT), pridemo do naslednjega rezultata:</p>
+
+	<pre>	<strong>&lt;segment 1990&gt;</strong> <font color="red">&lt;f0&gt;</font>Pred: \. <strong>&lt;end segment&gt;</strong>
+	<strong>&lt;segment 1991&gt;</strong> Po: \s<font color="red">&lt;/f0&gt;</font><strong>&lt;end segment&gt;</strong>
+	</pre>
+
+	<p>Uporabljeno je naslednje pravilo za segmentiranje: <i>segment za piko, ki ji sledi presledek</i>. Kot vidimo, segmenti - če jih jemljemo vsakega zase - pravil za parjenje in številčenje ne spoštujejo: <code><font color="red">&lt;f0&gt;</font></code> in <code><font color="red">&lt;/f0&gt;</font></code> bi morala biti skupaj v paru v enem segmentu, vendar ju pravila za segmentiranje ločujejo.   V nekaterih primerih ima to lahko za posledico probleme, recimo kadar je oznake zaradi slovničnih pravil v ciljnem besedilu postaviti na drugo mesto.(glej <a href="#Tag_operations">Operacije z oznakami</a> spodaj.</p>
+
+<hr>
+
+	<a name="tag_operation" id="tag_operation"></a>
+	<h1>Operacije z oznakami</h1>
+
+	<p>Pri delu z oznakami je treba biti pazljiv. Če jih nehote spremenite, se lahko zgodi, da izhodni dokument ne bo pravilno oblikovan. Pametno pravilo v tem primeru je  "Ne popravljaj, če ni pokvarjeno". Vseeno je dobro vedeti, kaj je mogoče.</p>
+
+	<a name="duplication" id="duplication"></a>
+	<h2>Podvojevanje skupin oznak:</h2>
+
+	<p>Če želite oznake podvojiti, jih enostavno kopirajte na mesto, kjer jih potrebujete. Ne pozabite, da mora začetna oznaka nastopiti pred oznako, ki par zapira. Oblikovanje, ki ga predstavlja kopirana skupina oznak, bo veljalo za segment, v katerega ste skupino kopirali.</p>
+
+	<p>Primer:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>To formatiranje<font color="red">&lt;/f0&gt;</font> bomo podvojili tukaj.<strong>&lt;end segment&gt;</strong></pre>
+
+	<p>Po podvojitvi:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>To formatiranje <font color="red">&lt;/f0&gt;</font> smo <font color="red">&lt;f0&gt;</font>tu podvojili<font color="red">&lt;/f0&gt;</font>.<strong>&lt;end segment&gt;</strong></pre>
+
+	<a name="deletion" id="deletion"></a>
+	<h2>Brisanje skupin oznak</h2>
+
+	<p>Skupino oznak odstranite iz segmenta tako, da jo izbrišete. Paziti morate, da izbrišete tako začetno kot končno oznako, saj lahko sicer prevedeno datoteko pokvarite do take mere, da je ne bo mogoče več odpreti. Z brisanjem skupine oznak odstranite to oblikovanje iz datoteke s prevodom.</p>
+
+	<p>Primer:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>To formatiranje<font color="red">&lt;/f0&gt;</font> bomo zbrisali.<strong>&lt;end segment&gt;</strong></pre>
+
+	<p>Po brisanju:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong>To formatiranje smo zbrisali.<strong>&lt;end segment&gt;</strong></pre>
+
+	<a name="order" id="order"></a>
+	<h2>Spreminjanje vrstnega reda skupin oznak</h2>
+
+	<p>Če morate zaradi drugačne stavčne strukture v ciljnem jeziku spremeniti vrstni red oznak, prestavite skupino oznak na želeno mesto v prevodu. Oblikovanje bo veljalo za besedilo, kamor ste ga prestavili.</p>
+
+	<p>Primer:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Za formatiranje tu<font color="red">&lt;/f0&gt;</font> in  <font color="red"><font color="red"></font>formatiranje tam<font color="red"></font></font> bomo spremenili vrstni red.<strong>&lt;end segment&gt;</strong></pre>
+
+	<p>Po spremembi vrstnega reda:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red"><font color="red"></font>Formatiranje tam<font color="red"></font></font> in <font color="red">&lt;f0&gt;</font>formatiranje tu<font color="red">&lt;/f0&gt;</font> sta v obratnem vrstnem redu.<strong>&lt;end segment&gt;</strong></pre>
+
+	<a name="nesting" id="nesting"></a>
+	<h2>Gnezdenje skupin oznak</h2>
+
+	<p>Če spremenite vrstni red skupin z oznakami, se lahko pripeti, da se ena skupina ugnezdi v drugo. Če se ugnezdena skupina v celoti nahaja v prvotni skupini, ne bo težav. Paziti pa morate, da pri prenašanju notranje skupine oznak ne pozabite česa na prvotnem mestu; saj se lahko zgodi, da bo izhodna datoteka okvarjena in je ne bo mogoče več odpreti. Ugnezdeni del besedila bo oblikovan v skladu z obema skupinama.</p>
+
+	<p>Primer:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Formatiranje<font color="red">&lt;/f0&gt;</font> <font color="red"><font color="red"></font>ena<font color="red"></font></font> bomo ugnezdili v formatiranje nič.<strong>&lt;end segment&gt;</strong></pre>
+
+	<p>Po gnezdenju:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Formatiranje <font color="red"><font color="red"></font>ena<font color="red"></font></font><font color="red">&lt;/f0&gt;</font> smo ugnezdili v formatiranje nič.<strong>&lt;end segment&gt;</strong></pre>
+
+<hr>
+
+	<a name="tag-overlapping" id="tag-overlapping"></a>
+	<h1>Prekrivanje skupin oznak</h1>
+
+	<p>Prekrivanje se lahko zgodi zaradi napačnega spreminjanja parov oznak in vedno povzroči okvarjen zapis besedila, zaradi česar datoteke včasih ni mogoče odpreti . Primer:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Formatiranje<font color="red">&lt;/f0&gt;</font> <font color="red"><font color="red"></font>&gt;tukaj<font color="red"></font></font>bomo malo pokvarili.<strong>&lt;end segment&gt;</strong></pre>
+
+	<p>Po napaki:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Formatiranje <font color="red"><font color="red"></font>one<font color="red">&lt;/f0&gt;</font> <font color="red"></font></font> je sedaj precej pokvarjeno<strong>&lt;end segment&gt;</strong>.</pre>
+
+<hr>
+
+	<a name="tag_validation" id="tag_validation"></a>
+	<h1>Preverjanje skupin oznak</h1>
+
+	<p>Preverjanje oznak odkrije spremenjene oznake (najsi bo namenoma, ali pa nehote), in prikaže prizadete segmente. Funkcija vam bo med uporabo odprla drugega za drugim vse segmente, v katerih odkrije nesoglasje, kar se oznak tiče.</p>
+
+	<p>Funkcija drugega za drugim odpre vse segmente, v katerih odkrije nesoglasja v oznakah. Funkcija je koristna pri iskanju napak v oznakah prevedenih besedil, pogosti težavi datotek OpenDocument in OpenOffice.org , ki jih zaradi težav z oznakami ni več mogoče odpreti. Težavo lahko pogostoma rešite tako, da oznake popravite in vnovič ustvarite izhodni dokument.</p>
+
+	<p>To okno odprete z bližnjico &lt;<code><a href="menu.html#shortcuts">Ctrl+T</a></code>.</p>
+	
+	<p>V oknu se nahaja tabela s tremi stolpci:</p>
+
+	<ul>
+		<li>povezava na segment </li>
+		<li>vsebina izvirnega segmenta,</li>
+		<li>vsebina prevedenega segmenta.</li>
+	</ul>
+	
+	<p>Oznake so okrepljene v modri barvi, da je laže primerjati izvorni in ciljni segment.<p>Če kliknete na povezavo, se segment odpre v urejevalniku.</p>
+	
+	<p>Popravite po potrebi napake in pritisnite <code><a href="menu.html#shortcuts">Ctrl+T</a></code>, da se vrnete nazaj v okno za preverjanje napak.</p>
+
+	<p><a href="formattedText.html#intro">Napake v oznakah</a> so posledice <a href="formattedText.html#tag_operation">manipulacij na oznakah</a>, zaradi katerih se v ciljnem dokumentu oznake ne pojavljajo v istem vrstnem redu in številu kot pa v originalnem besedilu. Nekatere teh manipulacij so potrebne in dobronamerne, pri drugih bo prišlo do problemov, ko se ustvarja ciljni dokument. </p>
+
+	<p>Oznake navadno predstavljajo kak ukaz za oblikovanje izvirnega besedila. Če se formatiranje izvornega besedila lahko<strong> poenostavite</strong>, ima lahko za posledico znatno manj oznak kasneje.</p>
+
+
+<hr>
+
+	<a name="tag_hints" id="tag_hints"></a>
+	<h1>Nasveti za ravnanje z oznakami</h1>
+
+	<p>Oznake navadno predstavljajo kak ukaz za oblikovanje izvirnega besedila. Če se formatiranje izvornega besedila lahko<strong> poenostavite</strong>, ima lahko za posledico znatno manj oznak kasneje. Poizkusite uskladiti uporabljene pisave, njihove velikosti, barve itd, saj s tem poenostavite prevajanje in zmanjšate število možnih napak v oznakah. Oglejte si točko <a href="#Tag_operations">Operacije z oznakami</a> , da vidite, kaj lahko storite z oznakami. Če vas oznake motijo in v trenutnem besedilu oblikovanje ni zelo pomembno, lahko prevajanje olajšate tudi tako, da iz izvirnega besedila odstranite čim več ukazov za oblikovanje.</p>
+
+	<p>Če v OmegaT oznake želite videti, vendar večine oblikovanja v izhodnem dokumentu ne potrebujete, lahko v prevedenih segmentih oznake mirno izpuščate. V tem primeru <strong>pazite predvsem na pare oznak</strong>, ker lahko s tem, da pozabite zbrisati eno od obeh polovic, pokvarite formatiranje svojega dokumenta do take mere, da prevedenega besedila v OpenOffice.org dokumentu ne morete več odpreti.  Ker besedilo že samo vključuje oznake, je mogoče prilagoditi <a href="./segmentation.html">pravila za segmentacijo</a> tako, da imajo ciljni segmenti manj oznak. Gre za napredno možnost programa, ki ni namenjena začetnikom.</p>
+
+	<p><strong>Važno:</strong> Program OmegaT ne odkrije vseh napak v oblikovanju samodejno, zato vas morda o kakšni napaki ali spremenjenem oblikovanju v ciljnem dokumentu ne bo opozoril. Lahko se tudi zgodi, da bo prevedena datoteka videti polomljena, datoteka OpenDocument oziroma OpenOffice.org morda celo toliko, da je ne boste mogli več odpreti.</p>
+	<hr>
+
+	<p><a href="legalNotices.html">Pravni poduk</a></p>
 </body>
 </html>

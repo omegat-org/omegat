@@ -1,100 +1,110 @@
 <html>
-
 <head>
-<meta http-equiv=Content-Type content="text/html; charset=utf-8">
-<meta name=Generator content="Microsoft Word 11 (filtered)">
-<title>Slovarji - Priročnik za uporabnika OmegaT 1.6.2</title>
-<style>
-<!--
- /* Style Definitions */
- p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0cm;
-	margin-bottom:.0001pt;
-	font-size:12.0pt;
-	font-family:"Times New Roman";}
-h1
-	{margin-right:0cm;
-	margin-left:0cm;
-	font-size:24.0pt;
-	font-family:"Times New Roman";
-	font-weight:bold;}
-h2
-	{margin-right:0cm;
-	margin-left:0cm;
-	font-size:18.0pt;
-	font-family:"Times New Roman";
-	font-weight:bold;}
-a:link, span.MsoHyperlink
-	{color:blue;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{color:blue;
-	text-decoration:underline;}
-p
-	{margin-right:0cm;
-	margin-left:0cm;
-	font-size:12.0pt;
-	font-family:"Times New Roman";}
-code
-	{font-family:"Courier New";}
-@page Section1
-	{size:595.3pt 841.9pt;
-	margin:70.85pt 70.85pt 2.0cm 70.85pt;}
-div.Section1
-	{page:Section1;}
--->
-</style>
-
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Geslovniki - Priročnik za uporabnika OmegaT 1.7.3  </title>
 </head>
+<body>
 
-<body lang=DE link=blue vlink=blue>
+	<h1>Geslovniki</h1>
 
-<div class=Section1>
+	<ul>
+		<li><a href="#usage">Uporaba</a></li>
+		<li><a href="#fileformat">Oblika zapisa datoteke</a></li>
+		<li><a href="#howtocreate">Kako ustvarjati geslovnike</a>
+			<ul>
+				<li><a href="#text_editor">S pomočjo urejevalnika besedila</a></li>
+				<li><a href="#spreadsheet">S pomočjo programa za preglednice</a></li>
+				<li><a href="#multiterm">S pomočjo Trados Multiterm</a></li>
+			</ul>
+		</li>
+		<li><a href="#commonglossaryproblems">Pogosti problemi z geslovniki</a></li>
+	</ul>
 
-<h1><span lang=SL>Slovarji</span></h1>
+	<p>Geslovniki so datoteke, ki se jih za uporabo v OmegaT sestavlja in ureja ročno.</p>
+	
+	<p> OmegaT bo izraze v aktivnem segmentu poiskal v geslovnikih, ki so na razpolago, in prevode izrazov prikazal samodejno v  <a href="userInterface.html#Glossary">prikaznem oknu za geslovnike</a></p>
 
-<p><span lang=SL>Slovar deluje samodejno. Obstoječi slovar lahko začnete
-uporabljati enostavno tako, da ga, ko odprete projekt, kopirate v podimenik </span><code><span
-lang=SL style='font-size:10.0pt'>/glossary</span></code><span lang=SL> . Ko
-projekt odprete, OmegaT slovarske datoteke v tem podimeniku samodejno prepozna.
-Izraze v aktivnem segmentu, ki jih OmegaT najde v slovarju oziroma slovarjih,
-samodejno pokaže v oknu slovarja.</span></p>
+<hr>
 
-<p><span lang=SL>Pri tem se najde samo natančne zadetke (program ne pozna
-sklanjatve itd.).</span></p>
+	<a name="usage" id="usage"></a>
+	<h1>Uporaba</h1>
 
-<p><span lang=SL>Nove izraze lahko med prevajanjem vnašate ročno (na primer s
-pomočjo urejevalnika besedila), vendar bodo novi vnosi na voljo šele po
-vnovičnem odprtju projekta. </span></p>
+	<p>Obstoječi geslovnik lahko začnete uporabljati enostavno tako, da ga prekopirate v podimenik <code>/glossary</code> . OmegaT geslovnike  v tem podimeniku samodejno  prepozna, ko projekt odprete.</p>
+	
+	<p>Izraze v aktivnem segmentu, ki jih najde v geslovniku oz. geslovnikih, OmegaT samodejno pokaže v podoknu za geslovnike. Pri tem se najde samo natančne zadetke (program ne pozna sklanjatve itd.).</p>
 
-<h2><a name="File_Format"></a><span lang=SL>Oblika zapisa datoteke</span></h2>
+	<p>{\cs6\f1\cf6\lang1024  &lt;span lang=SL&gt;}Nove izraze lahko med prevajanjem vnašate ročno (na primer s pomočjo urejevalnika besedila), vendar bodo novi vnosi na voljo šele po vnovičnem odprtju projekta.</p>
 
-<p><span lang=SL>Slovarji so datoteke z besedilom v treh s tabulatorjem ločenih
-stolpcih: v prvem stolpcu je izvirni izraz, v drugem stolpcu pa njegov prevod v
-ciljnem jeziku. Tretji stolpec je namenjen dodatnim podatkom.</span></p>
+<hr>
 
-<p><span lang=SL>Slovarje lahko hranite v privzetem kodiranju sistema (v tem
-primeru morajo datoteke imeti pripono </span><code><span lang=SL
-style='font-size:10.0pt'>.tab</span></code><span lang=SL>) ali v UTF-8 (v tem
-primeru morajo datoteke imeti pripono </span><code><span lang=SL
-style='font-size:10.0pt'>.utf8</span></code><span lang=SL>).</span></p>
+	<a name="fileformat" id="fileformat"></a>
+	<h1>Oblika zapisa datoteke</h1>
 
-<p><span lang=SL>Slovarje Multiterm je na primer mogoče po izvozu nespremenjene
-uporabiti v programu OmegaT, če imajo pripono </span><code><span lang=SL
-style='font-size:10.0pt'>.tab</span></code><span lang=SL> in če v prvih dveh
-stolpcih vsebujejo izvirni in ciljni jezik.</span></p>
+	<p>Geslovniki so datoteke z besedilom v treh s tabulatorjem ločenih stolpcih: v prvem stolpcu je izvirni izraz, v drugem stolpcu pa njegov prevod v ciljnem jeziku. Tretji stolpec je namenjen dodatnim podatkom.{\cs6\f1\cf6\lang1024  &lt;/span&gt;}</p>
 
-<div class=MsoNormal align=center style='text-align:center'><span lang=SL>
+	<p>Geslovnike lahko hranite v privzetem kodiranju sistema (v tem primeru morajo datoteke imeti pripono <code>.tab</code>) ali v  UTF-8 (v tem primeru morajo datoteke imeti pripono <code>.utf8</code>).</p>
 
-<hr size=2 width="100%" align=center>
+<hr>
 
-</span></div>
+	<a name="howtocreate" id="howtocreate"></a>
+	<h1>Kako ustvarjati geslovnike</h1>
 
-<p><span lang=SL><a href="legalNotices.html" title="Pravni poduk">Pravni
-poduk</a></span></p>
+	<a name="text_editor" id="text_editor"></a>
+	<h2>S pomočjo urejevalnika besedila</h2>
 
-</div>
+	<p>S pomočjo urejevalnika besedila ustvarite datoteko in ji dajte smiselno ime ter pripono <code>.tab</code>, recimo  <code>EN SL tehnični izrazi.tab</code>.</p>
 
+	<p>Vtipkajte izraz v izvornem jeziku, potem tipko  <code>tab</code>, in nato prevod za izraz v ciljnem jeziku. Lahko dodate še ponoven znak <code>tab</code> in za njim komentar v zvezi z vnosom. Pritisnite na <code>Enter</code> za naslednji vnos.</p>
+	
+	<p>Ko ste vnesli vse pojme, dokument shranite. V kolikor vhodni in izhodni jezik ne uporabljata istega kodiranja za znake, je treba geslovnik shraniti v kodiranju UTF-8. V tem primeru poimenujte datoteko - recimo -  <code>EN SL tehnični izrazi.utf8</code>.</p>
+
+	<a name="spreadsheet" id="spreadsheet"></a>
+	<h2>S pomočjo programa za preglednice</h2>
+
+	<p>V kolikor uporabljate Calc ali ExCel, vam bo ta pristop prišel prav, ker lahko - v kolikor ne potrebujte UTF-8 - izraze razvrščate.</p>
+
+	<p>Začnite s prazno preglednico. Vnašajte svoje izraze, po eno postavko na vrstico. Izvirni izraz je v prvem stolpcu, njegov prevod v drugem; v tretji stolpec lahko vnesete pripombe.</p>
+	
+	<p>Ko ste končali z vnašanjem, shranite dokument s pomočjo ukaza Shrani kot</p>
+	
+	<p>Za vrsto datoteke navedite Besedilo CSV; <strong> ločilo za polja </strong> na  <strong>tab </strong> in ločilo med besedami mora biti  <strong>prazno </strong> (v Calc zbrišite vsebino tega polja). Za pripono datoteke vnesite <code>.tab</code>.</p>
+	
+	<p>Program vas bo opozoril glede izgube oblikovanja ipd, sporočilo enostavno prezrite z V redu.</p>
+	
+	<p>Preverite, da ima datoteka pravilno pripono, in sicer <code>.tab</code> in ne slučajno <code>tab.csv</code>  Po potrebi datoteko preimenujte.</p>
+	
+	<p>Če vsebina datoteke to zahteva, lahko v Calc navedete, da naj jo program shrani v UTF8 obliki.  V tem primeru poskrbite, da ima datoteka pripono <code>.UTF8</code><a name="multiterm" id="multiterm"></a>
+	<h2>S pomočjo Trados Multiterm</h2>
+	
+	<p>Geslovnike, ki se jih uporablja v programu Multiterm, je mogoče po besedilnem izvozu brez sprememb uporabiti v  slovarjih OmegaT, pod pogojem, da ste jim dali pripono  <code>.tab</code> in da sta izvorni in ciljni jezik prva dva stolpca v njih</p>
+
+<hr>
+
+	<a name="commonglossaryproblems" id="commonglossaryproblems"></a>
+	<h1>Pogosti problemi z geslovniki</h1>
+
+	<dl>
+		<dt>problem: podokno za geslovnike ne prikazuje ničesar.</dt>
+		<dd>možni razlogi:<ul>
+			<li>v podimeniku "glossary" ni najti ustreznih datotek.</li>
+			<li>datoteka z gesli je prazna</li>
+			<li>datoteka nima pravilne pripone (.tab ali .utf8)</li>
+			<li>geslovniki niso shranjeni v ustrezni kodi</li>
+			<li>v aktivnem segmentu ni izrazov, ki bi ustrezali vnosom v geslovnik</li>
+			<li>popravili ste vzrok za enega ali več problemov, ki so omenjeni zgoraj, vendar projekta niste ponovno naložili</li>
+		</ul>
+		</dd>
+
+		<dt>problem: podokno za gesla nekaterih znakov ne kaže prav (pri tem pa so isti znaki prikazani na pravilen način v urejevalniku).</dt>
+		<dd>možni razlogi:<ul>
+			<li>pripona geslovnika ne ustreza uporabljenemu kodiranju</li>
+		</ul>
+		</dd>
+	</dl>
+	
+	<hr>
+
+	<p><a href="legalNotices.html">Pravni poduk</a></p>
 </body>
-
 </html>

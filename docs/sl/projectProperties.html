@@ -1,116 +1,71 @@
 <html>
-
 <head>
-<meta http-equiv=Content-Type content="text/html; charset=utf-8">
-<meta name=Generator content="Microsoft Word 11 (filtered)">
-<title>Lastnosti projekta - Priročnik za uporabnika OmegaT 1.6.2</title>
-<style>
-<!--
- /* Style Definitions */
- p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0cm;
-	margin-bottom:.0001pt;
-	font-size:12.0pt;
-	font-family:"Times New Roman";}
-h1
-	{margin-right:0cm;
-	margin-left:0cm;
-	font-size:24.0pt;
-	font-family:"Times New Roman";
-	font-weight:bold;}
-a:link, span.MsoHyperlink
-	{color:blue;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{color:blue;
-	text-decoration:underline;}
-p
-	{margin-right:0cm;
-	margin-left:0cm;
-	font-size:12.0pt;
-	font-family:"Times New Roman";}
-code
-	{font-family:"Courier New";}
-@page Section1
-	{size:595.3pt 841.9pt;
-	margin:70.85pt 70.85pt 2.0cm 70.85pt;}
-div.Section1
-	{page:Section1;}
- /* List Definitions */
- ol
-	{margin-bottom:0cm;}
-ul
-	{margin-bottom:0cm;}
--->
-</style>
-
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title> Lastnosti projekta -  Priročnik za uporabnika OmegaT 1.7.3 </title>
 </head>
+<body>
 
-<body lang=DE link=blue vlink=blue>
+	<h1>Lastnosti projekta</h1>
 
-<div class=Section1>
+	<ul>
+		<li><a href="#dialog">Pogovorno okno za lastnosti</a>
+			<ul>
+				<li><a href="#language">Jezikovne nastavitve</a></li>
+				<li><a href="#segments">Nastavitev segmentiranja</a></li>
+				<li><a href="#folder">Nastavitve strukture podimenikov</a></li>
+			</ul>
+		</li>
+		<li><a href="#warning">Kako spreminjati lastnosti projekta med delom</a></li>
+	</ul>
+	
+<hr>
 
-<h1><span lang=SL>Lastnosti projekta</span></h1>
+	<a name="dialog" id="dialog"></a>
+	<h1>Pogovorno okno za lastnosti</h1>
 
-<p><span lang=SL>V tem pogovornem oknu lahko prilagodite imenike in jezike
-projekta. Odprete ga z bližnjico <a href="keyboardShortcuts.html"
-title="Bližnjice OmegaT na tipkovnici"><code><span style='font-size:10.0pt'>Ctrl
-+ E</span></code></a> ali možnostjo <strong>Projekt -&gt; Lastnosti...</strong>
-v <a href="menu.html" title="Glavni meni">glavnem meniju</a>.</span></p>
+	<p>V tem dvogovoru lahko prilagodite  imenike in jezike projekta. Odprete ga, če pritisnete <code><a href= "menu.html#shortcuts">Ctrl+E</a></code> ali pa poiščete  <strong>Projekt -&gt; Lastnosti...</strong> v <a href="menu.html">glavnem meniju</a>. Pogovorno okno vsebuje:</p>
 
-<p><span lang=SL>Pogovorno okno vsebuje:</span></p>
+	<ul>
+		<li>Polja, v katerih s pomočjo spustnih polj izberete izvorni in ciljni jezik.</li>
+		<li>Izbirno polje za segmentiranje</li>
+		<li>Polje za nastavitev projektnih imenikov</li>
+	</ul>
 
-<ul style='margin-top:0cm' type=disc>
- <li class=MsoNormal><span lang=SL>polja, v katerih s pomočjo spustnih polj
-     izberete izvirni in ciljni jezik,</span></li>
- <li class=MsoNormal><span lang=SL>izbirno polje za segmentiranje,</span></li>
- <li class=MsoNormal><span lang=SL>polje za nastavitev projektnih imenikov.</span></li>
-</ul>
+	<p>Vsa polja lahko spreminjate. Oznake za jezike lahko vtipkate ali pa izberete iz spustnih polj.  Imena imenikov, ki še ne obstajate, lahko vtipkate, in OmegaT jih bo odprl za vas.</p>
+	
 
-<p><span lang=SL>Vsa polja ta lahko spreminjate. Oznake za jezike lahko vnesete
-ročno ali jih izberete iz spustnih seznamov. Imena imenikov, ki še ne
-obstajajo, lahko neposredno vnesete, da jih bo OmegaT ustvaril.</span></p>
+	<a name="language" id="language"></a>
+	<h2>Jezikovne nastavitve</h2>
+	
+	<p>Če spreminjate jezike, se lahko pripeti, da prevodnega spomina, ki ste ga doslej uspeli zgraditi, ne boste več mogli uporabljati, ker kombinacija jezikov ne bo več ustrezala.</p>
+	
+	<a name="segments" id="segments"></a>
+	<h2>Nastavitev segmentiranja</h2>
+	
+	<p>Nastavitve za segmentiranje samo spremenijo način, kako OmegaT dela z izvirnimi datotekami.. Segmentacije že prevedenega besedila se pri tem ne spreminja..</p>
+	
+	<p>Če nastavitve za segmentiranje spremenite sredi dela na projektu, se lahko zgodi, da se bodo že prevedeni segmenti združili skupaj ali pa da bodo razpadli.  Posledica bo, da bodo praktično spet v stanju "neprevedeno", saj za njih ne bo najti odgovarjajočega segmenta v prevodnem spominu, ne glede na to da se v njem nahaja stara oblika segmentov in njih prevod.</p>
+	
+	<p>OmegaT lahko <a href= "translationMemories.html#Upgrading_Translation_Memories"> obnovi stare prevodne spomine</a> , ki stavčnega segmentiranja niso poznale, v obratni smeri pa to ni mogoče.</p>
 
-<h3><a name="Modifying_Project_Properties_Half-Way"></a><span lang=SL>Kako
-spreminjati lastnosti projekta</span></h3>
+	<a name="folder" id="folder"></a>
+	<h2>Nastavitve strukture podimenikov</h2>
+	
+	<p>V kolikor nameravate spremeniti projektne imenike, vedite,  da program datotek ne bo sam od sebe preselil.  Tako se lahko znajdete v situaciji, ko ne boste ne vi ne OmegaT vedeli, kje je kaj.</p>
 
-<p><span lang=SL>Med prevajanjem lahko lastnosti projekta kadar koli
-spremenite, vendar se to ne priporoča. Ko začnete prevajati, naj bodo vse
-nastavitve dokončne, razen če odkrijete kakšne večje napake. </span></p>
+<hr>
 
-<p><span lang=SL>Natančneje: </span></p>
+	<a name="warning" id="warning"></a>
+	<h1>Kako spreminjati lastnosti projekta med delom</h1>
 
-<ul style='margin-top:0cm' type=disc>
- <li class=MsoNormal><span lang=SL>Če spreminjate jezike, se lahko zgodi, da
-     spomina prevodov, ki ste ga doslej uspeli zgraditi, ne boste več mogli
-     uporabljati, saj kombinacija jezikov ne bo več ustrezala.</span></li>
- <li class=MsoNormal><span lang=SL>Če spremenite pravila za segmentiranje, se
-     lahko že prevedeni segmenti združijo ali razdelijo, zato se bodo znova
-     kazali kot &quot;neprevedeni&quot;, čeprav je stari prevod (ki pa več ne
-     ustreza) v spominu še vedno na voljo. OmegaT lahko <a
-     href="translationMemories.html#Upgrading_Translation_Memories"
-     title=" Prevodni spomini">obnovi stare prevodne spomine</a>, ki so brez
-     stavčnega segmentiranja, prenova v nasprotni smeri pa ni možna. </span></li>
- <li class=MsoNormal><span lang=SL>Če spremenite projektne imenike, program
-     datotek ne bo samodejno preselil, zato se lahko zgodi, da ne boste več
-     vedeli, kje se kaj nahaja, program pa tudi ne.</span></li>
-</ul>
+	<p>Med prevajanjem lahko lastnosti projekta vedno spremenite; pametno pa to ni.  </p>
+	
+	<p>Ko ste enkrat začeli s prevajanjem, je treba vse nastavitve imeti za dokončne, razen če niste odkrili kake večje napake.   Glej poglavje <a href= "preventingDataLoss.html">Kako preprečiti izgubo podatkov</a> za nasvete, kako zavarovati svoje delo.</p>
 
-<p><span lang=SL>Glejte poglavje <a href="preventingDataLoss.html"
-title="Kako preprečiti izgubo podatkov">Kako preprečiti izgubo podatkov</a> za
-nasvete o tem, kako zaščititi svoje delo.</span></p>
 
-<div class=MsoNormal align=center style='text-align:center'><span lang=SL>
+	<hr>
 
-<hr size=2 width="100%" align=center>
-
-</span></div>
-
-<p><span lang=SL><a href="legalNotices.html" title="Pravni poduk">Pravni
-poduk</a></span></p>
-
-</div>
-
+	<p><a href="legalNotices.html">Pravni poduk</a></p>
 </body>
-
 </html>

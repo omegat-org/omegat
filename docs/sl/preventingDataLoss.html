@@ -1,114 +1,35 @@
 <html>
-
 <head>
-<meta http-equiv=Content-Type content="text/html; charset=utf-8">
-<meta name=Generator content="Microsoft Word 11 (filtered)">
-<title>Kako preprečiti izgubo podatkov - OmegaT 1.6.2 User Manual</title>
-<style>
-<!--
- /* Font Definitions */
- @font-face
-	{font-family:Tahoma;
-	panose-1:2 11 6 4 3 5 4 4 2 4;}
- /* Style Definitions */
- p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0cm;
-	margin-bottom:.0001pt;
-	font-size:12.0pt;
-	font-family:"Times New Roman";}
-h1
-	{margin-right:0cm;
-	margin-left:0cm;
-	font-size:24.0pt;
-	font-family:"Times New Roman";
-	font-weight:bold;}
-a:link, span.MsoHyperlink
-	{color:blue;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{color:blue;
-	text-decoration:underline;}
-p
-	{margin-right:0cm;
-	margin-left:0cm;
-	font-size:12.0pt;
-	font-family:"Times New Roman";}
-code
-	{font-family:"Courier New";}
-p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
-	{margin:0cm;
-	margin-bottom:.0001pt;
-	font-size:8.0pt;
-	font-family:Tahoma;}
-@page Section1
-	{size:595.3pt 841.9pt;
-	margin:70.85pt 70.85pt 2.0cm 70.85pt;}
-div.Section1
-	{page:Section1;}
- /* List Definitions */
- ol
-	{margin-bottom:0cm;}
-ul
-	{margin-bottom:0cm;}
--->
-</style>
-
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Kako preprečiti izgubo podatkov - Priročnik za uporabnika OmegaT 1.7.3</title>
 </head>
+<body>
 
-<body lang=DE link=blue vlink=blue>
+	<h1>Kako preprečiti izgubo podatkov</h1>
 
-<div class=Section1>
+	<p>OmegaT je robustna aplikacija. Vendar morate tudi pri OmegaT, kot pri vsaki drugi aplikaciji, poskrbeti za to, da ne pride do izgube podatkov.</p>
 
-<h1><span lang=SL>Kako preprečiti izgubo podatkov</span></h1>
+	<p>Medtem ko prevajate svoje datoteke, shranjuje OmegaT vaše dodatke prevodnemu spominu v projektni podimenik  <code>/omegat</code>.</p>
+	
+	<p>OmegaT shrani vedno, ko projekt odprete ali zaprete, prevodni spomin v isti podimenik v datoteke oblike  <code>project_save.tmx.LETOMMDDHHNN.bak</code>. <code>LETO</code> je 4-mestno leto, <code>MM</code> je mesec, <code>DD</code> dan v mescu, <code>HH</code> in <code>NN</code> so ure in minute, ko se je datoteko s prevodnim spominom shranilo.</p>
+	
+	<p>Če sumite, da je prišlo do izgube podatkov, postopajte kot sledi::<ol>
+			<li>zaprite projekt</li>
+			<li>preimenujte trenutno datoteko <code>project_save.tmx</code> tako, da si boste ime lahko zapomnili,  (kot recimo <code>project_save.tmx.začasno</code>)</li>
+			<li>poiščite kopijo prevodnega spomina, ki je še najbolj verjetno v redu</li>
+			<li>preimenujte jo v <code>project_save.tmx</code></li>
+			<li>ponovno odprite projekt</li>
+		</ol>
+		<p>Kako se izogniti izgubi pomembnih podatkov:</p>
+		<ul>
+		<li>Redno kopirajte datoteko <code>/omegat/project_save.tmx</code> na primerne medije, kot so CD ali DVD.</li>
+		<li>Dokler še niste čisto dobro seznanjeni z  OmegaT, redno zahtevajte ustvarjanje ciljnih datotek in se prepričajte, da vsebujejo zadnjo verzijo vaših prevodov.</li>
+		<li>Bodite posebno skrbni, ko kaj spreminjate v datotekah podimenika <code>/source</code>, kadar ste že sredi projekta. Če potem, ko ste začeli z delom, izvorno datoteko spremenite, se lahko pripeti, da OmegaT ne bo več mogel. najti segment, ki ste ga že prevedli..</li>
+		<li>Pomagajte si v prvih trenutkih, ko začenjate s temi besedili za pomoč. V kolikor naletite na probleme, se s sporočilom obrnite na <a href="http://groups.yahoo.com/group/omegat">skupino uporabnikov OmegaT</a>. Brez problema lahko pišete v jeziku, ki vam je najbolj domač..</li>
+	</ul>
+	<hr>
 
-<p><span lang=SL>OmegaT je robustna aplikacija. Vendar morate tudi pri OmegaT,
-kot pri vsaki drugi aplikaciji, poskrbeti za to, da ne pride do izgube
-podatkov.</span></p>
-
-<p><span lang=SL>Med prevajanjem vaših datotek shranjuje OmegaT vaše dodatke
-prevodnemu spominu v projektni podimenik </span><code><span lang=SL
-style='font-size:10.0pt'>/omegat</span></code><span lang=SL>. Vedno, kadar
-projekt odprete ali zaprete, bo OmegaT shranil prevodni spomin v navedeni
-podimenik, in sicer v datoteke z imenom &nbsp;</span><code><span lang=SL
-style='font-size:10.0pt'>project_save.tmx.LETOMMDDHHNN.bak</span></code><span
-lang=SL>. </span><code><span lang=SL style='font-size:10.0pt'>LETO</span></code><span
-lang=SL> je 4-mestno leto, </span><code><span lang=SL style='font-size:10.0pt'>MM</span></code><span
-lang=SL> je mesec, </span><code><span lang=SL style='font-size:10.0pt'>DD</span></code><span
-lang=SL> dan v mescu, </span><code><span lang=SL style='font-size:10.0pt'>HH</span></code><span
-lang=SL> in </span><code><span lang=SL style='font-size:10.0pt'>NN</span></code><span
-lang=SL> so ure in minute, ko se je datoteko s prevodnim spominom shranilo.</span></p>
-
-<p><span lang=SL>Kako se izogniti katastrofam:</span></p>
-
-<ul style='margin-top:0cm' type=disc>
- <li class=MsoNormal><span lang=SL>Redno kopirajte datoteko </span><code><span
-     lang=SL style='font-size:10.0pt'>/omegat/project_save.tmx</span></code><span
-     lang=SL> na primerne medije, kot so CD ali DVD.</span></li>
- <li class=MsoNormal><span lang=SL>Dokler še niste čisto dobro seznanjeni z
-     OmegaT, redno zahtevajte ustvarjanje ciljnih datotek in se prepričajte, da
-     vsebujejo zadnjo verzijo vaših prevodov.</span></li>
- <li class=MsoNormal><span lang=SL>Bodite posebno skrbni, ko kaj spreminjate v
-     datotekah podimenika </span><code><span lang=SL style='font-size:10.0pt'>/source</span></code><span
-     lang=SL>, če ste že sredi projekta. Lahko se namreč pripeti, da OmegaT ne
-     bo več mogel. najti segment, ki ste ga že prevedli, če izvorno datoteko
-     med prevajanjem spreminjate,</span></li>
- <li class=MsoNormal><span lang=SL>Pomagajte si v prvih trenutkih, ko
-     začenjate, s temi besedili za pomoč. V kolikor naletite na probleme, se s
-     sporočilom obrnite na <a href="http://groups.yahoo.com/group/OmegaT/">skupino
-     uporabnikov OmegaT</a>. Brez problema lahko pišete v jeziku, ki vam je
-     najbolj domač..</span></li>
-</ul>
-
-<div class=MsoNormal align=center style='text-align:center'><span lang=SL>
-
-<hr size=2 width="100%" align=center>
-
-</span></div>
-
-<p><span lang=SL><a href="legalNotices.html" title="Pravni poduk">Pravni poduk</a></span></p>
-
-</div>
-
+	<p><a href="legalNotices.html">Pravni poduk</a></p>
 </body>
-
 </html>

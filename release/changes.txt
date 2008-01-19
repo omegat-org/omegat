@@ -63,13 +63,12 @@
 
 
   3 Enhancements
-  2 Bugfixes
+  3 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.3 update 1
 
-  Enhancement
-s:
+  Enhancements:
 
   - Exceptions for EN.*: Fig., St., middle name.
 
@@ -87,6 +86,9 @@ s:
 
   - Prevent non-XML characters from entering the TMX 
   http://sourceforge.net/support/tracker.php?aid=1684825 
+  
+  - Relative paths not working under Windows/Java 1.4
+  http://sourceforge.net/support/tracker.php?aid=1875331 
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 Changes

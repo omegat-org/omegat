@@ -65,10 +65,10 @@ public class ProjectFileStorage
 			return;
 		
 		// advance to project tag
-		if ((blk=m_reader.advanceToTag("project")) == null)						// NOI18N
+		if ((blk=m_reader.advanceToTag("project")) == null)		// NOI18N
 			return;
 
-		String ver = blk.getAttribute("version");								// NOI18N
+		String ver = blk.getAttribute("version");			// NOI18N
 		if (ver != null && !ver.equals(OConsts.PROJ_CUR_VERSION))
 		{
 			throw new TranslationException(
@@ -162,8 +162,19 @@ public class ProjectFileStorage
             {
                 // check if path starts with a system root
                 File[] roots = File.listRoots();
+                boolean startsWithRoot = false;
                 for (int i = 0; i < roots.length; i++) {
-                    if (relativePath.startsWith(roots[i].getCanonicalPath()))
+                    try // Under Windows and Java 1.4, there is an exception if
+                    {   // using getCanonicalPath on a non-existent drive letter
+                        // [1875331] Relative paths not working under Windows/Java 1.4
+                        startsWithRoot = 
+                                relativePath.startsWith(roots[i].getCanonicalPath());
+                    }                    
+                    catch (IOException e)
+                    {
+                        startsWithRoot = false;
+                    }
+                    if (startsWithRoot)
                         // path starts with a root --> path is already absolute
                         return new File(relativePath).getCanonicalPath() + File.separator;
                 }

@@ -145,6 +145,9 @@ public class WikiGet
     {
         try 
         {
+            // Page name can contain invalid characters, see [1878113]
+            // Contributed by Anatoly Techtonik 
+            filename = filename.replaceAll("[\\\\/:\\*\\?\\\"\\|\\<\\>]","_");  // NOI18N
             File path = new File(dir,filename);
             FileOutputStream f = new FileOutputStream(path);
             BufferedWriter out = UTF8WriterBuilder(f);

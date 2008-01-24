@@ -63,7 +63,7 @@
 
 
   4 Enhancements
-  3 Bugfixes
+  4 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.3 update 1
@@ -89,6 +89,9 @@
   
   - Relative paths not working under Windows/Java 1.4
   http://sourceforge.net/support/tracker.php?aid=1875331 
+
+  - Mediawiki import - remove invalid chars in filename
+  http://sourceforge.net/support/tracker.php?aid=1878113  
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 Changes

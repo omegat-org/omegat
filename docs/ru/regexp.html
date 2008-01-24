@@ -1,0 +1,192 @@
+<html>
+<head>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Регулярные выражения - Руководство пользователя OmegaT 1.7.3</title>
+</head>
+<body>
+
+	<h1>Составление регулярных выражений</h1>
+
+	<p>Мы используем в поиске и в правилах сегментирования те регулярные выражения, которые поддерживаются Java. Если вам нужна более точная информация, обратитесь по адресу <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+		
+	<p>В сети можно найти простые инструктажи по регулярным выражениям (<a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>, например).</p>
+
+
+	<table border="0" cellpadding="3" cellspacing="0">
+
+		<tr>
+			<td width="40%"><h2>Вот это выражение:</h2></td>
+			<td><h2>Соответствует вот этой последовательности:</h2></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Флаги</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>(?i)</code></td>
+			<td>Включает поиск совпадений независимо от регистра символов (по умолчанию все шаблоны чувствительны к регистру)</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Символы</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>x</strong></td>
+			<td>Символ <strong>x</strong>, кроме следующего...</td>
+		</tr>
+		<tr>
+			<td><code>\u</code><strong>hhhh</strong></td>
+			<td>Символ с шестнадцатеричным значением <code>0x</code><strong>hhhh</strong></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\t</code></td>
+			<td>Символ табуляции (<code>'\u0009'</code>)</td>
+		</tr>
+		<tr>
+			<td><code>\n</code></td>
+			<td>Символ новой строки (line feed) (<code>'\u000A'</code>)</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\r</code></td>
+			<td>Символ возврата каретки (<code>'\u000D'</code>)</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Кавычки</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\</code></td>
+			<td>Только закавычивает следующий символ. Это нужно, если вы хотите ввести метасимволы <code>!$()*+.&lt;&gt;?[\]^{|}</code> в качестве их буквальных значений.</td>
+		</tr>
+		<tr>
+			<td><code>\\</code></td>
+			<td>Например, это будет символ обратного слэша</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\Q</code></td>
+			<td>Только закавычивает все символы до <code>\E</code></td>
+		</tr>
+		<tr>
+			<td><code>\E</code></td>
+			<td>Только прекращает закавычивание, начатое <code>\Q</code></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Классы символов</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>[abc]</code></td>
+			<td><code>a</code>, <code>b</code> или <code>c</code> (простой класс)</td>
+		</tr>
+		<tr>
+			<td><code>[^abc]</code></td>
+			<td>Любой символ, кроме <code>a</code>, <code>b</code> или <code>c</code> (отрицание)</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>[a-zA-Z]</code></td>
+			<td>От <code>a</code> до <code>z</code> или от <code>A</code> до <code>Z</code> включительно (диапазон)</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Предустановленные классы символов</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code> </code></td>
+			<td>Любой символ (кроме символов конца строки)</td>
+		</tr>
+		<tr>
+			<td><code>\d</code></td>
+			<td>Цифра: <code>[0-9]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\D</code></td>
+			<td>Не цифра: <code>[^0-9]</code></td>
+		</tr>
+		<tr>
+			<td><code>\s</code></td>
+			<td>Символ пробела: <code>[ \t\n\x0B\f\r]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\S</code></td>
+			<td>Не символ пробела: <code>[^\s]</code></td>
+		</tr>
+		<tr>
+			<td><code>\w</code></td>
+			<td>Символ слова: <code>[a-zA-Z_0-9]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\W</code></td>
+			<td>Не символ слова: <code>[^\w]</code></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Границы</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>^</code></td>
+			<td>Начало строки</td>
+		</tr>
+		<tr>
+			<td><code>$</code></td>
+			<td>Конец строки</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\b</code></td>
+			<td>Граница слова</td>
+		</tr>
+		<tr>
+			<td><code>\B</code></td>
+			<td>Не граница слова</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>"Жадные" кванторы</h3></td>
+		</tr>
+		<tr>
+			<td colspan="2">Они будут искать как можно больше совпадений. Например, <code>a+</code> выдаст на выходе <code>aaa</code> из последовательности <code>aaabbb</code>.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>?</code></td>
+			<td><strong>X</strong>, один раз или ни разу</td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>*</code></td>
+			<td><strong>X</strong>, ноль или больше раз</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>+</code></td>
+			<td><strong>X</strong>, один или больше раз</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>"Ленивые" ("нежадные") кванторы</h3></td>
+		</tr>
+		<tr>
+			<td colspan="2">Они будут искать как можно меньше совпадений. Например, <code>a+?</code> выдаст на выходе первую <code>a</code> из последовательности <code>aaabbb</code>.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>??</code></td>
+			<td><strong>X</strong>, один раз или ни разу</td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>*?</code></td>
+			<td><strong>X</strong>, ноль или больше раз</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>+?</code></td>
+			<td><strong>X</strong>, один или больше раз</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Логические операторы</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>XY</strong></td>
+			<td><strong>X</strong>, за которым идёт <strong>Y</strong></td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>|</code><strong>Y</strong></td>
+			<td>Или <strong>X</strong> или <strong>Y</strong></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>(</code><strong>XY</strong><code>)</code></td>
+			<td><strong>XY</strong> как отдельная группа</td>
+		</tr></table>
+
+	<hr>
+
+	<a href="legalNotices.html">Надлежащие уведомления</a>
+</body>
+</html>

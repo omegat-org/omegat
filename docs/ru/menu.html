@@ -1,0 +1,443 @@
+<html>
+<head>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Меню и клавиатурные комбинации в OmegaT - Руководство пользователя OmegaT 1.7.3</title>
+</head>
+<body>
+
+	<h1>Главное меню и клавиатурные комбинации</h1>
+	
+	<ul>
+		<li><a href="#menu">Главное меню</a> <br>&nbsp;<table border="1" width="60%" cellpadding="3" cellspacing="0">
+			<tr bgcolor="#DDDDDD" align="center">
+				<td><a href="#ProjectMenu"><code>Проект</code></a></td>
+				<td><a href="#EditMenu"><code>Правка</code></a></td>
+				<td><a href="#GoToMenu"><code>Переход</code></a></td>
+				<td><a href="#ToolsMenu"><code>Сервис</code></a></td>
+				<td><a href="#OptionsMenu"><code>Настройки</code></a></td>
+				<td><a href="#HelpMenu"><code>Справка</code></a></td>
+			</tr>
+			</table>
+		</li>
+	</ul>
+	<ul>
+		<li><a href="#shortcuts">Клавиатурные комбинации</a>
+		<ul>
+			<li><a href="#Project_management">Управление проектом</a></li>
+			<li><a href="#Editing">Редактирование</a></li>
+			<li><a href="#Moving_around">Перемещение</a></li>
+			<li><a href="#Reference_windows">Справочные окна</a></li>
+			<li><a href="#Other">Другое</a></li>
+		</ul>
+		</li>
+	</ul>
+
+	
+	<hr>
+
+	<a name="menu" id="menu"></a>
+	<h1>Главное меню</h1>
+	
+	<p>Все функции OmegaT доступны через меню, которое расположено выше окна редактирования. Большинство функций, кроме того, доступны через <a href= "menu.html#shortcuts">клавиатурные комбинации</a>.</p>
+
+	<p>Комбинации реализованы через нажатие клавиши <strong><code>Ctrl</code></strong> и буквы. Некоторые комбинации включают и другие клавиши. Для удобства чтения в руководстве все буквы комбинаций приведены в верхнем регистре.</p>
+	
+	<p><strong><code>Ctrl</code></strong> используется на Windows, UNIX и UNIX-подобных операционных системах с клавиатурами, оснащёнными клавишей <strong><code>Ctrl</code></strong> / <strong><code>Control</code></strong>. Пользователи Mac должны использовать вместо неё клавишу <strong><code>cmd</code></strong>. Клавиша <strong><code>cmd</code></strong> на клавиатурах фирмы Apple помечена либо как <strong><code>command</code></strong>, либо значком <strong>яблока</strong>.</p>
+
+	<p></p>
+
+		<table border="1" width="400" cellpadding="3" cellspacing="0">
+			<tr bgcolor="#DDDDDD" align="center">
+				<td><a href="#ProjectMenu"><code>Проект</code></a></td>
+				<td><a href="#EditMenu"><code>Правка</code></a></td>
+				<td><a href="#GoToMenu"><code>Переход</code></a></td>
+				<td><a href="#ToolsMenu"><code>Сервис</code></a></td>
+				<td><a href="#OptionsMenu"><code>Настройки</code></a></td>
+				<td><a href="#HelpMenu"><code>Справка</code></a></td>
+			</tr>
+		</table>
+		<table border="0" cellpadding="5" cellspacing="0">
+
+		<tr bgcolor="#FFFFFF">
+			<td id="ProjectMenu" colspan="3">
+			<hr><a name="ProjectMenu" id="ProjectMenu"></a><h2><code>Проект</code></h2>
+			</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td width="25%"><code>Новый</code></td>
+			<td width="10%"></td>
+			<td>Создаёт и открывает новый проект. Диалог создания проекта аналогичен диалогу <a href="projectProperties.html">правки проекта</a>.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Открыть</code></td>
+			<td><code>&lt;Ctrl+O&gt;</code></td>
+			<td>Открывает ранее созданный проект.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Импорт исходных файлов...</code></td>
+			<td></td>
+			<td>Копирует выбранные файлы в каталог <code>/source</code> и перезагружает проект, чтобы загрузить новые файлы.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Импорт из MediaWiki...</code></td>
+			<td></td>
+			<td>Импортирует материалы со страниц MediaWiki по заданному URL.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Перезагрузить</code></td>
+			<td></td>
+			<td>Перезагружает проект, чтобы обработать изменения в файлах оригинала, памяти переводов или глоссариев.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Закрыть</code></td>
+			<td></td>
+			<td>Сохраняет перевод и закрывает проект.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Сохранить</code></td>
+			<td><code>&lt;Ctrl+S&gt;</code></td>
+			<td>Сохраняет перевод в файлы памяти переводов проекта. OmegaT автоматически сохраняет перевод каждые 10 минут, а также когда вы закрываете проект или выходите из программы.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Создать переведённые документы</code></td>
+			<td></td>
+			<td>Создаёт переведённые документы на основе вашего перевода. Документы будут находиться в каталоге <code>/target</code>.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Свойства</code></td>
+			<td><code>&lt;Ctrl+E&gt;</code></td>
+			<td>Показывает диалог <a href="projectProperties.html">Свойства проекта</a> для редактирования языков и размещения каталогов проекта.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Файлы проекта...</code></td>
+			<td><code>&lt;Ctrl+L&gt;</code></td>
+			<td>Закрывает или открывает <a href="userInterface.html#Project_Files">окно файлов проекта</a> (в зависимости от того, открыто оно или закрыто).</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Выход</code></td>
+			<td><code>&lt;Ctrl+Q&gt;</code></td>
+			<td>Сохраняет проект и закрывает OmegaT. Если вы не сохранили проект вручную, то программа спросит, действительно ли вы хотите выйти.</td>
+		</tr>
+
+		<tr bgcolor="#FFFFFF">
+			<td id="name" colspan="3">
+			<hr><a name="EditMenu" id="EditMenu"></a><h2><code>Правка</code></h2>
+			</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+		        <td></td>
+				<td colspan="2">Команды, которые в других приложениях обычно находятся в этом меню (копировать/вырезать/вставить), в OmegaT не показываются, но доступны через клавиатурные комбинации вашей операционной системы. Например:</td>
+			</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Копировать</code></td>
+			<td><code>&lt;Ctrl+C&gt;</code></td>
+			<td>Копирует выбранный текст в буфер обмена.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Вырезать</code></td>
+			<td><code>&lt;Ctrl+X&gt;</code></td>
+			<td>Копирует выбранный текст в буфер обмена и стирает его.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Вставка</code></td>
+			<td><code>&lt;Ctrl+V&gt;</code></td>
+			<td>Вставляет текст из буфера обмена в позицию курсора.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td></td>
+			<td colspan="2"><strong>Меню содержит следующие пункты:</strong></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Отменить последнее действие</code></td>
+			<td><code>&lt;Ctrl+Z&gt;</code></td>
+			<td>Возвращается в состояние до того, как было проделано последнее действие по редактированию. Не работает после того, как модифицированный сегмент был отправлен в память переводов.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Повторить последнее действие</code></td>
+			<td><code>&lt;Ctrl+Y&gt;</code></td>
+			<td>Возвращается в состояние до того, как было проделано последнее действие по отмене редактирования. Не работает после того, как модифицированный сегмент был отправлен в память переводов.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Заменить на совпадение</code></td>
+			<td><code>&lt;Ctrl+R&gt;</code></td>
+			<td>Заменяет весь сегмент перевода текущим нечётким совпадением (по умолчанию выбирается первое совпадение).</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Вставить совпадение</code></td>
+			<td><code>&lt;Ctrl+I&gt;</code></td>
+			<td>Вставляет текущее нечёткое совпадение в позицию курсора. Эта функция никогда не перезапишет часть сегмента перевода, даже если он выбран.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Замена оригиналом</code></td>
+			<td><code>&lt;Shift+Ctrl+R&gt;</code></td>
+			<td>Перезаписывает весь сегмент перевода исходным сегментом.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Вставить оригинал</code></td>
+			<td><code>&lt;Shift+Ctrl+I&gt;</code></td>
+			<td>Вставляет оригинал в  позицию курсора.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Поиск в проекте...</code></td>
+			<td><code>&lt;Ctrl+F&gt;</code></td>
+			<td>Открывает новое <a href="userInterface.html#Search_Window">окно поиска</a>.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Выбрать нечёткое совпадение №N</code></td>
+			<td><code>&lt;Ctrl+#N&gt;</code></td>
+			<td>(№N - это число от 1 до 5) Выбирает нечёткое совпадение с соответствующим номером в окне просмотра совпадений. Раздел <a href= "userInterface.html#Fuzzy_Matches">Нечёткие совпадения</a> подробно описывает цветовое кодирование.</td>
+		</tr>
+
+		<tr bgcolor="#FFFFFF">
+			<td id="GotoMenu" colspan="3">
+			<hr><a name="GoToMenu" id="GoToMenu"></a><h2><code>Переход</code></h2>
+			</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Следующий непереведённый сегмент</code></td>
+			<td><code>&lt;Ctrl+U&gt;</code></td>
+			<td>Переход к следующему сегменту, который не имеет эквивалента в памяти переводов.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Следующий сегмент</code></td>
+			<td><code>&lt;Ctrl+N&gt;</code> или <code>&lt;Enter&gt;</code> или <code>&lt;Tab&gt;</code></td>
+			<td>Переход к следующему сегменту. Если текущий сегмент является последним в файле, то происходит переход к первому сегменту следующего файла.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Предыдущий сегмент</code></td>
+			<td><code>&lt;Ctrl+P&gt;</code> или <code>&lt;Ctrl+Enter&gt;</code> или <code>&lt;Ctrl+Tab&gt;</code></td>
+			<td>Переход к предыдущему сегменту. Если текущий сегмент является первым в файле, то происходит переход к последнему сегменту предыдущего файла.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Сегмент номер...</code></td>
+			<td><code>&lt;Ctrl+J&gt;</code></td>
+			<td>Открывает сегмент с произвольным номером.</td>
+		</tr>
+
+		<tr bgcolor="#FFFFFF">
+			<td id="ToolsMenu" colspan="3">
+			<hr><a name="ToolsMenu" id="ToolsMenu"></a><h2><code>Сервис</code></h2>
+			</td>
+		</tr>
+
+		<tr bgcolor="#DDDDDD">
+			<td><code>Проверка тэгов</code></td>
+			<td><code>&lt;Ctrl+T&gt;</code></td>
+			<td>Проверяет отсутствующие или неправильные тэги в файлах с форматированием. Показывает список сегментов с ошибочными тэгами. Раздел <a href= "userInterface.html#Tag_Validation">Окно проверки тэгов</a> описывает, что вы в нём увидите, а раздел <a href="formattedText.html">Работа с форматированным текстом</a> - почему.</td>
+		</tr>
+
+		<tr bgcolor="#FFFFFF">
+			<td id="OptionsMenu" colspan="3"><hr><h2><code>Настройки</code></h2></td>
+		</tr>
+
+		<tr bgcolor="#DDDDDD">
+			<td><code>Использовать Tab для перехода далее</code></td>
+			<td></td>
+			<td>Использовать для перехода на следующий сегмент клавишу <code>&lt;Tab&gt;</code> вместо стандартного <code>&lt;Enter&gt;</code>. Это полезно, например, при вводе символов китайского, японского или корейского языков.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Шрифт...</code></td>
+			<td></td>
+			<td>Показывает диалог <a href="fontSettings.html">Настройки шрифтов</a> для выбора шрифта программы. Пользователям старых компьютеров рекомендуется изменять шрифт до открытия проекта, иначе произойдёт существенное снижение производительности OmegaT. Особенно это ощущается на комбинации G4 + Mac OS X + японский язык.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Файловые фильтры...</code></td>
+			<td></td>
+			<td>Показывает диалог <a href="fileFilters.html">Файловые фильтры</a> для настройки параметров обработки файлов.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Сегментирование...</code></td>
+			<td></td>
+			<td>Открывает диалог <a href="segmentation.html">Сегментирование оригинала</a> для настройки сегментирования текста.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Настройки редактирования...</code></td>
+			<td></td>
+			<td>Показывает диалог <a href="translationEditing.html">Редактирование перевода</a> для настройки содержимого поля перевода ещё не переведённых сегментов.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Восстановить главное окно</code></td>
+			<td></td>
+			<td>Приводит компоненты главного окна OmegaT (редактор, совпадения, глоссарий) к их состоянию по умолчанию. Используйте эту функцию в случае, если вы переместили, скрыли или отсоединили компоненты окна и не можете вернуть их в требуемое состояние.</td>
+		</tr>
+
+		<tr bgcolor="#FFFFFF">
+			<td id="HelpMenu" colspan="3">
+			<hr><a name="HelpMenu" id="HelpMenu"></a><h2><code>Справка</code></h2>
+			</td>
+		</tr>
+
+		<tr bgcolor="#DDDDDD">
+			<td><code>Руководство пользователя...</code></td>
+			<td><code>&lt;F1&gt;</code></td>
+			<td>Открывает в отдельном окне <a href="userInterface.html#Help_Browser">систему помощи</a> с этим руководством.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>О программе...</code></td>
+			<td></td>
+			<td>Показывает информацию об авторских правах, создателях и лицензии.</td>
+		</tr>
+	</table>
+	<hr>
+
+	<a name="shortcuts"></a>
+	<h1>Клавиатурные комбинации</h1>
+	
+	<p>Описанные ниже клавиатурные комбинации доступны из главного окна. Когда на переднем плане находится другое окно, кликните на главное окно, чтобы вернуть его на передний план или нажмите <strong><code>Esc</code></strong> чтобы закрыть это окно.</p>
+
+	<p>Комбинации реализованы через нажатие клавиши <strong><code>Ctrl</code></strong> и буквы. Некоторые комбинации включают и другие клавиши. Для удобства чтения в руководстве все буквы комбинаций приведены в верхнем регистре.</p>
+	
+	<p><strong><code>Ctrl</code></strong> используется на Windows, UNIX и UNIX-подобных операционных системах с клавиатурами, оснащёнными клавишей <strong><code>Ctrl</code></strong> / <strong><code>Control</code></strong>. Пользователи Mac должны использовать вместо неё клавишу <strong><code>cmd</code></strong>. Клавиша <strong><code>cmd</code></strong> на клавиатурах фирмы Apple помечена либо как <strong><code>command</code></strong>, либо значком <strong>яблока</strong>.</p>
+
+	<ul>
+		<li><a href="#Project_management">Управление проектом</a></li>
+		<li><a href="#Editing">Редактирование</a></li>
+		<li><a href="#Moving_around">Перемещение</a></li>
+		<li><a href="#Reference_windows">Справочные окна</a></li>
+		<li><a href="#Other">Другое</a></li>
+	</ul>
+
+
+	<table border="0" cellpadding="3" cellspacing="0">
+
+		<tr bgcolor="#FFFFFF">
+			<td colspan="3">
+			<hr><a name="Project_management" id="Project_management"></a><h2>Управление проектом</h2>
+			</td>
+		</tr>
+
+		<tr bgcolor="#DDDDDD">
+			<td>Открыть проект</td>
+			<td><code>&lt;Ctrl+O&gt;</code></td>
+			<td>Показывает диалог открытия уже существующего проекта.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td>Сохранить</td>
+			<td><code>&lt;Ctrl+S&gt;</code></td>
+			<td>Сохраняет текущий перевод в файл project_save.tmx, расположенный в каталоге /omegat/ вашего проекта.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td>Свойства проекта</td>
+			<td><code>&lt;Ctrl+E&gt;</code></td>
+			<td>Показывает настройки проекта с возможностью их редактирования.</td>
+		</tr>
+
+		<tr bgcolor="#FFFFFF">
+			<td colspan="3">
+			<hr><a name="Editing" id="Editing"></a><h2>Редактирование</h2>
+			</td>
+		</tr>
+
+		<tr bgcolor="#DDDDDD">
+			<td>Отменить последнее действие</td>
+			<td><code>&lt;Ctrl+Z&gt;</code></td>
+			<td>Отменяет последнее редактирование в текущем сегменте перевода.</td>
+		</tr>
+
+		<tr bgcolor="#FFFFFF">
+			<td>Повторить последнее действие</td>
+			<td><code>&lt;Ctrl+Y&gt;</code></td>
+			<td>Повторяет последнее отменённое редактирование в текущем сегменте перевода.</td>
+		</tr>
+
+		<tr bgcolor="#DDDDDD">
+			<td>Выбрать совпадение №N</td>
+			<td><code>&lt;Ctrl+#N&gt;</code></td>
+			<td>№N - это номер от 1 до 5. Эта комбинация выбирает соответствующее по номеру совпадение, показанное в окне просмотра совпадений (по умолчанию выбирается первое совпадение).</td>
+		</tr>
+
+		<tr bgcolor="#FFFFFF">
+			<td>Заменить на совпадение</td>
+			<td><code>&lt;Ctrl+R&gt;</code></td>
+			<td>Заменяет весь сегмент перевода выбранным нечётким совпадением (по умолчанию выбирается первое совпадение).</td>
+		</tr>
+
+		<tr bgcolor="#DDDDDD">
+			<td>Вставить совпадение</td>
+			<td><code>&lt;Ctrl+I&gt;</code></td>
+			<td>Вставляет выбранное совпадение в позицию курсора в текущем сегменте перевода (по умолчанию вставляется первое совпадение).</td>
+		</tr>
+
+		<tr bgcolor="#FFFFFF">
+			<td>Замена оригиналом</td>
+			<td><code>&lt;Ctrl+Shift+R&gt;</code></td>
+			<td>Перезаписывает весь текущий сегмент перевода содержимым исходного сегмента.</td>
+		</tr>
+
+		<tr bgcolor="#DDDDDD">
+			<td>Вставить оригинал</td>
+			<td><code>&lt;Ctrl+Shift+I&gt;</code></td>
+			<td>Вставляет текст оригинала в позицию курсора в текущем сегменте перевода.</td>
+		</tr>
+
+		<tr bgcolor="#FFFFFF">
+			<td>Поиск в проекте</td>
+			<td><code>&lt;Ctrl+F&gt;</code></td>
+			<td>Показывает диалог поиска в проекте.</td>
+		</tr>
+
+		<tr bgcolor="#FFFFFF">
+			<td colspan="3">
+			<hr><a name="Moving_around" id="Moving_around"></a><h2>Перемещение</h2>
+			</td>
+		</tr>
+
+		<tr bgcolor="#DDDDDD">
+			<td>Следующий непереведённый сегмент</td>
+			<td><code>&lt;Ctrl+U&gt;</code></td>
+			<td>Перемещает поле редактирования к следующему сегменту, который не зарегистрирован в памяти переводов проекта.</td>
+		</tr>
+
+		<tr bgcolor="#FFFFFF">
+			<td>Следующий сегмент</td>
+			<td><code>&lt;Ctrl+N&gt;<br> Enter (ввод)</code></td>
+			<td>Перемещает поле редактирования на следующий сегмент.</td>
+		</tr>
+
+		<tr bgcolor="#DDDDDD">
+			<td>Предыдущий сегмент</td>
+			<td><code>&lt;Ctrl+P&gt;</code></td>
+			<td>Перемещает поле редактирования на предыдущий сегмент.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td>Сегмент номер...</td>
+			<td><code>&lt;Ctrl+J&gt;</code></td>
+			<td>Переход на сегмент с указанным номером.</td>
+		</tr>
+
+		<tr bgcolor="#FFFFFF">
+			<td colspan="3">
+			<hr><a name="Reference_windows" id="Reference_windows"></a><h2>Справочные окна</h2>
+			</td>
+		</tr>
+
+		<tr bgcolor="#DDDDDD">
+			<td>Список файлов проекта</td>
+			<td><code>&lt;Ctrl+L&gt;</code></td>
+			<td>Показывает список файлов проекта.</td>
+		</tr>
+
+		<tr bgcolor="#FFFFFF">
+			<td colspan="3">
+			<hr><a name="Other" id="Other"></a><h2>Другое</h2>
+			</td>
+		</tr>
+
+		<tr bgcolor="#DDDDDD">
+			<td>Проверка тэгов</td>
+			<td><code>&lt;Ctrl+T&gt;</code></td>
+			<td>Проверяет, что все тэги, содержащиеся в оригинале, присутствуют в тексте перевода.</td>
+		</tr>
+
+		<tr bgcolor="#FFFFFF">
+			<td>Файлы помощи</td>
+			<td><code>&lt;F1&gt;</code></td>
+			<td>Показывает в отдельном окне систему помощи OmegaT.</td>
+		</tr>
+	</table>
+	<hr>
+
+	<p><a href="legalNotices.html">Надлежащие уведомления</a></p>
+</body>
+</html>

@@ -62,7 +62,7 @@
 1.7.3 update 1 vs. 1.7.3
 
 
-  3 Enhancements
+  4 Enhancements
   3 Bugfixes
 
 ----------------------------------------------------------------------
@@ -71,13 +71,13 @@
   Enhancements:
 
   - Exceptions for EN.*: Fig., St., middle name.
-
   http://sourceforge.net/support/tracker.php?aid=1856354 
   
   Other enhancements:
   
   - Serbo-Croatian localisation updated to 1.7.3 (UI, readme, instant start, documentation)
   - Slovenian localisation updated to 1.7.3 (UI, readme, instant start, documentation)
+  - Russian localisation updated to 1.7.3 (UI, readme, instant start, documentation)
 
   Bug fixes:
 

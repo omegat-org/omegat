@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2008 Didier Briel
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -41,6 +42,7 @@ import org.omegat.util.xml.XMLStreamReader;
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
+ * @author Didier Briel
  */
 public class ProjectFileStorage
 {
@@ -211,7 +213,10 @@ public class ProjectFileStorage
             String prefix = new String();
             for (int i=0; i<2; i++)
             {
-                if (abs.getPath().startsWith(root.getPath()))
+                // File separator added to prevent "/MyProject EN-FR/"
+                // to be undesrtood as being inside "/MyProject/" [1879571]
+                if ( (abs.getPath()+File.separator).
+                        startsWith(root.getPath()+File.separator) )
                 {
                     res = prefix + abs.getPath().substring(root.getPath().length());
                     if (res.startsWith(File.separator))

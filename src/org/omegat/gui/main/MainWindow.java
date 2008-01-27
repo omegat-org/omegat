@@ -4,9 +4,10 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers, 
-                            Benjamin Siband, and Kim Bruning
-           (C)   2007 Zoltan Bartko
-               Home page: http://www.omegat.org/omegat/omegat.html
+                         Benjamin Siband, and Kim Bruning
+               2007 Zoltan Bartko
+               2008 Andrzej Sawula
+               Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
  This program is free software; you can redistribute it and/or modify
@@ -113,6 +114,7 @@ import org.omegat.util.Token;
  * @author Kim Bruning
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Zoltan Bartko - bartkozoltan@bartkozoltan.com
+ * @author Andrzej Sawula
  */
 public class MainWindow extends JFrame implements ActionListener, WindowListener, ComponentListener
 {
@@ -905,6 +907,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         
         CommandThread.core.signalProjectClosing();
         CommandThread.core.cleanUp();
+        progressLabel.setText(OStrings.getString("MW_PROGRESS_DEFAULT"));
+        setLengthLabel(OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
     }
     
     /** Updates UI (enables/disables menu items) upon <b>closing</b> project */
@@ -1545,6 +1549,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         statusLabel.setText(str);
     }
 
+    public void setLengthLabel(String str)
+    {
+        lengthLabel.setText(str);
+    }
+    
     /////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////
     // internal routines
@@ -1961,7 +1970,22 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     {
         if (!isProjectLoaded())
             return;
-
+       int translatedInFile = 0;
+        for (int _i = m_xlFirstEntry; _i <= m_xlLastEntry; _i++)
+        {
+            if (CommandThread.core.getSTE(_i).isTranslated())
+                translatedInFile++;
+        }
+        
+        progressLabel.setText(" " + Integer.toString(translatedInFile) + "/" + 
+                Integer.toString(m_xlLastEntry - m_xlFirstEntry + 1) +
+                " (" + Integer.toString(CommandThread.core.getNumberofTranslatedSegments()) + "/" +
+                Integer.toString(CommandThread.core.getNumberOfUniqueSegments()) + ", " +
+                Integer.toString(CommandThread.core.getNumberOfSegmentsTotal()) + ") ");
+        
+        setLengthLabel(" " + Integer.toString(m_curEntry.getSrcText().length()) + "/" +
+            Integer.toString(m_curEntry.getTranslation().length()) + " ");
+          
         synchronized (editor) {
             history.insertNew(m_curEntryNum);
 
@@ -2511,7 +2535,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private void initComponents() {
         separator2inProjectMenu = new javax.swing.JSeparator();
         projectExitMenuItem = new javax.swing.JMenuItem();
+        statusPanel = new javax.swing.JPanel();
         statusLabel = new javax.swing.JLabel();
+        statusPanel2 = new javax.swing.JPanel();
+        progressLabel = new javax.swing.JLabel();
+        lengthLabel = new javax.swing.JLabel();
         mainMenu = new javax.swing.JMenuBar();
         projectMenu = new javax.swing.JMenu();
         projectNewMenuItem = new javax.swing.JMenuItem();
@@ -2585,9 +2613,30 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(this);
         addComponentListener(this);
+        
+        statusPanel.setLayout(new java.awt.BorderLayout());
 
         statusLabel.setFont(new java.awt.Font("MS Sans Serif", 0, 11));
-        getContentPane().add(statusLabel, java.awt.BorderLayout.SOUTH);
+        statusPanel.add(statusLabel, java.awt.BorderLayout.CENTER);
+
+        statusPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        org.openide.awt.Mnemonics.setLocalizedText(progressLabel, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("MW_PROGRESS_DEFAULT"));
+        progressLabel.setToolTipText(java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("MW_PROGRESS_TOOLTIP"));
+        progressLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        progressLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        statusPanel2.add(progressLabel);
+
+        org.openide.awt.Mnemonics.setLocalizedText(lengthLabel, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("MW_SEGMENT_LENGTH_DEFAULT"));
+        lengthLabel.setToolTipText(java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("MW_SEGMENT_LENGTH_TOOLTIP"));
+        lengthLabel.setAlignmentX(1.0F);
+        lengthLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lengthLabel.setFocusable(false);
+        statusPanel2.add(lengthLabel);
+
+        statusPanel.add(statusPanel2, java.awt.BorderLayout.EAST);
+
+        getContentPane().add(statusPanel, java.awt.BorderLayout.SOUTH);
 
         org.openide.awt.Mnemonics.setLocalizedText(projectMenu, OStrings.getString("TF_MENU_FILE"));
         org.openide.awt.Mnemonics.setLocalizedText(projectNewMenuItem, OStrings.getString("TF_MENU_FILE_CREATE"));
@@ -3444,6 +3493,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private javax.swing.JMenuItem helpAboutMenuItem;
     private javax.swing.JMenuItem helpContentsMenuItem;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JLabel lengthLabel;    
     private javax.swing.JMenuItem lowerCaseMenuItem;
     private javax.swing.JMenuBar mainMenu;
     private javax.swing.JCheckBoxMenuItem optionsAlwaysConfirmQuitCheckBoxMenuItem;
@@ -3455,6 +3505,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private javax.swing.JMenuItem optionsSpellCheckMenuItem;
     private javax.swing.JCheckBoxMenuItem optionsTabAdvanceCheckBoxMenuItem;
     private javax.swing.JMenuItem optionsWorkflowMenuItem;
+    private javax.swing.JLabel progressLabel;    
     private javax.swing.JMenuItem projectCloseMenuItem;
     private javax.swing.JMenuItem projectCompileMenuItem;
     private javax.swing.JMenuItem projectEditMenuItem;
@@ -3479,6 +3530,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private javax.swing.JSeparator separatorInGoToMenu;
     private javax.swing.JSeparator separatorInSwitchCaseSubMenu;
     private javax.swing.JLabel statusLabel;
+    private javax.swing.JPanel statusPanel;
+    private javax.swing.JPanel statusPanel2;    
     private javax.swing.JMenu switchCaseSubMenu;
     private javax.swing.JMenuItem titleCaseMenuItem;
     private javax.swing.JMenu toolsMenu;

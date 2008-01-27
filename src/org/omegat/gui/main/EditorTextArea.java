@@ -6,7 +6,8 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Didier Briel and Tiago Saboga
                2007 Zoltan Bartko - bartkozoltan@bartkozoltan.com
-               Home page: http://www.omegat.org/omegat/omegat.html
+               2008 Andrzej Sawula
+               Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
  This program is free software; you can redistribute it and/or modify
@@ -70,6 +71,7 @@ import org.omegat.util.gui.Styles;
  * @author Didier Briel
  * @author Tiago Saboga
  * @author Zoltan Bartko
+ * @author Andrzej Sawula
  */
 public class EditorTextArea extends JTextPane implements MouseListener, DocumentListener
 {
@@ -177,11 +179,27 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
     ////////////////////////////////////////////////////////////////////////
     
     /**
+     * "Wrapper" method to allow for triggering translation length
+     * recalculation after processing key event, i.e. after performing
+     * edit operation.
+     * All real key event processing is done by processKeyEventBody
+     **/
+    
+    protected synchronized void processKeyEvent(KeyEvent e)
+    {
+        processKeyEventBody(e);
+        mw.setLengthLabel(" " + Integer.toString(mw.m_sourceDisplayLength) + "/" +
+            Integer.toString(((getTextLength() - mw.m_segmentEndInset - OStrings.getSegmentEndMarker().length()) -
+            (mw.m_segmentStartOffset + mw.m_sourceDisplayLength + OStrings.getSegmentStartMarker().length()))) + " ");
+        return;
+    }
+    
+    /**
      * Monitors key events - need to prevent text insertion
      * outside of edit zone while maintaining normal functionality
      * across jvm versions.
      */
-    protected synchronized void processKeyEvent(KeyEvent e)
+    protected synchronized void processKeyEventBody(KeyEvent e)
     {
         // design-time
         if (mw==null)

@@ -5,7 +5,7 @@
 1.8.0 vs. 1.7.3
 
 
-  12 Enhancements
+  14 Enhancements
    1 Bugfixe
 
 ----------------------------------------------------------------------
@@ -45,6 +45,15 @@
 
   - Clickable match window
   http://sourceforge.net/support/tracker.php?aid=1297188
+
+  - Compare source segment and translated segment lengths
+  http://sourceforge.net/support/tracker.php?aid=1562002 
+
+  - Indicate translation progress in status bar
+  http://sourceforge.net/support/tracker.php?aid=1520599  
+
+
+
 
 
   Other enhancements:

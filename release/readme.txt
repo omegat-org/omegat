@@ -177,6 +177,7 @@ Code has been contributed by
   Maxym Mykhalchuk 
   Henry Pijffers 
   Tiago Saboga
+  Andrzej Sawuła
   Benjamin Siband
   Martin Wunderlich
 
@@ -193,20 +194,26 @@ but you don't see your name on the lists, feel free to contact us.)
 
 OmegaT uses the following libraries:
 
-  HTMLParser by Somik Raha, Derrick Oswald and others (LGPL License).
+  HTMLParser by Somik Raha, Derrick Oswald and others (LGPL License)
   http://sourceforge.net/projects/htmlparser
 
-  MRJ Adapter 1.0.8 by Steve Roy (LGPL License).
+  MRJ Adapter 1.0.8 by Steve Roy (LGPL License)
   http://homepage.mac.com/sroy/mrjadapter/
 
-  VLDocking Framework 2.0.6d by VLSolutions (CeCILL License).
+  VLDocking Framework 2.0.6d by VLSolutions (CeCILL License)
   http://www.vlsolutions.com/en/products/docking/
 
-  Hunspell 1.1.12 by László Németh and others (LGPL License).
+  Hunspell 1.1.12 by László Németh and others (LGPL License)
 
-  JNA by Todd Fast, Timothy Wall and others (LGPL License).
+  JNA by Todd Fast, Timothy Wall and others (LGPL License)
 
-  Swing-Layout 1.0.2 (LGPL License).
+  Swing-Layout 1.0.2 (LGPL License)
+
+  Backport-util-concurrent (Public Domain)
+
+  Retroweaver 2.0.1 (Retroweaver License)
+
+  Jmyspell 2.1.4 (LGPL License)
 
 ==============================================================================
  5.  Is OmegaT bugging you ? Do you need help ?
@@ -246,24 +253,6 @@ as a Source Forge user.
 
 Please see the file 'changes.txt' for detailed information about changes in
 this and all previous releases.
-
-File formats supported:
-  - Plain text
-  - HTML and XHTML
-  - HTML Help Compiler
-  - OpenDocument / OpenOffice.org
-  - Java resource bundles (.properties)
-  - INI files (files with key=value pairs of any encoding)
-  - PO files
-  - DocBook documentation file format
-  - Microsoft OpenXML files
-  - Okapi monolingual XLIFF files
-
-Core changes:
-  -
-
-New UI features (compared to 1.6 OmegaT series):
-  -
 
 ==============================================================================
 

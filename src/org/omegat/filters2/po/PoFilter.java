@@ -4,8 +4,9 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
- Copyright (C) 2006 Thomas Huriaux
-               Home page: http://www.omegat.org/omegat/omegat.html
+               2006 Thomas Huriaux
+               2008 Martin Fleurke
+               Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
  This program is free software; you can redistribute it and/or modify
@@ -40,6 +41,7 @@ import org.omegat.util.OStrings;
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Thomas Huriaux
+ * @author Martin Fleurke
  */
 public class PoFilter extends AbstractFilter
 {
@@ -53,8 +55,8 @@ public class PoFilter extends AbstractFilter
     {
         return new Instance[] 
             { 
-                new Instance("*.po"),                                         // NOI18N
-                new Instance("*.pot")                                         // NOI18N
+                new Instance("*.po"),                                           // NOI18N
+                new Instance("*.pot")                                           // NOI18N
             };
     }
 
@@ -85,9 +87,12 @@ public class PoFilter extends AbstractFilter
     {
         StringBuffer nontrans = new StringBuffer();
         StringBuffer trans = new StringBuffer();
+        StringBuffer trans_plural = new StringBuffer();
         String s;
         boolean msgid = false;
         boolean msgstr = false;
+        boolean msgid_plural = false;
+        boolean msgstr_plural = false;
         boolean potential_header = false;
         boolean header = false;
         boolean nowrap = false;
@@ -146,6 +151,36 @@ public class PoFilter extends AbstractFilter
                     trans.append(s.replaceAll("\"(.*)\"","$1"));
                 }
             }
+            else if (s.matches("msgid_plural \".*\"")) 
+            {
+                potential_header = false;
+                msgid = false;
+                msgid_plural = true;
+                if (nowrap)
+                {
+                    trans_plural.append(s.replaceAll("msgid_plural (.*)","$1"));
+                    trans_plural.append("\n");
+              }
+              else
+              {
+                  trans_plural.append(s.replaceAll("msgid_plural \"(.*)\"","$1"));
+              }
+              nontrans.append(s+"\n");
+            }
+            else if ((s.matches("\"(.*)\"")) && msgid_plural)
+            {
+                nontrans.append(s);
+                nontrans.append("\n");
+                if (nowrap)
+                {
+                    trans_plural.append(s);
+                    trans_plural.append("\n");
+                }
+                else
+                {
+                    trans_plural.append(s.replaceAll("\"(.*)\"","$1"));
+                }
+            }
             else if (s.matches("msgstr \".*\""))
             {
                 msgid = false;
@@ -182,6 +217,51 @@ public class PoFilter extends AbstractFilter
                     trans.append("\n");
                 }
             }
+            
+            else if (s.matches("msgstr\\[0\\] \".*\""))
+            {
+                msgid_plural = false;
+                nontrans.append("msgstr[0] ");
+                if (!nowrap)
+                {
+                    nontrans.append("\"");
+                }
+                msgstr = true;
+                out.write(nontrans.toString());
+                nontrans.setLength(0);
+                    
+                out.write(processEntry(trans.toString()));
+                trans.setLength(0);
+                if (!nowrap)
+                    out.write("\"");
+                out.write("\n");
+            }
+            else if (s.matches("msgstr\\[1\\] \".*\""))
+            {
+                msgstr = false;
+                nontrans.append("msgstr[1] ");
+                if (!nowrap)
+                {
+                    nontrans.append("\"");
+                }
+                msgstr_plural = true;
+                out.write(nontrans.toString());
+                nontrans.setLength(0);
+                
+                out.write(processEntry(trans_plural.toString()));
+                trans_plural.setLength(0);
+                if (!nowrap)
+                    out.write("\"");
+                out.write("\n");
+            }
+            else if ((s.matches("\"(.*)\"")) && (msgstr || msgstr_plural) )
+            {
+                if (header)
+                {
+                    trans.append(s);
+                    trans.append("\n");
+                }
+            }
             else if (header)
             {
                 header = false;
@@ -198,6 +278,7 @@ public class PoFilter extends AbstractFilter
             {
                 nowrap = false;
                 msgstr = false;
+                msgstr_plural = false;
                 potential_header = false;
                 nontrans.append(s);
                 nontrans.append("\n");
@@ -208,5 +289,7 @@ public class PoFilter extends AbstractFilter
             out.write(nontrans.toString());
         if( trans.length()>=0 )
             out.write(processEntry(trans.toString()));
+        if( trans_plural.length()>=0 )
+          out.write(processEntry(trans_plural.toString()));
     }
 }

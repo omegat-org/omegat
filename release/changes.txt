@@ -52,11 +52,8 @@
   - Indicate translation progress in status bar
   http://sourceforge.net/support/tracker.php?aid=1520599  
 
-
-
-
-
   Other enhancements:
+  
   - Belarusian UI updated to 1.7.+
 
   Bug fixes:
@@ -72,12 +69,12 @@
 
 
   4 Enhancements
-  5 Bugfixes
+  6 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.3 update 1
 
-  Enhancements:
+  Implemented requests:
 
   - Exceptions for EN.*: Fig., St., middle name.
   http://sourceforge.net/support/tracker.php?aid=1856354 
@@ -103,7 +100,10 @@
   http://sourceforge.net/support/tracker.php?aid=1878113  
 
   - Relative paths with "similar names" not working
-  http://sourceforge.net/support/tracker.php?aid=1879571  
+  http://sourceforge.net/support/tracker.php?aid=1879571   
+
+  - PO-filter fails to handle plural forms
+  http://sourceforge.net/support/tracker.php?aid=1879892    
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 Changes
@@ -112,21 +112,24 @@
 1.7.3 vs. 1.7.2
 
 
-  4 Enhancements
+  6 Enhancements
   3 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.3
 
 
-Contains two new localisations (Danish and Polish) and bug fixes
+Contains a revised manual, two new localisations (Danish, polish) and bug fixes
 
  Other enhancements:
  
+ - Revised manual
+
  - Danish 1.6.2 localisation + instant start
  - Polish 1.6.2 localisation + partial manual
  - Catalan localisation updated to 1.7.2
- - Belarusian UI updated to 1.7.+
+ - Belarusian UI updated to 1.7.2
+ - French localisation updated to 1.7.3
 
  Bug fixes:
   

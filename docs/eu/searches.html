@@ -1,195 +1,124 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Bilaketak - OmegaT 1.6.2 erabiltzailearen eskuliburua</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Bilaketak - OmegaT 1.7.3 erabiltzailearen eskuliburua</title>
 </head>
 <body>
 
-<h1>Bilaketak</h1>
+	<h1>Bilaketak</h1>
 
-<h2>Edukiak</h2>
+	<ul>
+		<li><a href="#searchwindow">Bilaketa-leihoa</a>
+			<ul>
+				<li><a href="#calling">Bilaketa egitea</a></li>
+				<li><a href="#location">Bilaketaren kokapena</a></li>
+			</ul>
+		</li>
+		<li><a href="#searchmethods">Bilaketa-metodoak</a></li>
+		<li><a href="#usingwildcards">Komodinak erabiltzea</a></li>
+		<li><a href="#usingregularexpressions">Adierazpen erregularrak erabiltzea</a></li>
+		<li><a href="#display">Bilaketaren emaitzak erakustea</a></li>
+	</ul>
 
-<ul type="none">
-   <li>1. <a href="#Search_window">Bilaketa-leihoa</a></li>
-   <li>2. <a href="#Search_locations">Arakatutako tokiak</a></li>
 
-   <li>3. <a href="#Search_methods">Bilaketa-metodoak</a>
-
-      <ul type="none">
-         <li>3.1. <a href="#Exact searches">Bilaketa zehatzak</a></li>
-         <li>3.2. <a href="#Keyword_searches">Bilaketa-gakoak</a></li>
-      </ul>
-   </li>
-
-   <li>4. <a href="#Searching_using_wildcards">Komodinen bidezko bilaketak</a></li>
-
-   <li>5. <a href="#Searching_using_regular_expressions">Adierazpen erregularren bidezko bilaketak</a>
-
-      <ul>
-         <li>5.1. <a href="#Regular_Expressions_to_use_in_searches">Bilaketetan erabili daitezkeen adierazpen erregularrak</a></li>
-         <li>5.2. <a href="#Short_summary_of_regular-expression_constructs">Adierazpen erregularren laburpena</a></li>
-      </ul>
-   </li>
-</ul>
-
-<a name="Search_window"></a>
-<h2>Bilaketa-leihoa</h2>
-
-<p>OmegaT-k bilaketa-funtzio asko eta indartsuak eskaintzen ditu.</p>
-
-<p>Ireki bilaketa-leihoa <code>Ktrl+F</code> sakatuz eta sartu bilatu nahi duzun hitza edo esaldia "Bilatu hau" kutxan.</p>
-
-<p>Bestela, hautatu hitz edo esaldi bat edizio-eremuan (alegia, segmentu aktiboaren helburu-testuan) eta sakatu <code>Ktrl+F</code>. Kasu honetan, hitza edo esaldia automatikoki sartuko da "Bilatu hau" kutxan.</p>
-
-<p>Bilaketa-leihoa irekitzen den bakoitzean, koadroaren instantzia berri bat sortzen da. Leiho hauek ixtea ahazten bazaizu, mahaigainean multzo handi bat pilatzea gerta dakizuke.</p>
-
-<p>Bilaketak proiektuaren sorburuan eta helburuan egiten dira.</p>
-
-<a name="Search_locations"></a>
-<h2>Arakatutako tokiak</h2>
-
-<p>Hautatu tokiak kontrol-laukiak erabiliz.</p>
-
-<p>Bilaketak hainbat tokitan egitea hautatu dezakezu:</p>
-
-<ul>
-   <li>Proiektuan soilik (ezarpen lehenetsia)</li>
-   <li>Proiektuan eta /tm/ karpetan dauden erreferentziako itzulpen-memorietan (hautatu <i>Bilatu TMetan</i>)</li>
-   <li>Fitxategi bakarrean edo hainbat fitxategi dituen karpeta batean (hautatu <i>Bilatu fitxategietan</i>)</li>
-</ul>
-
-<p>Azken kasuan, bilaketak OmegaT-k irakurri ditzakeen fitxategietan egingo ditu soilik (Ikusi <a href="fileFormats">Onartutako fitxategi-formatuak</a>).</p>
-
-<a name="Search_methods"></a>
-<h2>Bilaketa-metodoak</h2>
-
-<p>Hautatu metodoa aukera-botoiak erabiliz.</p>
-
-<p>Bilaketak egiteko, bi metodo hauetako bat aukeratu dezakezu:</p>
-
-<ul>
-   <li><strong>Bilaketa zehatza</strong>: Adierazitako katea daukaten segmentuak bilatzen ditu.</li>
-   <li><strong>Bilaketa-gakoa</strong>: Adierazitako hitz-gako guztiak eta edozein ordenatan dituzten segmentuak bilatzen ditu.</li>
-</ul>
-
-<p>Erabiltzen duzun metodoa edozein dela, ondoko hiru aukerak erabili ditzakezu:</p>
-
-<ul>
-   <li>
-      <strong>Maiuskulak/minuskulak</strong>: Aukera hau hautatuz gero, adierazitako kate zehatza bilatuko da; bestela, maiuskulak ezikusi egingo dira.</li>
-
-   <li>
-      <strong>Adierazpen erregularrak</strong>: Aukera hau hautatuz gero, bilaketa-katea adierazpen erregulartzat hartuko da (hitz-gakoen bilaketaren kasuan, adierazpen anitz bailiran tratatuko dira).</li>
-
-   <li>
-      <strong>Bilatu TMetan</strong>: Aukera hau hautatuz gero, itzulpen-memoriak ere arakatuko dira.</li>
-</ul>
-
-<a name="Exact_searches"></a>
-<h2>Bilaketa zehatzak</h2>
-
-<p>Bilaketa zehatz batek esaldiak bilatzen ditu, hau da, hainbat hitzez osatutako kate bat adierazten bada, ordena horretan badaude soilik aurkituko dira. Bilaketa zehatza, Google bezalako Interneteko arakatzaileetan "esaldi zehatz" bat bilatzea bezalakoa da.</p>
-
-<a name="Keyword_searches"></a>
-<h2>Bilaketa-gakoak</h2>
-
-<p>Hautatu "Bilaketa-gakoa" eta sartu nahi beste hitz, espazioz banaturik eta edozein ordenatan, eta OmegaT-k hitz guztiak dauzkaten segmentuen zerrenda bat erakutsiko du. Gako-hitzen bidezko bilaketa, Google bezalako Interneteko arakatzaileetan "hitz guztiekin" bilatzea bezalakoa da.</p>
-
-<a name="Searching_using_wildcards"></a>
-<h2>Komodinen bidezko bilaketak</h2>
-
-<p>Bai bilaketa zehatzetan, bai gako-hitzen bidezkoan, '<code>*</code>' eta '<code>?</code>' komodinak erabili daitezke. Komodinak erabiltzeko, kontuan izan <strong>adierazpen erregularrak</strong> aukera hautatu ez duzula, bestela komodinak adierazpen erregularraren karakteretzat hartuko dira.</p>
-
-<p>'<code>?</code>' komodinak edozein karaktere (karaktere bakarra) ordezkatzen du; esaterako, '<code>ar?i</code>' kateak '<code>argi</code>' eta '<code>ardi</code>' bilatzen ditu. '<code>*</code>' komodinak edozein karaktere-kopuru ordezkatzen du; esaterako, '<code>a*i</code>' kateak '<code>argi</code>', '<code>asti</code>', '<code>aldi</code>' eta '<code>aurpegi</code>' bilatzen ditu.</p>
-
-<p>Karaktere hauek dauzkaten segmentuak bilatu nahi izanez gero, adierazpen erregularren aukera aktibatu beharko duzu eta alderantzizko barra ('<code>\</code>') sartu karakterearen aurrizki gisa, esaterako '<code>x\*y</code>' idatzi '<code>x*y</code>' bilatzeko eta '<code>x\?y</code>' idatzi '<code>x?y</code>' bilatzeko.</p>
-
-<a name="Searching_using_regular_expressions"></a>
-<h2>Adierazpen erregularren bidezko bilaketak</h2>
-
-<p>Adierazpen erregularren bidezko bilaketak oso ahaltsuak dira kate baten instantziak bilatu nahi direnean. Bilaketa arrunt baten parekoak dira, baina askoz zaluagoak. Sarean gai honi buruzko tutorial errazak aurki ditzakezu (esaterako, <a href="http://www.regular-expressions.info/quickstart.html" title="http://www.regular-expressions.info/quickstart.html" rel="nofollow">http://www.regular-expressions.info/quickstart.html</a>.)</p>
-
-<a name="Regular_Expressions_to_use_in_searches"></a>
-<h3>Bilaketetan erabili daitezkeen adierazpen erregularrak</h3>
-
-<p>Bilaketetan erabiltzen diren adierazpen erregularrak Javak onartzen dituenak dira. Informazio zehatzagoa behar baduzu, kontsultatu <a href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
-
-<a name="Short_summary_of_regular-expression_constructs"></a>
-<h4>Adierazpen erregularren laburpena</h4>
-
-<table border="0" width="80%" cellpadding="1" cellspacing="0" summary="Adierazpen erregularren formak, eta beren baliokideak">
-    <tr bgcolor="#DDEEFF"><th width="10%" align="left" id="construct">Forma</th><th align="left">Baliokidea</th></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="flags">Banderak</th></tr>
-    <tr><td><tt>(?i)</tt></td><td>Maiuskulak/minuskulak bereizten ez dituen bilaketa ahalbidetzen du (portaera lehenetsia bereiztea da)</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr><th align="left" colspan="2" id="characters">Karaktereak</th></tr>
-
-    <tr><td><strong>x</strong></td><td><strong>x</strong> karakterea, ondokoak salbu...</td></tr>
-    <tr><td><tt>\u</tt><strong>hhhh</strong></td><td><tt>0x</tt><strong>hhhh</strong> balio hamaseitarra duen karakterea</td></tr>
-    <tr><td><tt>\t</tt></td><td>Tabuladore karakterea (<tt>'\u0009'</tt>)</td></tr>
-
-    <tr><td><tt>\n</tt></td><td>Lerro berria sortzeko karakterea (<tt>'\u000A'</tt>)</td></tr>
-    <tr><td><tt>\r</tt></td><td>Orga-itzuleraren karakterea (<tt>'\u000D'</tt>)</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="quot">Komatxoak</th></tr>
-
-    <tr><td><tt>\</tt></td><td>Ondoren datorren karakterea komatxo artean jartzen du. Hau derrigorrezkoa da <code>!$()*+.&lt;&gt;?[\]^{|}</code> metakaraktereak bilatu nahi badituzu. </td></tr>
-    <tr><td><tt>\\</tt></td><td>Esaterako, hau alderantzizko barra da.</td></tr>
-    <tr><td><tt>\Q</tt></td><td><tt>\E</tt> dagoen tokira arteko karaktere guztiak komatxo artean jartzen ditu</td></tr>
-
-    <tr><td><tt>\E</tt></td><td><tt>\Q</tt> bidez hasi diren komatxoen amaiera</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="classes">Karaktere-klaseak</th></tr>
-    <tr><td><tt>[abc]</tt></td><td><tt>a</tt>, <tt>b</tt>, edo <tt>c</tt> (klase sinplea)</td></tr>
-
-    <tr><td><tt>[^abc]</tt></td><td>Edozein karaktere, <tt>a</tt>, <tt>b</tt>, edo <tt>c</tt> salbu (ezeztapena)</td></tr>
-    <tr><td><tt>[a-zA-Z]</tt></td><td><tt>a</tt>-tik <tt>z</tt>-ra edo <tt>A</tt>-tik <tt>Z</tt>-ra, (tartea)</td></tr>
-
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="predef">Aurredefinitutako karaktere-klaseak</th></tr>
-    <tr><td><tt>.</tt></td><td>Edozein karaktere (lerro-amaierak salbu)</td></tr>
-    <tr><td><tt>\d</tt></td><td>Digitu bat: <tt>[0-9]</tt></td></tr>
-    <tr><td><tt>\D</tt></td><td>Digitua ez den karaktere bat: <tt>[^0-9]</tt></td></tr>
-
-    <tr><td><tt>\s</tt></td><td>Zuriune bat: <tt>[ \t\n\x0B\f\r]</tt></td></tr>
-    <tr><td><tt>\S</tt></td><td>Zuriunea ez den karaktere bat: <tt>[^\s]</tt></td></tr>
-    <tr><td><tt>\w</tt></td><td>Hizki bat: <tt>[a-zA-Z_0-9]</tt></td></tr>
-    <tr><td><tt>\W</tt></td><td>Hizkia ez den karaktere bat: <tt>[^\w]</tt></td></tr>
-
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="bounds">Muga-formak</th></tr>
-    <tr><td><tt>^</tt></td><td>Lerroaren hasiera</td></tr>
-    <tr><td><tt>$</tt></td><td>Lerroaren amaiera</td></tr>
-    <tr><td><tt>\b</tt></td><td>Hitz-muga</td></tr>
-
-    <tr><td><tt>\B</tt></td><td>Hitzak ez diren karaktere-multzoen muga</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="greedy">Zenbatzaile asezinak</th></tr>
-    <tr><td colspan="2">Hauek ahalik eta baliokide gehien bilatuko dituzte. Esaterako, <code>a+</code> formak <code>aaa</code> aurkituko du <code>aaabbb</code> katean</td></tr>
-
-    <tr><td><strong>X</strong><tt>?</tt></td><td><strong>X</strong>, zero edo bat</td></tr>
-    <tr><td><strong>X</strong><tt>*</tt></td><td><strong>X</strong>, zero edo gehiago</td></tr>
-    <tr><td><strong>X</strong><tt>+</tt></td><td><strong>X</strong>, bat edo gehiago</td></tr>
-
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="reluc">Zenbatzailea motelak (aseak)</th></tr>
-    <tr><td colspan="2">Hauek ahalik eta baliokide gutxien bilatuko dituzte. Esaterako, <code>a+?</code> formak lehen <code>a</code> aurkituko du <code>aaabbb</code> katean</td></tr>
-    <tr><td><strong>X</strong><tt>??</tt></td><td><strong>X</strong>, zero edo bat</td></tr>
-
-    <tr><td><strong>X</strong><tt>*?</tt></td><td><strong>X</strong>, zero edo gehiago</td></tr>
-    <tr><td><strong>X</strong><tt>+?</tt></td><td><strong>X</strong>, bat edo gehiago</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="logical">Eragile logikoak</th></tr>
-
-    <tr><td><strong>XY</strong></td><td><strong>X</strong> eta ondoren <strong>Y</strong></td></tr>
-    <tr><td><strong>X</strong><tt>|</tt><strong>Y</strong></td><td><strong>X</strong> zein <strong>Y</strong></td></tr>
-
-    <tr><td><tt>(</tt><strong>XY</strong><tt>)</tt></td><td><strong>XY</strong> multzo bakar gisa</td></tr>
-</table>
 
 <hr>
-<p><a href="legalNotices.html" title="Legezko oharrak">Legezko oharrak</a></p>
 
+	<a name="searchwindow" id="searchwindow"></a>
+	<h1>Bilaketa-leihoa</h1>
+
+	<a name="calling" id="calling"></a>
+	<h2>Bilaketa egitea</h2>
+	
+	<p>OmegaT-k bilaketa-funtzio asko eta indartsuak eskaintzen ditu. Ireki <strong>bilaketa-leihoa</strong> <code>Ktrl+F</code> sakatuz eta sartu bilatu nahi duzun hitza edo esaldia <strong>Bilatu hau</strong> kutxan.</p>
+	
+	<p>Bestela, editorearen leihoan, hautatu hitz edo esaldi bat edizio-eremuan (alegia, segmentu aktiboaren helburu-testuan) eta sakatu <code>Ktrl+F</code>. Kasu honetan, hitza edo esaldia automatikoki sartuko da <strong>Bilatu hau</strong> kutxan.</p>
+
+	<p><strong>Bilaketa-leihoa</strong> irekitzen den bakoitzean, koadroaren instantzia berri bat sortzen da. Leiho hauek ixtea ahazten bazaizu, mahaigainean multzo handi bat pilatzea gerta dakizuke.</p>
+	
+	<a name="location" id="location"></a>
+	<h2>Bilaketaren kokapena</h2>
+	
+	<p>Bilaketak proiektuaren sorburuan zein helburuan egiten dira. Bilaketak egin daitezke:</p>
+
+	<ul>
+		<li>proiektuan soilik (ezarpen lehenetsia)</li>
+		<li>proiektuan eta /tm/ karpetan dauden erreferentziako itzulpen-memorietan (hautatu <i>Bilatu TMetan</i>)</li>
+		<li>fitxategi bakarrean edo hainbat fitxategi dituen karpeta batean (hautatu <i>Bilatu fitxategietan</i>)</li>
+	</ul>
+
+	<p>Azken kasuan, bilaketak OmegaT-k irakurri ditzakeen fitxategietan egingo ditu soilik (Ikusi <a href="filesToTranslate.html">Onartutako fitxategi-formatuak</a>).</p>
+
+
+
+<hr>
+
+	<a name="searchmethods" id="searchmethods"></a>
+	<h1>Bilaketa-metodoak</h1>
+
+	<p>Hautatu metodoa aukera-botoiak erabiliz. Bilaketak egiteko, bi metodo hauetako bat aukeratu dezakezu:</p>
+
+	<dl>
+		<dt><strong>Bilaketa zehatza</strong></dt><dd>Adierazitako katea daukaten segmentuak bilatzen ditu.</dd>
+		<dt><strong>Bilaketa-gakoa</strong></dt><dd>Adierazitako gako-hitz guztiak eta edozein ordenatan dituzten segmentuak bilatzen ditu.</dd>
+	</dl>
+
+	<p>Erabiltzen duzun metodoa edozein dela, ondoko hiru aukerak erabili ditzakezu:</p>
+
+	<dl>
+		<dt><strong>Maiuskulak/minuskulak</strong></dt><dd>Aukera hau hautatuz gero, adierazitako kate zehatza bilatuko da; bestela, maiuskulak ezikusi egingo dira.</dd>
+		<dt><strong>Adierazpen erregularrak</strong></dt><dd>Aukera hau hautatuz gero, bilaketa-katea adierazpen erregulartzat hartuko da (gako-hitzen bilaketaren kasuan, adierazpen anitz bailiran tratatuko dira).</dd>
+		<dt><strong>Bilatu TMetan</strong></dt><dd>Aukera hau hautatuz gero, itzulpen-memoriak ere arakatuko dira.</dd>
+	</dl>
+
+	<p><strong>Bilaketa</strong> zehatz batek esaldiak bilatzen ditu, hau da, hainbat hitzez osatutako kate bat adierazten bada, ordena horretan badaude soilik aurkituko dira. Bilaketa zehatza, Google bezalako Interneteko arakatzaileetan "esaldi zehatz" bat bilatzea bezalakoa da.</p>
+
+	<p>Hautatu <strong>Bilaketa-gakoa</strong> eta sartu nahi beste hitz, espazioz banaturik eta edozein ordenatan. OmegaT-k hitz guztiak dauzkaten segmentuen zerrenda bat erakutsiko du. Gako-hitzen bidezko bilaketa, Google bezalako Interneteko arakatzaileetan "hitz guztiekin" bilatzea bezalakoa da.</p>
+
+
+
+<hr>
+
+	<a name="usingwildcards" id="usingwildcards"></a>
+	<h1>Komodinak erabiltzea</h1>
+
+	<p>Bai bilaketa zehatzetan, bai gako-hitzen bidezkoan, '<code>*</code>' eta '<code>?</code>' komodinak erabili daitezke. Komodinak erabiltzeko, kontuan izan <strong>adierazpen erregularrak</strong> aukera hautatu ez duzula, bestela komodinak adierazpen erregularraren karakteretzat hartuko dira.</p>
+	
+	<p>'<strong>*</strong>' karaktereak edozein karaktere-kopuru ordezkatzen du (esaterako, '<strong>egi*</strong>' bilaketa-terminoaren bidez '<strong>egi</strong>', '<strong>egia</strong>' eta '<strong>egizu</strong>' hitzak aurkituko dira).</p>
+	
+	<p>'<strong>?</strong>' karaktereak karaktere bat ordezkatzen du ('<strong>egi?</strong>' terminoaren bidez '<strong>egia</strong>' aurkituko da, baina ez '<strong>egizu</strong>').</p>
+
+	<p><strong>*</strong> edo <strong>?</strong> karakterea daukaten segmentuak bilatu nahi izanez gero, adierazpen erregularren aukera aktibatu beharko duzu eta alderantzizko barra ('\') sartu karakterearen aurrizki gisa, esaterako 'x\*y' idatzi 'x*y' bilatzeko eta 'x\?<code>y</code>' idatzi '<code>x?y</code>' bilatzeko.</p>
+
+
+
+<hr>
+
+	<a name="usingregularexpressions" id="usingregularexpressions"></a>
+	<h1>Adierazpen erregularrak erabiltzea</h1>
+
+	<p>Adierazpen erregularren bidezko bilaketak oso ahaltsuak dira kate baten instantziak bilatu nahi direnean. Komodinen bidezko bilaketa baten parekoak dira, baina askoz zaluagoak.</p>
+	
+	<p>Bilaketetan erabiltzen diren adierazpen erregularrak Javak onartzen dituenak dira. <a href="regexp.html">Adierazpen erregularren formak</a> eranskinean laburpen bat dago.</p>
+	
+	<p>Informazio zehatzagoa behar baduzu, kontsultatu <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+		
+	<p>Sarean gai honi buruzko tutorial errazak aurki ditzakezu (esaterako, <a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)</p>
+	
+<hr>
+
+	<a name="display" id="display"></a>
+	<h1>Bilaketaren emaitzak erakustea</h1>
+	
+	<p>Bilaketa-eremuan kate bat sartu ondoren bilaketa-botoia sakatuz gero, bilatutako katea daukaten proiektuko segmentu guztiak erakutsiko dira. OmegaT-k segmentu berdinak entitate bakar gisa kudeatzen dituenez, lehen segmentu bakarra erakusten da soilik.</p>
+	
+	<p>Bilaketa-leihoan erakusten diren segmentuen ordena, proiektuan daukaten ordena bera da. Itzulitako segmentuetan jatorrizko testua goian eta itzulitako testua behean erakutsiko dira; itzuli gabeko segmentuetan jatorrizko testua soilik erakutsiko da.</p>
+
+	<p>Segmentu batean klikatuz, editorea agertzen da segmentua aldatu ahal izateko. Aldaketaren ondoren, bilaketa-leihora itzul zaitezke eta aurkitutako hurrengo segmentuan klikatu hura ere aldatzeko. Mekanika hau oso erabilgarria da terminologiaren eguneraketak egiteko.</p>
+
+	<hr>
+	
+	<p><a href="legalNotices.html">Legezko oharrak</a></p>
 </body>
 </html>

@@ -1,0 +1,192 @@
+<html>
+<head>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Adierazpen erregularrak - OmegaT 1.7.3 erabiltzailearen eskuliburua</title>
+</head>
+<body>
+
+	<h1>Adierazpen erregularrak</h1>
+
+	<p>Bilaketetan eta segmentazio-arauetan erabiltzen diren adierazpen erregularrak Javak onartzen dituenak dira. Informazio zehatzagoa behar baduzu, kontsultatu <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+		
+	<p>Sarean gai honi buruzko tutorial errazak aurki ditzakezu (esaterako, <a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)</p>
+
+
+	<table border="0" cellpadding="3" cellspacing="0">
+
+		<tr>
+			<td width="40%"><h2>Ondoko adierazpena:</h2></td>
+			<td><h2>Bat dator ondoko sekuentziarekin:</h2></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Banderak</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>(?i)</code></td>
+			<td>Maiuskulak/minuskulak bereizten ez dituen bilaketa ahalbidetzen du (portaera lehenetsia bereiztea da)</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Karaktereak</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>x</strong></td>
+			<td><strong>x</strong> karakterea, ondokoak salbu...</td>
+		</tr>
+		<tr>
+			<td><code>\u</code><strong>hhhh</strong></td>
+			<td><code>0x</code><strong>hhhh</strong> balio hamaseitarra duen karakterea</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\t</code></td>
+			<td>Tabuladore karakterea (<code>'\u0009'</code>)</td>
+		</tr>
+		<tr>
+			<td><code>\n</code></td>
+			<td>Lerro berria sortzeko karakterea (<code>'\u000A'</code>)</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\r</code></td>
+			<td>Orga-itzuleraren karakterea (<code>'\u000D'</code>)</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Komatxoak</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\</code></td>
+			<td>Ondoren datorren karakterea komatxo artean jartzen du. Hau derrigorrezkoa da <code>!$()*+.&lt;&gt;?[\]^{|}</code> metakaraktereak bilatu nahi badituzu. </td>
+		</tr>
+		<tr>
+			<td><code>\\</code></td>
+			<td>Esaterako, hau alderantzizko barra da.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\Q</code></td>
+			<td><code>\E</code> dagoen tokira arteko karaktere guztiak komatxo artean jartzen ditu</td>
+		</tr>
+		<tr>
+			<td><code>\E</code></td>
+			<td><code>\Q</code> bidez hasi diren komatxoen amaiera</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Karaktere-klaseak</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>[abc]</code></td>
+			<td><code>a</code>, <code>b</code>, edo <code>c</code> (klase sinplea)</td>
+		</tr>
+		<tr>
+			<td><code>[^abc]</code></td>
+			<td>Edozein karaktere, <code>a</code>, <code>b</code>, edo <code>c</code> salbu (ezeztapena)</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>[a-zA-Z]</code></td>
+			<td><code>a</code>-tik <code>z</code>-ra edo <code>A</code>-tik <code>Z</code>-ra, (tartea)</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Aurredefinitutako karaktere-klaseak</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>.</code></td>
+			<td>Edozein karaktere (lerro-amaierak salbu)</td>
+		</tr>
+		<tr>
+			<td><code>\d</code></td>
+			<td>Digitu bat: <code>[0-9]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\D</code></td>
+			<td>Digitua ez den karaktere bat: <code>[^0-9]</code></td>
+		</tr>
+		<tr>
+			<td><code>\s</code></td>
+			<td>Zuriune bat: <code>[ \t\n\x0B\f\r]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\S</code></td>
+			<td>Zuriunea ez den karaktere bat: <code>[^\s]</code></td>
+		</tr>
+		<tr>
+			<td><code>\w</code></td>
+			<td>Hizki bat: <code>[a-zA-Z_0-9]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\W</code></td>
+			<td>Hizkia ez den karaktere bat: <code>[^\w]</code></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Muga-formak</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>^</code></td>
+			<td>Lerroaren hasiera</td>
+		</tr>
+		<tr>
+			<td><code>$</code></td>
+			<td>Lerroaren amaiera</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\b</code></td>
+			<td>Hitz-muga</td>
+		</tr>
+		<tr>
+			<td><code>\B</code></td>
+			<td>Hitzak ez diren karaktere-multzoen muga</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Zenbatzaile asezinak</h3></td>
+		</tr>
+		<tr>
+			<td colspan="2">Hauek ahalik eta baliokide gehien bilatuko dituzte. Esaterako, <code>a+</code> formak <code>aaa</code> aurkituko du <code>aaabbb</code> katean</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>?</code></td>
+			<td><strong>X</strong>, zero edo bat</td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>*</code></td>
+			<td><strong>X</strong>, zero edo gehiago</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>+</code></td>
+			<td><strong>X</strong>, bat edo gehiago</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Zenbatzaile motelak (aseak)</h3></td>
+		</tr>
+		<tr>
+			<td colspan="2">Hauek ahalik eta baliokide gutxien bilatuko dituzte. Esaterako, <code>a+?</code> formak lehen <code>a</code> aurkituko du <code>aaabbb</code> katean</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>??</code></td>
+			<td><strong>X</strong>, zero edo bat</td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>*?</code></td>
+			<td><strong>X</strong>, zero edo gehiago</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>+?</code></td>
+			<td><strong>X</strong>, bat edo gehiago</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Eragile logikoak</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>XY</strong></td>
+			<td><strong>X</strong> eta ondoren <strong>Y</strong></td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>|</code><strong>Y</strong></td>
+			<td><strong>X</strong> zein <strong>Y</strong></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>(</code><strong>XY</strong><code>)</code></td>
+			<td><strong>XY</strong> multzo bakar gisa</td>
+		</tr></table>
+
+	<hr>
+
+	<a href="legalNotices.html">Legezko oharrak</a>
+</body>
+</html>

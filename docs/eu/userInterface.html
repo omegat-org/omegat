@@ -1,328 +1,365 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Erabiltzaile-interfazea - OmegaT 1.6.2 erabiltzailearen eskuliburua</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Erabiltzaile-interfazea - OmegaT 1.7.3 erabiltzailearen eskuliburua</title>
 </head>
 <body>
 
-<h1>Erabiltzaile-interfazea</h1>
-
-<h2>Edukiak</h2>
-
-<ul type="none">
-   <li>1. <a href="#User_Interface_Items">Erabiltzaile-interfazearen elementuak</a>
-
-      <ul type="none">
-         <li>1.1. <a href="#Windows_you.27ll_use_most_of_the_time">Gehien erabiliko dituzun leihoak</a></li>
-         <li>1.2. <a href="#Windows_you.27ll_use_sometimes">Zenbaitetan erabiliko dituzun leihoak</a></li>
-         <li>1.3. <a href="#Dialogs_you.27ll_use_to_change_your_project_settings">Zure proiektuaren ezarpenak aldatzeko erabiliko dituzun koadroak</a></li>
-      </ul>
-   </li>
-
-   <li>2. <a href="#OmegaT_Main_Window">OmegaT-ren leiho nagusia</a>
-
-      <ul>
-         <li>2.1. <a href="#Editor_Pane">Editore-panela</a></li>
-         <li>2.2. <a href="#Fuzzy_Matches">Parekatze lausoak</a></li>
-         <li>2.3. <a href="[z] Glosarioa">Glosarioa</a></li>
-         <li>2.4. <a href="#Main_Menu">Menu nagusia</a></li>
-         <li>2.5. <a href="#Status_Bar">Egoera-barra</a></li>
-      </ul>
-   </li>
-
-   <li>3. <a href="#Other_Windows">Beste leiho batzuk</a>
-
-      <ul>
-         <li>3.1. <a href="#Project_Files">Proiektuaren fitxategiak</a></li>
-         <li>3.2. <a href="#Search_Window">Bilaketa-leihoa</a></li>
-
-         <li>3.3. <a href="#Tag_Validation">Etiketen balidazioa</a>
-
-            <ul>
-               <li>3.3.1. <a href="#Tag_validation_window">Etiketen balidaziorako leihoa</a></li>
-               <li>3.3.2. <a href="#Tag_errors">Etiketa-erroreak</a></li>
-               <li>3.3.3. <a href="#Hints_for_tags_management">Etiketak kudeatzeko aholkuak</a></li>
-            </ul>
-         </li>
-
-         <li>3.4. <a href="#Help_Browser">Laguntza-arakatzailea</a></li>
-      </ul>
-   </li>
-
-   <li>4. <a href="#Dialogs">Koadroak</a></li>
-</ul>
-
-<a name="User_Interface_Items"></a>
-<h2>Erabiltzaile-interfazearen elementuak</h2>
-
-<p>OmegaT-ren erabiltzaile-interfazea hainbat elementuz osaturik dago. Ondoren elementu horiek laburbildu ditugu, eta gero, bakoitza xehetasun gehiagoz deskribatu dugu.</p>
-
-<a name="Windows_you.27ll_use_most_of_the_time"></a>
-<h3>Gehien erabiliko dituzun leihoak</h3>
-
-<ul>
-   <li>
-      <strong>OmegaT-ren leiho nagusia</strong>, hiru panel dauzkana:<ul>
-         <li><i>Editore-panela</i>, itzulpena tekleatu eta editatzen duzun lekua</li>
-         <li><i>Parekatzeen bisore-panela</i>, itzulpen-memorietatik erauzitako segmentu antzekoenak erakusten dituena</li>
-         <li><i>Glosarioen bisore-panela</i>, terminologiaren itzulpena erakusten duena</li>
-         <li>Eta baita <i>Menu nagusia</i> ere, alegia, OmegaT-ren funtzio gehienak atzitzeko erabiltzen dena</li>
-         <li>Eta <i>Egoera-barra</i>, leihoaren behealdean dagoena eta erabilerari lotutako mezuak ematen dituena</li>
-      </ul>
-   </li>
-
-   <li><strong>Proiektuaren fitxategien leihoa</strong>, zure fitxategi itzulgarrien zerrenda erakusten duena</li>
-   <li><strong>Bilaketa-leihoa</strong>, proiektuko segmentu jakinak bilatzeko erabiltzen dena</li>
-</ul>
-
-<a name="Windows_you.27ll_use_sometimes"></a>
-<h3>Zenbaitetan erabiliko dituzun leihoak</h3>
-
-<ul>
-   <li><strong>Etiketak balidatzeko leihoa</strong>, itzulitako dokumentuen formatu-akatsak detektatzen dituena</li>
-   <li><strong>Laguntza-arakatzailea</strong>, erabiltzailearen eskuliburua irakurtzeko</li>
-</ul>
-
-<a name="Dialogs_you.27ll_use_to_change_your_project_settings"></a>
-<h3>Zure proiektuaren ezarpenak aldatzeko erabiliko dituzun koadroak</h3>
-
-<ul>
-   <li><strong>Proiektuaren propietateak</strong>, proiektuaren karpetak eta hizkuntzak aldatzeko erabiltzen dena</li>
-   <li><strong>Letra-tipoa</strong>, OmegaT-k sorburua, itzulpena, parekatzeak eta glosarioa erakustean erabiltzen duen letra-tipoa aldatzeko balio duena</li>
-   <li><strong>Fitxategi-iragazkiak</strong>, onartutako fitxategi-formatuen kudeaketa doitzen duena</li>
-   <li><strong>Segmentazioa</strong>, testua segmentuetan zatitzen den modua aldatzen duena</li>
-   <li><strong>Editatu portaera</strong>, segmentuen artean mugitzean OmegaT-k duen portaera aldatzen duena</li>
-</ul>
-
-<a name="OmegaT_Main_Window"></a>
-<h2>OmegaT-ren leiho nagusia</h2>
-
-<p>Leiho nagusia hiru panelez, menu nagusiaz eta egoera-barraz osaturik dago.</p>
-
-<p>Panela bere izena dagoen tokitik arrastatuz, bere kokapena aldatu dezakezu, baita leiho berri bat sortuz desatrakatu ere. Panelaren egoeraren arabera, goiko ezkerreko izkinan 5 ikur desberdin agertu daitezke. Saguaren kurtsorea ikur bakoitzaren gainean jartzean argibide bat erakusten da.</p>
-
-<p>
-<img src="images/Minimize.gif" alt="Ikonotu" width="18" height="18">panela ikonotzen du, bere izena soilik erakutsiz egoera-barraren ondoan. <br> <img src="images/Maximize.gif" alt="Maximizatu" width="18" height="18">panelak leihoaren espazio osoa bete dezan eragiten du. <br> <img src="images/Restore.gif" alt="Leheneratu" width="18" height="18">panela ikonotu edo maximizatu baino lehen zegoen egoeran jartzen du. <br> <img src="images/Undock.gif" alt="Desatrakatu" width="18" height="18">panela leiho nagusitik desatrakatzen du eta leiho berri bat sortzen du. <br> <img src="images/Dock.gif" alt="Atrakatu" width="18" height="18">panela berriro leiho nagusian atrakatzen du.</p>
-
-<p>Era berean, panelak bata bestearen gainean jarri daitezke. Kasu honetan, panelek fitxa bat erakutsiko dute goialdean. Fitxan klikatuz, panela aurreko planora eramango da. Panelen tamaina aldatu nahi izanez gero, beren arteko banatzaileak arrastatu egin daitezke.</p>
-
-<a name="Editor_Pane"></a>
-<h3>Editore-panela</h3>
-
-<p>Hemen itzulpena tekleatu eta editatzen duzu. Editore-panelak partzialki itzulitako dokumentuen testua honela erakusten du: itzulita dagoen testua itzulita erakusten du, eta itzuli gabe dagoen testua jatorrizko hizkuntzan erakusten du.</p>
-
-<p>Testua segmentuetan zatituta erakusten da, eta dokumentuan zehar mugi zaitezke edozein segmentu klikatu eta editatzeko.</p>
-
-<p>Segmentuetako bat aktiboa da. Bi atal dauzkan bakarra da: goiko aldea jatorrizko hizkuntzan dago, karaktere lodiz eta atzeko plano berdez idatzita, eta beheko aldea edizio-eremua da eta bi markatzailek mugatzen dute: ezkerreko markatzailea "&lt;segment nnnn&gt;" da, non "nnnn" segmentuak proiektuaren baitan duen zenbakia den, eta eskuinekoa "&lt;end segment&gt;" da. Goiko aldeak erreferentzia gisa balio du, eta beheko aldea itzulpena egiteko edo moldatzeko lekua da.</p>
-
-<pre>Esaldi hau itzuli egin da.
-
-Esaldi hau ere itzuli egin da.
-
-<strong>Cette phrase est en train d'être traduite.</strong>
-&lt;segment 0003&gt;[Hemen hau tekleatu beharko zenuke: Esaldi hau itzultze-prozesuan dago]&lt;end segment&gt;</pre>
-
-<p><a href="translationEditing.html" title="Itzulpenaren edizioa">Editatu portaera</a> koadroan ezarritakoa jarraituz, edizio-eremura mugitzen zarenean hutsik agertuko da edo testu bat edukiko du:</p>
-
-<ul>
-   <li>Sorburu-testua</li>
-   <li>Itzultzera zoazen katearen antzekoena den itzulpena</li>
-</ul>
-
-<p>Beste segmentu batera mugitzen zarenean, itzulpena balidatu eta gorde egiten da.</p>
-
-<p>Segmentuak itzuli gabe geratu daitezen nahi baduzu, hustu edizio-eremua (hautatu dena <code>Ktrl+A</code> erabiliz eta ezabatu <code>Del</code> erabiliz).</p>
-
-<p><a href="translationEditing.html" title="Itzulpenaren edizioa">Editatu portaera</a> koadroan ezarri duzuna jarraituz, OmegaT-k itzulpena sorburuaren berdina izan dadin onartu dezake. Ezaugarri hau oso erabilgarria da ikurrak, izenak edo beste izen berezi batzuk dituzten dokumentuetan, edo itzulpena behar ez duten zatiak asko direnean.</p>
-
-<p>Gai honetan gehiago sakondu nahi izanez gero, ikusi <a href="translationEditing.html" title="Itzulpenaren edizioa">Itzulpenaren edizioa</a>.</p>
-
-<a name="Fuzzy_Matches"></a>
-<h3>Parekatze lausoak</h3>
-
-<p>Parekatzeen bisoreak <a href="translationMemories.html" title="Itzulpen-memoriak">itzulpen-memorietan</a> aurkitzen dituen segmenturik antzekoenak erakusten ditu, bai proiektua itzultzean sortu diren itzulpen-memorietan aurkitutakoak, bai beste lan batzuetatik inportatu dituzun itzulpen-memorietakoak edo zure bezeroak edo itzulpen-agentziak eman dizkizun memorietakoak.</p>
-
-<p>Hurrengo segmentura mugitzen zarenean, lehen parekatze lausoa (ehunekoetan parekatze-maila onena duena) automatikoki hautatzen da. Beste edozein parekatze hautatu dezakezu <a href="keyboardShortcuts.html" title="OmegaT-ren lasterteklak"><code>Ktrl+2</code>, <code>3</code>, <code>4</code>, edo <code>5</code> sakatuz</a>, eskuragarri dagoen parekatze-kopuruaren arabera.</p>
-
-<p><strong>Hautatutako</strong> parekatzea zure itzulpenean erabiltzeko, sakatu <a href="keyboardShortcuts.html" title="OmegaT-ren lasterteklak"><code>Ktrl+R</code></a> edizio-eremuko testuaren ordez parekatzea jartzeko edo sakatu <a href="keyboardShortcuts.html" title="OmegaT-ren lasterteklak"><code>Ktrl+I</code></a> parekatzea kurtsorearen kokapenean txertatzeko.</p>
-
-<p>Parekatze-ehunekoa gutxi gorabehera kalkulatzen da, bi segmentuetan bat datozen hitzak hartuz eta segmentu luzeenaren hitz-kopuruarekin zatituz.</p>
-
-<p>Hautatutako parekatze lausoa</p>
-
-<ul>
-   <li><strong>letra lodiz</strong> nabarmenduko da</li>
-   <li>Itzultzen ari zaren segmentuan falta diren hitzak <font color="blue"><strong>urdinez</strong></font> margotuko dira.</li>
-   <li>Hitz urdinetatik hurbil daudenak edo jatorrizkoaren kokapenean ez daudenak <font color="green"><strong>berdez</strong></font> margotuko dira.</li>
-</ul>
-
-<p>Ikusi hurrengo segmentua:</p>
-
-<pre>   <strong>Esaldi hau lehena da</strong></pre>
-
-<p>Segmentu parekatua:</p>
-
-<pre>   <strong>Java &amp; OmegaT-ri buruzko ohar orokorrak</strong></pre>
-
-<p>honela margotuko da:</p>
-
-<pre>   <strong>Esaldi hau <font color="blue">ez</font> <font color="green">da</font> <font color="blue">hirugarrena</font></strong></pre>
-
-<p>eta ehunekoa 2/5=<strong>%40</strong> izango da
-</p>
-
-<a name="Glossary"></a>
-<h3>Glosarioa</h3>
-
-<p>Glosarioen panelak <a href="glossaries.html" title="Glosarioak">glosario-fitxategietatik</a> kargatutako terminologia-itzulpenak erakusten ditu. Uneko segmentuan aurkitutako terminoen itzulpenak erakusten ditu, baina erreferentzia gisa soilik, eta ez du onartzen termino berriak eta beren itzulpena txertatzea edo existitzen diren terminoak ordeztea. OmegaT-k hitz anitzeko terminoak onartzen ditu, baina oso azaletik: termino baten bi hitzak uneko segmentuan badaude, terminoa panelean erakusten da.</p>
-
-<p>Glosarioen panelean agertzen diren terminoen formatua ondokoa da:</p>
-
-<pre>
-   'sorburu-terminoa' = 'terminoaren itzulpena'
-   Terminoari buruzko iruzkina, baldin badauka
-</pre>
-
-<a name="Main_Menu"></a>
-<h3>Menu nagusia</h3>
-
-<p>Menu nagusitik OmegaT-ren funtzio guztiak erabili daitezke. Hala ere, gehien erabiltzen diren funtzioak <a href="keyboardShortcuts.html" title="OmegaT-ren lasterteklak">lasterteklen</a> bidez maneia daitezke. Lasterteklak erabiltzera ohitzen zarenean, ez duzu menuen beharrik nabarituko itzultzen ari zaren bitartean.</p>
-
-<p>Joan <a href="menu.html" title="Menu nagusia">Menu nagusia</a> eranskinera menuen eta menuetako elementuen deskripzioak ikusteko.</p>
-
-<a name="Status_Bar"></a>
-<h3>Egoera-barra</h3>
-
-<p>Egoera-barrak itzulpen-lanari lotutako mezuak erakusten ditu leiho nagusiaren behealdean. Barra honek OmegaT prozesatzen ari den eragiketa zehatzei buruzko mezuak ematen dizkio erabiltzaileari. Uneko segmenturako aurkitu diren parekatze lausoen eta glosarioko terminoen kopurua ere erakusten du.</p>
-
-<a name="Other_Windows"></a>
-<h2>Beste leiho batzuk</h2>
-
-<a name="Project_Files"></a>
-<h3>Proiektuaren fitxategiak</h3>
-
-<p>Proiektuaren fitxategiak izeneko leihoak proiektuaren fitxategien zerrenda ematen du eta proiektuari buruzko beste datu batzuk erakusten ditu. OmegaT-k proiektu bat kargatzen duenean automatikoki erakusten da. Proiektua irekitzen denean, <a href="keyboardShortcuts.html" title="OmegaT-ren lasterteklak"><code>Ktrl+L</code> lastertekla</a> erabili dezakezu leiho hau ixteko irekita dagoenean, edo irekitzeko itxita dagoenean.</p>
-
-<p>Leiho honek erakusten duena ondoko hau da:</p>
-
-<ul>
-   <li>Proiektuaren fitxategi itzulgarri guztien zerrenda klikagarria. Fitxategi hauek sorburu-fitxategien karpetan daudenak dira, baina ez denak, soilik <a href="fileFormats.html" title="Onartutako fitxategi-formatuak">OmegaT-k kudeatu ditzakeenak</a>. Edozein fitxategiren izenean klikatzean, fitxategia editore-panelean irekiko da eta itzultzeko prest geratuko da.</li>
-   <li>Fitxategi bakoitzaren segmentu-kopurua. Datu hau fitxategiaren izenaren alboan ageri da.</li>
-   <li>Proiektu osoak daukan segmentu bakarren (ezberdinen) kopurua.</li>
-   <li>Itzulita dauden segmentu bakarren kopurua. Segmentu bat itzultzen den bakoitzean eguneratzen da.</li>
-</ul>
-
-<p>Segmentu <strong>bakarren</strong> kopurua kalkulatzeko, segmentu-kopuru osoa hartu eta segmentu errepikatu guztiak kentzen zaizkio. Maiuskulak eta minuskulak kontuan hartzen dira ("Bai" eta "bai" segmentu ezberdintzat hartzen dira).</p>
-
-<p>"Segmentu-kopurua" eta "Segmentu bakarren kopurua" alderatuz, testuan dagoen errepikapen-kopuruaren ideia bat eduki dezakezu. Zenbakiok ez dute adierazten errepikapenak garrantzitsuak diren ala ez: segmentuak askotan errepikatzen diren esaldi luzeak izan daitezke (ze zortea!) edo taula bat betetzen duten gako-hitzak (ez hainbesteko zortea...)</p>
-
-<p>Segmentazio-arauak aldatuz, segmentu-kopurua eta segmentu bakarren kopurua ere aldatzen dira. Hala ere, aldaketa hori ez zenuke egin beharko proiektuaren itzulpenari ekin ondoren. Honetan gehiago sakondu nahi izanez gero, irakurri <a href="segmentation.html" title="Sorburuaren segmentazioa">segmentazio-arauak</a>.</p>
-
-<p>Proiektu bati sorburu-fitxategiak gehitzeko, klikatu "Inportatu sorburu-fitxategiak..." botoia. Fitxategi hautatuak <code>/source/</code> direktoriora kopiatzen ditu eta proiektua birkargatzen du fitxategi berriak kargatzeko.</p>
-
-<a name="Search_Window"></a>
-<h3>Bilaketa-leihoa</h3>
-
-<p>Proiektuko segmentu jakinak bilatzeko, bilaketa-leihoa erabili dezakezu. Bilaketa-leiho bat baino gehiago eduki daiteke irekita aldi berean. Beste leiho bat irekitzeko, erabili <a href="keyboardShortcuts.html" title="OmegaT-ren lasterteklak"><code>Ktrl+F</code></a> leiho nagusian.</p>
-
-<p>Leihoak ondoko elementuak dauzka:</p>
-
-<ul>
-   <li>Bilaketa-kateak edo gako-hitzak sartzeko bilaketa-eremua</li>
-   <li>Bilaketa-ezarpenak aldatzeko hainbat bandera eta aukera-botoi</li>
-   <li>Emaitza klikagarriak erakusten dituen espazioa</li>
-</ul>
-
-<p>Bilaketa-eremuan kate bat sartu ondoren bilaketa-botoia sakatuz gero, bilatutako katea daukaten proiektuko segmentu guztiak erakutsiko dira. OmegaT-k segmentu berdinak entitate bakar gisa kudeatzen dituenez, haietako bat aldatzen baduzu, berdinak diren segmentu guztiak eguneratuko ditu, nahiz eta lehen segmentu bakarra erakutsi.</p>
-
-<p>Bilaketa-leihoan erakusten diren segmentuen ordena, proiektuan daukaten ordena bera da. Itzulitako segmentuetan jatorrizko testua goian eta itzulitako testua behean erakutsiko dira; itzuli gabeko segmentuetan jatorrizko testua soilik erakutsiko da.</p>
-
-<p>Katea proiektuaren fitxategietako batean aurkitzen bada, bere gainean klikatu dezakezu editorea ireki eta katea aldatzeko. Aldaketaren ondoren, bilaketa-leihora itzul zaitezke eta aurkitutako hurrengo segmentuan klikatu hura ere aldatzeko. Mekanika hau oso erabilgarria da terminologiaren eguneraketa masiboak egiteko.</p>
-
-<p>Bi motatako bilaketak egin daitezke:</p>
-
-<ul>
-   <li>Bilaketa zehatzaren bidez, adierazitako bilaketa-katea uneko proiektuan edo edozein direktorio edo direktorio-zuhaitzetan bilatzen da. Bilaketa zehatzak * eta ? komodinak onartzen ditu. '<strong>*'</strong> karaktereak edozein karaktere-kopuru ordezkatzen du (esaterako, '<strong>egi*'</strong> bilaketa-terminoaren bidez '<strong>egi'</strong>, '<strong>egia'</strong> eta '<strong>egizu'</strong> hitzak aurkituko dira). '<strong>?'</strong> karaktereak karaktere bat ordezkatzen du ('<strong>egi?'</strong> terminoaren bidez '<strong>egia'</strong> aurkituko da, baina ez '<strong>egizu'</strong>). Eragiketa honek bai sorburuan bai itzulpenean bilatzen du.</li>
-
-   <li>Hitz-gakoen bidezko bilaketak uneko proiektua aztertzen du eta bilaketa-hitz guztiak dauzkan segmentu guztiak bueltatzen ditu, edozein ordenatan.</li>
-</ul>
-
-<p>Bilaketak edozein direktoriotan egin daitezke, baina kontuan izan OmegaT-k <a href="fileFormats.html" title="Onartutako fitxategi-formatuak">onartutako fitxategietan</a> soilik egin ditzakeela bilaketak.</p>
-
-<a name="Tag_Validation"></a>
-<h3>Etiketen balidazioa</h3>
-
-<a name="Tag_validation_window"></a>
-<h4>Etiketen balidaziorako leihoa</h4>
-
-<p>Etiketak balidatzeko leihoak itzulitako dokumentuen formatu-akatsak detektatzeko balio du. Leihoa irekitzeko, erabili <a href="keyboardShortcuts.html" title="OmegaT-ren lasterteklak"><code>Ktrl+T</code></a>.</p>
-
-<p>Leihoak 3 zutabeko taula bat erakusten du:</p>
-
-<ul>
-   <li>Lehenak balizko segmentu akastunera joateko esteka klikagarri bat erakusten du</li>
-   <li>Bigarrenak segmentuaren jatorrizko edukia erakusten du</li>
-   <li>Hirugarrenak segmentuaren itzulpenaren edukia erakusten du</li>
-</ul>
-
-<p>Estekan klikatzean segmentua aktibatzen da editorean.</p>
-
-<a name="Tag_errors"></a>
-<h4>Etiketa-erroreak</h4>
-
-<p>Etiketa-errorea ondoko hauetako bat izan daiteke:</p>
-
-<ul>
-   <li>Etiketa sorburu-segmentuan zegoen baina ezabatu egin da itzulitako segmentuan</li>
-   <li>Etiketa ez zegoen sorburu-segmentuan eta nahi gabe txertatu egin da itzulitako segmentuan</li>
-   <li>Etiketen ordena aldatu egin da itzulitako segmentuan</li>
-</ul>
-
-<a name="Hints_for_tags_management"></a>
-<h4>Etiketak kudeatzeko aholkuak</h4>
-
-<p>Gehienetan etiketek jatorrizko testuan dagoen formatu-motaren bat ordezkatzen dute. <strong>Jatorrizko testuaren formatu-ezaugarriak sinplifikatuz</strong>, etiketa-kopurua txikiagoa izatea lortzen da. Posible bada, komenigarria da letra-tipoak, letra-tamainak, koloreak, etab. ahalik eta gehien bateratzea, itzulpena sinplifikatzeko eta balizko etiketa-erroreak murrizteko.</p>
-
-<p>Begiratu <a href="formattedText.html#Tag_operations" title="Testu formatudunarekin lanean">Eragiketak etiketekin</a> atala etiketekin zer egin daitekeen ikusi nahi baduzu.</p>
-
-<p>Gogoan izan etiketek traba egiten badizute eta formatuak garrantzi berezirik ez badauka egiten ari zaren lanerako, sorburu-fitxategiko formatua kentzeak asko lagunduko dizula itzulpena errazago egiten.</p>
-
-<p>Etiketak OmegaT-n ikusi behar badituzu, baina formatuaren gehiena dokumentu itzulian gorde behar ez baduzu, etiketak ezabatu egin ditzakezu. Kasu horretan <strong>arreta berezia jarri etiketa-bikoteetan</strong>. Bikote bateko etiketa bakarrak irauten badu, dokumentuaren formatua hondatuko da eta gertatu daiteke OpenOffice.org-eko dokumentu bat baliogabea izatea, edo HTML fitxategi bat ezin irakurri izatea.</p>
-
-<p>Etiketak testuan txertaturik daudenez, posible da <a href="segmentation.html" title="Sorburuaren segmentazioa">segmentazio-arauak</a> erabiltzea etiketa gutxiago dituzten segmentuak sortzeko. Hau ezaugarri aurreratu bat da eta hasiberriek ez lukete erabili behar.</p>
-
-<a name="Help_Browser"></a>
-<h3>Laguntza-arakatzailea</h3>
-
-<p>Laguntza-arakatzailea (hain zuzen, eskuliburu hau erakusten duena) erakusteko, sakatu <a href="keyboardShortcuts.html" title="OmegaT-ren lasterteklak">F1</a> edo joan <a href="menu.html" title="Menu nagusia">menu nagusiko</a> <strong>Laguntza -&gt; Erabiltzailearen eskuliburua</strong> aukerara.</p>
-
-<p>Leihoan, eskuliburuaz gain, bi botoi ikusiko dituzu: <strong>Atzera</strong> eta <strong>Edukiak</strong>.</p>
-
-<p>Erabiltzailearen eskuliburua, kapitulu ezberdinetara sartzeko estekak dituen HTML dokumentu bat da. Esteka batean sakatzeak hautatutako orria erakusten du, hain justu web-arakatzaile batean egingo zenukeen bezala.</p>
-
-<p>Erabiltzailearen eskuliburua OmegaT-ren instalazio-karpetaren <code>doc</code> azpikarpetan dago. Beraz, euskarazko dokumentazioa ikusteko beste modu bat, <code>doc/eu/index.hmtl</code> fitxategia zure arakatzailean irekitzea da. Horrela, sareko beste toki batzuetara eramaten duten estekak ere ireki ahal izango dituzu, OmegaT-ren laguntza-arakatzaileak ez baitu uzten kanpoko orrietara joaten.</p>
-
-<a name="Dialogs"></a>
-<h2>Elkarrizketa-koadroak</h2>
-
-<p>Ondoko elkarrizketa-koadroak OmegaT-ren eta proiektuen ezarpenak aldatzeko erabiltzen dira. Beste atal batzuetan azaltzen dira denak. Ondoren, zertarako erabiltzen diren eta nola ireki daitezkeen azaltzen da.</p>
-
-<ul>
-   <li>
-      <a href="projectProperties.html" title="Proiektuaren propietateak">Proiektuaren propietateak</a> koadroa proiektuaren karpetak eta hizkuntzak aldatzeko erabiltzen da. Koadroa irekitzeko, sakatu <a href="keyboardShortcuts.html" title="OmegaT-ren lasterteklak"><code>Ktrl+E</code></a> edo joan <a href="menu.html" title="Menu nagusia">menu nagusiko</a> <strong>Proiektua -&gt; Propietateak...</strong> aukerara.</li>
-
-   <li>
-      <a href="fontSettings.html" title="Letra-tipoen ezarpenak">Letra-tipoen ezarpenak</a> koadroan, OmegaT-k sorburua, itzulpena, parekatzeak eta glosarioa erakustean erabiltzen duen letra-tipoa aldatu dezakezu. Koadroa irekitzeko, erabili <a href="menu.html" title="Menu nagusia">menu nagusiko</a> <strong>Aukerak -&gt; Letra-tipoa</strong>.</li>
-
-   <li><a href="fileFilters.html" title="Fitxategi-iragazkiak">Fitxategi-iragazkiak</a> koadroa erabili dezakezu <a href="fileFormts.html" title="Onartutako fitxategi-formatuak">fitxategi erabilgarri</a> bakoitzak kudeatu ditzakeen fitxategiak aldatzeko.</li>
-
-   <li><a href="segmentation.html" title="Sorburuaren segmentazioa">Segmentazioa</a> koadroak testua segmentuetan zatitzen den modua aldatzea ahalbidetzen du. Kontuan izan esaldi-mailako segmentazioa <a href="projectProperties.html" title="Proiektuaren propietateak">Proiektuaren propietateak</a> koadroan gaitzen/desgaitzen dela.</li>
-
-   <li><a href="translationEditing.html" title="Itzulpenaren edizioa">Editatu portaera</a> koadroak segmentuen artean mugitzean OmegaT-k duen portaera aldatzen du.</li>
-</ul>
+	<h1>Erabiltzaile-interfazea</h1>
+
+	<ul>
+		<li><a href="#item">Erabiltzaile-interfazearen elementuak</a>
+			<ul>
+				<li><a href="#most">Gehien erabiliko dituzun leihoak</a></li>
+				<li><a href="#some">Erabili daitezkeen leihoak</a></li>
+				<li><a href="#dialogs">Zure proiektuaren ezarpenak aldatzeko erabiliko dituzun koadroak</a></li>
+			</ul>
+		</li>
+		<li><a href="#OmegaT_Main_Window">OmegaT-ren leiho nagusia</a>
+			<ul>
+				<li><a href="#main">Eragiketak leiho nagusian</a></li>
+				<li><a href="#Editor">Editore-panela</a>
+					<ul>
+						<li><a href="#segment_display">Segmentuen bisorea</a></li>
+						<li><a href="#edit_field">Edukien edizioa</a></li>
+					</ul>
+				</li>
+				<li><a href="#Match">Parekatzeen bisorea</a>
+					<ul>
+						<li><a href="#match_sel">Parekatze lausoen hautaketa</a></li>
+						<li><a href="#match_oper">Eragiketak parekatze lausoekin</a></li>
+						<li><a href="#match_display">Parekatzeen erakusketa eta informazioa</a></li>
+					</ul>
+				</li>
+				<li><a href="#Glossary">Glosarioa</a></li>
+				<li><a href="#menu">Menu nagusia</a></li>
+				<li><a href="#bar">Egoera-barra</a></li>
+			</ul>
+		</li>
+		<li><a href="#Other_windows">Beste leiho batzuk</a>
+			<ul>
+				<li><a href="#files">Proiektuaren fitxategiak</a>
+					<ul>
+						<li><a href="#proj_files">Leiho honek erakusten duena ondoko hau da:</a></li>
+						<li><a href="#unique">Segmentu bakarrak</a></li>
+						<li><a href="#adding_files">Proiektuari fitxategiak gehitzea</a></li>
+					</ul>
+				</li>
+				<li><a href="#search">Bilaketa-leihoa</a>
+					<ul>
+						<li><a href="#search_types">Bilaketa-motak</a></li>
+						<li><a href="#wildcards_regexp">Komodinak eta adierazpen erregularrak</a></li>
+						<li><a href="#search_display">Bilaketaren emaitzak erakustea</a></li>
+					</ul>
+				</li>
+				<li><a href="#tags">Etiketen balidazioa</a></li>
+				<li><a href="#manual">Laguntza-arakatzailea</a>
+					<ul>
+						<li><a href="#help">Laguntza-arakatzailearekin nabigatzea</a></li>
+						<li><a href="#offline">Erabiltzailearen eskuliburua lineaz kanpo arakatzea</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#dialogs">Zure proiektuaren ezarpenak aldatzeko erabiliko dituzun koadroak</a>
+			<ul>
+				<li><a href="projectProperties.html">Proiektuaren propietateak</a></li>
+				<li><a href="fontSettings.html">Letra-tipoa</a></li>
+				<li><a href="fileFilters.html">Fitxategi-iragazkiak</a></li>
+				<li><a href="segmentation.html">Segmentazioa</a></li>
+				<li><a href="translationEditing.html">Editatu portaera</a></li>
+			</ul>
+		</li>
+	</ul>
+<hr>
+
+	<a name="item" id="item"></a>
+	<h1>Erabiltzaile-interfazearen elementuak</h1>
+
+	<a name="most" id="most"></a>
+	<h2>Gehien erabiliko dituzun leihoak</h2>
+
+	<dl>
+		<dt><strong>OmegaT-ren leiho nagusia</strong> (<a href="#OmegaT_Main_Window">...</a>)</dt>
+		<dd>menu nagusia (<a href="#menu">...</a>), egoera-barra (<a href="#bar">...</a>) eta 3 panel dauzka:za<dl>
+				<dt>Editore-panela (<a href="#Editor">...</a>)</dt>
+				<dd>itzulpena tekleatu eta editatzen duzun lekua</dd>
+				<dt>Parekatzeen bisore-panela (<a href="#Match">...</a>)</dt>
+				<dd>itzulpen-memorietatik erauzitako segmentu antzekoenak erakusten dituena</dd>
+				<dt>Glosarioen bisore-panela (<a href="#Glossary">...</a>)</dt>
+				<dd>terminologiaren itzulpena erakusten duena</dd>
+			</dl>
+		</dd>
+		<dt><strong>Proiektuaren fitxategien leihoa</strong> (<a href="#files">...</a>)</dt>
+		<dd>zure fitxategi itzulgarrien zerrenda erakusten duena</dd>
+		<dd><code>Ktrl+L</code> bidez abiarazten da, <code>esc</code> bidez ezkutatzen da
+		</dd><dt><strong>Bilaketa-keihoa</strong> (<a href="#search">...</a>)</dt>
+		<dd>proiektuko segmentu jakinak bilatzeko</dd>
+		<dd><code>Ktrl+F</code> bidez abiarazten da, <code>esc</code> bidez ezkutatzen da</dd>
+	</dl>
+
+	<a name="some" id="some"></a>
+	<h2>Erabili daitezkeen leihoak</h2>
+
+	<dl>
+		<dt><strong>Etiketen balidaziorako leihoa</strong> (<a href="#tags">...</a>)</dt>
+		<dd>itzulpenetan etiketen akatsak bilatzeko</dd>
+		<dd><code>Ktrl+T</code> bidez abiarazten da, <code>esc</code> bidez ezkutatzen da</dd>
+		<dt><strong>Laguntza-arakatzailea</strong> (<a href="#manual">...</a>)</dt>
+		<dd>erabiltzailearen eskuliburua irakurtzeko</dd>
+		<dd><code>F1</code> bidez abiarazten da, <code>esc</code> bidez ezkutatzen da</dd>
+	</dl>
+
+	<a name="dialogs" id="dialogs"></a>
+	<h2>Zure proiektuaren ezarpenak aldatzeko erabiliko dituzun koadroak</h2>
+
+	<p>Ondoko elkarrizketa-koadroak OmegaT-ren eta proiektuen ezarpenak aldatzeko erabiltzen dira. Beste atal batzuetan azaltzen dira denak. Ondoren, zertarako erabiltzen diren eta nola ireki daitezkeen azaltzen da.</p>
+
+	<dl>
+		<dt><strong>Proiektuaren propietateak</strong> (<a href="projectProperties.html">...</a>)</dt>
+		<dd>proiektuaren karpetak eta hizkuntzak aldatzeko</dd>
+		<dd><code>Ktrl+E</code>  edo <strong>Proiektua → Propietateak...</strong> bidez abiarazten da, <code>esc</code> bidez ezkutatzen da</dd>
+		<dt><strong>Letra-tipoa</strong> (<a href="fontSettings.html">...</a>)</dt>
+		<dd>OmegaT-k sorburua, itzulpena, parekatzeak eta glosarioa erakustean erabiltzen duen letra-tipoa aldatzeko balio duena</dd>
+		<dd><strong>Aukera → Letra-tipoa...</strong> bidez abiarazten da, <code>esc</code> bidez ezkutatzen da</dd>
+		<dt><strong>Fitxategi-iragazkiak</strong> (<a href="fileFilters.html">...</a>)</dt>
+		<dd>onartutako fitxategi-formatuen kudeaketa doitzen duena</dd>
+		<dd><strong>Aukera → Fitxategi-iragazkia...</strong> bidez abiarazten da, <code>esc</code> bidez ezkutatzen da</dd>
+		<dt><strong>Segmentazioa</strong> (<a href="segmentation.html">...</a>)</dt>
+		<dd>testua segmentuetan nola zatitzen den aldatzen duena</dd>
+		<dd><strong>Aukera → Segmentazioa</strong> bidez abiarazten da, <code>esc</code> bidez ezkutatzen da</dd>
+		<dt><strong>Editatu portaera</strong> (<a href="translationEditing.html">...</a>)</dt>
+		<dd>segmentuen artean mugitzean OmegaT-k duen portaera aldatzen duena</dd>
+		<dd><strong>Aukera → Editatu portaera</strong> bidez abiarazten da, <code>esc</code> bidez ezkutatzen da</dd>
+	</dl>
 
 <hr>
-<p><a href="legalNotices.html" title="Legezko oharrak">Legezko oharrak</a></p>
 
+	<a name="OmegaT_Main_Window" id="OmegaT_Main_Window"></a>
+	<h1>OmegaT-ren leiho nagusia</h1>
+
+	<a name="main" id="main"></a>
+	<h2>Eragiketak leiho nagusian</h2>
+	
+	<p>Leiho nagusia hiru panelez, menu nagusiaz eta egoera-barraz osaturik dago. Panela bere izena dagoen tokitik arrastatuz, bere kokapena aldatu dezakezu, baita leiho berri bat sortuz desatrakatu ere. Panelaren egoeraren arabera, goiko ezkerreko izkinan 5 ikur desberdin agertu daitezke. Saguaren kurtsorea ikur bakoitzaren gainean jartzean argibide bat erakusten da.</p>
+
+	<p>
+		<img src="images/Minimize.gif" name="graphics1" alt="Ikonotu" align="bottom" width="18" height="18" border="0" id="graphics1">panela ikonotzen du, bere izena soilik erakutsiz egoera-barraren ondoan.<br> <img src="images/Maximize.gif" name="graphics2" alt="Maximizatu" align="bottom" width="18" height="18" border="0" id="graphics2">panelak leihoaren espazio osoa bete dezan eragiten du.<br> <img src="images/Restore.gif" name="graphics3" alt="Leheneratu" align="bottom" width="18" height="18" border="0" id="graphics3">panela ikonotu edo maximizatu baino lehen zegoen egoeran jartzen du.<br> <img src="images/Undock.gif" name="graphics4" alt="Desatrakatu" align="bottom" width="18" height="18" border="0" id="graphics4">panela leiho nagusitik desatrakatzen du eta leiho berri bat sortzen du.<br> <img src="images/Dock.gif" name="graphics5" alt="Atrakatu" align="bottom" width="18" height="18" border="0" id="graphics5">panela berriro leiho nagusian atrakatzen du.</p>
+
+	<p>Era berean, panelak bata bestearen gainean jarri daitezke. Kasu honetan, panelek fitxa bat erakutsiko dute goialdean. Fitxan klikatuz, panela aurreko planora eramango da. Panelen tamaina aldatu nahi izanez gero, beren arteko banatzaileak arrastatu egin daitezke.</p>
+
+	<a name="Editor" id="Editor"></a>
+	<h2>Editore-panela</h2>
+
+	<p>Hemen itzulpena tekleatu eta editatzen duzu.</p>
+	
+	<a name="segment_display" id="segment_display"></a>
+	<h3>Segmentuen bisorea</h3>
+	
+	<p>Editore-panelak partzialki itzulitako dokumentuen testua honela erakusten du: itzulita dagoen testua itzulita erakusten du, eta itzuli gabe dagoen testua jatorrizko hizkuntzan erakusten du. Testua segmentuetan zatituta erakusten da, eta dokumentuan zehar mugi zaitezke edozein segmentu klikatu eta editatzeko.</p>
+	
+	<p>Segmentuetako bat aktiboa da. Bi atal dauzkan bakarra da: goiko aldea jatorrizko hizkuntzan dago, karaktere lodiz eta atzeko plano berdez idatzita, eta beheko aldea edizio-eremua da eta bi markatzailek mugatzen dute: ezkerreko markatzailea <strong><code>&lt;segment nnnn&gt;</code></strong> da, non <strong><code>nnnn</code></strong> segmentuak proiektuaren baitan duen zenbakia den, eta eskuinekoa <strong><code>&lt;end segment&gt;</code></strong> da.</p>
+	
+	<p>Goiko aldeak erreferentzia gisa balio du, eta beheko aldea itzulpena egiteko edo moldatzeko lekua da.</p>
+	
+	<table border="1">
+		<tr><td>
+			<table border="0" cellpadding="3">
+				<tr><td>Esaldi hau itzuli egin da.</td></tr>
+				<tr><td>Esaldi hau ere itzuli egin da.</td></tr>
+				<tr bgcolor="#99ff99"><td><strong>Cette phrase est en train d'être traduite.</strong></td></tr>
+				<tr><td><strong><code>&lt;segment 0003&gt;</code></strong> [Hemen zure itzulpena idatzi beharko zenuke] <strong><code>&lt;end segment&gt;</code></strong></td></tr>
+				<tr><td>Esaldi hau itzuliko den hurrengoa da.</td></tr>
+			</table>
+		</td></tr>
+	</table>
+
+	<a name="edit_field" id="edit_field"></a>
+	<h3>Edukien edizioa</h3>
+
+	<p><a href="translationEditing.html">Editatu portaera</a> koadroan ezarritakoa jarraituz, edizio-eremura mugitzen zarenean hura hutsik agertuko da, sorburu-testua edukiko du edo izultzen ari zaren antzekoena den itzulpena edukiko du.</p>
+
+	<p>Beste segmentu batera mugitzen zarenean, itzulpena balidatu eta gorde egiten da.</p>
+	
+	<p>Segmentuak itzuli gabe geratu daitezen nahi baduzu, hustu edizio-eremua (hautatu dena <code>Ktrl+A</code> erabiliz eta ezabatu <code>Del</code> erabiliz).</p>
+	
+	<p><a href="translationEditing.html">Editatu portaera</a> koadroan ezarri duzuna jarraituz, OmegaT-k itzulpena sorburuaren berdina izan dadin onartu dezake. Ezaugarri hau oso erabilgarria da ikurrak, izenak edo beste izen berezi batzuk dituzten dokumentuetan, edo itzulpena behar ez duten zatiak asko direnean.</p>
+
+	<p>Gai honetan gehiago sakondu nahi izanez gero, ikusi <a href="translationEditing.html">Itzulpenaren edizioa</a>.</p>
+
+	<a name="Match" id="Match"></a>
+	<h2>Parekatzeen bisorea</h2>
+
+	<p>Parekatzeen bisoreak <a href="translationMemories.html">itzulpen-memorietan</a> aurkitzen dituen segmenturik antzekoenak erakusten ditu, bai proiektua itzultzean sortu diren itzulpen-memorietan aurkitutakoak, bai beste lan batzuetatik inportatu dituzun itzulpen-memorietakoak edo zure bezeroak edo itzulpen-agentziak eman dizkizun memorietakoak.</p>
+	
+	<a name="match_sel" id="match_sel"></a>
+	<h3>Parekatze lausoen hautaketa</h3>
+	
+	<p>Hurrengo segmentura mugitzen zarenean, lehen parekatze lausoa (ehunekoetan parekatze-maila onena duena) automatikoki hautatzen da. Beste edozein parekatze <a href="menu.html#shortcuts">hautatu</a> dezakezu <code>Ktrl+2</code>, <code>3</code>, <code>4</code>, edo <code>5</code> sakatuz, eskuragarri dagoen parekatze-kopuruaren arabera.</p>
+
+	<a name="match_oper" id="match_oper"></a>
+	<h3>Eragiketak parekatze lausoekin</h3>
+	
+	<p><strong>Hautatutako</strong> parekatzea zure itzulpenean erabiltzeko, sakatu <code><a href="menu.html#shortcuts">Ktrl+R</a></code> edizio-eremuko testuaren ordez parekatzea jartzeko edo sakatu <code><a href="menu.html#shortcuts">Ktrl+I</a></code> parekatzea kurtsorearen kokapenean txertatzeko.</p>
+	
+	<a name="match_display" id="match_display"></a>
+	<h3>Parekatzeen erakusketa eta informazioa</h3>
+	
+	<p>Parekatze-ehunekoa gutxi gorabehera kalkulatzen da, bi segmentuetan bat datozen hitzak hartuz eta segmentu luzeenaren hitz-kopuruarekin zatituz. Hautatutako parekatze lausoa <strong>letra lodiz</strong> nabarmenduko da, itzultzen ari zaren segmentuan falta diren hitzak <strong><font color="blue">urdinez</font></strong> eta falta diren zatien inguruan dauden hitzak <strong><font color="green">berdez</font></strong>.</p>
+
+	<p>Ikusi hurrengo segmentua:</p>
+
+	<pre>	<strong>Java &amp; OmegaT-ri buruzko informazioa</strong></pre>
+
+	<p>Segmentu parekatua:</p>
+
+	<pre>	<strong>Java &amp; OmegaT-ri buruzko ohar orokorrak</strong></pre>
+
+	<p>honela margotuko da:</p>
+
+	<pre>	<strong>Java &amp; OmegaT-ri <font color="green">buruzko</font> <font color="blue">ohar orokorrak</font></strong></pre>
+
+	<p>eta ehunekoa 2/5=<strong>%40</strong> izango da</p>
+
+	<a name="Glossary" id="Glossary"></a>
+	<h2>Glosarioa</h2>
+
+	<p>Glosarioen panelak <a href="glossaries.html">glosario-fitxategietatik</a> kargatutako terminologia-itzulpenak erakusten ditu.</p>
+	
+	<p>Uneko segmentuan aurkitutako terminoen itzulpenak erakusten ditu, baina erreferentzia gisa soilik, eta ez du onartzen termino berriak eta beren itzulpena txertatzea edo existitzen diren terminoak ordeztea.</p>
+	
+	<p>OmegaT-k hitz anitzeko terminoak onartzen ditu, baina oso azaletik: termino baten bi hitzak uneko segmentuan badaude, terminoa panelean erakusten da. Glosarioen panelean agertzen diren terminoen formatua ondokoa da:</p>
+
+	<pre> sorburu-terminoa = itzulitako terminoa		terminoari buruzko iruzkina, beharrezkoa bada</pre>
+
+	<a name="menu" id="menu"></a>
+	<h2>Menu nagusia</h2>
+
+	<p>Menu nagusitik OmegaT-ren funtzio guztiak erabili daitezke. Joan <a href="menu.html#menu">Menu nagusia</a> eranskinera menuen eta menuetako elementuen deskripzioak ikusteko.</p>
+
+	<p>Hala ere, gehien erabiltzen diren funtzioak <a href="menu.html#shortcuts">lasterteklen</a> bidez maneia daitezke. Lasterteklak erabiltzera ohitzen zarenean, ez duzu menuen beharrik nabarituko itzultzen ari zaren bitartean.</p>
+	
+	<a name="bar" id="bar"></a>
+	<h2>Egoera-barra</h2>
+
+	<p>Egoera-barrak itzulpen-lanari lotutako mezuak erakusten ditu leiho nagusiaren behealdean. Barra honek OmegaT prozesatzen ari den eragiketa zehatzei buruzko mezuak ematen dizkio erabiltzaileari. Uneko segmenturako aurkitu diren parekatze lausoen eta glosarioko terminoen kopurua ere erakusten du.</p>
+
+<hr>
+
+	<a name="Other_windows" id="Other_windows"></a>
+	<h1>Beste leiho batzuk</h1>
+
+	<a name="files" id="files"></a>
+	<h2>Proiektuaren fitxategiak</h2>
+
+	<p>Proiektuaren fitxategiak izeneko leihoak proiektuaren fitxategien zerrenda ematen du eta proiektuari buruzko beste datu batzuk erakusten ditu. OmegaT-k proiektu bat kargatzen duenean automatikoki erakusten da. Ixteko, erabili <code>esc</code>, irekitzeko edo aurrera eramateko, erabili <code>Ktrl+L</code>.</p>
+	
+	<a name="proj_files" id="proj_files"></a>
+	<h3>Leiho honek erakusten duena ondoko hau da:</h3>
+
+	<p>Ondoko informazioa erakusten da.</p>
+	
+	<ul>
+		<li>Proiektuaren fitxategi itzulgarri guztien zerrenda.<br> Fitxategi hauek sorburu-fitxategien karpetan daudenak dira, baina ez denak, soilik <a href="filesToTranslate.html">OmegaT-k kudeatu ditzakeenak</a>.<br> Edozein fitxategiren izenean klikatuz, fitxategia ireki eta itzultzeko prestatuko du.</li>
+		<li>Editore-panelean irekita dagoen fitxategiaren izena atzeko plano urdinarekin nabarmenduta ageri da.</li>
+		<li>Fitxategi bakoitzaren segmentu-kopurua fitxategiaren izenaren alboan ageri da.</li>
+		<li>Proiektu osoak daukan segmentu bakarren kopurua.</li>
+		<li>Itzulita dauden segmentu bakarren kopurua. Segmentu bat itzultzen den bakoitzean eguneratzen da.</li>
+	</ul>
+
+	<a name="unique" id="unique"></a>
+	<h3>Segmentu bakarrak</h3>
+	
+	<p>Segmentu <strong>bakarren</strong> kopurua kalkulatzeko, segmentu-kopuru osoa hartu eta segmentu errepikatu guztiak kentzen zaizkio. Maiuskulak eta minuskulak kontuan hartzen dira ("Bai" eta "bai" segmentu ezberdintzat hartzen dira).</p>
+
+	<p>"Segmentu-kopurua" eta "Segmentu bakarren kopurua" alderatuz, testuan dagoen errepikapen-kopuruaren ideia bat eduki dezakezu. Hala ere, zenbakiok ez dute adierazten errepikapenak garrantzitsuak diren ala ez: segmentuak askotan errepikatzen diren esaldi luzeak izan daitezke (ze zortea!) edo taula bat betetzen duten gako-hitzak (zorte gutxiago...)</p>
+	
+	<p>Zure proiektuaren <code>/omegat</code> karpetan dagoen <code>project_stats.txt</code> fitxategiak segmentuei buruzko informazio xeheagoa ematen du.</p>
+
+	<p>Segmentazio-arauak aldatuz, segmentu-kopurua eta segmentu bakarren kopurua ere aldatzen dira. Hala ere, aldaketa hori ez zenuke egin beharko proiektuaren itzulpenari ekin ondoren. Honetan gehiago sakondu nahi izanez gero, irakurri <a href="segmentation.html">segmentazio-arauak</a>.</p>
+
+	<a name="adding_files" id="adding_files"></a>
+	<h3>Proiektuari fitxategiak gehitzea</h3>
+	
+	<p>Proiektu bati sorburu-fitxategiak gehitzeko, klikatu "Inportatu sorburu-fitxategiak..." botoia. Fitxategi hautatuak <code>/source/</code> direktoriora kopiatzen ditu eta proiektua birkargatzen du fitxategi berriak kargatzeko. Proiektu bati sorburu-fitxategiak gehitu dakizkioke Internetik, MediaWiki formatuan idatzita badaude, "Inportatu MediaWikitik" botoia klikatuz eta URL bat sartuz.</p>
+
+	<a name="search" id="search"></a>
+	<h2>Bilaketa-leihoa</h2>
+
+	<p>Proiektuko segmentu jakinak bilatzeko, bilaketa-leihoa erabili dezakezu. Bilaketa-leiho bat baino gehiago eduki daiteke irekita aldi berean. Beste leiho bat irekitzeko, erabili <code><a href= "menu.html#shortcuts">Ktrl+F</a></code> leiho nagusian.</p>
+	
+	<p>Bilaketa-leihoak kateak edo gako-hitzak bilatzeko testu-eremu bat dauka, bilaketaren parametroak ezartzeko zenbait kontrol-lauki eta aukera-botoi, eta bilaketaren emaitzak erakusteko bistaratze-area bat.</p>
+
+	<a name="search_types" id="search_types"></a>
+	<h3>Bilaketa-motak</h3>
+	
+	<dl>
+		<dt>Bi <a href="searches.html#searchmethods">motatako</a> bilaketak egin daitezke:</dt>
+		<dt><strong>bilaketa zehatzak</strong></dt>
+		<dd>adierazitako bilaketa-katea uneko proiektuan edo edozein direktorio edo direktorio-zuhaitzetan bilatzen du.</dd>
+		<dt><strong>bilaketa-gakoak</strong></dt>
+		<dd>uneko proiektua aztertzen du eta bilaketa-hitz guztiak dauzkan segmentu guztiak bueltatzen ditu, edozein ordenatan.</dd>
+	</dl>
+
+	<p>Bilaketak bai sorburuan bai itzulpenean egiten dira.</p>
+
+	<p>Bilaketak edozein direktoriotan egin daitezke, baina kontuan izan OmegaT-k <a href="filesToTranslate.html">onartutako fitxategietan</a> soilik egin ditzakeela bilaketak.</p>
+	
+	<a name="wildcards_regexp" id="wildcards_regexp"></a>
+	<h3>Komodinak eta adierazpen erregularrak</h3>
+	
+	<p>Bilaketa zehatzak * eta ? <a href="searches.html#usingwildcards">komodinak</a> onartzen ditu, bai eta <a href="searches.html#usingregularexpressions">adierazpen erregularrak</a> ere.</p>
+
+	<a name="search_display" id="search_display"></a>
+	<h3>Bilaketaren emaitzak erakustea</h3>
+	
+	<p>Bilaketa-eremuan kate bat sartu ondoren bilaketa-botoia sakatuz gero, bilatutako katea daukaten proiektuko segmentu guztiak erakutsiko dira. OmegaT-k segmentu berdinak entitate bakar gisa kudeatzen dituenez, lehen segmentu bakarra erakusten da soilik.</p>
+	
+	<p>Bilaketa-leihoan erakusten diren segmentuen ordena, proiektuan daukaten ordena bera da. Itzulitako segmentuetan jatorrizko testua goian eta itzulitako testua behean erakutsiko dira; itzuli gabeko segmentuetan jatorrizko testua soilik erakutsiko da.</p>
+
+	<p>Segmentu batean klikatuz, editorea agertzen da segmentua aldatu ahal izateko. Aldaketaren ondoren, bilaketa-leihora itzul zaitezke eta aurkitutako hurrengo segmentuan klikatu hura ere aldatzeko. Mekanika hau oso erabilgarria da terminologiaren eguneraketak egiteko.</p>
+	
+	<a name="tags" id="tags"></a>
+	<h2>Etiketen balidazioa</h2>
+
+	<p>Etiketak balidatzeko leihoak itzulpenaren etiketa-akatsak detektatu eta zerrendatzen ditu.</p>
+	
+	<p>Leihoa irekitzeko, erabili <code><a href="menu.html#shortcuts">Ctrl+T</a></code>.</p>
+	
+	<p>Leihoak 3 zutabeko taula bat erakusten du, ondoko edukiekin:</p>
+
+	<ul>
+		<li>esteka bat segmentura joateko</li>
+		<li>segmentuaren jatorrizko edukia</li>
+		<li>segmentuaren itzulpenaren edukia</li>
+	</ul>
+	
+	<p>Etiketak letra lodi urdinez nabarmendurik daude, jatorrizkoa eta itzulitakoa errazago alderatu daitezen.</p><p>Klikatu estekan segmentua editorean aktibatzeko.</p>
+	
+	<p>Zuzendu akatsa, beharrezkoa bada, eta sakatu <code><a href="menu.html#shortcuts">Ctrl+T</a></code> etiketak balidatzeko leihora izultzeko eta akatsak zuzentzen jarraitzeko.</p>
+
+	<p><a href="formattedText.html#intro">Etiketa</a>-akatsak itzulpenean zehar egindako <a href="formattedText.html#tag_operation">etiketa-manipulazio</a> okerrak dira, gehienetan etiketen ordena edo zenbakiak ez direlako errespetatu. Etiketak manipulatzea ona izan daiteke zenbaitetan, baina arazoak ekar ditzake itzulitako dokumentua sortzerakoan.</p>
+
+	<p>Gehienetan etiketek jatorrizko testuan dagoen formatu-motaren bat ordezkatzen dute. <strong>Jatorrizko testuaren formatu-ezaugarriak sinplifikatuz</strong>, etiketa-kopurua txikiagoa izatea lortzen da.</p>
+	
+	<a name="manual" id="manual"></a>
+	<h2>Laguntza-arakatzailea</h2>
+
+	<p>Laguntza-arakatzailea (hain zuzen, eskuliburu hau erakusten duena) erakusteko, sakatu <a href="menu.html#shortcuts">F1</a> edo joan <a href="menu.html">menu nagusiko</a> <strong>Laguntza → Erabiltzailearen eskuliburua...</strong> aukerara.</p>
+	
+	<a name="help" id="help"></a>
+	<h3>Laguntza-arakatzailearekin nabigatzea</h3>
+	
+	<p>Leihoan, eskuliburuaz gain, bi botoi ikusiko dituzu: <strong>Atzera</strong> eta <strong>Edukiak</strong>. Erabiltzailearen eskuliburua, kapitulu ezberdinetara sartzeko estekak dituen HTML dokumentu bat da. Esteka batean sakatzeak hautatutako orria erakusten du, hain justu web-arakatzaile batean egingo zenukeen bezala.</p>
+
+	<a name="offline" id="offline"></a>
+	<h3>Erabiltzailearen eskuliburua lineaz kanpo arakatzea</h3>
+
+	<p>Erabiltzailearen eskuliburua OmegaT-ren instalazio-karpetaren <code>doc</code> azpikarpetan dago. Beraz, euskarazko dokumentazioa ikusteko beste modu bat, <code>doc/eu/index.hmtl</code> fitxategia zure arakatzailean irekitzea da. Horrela, sareko beste toki batzuetara eramaten duten estekak ere ireki ahal izango dituzu, OmegaT-ren laguntza-arakatzaileak ez baitu uzten kanpoko orrietara joaten.</p>
+
+<hr>
+
+	<p><a href="legalNotices.html">Legezko oharrak</a></p>
 </body>
 </html>

@@ -1,84 +1,160 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Itzuli beharreko fitxategiak - OmegaT 1.6.2 erabiltzailearen eskuliburua</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Itzuli beharreko fitxategiak - OmegaT 1.7.3 erabiltzailearen eskuliburua</title>
 </head>
 <body>
 
-<h1>Itzuli beharreko fitxategiak</h1>
+	<h1>Itzuli beharreko fitxategiak</h1>
 
-<p>OmegaT-rekin hainbat formatutako fitxategiak itzuli ditzakezu zuzenean. Funtsean, bi motatako fitxategi-formatuak daude. <strong>Testu hutseko</strong> formatuak eta <strong>testu formatuduneko</strong> formatuak.</p>
+	<ul>
+		<li><a href="#bidi">Eskuinetik ezkerrera idazten diren hizkuntzak</a>
+			<ul>
+				<li><a href="#bidi_transl">Itzulpena</a></li>
+				<li><a href="#bidi_create">Itzulitako dokumentuen sorrera</a></li>
+			</ul>
+		</li>
+		 <li>
+		    <a href="#formats">Fitxategi-formatuak</a>
+			<ul>
+				<li><a href="Testu hutsa">Testu hutseko fitxategiak</a></li>
+				<li><a href="#tagged">Testu formatuduneko fitxategiak</a></li>
+				<li><a href="#specifics">Fitxategi-formatuen berezitasunak</a></li>
+				<li><a href="#others">Beste fitxategi-formatu batzuk</a>
+					<ul>
+						<li><a href="#ooo">OpenOffice.org</a></li>
+						<li><a href="#okapi">Okapi Framework</a></li>
+						<li><a href="#tt">Translate Toolkit</a></li>
+						<li><a href="#po4a">po4a</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
 
-<h2>Edukiak</h2>
+	<hr>
 
-<ul type="none">
-   <li>1. <a href="#Plain_text_files">Testu hutseko fitxategiak</a></li>
-   <li>2. <a href="#Formatted_text_files">Testu formatuduneko fitxategiak</a></li>
-   <li>3. <a href="#File_formats_specifics">Fitxategi-formatuen berezitasunak</a></li>
-   <li>4. <a href="#Other_file_formats">Beste fitxategi-formatu batzuk</a></li>
-</ul>
+	<a name="bidi" id="bidi"></a>
+	<h1>Eskuinetik ezkerrera idazten diren hizkuntzak</h1>
+	
+	<a name="bidi_transl" id="bidi_transl"></a>
+	<h2>Itzulpena</h2>
 
-<a name="Plain_text_files"></a>
-<h3>Testu hutseko fitxategiak</h3>
+	<p>OmegaT-n noranzko biko hizkuntzak itzultzean, bi arazo izan behar dira kontuan: 1) testuaren sarrera eta 2) testuaren bisualizazioa. Eskuinetik ezkerrerako testuak (esaterako, urdua, arabiera, etab.) idazten direnean, ezkerretik eskuinerako bisualizazioa erabiltzen bada, testua ez da beti idatzi den ordena berean erakutsiko. Askotan hau ez da beharrezkoa eskuinetik ezkerrerako testua idazten denean, adibidez norantza horretako testu hutsa idazterakoan, eta lehenetsita dagoen ezkerretik eskuinerako bisualizazioa erabili daiteke.</p>
 
-<p>Testu hutseko fitxategiek testua daukate soilik, eta beraz, bere itzulpenerako itzulpena tekleatzea besterik ez da egin behar.</p>
+	<p>Hala ere, zenbait kasutan gerta daiteke eskuinetik ezkerrerako testu batean ezkerretik eskuinerako testu-zatiak sartu behar direla. Esaterako, batzuetan produktuen izenak ingelesez mantentzen dira, edo leku-markak bere jatorrizko forman utzi behar dira interfazeen kateak lokalizatzen direnean.</p>
 
-<p>Egun, OmegaT-k testu hutseko ondoko formatuak onartzen ditu:</p>
+	<p>Ezkerretik eskuinerako testua eskuinetik ezkerrerako testuen barruan txertazen direnean, ez dira erakusten testua sartu den ordena berean. OmegaT-k hau egin dezan, <code>Ctrl+Shift+O</code> erabili behar da.</p>
+	
+	<p><strong>Oharra:</strong> Mac OSX-en ere lastertekla bera erabili daiteke.</p>
+	
+	<p>Era berean, errazagoa da eskuinetik ezkerrerako testua sartzea ikuspegia eskuinetik ezkerrerako modura aldatu denean; izan ere, bisualizazio lehenetsian, eskuinetik ezkerrerako testua sartzen denean, espazioak jadanik existitzen den testuaren eskuinean agertzen da, baina espazioaren ondoren sartzen den karakterea ezkerrean agertzen da.</p>
 
-<ul>
-   <li>ASCII testua (.txt, etab.)</li>
-   <li>Testu kodetua</li>
-   <li>Javaren baliabide-paketeak (.properties)</li>
-   <li>PO fitxategiak (.po)</li>
-   <li>INI fitxategiak ('gako=balio' formatua, .ini)</li>
-</ul>
+	<p><code>Ctrl+Shift+O</code> erabiliz, bai testuaren sarrera bai testuaren bisualizazioa eskuinetik ezkerrerako modura aldatzen dira. OmegaT-ren panel bakoitza (ediziokoa, parekatze lausoena eta glosarioena) independentea da ezaugarri honi dagokionez.</p>
 
-<p>Fitxategi hauek duten formatu bakarra, indentazio eta alineaziorako darabilten "espazio zuriak" direla suposatzen da.</p>
+	<a name="bidi_create" id="bidi_create"></a>
+	<h2>Itzulitako dokumentuen sorrera</h2>
+	
+	<p>Itzulitako dokumentua sortzen denean, ezkerretik eskuinerako noranzkoan erakutsiko da, jatorrizko dokumentuan bezala. Hau eskuz aldatu behar da. Irteerako formatu bakoitzak eskuinetik ezkerrerako bisualizazioa kudeatzeko modu bat dauka, xehetasun gehiagotarako formatu bakoitza erabiltzen duen aplikazio espezifikoaren eskuliburua begiratu behar da.</p><hr>
+	
+	<a name="formats" id="formats"></a>
+	<h1>Fitxategi-formatuak</h1>
 
-<p>Gehienetan testu-editoreetan aldatzen dira eta normalean formatu hauek ez dute letra-tipo, kolore, marjina, etab.i buruzko informazioa gordetzen.</p>
+	<p>OmegaT-rekin hainbat formatutako fitxategiak itzuli ditzakezu. Funtsean, bi fitxategi-formatu dago, <strong>testu hutsa</strong> eta <strong>testu formatuduna</strong>.</p>
 
-<a name="Formatted_text_files"></a>
-<h3>Testu formatuduneko fitxategiak</h3>
+	<a name="plaintext" id="plaintext"></a>
+	<h2>Testu hutseko fitxategiak</h2>
 
-<p>Testu formatuduneko fitxategiek, testuaz gain, letra-tipo, tamaina, kolore, etab.i buruzko informazioa edukitzen dute. Normalean testu-prozesadoreak erabiliz sortzen dira.</p>
+	<p>Testu hutseko fitxategiek testua daukate soilik, eta beraz, bere itzulpenerako itzulpena tekleatzea besterik ez da egin behar.</p>
+	
+	<p>Fitxategiaren kodeketa zehazteko hainbat <a href="plainText.html">metodo</a> dago. Kodeketa ezartzea beharrezkoa da OmegaT-k fitxategiaren edukia nahastu ez dezan.</p>
 
-<p>Egun, OmegaT-k testu formatuduneko ondoko formatuak onartzen ditu:</p>
+	<p>Fitxategi hauek duten formatu bakarra, indentazio eta alineaziorako darabilten "espazio zuriak" direla suposatzen da. Gehienetan testu-editoreetan aldatzen dira eta normalean formatu hauek ez dute letra-tipo, kolore, marjina, etab.i buruzko informazioa gordetzen.</p>
 
-<ul>
-   <li>Microsoft-en Open XML fitxategiak</li>
-   <li>OpenOffice.org fitxategiak</li>
-   <li>OpenDocument fitxategiak</li>
-   <li>(X)HTML fitxategiak</li>
-   <li>HTML laguntza konpilatzeko fitxategiak (HCC)</li>
-   <li>DocBook fitxategiak</li>
-</ul>
+	<p>Egun, OmegaT-k testu hutseko ondoko formatuak onartzen ditu:</p>
 
-<p>Fitxategi-formatu hauek formatu-informazioa gordetzeko asmatuak izan dira. Formatu-informazioa oso sinplea izan daiteke, esaterako <strong>hau lodia da</strong>, edo oso konplexua, esaterako letra-tipo, kolore edo kokapen askotarikoak dauzkan taula bateko datuak.</p>
+	<ul>
+		<li>ASCII testua (.txt, etab.)</li>
+		<li>Testu kodetua</li>
+		<li>Java-ren baliabide-paketeak (.properties)</li>
+		<li>PO fitxategiak (.po)</li>
+		<li>INI fitxategiak ('gako=balio' formatua, .ini)</li>
+	</ul>
 
-<p>Itzulpen-lan askotan garrantzitsua izan ohi da itzulitako dokumentuak jatorrizkoaren itxura bera izan dezan. OmegaT-k erraztu egiten du lan hori, formatu berezia duten karaktere/hitzak manipulatzeko errazak diren etiketen bidez markatuz.</p>
+	<p>Testu hutseko beste fitxategi-mota batzuk OmegaT-n erabili ahal izateko, beren fitxategi-luzapena OmegaT-k onartutako fitxategi-mota bati <a href="fileFilters.html">lotu</a> behar zaio (esaterako, <code>.pod</code> fitxategiak ASCII testu-iragazkiari lotu ahal zaizkio) eta aurreprozesatu egin behar dira <a href="segmentation.html">segmentazio</a>-arau espezifikoak erabiliz.</p>
 
-<p>Jatorrizko testuaren formatu-ezaugarriak sinplifikatuz, etiketa-kopurua txikiagoa izatea lortzen da. Posible bada, komenigarria da letra-tipoak, letra-tamainak, koloreak, etab. ahalik eta gehien bateratzea, itzulpena sinplifikatzeko eta balizko etiketa-erroreak murrizteko.</p>
 
-<a name="File_formats_specifics"></a>
-<h3>Fitxategi-formatuen berezitasunak</h3>
+	<a name="tagged" id="tagged"></a>
+	<h2>Testu formatuduneko fitxategiak</h2>
 
-<p>Goiko fitxategi-formatu gehienek maneiu berezia behar dute.</p>
+	<p>Testu formatuduneko fitxategiek, testuaz gain, letra-tipo, tamaina, kolore, etab.i buruzko informazioa edukitzen dute. Normalean testu-prozesadoreak erabiliz sortzen dira.</p>
+	
+	<p>Fitxategi-formatu hauek formatu-informazioa gordetzeko asmatuak izan dira. Formatu-informazioa oso sinplea izan daiteke, esaterako <strong>hau lodia da</strong>, edo oso konplexua, esaterako letra-tipo, kolore edo kokapen askotarikoak dauzkan taula bateko datuak.</p>
+	
+	<p>Itzulpen-lan askotan garrantzitsua izan ohi da itzulitako dokumentuak jatorrizkoaren itxura bera izan dezan. OmegaT-k erraztu egiten du lan hori, formatu berezia duten karaktere/hitzak manipulatzeko errazak diren <a href="formattedText.html">etiketen</a> bidez markatuz.</p>
+	
+	<p>Jatorrizko testuaren formatu-ezaugarriak sinplifikatuz, etiketa-kopurua txikiagoa izatea lortzen da. Posible bada, komenigarria da letra-tipoak, letra-tamainak, koloreak, etab. ahalik eta gehien bateratzea, itzulpena sinplifikatzeko eta balizko <a href="userInterface.html#tags">etiketa-erroreak</a> murrizteko.</p>
 
-<p>Begiratu <a href="fileFormats.html" title="Onartutako fitxategi-formatuak">Onartutako fitxategi-formatuak</a> eta <a href="fileFilters.html" title="Fitxategi-iragazkiak">Fitxategi-iragazkiak</a> goiko fitxategi-formatu guztien kudeaketari buruzko informazio xehea aurkitzeko.</p>
+	<p>Egun, OmegaT-k testu formatuduneko ondoko formatuak onartzen ditu:</p>
 
-<a name="Other_file_formats"></a>
-<h3>Beste fitxategi-formatu batzuk</h3>
+	<ul>
+		<li>OpenOffice.org</li>
+		<li>OpenDocument</li>
+		<li>Microsoft Open XML</li>
+		<li>(X)HTML</li>
+		<li>HTML laguntza konpilatzeko fitxategiak</li>
+		<li>DocBook</li>
+		<li>Okapi-ren XLIFF fitxategi elebakarrak</li>
+	</ul>
 
-<p>OmegaT-k testu hutseko edo testu formatuduneko beste hainbat fitxategi atzitu ditzake.</p>
+	<p>Testu formatuduneko beste fitxategi-mota batzuk OmegaT-n erabili ahal izateko, beren fitxategi-luzapena OmegaT-k onartutako fitxategi-mota bati <a href="fileFilters.html">lotu</a> behar zaio eta aurreprozesatu egin behar dira <a href="segmentation.html">segmentazio</a>-arau espezifikoak erabiliz.</p>
 
-<p>Oro har, testu hutseko beste fitxategi batzuk (LaTex kasu) PO formatura bihurtu daitezke OmegaT-rekin itzuli ahal izateko.</p>
+	
+	<a name="specifics" id="specifics"></a>
+	<h2>Fitxategi-formatuen berezitasunak</h2>
 
-<p>Era berean, testu formatuduneko beste fitxategi batzuk (Microsoft Office-ren fitxategiak barne) Open Document formatura bihurtu daitezke OmegaT-rekin itzuli ahal izateko.</p>
+	<p>OmegaT-k fitxategi-mota bakoitza modu batean kudeatzen du. <a href="fileFilters.html">Fitxategi-iragazkietan</a> portaera espezifikoak ezarri daitezke.<a name="others" id="others"></a>
+	</p><h2>Beste fitxategi-formatu batzuk</h2>
 
-<p>Informazio gehiagorako, begiratu <a href="fileFormats.html" title="Onartutako fitxategi-formatuak">Onartutako fitxategi-formatuak</a>.</p>
+	<p>OmegaT-k testu hutseko edo testu formatuduneko beste hainbat fitxategi atzitu ditzake.</p>
+	
+	<p>Kanpoko tresnak erabili daitezke onartzen ez diren fitxategiak onartutako formatuetara bihurtzeko. Itzulitako fitxategia jatorrizko formatura bihurtu beharko da gero. Modu horretan, testu hutseko beste fitxategi batzuk (LaTex kasu) PO formatura bihurtu daitezke OmegaT-rekin itzuli ahal izateko. Era berean, testu formatuduneko beste fitxategi batzuk (Microsoft Office-ren fitxategiak barne) Open Document formatura bihurtu daitezke OmegaT-rekin itzuli ahal izateko.</p>
+	
+	<p>Itzulitako fitxategiaren kalitatea joan-etorriko bihurketaren kalitatearen araberakoa izango da. Segurtatu beste aukera guztiak aztertu dituzula bihurketa horiek egin baino lehen.</p>
+	
+	<p>Bihurketak egitea ahalbidetzen duten hainbat tresna daude:</p>
+	
+	<a name="ooo" id="ooo"></a>
+	<h3>OpenOffice.org</h3>
 
-<hr>
-<p><a href="legalNotices.html" title="Legezko oharrak">Legezko oharrak</a></p>
+	<p>OmegaT-k ez ditu zuzenean onartzen Microsoft Office-ren Word, Excel eta PowerPoint formatuak. Hala ere, OpenOffice.org (eta bere aldaerak) erabiliz, formatu horiek OpenDocument formatura bihurtu daitezke. OmegaT-k zuzenean onartzen du OpenDocument.</p>
+	
+	<p><a href="http://www.openoffice.org/">OpenOffice.org-en webgune ofiziala</a></p>
 
+	<a name="okapi" id="okapi"></a>
+	<h3>Okapi Framework</h3>
+
+	<p>Okapi Framework-en Text Extraction Utility deritzonak OmegaT-ren proiektuen karpeta-zuhaitza sortzeko aukera bat dauka. Era berean, OmegaT-rentzako bereziki pentsatutako XLIFF fitxategiak ere sortu daitezke. Duela gutxi Okapi-k Mono-ren gainean dabiltzan tresnak argitaratu ditu. Mono sistema eragile askotan erabili daitekeen plataforma bat da.</p>
+
+	<p><a href="http://okapi.sourceforge.net/Release/Tikal/ReadMe_ForMono.htm">Okapi for Mono tresnaren webgunea</a>, <a href="http://okapi.sourceforge.net/Release/Shared/Help/tutorial_02.htm">tutoriala</a></p>
+
+	<a name="tt" id="tt"></a>
+	<h3>Translate Toolkit</h3>
+	
+	<p>Translate Toolkit Python-en idatzitako tresna-sorta bat da. Portable Object formatutik eta formatura bihurtzeko tresnak dauzka: Mozilla-ren .properties eta dtd fitxategiak, CSV fitxategiak, Qt-ren .ts fitxategiak eta XLIFF fitxategiak bihur ditzake. Fitxategi horiek OmegaT-rekin itzuli baino lehen edo itzuli ondoren maneiatzeko tresna ugari dauzka.</p>
+
+	<p><a href="http://translate.sourceforge.net/wiki/toolkit/index">Translate Toolkit-en webgune ofiziala</a></p>
+
+	<a name="po4a" id="po4a"></a>
+	<h3>po4a</h3>
+
+	<p>po4a Perl-en idatzitako Debian-en tresna bat da. LaTeX, TeX, POD eta antzeko formatuak Portable Object formatura eta formatutik bihur ditzake.</p>
+
+	<p><a href="http://po4a.alioth.debian.org/">po4a-ren webgune ofiziala</a></p>
+	
+	<hr>
+
+	<p><a href="legalNotices.html">Legezko oharrak</a></p>
 </body>
 </html>

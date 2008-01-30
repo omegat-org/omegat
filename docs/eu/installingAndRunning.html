@@ -1,0 +1,308 @@
+<html>
+<head>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>OmegaT-ren instalazioa eta abian jartzea - OmegaT 1.7.3 erabiltzailearen eskuliburua</title>
+</head>
+
+<body>
+	<h1>OmegaT-ren instalazioa eta abian jartze</h1>
+
+	<ul>
+		<li><a href="#Linux_users">Linux (Intel) erabiltzaileak</a>
+			<ul>
+				<li><a href="#linux_which">Deskargatu beharreko paketea</a></li>
+				<li><a href="#linux_install">Instalazioa</a></li>
+				<li><a href="#linux_menu">Sistema eragileko menuaren instalazioa</a>
+					<ul>
+						<li><a href="#menu_kde">KDEn</a></li>
+						<li><a href="#menu_gnome">GNOMEn</a></li>
+					</ul>
+				</li>
+				<li><a href="#linux_running">OmegaT abian jartzea</a></li>
+			</ul>
+		</li>
+		<li><a href="#Windows_users">Windows erabiltzaileak</a>
+			<ul>
+				<li><a href="#windows_which">Deskargatu beharreko paketea</a></li>
+				<li><a href="#windows_install">Instalazioa</a></li>
+				<li><a href="#windows_menu">Windows-eko menuaren instalazioa</a></li>
+				<li><a href="#windows_running">OmegaT abian jartzea</a></li>
+			</ul>
+		</li>
+		<li><a href="#MacOSX_users">MacOSX erabiltzaileak</a>
+			<ul>
+				<li><a href="#osx_which">Deskargatu beharreko paketea</a></li>
+				<li><a href="#osx_install">Instalazioa</a></li>
+				<li><a href="#osx_dock">Atrakearen instalazioa</a></li>
+				<li><a href="#osx_running">OmegaT abian jartzea</a></li>
+			</ul>
+		</li>
+		<li><a href="#Other_systems">Beste sistema batzuk (Solaris SPARC/x86/x64, Linux x64/PowerPC, Windows x64)</a>
+			<ul>
+				<li><a href="#other_which">Deskargatu beharreko paketea</a></li>
+				<li><a href="#other_install">Instalazioa</a></li>
+				<li><a href="#other_menu">Sistema eragileko menuaren instalazioa</a></li>
+				<li><a href="#other_running">OmegaT abian jartzea</a></li>
+			</ul>
+		</li>
+		<li><a href="#command_line">Komando-lerroaren bidezko abioa</a>
+			<ul>
+				<li><a href="#terminal">Komando-lerroko leihoa irekitzea</a></li>
+				<li><a href="#script">Abiorako script-a aldatzea</a></li>
+				<li><a href="#arguments">Abiorako komandoaren argumentuak</a></li>
+			</ul>
+		</li>
+		<li><a href="#source_build">OmegaT iturburutik eraikitzea</a>
+			<ul>
+				<li><a href="#build_which">Deskargatu beharreko paketea</a></li>
+				<li><a href="#ant">Eraikitze-prozesua</a></li>
+			</ul>
+		</li>
+	</ul>
+
+	<hr>
+
+	<a name="Linux_users" id="Linux_users"></a>
+	<h1>Linux (Intel) erabiltzaileak</h1>
+
+	<a name="linux_which" id="linux_which"></a>
+	<h2>Deskargatu beharreko paketea</h2>SUN-en Java 1.4 JRE-rekin bateragarria den Java inplementaziorik al daukazu?<dl>
+		<dt><strong>→ Bai</strong></dt>
+		<dd>deskargatu <code>OmegaT_1.7.3_Without_JRE.zip</code><br> <em>*Pakete hau Java 1.4 JRE-rekin bateragarria den JRE-a instalatuta daukan edozein plataformatan erabili daiteke.</em></dd>
+		<dt><strong>→Ez / Ez dakit</strong></dt>
+		<dd>deskargatu <code>OmegaT_1.7.3_Linux.tar.gz</code><br> <em>*Pakete honek SUN-en Java Runtime Environment dakar berarekin. JRE honek ez ditu oztopatuko zure sisteman lehendik instalatuta eduki ditzakezun Java inplementazioak.</em></dd>
+	</dl>
+
+	<a name="linux_install" id="linux_install"></a>
+	<h2>OmegaT-ren instalazioa</h2>
+
+	<p>OmegaT instalatzeko, destrinkotu deskargatutako fitxategia. Horrela, omegat/ direktorio bat sortuko da, eta bertan, OmegaT erabiltzeko beharrezkoak diren fitxategi guztiak egongo dira.</p>
+
+	<p><code>.tar.gz</code> fitxategia destrinkotzeko:</p>
+
+	<p><code>$ tar xf deskargatutako_fitxategia.tar.gz</code></p>
+
+	<a name="linux_menu" id="linux_menu"></a>
+	<h2>OmegaT menuetara (KDE) edo paneletara (GNOME) gehitzea</h2>
+
+	<a name="menu_kde" id="menu_kde"></a>
+	<h3>KDE erabiltzaileak</h3>
+
+	<p>OmegaT zuen menuari gehitzeko, egin ondoko hau:</p>
+
+	<ul>
+		<li><code>Kontrol gunea - Mahaigaina - Panelak - Menuak - Editatu K menua - Fitxategia - Elementu berria/Berria</code></li>
+		<li>Gero, menu egoki bat hautatu ondoren, gehitu azpimenu/elementu bat <code>Fitxategia - Azpimenu berria eta Fitxategia -  Elementu berria</code> erabiliz. Sartu OmegaT elementu berriaren izen gisa.</li>
+		<li>"Komandoa" eremuan, erabili nabigazio-botoia OmegaT-ren abioko script-a bilatzeko (alegia, destrinkotutako direktorioaren barruan OmegaT deitzen den fitxategia), eta hautatu ezazue.</li>
+		<li>Klikatu ikono-botoian (Izena/Deskribapena/Iruzkinak eremuen eskuinaldean) - Beste ikonoak - Arakatu, eta joan OmegaT-ren /images azpikarpetara. Hautatu OmegaT.png ikonoa.</li>
+		<li>Azkenik, gorde aldaketak <code>Fitxategia - Gorde</code> aukera erabiliz.</li>
+	</ul>
+
+	<a name="menu_gnome" id="menu_gnome"></a>
+	<h3>GNOME erabiltzaileak</h3>
+
+	<p>OmegaT zuen panelari (pantailaren goialdean dagoen barrari alegia) gehitzeko, egin ondoko hau:</p>
+
+	<ul>
+		<li>Eskuineko botoiarekin klikatu <code>Panelari gehitu - Abiarazle berezitua</code>.</li>
+		<li>"Izena" eremuan, idatzi "OmegaT" ; "Komandoa" eremuan, erabili arakatze-botoia OmegaT-ren abioko script-a bilatzeko (alegia, destrinkotutako direktorioaren barruan OmegaT deitzen den fitxategia). Hautatu script-a eta onartu OK sakatuz.</li>
+	</ul>
+
+	<a name="linux_running" id="linux_running"></a>
+	<h2>OmegaT abian jartzea</h2>
+	
+	<p>OmegaT instalatu ondoren, komando-lerrotik abiarazi daiteke, komando-lerrotik abiarazteko beharrezkoak diren parametroak dituen script bat sor daiteke, edo zuzenean abiarazi daiteke <code>OmegaT.jar</code> fitxategian klikatuz. Metodoa bata edo bestea izango da banaketaren arabera. Segurtatu zure sistemako <code>PATH</code> ezarpena zuzena dela eta <code>.jar</code> fitxategiak Java abiarazle bati lotuta daudela.</p>
+	
+	<hr>
+
+	<a name="Windows_users" id="Windows_users"></a>
+	<h1>Windows erabiltzaileak</h1>
+
+	<a name="windows_which" id="windows_which"></a>
+	<h2>Deskargatu beharreko paketea</h2>SUN-en Java 1.4 JRE-rekin bateragarria den Java inplementaziorik al daukazu?<dl>
+		<dt><strong>→ Bai</strong></dt>
+		<dd>deskargatu <code>OmegaT_1.7.3_Without_JRE.zip</code><br> <em>*Pakete hau Java 1.4 JRE-rekin bateragarria den JRE-a instalatuta daukan edozein plataformatan erabili daiteke.</em></dd>
+		<dt><strong>→Ez / Ez dakit</strong></dt>
+		<dd>deskargatu <code>OmegaT_1.7.3_Windows.zip</code><br> <em>*Pakete honek SUN-en Java Runtime Environment dakar berarekin. JRE honek ez ditu oztopatuko zure sisteman lehendik instalatuta eduki ditzakezun Java inplementazioak.</em></dd>
+	</dl>
+
+	<a name="windows_install" id="windows_install"></a>
+	<h2>OmegaT-ren instalazioa</h2>
+
+	<p>OmegaT instalatzeko, sortu karpeta egoki bat (esaterako, <code>C:\Program Files\OmegaT</code>) eta kopiatu bertan deskargatutako fitxategia. Egin klik bi aldiz fitxategian eta destrinkotu. OmegaT abiarazteko behar diren fitxategia guztiak karpeta horretan daude. Destrinkotu ondoren, deskargatutako fitxategia ezabatu egin dezakezu.</p>
+
+	<a name="windows_menu" id="windows_menu"></a>
+	<h2>OmegaT hasierako menura edo mahaigainera gehitzea</h2>
+
+	<p><code>OmegaT-JRE.exe</code>, <code>OmegaT.exe</code> edo <code>OmegaT.bat</code> fitxategietako bat mahaigainera edo hasiera menura arrastatu daiteke aplikazioa bertatik abiarazteko.</p>
+	
+	<a name="windows_running" id="windows_running"></a>
+	<h2>OmegaT abian jartzea</h2>
+	
+	<p>OmegaT instalatu ondoren, <code>OmegaT.jar</code> fitxategian klikatuz abiarazi daiteke, <code>OmegaT.bat</code> fitxategian klikatuz ere abiarazi daiteke (fitxategi honetan komando-lerroko parametroak gehi daitezke) edo zuzenean komando-lerrotik abiarazi daiteke.</p>
+	
+	<hr>
+
+	<a name="MacOSX_users" id="MacOSX_users"></a>
+	<h1>MacOSX erabiltzaileak</h1>
+
+	<a name="osx_which" id="osx_which"></a>
+	<h2>Deskargatu beharreko paketea</h2>
+
+	<p>deskargatu <code>OmegaT_1.7.3_MacOSX.zip</code></p>
+
+	<a name="osx_install" id="osx_install"></a>
+	<h2>OmegaT-ren instalazioa</h2>
+
+	<p>Egin klik bi aldiz <code>OmegaT_1.7.3_MacOSX.zip</code> fitxategian eta destrinkotu. OSX disko-irudi bat (<code>OmegaT.dmg</code>) bere kasa muntatuko da eta 2 fitxategi erakutsiko ditu: <code>documentation.html</code> eta <code>OmegaT.app</code>. Kopiatu bi fitxategiak karpeta egoki batera (esaterako, Applications karpetan OmegaT izeneko karpeta bat sortu dezakezu). Hori egin ondoren, <code>OmegaT_1.7.3_MacOSX.zip</code> fitxategia ezabatu dezakezu.</p>
+
+	<a name="osx_dock" id="osx_dock"></a>
+	<h2>OmegaT atrakera gehitu</h2>
+
+	<p>OmegaT Dock-en atrakatu dezakezu <code>OmegaT.app</code> fitxategia arrastatu eta Dock-en jareginez.</p>
+	
+	<a name="osx_running" id="osx_running"></a>
+	<h2>OmegaT abian jartzea</h2>
+	
+	<p>Egin klik bi aldiz <code>OmegaT.app</code> gainean edo Dock-en duen atrakean.</p>
+	
+	<p>Komando-lerroko Java-ren abio parametroak aldatu nahi izanez gero, "Beste sistema batzuk" atalean (ikus behean) eskuragarri dagoen paketea erabiltzea aholkatzen da. Posible da, baita ere, <code>OmegaT.app</code> paketearen barruan dagoen <code>Info.plist</code> fitxategia aldatzea.</p>
+
+	<hr>
+
+	<a name="Other_systems" id="Other_systems"></a>
+	<h1>Beste sistema batzuk</h1>
+
+	<a name="other_which" id="other_which"></a>
+	<h2>Deskargatu beharreko paketea</h2>
+
+	<p>Linux (Intel x86) eta Windows plataformetarako, OmegaT-ren paketean Sun Java JRE bat gehitu da. Beste plataforma batzuetan (Linux PowerPC, Linux x64, Solaris SPARC/x86/x64, Windows x64, etab.), Java JRE bateragarri bat eduki behar da sisteman instalatuta OmegaT erabilil ahal izateko.</p>SUN-en Java 1.4 JRE-rekin bateragarria den Java inplementaziorik al daukazu?<dl>
+		<dt><strong>→ Bai</strong></dt>
+		<dd>deskargatu <code>OmegaT_1.7.3_Without_JRE.zip</code><br> <em>*Pakete hau Java 1.4 JRE-rekin bateragarria den JRE-a instalatuta daukan edozein plataformatan erabili daiteke.</em></dd>
+		<dt><strong>→Ez dakit</strong></dt>
+		<dd>ireki terminal bat eta idatzi "jva -version". "command not found" edo antzeko mezuren bat jasotzen bada, litekeena da Java ez dagoela instalatuta.</dd>
+		<dt><strong>→Ez</strong></dt>
+		<dd>eskuratu zure sistemarako Java JRE bat (ikus behean) eta deskargatu <code>OmegaT_1.7.3_Without_JRE.zip</code>.<p>SUN-ek JRE-ak eskaintzen ditu Solaris SPARC/x86 (Java 1.4) eta Linux x64, Solaris x64, Windows x64 (Java 1.5) sistemetarako:<br> <strong>http://java.sun.com/products/archive/</strong><br> IBM-k JRE-ak eskaintzen ditu Linux PowerPC-rako:<br> <strong>http://www.ibm.com/developerworks/java/jdk/linux/download.html</strong></p></dd>
+	</dl>
+
+	<p>Jarraitu zure sistemak behar duen paketearen instalaziorako argibideak.</p>
+
+	<a name="other_install" id="other_install"></a>
+	<h2>OmegaT-ren instalazioa</h2>
+
+	<p>OmegaT instalatzeko, destrinkotu <strong><code>OmegaT_1.7.3_Without_JRE.zip</code></strong> fitxategia. Horrela, <code>./OmegaT_1.7.3_Without_JRE/</code> direktorio bat sortuko da, eta bertan, OmegaT erabiltzeko beharrezkoak diren fitxategi guztiak egongo dira.</p>
+
+	<h2>Lastertekla komenigarriak instalatzea</h2>
+
+	<p>Jarraitu zure sistemaren argibideak OmegaT-ren lasterteklak leku egokietan instalatzeko.</p>
+	
+	<a name="other_running" id="other_running"></a>
+	<h2>OmegaT abian jartzea</h2>
+
+	<p>OmegaT instalatu ondoren, komando-lerrotik abiarazi daiteke, komando-lerrotik abiarazteko beharrezkoak diren parametroak dituen script bat sor daiteke, edo zuzenean abiarazi daiteke <code>OmegaT.jar</code> fitxategian klikatuz. Metodoa bata edo bestea izango da banaketaren arabera. Segurtatu zure sistemako <code>PATH</code> ezarpena zuzena dela eta <code>.jar</code> fitxategiak Java abiarazle bati lotuta daudela.</p>
+
+	<hr>
+	
+	<a name="command_line" id="command_line"></a>
+	<h1>Komando-lerroaren bidezko abioa</h1>
+	
+	<p>Normalean, ez da beharrezkoa OmegaT komando-lerrotik abiaraztea. Hala ere, komando-lerroaren metodoa erabiltzen bada OmegaT abiarazteko, aplikazioaren portaeraren zenbait alderdi aldatu eta moldatu daitezke. Bi modu daude OmegaT komando-lerroz abiarazteko.</p>
+	
+	<p>OmegaT komando-lerrotik kontrolatu nahi duten Mac OSX paketearen erabiltzaileei "Beste sistema batzuk" atalean eskuragarri dagoen paketea erabiltzea aholkatzen zaie. Ikus goian.<a name="terminal" id="terminal"></a>
+	</p><h2>1. metodoa: komando-lerroko leihoa irekitzea</h2>
+
+	<p>Komando-lerroko leihoari "terminala" ere deitzen zaio. Windows-en "MS-DOS leiho" deritzo, eta Hasiera menuan dago, Aplikazioak barruan, "MS-DOS" ikonoaren bidez. Mac OSX-erako pareko elementua Applications → Utilities atalean dagoen Terminal aplikazioa da.</p>
+
+	<p>OmegaT abiarazteko, normalean bi komando idatzi behar dira. Lehena hau da:</p>
+
+	<p><code>cd {karpeta}</code></p>
+
+	<p>non <code>{karpeta}</code> OmegaT aplikazioa dagoen karpeta den, bide-izen eta guzti - zehatzago esateko, <code>OmegaT.jar</code> dagoen lekua da. Praktikan, komando hau honelako zerbait izango da:</p>
+	
+	<dl>
+		<dt>Windows-en</dt>
+		<dd><code>cd C:\Program Files\OmegaT</code></dd>
+		<dt>Mac OSX-en</dt>
+		<dd><code>cd /Applications/OmegaT</code></dd>
+		<dt>Linux-en</dt>
+		<dd><code>cd /usr/local/omegat</code></dd>
+    </dl>
+	<p>Komando hauek OmegaT fitxategi exekutagarria daukan karpetara joateko balio dute. Bigarren komandoa OmegaT abiarazten duena da. Oinarrizko forman, komandoa hau da:</p>
+
+	<p><code>java -jar OmegaT.jar</code></p>
+
+	<p>Kontuan izan maiuskulak, garrantzitsuak dira.</p>
+
+	<p>Metodo honi esker errazagoa da akatsak aurkitzea: aplikazioaren erabileran arazoren bat gertatzen bada, informazio erabilgarria eman dezakeen akats-mezu bat agertzen da terminalean.</p>
+
+	<a name="script" id="script"></a>
+	<h2>2. metodoa: <code>.bat</code> fitxategia/abioko script-a aldatzea</h2>
+
+	<p>1. metodoa ez da aplikazio bat sarritan abian jartzeko modurik praktikoena. Hori dela-eta, goian deskribatu diren bi komandoak fitxategi batean gorde dira (zehatzago izateko, "script" batean, Windows sistemetan "<code>.bat</code> fitxategi" ere deitzen dena).</p>
+	
+	<p>Fitxategi hau exekutatzen denean, barruan dauden komandoak automatikoki exekutatzen dira. Beraz, abio-modua aldatzeko, aski da fitxategia aldatzea. OmegaT fitxategitik abiarazten denean, komando berriak exekutatu egingo dira.</p>
+
+	<a name="arguments" id="arguments"></a>
+	<h2>Abiorako komandoaren argumentuak</h2>
+
+	<p>Oinarrizko komandoak goian aipatu dira. Komando hauek aldatzeko, "argumentuak" erantsi behar zaizkie. Argumentuak hasierako "<code>java</code>" ondoren eta  "<code>-jar OmegaT.jar</code>" baino lehen gehitu behar dira.</p>
+	
+	<p>Ondoren argumentu posibleen zerrenda ematen da. Argumentuei buruzko informazio gehiago eduki nahi izanez gero, idatzi <code>man java</code> terminalean. <code>man</code> komandoaren bidez, hautatutako komandoaren eskuliburua erakusten da. Gerta daiteke zure sistemak ez edukitzea <code>java</code> komandorako eskulibururik zure hizkuntzan.</p>
+
+	<dl>
+		<dt><code>-Duser.language=XX</code></dt>
+		<dd><p>Normalean, hau da, OmegaT argumenturik gabe abiarazten denean, aplikazioak erabiltzailearen sistema eragilearen hizkuntza detektatzen du. OmegaT-k hizkuntza horretan dagoen erabiltzaile-interfazerik badauka, OmegaT-k horixe erabiltzen du. Hortaz, erabiltzailearen sistema eragilea errusieraz badago eta OmegaT errusieraz lokalizatu bada, OmegaT-ren erabiltzailearen interfazea, menuak, etab. errusieraz erakutsiko dira. Erabiltzailearen sistemaren hizkuntza ezin bada eskuratu, OmegaT-ren hizkuntza lehenetsia ingelesa da. Hau portaera lehenetsia da.</p>
+
+		<p>"<code>-Duser.language=XX</code>" argumentua erabiliz gero, OmegaT-k sistema eragilearena ez den beste hizkuntza bat erabili dezan lortu daiteke. "XX" jartzen duen lekuan, erabili nahi den hizkuntzaren bi digituko kodea idatzi behar da. Esaterako, OmegaT euskarazko interfazearekin abiarazi nahi izanez gero (adibidez, sistema eragilea gaztelaniaz badago), komandoa hau izango litzateke:</p>
+
+		<p><code>java -Duser.language=eu -jar OmegaT.jar</code></p></dd>
+
+		<dt><code>-Duser.country=XX</code></dt>
+		<dd><p>Hizkuntzarekin batera, herrialdea ere zehaztu daiteke, esaterako CN edo TW txineraren kasuan. Hasiera azkar zuzena ireki dadin, hizkuntza eta herrialdea, biak zehaztu behar dira. Hau ezinbestekoa da konbinazio bakarra existitzen den kasuetan ere, esaterako pt_BR Brasilgo portugesaren kasuan. .</p></dd>
+
+		<dt><code>-Dswing.aatext=true</code></dt>
+		<dd><p>Argumentu honek letra-tipoak leuntzen ditu, beren itxura hobetuz.</p></dd>
+
+		<dt><code>-XmxZZM</code></dt>
+		<dd><p>Komando honek memoria gehiago esleitzen dio OmegaT-ri. Portaera lehenetsi gisa, OmegaT-k 256 MB-eko memoria dauka; beraz, hori baino gutxiago esleitzen bazaio ez da inolako abantailarik lortuko. "ZZ" jartzen duen lekuan, OmegaT-ri esleitu nahi zaion memoria-kantitate berria. megabyte-tan, idatzi behar da. Esaterako, OmegaT 1.024 MB-eko (1 GB) memoriarekin abiarazi nahi izanez gero, ondoko hau idatzi behar da:</p>
+
+		<p><code>java -Xmx1024M -jar OmegaT.jar</code></p></dd>
+	</dl>
+	
+	<p>Argumentuak konbinatu egin daitezke. OmegaT goian aipatu diren adibide guztiekin abiarazi nahi izanez gero, komandoa ondoko hau izango litzateke:</p>
+
+	<p><code>java -Dswing.aatext=true -Duser.language=pt -Duser.country=BR -Xmx1024M -jar OmegaT.jar</code></p>
+
+	<hr>
+
+	<a name="build" id="build"></a>
+	<h1>OmegaT iturburutik eraikitzea</h1>
+
+	<a name="build_which" id="build_which"></a>
+	<h2>Deskargatu beharreko paketea</h2>
+
+	<dl>
+		<dt>Deskargatu OmegaT_1.7.3_Source.zip</dt>
+		<dd>Pakete honek bertsio honi dagozkion fitxategien iturburu-fitxategiak dauzka eta Java 1.4 JDK edo bertsio bateragarri bat instalatuta daukan edozein sistematan erabili daiteke. OmegaT eraikitzeko, ant izeneko utilitatea ere beharko duzu.</dd>
+		<dt>Koderik berriena ere eskuratu dezakezu CVS zerbitzaritik:</dt>
+		<dd><code>cvs -z3 -d:pserver:anonymous@omegat.cvs.sourceforge.net:/cvsroot/omegat co -P omegat</code></dd>
+	</dl>
+
+	<a name="ant" id="ant"></a>
+	<h2>OmegaT-ren eraikitzea</h2>
+
+	<dl>
+		<dd>Destrinkotu OmegaT_1.7.3_Source.zip fitxategia eta sartu OmegaT_1.7.3_Source direktorioan, edo sartu CVS-tik deskargatutako kodearen /omegat/ direktorioan. Egiaztatu direktorio horretan build.xml fitxategi bat dagoela. Orduan, idatzi komando-lerroan:</dd>
+	</dl>
+
+	<p><code>$ ant jar release</code></p>
+
+	<dl>
+		<dd>Horrela, OmegaT-ren banaketa oso bat sortuko da ./dist/ direktorioan, eta bertan, OmegaT erabiltzeko beharrezkoak diren fitxategi guztiak egongo dira.</dd>
+	</dl>
+	<hr>
+
+	<p><a href="legalNotices.html">Legezko oharrak</a></p>
+</body>
+</html>

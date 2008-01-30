@@ -68,7 +68,7 @@
 1.7.3 update 1 vs. 1.7.3
 
 
-  4 Enhancements
+  5 Enhancements
   6 Bugfixes
 
 ----------------------------------------------------------------------
@@ -84,6 +84,7 @@
   - Serbo-Croatian localisation updated to 1.7.3 (UI, readme, instant start, documentation)
   - Slovenian localisation updated to 1.7.3 (UI, readme, instant start, documentation)
   - Russian localisation updated to 1.7.3 (UI, readme, instant start, documentation)
+  - Basque localisation updated to 1.7.3 (UI, readme, instant start, documentation)
 
   Bug fixes:
 

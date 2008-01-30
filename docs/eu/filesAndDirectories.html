@@ -1,0 +1,224 @@
+<html>
+<head>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Fitxategiak eta direktorioak - OmegaT 1.7.3 erabiltzailearen eskuliburua</title>
+</head>
+<body>
+
+	<h1>OmegaT-ren fitxategiak eta direktorioak</h1>
+
+	<ul>
+		<li><a href="#project">Itzulpen-proiektuaren fitxategiak</a>
+			<ul>
+				<li><a href="#project_location">Proiektuaren fitxategien kokapena</a></li>
+				<li><a href="#project_list">Proiektuaren fitxategien zerrenda</a></li>
+			</ul>
+		</li>
+		<li><a href="#user">Erabiltzailearen fitxategiak</a>
+			<ul>
+				<li><a href="#user_location">Erabiltzailearen fitxategien kokapena</a></li>
+				<li><a href="#user_list">Erabiltzailearen fitxategien zerrenda</a></li>
+			</ul>
+		</li>
+		<li><a href="#application">Aplikazioaren fitxategiak</a>
+			<ul>
+				<li><a href="#application_list">Aplikazioaren fitxategien zerrenda</a></li>
+			</ul>
+		</li>
+	</ul>
+
+	<p>OmegaT-k hiru fitxategi-motarekin egiten du lan.</p>
+
+	<dl>
+		<dt>Itzulpen-proiektuaren fitxategiak</dt><dd>Itzulpen-proiektu bat osatzen dute. Galduz gero, proiektuaren integritatea eta lana egiteko aukera murriztu daiteke. Proiektuaren fitxategiak fitxategirik garrantzitsuenak dira OmegaT-n. Eguneroko lanean erabiliko diren fitxategiak dira.</dd>
+		<dt>Erabiltzailearen ezarpenen fitxategiak</dt><dd>Erabiltzaileak OmegaT-ren portaera aldatzeko hobespenak ezartzen dituenean sortzen diren fitxategiak dira. Haiek galduz gero, OmegaT-k ezarpen lehenetsiak erabiliko ditu. Honek arazo txiki batzuk sor ditzake itzulpen baten erdian gertatzen bada.</dd>
+		<dt>Aplikazioaren fitxategiak</dt><dd>OmegaT instalatzeko deskargatu den paketean daude, eta gehienak ezinbestekoak dira OmegaT-k taxuz funtzionatu dezan. Fitxategi horiek galduz gero, deskargatu berriro edota instalatu berriro OmegaT.</dd>
+	</dl>
+
+<hr>
+
+	<a name="project"></a>
+	<h1>Itzulpen-proiektuaren fitxategiak</h1>
+
+	<p>OmegaT-ren itzulpen-proiektu bat hainbat fitxategi eta direktorioz osaturik dago.</p>
+
+	<a name="project_location"></a>
+	<h2>Itzulpen-proiektuaren fitxategien kokapena</h2>
+
+	<p>Itzulpen-proiektu bat sortzen denean, OmegaT-k automatikoki sortzen du fitxategien biltegi gisa erabiliko diren direktorioen zerrenda, bai eta proiektuaren hobespenak eta itzulpen-memoriak gordetzeko erabiliko diren hainbat fitxategi ere.</p>
+
+	<p>Portaera lehenetsi gisa, itzulpen-proiektu baten direktorioak direktorio nagusi baten azpian bilduta gordetzen dira. Direktorio hauen kokapena aldatu egin daiteke, bai proiektua sortzean bai itzulpen-prozesuaren erdian. Hortaz, jadanik existitzen diren direktorioak hautatu daitezke, edo bakoitzaren lan-ohiturak islatzen dituzten direktorioak sortu daitezke.</p>
+
+	<p>Proiektua <a href="instantStartGuide.html#create">sortu</a> ondoren direktorioen kokapena aldatu nahi izanez gero, ireki <strong>Proiektua → Propietateak...</strong> eta egin beharrezkoak diren <a href="projectProperties.html">aldaketak</a>.</p>
+
+	<a name="project_list"></a>
+	<h2>Itzulpen-proiektuaren fitxategien zerrenda</h2>
+
+	<p>Fitxategi-nabigatzaile batean, itzulpen-proiektu batek edozein direktorioren itxura dauka. OmegaT-ren elkarrizketa-koadroetan, itzulpen-proiektu bat OmegaT-ren ikonoa daukan fitxategi bat bezala erakusten da. OmegaT-k ez du proiektuaren direktorio-hierarkian sartu beharrik hura irekitzeko. Aski da OmegaT-ren ikonoa daukan elementua hautatzea.</p><p>Ezarpen lehenetsiak mantenduz sortutako itzulpen-proiektu batek egitura hau dauka:</p>
+
+	<dl>
+		<dt>/project_name/</dt>
+		<dd>
+			<dl>
+				<dt>/omegat/</dt>
+				<dd>
+					<dl>
+						<dt>project_save.tmx (<a href="translationMemories.html">...</a>)</dt>
+						<dd>TMX fitxategia hau proiektua lehen aldiz gordetzen denean sortzen da. Lanerako itzulpen-memoria gisa funtzionatzen du. Automatikoki gordetzeko funtzioari esker, OmegaT-tik irtetean berez eguneratuko da. Fitxategi itzuliak sortzeko erabiltzen den itzulpen-memoria da.</dd>
+						<dt>project_save.tmx.YEARMMDDHHNN.bak (<a href="translationMemories.html#TMX_backup">...</a>)</dt>
+						<dd>Hemen eredu hau jarraitzen duten TMX fitxategiak egongo dira. <strong>project_save.tmx</strong> fitxategiaren babeskopiak dira eta proiektua berrirekitzen den bakoitzen eguneratzen dira, <strong>project_save.tmx</strong> fitxategiaren edukiak islatzeko edozein aldaketak fitxategi hori alda dezan baino lehen.</dd>
+						<dt>project_stats.txt (<a href="userInterface.html#files">...</a>)</dt>
+						<dd>Testu-fitxategi hau kalkulu-orri batean ireki daiteke, segmentuei eta hitzen zenbaketari buruzko informazioa erakusteko. Bertan gordetzen den informazioa "Proiektuaren fitxategiak" leihoan erakusten dena baino osatuagoa da.</dd>
+					</dl>
+				</dd>
+				<dt>/source/</dt>
+				<dd>Proiektuan itzulgai gisa sartuko diren <a href="filesToTranslate.html">fitxategiak</a>. Hemen fitxategiz betetako direktorioak ere sar daitezke.</dd>
+				<dt>/target/</dt>
+				<dd>Proiektu bat irekita dagoenean <strong>Proiektua → Sortu dokumentu itzuliak</strong> hautatzen bada, <strong>/source/</strong> karpetan dauden fitxategi guztiak, itzuliak egon zein ez, karpeta honetan birsortuko dira, direktorioen hierarkia bera mantenduz, itzulpenaren uneko egoera islatzeko. Praktikan, OmegaT-k <strong>/omegat/project_save.tmx</strong> fitxategian gordetako informazioa eta sorburu-dokumentuak batzen ditu <strong>/target/</strong> karpetan dauden edukiak sortzeko.</dd>
+				<dt>/tm/</dt>
+				<dd>Itzulpenean erabili nahi diren kanpoko <a href="translationMemories.html">itzulpen-memoriak</a> direktorio honetan gorde behar dira proiektua kargatu baino lehen.</dd>
+				<dt>/glossary/</dt>
+				<dd>Hemen <a href="glossaries.html">glosario-fitxategiak</a> gordetzen dira. Erabiltzaileak proiektua ireki baino lehen utzi behar ditu hemen bere glosario-fitxategiak.</dd>
+				<dt>omegat.project</dt>
+				<dd>OmegaT-k fitxategi hau automatikoki sortzen du proiektua sortzen denean. Bertan <a href="projectProperties.html">proiektuaren parametroak</a> gordetzen dira. Fitxategi honetan gordetako parametroak proiektuaren propietateen leihoan alda daitezke.</dd>
+				<dt>proiektuarenizena-omegat.tmx (<a href="translationMemories.html#TMX_files_location_and_purpose">...</a>)<br> proiektuarenizena-level1.tmx<br> proiektuarenizena-level2.tmx</dt>
+				<dd>Fitxategi hauek /source/ karpetaren edukiei dagozkien segmentuen sorburua eta helburua gordetzen dituzte (betiere fitxategi itzuliak sortu diren unekoak). </dd>
+			</dl>
+		</dd>
+	</dl>
+
+<hr>
+
+	<a name="user"></a>
+	<h1>Erabiltzailearen fitxategiak</h1>
+
+	<a name="user_location"></a>
+	<h2>Erabiltzailearen fitxategien kokapena</h2>
+
+	<p>OmegaT 1.6 bertsiotik aurreta, erabiltzailearen fitxategiak kokapen berezi batean gordetzen dira, OmegaT-ren edozein bertsiorekin atzitu ahal izan daitezen. Kokapena erabiltzen duzun plataformaren araberakoa da:</p>
+
+	<dl>
+		<dt>Windows-en</dt>
+		<dd><strong>C:\Documents and Settings\&lt;Erabiltzailearen izena&gt;\Application Data\OmegaT</strong>. &lt;Erabiltzailearen izena&gt; zatiaren aurretik dagoen testua beste bat izan daiteke zenbait sistematan. Aplikazioaren bide-izen osoa %APPDATA% ingurune-aldagaiaren bidez atzitzen da.</dd>
+		<dt>Linux/Solaris/FreeBSD-n:</dt>
+		<dd><strong>&lt;Erabiltzailearen Home-a&gt;/.omegat</strong> (.omegat direktorio bat da, aurretik daukan puntuak esan nahi du direktorioa ikusezina dela <code>ls -a</code> edo pareko komando bat erabili ezean.)</dd>
+		<dt>MacOSX-en:</dt>
+		<dd><strong>&lt;Erabiltzailearen Home-a&gt;/Library/Preferences/OmegaT</strong></dd>
+	</dl>
+
+
+	<a name="user_list"></a>
+	<h2>Erabiltzailearen fitxategien zerrenda</h2>
+
+	<p>Erabiltzailearen fitxategiak hauek dira:</p>
+
+	<dl>
+		<dt>log.txt</dt>
+		<dd>Fitxategi honek OmegaT erabiltzean sortutako Java-ren akats-mezuak gordetzen ditu. OmegaT modu bitxian ari dela uste baduzu, garrantzitsua da fitxategi hau edo bertako zatirik esanguratsuenak <a href="website.html">arazoen jakinarazpen</a> batean bidaltzea OmegaT-ren taldeari.</dd>
+		<dt>omegat.prefs</dt>
+		<dd>Fitxategi hau XML formatuko fitxategia da. Bertan interfazean ageri diren ezarpen-aukera guztiak eta leihoen kokapenari buruzko datuak gordetzen dira.</dd>
+		<dt>filters.conf</dt>
+		<dd>Fitxategi hau XML formatuko fitxategia da. <a href="fileFilters.html">Fitxategi-iragazkien</a> hobespenetan ezarritako datu guztiak gordetzen ditu.</dd>
+		<dt>segmentation.conf</dt>
+		<dd>Fitxategi hau XML formatuko fitxategia da. <a href="segmentation.html">Esaldien segmentazioaren</a> hobespenetan ezarritako datu guztiak gordetzen ditu.</dd>
+	</dl>
+
+<hr>
+
+	<a name="applications"></a>
+	<h1>Aplikazioaren fitxategiak</h1>
+
+	<p>OmegaT SourceForge-ko gunetik deskarga daitekeen pakete gisa banatzen da. Kapitulu honetan <a href="installingAndRunning.html#Other_systems">plataformarekiko independentea den paketeaz</a> arituko gara, aplikazioa Java forma estandarrean daukan paketeaz alegia. Beste paketeek fitxategi gehiago dauzkate: Linux-erako <code>.tar</code> pakete bat, Windows-erako instalatzaile bat (JRE batekin edo hori gabe), MacOSX-erako instalatzaile bat eta garatzaileentzako iturburu-kodearen pakete bat.</p>
+	
+	<p>Plataformarekiko independentea den pakete hau Java 1.4.2 Runtime Environment delakoa daukan <strong>edozein</strong> plataformatan erabili daiteke.</p>
+
+	<p>Plataformarekiko independentea den pakete hau fitxategi trinko gisa banatzen da, erabiltzaileak berau desktrinkotu dezan instalazioa egin nahi duen direktorioan. Destrinkotzea burutzeko, klikatu bi aldiz paketearen gainean. Destrinkotu ondoren, direktorio bat sortzen da OmegaT-ren fitxategiekin:</p>
+
+	<dl>
+		<dt>Deskargatutako fitxategia:</dt>
+		<dd>OmegaT_1.7.3_Without_JRE.zip</dd>
+		<dt>Destrinkotutako direktorioa:</dt>
+		<dd>/OmegaT_1.7.3_Without_JRE/</dd>
+	</dl>
+
+	<a name="application_list"></a>
+	<h2>Aplikazioaren fitxategien zerrenda</h2>
+
+	<p>OmegaT-ren direktorioak ondoko fitxategiak edukiko ditu:</p>
+
+	<dl>
+		<dt>/OmegaT_1.7.3_Without_JRE/</dt>
+		<dd>
+			<dl>
+				<dt>/docs/</dt>
+				<dd>Erabiltzailearen eskuliburuaren fitxategiak direktorio honetan daude. Interneteko nabigatzaile batean ireki daitezke, dokumentazio honen kanpo-estekak erabili nahi badira.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>/images/</dt>
+				<dd>Hemen ikonoak eta logoak daude gordeta.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>/lib/</dt>
+				<dd>Java fitxategiak hemen daude gordeta. Ezinbestekoak dira OmegaT-ren funtzionamendua zuzena izan dadin.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>join.html</dt>
+				<dd>Hau HTML fitxategi arrunt bat da: hura nabigatzaile batean ireki ondoren, Yahoo Groups-en dagoen OmegaT-ren erabiltzaileen taldera eramaten du. Taldearekin bat egitea ez da beharrezkoa, baina zerbitzu gehiago eskuratzeko bidea da, hala nola zenbait fitxategi eta inkesta atzitzeko eta OmegaT-ri lotutako eztabaidetan parte hartzeko. Taldearen fitxategiak publikoak dira eta haiek kontsultatzeko ez da beharrezkoa taldean izena ematea.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>changes.txt</dt>
+				<dd>Bertsio honen eta aurreko bertsioen artean egon diren aldaketen zerrenda xehea.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>license.txt</dt>
+				<dd>The GNU GENERAL PUBLIC LICENSE. Lizentzia honek OmegaT-rekin zenbait gauza egitea ahalbidetzen du, hura moldatu eta birbanatzea barne. OmegaT aldatu edo banatzeko nahia badaukazu, irakurri ondo dokumentu hau eta ezer egin baino lehen, segurtatu inplikazio guztiez jabetzen zarela. Zalantzarik badaukazu, galdetu zuzenean taldeko kideei, bai posta bat bidaliz SourceForge-ko gunera, bai posta publiko bat bidaliz erabiltzaileen taldera.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>doc-license.txt</dt>
+				<dd>The GNU GENERAL PUBLIC LICENSE. Lizentzia honek dokumentazioa babesten du. Ikus goian.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>readme.txt</dt>
+				<dd>Fitxategi hau oso garrantzitsua da eta OmegaT-rekin lanean hasi baino lehen irakurri beharko zenuke. OmegaT-ri buruzko informazio orokorra dauka, informazio gehiago non aurkitu, nola lagundu, etab. Hainbat hizkuntzatara itzulita dago.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>OmegaT</dt>
+				<dd>Hau bi lerro dituen testu-fitxategi normal bat da:<br> <code>#!/bin/bash</code><br> <code>java -jar OmegaT.jar $*</code><br> Fitxategi hau erabilgarria izan daiteke <a href="installingAndRunning.html#command_line">komando-lerrotik</a> exekutzeko moduan jartzen baduzu (<code>chmod +x OmegaT</code>), <code>/OmegaT_1.7.3/</code> direktorioan zaudela egiaztatu ondoren. Aurrerantzean, OmegaT abiarazteko aski izango da fitxategi honi deitzea komando-lerrotik.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>OmegaT.bat</dt>
+				<dd>Hau lerro bakarra duen testu-fitxategi normal bat da:<br> <code>java -jar OmegaT.jar %*</code><br> OmegaT Windows-en <a href="installingAndRunning.html#command_line">komando-lerrotik</a> abiarazteko erabili daiteke.</dd>
+			</dl>
+		</dd>
+		<dd>
+			<dl>
+				<dt>OmegaT.jar</dt>
+				<dd>Fitxategi hau aplikazio nagusia da. OmegaT abiarazteko, fitxategi hau komando-lerrotik deitu daiteke edo fitxategi-kudeatzailetik abiarazi daiteke (gainean bi aldiz klikatuz).</dd>
+			</dl>
+		</dd>
+	</dl>
+
+<hr>
+
+	<p><a href="legalNotices.html">Legezko oharrak</a></p>
+</body>
+</html>

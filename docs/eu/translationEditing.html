@@ -1,47 +1,54 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Itzulpenaren edizioa - OmegaT 1.6.2 erabiltzailearen eskuliburua</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Itzulpenaren edizioa - OmegaT 1.7.3 erabiltzailearen eskuliburua</title>
 </head>
 <body>
 
-<h1>Itzulpenaren edizioa</h1>
+	<h1>Edizio-eremuaren portaera</h1>
 
-<p>Itzulpena egiteko, segmentu batetik beste batera mugitzen zara eta segmentu bakarra editatzen duzu aldi bakoitzean. Segmentu artean mugitzean, gertatu daiteke edizio-eremua testuz betetzen dela. Esaterako, itzulitako segmentu batera mugitzen zarenean, edizio-eremua itzulpenarekin betetzen da eta aurretik egin duzun itzulpen hori berriro editatu dezakezu.</p>
+	<ul>
+		<li><a href="#auto_insert">Parekatzeen txertatze automatikoa</a></li>
+		<li><a href="#validation">Aldatuko ez diren segmentuak</a></li>
+	</ul>
 
-<p>Bestalde, itzuli gabe dagoen segmentu batera mugitzen zarenean, OmegaT-k edizio-eremua zuk adierazitako testuarekin betetzen du, nahi duzun eran editatu dezazun.</p>
 
-<ul>
-   <li>OmegaT-k automatikoki sorburu-testuarekin bete dezake edizio-eremua. Hau oso erabilgarria da ukitu gabe utzi behar dituzun izen berezi edo ikur asko dituen testua itzultzen ari bazara. Joan <strong>Aukerak -&gt; Editatu portaera</strong> koadrora eta baieztatu <strong>Sorburu-testua</strong> aukera-botoia hautatua dagoela.</li>
+	<p>Edizio-eremuak ondoko portaera izan dezan ezarri daiteke:</p>
+	
+	<ul>
+		<li>Txertatu automatikoki eskuragarri dagoen parekatzerik onena</li>
+		<li>Hartu itzulitzat jatorrizkoaren berdinak diren segmentuak</li>
+	</ul>
+	
+	<hr>
+	
+	<a name="auto_insert" id="auto_insert"></a>
+	<h1>Parekatzeen txertatze automatikoa</h1>
+	
+	<p>Itzulpena egiteko, segmentu batetik beste batera mugitzen zara eta uneko segmentua editatzen duzu aldi bakoitzean. Segmentu artean mugitzean, edizio-eremua itzulpenarekin edo sorburu-testuarekin bete dadila erabaki dezakezu.</p>
+	
+	<p><strong>Aukerak → Editatu portaera</strong> atalean OmegaT-k ondoko aukerak eskaintzen dizkizu:</p>
 
-   <li>OmegaT-k edizio-eremua hutsik utzi dezake. Aukera honi esker, ez duzu sorburu-testua kendu beharrik itzulpena egiteko eta tekla-sakatze pare bat (<code>Ktrl+A</code> eta <code>Del</code>) aurreztuko duzu. Joan &lt;s3&gt;Aukerak -&gt; Editatu portaera</strong> koadrora eta hautatu <strong>Utzi segmentua hutsik</strong> aukera-botoia.</li>
-
-   <li>OmegaT-k itzultzera zoazen katearen antzekoena den itzulpena txertatu dezake. Joan <strong>Aukerak -&gt; Editatu portaera</strong> koadrora, markatu <strong>Txertatu parekatze lausorik onena</strong> bandera eta doitu parekatzeak izan behar duen gutxieneko antzekotasuna parekatzea automatikoki txertatu dadin.</li>
-</ul>
-
-<p>Aipatu diren aukerak OmegaT-n ezartzeko, joan <strong>Aukerak -&gt; Editatu portaera</strong> koadrora, eta...</p>
-
-<ul>
-   <li>Baieztatu <strong>Sorburu-testua</strong> aukera-botoia hautatua dagoela. Portaera lehenetsia botoi hori hautatua egotea da, beraz seguraski horrela egongo da.</li>
-
-   <li>Hautatu <strong>Utzi segmentua hutsik</strong> aukera-botoia.</li>
-
-   <li>Markatu <strong>Txertatu parekatze lausorik onena</strong> bandera eta doitu parekatzeak izan behar duen gutxieneko antzekotasuna parekatzea automatikoki txertatu dadin. Nahi izanez gero, txertatutako parekatze lausoak bereizteko aurrizkia aldatu dezakezu.</li>
-</ul>
-
-<p>... eta klikatu <strong>Onartu</strong>.</p>
-
-<a name="Text_To_Store"></a>
-<h2>Testu aldaezina</h2>
-
-<p>Itzultzen ari zaren dokumentuak ukitu gabe utzi behar diren izen bereziak edo ikurrak eduki ditzake. Bi estrategia daude testu aldaezina daukaten segmentuekin lan egiteko.</p>
-
-<p>Bata, aipatu segmentuak itzuli gabe uztea. Orduan, OmegaT-k ulertuko du segmentu hauek oraindik ez direla aztertu. Itzulpena berrikusten bada, OmegaT-k berriro irekiko ditu segmentuok, eta adi ez bazaude, itzuli egingo dituzu, nahiz eta testu aldaezina izan. Hau aukera lehenetsia da.</p>
-
-<p>Bestea, OmegaT-ri itzulpena gordetzeko esan diezaiokezu, nahiz eta helburua eta sorburua testu bera izan. Orduan, OmegaT-k testua jada aztertu duzula ulertuko du eta ez du berriro irekiko. Joan <strong>Aukerak -&gt; Editatu portaera</strong> koadrora eta markatu <strong>Onartu itzulpena sorburuaren berdina izan dadin</strong> bandera.</p>
+	<dl>
+		<dt><strong>egSorburu-testua</strong></dt><dd>OmegaT-k automatikoki sorburu-testuarekin bete dezake edizio-eremua. Hau oso erabilgarria da ukitu gabe utzi behar dituzun izen berezi edo ikur asko dituen testua itzultzen ari bazara.</dd>
+		<dt><strong>Utzi segmentua hutsik</strong></dt><dd>OmegaT-k edizio-eremua hutsik utziko du. Aukera honi esker, ez duzu sorburu-testua kendu beharrik itzulpena egiteko eta tekla-sakatze pare bat (<code>Ktrl+A</code> eta <code>Del</code>) aurreztuko duzu.</dd>
+		<dt><strong>Txertatu parekatze lausorik onena</strong></dt><dd>OmegaT-k itzultzera zoazen katearen antzekoena den itzulpena txertatuko du, kasu honetan finkatu duzun antzekotasun-maila gainditzen badu.</dd>
+	</dl>
 
 <hr>
-<p><a href="legalNotices.html" title="Legezko oharrak">Legezko oharrak</a></p>
 
+	<a name="validation" id="validation"></a>
+	<h1>Aldatuko ez diren segmentuak</h1>
+
+	<p>Itzultzen ari zaren dokumentuak ukitu gabe utzi behar diren izen bereziak edo ikurrak eduki ditzake. Bi estrategia daude testu aldaezina daukaten segmentuekin lan egiteko.</p>
+
+	<p>Bata, aipatu segmentuak itzuli gabe uztea. Orduan, OmegaT-k ulertuko du segmentu hauek oraindik ez direla aztertu. Itzulpena berrikusten bada, OmegaT-k berriro irekiko ditu segmentuok, eta adi ez bazaude, itzuli egingo dituzu, nahiz eta testu aldaezina izan. Hau aukera lehenetsia da.</p>
+
+	<p>Bestea, OmegaT-ri itzulpena gordetzeko esan diezaiokezu, nahiz eta helburua eta sorburua testu bera izan. Orduan, OmegaT-k testua jada aztertu duzula ulertuko du eta ez du berriro irekiko. Joan <strong>Aukerak → Editatu portaera</strong> koadrora eta markatu <strong>Onartu itzulpena sorburuaren berdina izan dadin</strong> bandera.</p>
+
+	<hr>
+
+	<p><a href="legalNotices.html">Legezko oharrak</a></p>
 </body>
 </html>

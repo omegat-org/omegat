@@ -1,216 +1,195 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Formázott szöveg kezelése - OmegaT 1.6.2 felhasználói kézikönyv</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Formázott szöveg kezelése - OmegaT 1.7.3 felhasználói kézikönyv</title>
 </head>
+
 <body>
-
-<h1>Formázott szöveg kezelése</h1>
-
-<h2>Tartalomjegyzék</h2>
-
-<ul type="none">
-   <li>1. <a href="#Formatted_Text_in_OmegaT">Formázott szöveg az OmegaT-ben</a>
-
-      <ul type="none">
-         <li>1.1. <a href="#Tag_naming">Jelek elnevezése</a></li>
-         <li>1.2. <a href="#Tag_numbering">Jelek számozása</a></li>
-         <li>1.3. <a href="#Pairs_and_singletons">Páros és egyedülálló jelek</a></li>
-         <li>1.4. <a href="#Tags_and_sentence_segmenting">Jelek és mondatdarabolás</a></li>
-
-         <li>1.5. <a href="#Tag_operations">Műveletek a jelekkel</a>
-
-            <ul type="none">
-               <li>1.5.1. <a href="#Tag_group_duplication">Jelcsoport másolása</a></li>
-               <li>1.5.2. <a href="#Tag_group_deletion">Jelcsoport törlése</a></li>
-               <li>1.5.3. <a href="#Tag_group_order_modification">Jelcsoport sorrendjének módosítása</a></li>
-               <li>1.5.4. <a href="#Tag_group_nesting">Jelcsoportok egymásba ágyazása</a></li>
-            </ul>
-         </li>
-
-         <li>1.6. <a href="#Tag_group_overlapping">Egymást átfedő jelcsoportok</a></li>
-         <li>1.7. <a href="#Tag_group_validation">Jelcsoportok ellenőrzése</a></li>
-         <li>1.8. <a href="#Hints_for_tags_management">Ötletek a jelölők kezeléséhez</a></li>
-         <li>1.9. <a href="#Important">Fontos</a></li>
-      </ul>
-   </li>
-</ul>
-
-<a name="Formatted_Text_in_OmegaT"></a>
-<h2>Formázott szöveg az OmegaT-ben</h2>
-
-<p>A forrásszövegben lévő formázást rendszerint elő kell állítani a fordításban is. Az OmegaT a támogatott (jelenleg: DocBook, HTML, XHTML, Open Document, OpenOffice.org) állományokban a sorok közötti formázási adatokat jelölők formájában jeleníti meg. A rendszer a jeleket a szövegrészek hasonlóságának megállapítása során rendszerint figyelmen kívül hagyja. A fordításban megőrzött jeleket a célnyelvi dokumentum is tartalmazni fogja.</p>
-
-<a name="Tag_naming"></a>
-<h3>Jelek elnevezése</h3>
-
-<p>A jelölők egytől háromig terjedő betűből és egy számból állnak. Az egyedi számoknak köszönhetően az egymásnak megfelelő jelölők csoportba foglalhatók, az azonos jelölőcsoporthoz tartozó, de voltaképpen különböző jelölők pedig megkülönböztethetők.</p>
-
-<p>A betűk nem feltétlenül tükrözik a jelölő által képviselt formázás értékét (pl. vastag, dőlt stb.)</p>
-
-<a name="Tag_numbering"></a>
-<h3>Jelölők számozása</h3>
-
-<p>A jelölők számozása <strong>jelölőcsoportonként</strong> növekvő.</p>
-
-<p>A "jelölőcsoport" jelenthet egyetlen jelölőt (pl. <code>&lt;br1&gt;</code>) önmagában, vagy két, egymással párt alkotó jelölőt (pl. <code>&lt;f3&gt;</code> és <code>&lt;/f3&gt;</code>).</p>
-
-<p>Egy szövegrészen belül az első csoport (páros vagy egyedülálló jelölő) a <strong>0</strong> számot kapja, a második a <strong>1</strong> számot stb.</p>
-
-<p>Az alábbi példában három jelölőcsoport fordul elő (egy páros, egy egyedülálló, majd ismét egy páros), a második példában csak egy (páros) jelölőcsoport fordul elő.</p>
-
-<a name="Pairs_and_singletons"></a>
-<h3>Páros és egyedülálló jelölők</h3>
-
-<p>A jelölők egyedülállók vagy párosak lehetnek.</p>
-
-<p>
-Az <strong>egyedülálló jelölők</strong> a környező szöveget nem befolyásoló formázási információkat tartalmaznak (például egy plusz szóköz vagy egy sortörés).</p>
-
-<pre>   <strong>&lt;segment 2132&gt;</strong>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;<strong>&lt;end segment&gt;</strong></pre>
-
-<p>
-<code><strong>&lt;br1&gt;A </strong></code> egyedülálló jelölő és nem befolyásolja a környező szöveget.</p>
-
-<p>
-A <strong>páros jelölők</strong> általában olyan stilizálási információkat tartalmaznak, amelyek a jelölőpár nyitó és záró eleme közötti részre érvényesek. Bármilyen változás éri a jelölőpárt, a nyitó jelölőnek mindig meg kell előznie a lezáró jelölőt.</p>
-
-<pre>   <strong>&lt;segment 3167&gt;</strong>Naplófájl (&lt;f1&gt;log.txt&lt;/f1&gt;) a műveletek és hibák nyomon követéséhez.<strong>&lt;end segment&gt;</strong></pre>
-
-<p>
-A <code><strong>&lt;f1&gt;</strong></code> és a <code><strong>&lt;/f1&gt;</strong></code> egy jelölőpárt alkot és a <code><strong>log.txt</strong></code> szövegrészre vonatkozik.</p>
-
-<a name="Tags_and_sentence_segmenting"></a>
-<h3>Jelölők és mondatdarabolás</h3>
-
-<p>Az OmegaT a jelölőket a mondatok darabolása előtt állítja elő. A darabolási szabályoktól függően úgy tűnhet, hogy a jelölők nem követik a fenti számozási és csoportosítási szabályokat.</p>
-
-<pre>   <strong>&lt;segment 1554&gt;</strong> &lt;c0&gt;Előtte: \. Utána: \s&lt;/c0&gt;<br> &lt;b2&gt;Note:&lt;/b2&gt;<br>
-A "\." jelentése a "." karakter&lt;br3&gt; "\s" means any white space character <strong>&lt;end segment&gt;</strong></pre>
-
-<p>Úgy tűnik, itt nincs gond. Ha a szövegrészre a vonatkozó darabolási alapszabályt alkalmazzuk (az OmegaT alapbeállítása szerint), akkor a következő eredményt kapjuk:</p>
-
-<pre>   <strong>&lt;segment 1990&gt;</strong> &lt;c0&gt;Előtte: \. <strong>&lt;end segment&gt;</strong>
-
-   <strong>&lt;segment 1991&gt;</strong> Utána: \s&lt;/c0&gt;&lt;br1&gt; <strong>&lt;end segment&gt;</strong>
-
-   <strong>&lt;segment 1992&gt;</strong> &lt;b2&gt;Megjegyzés:&lt;/b2&gt; A "\." jelentése a "." karakter&lt;br3&gt;<strong>&lt;end segment&gt;</strong>
-
-   <strong>&lt;segment 1993&gt;</strong> A "\s" jelentése a szóköz vagy a tabulátor <strong>&lt;end segment&gt;</strong></pre>
-
-<p>(Az alkalmazott mondatdarabolási szabályok: <i>pontot és szóközt követő szövegrész</i> és <i>sortörést követő szövegrész</i>.)</p>
-
-<p>
-Here, we see that segments taken one by one do not respect the pairing and numbering rules: <code><code></code> and <code>&lt;/co&gt;</code> should be paired in the same segment, but are separated by the segmentation rules.
-</p>
-
-<p>Bizonyos esetekben ez még a fordításban is gondot okozhat, ha a jelölőket a célnyelvi szórend érdekében el kell mozdítani (lásd alább: <a href="#Tag_operations" title="Formázott szöveg kezelése">A jelölőkkel végzett műveletek</a>).</p>
-
-<a name="Tag_operations"></a>
-<h3>Műveletek a jelölőkkel</h3>
-
-<p>A jelölőkkel óvatosan kell bánni. Ha véletlenül módosulnak, az akár az egész fordításra kihathat. A legrosszabb esetben akár az is előfordulhat, hogy az állományt nem lehet megnyitni; ez főleg OpenOffice.org állományok esetén fordul elő.</p>
-
-<a name="Tag_group_duplication"></a>
-<h4>Jelölőcsoport másolása</h4>
-
-<p>A jelölőcsoportok másolásához mindössze át kell őket másolnia a kívánt helyre. Ne feledje, hogy jelölőpár esetén a nyitó jelölőnek mindig meg kell előznie a lezáró jelölőt.</p>
-
-<p>Az átmásolt csoport általi formázás a másolás helyén megismétlődik.</p>
-
-<p>Például:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Ez a formázás&lt;/f0&gt; itt megismétlődik.<strong>&lt;end segment&gt;</strong></pre>
-
-<p>Átmásolás után:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Ce format&lt;/f0&gt; a été &lt;f0&gt;copié ici&lt;/f0&gt;.<strong>&lt;end segment&gt;</strong></pre>
-
-<a name="Tag_group_deletion"></a>
-<h4>Jelcsoport törlése</h4>
-
-<p>Egy jelcsoport törlése a szövegrészből való eltávolításával érhető el. Ne feledje, hogy egy jelcsoportnak mind a nyitó, mind a lezáró jelét törölni kell ahhoz, hogy a formázás nyoma teljesen eltűnjön, különben a lefordított állomány sérülhet és megnyithatatlanná válhat.</p>
-
-<p>A jelölőcsoport törlésével a hozzá tartozó formázás törlődik a fordításból.</p>
-
-<p>Például:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Ez a formázás&lt;/f0&gt; törlődik.<strong>&lt;end segment&gt;</strong></pre>
-
-<p>Törlés után:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>Ce format a été effacé.<strong>&lt;end segment&gt;</strong></pre>
-
-<a name="Tag_group_order_modification"></a>
-<h4>Jelölőcsoport sorrendjének módosítása</h4>
-
-<p>Ha egy jelölőcsoport sorrendjét a célnyelvi mondatszerkezet érdekében módosítja, oda kell azt áthelyeznie, ahol annak a fordításban kell szerepelnie.</p>
-
-<p>A formázás a hozzá kapcsolódó részre lesz érvényes.</p>
-
-<p>Például:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Ez a formázás&lt;/f0&gt; és &lt;f1&gt;ez a formázás&lt;/f1&gt; felcserélődik.<strong>&lt;end segment&gt;</strong></pre>
-
-<p>A sorrend módosítása után:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f1&gt;Ce format&lt;/f1&gt; et &lt;f0&gt;ce format&lt;/f0&gt; ont été inversés.<strong>&lt;end segment&gt;</strong></pre>
-
-<a name="Tag_group_nesting"></a>
-<h4>Jelcsoportok egymásba ágyazása</h4>
-
-<p>A jelölőcsoportok sorrendjének módosítása következtében az egyik jelölőcsoport egy másikba ágyazódhat. Erre akkor van lehetőség, ha a külső jelölőcsoport teljes egészében magában foglalja a bezárt jelölőcsoportot. Különös figyelmet érdemel az olyan jelölőcsoportok beágyazása, amelyek nem teljesen kerülnek a külső jelölőcsoport belsejébe, mert a lefordított állomány sérülhet és megnyithatatlanná válhat.</p>
-
-<p>A bezárt szövegrészre mind a két formázás érvényesül.</p>
-
-<p>Például:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Ez a formázás&lt;/f0&gt; &lt;f1&gt;itt&lt;/f1&gt; lesz beágyazva.<strong>&lt;end segment&gt;</strong></pre>
-
-<p>Beágyazás után:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Le format &lt;f1&gt;ici&lt;/f1&gt;&lt;/f0&gt; a été emboité dans le premier format.<strong>&lt;end segment&gt;</strong></pre>
-
-<a name="Tag_group_overlapping"></a>
-<h3>Egymást átfedő jelcsoportok</h3>
-
-<p>A jelölőcsoportok átfedése a jelölőcsoportok hibás használatából fakad, és eredményeként a lefordított állomány mindenképpen sérülni fog és megnyithatatlan lesz.</p>
-
-<p>Például:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Ez a formázás&lt;/f0&gt; &lt;f1&gt;itt&lt;/f1&gt; összekavarodik.<strong>&lt;end segment&gt;</strong></pre>
-
-<p>Hibás jelölőkezelést követően:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;ez a formázás &lt;f1&gt;itt&lt;/f0&gt; &lt;/f1&gt;rendesen összekavarodott.<strong>&lt;end segment&gt;</strong></pre>
-
-<a name="Tag_group_validation"></a>
-<h3>Jelölőcsoportok ellenőrzése</h3>
-
-<p>A jelölők ellenőrzése funkció (<a href="userInterface.html#Tag_Validation" title="A felhasználói felület">Jelölő-ellenőrzés</a>) felderíti a (szándékosan vagy véletlenül) felcserélt jelölőket és kijelzi az érintett szövegrészeket. Használata során egy párbeszédablak nyílik meg, benne a gyaníthatóan hibás vagy széttagolt jelölőkkel.</p>
-
-<p>Ezzel a funkcióval fellelhetők a lefordított és jelölőket tartalmazó szövegben rejtőző hibák. Ez a gond gyakran jelentkezik OpenDocument vagy OpenOffice.org állományokban, amelyek a fordítás során létrejövő jelölőhibák miatt nem nyithatók meg. A jelölők rendbe rakása és a célszöveg újbóli előállítása gyakran elegendő a hiba orvoslásához.</p>
-
-<a name="Hints_for_tags_management"></a>
-<h3>Ötletek a jelölők kezeléséhez</h3>
-
-<p>A jelölők rendszerint az eredeti szöveg valamilyen formázását mutatják. <strong>Az eredeti szöveg egyszerűsítése</strong> számottevően csökkenti a jelölők számát. Ha lehetséges, célszerű megfontolni a használt betűtípusok, -méretek, -színek egységesítését a fordítás egyszerűbbé tétele és a jelölők használatával összefüggő hibák mennyiségének a csökkentése érdekében.</p>
-
-<p>Olvassa el a <a href="#Tag_operations" title="Formázott szöveg kezelése">Műveletek a jelölőkkel</a> részt és tekintse át, milyen műveleteket hajthat végre velük.</p>
-
-<p>Ne feledje, hogy ha zavarják a jelölők, amúgy pedig nem elengedhetetlenül fontosak az adott munka szempontjából, akkor nagyban könnyíti a fordítást, ha nagy részüket eltávolítja az eredeti szövegből.</p>
-
-<p>Ha szeretné látni a szövegben a jelölőket, de a fordításban nem lesz rájuk szüksége, dönthet úgy, hogy kihagyja őket a fordításból. Ez esetben <strong>gondosan ügyeljen a jelölőkre</strong>, mert ha elfelejti kitörölni egy jelölőpár egyik elemét, a formázás félresikeredhet és a lefordított OpenOffice.org dokumentumot nem fogja tudni megnyitni.</p>
-
-<p>Mivel a jelölők magában a szövegben jelennek meg, egy <a href="segmentation.html" title="Forrásszöveg darabolása">darabolási szabállyal</a> elérhető, hogy csökkenjen a szövegrészekben lévő jelölők száma. Ennek a funkciónak a használatát kezdő felhasználóknak nem ajánljuk.</p>
-
-<a name="Important"></a>
-<h3>Fontos</h3>
-
-<p>Az OmegaT még nem teljesen automatikusan kezeli a formázási hibák felderítését, ezért nem jelez, ha hibát ejt vagy módosítja a célszöveg formázását a nyelv igényei szerint. Esetenként a lefordított állomány hibásan jelenik meg, OpenDocument / OpenOffice.org fájlok esetén pedig akár meg sem nyílik.</p>
+	<h1>Formázott szöveg kezelése</h1>
+
+	<ul>
+		<li><a href="#intro">Formázó címkék</a>
+			<ul>
+				<li><a href="#naming">Címkék elnevezése</a>
+				</li><li><a href="#numbering">Címkék számozása</a>
+				</li><li><a href="#pairs">Páros és egyedül álló címkék</a>
+			</li></ul>
+		</li>
+		<li><a href="#tag_segmenting">Címkék és mondatdarabolás</a></li>
+		<li><a href="#tag_operation">Műveletek a címkékkel</a>
+			<ul>
+				<li><a href="#duplication">Címkecsoport másolása</a>
+				</li><li><a href="#deletion">Címkecsoport törlése</a>
+				</li><li><a href="#order">Címkecsoport sorrendjének módosítása</a>
+				</li><li><a href="#nesting">Címkecsoportok egymásba ágyazása</a>
+			</li></ul>
+		</li>
+		<li><a href="#tag-overlapping">Egymást átfedő címkecsoportok</a></li>
+		<li><a href="#tag_validation">Címkecsoportok ellenőrzése</a></li>
+		<li><a href="#tag_hints">Ötletek a címkék kezeléséhez</a></li>
+	</ul>
+
+	<p>A forrásszövegben lévő formázást rendszerint elő kell állítani a fordításban is. Az OmegaT a támogatott (jelenleg: DocBook, HTML, XHTML, Open Document, OpenOffice.org típusú) állományokban a szövegen belüli formázási információkat címkék formájában jeleníti meg. A rendszer a címkéket a szövegrészek hasonlóságának megállapítása során rendszerint figyelmen kívül hagyja. A fordításban megőrzött címkéket a célnyelvi dokumentum is tartalmazni fogja.</p>
 
 <hr>
-<p><a href="legalNotices.html" title="Jogi tudnivalók">Jogi tudnivalók</a></p>
 
+	<a name="intro" id="intro"></a>
+	<h1>Formázó címkék</h1>
+
+
+	<a name="naming" id="naming"></a>
+	<h2>Címkék elnevezése</h2>
+
+	<p>A címkék egytől háromig terjedő betűből és egy számból állnak. Az egyedi számoknak köszönhetően az egymásnak megfelelő címkék csoportba foglalhatók, az azonos címkecsoporthoz tartozó, de voltaképpen különböző címkék pedig megkülönböztethetők. A betűk nem feltétlenül tükrözik a címke által képviselt formázás értékét (pl.</p>
+
+	<a name="numbering" id="numbering"></a>
+	<h2>Címkék számozása</h2>
+
+	<p>A címkék számozása <strong>címkecsoportonként</strong> növekvő. A "címkecsoport" jelenthet egyetlen címkét (pl. &lt;c0&gt;&lt;br1&gt;&lt;/c0&gt;) önmagában, vagy két, egymással párt alkotó címkét (pl. <code>&lt;f3&gt;</code> és &lt;c2&gt;&lt;/f3&gt;&lt;/c2&gt;). Egy szövegrészen belül az első csoport (páros vagy egyedül álló címke) a 0 számot kapja, a második az 1 számot stb. Az alábbi első példában három címkecsoport fordul elő (egy páros, egy egyedül álló, majd ismét egy páros), a második példában csak egy (páros) címkecsoport szerepel.</p>
+
+	<a name="pairs" id="pairs"></a>
+	<h2>Páros és egyedül álló címkék</h2>
+
+	<p>A címkék egyedül állók vagy párosak lehetnek. Az <strong>egyedül álló címkék</strong> a környező szöveget nem befolyásoló formázási információkat tartalmaznak (például egy plusz szóköz vagy egy sortörés).</p>
+
+	<pre>	<strong>&lt;2132. egység&gt;</strong><font color="red">&lt;b0&gt;</font>&lt;Ctr+N&gt;<font color="red">&lt;/b0&gt;</font>, <font color="red">&lt;br1&gt;</font><font color="red">&lt;b2&gt;</font>&lt;Enter&gt;<font color="red">&lt;/b2&gt;</font><strong>&lt;egység vége&gt;</strong></pre>
+
+	<p><code><strong><font color="red">&lt;br1&gt;A </strong></code> egyedül álló címke és nem befolyásolja a környező szöveget. A <strong>páros címkék</strong> általában olyan stilizálási információkat tartalmaznak, amelyek a címkepár nyitó és záró eleme közötti részre érvényesek. Bármilyen változás éri a címkepárt, a nyitó címkének mindig meg kell előznie a lezáró címkét.</p>
+
+	<pre>	<strong>&lt;3167. egység&gt;</strong>Naplófájl (<font color="red">log.txt</font>) a műveletek és hibák nyomon követéséhez.&lt;s1&gt;&lt;egység vége&gt;&lt;/s1&gt;</pre>
+
+	<p>A <code><strong>&lt;f1&gt;</strong></code> és a &lt;c2&gt;&lt;s3&gt;&lt;/f1&gt;&lt;/s3&gt;&lt;/c2&gt; egy címkepárt alkot és a &lt;c4&gt;&lt;s5&gt;log.txt&lt;/s5&gt;&lt;/c4&gt; szövegrészre vonatkozik.</p>
+
+<hr>
+
+	<a name="tag_segmenting" id="tag_segmenting"></a>
+	<h1>Címkék és mondatdarabolás</h1>
+
+	<p>Az OmegaT a címkéket a mondatok darabolása előtt állítja elő. A darabolási szabályoktól függően úgy tűnhet, hogy a címkék nem követik a fenti számozási és csoportosítási szabályokat.</p>
+
+	<pre>	<strong>&lt;1554. egység&gt;</strong> <font color="red">&lt;f0&gt;</font>Előtte: \. Utána: \s<font color="red">&lt;/f0&gt;</font><strong>&lt;egység vége&gt;</strong></pre>
+
+	<p>Úgy tűnik, itt nincs gond. Ha a szövegrészre a vonatkozó darabolási alapszabályt alkalmazzuk (az OmegaT alapbeállítása szerint), akkor a következő eredményt kapjuk:</p>
+
+	<pre>	<strong>&lt;1990. egység&gt;</strong> <font color="red">&lt;f0&gt;</font>Előtte: \. <strong>&lt;egység vége&gt;</strong>
+	<strong>&lt;1991. egység&gt;</strong> Utána: \s<font color="red">&lt;/f0&gt;</font><strong>&lt;egység vége&gt;</strong>
+	</pre>
+
+	<p>Az alkalmazott szövegdarabolási szabályok: <i>pontot és szóközt követő szövegrész</i>. A fenti példában az látható, hogy a szövegrészek egyenként nincsenek tekintettel a párosítás és a számozás szabályaira: a <code><font color="red">&lt;f0&gt;</font></code> és a <code><font color="red">&lt;/f0&gt;</font></code> az adott szövegrészen belül párosítandó lenne, de a darabolási szabályok elválasztják őket. Bizonyos esetekben a fordításban is gondot okozhat, ha a címkéket a célnyelvi szórend érdekében el kell mozdítani (lásd alább: Műveletek a címkékkel).</p>
+
+<hr>
+
+	<a name="tag_operation" id="tag_operation"></a>
+	<h1>Műveletek a címkékkel</h1>
+
+	<p>A címkékkel óvatosan kell bánni. Ha véletlenül módosulnak, az akár az egész fordításra kihathat. A megfelelő hozzáállás: ne javítsuk azt, ami nem romlott el. Ugyanakkor jó tudni, mit és hogyan lehet végrehajtani.</p>
+
+	<a name="duplication" id="duplication"></a>
+	<h2>Címkecsoport másolása</h2>
+
+	<p>A címkecsoportok másolásához mindössze át kell őket másolnia a kívánt helyre. Ne feledje, hogy címkepár esetén a nyitó címkének mindig meg kell előznie a lezáró címkét. Az átmásolt csoport általi formázás a másolás helyén megismétlődik.</p>
+
+	<p>Például:</p>
+
+	<pre>	<strong>&lt;0001. egység&gt;</strong><font color="red">&lt;f0&gt;</font>Ez a formázás<font color="red">&lt;/f0&gt;</font> itt megismétlődik.<strong>&lt;egység vége&gt;</strong></pre>
+
+	<p>Átmásolás után:</p>
+
+	<pre>	<strong>&lt;0001. egység&gt;</strong><font color="red">&lt;f0&gt;</font>Ez a formázás<font color="red">&lt;/f0&gt;</font> <font color="red">&lt;f0&gt;</font>itt megismétlődik<font color="red">&lt;/f0&gt;</font>.<strong>&lt;egység vége&gt;</strong></pre>
+
+	<a name="deletion" id="deletion"></a>
+	<h2>Címkecsoport törlése</h2>
+
+	<p>Egy címkecsoportot a szövegrészből való törléssel távolíthat el. Ne feledje, hogy egy címkecsoportnak mind a nyitó, mind a lezáró címkéjét törölni kell ahhoz, hogy a formázás nyoma teljesen eltűnjön, különben a lefordított állomány sérülhet és megnyithatatlanná válhat. A címkecsoport törlésével a hozzá tartozó formázás törlődik a fordításból.</p>
+
+	<p>Például:</p>
+
+	<pre>	<strong>&lt;0001. egység&gt;</strong><font color="red">&lt;f0&gt;</font>Ez a formázás<font color="red">&lt;/f0&gt;</font> törlődik.<strong>&lt;egység vége&gt;</strong></pre>
+
+	<p>Törlés után:</p>
+
+	<pre>	<strong>&lt;0001. egység&gt;</strong>Ez a formázás törlődött.<strong>&lt;egység vége&gt;</strong></pre>
+
+	<a name="order" id="order"></a>
+	<h2>Címkecsoport sorrendjének módosítása</h2>
+
+	<p>Ha egy címkecsoport sorrendjét a célnyelvi mondatszerkezet érdekében módosítja, oda kell áthelyeznie, ahol annak a fordításban szerepelnie kell. A formázás a hozzá kapcsolódó részre lesz érvényes.</p>
+
+	<p>Például:</p>
+
+	<pre>	<strong>&lt;0001. egység&gt;</strong><font color="red">&lt;f0&gt;</font>A 0. formázás<font color="red">&lt;/f0&gt;</font> és az <font color="red"><font color="red"></font>1. formázás<font color="red"></font></font> felcserélődik.<strong>&lt;egység vége&gt;</strong></pre>
+
+	<p>A sorrend módosítása után:</p>
+
+	<pre>	<strong>&lt;0001. egység&gt;</strong><font color="red"><font color="red"></font>Az 1. formázás<font color="red"></font></font> és a <font color="red">&lt;f0&gt;</font>0. formázás<font color="red">&lt;/f0&gt;</font> helyet cserélt.<strong>&lt;egység vége&gt;</strong></pre>
+
+	<a name="nesting" id="nesting"></a>
+	<h2>Címkecsoportok egymásba ágyazása</h2>
+
+	<p>A címkecsoportok sorrendjének módosítása következtében az egyik címkecsoport egy másikba ágyazódhat. Erre akkor van lehetőség, ha a külső címkecsoport teljes egészében körbefogja a bezárt címkecsoportot. Különös figyelmet érdemel az olyan címkecsoportok beágyazása, amelyek nem teljesen kerülnek a külső címkecsoport belsejébe, mert a lefordított állomány sérülhet és megnyithatatlanná válhat. A bezárt szövegrészre mind a két formázás érvényesül.</p>
+
+	<p>Például:</p>
+
+	<pre>	<strong>&lt;0001. egység&gt;</strong><font color="red">&lt;f0&gt;</font>Az <font color="red"><font color="red"></font>1.<font color="red"></font></font> formázás<font color="red">&lt;/f0&gt;</font> a 0. formázásba ágyazódik.<strong>&lt;egység vége&gt;</strong></pre>
+
+	<p>Beágyazás után:</p>
+
+	<pre>	<strong>&lt;0001. egység&gt;</strong><font color="red">&lt;f0&gt;</font>Az <font color="red"><font color="red"></font>1.<font color="red"></font></font><font color="red">&lt;/f0&gt;</font> formázás beágyazódott a 0. formázásba.<strong>&lt;egység vége&gt;</strong></pre>
+
+<hr>
+
+	<a name="tag-overlapping" id="tag-overlapping"></a>
+	<h1>Egymást átfedő címkecsoportok</h1>
+
+	<p>A címkecsoportok átfedése a címkecsoportok hibás használatából fakad, és eredményeként a lefordított állomány mindenképpen sérülni fog és megnyithatatlan lesz. Például:</p>
+
+	<pre>	<strong>&lt;0001. egység&gt;</strong><font color="red">&lt;f0&gt;</font>Az <font color="red">&lt;/f0&gt;</font> <font color="red"><font color="red"></font>1.<font color="red"></font></font> formázás összekavarodik.<strong>&lt;egység vége&gt;</strong></pre>
+
+	<p>Hibás címkekezelést követően:</p>
+
+	<pre>	<strong>&lt;0001. egység&gt;</strong><font color="red">&lt;f0&gt;</font>Az  <font color="red"><font color="red"></font>1.<font color="red">&lt;/f0&gt;</font> <font color="red"></font></font>formázás igencsak összekutyulódott.<strong>&lt;egység vége&gt;</strong></pre>
+
+<hr>
+
+	<a name="tag_validation" id="tag_validation"></a>
+	<h1>Címkecsoportok ellenőrzése</h1>
+
+	<p>A címke-ellenőrzési funkció felderíti a (szándékosan vagy véletlenül) felcserélt címkéket és kijelzi az érintett szövegrészeket. Használata során egy párbeszédablak nyílik meg, benne a gyaníthatóan hibás vagy széttagolt címkékkel.</p>
+
+	<p>Ezzel a funkcióval fellelhetők a lefordított és címkéket tartalmazó szövegben rejtőző hibák. Ez a gond gyakran jelentkezik OpenDocument vagy OpenOffice.org állományokban, amelyek a fordítás során létrejövő jelölőhibák miatt nem nyithatók meg. A címkék rendbe rakása és a célszöveg újbóli előállítása gyakran elegendő a hiba orvoslásához.</p>
+
+	<p>Az ablak megnyitásához használja a főablakban a <code><a href="menu.html#shortcuts">Ctrl+T</a></code> gyorsbillentyűt.</p>
+	
+	<p>Az ablak háromhasábos táblázatból áll:</p>
+
+	<ul>
+		<li>egy ugrópont a szövegdarabra</li>
+		<li>az eredeti szövegdarab tartalma</li>
+		<li>a lefordított szövegdarab tartalma</li>
+	</ul>
+	
+	<p>A címkék az eredeti és a lefordított tartalom összehasonlításának megkönnyítésére kék vastag betűkkel jelennek meg.<p>Ha az ugrópontra kattint, a kurzor a szerkesztőben a szövegdarabra ugrik.</p>
+	
+	<p>Szükség esetén javítsa ki a hibát és a többi hiba kijavításához a <code><a href="menu.html#shortcuts">Ctrl+T</a></code> lenyomásával térjen vissza a címke-ellenőrzési ablakba.</p>
+
+	<p>A <a href="formattedText.html#intro">címke</a>hibák olyan, a fordításban végrehajtott <a href="formattedText.html#tag_operation">címkeműveletek</a> eredményei, amelyek az eredetihez képest eltérő címkesorrendet és számozást eredményeznek. Egyes címkeműveletek szükségesek és ártalmatlanok, míg mások gondot okoznak a lefordított dokumentum létrehozása során.</p>
+
+	<p>A címkék rendszerint az eredeti szöveg valamilyen formázását mutatják. <strong>Az eredeti szöveg egyszerűsítésével</strong> számottevően csökkenthető a címkék száma.</p>
+
+
+<hr>
+
+	<a name="tag_hints" id="tag_hints"></a>
+	<h1>Ötletek a címkék kezeléséhez</h1>
+
+	<p>A címkék rendszerint az eredeti szöveg valamilyen formázását mutatják. <strong>Az eredeti szöveg formázásának egyszerűsítésével</strong> számottevően csökkenthető a címkék száma. Ha lehetséges, célszerű megfontolni a használt betűtípusok, -méretek, -színek egységesítését a fordítás egyszerűbbé tétele és a jelölők használatával összefüggő hibák mennyiségének a csökkentése érdekében. Olvassa el a Műveletek a címkékkel c. részt és tekintse át, milyen műveleteket hajthat végre rajtuk. Ne feledje, hogy ha zavarják a címkék, amúgy pedig nem elengedhetetlenül fontosak az adott munka szempontjából, akkor nagyban könnyíti a fordítást, ha többségüket eltávolítja az eredeti szövegből.</p>
+
+	<p>Ha szeretné látni a szövegben a címkéket, de a fordításban nem lesz rájuk szüksége, dönthet úgy, hogy kihagyja őket a fordításból. Ez esetben <strong>gondosan ügyeljen a címkékre</strong>, mert ha elfelejti kitörölni egy címkepár egyik elemét, a formázás félresikeredhet és a lefordított OpenOffice.org dokumentumot nem fogja tudni megnyitni. Mivel a címkék magában a szövegben jelennek meg, egy &lt;a0&gt;darabolási szabállyal&lt;/a0&gt; elérhető, hogy csökkenjen a szövegrészekben lévő címkék száma. Ennek a funkciónak a használatát kezdő felhasználóknak nem ajánljuk.</p>
+
+	<p><strong>Fontos:</strong> Az OmegaT még nem teljesen automatikusan kezeli a formázási hibák felderítését, ezért nem jelez, ha hibát ejt vagy a célszöveg formázását a nyelv igényei szerint módosítja. Esetenként a lefordított állomány hibásan jelenik meg, OpenDocument/OpenOffice.org fájlok esetén pedig előfordulhat, hogy akár meg sem nyílik.</p>
+	<hr>
+
+	<p><a href="legalNotices.html">Jogi tudnivalók</a></p>
 </body>
 </html>

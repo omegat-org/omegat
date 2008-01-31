@@ -1,44 +1,71 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>A projekt beállításai - OmegaT 1.6.2 felhasználói kézikönyv</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>A projekt beállításai - OmegaT 1.7.3 felhasználói kézikönyv</title>
 </head>
 <body>
 
-<h1>A projekt beállításai</h1>
+	<h1>A projekt beállításai</h1>
 
-<p>Ebben a párbeszédablakban módosíthatók a projektmappák és a nyelvek. Megnyitása a <a href="keyboardShortcuts.html" title="Az OmegaT gyorsbillentyűi"><code>Ctrl+E</code></a> lenyomásával vagy a <a href="menu.html" title="Főmenü">főmenü</a> <strong>Projekt -&gt; Beállítások...</strong> pontjából lehetséges.</p>
+	<ul>
+		<li><a href="#dialog">A Beállítások párbeszédablak</a>
+			<ul>
+				<li><a href="#language">A nyelv megváltoztatása</a></li>
+				<li><a href="#segments">A szövegdarabolás megváltoztatása</a></li>
+				<li><a href="#folder">A könyvtárszerkezet megváltoztatása</a></li>
+			</ul>
+		</li>
+		<li><a href="[bizonytalan] Figyelem!">A projekt beállításainak folyamat közbeni megváltoztatása </a></li>
+	</ul>
+	
+<hr>
 
-<p>A párbeszédablak elemei:</p>
+	<a name="dialog" id="dialog"></a>
+	<h1>A Beállítások párbeszédablak</h1>
 
-<ul>
-   <li>A projekt forrás- és célnyelvének beállítása a legördülő menük segítségével</li>
-   <li>Szövegdarabolási beállítások jelölése</li>
-   <li>Projektmappák beállítására szolgáló terület</li>
-</ul>
+	<p>Ebben a párbeszédablakban módosíthatók a projektmappák és a nyelvek. Megnyitása a <code><a href= "menu.html#shortcuts">Ctrl+E</a></code> lenyomásával vagy a <a href="menu.html">főmenü</a> <strong>Projekt -&gt; Beállítások...</strong> pontjából lehetséges. A párbeszédablak elemei:</p>
 
-<p>Mindegyik mező szerkeszthető. Vagy gépelje be a nyelvek nevét, vagy válasszon a lenyíló menükből. A nem létező mappák nevét begépelheti, az OmegaT pedig létrehozza őket.</p>
+	<ul>
+		<li>A projekt forrás- és célnyelvének beállítása a legördülő menük segítségével</li>
+		<li>Szövegdarabolási beállítások jelölése</li>
+		<li>A projekt könyvtárszerkezetének beállítására szolgáló terület</li>
+	</ul>
 
-<a name="Modifying_Project_Properties_Half-Way"></a>
-<h3>A projekt beállításainak módosítása a folyamat közben</h3>
+	<p>Mindegyik mező szerkeszthető. Vagy gépelje be a nyelvek nevét, vagy válasszon a lenyíló menükből. A nem létező mappák nevét begépelheti, az OmegaT pedig létrehozza őket.</p>
+	
 
-<p>Fordítás során bármikor módosíthatja a projekt beállításait, noha törekednie kell ennek elkerülésére. A fordítás megkezdése után tekintsen minden beállítást véglegesnek, hacsak valamilyen súlyos hibát nem észlel.</p>
+	<a name="language" id="language"></a>
+	<h2>A nyelv megváltoztatása</h2>
+	
+	<p>Ne feledje, hogy a nyelvek módosítása következtében a használatban lévő fordítási memóriák használhatatlanná válhatnak, mivel a megadott és az új nyelvek eltérőek lesznek.</p>
+	
+	<a name="segments" id="segments"></a>
+	<h2>A szövegdarabolás megváltoztatása</h2>
+	
+	<p>A szövegdarabolás megváltoztatása csak az OmegaT forrásállomány-kezelését érinti. A már meglévő fordítási memóriák szövegdarabolását nem befolyásolja.</p>
+	
+	<p>Ha megváltoztatja a szövegdarabolás beállításait, előfordulhat, hogy egyes már lefordított szövegrészeket a program szétvágja vagy egyesíti. Ennek eredményeként az érintett részek "lefordítatlan" állapotba kerülnek, mivel akkor sem fognak egyezni a projekt memóriájában lévő szövegrészekkel, ha a memória tartalmazza a régi, de most már nem egyező fordítást.</p>
+	
+	<p>Az OmegaT a szövegdarabolást korábban nem használó <a href= "translationMemories.html#Upgrading_Translation_Memories">régi fordítási memóriákat frissíteni tudja</a>, de megfordítva nem, mint ahogy a fordítási memóriát sem tudja módosítani, ha Ön fordítás közben meggondolja magát.</p>
 
-<p>Konkrétan:</p>
-
-<ul>
-   <li>A nyelvek módosítása következtében a használatban lévő fordítási memóriák használhatatlanná válhatnak, mivel a megadott és az új nyelvek eltérőek lesznek.</li>
-
-   <li>A szövegdarabolási beállítások módosítása miatt néhány már lefordított szöveget a program szétvághat vagy egyesíthet, így gyakorlatilag "lefordítatlan" állapotba kerülhetnek, noha a régi, de most már nem egyező fordítás még mindig ott van a memóriában. Az OmegaT a mondatdarabolást korábban nem használó <a href="translationMemories.html#Upgrading_Translation_Memories" title="Fordítási memóriák"> régi fordítási memóriákat frissíteni tudja</a>, de megfordítva nem, mint ahogy a fordítási memóriát sem tudja módosítani, ha fordítás közben meggondolja magát.</li>
-
-   <li>A projektmappák módosításával az állományok nem helyeződnek át a régi mappákból az újakba, így előfordulhat, hogy sem Ön, sem az OmegaT nem fogja tudni azonosítani a mappákat és azt, melyikük van éppen használatban.</li>
-</ul>
-
-<p>A munka megvédésével kapcsolatosan lásd az <a href="preventingDataLoss.html" title="Adatvesztés elkerülése">
-Adatvesztés elkerülése</a> c. részt.</p>
+	<a name="folder" id="folder"></a>
+	<h2>A könyvtárszerkezet megváltoztatása</h2>
+	
+	<p>Ha a projekt könyvtárszerkezetét meg kívánja változtatni, ne feledje, hogy ezzel a régi mappákban lévő állományok nem kerülnek át az új mappákba. Így előfordulhat, hogy sem Ön, sem az OmegaT nem fogja tudni azonosítani a mappákat, sem azt, hogy éppen melyikük van használatban.</p>
 
 <hr>
-<p><a href="legalNotices.html" title="Jogi tudnivalók">Jogi tudnivalók</a></p>
 
+	<a name="warning" id="warning"></a>
+	<h1>A projekt beállításainak folyamat közbeni megváltoztatása </h1>
+
+	<p>Fordítás során módosíthatja a projekt beállításait.</p>
+	
+	<p>A biztonság érdekében a fordítás megkezdése után azonban tekintsen minden beállítást véglegesnek, hacsak valamilyen komoly hibát nem észlel. A munka eredményének megvédésével kapcsolatosan l. az <a href= "preventingDataLoss.html">Adatvesztés elkerülése</a> c. részt.</p>
+
+
+	<hr>
+
+	<p><a href="legalNotices.html">Jogi tudnivalók</a></p>
 </body>
 </html>

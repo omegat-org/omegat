@@ -1,7 +1,7 @@
-Ezt a fordítást [Fábricz Károly] készítette, copyright© [2007]. 
+﻿Ezt a fordítást [Fábricz Károly] készítette, copyright© [2007]. 
 
 ==============================================================================
-  OmegaT 1.6.2, Olvass el!
+  OmegaT 1.7.3, Olvass el!
 
   1.  Tájékoztató az OmegaT-ről
   2.  Mi az OmegaT?

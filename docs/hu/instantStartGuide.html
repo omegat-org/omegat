@@ -1,205 +1,194 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Útmutató az azonnali kezdéshez - OmegaT 1.6.2 felhasználói kézikönyv</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Útmutató az azonnali kezdéshez - OmegaT 1.7.3 felhasználói kézikönyv</title>
 </head>
 <body>
 
-<h1>Útmutató az azonnali kezdéshez</h1>
-<p><small>avagy miként foghatja hadra az OmegaT-t 5 percen belül</small></p>
+	<h1>Fogja hadra az OmegaT-t 5 percen belül!<br> - Útmutató az azonnali kezdéshez</h1>
 
-<p><strong>A jelen azonnali kezdéshez való útmutató csak a legelemibb ismereteket tárgyalja. Minden felhasználónak elolvasásra ajánljuk, mert megtudhatja belőle mindazt, amit az OmegaT számára tartogat.</strong></p>
+	<ul>
+		<li><a href="#summary">Az OmegaT működéséről - röviden</a></li>
+		<li><a href="#translate">Hogyan fordíthat az OmegaT-vel</a>
+			<ul>
+				<li><a href="#create">Új projekt létrehozása és megnyitása</a></li>
+				<li><a href="#segments">Szövegdarabok fordítása egyesével</a></li>
+				<li><a href="#tm">A fordítási memória és a szójegyzék egyezéseinek használata</a>
+					<ul>
+						<li><a href="#tm_matches">Egyezések a fordítási memóriában</a></li>
+						<li><a href="#gloss_matches">Egyezések a szójegyzékben</a></li>
+					</ul>
+				</li>
+				<li><a href="#searches">Keresési lehetőségek</a></li>
+				<li><a href="#create_trans">Lefordított állományok létrehozása</a></li>
+			</ul>
+		</li>
+		<li><a href="#tags">Hogyan kezelheti a címkékkel ellátott szöveget</a>
+			<ul>
+				<li><a href="#example">Egy példa...</a></li>
+				<li><a href="#tag_verif">Címkék ellenőrzése</a></li>
+			</ul>
+		</li>
+	</ul>
 
-<h2>Tartalomjegyzék</h2>
+	<p>A jelen azonnali kezdéshez való útmutató csak a legelemibb ismereteket tárgyalja. Ajánlatos vele minden felhasználónak megismerkedni, mert megtudhatja belőle mindazt, amit az OmegaT a számára tartogat.</p>
+	
+	<p>Az itt leírt gyorsbillentyűket a "ctrl+billentyű" kombinációval, Mac esetén a "cmd+billentyű" kombinációval használhatja. A "cmd" billentyűn van egy "command" felirat vagy az "alma"-jel az Apple klaviatúráján.</p>
 
-<ol type="I">
-   <li><a href="#Briefly.2C_how_OmegaT_works">Az OmegaT működéséről - röviden</a></li>
-   <li><a href="#How_to_translate_using_OmegaT">Hogyan fordíthat az OmegaT-vel</a>
-      <ol type="a">
-         <li><a href="#Create_and_open_a_new_project">Új projekt létrehozása és megnyitása</a></li>
-         <li><a href="#Translate_the_segments_one_by_one">Szövegdarabok fordítása egyesével</a></li>
-         <li><a href="#Use_TM_and_glossary_matches">A fordítási memória és a szójegyzék egyezéseinek használata</a></li>
-         	<ol type="1">
-         		<li><a href="#TM_matches">Egyezések a fordítási memóriában</a></li>
-         		<li><a href="#Glossary_matches">Egyezések a szójegyzékben</a></li>
-         	</ol>
-         <li><a href="#Create_the_translated_documents">Lefordított állományok létrehozása</span></a></li>
-      </ol>
-   </li>
-   <li><a href="#Dealing_with_tagged_text">Jelölőkkel tagolt szöveg kezelése</a>
-      <ol type="a">
-         <li><a href="#An_example...">Egy példa...</a></li>
-         <li><a href="#Tag_verification">Jelölők ellenőrzése</a></li>
-      </ol>
-   </li>
-</ol>
+	<hr>
 
-<a name="Briefly.2C_how_OmegaT_works"></a>
-<h2>I. Az OmegaT működéséről - röviden</h2>
+	<a name="summary" id="summary"></a>
+	<h1>Az OmegaT működéséről - röviden</h1>
 
-<p>Az OmegaT képernyője három ablakra van felosztva. Ezek mindegyikét átméretezheti az egérrel. Balra található a szerkesztő, ahol begépeli a fordítást. Jobbra fent láthatók az egyezések, ahol a fordítási memóriában található egyezések jelennek meg. Ez alatt találhatók a szójegyzékben fellelt egyezések.</p>
+	<p>Az OmegaT képernyője <a href="userInterface.html">három ablakra</a> van felosztva. Ezek mindegyikét átméretezheti az egérrel. Balra található a szerkesztő, amelybe beírja a fordítást. Jobbra fent láthatók az egyezések, ahol a fordítási memóriában fellelt megfelelők jelennek meg. Ez alatt találhatók a szójegyzékben fellelt egyezések.</p>
 
-<p>A szerkesztőablakban az OmegaT a forrásszöveget jeleníti meg mondatokra (vagy bekezdésekre - l. <a href="./segmentation.html">Forrásszöveg darabolása</a>!)daraboltan. Ezeket a darabokat fordítja egyiket a másik után. Ahogyan halad a szöveggel, fordításait a fordítási memória megjegyzi. Ha minden szövegdarabot lefordított (vagy ha úgy kívánja, még ezt megelőzően) az OmegaT a fordítási memória segítségével a “Cél” mappában előállítja a lefordított dokumentumo(ka)t.</p>
+	<p>A szerkesztőablakban az OmegaT a forrásszöveget jeleníti meg mondatokra (vagy bekezdésekre) '<a href="segmentation.html">darabolva</a>'. Ezeket a szövegrészeket fordítja egyiket a másik után. Ahogyan halad a szöveggel, fordításait a fordítási memória megjegyzi. Ha minden szövegdarabot lefordított (vagy ha úgy kívánja, még előtte) az OmegaT a fordítási memória segítségével a “target” nevű mappában előállítja a lefordított dokumentumo(ka)t.</p>
 
-<p>Az OmegaT a fordítási feladatot ún. fordítási projektbe szervezi. Az OmegaT minden projekthez létrehoz egy sor mappát. Ezekben tárolja a lefordítandó forrásszövegeket, az esetleg használni kívánt szójegyzékeket és fordítási memóriákat. Az OmegaT létrehoz egy “Cél” mappát is, amelyben a végleges lefordított dokumentumok kapnak helyet.</p>
+	<p>Az OmegaT a fordítási feladatot ún. fordítási projektbe szervezi. Az OmegaT minden projekthez létrehoz egy sor mappát. Ezekben tárolja a lefordítandó <a href="filesToTranslate.html">forrásszövegeket</a>, az esetleg használni kívánt <a href="glossaries.html">szójegyzékeket</a> és fordítási memóriákat. Az OmegaT létrehoz egy “target” mappát is a végleges lefordított dokumentumok számára.</p>
 
-<a name="How_to_translate_using_OmegaT"></a>
-<h2>II. Hogyan fordíthat az OmegaT-vel</h2>
+	<hr>
 
-<a name="Create_and_open_a_new_project"></a>
-<h3>a. Új projekt létrehozása és megnyitása</h3>
+	<a name="translate" id="translate"></a>
+	<h1>Hogyan fordíthat az OmegaT-vel</h1>
 
-<p>A menüből válassza ki a <strong>Projekt → Új...</strong> pontot.</p>
+	<a name="create" id="create"></a>
+	<h2>Új projekt létrehozása és megnyitása</h2>
 
-<p>Térjen át arra a mappára, amelyben a projekt állományait menteni kívánja, majd adjon meg egy nevet a fordítási projektnek. A projekt fő mappája ezt a nevet fogja használni: minden projektfájl ebbe a mappába vagy annak almappáiba kerül majd.</p>
+	<p>A menüből válassza ki a <strong>Projekt → Új...</strong> pontot.</p>
 
-<p>Az OmegaT a létrehozandó projektmappák megerősítésére vagy módosítására az alábbi párbeszédablakot használja:</p>
+	<p>Térjen át arra a mappára, amelybe a projekt állományait menteni kívánja, majd adjon meg egy nevet a fordítási projektnek. A projekt fő mappája ezt a nevet fogja használni: minden projektfájl ebbe a mappába vagy annak almappáiba kerül majd.</p>
 
-<center><img src="images/NewProject.png" alt="Projektbeállítások ablaka" /></center>
+	<p>Az OmegaT a létrehozandó projektmappák megerősítésére vagy módosítására az alábbi párbeszédablakot használja:</p>
 
-<p>Elfogadhatja az almappák felkínált helyét, de előtte ellenőrizze, hogy a forrásnyelvi és a célnyelvi kódok helyesek-e. A lenyíló listából válassza ki a nyelvi kódot (2 betű) vagy a nyelvi- és régiókódot (2 + 2 betű), vagy írja be őket (a 2 betűs mintának megfelelően). Jegyezze meg a Cél almappa helyét (ahová a lefordított szövegek kerülnek majd).</p>
+	<p align="center">
+		<img src="images/NewProject.png" name="graphics1" alt="Projektbeállítások ablaka" align="bottom" border="0" id="graphics1">
+	</p>
 
-<p>Ha "bekezdésenkénti" szövegdarabolás helyett mondatonkéntit szeretne használni, ellenőrizze a szövegdarabolási szabályokat.</p>
+	<p>Elfogadhatja az almappák felkínált helyét, de előtte ellenőrizze, hogy a forrásnyelvi és a célnyelvi kódok helyesek-e. A lenyíló listából válassza ki a nyelvi kódot (2 betű) vagy a nyelvi- és régiókódot (2 + 2 betű), vagy írja be őket (a 2 betűs mintának megfelelően). Jegyezze meg a target almappa helyét (ahová a lefordított szövegek kerülnek).</p>
 
-<p>Ha a projekt beállításait a Rendben gombra kattintva jóváhagyja, az OmegaT felszólítja majd az importálandó forrásdokumentumok kiválasztására. Importálhat egyetlen állományt, de importálhat akár egész könyvtárakat (az alkönyvtáraikban lévő összes állománnyal együtt). Ha véletlenül rossz vagy túl sok dokumentumot importált, törölje őket a projekt Forrás mappájából (pl. egy fájlkezelővel).</p>
+	<p>Ha "bekezdésenkénti" szövegdarabolás helyett mondatonkéntit szeretne használni, ellenőrizze a <a href="segmentation.html">szövegdarabolási szabályokat</a>.</p>
 
-<p>A fordítandó állományok ellenőrzéséhez térjen át a <strong>Projektfájlok</strong> ablakra (Menü: <strong>Projekt → Projektfájlok...</strong>, ha a mappa nem nyílik ki automatikusan). Ha módosította a Forrás mappa tartalmát, ne feledje előbb újból betölteni a projektet (Menü: <strong>Projekt → Újratöltés</strong>). Az OmegaT alaphelyzetben a projektben felsorolt állományok közül az elsőt nyitja meg.</p>
+	<p>Ha a projekt beállításait a Rendben gombra kattintva jóváhagyja, az OmegaT felszólítja az importálandó forrásdokumentumok kiválasztására. Importálhat egyetlen állományt, de importálhat akár egész könyvtárakat (az alkönyvtáraikban lévő összes állománnyal együtt). Ha véletlenül rossz vagy túl sok dokumentumot importált, törölje őket a projekt source nevű mappájából (pl. az Intézővel).</p>
 
-<p>Ne feledje, hogy az OmegaT csak az alábbi formájú állományok fordítását támogatja. Minden egyéb állományt figyelmen kívül hagy.<ul>
-<li>Open Document Format (ODF ISO/IEC 26300)</li>
-<li>OpenOffice.org </li>
-<li>XHTML, HTML </li>
-<li>HTML Help Compiler (HCC)</li>
-<li>DocBook </li>
-<li>egyszerű szöveg</li>
-<li>bundle.properties Java </li>
-<li>egynyelvű .po</li>
-<li>INI ('kulcs=érték' forma)</li>
-</ul>
-</p>
+	<p>A fordítandó állományok ellenőrzéséhez térjen át a <strong>Projektállományok</strong> ablakra (Menü: <strong>Projekt → Projektállományok...</strong>, ha a mappa nem nyílik ki automatikusan). Ha módosította a Forrás mappa tartalmát, ne feledje előbb újból betölteni a projektet (Menü: <strong>Projekt → Újratöltés</strong>). Az OmegaT alaphelyzetben a projektben felsorolt állományok közül az elsőt nyitja meg.</p>
 
-<a name="Translate_the_segments_one_by_one"></a>
-<h3>b. Szövegdarabok fordítása egyesével</h3>
+	<p>Ne feledje, hogy az OmegaT csak az alábbi <a href="filesToTranslate.html">formátumú</a> állományok fordítását támogatja, ha azok megfelelnek az <a href="fileFilters.html">állományszűrőkben</a> megadott mintának. Minden egyéb állományt figyelmen kívül hagy.</p>
 
-<p>Ha meghatározta a projektet és a fordítandó állományokat, az OmegaT a szerkesztőben megnyitja az első forrásszöveget. Az első szövegdarab zöld színnel kiemelve látható; alatta a célnyelvi mezőben megismétlődik a forrásszöveg. (Ekkor a célnyelvi mezőn kívüli összes szöveg zárolva van és nem módosítható.) A &lt;0001 darab&gt; és a &lt;darab vége&gt; jelölők közé kell beírnia a fordítást a forrásszöveg felülírásával.</p>
+	<ul>
+		<li>Open Document forma (ODF ISO/IEC 26300)</li>
+		<li>OpenOffice.org</li>
+		<li>XHTML, HTML</li>
+		<li>HTML Help Compiler</li>
+		<li>DocBook</li>
+		<li>egyszerű szöveg</li>
+		<li>bundle.properties Java</li>
+		<li>egynyelvű .po</li>
+		<li>INI ('kulcs=érték' forma)</li>
+		<li>Okapi egynyelvű XLIFF</li>
+	</ul>
 
-<p>A következő szövegdarabra az "<strong>ENTER</strong>" lenyomásával léphet.</p>
+	<a name="segments" id="segments"></a>
+	<h2>Szövegdarabok fordítása egyesével</h2>
 
-<p>Megjegyzés:<br/> - Bármely, akár feljebb, akár lejjebb lévő szövegrészre áttérhet, ha kétszer rákattint a megnyitni kívánt mondatra vagy bekezdésre. <br/> - Ha inkább üres célnyelvi mezőbe szeretné beírni a fordítást, módosítsa ennek megfelelően a <strong>Beállítások → Szerkesztési mód...</strong> beállítását.</p>
+	<p>Ha meghatározta a projektet és a fordítandó állományokat, az OmegaT a szerkesztőben megnyitja az első forrásszöveget. Az első szövegdarab zöld színnel kiemelve látható; alatta a célnyelvi mezőben megismétlődik a forrásszöveg. (Ekkor a célnyelvi mezőn kívüli összes szöveg zárolva van és nem módosítható.) A <code>&lt;0001. egység&gt;</code> és a <code>&lt;egység vége&gt;</code> címkék közé kell beírnia a fordítást a forrásszöveg felülírásával.</p>A következő szövegrészre az "<strong>ENTER</strong>" lenyomásával térhet át. Megjegyzés:<ul>
+		<li>Bármely, akár feljebb, akár lejjebb lévő szövegrészre áttérhet, ha kétszer rákattint a megnyitni kívánt mondatra vagy bekezdésre.</li>
+		<li>Ha inkább üres célnyelvi mezőbe szeretné beírni a fordítást, módosítsa ennek megfelelően a Beállítások → Szerkesztési mód... beállítását.</li>
+	</ul>
 
-<p>Az "<strong>ENTER</strong>" megnyomásakor a háttérben több dolog történik: <br/> Az OmegaT a szövegdarabpárt (a forrást és fordítását) hozzáadja a fordítási memóriához és automatikusan lefordítja az összes ezzel azonos, de más projektfájlban lévő szöveget. Ezen túl végignézi a fordítási memóriát és a szójegyzéket, nincs-e bennük egyezés a következő lefordítatlan szövegdarabbal.</p>
+	<p>A "<strong>Rendben</strong>" megnyomásakor több dolog történik a háttérben: az OmegaT a szövegrészeket (a forrást és fordítást) hozzáadja a fordítási memóriához és automatikusan lefordítja az összes ezzel azonos, de más projektállományokban lévő szöveget. Ezen túl végignézi a fordítási memóriát és a szójegyzéket, nincs-e bennük egyezés a következő lefordítatlan szövegdarabbal.</p>
 
-<a name="Use_TM_and_glossary_matches"></a>
-<h3>c. A fordítási memória és a szójegyzék egyezéseinek használata</h3>
-
-<a name="TM_matches"></a>
-<h4>1. Egyezések a fordítási memóriában</h4>
-
-<p>Ha az OmegaT a fordítási memóriában bizonytalan (30%-os vagy azt meghaladó mértékű) egyezést talál a következő szövegdarabhoz, akkor megjeleníti azokat az Egyezések ablakban. Alaphelyzetben az Egyezések ablakban az első egyezést választja ki.</p>
-<p>Ha valamely egyezést a célnyelvi mezőbe kíván beszúrni, használhatja az alábbi gyorsbillentyűket:<br/>
-<ul>
-   <li>A <code>Ctrl+I</code> lenyomásával a kiválasztott egyezést beszúrja a kurzor helyére, illetve...</li>
-   <li>A <code>Ctrl+R</code> lenyomásával a kiválasztott egyezéssel felülírja a teljes szövegdarabot.</li>
-</ul>
-</p>
-
-<p>Ha több egyezés is szerepel és Ön nem az előre kiválasztottat kívánja használni:<br/>
-<ul>
-	<li>Válassza ki a kívánt egyezést az Egyezések ablakból: <code>Ctrl+2</code> a második egyezés, <code>Ctrl+3</code> a harmadik egyezés kiválasztásához stb.</li>
-	<li>Ezután használhatja a <code>Ctrl+I</code> vagy a <code>Ctrl+R</code> gyorsbillentyűket a fent leírtak szerint.</li>
-</ul>
-</p>
-
-<p>(Arra is utasíthatja az OmegaT-t, hogy bármely megadott százalék fölötti egyezést automatikusan szúrjon be a célnyelvi mezőbe, ha a szövegdarab megnyílik. Ezt a lehetőséget a <strong>Beállítások → Szerkesztési mód... pontban állíthatja be.</strong>)</p>
-
-<a name="Glossary_matches"></a>
-<h4>2. Egyezések a szójegyzékben</h4>
-
-<p>Ha az OmegaT 100%-ban egyező kifejezést talál a szójegyzékben, ezeket a Szójegyzék ablakban jeleníti meg. Ezek átmásolásához a programban nincsenek gyorsbillentyűk.</p>
-
-<a name="Create_the_translated_documents"></a>
-<h3>d. Lefordított állományok létrehozása</h3>
-
-<p>Ha minden szövegdarabot lefordított (vagy akár korábban), az  OmegaT frissíti a céldokumentumo(ka)t a fordítási memóriában tárolt fordítások alapján.</p>
-
-<p>Ehhez a menüből válassza ki a <strong>Projekt → Lefordított állományok létrehozása</strong> pontot.</p>
-
-<p>Az OmegaT előállítja a projekt forrásmappájában lévő összes állomány fordítását, akár teljesen elkészültek, akár nem. A teljesen vagy részben kész állományokat a projekt célmappájába menti.</p>
-
-<p>A fordítás befejezéséhez nyissa meg a célnyelvi szövegeket a velük használatos alkalmazásban (böngészőben, szövegszerkesztőben...) és ellenőrizze a fordítás tartalmát és szerkesztését. Ezután visszatérhet az OmegaT-hez és elvégezheti a szükséges javításokat; ne feledkezzen el a lefordított szövegek végleges előállításáról.</p>
+	<a name="tm" id="tm"></a>
+	<h2>A fordítási memória és a szójegyzék egyezéseinek használata</h2>
 
 
-<a name="Dealing_with_tagged_text"></a>
-<h2>III. Jelölőkkel tagolt szöveg kezelése</h2>
+	<a name="tm_matches" id="tm_matches"></a>
+	<h3>Egyezések a fordítási memóriában</h3>
 
-<p>Az OmegaT speciális jelölők használatával gondoskodik arról, hogy a forrásszövegek formázása (vastag, dőlt stb.) megőrződjék. Az OmegaT jelölői egy vagy több betűből és egy vagy több azt követő számjegyből, esetenként a "/" karakterből állnak (például: &lt;f0&gt;, &lt;br10/&gt;, &lt;/s2&gt; stb.).</p>
+	<p>Ha az OmegaT a fordítási memóriában bizonytalan (30%-os vagy annál magasabb mértékű) egyezést talál a következő szövegrészhez, akkor megjeleníti azokat a Bizonytalan egyezések ablakában. Alaphelyzetben a Bizonytalan egyezések ablakból az első egyezést választja ki.</p>
 
-<p>Ezekre ügyelnie kell és a megfelelő helyre kell beszúrnia őket a célnyelvi szövegbe. (Lásd az OmegaT felhasználói kézikönyvében a jelölők szerkesztésével kapcsolatos további tudnivalókat.)</p>
+	<p>Ha valamely egyezést a célnyelvi mezőbe kíván beszúrni, használhatja az alábbi <a href="menu.html#shortcuts">gyorsbillentyűket</a>:</p>
 
-<a name="An_example..."></a>
-<h3>a. Egy példa...</h3>
+	<ul>
+		<li>A <code>Ctrl+I</code> lenyomásával a kiválasztott egyezést beszúrja a kurzor helyére, vagy...</li>
+		<li>A <code>Ctrl+R</code> lenyomásával a kiválasztott egyezéssel felülírja a teljes szövegrészt.</li>
+	</ul>
 
-<p>Ezekben a példákban a jelölők <font color="#ff0000">pirossal</font> vannak megjelölve a könnyebbség kedvéért, az OmegaT-ben ezek nem jelennek meg más színben.</p>
+	<p>Ha több egyezés is szerepel, de Ön nem az előre kiválasztottat kívánja használni:</p>
 
-<p>
-<strong>Íme egy példa egy jelölőre egy HTML-állomány esetén:</strong>
-</p>
+	<ul>
+		<li>Válassza ki a kívánt egyezést a Bizonytalan egyezések ablakból: a <code>Ctrl+2</code>-t a második egyezés, a <code>Ctrl+3</code>-at a harmadik egyezés kiválasztásához stb.</li>
+		<li>Ezután használhatja a <code>Ctrl+I</code> vagy a <code>Ctrl+R</code> gyorsbillentyűket a fent leírtak szerint.</li>
+	</ul>
 
-<p>
-<code><font color="#ff0000">&lt;p&gt;</font>Egy másik megjelenítési betűtípust választhat a <font color="#ff0000">&lt;b&gt;</font>Betű kijelzése<font color="#ff0000">&lt;/b&gt;</font> párbeszédablakból. Megnyitása a <font color="#ff0000">&lt;i&gt;</font>Beállítások<font color="#ff0000">&lt;/i&gt;</font> &amp;gt; <font color="#ff0000">&lt;i&gt;</font>Betű kijelzése...<font color="#ff0000">&lt;/i&gt;</font> menüpontból lehetséges. A párbeszédablakban beállíthatja a betű típusát és méretét.<font color="#ff0000">&lt;/p&gt;</font></code>
-</p>
+	<p>(Arra is utasíthatja az OmegaT-t, hogy bármely megadott százalék fölötti egyezést automatikusan szúrjon be a célnyelvi mezőbe, ha a szövegdarab megnyílik. Ezt a lehetőséget a <strong>Beállítások → Szerkesztési mód...</strong> pontban állíthatja be.)</p>
 
-<p>
-<strong>Az OmegaT ezt így jeleníti meg piros kiemelésben:</strong>
-</p>
+	<a name="gloss_matches" id="gloss_matches"></a>
+	<h3>Egyezések a szójegyzékben</h3>
 
-<p>
-<code>Egy másik megjelenítési betűtípust választhat a <font color="#ff0000">&lt;b0&gt;</font>Betű kijelzése<font color="#ff0000">&lt;/b0&gt;</font> párbeszédablakból. Megnyitása a <font color="#ff0000">&lt;i1&gt;</font>Beállítások<font color="#ff0000">&lt;/i1&gt;</font> &gt; <font color="#ff0000">&lt;i2&gt;</font>Betű kijelzése...<font color="#ff0000">&lt;/i2&gt;</font> menüpontból lehetséges. A párbeszédablakban beállíthatja a betű típusát és méretét.</code>
-</p>
+	<p>Ha az OmegaT 100%-ban egyező kifejezést talál a <a href="glossaries.html">szójegyzékben</a>, ezeket a Szójegyzék ablakban jeleníti meg. Ezek átmásolásához a programban nincsenek gyorsbillentyűk.</p>
+	
+	<a name="searches" id="searches"></a>
+	<h2>Keresési lehetőségek</h2>
+	
+	<p>Az OmegaT kiterjedt <a href="searches.html">keresési</a> lehetőségeket biztosít. A Keresés ablakot hívja elő a <code>Ctrl+F</code>-fel és a "Keresendő" mezőbe írja be a keresendő szót vagy kifejezést.</p>
+	
+	<p>Másik megoldásként jelölje ki a szerkesztő mezőben (az éppen fordítandó szöveg célnyelvi mezőjében) a keresendő szót vagy kifejezést, majd nyomja meg a <code>Ctrl+F</code>-et. A kijelölt szó vagy kifejezés ekkor automatikusan belekerül a "Keresendő" mezőbe.</p>
 
-<p>
-<strong>És ezt így fordítaná le (a példa afrikaans):</strong>
-</p>
+	<a name="create_trans" id="create_trans"></a>
+	<h2>Lefordított állományok létrehozása</h2>
 
-<p>
-<code>'n Mens kan 'n ander vertoonfont kies met die 
-<font color="#ff0000">&lt;b0&gt;</font>Vertoonfont<font color="#ff0000">&lt;/b0&gt;</font>-dialoogkassie. 
-Kies <font color="#ff0000">&lt;i1&gt;</font>Opstelling<font color="#ff0000">&lt;/i1&gt;</font> 
+	<p>Ha minden szövegrészt lefordított (vagy még előtte), az  OmegaT frissíti a céldokumentumo(ka)t a fordítási memóriában tárolt fordítások alapján. Ehhez a menüből válassza ki a <strong>Projekt → Lefordított állományok létrehozása</strong> pontot.</p>
 
-&gt; <font color="#ff0000">&lt;i2&gt;</font>Vertoonfont...<font color="#ff0000">&lt;/i2&gt;</font> 
-op die kieslys. Die lettertipe én die lettergrootte kan met dié 
-dialoogkassie verander word.</code>
-</p>
+	<p>Az OmegaT előállítja a projekt forrásmappájában lévő összes állomány fordítását, akár teljesen elkészültek, akár nem. A teljesen vagy részben kész állományokat a projekt célmappájába (target) menti.</p>
 
-<p>
-<strong>Amikor az OmegaT előállítja a fordítást, a HTML ekként néz ki:</strong>
-</p>
+	<p>A fordítás befejezéséhez nyissa meg a célnyelvi szövegeket a velük használatos alkalmazásban (böngészőben, szövegszerkesztőben...), és ellenőrizze a fordítás tartalmát és szerkesztését. Ezután visszatérhet az OmegaT-hez és elvégezheti a szükséges javításokat; ne feledkezzen el a lefordított szövegek végleges előállításáról.</p>
 
-<p>
-<code><font color="#ff0000">&lt;p&gt;</font>'n Mens kan 'n ander vertoonfont kies 
-met die <font color="#ff0000">&lt;b&gt;</font>Vertoonfont<font color="#ff0000">&lt;/b&gt;</font>-dialoogkassie. 
-Kies <font color="#ff0000">&lt;i&gt;</font>Opstelling<font color="#ff0000">&lt;/i&gt;</font> 
+	<hr>
 
-&amp;gt; <font color="#ff0000">&lt;i&gt;</font>Vertoonfont...<font color="#ff0000">&lt;/i&gt;</font> 
-op die kieslys. Die lettertipe én die lettergrootte kan met dié 
-dialoogkassie verander word.<font color="#ff0000">&lt;/p&gt;</font></code>
-</p>
+	<a name="tags" id="tags"></a>
+	<h1>Hogyan kezelheti a címkékkel ellátott szöveget</h1>
 
-<a name="Tag_verification"></a>
-<h3>b. Jelölők ellenőrzése</h3>
+	<p>Az OmegaT <a href="formattedText.html#intro">speciális címkék</a> használatával gondoskodik arról, hogy a forrásszövegek formázása (vastag, dőlt stb.) megőrződjék. Az OmegaT címkéi egy vagy több betűből és egy vagy több azt követő számjegyből, esetenként a "/" karakterből állnak (például: &lt;f0&gt;, &lt;br10/&gt;, &lt;/s2&gt; stb.).</p>
 
-<p>Az OmegaT nem ellenőrzi automatikusan a lefordított dokumentumban lévő hibás jelölőket. A szöveg leadása előtt Önnek kell ellenőriznie a jelölők helyességét.</p>
+	<p>Ezekre <a href="formattedText.html#Tag_operations">ügyelnie</a> kell és a célnyelvi szövegbe a megfelelő helyre kell őket beszúrnia.</p>
 
-<p>Válassza a menüből az <strong>Eszközök→ Jelölő-ellenőrzés </strong>  pontot. Egy táblázat jelenik meg, mely mutatja, hol nem egyeznek a forrásnyelvi és célnyelvi jelölők. Kattintson a szövegdarab számára.</p>
+	<a name="example" id="example"></a>
+	<h2>Egy példa...</h2>
 
-<p>Ekkor automatikusan a szerkesztőben a hibás szövegdarabhoz kerül, ahol kijavíthatja a jelölőhibát.</p>
+	<p>Ezekben a példákban a címkéket kiemeltük a könnyebbség kedvéért, az OmegaT-ben ezek nem jelennek meg kiemelten. A <font color="blue">kék</font> címkék azok a HTML-címkék, amelyeket az OmegaT figyelmen kívül hagy, mert teljesen körbefogják a szövegrészt, a <font color="green">zöld</font> címkéket az OmegaT kezeli, mert a szövegrész belsejében vannak, a <font color="red">pirosak</font> pedig azt mutatják, miként jelennek meg az OmegaT-ben.</p>
 
-<p>Egyes esetekben a jelölőhiba miatt a dokumentumot nem lehet megnyitni. Ezért mindig javítsa ki a jelölőhibákat, mielőtt létrehozza a lefordított állományokat.</p>
+	<p>Íme egy példa egy HTML-szövegrészre:</p>
 
-<p>Végezetül nyissa meg a böngészőben vagy a szerkesztőben a lefordított szöveget és ellenőrizze a végső formázást.</p>
+	<p><font color="blue"><code>&lt;p&gt;</code></font><code>Egy másik megjelenítési betűtípust választhat a </code> <font color="green"><code>&lt;b&gt;</code></font><code>Megjelenítés betűje</code><font color="green"><code>&lt;/b&gt;</code></font><code> párbeszédablakból. Nyissa meg a</code> <font color="green"><code>&lt;i&gt;</code></font><code>Beállítások</code><font color="green"><code>&lt;/i&gt;</code></font><code> →</code> <font color="green"><code>&lt;i&gt;</code></font><code>Betű...</code><font color="green"><code>&lt;/i&gt;</code></font><code>menüpontot. A párbeszédablakban beállíthatja a betű típusát és méretét.</code><font color="blue"><code>&lt;/p&gt;</code></font></p>
 
-<hr>
-<p><a href="legalNotices.html" title="Jogi tudnivalók">Jogi tudnivalók</a></p>
+	<p>Az OmegaT ezt így jeleníti meg piros kiemelésben:</p>
 
+	<p><code>Egy másik megjelenítési betűtípust választhat a<font color="red"><code>&lt;b0&gt;</code></font><code>Megjelenítés betűje<font color="red">&lt;/b0&gt;</font> párbeszédablakból. Megnyitása a </code> <font color="red"><code>&lt;i1&gt;</code></font><code>Beállítások</code><font color="red"><code>&lt;/i1&gt;</code></font><code> →</code> <font color="red"><code>&lt;i2&gt;</code></font><code>Betű kijelzése...</code><font color="red"><code>&lt;/i2&gt;</code></font><code> menüpontból lehetséges. A párbeszédablakban beállíthatja a betű típusát és méretét.</code></p>
+
+	<p>És ezt így fordítaná le (a példa afrikaans):</p>
+
+	<p><code>'n Mens kan 'n ander vertoonfont kies met die</code> <font color="red"><code>&lt;b0&gt;</code></font><code>Vertoonfont</code><font color="red"><code>&lt;/b0&gt;</code></font><code>-dialoogkassie. Kies</code> <font color="red"><code>&lt;i1&gt;</code></font><code>Opstelling</code><font color="red"><code>&lt;/i1&gt;</code></font><code> →</code> <font color="red"><code>&lt;i2&gt;</code></font><code>Vertoonfont...</code><font color="red"><code>&lt;/i2&gt;</code></font><code>op die kieslys. Die lettertipe én die lettergrootte kan met dié dialoogkassie verander word.</code></p>
+
+	<p>Amikor az OmegaT előállítja a fordítást, a HTML ekként néz ki:</p>
+
+	<p><font color="blue"><code>&lt;p&gt;</code></font><code>'n Mens kan 'n ander vertoonfont kies met die</code> <font color="green"><code>&lt;b&gt;</code></font><code>Vertoonfont</code><font color="green"><code>&lt;/b&gt;</code></font><code>-dialoogkassie. Kies</code> <font color="green"><code>&lt;i&gt;</code></font><code>Opstelling</code><font color="green"><code>&lt;/i&gt;</code></font><code> →</code> <font color="green"><code>&lt;i&gt;</code></font><code>Vertoonfont...</code><font color="green"><code>&lt;/i&gt;</code></font><code>op die kieslys. Die lettertipe én die lettergrootte kan met dié dialoogkassie verander word.</code><font color="blue"><code>&lt;/p&gt;</code></font></p>
+
+	<a name="tag_verif" id="tag_verif"></a>
+	<h2>Címkék ellenőrzése</h2>
+
+	<p>Az OmegaT nem ellenőrzi automatikusan a lefordított dokumentumban lévő hibás címkéket. A szöveg leadása előtt Önnek kell ellenőriznie a címkék helyességét.</p>
+	
+	<p>Válassza a menüből az <strong>Eszközök→ <a href="formattedText.html#tag_validation">Címkék ellenőrzése</a></strong> pontot. Egy táblázat jelenik meg, mely mutatja, hol nem egyeznek a forrásnyelvi és a célnyelvi címkék. Kattintson a szövegrész számára.</p>
+
+	<p>Ekkor a szerkesztőben automatikusan a hibás szövegdarabhoz kerül, ahol kijavíthatja a hibás címkét.</p>
+
+	<p>Egyes esetekben a címkehiba miatt a dokumentumot nem lehet megnyitni. Ezért mindig javítsa ki a címkehibákat, mielőtt létrehozza a lefordított állományokat.</p>
+
+	<p>Végezetül nyissa meg a böngészőben vagy a szerkesztőben a lefordított szöveget és ellenőrizze a végső formázást.</p>
+
+	<hr>
+
+	<p><a href="legalNotices.html">Jogi tudnivalók</a></p>
 </body>
 </html>

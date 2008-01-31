@@ -1,29 +1,110 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Szójegyzékek - OmegaT 1.6.2 felhasználói kézikönyv</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Szójegyzékek - OmegaT 1.7.3 felhasználói kézikönyv</title>
 </head>
 <body>
 
-<h1>Szójegyzékek</h1>
+	<h1>Szójegyzékek</h1>
 
-<p>A szójegyzékek funkciója automatikusan működik. Ha egy meglévő szójegyzéket kíván használni, a projekt létrehozása után tegye a  <code>/szójegyzék</code> könyvtárba. Az OmegaT automatikusan felismeri a szójegyzékeket ebben a könyvtárban, amikor egy projektet megnyit. Azok az adott szövegrészben lévő kifejezések, amelyeket az OmegaT megtalál a szójegyzék(ek)ben, megjelennek a Szójegyzék ablakban.</p>
+	<ul>
+		<li><a href="#usage">Használat</a></li>
+		<li><a href="#fileformat">Állományforma</a></li>
+		<li><a href="#howtocreate">Hogyan hozhat létre szójegyzékeket</a>
+			<ul>
+				<li><a href="#text_editor">Szövegszerkesztő használata</a></li>
+				<li><a href="#spreadsheet">Táblázatkezelő program használata</a></li>
+				<li><a href="#multiterm">A Trados Multiterm használata</a></li>
+			</ul>
+		</li>
+		<li><a href="#commonglossaryproblems">A szójegyzékkel kapcsolatos általános problémák</a></li>
+	</ul>
 
-<p>A szójegyzékek funkciója csak pontos megfeleléseket talál (vagyis a ragozott alakokat stb. nem).</p>
-
-<p>Új kifejezéseket közvetlenül felvehet a szójegyzék(ek)be a fordítás során (például egy szövegszerkesztővel), de az újonnan felvitt kifejezéseket a rendszer csak akkor ismeri fel, ha a projektet újból betölti.</p>
-
-<a name="File_Format"></a>
-<h2>Állományforma</h2>
-
-<p>A szójegyzékek egyszerű szöveges állományok, három oszlopos, tabulátorral elválasztott bejegyzésekkel, melyek közül az első oszlopba kerülnek a forrásnyelvi, a másodikba a célnyelvi kifejezések. A harmadik oszlop kiegészítő információt tartalmazhat.</p>
-
-<p>A szójegyzékek készülhetnek a rendszer alapbeállítás szerinti kódolásával (ilyenkor a kiterjesztésük <code>.tab</code>), illetve UTF-8-ban (ekkor a kiterjesztés <code>.utf8</code>).</p>
-
-<p>Például a Trados Multiterm szövegexportálási funkciójával mentett szójegyzékek módosítás nélkül használhatók, ha a <code>.tab</code> kiterjesztéssel látja el őket, és a forrás- és célnyelvi mező az első két mező.</p>
+	<p>A szójegyzékek olyan állományok, amelyeket az OmegaT-vel való használatra kézi úton hoz létre és frissít.</p>
+	
+	<p>Ha egy OmegaT-projekt egy vagy több szójegyzéket tartalmaz, a szójegyzékben és az aktuális szövegrészben egyaránt fellelhető kifejezések automatikusan megjelennek a <a href="userInterface.html#Glossary">Szójegyzék</a> ablakban.</p>
 
 <hr>
-<p><a href="legalNotices.html" title="Jogi tudnivalók">Jogi tudnivalók</a></p>
 
+	<a name="usage" id="usage"></a>
+	<h1>Használat</h1>
+
+	<p>Ha egy meglévő szójegyzéket kíván használni, a projekt létrehozása után tegye azt a <code>/glossary</code> könyvtárba. Az OmegaT automatikusan felismeri az ebben a könyvtárban lévő szójegyzékeket, amikor megnyit egy projektet.</p>
+	
+	<p>Azok az adott szövegrészben lévő kifejezések, amelyeket az OmegaT megtalál a szójegyzék(ek)ben, megjelennek a Szójegyzék ablakban is. A szójegyzékek funkciója csak pontos megfeleléseket talál (vagyis a ragozott alakokat stb. nem).</p>
+
+	<p>Új kifejezéseket közvetlenül felvehet a szójegyzék(ek)be a fordítás során (például egy szövegszerkesztővel), de az újonnan felvitt kifejezéseket a rendszer csak akkor ismeri fel, ha a projektet újból betölti.</p>
+
+<hr>
+
+	<a name="fileformat" id="fileformat"></a>
+	<h1>Állományforma</h1>
+
+	<p>A szójegyzékek egyszerű szöveges állományok, három oszlopos, tabulátorral elválasztott bejegyzésekkel, melyek közül az első oszlopba kerülnek a forrásnyelvi, a másodikba a célnyelvi kifejezések. A harmadik oszlop kiegészítő információt tartalmazhat.</p>
+
+	<p>A szójegyzékek készülhetnek a rendszer alapbeállítás szerinti kódolásával (ilyenkor a kiterjesztésük <code>.tab</code>), illetve UTF-8-ban (ekkor a kiterjesztés <code>.utf8</code>).</p>
+
+<hr>
+
+	<a name="howtocreate" id="howtocreate"></a>
+	<h1>Hogyan hozhat létre szójegyzékeket</h1>
+
+	<a name="text_editor" id="text_editor"></a>
+	<h2>Szövegszerkesztő használata</h2>
+
+	<p>Hozza létre az állományt egy szövegszerkesztőben, majd nevezze el <code>.tab</code> kiterjesztéssel, pl. <code>szojegyzek.tab</code> névvel.</p>
+
+	<p>A forrásnyelven írjon be egy kifejezést, utána nyomja le a <code>tab</code> billentyűt, majd írja be a kifejezés célnyelvi megfelelőjét. A második <code>tab</code> után megadhat egy megjegyzést. Új kifejezés megkezdéséhez nyomjon <code>Enter</code>-t.</p>
+	
+	<p>Ha minden kifejezést beírt, mentse el a dokumentumot. Ha a két nyelv karakterkészlete nem azonos, akkor az állományt UTF-8 kódolással mentse el. Ez esetben nevezze át az állományt <code>szojegyzek.utf8</code>-ra.</p>
+
+	<a name="spreadsheet" id="spreadsheet"></a>
+	<h2>Táblázatkezelő program használata</h2>
+
+	<p>Excel vagy Calc használata esetén ez a módszer kényelmes, hiszen rendezésre is van lehetősége, ha nincs szüksége UTF-8-ra.</p>
+
+	<p>Kezdjen neki egy üres munkalappal. Adja meg a bejegyzéseket, soronként egyet. A forrásnyelvi kifejezések kerülnek az első oszlopba, a célnyelvi megfelelők a másodikba; a harmadik oszlopot használhatja megjegyzésekre.</p>
+	
+	<p>Ha elkészült, mentse el a dokumentumot: használja a Fájl/Mentés másként menüpontot.</p>
+	
+	<p>Az állomány típusának jelölje meg a szöveget (tabulátorral tagolt vagy CSV), a <strong>mezőhatárolót</strong> állítsa <strong>tabulátorra</strong>, a <strong>szóhatároló</strong> helyén pedig ne adjon meg semmit (ha van valami a mezőben, akkor törölje ki). Kiterjesztésnek adja meg a <code>.tab</code>-ot.</p>
+	
+	<p>A szoftver feltesz néhány kérdést a formázás elvesztésével vagy a mentett táblázattal kapcsolatosan, itt egyszerűen kattintson a Rendben gombra.</p>
+	
+	<p>Az Intézővel ellenőrizze, hogy az állomány neve valóban <code>szojegyzek.tab</code>-e, nem pedig <code>szojegyzek.tab.csv</code>. Ha mégis az lenne, módosítsa.</p>
+	
+	<p>Mentés előtt szükség esetén kiválaszthatja az UTF-8 kódolást. Ez esetben nevezze át az állományt <code>szojegyzek.utf8</code>-ra.<a name="multiterm" id="multiterm"></a>
+	<h2>A Trados Multiterm használata</h2>
+	
+	<p>Például a Trados Multiterm szövegexportálási funkciójával mentett szójegyzékek módosítás nélkül használhatók, ha a <code>.tab</code> kiterjesztéssel látja el őket, és a forrás- és célnyelvi mező az első két mező.</p>
+
+<hr>
+
+	<a name="commonglossaryproblems" id="commonglossaryproblems"></a>
+	<h1>A szójegyzékkel kapcsolatos általános problémák</h1>
+
+	<dl>
+		<dt>Probléma: nem látszanak a szójegyzékben a kifejezések.</dt>
+		<dd>Lehetséges okok:<ul>
+			<li>nincs szójegyzék a "glossary" mappában</li>
+			<li>üres a szójegyzékállomány</li>
+			<li>hibás a szójegyzékállomány kiterjesztése (.tab vagy .utf8)</li>
+			<li>a szójegyzékállomány hibás kódolású</li>
+			<li>az aktuális szövegrész nem tartalmaz olyan kifejezést, amely a szójegyzékben is szerepel</li>
+			<li>a fenti gondokat elhárította ugyan, de a projektet nem töltötte be ismét.</li>
+		</ul>
+		</dd>
+
+		<dt>Probléma: a Szójegyzék ablakban nem helyesen jelennek meg egyes karakterek (holott ugyanezek a Szerkesztő panelen helyesen láthatók).</dt>
+		<dd>Lehetséges okok:<ul>
+			<li>a kiterjesztés és az állomány kódolása nem egyezik.</li>
+		</ul>
+		</dd>
+	</dl>
+	
+	<hr>
+
+	<p><a href="legalNotices.html">Jogi tudnivalók</a></p>
 </body>
 </html>

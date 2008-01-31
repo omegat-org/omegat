@@ -1,36 +1,51 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Az OmegaT leírása - OmegaT 1.6.2 felhasználói kézikönyv</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Az OmegaT leírása - Az OmegaT 1.7.3 felhasználói kézikönyve</title>
 </head>
 <body>
 
-<h1>Az OmegaT leírása</h1>
+	<h1>Az OmegaT leírása</h1>
 
-<p>Az OmegaT ingyenes, több platformon használható segédeszköz a számítógéppel segített fordításhoz.</p>
-
-<h2>Fordítási memória</h2>
-
-<p>Az OmegaT nyomon követi a szöveg fordítását és hivatkozás céljából korábbi fordításokból származó memóriákat tud hasznosítani.</p>
-
-<p>A fordítási memóriák hasznosak olyan fordítások esetén, amelyekben sok az ismétlődő vagy hasonló szövegrész. Az OmegaT fordítási memóriákkal dolgozik, így emlékezik arra, hogyan fordította a korábbi szövegrészeket, és megoldásokat javasol az adott szövegrészhez az előzők hasonlósága alapján.</p>
-
-<p>Ugyancsak nagy segítséget jelenthet, ha egy korábban lefordított dokumentumot frissíteni kell. A változatlan mondatok helyére a fordításuk kerül, míg a frissített mondatokhoz a korábbi változat jelenik meg annak legvalószínűbb fordításaként. Az eredeti irat módosításai így könnyebben kezelhetők.</p>
-
-<p>Ha korábban készült fordítási memóriákat használ, melyet például egy fordítóiroda vagy egy ügyfele bocsát rendelkezésre, az OmegaT ezeket referenciaként képes felhasználni.</p>
-
-<h2>A terminológia kezelése</h2>
-
-<p>A terminológia kezelése a fordítás egyöntetűsége szempontjából fontos. Az OmegaT szójegyzékeket használ, melyekben egy-egy szó vagy rövid kifejezés fordítása szerepel az adott szakterület egyfajta kétnyelvű szakszótára gyanánt. Az OmegaT ezen szavak fordítását hivatkozási céllal jeleníti meg az éppen fordítandó szövegrészletnek megfelelően.</p>
-
-<h2>A fordítás folyamata</h2>
-
-<p>Tételezzük fel, hogy valamilyen fordítási feladatot kap, amely egyetlen szöveg lefordításától kezdve akár egy teljes könyvtárnyi, alkönyvtárakba szervezett fájlok lefordításáig tetszőleges feladatot foglalhat magában. Az állományok különféle formákban léteznek. Amikor az OmegaT tudomására hozza, hogy egy sor fájlt kell lefordítania, a program rákeres az <a href="fileFormats.html" title="Támogatott állományformátumok">általa támogatott állományokra</a> az <a href="fileFilters.html" title="Állományszűrők">állományszűrési szabályok</a> szerint, felismeri a bennük lévő szövegrészeket, a nagyobb szövegegységeket a <a href="segmentation.html" title="Forrásszöveg darabolása">darabolási szabályok</a> szerint elemeire darabolja és az egyes darabokat úgy tárja Ön elé, hogy azokon fordítás közben végig tudjon haladni.</p>
-
-<p>Ha meg szeretné tekinteni az állományokat lefordított állapotukban, <a href="userInterface.html" title="A felhasználói felület">létrehozhatja a fordításokat</a>, megnyithatja a megfelelő programmal és szemügyre veheti őket.</p>
+	<ul>
+		<li><a href="#tm">Fordítási memória</a></li>
+		<li><a href="#glossary">A terminológia kezelése</a></li>
+		<li><a href="#process">A fordítás folyamata</a></li>
+	</ul>
+	
+	<p>Az OmegaT ingyenes, több platformon használható segédeszköz a számítógéppel segített fordításhoz.</p>
 
 <hr>
-<p><a href="legalNotices.html" title="Jogi tudnivalók">Jogi tudnivalók</a></p>
 
+	<a name="tm" id="tm"></a>
+	<h2>Fordítási memória</h2>
+
+	<p>Az OmegaT fordítási memóriában rögzíti fordításait és korábbi fordításokból származó használ referenciaként.</p>
+
+	<p>A fordítási memóriák hasznosak olyan fordítások esetén, amelyekben sok az ismétlődő vagy kellőképpen hasonló szövegrész. Az OmegaT fordítási memóriákat felhasználva emlékezik korábbi fordításaira és ezek alapján a legvalószínűbb fordításra tesz javaslatokat az éppen fordítandó szövegre vonatkozóan.</p>
+
+	<p>A fordítási memóriák ugyancsak nagy segítséget jelentenek, ha egy korábban lefordított dokumentumot frissíteni kell. A változatlan mondatok helyére a fordításuk kerül, míg a frissített mondatokhoz a korábbi változat jelenik meg annak legvalószínűbb fordításaként. Az eredeti irat módosításai így könnyebben kezelhetők.</p>
+
+	<p>Ha korábban készült fordítási memóriákat használ, melyeket például egy fordítóiroda vagy egy ügyfele bocsátott a rendelkezésére, az OmegaT ezeket referenciaként hasznosítja.</p>
+
+	<a name="glossary" id="glossary"></a>
+	<h2>A terminológia kezelése</h2>
+
+	<p>A terminológia kezelése a fordítás egyöntetűsége szempontjából fontos. Az OmegaT szójegyzékeket használ, melyekben egy-egy szó vagy rövid kifejezés fordítása szerepel az adott szakterület egyfajta kétnyelvű szakszótáraként. Az OmegaT az éppen fordítandó szövegrészletben lévő szavak fordítását tájékoztatási céllal jeleníti meg.</p>
+
+	<a name="process" id="process"></a>
+	<h2>A fordítás folyamata</h2>
+
+	<p>Tételezzük fel, hogy valamilyen fordítási feladatot kap, amely egyetlen szöveg lefordításától kezdve akár egy teljes könyvtárnyi, alkönyvtárakba szervezett fájlok lefordításáig tetszőleges feladatot foglalhat magában. Az állományok különféle formákban léteznek.</p>
+	
+	<p>Amikor az OmegaT felismeri, hogy egy sor fájlt kell lefordítania, a program az <a href="fileFilters.html">állományszűrési szabályok</a> szerint rákeres az <a href="filesAndDirectories.html">általa támogatott állományokra</a>, azonosítja a bennük lévő szövegrészeket, a nagyobb szövegegységeket a <a href="segmentation.html">darabolási szabályok</a> szerint elemeire darabolja, majd az egyes darabokat úgy tárja Ön elé, hogy azokon fordítás közben végig tudjon haladni.</p>
+
+	<p>Az OmegaT megjegyzi a fordításait és lehetséges fordításokat ajánl a memóriában rögzített hasonló szövegrészekhez.</p>
+
+	<p>Ha meg szeretné tekinteni az állományokat lefordított állapotukban, <a href="userInterface.html">létrehozhatja a fordításokat</a>, megnyithatja a megfelelő programmal és szemügyre veheti őket.</p>
+	<hr>
+
+	<p><a href="legalNotices.html">Jogi tudnivalók</a></p>
 </body>
 </html>

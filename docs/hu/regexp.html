@@ -1,0 +1,192 @@
+<html>
+<head>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Reguláris kifejezések - OmegaT 1.7.3 felhasználói kézikönyv</title>
+</head>
+<body>
+
+	<h1>A reguláris kifejezések szerkezete</h1>
+
+	<p>A keresésekben és szövegdarabolásban használatos reguláris kifejezések megegyeznek a Java által támogatottakkal. Ha további információkra van szüksége, ezeket megtalálja itt: <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+		
+	<p>Egyszerű oktatóprogramot számos helyen találhat a neten (pl. <a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)</p>
+
+
+	<table border="0" cellpadding="3" cellspacing="0">
+
+		<tr>
+			<td width="40%"><h2>Az alábbi szerkezet:</h2></td>
+			<td><h2>A következő egyezésnek felel meg:</h2></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Jelölők</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>(?i)</code></td>
+			<td>Kikapcsolja a nagy- és kisbetűk közötti különbségtételt (alaphelyzetben a minta érzékeny a kis- és nagybetűkre).</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Karakterek</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>x</strong></td>
+			<td>Az <strong>x</strong> karakter, kivéve az alábbiakat...</td>
+		</tr>
+		<tr>
+			<td><code>\u</code><strong>hhhh</strong></td>
+			<td>A hexadecimális&nbsp;&nbsp;<code>0x</code><strong>hhhh</strong> karakter</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\t</code></td>
+			<td>A tabulátor (<code>'\u0009'</code>)</td>
+		</tr>
+		<tr>
+			<td><code>\n</code></td>
+			<td>Az új sor (soremelés) (<code>'\u000A'</code>)</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\r</code></td>
+			<td>A kocsivissza (<code>'\u000D'</code>)</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Idézőkarakter</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\</code></td>
+			<td>Semmi, mindössze eredeti jelentésében idézi a következő karaktert. Erre akkor van szükség, ha a <code>!$()*+.&lt;&gt;?[\]^{|}</code> metakarakterekre önmagukban szeretne rákeresni.</td>
+		</tr>
+		<tr>
+			<td><code>\\</code></td>
+			<td>Ezzel kereshet magára a visszaperjelre</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\Q</code></td>
+			<td>Semmi, csak idéz minden karaktert az <code>\E</code>-ig</td>
+		</tr>
+		<tr>
+			<td><code>\E</code></td>
+			<td>Semmi, csak lezárja a <code>\Q</code>-val megkezdett idézést</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Karakterosztályok</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>[abc]</code></td>
+			<td>az <code>a</code>, <code>b</code> vagy <code>c</code> alkotta osztály (egyszerű osztály)</td>
+		</tr>
+		<tr>
+			<td><code>[^abc]</code></td>
+			<td>Az <code>a</code>, <code>b</code> vagy <code>c</code> kivételével bármely karakter (tagadás)</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>[a-zA-Z]</code></td>
+			<td><code>a</code>-tól <code>z</code>ig vagy <code>A</code>-tól <code>Z</code>-ig terjedő tartomány</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Sajátos jelentésű karakterek</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>.</code></td>
+			<td>Bármely karakter (kivéve a sort lezárókat)</td>
+		</tr>
+		<tr>
+			<td><code>\d</code></td>
+			<td>Számjegy: <code>[0-9]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\D</code></td>
+			<td>Nem számjegy (betű): <code>[^0-9]</code></td>
+		</tr>
+		<tr>
+			<td><code>\s</code></td>
+			<td>Helykihagyó karakter: <code>[ \t\n\x0B\f\r]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\S</code></td>
+			<td>Nem helykihagyó karakter: <code>[^\s]</code></td>
+		</tr>
+		<tr>
+			<td><code>\w</code></td>
+			<td>Szó: <code>[a-zA-Z_0-9]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\W</code></td>
+			<td>Nem szó: <code>[^\w]</code></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Határolók</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>^</code></td>
+			<td>Sor eleje</td>
+		</tr>
+		<tr>
+			<td><code>$</code></td>
+			<td>Sor vége</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\b</code></td>
+			<td>Szóhatár</td>
+		</tr>
+		<tr>
+			<td><code>\B</code></td>
+			<td>Nem szóhatár</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Tág kvantorok</h3></td>
+		</tr>
+		<tr>
+			<td colspan="2">A lehető legtágabb egyezéssel keresnek. Például az <code>a+</code> megtalálja az <code>aaa</code>-t az <code>aaabbb</code>-ben</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>?</code></td>
+			<td><strong>X</strong> nulla vagy egy előfordulása</td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>*</code></td>
+			<td><strong>X</strong> nulla vagy több előfordulása</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>+</code></td>
+			<td><strong>X</strong> legalább egy előfordulása</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Szűk kvantorok</h3></td>
+		</tr>
+		<tr>
+			<td colspan="2">A lehető legszűkebb egyezéssel keresnek. Például az <code>a+?</code> az <code>a</code> első előfordulását találja meg az <code>aaabbb</code>-ben</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>??</code></td>
+			<td><strong>X</strong> nulla vagy egy előfordulása</td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>*?</code></td>
+			<td><strong>X</strong> nulla vagy több előfordulása</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>+?</code></td>
+			<td><strong>X</strong> legalább egy előfordulása</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Logikai operátorok</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>XY</strong></td>
+			<td><strong>X</strong>, utána <strong>Y</strong></td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>|</code><strong>Y</strong></td>
+			<td>Vagy <strong>X</strong>, vagy <strong>Y</strong></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>(</code><strong>XY</strong><code>)</code></td>
+			<td><strong>XY</strong> egyetlen csoportként</td>
+		</tr></table>
+
+	<hr>
+
+	<a href="legalNotices.html">Jogi tudnivalók</a>
+</body>
+</html>

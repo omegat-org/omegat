@@ -1,43 +1,71 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Propietats del projecte - Manual d'usuari de l'OmegaT 1.6.1</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Propietats del projecte - Manual d'usuari de l'OmegaT 1.7.3</title>
 </head>
 <body>
 
-<h1>Propietats del projecte</h1>
+	<h1>Propietats del projecte</h1>
 
-<p>Aquest diàleg us permet modificar les carpetes i les llengües del projecte. Podeu obrir-lo prement <a href="keyboardShortcuts.html" title="Dreceres de teclat de l'OmegaT"><code>Ctrl+E</code></a> o seleccionant <strong>Projecte -&gt; Propietats...</strong> al <a href="menu.html" title="Menú principal">menú principal</a>.</p>
+	<ul>
+		<li><a href="#dialog">Diàleg Propietats</a>
+			<ul>
+				<li><a href="#language">Modificacions de la llengua</a></li>
+				<li><a href="#segments">Modificacions de la segmentació</a></li>
+				<li><a href="#folder">Modificació de l'estructura de carpetes</a></li>
+			</ul>
+		</li>
+		<li><a href="#warning">Modificació de les propietats del projecte durant la sessió</a></li>
+	</ul>
+	
+<hr>
 
-<p>El diàleg conté:</p>
+	<a name="dialog" id="dialog"></a>
+	<h1>Diàleg Propietats</h1>
 
-<ul>
-   <li>Una àrea per a definir les llengües de partida i d'arribada mitjançant llistes desplegables</li>
-   <li>Els valors de configuració de la segmentació</li>
-   <li>Una àrea per a definir les carpetes del projecte</li>
-</ul>
+	<p>Aquest diàleg us permet modificar les carpetes i les llengües del projecte. Podeu obrir-lo prement  <code><a href= "menu.html#shortcuts">Ctrl+E</a></code> o seleccionant <strong>Projecte → Propietats...</strong> al <a href="menu.html">menú principal</a>. El diàleg conté:</p>
 
-<p>Tots els camps són editables. Podeu especificar les llengües manualment o utilitzant les llistes desplegables. Si escriviu noms de carpetes que no existeixen, l'OmegaT les crearà.</p>
+	<ul>
+		<li>Una àrea per a definir les llengües de partida i d'arribada mitjançant llistes desplegables</li>
+		<li>Els valors de configuració de la segmentació</li>
+		<li>Una àrea per a definir les carpetes del projecte</li>
+	</ul>
 
-<a name="Modifying_Project_Properties_Half-Way"></a>
-<h3>Modificació de les propietats del projecte quan la traducció ja ha començat</h3>
+	<p>Tots els camps són editables. Podeu especificar les llengües manualment o utilitzant les llistes desplegables. Si escriviu noms de carpetes que no existeixen, l'OmegaT les crearà.</p>
+	
 
-<p>Durant la traducció, podeu modificar les propietats del projecte en qualsevol moment, però no és recomanable. Tots els valors s'haurien de considerar com a "finals" un cop començada la traducció, a menys que detecteu una errada greu.</p>
+	<a name="language" id="language"></a>
+	<h2>Modificació de la llengua</h2>
+	
+	<p>Cal tenir en compte que la modificació de les llengües pot fer que les memòries de traducció utilitzades fins llavors quedin inservibles, ja que és possible que les llengües de les memòries no coincideixin amb les noves llengües especificades.</p>
+	
+	<a name="segments" id="segments"></a>
+	<h2>Modificacions de la segmentació</h2>
+	
+	<p>Els paràmetres de segmentació només modifiquen la manera com l'OmegaT manipula els fitxers de partida. No modifiquen la segmentació de les memòries de traducció ja existents.</p>
+	
+	<p>Si canvieu les paràmetres de segmentació, és possible que alguns segments ja traduïts quedin dividits o fusionats. A efectes pràctics, això farà que tornin a l'estat "no traduït", ja que no coincidiran amb els segments desats a la memòria del projecte, tot i que la traducció antiga (i ara no coincident) encara sigui a la memòria.</p>
+	
+	<p>L'OmegaT pot <a href= "translationMemories.html#Upgrading_Translation_Memories">actualitzar memòries de traducció anteriors</a> en les quals no es va utilitzar la segmentació per frases, però no a la inversa, i tampoc no pot fer-ho en el cas de la memòria de traducció del projecte si en canvieu la segmentació un cop començada la traducció.</p>
 
-<p>En concret:</p>
-
-<ul>
-   <li>La modificació de les llengües pot fer que les memòries de traducció utilitzades fins llavors quedin inservibles, ja que és possible que les llengües de les memòries no coincideixin amb les noves llengües especificades.</li>
-
-   <li>La modificació dels valors de segmentació pot fer que es divideixin o s'uneixin segments ja traduïts, cosa que els restablirà a l'estat "no traduït", malgrat que la memòria de traducció encara contingui la traducció anterior que ara no coincideix. L'OmegaT pot <a href="translationMemories.html#Upgrading_Translation_Memories" title="Memòries de traducció">actualitzar memòries de traducció anteriors</a> en les quals no es va utilitzar la segmentació per frases, però no a la inversa, i tampoc no pot fer-ho en el cas de la memòria de traducció del projecte si en canvieu la segmentació un cop començada la traducció.</li>
-
-   <li>La modificació de les carpetes del projecte no mourà els fitxers de les carpetes antigues a les noves; per tant, correu el risc de trobar-vos en una situació en què ni l'usuari ni l'OmegaT no sapigueu què signifiquen realment les carpetes ni quines s'estan utilitzant.</li>
-</ul>
-
-<p>Vegeu l'apartat <a href="preventingDataLoss.html" title="Prevenció de pèrdua de dades">Prevenció de pèrdua de dades</a> per a obtenir més informació sobre les formes de protegir la vostra feina.</p>
+	<a name="folder" id="folder"></a>
+	<h2>Modificació de l'estructura de carpetes</h2>
+	
+	<p>Si voleu modificar les carpetes del projecte, tingueu en compte que aquesta operació no mourà els fitxers que contenen de les carpetes antigues a les noves. Per tant, correu el risc de trobar-vos en una situació en què ni l'usuari ni l'OmegaT no sapigueu què signifiquen realment les carpetes ni quines s'estan utilitzant.</p>
 
 <hr>
-<p><a href="legalNotices.html" title="Avisos legals">Avisos legals</a></p>
 
+	<a name="warning" id="warning"></a>
+	<h1>Modificació de les propietats del projecte durant la sessió</h1>
+
+	<p>Durant la traducció, es poden modificar les propietats del projecte.</p>
+	
+	<p>No obstant, la forma més segura seria considerar tots els valors com a "finals" un cop començada la traducció, a menys que detecteu una errada greu. Vegeu l'apartat <a href= "preventingDataLoss.html">Prevenció de pèrdua de dades</a> per a obtenir més informació sobre les formes de protegir la vostra feina.</p>
+
+
+	<hr>
+
+	<p><a href="legalNotices.html">Avisos legals</a></p>
 </body>
 </html>

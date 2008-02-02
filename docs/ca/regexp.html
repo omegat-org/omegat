@@ -1,0 +1,192 @@
+<html>
+<head>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Expressions regulars - Manual d'usuari de l'OmegaT 1.7.3</title>
+</head>
+<body>
+
+	<h1>Construccions d'expressions regulars</h1>
+
+	<p>Les expressions regulars que podeu utilitzar en les cerques i en les regles de segmentació són les que permet el Java. Si necessiteu informació més específica, visiteu <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+		
+	<p>Podeu trobar guies d'aprenentatge senzilles al web (per exemple, <a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>).</p>
+
+
+	<table border="0" cellpadding="3" cellspacing="0">
+
+		<tr>
+			<td width="40%"><h2>La construcció següent:</h2></td>
+			<td><h2>Coincideix amb la seqüència següent:</h2></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Indicadors</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>(?i)</code></td>
+			<td>Fa que les cerques no distingeixin entre majúscules i minúscules (per defecte, es distingeix entre majúscules i minúscules).</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Caràcters</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>x</strong></td>
+			<td>El caràcter <strong>x</strong>, excepte els següents...</td>
+		</tr>
+		<tr>
+			<td><code>\u</code><strong>hhhh</strong></td>
+			<td>El caràcter amb valor hexadecimal <code>0x</code><strong>hhhh</strong></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\t</code></td>
+			<td>El caràcter de tabulació (<code>'\u0009'</code>)</td>
+		</tr>
+		<tr>
+			<td><code>\n</code></td>
+			<td>El caràcter de nova línia (salt de línia) (<code>'\u000A'</code>)</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\r</code></td>
+			<td>El caràcter de retorn de carro  (<code>'\u000D'</code>)</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Cita</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\</code></td>
+			<td>No res, però cita literalment el caràcter següent. És necessari si especifiqueu metacaràcters <code>!$()*+.&lt;&gt;?[\]^{|}</code> i voleu que coincideixin amb els caràcters literalment.</td>
+		</tr>
+		<tr>
+			<td><code>\\</code></td>
+			<td>Per exemple, això representa el caràcter de barra inversa</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\Q</code></td>
+			<td>No res, però cita literalment tots els caràcters fins que s'especifiqui <code>\E</code></td>
+		</tr>
+		<tr>
+			<td><code>\E</code></td>
+			<td>No res, però indica que acaba la cita literal iniciada per <code>\Q</code></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Classes de caràcters</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>[abc]</code></td>
+			<td><code>a</code>, <code>b</code> o <code>c</code> (classe senzilla)</td>
+		</tr>
+		<tr>
+			<td><code>[^abc]</code></td>
+			<td>Qualsevol caràcter excepte <code>a</code>, <code>b</code> o <code>c</code> (negació)</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>[a-zA-Z]</code></td>
+			<td>D'<code>a</code> a <code>z</code> o d'<code>A</code> a <code>Z</code>, ambdós inclosos (àmbit)</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Classes de caràcters predefinides</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>.</code></td>
+			<td>Qualsevol caràcter (excepte salts de línia)</td>
+		</tr>
+		<tr>
+			<td><code>\d</code></td>
+			<td>Un dígit: <code>[0-9]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\D</code></td>
+			<td>Qualsevol caràcter menys un dígit: <code>[^0-9]</code></td>
+		</tr>
+		<tr>
+			<td><code>\s</code></td>
+			<td>Un caràcter d'espai en blanc: <code>[ \t\n\x0B\f\r]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\S</code></td>
+			<td>Qualsevol caràcter menys l'espai en blanc:  <code>[^\s]</code></td>
+		</tr>
+		<tr>
+			<td><code>\w</code></td>
+			<td>Un caràcter de paraula: <code>[a-zA-Z_0-9]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\W</code></td>
+			<td>Qualsevol caràcter menys un caràcter de paraula: <code>[^\w]</code></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Caràcters de límit</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>^</code></td>
+			<td>L'inici d'una línia</td>
+		</tr>
+		<tr>
+			<td><code>$</code></td>
+			<td>El final d'una línia</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\b</code></td>
+			<td>Un límit de paraula</td>
+		</tr>
+		<tr>
+			<td><code>\B</code></td>
+			<td>Qualsevol límit menys el de paraula</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Quantificadors "voraços"</h3></td>
+		</tr>
+		<tr>
+			<td colspan="2">Coincideixen amb tants caràcters com sigui possible. Per exemple, <code>a+</code> coincidirà amb <code>aaa</code> dins d'<code>aaabbb</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>?</code></td>
+			<td><strong>X</strong>, una vegada o cap</td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>*</code></td>
+			<td><strong>X</strong>, zero o més vegades</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>+</code></td>
+			<td><strong>X</strong>, una o més vegades</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Quantificadors "no voraços"</h3></td>
+		</tr>
+		<tr>
+			<td colspan="2">Coincideixen amb tan pocs caràcters com sigui possible. Per exemple, <code>a+?</code> coincidirà amb la primera <code>a</code> dins d'<code>aaabbb</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>??</code></td>
+			<td><strong>X</strong>, una vegada o cap</td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>*?</code></td>
+			<td><strong>X</strong>, zero o més vegades</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>+?</code></td>
+			<td><strong>X</strong>, una o més vegades</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Operadors lògics</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>XY</strong></td>
+			<td><strong>X</strong> seguida d'<strong>Y</strong></td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>|</code><strong>Y</strong></td>
+			<td><strong>X</strong> o bé <strong>Y</strong></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>(</code><strong>XY</strong><code>)</code></td>
+			<td><strong>XY</strong> com a un grup únic</td>
+		</tr></table>
+
+	<hr>
+
+	<a href="legalNotices.html">Avisos legals</a>
+</body>
+</html>

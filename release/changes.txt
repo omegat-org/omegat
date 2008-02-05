@@ -6,7 +6,7 @@
 
 
   14 Enhancements
-   1 Bugfixe
+   2 Bugfixes
 
 ----------------------------------------------------------------------
 1.8.0
@@ -60,6 +60,10 @@
   
   - HTML filter loses html-encoded characters if not supported
   http://sourceforge.net/support/tracker.php?aid=1802000
+
+  - Check-spelling/styles error
+  http://sourceforge.net/support/tracker.php?aid=1822579 
+
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 update 1 Changes

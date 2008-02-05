@@ -116,7 +116,14 @@ public final class Styles
      */
     public static MutableAttributeSet applyStyles(AttributeSet base, AttributeSet toApply) {
         MutableAttributeSet result = new SimpleAttributeSet();
-        StyleConstants.setBackground(result, StyleConstants.getBackground(base));
+        try 
+        {
+            StyleConstants.setBackground(result, StyleConstants.getBackground(base));
+        }
+        catch( java.lang.NullPointerException e ) // Hack for [ 1822579 ] 
+        {                                         // Check-spelling/styles error
+            StyleConstants.setBackground(result, Color.white);
+        }
         StyleConstants.setForeground(result, StyleConstants.getForeground(toApply));
         StyleConstants.setBold(result, StyleConstants.isBold(toApply));
         StyleConstants.setUnderline(result, StyleConstants.isUnderline(toApply));

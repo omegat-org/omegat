@@ -73,7 +73,7 @@
 
 
   7 Enhancements
-  6 Bugfixes
+  7 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.3 update 1
@@ -111,6 +111,9 @@
 
   - PO-filter fails to handle plural forms
   http://sourceforge.net/support/tracker.php?aid=1879892    
+
+  - Non-translatable strings displayed in OOo documents
+  http://sourceforge.net/support/tracker.php?aid=1888097 
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 Changes

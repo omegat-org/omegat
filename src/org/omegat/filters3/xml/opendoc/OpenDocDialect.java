@@ -149,7 +149,7 @@ public class OpenDocDialect extends DefaultXMLDialect
             "dc:language",                                                      // NOI18N
             "meta:editing-cycles",                                              // NOI18N
             "meta:editing-duration",                                            // NOI18N
-            
+            "meta:user-defined",                                                // NOI18N
         });
         if (options.getTranslateNotes())
         {

@@ -1,201 +1,144 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Bronsegmentatie - OmegaT 1.6.2 Gebruikershandleidin</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Bronsegmentatie - OmegaT 1.7.3 Gebruikershandleiding</title>
 </head>
+
 <body>
+	<h1>Bronsegmentatie</h1>
 
-<h1>Bronsegmentatie</h1>
+	<ul>
+		<li><a href="#structure">Segmentatie op structuurniveau</a></li>
+		<li><a href="#sentence">Segmentatie op zinniveau</a>
+			<ul>
+				<li><a href="#about">Segmentatieregels</a></li>
+				<li><a href="#setup">Regels instellen</a>
+					<ul>
+						<li><a href="#priority">Prioriteit</a></li>
+						<li><a href="#creation">Maken van regels</a></li>
+						<li><a href="#breal">Afbreken/Uitzondering</a></li>
+						<li><a href="#setup">Eenvoudige voorbeelden</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="regexp.html">Constructies van reguliere uitdrukkingen</a></li>
+	</ul>
+	
+	<p>Programma's met vertaalgeheugens werken met teksteenheden die segmenten worden genoemd. OmegaT heeft 2 manieren om een tekst te segmenteren: alineasegmentatie en zinsegmentatie.</p>
 
-<h2>Inhoud</h2></div>
+	<p>Selecteer <strong>Project → Eigenschappen...</strong> uit het hoofdmenu en gebruik het beschikbare keuzevak om het type van segmentatie te selecteren.</p>
 
-<ul type="none">
-   <li>1. <a href="#Segmentatie_basisbegrippen">Basisbegrippen van segmentatie</a></li>
+	<p>Als zinsegmentatie is geselecteerd kunt u de regels instellen door <strong>Opties → Segmentatie...</strong> te selecteren uit het hoofdmenu.</p>
 
-   <li>2. <a href="#Zin_segmentatie">Zin-segmentatie</a>
+	<p>Merk op dat een groot deel van de ontwikkeling is gaan zitten in het ontwikkelen van betrouwbare segmentatieregels, dus in de meeste gevallen zal het niet nodig zijn om uw eigen segmentatieregels te schrijven. Aan de andere kant kan deze functionaliteit in speciale gevallen bijzonder handig zijn door u toe te staan te vertalen wat vertaald moet worden, zonder daarbij het gevaar te lopen dat wat moet blijven zoals het is, gewijzigd wordt.</p>
+	
+	<p><strong>Waarschuwing!</strong> Wijzigen van de filteropties als een project is geopend, kan leiden tot gegevensverlies. Als u de segmentatie-opties wijzigt als een project geopend is moet u het project herladen vóórdat de wijzigingen effect hebben.</p>
 
-      <ul>
-         <li>2.1. <a href="#Over_regels">Over regels</a></li>
 
-         <li>2.2. <a href="#Regels_instellen">Regels instellen</a>
+	<hr>
+	<a name="structure" id="structure"></a>
+	<h1>Segmentatie op structuurniveau</h1>
 
-            <ul>
-               <li>2.2.1. <a href="#Verzamelingen_van_regels">Verzamelingen van regels</a></li>
-               <li>2.2.2. <a href="#Eenvoudige_voorbeelden">Eenvoudige voorbeelden</a></li>
-            </ul>
-         </li>
+	<p>OmegaT parst eerst de tekst voor segmentatie op structuur-niveau. Gedurende dit proces wordt alleen de structuur van het brondocument gebruikt om segmenten te maken.</p>
+	
+	<p><a href="fileFilters.html#filter_options">Tekstbestanden</a> kunnen bijvoorbeeld gesegmenteerd worden op regeleinden, lege regels of helemaal niet gesegmenteerd worden. Bestanden met opmaak (OpenOffice.org-documenten, HTML-documenten, etc.) worden gesegmenteerd op blokniveau (alinea) tags. Vertaalbare object-<a href="fileFilters.html#filter_options">attributen</a> in XHTML of HTML-bestanden kunnen als afzonderlijke segmenten worden geëxtraheerd.</p>
 
-         <li>2.3. <a href="#Reguliere_uitdrukkingen_om_te_ gebruiken_in_segmentatieregels"> Reguliere uitdrukkingen om te gebruiken in segmentatieregels</a>
+	<hr>
+	<a name="sentence" id="sentence"></a>
+	<h1>Segmentatie op zinniveau</h1>
 
-            <ul>
-               <li>2.3.1. <a href="#Korte_samenvatting_van_constructies_van_reguliere_uitdrukkingen">Korte samenvatting van constructies van reguliere uitdrukkingen</a></li>
-            </ul>
-         </li>
-      </ul>
-   </li>
-</ul>
+	<p>Nadat het bronbestand in logische eenheden is gesegmenteerd, zal OmegaT deze blokken verder segmenteren in zinnen.</p>
+	
+	<a name="about" id="about"></a>
+	<h2>Segmentatieregels</h2>
 
-<a name="Segmentation_Basics"></a>
-<h2>Basisbegrippen van segmentatie</h2>
+	<p>Het segmenteringsproces kan als volgt worden voorgesteld: stel de cursor voor die zich langs de tekst verplaatst, één teken per keer. Voor elke cursorpositie wordt elke regel in de opgegeven volgorde toegepast en probeert of het <strong>Voor</strong>-patroon toe te passen is op alle tekst die links van de cursor staat en het <strong>Na</strong>-patroon op de tekst rechts van de cursor. Als de regel overeenkomt stopt het programma het beoordelen van de regels (voor de uitzonderingsregel) of maakt een nieuw segment (voor de afbreekregels).</p>
 
-<p>Programma's met vertaalgeheugens werken met teksteenheden die segmenten worden genoemd. Er bestaan meerdere manieren om een tekst op te delen in segmenten.</p>
+	<p>De zinsegmentatie is geïmplementeerd met behulp van de <a href= "http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a>-standaard - let er wel op dat niet alle SRX-mogelijkheden worden ondersteund. En het is niet mogelijk om in SRX-formaat gedefinieerde regels te importeren/exporteren. Als u echter weet hoe SRX werkt, zult u al heel veel weten over de manier waarop OmegaT de segmentatie doet.</p>
 
-<p>OmegaT parst eerst de tekst voor segmentatie op structuur-niveau. Gedurende dit proces wordt alleen de structuur van het brondocument gebruikt om segmenten te maken. Bijvoorbeeld: tekstbestanden kunnen worden gesegmenteerd op regeleinden, lege regels of helemaal niet op structuurniveau worden gesegmenteerd. Bestanden met opmaak (OpenOffice.org, OpenDocument, XHTML- en HTML-documenten) worden gesegmenteerd op blok-niveau (alinea) tags.</p>
+	<p>Er zijn twee soorten regels:</p>
 
-<p>Vertaalbare objectattributen (in XHTML- of HTMLbestanden) worden ook als afzonderlijke segmenten ingedeeld.</p>
+	<ul>
+		<li><strong>Afbreekregels</strong> scheiden de brontekst in segmenten.<p><strong>Voorbeeld</strong>: <i>"Begrijpt u dat? Ik was er niet zeker van."</i> zou moeten worden gescheiden in twee segmenten.<br> Er zou een afbreekregel moeten zijn voor "<code>?</code>".</p></li>
+		<li><strong>Uitzonderingsregels</strong> specificeren welke gedeelten van tekst NIET zouden moeten worden gescheiden.<p><strong>Voorbeeld</strong>: <i>"Mrs. Dalloway "</i> zou niet moeten worden gescheiden, dus een uitzonderingsregel zou moeten worden gemaakt voor Mrs (en Mr en Dr en prof etc), gevolgd door een punt.</p></li>
+	</ul>
 
-<p>OmegaT kan ook segmenteren per zin. Zin-segmentatie gebeurt na de segmentatie op structuur-niveau. Segmenten die gedurende beide processen worden gemaakt kunnen helaas niet worden gewijzigd (gesplitst of samengevoegd) tijdens de vertaling. Dit is een beperking van OmegaT welke wij erkennen.</p>
+	<p>De voorgedefinieerde afbreekregels zouden voldoende moeten zijn voor de meeste Europese talen en Japans. Gezien de flexibiliteit kunt u overwegen om meer uitzonderingsregels te definiëren voor de taal waaruit u vertaald om u meer betekenisvolle en samenhangende segmenten te geven.</p>
 
-<p>Als u niet tevreden bent met de segmentatie dient u ofwel het bronbestand extern aan te passen, dan wel de segmentatieregels aan te passen. Als dat eenmaal is gedaan moet u het project herladen om uw aanpassingen te kunnen doorvoeren.</p>
+	<a name="setup" id="setup"></a>
+	<h2>Regels instellen</h2>
 
-<a name="Sentence_Segmentation"></a>
-<h2>Zin-segmentatie</h2>
 
-<p>Nadat OmegaT het bronbestand in logische eenheden heeft gesegmenteerd, voor opgemaakte bestanden meestal overeenkomend met alinea's, zal het deze blokken verder segmenteren in zinnen als u Zin-segmentatie niet heeft uitgeschakeld. Algemeen gesproken kan OmegaT de logische bronbestand-blokken segementeren naar elk segment dat u instelt. Als <strong>standaard</strong> segmenteert OmegaT echter in zinnen, we zullen dat <strong>zin</strong>-segmentatie noemen.</p>
+	<a name="priority" id="priority"></a>
+	<h3>Prioriteit</h3>
 
-<p>De Zin-segmentatie werd ingebouwd met de <a href="http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a>-standaard in gedachten, maar op het moment van schrijven ondersteunt OmegaT niet alle SRX-mogelijkheden, noch is het in staat om in SRX-formaat gedefinieerde regels te im-/exporteren. Maar als u weet hoe SRX werkt, dan weet u ook al hoe OmegaT werkt omdat ze min of meer hetzelfde zijn.</p>
+	<p>Alle segmentatieregels die zijn ingesteld met een overeenkomend taalpatroon worden toegepast in de opgegeven volgorde van prioriteit, dus regels voor een specifieke taal zouden hoger moeten staan dan de standaardregels.</p>
+	
+	<p>Regels voor Canadees Frans (FR-CA) zouden bijvoorbeeld hoger moeten staan dan de regels voor Frans (FR.*) en hoger dan de standaardregels (.*). Dan zal bij vertalen vanuit Canadees Frans uw project de regels, die zijn gedefinieerd voor die taal, de regels voor Frans en de standaardregels, in de juiste volgorde gebruiken.</p>
 
-<a name="About_Rules"></a>
-<h3>Over regels</h3>
+	<a name="creation" id="creation"></a>
+	<h3>Maken van regels</h3>
+	
+	<p>Klik op <strong>Toevoegen</strong> in het bovengedeelte van het dialoogvenster om een lege verzameling van regels te maken. Een nieuwe regel verschijnt aan de onderzijde van de tabel.</p>
+	
+	<p>Wijzig de naam van de regelverzameling en het taalpatroon. De syntax van het taalpatroon komt overeen met de syntax voor <a href="regexp.html">reguliere uitdrukkingen</a>. Als uw regelverzameling een taal/land-paar betreft raden wij u aan om het naar boven te verplaatsen met de knop <strong>Naar boven</strong>. Klik eenvoudigweg op een regelverzameling in een tabel om die te bewerken, de regels van de verzameling zullen in het onderste gedeelte van het venster verschijnen.</p>
 
-<p>Er zijn twee soorten mogelijke regels.</p>
+	<a name="break" id="break"></a>
+	<h3>Afbreken/Uitzondering</h3>
+	
+	<p>Het keuzevak Afbreken/Uitzondering bepaalt of het een afbreekregel (keuzevak geselecteerd) of een uitzonderingsregel is (keuzevak niet geselecteerd). Twee reguliere uitdrukkingen Voor en Na specificeren wat er voor en na een bepaalde positie staat zodat het voldoet aan de uitzonderingsregel of de afbreekregel.</p>
 
-<ul>
-   <li>Afbreekregels breken de tekst in segmenten.</li>
-   <li>Uitzonderingregels specificeren welke stukken tekst niet van andere mogen worden gescheiden.</li>
-</ul>
 
-<p>Voorbeeld afbreekregel: <i>"Did it make sense? I was not sure."</i> kan gesegmenteerd worden als twee zinnen na het "<code>?</code>". Er zou een afbreekregel moeten zijn voor "<code>?</code>".</p>
+	<a name="examples" id="examples"></a>
+	<h3>Een paar eenvoudige voorbeelden</h3>
 
-<p>Voorbeeld uitzonderingregel: <i>"Who is afraid of Mrs. Woolf?"</i> kan niet worden gesegmenteerd na de "<code>.</code>". Er zou een uitzonderingregel moeten zijn voor "<code>Mrs.</code>".</p>
+	<table border="0" cellpadding="4" cellspacing="0">
+		<tr bgcolor="#DDDDDD">
+			<td width="25%"><strong>Bedoeling</strong></td>
+			<td><strong>Vóór</strong></td>
+			<td><strong>Na</strong></td>
+			<td width="50%"><strong>Opmerking</strong></td>
+		</tr>
+		<tr>
+			<td>stel een segment in na een punt ('<code>.</code>') en vóór een spatie</td>
+			<td><code>\.</code></td>
+			<td><code>\s</code></td>
+			<td>"<code>\.</code>" betekent het teken "<code>.</code>" "<code>\s</code>" betekent elk teken voor witruimte</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td>niet segmenteren na Mr.</td>
+			<td><code>Mr\.</code></td>
+			<td><code>\s</code></td>
+			<td>Het is een uitzonderingsregel, dus het keuzevak voor de regel moet niet zijn geselecteerd</td>
+		</tr>
+		<tr>
+			<td><code>stel een segment in na</code> <code>"</code><code>。</code><code>"</code> <code>(Japanse punt)</code></td>
+			<td><code>。</code> </td>
+			<td></td>
+			<td>Let er op dat <i>na</i> leeg is</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td>niet segmenteren na M. Mr. Mrs. en Ms.</td>
+			<td><code>Mr??s??\.</code></td>
+			<td><code>\s</code></td>
+			<td>uitzonderingsregel - zie het gebruik van ? in reguliere uitdrukkingen (niet-gulzige parameters)</td>
+		</tr>
+	</table>
 
-<p>De voorgedefinieerde afbreekregels zouden voldoende moeten zijn voor de meeste Europese talen en Japans, maar we raden aan om meer uitzonderingregels te definiëren voor de taal waaruit u vertaalt, omdat het uiteraard onmogelijk is om alle mogelijke uitzonderingen voor alle mogelijke talen vooraf te definiëren.</p>
+	<hr>
+	<a name="regex" id="regex"></a>
+	<h1>Samenvatting van constructies van reguliere uitdrukkingen</h1>
 
-<a name="Rules_Setup"></a>
-<h3>Regels instellen</h3>
+	<p>De reguliere uitdrukkingen die worden gebruikt in segmentatieregels zijn die welke worden ondersteund door Java. Een korte samenvatting is beschikbaar in de appendix <a href="regexp.html">Constructies van reguliere uitdrukkingen</a>.</p>
+	
+	<p>Als u meer specifieke informatie nodig heeft raadpleeg dan <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+		
+	<p>U kunt eenvoudige handleidingen vinden op het web (<a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a> bijvoorbeeld.)</p>
 
-<p>Selecteer <strong>Opties -&gt; Segmentatie...</strong> uit het hoofdmenu om de regels in te stellen. Let er op dat u als u segmentatie-opties wijzigt als een project geopend is, u het project moet herladen om de wijzigingen door te voeren.</p>
+	<hr>
 
-<a name="Sets_of_Rules"></a>
-<h4>Verzamelingen van regels</h4>
-
-<p>Alle segmentatieregels die zijn ingesteld met een overeenkomend taalpatroon worden toegepast in de opgegeven volgorde van prioriteit, dus regels voor een specifieke taal zouden hoger moeten staan dan de standaardregels.</p>
-
-<p>Regels voor Canadees Frans (FR-CA) zouden bijvoorbeeld hoger moeten staan dan de regels voor Frans (FR.*) en hoger dan de standaardregels (.*). Dan zal bij vertalen vanuit Canadees Frans uw project de regels, die zijn gedefinieerd voor die taal, de regels voor Frans en de standaardregels, in de juiste volgorde gebruiken.</p>
-
-<p>Klik op <strong>Toevoegen</strong> in het bovengedeelte van het dialoogvenster om een lege verzameling van regels te maken. Een nieuwe regel verschijnt aan de onderzijde van de tabel. Wijzig de naam van de regelverzameling en het taalpatroon. De syntax van het taalpatroon komt overeen met de syntax voor reguliere uitdrukkingen. Zie de sectie <a href="#Korte_samenvatting_van_constructies_van_reguliere_uitdrukkingen">Korte samenvatting van constructies van reguliere uitdrukkingen</a> hieronder.</p>
-
-<p>Als uw verzameling van regels een taal/land-paar betreft raden wij u aan om het naar boven te verplaatsen met de knop <strong>Naar boven</strong>.</p>
-
-<p>Klik eenvoudigweg op een verzameling van regels in een tabel om die te bewerken, de regels van de verzameling zullen in het onderste gedeelte van het venster verschijnen.</p>
-
-<p>Het keuzevak Afbreek/Uitzondering bepaalt of het een afbreekregel (keuzevak geselecteerd) of een uitzonderingregel is (keuzevak niet geselecteerd). Twee reguliere uitdrukkingen Voor en Na specificeren wat er voor en na een bepalde positie staat zodat het voldoet aan of de uitzonderingregel of de afbreekregel.</p>
-
-<p>Het proces van segmenteren kan vereenvoudigd worden voorgesteld door het volgende. Stelt u zich een cursor voor die zich verplaatst van ná het eerste tot vóór het laatste teken van een tekst. Voor elke cursorpositie nemen we elke regel in de opgegevn volgorde en proberen het <strong>Voor</strong>-patroon toe te passen op alle tekst die links van de cursor staat en het <strong>Na</strong>-patroon op de tekst rechts daarvan, zodat zij de cursor raken.</p>
-
-<p>Als de toepassing van een regel succesvol is, voor uitzonderingregels doen we niets maar stoppen het onderzoeken van meer regels en voor afbreekregels nemen we de tekst links als een afzonderlijk segment, voor elke cursorpositie in de tekst.</p>
-
-<a name="Simple_examples"></a>
-<h4>Eenvoudige voorbeelden</h4>
-
-<p>
-<dl>
-   <dt><strong>Doel:</strong> een segment instellen na een punt ('<code>.</code>') en vóór een spatie</dt>
-   <dd>Voor: <code>\.</code> Na: <code>\s</code> <br> <strong>Opmerking:</strong> "<code>\.</code>" betekent het teken "<code>.</code>" <br> "<code>\s</code>" betekent elk teken voor witruimte</dd>
-
-   <dt><strong>Doel:</strong> geen segment instellen na "Mr."</dt>
-   <dd>Voor: <code>Mr\.</code> Na: <code>\s</code> <br> <strong>Opmerking:</strong> Vergeet niet om het keuzevak <strong>niet geselecteerd</strong> te laten
-   </dd>
-
-   <dt><strong>Doel:</strong> een segment instellen na "。" (Japanse punt)</dt>
-   <dd>Voor: 。 Na: (leeg) <br> <strong>Opmerking:</strong> U kunt een veld leeg laten</dd>
-</dl>
-</p>
-
-<a name="Regular_Expressions_to_use_in_segmentation_rules"></a>
-<h3>Reguliere uitdrukkingen om te gebruiken in segmentatieregels</h3>
-
-<p>De segmentatieregels zelf worden weergegeven als reguliere uitdrukkingen. Dit zorgt voor maximale flexibiliteit in de definities van regels en sluit aan bij SRX.</p>
-
-<a name="Short_summary_of_regular-expression_constructs"></a>
-<h4>Korte samenvatting van constructies van reguliere uitdrukkingen</h4>
-
-<p>Dit zijn niet de enige constructies die u mag gebruiken in OmegaT segmentatieregels, maar meer de meest toegepaste. OmegaT ondersteunt alle mogelijkheden voor reguliere uitdrukkingen zoals beschreven in de <a href="http://www.lisa.org/standards/srx/">SRX-standaard</a>.</p>
-
-<table border="0" width="80%" cellpadding="1" cellspacing="0" summary="Constructies van reguliere uitdrukkingen en waar zij mee overeenkomen">
-    <tr bgcolor="#DDEEFF"><th width="10%" align="left" id="construct">Constructie&nbsp;</th><th align="left">Overeenkomsten</th></tr>
-
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="flags">Vlaggen</th></tr>
-    <tr><td><tt>(?i)</tt></td><td>Schakelt overeenkomen van hoofd-/kleine letters in (standaard is het patroon hoofdletter-gevoelig).</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr><th align="left" colspan="2" id="characters">Tekens</th></tr>
-    <tr><td><strong>x</strong></td><td>Het teken <strong>x</strong>, met uitzondering van het volgende...</td></tr>
-
-    <tr><td><tt>\u</tt><strong>hhhh</strong></td><td>Het teken met de hexadecimale waarde&nbsp;<tt>0x</tt><strong>hhhh</strong></td></tr>
-    <tr><td><tt>\t</tt></td><td>Het Tab-teken (<tt>'\u0009'</tt>)</td></tr>
-    <tr><td><tt>\n</tt></td><td>Het teken voor een nieuwe regel (line feed) (<tt>'\u000A'</tt>)</td></tr>
-
-    <tr><td><tt>\r</tt></td><td>Het teken voor een carriage-return (<tt>'\u000D'</tt>)</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="quot">Quote</th></tr>
-    <tr><td><tt>\</tt></td><td>Niets, maar quote het volgende teken. Dit is vereist als u een van de metatekens <code>!$()*+.&lt;&gt;?[\]^{|}</code> zou willen invoeren om overeen te komen als hetzelfde teken.</td></tr>
-
-    <tr><td><tt>\\</tt></td><td>Dit is bijvoorbeeld het teken voor een backslash</td></tr>
-    <tr><td><tt>\Q</tt></td><td>Niets, maar quote alle tekens tot <tt>\E</tt></td></tr>
-    <tr><td><tt>\E</tt></td><td>Niets, maar beëindigt quoten dat werd gestart door <tt>\Q</tt></td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="classes">Tekenklassen</th></tr>
-
-    <tr><td><tt>[abc]</tt></td><td><tt>a</tt>, <tt>b</tt> of <tt>c</tt> (eenvoudige klasse)</td></tr>
-    <tr><td><tt>[^abc]</tt></td><td>Elk teken met uitzondering van <tt>a</tt>, <tt>b</tt> of <tt>c</tt> (negatie)</td></tr>
-
-    <tr><td><tt>[a-zA-Z]</tt></td><td><tt>a</tt> tot en met <tt>z</tt> of <tt>A</tt> tot en met <tt>Z</tt> inclusief (bereik)</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="predef">Voorgedefinieerde tekenklassen</th></tr>
-
-    <tr><td><tt>.</tt></td><td>Elk teken (met uitzondering van regeleinden)</td></tr>
-    <tr><td><tt>\d</tt></td><td>Een getal: <tt>[0-9]</tt></td></tr>
-    <tr><td><tt>\D</tt></td><td>Geen getal: <tt>[^0-9]</tt></td></tr>
-    <tr><td><tt>\s</tt></td><td>Een teken voor witruimte: <tt>[ \t\n\x0B\f\r]</tt></td></tr>
-
-    <tr><td><tt>\S</tt></td><td>Een teken niet zijnde witruimte: <tt>[^\s]</tt></td></tr>
-    <tr><td><tt>\w</tt></td><td>Een woordteken: <tt>[a-zA-Z_0-9]</tt></td></tr>
-    <tr><td><tt>\W</tt></td><td>Een teken voor geen-woord: <tt>[^\w]</tt></td></tr>
-    <tr><th>&nbsp;</th></tr>
-
-    <tr align="left"><th colspan="2" id="bounds">Overeenkomsten voor begrenzingen</th></tr>
-    <tr><td><tt>^</tt></td><td>Het begin van een regel</td></tr>
-    <tr><td><tt>$</tt></td><td>Het einde van een regel</td></tr>
-    <tr><td><tt>\b</tt></td><td>Een woordgrens</td></tr>
-    <tr><td><tt>\B</tt></td><td>Grens voor geen-woord</td></tr>
-
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="greedy">Gulzige parameters</th></tr>
-    <tr><td colspan="2">Deze zullen overeenkomen met zoveel als voor hen mogelijk is. <code>a+</code> zal bijvoorbeeld overeenkomen met <code>aaa</code> in <code>aaabbb</code></td></tr>
-    <tr><td><strong>X</strong><tt>?</tt></td><td><strong>X</strong>, één maal of helemaal niet</td></tr>
-
-    <tr><td><strong>X</strong><tt>*</tt></td><td><strong>X</strong>, nul of meer keren</td></tr>
-    <tr><td><strong>X</strong><tt>+</tt></td><td><strong>X</strong>, één of meer keren</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="reluc">Weigerachtige (niet-gulzige) parameters</th></tr>
-
-    <tr><td colspan="2">Deze zullen overeenkomen met zo weinig als voor hen mogelijk is. <code>a+?</code> zal bijvoorbeeld overeen komen met de eerste <code>a</code> in <code>aaabbb</code></td></tr>
-    <tr><td><strong>X</strong><tt>??</tt></td><td><strong>X</strong>, één maal of helemaal niet</td></tr>
-    <tr><td><strong>X</strong><tt>*?</tt></td><td><strong>X</strong>, nul of meer keren</td></tr>
-
-    <tr><td><strong>X</strong><tt>+?</tt></td><td><strong>X</strong>, één of meer keren</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="logical">Logische operatoren</th></tr>
-    <tr><td><strong>XY</strong></td><td><strong>X</strong> gevolgd door <strong>Y</strong></td></tr>
-
-    <tr><td><strong>X</strong><tt>|</tt><strong>Y</strong></td><td>Of <strong>X</strong> óf <strong>Y</strong></td></tr>
-    <tr><td><tt>(</tt><strong>XY</strong><tt>)</tt></td><td><strong>XY</strong> als een enkele groep</td></tr>
-
-</table>
-
-<hr>
-<p><a href="legalNotices.html" title="Auteursrechten">Auteursrechten</a></p>
-
+	<p><code><a href="legalNotices.html">Auteursrechten</a></code></p>
 </body>
 </html>

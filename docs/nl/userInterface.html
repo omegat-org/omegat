@@ -1,328 +1,365 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>De gebruikersinterface - OmegaT 1.6.2 Gebruikershandleiding</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>De gebruikersinterface - OmegaT 1.7.3 Gebruikershandleiding</title>
 </head>
 <body>
 
-<h1>De gebruikersinterface</h1>
-
-<h2>Inhoud</h2>
-
-<ul type="none">
-   <li>1. <a href="#Items_in_de_gebruikersinterface">Items in de gebruikersinterface</a>
-
-      <ul type="none">
-         <li>1.1. <a href="#Vensters_die_u_veel_zult_gebruiken">Vensters die u veel zult gebruiken</a></li>
-         <li>1.2. <a href="#Vensters_die_u_soms_zult_gebruiken">Vensters die u soms zult gebruiken</a></li>
-         <li>1.3. <a href="#Dialoogvensters_om_uw_projectinstellingen_te_wijzigen">Dialoogvensters om uw projectinstellingen te wijzigen</a></li>
-      </ul>
-   </li>
-
-   <li>2. <a href="#OmegaT_hoofdvenster">OmegaT hoofdvenster</a>
-
-      <ul>
-         <li>2.1. <a href="#venster_Bewerken">venster Bewerken</a></li>
-         <li>2.2. <a href="#Fuzzy_overeenkomsten">venster Overeenkomsten</a></li>
-         <li>2.3. <a href="#Woordenlijst">venster Woordenlijst</a></li>
-         <li>2.4. <a href="#Hoofdmenu">Hoofdmenu</a></li>
-         <li>2.5. <a href="#Statusbalk">Statusbalk</a></li>
-      </ul>
-   </li>
-
-   <li>3. <a href="#Andere_vensters">Andere vensters</a>
-
-      <ul>
-         <li>3.1. <a href="#Projectbestanden">Projectbestanden</a></li>
-         <li>3.2. <a href="#venster_Zoeken">venster Zoeken</a></li>
-
-         <li>3.3. <a href="#Tagvalidatie">Tagvalidatie</a>
-
-            <ul>
-               <li>3.3.1. <a href="#venster_Tagvalidatie">venster Tagvalidatie</a></li>
-               <li>3.3.2. <a href="#Tagfouten">Tagfouten</a></li>
-               <li>3.3.3. <a href="#Hints_voor_tagbeheer">Hints voor tagbeheer</a></li>
-            </ul>
-         </li>
-
-         <li>3.4. <a href="#Help_browser">Help-browser</a></li>
-      </ul>
-   </li>
-
-   <li>4. <a href="#Dialoogvensters">Dialoogvensters</a></li>
-</ul>
-
-<a name="User_Interface_Items"></a>
-<h2>Items in de gebruikersinterface</h2>
-
-<p>De gebruikersinterface van OmegaT bestaat uit een aantal items. Hieronder vatten we ze kort samen en beschrijven daarna de items meer in detail.</p>
-
-<a name="Windows_you.27ll_use_most_of_the_time"></a>
-<h3>Vensters die u veel zult gebruiken</h3>
-
-<ul>
-   <li>
-      <strong>OmegaT hoofdvenster</strong> met drie vensters:<ul>
-         <li><i>venster Bewerken</i> waar u de vertaling typt en bewerkt</li>
-         <li><i>venster Overeenkomsten</i> dat de meest overeenkomende segmenten uit de vertaalgeheugens toont</li>
-         <li><i>venster Woordenlijst</i> met de vertaling van de terminologie</li>
-         <li>En ook het <i>hoofdmenu</i> waar u de meeste functies van OmegaT kunt benaderen</li>
-         <li>Net als de <i>Statusbalk</i> aan de onderzijde van het venster om berichten met betrekking tot het verloop van het werk te zien</li>
-      </ul>
-   </li>
-
-   <li><strong>venster Projectbestanden</strong> met de lijst van uw te vertalen bestanden</li>
-   <li><strong>venster Zoeken</strong> dat wordt gebruikt om specifieke segmenten in het project te vinden</li>
-</ul>
-
-<a name="Windows_you.27ll_use_sometimes"></a>
-<h3>Vensters die u soms zult gebruiken</h3>
-
-<ul>
-   <li><strong>venster Tagvalidatie</strong> om fouten in de opmaak van de vertaalde documenten te ontdekken</li>
-   <li><strong>Help-browser</strong> om de gebruikershandleiding te lezen</li>
-</ul>
-
-<a name="Dialogs_you.27ll_use_to_change_your_project_settings"></a>
-<h3>Dialoogvensters om uw projectinstellingen te wijzigen</h3>
-
-<ul>
-   <li><strong>Project-eigenschappen</strong> om de projectmappen en talen aan te passen</li>
-   <li><strong>Lettertype</strong> om het lettertype aan te passen dat OmegaT gebruikt voor het weregeven van de bronteksten, vertaling, overeenkomsten en woordenlijsten</li>
-   <li><strong>Bestandsfilter</strong> om de afhandeling van ondersteunde bestandsformaten aan te passen</li>
-   <li><strong>Segmentatie</strong> om de manier te wijzigen waarop uw tekst in zinnen is gesegmenteerd</li>
-   <li><strong>Bewerken (gedrag)</strong> om het gedrag van OmegaT te wijzigen voor de manier waarop u tussen de segmenten beweegt</li>
-</ul>
-
-<a name="OmegaT_Main_Window"></a>
-<h2>OmegaT hoofdvenster</h2>
-
-<p>Hoofdvenster bestaat uit drie vensters, het hoofdmenu en een statusbalk.</p>
-
-<p>U kunt de positie van elk venster wijzigen of het zelfs losmaken en een zelfstandig venster maken door het venster te slepen aan zijn naam. Afhankelijk van de status van het venster kunnen 5 verschillende tekens verschijnen in de rechterbovenhoek van het venster. Door de muisaanwijzer over elk teken te bewegen zou een verklarende tekst zichtbaar moeten worden.</p>
-
-<p>
-<img src="images/Minimize.gif" alt="Minimaliseren" width="18" height="18">verkleint het venster zodat alleen de naam wordt getoond, vlak boven de statusbalk. <br> <img src="images/Maximize.gif" alt="Maximaliseren" width="18" height="18"> laat het venster alle beschikbare vensterruimte innemen. <br> <img src="images/Restore.gif" alt="Herstellen" width="18" height="18"> herstelt het venster tot wat het was vóórdat het werd geminimaliseerd of gemaximaliseerd. <br> <img src="images/Undock.gif" alt="Losmaken" width="18" height="18"> maakt het venster los van het hoofdvenster tot een zelfstandig venster. <br> <img src="images/Dock.gif" alt="Vastzetten" width="18" height="18"> zet het venster weer vast in het hoofdvenster.</p>
-
-<p>Het is ook mogelijk de vensters dusdanig te plaatsen dat zij elkaar overlappen. In dit geval zullen de vensters aan de bovenzijde een tab weergeven. Klikken op de tab zal het venster naar de voorgrond brengen. De scheidingen tussen de vensters kunnen worden gesleept om afmetingen van vensters te wijzigen.</p>
-
-<a name="Editor_Pane"></a>
-<h3>venster Bewerken</h3>
-
-<p>Hier typt en bewerkt u de vertaling. Het venster bewerken geeft de tekst van het gedeeltelijk vertaalde document weer: de tekst die al vertaald is wordt vertaald weergegeven en de tekst die nog niet vertaald is wordt weergegeven in de originele taal.</p>
-
-<p>De weergegeven tekst is gesplitst in segmenten en u kunt door het document scrollen en op een willekeurig segment dubbelklikken om het te bewerken.</p>
-
-<p>Eéén van de segmenten is actief. Dat is het enige segment dat is weergegevn in twee delen: het bovenste gedeelte is weergegeven in de originele taal, in vette tekens met een groene achtergondkleur, het onderste gedeelte is het bewerkingsveld, gescheiden door twee markeringen: de linker markering is "&lt;segment nnnn&gt;" waar "nnnn" staat voor het nummer van het segment in het project, de rechter markering is "&lt;end segment&gt;". U zou het bovenste gedeelte als een verwijzing moeten gebruiken en de inhoud van het bewerkingsveld overschrijven of bewerken als de vertaling.</p>
-
-<pre>Deze zin is vertaald.
-
-Deze zin is ook vertaald.
-
-<strong>Cette phrase est en train d'être traduite.</strong>
-&lt;segment 0003&gt;[Hier zou u moeten typen: Deze zin wordt vertaald]&lt;end segment&gt;</pre>
-
-<p>Afhankelijk van het <a href="translationEditing.html" title="Vertaling bewerken">bewerkingsgedrag</a> kan het bewerkingsveld voor het niet-vertaalde segment leeg zijn of andere tekst bevatten als u er naartoe verplaatst:</p>
-
-<ul>
-   <li>De brontekst</li>
-   <li>De vertaling van de tekenreeks die het meest overeenkomt met die welke u gaat vertalen</li>
-</ul>
-
-<p>Als u verder gaat naar een ander segment wordt de vertaling gevalideerd en opgeslagen.</p>
-
-<p>Als u wilt dat het segment niet vertaald wordt, maakt u eenvoudigweg het bewerkingsveld leeg door alle tekst te verwijderen (selecteer alles met <code>Ctrl+A</code> en verwijder het met <code>Del</code>).</p>
-
-<p>Afhankelijk van de opties die u instelt bij <a href="translationEditing.html" title="Vertaling bewerken">Bewerken (gedrag)</a> kan OmegaT een vertaling onthouden als die identiek is aan de bron. Het is handig voor documenten die handelsmerk, (bedrijfs-)namen of andere woorden met hoofdletters bevatten of delen in een derde taal die niet vertaald behoeven te worden.</p>
-
-<p>Zie <a href="translationEditing.html" title="Vertaling bewerken">Vertaling bewerken</a> voor meer details.</p>
-
-<a name="Fuzzy_Matches"></a>
-<h3>venster Overeenkomsten</h3>
-
-<p>Het venster Overeenkomsten toont de meest overeenkomende segmenten uit de <a href="translationMemories.html" title="Vertaalgeheugens">vertaalgeheugens</a>, zowel uit het vertaalgeheugen dat werd gemaakt voor het project waarin u uw project vertaalt als uit andere vertaalgeheugens die u importeerde uit eerder werk of die u heeft gekregen van uw cliënt of vertaalbureau.</p>
-
-<p>Als doorgaat naar het volgende segment wordt de eerste overeenkomst (die met het hoogste percentage van overeenkomst) automatisch geselecteerd. U kunt een andere kiezen door te <a href="keyboardShortcuts.html" title="OmegaT toetsenbord sneltoetsen">drukken op <code>Ctrl+2</code>, <code>3</code>, <code>4</code> of <code>5</code></a>, afhankelijk van het aantal beschikbare overeenkomsten.</p>
-
-<p>Om de <strong>geselecteerde</strong> overeenkomst in uw vertaling te gebruiken gebruikt u <a href="keyboardShortcuts.html" title="OmegaT toetsenbord sneltoetsen"><code>Ctrl+R</code></a> om het doelveld te vervangen met die overeenkomst of <a href="keyboardShortcuts.html" title="OmegaT toetsenbord sneltoetsen"><code>Ctrl+I</code></a> om die in te voegen op de cursorpositie.</p>
-
-<p>Het percentage van overeenkomst wordt ruwweg berekend aan de hand van de gebruikte woorden in het overeenkomende en overeen te komen segment en dat te delen door het aantal woorden in het langste van die twee.</p>
-
-<p>Geselecteerde overeenkomst</p>
-
-<ul>
-   <li>Wordt weergegeven in <strong>vet</strong></li>
-   <li>Woorden die ontbreken in het segment dat u wilt vertalen zijn <font color="blue"><strong>blauw</strong></font></li>
-   <li>De woorden nabij blauwe of op posities die niet overeenkomen met het origineel zijn <font color="green"><strong>groen</strong></font></li>
-</ul>
-
-<p>Kijk naar het segment:</p>
-
-<pre>   <strong>Informatie over Java &amp; OmegaT</strong></pre>
-
-<p>Het overeenkomende segment:</p>
-
-<pre>   <strong>Algemene opmerkingen over Java &amp; OmegaT</strong></pre>
-
-<p>zal worden gekleurd:</p>
-
-<pre>   <strong><font color="blue">Algemene opmerkingen</font> <font color="green">over</font> Java &amp; OmegaT</strong></pre>
-
-<p>en het percentage zou liggen rond 3/5 = <strong>60%</strong>
-</p>
-
-<a name="Glossary"></a>
-<h3>venster Woordenlijst</h3>
-
-<p>Het venster Woordenlijst bevat vertalingen van terminologie die is geladen uit <a href="glossaries.html" title="Woordenlijsten">woordenlijstbestanden</a>. Het toont de vertalingen van termen die zijn gevonden in het huidige segment, maar het wordt slechts getoond voor verwijzingsdoeleinden en het kan niet worden vervangen met of worden ingevoegd op de plaats van de term in de vertaling. OmegaT ondersteunt ook termen met meerdere woorden, maar op een hele basale manier: als beide woorden van een term worden gevonden in het huidige segment, wordt de term getoond.</p>
-
-<p>De opmaak voor de terminologie in he venster Woordenlijsten is</p>
-
-<pre>
-   'bronterm' = 'vertaalde term'
-   Algemene opmerking over de term, als die aanwezig is
-</pre>
-
-<a name="Main_Menu"></a>
-<h3>Hoofdmenu</h3>
-
-<p>Uiteraard kunt u het hoofdmenu gebruiken om alle functies van OmegaT te benaderen. De meestgebruikte functies zijn te benaderen met <a href="keyboardShortcuts.html" title="OmegaT toetsenbord sneltoetsen">toetsenbord sneltoetsen</a>, dus als u daar eenmaal aan gewend bent, zal er geen reden meer zijn om door de menu's te bladeren tijdens het vertalen.</p>
-
-<p>Zie de appendix <a href="menu.html" title="Hoofdmenu">Hoofdmenu</a> voor een volledige beschrijving van alle menu's en menuitems.</p>
-
-<a name="Status_Bar"></a>
-<h3>Statusbalk</h3>
-
-<p>De statusbalk geeft onder in het hoofdvenster berichten weer die van belang zijn voor de werking. Deze balk geeft de gebruiker berichten  met terugkoppeling over specifieke bewerkingen die worden uitgevoerd. Het geeft ook het aantal overeenkomsten en woordenlijstovereenkomsten aan voor het huidige segment.</p>
-
-<a name="Other_Windows"></a>
-<h2>Andere vensters</h2>
-
-<a name="Project_Files"></a>
-<h3>Projectbestanden</h3>
-
-<p>Het venster Projectbestanden geeft een lijst met de projectbestanden weer en andere projectinformatie. Het wordt automatisch weergegeven als OmegaT een project laadt. Als het project geopend is, kunt u de <a href="keyboardShortcuts.html" title="OmegaT toetsenbord sneltoetsen">sneltoets <code>Ctrl+L</code></a> in het hoofdvenster gebruiken om het te sluiten als het zichtbaar is of te openen als het gesloten is.</p>
-
-<p>Mogelijkheden venster Projectbestanden:</p>
-
-<ul>
-   <li>Lijst van alle te vertalen bestanden in het project, waarop kan worden geklikt. Dit zijn de bestanden die aanwezig zijn in de map met bronbestanden, die <a href="fileFormats.html" title="Ondersteunde bestandsformaten">OmegaT kan afhandelen</a>. Door op een bestand te klikken wordt dat in het venster Bewerken geopend voor vertaling.</li>
-   <li>Het aantal segmenten in elk bestand wordt anast de bestandsnaam getoond.</li>
-   <li>Het aantal unieke (verschillende) segmenten in het gehele project.</li>
-   <li>Het aantal unieke segmenten dat u al heeft vertaald. Het wordt, ieder keer als u een segment heeft vertaald, bijgewerkt.</li>
-</ul>
-
-<p>Het aantal <strong>Unieke</strong> segmenten wordt berekend door alle segmenten te tellen en de dubbele te verwijderen, waarbij rekening wordt gehouden met hoofdletters ("Ruin" en "ruin" worden als verschillend beschouwd).</p>
-
-<p>Door te kijken naar het verschil tussen "Aantal segmenten" en "Aantal unieke segmenten" krijgt u een ruw idee over hoeveel herhalingen er in de tekst staan. De aantallen geven geen heldere indicatie over hoe belangrijk die herhalingen zijn: segmenten kunnen relatief lange zinnen zijn die een aantal keren worden herhaald (heel plezierig!) of eenvoudige sleutelwoorden waarmee een tabel wordt gevuld (minder plezierig...)</p>
-
-<p>Het is mogelijk om het aantal segmenten/unieke segmenten aan te passen door de segmentatieregels aan te passen. Zulke aanpassingen zouden _nooit_ moeten gebeuren nadat u met de vertaling van het project bent begonnen. Zie <a href="segmentation.html" title="Bronsegmentatie">segmentatieregels</a> voor meer informatie.</p>
-
-<p>U kunt bronbestanden aan het project toevoegen door te klikken op de knop "Bronbestanden importeren...". Dat kopieert de geselecteerde nestanden naar de map <code>/source</code> en herlaadt het project om de nieuwe bestanden te laden.</p>
-
-<a name="Search_Window"></a>
-<h3>venster Zoeken</h3>
-
-<p>U gebruikt het venster Zoeken om specifieke segmenten in het project te vinden. Er kunnen meerdere vensters tegelijkertijd geopend zijn. Gebruik <a href="keyboardShortcuts.html" title="OmegaT toetsenbord sneltoetsen"><code>Ctrl+F</code></a> in het hoofdvenster om een nieuw venster te openen.</p>
-
-<p>Het venster bestaat uit:</p>
-
-<ul>
-   <li>Zoekvelden om tekenreeksen of sleutelwoorden om te zoeken in te voeren</li>
-   <li>Een aantal vlaggen en optieknoppen om de zoekinstellingen te wijzigen</li>
-   <li>Een weergaveruimte waarin geklikt kan worden</li>
-</ul>
-
-<p>Door op de zoekknop te drukken na het invoeren van een zoek-tekenreeks in het zoekveld zullen alle segmenten in het project,die de gezochte tekenreeks bevatten, worden weergegeven. Omdat OmegaT alle gelijke segmenten als één entiteit behandelt -- als u er één wijzigt, worden alle andere gelijke segmenten bijgewerkt, wordt alleen het eerste unieke segment weergegeven.</p>
-
-<p>De segmenten worden weergegeven in de volgorde waarin zij in het project voorkomen. Vertaalde segmenten zullen worden weergegeven met de originele tekst boven en de vertaalde tekst onder, niet-vertaalde segmenten zullen alleen in originele tekst worden weergegeven.</p>
-
-<p>Als een tekenreeks in een van de projectbestanden wordt aangetroffen kunt u er op klikken om het in het venster Bewerken aan te passen. Daarna kunt u teruggaan naar het venster Zoeken en naar het volgende gevonden segment gaan om het ook aante passen. Een dergelijk patronn is handig voor het op grote schaal bijwerken van terminologie.</p>
-
-<p>Er zijn twee soorten zoeken beschikbaar:</p>
-
-<ul>
-   <li>Exact zoeken zoekt naar de gespecificeerde zoekreeks binnen het huidige project of in een willekeurige map of map-gedeelte. Exact zoeken ondersteunt jokertekens * en ?. Het teken '<strong>*'</strong> komt overeen met nul of meer tekens (de zoekterm '<strong>run*'</strong> zal bijvoorbeeld overeenkomen met '<strong>run'</strong>, '<strong>runs'</strong> en '<strong>running'</strong>. Het teken '<strong>?'</strong> komt overeen met precies één teken ('<strong>run?'</strong> zal bijvoorbeeld overeenkomen met '<strong>runs'</strong> en '<strong>rung'</strong>, maar niet met '<strong>run'</strong> of '<strong>running'</strong>). Deze bewerking zoekt zowel in de bron als in de vertaling.</li>
-
-   <li>Zoeken op sleutelwoorden bekijkt het huidige project en geeft alle segmenten weer die alle gezochte woorden bevatten, in willekeurige volgorde.</li>
-</ul>
-
-<p>U kunt ook binnen een willekeurige map zoeken, maar onthoudt daarbij dat OmegaT alleen kan zoeken in <a href="fileFormats.html" title="Ondersteunde bestandsformaten">bestanden die het ondersteunt</a>.</p>
-
-<a name="Tag_Validation"></a>
-<h3>Tagvalidatie</h3>
-
-<a name="Tag_validation_window"></a>
-<h4>venster Tagvalidatie</h4>
-
-<p>Het venster Tagvalidatie wordt gebruikt om fouten in de opmaak van de vertaalde documenten op te sporen. Gebruik <a href="keyboardShortcuts.html" title="OmegaT toetsenbord sneltoetsen"><code>Ctrl+T</code></a> om het venster te openen.</p>
-
-<p>Het venster heeft een kolom met 3 tabellen waarin:</p>
-
-<ul>
-   <li>Een koppeling naar het segment met de mogelijke tagfout om op te klikken</li>
-   <li>Inhoud van het originele segment</li>
-   <li>Inhoud van het vertaalde segment</li>
-</ul>
-
-<p>Door op de koppeling te klikken wordt het segment actief in het venster Bewerken.</p>
-
-<a name="Tag_errors"></a>
-<h4>Tagfouten</h4>
-
-<p>Een mogelijke tagfout is één van de volgende:</p>
-
-<ul>
-   <li>Een tag die in de brontekst stond werd gewist in het vertaalde segment.</li>
-   <li>Een tag staat niet in de brontekst, maar werd per ongeluk ingevoegd in het vertaalde segment.</li>
-   <li>De volgorde van de tags is gewijzigd in het vertaalde segment.</li>
-</ul>
-
-<a name="Hints_for_tags_management"></a>
-<h4>Hints voor tagbeheer</h4>
-
-<p>Tags vertegenwoordigen meestal enige vorm van opmaak in de originele tekst. <strong>Vereenvoudigen van de opmaak van de originele tekst</strong> draagt enorm bij aan het verminderen van het aantal tags. Het gelijk maken van gebruikte lettertypen, lettertype-afmetingen, kleuren etc zou indien mogelijk moeten worden overwogen, om het vertalen te vereenvoudigen en het verminderen van het aantal mogelijke fouten in tags.</p>
-
-<p>Kijk eens in de sectie <a href="formattedText.html#Tag_bewerkingen" title="Werken met opgemaakte tekst">Tag-bewerkingen</a> om te zien wat er met tags gedaan kan worden.</p>
-
-<p>Onthoud dat, als u last heeft van de tags en de opmaak niet buitengewoon relevant is voor de huidige taak, het verwijderen van de meeste opmaak uit het brondocument de vertaling enorm zal vereenvoudigen.</p>
-
-<p>Als u de tags moet zien in OmegaT maar de meeste opmaak niet behoeft te behouden in het vertaalde document staat het u vrij om de tags niet op te nemen in het vertaalde document. <strong>Let extra op de tag-paren</strong> in dit geval. Als maar één tag van het paar overblijft, zal het de opmaak van uw document verstoren en een vertaald OpenOffice.org document ongeldig maken of een vertaald HTML-bestand onleesbaar maken.</p>
-
-<p>Omdat tags in de tekst zelf zijn opgenomen, is het mogelijk om <a href="segmentation.html" title="Bronsegmentatie">segmentatieregels</a> te gebruiken om segmenten te maken die minder tags bevatten. Dit is een geavanceerde mogelijkheid die niet moet worden gebruikt door beginnende gebruikers.</p>
-
-<a name="Help_Browser"></a>
-<h3>Help-browser</h3>
-
-<p>De Help-browser (die deze handleiding weergeeft) kan worden opgeroepen door te drukken op <a href="keyboardShortcuts.html" title="OmegaT toetsenbord sneltoetsen">F1</a> of door in het <a href="menu.html" title="Hoofdmenu">hoofdmenu</a> <strong>Help -&gt; Gebruikershandleiding...</strong> te gebruiken.</p>
-
-<p>In het venster zult u de handleiding zien en twee knoppen: <strong>Terug</strong> en <strong>Inhoud</strong>.</p>
-
-<p>De gebruikershandleiding is een HTML-document met koppelingen naar de verschillende hoofdstukken. Door op een koppeling te klikken, zoals u in een web-browser zou doen, brengt de gewenste pagina op de voorgrond.</p>
-
-<p>De gebruikershandleiding staat in de submap <code>doc</code> onder de OmegaT installatiemap, dus kunt u, bijvoorbeeld, de Engelse documentatie bekijken door in uw browser het bestand <code>docs/en/index.hmtl</code> te openen. Op die manier kunt u ook externe koppelingen volgen, omdat de ingebouwde Help-browser geen externe internetkoppelingen accepteert.</p>
-
-<a name="Dialogs"></a>
-<h2>Dialoogvensters</h2>
-
-<p>U kunt de onderstaande dialoogvensters gebruiken om OmegaT en de projectinstellingen te wijzigen. Deze worden allemaal beschreven in afzonderlijke secties, hieronder vatten we slechts samen waar zij voor kunnen worden gebruikt en hoe u ze op kunt roepen.</p>
-
-<ul>
-   <li>
-      <a href="projectProperties.html" title="Projecteigenschappen">Projecteigenschappen</a> wordt gebruikt om de projectmappen en talen aan te passen. U kunt het openen dor te drukken op <a href="keyboardShortcuts.html" title="OmegaT toetsenbord sneltoetsen"><code>Ctrl+E</code></a> of door in het <a href="menu.html" title="Hoofdmenu">hoofdmenu</a> <strong>Project -&gt; Eigenschappen...</strong> te gebruiken</li>
-
-   <li>
-      <a href="fontSettings.html" title="Lettertype-instellingen">Lettertype-instellingen</a> is een dialoogvenster om het lettertype aan te passen dat OmegaT gebruikt om bron, vertaling, overeenkomsten en termen uit de woordenlijsten weer te geven. Het wordt opgeroepen door het <a href="menu.html" title="Hoofdmenu">hoofdmenu</a>item <strong>Opties -&gt; Lettertype...</strong> .</li>
-
-   <li>U kunt <a href="fileFilters.html" title="Bestandsfilters">Bestandsfilteropties</a> gebruiken om de bestanden aan te passen die zouden moeten worden afgehandeld door een van de <a href="fileFormts.html" title="Ondersteunde bestandsformaten">beschikbare filters</a>.</li>
-
-   <li>Het <a href="segmentation.html" title="Bronsegmentatie">dialoogvenster Segmentatie-instellingen</a> stelt u in staat om de manier waarop uw tekst in zinnen wordt gesegmenteerd te wijzigen. Let er wel op dat zin-segmentatie wordt in-/uitgeschakeld in het dialoogvenster <a href="projectProperties.html" title="Projecteigenschappen">Projecteigenschappen</a>.</li>
-
-   <li>Het <a href="translationEditing.html" title="Vertaling bewerken">dialoogvenster Bewerken (gedrag)</a> wijzigt hoe OmegaT zich zal gedragen als u van segment naar segment gaat.</li>
-</ul>
+	<h1>De gebruikersinterface</h1>
+
+	<ul>
+		<li><a href="#item">Items in de gebruikersinterface</a>
+			<ul>
+				<li><a href="#most">Vensters die u veel zult gebruiken</a></li>
+				<li><a href="#some">Vensters die u af en toe zult gebruiken</a></li>
+				<li><a href="#dialogs">Dialoogvensters die u gebruikt om uw projectinstellingen te wijzigen</a></li>
+			</ul>
+		</li>
+		<li><a href="#OmegaT_Main_Window">OmegaT hoofdvenster</a>
+			<ul>
+				<li><a href="#main">Bewerkingen in het hoofdvenster</a></li>
+				<li><a href="#Editor">venster Bewerken</a>
+					<ul>
+						<li><a href="#segment_display">Weergave segmenten</a></li>
+						<li><a href="#edit_field">Inhoud bewerkingsveld</a></li>
+					</ul>
+				</li>
+				<li><a href="#Match">venster Overeenkomsten</a>
+					<ul>
+						<li><a href="#match_sel">Overeenkomsten selecteren</a></li>
+						<li><a href="#match_oper">Bewerken van overeenkomsten</a></li>
+						<li><a href="#match_display">Weergave van en informatie over overeenkomsten</a></li>
+					</ul>
+				</li>
+				<li><a href="#Glossary">venster Woordenlijst</a></li>
+				<li><a href="#menu">Hoofdmenu</a></li>
+				<li><a href="#bar">Statusbalk</a></li>
+			</ul>
+		</li>
+		<li><a href="#Other_windows">Andere vensters</a>
+			<ul>
+				<li><a href="#files">Projectbestanden</a>
+					<ul>
+						<li><a href="#proj_files">Mogelijkheden venster Projectbestanden</a></li>
+						<li><a href="#unique">Unieke segmenten</a></li>
+						<li><a href="#adding_files">Bestanden toevoegen aan het project</a></li>
+					</ul>
+				</li>
+				<li><a href="#search">venster Zoeken</a>
+					<ul>
+						<li><a href="#search_types">Zoektypen</a></li>
+						<li><a href="#wildcards_regexp">Jokertekens en reguliere uitdrukkingen</a></li>
+						<li><a href="#search_display">Zoekresultaten weergeven</a></li>
+					</ul>
+				</li>
+				<li><a href="#tags">Tags valideren</a></li>
+				<li><a href="#manual">Help-browser</a>
+					<ul>
+						<li><a href="#help">Help-browser navigatie</a></li>
+						<li><a href="#offline">Gebruikershandleiding offline doorbladeren</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#dialogs">Dialoogvensters die u gebruikt om uw projectinstellingen te wijzigen</a>
+			<ul>
+				<li><a href="projectProperties.html">Projecteigenschappen</a></li>
+				<li><a href="fontSettings.html">Lettertype</a></li>
+				<li><a href="fileFilters.html">Bestandsfilters</a></li>
+				<li><a href="segmentation.html">Segmentatie</a></li>
+				<li><a href="translationEditing.html">Bewerken (gedrag)</a></li>
+			</ul>
+		</li>
+	</ul>
+<hr>
+
+	<a name="item" id="item"></a>
+	<h1>Items in de gebruikersinterface</h1>
+
+	<a name="most" id="most"></a>
+	<h2>Vensters die u veel zult gebruiken</h2>
+
+	<dl>
+		<dt><strong>OmegaT hoofdvenster</strong> (<a href="#OmegaT_Main_Window">...</a>)</dt>
+		<dd>bevat het hoofdmenu (<a href="#menu">...</a>), statusbalk (<a href="#bar">...</a>) en 3 vensters:<dl>
+				<dt>venster Bewerken (<a href="#Editor">...</a>)</dt>
+				<dd>waar u uw vertaling typt en bewerkt</dd>
+				<dt>venster Overeenkomsten (<a href="#Match">...</a>)</dt>
+				<dd>met de meest overeenkomende segmenten vanuit vertaalgeheugens</dd>
+				<dt>venster Woordenlijst (<a href="#Glossary">...</a>)</dt>
+				<dd>met de vertaling van de terminologie</dd>
+			</dl>
+		</dd>
+		<dt><strong>venster Projectbestanden</strong> (<a href="#files">...</a>)</dt>
+		<dd>met de lijst van uw te vertalen bestanden</dd>
+		<dd>opgeroepen met <code>Ctrl+L</code>, verborgen met <code>esc</code>
+		<dt><strong>venster Zoeken</strong> (<a href="#search">...</a>)</dt>
+		<dd>om te zoeken naar specifieke segmenten in het project</dd>
+		<dd>opgeroepen met <code>Ctrl+F</code>, verborgen met <code>esc</code></dd>
+	</dl>
+
+	<a name="some" id="some"></a>
+	<h2>Vensters die u af en toe zult gebruiken</h2>
+
+	<dl>
+		<dt><strong>venster Tags valideren</strong> (<a href="#tags">...</a>)</dt>
+		<dd>om te controleren of er tagfouten in vertalingen staan</dd>
+		<dd>opgeroepen met <code>Ctrl+T</code>, verborgen met <code>esc</code></dd>
+		<dt><strong>Help-browser</strong> (<a href="#manual">...</a>)</dt>
+		<dd>om de gebruikershandleiding te lezen</dd>
+		<dd>opgeroepen met <code>F1</code>, verborgen met <code>esc</code></dd>
+	</dl>
+
+	<a name="dialogs" id="dialogs"></a>
+	<h2>Dialoogvensters die u gebruikt om uw projectinstellingen te wijzigen</h2>
+
+	<p>U kunt de onderstaande dialoogvensters gebruiken om OmegaT en de projectinstellingen te wijzigen. Deze worden allemaal beschreven in afzonderlijke secties, hieronder vatten we slechts samen waar zij voor kunnen worden gebruikt en hoe u ze op kunt roepen:</p>
+
+	<dl>
+		<dt><strong>Projecteigenschappen</strong> (<a href="projectProperties.html">...</a>)</dt>
+		<dd>om de projectmappen en talen aan te passen</dd>
+		<dd>opgeroepen met <code>Ctrl+E</code> of met <strong>Project → Eigenschappen...</strong>, verborgen met <code>esc</code></dd>
+		<dt><strong>Lettertype</strong> (<a href="fontSettings.html">...</a>)</dt>
+		<dd>om het lettertype aan te passen dat OmegaT gebruikt voor het weergeven van bron, vertaling, overeenkomsten en de termen uit de woordenlijst</dd>
+		<dd>opgeroepen met <strong>Opties → Lettertype...</strong>, verborgen met <code>esc</code></dd>
+		<dt><strong>Bestandsfilters</strong> (<a href="fileFilters.html">...</a>)</dt>
+		<dd>om de afhandeling van ondersteunde bestandsformaten aan te passen</dd>
+		<dd>opgeroepen met <strong>Opties → Bestandsfilters...</strong>, verborgen met <code>esc</code></dd>
+		<dt><strong>Segmentatie</strong> (<a href="segmentation.html">...</a>)</dt>
+		<dd>om de manier waarop de tekst in segmenten wordt opgedeeld te wijzigen</dd>
+		<dd>opgeroepen met <strong>Opties → Segmentatie</strong>, verborgen met <code>esc</code></dd>
+		<dt><strong>Bewerken (gedrag)</strong> (<a href="translationEditing.html">...</a>)</dt>
+		<dd>om te wijzigen hoe OmegaT zich gedraagt bij het doorlopen van de segmenten</dd>
+		<dd>opgeroepen met <strong>Opties → Bewerken (gedrag)...</strong>, verborgen met <code>esc</code></dd>
+	</dl>
 
 <hr>
-<p><a href="legalNotices.html" title="Auteursrechten">Auteursrechten</a></p>
 
+	<a name="OmegaT_Main_Window" id="OmegaT_Main_Window"></a>
+	<h1>OmegaT hoofdvenster</h1>
+
+	<a name="main" id="main"></a>
+	<h2>Bewerkingen in het hoofdvenster</h2>
+	
+	<p>Het hoofdvenster bestaat uit drie vensters, het hoofdmenu en een statusbalk. U kunt de positie van elk venster wijzigen of het zelfs losmaken en er een zelfstandig venster van maken door het venster te slepen aan zijn naam. Afhankelijk van de status van het venster kunnen 5 verschillende tekens verschijnen in de rechterbovenhoek van het venster. Door de muis boven een teken te brengen wordt een korte omschrijving weergegeven.</p>
+
+	<p>
+		<img src="images/Minimize.gif" name="graphics1" alt="Minimaliseren" align="bottom" width="18" height="18" border="0" id="graphics1">verkleint het venster zodat alleen de naam wordt getoond vlak boven de statusbalk.<br> <img src="images/Maximize.gif" name="graphics2" alt="Maximaliseren" align="bottom" width="18" height="18" border="0" id="graphics2"> laat het venster alle beschikbare vensterruimte innemen.<br> <img src="images/Restore.gif" name="graphics3" alt="Herstellen" align="bottom" width="18" height="18" border="0" id="graphics3"> herstelt het venster tot wat het was vóórdat het werd geminimaliseerd of gemaximaliseerd.<br> <img src="images/Undock.gif" name="graphics4" alt="Losmaken" align="bottom" width="18" height="18" border="0" id="graphics4"> maakt het venster los van het hoofdvenster tot een zelfstandig venster.<br> <img src="images/Dock.gif" name="graphics5" alt="Vastzetten" align="bottom" width="18" height="18" border="0" id="graphics5"> zet het venster weer vast in het hoofdvenster.</p>
+
+	<p>Het is ook mogelijk de vensters dusdanig te plaatsen dat zij elkaar overlappen. In dat geval zullen de vensters aan de bovenzijde een tab weergeven. Klikken op de tab zal het venster naar de voorgrond brengen. De scheidingen tussen de vensters kunnen worden gesleept om de afmetingen van vensters te wijzigen.</p>
+
+	<a name="Editor" id="Editor"></a>
+	<h2>venster Bewerken</h2>
+
+	<p>Hier typt en bewerkt u de vertaling.</p>
+	
+	<a name="segment_display" id="segment_display"></a>
+	<h3>Weergave segmenten</h3>
+	
+	<p>Het venster Bewerken geeft de tekst van het gedeeltelijk vertaalde document weer: de tekst die al vertaald is wordt vertaald weergegeven en de tekst die nog niet vertaald is wordt weergegeven in de originele taal. De weergegeven tekst is gesplitst in segmenten en u kunt door het document scrollen en op een willekeurig segment dubbelklikken om het te bewerken.</p>
+	
+	<p>Eén van de segmenten is actief. Dat is het enige segment dat is weergegeven in twee delen: het bovenste gedeelte is weergegeven in de originele taal, in vette tekens met een groene achtergondkleur, het onderste gedeelte is het bewerkingsveld, gescheiden door twee markeringen: de linker markering is <strong><code>&lt;segment nnnn&gt;</code></strong> waar <strong><code>nnnn</code></strong> staat voor het nummer van het segment in het project, de rechter markering is <strong><code>&lt;end segment&gt;</code></strong>.</p>
+	
+	<p>U zou het bovenste gedeelte als een verwijzing moeten gebruiken en de inhoud van het bewerkingsveld overschrijven of bewerken om de vertaling te bevatten.</p>
+	
+	<table border="1">
+		<tr><td>
+			<table border="0" cellpadding="3">
+				<tr><td>Deze zin is vertaald.</td></tr>
+				<tr><td>Deze zin is ook vertaald.</td></tr>
+				<tr bgcolor="#99ff99"><td><strong>Deze frase zal op dit moment worden vertaald.</strong></td></tr>
+				<tr><td><strong><code>&lt;segment 0003&gt;</code></strong> [Hier zou u uw vertaling moeten typen] <strong><code>&lt;end segment&gt;</code></strong></td></tr>
+				<tr><td>Deze zin wordt als volgende vertaald.</td></tr>
+			</table>
+		</td></tr>
+	</table>
+
+	<a name="edit_field" id="edit_field"></a>
+	<h3>Inhoud bewerkingsveld</h3>
+
+	<p>Afhankelijk van het <a href="translationEditing.html">bewerkingsgedrag</a> kan het bewerkingsveld voor het niet-vertaalde segment leeg zijn, de brontekst bevatten of de vertaling van de tekenreeks die het meeste lijkt op die welke u gaat vertalen.</p>
+
+	<p>Als u verder gaat naar een ander segment wordt de vertaling gevalideerd en opgeslagen.</p>
+	
+	<p>Als u wilt dat het segment niet vertaald wordt, maakt u eenvoudigweg het bewerkingsveld leeg door alle tekst te verwijderen (selecteer alles met <code>Ctrl+A</code> en verwijder het met <code>Del</code>).</p>
+	
+	<p>Afhankelijk van de opties die u instelt bij <a href="translationEditing.html">Bewerken (gedrag)</a> kan OmegaT een vertaling onthouden als die identiek is aan de bron. Het is handig voor documenten die handelsmerken, (bedrijfs-)namen of andere woorden met hoofdletters bevatten of delen in een derde taal die niet vertaald behoeven te worden.</p>
+
+	<p>Zie <a href="translationEditing.html">Vertaling bewerken</a> voor meer details.</p>
+
+	<a name="Match" id="Match"></a>
+	<h2>venster Overeenkomsten</h2>
+
+	<p>Het venster Overeenkomsten toont de meest overeenkomende segmenten uit de <a href="translationMemories.html">vertaalgeheugens</a>, zowel uit het vertaalgeheugen dat werd gemaakt voor het project waarin u uw project vertaalt als uit andere vertaalgeheugens die u importeerde uit eerder werk of die u heeft gekregen van uw cliënt of vertaalbureau.</p>
+	
+	<a name="match_sel" id="match_sel"></a>
+	<h3>Overeenkomsten selecteren</h3>
+	
+	<p>Als u doorgaat naar het volgende segment wordt de eerste overeenkomst (die met het hoogste percentage van overeenkomst) automatisch geselecteerd. U kunt een andere kiezen door te <a href="menu.html#shortcuts">drukken op <code>Ctrl+2</code>, <code>3</code>, <code>4</code> of <code>5</code></a>, afhankelijk van het aantal beschikbare overeenkomsten.</p>
+
+	<a name="match_oper" id="match_oper"></a>
+	<h3>Bewerken van overeenkomsten</h3>
+	
+	<p>Om de <strong>geselecteerde</strong> overeenkomst in uw vertaling te gebruiken gebruikt u <code><a href="menu.html#shortcuts">Ctrl+R</a></code> om het doelveld te vervangen met die overeenkomst of <code><a href="menu.html#shortcuts">Ctrl+I</a></code> om die in te voegen op de cursorpositie.</p>
+	
+	<a name="match_display" id="match_display"></a>
+	<h3>Weergave van en informatie over overeenkomsten</h3>
+	
+	<p>Het percentage van overeenkomst is, ruw berekend, het equivalent van het aantal meest voorkomende woorden in het vergeleken en overeenkomende segment, gedeeld door het aantal woorden in de langste van die twee. De geselecteerde overeenkomst zal worden geaccentueerd in <strong>vet</strong>, woorden die ontbreken in het segment dat u vertaald zullen <strong><font color="blue">blauw</font></strong> gekleurd zijn en woorden die aansluiten aan ontbrekende gedeelten zullen <strong><font color="green">groen</font></strong> zijn.</p>
+
+	<p>Kijk naar het segment:</p>
+
+	<pre>	<strong>Informatie over Java &amp; OmegaT</strong></pre>
+
+	<p>Het overeenkomende segment:</p>
+
+	<pre>	<strong>Algemene opmerkingen over Java &amp; OmegaT</strong></pre>
+
+	<p>zal worden gekleurd:</p>
+
+	<pre>	<strong><font color="blue">Algemene opmerkingen</font> <font color="green">over</font> Java &amp; OmegaT</strong></pre>
+
+	<p>en het percentage zou liggen rond 3/5=<strong>60%</strong></p>
+
+	<a name="Glossary" id="Glossary"></a>
+	<h2>venster Woordenlijst</h2>
+
+	<p>Het venster Woordenlijsten bevat vertalingen van terminologie die is geladen uit <a href="glossaries.html">woordenlijstbestanden</a>.</p>
+	
+	<p>Het toont de vertalingen van termen die zijn gevonden in het huidige segment, maar het wordt slechts getoond voor verwijzingsdoeleinden en het kan niet worden vervangen met of worden ingevoegd op de plaats van de term in de vertaling.</p>
+	
+	<p>OmegaT ondersteunt ook termen met meerdere woorden, maar op een hele basale manier: als beide woorden van een term worden gevonden in het huidige segment, wordt de term getoond. De opmaak voor de terminologie in het venster Woordenlijsten is:</p>
+
+	<pre> bronterm = vertaalde term	Opmerking over de term, indien aanwezig</pre>
+
+	<a name="menu" id="menu"></a>
+	<h2>Hoofdmenu</h2>
+
+	<p>Uiteraard kunt u het hoofdmenu gebruiken om alle functies van OmegaT te benaderen. Zie de appendix <a href="menu.html#menu">Hoofdmenu</a> voor een volledige beschrijving van alle menu's en menuitems.</p>
+
+	<p>De meestgebruikte functies zijn te benaderen met <a href="menu.html#shortcuts">toetsenbord sneltoetsen</a>, dus als u daar eenmaal aan gewend bent, zal er geen reden meer zijn om door de menu's te bladeren tijdens het vertalen.</p>
+	
+	<a name="bar" id="bar"></a>
+	<h2>Statusbalk</h2>
+
+	<p>De statusbalk geeft berichten met betrekking tot de werkzaamheden weer aan de onderzijde van het hoofdvenster. Deze balk geeft de gebruiker berichten met terugkoppeling over specifieke bewerkingen die worden uitgevoerd. Het geeft ook het aantal overeenkomsten en woordenlijstovereenkomsten aan voor het huidige segment.</p>
+
+<hr>
+
+	<a name="Other_windows" id="Other_windows"></a>
+	<h1>Andere vensters</h1>
+
+	<a name="files" id="files"></a>
+	<h2>Projectbestanden</h2>
+
+	<p>Het venster Projectbestanden geeft een lijst met de projectbestanden weer en andere projectinformatie. Het wordt automatisch weergegeven als OmegaT een project laadt. Gebruik <code>esc</code> om het te sluiten, gebruik <code>Ctrl+L</code> om het te openen of het op de voorgrond te halen.</p>
+	
+	<a name="proj_files" id="proj_files"></a>
+	<h3>Mogelijkheden venster Projectbestanden</h3>
+
+	<p>De volgende informatie wordt weergegeven.</p>
+	
+	<ul>
+		<li>de lijst van alle te vertalen bestanden in het project.<br> Dit zijn de bestanden die aanwezig zijn in de map met bronbestanden, die <a href="filesToTranslate.html">OmegaT kan afhandelen</a>.<br> Klikken op een bestand zal het openen voor vertaling</li>
+		<li>het bestand dat momenteel beschikbaar is in het venster Bewerken is geaccentueerd met een blauwe achtergrond.</li>
+		<li>het aantal segmenten in elk bestand wordt naast de bestandsnaam getoond.</li>
+		<li>het aantal unieke segmenten in het gehele project.</li>
+		<li>het aantal unieke segmenten dat al vertaald is. Het wordt iedere keer als u een segment heeft vertaald bijgewerkt.</li>
+	</ul>
+
+	<a name="unique" id="unique"></a>
+	<h3>Unieke segmenten</h3>
+	
+	<p>Het aantal <strong>Unieke</strong> segmenten wordt berekend door alle segmenten te tellen en de dubbele te verwijderen, waarbij rekening wordt gehouden met hoofdletters ("Ruin" en "ruin" worden als verschillend beschouwd).</p>
+
+	<p>Het verschil tussen "Aantal segmenten" en "Aantal unieke segmenten" geeft u een ruw idee van het aantal herhalingen in een tekst. Merk echter op dat de aantallen niet  vertellen hoe relevant de herhalingen zijn: het zou kunnen betekenen dat relatief lange zinnen een aantal keren worden herhaald (zeer gelukkig!) of het zou een tabel met sleutelwoorden kunnen beschrijven (niet zo gelukkig...)</p>
+	
+	<p>Het bestand <code>project_stats.txt</code> dat is geplaatst in de map <code>/omegat</code> van uw project bevat meer gedetailleerde segmentinformatie per bestand.</p>
+
+	<p>Het is mogelijk om het aantal segmenten/unieke segmenten aan te passen door de segmentatieregels aan te passen. Zulke aanpassingen zouden _nooit_ moeten gebeuren nadat u met de vertaling van het project bent begonnen. Zie <a href="segmentation.html">segmentatieregels</a> voor meer informatie.</p>
+
+	<a name="adding_files" id="adding_files"></a>
+	<h3>Bestanden toevoegen aan het project</h3>
+	
+	<p>U kunt bronbestanden aan het project toevoegen door te klikken op de knop "Bronbestanden importeren...". Dat kopieert de geselecteerde bestanden naar de map <code>/source</code> en herlaadt het project om de nieuwe bestanden te laden. U kunt ook bronbestanden toevoegen vanaf internetpagina's, geschreven in MediaWiki, door te klikken op de knop "Importeren van MediaWiki" en de corresponderende URL op te geven.</p>
+
+	<a name="search" id="search"></a>
+	<h2>venster Zoeken</h2>
+
+	<p>U gebruikt het venster Zoeken om specifieke segmenten in het project te vinden. Er kunnen meerdere vensters tegelijkertijd geopend zijn. Gebruik <code><a href= "menu.html#shortcuts">Ctrl+F</a></code> in het hoofdvenster om een nieuw venster te openen.</p>
+	
+	<p>Het venster Zoeken bestaat uit een tekstvak voor tekenreeksen of sleutelwoorden om te zoeken, vlaggen en keuzeknoppen voor het instellen van het zoek- en weergavegebied dat de resultaten van de zoekactie bevat.</p>
+
+	<a name="search_types" id="search_types"></a>
+	<h3>Zoektypen</h3>
+	
+	<dl>
+		<dt>Er zijn twee <a href="searches.html#searchmethods">typen</a> om te zoeken beschikbaar:</dt>
+		<dt><strong>exact zoeken</strong></dt>
+		<dd>zoekt naar de gespecificeerde zoekreeks binnen het huidige project of in een willekeurige map of map-gedeelte.</dd>
+		<dt><strong>zoeken met sleutelwoord</strong></dt>
+		<dd>onderzoekt het huidige project en geeft alle segmenten weer die alle gezochte woorden bevatten, in willekeurige volgorde.</dd>
+	</dl>
+
+	<p>Zoekacties worden in zowel de bron als de vertaling uitgevoerd.</p>
+
+	<p>U kunt ook binnen een willekeurige map zoeken, maar onthoudt daarbij dat OmegaT alleen kan zoeken in <a href="filesToTranslate.html">bestanden die het ondersteunt</a>.</p>
+	
+	<a name="wildcards_regexp" id="wildcards_regexp"></a>
+	<h3>Jokertekens en reguliere uitdrukkingen</h3>
+	
+	<p>Zoeken ondersteunt de <a href="searches.html#usingwildcards">jokertekens</a> * en ? net als <a href="searches.html#usingregularexpressions">reguliere uitdrukkingen</a>.</p>
+
+	<a name="search_display" id="search_display"></a>
+	<h3>Zoekresultaten weergeven</h3>
+	
+	<p>Door op de zoekknop te drukken na het invoeren van een zoek-tekenreeks in het zoekvak zullen alle segmenten in het project, die de gezochte tekenreeks bevatten, worden weergegeven. Omdat OmegaT alle identieke segmenten behandelt als één entiteit wordt alleen het eerste unieke segment getoond.</p>
+	
+	<p>De segmenten worden weergegeven in de volgorde waarin zij in het project voorkomen. Vertaalde segmenten zullen worden weergegeven met de originele tekst boven en de vertaalde tekst eronder, niet-vertaalde segmenten zullen alleen in originele tekst worden weergegeven.</p>
+
+	<p>U kunt op een segment klikken om het naar voren te brengen in het venster Bewerken om te wijzigen. Daarna kunt u teruggaan naar het venster Zoeken en naar het volgende gevonden segment gaan om het ook aan te passen. Zo'n patroon is handig voor het bijwerken van terminologie.</p>
+	
+	<a name="tags" id="tags"></a>
+	<h2>Tags valideren</h2>
+
+	<p>Het venster Tags valideren detecteert de tagfouten in de vertaling en somt ze op.</p>
+	
+	<p>Gebruik <code><a href="menu.html#shortcuts">Ctrl+T</a></code> om het venster te openen.</p>
+	
+	<p>Het venster heeft een kolom met 3 tabellen waarin:</p>
+
+	<ul>
+		<li>een koppeling naar het segment</li>
+		<li>inhoud van het originele segment</li>
+		<li>inhoud van het vertaalde segment</li>
+	</ul>
+	
+	<p>De tags worden vet blauw geaccentueerd voor eenvoudige vergelijking tussen de originele en de vertaalde inhoud.<p>Klik op de koppeling om het segment in het venster Bewerken te activeren.</p>
+	
+	<p>Verbeter indien nodig de fout en druk op <code><a href="menu.html#shortcuts">Ctrl+T</a></code> om terug te keren naar het venster Tags valideren om andere fouten te corrigeren.</p>
+
+	<p><a href="formattedText.html#intro">Tag</a>-fouten zijn <a href="formattedText.html#tag_operation">tagbewerkingen</a> in de vertaling die niet dezelfde tagvolgorde en nummering produceren als die in het originele segment. Sommige tagbewerkingen zijn noodzakelijk en zijn goedaardig, sommige zullen problemen veroorzaken als het vertaalde document wordt gemaakt.</p>
+
+	<p>Tags vertegenwoordigen meestal enige vorm van opmaak in de originele tekst. <strong>Vereenvoudigen van de opmaak van de originele tekst</strong> draagt enorm bij aan het verminderen van het aantal tags.</p>
+	
+	<a name="manual" id="manual"></a>
+	<h2>Help-browser</h2>
+
+	<p>De Help-browser (die deze handleiding weergeeft) kan worden opgeroepen door te drukken op <a href="menu.html#shortcuts">F1</a> of door in het <a href="menu.html">hoofdmenu</a> <strong>Help → Gebruikershandleiding...</strong> te gebruiken.</p>
+	
+	<a name="help" id="help"></a>
+	<h3>Help-browser navigatie</h3>
+	
+	<p>In het venster zult u de handleiding zien en twee knoppen: <strong>Terug</strong> en <strong>Inhoud</strong>. De gebruikershandleiding is een HTML-document met koppelingen naar de verschillende hoofdstukken. Klikken op een koppeling, zoals u in een webbrowser zou doen, brengt de gewenste pagina op de voorgrond.</p>
+
+	<a name="offline" id="offline"></a>
+	<h3>Gebruikershandleiding offline doorbladeren</h3>
+
+	<p>De gebruikershandleiding is geplaatst in de submap <code>docs</code> onder de OmegaT-installatiemap, dus u kunt bijvoorbeeld Engelse documentatie bekijken door het bestand <code>docs/en/index.html</code> in uw browser te openen. Op deze manier bent u in staat om ook externe koppelingen te volgen, omdat de ingebouwde helpbrowser geen externe internetkoppelingen accepteert.</p>
+
+<hr>
+
+	<p><a href="legalNotices.html">Auteursrechten</a></p>
 </body>
 </html>

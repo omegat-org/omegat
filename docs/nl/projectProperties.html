@@ -1,43 +1,71 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Projecteigenschappen - OmegaT 1.6.2 Gebruikershandleiding</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Projecteigenschappen - OmegaT 1.7.3 Gebruikershandleiding</title>
 </head>
 <body>
 
-<h1>Projecteigenschappen</h1>
+	<h1>Projecteigenschappen</h1>
 
-<p>Dit dialoogvenster wordt gebruikt om de projectmappen en talen aan te passen. Het kan worden geopend door te drukken de toetscombinatie <a href="keyboardShortcuts.html" title="OmegaT toetsenbord sneltoetsen"><code>Ctrl+E</code></a> of door uit het <a href="menu.html" title="Hoofdmenu">hoofdmenu</a> <strong>Project -&gt; Eigenschappen...</strong> aan te roepen.</p>
+	<ul>
+		<li><a href="#dialog">dialoogvenster Eigenschappen</a>
+			<ul>
+				<li><a href="#language">Taalaanpassingen</a></li>
+				<li><a href="#segments">Aanpassingen van segmentatie</a></li>
+				<li><a href="#folder">Aanpassingen aan mappenstructuur</a></li>
+			</ul>
+		</li>
+		<li><a href="#warning">Aanpassen van projecteigenschappen tijdens de sessie</a></li>
+	</ul>
+	
+<hr>
 
-<p>Het dialoogvenster bevat:</p>
+	<a name="dialog" id="dialog"></a>
+	<h1>dialoogvenster Eigenschappen</h1>
 
-<ul>
-   <li>Gebied om de bron- en doeltalen van het project met keuzelijsten in te stellen</li>
-   <li>Vlag voor segmentatie-instellingen</li>
-   <li>Gebied voor het instellen van de projectmappen</li>
-</ul>
+	<p>Dit dialoogvenster wordt gebruikt om de projectmappen en talen aan te passen. Het kan worden geopend door te drukken op de toetscombinatie <code><a href= "menu.html#shortcuts">Ctrl+E</a></code> of door uit het <a href="menu.html">hoofdmenu</a> <strong>Project → Eigenschappen...</strong> aan te roepen. Het dialoogvenster bevat:</p>
 
-<p>Alle velden zijn te bewerken. U kunt de talen handmatig instellen of het keuzelijstmenu gebruiken. U kut de namen voor mappen die nog niet bestaan typen en OmegaT zal ze voor u maken.</p>
+	<ul>
+		<li>Gebied om de bron- en doeltalen van het project met keuzelijsten in te stellen</li>
+		<li>Vlag voor segmentatie-instellingen</li>
+		<li>Gebied voor het instellen van de projectmappen</li>
+	</ul>
 
-<a name="Modifying_Project_Properties_Half-Way"></a>
-<h3>Halverwege de projecteigenschappen aanpassen</h3>
+	<p>Alle velden zijn te bewerken. U kunt de talen handmatig instellen of het keuzelijstmenu gebruiken. U kut de namen voor mappen die nog niet bestaan typen en OmegaT zal ze voor u maken.</p>
+	
 
-<p>Het is altijd mogelijk, maar het wordt niet aangeraden, om de projecteigenschappen tijdens een vertaling aan te passen. Alle instellingen zouden als vaststaand moeten worden beschouwd op het moment dat begonnen wordt met de vertaling, tenzij u zich realiseert dat er een grote vergissing werd gemaakt.</p>
+	<a name="language" id="language"></a>
+	<h2>Taalaanpassing</h2>
+	
+	<p>U dient goed te onthouden dat het wijzigen van de talen er voor kan zorgen dat het de huidige gebruikte vertaalgeheugens onbruikbaar kan maken omdat hun taal niet meer overeenkomt met de nieuwe talen.</p>
+	
+	<a name="segments" id="segments"></a>
+	<h2>Aanpassingen van segmentatie</h2>
+	
+	<p>De instellingen voor segmentatie passen alleen de manier aan waarop de bronbestanden door OmegaT worden afgehandeld. Zij passen niet de segmentatie van de reeds bestaande vertaalgeheugens aan.</p>
+	
+	<p>Indien u de instellingen voor segmentatie wijzigt, kan het zijn dat sommige reeds vertaalde segmenten opgedeeld of samengevoegd worden. Praktisch gezien zullen ze dan terugkeren naar de status "niet vertaald" omdat zij niet overeenkomen met de opgenomen segmenten in het projectgeheugen, zelfs nu de oude en nu niet meer overeenkomende vertaling nog steeds bestaat.</p>
+	
+	<p>OmegaT kan <a href= "translationMemories.html#Upgrading_Translation_Memories">oude vertaalgeheugens bijwerken</a> die geen gebruik maakten van zin-segmentatie, maar niet andersom en niet het vertaalgeheugen van het project als u zich halverwege de vertaling bedenkt.</p>
 
-<p>Specifiek:</p>
-
-<ul>
-   <li>Aanpassen van de talen kan leiden tot het onbruikbaar worden van de momenteel gebruikte vertaalgeheugens omdat hun taal niet meer overeenkomt met de nieuwe talen.</li>
-
-   <li>Wijzigen van de segmentatie-instellingen kunnen er toe leiden dat sommige, reeds vertaalde, segmenten worden gesplitst of samengevoegd hetgeen ze zal terugbrengen naar de status "niet vertaald", zelfs nu de oude en nu niet meer overeenkomende vertaling nog steeds in het vertaalgeheugen staat. OmegaT kan <a href="translationMemories.html#Bijwerken_van_vertaalgeheugens" title="Vertaalgeheugens">oude vertaalgeheugens bijwerken</a> die geen gebruik maakten van zin-segmentatie, maar niet andersom en niet het vertaalgeheugen van het project als u zich halverwege de vertaling bedenkt.</li>
-
-   <li>Aanpassen van de projectmappen zal nietleiden tot het verplaatsen van de bestanden van de oude mappen naar de nieuwe en loopt u het risico dat u in een situatie terecht komt waar u noch OmegaT weten wat de mappen werkelijk betekenen en welke er van worden gebruikt.</li>
-</ul>
-
-<p>Zie de sectie <a href="preventingDataLoss.html" title="Gegevensverlies voorkomen">Gegevensverlies voorkomen</a> voor manieren om uw werk te beveiligen.</p>
+	<a name="folder" id="folder"></a>
+	<h2>Aanpassingen aan mappenstructuur</h2>
+	
+	<p>Voor het geval u van plan bent de projectmappen aan te passen, onthoudt dan dat dat niet de bestanden uit oude mappen naar de nieuwe verplaatst. U loopt het risico dat u in een situatie terecht komt waarin noch u, noch OmegaT weten wat de mappen echt betekenen en welke van hen gebruikt worden.</p>
 
 <hr>
-<p><a href="legalNotices.html" title="Auteursrechten">Auteursrechten</a></p>
 
+	<a name="warning" id="warning"></a>
+	<h1>Aanpassen van projecteigenschappen tijdens de sessie</h1>
+
+	<p>Het is mogelijk om de projecteigenschappen gedurende een vertaalsessie aan te passen.</p>
+	
+	<p>De veiligste manier is echter om alle instellingen als vast te beschouwen als de vertaling eenmaal is begonnen - tenzij u zich natuurlijk realiseert dat er een grote vergissing is gemaakt. Zie de sectie <a href= "preventingDataLoss.html">Gegevensverlies voorkomen</a> voor manieren om uw werk te beveiligen.</p>
+
+
+	<hr>
+
+	<p><a href="legalNotices.html">Auteursrechten</a></p>
 </body>
 </html>

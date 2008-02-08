@@ -1,0 +1,192 @@
+<html>
+<head>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Reguliere uitdrukkingen - OmegaT 1.7.3 Gebruikershandleiding</title>
+</head>
+<body>
+
+	<h1>Constructies van reguliere uitdrukkingen</h1>
+
+	<p>De reguliere uitdrukkingen die worden gebruikt in zoekacties en segmentatieregels zijn die welke worden ondersteund door Java. Als u meer specifieke informatie nodig heeft raadpleeg dan <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+		
+	<p>U kunt eenvoudige handleidingen vinden op het web (<a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a> bijvoorbeeld.)</p>
+
+
+	<table border="0" cellpadding="3" cellspacing="0">
+
+		<tr>
+			<td width="40%"><h2>De volgende constructie:</h2></td>
+			<td><h2>Komt overeen met de volgende reeks:</h2></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Vlaggen</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>(?i)</code></td>
+			<td>Schakelt overeenkomen van hoofd-/kleine letters in (standaard is het patroon hoofdletter-gevoelig).</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Tekens</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>x</strong></td>
+			<td>Het teken <strong>x</strong>, met uitzondering van het volgende...</td>
+		</tr>
+		<tr>
+			<td><code>\u</code><strong>hhhh</strong></td>
+			<td>Het teken met de hexadecimale waarde&nbsp;<code>0x</code><strong>hhhh</strong></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\t</code></td>
+			<td>Het Tab-teken (<code>'\u0009'</code>)</td>
+		</tr>
+		<tr>
+			<td><code>\n</code></td>
+			<td>Het teken voor een nieuwe regel (line feed) (<code>'\u000A'</code>)</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\r</code></td>
+			<td>Het teken voor een carriage-return (<code>'\u000D'</code>)</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Quote</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\</code></td>
+			<td>Niets, maar quote het volgende teken. Dit is vereist als u een van de metatekens <code>!$()*+.&lt;&gt;?[\]^{|}</code> zou willen invoeren om overeen te komen als hetzelfde teken.</td>
+		</tr>
+		<tr>
+			<td><code>\\</code></td>
+			<td>Dit is bijvoorbeeld het teken voor een backslash</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\Q</code></td>
+			<td>Niets, maar quote alle tekens tot <code>\E</code></td>
+		</tr>
+		<tr>
+			<td><code>\E</code></td>
+			<td>Niets, maar beëindigt quoten dat werd gestart door <code>\Q</code></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Tekenklassen</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>[abc]</code></td>
+			<td><code>a</code>, <code>b</code> of <code>c</code> (eenvoudige klasse)</td>
+		</tr>
+		<tr>
+			<td><code>[^abc]</code></td>
+			<td>Elk teken met uitzondering van <code>a</code>, <code>b</code> of <code>c</code> (negatie)</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>[a-zA-Z]</code></td>
+			<td><code>a</code> tot en met <code>z</code> of <code>A</code> tot en met <code>Z</code> inclusief (bereik)</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Voorgedefinieerde tekenklassen</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>.</code></td>
+			<td>Elk teken (met uitzondering van regeleinden)</td>
+		</tr>
+		<tr>
+			<td><code>\d</code></td>
+			<td>Een getal: <code>[0-9]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\D</code></td>
+			<td>Geen getal: <code>[^0-9]</code></td>
+		</tr>
+		<tr>
+			<td><code>\s</code></td>
+			<td>Een teken voor witruimte: <code>[ \t\n\x0B\f\r]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\S</code></td>
+			<td>Een teken niet zijnde witruimte: <code>[^\s]</code></td>
+		</tr>
+		<tr>
+			<td><code>\w</code></td>
+			<td>Een woordteken: <code>[a-zA-Z_0-9]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\W</code></td>
+			<td>Een teken voor geen-woord: <code>[^\w]</code></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Overeenkomsten voor begrenzingen</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>^</code></td>
+			<td>Het begin van een regel</td>
+		</tr>
+		<tr>
+			<td><code>$</code></td>
+			<td>Het einde van een regel</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\b</code></td>
+			<td>Een woordgrens</td>
+		</tr>
+		<tr>
+			<td><code>\B</code></td>
+			<td>Grens voor geen-woord</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Gulzige parameters</h3></td>
+		</tr>
+		<tr>
+			<td colspan="2">Deze zullen overeenkomen met zoveel als voor hen mogelijk is. <code>a+</code> zal bijvoorbeeld overeenkomen met <code>aaa</code> in <code>aaabbb</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>?</code></td>
+			<td><strong>X</strong>, één maal of helemaal niet</td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>*</code></td>
+			<td><strong>X</strong>, nul of meer keren</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>+</code></td>
+			<td><strong>X</strong>, één of meer keren</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Weigerachtige (niet-gulzige) parameters</h3></td>
+		</tr>
+		<tr>
+			<td colspan="2">Deze zullen overeenkomen met zo weinig als voor hen mogelijk is. <code>a+?</code> zal bijvoorbeeld overeen komen met de eerste <code>a</code> in <code>aaabbb</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>??</code></td>
+			<td><strong>X</strong>, één maal of helemaal niet</td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>*?</code></td>
+			<td><strong>X</strong>, nul of meer keren</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>+?</code></td>
+			<td><strong>X</strong>, één of meer keren</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Logische operatoren</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>XY</strong></td>
+			<td><strong>X</strong> gevolgd door <strong>Y</strong></td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>|</code><strong>Y</strong></td>
+			<td>Of <strong>X</strong> óf <strong>Y</strong></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>(</code><strong>XY</strong><code>)</code></td>
+			<td><strong>XY</strong> als een enkele groep</td>
+		</tr></table>
+
+	<hr>
+
+	<a href="legalNotices.html">Auteursrechten</a>
+</body>
+</html>

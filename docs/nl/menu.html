@@ -1,179 +1,443 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Over OmegaT - OmegaT 1.6.2 Gebruikershandleiding</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>OmegaT menu- en toetsenbordsneltoetsen - OmegaT 1.7.3 Gebruikershandleiding</title>
 </head>
 <body>
 
-<h1>Hoofdmenu</h1>
+	<h1>Hoofdmenu- en toetsenbordsneltoetsen</h1>
+	
+	<ul>
+		<li><a href="#menu">Hoofdmenu</a>&nbsp;<table border="1" width="60%" cellpadding="3" cellspacing="0">
+			<tr bgcolor="#DDDDDD" align="center">
+				<td><a href="#ProjectMenu"><code>Project</code></a></td>
+				<td><a href="#EditMenu"><code>Bewerken</code></a></td>
+				<td><a href="#GoToMenu"><code>Ga naar</code></a></td>
+				<td><a href="#ToolsMenu"><code>Extra</code></a></td>
+				<td><a href="#OptionsMenu"><code>Opties</code></a></td>
+				<td><a href="#HelpMenu"><code>Help</code></a></td>
+			</tr>
+			</table>
+		</li>
+	</ul>
+	<ul>
+		<li><a href="#shortcuts">Toetsenbordsneltoetsen</a>
+		<ul>
+			<li><a href="#Project_management">Projectbeheer</a></li>
+			<li><a href="#Editing">Bewerken</a></li>
+			<li><a href="#Moving_around">Verplaatsen</a></li>
+			<li><a href="#Reference_windows">Verwijzingsvensters</a></li>
+			<li><a href="#Other">Andere</a></li>
+		</ul>
+		</li>
+	</ul>
 
-<p>Alle functionaliteiten van OmegaT zijn beschikbaar via de menubalk boven het venster Bewerken. De meeste functies zijn ook beschikbaar via <a href="keyboardShortcuts.html">toetsenbord sneltoetsen</a>.</p>
+	
+	<hr>
 
-<p>De sneltoetsen die worden vermeld met <strong><code>Ctrl</code></strong> zijn voor Windows, UNIX en UNIX-achtige besturingssystemen die een toetsenbord hebben met de <strong><code>Ctrl</code></strong>- of <strong><code>Control</code></strong>-toets. Gebruikers van Mac OS X zouden in plaats daarvan de toets Apple <img src="images/AppleKey.gif" alt="toets Apple" width="19" height="19"> moeten gebruiken.</p>
+	<a name="menu" id="menu"></a>
+	<h1>Hoofdmenu</h1>
+	
+	<p>Alle functionaliteiten van OmegaT zijn beschikbaar via de menubalk boven het venster Bewerken. De meeste functies zijn ook beschikbaar via <a href= "menu.html#shortcuts">toetsenbord-sneltoetsen</a>.</p>
 
-<h2>Inhoud</h2>
-<ul type="none">
-   <li>1. <a href="#menu_Project">menu Project</a></li>
-   <li>2. <a href="#menu_Bewerken">menu Bewerken</a></li>
-   <li>3. <a href="#menu_Ga_naar">menu Ga naar</a></li>
-   <li>4. <a href="#menu_Extra">menu Extra</a></li>
-   <li>5. <a href="#menu_Opties">menu Opties</a></li>
-   <li>6. <a href="#menu_Help">menu Help</a></li>
-</ul>
+	<p>Sneltoetsen worden geactiveerd door te drukken op <strong><code>Ctrl</code></strong> en een letter. Sommige sneltoetsen gebruiken ook andere toetsen. Voor de leesbaarheid worden letters hier geschreven als hoofdletters.</p>
+	
+	<p><strong><code>Ctrl</code></strong> wordt gebruikt op Windows, UNIX en UNIX-achtige besturingssystemen die een toetsenbord hebben met de <strong><code>Ctrl</code></strong>- / <strong><code>Control</code></strong>-toets. Mac-gebruikers moeten in plaats daarvan <strong><code>cmd+toets</code></strong> lezen. De <strong><code>cmd</code></strong>-toets heeft ofwel een label <strong><code>command</code></strong> of een <strong>Apple</strong>-merkteken op Apple-toetsenborden.</p>
 
-<a name="Project_Menu"></a>
-<h4>menu Project</h4>
+	<p></p>
 
-<p>
-<dl>
-   <dt>Nieuw</dt>
-   <dd>Maakt en opent een nieuw project Het dialoogvenster om een project te maken is hetzelfde als met <a href="projectProperties.html">het project bewerken</a>.</dd>
+		<table border="1" width="400" cellpadding="3" cellspacing="0">
+			<tr bgcolor="#DDDDDD" align="center">
+				<td><a href="#ProjectMenu"><code>Project</code></a></td>
+				<td><a href="#EditMenu"><code>Bewerken</code></a></td>
+				<td><a href="#GoToMenu"><code>Ga naar</code></a></td>
+				<td><a href="#ToolsMenu"><code>Extra</code></a></td>
+				<td><a href="#OptionsMenu"><code>Opties</code></a></td>
+				<td><a href="#HelpMenu"><code>Help</code></a></td>
+			</tr>
+		</table>
+		<table border="0" cellpadding="5" cellspacing="0">
 
-   <dt>Open <code>&lt;Ctrl+O&gt;</code></dt>
-   <dd>Opent een eerder gemaakt project.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td id="ProjectMenu" colspan="3">
+			<hr><a name="ProjectMenu" id="ProjectMenu"></a><h2><code>Project</code></h2>
+			</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td width="25%"><code>Nieuw</code></td>
+			<td width="10%"></td>
+			<td>Maakt en opent een nieuw project. Het dialoogvenster om een project te maken is hetzelfde als met <a href="projectProperties.html">het project bewerken</a>.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Openen...</code></td>
+			<td><code>&lt;Ctrl+O&gt;</code></td>
+			<td>Opent een eerder gemaakt project.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Bronbestanden importeren...</code></td>
+			<td></td>
+			<td>Kopieert de geselecteerde bestanden naar de map <code>/source</code> en herlaadt het project om de nieuwe bestanden te laden.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Importeren vanuit MediaWiki...</code></td>
+			<td></td>
+			<td>Importeert eenheden vanaf pagina's van MediaWiki, gebaseerd op de ingevoerde URL</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Herladen</code></td>
+			<td></td>
+			<td>Herlaadt het project om rekening te houden met externe wijzigingen in bronbestanden, gebruikte vertaalgeheugens of woordenlijsten.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Sluiten</code></td>
+			<td></td>
+			<td>Slaat de vertaling op en sluit het project.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Opslaan</code></td>
+			<td><code>&lt;Ctrl+S&gt;</code></td>
+			<td>Slaat de vertaling op in het vertaalgeheugen van het project. OmegaT slaat automatisch elke 10 minuten de vertaling op of als u het project sluit of OmegaT afsluit.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Vertaalde documenten maken</code></td>
+			<td></td>
+			<td>Maakt de doeldocumenten op basis van uw vertaling van de tekst in de documenten. De documenten zullen worden opgeslagen in de map <code>/target</code>.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Eigenschappen...</code></td>
+			<td><code>&lt;Ctrl+E&gt;</code></td>
+			<td>Geeft het dialoogvenster <a href="projectProperties.html">Projecteigenschappen</a> weer om de projecttalen en maplocaties te kunnen bewerken.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Projectbestanden...</code></td>
+			<td><code>&lt;Ctrl+L&gt;</code></td>
+			<td>Sluit of opent het venster <a href="userInterface.html#Project_Files">Projectbestanden</a> (afhankelijk van het feit of het geopend of gesloten is).</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Afsluiten</code></td>
+			<td><code>&lt;Ctrl+Q&gt;</code></td>
+			<td>Slaat het project op en sluit OmegaT af. Als u het project nog niet handmatig hebt opgeslagen wordt bevestiging gevraagd of u werkelijk af wilt sluiten.</td>
+		</tr>
 
-   <dt>Bronbestanden importeren...</dt>
-   <dd>Kopieert de geselecteerde bestanden naar de map <code>/source</code> en herlaand het project om de nieuwe bestanden te laden.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td id="name" colspan="3">
+			<hr><a name="EditMenu" id="EditMenu"></a><h2><code>Bewerken</code></h2>
+			</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+		        <td></td>
+				<td colspan="2">Items die in de meeste toepassingen aanwezig zijn (kopiëren/knippen/plakken) worden in dit menu niet weergegeven maar zijn beschikbaar met de sneltoetsen van uw systeem. Bijvoorbeeld:</td>
+			</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Kopiëren</code></td>
+			<td><code>&lt;Ctrl+C&gt;</code></td>
+			<td>Kopieert de geselecteerde tekst naar het klembord.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Knippen</code></td>
+			<td><code>&lt;Ctrl+X&gt;</code></td>
+			<td>Kopieert de geselecteerde tekst naar het klembord en verwijdert de geselecteerde tekst.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Plakken</code></td>
+			<td><code>&lt;Ctrl+V&gt;</code></td>
+			<td>Plakt de tekst van het klembord op de cursorpositie.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td></td>
+			<td colspan="2"><strong>Het menu zelf bevat de volgende items:</strong></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Laatste actie ongedaan maken</code></td>
+			<td><code>&lt;Ctrl+Z&gt;</code></td>
+			<td>Gaat terug naar de status vóórdat de laatste bewerkingsactie werd uitgevoerd. Werkt niet meer als het gewijzigde segment al gevalideerd is.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Laatste actie opnieuw</code></td>
+			<td><code>&lt;Ctrl+Y&gt;</code></td>
+			<td>Gaat terug naar de status vóórdat de laatste bewerkingsactie werd geannuleerd. Werkt niet meer als het gewijzigde segment al gevalideerd is.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Vertaling overschrijven</code></td>
+			<td><code>&lt;Ctrl+R&gt;</code></td>
+			<td>Overschrijft het gehele doelsegment met de huidige geselecteerde fuzzy overeenkomst (de eerste overeenkomst wordt standaard geselecteerd).</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Vertaling invoegen</code></td>
+			<td><code>&lt;Ctrl+I&gt;</code></td>
+			<td>Voegt de huidige geselecteerde fuzzy overeenkomst in op de cursorpositie. Deze functie zal nooit een deel van het doelsegment overschrijven, zelfs niet als het geselecteerd is.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Bron overschrijven</code></td>
+			<td><code>&lt;Shift+Ctrl+R&gt;</code></td>
+			<td>Overschrijft het gehele doelsegment met de brontekst.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Bron invoegen</code></td>
+			<td><code>&lt;Shift+Ctrl+I&gt;</code></td>
+			<td>Voegt de brontekst in op de cursorpositie.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Zoeken in project...</code></td>
+			<td><code>&lt;Ctrl+F&gt;</code></td>
+			<td>Opent een nieuw venster <a href="userInterface.html#Search_Window">Zoeken</a>.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Selecteer fuzzy overeenkomst #N</code></td>
+			<td><code>&lt;Ctrl+#N&gt;</code></td>
+			<td>(#N is een getal van 1 tot en met 5) - Selecteert de Ne fuzzy overeenkomst die wordt weergegeven in het venster Overeenkomsten om het in te voegen in het segment of het te vervangen. De sectie <a href= "userInterface.html#Fuzzy_Matches">Fuzzy overeenkomsten</a> beschrijft de kleurcodering tot in detail.</td>
+		</tr>
 
-   <dt>Herladen</dt>
-   <dd>Herlaadt het project om rekening te houden met externe wijzigingen in bronbestanden, gebruikte vertaalgeheugens of woordenlijsten.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td id="GotoMenu" colspan="3">
+			<hr><a name="GoToMenu" id="GoToMenu"></a><h2><code>Ga naar</code></h2>
+			</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Volgende niet-vertaalde segment</code></td>
+			<td><code>&lt;Ctrl+U&gt;</code></td>
+			<td>Verplaatst naar het volgende segment dat geen equivalent heeft in het vertaalgeheugen.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Volgende segment</code></td>
+			<td><code>&lt;Ctrl+N&gt;</code> of <code>&lt;Enter&gt;</code> of <code>&lt;Tab&gt;</code></td>
+			<td>Verplaatst naar het volgende segment. Als het huidige segment het laatste in een bestand is, verplaatst het naar het eerste segment van het volgende bestand.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Vorige segment</code></td>
+			<td><code>&lt;Ctrl+P&gt;</code> of <code>&lt;Ctrl+Enter&gt;</code> of <code>&lt;Ctrl+Tab&gt;</code></td>
+			<td>Verplaatst naar het vorige segment. Verplaatst naar het laatste segment van het vorige bestand als het huidige segment het eerste in een bestand is.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Segmentnummer...</code></td>
+			<td><code>&lt;Ctrl+J&gt;</code></td>
+			<td>Het segment wordt geopend bij het invoeren van zijn segmentnummer</td>
+		</tr>
 
-   <dt>Sluiten</dt>
-   <dd>Slaat de vertaling op en sluit het project.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td id="ToolsMenu" colspan="3">
+			<hr><a name="ToolsMenu" id="ToolsMenu"></a><h2><code>Extra</code></h2>
+			</td>
+		</tr>
 
-   <dt>Opslaan <code>&lt;Ctrl+S&gt;</code></dt>
-   <dd>Slaat de vertaling op in het veraalgeheugen van het project. OmegaT slaat automatisch elke 10 minuten de vertaling op of als u het project sluit of OmegaT afsluit.</dd>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Tags valideren</code></td>
+			<td><code>&lt;Ctrl+T&gt;</code></td>
+			<td>Controleert op missende of misplaatste tags in opgemaakte bestanden. Zal een lijst weergeven waarin de segmenten met tagfouten staan. De sectie over het venster <a href= "userInterface.html#Tag_validation">Tags valideren</a> laat zien wat u daar ziet en <a href="formattedText.html">Werken met opgemaakte tekst</a> vertelt u waarom.</td>
+		</tr>
 
-   <dt>Vertaalde documenten maken</dt>
-   <dd>Maakt de doeldocumenten op basis van uw vertaling van de tekst in de documenten. De documenten zullen worden geladen in de map <code>/target</code>.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td id="OptionsMenu" colspan="3"><hr><h2><code>Opties</code></h2></td>
+		</tr>
 
-   <dt>Eigenschappen <code>&lt;Ctrl+E&gt;</code></dt>
-   <dd>Geeft het dialoogvenster <a href="projectProperties.html">Projecteigenschappen</a> weer om de projecttalen en maplocaties te kunnen bewerken.</dd>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Tab gebruiken om door te gaan</code></td>
+			<td></td>
+			<td>Stelt de toets voor het valideren van het segment in op <code>&lt;Tab&gt;</code> in plaats van de standaardtoets <code>&lt;Enter&gt;</code>. Deze optie is handig voor sommige invoersystemen voor Chinese, Japanse of Koreaanse tekens.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Lettertype...</code></td>
+			<td></td>
+			<td>Toont het dialoogvenster <a href="fontSettings.html">Lettertype-instellingen</a> om het lettertype voor de tekstweergave aan te passen. Gebruikers van oudere computers zouden het lettertype beter vóór het openen van een project kunnen wijzigen of moeten rekenen op een straftijd bij de uitvoering. Deze straf is het meest pijnlijk op de combinatie G4 + Mac OS X + Japans.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Bestandsfilters...</code></td>
+			<td></td>
+			<td>Geeft het dialoogvenster <a href="fileFilters.html">Bestandsfilters</a> weer om de bestandsafhandeling en het parsen te configureren.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Segmentatie...</code></td>
+			<td></td>
+			<td>Opent het venster <a href="segmentation.html">Segmentatie-instellingen</a> om de tekstsegmentatie te configureren.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Bewerken (gedrag)...</code></td>
+			<td></td>
+			<td>Geeft het dialoogvenster <a href="translationEditing.html">Vertaling bewerken</a> weer om de inhoud van doelvelden te configureren voor nog niet vertaalde segmenten.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Hoofdvenster herstellen</code></td>
+			<td></td>
+			<td>Herstelt de componenten (venster Bewerken, venster Overeenkomsten en venster Woordenlijst) van het hoofdvenster van OmegaT naar hun standaardstatus. Gebruik deze mogelijkheid in de gevallen dat u één of meer componenten heeft losgemaakt, verplaatst of verborgen en u ze niet terug kan krijgen op de manier die u wilt.</td>
+		</tr>
 
-   <dt>Projectbestanden... <code>&lt;Ctrl+L&gt;</code></dt>
-   <dd>Sluit of opent het venster <a href="userInterface.html#Project_Files">Projectbestanden</a> (afhankelijk van het feit of het geopend of gesloten is).</dd>
+		<tr bgcolor="#FFFFFF">
+			<td id="HelpMenu" colspan="3">
+			<hr><a name="HelpMenu" id="HelpMenu"></a><h2><code>Help</code></h2>
+			</td>
+		</tr>
 
-   <dt>Afsluiten <code>&lt;Ctrl+Q&gt;</code></dt>
-   <dd>Slaat het project op en sluit OmegaT af. Als u het project nog niet handmatig hebt opgeslagen wordt bevestiging gevraagd of u werkelijk af wilt sluiten.</dd>
-</dl>
-</p>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Gebruikershandleiding...</code></td>
+			<td><code>&lt;F1&gt;</code></td>
+			<td>Opent de <a href="userInterface.html#Help_Browser">Help-browser</a> met deze handleiding in een afzonderlijk venster.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Over...</code></td>
+			<td></td>
+			<td>Geeft auteursrechten, dankwoorden en licentie-informatie weer.</td>
+		</tr>
+	</table>
+	<hr>
 
-<a name="Edit_Menu"></a>
-<h4>menu Bewerken</h4>
+	<a name="shortcuts"></a>
+	<h1>Toetsenbordsneltoetsen</h1>
+	
+	<p>De volgende sneltoetsen zijn beschikbaar in het hoofdvenster. Als een ander venster op de voorgrond staat, klik dan op het hoofdvenster om het weer op de voorgrond te plaatsen of druk op <strong><code>Esc</code></strong> om dat venster te sluiten.</p>
 
-<p>Items die in de meeste toepassingen aanwezig zijn (kopiëren/knippen/plakken) worden in dit menu niet weergegeven maar zijn beschikbaar met de sneltoetsen van uw systeem. Bijvoorbeeld op Windows:</p>
+	<p>Sneltoetsen worden geactiveerd door te drukken op <strong><code>Ctrl</code></strong> en een letter. Sommige sneltoetsen gebruiken ook andere toetsen. Voor de leesbaarheid worden letters hier geschreven als hoofdletters.</p>
+	
+	<p><strong><code>Ctrl</code></strong> wordt gebruikt op Windows, UNIX en UNIX-achtige besturingssystemen die een toetsenbord hebben met de <strong><code>Ctrl</code></strong>- / <strong><code>Control</code></strong>-toets. Mac-gebruikers moeten in plaats daarvan <strong><code>cmd+toets</code></strong> lezen. De <strong><code>cmd</code></strong>-toets heeft ofwel een label <strong><code>command</code></strong> of een <strong>Apple</strong>-merkteken op Apple-toetsenborden.</p>
 
-<p>
-<dl>
-   <dt>Kopiëren <code>&lt;Ctrl+C&gt;</code></dt>
-   <dd>Kopieert de geselecteerde tekst naar het klembord.</dd>
+	<ul>
+		<li><a href="#Project_management">Projectbeheer</a></li>
+		<li><a href="#Editing">Bewerken</a></li>
+		<li><a href="#Moving_around">Verplaatsen</a></li>
+		<li><a href="#Reference_windows">Verwijzingsvensters</a></li>
+		<li><a href="#Other">Andere</a></li>
+	</ul>
 
-   <dt>Knippen <code>&lt;Ctrl+X&gt;</code></dt>
-   <dd>Kopieeert de geselecteerde tekst naar het klembord en verwijdert de geselecteerde tekst.</dd>
 
-   <dt>Plakken <code>&lt;Ctrl+V&gt;</code></dt>
-   <dd>Plakt de tekst van het klembord op de cursorpositie.</dd>
-</dl>
-</p>
+	<table border="0" cellpadding="3" cellspacing="0">
 
-<p>Het menu zelf bevat de volgende items:</p>
+		<tr bgcolor="#FFFFFF">
+			<td colspan="3">
+			<hr><a name="Project_management" id="Project_management"></a><h2>Projectbeheer</h2>
+			</td>
+		</tr>
 
-<p>
-<dl>
-   <dt>Laatste actie ongedaan maken <code>&lt;Ctrl+Z&gt;</code></dt>
-   <dd>Gaat terug naar de status vóórdat de laats bewerkingsactie werd uitgevoerd. Werkt niet meer als het gewijzigde segment al gevalideerd is.</dd>
+		<tr bgcolor="#DDDDDD">
+			<td>Project openen</td>
+			<td><code>&lt;Ctrl+O&gt;</code></td>
+			<td>Geeft een dialoogvenster weer om een reeds bestaand project te zoeken</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td>Opslaan</td>
+			<td><code>&lt;Ctrl+S&gt;</code></td>
+			<td>Slaat het huidige werk op in het bestand project_save.tmx dat staat in de map /omegat/ van het project</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td>Projecteigenschappen</td>
+			<td><code>&lt;Ctrl+E&gt;</code></td>
+			<td>Geeft de projectinstellingen weer om ze eventueel aan te passen</td>
+		</tr>
 
-   <dt>Laatste actie opnieuw <code>&lt;Ctrl+Y&gt;</code></dt>
-   <dd>Gaat terug naar de status vóórdat de laats bewerkingsactie werd geannuleerd. Werkt niet meer als het gewijzigde segment al gevalideerd is.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td colspan="3">
+			<hr><a name="Editing" id="Editing"></a><h2>Bewerken</h2>
+			</td>
+		</tr>
 
-   <dt>Vertaling overschrijven <code>&lt;Ctrl+R&gt;</code></dt>
-   <dd>Overschrijft het gehele doelsegment met de huidige geselecteerde fuzzy overeenkomst (de eerste overeenkomst wordt standaard geselecteerd).</dd>
+		<tr bgcolor="#DDDDDD">
+			<td>Laatste actie ongedaan maken</td>
+			<td><code>&lt;Ctrl+Z&gt;</code></td>
+			<td>Maakt de laatste actie in het huidige doelsegment ongedaan</td>
+		</tr>
 
-   <dt>Vertaling invoegen <code>&lt;Ctrl+I&gt;</code></dt>
-   <dd>Voegt de huidige geselecteerde fuzzy overeenkomst in op de cursorpositie. Deze functie zal nooit een deel van het doelsegment overschrijven, zelfs niet als het geselecteerd is.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td>Laatste actie opnieuw</td>
+			<td><code>&lt;Ctrl+Y&gt;</code></td>
+			<td>Voert opnieuw de laatste bewerkingsactie uit die zojuist in het huidige doelsegment ongedaan werd gemaakt</td>
+		</tr>
 
-   <dt>Bron overschrijven <code>&lt;Shift+Ctrl+R&gt;</code></dt>
-   <dd>Overschrijft het gehele doelsegment met de brontekst.</dd>
+		<tr bgcolor="#DDDDDD">
+			<td>Selecteer overeenkomst #N</td>
+			<td><code>&lt;Ctrl+#N&gt;</code></td>
+			<td>#N is een getal van 1 tot en met 5. De sneltoets selecteert de N<sup>e</sup> overeenkomst die wordt weergegeven in het venster Overeenkomsten (de eerste overeenkomst wordt standaard geselecteerd)</td>
+		</tr>
 
-   <dt>Bron invoegen <code>&lt;Shift+Ctrl+I&gt;</code></dt>
-   <dd>Voegt de brontekst in op de cursorpositie.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td>Vervangen door overeenkomst</td>
+			<td><code>&lt;Ctrl+R&gt;</code></td>
+			<td>Vervangt de inhoud van het huidige doelsegment door de geselecteerde overeenkomst (de eerste overeenkomst wordt standaard geselecteerd)</td>
+		</tr>
 
-   <dt>Zoeken in project... <code>&lt;Ctrl+F&gt;</code></dt>
-   <dd>Opent een nieuw venster <a href="userInterface.html#Search_Window">Zoeken</a>.</dd>
+		<tr bgcolor="#DDDDDD">
+			<td>Overeenkomst invoegen</td>
+			<td><code>&lt;Ctrl+I&gt;</code></td>
+			<td>Voegt de geselecteerde overeenkomst in op de cursorpositie in het huidige doelsegment (de eerste overeenkomst wordt standaard geselecteerd)</td>
+		</tr>
 
-   <dt>Selecteer overeenkomst #N <code>&lt;Ctrl+N&gt;</code> (N is van 1 tot en met 5)</dt>
-   <dd>Selecteert de N-e fuzzy overeenkomst die wordt weergegeven in het venster met overeenkomsten om het in te voegen in het segment of het te vervangen. De sectie <a href="userInterface.html#Fuzzy_Matches">Fuzzy overeenkomsten</a> beschrijft de kleurcoderingen in detail.</dd>
-</dl>
-</p>
+		<tr bgcolor="#FFFFFF">
+			<td>Vervangen door bron</td>
+			<td><code>&lt;Ctrl+Shift+R&gt;</code></td>
+			<td>Vervangt de inhoud van het huidige doelsegment door de inhoud van de brontekst</td>
+		</tr>
 
-<a name="Go_to_Menu"></a>
-<h4>menu Ga naar</h4>
+		<tr bgcolor="#DDDDDD">
+			<td>Bron invoegen</td>
+			<td><code>&lt;Ctrl+Shift+I&gt;</code></td>
+			<td>Voegt de inhoud van de brontekst in op de cursorpositie in het huidige doelsegment</td>
+		</tr>
 
-<p>
-<dl>
-   <dt>Volgende niet-vertaalde segment <code>&lt;Ctrl+U&gt;</code></dt>
-   <dd>Verplaatst naar het volgende segment dat geen equivalent heeft in het vertaalgeheugen.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td>Zoeken in project</td>
+			<td><code>&lt;Ctrl+F&gt;</code></td>
+			<td>Geeft een dialoogvenster weer waarmee zoekacties kunnen worden uitgevoerd binnen het project</td>
+		</tr>
 
-   <dt>Volgend segment <code>&lt;Ctrl+N&gt;</code>, <code>&lt;Enter&gt;</code> / <code>&lt;Tab&gt;</code>
-   </dt>
-   <dd>Verplaatst naar het volgende segment. Als het huidige segment het laatste in een bestand is, verplaatst het naar het eerste segment van het volgende bestand.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td colspan="3">
+			<hr><a name="Moving_around" id="Moving_around"></a><h2>Verplaatsen</h2>
+			</td>
+		</tr>
 
-   <dt>Vorige segment <code>&lt;Ctrl+P&gt;</code>, <code>&lt;Ctrl+Enter&gt;</code> / <code>&lt;Ctrl+Tab&gt;</code>
-   </dt>
-   <dd>Verplaatst naar het vorige segment. Verplaatst naar het laatste segment van het vorige bestand als het huidige segment het eerste in een bestand is.</dd>
-</dl>
-</p>
+		<tr bgcolor="#DDDDDD">
+			<td>Volgende niet-vertaalde segment</td>
+			<td><code>&lt;Ctrl+U&gt;</code></td>
+			<td>Verplaatst het bewerkingsveld naar het volgende segment dat nog niet geregistreerd is in het vertaalgeheugen van het project</td>
+		</tr>
 
-<a name="Tools_Menu"></a>
-<h4>menu Extra</h4>
+		<tr bgcolor="#FFFFFF">
+			<td>Volgende segment</td>
+			<td><code>&lt;Ctrl+#N&gt;<br> Enter Return</code></td>
+			<td>Verplaatst het bewerkingsveld naar het volgende segment</td>
+		</tr>
 
-<p>
-<dl>
-   <dt>Tags valideren <code>&lt;Ctrl+T&gt;</code></dt>
-   <dd>Controleert op missende of misplaatste tags in opgemaakte bestanden. Zal een lijst weergeven waarin de segmenten met tagfouten staan. De sectie over het venster <a href="userInterface.html#Tag_validatie">Tags valideren</a> laat zien wat u daar ziet en <a href="formattedText.html">Werken met opgemaakte tekst</a> vertelt u waarom.</dd>
-</dl>
-</p>
+		<tr bgcolor="#DDDDDD">
+			<td>Vorige segment</td>
+			<td><code>&lt;Ctrl+P&gt;</code></td>
+			<td>Verplaatst het bewerkingsveld naar het vorige segment</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td>Segmentnummer...</td>
+			<td><code>&lt;Ctrl+J&gt;</code></td>
+			<td>Verplaatst naar het ingevoerde segmentnummer</td>
+		</tr>
 
-<a name="Options_Menu"></a>
-<h4>menu Opties</h4>
+		<tr bgcolor="#FFFFFF">
+			<td colspan="3">
+			<hr><a name="Reference_windows" id="Reference_windows"></a><h2>Verwijzingsvensters</h2>
+			</td>
+		</tr>
 
-<p>
-<dl>
-   <dt>Tab gebruiken om door te gaan</dt>
-   <dd>Stelt de toets voor het valideren van het segment in op <code>&lt;Tab&gt;</code> in plaats van de standaardtoets <code>&lt;Enter&gt;</code>. Deze optie is handig voor sommige invoersystemen voor Chinese, Japanse of Koreaanse tekens.</dd>
+		<tr bgcolor="#DDDDDD">
+			<td>Projectbestandenlijst</td>
+			<td><code>&lt;Ctrl+L&gt;</code></td>
+			<td>Geeft de lijst met projectbestanden weer</td>
+		</tr>
 
-   <dt>Lettertype...</dt>
-   <dd>Toont het dialoogvenster <a href="fontSettings.html">Lettertype-instellingen</a> om het lettertype voor de tekstweergave aan te passen. Gebruikers van oudere computers zouden het lettertype beter vóór het openen van een project kunnen wijzigen of moeten rekenen op een straftijd bij de uitvoering. Deze straf is het meest pijnlijk op de combinatie G4 + Mac OS X + Japans.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td colspan="3">
+			<hr><a name="Other" id="Other"></a><h2>Andere</h2>
+			</td>
+		</tr>
 
-   <dt>Bestandsfilters...</dt>
-   <dd>Geeft het dialoogvenster <a href="fileFilters.html">Bestandsfilters</a> weer om de bestandsafhandeling en het parsen te configureren.</dd>
+		<tr bgcolor="#DDDDDD">
+			<td>Tags valideren</td>
+			<td><code>&lt;Ctrl+T&gt;</code></td>
+			<td>Verifieert of alle in de brontekst aanwezige tags ook in de doeltekst aanwezig zijn.</td>
+		</tr>
 
-   <dt>Segmentatie...</dt>
-   <dd>Opent het dialoogvenster <a href="segmentation.html">Bronsegmentatie</a> om de segmentatie van de tekst te configureren.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td>Helpbestanden</td>
+			<td><code>&lt;F1&gt;</code></td>
+			<td>Geeft de OmegaT helpbestanden weer in een afzonderlijk venster</td>
+		</tr>
+	</table>
+	<hr>
 
-   <dt>Bewerken (gedrag)...</dt>
-   <dd>Geeft het dialoogvenster <a href="translationEditing.html">Vertaling bewerken</a> weer om de inhoud van doelvelden te configureren voor nog niet vertaalde segmenten.</dd>
-
-   <dt>Hoofdvenster herstellen</dt>
-   <dd>Herstelt de componenten (venster Editor, venster Matches en venster Glossary) van het hoofdvenster van OmegaT naar hun standaardstatus. Gebruik deze mogelijkheid in de gevallen dat u één of meer componenten heeft losgemaakt, verplaatst of verborgen en u ze niet terug kan krijgen op de manier die u wilt.</dd>
-</dl>
-</p>
-
-<a name="Help_Menu"></a>
-<h4>menu Help</h4>
-
-<p>
-<dl>
-   <dt>Gebruikershandleiding... <code>&lt;F1&gt;</code></dt>
-   <dd>Opent de <a href="userInterface.html#Help_Browser">Help-browser</a> met deze handleiding in een afzonderlijk venster.</dd>
-
-   <dt>Over...</dt>
-   <dd>Geeft auterusrechten, dankwoorden en licentie-informatie weer.</dd>
-</dl>
-</p>
-
-<hr>
-<p><a href="legalNotices.html" title="Auteursrechten">Auteursrechten</a></p>
-
+	<p><a href="legalNotices.html">Auteursrechten</a></p>
 </body>
 </html>

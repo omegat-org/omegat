@@ -1,29 +1,110 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Woordenlijsten - OmegaT 1.6.2 Gebruikershandleiding</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Woordenlijsten - OmegaT 1.7.3 Gebruikershandleiding</title>
 </head>
 <body>
 
-<h1>Woordenlijsten</h1>
+	<h1>Woordenlijsten</h1>
 
-<p>De functie woordenlijst is een automatische. Plaats een bestaande woordenlijst om hem te gebruiken eenvoudigweg in de map <code>/glossary</code>, direct na het maken van het project. OmegaT ontdekt automatisch woordenlijstbestanden in deze map als een project wordt geopend. Termen in het actieve segment die OmegaT vindt in de woordenlijstbestanden worden weergegeven in het venster Woordenlijst.</p>
+	<ul>
+		<li><a href="#usage">Gebruik</a></li>
+		<li><a href="#fileformat">Bestandsformaat</a></li>
+		<li><a href="#howtocreate">Hoe zijn woordenlijsten te maken</a>
+			<ul>
+				<li><a href="#text_editor">Gebruik van een tekstbewerker</a></li>
+				<li><a href="#spreadsheet">Gebruik van een werkbladprogramma</a></li>
+				<li><a href="#multiterm">Gebruik van Trados Multiterm</a></li>
+			</ul>
+		</li>
+		<li><a href="#commonglossaryproblems">Algemene problemen met woordenlijsten</a></li>
+	</ul>
 
-<p>De functie woordenlijst vindt alleen exacte overeenkomsten met het item van de woordenlijst (dat zijn dus niet de afgeleide vormen etc).</p>
-
-<p>Nieuwe termen kunnen handmatig aan de woordenlijstbestanden worden toegevoegd tijdens het vertalen (bijvoorbeeld in een tekstverwerkingsprogramma), maar nieuw toegevoegde termen worden niet herkend totdat het project opnieuw wordt geladen.</p>
-
-<a name="File_Format"></a>
-<h2>Bestandsformaat</h2>
-
-<p>Woordenlijstbestanden zijn eenvoudige platte tekst-bestanden die drie-kolommen, tabgescheiden lijsten bevatten met de bron- en doeltermen in respectievelijk de eerste en tweede kolom. De derde kolom kan worden gebruikt voor aanvullende informatie.</p>
-
-<p>Woordenlijstbestanden mogen of de standaard systeemcodering (in dat geval zouden de bestanden de extensie <code>.tab</code> hebben) of de UTF-8 codering hebben (in dat geval zouden zij de extensie <code>.utf8</code> hebben).</p>
-
-<p>Bijvoorbeeld: woordenlijsten, gemaakt met behulp van Trados Multiterm's tekstexport-functie kunnen zonder verdere aanpassingen als OmegaT woordenlijsten worden gebruikt, vooropgesteld dat zij de bestandsextensie <code>.tab</code> hebben en de bron- en doelterm-velden respectievelijk de eerste twee velden zijn.</p>
+	<p>Woordenlijsten zijn bestanden die handmatig gemaakt en bijgewerkt worden voor gebruik in OmegaT.</p>
+	
+	<p>Als een OmegaTproject één of meer woordenlijsten bevat, worden termen uit de woordenlijst die ook worden gevonden in het actieve segment automatisch weergegeven in het <a href="userInterface.html#Glossary">venster Woordenlijst</a>.</p>
 
 <hr>
-<p><a href="legalNotices.html" title="Auteursrechten">Auteursrechten</a></p>
 
+	<a name="usage" id="usage"></a>
+	<h1>Gebruik</h1>
+
+	<p>Plaats een bestaande woordenlijst eenvoudigweg in de map <code>/glossary</code> na het maken van het project, om die te gebruiken. OmegaT detecteert automatisch woordenlijstbestanden in deze map als het project wordt geopend.</p>
+	
+	<p>Termen in het actieve segment die OmegaT vindt in het/de woordenlijstbestand(en) worden weergegeven in het venster Woordenlijst. De functie woordenlijst vindt alleen exacte overeenkomsten met het item van de woordenlijst (dat zijn dus niet de afgeleide vormen etc).</p>
+
+	<p>Nieuwe termen kunnen handmatig aan de woordenlijstbestanden worden toegevoegd tijdens het vertalen (bijvoorbeeld in een tekstbewerkingsprogramma), maar nieuw toegevoegde termen worden niet herkend totdat het project opnieuw wordt geladen.</p>
+
+<hr>
+
+	<a name="fileformat" id="fileformat"></a>
+	<h1>Bestandsformaat</h1>
+
+	<p>Woordenlijstbestanden zijn eenvoudige platte tekst-bestanden die drie-kolommen, tabgescheiden lijsten bevatten met de bron- en doeltermen in respectievelijk de eerste en tweede kolom. De derde kolom kan worden gebruikt voor aanvullende informatie.</p>
+
+	<p>Woordenlijstbestanden kunnen of in de standaard systeemcodering (in welk geval de bestanden de extensie <code>.tab</code> zouden moeten hebben) of in UTF-8 (in welk geval zij de extensie <code>.utf8</code>) zouden moeten hebben.</p>
+
+<hr>
+
+	<a name="howtocreate" id="howtocreate"></a>
+	<h1>Hoe zijn woordenlijsten te maken</h1>
+
+	<a name="text_editor" id="text_editor"></a>
+	<h2>Gebruik van een tekstbewerker</h2>
+
+	<p>Maak een bestand in uw favoriete tekstbewerker en geef het een relevante naam met de extensie <code>.tab</code> zoals bijvoorbeeld <code>myn_woordenlijst.tab</code>.</p>
+
+	<p>Typ een item in de brontaal, druk dan op de toets <code>tab</code> en dan de vertaling in de doeltaal. U kunt een optionele opmerking toevoegen na een tweede <code>tab</code>. Druk op <code>Enter</code> voor een nieuw item.</p>
+	
+	<p>Sla het document op als alle items zijn ingevoerd. Als de twee talen geen tekenset delen dan moet het bestand worden opgeslagen in de codering UTF-8. Hernoem het in dat geval naar <code>myn_woordenlijst.utf8</code>.</p>
+
+	<a name="spreadsheet" id="spreadsheet"></a>
+	<h2>Gebruik van een werkbladprogramma</h2>
+
+	<p>Voor Excel- of Calc-gebruikers is deze methode best handig omdat het, vooropgesteld dat u geen UTF-8 nodig heeft, sorteren mogelijk maakt.</p>
+
+	<p>Start met een leeg werkblad. Voer uw items in, één item per regel. Bronuitdrukkingen staan in de eerste kolom, doelwoorden in de tweede; u kunt optionele opmerkingen invoeren in de derde kolom.</p>
+	
+	<p>Sla het bestand op met Opslaan als, indien gereed.</p>
+	
+	<p>In Bestandstype, selecteer Tekst (tabgescheiden of CSV), stel het <strong>veldscheidingsteken</strong> in op <strong>tabulator</strong> en het <strong>woordscheidingsteken</strong> op niets (verwijder alles wat in dat veld staat). Gebruik <code>.tab</code> als de bestandsextensie.</p>
+	
+	<p>De software zal u een aantal vragen stellen met betrekking tot opmaakverlies of het opgeslagen werkblad, maar druk gewoon op OK.</p>
+	
+	<p>Gebruik uw bestandbeheerder om te bevestigen dat het bestand goed is benoemd <code>myn_woordenlijst.tab</code> en niet <code>myn_woordenlijst.tab.csv</code>. Corrigeer indien nodig.</p>
+	
+	<p>Indien nodig kunt u de UTF-8-codering selecteren vóór het opslaan. Hernoem in dit geval het bestand <code>myn_woordenlijst.utf8</code>.<a name="multiterm" id="multiterm"></a>
+	<h2>Gebruik van Trados Multiterm</h2>
+	
+	<p>Woordenlijsten die zijn gemaakt met behulp van Trados Multiterm's tekstexportfunctie kunnen bijvoorbeeld zonder verdere aanpassingen worden gebruikt als OmegaT-woordenlijsten, vooropgesteld dat zij de bestandsextensie <code>.tab</code> hebben gekregen en de bron- en doelterm-velden respectievelijk de eerste twee velden zijn.</p>
+
+<hr>
+
+	<a name="commonglossaryproblems" id="commonglossaryproblems"></a>
+	<h1>Algemene problemen met woordenlijsten</h1>
+
+	<dl>
+		<dt>Probleem: Er worden geen woordenlijstitems weergegeven.</dt>
+		<dd>Mogelijke oorzaken:<ul>
+			<li>geen woordenlijstbestand in de map "glossary"</li>
+			<li>woordenlijstbestand is leeg</li>
+			<li>het woordenlijstbestand heeft niet de juiste extensie (.tab of .utf8)</li>
+			<li>het woordenlijstbestand heeft niet de juiste codering</li>
+			<li>er staan in het actieve segment geen termen die overeenkomen met enige term in de woordenlijst</li>
+			<li>één of meer van de bovenstaande problemen zijn gerepareerd, maar het project is nog niet opnieuw geladen.</li>
+		</ul>
+		</dd>
+
+		<dt>Probleem: In het venster Woordenlijst worden sommige tekens niet juist weergegeven (maar dezelfde tekens worden wel goed weergegeven in het venster Bewerken).</dt>
+		<dd>Mogelijke oorzaken:<ul>
+			<li>de extensie komt niet overeen met de bestandscodering.</li>
+		</ul>
+		</dd>
+	</dl>
+	
+	<hr>
+
+	<p><a href="legalNotices.html">Auteursrechten</a></p>
 </body>
 </html>

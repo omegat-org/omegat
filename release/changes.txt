@@ -72,7 +72,7 @@
 1.7.3 update 1 vs. 1.7.3
 
 
-  7 Enhancements
+  8 Enhancements
   7 Bugfixes
 
 ----------------------------------------------------------------------
@@ -91,6 +91,7 @@
   - Basque localisation updated to 1.7.3 (UI, readme, instant start, documentation)
   - Hungarian localisation updated to 1.7.3 (UI, readme, instant start, documentation)
   - Catalan localisation updated to 1.7.3 (UI, readme, instant start, documentation)
+  - Dutch localisation updated to 1.7.3 (UI, readme, instant start, documentation)
 
   Bug fixes:
 

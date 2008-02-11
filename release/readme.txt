@@ -5,7 +5,7 @@
 
   1.  Information about OmegaT
   2.  What is OmegaT?
-  3.  General notes about Java & OmegaT
+  3.  Installing OmegaT
   4.  Contributions to OmegaT
   5.  Is OmegaT bugging you? Do you need help?
   6.  Release details

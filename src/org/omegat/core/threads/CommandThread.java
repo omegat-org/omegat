@@ -45,6 +45,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -116,9 +117,9 @@ public class CommandThread extends Thread
         m_projWin = tf.getProjectFrame();
         
         m_config = new ProjectProperties();
-        m_strEntryHash = new HashMap(4096);
-        m_strEntryList = new ArrayList();
-        m_srcTextEntryArray = new ArrayList(4096);
+        m_strEntryHash = new HashMap<String, StringEntry>(4096);
+        m_strEntryList = new ArrayList<StringEntry>();
+        m_srcTextEntryArray = new ArrayList<SourceTextEntry>(4096);
         m_tmList = new ArrayList();
         m_legacyTMs = new ArrayList();
         m_orphanedList = new ArrayList();
@@ -407,9 +408,6 @@ public class CommandThread extends Thread
         String filename, boolean forceValidTMX, boolean addOrphans, boolean levelTwo) 
             throws IOException
     {
-        // build translation database files
-        StringEntry se;
-        
         // we got this far, so assume lang codes are proper
         String sourceLocale = Preferences.getPreference(Preferences.SOURCE_LOCALE);
         String targetLocale = Preferences.getPreference(Preferences.TARGET_LOCALE);
@@ -454,9 +452,8 @@ public class CommandThread extends Thread
         // Write TUs
         String source = null;
         String target = null;
-        for (int i = 0; i < m_strEntryList.size(); i++)
+        for (StringEntry se : m_strEntryList)
         {
-            se = (StringEntry) m_strEntryList.get(i);
             source = forceValidTMX ? StaticUtils.stripTags(se.getSrcText())
                                    : se.getSrcText();
             target = forceValidTMX ? StaticUtils.stripTags(se.getTranslation())
@@ -641,11 +638,9 @@ public class CommandThread extends Thread
         ArrayList suspects = new ArrayList(16);
         
         StringEntry se;
-        SourceTextEntry ste;
         
-        for (i=0; i<numEntries(); i++)
+        for (SourceTextEntry ste : m_srcTextEntryArray)
         {
-            ste = (SourceTextEntry) m_srcTextEntryArray.get(i);
             se = ste.getStrEntry();
             s = se.getSrcText();
             t = se.getTranslation();
@@ -854,7 +849,7 @@ public class CommandThread extends Thread
         if( srcText.length()==0 || srcText.trim().length()==0 )
             return;
         
-        StringEntry strEntry = (StringEntry) m_strEntryHash.get(srcText);
+        StringEntry strEntry = m_strEntryHash.get(srcText);
         if (strEntry == null)
         {
             // entry doesn't exist yet - create and store it
@@ -1105,7 +1100,6 @@ public class CommandThread extends Thread
         File f;
         int i;
         String fname;
-        ArrayList strEntryList = new ArrayList(m_strEntryList.size());
         
         // foreach lang
         // foreach file
@@ -1114,12 +1108,10 @@ public class CommandThread extends Thread
         //buildNearList(m_strEntryList, status + " (" + fname + ")");
         
         String ext;
-        strEntryList.clear();
         f = new File(m_config.getTMRoot());
         fileList = f.list();
         for (i=0; i<fileList.length; i++)
         {
-            strEntryList.clear();
             fname = fileList[i];
             int lastdot = fname.lastIndexOf('.');
             if (lastdot<0)
@@ -1197,7 +1189,7 @@ public class CommandThread extends Thread
 
             if (isProject)
             {
-                StringEntry se = (StringEntry) m_strEntryHash.get(src);
+                StringEntry se = m_strEntryHash.get(src);
                 if( se==null )
                 {
                     // loading a project save file and the
@@ -1432,9 +1424,8 @@ catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug
                 remainingSegments               = 0
                 ;
         
-        for (int i=0; i<m_strEntryList.size(); i++)
+        for (StringEntry se : m_strEntryList)
         {
-            StringEntry se = (StringEntry) m_strEntryList.get(i);
             String src = se.getSrcText();
             int dups = se.getParentList().size();
             
@@ -1466,9 +1457,8 @@ catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug
         int remainingCharsNoSpaces = 0;
         int remainingChars = 0;
         SortedMap counts = new TreeMap();
-        for (int i = 0; i < m_srcTextEntryArray.size(); i++)
+        for (SourceTextEntry ste : m_srcTextEntryArray)
         {
-            SourceTextEntry ste = (SourceTextEntry) m_srcTextEntryArray.get(i);
             String fileName = ste.getSrcFile().name;
             fileName = StaticUtils.makeFilenameRelative(fileName, getProjectProperties().getSourceRoot());
             int[] numbers; // [0] - words, [1] - left words
@@ -1632,7 +1622,7 @@ catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug
     {
         try
         {
-            return (SourceTextEntry) m_srcTextEntryArray.get(num);
+            return m_srcTextEntryArray.get(num);
         }
         catch( IndexOutOfBoundsException iobe )
         {
@@ -1650,7 +1640,7 @@ catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug
     
     public StringEntry getStringEntry(String srcText)
     {
-        return (StringEntry) m_strEntryHash.get(srcText);
+        return m_strEntryHash.get(srcText);
     }
     
     ////////////////////////////////////////////////////////
@@ -1778,9 +1768,9 @@ catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug
     private ProjectFrame	m_projWin;
     
     /** maps text to strEntry obj */
-    private HashMap     m_strEntryHash; 
-    private ArrayList	m_strEntryList;
-    private ArrayList	m_srcTextEntryArray;
+    private Map<String,StringEntry> m_strEntryHash; 
+    private List<StringEntry>	m_strEntryList;
+    private List<SourceTextEntry>	m_srcTextEntryArray;
     
     /** the list of legacy TMX files, each object is the list of string entries */
     private List m_legacyTMs;

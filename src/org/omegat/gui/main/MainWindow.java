@@ -121,7 +121,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     /** Creates new form MainWindow */
     public MainWindow()
     {
-        m_searches = new HashSet();
+        m_searches = new HashSet<SearchWindow>();
         initComponents();
         createMainComponents();
         initDocking();
@@ -961,8 +961,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         // dispose other windows
         if (m_tagWin != null)
             m_tagWin.dispose();
-        for (Iterator i = m_searches.iterator(); i.hasNext();) {
-            SearchWindow sw = (SearchWindow)i.next();
+        for (SearchWindow sw : m_searches) {
             sw.dispose();
         }
         m_searches.clear();
@@ -2522,7 +2521,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         return m_displaySegmentSources;
     }
     
-    private Set m_searches; // set of all open search windows
+    private Set<SearchWindow> m_searches; // set of all open search windows
     
     public boolean m_projectLoaded;
     

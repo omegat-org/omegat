@@ -28,13 +28,13 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.HashSet;
+
 import javax.swing.JTextPane;
 
+import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.messages.MessageRelay;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
-import org.omegat.gui.main.MainWindow;
 
 /** 
  * EntryListPane displays translation segments and, upon doubleclick

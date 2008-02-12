@@ -9,13 +9,13 @@ package org.omegat.gui.dialogs;
 import java.awt.Frame;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+
 import org.omegat.core.spellchecker.DictionaryManager;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;

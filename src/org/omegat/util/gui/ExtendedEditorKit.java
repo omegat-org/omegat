@@ -24,8 +24,8 @@
 
 package org.omegat.util.gui;
 
-import javax.swing.*;
-import javax.swing.text.*;
+import javax.swing.text.StyledEditorKit;
+import javax.swing.text.ViewFactory;
 
 /**
  * Custom editor kit. As seen on 

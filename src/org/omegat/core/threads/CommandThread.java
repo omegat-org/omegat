@@ -1007,7 +1007,7 @@ public class CommandThread extends Thread
         File root = new File(m_config.getSourceRoot());
         StaticUtils.buildFileList(srcFileList, root, true);
         
-        Set processedFiles = new HashSet();
+        Set<File> processedFiles = new HashSet<File>();
         
         for (String filename : srcFileList)
         {

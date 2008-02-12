@@ -24,7 +24,6 @@
 
 package org.omegat.filters3.xml;
 
-import org.omegat.filters3.Tag;
 
 /**
  * Entity declaration in XML file's Document type declaration.

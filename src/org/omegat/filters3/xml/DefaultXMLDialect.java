@@ -24,15 +24,14 @@
 
 package org.omegat.filters3.xml;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
-import org.xml.sax.InputSource;
 
 import org.omegat.util.MultiMap;
+import org.xml.sax.InputSource;
 
 /**
  * Helper class for describing a certain XML dialect.
@@ -42,7 +41,7 @@ import org.omegat.util.MultiMap;
 public class DefaultXMLDialect implements XMLDialect
 {
     /** The set of defined paragraph tags. */
-    private Set paragraphTags = new HashSet();
+    private Set<String> paragraphTags = new HashSet<String>();
     
     /** Defines paragraph tag. Allows duplicates. */
     public void defineParagraphTag(String tag)
@@ -57,7 +56,7 @@ public class DefaultXMLDialect implements XMLDialect
     }
 
     /** The set of defined tags that surround preformatted text. */
-    private Set preformatTags = new HashSet();
+    private Set<String> preformatTags = new HashSet<String>();
     
     /** Defines preformat tag. Allows duplicates. */
     public void definePreformatTag(String tag)
@@ -72,7 +71,7 @@ public class DefaultXMLDialect implements XMLDialect
     }
 
     /** The set of defined tags that surround intact text. */
-    private Set intactTags = new HashSet();
+    private Set<String> intactTags = new HashSet<String>();
     
     /** Defines intact tag. Allows duplicates. */
     public void defineIntactTag(String tag)
@@ -87,7 +86,7 @@ public class DefaultXMLDialect implements XMLDialect
     }
     
     /** The set of defined paragraph tags. */
-    private MultiMap translatableTagAttributes = new MultiMap();
+    private MultiMap<String,String> translatableTagAttributes = new MultiMap<String, String>();
     
     /** Defines translatable attribute of a tag. */
     public void defineTranslatableTagAttribute(String tag, String attribute)
@@ -108,7 +107,7 @@ public class DefaultXMLDialect implements XMLDialect
     }
     
     /** The set of defined paragraph tags. */
-    private Set translatableAttributes = new HashSet();
+    private Set<String> translatableAttributes = new HashSet<String>();
     
     /** Defines always translatable attribute (no matter what tag it belongs to). */
     public void defineTranslatableAttribute(String attribute)
@@ -127,7 +126,7 @@ public class DefaultXMLDialect implements XMLDialect
      * that should be translated separately, not breaking currently 
      * collected text.
      */
-    private Set outOfTurnTags = new HashSet();
+    private Set<String> outOfTurnTags = new HashSet<String>();
     
     /**
      * Defines out of turn tag. Such tag surrounds chunk of text 
@@ -149,7 +148,7 @@ public class DefaultXMLDialect implements XMLDialect
             defineOutOfTurnTag(tags[i]);
     }
 
-    HashMap constraints = new HashMap();
+    Map<Integer, Pattern> constraints = new HashMap<Integer, Pattern>();
     
     /** 
      * Defines a constraint to restrict supported subset of XML files.
@@ -163,7 +162,7 @@ public class DefaultXMLDialect implements XMLDialect
         constraints.put(constraintType, template);
     }
     
-    HashMap shortcuts = new HashMap();
+    Map<String,String> shortcuts = new HashMap<String, String>();
     
     /** 
      * Defines a shortcut for a tag, useful for formatting tags.
@@ -200,7 +199,7 @@ public class DefaultXMLDialect implements XMLDialect
      * <p>
      * Each entry in a set should be a String class.
      */
-    public Set getParagraphTags()
+    public Set<String> getParagraphTags()
     {
         return paragraphTags;
     }
@@ -210,7 +209,7 @@ public class DefaultXMLDialect implements XMLDialect
      * <p>
      * Each entry in a set should be a String class.
      */
-    public Set getPreformatTags()
+    public Set<String> getPreformatTags()
     {
         return preformatTags;
     }
@@ -222,7 +221,7 @@ public class DefaultXMLDialect implements XMLDialect
      * <p>
      * Each entry in a set should be a String class.
      */
-    public Set getIntactTags()
+    public Set<String> getIntactTags()
     {
         return intactTags;
     }
@@ -232,7 +231,7 @@ public class DefaultXMLDialect implements XMLDialect
      * <p>
      * Each entry should map from a String to a set of Strings.
      */
-    public MultiMap getTranslatableTagAttributes()
+    public MultiMap<String, String> getTranslatableTagAttributes()
     {
         return translatableTagAttributes;
     }
@@ -242,7 +241,7 @@ public class DefaultXMLDialect implements XMLDialect
      * <p>
      * Each entry in a set should be a String class.
      */
-    public Set getTranslatableAttributes()
+    public Set<String> getTranslatableAttributes()
     {
         return translatableAttributes;
     }
@@ -255,7 +254,7 @@ public class DefaultXMLDialect implements XMLDialect
      * <p>
      * Each entry in a set should be a String class.
      */
-    public Set getOutOfTurnTags()
+    public Set<String> getOutOfTurnTags()
     {
         return outOfTurnTags;
     }
@@ -268,7 +267,7 @@ public class DefaultXMLDialect implements XMLDialect
      * Each entry should map an {@link Integer} to a {@link Pattern} -- 
      * regular expression for a specified constrained string.
      */
-    public Map getConstraints()
+    public Map<Integer, Pattern> getConstraints()
     {
         return constraints;
     }
@@ -288,7 +287,7 @@ public class DefaultXMLDialect implements XMLDialect
      * Each entry should map a {@link String} to a {@link String} -- 
      * a tag to its shortcut.
      */
-    public Map getShortcuts()
+    public Map<String,String> getShortcuts()
     {
         return shortcuts;
     }

@@ -25,26 +25,16 @@
 
 package org.omegat.filters2.hhc;
 
-import java.awt.Dialog;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 
 import org.htmlparser.Parser;
 import org.htmlparser.util.ParserException;
-
-import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
-import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
-
-import org.omegat.filters2.html2.HTMLReader;
-import org.omegat.filters2.html2.HTMLWriter;
 import org.omegat.filters2.html2.HTMLFilter2;
+import org.omegat.util.OStrings;
         
 
 /**

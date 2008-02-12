@@ -25,6 +25,7 @@
 package org.omegat.filters3;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A list of Tag's attritutes.
@@ -33,7 +34,7 @@ import java.util.ArrayList;
  */
 public class Attributes
 {
-    ArrayList list = new ArrayList();
+    List<Attribute> list = new ArrayList<Attribute>();
     
     /** Number of attributes. */
     public int size()
@@ -50,7 +51,7 @@ public class Attributes
     /** Gets one of the attributes from the list. */
     public Attribute get(int index)
     {
-        return (Attribute)list.get(index);
+        return list.get(index);
     }
 
     /**

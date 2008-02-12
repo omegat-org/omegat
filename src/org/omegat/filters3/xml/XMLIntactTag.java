@@ -24,12 +24,7 @@
 
 package org.omegat.filters3.xml;
 
-import org.omegat.filters3.Attribute;
-import org.omegat.filters3.Attributes;
-import org.omegat.filters3.Element;
-import org.omegat.filters3.Entry;
 import org.omegat.filters3.Tag;
-import org.omegat.util.StaticUtils;
 
 /**
  * XML Tag that surrounds intact portions of XML document.

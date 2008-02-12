@@ -25,7 +25,6 @@
 
 package org.omegat.filters3.xml.opendoc;
 
-import org.omegat.core.threads.CommandThread;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**

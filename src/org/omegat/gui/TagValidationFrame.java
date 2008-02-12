@@ -30,9 +30,9 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.*;
+import java.util.regex.Matcher;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Box;
@@ -45,11 +45,11 @@ import javax.swing.KeyStroke;
 
 import org.omegat.core.StringEntry;
 import org.omegat.core.matching.SourceTextEntry;
-import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
-import org.omegat.util.PatternConsts;
-import org.openide.awt.Mnemonics;
 import org.omegat.gui.main.MainWindow;
+import org.omegat.util.OStrings;
+import org.omegat.util.PatternConsts;
+import org.omegat.util.Preferences;
+import org.openide.awt.Mnemonics;
 
 
 /**

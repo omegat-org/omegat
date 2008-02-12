@@ -25,17 +25,9 @@
 
 package org.omegat.gui.main;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
 import java.util.List;
 
-import org.omegat.core.StringData;
 import org.omegat.core.glossary.GlossaryEntry;
-import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
-import org.omegat.util.Token;
 
 /**
  * This is a Glossary pane that displays glossary entries.
@@ -56,12 +48,11 @@ public class GlossaryTextArea extends javax.swing.JTextPane
      * Sets the list of glossary entries to show in the pane.
      * Each element of the list should be an instance of {@link GlossaryEntry}.
      */
-    public void setGlossaryEntries(List entries)
+    public void setGlossaryEntries(List<GlossaryEntry> entries)
     {
         StringBuffer buf = new StringBuffer();
-        for (int i=0; i<entries.size(); i++)
+        for (GlossaryEntry entry : entries)
         {
-            GlossaryEntry entry = (GlossaryEntry) entries.get(i);
             buf.append(entry.getSrcText() + " = " +                             // NOI18N
                     entry.getLocText());                                        // NOI18N
             if (entry.getCommentText().length()>0)

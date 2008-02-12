@@ -24,7 +24,6 @@
 
 package org.omegat.filters3.xml.xhtml;
 
-import java.awt.Dialog;
 import java.io.Serializable;
 
 

@@ -34,6 +34,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -45,8 +46,6 @@ import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXNotRecognizedException;
-import org.xml.sax.SAXNotSupportedException;
 
 
 /**
@@ -130,7 +129,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
     }
 
     /** Processes an XML file. */
-    public List processFile(File inFile, String inEncoding, File outFile, String outEncoding) 
+    public List<File> processFile(File inFile, String inEncoding, File outFile, String outEncoding) 
             throws IOException, TranslationException
     {
         try
@@ -212,15 +211,15 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
             Matcher matcher = PatternConsts.XML_DOCTYPE.matcher(buf);
             if (matcher.find())
             {
-                Pattern doctype = (Pattern) dialect.getConstraints().get(XMLDialect.CONSTRAINT_DOCTYPE);
+                Pattern doctype = dialect.getConstraints().get(XMLDialect.CONSTRAINT_DOCTYPE);
                 if (doctype!=null && 
                         (matcher.group(1)==null || !doctype.matcher(matcher.group(1)).matches()))
                     return false;
-                Pattern publicc = (Pattern) dialect.getConstraints().get(XMLDialect.CONSTRAINT_PUBLIC_DOCTYPE);
+                Pattern publicc = dialect.getConstraints().get(XMLDialect.CONSTRAINT_PUBLIC_DOCTYPE);
                 if (publicc!=null && 
                         (matcher.group(3)==null || !publicc.matcher(matcher.group(3)).matches()))
                     return false;
-                Pattern system = (Pattern) dialect.getConstraints().get(XMLDialect.CONSTRAINT_SYSTEM_DOCTYPE);
+                Pattern system = dialect.getConstraints().get(XMLDialect.CONSTRAINT_SYSTEM_DOCTYPE);
                 if (system!=null && 
                         (matcher.group(5)==null || !system.matcher(matcher.group(5)).matches()))
                     return false;
@@ -235,7 +234,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
             matcher = PatternConsts.XML_ROOTTAG.matcher(buf);
             if (matcher.find())
             {
-                Pattern root = (Pattern) dialect.getConstraints().get(XMLDialect.CONSTRAINT_ROOT);
+                Pattern root = dialect.getConstraints().get(XMLDialect.CONSTRAINT_ROOT);
                 if (root!=null && 
                         (matcher.group(1)==null || !root.matcher(matcher.group(1)).matches()))
                     return false;

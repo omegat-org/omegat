@@ -26,6 +26,8 @@ package org.omegat.util;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * A map that maps keys to sets of values.
@@ -33,29 +35,29 @@ import java.util.HashSet;
  *
  * @author Maxym Mykhalchuk
  */
-public class MultiMap
+public class MultiMap<K,V>
 {
     /** We're backed up by a HashMap<key, HashSet>. */
-    HashMap map;
+    Map<K,Set<V>> map;
     
     /** Creates an empty MultiMap. */
     public MultiMap()
     {
-        map = new HashMap();
+        map = new HashMap<K, Set<V>>();
     }
             
     /** Returns <tt>true</tt> if this map contains a mapping for the specified key. */
-    public boolean containsKey(Object key)
+    public boolean containsKey(K key)
     {
         return map.containsKey(key);
     }
     
     /** Returns <tt>true</tt> if this map maps the specified key to the specified value. */
-    public boolean containsPair(Object key, Object value)
+    public boolean containsPair(K key, V value)
     {
         if (containsKey(key))
         {
-            HashSet values = (HashSet)map.get(key);
+            Set<V> values = map.get(key);
             return values.contains(value);
         }
         else
@@ -68,16 +70,16 @@ public class MultiMap
      * this key, the new value is appended to the list of the values
      * mapped from this key.
      */
-    public void put(Object key, Object value)
+    public void put(K key, V value)
     {
         if (containsKey(key))
         {
-            HashSet values = (HashSet)map.get(key);
+            Set<V> values = map.get(key);
             values.add(value);
         }
         else
         {
-            HashSet values = new HashSet();
+            Set<V> values = new HashSet<V>();
             values.add(value);
             map.put(key, values);
         }
@@ -87,6 +89,5 @@ public class MultiMap
     public void remove(Object key)
     {
         map.remove(key);
-    }
-    
+    }    
 }

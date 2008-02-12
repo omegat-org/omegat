@@ -24,35 +24,29 @@
 
 package org.omegat.gui.segmentation;
 
-import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;     // HP
-import java.awt.event.KeyEvent;        // HP
 import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.beans.ExceptionListener;
-import javax.swing.AbstractAction;     // HP
-import javax.swing.Action;             // HP
-import javax.swing.JComponent;         // HP
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;          // HP
+import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
-import javax.swing.border.TitledBorder;
-import javax.swing.event.CellEditorListener;
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
 
 import org.omegat.core.segmentation.MapRule;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.datamodels.MappingRulesModel;
 import org.omegat.core.segmentation.datamodels.SegmentationRulesModel;
-import org.omegat.core.segmentation.datamodels.SRXOptionsModel;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 

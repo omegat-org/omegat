@@ -25,6 +25,7 @@
 package org.omegat.filters3.xml;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Document type declaration in XML file.
@@ -52,7 +53,7 @@ public class DTD extends XMLPseudoTag
         return systemId;
     }
     
-    private ArrayList entities;
+    private List<Entity> entities;
     
     /** Creates a new instance of Doctype */
     public DTD(String name, String publicId, String systemId)
@@ -60,7 +61,7 @@ public class DTD extends XMLPseudoTag
         this.name = name;
         this.publicId = publicId;
         this.systemId = systemId;
-        entities = new ArrayList();
+        entities = new ArrayList<Entity>();
     }
 
     public void addEntity(Entity entity)

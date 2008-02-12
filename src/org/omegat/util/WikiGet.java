@@ -24,10 +24,13 @@
 
 package org.omegat.util;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.io.*;
-import java.util.regex.*;
 
 /**
  * Import pages from MediaWiki

@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 import javax.xml.parsers.SAXParser;
@@ -88,7 +89,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     /** Current entry that collects normal text. */
     Entry entry;
     /** Stack of entries that collect out-of-turn text. */
-    Stack outofturnEntries = new Stack();
+    Stack<Entry> outofturnEntries = new Stack<Entry>();
     /** Current entry that collects the text surrounded by intact tag. */
     Entry intacttagEntry = null;
     /** Current entry that collects the text surrounded by intact tag. */
@@ -116,7 +117,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         if (collectingIntactText())
             return intacttagEntry;
         else if (collectingOutOfTurnText())
-            return (Entry) outofturnEntries.peek();
+            return outofturnEntries.peek();
         else
             return entry;
     }
@@ -125,13 +126,13 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
      * External entities declared in source file. 
      * Each entry is of type {@link Entity}.
      */
-    private ArrayList externalEntities = new ArrayList();
+    private List<Entity> externalEntities = new ArrayList<Entity>();
     
     /** 
      * Internal entities declared in source file. 
      * A {@link Map} from {@link String}/entity name/ to {@link Entity}.
      */
-    private Map internalEntities = new HashMap();
+    private Map<String,Entity> internalEntities = new HashMap<String, Entity>();
     /** Internal entity just started. */
     private Entity internalEntityStarted = null;
     
@@ -152,12 +153,12 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
      * they were included into main file.
      * Each entry is of type {@link File}.
      */
-    private ArrayList processedFiles = new ArrayList();
+    private List<File> processedFiles = new ArrayList<File>();
     /** 
      * Returns external files this handler has processed, because
      * they were included into main file. Each entry is {@link File}.
      */
-    public ArrayList getProcessedFiles()
+    public List<File> getProcessedFiles()
     {
         if (processedFiles.size()>0)
             return processedFiles;
@@ -276,9 +277,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     {
         if (publicId==null && systemId==null)
             return null;
-        for (int i=0; i<externalEntities.size(); i++)
+        for (Entity entity : externalEntities)
         {
-            Entity entity = (Entity) externalEntities.get(i);
             if (entity.isInternal())
                 continue;
             if (StaticUtils.equal(publicId, entity.getPublicId()) && 
@@ -299,7 +299,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     {
         if (inDTD)
             return;
-        internalEntityStarted = (Entity) internalEntities.get(name);
+        internalEntityStarted = internalEntities.get(name);
     }
     
     /** 
@@ -586,7 +586,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     private String getShortcut(String tag)
     {
         if (dialect.getShortcuts()!=null)
-            return (String) dialect.getShortcuts().get(tag);
+            return dialect.getShortcuts().get(tag);
         else
             return null;
     }

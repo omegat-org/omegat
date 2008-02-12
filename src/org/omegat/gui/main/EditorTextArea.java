@@ -35,10 +35,10 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
@@ -46,17 +46,17 @@ import javax.swing.JTextPane;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.StyleContext;
-import javax.swing.undo.UndoManager;
 import javax.swing.text.Utilities;
-import javax.swing.text.BadLocationException;
+import javax.swing.undo.UndoManager;
+
 import org.omegat.core.matching.SourceTextEntry;
-import org.omegat.core.threads.CommandThread;
 import org.omegat.core.spellchecker.SpellChecker;
+import org.omegat.core.threads.CommandThread;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
-
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
@@ -818,9 +818,8 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                     // is the word in the string?
                     if (translation.indexOf(word) != -1) {
                         // split the text into tokens. If there is a match, redraw it
-                        List tokenList = StaticUtils.tokenizeText(translation);
-                        for (int j = 0; j < tokenList.size(); j++) {
-                            Token token = (Token) tokenList.get(j);
+                        List<Token> tokenList = StaticUtils.tokenizeText(translation);
+                        for (Token token : tokenList) {
                             String tokenText = token.getTextFromString(translation);
                             // redraw?
                             if (tokenText.equals(word)) {
@@ -963,7 +962,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
             
             String selectionText = this.getText(start, end - start);
             // tokenize the selection
-            List tokenList = StaticUtils.tokenizeText(selectionText);
+            List<Token> tokenList = StaticUtils.tokenizeText(selectionText);
             
             StringBuffer buffer = new StringBuffer(selectionText);
             
@@ -973,8 +972,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                 int title = 0;
                 int other = 0;
 
-                for (int i = 0; i < tokenList.size(); i++) {
-                    Token token = (Token) tokenList.get(i);
+                for (Token token : tokenList) {
                     String word = token.getTextFromString(selectionText);
                     if (isLowerCase(word)) {
                         lower++;
@@ -1009,9 +1007,8 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
            
             int lengthIncrement = 0;
             
-            for (int i = 0; i < tokenList.size(); i++) {
+            for (Token token : tokenList) {
                 // find out the case and change to the selected 
-                Token token = (Token) tokenList.get(i);
                 String result = doChangeCase(
                         token.getTextFromString(selectionText), toWhat);
                 

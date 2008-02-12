@@ -24,10 +24,7 @@
 
 package org.omegat.filters3.xml;
 
-import org.omegat.filters3.Attribute;
-import org.omegat.filters3.Attributes;
 import org.omegat.filters3.OutOfTurnTag;
-import org.omegat.util.StaticUtils;
 
 /**
  * Out of turn XML Tag.

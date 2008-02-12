@@ -24,7 +24,6 @@
 
 package org.omegat.filters3;
 
-import org.omegat.filters2.TranslationException;
 import org.omegat.util.StaticUtils;
 
 /**

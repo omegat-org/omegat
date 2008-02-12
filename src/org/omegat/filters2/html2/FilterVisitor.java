@@ -27,34 +27,18 @@ package org.omegat.filters2.html2;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
 import java.util.ArrayList;
-import java.io.Serializable;
+import java.util.List;
 
 import org.htmlparser.Node;
 import org.htmlparser.Remark;
 import org.htmlparser.Tag;
 import org.htmlparser.Text;
 import org.htmlparser.visitors.NodeVisitor;
-
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
-import org.omegat.filters2.AbstractFilter;
-
-import java.awt.Dialog;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.Serializable;
-import java.io.Writer;
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetEncoder;
-
-
-import org.omegat.filters2.AbstractFilter;
-import org.omegat.filters2.Instance;
-import org.omegat.util.LinebreakPreservingReader;
-import org.omegat.util.Log;
-import org.omegat.util.OStrings;
 /**
  * The part of HTML filter that actually does the job.
  * This class is called back by HTMLParser (http://sf.net/projects/htmlparser/).
@@ -104,10 +88,10 @@ public class FilterVisitor extends NodeVisitor
      * <li>Otherwise they are written out directly.
      * </ul>
      */
-    ArrayList befors;
+    List<Node> befors;
     
     /** The list of nodes forming a chunk of text. */
-    ArrayList translatable;
+    List<Node> translatable;
 
     /** 
      * The list of non-paragraph tags following a chunk of text.
@@ -116,14 +100,14 @@ public class FilterVisitor extends NodeVisitor
      * <li>Otherwise (paragraph tag follows), they are written out directly.
      * </ul>
      */
-    ArrayList afters;
+    List<Node> afters;
     
     /** The tags behind the shortcuts */
-    ArrayList s_tags;
+    List<Tag> s_tags;
     /** The tag numbers of shorcutized tags */
-    ArrayList s_tag_numbers;
+    List<Integer> s_tag_numbers;
     /** The list of all the tag shortcuts */
-    ArrayList s_shortcuts;
+    List<String> s_shortcuts;
     /** The number of shortcuts stored */
     int s_nshortcuts;
 
@@ -384,7 +368,7 @@ public class FilterVisitor extends NodeVisitor
         // detecting the first starting tag in 'befors'
         // that has its ending in the paragraph
         // all before this "first good" are simply written out
-        ArrayList all = new ArrayList();
+        List<Node> all = new ArrayList<Node>();
         all.addAll(befors);
         all.addAll(translatable);
         int firstgoodlimit = befors.size();
@@ -556,12 +540,12 @@ public class FilterVisitor extends NodeVisitor
         text = false;
         recurse = true;
         // paragraph = new StringBuffer();
-        befors = new ArrayList();
-        translatable = new ArrayList();
-        afters = new ArrayList();
-        s_tags = new ArrayList();
-        s_tag_numbers = new ArrayList();
-        s_shortcuts = new ArrayList();
+        befors = new ArrayList<Node>();
+        translatable = new ArrayList<Node>();
+        afters = new ArrayList<Node>();
+        s_tags = new ArrayList<Tag>();
+        s_tag_numbers = new ArrayList<Integer>();
+        s_shortcuts = new ArrayList<String>();
         s_nshortcuts = 0;
     }
     
@@ -580,7 +564,7 @@ public class FilterVisitor extends NodeVisitor
             int recursion = 1;
             for(int i=s_tags.size()-1; i>=0; i--)
             {
-                Tag othertag = (Tag)s_tags.get(i);
+                Tag othertag = s_tags.get(i);
                 if( othertag.getTagName().equals(tag.getTagName()) )
                 {
                     if( othertag.isEndTag() )
@@ -591,7 +575,7 @@ public class FilterVisitor extends NodeVisitor
                         if( recursion==0 )
                         {
                             // we've found a starting tag for this ending one !!!
-                            n = ((Integer)s_tag_numbers.get(i)).intValue();
+                            n = s_tag_numbers.get(i);
                             break;
                         }
                     }
@@ -629,7 +613,7 @@ public class FilterVisitor extends NodeVisitor
         
         String shortcut = result.toString();
         s_tags.add(tag);
-        s_tag_numbers.add(new Integer(n));
+        s_tag_numbers.add(n);
         s_shortcuts.add(shortcut);
         paragraph.append(shortcut);
     }
@@ -641,11 +625,11 @@ public class FilterVisitor extends NodeVisitor
     {
         for(int i=0; i<s_shortcuts.size(); i++)
         {
-            String shortcut = (String)s_shortcuts.get(i);
+            String shortcut = s_shortcuts.get(i);
             int pos=-1;
             while( (pos=str.indexOf(shortcut, pos+1))>=0 )
             {
-                Tag tag = (Tag)s_tags.get(i);
+                Tag tag = s_tags.get(i);
                 try
                 {
                     str = str.substring(0, pos) + 
@@ -731,9 +715,8 @@ public class FilterVisitor extends NodeVisitor
     /** Saves "Befors" to output stream and cleans the list. */
     private void flushbefors()
     {
-        for(int i=0; i<befors.size(); i++)
+        for(Node node : befors)
         {
-            Node node = (Node)befors.get(i);
             if( node instanceof Tag )
                 writeout("<"+node.getText()+">");                           // NOI18N
             else
@@ -1204,9 +1187,8 @@ public class FilterVisitor extends NodeVisitor
                     {
                         String maybeShortcut = str.substring(i, gtpos+1);
                         boolean foundShortcut = false;                          // here because it's impossible to step out of two loops at once
-                        for(int j=0; j<s_shortcuts.size(); j++)
+                        for(String currShortcut : s_shortcuts)
                         {
-                            String currShortcut = (String)s_shortcuts.get(j);
                             if( maybeShortcut.equals(currShortcut) )
                             {
                                 // skipping the conversion of < into &lt;

@@ -43,30 +43,30 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import javax.swing.JOptionPane;
 
 import org.omegat.core.StringEntry;
+import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
-import org.omegat.filters2.html2.HTMLFilter2;
 import org.omegat.filters2.hhc.HHCFilter2;
+import org.omegat.filters2.html2.HTMLFilter2;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.filters2.text.TextFilter;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 import org.omegat.filters2.text.ini.INIFilter;
 import org.omegat.filters3.xml.docbook.DocBookFilter;
 import org.omegat.filters3.xml.opendoc.OpenDocFilter;
-import org.omegat.filters3.xml.opendoc.OpenDocXMLFilter;
 import org.omegat.filters3.xml.openxml.OpenXMLFilter;
-import org.omegat.filters3.xml.openxml.OpenXMLXMLFilter;
-import org.omegat.filters3.xml.xliff.XLIFFFilter;
 import org.omegat.filters3.xml.xhtml.XHTMLFilter;
-import org.omegat.util.Language;
+import org.omegat.filters3.xml.xliff.XLIFFFilter;
 import org.omegat.util.LFileCopy;
+import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -195,12 +195,12 @@ public class FilterMaster
         
         if( CommandThread.core.getProjectProperties().isSentenceSegmentingEnabled() )
         {
-            List spaces = new ArrayList();
-            List brules = new ArrayList();
-            List segments = Segmenter.segment(entry, spaces, brules);
+            List<StringBuffer> spaces = new ArrayList<StringBuffer>();
+            List<Rule> brules = new ArrayList<Rule>();
+            List<String> segments = Segmenter.segment(entry, spaces, brules);
             for(int i=0; i<segments.size(); i++)
             {
-                String onesrc = (String)segments.get(i);
+                String onesrc = segments.get(i);
                 segments.set(i, processSingleEntry(onesrc));
             }
             res.append(Segmenter.glue(segments, spaces, brules));
@@ -265,7 +265,7 @@ public class FilterMaster
      * @return          Whether the file was handled by one of OmegaT filters.
      * @see #translateFile(String, String, String)
      */
-    public boolean loadFile(String filename, Set processedFiles)
+    public boolean loadFile(String filename, Set<File> processedFiles)
             throws IOException, TranslationException
     {
         try
@@ -279,7 +279,7 @@ public class FilterMaster
             File inFile = new File(filename);
             String inEncoding = lookup.inEncoding;
             AbstractFilter filterObject = lookup.filterObject;
-            List files = filterObject.processFile(inFile, inEncoding, null, null);
+            List<File> files = filterObject.processFile(inFile, inEncoding, null, null);
             if (files!=null)
                 processedFiles.addAll(files);
         }
@@ -323,7 +323,7 @@ public class FilterMaster
      * @param processedFiles Set of already searched files.
      * @see #translateFile(String, String, String)
      */
-    public void searchFile(String filename, SearchThread searchthread, Set processedFiles)
+    public void searchFile(String filename, SearchThread searchthread, Set<File> processedFiles)
             throws IOException, TranslationException
     {
         setSearchMode(searchthread);
@@ -348,7 +348,7 @@ public class FilterMaster
      * @param targetdir The folder to place the translated inFile to.
      * @param processedFiles Set of all already processed files not to redo them again.
      */
-    public void translateFile(String sourcedir, String filename, String targetdir, Set processedFiles)
+    public void translateFile(String sourcedir, String filename, String targetdir, Set<File> processedFiles)
             throws IOException, TranslationException
     {
         setMemorizing(false);
@@ -381,7 +381,7 @@ public class FilterMaster
         String outEncoding = instance.getTargetEncoding();
         
         AbstractFilter filterObject = lookup.filterObject;
-        List files = filterObject.processFile(inFile, inEncoding, outFile, outEncoding);
+        List<File> files = filterObject.processFile(inFile, inEncoding, outFile, outEncoding);
         if (files!=null)
             processedFiles.addAll(files);
     }
@@ -458,7 +458,7 @@ public class FilterMaster
     }
     
     
-    private static List supportedEncodings = null;
+    private static List<String> supportedEncodings = null;
     /**
      * Queries JRE for the list of supported encodings.
      * Also adds the human name for no/automatic inEncoding.
@@ -466,11 +466,11 @@ public class FilterMaster
      * 
      * @return names of all the encodings in an array
      */
-    public static List getSupportedEncodings()
+    public static List<String> getSupportedEncodings()
     {
         if( supportedEncodings==null )
         {
-            supportedEncodings = new ArrayList();
+            supportedEncodings = new ArrayList<String>();
             supportedEncodings.add(AbstractFilter.ENCODING_AUTO_HUMAN);
             supportedEncodings.addAll(Charset.availableCharsets().keySet());
         }
@@ -508,7 +508,7 @@ public class FilterMaster
      */
     class MyExceptionListener implements ExceptionListener
     {
-        private List exceptionsList = new ArrayList();
+        private List<Exception> exceptionsList = new ArrayList<Exception>();
         private boolean exceptionOccured = false;
         public void exceptionThrown(Exception e)
         {
@@ -526,7 +526,7 @@ public class FilterMaster
         /**
          * Returns the list of occured exceptions.
          */
-        public List getExceptionsList()
+        public List<Exception> getExceptionsList()
         {
             return exceptionsList;
         }
@@ -548,11 +548,10 @@ public class FilterMaster
             if( myel.isExceptionOccured() )
             {
                 StringBuffer sb = new StringBuffer();
-                List exceptions = myel.getExceptionsList();
-                for(int i=0; i<exceptions.size(); i++)
+                for(Exception ex : myel.getExceptionsList())
                 {
                     sb.append("    ");                                          // NOI18N
-                    sb.append(exceptions.get(i));
+                    sb.append(ex);
                     sb.append("\n");                                            // NOI18N
                 }
                 throw new Exception("Exceptions occured while loading file filters:\n"+sb.toString()); // NOI18N
@@ -622,7 +621,7 @@ public class FilterMaster
         }
 
         // now adding those filters from defaults which appeared in new version only
-        HashSet existing = new HashSet();
+        Set<String> existing = new HashSet<String>();
         for (int i = 0; i < filters.getFilter().length; i++)
             existing.add(filters.getFilter(i).getClassName());
         for (int i = 0; i < defaults.getFilter().length; i++)
@@ -665,8 +664,8 @@ public class FilterMaster
                         // trying to create
                         try
                         {
-                            Class filter_class = cl.loadClass(classname);
-                            Constructor filter_constructor = filter_class.getConstructor((Class[])null);
+                            Class<?> filter_class = cl.loadClass(classname);
+                            Constructor<?> filter_constructor = filter_class.getConstructor((Class[])null);
                             Object filter = filter_constructor.newInstance((Object[])null);
                             if( filter instanceof AbstractFilter )
                             {
@@ -737,8 +736,8 @@ public class FilterMaster
             {
                 try
                 {
-                    Class filter_class = cl.loadClass((String)filterList.get(j));
-                    Constructor filter_constructor = filter_class.getConstructor((Class[])null);
+                    Class<?> filter_class = cl.loadClass((String)filterList.get(j));
+                    Constructor<?> filter_constructor = filter_class.getConstructor((Class[])null);
                     Object filter = filter_constructor.newInstance((Object[])null);
                     if( filter instanceof AbstractFilter )
                     {

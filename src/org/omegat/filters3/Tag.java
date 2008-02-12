@@ -24,7 +24,6 @@
 
 package org.omegat.filters3;
 
-import org.omegat.util.StaticUtils;
 
 /**
  * A tag in a source text.

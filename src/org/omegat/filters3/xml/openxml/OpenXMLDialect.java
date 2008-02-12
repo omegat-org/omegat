@@ -25,9 +25,7 @@
 
 package org.omegat.filters3.xml.openxml;
 
-import org.omegat.core.threads.CommandThread;
 import org.omegat.filters3.xml.DefaultXMLDialect;
-import org.omegat.filters3.xml.openxml.*;
 
 /**
  * Dialect of Open XML files.

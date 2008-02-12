@@ -26,17 +26,8 @@
 package org.omegat.filters2.hhc;
 
 import java.io.BufferedWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 
-import org.htmlparser.Node;
-import org.htmlparser.Remark;
 import org.htmlparser.Tag;
-import org.htmlparser.Text;
-import org.htmlparser.visitors.NodeVisitor;
-
-import org.omegat.util.PatternConsts;
-import org.omegat.util.StaticUtils;
 import org.omegat.filters2.html2.FilterVisitor;
 
 /**
@@ -48,13 +39,9 @@ import org.omegat.filters2.html2.FilterVisitor;
  */
 class HHCFilterVisitor extends FilterVisitor
 {
-    private HHCFilter2 filter;
-    private BufferedWriter writer;
     public HHCFilterVisitor(HHCFilter2 hhcfilter, BufferedWriter bufwriter)
     {
         super(hhcfilter, bufwriter);
-        this.filter = hhcfilter;
-        this.writer = bufwriter;
     }
 
     /////////////////////////////////////////////////////////////////////////

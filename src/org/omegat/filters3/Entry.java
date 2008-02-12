@@ -394,11 +394,10 @@ public class Entry
         
         ///////////////////////////////////////////////////////////////////////
         // recovering tags
-        List shortTags = listShortTags(translation);
+        List<ShortTag> shortTags = listShortTags(translation);
         int pos = 0;
-        for(int i=0; i<shortTags.size(); i++)
+        for(ShortTag shortTag : shortTags)
         {
-            ShortTag shortTag = (ShortTag)shortTags.get(i);
             if (pos<shortTag.pos)
             {
                 translatedEntry.add(getTextInstance().createInstance(
@@ -448,7 +447,7 @@ public class Entry
      *
      * @return List of {@link #ShortTag} classes.
      */
-    private List listShortTags(String str)
+    private List<ShortTag> listShortTags(String str)
     {
         // The code is nearly the same as in buildTagList in StaticUtils.java
         final int STATE_NORMAL = 1;
@@ -456,7 +455,7 @@ public class Entry
         
         int state = STATE_NORMAL;
         
-        List res = new ArrayList(str.length()/4);
+        List<ShortTag> res = new ArrayList<ShortTag>(str.length()/4);
         StringBuffer tag = new StringBuffer(str.length());
         for (int i=0; i<str.length(); i++)
         {
@@ -544,7 +543,7 @@ public class Entry
     ///////////////////////////////////////////////////////////////////////////
     
     /** Elements (tags and text) of this entry. */
-    private List elements = new ArrayList();
+    private List<Element> elements = new ArrayList<Element>();
     
     /** Adds an element to this entry. Can be either a {@link Text} or a {@link Tag}. */
     public void add(Element elem)
@@ -563,7 +562,7 @@ public class Entry
     /** Gets an element. Can be either a {@link Text} or a {@link Tag}. */
     public Element get(int i)
     {
-        return (Element)elements.get(i);
+        return elements.get(i);
     }
     
     /** Returns the number of source elements. */

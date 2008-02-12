@@ -24,9 +24,6 @@
 
 package org.omegat.filters2;
 
-import java.beans.XMLEncoder;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.Serializable;
 
 

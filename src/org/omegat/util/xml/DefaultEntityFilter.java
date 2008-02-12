@@ -25,7 +25,6 @@
 package org.omegat.util.xml;
 
 import java.util.HashMap;
-import org.omegat.util.StaticUtils;
 
 /**
  * Entity filter for XML.

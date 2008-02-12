@@ -31,12 +31,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
+
 import org.omegat.core.StringData;
 import org.omegat.core.matching.NearString;
-import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.util.OStrings;
 import org.omegat.util.Token;
 import org.omegat.util.gui.Styles;
@@ -50,8 +51,8 @@ import org.omegat.util.gui.Styles;
  */
 public class MatchesTextArea extends javax.swing.JTextPane implements MouseListener
 {
-    private List matches;
-    private List delimiters;
+    private List<NearString> matches;
+    private List<Integer> delimiters;
     private int activeMatch;
     private StringBuffer displayBuffer;
     
@@ -70,12 +71,12 @@ public class MatchesTextArea extends javax.swing.JTextPane implements MouseListe
      * Sets the list of fuzzy matches to show in the pane.
      * Each element of the list should be an instance of {@link NearString}.
      */
-    public void setMatches(List matches)
+    public void setMatches(List<NearString> matches)
     {
         this.matches = matches;
         activeMatch = -1;
-        delimiters = new ArrayList(matches.size()+1);
-        delimiters.add(new Integer(0));
+        delimiters = new ArrayList<Integer>(matches.size()+1);
+        delimiters.add(0);
         displayBuffer = new StringBuffer();
         
         for (int i=0; i<matches.size(); i++)
@@ -86,7 +87,7 @@ public class MatchesTextArea extends javax.swing.JTextPane implements MouseListe
                     match.proj + " >");                                         // NOI18N
             if (i < (matches.size()-1))
                 displayBuffer.append("\n\n");                                   // NOI18N
-            delimiters.add(new Integer(displayBuffer.length()));
+            delimiters.add(displayBuffer.length());
         }
         
         setText(displayBuffer.toString());
@@ -110,10 +111,10 @@ public class MatchesTextArea extends javax.swing.JTextPane implements MouseListe
         selectAll();
         setCharacterAttributes(Styles.PLAIN, true);
         
-        int start = ((Integer)delimiters.get(activeMatch)).intValue();
-        int end = ((Integer)delimiters.get(activeMatch+1)).intValue();
+        int start = delimiters.get(activeMatch);
+        int end = delimiters.get(activeMatch+1);
         
-        NearString match = (NearString) matches.get(activeMatch);
+        NearString match = matches.get(activeMatch);
         // List tokens = match.str.getSrcTokenList();
         List<Token> tokens = match.str.getSrcTokenListAll(); // fix for bug 1586397
         byte[] attributes = match.attr;
@@ -151,7 +152,7 @@ public class MatchesTextArea extends javax.swing.JTextPane implements MouseListe
 
     public void mouseClicked(MouseEvent e) {
         // is there anything?
-        if (matches == null || matches.size() == 0)
+        if (matches == null || matches.isEmpty())
             return;
         
         // set up the menu
@@ -164,8 +165,8 @@ public class MatchesTextArea extends javax.swing.JTextPane implements MouseListe
             
             int i;
             for (i = 0; i < delimiters.size()-1; i++) {
-                int start = ((Integer) delimiters.get(i)).intValue();
-                int end = ((Integer) delimiters.get(i+1)).intValue();
+                int start = delimiters.get(i);
+                int end = delimiters.get(i+1);
                 
                 if (mousepos >= start && mousepos< end) {
                     clickedItem = i;
@@ -203,7 +204,7 @@ public class MatchesTextArea extends javax.swing.JTextPane implements MouseListe
             if (clicked >= matches.size())
                 return;
             
-            final NearString ns = (NearString) matches.get(clicked);
+            final NearString ns = matches.get(clicked);
             String project = ns.proj;
             
             item = popup.add(OStrings.getString("MATCHES_GO_TO_SEGMENT_SOURCE"));

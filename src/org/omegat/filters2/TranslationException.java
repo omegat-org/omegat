@@ -24,7 +24,6 @@
 
 package org.omegat.filters2;
 
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * TranslationException is a checked exception that may be thrown

@@ -365,7 +365,7 @@ public abstract class AbstractFilter
      *
      * @author Martin Wunderlich
      */
-    public List processFile(File inFile, String inEncoding, File outFile, String outEncoding) throws IOException, TranslationException
+    public List<File> processFile(File inFile, String inEncoding, File outFile, String outEncoding) throws IOException, TranslationException
     {
     	BufferedReader reader = createReader(inFile, inEncoding);
     	BufferedWriter writer;

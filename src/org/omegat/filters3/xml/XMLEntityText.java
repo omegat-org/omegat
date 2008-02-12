@@ -25,7 +25,6 @@
 package org.omegat.filters3.xml;
 
 import org.omegat.filters3.Text;
-import org.omegat.util.StaticUtils;
 
 /**
  * Internal entity text in XML.

@@ -132,7 +132,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener
     
     private JComboBox encodingComboBox()
     {
-        return new JComboBox(new Vector(FilterMaster.getSupportedEncodings()));
+        return new JComboBox(new Vector<String>(FilterMaster.getSupportedEncodings()));
     }
     
     public void valueChanged(ListSelectionEvent e)
@@ -146,7 +146,6 @@ public class FilterEditor extends JDialog implements ListSelectionListener
         }
         else
         {
-            int selectedRow = lsm.getMinSelectionIndex();
             editButton.setEnabled(true);
             removeButton.setEnabled(true);
         }
@@ -386,9 +385,9 @@ public class FilterEditor extends JDialog implements ListSelectionListener
     {//GEN-HEADEREND:event_toDefaultsButtonActionPerformed
         try
         {
-            Class filterClass = Class.forName(filter.getClassName());
+            Class<?> filterClass = Class.forName(filter.getClassName());
             boolean fromPlugin = filter.isFromPlugin();
-            Constructor filterConstructor = filterClass.getConstructor((Class[])null);
+            Constructor<?> filterConstructor = filterClass.getConstructor((Class[])null);
             AbstractFilter filterObject = (AbstractFilter)filterConstructor.newInstance((Object[])null);
             filter = new OneFilter(filterObject, fromPlugin);
             filters.setFilter(index, filter);

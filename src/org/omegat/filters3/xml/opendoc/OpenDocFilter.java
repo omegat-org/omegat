@@ -35,6 +35,7 @@ import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
@@ -53,7 +54,7 @@ import org.omegat.util.Log;
  */
 public class OpenDocFilter extends AbstractFilter
 {
-    private static final HashSet TRANSLATABLE = new HashSet(
+    private static final Set<String> TRANSLATABLE = new HashSet<String>(
             Arrays.asList(new String[] 
     { 
         "content.xml",                                                          // NOI18N
@@ -72,10 +73,10 @@ public class OpenDocFilter extends AbstractFilter
         try
         {
             ZipFile file = new ZipFile(inFile);
-            Enumeration entries = file.entries();
+            Enumeration<? extends ZipEntry> entries = file.entries();
             while (entries.hasMoreElements())
             {
-                ZipEntry entry = (ZipEntry) entries.nextElement();
+                ZipEntry entry = entries.nextElement();
                 if (TRANSLATABLE.contains(entry.getName()))
                     return true;
             }
@@ -107,13 +108,13 @@ public class OpenDocFilter extends AbstractFilter
      * which is actually a ZIP file consisting of many XML files, 
      * some of which should be translated.
      */
-    public List processFile(File inFile, String inEncoding, File outFile, String outEncoding) throws IOException, TranslationException
+    public List<File> processFile(File inFile, String inEncoding, File outFile, String outEncoding) throws IOException, TranslationException
     {
         ZipFile zipfile = new ZipFile(inFile);
         ZipOutputStream zipout = null;
         if (outFile!=null)
             zipout = new ZipOutputStream(new FileOutputStream(outFile));
-        Enumeration zipcontents = zipfile.entries();
+        Enumeration<? extends ZipEntry> zipcontents = zipfile.entries();
         while (zipcontents.hasMoreElements())
         {
             ZipEntry zipentry = (ZipEntry) zipcontents.nextElement();

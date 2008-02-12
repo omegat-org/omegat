@@ -24,8 +24,6 @@
 
 package org.omegat.filters3.xml;
 
-import org.omegat.filters3.Attributes;
-import org.omegat.filters3.Tag;
 
 /**
  * A comment in XML file.

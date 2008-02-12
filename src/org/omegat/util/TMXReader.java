@@ -26,23 +26,21 @@ package org.omegat.util;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.xml.sax.Attributes;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.util.xml.XMLReader;
+import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 /**
  * Class that loads TMX (Translation Memory Exchange) files (any version, we're cool).

@@ -26,13 +26,13 @@ package org.omegat;
 
 import java.util.Date;
 import java.util.Locale;
+
 import javax.swing.UIManager;
 
 import org.omegat.core.threads.CommandThread;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 
 /**
  * The main OmegaT class, used to launch the programm.

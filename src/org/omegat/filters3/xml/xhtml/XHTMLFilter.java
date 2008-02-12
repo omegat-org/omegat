@@ -31,7 +31,6 @@ import java.io.Serializable;
 
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
-import org.omegat.filters3.xml.XMLDialect;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 

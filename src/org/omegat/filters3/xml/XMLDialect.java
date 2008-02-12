@@ -26,6 +26,8 @@ package org.omegat.filters3.xml;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
+
 import org.omegat.util.MultiMap;
 import org.xml.sax.InputSource;
 
@@ -41,14 +43,14 @@ public interface XMLDialect
      * <p>
      * Each entry in a set should be a String class.
      */
-    Set getParagraphTags();
+    Set<String> getParagraphTags();
 
     /**
      * Returns the set of tags that surround preformatted text.
      * <p>
      * Each entry in a set should be a String class.
      */
-    Set getPreformatTags();
+    Set<String> getPreformatTags();
     
     /**
      * Returns the set of tags that surround intact portions of document,
@@ -56,7 +58,7 @@ public interface XMLDialect
      * <p>
      * Each entry in a set should be a String class.
      */
-    Set getIntactTags();
+    Set<String> getIntactTags();
     
     /**
      * Returns the set of "out-of-turn" tags.
@@ -66,21 +68,21 @@ public interface XMLDialect
      * <p>
      * Each entry in a set should be a String class.
      */
-    Set getOutOfTurnTags();
+    Set<String> getOutOfTurnTags();
     
     /**
      * Returns the multimap of translatable attributes of each tag.
      * <p>
      * Each entry should map from a String to a set of Strings.
      */
-    MultiMap getTranslatableTagAttributes();
+    MultiMap<String,String> getTranslatableTagAttributes();
     
     /**
      * Returns the set of translatable attributes (no matter what tag they belong to).
      * <p>
      * Each entry in a set should be a String class.
      */
-    Set getTranslatableAttributes();
+    Set<String> getTranslatableAttributes();
     
     /**
      * Returns the map of tags to their shortcuts.
@@ -90,7 +92,7 @@ public interface XMLDialect
      * Each entry should map a {@link String} to a {@link String} -- 
      * a tag to its shortcut.
      */
-    Map getShortcuts();
+    Map<String,String> getShortcuts();
 
     
     /** Unboxed (of primitive type </code>int</code>) constraint on Doctype name. */
@@ -119,12 +121,11 @@ public interface XMLDialect
      * Each entry should map an {@link Integer} to a {@link Pattern} -- 
      * regular expression for a specified constrained string.
      */
-    Map getConstraints();
+    Map<Integer, Pattern> getConstraints();
     
     /**
      * Resolves external entites if child filter needs it.
      * Should return <code>null</code> if it doesn't or cannot.
      */
-    InputSource resolveEntity(String publicId, String systemId);
-    
+    InputSource resolveEntity(String publicId, String systemId);    
 }

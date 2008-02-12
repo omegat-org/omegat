@@ -32,12 +32,12 @@ package org.omegat.gui.dialogs;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+
 import org.omegat.core.spellchecker.DictionaryManager;
 import org.omegat.util.OStrings;
 

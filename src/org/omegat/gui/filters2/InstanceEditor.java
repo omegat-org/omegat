@@ -319,7 +319,7 @@ public class InstanceEditor extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(jLabel3, gridBagConstraints);
 
-        sourceEncodingField.setModel(new DefaultComboBoxModel(new Vector(FilterMaster.getSupportedEncodings())));
+        sourceEncodingField.setModel(new DefaultComboBoxModel(new Vector<String>(FilterMaster.getSupportedEncodings())));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -336,7 +336,7 @@ public class InstanceEditor extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(jLabel6, gridBagConstraints);
 
-        targetEncodingField.setModel(new DefaultComboBoxModel(new Vector(FilterMaster.getSupportedEncodings())));
+        targetEncodingField.setModel(new DefaultComboBoxModel(new Vector<String>(FilterMaster.getSupportedEncodings())));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;

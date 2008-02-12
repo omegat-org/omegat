@@ -33,6 +33,8 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.xml.XMLBlock;
@@ -150,9 +152,9 @@ public class Preferences
     static
     {
         m_loaded = false;
-        m_preferenceMap = new HashMap(64);
-        m_nameList = new ArrayList(32);
-        m_valList = new ArrayList(32);
+        m_preferenceMap = new HashMap<String, Integer>(64);
+        m_nameList = new ArrayList<String>(32);
+        m_valList = new ArrayList<String>(32);
         m_changed = false;
         doLoad();
     }
@@ -172,12 +174,12 @@ public class Preferences
         if (!m_loaded)
             doLoad();
         
-        Integer i = (Integer) m_preferenceMap.get(key);
+        Integer i = m_preferenceMap.get(key);
         String v = "";								// NOI18N
         if (i != null)
         {
             // mapping exists - recover defaultValue
-            v = (String) m_valList.get(i.intValue());
+            v = m_valList.get(i);
         }
         return v;
     }
@@ -253,11 +255,11 @@ public class Preferences
         {
             if (!m_loaded)
                 doLoad();
-            Integer i = (Integer) m_preferenceMap.get(name);
+            Integer i = m_preferenceMap.get(name);
             if (i == null)
             {
                 // defaultValue doesn't exist - add it
-                i = new Integer(m_valList.size());
+                i = m_valList.size();
                 m_preferenceMap.put(name, i);
                 m_valList.add(value);
                 m_nameList.add(name);
@@ -316,7 +318,7 @@ public class Preferences
             xml.killEmptyBlocks();
             xml.setStream(new File(StaticUtils.getConfigDir() + FILE_PREFERENCES));
             XMLBlock blk;
-            ArrayList lst;
+            List<XMLBlock> lst;
             
             m_preferenceMap.clear();
             String pref;
@@ -340,10 +342,9 @@ public class Preferences
             if (lst == null)
                 return;
             
-            Integer j;
             for (int i=0; i<lst.size(); i++)
             {
-                blk = (XMLBlock) lst.get(i);
+                blk = lst.get(i);
                 if (blk.isClose())
                     continue;
                 
@@ -351,7 +352,7 @@ public class Preferences
                     continue;
                 
                 pref = blk.getTagName();
-                blk = (XMLBlock) lst.get(++i);
+                blk = lst.get(++i);
                 if (blk.isTag())
                 {
                     // parse error - keep trying
@@ -361,8 +362,7 @@ public class Preferences
                 if (pref != null && !pref.equals("") && val != null)		// NOI18N
                 {
                     // valid match - record these
-                    j = new Integer(m_valList.size());
-                    m_preferenceMap.put(pref, j);
+                    m_preferenceMap.put(pref, m_valList.size());
                     m_nameList.add(pref);
                     m_valList.add(val);
                 }
@@ -410,8 +410,8 @@ public class Preferences
         
         for (int i=0; i<m_nameList.size(); i++)
         {
-            String name = (String) m_nameList.get(i);
-            String val = StaticUtils.makeValidXML((String) m_valList.get(i));
+            String name = m_nameList.get(i);
+            String val = StaticUtils.makeValidXML(m_valList.get(i));
             if (val.equals(""))							// NOI18N
                 continue;	// don't write blank preferences
             out.write("    <" + name + ">");					// NOI18N
@@ -430,9 +430,9 @@ public class Preferences
     
     // use a hash map for fast lookup of data
     // use array lists for orderly recovery of it for saving to disk
-    private static ArrayList m_nameList;
-    private static ArrayList m_valList;
-    private static HashMap   m_preferenceMap;
+    private static List<String> m_nameList;
+    private static List<String> m_valList;
+    private static Map<String,Integer>   m_preferenceMap;
     
 }
 

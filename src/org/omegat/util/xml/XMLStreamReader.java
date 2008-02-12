@@ -30,6 +30,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 import org.omegat.filters2.TranslationException;
@@ -51,8 +52,8 @@ public class XMLStreamReader
     {
         m_pos = -1;
         m_stringStream = "";	// NOI18N
-        m_charStack = new Stack();
-        m_charCache = new ArrayList();
+        m_charStack = new Stack<Character>();
+        m_charCache = new ArrayList<Character>();
         m_killEmptyBlocks = false;
         m_ignoreWhiteSpace = false;
         m_breakWhitespace = false;
@@ -248,7 +249,7 @@ public class XMLStreamReader
     {
         if( !m_charStack.empty() )
         {
-            Character ch = (Character) m_charStack.pop();
+            Character ch = m_charStack.pop();
             return ch.charValue();
         }
         else
@@ -1155,7 +1156,7 @@ public class XMLStreamReader
         return out.toString();
     }
     
-    public ArrayList closeBlock(XMLBlock block) throws TranslationException
+    public List<XMLBlock> closeBlock(XMLBlock block) throws TranslationException
     {
         return closeBlock(block, false);
     }
@@ -1166,9 +1167,9 @@ public class XMLStreamReader
      * If the provided block is not a standalone tag, or if there are
      * no elements between open and close, a null is returned.
      */
-    public ArrayList closeBlock(XMLBlock block, boolean includeTerminationBlock) throws TranslationException
+    public List<XMLBlock> closeBlock(XMLBlock block, boolean includeTerminationBlock) throws TranslationException
     {
-        ArrayList lst = new ArrayList();
+        List<XMLBlock> lst = new ArrayList<XMLBlock>();
         
         // sanity check
         if (block == null)
@@ -1369,8 +1370,8 @@ public class XMLStreamReader
     private XMLBlock			m_headBlock;
     
     private int		m_pos;
-    private Stack	    m_charStack;
-    private ArrayList	m_charCache;
+    private Stack<Character> m_charStack;
+    private List<Character> m_charCache;
     private boolean	m_killEmptyBlocks;
     private boolean	m_ignoreWhiteSpace;	// don't copy ws to text
     private boolean	m_breakWhitespace;	// put all ws in own block

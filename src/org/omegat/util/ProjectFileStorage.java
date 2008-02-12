@@ -30,7 +30,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
+import java.util.List;
 
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.xml.XMLBlock;
@@ -60,7 +60,7 @@ public class ProjectFileStorage
 		
 		// verify valid project file
 		XMLBlock blk;
-		ArrayList lst;
+		List<XMLBlock> lst;
 
 		// advance to omegat tag
 		if (m_reader.advanceToTag("omegat") == null)					// NOI18N
@@ -88,7 +88,7 @@ public class ProjectFileStorage
 
 		for (int i=0; i<lst.size(); i++)
 		{
-			blk = (XMLBlock) lst.get(i);
+			blk = lst.get(i);
 			if (blk.isClose())
 				continue;
 
@@ -96,35 +96,35 @@ public class ProjectFileStorage
 			{
 				if (++i >= lst.size())
 					break;
-				blk = (XMLBlock) lst.get(i);
+				blk = lst.get(i);
 				m_target = computeAbsolutePath(blk.getText(), OConsts.DEFAULT_TARGET);
 			}
 			else if (blk.getTagName().equals("source_dir"))						// NOI18N
 			{
 				if (++i >= lst.size())
 					break;
-				blk = (XMLBlock) lst.get(i);
+				blk = lst.get(i);
 				m_source = computeAbsolutePath(blk.getText(), OConsts.DEFAULT_SOURCE);
 			}
 			else if (blk.getTagName().equals("tm_dir"))							// NOI18N
 			{
 				if (++i >= lst.size())
 					break;
-				blk = (XMLBlock) lst.get(i);
+				blk = lst.get(i);
 				m_tm = computeAbsolutePath(blk.getText(), OConsts.DEFAULT_TM);
 			}
 			else if (blk.getTagName().equals("glossary_dir"))					// NOI18N
 			{
 				if (++i >= lst.size())
 					break;
-				blk = (XMLBlock) lst.get(i);
+				blk = lst.get(i);
 				m_glossary = computeAbsolutePath(blk.getText(), OConsts.DEFAULT_GLOSSARY);
 			}
 			else if (blk.getTagName().equals("source_lang"))					// NOI18N
 			{
 				if (++i >= lst.size())
 					break;
-				blk = (XMLBlock) lst.get(i);
+				blk = lst.get(i);
 				if (blk != null)
 					m_sourceLocale = blk.getText();
 			}
@@ -132,7 +132,7 @@ public class ProjectFileStorage
 			{
 				if (++i >= lst.size())
 					break;
-				blk = (XMLBlock) lst.get(i);
+				blk = lst.get(i);
 				if (blk != null)
 					m_targetLocale = blk.getText();
 			}
@@ -140,7 +140,7 @@ public class ProjectFileStorage
 			{
 				if (++i >= lst.size())
 					break;
-				blk = (XMLBlock) lst.get(i);
+				blk = lst.get(i);
 				if (blk != null)
 					m_sentenceSeg = blk.getText();
 			}

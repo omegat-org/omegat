@@ -31,6 +31,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.*;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -180,7 +181,7 @@ public class TagValidationFrame extends JFrame
         return str;
     }
    
-    public void displayStringList(ArrayList stringList)
+    public void displayStringList(List<SourceTextEntry> stringList)
     {
         this.stringList = stringList;
         update();
@@ -205,9 +206,8 @@ public class TagValidationFrame extends JFrame
         output.append("<body>\n");                                              // NOI18N
         
         output.append("<table BORDER COLS=3 WIDTH=\"100%\" NOSAVE>\n");         // NOI18N
-        for (int i=0; i<stringList.size(); i++)
+        for (SourceTextEntry ste : stringList)
         {
-            SourceTextEntry ste = (SourceTextEntry) stringList.get(i);
             StringEntry se = ste.getStrEntry();
             String src = se.getSrcText();
             String trans = se.getTranslation();
@@ -242,5 +242,5 @@ public class TagValidationFrame extends JFrame
     }
 
     private JEditorPane m_editorPane;
-    private ArrayList stringList;
+    private List<SourceTextEntry> stringList;
 }

@@ -299,9 +299,7 @@ public class SearchThread extends Thread
         // search the TM, if requested
         if (m_tmSearch) {
             // search all TM entries
-            ArrayList tmList = CommandThread.core.getTransMemory();
-            for (i = 0; i < tmList.size(); i++) {
-                TransMemory tm = (TransMemory) tmList.get(i);
+            for (TransMemory tm : CommandThread.core.getTransMemory()) {
                 String srcText = tm.source;
                 String locText = tm.target;
 

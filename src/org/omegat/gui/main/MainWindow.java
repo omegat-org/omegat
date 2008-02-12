@@ -656,7 +656,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     
     private void doValidateTags()
     {
-        ArrayList suspects = CommandThread.core.validateTags();
+        List<SourceTextEntry> suspects = CommandThread.core.validateTags();
         if (suspects.size() > 0)
         {
             // create a tag validation window if necessary

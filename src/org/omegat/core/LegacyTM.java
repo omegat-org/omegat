@@ -38,7 +38,7 @@ public class LegacyTM
     /** name of TMX file */
     private String tmxname;
     /** list of StringEntry objects of the TM */
-    private List tmstrings;
+    private List<StringEntry> tmstrings;
     
     /** 
      * Creates a new instance of Legacy Translation Memory
@@ -46,7 +46,7 @@ public class LegacyTM
      * @param tmxname     name of TMX file
      * @param tmstrings   list of StringEntry objects of the TM
      */
-    public LegacyTM(String tmxname, List tmstrings)
+    public LegacyTM(String tmxname, List<StringEntry> tmstrings)
     {
         this.tmxname = tmxname;
         this.tmstrings = tmstrings;
@@ -56,6 +56,6 @@ public class LegacyTM
     public String getName()   { return tmxname; }
     
     /** Returns the list of StringEntry-es of this Translation Memory */
-    public List getStrings()  { return tmstrings; }
+    public List<StringEntry> getStrings()  { return tmstrings; }
     
 }

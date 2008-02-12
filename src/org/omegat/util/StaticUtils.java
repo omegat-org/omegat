@@ -35,7 +35,9 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.text.BreakIterator;
 import java.text.MessageFormat;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 import java.lang.reflect.Array;
 import java.net.URL;
 import java.net.URLConnection;
@@ -80,7 +82,7 @@ public class StaticUtils
      * Builds a list of format tags within the supplied string.
      * Format tags are OmegaT style tags: &lt;xx02&gt; or &lt;/yy01&gt;.
      */
-    public static void buildTagList(String str, ArrayList tagList)
+    public static void buildTagList(String str, List<String> tagList)
     {
         // The code is nearly the same as in listShortTags in Entry.java
         final int STATE_NORMAL = 1;
@@ -118,7 +120,7 @@ public class StaticUtils
      * Returns a list of all files under the root directory
      * by absolute path.
      */
-    public static void buildFileList(ArrayList lst, File rootDir,
+    public static void buildFileList(List<String> lst, File rootDir,
             boolean recursive)
     {
         int i;
@@ -162,7 +164,7 @@ public class StaticUtils
     
     // returns a list of all files under the root directory
     //  by absolute path
-    public static void buildDirList(ArrayList lst, File rootDir)
+    public static void buildDirList(List<String> lst, File rootDir)
     {
         int i;
         // read all files in current directory, recurse into subdirs
@@ -179,7 +181,6 @@ public class StaticUtils
         }
     }
     
-    private static BreakIterator wordBreaker = null;
     /** Returns an iterator to break sentences into words. */
     public static BreakIterator getWordBreaker()
     {
@@ -205,7 +206,7 @@ public class StaticUtils
       * memory is saved. Token lists are not saved when
       * all tokens are requested. Again to save memory.
       */
-    private static java.util.Map tokenCache = new java.util.Hashtable();
+    private static Map<String, List<Token>> tokenCache = new java.util.Hashtable<String, List<Token>>();
 
     /** Removes all token lists from the cache. */
     public static void clearTokenCache() {
@@ -227,7 +228,7 @@ public class StaticUtils
       * @param str string to tokenize
       * @return List of all tokens (words only)
       */
-    public static List tokenizeText(String str) {
+    public static List<Token> tokenizeText(String str) {
         return tokenizeText(str, false);
     }
 
@@ -247,20 +248,20 @@ public class StaticUtils
       * @param all If true, numbers, tags, and other non-word tokens are included in the list
       * @return List of tokens (all)
       */
-    public static List tokenizeText(String str, boolean all) {
+    public static List<Token> tokenizeText(String str, boolean all) {
         // check if we've already tokenized this string
         // no sense in retokenizing identical strings
         // don't check if the caller wants all tokens
-        List tokens = null;
+        List<Token> tokens = null;
         if (!all) {
-            tokens = (List)tokenCache.get(str);
+            tokens = tokenCache.get(str);
             if (tokens != null)
                 return tokens;
         }
 
         // create a new token list
         // and put it in the cache if not all tokens are requested
-        tokens = new ArrayList();
+        tokens = new ArrayList<Token>();
         if (!all)
             tokenCache.put(str, tokens);
 
@@ -308,18 +309,6 @@ public class StaticUtils
         GraphicsEnvironment graphics;
         graphics = GraphicsEnvironment.getLocalGraphicsEnvironment();
         return graphics.getAvailableFontFamilyNames();
-    }
-    
-    /**
-     * Tests, whether one list of tokens is fully contained (is-a subset)
-     * in other list of tokens
-     */
-    public static boolean isSubset(List maybeSubset, List maybeSuperset)
-    {
-        for(int i=0; i<maybeSubset.size(); i++)
-            if( !maybeSuperset.contains(maybeSubset.get(i)) )
-                return false;
-        return true;
     }
     
     /**
@@ -829,7 +818,6 @@ public class StaticUtils
         URLConnection urlConn = null;
         InputStream in = null;
         OutputStream out = null;
-        StringBuffer sb = new StringBuffer();
         try {
             URL url = new URL(address);
             urlConn = url.openConnection();
@@ -860,15 +848,15 @@ public class StaticUtils
         }
     }
 
-    public static void extractFileFromJar(String archive, ArrayList filenames,
+    public static void extractFileFromJar(String archive, List<String> filenames,
             String destination) throws IOException {
         // open the jar (zip) file
         JarFile jar = new JarFile(archive);
         
         // parse the entries
-        java.util.Enumeration entryEnum = jar.entries();
+        Enumeration<JarEntry> entryEnum = jar.entries();
         while (entryEnum.hasMoreElements()) {
-            JarEntry file = (JarEntry) entryEnum.nextElement();
+            JarEntry file = entryEnum.nextElement();
             if (filenames.contains(file.getName())) {
                 // match found
                 File f = new File(destination + File.separator + file.getName());

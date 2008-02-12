@@ -42,29 +42,27 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.omegat.core.LegacyTM;
+import org.omegat.core.ProjectProperties;
 import org.omegat.core.StringEntry;
 import org.omegat.core.TransMemory;
 import org.omegat.core.glossary.GlossaryManager;
 import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.SourceTextEntry;
+import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.ProjectFrame;
-import org.omegat.core.ProjectProperties;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.messages.MessageRelay;
-import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -120,15 +118,12 @@ public class CommandThread extends Thread
         m_strEntryHash = new HashMap<String, StringEntry>(4096);
         m_strEntryList = new ArrayList<StringEntry>();
         m_srcTextEntryArray = new ArrayList<SourceTextEntry>(4096);
-        m_tmList = new ArrayList();
-        m_legacyTMs = new ArrayList();
-        m_orphanedList = new ArrayList();
+        m_tmList = new ArrayList<TransMemory>();
+        m_legacyTMs = new ArrayList<LegacyTM>();
+        m_orphanedList = new ArrayList<TransMemory>();
         m_modifiedFlag = false;
         
-        m_extensionList = new ArrayList(32);
-        m_extensionMapList = new ArrayList(32);
-        
-        m_requestQueue = new LinkedList();
+        m_requestQueue = new LinkedList<RequestPacket>();
         m_saveCount = -1;
         m_saveThread = null;
     }
@@ -216,8 +211,7 @@ public class CommandThread extends Thread
         {
             if (m_requestQueue.size() > 0)
             {
-                pack.set((RequestPacket)
-                m_requestQueue.removeFirst());
+                pack.set(m_requestQueue.removeFirst());
             }
         }
     }
@@ -241,9 +235,6 @@ public class CommandThread extends Thread
         
         m_tmList.clear();
         m_orphanedList.clear();
-        
-        m_extensionList.clear();
-        m_extensionMapList.clear();
         
         m_strEntryList.clear();
         m_srcTextEntryArray.clear();
@@ -355,10 +346,6 @@ public class CommandThread extends Thread
             m_tmList = null;
             m_orphanedList.clear();
             m_orphanedList = null;
-            m_extensionList.clear();
-            m_extensionList = null;
-            m_extensionMapList.clear();
-            m_extensionMapList = null;
             m_glossary = null;
 
             // Well, that cleared up some, GC to the rescue!
@@ -481,10 +468,8 @@ public class CommandThread extends Thread
         
         // Write orphan strings
         if (addOrphans) {
-            TransMemory transMem;
-            for (int i = 0; i < m_orphanedList.size(); i++)
+            for (TransMemory transMem : m_orphanedList)
             {
-                transMem = (TransMemory) m_orphanedList.get(i);
                 if (transMem.target.length() == 0)
                     continue;
                 source = forceValidTMX ? StaticUtils.stripTags(transMem.source)
@@ -628,14 +613,14 @@ public class CommandThread extends Thread
      * Scans project and builds the list of entries which are suspected of
      * having changed (possibly invalid) tag structures.
      */
-    public ArrayList validateTags()
+    public List<SourceTextEntry> validateTags()
     {
-        int i, j;
+        int j;
         String s;
         String t;
-        ArrayList srcTags = new ArrayList(32);
-        ArrayList locTags = new ArrayList(32);
-        ArrayList suspects = new ArrayList(16);
+        List<String> srcTags = new ArrayList<String>(32);
+        List<String> locTags = new ArrayList<String>(32);
+        List<SourceTextEntry> suspects = new ArrayList<SourceTextEntry>(16);
         
         StringEntry se;
         
@@ -663,8 +648,8 @@ public class CommandThread extends Thread
                 // compare one by one
                 for (j=0; j<srcTags.size(); j++)
                 {
-                    s = (String) srcTags.get(j);
-                    t = (String) locTags.get(j);
+                    s = srcTags.get(j);
+                    t = locTags.get(j);
                     if (!s.equals(t))
                     {
                         suspects.add(ste);
@@ -720,14 +705,13 @@ public class CommandThread extends Thread
         }
         
         // build mirror directory of source tree
-        ArrayList fileList = new ArrayList(256);
+        List<String> fileList = new ArrayList<String>(256);
         String srcRoot = m_config.getSourceRoot();
         String locRoot = m_config.getTargetRoot();
         StaticUtils.buildDirList(fileList, new File(srcRoot));
         
-        for(int i=0; i<fileList.size(); i++)
+        for(String filename : fileList)
         {
-            String filename = (String) fileList.get(i);
             String destFileName = locRoot + filename.substring(srcRoot.length());
             File destFile = new File(destFileName);
             if (!destFile.exists())
@@ -748,11 +732,10 @@ public class CommandThread extends Thread
         fileList.clear();
         StaticUtils.buildFileList(fileList, new File(srcRoot), true);
         
-        Set processedFiles = new HashSet();
+        Set<File> processedFiles = new HashSet<File>();
         
-        for(int i=0; i<fileList.size(); i++)
+        for(String filename : fileList)
         {
-            String filename = (String) fileList.get(i);
             File file = new File(filename);
             if (processedFiles.contains(file))
                 continue;
@@ -1020,15 +1003,14 @@ public class CommandThread extends Thread
         // now open source files
         FilterMaster fm = FilterMaster.getInstance();
         
-        ArrayList srcFileList = new ArrayList();
+        List<String> srcFileList = new ArrayList<String>();
         File root = new File(m_config.getSourceRoot());
         StaticUtils.buildFileList(srcFileList, root, true);
         
         Set processedFiles = new HashSet();
         
-        for (int i=0; i<srcFileList.size(); i++)
+        for (String filename : srcFileList)
         {
-            String filename = (String) srcFileList.get(i);
             File file = new File(filename);
             if (processedFiles.contains(file))
                 continue;
@@ -1084,9 +1066,8 @@ public class CommandThread extends Thread
         matcher.match(m_strEntryList);
         
         // matching legacy TMX files
-        for(int i=0; i<m_legacyTMs.size(); i++)
+        for(LegacyTM tm : m_legacyTMs)
         {
-            LegacyTM tm = (LegacyTM)m_legacyTMs.get(i);
             matcher.match(m_strEntryList, tm.getName(), tm.getStrings());
         }
     }
@@ -1152,8 +1133,8 @@ public class CommandThread extends Thread
         new File(fname + ".tmp").delete();
 
         int num = tmx.numSegments();
-        ArrayList strEntryList = new ArrayList(num);
-        ArrayList strOrphaneList = null;
+        List<StringEntry> strEntryList = new ArrayList<StringEntry>(num);
+        List<StringEntry> strOrphaneList = null;
 
         // RFE 1001918 - backing up project's TMX upon successful read
         if( isProject )
@@ -1171,7 +1152,7 @@ public class CommandThread extends Thread
         // and adding to the list of legacy TMs
         if( isProject )
         {
-            strOrphaneList = new ArrayList();
+            strOrphaneList = new ArrayList<StringEntry>();
             LegacyTM tm = new LegacyTM(
                     OStrings.getString("CT_ORPHAN_STRINGS"), strOrphaneList);
             m_legacyTMs.add(tm);
@@ -1456,14 +1437,14 @@ catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug
         int remainingWords = 0;
         int remainingCharsNoSpaces = 0;
         int remainingChars = 0;
-        SortedMap counts = new TreeMap();
+        Map<String, int[]> counts = new TreeMap<String, int[]>();
         for (SourceTextEntry ste : m_srcTextEntryArray)
         {
             String fileName = ste.getSrcFile().name;
             fileName = StaticUtils.makeFilenameRelative(fileName, getProjectProperties().getSourceRoot());
             int[] numbers; // [0] - words, [1] - left words
             if( counts.containsKey(fileName) )
-                numbers = (int[]) counts.get(fileName);
+                numbers = counts.get(fileName);
             else
                 numbers = new int[] {0, 0, 0, 0, 0, 0};
 
@@ -1593,11 +1574,9 @@ catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug
                     OStrings.getString("CT_STATS_FILE_Remaining_Characters") +
                     "\n");                                                      // NOI18N
             
-            Iterator it = counts.keySet().iterator();
-            while( it.hasNext() )
+            for (String filename : counts.keySet())
             {
-                String filename = (String) it.next();
-                int[] numbers = (int[]) counts.get(filename);
+                int[] numbers = counts.get(filename);
                 ofp.write(filename + 
                         "\t" + numbers[I_WORDS] + "\t" + numbers[I_WORDSLEFT] +         // NOI18N
                         "\t" + numbers[I_CHARSNSP] + "\t" + numbers[I_CHARSNSPLEFT] +   // NOI18N
@@ -1654,7 +1633,7 @@ catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug
     public MainWindow getTransFrame()
     { return m_transFrame;	}
     
-    public ArrayList	getTransMemory()
+    public List<TransMemory>	getTransMemory()
     { return m_tmList;		}
     
     /////////////////////////////////////////////////////////
@@ -1753,7 +1732,7 @@ catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug
         torun.start();
     }
     
-    private LinkedList m_requestQueue;
+    private LinkedList<RequestPacket> m_requestQueue;
     
     // project name of strings loaded from TM - store globally so to not
     // pass seperately on each function call
@@ -1773,13 +1752,10 @@ catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug
     private List<SourceTextEntry>	m_srcTextEntryArray;
     
     /** the list of legacy TMX files, each object is the list of string entries */
-    private List m_legacyTMs;
+    private List<LegacyTM> m_legacyTMs;
     
-    private ArrayList	m_tmList;
-    private ArrayList	m_orphanedList;
-    
-    private ArrayList	m_extensionList;
-    private ArrayList	m_extensionMapList;
+    private List<TransMemory>	m_tmList;
+    private List<TransMemory>	m_orphanedList;
     
     private GlossaryManager m_glossary;
 }

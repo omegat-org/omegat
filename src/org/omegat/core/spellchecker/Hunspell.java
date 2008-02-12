@@ -25,9 +25,7 @@
 package org.omegat.core.spellchecker;
 
 import com.sun.jna.Library;
-import com.sun.jna.Native;
 import com.sun.jna.Pointer;
-import com.sun.jna.Structure;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
@@ -74,6 +72,5 @@ public interface Hunspell extends Library {
     /**
      * put a word into the custom dictionary
      */
-    public int Hunspell_put_word(Pointer pHunspell, byte[] word);
-    
+    public int Hunspell_put_word(Pointer pHunspell, byte[] word);    
 }

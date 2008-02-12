@@ -26,6 +26,7 @@ package org.omegat.core.matching;
 
 import java.util.List;
 import org.omegat.util.OStrings;
+import org.omegat.util.Token;
 
 /**
  * Class to compute Levenshtein Distance.
@@ -110,7 +111,7 @@ class LevenshteinDistance
      * For perfomance reasons the maximal number of compared items is
      * {@link #MAX_N}.
      */
-    public static int compute(List s, List t)
+    public static int compute(List<Token> s, List<Token> t)
     {
         if( s==null || t==null )
             throw new IllegalArgumentException(OStrings.getString("LD_NULL_ARRAYS_ERROR"));
@@ -134,7 +135,7 @@ class LevenshteinDistance
         short i; // iterates through s
         short j; // iterates through t
         
-        Object t_j = null; // jth object of t
+        Token t_j = null; // jth object of t
         
         short cost; // cost
         
@@ -146,7 +147,7 @@ class LevenshteinDistance
             t_j = t.get(j-1);
             d[0] = j;
             
-            Object s_i = null; // ith object of s
+            Token s_i = null; // ith object of s
             for (i=1; i<=n; i++)
             {
                 s_i = s.get(i-1);

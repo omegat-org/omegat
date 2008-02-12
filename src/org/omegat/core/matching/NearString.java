@@ -31,7 +31,7 @@ import org.omegat.core.*;
  *
  * @author Keith Godfrey
  */
-public class NearString implements Comparable
+public class NearString implements Comparable<NearString>
 {
     public NearString(StringEntry strEntry,
             int nearScore,
@@ -47,9 +47,8 @@ public class NearString implements Comparable
             proj = projName;
     }
     
-    public int compareTo(Object object)
+    public int compareTo(NearString o)
     {
-        NearString o = (NearString)object;
         if (o.score == score)
             return (o.adjustedScore < adjustedScore) ? -1 : 1;
         else

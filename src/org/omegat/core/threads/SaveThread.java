@@ -25,7 +25,6 @@
 package org.omegat.core.threads;
 
 import java.text.DateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import org.omegat.util.OStrings;

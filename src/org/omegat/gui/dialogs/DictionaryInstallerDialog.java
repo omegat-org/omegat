@@ -33,6 +33,8 @@ package org.omegat.gui.dialogs;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -66,12 +68,12 @@ public class DictionaryInstallerDialog extends JDialog {
         
         UiInitComponents();
         
-        ArrayList list = dicMan.getInstallableDictionaryNameList();
+        List<String> list = dicMan.getInstallableDictionaryNameList();
         
         listModel = new DefaultListModel();
         
-        for (int i = 0; i < list.size(); i++) {
-            listModel.addElement(list.get(i));
+        for (String str : list) {
+            listModel.addElement(str);
         }
         
         dictionaryList.setModel(listModel);

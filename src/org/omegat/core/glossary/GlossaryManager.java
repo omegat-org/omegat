@@ -34,8 +34,6 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 import org.omegat.core.StringEntry;
 import org.omegat.util.Log;
@@ -59,7 +57,7 @@ public class GlossaryManager
     /** Creates a new instance of GlossaryLoader */
     public GlossaryManager()
     {
-        glossaryEntries = new ArrayList();
+        glossaryEntries = new ArrayList<GlossaryEntry>();
     }
     
     /**
@@ -162,28 +160,26 @@ public class GlossaryManager
      * <li>"Edit" vs "Edit" - matches OK!
      * </ul>
      */
-    public void buildGlossary(List strEntryList)
+    public void buildGlossary(List<StringEntry> strEntryList)
     {
-        for(int i=0; i<glossaryEntries.size(); i++)
+        for(GlossaryEntry glosEntry : glossaryEntries)
         {
-            GlossaryEntry glosEntry = (GlossaryEntry)glossaryEntries.get(i);
             String glosStr = glosEntry.getSrcText();
             //List glosTokens = new ArrayList();
             //int glosTokensN = StaticUtils.tokenizeText(glosStr, glosTokens);
-            List glosTokens = StaticUtils.tokenizeText(glosStr);
+            List<Token> glosTokens = StaticUtils.tokenizeText(glosStr);
             int glosTokensN = glosTokens.size();
             if (glosTokensN==0)
                 continue;
-            for(int j=0; j<strEntryList.size(); j++)
+            for(StringEntry strEntry : strEntryList)
             {
-                StringEntry strEntry = (StringEntry)strEntryList.get(j);
-                List strTokens = strEntry.getSrcTokenList();
+                List<Token> strTokens = strEntry.getSrcTokenList();
                 if (strTokens.containsAll(glosTokens))
                     strEntry.addGlossaryEntry(glosEntry);
             }
         }
     }
 
-    private List glossaryEntries;
+    private List<GlossaryEntry> glossaryEntries;
     
 }

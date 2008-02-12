@@ -47,7 +47,7 @@ public class SegmentHistory {
      */
     private int pointer = -1;
     
-    private ArrayList history = new ArrayList();
+    private List<Integer> history = new ArrayList<Integer>();
     
     /** Creates a new instance of SegmentHistory */
     protected SegmentHistory() {
@@ -81,7 +81,7 @@ public class SegmentHistory {
      */
     public void insertNew(int segmentNumber) {
         if (pointer > -1) {
-            int current = ((Integer) history.get(pointer)).intValue();
+            int current = history.get(pointer);
             
             // no need for identical values- just to make sure
             if (current == segmentNumber)
@@ -139,7 +139,7 @@ public class SegmentHistory {
      * return the int value of the given item in the history list
      */
     private int get(int index) {
-        return ((Integer) history.get(index)).intValue();
+        return history.get(index);
     }
     
     /**

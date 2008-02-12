@@ -68,9 +68,6 @@ public class SearchThread extends Thread
                 
         m_numFinds = 0;
         m_curFileName = "";	// NOI18N
-        
-        m_extList = new ArrayList();
-        m_extMapList = new ArrayList();
     }
     
     /////////////////////////////////////////////////////////
@@ -104,10 +101,10 @@ public class SearchThread extends Thread
             m_searchRecursive = recursive;
             m_tmSearch = tm;
             m_searching = true;
-            m_entrySet = new HashSet(); // HP
+            m_entrySet = new HashSet<String>(); // HP
 
             // create a list of matchers
-            m_matchers = new ArrayList();
+            m_matchers = new ArrayList<Matcher>();
 
             // determine pattern matching flags
             int flags = caseSensitive ? 0 : Pattern.CASE_INSENSITIVE + Pattern.UNICODE_CASE;
@@ -318,20 +315,16 @@ public class SearchThread extends Thread
 
     private void searchFiles() throws IOException, TranslationException
     {
-        int i;
-        int j;
-        
-        ArrayList fileList = new ArrayList(256);
+        List<String> fileList = new ArrayList<String>(256);
         if (!m_searchDir.endsWith(File.separator))
             m_searchDir += File.separator;
         StaticUtils.buildFileList(fileList, new File(m_searchDir), m_searchRecursive);
         
         FilterMaster fm = FilterMaster.getInstance();
-        Set processedFiles = new HashSet();
+        Set<File> processedFiles = new HashSet<File>();
         
-        for (i=0; i<fileList.size(); i++)
+        for (String filename :  fileList)
         {
-            String filename = (String) fileList.get(i);
             File file = new File(filename);
             if (processedFiles.contains(file))
                 continue;
@@ -359,14 +352,11 @@ public class SearchThread extends Thread
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
     private boolean searchString(String text) {
-        if (text == null || m_matchers == null || m_matchers.size() == 0)
+        if (text == null || m_matchers == null || m_matchers.isEmpty())
             return false;
 
         // check the text against all matchers
-        for (int i = 0; i < m_matchers.size(); i++) {
-            // get the next matcher
-            Matcher matcher = (Matcher)m_matchers.get(i);
-
+        for (Matcher matcher : m_matchers) {
             // check the text against the current matcher
             // if one of the search strings is not found, don't
             // bother looking for the rest of the search strings
@@ -400,13 +390,10 @@ public class SearchThread extends Thread
     private boolean   m_searchRecursive;
     private String    m_curFileName;
     private boolean   m_tmSearch;
-    private HashSet   m_entrySet; // HP: keeps track of previous results, to avoid duplicate entries
-    private ArrayList m_matchers; // HP: contains a matcher for each search string
+    private Set<String>   m_entrySet; // HP: keeps track of previous results, to avoid duplicate entries
+    private List<Matcher> m_matchers; // HP: contains a matcher for each search string
                                   //     (multiple if keyword search)
 
     private int m_numFinds;
-
-    private ArrayList m_extList;
-    private ArrayList m_extMapList;
 }
 

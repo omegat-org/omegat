@@ -38,6 +38,7 @@ import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.util.OConsts;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.Token;
 
 
 /*
@@ -55,9 +56,9 @@ public class StringEntry
     /** Creates a new string entry for a unique translatable string. */
     public StringEntry(String srcText)
     {
-        m_parentList = new TreeSet(new STEComparator());
-        m_nearList = new TreeSet();
-        m_glosList = new LinkedList();
+        m_parentList = new TreeSet<SourceTextEntry>(new STEComparator());
+        m_nearList = new TreeSet<NearString>();
+        m_glosList = new LinkedList<GlossaryEntry>();
         m_srcText = srcText;
         m_translation = "";                                                     // NOI18N
     }
@@ -69,7 +70,7 @@ public class StringEntry
     }
     
     /** Returns the tokens of this entry's source string */
-    public List getSrcTokenList()
+    public List<Token> getSrcTokenList()
     {
         return StaticUtils.tokenizeText(m_srcText); // HP: using cache in StaticUtils now
     }
@@ -80,12 +81,12 @@ public class StringEntry
       *
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
-    public List getSrcTokenListAll() {
+    public List<Token> getSrcTokenListAll() {
         return StaticUtils.tokenizeText(m_srcText, true);
     }
 
     /** List of SourceTextEntry-es this string entry belongs to. */
-    public SortedSet getParentList()
+    public SortedSet<SourceTextEntry> getParentList()
     { 
         return m_parentList;	
     }
@@ -102,16 +103,15 @@ public class StringEntry
      *
      * @return list of near segments, that have a translation
      */
-    public List getNearListTranslated()
+    public List<NearString> getNearListTranslated()
     {
-        List res = new ArrayList(OConsts.MAX_NEAR_STRINGS);
-        int size;
-        Iterator i;
+        List<NearString> res = new ArrayList<NearString>(OConsts.MAX_NEAR_STRINGS);
+        Iterator<NearString> i;
         // FIX:
         // HP: this code can sometimes cause a ConcurrentModificationException 
         // HP: because m_nearList is not thread-safe
         // HP: please make it thread-safe, but test for performance issues
-        for(size=0, i=m_nearList.iterator(); i.hasNext() && res.size()<OConsts.MAX_NEAR_STRINGS; )
+        for(i=m_nearList.iterator(); i.hasNext() && res.size()<OConsts.MAX_NEAR_STRINGS; )
         {
             NearString next = (NearString) i.next();
             if( next.str.getTranslation().length()!=0 )
@@ -152,7 +152,7 @@ public class StringEntry
      * Returns a List of Glossary entries, associated with
      * the current String entry
      */
-    public List getGlossaryEntries()
+    public List<GlossaryEntry> getGlossaryEntries()
     {
         return m_glosList;
     }
@@ -169,7 +169,7 @@ public class StringEntry
     //	issues
 
     /** Returns the tokens of this entry's translation */
-    public List getTransTokenList()
+    public List<Token> getTransTokenList()
     {
         return StaticUtils.tokenizeText(m_translation);
     }
@@ -220,11 +220,11 @@ public class StringEntry
     // NOTE: references to these lists are returned through the above
     // access calls
     /** Sorted set of parent source text entries. */
-    private SortedSet	m_parentList;
+    private SortedSet<SourceTextEntry>	m_parentList;
     /** Sorted set of near matched strings. */
-    private SortedSet	m_nearList;
+    private SortedSet<NearString>	m_nearList;
     /** List of glossary terms for this string. */
-    private LinkedList	m_glosList;
+    private List<GlossaryEntry>	m_glosList;
     
     private String m_srcText;
     private String m_translation;
@@ -234,12 +234,10 @@ public class StringEntry
  * A comparator for SourceTextEntry classes,
  * which sorts them according to their entryNum() descending.
  */
-class STEComparator implements Comparator
+class STEComparator implements Comparator<SourceTextEntry>
 {
-    public int compare(Object o1, Object o2)
+    public int compare(SourceTextEntry first, SourceTextEntry second)
     {
-        SourceTextEntry first = (SourceTextEntry) o1;
-        SourceTextEntry second = (SourceTextEntry) o2;
         if (first == second)
             return 0;
         if (first.entryNum() == second.entryNum())

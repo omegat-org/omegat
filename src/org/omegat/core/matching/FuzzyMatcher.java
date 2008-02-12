@@ -67,7 +67,7 @@ public class FuzzyMatcher
     /**
      * Builds the similarity data for color highlight in match window.
      */
-    private byte[] buildSimilarityData(List sourceTokens, List matchTokens)
+    private byte[] buildSimilarityData(List<Token> sourceTokens, List<Token> matchTokens)
     {
         int len = matchTokens.size();
         byte[] result = new byte[len];
@@ -79,11 +79,10 @@ public class FuzzyMatcher
             
             Token righttoken = null;
             if( i+1<len )
-                righttoken = (Token)matchTokens.get(i+1);
+                righttoken = matchTokens.get(i+1);
             boolean rightfound = (i+1==len) || sourceTokens.contains(righttoken);
             
-            Token token;
-            token = (Token)matchTokens.get(i);
+            Token token = matchTokens.get(i);
             boolean found = sourceTokens.contains(token);
             
             if( found && (!leftfound || !rightfound) )
@@ -102,7 +101,7 @@ public class FuzzyMatcher
      *
      * @param strings - the list of the source text strings.
      */
-    public void match(List strings) throws InterruptedException
+    public void match(List<StringEntry> strings) throws InterruptedException
     {
 //System.err.println("Matching segments...");
 //long timeStart = System.currentTimeMillis();
@@ -127,21 +126,21 @@ public class FuzzyMatcher
                 updateStatus(i, total);
             }
             
-            StringEntry strEntry = (StringEntry) strings.get(i);
-            List strTokens = strEntry.getSrcTokenList();
+            StringEntry strEntry = strings.get(i);
+            List<Token> strTokens = strEntry.getSrcTokenList();
             int strTokensSize = strTokens.size();
             if( strTokensSize==0 ) // HP: maybe also test on strTokensComplete.size(), if strTokensSize is 0
                 continue;          // HP: perhaps that would result in better number/non-word matching too
-            List strTokensAll = strEntry.getSrcTokenListAll(); // HP: includes non-word tokens
+            List<Token> strTokensAll = strEntry.getSrcTokenListAll(); // HP: includes non-word tokens
             
             for(int j=i+1; j<total; j++)
             {
-                StringEntry candEntry = (StringEntry) strings.get(j);
+                StringEntry candEntry = strings.get(j);
                 // don't know why, but it happened once
                 if( candEntry==null )
                     continue;
 //long timeTLStart = System.currentTimeMillis();
-                List candTokens = candEntry.getSrcTokenList();
+                List<Token> candTokens = candEntry.getSrcTokenList();
 //long timeTLEnd = System.currentTimeMillis();
 //timeTLTotal += (timeTLEnd - timeTLStart);
                 int candTokensSize = candTokens.size();
@@ -162,7 +161,7 @@ public class FuzzyMatcher
                 // list of tokens, including numbers, tags, and other non-word tokens
                 // fix for bug 1449988
 //long timeTLAStart = System.currentTimeMillis();
-                List candTokensAll = candEntry.getSrcTokenListAll();
+                List<Token> candTokensAll = candEntry.getSrcTokenListAll();
 //long timeTLAEnd = System.currentTimeMillis();
 //timeTLATotal += (timeTLAEnd - timeTLAStart);
 //long timeLDAStart = System.currentTimeMillis();
@@ -209,7 +208,7 @@ public class FuzzyMatcher
      * @param tmxname    name of legacy TMX file
      * @param tmstrings  the strings of legacy TMX file
      */
-    public void match(List strings, String tmxname, List tmstrings) throws InterruptedException
+    public void match(List<StringEntry> strings, String tmxname, List<StringEntry> tmstrings) throws InterruptedException
     {
         int tmtotal = tmstrings.size();
         int total = strings.size();
@@ -226,17 +225,17 @@ public class FuzzyMatcher
                 updateStatus(i, tmtotal);
             }
             
-            StringEntry strEntry = (StringEntry) tmstrings.get(i);
-            List strTokens = strEntry.getSrcTokenList();
+            StringEntry strEntry = tmstrings.get(i);
+            List<Token> strTokens = strEntry.getSrcTokenList();
             int strTokensSize = strTokens.size();
             if( strTokensSize==0 ) // HP: maybe also test on strTokensComplete.size(), if strTokensSize is 0
                 continue;          // HP: perhaps that would result in better number/non-word matching too
-            List strTokensAll = strEntry.getSrcTokenListAll(); // HP: includes non-word tokens
+            List<Token> strTokensAll = strEntry.getSrcTokenListAll(); // HP: includes non-word tokens
             
             for(int j=0; j<total; j++)
             {
-                StringEntry candEntry = (StringEntry) strings.get(j);
-                List candTokens = candEntry.getSrcTokenList();
+                StringEntry candEntry = strings.get(j);
+                List<Token> candTokens = candEntry.getSrcTokenList();
                 int candTokensSize = candTokens.size();
                 if( candTokensSize==0 )
                     continue;
@@ -251,7 +250,7 @@ public class FuzzyMatcher
                 // determine Levenshtein distance/adjusted similarity across the complete
                 // list of tokens, including numbers, tags, and other non-word tokens
                 // fix for bug 1449988
-                List candTokensAll = candEntry.getSrcTokenListAll();
+                List<Token> candTokensAll = candEntry.getSrcTokenListAll();
                 int ldAll = LevenshteinDistance.compute(strTokensAll, candTokensAll);
                 int simAdjusted = (100 * (Math.max(strTokensAll.size(), candTokensAll.size()) - ldAll)) /
                         Math.max(strTokensAll.size(), candTokensAll.size());
@@ -264,6 +263,4 @@ public class FuzzyMatcher
         }
         updateStatus(tmtotal, tmtotal);
     }
-    
-    
 }

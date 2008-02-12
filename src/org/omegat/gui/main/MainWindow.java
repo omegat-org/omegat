@@ -46,9 +46,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -61,14 +61,18 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
+
+import net.roydesign.mac.MRJAdapter;
 
 import org.omegat.core.ProjectProperties;
 import org.omegat.core.StringEntry;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
+import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.DialogThread;
 import org.omegat.filters2.TranslationException;
@@ -79,10 +83,10 @@ import org.omegat.gui.SearchWindow;
 import org.omegat.gui.TagValidationFrame;
 import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.FontSelectionDialog;
+import org.omegat.gui.dialogs.SpellcheckerConfigurationDialog;
 import org.omegat.gui.dialogs.WorkflowOptionsDialog;
 import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
-import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -90,6 +94,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.RequestPacket;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.Token;
 import org.omegat.util.WikiGet;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.Styles;
@@ -99,11 +104,6 @@ import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.event.DockableStateWillChangeEvent;
 import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
 import com.vlsolutions.swing.docking.ui.DockingUISettings;
-import javax.swing.text.AttributeSet;
-
-import net.roydesign.mac.MRJAdapter;
-import org.omegat.gui.dialogs.SpellcheckerConfigurationDialog;
-import org.omegat.util.Token;
 
 /**
  * The main window of OmegaT application.
@@ -1271,12 +1271,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                     File selSrc=selFiles[i];
                     if( selSrc.isDirectory() )
                     {
-                        ArrayList files = new ArrayList();
+                        List<String> files = new ArrayList<String>();
                         StaticUtils.buildFileList(files, selSrc, true);
                         String selSourceParent = selSrc.getParent();
-                        for(int j=0; j<files.size(); j++)
+                        for(String filename : files)
                         {
-                            String filename = (String)files.get(j);
                             String midName = filename.substring(selSourceParent.length());
                             File src=new File(filename);
                             File dest=new File(sourcedir, midName);
@@ -1733,7 +1732,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             
             // the list of incorrect words returned eventually by the 
             // spellchecker
-            List wordList = null;
+            List<Token> wordList = null;
             int flags = IS_NOT_TRANSLATED;
             
             if (start == end)
@@ -1823,10 +1822,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                     }
     
                     // starting from the last (guaranteed by sorting ParentList)
-                    Iterator it = m_curEntry.getStrEntry().getParentList().iterator();
-                    while (it.hasNext())
+                    for (SourceTextEntry ste : m_curEntry.getStrEntry().getParentList())
                     {
-                        SourceTextEntry ste = (SourceTextEntry) it.next();
                         int entry = ste.entryNum();
                         if (entry>m_xlLastEntry)
                             continue;
@@ -1851,10 +1848,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                         }
                         
                         if (doCheckSpelling && wordList != null) {
-                            Iterator iter = wordList.iterator();
-
-                            while (iter.hasNext()) {
-                                Token token = (Token) iter.next();
+                            for (Token token : wordList) {
                                 int tokenStart = token.getOffset();
                                 int tokenEnd = tokenStart + token.getLength();
                                 String word = token.getTextFromString(display_string);
@@ -2075,10 +2069,10 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                         // FIX: unknown, but expect number parsing errors
                     }
                     // </HP-experiment>
-                    List near = m_curEntry.getStrEntry().getNearListTranslated();
+                    List<NearString> near = m_curEntry.getStrEntry().getNearListTranslated();
                     if( near.size()>0 )
                     {
-                        NearString thebest = (NearString)near.get(0);
+                        NearString thebest = near.get(0);
                         if( thebest.score >= percentage )
                         {
                             int old_tr_len = translation.length();
@@ -2327,19 +2321,17 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      * @param start : the starting position
      * @param text : the text to check
      */
-    private synchronized ArrayList checkSpelling(int start, String text) {
+    private synchronized List<Token> checkSpelling(int start, String text) {
         // we have the translation and it should be spellchecked
-        List wordlist = StaticUtils.tokenizeText(text);
-        ArrayList wrongWordList = new ArrayList();
-        Iterator iter = wordlist.iterator();
+        List<Token> wordlist = StaticUtils.tokenizeText(text);
+        List<Token> wrongWordList = new ArrayList<Token>();
         
         AbstractDocument xlDoc = (AbstractDocument)editor.getDocument();
         AttributeSet attributes = m_translatedAttributeSet;
 
         SpellChecker spellchecker = CommandThread.core.getSpellchecker();
 
-        while (iter.hasNext()) {
-            Token token = (Token) iter.next();
+        for (Token token : wordlist) {
             int tokenStart = token.getOffset();
             int tokenEnd = tokenStart + token.getLength();
             String word = text.substring(tokenStart, tokenEnd);

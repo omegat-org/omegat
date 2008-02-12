@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -95,19 +97,19 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         
         dicMan = new DictionaryManager(dirName);
         
-        ArrayList aList = dicMan.getLocalDictionaryNameList();
+        List<String> aList = dicMan.getLocalDictionaryNameList();
         
         Collections.sort(aList);
         
         // initialize the language list model
         languageListModel.clear();
         
-        for (int i = 0; i < aList.size(); i++) {
-            languageListModel.addElement(aList.get(i));
+        for (String str : aList) {
+            languageListModel.addElement(str);
         }
         
         // see if there is anything at all
-        uninstallButton.setSelected(aList.size() > 0);
+        uninstallButton.setSelected(!aList.isEmpty());
         
         languageList.setModel(languageListModel);
     }    

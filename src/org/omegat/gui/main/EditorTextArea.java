@@ -695,7 +695,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
             
             if (!spellchecker.isCorrect(word)) {
                 // get the suggestions and create a menu
-                ArrayList suggestions = spellchecker.suggest(word);
+                List<String> suggestions = spellchecker.suggest(word);
                 
                 // create the menu
                 popup = new JPopupMenu();

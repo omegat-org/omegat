@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import org.omegat.util.OConsts;
@@ -71,8 +72,8 @@ public class DictionaryManager {
     /**
      * returns a list of full names of dictionaries from a dictionary code list
      */
-    public ArrayList getDictionaryNameList(ArrayList aList) {
-        ArrayList result = new ArrayList();
+    public List<String> getDictionaryNameList(List<String> aList) {
+        List<String> result = new ArrayList<String>();
         
         for (int i = 0; i < aList.size(); i++) {
             String dic = (String) aList.get(i);
@@ -92,15 +93,15 @@ public class DictionaryManager {
     /**
      * return a list of full names of the local dictionaries
      */
-    public ArrayList getLocalDictionaryNameList() {
+    public List<String> getLocalDictionaryNameList() {
         return getDictionaryNameList(getLocalDictionaryCodeList());
     }
     
     /**
      * returns a list of available dictionaries in the xx_YY form
      */
-    public ArrayList getLocalDictionaryCodeList() {
-        ArrayList result = new ArrayList();
+    public List<String> getLocalDictionaryCodeList() {
+        List<String> result = new ArrayList<String>();
         
         String[] affixFiles;
         String[] dictionaryFiles;
@@ -172,19 +173,19 @@ public class DictionaryManager {
      * return a list of names of installable dictionaries 
      * (e.g. en_US - english (USA))
      */
-    public ArrayList getInstallableDictionaryNameList() throws IOException {
+    public List<String> getInstallableDictionaryNameList() throws IOException {
         return getDictionaryNameList(getInstallableDictionaryCodeList());
     }
     
     /**
      * returns a list of codes (xx_YY) of installable dictionaries
      */
-    public ArrayList getInstallableDictionaryCodeList() throws IOException {
-        ArrayList localDicList = getLocalDictionaryCodeList();
+    public List<String> getInstallableDictionaryCodeList() throws IOException {
+        List<String> localDicList = getLocalDictionaryCodeList();
         
-        ArrayList remoteDicList = getRemoteDictionaryCodeList();
+        List<String> remoteDicList = getRemoteDictionaryCodeList();
         
-        ArrayList result = new ArrayList();
+        List<String> result = new ArrayList<String>();
         
         // compare the two lists
         for (int i = 0; i < remoteDicList.size(); i++) {
@@ -199,8 +200,8 @@ public class DictionaryManager {
     /**
      * downloads the list of available dictionaries from the net
      */
-    private ArrayList getRemoteDictionaryCodeList() throws IOException {
-        ArrayList result = new ArrayList();
+    private List<String> getRemoteDictionaryCodeList() throws IOException {
+        List<String> result = new ArrayList<String>();
         
         // download the file
         String htmlfile = StaticUtils.downloadFileToString(
@@ -240,7 +241,7 @@ public class DictionaryManager {
         
         StaticUtils.downloadFileToDisk(from, to);
         
-        ArrayList filenames = new ArrayList();
+        List<String> filenames = new ArrayList<String>();
         
         filenames.add(langCode + OConsts.SC_AFFIX_EXTENSION);
         filenames.add(langCode + OConsts.SC_DICTIONARY_EXTENSION);

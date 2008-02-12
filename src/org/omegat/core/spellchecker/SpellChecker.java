@@ -42,6 +42,8 @@ import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.util.ArrayList;
+import java.util.List;
+
 import org.dts.spell.dictionary.OpenOfficeSpellDictionary;
 import org.dts.spell.dictionary.SpellDictionary;
 
@@ -72,10 +74,10 @@ public class SpellChecker {
     private org.dts.spell.SpellChecker jmyspell;
     
     /** the list of ignored words */
-    private ArrayList ignoreList = new ArrayList();
+    private List<String> ignoreList = new ArrayList<String>();
     
     /** the list of learned (valid) words */
-    private ArrayList learnedList = new ArrayList();
+    private List<String> learnedList = new ArrayList<String>();
     
     /** the pointer to the hunspell class */
     private Pointer pHunspell = null;
@@ -207,8 +209,8 @@ public class SpellChecker {
     /**
      * fill the word list (ignore or learned) with contents from the disk
      */
-    private void fillWordList(String filename, ArrayList list) {
-        list = new ArrayList();
+    private void fillWordList(String filename, List<String> list) {
+        list = new ArrayList<String>();
         BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader(filename));
@@ -234,13 +236,12 @@ public class SpellChecker {
     /**
      * dump word list to a file
      */
-    private void dumpWordList(ArrayList list, String filename) {
+    private void dumpWordList(List<String> list, String filename) {
         BufferedWriter bw = null;
         try {
             bw = new BufferedWriter(new FileWriter(filename));
             
-            for (int i = 0; i < list.size(); i++) {
-                String text = (String) list.get(i);
+            for (String text : list) {
                 bw.write(text);
                 bw.newLine();
             }
@@ -283,8 +284,8 @@ public class SpellChecker {
     /**
      * return a list of strings as suggestions
      */
-    public ArrayList suggest(String word) {
-        ArrayList aList = new ArrayList();
+    public List<String> suggest(String word) {
+        List<String> aList = new ArrayList<String>();
         
         if (isCorrect(word))
             return aList;
@@ -292,8 +293,6 @@ public class SpellChecker {
         if (hunspell!=null) {        
             // the pointer to the string reference to be sent
             PointerByReference strings = new PointerByReference();
-
-            String[] strings2 = new String[100];
 
             // total suggestions
             int total = 0;

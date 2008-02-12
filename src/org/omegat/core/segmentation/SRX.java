@@ -27,19 +27,15 @@ package org.omegat.core.segmentation;
 import java.beans.ExceptionListener;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 import javax.swing.JOptionPane;
 
 import org.omegat.util.Language;
@@ -149,11 +145,10 @@ public class SRX implements Serializable, Cloneable
             if( myel.isExceptionOccured() )
             {
                 StringBuffer sb = new StringBuffer();
-                List exceptions = myel.getExceptionsList();
-                for(int i=0; i<exceptions.size(); i++)
+                for(Exception ex : myel.getExceptionsList())
                 {
                     sb.append("    ");                                          // NOI18N
-                    sb.append(exceptions.get(i));
+                    sb.append(ex);
                     sb.append("\n");                                            // NOI18N
                 }
                 Log.logErrorRB(
@@ -295,7 +290,7 @@ public class SRX implements Serializable, Cloneable
      */
     static class MyExceptionListener implements ExceptionListener
     {
-        private List exceptionsList = new ArrayList();
+        private List<Exception> exceptionsList = new ArrayList<Exception>();
         private boolean exceptionOccured = false;
         public void exceptionThrown(Exception e)
         {
@@ -313,7 +308,7 @@ public class SRX implements Serializable, Cloneable
         /**
          * Returns the list of occured exceptions.
          */
-        public List getExceptionsList()
+        public List<Exception> getExceptionsList()
         {
             return exceptionsList;
         }

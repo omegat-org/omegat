@@ -1237,7 +1237,7 @@ public class CommandThread extends Thread
         {
             File tmxFolder = tmxFile.getParentFile();
             // getting all .bak files in the same folder
-            List tmxs = Arrays.asList(tmxFolder.listFiles(new FilenameFilter()
+            List<File> tmxs = Arrays.asList(tmxFolder.listFiles(new FilenameFilter()
             {
                 public boolean accept(File dir, String name)
                 {
@@ -1249,12 +1249,10 @@ public class CommandThread extends Thread
             if (tmxs.size()>MAX_BACKUPS)
             {
                 // sorting: old files last
-                Collections.sort(tmxs, new Comparator()
+                Collections.sort(tmxs, new Comparator<File>()
                 {
-                    public int compare(Object o1, Object o2)
+                    public int compare(File f1, File f2)
                     {
-                        File f1 = (File)o1; 
-                        File f2 = (File)o2;
                         if( f1.lastModified()==f2.lastModified() )
                             return 0;
                         else if ( f1.lastModified()>f2.lastModified() )

@@ -120,7 +120,7 @@ public final class Segmenter
     private static List<String> breakParagraph(String paragraph, List<Rule> brules)
     {
         Language srclang = new Language(Preferences.getPreference(Preferences.SOURCE_LOCALE));
-        List rules = SRX.getSRX().lookupRulesForLanguage(srclang);
+        List<Rule> rules = SRX.getSRX().lookupRulesForLanguage(srclang);
         if (brules == null)
             brules = new ArrayList<Rule>();
 
@@ -129,7 +129,7 @@ public final class Segmenter
         Set<BreakPosition> breakpositions = new TreeSet<BreakPosition>();
         for(int i=rules.size()-1; i>=0; i--)
         {
-            Rule rule = (Rule)rules.get(i);
+            Rule rule = rules.get(i);
             List<BreakPosition> rulebreaks = getBreaks(paragraph, rule);
             if( rule.isBreakRule() )
             {

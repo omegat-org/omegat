@@ -40,19 +40,19 @@ import org.omegat.util.OStrings;
  */
 public class SegmentationRulesModel extends AbstractTableModel
 {
-    private List rules;
+    private List<Rule> rules;
     
     /**
      * Creates a new instance of SegmentationRulesModel 
      */
-    public SegmentationRulesModel(List rules)
+    public SegmentationRulesModel(List<Rule> rules)
     {
         this.rules = rules;
     }
 
     public Object getValueAt(int rowIndex, int columnIndex)
     {
-        Rule rule = (Rule)rules.get(rowIndex);
+        Rule rule = rules.get(rowIndex);
         switch( columnIndex )
         {
             case 0:
@@ -75,7 +75,7 @@ public class SegmentationRulesModel extends AbstractTableModel
         return 3;
     }
 
-    public Class getColumnClass(int columnIndex)
+    public Class<?> getColumnClass(int columnIndex)
     {
         if( columnIndex==0 )
             return Boolean.class;
@@ -97,7 +97,7 @@ public class SegmentationRulesModel extends AbstractTableModel
 
     public void setValueAt(Object aValue, int rowIndex, int columnIndex)
     {
-        Rule rule = (Rule)rules.get(rowIndex);
+        Rule rule = rules.get(rowIndex);
         switch( columnIndex )
         {
             case 0:
@@ -150,8 +150,8 @@ public class SegmentationRulesModel extends AbstractTableModel
     /** Moves a segmentation rule up an order. */
     public void moveRowUp(int row)
     {
-        Object rulePrev = rules.get(row-1);
-        Object rule = rules.get(row);
+        Rule rulePrev = rules.get(row-1);
+        Rule rule = rules.get(row);
         rules.remove(row-1);
         rules.add(row, rulePrev);
         fireTableRowsUpdated(row-1, row);
@@ -160,8 +160,8 @@ public class SegmentationRulesModel extends AbstractTableModel
     /** Moves a segmentation rule down an order. */
     public void moveRowDown(int row)
     {
-        Object ruleNext = rules.get(row+1);
-        Object rule = rules.get(row);
+        Rule ruleNext = rules.get(row+1);
+        Rule rule = rules.get(row);
         rules.remove(row+1);
         rules.add(row, ruleNext);
         fireTableRowsUpdated(row, row+1);
@@ -172,7 +172,7 @@ public class SegmentationRulesModel extends AbstractTableModel
 //
 
     /** List of listeners */
-    protected List listeners = new ArrayList();
+    protected List<ExceptionListener> listeners = new ArrayList<ExceptionListener>();
 
     public void addExceptionListener(ExceptionListener l) 
     {
@@ -188,10 +188,8 @@ public class SegmentationRulesModel extends AbstractTableModel
     {
 	for(int i=listeners.size()-1; i>=0; i--) 
         {
-            ExceptionListener l = (ExceptionListener)listeners.get(i);
+            ExceptionListener l = listeners.get(i);
             l.exceptionThrown(e);
 	}
     }
-    
-    
 }

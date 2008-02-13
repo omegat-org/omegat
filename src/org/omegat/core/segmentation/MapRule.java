@@ -41,7 +41,7 @@ public class MapRule implements Serializable
     public MapRule() { }
 
     /** creates an initialized MapRule */
-    public MapRule(String language, String pattern, List rules)
+    public MapRule(String language, String pattern, List<Rule> rules)
     {
         this.setLanguage(language);
         this.setPattern(pattern);
@@ -96,14 +96,14 @@ public class MapRule implements Serializable
     }
 
     /** List of rules (of class {@link Rule}) for the language */
-    private List rules;
+    private List<Rule> rules;
     /** Returns List of rules (of class {@link Rule}) for the language */
-    public List getRules()
+    public List<Rule> getRules()
     {
         return rules;
     }
     /** Sets List of rules (of class {@link Rule}) for the language */
-    public void setRules(List rules)
+    public void setRules(List<Rule> rules)
     {
         this.rules = rules;
     }

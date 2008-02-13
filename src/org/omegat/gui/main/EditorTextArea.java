@@ -574,7 +574,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                     spellcheckEnd-spellcheckStart);
             
             // find the tokens
-            List tokenList = StaticUtils.tokenizeText(spellcheckBase);
+            List<Token> tokenList = StaticUtils.tokenizeText(spellcheckBase);
             
             SpellChecker spellchecker = CommandThread.core.getSpellchecker();
             
@@ -593,9 +593,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                     spellcheckBase, correctAttributes);
             
             // iterate!
-            Iterator tokenListIterator = tokenList.iterator();
-            while (tokenListIterator.hasNext()) {
-                Token token = (Token) tokenListIterator.next();
+            for (Token token : tokenList) {
                 String word = token.getTextFromString(spellcheckBase);
                 // is it correct?
                 if (!spellchecker.isCorrect(word)) {

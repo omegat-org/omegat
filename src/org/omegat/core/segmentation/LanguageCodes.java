@@ -56,7 +56,7 @@ public final class LanguageCodes
     public static final String F_HTML_KEY = "CORE_SRX_RULES_FORMATTING_HTML";  // NOI18N
     
     /** A Map from language codes to language keys. */
-    private static Map codeKeyHash = new HashMap();
+    private static Map<String,String> codeKeyHash = new HashMap<String, String>();
             
     static
     {
@@ -78,9 +78,7 @@ public final class LanguageCodes
     {
         if( !codeKeyHash.containsKey(code) )
             return code;
-        String key = codeKeyHash.get(code).toString();
+        String key = codeKeyHash.get(code);
         return OStrings.getString(key);
     }
-    
-    
 }

@@ -28,6 +28,8 @@ import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 import javax.swing.table.AbstractTableModel;
 
 import org.omegat.util.OStrings;
@@ -54,7 +56,7 @@ public class Filters extends AbstractTableModel implements Serializable
     }
     
     /** Holds the list of available filters. */
-    private ArrayList filters = new ArrayList();
+    private List<OneFilter> filters = new ArrayList<OneFilter>();
     
     /** 
      * Returns the number of filters. 
@@ -69,14 +71,14 @@ public class Filters extends AbstractTableModel implements Serializable
      */
     public OneFilter[] getFilter()
     {
-        return (OneFilter[])filters.toArray(new OneFilter[0]);
+        return filters.toArray(new OneFilter[0]);
     }
     /**
      * Sets all filters from the array.
      */
     public void setFilter(OneFilter[] filter)
     {
-        filters = new ArrayList(Arrays.asList(filter));
+        filters = new ArrayList<OneFilter>(Arrays.asList(filter));
     }
     
     /**
@@ -84,7 +86,7 @@ public class Filters extends AbstractTableModel implements Serializable
      */
     public OneFilter getFilter(int index)
     {
-        return (OneFilter)filters.get(index);
+        return filters.get(index);
     }
     /**
      * Sets a filter by index.
@@ -141,7 +143,7 @@ public class Filters extends AbstractTableModel implements Serializable
         return null;
     }
     
-    public Class getColumnClass(int columnIndex)
+    public Class<?> getColumnClass(int columnIndex)
     {
         switch( columnIndex )
         {

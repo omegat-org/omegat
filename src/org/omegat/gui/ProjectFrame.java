@@ -34,6 +34,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -69,8 +70,8 @@ public class ProjectFrame extends JFrame
     {
         m_parent = parent;
         
-        m_nameList = new ArrayList(256);
-        m_offsetList = new ArrayList(256);
+        m_nameList = new ArrayList<String>(256);
+        m_offsetList = new ArrayList<Integer>(256);
 
         // set the position and size
         initWindowLayout();
@@ -214,14 +215,13 @@ public class ProjectFrame extends JFrame
         m_nameList.clear();
         m_offsetList.clear();
         m_editorPane.setText("");                                               // NOI18N
-        numberofUniqueSegments = -1;
         uiUpdateImportButtonStatus();
     }
     
     public void addFile(String name, int entryNum)
     {
         m_nameList.add(name);
-        m_offsetList.add(new Integer(entryNum));
+        m_offsetList.add(entryNum);
     }
     
     /**
@@ -229,7 +229,7 @@ public class ProjectFrame extends JFrame
      */
     public void buildDisplay()
     {
-        if( m_nameList==null || m_offsetList==null || m_nameList.size()==0 )
+        if( m_nameList==null || m_offsetList==null || m_nameList.isEmpty() )
             return;
         
         StringBuffer output = new StringBuffer();
@@ -262,8 +262,8 @@ public class ProjectFrame extends JFrame
         String currentFile = m_parent.getActiveFileName();
         for (int i=0; i<m_nameList.size(); i++)
         {
-            String name = (String) m_nameList.get(i);
-            entriesUpToNow = ((Integer)m_offsetList.get(i)).intValue();
+            String name = m_nameList.get(i);
+            entriesUpToNow = m_offsetList.get(i);
             int size = 1+entriesUpToNow-firstEntry;
             
             String tableRowTag;
@@ -368,10 +368,8 @@ public class ProjectFrame extends JFrame
     private JButton     m_addNewFileButton;
     private JButton     m_wikiImportButton;
     private JButton     m_closeButton;
-    private ArrayList   m_nameList;
-    private ArrayList   m_offsetList;
-    
-    private int         numberofUniqueSegments;
+    private List<String>   m_nameList;
+    private List<Integer>   m_offsetList;
     
     private MainWindow  m_parent;
 }

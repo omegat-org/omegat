@@ -77,7 +77,7 @@ public class WordIterator extends BreakIterator
         return breaker.current();
     }
     
-    LinkedList nextItems = new LinkedList();
+    LinkedList<Integer> nextItems = new LinkedList<Integer>();
     
     /**
      * Return the boundary of the word following the current boundary.
@@ -91,7 +91,7 @@ public class WordIterator extends BreakIterator
     public int next()
     {
         if (!nextItems.isEmpty())
-            return ((Integer)nextItems.removeFirst()).intValue();
+            return nextItems.removeFirst();
         
         int curr = current();
         int next = breaker.next();
@@ -110,7 +110,7 @@ public class WordIterator extends BreakIterator
             int next3 = breaker.next();
             if (DONE==next3)
             {
-                nextItems.add(new Integer(next2));
+                nextItems.add(next2);
                 return next;
             }
             // there're at least two maybe-words after "<"
@@ -131,8 +131,8 @@ public class WordIterator extends BreakIterator
                 int next4 = breaker.next();
                 if (DONE==next4)
                 {
-                    nextItems.add(new Integer(next2));
-                    nextItems.add(new Integer(next3));
+                    nextItems.add(next2);
+                    nextItems.add(next3);
                     return next;
                 }
                 // there're at least three maybe-words after "<"
@@ -162,8 +162,8 @@ public class WordIterator extends BreakIterator
                 int next4 = breaker.next();
                 if (DONE==next4)
                 {
-                    nextItems.add(new Integer(next2));
-                    nextItems.add(new Integer(next3));
+                    nextItems.add(next2);
+                    nextItems.add(next3);
                     return next;
                 }
                 // there're at least three maybe-words after "<"
@@ -219,7 +219,7 @@ public class WordIterator extends BreakIterator
                 if (DONE==next3)
                 {
                     // Something&
-                    nextItems.add(new Integer(next2));
+                    nextItems.add(next2);
                     return next;
                 }
                 

@@ -28,6 +28,7 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JTextPane;
 
@@ -50,8 +51,8 @@ class EntryListPane extends JTextPane
     public EntryListPane(MainWindow trans)
     {
         m_transFrame = trans;
-        m_offsetList = new ArrayList();
-        m_entryList = new ArrayList();
+        m_offsetList = new ArrayList<Integer>();
+        m_entryList = new ArrayList<Integer>();
         m_stringBuf = new StringBuffer();
 
         addMouseListener(new MouseAdapter()
@@ -64,18 +65,18 @@ class EntryListPane extends JTextPane
                     // user double clicked on viewer pane - send message
                     //    to org.omegat.gui.TransFrame to jump to this entry
                     int pos = getCaretPosition();
-                    Integer off;
-                    Integer entry;
+                    int off;
+                    int entry;
                     for (int i=0; i<m_offsetList.size(); i++)
                     {
-                        off = (Integer) m_offsetList.get(i);
-                        if (off.intValue() >= pos)
+                        off = m_offsetList.get(i);
+                        if (off >= pos)
                         {
-                            entry = (Integer) m_entryList.get(i);
-                            if (entry.intValue() >= 0)
+                            entry = m_entryList.get(i);
+                            if (entry >= 0)
                             {
                                 MessageRelay.uiMessageDoGotoEntry(
-                                        m_transFrame, entry.toString());
+                                        m_transFrame, Integer.toString(entry));
                             }
                             break;
                         }
@@ -104,8 +105,8 @@ class EntryListPane extends JTextPane
             m_stringBuf.append("-- "+loc + "\n");                                // NOI18N
         }
 
-        m_entryList.add(new Integer(num));
-        m_offsetList.add(new Integer(m_stringBuf.length()));
+        m_entryList.add(num);
+        m_offsetList.add(m_stringBuf.length());
     }
 
     /**
@@ -156,7 +157,7 @@ class EntryListPane extends JTextPane
     }
 
     private StringBuffer    m_stringBuf;
-    private ArrayList        m_entryList;
-    private ArrayList        m_offsetList;
+    private List<Integer>        m_entryList;
+    private List<Integer> m_offsetList;
     private MainWindow    m_transFrame;
 }

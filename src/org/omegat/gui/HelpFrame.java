@@ -40,6 +40,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 import javax.swing.AbstractAction;     // HP
@@ -84,7 +85,7 @@ public class HelpFrame extends JFrame
     /** Creates the Help Frame */
     private HelpFrame()
     {
-        m_historyList = new ArrayList();
+        m_historyList = new ArrayList<String>();
         
         // set window size & position
         initWindowLayout();
@@ -114,11 +115,10 @@ public class HelpFrame extends JFrame
             {
                 if (m_historyList.size() > 0)
                 {
-                    String s = (String) m_historyList.remove(
-                            m_historyList.size()-1);
+                    String s = m_historyList.remove(m_historyList.size() - 1);
                     displayFile(s);
                 }
-                if (m_historyList.size() == 0)
+                if (m_historyList.isEmpty())
                 {
                     m_backButton.setEnabled(false);
                 }
@@ -579,7 +579,7 @@ public class HelpFrame extends JFrame
     private JButton		m_closeButton;
     private JButton		m_homeButton;
     private JButton		m_backButton;
-    private ArrayList	m_historyList;
+    private List<String>	m_historyList;
     
     /** Stores the information about the currently opened HTML file,
       without trailing #... */

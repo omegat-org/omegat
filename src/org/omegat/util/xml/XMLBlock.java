@@ -26,6 +26,7 @@ package org.omegat.util.xml;
 
 import org.omegat.util.OConsts;
 import java.util.ArrayList;
+import java.util.List;
 
 /*
  * XML Block is either a tag (with optional attributes), or a string
@@ -66,7 +67,7 @@ public class XMLBlock
 	private void setAttribute(XMLAttribute attr)
 	{
 		if (m_attrList == null)
-			m_attrList = new ArrayList(8);
+			m_attrList = new ArrayList<XMLAttribute>(8);
 
 		// assume that this attribute doesn't exist already
 		m_attrList.add(attr);
@@ -162,11 +163,9 @@ public class XMLBlock
 			String tag = "<?" + m_text;	// NOI18N
 			if (m_attrList != null)
 			{
-				XMLAttribute attr;
-				for (int i=0; i<m_attrList.size(); i++)
+				for (XMLAttribute attr : m_attrList)
 				{
 					// add attribute/value pair
-					attr = (XMLAttribute) m_attrList.get(i);
 					tag += " " + attr.name + "=\"" + attr.value + "\"";	// NOI18N
 				}
 			}
@@ -200,7 +199,7 @@ public class XMLBlock
 				{
 					if (m_attrList.size() > 0)
 					{
-						tag += ((XMLAttribute) m_attrList.get(0)).name;
+						tag += m_attrList.get(0).name;
 					}
 				}
 				tag += '>';
@@ -218,11 +217,9 @@ public class XMLBlock
 			tag += m_text;
 			if (m_attrList != null)
 			{
-				XMLAttribute attr;
-				for (int i=0; i<m_attrList.size(); i++)
+				for (XMLAttribute attr : m_attrList)
 				{
 					// add attribute/value pair
-					attr = (XMLAttribute) m_attrList.get(i);
 					tag += " " + attr.name + "=\"" + attr.value + "\"";	// NOI18N
 				}
 			}
@@ -262,7 +259,7 @@ public class XMLBlock
 			return null;
 		}
 		else
-			return (XMLAttribute) m_attrList.get(n);
+			return m_attrList.get(n);
 	}
 
 	public String getAttribute(String name)
@@ -273,7 +270,7 @@ public class XMLBlock
 		
 		for (int i=0; i<m_attrList.size(); i++)
 		{
-			attr = (XMLAttribute) m_attrList.get(i);
+			attr = m_attrList.get(i);
 			if (attr.name.equals(name))
 				break;
 			else
@@ -293,7 +290,7 @@ public class XMLBlock
 	private boolean		m_isTag;
 	private boolean		m_hasText;
 	private char		m_typeChar;
-	private ArrayList	m_attrList;
+	private List<XMLAttribute>	m_attrList;
 
     /** Returns a string representation for debugging purposes mainly. */
     public String toString()

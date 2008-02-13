@@ -27,6 +27,7 @@ package org.omegat.filters2.master;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import org.omegat.filters2.AbstractFilter;
@@ -183,21 +184,21 @@ public class OneFilter extends AbstractTableModel implements Serializable
     }
 
     /** Holds instances property. */
-    private ArrayList instances = new ArrayList();
+    private List<Instance> instances = new ArrayList<Instance>();
 
     /**
      * Returns all the instances of the filter.
      */
     public Instance[] getInstance()
     {
-        return (Instance[])instances.toArray(new Instance[0]);
+        return instances.toArray(new Instance[0]);
     }
     /**
      * Sets all the instances of the filter at once.
      */
     public void setInstance(Instance[] instance)
     {
-        instances = new ArrayList(Arrays.asList(instance));
+        instances = new ArrayList<Instance>(Arrays.asList(instance));
         fireTableDataChanged();
     }
 
@@ -221,7 +222,7 @@ public class OneFilter extends AbstractTableModel implements Serializable
     /** Returns the filter instance #... */
     public Instance getInstance(int index)
     {
-        return (Instance)instances.get(index);
+        return instances.get(index);
     }
     /** Sets the filter instance #... */
     public void setInstance(int index, Instance instance)
@@ -331,7 +332,7 @@ public class OneFilter extends AbstractTableModel implements Serializable
         return null;
     }
     
-    public Class getColumnClass(int columnIndex)
+    public Class<?> getColumnClass(int columnIndex)
     {
         return String.class;
     }

@@ -698,8 +698,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                 popup = new JPopupMenu();
                 
                 // the suggestions
-                for (int i = 0; i < suggestions.size(); i++) {
-                    final String replacement = suggestions.get(i);
+                for (final String replacement : suggestions) {
                     JMenuItem item = popup.add(replacement);
                     item.addActionListener(new ActionListener() {
                             // the action: replace the word with the selected

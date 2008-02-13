@@ -75,9 +75,7 @@ public class DictionaryManager {
     public List<String> getDictionaryNameList(List<String> aList) {
         List<String> result = new ArrayList<String>();
         
-        for (int i = 0; i < aList.size(); i++) {
-            String dic = aList.get(i);
-            
+        for (String dic : aList) {
             String parts[] = dic.split("_");
             Locale locale;
             if (parts.length == 1)
@@ -188,8 +186,7 @@ public class DictionaryManager {
         List<String> result = new ArrayList<String>();
         
         // compare the two lists
-        for (int i = 0; i < remoteDicList.size(); i++) {
-            String dicCode = remoteDicList.get(i);
+        for (String dicCode : remoteDicList) {
             if (!localDicList.contains(dicCode))
                 result.add(dicCode);
         }

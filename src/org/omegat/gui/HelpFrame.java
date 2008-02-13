@@ -232,10 +232,7 @@ public class HelpFrame extends JFrame
             StaticUtils.installDir() + File.separator + OConsts.HELP_DIR);
         File[] subDirs = docDir.listFiles();
         Arrays.sort(subDirs); // sort on alphabetical order
-        for (int i = 0; i < subDirs.length; i++) {
-            // Get the next subdir
-            File subDir = subDirs[i];
-
+        for (File subDir : subDirs) {
             // Skip normal files
             if (!subDir.isDirectory())
                 continue;

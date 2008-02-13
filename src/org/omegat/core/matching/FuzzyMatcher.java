@@ -211,7 +211,6 @@ public class FuzzyMatcher
     public void match(List<StringEntry> strings, String tmxname, List<StringEntry> tmstrings) throws InterruptedException
     {
         int tmtotal = tmstrings.size();
-        int total = strings.size();
         
         statusTemplate = OStrings.getString("CT_FUZZY_X_OF_Y") + " (" + tmxname + ")";       // NOI18N
         updateStatus(0, tmtotal);
@@ -232,9 +231,8 @@ public class FuzzyMatcher
                 continue;          // HP: perhaps that would result in better number/non-word matching too
             List<Token> strTokensAll = strEntry.getSrcTokenListAll(); // HP: includes non-word tokens
             
-            for(int j=0; j<total; j++)
+            for(StringEntry candEntry : strings)
             {
-                StringEntry candEntry = strings.get(j);
                 List<Token> candTokens = candEntry.getSrcTokenList();
                 int candTokensSize = candTokens.size();
                 if( candTokensSize==0 )

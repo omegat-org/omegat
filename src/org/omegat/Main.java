@@ -43,8 +43,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        for (int i = 0; i < args.length; i++) {
-            String arg = args[i];
+        for (String arg : args) {
             if (arg.startsWith("locale=")) {
                 String language = arg.substring(7, 9);
                 String country  = arg.length() > 10 ? arg.substring(10, 12) : null;

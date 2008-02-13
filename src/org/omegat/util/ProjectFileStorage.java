@@ -163,14 +163,13 @@ public class ProjectFileStorage
             try
             {
                 // check if path starts with a system root
-                File[] roots = File.listRoots();
                 boolean startsWithRoot = false;
-                for (int i = 0; i < roots.length; i++) {
+                for (File root : File.listRoots()) {
                     try // Under Windows and Java 1.4, there is an exception if
                     {   // using getCanonicalPath on a non-existent drive letter
                         // [1875331] Relative paths not working under Windows/Java 1.4
                         startsWithRoot = 
-                                relativePath.startsWith(roots[i].getCanonicalPath());
+                                relativePath.startsWith(root.getCanonicalPath());
                     }                    
                     catch (IOException e)
                     {

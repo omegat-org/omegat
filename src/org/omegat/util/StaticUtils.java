@@ -123,7 +123,6 @@ public class StaticUtils
     public static void buildFileList(List<String> lst, File rootDir,
             boolean recursive)
     {
-        int i;
         // read all files in current directory, recurse into subdirs
         // append files to supplied list
         File flist[] = null;
@@ -141,22 +140,22 @@ public class StaticUtils
         if( flist==null )
             return;
         
-        for (i=0; i<Array.getLength(flist); i++)
+        for (File file : flist)
         {
-            if (flist[i].isDirectory())
+            if (file.isDirectory())
             {
                 continue;	// recurse into directories later
             }
-            lst.add(flist[i].getAbsolutePath());
+            lst.add(file.getAbsolutePath());
         }
         if (recursive)
         {
-            for (i=0; i<Array.getLength(flist); i++)
+            for (File file : flist)
             {
-                if (flist[i].isDirectory())
+                if (file.isDirectory())
                 {
                     // now recurse into subdirectories
-                    buildFileList(lst, flist[i], true);
+                    buildFileList(lst, file, true);
                 }
             }
         }
@@ -166,17 +165,16 @@ public class StaticUtils
     //  by absolute path
     public static void buildDirList(List<String> lst, File rootDir)
     {
-        int i;
         // read all files in current directory, recurse into subdirs
         // append files to supplied list
         File [] flist = rootDir.listFiles();
-        for (i=0; i<Array.getLength(flist); i++)
+        for (File file : flist)
         {
-            if (flist[i].isDirectory())
+            if (file.isDirectory())
             {
                 // now recurse into subdirectories
-                lst.add(flist[i].getAbsolutePath());
-                buildDirList(lst, flist[i]);
+                lst.add(file.getAbsolutePath());
+                buildDirList(lst, file);
             }
         }
     }

@@ -839,11 +839,8 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         TUV sourceT  = null; // source TUV according to TMX source language
         TUV sourceTC = null; // candidate for source TUV according to TMX source language
         TUV targetT  = null; // target TUV according to TMX source language
-        for (int i = 0; i < tuvs.size(); i++) 
+        for (TUV tuv : tuvs) 
         {
-            // get the next TUV
-            TUV tuv = tuvs.get(i);
-
             // first match TUV language against entire source language (lang code + reg code)
             if ((source == null) && tuv.language.equalsIgnoreCase(sourceLanguage))
                 // the current TUV is the source
@@ -926,10 +923,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
 
         // store alternative translations
         if (!isProjectTMX) {
-            for (int i = 0; i < tuvs.size(); i++) {
-                // get the next TUV
-                TUV tuv = tuvs.get(i);
-
+            for (TUV tuv : tuvs) {
                 // store the TUV as alternative if it's source nor target
                 // and its language appears in the set of useful variant languages
                 if (   (tuv != source)

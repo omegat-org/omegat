@@ -51,8 +51,8 @@ public class DefaultXMLDialect implements XMLDialect
     /** Defines a set of paragraph tags from an array. Allows duplicates. */
     public void defineParagraphTags(String[] tags)
     {
-        for (int i=0; i<tags.length; i++)
-            defineParagraphTag(tags[i]);
+        for (String tag : tags)
+            defineParagraphTag(tag);
     }
 
     /** The set of defined tags that surround preformatted text. */
@@ -66,8 +66,8 @@ public class DefaultXMLDialect implements XMLDialect
     /** Defines a set of preformat tags from an array. Allows duplicates. */
     public void definePreformatTags(String[] tags)
     {
-        for (int i=0; i<tags.length; i++)
-            definePreformatTag(tags[i]);
+        for (String tag : tags)
+            definePreformatTag(tag);
     }
 
     /** The set of defined tags that surround intact text. */
@@ -81,8 +81,8 @@ public class DefaultXMLDialect implements XMLDialect
     /** Defines a set of intact tags from an array. Allows duplicates. */
     public void defineIntactTags(String[] tags)
     {
-        for (int i=0; i<tags.length; i++)
-            defineIntactTag(tags[i]);
+        for (String tag : tags)
+            defineIntactTag(tag);
     }
     
     /** The set of defined paragraph tags. */
@@ -96,14 +96,14 @@ public class DefaultXMLDialect implements XMLDialect
     /** Defines translatable attributes of a tag. */
     public void defineTranslatableTagAttributes(String tag, String[] attributes)
     {
-        for (int i=0; i<attributes.length; i++)
-            defineTranslatableTagAttribute(tag, attributes[i]);
+        for (String attr : attributes)
+            defineTranslatableTagAttribute(tag, attr);
     }
     /** Defines translatable attribute of several tags. */
     public void defineTranslatableTagsAttribute(String[] tags, String attribute)
     {
-        for (int i=0; i<tags.length; i++)
-            defineTranslatableTagAttribute(tags[i], attribute);
+        for (String tag : tags)
+            defineTranslatableTagAttribute(tag, attribute);
     }
     
     /** The set of defined paragraph tags. */
@@ -117,8 +117,8 @@ public class DefaultXMLDialect implements XMLDialect
     /** Defines always translatable attributes (no matter what tag it belongs to). */
     public void defineTranslatableAttributes(String[] attributes)
     {
-        for (int i=0; i<attributes.length; i++)
-            defineTranslatableAttribute(attributes[i]);
+        for (String attr : attributes)
+            defineTranslatableAttribute(attr);
     }
 
     /**
@@ -144,8 +144,8 @@ public class DefaultXMLDialect implements XMLDialect
      */
     public void defineOutOfTurnTags(String[] tags)
     {
-        for (int i=0; i<tags.length; i++)
-            defineOutOfTurnTag(tags[i]);
+        for (String tag : tags)
+            defineOutOfTurnTag(tag);
     }
 
     Map<Integer, Pattern> constraints = new HashMap<Integer, Pattern>();

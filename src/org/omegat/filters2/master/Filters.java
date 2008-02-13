@@ -106,8 +106,8 @@ public class Filters extends AbstractTableModel implements Serializable
      */
     public void addFilter(OneFilter filter)
     {
-        for(int i=0; i<filters.size(); i++)
-            if(getFilter(i).getClassName().equals(filter.getClassName()))
+        for(OneFilter f : filters)
+            if(f.getClassName().equals(filter.getClassName()))
                 return;
         filters.add(filter);
     }

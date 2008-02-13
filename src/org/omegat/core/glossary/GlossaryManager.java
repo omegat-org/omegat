@@ -76,10 +76,9 @@ public class GlossaryManager
     {
         if (folder.isDirectory())
         {
-            String fileList[] = folder.list();
-            for (int i=0; i<fileList.length; i++)
+            for (String file : folder.list())
             {
-                String fname = folder.getAbsolutePath() + File.separator + fileList[i];
+                String fname = folder.getAbsolutePath() + File.separator + file;
                 String fname_lower=fname.toLowerCase();
                 // ignoring files with unrecognized extensions - http://sf.net/tracker/index.php?func=detail&aid=1088247&group_id=68187&atid=520347
                 if( fname_lower.endsWith(EXT_DEF_ENC) || fname_lower.endsWith(EXT_UTF8_ENC) ) {

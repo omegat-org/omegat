@@ -79,13 +79,13 @@ public final class PluginUtils
     private static void loadPluginsFrom(File dir)
     {
         File[] filters = dir.listFiles(new JARorFolderFileFilter());
-        for(int i=0; i<filters.length; i++)
+        for(File filter : filters)
         {
-            if( filters[i].isFile() )
+            if( filter.isFile() )
             {
                 try
                 {
-                    URL jar = filters[i].toURL();
+                    URL jar = filter.toURL();
                     loadOnePlugin(jar);
                 }
                 catch( MalformedURLException mue )
@@ -93,18 +93,18 @@ public final class PluginUtils
                     // nothing is really wrong
                     // strange exception
                     Log.log("Couldn't access local file system " +      // NOI18N
-                            "to get '"+filters[i]+"' !");                       // NOI18N
+                            "to get '"+filter+"' !");                       // NOI18N
                 }
                 catch( IOException ioe )
                 {
                     // nothing is really wrong
                     // we just couldn't load one JAR
                     Log.log("Couldn't load plugin JAR '"+               // NOI18N
-                            filters[i]+"' !");                                  // NOI18N
+                            filter+"' !");                                  // NOI18N
                 }
             }
             else
-                loadPluginsFrom(filters[i]);
+                loadPluginsFrom(filter);
         }
     }
     
@@ -127,17 +127,17 @@ public final class PluginUtils
         
         Map entries = manifest.getEntries();
         String[] keys = (String[])entries.keySet().toArray(new String[]{});
-        for(int i=0; i<keys.length; i++)
+        for(String key : keys)
         {
-            Attributes attrs = (Attributes)entries.get(keys[i]);
+            Attributes attrs = (Attributes)entries.get(key);
             String name = attrs.getValue("Name");                               // NOI18N
             String isfilter = attrs.getValue("OmegaT-Filter");                  // NOI18N
             if( isfilter!=null && isfilter.equals("true") )                     // NOI18N
             {
-                filterList.add(keys[i]);
+                filterList.add(key);
                 try
                 {
-                    URLClassLoader.newInstance(new URL[] {jar}).loadClass(keys[i]);
+                    URLClassLoader.newInstance(new URL[] {jar}).loadClass(key);
                 }
                 catch( ClassNotFoundException e )
                 {

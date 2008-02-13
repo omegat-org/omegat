@@ -35,7 +35,6 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -700,7 +699,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                 
                 // the suggestions
                 for (int i = 0; i < suggestions.size(); i++) {
-                    final String replacement = (String) suggestions.get(i);
+                    final String replacement = suggestions.get(i);
                     JMenuItem item = popup.add(replacement);
                     item.addActionListener(new ActionListener() {
                             // the action: replace the word with the selected

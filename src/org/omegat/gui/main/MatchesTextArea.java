@@ -81,7 +81,7 @@ public class MatchesTextArea extends javax.swing.JTextPane implements MouseListe
         
         for (int i=0; i<matches.size(); i++)
         {
-            NearString match = (NearString) matches.get(i);
+            NearString match = matches.get(i);
             displayBuffer.append((i+1)+") " + match.str.getSrcText() + "\n" +   // NOI18N
                     match.str.getTranslation() + "\n< " + match.score + "% " +  // NOI18N
                     match.proj + " >");                                         // NOI18N

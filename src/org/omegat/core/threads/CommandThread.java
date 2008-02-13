@@ -1262,7 +1262,7 @@ public class CommandThread extends Thread
                     }
                 });
                 for(int i=MAX_BACKUPS; i<tmxs.size(); i++)
-                    ((File)tmxs.get(i)).delete();
+                    tmxs.get(i).delete();
             }
         }
         catch(Exception e)

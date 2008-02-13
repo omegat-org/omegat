@@ -113,7 +113,7 @@ public class StringEntry
         // HP: please make it thread-safe, but test for performance issues
         for(i=m_nearList.iterator(); i.hasNext() && res.size()<OConsts.MAX_NEAR_STRINGS; )
         {
-            NearString next = (NearString) i.next();
+            NearString next = i.next();
             if( next.str.getTranslation().length()!=0 )
                 res.add(next);
         }
@@ -139,7 +139,7 @@ public class StringEntry
         // if list is full, remove last entry if its score is lower than the new entry's score
         if( m_nearList.size()>=OConsts.MAX_STORED_NEAR_STRINGS )
         {
-            NearString last = (NearString)m_nearList.last();
+            NearString last = m_nearList.last();
             if((score > last.score) || ((score == last.score) && (adjustedScore > last.adjustedScore)))
                 m_nearList.remove(last);
             else

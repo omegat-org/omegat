@@ -90,7 +90,7 @@ public class DTD extends XMLPseudoTag
             res.append("\n[\n");                                                // NOI18N
             for (int i=0; i<entities.size(); i++)
             {
-                Entity entity = (Entity) entities.get(i);
+                Entity entity = entities.get(i);
                 res.append(entity.toString());
                 res.append("\n");                                               // NOI18N
             }

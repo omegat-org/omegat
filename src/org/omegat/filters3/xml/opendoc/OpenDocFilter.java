@@ -117,7 +117,7 @@ public class OpenDocFilter extends AbstractFilter
         Enumeration<? extends ZipEntry> zipcontents = zipfile.entries();
         while (zipcontents.hasMoreElements())
         {
-            ZipEntry zipentry = (ZipEntry) zipcontents.nextElement();
+            ZipEntry zipentry = zipcontents.nextElement();
             String shortname = zipentry.getName();
             if (shortname.lastIndexOf('/')>=0)
                 shortname = shortname.substring(shortname.lastIndexOf('/')+1);

@@ -165,7 +165,7 @@ public final class Segmenter
             if( oneseg.trim().length()==0
                     && segments.size()>0 )
             {
-                String prev = (String)segments.get(segments.size()-1);
+                String prev = segments.get(segments.size()-1);
                 prev += oneseg;
                 segments.set(segments.size()-1, prev);
             }

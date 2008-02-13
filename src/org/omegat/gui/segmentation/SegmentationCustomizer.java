@@ -163,7 +163,7 @@ public class SegmentationCustomizer extends JDialog
                 else
                     mapDownButton.setEnabled(false);
                 
-                MapRule maprule = (MapRule)SRX.getSRX().getMappingRules().get(selrow);
+                MapRule maprule = SRX.getSRX().getMappingRules().get(selrow);
                 SegmentationRulesModel model = new SegmentationRulesModel(maprule.getRules());
                 ruleTable.setModel(model);
                 model.addExceptionListener(new ExceptionListener()

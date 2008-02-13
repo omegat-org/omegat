@@ -837,8 +837,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         if (activeMatch >= m_curEntry.getStrEntry().getNearListTranslated().size())
             return;
         
-        NearString near = (NearString) m_curEntry.getStrEntry().
-                getNearListTranslated().get(activeMatch);
+        NearString near = m_curEntry.getStrEntry().getNearListTranslated().get(activeMatch);
         doInsertText(near.str.getTranslation());
     }
     
@@ -867,8 +866,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         if (activeMatch >= m_curEntry.getStrEntry().getNearListTranslated().size())
             return;
         
-        NearString near = (NearString) m_curEntry.getStrEntry().
-                getNearListTranslated().get(activeMatch);
+        NearString near = m_curEntry.getStrEntry().getNearListTranslated().get(activeMatch);
         doReplaceEditText(near.str.getTranslation());
     }
     

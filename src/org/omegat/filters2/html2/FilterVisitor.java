@@ -375,7 +375,7 @@ public class FilterVisitor extends NodeVisitor
         int firstgood = 0;
         while( firstgood<firstgoodlimit )
         {
-            Node good_node = (Node)all.get(firstgood); 
+            Node good_node = all.get(firstgood); 
             if( !(good_node instanceof Tag) )
             {
                 firstgood++;
@@ -388,7 +388,7 @@ public class FilterVisitor extends NodeVisitor
             boolean found = false;
             for(int i=firstgood+1; i<all.size(); i++)
             {
-                Node cand_node = (Node)all.get(i);
+                Node cand_node = all.get(i);
                 if( cand_node instanceof Tag )
                 {
                     Tag cand = (Tag)cand_node;
@@ -420,7 +420,7 @@ public class FilterVisitor extends NodeVisitor
         // writing out all tags before the "first good" one
         for(int i=0; i<firstgood;i++)
         {
-            Node node = (Node)all.get(i);
+            Node node = all.get(i);
             if( node instanceof Tag )
                 writeout("<" + node.getText() + ">");                           // NOI18N
             else
@@ -436,7 +436,7 @@ public class FilterVisitor extends NodeVisitor
         int lastgood = all.size()-1;
         while( lastgood>lastgoodlimit )
         {
-            Node good_node = (Node)all.get(lastgood); 
+            Node good_node = all.get(lastgood); 
             if( !(good_node instanceof Tag) )
             {
                 lastgood--;
@@ -449,7 +449,7 @@ public class FilterVisitor extends NodeVisitor
             boolean found = false;
             for(int i=lastgood-1; i>=firstgoodlimit; i--)
             {
-                Node cand_node = (Node)all.get(i);
+                Node cand_node = all.get(i);
                 if( cand_node instanceof Tag )
                 {
                     Tag cand = (Tag)cand_node;
@@ -483,7 +483,7 @@ public class FilterVisitor extends NodeVisitor
         // appending all tags starting from "first good" one to paragraph text
         for(int i=firstgood; i<=lastgood; i++)
         {
-            Node node = (Node)all.get(i);
+            Node node = all.get(i);
             if( node instanceof Tag )
             {
                 shortcut((Tag)node, paragraph);
@@ -522,7 +522,7 @@ public class FilterVisitor extends NodeVisitor
         // writing out all tags after the "last good" one
         for(int i=lastgood+1; i<all.size();i++)
         {
-            Node node = (Node)all.get(i);
+            Node node = all.get(i);
             if( node instanceof Tag )
                 writeout("<" + node.getText() + ">");                           // NOI18N
             else

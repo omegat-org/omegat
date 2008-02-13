@@ -178,7 +178,7 @@ public class SpellChecker {
                 try {
                     // load the learned words into the spell checker
                     for (int i = 0; i < learnedList.size(); i++) {
-                        hunspell.Hunspell_put_word(pHunspell, prepareString((String) learnedList.get(i)));
+                        hunspell.Hunspell_put_word(pHunspell, prepareString(learnedList.get(i)));
                     }
                 } catch (UnsupportedEncodingException ex) {
                     Log.log("Unsupported encoding " + encoding);

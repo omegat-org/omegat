@@ -3,7 +3,7 @@ Main-Class: org.omegat.Main
 License: GNU Public License version 2
 Specification-Version: 1
 Implementation-Version: @version@
-Class-Path: lib/lib-mnemonics.jar lib/htmlparser.jar lib/MRJAdapter.jar lib/vldocking_2.0.6d.jar lib/jna.jar lib/swing-layout-1.0.jar lib/retroweaver-rt-2.0.1.jar lib/jmyspell-core-1.0.0-beta-2-1.4.jar lib/backport-util-concurrent.jar
+Class-Path: lib/lib-mnemonics.jar lib/htmlparser.jar lib/MRJAdapter.jar lib/vldocking_2.0.6d.jar lib/jna.jar lib/swing-layout-1.0.jar lib/jmyspell-core-1.0.0-beta-2.jar
 
 
 

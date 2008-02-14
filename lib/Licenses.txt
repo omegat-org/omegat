@@ -18,13 +18,6 @@ greater or the Mozilla Public License version 1.1
 swing-layout-1.0.2.jar is distributed under the GNU Lesser General  
 Public License version 2.1 and greater
 
-backport-util-concurrent.jar is Public domain
-
-retroweaver-rt-2.0.1.jar is distributed under the retroweaver license (retroweaver-license.txt)
-jmyspell-core-1.0.0-beta-2-1.4.jar is distributed under the 
+jmyspell-core-1.0.0-beta-2.jar is distributed under the 
 GNU Lesser General  
 Public License version 2.1 and greater
-
-
-
-

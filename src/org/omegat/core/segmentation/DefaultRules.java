@@ -36,9 +36,9 @@ import java.util.List;
 public class DefaultRules
 {
     /** Text files format-related rule. */
-    public static List textFormat()
+    public static List<Rule> textFormat()
     {
-        List srules = new ArrayList();
+        List<Rule> srules = new ArrayList<Rule>();
         
         // special handling for Text files to break on empty indented lines
         // idea by Jean-Christophe Helary
@@ -48,9 +48,9 @@ public class DefaultRules
     }
 
     /** HTML format-related rule. */
-    public static List htmlFormat()
+    public static List<Rule> htmlFormat()
     {
-        List srules = new ArrayList();
+        List<Rule> srules = new ArrayList<Rule>();
         
         // special handling for BR tag to segmenent on it
         // idea by Jean-Christophe Helary
@@ -60,9 +60,9 @@ public class DefaultRules
     }
 
     /** Default language-related segmentation rules. */
-    public static List defaultLingual()
+    public static List<Rule> defaultLingual()
     {
-        List srules = new ArrayList();
+        List<Rule> srules = new ArrayList<Rule>();
         // ... exception
         srules.add(new Rule(false, "\\.\\.\\.", "\\s+\\P{Lu}"));                // NOI18N
         // .?! break rule
@@ -72,9 +72,9 @@ public class DefaultRules
     }
 
     /** English exceptions. */
-    public static List english()
+    public static List<Rule> english()
     {
-        List srules = new ArrayList();
+        List<Rule> srules = new ArrayList<Rule>();
         
         srules.add(new Rule(false, "etc\\.", "\\s+\\P{Lu}"));                   // NOI18N
         
@@ -100,26 +100,26 @@ public class DefaultRules
     }
 
     /** A bit of Japanese segmentation. */
-    public static List japanese()
+    public static List<Rule> japanese()
     {
-        List srules = new ArrayList();
+        List<Rule> srules = new ArrayList<Rule>();
         srules.add(new Rule(true, "\u3002", "."));                              // NOI18N
         return srules;
     }
     
     /** Some Russian examples. */
-    public static List russian()
+    public static List<Rule> russian()
     {
-        List srules = new ArrayList();
+        List<Rule> srules = new ArrayList<Rule>();
         srules.add(new Rule(false, "(?i)\u0442\\.\u0435\\.", "\\s"));           // NOI18N
         srules.add(new Rule(false, "(?i)\u0442\\.\u043A\\.", "\\s"));           // NOI18N
         return srules;
     }
 
     /** Extensive set of exceptions for segmenting German language. */
-    public static List german()
+    public static List<Rule> german()
     {
-        List srules = new ArrayList();
+        List<Rule> srules = new ArrayList<Rule>();
         // Rules contributed by Martin Kempf
         srules.add(new Rule(false, "www\\.", ".*"));                            // NOI18N
         srules.add(new Rule(false, ".*", "\\.at"));                             // NOI18N

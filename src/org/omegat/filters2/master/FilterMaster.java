@@ -641,7 +641,7 @@ public class FilterMaster
     private void checkIfAllFilterPluginsAreAvailable()
     {
         ClassLoader cl = PluginUtils.getPluginsClassloader();
-        List plugins = PluginUtils.getPlugins();
+        List<List<Object>> plugins = PluginUtils.getPlugins();
         
         int k=0;
         while( k<filters.filtersSize() )
@@ -653,9 +653,8 @@ public class FilterMaster
                 continue;
             }
             
-            for(int i=0; i<plugins.size(); i++)
+            for(List<Object> filterList : plugins)
             {
-                List filterList = (List)plugins.get(i);
                 for(int j=1; j<filterList.size(); j++)
                 {
                     String classname = (String)filterList.get(j);
@@ -727,11 +726,11 @@ public class FilterMaster
     private void loadFilterClassesFromPlugins()
     {
         ClassLoader cl = PluginUtils.getPluginsClassloader();
-        List plugins = PluginUtils.getPlugins();
+        List<List<Object>> plugins = PluginUtils.getPlugins();
         
         for(int i=0; i<plugins.size(); i++)
         {
-            List filterList = (List)plugins.get(i);
+            List<Object> filterList = plugins.get(i);
             for(int j=1; j<filterList.size(); j++)
             {
                 try

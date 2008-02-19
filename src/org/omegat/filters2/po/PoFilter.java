@@ -151,6 +151,21 @@ public class PoFilter extends AbstractFilter
                     trans.append(s.replaceAll("\"(.*)\"","$1"));
                 }
             }
+            else if (s.matches("\"(.*)\"") && msgid_plural)
+            {
+                potential_header = false;
+                nontrans.append(s);
+                nontrans.append("\n");
+                if (nowrap)
+                {
+                    trans_plural.append(s);
+                    trans_plural.append("\n");
+                }
+                else
+                {
+                    trans_plural.append(s.replaceAll("\"(.*)\"","$1"));
+                }
+            }
             else if (s.matches("msgid_plural \".*\"")) 
             {
                 potential_header = false;

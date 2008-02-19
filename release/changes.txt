@@ -64,6 +64,23 @@
   - Check-spelling/styles error
   http://sourceforge.net/support/tracker.php?aid=1822579 
 
+----------------------------------------------------------------------
+ OmegaT 1.7.3 update 2 Changes
+----------------------------------------------------------------------
+
+1.7.3 update 2 vs. 1.7.3 update 1
+
+
+  0 Enhancement
+  1 Bugfixe
+
+----------------------------------------------------------------------
+1.7.3 update 2
+
+  Bug fixes:
+
+  - PO: Bad handling of plural messages on multiple lines 
+  http://sourceforge.net/support/tracker.php?aid=1896781  
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 update 1 Changes

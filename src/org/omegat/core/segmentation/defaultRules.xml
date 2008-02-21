@@ -1,0 +1,1664 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- 
+ Default segmentation rules and exceptions
+-->
+<srx xmlns="http://www.lisa.org/srx20">
+ <body>
+  <languagerules>
+   <!-- Extensive set of exceptions for segmenting German language -->
+   <languagerule languagerulename="German">
+    <!-- Rules contributed by Martin Kempf -->
+    <rule break="no">
+     <beforebreak>www\.</beforebreak>
+     <afterbreak>.*</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>.*</beforebreak>
+     <afterbreak>\.at</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>.*</beforebreak>
+     <afterbreak>\.de</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>a\.a\.O\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Abb\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Abf\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Abk\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Abo\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Abs\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Abt\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>abzgl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>a\.D\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Adr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>a\.M\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>am\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>amtl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Anh\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Ank\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Anl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Anm\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>a\.Rh\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>A\.T\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Aufl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sb\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Bd\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>beil\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>bes\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Best\.-Nr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Betr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Bez\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Bhf\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>b\.w\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>bzgl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>bzw\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>ca\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Chr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>d\.Ä\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>dgl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>d\.h\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Dipl\.-Ing\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Dipl\.-Kfm\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Dir\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>d\.J\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Dr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Dr\.\smed\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Dr\.\sphil\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sdt\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Dtzd\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>e\.h\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>ehem\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>eigtl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>einschl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>entspr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>erb\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>erw\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Erw\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>ev\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>e\.V\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>evtl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>e\.Wz\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>exkl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sf\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Fa\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Fam\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sff\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>F\.f\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Ffm\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Forts\.\sf\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Fr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Frl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>frz\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>geb\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Gebr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>gedr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>gegr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>gek\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Ges\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>gesch\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>gest\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>gez\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>ggf\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>ggfs\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Hbf\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>hpts\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Hptst\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Hr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Hrn\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Hrsg\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>i\.A\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>i\.b\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>i\.B\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>i\.H\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>i\.J\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Ing\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Inh\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>inkl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>i\.R\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>i\.V\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>jew\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Jh\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>jhrl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Kap\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>kath\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Kfm\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>kfm\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>kgl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Kl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>k\.o\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>k\.u\.k\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>led\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>m\.E\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Mio\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>möbl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Mrd\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>m\.W\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>MwSt\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>näml\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>n\.Chr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Nr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>n\.u\.Z\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\so\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>o\.B\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Obb\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sod\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>österr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>p\.Adr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Pfd\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Pl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Reg\.-Bez\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>r\.k\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>r\.-k\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>röm\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>röm\.-kath\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sS\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\ss\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>s\.a\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Sa\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>schles\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>schwäb\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>schweiz\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>s\.o\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>So\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>sog\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>St\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Str\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>StR\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>str\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>s\.u\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>südd\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>tägl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\su\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>u\.a\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>u\.ä\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>u\.Ä\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>u\.a\.m\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>u\.A\.w\.g\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>usw\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>u\.v\.a\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>u\.v\.a\.m\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>u\.U\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sV\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>v\.Chr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Verf\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>verh\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>verw\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>vgl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>v\.H\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>vorm\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>v\.R\.w\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>v\.T\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>v\.u\.Z\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>wg\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sz\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\s\Wz\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>z\.B\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>z\.Hd\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Zi\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>zur\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>zus\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>z\.T\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Ztr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>zzgl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>z\.Z\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Elekt\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Stck\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>mind\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>min\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>max\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>sep\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>spez\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Mio\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\(s\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>e\.V\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sempf\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>engl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Fa\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Co\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Ca\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>ca\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>engl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>etc\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>gem\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>insg\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>i\.d\.r\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\slt\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sa\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Std\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\su\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>p\.\sa\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Pos\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Prof\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>glw\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\ssec\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Stellv\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>stv\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Tab\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>u\.\sa\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Red\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>z\.\sT\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>d\.\sh\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\p{Lu}\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Rel\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>iqpr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sa\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Sek\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\ss\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\srd\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sp\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sB\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>[0-9]\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Zi\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Altb\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Ausst\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>App\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Blk\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Bj\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>bezugsf\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Hzg\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>erl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>freist\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Ant\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Ben\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Mitben\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>geh\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>gehob\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Grdst\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Ges\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Hdl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>incl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Mo\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Di\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Mi\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Do\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Fr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sä\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Elektr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Stck\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>pl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>sing\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Inv\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>jährl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Kaut\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Einstpl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Ki\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>kinderfreundl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>kl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Kochgel\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>kpl.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>möbl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>lux\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>mod\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>mtl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>neuw\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Nfl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\soff\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>n\.V\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Prov\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>ren\.-bed\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>selbst\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>sep\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Stud\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Tel\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Terr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Umgeb\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Verk\.-Anb\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Verk\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Wohnfl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Zim\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>verm\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Jg\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>einschl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sSachverst\.</beforebreak>
+     <afterbreak>\sf\.\sBaubiologie</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>allg\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>ökol\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>biolog\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>versch\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>landwirtsch\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Vgl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>z\.Tl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sv\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\schem\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\s\Wi\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sd\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Inst\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sStat\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\si\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\s\Wvolksw\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sn\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sJhdt\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sMagnet\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sUmgebungstemp\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sCh\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Biol\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\srel\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>%\s\?</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\s%\s\?</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\ssynth\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sMax\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>bw\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Phys\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sZt\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>zw\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sMed\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sPf\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Österr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Kurat\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>allerg\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>o\.ä\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>z\.\sTl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Bzgl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>v\.a\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sArch\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>extr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Biolog\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Petrochem\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Univ\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>elektr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\se\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>bauaufs\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Entspr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>sichtl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>weibl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>männl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>i\.a\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>ggfl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sreg\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sJan\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sFeb\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sFebr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sMär\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sApr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sJun\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sJul\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sAug\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sSep\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sSept\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sOkt\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sNov\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sDez\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Min\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\[u\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\szul\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\(el\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\spos\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sneg\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\(d\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Einschl\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sbiol\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Werkstoffnr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\svon\setwa\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sder\setwa\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>org\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Bayer\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>u\.v\.m\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="yes">
+     <beforebreak>\.\&quot;</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="yes">
+     <beforebreak>\?\&quot;</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="yes">
+     <beforebreak>\!\&quot;</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="yes">
+     <beforebreak>[\.\?\!]+</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+   </languagerule>
+
+   <!-- Some Russian examples -->
+   <languagerule languagerulename="Russian">
+    <rule break="no">
+     <beforebreak>(?i)т\.е\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>(?i)т\.к\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+   </languagerule>
+
+   <!-- A bit of Japanese segmentation -->
+   <languagerule languagerulename="Japanese">
+    <rule break="yes">
+     <beforebreak>。</beforebreak>
+     <afterbreak>.</afterbreak>
+    </rule>
+   </languagerule>
+
+   <!-- English exceptions -->
+   <languagerule languagerulename="English">
+    <rule break="no">
+     <beforebreak>etc\.</beforebreak>
+     <afterbreak>\s+\P{Lu}</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Dr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>U\.K\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>M\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Mr\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Mrs\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Ms\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Prof\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>(?i)e\.g\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>(?i)i\.e\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>resp\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>tel\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <!-- Following rules contributed by Jean-Christophe Helary
+     http://sourceforge.net/support/tracker.php?aid=1856354  -->
+    <rule break="no">
+     <beforebreak>(?i)fig\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>St\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\s[A-Z]\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+   </languagerule>
+
+   <!-- Default language-related segmentation rules -->
+   <languagerule languagerulename="Default">
+    <rule break="no">
+     <!-- ... exception -->
+     <beforebreak>\.\.\.</beforebreak>
+     <afterbreak>\s+\P{Lu}</afterbreak>
+    </rule>
+    <rule break="yes">
+     <!-- .?! break rule -->
+     <beforebreak>[\.\?\!]+</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+   </languagerule>
+
+   <!-- Text files format-related rule -->
+   <languagerule languagerulename="Text">
+    <!-- special handling for Text files to break on empty indented lines
+     idea by Jean-Christophe Helary -->
+    <rule break="yes">
+     <beforebreak>\n</beforebreak>
+     <afterbreak>\s+</afterbreak>
+    </rule>
+   </languagerule>
+
+   <!-- HTML format-related rule -->
+   <languagerule languagerulename="HTML">
+    <!-- special handling for BR tag to segmenent on it
+     idea by Jean-Christophe Helary -->
+    <rule break="yes">
+     <beforebreak>&lt;br\d+/?&gt;</beforebreak>
+     <afterbreak>.</afterbreak>
+    </rule>
+   </languagerule>
+  </languagerules>
+  <maprules>
+   <languagemap languagepattern="DE.*" languagerulename="German" />
+   <languagemap languagepattern="RU.*" languagerulename="Russian" />
+   <languagemap languagepattern="JA.*" languagerulename="Japanese" />
+   <languagemap languagepattern="EN.*" languagerulename="English" />
+   <languagemap languagepattern=".*" languagerulename="Default" />
+   <languagemap languagepattern=".*" languagerulename="Text" />
+   <languagemap languagepattern=".*" languagerulename="HTML" />
+  </maprules>
+ </body>
+</srx>

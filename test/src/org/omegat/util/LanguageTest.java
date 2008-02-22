@@ -80,7 +80,7 @@ public class LanguageTest extends TestCase
     {
         String LANG = "XXX-yy";
         Language lang = new Language(LANG);
-        if( !lang.getLocale().equals("xxx_YY") )
+        if( !lang.getLocaleCode().equals("xxx_YY") )
             fail("Locale is wrong '"+lang.getLocale()+"', should be 'xxx_YY'");
     }
 

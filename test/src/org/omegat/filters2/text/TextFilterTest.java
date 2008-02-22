@@ -18,7 +18,7 @@ public class TextFilterTest extends TestCase {
                 return entry;
             }
         });
-        filter.processFile(new File("test/data/text/text1.txt"), null, null, null);
+        filter.processFile(new File("test/data/filters/text/text1.txt"), null, null, null);
         assertEquals("First entry\r\n", entries.get(0));
     }
 }

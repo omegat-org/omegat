@@ -5,7 +5,7 @@
 1.8.0 vs. 1.7.3 update 1
 
 
-  14 Enhancements
+  15 Enhancements
    3 Bugfixes
 
 ----------------------------------------------------------------------
@@ -55,6 +55,7 @@
   Other enhancements:
   
   - Belarusian UI updated to 1.7.+
+  - French UI updated to 1.8
 
   Bug fixes:
   

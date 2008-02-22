@@ -2,23 +2,19 @@
  * GlossaryTextAreaTest.java
  * JUnit based test
  *
- * Created on 3 Июль 2006 г., 21:18
+ * Created on 3 пїЅпїЅпїЅпїЅ 2006 пїЅ., 21:18
  */
 
 package org.omegat.gui.main;
 
 import java.util.ArrayList;
-import junit.framework.*;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
 import java.util.List;
-import org.omegat.core.StringData;
+
 import org.omegat.core.glossary.GlossaryEntry;
-import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
-import org.omegat.util.Token;
+
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *
@@ -52,22 +48,23 @@ public class GlossaryTextAreaTest extends TestCase
      */
     public void testSetGlossaryEntries()
     {
-        List entries = new ArrayList();
+        List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
         entries.add(new GlossaryEntry("source1", "translation1", ""));
         entries.add(new GlossaryEntry("source2", "translation2", "comment2"));
         GlossaryTextArea gta = new GlossaryTextArea();
         gta.setGlossaryEntries(entries);
-        String GTATEXT = "'source1' = 'translation1'\n\n'source2' = 'translation2'\ncomment2\n\n";
+        String GTATEXT = "source1 = translation1\n\nsource2 = translation2\ncomment2\n\n";
+        String gt=gta.getText();
         if (!gta.getText().equals(GTATEXT))
             fail("Glossary pane doesn't show what it should.");        
     }
 
     /**
-     * Тест метода clear класса org.omegat.gui.main.GlossaryTextArea.
+     * пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ clear пїЅпїЅпїЅпїЅпїЅпїЅ org.omegat.gui.main.GlossaryTextArea.
      */
     public void testClear()
     {
-        List entries = new ArrayList();
+        List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
         entries.add(new GlossaryEntry("source1", "translation1", ""));
         entries.add(new GlossaryEntry("source2", "translation2", "comment2"));
         GlossaryTextArea gta = new GlossaryTextArea();

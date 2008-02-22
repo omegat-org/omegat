@@ -289,13 +289,31 @@ public class SRX implements Serializable, Cloneable
                 if( DEF.equals(maprule.getLanguageCode()) )
                 {
                     maprule.setLanguage(LanguageCodes.DEFAULT_CODE);
-// TODO: uncomment or remove                  maprule.getRules().removeAll(DefaultRules.english());
-// TODO: uncomment or remove                  maprule.getRules().removeAll(DefaultRules.textFormat());
-// TODO: uncomment or remove                  maprule.getRules().removeAll(DefaultRules.htmlFormat());
+                    maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.ENGLISH_CODE));
+                    maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.F_TEXT_CODE));
+                    maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.F_HTML_CODE));
                 }
             }
         }
         return current;
+    }
+    
+    /**
+     * Find rules for specific language.
+     * 
+     * @param source
+     *            rules list
+     * @param langName
+     *            language name
+     * @return list of rules
+     */
+    private static List<Rule> getRulesForLanguage(final SRX source, String langName) {
+        for (MapRule mr : source.getMappingRules()) {
+            if (langName.equals(mr.getLanguageCode())) {
+                return mr.getRules();
+            }
+        }
+        return null;
     }
     
     /**
@@ -336,6 +354,7 @@ public class SRX implements Serializable, Cloneable
      */
     private void initDefaults() {
         try {
+            List<MapRule> newMap=new ArrayList<MapRule>();
             URL rulesUrl = this.getClass().getClassLoader()
                     .getResource("org/omegat/core/segmentation/defaultRules.xml");
             Srx data = (Srx) SRX_JAXB_CONTEXT.createUnmarshaller().unmarshal(rulesUrl);
@@ -356,8 +375,10 @@ public class SRX implements Serializable, Cloneable
                     rulesList.add(new Rule(isBreak, r.getBeforebreak().getContent(), r.getAfterbreak().getContent()));
                 }
 
-                getMappingRules().add(new MapRule(lang, pattern, rulesList));
+                newMap.add(new MapRule(lang, pattern, rulesList));
             }
+            // set rules only if no errors
+            getMappingRules().addAll(newMap);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><!-- Sitemap 1.0 -->
+<meta name="GENERATOR" content="Microsoft® HTML Help Workshop 4.1">
+
+</HEAD><BODY>
+<UL>
+        <LI> <OBJECT type="text/sitemap">
+                <param name="Name" value="Introduction to GraphEdit">
+                <param name="Local" value="graphedit_help.htm">
+                </OBJECT>
+        </LI><LI> <OBJECT type="text/sitemap">
+                <param name="Name" value="Building Filter Graphs">
+             </OBJECT>
+        <UL>
+             <LI> <OBJECT type="text/sitemap">
+                     <param name="Name" value="Build a File Playback Graph">
+                     <param name="Local" value="build_graph.htm">
+                  </OBJECT>
+        </LI></UL>
+</LI></UL>
+</BODY></HTML>

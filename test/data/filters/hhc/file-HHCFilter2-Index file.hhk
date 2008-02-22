@@ -1,0 +1,15 @@
+<html>
+<!-- Sitemap 1.0 -->
+<object type="text/site properties">
+  <param name="SiteType" value="index">
+</object>
+<ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Options">
+    <param name="Name" value="Tool Options: spell checking">
+    <param name="Local" value="Dialog\spellchecking.htm">
+    <param name="Name" value="Tool Options: windows">
+    <param name="Local" value="Dialog\windows.htm">
+  </object>
+</ul>
+</html>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V3.1//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<book>
+<bookinfo>
+  <title>My First Book</title>
+  <author><firstname>Jane</firstname><surname>Doe</surname></author>
+  <copyright><year>1998</year><holder>Jane Doe</holder></copyright>
+</bookinfo>
+<preface><title>Foreword</title> ... </preface>
+<chapter> ... </chapter>
+<chapter> ... </chapter>
+<chapter> ... </chapter>
+<appendix> ... </appendix>
+<appendix> ... </appendix>
+<index> ... </index>
+</book>

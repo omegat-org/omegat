@@ -1,0 +1,18 @@
+body {
+	font-family: Lucida Grande;
+	margin: 1em;
+	color: #036;
+	line-height: 200%;
+	padding: 1em;
+	border: solid 1px;
+	border-color: #036
+	}
+}
+
+h1, h2, table, dt {
+	color: navy;
+}
+
+h3, h4, ul a {
+	color: green;
+}

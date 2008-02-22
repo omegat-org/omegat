@@ -9,7 +9,7 @@
                 <root id="src.dir"/>
             </source-roots>
             <test-roots>
-                <root id="test.test.dir" name="Test Packages"/>
+                <root id="test.src.dir" name="test\src"/>
             </test-roots>
         </data>
         <references xmlns="http://www.netbeans.org/ns/ant-project-references/1">

@@ -95,6 +95,7 @@ public abstract class AbstractFilter
         TFP_TARGET_COUNTRY_CODE
     };
     
+    protected IParseCallback entryProcessingCallback;
     
     /**
      * The default output filename pattern.
@@ -394,6 +395,17 @@ public abstract class AbstractFilter
      */
     protected final String processEntry(String entry)
     {
-        return FilterMaster.getInstance().processEntry(entry);
+        return entryProcessingCallback.processEntry(entry);
+       // return FilterMaster.getInstance().processEntry(entry);
+    }
+
+    /**
+     * Set callback for process entry. Every who executes parsing should setup
+     * this callback.
+     * 
+     * @param callback
+     */
+    public void setParseCallback(IParseCallback callback) {
+        this.entryProcessingCallback = callback;
     }
 }

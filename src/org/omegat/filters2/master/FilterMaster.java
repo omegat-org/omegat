@@ -52,6 +52,7 @@ import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.hhc.HHCFilter2;
@@ -279,6 +280,13 @@ public class FilterMaster
             File inFile = new File(filename);
             String inEncoding = lookup.inEncoding;
             AbstractFilter filterObject = lookup.filterObject;
+            
+            filterObject.setParseCallback(new IParseCallback() {
+                public String processEntry(String entry) {
+                    return FilterMaster.this.processEntry(entry);
+                }
+            });
+            
             List<File> files = filterObject.processFile(inFile, inEncoding, null, null);
             if (files!=null)
                 processedFiles.addAll(files);
@@ -381,6 +389,13 @@ public class FilterMaster
         String outEncoding = instance.getTargetEncoding();
         
         AbstractFilter filterObject = lookup.filterObject;
+        
+        filterObject.setParseCallback(new IParseCallback() {
+            public String processEntry(String entry) {
+                return FilterMaster.this.processEntry(entry);
+            }
+        });
+        
         List<File> files = filterObject.processFile(inFile, inEncoding, outFile, outEncoding);
         if (files!=null)
             processedFiles.addAll(files);

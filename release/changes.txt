@@ -75,11 +75,16 @@
 1.7.3 update 2 vs. 1.7.3 update 1
 
 
-  0 Enhancement
+  1 Enhancement
   1 Bugfixe
 
 ----------------------------------------------------------------------
 1.7.3 update 2
+
+  Implemented requests:
+
+  - Command line parameters for OmegaT.exe
+  http://sourceforge.net/support/tracker.php?aid=1900264  
 
   Bug fixes:
 

@@ -2,7 +2,7 @@
  * GlossaryTextAreaTest.java
  * JUnit based test
  *
- * Created on 3 ���� 2006 �., 21:18
+ * Created on 3 July 2006 at 21:18
  */
 
 package org.omegat.gui.main;
@@ -60,7 +60,7 @@ public class GlossaryTextAreaTest extends TestCase
     }
 
     /**
-     * ���� ������ clear ������ org.omegat.gui.main.GlossaryTextArea.
+     * Testing clear in org.omegat.gui.main.GlossaryTextArea.
      */
     public void testClear()
     {

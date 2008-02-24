@@ -46,6 +46,9 @@ public class SetSvnProperties {
 	    set("application/octet-stream");
 	} else if (filename.endsWith(".java")) {
 	    set("text/plain", "native");
+	    if (filename.startsWith("./src/")) {
+		setKeywords("Author Date Id Revision");
+	    }
 	} else if (filename.endsWith(".properties")) {
 	    set("text/plain", "native");
 	} else if (filename.endsWith(".xml")) {
@@ -90,5 +93,8 @@ public class SetSvnProperties {
     protected static void set(String mimetype, String eol) {
 	System.out.println("svn propset svn:mime-type "+mimetype+" \""+filename+"\"");
 	System.out.println("svn propset svn:eol-style "+mimetype+" \""+filename+"\"");
+    }
+    protected static void setKeywords(String keywords) {
+	System.out.println("svn propset svn:keywords '"+keywords+"' \""+filename+"\"");
     }
 }

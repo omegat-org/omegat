@@ -130,8 +130,10 @@ public class OpenXMLFilter extends AbstractFilter
     OpenXMLXMLFilter xmlfilter = null;
     private OpenXMLXMLFilter getXMLFilter()
     {
-        if (xmlfilter==null)
+        if (xmlfilter==null) {
             xmlfilter = new OpenXMLXMLFilter();
+            xmlfilter.setParseCallback(entryProcessingCallback);
+        }
         // Defining the actual dialect, because at this step 
         // we have the options
         OpenXMLDialect dialect = (OpenXMLDialect) xmlfilter.getDialect();
@@ -177,7 +179,9 @@ public class OpenXMLFilter extends AbstractFilter
                             String outEncoding) 
                             throws IOException, TranslationException
     {
-        ZipFile zipfile = new ZipFile(inFile);
+	defineDOCUMENTSOptions(); // Define the documents to read
+	 
+	ZipFile zipfile = new ZipFile(inFile);
         ZipOutputStream zipout = null;
         if (outFile!=null)
             zipout = new ZipOutputStream(new FileOutputStream(outFile));

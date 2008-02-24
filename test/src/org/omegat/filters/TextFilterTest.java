@@ -12,6 +12,9 @@ public class TextFilterTest extends TestFilterBase {
 	List<String> entries = parse(new TextFilter(), "test/data/filters/text/text1.txt");
 	assertEquals("First entry\r\n", entries.get(0));
     }
+    public void testTranslate() throws Exception {
+	translateText(new TextFilter(), "test/data/filters/text/text1.txt");
+    }
 
     @Test
     public void testParseNeverBreak() throws Exception {

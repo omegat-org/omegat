@@ -54,7 +54,6 @@ public class GlossaryTextAreaTest extends TestCase
         GlossaryTextArea gta = new GlossaryTextArea();
         gta.setGlossaryEntries(entries);
         String GTATEXT = "source1 = translation1\n\nsource2 = translation2\ncomment2\n\n";
-        String gt=gta.getText();
         if (!gta.getText().equals(GTATEXT))
             fail("Glossary pane doesn't show what it should.");        
     }

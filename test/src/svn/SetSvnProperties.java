@@ -52,7 +52,7 @@ public class SetSvnProperties {
         } else if (filename.startsWith("./.")) {
             set("text/xml", "native");
         } else if (filename.endsWith(".java")) {
-            set("text/plain", "native");
+            set("text/x-java", "native");
             if (filename.startsWith("./src/")) {
                 setKeywords("Author Date Id Revision");
             }
@@ -113,7 +113,7 @@ public class SetSvnProperties {
     protected static void set(String mimetype, String eol) {
          System.out.println("svn propset svn:mime-type " + mimetype + " \"" +
          filename + "\"");
-         System.out.println("svn propset svn:eol-style " + mimetype + " \"" +
+         System.out.println("svn propset svn:eol-style " + eol + " \"" +
          filename + "\"");
     }
 

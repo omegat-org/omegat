@@ -10,6 +10,9 @@ import java.util.List;
  * Good reference for mime-types could be found on
  * http://mindprod.com/jgloss/mime.html
  * 
+ * If you are using TortoiseSVN, then kill TSVNCache in memory, since it can
+ * conflict with command-line svn.
+ * 
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
 public class SetSvnProperties {
@@ -106,18 +109,15 @@ public class SetSvnProperties {
     }
 
     protected static void set(String mimetype) {
-         System.out.println("svn propset svn:mime-type " + mimetype + " \"" +
-         filename + "\"");
+        System.out.println("svn propset svn:mime-type " + mimetype + " \"" + filename + "\"");
     }
 
     protected static void set(String mimetype, String eol) {
-         System.out.println("svn propset svn:mime-type " + mimetype + " \"" +
-         filename + "\"");
-         System.out.println("svn propset svn:eol-style " + eol + " \"" +
-         filename + "\"");
+        System.out.println("svn propset svn:mime-type " + mimetype + " \"" + filename + "\"");
+        System.out.println("svn propset svn:eol-style " + eol + " \"" + filename + "\"");
     }
 
     protected static void setKeywords(String keywords) {
-         System.out.println("svn propset svn:keywords '" + keywords + "' \"" + filename + "\"");
+        System.out.println("svn propset svn:keywords '" + keywords + "' \"" + filename + "\"");
     }
 }

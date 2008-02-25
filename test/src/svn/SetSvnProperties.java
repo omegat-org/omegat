@@ -75,6 +75,10 @@ public class SetSvnProperties {
             set("application/octet-stream");
         } else if (filename.endsWith(".jar")) {
             set("application/java-archive");
+        } else if (filename.endsWith(".zip")) {
+            set("application/zip");
+        } else if (filename.endsWith(".gz")) {
+            set("application/gzip");
         } else if (filename.endsWith(".txt")) {
             set("text/plain", "native");
         } else if (filename.endsWith(".form")) {

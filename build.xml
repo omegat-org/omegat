@@ -179,7 +179,10 @@
     <!-- Builds a ZIP distribution -->    
     <target name="zip" description="Build Zip distro" depends="jar,release">
         <mkdir dir="dist2"/>
-        <zip basedir="dist" destfile="dist2/OmegaT_${distversion}.zip" excludes="OmegaT.exe OmegaT.iss l10n-project"/>
+        <zip destfile="dist2/OmegaT_${distversion}.zip">
+            <zipfileset dir="dist" excludes="OmegaT OmegaT.exe OmegaT.iss l10n-project"/>
+            <zipfileset dir="dist" includes="OmegaT" filemode="755"/>
+        </zip>
     </target>
 
     <!-- Creates a Windows Installer -->

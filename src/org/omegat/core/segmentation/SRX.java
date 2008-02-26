@@ -33,16 +33,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
-import javax.xml.bind.JAXBContext;
 
-import org.omegat.core.segmentation.jaxb.Languagemap;
-import org.omegat.core.segmentation.jaxb.Languagerule;
-import org.omegat.core.segmentation.jaxb.Srx;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -63,16 +58,6 @@ public class SRX implements Serializable, Cloneable
     private static final String CONF_SENTSEG = "segmentation.conf";             // NOI18N
     private static final File configFile=new File(
             StaticUtils.getConfigDir()+CONF_SENTSEG);
-    
-    protected static final JAXBContext SRX_JAXB_CONTEXT;
-    
-    static {
-        try {
-            SRX_JAXB_CONTEXT = JAXBContext.newInstance(Srx.class);
-        } catch (Exception ex) {
-            throw new ExceptionInInitializerError("Segmentation engine: JAXB initialize error: " + ex.getMessage());
-        }
-    }
             
     /**
      * SRX factory method.
@@ -289,9 +274,9 @@ public class SRX implements Serializable, Cloneable
                 if( DEF.equals(maprule.getLanguageCode()) )
                 {
                     maprule.setLanguage(LanguageCodes.DEFAULT_CODE);
-                    maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.ENGLISH_CODE));
-                    maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.F_TEXT_CODE));
-                    maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.F_HTML_CODE));
+                    maprule.getRules().removeAll(DefaultRules.english());
+                    maprule.getRules().removeAll(DefaultRules.textFormat());
+                    maprule.getRules().removeAll(DefaultRules.htmlFormat());
                 }
             }
         }
@@ -348,51 +333,67 @@ public class SRX implements Serializable, Cloneable
 
     // Patterns
     private static final String DEFAULT_RULES_PATTERN = ".*";                   // NOI18N
+    private static final String ENGLISH_RULES_PATTERN = "EN.*";                 // NOI18N
+    private static final String JAPANESE_RULES_PATTERN = "JA.*";                // NOI18N
+    private static final String RUSSIAN_RULES_PATTERN = "RU.*";                 // NOI18N
+    private static final String GERMAN_RULES_PATTERN = "DE.*";                  // NOI18N
     
     /**
      * Initializes default rules.
      */
-    private void initDefaults() {
-        try {
-            List<MapRule> newMap=new ArrayList<MapRule>();
-            URL rulesUrl = this.getClass().getClassLoader()
-                    .getResource("org/omegat/core/segmentation/defaultRules.xml");
-            Srx data = (Srx) SRX_JAXB_CONTEXT.createUnmarshaller().unmarshal(rulesUrl);
+    private void initDefaults()
+    {
+        // Extensive set of German exceptions
+        getMappingRules().add(new MapRule(
+                LanguageCodes.GERMAN_CODE,
+                GERMAN_RULES_PATTERN, 
+                DefaultRules.german()));
+        
+        // Russian as an example
+        getMappingRules().add(new MapRule(
+                LanguageCodes.RUSSIAN_CODE,
+                RUSSIAN_RULES_PATTERN, 
+                DefaultRules.russian()));
+        
+        // now Japanese
+        getMappingRules().add(new MapRule(
+                LanguageCodes.JAPANESE_CODE,
+                JAPANESE_RULES_PATTERN, 
+                DefaultRules.japanese()));
 
-            for (Languagerule rules : data.getBody().getLanguagerules().getLanguagerule()) {
+        // now English
+        getMappingRules().add(new MapRule(
+                LanguageCodes.ENGLISH_CODE,
+                ENGLISH_RULES_PATTERN, 
+                DefaultRules.english()));
 
-                String lang = rules.getLanguagerulename();
-                String pattern = DEFAULT_RULES_PATTERN;
-                for (Languagemap lm : data.getBody().getMaprules().getLanguagemap()) {
-                    if (lm.getLanguagerulename().equals(rules.getLanguagerulename())) {
-                        pattern = lm.getLanguagepattern();
-                        break;
-                    }
-                }
-                List<Rule> rulesList = new ArrayList<Rule>(rules.getRule().size());
-                for (org.omegat.core.segmentation.jaxb.Rule r : rules.getRule()) {
-                    boolean isBreak = "yes".equalsIgnoreCase(r.getBreak());
-                    rulesList.add(new Rule(isBreak, r.getBeforebreak().getContent(), r.getAfterbreak().getContent()));
-                }
+        // default lingual rules
+        getMappingRules().add(new MapRule(
+                LanguageCodes.DEFAULT_CODE,
+                DEFAULT_RULES_PATTERN, 
+                DefaultRules.defaultLingual()));
 
-                newMap.add(new MapRule(lang, pattern, rulesList));
-            }
-            // set rules only if no errors
-            getMappingRules().addAll(newMap);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        // segmentation for text files
+        getMappingRules().add(new MapRule(
+                LanguageCodes.F_TEXT_CODE,
+                DEFAULT_RULES_PATTERN, 
+                DefaultRules.textFormat()));
+
+        // segmentation for (X)HTML files
+        getMappingRules().add(new MapRule(
+                LanguageCodes.F_HTML_CODE,
+                DEFAULT_RULES_PATTERN, 
+                DefaultRules.htmlFormat()));
     }
         
     /**
      * Finds the rules for a certain language.
      * <p>
      * Usually (if the user didn't skrew up the setup) there're a default
-     * segmentation rules, so it's a good idea to rely on this method always
-     * returning at least some rules.
+     * segmentation rules, so it's a good idea to rely on this method 
+     * always returning at least some rules.
      * <p>
-     * Or in case of a completely screwd setup -- an empty list without any
-     * rules.
+     * Or in case of a completely screwd setup -- an empty list without any rules.
      */
     public List<Rule> lookupRulesForLanguage(Language srclang)
     {

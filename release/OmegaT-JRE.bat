@@ -1,0 +1,1 @@
+jre\bin\javaw -jar OmegaT.jar %*

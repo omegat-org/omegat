@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<jnlp spec="1.0+" codebase="@@HTTP_BASE@@" href="OmegaT.jnlp">
+	<information>
+		<title>OmegaT</title>
+		<vendor>OmegaT development team</vendor>
+		<homepage href="http://omegat.sf.net" />
+		<shortcut online="false">
+			<desktop />
+			<menu submenu="OmegaT from WebStart" />
+		</shortcut>
+		<offline-allowed />
+
+		<related-content href="readme.html">
+			<title>README</title>
+			<description>
+				The README file contains additional information about
+				the product
+			</description>
+		</related-content>
+	</information>
+
+	<security>
+		<all-permissions />
+	</security>
+
+	<resources>
+		<j2se version="1.5*" max-heap-size="256m"
+			href="http://java.sun.com/products/autodl/j2se">
+			<resources>
+				<jar href="OmegaT.jar" />
+				<!--jar href="docs.jar" /-->
+				<jar href="htmlparser.jar" />
+				<jar href="jmyspell-core-1.0.0-beta-2.jar" />
+				<jar href="jna.jar" />
+				<jar href="lib-mnemonics.jar" />
+				<jar href="MRJAdapter.jar" />
+				<jar href="swing-layout-1.0.jar" />
+				<jar href="vldocking_2.0.6d.jar" />
+			</resources>
+			<resources os="Windows">
+				<nativelib href="hunspell-win.jar" />
+			</resources>
+			<resources os="Linux" arch="x86">
+				<nativelib href="hunspell-lin-i386.jar" />
+			</resources>
+			<resources os="Linux" arch="i386">
+				<nativelib href="hunspell-lin-i386.jar" />
+			</resources>
+			<resources os="MacOS">
+				<nativelib href="hunspell-mac.jar" />
+			</resources>
+		</j2se>
+	</resources>
+	<resources>
+		<j2se version="1.6+" max-heap-size="256m"
+			href="http://java.sun.com/products/autodl/j2se">
+			<resources>
+				<jar href="OmegaT.jar" />
+				<!--jar href="docs.jar" /-->
+				<jar href="htmlparser.jar" />
+				<jar href="jmyspell-core-1.0.0-beta-2.jar" />
+				<jar href="jna.jar" />
+				<jar href="lib-mnemonics.jar" />
+				<jar href="MRJAdapter.jar" />
+				<jar href="swing-layout-1.0.jar" />
+				<jar href="vldocking_2.0.6d.jar" />
+			</resources>
+			<resources os="Windows">
+				<nativelib href="hunspell-win.jar" />
+			</resources>
+			<resources os="Linux" arch="x86">
+				<nativelib href="hunspell-lin-i386.jar" />
+			</resources>
+			<resources os="Linux" arch="i386">
+				<nativelib href="hunspell-lin-i386.jar" />
+			</resources>
+			<resources os="MacOS">
+				<nativelib href="hunspell-mac.jar" />
+			</resources>
+		</j2se>
+	</resources>
+	<application-desc main-class="org.omegat.Main" />
+</jnlp>

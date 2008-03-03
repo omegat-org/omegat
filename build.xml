@@ -229,6 +229,11 @@
         <ant target="do-win" />
         <ant target="do-win-jre" />
     </target>
+    
+    <!-- Creates WebStart package -->
+    <target name="webstart" depends="init,jar">
+        <ant dir="release/WebStart-specific" antfile="build.xml"/>
+    </target>
 
     <!-- Builds and copies to dist2 all addons -->
     <target name="addons">

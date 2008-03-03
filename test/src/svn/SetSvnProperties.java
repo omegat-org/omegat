@@ -65,6 +65,8 @@ public class SetSvnProperties {
             set("text/plain", "native");
         } else if (filename.endsWith(".xml")) {
             set("text/xml", "native");
+        } else if (filename.endsWith(".jnlp")) {
+            set("text/xml", "native");
         } else if (filename.endsWith(".xsd")) {
             set("text/xml", "native");
         } else if (filename.endsWith(".dtd")) {

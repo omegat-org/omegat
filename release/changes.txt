@@ -4,7 +4,7 @@
 1.8.0 update 1 vs. 1.8.0
 
 
-  1 Enhancements
+  2 Enhancements
    0 Bugfixe
 
 ----------------------------------------------------------------------
@@ -12,6 +12,7 @@
 
  Other enhancements:
   - Albanian localisation updated to 1.8 (UI, readme)
+  - Belarusian localisation updated to 1.8 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 1.8.0 Changes

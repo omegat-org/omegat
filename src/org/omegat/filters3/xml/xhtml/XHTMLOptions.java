@@ -32,7 +32,7 @@ import java.io.Serializable;
  * Serializable to allow saving to / reading from configuration file.
  * <p>
  * XHTML filter have the following options
- * ([+] means default on).
+ * ([+] means default on).<br>
  * Translatable attributes:
  * <ul>
  * <li>[+] href
@@ -41,6 +41,7 @@ import java.io.Serializable;
  * <li>[+] hreflang
  * <li>[+] value
  * </ul>
+ * Start a new paragraph on breaks (&lt;br&gt;) []
  * @author Didier Briel
  */
 public class XHTMLOptions implements Serializable

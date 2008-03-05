@@ -34,13 +34,14 @@ import java.io.Serializable;
  * OpenDoc filter have the following options
  * ([+] means default on).
  * Translatable elements:
- * <ul>[-] Hidden text (Word)
- * <ul>[+] Comments (Word, Excel)
- * <ul>[+] Footnotes (Word)
- * <ul>[+] Endnotes (Words)
- * <ul>[+] Header (Words)
- * <ul>[+] Footer (Words)
- * <ul>[+] Slide comments (Words)
+ * <ul>
+ * <li>[] Hidden text (Word)
+ * <li>[+] Comments (Word, Excel)
+ * <li>[+] Footnotes (Word)
+ * <li>[+] Endnotes (Words)
+ * <li>[+] Header (Words)
+ * <li>[+] Footer (Words)
+ * <li>[+] Slide comments (Words)
  * </ul>
  * @author Didier Briel
  */

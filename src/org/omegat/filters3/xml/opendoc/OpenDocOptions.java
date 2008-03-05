@@ -34,10 +34,11 @@ import java.io.Serializable;
  * OpenDoc filter have the following options
  * ([+] means default on).
  * Translatable elements:
- * <ul>[+] Index entries
- * <ul>[-] Bookmarks
- * <ul>[+] Notes
- * <ul>[+] Comments
+ * <ul>
+ * <li>[+] Index entries
+ * <li>[] Bookmarks
+ * <li>[+] Notes
+ * <li>[+] Comments
  * </ul>
  * @author Didier Briel
  */

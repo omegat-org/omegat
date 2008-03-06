@@ -1,5 +1,5 @@
-<html>
-<!-- Sitemap 1.0 -->
+<html><!-- Sitemap 1.0 -->
+
 <object type="text/site properties">
   <param name="SiteType" value="toc">
   <param name="Image Width" value="16">
@@ -12,19 +12,23 @@
     <param name="Local" value="TitlePage.htm">
     <param name="ImageNumber" value="1">
   </object>
+  </li>
   <li><object type="text/sitemap">
     <param name="Name" value="Screen">
     <param name="Local" value="general\screen.htm">
   </object>
+  </li>
   <ul>
     <li><object type="text/sitemap">
       <param name="Name" value="Menus">
       <param name="Local" value="general\menus.htm">
     </object>
+    </li>
     <li><object type="text/sitemap">
       <param name="Name" value="Main Toolbar">
       <param name="Local" value="general\maintoolbar.htm">
     </object>
-    </ul>
+    </li>
+  </ul>
 </ul>
 </html>

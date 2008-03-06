@@ -1,5 +1,5 @@
-<html>
-<!-- Sitemap 1.0 -->
+<html><!-- Sitemap 1.0 -->
+
 <object type="text/site properties">
   <param name="SiteType" value="index">
 </object>
@@ -11,5 +11,6 @@
     <param name="Name" value="Tool Options: windows">
     <param name="Local" value="Dialog\windows.htm">
   </object>
+  </li>
 </ul>
 </html>

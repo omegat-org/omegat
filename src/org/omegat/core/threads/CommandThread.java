@@ -29,9 +29,9 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InterruptedIOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -963,30 +963,15 @@ public class CommandThread extends Thread
             }
         }
     }
+    
+    /** Format for TMX files backup suffix. */
+    protected static final SimpleDateFormat FORMAT_DATETIME_SUFFIX = new SimpleDateFormat("yyyyMMddHHmm");
 
     /** Formats date (in milliseconds) to YYYYMMDDHHMM form. */
-    private String millisToDateTime(long millis)
-    {
-        Calendar date = Calendar.getInstance();
-        date.setTimeInMillis(millis);
-        
-        int year = date.get(Calendar.YEAR);
-        int month = date.get(Calendar.MONTH)+1;
-        int day = date.get(Calendar.DAY_OF_MONTH);
-        int hour = date.get(Calendar.HOUR_OF_DAY);
-        int minute = date.get(Calendar.MINUTE);
-        
-        return pad2(year) + pad2(month) + pad2(day) + 
-                pad2(hour) + pad2(minute);
-    }
-    
-    /** Make the number at least two digits long (prepends 0). */
-    private String pad2(int n)
-    {
-        if (n<10)
-            return "0" + Integer.toString(n);                                   // NOI18N
-        else
-            return Integer.toString(n);
+    private String millisToDateTime(final long millis) {
+        synchronized (FORMAT_DATETIME_SUFFIX) {
+            return FORMAT_DATETIME_SUFFIX.format(new Date());
+        }
     }
 
     private static final int MAX_BACKUPS = 10;

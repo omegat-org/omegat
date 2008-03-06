@@ -4,7 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-           (C) 2007 Didier Briel
+               2007 Didier Briel
+               2008 Fabian Mandelbaum
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -34,11 +35,15 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
+ * @author Fabian Mandelbaum
  */
 public class DocBookDialect extends DefaultXMLDialect
 {
-    private static final Pattern DOCBOOK_PUBLIC_DTD = 
+    public static final Pattern DOCBOOK_PUBLIC_DTD = 
             Pattern.compile("-//OASIS//DTD DocBook.*");                         // NOI18N
+    public static final Pattern DB5_XMLNS = Pattern.compile(
+            "xmlns(:\\w+)?=\"http://docbook.org/ns/docbook\"");
+    private String nsString = null; // the value of the NS, if any
     
     public DocBookDialect()
     {
@@ -92,8 +97,17 @@ public class DocBookDialect extends DefaultXMLDialect
             "indexterm",                                                        // NOI18N
         });
 
-        definePreformatTag("screen");                                           // NOI18N
+        definePreformatTags(new String[]
+        {
+            "screen",                                                           // NOI18N
+            "programlisting",                                                   // NOI18N
+        });
         
         defineTranslatableAttribute("url");                                     // NOI18N
     }
+    
+    //TODO: Can we can read db xml content here to try to determinate if
+    // the root element has a NS declaration to be able to handle
+    // namespaced-tags properly? We'd actually need to read only the
+    // root element together with its attributes.
 }

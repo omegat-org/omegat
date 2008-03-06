@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2008 Fabian Mandelbaum
                Home page: http://www.omegat.org/omegat/omegat.html
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -24,14 +25,19 @@
 
 package org.omegat.filters3.xml.docbook;
 
+import java.io.BufferedReader;
+import java.util.regex.Matcher;
 import org.omegat.filters2.Instance;
+import org.omegat.filters3.xml.XMLDialect;
 import org.omegat.filters3.xml.XMLFilter;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 
 /**
  * Filter for DocBook files.
  *
  * @author Maxym Mykhalchuk
+ * @author Fabian Mandelbaum
  */
 public class DocBookFilter extends XMLFilter
 {
@@ -64,7 +70,7 @@ public class DocBookFilter extends XMLFilter
      */
     public String getHint()
     {
-        return OStrings.getString("DocBook_HINT");
+        return OStrings.getString("DocBook_HINT"); 
     }
 
     /**
@@ -81,6 +87,7 @@ public class DocBookFilter extends XMLFilter
         return new Instance[] 
         {
             new Instance("*.xml", "UTF-8", "UTF-8"),                            // NOI18N
+            new Instance("*.dbk", "UTF-8", "UTF-8"),                            // NOI18N
         };
     }
 
@@ -99,6 +106,35 @@ public class DocBookFilter extends XMLFilter
      */
     public boolean isTargetEncodingVariable()
     {
+        return true;
+    }
+    
+    /** 
+     * Returns whether the file is supported by the filter, by checking 
+     * DB4 (DTD) or DB5 (Namespace) constraints.
+     * @return <code>true</code> or <code>false</code>
+     */
+    public boolean isFileSupported(BufferedReader reader) {
+        XMLDialect dialect = getDialect();
+        if (dialect.getConstraints() == null || dialect.getConstraints().size() == 0)
+            return true;
+        try {
+            char[] cbuf = new char[OConsts.READ_AHEAD_LIMIT];
+            int cbuf_len = reader.read(cbuf);
+            String buf = new String(cbuf, 0, cbuf_len);
+            Matcher matcher = DocBookDialect.DOCBOOK_PUBLIC_DTD.matcher(buf);
+            if (matcher.find()) { // We can safely assume we have a db4 doc...
+                return true;
+            }
+            else { // Let's see if we have a db5 doc...
+                matcher = DocBookDialect.DB5_XMLNS.matcher(buf);
+                if (!matcher.find()) // Neither db4, nor db5
+                    return false;
+            }
+        }
+        catch (Exception e) {
+            return false;
+        }
         return true;
     }
 }

@@ -105,6 +105,9 @@
   - Windows installer
   http://sourceforge.net/support/tracker.php?aid=1596625   
 
+  - DocBook 5.0 filter  
+  http://sourceforge.net/support/tracker.php?aid=1907008    
+  
   Other enhancements:
 
   - New Arabic localisation (readme, instant start)

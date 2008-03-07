@@ -24,11 +24,31 @@
 
 package org.omegat.core.data;
 
+import java.io.IOException;
+
+import org.omegat.core.ProjectProperties;
+import org.omegat.filters2.TranslationException;
+
 /**
  * Interface for access to data engine funtionality.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IDataEngine {
+    /**
+     * Save project.
+     */
     void saveProject();
+
+    /**
+     * Create translated documents.
+     */
+    void compileProject() throws IOException, TranslationException;
+
+    /**
+     * Get project properties.
+     * 
+     * @return project properties
+     */
+    ProjectProperties getProjectProperties();
 }

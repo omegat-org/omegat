@@ -72,7 +72,6 @@ import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.DialogThread;
-import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.HelpFrame;
 import org.omegat.gui.ProjectFrame;
@@ -80,7 +79,6 @@ import org.omegat.gui.SearchWindow;
 import org.omegat.gui.TagValidationFrame;
 import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.FontSelectionDialog;
-import org.omegat.gui.dialogs.SpellcheckerConfigurationDialog;
 import org.omegat.gui.dialogs.WorkflowOptionsDialog;
 import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
@@ -122,7 +120,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     public MainWindow()
     {
         m_searches = new HashSet<SearchWindow>();
-        menu = new MainWindowMenu(this);
+        menu = new MainWindowMenu(this, new MainWindowMenuHandler(this));
         initComponents();
         createMainComponents();
         initDocking();
@@ -1270,25 +1268,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         });
     }
     
-    private void doCompileProject()
-    {
-        if (!isProjectLoaded())
-            return;
-        
-        try
-        {
-            CommandThread.core.compileProject();
-        }
-        catch(IOException e)
-        {
-            displayError(OStrings.getString("TF_COMPILE_ERROR"), e);
-        }
-        catch(TranslationException te)
-        {
-            displayError(OStrings.getString("TF_COMPILE_ERROR"), te);
-        }
-    }
-    
     private void doFind()
     {
         if (!isProjectLoaded())
@@ -1362,7 +1341,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
      * otherwise displays source text.
      * Also stores length of each displayed segment plus its starting offset.
      */
-    private synchronized void loadDocument()
+    synchronized void loadDocument()
     {
         m_docReady = false;
 
@@ -1509,7 +1488,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
      *
      * @param forceCommit If false, the translation will not be saved
      */
-    private synchronized void commitEntry(boolean forceCommit) {
+    synchronized void commitEntry(boolean forceCommit) {
         if (!isProjectLoaded())
             return;
 
@@ -2448,10 +2427,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         doGotoHistoryForward();
     }
 
-    public void optionsSpellCheckMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        doSpellCheckSettings();
-    }
-
     public void viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
         Preferences.setPreference(Preferences.MARK_TRANSLATED_SEGMENTS,
                 menu.viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected());
@@ -2657,11 +2632,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         { }
     }
 
-    public void projectCompileMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doCompileProject();
-    }
-    
     public void projectCloseMenuItemActionPerformed(java.awt.event.ActionEvent evt)
     {
         doCloseProject();
@@ -2712,29 +2682,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         activateEntry();
     }
 
-    /**
-     * Opens the spell checking window
-     */
-    private void doSpellCheckSettings() {
-        SpellcheckerConfigurationDialog sd = new SpellcheckerConfigurationDialog(this, 
-                CommandThread.core.getProjectProperties().getTargetLanguage());
-        sd.setVisible(true);
-        if (sd.getReturnStatus() == SpellcheckerConfigurationDialog.RET_OK) {
-            m_autoSpellChecking = 
-                    Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
-            if (m_autoSpellChecking) {
-                SpellChecker sc = CommandThread.core.getSpellchecker();
-                sc.destroy();
-                sc.initialize();
-            }
-            commitEntry(false);
-            int thisEntry = m_curEntryNum;
-            loadDocument();
-            activateEntry();
-        }
-    }
-
-    private boolean m_autoSpellChecking;
+    boolean m_autoSpellChecking;
     
     public boolean autoSpellCheckingOn() {
         return m_autoSpellChecking;

@@ -30,5 +30,21 @@ package org.omegat.gui.main;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IMainWindow {
+    /**
+     * Show message in status bar.
+     * 
+     * @param messageText
+     *                message text
+     */
     void showStatusMessage(String messageText);
+
+    /**
+     * Display error.
+     * 
+     * @param errorText
+     *                error text
+     * @param ex
+     *                exception to show
+     */
+    void displayError(String errorText, Throwable ex);
 }

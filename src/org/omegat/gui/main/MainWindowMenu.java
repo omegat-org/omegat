@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers, 
                          Benjamin Siband, and Kim Bruning
                2007 Zoltan Bartko
-               2008 Andrzej Sawula
+               2008 Andrzej Sawula, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -23,7 +23,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.gui.main;
 
@@ -32,6 +32,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ResourceBundle;
 
 import javax.swing.JCheckBoxMenuItem;
@@ -57,109 +60,42 @@ import org.openide.awt.Mnemonics;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class MainWindowMenu implements ActionListener {
+    /** MainWindow instance. */
     protected final MainWindow mainWindow;
 
     public MainWindowMenu(final MainWindow mainWindow) {
         this.mainWindow = mainWindow;
     }
 
-    // Code for dispatching events from components to event handlers.
-
+    /**
+     * Code for dispatching events from components to event handlers.
+     * 
+     * @param evt
+     *            event info
+     */
     public void actionPerformed(ActionEvent evt) {
-        if (evt.getSource() == projectExitMenuItem) {
-            mainWindow.projectExitMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == projectNewMenuItem) {
-            mainWindow.projectNewMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == projectOpenMenuItem) {
-            mainWindow.projectOpenMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == projectImportMenuItem) {
-            mainWindow.projectImportMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == projectWikiImportMenuItem) {
-            mainWindow.projectWikiImportMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == projectReloadMenuItem) {
-            mainWindow.projectReloadMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == projectCloseMenuItem) {
-            mainWindow.projectCloseMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == projectSaveMenuItem) {
-            mainWindow.projectSaveMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == projectCompileMenuItem) {
-            mainWindow.projectCompileMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == projectEditMenuItem) {
-            mainWindow.projectEditMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == viewFileListMenuItem) {
-            mainWindow.viewFileListMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == editUndoMenuItem) {
-            mainWindow.editUndoMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == editRedoMenuItem) {
-            mainWindow.editRedoMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == editOverwriteTranslationMenuItem) {
-            mainWindow.editOverwriteTranslationMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == editInsertTranslationMenuItem) {
-            mainWindow.editInsertTranslationMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == editOverwriteSourceMenuItem) {
-            mainWindow.editOverwriteSourceMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == editInsertSourceMenuItem) {
-            mainWindow.editInsertSourceMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == editFindInProjectMenuItem) {
-            mainWindow.editFindInProjectMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == lowerCaseMenuItem) {
-            mainWindow.lowerCaseMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == upperCaseMenuItem) {
-            mainWindow.upperCaseMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == titleCaseMenuItem) {
-            mainWindow.titleCaseMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == cycleSwitchCaseMenuItem) {
-            mainWindow.cycleSwitchCaseMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == editSelectFuzzy1MenuItem) {
-            mainWindow.editSelectFuzzy1MenuItemActionPerformed(evt);
-        } else if (evt.getSource() == editSelectFuzzy2MenuItem) {
-            mainWindow.editSelectFuzzy2MenuItemActionPerformed(evt);
-        } else if (evt.getSource() == editSelectFuzzy3MenuItem) {
-            mainWindow.editSelectFuzzy3MenuItemActionPerformed(evt);
-        } else if (evt.getSource() == editSelectFuzzy4MenuItem) {
-            mainWindow.editSelectFuzzy4MenuItemActionPerformed(evt);
-        } else if (evt.getSource() == editSelectFuzzy5MenuItem) {
-            mainWindow.editSelectFuzzy5MenuItemActionPerformed(evt);
-        } else if (evt.getSource() == gotoNextUntranslatedMenuItem) {
-            mainWindow.gotoNextUntranslatedMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == gotoNextSegmentMenuItem) {
-            mainWindow.gotoNextSegmentMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == gotoPreviousSegmentMenuItem) {
-            mainWindow.gotoPreviousSegmentMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == gotoSegmentMenuItem) {
-            mainWindow.gotoSegmentMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == gotoHistoryForwardMenuItem) {
-            mainWindow.gotoHistoryForwardMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == gotoHistoryBackMenuItem) {
-            mainWindow.gotoHistoryBackMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == viewMarkTranslatedSegmentsCheckBoxMenuItem) {
-            mainWindow.viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == viewMarkUntranslatedSegmentsCheckBoxMenuItem) {
-            mainWindow.viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == viewDisplaySegmentSourceCheckBoxMenuItem) {
-            mainWindow.viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == toolsValidateTagsMenuItem) {
-            mainWindow.toolsValidateTagsMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == optionsTabAdvanceCheckBoxMenuItem) {
-            mainWindow.optionsTabAdvanceCheckBoxMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == optionsAlwaysConfirmQuitCheckBoxMenuItem) {
-            mainWindow.optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == optionsFontSelectionMenuItem) {
-            mainWindow.optionsFontSelectionMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == optionsSetupFileFiltersMenuItem) {
-            mainWindow.optionsSetupFileFiltersMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == optionsSentsegMenuItem) {
-            mainWindow.optionsSentsegMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == optionsSpellCheckMenuItem) {
-            mainWindow.optionsSpellCheckMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == optionsWorkflowMenuItem) {
-            mainWindow.optionsWorkflowMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == optionsRestoreGUIMenuItem) {
-            mainWindow.optionsRestoreGUIMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == helpContentsMenuItem) {
-            mainWindow.helpContentsMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == helpAboutMenuItem) {
-            mainWindow.helpAboutMenuItemActionPerformed(evt);
+        // Item what perform event.
+        JMenuItem menuItem = (JMenuItem) evt.getSource();
+
+        // Get item name from actionCommand.
+        String action = menuItem.getActionCommand();
+
+        // Find method by item name.
+        String methodName = action + "ActionPerformed";
+        Method method;
+        try {
+            method = mainWindow.getClass().getMethod(methodName, ActionEvent.class);
+        } catch (NoSuchMethodException ex) {
+            throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
+        }
+
+        // Call ...MenuItemActionPerformed method.
+        try {
+            method.invoke(mainWindow, evt);
+        } catch (IllegalAccessException ex) {
+            throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
+        } catch (InvocationTargetException ex) {
+            throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
         }
     }
 
@@ -522,7 +458,26 @@ public class MainWindowMenu implements ActionListener {
 
         mainMenu.add(helpMenu);
 
+        setActionCommands();
+
         return mainMenu;
+    }
+
+    /**
+     * Set 'actionCommand' for all menu items. TODO: change to key from resource
+     * bundle values
+     */
+    protected void setActionCommands() {
+        try {
+            for (Field f : this.getClass().getDeclaredFields()) {
+                if (JMenuItem.class.isAssignableFrom(f.getType()) && f.getType() != JMenu.class) {
+                    JMenuItem menuItem = (JMenuItem) f.get(this);
+                    menuItem.setActionCommand(f.getName());
+                }
+            }
+        } catch (IllegalAccessException ex) {
+            throw new ExceptionInInitializerError(ex);
+        }
     }
 
     /**

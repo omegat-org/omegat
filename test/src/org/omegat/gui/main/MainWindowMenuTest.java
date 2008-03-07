@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.gui.main;
 
@@ -51,7 +51,7 @@ public class MainWindowMenuTest extends TestCase {
         Map<String, Method> existsMethods = new HashMap<String, Method>();
 
         for (Method m : MainWindow.class.getDeclaredMethods()) {
-            if (Modifier.isProtected(m.getModifiers()) && !Modifier.isStatic(m.getModifiers())
+            if (Modifier.isPublic(m.getModifiers()) && !Modifier.isStatic(m.getModifiers())
                     && m.getParameterTypes().length == 1 && m.getParameterTypes()[0] == ActionEvent.class) {
                 existsMethods.put(m.getName(), m);
             }
@@ -61,13 +61,15 @@ public class MainWindowMenuTest extends TestCase {
             if (JMenuItem.class.isAssignableFrom(f.getType()) && f.getType() != JMenu.class) {
                 count++;
                 String actionMethodName = f.getName() + "ActionPerformed";
-                Method m = existsMethods.remove(actionMethodName);
+                Method m = MainWindow.class.getMethod(actionMethodName, ActionEvent.class);
                 assertNotNull("Action method not defined for " + f.getName(), m);
+                assertNotNull(existsMethods.remove(actionMethodName));
             } else {
                 System.out.println("Action not need for " + f);
             }
         }
         assertTrue("menu items not found", count > 30);
-        assertTrue("There is action handlers in MainWindow which doesn't used in menu: "+existsMethods.keySet(), existsMethods.isEmpty());
+        assertTrue("There is action handlers in MainWindow which doesn't used in menu: " + existsMethods.keySet(),
+                existsMethods.isEmpty());
     }
 }

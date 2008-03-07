@@ -27,18 +27,30 @@
 
 package org.omegat.gui.main;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
 
 import org.omegat.core.Core;
+import org.omegat.core.ProjectProperties;
 import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.core.threads.CommandThread;
+import org.omegat.core.threads.DialogThread;
 import org.omegat.filters2.TranslationException;
+import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.HelpFrame;
+import org.omegat.gui.SearchWindow;
 import org.omegat.gui.dialogs.AboutDialog;
+import org.omegat.gui.dialogs.FontSelectionDialog;
 import org.omegat.gui.dialogs.SpellcheckerConfigurationDialog;
+import org.omegat.gui.dialogs.WorkflowOptionsDialog;
+import org.omegat.gui.filters2.FiltersCustomizer;
+import org.omegat.gui.segmentation.SegmentationCustomizer;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -77,10 +89,38 @@ public class MainWindowMenuHandler {
     }
 
     /**
+     * Imports the file/files/folder into project's source files.
+     * 
+     * @author Kim Bruning
+     * @author Maxym Mykhalchuk
+     */
+    public void projectImportMenuItemActionPerformed() {
+        mainWindow.doImportSourceFiles();
+    }
+
+    public void projectWikiImportMenuItemActionPerformed() {
+        mainWindow.doWikiImport();
+    }
+
+    public void projectReloadMenuItemActionPerformed() {
+        mainWindow.doReloadProject();
+    }
+
+    /**
      * Close project.
      */
     public void projectCloseMenuItemActionPerformed() {
         mainWindow.doCloseProject();
+    }
+
+    /**
+     * Save project.
+     */
+    public void projectSaveMenuItemActionPerformed() {
+        // commit the current entry first
+        mainWindow.commitEntry(true);
+        mainWindow.activateEntry();
+        mainWindow.doSave();
     }
 
     /**
@@ -96,6 +136,24 @@ public class MainWindowMenuHandler {
             Core.getMainWindow().displayError(OStrings.getString("TF_COMPILE_ERROR"), e);
         } catch (TranslationException te) {
             Core.getMainWindow().displayError(OStrings.getString("TF_COMPILE_ERROR"), te);
+        }
+    }
+
+    /** Edits project's properties */
+    public void projectEditMenuItemActionPerformed() {
+        ProjectProperties config = CommandThread.core.getProjectProperties();
+        boolean changed = false;
+        try {
+            changed = config.editProject(mainWindow);
+        } catch (IOException ioe) {
+            mainWindow.displayWarning(OStrings.getString("MW_ERROR_PROJECT_NOT_EDITABLE"), ioe);
+        }
+
+        if (changed) {
+            int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"), OStrings
+                    .getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
+            if (res == JOptionPane.YES_OPTION)
+                mainWindow.doReloadProject();
         }
     }
 
@@ -136,6 +194,51 @@ public class MainWindowMenuHandler {
         System.exit(0);
     }
 
+    public void editUndoMenuItemActionPerformed() {
+        try {
+            synchronized (mainWindow.editor) {
+                mainWindow.editor.undoOneEdit();
+            }
+        } catch (CannotUndoException cue) {
+        }
+    }
+
+    public void editRedoMenuItemActionPerformed() {
+        try {
+            synchronized (mainWindow.editor) {
+                mainWindow.editor.redoOneEdit();
+            }
+        } catch (CannotRedoException cue) {
+        }
+    }
+
+    public void editOverwriteTranslationMenuItemActionPerformed() {
+        mainWindow.doRecycleTrans();
+    }
+
+    public void editInsertTranslationMenuItemActionPerformed() {
+        mainWindow.doInsertTrans();
+    }
+
+    public void editFindInProjectMenuItemActionPerformed() {
+        if (!mainWindow.isProjectLoaded())
+            return;
+
+        synchronized (mainWindow.editor) {
+            String selection = mainWindow.editor.getSelectedText();
+            if (selection != null)
+                selection.trim();
+
+            // SearchThread srch = new SearchThread(this, selection);
+            // srch.start();
+            SearchWindow search = new SearchWindow(mainWindow, selection);
+            search.addWindowListener(mainWindow);
+            DialogThread dt = new DialogThread(search);
+            dt.start();
+            mainWindow.m_searches.add(search);
+        }
+    }
+
     /** Set active match to #1. */
     public void editSelectFuzzy1MenuItemActionPerformed() {
         mainWindow.matches.setActiveMatch(0);
@@ -161,7 +264,15 @@ public class MainWindowMenuHandler {
         mainWindow.matches.setActiveMatch(4);
     }
 
-    public void gotoPreviousSegmentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
+    public void gotoNextUntranslatedMenuItemActionPerformed() {
+        mainWindow.doNextUntranslatedEntry();
+    }
+
+    public void gotoNextSegmentMenuItemActionPerformed() {
+        mainWindow.doNextEntry();
+    }
+
+    public void gotoPreviousSegmentMenuItemActionPerformed() {
         mainWindow.doPrevEntry();
     }
 
@@ -266,8 +377,86 @@ public class MainWindowMenuHandler {
         }
     }
 
-    public void gotoNextSegmentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        mainWindow.doNextEntry();
+    public void toolsValidateTagsMenuItemActionPerformed() {
+        mainWindow.doValidateTags();
+    }
+
+    public void optionsTabAdvanceCheckBoxMenuItemActionPerformed() {
+        Preferences.setPreference(Preferences.USE_TAB_TO_ADVANCE, mainWindow.menu.optionsTabAdvanceCheckBoxMenuItem
+                .isSelected());
+        if (mainWindow.menu.optionsTabAdvanceCheckBoxMenuItem.isSelected())
+            mainWindow.m_advancer = KeyEvent.VK_TAB;
+        else
+            mainWindow.m_advancer = KeyEvent.VK_ENTER;
+    }
+
+    /**
+     * Displays the font dialog to allow selecting the font for source, target
+     * text (in main window) and for match and glossary windows.
+     */
+    public void optionsFontSelectionMenuItemActionPerformed() {
+        FontSelectionDialog dlg = new FontSelectionDialog(mainWindow, mainWindow.m_font);
+        dlg.setVisible(true);
+        if (dlg.getReturnStatus() == FontSelectionDialog.RET_OK_CHANGED) {
+            // fonts have changed
+            // first commit current translation
+            mainWindow.commitEntry(false); // part of fix for bug 1409309
+            mainWindow.m_font = dlg.getSelectedFont();
+            synchronized (mainWindow.editor) {
+                mainWindow.editor.setFont(mainWindow.m_font);
+            }
+            mainWindow.matches.setFont(mainWindow.m_font);
+            mainWindow.glossary.setFont(mainWindow.m_font);
+            if (mainWindow.m_tagWin != null)
+                mainWindow.m_tagWin.setFont(mainWindow.m_font);
+            if (mainWindow.m_projWin != null)
+                mainWindow.m_projWin.setFont(mainWindow.m_font);
+
+            Preferences.setPreference(OConsts.TF_SRC_FONT_NAME, mainWindow.m_font.getName());
+            Preferences.setPreference(OConsts.TF_SRC_FONT_SIZE, mainWindow.m_font.getSize());
+            mainWindow.activateEntry();
+        }
+    }
+
+    /**
+     * Displays the filters setup dialog to allow customizing file filters in
+     * detail.
+     */
+    public void optionsSetupFileFiltersMenuItemActionPerformed() {
+        FiltersCustomizer dlg = new FiltersCustomizer(mainWindow);
+        dlg.setVisible(true);
+        if (dlg.getReturnStatus() == FiltersCustomizer.RET_OK) {
+            // saving config
+            FilterMaster.getInstance().saveConfig();
+
+            if (mainWindow.isProjectLoaded()) {
+                // asking to reload a project
+                int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"), OStrings
+                        .getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
+                if (res == JOptionPane.YES_OPTION)
+                    mainWindow.doReloadProject();
+            }
+        } else {
+            // reloading config from disk
+            FilterMaster.getInstance().loadConfig();
+        }
+    }
+
+    /**
+     * Displays the segmentation setup dialog to allow customizing the
+     * segmentation rules in detail.
+     */
+    public void optionsSentsegMenuItemActionPerformed() {
+        SegmentationCustomizer segment_window = new SegmentationCustomizer(mainWindow);
+        segment_window.setVisible(true);
+
+        if (segment_window.getReturnStatus() == SegmentationCustomizer.RET_OK && mainWindow.isProjectLoaded()) {
+            // asking to reload a project
+            int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"), OStrings
+                    .getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
+            if (res == JOptionPane.YES_OPTION)
+                mainWindow.doReloadProject();
+        }
     }
 
     /**
@@ -288,6 +477,14 @@ public class MainWindowMenuHandler {
             mainWindow.loadDocument();
             mainWindow.activateEntry();
         }
+    }
+
+    /**
+     * Displays the workflow setup dialog to allow customizing the diverse
+     * workflow options.
+     */
+    public void optionsWorkflowMenuItemActionPerformed() {
+        new WorkflowOptionsDialog(mainWindow).setVisible(true);
     }
 
     /**

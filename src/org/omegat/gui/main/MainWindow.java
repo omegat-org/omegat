@@ -56,8 +56,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
-import javax.swing.undo.CannotRedoException;
-import javax.swing.undo.CannotUndoException;
 
 import org.omegat.core.Core;
 import org.omegat.core.ProjectProperties;
@@ -66,15 +64,9 @@ import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.core.threads.CommandThread;
-import org.omegat.core.threads.DialogThread;
-import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.ProjectFrame;
 import org.omegat.gui.SearchWindow;
 import org.omegat.gui.TagValidationFrame;
-import org.omegat.gui.dialogs.FontSelectionDialog;
-import org.omegat.gui.dialogs.WorkflowOptionsDialog;
-import org.omegat.gui.filters2.FiltersCustomizer;
-import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -435,7 +427,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     ///////////////////////////////////////////////////////////////
     // command handling
     
-    private void doValidateTags()
+    void doValidateTags()
     {
         List<SourceTextEntry> suspects = CommandThread.core.validateTags();
         if (suspects.size() > 0)
@@ -518,7 +510,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
      * @author Henry Pijffers
      * @author Maxym Mykhalchuk
      */
-    private synchronized void doNextUntranslatedEntry()
+    synchronized void doNextUntranslatedEntry()
     {
         // check if a document is loaded
         if (isProjectLoaded() == false)
@@ -755,125 +747,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         };
         SwingUtilities.invokeLater(runlater);
     }
-    
-    /** Edits project's properties */
-    private void doEditProject()
-    {
-        ProjectProperties config = CommandThread.core.getProjectProperties();
-        boolean changed = false;
-        try
-        {
-            changed = config.editProject(this);
-        }
-        catch( IOException ioe )
-        {
-            displayWarning( OStrings.getString("MW_ERROR_PROJECT_NOT_EDITABLE"), ioe);
-        }
-        
-        if( changed )
-        {
-            int res = JOptionPane.showConfirmDialog(this,
-                    OStrings.getString("MW_REOPEN_QUESTION"),
-                    OStrings.getString("MW_REOPEN_TITLE"),
-                    JOptionPane.YES_NO_OPTION);
-            if( res==JOptionPane.YES_OPTION )
-                doReloadProject();
-        }
-    }
 
-    /**
-     * Displays the font dialog to allow selecting
-     * the font for source, target text (in main window)
-     * and for match and glossary windows.
-     */
-    private void doFont()
-    {
-        FontSelectionDialog dlg = new FontSelectionDialog(this, m_font);
-        dlg.setVisible(true);
-        if( dlg.getReturnStatus()==FontSelectionDialog.RET_OK_CHANGED )
-        {
-            // fonts have changed
-            // first commit current translation
-            commitEntry(false); // part of fix for bug 1409309
-            m_font = dlg.getSelectedFont();
-            synchronized (editor) {
-                editor.setFont(m_font);
-            }
-            matches.setFont(m_font);
-            glossary.setFont(m_font);
-            if (m_tagWin!=null)
-                m_tagWin.setFont(m_font);
-            if (m_projWin!=null)
-                m_projWin.setFont(m_font);
-
-            Preferences.setPreference(OConsts.TF_SRC_FONT_NAME, m_font.getName());
-            Preferences.setPreference(OConsts.TF_SRC_FONT_SIZE, m_font.getSize());
-            activateEntry();
-        }
-    }
-    
-    /**
-     * Displays the filters setup dialog to allow
-     * customizing file filters in detail.
-     */
-    private void setupFilters()
-    {
-        FiltersCustomizer dlg = new FiltersCustomizer(this);
-        dlg.setVisible(true);
-        if( dlg.getReturnStatus()==FiltersCustomizer.RET_OK )
-        {
-            // saving config
-            FilterMaster.getInstance().saveConfig();
-            
-            if(isProjectLoaded())
-            {
-                // asking to reload a project
-                int res = JOptionPane.showConfirmDialog(this,
-                        OStrings.getString("MW_REOPEN_QUESTION"),
-                        OStrings.getString("MW_REOPEN_TITLE"),
-                        JOptionPane.YES_NO_OPTION);
-                if( res==JOptionPane.YES_OPTION )
-                    doReloadProject();
-            }
-        }
-        else
-        {
-            // reloading config from disk
-            FilterMaster.getInstance().loadConfig();
-        }
-    }
-    
-    /**
-     * Displays the segmentation setup dialog to allow
-     * customizing the segmentation rules in detail.
-     */
-    private void setupSegmentation()
-    {
-        SegmentationCustomizer segment_window = new SegmentationCustomizer(this);
-        segment_window.setVisible(true);
-        
-        if( segment_window.getReturnStatus()==SegmentationCustomizer.RET_OK 
-                && isProjectLoaded())
-        {
-            // asking to reload a project
-            int res = JOptionPane.showConfirmDialog(this,
-                    OStrings.getString("MW_REOPEN_QUESTION"),
-                    OStrings.getString("MW_REOPEN_TITLE"),
-                    JOptionPane.YES_NO_OPTION);
-            if( res==JOptionPane.YES_OPTION )
-                doReloadProject();
-        }
-    }
-    
-    /**
-     * Displays the workflow setup dialog to allow
-     * customizing the diverse workflow options.
-     */
-    private void setupWorkflow()
-    {
-        new WorkflowOptionsDialog(this).setVisible(true);
-    }
-    
     void doSave()
     {
         if (!isProjectLoaded())
@@ -957,6 +831,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         doCloseProject();
         doLoadProject(projectRoot);
     }
+    
     
     /**
      * Imports the file/files/folder into project's source files.
@@ -1086,26 +961,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         });
     }
     
-    private void doFind()
-    {
-        if (!isProjectLoaded())
-            return;
-
-        synchronized (editor) {
-            String selection = editor.getSelectedText();
-            if (selection != null)
-                selection.trim();
-
-            //SearchThread srch = new SearchThread(this, selection);
-            //srch.start();
-            SearchWindow search = new SearchWindow(this, selection);
-            search.addWindowListener(this);
-            DialogThread dt = new DialogThread(search);
-            dt.start();
-            m_searches.add(search);
-        }
-    }
-
     public void searchWindowClosed(SearchWindow searchWindow) {
         m_searches.remove(searchWindow);
     }
@@ -2031,7 +1886,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     }
     
     /** The font for main window (source and target text) and for match and glossary windows */
-    private Font m_font;
+    Font m_font;
     
     /** first entry number in current file. */
     public int		m_xlFirstEntry;
@@ -2076,8 +1931,8 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     private String  m_activeProj;
     public int      m_curEntryNum;
 
-    private TagValidationFrame  m_tagWin;
-    private ProjectFrame	m_projWin;
+    TagValidationFrame m_tagWin;
+    ProjectFrame m_projWin;
     public ProjectFrame getProjectFrame()
     {
         return m_projWin;
@@ -2109,7 +1964,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         return m_displaySegmentSources;
     }
     
-    private Set<SearchWindow> m_searches; // set of all open search windows
+    Set<SearchWindow> m_searches; // set of all open search windows
     
     public boolean m_projectLoaded;
     
@@ -2298,21 +2153,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         doInsertSource();
     }
     
-    public void projectImportMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doImportSourceFiles();
-    }
-    
-    public void projectWikiImportMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doWikiImport();
-    }
-    
-    public void projectReloadMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doReloadProject();
-    }
-    
     public void formComponentMoved(java.awt.event.ComponentEvent evt)
     {
         saveScreenLayout();
@@ -2323,95 +2163,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         saveScreenLayout();
     }
     
-    public void optionsWorkflowMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        setupWorkflow();
-    }
-    
-    public void optionsSentsegMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        setupSegmentation();
-    }
-    
-    public void projectEditMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doEditProject();
-    }
-    
-    public void optionsTabAdvanceCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        Preferences.setPreference(Preferences.USE_TAB_TO_ADVANCE,
-                menu.optionsTabAdvanceCheckBoxMenuItem.isSelected());
-        if( menu.optionsTabAdvanceCheckBoxMenuItem.isSelected() )
-            m_advancer = KeyEvent.VK_TAB;
-        else
-            m_advancer = KeyEvent.VK_ENTER;
-    }
-    
-    public void optionsSetupFileFiltersMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        setupFilters();
-    }
-    
-    public void optionsFontSelectionMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doFont();
-    }
-    
-    public void toolsValidateTagsMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doValidateTags();
-    }
-    
-    public void editFindInProjectMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doFind();
-    }
-    
-    public void editInsertTranslationMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doInsertTrans();
-    }
-    
-    public void editOverwriteTranslationMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doRecycleTrans();
-    }
-    
-    public void gotoNextUntranslatedMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doNextUntranslatedEntry();
-    }
-       
-    public void editRedoMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        try
-        {
-            synchronized (editor) {editor.redoOneEdit();}
-        }
-        catch (CannotRedoException cue)
-        { }
-    }
-    
-    public void editUndoMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        try
-        {
-            synchronized (editor) {editor.undoOneEdit();}
-        }
-        catch( CannotUndoException cue )
-        { }
-    }
-    
-    public void projectSaveMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        // commit the current entry first
-        commitEntry();
-        activateEntry();
-        doSave();
-    }
-    
-    public void viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
+        public void viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
        Preferences.setPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS,
                menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
         if( menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected() )
@@ -2452,13 +2204,13 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     private DockingDesktop desktop;
 
     private DockableScrollPane editorScroller;
-    private EditorTextArea editor;
+    EditorTextArea editor;
     
     private DockableScrollPane matchesScroller;
     MatchesTextArea matches;
     
     private DockableScrollPane glossaryScroller;
-    private GlossaryTextArea glossary;
+    GlossaryTextArea glossary;
     
     private SegmentHistory history = SegmentHistory.getInstance();
 }

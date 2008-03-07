@@ -2410,7 +2410,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     public void windowOpened(java.awt.event.WindowEvent evt) {
     }// </editor-fold>//GEN-END:initComponents
 
-    protected void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed
+    public void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed
         commitEntry(false);
         
         m_displaySegmentSources = 
@@ -2423,43 +2423,43 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         activateEntry();
     }//GEN-LAST:event_viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed
 
-    protected void cycleSwitchCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cycleSwitchCaseMenuItemActionPerformed
+    public void cycleSwitchCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cycleSwitchCaseMenuItemActionPerformed
         synchronized(editor) {
             editor.changeCase(EditorTextArea.CASE_CYCLE);
         }
     }//GEN-LAST:event_cycleSwitchCaseMenuItemActionPerformed
 
-    protected void titleCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleCaseMenuItemActionPerformed
+    public void titleCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleCaseMenuItemActionPerformed
         synchronized(editor) {
             editor.changeCase(EditorTextArea.CASE_TITLE);
         }
     }//GEN-LAST:event_titleCaseMenuItemActionPerformed
 
-    protected void upperCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upperCaseMenuItemActionPerformed
+    public void upperCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upperCaseMenuItemActionPerformed
         synchronized(editor) {
             editor.changeCase(EditorTextArea.CASE_UPPER);
         }
     }//GEN-LAST:event_upperCaseMenuItemActionPerformed
 
-    protected void lowerCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lowerCaseMenuItemActionPerformed
+    public void lowerCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lowerCaseMenuItemActionPerformed
         synchronized(editor) {
             editor.changeCase(EditorTextArea.CASE_LOWER);
         }
     }//GEN-LAST:event_lowerCaseMenuItemActionPerformed
 
-    protected void gotoHistoryBackMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoHistoryBackMenuItemActionPerformed
+    public void gotoHistoryBackMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoHistoryBackMenuItemActionPerformed
         doGotoHistoryBack();
     }//GEN-LAST:event_gotoHistoryBackMenuItemActionPerformed
 
-    protected void gotoHistoryForwardMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoHistoryForwardMenuItemActionPerformed
+    public void gotoHistoryForwardMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoHistoryForwardMenuItemActionPerformed
         doGotoHistoryForward();
     }//GEN-LAST:event_gotoHistoryForwardMenuItemActionPerformed
 
-    protected void optionsSpellCheckMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsSpellCheckMenuItemActionPerformed
+    public void optionsSpellCheckMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsSpellCheckMenuItemActionPerformed
         doSpellCheckSettings();
     }//GEN-LAST:event_optionsSpellCheckMenuItemActionPerformed
 
-    protected void viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed
+    public void viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed
         Preferences.setPreference(Preferences.MARK_TRANSLATED_SEGMENTS,
                 menu.viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected());
         if( menu.viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected() )
@@ -2472,11 +2472,11 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         activateEntry();
     }//GEN-LAST:event_viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed
 
-    protected void optionsRestoreGUIMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsRestoreGUIMenuItemActionPerformed
+    public void optionsRestoreGUIMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsRestoreGUIMenuItemActionPerformed
         restoreGUI();
     }//GEN-LAST:event_optionsRestoreGUIMenuItemActionPerformed
 
-    protected void viewFileListMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_viewFileListMenuItemActionPerformed
+    public void viewFileListMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_viewFileListMenuItemActionPerformed
     {//GEN-HEADEREND:event_viewFileListMenuItemActionPerformed
         if( m_projWin==null )
         {
@@ -2496,63 +2496,63 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         }
     }//GEN-LAST:event_viewFileListMenuItemActionPerformed
 
-    protected void optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed
+    public void optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed
         Preferences.setPreference(Preferences.ALWAYS_CONFIRM_QUIT,
                 menu.optionsAlwaysConfirmQuitCheckBoxMenuItem.isSelected());
     }//GEN-LAST:event_optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed
 
-    protected void editOverwriteSourceMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editOverwriteSourceMenuItemActionPerformed
+    public void editOverwriteSourceMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editOverwriteSourceMenuItemActionPerformed
     {//GEN-HEADEREND:event_editOverwriteSourceMenuItemActionPerformed
         doOverwriteSource();
     }//GEN-LAST:event_editOverwriteSourceMenuItemActionPerformed
 
-    protected void editInsertSourceMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editInsertSourceMenuItemActionPerformed
+    public void editInsertSourceMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editInsertSourceMenuItemActionPerformed
     {//GEN-HEADEREND:event_editInsertSourceMenuItemActionPerformed
         doInsertSource();
     }//GEN-LAST:event_editInsertSourceMenuItemActionPerformed
     
-    protected void projectImportMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectImportMenuItemActionPerformed
+    public void projectImportMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectImportMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectImportMenuItemActionPerformed
         doImportSourceFiles();
     }//GEN-LAST:event_projectImportMenuItemActionPerformed
     
-    protected void projectWikiImportMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectWikiImportMenuItemActionPerformed
+    public void projectWikiImportMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectWikiImportMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectWikiImportMenuItemActionPerformed
         doWikiImport();
     }//GEN-LAST:event_projectWikiImportMenuItemActionPerformed
     
-    protected void projectReloadMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectReloadMenuItemActionPerformed
+    public void projectReloadMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectReloadMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectReloadMenuItemActionPerformed
         doReloadProject();
     }//GEN-LAST:event_projectReloadMenuItemActionPerformed
     
-    protected void formComponentMoved(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentMoved
+    public void formComponentMoved(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentMoved
     {//GEN-HEADEREND:event_formComponentMoved
         saveScreenLayout();
     }//GEN-LAST:event_formComponentMoved
     
-    protected void formComponentResized(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentResized
+    public void formComponentResized(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentResized
     {//GEN-HEADEREND:event_formComponentResized
         saveScreenLayout();
     }//GEN-LAST:event_formComponentResized
     
-    protected void optionsWorkflowMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsWorkflowMenuItemActionPerformed
+    public void optionsWorkflowMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsWorkflowMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsWorkflowMenuItemActionPerformed
         setupWorkflow();
     }//GEN-LAST:event_optionsWorkflowMenuItemActionPerformed
     
-    protected void optionsSentsegMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsSentsegMenuItemActionPerformed
+    public void optionsSentsegMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsSentsegMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsSentsegMenuItemActionPerformed
         setupSegmentation();
     }//GEN-LAST:event_optionsSentsegMenuItemActionPerformed
     
-    protected void projectEditMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectEditMenuItemActionPerformed
+    public void projectEditMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectEditMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectEditMenuItemActionPerformed
         doEditProject();
     }//GEN-LAST:event_projectEditMenuItemActionPerformed
     
-    protected void optionsTabAdvanceCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsTabAdvanceCheckBoxMenuItemActionPerformed
+    public void optionsTabAdvanceCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsTabAdvanceCheckBoxMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsTabAdvanceCheckBoxMenuItemActionPerformed
         Preferences.setPreference(Preferences.USE_TAB_TO_ADVANCE,
                 menu.optionsTabAdvanceCheckBoxMenuItem.isSelected());
@@ -2562,89 +2562,89 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
             m_advancer = KeyEvent.VK_ENTER;
     }//GEN-LAST:event_optionsTabAdvanceCheckBoxMenuItemActionPerformed
     
-    protected void helpContentsMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_helpContentsMenuItemActionPerformed
+    public void helpContentsMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_helpContentsMenuItemActionPerformed
     {//GEN-HEADEREND:event_helpContentsMenuItemActionPerformed
         HelpFrame hf = HelpFrame.getInstance();
         hf.setVisible(true);
         hf.toFront();
     }//GEN-LAST:event_helpContentsMenuItemActionPerformed
     
-    protected void optionsSetupFileFiltersMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsSetupFileFiltersMenuItemActionPerformed
+    public void optionsSetupFileFiltersMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsSetupFileFiltersMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsSetupFileFiltersMenuItemActionPerformed
         setupFilters();
     }//GEN-LAST:event_optionsSetupFileFiltersMenuItemActionPerformed
     
-    protected void optionsFontSelectionMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsFontSelectionMenuItemActionPerformed
+    public void optionsFontSelectionMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsFontSelectionMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsFontSelectionMenuItemActionPerformed
         doFont();
     }//GEN-LAST:event_optionsFontSelectionMenuItemActionPerformed
     
-    protected void toolsValidateTagsMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_toolsValidateTagsMenuItemActionPerformed
+    public void toolsValidateTagsMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_toolsValidateTagsMenuItemActionPerformed
     {//GEN-HEADEREND:event_toolsValidateTagsMenuItemActionPerformed
         doValidateTags();
     }//GEN-LAST:event_toolsValidateTagsMenuItemActionPerformed
     
-    protected void editSelectFuzzy5MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy5MenuItemActionPerformed
+    public void editSelectFuzzy5MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy5MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy5MenuItemActionPerformed
         matches.setActiveMatch(4);
     }//GEN-LAST:event_editSelectFuzzy5MenuItemActionPerformed
     
-    protected void editSelectFuzzy4MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy4MenuItemActionPerformed
+    public void editSelectFuzzy4MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy4MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy4MenuItemActionPerformed
         matches.setActiveMatch(3);
     }//GEN-LAST:event_editSelectFuzzy4MenuItemActionPerformed
     
-    protected void editSelectFuzzy3MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy3MenuItemActionPerformed
+    public void editSelectFuzzy3MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy3MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy3MenuItemActionPerformed
         matches.setActiveMatch(2);
     }//GEN-LAST:event_editSelectFuzzy3MenuItemActionPerformed
     
-    protected void editSelectFuzzy2MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy2MenuItemActionPerformed
+    public void editSelectFuzzy2MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy2MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy2MenuItemActionPerformed
         matches.setActiveMatch(1);
     }//GEN-LAST:event_editSelectFuzzy2MenuItemActionPerformed
     
-    protected void editSelectFuzzy1MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy1MenuItemActionPerformed
+    public void editSelectFuzzy1MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy1MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy1MenuItemActionPerformed
         matches.setActiveMatch(0);
     }//GEN-LAST:event_editSelectFuzzy1MenuItemActionPerformed
     
-    protected void editFindInProjectMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editFindInProjectMenuItemActionPerformed
+    public void editFindInProjectMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editFindInProjectMenuItemActionPerformed
     {//GEN-HEADEREND:event_editFindInProjectMenuItemActionPerformed
         doFind();
     }//GEN-LAST:event_editFindInProjectMenuItemActionPerformed
     
-    protected void editInsertTranslationMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editInsertTranslationMenuItemActionPerformed
+    public void editInsertTranslationMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editInsertTranslationMenuItemActionPerformed
     {//GEN-HEADEREND:event_editInsertTranslationMenuItemActionPerformed
         doInsertTrans();
     }//GEN-LAST:event_editInsertTranslationMenuItemActionPerformed
     
-    protected void editOverwriteTranslationMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editOverwriteTranslationMenuItemActionPerformed
+    public void editOverwriteTranslationMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editOverwriteTranslationMenuItemActionPerformed
     {//GEN-HEADEREND:event_editOverwriteTranslationMenuItemActionPerformed
         doRecycleTrans();
     }//GEN-LAST:event_editOverwriteTranslationMenuItemActionPerformed
     
-    protected void gotoNextUntranslatedMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_gotoNextUntranslatedMenuItemActionPerformed
+    public void gotoNextUntranslatedMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_gotoNextUntranslatedMenuItemActionPerformed
     {//GEN-HEADEREND:event_gotoNextUntranslatedMenuItemActionPerformed
         doNextUntranslatedEntry();
     }//GEN-LAST:event_gotoNextUntranslatedMenuItemActionPerformed
     
-    protected void gotoPreviousSegmentMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_gotoPreviousSegmentMenuItemActionPerformed
+    public void gotoPreviousSegmentMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_gotoPreviousSegmentMenuItemActionPerformed
     {//GEN-HEADEREND:event_gotoPreviousSegmentMenuItemActionPerformed
         doPrevEntry();
     }//GEN-LAST:event_gotoPreviousSegmentMenuItemActionPerformed
     
-    protected void gotoSegmentMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_gotoSegmentMenuItemActionPerformed
+    public void gotoSegmentMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_gotoSegmentMenuItemActionPerformed
     {//GEN-HEADEREND:event_gotoSegmentMenuItemActionPerformed
         doGotoEntry();
     }//GEN-LAST:event_gotoSegmentMenuItemActionPerformed
     
-    protected void gotoNextSegmentMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_gotoNextSegmentMenuItemActionPerformed
+    public void gotoNextSegmentMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_gotoNextSegmentMenuItemActionPerformed
     {//GEN-HEADEREND:event_gotoNextSegmentMenuItemActionPerformed
         doNextEntry();
     }//GEN-LAST:event_gotoNextSegmentMenuItemActionPerformed
     
-    protected void editRedoMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editRedoMenuItemActionPerformed
+    public void editRedoMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editRedoMenuItemActionPerformed
     {//GEN-HEADEREND:event_editRedoMenuItemActionPerformed
         try
         {
@@ -2654,7 +2654,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         { }
     }//GEN-LAST:event_editRedoMenuItemActionPerformed
     
-    protected void editUndoMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editUndoMenuItemActionPerformed
+    public void editUndoMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editUndoMenuItemActionPerformed
     {//GEN-HEADEREND:event_editUndoMenuItemActionPerformed
         try
         {
@@ -2664,17 +2664,17 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         { }
     }//GEN-LAST:event_editUndoMenuItemActionPerformed
 
-    protected void projectCompileMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectCompileMenuItemActionPerformed
+    public void projectCompileMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectCompileMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectCompileMenuItemActionPerformed
         doCompileProject();
     }//GEN-LAST:event_projectCompileMenuItemActionPerformed
     
-    protected void projectCloseMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectCloseMenuItemActionPerformed
+    public void projectCloseMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectCloseMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectCloseMenuItemActionPerformed
         doCloseProject();
     }//GEN-LAST:event_projectCloseMenuItemActionPerformed
     
-    protected void projectSaveMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectSaveMenuItemActionPerformed
+    public void projectSaveMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectSaveMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectSaveMenuItemActionPerformed
         // commit the current entry first
         commitEntry();
@@ -2682,31 +2682,31 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         doSave();
     }//GEN-LAST:event_projectSaveMenuItemActionPerformed
     
-    protected void projectOpenMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectOpenMenuItemActionPerformed
+    public void projectOpenMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectOpenMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectOpenMenuItemActionPerformed
         doLoadProject();
     }//GEN-LAST:event_projectOpenMenuItemActionPerformed
     
-    protected void projectNewMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectNewMenuItemActionPerformed
+    public void projectNewMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectNewMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectNewMenuItemActionPerformed
         doCreateProject();
     }//GEN-LAST:event_projectNewMenuItemActionPerformed
     
-    protected void projectExitMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectExitMenuItemActionPerformed
+    public void projectExitMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectExitMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectExitMenuItemActionPerformed
         doQuit();
     }//GEN-LAST:event_projectExitMenuItemActionPerformed
     
-    protected void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
+    public void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
     {//GEN-HEADEREND:event_formWindowClosing
         doQuit();
     }//GEN-LAST:event_formWindowClosing
     
-    protected void helpAboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpAboutMenuItemActionPerformed
+    public void helpAboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpAboutMenuItemActionPerformed
         doAbout();
     }//GEN-LAST:event_helpAboutMenuItemActionPerformed
 
-    protected void viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed
+    public void viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed
        Preferences.setPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS,
                menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
         if( menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected() )

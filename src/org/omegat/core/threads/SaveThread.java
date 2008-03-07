@@ -27,6 +27,7 @@ package org.omegat.core.threads;
 import java.text.DateFormat;
 import java.util.Date;
 
+import org.omegat.core.Core;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 
@@ -60,8 +61,8 @@ class SaveThread extends Thread
             {
                 if( CommandThread.core.isProjectModified() )
                 {
-                    CommandThread.core.save();
-                    CommandThread.core.m_transFrame.setMessageText(
+                    Core.getDataEngine().saveProject();
+                    Core.getMainWindow().showStatusMessage(
                             StaticUtils.format(
                                     OStrings.getString("ST_PROJECT_AUTOSAVED"),
                                     new Object[]

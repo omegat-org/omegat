@@ -64,6 +64,7 @@ import javax.swing.undo.CannotUndoException;
 
 import net.roydesign.mac.MRJAdapter;
 
+import org.omegat.core.Core;
 import org.omegat.core.ProjectProperties;
 import org.omegat.core.StringEntry;
 import org.omegat.core.matching.NearString;
@@ -113,7 +114,7 @@ import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class MainWindow extends JFrame implements WindowListener, ComponentListener
+public class MainWindow extends JFrame implements WindowListener, ComponentListener, IMainWindow
 {
     protected final MainWindowMenu menu;
     
@@ -962,11 +963,11 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         if (!isProjectLoaded())
             return;
         
-        setMessageText( OStrings.getString("MW_STATUS_SAVING"));
+        showStatusMessage(OStrings.getString("MW_STATUS_SAVING"));
         
-        CommandThread.core.save();
+        Core.getDataEngine().saveProject();
         
-        setMessageText( OStrings.getString("MW_STATUS_SAVED"));
+        showStatusMessage(OStrings.getString("MW_STATUS_SAVED"));
     }
     
     /**
@@ -1333,11 +1334,15 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         }
     }
 
-    /* updates status label */
-    public void setMessageText(String str)
-    {
-        if( str.length()==0 )
-            str = new String()+' ';
+    /**
+     * Show message in status bar.
+     * 
+     * @param str
+     *                message text
+     */
+    public void showStatusMessage(String str) {
+        if (str.length() == 0)
+            str = new String() + ' ';
         statusLabel.setText(str);
     }
 
@@ -1907,23 +1912,23 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
                     Object obj[] = {
                         new Integer(nearLength),
                                 new Integer(m_glossaryLength) };
-                                setMessageText(StaticUtils.format(
+                                showStatusMessage(StaticUtils.format(
                                         OStrings.getString("TF_NUM_NEAR_AND_GLOSSARY"), obj));
                 }
                 else if (nearLength > 0)
                 {
                     Object obj[] = { new Integer(nearLength) };
-                    setMessageText(StaticUtils.format(
+                    showStatusMessage(StaticUtils.format(
                             OStrings.getString("TF_NUM_NEAR"), obj));
                 }
                 else if (m_glossaryLength > 0)
                 {
                     Object obj[] = { new Integer(m_glossaryLength) };
-                    setMessageText(StaticUtils.format(
+                    showStatusMessage(StaticUtils.format(
                             OStrings.getString("TF_NUM_GLOSSARY"), obj));
                 }
                 else
-                    setMessageText(new String());                                       // NOI18N
+                    showStatusMessage(new String());                                       // NOI18N
             }
             catch (Exception exception) {
                 Log.log("ERROR: exception while setting message text:");
@@ -2026,7 +2031,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
      */
     public void displayWarning(String msg, Throwable e)
     {
-        setMessageText(msg);
+	showStatusMessage(msg);
         String fulltext = msg;
         if( e!=null )
             fulltext+= "\n" + e.toString();                                     // NOI18N
@@ -2042,7 +2047,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
      */
     public void displayError(String msg, Throwable e)
     {
-        setMessageText(msg);
+	showStatusMessage(msg);
         String fulltext = msg;
         if( e!=null )
             fulltext+= "\n" + e.toString();                                     // NOI18N

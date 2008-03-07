@@ -29,6 +29,7 @@ import java.util.Locale;
 
 import javax.swing.UIManager;
 
+import org.omegat.core.Core;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
@@ -92,6 +93,8 @@ public class Main
         CommandThread.core.start();
         
         mainwindow.setVisible(true);
+        
+        Core.initialize(CommandThread.core, mainwindow);
     }
 }
 

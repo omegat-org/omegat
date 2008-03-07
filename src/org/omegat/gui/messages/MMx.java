@@ -24,6 +24,7 @@
 
 package org.omegat.gui.messages;
 
+import org.omegat.core.Core;
 import org.omegat.gui.main.MainWindow;
 
 /**
@@ -80,7 +81,7 @@ class MMx implements Runnable
 				m_tf.doGotoEntry(m_msg);
 				break;
 			case CMD_SET_STATUS:
-				m_tf.setMessageText(m_msg);
+			        Core.getMainWindow().showStatusMessage(m_msg);
 				break;
 			case CMD_ERROR_MESSAGE:
 				m_tf.displayError(m_msg, m_throw);

@@ -42,10 +42,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.omegat.core.Core;
 import org.omegat.core.LegacyTM;
 import org.omegat.core.ProjectProperties;
 import org.omegat.core.StringEntry;
 import org.omegat.core.TransMemory;
+import org.omegat.core.data.IDataEngine;
 import org.omegat.core.data.Statistics;
 import org.omegat.core.glossary.GlossaryManager;
 import org.omegat.core.matching.FuzzyMatcher;
@@ -75,7 +77,7 @@ import org.omegat.util.TMXWriter;
  * @author Maxym Mykhalchuk
  * @author Bartko Zoltan
  */
-public class CommandThread extends Thread
+public class CommandThread extends Thread implements IDataEngine
 {
     
     /**
@@ -151,7 +153,7 @@ public class CommandThread extends Thread
                         break;
                         
                     case RequestPacket.SAVE:
-                        save();
+                        saveProject();
                         break;
                 }
             }
@@ -219,7 +221,7 @@ public class CommandThread extends Thread
             // disable future saves
             if (m_saveCount >= 0)
                 m_saveCount = 1;
-            save();
+            saveProject();
         }
         
         m_strEntryHash.clear();
@@ -429,7 +431,7 @@ public class CommandThread extends Thread
             return;
         
         // save project first
-        save();
+        saveProject();
 
         // build 3 TMX files:
         // - OmegaT-specific, with inline OmegaT formatting tags
@@ -500,16 +502,16 @@ public class CommandThread extends Thread
                 continue;
             // shorten filename to that which is relative to src root
             String midName = filename.substring(srcRoot.length());
-            m_transFrame.setMessageText(StaticUtils.format(
-                OStrings.getString("CT_COMPILE_FILE_MX"), new Object[] {midName}));
+            String message = StaticUtils.format(OStrings.getString("CT_COMPILE_FILE_MX"), new Object[] { midName });
+	    Core.getMainWindow().showStatusMessage(message);
 
             fm.translateFile(srcRoot, midName, locRoot, processedFiles);
         }
-        m_transFrame.setMessageText(OStrings.getString("CT_COMPILE_DONE_MX"));
+        Core.getMainWindow().showStatusMessage(OStrings.getString("CT_COMPILE_DONE_MX"));
     }
     
     /** Saves the translation memory and preferences */
-    public void save()
+    public void saveProject()
     {
         if( isProjectModified() )
             forceSave(false);
@@ -726,7 +728,7 @@ public class CommandThread extends Thread
             // since the source files may have changed since the last time
             //  they were loaded, load each string then look for it's
             //  owner
-            m_transFrame.setMessageText(OStrings.getString("CT_LOAD_TMX"));
+            Core.getMainWindow().showStatusMessage(OStrings.getString("CT_LOAD_TMX"));
             loadTMXFile(proj.getAbsolutePath(), "UTF-8", true); // NOI18N
         }
         catch (IOException e)
@@ -780,7 +782,7 @@ public class CommandThread extends Thread
             // feed file name to project window
             String filepath = filename.substring(m_config.getSourceRoot().length());
             
-            m_transFrame.setMessageText(StaticUtils.format(
+            Core.getMainWindow().showStatusMessage(StaticUtils.format(
                 OStrings.getString("CT_LOAD_FILE_MX"), new Object[] {filepath}));
             
             m_curFile = new ProjectFileData();
@@ -798,7 +800,7 @@ public class CommandThread extends Thread
                 m_projWin.addFile(filepath, numEntries());
             }
         }
-        m_transFrame.setMessageText(OStrings.getString("CT_LOAD_SRC_COMPLETE"));
+        Core.getMainWindow().showStatusMessage(OStrings.getString("CT_LOAD_SRC_COMPLETE"));
         m_curFile = null;
         loadTranslations();
 //                                  Call is too early 

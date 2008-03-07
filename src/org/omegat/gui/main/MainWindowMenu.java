@@ -113,8 +113,6 @@ public class MainWindowMenu implements ActionListener {
             mainWindow.viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed(evt);
         } else if (evt.getSource() == toolsValidateTagsMenuItem) {
             mainWindow.toolsValidateTagsMenuItemActionPerformed(evt);
-        } else if (evt.getSource() == optionsMenu) {
-            mainWindow.optionsMenuActionPerformed(evt);
         } else if (evt.getSource() == optionsTabAdvanceCheckBoxMenuItem) {
             mainWindow.optionsTabAdvanceCheckBoxMenuItemActionPerformed(evt);
         } else if (evt.getSource() == optionsAlwaysConfirmQuitCheckBoxMenuItem) {

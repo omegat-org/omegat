@@ -2457,10 +2457,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         doSpellCheckSettings();
     }//GEN-LAST:event_optionsSpellCheckMenuItemActionPerformed
 
-    protected void optionsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsMenuActionPerformed
-// TODO add your handling code here:
-    }//GEN-LAST:event_optionsMenuActionPerformed
-
     protected void viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed
         Preferences.setPreference(Preferences.MARK_TRANSLATED_SEGMENTS,
                 menu.viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected());

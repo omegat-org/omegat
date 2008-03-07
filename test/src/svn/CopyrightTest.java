@@ -40,7 +40,7 @@ import org.omegat.util.LFileCopy;
  */
 public class CopyrightTest extends TestCase {
     protected static final String[] MUST_EXIST = new String[] { "OmegaT - Computer Assisted Translation (CAT) tool",
-            "Copyright (C)", "Home page: http://www.omegat.org/omegat/omegat.html", "This program is free software",
+            "Copyright (C)", "Home page: http://www.omegat.org/", "This program is free software",
             "GNU General Public License" };
 
     public void testCopyright() throws Exception {
@@ -51,20 +51,18 @@ public class CopyrightTest extends TestCase {
         for (File f : sourceFiles) {
             LFileCopy.copy(f, fdata);
             String data = fdata.toString("ISO-8859-1");
-            assertTrue("There is no copyright note in " + f.getAbsolutePath(), checkNote(data));
+            checkNote(f, data);
             fdata.reset();
         }
     }
 
-    protected boolean checkNote(String data) {
+    protected void checkNote(File f, String data) {
         int pos = data.indexOf("\npackage ");
         if (pos > 0)
             data = data.substring(0, pos);
         for (String con : MUST_EXIST) {
-            if (!data.contains(con))
-                return false;
+            assertTrue("There is no copyright note in '" + f.getAbsolutePath() + "' : " + con, data.contains(con));
         }
-        return true;
     }
 
     protected void list(File dir, List<File> files) {

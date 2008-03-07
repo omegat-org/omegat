@@ -7,6 +7,7 @@
                          Benjamin Siband, and Kim Bruning
                2007 Zoltan Bartko
                2008 Andrzej Sawula
+ Portions copyright 2008 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -110,6 +111,7 @@ import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Zoltan Bartko - bartkozoltan@bartkozoltan.com
  * @author Andrzej Sawula
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class MainWindow extends JFrame implements WindowListener, ComponentListener
 {

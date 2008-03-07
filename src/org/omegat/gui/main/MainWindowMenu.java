@@ -35,7 +35,6 @@ import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ResourceBundle;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
@@ -104,62 +103,13 @@ public class MainWindowMenu implements ActionListener {
      */
     JMenuBar initComponents() {
         mainMenu = new JMenuBar();
-        projectMenu = createMenu("TF_MENU_FILE");
-        editMenu = createMenu("TF_MENU_EDIT");
-        gotoMenu = createMenu("MW_GOTOMENU");
-        viewMenu = createMenu("MW_VIEW_MENU");
-        toolsMenu = createMenu("TF_MENU_TOOLS");
-        optionsMenu = createMenu("MW_OPTIONSMENU");
-        helpMenu = createMenu("TF_MENU_HELP");
-
-        projectExitMenuItem = new JMenuItem();
-        projectNewMenuItem = new JMenuItem();
-        projectOpenMenuItem = new JMenuItem();
-        projectImportMenuItem = new JMenuItem();
-        projectWikiImportMenuItem = new JMenuItem();
-        projectReloadMenuItem = new JMenuItem();
-        projectCloseMenuItem = new JMenuItem();
-        projectSaveMenuItem = new JMenuItem();
-        projectCompileMenuItem = new JMenuItem();
-        projectEditMenuItem = new JMenuItem();
-        viewFileListMenuItem = new JMenuItem();
-        editUndoMenuItem = new JMenuItem();
-        editRedoMenuItem = new JMenuItem();
-        editOverwriteTranslationMenuItem = new JMenuItem();
-        editInsertTranslationMenuItem = new JMenuItem();
-        editOverwriteSourceMenuItem = new JMenuItem();
-        editInsertSourceMenuItem = new JMenuItem();
-        editFindInProjectMenuItem = new JMenuItem();
-        switchCaseSubMenu = new JMenu();
-        lowerCaseMenuItem = new JMenuItem();
-        upperCaseMenuItem = new JMenuItem();
-        titleCaseMenuItem = new JMenuItem();
-        cycleSwitchCaseMenuItem = new JMenuItem();
-        editSelectFuzzy1MenuItem = new JMenuItem();
-        editSelectFuzzy2MenuItem = new JMenuItem();
-        editSelectFuzzy3MenuItem = new JMenuItem();
-        editSelectFuzzy4MenuItem = new JMenuItem();
-        editSelectFuzzy5MenuItem = new JMenuItem();
-        gotoNextUntranslatedMenuItem = new JMenuItem();
-        gotoNextSegmentMenuItem = new JMenuItem();
-        gotoPreviousSegmentMenuItem = new JMenuItem();
-        gotoSegmentMenuItem = new JMenuItem();
-        gotoHistoryForwardMenuItem = new JMenuItem();
-        gotoHistoryBackMenuItem = new JMenuItem();
-        viewMarkTranslatedSegmentsCheckBoxMenuItem = new JCheckBoxMenuItem();
-        viewMarkUntranslatedSegmentsCheckBoxMenuItem = new JCheckBoxMenuItem();
-        viewDisplaySegmentSourceCheckBoxMenuItem = new JCheckBoxMenuItem();
-        toolsValidateTagsMenuItem = new JMenuItem();
-        optionsTabAdvanceCheckBoxMenuItem = new JCheckBoxMenuItem();
-        optionsAlwaysConfirmQuitCheckBoxMenuItem = new JCheckBoxMenuItem();
-        optionsFontSelectionMenuItem = new JMenuItem();
-        optionsSetupFileFiltersMenuItem = new JMenuItem();
-        optionsSentsegMenuItem = new JMenuItem();
-        optionsSpellCheckMenuItem = new JMenuItem();
-        optionsWorkflowMenuItem = new JMenuItem();
-        optionsRestoreGUIMenuItem = new JMenuItem();
-        helpContentsMenuItem = new JMenuItem();
-        helpAboutMenuItem = new JMenuItem();
+        mainMenu.add(projectMenu = createMenu("TF_MENU_FILE"));
+        mainMenu.add(editMenu = createMenu("TF_MENU_EDIT"));
+        mainMenu.add(gotoMenu = createMenu("MW_GOTOMENU"));
+        mainMenu.add(viewMenu = createMenu("MW_VIEW_MENU"));
+        mainMenu.add(toolsMenu = createMenu("TF_MENU_TOOLS"));
+        mainMenu.add(optionsMenu = createMenu("MW_OPTIONSMENU"));
+        mainMenu.add(helpMenu = createMenu("TF_MENU_HELP"));
 
         projectMenu.add(projectNewMenuItem = createMenuItem("TF_MENU_FILE_CREATE"));
         projectMenu.add(projectOpenMenuItem = createMenuItem("TF_MENU_FILE_OPEN"));
@@ -176,220 +126,62 @@ public class MainWindowMenu implements ActionListener {
         projectMenu.add(viewFileListMenuItem = createMenuItem("TF_MENU_FILE_PROJWIN"));
         projectExitMenuItem = createMenuItem("TF_MENU_FILE_QUIT");
 
-        Mnemonics.setLocalizedText(editUndoMenuItem, OStrings.getString("TF_MENU_EDIT_UNDO"));
-        editUndoMenuItem.addActionListener(this);
-
-        editMenu.add(editUndoMenuItem);
-
-        Mnemonics.setLocalizedText(editRedoMenuItem, OStrings.getString("TF_MENU_EDIT_REDO"));
-        editRedoMenuItem.addActionListener(this);
-
-        editMenu.add(editRedoMenuItem);
-
+        editMenu.add(editUndoMenuItem = createMenuItem("TF_MENU_EDIT_UNDO"));
+        editMenu.add(editRedoMenuItem = createMenuItem("TF_MENU_EDIT_REDO"));
         editMenu.add(new JSeparator());
-
-        Mnemonics.setLocalizedText(editOverwriteTranslationMenuItem, OStrings.getString("TF_MENU_EDIT_RECYCLE"));
-        editOverwriteTranslationMenuItem.addActionListener(this);
-
-        editMenu.add(editOverwriteTranslationMenuItem);
-
-        Mnemonics.setLocalizedText(editInsertTranslationMenuItem, OStrings.getString("TF_MENU_EDIT_INSERT"));
-        editInsertTranslationMenuItem.addActionListener(this);
-
-        editMenu.add(editInsertTranslationMenuItem);
-
+        editMenu.add(editOverwriteTranslationMenuItem = createMenuItem("TF_MENU_EDIT_RECYCLE"));
+        editMenu.add(editInsertTranslationMenuItem = createMenuItem("TF_MENU_EDIT_INSERT"));
         editMenu.add(new JSeparator());
-
-        Mnemonics.setLocalizedText(editOverwriteSourceMenuItem, OStrings.getString("TF_MENU_EDIT_SOURCE_OVERWRITE"));
-        editOverwriteSourceMenuItem.addActionListener(this);
-
-        editMenu.add(editOverwriteSourceMenuItem);
-
-        Mnemonics.setLocalizedText(editInsertSourceMenuItem, OStrings.getString("TF_MENU_EDIT_SOURCE_INSERT"));
-        editInsertSourceMenuItem.addActionListener(this);
-
-        editMenu.add(editInsertSourceMenuItem);
-
+        editMenu.add(editOverwriteSourceMenuItem = createMenuItem("TF_MENU_EDIT_SOURCE_OVERWRITE"));
+        editMenu.add(editInsertSourceMenuItem = createMenuItem("TF_MENU_EDIT_SOURCE_INSERT"));
         editMenu.add(new JSeparator());
-
-        Mnemonics.setLocalizedText(editFindInProjectMenuItem, OStrings.getString("TF_MENU_EDIT_FIND"));
-        editFindInProjectMenuItem.addActionListener(this);
-
-        editMenu.add(editFindInProjectMenuItem);
-
+        editMenu.add(editFindInProjectMenuItem = createMenuItem("TF_MENU_EDIT_FIND"));
         editMenu.add(new JSeparator());
+        editMenu.add(switchCaseSubMenu = createMenu("TF_EDIT_MENU_SWITCH_CASE"));
+        editMenu.add(new JSeparator());
+        editMenu.add(editSelectFuzzy1MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_1"));
+        editMenu.add(editSelectFuzzy2MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_2"));
+        editMenu.add(editSelectFuzzy3MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_3"));
+        editMenu.add(editSelectFuzzy4MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_4"));
+        editMenu.add(editSelectFuzzy5MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_5"));
 
-        Mnemonics.setLocalizedText(switchCaseSubMenu, OStrings.getString("TF_EDIT_MENU_SWITCH_CASE"));
-        Mnemonics.setLocalizedText(lowerCaseMenuItem, OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_LOWER"));
-        lowerCaseMenuItem.addActionListener(this);
-
-        switchCaseSubMenu.add(lowerCaseMenuItem);
-
-        Mnemonics.setLocalizedText(upperCaseMenuItem, OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_UPPER"));
-        upperCaseMenuItem.addActionListener(this);
-
-        switchCaseSubMenu.add(upperCaseMenuItem);
-
-        Mnemonics.setLocalizedText(titleCaseMenuItem, OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_TITLE"));
-        titleCaseMenuItem.addActionListener(this);
-
-        switchCaseSubMenu.add(titleCaseMenuItem);
-
+        switchCaseSubMenu.add(lowerCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_LOWER"));
+        switchCaseSubMenu.add(upperCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_UPPER"));
+        switchCaseSubMenu.add(titleCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_TITLE"));
         switchCaseSubMenu.add(new JSeparator());
+        switchCaseSubMenu.add(cycleSwitchCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_CYCLE"));
+
+        gotoMenu.add(gotoNextUntranslatedMenuItem = createMenuItem("TF_MENU_EDIT_UNTRANS"));
+        gotoMenu.add(gotoNextSegmentMenuItem = createMenuItem("TF_MENU_EDIT_NEXT"));
+        gotoMenu.add(gotoPreviousSegmentMenuItem = createMenuItem("TF_MENU_EDIT_PREV"));
+        gotoMenu.add(gotoSegmentMenuItem = createMenuItem("TF_MENU_EDIT_GOTO"));
+        gotoMenu.add(new JSeparator());
+        gotoMenu.add(gotoHistoryForwardMenuItem = createMenuItem("TF_MENU_GOTO_FORWARD_IN_HISTORY"));
+        gotoMenu.add(gotoHistoryBackMenuItem = createMenuItem("TF_MENU_GOTO_BACK_IN_HISTORY"));
+
+        viewMenu.add(viewMarkTranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_MARK_TRANSLATED"));
+        viewMenu.add(viewMarkUntranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_MARK_UNTRANSLATED"));
+        viewMenu.add(viewDisplaySegmentSourceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES"));
+
+        toolsMenu.add(toolsValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_VALIDATE"));
+
+        optionsMenu.add(optionsTabAdvanceCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_ADVANCE"));
+        optionsMenu.add(optionsAlwaysConfirmQuitCheckBoxMenuItem = createCheckboxMenuItem("MW_OPTIONSMENU_ALWAYS_CONFIRM_QUIT"));
+        optionsMenu.add(new JSeparator());
+        optionsMenu.add(optionsFontSelectionMenuItem = createMenuItem("TF_MENU_DISPLAY_FONT"));
+        optionsMenu.add(optionsSetupFileFiltersMenuItem = createMenuItem("TF_MENU_DISPLAY_FILTERS"));
+        optionsMenu.add(optionsSentsegMenuItem = createMenuItem("MW_OPTIONSMENU_SENTSEG"));
+        optionsMenu.add(optionsSpellCheckMenuItem = createMenuItem("MW_OPTIONSMENU_SPELLCHECK"));
+        optionsMenu.add(optionsWorkflowMenuItem = createMenuItem("MW_OPTIONSMENU_WORKFLOW"));
+        optionsMenu.add(optionsRestoreGUIMenuItem = createMenuItem("MW_OPTIONSMENU_RESTORE_GUI"));
+
+        helpMenu.add(helpContentsMenuItem = createMenuItem("TF_MENU_HELP_CONTENTS"));
+        helpMenu.add(helpAboutMenuItem = createMenuItem("TF_MENU_HELP_ABOUT"));
 
         cycleSwitchCaseMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, InputEvent.SHIFT_MASK));
-        Mnemonics.setLocalizedText(cycleSwitchCaseMenuItem, OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_CYCLE"));
-        cycleSwitchCaseMenuItem.addActionListener(this);
-
-        switchCaseSubMenu.add(cycleSwitchCaseMenuItem);
-
-        editMenu.add(switchCaseSubMenu);
-
-        editMenu.add(new JSeparator());
-
-        Mnemonics.setLocalizedText(editSelectFuzzy1MenuItem, OStrings.getString("TF_MENU_EDIT_COMPARE_1"));
-        editSelectFuzzy1MenuItem.addActionListener(this);
-
-        editMenu.add(editSelectFuzzy1MenuItem);
-
-        Mnemonics.setLocalizedText(editSelectFuzzy2MenuItem, OStrings.getString("TF_MENU_EDIT_COMPARE_2"));
-        editSelectFuzzy2MenuItem.addActionListener(this);
-
-        editMenu.add(editSelectFuzzy2MenuItem);
-
-        Mnemonics.setLocalizedText(editSelectFuzzy3MenuItem, OStrings.getString("TF_MENU_EDIT_COMPARE_3"));
-        editSelectFuzzy3MenuItem.addActionListener(this);
-
-        editMenu.add(editSelectFuzzy3MenuItem);
-
-        Mnemonics.setLocalizedText(editSelectFuzzy4MenuItem, OStrings.getString("TF_MENU_EDIT_COMPARE_4"));
-        editSelectFuzzy4MenuItem.addActionListener(this);
-
-        editMenu.add(editSelectFuzzy4MenuItem);
-
-        Mnemonics.setLocalizedText(editSelectFuzzy5MenuItem, OStrings.getString("TF_MENU_EDIT_COMPARE_5"));
-        editSelectFuzzy5MenuItem.addActionListener(this);
-
-        editMenu.add(editSelectFuzzy5MenuItem);
-
-        Mnemonics.setLocalizedText(gotoNextUntranslatedMenuItem, OStrings.getString("TF_MENU_EDIT_UNTRANS"));
-        gotoNextUntranslatedMenuItem.addActionListener(this);
-
-        gotoMenu.add(gotoNextUntranslatedMenuItem);
-
-        Mnemonics.setLocalizedText(gotoNextSegmentMenuItem, OStrings.getString("TF_MENU_EDIT_NEXT"));
-        gotoNextSegmentMenuItem.addActionListener(this);
-
-        gotoMenu.add(gotoNextSegmentMenuItem);
-
-        Mnemonics.setLocalizedText(gotoPreviousSegmentMenuItem, OStrings.getString("TF_MENU_EDIT_PREV"));
-        gotoPreviousSegmentMenuItem.addActionListener(this);
-
-        gotoMenu.add(gotoPreviousSegmentMenuItem);
-
-        Mnemonics.setLocalizedText(gotoSegmentMenuItem, OStrings.getString("TF_MENU_EDIT_GOTO"));
-        gotoSegmentMenuItem.addActionListener(this);
-
-        gotoMenu.add(gotoSegmentMenuItem);
-
-        gotoMenu.add(new JSeparator());
-
-        Mnemonics.setLocalizedText(gotoHistoryForwardMenuItem, OStrings.getString("TF_MENU_GOTO_FORWARD_IN_HISTORY"));
-        gotoHistoryForwardMenuItem.addActionListener(this);
-
-        gotoMenu.add(gotoHistoryForwardMenuItem);
-
-        Mnemonics.setLocalizedText(gotoHistoryBackMenuItem, OStrings.getString("TF_MENU_GOTO_BACK_IN_HISTORY"));
-        gotoHistoryBackMenuItem.addActionListener(this);
-
-        gotoMenu.add(gotoHistoryBackMenuItem);
-
-        Mnemonics.setLocalizedText(viewMarkTranslatedSegmentsCheckBoxMenuItem, OStrings
-                .getString("TF_MENU_DISPLAY_MARK_TRANSLATED"));
-        viewMarkTranslatedSegmentsCheckBoxMenuItem.addActionListener(this);
-
-        viewMenu.add(viewMarkTranslatedSegmentsCheckBoxMenuItem);
-
-        Mnemonics.setLocalizedText(viewMarkUntranslatedSegmentsCheckBoxMenuItem, ResourceBundle.getBundle(
-                "org/omegat/Bundle").getString("TF_MENU_DISPLAY_MARK_UNTRANSLATED"));
-        viewMarkUntranslatedSegmentsCheckBoxMenuItem.addActionListener(this);
-
-        viewMenu.add(viewMarkUntranslatedSegmentsCheckBoxMenuItem);
-
-        Mnemonics.setLocalizedText(viewDisplaySegmentSourceCheckBoxMenuItem, OStrings
-                .getString("MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES"));
-        viewDisplaySegmentSourceCheckBoxMenuItem.addActionListener(this);
-
-        viewMenu.add(viewDisplaySegmentSourceCheckBoxMenuItem);
-
-        Mnemonics.setLocalizedText(toolsValidateTagsMenuItem, OStrings.getString("TF_MENU_TOOLS_VALIDATE"));
-        toolsValidateTagsMenuItem.addActionListener(this);
-
-        toolsMenu.add(toolsValidateTagsMenuItem);
-
-        Mnemonics.setLocalizedText(optionsTabAdvanceCheckBoxMenuItem, OStrings.getString("TF_MENU_DISPLAY_ADVANCE"));
-        optionsTabAdvanceCheckBoxMenuItem.addActionListener(this);
-
-        optionsMenu.add(optionsTabAdvanceCheckBoxMenuItem);
-
-        Mnemonics.setLocalizedText(optionsAlwaysConfirmQuitCheckBoxMenuItem, OStrings
-                .getString("MW_OPTIONSMENU_ALWAYS_CONFIRM_QUIT"));
-        optionsAlwaysConfirmQuitCheckBoxMenuItem.addActionListener(this);
-
-        optionsMenu.add(optionsAlwaysConfirmQuitCheckBoxMenuItem);
-
-        optionsMenu.add(new JSeparator());
-
-        Mnemonics.setLocalizedText(optionsFontSelectionMenuItem, OStrings.getString("TF_MENU_DISPLAY_FONT"));
-        optionsFontSelectionMenuItem.addActionListener(this);
-
-        optionsMenu.add(optionsFontSelectionMenuItem);
-
-        Mnemonics.setLocalizedText(optionsSetupFileFiltersMenuItem, OStrings.getString("TF_MENU_DISPLAY_FILTERS"));
-        optionsSetupFileFiltersMenuItem.addActionListener(this);
-
-        optionsMenu.add(optionsSetupFileFiltersMenuItem);
-
-        Mnemonics.setLocalizedText(optionsSentsegMenuItem, OStrings.getString("MW_OPTIONSMENU_SENTSEG"));
-        optionsSentsegMenuItem.addActionListener(this);
-
-        optionsMenu.add(optionsSentsegMenuItem);
-
-        Mnemonics.setLocalizedText(optionsSpellCheckMenuItem, OStrings.getString("MW_OPTIONSMENU_SPELLCHECK"));
-        optionsSpellCheckMenuItem.addActionListener(this);
-
-        optionsMenu.add(optionsSpellCheckMenuItem);
-
-        Mnemonics.setLocalizedText(optionsWorkflowMenuItem, OStrings.getString("MW_OPTIONSMENU_WORKFLOW"));
-        optionsWorkflowMenuItem.addActionListener(this);
-
-        optionsMenu.add(optionsWorkflowMenuItem);
-
-        Mnemonics.setLocalizedText(optionsRestoreGUIMenuItem, OStrings.getString("MW_OPTIONSMENU_RESTORE_GUI"));
-        optionsRestoreGUIMenuItem.addActionListener(this);
-
-        optionsMenu.add(optionsRestoreGUIMenuItem);
-
         helpContentsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
-        Mnemonics.setLocalizedText(helpContentsMenuItem, OStrings.getString("TF_MENU_HELP_CONTENTS"));
-        helpContentsMenuItem.addActionListener(this);
-
-        helpMenu.add(helpContentsMenuItem);
-
-        Mnemonics.setLocalizedText(helpAboutMenuItem, OStrings.getString("TF_MENU_HELP_ABOUT"));
-        helpAboutMenuItem.addActionListener(this);
-
-        helpMenu.add(helpAboutMenuItem);
 
         setActionCommands();
-
-        mainMenu.add(projectMenu);
-        mainMenu.add(editMenu);
-        mainMenu.add(gotoMenu);
-        mainMenu.add(viewMenu);
-        mainMenu.add(toolsMenu);
-        mainMenu.add(optionsMenu);
-        mainMenu.add(helpMenu);
 
         return mainMenu;
     }
@@ -416,6 +208,20 @@ public class MainWindowMenu implements ActionListener {
      */
     private JMenuItem createMenuItem(final String titleKey) {
         JMenuItem result = new JMenuItem();
+        Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
+        result.addActionListener(this);
+        return result;
+    }
+
+    /**
+     * Create menu item instance and set title.
+     * 
+     * @param titleKey
+     *            title name key in resource bundle
+     * @return menu item instance
+     */
+    private JCheckBoxMenuItem createCheckboxMenuItem(final String titleKey) {
+        JCheckBoxMenuItem result = new JCheckBoxMenuItem();
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
         result.addActionListener(this);
         return result;
@@ -497,85 +303,34 @@ public class MainWindowMenu implements ActionListener {
     }
 
     /**
-     * Updates menu items (enables/disables) upon <b>opening</b> project
+     * Enable or disable items depend of project open or close.
+     * 
+     * @param isProjectOpened
+     *            project open status: true if opened, false if closed
      */
-    void uiUpdateOnProjectOpen() {
-        projectNewMenuItem.setEnabled(false);
-        projectOpenMenuItem.setEnabled(false);
+    public void onProjectStatusChanged(final boolean isProjectOpened) {
+        JMenuItem[] itemsToSwitchOff = new JMenuItem[] { projectNewMenuItem, projectOpenMenuItem };
 
-        projectImportMenuItem.setEnabled(true);
-        projectWikiImportMenuItem.setEnabled(true);
-        projectReloadMenuItem.setEnabled(true);
-        projectCloseMenuItem.setEnabled(true);
-        projectSaveMenuItem.setEnabled(true);
-        projectEditMenuItem.setEnabled(true);
-        projectCompileMenuItem.setEnabled(true);
+        JMenuItem[] itemsToSwitchOn = new JMenuItem[] { projectImportMenuItem, projectWikiImportMenuItem,
+                projectReloadMenuItem, projectCloseMenuItem, projectSaveMenuItem, projectEditMenuItem,
+                projectCompileMenuItem,
 
-        editMenu.setEnabled(true);
-        editFindInProjectMenuItem.setEnabled(true);
-        editInsertSourceMenuItem.setEnabled(true);
-        editInsertTranslationMenuItem.setEnabled(true);
-        editOverwriteSourceMenuItem.setEnabled(true);
-        editOverwriteTranslationMenuItem.setEnabled(true);
-        editRedoMenuItem.setEnabled(true);
-        editSelectFuzzy1MenuItem.setEnabled(true);
-        editSelectFuzzy2MenuItem.setEnabled(true);
-        editSelectFuzzy3MenuItem.setEnabled(true);
-        editSelectFuzzy4MenuItem.setEnabled(true);
-        editSelectFuzzy5MenuItem.setEnabled(true);
-        editUndoMenuItem.setEnabled(true);
+                editMenu, editFindInProjectMenuItem, editInsertSourceMenuItem, editInsertTranslationMenuItem,
+                editOverwriteSourceMenuItem, editOverwriteTranslationMenuItem, editRedoMenuItem,
+                editSelectFuzzy1MenuItem, editSelectFuzzy2MenuItem, editSelectFuzzy3MenuItem, editSelectFuzzy4MenuItem,
+                editSelectFuzzy5MenuItem, editUndoMenuItem, switchCaseSubMenu,
 
-        gotoMenu.setEnabled(true);
-        gotoNextSegmentMenuItem.setEnabled(true);
-        gotoNextUntranslatedMenuItem.setEnabled(true);
-        gotoPreviousSegmentMenuItem.setEnabled(true);
-        gotoSegmentMenuItem.setEnabled(true);
+                gotoMenu, gotoNextSegmentMenuItem, gotoNextUntranslatedMenuItem, gotoPreviousSegmentMenuItem,
+                gotoSegmentMenuItem,
 
-        viewFileListMenuItem.setEnabled(true);
-        toolsValidateTagsMenuItem.setEnabled(true);
+                viewFileListMenuItem, toolsValidateTagsMenuItem };
 
-        switchCaseSubMenu.setEnabled(true);
-    }
-
-    /**
-     * Updates menu items (enables/disables) upon <b>closing</b> project
-     */
-    void uiUpdateOnProjectClose() {
-        projectNewMenuItem.setEnabled(true);
-        projectOpenMenuItem.setEnabled(true);
-
-        projectImportMenuItem.setEnabled(false);
-        projectWikiImportMenuItem.setEnabled(false);
-        projectReloadMenuItem.setEnabled(false);
-        projectCloseMenuItem.setEnabled(false);
-        projectSaveMenuItem.setEnabled(false);
-        projectEditMenuItem.setEnabled(false);
-        projectCompileMenuItem.setEnabled(false);
-
-        editMenu.setEnabled(false);
-        editFindInProjectMenuItem.setEnabled(false);
-        editInsertSourceMenuItem.setEnabled(false);
-        editInsertTranslationMenuItem.setEnabled(false);
-        editOverwriteSourceMenuItem.setEnabled(false);
-        editOverwriteTranslationMenuItem.setEnabled(false);
-        editRedoMenuItem.setEnabled(false);
-        editSelectFuzzy1MenuItem.setEnabled(false);
-        editSelectFuzzy2MenuItem.setEnabled(false);
-        editSelectFuzzy3MenuItem.setEnabled(false);
-        editSelectFuzzy4MenuItem.setEnabled(false);
-        editSelectFuzzy5MenuItem.setEnabled(false);
-        editUndoMenuItem.setEnabled(false);
-
-        gotoMenu.setEnabled(false);
-        gotoNextSegmentMenuItem.setEnabled(false);
-        gotoNextUntranslatedMenuItem.setEnabled(false);
-        gotoPreviousSegmentMenuItem.setEnabled(false);
-        gotoSegmentMenuItem.setEnabled(false);
-
-        viewFileListMenuItem.setEnabled(false);
-        toolsValidateTagsMenuItem.setEnabled(false);
-
-        switchCaseSubMenu.setEnabled(false);
+        for (JMenuItem item : itemsToSwitchOff) {
+            item.setEnabled(!isProjectOpened);
+        }
+        for (JMenuItem item : itemsToSwitchOn) {
+            item.setEnabled(isProjectOpened);
+        }
     }
 
     JMenuItem cycleSwitchCaseMenuItem;

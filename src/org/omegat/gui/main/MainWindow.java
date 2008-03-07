@@ -788,7 +788,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     /** Updates UI (enables/disables menu items) upon <b>closing</b> project */
     private void uiUpdateOnProjectClose()
     {
-        menu.uiUpdateOnProjectClose();
+        menu.onProjectStatusChanged(false);
         
         synchronized (editor) {
             editor.setEditable(false);
@@ -810,7 +810,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     /** Updates UI (enables/disables menu items) upon <b>opening</b> project */
     private void uiUpdateOnProjectOpen()
     {
-        menu.uiUpdateOnProjectOpen();
+        menu.onProjectStatusChanged(true);
         
         synchronized (editor) {
             editor.setEditable(true);

@@ -44,6 +44,7 @@ import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
 
 import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
 import org.openide.awt.Mnemonics;
 
 /**
@@ -126,6 +127,12 @@ public class MainWindowMenu implements ActionListener {
         projectMenu.add(viewFileListMenuItem = createMenuItem("TF_MENU_FILE_PROJWIN"));
         projectExitMenuItem = createMenuItem("TF_MENU_FILE_QUIT");
 
+        // all except MacOSX
+        if (!StaticUtils.onMacOSX()) {
+            projectMenu.add(new JSeparator());
+            projectMenu.add(projectExitMenuItem);
+        }
+
         editMenu.add(editUndoMenuItem = createMenuItem("TF_MENU_EDIT_UNDO"));
         editMenu.add(editRedoMenuItem = createMenuItem("TF_MENU_EDIT_REDO"));
         editMenu.add(new JSeparator());
@@ -159,14 +166,18 @@ public class MainWindowMenu implements ActionListener {
         gotoMenu.add(gotoHistoryForwardMenuItem = createMenuItem("TF_MENU_GOTO_FORWARD_IN_HISTORY"));
         gotoMenu.add(gotoHistoryBackMenuItem = createMenuItem("TF_MENU_GOTO_BACK_IN_HISTORY"));
 
-        viewMenu.add(viewMarkTranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_MARK_TRANSLATED"));
-        viewMenu.add(viewMarkUntranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_MARK_UNTRANSLATED"));
-        viewMenu.add(viewDisplaySegmentSourceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES"));
+        viewMenu
+                .add(viewMarkTranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_MARK_TRANSLATED"));
+        viewMenu
+                .add(viewMarkUntranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_MARK_UNTRANSLATED"));
+        viewMenu
+                .add(viewDisplaySegmentSourceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES"));
 
         toolsMenu.add(toolsValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_VALIDATE"));
 
         optionsMenu.add(optionsTabAdvanceCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_ADVANCE"));
-        optionsMenu.add(optionsAlwaysConfirmQuitCheckBoxMenuItem = createCheckboxMenuItem("MW_OPTIONSMENU_ALWAYS_CONFIRM_QUIT"));
+        optionsMenu
+                .add(optionsAlwaysConfirmQuitCheckBoxMenuItem = createCheckboxMenuItem("MW_OPTIONSMENU_ALWAYS_CONFIRM_QUIT"));
         optionsMenu.add(new JSeparator());
         optionsMenu.add(optionsFontSelectionMenuItem = createMenuItem("TF_MENU_DISPLAY_FONT"));
         optionsMenu.add(optionsSetupFileFiltersMenuItem = createMenuItem("TF_MENU_DISPLAY_FILTERS"));
@@ -182,6 +193,7 @@ public class MainWindowMenu implements ActionListener {
         helpContentsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 
         setActionCommands();
+        initUIShortcuts();
 
         return mainMenu;
     }
@@ -248,7 +260,7 @@ public class MainWindowMenu implements ActionListener {
      * Sets the shortcut keys. Need to do it here (manually), because on MacOSX
      * the shortcut key is CMD, and on other OSes it's Ctrl.
      */
-    void initUIShortcuts() {
+    private void initUIShortcuts() {
         setAccelerator(projectOpenMenuItem, KeyEvent.VK_O);
         setAccelerator(projectSaveMenuItem, KeyEvent.VK_S);
         setAccelerator(projectEditMenuItem, KeyEvent.VK_E);

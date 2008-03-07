@@ -33,7 +33,6 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentListener;
@@ -53,10 +52,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
-import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
@@ -114,12 +111,15 @@ import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
  * @author Zoltan Bartko - bartkozoltan@bartkozoltan.com
  * @author Andrzej Sawula
  */
-public class MainWindow extends JFrame implements ActionListener, WindowListener, ComponentListener
+public class MainWindow extends JFrame implements WindowListener, ComponentListener
 {
+    protected final MainWindowMenu menu;
+    
     /** Creates new form MainWindow */
     public MainWindow()
     {
         m_searches = new HashSet<SearchWindow>();
+        menu = new MainWindowMenu(this);
         initComponents();
         createMainComponents();
         initDocking();
@@ -189,7 +189,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         loadScreenLayout();
         updateCheckboxesOnStart();
         uiUpdateOnProjectClose();
-        initUIShortcuts();
+        menu.initUIShortcuts();
         
         try
         {
@@ -217,8 +217,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         // all except MacOSX
         if(!StaticUtils.onMacOSX())   // NOI18N
         {
-            projectMenu.add(separator2inProjectMenu);
-            projectMenu.add(projectExitMenuItem);
+            menu.projectMenu.add(menu.separator2inProjectMenu);
+            menu.projectMenu.add(menu.projectExitMenuItem);
         }
 
         // Add Language submenu to Options menu
@@ -242,65 +242,6 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             Log.log(e);
         }
     }
-    
-    /**
-     * Sets the shortcut keys.
-     * Need to do it here (manually), because on MacOSX the shortcut key is CMD,
-     * and on other OSes it's Ctrl.
-     */
-    private void initUIShortcuts()
-    {
-        setAccelerator(projectOpenMenuItem, KeyEvent.VK_O);
-        setAccelerator(projectSaveMenuItem, KeyEvent.VK_S);
-        setAccelerator(projectEditMenuItem, KeyEvent.VK_E);
-        setAccelerator(projectExitMenuItem, KeyEvent.VK_Q);
-        
-        setAccelerator(editUndoMenuItem , KeyEvent.VK_Z);
-        setAccelerator(editRedoMenuItem , KeyEvent.VK_Y);
-        setAccelerator(editOverwriteTranslationMenuItem , KeyEvent.VK_R);
-        setAccelerator(editInsertTranslationMenuItem , KeyEvent.VK_I);
-        setAccelerator(editOverwriteSourceMenuItem , KeyEvent.VK_R, true);
-        setAccelerator(editInsertSourceMenuItem , KeyEvent.VK_I, true);
-        setAccelerator(editFindInProjectMenuItem , KeyEvent.VK_F);
-        setAccelerator(editSelectFuzzy1MenuItem , KeyEvent.VK_1);
-        setAccelerator(editSelectFuzzy2MenuItem , KeyEvent.VK_2);
-        setAccelerator(editSelectFuzzy3MenuItem , KeyEvent.VK_3);
-        setAccelerator(editSelectFuzzy4MenuItem , KeyEvent.VK_4);
-        setAccelerator(editSelectFuzzy5MenuItem , KeyEvent.VK_5);
-        
-        setAccelerator(gotoNextUntranslatedMenuItem , KeyEvent.VK_U);
-        setAccelerator(gotoNextSegmentMenuItem , KeyEvent.VK_N);
-        setAccelerator(gotoPreviousSegmentMenuItem , KeyEvent.VK_P);
-        setAccelerator(gotoSegmentMenuItem, KeyEvent.VK_J);
-        
-        setAccelerator(gotoHistoryForwardMenuItem, KeyEvent.VK_N, true);
-        setAccelerator(gotoHistoryBackMenuItem, KeyEvent.VK_P, true);
-        
-        setAccelerator(viewFileListMenuItem, KeyEvent.VK_L);
-        
-        setAccelerator(toolsValidateTagsMenuItem , KeyEvent.VK_T);
-    }
-    
-    /**
-     * Utility method to set Ctrl + key accelerators for menu items.
-     * @param key integer specifiyng the key code (e.g. KeyEvent.VK_Z)
-     */
-    private void setAccelerator(JMenuItem item, int key)
-    {
-        setAccelerator(item, key, false);
-    }
-    
-    /**
-     * Utility method to set Ctrl + key accelerators for menu items.
-     * @param key integer specifiyng the key code (e.g. KeyEvent.VK_Z)
-     */
-    private void setAccelerator(JMenuItem item, int key, boolean shift)
-    {
-        int shiftmask = shift ? KeyEvent.SHIFT_MASK : 0;
-        item.setAccelerator(KeyStroke.getKeyStroke(key,
-                shiftmask | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-    }
-    
     
     /**
      * Sets the title of the main window appropriately
@@ -357,25 +298,25 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     /** Updates menu checkboxes from preferences on start */
     private void updateCheckboxesOnStart() {
         if (Preferences.isPreference(Preferences.USE_TAB_TO_ADVANCE)) {
-            optionsTabAdvanceCheckBoxMenuItem.setSelected(true);
+            menu.optionsTabAdvanceCheckBoxMenuItem.setSelected(true);
             m_advancer = KeyEvent.VK_TAB;
         } else {
             m_advancer = KeyEvent.VK_ENTER;
         }
-        optionsAlwaysConfirmQuitCheckBoxMenuItem.setSelected(Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT));
+        menu.optionsAlwaysConfirmQuitCheckBoxMenuItem.setSelected(Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT));
         
         if (Preferences.isPreference(Preferences.MARK_TRANSLATED_SEGMENTS)) {
-            viewMarkTranslatedSegmentsCheckBoxMenuItem.setSelected(true);
+            menu.viewMarkTranslatedSegmentsCheckBoxMenuItem.setSelected(true);
             m_translatedAttributeSet = Styles.TRANSLATED;
         } else if (Preferences.isPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS)) {
-            viewMarkUntranslatedSegmentsCheckBoxMenuItem.setSelected(true);
+            menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.setSelected(true);
             m_unTranslatedAttributeSet = Styles.UNTRANSLATED;
         } else {
             m_translatedAttributeSet = Styles.PLAIN;
             m_unTranslatedAttributeSet = Styles.PLAIN;
         }
         if (Preferences.isPreference(Preferences.DISPLAY_SEGMENT_SOURCES)) {
-            viewDisplaySegmentSourceCheckBoxMenuItem.setSelected(true);
+            menu.viewDisplaySegmentSourceCheckBoxMenuItem.setSelected(true);
             m_displaySegmentSources = true;
         }
     }
@@ -844,41 +785,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     /** Updates UI (enables/disables menu items) upon <b>closing</b> project */
     private void uiUpdateOnProjectClose()
     {
-        projectNewMenuItem.setEnabled(true);
-        projectOpenMenuItem.setEnabled(true);
-        
-        projectImportMenuItem.setEnabled(false);
-        projectWikiImportMenuItem.setEnabled(false);
-        projectReloadMenuItem.setEnabled(false);
-        projectCloseMenuItem.setEnabled(false);
-        projectSaveMenuItem.setEnabled(false);
-        projectEditMenuItem.setEnabled(false);
-        projectCompileMenuItem.setEnabled(false);
-        
-        editMenu.setEnabled(false);
-        editFindInProjectMenuItem.setEnabled(false);
-        editInsertSourceMenuItem.setEnabled(false);
-        editInsertTranslationMenuItem.setEnabled(false);
-        editOverwriteSourceMenuItem.setEnabled(false);
-        editOverwriteTranslationMenuItem.setEnabled(false);
-        editRedoMenuItem.setEnabled(false);
-        editSelectFuzzy1MenuItem.setEnabled(false);
-        editSelectFuzzy2MenuItem.setEnabled(false);
-        editSelectFuzzy3MenuItem.setEnabled(false);
-        editSelectFuzzy4MenuItem.setEnabled(false);
-        editSelectFuzzy5MenuItem.setEnabled(false);
-        editUndoMenuItem.setEnabled(false);
-
-        gotoMenu.setEnabled(false);
-        gotoNextSegmentMenuItem.setEnabled(false);
-        gotoNextUntranslatedMenuItem.setEnabled(false);
-        gotoPreviousSegmentMenuItem.setEnabled(false);
-        gotoSegmentMenuItem.setEnabled(false);
-
-        viewFileListMenuItem.setEnabled(false);
-        toolsValidateTagsMenuItem.setEnabled(false);
-
-        switchCaseSubMenu.setEnabled(false);
+        menu.uiUpdateOnProjectClose();
         
         synchronized (editor) {
             editor.setEditable(false);
@@ -900,41 +807,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     /** Updates UI (enables/disables menu items) upon <b>opening</b> project */
     private void uiUpdateOnProjectOpen()
     {
-        projectNewMenuItem.setEnabled(false);
-        projectOpenMenuItem.setEnabled(false);
-        
-        projectImportMenuItem.setEnabled(true);
-        projectWikiImportMenuItem.setEnabled(true);
-        projectReloadMenuItem.setEnabled(true);
-        projectCloseMenuItem.setEnabled(true);
-        projectSaveMenuItem.setEnabled(true);
-        projectEditMenuItem.setEnabled(true);
-        projectCompileMenuItem.setEnabled(true);
-        
-        editMenu.setEnabled(true);
-        editFindInProjectMenuItem.setEnabled(true);
-        editInsertSourceMenuItem.setEnabled(true);
-        editInsertTranslationMenuItem.setEnabled(true);
-        editOverwriteSourceMenuItem.setEnabled(true);
-        editOverwriteTranslationMenuItem.setEnabled(true);
-        editRedoMenuItem.setEnabled(true);
-        editSelectFuzzy1MenuItem.setEnabled(true);
-        editSelectFuzzy2MenuItem.setEnabled(true);
-        editSelectFuzzy3MenuItem.setEnabled(true);
-        editSelectFuzzy4MenuItem.setEnabled(true);
-        editSelectFuzzy5MenuItem.setEnabled(true);
-        editUndoMenuItem.setEnabled(true);
-        
-        gotoMenu.setEnabled(true);
-        gotoNextSegmentMenuItem.setEnabled(true);
-        gotoNextUntranslatedMenuItem.setEnabled(true);
-        gotoPreviousSegmentMenuItem.setEnabled(true);
-        gotoSegmentMenuItem.setEnabled(true);
-        
-        viewFileListMenuItem.setEnabled(true);
-        toolsValidateTagsMenuItem.setEnabled(true);
-        
-        switchCaseSubMenu.setEnabled(true);
+        menu.uiUpdateOnProjectOpen();
         
         synchronized (editor) {
             editor.setEditable(true);
@@ -1913,8 +1786,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             history.insertNew(m_curEntryNum);
 
             // update history menu items
-            gotoHistoryBackMenuItem.setEnabled(history.hasPrev());
-            gotoHistoryForwardMenuItem.setEnabled(history.hasNext());
+            menu.gotoHistoryBackMenuItem.setEnabled(history.hasPrev());
+            menu.gotoHistoryForwardMenuItem.setEnabled(history.hasNext());
 
             // recover data about current entry
             // <HP-experiment>
@@ -2454,82 +2327,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
-        separator2inProjectMenu = new javax.swing.JSeparator();
-        projectExitMenuItem = new javax.swing.JMenuItem();
         statusPanel = new javax.swing.JPanel();
         statusLabel = new javax.swing.JLabel();
         statusPanel2 = new javax.swing.JPanel();
         progressLabel = new javax.swing.JLabel();
         lengthLabel = new javax.swing.JLabel();
-        mainMenu = new javax.swing.JMenuBar();
-        projectMenu = new javax.swing.JMenu();
-        projectNewMenuItem = new javax.swing.JMenuItem();
-        projectOpenMenuItem = new javax.swing.JMenuItem();
-        projectImportMenuItem = new javax.swing.JMenuItem();
-        projectWikiImportMenuItem = new javax.swing.JMenuItem();
-        projectReloadMenuItem = new javax.swing.JMenuItem();
-        projectCloseMenuItem = new javax.swing.JMenuItem();
-        separator4inProjectMenu = new javax.swing.JSeparator();
-        projectSaveMenuItem = new javax.swing.JMenuItem();
-        separator5inProjectMenu = new javax.swing.JSeparator();
-        projectCompileMenuItem = new javax.swing.JMenuItem();
-        separator1inProjectMenu = new javax.swing.JSeparator();
-        projectEditMenuItem = new javax.swing.JMenuItem();
-        viewFileListMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        editUndoMenuItem = new javax.swing.JMenuItem();
-        editRedoMenuItem = new javax.swing.JMenuItem();
-        separator1inEditMenu = new javax.swing.JSeparator();
-        editOverwriteTranslationMenuItem = new javax.swing.JMenuItem();
-        editInsertTranslationMenuItem = new javax.swing.JMenuItem();
-        separator4inEditMenu = new javax.swing.JSeparator();
-        editOverwriteSourceMenuItem = new javax.swing.JMenuItem();
-        editInsertSourceMenuItem = new javax.swing.JMenuItem();
-        separator2inEditMenu = new javax.swing.JSeparator();
-        editFindInProjectMenuItem = new javax.swing.JMenuItem();
-        separator3inEditMenu = new javax.swing.JSeparator();
-        switchCaseSubMenu = new javax.swing.JMenu();
-        lowerCaseMenuItem = new javax.swing.JMenuItem();
-        upperCaseMenuItem = new javax.swing.JMenuItem();
-        titleCaseMenuItem = new javax.swing.JMenuItem();
-        separatorInSwitchCaseSubMenu = new javax.swing.JSeparator();
-        cycleSwitchCaseMenuItem = new javax.swing.JMenuItem();
-        separator5inEditMenu = new javax.swing.JSeparator();
-        editSelectFuzzy1MenuItem = new javax.swing.JMenuItem();
-        editSelectFuzzy2MenuItem = new javax.swing.JMenuItem();
-        editSelectFuzzy3MenuItem = new javax.swing.JMenuItem();
-        editSelectFuzzy4MenuItem = new javax.swing.JMenuItem();
-        editSelectFuzzy5MenuItem = new javax.swing.JMenuItem();
-        gotoMenu = new javax.swing.JMenu();
-        gotoNextUntranslatedMenuItem = new javax.swing.JMenuItem();
-        gotoNextSegmentMenuItem = new javax.swing.JMenuItem();
-        gotoPreviousSegmentMenuItem = new javax.swing.JMenuItem();
-        gotoSegmentMenuItem = new javax.swing.JMenuItem();
-        separatorInGoToMenu = new javax.swing.JSeparator();
-        gotoHistoryForwardMenuItem = new javax.swing.JMenuItem();
-        gotoHistoryBackMenuItem = new javax.swing.JMenuItem();
-        viewMenu = new javax.swing.JMenu();
-        viewMarkTranslatedSegmentsCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
-        viewMarkUntranslatedSegmentsCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
-        viewDisplaySegmentSourceCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
-        toolsMenu = new javax.swing.JMenu();
-        toolsValidateTagsMenuItem = new javax.swing.JMenuItem();
-        optionsMenu = new javax.swing.JMenu();
-        optionsTabAdvanceCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
-        optionsAlwaysConfirmQuitCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
-        separator1inOptionsMenu = new javax.swing.JSeparator();
-        optionsFontSelectionMenuItem = new javax.swing.JMenuItem();
-        optionsSetupFileFiltersMenuItem = new javax.swing.JMenuItem();
-        optionsSentsegMenuItem = new javax.swing.JMenuItem();
-        optionsSpellCheckMenuItem = new javax.swing.JMenuItem();
-        optionsWorkflowMenuItem = new javax.swing.JMenuItem();
-        optionsRestoreGUIMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        helpContentsMenuItem = new javax.swing.JMenuItem();
-        helpAboutMenuItem = new javax.swing.JMenuItem();
-
-        org.openide.awt.Mnemonics.setLocalizedText(projectExitMenuItem, OStrings.getString("TF_MENU_FILE_QUIT"));
-        projectExitMenuItem.addActionListener(this);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(this);
@@ -2559,438 +2361,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
         getContentPane().add(statusPanel, java.awt.BorderLayout.SOUTH);
 
-        org.openide.awt.Mnemonics.setLocalizedText(projectMenu, OStrings.getString("TF_MENU_FILE"));
-        org.openide.awt.Mnemonics.setLocalizedText(projectNewMenuItem, OStrings.getString("TF_MENU_FILE_CREATE"));
-        projectNewMenuItem.addActionListener(this);
-
-        projectMenu.add(projectNewMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(projectOpenMenuItem, OStrings.getString("TF_MENU_FILE_OPEN"));
-        projectOpenMenuItem.addActionListener(this);
-
-        projectMenu.add(projectOpenMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(projectImportMenuItem, OStrings.getString("TF_MENU_FILE_IMPORT"));
-        projectImportMenuItem.addActionListener(this);
-
-        projectMenu.add(projectImportMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(projectWikiImportMenuItem, OStrings.getString("TF_MENU_WIKI_IMPORT"));
-        projectWikiImportMenuItem.addActionListener(this);
-
-        projectMenu.add(projectWikiImportMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(projectReloadMenuItem, OStrings.getString("TF_MENU_PROJECT_RELOAD"));
-        projectReloadMenuItem.addActionListener(this);
-
-        projectMenu.add(projectReloadMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(projectCloseMenuItem, OStrings.getString("TF_MENU_FILE_CLOSE"));
-        projectCloseMenuItem.addActionListener(this);
-
-        projectMenu.add(projectCloseMenuItem);
-
-        projectMenu.add(separator4inProjectMenu);
-
-        org.openide.awt.Mnemonics.setLocalizedText(projectSaveMenuItem, OStrings.getString("TF_MENU_FILE_SAVE"));
-        projectSaveMenuItem.addActionListener(this);
-
-        projectMenu.add(projectSaveMenuItem);
-
-        projectMenu.add(separator5inProjectMenu);
-
-        org.openide.awt.Mnemonics.setLocalizedText(projectCompileMenuItem, OStrings.getString("TF_MENU_FILE_COMPILE"));
-        projectCompileMenuItem.addActionListener(this);
-
-        projectMenu.add(projectCompileMenuItem);
-
-        projectMenu.add(separator1inProjectMenu);
-
-        org.openide.awt.Mnemonics.setLocalizedText(projectEditMenuItem, OStrings.getString("MW_PROJECTMENU_EDIT"));
-        projectEditMenuItem.addActionListener(this);
-
-        projectMenu.add(projectEditMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(viewFileListMenuItem, OStrings.getString("TF_MENU_FILE_PROJWIN"));
-        viewFileListMenuItem.addActionListener(this);
-
-        projectMenu.add(viewFileListMenuItem);
-
-        mainMenu.add(projectMenu);
-
-        org.openide.awt.Mnemonics.setLocalizedText(editMenu, OStrings.getString("TF_MENU_EDIT"));
-        org.openide.awt.Mnemonics.setLocalizedText(editUndoMenuItem, OStrings.getString("TF_MENU_EDIT_UNDO"));
-        editUndoMenuItem.addActionListener(this);
-
-        editMenu.add(editUndoMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(editRedoMenuItem, OStrings.getString("TF_MENU_EDIT_REDO"));
-        editRedoMenuItem.addActionListener(this);
-
-        editMenu.add(editRedoMenuItem);
-
-        editMenu.add(separator1inEditMenu);
-
-        org.openide.awt.Mnemonics.setLocalizedText(editOverwriteTranslationMenuItem, OStrings.getString("TF_MENU_EDIT_RECYCLE"));
-        editOverwriteTranslationMenuItem.addActionListener(this);
-
-        editMenu.add(editOverwriteTranslationMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(editInsertTranslationMenuItem, OStrings.getString("TF_MENU_EDIT_INSERT"));
-        editInsertTranslationMenuItem.addActionListener(this);
-
-        editMenu.add(editInsertTranslationMenuItem);
-
-        editMenu.add(separator4inEditMenu);
-
-        org.openide.awt.Mnemonics.setLocalizedText(editOverwriteSourceMenuItem, OStrings.getString("TF_MENU_EDIT_SOURCE_OVERWRITE"));
-        editOverwriteSourceMenuItem.addActionListener(this);
-
-        editMenu.add(editOverwriteSourceMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(editInsertSourceMenuItem, OStrings.getString("TF_MENU_EDIT_SOURCE_INSERT"));
-        editInsertSourceMenuItem.addActionListener(this);
-
-        editMenu.add(editInsertSourceMenuItem);
-
-        editMenu.add(separator2inEditMenu);
-
-        org.openide.awt.Mnemonics.setLocalizedText(editFindInProjectMenuItem, OStrings.getString("TF_MENU_EDIT_FIND"));
-        editFindInProjectMenuItem.addActionListener(this);
-
-        editMenu.add(editFindInProjectMenuItem);
-
-        editMenu.add(separator3inEditMenu);
-
-        org.openide.awt.Mnemonics.setLocalizedText(switchCaseSubMenu, OStrings.getString("TF_EDIT_MENU_SWITCH_CASE"));
-        org.openide.awt.Mnemonics.setLocalizedText(lowerCaseMenuItem, OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_LOWER"));
-        lowerCaseMenuItem.addActionListener(this);
-
-        switchCaseSubMenu.add(lowerCaseMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(upperCaseMenuItem, OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_UPPER"));
-        upperCaseMenuItem.addActionListener(this);
-
-        switchCaseSubMenu.add(upperCaseMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(titleCaseMenuItem, OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_TITLE"));
-        titleCaseMenuItem.addActionListener(this);
-
-        switchCaseSubMenu.add(titleCaseMenuItem);
-
-        switchCaseSubMenu.add(separatorInSwitchCaseSubMenu);
-
-        cycleSwitchCaseMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, java.awt.event.InputEvent.SHIFT_MASK));
-        org.openide.awt.Mnemonics.setLocalizedText(cycleSwitchCaseMenuItem, OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_CYCLE"));
-        cycleSwitchCaseMenuItem.addActionListener(this);
-
-        switchCaseSubMenu.add(cycleSwitchCaseMenuItem);
-
-        editMenu.add(switchCaseSubMenu);
-
-        editMenu.add(separator5inEditMenu);
-
-        org.openide.awt.Mnemonics.setLocalizedText(editSelectFuzzy1MenuItem, OStrings.getString("TF_MENU_EDIT_COMPARE_1"));
-        editSelectFuzzy1MenuItem.addActionListener(this);
-
-        editMenu.add(editSelectFuzzy1MenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(editSelectFuzzy2MenuItem, OStrings.getString("TF_MENU_EDIT_COMPARE_2"));
-        editSelectFuzzy2MenuItem.addActionListener(this);
-
-        editMenu.add(editSelectFuzzy2MenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(editSelectFuzzy3MenuItem, OStrings.getString("TF_MENU_EDIT_COMPARE_3"));
-        editSelectFuzzy3MenuItem.addActionListener(this);
-
-        editMenu.add(editSelectFuzzy3MenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(editSelectFuzzy4MenuItem, OStrings.getString("TF_MENU_EDIT_COMPARE_4"));
-        editSelectFuzzy4MenuItem.addActionListener(this);
-
-        editMenu.add(editSelectFuzzy4MenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(editSelectFuzzy5MenuItem, OStrings.getString("TF_MENU_EDIT_COMPARE_5"));
-        editSelectFuzzy5MenuItem.addActionListener(this);
-
-        editMenu.add(editSelectFuzzy5MenuItem);
-
-        mainMenu.add(editMenu);
-
-        org.openide.awt.Mnemonics.setLocalizedText(gotoMenu, OStrings.getString("MW_GOTOMENU"));
-        org.openide.awt.Mnemonics.setLocalizedText(gotoNextUntranslatedMenuItem, OStrings.getString("TF_MENU_EDIT_UNTRANS"));
-        gotoNextUntranslatedMenuItem.addActionListener(this);
-
-        gotoMenu.add(gotoNextUntranslatedMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(gotoNextSegmentMenuItem, OStrings.getString("TF_MENU_EDIT_NEXT"));
-        gotoNextSegmentMenuItem.addActionListener(this);
-
-        gotoMenu.add(gotoNextSegmentMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(gotoPreviousSegmentMenuItem, OStrings.getString("TF_MENU_EDIT_PREV"));
-        gotoPreviousSegmentMenuItem.addActionListener(this);
-
-        gotoMenu.add(gotoPreviousSegmentMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(gotoSegmentMenuItem, OStrings.getString("TF_MENU_EDIT_GOTO"));
-        gotoSegmentMenuItem.addActionListener(this);
-
-        gotoMenu.add(gotoSegmentMenuItem);
-
-        gotoMenu.add(separatorInGoToMenu);
-
-        org.openide.awt.Mnemonics.setLocalizedText(gotoHistoryForwardMenuItem, OStrings.getString("TF_MENU_GOTO_FORWARD_IN_HISTORY"));
-        gotoHistoryForwardMenuItem.addActionListener(this);
-
-        gotoMenu.add(gotoHistoryForwardMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(gotoHistoryBackMenuItem, OStrings.getString("TF_MENU_GOTO_BACK_IN_HISTORY"));
-        gotoHistoryBackMenuItem.addActionListener(this);
-
-        gotoMenu.add(gotoHistoryBackMenuItem);
-
-        mainMenu.add(gotoMenu);
-
-        org.openide.awt.Mnemonics.setLocalizedText(viewMenu, OStrings.getString("MW_VIEW_MENU"));
-        org.openide.awt.Mnemonics.setLocalizedText(viewMarkTranslatedSegmentsCheckBoxMenuItem, OStrings.getString("TF_MENU_DISPLAY_MARK_TRANSLATED"));
-        viewMarkTranslatedSegmentsCheckBoxMenuItem.addActionListener(this);
-
-        viewMenu.add(viewMarkTranslatedSegmentsCheckBoxMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(viewMarkUntranslatedSegmentsCheckBoxMenuItem, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("TF_MENU_DISPLAY_MARK_UNTRANSLATED"));
-        viewMarkUntranslatedSegmentsCheckBoxMenuItem.addActionListener(this);
-
-        viewMenu.add(viewMarkUntranslatedSegmentsCheckBoxMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(viewDisplaySegmentSourceCheckBoxMenuItem, OStrings.getString("MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES"));
-        viewDisplaySegmentSourceCheckBoxMenuItem.addActionListener(this);
-
-        viewMenu.add(viewDisplaySegmentSourceCheckBoxMenuItem);
-
-        mainMenu.add(viewMenu);
-
-        org.openide.awt.Mnemonics.setLocalizedText(toolsMenu, OStrings.getString("TF_MENU_TOOLS"));
-        org.openide.awt.Mnemonics.setLocalizedText(toolsValidateTagsMenuItem, OStrings.getString("TF_MENU_TOOLS_VALIDATE"));
-        toolsValidateTagsMenuItem.addActionListener(this);
-
-        toolsMenu.add(toolsValidateTagsMenuItem);
-
-        mainMenu.add(toolsMenu);
-
-        org.openide.awt.Mnemonics.setLocalizedText(optionsMenu, OStrings.getString("MW_OPTIONSMENU"));
-        optionsMenu.addActionListener(this);
-
-        org.openide.awt.Mnemonics.setLocalizedText(optionsTabAdvanceCheckBoxMenuItem, OStrings.getString("TF_MENU_DISPLAY_ADVANCE"));
-        optionsTabAdvanceCheckBoxMenuItem.addActionListener(this);
-
-        optionsMenu.add(optionsTabAdvanceCheckBoxMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(optionsAlwaysConfirmQuitCheckBoxMenuItem, OStrings.getString("MW_OPTIONSMENU_ALWAYS_CONFIRM_QUIT"));
-        optionsAlwaysConfirmQuitCheckBoxMenuItem.addActionListener(this);
-
-        optionsMenu.add(optionsAlwaysConfirmQuitCheckBoxMenuItem);
-
-        optionsMenu.add(separator1inOptionsMenu);
-
-        org.openide.awt.Mnemonics.setLocalizedText(optionsFontSelectionMenuItem, OStrings.getString("TF_MENU_DISPLAY_FONT"));
-        optionsFontSelectionMenuItem.addActionListener(this);
-
-        optionsMenu.add(optionsFontSelectionMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(optionsSetupFileFiltersMenuItem, OStrings.getString("TF_MENU_DISPLAY_FILTERS"));
-        optionsSetupFileFiltersMenuItem.addActionListener(this);
-
-        optionsMenu.add(optionsSetupFileFiltersMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(optionsSentsegMenuItem, OStrings.getString("MW_OPTIONSMENU_SENTSEG"));
-        optionsSentsegMenuItem.addActionListener(this);
-
-        optionsMenu.add(optionsSentsegMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(optionsSpellCheckMenuItem, OStrings.getString("MW_OPTIONSMENU_SPELLCHECK"));
-        optionsSpellCheckMenuItem.addActionListener(this);
-
-        optionsMenu.add(optionsSpellCheckMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(optionsWorkflowMenuItem, OStrings.getString("MW_OPTIONSMENU_WORKFLOW"));
-        optionsWorkflowMenuItem.addActionListener(this);
-
-        optionsMenu.add(optionsWorkflowMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(optionsRestoreGUIMenuItem, OStrings.getString("MW_OPTIONSMENU_RESTORE_GUI"));
-        optionsRestoreGUIMenuItem.addActionListener(this);
-
-        optionsMenu.add(optionsRestoreGUIMenuItem);
-
-        mainMenu.add(optionsMenu);
-
-        org.openide.awt.Mnemonics.setLocalizedText(helpMenu, OStrings.getString("TF_MENU_HELP"));
-        helpContentsMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        org.openide.awt.Mnemonics.setLocalizedText(helpContentsMenuItem, OStrings.getString("TF_MENU_HELP_CONTENTS"));
-        helpContentsMenuItem.addActionListener(this);
-
-        helpMenu.add(helpContentsMenuItem);
-
-        org.openide.awt.Mnemonics.setLocalizedText(helpAboutMenuItem, OStrings.getString("TF_MENU_HELP_ABOUT"));
-        helpAboutMenuItem.addActionListener(this);
-
-        helpMenu.add(helpAboutMenuItem);
-
-        mainMenu.add(helpMenu);
-
-        setJMenuBar(mainMenu);
+        setJMenuBar(menu.initComponents());
 
         pack();
-    }
-
-    // Code for dispatching events from components to event handlers.
-
-    public void actionPerformed(java.awt.event.ActionEvent evt) {
-        if (evt.getSource() == projectExitMenuItem) {
-            MainWindow.this.projectExitMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == projectNewMenuItem) {
-            MainWindow.this.projectNewMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == projectOpenMenuItem) {
-            MainWindow.this.projectOpenMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == projectImportMenuItem) {
-            MainWindow.this.projectImportMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == projectWikiImportMenuItem) {
-            MainWindow.this.projectWikiImportMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == projectReloadMenuItem) {
-            MainWindow.this.projectReloadMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == projectCloseMenuItem) {
-            MainWindow.this.projectCloseMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == projectSaveMenuItem) {
-            MainWindow.this.projectSaveMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == projectCompileMenuItem) {
-            MainWindow.this.projectCompileMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == projectEditMenuItem) {
-            MainWindow.this.projectEditMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == viewFileListMenuItem) {
-            MainWindow.this.viewFileListMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == editUndoMenuItem) {
-            MainWindow.this.editUndoMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == editRedoMenuItem) {
-            MainWindow.this.editRedoMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == editOverwriteTranslationMenuItem) {
-            MainWindow.this.editOverwriteTranslationMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == editInsertTranslationMenuItem) {
-            MainWindow.this.editInsertTranslationMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == editOverwriteSourceMenuItem) {
-            MainWindow.this.editOverwriteSourceMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == editInsertSourceMenuItem) {
-            MainWindow.this.editInsertSourceMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == editFindInProjectMenuItem) {
-            MainWindow.this.editFindInProjectMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == lowerCaseMenuItem) {
-            MainWindow.this.lowerCaseMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == upperCaseMenuItem) {
-            MainWindow.this.upperCaseMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == titleCaseMenuItem) {
-            MainWindow.this.titleCaseMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == cycleSwitchCaseMenuItem) {
-            MainWindow.this.cycleSwitchCaseMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == editSelectFuzzy1MenuItem) {
-            MainWindow.this.editSelectFuzzy1MenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == editSelectFuzzy2MenuItem) {
-            MainWindow.this.editSelectFuzzy2MenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == editSelectFuzzy3MenuItem) {
-            MainWindow.this.editSelectFuzzy3MenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == editSelectFuzzy4MenuItem) {
-            MainWindow.this.editSelectFuzzy4MenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == editSelectFuzzy5MenuItem) {
-            MainWindow.this.editSelectFuzzy5MenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == gotoNextUntranslatedMenuItem) {
-            MainWindow.this.gotoNextUntranslatedMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == gotoNextSegmentMenuItem) {
-            MainWindow.this.gotoNextSegmentMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == gotoPreviousSegmentMenuItem) {
-            MainWindow.this.gotoPreviousSegmentMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == gotoSegmentMenuItem) {
-            MainWindow.this.gotoSegmentMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == gotoHistoryForwardMenuItem) {
-            MainWindow.this.gotoHistoryForwardMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == gotoHistoryBackMenuItem) {
-            MainWindow.this.gotoHistoryBackMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == viewMarkTranslatedSegmentsCheckBoxMenuItem) {
-            MainWindow.this.viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == viewMarkUntranslatedSegmentsCheckBoxMenuItem) {
-            MainWindow.this.viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == viewDisplaySegmentSourceCheckBoxMenuItem) {
-            MainWindow.this.viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == toolsValidateTagsMenuItem) {
-            MainWindow.this.toolsValidateTagsMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == optionsMenu) {
-            MainWindow.this.optionsMenuActionPerformed(evt);
-        }
-        else if (evt.getSource() == optionsTabAdvanceCheckBoxMenuItem) {
-            MainWindow.this.optionsTabAdvanceCheckBoxMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == optionsAlwaysConfirmQuitCheckBoxMenuItem) {
-            MainWindow.this.optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == optionsFontSelectionMenuItem) {
-            MainWindow.this.optionsFontSelectionMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == optionsSetupFileFiltersMenuItem) {
-            MainWindow.this.optionsSetupFileFiltersMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == optionsSentsegMenuItem) {
-            MainWindow.this.optionsSentsegMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == optionsSpellCheckMenuItem) {
-            MainWindow.this.optionsSpellCheckMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == optionsWorkflowMenuItem) {
-            MainWindow.this.optionsWorkflowMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == optionsRestoreGUIMenuItem) {
-            MainWindow.this.optionsRestoreGUIMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == helpContentsMenuItem) {
-            MainWindow.this.helpContentsMenuItemActionPerformed(evt);
-        }
-        else if (evt.getSource() == helpAboutMenuItem) {
-            MainWindow.this.helpAboutMenuItemActionPerformed(evt);
-        }
     }
 
     public void componentHidden(java.awt.event.ComponentEvent evt) {
@@ -3035,11 +2408,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     public void windowOpened(java.awt.event.WindowEvent evt) {
     }// </editor-fold>//GEN-END:initComponents
 
-    private void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed
+    protected void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed
         commitEntry(false);
         
         m_displaySegmentSources = 
-                viewDisplaySegmentSourceCheckBoxMenuItem.isSelected();
+                menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected();
         
         Preferences.setPreference(Preferences.DISPLAY_SEGMENT_SOURCES,
                 m_displaySegmentSources);
@@ -3048,50 +2421,50 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         activateEntry();
     }//GEN-LAST:event_viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed
 
-    private void cycleSwitchCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cycleSwitchCaseMenuItemActionPerformed
+    protected void cycleSwitchCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cycleSwitchCaseMenuItemActionPerformed
         synchronized(editor) {
             editor.changeCase(EditorTextArea.CASE_CYCLE);
         }
     }//GEN-LAST:event_cycleSwitchCaseMenuItemActionPerformed
 
-    private void titleCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleCaseMenuItemActionPerformed
+    protected void titleCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleCaseMenuItemActionPerformed
         synchronized(editor) {
             editor.changeCase(EditorTextArea.CASE_TITLE);
         }
     }//GEN-LAST:event_titleCaseMenuItemActionPerformed
 
-    private void upperCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upperCaseMenuItemActionPerformed
+    protected void upperCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upperCaseMenuItemActionPerformed
         synchronized(editor) {
             editor.changeCase(EditorTextArea.CASE_UPPER);
         }
     }//GEN-LAST:event_upperCaseMenuItemActionPerformed
 
-    private void lowerCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lowerCaseMenuItemActionPerformed
+    protected void lowerCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lowerCaseMenuItemActionPerformed
         synchronized(editor) {
             editor.changeCase(EditorTextArea.CASE_LOWER);
         }
     }//GEN-LAST:event_lowerCaseMenuItemActionPerformed
 
-    private void gotoHistoryBackMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoHistoryBackMenuItemActionPerformed
+    protected void gotoHistoryBackMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoHistoryBackMenuItemActionPerformed
         doGotoHistoryBack();
     }//GEN-LAST:event_gotoHistoryBackMenuItemActionPerformed
 
-    private void gotoHistoryForwardMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoHistoryForwardMenuItemActionPerformed
+    protected void gotoHistoryForwardMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoHistoryForwardMenuItemActionPerformed
         doGotoHistoryForward();
     }//GEN-LAST:event_gotoHistoryForwardMenuItemActionPerformed
 
-    private void optionsSpellCheckMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsSpellCheckMenuItemActionPerformed
+    protected void optionsSpellCheckMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsSpellCheckMenuItemActionPerformed
         doSpellCheckSettings();
     }//GEN-LAST:event_optionsSpellCheckMenuItemActionPerformed
 
-    private void optionsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsMenuActionPerformed
+    protected void optionsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsMenuActionPerformed
 // TODO add your handling code here:
     }//GEN-LAST:event_optionsMenuActionPerformed
 
-    private void viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed
+    protected void viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed
         Preferences.setPreference(Preferences.MARK_TRANSLATED_SEGMENTS,
-                viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected());
-        if( viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected() )
+                menu.viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected());
+        if( menu.viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected() )
             m_translatedAttributeSet = Styles.TRANSLATED;
         else
             m_translatedAttributeSet = Styles.PLAIN;
@@ -3101,15 +2474,15 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         activateEntry();
     }//GEN-LAST:event_viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed
 
-    private void optionsRestoreGUIMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsRestoreGUIMenuItemActionPerformed
+    protected void optionsRestoreGUIMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsRestoreGUIMenuItemActionPerformed
         restoreGUI();
     }//GEN-LAST:event_optionsRestoreGUIMenuItemActionPerformed
 
-    private void viewFileListMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_viewFileListMenuItemActionPerformed
+    protected void viewFileListMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_viewFileListMenuItemActionPerformed
     {//GEN-HEADEREND:event_viewFileListMenuItemActionPerformed
         if( m_projWin==null )
         {
-            viewFileListMenuItem.setSelected(false);
+            menu.viewFileListMenuItem.setSelected(false);
             return;
         }
 
@@ -3125,155 +2498,155 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         }
     }//GEN-LAST:event_viewFileListMenuItemActionPerformed
 
-    private void optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed
+    protected void optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed
         Preferences.setPreference(Preferences.ALWAYS_CONFIRM_QUIT,
-                optionsAlwaysConfirmQuitCheckBoxMenuItem.isSelected());
+                menu.optionsAlwaysConfirmQuitCheckBoxMenuItem.isSelected());
     }//GEN-LAST:event_optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed
 
-    private void editOverwriteSourceMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editOverwriteSourceMenuItemActionPerformed
+    protected void editOverwriteSourceMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editOverwriteSourceMenuItemActionPerformed
     {//GEN-HEADEREND:event_editOverwriteSourceMenuItemActionPerformed
         doOverwriteSource();
     }//GEN-LAST:event_editOverwriteSourceMenuItemActionPerformed
 
-    private void editInsertSourceMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editInsertSourceMenuItemActionPerformed
+    protected void editInsertSourceMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editInsertSourceMenuItemActionPerformed
     {//GEN-HEADEREND:event_editInsertSourceMenuItemActionPerformed
         doInsertSource();
     }//GEN-LAST:event_editInsertSourceMenuItemActionPerformed
     
-    private void projectImportMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectImportMenuItemActionPerformed
+    protected void projectImportMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectImportMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectImportMenuItemActionPerformed
         doImportSourceFiles();
     }//GEN-LAST:event_projectImportMenuItemActionPerformed
     
-    private void projectWikiImportMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectWikiImportMenuItemActionPerformed
+    protected void projectWikiImportMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectWikiImportMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectWikiImportMenuItemActionPerformed
         doWikiImport();
     }//GEN-LAST:event_projectWikiImportMenuItemActionPerformed
     
-    private void projectReloadMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectReloadMenuItemActionPerformed
+    protected void projectReloadMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectReloadMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectReloadMenuItemActionPerformed
         doReloadProject();
     }//GEN-LAST:event_projectReloadMenuItemActionPerformed
     
-    private void formComponentMoved(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentMoved
+    protected void formComponentMoved(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentMoved
     {//GEN-HEADEREND:event_formComponentMoved
         saveScreenLayout();
     }//GEN-LAST:event_formComponentMoved
     
-    private void formComponentResized(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentResized
+    protected void formComponentResized(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentResized
     {//GEN-HEADEREND:event_formComponentResized
         saveScreenLayout();
     }//GEN-LAST:event_formComponentResized
     
-    private void optionsWorkflowMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsWorkflowMenuItemActionPerformed
+    protected void optionsWorkflowMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsWorkflowMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsWorkflowMenuItemActionPerformed
         setupWorkflow();
     }//GEN-LAST:event_optionsWorkflowMenuItemActionPerformed
     
-    private void optionsSentsegMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsSentsegMenuItemActionPerformed
+    protected void optionsSentsegMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsSentsegMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsSentsegMenuItemActionPerformed
         setupSegmentation();
     }//GEN-LAST:event_optionsSentsegMenuItemActionPerformed
     
-    private void projectEditMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectEditMenuItemActionPerformed
+    protected void projectEditMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectEditMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectEditMenuItemActionPerformed
         doEditProject();
     }//GEN-LAST:event_projectEditMenuItemActionPerformed
     
-    private void optionsTabAdvanceCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsTabAdvanceCheckBoxMenuItemActionPerformed
+    protected void optionsTabAdvanceCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsTabAdvanceCheckBoxMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsTabAdvanceCheckBoxMenuItemActionPerformed
         Preferences.setPreference(Preferences.USE_TAB_TO_ADVANCE,
-                optionsTabAdvanceCheckBoxMenuItem.isSelected());
-        if( optionsTabAdvanceCheckBoxMenuItem.isSelected() )
+                menu.optionsTabAdvanceCheckBoxMenuItem.isSelected());
+        if( menu.optionsTabAdvanceCheckBoxMenuItem.isSelected() )
             m_advancer = KeyEvent.VK_TAB;
         else
             m_advancer = KeyEvent.VK_ENTER;
     }//GEN-LAST:event_optionsTabAdvanceCheckBoxMenuItemActionPerformed
     
-    private void helpContentsMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_helpContentsMenuItemActionPerformed
+    protected void helpContentsMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_helpContentsMenuItemActionPerformed
     {//GEN-HEADEREND:event_helpContentsMenuItemActionPerformed
         HelpFrame hf = HelpFrame.getInstance();
         hf.setVisible(true);
         hf.toFront();
     }//GEN-LAST:event_helpContentsMenuItemActionPerformed
     
-    private void optionsSetupFileFiltersMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsSetupFileFiltersMenuItemActionPerformed
+    protected void optionsSetupFileFiltersMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsSetupFileFiltersMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsSetupFileFiltersMenuItemActionPerformed
         setupFilters();
     }//GEN-LAST:event_optionsSetupFileFiltersMenuItemActionPerformed
     
-    private void optionsFontSelectionMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsFontSelectionMenuItemActionPerformed
+    protected void optionsFontSelectionMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsFontSelectionMenuItemActionPerformed
     {//GEN-HEADEREND:event_optionsFontSelectionMenuItemActionPerformed
         doFont();
     }//GEN-LAST:event_optionsFontSelectionMenuItemActionPerformed
     
-    private void toolsValidateTagsMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_toolsValidateTagsMenuItemActionPerformed
+    protected void toolsValidateTagsMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_toolsValidateTagsMenuItemActionPerformed
     {//GEN-HEADEREND:event_toolsValidateTagsMenuItemActionPerformed
         doValidateTags();
     }//GEN-LAST:event_toolsValidateTagsMenuItemActionPerformed
     
-    private void editSelectFuzzy5MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy5MenuItemActionPerformed
+    protected void editSelectFuzzy5MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy5MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy5MenuItemActionPerformed
         matches.setActiveMatch(4);
     }//GEN-LAST:event_editSelectFuzzy5MenuItemActionPerformed
     
-    private void editSelectFuzzy4MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy4MenuItemActionPerformed
+    protected void editSelectFuzzy4MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy4MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy4MenuItemActionPerformed
         matches.setActiveMatch(3);
     }//GEN-LAST:event_editSelectFuzzy4MenuItemActionPerformed
     
-    private void editSelectFuzzy3MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy3MenuItemActionPerformed
+    protected void editSelectFuzzy3MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy3MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy3MenuItemActionPerformed
         matches.setActiveMatch(2);
     }//GEN-LAST:event_editSelectFuzzy3MenuItemActionPerformed
     
-    private void editSelectFuzzy2MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy2MenuItemActionPerformed
+    protected void editSelectFuzzy2MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy2MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy2MenuItemActionPerformed
         matches.setActiveMatch(1);
     }//GEN-LAST:event_editSelectFuzzy2MenuItemActionPerformed
     
-    private void editSelectFuzzy1MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy1MenuItemActionPerformed
+    protected void editSelectFuzzy1MenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editSelectFuzzy1MenuItemActionPerformed
     {//GEN-HEADEREND:event_editSelectFuzzy1MenuItemActionPerformed
         matches.setActiveMatch(0);
     }//GEN-LAST:event_editSelectFuzzy1MenuItemActionPerformed
     
-    private void editFindInProjectMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editFindInProjectMenuItemActionPerformed
+    protected void editFindInProjectMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editFindInProjectMenuItemActionPerformed
     {//GEN-HEADEREND:event_editFindInProjectMenuItemActionPerformed
         doFind();
     }//GEN-LAST:event_editFindInProjectMenuItemActionPerformed
     
-    private void editInsertTranslationMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editInsertTranslationMenuItemActionPerformed
+    protected void editInsertTranslationMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editInsertTranslationMenuItemActionPerformed
     {//GEN-HEADEREND:event_editInsertTranslationMenuItemActionPerformed
         doInsertTrans();
     }//GEN-LAST:event_editInsertTranslationMenuItemActionPerformed
     
-    private void editOverwriteTranslationMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editOverwriteTranslationMenuItemActionPerformed
+    protected void editOverwriteTranslationMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editOverwriteTranslationMenuItemActionPerformed
     {//GEN-HEADEREND:event_editOverwriteTranslationMenuItemActionPerformed
         doRecycleTrans();
     }//GEN-LAST:event_editOverwriteTranslationMenuItemActionPerformed
     
-    private void gotoNextUntranslatedMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_gotoNextUntranslatedMenuItemActionPerformed
+    protected void gotoNextUntranslatedMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_gotoNextUntranslatedMenuItemActionPerformed
     {//GEN-HEADEREND:event_gotoNextUntranslatedMenuItemActionPerformed
         doNextUntranslatedEntry();
     }//GEN-LAST:event_gotoNextUntranslatedMenuItemActionPerformed
     
-    private void gotoPreviousSegmentMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_gotoPreviousSegmentMenuItemActionPerformed
+    protected void gotoPreviousSegmentMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_gotoPreviousSegmentMenuItemActionPerformed
     {//GEN-HEADEREND:event_gotoPreviousSegmentMenuItemActionPerformed
         doPrevEntry();
     }//GEN-LAST:event_gotoPreviousSegmentMenuItemActionPerformed
     
-    private void gotoSegmentMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_gotoSegmentMenuItemActionPerformed
+    protected void gotoSegmentMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_gotoSegmentMenuItemActionPerformed
     {//GEN-HEADEREND:event_gotoSegmentMenuItemActionPerformed
         doGotoEntry();
     }//GEN-LAST:event_gotoSegmentMenuItemActionPerformed
     
-    private void gotoNextSegmentMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_gotoNextSegmentMenuItemActionPerformed
+    protected void gotoNextSegmentMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_gotoNextSegmentMenuItemActionPerformed
     {//GEN-HEADEREND:event_gotoNextSegmentMenuItemActionPerformed
         doNextEntry();
     }//GEN-LAST:event_gotoNextSegmentMenuItemActionPerformed
     
-    private void editRedoMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editRedoMenuItemActionPerformed
+    protected void editRedoMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editRedoMenuItemActionPerformed
     {//GEN-HEADEREND:event_editRedoMenuItemActionPerformed
         try
         {
@@ -3283,7 +2656,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         { }
     }//GEN-LAST:event_editRedoMenuItemActionPerformed
     
-    private void editUndoMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editUndoMenuItemActionPerformed
+    protected void editUndoMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editUndoMenuItemActionPerformed
     {//GEN-HEADEREND:event_editUndoMenuItemActionPerformed
         try
         {
@@ -3293,17 +2666,17 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         { }
     }//GEN-LAST:event_editUndoMenuItemActionPerformed
 
-    private void projectCompileMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectCompileMenuItemActionPerformed
+    protected void projectCompileMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectCompileMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectCompileMenuItemActionPerformed
         doCompileProject();
     }//GEN-LAST:event_projectCompileMenuItemActionPerformed
     
-    private void projectCloseMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectCloseMenuItemActionPerformed
+    protected void projectCloseMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectCloseMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectCloseMenuItemActionPerformed
         doCloseProject();
     }//GEN-LAST:event_projectCloseMenuItemActionPerformed
     
-    private void projectSaveMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectSaveMenuItemActionPerformed
+    protected void projectSaveMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectSaveMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectSaveMenuItemActionPerformed
         // commit the current entry first
         commitEntry();
@@ -3311,34 +2684,34 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         doSave();
     }//GEN-LAST:event_projectSaveMenuItemActionPerformed
     
-    private void projectOpenMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectOpenMenuItemActionPerformed
+    protected void projectOpenMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectOpenMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectOpenMenuItemActionPerformed
         doLoadProject();
     }//GEN-LAST:event_projectOpenMenuItemActionPerformed
     
-    private void projectNewMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectNewMenuItemActionPerformed
+    protected void projectNewMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectNewMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectNewMenuItemActionPerformed
         doCreateProject();
     }//GEN-LAST:event_projectNewMenuItemActionPerformed
     
-    private void projectExitMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectExitMenuItemActionPerformed
+    protected void projectExitMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_projectExitMenuItemActionPerformed
     {//GEN-HEADEREND:event_projectExitMenuItemActionPerformed
         doQuit();
     }//GEN-LAST:event_projectExitMenuItemActionPerformed
     
-    private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
+    protected void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
     {//GEN-HEADEREND:event_formWindowClosing
         doQuit();
     }//GEN-LAST:event_formWindowClosing
     
-    private void helpAboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpAboutMenuItemActionPerformed
+    protected void helpAboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpAboutMenuItemActionPerformed
         doAbout();
     }//GEN-LAST:event_helpAboutMenuItemActionPerformed
 
-    private void viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed
+    protected void viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed
        Preferences.setPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS,
-                viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
-        if( viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected() )
+               menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
+        if( menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected() )
             m_unTranslatedAttributeSet = Styles.UNTRANSLATED;
         else
             m_unTranslatedAttributeSet = Styles.PLAIN;
@@ -3390,79 +2763,12 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem cycleSwitchCaseMenuItem;
-    private javax.swing.JMenuItem editFindInProjectMenuItem;
-    private javax.swing.JMenuItem editInsertSourceMenuItem;
-    private javax.swing.JMenuItem editInsertTranslationMenuItem;
-    private javax.swing.JMenu editMenu;
-    private javax.swing.JMenuItem editOverwriteSourceMenuItem;
-    private javax.swing.JMenuItem editOverwriteTranslationMenuItem;
-    private javax.swing.JMenuItem editRedoMenuItem;
-    private javax.swing.JMenuItem editSelectFuzzy1MenuItem;
-    private javax.swing.JMenuItem editSelectFuzzy2MenuItem;
-    private javax.swing.JMenuItem editSelectFuzzy3MenuItem;
-    private javax.swing.JMenuItem editSelectFuzzy4MenuItem;
-    private javax.swing.JMenuItem editSelectFuzzy5MenuItem;
-    private javax.swing.JMenuItem editUndoMenuItem;
-    private javax.swing.JMenuItem gotoHistoryBackMenuItem;
-    private javax.swing.JMenuItem gotoHistoryForwardMenuItem;
-    private javax.swing.JMenu gotoMenu;
-    private javax.swing.JMenuItem gotoNextSegmentMenuItem;
-    private javax.swing.JMenuItem gotoNextUntranslatedMenuItem;
-    private javax.swing.JMenuItem gotoPreviousSegmentMenuItem;
-    private javax.swing.JMenuItem gotoSegmentMenuItem;
-    private javax.swing.JMenuItem helpAboutMenuItem;
-    private javax.swing.JMenuItem helpContentsMenuItem;
-    private javax.swing.JMenu helpMenu;
+
     private javax.swing.JLabel lengthLabel;    
-    private javax.swing.JMenuItem lowerCaseMenuItem;
-    private javax.swing.JMenuBar mainMenu;
-    private javax.swing.JCheckBoxMenuItem optionsAlwaysConfirmQuitCheckBoxMenuItem;
-    private javax.swing.JMenuItem optionsFontSelectionMenuItem;
-    private javax.swing.JMenu optionsMenu;
-    private javax.swing.JMenuItem optionsRestoreGUIMenuItem;
-    private javax.swing.JMenuItem optionsSentsegMenuItem;
-    private javax.swing.JMenuItem optionsSetupFileFiltersMenuItem;
-    private javax.swing.JMenuItem optionsSpellCheckMenuItem;
-    private javax.swing.JCheckBoxMenuItem optionsTabAdvanceCheckBoxMenuItem;
-    private javax.swing.JMenuItem optionsWorkflowMenuItem;
     private javax.swing.JLabel progressLabel;    
-    private javax.swing.JMenuItem projectCloseMenuItem;
-    private javax.swing.JMenuItem projectCompileMenuItem;
-    private javax.swing.JMenuItem projectEditMenuItem;
-    private javax.swing.JMenuItem projectExitMenuItem;
-    private javax.swing.JMenuItem projectImportMenuItem;
-    private javax.swing.JMenu projectMenu;
-    private javax.swing.JMenuItem projectNewMenuItem;
-    private javax.swing.JMenuItem projectOpenMenuItem;
-    private javax.swing.JMenuItem projectReloadMenuItem;
-    private javax.swing.JMenuItem projectSaveMenuItem;
-    private javax.swing.JMenuItem projectWikiImportMenuItem;
-    private javax.swing.JSeparator separator1inEditMenu;
-    private javax.swing.JSeparator separator1inOptionsMenu;
-    private javax.swing.JSeparator separator1inProjectMenu;
-    private javax.swing.JSeparator separator2inEditMenu;
-    private javax.swing.JSeparator separator2inProjectMenu;
-    private javax.swing.JSeparator separator3inEditMenu;
-    private javax.swing.JSeparator separator4inEditMenu;
-    private javax.swing.JSeparator separator4inProjectMenu;
-    private javax.swing.JSeparator separator5inEditMenu;
-    private javax.swing.JSeparator separator5inProjectMenu;
-    private javax.swing.JSeparator separatorInGoToMenu;
-    private javax.swing.JSeparator separatorInSwitchCaseSubMenu;
     private javax.swing.JLabel statusLabel;
     private javax.swing.JPanel statusPanel;
     private javax.swing.JPanel statusPanel2;    
-    private javax.swing.JMenu switchCaseSubMenu;
-    private javax.swing.JMenuItem titleCaseMenuItem;
-    private javax.swing.JMenu toolsMenu;
-    private javax.swing.JMenuItem toolsValidateTagsMenuItem;
-    private javax.swing.JMenuItem upperCaseMenuItem;
-    private javax.swing.JCheckBoxMenuItem viewDisplaySegmentSourceCheckBoxMenuItem;
-    private javax.swing.JMenuItem viewFileListMenuItem;
-    private javax.swing.JCheckBoxMenuItem viewMarkTranslatedSegmentsCheckBoxMenuItem;
-    private javax.swing.JCheckBoxMenuItem viewMarkUntranslatedSegmentsCheckBoxMenuItem;
-    private javax.swing.JMenu viewMenu;
     // End of variables declaration//GEN-END:variables
 
     private DockingDesktop desktop;

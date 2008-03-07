@@ -578,24 +578,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     }
     
     
-    /** inserts the source text of a segment at cursor position */
-    private synchronized void doInsertSource()
-    {
-        if (!isProjectLoaded())
-            return;
-        
-        doInsertText(m_curEntry.getSrcText());
-    }
-    
-    /** replaces entire edited segment text with a the source text of a segment at cursor position */
-    private synchronized void doOverwriteSource()
-    {
-        if (!isProjectLoaded())
-            return;
-        
-        doReplaceEditText(m_curEntry.getSrcText());
-    }
-    
+   
     /** insert current fuzzy match at cursor position */
 
     public synchronized void doInsertTrans()
@@ -615,7 +598,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     }
     
     /** inserts text at the cursor position */
-    private synchronized void doInsertText(String text)
+    synchronized void doInsertText(String text)
     {
         synchronized (editor) {
 //            int pos = editor.getCaretPosition();
@@ -644,7 +627,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     }
     
     /** replaces the entire edit area with a given text */
-    private synchronized void doReplaceEditText(String text)
+    synchronized void doReplaceEditText(String text)
     {
         synchronized (editor) {
             // build local offsets
@@ -963,27 +946,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     
     public void searchWindowClosed(SearchWindow searchWindow) {
         m_searches.remove(searchWindow);
-    }
-
-    /**
-      * Restores defaults for all dockable parts.
-      * May be expanded in the future to reset the entire GUI to its defaults.
-      *
-      * Note: The current implementation is just a quick hack, due to
-      *       insufficient knowledge of the docking framework library.
-      *
-      * @author Henry Pijffers (henry.pijffers@saxnot.com)
-      */
-    public void restoreGUI() {
-        try {
-            String layout = "60#63#120#109#108#32#118#101#114#115#105#111#110#61#34#49#46#48#34#63#62#10#60#68#111#99#107#105#110#103#68#101#115#107#116#111#112#32#118#101#114#115#105#111#110#61#34#50#46#48#34#62#10#60#68#111#99#107#105#110#103#80#97#110#101#108#62#10#60#83#112#108#105#116#32#111#114#105#101#110#116#97#116#105#111#110#61#34#49#34#32#108#111#99#97#116#105#111#110#61#34#48#46#53#57#53#51#48#55#57#49#55#56#56#56#53#54#51#49#34#62#10#60#68#111#99#107#97#98#108#101#62#10#60#75#101#121#32#100#111#99#107#78#97#109#101#61#34#69#68#73#84#79#82#34#47#62#10#60#47#68#111#99#107#97#98#108#101#62#10#60#83#112#108#105#116#32#111#114#105#101#110#116#97#116#105#111#110#61#34#48#34#32#108#111#99#97#116#105#111#110#61#34#48#46#54#57#55#52#53#50#50#50#57#50#57#57#51#54#51#34#62#10#60#68#111#99#107#97#98#108#101#62#10#60#75#101#121#32#100#111#99#107#78#97#109#101#61#34#77#65#84#67#72#69#83#34#47#62#10#60#47#68#111#99#107#97#98#108#101#62#10#60#68#111#99#107#97#98#108#101#62#10#60#75#101#121#32#100#111#99#107#78#97#109#101#61#34#71#76#79#83#83#65#82#89#34#47#62#10#60#47#68#111#99#107#97#98#108#101#62#10#60#47#83#112#108#105#116#62#10#60#47#83#112#108#105#116#62#10#60#47#68#111#99#107#105#110#103#80#97#110#101#108#62#10#60#84#97#98#71#114#111#117#112#115#62#10#60#47#84#97#98#71#114#111#117#112#115#62#10#60#47#68#111#99#107#105#110#103#68#101#115#107#116#111#112#62#10";
-            byte[] bytes = StaticUtils.uudecode(layout);
-            ByteArrayInputStream in = new ByteArrayInputStream(bytes);
-            desktop.readXML(in);
-            in.close();
-        } catch (Exception exception) {
-            // eat silently, probably a bug in the docking framework
-        }
     }
 
     /**
@@ -1912,7 +1874,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     
     public char	m_advancer;
     
-    private SourceTextEntry		m_curEntry;
+    SourceTextEntry		m_curEntry;
     
    //private String  m_activeFile;
     
@@ -2092,13 +2054,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         }
     }
 
-    public void gotoHistoryBackMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        doGotoHistoryBack();
-    }
-
-    public void gotoHistoryForwardMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        doGotoHistoryForward();
-    }
 
     public void viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
         Preferences.setPreference(Preferences.MARK_TRANSLATED_SEGMENTS,
@@ -2113,9 +2068,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         activateEntry();
     }
 
-    public void optionsRestoreGUIMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        restoreGUI();
-    }
+   
 
     public void viewFileListMenuItemActionPerformed(java.awt.event.ActionEvent evt)
     {
@@ -2137,21 +2090,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         }
     }
 
-    public void optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        Preferences.setPreference(Preferences.ALWAYS_CONFIRM_QUIT,
-                menu.optionsAlwaysConfirmQuitCheckBoxMenuItem.isSelected());
-    }
-
-    public void editOverwriteSourceMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doOverwriteSource();
-    }
-
-    public void editInsertSourceMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doInsertSource();
-    }
     
     public void formComponentMoved(java.awt.event.ComponentEvent evt)
     {
@@ -2181,19 +2119,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     public boolean autoSpellCheckingOn() {
         return m_autoSpellChecking;
     }
-
-    private synchronized void doGotoHistoryBack() {
-        int prevValue = history.back();
-        if (prevValue != -1)
-            doGotoEntry(prevValue+1);
-    }
-
-    private synchronized void doGotoHistoryForward() {
-        int nextValue = history.forward();
-        if (nextValue != -1)
-            doGotoEntry(nextValue+1);
-    }
-    
     
     private javax.swing.JLabel lengthLabel;    
     private javax.swing.JLabel progressLabel;    
@@ -2201,7 +2126,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     private javax.swing.JPanel statusPanel;
     private javax.swing.JPanel statusPanel2;    
 
-    private DockingDesktop desktop;
+    DockingDesktop desktop;
 
     private DockableScrollPane editorScroller;
     EditorTextArea editor;
@@ -2212,5 +2137,5 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     private DockableScrollPane glossaryScroller;
     GlossaryTextArea glossary;
     
-    private SegmentHistory history = SegmentHistory.getInstance();
+    SegmentHistory history = SegmentHistory.getInstance();
 }

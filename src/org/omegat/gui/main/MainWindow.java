@@ -54,6 +54,7 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JSeparator;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.text.AbstractDocument;
@@ -219,7 +220,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         // all except MacOSX
         if(!StaticUtils.onMacOSX())   // NOI18N
         {
-            menu.projectMenu.add(menu.separator2inProjectMenu);
+            menu.projectMenu.add(new JSeparator());
             menu.projectMenu.add(menu.projectExitMenuItem);
         }
 

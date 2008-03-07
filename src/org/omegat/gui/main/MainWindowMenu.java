@@ -112,7 +112,6 @@ public class MainWindowMenu implements ActionListener {
         optionsMenu = createMenu("MW_OPTIONSMENU");
         helpMenu = createMenu("TF_MENU_HELP");
 
-        separator2inProjectMenu = new JSeparator();
         projectExitMenuItem = new JMenuItem();
         projectNewMenuItem = new JMenuItem();
         projectOpenMenuItem = new JMenuItem();
@@ -120,31 +119,22 @@ public class MainWindowMenu implements ActionListener {
         projectWikiImportMenuItem = new JMenuItem();
         projectReloadMenuItem = new JMenuItem();
         projectCloseMenuItem = new JMenuItem();
-        separator4inProjectMenu = new JSeparator();
         projectSaveMenuItem = new JMenuItem();
-        separator5inProjectMenu = new JSeparator();
         projectCompileMenuItem = new JMenuItem();
-        separator1inProjectMenu = new JSeparator();
         projectEditMenuItem = new JMenuItem();
         viewFileListMenuItem = new JMenuItem();
         editUndoMenuItem = new JMenuItem();
         editRedoMenuItem = new JMenuItem();
-        separator1inEditMenu = new JSeparator();
         editOverwriteTranslationMenuItem = new JMenuItem();
         editInsertTranslationMenuItem = new JMenuItem();
-        separator4inEditMenu = new JSeparator();
         editOverwriteSourceMenuItem = new JMenuItem();
         editInsertSourceMenuItem = new JMenuItem();
-        separator2inEditMenu = new JSeparator();
         editFindInProjectMenuItem = new JMenuItem();
-        separator3inEditMenu = new JSeparator();
         switchCaseSubMenu = new JMenu();
         lowerCaseMenuItem = new JMenuItem();
         upperCaseMenuItem = new JMenuItem();
         titleCaseMenuItem = new JMenuItem();
-        separatorInSwitchCaseSubMenu = new JSeparator();
         cycleSwitchCaseMenuItem = new JMenuItem();
-        separator5inEditMenu = new JSeparator();
         editSelectFuzzy1MenuItem = new JMenuItem();
         editSelectFuzzy2MenuItem = new JMenuItem();
         editSelectFuzzy3MenuItem = new JMenuItem();
@@ -154,7 +144,6 @@ public class MainWindowMenu implements ActionListener {
         gotoNextSegmentMenuItem = new JMenuItem();
         gotoPreviousSegmentMenuItem = new JMenuItem();
         gotoSegmentMenuItem = new JMenuItem();
-        separatorInGoToMenu = new JSeparator();
         gotoHistoryForwardMenuItem = new JMenuItem();
         gotoHistoryBackMenuItem = new JMenuItem();
         viewMarkTranslatedSegmentsCheckBoxMenuItem = new JCheckBoxMenuItem();
@@ -163,7 +152,6 @@ public class MainWindowMenu implements ActionListener {
         toolsValidateTagsMenuItem = new JMenuItem();
         optionsTabAdvanceCheckBoxMenuItem = new JCheckBoxMenuItem();
         optionsAlwaysConfirmQuitCheckBoxMenuItem = new JCheckBoxMenuItem();
-        separator1inOptionsMenu = new JSeparator();
         optionsFontSelectionMenuItem = new JMenuItem();
         optionsSetupFileFiltersMenuItem = new JMenuItem();
         optionsSentsegMenuItem = new JMenuItem();
@@ -172,64 +160,21 @@ public class MainWindowMenu implements ActionListener {
         optionsRestoreGUIMenuItem = new JMenuItem();
         helpContentsMenuItem = new JMenuItem();
         helpAboutMenuItem = new JMenuItem();
-        Mnemonics.setLocalizedText(projectExitMenuItem, OStrings.getString("TF_MENU_FILE_QUIT"));
-        projectExitMenuItem.addActionListener(this);
 
-        Mnemonics.setLocalizedText(projectNewMenuItem, OStrings.getString("TF_MENU_FILE_CREATE"));
-        projectNewMenuItem.addActionListener(this);
-
-        projectMenu.add(projectNewMenuItem);
-
-        Mnemonics.setLocalizedText(projectOpenMenuItem, OStrings.getString("TF_MENU_FILE_OPEN"));
-        projectOpenMenuItem.addActionListener(this);
-
-        projectMenu.add(projectOpenMenuItem);
-
-        Mnemonics.setLocalizedText(projectImportMenuItem, OStrings.getString("TF_MENU_FILE_IMPORT"));
-        projectImportMenuItem.addActionListener(this);
-
-        projectMenu.add(projectImportMenuItem);
-
-        Mnemonics.setLocalizedText(projectWikiImportMenuItem, OStrings.getString("TF_MENU_WIKI_IMPORT"));
-        projectWikiImportMenuItem.addActionListener(this);
-
-        projectMenu.add(projectWikiImportMenuItem);
-
-        Mnemonics.setLocalizedText(projectReloadMenuItem, OStrings.getString("TF_MENU_PROJECT_RELOAD"));
-        projectReloadMenuItem.addActionListener(this);
-
-        projectMenu.add(projectReloadMenuItem);
-
-        Mnemonics.setLocalizedText(projectCloseMenuItem, OStrings.getString("TF_MENU_FILE_CLOSE"));
-        projectCloseMenuItem.addActionListener(this);
-
-        projectMenu.add(projectCloseMenuItem);
-
-        projectMenu.add(separator4inProjectMenu);
-
-        Mnemonics.setLocalizedText(projectSaveMenuItem, OStrings.getString("TF_MENU_FILE_SAVE"));
-        projectSaveMenuItem.addActionListener(this);
-
-        projectMenu.add(projectSaveMenuItem);
-
-        projectMenu.add(separator5inProjectMenu);
-
-        Mnemonics.setLocalizedText(projectCompileMenuItem, OStrings.getString("TF_MENU_FILE_COMPILE"));
-        projectCompileMenuItem.addActionListener(this);
-
-        projectMenu.add(projectCompileMenuItem);
-
-        projectMenu.add(separator1inProjectMenu);
-
-        Mnemonics.setLocalizedText(projectEditMenuItem, OStrings.getString("MW_PROJECTMENU_EDIT"));
-        projectEditMenuItem.addActionListener(this);
-
-        projectMenu.add(projectEditMenuItem);
-
-        Mnemonics.setLocalizedText(viewFileListMenuItem, OStrings.getString("TF_MENU_FILE_PROJWIN"));
-        viewFileListMenuItem.addActionListener(this);
-
-        projectMenu.add(viewFileListMenuItem);
+        projectMenu.add(projectNewMenuItem = createMenuItem("TF_MENU_FILE_CREATE"));
+        projectMenu.add(projectOpenMenuItem = createMenuItem("TF_MENU_FILE_OPEN"));
+        projectMenu.add(projectImportMenuItem = createMenuItem("TF_MENU_FILE_IMPORT"));
+        projectMenu.add(projectWikiImportMenuItem = createMenuItem("TF_MENU_WIKI_IMPORT"));
+        projectMenu.add(projectReloadMenuItem = createMenuItem("TF_MENU_PROJECT_RELOAD"));
+        projectMenu.add(projectCloseMenuItem = createMenuItem("TF_MENU_FILE_CLOSE"));
+        projectMenu.add(new JSeparator());
+        projectMenu.add(projectSaveMenuItem = createMenuItem("TF_MENU_FILE_SAVE"));
+        projectMenu.add(new JSeparator());
+        projectMenu.add(projectCompileMenuItem = createMenuItem("TF_MENU_FILE_COMPILE"));
+        projectMenu.add(new JSeparator());
+        projectMenu.add(projectEditMenuItem = createMenuItem("MW_PROJECTMENU_EDIT"));
+        projectMenu.add(viewFileListMenuItem = createMenuItem("TF_MENU_FILE_PROJWIN"));
+        projectExitMenuItem = createMenuItem("TF_MENU_FILE_QUIT");
 
         Mnemonics.setLocalizedText(editUndoMenuItem, OStrings.getString("TF_MENU_EDIT_UNDO"));
         editUndoMenuItem.addActionListener(this);
@@ -241,7 +186,7 @@ public class MainWindowMenu implements ActionListener {
 
         editMenu.add(editRedoMenuItem);
 
-        editMenu.add(separator1inEditMenu);
+        editMenu.add(new JSeparator());
 
         Mnemonics.setLocalizedText(editOverwriteTranslationMenuItem, OStrings.getString("TF_MENU_EDIT_RECYCLE"));
         editOverwriteTranslationMenuItem.addActionListener(this);
@@ -253,7 +198,7 @@ public class MainWindowMenu implements ActionListener {
 
         editMenu.add(editInsertTranslationMenuItem);
 
-        editMenu.add(separator4inEditMenu);
+        editMenu.add(new JSeparator());
 
         Mnemonics.setLocalizedText(editOverwriteSourceMenuItem, OStrings.getString("TF_MENU_EDIT_SOURCE_OVERWRITE"));
         editOverwriteSourceMenuItem.addActionListener(this);
@@ -265,14 +210,14 @@ public class MainWindowMenu implements ActionListener {
 
         editMenu.add(editInsertSourceMenuItem);
 
-        editMenu.add(separator2inEditMenu);
+        editMenu.add(new JSeparator());
 
         Mnemonics.setLocalizedText(editFindInProjectMenuItem, OStrings.getString("TF_MENU_EDIT_FIND"));
         editFindInProjectMenuItem.addActionListener(this);
 
         editMenu.add(editFindInProjectMenuItem);
 
-        editMenu.add(separator3inEditMenu);
+        editMenu.add(new JSeparator());
 
         Mnemonics.setLocalizedText(switchCaseSubMenu, OStrings.getString("TF_EDIT_MENU_SWITCH_CASE"));
         Mnemonics.setLocalizedText(lowerCaseMenuItem, OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_LOWER"));
@@ -290,7 +235,7 @@ public class MainWindowMenu implements ActionListener {
 
         switchCaseSubMenu.add(titleCaseMenuItem);
 
-        switchCaseSubMenu.add(separatorInSwitchCaseSubMenu);
+        switchCaseSubMenu.add(new JSeparator());
 
         cycleSwitchCaseMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, InputEvent.SHIFT_MASK));
         Mnemonics.setLocalizedText(cycleSwitchCaseMenuItem, OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_CYCLE"));
@@ -300,7 +245,7 @@ public class MainWindowMenu implements ActionListener {
 
         editMenu.add(switchCaseSubMenu);
 
-        editMenu.add(separator5inEditMenu);
+        editMenu.add(new JSeparator());
 
         Mnemonics.setLocalizedText(editSelectFuzzy1MenuItem, OStrings.getString("TF_MENU_EDIT_COMPARE_1"));
         editSelectFuzzy1MenuItem.addActionListener(this);
@@ -347,7 +292,7 @@ public class MainWindowMenu implements ActionListener {
 
         gotoMenu.add(gotoSegmentMenuItem);
 
-        gotoMenu.add(separatorInGoToMenu);
+        gotoMenu.add(new JSeparator());
 
         Mnemonics.setLocalizedText(gotoHistoryForwardMenuItem, OStrings.getString("TF_MENU_GOTO_FORWARD_IN_HISTORY"));
         gotoHistoryForwardMenuItem.addActionListener(this);
@@ -393,7 +338,7 @@ public class MainWindowMenu implements ActionListener {
 
         optionsMenu.add(optionsAlwaysConfirmQuitCheckBoxMenuItem);
 
-        optionsMenu.add(separator1inOptionsMenu);
+        optionsMenu.add(new JSeparator());
 
         Mnemonics.setLocalizedText(optionsFontSelectionMenuItem, OStrings.getString("TF_MENU_DISPLAY_FONT"));
         optionsFontSelectionMenuItem.addActionListener(this);
@@ -459,6 +404,20 @@ public class MainWindowMenu implements ActionListener {
     private JMenu createMenu(final String titleKey) {
         JMenu result = new JMenu();
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
+        return result;
+    }
+
+    /**
+     * Create menu item instance and set title.
+     * 
+     * @param titleKey
+     *            title name key in resource bundle
+     * @return menu item instance
+     */
+    private JMenuItem createMenuItem(final String titleKey) {
+        JMenuItem result = new JMenuItem();
+        Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
+        result.addActionListener(this);
         return result;
     }
 
@@ -665,18 +624,6 @@ public class MainWindowMenu implements ActionListener {
     JMenuItem projectReloadMenuItem;
     JMenuItem projectSaveMenuItem;
     JMenuItem projectWikiImportMenuItem;
-    JSeparator separator1inEditMenu;
-    JSeparator separator1inOptionsMenu;
-    JSeparator separator1inProjectMenu;
-    JSeparator separator2inEditMenu;
-    JSeparator separator2inProjectMenu;
-    JSeparator separator3inEditMenu;
-    JSeparator separator4inEditMenu;
-    JSeparator separator4inProjectMenu;
-    JSeparator separator5inEditMenu;
-    JSeparator separator5inProjectMenu;
-    JSeparator separatorInGoToMenu;
-    JSeparator separatorInSwitchCaseSubMenu;
     JMenu switchCaseSubMenu;
     JMenuItem titleCaseMenuItem;
     JMenu toolsMenu;

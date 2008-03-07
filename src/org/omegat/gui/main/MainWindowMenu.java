@@ -103,10 +103,17 @@ public class MainWindowMenu implements ActionListener {
      * Initialize menu items.
      */
     JMenuBar initComponents() {
+        mainMenu = new JMenuBar();
+        projectMenu = createMenu("TF_MENU_FILE");
+        editMenu = createMenu("TF_MENU_EDIT");
+        gotoMenu = createMenu("MW_GOTOMENU");
+        viewMenu = createMenu("MW_VIEW_MENU");
+        toolsMenu = createMenu("TF_MENU_TOOLS");
+        optionsMenu = createMenu("MW_OPTIONSMENU");
+        helpMenu = createMenu("TF_MENU_HELP");
+
         separator2inProjectMenu = new JSeparator();
         projectExitMenuItem = new JMenuItem();
-        mainMenu = new JMenuBar();
-        projectMenu = new JMenu();
         projectNewMenuItem = new JMenuItem();
         projectOpenMenuItem = new JMenuItem();
         projectImportMenuItem = new JMenuItem();
@@ -120,7 +127,6 @@ public class MainWindowMenu implements ActionListener {
         separator1inProjectMenu = new JSeparator();
         projectEditMenuItem = new JMenuItem();
         viewFileListMenuItem = new JMenuItem();
-        editMenu = new JMenu();
         editUndoMenuItem = new JMenuItem();
         editRedoMenuItem = new JMenuItem();
         separator1inEditMenu = new JSeparator();
@@ -144,7 +150,6 @@ public class MainWindowMenu implements ActionListener {
         editSelectFuzzy3MenuItem = new JMenuItem();
         editSelectFuzzy4MenuItem = new JMenuItem();
         editSelectFuzzy5MenuItem = new JMenuItem();
-        gotoMenu = new JMenu();
         gotoNextUntranslatedMenuItem = new JMenuItem();
         gotoNextSegmentMenuItem = new JMenuItem();
         gotoPreviousSegmentMenuItem = new JMenuItem();
@@ -152,13 +157,10 @@ public class MainWindowMenu implements ActionListener {
         separatorInGoToMenu = new JSeparator();
         gotoHistoryForwardMenuItem = new JMenuItem();
         gotoHistoryBackMenuItem = new JMenuItem();
-        viewMenu = new JMenu();
         viewMarkTranslatedSegmentsCheckBoxMenuItem = new JCheckBoxMenuItem();
         viewMarkUntranslatedSegmentsCheckBoxMenuItem = new JCheckBoxMenuItem();
         viewDisplaySegmentSourceCheckBoxMenuItem = new JCheckBoxMenuItem();
-        toolsMenu = new JMenu();
         toolsValidateTagsMenuItem = new JMenuItem();
-        optionsMenu = new JMenu();
         optionsTabAdvanceCheckBoxMenuItem = new JCheckBoxMenuItem();
         optionsAlwaysConfirmQuitCheckBoxMenuItem = new JCheckBoxMenuItem();
         separator1inOptionsMenu = new JSeparator();
@@ -168,13 +170,11 @@ public class MainWindowMenu implements ActionListener {
         optionsSpellCheckMenuItem = new JMenuItem();
         optionsWorkflowMenuItem = new JMenuItem();
         optionsRestoreGUIMenuItem = new JMenuItem();
-        helpMenu = new JMenu();
         helpContentsMenuItem = new JMenuItem();
         helpAboutMenuItem = new JMenuItem();
         Mnemonics.setLocalizedText(projectExitMenuItem, OStrings.getString("TF_MENU_FILE_QUIT"));
         projectExitMenuItem.addActionListener(this);
 
-        Mnemonics.setLocalizedText(projectMenu, OStrings.getString("TF_MENU_FILE"));
         Mnemonics.setLocalizedText(projectNewMenuItem, OStrings.getString("TF_MENU_FILE_CREATE"));
         projectNewMenuItem.addActionListener(this);
 
@@ -231,9 +231,6 @@ public class MainWindowMenu implements ActionListener {
 
         projectMenu.add(viewFileListMenuItem);
 
-        mainMenu.add(projectMenu);
-
-        Mnemonics.setLocalizedText(editMenu, OStrings.getString("TF_MENU_EDIT"));
         Mnemonics.setLocalizedText(editUndoMenuItem, OStrings.getString("TF_MENU_EDIT_UNDO"));
         editUndoMenuItem.addActionListener(this);
 
@@ -330,9 +327,6 @@ public class MainWindowMenu implements ActionListener {
 
         editMenu.add(editSelectFuzzy5MenuItem);
 
-        mainMenu.add(editMenu);
-
-        Mnemonics.setLocalizedText(gotoMenu, OStrings.getString("MW_GOTOMENU"));
         Mnemonics.setLocalizedText(gotoNextUntranslatedMenuItem, OStrings.getString("TF_MENU_EDIT_UNTRANS"));
         gotoNextUntranslatedMenuItem.addActionListener(this);
 
@@ -365,9 +359,6 @@ public class MainWindowMenu implements ActionListener {
 
         gotoMenu.add(gotoHistoryBackMenuItem);
 
-        mainMenu.add(gotoMenu);
-
-        Mnemonics.setLocalizedText(viewMenu, OStrings.getString("MW_VIEW_MENU"));
         Mnemonics.setLocalizedText(viewMarkTranslatedSegmentsCheckBoxMenuItem, OStrings
                 .getString("TF_MENU_DISPLAY_MARK_TRANSLATED"));
         viewMarkTranslatedSegmentsCheckBoxMenuItem.addActionListener(this);
@@ -386,18 +377,10 @@ public class MainWindowMenu implements ActionListener {
 
         viewMenu.add(viewDisplaySegmentSourceCheckBoxMenuItem);
 
-        mainMenu.add(viewMenu);
-
-        Mnemonics.setLocalizedText(toolsMenu, OStrings.getString("TF_MENU_TOOLS"));
         Mnemonics.setLocalizedText(toolsValidateTagsMenuItem, OStrings.getString("TF_MENU_TOOLS_VALIDATE"));
         toolsValidateTagsMenuItem.addActionListener(this);
 
         toolsMenu.add(toolsValidateTagsMenuItem);
-
-        mainMenu.add(toolsMenu);
-
-        Mnemonics.setLocalizedText(optionsMenu, OStrings.getString("MW_OPTIONSMENU"));
-        optionsMenu.addActionListener(this);
 
         Mnemonics.setLocalizedText(optionsTabAdvanceCheckBoxMenuItem, OStrings.getString("TF_MENU_DISPLAY_ADVANCE"));
         optionsTabAdvanceCheckBoxMenuItem.addActionListener(this);
@@ -442,9 +425,6 @@ public class MainWindowMenu implements ActionListener {
 
         optionsMenu.add(optionsRestoreGUIMenuItem);
 
-        mainMenu.add(optionsMenu);
-
-        Mnemonics.setLocalizedText(helpMenu, OStrings.getString("TF_MENU_HELP"));
         helpContentsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
         Mnemonics.setLocalizedText(helpContentsMenuItem, OStrings.getString("TF_MENU_HELP_CONTENTS"));
         helpContentsMenuItem.addActionListener(this);
@@ -456,11 +436,30 @@ public class MainWindowMenu implements ActionListener {
 
         helpMenu.add(helpAboutMenuItem);
 
-        mainMenu.add(helpMenu);
-
         setActionCommands();
 
+        mainMenu.add(projectMenu);
+        mainMenu.add(editMenu);
+        mainMenu.add(gotoMenu);
+        mainMenu.add(viewMenu);
+        mainMenu.add(toolsMenu);
+        mainMenu.add(optionsMenu);
+        mainMenu.add(helpMenu);
+
         return mainMenu;
+    }
+
+    /**
+     * Create menu instance and set title.
+     * 
+     * @param titleKey
+     *            title name key in resource bundle
+     * @return menu instance
+     */
+    private JMenu createMenu(final String titleKey) {
+        JMenu result = new JMenu();
+        Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
+        return result;
     }
 
     /**

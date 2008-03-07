@@ -34,8 +34,6 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowListener;
@@ -50,7 +48,6 @@ import java.util.List;
 import java.util.Set;
 
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -62,8 +59,6 @@ import javax.swing.text.BadLocationException;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 
-import net.roydesign.mac.MRJAdapter;
-
 import org.omegat.core.Core;
 import org.omegat.core.ProjectProperties;
 import org.omegat.core.StringEntry;
@@ -73,11 +68,9 @@ import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.DialogThread;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.gui.HelpFrame;
 import org.omegat.gui.ProjectFrame;
 import org.omegat.gui.SearchWindow;
 import org.omegat.gui.TagValidationFrame;
-import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.FontSelectionDialog;
 import org.omegat.gui.dialogs.WorkflowOptionsDialog;
 import org.omegat.gui.filters2.FiltersCustomizer;
@@ -190,29 +183,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         loadScreenLayout();
         updateCheckboxesOnStart();
         uiUpdateOnProjectClose();
-        
-        try
-        {
-            // MacOSX-specific
-            MRJAdapter.addQuitApplicationListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent e)
-                {
-                    doQuit();
-                }
-            });
-            MRJAdapter.addAboutListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent e)
-                {
-                    doAbout();
-                }
-            });
-        }
-        catch(NoClassDefFoundError e)
-        {
-            Log.log(e);
-        }
     }
 
     /**
@@ -464,58 +434,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     ///////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////
     // command handling
-    
-    /** Shows About dialog */
-    private void doAbout()
-    {
-        new AboutDialog(this).setVisible(true);        
-    }
-    
-    /** Quits OmegaT */
-    private void doQuit()
-    {
-        boolean projectModified = false;
-        if (isProjectLoaded())
-            projectModified = CommandThread.core.isProjectModified();
-
-        // RFE 1302358
-        // Add Yes/No Warning before OmegaT quits
-        if (projectModified ||
-                Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT))
-        {
-            if( JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(this,
-                    OStrings.getString("MW_QUIT_CONFIRM"),
-                    OStrings.getString("CONFIRM_DIALOG_TITLE"),
-                    JOptionPane.YES_NO_OPTION) )
-            {
-                return;
-            }
-        }
-
-        saveScreenLayout();
-        Preferences.save();
-
-        if (isProjectLoaded())
-            doSave();
-
-        // shut down
-        if( CommandThread.core!=null )
-            CommandThread.core.interrupt();
-
-        // waiting for CommandThread to finish for 1 minute
-        for( int i=0; i<600 && CommandThread.core!=null; i++ )
-        {
-            try
-            {
-                Thread.sleep(100);
-            }
-            catch (InterruptedException e)
-            {
-            }
-        }
-
-        System.exit(0);
-    }
     
     private void doValidateTags()
     {
@@ -956,7 +874,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         new WorkflowOptionsDialog(this).setVisible(true);
     }
     
-    private void doSave()
+    void doSave()
     {
         if (!isProjectLoaded())
             return;
@@ -971,7 +889,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     /**
      * Creates a new Project.
      */
-    private void doCreateProject()
+    void doCreateProject()
     {
         CommandThread.core.createProject();
         try
@@ -989,7 +907,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     /**
      * Loads a new project.
      */
-    private void doLoadProject()
+    void doLoadProject()
     {
         if (isProjectLoaded())
         {
@@ -1108,106 +1026,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         {
             WikiGet.doWikiGet(remote_url, projectsource);
             doReloadProject();
-        }
-    }
-	    
-    /**
-      * Asks the user for a segment number and then displays the segment.
-      *
-      * @author Henry Pijffers (henry.pijffers@saxnot.com)
-      */
-    public synchronized void doGotoEntry() {
-        // Create a dialog for input
-        final JOptionPane input = new JOptionPane(OStrings.getString("MW_PROMPT_SEG_NR_MSG"),
-                                                  JOptionPane.PLAIN_MESSAGE,
-                                                  JOptionPane.OK_CANCEL_OPTION); // create option pane
-        input.setWantsInput(true); // make it require input
-        final JDialog dialog = new JDialog(
-            this, OStrings.getString("MW_PROMPT_SEG_NR_TITLE"), true); // create dialog
-        dialog.setContentPane(input); // add option pane to dialog
-
-        // Make the dialog verify the input
-        input.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent event) {
-                // Handle the event
-                if (dialog.isVisible() && (event.getSource() == input)) {
-                    // If user pressed Enter or OK, check the input
-                    String property = event.getPropertyName();
-                    Object value    = input.getValue();
-
-                    // Don't do the checks if no option has been selected
-                    if (value == JOptionPane.UNINITIALIZED_VALUE)
-                        return;
-
-                    if (   property.equals(JOptionPane.INPUT_VALUE_PROPERTY)
-                        || (   property.equals(JOptionPane.VALUE_PROPERTY)
-                            && ((Integer)value).intValue() == JOptionPane.OK_OPTION)) {
-                        // Prevent the checks from being done twice
-                        input.setValue(JOptionPane.UNINITIALIZED_VALUE);
-
-                        // Get the value entered by the user
-                        String inputValue = (String)input.getInputValue();
-
-                        // Check if the user entered a value at all
-                        if ((inputValue == null) || (inputValue.trim().length() == 0)) {
-                            // Show error message
-                            displayErrorMessage();
-                            return;
-                        }
-
-                        // Check if the user really entered a number
-                        int segmentNr = -1;
-                        try {
-                            // Just parse it. If parsed, it's a number.
-                            segmentNr = Integer.parseInt(inputValue);
-                        }
-                        catch (NumberFormatException e) {
-                            // If the exception is thrown, the user didn't enter a number
-                            // Show error message
-                            displayErrorMessage();
-                            return;
-                        }
-
-                        // Check if the segment number is within bounds
-                        if (segmentNr < 1 || segmentNr > CommandThread.core.numEntries()) {
-                            // Tell the user he has to enter a number within certain bounds
-                            displayErrorMessage();
-                            return;
-                        }
-                    }
-
-                    // If we're here, the user has either pressed Cancel/Esc,
-                    // or has entered a valid number. In all cases, close the dialog.
-                    dialog.setVisible(false);
-                }
-            }
-
-            private void displayErrorMessage() {
-                JOptionPane.showMessageDialog(
-                    dialog,
-                    StaticUtils.format(OStrings.getString("MW_SEGMENT_NUMBER_ERROR"),
-                                         new Object[] {new Integer(CommandThread.core.numEntries())}),
-                    OStrings.getString("TF_ERROR"),
-                    JOptionPane.ERROR_MESSAGE
-                );
-            }
-        });
-
-        // Show the input dialog
-        dialog.pack(); // make it look good
-        dialog.setLocationRelativeTo(this); // center it on the main window
-        dialog.setVisible(true); // show it
-
-        // Get the input value, if any
-        Object inputValue = input.getInputValue();
-        if ((inputValue != null) && !inputValue.equals(JOptionPane.UNINITIALIZED_VALUE)) {
-            // Go to the segment the user requested
-            try {
-                doGotoEntry((String)inputValue);
-            }
-            catch (ClassCastException e) {
-                // Shouldn't happen, but still... Just eat silently.
-            }
         }
     }
 
@@ -2366,7 +2184,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
 
     public void windowClosing(java.awt.event.WindowEvent evt) {
         if (evt.getSource() == MainWindow.this) {
-            MainWindow.this.formWindowClosing(evt);
+            menu.mainWindowMenuHandler.projectExitMenuItemActionPerformed();
         }
     }
 
@@ -2530,13 +2348,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
             m_advancer = KeyEvent.VK_ENTER;
     }
     
-    public void helpContentsMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        HelpFrame hf = HelpFrame.getInstance();
-        hf.setVisible(true);
-        hf.toFront();
-    }
-    
     public void optionsSetupFileFiltersMenuItemActionPerformed(java.awt.event.ActionEvent evt)
     {
         setupFilters();
@@ -2550,31 +2361,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     public void toolsValidateTagsMenuItemActionPerformed(java.awt.event.ActionEvent evt)
     {
         doValidateTags();
-    }
-    
-    public void editSelectFuzzy5MenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        matches.setActiveMatch(4);
-    }
-    
-    public void editSelectFuzzy4MenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        matches.setActiveMatch(3);
-    }
-    
-    public void editSelectFuzzy3MenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        matches.setActiveMatch(2);
-    }
-    
-    public void editSelectFuzzy2MenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        matches.setActiveMatch(1);
-    }
-    
-    public void editSelectFuzzy1MenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        matches.setActiveMatch(0);
     }
     
     public void editFindInProjectMenuItemActionPerformed(java.awt.event.ActionEvent evt)
@@ -2596,22 +2382,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     {
         doNextUntranslatedEntry();
     }
-    
-    public void gotoPreviousSegmentMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doPrevEntry();
-    }
-    
-    public void gotoSegmentMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doGotoEntry();
-    }
-    
-    public void gotoNextSegmentMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doNextEntry();
-    }
-    
+       
     public void editRedoMenuItemActionPerformed(java.awt.event.ActionEvent evt)
     {
         try
@@ -2631,11 +2402,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         catch( CannotUndoException cue )
         { }
     }
-
-    public void projectCloseMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doCloseProject();
-    }
     
     public void projectSaveMenuItemActionPerformed(java.awt.event.ActionEvent evt)
     {
@@ -2645,30 +2411,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         doSave();
     }
     
-    public void projectOpenMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doLoadProject();
-    }
-    
-    public void projectNewMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doCreateProject();
-    }
-    
-    public void projectExitMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        doQuit();
-    }
-    
-    public void formWindowClosing(java.awt.event.WindowEvent evt)
-    {
-        doQuit();
-    }
-    
-    public void helpAboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        doAbout();
-    }
-
     public void viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
        Preferences.setPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS,
                menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
@@ -2713,7 +2455,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     private EditorTextArea editor;
     
     private DockableScrollPane matchesScroller;
-    private MatchesTextArea matches;
+    MatchesTextArea matches;
     
     private DockableScrollPane glossaryScroller;
     private GlossaryTextArea glossary;

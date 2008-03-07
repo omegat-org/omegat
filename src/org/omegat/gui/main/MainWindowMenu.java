@@ -43,6 +43,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
 
+import net.roydesign.mac.MRJAdapter;
+
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.openide.awt.Mnemonics;
@@ -215,7 +218,37 @@ public class MainWindowMenu implements ActionListener {
         setActionCommands();
         initUIShortcuts();
 
+        initMacSpecific();        
+        
         return mainMenu;
+    }
+    
+    /**
+     * Initialize Mac-specific features.
+     */
+    private void initMacSpecific() {
+        try
+        {
+            // MacOSX-specific
+            MRJAdapter.addQuitApplicationListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    mainWindowMenuHandler.projectExitMenuItemActionPerformed();
+                }
+            });
+            MRJAdapter.addAboutListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    mainWindowMenuHandler.helpAboutMenuItemActionPerformed();
+                }
+            });
+        }
+        catch(NoClassDefFoundError e)
+        {
+            Log.log(e);
+        }
     }
 
     /**

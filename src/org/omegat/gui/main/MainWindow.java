@@ -29,16 +29,11 @@
 package org.omegat.gui.main;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GraphicsEnvironment;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowListener;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -50,9 +45,11 @@ import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -79,14 +76,10 @@ import org.omegat.util.RequestPacket;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
 import org.omegat.util.WikiGet;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.Styles;
 
-import com.vlsolutions.swing.docking.DockingConstants;
 import com.vlsolutions.swing.docking.DockingDesktop;
-import com.vlsolutions.swing.docking.event.DockableStateWillChangeEvent;
-import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
 
 /**
  * The main window of OmegaT application.
@@ -100,8 +93,8 @@ import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class MainWindow extends JFrame implements WindowListener, ComponentListener, IMainWindow, IProjectEventListener, IApplicationEventListener
-{
+public class MainWindow extends JFrame implements WindowListener, ComponentListener, IMainWindow,
+        IProjectEventListener, IApplicationEventListener {
     protected final MainWindowMenu menu;
     
     /** Creates new form MainWindow */
@@ -109,12 +102,24 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     {
         m_searches = new HashSet<SearchWindow>();
         menu = new MainWindowMenu(this, new MainWindowMenuHandler(this));
-        initComponents();
-        createMainComponents();
-        initDocking();
+
+        setJMenuBar(menu.initComponents());
+        getContentPane().add(MainWindowUI.createStatusBar(this), BorderLayout.SOUTH);
+        pack();
+
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        
+        addWindowListener(this);
+        addComponentListener(this);
+
+        MainWindowUI.createMainComponents(this);
+
+        getContentPane().add(MainWindowUI.initDocking(this), BorderLayout.CENTER);
+
         additionalUIInit();
         oldInit();
         loadInstantStart();
+        
         CoreEvents.registerApplicationEventListener(this);
         CoreEvents.registerProjectChangeListener(this);
     }
@@ -126,51 +131,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     public void onApplicationShutdown() {
     }
 
-    private void createMainComponents()
-    {
-        editor = new EditorTextArea(this);
-        matches = new MatchesTextArea(this);
-        glossary = new GlossaryTextArea();
 
-        String fontName = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_NAME, OConsts.TF_FONT_DEFAULT);
-        int fontSize = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_SIZE, OConsts.TF_FONT_SIZE_DEFAULT);
-
-        m_font = new Font(fontName, Font.PLAIN, fontSize);
-        editor.setFont(m_font);
-        matches.setFont(m_font);
-        glossary.setFont(m_font);
-        m_autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
-    }
-    
-    private void initDocking()
-    {
-        DockingUI.initialize();
-
-        editorScroller = new DockableScrollPane("EDITOR", " ", editor, false);  // NOI18N
-        editorScroller.setMinimumSize(new Dimension(100, 100));
-        matchesScroller = new DockableScrollPane("MATCHES",                     // NOI18N
-                OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches"), matches, true);
-        glossaryScroller = new DockableScrollPane("GLOSSARY",                   // NOI18N
-                OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Glossary"), glossary, true);
-        
-        desktop = new DockingDesktop();
-        desktop.addDockableStateWillChangeListener(new DockableStateWillChangeListener()
-        {
-            public void dockableStateWillChange(DockableStateWillChangeEvent event)
-            {
-                if (event.getFutureState().isClosed())
-                    event.cancel();
-            }
-        });
-        desktop.addDockable(editorScroller);
-        desktop.split(editorScroller, matchesScroller, DockingConstants.SPLIT_RIGHT);
-        desktop.split(matchesScroller, glossaryScroller, DockingConstants.SPLIT_BOTTOM);
-        desktop.setDockableWidth(editorScroller, 0.6);
-        desktop.setDockableHeight(matchesScroller, 0.7);
-        
-        getContentPane().add(desktop, BorderLayout.CENTER);
-    }
-    
     /**
      * Some additional actions to initialize UI,
      * not doable via NetBeans Form Editor
@@ -184,7 +145,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
 
         statusLabel.setText(new String()+' ');
         
-        loadScreenLayout();
+        MainWindowUI.loadScreenLayout(this);
         updateCheckboxesOnStart();
         uiUpdateOnProjectClose();
     }
@@ -285,65 +246,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         }
     }
     
-    private boolean layoutInitialized = false;
-    
-    /**
-     * Initialized the sizes of OmegaT window.
-     * <p>
-     * Assume screen size is 800x600 if width less than 900, and
-     * 1024x768 if larger. Assume task bar at bottom of screen.
-     * If screen size saved, recover that and use instead
-     * (18may04).
-     */
-    private void loadScreenLayout()
-    {
-        // main window
-        try
-        {
-            String dx = Preferences.getPreference(Preferences.MAINWINDOW_X);
-            String dy = Preferences.getPreference(Preferences.MAINWINDOW_Y);
-            int x = Integer.parseInt(dx);
-            int y = Integer.parseInt(dy);
-            setLocation(x, y);
-            String dw = Preferences.getPreference(Preferences.MAINWINDOW_WIDTH);
-            String dh = Preferences.getPreference(Preferences.MAINWINDOW_HEIGHT);
-            int w = Integer.parseInt(dw);
-            int h = Integer.parseInt(dh);
-            setSize(w, h);
-        }
-        catch (NumberFormatException nfe)
-        {
-            // size info missing - put window in default position
-            GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            Rectangle scrSize = env.getMaximumWindowBounds();
-            if (scrSize.width < 900)
-            {
-                // assume 800x600
-                setSize(580, 536);
-                setLocation(0, 0);
-            }
-            else
-            {
-                // assume 1024x768 or larger
-                setSize(690, 700);
-                setLocation(0, 0);
-            }
-        }
-
-        String layout = Preferences.getPreference(Preferences.MAINWINDOW_LAYOUT);
-        if (layout.length()>0)
-        {
-            byte[] bytes = StaticUtils.uudecode(layout);
-            try
-            {
-                ByteArrayInputStream in = new ByteArrayInputStream(bytes);
-                desktop.readXML(in);
-                in.close();
-            } catch (Exception e) { }
-        }
-        
-        layoutInitialized = true;
-    }
+    boolean layoutInitialized = false;
     
     public void filelistWindowClosed()
     {
@@ -405,34 +308,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
 
         // Default to English, if no translation exists
         return "en";                                                        // NOI18N
-    }
-    
-    /**
-     * Stores screen layout (width, height, position, etc).
-     */
-    public void saveScreenLayout()
-    {
-        if (!layoutInitialized)
-            return;
-        
-        Preferences.setPreference(Preferences.MAINWINDOW_WIDTH, getWidth());
-        Preferences.setPreference(Preferences.MAINWINDOW_HEIGHT, getHeight());
-        Preferences.setPreference(Preferences.MAINWINDOW_X, getX());
-        Preferences.setPreference(Preferences.MAINWINDOW_Y, getY());
-        
-        try
-        {
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            desktop.writeXML(out);
-            out.close();
-            byte[] buf = out.toByteArray();
-            String layout = StaticUtils.uuencode(buf);
-            Preferences.setPreference(Preferences.MAINWINDOW_LAYOUT, layout);
-        } 
-        catch (Exception e) 
-        {
-            Preferences.setPreference(Preferences.MAINWINDOW_LAYOUT, new String());
-        }
     }
     
     ///////////////////////////////////////////////////////////////
@@ -1944,51 +1819,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     Set<SearchWindow> m_searches; // set of all open search windows
     
     public boolean m_projectLoaded;
-    
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
-     */
-    private void initComponents() {
-        statusPanel = new javax.swing.JPanel();
-        statusLabel = new javax.swing.JLabel();
-        statusPanel2 = new javax.swing.JPanel();
-        progressLabel = new javax.swing.JLabel();
-        lengthLabel = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        addWindowListener(this);
-        addComponentListener(this);
-        
-        statusPanel.setLayout(new java.awt.BorderLayout());
-
-        statusLabel.setFont(new java.awt.Font("MS Sans Serif", 0, 11));
-        statusPanel.add(statusLabel, java.awt.BorderLayout.CENTER);
-
-        statusPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
-
-        org.openide.awt.Mnemonics.setLocalizedText(progressLabel, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("MW_PROGRESS_DEFAULT"));
-        progressLabel.setToolTipText(java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("MW_PROGRESS_TOOLTIP"));
-        progressLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        progressLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        statusPanel2.add(progressLabel);
-
-        org.openide.awt.Mnemonics.setLocalizedText(lengthLabel, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("MW_SEGMENT_LENGTH_DEFAULT"));
-        lengthLabel.setToolTipText(java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("MW_SEGMENT_LENGTH_TOOLTIP"));
-        lengthLabel.setAlignmentX(1.0F);
-        lengthLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        lengthLabel.setFocusable(false);
-        statusPanel2.add(lengthLabel);
-
-        statusPanel.add(statusPanel2, java.awt.BorderLayout.EAST);
-
-        getContentPane().add(statusPanel, java.awt.BorderLayout.SOUTH);
-
-        setJMenuBar(menu.initComponents());
-
-        pack();
-    }
 
     public void componentHidden(java.awt.event.ComponentEvent evt) {
     }
@@ -2035,12 +1865,12 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
 
     public void formComponentMoved(java.awt.event.ComponentEvent evt)
     {
-        saveScreenLayout();
+        MainWindowUI.saveScreenLayout(this);
     }
     
     public void formComponentResized(java.awt.event.ComponentEvent evt)
     {
-        saveScreenLayout();
+        MainWindowUI.saveScreenLayout(this);
     }
     
     boolean m_autoSpellChecking;
@@ -2049,21 +1879,19 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         return m_autoSpellChecking;
     }
     
-    private javax.swing.JLabel lengthLabel;    
-    private javax.swing.JLabel progressLabel;    
-    private javax.swing.JLabel statusLabel;
-    private javax.swing.JPanel statusPanel;
-    private javax.swing.JPanel statusPanel2;    
+    JLabel lengthLabel;    
+    JLabel progressLabel;    
+    JLabel statusLabel;
 
     DockingDesktop desktop;
 
-    private DockableScrollPane editorScroller;
+    DockableScrollPane editorScroller;
     public EditorTextArea editor;
     
-    private DockableScrollPane matchesScroller;
+    DockableScrollPane matchesScroller;
     MatchesTextArea matches;
     
-    private DockableScrollPane glossaryScroller;
+    DockableScrollPane glossaryScroller;
     GlossaryTextArea glossary;
     
     SegmentHistory history = SegmentHistory.getInstance();

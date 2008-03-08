@@ -193,7 +193,7 @@ public class MainWindowMenuHandler {
             }
         }
 
-        mainWindow.saveScreenLayout();
+        MainWindowUI.saveScreenLayout(mainWindow);
         Preferences.save();
 
         if (mainWindow.isProjectLoaded())

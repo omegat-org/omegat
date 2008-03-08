@@ -1903,12 +1903,12 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     /**
      * the attribute set used for translated segments
      */
-    private AttributeSet m_translatedAttributeSet;
+    AttributeSet m_translatedAttributeSet;
     
     /**
      * the attribute set used for translated segments
      */
-    private AttributeSet m_unTranslatedAttributeSet;
+    AttributeSet m_unTranslatedAttributeSet;
     
     /**
      * return the attribute set of translated segments
@@ -1920,7 +1920,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     /**
      * display the segmetn sources or not
      */
-    private boolean m_displaySegmentSources;
+    boolean m_displaySegmentSources;
     
     public boolean displaySegmentSources() {
         return m_displaySegmentSources;
@@ -2017,80 +2017,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     public void windowOpened(java.awt.event.WindowEvent evt) {
     }
 
-    public void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        commitEntry(false);
-        
-        m_displaySegmentSources = 
-                menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected();
-        
-        Preferences.setPreference(Preferences.DISPLAY_SEGMENT_SOURCES,
-                m_displaySegmentSources);
-        
-        loadDocument();
-        activateEntry();
-    }
 
-    public void cycleSwitchCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        synchronized(editor) {
-            editor.changeCase(EditorTextArea.CASE_CYCLE);
-        }
-    }
-
-    public void titleCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        synchronized(editor) {
-            editor.changeCase(EditorTextArea.CASE_TITLE);
-        }
-    }
-
-    public void upperCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        synchronized(editor) {
-            editor.changeCase(EditorTextArea.CASE_UPPER);
-        }
-    }
-
-    public void lowerCaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        synchronized(editor) {
-            editor.changeCase(EditorTextArea.CASE_LOWER);
-        }
-    }
-
-
-    public void viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        Preferences.setPreference(Preferences.MARK_TRANSLATED_SEGMENTS,
-                menu.viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected());
-        if( menu.viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected() )
-            m_translatedAttributeSet = Styles.TRANSLATED;
-        else
-            m_translatedAttributeSet = Styles.PLAIN;
-        
-        commitEntry(false);
-        loadDocument();
-        activateEntry();
-    }
-
-   
-
-    public void viewFileListMenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        if( m_projWin==null )
-        {
-            menu.viewFileListMenuItem.setSelected(false);
-            return;
-        }
-
-        // if the project window is not shown or in the background, show it
-        if (!m_projWin.isActive()) {
-            m_projWin.buildDisplay();
-            m_projWin.setVisible(true);
-            m_projWin.toFront();
-        }
-        // otherwise hide it
-        else {
-            m_projWin.setVisible(false);
-        }
-    }
-
-    
     public void formComponentMoved(java.awt.event.ComponentEvent evt)
     {
         saveScreenLayout();
@@ -2101,19 +2028,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         saveScreenLayout();
     }
     
-        public void viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-       Preferences.setPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS,
-               menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
-        if( menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected() )
-            m_unTranslatedAttributeSet = Styles.UNTRANSLATED;
-        else
-            m_unTranslatedAttributeSet = Styles.PLAIN;
-        
-        commitEntry(false);
-        loadDocument();
-        activateEntry();
-    }
-
     boolean m_autoSpellChecking;
     
     public boolean autoSpellCheckingOn() {

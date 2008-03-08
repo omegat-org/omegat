@@ -89,32 +89,16 @@ public class MainWindowMenu implements ActionListener {
 
         // Find method by item name.
         String methodName = action + "ActionPerformed";
-        Method method1 = null;
-        Method method2 = null;
-        Method method3 = null;
+        Method method = null;
         try {
-            method1 = mainWindowMenuHandler.getClass().getMethod(methodName);
+            method = mainWindowMenuHandler.getClass().getMethod(methodName);
         } catch (NoSuchMethodException ex) {
-            try {
-                method2 = mainWindowMenuHandler.getClass().getMethod(methodName, ActionEvent.class);
-            } catch (NoSuchMethodException ex2) {
-                try {
-                    method3 = mainWindow.getClass().getMethod(methodName, ActionEvent.class);
-                } catch (NoSuchMethodException ex3) {
-                    throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
-                }
-            }
+            throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
         }
 
         // Call ...MenuItemActionPerformed method.
         try {
-            if (method1 != null) {
-                method1.invoke(mainWindowMenuHandler);
-            } else if (method2 != null) {
-                method2.invoke(mainWindowMenuHandler, evt);
-            } else {
-                method3.invoke(mainWindow, evt);
-            }
+            method.invoke(mainWindowMenuHandler);
         } catch (IllegalAccessException ex) {
             throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
         } catch (InvocationTargetException ex) {

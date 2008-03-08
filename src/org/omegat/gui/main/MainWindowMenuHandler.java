@@ -55,6 +55,7 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.Styles;
 
 /**
  * Handler for main menu items.
@@ -155,6 +156,24 @@ public class MainWindowMenuHandler {
                     .getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
             if (res == JOptionPane.YES_OPTION)
                 mainWindow.doReloadProject();
+        }
+    }
+
+    public void viewFileListMenuItemActionPerformed() {
+        if (mainWindow.m_projWin == null) {
+            mainWindow.menu.viewFileListMenuItem.setSelected(false);
+            return;
+        }
+
+        // if the project window is not shown or in the background, show it
+        if (!mainWindow.m_projWin.isActive()) {
+            mainWindow.m_projWin.buildDisplay();
+            mainWindow.m_projWin.setVisible(true);
+            mainWindow.m_projWin.toFront();
+        }
+        // otherwise hide it
+        else {
+            mainWindow.m_projWin.setVisible(false);
         }
     }
 
@@ -288,6 +307,30 @@ public class MainWindowMenuHandler {
         mainWindow.matches.setActiveMatch(4);
     }
 
+    public void cycleSwitchCaseMenuItemActionPerformed() {
+        synchronized (mainWindow.editor) {
+            mainWindow.editor.changeCase(EditorTextArea.CASE_CYCLE);
+        }
+    }
+
+    public void titleCaseMenuItemActionPerformed() {
+        synchronized (mainWindow.editor) {
+            mainWindow.editor.changeCase(EditorTextArea.CASE_TITLE);
+        }
+    }
+
+    public void upperCaseMenuItemActionPerformed() {
+        synchronized (mainWindow.editor) {
+            mainWindow.editor.changeCase(EditorTextArea.CASE_UPPER);
+        }
+    }
+
+    public void lowerCaseMenuItemActionPerformed() {
+        synchronized (mainWindow.editor) {
+            mainWindow.editor.changeCase(EditorTextArea.CASE_LOWER);
+        }
+    }
+
     public void gotoNextUntranslatedMenuItemActionPerformed() {
         mainWindow.doNextUntranslatedEntry();
     }
@@ -415,6 +458,43 @@ public class MainWindowMenuHandler {
             if (nextValue != -1)
                 mainWindow.doGotoEntry(nextValue + 1);
         }
+    }
+
+    public void viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed() {
+        Preferences.setPreference(Preferences.MARK_TRANSLATED_SEGMENTS,
+                mainWindow.menu.viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected());
+        if (mainWindow.menu.viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected())
+            mainWindow.m_translatedAttributeSet = Styles.TRANSLATED;
+        else
+            mainWindow.m_translatedAttributeSet = Styles.PLAIN;
+
+        mainWindow.commitEntry(false);
+        mainWindow.loadDocument();
+        mainWindow.activateEntry();
+    }
+
+    public void viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed() {
+        Preferences.setPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS,
+                mainWindow.menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
+        if (mainWindow.menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected())
+            mainWindow.m_unTranslatedAttributeSet = Styles.UNTRANSLATED;
+        else
+            mainWindow.m_unTranslatedAttributeSet = Styles.PLAIN;
+
+        mainWindow.commitEntry(false);
+        mainWindow.loadDocument();
+        mainWindow.activateEntry();
+    }
+
+    public void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed() {
+        mainWindow.commitEntry(false);
+
+        mainWindow.m_displaySegmentSources = mainWindow.menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected();
+
+        Preferences.setPreference(Preferences.DISPLAY_SEGMENT_SOURCES, mainWindow.m_displaySegmentSources);
+
+        mainWindow.loadDocument();
+        mainWindow.activateEntry();
     }
 
     public void toolsValidateTagsMenuItemActionPerformed() {

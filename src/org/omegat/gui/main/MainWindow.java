@@ -2043,7 +2043,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     DockingDesktop desktop;
 
     private DockableScrollPane editorScroller;
-    EditorTextArea editor;
+    public EditorTextArea editor;
     
     private DockableScrollPane matchesScroller;
     MatchesTextArea matches;

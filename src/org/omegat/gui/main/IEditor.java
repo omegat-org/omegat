@@ -22,46 +22,31 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **************************************************************************/
 
-package org.omegat.core;
-
-import org.omegat.core.data.IDataEngine;
-import org.omegat.gui.main.IEditor;
-import org.omegat.gui.main.IMainWindow;
+package org.omegat.gui.main;
 
 /**
- * Class which contains all components instances.
+ * Interface for access to editor functionality.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class Core {
-    private static IDataEngine dataEngine;
-    private static IMainWindow mainWindow;
-    private static IEditor editor;
-
-    /** Get data engine instance. */
-    public static IDataEngine getDataEngine() {
-	return dataEngine;
-    }
-
-    /** Get main windows instance. */
-    public static IMainWindow getMainWindow() {
-	return mainWindow;
-    }
-    
-    /** Get editor instance. */
-    public static IEditor getEditor() {
-        return editor;
+public interface IEditor {
+    enum CHANGE_CASE_TO {
+        /** lower case */
+        LOWER,
+        /** title case */
+        TITLE,
+        /** upper case */
+        UPPER,
+        /** cycle between cases */
+        CYCLE,
     }
 
     /**
-     * Initialize application core from exists main components instances.
+     * Change case of the selected text or if none is selected, of the current
+     * word.
      * 
-     * TODO: change initialization for instantiate component instances, instead
-     * use already created instanced
+     * @param newCase :
+     *                lower, title, upper or cycle
      */
-    public static void initialize(final IDataEngine de, final IMainWindow mw, final IEditor ed) {
-	dataEngine = de;
-        mainWindow = mw;
-        editor = ed;
-    }
+    void changeCase(CHANGE_CASE_TO newCase);
 }

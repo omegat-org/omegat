@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Didier Briel and Tiago Saboga
                2007 Zoltan Bartko - bartkozoltan@bartkozoltan.com
-               2008 Andrzej Sawula
+               2008 Andrzej Sawula, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -71,8 +71,9 @@ import org.omegat.util.gui.Styles;
  * @author Tiago Saboga
  * @author Zoltan Bartko
  * @author Andrzej Sawula
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class EditorTextArea extends JTextPane implements MouseListener, DocumentListener
+public class EditorTextArea extends JTextPane implements MouseListener, DocumentListener, IEditor
 {
     private MainWindow mw;
     
@@ -910,23 +911,15 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
             }
         }
     }
-    
-    /** lower case */
-    public final static int CASE_LOWER = 1;
-    /** title case */
-    public final static int CASE_TITLE = 2;
-    /** upper case */
-    public final static int CASE_UPPER = 3;
-    
-    /** cycle between cases */
-    public final static int CASE_CYCLE = 0;
-    
+   
     /**
-     * change case of the selected text or if none is selected, of the current 
-     * word
-     * @param toWhat : one of the CASE_* constants
+     * Change case of the selected text or if none is selected, of the current
+     * word.
+     * 
+     * @param toWhat :
+     *                lower, title, upper or cycle
      */
-    public synchronized void changeCase(int toWhat) {
+    public synchronized void changeCase(CHANGE_CASE_TO toWhat) {
         int start = getSelectionStart();
         int end = getSelectionEnd();
         
@@ -962,7 +955,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
             
             StringBuffer buffer = new StringBuffer(selectionText);
             
-            if (toWhat == CASE_CYCLE) {
+            if (toWhat == CHANGE_CASE_TO.CYCLE) {
                 int lower = 0;
                 int upper = 0;
                 int title = 0;
@@ -989,16 +982,16 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                     return; // nothing to do here
 
                 if (lower != 0 && title == 0 && upper == 0)
-                    toWhat = CASE_TITLE;
+                    toWhat = CHANGE_CASE_TO.TITLE;
                 
                 if (lower == 0 && title != 0 && upper == 0)
-                    toWhat = CASE_UPPER;
+                    toWhat = CHANGE_CASE_TO.UPPER;
                 
                 if (lower == 0 && title == 0 && upper != 0)
-                    toWhat = CASE_LOWER;
+                    toWhat = CHANGE_CASE_TO.LOWER;
                 
                 if (other != 0)
-                    toWhat = CASE_UPPER;
+                    toWhat = CHANGE_CASE_TO.UPPER;
             }
            
             int lengthIncrement = 0;
@@ -1038,15 +1031,15 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
      * @param input : the string to work on
      * @param toWhat: one of the CASE_* values - except for case CASE_CYCLE.
      */
-    private String doChangeCase(String input, int toWhat) {
+    private String doChangeCase(String input, CHANGE_CASE_TO toWhat) {
         Locale locale = CommandThread.core
                 .getProjectProperties().getTargetLanguage().getLocale();
         
         switch (toWhat) {
-            case CASE_LOWER: return input.toLowerCase(locale);
-            case CASE_UPPER: return input.toUpperCase(locale);
+            case LOWER: return input.toLowerCase(locale);
+            case UPPER: return input.toUpperCase(locale);
             // TODO: find out how to get a locale-aware title case
-            case CASE_TITLE: return Character.toTitleCase(input.charAt(0)) 
+            case TITLE: return Character.toTitleCase(input.charAt(0)) 
                     + input.substring(1).toLowerCase(locale);
         }
         // if everything fails

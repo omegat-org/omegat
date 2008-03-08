@@ -309,25 +309,25 @@ public class MainWindowMenuHandler {
 
     public void cycleSwitchCaseMenuItemActionPerformed() {
         synchronized (mainWindow.editor) {
-            mainWindow.editor.changeCase(EditorTextArea.CASE_CYCLE);
+            Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.CYCLE);
         }
     }
 
     public void titleCaseMenuItemActionPerformed() {
         synchronized (mainWindow.editor) {
-            mainWindow.editor.changeCase(EditorTextArea.CASE_TITLE);
+            Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.TITLE);
         }
     }
 
     public void upperCaseMenuItemActionPerformed() {
         synchronized (mainWindow.editor) {
-            mainWindow.editor.changeCase(EditorTextArea.CASE_UPPER);
+            Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.UPPER);
         }
     }
 
     public void lowerCaseMenuItemActionPerformed() {
         synchronized (mainWindow.editor) {
-            mainWindow.editor.changeCase(EditorTextArea.CASE_LOWER);
+            Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.LOWER);
         }
     }
 

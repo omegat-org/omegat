@@ -94,7 +94,7 @@ public class Main
         
         mainwindow.setVisible(true);
         
-        Core.initialize(CommandThread.core, mainwindow);
+        Core.initialize(CommandThread.core, mainwindow, mainwindow.editor);
     }
 }
 

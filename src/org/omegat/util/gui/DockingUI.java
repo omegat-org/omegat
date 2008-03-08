@@ -114,8 +114,7 @@ public class DockingUI {
      *            icon file name
      * @return icon instance
      */
-    private static ImageIcon getIcon(String iconName) {
-        return new ImageIcon(DockingUI.class.getResource("/org/omegat/gui/resources/" + // NOI18N
-                iconName));
+    private static ImageIcon getIcon(final String iconName) {
+        return ResourcesUtil.getIcon("/org/omegat/gui/resources/" + iconName);
     }
 }

@@ -36,10 +36,14 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.Locale;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
 import org.omegat.util.OConsts;
@@ -219,5 +223,52 @@ public class MainWindowUI {
         } catch (Exception e) {
             Preferences.setPreference(Preferences.MAINWINDOW_LAYOUT, new String());
         }
+    }
+
+    /** Loads Instant start article */
+    public static void loadInstantStart(final DockableScrollPane editorScroller, final EditorTextArea editor) {
+        try {
+            String language = detectInstantStartLanguage();
+            String filepath = StaticUtils.installDir() + File.separator + OConsts.HELP_DIR + File.separator + language
+                    + File.separator + OConsts.HELP_INSTANT_START;
+            JTextPane instantArticlePane = new JTextPane();
+            instantArticlePane.setEditable(false);
+            instantArticlePane.setPage("file:///" + filepath);
+            editorScroller.setViewportView(instantArticlePane);
+            editorScroller.setName(OStrings.getString("DOCKING_INSTANT_START_TITLE"));
+        } catch (IOException e) {
+            editorScroller.setViewportView(editor);
+        }
+    }
+
+    /**
+     * Detects the language of the instant start guide (checks if present in
+     * default locale's language).
+     * 
+     * If there is no instant start guide in the default locale's language, "en"
+     * (English) is returned, otherwise the acronym for the default locale's
+     * language.
+     * 
+     * @author Henry Pijffers (henry.pijffers@saxnot.com)
+     */
+    private static String detectInstantStartLanguage() {
+        // Get the system language and country
+        String language = Locale.getDefault().getLanguage().toLowerCase();
+        String country = Locale.getDefault().getCountry().toUpperCase();
+
+        // Check if there's a translation for the full locale (lang + country)
+        File isg = new File(StaticUtils.installDir() + File.separator + OConsts.HELP_DIR + File.separator + language
+                + "_" + country + File.separator + OConsts.HELP_INSTANT_START);
+        if (isg.exists())
+            return language + "_" + country;
+
+        // Check if there's a translation for the language only
+        isg = new File(StaticUtils.installDir() + File.separator + OConsts.HELP_DIR + File.separator + language
+                + File.separator + OConsts.HELP_INSTANT_START);
+        if (isg.exists())
+            return language;
+
+        // Default to English, if no translation exists
+        return "en";
     }
 }

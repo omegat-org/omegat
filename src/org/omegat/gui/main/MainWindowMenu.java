@@ -47,7 +47,9 @@ import net.roydesign.mac.MRJAdapter;
 
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.Styles;
 import org.openide.awt.Mnemonics;
 
 /**
@@ -78,7 +80,7 @@ public class MainWindowMenu implements ActionListener {
      * Code for dispatching events from components to event handlers.
      * 
      * @param evt
-     *            event info
+     *                event info
      */
     public void actionPerformed(ActionEvent evt) {
         // Item what perform event.
@@ -202,35 +204,56 @@ public class MainWindowMenu implements ActionListener {
         setActionCommands();
         initUIShortcuts();
 
-        initMacSpecific();        
+        initMacSpecific();
         
+        updateCheckboxesOnStart();
+
         return mainMenu;
     }
-    
+
+    /** Updates menu checkboxes from preferences on start */
+    private void updateCheckboxesOnStart() {
+        if (Preferences.isPreference(Preferences.USE_TAB_TO_ADVANCE)) {
+            optionsTabAdvanceCheckBoxMenuItem.setSelected(true);
+            mainWindow.m_advancer = KeyEvent.VK_TAB;
+        } else {
+            mainWindow.m_advancer = KeyEvent.VK_ENTER;
+        }
+        optionsAlwaysConfirmQuitCheckBoxMenuItem.setSelected(Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT));
+
+        if (Preferences.isPreference(Preferences.MARK_TRANSLATED_SEGMENTS)) {
+            viewMarkTranslatedSegmentsCheckBoxMenuItem.setSelected(true);
+            mainWindow.m_translatedAttributeSet = Styles.TRANSLATED;
+        } else if (Preferences.isPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS)) {
+            viewMarkUntranslatedSegmentsCheckBoxMenuItem.setSelected(true);
+            mainWindow.m_unTranslatedAttributeSet = Styles.UNTRANSLATED;
+        } else {
+            mainWindow.m_translatedAttributeSet = Styles.PLAIN;
+            mainWindow.m_unTranslatedAttributeSet = Styles.PLAIN;
+        }
+        if (Preferences.isPreference(Preferences.DISPLAY_SEGMENT_SOURCES)) {
+            viewDisplaySegmentSourceCheckBoxMenuItem.setSelected(true);
+            mainWindow.m_displaySegmentSources = true;
+        }
+    }
+
     /**
      * Initialize Mac-specific features.
      */
     private void initMacSpecific() {
-        try
-        {
+        try {
             // MacOSX-specific
-            MRJAdapter.addQuitApplicationListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent e)
-                {
+            MRJAdapter.addQuitApplicationListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
                     mainWindowMenuHandler.projectExitMenuItemActionPerformed();
                 }
             });
-            MRJAdapter.addAboutListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent e)
-                {
+            MRJAdapter.addAboutListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
                     mainWindowMenuHandler.helpAboutMenuItemActionPerformed();
                 }
             });
-        }
-        catch(NoClassDefFoundError e)
-        {
+        } catch (NoClassDefFoundError e) {
             Log.log(e);
         }
     }
@@ -239,7 +262,7 @@ public class MainWindowMenu implements ActionListener {
      * Create menu instance and set title.
      * 
      * @param titleKey
-     *            title name key in resource bundle
+     *                title name key in resource bundle
      * @return menu instance
      */
     private JMenu createMenu(final String titleKey) {
@@ -252,7 +275,7 @@ public class MainWindowMenu implements ActionListener {
      * Create menu item instance and set title.
      * 
      * @param titleKey
-     *            title name key in resource bundle
+     *                title name key in resource bundle
      * @return menu item instance
      */
     private JMenuItem createMenuItem(final String titleKey) {
@@ -266,7 +289,7 @@ public class MainWindowMenu implements ActionListener {
      * Create menu item instance and set title.
      * 
      * @param titleKey
-     *            title name key in resource bundle
+     *                title name key in resource bundle
      * @return menu item instance
      */
     private JCheckBoxMenuItem createCheckboxMenuItem(final String titleKey) {
@@ -333,7 +356,7 @@ public class MainWindowMenu implements ActionListener {
      * Utility method to set Ctrl + key accelerators for menu items.
      * 
      * @param key
-     *            integer specifiyng the key code (e.g. KeyEvent.VK_Z)
+     *                integer specifiyng the key code (e.g. KeyEvent.VK_Z)
      */
     private void setAccelerator(JMenuItem item, int key) {
         setAccelerator(item, key, false);
@@ -343,7 +366,7 @@ public class MainWindowMenu implements ActionListener {
      * Utility method to set Ctrl + key accelerators for menu items.
      * 
      * @param key
-     *            integer specifiyng the key code (e.g. KeyEvent.VK_Z)
+     *                integer specifiyng the key code (e.g. KeyEvent.VK_Z)
      */
     private void setAccelerator(JMenuItem item, int key, boolean shift) {
         int shiftmask = shift ? KeyEvent.SHIFT_MASK : 0;
@@ -355,7 +378,7 @@ public class MainWindowMenu implements ActionListener {
      * Enable or disable items depend of project open or close.
      * 
      * @param isProjectOpened
-     *            project open status: true if opened, false if closed
+     *                project open status: true if opened, false if closed
      */
     public void onProjectStatusChanged(final boolean isProjectOpened) {
         JMenuItem[] itemsToSwitchOff = new JMenuItem[] { projectNewMenuItem, projectOpenMenuItem };

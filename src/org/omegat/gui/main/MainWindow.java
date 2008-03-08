@@ -30,24 +30,19 @@ package org.omegat.gui.main;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ComponentListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.text.AbstractDocument;
@@ -77,6 +72,7 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
 import org.omegat.util.WikiGet;
 import org.omegat.util.gui.OmegaTFileChooser;
+import org.omegat.util.gui.ResourcesUtil;
 import org.omegat.util.gui.Styles;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
@@ -118,7 +114,8 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
 
         additionalUIInit();
         oldInit();
-        loadInstantStart();
+        
+        MainWindowUI.loadInstantStart(editorScroller, editor);
         
         CoreEvents.registerApplicationEventListener(this);
         CoreEvents.registerProjectChangeListener(this);
@@ -139,35 +136,18 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     private void additionalUIInit()
     {
         updateTitle();
-        loadWindowIcon();
+        
+        setIconImage(ResourcesUtil.getIcon("/org/omegat/gui/resources/OmegaT_small.gif").getImage());
+
         m_projWin = new ProjectFrame(this);
         m_projWin.setFont(m_font);
 
         statusLabel.setText(new String()+' ');
         
         MainWindowUI.loadScreenLayout(this);
-        updateCheckboxesOnStart();
         uiUpdateOnProjectClose();
     }
 
-    /**
-     * Loads and set main window's icon.
-     */
-    private void loadWindowIcon()
-    {
-        try
-        {
-            URL resource = getClass().getResource("/org/omegat/gui/resources/OmegaT_small.gif");  // NOI18N
-            ImageIcon imageicon = new ImageIcon(resource);
-            Image image = imageicon.getImage();
-            setIconImage(image);
-        }
-        catch( Exception e )
-        {
-            Log.log(e);
-        }
-    }
-    
     /**
      * Sets the title of the main window appropriately
      */
@@ -192,7 +172,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         // RFE [1604238]: instant start display in the main window
         else
         {
-            loadInstantStart();
+            MainWindowUI.loadInstantStart(editorScroller, editor);
         }
         setTitle(s);
     }
@@ -220,96 +200,12 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
                 (start.charAt(zero - 3) == '0');
     }
     
-    /** Updates menu checkboxes from preferences on start */
-    private void updateCheckboxesOnStart() {
-        if (Preferences.isPreference(Preferences.USE_TAB_TO_ADVANCE)) {
-            menu.optionsTabAdvanceCheckBoxMenuItem.setSelected(true);
-            m_advancer = KeyEvent.VK_TAB;
-        } else {
-            m_advancer = KeyEvent.VK_ENTER;
-        }
-        menu.optionsAlwaysConfirmQuitCheckBoxMenuItem.setSelected(Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT));
-        
-        if (Preferences.isPreference(Preferences.MARK_TRANSLATED_SEGMENTS)) {
-            menu.viewMarkTranslatedSegmentsCheckBoxMenuItem.setSelected(true);
-            m_translatedAttributeSet = Styles.TRANSLATED;
-        } else if (Preferences.isPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS)) {
-            menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.setSelected(true);
-            m_unTranslatedAttributeSet = Styles.UNTRANSLATED;
-        } else {
-            m_translatedAttributeSet = Styles.PLAIN;
-            m_unTranslatedAttributeSet = Styles.PLAIN;
-        }
-        if (Preferences.isPreference(Preferences.DISPLAY_SEGMENT_SOURCES)) {
-            menu.viewDisplaySegmentSourceCheckBoxMenuItem.setSelected(true);
-            m_displaySegmentSources = true;
-        }
-    }
-    
     boolean layoutInitialized = false;
     
     public void filelistWindowClosed()
     {
     }
-    
-    /** Loads Instant start article */
-    private void loadInstantStart()
-    {
-        try
-        {
-            String language = detectInstantStartLanguage();
-            String filepath =
-                    StaticUtils.installDir()
-                    + File.separator + OConsts.HELP_DIR + File.separator
-                    + language + File.separator
-                    + OConsts.HELP_INSTANT_START;
-            JTextPane instantArticlePane = new JTextPane();
-            instantArticlePane.setEditable(false);
-            instantArticlePane.setPage("file:///"+filepath);                    // NOI18N
-            editorScroller.setViewportView(instantArticlePane);
-            editorScroller.setName(OStrings.getString("DOCKING_INSTANT_START_TITLE"));
-        }
-        catch (IOException e)
-        {
-            editorScroller.setViewportView(editor);
-        }
-    }
-    
-    /**
-      * Detects the language of the instant start guide
-      * (checks if present in default locale's language).
-      *
-      * If there is no instant start guide in the default
-      * locale's language, "en" (English) is returned, otherwise
-      * the acronym for the default locale's language.
-      *
-      * @author Henry Pijffers (henry.pijffers@saxnot.com)
-      */
-    private String detectInstantStartLanguage() {
-        // Get the system language and country
-        String language = java.util.Locale.getDefault().getLanguage().toLowerCase();
-        String country  = java.util.Locale.getDefault().getCountry().toUpperCase();
-
-        // Check if there's a translation for the full locale (lang + country)
-        File isg = new File(StaticUtils.installDir()
-            + File.separator + OConsts.HELP_DIR
-            + File.separator + language + "_" + country
-            + File.separator + OConsts.HELP_INSTANT_START);
-        if (isg.exists())
-            return language + "_" + country;
-
-        // Check if there's a translation for the language only
-        isg = new File(StaticUtils.installDir()
-            + File.separator + OConsts.HELP_DIR
-            + File.separator + language
-            + File.separator + OConsts.HELP_INSTANT_START);
-        if(isg.exists())
-            return language;
-
-        // Default to English, if no translation exists
-        return "en";                                                        // NOI18N
-    }
-    
+ 
     ///////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////
     // command handling

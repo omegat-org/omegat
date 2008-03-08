@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 
 /**
@@ -39,6 +40,7 @@ public class CoreEvents {
     private static final Logger LOG = Logger.getLogger(CoreEvents.class.getName());
 
     private static final List<IProjectEventListener> projectEventListeners = new ArrayList<IProjectEventListener>();
+    private static final List<IApplicationEventListener> applicationEventListeners = new ArrayList<IApplicationEventListener>();
 
     /** Register listener. */
     public static void registerProjectChangeListener(final IProjectEventListener listener) {
@@ -54,12 +56,45 @@ public class CoreEvents {
         }
     }
 
+    /** Register listener. */
+    public static void registerApplicationEventListener(final IApplicationEventListener listener) {
+        synchronized (applicationEventListeners) {
+            applicationEventListeners.add(listener);
+        }
+    }
+
+    /** Unregister listener. */
+    public static void unregisterApplicationEventListener(final IApplicationEventListener listener) {
+        synchronized (applicationEventListeners) {
+            applicationEventListeners.remove(listener);
+        }
+    }
+
     /** Fire event. */
     public static void fireProjectChange() {
         LOG.info("EVENT: project change event");
         synchronized (projectEventListeners) {
             for (IProjectEventListener listener : projectEventListeners) {
                 listener.onProjectChanged();
+            }
+        }
+    }
+    
+    /** Fire event. */
+    public static void fireApplicationStartup() {
+        LOG.info("EVENT: application startup");
+        synchronized (applicationEventListeners) {
+            for (IApplicationEventListener listener : applicationEventListeners) {
+                listener.onApplicationStartup();
+            }
+        }
+    }
+    /** Fire event. */
+    public static void fireApplicationShutdown() {
+        LOG.info("EVENT: application shutdown");
+        synchronized (applicationEventListeners) {
+            for (IApplicationEventListener listener : applicationEventListeners) {
+                listener.onApplicationShutdown();
             }
         }
     }

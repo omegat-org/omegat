@@ -58,8 +58,11 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.core.ProjectProperties;
 import org.omegat.core.StringEntry;
+import org.omegat.core.events.IApplicationEventListener;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.spellchecker.SpellChecker;
@@ -97,7 +100,7 @@ import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class MainWindow extends JFrame implements WindowListener, ComponentListener, IMainWindow
+public class MainWindow extends JFrame implements WindowListener, ComponentListener, IMainWindow, IProjectEventListener, IApplicationEventListener
 {
     protected final MainWindowMenu menu;
     
@@ -112,6 +115,15 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         additionalUIInit();
         oldInit();
         loadInstantStart();
+        CoreEvents.registerApplicationEventListener(this);
+        CoreEvents.registerProjectChangeListener(this);
+    }
+    
+    public void onApplicationStartup() {
+        onProjectChanged();
+    }
+    
+    public void onApplicationShutdown() {
     }
 
     private void createMainComponents()
@@ -664,11 +676,17 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         setLengthLabel(OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
     }
     
+    public void onProjectChanged() {
+        if (Core.getDataEngine().isProjectLoaded()) {
+            menu.onProjectStatusChanged(true);
+        } else {
+            menu.onProjectStatusChanged(false);
+        }
+    }
+    
     /** Updates UI (enables/disables menu items) upon <b>closing</b> project */
     private void uiUpdateOnProjectClose()
     {
-        menu.onProjectStatusChanged(false);
-        
         synchronized (editor) {
             editor.setEditable(false);
         }
@@ -689,8 +707,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     /** Updates UI (enables/disables menu items) upon <b>opening</b> project */
     private void uiUpdateOnProjectOpen()
     {
-        menu.onProjectStatusChanged(true);
-        
         synchronized (editor) {
             editor.setEditable(true);
         }

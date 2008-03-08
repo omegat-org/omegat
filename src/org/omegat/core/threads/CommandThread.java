@@ -357,6 +357,18 @@ public class CommandThread extends Thread implements IDataEngine
         }
     }
     
+    /**
+     * True if project loaded. TODO: use m_config for that in future.
+     */
+    private boolean projectLoaded = false;
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean isProjectLoaded() {
+        return projectLoaded;
+    }
+    
     
     private boolean projectClosing = false;
     /**
@@ -365,6 +377,7 @@ public class CommandThread extends Thread implements IDataEngine
      * any error.
      */
     public void closeProject() {
+        projectLoaded = false;
         projectClosing = true;
         cleanUp();
 
@@ -819,6 +832,8 @@ public class CommandThread extends Thread implements IDataEngine
         
         // initialize the spell checker
         m_spellchecker.initialize();
+        
+        projectLoaded = true;
         
         CoreEvents.fireProjectChange();
 

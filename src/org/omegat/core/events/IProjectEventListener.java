@@ -22,49 +22,16 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **************************************************************************/
 
-package org.omegat.core.data;
-
-import java.io.IOException;
-import java.io.InterruptedIOException;
-
-import org.omegat.core.ProjectProperties;
-import org.omegat.filters2.TranslationException;
+package org.omegat.core.events;
 
 /**
- * Interface for access to data engine funtionality.
+ * Listener interface for project status change events.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public interface IDataEngine {
+public interface IProjectEventListener {
     /**
-     * Create new project.
+     * This method called when project status changed, i.e. new/open/save/close/compile.
      */
-    void createProject();
-
-    /**
-     * Load project.
-     */
-    boolean loadProject(String projectDir) throws IOException, InterruptedIOException, TranslationException;
-
-    /**
-     * Save project.
-     */
-    void saveProject();
-
-    /**
-     * Close project.
-     */
-    void closeProject();
-
-    /**
-     * Create translated documents.
-     */
-    void compileProject() throws IOException, TranslationException;
-
-    /**
-     * Get project properties.
-     * 
-     * @return project properties
-     */
-    ProjectProperties getProjectProperties();
+    void onProjectChanged();
 }

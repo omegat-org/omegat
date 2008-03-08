@@ -22,49 +22,45 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **************************************************************************/
 
-package org.omegat.core.data;
+package org.omegat.core;
 
-import java.io.IOException;
-import java.io.InterruptedIOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
-import org.omegat.core.ProjectProperties;
-import org.omegat.filters2.TranslationException;
+import org.omegat.core.events.IProjectEventListener;
 
 /**
- * Interface for access to data engine funtionality.
+ * Class for distribute main application events.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public interface IDataEngine {
-    /**
-     * Create new project.
-     */
-    void createProject();
+public class CoreEvents {
+    private static final Logger LOG = Logger.getLogger(CoreEvents.class.getName());
 
-    /**
-     * Load project.
-     */
-    boolean loadProject(String projectDir) throws IOException, InterruptedIOException, TranslationException;
+    private static final List<IProjectEventListener> projectEventListeners = new ArrayList<IProjectEventListener>();
 
-    /**
-     * Save project.
-     */
-    void saveProject();
+    /** Register listener. */
+    public static void registerProjectChangeListener(final IProjectEventListener listener) {
+        synchronized (projectEventListeners) {
+            projectEventListeners.add(listener);
+        }
+    }
 
-    /**
-     * Close project.
-     */
-    void closeProject();
+    /** Unregister listener. */
+    public static void unregisterProjectChangeListener(final IProjectEventListener listener) {
+        synchronized (projectEventListeners) {
+            projectEventListeners.remove(listener);
+        }
+    }
 
-    /**
-     * Create translated documents.
-     */
-    void compileProject() throws IOException, TranslationException;
-
-    /**
-     * Get project properties.
-     * 
-     * @return project properties
-     */
-    ProjectProperties getProjectProperties();
+    /** Fire event. */
+    public static void fireProjectChange() {
+        LOG.info("EVENT: project change event");
+        synchronized (projectEventListeners) {
+            for (IProjectEventListener listener : projectEventListeners) {
+                listener.onProjectChanged();
+            }
+        }
+    }
 }

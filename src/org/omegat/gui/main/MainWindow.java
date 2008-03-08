@@ -659,8 +659,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         updateTitle();
         uiUpdateOnProjectClose();
         
-        CommandThread.core.signalProjectClosing();
-        CommandThread.core.cleanUp();
+        Core.getDataEngine().closeProject();
         progressLabel.setText(OStrings.getString("MW_PROGRESS_DEFAULT"));
         setLengthLabel(OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
     }
@@ -748,7 +747,7 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
      */
     void doCreateProject()
     {
-        CommandThread.core.createProject();
+        Core.getDataEngine().createProject();
         try
         {
             String projectRoot = CommandThread.core.getProjectProperties().getProjectRoot();

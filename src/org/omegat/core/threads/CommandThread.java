@@ -43,6 +43,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.core.LegacyTM;
 import org.omegat.core.ProjectProperties;
 import org.omegat.core.StringEntry;
@@ -153,7 +154,7 @@ public class CommandThread extends Thread implements IDataEngine
                         break;
                         
                     case RequestPacket.SAVE:
-                        saveProject();
+                        Core.getDataEngine().saveProject();
                         break;
                 }
             }
@@ -259,7 +260,7 @@ public class CommandThread extends Thread implements IDataEngine
             
             evtStr = OStrings.getString("CT_LOADING_PROJECT");
             MessageRelay.uiMessageSetMessageText(tf, evtStr);
-            if (!loadProject((String)pack.parameter))
+            if (!Core.getDataEngine().loadProject((String)pack.parameter))
             {
                 // loading of project cancelled
                 evtStr = OStrings.getString("CT_CANCEL_LOAD");
@@ -363,9 +364,11 @@ public class CommandThread extends Thread implements IDataEngine
      * and if it's still being loaded, core thread shouldn't throw
      * any error.
      */
-    public void signalProjectClosing()
-    {
+    public void closeProject() {
         projectClosing = true;
+        cleanUp();
+
+        CoreEvents.fireProjectChange();
     }
     
     /**
@@ -508,6 +511,8 @@ public class CommandThread extends Thread implements IDataEngine
             fm.translateFile(srcRoot, midName, locRoot, processedFiles);
         }
         Core.getMainWindow().showStatusMessage(OStrings.getString("CT_COMPILE_DONE_MX"));
+
+        CoreEvents.fireProjectChange();
     }
     
     /** Saves the translation memory and preferences */
@@ -581,6 +586,8 @@ public class CommandThread extends Thread implements IDataEngine
 
         // update statistics
         Statistics.buildProjectStats(m_strEntryList, m_srcTextEntryArray, m_config, numberofTranslatedSegments);
+
+        CoreEvents.fireProjectChange();
     }
     
     /**
@@ -687,6 +694,7 @@ public class CommandThread extends Thread implements IDataEngine
             }
             
             m_config.buildProjFile();
+            CoreEvents.fireProjectChange();
         }
         catch(IOException e)
         {
@@ -748,7 +756,7 @@ public class CommandThread extends Thread implements IDataEngine
      * @param projectRoot The folder where the project resides. If it's null,
      *                     FileChooser is called to select a project.
      */
-    private boolean loadProject(String projectRoot)
+    public boolean loadProject(String projectRoot)
             throws IOException, InterruptedIOException, TranslationException
     {
         if (!m_config.loadExisting(m_transFrame, projectRoot))
@@ -812,6 +820,8 @@ public class CommandThread extends Thread implements IDataEngine
         // initialize the spell checker
         m_spellchecker.initialize();
         
+        CoreEvents.fireProjectChange();
+
         return true;
     }
     

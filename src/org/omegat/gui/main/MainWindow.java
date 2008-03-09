@@ -31,7 +31,8 @@ package org.omegat.gui.main;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ComponentListener;
-import java.awt.event.WindowListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,7 +62,6 @@ import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.gui.ProjectFrame;
 import org.omegat.gui.SearchWindow;
-import org.omegat.gui.TagValidationFrame;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -89,8 +89,8 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class MainWindow extends JFrame implements WindowListener, ComponentListener, IMainWindow,
-        IProjectEventListener, IApplicationEventListener {
+public class MainWindow extends JFrame implements ComponentListener, IMainWindow, IProjectEventListener,
+        IApplicationEventListener {
     protected final MainWindowMenu menu;
     
     /** Creates new form MainWindow */
@@ -105,7 +105,12 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
 
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         
-        addWindowListener(this);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                menu.mainWindowMenuHandler.projectExitMenuItemActionPerformed();
+            }
+        });
+
         addComponentListener(this);
 
         MainWindowUI.createMainComponents(this);
@@ -128,6 +133,19 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     public void onApplicationShutdown() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public JFrame getApplicationFrame() {
+        return this;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public Font getApplicationFont() {
+        return m_font;
+    }
 
     /**
      * Some additional actions to initialize UI,
@@ -210,39 +228,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     ///////////////////////////////////////////////////////////////
     // command handling
     
-    void doValidateTags()
-    {
-        List<SourceTextEntry> suspects = CommandThread.core.validateTags();
-        if (suspects.size() > 0)
-        {
-            // create a tag validation window if necessary
-            if (m_tagWin == null) {
-                m_tagWin = new TagValidationFrame(this);
-                m_tagWin.addWindowListener(this);
-                m_tagWin.setFont(m_font);
-            } else {
-                // close tag validation window if present
-                m_tagWin.dispose();
-            }
-
-            // display list of suspect strings
-            m_tagWin.setVisible(true);
-            m_tagWin.displayStringList(suspects);
-        }
-        else
-        {
-            // close tag validation window if present
-            if (m_tagWin != null)
-                m_tagWin.dispose();
-
-            // show dialog saying all is OK
-            JOptionPane.showMessageDialog(this,
-                    OStrings.getString("TF_NOTICE_OK_TAGS"),
-                    OStrings.getString("TF_NOTICE_TITLE_TAGS"),
-                    JOptionPane.INFORMATION_MESSAGE);
-        }
-    }
-
     public synchronized void doNextEntry()
     {
         if (!isProjectLoaded())
@@ -467,8 +452,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
         m_projWin.setVisible(false);
 
         // dispose other windows
-        if (m_tagWin != null)
-            m_tagWin.dispose();
         for (SearchWindow sw : m_searches) {
             sw.dispose();
         }
@@ -1679,7 +1662,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
     private String  m_activeProj;
     public int      m_curEntryNum;
 
-    TagValidationFrame m_tagWin;
     ProjectFrame m_projWin;
     public ProjectFrame getProjectFrame()
     {
@@ -1733,31 +1715,6 @@ public class MainWindow extends JFrame implements WindowListener, ComponentListe
 
     public void componentShown(java.awt.event.ComponentEvent evt) {
     }
-
-    public void windowActivated(java.awt.event.WindowEvent evt) {
-    }
-
-    public void windowClosed(java.awt.event.WindowEvent evt) {
-    }
-
-    public void windowClosing(java.awt.event.WindowEvent evt) {
-        if (evt.getSource() == MainWindow.this) {
-            menu.mainWindowMenuHandler.projectExitMenuItemActionPerformed();
-        }
-    }
-
-    public void windowDeactivated(java.awt.event.WindowEvent evt) {
-    }
-
-    public void windowDeiconified(java.awt.event.WindowEvent evt) {
-    }
-
-    public void windowIconified(java.awt.event.WindowEvent evt) {
-    }
-
-    public void windowOpened(java.awt.event.WindowEvent evt) {
-    }
-
 
     public void formComponentMoved(java.awt.event.ComponentEvent evt)
     {

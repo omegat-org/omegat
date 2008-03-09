@@ -275,7 +275,6 @@ public class MainWindowMenuHandler {
             // SearchThread srch = new SearchThread(this, selection);
             // srch.start();
             SearchWindow search = new SearchWindow(mainWindow, selection);
-            search.addWindowListener(mainWindow);
             DialogThread dt = new DialogThread(search);
             dt.start();
             mainWindow.m_searches.add(search);
@@ -498,7 +497,7 @@ public class MainWindowMenuHandler {
     }
 
     public void toolsValidateTagsMenuItemActionPerformed() {
-        mainWindow.doValidateTags();
+        Core.getTagValidation().validateTags();
     }
 
     public void optionsTabAdvanceCheckBoxMenuItemActionPerformed() {
@@ -532,8 +531,7 @@ public class MainWindowMenuHandler {
             }
             mainWindow.matches.setFont(mainWindow.m_font);
             mainWindow.glossary.setFont(mainWindow.m_font);
-            if (mainWindow.m_tagWin != null)
-                mainWindow.m_tagWin.setFont(mainWindow.m_font);
+            Core.getTagValidation().setFont(mainWindow.m_font);
             if (mainWindow.m_projWin != null)
                 mainWindow.m_projWin.setFont(mainWindow.m_font);
 

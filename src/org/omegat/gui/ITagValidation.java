@@ -22,43 +22,23 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **************************************************************************/
 
-package org.omegat.gui.main;
+package org.omegat.gui;
 
 import java.awt.Font;
 
-import javax.swing.JFrame;
-
 /**
- * Interface for access to main window functionality.
+ * Interface for tag validation.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public interface IMainWindow {
+public interface ITagValidation {
     /**
-     * Get application frame.
+     * Calls IDataEngine for get invalid tags list and show they.
      */
-    JFrame getApplicationFrame();
-
+    void validateTags();
+    
     /**
-     * Get main application font.
+     * Set font for window.
      */
-    Font getApplicationFont();
-
-    /**
-     * Show message in status bar.
-     * 
-     * @param messageText
-     *                message text
-     */
-    void showStatusMessage(String messageText);
-
-    /**
-     * Display error.
-     * 
-     * @param errorText
-     *                error text
-     * @param ex
-     *                exception to show
-     */
-    void displayError(String errorText, Throwable ex);
+    void setFont(Font newFont);
 }

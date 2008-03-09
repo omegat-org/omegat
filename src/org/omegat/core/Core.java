@@ -25,6 +25,7 @@
 package org.omegat.core;
 
 import org.omegat.core.data.IDataEngine;
+import org.omegat.gui.ITagValidation;
 import org.omegat.gui.main.IEditor;
 import org.omegat.gui.main.IMainWindow;
 
@@ -37,20 +38,26 @@ public class Core {
     private static IDataEngine dataEngine;
     private static IMainWindow mainWindow;
     private static IEditor editor;
+    private static ITagValidation tagValidation;
 
     /** Get data engine instance. */
     public static IDataEngine getDataEngine() {
-	return dataEngine;
+        return dataEngine;
     }
 
     /** Get main windows instance. */
     public static IMainWindow getMainWindow() {
-	return mainWindow;
+        return mainWindow;
     }
-    
+
     /** Get editor instance. */
     public static IEditor getEditor() {
         return editor;
+    }
+
+    /** Get tag validation component instance. */
+    public static ITagValidation getTagValidation() {
+        return tagValidation;
     }
 
     /**
@@ -59,9 +66,10 @@ public class Core {
      * TODO: change initialization for instantiate component instances, instead
      * use already created instanced
      */
-    public static void initialize(final IDataEngine de, final IMainWindow mw, final IEditor ed) {
-	dataEngine = de;
+    public static void initialize(final IDataEngine de, final IMainWindow mw, final IEditor ed, final ITagValidation tv) {
+        dataEngine = de;
         mainWindow = mw;
         editor = ed;
+        tagValidation = tv;
     }
 }

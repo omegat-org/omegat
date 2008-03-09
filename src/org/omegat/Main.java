@@ -32,6 +32,7 @@ import javax.swing.UIManager;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.threads.CommandThread;
+import org.omegat.gui.TagValidationTool;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -95,7 +96,7 @@ public class Main
         
         mainwindow.setVisible(true);
         
-        Core.initialize(CommandThread.core, mainwindow, mainwindow.editor);
+        Core.initialize(CommandThread.core, mainwindow, mainwindow.editor, new TagValidationTool(mainwindow));
         CoreEvents.fireApplicationStartup();
     }
 }

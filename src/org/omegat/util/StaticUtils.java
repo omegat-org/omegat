@@ -771,7 +771,7 @@ public class StaticUtils
       *
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
-    public static String format(String str, Object[] arguments) {
+    public static String format(String str, Object... arguments) {
         // MessageFormat.format expects single quotes to be escaped
         // by duplicating them, otherwise the string will not be formatted
         str = str.replaceAll("'", "''");

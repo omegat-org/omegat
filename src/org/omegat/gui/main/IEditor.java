@@ -110,4 +110,7 @@ public interface IEditor {
      * @return true if space is available
      */
     boolean checkCaretForDelete(boolean forward);
+    
+    /** replaces the entire edit area with a given text */
+    void replaceEditText(String text);
 }

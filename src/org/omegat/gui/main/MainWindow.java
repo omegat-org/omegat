@@ -274,21 +274,7 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
             return;
         
         NearString near = m_curEntry.getStrEntry().getNearListTranslated().get(activeMatch);
-        doReplaceEditText(near.str.getTranslation());
-    }
-    
-    /** replaces the entire edit area with a given text */
-    synchronized void doReplaceEditText(String text)
-    {
-        synchronized (editor) {
-            // build local offsets
-            int start = getTranslationStart();
-            int end = getTranslationEnd();
-
-            // remove text
-            editor.select(start, end);
-            editor.replaceSelection(text);
-        }
+        Core.getEditor().replaceEditText(near.str.getTranslation());
     }
     
     /** Closes the project. */
@@ -662,27 +648,7 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
         JOptionPane.showMessageDialog(this, fulltext, OStrings.getString("TF_ERROR"),
                 JOptionPane.ERROR_MESSAGE);
     }
-    
-    /**
-     * Calculate the position of the start of the current translation
-     */
-    public synchronized int getTranslationStart() {
-        synchronized(editor) {
-            return m_segmentStartOffset + m_sourceDisplayLength +
-                   OConsts.segmentStartStringFull.length(); 
-        }
-    }
-    
-    /**
-     * Calculcate the position of the end of the current translation
-     */
-    public synchronized int getTranslationEnd() {
-        synchronized(editor) {
-           return editor.getTextLength() - m_segmentEndInset -
-                    OConsts.segmentEndStringFull.length();
-        }
-    }
-    
+
     /**
      * Checks the spelling of the segment.
      * @param start : the starting position

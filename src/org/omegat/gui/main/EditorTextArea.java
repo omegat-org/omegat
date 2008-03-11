@@ -76,6 +76,7 @@ import org.omegat.util.gui.Styles;
 public class EditorTextArea extends JTextPane implements MouseListener, DocumentListener
 {
     private MainWindow mw;
+    protected EditorController controller;
     
     /** Creates new form BeanForm */
     public EditorTextArea(MainWindow mainwindow)
@@ -548,8 +549,8 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
             // to a position within the edited segment
             int offset = getCaretPosition();
 
-            int start = mw.getTranslationStart();
-            int end = mw.getTranslationEnd();
+            int start = controller.getTranslationStart();
+            int end = controller.getTranslationEnd();
             
             int spellcheckStart;
             int spellcheckEnd;
@@ -677,7 +678,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
         if (!mw.autoSpellCheckingOn())
             return false;
         
-        if (mousepos < mw.getTranslationStart() || mousepos > mw.getTranslationEnd())
+        if (mousepos < controller.getTranslationStart() || mousepos > controller.getTranslationEnd())
             return false;
 
         try {    
@@ -784,7 +785,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
             
             // which is the current segment in the document and what is the length?
             int startOffset = mw.m_segmentStartOffset;
-            int currentTrLen = mw.getTranslationEnd() - mw.getTranslationStart();
+            int currentTrLen = controller.getTranslationEnd() - controller.getTranslationStart();
             int totalLen = mw.m_sourceDisplayLength + OConsts.segmentStartStringFull.length() +
                     currentTrLen + OConsts.segmentEndStringFull.length() + 2;
             
@@ -846,8 +847,8 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
     private synchronized boolean createGoToSegmentPopUp(Point point) {
         final int mousepos = this.viewToModel(point);
         
-        if (mousepos >= mw.getTranslationStart() - OConsts.segmentStartStringFull.length()
-            && mousepos <= mw.getTranslationEnd() + OConsts.segmentStartStringFull.length())
+        if (mousepos >= controller.getTranslationStart() - OConsts.segmentStartStringFull.length()
+            && mousepos <= controller.getTranslationEnd() + OConsts.segmentStartStringFull.length())
             return false;
 
         popup = new JPopupMenu();

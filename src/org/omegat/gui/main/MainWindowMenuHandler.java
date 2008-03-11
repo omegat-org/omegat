@@ -249,7 +249,7 @@ public class MainWindowMenuHandler {
             if (!mainWindow.isProjectLoaded())
                 return;
 
-            mainWindow.doReplaceEditText(mainWindow.m_curEntry.getSrcText());
+            Core.getEditor().replaceEditText(mainWindow.m_curEntry.getSrcText());
         }
     }
 

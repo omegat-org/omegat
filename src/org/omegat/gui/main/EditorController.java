@@ -69,6 +69,7 @@ public class EditorController implements IEditor {
     public EditorController(final MainWindow mainWindow, final EditorTextArea editor) {
         this.mw = mainWindow;
         this.editor = editor;
+        editor.controller = this;
     }
 
     /**
@@ -445,8 +446,8 @@ public class EditorController implements IEditor {
 
                 AttributeSet attributes = mw.m_translatedAttributeSet;
 
-                int start = mw.getTranslationStart();
-                int end = mw.getTranslationEnd();
+                int start = getTranslationStart();
+                int end = getTranslationEnd();
                 String display_string;
                 String new_translation;
 
@@ -729,8 +730,8 @@ public class EditorController implements IEditor {
 
             int caretPosition = editor.getCaretPosition();
 
-            int translationStart = mw.getTranslationStart();
-            int translationEnd = mw.getTranslationEnd();
+            int translationStart = getTranslationStart();
+            int translationEnd = getTranslationEnd();
 
             // both should be within the limits
             if (end < translationStart || start > translationEnd)
@@ -866,13 +867,13 @@ public class EditorController implements IEditor {
                  * int start = m_segmentStartOffset + m_sourceDisplayLength +
                  * OConsts.segmentStartStringFull.length();
                  */
-                int start = mw.getTranslationStart();
+                int start = getTranslationStart();
                 // -1 for space before tag, -2 for newlines
                 /*
                  * int end = editor.getTextLength() - m_segmentEndInset -
                  * OConsts.segmentEndStringFull.length();
                  */
-                int end = mw.getTranslationEnd();
+                int end = getTranslationEnd();
 
                 if (spos != epos) {
                     // dealing with a selection here - make sure it's w/in bounds
@@ -923,7 +924,7 @@ public class EditorController implements IEditor {
                         return false;
                 } else {
                     // make sure we're not at start of segment
-                    int start = mw.getTranslationStart();
+                    int start = getTranslationStart();
                     int spos = editor.getSelectionStart();
                     int epos = editor.getSelectionEnd();
                     if (pos <= start && epos <= start && spos <= start)
@@ -1009,6 +1010,43 @@ public class EditorController implements IEditor {
                 }
 
                 return result;
+            }
+        }
+    }
+
+    /** replaces the entire edit area with a given text */
+    public void replaceEditText(final String text) {
+        synchronized (mw) {
+            synchronized (editor) {
+                // build local offsets
+                int start = getTranslationStart();
+                int end = getTranslationEnd();
+
+                // remove text
+                editor.select(start, end);
+                editor.replaceSelection(text);
+            }
+        }
+    }
+
+    /**
+     * Calculate the position of the start of the current translation
+     */
+    protected int getTranslationStart() {
+        synchronized (mw) {
+            synchronized (editor) {
+                return mw.m_segmentStartOffset + mw.m_sourceDisplayLength + OConsts.segmentStartStringFull.length();
+            }
+        }
+    }
+
+    /**
+     * Calculcate the position of the end of the current translation
+     */
+    protected int getTranslationEnd() {
+        synchronized (mw) {
+            synchronized (editor) {
+                return editor.getTextLength() - mw.m_segmentEndInset - OConsts.segmentEndStringFull.length();
             }
         }
     }

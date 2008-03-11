@@ -65,9 +65,12 @@ public class Main
             "\n" +                                                                    // NOI18N
             OStrings.getDisplayVersion() +                                            // NOI18N
             " ("+new Date()+") " +                                                    // NOI18N
-            " Locale "+Locale.getDefault()+                                           // NOI18N
-            "\n");                                                                    // NOI18N
+            " Locale "+Locale.getDefault());                                          // NOI18N
 
+        Log.log("Java: " + System.getProperty("java.vendor") + " " + System.getProperty("java.version") + " from "
+                + System.getProperty("java.home"));
+        Log.log("");
+        
         try
         {
             // Workaround for JDK bug 6389282 (OmegaT bug bug 1555809)

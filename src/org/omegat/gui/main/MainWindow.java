@@ -311,8 +311,8 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
         uiUpdateOnProjectClose();
         
         Core.getDataEngine().closeProject();
-        progressLabel.setText(OStrings.getString("MW_PROGRESS_DEFAULT"));
-        setLengthLabel(OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
+        showProgressMessage(OStrings.getString("MW_PROGRESS_DEFAULT"));
+        showLengthMessage(OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
     }
     
     public void onProjectChanged() {
@@ -567,15 +567,34 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
      * @param str
      *                message text
      */
+    @Override
     public void showStatusMessage(String str) {
         if (str.length() == 0)
             str = new String() + ' ';
         statusLabel.setText(str);
     }
+    
+    /**
+     * Show message in progress bar.
+     * 
+     * @param messageText
+     *                message text
+     */
+    @Override
+    public void showProgressMessage(String messageText) {
+        progressLabel.setText(messageText);
+    }
 
-    public void setLengthLabel(String str)
-    {
-        lengthLabel.setText(str);
+    /**
+     * Show message in length label.
+     * 
+     * @param messageText
+     *                message text
+     */
+    @Override
+    public void showLengthMessage(String messageText) {
+        // TODO Auto-generated method stub
+
     }
 
     ///////////////////////////////////////////////////////////////
@@ -585,7 +604,7 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
     /**
      * Displays fuzzy matching info if it's available.
      */
-    private void updateFuzzyInfo()
+    public void updateFuzzyInfo()
     {
         if (!isProjectLoaded())
             return;
@@ -597,14 +616,14 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
     /**
      * Displays glossary terms for the current segment.
      */
-    private void updateGlossaryInfo()
+    public void updateGlossaryInfo()
     {
         StringEntry curEntry = m_curEntry.getStrEntry();
         glossary.setGlossaryEntries(curEntry.getGlossaryEntries());
     }
     
     /** Is any segment edited currently? */
-    private boolean entryActivated = false;
+    public boolean entryActivated = false;
     
     public static final String IMPOSSIBLE = "Should not have happened, " +     // NOI18N
             "report to http://sf.net/tracker/?group_id=68187&atid=520347";      // NOI18N
@@ -873,277 +892,6 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
             return result;
         }
     }
-    /**
-     * Activates the current entry by displaying source text and embedding
-     * displayed text in markers.
-     * <p>
-     * Also moves document focus to current entry,
-     * and makes sure fuzzy info displayed if available.
-     */
-    public synchronized void activateEntry()
-    {
-        if (!isProjectLoaded())
-            return;
-       int translatedInFile = 0;
-        for (int _i = m_xlFirstEntry; _i <= m_xlLastEntry; _i++)
-        {
-            if (CommandThread.core.getSTE(_i).isTranslated())
-                translatedInFile++;
-        }
-        
-        progressLabel.setText(" " + Integer.toString(translatedInFile) + "/" + 
-                Integer.toString(m_xlLastEntry - m_xlFirstEntry + 1) +
-                " (" + Integer.toString(CommandThread.core.getNumberofTranslatedSegments()) + "/" +
-                Integer.toString(CommandThread.core.getNumberOfUniqueSegments()) + ", " +
-                Integer.toString(CommandThread.core.getNumberOfSegmentsTotal()) + ") ");
-        
-        setLengthLabel(" " + Integer.toString(m_curEntry.getSrcText().length()) + "/" +
-            Integer.toString(m_curEntry.getTranslation().length()) + " ");
-          
-        synchronized (editor) {
-            history.insertNew(m_curEntryNum);
-
-            // update history menu items
-            menu.gotoHistoryBackMenuItem.setEnabled(history.hasPrev());
-            menu.gotoHistoryForwardMenuItem.setEnabled(history.hasNext());
-
-            // recover data about current entry
-            // <HP-experiment>
-            if (m_curEntryNum < m_xlFirstEntry) {
-                Log.log("ERROR: Current entry # lower than first entry #");
-                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                // FIX: m_curEntryNum = m_xlFirstEntry;
-            }
-            if (m_curEntryNum > m_xlLastEntry) {
-                Log.log("ERROR: Current entry # greater than last entry #");
-                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                // FIX: m_curEntryNum = m_xlLastEntry;
-            }
-            // </HP-experiment>
-            m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
-            String srcText = m_curEntry.getSrcText();
-
-            m_sourceDisplayLength = srcText.length();
-
-            // sum up total character offset to current segment start
-            m_segmentStartOffset = 0;
-            int localCur = m_curEntryNum - m_xlFirstEntry;
-            // <HP-experiment>
-            DocumentSegment docSeg = null; // <HP-experiment> remove once done experimenting
-            try {
-                for (int i=0; i<localCur; i++)
-                {
-                    //DocumentSegment // <HP-experiment> re-join with next line once done experimenting
-                    docSeg = m_docSegList[i];
-                    m_segmentStartOffset += docSeg.length; // length includes \n
-                }
-
-                //DocumentSegment // <HP-experiment> re-join with next line once done experimenting
-                docSeg = m_docSegList[localCur];
-            }
-            catch (Exception exception) {
-                Log.log("ERROR: exception while calculating character offset:");
-                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                Log.log(exception);
-                return; // deliberately breaking, to simulate previous behaviour
-                // FIX: for (int i=0; i<localCur && i < m_docSegList.length; i++)
-            }
-            // </HP-experiment>
-
-            // -2 to move inside newlines at end of segment
-            m_segmentEndInset = editor.getTextLength() - (m_segmentStartOffset + docSeg.length-2);
-
-            String translation = m_curEntry.getTranslation();
-
-            if( translation==null || translation.length()==0 )
-            {
-                translation=m_curEntry.getSrcText();
-
-                // if "Leave translation empty" is set
-                // then we don't insert a source text into target
-                //
-                // RFE "Option: not copy source text into target field"
-                //      http://sourceforge.net/support/tracker.php?aid=1075972
-                if( Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT) )
-                {
-                    translation = new String();
-                }
-
-                // if WORKFLOW_OPTION "Insert best fuzzy match into target field" is set
-                // RFE "Option: Insert best match (80%+) into target field"
-                //      http://sourceforge.net/support/tracker.php?aid=1075976
-                if( Preferences.isPreference(Preferences.BEST_MATCH_INSERT) )
-                {
-                    String percentage_s = Preferences.getPreferenceDefault(
-                            Preferences.BEST_MATCH_MINIMAL_SIMILARITY, Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT);
-                    // <HP-experiment>
-                    int percentage = 0;
-                    try {
-                        //int
-                        percentage = Integer.parseInt(percentage_s);
-                    }
-                    catch (Exception exception) {
-                        Log.log("ERROR: exception while parsing percentage:");
-                        Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                        Log.log(exception);
-                        return; // deliberately breaking, to simulate previous behaviour
-                        // FIX: unknown, but expect number parsing errors
-                    }
-                    // </HP-experiment>
-                    List<NearString> near = m_curEntry.getStrEntry().getNearListTranslated();
-                    if( near.size()>0 )
-                    {
-                        NearString thebest = near.get(0);
-                        if( thebest.score >= percentage )
-                        {
-                            int old_tr_len = translation.length();
-                            translation = Preferences.getPreferenceDefault(
-                                    Preferences.BEST_MATCH_EXPLANATORY_TEXT,
-                                    OStrings.getString("WF_DEFAULT_PREFIX")) +
-                                    thebest.str.getTranslation();
-                            }
-                            }
-                            }
-                        }
-
-            int replacedLength = replaceEntry(m_segmentStartOffset, 
-                    docSeg.length, srcText, translation, WITH_END_MARKERS);
-
-            // <HP-experiment>
-            try {
-                updateFuzzyInfo();
-                updateGlossaryInfo();
-            }
-            catch (Exception exception) {
-                Log.log("ERROR: exception while updating match and glossary info:");
-                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                Log.log(exception);
-                return; // deliberately breaking, to simulate previous behaviour
-                // FIX: unknown
-            }
-            // </HP-experiment>
-
-            StringEntry curEntry = m_curEntry.getStrEntry();
-            int nearLength = curEntry.getNearListTranslated().size();
-
-            // <HP-experiment>
-            try {
-                if (nearLength > 0 && m_glossaryLength > 0)
-                {
-                    // display text indicating both categories exist
-                    Object obj[] = {
-                        new Integer(nearLength),
-                                new Integer(m_glossaryLength) };
-                                showStatusMessage(StaticUtils.format(
-                                        OStrings.getString("TF_NUM_NEAR_AND_GLOSSARY"), obj));
-                }
-                else if (nearLength > 0)
-                {
-                    Object obj[] = { new Integer(nearLength) };
-                    showStatusMessage(StaticUtils.format(
-                            OStrings.getString("TF_NUM_NEAR"), obj));
-                }
-                else if (m_glossaryLength > 0)
-                {
-                    Object obj[] = { new Integer(m_glossaryLength) };
-                    showStatusMessage(StaticUtils.format(
-                            OStrings.getString("TF_NUM_GLOSSARY"), obj));
-                }
-                else
-                    showStatusMessage(new String());                                       // NOI18N
-            }
-            catch (Exception exception) {
-                Log.log("ERROR: exception while setting message text:");
-                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                Log.log(exception);
-                return; // deliberately breaking, to simulate previous behaviour
-                // FIX: unknown
-            }
-            // </HP-experiment>
-
-            int offsetPrev = 0;
-            int localNum = m_curEntryNum-m_xlFirstEntry;
-            // <HP-experiment>
-            try {
-                for (int i=Math.max(0, localNum-3); i<localNum; i++)
-                {
-                    docSeg = m_docSegList[i];
-                    offsetPrev += docSeg.length;
-                }
-            }
-            catch (Exception exception) {
-                Log.log("ERROR: exception while calculating previous offset:");
-                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                Log.log(exception);
-                return; // deliberately breaking, to simulate previous behaviour
-                // FIX: unknown
-            }
-            // </HP-experiment>
-            final int lookPrev = m_segmentStartOffset - offsetPrev;
-
-            int offsetNext = 0;
-            int localLast = m_xlLastEntry-m_xlFirstEntry;
-            // <HP-experiment>
-            try {
-                for (int i=localNum+1; i<(localNum+4) && i<=localLast; i++)
-                {
-                    docSeg = m_docSegList[i];
-                    offsetNext += docSeg.length;
-                }
-            }
-            catch (Exception exception) {
-                Log.log("ERROR: exception while calculating next offset:");
-                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                Log.log(exception);
-                return; // deliberately breaking, to simulate previous behaviour
-                // FIX: unknown
-            }
-            // </HP-experiment>
-            final int lookNext = m_segmentStartOffset + replacedLength + offsetNext;
-
-            SwingUtilities.invokeLater(new Runnable()
-            {
-                public void run()
-                {
-                    try
-                    {
-                        editor.setCaretPosition(lookNext);
-                        SwingUtilities.invokeLater(new Runnable()
-                        {
-                            public void run()
-                            {
-                                try
-                                {
-                                    editor.setCaretPosition(lookPrev);
-                                    SwingUtilities.invokeLater(new Runnable()
-                                    {
-                                        public void run()
-                                        {
-                                            checkCaret();
-                                        }
-                                    });
-                                }
-                                catch(IllegalArgumentException iae)
-                                {} // eating silently
-                            }
-                        });
-                    }
-                    catch(IllegalArgumentException iae)
-                    {} // eating silently
-                }
-            });
-
-            if (!m_docReady)
-            {
-                m_docReady = true;
-            }
-            editor.cancelUndo();
-            
-            editor.checkSpelling(true);
-        } // synchronize (editor)
-
-        entryActivated = true;
-    }
 
     /**
      * Displays a warning message.
@@ -1368,7 +1116,7 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
     public int		m_sourceDisplayLength;
     public int		m_segmentEndInset;
     // text length of glossary, if displayed
-    private int		m_glossaryLength;
+    public int		m_glossaryLength;
     
     // boolean set after safety check that org.omegat.OConsts.segmentStartStringFull
     //	contains empty "0000" for segment number

@@ -51,6 +51,22 @@ public interface IMainWindow {
      *                message text
      */
     void showStatusMessage(String messageText);
+    
+    /**
+     * Show message in progress bar.
+     * 
+     * @param messageText
+     *                message text
+     */
+    void showProgressMessage(String messageText);
+
+    /**
+     * Show message in length label.
+     * 
+     * @param messageText
+     *                message text
+     */
+    void showLengthMessage(String messageText);
 
     /**
      * Display error.

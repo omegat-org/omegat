@@ -75,7 +75,7 @@ class MMx implements Runnable
 		switch (m_cmdNum)
 		{
 			case CMD_ACTIVATE_ENTRY:
-				m_tf.activateEntry();
+			    Core.getEditor().activateEntry();
 				break;
 			case CMD_GOTO_ENTRY:
 			    try {

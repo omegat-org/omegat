@@ -40,11 +40,16 @@ public interface IEditor {
         /** cycle between cases */
         CYCLE,
     }
-    
+
     /**
      * Displays all segments in current document.
      */
     void loadDocument();
+
+    /**
+     * Activate entry for edit.
+     */
+    void activateEntry();
 
     /**
      * Move to next entry.

@@ -30,14 +30,20 @@ package org.omegat.gui.main;
 import java.util.List;
 import java.util.Locale;
 
+import javax.swing.SwingUtilities;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Utilities;
 
+import org.omegat.core.Core;
+import org.omegat.core.StringEntry;
+import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.util.Log;
+import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
@@ -163,6 +169,245 @@ public class EditorController implements IEditor {
         }
     }
 
+    /**
+     * Activates the current entry by displaying source text and embedding
+     * displayed text in markers.
+     * <p>
+     * Also moves document focus to current entry, and makes sure fuzzy info
+     * displayed if available.
+     */
+    public void activateEntry() {
+        synchronized (mw) {
+            if (!mw.isProjectLoaded())
+                return;
+            int translatedInFile = 0;
+            for (int _i = mw.m_xlFirstEntry; _i <= mw.m_xlLastEntry; _i++) {
+                if (CommandThread.core.getSTE(_i).isTranslated())
+                    translatedInFile++;
+            }
+
+            String pMsg = " " + Integer.toString(translatedInFile) + "/"
+                    + Integer.toString(mw.m_xlLastEntry - mw.m_xlFirstEntry + 1) + " ("
+                    + Integer.toString(CommandThread.core.getNumberofTranslatedSegments()) + "/"
+                    + Integer.toString(CommandThread.core.getNumberOfUniqueSegments()) + ", "
+                    + Integer.toString(CommandThread.core.getNumberOfSegmentsTotal()) + ") ";
+            Core.getMainWindow().showProgressMessage(pMsg);
+
+            String lMsg = " " + Integer.toString(mw.m_curEntry.getSrcText().length()) + "/"
+                    + Integer.toString(mw.m_curEntry.getTranslation().length()) + " ";
+            Core.getMainWindow().showLengthMessage(lMsg);
+
+            synchronized (editor) {
+                mw.history.insertNew(mw.m_curEntryNum);
+
+                // update history menu items
+                mw.menu.gotoHistoryBackMenuItem.setEnabled(mw.history.hasPrev());
+                mw.menu.gotoHistoryForwardMenuItem.setEnabled(mw.history.hasNext());
+
+                // recover data about current entry
+                // <HP-experiment>
+                if (mw.m_curEntryNum < mw.m_xlFirstEntry) {
+                    Log.log("ERROR: Current entry # lower than first entry #");
+                    Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                    // FIX: m_curEntryNum = m_xlFirstEntry;
+                }
+                if (mw.m_curEntryNum > mw.m_xlLastEntry) {
+                    Log.log("ERROR: Current entry # greater than last entry #");
+                    Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                    // FIX: m_curEntryNum = m_xlLastEntry;
+                }
+                // </HP-experiment>
+                mw.m_curEntry = CommandThread.core.getSTE(mw.m_curEntryNum);
+                String srcText = mw.m_curEntry.getSrcText();
+
+                mw.m_sourceDisplayLength = srcText.length();
+
+                // sum up total character offset to current segment start
+                mw.m_segmentStartOffset = 0;
+                int localCur = mw.m_curEntryNum - mw.m_xlFirstEntry;
+                // <HP-experiment>
+                DocumentSegment docSeg = null; // <HP-experiment> remove once done experimenting
+                try {
+                    for (int i = 0; i < localCur; i++) {
+                        //DocumentSegment // <HP-experiment> re-join with next line once done experimenting
+                        docSeg = mw.m_docSegList[i];
+                        mw.m_segmentStartOffset += docSeg.length; // length includes \n
+                    }
+
+                    //DocumentSegment // <HP-experiment> re-join with next line once done experimenting
+                    docSeg = mw.m_docSegList[localCur];
+                } catch (Exception exception) {
+                    Log.log("ERROR: exception while calculating character offset:");
+                    Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                    Log.log(exception);
+                    return; // deliberately breaking, to simulate previous behaviour
+                    // FIX: for (int i=0; i<localCur && i < m_docSegList.length; i++)
+                }
+                // </HP-experiment>
+
+                // -2 to move inside newlines at end of segment
+                mw.m_segmentEndInset = editor.getTextLength() - (mw.m_segmentStartOffset + docSeg.length - 2);
+
+                String translation = mw.m_curEntry.getTranslation();
+
+                if (translation == null || translation.length() == 0) {
+                    translation = mw.m_curEntry.getSrcText();
+
+                    // if "Leave translation empty" is set
+                    // then we don't insert a source text into target
+                    //
+                    // RFE "Option: not copy source text into target field"
+                    //      http://sourceforge.net/support/tracker.php?aid=1075972
+                    if (Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT)) {
+                        translation = new String();
+                    }
+
+                    // if WORKFLOW_OPTION "Insert best fuzzy match into target field" is set
+                    // RFE "Option: Insert best match (80%+) into target field"
+                    //      http://sourceforge.net/support/tracker.php?aid=1075976
+                    if (Preferences.isPreference(Preferences.BEST_MATCH_INSERT)) {
+                        String percentage_s = Preferences.getPreferenceDefault(
+                                Preferences.BEST_MATCH_MINIMAL_SIMILARITY,
+                                Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT);
+                        // <HP-experiment>
+                        int percentage = 0;
+                        try {
+                            //int
+                            percentage = Integer.parseInt(percentage_s);
+                        } catch (Exception exception) {
+                            Log.log("ERROR: exception while parsing percentage:");
+                            Log
+                                    .log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                            Log.log(exception);
+                            return; // deliberately breaking, to simulate previous behaviour
+                            // FIX: unknown, but expect number parsing errors
+                        }
+                        // </HP-experiment>
+                        List<NearString> near = mw.m_curEntry.getStrEntry().getNearListTranslated();
+                        if (near.size() > 0) {
+                            NearString thebest = near.get(0);
+                            if (thebest.score >= percentage) {
+                                int old_tr_len = translation.length();
+                                translation = Preferences.getPreferenceDefault(Preferences.BEST_MATCH_EXPLANATORY_TEXT,
+                                        OStrings.getString("WF_DEFAULT_PREFIX"))
+                                        + thebest.str.getTranslation();
+                            }
+                        }
+                    }
+                }
+
+                int replacedLength = mw.replaceEntry(mw.m_segmentStartOffset, docSeg.length, srcText, translation,
+                        mw.WITH_END_MARKERS);
+
+                // <HP-experiment>
+                try {
+                    mw.updateFuzzyInfo();
+                    mw.updateGlossaryInfo();
+                } catch (Exception exception) {
+                    Log.log("ERROR: exception while updating match and glossary info:");
+                    Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                    Log.log(exception);
+                    return; // deliberately breaking, to simulate previous behaviour
+                    // FIX: unknown
+                }
+                // </HP-experiment>
+
+                StringEntry curEntry = mw.m_curEntry.getStrEntry();
+                int nearLength = curEntry.getNearListTranslated().size();
+
+                // <HP-experiment>
+                try {
+                    String msg;
+                    if (nearLength > 0 && mw.m_glossaryLength > 0) {
+                        // display text indicating both categories exist
+                        msg = StaticUtils.format(OStrings.getString("TF_NUM_NEAR_AND_GLOSSARY"), nearLength, mw.m_glossaryLength);
+                    } else if (nearLength > 0) {
+                        msg = StaticUtils.format(OStrings.getString("TF_NUM_NEAR"), nearLength);
+                    } else if (mw.m_glossaryLength > 0) {
+                        msg = StaticUtils.format(OStrings.getString("TF_NUM_GLOSSARY"), mw.m_glossaryLength);
+                    } else {
+                        msg = new String();
+                    }
+                    Core.getMainWindow().showStatusMessage(msg);
+                } catch (Exception exception) {
+                    Log.log("ERROR: exception while setting message text:");
+                    Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                    Log.log(exception);
+                    return; // deliberately breaking, to simulate previous behaviour
+                    // FIX: unknown
+                }
+                // </HP-experiment>
+
+                int offsetPrev = 0;
+                int localNum = mw.m_curEntryNum - mw.m_xlFirstEntry;
+                // <HP-experiment>
+                try {
+                    for (int i = Math.max(0, localNum - 3); i < localNum; i++) {
+                        docSeg = mw.m_docSegList[i];
+                        offsetPrev += docSeg.length;
+                    }
+                } catch (Exception exception) {
+                    Log.log("ERROR: exception while calculating previous offset:");
+                    Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                    Log.log(exception);
+                    return; // deliberately breaking, to simulate previous behaviour
+                    // FIX: unknown
+                }
+                // </HP-experiment>
+                final int lookPrev = mw.m_segmentStartOffset - offsetPrev;
+
+                int offsetNext = 0;
+                int localLast = mw.m_xlLastEntry - mw.m_xlFirstEntry;
+                // <HP-experiment>
+                try {
+                    for (int i = localNum + 1; i < (localNum + 4) && i <= localLast; i++) {
+                        docSeg = mw.m_docSegList[i];
+                        offsetNext += docSeg.length;
+                    }
+                } catch (Exception exception) {
+                    Log.log("ERROR: exception while calculating next offset:");
+                    Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                    Log.log(exception);
+                    return; // deliberately breaking, to simulate previous behaviour
+                    // FIX: unknown
+                }
+                // </HP-experiment>
+                final int lookNext = mw.m_segmentStartOffset + replacedLength + offsetNext;
+
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        try {
+                            editor.setCaretPosition(lookNext);
+                            SwingUtilities.invokeLater(new Runnable() {
+                                public void run() {
+                                    try {
+                                        editor.setCaretPosition(lookPrev);
+                                        SwingUtilities.invokeLater(new Runnable() {
+                                            public void run() {
+                                                mw.checkCaret();
+                                            }
+                                        });
+                                    } catch (IllegalArgumentException iae) {
+                                    } // eating silently
+                                }
+                            });
+                        } catch (IllegalArgumentException iae) {
+                        } // eating silently
+                    }
+                });
+
+                if (!mw.m_docReady) {
+                    mw.m_docReady = true;
+                }
+                editor.cancelUndo();
+
+                editor.checkSpelling(true);
+            } // synchronize (editor)
+
+            mw.entryActivated = true;
+        }
+    }
+
     public void nextEntry() {
         synchronized (mw) {
             if (!mw.isProjectLoaded())
@@ -177,7 +422,7 @@ public class EditorController implements IEditor {
                 loadDocument();
             }
 
-            mw.activateEntry();
+            activateEntry();
         }
     }
 
@@ -197,7 +442,7 @@ public class EditorController implements IEditor {
                     mw.m_curEntryNum = 0;
                 loadDocument();
             }
-            mw.activateEntry();
+            activateEntry();
         }
     }
 
@@ -269,7 +514,7 @@ public class EditorController implements IEditor {
             }
 
             // activate the entry
-            mw.activateEntry();
+            activateEntry();
         }
     }
 
@@ -293,7 +538,7 @@ public class EditorController implements IEditor {
                     mw.m_curEntryNum = 0;
                 loadDocument();
             }
-            mw.activateEntry();
+            activateEntry();
         }
     }
 

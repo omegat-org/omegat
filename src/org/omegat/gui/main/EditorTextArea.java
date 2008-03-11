@@ -188,10 +188,10 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
     protected synchronized void processKeyEvent(KeyEvent e)
     {
         processKeyEventBody(e);
-        mw.setLengthLabel(" " + Integer.toString(mw.m_sourceDisplayLength) + "/" +
+        String msg = " " + Integer.toString(mw.m_sourceDisplayLength) + "/" +
             Integer.toString(((getTextLength() - mw.m_segmentEndInset - OStrings.getSegmentEndMarker().length()) -
-            (mw.m_segmentStartOffset + mw.m_sourceDisplayLength + OStrings.getSegmentStartMarker().length()))) + " ");
-        return;
+            (mw.m_segmentStartOffset + mw.m_sourceDisplayLength + OStrings.getSegmentStartMarker().length()))) + " ";
+        Core.getMainWindow().showLengthMessage(msg);
     }
     
     /**

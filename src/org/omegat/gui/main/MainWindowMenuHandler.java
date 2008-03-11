@@ -121,7 +121,7 @@ public class MainWindowMenuHandler {
     public void projectSaveMenuItemActionPerformed() {
         // commit the current entry first
         mainWindow.commitEntry(true);
-        mainWindow.activateEntry();
+        Core.getEditor().activateEntry();
         mainWindow.doSave();
     }
 
@@ -470,7 +470,7 @@ public class MainWindowMenuHandler {
 
         mainWindow.commitEntry(false);
         Core.getEditor().loadDocument();
-        mainWindow.activateEntry();
+        Core.getEditor().activateEntry();
     }
 
     public void viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed() {
@@ -483,7 +483,7 @@ public class MainWindowMenuHandler {
 
         mainWindow.commitEntry(false);
         Core.getEditor().loadDocument();
-        mainWindow.activateEntry();
+        Core.getEditor().activateEntry();
     }
 
     public void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed() {
@@ -494,7 +494,7 @@ public class MainWindowMenuHandler {
         Preferences.setPreference(Preferences.DISPLAY_SEGMENT_SOURCES, mainWindow.m_displaySegmentSources);
 
         Core.getEditor().loadDocument();
-        mainWindow.activateEntry();
+        Core.getEditor().activateEntry();
     }
 
     public void toolsValidateTagsMenuItemActionPerformed() {
@@ -538,7 +538,7 @@ public class MainWindowMenuHandler {
 
             Preferences.setPreference(OConsts.TF_SRC_FONT_NAME, mainWindow.m_font.getName());
             Preferences.setPreference(OConsts.TF_SRC_FONT_SIZE, mainWindow.m_font.getSize());
-            mainWindow.activateEntry();
+            Core.getEditor().activateEntry();
         }
     }
 
@@ -599,7 +599,7 @@ public class MainWindowMenuHandler {
             }
             mainWindow.commitEntry(false);
             Core.getEditor().loadDocument();
-            mainWindow.activateEntry();
+            Core.getEditor().activateEntry();
         }
     }
 

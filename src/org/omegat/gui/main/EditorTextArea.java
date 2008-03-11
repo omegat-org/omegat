@@ -189,9 +189,9 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
     protected synchronized void processKeyEvent(KeyEvent e)
     {
         processKeyEventBody(e);
-        String msg = " " + Integer.toString(mw.m_sourceDisplayLength) + "/" +
-            Integer.toString(((getTextLength() - mw.m_segmentEndInset - OStrings.getSegmentEndMarker().length()) -
-            (mw.m_segmentStartOffset + mw.m_sourceDisplayLength + OStrings.getSegmentStartMarker().length()))) + " ";
+        String msg = " " + Integer.toString(controller.m_sourceDisplayLength) + "/" +
+            Integer.toString(((getTextLength() - controller.m_segmentEndInset - OStrings.getSegmentEndMarker().length()) -
+            (controller.m_segmentStartOffset + controller.m_sourceDisplayLength + OStrings.getSegmentStartMarker().length()))) + " ";
         Core.getMainWindow().showLengthMessage(msg);
     }
     
@@ -368,9 +368,9 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
         if( e.getModifiers()==CTRL_KEY_MASK &&
                 e.getKeyCode()==KeyEvent.VK_A )
         {
-            int start = mw.m_segmentStartOffset + mw.m_sourceDisplayLength +
+            int start = controller.m_segmentStartOffset + controller.m_sourceDisplayLength +
                     OConsts.segmentStartStringFull.length();
-            int end = getTextLength() - mw.m_segmentEndInset -
+            int end = getTextLength() - controller.m_segmentEndInset -
                     OConsts.segmentEndStringFull.length();
             
             // selecting
@@ -458,8 +458,8 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                 if (e.getID() == KeyEvent.KEY_PRESSED)
                 {
                     int pos = getCaretPosition();
-                    int start = mw.m_segmentStartOffset +
-                            mw.m_sourceDisplayLength +
+                    int start = controller.m_segmentStartOffset +
+                    controller.m_sourceDisplayLength +
                             OConsts.segmentStartStringFull.length();
                     if (pos < start)
                         moveCaretPosition(start);
@@ -475,7 +475,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                 {
                     int pos = getCaretPosition();
                     // -1 for space before tag, -2 for newlines
-                    int end = getTextLength() - mw.m_segmentEndInset -
+                    int end = getTextLength() - controller.m_segmentEndInset -
                             OConsts.segmentEndStringFull.length();
                     if (pos > end)
                         moveCaretPosition(end);
@@ -784,9 +784,9 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
             // Replace the errors in the rest of the document
             
             // which is the current segment in the document and what is the length?
-            int startOffset = mw.m_segmentStartOffset;
+            int startOffset = controller.m_segmentStartOffset;
             int currentTrLen = controller.getTranslationEnd() - controller.getTranslationStart();
-            int totalLen = mw.m_sourceDisplayLength + OConsts.segmentStartStringFull.length() +
+            int totalLen = controller.m_sourceDisplayLength + OConsts.segmentStartStringFull.length() +
                     currentTrLen + OConsts.segmentEndStringFull.length() + 2;
             
             int localCur = controller.m_curEntryNum - mw.m_xlFirstEntry;
@@ -881,7 +881,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
         int pos = getCaretPosition();
         DocumentSegment docSeg;
         int i;
-        if (pos < mw.m_segmentStartOffset)
+        if (pos < controller.m_segmentStartOffset)
         {
             // before current entry
             int offset = 0;
@@ -896,10 +896,10 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                 }
             }
         }
-        else if (pos > getTextLength() - mw.m_segmentEndInset)
+        else if (pos > getTextLength() - controller.m_segmentEndInset)
         {
             // after current entry
-            int inset = getTextLength() - mw.m_segmentEndInset;
+            int inset = getTextLength() - controller.m_segmentEndInset;
             for (i=controller.m_curEntryNum+1; i<=mw.m_xlLastEntry; i++)
             {
                 docSeg = mw.m_docSegList[i-mw.m_xlFirstEntry];

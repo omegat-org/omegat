@@ -67,7 +67,15 @@ public class EditorController implements IEditor {
     private final MainWindow mw;
 
     private SourceTextEntry m_curEntry;
-    protected int m_curEntryNum = -1;
+    protected int m_curEntryNum = -1;    
+    
+    // starting offset and length of source lang in current segment
+    protected int m_segmentStartOffset;
+    protected int m_sourceDisplayLength;
+    protected int m_segmentEndInset;
+    // text length of glossary, if displayed
+    private int m_glossaryLength;
+
 
     public EditorController(final MainWindow mainWindow, final EditorTextArea editor) {
         this.mw = mainWindow;
@@ -236,10 +244,10 @@ public class EditorController implements IEditor {
                 m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
                 String srcText = m_curEntry.getSrcText();
 
-                mw.m_sourceDisplayLength = srcText.length();
+                m_sourceDisplayLength = srcText.length();
 
                 // sum up total character offset to current segment start
-                mw.m_segmentStartOffset = 0;
+                m_segmentStartOffset = 0;
                 int localCur = m_curEntryNum - mw.m_xlFirstEntry;
                 // <HP-experiment>
                 DocumentSegment docSeg = null; // <HP-experiment> remove once done experimenting
@@ -247,7 +255,7 @@ public class EditorController implements IEditor {
                     for (int i = 0; i < localCur; i++) {
                         //DocumentSegment // <HP-experiment> re-join with next line once done experimenting
                         docSeg = mw.m_docSegList[i];
-                        mw.m_segmentStartOffset += docSeg.length; // length includes \n
+                        m_segmentStartOffset += docSeg.length; // length includes \n
                     }
 
                     //DocumentSegment // <HP-experiment> re-join with next line once done experimenting
@@ -262,7 +270,7 @@ public class EditorController implements IEditor {
                 // </HP-experiment>
 
                 // -2 to move inside newlines at end of segment
-                mw.m_segmentEndInset = editor.getTextLength() - (mw.m_segmentStartOffset + docSeg.length - 2);
+                m_segmentEndInset = editor.getTextLength() - (m_segmentStartOffset + docSeg.length - 2);
 
                 String translation = m_curEntry.getTranslation();
 
@@ -312,7 +320,7 @@ public class EditorController implements IEditor {
                     }
                 }
 
-                int replacedLength = replaceEntry(mw.m_segmentStartOffset, docSeg.length, srcText, translation,
+                int replacedLength = replaceEntry(m_segmentStartOffset, docSeg.length, srcText, translation,
                         mw.WITH_END_MARKERS);
 
                 // <HP-experiment>
@@ -334,14 +342,14 @@ public class EditorController implements IEditor {
                 // <HP-experiment>
                 try {
                     String msg;
-                    if (nearLength > 0 && mw.m_glossaryLength > 0) {
+                    if (nearLength > 0 && m_glossaryLength > 0) {
                         // display text indicating both categories exist
                         msg = StaticUtils.format(OStrings.getString("TF_NUM_NEAR_AND_GLOSSARY"), nearLength,
-                                mw.m_glossaryLength);
+                                m_glossaryLength);
                     } else if (nearLength > 0) {
                         msg = StaticUtils.format(OStrings.getString("TF_NUM_NEAR"), nearLength);
-                    } else if (mw.m_glossaryLength > 0) {
-                        msg = StaticUtils.format(OStrings.getString("TF_NUM_GLOSSARY"), mw.m_glossaryLength);
+                    } else if (m_glossaryLength > 0) {
+                        msg = StaticUtils.format(OStrings.getString("TF_NUM_GLOSSARY"), m_glossaryLength);
                     } else {
                         msg = new String();
                     }
@@ -371,7 +379,7 @@ public class EditorController implements IEditor {
                     // FIX: unknown
                 }
                 // </HP-experiment>
-                final int lookPrev = mw.m_segmentStartOffset - offsetPrev;
+                final int lookPrev = m_segmentStartOffset - offsetPrev;
 
                 int offsetNext = 0;
                 int localLast = mw.m_xlLastEntry - mw.m_xlFirstEntry;
@@ -389,7 +397,7 @@ public class EditorController implements IEditor {
                     // FIX: unknown
                 }
                 // </HP-experiment>
-                final int lookNext = mw.m_segmentStartOffset + replacedLength + offsetNext;
+                final int lookNext = m_segmentStartOffset + replacedLength + offsetNext;
 
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
@@ -502,8 +510,8 @@ public class EditorController implements IEditor {
                     display_string = new_translation;
                 }
 
-                int startOffset = mw.m_segmentStartOffset;
-                int totalLen = mw.m_sourceDisplayLength + OConsts.segmentStartStringFull.length()
+                int startOffset = m_segmentStartOffset;
+                int totalLen = m_sourceDisplayLength + OConsts.segmentStartStringFull.length()
                         + new_translation.length() + OConsts.segmentEndStringFull.length() + 2;
 
                 int localCur = m_curEntryNum - mw.m_xlFirstEntry;
@@ -512,14 +520,14 @@ public class EditorController implements IEditor {
                 String segmentSource = null;
 
                 if (mw.m_displaySegmentSources) {
-                    int increment = mw.m_sourceDisplayLength + 1;
+                    int increment = m_sourceDisplayLength + 1;
                     startOffset += increment;
                     //totalLen -= increment;
                     docSeg.length += increment;
                     segmentSource = m_curEntry.getSrcText();
                 }
 
-                docSeg.length = replaceEntry(mw.m_segmentStartOffset, totalLen, segmentSource, display_string, flags);
+                docSeg.length = replaceEntry(m_segmentStartOffset, totalLen, segmentSource, display_string, flags);
 
                 if (doCheckSpelling && mw.m_autoSpellChecking) {
                     wordList = mw.checkSpelling(startOffset, display_string);
@@ -936,7 +944,7 @@ public class EditorController implements IEditor {
                 if (forward) {
                     // make sure we're not at end of segment
                     // -1 for space before tag, -2 for newlines
-                    int end = editor.getTextLength() - mw.m_segmentEndInset - OConsts.segmentEndStringFull.length();
+                    int end = editor.getTextLength() - m_segmentEndInset - OConsts.segmentEndStringFull.length();
                     int spos = editor.getSelectionStart();
                     int epos = editor.getSelectionEnd();
                     if (pos >= end && spos >= end && epos >= end)
@@ -1067,7 +1075,7 @@ public class EditorController implements IEditor {
     protected int getTranslationStart() {
         synchronized (mw) {
             synchronized (editor) {
-                return mw.m_segmentStartOffset + mw.m_sourceDisplayLength + OConsts.segmentStartStringFull.length();
+                return m_segmentStartOffset + m_sourceDisplayLength + OConsts.segmentStartStringFull.length();
             }
         }
     }
@@ -1078,7 +1086,7 @@ public class EditorController implements IEditor {
     protected int getTranslationEnd() {
         synchronized (mw) {
             synchronized (editor) {
-                return editor.getTextLength() - mw.m_segmentEndInset - OConsts.segmentEndStringFull.length();
+                return editor.getTextLength() - m_segmentEndInset - OConsts.segmentEndStringFull.length();
             }
         }
     }

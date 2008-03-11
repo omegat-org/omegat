@@ -709,13 +709,6 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
     /** last entry number in current file. */
     public int		m_xlLastEntry;
     
-    // starting offset and length of source lang in current segment
-    public int		m_segmentStartOffset;
-    public int		m_sourceDisplayLength;
-    public int		m_segmentEndInset;
-    // text length of glossary, if displayed
-    public int		m_glossaryLength;
-    
     // boolean set after safety check that org.omegat.OConsts.segmentStartStringFull
     //	contains empty "0000" for segment number
     public boolean	m_segmentTagHasNumber;

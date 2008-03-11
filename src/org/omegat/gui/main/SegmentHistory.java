@@ -36,12 +36,6 @@ import java.util.List;
  * @author bartkoz
  */
 public class SegmentHistory {
-    
-    /**
-     * the instance in question
-     */
-    private static SegmentHistory INSTANCE;
-    
     /**
      * the pointer
      */
@@ -51,13 +45,6 @@ public class SegmentHistory {
     
     /** Creates a new instance of SegmentHistory */
     protected SegmentHistory() {
-    }
-    
-    public static SegmentHistory getInstance() {
-        if (INSTANCE == null)
-            INSTANCE = new SegmentHistory();
-        
-        return INSTANCE;
     }
     
     /**

@@ -63,7 +63,6 @@ import org.omegat.gui.ProjectFrame;
 import org.omegat.gui.SearchWindow;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.RequestPacket;
@@ -205,15 +204,6 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
         ////////////////////////////////
         
         enableEvents(0);
-        
-        // check this only once as it can be changed only at compile time
-        // should be OK, but localization might have messed it up
-        String start = OConsts.segmentStartStringFull;
-        int zero = start.lastIndexOf('0');
-        m_segmentTagHasNumber = (zero > 4) && // 4 to reserve room for 10000 digit
-                (start.charAt(zero - 1) == '0') &&
-                (start.charAt(zero - 2) == '0') &&
-                (start.charAt(zero - 3) == '0');
     }
     
     boolean layoutInitialized = false;
@@ -398,7 +388,7 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
 
         matches.clear();
         glossary.clear();
-        history.clear();
+        Core.getEditor().clearHistory();
         editorScroller.setViewportView(editor);
 
         RequestPacket load;
@@ -420,7 +410,7 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
 
         matches.clear();
         glossary.clear();
-        history.clear();
+        Core.getEditor().clearHistory();
         editorScroller.setViewportView(editor);
 
         RequestPacket load;
@@ -690,10 +680,6 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
     /** The font for main window (source and target text) and for match and glossary windows */
     Font m_font;
     
-    // boolean set after safety check that org.omegat.OConsts.segmentStartStringFull
-    //	contains empty "0000" for segment number
-    public boolean	m_segmentTagHasNumber;
-    
     public char	m_advancer;
 
     private String  m_activeProj;
@@ -782,6 +768,4 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
     
     DockableScrollPane glossaryScroller;
     GlossaryTextArea glossary;
-    
-    SegmentHistory history = SegmentHistory.getInstance();
 }

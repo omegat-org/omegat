@@ -63,6 +63,13 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class EditorController implements IEditor {
+
+    private static final String IMPOSSIBLE = "Should not have happened, " + // NOI18N
+            "report to http://sf.net/tracker/?group_id=68187&atid=520347"; // NOI18N
+
+    private final int WITH_END_MARKERS = 1;
+    private final int IS_NOT_TRANSLATED = 2;
+
     private final EditorTextArea editor;
     private final MainWindow mw;
 
@@ -90,16 +97,24 @@ public class EditorController implements IEditor {
     /** Is any segment edited currently? */
     private boolean entryActivated = false;
 
-    private static final String IMPOSSIBLE = "Should not have happened, " + // NOI18N
-            "report to http://sf.net/tracker/?group_id=68187&atid=520347"; // NOI18N
+    // boolean set after safety check that org.omegat.OConsts.segmentStartStringFull
+    //  contains empty "0000" for segment number
+    private boolean m_segmentTagHasNumber;
 
-    private final int WITH_END_MARKERS = 1;
-    private final int IS_NOT_TRANSLATED = 2;
+    /** Object which store history of moving by segments. */
+    private SegmentHistory history = new SegmentHistory();
 
     public EditorController(final MainWindow mainWindow, final EditorTextArea editor) {
         this.mw = mainWindow;
         this.editor = editor;
         editor.controller = this;
+
+        // check this only once as it can be changed only at compile time
+        // should be OK, but localization might have messed it up
+        String start = OConsts.segmentStartStringFull;
+        int zero = start.lastIndexOf('0');
+        m_segmentTagHasNumber = (zero > 4) && // 4 to reserve room for 10000 digit
+                (start.charAt(zero - 1) == '0') && (start.charAt(zero - 2) == '0') && (start.charAt(zero - 3) == '0');
     }
 
     public SourceTextEntry getCurrentEntry() {
@@ -239,11 +254,11 @@ public class EditorController implements IEditor {
             Core.getMainWindow().showLengthMessage(lMsg);
 
             synchronized (editor) {
-                mw.history.insertNew(m_curEntryNum);
+                history.insertNew(m_curEntryNum);
 
                 // update history menu items
-                mw.menu.gotoHistoryBackMenuItem.setEnabled(mw.history.hasPrev());
-                mw.menu.gotoHistoryForwardMenuItem.setEnabled(mw.history.hasNext());
+                mw.menu.gotoHistoryBackMenuItem.setEnabled(history.hasPrev());
+                mw.menu.gotoHistoryForwardMenuItem.setEnabled(history.hasNext());
 
                 // recover data about current entry
                 // <HP-experiment>
@@ -1018,7 +1033,7 @@ public class EditorController implements IEditor {
                         // <HP-experiment>
 
                         try {
-                            if (mw.m_segmentTagHasNumber) {
+                            if (m_segmentTagHasNumber) {
                                 // put entry number in first tag
                                 String num = String.valueOf(m_curEntryNum + 1);
                                 int zero = startStr.lastIndexOf('0');
@@ -1104,6 +1119,33 @@ public class EditorController implements IEditor {
             synchronized (editor) {
                 return editor.getTextLength() - m_segmentEndInset - OConsts.segmentEndStringFull.length();
             }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void clearHistory() {
+        history.clear();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void gotoHistoryBack() {
+        int prevValue = history.back();
+        if (prevValue != -1) {
+            gotoEntry(prevValue + 1);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void gotoHistoryForward() {
+        int nextValue = history.forward();
+        if (nextValue != -1) {
+            gotoEntry(nextValue + 1);
         }
     }
 }

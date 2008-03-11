@@ -133,4 +133,19 @@ public interface IEditor {
 
     /** inserts text at the cursor position */
     void insertText(String text);
+    
+    /**
+     * Clear history of moving by segments.
+     */
+    void clearHistory();
+    
+    /**
+     * Go to next segment from history.
+     */
+    void gotoHistoryForward();
+    
+    /**
+     * Go to previous segment from history.
+     */
+    void gotoHistoryBack();
 }

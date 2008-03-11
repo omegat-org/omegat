@@ -446,17 +446,13 @@ public class MainWindowMenuHandler {
 
     public void gotoHistoryBackMenuItemActionPerformed() {
         synchronized (mainWindow) {
-            int prevValue = mainWindow.history.back();
-            if (prevValue != -1)
-                Core.getEditor().gotoEntry(prevValue + 1);
+            Core.getEditor().gotoHistoryBack();
         }
     }
 
     public void gotoHistoryForwardMenuItemActionPerformed() {
         synchronized (mainWindow) {
-            int nextValue = mainWindow.history.forward();
-            if (nextValue != -1)
-                Core.getEditor().gotoEntry(nextValue + 1);
+            Core.getEditor().gotoHistoryForward();
         }
     }
 

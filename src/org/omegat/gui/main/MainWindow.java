@@ -562,8 +562,7 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
      *                message text
      */
     public void showLengthMessage(String messageText) {
-        // TODO Auto-generated method stub
-
+        lengthLabel.setText(messageText);
     }
 
     ///////////////////////////////////////////////////////////////

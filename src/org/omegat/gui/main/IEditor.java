@@ -62,6 +62,14 @@ public interface IEditor {
     void nextUntranslatedEntry();
 
     /**
+     * Goto entry with specified number.
+     * 
+     * @param entryNum
+     *            entry number
+     */
+    void gotoEntry(int entryNum);
+
+    /**
      * Change case of the selected text or if none is selected, of the current
      * word.
      * 

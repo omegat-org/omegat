@@ -78,7 +78,10 @@ class MMx implements Runnable
 				m_tf.activateEntry();
 				break;
 			case CMD_GOTO_ENTRY:
-				m_tf.doGotoEntry(m_msg);
+			    try {
+			        Core.getEditor().gotoEntry(Integer.parseInt(m_msg));
+			    } catch (NumberFormatException ex) {
+			    }
 				break;
 			case CMD_SET_STATUS:
 			        Core.getMainWindow().showStatusMessage(m_msg);

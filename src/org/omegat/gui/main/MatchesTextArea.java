@@ -36,6 +36,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
+import org.omegat.core.Core;
 import org.omegat.core.StringData;
 import org.omegat.core.matching.NearString;
 import org.omegat.util.OStrings;
@@ -212,7 +213,7 @@ public class MatchesTextArea extends javax.swing.JTextPane implements MouseListe
             if (project == null || project.equals("")) {
                 item.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        mw.doGotoEntry(ns.str.getParentList().first()
+                        Core.getEditor().gotoEntry(ns.str.getParentList().first()
 								.entryNum() + 1);
                     }
                 });

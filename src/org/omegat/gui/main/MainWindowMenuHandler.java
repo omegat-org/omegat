@@ -435,9 +435,10 @@ public class MainWindowMenuHandler {
             if ((inputValue != null) && !inputValue.equals(JOptionPane.UNINITIALIZED_VALUE)) {
                 // Go to the segment the user requested
                 try {
-                    mainWindow.doGotoEntry((String) inputValue);
+                    Core.getEditor().gotoEntry(Integer.parseInt((String) inputValue));
                 } catch (ClassCastException e) {
                     // Shouldn't happen, but still... Just eat silently.
+                } catch (NumberFormatException e) {
                 }
             }
         }
@@ -447,7 +448,7 @@ public class MainWindowMenuHandler {
         synchronized (mainWindow) {
             int prevValue = mainWindow.history.back();
             if (prevValue != -1)
-                mainWindow.doGotoEntry(prevValue + 1);
+                Core.getEditor().gotoEntry(prevValue + 1);
         }
     }
 
@@ -455,7 +456,7 @@ public class MainWindowMenuHandler {
         synchronized (mainWindow) {
             int nextValue = mainWindow.history.forward();
             if (nextValue != -1)
-                mainWindow.doGotoEntry(nextValue + 1);
+                Core.getEditor().gotoEntry(nextValue + 1);
         }
     }
 

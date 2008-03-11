@@ -890,7 +890,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                 offset += docSeg.length;
                 if (pos < offset)
                 {
-                    mw.doGotoEntry(i+1);
+                    Core.getEditor().gotoEntry(i+1);
                     return;
                 }
             }
@@ -905,7 +905,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                 inset += docSeg.length;
                 if (pos <= inset)
                 {
-                    mw.doGotoEntry(i+1);
+                    Core.getEditor().gotoEntry(i+1);
                     return;
                 }
             }

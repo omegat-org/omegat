@@ -538,45 +538,6 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
             doReloadProject();
         }
     }
-
-    public synchronized void doGotoEntry(int entryNum)
-    {
-        if (!isProjectLoaded())
-            return;
-        
-        commitEntry();
-        
-        m_curEntryNum = entryNum - 1;
-        if (m_curEntryNum < m_xlFirstEntry)
-        {
-            if (m_curEntryNum < 0)
-                m_curEntryNum = CommandThread.core.numEntries() - 1;
-            // empty project bugfix:
-            if (m_curEntryNum < 0)
-                m_curEntryNum = 0;
-            Core.getEditor().loadDocument();
-        }
-        else if (m_curEntryNum > m_xlLastEntry)
-        {
-            if (m_curEntryNum >= CommandThread.core.numEntries())
-                m_curEntryNum = 0;
-            Core.getEditor().loadDocument();
-        }
-        activateEntry();
-    }
-    
-    public synchronized void doGotoEntry(String str)
-    {
-        int num;
-        try
-        {
-            num = Integer.parseInt(str);
-            doGotoEntry(num);
-        }
-        catch (NumberFormatException e)
-        {
-        }
-    }
     
     public synchronized void finishLoadProject()
     {

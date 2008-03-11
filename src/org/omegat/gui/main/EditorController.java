@@ -273,6 +273,30 @@ public class EditorController implements IEditor {
         }
     }
 
+    public void gotoEntry(final int entryNum) {
+        synchronized (mw) {
+            if (!mw.isProjectLoaded())
+                return;
+
+            mw.commitEntry();
+
+            mw.m_curEntryNum = entryNum - 1;
+            if (mw.m_curEntryNum < mw.m_xlFirstEntry) {
+                if (mw.m_curEntryNum < 0)
+                    mw.m_curEntryNum = CommandThread.core.numEntries() - 1;
+                // empty project bugfix:
+                if (mw.m_curEntryNum < 0)
+                    mw.m_curEntryNum = 0;
+                loadDocument();
+            } else if (mw.m_curEntryNum > mw.m_xlLastEntry) {
+                if (mw.m_curEntryNum >= CommandThread.core.numEntries())
+                    mw.m_curEntryNum = 0;
+                loadDocument();
+            }
+            mw.activateEntry();
+        }
+    }
+
     /**
      * Change case of the selected text or if none is selected, of the current
      * word.

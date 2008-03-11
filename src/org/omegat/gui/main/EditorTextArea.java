@@ -139,7 +139,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
             return;
         
         // ignore mouse clicks until document is ready
-        if (!mw.m_docReady)
+        if (!controller.m_docReady)
             return;
         
         // the popup menu
@@ -789,8 +789,8 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
             int totalLen = controller.m_sourceDisplayLength + OConsts.segmentStartStringFull.length() +
                     currentTrLen + OConsts.segmentEndStringFull.length() + 2;
             
-            int localCur = controller.m_curEntryNum - mw.m_xlFirstEntry;
-            DocumentSegment docSeg = mw.m_docSegList[localCur];
+            int localCur = controller.m_curEntryNum - controller.m_xlFirstEntry;
+            DocumentSegment docSeg = controller.m_docSegList[localCur];
             docSeg.length = totalLen;
             
             // the segment counter - local
@@ -800,7 +800,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
             int segOffset = 0;
             
             // iterate through the entries in this file
-            for (int i = mw.m_xlFirstEntry; i <= mw.m_xlLastEntry; i++) {
+            for (int i = controller.m_xlFirstEntry; i <= controller.m_xlLastEntry; i++) {
                 SourceTextEntry ste = CommandThread.core.getSTE(i);
                 if (ste.isTranslated() && 
                         localCnt != localCur) {
@@ -831,7 +831,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                 }
                 
                 // next segment
-                segOffset += mw.m_docSegList[localCnt++].length;
+                segOffset += controller.m_docSegList[localCnt++].length;
             }
             
         } catch (BadLocationException ex) {
@@ -885,9 +885,9 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
         {
             // before current entry
             int offset = 0;
-            for (i=mw.m_xlFirstEntry; i<controller.m_curEntryNum; i++)
+            for (i=controller.m_xlFirstEntry; i<controller.m_curEntryNum; i++)
             {
-                docSeg = mw.m_docSegList[i-mw.m_xlFirstEntry];
+                docSeg = controller.m_docSegList[i-controller.m_xlFirstEntry];
                 offset += docSeg.length;
                 if (pos < offset)
                 {
@@ -900,9 +900,9 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
         {
             // after current entry
             int inset = getTextLength() - controller.m_segmentEndInset;
-            for (i=controller.m_curEntryNum+1; i<=mw.m_xlLastEntry; i++)
+            for (i=controller.m_curEntryNum+1; i<=controller.m_xlLastEntry; i++)
             {
-                docSeg = mw.m_docSegList[i-mw.m_xlFirstEntry];
+                docSeg = controller.m_docSegList[i-controller.m_xlFirstEntry];
                 inset += docSeg.length;
                 if (pos <= inset)
                 {

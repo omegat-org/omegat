@@ -76,6 +76,18 @@ public class EditorController implements IEditor {
     // text length of glossary, if displayed
     private int m_glossaryLength;
 
+    /** first entry number in current file. */
+    public int      m_xlFirstEntry;
+    /** last entry number in current file. */
+    public int      m_xlLastEntry;
+    
+    // indicates the document is loaded and ready for processing
+    public boolean  m_docReady;
+    
+    /** text segments in current document. */
+    public DocumentSegment[] m_docSegList;
+    
+
 
     public EditorController(final MainWindow mainWindow, final EditorTextArea editor) {
         this.mw = mainWindow;
@@ -101,7 +113,7 @@ public class EditorController implements IEditor {
      */
     public void loadDocument() {
         synchronized (mw) {
-            mw.m_docReady = false;
+            m_docReady = false;
 
             synchronized (editor) {
                 // clear old text
@@ -114,12 +126,12 @@ public class EditorController implements IEditor {
 
                 m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
 
-                mw.m_xlFirstEntry = m_curEntry.getFirstInFile();
-                mw.m_xlLastEntry = m_curEntry.getLastInFile();
-                int xlEntries = 1 + mw.m_xlLastEntry - mw.m_xlFirstEntry;
+                m_xlFirstEntry = m_curEntry.getFirstInFile();
+                m_xlLastEntry = m_curEntry.getLastInFile();
+                int xlEntries = 1 + m_xlLastEntry - m_xlFirstEntry;
 
                 DocumentSegment docSeg;
-                mw.m_docSegList = new DocumentSegment[xlEntries];
+                m_docSegList = new DocumentSegment[xlEntries];
 
                 int totalLength = 0;
 
@@ -136,7 +148,7 @@ public class EditorController implements IEditor {
                 for (int i = 0; i < xlEntries; i++) {
                     docSeg = new DocumentSegment();
 
-                    SourceTextEntry ste = CommandThread.core.getSTE(i + mw.m_xlFirstEntry);
+                    SourceTextEntry ste = CommandThread.core.getSTE(i + m_xlFirstEntry);
                     String sourceText = ste.getSrcText();
                     String text = ste.getTranslation();
 
@@ -183,7 +195,7 @@ public class EditorController implements IEditor {
                     }
 
                     docSeg.length = text.length();
-                    mw.m_docSegList[i] = docSeg;
+                    m_docSegList[i] = docSeg;
                 }
             } // synchronized (editor)
 
@@ -203,13 +215,13 @@ public class EditorController implements IEditor {
             if (!mw.isProjectLoaded())
                 return;
             int translatedInFile = 0;
-            for (int _i = mw.m_xlFirstEntry; _i <= mw.m_xlLastEntry; _i++) {
+            for (int _i = m_xlFirstEntry; _i <= m_xlLastEntry; _i++) {
                 if (CommandThread.core.getSTE(_i).isTranslated())
                     translatedInFile++;
             }
 
             String pMsg = " " + Integer.toString(translatedInFile) + "/"
-                    + Integer.toString(mw.m_xlLastEntry - mw.m_xlFirstEntry + 1) + " ("
+                    + Integer.toString(m_xlLastEntry - m_xlFirstEntry + 1) + " ("
                     + Integer.toString(CommandThread.core.getNumberofTranslatedSegments()) + "/"
                     + Integer.toString(CommandThread.core.getNumberOfUniqueSegments()) + ", "
                     + Integer.toString(CommandThread.core.getNumberOfSegmentsTotal()) + ") ";
@@ -228,12 +240,12 @@ public class EditorController implements IEditor {
 
                 // recover data about current entry
                 // <HP-experiment>
-                if (m_curEntryNum < mw.m_xlFirstEntry) {
+                if (m_curEntryNum < m_xlFirstEntry) {
                     Log.log("ERROR: Current entry # lower than first entry #");
                     Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
                     // FIX: m_curEntryNum = m_xlFirstEntry;
                 }
-                if (m_curEntryNum > mw.m_xlLastEntry) {
+                if (m_curEntryNum > m_xlLastEntry) {
                     Log.log("ERROR: Current entry # greater than last entry #");
                     Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
                     // FIX: m_curEntryNum = m_xlLastEntry;
@@ -246,18 +258,18 @@ public class EditorController implements IEditor {
 
                 // sum up total character offset to current segment start
                 m_segmentStartOffset = 0;
-                int localCur = m_curEntryNum - mw.m_xlFirstEntry;
+                int localCur = m_curEntryNum - m_xlFirstEntry;
                 // <HP-experiment>
                 DocumentSegment docSeg = null; // <HP-experiment> remove once done experimenting
                 try {
                     for (int i = 0; i < localCur; i++) {
                         //DocumentSegment // <HP-experiment> re-join with next line once done experimenting
-                        docSeg = mw.m_docSegList[i];
+                        docSeg = m_docSegList[i];
                         m_segmentStartOffset += docSeg.length; // length includes \n
                     }
 
                     //DocumentSegment // <HP-experiment> re-join with next line once done experimenting
-                    docSeg = mw.m_docSegList[localCur];
+                    docSeg = m_docSegList[localCur];
                 } catch (Exception exception) {
                     Log.log("ERROR: exception while calculating character offset:");
                     Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
@@ -362,11 +374,11 @@ public class EditorController implements IEditor {
                 // </HP-experiment>
 
                 int offsetPrev = 0;
-                int localNum = m_curEntryNum - mw.m_xlFirstEntry;
+                int localNum = m_curEntryNum - m_xlFirstEntry;
                 // <HP-experiment>
                 try {
                     for (int i = Math.max(0, localNum - 3); i < localNum; i++) {
-                        docSeg = mw.m_docSegList[i];
+                        docSeg = m_docSegList[i];
                         offsetPrev += docSeg.length;
                     }
                 } catch (Exception exception) {
@@ -380,11 +392,11 @@ public class EditorController implements IEditor {
                 final int lookPrev = m_segmentStartOffset - offsetPrev;
 
                 int offsetNext = 0;
-                int localLast = mw.m_xlLastEntry - mw.m_xlFirstEntry;
+                int localLast = m_xlLastEntry - m_xlFirstEntry;
                 // <HP-experiment>
                 try {
                     for (int i = localNum + 1; i < (localNum + 4) && i <= localLast; i++) {
-                        docSeg = mw.m_docSegList[i];
+                        docSeg = m_docSegList[i];
                         offsetNext += docSeg.length;
                     }
                 } catch (Exception exception) {
@@ -419,8 +431,8 @@ public class EditorController implements IEditor {
                     }
                 });
 
-                if (!mw.m_docReady) {
-                    mw.m_docReady = true;
+                if (!m_docReady) {
+                    m_docReady = true;
                 }
                 editor.cancelUndo();
 
@@ -512,8 +524,8 @@ public class EditorController implements IEditor {
                 int totalLen = m_sourceDisplayLength + OConsts.segmentStartStringFull.length()
                         + new_translation.length() + OConsts.segmentEndStringFull.length() + 2;
 
-                int localCur = m_curEntryNum - mw.m_xlFirstEntry;
-                DocumentSegment docSeg = mw.m_docSegList[localCur];
+                int localCur = m_curEntryNum - m_xlFirstEntry;
+                DocumentSegment docSeg = m_docSegList[localCur];
                 docSeg.length = display_string.length() + "\n\n".length(); // NOI18N
                 String segmentSource = null;
 
@@ -546,31 +558,31 @@ public class EditorController implements IEditor {
                         // find all identical strings and redraw them
 
                         // build offsets of all strings
-                        int localEntries = 1 + mw.m_xlLastEntry - mw.m_xlFirstEntry;
+                        int localEntries = 1 + m_xlLastEntry - m_xlFirstEntry;
                         int[] offsets = new int[localEntries];
                         int currentOffset = 0;
                         for (int i = 0; i < localEntries; i++) {
                             offsets[i] = currentOffset;
-                            docSeg = mw.m_docSegList[i];
+                            docSeg = m_docSegList[i];
                             currentOffset += docSeg.length;
                         }
 
                         // starting from the last (guaranteed by sorting ParentList)
                         for (SourceTextEntry ste : m_curEntry.getStrEntry().getParentList()) {
                             int entry = ste.entryNum();
-                            if (entry > mw.m_xlLastEntry)
+                            if (entry > m_xlLastEntry)
                                 continue;
-                            else if (entry < mw.m_xlFirstEntry)
+                            else if (entry < m_xlFirstEntry)
                                 break;
                             else if (entry == m_curEntryNum)
                                 continue;
 
-                            int localEntry = entry - mw.m_xlFirstEntry;
+                            int localEntry = entry - m_xlFirstEntry;
                             int offset = offsets[localEntry];
                             int replacementLength = docSeg.length;
 
                             // replace old text w/ new
-                            docSeg = mw.m_docSegList[localEntry];
+                            docSeg = m_docSegList[localEntry];
                             docSeg.length = replaceEntry(offset, docSeg.length, segmentSource, display_string, flags);
 
                             int supplement = 0;
@@ -610,7 +622,7 @@ public class EditorController implements IEditor {
             commitEntry();
 
             m_curEntryNum++;
-            if (m_curEntryNum > mw.m_xlLastEntry) {
+            if (m_curEntryNum > m_xlLastEntry) {
                 if (m_curEntryNum >= CommandThread.core.numEntries())
                     m_curEntryNum = 0;
                 loadDocument();
@@ -628,7 +640,7 @@ public class EditorController implements IEditor {
             commitEntry();
 
             m_curEntryNum--;
-            if (m_curEntryNum < mw.m_xlFirstEntry) {
+            if (m_curEntryNum < m_xlFirstEntry) {
                 if (m_curEntryNum < 0)
                     m_curEntryNum = CommandThread.core.numEntries() - 1;
                 // empty project bugfix:
@@ -703,7 +715,7 @@ public class EditorController implements IEditor {
                 m_curEntryNum = curEntryNum;
 
                 // load the document, if the segment is not in the current document
-                if (m_curEntryNum < mw.m_xlFirstEntry || m_curEntryNum > mw.m_xlLastEntry)
+                if (m_curEntryNum < m_xlFirstEntry || m_curEntryNum > m_xlLastEntry)
                     loadDocument();
             }
 
@@ -724,14 +736,14 @@ public class EditorController implements IEditor {
             commitEntry();
 
             m_curEntryNum = entryNum - 1;
-            if (m_curEntryNum < mw.m_xlFirstEntry) {
+            if (m_curEntryNum < m_xlFirstEntry) {
                 if (m_curEntryNum < 0)
                     m_curEntryNum = CommandThread.core.numEntries() - 1;
                 // empty project bugfix:
                 if (m_curEntryNum < 0)
                     m_curEntryNum = 0;
                 loadDocument();
-            } else if (m_curEntryNum > mw.m_xlLastEntry) {
+            } else if (m_curEntryNum > m_xlLastEntry) {
                 if (m_curEntryNum >= CommandThread.core.numEntries())
                     m_curEntryNum = 0;
                 loadDocument();

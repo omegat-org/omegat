@@ -57,7 +57,6 @@ import org.omegat.core.StringEntry;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
-import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.gui.ProjectFrame;
@@ -701,20 +700,9 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
     /** The font for main window (source and target text) and for match and glossary windows */
     Font m_font;
     
-    /** first entry number in current file. */
-    public int		m_xlFirstEntry;
-    /** last entry number in current file. */
-    public int		m_xlLastEntry;
-    
     // boolean set after safety check that org.omegat.OConsts.segmentStartStringFull
     //	contains empty "0000" for segment number
     public boolean	m_segmentTagHasNumber;
-    
-    // indicates the document is loaded and ready for processing
-    public boolean	m_docReady;
-    
-    /** text segments in current document. */
-    public DocumentSegment[] m_docSegList;
     
     public char	m_advancer;
 

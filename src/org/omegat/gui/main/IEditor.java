@@ -95,4 +95,19 @@ public interface IEditor {
      *            lower, title, upper or cycle
      */
     void changeCase(CHANGE_CASE_TO newCase);
+
+    /**
+     * Checks whether the selection & caret is inside editable text, and changes
+     * their positions accordingly if not.
+     */
+    void checkCaret();
+
+    /**
+     * Make sure there's one character in the direction indicated for delete
+     * operation.
+     * 
+     * @param forward
+     * @return true if space is available
+     */
+    boolean checkCaretForDelete(boolean forward);
 }

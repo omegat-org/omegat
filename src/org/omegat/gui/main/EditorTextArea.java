@@ -257,7 +257,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
         switch (keyChar)
         {
             case KeyEvent.VK_BACK_SPACE:
-                if (mw.checkCaretForDelete(false))
+                if (Core.getEditor().checkCaretForDelete(false))
                 {
                     // RFE [ 1579488 ] Ctrl+Backspace
                     if (e.getModifiers() == CTRL_DEL_MASK &&
@@ -279,7 +279,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                             else
                                 setSelectionStart(wordBeforeEnd);
                             // Check selection is within segment
-                            mw.checkCaret(); 
+                            Core.getEditor().checkCaret(); 
                             // Remove selection
                             replaceSelection("");                               // NOI18N
                             // Swallow key event
@@ -300,7 +300,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                 checkSpelling(false);
                 return;
             case KeyEvent.VK_DELETE:
-                if (mw.checkCaretForDelete(true))
+                if (Core.getEditor().checkCaretForDelete(true))
                 {
                     // RFE [ 1579488 ] Ctrl+Delete
                     if (e.getModifiers()== CTRL_DEL_MASK &&
@@ -319,7 +319,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                             else
                                 setSelectionEnd(nextWord);
                             // Check selection is within segment
-                            mw.checkCaret(); 
+                            Core.getEditor().checkCaret(); 
                             // Remove selection
                             replaceSelection("");                               // NOI18N
                             // Swallow key event
@@ -353,7 +353,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
             super.processKeyEvent(e);
             
             // and then "refining" the selection
-            mw.checkCaret();
+            Core.getEditor().checkCaret();
             
             return;
         }
@@ -381,7 +381,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
         
         // every other key press should be within the editing zone
         //	so make sure the caret is there
-        mw.checkCaret();
+        Core.getEditor().checkCaret();
         
         // if user pressed enter, see what modifiers were pressed
         //	so determine what to do
@@ -498,7 +498,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                     setCaretPosition(start);
                 else
                     super.processKeyEvent(e);
-                mw.checkCaret();
+                Core.getEditor().checkCaret();
                 return;
             }
             else if (keyCode == KeyEvent.VK_DOWN		||
@@ -512,7 +512,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                     setCaretPosition(end);
                 else
                     super.processKeyEvent(e);
-                mw.checkCaret();
+                Core.getEditor().checkCaret();
                 return;
             }
         }
@@ -660,7 +660,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
      */
     public void replaceSelection(String string) 
     {
-        mw.checkCaret();
+        Core.getEditor().checkCaret();
         super.replaceSelection(string);
         checkSpelling(true);
     }

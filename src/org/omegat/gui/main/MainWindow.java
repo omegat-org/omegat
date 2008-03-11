@@ -741,46 +741,6 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
     }
     
     /**
-     * Make sure there's one character in the direction indicated for
-     * delete operation.
-     *
-     * @param forward
-     * @return true if space is available
-     */
-    public synchronized boolean checkCaretForDelete(boolean forward)
-    {
-        synchronized (editor) {
-            int pos = editor.getCaretPosition();
-
-            // make sure range doesn't overlap boundaries
-            checkCaret();
-
-            if (forward)
-            {
-                // make sure we're not at end of segment
-                // -1 for space before tag, -2 for newlines
-                int end = editor.getTextLength() - m_segmentEndInset -
-                        OConsts.segmentEndStringFull.length();
-                int spos = editor.getSelectionStart();
-                int epos = editor.getSelectionEnd();
-                if( pos>=end && spos>=end && epos>=end )
-                    return false;
-            }
-            else
-            {
-                // make sure we're not at start of segment
-                int start = getTranslationStart();
-                int spos = editor.getSelectionStart();
-                int epos = editor.getSelectionEnd();
-                if( pos<=start && epos<=start && spos<=start )
-                    return false;
-            }
-        } // synchronized (editor)
-
-        return true;
-    }
-
-    /**
      * Calculate the position of the start of the current translation
      */
     public synchronized int getTranslationStart() {
@@ -838,59 +798,6 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
         return wrongWordList;
     }
     
-    /**
-     * Checks whether the selection & caret is inside editable text,
-     * and changes their positions accordingly if not.
-     */
-    public synchronized void checkCaret()
-    {
-        synchronized (editor) {
-            //int pos = m_editor.getCaretPosition();
-            int spos = editor.getSelectionStart();
-            int epos = editor.getSelectionEnd();
-            /*int start = m_segmentStartOffset + m_sourceDisplayLength +
-                    OConsts.segmentStartStringFull.length();*/
-            int start = getTranslationStart();
-            // -1 for space before tag, -2 for newlines
-            /*int end = editor.getTextLength() - m_segmentEndInset -
-                    OConsts.segmentEndStringFull.length();*/
-            int end = getTranslationEnd();
-    
-            if (spos != epos)
-            {
-                // dealing with a selection here - make sure it's w/in bounds
-                if (spos < start)
-                {
-                    editor.setSelectionStart(start);
-                }
-                else if (spos > end)
-                {
-                    editor.setSelectionStart(end);
-                }
-                if (epos > end)
-                {
-                    editor.setSelectionEnd(end);
-                }
-                else if (epos < start)
-                {
-                    editor.setSelectionStart(start);
-                }
-            }
-            else
-            {
-                // non selected text
-                if (spos < start)
-                {
-                    editor.setCaretPosition(start);
-                }
-                else if (spos > end)
-                {
-                    editor.setCaretPosition(end);
-                }
-            }
-        } // synchronized (editor)
-    }
-
     public void fatalError(String msg, Throwable re)
     {
         Log.log(msg);

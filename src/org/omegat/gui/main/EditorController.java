@@ -83,12 +83,10 @@ public class EditorController implements IEditor {
         editor.controller = this;
     }
 
-    @Override
     public SourceTextEntry getCurrentEntry() {
         return m_curEntry;
     }
 
-    @Override
     public String getCurrentFile() {
         String fullName = CommandThread.core.getSTE(m_curEntryNum).getSrcFile().name;
         return fullName.substring(CommandThread.core.sourceRoot().length());
@@ -714,7 +712,6 @@ public class EditorController implements IEditor {
         }
     }
 
-    @Override
     public void setFirstEntry() {
         m_curEntryNum = 0;
     }

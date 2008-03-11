@@ -540,7 +540,6 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
      * @param str
      *                message text
      */
-    @Override
     public void showStatusMessage(String str) {
         if (str.length() == 0)
             str = new String() + ' ';
@@ -553,7 +552,6 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
      * @param messageText
      *                message text
      */
-    @Override
     public void showProgressMessage(String messageText) {
         progressLabel.setText(messageText);
     }
@@ -564,7 +562,6 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
      * @param messageText
      *                message text
      */
-    @Override
     public void showLengthMessage(String messageText) {
         // TODO Auto-generated method stub
 

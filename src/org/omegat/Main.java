@@ -33,6 +33,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.gui.TagValidationTool;
+import org.omegat.gui.main.EditorController;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -95,8 +96,9 @@ public class Main
         CommandThread.core.start();
         
         mainwindow.setVisible(true);
-        
-        Core.initialize(CommandThread.core, mainwindow, mainwindow.editor, new TagValidationTool(mainwindow));
+        EditorController ec = new EditorController(mainwindow, mainwindow.editor);
+
+        Core.initialize(CommandThread.core, mainwindow, ec, new TagValidationTool(mainwindow));
         CoreEvents.fireApplicationStartup();
     }
 }

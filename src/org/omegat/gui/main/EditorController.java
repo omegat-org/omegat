@@ -33,6 +33,7 @@ import java.util.Locale;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Utilities;
 
+import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.util.Log;
 import org.omegat.util.StaticUtils;
@@ -58,6 +59,116 @@ public class EditorController implements IEditor {
     public EditorController(final MainWindow mainWindow, final EditorTextArea editor) {
         this.mw = mainWindow;
         this.editor = editor;
+    }
+
+    public void nextEntry() {
+        synchronized (mw) {
+            if (!mw.isProjectLoaded())
+                return;
+
+            mw.commitEntry();
+
+            mw.m_curEntryNum++;
+            if (mw.m_curEntryNum > mw.m_xlLastEntry) {
+                if (mw.m_curEntryNum >= CommandThread.core.numEntries())
+                    mw.m_curEntryNum = 0;
+                mw.loadDocument();
+            }
+
+            mw.activateEntry();
+        }
+    }
+
+    public void prevEntry() {
+        synchronized (mw) {
+            if (!mw.isProjectLoaded())
+                return;
+
+            mw.commitEntry();
+
+            mw.m_curEntryNum--;
+            if (mw.m_curEntryNum < mw.m_xlFirstEntry) {
+                if (mw.m_curEntryNum < 0)
+                    mw.m_curEntryNum = CommandThread.core.numEntries() - 1;
+                // empty project bugfix:
+                if (mw.m_curEntryNum < 0)
+                    mw.m_curEntryNum = 0;
+                mw.loadDocument();
+            }
+            mw.activateEntry();
+        }
+    }
+
+    /**
+     * Finds the next untranslated entry in the document.
+     * <p>
+     * Since 1.6.0 RC9 also looks from the beginning of the document if there're
+     * no untranslated till the end of document. This way it look at entire
+     * project like Go To Next Segment does.
+     * 
+     * @author Henry Pijffers
+     * @author Maxym Mykhalchuk
+     */
+    public void nextUntranslatedEntry() {
+        synchronized (mw) {
+            // check if a document is loaded
+            if (mw.isProjectLoaded() == false)
+                return;
+
+            // save the current entry
+            mw.commitEntry();
+
+            // get the total number of entries
+            int numEntries = CommandThread.core.numEntries();
+
+            boolean found = false;
+            int curEntryNum;
+
+            // iterate through the list of entries,
+            // starting at the current entry,
+            // until an entry with no translation is found
+            for (curEntryNum = mw.m_curEntryNum + 1; curEntryNum < numEntries; curEntryNum++) {
+                // get the next entry
+                SourceTextEntry entry = CommandThread.core.getSTE(curEntryNum);
+
+                // check if the entry is not null, and whether it contains a translation
+                if (entry != null && entry.getTranslation().length() == 0) {
+                    // we've found it
+                    found = true;
+                    // stop searching
+                    break;
+                }
+            }
+
+            // if we haven't found untranslated entry till the end,
+            // trying to search for it from the beginning
+            if (!found) {
+                for (curEntryNum = 0; curEntryNum < mw.m_curEntryNum; curEntryNum++) {
+                    // get the next entry
+                    SourceTextEntry entry = CommandThread.core.getSTE(curEntryNum);
+
+                    // check if the entry is not null, and whether it contains a translation
+                    if (entry != null && entry.getTranslation().length() == 0) {
+                        // we've found it
+                        found = true;
+                        // stop searching
+                        break;
+                    }
+                }
+            }
+
+            if (found) {
+                // mark the entry
+                mw.m_curEntryNum = curEntryNum;
+
+                // load the document, if the segment is not in the current document
+                if (mw.m_curEntryNum < mw.m_xlFirstEntry || mw.m_curEntryNum > mw.m_xlLastEntry)
+                    mw.loadDocument();
+            }
+
+            // activate the entry
+            mw.activateEntry();
+        }
     }
 
     /**

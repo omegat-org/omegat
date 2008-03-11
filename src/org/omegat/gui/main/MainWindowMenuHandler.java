@@ -331,15 +331,15 @@ public class MainWindowMenuHandler {
     }
 
     public void gotoNextUntranslatedMenuItemActionPerformed() {
-        mainWindow.doNextUntranslatedEntry();
+        Core.getEditor().nextUntranslatedEntry();
     }
 
     public void gotoNextSegmentMenuItemActionPerformed() {
-        mainWindow.doNextEntry();
+        Core.getEditor().nextEntry();
     }
 
     public void gotoPreviousSegmentMenuItemActionPerformed() {
-        mainWindow.doPrevEntry();
+        Core.getEditor().prevEntry();
     }
 
     /**

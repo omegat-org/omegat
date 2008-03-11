@@ -36,7 +36,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
-import java.util.Locale;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -51,6 +50,7 @@ import javax.swing.text.StyleContext;
 import javax.swing.text.Utilities;
 import javax.swing.undo.UndoManager;
 
+import org.omegat.core.Core;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.core.threads.CommandThread;
@@ -413,14 +413,14 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                 {
                     // go backwards on control return
                     if (e.getID() == KeyEvent.KEY_PRESSED)
-                        mw.doPrevEntry();
+                        Core.getEditor().prevEntry();
                 }
                 else if (!e.isShiftDown())
                 {
                     // return w/o modifiers - swallow event and move on to
                     //  next segment
                     if (e.getID() == KeyEvent.KEY_PRESSED)
-                        mw.doNextEntry();
+                        Core.getEditor().nextEntry();
                 }
             }
             else if (mw.m_advancer == KeyEvent.VK_TAB)
@@ -430,14 +430,14 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                 {
                     // go backwards on control return
                     if (e.getID() == KeyEvent.KEY_PRESSED)
-                        mw.doPrevEntry();
+                        Core.getEditor().prevEntry();
                 }
                 else
                 {
                     // return w/o modifiers - swallow event and move on to
                     //  next segment
                     if (e.getID() == KeyEvent.KEY_PRESSED)
-                        mw.doNextEntry();
+                        Core.getEditor().nextEntry();
                 }
             }
             return;

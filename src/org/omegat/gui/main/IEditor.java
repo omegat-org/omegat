@@ -42,11 +42,26 @@ public interface IEditor {
     }
 
     /**
+     * Move to next entry.
+     */
+    void nextEntry();
+
+    /**
+     * Move to previous entry.
+     */
+    void prevEntry();
+
+    /**
+     * Move to next untranslated entry.
+     */
+    void nextUntranslatedEntry();
+
+    /**
      * Change case of the selected text or if none is selected, of the current
      * word.
      * 
      * @param newCase :
-     *                lower, title, upper or cycle
+     *            lower, title, upper or cycle
      */
     void changeCase(CHANGE_CASE_TO newCase);
 }

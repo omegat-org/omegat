@@ -245,21 +245,9 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
             return;
         
         NearString near = m_curEntry.getStrEntry().getNearListTranslated().get(activeMatch);
-        doInsertText(near.str.getTranslation());
+        Core.getEditor().insertText(near.str.getTranslation());
     }
-    
-    /** inserts text at the cursor position */
-    synchronized void doInsertText(String text)
-    {
-        synchronized (editor) {
-//            int pos = editor.getCaretPosition();
-//            editor.select(pos, pos);
-// Removing the two lines above implements:
-// RFE [ 1579488 ] overwriting with Ctrl+i
-            editor.replaceSelection(text);
-        }
-    }
-    
+
     /** replace entire edit area with active fuzzy match */
     public synchronized void doRecycleTrans()
     {

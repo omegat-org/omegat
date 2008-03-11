@@ -1029,6 +1029,19 @@ public class EditorController implements IEditor {
         }
     }
 
+    /** inserts text at the cursor position */
+    public void insertText(final String text) {
+        synchronized (mw) {
+            synchronized (editor) {
+                //            int pos = editor.getCaretPosition();
+                //            editor.select(pos, pos);
+                // Removing the two lines above implements:
+                // RFE [ 1579488 ] overwriting with Ctrl+i
+                editor.replaceSelection(text);
+            }
+        }
+    }
+
     /**
      * Calculate the position of the start of the current translation
      */

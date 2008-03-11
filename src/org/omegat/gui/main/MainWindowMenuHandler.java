@@ -259,7 +259,7 @@ public class MainWindowMenuHandler {
             if (!mainWindow.isProjectLoaded())
                 return;
 
-            mainWindow.doInsertText(mainWindow.m_curEntry.getSrcText());
+            Core.getEditor().insertText(mainWindow.m_curEntry.getSrcText());
         }
     }
 

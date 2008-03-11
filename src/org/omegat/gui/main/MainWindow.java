@@ -30,6 +30,8 @@ package org.omegat.gui.main;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -87,8 +89,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class MainWindow extends JFrame implements ComponentListener, IMainWindow, IProjectEventListener,
-        IApplicationEventListener {
+public class MainWindow extends JFrame implements IMainWindow, IProjectEventListener, IApplicationEventListener {
     protected final MainWindowMenu menu;
     
     /** Creates new form MainWindow */
@@ -109,7 +110,14 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
             }
         });
 
-        addComponentListener(this);
+        addComponentListener(new ComponentAdapter() {
+            public void componentMoved(ComponentEvent e) {
+                MainWindowUI.saveScreenLayout(MainWindow.this);
+            }
+            public void componentResized(ComponentEvent e) {
+                MainWindowUI.saveScreenLayout(MainWindow.this);
+            }
+        });
 
         MainWindowUI.createMainComponents(this);
 
@@ -208,10 +216,6 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
     
     boolean layoutInitialized = false;
     
-    public void filelistWindowClosed()
-    {
-    }
- 
     ///////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////
     // command handling
@@ -477,8 +481,7 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
             {
                 displayError(OStrings.getString("MAIN_ERROR_File_Import_Failed"), ioe);
             }
-        }
-        
+        }        
     }
 
     /** 
@@ -720,34 +723,6 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
     
     public boolean m_projectLoaded;
 
-    public void componentHidden(java.awt.event.ComponentEvent evt) {
-    }
-
-    public void componentMoved(java.awt.event.ComponentEvent evt) {
-        if (evt.getSource() == MainWindow.this) {
-            MainWindow.this.formComponentMoved(evt);
-        }
-    }
-
-    public void componentResized(java.awt.event.ComponentEvent evt) {
-        if (evt.getSource() == MainWindow.this) {
-            MainWindow.this.formComponentResized(evt);
-        }
-    }
-
-    public void componentShown(java.awt.event.ComponentEvent evt) {
-    }
-
-    public void formComponentMoved(java.awt.event.ComponentEvent evt)
-    {
-        MainWindowUI.saveScreenLayout(this);
-    }
-    
-    public void formComponentResized(java.awt.event.ComponentEvent evt)
-    {
-        MainWindowUI.saveScreenLayout(this);
-    }
-    
     boolean m_autoSpellChecking;
     
     public boolean autoSpellCheckingOn() {

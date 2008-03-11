@@ -140,14 +140,6 @@ public class ProjectFrame extends JFrame
         cp.add(bbut, "South");                                                  // NOI18N
         
         m_editorPane.addHyperlinkListener(new HListener(m_parent, true));
-        
-        addComponentListener(new java.awt.event.ComponentAdapter()
-        {
-            public void componentHidden(java.awt.event.ComponentEvent evt)
-            {
-                m_parent.filelistWindowClosed();
-            }
-        });        
 
         Mnemonics.setLocalizedText(m_closeButton, OStrings.getString("BUTTON_CLOSE"));
         setTitle(OStrings.getString("PF_WINDOW_TITLE"));

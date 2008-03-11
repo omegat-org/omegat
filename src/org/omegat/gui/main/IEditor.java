@@ -52,6 +52,19 @@ public interface IEditor {
     void activateEntry();
 
     /**
+     * Commits the translation. Translation will be saved.
+     */
+    void commitEntry();
+
+    /**
+     * Commits the translation.
+     * 
+     * @param forceCommit
+     *            If false, the translation will not be saved
+     */
+    void commitEntry(boolean forceCommit);
+
+    /**
      * Move to next entry.
      */
     void nextEntry();

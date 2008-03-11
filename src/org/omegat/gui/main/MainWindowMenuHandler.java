@@ -120,7 +120,7 @@ public class MainWindowMenuHandler {
      */
     public void projectSaveMenuItemActionPerformed() {
         // commit the current entry first
-        mainWindow.commitEntry(true);
+        Core.getEditor().commitEntry(true);
         Core.getEditor().activateEntry();
         mainWindow.doSave();
     }
@@ -468,7 +468,7 @@ public class MainWindowMenuHandler {
         else
             mainWindow.m_translatedAttributeSet = Styles.PLAIN;
 
-        mainWindow.commitEntry(false);
+        Core.getEditor().commitEntry(false);
         Core.getEditor().loadDocument();
         Core.getEditor().activateEntry();
     }
@@ -481,13 +481,13 @@ public class MainWindowMenuHandler {
         else
             mainWindow.m_unTranslatedAttributeSet = Styles.PLAIN;
 
-        mainWindow.commitEntry(false);
+        Core.getEditor().commitEntry(false);
         Core.getEditor().loadDocument();
         Core.getEditor().activateEntry();
     }
 
     public void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed() {
-        mainWindow.commitEntry(false);
+        Core.getEditor().commitEntry(false);
 
         mainWindow.m_displaySegmentSources = mainWindow.menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected();
 
@@ -525,7 +525,7 @@ public class MainWindowMenuHandler {
         if (dlg.getReturnStatus() == FontSelectionDialog.RET_OK_CHANGED) {
             // fonts have changed
             // first commit current translation
-            mainWindow.commitEntry(false); // part of fix for bug 1409309
+            Core.getEditor().commitEntry(false); // part of fix for bug 1409309
             mainWindow.m_font = dlg.getSelectedFont();
             synchronized (mainWindow.editor) {
                 mainWindow.editor.setFont(mainWindow.m_font);
@@ -597,7 +597,7 @@ public class MainWindowMenuHandler {
                 sc.destroy();
                 sc.initialize();
             }
-            mainWindow.commitEntry(false);
+            Core.getEditor().commitEntry(false);
             Core.getEditor().loadDocument();
             Core.getEditor().activateEntry();
         }

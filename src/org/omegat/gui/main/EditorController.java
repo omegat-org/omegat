@@ -42,6 +42,7 @@ import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -407,13 +408,200 @@ public class EditorController implements IEditor {
             mw.entryActivated = true;
         }
     }
+    
+    /**
+     * Commits the translation.
+     * Reads current entry text and commit it to memory if it's changed.
+     * Also clears out segment markers while we're at it.
+     * <p>
+     * Since 1.6: Translation equal to source may be validated as OK translation
+     *            if appropriate option is set in Workflow options dialog.
+     */
+    public void commitEntry() {
+        commitEntry(true);
+    }
+    
+    /**
+     * Commits the translation.
+     * Reads current entry text and commit it to memory if it's changed.
+     * Also clears out segment markers while we're at it.
+     * <p>
+     * Since 1.6: Translation equal to source may be validated as OK translation
+     *            if appropriate option is set in Workflow options dialog.
+     *
+     * @param forceCommit If false, the translation will not be saved
+     */
+    public void commitEntry(final boolean forceCommit) {
+        synchronized (mw) {
+        if (!mw.isProjectLoaded())
+            return;
+
+        if (!mw.entryActivated)
+            return;
+        mw.entryActivated = false;
+
+        synchronized (editor) {
+            AbstractDocument xlDoc = (AbstractDocument)editor.getDocument();
+
+            AttributeSet attributes = mw.m_translatedAttributeSet;
+            
+            int start = mw.getTranslationStart();
+            int end = mw.getTranslationEnd();
+            String display_string;
+            String new_translation;
+            
+            boolean doCheckSpelling = true;
+            
+            // the list of incorrect words returned eventually by the 
+            // spellchecker
+            List<Token> wordList = null;
+            int flags = mw.IS_NOT_TRANSLATED;
+            
+            if (start == end)
+            {
+                new_translation = new String();
+                doCheckSpelling = false;
+                
+                if (!mw.m_displaySegmentSources) {    
+                display_string  = mw.m_curEntry.getSrcText();
+                    attributes = mw.m_unTranslatedAttributeSet;    
+                } else {
+                    display_string = new String();
+            }
+            }
+            else
+            {
+                try
+                {
+                    new_translation = xlDoc.getText(start, end - start);
+                    if (   new_translation.equals(mw.m_curEntry.getSrcText())
+                        && !Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)) {
+                        attributes = mw.m_unTranslatedAttributeSet;
+                        doCheckSpelling = false;  
+                    } else {
+                        attributes = mw.m_translatedAttributeSet;
+                        flags = 0;
+                }
+                }
+                catch(BadLocationException ble)
+                {
+                    Log.log(mw.IMPOSSIBLE);
+                    Log.log(ble);
+                    new_translation = new String();
+                    doCheckSpelling = false;
+                }
+                display_string = new_translation;
+            }
+
+            int startOffset = mw.m_segmentStartOffset;
+            int totalLen = mw.m_sourceDisplayLength + OConsts.segmentStartStringFull.length() +
+                    new_translation.length() + OConsts.segmentEndStringFull.length() + 2;
+
+            int localCur = mw.m_curEntryNum - mw.m_xlFirstEntry;
+            DocumentSegment docSeg = mw.m_docSegList[localCur];
+            docSeg.length = display_string.length() + "\n\n".length();              // NOI18N
+            String segmentSource = null;
+    
+            if (mw.m_displaySegmentSources) {
+                int increment = mw.m_sourceDisplayLength + 1; 
+                startOffset += increment;
+                //totalLen -= increment;
+                docSeg.length += increment;
+                segmentSource = mw.m_curEntry.getSrcText();
+            }
+            
+            docSeg.length = mw.replaceEntry(mw.m_segmentStartOffset, totalLen, 
+                    segmentSource, display_string, flags);
+            
+            if (doCheckSpelling && mw.m_autoSpellChecking) {
+                wordList = mw.checkSpelling(startOffset, display_string);
+            }
+
+            if (forceCommit) { // fix for 
+                String old_translation = mw.m_curEntry.getTranslation();
+                // update memory
+                if (   new_translation.equals(mw.m_curEntry.getSrcText())
+                    && !Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC))
+                    mw.m_curEntry.setTranslation(new String());
+                else
+                    mw.m_curEntry.setTranslation(new_translation);
+    
+                // update the length parameters of all changed segments
+                // update strings in display
+                if (!mw.m_curEntry.getTranslation().equals(old_translation))
+                {
+                    // find all identical strings and redraw them
+    
+                    // build offsets of all strings
+                    int localEntries = 1+mw.m_xlLastEntry-mw.m_xlFirstEntry;
+                    int[] offsets = new int[localEntries];
+                    int currentOffset = 0;
+                    for (int i=0; i<localEntries; i++)
+                    {
+                        offsets[i]=currentOffset;
+                        docSeg = mw.m_docSegList[i];
+                        currentOffset += docSeg.length;
+                    }
+    
+                    // starting from the last (guaranteed by sorting ParentList)
+                    for (SourceTextEntry ste : mw.m_curEntry.getStrEntry().getParentList())
+                    {
+                        int entry = ste.entryNum();
+                        if (entry>mw.m_xlLastEntry)
+                            continue;
+                        else if (entry<mw.m_xlFirstEntry)
+                            break;
+                        else if (entry==mw.m_curEntryNum)
+                            continue;
+    
+                        int localEntry = entry-mw.m_xlFirstEntry;
+                        int offset = offsets[localEntry];
+                        int replacementLength = docSeg.length;
+    
+                        // replace old text w/ new
+                        docSeg = mw.m_docSegList[localEntry];
+                        docSeg.length = mw.replaceEntry(offset, docSeg.length, 
+                                segmentSource, display_string, flags);
+                        
+                        int supplement = 0;
+                        
+                        if (mw.m_displaySegmentSources) {
+                            supplement = ste.getSrcText().length() + "\n".length();
+                        }
+                        
+                        if (doCheckSpelling && wordList != null) {
+                            for (Token token : wordList) {
+                                int tokenStart = token.getOffset();
+                                int tokenEnd = tokenStart + token.getLength();
+                                String word = token.getTextFromString(display_string);
+
+                                try {
+                                    xlDoc.replace(
+                                            offset+supplement+tokenStart,
+                                            token.getLength(),
+                                            word,
+                                            Styles.applyStyles(attributes,Styles.MISSPELLED)
+                                            );
+                                } catch (BadLocationException ble) {
+                                    //Log.log(IMPOSSIBLE);
+                            Log.log(ble);
+                        }
+                    }
+                }
+            }
+                }
+            }
+            editor.cancelUndo();
+        } // synchronize (editor)
+    }
+    }
 
     public void nextEntry() {
         synchronized (mw) {
             if (!mw.isProjectLoaded())
                 return;
 
-            mw.commitEntry();
+            commitEntry();
 
             mw.m_curEntryNum++;
             if (mw.m_curEntryNum > mw.m_xlLastEntry) {
@@ -431,7 +619,7 @@ public class EditorController implements IEditor {
             if (!mw.isProjectLoaded())
                 return;
 
-            mw.commitEntry();
+            commitEntry();
 
             mw.m_curEntryNum--;
             if (mw.m_curEntryNum < mw.m_xlFirstEntry) {
@@ -463,7 +651,7 @@ public class EditorController implements IEditor {
                 return;
 
             // save the current entry
-            mw.commitEntry();
+            commitEntry();
 
             // get the total number of entries
             int numEntries = CommandThread.core.numEntries();
@@ -523,7 +711,7 @@ public class EditorController implements IEditor {
             if (!mw.isProjectLoaded())
                 return;
 
-            mw.commitEntry();
+            commitEntry();
 
             mw.m_curEntryNum = entryNum - 1;
             if (mw.m_curEntryNum < mw.m_xlFirstEntry) {

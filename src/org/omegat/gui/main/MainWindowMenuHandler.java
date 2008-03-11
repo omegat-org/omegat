@@ -249,7 +249,7 @@ public class MainWindowMenuHandler {
             if (!mainWindow.isProjectLoaded())
                 return;
 
-            Core.getEditor().replaceEditText(mainWindow.m_curEntry.getSrcText());
+            Core.getEditor().replaceEditText(Core.getEditor().getCurrentEntry().getSrcText());
         }
     }
 
@@ -259,7 +259,7 @@ public class MainWindowMenuHandler {
             if (!mainWindow.isProjectLoaded())
                 return;
 
-            Core.getEditor().insertText(mainWindow.m_curEntry.getSrcText());
+            Core.getEditor().insertText(Core.getEditor().getCurrentEntry().getSrcText());
         }
     }
 

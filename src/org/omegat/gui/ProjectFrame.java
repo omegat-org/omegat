@@ -48,6 +48,7 @@ import javax.swing.KeyStroke;
 import javax.swing.text.Element;
 import javax.swing.text.html.HTMLDocument;
 
+import org.omegat.core.Core;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
@@ -259,7 +260,7 @@ public class ProjectFrame extends JFrame
         output.append("</tr>\n");                                               // NOI18N
         int firstEntry = 1;
         int entriesUpToNow = 0;
-        String currentFile = m_parent.getActiveFileName();
+        String currentFile = Core.getEditor().getCurrentFile();
         for (int i=0; i<m_nameList.size(); i++)
         {
             String name = m_nameList.get(i);

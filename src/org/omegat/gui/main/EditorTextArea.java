@@ -789,7 +789,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
             int totalLen = mw.m_sourceDisplayLength + OConsts.segmentStartStringFull.length() +
                     currentTrLen + OConsts.segmentEndStringFull.length() + 2;
             
-            int localCur = mw.m_curEntryNum - mw.m_xlFirstEntry;
+            int localCur = controller.m_curEntryNum - mw.m_xlFirstEntry;
             DocumentSegment docSeg = mw.m_docSegList[localCur];
             docSeg.length = totalLen;
             
@@ -885,7 +885,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
         {
             // before current entry
             int offset = 0;
-            for (i=mw.m_xlFirstEntry; i<mw.m_curEntryNum; i++)
+            for (i=mw.m_xlFirstEntry; i<controller.m_curEntryNum; i++)
             {
                 docSeg = mw.m_docSegList[i-mw.m_xlFirstEntry];
                 offset += docSeg.length;
@@ -900,7 +900,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
         {
             // after current entry
             int inset = getTextLength() - mw.m_segmentEndInset;
-            for (i=mw.m_curEntryNum+1; i<=mw.m_xlLastEntry; i++)
+            for (i=controller.m_curEntryNum+1; i<=mw.m_xlLastEntry; i++)
             {
                 docSeg = mw.m_docSegList[i-mw.m_xlFirstEntry];
                 inset += docSeg.length;

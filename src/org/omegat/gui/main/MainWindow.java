@@ -178,7 +178,7 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
             try
             {
                 //String file = m_activeFile.substring(CommandThread.core.sourceRoot().length());
-                String file = getActiveFileName();
+                String file = Core.getEditor().getCurrentFile();
  //               Log.log("file = "+file);
                 // RFE [1764103] Editor window name 
                 editorScroller.setName(StaticUtils.format( 
@@ -200,7 +200,6 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
      */
     public void oldInit()
     {
-        m_curEntryNum = -1;
         m_activeProj = new String();
         //m_activeFile = new String();
         
@@ -241,10 +240,10 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
         if (activeMatch < 0)
             return;
         
-        if (activeMatch >= m_curEntry.getStrEntry().getNearListTranslated().size())
+        if (activeMatch >= Core.getEditor().getCurrentEntry().getStrEntry().getNearListTranslated().size())
             return;
         
-        NearString near = m_curEntry.getStrEntry().getNearListTranslated().get(activeMatch);
+        NearString near = Core.getEditor().getCurrentEntry().getStrEntry().getNearListTranslated().get(activeMatch);
         Core.getEditor().insertText(near.str.getTranslation());
     }
 
@@ -258,10 +257,10 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
         if (activeMatch < 0)
             return;
 
-        if (activeMatch >= m_curEntry.getStrEntry().getNearListTranslated().size())
+        if (activeMatch >= Core.getEditor().getCurrentEntry().getStrEntry().getNearListTranslated().size())
             return;
         
-        NearString near = m_curEntry.getStrEntry().getNearListTranslated().get(activeMatch);
+        NearString near = Core.getEditor().getCurrentEntry().getStrEntry().getNearListTranslated().get(activeMatch);
         Core.getEditor().replaceEditText(near.str.getTranslation());
     }
     
@@ -521,7 +520,7 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
             {
                 m_activeProj = CommandThread.core.getProjectProperties().getProjectName();
                 //m_activeFile = new String();
-                m_curEntryNum = 0;
+                Core.getEditor().setFirstEntry();
                 
                 Core.getEditor().loadDocument();
                 synchronized (this) {m_projectLoaded = true;}
@@ -583,7 +582,7 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
         if (!isProjectLoaded())
             return;
         
-        StringEntry curEntry = m_curEntry.getStrEntry();
+        StringEntry curEntry = Core.getEditor().getCurrentEntry().getStrEntry();
         matches.setMatches(curEntry.getNearListTranslated());
     }
     
@@ -592,7 +591,7 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
      */
     public void updateGlossaryInfo()
     {
-        StringEntry curEntry = m_curEntry.getStrEntry();
+        StringEntry curEntry = Core.getEditor().getCurrentEntry().getStrEntry();
         glossary.setGlossaryEntries(curEntry.getGlossaryEntries());
     }
     
@@ -728,25 +727,8 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
     public DocumentSegment[] m_docSegList;
     
     public char	m_advancer;
-    
-    SourceTextEntry		m_curEntry;
-    
-   //private String  m_activeFile;
-    
-    private String getActiveFileFullPath() 
-    {
-        return CommandThread.core.getSTE(m_curEntryNum).getSrcFile().name;
-    }
-    
-    public String getActiveFileName() 
-    {
-        String result = getActiveFileFullPath().substring(
-                CommandThread.core.sourceRoot().length());
- //       Log.log("active file name="+result);
-        return result;
-    }    
+
     private String  m_activeProj;
-    public int      m_curEntryNum;
 
     ProjectFrame m_projWin;
     public ProjectFrame getProjectFrame()

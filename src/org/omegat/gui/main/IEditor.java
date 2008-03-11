@@ -24,6 +24,8 @@
 
 package org.omegat.gui.main;
 
+import org.omegat.core.matching.SourceTextEntry;
+
 /**
  * Interface for access to editor functionality.
  * 
@@ -40,6 +42,16 @@ public interface IEditor {
         /** cycle between cases */
         CYCLE,
     }
+
+    /**
+     * Get current file name which opened in editor.
+     */
+    String getCurrentFile();
+
+    /**
+     * Get current active entry.
+     */
+    SourceTextEntry getCurrentEntry();
 
     /**
      * Displays all segments in current document.
@@ -86,6 +98,11 @@ public interface IEditor {
      *            entry number
      */
     void gotoEntry(int entryNum);
+    
+    /**
+     * TODO: change it to setup first entry on the 'onProjectLoaded' event
+     */
+    void setFirstEntry();
 
     /**
      * Change case of the selected text or if none is selected, of the current

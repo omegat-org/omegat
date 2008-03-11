@@ -66,10 +66,24 @@ public class EditorController implements IEditor {
     private final EditorTextArea editor;
     private final MainWindow mw;
 
+    private SourceTextEntry m_curEntry;
+    protected int m_curEntryNum = -1;
+
     public EditorController(final MainWindow mainWindow, final EditorTextArea editor) {
         this.mw = mainWindow;
         this.editor = editor;
         editor.controller = this;
+    }
+
+    @Override
+    public SourceTextEntry getCurrentEntry() {
+        return m_curEntry;
+    }
+
+    @Override
+    public String getCurrentFile() {
+        String fullName = CommandThread.core.getSTE(m_curEntryNum).getSrcFile().name;
+        return fullName.substring(CommandThread.core.sourceRoot().length());
     }
 
     /**
@@ -92,10 +106,10 @@ public class EditorController implements IEditor {
                     mw.updateTitle();
                 mw.m_projWin.buildDisplay();
 
-                mw.m_curEntry = CommandThread.core.getSTE(mw.m_curEntryNum);
+                m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
 
-                mw.m_xlFirstEntry = mw.m_curEntry.getFirstInFile();
-                mw.m_xlLastEntry = mw.m_curEntry.getLastInFile();
+                mw.m_xlFirstEntry = m_curEntry.getFirstInFile();
+                mw.m_xlLastEntry = m_curEntry.getLastInFile();
                 int xlEntries = 1 + mw.m_xlLastEntry - mw.m_xlFirstEntry;
 
                 DocumentSegment docSeg;
@@ -195,12 +209,12 @@ public class EditorController implements IEditor {
                     + Integer.toString(CommandThread.core.getNumberOfSegmentsTotal()) + ") ";
             Core.getMainWindow().showProgressMessage(pMsg);
 
-            String lMsg = " " + Integer.toString(mw.m_curEntry.getSrcText().length()) + "/"
-                    + Integer.toString(mw.m_curEntry.getTranslation().length()) + " ";
+            String lMsg = " " + Integer.toString(m_curEntry.getSrcText().length()) + "/"
+                    + Integer.toString(m_curEntry.getTranslation().length()) + " ";
             Core.getMainWindow().showLengthMessage(lMsg);
 
             synchronized (editor) {
-                mw.history.insertNew(mw.m_curEntryNum);
+                mw.history.insertNew(m_curEntryNum);
 
                 // update history menu items
                 mw.menu.gotoHistoryBackMenuItem.setEnabled(mw.history.hasPrev());
@@ -208,25 +222,25 @@ public class EditorController implements IEditor {
 
                 // recover data about current entry
                 // <HP-experiment>
-                if (mw.m_curEntryNum < mw.m_xlFirstEntry) {
+                if (m_curEntryNum < mw.m_xlFirstEntry) {
                     Log.log("ERROR: Current entry # lower than first entry #");
                     Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
                     // FIX: m_curEntryNum = m_xlFirstEntry;
                 }
-                if (mw.m_curEntryNum > mw.m_xlLastEntry) {
+                if (m_curEntryNum > mw.m_xlLastEntry) {
                     Log.log("ERROR: Current entry # greater than last entry #");
                     Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
                     // FIX: m_curEntryNum = m_xlLastEntry;
                 }
                 // </HP-experiment>
-                mw.m_curEntry = CommandThread.core.getSTE(mw.m_curEntryNum);
-                String srcText = mw.m_curEntry.getSrcText();
+                m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
+                String srcText = m_curEntry.getSrcText();
 
                 mw.m_sourceDisplayLength = srcText.length();
 
                 // sum up total character offset to current segment start
                 mw.m_segmentStartOffset = 0;
-                int localCur = mw.m_curEntryNum - mw.m_xlFirstEntry;
+                int localCur = m_curEntryNum - mw.m_xlFirstEntry;
                 // <HP-experiment>
                 DocumentSegment docSeg = null; // <HP-experiment> remove once done experimenting
                 try {
@@ -250,10 +264,10 @@ public class EditorController implements IEditor {
                 // -2 to move inside newlines at end of segment
                 mw.m_segmentEndInset = editor.getTextLength() - (mw.m_segmentStartOffset + docSeg.length - 2);
 
-                String translation = mw.m_curEntry.getTranslation();
+                String translation = m_curEntry.getTranslation();
 
                 if (translation == null || translation.length() == 0) {
-                    translation = mw.m_curEntry.getSrcText();
+                    translation = m_curEntry.getSrcText();
 
                     // if "Leave translation empty" is set
                     // then we don't insert a source text into target
@@ -285,7 +299,7 @@ public class EditorController implements IEditor {
                             // FIX: unknown, but expect number parsing errors
                         }
                         // </HP-experiment>
-                        List<NearString> near = mw.m_curEntry.getStrEntry().getNearListTranslated();
+                        List<NearString> near = m_curEntry.getStrEntry().getNearListTranslated();
                         if (near.size() > 0) {
                             NearString thebest = near.get(0);
                             if (thebest.score >= percentage) {
@@ -314,7 +328,7 @@ public class EditorController implements IEditor {
                 }
                 // </HP-experiment>
 
-                StringEntry curEntry = mw.m_curEntry.getStrEntry();
+                StringEntry curEntry = m_curEntry.getStrEntry();
                 int nearLength = curEntry.getNearListTranslated().size();
 
                 // <HP-experiment>
@@ -342,7 +356,7 @@ public class EditorController implements IEditor {
                 // </HP-experiment>
 
                 int offsetPrev = 0;
-                int localNum = mw.m_curEntryNum - mw.m_xlFirstEntry;
+                int localNum = m_curEntryNum - mw.m_xlFirstEntry;
                 // <HP-experiment>
                 try {
                     for (int i = Math.max(0, localNum - 3); i < localNum; i++) {
@@ -463,7 +477,7 @@ public class EditorController implements IEditor {
                     doCheckSpelling = false;
 
                     if (!mw.m_displaySegmentSources) {
-                        display_string = mw.m_curEntry.getSrcText();
+                        display_string = m_curEntry.getSrcText();
                         attributes = mw.m_unTranslatedAttributeSet;
                     } else {
                         display_string = new String();
@@ -471,7 +485,7 @@ public class EditorController implements IEditor {
                 } else {
                     try {
                         new_translation = xlDoc.getText(start, end - start);
-                        if (new_translation.equals(mw.m_curEntry.getSrcText())
+                        if (new_translation.equals(m_curEntry.getSrcText())
                                 && !Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)) {
                             attributes = mw.m_unTranslatedAttributeSet;
                             doCheckSpelling = false;
@@ -492,7 +506,7 @@ public class EditorController implements IEditor {
                 int totalLen = mw.m_sourceDisplayLength + OConsts.segmentStartStringFull.length()
                         + new_translation.length() + OConsts.segmentEndStringFull.length() + 2;
 
-                int localCur = mw.m_curEntryNum - mw.m_xlFirstEntry;
+                int localCur = m_curEntryNum - mw.m_xlFirstEntry;
                 DocumentSegment docSeg = mw.m_docSegList[localCur];
                 docSeg.length = display_string.length() + "\n\n".length(); // NOI18N
                 String segmentSource = null;
@@ -502,7 +516,7 @@ public class EditorController implements IEditor {
                     startOffset += increment;
                     //totalLen -= increment;
                     docSeg.length += increment;
-                    segmentSource = mw.m_curEntry.getSrcText();
+                    segmentSource = m_curEntry.getSrcText();
                 }
 
                 docSeg.length = replaceEntry(mw.m_segmentStartOffset, totalLen, segmentSource, display_string, flags);
@@ -512,17 +526,17 @@ public class EditorController implements IEditor {
                 }
 
                 if (forceCommit) { // fix for 
-                    String old_translation = mw.m_curEntry.getTranslation();
+                    String old_translation = m_curEntry.getTranslation();
                     // update memory
-                    if (new_translation.equals(mw.m_curEntry.getSrcText())
+                    if (new_translation.equals(m_curEntry.getSrcText())
                             && !Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC))
-                        mw.m_curEntry.setTranslation(new String());
+                        m_curEntry.setTranslation(new String());
                     else
-                        mw.m_curEntry.setTranslation(new_translation);
+                        m_curEntry.setTranslation(new_translation);
 
                     // update the length parameters of all changed segments
                     // update strings in display
-                    if (!mw.m_curEntry.getTranslation().equals(old_translation)) {
+                    if (!m_curEntry.getTranslation().equals(old_translation)) {
                         // find all identical strings and redraw them
 
                         // build offsets of all strings
@@ -536,13 +550,13 @@ public class EditorController implements IEditor {
                         }
 
                         // starting from the last (guaranteed by sorting ParentList)
-                        for (SourceTextEntry ste : mw.m_curEntry.getStrEntry().getParentList()) {
+                        for (SourceTextEntry ste : m_curEntry.getStrEntry().getParentList()) {
                             int entry = ste.entryNum();
                             if (entry > mw.m_xlLastEntry)
                                 continue;
                             else if (entry < mw.m_xlFirstEntry)
                                 break;
-                            else if (entry == mw.m_curEntryNum)
+                            else if (entry == m_curEntryNum)
                                 continue;
 
                             int localEntry = entry - mw.m_xlFirstEntry;
@@ -589,10 +603,10 @@ public class EditorController implements IEditor {
 
             commitEntry();
 
-            mw.m_curEntryNum++;
-            if (mw.m_curEntryNum > mw.m_xlLastEntry) {
-                if (mw.m_curEntryNum >= CommandThread.core.numEntries())
-                    mw.m_curEntryNum = 0;
+            m_curEntryNum++;
+            if (m_curEntryNum > mw.m_xlLastEntry) {
+                if (m_curEntryNum >= CommandThread.core.numEntries())
+                    m_curEntryNum = 0;
                 loadDocument();
             }
 
@@ -607,13 +621,13 @@ public class EditorController implements IEditor {
 
             commitEntry();
 
-            mw.m_curEntryNum--;
-            if (mw.m_curEntryNum < mw.m_xlFirstEntry) {
-                if (mw.m_curEntryNum < 0)
-                    mw.m_curEntryNum = CommandThread.core.numEntries() - 1;
+            m_curEntryNum--;
+            if (m_curEntryNum < mw.m_xlFirstEntry) {
+                if (m_curEntryNum < 0)
+                    m_curEntryNum = CommandThread.core.numEntries() - 1;
                 // empty project bugfix:
-                if (mw.m_curEntryNum < 0)
-                    mw.m_curEntryNum = 0;
+                if (m_curEntryNum < 0)
+                    m_curEntryNum = 0;
                 loadDocument();
             }
             activateEntry();
@@ -648,7 +662,7 @@ public class EditorController implements IEditor {
             // iterate through the list of entries,
             // starting at the current entry,
             // until an entry with no translation is found
-            for (curEntryNum = mw.m_curEntryNum + 1; curEntryNum < numEntries; curEntryNum++) {
+            for (curEntryNum = m_curEntryNum + 1; curEntryNum < numEntries; curEntryNum++) {
                 // get the next entry
                 SourceTextEntry entry = CommandThread.core.getSTE(curEntryNum);
 
@@ -664,7 +678,7 @@ public class EditorController implements IEditor {
             // if we haven't found untranslated entry till the end,
             // trying to search for it from the beginning
             if (!found) {
-                for (curEntryNum = 0; curEntryNum < mw.m_curEntryNum; curEntryNum++) {
+                for (curEntryNum = 0; curEntryNum < m_curEntryNum; curEntryNum++) {
                     // get the next entry
                     SourceTextEntry entry = CommandThread.core.getSTE(curEntryNum);
 
@@ -680,16 +694,21 @@ public class EditorController implements IEditor {
 
             if (found) {
                 // mark the entry
-                mw.m_curEntryNum = curEntryNum;
+                m_curEntryNum = curEntryNum;
 
                 // load the document, if the segment is not in the current document
-                if (mw.m_curEntryNum < mw.m_xlFirstEntry || mw.m_curEntryNum > mw.m_xlLastEntry)
+                if (m_curEntryNum < mw.m_xlFirstEntry || m_curEntryNum > mw.m_xlLastEntry)
                     loadDocument();
             }
 
             // activate the entry
             activateEntry();
         }
+    }
+
+    @Override
+    public void setFirstEntry() {
+        m_curEntryNum = 0;
     }
 
     public void gotoEntry(final int entryNum) {
@@ -699,17 +718,17 @@ public class EditorController implements IEditor {
 
             commitEntry();
 
-            mw.m_curEntryNum = entryNum - 1;
-            if (mw.m_curEntryNum < mw.m_xlFirstEntry) {
-                if (mw.m_curEntryNum < 0)
-                    mw.m_curEntryNum = CommandThread.core.numEntries() - 1;
+            m_curEntryNum = entryNum - 1;
+            if (m_curEntryNum < mw.m_xlFirstEntry) {
+                if (m_curEntryNum < 0)
+                    m_curEntryNum = CommandThread.core.numEntries() - 1;
                 // empty project bugfix:
-                if (mw.m_curEntryNum < 0)
-                    mw.m_curEntryNum = 0;
+                if (m_curEntryNum < 0)
+                    m_curEntryNum = 0;
                 loadDocument();
-            } else if (mw.m_curEntryNum > mw.m_xlLastEntry) {
-                if (mw.m_curEntryNum >= CommandThread.core.numEntries())
-                    mw.m_curEntryNum = 0;
+            } else if (m_curEntryNum > mw.m_xlLastEntry) {
+                if (m_curEntryNum >= CommandThread.core.numEntries())
+                    m_curEntryNum = 0;
                 loadDocument();
             }
             activateEntry();
@@ -977,7 +996,7 @@ public class EditorController implements IEditor {
                         try {
                             if (mw.m_segmentTagHasNumber) {
                                 // put entry number in first tag
-                                String num = String.valueOf(mw.m_curEntryNum + 1);
+                                String num = String.valueOf(m_curEntryNum + 1);
                                 int zero = startStr.lastIndexOf('0');
                                 startStr = startStr.substring(0, zero - num.length() + 1) + num
                                         + startStr.substring(zero + 1, startStr.length());

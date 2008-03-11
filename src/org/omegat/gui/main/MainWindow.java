@@ -590,15 +590,6 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
         glossary.setGlossaryEntries(curEntry.getGlossaryEntries());
     }
     
-    /** Is any segment edited currently? */
-    public boolean entryActivated = false;
-    
-    public static final String IMPOSSIBLE = "Should not have happened, " +     // NOI18N
-            "report to http://sf.net/tracker/?group_id=68187&atid=520347";      // NOI18N
-
-    public final int WITH_END_MARKERS = 1;
-    public final int IS_NOT_TRANSLATED = 2;
-    
     /**
      * Displays a warning message.
      *

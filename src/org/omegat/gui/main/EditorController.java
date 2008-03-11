@@ -67,8 +67,8 @@ public class EditorController implements IEditor {
     private final MainWindow mw;
 
     private SourceTextEntry m_curEntry;
-    protected int m_curEntryNum = -1;    
-    
+    protected int m_curEntryNum = -1;
+
     // starting offset and length of source lang in current segment
     protected int m_segmentStartOffset;
     protected int m_sourceDisplayLength;
@@ -77,17 +77,24 @@ public class EditorController implements IEditor {
     private int m_glossaryLength;
 
     /** first entry number in current file. */
-    public int      m_xlFirstEntry;
+    protected int m_xlFirstEntry;
     /** last entry number in current file. */
-    public int      m_xlLastEntry;
-    
-    // indicates the document is loaded and ready for processing
-    public boolean  m_docReady;
-    
-    /** text segments in current document. */
-    public DocumentSegment[] m_docSegList;
-    
+    protected int m_xlLastEntry;
 
+    // indicates the document is loaded and ready for processing
+    protected boolean m_docReady;
+
+    /** text segments in current document. */
+    protected DocumentSegment[] m_docSegList;
+
+    /** Is any segment edited currently? */
+    private boolean entryActivated = false;
+
+    private static final String IMPOSSIBLE = "Should not have happened, " + // NOI18N
+            "report to http://sf.net/tracker/?group_id=68187&atid=520347"; // NOI18N
+
+    private final int WITH_END_MARKERS = 1;
+    private final int IS_NOT_TRANSLATED = 2;
 
     public EditorController(final MainWindow mainWindow, final EditorTextArea editor) {
         this.mw = mainWindow;
@@ -190,7 +197,7 @@ public class EditorController implements IEditor {
                         text += "\n\n";
 
                     } catch (BadLocationException ble) {
-                        Log.log(mw.IMPOSSIBLE);
+                        Log.log(IMPOSSIBLE);
                         Log.log(ble);
                     }
 
@@ -331,7 +338,7 @@ public class EditorController implements IEditor {
                 }
 
                 int replacedLength = replaceEntry(m_segmentStartOffset, docSeg.length, srcText, translation,
-                        mw.WITH_END_MARKERS);
+                        WITH_END_MARKERS);
 
                 // <HP-experiment>
                 try {
@@ -439,7 +446,7 @@ public class EditorController implements IEditor {
                 editor.checkSpelling(true);
             } // synchronize (editor)
 
-            mw.entryActivated = true;
+            entryActivated = true;
         }
     }
 
@@ -469,9 +476,9 @@ public class EditorController implements IEditor {
             if (!mw.isProjectLoaded())
                 return;
 
-            if (!mw.entryActivated)
+            if (!entryActivated)
                 return;
-            mw.entryActivated = false;
+            entryActivated = false;
 
             synchronized (editor) {
                 AbstractDocument xlDoc = (AbstractDocument) editor.getDocument();
@@ -488,7 +495,7 @@ public class EditorController implements IEditor {
                 // the list of incorrect words returned eventually by the 
                 // spellchecker
                 List<Token> wordList = null;
-                int flags = mw.IS_NOT_TRANSLATED;
+                int flags = IS_NOT_TRANSLATED;
 
                 if (start == end) {
                     new_translation = new String();
@@ -512,7 +519,7 @@ public class EditorController implements IEditor {
                             flags = 0;
                         }
                     } catch (BadLocationException ble) {
-                        Log.log(mw.IMPOSSIBLE);
+                        Log.log(IMPOSSIBLE);
                         Log.log(ble);
                         new_translation = new String();
                         doCheckSpelling = false;
@@ -982,7 +989,7 @@ public class EditorController implements IEditor {
 
                 int result = 0;
 
-                AttributeSet attr = ((flags & mw.IS_NOT_TRANSLATED) == mw.IS_NOT_TRANSLATED ? mw.m_unTranslatedAttributeSet
+                AttributeSet attr = ((flags & IS_NOT_TRANSLATED) == IS_NOT_TRANSLATED ? mw.m_unTranslatedAttributeSet
                         : mw.m_translatedAttributeSet);
 
                 try {
@@ -990,7 +997,7 @@ public class EditorController implements IEditor {
 
                     xlDoc.insertString(offset, "\n\n", Styles.PLAIN);
                     result = 2;
-                    if ((flags & mw.WITH_END_MARKERS) == mw.WITH_END_MARKERS) {
+                    if ((flags & WITH_END_MARKERS) == WITH_END_MARKERS) {
                         String endStr = OConsts.segmentEndStringFull;
                         xlDoc.insertString(offset, endStr, Styles.PLAIN);
                         // make the text bold
@@ -1004,7 +1011,7 @@ public class EditorController implements IEditor {
                         result += translation.length();
                     }
 
-                    if ((flags & mw.WITH_END_MARKERS) == mw.WITH_END_MARKERS) {
+                    if ((flags & WITH_END_MARKERS) == WITH_END_MARKERS) {
                         // insert a plain space
                         xlDoc.insertString(offset, " ", Styles.PLAIN);
                         String startStr = new String(OConsts.segmentStartString);
@@ -1034,14 +1041,14 @@ public class EditorController implements IEditor {
                         result += startStr.length();
                     }
                     if (source != null) {
-                        if ((flags & mw.WITH_END_MARKERS) != mw.WITH_END_MARKERS) {
+                        if ((flags & WITH_END_MARKERS) != WITH_END_MARKERS) {
                             source += "\n";
                         }
                         xlDoc.insertString(offset, source, Styles.GREEN);
                         result += source.length();
                     }
                 } catch (BadLocationException ble) {
-                    Log.log(mw.IMPOSSIBLE);
+                    Log.log(IMPOSSIBLE);
                     Log.log(ble);
                 }
 

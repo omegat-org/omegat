@@ -169,7 +169,7 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
     /**
      * Sets the title of the main window appropriately
      */
-    private void updateTitle()
+    public void updateTitle()
     {
         String s = OStrings.getDisplayVersion();
         if(isProjectLoaded())
@@ -554,13 +554,13 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
             // empty project bugfix:
             if (m_curEntryNum < 0)
                 m_curEntryNum = 0;
-            loadDocument();
+            Core.getEditor().loadDocument();
         }
         else if (m_curEntryNum > m_xlLastEntry)
         {
             if (m_curEntryNum >= CommandThread.core.numEntries())
                 m_curEntryNum = 0;
-            loadDocument();
+            Core.getEditor().loadDocument();
         }
         activateEntry();
     }
@@ -588,7 +588,7 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
                 //m_activeFile = new String();
                 m_curEntryNum = 0;
                 
-                loadDocument();
+                Core.getEditor().loadDocument();
                 synchronized (this) {m_projectLoaded = true;}
                 
                 uiUpdateOnProjectOpen();
@@ -616,112 +616,7 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
     {
         lengthLabel.setText(str);
     }
-    
-    /////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////
-    // internal routines
 
-    /**
-     * Displays all segments in current document.
-     * <p>
-     * Displays translation for each segment if it's available,
-     * otherwise displays source text.
-     * Also stores length of each displayed segment plus its starting offset.
-     */
-    synchronized void loadDocument()
-    {
-        m_docReady = false;
-
-        synchronized (editor) {
-            // clear old text
-            editor.setText(new String());
-
-            // update the title and the project window
-            if (isProjectLoaded())
-                updateTitle();
-            m_projWin.buildDisplay();
-            
-            m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
-
-            m_xlFirstEntry = m_curEntry.getFirstInFile();
-            m_xlLastEntry = m_curEntry.getLastInFile();
-            int xlEntries = 1+m_xlLastEntry-m_xlFirstEntry;
-
-            DocumentSegment docSeg;
-            m_docSegList = new DocumentSegment[xlEntries];
-
-            int totalLength = 0;
-            
-            AbstractDocument xlDoc = (AbstractDocument)editor.getDocument();
-            AttributeSet attributes = m_translatedAttributeSet;
-            
-            // if the source should be displayed, too
-            AttributeSet srcAttributes = m_unTranslatedAttributeSet;
-            
-            // how to display the source segment
-            if (m_displaySegmentSources)
-                srcAttributes = Styles.GREEN;
-            
-            for (int i=0; i<xlEntries; i++)
-            {
-                docSeg = new DocumentSegment();
-
-                SourceTextEntry ste = CommandThread.core.getSTE(i+m_xlFirstEntry);
-                String sourceText = ste.getSrcText();
-                String text = ste.getTranslation();
-                
-                boolean doSpellcheck = false;
-                // set text and font
-                if( text.length()==0 )
-                {
-                    if (!m_displaySegmentSources) {
-                    // no translation available - use source text
-                    text = ste.getSrcText();
-                        attributes = m_unTranslatedAttributeSet;
-                }
-                } else {
-                   doSpellcheck = true;
-                   attributes = m_translatedAttributeSet;
-                }
-                try {
-                    if (m_displaySegmentSources) {
-                        xlDoc.insertString(totalLength, sourceText+"\n", srcAttributes);
-                        totalLength += sourceText.length()+1;
-                    }
-
-                    xlDoc.insertString(totalLength,text,attributes);
-
-                    // mark the incorrectly set words, if needed
-                    if (doSpellcheck && m_autoSpellChecking) {
-                        checkSpelling(totalLength, text);
-                    }
-                    
-                    totalLength += text.length();
-                    													// NOI18N
-                    xlDoc.insertString(totalLength, "\n\n", Styles.PLAIN);
-                    
-                    totalLength += 2;
-                    
-                    if (m_displaySegmentSources) {
-                        text = sourceText + "\n" + text;
-                    }
-                    
-                    text += "\n\n";	
-
-                } catch(BadLocationException ble)
-                {
-                    Log.log(IMPOSSIBLE);
-                    Log.log(ble);
-                }
-
-                docSeg.length = text.length();
-                m_docSegList[i] = docSeg;
-            }
-        } // synchronized (editor)
-
-        Thread.yield();
-    }
-    
     ///////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////
     // display oriented code
@@ -750,7 +645,7 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
     /** Is any segment edited currently? */
     private boolean entryActivated = false;
     
-    private static final String IMPOSSIBLE = "Should not have happened, " +     // NOI18N
+    public static final String IMPOSSIBLE = "Should not have happened, " +     // NOI18N
             "report to http://sf.net/tracker/?group_id=68187&atid=520347";      // NOI18N
     
     /**
@@ -1386,7 +1281,7 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
      * @param start : the starting position
      * @param text : the text to check
      */
-    private synchronized List<Token> checkSpelling(int start, String text) {
+    public synchronized List<Token> checkSpelling(int start, String text) {
         // we have the translation and it should be spellchecked
         List<Token> wordlist = StaticUtils.tokenizeText(text);
         List<Token> wrongWordList = new ArrayList<Token>();

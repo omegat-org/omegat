@@ -30,6 +30,8 @@ package org.omegat.gui.main;
 import java.util.List;
 import java.util.Locale;
 
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Utilities;
 
@@ -39,6 +41,7 @@ import org.omegat.util.Log;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
+import org.omegat.util.gui.Styles;
 
 /**
  * Class for control all editor operations.
@@ -61,6 +64,105 @@ public class EditorController implements IEditor {
         this.editor = editor;
     }
 
+    /**
+     * Displays all segments in current document.
+     * <p>
+     * Displays translation for each segment if it's available, otherwise
+     * displays source text. Also stores length of each displayed segment plus
+     * its starting offset.
+     */
+    public void loadDocument() {
+        synchronized (mw) {
+            mw.m_docReady = false;
+
+            synchronized (editor) {
+                // clear old text
+                editor.setText(new String());
+
+                // update the title and the project window
+                if (mw.isProjectLoaded())
+                    mw.updateTitle();
+                mw.m_projWin.buildDisplay();
+
+                mw.m_curEntry = CommandThread.core.getSTE(mw.m_curEntryNum);
+
+                mw.m_xlFirstEntry = mw.m_curEntry.getFirstInFile();
+                mw.m_xlLastEntry = mw.m_curEntry.getLastInFile();
+                int xlEntries = 1 + mw.m_xlLastEntry - mw.m_xlFirstEntry;
+
+                DocumentSegment docSeg;
+                mw.m_docSegList = new DocumentSegment[xlEntries];
+
+                int totalLength = 0;
+
+                AbstractDocument xlDoc = (AbstractDocument) editor.getDocument();
+                AttributeSet attributes = mw.m_translatedAttributeSet;
+
+                // if the source should be displayed, too
+                AttributeSet srcAttributes = mw.m_unTranslatedAttributeSet;
+
+                // how to display the source segment
+                if (mw.m_displaySegmentSources)
+                    srcAttributes = Styles.GREEN;
+
+                for (int i = 0; i < xlEntries; i++) {
+                    docSeg = new DocumentSegment();
+
+                    SourceTextEntry ste = CommandThread.core.getSTE(i + mw.m_xlFirstEntry);
+                    String sourceText = ste.getSrcText();
+                    String text = ste.getTranslation();
+
+                    boolean doSpellcheck = false;
+                    // set text and font
+                    if (text.length() == 0) {
+                        if (!mw.m_displaySegmentSources) {
+                            // no translation available - use source text
+                            text = ste.getSrcText();
+                            attributes = mw.m_unTranslatedAttributeSet;
+                        }
+                    } else {
+                        doSpellcheck = true;
+                        attributes = mw.m_translatedAttributeSet;
+                    }
+                    try {
+                        if (mw.m_displaySegmentSources) {
+                            xlDoc.insertString(totalLength, sourceText + "\n", srcAttributes);
+                            totalLength += sourceText.length() + 1;
+                        }
+
+                        xlDoc.insertString(totalLength, text, attributes);
+
+                        // mark the incorrectly set words, if needed
+                        if (doSpellcheck && mw.m_autoSpellChecking) {
+                            mw.checkSpelling(totalLength, text);
+                        }
+
+                        totalLength += text.length();
+                        // NOI18N
+                        xlDoc.insertString(totalLength, "\n\n", Styles.PLAIN);
+
+                        totalLength += 2;
+
+                        if (mw.m_displaySegmentSources) {
+                            text = sourceText + "\n" + text;
+                        }
+
+                        text += "\n\n";
+
+                    } catch (BadLocationException ble) {
+                        Log.log(mw.IMPOSSIBLE);
+                        Log.log(ble);
+                    }
+
+                    docSeg.length = text.length();
+                    mw.m_docSegList[i] = docSeg;
+                }
+            } // synchronized (editor)
+
+            Thread.yield();
+        }
+    }
+
     public void nextEntry() {
         synchronized (mw) {
             if (!mw.isProjectLoaded())
@@ -72,7 +174,7 @@ public class EditorController implements IEditor {
             if (mw.m_curEntryNum > mw.m_xlLastEntry) {
                 if (mw.m_curEntryNum >= CommandThread.core.numEntries())
                     mw.m_curEntryNum = 0;
-                mw.loadDocument();
+                loadDocument();
             }
 
             mw.activateEntry();
@@ -93,7 +195,7 @@ public class EditorController implements IEditor {
                 // empty project bugfix:
                 if (mw.m_curEntryNum < 0)
                     mw.m_curEntryNum = 0;
-                mw.loadDocument();
+                loadDocument();
             }
             mw.activateEntry();
         }
@@ -163,7 +265,7 @@ public class EditorController implements IEditor {
 
                 // load the document, if the segment is not in the current document
                 if (mw.m_curEntryNum < mw.m_xlFirstEntry || mw.m_curEntryNum > mw.m_xlLastEntry)
-                    mw.loadDocument();
+                    loadDocument();
             }
 
             // activate the entry

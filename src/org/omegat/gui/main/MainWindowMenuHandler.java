@@ -468,7 +468,7 @@ public class MainWindowMenuHandler {
             mainWindow.m_translatedAttributeSet = Styles.PLAIN;
 
         mainWindow.commitEntry(false);
-        mainWindow.loadDocument();
+        Core.getEditor().loadDocument();
         mainWindow.activateEntry();
     }
 
@@ -481,7 +481,7 @@ public class MainWindowMenuHandler {
             mainWindow.m_unTranslatedAttributeSet = Styles.PLAIN;
 
         mainWindow.commitEntry(false);
-        mainWindow.loadDocument();
+        Core.getEditor().loadDocument();
         mainWindow.activateEntry();
     }
 
@@ -492,7 +492,7 @@ public class MainWindowMenuHandler {
 
         Preferences.setPreference(Preferences.DISPLAY_SEGMENT_SOURCES, mainWindow.m_displaySegmentSources);
 
-        mainWindow.loadDocument();
+        Core.getEditor().loadDocument();
         mainWindow.activateEntry();
     }
 
@@ -597,7 +597,7 @@ public class MainWindowMenuHandler {
                 sc.initialize();
             }
             mainWindow.commitEntry(false);
-            mainWindow.loadDocument();
+            Core.getEditor().loadDocument();
             mainWindow.activateEntry();
         }
     }

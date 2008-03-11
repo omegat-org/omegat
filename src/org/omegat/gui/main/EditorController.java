@@ -297,7 +297,7 @@ public class EditorController implements IEditor {
                     }
                 }
 
-                int replacedLength = mw.replaceEntry(mw.m_segmentStartOffset, docSeg.length, srcText, translation,
+                int replacedLength = replaceEntry(mw.m_segmentStartOffset, docSeg.length, srcText, translation,
                         mw.WITH_END_MARKERS);
 
                 // <HP-experiment>
@@ -504,8 +504,7 @@ public class EditorController implements IEditor {
                     segmentSource = mw.m_curEntry.getSrcText();
                 }
 
-                docSeg.length = mw
-                        .replaceEntry(mw.m_segmentStartOffset, totalLen, segmentSource, display_string, flags);
+                docSeg.length = replaceEntry(mw.m_segmentStartOffset, totalLen, segmentSource, display_string, flags);
 
                 if (doCheckSpelling && mw.m_autoSpellChecking) {
                     wordList = mw.checkSpelling(startOffset, display_string);
@@ -551,8 +550,7 @@ public class EditorController implements IEditor {
 
                             // replace old text w/ new
                             docSeg = mw.m_docSegList[localEntry];
-                            docSeg.length = mw
-                                    .replaceEntry(offset, docSeg.length, segmentSource, display_string, flags);
+                            docSeg.length = replaceEntry(offset, docSeg.length, segmentSource, display_string, flags);
 
                             int supplement = 0;
 
@@ -934,6 +932,84 @@ public class EditorController implements IEditor {
             } // synchronized (editor)
 
             return true;
+        }
+    }
+
+    /**
+     * replace the text in the editor and return the new length
+     */
+    private int replaceEntry(int offset, int length, String source, String translation, int flags) {
+        synchronized (mw) {
+            synchronized (editor) {
+                AbstractDocument xlDoc = (AbstractDocument) editor.getDocument();
+
+                int result = 0;
+
+                AttributeSet attr = ((flags & mw.IS_NOT_TRANSLATED) == mw.IS_NOT_TRANSLATED ? mw.m_unTranslatedAttributeSet
+                        : mw.m_translatedAttributeSet);
+
+                try {
+                    xlDoc.remove(offset, length);
+
+                    xlDoc.insertString(offset, "\n\n", Styles.PLAIN);
+                    result = 2;
+                    if ((flags & mw.WITH_END_MARKERS) == mw.WITH_END_MARKERS) {
+                        String endStr = OConsts.segmentEndStringFull;
+                        xlDoc.insertString(offset, endStr, Styles.PLAIN);
+                        // make the text bold
+                        xlDoc.replace(offset + endStr.indexOf(OConsts.segmentEndString), OConsts.segmentEndString
+                                .length(), OConsts.segmentEndString, Styles.BOLD);
+                        result += endStr.length();
+                    }
+                    // modify the attributes only if absolutely necessary
+                    if (translation != null && !translation.equals("")) {
+                        xlDoc.insertString(offset, translation, attr);
+                        result += translation.length();
+                    }
+
+                    if ((flags & mw.WITH_END_MARKERS) == mw.WITH_END_MARKERS) {
+                        // insert a plain space
+                        xlDoc.insertString(offset, " ", Styles.PLAIN);
+                        String startStr = new String(OConsts.segmentStartString);
+                        // <HP-experiment>
+
+                        try {
+                            if (mw.m_segmentTagHasNumber) {
+                                // put entry number in first tag
+                                String num = String.valueOf(mw.m_curEntryNum + 1);
+                                int zero = startStr.lastIndexOf('0');
+                                startStr = startStr.substring(0, zero - num.length() + 1) + num
+                                        + startStr.substring(zero + 1, startStr.length());
+                            }
+                        } catch (Exception exception) {
+                            Log.log("ERROR: exception while putting segment # in start tag:");
+                            Log
+                                    .log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                            Log.log(exception);
+                            // FIX: since these are localised, don't assume number appears, keep try/catch block
+                        }
+                        // </HP-experiment>
+                        /*
+                         * startStr = "<segment
+                         * "+Integer.toString(m_curEntryNum + 1)+">";
+                         */
+                        xlDoc.insertString(offset, startStr, Styles.BOLD);
+                        result += startStr.length();
+                    }
+                    if (source != null) {
+                        if ((flags & mw.WITH_END_MARKERS) != mw.WITH_END_MARKERS) {
+                            source += "\n";
+                        }
+                        xlDoc.insertString(offset, source, Styles.GREEN);
+                        result += source.length();
+                    }
+                } catch (BadLocationException ble) {
+                    Log.log(mw.IMPOSSIBLE);
+                    Log.log(ble);
+                }
+
+                return result;
+            }
         }
     }
 }

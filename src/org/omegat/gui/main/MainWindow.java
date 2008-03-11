@@ -632,83 +632,6 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
     public final int IS_NOT_TRANSLATED = 2;
     
     /**
-     * replace the text in the editor and return the new length
-     */
-    public synchronized int replaceEntry(int offset, int length, 
-            String source, String translation, int flags) {
-        synchronized(editor) {
-            AbstractDocument xlDoc = (AbstractDocument) editor.getDocument();
-            
-            int result = 0;
-            
-            AttributeSet attr = 
-                    ((flags & IS_NOT_TRANSLATED) == IS_NOT_TRANSLATED ?
-                        m_unTranslatedAttributeSet : m_translatedAttributeSet);
-            
-            try {
-                xlDoc.remove(offset, length);
-                
-                xlDoc.insertString(offset,"\n\n",Styles.PLAIN);
-                result = 2;
-                if ((flags & WITH_END_MARKERS) == WITH_END_MARKERS) {
-                    String endStr = OConsts.segmentEndStringFull;
-                    xlDoc.insertString(offset, endStr, Styles.PLAIN);
-                    // make the text bold
-                    xlDoc.replace(offset+endStr.indexOf(OConsts.segmentEndString),
-                            OConsts.segmentEndString.length(),
-                            OConsts.segmentEndString, Styles.BOLD);
-                    result += endStr.length(); 
-                }
-                // modify the attributes only if absolutely necessary
-                if (translation != null && !translation.equals("")) {
-                    xlDoc.insertString(offset, translation, attr);
-                    result += translation.length();
-                }
-                
-                if ((flags & WITH_END_MARKERS) == WITH_END_MARKERS) {
-                    // insert a plain space
-                    xlDoc.insertString(offset," ",Styles.PLAIN);
-                    String startStr = new String(OConsts.segmentStartString);
-                    // <HP-experiment>
-                    
-                            try {
-                        if (m_segmentTagHasNumber)
-                        {
-                            // put entry number in first tag
-                            String num = String.valueOf(m_curEntryNum + 1);
-                            int zero = startStr.lastIndexOf('0');
-                            startStr = startStr.substring(0, zero-num.length()+1) + num + 
-                                    startStr.substring(zero+1, startStr.length());
-                        }
-                    }
-                    catch (Exception exception) {
-                        Log.log("ERROR: exception while putting segment # in start tag:");
-                        Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                        Log.log(exception);
-                        // FIX: since these are localised, don't assume number appears, keep try/catch block
-                    }
-                    // </HP-experiment>
-                    /*startStr = "<segment "+Integer.toString(m_curEntryNum + 1)+">";*/
-                    xlDoc.insertString(offset, startStr, Styles.BOLD);
-                    result += startStr.length();
-                }
-                if (source != null) {
-                    if ((flags & WITH_END_MARKERS) != WITH_END_MARKERS) {
-                        source += "\n";
-                    }
-                    xlDoc.insertString(offset, source, Styles.GREEN);
-                    result += source.length();
-                }
-            } catch (BadLocationException ble) {
-                Log.log(IMPOSSIBLE);
-                Log.log(ble);
-            }
-            
-            return result;
-        }
-    }
-
-    /**
      * Displays a warning message.
      *
      * @param msg the message to show
@@ -842,7 +765,7 @@ public class MainWindow extends JFrame implements ComponentListener, IMainWindow
     
     // boolean set after safety check that org.omegat.OConsts.segmentStartStringFull
     //	contains empty "0000" for segment number
-    private boolean	m_segmentTagHasNumber;
+    public boolean	m_segmentTagHasNumber;
     
     // indicates the document is loaded and ready for processing
     public boolean	m_docReady;

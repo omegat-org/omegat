@@ -384,61 +384,6 @@ public class CommandThread extends Thread implements IDataEngine
         CoreEvents.fireProjectChange();
     }
     
-    /**
-     * Scans project and builds the list of entries which are suspected of
-     * having changed (possibly invalid) tag structures.
-     */
-    public List<SourceTextEntry> validateTags()
-    {
-        int j;
-        String s;
-        String t;
-        List<String> srcTags = new ArrayList<String>(32);
-        List<String> locTags = new ArrayList<String>(32);
-        List<SourceTextEntry> suspects = new ArrayList<SourceTextEntry>(16);
-        
-        StringEntry se;
-        
-        for (SourceTextEntry ste : m_srcTextEntryArray)
-        {
-            se = ste.getStrEntry();
-            s = se.getSrcText();
-            t = se.getTranslation();
-            
-            // if there's no translation, skip the string
-            // bugfix for http://sourceforge.net/support/tracker.php?aid=1209839
-            if( t==null || t.length()==0 )
-                continue;
-            
-            // extract tags from src and loc string
-            StaticUtils.buildTagList(s, srcTags);
-            StaticUtils.buildTagList(t, locTags);
-            
-            // make sure lists match
-            // for now, insist on exact match
-            if (srcTags.size() != locTags.size())
-                suspects.add(ste);
-            else
-            {
-                // compare one by one
-                for (j=0; j<srcTags.size(); j++)
-                {
-                    s = srcTags.get(j);
-                    t = locTags.get(j);
-                    if (!s.equals(t))
-                    {
-                        suspects.add(ste);
-                        break;
-                    }
-                }
-            }
-            
-            srcTags.clear();
-            locTags.clear();
-        }
-        return suspects;
-    }
-    
     /** Builds all translated files and creates fresh TM files. */
     public void compileProject()
             throws IOException, TranslationException

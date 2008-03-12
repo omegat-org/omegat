@@ -25,17 +25,20 @@
 package org.omegat.gui;
 
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.StringEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.threads.CommandThread;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
 
 /**
  * Class for show tag validation results.
@@ -52,7 +55,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
     }
 
     public void validateTags() {
-        List<SourceTextEntry> suspects = CommandThread.core.validateTags();
+        List<SourceTextEntry> suspects = listInvalidTags();
         if (suspects.size() > 0) {
             // create a tag validation window if necessary
             if (m_tagWin == null) {
@@ -90,5 +93,56 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
             if (m_tagWin != null)
                 m_tagWin.dispose();
         }
+    }
+    
+    /**
+     * Scans project and builds the list of entries which are suspected of
+     * having changed (possibly invalid) tag structures.
+     */
+    private List<SourceTextEntry> listInvalidTags() {
+        int j;
+        String s;
+        String t;
+        List<String> srcTags = new ArrayList<String>(32);
+        List<String> locTags = new ArrayList<String>(32);
+        List<SourceTextEntry> suspects = new ArrayList<SourceTextEntry>(16);
+
+        StringEntry se;
+
+        for (int i = 0; i < CommandThread.core.getNumberOfSegmentsTotal(); i++) {
+            SourceTextEntry ste = CommandThread.core.getSTE(i);
+            se = ste.getStrEntry();
+            s = se.getSrcText();
+            t = se.getTranslation();
+
+            // if there's no translation, skip the string
+            // bugfix for http://sourceforge.net/support/tracker.php?aid=1209839
+            if (t == null || t.length() == 0)
+                continue;
+
+            // extract tags from src and loc string
+            StaticUtils.buildTagList(s, srcTags);
+            StaticUtils.buildTagList(t, locTags);
+
+            // make sure lists match
+            // for now, insist on exact match
+            if (srcTags.size() != locTags.size())
+                suspects.add(ste);
+            else {
+                // compare one by one
+                for (j = 0; j < srcTags.size(); j++) {
+                    s = srcTags.get(j);
+                    t = locTags.get(j);
+                    if (!s.equals(t)) {
+                        suspects.add(ste);
+                        break;
+                    }
+                }
+            }
+
+            srcTags.clear();
+            locTags.clear();
+        }
+        return suspects;
     }
 }

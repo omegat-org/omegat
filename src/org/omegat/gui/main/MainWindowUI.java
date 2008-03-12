@@ -46,6 +46,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
+import org.omegat.gui.editor.EditorTextArea;
+import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;

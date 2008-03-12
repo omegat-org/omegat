@@ -34,8 +34,8 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.regex.Matcher;
 
+import org.omegat.core.data.CommandThread;
 import org.omegat.core.segmentation.Segmenter;
-import org.omegat.core.threads.CommandThread;
 import org.omegat.util.xml.XMLReader;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;

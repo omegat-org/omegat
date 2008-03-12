@@ -33,9 +33,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.omegat.core.ProjectProperties;
-import org.omegat.core.StringEntry;
-import org.omegat.core.TransMemory;
+import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.data.StringEntry;
+import org.omegat.core.data.TransMemory;
 
 /**
  * Class that store TMX (Translation Memory Exchange) files.

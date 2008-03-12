@@ -26,7 +26,7 @@ package org.omegat.core;
 
 import org.omegat.core.data.IDataEngine;
 import org.omegat.gui.ITagValidation;
-import org.omegat.gui.main.IEditor;
+import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.main.IMainWindow;
 
 /**

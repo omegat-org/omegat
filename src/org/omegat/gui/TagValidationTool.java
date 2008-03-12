@@ -32,10 +32,10 @@ import javax.swing.JOptionPane;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.StringEntry;
+import org.omegat.core.data.CommandThread;
+import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.SourceTextEntry;
-import org.omegat.core.threads.CommandThread;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;

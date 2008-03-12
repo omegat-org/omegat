@@ -47,7 +47,7 @@ import java.util.List;
 import org.dts.spell.dictionary.OpenOfficeSpellDictionary;
 import org.dts.spell.dictionary.SpellDictionary;
 
-import org.omegat.core.threads.CommandThread;
+import org.omegat.core.data.CommandThread;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.Platform;

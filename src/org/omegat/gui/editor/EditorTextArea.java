@@ -25,7 +25,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.gui.main;
+package org.omegat.gui.editor;
 
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -51,9 +51,10 @@ import javax.swing.text.Utilities;
 import javax.swing.undo.UndoManager;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.CommandThread;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.spellchecker.SpellChecker;
-import org.omegat.core.threads.CommandThread;
+import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;

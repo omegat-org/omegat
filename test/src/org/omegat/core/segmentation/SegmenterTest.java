@@ -24,11 +24,14 @@
 
 package org.omegat.core.segmentation;
 
-import junit.framework.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.omegat.core.threads.CommandThread;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
+import org.omegat.core.data.CommandThread;
 import org.omegat.gui.main.MainWindow;
 
 /**

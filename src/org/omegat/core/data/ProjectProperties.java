@@ -22,7 +22,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.core;
+package org.omegat.core.data;
 
 import java.awt.Frame;
 import java.io.File;
@@ -39,7 +39,6 @@ import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
-
 
 /**
  * Storage for project properties.

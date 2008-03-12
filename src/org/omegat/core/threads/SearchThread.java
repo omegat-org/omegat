@@ -34,12 +34,13 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.omegat.core.TransMemory;
+import org.omegat.core.data.CommandThread;
+import org.omegat.core.data.TransMemory;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.gui.SearchWindow;
 import org.omegat.gui.main.MainWindow;
+import org.omegat.gui.search.SearchWindow;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;

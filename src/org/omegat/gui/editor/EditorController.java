@@ -25,7 +25,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **************************************************************************/
 
-package org.omegat.gui.main;
+package org.omegat.gui.editor;
 
 import java.util.List;
 import java.util.Locale;
@@ -37,10 +37,11 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Utilities;
 
 import org.omegat.core.Core;
-import org.omegat.core.StringEntry;
+import org.omegat.core.data.CommandThread;
+import org.omegat.core.data.StringEntry;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
-import org.omegat.core.threads.CommandThread;
+import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -144,7 +145,7 @@ public class EditorController implements IEditor {
                 // update the title and the project window
                 if (mw.isProjectLoaded())
                     mw.updateTitle();
-                mw.m_projWin.buildDisplay();
+                mw.getProjectFrame().buildDisplay();
 
                 m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
 
@@ -164,7 +165,7 @@ public class EditorController implements IEditor {
                 AttributeSet srcAttributes = mw.m_unTranslatedAttributeSet;
 
                 // how to display the source segment
-                if (mw.m_displaySegmentSources)
+                if (mw.displaySegmentSources())
                     srcAttributes = Styles.GREEN;
 
                 for (int i = 0; i < xlEntries; i++) {
@@ -177,7 +178,7 @@ public class EditorController implements IEditor {
                     boolean doSpellcheck = false;
                     // set text and font
                     if (text.length() == 0) {
-                        if (!mw.m_displaySegmentSources) {
+                        if (!mw.displaySegmentSources()) {
                             // no translation available - use source text
                             text = ste.getSrcText();
                             attributes = mw.m_unTranslatedAttributeSet;
@@ -187,7 +188,7 @@ public class EditorController implements IEditor {
                         attributes = mw.m_translatedAttributeSet;
                     }
                     try {
-                        if (mw.m_displaySegmentSources) {
+                        if (mw.displaySegmentSources()) {
                             xlDoc.insertString(totalLength, sourceText + "\n", srcAttributes);
                             totalLength += sourceText.length() + 1;
                         }
@@ -205,7 +206,7 @@ public class EditorController implements IEditor {
 
                         totalLength += 2;
 
-                        if (mw.m_displaySegmentSources) {
+                        if (mw.displaySegmentSources()) {
                             text = sourceText + "\n" + text;
                         }
 
@@ -516,7 +517,7 @@ public class EditorController implements IEditor {
                     new_translation = new String();
                     doCheckSpelling = false;
 
-                    if (!mw.m_displaySegmentSources) {
+                    if (!mw.displaySegmentSources()) {
                         display_string = m_curEntry.getSrcText();
                         attributes = mw.m_unTranslatedAttributeSet;
                     } else {
@@ -551,7 +552,7 @@ public class EditorController implements IEditor {
                 docSeg.length = display_string.length() + "\n\n".length(); // NOI18N
                 String segmentSource = null;
 
-                if (mw.m_displaySegmentSources) {
+                if (mw.displaySegmentSources()) {
                     int increment = m_sourceDisplayLength + 1;
                     startOffset += increment;
                     //totalLen -= increment;
@@ -609,7 +610,7 @@ public class EditorController implements IEditor {
 
                             int supplement = 0;
 
-                            if (mw.m_displaySegmentSources) {
+                            if (mw.displaySegmentSources()) {
                                 supplement = ste.getSrcText().length() + "\n".length();
                             }
 

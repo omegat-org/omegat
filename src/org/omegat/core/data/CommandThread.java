@@ -23,7 +23,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.core.threads;
+package org.omegat.core.data;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -45,9 +45,6 @@ import java.util.Set;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.LegacyTM;
-import org.omegat.core.ProjectProperties;
-import org.omegat.core.StringEntry;
-import org.omegat.core.TransMemory;
 import org.omegat.core.data.IDataEngine;
 import org.omegat.core.data.Statistics;
 import org.omegat.core.glossary.GlossaryManager;
@@ -56,7 +53,7 @@ import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.gui.ProjectFrame;
+import org.omegat.gui.filelist.ProjectFrame;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.messages.MessageRelay;
 import org.omegat.util.LFileCopy;
@@ -993,7 +990,7 @@ public class CommandThread extends Thread implements IDataEngine
      * Writes the error info to the log and
      * displays an error message.
      */
-    void displayError(String msg, Throwable e)
+    public void displayError(String msg, Throwable e)
     {
         Log.logRB("LD_ERROR", new Object[] {msg}); // NOI18N
         Log.log(e);

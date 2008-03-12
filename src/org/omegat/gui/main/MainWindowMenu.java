@@ -419,8 +419,8 @@ public class MainWindowMenu implements ActionListener {
     JMenuItem editSelectFuzzy4MenuItem;
     JMenuItem editSelectFuzzy5MenuItem;
     JMenuItem editUndoMenuItem;
-    JMenuItem gotoHistoryBackMenuItem;
-    JMenuItem gotoHistoryForwardMenuItem;
+    public JMenuItem gotoHistoryBackMenuItem;
+    public JMenuItem gotoHistoryForwardMenuItem;
     JMenu gotoMenu;
     JMenuItem gotoNextSegmentMenuItem;
     JMenuItem gotoNextUntranslatedMenuItem;

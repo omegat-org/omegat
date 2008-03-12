@@ -26,6 +26,8 @@ package org.omegat.core;
 
 import java.util.List;
 
+import org.omegat.core.data.StringEntry;
+
 /**
  * Represents a legacy Translation Memory file.
  * These files generally reside in /tm subfolder of the project folder. 

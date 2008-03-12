@@ -34,7 +34,7 @@ import org.omegat.gui.main.MainWindow;
  *
  * @author Keith Godfrey
  */
-class HListener implements HyperlinkListener
+public class HListener implements HyperlinkListener
 {
 	public HListener(MainWindow t, boolean grabFocus)
 	{

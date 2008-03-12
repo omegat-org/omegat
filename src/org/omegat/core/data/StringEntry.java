@@ -22,7 +22,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.core;
+package org.omegat.core.data;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -35,7 +35,6 @@ import java.util.TreeSet;
 import org.omegat.core.glossary.GlossaryEntry;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
-import org.omegat.core.threads.CommandThread;
 import org.omegat.util.OConsts;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;

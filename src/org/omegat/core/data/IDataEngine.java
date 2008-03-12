@@ -27,7 +27,6 @@ package org.omegat.core.data;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 
-import org.omegat.core.ProjectProperties;
 import org.omegat.filters2.TranslationException;
 
 /**

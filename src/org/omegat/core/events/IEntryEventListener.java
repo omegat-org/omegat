@@ -23,7 +23,7 @@
  **************************************************************************/
 package org.omegat.core.events;
 
-import org.omegat.core.StringEntry;
+import org.omegat.core.data.StringEntry;
 
 /**
  * Listener interface for entry change events.

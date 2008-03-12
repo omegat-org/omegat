@@ -23,7 +23,7 @@
 **************************************************************************/
 
 
-package org.omegat.gui.main;
+package org.omegat.gui.editor;
 
 import java.util.ArrayList;
 import java.util.List;

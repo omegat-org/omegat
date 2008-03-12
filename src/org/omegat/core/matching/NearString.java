@@ -24,7 +24,7 @@
 
 package org.omegat.core.matching;
 
-import org.omegat.core.*;
+import org.omegat.core.data.StringEntry;
 
 /**
  * Class to hold a single fuzzy match.

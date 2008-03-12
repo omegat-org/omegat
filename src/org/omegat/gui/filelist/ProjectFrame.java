@@ -23,7 +23,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.gui;
+package org.omegat.gui.filelist;
 
 import java.awt.Container;
 import java.awt.Dimension;
@@ -49,7 +49,8 @@ import javax.swing.text.Element;
 import javax.swing.text.html.HTMLDocument;
 
 import org.omegat.core.Core;
-import org.omegat.core.threads.CommandThread;
+import org.omegat.core.data.CommandThread;
+import org.omegat.gui.HListener;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;

@@ -22,7 +22,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.gui;
+package org.omegat.gui.search;
 
 import java.awt.Container;
 import java.awt.GridBagConstraints;
@@ -53,7 +53,7 @@ import javax.swing.text.PlainDocument;
 import javax.swing.text.StringContent;
 import javax.swing.undo.UndoManager;
 
-import org.omegat.core.threads.CommandThread;
+import org.omegat.core.data.CommandThread;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;

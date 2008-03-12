@@ -43,7 +43,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 
-import org.omegat.core.StringEntry;
+import org.omegat.core.data.StringEntry;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;

@@ -50,7 +50,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-import org.omegat.core.ProjectProperties;
+import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;

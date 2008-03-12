@@ -53,15 +53,17 @@ import javax.swing.text.BadLocationException;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.ProjectProperties;
-import org.omegat.core.StringEntry;
+import org.omegat.core.data.CommandThread;
+import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.spellchecker.SpellChecker;
-import org.omegat.core.threads.CommandThread;
-import org.omegat.gui.ProjectFrame;
-import org.omegat.gui.SearchWindow;
+import org.omegat.gui.editor.EditorTextArea;
+import org.omegat.gui.filelist.ProjectFrame;
+import org.omegat.gui.matches.MatchesTextArea;
+import org.omegat.gui.search.SearchWindow;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -89,7 +91,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class MainWindow extends JFrame implements IMainWindow, IProjectEventListener, IApplicationEventListener {
-    protected final MainWindowMenu menu;
+    public final MainWindowMenu menu;
     
     /** Creates new form MainWindow */
     public MainWindow()
@@ -695,12 +697,12 @@ public class MainWindow extends JFrame implements IMainWindow, IProjectEventList
     /**
      * the attribute set used for translated segments
      */
-    AttributeSet m_translatedAttributeSet;
+    public AttributeSet m_translatedAttributeSet;
     
     /**
      * the attribute set used for translated segments
      */
-    AttributeSet m_unTranslatedAttributeSet;
+    public AttributeSet m_unTranslatedAttributeSet;
     
     /**
      * return the attribute set of translated segments
@@ -722,7 +724,7 @@ public class MainWindow extends JFrame implements IMainWindow, IProjectEventList
     
     public boolean m_projectLoaded;
 
-    boolean m_autoSpellChecking;
+    public boolean m_autoSpellChecking;
     
     public boolean autoSpellCheckingOn() {
         return m_autoSpellChecking;

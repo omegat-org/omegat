@@ -46,10 +46,10 @@ import java.util.Set;
 
 import javax.swing.JOptionPane;
 
-import org.omegat.core.StringEntry;
+import org.omegat.core.data.CommandThread;
+import org.omegat.core.data.StringEntry;
 import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.Segmenter;
-import org.omegat.core.threads.CommandThread;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.IParseCallback;

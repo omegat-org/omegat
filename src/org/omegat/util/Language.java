@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Didier Briel
  Portions copyright 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
-               Home page: http://www.omegat.org/omegat/omegat.html
+               Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
  This program is free software; you can redistribute it and/or modify
@@ -577,7 +577,7 @@ public class Language
         new Language("VE"),       // NOI18N  // VENDA 
         new Language("VI"),       // NOI18N  // VIETNAMESE
 //        new Language("VI-VN"),       // NOI18N  // VIETNAMESE (VIETNAM)
-        new Language("VO"),       // NOI18N  // VOLAPÜK
+        new Language("VO"),       // NOI18N  // VOLAPï¿½K
         new Language("WA"),       // NOI18N  // WALLOON
         new Language("WO"),       // NOI18N  // WOLOF
         new Language("XH"),       // NOI18N  // XHOSA

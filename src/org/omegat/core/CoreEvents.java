@@ -28,11 +28,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.swing.SwingUtilities;
+
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 
 /**
  * Class for distribute main application events.
+ * 
+ * All events can be fired in any threads, but will be delivered to listeners
+ * only in the UI thread.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
@@ -73,29 +78,42 @@ public class CoreEvents {
     /** Fire event. */
     public static void fireProjectChange() {
         LOG.info("EVENT: project change event");
-        synchronized (projectEventListeners) {
-            for (IProjectEventListener listener : projectEventListeners) {
-                listener.onProjectChanged();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                synchronized (projectEventListeners) {
+                    for (IProjectEventListener listener : projectEventListeners) {
+                        listener.onProjectChanged();
+                    }
+                }
             }
-        }
+        });
     }
-    
+
     /** Fire event. */
     public static void fireApplicationStartup() {
         LOG.info("EVENT: application startup");
-        synchronized (applicationEventListeners) {
-            for (IApplicationEventListener listener : applicationEventListeners) {
-                listener.onApplicationStartup();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                synchronized (applicationEventListeners) {
+                    for (IApplicationEventListener listener : applicationEventListeners) {
+                        listener.onApplicationStartup();
+                    }
+                }
             }
-        }
+        });
     }
+
     /** Fire event. */
     public static void fireApplicationShutdown() {
         LOG.info("EVENT: application shutdown");
-        synchronized (applicationEventListeners) {
-            for (IApplicationEventListener listener : applicationEventListeners) {
-                listener.onApplicationShutdown();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                synchronized (applicationEventListeners) {
+                    for (IApplicationEventListener listener : applicationEventListeners) {
+                        listener.onApplicationShutdown();
+                    }
+                }
             }
-        }
+        });
     }
 }

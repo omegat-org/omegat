@@ -401,7 +401,7 @@ public class MainWindowMenuHandler {
                             }
 
                             // Check if the segment number is within bounds
-                            if (segmentNr < 1 || segmentNr > CommandThread.core.numEntries()) {
+                            if (segmentNr < 1 || segmentNr > CommandThread.core.getNumberOfSegmentsTotal()) {
                                 // Tell the user he has to enter a number within
                                 // certain bounds
                                 displayErrorMessage();
@@ -420,7 +420,7 @@ public class MainWindowMenuHandler {
                 private void displayErrorMessage() {
                     JOptionPane.showMessageDialog(dialog, StaticUtils.format(OStrings
                             .getString("MW_SEGMENT_NUMBER_ERROR"), new Object[] { new Integer(CommandThread.core
-                            .numEntries()) }), OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
+                            .getNumberOfSegmentsTotal()) }), OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
                 }
             });
 

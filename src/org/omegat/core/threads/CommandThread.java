@@ -568,7 +568,7 @@ public class CommandThread extends Thread implements IDataEngine
             m_strEntryList.add(strEntry);
             m_strEntryHash.put(srcText, strEntry);
         }
-        SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, numEntries());
+        SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, getNumberOfSegmentsTotal());
         m_srcTextEntryArray.add(srcTextEntry);
     }
     
@@ -763,7 +763,7 @@ public class CommandThread extends Thread implements IDataEngine
             //             added condition m_curFile.lastEntry>=m_curFile.firstEntry
             if( fileLoaded && (m_curFile.lastEntry>=m_curFile.firstEntry) )
             {
-                m_projWin.addFile(filepath, numEntries());
+                m_projWin.addFile(filepath, getNumberOfSegmentsTotal());
             }
         }
         Core.getMainWindow().showStatusMessage(OStrings.getString("CT_LOAD_SRC_COMPLETE"));
@@ -1055,8 +1055,6 @@ public class CommandThread extends Thread implements IDataEngine
     public String	sourceRoot()
     { return m_config.getSourceRoot();		}
     
-    public int		numEntries()
-    { return m_srcTextEntryArray.size(); }
     public MainWindow getTransFrame()
     { return m_transFrame;	}
     

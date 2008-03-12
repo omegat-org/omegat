@@ -276,7 +276,7 @@ public class SearchThread extends Thread
 
         // search through all project entries
         int i;
-        for (i = 0; i < CommandThread.core.numEntries(); i++) {
+        for (i = 0; i < CommandThread.core.getNumberOfSegmentsTotal(); i++) {
             // get the source and translation of the next entry
             SourceTextEntry ste = CommandThread.core.getSTE(i);
             String srcText = ste.getSrcText();

@@ -645,7 +645,7 @@ public class EditorController implements IEditor {
 
             m_curEntryNum++;
             if (m_curEntryNum > m_xlLastEntry) {
-                if (m_curEntryNum >= CommandThread.core.numEntries())
+                if (m_curEntryNum >= CommandThread.core.getNumberOfSegmentsTotal())
                     m_curEntryNum = 0;
                 loadDocument();
             }
@@ -664,7 +664,7 @@ public class EditorController implements IEditor {
             m_curEntryNum--;
             if (m_curEntryNum < m_xlFirstEntry) {
                 if (m_curEntryNum < 0)
-                    m_curEntryNum = CommandThread.core.numEntries() - 1;
+                    m_curEntryNum = CommandThread.core.getNumberOfSegmentsTotal() - 1;
                 // empty project bugfix:
                 if (m_curEntryNum < 0)
                     m_curEntryNum = 0;
@@ -694,7 +694,7 @@ public class EditorController implements IEditor {
             commitEntry();
 
             // get the total number of entries
-            int numEntries = CommandThread.core.numEntries();
+            int numEntries = CommandThread.core.getNumberOfSegmentsTotal();
 
             boolean found = false;
             int curEntryNum;
@@ -760,13 +760,13 @@ public class EditorController implements IEditor {
             m_curEntryNum = entryNum - 1;
             if (m_curEntryNum < m_xlFirstEntry) {
                 if (m_curEntryNum < 0)
-                    m_curEntryNum = CommandThread.core.numEntries() - 1;
+                    m_curEntryNum = CommandThread.core.getNumberOfSegmentsTotal() - 1;
                 // empty project bugfix:
                 if (m_curEntryNum < 0)
                     m_curEntryNum = 0;
                 loadDocument();
             } else if (m_curEntryNum > m_xlLastEntry) {
-                if (m_curEntryNum >= CommandThread.core.numEntries())
+                if (m_curEntryNum >= CommandThread.core.getNumberOfSegmentsTotal())
                     m_curEntryNum = 0;
                 loadDocument();
             }

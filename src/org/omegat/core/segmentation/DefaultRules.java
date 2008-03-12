@@ -157,7 +157,7 @@ public class DefaultRules
         srules.add(new Rule(false, "bzw\\.", "\\s"));                           // NOI18N
         srules.add(new Rule(false, "ca\\.", "\\s"));                            // NOI18N
         srules.add(new Rule(false, "Chr\\.", "\\s"));                           // NOI18N
-        srules.add(new Rule(false, "d\\.ï¿½\\.", "\\s"));                         // NOI18N
+        srules.add(new Rule(false, "d\\.Ä\\.", "\\s"));                         // NOI18N
         srules.add(new Rule(false, "dgl\\.", "\\s"));                           // NOI18N
         srules.add(new Rule(false, "d\\.h\\.", "\\s"));                         // NOI18N
         srules.add(new Rule(false, "Dipl\\.-Ing\\.", "\\s"));                   // NOI18N
@@ -234,11 +234,11 @@ public class DefaultRules
         srules.add(new Rule(false, "led\\.", "\\s"));                           // NOI18N
         srules.add(new Rule(false, "m\\.E\\.", "\\s"));                         // NOI18N
         srules.add(new Rule(false, "Mio\\.", "\\s"));                           // NOI18N
-        srules.add(new Rule(false, "mï¿½bl\\.", "\\s"));                          // NOI18N
+        srules.add(new Rule(false, "möbl\\.", "\\s"));                          // NOI18N
         srules.add(new Rule(false, "Mrd\\.", "\\s"));                           // NOI18N
         srules.add(new Rule(false, "m\\.W\\.", "\\s"));                         // NOI18N
         srules.add(new Rule(false, "MwSt\\.", "\\s"));                          // NOI18N
-        srules.add(new Rule(false, "nï¿½ml\\.", "\\s"));                          // NOI18N
+        srules.add(new Rule(false, "näml\\.", "\\s"));                          // NOI18N
         srules.add(new Rule(false, "n\\.Chr\\.", "\\s"));                       // NOI18N
         srules.add(new Rule(false, "Nr\\.", "\\s"));                            // NOI18N
         srules.add(new Rule(false, "n\\.u\\.Z\\.", "\\s"));                     // NOI18N
@@ -246,7 +246,7 @@ public class DefaultRules
         srules.add(new Rule(false, "o\\.B\\.", "\\s"));                         // NOI18N
         srules.add(new Rule(false, "Obb\\.", "\\s"));                           // NOI18N
         srules.add(new Rule(false, "\\sod\\.", "\\s"));                         // NOI18N
-        srules.add(new Rule(false, "ï¿½sterr\\.", "\\s"));                        // NOI18N
+        srules.add(new Rule(false, "österr\\.", "\\s"));                        // NOI18N
         srules.add(new Rule(false, "p\\.Adr\\.", "\\s"));                       // NOI18N
         srules.add(new Rule(false, "Pfd\\.", "\\s"));                           // NOI18N
         srules.add(new Rule(false, "Pl\\.", "\\s"));                            // NOI18N
@@ -254,14 +254,14 @@ public class DefaultRules
         srules.add(new Rule(false, "Reg\\.-Bez\\.", "\\s"));                    // NOI18N
         srules.add(new Rule(false, "r\\.k\\.", "\\s"));                         // NOI18N
         srules.add(new Rule(false, "r\\.-k\\.", "\\s"));                        // NOI18N
-        srules.add(new Rule(false, "rï¿½m\\.", "\\s"));                           // NOI18N
-        srules.add(new Rule(false, "rï¿½m\\.-kath\\.", "\\s"));                   // NOI18N
+        srules.add(new Rule(false, "röm\\.", "\\s"));                           // NOI18N
+        srules.add(new Rule(false, "röm\\.-kath\\.", "\\s"));                   // NOI18N
         srules.add(new Rule(false, "\\sS\\.", "\\s"));                          // NOI18N
         srules.add(new Rule(false, "\\ss\\.", "\\s"));                          // NOI18N
         srules.add(new Rule(false, "s\\.a\\.", "\\s"));                         // NOI18N
         srules.add(new Rule(false, "Sa\\.", "\\s"));                            // NOI18N
         srules.add(new Rule(false, "schles\\.", "\\s"));                        // NOI18N
-        srules.add(new Rule(false, "schwï¿½b\\.", "\\s"));                        // NOI18N
+        srules.add(new Rule(false, "schwäb\\.", "\\s"));                        // NOI18N
         srules.add(new Rule(false, "schweiz\\.", "\\s"));                       // NOI18N
         srules.add(new Rule(false, "s\\.o\\.", "\\s"));                         // NOI18N
         srules.add(new Rule(false, "So\\.", "\\s"));                            // NOI18N
@@ -271,12 +271,12 @@ public class DefaultRules
         srules.add(new Rule(false, "StR\\.", "\\s"));                           // NOI18N
         srules.add(new Rule(false, "str\\.", "\\s"));                           // NOI18N
         srules.add(new Rule(false, "s\\.u\\.", "\\s"));                         // NOI18N
-        srules.add(new Rule(false, "sï¿½dd\\.", "\\s"));                          // NOI18N
-        srules.add(new Rule(false, "tï¿½gl\\.", "\\s"));                          // NOI18N
+        srules.add(new Rule(false, "südd\\.", "\\s"));                          // NOI18N
+        srules.add(new Rule(false, "tägl\\.", "\\s"));                          // NOI18N
         srules.add(new Rule(false, "\\su\\.", "\\s"));                          // NOI18N
         srules.add(new Rule(false, "u\\.a\\.", "\\s"));                         // NOI18N
-        srules.add(new Rule(false, "u\\.ï¿½\\.", "\\s"));                         // NOI18N
-        srules.add(new Rule(false, "u\\.ï¿½\\.", "\\s"));                         // NOI18N
+        srules.add(new Rule(false, "u\\.ä\\.", "\\s"));                         // NOI18N
+        srules.add(new Rule(false, "u\\.Ä\\.", "\\s"));                         // NOI18N
         srules.add(new Rule(false, "u\\.a\\.m\\.", "\\s"));                     // NOI18N
         srules.add(new Rule(false, "u\\.A\\.w\\.g\\.", "\\s"));                 // NOI18N
         srules.add(new Rule(false, "usw\\.", "\\s"));                           // NOI18N
@@ -377,13 +377,13 @@ public class DefaultRules
         srules.add(new Rule(false, "Mi\\.", "\\s"));                            // NOI18N
         srules.add(new Rule(false, "Do\\.", "\\s"));                            // NOI18N
         srules.add(new Rule(false, "Fr\\.", "\\s"));                            // NOI18N
-        srules.add(new Rule(false, "\\sï¿½\\.", "\\s"));                          // NOI18N
+        srules.add(new Rule(false, "\\sä\\.", "\\s"));                          // NOI18N
         srules.add(new Rule(false, "Elektr\\.", "\\s"));                        // NOI18N
         srules.add(new Rule(false, "Stck\\.", "\\s"));                          // NOI18N
         srules.add(new Rule(false, "pl\\.", "\\s"));                            // NOI18N
         srules.add(new Rule(false, "sing\\.", "\\s"));                          // NOI18N
         srules.add(new Rule(false, "Inv\\.", "\\s"));                           // NOI18N
-        srules.add(new Rule(false, "jï¿½hrl\\.", "\\s"));                         // NOI18N
+        srules.add(new Rule(false, "jährl\\.", "\\s"));                         // NOI18N
         srules.add(new Rule(false, "Kaut\\.", "\\s"));                          // NOI18N
         srules.add(new Rule(false, "Einstpl\\.", "\\s"));                       // NOI18N
         srules.add(new Rule(false, "Ki\\.", "\\s"));                            // NOI18N
@@ -391,7 +391,7 @@ public class DefaultRules
         srules.add(new Rule(false, "kl\\.", "\\s"));                            // NOI18N
         srules.add(new Rule(false, "Kochgel\\.", "\\s"));                       // NOI18N
         srules.add(new Rule(false, "kpl.", "\\s"));                             // NOI18N
-        srules.add(new Rule(false, "mï¿½bl\\.", "\\s"));                          // NOI18N
+        srules.add(new Rule(false, "möbl\\.", "\\s"));                          // NOI18N
         srules.add(new Rule(false, "lux\\.", "\\s"));                           // NOI18N
         srules.add(new Rule(false, "mod\\.", "\\s"));                           // NOI18N
         srules.add(new Rule(false, "mtl\\.", "\\s"));                           // NOI18N
@@ -416,7 +416,7 @@ public class DefaultRules
         srules.add(new Rule(false, "einschl\\.", "\\s"));                       // NOI18N
         srules.add(new Rule(false, "\\sSachverst\\.", "\\sf\\.\\sBaubiologie"));// NOI18N
         srules.add(new Rule(false, "allg\\.", "\\s"));                          // NOI18N
-        srules.add(new Rule(false, "ï¿½kol\\.", "\\s"));                          // NOI18N
+        srules.add(new Rule(false, "ökol\\.", "\\s"));                          // NOI18N
         srules.add(new Rule(false, "biolog\\.", "\\s"));                        // NOI18N
         srules.add(new Rule(false, "versch\\.", "\\s"));                        // NOI18N
         srules.add(new Rule(false, "landwirtsch\\.", "\\s"));                   // NOI18N
@@ -447,10 +447,10 @@ public class DefaultRules
         srules.add(new Rule(false, "zw\\.", "\\s"));                            // NOI18N
         srules.add(new Rule(false, "\\sMed\\.", "\\s"));                        // NOI18N
         srules.add(new Rule(false, "\\sPf\\.", "\\s"));                         // NOI18N
-        srules.add(new Rule(false, "ï¿½sterr\\.", "\\s"));                        // NOI18N
+        srules.add(new Rule(false, "Österr\\.", "\\s"));                        // NOI18N
         srules.add(new Rule(false, "Kurat\\.", "\\s"));                         // NOI18N
         srules.add(new Rule(false, "allerg\\.", "\\s"));                        // NOI18N
-        srules.add(new Rule(false, "o\\.ï¿½\\.", "\\s"));                         // NOI18N
+        srules.add(new Rule(false, "o\\.ä\\.", "\\s"));                         // NOI18N
         srules.add(new Rule(false, "z\\.\\sTl\\.", "\\s"));                     // NOI18N
         srules.add(new Rule(false, "Bzgl\\.", "\\s"));                          // NOI18N
         srules.add(new Rule(false, "v\\.a\\.", "\\s"));                         // NOI18N
@@ -465,14 +465,14 @@ public class DefaultRules
         srules.add(new Rule(false, "Entspr\\.", "\\s"));                        // NOI18N
         srules.add(new Rule(false, "sichtl\\.", "\\s"));                        // NOI18N
         srules.add(new Rule(false, "weibl\\.", "\\s"));                         // NOI18N
-        srules.add(new Rule(false, "mï¿½nnl\\.", "\\s"));                         // NOI18N
+        srules.add(new Rule(false, "männl\\.", "\\s"));                         // NOI18N
         srules.add(new Rule(false, "i\\.a\\.", "\\s"));                         // NOI18N
         srules.add(new Rule(false, "ggfl\\.", "\\s"));                          // NOI18N
         srules.add(new Rule(false, "\\sreg\\.", "\\s"));                        // NOI18N
         srules.add(new Rule(false, "\\sJan\\.", "\\s"));                        // NOI18N
         srules.add(new Rule(false, "\\sFeb\\.", "\\s"));                        // NOI18N
         srules.add(new Rule(false, "\\sFebr\\.", "\\s"));                       // NOI18N
-        srules.add(new Rule(false, "\\sMï¿½r\\.", "\\s"));                        // NOI18N
+        srules.add(new Rule(false, "\\sMär\\.", "\\s"));                        // NOI18N
         srules.add(new Rule(false, "\\sApr\\.", "\\s"));                        // NOI18N
         srules.add(new Rule(false, "\\sJun\\.", "\\s"));                        // NOI18N
         srules.add(new Rule(false, "\\sJul\\.", "\\s"));                        // NOI18N

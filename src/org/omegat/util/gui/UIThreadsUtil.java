@@ -24,10 +24,10 @@
 
 package org.omegat.util.gui;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
+
+import org.omegat.util.Log;
 
 /**
  * Utils for check UI threads and run specific code in UI threads only.
@@ -35,8 +35,6 @@ import javax.swing.SwingUtilities;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class UIThreadsUtil {
-    private static final Logger LOGGER = Logger.getLogger(UIThreadsUtil.class.getName());
-
     /**
      * Execute code in swing thread only.
      */
@@ -54,7 +52,8 @@ public class UIThreadsUtil {
      */
     public static void mustBeSwingThread() {
         if (!SwingUtilities.isEventDispatchThread()) {
-            LOGGER.log(Level.SEVERE, "This call must be in swing thread", new Exception());
+            Log.logErrorRB("LOG_ERROR_MUST_BE_SWING_THREAD");
+            Log.log(new Exception());
         }
     }
 
@@ -63,8 +62,9 @@ public class UIThreadsUtil {
      * it's not true.
      */
     public static void mustNotBeSwingThread() {
-        if (!SwingUtilities.isEventDispatchThread()) {
-            LOGGER.log(Level.SEVERE, "This call must be in swing thread", new Exception());
+        if (SwingUtilities.isEventDispatchThread()) {
+            Log.logErrorRB("LOG_ERROR_MUSTNOT_BE_SWING_THREAD");
+            Log.log(new Exception());
         }
     }
 }

@@ -26,12 +26,12 @@ package org.omegat.core;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.util.Log;
 
 /**
  * Class for distribute main application events.
@@ -42,8 +42,6 @@ import org.omegat.core.events.IProjectEventListener;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class CoreEvents {
-    private static final Logger LOG = Logger.getLogger(CoreEvents.class.getName());
-
     private static final List<IProjectEventListener> projectEventListeners = new ArrayList<IProjectEventListener>();
     private static final List<IApplicationEventListener> applicationEventListeners = new ArrayList<IApplicationEventListener>();
 
@@ -77,7 +75,7 @@ public class CoreEvents {
 
     /** Fire event. */
     public static void fireProjectChange() {
-        LOG.info("EVENT: project change event");
+        Log.logInfoRB("LOG_INFO_EVENT_PROJECT_CHANGE");
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 synchronized (projectEventListeners) {
@@ -91,7 +89,7 @@ public class CoreEvents {
 
     /** Fire event. */
     public static void fireApplicationStartup() {
-        LOG.info("EVENT: application startup");
+        Log.logInfoRB("LOG_INFO_EVENT_APPLICATION_STARTUP");
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 synchronized (applicationEventListeners) {
@@ -105,7 +103,7 @@ public class CoreEvents {
 
     /** Fire event. */
     public static void fireApplicationShutdown() {
-        LOG.info("EVENT: application shutdown");
+        Log.logInfoRB("LOG_INFO_EVENT_APPLICATION_SHUTDOWN");
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 synchronized (applicationEventListeners) {

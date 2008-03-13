@@ -67,8 +67,8 @@ public class Main
             " ("+new Date()+") " +                                                    // NOI18N
             " Locale "+Locale.getDefault());                                          // NOI18N
 
-        Log.log("Java: " + System.getProperty("java.vendor") + " " + System.getProperty("java.version") + " from "
-                + System.getProperty("java.home"));
+        Log.logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"), System.getProperty("java.version"), System
+                .getProperty("java.home"));
         Log.log("");
         
         try

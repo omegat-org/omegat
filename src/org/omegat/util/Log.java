@@ -111,29 +111,18 @@ public class Log {
     /**
       * Logs a message, retrieved from the resource bundle.
       *
-      * @param key The key of the message in the resource bundle.
-      *
-      * @author Henry Pijffers (henry.pijffers@saxnot.com)
-      */
-    public static void logRB(String key) {
-        logRB(key, null);
-    }
-
-    /**
-      * Logs a message, retrieved from the resource bundle.
-      *
       * @param key        The key of the message in the resource bundle.
       * @param parameters Parameters for the message. These are inserted by
       *                   using StaticUtils.format.
       *
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
-    public static void logRB(String key, Object[] parameters) {
+    public static void logRB(String key, Object... parameters) {
         // Retrieve the message
         String message = OStrings.getString(key);
 
         // Format the message, if there are parameters
-        if (parameters != null)
+        if (parameters != null && parameters.length > 0)
             message = StaticUtils.format(message, parameters);
 
         // Write the message to the log
@@ -250,17 +239,38 @@ public class Log {
     }
 
     /**
-      * Writes an error message to the log (to be retrieved from the
-      * resource bundle), preceded by a line containing the error ID.
-      *
-      * While the error message can be localised, the error ID should not,
-      * so developers can determine what error was given by looking at the
-      * error ID, instead of trying to interpret localised messages.
-      *
-      * @param key The key of the error message in the resource bundle
-      *
-      * @author Henry Pijffers (henry.pijffers@saxnot.com)
-      */
+     * Writes the specified info message to the log, preceded by a line
+     * containing the info ID.
+     *
+     * While the info message can be localised, the info ID should not,
+     * so developers can determine what info was given by looking at the
+     * info ID, instead of trying to interpret localised messages.
+     *
+     * @param id         An identification string for the info
+     * @param parameters Parameters for the info message. These are
+     *                   inserted by using StaticUtils.format.
+     *
+     * @author Henry Pijffers (henry.pijffers@saxnot.com)
+     * @author Alex Buloichik (alex73mail@gmail.com)
+     */
+    public static void logInfoRB(String id, Object... parameters) {
+        logIdentifiableMessage(StaticUtils.format(OStrings.getString("LOG_INFO_ID"), new Object[] { id }), OStrings
+                .getString(id), parameters);
+    }
+    
+    /**
+     * Writes an error message to the log (to be retrieved from the resource
+     * bundle), preceded by a line containing the error ID.
+     * 
+     * While the error message can be localised, the error ID should not, so
+     * developers can determine what error was given by looking at the error ID,
+     * instead of trying to interpret localised messages.
+     * 
+     * @param key
+     *                The key of the error message in the resource bundle
+     * 
+     * @author Henry Pijffers (henry.pijffers@saxnot.com)
+     */
     public static void logErrorRB(String key) {
         // Retrieve and log the error message
         String message = OStrings.getString(key);

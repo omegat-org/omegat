@@ -69,8 +69,8 @@ public class Language
     /** 
      * Creates a new instance of Language, based on a string 
      * of a form "XX_YY" or "XX-YY", where 
-     * XXX is a language code composed from 1-8 alpha (A-Za-z) chars,
-     * and YYY is a country ISO code composed from 1-8 alpha/digit (A-Za-z0-9) 
+     * XX is a language code composed from 1-8 alpha (A-Za-z) chars,
+     * and YY is a country ISO code composed from 1-8 alpha/digit (A-Za-z0-9) 
      * chars.
      */
     public Language(String str)
@@ -217,8 +217,8 @@ public class Language
 //        new Language("AZ-AZ"),       // NOI18N  // AZERBAIJANI (AZERBAIJAN)
         new Language("BA"),       // NOI18N  // BASHKIR
                 
-        new Language("BE"),       // NOI18N  // BYELORUSSIAN
-//        new Language("BE-BY"),       // NOI18N  // BYELORUSSIAN (BELARUS)
+        new Language("BE"),       // NOI18N  // BELARUSIAN
+//        new Language("BE-BY"),       // NOI18N  // BELARUSIAN (BELARUS)
         new Language("BG"),       // NOI18N  // BULGARIAN
 //        new Language("BG-BG"),       // NOI18N  // BULGARIAN (BULGARIA)
         
@@ -577,7 +577,7 @@ public class Language
         new Language("VE"),       // NOI18N  // VENDA 
         new Language("VI"),       // NOI18N  // VIETNAMESE
 //        new Language("VI-VN"),       // NOI18N  // VIETNAMESE (VIETNAM)
-        new Language("VO"),       // NOI18N  // VOLAP�K
+        new Language("VO"),       // NOI18N  // VOLAPUK
         new Language("WA"),       // NOI18N  // WALLOON
         new Language("WO"),       // NOI18N  // WOLOF
         new Language("XH"),       // NOI18N  // XHOSA

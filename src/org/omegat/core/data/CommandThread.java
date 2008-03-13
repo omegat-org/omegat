@@ -26,14 +26,10 @@
 package org.omegat.core.data;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -45,8 +41,6 @@ import java.util.Set;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.LegacyTM;
-import org.omegat.core.data.IDataEngine;
-import org.omegat.core.data.Statistics;
 import org.omegat.core.glossary.GlossaryManager;
 import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.SourceTextEntry;
@@ -56,6 +50,7 @@ import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.filelist.ProjectFrame;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.messages.MessageRelay;
+import org.omegat.util.FileUtil;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -875,7 +870,7 @@ public class CommandThread extends Thread implements IDataEngine
                 fileMillis = new Date().getTime();
             LFileCopy.copy(fname, fname+"."+millisToDateTime(fileMillis)+".bak");   // NOI18N
             
-            removeOldBackups(tmxFile);
+            FileUtil.removeOldBackups(tmxFile);
         }
 
         // If a legacy TM, creating one
@@ -943,49 +938,6 @@ public class CommandThread extends Thread implements IDataEngine
         }
     }
 
-    private static final int MAX_BACKUPS = 10;
-    /** Removes old backups so that only 10 last are there. */
-    private void removeOldBackups(File tmxFile)
-    {
-        // now removing too old backups
-        try
-        {
-            File tmxFolder = tmxFile.getParentFile();
-            // getting all .bak files in the same folder
-            List<File> tmxs = Arrays.asList(tmxFolder.listFiles(new FilenameFilter()
-            {
-                public boolean accept(File dir, String name)
-                {
-                    return name.endsWith(".bak");                               // NOI18N
-                }
-            }));
-            
-            // removing more than 10 backups
-            if (tmxs.size()>MAX_BACKUPS)
-            {
-                // sorting: old files last
-                Collections.sort(tmxs, new Comparator<File>()
-                {
-                    public int compare(File f1, File f2)
-                    {
-                        if( f1.lastModified()==f2.lastModified() )
-                            return 0;
-                        else if ( f1.lastModified()>f2.lastModified() )
-                            return -1;
-                        else
-                            return 1;
-                    }
-                });
-                for(int i=MAX_BACKUPS; i<tmxs.size(); i++)
-                    tmxs.get(i).delete();
-            }
-        }
-        catch(Exception e)
-        {
-            // we don't care
-        }
-    }
-    
     /**
      * Writes the error info to the log and
      * displays an error message.

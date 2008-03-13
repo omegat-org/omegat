@@ -67,10 +67,9 @@ public class FileUtil {
                         return f2.getName().compareTo(f1.getName());
                     }
                 });
-            }
-
-            for (int i = MAX_BACKUPS; i < bakFiles.length; i++) {
-                bakFiles[i].delete();
+                for (int i = MAX_BACKUPS; i < bakFiles.length; i++) {
+                    bakFiles[i].delete();
+                }
             }
         } catch (Exception e) {
             // we don't care

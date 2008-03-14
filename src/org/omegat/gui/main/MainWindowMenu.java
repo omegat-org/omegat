@@ -48,6 +48,7 @@ import net.roydesign.mac.MRJAdapter;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -210,9 +211,20 @@ public class MainWindowMenu implements ActionListener {
         
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
             public void onApplicationStartup() {
-                updateCheckboxesOnStart();
+                updateCheckboxesOnStart();        
+                onProjectStatusChanged(false);
             }
             public void onApplicationShutdown() {
+            }
+        });
+        
+        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
+            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
+                if (Core.getDataEngine().isProjectLoaded()) {
+                    onProjectStatusChanged(true);
+                } else {
+                    onProjectStatusChanged(false);
+                }
             }
         });
 
@@ -228,8 +240,6 @@ public class MainWindowMenu implements ActionListener {
         viewMarkUntranslatedSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkUntranslated());
 
         viewDisplaySegmentSourceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isDisplaySegmentSources());
-        
-        onProjectStatusChanged(false);
     }
 
     /**
@@ -375,7 +385,7 @@ public class MainWindowMenu implements ActionListener {
      * @param isProjectOpened
      *                project open status: true if opened, false if closed
      */
-    public void onProjectStatusChanged(final boolean isProjectOpened) {
+    private void onProjectStatusChanged(final boolean isProjectOpened) {
         JMenuItem[] itemsToSwitchOff = new JMenuItem[] { projectNewMenuItem, projectOpenMenuItem };
 
         JMenuItem[] itemsToSwitchOn = new JMenuItem[] { projectImportMenuItem, projectWikiImportMenuItem,

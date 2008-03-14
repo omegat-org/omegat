@@ -49,11 +49,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 import org.omegat.core.Core;
-import org.omegat.core.CoreEvents;
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.StringEntry;
-import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.editor.EditorTextArea;
 import org.omegat.gui.filelist.ProjectFrame;
@@ -83,7 +81,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class MainWindow extends JFrame implements IMainWindow, IProjectEventListener {
+public class MainWindow extends JFrame implements IMainWindow {
     public final MainWindowMenu menu;
     
     /** Creates new form MainWindow */
@@ -121,8 +119,6 @@ public class MainWindow extends JFrame implements IMainWindow, IProjectEventList
         oldInit();
         
         MainWindowUI.loadInstantStart(editorScroller, editor);
-        
-        CoreEvents.registerProjectChangeListener(this);
     }
     
     /**
@@ -265,14 +261,6 @@ public class MainWindow extends JFrame implements IMainWindow, IProjectEventList
         Core.getDataEngine().closeProject();
         showProgressMessage(OStrings.getString("MW_PROGRESS_DEFAULT"));
         showLengthMessage(OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
-    }
-    
-    public void onProjectChanged(final PROJECT_CHANGE_TYPE eventType) {
-        if (Core.getDataEngine().isProjectLoaded()) {
-            menu.onProjectStatusChanged(true);
-        } else {
-            menu.onProjectStatusChanged(false);
-        }
     }
     
     /** Updates UI (enables/disables menu items) upon <b>closing</b> project */

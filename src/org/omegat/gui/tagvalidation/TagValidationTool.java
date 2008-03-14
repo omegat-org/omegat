@@ -22,7 +22,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **************************************************************************/
 
-package org.omegat.gui;
+package org.omegat.gui.tagvalidation;
 
 import java.awt.Font;
 import java.util.ArrayList;

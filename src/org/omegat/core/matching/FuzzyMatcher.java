@@ -26,8 +26,8 @@ package org.omegat.core.matching;
 
 import java.util.List;
 
-import org.omegat.core.StringData;
 import org.omegat.core.data.CommandThread;
+import org.omegat.core.data.StringData;
 import org.omegat.core.data.StringEntry;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.messages.MessageRelay;

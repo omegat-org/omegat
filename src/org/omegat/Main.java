@@ -32,9 +32,9 @@ import javax.swing.UIManager;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.CommandThread;
-import org.omegat.gui.TagValidationTool;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.main.MainWindow;
+import org.omegat.gui.tagvalidation.TagValidationTool;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 

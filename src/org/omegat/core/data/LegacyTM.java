@@ -22,11 +22,10 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.core;
+package org.omegat.core.data;
 
 import java.util.List;
 
-import org.omegat.core.data.StringEntry;
 
 /**
  * Represents a legacy Translation Memory file.

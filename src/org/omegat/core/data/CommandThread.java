@@ -40,7 +40,6 @@ import java.util.Set;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.LegacyTM;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.glossary.GlossaryManager;
 import org.omegat.core.matching.FuzzyMatcher;

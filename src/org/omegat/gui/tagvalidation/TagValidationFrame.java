@@ -23,7 +23,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.gui;
+package org.omegat.gui.tagvalidation;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -45,6 +45,7 @@ import javax.swing.KeyStroke;
 
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.matching.SourceTextEntry;
+import org.omegat.gui.HListener;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;

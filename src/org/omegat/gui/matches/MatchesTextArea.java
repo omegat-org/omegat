@@ -37,7 +37,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
 import org.omegat.core.Core;
-import org.omegat.core.StringData;
+import org.omegat.core.data.StringData;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;

@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package svn;
 
@@ -71,7 +71,29 @@ public class SetSvnProperties {
             return;
         }
         if (filename.startsWith("./test/data/")) {
-            set("application/octet-stream");
+            if (filename.endsWith(".xml")) {
+                set("text/xml");
+            } else if (filename.endsWith(".hhc") || filename.endsWith(".hhk")) {
+                set("text/html");
+            } else if (filename.endsWith(".html")) {
+                set("text/html");
+            } else if (filename.endsWith(".ini")) {
+                set("text/plain");
+            } else if (filename.endsWith(".odt")) {
+                set("application/octet-stream");
+            } else if (filename.endsWith(".docx")) {
+                set("application/octet-stream");
+            } else if (filename.endsWith(".po")) {
+                set("text/plain");
+            } else if (filename.endsWith(".properties")) {
+                set("text/plain");
+            } else if (filename.endsWith(".txt")) {
+                set("text/plain");
+            } else if (filename.endsWith(".xlf")) {
+                set("text/xml");
+            } else {
+                System.out.println("unknown: " + filename);
+            }
         } else if (filename.startsWith("./native/")) {
             set("application/octet-stream");
         } else if (filename.equals("./release/OmegaT")) {

@@ -31,10 +31,6 @@ import javax.swing.UIManager;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.CommandThread;
-import org.omegat.gui.editor.EditorController;
-import org.omegat.gui.main.MainWindow;
-import org.omegat.gui.tagvalidation.TagValidationTool;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
@@ -90,18 +86,7 @@ public class Main
             Log.logErrorRB("MAIN_ERROR_CANT_INIT_OSLF");
         }
         
-        MainWindow mainwindow = new MainWindow();
-        
-        // bugfix - Serious threading issue, preventing OmegaT from showing up...
-        //          http://sourceforge.net/support/tracker.php?aid=1216514
-        // we start command thread here...
-        CommandThread.core = new CommandThread(mainwindow);
-        CommandThread.core.start();
-        
-        mainwindow.setVisible(true);
-        EditorController ec = new EditorController(mainwindow, mainwindow.editor);
-
-        Core.initialize(CommandThread.core, mainwindow, ec, new TagValidationTool(mainwindow));
+        Core.initialize();
         CoreEvents.fireApplicationStartup();
     }
 }

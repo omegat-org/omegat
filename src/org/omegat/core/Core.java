@@ -24,10 +24,14 @@
 
 package org.omegat.core;
 
+import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.IDataEngine;
+import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.tagvalidation.ITagValidation;
+import org.omegat.gui.tagvalidation.TagValidationTool;
 
 /**
  * Class which contains all components instances.
@@ -66,10 +70,20 @@ public class Core {
      * TODO: change initialization for instantiate component instances, instead
      * use already created instanced
      */
-    public static void initialize(final IDataEngine de, final IMainWindow mw, final IEditor ed, final ITagValidation tv) {
-        dataEngine = de;
-        mainWindow = mw;
-        editor = ed;
-        tagValidation = tv;
+    public static void initialize() {
+        MainWindow me = new MainWindow();
+        
+        // bugfix - Serious threading issue, preventing OmegaT from showing up...
+        //          http://sourceforge.net/support/tracker.php?aid=1216514
+        // we start command thread here...
+        CommandThread.core = new CommandThread(me);
+        CommandThread.core.start();
+        
+        me.setVisible(true);
+
+        dataEngine = CommandThread.core;
+        mainWindow = me;
+        editor = new EditorController(me, me.editor);
+        tagValidation = new TagValidationTool(me);
     }
 }

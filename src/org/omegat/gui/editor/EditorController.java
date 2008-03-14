@@ -72,7 +72,7 @@ public class EditorController implements IEditor {
     private final int IS_NOT_TRANSLATED = 2;
 
     private final EditorTextArea editor;
-    private final MainWindow mw;
+    protected final MainWindow mw;
 
     private SourceTextEntry m_curEntry;
     protected int m_curEntryNum = -1;
@@ -197,7 +197,7 @@ public class EditorController implements IEditor {
 
                         // mark the incorrectly set words, if needed
                         if (doSpellcheck && mw.m_autoSpellChecking) {
-                            mw.checkSpelling(totalLength, text);
+                            EditorSpellChecking.checkSpelling(totalLength, text, this, editor);
                         }
 
                         totalLength += text.length();
@@ -459,7 +459,7 @@ public class EditorController implements IEditor {
                 }
                 editor.cancelUndo();
 
-                editor.checkSpelling(true);
+                checkSpelling(true);
             } // synchronize (editor)
 
             entryActivated = true;
@@ -563,7 +563,7 @@ public class EditorController implements IEditor {
                 docSeg.length = replaceEntry(m_segmentStartOffset, totalLen, segmentSource, display_string, flags);
 
                 if (doCheckSpelling && mw.m_autoSpellChecking) {
-                    wordList = mw.checkSpelling(startOffset, display_string);
+                    wordList = EditorSpellChecking.checkSpelling(startOffset, display_string, this, editor);
                 }
 
                 if (forceCommit) { // fix for 
@@ -1147,6 +1147,25 @@ public class EditorController implements IEditor {
         int nextValue = history.forward();
         if (nextValue != -1) {
             gotoEntry(nextValue + 1);
+        }
+    }
+
+    /**
+     * Check the spelling of the words around the caret (the word the caret is
+     * in or, if between words, the word before and the word after.
+     * 
+     * Used with keyboard events which modify the text.
+     * 
+     * @param keycode :
+     *                the keycode, to prevent multiple passes
+     * @param full :
+     *                if true, the whole segment is checked
+     */
+    public void checkSpelling(final boolean full) {
+        if (!mw.autoSpellCheckingOn())
+            return;
+        synchronized (editor) {
+            EditorSpellChecking.checkSpelling(full, this, editor);
         }
     }
 }

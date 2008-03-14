@@ -607,44 +607,6 @@ public class MainWindow extends JFrame implements IMainWindow, IProjectEventList
                 JOptionPane.ERROR_MESSAGE);
     }
 
-    /**
-     * Checks the spelling of the segment.
-     * @param start : the starting position
-     * @param text : the text to check
-     */
-    public synchronized List<Token> checkSpelling(int start, String text) {
-        // we have the translation and it should be spellchecked
-        List<Token> wordlist = StaticUtils.tokenizeText(text);
-        List<Token> wrongWordList = new ArrayList<Token>();
-        
-        AbstractDocument xlDoc = (AbstractDocument)editor.getDocument();
-        AttributeSet attributes = m_translatedAttributeSet;
-
-        SpellChecker spellchecker = CommandThread.core.getSpellchecker();
-
-        for (Token token : wordlist) {
-            int tokenStart = token.getOffset();
-            int tokenEnd = tokenStart + token.getLength();
-            String word = text.substring(tokenStart, tokenEnd);
-
-            if (!spellchecker.isCorrect(word)) {
-                try {
-                    xlDoc.replace(
-                            start+tokenStart,
-                            token.getLength(),
-                            word,
-                            Styles.applyStyles(attributes,Styles.MISSPELLED)
-                            );
-                } catch (BadLocationException ble) {
-                    //Log.log(IMPOSSIBLE);
-                    Log.log(ble);
-                }
-                wrongWordList.add(token);
-            }
-        }
-        return wrongWordList;
-    }
-    
     public void fatalError(String msg, Throwable re)
     {
         Log.log(msg);

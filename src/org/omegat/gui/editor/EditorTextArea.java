@@ -35,15 +35,11 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.List;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import javax.swing.JSeparator;
 import javax.swing.JTextPane;
 import javax.swing.event.DocumentListener;
-import javax.swing.text.AbstractDocument;
-import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.StyleContext;
@@ -51,17 +47,11 @@ import javax.swing.text.Utilities;
 import javax.swing.undo.UndoManager;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.CommandThread;
-import org.omegat.core.matching.SourceTextEntry;
-import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.gui.main.MainWindow;
-import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
-import org.omegat.util.Token;
 import org.omegat.util.gui.ExtendedEditorKit;
-import org.omegat.util.gui.Styles;
 
 
 /**
@@ -103,7 +93,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
     ////////////////////////////////////////////////////////////////////////
     
     /** Undo Manager to store edits */
-    private UndoManager	undoManager;
+    protected UndoManager undoManager;
     
     /** Orders to cancel all Undoable edits. */
     public synchronized void cancelUndo()
@@ -122,9 +112,6 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
         if (undoManager.canRedo())
             undoManager.redo();
     }
-    
-    private static final String IMPOSSIBLE = "Should not have happened, " +     // NOI18N
-            "report to http://sf.net/tracker/?group_id=68187&atid=520347";      // NOI18N
     
     ////////////////////////////////////////////////////////////////////////
     // Mouse reaction
@@ -299,7 +286,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                         super.processKeyEvent(e);
                 }
                 
-                checkSpelling(false);
+                controller.checkSpelling(false);
                 return;
             case KeyEvent.VK_DELETE:
                 if (Core.getEditor().checkCaretForDelete(true))
@@ -339,7 +326,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                         super.processKeyEvent(e);
                 }
                 
-                checkSpelling(false);
+                controller.checkSpelling(false);
                 return;
         }
         
@@ -525,100 +512,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
         // check the spelling at last
         if (!e.isActionKey() && keyCode == KeyEvent.VK_UNDEFINED
                 && e.getModifiers() != CTRL_KEY_MASK)
-            checkSpelling(false);
-        
-        
-    }
-
-    /**
-     * Check the spelling of the words around the caret 
-     * (the word the caret is in or, if between words, the word before and the
-     * word after.
-     *
-     * Used with keyboard events which modify the text.
-     *
-     * @param keycode : the keycode, to prevent multiple passes
-     * @param full : if true, the whole segment is checked
-     */
-    public synchronized void checkSpelling(boolean full) {
-
-        if (!mw.autoSpellCheckingOn())
-            return;
-                
-        try {
-            // here we are. Assuming that the caret has already been set 
-            // to a position within the edited segment
-            int offset = getCaretPosition();
-
-            int start = controller.getTranslationStart();
-            int end = controller.getTranslationEnd();
-            
-            int spellcheckStart;
-            int spellcheckEnd;
-            
-            if (full) {
-                spellcheckStart = start;
-                spellcheckEnd = end;
-            } else {
-                // the previous word start and end
-                int prevWord = Utilities.getPreviousWord(this, offset);
-                int endPrevWord = Utilities.getWordEnd(this, prevWord);
-
-                // the previous next word start and end
-                int nextWord = Utilities.getNextWord(this, offset);
-                int endNextWord = Utilities.getWordEnd(this, nextWord);
-                
-                spellcheckStart = (prevWord < start ? start : prevWord);
-                spellcheckEnd = (endNextWord > end ? end : endNextWord);
-            }
-
-            String spellcheckBase = this.getText(spellcheckStart,
-                    spellcheckEnd-spellcheckStart);
-            
-            // find the tokens
-            List<Token> tokenList = StaticUtils.tokenizeText(spellcheckBase);
-            
-            SpellChecker spellchecker = CommandThread.core.getSpellchecker();
-            
-            AttributeSet attributes;
-            AttributeSet correctAttributes = mw.getTranslatedAttributeSet();
-            AttributeSet wrongAttributes = 
-                    Styles.applyStyles(correctAttributes, Styles.MISSPELLED);
-            
-            AbstractDocument xlDoc = (AbstractDocument)this.getDocument();
-            
-            // to make the undo framework work
-            xlDoc.removeUndoableEditListener(undoManager);
-            
-            // first, repaint the whole area as if it were correct
-            xlDoc.replace(spellcheckStart, spellcheckEnd-spellcheckStart,
-                    spellcheckBase, correctAttributes);
-            
-            // iterate!
-            for (Token token : tokenList) {
-                String word = token.getTextFromString(spellcheckBase);
-                // is it correct?
-                if (!spellchecker.isCorrect(word)) {
-                    attributes = wrongAttributes;
-                } else {
-                    attributes = correctAttributes;
-                }
-                
-                xlDoc.replace(spellcheckStart+token.getOffset(),
-                        token.getLength(),
-                        word,
-                        attributes);
-            }
-            
-            // put the caret position where it belongs to
-            this.setCaretPosition(offset);
-            
-            // put the undo manager back where it was
-            xlDoc.addUndoableEditListener(undoManager);
-            
-        } catch (BadLocationException ble) {
-            // so now what?
-        }
+            controller.checkSpelling(false);
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -664,7 +558,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
     {
         Core.getEditor().checkCaret();
         super.replaceSelection(string);
-        checkSpelling(true);
+        controller.checkSpelling(true);
     }
 
     /**
@@ -673,174 +567,12 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
      * @param point : where should the popup be shown
      */
     private synchronized boolean createSpellCheckerPopUp(Point point) {
-        // where is the mouse
-        int mousepos = this.viewToModel(point);
-        
         if (!mw.autoSpellCheckingOn())
             return false;
         
-        if (mousepos < controller.getTranslationStart() || mousepos > controller.getTranslationEnd())
-            return false;
-
-        try {    
-            // find the word boundaries
-            final int wordStart = Utilities.getWordStart(this,mousepos);
-            final int wordEnd = Utilities.getWordEnd(this, mousepos);
-
-            final String word = this.getText(wordStart, wordEnd - wordStart);
-
-            SpellChecker spellchecker = CommandThread.core.getSpellchecker();
-
-            final AbstractDocument xlDoc = (AbstractDocument) this.getDocument();
-            
-            if (!spellchecker.isCorrect(word)) {
-                // get the suggestions and create a menu
-                List<String> suggestions = spellchecker.suggest(word);
-                
-                // create the menu
-                popup = new JPopupMenu();
-                
-                // the suggestions
-                for (final String replacement : suggestions) {
-                    JMenuItem item = popup.add(replacement);
-                    item.addActionListener(new ActionListener() {
-                            // the action: replace the word with the selected
-                            // suggestion
-                          public synchronized void actionPerformed(ActionEvent e) {
-                            try {
-                                int pos = getCaretPosition();
-                              xlDoc.replace(wordStart,word.length(),
-                                      replacement,mw.getTranslatedAttributeSet());
-                              setCaretPosition(pos);
-}
-                            catch (BadLocationException exc) {
-                              System.err.println(exc);
-                            }
-                          }
-                    });
-                }
-                
-                // what if no action is done?
-                if (suggestions.size() == 0) {
-                    JMenuItem item = popup.add(
-                            OStrings.getString("SC_NO_SUGGESTIONS"));
-                    item.addActionListener(new ActionListener() {
-                          public synchronized void actionPerformed(ActionEvent e) {
-                            // just hide the menu
-                          }
-                    });
-                }
-                
-                popup.add(new JSeparator());
-                
-                // let us ignore it
-                JMenuItem item = popup.add(OStrings.getString("SC_IGNORE_ALL"));
-                item.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        addIgnoreWord(word, wordStart, false);
-                    }
-                });
-                
-                // or add it to the dictionary
-                item = popup.add(OStrings.getString("SC_ADD_TO_DICTIONARY"));
-                item.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        addIgnoreWord(word, wordStart, true);
-                    }
-                });
-                
-                popup.show(this, (int) point.getX(), (int) point.getY());
-                
-            }
-
-        } catch (BadLocationException ex) {
-            Log.logRB(IMPOSSIBLE);
-            Log.log(ex);
-        }
-        return true;
+        return EditorSpellChecking.createSpellCheckerPopUp(point, controller, this);
     }
 
-    /**
-     * add a new word to the spell checker or ignore a word
-     * @param word : the word in question
-     * @param offset : the offset of the word in the editor
-     * @param add : true for add, false for ignore
-     */
-    private synchronized void addIgnoreWord(String word, int offset, boolean add) {
-        SpellChecker spellchecker = CommandThread.core.getSpellchecker();
-        
-        if (add) {
-            spellchecker.learnWord(word);
-        } else {
-            spellchecker.ignoreWord(word);
-        }
-        
-        // redraw document
-        
-        AbstractDocument xlDoc = (AbstractDocument) getDocument();
-        try {
-            // redraw the word in question
-            xlDoc.replace(offset, word.length(), word, mw.getTranslatedAttributeSet());
-            
-            // Replace the errors in the rest of the document
-            
-            // which is the current segment in the document and what is the length?
-            int startOffset = controller.m_segmentStartOffset;
-            int currentTrLen = controller.getTranslationEnd() - controller.getTranslationStart();
-            int totalLen = controller.m_sourceDisplayLength + OConsts.segmentStartStringFull.length() +
-                    currentTrLen + OConsts.segmentEndStringFull.length() + 2;
-            
-            int localCur = controller.m_curEntryNum - controller.m_xlFirstEntry;
-            DocumentSegment docSeg = controller.m_docSegList[localCur];
-            docSeg.length = totalLen;
-            
-            // the segment counter - local
-            int localCnt = 0;
-            
-            // the caret offset in the cycle
-            int segOffset = 0;
-            
-            // iterate through the entries in this file
-            for (int i = controller.m_xlFirstEntry; i <= controller.m_xlLastEntry; i++) {
-                SourceTextEntry ste = CommandThread.core.getSTE(i);
-                if (ste.isTranslated() && 
-                        localCnt != localCur) {
-                    // only translated and inactive made it
-                    int translationStartOffset = segOffset;
-                    if (mw.displaySegmentSources()) {
-                        // don't forget sources if they are displayed
-                        translationStartOffset += ste.getSrcText().length() + 1;
-                    }
-                    
-                    String translation = ste.getTranslation();
-                    
-                    // is the word in the string?
-                    if (translation.indexOf(word) != -1) {
-                        // split the text into tokens. If there is a match, redraw it
-                        List<Token> tokenList = StaticUtils.tokenizeText(translation);
-                        for (Token token : tokenList) {
-                            String tokenText = token.getTextFromString(translation);
-                            // redraw?
-                            if (tokenText.equals(word)) {
-                                xlDoc.replace(
-                                        translationStartOffset + token.getOffset(),
-                                        word.length(), word, 
-                                        mw.getTranslatedAttributeSet());
-                            }
-                        }
-                    }
-                }
-                
-                // next segment
-                segOffset += controller.m_docSegList[localCnt++].length;
-            }
-            
-        } catch (BadLocationException ex) {
-            Log.logRB(IMPOSSIBLE);
-            Log.log(ex);
-        }
-    }
-    
     /**
      * creates a popup menu for inactive segments - with an item allowing to go 
      * to the given segment.
@@ -870,7 +602,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
     /**
      * the spellchecker popup menu
      */
-    private JPopupMenu popup;
+    protected JPopupMenu popup;
     
     /**
      * go to the segment specified by the caret position in the editor -

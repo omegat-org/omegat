@@ -45,11 +45,13 @@ import javax.swing.KeyStroke;
 
 import net.roydesign.mac.MRJAdapter;
 
+import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
+import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
-import org.omegat.util.gui.Styles;
 import org.openide.awt.Mnemonics;
 
 /**
@@ -206,35 +208,26 @@ public class MainWindowMenu implements ActionListener {
 
         initMacSpecific();
         
-        updateCheckboxesOnStart();
+        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
+            public void onApplicationStartup() {
+                updateCheckboxesOnStart();
+            }
+            public void onApplicationShutdown() {
+            }
+        });
 
         return mainMenu;
     }
 
     /** Updates menu checkboxes from preferences on start */
     private void updateCheckboxesOnStart() {
-        if (Preferences.isPreference(Preferences.USE_TAB_TO_ADVANCE)) {
-            optionsTabAdvanceCheckBoxMenuItem.setSelected(true);
-            mainWindow.m_advancer = KeyEvent.VK_TAB;
-        } else {
-            mainWindow.m_advancer = KeyEvent.VK_ENTER;
-        }
+        optionsTabAdvanceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isUseTabForAdvance());
         optionsAlwaysConfirmQuitCheckBoxMenuItem.setSelected(Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT));
 
-        if (Preferences.isPreference(Preferences.MARK_TRANSLATED_SEGMENTS)) {
-            viewMarkTranslatedSegmentsCheckBoxMenuItem.setSelected(true);
-            mainWindow.m_translatedAttributeSet = Styles.TRANSLATED;
-        } else if (Preferences.isPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS)) {
-            viewMarkUntranslatedSegmentsCheckBoxMenuItem.setSelected(true);
-            mainWindow.m_unTranslatedAttributeSet = Styles.UNTRANSLATED;
-        } else {
-            mainWindow.m_translatedAttributeSet = Styles.PLAIN;
-            mainWindow.m_unTranslatedAttributeSet = Styles.PLAIN;
-        }
-        if (Preferences.isPreference(Preferences.DISPLAY_SEGMENT_SOURCES)) {
-            viewDisplaySegmentSourceCheckBoxMenuItem.setSelected(true);
-            mainWindow.m_displaySegmentSources = true;
-        }
+        viewMarkTranslatedSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkTranslated());
+        viewMarkUntranslatedSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkUntranslated());
+
+        viewDisplaySegmentSourceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isDisplaySegmentSources());
         
         onProjectStatusChanged(false);
     }

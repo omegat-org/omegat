@@ -104,6 +104,8 @@ public class EditorController implements IEditor {
 
     /** Object which store history of moving by segments. */
     private SegmentHistory history = new SegmentHistory();
+    
+    private final EditorSettings settings = new EditorSettings();
 
     public EditorController(final MainWindow mainWindow, final EditorTextArea editor) {
         this.mw = mainWindow;
@@ -159,13 +161,13 @@ public class EditorController implements IEditor {
                 int totalLength = 0;
 
                 AbstractDocument xlDoc = (AbstractDocument) editor.getDocument();
-                AttributeSet attributes = mw.m_translatedAttributeSet;
+                AttributeSet attributes = settings.getTranslatedAttributeSet();
 
                 // if the source should be displayed, too
-                AttributeSet srcAttributes = mw.m_unTranslatedAttributeSet;
+                AttributeSet srcAttributes = settings.getUntranslatedAttributeSet();
 
                 // how to display the source segment
-                if (mw.displaySegmentSources())
+                if (settings.isDisplaySegmentSources())
                     srcAttributes = Styles.GREEN;
 
                 for (int i = 0; i < xlEntries; i++) {
@@ -178,17 +180,17 @@ public class EditorController implements IEditor {
                     boolean doSpellcheck = false;
                     // set text and font
                     if (text.length() == 0) {
-                        if (!mw.displaySegmentSources()) {
+                        if (!settings.isDisplaySegmentSources()) {
                             // no translation available - use source text
                             text = ste.getSrcText();
-                            attributes = mw.m_unTranslatedAttributeSet;
+                            attributes = settings.getUntranslatedAttributeSet();
                         }
                     } else {
                         doSpellcheck = true;
-                        attributes = mw.m_translatedAttributeSet;
+                        attributes = settings.getTranslatedAttributeSet();
                     }
                     try {
-                        if (mw.displaySegmentSources()) {
+                        if (settings.isDisplaySegmentSources()) {
                             xlDoc.insertString(totalLength, sourceText + "\n", srcAttributes);
                             totalLength += sourceText.length() + 1;
                         }
@@ -206,7 +208,7 @@ public class EditorController implements IEditor {
 
                         totalLength += 2;
 
-                        if (mw.displaySegmentSources()) {
+                        if (settings.isDisplaySegmentSources()) {
                             text = sourceText + "\n" + text;
                         }
 
@@ -499,7 +501,7 @@ public class EditorController implements IEditor {
             synchronized (editor) {
                 AbstractDocument xlDoc = (AbstractDocument) editor.getDocument();
 
-                AttributeSet attributes = mw.m_translatedAttributeSet;
+                AttributeSet attributes = settings.getTranslatedAttributeSet();
 
                 int start = getTranslationStart();
                 int end = getTranslationEnd();
@@ -517,9 +519,9 @@ public class EditorController implements IEditor {
                     new_translation = new String();
                     doCheckSpelling = false;
 
-                    if (!mw.displaySegmentSources()) {
+                    if (!settings.isDisplaySegmentSources()) {
                         display_string = m_curEntry.getSrcText();
-                        attributes = mw.m_unTranslatedAttributeSet;
+                        attributes = settings.getUntranslatedAttributeSet();
                     } else {
                         display_string = new String();
                     }
@@ -528,10 +530,10 @@ public class EditorController implements IEditor {
                         new_translation = xlDoc.getText(start, end - start);
                         if (new_translation.equals(m_curEntry.getSrcText())
                                 && !Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)) {
-                            attributes = mw.m_unTranslatedAttributeSet;
+                            attributes = settings.getUntranslatedAttributeSet();
                             doCheckSpelling = false;
                         } else {
-                            attributes = mw.m_translatedAttributeSet;
+                            attributes = settings.getTranslatedAttributeSet();
                             flags = 0;
                         }
                     } catch (BadLocationException ble) {
@@ -552,7 +554,7 @@ public class EditorController implements IEditor {
                 docSeg.length = display_string.length() + "\n\n".length(); // NOI18N
                 String segmentSource = null;
 
-                if (mw.displaySegmentSources()) {
+                if (settings.isDisplaySegmentSources()) {
                     int increment = m_sourceDisplayLength + 1;
                     startOffset += increment;
                     //totalLen -= increment;
@@ -610,7 +612,7 @@ public class EditorController implements IEditor {
 
                             int supplement = 0;
 
-                            if (mw.displaySegmentSources()) {
+                            if (settings.isDisplaySegmentSources()) {
                                 supplement = ste.getSrcText().length() + "\n".length();
                             }
 
@@ -1005,8 +1007,8 @@ public class EditorController implements IEditor {
 
                 int result = 0;
 
-                AttributeSet attr = ((flags & IS_NOT_TRANSLATED) == IS_NOT_TRANSLATED ? mw.m_unTranslatedAttributeSet
-                        : mw.m_translatedAttributeSet);
+                AttributeSet attr = ((flags & IS_NOT_TRANSLATED) == IS_NOT_TRANSLATED ? settings
+                        .getUntranslatedAttributeSet() : settings.getTranslatedAttributeSet());
 
                 try {
                     xlDoc.remove(offset, length);
@@ -1167,5 +1169,12 @@ public class EditorController implements IEditor {
         synchronized (editor) {
             EditorSpellChecking.checkSpelling(full, this, editor);
         }
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public EditorSettings getSettings() {
+        return settings;
     }
 }

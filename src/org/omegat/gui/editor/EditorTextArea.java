@@ -386,15 +386,15 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                         e.getWhen(), 0, KeyEvent.VK_ENTER, '\n');
                 super.processKeyEvent(ke);
             }
-            else if (mw.m_advancer != keyCode)
+            else if (controller.getSettings().getAdvancerChar() != keyCode)
             {
                 return;	// swallow event - hopefully IME still works
             }
         }
         
-        if (keyCode == mw.m_advancer)
+        if (keyCode == controller.getSettings().getAdvancerChar())
         {
-            if (mw.m_advancer == KeyEvent.VK_ENTER)
+            if (controller.getSettings().getAdvancerChar() == KeyEvent.VK_ENTER)
             {
                 // Previous segment shortcut should be CMD+Enter on MacOSX
                 // http://sourceforge.net/support/tracker.php?aid=1468315
@@ -412,7 +412,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                         Core.getEditor().nextEntry();
                 }
             }
-            else if (mw.m_advancer == KeyEvent.VK_TAB)
+            else if (controller.getSettings().getAdvancerChar() == KeyEvent.VK_TAB)
             {
                 // ctrl-tab not caught
                 if (e.isShiftDown())

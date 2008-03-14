@@ -72,7 +72,7 @@ public interface IEditor {
      * Commits the translation.
      * 
      * @param forceCommit
-     *            If false, the translation will not be saved
+     *                If false, the translation will not be saved
      */
     void commitEntry(boolean forceCommit);
 
@@ -95,10 +95,10 @@ public interface IEditor {
      * Goto entry with specified number.
      * 
      * @param entryNum
-     *            entry number
+     *                entry number
      */
     void gotoEntry(int entryNum);
-    
+
     /**
      * TODO: change it to setup first entry on the 'onProjectLoaded' event
      */
@@ -109,7 +109,7 @@ public interface IEditor {
      * word.
      * 
      * @param newCase :
-     *            lower, title, upper or cycle
+     *                lower, title, upper or cycle
      */
     void changeCase(CHANGE_CASE_TO newCase);
 
@@ -133,19 +133,22 @@ public interface IEditor {
 
     /** inserts text at the cursor position */
     void insertText(String text);
-    
+
     /**
      * Clear history of moving by segments.
      */
     void clearHistory();
-    
+
     /**
      * Go to next segment from history.
      */
     void gotoHistoryForward();
-    
+
     /**
      * Go to previous segment from history.
      */
     void gotoHistoryBack();
+
+    /** Get settings instance. */
+    EditorSettings getSettings();
 }

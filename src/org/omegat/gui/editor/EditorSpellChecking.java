@@ -113,7 +113,7 @@ public class EditorSpellChecking {
             SpellChecker spellchecker = CommandThread.core.getSpellchecker();
 
             AttributeSet attributes;
-            AttributeSet correctAttributes = controller.mw.getTranslatedAttributeSet();
+            AttributeSet correctAttributes = controller.getSettings().getTranslatedAttributeSet();
             AttributeSet wrongAttributes = Styles.applyStyles(correctAttributes, Styles.MISSPELLED);
 
             AbstractDocument xlDoc = (AbstractDocument) editor.getDocument();
@@ -190,7 +190,7 @@ public class EditorSpellChecking {
                         public synchronized void actionPerformed(ActionEvent e) {
                             try {
                                 int pos = editor.getCaretPosition();
-                                xlDoc.replace(wordStart, word.length(), replacement, controller.mw
+                                xlDoc.replace(wordStart, word.length(), replacement, controller.getSettings()
                                         .getTranslatedAttributeSet());
                                 editor.setCaretPosition(pos);
                             } catch (BadLocationException exc) {
@@ -274,7 +274,7 @@ public class EditorSpellChecking {
                 AbstractDocument xlDoc = (AbstractDocument) editor.getDocument();
                 try {
                     // redraw the word in question
-                    xlDoc.replace(offset, word.length(), word, controller.mw.getTranslatedAttributeSet());
+                    xlDoc.replace(offset, word.length(), word, controller.getSettings().getTranslatedAttributeSet());
 
                     // Replace the errors in the rest of the document
 
@@ -302,7 +302,7 @@ public class EditorSpellChecking {
                         if (ste.isTranslated() && localCnt != localCur) {
                             // only translated and inactive made it
                             int translationStartOffset = segOffset;
-                            if (controller.mw.displaySegmentSources()) {
+                            if (controller.getSettings().isDisplaySegmentSources()) {
                                 // don't forget sources if they are displayed
                                 translationStartOffset += ste.getSrcText().length() + 1;
                             }
@@ -320,7 +320,7 @@ public class EditorSpellChecking {
                                     // redraw?
                                     if (tokenText.equals(word)) {
                                         xlDoc.replace(translationStartOffset + token.getOffset(), word.length(), word,
-                                                controller.mw.getTranslatedAttributeSet());
+                                                controller.getSettings().getTranslatedAttributeSet());
                                     }
                                 }
                             }
@@ -354,7 +354,7 @@ public class EditorSpellChecking {
             List<Token> wrongWordList = new ArrayList<Token>();
 
             AbstractDocument xlDoc = (AbstractDocument) editor.getDocument();
-            AttributeSet attributes = controller.mw.m_translatedAttributeSet;
+            AttributeSet attributes = controller.getSettings().getTranslatedAttributeSet();
 
             SpellChecker spellchecker = CommandThread.core.getSpellchecker();
 

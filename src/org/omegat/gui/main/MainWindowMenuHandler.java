@@ -27,7 +27,6 @@
 
 package org.omegat.gui.main;
 
-import java.awt.event.KeyEvent;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
@@ -56,7 +55,6 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
-import org.omegat.util.gui.Styles;
 
 /**
  * Handler for main menu items.
@@ -458,12 +456,7 @@ public class MainWindowMenuHandler {
     }
 
     public void viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed() {
-        Preferences.setPreference(Preferences.MARK_TRANSLATED_SEGMENTS,
-                mainWindow.menu.viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected());
-        if (mainWindow.menu.viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected())
-            mainWindow.m_translatedAttributeSet = Styles.TRANSLATED;
-        else
-            mainWindow.m_translatedAttributeSet = Styles.PLAIN;
+        Core.getEditor().getSettings().setMarkTranslated(mainWindow.menu.viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected());
 
         Core.getEditor().commitEntry(false);
         Core.getEditor().loadDocument();
@@ -471,12 +464,7 @@ public class MainWindowMenuHandler {
     }
 
     public void viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed() {
-        Preferences.setPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS,
-                mainWindow.menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
-        if (mainWindow.menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected())
-            mainWindow.m_unTranslatedAttributeSet = Styles.UNTRANSLATED;
-        else
-            mainWindow.m_unTranslatedAttributeSet = Styles.PLAIN;
+        Core.getEditor().getSettings().setMarkUntranslated(mainWindow.menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
 
         Core.getEditor().commitEntry(false);
         Core.getEditor().loadDocument();
@@ -486,9 +474,7 @@ public class MainWindowMenuHandler {
     public void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed() {
         Core.getEditor().commitEntry(false);
 
-        mainWindow.m_displaySegmentSources = mainWindow.menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected();
-
-        Preferences.setPreference(Preferences.DISPLAY_SEGMENT_SOURCES, mainWindow.m_displaySegmentSources);
+        Core.getEditor().getSettings().setDisplaySegmentSources(mainWindow.menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected());
 
         Core.getEditor().loadDocument();
         Core.getEditor().activateEntry();
@@ -499,12 +485,8 @@ public class MainWindowMenuHandler {
     }
 
     public void optionsTabAdvanceCheckBoxMenuItemActionPerformed() {
-        Preferences.setPreference(Preferences.USE_TAB_TO_ADVANCE, mainWindow.menu.optionsTabAdvanceCheckBoxMenuItem
-                .isSelected());
-        if (mainWindow.menu.optionsTabAdvanceCheckBoxMenuItem.isSelected())
-            mainWindow.m_advancer = KeyEvent.VK_TAB;
-        else
-            mainWindow.m_advancer = KeyEvent.VK_ENTER;
+        Core.getEditor().getSettings().setUseTabForAdvance(
+                mainWindow.menu.optionsTabAdvanceCheckBoxMenuItem.isSelected());
     }
 
     public void optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed() {

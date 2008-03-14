@@ -47,9 +47,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
-import javax.swing.text.AbstractDocument;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -58,7 +55,6 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
-import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.gui.editor.EditorTextArea;
 import org.omegat.gui.filelist.ProjectFrame;
 import org.omegat.gui.matches.MatchesTextArea;
@@ -69,11 +65,9 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.RequestPacket;
 import org.omegat.util.StaticUtils;
-import org.omegat.util.Token;
 import org.omegat.util.WikiGet;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.ResourcesUtil;
-import org.omegat.util.gui.Styles;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 
@@ -637,40 +631,12 @@ public class MainWindow extends JFrame implements IMainWindow, IProjectEventList
     /** The font for main window (source and target text) and for match and glossary windows */
     Font m_font;
     
-    public char	m_advancer;
-
     private String  m_activeProj;
 
     ProjectFrame m_projWin;
     public ProjectFrame getProjectFrame()
     {
         return m_projWin;
-    }
-    
-    /**
-     * the attribute set used for translated segments
-     */
-    public AttributeSet m_translatedAttributeSet;
-    
-    /**
-     * the attribute set used for translated segments
-     */
-    public AttributeSet m_unTranslatedAttributeSet;
-    
-    /**
-     * return the attribute set of translated segments
-     */
-    public AttributeSet getTranslatedAttributeSet() {
-        return m_translatedAttributeSet;
-    }
-    
-    /**
-     * display the segmetn sources or not
-     */
-    boolean m_displaySegmentSources;
-    
-    public boolean displaySegmentSources() {
-        return m_displaySegmentSources;
     }
     
     Set<SearchWindow> m_searches; // set of all open search windows

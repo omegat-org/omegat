@@ -235,6 +235,8 @@ public class MainWindowMenu implements ActionListener {
             viewDisplaySegmentSourceCheckBoxMenuItem.setSelected(true);
             mainWindow.m_displaySegmentSources = true;
         }
+        
+        onProjectStatusChanged(false);
     }
 
     /**

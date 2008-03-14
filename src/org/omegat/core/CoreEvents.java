@@ -74,13 +74,13 @@ public class CoreEvents {
     }
 
     /** Fire event. */
-    public static void fireProjectChange() {
+    public static void fireProjectChange(final IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
         Log.logInfoRB("LOG_INFO_EVENT_PROJECT_CHANGE");
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 synchronized (projectEventListeners) {
                     for (IProjectEventListener listener : projectEventListeners) {
-                        listener.onProjectChanged();
+                        listener.onProjectChanged(eventType);
                     }
                 }
             }

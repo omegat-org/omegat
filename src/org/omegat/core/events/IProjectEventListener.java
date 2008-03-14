@@ -30,8 +30,14 @@ package org.omegat.core.events;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IProjectEventListener {
+    /** Event type which happen for project. */
+    enum PROJECT_CHANGE_TYPE {
+        CLOSE, COMPILE, CREATE, LOAD, SAVE
+    }
+
     /**
-     * This method called when project status changed, i.e. new/open/save/close/compile.
+     * This method called when project status changed, i.e.
+     * new/open/save/close/compile.
      */
-    void onProjectChanged();
+    void onProjectChanged(PROJECT_CHANGE_TYPE eventType);
 }

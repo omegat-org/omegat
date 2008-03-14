@@ -41,6 +41,7 @@ import java.util.Set;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.LegacyTM;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.glossary.GlossaryManager;
 import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.SourceTextEntry;
@@ -373,7 +374,7 @@ public class CommandThread extends Thread implements IDataEngine
         projectClosing = true;
         cleanUp();
 
-        CoreEvents.fireProjectChange();
+        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE);
     }
     
     /** Builds all translated files and creates fresh TM files. */
@@ -462,7 +463,7 @@ public class CommandThread extends Thread implements IDataEngine
         }
         Core.getMainWindow().showStatusMessage(OStrings.getString("CT_COMPILE_DONE_MX"));
 
-        CoreEvents.fireProjectChange();
+        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
     }
     
     /** Saves the translation memory and preferences */
@@ -537,7 +538,7 @@ public class CommandThread extends Thread implements IDataEngine
         // update statistics
         Statistics.buildProjectStats(m_strEntryList, m_srcTextEntryArray, m_config, numberofTranslatedSegments);
 
-        CoreEvents.fireProjectChange();
+        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.SAVE);
     }
     
     /**
@@ -644,7 +645,7 @@ public class CommandThread extends Thread implements IDataEngine
             }
             
             m_config.buildProjFile();
-            CoreEvents.fireProjectChange();
+            CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.CREATE);
         }
         catch(IOException e)
         {
@@ -772,7 +773,7 @@ public class CommandThread extends Thread implements IDataEngine
         
         projectLoaded = true;
         
-        CoreEvents.fireProjectChange();
+        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
 
         return true;
     }

@@ -56,7 +56,6 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.StringEntry;
-import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.spellchecker.SpellChecker;
@@ -90,7 +89,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class MainWindow extends JFrame implements IMainWindow, IProjectEventListener, IApplicationEventListener {
+public class MainWindow extends JFrame implements IMainWindow, IProjectEventListener {
     public final MainWindowMenu menu;
     
     /** Creates new form MainWindow */
@@ -129,17 +128,9 @@ public class MainWindow extends JFrame implements IMainWindow, IProjectEventList
         
         MainWindowUI.loadInstantStart(editorScroller, editor);
         
-        CoreEvents.registerApplicationEventListener(this);
         CoreEvents.registerProjectChangeListener(this);
     }
     
-    public void onApplicationStartup() {
-        onProjectChanged();
-    }
-    
-    public void onApplicationShutdown() {
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -282,7 +273,7 @@ public class MainWindow extends JFrame implements IMainWindow, IProjectEventList
         showLengthMessage(OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
     }
     
-    public void onProjectChanged() {
+    public void onProjectChanged(final PROJECT_CHANGE_TYPE eventType) {
         if (Core.getDataEngine().isProjectLoaded()) {
             menu.onProjectStatusChanged(true);
         } else {

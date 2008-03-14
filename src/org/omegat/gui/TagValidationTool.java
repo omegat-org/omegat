@@ -88,10 +88,12 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         m_tagWin.setFont(newFont);
     }
 
-    public void onProjectChanged() {
-        if (!Core.getDataEngine().isProjectLoaded()) {
+    public void onProjectChanged(final IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
+        switch (eventType) {
+        case CLOSE:
             if (m_tagWin != null)
                 m_tagWin.dispose();
+            break;
         }
     }
     

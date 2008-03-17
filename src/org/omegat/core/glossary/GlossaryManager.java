@@ -36,9 +36,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.omegat.core.data.StringEntry;
+import org.omegat.core.matching.Tokenizer;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
 
 /**
@@ -166,7 +166,7 @@ public class GlossaryManager
             String glosStr = glosEntry.getSrcText();
             //List glosTokens = new ArrayList();
             //int glosTokensN = StaticUtils.tokenizeText(glosStr, glosTokens);
-            List<Token> glosTokens = StaticUtils.tokenizeText(glosStr);
+            List<Token> glosTokens = Tokenizer.tokenizeText(glosStr);
             int glosTokensN = glosTokens.size();
             if (glosTokensN==0)
                 continue;

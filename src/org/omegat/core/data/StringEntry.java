@@ -35,6 +35,7 @@ import java.util.TreeSet;
 import org.omegat.core.glossary.GlossaryEntry;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
+import org.omegat.core.matching.Tokenizer;
 import org.omegat.util.OConsts;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
@@ -71,7 +72,7 @@ public class StringEntry
     /** Returns the tokens of this entry's source string */
     public List<Token> getSrcTokenList()
     {
-        return StaticUtils.tokenizeText(m_srcText); // HP: using cache in StaticUtils now
+        return Tokenizer.tokenizeText(m_srcText); // HP: using cache in StaticUtils now
     }
     
     /**
@@ -81,7 +82,7 @@ public class StringEntry
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
     public List<Token> getSrcTokenListAll() {
-        return StaticUtils.tokenizeText(m_srcText, true);
+        return Tokenizer.tokenizeText(m_srcText, true);
     }
 
     /** List of SourceTextEntry-es this string entry belongs to. */
@@ -170,7 +171,7 @@ public class StringEntry
     /** Returns the tokens of this entry's translation */
     public List<Token> getTransTokenList()
     {
-        return StaticUtils.tokenizeText(m_translation);
+        return Tokenizer.tokenizeText(m_translation);
     }
     
     /**

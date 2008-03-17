@@ -43,11 +43,11 @@ import javax.swing.text.Utilities;
 
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.matching.SourceTextEntry;
+import org.omegat.core.matching.Tokenizer;
 import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
 import org.omegat.util.gui.Styles;
 
@@ -108,7 +108,7 @@ public class EditorSpellChecking {
             String spellcheckBase = editor.getText(spellcheckStart, spellcheckEnd - spellcheckStart);
 
             // find the tokens
-            List<Token> tokenList = StaticUtils.tokenizeText(spellcheckBase);
+            List<Token> tokenList = Tokenizer.tokenizeText(spellcheckBase);
 
             SpellChecker spellchecker = CommandThread.core.getSpellchecker();
 
@@ -314,7 +314,7 @@ public class EditorSpellChecking {
                                 // split the text into tokens. If there is a
                                 // match,
                                 // redraw it
-                                List<Token> tokenList = StaticUtils.tokenizeText(translation);
+                                List<Token> tokenList = Tokenizer.tokenizeText(translation);
                                 for (Token token : tokenList) {
                                     String tokenText = token.getTextFromString(translation);
                                     // redraw?
@@ -350,7 +350,7 @@ public class EditorSpellChecking {
             final EditorTextArea editor) {
         synchronized (controller.mw) {
             // we have the translation and it should be spellchecked
-            List<Token> wordlist = StaticUtils.tokenizeText(text);
+            List<Token> wordlist = Tokenizer.tokenizeText(text);
             List<Token> wrongWordList = new ArrayList<Token>();
 
             AbstractDocument xlDoc = (AbstractDocument) editor.getDocument();

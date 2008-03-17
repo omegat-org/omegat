@@ -22,10 +22,12 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.util;
+package org.omegat.core.matching;
 
 import java.text.BreakIterator;
 import java.util.LinkedList;
+
+import org.omegat.util.PatternConsts;
 
 /**
  * BreakIterator for word-breaks with OmegaT heuristics,

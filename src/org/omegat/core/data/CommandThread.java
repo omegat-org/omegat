@@ -44,6 +44,7 @@ import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.glossary.GlossaryManager;
 import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.SourceTextEntry;
+import org.omegat.core.matching.Tokenizer;
 import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
@@ -713,7 +714,7 @@ public class CommandThread extends Thread implements IDataEngine
             return false;
 
         // reset token list cache
-        StaticUtils.clearTokenCache();
+        Tokenizer.clearTokenCache();
         
         projectClosing = false;
         

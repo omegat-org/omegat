@@ -37,7 +37,6 @@ import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.matching.Tokenizer;
 import org.omegat.util.OConsts;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
 
 

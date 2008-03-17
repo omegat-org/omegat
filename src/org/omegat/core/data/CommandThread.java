@@ -1107,6 +1107,15 @@ public class CommandThread extends Thread implements IDataEngine
         torun.start();
     }
     
+    /**
+     * {@inheritDoc}
+     */
+    public synchronized void iterateByAllEntries(final EntriesIteratorCallback callback) {
+        for (StringEntry en : m_strEntryList) {
+            callback.onEntry(en);
+        }
+    }
+    
     private LinkedList<RequestPacket> m_requestQueue;
     
     // project name of strings loaded from TM - store globally so to not

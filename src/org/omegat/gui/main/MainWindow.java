@@ -545,7 +545,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             return;
         
         StringEntry curEntry = Core.getEditor().getCurrentEntry().getStrEntry();
-        matches.setMatches(curEntry.getNearListTranslated());
+        Core.getMatcher().showMatches(curEntry);
     }
     
     /**
@@ -647,7 +647,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     public EditorTextArea editor;
     
     DockableScrollPane matchesScroller;
-    MatchesTextArea matches;
+    public MatchesTextArea matches;
     
     DockableScrollPane glossaryScroller;
     GlossaryTextArea glossary;

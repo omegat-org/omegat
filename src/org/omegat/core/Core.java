@@ -30,6 +30,7 @@ import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.main.MainWindow;
+import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.tagvalidation.ITagValidation;
 import org.omegat.gui.tagvalidation.TagValidationTool;
 
@@ -43,6 +44,7 @@ public class Core {
     private static IMainWindow mainWindow;
     private static IEditor editor;
     private static ITagValidation tagValidation;
+    private static IMatcher matcher;
 
     /** Get data engine instance. */
     public static IDataEngine getDataEngine() {
@@ -62,6 +64,11 @@ public class Core {
     /** Get tag validation component instance. */
     public static ITagValidation getTagValidation() {
         return tagValidation;
+    }
+
+    /** Get matcher component instance. */
+    public static IMatcher getMatcher() {
+        return matcher;
     }
 
     /**
@@ -85,5 +92,6 @@ public class Core {
         mainWindow = me;
         editor = new EditorController(me, me.editor);
         tagValidation = new TagValidationTool(me);
+        matcher = me.matches;
     }
 }

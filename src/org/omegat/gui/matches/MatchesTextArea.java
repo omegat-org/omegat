@@ -34,10 +34,12 @@ import java.util.List;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.StringData;
+import org.omegat.core.data.StringEntry;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
@@ -51,7 +53,7 @@ import org.omegat.util.gui.Styles;
  * @author Maxym Mykhalchuk
  * @author Zoltan Bartko
  */
-public class MatchesTextArea extends javax.swing.JTextPane implements MouseListener
+public class MatchesTextArea extends JTextPane implements IMatcher, MouseListener
 {
     private List<NearString> matches;
     private List<Integer> delimiters;
@@ -59,6 +61,8 @@ public class MatchesTextArea extends javax.swing.JTextPane implements MouseListe
     private StringBuffer displayBuffer;
     
     private MainWindow mw;
+    
+    protected StringEntry processedEntry;
     
     /** Creates new form MatchGlossaryPane */
     public MatchesTextArea(MainWindow mw)
@@ -69,11 +73,20 @@ public class MatchesTextArea extends javax.swing.JTextPane implements MouseListe
         addMouseListener(this);
     }
     
+    /**
+     * {@inheritDoc}
+     */
+    public void showMatches(final StringEntry entry) {
+        this.processedEntry = entry;
+        new FindMatchesThread(this, entry).start();
+        setMatches(entry.getNearListTranslated());
+    }
+    
     /** 
      * Sets the list of fuzzy matches to show in the pane.
      * Each element of the list should be an instance of {@link NearString}.
      */
-    public void setMatches(List<NearString> matches)
+    private void setMatches(List<NearString> matches)
     {
         this.matches = matches;
         activeMatch = -1;

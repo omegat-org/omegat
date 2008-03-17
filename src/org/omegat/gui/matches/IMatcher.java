@@ -23,6 +23,8 @@
  **************************************************************************/
 package org.omegat.gui.matches;
 
+import org.omegat.core.data.StringEntry;
+
 /**
  * Interface for access to editor functionality.
  * 
@@ -30,7 +32,12 @@ package org.omegat.gui.matches;
  */
 public interface IMatcher {
     /**
+     * Show matches for specified entry.
+     */
+    void showMatches(StringEntry entry);
+    
+    /**
      * Get translation of best matched entry, or null if there is no matches.
      */
-    String getMatchedTranslation();
+    // String getMatchedTranslation();
 }

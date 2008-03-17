@@ -22,67 +22,43 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **************************************************************************/
 
-package org.omegat.core.data;
+package org.omegat.gui.matches;
 
-import java.io.IOException;
-import java.io.InterruptedIOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.omegat.filters2.TranslationException;
+import org.omegat.core.Core;
+import org.omegat.core.data.IDataEngine;
+import org.omegat.core.data.StringEntry;
 
 /**
- * Interface for access to data engine funtionality.
+ * Class for find matches and show result in the matches pane.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public interface IDataEngine {
-    /**
-     * Create new project.
-     */
-    void createProject();
+public class FindMatchesThread extends Thread {
+    private final MatchesTextArea matcherController;
+    private final StringEntry processedEntry;
 
-    /**
-     * Load project.
-     */
-    boolean loadProject(String projectDir) throws IOException, InterruptedIOException, TranslationException;
+    public FindMatchesThread(final MatchesTextArea matcherController, final StringEntry entry) {
+        this.matcherController = matcherController;
+        this.processedEntry = entry;
+    }
 
-    /**
-     * Save project.
-     */
-    void saveProject();
-
-    /**
-     * Close project.
-     */
-    void closeProject();
-
-    /**
-     * Create translated documents.
-     */
-    void compileProject() throws IOException, TranslationException;
-
-    /**
-     * Get project properties.
-     * 
-     * @return project properties
-     */
-    ProjectProperties getProjectProperties();
-
-    /**
-     * Get project loaded status.
-     * 
-     * @return true if project loaded
-     */
-    boolean isProjectLoaded();
-
-    /**
-     * Iterate for all entries in project.
-     */
-    void iterateByAllEntries(EntriesIteratorCallback callback);
-
-    /**
-     * Callback for entries iterator.
-     */
-    public interface EntriesIteratorCallback {
-        void onEntry(StringEntry entry);
+    @Override
+    public void run() {
+        final List<StringEntry> entries = new ArrayList<StringEntry>(5000);
+        Core.getDataEngine().iterateByAllEntries(new IDataEngine.EntriesIteratorCallback() {
+            public void onEntry(StringEntry entry) {
+                entries.add(entry);
+            }
+        });
+        for (StringEntry en : entries) {
+            if (matcherController.processedEntry != processedEntry) {
+                // Processed entry changed, because user moved to other entry.
+                // I.e. we don't need to find and display data for old entry.
+                return;
+            }            
+        }
     }
 }

@@ -92,6 +92,8 @@ public class MainWindowMenu implements ActionListener {
         // Get item name from actionCommand.
         String action = menuItem.getActionCommand();
 
+        Log.logInfoRB("LOG_MENU_CLICK", action);
+        
         // Find method by item name.
         String methodName = action + "ActionPerformed";
         Method method = null;

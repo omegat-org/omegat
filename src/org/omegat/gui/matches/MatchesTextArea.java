@@ -118,11 +118,11 @@ public class MatchesTextArea extends javax.swing.JTextPane implements MouseListe
         
         NearString match = matches.get(activeMatch);
         // List tokens = match.str.getSrcTokenList();
-        List<Token> tokens = match.str.getSrcTokenListAll(); // fix for bug 1586397
+        Token[] tokens = match.str.getSrcTokenListAll(); // fix for bug 1586397
         byte[] attributes = match.attr;
-        for (int i=0; i<tokens.size(); i++)
+        for (int i=0; i<tokens.length; i++)
         {
-            Token token = tokens.get(i);
+            Token token = tokens[i];
             int tokstart = start + 3 + token.getOffset();
             int tokend = start + 3 + token.getOffset() + token.getLength();
             select(tokstart, tokend);

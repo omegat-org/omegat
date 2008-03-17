@@ -67,9 +67,9 @@ public class FuzzyMatcher
     /**
      * Builds the similarity data for color highlight in match window.
      */
-    private byte[] buildSimilarityData(List<Token> sourceTokens, List<Token> matchTokens)
+    private byte[] buildSimilarityData(Token[] sourceTokens, Token[] matchTokens)
     {
-        int len = matchTokens.size();
+        int len = matchTokens.length;
         byte[] result = new byte[len];
         
         boolean leftfound = true;
@@ -79,11 +79,11 @@ public class FuzzyMatcher
             
             Token righttoken = null;
             if( i+1<len )
-                righttoken = matchTokens.get(i+1);
-            boolean rightfound = (i+1==len) || sourceTokens.contains(righttoken);
+                righttoken = matchTokens[i+1];
+            boolean rightfound = (i + 1 == len) || Tokenizer.isContains(sourceTokens, righttoken);
             
-            Token token = matchTokens.get(i);
-            boolean found = sourceTokens.contains(token);
+            Token token = matchTokens[i];
+            boolean found = Tokenizer.isContains(sourceTokens, token);
             
             if( found && (!leftfound || !rightfound) )
                 result[i] = StringData.PAIR;
@@ -94,7 +94,7 @@ public class FuzzyMatcher
         }
         return result;
     }
-    
+        
     /**
      * Builds the list of fuzzy matches
      * between the strings of the source text(s).
@@ -127,11 +127,11 @@ public class FuzzyMatcher
             }
             
             StringEntry strEntry = strings.get(i);
-            List<Token> strTokens = strEntry.getSrcTokenList();
-            int strTokensSize = strTokens.size();
+            Token[] strTokens = strEntry.getSrcTokenList();
+            int strTokensSize = strTokens.length;
             if( strTokensSize==0 ) // HP: maybe also test on strTokensComplete.size(), if strTokensSize is 0
                 continue;          // HP: perhaps that would result in better number/non-word matching too
-            List<Token> strTokensAll = strEntry.getSrcTokenListAll(); // HP: includes non-word tokens
+            Token[] strTokensAll = strEntry.getSrcTokenListAll(); // HP: includes non-word tokens
             
             for(int j=i+1; j<total; j++)
             {
@@ -140,10 +140,10 @@ public class FuzzyMatcher
                 if( candEntry==null )
                     continue;
 //long timeTLStart = System.currentTimeMillis();
-                List<Token> candTokens = candEntry.getSrcTokenList();
+                Token[] candTokens = candEntry.getSrcTokenList();
 //long timeTLEnd = System.currentTimeMillis();
 //timeTLTotal += (timeTLEnd - timeTLStart);
-                int candTokensSize = candTokens.size();
+                int candTokensSize = candTokens.length;
                 if( candTokensSize==0 )
                     continue;
                 
@@ -161,15 +161,15 @@ public class FuzzyMatcher
                 // list of tokens, including numbers, tags, and other non-word tokens
                 // fix for bug 1449988
 //long timeTLAStart = System.currentTimeMillis();
-                List<Token> candTokensAll = candEntry.getSrcTokenListAll();
+                Token[] candTokensAll = candEntry.getSrcTokenListAll();
 //long timeTLAEnd = System.currentTimeMillis();
 //timeTLATotal += (timeTLAEnd - timeTLAStart);
 //long timeLDAStart = System.currentTimeMillis();
                 int ldAll = LevenshteinDistance.compute(strTokensAll, candTokensAll);
 //long timeLDAEnd = System.currentTimeMillis();
 //timeLDATotal += (timeLDAEnd - timeLDAStart);
-                int simAdjusted = (100 * (Math.max(strTokensAll.size(), candTokensAll.size()) - ldAll)) /
-                        Math.max(strTokensAll.size(), candTokensAll.size());
+                int simAdjusted = (100 * (Math.max(strTokensAll.length, candTokensAll.length) - ldAll)) /
+                        Math.max(strTokensAll.length, candTokensAll.length);
                 // end fix 1449988
 
                 //byte[] similarityData = buildSimilarityData(strTokens, candTokens);
@@ -225,16 +225,16 @@ public class FuzzyMatcher
             }
             
             StringEntry strEntry = tmstrings.get(i);
-            List<Token> strTokens = strEntry.getSrcTokenList();
-            int strTokensSize = strTokens.size();
+            Token[] strTokens = strEntry.getSrcTokenList();
+            int strTokensSize = strTokens.length;
             if( strTokensSize==0 ) // HP: maybe also test on strTokensComplete.size(), if strTokensSize is 0
                 continue;          // HP: perhaps that would result in better number/non-word matching too
-            List<Token> strTokensAll = strEntry.getSrcTokenListAll(); // HP: includes non-word tokens
+            Token[] strTokensAll = strEntry.getSrcTokenListAll(); // HP: includes non-word tokens
             
             for(StringEntry candEntry : strings)
             {
-                List<Token> candTokens = candEntry.getSrcTokenList();
-                int candTokensSize = candTokens.size();
+                Token[] candTokens = candEntry.getSrcTokenList();
+                int candTokensSize = candTokens.length;
                 if( candTokensSize==0 )
                     continue;
                 
@@ -248,10 +248,10 @@ public class FuzzyMatcher
                 // determine Levenshtein distance/adjusted similarity across the complete
                 // list of tokens, including numbers, tags, and other non-word tokens
                 // fix for bug 1449988
-                List<Token> candTokensAll = candEntry.getSrcTokenListAll();
+                Token[] candTokensAll = candEntry.getSrcTokenListAll();
                 int ldAll = LevenshteinDistance.compute(strTokensAll, candTokensAll);
-                int simAdjusted = (100 * (Math.max(strTokensAll.size(), candTokensAll.size()) - ldAll)) /
-                        Math.max(strTokensAll.size(), candTokensAll.size());
+                int simAdjusted = (100 * (Math.max(strTokensAll.length, candTokensAll.length) - ldAll)) /
+                        Math.max(strTokensAll.length, candTokensAll.length);
                 // end fix 1449988
 
                 //byte[] similarityData = buildSimilarityData(candTokens, strTokens);

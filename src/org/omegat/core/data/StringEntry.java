@@ -70,7 +70,7 @@ public class StringEntry
     }
     
     /** Returns the tokens of this entry's source string */
-    public List<Token> getSrcTokenList()
+    public Token[] getSrcTokenList()
     {
         return Tokenizer.tokenizeText(m_srcText); // HP: using cache in StaticUtils now
     }
@@ -81,7 +81,7 @@ public class StringEntry
       *
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
-    public List<Token> getSrcTokenListAll() {
+    public Token[] getSrcTokenListAll() {
         return Tokenizer.tokenizeText(m_srcText, true);
     }
 
@@ -169,7 +169,7 @@ public class StringEntry
     //	issues
 
     /** Returns the tokens of this entry's translation */
-    public List<Token> getTransTokenList()
+    public Token[] getTransTokenList()
     {
         return Tokenizer.tokenizeText(m_translation);
     }

@@ -28,6 +28,7 @@ package org.omegat.core.matching;
 
 import java.text.BreakIterator;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,11 +53,15 @@ public class Tokenizer {
       * memory is saved. Token lists are not saved when
       * all tokens are requested. Again to save memory.
       */
-    private static Map<String, List<Token>> tokenCache = new java.util.Hashtable<String, List<Token>>();
+    private static Map<String, Token[]> tokenCache = new HashMap<String, Token[]>(5000);
+    
+    private static final Token[] EMPTY_TOKENS_LIST = new Token[0];
 
     /** Removes all token lists from the cache. */
     public static void clearTokenCache() {
-        tokenCache.clear();
+        synchronized (tokenCache) {
+            tokenCache.clear();
+        }
     }
 
     /**
@@ -74,7 +79,7 @@ public class Tokenizer {
       * @param str string to tokenize
       * @return List of all tokens (words only)
       */
-    public static List<Token> tokenizeText(String str) {
+    public static Token[] tokenizeText(String str) {
         return tokenizeText(str, false);
     }
 
@@ -92,28 +97,28 @@ public class Tokenizer {
       *
       * @param str string to tokenize
       * @param all If true, numbers, tags, and other non-word tokens are included in the list
-      * @return List of tokens (all)
+      * @return array of tokens (all)
       */
-    public static List<Token> tokenizeText(String str, boolean all) {
+    public static Token[] tokenizeText(String str, boolean all) {
+        if (str.length()==0) {
+            // fixes bug nr. 1382810 (StringIndexOutOfBoundsException)
+            return EMPTY_TOKENS_LIST;
+        }
+        
         // check if we've already tokenized this string
         // no sense in retokenizing identical strings
         // don't check if the caller wants all tokens
-        List<Token> tokens = null;
         if (!all) {
-            tokens = tokenCache.get(str);
-            if (tokens != null)
-                return tokens;
+            Token[] result;
+            synchronized (tokenCache) {
+                result = tokenCache.get(str);
+            }
+            if (result != null)
+                return result;
         }
 
-        // create a new token list
-        // and put it in the cache if not all tokens are requested
-        tokens = new ArrayList<Token>();
-        if (!all)
-            tokenCache.put(str, tokens);
-
-        // fixes bug nr. 1382810 (StringIndexOutOfBoundsException)
-        if (str.length() == 0)
-            return tokens;
+        // create a new token list        
+        List<Token> tokens = new ArrayList<Token>();
 
         // get a word breaker
         str = str.toLowerCase(); // HP: possible error, this makes "A" and "a" match, CHECK AND FIX
@@ -143,8 +148,17 @@ public class Tokenizer {
                 tokens.add(token);
             }
         }
+        
+        Token[] result = tokens.toArray(new Token[tokens.size()]);
 
-        return tokens;
+        // put result in the cache if not all tokens are requested
+        if (!all) {
+            synchronized (tokenCache) {
+                tokenCache.put(str, result);
+            }
+        }
+
+        return result;
     }
     
     /** Returns an iterator to break sentences into words. */
@@ -164,5 +178,29 @@ public class Tokenizer {
         // exceptions. By returning a new WordIterator each time
         // one is requested, this problem is solved, and it doesn't
         // hurt performance either.
+    }    
+
+    /**
+     * Check if array contains token.
+     */
+    public static boolean isContains(Token[] tokensList, Token tokenForCheck) {
+        for (Token t : tokensList) {
+            if (tokenForCheck.equals(t)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Check if array contains other array.
+     */
+    public static boolean isContainsAll(Token[] tokensList, Token[] listForFind) {
+        for (Token t : listForFind) {
+            if (!isContains(tokensList, t)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

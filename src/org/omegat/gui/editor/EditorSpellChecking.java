@@ -107,9 +107,6 @@ public class EditorSpellChecking {
 
             String spellcheckBase = editor.getText(spellcheckStart, spellcheckEnd - spellcheckStart);
 
-            // find the tokens
-            List<Token> tokenList = Tokenizer.tokenizeText(spellcheckBase);
-
             SpellChecker spellchecker = CommandThread.core.getSpellchecker();
 
             AttributeSet attributes;
@@ -125,7 +122,7 @@ public class EditorSpellChecking {
             xlDoc.replace(spellcheckStart, spellcheckEnd - spellcheckStart, spellcheckBase, correctAttributes);
 
             // iterate!
-            for (Token token : tokenList) {
+            for (Token token : Tokenizer.tokenizeText(spellcheckBase)) {
                 String word = token.getTextFromString(spellcheckBase);
                 // is it correct?
                 if (!spellchecker.isCorrect(word)) {
@@ -314,8 +311,7 @@ public class EditorSpellChecking {
                                 // split the text into tokens. If there is a
                                 // match,
                                 // redraw it
-                                List<Token> tokenList = Tokenizer.tokenizeText(translation);
-                                for (Token token : tokenList) {
+                                for (Token token : Tokenizer.tokenizeText(translation)) {
                                     String tokenText = token.getTextFromString(translation);
                                     // redraw?
                                     if (tokenText.equals(word)) {
@@ -350,7 +346,7 @@ public class EditorSpellChecking {
             final EditorTextArea editor) {
         synchronized (controller.mw) {
             // we have the translation and it should be spellchecked
-            List<Token> wordlist = Tokenizer.tokenizeText(text);
+            Token[] wordlist = Tokenizer.tokenizeText(text);
             List<Token> wrongWordList = new ArrayList<Token>();
 
             AbstractDocument xlDoc = (AbstractDocument) editor.getDocument();

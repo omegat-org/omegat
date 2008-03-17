@@ -24,7 +24,6 @@
 
 package org.omegat.core.matching;
 
-import java.util.List;
 import org.omegat.util.OStrings;
 import org.omegat.util.Token;
 
@@ -111,13 +110,13 @@ class LevenshteinDistance
      * For perfomance reasons the maximal number of compared items is
      * {@link #MAX_N}.
      */
-    public static int compute(List<Token> s, List<Token> t)
+    public static int compute(Token[] s, Token[] t)
     {
         if( s==null || t==null )
             throw new IllegalArgumentException(OStrings.getString("LD_NULL_ARRAYS_ERROR"));
         
-        int n = s.size(); // length of s
-        int m = t.size(); // length of t
+        int n = s.length; // length of s
+        int m = t.length; // length of t
         
         if( n==0 )
             return m;
@@ -144,13 +143,13 @@ class LevenshteinDistance
         
         for (j = 1; j<=m; j++)
         {
-            t_j = t.get(j-1);
+            t_j = t[j-1];
             d[0] = j;
             
             Token s_i = null; // ith object of s
             for (i=1; i<=n; i++)
             {
-                s_i = s.get(i-1);
+                s_i = s[i-1];
                 cost = s_i.equals(t_j) ? (short)0 : (short)1;
                 // minimum of cell to the left+1, to the top+1, diagonally left and up +cost
                 d[i] = minimum(d[i-1]+1, p[i]+1, p[i-1]+cost);

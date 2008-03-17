@@ -166,19 +166,18 @@ public class GlossaryManager
             String glosStr = glosEntry.getSrcText();
             //List glosTokens = new ArrayList();
             //int glosTokensN = StaticUtils.tokenizeText(glosStr, glosTokens);
-            List<Token> glosTokens = Tokenizer.tokenizeText(glosStr);
-            int glosTokensN = glosTokens.size();
+            Token[] glosTokens = Tokenizer.tokenizeText(glosStr);
+            int glosTokensN = glosTokens.length;
             if (glosTokensN==0)
                 continue;
             for(StringEntry strEntry : strEntryList)
             {
-                List<Token> strTokens = strEntry.getSrcTokenList();
-                if (strTokens.containsAll(glosTokens))
+                Token[] strTokens = strEntry.getSrcTokenList();
+                if (Tokenizer.isContainsAll(strTokens, glosTokens));
                     strEntry.addGlossaryEntry(glosEntry);
             }
         }
     }
-
-    private List<GlossaryEntry> glossaryEntries;
     
+    private List<GlossaryEntry> glossaryEntries;    
 }

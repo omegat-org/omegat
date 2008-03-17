@@ -110,7 +110,7 @@
   
   Other enhancements:
 
-  - New Arabic localisation (readme, instant start)
+  - New Arabic localisation (UI, readme, instant start)
 
   Bug fixes:
 

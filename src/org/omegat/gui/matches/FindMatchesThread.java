@@ -125,6 +125,7 @@ public class FindMatchesThread extends Thread {
         }
 
         long after = System.currentTimeMillis();
+        // TODO: remove it. Only for show matching speed
         System.out.println("Time for find matches: " + (after - before));
 
         SwingUtilities.invokeLater(new Runnable() {

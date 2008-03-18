@@ -99,8 +99,8 @@ public class Tokenizer {
       * @param all If true, numbers, tags, and other non-word tokens are included in the list
       * @return array of tokens (all)
       */
-    public static Token[] tokenizeText(String str, boolean all) {
-        if (str.length()==0) {
+    public static Token[] tokenizeText(final String strOrig, final boolean all) {
+        if (strOrig.length()==0) {
             // fixes bug nr. 1382810 (StringIndexOutOfBoundsException)
             return EMPTY_TOKENS_LIST;
         }
@@ -111,7 +111,7 @@ public class Tokenizer {
         if (!all) {
             Token[] result;
             synchronized (tokenCache) {
-                result = tokenCache.get(str);
+                result = tokenCache.get(strOrig);
             }
             if (result != null)
                 return result;
@@ -121,7 +121,7 @@ public class Tokenizer {
         List<Token> tokens = new ArrayList<Token>();
 
         // get a word breaker
-        str = str.toLowerCase(); // HP: possible error, this makes "A" and "a" match, CHECK AND FIX
+        String str = strOrig.toLowerCase(); // HP: possible error, this makes "A" and "a" match, CHECK AND FIX
         BreakIterator breaker = getWordBreaker();
         breaker.setText(str);
 
@@ -154,7 +154,7 @@ public class Tokenizer {
         // put result in the cache if not all tokens are requested
         if (!all) {
             synchronized (tokenCache) {
-                tokenCache.put(str, result);
+                tokenCache.put(strOrig, result);
             }
         }
 

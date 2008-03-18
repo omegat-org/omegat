@@ -784,7 +784,7 @@ public class EditorController implements IEditor {
 
                 String selectionText = editor.getText(start, end - start);
                 // tokenize the selection
-                Token[] tokenList = Tokenizer.tokenizeText(selectionText);
+                Token[] tokenList = Tokenizer.tokenizeTextNoCache(selectionText);
 
                 StringBuffer buffer = new StringBuffer(selectionText);
 

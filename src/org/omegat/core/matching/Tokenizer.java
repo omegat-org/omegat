@@ -82,7 +82,15 @@ public class Tokenizer {
     public static Token[] tokenizeText(String str) {
         return tokenizeTextWithCache(str);
     }
-    
+
+    /**
+     * Breaks a string into tokens (see
+     * {@link #tokenizeTextNoCache(String, boolean)}) and don't cache results.
+     */
+    public static Token[] tokenizeTextNoCache(String str) {
+        return tokenizeTextNoCache(str, false);
+    }
+
     /**
      * Breaks a string into tokens (see {@link #tokenizeTextNoCache(String, boolean)}) and cache results.
      * 

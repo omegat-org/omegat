@@ -76,7 +76,7 @@ public class StringEntry
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
     public Token[] getSrcTokenListAll() {
-        return Tokenizer.tokenizeText(m_srcText, true);
+        return Tokenizer.tokenizeTextNoCache(m_srcText, true);
     }
 
     /** List of SourceTextEntry-es this string entry belongs to. */

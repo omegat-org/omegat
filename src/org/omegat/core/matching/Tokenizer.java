@@ -80,45 +80,64 @@ public class Tokenizer {
       * @return List of all tokens (words only)
       */
     public static Token[] tokenizeText(String str) {
-        return tokenizeText(str, false);
+        return tokenizeTextWithCache(str);
+    }
+    
+    /**
+     * Breaks a string into tokens (see {@link #tokenizeTextNoCache(String, boolean)}) and cache results.
+     * 
+     * Check if we've already tokenized this string, because no sense in retokenizing identical strings.
+     * 
+     * Don't check if the caller wants all tokens.
+     * 
+     * @param strOrig
+     * @return
+     */
+    public static Token[] tokenizeTextWithCache(final String strOrig) {
+        Token[] result;
+        synchronized (tokenCache) {
+            result = tokenCache.get(strOrig);
+        }
+        if (result != null)
+            return result;
+
+        result = tokenizeTextNoCache(strOrig, false);
+
+        // put result in the cache
+        synchronized (tokenCache) {
+            tokenCache.put(strOrig, result);
+        }
+        return result;
     }
 
     /**
-      * Breaks a string into tokens.
-      * <p>
-      * Examples:
-      * <ul>
-      * <li> This is a semi-good way. -> "this", "is", "a", "semi-good", "way"
-      * <li> Fine, thanks, and you? -> "fine", "thanks", "and", "you"
-      * <li> C&all this action -> "call", "this", "action" ('&' is eaten)
-      * </ul>
-      * <p>
-      * OmegaT tags and other non-word tokens are skipped if the parameter "all" is false.
-      *
-      * @param str string to tokenize
-      * @param all If true, numbers, tags, and other non-word tokens are included in the list
-      * @return array of tokens (all)
-      */
-    public static Token[] tokenizeText(final String strOrig, final boolean all) {
+     * Breaks a string into tokens.
+     * <p>
+     * Examples:
+     * <ul>
+     * <li> This is a semi-good way. -> "this", "is", "a", "semi-good", "way"
+     * <li> Fine, thanks, and you? -> "fine", "thanks", "and", "you"
+     * <li> C&all this action -> "call", "this", "action" ('&' is eaten)
+     * </ul>
+     * <p>
+     * OmegaT tags and other non-word tokens are skipped if the parameter "all"
+     * is false.
+     * 
+     * @param str
+     *                string to tokenize
+     * @param all
+     *                If true, numbers, tags, and other non-word tokens are
+     *                included in the list
+     * @return array of tokens (all)
+     */
+    public static Token[] tokenizeTextNoCache(final String strOrig, final boolean all) {
         if (strOrig.length()==0) {
             // fixes bug nr. 1382810 (StringIndexOutOfBoundsException)
             return EMPTY_TOKENS_LIST;
         }
-        
-        // check if we've already tokenized this string
-        // no sense in retokenizing identical strings
-        // don't check if the caller wants all tokens
-        if (!all) {
-            Token[] result;
-            synchronized (tokenCache) {
-                result = tokenCache.get(strOrig);
-            }
-            if (result != null)
-                return result;
-        }
 
         // create a new token list        
-        List<Token> tokens = new ArrayList<Token>();
+        List<Token> tokens = new ArrayList<Token>(64);
 
         // get a word breaker
         String str = strOrig.toLowerCase(); // HP: possible error, this makes "A" and "a" match, CHECK AND FIX
@@ -149,16 +168,7 @@ public class Tokenizer {
             }
         }
         
-        Token[] result = tokens.toArray(new Token[tokens.size()]);
-
-        // put result in the cache if not all tokens are requested
-        if (!all) {
-            synchronized (tokenCache) {
-                tokenCache.put(strOrig, result);
-            }
-        }
-
-        return result;
+        return tokens.toArray(new Token[tokens.size()]);
     }
     
     /** Returns an iterator to break sentences into words. */

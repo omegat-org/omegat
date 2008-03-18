@@ -39,6 +39,13 @@ package org.omegat.util;
 public class StringUtil {
 
     /**
+     * Check if string is empty, i.e. null or length==0
+     */
+    public static boolean isEmpty(final String str) {
+        return str == null || str.length() == 0;
+    }
+
+    /**
      * Returns true if the input is lowercase.
      */
     public static boolean isLowerCase(final String input) {

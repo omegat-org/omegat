@@ -26,6 +26,7 @@ package org.omegat.core.data;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
+import java.util.List;
 
 import org.omegat.filters2.TranslationException;
 
@@ -75,14 +76,16 @@ public interface IDataEngine {
     boolean isProjectLoaded();
 
     /**
-     * Iterate for all entries in project.
+     * Get all entries.
+     * 
+     * @return read-only list of project entries, or null if project not loaded
      */
-    void iterateByAllEntries(EntriesIteratorCallback callback);
+    List<StringEntry> getAllEntries();
 
     /**
-     * Callback for entries iterator.
+     * Get all translation memory objects.
+     * 
+     * @return read-only list of translation memories, or null if project not loaded
      */
-    public interface EntriesIteratorCallback {
-        void onEntry(StringEntry entry);
-    }
+    List<LegacyTM> getMemory();
 }

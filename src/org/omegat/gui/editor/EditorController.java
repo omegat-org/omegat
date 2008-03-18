@@ -343,16 +343,16 @@ public class EditorController implements IEditor {
                             // FIX: unknown, but expect number parsing errors
                         }
                         // </HP-experiment>
-                        List<NearString> near = m_curEntry.getStrEntry().getNearListTranslated();
-                        if (near.size() > 0) {
-                            NearString thebest = near.get(0);
-                            if (thebest.score >= percentage) {
-                                int old_tr_len = translation.length();
-                                translation = Preferences.getPreferenceDefault(Preferences.BEST_MATCH_EXPLANATORY_TEXT,
-                                        OStrings.getString("WF_DEFAULT_PREFIX"))
-                                        + thebest.str.getTranslation();
-                            }
-                        }
+//                        List<NearString> near = m_curEntry.getStrEntry().getNearListTranslated();
+//                        if (near.size() > 0) {
+//                            NearString thebest = near.get(0);
+//                            if (thebest.score >= percentage) {
+//                                int old_tr_len = translation.length();
+//                                translation = Preferences.getPreferenceDefault(Preferences.BEST_MATCH_EXPLANATORY_TEXT,
+//                                        OStrings.getString("WF_DEFAULT_PREFIX"))
+//                                        + thebest.str.getTranslation();
+//                            }
+//                        }
                     }
                 }
 
@@ -373,7 +373,7 @@ public class EditorController implements IEditor {
                 // </HP-experiment>
 
                 StringEntry curEntry = m_curEntry.getStrEntry();
-                int nearLength = curEntry.getNearListTranslated().size();
+                int nearLength = 0;// TODO: curEntry.getNearListTranslated().size();
 
                 // <HP-experiment>
                 try {

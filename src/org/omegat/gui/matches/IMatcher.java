@@ -24,6 +24,7 @@
 package org.omegat.gui.matches;
 
 import org.omegat.core.data.StringEntry;
+import org.omegat.core.matching.NearString;
 
 /**
  * Interface for access to editor functionality.
@@ -35,6 +36,11 @@ public interface IMatcher {
      * Show matches for specified entry.
      */
     void showMatches(StringEntry entry);
+    
+    /**
+     * Get selected match.
+     */
+    NearString getActiveMatch();
     
     /**
      * Get translation of best matched entry, or null if there is no matches.

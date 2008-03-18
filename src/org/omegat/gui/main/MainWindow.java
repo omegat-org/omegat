@@ -211,15 +211,10 @@ public class MainWindow extends JFrame implements IMainWindow {
         if (!isProjectLoaded())
             return;
         
-        int activeMatch = matches.getActiveMatch();
-        if (activeMatch < 0)
-            return;
-        
-        if (activeMatch >= Core.getEditor().getCurrentEntry().getStrEntry().getNearListTranslated().size())
-            return;
-        
-        NearString near = Core.getEditor().getCurrentEntry().getStrEntry().getNearListTranslated().get(activeMatch);
-        Core.getEditor().insertText(near.str.getTranslation());
+        NearString near = Core.getMatcher().getActiveMatch();
+        if (near != null) {
+            Core.getEditor().insertText(near.str.getTranslation());
+        }
     }
 
     /** replace entire edit area with active fuzzy match */
@@ -228,15 +223,10 @@ public class MainWindow extends JFrame implements IMainWindow {
         if (!isProjectLoaded())
             return;
         
-        int activeMatch = matches.getActiveMatch();
-        if (activeMatch < 0)
-            return;
-
-        if (activeMatch >= Core.getEditor().getCurrentEntry().getStrEntry().getNearListTranslated().size())
-            return;
-        
-        NearString near = Core.getEditor().getCurrentEntry().getStrEntry().getNearListTranslated().get(activeMatch);
-        Core.getEditor().replaceEditText(near.str.getTranslation());
+        NearString near = Core.getMatcher().getActiveMatch();
+        if (near != null) {
+            Core.getEditor().replaceEditText(near.str.getTranslation());
+        }
     }
     
     /** Closes the project. */

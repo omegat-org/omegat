@@ -24,19 +24,15 @@
 
 package org.omegat.core.data;
 
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.omegat.core.glossary.GlossaryEntry;
-import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.matching.Tokenizer;
-import org.omegat.util.OConsts;
 import org.omegat.util.Token;
 
 
@@ -56,7 +52,6 @@ public class StringEntry
     public StringEntry(String srcText)
     {
         m_parentList = new TreeSet<SourceTextEntry>(new STEComparator());
-        m_nearList = new TreeSet<NearString>();
         m_glosList = new LinkedList<GlossaryEntry>();
         m_srcText = srcText;
         m_translation = "";                                                     // NOI18N
@@ -94,59 +89,7 @@ public class StringEntry
     {
         m_parentList.add(srcTextEntry);
     }
-    
-    /**
-     * Gets a list with (max) 5 near segments, but only with those that have a
-     * translation. This list is recomputed on each call to this method,
-     * because some text may become translated after a call to this method.
-     *
-     * @return list of near segments, that have a translation
-     */
-    public List<NearString> getNearListTranslated()
-    {
-        List<NearString> res = new ArrayList<NearString>(OConsts.MAX_NEAR_STRINGS);
-        Iterator<NearString> i;
-        // FIX:
-        // HP: this code can sometimes cause a ConcurrentModificationException 
-        // HP: because m_nearList is not thread-safe
-        // HP: please make it thread-safe, but test for performance issues
-        for(i=m_nearList.iterator(); i.hasNext() && res.size()<OConsts.MAX_NEAR_STRINGS; )
-        {
-            NearString next = i.next();
-            if( next.str.getTranslation().length()!=0 )
-                res.add(next);
-        }
-        return res;
-    }
-    
-    /**
-     * Adds near string for this string.
-     * Near string links to another existing string entry and has
-     * a similarity score and a similarity coloring data.
-     * Near string is inserted into the list according to its score,
-     * and there cannot be more than MAX_STORED_NEAR_STRINGS (50) near strings.
-     *
-     * @param strEntry actual near string
-     * @param score similarity score
-     * @param adjustedScore similarity score adjusted for full string, including non-word tokens
-     * @param nearData coloring data
-     * @param nearProj the TMX origin of the string, null for project's TMX
-     */
-    //public void addNearString(StringEntry strEntry, int score, byte[] nearData, String nearProj)
-    public void addNearString(StringEntry strEntry, int score, int adjustedScore, byte[] nearData, String nearProj)
-    {
-        // if list is full, remove last entry if its score is lower than the new entry's score
-        if( m_nearList.size()>=OConsts.MAX_STORED_NEAR_STRINGS )
-        {
-            NearString last = m_nearList.last();
-            if((score > last.score) || ((score == last.score) && (adjustedScore > last.adjustedScore)))
-                m_nearList.remove(last);
-            else
-                return;
-        }
-        m_nearList.add(new NearString(strEntry, score, adjustedScore, nearData, nearProj));
-    }
-    
+
     /**
      * Returns a List of Glossary entries, associated with
      * the current String entry
@@ -220,8 +163,6 @@ public class StringEntry
     // access calls
     /** Sorted set of parent source text entries. */
     private SortedSet<SourceTextEntry>	m_parentList;
-    /** Sorted set of near matched strings. */
-    private SortedSet<NearString>	m_nearList;
     /** List of glossary terms for this string. */
     private List<GlossaryEntry>	m_glosList;
     

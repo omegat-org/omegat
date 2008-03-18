@@ -60,7 +60,7 @@ import org.omegat.util.Token;
  * @author Chas Emerick, Apache Software Foundation
  * @author Maxym Mykhalchuk
  */
-class LevenshteinDistance
+public class LevenshteinDistance
 {
     
     /**

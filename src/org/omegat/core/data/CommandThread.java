@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -42,7 +43,6 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.glossary.GlossaryManager;
-import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.matching.Tokenizer;
 import org.omegat.core.spellchecker.SpellChecker;
@@ -286,9 +286,6 @@ public class CommandThread extends Thread implements IDataEngine
                 // allow project load to resume
             }
             
-            // evaluate strings for fuzzy matching
-            buildNearList();
-            
             // build word count
             Statistics.buildProjectStats(m_strEntryList, m_srcTextEntryArray, m_config, numberofTranslatedSegments);
             
@@ -304,10 +301,6 @@ public class CommandThread extends Thread implements IDataEngine
             
             // enable normal saves
             m_saveCount = 2;
-        }
-        catch (InterruptedException e1)
-        {
-            // user said cancel - this is OK
         }
         catch( Exception e )
         {
@@ -778,26 +771,6 @@ public class CommandThread extends Thread implements IDataEngine
         return true;
     }
     
-    /**
-     * Builds the list of fuzzy matches between the source text strings.
-     *
-     * @author Maxym Mykhalchuk
-     */
-    private void buildNearList() throws InterruptedException
-    {
-        // creating a fuzzy matching engine
-        FuzzyMatcher matcher = new FuzzyMatcher(m_transFrame, this);
-        
-        // matching source strings with each other
-        matcher.match(m_strEntryList);
-        
-        // matching legacy TMX files
-        for(LegacyTM tm : m_legacyTMs)
-        {
-            matcher.match(m_strEntryList, tm.getName(), tm.getStrings());
-        }
-    }
-    
     /** Locates and loads external TMX files with legacy translations. */
     private void loadTM() throws IOException
     {
@@ -1106,14 +1079,19 @@ public class CommandThread extends Thread implements IDataEngine
         torun.setPriority(Thread.MIN_PRIORITY);
         torun.start();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public List<StringEntry> getAllEntries() {
+        return Collections.unmodifiableList(new ArrayList<StringEntry>(m_strEntryList));
+    }
     
     /**
      * {@inheritDoc}
      */
-    public synchronized void iterateByAllEntries(final EntriesIteratorCallback callback) {
-        for (StringEntry en : m_strEntryList) {
-            callback.onEntry(en);
-        }
+    public List<LegacyTM> getMemory() {
+        return m_legacyTMs;
     }
     
     private LinkedList<RequestPacket> m_requestQueue;

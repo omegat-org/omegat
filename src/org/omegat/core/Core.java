@@ -26,6 +26,7 @@ package org.omegat.core;
 
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.IDataEngine;
+import org.omegat.core.matching.ITokenizer;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.main.IMainWindow;
@@ -45,6 +46,7 @@ public class Core {
     private static IEditor editor;
     private static ITagValidation tagValidation;
     private static IMatcher matcher;
+    private static ITokenizer tokenizer;
 
     /** Get data engine instance. */
     public static IDataEngine getDataEngine() {
@@ -69,6 +71,11 @@ public class Core {
     /** Get matcher component instance. */
     public static IMatcher getMatcher() {
         return matcher;
+    }
+    
+    /** Get tokenizer component instance. */
+    public static ITokenizer getTokenizer() {
+        return tokenizer;
     }
 
     /**

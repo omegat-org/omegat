@@ -40,7 +40,6 @@ import org.omegat.core.Core;
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.matching.SourceTextEntry;
-import org.omegat.core.matching.Tokenizer;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -784,7 +783,7 @@ public class EditorController implements IEditor {
 
                 String selectionText = editor.getText(start, end - start);
                 // tokenize the selection
-                Token[] tokenList = Tokenizer.tokenizeTextNoCache(selectionText);
+                Token[] tokenList = Core.getTokenizer().tokenizeTextNoCache(selectionText);
 
                 StringBuffer buffer = new StringBuffer(selectionText);
 

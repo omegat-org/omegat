@@ -35,6 +35,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.matching.Tokenizer;
 import org.omegat.util.Log;
@@ -166,13 +167,13 @@ public class GlossaryManager
             String glosStr = glosEntry.getSrcText();
             //List glosTokens = new ArrayList();
             //int glosTokensN = StaticUtils.tokenizeText(glosStr, glosTokens);
-            Token[] glosTokens = Tokenizer.tokenizeTextWithCache(glosStr);
+            Token[] glosTokens = Core.getTokenizer().tokenizeTextWithCache(glosStr);
             int glosTokensN = glosTokens.length;
             if (glosTokensN==0)
                 continue;
             for(StringEntry strEntry : strEntryList)
             {
-                Token[] strTokens = Tokenizer.tokenizeTextWithCache(strEntry.getSrcText());
+                Token[] strTokens = Core.getTokenizer().tokenizeTextWithCache(strEntry.getSrcText());
                 if (Tokenizer.isContainsAll(strTokens, glosTokens));
                     strEntry.addGlossaryEntry(glosEntry);
             }

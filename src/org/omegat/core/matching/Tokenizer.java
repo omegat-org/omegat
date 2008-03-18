@@ -45,7 +45,7 @@ import org.omegat.util.Token;
  * @author Zoltan Bartko - bartkozoltan@bartkozoltan.com
  * @author Alex Buloichik
  */
-public class Tokenizer {
+public class Tokenizer implements ITokenizer {
 
     /**
       * Contains a list of tokens for each *unique* string.
@@ -58,7 +58,7 @@ public class Tokenizer {
     private static final Token[] EMPTY_TOKENS_LIST = new Token[0];
 
     /** Removes all token lists from the cache. */
-    public static void clearTokenCache() {
+    public void clearCache() {
         synchronized (tokenCache) {
             tokenCache.clear();
         }
@@ -68,7 +68,7 @@ public class Tokenizer {
      * Breaks a string into tokens (see
      * {@link #tokenizeTextNoCache(String, boolean)}) and don't cache results.
      */
-    public static Token[] tokenizeTextNoCache(String str) {
+    public Token[] tokenizeTextNoCache(String str) {
         return tokenizeTextNoCache(str, false);
     }
 
@@ -79,7 +79,7 @@ public class Tokenizer {
      * 
      * Don't check if the caller wants all tokens.
      */
-    public static Token[] tokenizeTextWithCache(final String strOrig) {
+    public Token[] tokenizeTextWithCache(final String strOrig) {
         Token[] result;
         synchronized (tokenCache) {
             result = tokenCache.get(strOrig);
@@ -102,7 +102,7 @@ public class Tokenizer {
      * 
      * Numbers, tags, and other non-word tokens are included in the result.
      */
-    public static Token[] tokenizeAll(final String strOrig) {
+    public Token[] tokenizeAll(final String strOrig) {
         return tokenizeTextNoCache(strOrig, true);
     }
 

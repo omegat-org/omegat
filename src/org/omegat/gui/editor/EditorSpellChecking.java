@@ -41,9 +41,9 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Utilities;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.matching.SourceTextEntry;
-import org.omegat.core.matching.Tokenizer;
 import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -122,7 +122,7 @@ public class EditorSpellChecking {
             xlDoc.replace(spellcheckStart, spellcheckEnd - spellcheckStart, spellcheckBase, correctAttributes);
 
             // iterate!
-            for (Token token : Tokenizer.tokenizeTextNoCache(spellcheckBase)) {
+            for (Token token : Core.getTokenizer().tokenizeTextNoCache(spellcheckBase)) {
                 String word = token.getTextFromString(spellcheckBase);
                 // is it correct?
                 if (!spellchecker.isCorrect(word)) {
@@ -311,7 +311,7 @@ public class EditorSpellChecking {
                                 // split the text into tokens. If there is a
                                 // match,
                                 // redraw it
-                                for (Token token : Tokenizer.tokenizeTextNoCache(translation)) {
+                                for (Token token : Core.getTokenizer().tokenizeTextNoCache(translation)) {
                                     String tokenText = token.getTextFromString(translation);
                                     // redraw?
                                     if (tokenText.equals(word)) {
@@ -346,7 +346,7 @@ public class EditorSpellChecking {
             final EditorTextArea editor) {
         synchronized (controller.mw) {
             // we have the translation and it should be spellchecked
-            Token[] wordlist = Tokenizer.tokenizeTextNoCache(text);
+            Token[] wordlist = Core.getTokenizer().tokenizeTextNoCache(text);
             List<Token> wrongWordList = new ArrayList<Token>();
 
             AbstractDocument xlDoc = (AbstractDocument) editor.getDocument();

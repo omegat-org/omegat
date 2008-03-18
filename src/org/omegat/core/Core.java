@@ -27,6 +27,7 @@ package org.omegat.core;
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.IDataEngine;
 import org.omegat.core.matching.ITokenizer;
+import org.omegat.core.matching.Tokenizer;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.main.IMainWindow;
@@ -100,5 +101,6 @@ public class Core {
         editor = new EditorController(me, me.editor);
         tagValidation = new TagValidationTool(me);
         matcher = me.matches;
+        tokenizer = new Tokenizer();
     }
 }

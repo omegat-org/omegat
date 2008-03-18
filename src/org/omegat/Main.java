@@ -86,7 +86,7 @@ public class Main
             Log.logErrorRB("MAIN_ERROR_CANT_INIT_OSLF");
         }
         
-        Core.initialize();
+        Core.initialize(args);
         CoreEvents.fireApplicationStartup();
     }
 }

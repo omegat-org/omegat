@@ -35,6 +35,7 @@ import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.tagvalidation.ITagValidation;
 import org.omegat.gui.tagvalidation.TagValidationTool;
+import org.omegat.util.Log;
 
 /**
  * Class which contains all components instances.
@@ -85,7 +86,7 @@ public class Core {
      * TODO: change initialization for instantiate component instances, instead
      * use already created instanced
      */
-    public static void initialize() {
+    public static void initialize(final String[] args) {
         MainWindow me = new MainWindow();
         
         // bugfix - Serious threading issue, preventing OmegaT from showing up...
@@ -101,6 +102,36 @@ public class Core {
         editor = new EditorController(me, me.editor);
         tagValidation = new TagValidationTool(me);
         matcher = me.matches;
-        tokenizer = new Tokenizer();
+        tokenizer = createComponent(ITokenizer.class, new Tokenizer(), args);
+    }
+    
+    /**
+     * Try to create component instance by class specified in command line.
+     * 
+     * @param <T>
+     *                return type
+     * @param interfaceClass
+     *                component interface class
+     * @param defaultImplementation
+     *                default component implementation instance
+     * @param args
+     *                command line
+     * @return component inmplementation
+     */
+    protected static <T> T createComponent(final Class<T> interfaceClass, final T defaultImplementation,
+            final String[] args) {
+        final String prefix = interfaceClass.getSimpleName() + "=";
+        String implClassName = null;
+        try {
+            for (String arg : args) {
+                if (arg.startsWith(prefix)) {
+                    implClassName = arg.substring(prefix.length());
+                    return (T) Class.forName(implClassName).newInstance();
+                }
+            }
+        } catch (Exception ex) {
+            Log.log(ex);
+        }
+        return defaultImplementation;
     }
 }

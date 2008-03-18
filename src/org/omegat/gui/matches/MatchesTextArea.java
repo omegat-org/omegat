@@ -41,8 +41,12 @@ import org.omegat.core.Core;
 import org.omegat.core.data.StringData;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.matching.NearString;
+import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.gui.main.MainWindow;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -56,12 +60,12 @@ import org.omegat.util.gui.UIThreadsUtil;
  */
 public class MatchesTextArea extends JTextPane implements IMatcher {
 
-    private List<NearString> matches = new ArrayList<NearString>();
+    private final List<NearString> matches = new ArrayList<NearString>();
 
-    private List<Integer> delimiters = new ArrayList<Integer>();
+    private final List<Integer> delimiters = new ArrayList<Integer>();
     private int activeMatch;
 
-    private MainWindow mw;
+    private final MainWindow mw;
 
     protected StringEntry processedEntry;
 
@@ -123,6 +127,48 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
 
         setText(displayBuffer.toString());
         setActiveMatch(0);
+
+        checkForReplaceTranslation();
+    }
+
+    /**
+     * if WORKFLOW_OPTION "Insert best fuzzy match into target field" is set
+     * 
+     * RFE "Option: Insert best match (80%+) into target field"
+     * 
+     * http://sourceforge.net/support/tracker.php?aid=1075976
+     */
+    private void checkForReplaceTranslation() {
+        if (matches.isEmpty()) {
+            return;
+        }
+        if (Preferences.isPreference(Preferences.BEST_MATCH_INSERT)) {
+            String percentage_s = Preferences.getPreferenceDefault(Preferences.BEST_MATCH_MINIMAL_SIMILARITY,
+                    Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT);
+            // <HP-experiment>
+            int percentage = 0;
+            try {
+                // int
+                percentage = Integer.parseInt(percentage_s);
+            } catch (Exception exception) {
+                Log.log("ERROR: exception while parsing percentage:");
+                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                Log.log(exception);
+                return; // deliberately breaking, to simulate previous behaviour
+                // FIX: unknown, but expect number parsing errors
+            }
+            // </HP-experiment>
+            NearString thebest = matches.get(0);
+            if (thebest.score >= percentage) {
+                String translation = Preferences.getPreferenceDefault(Preferences.BEST_MATCH_EXPLANATORY_TEXT, OStrings
+                        .getString("WF_DEFAULT_PREFIX"))
+                        + thebest.str.getTranslation();
+                SourceTextEntry currentEntry = Core.getEditor().getCurrentEntry();
+                if (StringUtil.isEmpty(currentEntry.getTranslation())) {
+                    Core.getEditor().replaceEditText(translation);
+                }
+            }
+        }
     }
 
     /**
@@ -171,7 +217,7 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
     public void clear() {
         // stop find matches threads
         processedEntry = null;
-        
+
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 setMatches(new ArrayList<NearString>());

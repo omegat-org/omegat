@@ -32,8 +32,6 @@ import java.util.TreeSet;
 
 import org.omegat.core.glossary.GlossaryEntry;
 import org.omegat.core.matching.SourceTextEntry;
-import org.omegat.core.matching.Tokenizer;
-import org.omegat.util.Token;
 
 
 /*
@@ -61,22 +59,6 @@ public class StringEntry
     public String getSrcText()
     { 
         return m_srcText;	
-    }
-    
-    /** Returns the tokens of this entry's source string */
-    public Token[] getSrcTokenList()
-    {
-        return Tokenizer.tokenizeText(m_srcText); // HP: using cache in StaticUtils now
-    }
-    
-    /**
-      * Returns all tokens of this entry's source string,
-      * including numbers, tags, and other non-word tokens.
-      *
-      * @author Henry Pijffers (henry.pijffers@saxnot.com)
-      */
-    public Token[] getSrcTokenListAll() {
-        return Tokenizer.tokenizeTextNoCache(m_srcText, true);
     }
 
     /** List of SourceTextEntry-es this string entry belongs to. */
@@ -109,12 +91,6 @@ public class StringEntry
     //	before or after they actually did, making the condition trivial
     // if more processing happens here later, readdress synchronization
     //	issues
-
-    /** Returns the tokens of this entry's translation */
-    public Token[] getTransTokenList()
-    {
-        return Tokenizer.tokenizeText(m_translation);
-    }
     
     /**
      * Returns the translation of the StringEntry.

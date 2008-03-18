@@ -172,7 +172,7 @@ public class GlossaryManager
                 continue;
             for(StringEntry strEntry : strEntryList)
             {
-                Token[] strTokens = strEntry.getSrcTokenList();
+                Token[] strTokens = Tokenizer.tokenizeTextWithCache(strEntry.getSrcText());
                 if (Tokenizer.isContainsAll(strTokens, glosTokens));
                     strEntry.addGlossaryEntry(glosEntry);
             }

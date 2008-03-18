@@ -65,25 +65,6 @@ public class Tokenizer {
     }
 
     /**
-      * Breaks a string into tokens.
-      * <p>
-      * Examples:
-      * <ul>
-      * <li> This is a semi-good way. -> "this", "is", "a", "semi-good", "way"
-      * <li> Fine, thanks, and you? -> "fine", "thanks", "and", "you"
-      * <li> C&all this action -> "call", "this", "action" ('&' is eaten)
-      * </ul>
-      * <p>
-      * Also skips OmegaT tags.
-      *
-      * @param str string to tokenize
-      * @return List of all tokens (words only)
-      */
-    public static Token[] tokenizeText(String str) {
-        return tokenizeTextWithCache(str);
-    }
-
-    /**
      * Breaks a string into tokens (see
      * {@link #tokenizeTextNoCache(String, boolean)}) and don't cache results.
      */
@@ -97,9 +78,6 @@ public class Tokenizer {
      * Check if we've already tokenized this string, because no sense in retokenizing identical strings.
      * 
      * Don't check if the caller wants all tokens.
-     * 
-     * @param strOrig
-     * @return
      */
     public static Token[] tokenizeTextWithCache(final String strOrig) {
         Token[] result;
@@ -116,6 +94,16 @@ public class Tokenizer {
             tokenCache.put(strOrig, result);
         }
         return result;
+    }
+    
+    /**
+     * Breaks a string into tokens (see
+     * {@link #tokenizeTextNoCache(String, boolean)}).
+     * 
+     * Numbers, tags, and other non-word tokens are included in the result.
+     */
+    public static Token[] tokenizeAll(final String strOrig) {
+        return tokenizeTextNoCache(strOrig, true);
     }
 
     /**
@@ -138,7 +126,7 @@ public class Tokenizer {
      *                included in the list
      * @return array of tokens (all)
      */
-    public static Token[] tokenizeTextNoCache(final String strOrig, final boolean all) {
+    private static Token[] tokenizeTextNoCache(final String strOrig, final boolean all) {
         if (strOrig.length()==0) {
             // fixes bug nr. 1382810 (StringIndexOutOfBoundsException)
             return EMPTY_TOKENS_LIST;

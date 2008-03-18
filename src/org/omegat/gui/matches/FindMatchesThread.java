@@ -36,6 +36,7 @@ import org.omegat.core.data.StringEntry;
 import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.matching.NearString;
+import org.omegat.core.matching.Tokenizer;
 import org.omegat.util.OConsts;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
@@ -81,13 +82,13 @@ public class FindMatchesThread extends Thread {
         long before = System.currentTimeMillis();
 
         // get tokens for original string
-        strTokens = processedEntry.getSrcTokenList();
+        strTokens = Tokenizer.tokenizeTextWithCache(processedEntry.getSrcText());
         if (strTokens.length == 0) {
             return;
             // HP: maybe also test on strTokensComplete.size(), if strTokensSize is 0
             // HP: perhaps that would result in better number/non-word matching too
         }
-        strTokensAll = processedEntry.getSrcTokenListAll();// HP: includes non-word tokens
+        strTokensAll = Tokenizer.tokenizeAll(processedEntry.getSrcText());// HP: includes non-word tokens
 
         // travel by project entries
         for (StringEntry candEntry : entries) {
@@ -120,7 +121,7 @@ public class FindMatchesThread extends Thread {
         // fill similarity data only for result
         for (NearString near : result) {
             // fix for bug 1586397
-            byte[] similarityData = FuzzyMatcher.buildSimilarityData(strTokensAll, near.str.getSrcTokenListAll());
+            byte[] similarityData = FuzzyMatcher.buildSimilarityData(strTokensAll, Tokenizer.tokenizeAll(near.str.getSrcText()));
             near.attr = similarityData;
         }
 
@@ -144,7 +145,7 @@ public class FindMatchesThread extends Thread {
      *                entry to compare
      */
     protected void processEntry(final StringEntry candEntry, final String tmxName) {
-        Token[] candTokens = candEntry.getSrcTokenList();
+        Token[] candTokens = Tokenizer.tokenizeTextWithCache(candEntry.getSrcText());
         if (candTokens.length == 0) {
             return;
         }
@@ -157,7 +158,7 @@ public class FindMatchesThread extends Thread {
             return;
 
         if (haveChanceToAdd(similarity)) {
-            Token[] candTokensAll = candEntry.getSrcTokenListAll();
+            Token[] candTokensAll = Tokenizer.tokenizeAll(candEntry.getSrcText());
             int ldAll = LevenshteinDistance.compute(strTokensAll, candTokensAll);
             int simAdjusted = (100 * (Math.max(strTokensAll.length, candTokensAll.length) - ldAll))
                     / Math.max(strTokensAll.length, candTokensAll.length);

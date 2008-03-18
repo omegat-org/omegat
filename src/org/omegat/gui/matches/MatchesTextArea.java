@@ -42,6 +42,7 @@ import org.omegat.core.data.StringData;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
+import org.omegat.core.matching.Tokenizer;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -192,7 +193,7 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
 
         NearString match = matches.get(activeMatch);
         // List tokens = match.str.getSrcTokenList();
-        Token[] tokens = match.str.getSrcTokenListAll(); // fix for bug 1586397
+        Token[] tokens = Tokenizer.tokenizeAll(match.str.getSrcText()); // fix for bug 1586397
         byte[] attributes = match.attr;
         for (int i = 0; i < tokens.length; i++) {
             Token token = tokens[i];

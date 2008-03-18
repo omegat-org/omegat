@@ -100,6 +100,10 @@ public class FindMatchesThread extends Thread {
             if (StringUtil.isEmpty(candEntry.getTranslation())) {
                 continue;
             }
+            if (candEntry == processedEntry) {
+                // skip original==original entry comparison
+                continue;
+            }
             processEntry(candEntry, null);
         }
 

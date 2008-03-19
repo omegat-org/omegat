@@ -306,7 +306,6 @@ public class MainWindow extends JFrame implements IMainWindow {
             public void run()
             {
                 updateFuzzyInfo();    // just display the matches, don't commit/activate!
-                updateGlossaryInfo(); // and glossary matches
                 // commitEntry(false); // part of fix for bug 1409309
                 // activateEntry();
             }
@@ -537,15 +536,6 @@ public class MainWindow extends JFrame implements IMainWindow {
         
         StringEntry curEntry = Core.getEditor().getCurrentEntry().getStrEntry();
         Core.getMatcher().showMatches(curEntry);
-    }
-    
-    /**
-     * Displays glossary terms for the current segment.
-     */
-    public void updateGlossaryInfo()
-    {
-//        StringEntry curEntry = Core.getEditor().getCurrentEntry().getStrEntry();
-//        glossary.setGlossaryEntries(curEntry.getGlossaryEntries());
     }
     
     /**

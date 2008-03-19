@@ -328,7 +328,6 @@ public class EditorController implements IEditor {
                 // <HP-experiment>
                 try {
                     mw.updateFuzzyInfo();
-                    mw.updateGlossaryInfo();
                 } catch (Exception exception) {
                     Log.log("ERROR: exception while updating match and glossary info:");
                     Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");

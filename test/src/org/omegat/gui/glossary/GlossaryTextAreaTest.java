@@ -22,12 +22,13 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.gui.main;
+package org.omegat.gui.glossary;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.omegat.core.glossary.GlossaryEntry;
+import org.omegat.gui.glossary.GlossaryTextArea;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

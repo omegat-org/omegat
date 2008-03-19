@@ -55,6 +55,7 @@ import org.omegat.core.data.StringEntry;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.editor.EditorTextArea;
 import org.omegat.gui.filelist.ProjectFrame;
+import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.gui.search.SearchWindow;
 import org.omegat.util.LFileCopy;

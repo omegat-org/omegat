@@ -325,18 +325,6 @@ public class EditorController implements IEditor {
                 int replacedLength = replaceEntry(m_segmentStartOffset, docSeg.length, srcText, translation,
                         WITH_END_MARKERS);
 
-                // <HP-experiment>
-                try {
-                    mw.updateFuzzyInfo();
-                } catch (Exception exception) {
-                    Log.log("ERROR: exception while updating match and glossary info:");
-                    Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                    Log.log(exception);
-                    return; // deliberately breaking, to simulate previous behaviour
-                    // FIX: unknown
-                }
-                // </HP-experiment>
-
                 StringEntry curEntry = m_curEntry.getStrEntry();
                 int nearLength = 0;// TODO: curEntry.getNearListTranslated().size();
 

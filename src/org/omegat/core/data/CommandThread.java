@@ -290,13 +290,6 @@ public class CommandThread extends Thread implements IDataEngine
             // Project Loaded...
             MessageRelay.uiMessageSetMessageText(tf, "");  // NOI18N
             
-            // Calling Main Window back to notify that project
-            // is successfully loaded.
-            // Part of bugfix for
-            //           First segment does not trigger matches after load
-            //           http://sourceforge.net/support/tracker.php?aid=1370838
-            m_transFrame.projectLoaded();
-            
             // enable normal saves
             m_saveCount = 2;
         }

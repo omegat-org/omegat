@@ -287,32 +287,6 @@ public class MainWindow extends JFrame implements IMainWindow {
         m_projWin.setVisible(true);
     }
     
-    /**
-     * Notifies Main Window that the CommandThread has finished loading the 
-     * project.
-     * <p>
-     * Current implementation commits and re-activates current entry to show 
-     * fuzzy matches.
-     * <p>
-     * Calling Main Window back to notify that project is successfully loaded.
-     * Part of bugfix for 
-     * <a href="http://sourceforge.net/support/tracker.php?aid=1370838">[1370838]
-     * First segment does not trigger matches after load</a>.
-     */
-    public synchronized void projectLoaded()
-    {
-        Thread runlater = new Thread()
-        {
-            public void run()
-            {
-                updateFuzzyInfo();    // just display the matches, don't commit/activate!
-                // commitEntry(false); // part of fix for bug 1409309
-                // activateEntry();
-            }
-        };
-        SwingUtilities.invokeLater(runlater);
-    }
-
     void doSave()
     {
         if (!isProjectLoaded())
@@ -525,18 +499,6 @@ public class MainWindow extends JFrame implements IMainWindow {
     ///////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////
     // display oriented code
-    
-    /**
-     * Displays fuzzy matching info if it's available.
-     */
-    public void updateFuzzyInfo()
-    {
-        if (!isProjectLoaded())
-            return;
-        
-        StringEntry curEntry = Core.getEditor().getCurrentEntry().getStrEntry();
-        Core.getMatcher().showMatches(curEntry);
-    }
     
     /**
      * Displays a warning message.

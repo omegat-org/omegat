@@ -23,7 +23,6 @@
  **************************************************************************/
 package org.omegat.gui.matches;
 
-import org.omegat.core.data.StringEntry;
 import org.omegat.core.matching.NearString;
 
 /**
@@ -32,11 +31,6 @@ import org.omegat.core.matching.NearString;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IMatcher {
-    /**
-     * Show matches for specified entry.
-     */
-    void showMatches(StringEntry entry);
-    
     /**
      * Get selected match.
      */

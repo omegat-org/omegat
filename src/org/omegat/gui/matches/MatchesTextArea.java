@@ -38,8 +38,10 @@ import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.core.data.StringData;
 import org.omegat.core.data.StringEntry;
+import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.gui.main.MainWindow;
@@ -80,14 +82,17 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
                 onMouseClick(e);
             }
         });
-    }
+        
+        // find fuzzy match entries on every editor entry change
+        CoreEvents.registerEntryEventListener(new IEntryEventListener() {
+            public void onNewFile(String activeFileName) {
+            }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void showMatches(final StringEntry entry) {
-        this.processedEntry = entry;
-        new FindMatchesThread(this, entry).start();
+            public void onEntryActivated(final StringEntry newEntry) {
+                processedEntry = newEntry;
+                new FindMatchesThread(MatchesTextArea.this, newEntry).start();
+            }
+        });
     }
 
     /**

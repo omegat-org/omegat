@@ -35,12 +35,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.omegat.core.Core;
-import org.omegat.core.data.StringEntry;
-import org.omegat.core.matching.Tokenizer;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.Token;
 
 /**
  * Class that loads glossary files and adds glossary entries 
@@ -146,42 +142,6 @@ public class GlossaryManager
         in.close();
     }
 
-    /**
-     * Builds the Glossary.
-     * This process looks up the source string entries, 
-     * and adds the glossary entries there.
-     * <p>
-     * Test cases wheter a glossary entry matches a string entry text:
-     * <ul>
-     * <li>"Edit" vs "Editing" - doesn't match
-     * <li>"Old Line" vs "Hold Line" - doesn't match
-     * <li>"Some Text" vs "There was some text there" - OK!
-     * <li>"Edit" vs "Editing the edit" - matches OK!
-     * <li>"Edit" vs "Edit" - matches OK!
-     * </ul>
-     */
-    public void buildGlossary(List<StringEntry> strEntryList)
-    {
-        if (true) return;
-        for(GlossaryEntry glosEntry : glossaryEntries)
-        {
-            String glosStr = glosEntry.getSrcText();
-            //List glosTokens = new ArrayList();
-            //int glosTokensN = StaticUtils.tokenizeText(glosStr, glosTokens);
-            Token[] glosTokens = Core.getTokenizer().tokenizeTextWithCache(glosStr);
-            int glosTokensN = glosTokens.length;
-            if (glosTokensN==0)
-                continue;
-            for(StringEntry strEntry : strEntryList)
-            {
-                Token[] strTokens = Core.getTokenizer().tokenizeTextWithCache(strEntry.getSrcText());
-                if (Tokenizer.isContainsAll(strTokens, glosTokens)) {
-                    strEntry.addGlossaryEntry(glosEntry);
-                }
-            }
-        }
-    }
-    
     public List<GlossaryEntry> getGlossaryEntries() {
         return glossaryEntries;
     }

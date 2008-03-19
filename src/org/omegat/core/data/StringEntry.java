@@ -25,12 +25,9 @@
 package org.omegat.core.data;
 
 import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.omegat.core.glossary.GlossaryEntry;
 import org.omegat.core.matching.SourceTextEntry;
 
 
@@ -50,7 +47,6 @@ public class StringEntry
     public StringEntry(String srcText)
     {
         m_parentList = new TreeSet<SourceTextEntry>(new STEComparator());
-        m_glosList = new LinkedList<GlossaryEntry>();
         m_srcText = srcText;
         m_translation = "";                                                     // NOI18N
     }
@@ -72,19 +68,6 @@ public class StringEntry
         m_parentList.add(srcTextEntry);
     }
 
-    /**
-     * Returns a List of Glossary entries, associated with
-     * the current String entry
-     */
-    public List<GlossaryEntry> getGlossaryEntries()
-    {
-        return m_glosList;
-    }
-    public void addGlossaryEntry(GlossaryEntry glosEntry)
-    {
-        m_glosList.add(glosEntry);
-    }
-
     // these methods aren't sychronized - thought about doing so, but
     //	as the translation is set by user action, any race condition
     //	would be the same as user pressing 'enter' key a few milliseconds
@@ -99,8 +82,7 @@ public class StringEntry
     {
         return m_translation;
     }
-    
-    
+        
     /**
      * Sets the translation of the StringEntry.
      * If translation given is null or equal to the source, than
@@ -139,8 +121,6 @@ public class StringEntry
     // access calls
     /** Sorted set of parent source text entries. */
     private SortedSet<SourceTextEntry>	m_parentList;
-    /** List of glossary terms for this string. */
-    private List<GlossaryEntry>	m_glosList;
     
     private String m_srcText;
     private String m_translation;

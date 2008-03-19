@@ -29,7 +29,9 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
+import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IApplicationEventListener;
+import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.Log;
 
@@ -44,37 +46,59 @@ import org.omegat.util.Log;
 public class CoreEvents {
     private static final List<IProjectEventListener> projectEventListeners = new ArrayList<IProjectEventListener>();
     private static final List<IApplicationEventListener> applicationEventListeners = new ArrayList<IApplicationEventListener>();
+    private static final List<IEntryEventListener> entryEventListeners = new ArrayList<IEntryEventListener>();
 
     /** Register listener. */
-    public static void registerProjectChangeListener(final IProjectEventListener listener) {
+    public static void registerProjectChangeListener(
+            final IProjectEventListener listener) {
         synchronized (projectEventListeners) {
             projectEventListeners.add(listener);
         }
     }
 
     /** Unregister listener. */
-    public static void unregisterProjectChangeListener(final IProjectEventListener listener) {
+    public static void unregisterProjectChangeListener(
+            final IProjectEventListener listener) {
         synchronized (projectEventListeners) {
             projectEventListeners.remove(listener);
         }
     }
 
     /** Register listener. */
-    public static void registerApplicationEventListener(final IApplicationEventListener listener) {
+    public static void registerApplicationEventListener(
+            final IApplicationEventListener listener) {
         synchronized (applicationEventListeners) {
             applicationEventListeners.add(listener);
         }
     }
 
     /** Unregister listener. */
-    public static void unregisterApplicationEventListener(final IApplicationEventListener listener) {
+    public static void unregisterApplicationEventListener(
+            final IApplicationEventListener listener) {
         synchronized (applicationEventListeners) {
             applicationEventListeners.remove(listener);
         }
     }
 
+    /** Register listener. */
+    public static void registerEntryEventListener(
+            final IEntryEventListener listener) {
+        synchronized (entryEventListeners) {
+            entryEventListeners.add(listener);
+        }
+    }
+
+    /** Unregister listener. */
+    public static void unregisterEntryEventListener(
+            final IEntryEventListener listener) {
+        synchronized (entryEventListeners) {
+            entryEventListeners.remove(listener);
+        }
+    }
+
     /** Fire event. */
-    public static void fireProjectChange(final IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
+    public static void fireProjectChange(
+            final IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
         Log.logInfoRB("LOG_INFO_EVENT_PROJECT_CHANGE", eventType);
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -109,6 +133,34 @@ public class CoreEvents {
                 synchronized (applicationEventListeners) {
                     for (IApplicationEventListener listener : applicationEventListeners) {
                         listener.onApplicationShutdown();
+                    }
+                }
+            }
+        });
+    }
+
+    /** Fire event. */
+    public static void fireEntryNewFile(final String activeFileName) {
+        Log.logInfoRB("LOG_INFO_EVENT_ENTRY_NEWFILE", activeFileName);
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                synchronized (entryEventListeners) {
+                    for (IEntryEventListener listener : entryEventListeners) {
+                        listener.onNewFile(activeFileName);
+                    }
+                }
+            }
+        });
+    }
+
+    /** Fire event. */
+    public static void fireEntryActivated(final StringEntry newEntry) {
+        Log.logInfoRB("LOG_INFO_EVENT_ENTRY_ACTIVATED");
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                synchronized (entryEventListeners) {
+                    for (IEntryEventListener listener : entryEventListeners) {
+                        listener.onEntryActivated(newEntry);
                     }
                 }
             }

@@ -543,8 +543,8 @@ public class MainWindow extends JFrame implements IMainWindow {
      */
     public void updateGlossaryInfo()
     {
-        StringEntry curEntry = Core.getEditor().getCurrentEntry().getStrEntry();
-        glossary.setGlossaryEntries(curEntry.getGlossaryEntries());
+//        StringEntry curEntry = Core.getEditor().getCurrentEntry().getStrEntry();
+//        glossary.setGlossaryEntries(curEntry.getGlossaryEntries());
     }
     
     /**

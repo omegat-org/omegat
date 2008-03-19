@@ -162,6 +162,7 @@ public class GlossaryManager
      */
     public void buildGlossary(List<StringEntry> strEntryList)
     {
+        if (true) return;
         for(GlossaryEntry glosEntry : glossaryEntries)
         {
             String glosStr = glosEntry.getSrcText();

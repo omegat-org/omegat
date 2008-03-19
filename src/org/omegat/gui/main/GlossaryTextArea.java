@@ -27,7 +27,11 @@ package org.omegat.gui.main;
 
 import java.util.List;
 
+import org.omegat.core.CoreEvents;
+import org.omegat.core.data.StringEntry;
+import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.glossary.GlossaryEntry;
+import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * This is a Glossary pane that displays glossary entries.
@@ -38,18 +42,33 @@ import org.omegat.core.glossary.GlossaryEntry;
  */
 public class GlossaryTextArea extends javax.swing.JTextPane
 {
+    protected StringEntry processedEntry;
+    
     /** Creates new form MatchGlossaryPane */
     public GlossaryTextArea()
     {
         setEditable(false);
+        
+        // find glossary entries on every editor entry change
+        CoreEvents.registerEntryEventListener(new IEntryEventListener() {
+            public void onNewFile(String activeFileName) {
+            }
+
+            public void onEntryActivated(final StringEntry newEntry) {
+                processedEntry = newEntry;
+                new FindGlossaryThread(GlossaryTextArea.this, newEntry).start();
+            }
+        });
     }
     
-    /** 
-     * Sets the list of glossary entries to show in the pane.
-     * Each element of the list should be an instance of {@link GlossaryEntry}.
+    /**
+     * Sets the list of glossary entries to show in the pane. Each element of
+     * the list should be an instance of {@link GlossaryEntry}.
      */
-    public void setGlossaryEntries(List<GlossaryEntry> entries)
+    protected void setGlossaryEntries(List<GlossaryEntry> entries)
     {
+        UIThreadsUtil.mustBeSwingThread();
+        
         StringBuffer buf = new StringBuffer();
         for (GlossaryEntry entry : entries)
         {

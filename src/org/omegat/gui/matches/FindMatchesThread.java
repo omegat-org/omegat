@@ -58,6 +58,8 @@ public class FindMatchesThread extends Thread {
 
     /** Result list. */
     private List<NearString> result = new ArrayList<NearString>(OConsts.MAX_NEAR_STRINGS + 1);
+    
+    private LevenshteinDistance levenshteinDistance = new LevenshteinDistance();
 
     /** Tokens for original string. */
     private Token[] strTokens;
@@ -153,7 +155,7 @@ public class FindMatchesThread extends Thread {
             return;
         }
 
-        int ld = LevenshteinDistance.compute(strTokens, candTokens);
+        int ld = levenshteinDistance.compute(strTokens, candTokens);
         int similarity = (100 * (Math.max(strTokens.length, candTokens.length) - ld))
                 / Math.max(strTokens.length, candTokens.length);
 
@@ -162,7 +164,7 @@ public class FindMatchesThread extends Thread {
 
         if (haveChanceToAdd(similarity)) {
             Token[] candTokensAll = Core.getTokenizer().tokenizeAll(candEntry.getSrcText());
-            int ldAll = LevenshteinDistance.compute(strTokensAll, candTokensAll);
+            int ldAll = levenshteinDistance.compute(strTokensAll, candTokensAll);
             int simAdjusted = (100 * (Math.max(strTokensAll.length, candTokensAll.length) - ldAll))
                     / Math.max(strTokensAll.length, candTokensAll.length);
 

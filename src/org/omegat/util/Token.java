@@ -73,7 +73,18 @@ public class Token
      */
     public Token(String _text, int _offset)
     {
-        length = _text.length();
+        this(_text, _offset, _text.length());
+    }
+
+    /**
+     * Creates a new token.
+     * @param _text the text of the token
+     * @param _offset the starting position of this token in parent string
+     * @param _length length of token
+     */
+    public Token(String _text, int _offset, int _length)
+    {
+        length = _length;
         hash = (_text == null) ? -1 : stripAmpersand(_text).hashCode();
         offset = _offset;
     }

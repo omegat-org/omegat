@@ -174,8 +174,9 @@ public class GlossaryManager
             for(StringEntry strEntry : strEntryList)
             {
                 Token[] strTokens = Core.getTokenizer().tokenizeTextWithCache(strEntry.getSrcText());
-                if (Tokenizer.isContainsAll(strTokens, glosTokens));
+                if (Tokenizer.isContainsAll(strTokens, glosTokens)) {
                     strEntry.addGlossaryEntry(glosEntry);
+                }
             }
         }
     }

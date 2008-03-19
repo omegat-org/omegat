@@ -37,6 +37,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Utilities;
 
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.matching.SourceTextEntry;
@@ -428,6 +429,7 @@ public class EditorController implements IEditor {
                 editor.cancelUndo();
 
                 checkSpelling(true);
+                CoreEvents.fireEntryActivated(m_curEntry.getStrEntry());
             } // synchronize (editor)
 
             entryActivated = true;

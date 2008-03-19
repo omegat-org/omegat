@@ -110,7 +110,7 @@ public class LevenshteinDistance
      * For perfomance reasons the maximal number of compared items is
      * {@link #MAX_N}.
      */
-    public static int compute(Token[] s, Token[] t)
+    public static synchronized int compute(Token[] s, Token[] t)
     {
         if( s==null || t==null )
             throw new IllegalArgumentException(OStrings.getString("LD_NULL_ARRAYS_ERROR"));

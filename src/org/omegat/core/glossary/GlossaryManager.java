@@ -181,5 +181,9 @@ public class GlossaryManager
         }
     }
     
+    public List<GlossaryEntry> getGlossaryEntries() {
+        return glossaryEntries;
+    }
+    
     private List<GlossaryEntry> glossaryEntries;    
 }

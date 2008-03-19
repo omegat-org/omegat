@@ -1118,5 +1118,5 @@ public class CommandThread extends Thread implements IDataEngine
     private List<TransMemory>	m_tmList;
     private List<TransMemory>	m_orphanedList;
     
-    private GlossaryManager m_glossary;
+    public GlossaryManager m_glossary;
 }

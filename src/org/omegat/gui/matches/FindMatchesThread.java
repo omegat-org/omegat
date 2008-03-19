@@ -77,6 +77,7 @@ public class FindMatchesThread extends Thread {
         final List<LegacyTM> memory = Core.getDataEngine().getMemory();
         if (entries == null || memory == null) {
             // project is closed
+            clear();
             return;
         }
 
@@ -85,6 +86,7 @@ public class FindMatchesThread extends Thread {
         // get tokens for original string
         strTokens = Core.getTokenizer().tokenizeTextWithCache(processedEntry.getSrcText());
         if (strTokens.length == 0) {
+            clear();
             return;
             // HP: maybe also test on strTokensComplete.size(), if strTokensSize is 0
             // HP: perhaps that would result in better number/non-word matching too
@@ -138,6 +140,19 @@ public class FindMatchesThread extends Thread {
             public void run() {
                 if (matcherController.processedEntry == processedEntry) {
                     matcherController.setMatches(result);
+                }
+            }
+        });
+    }
+    
+    /**
+     * Clear result window.
+     */
+    private void clear() {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                if (matcherController.processedEntry == processedEntry) {
+                    matcherController.clear();
                 }
             }
         });

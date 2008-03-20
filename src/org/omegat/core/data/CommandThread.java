@@ -42,6 +42,7 @@ import java.util.Set;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.glossary.GlossaryEntry;
 import org.omegat.core.glossary.GlossaryManager;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.core.spellchecker.SpellChecker;
@@ -92,6 +93,13 @@ public class CommandThread extends Thread implements IDataEngine
      */
     public SpellChecker getSpellchecker() {
         return m_spellchecker;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public List<GlossaryEntry> getGlossaryEntries() {
+        return m_glossary.getGlossaryEntries();
     }
     
     public CommandThread(MainWindow tf)
@@ -319,7 +327,7 @@ public class CommandThread extends Thread implements IDataEngine
             m_tmList = null;
             m_orphanedList.clear();
             m_orphanedList = null;
-            m_glossary = null;
+            m_glossary.clear();
 
             // Well, that cleared up some, GC to the rescue!
             System.gc();
@@ -703,7 +711,6 @@ public class CommandThread extends Thread implements IDataEngine
         projectClosing = false;
         
         // first load glossary files
-        m_glossary = new GlossaryManager();
         m_glossary.loadGlossaryFiles(new File(m_config.getGlossaryRoot()));
         
         // now open source files
@@ -1110,5 +1117,5 @@ public class CommandThread extends Thread implements IDataEngine
     private List<TransMemory>	m_tmList;
     private List<TransMemory>	m_orphanedList;
     
-    public GlossaryManager m_glossary;
+    private final GlossaryManager m_glossary = new GlossaryManager();
 }

@@ -33,6 +33,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.omegat.util.Log;
@@ -51,12 +52,6 @@ public class GlossaryManager
     private final String EXT_DEF_ENC = ".tab";      // NOI18N
     private final String EXT_UTF8_ENC = ".utf8";    // NOI18N
     
-    /** Creates a new instance of GlossaryLoader */
-    public GlossaryManager()
-    {
-        glossaryEntries = new ArrayList<GlossaryEntry>();
-    }
-    
     /**
      * Loads the glossary files
      * and builds the cash of glossary entries.
@@ -73,6 +68,7 @@ public class GlossaryManager
     {
         if (folder.isDirectory())
         {
+            List<GlossaryEntry> result=new ArrayList<GlossaryEntry>();
             for (String file : folder.list())
             {
                 String fname = folder.getAbsolutePath() + File.separator + file;
@@ -80,23 +76,23 @@ public class GlossaryManager
                 // ignoring files with unrecognized extensions - http://sf.net/tracker/index.php?func=detail&aid=1088247&group_id=68187&atid=520347
                 if( fname_lower.endsWith(EXT_DEF_ENC) || fname_lower.endsWith(EXT_UTF8_ENC) ) {
                     Log.logRB("CT_LOADING_GLOSSARY", new Object[] {fname});
-                    loadGlossaryFile(new File(fname));
+                    loadGlossaryFile(new File(fname), result);
                 }
             }
+            glossaryEntries = Collections.unmodifiableList(result);
         }
         else
         {
             // uh oh - something is screwed up here
             throw new IOException(OStrings.getString("CT_ERROR_ACCESS_GLOSSARY_DIR"));
-        }
-        
+        }        
     }
 
     /**
      * Loads one glossary file.
      * Detects a file format and loads a file in appropriate encoding.
      */
-    private void loadGlossaryFile(File file) 
+    private void loadGlossaryFile(final File file, final List<GlossaryEntry> result) 
             throws FileNotFoundException, UnsupportedEncodingException, IOException
     {
         String fname_lower = file.getName().toLowerCase();
@@ -136,15 +132,25 @@ public class GlossaryManager
             String comment = "";                                               // NOI18N
             if( tokens.length>=3 )
                 comment=tokens[2];
-            GlossaryEntry glosEntry = new GlossaryEntry(tokens[0], tokens[1], comment);
-            glossaryEntries.add(glosEntry);
+            result.add(new GlossaryEntry(tokens[0], tokens[1], comment));
         }
         in.close();
     }
 
+    /**
+     * Get glossary entries.
+     * @return all entries
+     */
     public List<GlossaryEntry> getGlossaryEntries() {
         return glossaryEntries;
     }
-    
+
+    /**
+     * Clear data about glossaries.
+     */
+    public void clear() {
+        glossaryEntries = null;
+    }
+
     private List<GlossaryEntry> glossaryEntries;    
 }

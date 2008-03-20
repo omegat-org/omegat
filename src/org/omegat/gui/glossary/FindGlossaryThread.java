@@ -31,7 +31,6 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.glossary.GlossaryEntry;
 import org.omegat.core.matching.Tokenizer;
@@ -77,28 +76,32 @@ public class FindGlossaryThread extends Thread {
 
     @Override
     public void run() {
-        for (GlossaryEntry glosEntry : CommandThread.core.m_glossary
-                .getGlossaryEntries()) {
-            if (glossaryController.processedEntry != processedEntry) {
-                // Processed entry changed, because user moved to other entry.
-                // I.e. we don't need to find and display data for old entry.
-                return;
-            }
+        List<GlossaryEntry> entries = Core.getDataEngine().getGlossaryEntries();
+        if (entries != null) {
+            for (GlossaryEntry glosEntry : entries) {
+                if (glossaryController.processedEntry != processedEntry) {
+                    // Processed entry changed, because user moved to other
+                    // entry.
+                    // I.e. we don't need to find and display data for old
+                    // entry.
+                    return;
+                }
 
-            String glosStr = glosEntry.getSrcText();
-            Token[] glosTokens = Core.getTokenizer().tokenizeTextWithCache(
-                    glosStr);
-            int glosTokensN = glosTokens.length;
-            if (glosTokensN == 0)
-                continue;
+                String glosStr = glosEntry.getSrcText();
+                Token[] glosTokens = Core.getTokenizer().tokenizeTextWithCache(
+                        glosStr);
+                int glosTokensN = glosTokens.length;
+                if (glosTokensN == 0)
+                    continue;
 
-            Token[] strTokens = Core.getTokenizer().tokenizeTextWithCache(
-                    processedEntry.getSrcText());
-            if (Tokenizer.isContainsAll(strTokens, glosTokens)) {
-                result.add(glosEntry);
+                Token[] strTokens = Core.getTokenizer().tokenizeTextWithCache(
+                        processedEntry.getSrcText());
+                if (Tokenizer.isContainsAll(strTokens, glosTokens)) {
+                    result.add(glosEntry);
+                }
             }
         }
-        
+
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 if (glossaryController.processedEntry == processedEntry) {

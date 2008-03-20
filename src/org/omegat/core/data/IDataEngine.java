@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.util.List;
 
+import org.omegat.core.glossary.GlossaryEntry;
 import org.omegat.filters2.TranslationException;
 
 /**
@@ -44,7 +45,8 @@ public interface IDataEngine {
     /**
      * Load project.
      */
-    boolean loadProject(String projectDir) throws IOException, InterruptedIOException, TranslationException;
+    boolean loadProject(String projectDir) throws IOException,
+            InterruptedIOException, TranslationException;
 
     /**
      * Save project.
@@ -85,7 +87,15 @@ public interface IDataEngine {
     /**
      * Get all translation memory objects.
      * 
-     * @return read-only list of translation memories, or null if project not loaded
+     * @return read-only list of translation memories, or null if project not
+     *         loaded
      */
     List<LegacyTM> getMemory();
+
+    /**
+     * Get all glossary entries as unmodifiable list.
+     * 
+     * @return glossary entries list, of null if project not loaded
+     */
+    List<GlossaryEntry> getGlossaryEntries();
 }

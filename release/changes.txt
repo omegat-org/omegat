@@ -93,7 +93,7 @@
 
 
   3 Enhancements
-  1 Bugfixe
+  2 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.3 update 2
@@ -117,6 +117,9 @@
 
   - PO: Bad handling of plural messages on multiple lines 
   http://sourceforge.net/support/tracker.php?aid=1896781  
+
+  - Some strings not translated when using external bundle
+    http://sourceforge.net/support/tracker.php?aid=1922188 
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 update 1 Changes

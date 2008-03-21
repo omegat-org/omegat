@@ -157,15 +157,15 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         jPanel1.setLayout(new java.awt.GridLayout(0, 1));
 
         jPanel1.setMinimumSize(new java.awt.Dimension(167, 121));
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("OpenDoc_TRANSLATE_ELEMENTS"));
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, OStrings.getString("OpenDoc_TRANSLATE_ELEMENTS"));
         jPanel1.add(jLabel2);
 
         jLabel3.setFont(new java.awt.Font("MS Sans Serif", 1, 11));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("OpenXML_WORD"));
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, OStrings.getString("OpenXML_WORD"));
         jPanel1.add(jLabel3);
 
-        org.openide.awt.Mnemonics.setLocalizedText(translateHiddenTextCB, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("OpenXML_TRANSLATE_HIDDEN_TEXT"));
+        org.openide.awt.Mnemonics.setLocalizedText(translateHiddenTextCB, OStrings.getString("OpenXML_TRANSLATE_HIDDEN_TEXT"));
         translateHiddenTextCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateHiddenTextCBradiosActionPerformed(evt);
@@ -175,7 +175,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         jPanel1.add(translateHiddenTextCB);
 
         translateCommentsCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(translateCommentsCB, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("OpenXML_TRANSLATE_COMMENTS"));
+        org.openide.awt.Mnemonics.setLocalizedText(translateCommentsCB, OStrings.getString("OpenXML_TRANSLATE_COMMENTS"));
         translateCommentsCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateCommentsCBradiosActionPerformed(evt);
@@ -185,7 +185,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         jPanel1.add(translateCommentsCB);
 
         translateFootnotesCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(translateFootnotesCB, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("OpenXML_TRANSLATE_FOOTNOTES"));
+        org.openide.awt.Mnemonics.setLocalizedText(translateFootnotesCB, OStrings.getString("OpenXML_TRANSLATE_FOOTNOTES"));
         translateFootnotesCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateFootnotesCBradiosActionPerformed(evt);
@@ -195,7 +195,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         jPanel1.add(translateFootnotesCB);
 
         translateEndnotesCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(translateEndnotesCB, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("OpenXML_TRANSLATE_ENDNOTES"));
+        org.openide.awt.Mnemonics.setLocalizedText(translateEndnotesCB, OStrings.getString("OpenXML_TRANSLATE_ENDNOTES"));
         translateEndnotesCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateEndnotesCBradiosActionPerformed(evt);
@@ -205,7 +205,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         jPanel1.add(translateEndnotesCB);
 
         translateHeadersCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(translateHeadersCB, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("OpenXML_TRANSLATE_HEADERS"));
+        org.openide.awt.Mnemonics.setLocalizedText(translateHeadersCB, OStrings.getString("OpenXML_TRANSLATE_HEADERS"));
         translateHeadersCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateHeadersCBradiosActionPerformed(evt);
@@ -215,7 +215,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         jPanel1.add(translateHeadersCB);
 
         translateFootersCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(translateFootersCB, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("OpenXML_TRANSLATE_FOOTERS"));
+        org.openide.awt.Mnemonics.setLocalizedText(translateFootersCB, OStrings.getString("OpenXML_TRANSLATE_FOOTERS"));
         translateFootersCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateFootersCBradiosActionPerformed(evt);
@@ -226,11 +226,11 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
 
         jLabel4.setFont(new java.awt.Font("MS Sans Serif", 1, 11));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("OpenXML_EXCEL"));
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, OStrings.getString("OpenXML_EXCEL"));
         jPanel1.add(jLabel4);
 
         translateExcelCommentsCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(translateExcelCommentsCB, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("OpenXML_TRANSLATE_EXCEL_COMMENTS"));
+        org.openide.awt.Mnemonics.setLocalizedText(translateExcelCommentsCB, OStrings.getString("OpenXML_TRANSLATE_EXCEL_COMMENTS"));
         translateExcelCommentsCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateExcelCommentsCBradiosActionPerformed(evt);
@@ -241,11 +241,11 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
 
         jLabel5.setFont(new java.awt.Font("MS Sans Serif", 1, 11));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel5, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("OpenXML_POWER_POINT"));
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel5, OStrings.getString("OpenXML_POWER_POINT"));
         jPanel1.add(jLabel5);
 
         translateSlideCommentsCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(translateSlideCommentsCB, java.util.ResourceBundle.getBundle("org/omegat/Bundle").getString("OpenXML_TRANSLATE_SLIDE_COMMENTS"));
+        org.openide.awt.Mnemonics.setLocalizedText(translateSlideCommentsCB, OStrings.getString("OpenXML_TRANSLATE_SLIDE_COMMENTS"));
         translateSlideCommentsCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateSlideCommentsCBradiosActionPerformed(evt);

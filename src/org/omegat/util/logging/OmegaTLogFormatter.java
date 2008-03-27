@@ -39,6 +39,9 @@ public class OmegaTLogFormatter extends Formatter {
 
     protected static String lineMark;
 
+    protected static String lineSeparator = System
+            .getProperty("line.separator");
+
     static {
         // get a positive random number
         Random generator = new Random();
@@ -54,7 +57,7 @@ public class OmegaTLogFormatter extends Formatter {
         else if (sessionID.length() < 5)
             for (int i = 5; i > sessionID.length(); i++)
                 sessionID = "0" + sessionID;
-        
+
         lineMark = sessionID;
     }
 
@@ -62,7 +65,8 @@ public class OmegaTLogFormatter extends Formatter {
     public String format(final LogRecord record) {
         final StringBuilder result = new StringBuilder();
         for (String str : record.getMessage().split("\n")) {
-            result.append(lineMark).append(": ").append(str).append('\n');
+            result.append(lineMark).append(": ").append(str).append(
+                    lineSeparator);
         }
         return result.toString();
     }

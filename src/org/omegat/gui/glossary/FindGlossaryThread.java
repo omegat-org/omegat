@@ -76,6 +76,10 @@ public class FindGlossaryThread extends Thread {
 
     @Override
     public void run() {
+        // computer source entry tokens
+        Token[] strTokens = Core.getTokenizer().tokenizeTextWithCache(
+                processedEntry.getSrcText());
+
         List<GlossaryEntry> entries = Core.getDataEngine().getGlossaryEntries();
         if (entries != null) {
             for (GlossaryEntry glosEntry : entries) {
@@ -87,6 +91,7 @@ public class FindGlossaryThread extends Thread {
                     return;
                 }
 
+                // computer glossary entry tokens
                 String glosStr = glosEntry.getSrcText();
                 Token[] glosTokens = Core.getTokenizer().tokenizeTextWithCache(
                         glosStr);
@@ -94,8 +99,6 @@ public class FindGlossaryThread extends Thread {
                 if (glosTokensN == 0)
                     continue;
 
-                Token[] strTokens = Core.getTokenizer().tokenizeTextWithCache(
-                        processedEntry.getSrcText());
                 if (Tokenizer.isContainsAll(strTokens, glosTokens)) {
                     result.add(glosEntry);
                 }

@@ -84,14 +84,14 @@ public class FindMatchesThread extends Thread {
         long before = System.currentTimeMillis();
 
         // get tokens for original string
-        strTokens = Core.getTokenizer().tokenizeTextWithCache(processedEntry.getSrcText());
+        strTokens = Core.getTokenizer().tokenizeWords(processedEntry.getSrcText());
         if (strTokens.length == 0) {
             clear();
             return;
             // HP: maybe also test on strTokensComplete.size(), if strTokensSize is 0
             // HP: perhaps that would result in better number/non-word matching too
         }
-        strTokensAll = Core.getTokenizer().tokenizeAll(processedEntry.getSrcText());// HP: includes non-word tokens
+        strTokensAll = Core.getTokenizer().tokenizeAllExactly(processedEntry.getSrcText());// HP: includes non-word tokens
 
         // travel by project entries
         for (StringEntry candEntry : entries) {
@@ -128,7 +128,7 @@ public class FindMatchesThread extends Thread {
         // fill similarity data only for result
         for (NearString near : result) {
             // fix for bug 1586397
-            byte[] similarityData = FuzzyMatcher.buildSimilarityData(strTokensAll, Core.getTokenizer().tokenizeAll(near.str.getSrcText()));
+            byte[] similarityData = FuzzyMatcher.buildSimilarityData(strTokensAll, Core.getTokenizer().tokenizeAllExactly(near.str.getSrcText()));
             near.attr = similarityData;
         }
 
@@ -165,7 +165,7 @@ public class FindMatchesThread extends Thread {
      *                entry to compare
      */
     protected void processEntry(final StringEntry candEntry, final String tmxName) {
-        Token[] candTokens = Core.getTokenizer().tokenizeTextWithCache(candEntry.getSrcText());
+        Token[] candTokens = Core.getTokenizer().tokenizeWords(candEntry.getSrcText());
         if (candTokens.length == 0) {
             return;
         }
@@ -178,7 +178,7 @@ public class FindMatchesThread extends Thread {
             return;
 
         if (haveChanceToAdd(similarity)) {
-            Token[] candTokensAll = Core.getTokenizer().tokenizeAll(candEntry.getSrcText());
+            Token[] candTokensAll = Core.getTokenizer().tokenizeAllExactly(candEntry.getSrcText());
             int ldAll = levenshteinDistance.compute(strTokensAll, candTokensAll);
             int simAdjusted = (100 * (Math.max(strTokensAll.length, candTokensAll.length) - ldAll))
                     / Math.max(strTokensAll.length, candTokensAll.length);

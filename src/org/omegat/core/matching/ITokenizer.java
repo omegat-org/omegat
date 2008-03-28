@@ -32,26 +32,39 @@ import org.omegat.util.Token;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface ITokenizer {
-
     /**
      * Clear cahed tokens.
      */
     void clearCache();
 
     /**
-     * Breaks a string into tokens and don't cache results.
-     */
-    Token[] tokenizeTextNoCache(String str);
-
-    /**
-     * Breaks a string into tokens and cache results.
-     */
-    Token[] tokenizeTextWithCache(String str);
-
-    /**
-     * Breaks a string into tokens.
+     * Breaks a string into word-only tokens. Numbers, tags, and other non-word
+     * tokens are NOT included in the result. Stemming CAN be used if possible.
      * 
-     * Numbers, tags, and other non-word tokens are included in the result.
+     * This method used to find 'fizzy matches' entries and to find glossary
+     * entries.
+     * 
+     * Results can be cached for better performance.
      */
-    Token[] tokenizeAll(String str);
+    Token[] tokenizeWords(String str);
+
+    /**
+     * Breaks a string into word-only tokens. Numbers, tags, and other non-word
+     * tokens are NOT included in the result. Stemming must NOT be used.
+     * 
+     * This method used to tokenize string to check spelling and to switch case.
+     * 
+     * There is no sense to cache results.
+     */
+    Token[] tokenizeWordsExactly(String str);
+
+    /**
+     * Breaks a string into tokens. Numbers, tags, and other non-word tokens are
+     * included in the result. Stemming must NOT be used.
+     * 
+     * This method used to mark string differences on UI and to tune similarity.
+     * 
+     * There is no sense to cache results.
+     */
+    Token[] tokenizeAllExactly(String str);
 }

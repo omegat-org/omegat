@@ -197,7 +197,7 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
 
         NearString match = matches.get(activeMatch);
         // List tokens = match.str.getSrcTokenList();
-        Token[] tokens = Core.getTokenizer().tokenizeAll(match.str.getSrcText()); // fix for bug 1586397
+        Token[] tokens = Core.getTokenizer().tokenizeAllExactly(match.str.getSrcText()); // fix for bug 1586397
         byte[] attributes = match.attr;
         for (int i = 0; i < tokens.length; i++) {
             Token token = tokens[i];

@@ -65,21 +65,16 @@ public class Tokenizer implements ITokenizer {
     }
 
     /**
-     * Breaks a string into tokens (see
-     * {@link #tokenizeTextNoCache(String, boolean)}) and don't cache results.
+     * {@inheritDoc}
      */
-    public Token[] tokenizeTextNoCache(String str) {
+    public Token[] tokenizeWordsExactly(final String str) {
         return tokenizeTextNoCache(str, false);
     }
 
     /**
-     * Breaks a string into tokens (see {@link #tokenizeTextNoCache(String, boolean)}) and cache results.
-     * 
-     * Check if we've already tokenized this string, because no sense in retokenizing identical strings.
-     * 
-     * Don't check if the caller wants all tokens.
+     * {@inheritDoc}
      */
-    public Token[] tokenizeTextWithCache(final String strOrig) {
+    public Token[] tokenizeWords(final String strOrig) {
         Token[] result;
         synchronized (tokenCache) {
             result = tokenCache.get(strOrig);
@@ -97,12 +92,9 @@ public class Tokenizer implements ITokenizer {
     }
     
     /**
-     * Breaks a string into tokens (see
-     * {@link #tokenizeTextNoCache(String, boolean)}).
-     * 
-     * Numbers, tags, and other non-word tokens are included in the result.
+     * {@inheritDoc}
      */
-    public Token[] tokenizeAll(final String strOrig) {
+    public Token[] tokenizeAllExactly(final String strOrig) {
         return tokenizeTextNoCache(strOrig, true);
     }
 

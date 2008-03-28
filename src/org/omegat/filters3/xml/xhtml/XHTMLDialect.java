@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007 Didier Briel, Alex Buloichik 
+               2007-2008 Didier Briel, Alex Buloichik 
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -48,8 +48,8 @@ public class XHTMLDialect extends DefaultXMLDialect
         defineConstraint(CONSTRAINT_PUBLIC_DOCTYPE, XHTML_PUBLIC_DTD);                    
     }   
 
-    private static final Pattern PUBLIC_XHTML = Pattern 
-            .compile("-//W3C//DTD\\s+XHTML.+"); // NOI18N
+    private static final Pattern PUBLIC_XHTML = 
+            Pattern.compile("-//W3C//DTD\\s+XHTML.+");                          // NOI18N
 
     private static final String DTD = 
             "/org/omegat/filters3/xml/xhtml/res/xhtml2-flat.dtd";               // NOI18N

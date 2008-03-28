@@ -64,9 +64,12 @@ public class OmegaTLogFormatter extends Formatter {
     @Override
     public String format(final LogRecord record) {
         final StringBuilder result = new StringBuilder();
-        for (String str : record.getMessage().split("\n")) {
-            result.append(lineMark).append(": ").append(str).append(
-                    lineSeparator);
+        String[] lines = record.getMessage().split("\r|\n");
+        for (String str : lines) {
+            if (str.length() > 0) {
+                result.append(lineMark).append(": ").append(str).append(
+                        lineSeparator);
+            }
         }
         return result.toString();
     }

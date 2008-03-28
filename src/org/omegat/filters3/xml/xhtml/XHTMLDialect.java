@@ -48,24 +48,21 @@ public class XHTMLDialect extends DefaultXMLDialect
         defineConstraint(CONSTRAINT_PUBLIC_DOCTYPE, XHTML_PUBLIC_DTD);                    
     }   
 
-    private static final Pattern PUBLIC_XHTML = 
-            Pattern.compile("-//W3C//DTD\\s+XHTML\\s+1\\..+//.*");              // NOI18N   
+    private static final Pattern PUBLIC_XHTML = Pattern
+            .compile("-//W3C//DTD\\s+XHTML.+"); // NOI18N
 
-    private static final 
-            String DTD = "/org/omegat/filters3/xml/xhtml/res/xhtml11-flat.dtd"; // NOI18N
+    private static final String DTD = "/org/omegat/filters3/xml/xhtml/res/xhtml2-flat.dtd"; // NOI18N
     
     /**
-     * Resolves external entites if child filter needs it.
-     * Default implementation returns <code>null</code>.
+     * Resolves external entites if child filter needs it. Default
+     * implementation returns <code>null</code>.
      */
-    public InputSource resolveEntity(String publicId, String systemId)
-    {
-        if (publicId!=null && PUBLIC_XHTML.matcher(publicId).matches())
-        {
-            URL dtdresource = getClass().getResource(DTD);
+    public InputSource resolveEntity(String publicId, String systemId) {
+        if (publicId != null && PUBLIC_XHTML.matcher(publicId).matches()
+                && systemId.endsWith(".dtd")) {
+            URL dtdresource = XHTMLDialect.class.getResource(DTD);
             return new InputSource(dtdresource.toExternalForm());
-        }
-        else
+        } else
             return null;
     }
   

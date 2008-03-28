@@ -93,7 +93,7 @@
 
 
   3 Enhancements
-  2 Bugfixes
+  3 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.3 update 2
@@ -119,7 +119,10 @@
   http://sourceforge.net/support/tracker.php?aid=1896781  
 
   - Some strings not translated when using external bundle
-    http://sourceforge.net/support/tracker.php?aid=1922188 
+  http://sourceforge.net/support/tracker.php?aid=1922188 
+
+  - XHTML: xmlns="http://www.w3.org... in every tag
+  http://sourceforge.net/support/tracker.php?aid=1926940  
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 update 1 Changes

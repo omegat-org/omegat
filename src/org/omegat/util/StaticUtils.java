@@ -41,6 +41,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.regex.*;
 
 /**
  * Static functions taken from
@@ -149,7 +150,7 @@ public class StaticUtils
         {
             for (File file : flist)
             {
-                if (file.isDirectory())
+                if ( isProperDirectory(file) ) // Ignores some directories
                 {
                     // now recurse into subdirectories
                     buildFileList(lst, file, true);
@@ -167,7 +168,7 @@ public class StaticUtils
         File [] flist = rootDir.listFiles();
         for (File file : flist)
         {
-            if (file.isDirectory())
+            if ( isProperDirectory(file) ) // Ignores some directories
             {
                 // now recurse into subdirectories
                 lst.add(file.getAbsolutePath());
@@ -186,6 +187,31 @@ public class StaticUtils
         return graphics.getAvailableFontFamilyNames();
     }
     
+   
+    // List of CVS or SVN folders
+    private static final String CVS_SVN_FOLDERS = "(CVS)|(.svn)|(_svn)";        // NOI18N
+    
+    private static final Pattern IGNORED_FOLDERS = 
+            Pattern.compile(CVS_SVN_FOLDERS);
+    
+    /**
+     * Tests whether a directory has to be used
+     * @return <code>true</code> or <code>false</code>
+     */
+    private static boolean isProperDirectory(File file)
+    {
+        if ( file.isDirectory() )
+        {
+            Matcher directoryMatch = IGNORED_FOLDERS.matcher(file.getName());
+            if (directoryMatch.matches())
+                return false;
+            else
+                return true;
+        }
+        else
+            return false;
+    }
+            
     /**
      * Converts a single char into valid XML.
      * Output stream must convert stream to UTF-8 when saving to disk.

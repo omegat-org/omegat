@@ -20,7 +20,7 @@ Source: "docs\*"; DestDir: "{app}\docs"; Flags: recursesubdirs
 Source: "images\*"; DestDir: "{app}\images"; Flags: recursesubdirs
 Source: "lib\*"; DestDir: "{app}\lib"; Flags: recursesubdirs
 Source: "native\*"; DestDir: "{app}\native"; Flags: recursesubdirs
-Source: "..\jre\*"; DestDir: "{app}\jre"; Flags: recursesubdirs
+Source: "..\..\jre\*"; DestDir: "{app}\jre"; Flags: recursesubdirs
 Source: "OmegaT-JRE.bat"; DestDir: "{app}\"; DestName: "OmegaT.bat"
 Source: "OmegaT-JRE.exe"; DestDir: "{app}"
 Source: "OmegaT-JRE.l4J.ini"; DestDir: "{app}"

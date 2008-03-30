@@ -13,7 +13,7 @@ Compression=lzma
 SolidCompression=yes
 LicenseFile=license.txt
 OutputDir=..\dist2
-OutputBaseFilename=OmegaT_win_without_JRE_@VERSION_NUMBER_SUBST@
+OutputBaseFilename=OmegaT_@VERSION_NUMBER_SUBST@_Windows_without_JRE
 
 [Files]
 Source: "docs\*"; DestDir: "{app}\docs"; Flags: recursesubdirs

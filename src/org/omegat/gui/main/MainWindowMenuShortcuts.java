@@ -102,7 +102,9 @@ public class MainWindowMenuShortcuts {
         Properties shortcuts = new Properties();
         String name = MainWindowMenuShortcuts.class.getPackage().getName()
                 .replace('.', '/')
-                + "/MainMenuShortcuts.properties";
+                + "/MainMenuShortcuts";
+        name += StaticUtils.onMacOSX() ? ".mac.properties" : ".properties";
+        
         File userShortcuts = new File(StaticUtils.getConfigDir(),
                 "MainMenuShortcuts.properties");
         try {

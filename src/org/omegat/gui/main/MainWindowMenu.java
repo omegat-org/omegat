@@ -27,11 +27,8 @@
 
 package org.omegat.gui.main;
 
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -41,7 +38,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
-import javax.swing.KeyStroke;
 
 import net.roydesign.mac.MRJAdapter;
 
@@ -203,11 +199,8 @@ public class MainWindowMenu implements ActionListener {
         helpMenu.add(helpContentsMenuItem = createMenuItem("TF_MENU_HELP_CONTENTS"));
         helpMenu.add(helpAboutMenuItem = createMenuItem("TF_MENU_HELP_ABOUT"));
 
-        cycleSwitchCaseMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, InputEvent.SHIFT_MASK));
-        helpContentsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
-
         setActionCommands();
-        initUIShortcuts();
+        MainWindowMenuShortcuts.setShortcuts(mainMenu);
 
         initMacSpecific();
         
@@ -321,64 +314,6 @@ public class MainWindowMenu implements ActionListener {
         } catch (IllegalAccessException ex) {
             throw new ExceptionInInitializerError(ex);
         }
-    }
-
-    /**
-     * Sets the shortcut keys. Need to do it here (manually), because on MacOSX
-     * the shortcut key is CMD, and on other OSes it's Ctrl.
-     */
-    private void initUIShortcuts() {
-        setAccelerator(projectOpenMenuItem, KeyEvent.VK_O);
-        setAccelerator(projectSaveMenuItem, KeyEvent.VK_S);
-        setAccelerator(projectEditMenuItem, KeyEvent.VK_E);
-        setAccelerator(projectExitMenuItem, KeyEvent.VK_Q);
-
-        setAccelerator(editUndoMenuItem, KeyEvent.VK_Z);
-        setAccelerator(editRedoMenuItem, KeyEvent.VK_Y);
-        setAccelerator(editOverwriteTranslationMenuItem, KeyEvent.VK_R);
-        setAccelerator(editInsertTranslationMenuItem, KeyEvent.VK_I);
-        setAccelerator(editOverwriteSourceMenuItem, KeyEvent.VK_R, true);
-        setAccelerator(editInsertSourceMenuItem, KeyEvent.VK_I, true);
-        setAccelerator(editFindInProjectMenuItem, KeyEvent.VK_F);
-        setAccelerator(editSelectFuzzy1MenuItem, KeyEvent.VK_1);
-        setAccelerator(editSelectFuzzy2MenuItem, KeyEvent.VK_2);
-        setAccelerator(editSelectFuzzy3MenuItem, KeyEvent.VK_3);
-        setAccelerator(editSelectFuzzy4MenuItem, KeyEvent.VK_4);
-        setAccelerator(editSelectFuzzy5MenuItem, KeyEvent.VK_5);
-
-        setAccelerator(gotoNextUntranslatedMenuItem, KeyEvent.VK_U);
-        setAccelerator(gotoNextSegmentMenuItem, KeyEvent.VK_N);
-        setAccelerator(gotoPreviousSegmentMenuItem, KeyEvent.VK_P);
-        setAccelerator(gotoSegmentMenuItem, KeyEvent.VK_J);
-
-        setAccelerator(gotoHistoryForwardMenuItem, KeyEvent.VK_N, true);
-        setAccelerator(gotoHistoryBackMenuItem, KeyEvent.VK_P, true);
-
-        setAccelerator(viewFileListMenuItem, KeyEvent.VK_L);
-
-        setAccelerator(toolsValidateTagsMenuItem, KeyEvent.VK_T);
-    }
-
-    /**
-     * Utility method to set Ctrl + key accelerators for menu items.
-     * 
-     * @param key
-     *                integer specifiyng the key code (e.g. KeyEvent.VK_Z)
-     */
-    private void setAccelerator(JMenuItem item, int key) {
-        setAccelerator(item, key, false);
-    }
-
-    /**
-     * Utility method to set Ctrl + key accelerators for menu items.
-     * 
-     * @param key
-     *                integer specifiyng the key code (e.g. KeyEvent.VK_Z)
-     */
-    private void setAccelerator(JMenuItem item, int key, boolean shift) {
-        int shiftmask = shift ? KeyEvent.SHIFT_MASK : 0;
-        item.setAccelerator(KeyStroke.getKeyStroke(key, shiftmask
-                | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
     }
 
     /**

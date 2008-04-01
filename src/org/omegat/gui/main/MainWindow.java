@@ -51,7 +51,6 @@ import javax.swing.WindowConstants;
 import org.omegat.core.Core;
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.core.data.StringEntry;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.editor.EditorTextArea;
 import org.omegat.gui.filelist.ProjectFrame;

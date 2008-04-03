@@ -27,6 +27,8 @@ package org.omegat.gui.matches;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
@@ -47,6 +49,9 @@ import org.omegat.util.Token;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class FindMatchesThread extends Thread {
+    private static final Logger LOGGER = Logger
+            .getLogger(FindMatchesThread.class.getName());
+    
     private final MatchesTextArea matcherController;
 
     /**
@@ -81,7 +86,11 @@ public class FindMatchesThread extends Thread {
             return;
         }
 
-        long before = System.currentTimeMillis();
+        long before = 0;
+        if (LOGGER.isLoggable(Level.FINER)) {
+            // only if need to be logged
+            before = System.currentTimeMillis();
+        }
 
         // get tokens for original string
         strTokens = Core.getTokenizer().tokenizeWords(processedEntry.getSrcText());
@@ -132,9 +141,11 @@ public class FindMatchesThread extends Thread {
             near.attr = similarityData;
         }
 
-        long after = System.currentTimeMillis();
-        // TODO: remove it. Only for show matching speed
-        System.out.println("Time for find matches: " + (after - before));
+        if (LOGGER.isLoggable(Level.FINER)) {
+            // only if need to be logged
+            long after = System.currentTimeMillis();
+            LOGGER.finer("Time for find matches: " + (after - before));
+        }
 
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

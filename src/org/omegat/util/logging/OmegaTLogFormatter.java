@@ -25,9 +25,16 @@
 
 package org.omegat.util.logging;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Random;
 import java.util.logging.Formatter;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
+
+import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
 
 /**
  * Formatter for output data with session ID
@@ -41,6 +48,13 @@ public class OmegaTLogFormatter extends Formatter {
 
     protected static String lineSeparator = System
             .getProperty("line.separator");
+
+    private String logMask;
+    private boolean isMaskContainsMark;
+    private boolean isMaskContainsThreadName;
+    private boolean isMaskContainsLevel;
+    private boolean isMaskContainsText;
+    private boolean isMaskContainsKey;
 
     static {
         // get a positive random number
@@ -61,16 +75,103 @@ public class OmegaTLogFormatter extends Formatter {
         lineMark = sessionID;
     }
 
+    /**
+     * Initialize formatter.
+     */
+    public OmegaTLogFormatter() {
+        LogManager manager = LogManager.getLogManager();
+        String cname = getClass().getName();
+
+        logMask = manager.getProperty(cname + ".mask");
+        if (logMask == null) {
+            logMask = "$mark: $level: $text $key";
+        }
+
+        isMaskContainsKey = logMask.contains("$key");
+        isMaskContainsLevel = logMask.contains("$level");
+        isMaskContainsMark = logMask.contains("$mark");
+        isMaskContainsText = logMask.contains("$text");
+        isMaskContainsThreadName = logMask.contains("$threadName");
+    }
+
+    /**
+     * Format output message.
+     */
     @Override
     public String format(final LogRecord record) {
         final StringBuilder result = new StringBuilder();
-        String[] lines = record.getMessage().split("\r|\n");
-        for (String str : lines) {
-            if (str.length() > 0) {
-                result.append(lineMark).append(": ").append(str).append(
-                        lineSeparator);
+        String message;
+        String format;
+        if (record.getResourceBundle() != null) {
+            format = record.getResourceBundle().getString(record.getMessage());
+        } else {
+            format = record.getMessage();
+        }
+        message = StaticUtils.format(format, record.getParameters());
+        String[] lines = message.split("\r|\n");
+        for (String line : lines) {
+            appendFormattedLine(result, record, line, false);
+        }
+        if (record.getThrown() != null) {
+            StringWriter stackTrace = new StringWriter();
+
+            record.getThrown().printStackTrace(new PrintWriter(stackTrace));
+            for (String line : stackTrace.toString().split("\r|\n")) {
+                appendFormattedLine(result, record, line, true);
             }
         }
         return result.toString();
+    }
+
+    /**
+     * Format one line and append to output.
+     */
+    protected void appendFormattedLine(final StringBuilder out,
+            final LogRecord record, final String line, final boolean isStack) {
+        if (line.length() == 0)
+            return;
+
+        String res = logMask;
+        if (isMaskContainsMark) {
+            res = res.replace("$mark", lineMark);
+        }
+        if (isMaskContainsThreadName) {
+            res = res.replace("$threadName", Thread.currentThread().getName());
+        }
+        if (isMaskContainsLevel) {
+            res = res.replace("$level", getLocalizedLevel(record.getLevel()));
+        }
+        if (isMaskContainsText) {
+            res = res.replace("$text", line);
+        }
+        if (isMaskContainsKey) {
+            if (record.getResourceBundle() != null && !isStack) {
+                res = res.replace("$key", "(" + record.getMessage() + ")");
+            } else {
+                res = res.replace("$key", "");
+            }
+        }
+        out.append(res).append(lineSeparator);
+    }
+
+    /**
+     * Get localized level name.
+     */
+    protected String getLocalizedLevel(final Level logLevel) {
+        String result;
+        if (Level.INFO.getName().equals(logLevel.getName())) {
+            result = OStrings.getString("LOG_INFO_ID");
+        } else if (Level.SEVERE.getName().equals(logLevel.getName())) {
+            result = OStrings.getString("LOG_ERROR_ID");
+        } else if (Level.WARNING.getName().equals(logLevel.getName())) {
+            result = OStrings.getString("LOG_WARNING_ID");
+        } else {
+            result = logLevel.getLocalizedName();
+        }
+        result = result.replace("{0}", "").replace("()", "").trim();
+        if (result.endsWith(":")) {
+            result = result.substring(0, result.length() - 1);
+        }
+        return result.trim();
     }
 }

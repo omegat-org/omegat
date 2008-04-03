@@ -47,6 +47,13 @@ public class OStrings
     private static ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/Bundle");
 
     /**
+     * Returns resource bundle.
+     */
+    public static ResourceBundle getResourceBundle() {
+        return bundle;
+    }
+    
+    /**
       * Loads resources from the specified file.
       * If the file cannot be loaded, resources are reverted to the default locale.
       * Useful when testing localisations outside the jar file.

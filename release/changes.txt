@@ -4,7 +4,7 @@
 2.0.0 vs. 1.8.0 update 1 
 
 
-  2 Enhancements
+  3 Enhancements
   0 Bugfixe
 
 ----------------------------------------------------------------------
@@ -14,6 +14,9 @@
   
   - User-configurable keyboard shortcuts
   http://sourceforge.net/support/tracker.php?aid=1615400 
+
+  - Shortcut for Reload/Close/Create translated documents
+  http://sourceforge.net/support/tracker.php?aid=1618679  
 
   Other enhancements:
   - Zero load time. That is, data required for matching is now computed 

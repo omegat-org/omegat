@@ -4,18 +4,21 @@
 2.0.0 vs. 1.8.0 update 1 
 
 
-  1 Enhancements
+  2 Enhancements
   0 Bugfixe
 
 ----------------------------------------------------------------------
 2.0.0 
 
+  Implemented requests:
+  
+  - User-configurable keyboard shortcuts
+  http://sourceforge.net/support/tracker.php?aid=1615400 
+
   Other enhancements:
   - Zero load time. That is, data required for matching is now computed 
 "on-demand", which means the load time for any project should now be 
 under a minute in most cases.
-
-
 
 ----------------------------------------------------------------------
  OmegaT 1.8.0 update 1 Changes

@@ -1,16 +1,35 @@
 ----------------------------------------------------------------------
+ OmegaT 2.0.0 Changes
+----------------------------------------------------------------------
+2.0.0 vs. 1.8.0 update 1 
+
+
+  1 Enhancements
+  0 Bugfixe
+
+----------------------------------------------------------------------
+2.0.0 
+
+  Other enhancements:
+  - Zero load time. That is, data required for matching is now computed 
+"on-demand", which means the load time for any project should now be 
+under a minute in most cases.
+
+
+
+----------------------------------------------------------------------
  OmegaT 1.8.0 update 1 Changes
 ----------------------------------------------------------------------
 1.8.0 update 1 vs. 1.8.0
 
 
-  3 Enhancements
+   3 Enhancements
    0 Bugfixe
 
 ----------------------------------------------------------------------
 1.8.0 update 1
 
- Other enhancements:
+  Other enhancements:
   - Albanian localisation updated to 1.8 (UI, readme)
   - Belarusian localisation updated to 1.8 (UI)
   - New Portuguese (Portugal) localisation (UI)

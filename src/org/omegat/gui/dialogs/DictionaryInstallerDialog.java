@@ -1,15 +1,10 @@
-/*
- * DictionaryInstallerDialog.java
- *
- * Created on Pondelok, 2007, september 3, 17:59
- */
-
 /**************************************************************************
  OmegaT - Computer Assisted Translation (CAT) tool 
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
+               2008 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -38,6 +33,13 @@ import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
+import java.awt.event.ActionEvent;     // HP
+import java.awt.event.KeyEvent;        // HP
+import javax.swing.AbstractAction;     // HP
+import javax.swing.Action;             // HP
+import javax.swing.JComponent;         // HP
+import javax.swing.KeyStroke;          // HP
+
 import org.omegat.core.spellchecker.DictionaryManager;
 import org.omegat.util.OStrings;
 
@@ -45,6 +47,7 @@ import org.omegat.util.OStrings;
  * The spellchecker dictionary installer.
  *
  * @author  bartkoz
+ * @author Didier Briel
  */
 public class DictionaryInstallerDialog extends JDialog {
     
@@ -61,7 +64,22 @@ public class DictionaryInstallerDialog extends JDialog {
     /** Creates new form DictionaryInstallerDialog */
     public DictionaryInstallerDialog(JDialog parent, DictionaryManager dicMan) throws IOException {
         super(parent, true);
-    
+
+        // HP
+        //  Handle escape key to close the window
+        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
+        Action escapeAction = new AbstractAction()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                dispose();
+            }
+        };
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
+        put(escape, "ESCAPE");                                                  // NOI18N
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+        // END HP
+        
         this.dicMan = dicMan;
         
         initComponents();
@@ -106,6 +124,7 @@ public class DictionaryInstallerDialog extends JDialog {
         listLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle(OStrings.getString("GUI_DICTIONARY_INSTALLER_TITLE"));
         jScrollPane2.setViewportView(dictionaryList);
 
         org.openide.awt.Mnemonics.setLocalizedText(closeButton, OStrings.getString("BUTTON_CLOSE"));
@@ -161,7 +180,7 @@ public class DictionaryInstallerDialog extends JDialog {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                         .add(installButton)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 121, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 125, Short.MAX_VALUE)
                         .add(closeButton))
                     .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
                 .addContainerGap())

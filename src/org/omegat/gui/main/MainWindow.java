@@ -6,8 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers, 
                          Benjamin Siband, and Kim Bruning
                2007 Zoltan Bartko
-               2008 Andrzej Sawula
- Portions copyright 2008 Alex Buloichik
+               2008 Andrzej Sawula, Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -381,6 +380,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         OmegaTFileChooser chooser=new OmegaTFileChooser();
         chooser.setMultiSelectionEnabled(true);
         chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        chooser.setDialogTitle(OStrings.getString("TF_FILE_IMPORT_TITLE"));
         
         int result=chooser.showOpenDialog(this);
         if( result==OmegaTFileChooser.APPROVE_OPTION )

@@ -30,18 +30,19 @@ under a minute in most cases.
 
 
    1 Enhancement
-   1 Bugfix
-
+   2 Bugfixes
 ----------------------------------------------------------------------
 1.8.0 update 2
+
+  Other enhancements:
+  - Spellchecking dialogs now have a title
 
   Bug fixes:
   
   - Spellchecking dialogs not dismissable with [esc]
   http://sourceforge.net/support/tracker.php?aid=1815506
-  
-  Other enhancements:
-  - Spellchecking dialogs now have a title
+  - Wrong Import file dialog title
+  http://sourceforge.net/support/tracker.php?aid=1940081 
 
 ----------------------------------------------------------------------
  OmegaT 1.8.0 update 1 Changes

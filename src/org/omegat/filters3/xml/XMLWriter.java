@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2008 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -35,6 +36,7 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.regex.Matcher;
 
+import org.omegat.util.OConsts;
 import org.omegat.util.Log;
 import org.omegat.util.PatternConsts;
 
@@ -45,6 +47,7 @@ import org.omegat.util.PatternConsts;
  * and writes out the file in the encoding.
  *
  * @author Maxym Mykhalchuk
+ * @author Didier Briel
  */
 public class XMLWriter extends Writer
 {
@@ -63,7 +66,8 @@ public class XMLWriter extends Writer
      * @param fileName  file name to write to
      * @param encoding  encoding to write a file in
      */
-    public XMLWriter(File file, String encoding) throws FileNotFoundException, UnsupportedEncodingException
+    public XMLWriter(File file, String encoding) 
+        throws FileNotFoundException, UnsupportedEncodingException
     {
         if (encoding==null)
             XML_HEADER = "<?xml version=\"1.0\"?>";                             // NOI18N
@@ -74,8 +78,8 @@ public class XMLWriter extends Writer
         FileOutputStream fos = new FileOutputStream(file);
         
         OutputStreamWriter osw;
-        if (encoding==null)
-            osw = new OutputStreamWriter(fos);
+        if (encoding==null) // Without precision, an XML file is UTF-8
+            osw = new OutputStreamWriter(fos, OConsts.UTF8);
         else
             osw = new OutputStreamWriter(fos, encoding);
         
@@ -135,7 +139,7 @@ public class XMLWriter extends Writer
             }
             else
             {
-                Log.log("Shouldn't happen! " +                          // NOI18N
+                Log.log("Shouldn't happen! " +                                  // NOI18N
                         "XMLWriter: XML File does not contain XML header:\n" +  // NOI18N
                         buffer.substring(0, Math.min(buffer.length(), 80))); 
                 realWriter.write(XML_HEADER);

@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007 Didier Briel
+               2007-2008 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -164,13 +164,13 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
 
     /** 
      * Whether source encoding can be varied by the user.
-     * If XML file has no encoding declaration, user-specified will be used, 
-     * hence returns <code>true</code> by default.
-     * @return <code>true</code>
+     * If XML file has no encoding declaration, UTF-8 will be used, 
+     * hence returns <code>false</code> by default.
+     * @return <code>false</code>
      */
     public boolean isSourceEncodingVariable()
     {
-        return true;
+        return false;
     }
 
     /**

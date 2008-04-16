@@ -65,7 +65,7 @@ under a minute in most cases.
  OmegaT 1.8.0 Changes
 ----------------------------------------------------------------------
 
-1.8.0 vs. 1.7.3 update 2
+1.8.0 vs. 1.7.3 update 3
 
 
   15 Enhancements
@@ -130,6 +130,24 @@ under a minute in most cases.
 
   - Mistake of segmentation after <PRE>
   http://sourceforge.net/support/tracker.php?aid=1827479  
+
+----------------------------------------------------------------------
+ OmegaT 1.7.3 update 3 Changes
+----------------------------------------------------------------------
+
+1.7.3 update 3 vs. 1.7.3 update 2
+
+
+  0 Enhancement
+  1 Bugfix
+
+  Bug fixes:
+
+  - Wrong default encoding in XML (should be UTF-8) 
+  http://sourceforge.net/support/tracker.php?aid=1941365   
+
+----------------------------------------------------------------------
+1.7.3 update 3
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 update 2 Changes

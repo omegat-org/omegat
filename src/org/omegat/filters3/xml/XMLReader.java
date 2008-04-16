@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2008 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -34,6 +35,7 @@ import java.io.Reader;
 import java.util.regex.Matcher;
 
 import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 
 
@@ -41,14 +43,17 @@ import org.omegat.util.PatternConsts;
  * This class automatically detects encoding of an inner XML file
  * and constructs a Reader with appropriate encoding.
  * <p>
- * Detecting of encoding is done by reading a value from XML header
+ * Detecting of encoding is done first by reading a possible BOM,
+ * to detect UTF-16 or UTF-8
+ * then by reading a value from the XML header
  *     <code>&lt;?xml version="1.0" encoding="..."?&gt;</code>
  * <p>
- * If encoding isn't specified, or it is not supported by Java platform,
- * the file is opened in default system encoding 
- * (ISO-8859-2 in USA, Windows-1251 on my OS).
+ * If encoding isn't specified, or it is not supported by the Java platform,
+ * the file is opened in UTF-8, in compliance with the XML specifications
+ * 
  *
  * @author Maxym Mykhalchuk
+ * @author Didier Briel
  */
 public class XMLReader extends Reader
 {
@@ -67,7 +72,7 @@ public class XMLReader extends Reader
     /**
      * Creates a new instance of XMLReader.
      * If encoding cannot be detected,
-     * falls back to default encoding of Operating System.
+     * falls back to default UTF-8.
      *
      * @param fileName - the file to read
      */
@@ -80,7 +85,7 @@ public class XMLReader extends Reader
      * Creates a new instance of XMLReader.
      * If encoding cannot be detected, falls back to supplied <code>encoding</code>,
      * or (if supplied null, or supplied encoding is not supported by JVM)
-     * falls back to default encoding of Operating System.
+     * falls back to UTF-8.
      *
      * @param fileName   The file to read.
      * @param encoding   The encoding to use if we can't autodetect.
@@ -148,10 +153,10 @@ public class XMLReader extends Reader
             return new InputStreamReader(is, encoding);
         }
         
-        // default encoding if we couldn't detect it ourselves
+        // UTF-8 if we couldn't detect it ourselves
         try
         {
-            return new InputStreamReader(is, defaultEncoding);
+            return new InputStreamReader(is, OConsts.UTF8);
         }
         catch( Exception e )
         {

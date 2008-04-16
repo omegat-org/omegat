@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007 Didier Briel
+               2007-2008 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -75,18 +75,18 @@ public class XHTMLFilter extends XMLFilter
     {
         return new Instance[]
         {
-            new Instance("*.html", "UTF-8", "UTF-8"),                           // NOI18N
-            new Instance("*.xhtml", "UTF-8", "UTF-8"),                          // NOI18N
+            new Instance("*.html", null, null),
+            new Instance("*.xhtml", null, null),
         };
     }
     
     /**
-     * Yes, XHTML may be read in a variety of encodings.
-     * @return <code>true</code>
+     * Either the encoding can be read, or it is UTF-8.
+     * @return <code>false</code>
      */
     public boolean isSourceEncodingVariable()
     {
-        return true;
+        return false;
     }
     
     /**

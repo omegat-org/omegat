@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-           (C) 2007 Didier Briel 
+           (C) 2007-2008 Didier Briel 
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -69,17 +69,17 @@ public class XLIFFFilter extends XMLFilter
     {
         return new Instance[] 
         {
-            new Instance("*.xlf", null, null),                            // NOI18N
+            new Instance("*.xlf", null, null),                                  // NOI18N
         };
     }
 
     /**
-     * Yes, XLIFF may be read in a variety of encodings.
-     * @return <code>true</code>
+     * Either the encoding can be read, or it is UTF-8.
+     * @return <code>false</code>
      */
     public boolean isSourceEncodingVariable()
     {
-        return true;
+        return false;
     }
     
     /**

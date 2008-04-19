@@ -98,105 +98,105 @@ public class PoFilter extends AbstractFilter
         boolean nowrap = false;
         while( (s=in.readLine())!=null )
         {
-            //removing the fuzzy markers, as it has no meanings after being
-            //processed by omegat
-            if (s.matches("#, fuzzy"))
+            // Removing the fuzzy markers, as it has no meanings after being
+            // processed by omegat
+            if (s.matches("#, fuzzy"))                                          // NOI18N
             {
                 continue;
             }
-            else if (s.matches("#,.* fuzzy.*"))
+            else if (s.matches("#,.* fuzzy.*"))                                 // NOI18N
             {
-                s=s.replaceAll("(.*), fuzzy(.*)", "$1$2");
+                s=s.replaceAll("(.*), fuzzy(.*)", "$1$2");                      // NOI18N
             }
             
             //FSM for po files
-            if (s.matches("#,.* no-wrap.*"))
+            if (s.matches("#,.* no-wrap.*"))                                    // NOI18N
             {
                 nowrap = true;
                 nontrans.append(s);
-                nontrans.append("\n");
+                nontrans.append("\n");                                          // NOI18N
             }
-            else if (s.matches("msgid \"\""))
+            else if (s.matches("msgid \"\""))                                   // NOI18N
             {
                 potential_header = true;
                 msgid = true;
-                nontrans.append(s+"\n");
+                nontrans.append(s+"\n");                                        // NOI18N
             }
-            else if (s.matches("msgid \".*\""))
+            else if (s.matches("msgid \".*\""))                                 // NOI18N
             {
                 msgid = true;
                 if (nowrap)
                 {
-                    trans.append(s.replaceAll("msgid (.*)","$1"));
-                    trans.append("\n");
+                    trans.append(s.replaceAll("msgid (.*)","$1"));              // NOI18N
+                    trans.append("\n");                                         // NOI18N
                 }
                 else
                 {
-                    trans.append(s.replaceAll("msgid \"(.*)\"","$1"));
+                    trans.append(s.replaceAll("msgid \"(.*)\"","$1"));          // NOI18N
                 }
-                nontrans.append(s+"\n");
+                nontrans.append(s+"\n");                                        // NOI18N
             }
-            else if ((s.matches("\"(.*)\"")) && msgid)
+            else if ((s.matches("\"(.*)\"")) && msgid)                          // NOI18N
             {
                 potential_header = false;
                 nontrans.append(s);
-                nontrans.append("\n");
+                nontrans.append("\n");                                          // NOI18N
                 if (nowrap)
                 {
                     trans.append(s);
-                    trans.append("\n");
+                    trans.append("\n");                                         // NOI18N
                 }
                 else
                 {
-                    trans.append(s.replaceAll("\"(.*)\"","$1"));
+                    trans.append(s.replaceAll("\"(.*)\"","$1"));                // NOI18N
                 }
             }
-            else if (s.matches("\"(.*)\"") && msgid_plural)
+            else if (s.matches("\"(.*)\"") && msgid_plural)                     // NOI18N
             {
                 potential_header = false;
                 nontrans.append(s);
-                nontrans.append("\n");
+                nontrans.append("\n");                                          // NOI18N
                 if (nowrap)
                 {
                     trans_plural.append(s);
-                    trans_plural.append("\n");
+                    trans_plural.append("\n");                                  // NOI18N
                 }
                 else
                 {
-                    trans_plural.append(s.replaceAll("\"(.*)\"","$1"));
+                    trans_plural.append(s.replaceAll("\"(.*)\"","$1"));         // NOI18N
                 }
             }
-            else if (s.matches("msgid_plural \".*\"")) 
+            else if (s.matches("msgid_plural \".*\""))                          // NOI18N
             {
                 potential_header = false;
                 msgid = false;
                 msgid_plural = true;
                 if (nowrap)
                 {
-                    trans_plural.append(s.replaceAll("msgid_plural (.*)","$1"));
-                    trans_plural.append("\n");
+                    trans_plural.append(s.replaceAll("msgid_plural (.*)","$1"));// NOI18N
+                    trans_plural.append("\n");                                  // NOI18N
               }
               else
               {
-                  trans_plural.append(s.replaceAll("msgid_plural \"(.*)\"","$1"));
+                  trans_plural.append(s.replaceAll("msgid_plural \"(.*)\"","$1"));  // NOI18N
               }
-              nontrans.append(s+"\n");
+              nontrans.append(s+"\n");                                          // NOI18N
             }
-            else if ((s.matches("\"(.*)\"")) && msgid_plural)
+            else if ((s.matches("\"(.*)\"")) && msgid_plural)                   // NOI18N
             {
                 nontrans.append(s);
-                nontrans.append("\n");
+                nontrans.append("\n");                                          // NOI18N
                 if (nowrap)
                 {
                     trans_plural.append(s);
-                    trans_plural.append("\n");
+                    trans_plural.append("\n");                                  // NOI18N
                 }
                 else
                 {
-                    trans_plural.append(s.replaceAll("\"(.*)\"","$1"));
+                    trans_plural.append(s.replaceAll("\"(.*)\"","$1"));         // NOI18N
                 }
             }
-            else if (s.matches("msgstr \".*\""))
+            else if (s.matches("msgstr \".*\""))                                // NOI18N
             {
                 msgid = false;
                 if (potential_header)
@@ -204,77 +204,76 @@ public class PoFilter extends AbstractFilter
                     header = true;
                     msgstr = true;
                     nontrans.append(s);
-                    nontrans.append("\n");
+                    nontrans.append("\n");                                      // NOI18N
                 }
                 else
                 {
-                    nontrans.append("msgstr ");
+                    nontrans.append("msgstr ");                                 // NOI18N
                     if (!nowrap)
                     {
-                        nontrans.append("\"");
+                        nontrans.append("\"");                                  // NOI18N
                     }
                     msgstr = true;
                     out.write(nontrans.toString());
                     nontrans.setLength(0);
                     
-                    out.write(processEntry(trans.toString()));
+                    out.write(privateProcessEntry(trans.toString()));
                     trans.setLength(0);
                     if (!nowrap)
-                        out.write("\"");
-                    out.write("\n");
+                        out.write("\"");                                        // NOI18N
+                    out.write("\n");                                            // NOI18N
                 }
             }
-            else if ((s.matches("\"(.*)\"")) && msgstr)
+            else if ((s.matches("\"(.*)\"")) && msgstr)                         // NOI18N
             {
                 if (header)
                 {
-                    trans.append(s);
-                    trans.append("\n");
+                    trans.append(s.replaceAll("\"(.*)\"","$1"));                // NOI18N
                 }
             }
             
-            else if (s.matches("msgstr\\[0\\] \".*\""))
+            else if (s.matches("msgstr\\[0\\] \".*\""))                         // NOI18N
             {
                 msgid_plural = false;
-                nontrans.append("msgstr[0] ");
+                nontrans.append("msgstr[0] ");                                  // NOI18N
                 if (!nowrap)
                 {
-                    nontrans.append("\"");
+                    nontrans.append("\"");                                      // NOI18N
                 }
                 msgstr = true;
                 out.write(nontrans.toString());
                 nontrans.setLength(0);
                     
-                out.write(processEntry(trans.toString()));
+                out.write(privateProcessEntry(trans.toString()));
                 trans.setLength(0);
                 if (!nowrap)
-                    out.write("\"");
-                out.write("\n");
+                    out.write("\"");                                            // NOI18N
+                out.write("\n");                                                // NOI18N
             }
-            else if (s.matches("msgstr\\[1\\] \".*\""))
+            else if (s.matches("msgstr\\[1\\] \".*\""))                         // NOI18N
             {
                 msgstr = false;
-                nontrans.append("msgstr[1] ");
+                nontrans.append("msgstr[1] ");                                  // NOI18N
                 if (!nowrap)
                 {
-                    nontrans.append("\"");
+                    nontrans.append("\"");                                      // NOI18N
                 }
                 msgstr_plural = true;
                 out.write(nontrans.toString());
                 nontrans.setLength(0);
                 
-                out.write(processEntry(trans_plural.toString()));
+                out.write(privateProcessEntry(trans_plural.toString()));
                 trans_plural.setLength(0);
                 if (!nowrap)
-                    out.write("\"");
-                out.write("\n");
+                    out.write("\"");                                            // NOI18N
+                out.write("\n");                                                // NOI18N
             }
-            else if ((s.matches("\"(.*)\"")) && (msgstr || msgstr_plural) )
+            else if ((s.matches("\"(.*)\"")) && (msgstr || msgstr_plural) )     // NOI18N
             {
                 if (header)
                 {
                     trans.append(s);
-                    trans.append("\n");
+                    trans.append("\n");                                         // NOI18N
                 }
             }
             else if (header)
@@ -284,10 +283,17 @@ public class PoFilter extends AbstractFilter
                 msgstr = false;
                 out.write(nontrans.toString());
                 nontrans.setLength(0);
-                
-                out.write(processEntry(trans.toString()));
+                // Write header. The translation should contain a couple of lines.
+                // each line has to be written on a separate line within quotes. 
+                out.write("\"");                                                // NOI18N
+                String headerString = privateProcessEntry(trans.toString());
+                // Create separate lines within quotes.
+                headerString = headerString.replace("\\n", "\\n\"\n\"");        // NOI18N
+                // Remove the last quote-open
+                headerString = headerString.substring(0,headerString.length()-1);
+                out.write(headerString);
                 trans.setLength(0);
-                out.write("\n");
+                out.write("\n");                                                // NOI18N
             }
             else
             {
@@ -296,15 +302,42 @@ public class PoFilter extends AbstractFilter
                 msgstr_plural = false;
                 potential_header = false;
                 nontrans.append(s);
-                nontrans.append("\n");
+                nontrans.append("\n");                                          // NOI18N
             }
         }
         
         if( nontrans.length()>=0 )
             out.write(nontrans.toString());
         if( trans.length()>=0 )
-            out.write(processEntry(trans.toString()));
+            out.write(privateProcessEntry(trans.toString()));
         if( trans_plural.length()>=0 )
-          out.write(processEntry(trans_plural.toString()));
+          out.write(privateProcessEntry(trans_plural.toString()));
+    }
+    
+    /** 
+     * Private processEntry to do pre- and postprocessing.
+     * Double quotes are (un)escaped before and after translation.<br> 
+     * [ 1869069 ] Escape support for PO
+     * @return the modified entry
+     **/
+    private String privateProcessEntry(String entry)
+    {
+        // Removes escapes from quotes. ( \" becomes " )
+        entry = entry.replace("\\\"", "\"");                                    // NOI18N
+        // Interprets newline sequence, except when preceded by \
+        // \n becomes Linefeed, but \\n is not touched
+        entry = entry.replaceAll("([^\\\\])\\\\n", "$1\\\n");                   // NOI18N
+        // Interprets newline sequence at the beginning of a line
+        entry = entry.replaceAll("^\\\\n", "\\\n");                             // NOI18N
+        // Removes escape from backslash        
+        entry = entry.replace("\\\\", "\\");                                    // NOI18N
+        String translation = processEntry(entry); 
+        // Escapes backslash
+        translation = translation.replace("\\", "\\\\");                        // NOI18N 
+        // Adds escapes to quotes. ( " becomes \" )
+        translation = translation.replace("\"", "\\\"");                        // NOI18N 
+        // Interprets newline chars.
+        translation = translation.replace("\n", "\\n");                         // NOI18N 
+        return translation;
     }
 }

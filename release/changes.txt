@@ -138,16 +138,20 @@ under a minute in most cases.
 1.7.3 update 3 vs. 1.7.3 update 2
 
 
-  0 Enhancement
+  1 Enhancement
   1 Bugfix
 
+----------------------------------------------------------------------
+1.7.3 update 3
+
+  Implemented requests:
+  - Escape support for PO 
+  http://sourceforge.net/support/tracker.php?aid=1869069    
+  
   Bug fixes:
 
   - Wrong default encoding in XML (should be UTF-8) 
   http://sourceforge.net/support/tracker.php?aid=1941365   
-
-----------------------------------------------------------------------
-1.7.3 update 3
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 update 2 Changes

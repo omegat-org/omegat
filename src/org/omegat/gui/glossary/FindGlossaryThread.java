@@ -33,6 +33,7 @@ import javax.swing.SwingUtilities;
 import org.omegat.core.Core;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.glossary.GlossaryEntry;
+import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.Tokenizer;
 import org.omegat.util.Token;
 
@@ -78,7 +79,7 @@ public class FindGlossaryThread extends Thread {
     public void run() {
         // computer source entry tokens
         Token[] strTokens = Core.getTokenizer().tokenizeWords(
-                processedEntry.getSrcText());
+                processedEntry.getSrcText(), ITokenizer.StemmingMode.GLOSSARY);
 
         List<GlossaryEntry> entries = Core.getDataEngine().getGlossaryEntries();
         if (entries != null) {
@@ -93,8 +94,8 @@ public class FindGlossaryThread extends Thread {
 
                 // computer glossary entry tokens
                 String glosStr = glosEntry.getSrcText();
-                Token[] glosTokens = Core.getTokenizer().tokenizeWords(
-                        glosStr);
+                Token[] glosTokens = Core.getTokenizer().tokenizeWords(glosStr,
+                        ITokenizer.StemmingMode.GLOSSARY);
                 int glosTokensN = glosTokens.length;
                 if (glosTokensN == 0)
                     continue;

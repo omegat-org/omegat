@@ -32,22 +32,22 @@ import org.omegat.util.Token;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface ITokenizer {
-    /**
-     * Clear cahed tokens.
-     */
-    void clearCache();
+    enum StemmingMode {
+        NONE, MATCHING, GLOSSARY
+    };
 
     /**
      * Breaks a string into word-only tokens. Numbers, tags, and other non-word
-     * tokens are NOT included in the result. Stemming CAN be used if possible.
+     * tokens are NOT included in the result. Stemming can be used if possible,
+     * depends of StemmingMode.
      * 
      * This method used to find 'fizzy matches' entries and to find glossary
      * entries.
      * 
      * Results can be cached for better performance.
      */
-    Token[] tokenizeWords(String str);
-
+    Token[] tokenizeWords(String str, StemmingMode stemmingMode);
+    
     /**
      * Breaks a string into word-only tokens. Numbers, tags, and other non-word
      * tokens are NOT included in the result. Stemming must NOT be used.
@@ -56,7 +56,7 @@ public interface ITokenizer {
      * 
      * There is no sense to cache results.
      */
-    Token[] tokenizeWordsExactly(String str);
+    Token[] tokenizeWordsForSpelling(String str);
 
     /**
      * Breaks a string into tokens. Numbers, tags, and other non-word tokens are
@@ -67,4 +67,9 @@ public interface ITokenizer {
      * There is no sense to cache results.
      */
     Token[] tokenizeAllExactly(String str);
+
+    /**
+     * Clear cahed tokens.
+     */
+    void clearCache();
 }

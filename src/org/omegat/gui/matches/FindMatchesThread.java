@@ -36,6 +36,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.LegacyTM;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.matching.FuzzyMatcher;
+import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.matching.NearString;
 import org.omegat.util.OConsts;
@@ -93,7 +94,8 @@ public class FindMatchesThread extends Thread {
         }
 
         // get tokens for original string
-        strTokens = Core.getTokenizer().tokenizeWords(processedEntry.getSrcText());
+        strTokens = Core.getTokenizer().tokenizeWords(
+                processedEntry.getSrcText(), ITokenizer.StemmingMode.MATCHING);
         if (strTokens.length == 0) {
             clear();
             return;
@@ -176,7 +178,8 @@ public class FindMatchesThread extends Thread {
      *                entry to compare
      */
     protected void processEntry(final StringEntry candEntry, final String tmxName) {
-        Token[] candTokens = Core.getTokenizer().tokenizeWords(candEntry.getSrcText());
+        Token[] candTokens = Core.getTokenizer().tokenizeWords(
+                candEntry.getSrcText(), ITokenizer.StemmingMode.MATCHING);
         if (candTokens.length == 0) {
             return;
         }

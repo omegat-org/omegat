@@ -772,7 +772,7 @@ public class EditorController implements IEditor {
 
                 String selectionText = editor.getText(start, end - start);
                 // tokenize the selection
-                Token[] tokenList = Core.getTokenizer().tokenizeWordsExactly(selectionText);
+                Token[] tokenList = Core.getTokenizer().tokenizeWordsForSpelling(selectionText);
 
                 StringBuffer buffer = new StringBuffer(selectionText);
 

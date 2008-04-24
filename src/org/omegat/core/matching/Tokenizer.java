@@ -67,14 +67,14 @@ public class Tokenizer implements ITokenizer {
     /**
      * {@inheritDoc}
      */
-    public Token[] tokenizeWordsExactly(final String str) {
+    public Token[] tokenizeWordsForSpelling(final String str) {
         return tokenizeTextNoCache(str, false);
     }
 
     /**
      * {@inheritDoc}
      */
-    public Token[] tokenizeWords(final String strOrig) {
+    public Token[] tokenizeWords(final String strOrig, final StemmingMode stemmingMode) {
         Token[] result;
         synchronized (tokenCache) {
             result = tokenCache.get(strOrig);

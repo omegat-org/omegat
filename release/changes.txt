@@ -138,13 +138,17 @@ under a minute in most cases.
 1.7.3 update 3 vs. 1.7.3 update 2
 
 
-  1 Enhancement
+  2 Enhancements
   1 Bugfix
 
 ----------------------------------------------------------------------
 1.7.3 update 3
 
   Implemented requests:
+
+  - DocBook: Allow to translate the language attribute
+  http://sourceforge.net/support/tracker.php?aid=1949471     
+
   - Escape support for PO 
   http://sourceforge.net/support/tracker.php?aid=1869069    
   

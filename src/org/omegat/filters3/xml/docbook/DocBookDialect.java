@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Didier Briel
-               2008 Fabian Mandelbaum
+               2008 Fabian Mandelbaum, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -103,10 +103,16 @@ public class DocBookDialect extends DefaultXMLDialect
             "programlisting",                                                   // NOI18N
         });
         
-        defineTranslatableAttribute("url");                                     // NOI18N
+        defineTranslatableAttributes(new String[]
+        {        
+                "url",                                                          // NOI18N
+                "lang",                                                         // NOI18N
+                "xml:lang"                                                      // NOI18N
+        });                                                 
+        
     }
     
-    //TODO: Can we can read db xml content here to try to determinate if
+    // TODO: Can we can read db xml content here to try to determinate if
     // the root element has a NS declaration to be able to handle
     // namespaced-tags properly? We'd actually need to read only the
     // root element together with its attributes.

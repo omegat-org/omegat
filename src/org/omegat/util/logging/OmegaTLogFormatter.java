@@ -160,17 +160,13 @@ public class OmegaTLogFormatter extends Formatter {
     protected String getLocalizedLevel(final Level logLevel) {
         String result;
         if (Level.INFO.getName().equals(logLevel.getName())) {
-            result = OStrings.getString("LOG_INFO_ID");
+            result = OStrings.getString("LOG_LEVEL_INFO");
         } else if (Level.SEVERE.getName().equals(logLevel.getName())) {
-            result = OStrings.getString("LOG_ERROR_ID");
+            result = OStrings.getString("LOG_LEVEL_SEVERE");
         } else if (Level.WARNING.getName().equals(logLevel.getName())) {
-            result = OStrings.getString("LOG_WARNING_ID");
+            result = OStrings.getString("LOG_LEVEL_WARNING");
         } else {
             result = logLevel.getLocalizedName();
-        }
-        result = result.replace("{0}", "").replace("()", "").trim();
-        if (result.endsWith(":")) {
-            result = result.substring(0, result.length() - 1);
         }
         return result.trim();
     }

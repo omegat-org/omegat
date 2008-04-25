@@ -46,6 +46,18 @@ import org.omegat.util.Token;
 /**
  * Class for find matches and show result in the matches pane.
  * 
+ * Since we can use stemmers for prepare tokens, we should use 3-pass comparison
+ * of similarity. Similarity will be calculated by 3 steps:
+ * 
+ * 1. Split original segment into word-only tokens using stemmer(with stop words
+ * list), then compare tokens.
+ * 
+ * 2. Split original segment into word-only tokens without stemmer, then compare
+ * tokens.
+ * 
+ * 3. Split original segment into not-only-words tokens(include numbers and
+ * tags) without stemmer, then compare tokens.
+ * 
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik (alex73mail@gmail.com)
  */

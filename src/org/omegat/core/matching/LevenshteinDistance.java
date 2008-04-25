@@ -63,8 +63,7 @@ import org.omegat.util.Token;
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class LevenshteinDistance
-{
+public class LevenshteinDistance implements ISimilarityCalculator {
     
     /**
      * Get minimum of three values

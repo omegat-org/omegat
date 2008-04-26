@@ -44,18 +44,18 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 
 /**
- * Class for find matches and show result in the matches pane.
+ * Class to find matches and show result in the matches pane.
  * 
- * Since we can use stemmers for prepare tokens, we should use 3-pass comparison
- * of similarity. Similarity will be calculated by 3 steps:
+ * Since we can use stemmers to prepare tokens, we should use 3-pass comparison
+ * of similarity. Similarity will be calculated in 3 steps:
  * 
- * 1. Split original segment into word-only tokens using stemmer(with stop words
+ * 1. Split original segment into word-only tokens using stemmer (with stop words
  * list), then compare tokens.
  * 
  * 2. Split original segment into word-only tokens without stemmer, then compare
  * tokens.
  * 
- * 3. Split original segment into not-only-words tokens(include numbers and
+ * 3. Split original segment into not-only-words tokens (including numbers and
  * tags) without stemmer, then compare tokens.
  * 
  * @author Maxym Mykhalchuk
@@ -68,9 +68,10 @@ public class FindMatchesThread extends Thread {
     private final MatchesTextArea matcherController;
 
     /**
-     * Entry which processed currently.
+     * Entry which is processed currently.
      * 
-     * If entry in controller was changed, it means user was moved to other entry, and there is no sense to continue.
+     * If entry in controller was changed, it means user has moved to another 
+     * entry, and there is no sense to continue.
      */
     private final StringEntry processedEntry;
 
@@ -214,7 +215,8 @@ public class FindMatchesThread extends Thread {
     }
 
     /**
-     * Check if entry have a chance to be added to result list. If no, there is no sense to calculate other parameters.
+     * Check if entry have a chance to be added to result list. 
+     * If no, there is no sense to calculate other parameters.
      * 
      * @param similarity
      *                calculate similarity
@@ -229,7 +231,8 @@ public class FindMatchesThread extends Thread {
     }
 
     /**
-     * Add near string into result list. Near strings sorted by "similarity,simAdjusted"
+     * Add near string into result list. 
+     * Near strings sorted by "similarity,simAdjusted"
      */
     protected void addNearString(final StringEntry candEntry, final int similarity, final int simAdjusted,
             final byte[] similarityData, final String tmxName) {

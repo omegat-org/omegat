@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2007 Didier Briel, Zoltan Bartko, Alex Buloichik 
+               2008 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -360,7 +361,7 @@ public class StaticUtils
      *
      * Windows:  <Documents and Settings>\<User name>\Application Data\OmegaT
      * Linux:    <User Home>/.omegat
-     * Solaris:  <User Home>/.omegat
+     * Solaris/SunOS:  <User Home>/.omegat
      * FreeBSD:  <User Home>/.omegat
      * Mac OS X: <User Home>/Library/Preferences/OmegaT
      * Other:    User home directory
@@ -436,28 +437,32 @@ public class StaticUtils
             else
             {
                 // otherwise set the config dir to the user's home directory, usually
-                // C:\Documents and Settings\<User>
-                m_configDir = home;
+                // C:\Documents and Settings\<User>\
+                m_configDir = home + File.separator;
             }
         }
-        // check for UNIX varieties
-        else if (os.equals("Linux") || os.equals("Solaris") ||                  // NOI18N
-                os.equals("FreeBSD"))                                           // NOI18N
+        // Check for UNIX varieties
+        // Solaris is generally detected as SunOS
+        else if (os.equals("Linux") ||                                          // NOI18N
+                 os.equals("SunOS") ||                                          // NOI18N              
+                 os.equals("Solaris") ||                                        // NOI18N
+                 os.equals("FreeBSD"))                                          // NOI18N
         {
-            // set the config dir to the user's home dir + "/.omegat", so it's hidden
+            // set the config dir to the user's home dir + "/.omegat/", so it's hidden
             m_configDir = home + UNIX_CONFIG_DIR;
         }
         // check for Mac OS X
         else if (os.equals("Mac OS X"))                                         // NOI18N
         {
-            // set the config dir to the user's home dir + "/Library/Preferences/OmegaT"
+            // set the config dir to the user's home dir + 
+            // "/Library/Preferences/OmegaT/"
             m_configDir = home + OSX_CONFIG_DIR;
         }
-        // other OS'es / default
+        // other OSes / default
         else
         {
             // use the user's home directory by default
-            m_configDir = home;
+            m_configDir = home + File.separator;
         }
         
         // create the path to the configuration dir, if necessary

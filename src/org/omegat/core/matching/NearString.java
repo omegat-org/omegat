@@ -35,12 +35,14 @@ public class NearString implements Comparable<NearString>
 {
     public NearString(StringEntry strEntry,
             int nearScore,
+            int nearScoreNoStem,
             int adjustedScore,
             byte[] nearData,
             String projName)
     {
         str = strEntry;
         score = nearScore;
+        scoreNoStem = nearScoreNoStem;
         this.adjustedScore = adjustedScore;
         attr = nearData;
         if (projName != null)
@@ -56,7 +58,7 @@ public class NearString implements Comparable<NearString>
     }
     
     public StringEntry str;
-    public int score; // similarity score for match without non-word tokens
+    public int score, scoreNoStem; // similarity score for match without non-word tokens
     public int adjustedScore; // adjusted similarity score for match including all tokens
     public byte[] attr;	// matching attributes of near strEntry
     public String proj = ""; // NOI18N

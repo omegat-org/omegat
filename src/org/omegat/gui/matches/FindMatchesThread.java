@@ -36,6 +36,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.LegacyTM;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.matching.FuzzyMatcher;
+import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.matching.NearString;
@@ -78,11 +79,12 @@ public class FindMatchesThread extends Thread {
     /** Result list. */
     private List<NearString> result = new ArrayList<NearString>(OConsts.MAX_NEAR_STRINGS + 1);
     
-    private LevenshteinDistance levenshteinDistance = new LevenshteinDistance();
+    private ISimilarityCalculator distance = new LevenshteinDistance();
 
-    /** Tokens for original string. */
-    private Token[] strTokens;
-    /** Tokens for original string. */
+    /** Tokens for original string, with and without stems. */
+    private Token[] strTokensStem, strTokensNoStem;
+    
+    /** Tokens for original string, includes numbers and tags. */
     private Token[] strTokensAll;
 
     public FindMatchesThread(final MatchesTextArea matcherController, final StringEntry entry) {
@@ -107,14 +109,16 @@ public class FindMatchesThread extends Thread {
         }
 
         // get tokens for original string
-        strTokens = Core.getTokenizer().tokenizeWords(
+        strTokensStem = Core.getTokenizer().tokenizeWords(
                 processedEntry.getSrcText(), ITokenizer.StemmingMode.MATCHING);
-        if (strTokens.length == 0) {
+        if (strTokensStem.length == 0) {
             clear();
             return;
             // HP: maybe also test on strTokensComplete.size(), if strTokensSize is 0
             // HP: perhaps that would result in better number/non-word matching too
         }
+        strTokensNoStem = Core.getTokenizer().tokenizeWords(
+                processedEntry.getSrcText(), ITokenizer.StemmingMode.NONE);
         strTokensAll = Core.getTokenizer().tokenizeAllExactly(processedEntry.getSrcText());// HP: includes non-word tokens
 
         // travel by project entries
@@ -190,28 +194,47 @@ public class FindMatchesThread extends Thread {
      * @param candEntry
      *                entry to compare
      */
-    protected void processEntry(final StringEntry candEntry, final String tmxName) {
+    protected void processEntry(final StringEntry candEntry,
+            final String tmxName) {
         Token[] candTokens = Core.getTokenizer().tokenizeWords(
                 candEntry.getSrcText(), ITokenizer.StemmingMode.MATCHING);
         if (candTokens.length == 0) {
             return;
         }
 
-        int ld = levenshteinDistance.compute(strTokens, candTokens);
-        int similarity = (100 * (Math.max(strTokens.length, candTokens.length) - ld))
-                / Math.max(strTokens.length, candTokens.length);
+        int similarityStem = calcSimilarity(strTokensStem, candTokens);
 
-        if (similarity < OConsts.FUZZY_MATCH_THRESHOLD)
+        if (similarityStem < OConsts.FUZZY_MATCH_THRESHOLD)
             return;
 
-        if (haveChanceToAdd(similarity)) {
-            Token[] candTokensAll = Core.getTokenizer().tokenizeAllExactly(candEntry.getSrcText());
-            int ldAll = levenshteinDistance.compute(strTokensAll, candTokensAll);
-            int simAdjusted = (100 * (Math.max(strTokensAll.length, candTokensAll.length) - ldAll))
-                    / Math.max(strTokensAll.length, candTokensAll.length);
+        Token[] candTokensNoStem = Core.getTokenizer().tokenizeWords(
+                candEntry.getSrcText(), ITokenizer.StemmingMode.NONE);
+        int similarityNoStem = calcSimilarity(strTokensNoStem, candTokensNoStem);
 
-            addNearString(candEntry, similarity, simAdjusted, null, tmxName);
+        if (haveChanceToAdd(similarityStem, similarityNoStem)) {
+            Token[] candTokensAll = Core.getTokenizer().tokenizeAllExactly(
+                    candEntry.getSrcText());
+            int simAdjusted = calcSimilarity(strTokensAll, candTokensAll);
+
+            addNearString(candEntry, similarityStem, similarityNoStem,
+                    simAdjusted, null, tmxName);
         }
+    }
+    
+    /**
+     * Calculate similarity for tokens arrays(percent).
+     * 
+     * @param str
+     *                original string tokens
+     * @param cand
+     *                candidate string tokens
+     * @return similarity in percents
+     */
+    protected int calcSimilarity(final Token[] str, final Token cand[]) {
+        int ld = distance.compute(str, cand);
+        int similarity = (100 * (Math.max(str.length, cand.length) - ld))
+                / Math.max(str.length, cand.length);
+        return similarity;
     }
 
     /**
@@ -222,20 +245,28 @@ public class FindMatchesThread extends Thread {
      *                calculate similarity
      * @return true if additional calculation need
      */
-    protected boolean haveChanceToAdd(final int similarity) {
+    protected boolean haveChanceToAdd(final int similarity, final int similarityNoStem) {
         if (result.size() < OConsts.MAX_NEAR_STRINGS) {
             return true;
         }
         NearString st = result.get(result.size() - 1);
-        return st.score <= similarity;
+        if (st.score < similarity) {
+            return true;
+        } else if (st.score>similarity) {
+            return false;
+        }else {
+            return st.scoreNoStem <= similarityNoStem;
+        }
     }
 
     /**
      * Add near string into result list. 
      * Near strings sorted by "similarity,simAdjusted"
      */
-    protected void addNearString(final StringEntry candEntry, final int similarity, final int simAdjusted,
-            final byte[] similarityData, final String tmxName) {
+    protected void addNearString(final StringEntry candEntry,
+            final int similarity, final int similarityNoStem,
+            final int simAdjusted, final byte[] similarityData,
+            final String tmxName) {
         // find position for new data
         int pos = 0;
         for (int i = 0; i < result.size(); i++) {
@@ -244,14 +275,20 @@ public class FindMatchesThread extends Thread {
                 break;
             }
             if (st.score == similarity) {
-                if (st.adjustedScore < simAdjusted) {
+                if (st.scoreNoStem < similarityNoStem) {
                     break;
+                }
+                if (st.scoreNoStem == similarityNoStem) {
+                    if (st.adjustedScore < simAdjusted) {
+                        break;
+                    }
                 }
             }
             pos = i + 1;
         }
 
-        result.add(pos, new NearString(candEntry, similarity, simAdjusted, similarityData, tmxName));
+        result.add(pos, new NearString(candEntry, similarity, similarityNoStem,
+                simAdjusted, similarityData, tmxName));
         if (result.size() > OConsts.MAX_NEAR_STRINGS) {
             result.remove(result.size() - 1);
         }

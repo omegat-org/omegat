@@ -29,6 +29,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -122,9 +123,12 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
 
         for (int i = 0; i < newMatches.size(); i++) {
             NearString match = newMatches.get(i);
-            displayBuffer.append((i + 1) + ") " + match.str.getSrcText() + "\n" + // NOI18N
-                    match.str.getTranslation() + "\n< " + match.score + "% " + // NOI18N
-                    match.proj + " >"); // NOI18N
+            displayBuffer.append(MessageFormat.format(
+                    "{0}) {1}\n{2}\n<{3}/{4}/{5}% {6} >", i + 1, match.str
+                            .getSrcText(), match.str.getTranslation(),
+                    match.score, match.scoreNoStem, match.adjustedScore,
+                    match.proj));
+            
             if (i < (newMatches.size() - 1))
                 displayBuffer.append("\n\n"); // NOI18N
             delimiters.add(displayBuffer.length());

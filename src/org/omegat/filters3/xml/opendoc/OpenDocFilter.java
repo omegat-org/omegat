@@ -162,7 +162,8 @@ public class OpenDocFilter extends AbstractFilter
             {
                 if (zipout!=null)
                 {
-                    zipout.putNextEntry(zipentry);
+                    ZipEntry outentry = new ZipEntry (zipentry.getName());
+                    zipout.putNextEntry(outentry);
                     LFileCopy.copy(zipfile.getInputStream(zipentry), zipout);
                     zipout.closeEntry();
                 }

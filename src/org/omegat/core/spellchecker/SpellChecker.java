@@ -394,6 +394,7 @@ public class SpellChecker {
             if (libName.matches("lib.*\\.so\\.[0-9]+$")) {
                 return libName;
             }
+            libName = libName + "-" + System.getProperty("os.arch");
         } 
         
         return System.mapLibraryName(libName);

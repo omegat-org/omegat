@@ -4,11 +4,11 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
- Portions Copyright (C) 2005-06 Henry Pijffers
- Portions Copyright (C) 2006 Martin Wunderlich
- Portions Copyright (C) 2006-2007 Didier Briel
-
-                Home page: http://www.omegat.org/
+           (C) 2005-06 Henry Pijffers
+           (C) 2006 Martin Wunderlich
+           (C) 2006-2007 Didier Briel
+           (C) 2008 Martin Fleurke
+               Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
  This program is free software; you can redistribute it and/or modify
@@ -156,7 +156,8 @@ public class FilterMaster
      * </ul>
      *
      * @param entry Translatable source string
-     * @return Translation of the source string. If there's no translation, returns the source string itself.
+     * @return Translation of the source string. If there's no translation, 
+     * returns the source string itself.
      */
     public String processEntry(String entry)
     {
@@ -170,11 +171,13 @@ public class FilterMaster
         if (cr)
             entry = entry.replaceAll("\\r", "\n");
 
-        // some special space handling
+        // Some special space handling: skip leading and trailing whitespace 
+        // and non-breaking-space
         int len = entry.length();
         int b = 0;
         StringBuffer bs = new StringBuffer();
-        while( b<len && Character.isWhitespace(entry.charAt(b)) )
+        while( b<len && (Character.isWhitespace(entry.charAt(b)) || 
+                         entry.charAt(b)=='\u00A0') )
         {
             bs.append(entry.charAt(b));
             b++;
@@ -182,7 +185,8 @@ public class FilterMaster
 
         int e = len-1;
         StringBuffer es = new StringBuffer();
-        while( e>=b && Character.isWhitespace(entry.charAt(e)) )
+        while( e>=b && (Character.isWhitespace(entry.charAt(e)) || 
+                        entry.charAt(e)=='\u00A0') )
         {
             es.append(entry.charAt(e));
             e--;

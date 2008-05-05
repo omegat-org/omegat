@@ -29,13 +29,14 @@ under a minute in most cases.
 1.8.0 update 2 vs. 1.8.0 update 1
 
 
-   2 Enhancements
+   3 Enhancements
    4 Bugfixes
 ----------------------------------------------------------------------
 1.8.0 update 2
 
   Other enhancements:
   - Spellchecking dialogs now have a title
+  - Non-breaking spaces are trimmed from translatable text
   - Catalan localisation updated to 1.8 (UI)
 
   Bug fixes:

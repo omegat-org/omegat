@@ -89,8 +89,10 @@ not provide a JRE for PPC systems. Download in this case from:
     http://www-128.ibm.com/developerworks/java/jdk/linux/download.html 
 
 3.2 Installation
-To install OmegaT, simply create a suitable folder for OmegaT (e.g. C:\Program 
-Files\OmegaT on Windows or /usr/local/lib on Linux). Copy the OmegaT zip 
+* Windows users: Simply launch the installation program. If you want, the 
+installation program can create shortcuts to launch OmegaT.
+* Others: To install OmegaT, simply create a suitable folder for OmegaT 
+(e.g., /usr/local/lib on Linux). Copy the OmegaT zip or tar.gz
 archive to this folder and unpack it there.
 
 3.3 Launching OmegaT
@@ -149,7 +151,7 @@ To contribute to OmegaT development, get in touch with the developers at:
 
 To translate OmegaT's user interface, user manual or other related documents,
 read:
-      http://www.omegat.org/omegat/omegat_en/translation-info.html
+      http://www.omegat.org/en/translation-info.html
 
 And subscribe to the translators' list:
       http://lists.sourceforge.net/mailman/listinfo/omegat-l10n

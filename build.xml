@@ -180,7 +180,7 @@
     <target name="zip" description="Build Zip distro" depends="jar,release">
         <mkdir dir="dist2"/>
         <zip destfile="dist2/OmegaT_${distversion}.zip">
-            <zipfileset dir="dist" excludes="OmegaT OmegaT-JRE OmegaT.exe OmegaT-JRE.exe OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini OmegaT-JRE.l4J.ini l10n-project"/>
+            <zipfileset dir="dist" excludes="OmegaT OmegaT-JRE OmegaT.exe OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project"/>
             <zipfileset dir="dist" includes="OmegaT" filemode="755"/>
         </zip>
     </target>
@@ -190,7 +190,7 @@
         <mkdir dir="dist2"/>
         <mkdir dir="dist2/linux"/>
         <copy todir="dist2/linux/OmegaT">
-            <fileset dir="dist" excludes="OmegaT OmegaT-JRE OmegaT.exe OmegaT-JRE.exe OmegaT.bat OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini OmegaT-JRE.l4J.ini l10n-project"/>           
+            <fileset dir="dist" excludes="OmegaT OmegaT-JRE OmegaT.exe OmegaT.bat OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project"/>           
         </copy>
         <copy file="dist/OmegaT-JRE" tofile="dist2/linux/OmegaT/OmegaT"/>
         <copy todir="dist2/linux/OmegaT/jre">
@@ -219,8 +219,8 @@
 
     <!-- Creates a Windows Installer with JRE-->
     <target name="do-win-jre" depends="check-jre" if="jre.exists">
-        <copy todir="dist" file="release/win32-specific/OmegaT-JRE.exe"/>
-        <copy todir="dist" file="release/win32-specific/OmegaT-JRE.l4J.ini"/>
+        <copy todir="dist" file="release/win32-specific/OmegaT.exe"/>
+        <copy todir="dist" file="release/win32-specific/OmegaT.l4J.ini"/>
         
         <filter token="VERSION_NUMBER_SUBST" value="${distversion}"/>
         <copy todir="dist" file="release/win32-specific/OmegaT-JRE.iss" filtering="on"/>

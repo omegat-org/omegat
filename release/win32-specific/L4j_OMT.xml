@@ -13,7 +13,7 @@
   <stayAlive>false</stayAlive>
   <icon>C:\Documents and Settings\Didier\Bureau\Devpt\OTDEV\omegat\images\OmegaT.ico</icon>
   <jre>
-    <path></path>
+    <path>jre</path>
     <minVersion>1.4.2</minVersion>
     <maxVersion></maxVersion>
     <dontUsePrivateJres>false</dontUsePrivateJres>

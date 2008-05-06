@@ -7,7 +7,7 @@ AppPublisher=OmegaT
 AppPublisherURL=http://www.omegat.org/
 DefaultDirName={pf}\OmegaT
 DefaultGroupName=OmegaT
-UninstallDisplayIcon={app}\OmegaT-JRE.exe
+UninstallDisplayIcon={app}\OmegaT.exe
 AllowNoIcons=yes
 Compression=lzma
 SolidCompression=yes
@@ -21,8 +21,8 @@ Source: "images\*"; DestDir: "{app}\images"; Flags: recursesubdirs
 Source: "lib\*"; DestDir: "{app}\lib"; Flags: recursesubdirs
 Source: "native\*"; DestDir: "{app}\native"; Flags: recursesubdirs
 Source: "..\..\jre\*"; DestDir: "{app}\jre"; Flags: recursesubdirs
-Source: "OmegaT-JRE.exe"; DestDir: "{app}"
-Source: "OmegaT-JRE.l4J.ini"; DestDir: "{app}"
+Source: "OmegaT.exe"; DestDir: "{app}"
+Source: "OmegaT.l4J.ini"; DestDir: "{app}"
 Source: "OmegaT.jar"; DestDir: "{app}"
 Source: "license.txt"; DestDir: "{app}"
 Source: "doc-license.txt"; DestDir: "{app}"
@@ -54,9 +54,9 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Icons]
-Name: "{group}\OmegaT @VERSION_NUMBER_SUBST@"; Filename: "{app}\OmegaT-JRE.exe"; WorkingDir: "{app}"
-Name: "{commondesktop}\OmegaT"; Filename: "{app}\OmegaT-JRE.exe"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\OmegaT"; Filename: "{app}\OmegaT-JRE.exe"; Tasks: quicklaunchicon
+Name: "{group}\OmegaT @VERSION_NUMBER_SUBST@"; Filename: "{app}\OmegaT.exe"; WorkingDir: "{app}"
+Name: "{commondesktop}\OmegaT"; Filename: "{app}\OmegaT.exe"; Tasks: desktopicon
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\OmegaT"; Filename: "{app}\OmegaT.exe"; Tasks: quicklaunchicon
 Name: "{group}\OmegaT Readme"; Filename: "{app}\readme.txt"
 Name: "{group}\OmegaT User Manual"; Filename: "{app}\docs\index.html"
 Name: "{group}\Join OmegaT Mailing List"; Filename: "{app}\join.html"

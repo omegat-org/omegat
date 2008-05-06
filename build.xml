@@ -180,7 +180,7 @@
     <target name="zip" description="Build Zip distro" depends="jar,release">
         <mkdir dir="dist2"/>
         <zip destfile="dist2/OmegaT_${distversion}.zip">
-            <zipfileset dir="dist" excludes="OmegaT OmegaT-JRE OmegaT.exe OmegaT-JRE.exe OmegaT-JRE.bat OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini OmegaT-JRE.l4J.ini l10n-project"/>
+            <zipfileset dir="dist" excludes="OmegaT OmegaT-JRE OmegaT.exe OmegaT-JRE.exe OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini OmegaT-JRE.l4J.ini l10n-project"/>
             <zipfileset dir="dist" includes="OmegaT" filemode="755"/>
         </zip>
     </target>
@@ -190,7 +190,7 @@
         <mkdir dir="dist2"/>
         <mkdir dir="dist2/linux"/>
         <copy todir="dist2/linux/OmegaT">
-            <fileset dir="dist" excludes="OmegaT OmegaT-JRE OmegaT.exe OmegaT-JRE.exe OmegaT.bat OmegaT-JRE.bat OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini OmegaT-JRE.l4J.ini l10n-project"/>           
+            <fileset dir="dist" excludes="OmegaT OmegaT-JRE OmegaT.exe OmegaT-JRE.exe OmegaT.bat OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini OmegaT-JRE.l4J.ini l10n-project"/>           
         </copy>
         <copy file="dist/OmegaT-JRE" tofile="dist2/linux/OmegaT/OmegaT"/>
         <copy todir="dist2/linux/OmegaT/jre">

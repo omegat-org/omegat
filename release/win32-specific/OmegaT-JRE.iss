@@ -49,6 +49,9 @@ Source: "join.html"; DestDir: "{app}"
 Source: "index.html"; DestDir: "{app}"
 Source: "changes.txt"; DestDir: "{app}"
 
+[UninstallDelete]
+Type: filesandordirs; Name: "{app}\jre\launch4j-tmp"
+
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked

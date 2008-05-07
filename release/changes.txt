@@ -148,7 +148,7 @@ under a minute in most cases.
 
 
   2 Enhancements
-  3 Bugfixes
+  4 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.3 update 3
@@ -171,6 +171,9 @@ under a minute in most cases.
 
   - Error trying to create target document with large OOo file
   http://sourceforge.net/support/tracker.php?aid=1955635  
+
+  - Windows: the OmegaT folder was not completely removed from Program files
+when uninstalling the JRE version
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 update 2 Changes

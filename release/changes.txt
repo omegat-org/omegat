@@ -19,6 +19,7 @@
   http://sourceforge.net/support/tracker.php?aid=1618679  
 
   Other enhancements:
+
   - Zero load time. That is, data required for matching is now computed 
 "on-demand", which means the load time for any project should now be 
 under a minute in most cases.
@@ -35,6 +36,7 @@ under a minute in most cases.
 1.8.0 update 2
 
   Other enhancements:
+
   - Spellchecking dialogs now have a title
   - Non-breaking spaces are trimmed from translatable text
   - Catalan localisation updated to 1.8 (UI)
@@ -63,6 +65,7 @@ under a minute in most cases.
 1.8.0 update 1
 
   Other enhancements:
+
   - Albanian localisation updated to 1.8 (UI, readme)
   - Belarusian localisation updated to 1.8 (UI)
   - New Portuguese (Portugal) localisation (UI)

@@ -55,6 +55,7 @@ public class OmegaTLogFormatter extends Formatter {
     private boolean isMaskContainsLevel;
     private boolean isMaskContainsText;
     private boolean isMaskContainsKey;
+    private boolean isMaskContainsLoggerName;
 
     static {
         // get a positive random number
@@ -92,6 +93,7 @@ public class OmegaTLogFormatter extends Formatter {
         isMaskContainsMark = logMask.contains("$mark");
         isMaskContainsText = logMask.contains("$text");
         isMaskContainsThreadName = logMask.contains("$threadName");
+        isMaskContainsLoggerName = logMask.contains("$loggerName");
     }
 
     /**
@@ -107,7 +109,11 @@ public class OmegaTLogFormatter extends Formatter {
         } else {
             format = record.getMessage();
         }
-        message = StaticUtils.format(format, record.getParameters());
+        if (record.getParameters() == null) {
+            message = format;
+        } else {
+            message = StaticUtils.format(format, record.getParameters());
+        }
         String[] lines = message.split("\r|\n");
         for (String line : lines) {
             appendFormattedLine(result, record, line, false);
@@ -134,6 +140,9 @@ public class OmegaTLogFormatter extends Formatter {
         String res = logMask;
         if (isMaskContainsMark) {
             res = res.replace("$mark", lineMark);
+        }
+        if (isMaskContainsLoggerName) {
+            res = res.replace("$loggerName", record.getLoggerName());
         }
         if (isMaskContainsThreadName) {
             res = res.replace("$threadName", Thread.currentThread().getName());

@@ -22,7 +22,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.core.glossary;
+package org.omegat.gui.glossary;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -37,18 +37,19 @@ import java.util.Collections;
 import java.util.List;
 
 import org.omegat.util.Log;
-import org.omegat.util.OStrings;
 
 /**
- * Class that loads glossary files and adds glossary entries 
- * to strings of the source files.
- *
+ * Class that loads glossary files and adds glossary entries to strings of the
+ * source files.
+ * 
+ * This class don't need any threads synchronization code, since it only set and
+ * clear 'glossaryEntries' var.
+ * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  */
 public class GlossaryManager
 {
-    
     private final String EXT_DEF_ENC = ".tab";      // NOI18N
     private final String EXT_UTF8_ENC = ".utf8";    // NOI18N
     
@@ -64,33 +65,35 @@ public class GlossaryManager
      * 
      * @param folder - folder to look for the glossary files
      */
-    public void loadGlossaryFiles(File folder)  throws IOException
+    public void loadGlossaryFiles(File folder)
     {
-        if (folder.isDirectory())
-        {
-            List<GlossaryEntry> result=new ArrayList<GlossaryEntry>();
-            for (String file : folder.list())
-            {
+        if (!folder.isDirectory()) {
+            Log.logRB("CT_ERROR_ACCESS_GLOSSARY_DIR");
+            return;
+        }
+        try {
+            List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
+            for (String file : folder.list()) {
                 String fname = folder.getAbsolutePath() + File.separator + file;
-                String fname_lower=fname.toLowerCase();
-                // ignoring files with unrecognized extensions - http://sf.net/tracker/index.php?func=detail&aid=1088247&group_id=68187&atid=520347
-                if( fname_lower.endsWith(EXT_DEF_ENC) || fname_lower.endsWith(EXT_UTF8_ENC) ) {
-                    Log.logRB("CT_LOADING_GLOSSARY", new Object[] {fname});
+                String fname_lower = fname.toLowerCase();
+                // ignoring files with unrecognized extensions -
+                // http://sf.net/tracker/index.php?func=detail&aid=1088247&group_id=68187&atid=520347
+                if (fname_lower.endsWith(EXT_DEF_ENC)
+                        || fname_lower.endsWith(EXT_UTF8_ENC)) {
+                    Log.logRB("CT_LOADING_GLOSSARY", new Object[] { fname });
                     loadGlossaryFile(new File(fname), result);
                 }
             }
             glossaryEntries = Collections.unmodifiableList(result);
+        } catch (Exception ex) {
+            Log.logRB("CT_ERROR_ACCESS_GLOSSARY_DIR");
+            Log.log(ex);
         }
-        else
-        {
-            // uh oh - something is screwed up here
-            throw new IOException(OStrings.getString("CT_ERROR_ACCESS_GLOSSARY_DIR"));
-        }        
     }
 
     /**
-     * Loads one glossary file.
-     * Detects a file format and loads a file in appropriate encoding.
+     * Loads one glossary file. Detects a file format and loads a file in
+     * appropriate encoding.
      */
     private void loadGlossaryFile(final File file, final List<GlossaryEntry> result) 
             throws FileNotFoundException, UnsupportedEncodingException, IOException

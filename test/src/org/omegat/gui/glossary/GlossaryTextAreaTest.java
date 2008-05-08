@@ -27,7 +27,6 @@ package org.omegat.gui.glossary;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.omegat.core.glossary.GlossaryEntry;
 import org.omegat.gui.glossary.GlossaryTextArea;
 
 import junit.framework.Test;

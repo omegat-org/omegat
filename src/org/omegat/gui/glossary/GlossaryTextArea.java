@@ -25,12 +25,14 @@
 
 package org.omegat.gui.glossary;
 
+import java.io.File;
 import java.util.List;
 
+import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IEntryEventListener;
-import org.omegat.core.glossary.GlossaryEntry;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -42,12 +44,33 @@ import org.omegat.util.gui.UIThreadsUtil;
  */
 public class GlossaryTextArea extends javax.swing.JTextPane
 {
+    /** Glossary manager instance.*/
+    protected final GlossaryManager manager;
+
+    /**
+     * Currently processed entry. Used to detect if user moved into new entry.
+     * In this case, new find should be started.
+     */
     protected StringEntry processedEntry;
     
     /** Creates new form MatchGlossaryPane */
     public GlossaryTextArea()
     {
+        manager = new GlossaryManager();
         setEditable(false);
+        
+        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
+            public void onProjectChanged(final PROJECT_CHANGE_TYPE eventType) {
+                switch (eventType) {
+                case LOAD:
+                    loadGlossaries();
+                    break;
+                case CLOSE:
+                    closeGlossaries();
+                    break;
+                }
+            }
+        });
         
         // find glossary entries on every editor entry change
         CoreEvents.registerEntryEventListener(new IEntryEventListener() {
@@ -85,5 +108,19 @@ public class GlossaryTextArea extends javax.swing.JTextPane
     public void clear()
     {
         setText(new String());
+    }
+    
+    protected void loadGlossaries() {
+        final File dir = new File(Core.getDataEngine().getProjectProperties()
+                .getGlossaryRoot());
+        new Thread() {
+            public void run() {
+                manager.loadGlossaryFiles(dir);
+            }
+        }.start();
+    }
+
+    protected void closeGlossaries() {
+        manager.clear();
     }
 }

@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.util.List;
 
-import org.omegat.core.glossary.GlossaryEntry;
 import org.omegat.filters2.TranslationException;
 
 /**
@@ -91,11 +90,4 @@ public interface IDataEngine {
      *         loaded
      */
     List<LegacyTM> getMemory();
-
-    /**
-     * Get all glossary entries as unmodifiable list.
-     * 
-     * @return glossary entries list, of null if project not loaded
-     */
-    List<GlossaryEntry> getGlossaryEntries();
 }

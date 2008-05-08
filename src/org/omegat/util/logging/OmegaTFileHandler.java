@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.logging.ErrorManager;
+import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 import java.util.logging.StreamHandler;
@@ -64,6 +65,11 @@ public class OmegaTFileHandler extends StreamHandler {
         LogManager manager = LogManager.getLogManager();
         String cname = getClass().getName();
 
+        String level = manager.getProperty(cname + ".level");
+        if (level != null) {
+            setLevel(Level.parse(level.trim()));
+        }
+        
         String maxSizeStr = manager.getProperty(cname + ".size");
         if (maxSizeStr != null) {
             maxSize = Long.parseLong(maxSizeStr);

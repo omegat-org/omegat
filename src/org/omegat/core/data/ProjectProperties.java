@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.TranslationException;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
 import org.omegat.util.Language;
@@ -232,8 +233,9 @@ public class ProjectProperties
         if( projectRootFolder==null )
         {
             // select existing project file - open it
-            OmegaTFileChooser pfc=new OpenProjectFileChooser();
-            if( OmegaTFileChooser.APPROVE_OPTION!=pfc.showOpenDialog(null) )
+            OmegaTFileChooser pfc = new OpenProjectFileChooser();
+            if (OmegaTFileChooser.APPROVE_OPTION != pfc.showOpenDialog(Core
+                    .getMainWindow().getApplicationFrame()))
                 return false;
             
             projectRootFolder = pfc.getSelectedFile();

@@ -87,6 +87,7 @@ public class Log {
             LogRecord rec = new LogRecord(Level.INFO, key);
             rec.setResourceBundle(OStrings.getResourceBundle());
             rec.setParameters(parameters);
+            rec.setLoggerName(LOGGER.getName());
             LOGGER.log(rec);
         }
     }
@@ -126,6 +127,7 @@ public class Log {
             LogRecord rec = new LogRecord(Level.WARNING, key);
             rec.setResourceBundle(OStrings.getResourceBundle());
             rec.setParameters(parameters);
+            rec.setLoggerName(LOGGER.getName());
             LOGGER.log(rec);
         }
     }
@@ -151,6 +153,7 @@ public class Log {
             LogRecord rec = new LogRecord(Level.INFO, id);
             rec.setResourceBundle(OStrings.getResourceBundle());
             rec.setParameters(parameters);
+            rec.setLoggerName(LOGGER.getName());
             LOGGER.log(rec);
         }       
     }
@@ -174,6 +177,7 @@ public class Log {
             LogRecord rec = new LogRecord(Level.SEVERE, key);
             rec.setResourceBundle(OStrings.getResourceBundle());
             rec.setParameters(parameters);
+            rec.setLoggerName(LOGGER.getName());
             LOGGER.log(rec);
         }
     }

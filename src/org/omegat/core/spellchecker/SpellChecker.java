@@ -25,9 +25,6 @@
 
 package org.omegat.core.spellchecker;
 
-import com.sun.jna.Native;
-import com.sun.jna.Pointer;
-import com.sun.jna.ptr.PointerByReference;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -46,26 +43,26 @@ import java.util.List;
 
 import org.dts.spell.dictionary.OpenOfficeSpellDictionary;
 import org.dts.spell.dictionary.SpellDictionary;
-
+import org.omegat.core.CoreEvents;
 import org.omegat.core.data.CommandThread;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.Platform;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
+
+import com.sun.jna.Native;
+import com.sun.jna.Pointer;
+import com.sun.jna.ptr.PointerByReference;
 
 /**
- * The singleton spell checker class. Use getInstance() to retrieve the instance.
+ * Spell check implementation for use Hunspell or JMySpell.
+ * 
  * @author Zoltan Bartko (bartkozoltan at bartkozoltan dot com)
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class SpellChecker {
-    
-    /**
-     * The spell checker instance
-     */
-    private static SpellChecker INSTANCE = null;
-    
+public class SpellChecker implements ISpellChecker {
     /**
      * The spell checking interface
      */
@@ -95,20 +92,8 @@ public class SpellChecker {
      */
     private String learnedFileName;
     
-    /**
-     * return an instance of the spell checker
-     */
-    public static SpellChecker getInstance() {
-        if (INSTANCE != null) {
-            return INSTANCE;
-        }
-        
-        INSTANCE = new SpellChecker();
-        return INSTANCE;
-    }
-    
     /** Creates a new instance of SpellChecker */
-    protected  SpellChecker() {
+    public  SpellChecker() {
         String libraryPath = StaticUtils.installDir()
             + File.separator
             + OConsts.NATIVE_LIBRARY_DIR
@@ -122,6 +107,18 @@ public class SpellChecker {
         } catch (Error err) {
             Log.log("Error loading hunspell: "+err.getMessage());
         }
+        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
+            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
+                switch (eventType) {
+                case LOAD:
+                    initialize();
+                    break;
+                case CLOSE:
+                    destroy();
+                    break;
+                }
+            }
+        });
     }
     
     /**

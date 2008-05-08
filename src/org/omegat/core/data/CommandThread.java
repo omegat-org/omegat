@@ -43,7 +43,6 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.SourceTextEntry;
-import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.filelist.ProjectFrame;
@@ -80,18 +79,6 @@ public class CommandThread extends Thread implements IDataEngine
      * </small>
      */
     public static CommandThread core;
-    
-    /**
-     * the spell checker instance
-     */
-    private static final SpellChecker m_spellchecker = SpellChecker.getInstance();
-    
-    /**
-     * return the spell checker instance
-     */
-    public SpellChecker getSpellchecker() {
-        return m_spellchecker;
-    }
     
     public CommandThread(MainWindow tf)
     {
@@ -234,9 +221,6 @@ public class CommandThread extends Thread implements IDataEngine
         }
         
         numberofTranslatedSegments = 0;
-        
-        // clean up the spell checker
-        m_spellchecker.destroy();
     }
     
     private void requestLoad(RequestPacket pack)
@@ -745,9 +729,6 @@ public class CommandThread extends Thread implements IDataEngine
 //                                  and doesn't seem useful
         m_projWin.setVisible(true);
         m_projWin.toFront();
-        
-        // initialize the spell checker
-        m_spellchecker.initialize();
         
         projectLoaded = true;
         

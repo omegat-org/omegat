@@ -38,7 +38,7 @@ import javax.swing.undo.CannotUndoException;
 import org.omegat.core.Core;
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.core.spellchecker.SpellChecker;
+import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.threads.DialogThread;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
@@ -572,7 +572,7 @@ public class MainWindowMenuHandler {
         if (sd.getReturnStatus() == SpellcheckerConfigurationDialog.RET_OK) {
             mainWindow.m_autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
             if (mainWindow.m_autoSpellChecking) {
-                SpellChecker sc = CommandThread.core.getSpellchecker();
+                ISpellChecker sc = Core.getSpellChecker();
                 sc.destroy();
                 sc.initialize();
             }

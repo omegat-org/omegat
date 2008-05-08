@@ -28,6 +28,8 @@ import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.IDataEngine;
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.Tokenizer;
+import org.omegat.core.spellchecker.ISpellChecker;
+import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.main.IMainWindow;
@@ -49,6 +51,7 @@ public class Core {
     private static ITagValidation tagValidation;
     private static IMatcher matcher;
     private static ITokenizer tokenizer;
+    private static ISpellChecker spellChecker;
 
     /** Get data engine instance. */
     public static IDataEngine getDataEngine() {
@@ -79,6 +82,11 @@ public class Core {
     public static ITokenizer getTokenizer() {
         return tokenizer;
     }
+    
+    /** Get spell checker instance. */
+    public static ISpellChecker getSpellChecker() {
+        return spellChecker;
+    }
 
     /**
      * Initialize application core from exists main components instances.
@@ -103,6 +111,7 @@ public class Core {
         tagValidation = new TagValidationTool(me);
         matcher = me.matches;
         tokenizer = createComponent(ITokenizer.class, new Tokenizer(), args);
+        spellChecker = new SpellChecker();
     }
     
     /**

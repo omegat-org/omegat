@@ -44,7 +44,6 @@ import javax.swing.text.Utilities;
 import org.omegat.core.Core;
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.matching.SourceTextEntry;
-import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -107,8 +106,6 @@ public class EditorSpellChecking {
 
             String spellcheckBase = editor.getText(spellcheckStart, spellcheckEnd - spellcheckStart);
 
-            SpellChecker spellchecker = CommandThread.core.getSpellchecker();
-
             AttributeSet attributes;
             AttributeSet correctAttributes = controller.getSettings().getTranslatedAttributeSet();
             AttributeSet wrongAttributes = Styles.applyStyles(correctAttributes, Styles.MISSPELLED);
@@ -125,7 +122,7 @@ public class EditorSpellChecking {
             for (Token token : Core.getTokenizer().tokenizeWordsForSpelling(spellcheckBase)) {
                 String word = token.getTextFromString(spellcheckBase);
                 // is it correct?
-                if (!spellchecker.isCorrect(word)) {
+                if (!Core.getSpellChecker().isCorrect(word)) {
                     attributes = wrongAttributes;
                 } else {
                     attributes = correctAttributes;
@@ -167,13 +164,11 @@ public class EditorSpellChecking {
 
             final String word = editor.getText(wordStart, wordEnd - wordStart);
 
-            SpellChecker spellchecker = CommandThread.core.getSpellchecker();
-
             final AbstractDocument xlDoc = (AbstractDocument) editor.getDocument();
 
-            if (!spellchecker.isCorrect(word)) {
+            if (!Core.getSpellChecker().isCorrect(word)) {
                 // get the suggestions and create a menu
-                List<String> suggestions = spellchecker.suggest(word);
+                List<String> suggestions = Core.getSpellChecker().suggest(word);
 
                 // create the menu
                 editor.popup = new JPopupMenu();
@@ -258,12 +253,10 @@ public class EditorSpellChecking {
          */
         protected void addIgnoreWord(final String word, final int offset, final boolean add) {
             synchronized (editor) {
-                SpellChecker spellchecker = CommandThread.core.getSpellchecker();
-
                 if (add) {
-                    spellchecker.learnWord(word);
+                    Core.getSpellChecker().learnWord(word);
                 } else {
-                    spellchecker.ignoreWord(word);
+                    Core.getSpellChecker().ignoreWord(word);
                 }
 
                 // redraw document
@@ -352,14 +345,12 @@ public class EditorSpellChecking {
             AbstractDocument xlDoc = (AbstractDocument) editor.getDocument();
             AttributeSet attributes = controller.getSettings().getTranslatedAttributeSet();
 
-            SpellChecker spellchecker = CommandThread.core.getSpellchecker();
-
             for (Token token : wordlist) {
                 int tokenStart = token.getOffset();
                 int tokenEnd = tokenStart + token.getLength();
                 String word = text.substring(tokenStart, tokenEnd);
 
-                if (!spellchecker.isCorrect(word)) {
+                if (!Core.getSpellChecker().isCorrect(word)) {
                     try {
                         xlDoc.replace(start + tokenStart, token.getLength(), word, Styles.applyStyles(attributes,
                                 Styles.MISSPELLED));

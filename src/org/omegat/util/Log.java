@@ -25,6 +25,8 @@
 
 package org.omegat.util;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
@@ -45,16 +47,35 @@ public class Log {
     static {
         LOGGER = Logger.global;
 
-        try {
-            InputStream in = Log.class
-                    .getResourceAsStream("/org/omegat/logger.properties");
+        boolean loaded = false;
+        File usersLogSettings = new File(StaticUtils.getConfigDir(),
+                "logger.properties");
+        if (usersLogSettings.exists()) {
+            // try to load logger settings from user home dir
             try {
-                LogManager.getLogManager().readConfiguration(in);
-            } finally {
-                in.close();
+                InputStream in = new FileInputStream(usersLogSettings);
+                try {
+                    LogManager.getLogManager().readConfiguration(in);
+                    loaded = true;
+                } finally {
+                    in.close();
+                }
+            } catch (Exception e) {
             }
-        } catch (IOException ex) {
-            LOGGER.log(Level.SEVERE, "Can't open file for logging", ex);
+        }
+        if (!loaded) {
+            // load built-in logger settings
+            try {
+                InputStream in = Log.class
+                        .getResourceAsStream("/org/omegat/logger.properties");
+                try {
+                    LogManager.getLogManager().readConfiguration(in);
+                } finally {
+                    in.close();
+                }
+            } catch (IOException ex) {
+                LOGGER.log(Level.SEVERE, "Can't open file for logging", ex);
+            }
         }
     }
     

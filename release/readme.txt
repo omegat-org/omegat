@@ -59,7 +59,7 @@ OmegaT supports the following file formats out of the box:
   - Microsoft OpenXML files
   - Okapi monolingual XLIFF files
 
-OmegaT can be customized to other file formats as well.
+OmegaT can be customized to support other file formats as well.
 
 OmegaT will automatically parse even the most complex source folder
 hierarchies, to access all the supported files, and produce a target folder

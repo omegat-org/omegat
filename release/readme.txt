@@ -15,8 +15,7 @@
 
 
 The most current info about OmegaT can be found at
-(in English, Slovak, Dutch, Portugese):
-      http://www.omegat.org/omegat/omegat.html
+      http://www.omegat.org/
 
 User support, at the Yahoo user group (multilingual), where the archives are
 searchable without subscription:
@@ -31,30 +30,39 @@ Bug reports (in English), at the SourceForge site:
 ==============================================================================
   2.  What is OmegaT?
 
-OmegaT is a Computer Assisted Translation tool. It is free, in the meaning
-that you don't have to pay anything to be able to use it, even for
-professional use, and in the meaning that you are free to modify it and/or
-re-distribute it as long as you respect the user license.
+OmegaT is a computer-assisted translation (CAT) tool. It is free, that is you 
+don't have to pay anything to be able to use it, even for professional use, 
+and you are free to modify it and/or re-distribute it as long as you respect 
+the user license.
 
-OmegaT's main features are
+OmegaT's main features are:
   - ability to run on any operating system supporting Java
-  - use of any valid TMX file as translation reference
+  - use of any valid TMX file as a translation reference
   - flexible sentence segmenting (using an SRX-like method)
   - searches in the project and the reference translation memories
-  - searches in any directory including OmegaT-readable files
+  - searches of files in supported formats in any folder 
   - fuzzy matching
-  - smart handling of projects including complex directory hierarchies
+  - smart handling of projects including complex folder hierarchies
   - support for glossaries (terminology checks)
-  - easy to understand documentation and tutorial
+  - clear and comprehensive documentation and tutorial
   - localization in a number of languages.
 
-OmegaT supports OpenDocument files, Microsoft Office files (using
-OpenOffice.org as a conversion filter, or by conversion to HTML),
-OpenOffice.org or StarOffice files, as well as (X)HTML, Java localization
-files, plain text files, and more.
+OmegaT supports the following file formats out of the box:
+  - plain text
+  - HTML and XHTML
+  - HTML Help Compiler
+  - OpenDocument/OpenOffice.org
+  - Java resource bundles (.properties)
+  - INI files (files with key=value pairs of any encoding)
+  - PO files
+  - DocBook documentation file format
+  - Microsoft OpenXML files
+  - Okapi monolingual XLIFF files
 
-OmegaT will automatically parse even the most complex source directory
-hierarchies, to access all the supported files, and produce a target directory
+OmegaT can be customized to other file formats as well.
+
+OmegaT will automatically parse even the most complex source folder
+hierarchies, to access all the supported files, and produce a target folder
 with exactly the same structure, including copies of any non-supported files.
 
 For a quick-start tutorial, launch OmegaT and read the displayed Instant Start 
@@ -70,20 +78,24 @@ the [Help] menu after starting OmegaT.
 In order to run, OmegaT requires the Java Runtime Environment (JRE) version 
 1.4 or higher to be installed on your system. OmegaT is now supplied as 
 standard with the Java Runtime Environment to save users the trouble of 
-selecting, obtaining and installing it. Windows and Linux users: if you are 
-confident that your system already has a suitable version of the JRE 
-installed, you can install the version of OmegaT without the JRE (this is 
-indicated in the name of the version, "Without_JRE"). If you are in any 
-doubt, we recommend that you use the "standard" version, i.e. with JRE. This 
-is safe, since even if the JRE is already installed on your system, this 
-version will not interfere with it.
+selecting, obtaining and installing it. 
+
+Windows and Linux users: if you are confident that your system already has a 
+suitable version of the JRE installed, you can install the version of OmegaT 
+without the JRE (this is indicated in the name of the version,"Without_JRE"). 
+If you are in any doubt, we recommend that you use the "standard" version, 
+i.e. with JRE. This is safe, since even if the JRE is already installed on 
+your system, this version will not interfere with it.
+
 Linux users: note that OmegaT does not work with the free/open-source Java 
 implementations that are packaged with many Linux distributions (for example, 
 Ubuntu), as these are either outdated or incomplete. Download and install 
 Sun's Java Runtime Environment (JRE) via the link above, or download and and 
 install the OmegaT package bundled with JRE (the .tar.gz bundle marked 
 "Linux").
+
 Mac users: the JRE is already installed on Mac OS X.
+
 Linux on PowerPC systems: users will need to download IBM's JRE, as Sun does 
 not provide a JRE for PPC systems. Download in this case from:
     http://www-128.ibm.com/developerworks/java/jdk/linux/download.html 
@@ -144,13 +156,14 @@ field; in the "Command" field, use the navigation button to find your OmegaT
 launch script. Select it and confirm with OK.
 
 ==============================================================================
- 4. Contributions to OmegaT
+ 4. Getting involved in the OmegaT project
 
-To contribute to OmegaT development, get in touch with the developers at:
+To participate in the OmegaT development, get in touch with the developers at:
     http://lists.sourceforge.net/lists/listinfo/omegat-development
 
 To translate OmegaT's user interface, user manual or other related documents,
 read:
+      
       http://www.omegat.org/en/translation-info.html
 
 And subscribe to the translators' list:
@@ -186,7 +199,8 @@ Code has been contributed by
 Other contributions by
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (documentation manager)
+  Jean-Christophe Helary
+  Vito Smolej (documentation manager)
   Samuel Murray
   Marc Prior (localization manager)
   and many, many more very helpful people
@@ -218,19 +232,19 @@ OmegaT uses the following libraries:
   Jmyspell 2.1.4 (LGPL License)
 
 ==============================================================================
- 5.  Is OmegaT bugging you ? Do you need help ?
+ 5.  Is OmegaT bugging you? Do you need help?
 
 Before reporting a bug, make sure that you have thoroughly checked the
 documentation. What you see may instead be a characteristic of OmegaT that
 you have just discovered. If you check the OmegaT log and you see words like
-"Error", "Warning", "Exception", or "died unexpectedly" then you are on to
-something (the log.txt is located in the user preferences directory, see the
-manual for its location).
+"Error", "Warning", "Exception", or "died unexpectedly" then you have probably
+discovered a genuine problem (the log.txt is located in the user preferences
+folder, see the manual for its location).
 
-The next thing you do is confirm what you found with other users, to make sure
-this has not already been reported. You can verify the bug report page at
+The next thing to do is to confirm what you found with other users, to make 
+sure this has not already been reported. You can verify the bug report page at
 SourceForge too. Only when you are sure you are the first to have found some
-reproductible sequence of event that triggered something not supposed to
+reproducible sequence of event that triggered something not supposed to
 happen should you file a bug report.
 
 Every good bug report needs exactly three things.
@@ -238,7 +252,7 @@ Every good bug report needs exactly three things.
   - What you expected to see, and
   - What you saw instead.
 
-You can add copies of files, portions of the log, screenshots, anything that
+You can add copies of files, portions of the log, screen shots, anything that
 you think will help the developers with finding and fixing your bug.
 
 To browse the archives of the user group, go to:
@@ -256,5 +270,5 @@ as a Source Forge user.
 Please see the file 'changes.txt' for detailed information about changes in
 this and all previous releases.
 
-==============================================================================
 
+==============================================================================

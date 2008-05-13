@@ -27,6 +27,8 @@ package org.omegat.gui.main;
 import java.io.File;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.CommandThread;
+import org.omegat.core.data.ProjectProperties;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
 import org.omegat.util.gui.SwingWorker;
@@ -70,6 +72,31 @@ public class ProjectUICommands {
             }
 
             protected void done() {
+                Core.getEditor().loadDocument();
+                Core.getEditor().setFirstEntry();                
+                Core.getEditor().activateEntry();
+            }
+        }.execute();
+    }
+    
+    public static void projectReload() {
+        ProjectProperties config = CommandThread.core.getProjectProperties();
+        final String projectRoot = config.getProjectRoot();
+        
+        Core.getMainWindow().doCloseProject();
+        
+        Core.getMainWindow().clear();
+        
+        new SwingWorker<Object>() {
+            protected Object doInBackground() throws Exception {
+                Core.getDataEngine().newLoadProject(
+                        projectRoot + File.separator);
+                return null;
+            }
+
+            protected void done() {
+                Core.getEditor().loadDocument();
+                Core.getEditor().setFirstEntry();                
                 Core.getEditor().activateEntry();
             }
         }.execute();

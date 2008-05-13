@@ -80,4 +80,5 @@ public interface IMainWindow {
     
     void finishLoadProject();
     void clear();
+    void doCloseProject();
 }

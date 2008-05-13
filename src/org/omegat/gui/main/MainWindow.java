@@ -278,7 +278,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         }
         
         updateTitle();
-        m_projWin.buildDisplay();
+//        m_projWin.buildDisplay();
         
         m_projWin.uiUpdateImportButtonStatus();
         
@@ -347,18 +347,6 @@ public class MainWindow extends JFrame implements IMainWindow {
         load = new RequestPacket(RequestPacket.LOAD, this, projectRoot);
         CommandThread.core.messageBoardPost(load);
     }
-
-    /**
-     * Reloads, i.e. closes and loads the same project.
-     */
-    public void doReloadProject()
-    {
-        ProjectProperties config = CommandThread.core.getProjectProperties();
-        String projectRoot = config.getProjectRoot();
-        doCloseProject();
-        doLoadProject(projectRoot);
-    }
-    
     
     /**
      * Imports the file/files/folder into project's source files.
@@ -402,7 +390,7 @@ public class MainWindow extends JFrame implements IMainWindow {
                         LFileCopy.copy(selSrc, dest);
                     }
                 }
-                doReloadProject();
+                ProjectUICommands.projectReload();
             }
             catch(IOException ioe)
             {
@@ -427,7 +415,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         if ( (remote_url != null ) && (remote_url.trim().length() > 0) )
         {
             WikiGet.doWikiGet(remote_url, projectsource);
-            doReloadProject();
+            ProjectUICommands.projectReload();
         }
     }
     
@@ -439,9 +427,9 @@ public class MainWindow extends JFrame implements IMainWindow {
             {
                 m_activeProj = CommandThread.core.getProjectProperties().getProjectName();
                 //m_activeFile = new String();
-                Core.getEditor().setFirstEntry();
+               // Core.getEditor().setFirstEntry();
                 
-                Core.getEditor().loadDocument();
+                //Core.getEditor().loadDocument();
                 synchronized (this) {m_projectLoaded = true;}
                 
                 uiUpdateOnProjectOpen();

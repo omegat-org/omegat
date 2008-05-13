@@ -104,7 +104,7 @@ public class MainWindowMenuHandler {
     }
 
     public void projectReloadMenuItemActionPerformed() {
-        mainWindow.doReloadProject();
+        ProjectUICommands.projectReload();
     }
 
     /**
@@ -154,7 +154,7 @@ public class MainWindowMenuHandler {
             int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"), OStrings
                     .getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
             if (res == JOptionPane.YES_OPTION)
-                mainWindow.doReloadProject();
+                ProjectUICommands.projectReload();
         }
     }
 
@@ -537,7 +537,7 @@ public class MainWindowMenuHandler {
                 int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"), OStrings
                         .getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
                 if (res == JOptionPane.YES_OPTION)
-                    mainWindow.doReloadProject();
+                    ProjectUICommands.projectReload();
             }
         } else {
             // reloading config from disk
@@ -558,7 +558,7 @@ public class MainWindowMenuHandler {
             int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"), OStrings
                     .getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
             if (res == JOptionPane.YES_OPTION)
-                mainWindow.doReloadProject();
+                ProjectUICommands.projectReload();
         }
     }
 

@@ -54,6 +54,7 @@ import org.omegat.gui.HListener;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.UIThreadsUtil;
 import org.openide.awt.Mnemonics;
 
 /**
@@ -223,6 +224,8 @@ public class ProjectFrame extends JFrame
      */
     public void buildDisplay()
     {
+        UIThreadsUtil.mustBeSwingThread();
+
         if( m_nameList==null || m_offsetList==null || m_nameList.isEmpty() )
             return;
         

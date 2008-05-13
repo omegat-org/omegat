@@ -472,7 +472,16 @@ public class MainWindow extends JFrame implements IMainWindow {
     public void showStatusMessage(String str) {
         if (str.length() == 0)
             str = new String() + ' ';
-        statusLabel.setText(str);
+        if (SwingUtilities.isEventDispatchThread()) {
+            statusLabel.setText(str);
+        } else {
+            final String s = str;
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    statusLabel.setText(s);
+                }
+            });
+        }
     }
     
     /**

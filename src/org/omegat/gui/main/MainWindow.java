@@ -318,22 +318,12 @@ public class MainWindow extends JFrame implements IMainWindow {
     /**
      * Loads a new project.
      */
-    void doLoadProject()
+    public void clear()
     {
-        if (isProjectLoaded())
-        {
-            displayError( "Please close the project first!", new Exception( "Another project is open")); // NOI18N
-            return;
-        }
-
         matches.clear();
         glossary.clear();
         Core.getEditor().clearHistory();
         editorScroller.setViewportView(editor);
-
-        RequestPacket load;
-        load = new RequestPacket(RequestPacket.LOAD, this);
-        CommandThread.core.messageBoardPost(load);
     }
     
     /**

@@ -77,4 +77,7 @@ public interface IMainWindow {
      *                exception to show
      */
     void displayError(String errorText, Throwable ex);
+    
+    void finishLoadProject();
+    void clear();
 }

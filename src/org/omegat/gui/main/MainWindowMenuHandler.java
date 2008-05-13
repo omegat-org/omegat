@@ -86,7 +86,7 @@ public class MainWindowMenuHandler {
      * Open project.
      */
     public void projectOpenMenuItemActionPerformed() {
-        mainWindow.doLoadProject();
+        ProjectUICommands.projectOpen();
     }
 
     /**

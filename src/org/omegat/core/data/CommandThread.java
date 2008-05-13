@@ -59,6 +59,7 @@ import org.omegat.util.RequestPacket;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.TMXReader;
 import org.omegat.util.TMXWriter;
+import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * CommandThread is a thread to asynchronously do the stuff
@@ -223,6 +224,93 @@ public class CommandThread extends Thread implements IDataEngine
         numberofTranslatedSegments = 0;
     }
     
+    /**
+     * {@inheritDoc}
+     * TODO: change to File parameter
+     */
+    public void newLoadProject(String projectDir) throws Exception {
+        UIThreadsUtil.mustNotBeSwingThread();
+        // load new project
+        try
+        {
+            cleanUp();
+            
+            Core.getMainWindow().showStatusMessage(OStrings.getString("CT_LOADING_PROJECT"));
+            if (!loadProject(projectDir))
+            {
+                // loading of project cancelled
+                Core.getMainWindow().showStatusMessage(OStrings.getString("CT_CANCEL_LOAD"));
+                return;
+            }
+            Core.getMainWindow().finishLoadProject();
+           // MessageRelay.uiMessageDisplayEntry(tf);
+            if (m_saveCount == -1)
+            {
+                m_saveThread.start();
+                m_saveCount = 1;
+            }
+                          
+            // load in translation database files
+            try
+            {
+                loadTM();
+            }
+            catch (IOException e)
+            {
+                String msg = OStrings.getString("TF_TM_LOAD_ERROR");
+                displayError(msg, e);
+                // allow project load to resume
+            }
+            
+            // build word count
+            Statistics.buildProjectStats(m_strEntryList, m_srcTextEntryArray, m_config, numberofTranslatedSegments);
+            
+            // Project Loaded...
+            Core.getMainWindow().showStatusMessage("");
+            
+            // enable normal saves
+            m_saveCount = 2;
+        }
+        catch( Exception e )
+        {
+            // any error
+            if( !projectClosing )
+                displayError(OStrings.getString("TF_LOAD_ERROR"), e);
+            else
+                Log.logRB("CT_CANCEL_LOAD");               // NOI18N
+        }
+        // Fix for bug 1571944 @author Henry Pijffers (henry.pijffers@saxnot.com)
+        catch (OutOfMemoryError oome) {
+            // Oh shit, we're all out of storage space!
+            // Of course we should've cleaned up after ourselves earlier,
+            // but since we didn't, do a bit of cleaning up now, otherwise
+            // we can't even inform the user about our slacking off.
+            m_strEntryHash.clear();
+            m_strEntryHash = null;
+            m_strEntryList.clear();
+            m_strEntryList = null;
+            m_srcTextEntryArray.clear();
+            m_srcTextEntryArray = null;
+            m_legacyTMs.clear();
+            m_legacyTMs = null;
+            m_tmList.clear();
+            m_tmList = null;
+            m_orphanedList.clear();
+            m_orphanedList = null;
+
+            // Well, that cleared up some, GC to the rescue!
+            System.gc();
+
+            // There, that should do it, now inform the user
+            Log.logErrorRB("OUT_OF_MEMORY");
+            Log.log(oome);
+            m_transFrame.displayError(OStrings.getString("OUT_OF_MEMORY"), oome);
+
+            // Just quit, we can't help it anyway
+            System.exit(0);
+        }
+    }
+    
     private void requestLoad(RequestPacket pack)
     {
         MainWindow tf = (MainWindow) pack.obj;
@@ -235,7 +323,7 @@ public class CommandThread extends Thread implements IDataEngine
             
             evtStr = OStrings.getString("CT_LOADING_PROJECT");
             MessageRelay.uiMessageSetMessageText(tf, evtStr);
-            if (!Core.getDataEngine().loadProject((String)pack.parameter))
+            if (!loadProject((String)pack.parameter))
             {
                 // loading of project cancelled
                 evtStr = OStrings.getString("CT_CANCEL_LOAD");

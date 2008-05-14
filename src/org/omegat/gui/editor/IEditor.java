@@ -44,6 +44,11 @@ public interface IEditor {
     }
 
     /**
+     * Show introduction text.
+     */
+    void showIntoduction();
+
+    /**
      * Get current file name which opened in editor.
      */
     String getCurrentFile();

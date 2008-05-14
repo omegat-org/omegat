@@ -50,6 +50,7 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 import org.omegat.util.gui.Styles;
+import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * Class for control all editor operations.
@@ -118,6 +119,8 @@ public class EditorController implements IEditor {
         int zero = start.lastIndexOf('0');
         m_segmentTagHasNumber = (zero > 4) && // 4 to reserve room for 10000 digit
                 (start.charAt(zero - 1) == '0') && (start.charAt(zero - 2) == '0') && (start.charAt(zero - 3) == '0');
+        
+        showIntoduction();
     }
 
     public SourceTextEntry getCurrentEntry() {
@@ -130,6 +133,14 @@ public class EditorController implements IEditor {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public void showIntoduction() {
+        UIThreadsUtil.mustBeSwingThread();
+        editor.setText(OStrings.getString("TF_INTRO_MESSAGE"));
+    }
+    
+    /**
      * Displays all segments in current document.
      * <p>
      * Displays translation for each segment if it's available, otherwise
@@ -137,6 +148,7 @@ public class EditorController implements IEditor {
      * its starting offset.
      */
     public void loadDocument() {
+        UIThreadsUtil.mustBeSwingThread();
         synchronized (mw) {
             m_docReady = false;
 

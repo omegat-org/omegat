@@ -83,7 +83,6 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
         undoManager = new UndoManager();
         doc.addUndoableEditListener(undoManager);
         setDocument(doc);
-        setText(OStrings.getString("TF_INTRO_MESSAGE"));
 
         addMouseListener(this);
     }
@@ -194,7 +193,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
         if (mw==null)
             return;
         
-        if (!mw.m_projectLoaded)
+        if (!mw.isProjectLoaded())
         {
             if( (e.getModifiers()&CTRL_KEY_MASK)==CTRL_KEY_MASK ||
                     (e.getModifiers()&InputEvent.ALT_MASK)==InputEvent.ALT_MASK )

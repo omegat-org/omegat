@@ -42,6 +42,37 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ProjectUICommands {
+    public static void projectCreate() {
+        UIThreadsUtil.mustBeSwingThread();
+        if (Core.getDataEngine().isProjectLoaded()) {
+            // it shoudn't happen because menu item for open project must be
+            // disabled in this case
+            Core.getMainWindow().displayError(
+                    "Please close the project first!",
+                    new Exception("FATAL: Another project is open"));
+            return;
+        }
+
+        Core.getDataEngine().createProject();
+
+        final String projectRoot = CommandThread.core.getProjectProperties()
+                .getProjectRoot();
+
+        new SwingWorker<Object>() {
+            protected Object doInBackground() throws Exception {
+                Core.getDataEngine().newLoadProject(
+                        projectRoot + File.separator);
+                return null;
+            }
+
+            protected void done() {
+                Core.getEditor().setFirstEntry();
+                Core.getEditor().loadDocument();
+                Core.getEditor().activateEntry();
+            }
+        }.execute();   
+    }
+    
     /**
      * Open project.
      */

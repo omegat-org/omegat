@@ -232,25 +232,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         }
         m_searches.clear();
     }
-    
-    /**
-     * Creates a new Project.
-     */
-    void doCreateProject()
-    {
-        Core.getDataEngine().createProject();
-        try
-        {
-            String projectRoot = CommandThread.core.getProjectProperties().getProjectRoot();
-            if( new File(projectRoot).exists() )
-                doLoadProject(projectRoot);
-        }
-        catch( Exception e )
-        {
-            // do nothing
-        }
-    }
-    
+        
     /**
      * Loads a new project.
      */

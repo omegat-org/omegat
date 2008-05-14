@@ -79,7 +79,7 @@ public class MainWindowMenuHandler {
      * Create new project.
      */
     public void projectNewMenuItemActionPerformed() {
-        mainWindow.doCreateProject();
+        ProjectUICommands.projectCreate();
     }
 
     /**

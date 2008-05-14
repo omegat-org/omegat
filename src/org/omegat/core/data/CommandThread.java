@@ -69,7 +69,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Maxym Mykhalchuk
  * @author Bartko Zoltan
  */
-public class CommandThread extends Thread implements IDataEngine
+public class CommandThread implements IDataEngine
 {
     
     /**
@@ -82,10 +82,7 @@ public class CommandThread extends Thread implements IDataEngine
     public static CommandThread core;
     
     public CommandThread(MainWindow tf)
-    {
-        setName("Command thread"); // NOI18N
-        setPriority(MIN_PRIORITY);
-        
+    {        
         m_transFrame = tf;
         m_projWin = tf.getProjectFrame();
         
@@ -100,64 +97,6 @@ public class CommandThread extends Thread implements IDataEngine
         
         m_requestQueue = new LinkedList<RequestPacket>();
         m_saveCount = -1;
-        m_saveThread = null;
-    }
-    
-    public void run()
-    {
-        RequestPacket pack = new RequestPacket();
-        m_saveThread = new SaveThread();
-        try
-        {
-            while( !interrupted() )
-            {
-                try
-                {
-                    sleep(100); // otherwise CPU usage goes 100%
-                } 
-                catch (InterruptedException ex)
-                {
-                    interrupt();
-                }
-                
-                pack.reset();
-                messageBoardCheck(pack);
-                switch (pack.type)
-                {
-                    case RequestPacket.NO_OP:
-                        // do nothing
-                        break;
-                        
-                    case RequestPacket.LOAD:
-                        requestLoad(pack);
-                        break;
-                        
-                    case RequestPacket.SAVE:
-                        Core.getDataEngine().saveProject();
-                        break;
-                }
-            }
-            Preferences.save();
-            
-            m_saveThread.interrupt();
-            
-            // sleeping a bit
-            try
-            { 
-                sleep(100); 
-            }
-            catch (InterruptedException e)
-            {
-                interrupt();
-            }
-            core = null;
-        }
-        catch (RuntimeException re)
-        {
-            forceSave(true);
-            String msg = OStrings.getString("CT_FATAL_ERROR");
-            m_transFrame.fatalError(msg, re);
-        }
     }
     
     //////////////////////////////////////////////////////
@@ -245,7 +184,6 @@ public class CommandThread extends Thread implements IDataEngine
            // MessageRelay.uiMessageDisplayEntry(tf);
             if (m_saveCount == -1)
             {
-                m_saveThread.start();
                 m_saveCount = 1;
             }
                           
@@ -332,7 +270,6 @@ public class CommandThread extends Thread implements IDataEngine
             MessageRelay.uiMessageDisplayEntry(tf);
             if (m_saveCount == -1)
             {
-                m_saveThread.start();
                 m_saveCount = 1;
             }
             
@@ -1040,7 +977,6 @@ public class CommandThread extends Thread implements IDataEngine
     
     /////////////////////////////////////////////////////////
     
-    private SaveThread	m_saveThread;
     // count=0		save disabled
     // count=1		one more save only
     // count=2		regular mode

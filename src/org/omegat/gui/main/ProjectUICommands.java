@@ -58,19 +58,21 @@ public class ProjectUICommands {
         final String projectRoot = CommandThread.core.getProjectProperties()
                 .getProjectRoot();
 
-        new SwingWorker<Object>() {
-            protected Object doInBackground() throws Exception {
-                Core.getDataEngine().newLoadProject(
-                        projectRoot + File.separator);
-                return null;
-            }
+        if (projectRoot != null && projectRoot.length() > 0) {
+            new SwingWorker<Object>() {
+                protected Object doInBackground() throws Exception {
+                    Core.getDataEngine().newLoadProject(
+                            projectRoot + File.separator);
+                    return null;
+                }
 
-            protected void done() {
-                Core.getEditor().setFirstEntry();
-                Core.getEditor().loadDocument();
-                Core.getEditor().activateEntry();
-            }
-        }.execute();   
+                protected void done() {
+                    Core.getEditor().setFirstEntry();
+                    Core.getEditor().loadDocument();
+                    Core.getEditor().activateEntry();
+                }
+            }.execute();
+        }
     }
     
     /**

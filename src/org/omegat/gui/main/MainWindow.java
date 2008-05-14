@@ -395,27 +395,6 @@ public class MainWindow extends JFrame implements IMainWindow {
                 JOptionPane.ERROR_MESSAGE);
     }
 
-    public void fatalError(String msg, Throwable re)
-    {
-        Log.log(msg);
-        if (re != null)
-            Log.log(re);
-
-        // try for 10 seconds to shutdown gracefully
-        CommandThread.core.interrupt();
-        for( int i=0; i<100 && CommandThread.core!=null; i++ )
-        {
-            try
-            {
-                Thread.sleep(100);
-            }
-            catch (InterruptedException e)
-            {
-            }
-        }
-        Runtime.getRuntime().halt(1);
-    }
-    
     /** Tells whether the project is loaded. */
     public synchronized boolean isProjectLoaded()
     {

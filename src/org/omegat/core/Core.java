@@ -101,7 +101,6 @@ public class Core {
         //          http://sourceforge.net/support/tracker.php?aid=1216514
         // we start command thread here...
         CommandThread.core = new CommandThread(me);
-        CommandThread.core.start();
         
         me.setVisible(true);
 

@@ -197,18 +197,6 @@ public class MainWindowMenuHandler {
             Core.getDataEngine().saveProject();
         }
 
-        // shut down
-        if (CommandThread.core != null)
-            CommandThread.core.interrupt();
-
-        // waiting for CommandThread to finish for 1 minute
-        for (int i = 0; i < 600 && CommandThread.core != null; i++) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-            }
-        }
-
         System.exit(0);
     }
 

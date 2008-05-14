@@ -242,28 +242,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         glossary.clear();
         Core.getEditor().clearHistory();
     }
-    
-    /**
-     * Loads the same project as was open in OmegaT before.
-     * @param projectRoot previously closed project's root
-     */
-    public void doLoadProject(String projectRoot)
-    {
-        if (isProjectLoaded())
-        {
-            displayError( "Please close the project first!", new Exception( "Another project is open")); // NOI18N
-            return;
-        }
-
-        matches.clear();
-        glossary.clear();
-        Core.getEditor().clearHistory();
-
-        RequestPacket load;
-        load = new RequestPacket(RequestPacket.LOAD, this, projectRoot);
-        CommandThread.core.messageBoardPost(load);
-    }
-    
+        
     /**
      * Imports the file/files/folder into project's source files.
      * @author Kim Bruning

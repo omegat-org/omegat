@@ -320,13 +320,23 @@ public class PoFilter extends AbstractFilter
      * [ 1869069 ] Escape support for PO
      * @return the modified entry
      **/
-    private String privateProcessEntry(String entry)
-    {
-        // Removes escapes from quotes. ( \" becomes " )
-        entry = entry.replace("\\\"", "\"");                                    // NOI18N
-        // Interprets newline sequence, except when preceded by \
-        // \n becomes Linefeed, but \\n is not touched
-        entry = entry.replaceAll("([^\\\\])\\\\n", "$1\\\n");                   // NOI18N
+     private String privateProcessEntry(String entry)
+     {
+         // Removes escapes from quotes. ( \" becomes " unless the \ 
+         // was escaped itself.) The number of preceding slashes before \" 
+         // should not be odd, else the \ is escaped and not part of \".
+         // The regex is: no backslash before an optional even number  
+         // of backslashes before \". Replace only the \" with " and keep the  
+         // other escaped backslashes )
+         entry = entry.replaceAll("(?<!\\\\)((\\\\\\\\)*)\\\\\"", "$1\"");      // NOI18N
+         // Interprets newline sequence, except when preceded by \
+         // \n becomes Linefeed, unless the \ was escaped itself.
+         // The number of preceding slashes before \n should not be  odd, 
+         // else the \ is escaped and not part of \n.
+         // The regex is: no backslash before an optional even number of 
+         // backslashes before \n. Replace only the \n with <newline> and keep  
+         // the other escaped backslashes.
+         entry = entry.replaceAll("(?<!\\\\)((\\\\\\\\)*)\\\\n", "$1\n");       // NOI18N
         // Interprets newline sequence at the beginning of a line
         entry = entry.replaceAll("^\\\\n", "\\\n");                             // NOI18N
         // Removes escape from backslash        

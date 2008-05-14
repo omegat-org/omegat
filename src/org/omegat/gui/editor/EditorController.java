@@ -154,6 +154,7 @@ public class EditorController implements IEditor {
             pane.setName(title);
             if (pane.getViewport().getView() != editor) {
                 pane.setViewportView(editor);
+                editor.requestFocus();
             }
             editor.setEditable(true);
         }

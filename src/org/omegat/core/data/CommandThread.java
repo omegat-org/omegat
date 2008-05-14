@@ -46,7 +46,6 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.filelist.ProjectFrame;
 import org.omegat.gui.main.MainWindow;
-import org.omegat.gui.messages.MessageRelay;
 import org.omegat.util.FileUtil;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
@@ -791,8 +790,9 @@ public class CommandThread implements IDataEngine
         Log.logRB("LD_ERROR", new Object[] {msg}); // NOI18N
         Log.log(e);
         Log.log("----------------------------"); // NOI18N
-        if( m_transFrame!=null )
-            MessageRelay.uiMessageDisplayError(m_transFrame, msg, e);
+        if( m_transFrame!=null ) {
+            Core.getMainWindow().displayError(msg, e);
+        }
     }
 
     /**

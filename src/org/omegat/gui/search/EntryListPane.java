@@ -31,9 +31,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
 
+import org.omegat.core.Core;
 import org.omegat.gui.main.MainWindow;
-import org.omegat.gui.messages.MessageRelay;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
 
@@ -66,17 +67,19 @@ class EntryListPane extends JTextPane
                     //    to org.omegat.gui.TransFrame to jump to this entry
                     int pos = getCaretPosition();
                     int off;
-                    int entry;
                     for (int i=0; i<m_offsetList.size(); i++)
                     {
                         off = m_offsetList.get(i);
                         if (off >= pos)
                         {
-                            entry = m_entryList.get(i);
+                            final int entry = m_entryList.get(i);
                             if (entry >= 0)
                             {
-                                MessageRelay.uiMessageDoGotoEntry(
-                                        m_transFrame, Integer.toString(entry));
+                                SwingUtilities.invokeLater(new Runnable() {
+                                    public void run() {
+                                        Core.getEditor().gotoEntry(entry);
+                                    }
+                                });
                             }
                             break;
                         }

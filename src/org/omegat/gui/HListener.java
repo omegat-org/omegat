@@ -20,44 +20,46 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.gui;
 
+import javax.swing.SwingUtilities;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
-import org.omegat.gui.messages.MessageRelay;
+
+import org.omegat.core.Core;
 import org.omegat.gui.main.MainWindow;
 
 /**
  * A listener for old Hyperlink-like style
- *
+ * 
  * @author Keith Godfrey
  */
-public class HListener implements HyperlinkListener
-{
-	public HListener(MainWindow t, boolean grabFocus)
-	{
-		m_transFrame = t;
-		m_grabFocus = grabFocus;
-	}
+public class HListener implements HyperlinkListener {
+    public HListener(MainWindow t, boolean grabFocus) {
+        m_transFrame = t;
+        m_grabFocus = grabFocus;
+    }
 
-	public void hyperlinkUpdate(HyperlinkEvent e)
-	{
-		String s;
-		if (e.getEventType() == 
-		HyperlinkEvent.EventType.ACTIVATED)
-		{
-			s = e.getDescription();
-			MessageRelay.uiMessageDoGotoEntry(m_transFrame, s);
-			//m_transFrame.doGotoEntry(s);
-			if (m_grabFocus)
-			{
-				m_transFrame.toFront();
-			}
-		}
-	}
+    public void hyperlinkUpdate(HyperlinkEvent e) {
+        if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+            final String s = e.getDescription();
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    try {
+                        Core.getEditor().gotoEntry(Integer.parseInt(s));
+                    } catch (NumberFormatException ex) {
+                    }
+                }
+            });
+            // m_transFrame.doGotoEntry(s);
+            if (m_grabFocus) {
+                m_transFrame.toFront();
+            }
+        }
+    }
 
-	private MainWindow	m_transFrame;
-	private boolean	m_grabFocus;
+    private MainWindow m_transFrame;
+    private boolean m_grabFocus;
 }

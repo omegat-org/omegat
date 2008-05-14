@@ -33,8 +33,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -49,7 +48,9 @@ import javax.swing.text.Element;
 import javax.swing.text.html.HTMLDocument;
 
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.core.data.CommandThread;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.HListener;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
@@ -73,9 +74,6 @@ public class ProjectFrame extends JFrame
     {
         m_parent = parent;
         
-        m_nameList = new ArrayList<String>(256);
-        m_offsetList = new ArrayList<Integer>(256);
-
         // set the position and size
         initWindowLayout();
 
@@ -149,11 +147,25 @@ public class ProjectFrame extends JFrame
         
 //        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 //        setBounds((screenSize.width-600)/2, (screenSize.height-500)/2, 600, 400);
+        
+        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
+            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
+                switch (eventType) {
+                case CLOSE:
+                    setVisible(false);
+                    reset();
+                    break;
+                case LOAD:
+                    setVisible(true);
+                    toFront();
+                }
+            }
+        });
     }
 
     /**
-      * Loads/sets the position and size of the search window.
-      */
+     * Loads/sets the position and size of the search window.
+     */
     private void initWindowLayout()
     {
         // main window
@@ -207,16 +219,8 @@ public class ProjectFrame extends JFrame
 
     public void reset()
     {
-        m_nameList.clear();
-        m_offsetList.clear();
         m_editorPane.setText("");                                               // NOI18N
         uiUpdateImportButtonStatus();
-    }
-    
-    public void addFile(String name, int entryNum)
-    {
-        m_nameList.add(name);
-        m_offsetList.add(entryNum);
     }
     
     /**
@@ -225,9 +229,8 @@ public class ProjectFrame extends JFrame
     public void buildDisplay()
     {
         UIThreadsUtil.mustBeSwingThread();
-
-        if( m_nameList==null || m_offsetList==null || m_nameList.isEmpty() )
-            return;
+        
+        if (Core.getDataEngine()==null) return;
         
         StringBuffer output = new StringBuffer();
         
@@ -257,31 +260,31 @@ public class ProjectFrame extends JFrame
         int firstEntry = 1;
         int entriesUpToNow = 0;
         String currentFile = Core.getEditor().getCurrentFile();
-        for (int i=0; i<m_nameList.size(); i++)
-        {
-            String name = m_nameList.get(i);
-            entriesUpToNow = m_offsetList.get(i);
-            int size = 1+entriesUpToNow-firstEntry;
+        for (Map.Entry<String, Integer> f : Core.getDataEngine()
+                .getProjectFiles().entrySet()) {
+//            String name = m_nameList.get(i);
+  //          entriesUpToNow = m_offsetList.get(i);
+    //        int size = 1+entriesUpToNow-firstEntry;
             
             String tableRowTag;
-            if (name.equals(currentFile))
+            if (f.getKey().equals(currentFile))
                 tableRowTag = "<tr bgcolor=\"#C8DDF2\">\n";                     // NOI18N
             else
                 tableRowTag = "<tr>\n";                                         // NOI18N
             
             output.append(tableRowTag);                                         // NOI18N
             output.append("<td width=80%>");                                    // NOI18N
-            output.append("<a href=\""+firstEntry+"\">"+name+"</a>");       // NOI18N
+            output.append("<a href=\""+firstEntry+"\">"+f.getKey()+"</a>");       // NOI18N
             output.append("</td>\n");                                           // NOI18N
             output.append("<td width=20% align=center>");                       // NOI18N
-            output.append(size);                                                // NOI18N
+            output.append(f.getValue());                                                // NOI18N
             output.append("</td>\n");                                           // NOI18N
             output.append("</tr>\n");                                           // NOI18N
             
             firstEntry = entriesUpToNow+1;
         }
         
-        if (m_nameList.size()>1)
+        if (Core.getDataEngine().getProjectFiles().size()>1)
         {
             output.append("<tr>\n");                                            // NOI18N
             output.append("<td width=80%><b>");                                 // NOI18N
@@ -365,8 +368,6 @@ public class ProjectFrame extends JFrame
     private JButton     m_addNewFileButton;
     private JButton     m_wikiImportButton;
     private JButton     m_closeButton;
-    private List<String>   m_nameList;
-    private List<Integer>   m_offsetList;
     
     private MainWindow  m_parent;
 }

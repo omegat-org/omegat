@@ -100,7 +100,7 @@ public class Core {
         // bugfix - Serious threading issue, preventing OmegaT from showing up...
         //          http://sourceforge.net/support/tracker.php?aid=1216514
         // we start command thread here...
-        CommandThread.core = new CommandThread(me);
+        CommandThread.core = new CommandThread();
         
         me.setVisible(true);
 

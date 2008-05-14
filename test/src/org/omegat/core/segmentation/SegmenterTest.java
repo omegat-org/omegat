@@ -81,7 +81,7 @@ public class SegmenterTest extends TestCase
     public void testGlue()
     {
         MainWindow mw = new MainWindow();
-        CommandThread.core=new CommandThread(mw);
+        CommandThread.core = new CommandThread();
         List spaces = new ArrayList();
         List brules = new ArrayList();
         String oldString = "<br7>\n\n<br5>\n\nother";

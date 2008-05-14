@@ -37,6 +37,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -44,8 +45,6 @@ import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.gui.filelist.ProjectFrame;
-import org.omegat.gui.main.MainWindow;
 import org.omegat.util.FileUtil;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
@@ -78,11 +77,8 @@ public class CommandThread implements IDataEngine
      */
     public static CommandThread core;
     
-    public CommandThread(MainWindow tf)
-    {        
-        m_transFrame = tf;
-        m_projWin = tf.getProjectFrame();
-        
+    public CommandThread()
+    {                
         m_config = new ProjectProperties();
         m_strEntryHash = new HashMap<String, StringEntry>(4096);
         m_strEntryList = new ArrayList<StringEntry>();
@@ -121,13 +117,6 @@ public class CommandThread implements IDataEngine
         
         m_strEntryList.clear();
         m_srcTextEntryArray.clear();
-        
-        if (m_projWin != null)
-        {
-            if (m_projWin.isVisible())
-                m_projWin.setVisible(false);
-            m_projWin.reset();
-        }
         
         numberofTranslatedSegments = 0;
     }
@@ -210,7 +199,6 @@ public class CommandThread implements IDataEngine
             // There, that should do it, now inform the user
             Log.logErrorRB("OUT_OF_MEMORY");
             Log.log(oome);
-            m_transFrame.displayError(OStrings.getString("OUT_OF_MEMORY"), oome);
 
             // Just quit, we can't help it anyway
             System.exit(0);
@@ -440,7 +428,7 @@ public class CommandThread implements IDataEngine
         // save project files (.proj .handlers .ignore)
         try
         {
-            if (!m_config.createNew(m_transFrame))
+            if (!m_config.createNew(Core.getMainWindow().getApplicationFrame()))
                 return;	// cancel pressed
             
             // create project root directory
@@ -579,7 +567,7 @@ public class CommandThread implements IDataEngine
     public boolean loadProject(String projectRoot)
             throws IOException, InterruptedIOException, TranslationException
     {
-        if (!m_config.loadExisting(m_transFrame, projectRoot))
+        if (!m_config.loadExisting(Core.getMainWindow().getApplicationFrame(), projectRoot))
             return false;
 
         // reset token list cache
@@ -595,6 +583,8 @@ public class CommandThread implements IDataEngine
         StaticUtils.buildFileList(srcFileList, root, true);
         
         Set<File> processedFiles = new HashSet<File>();
+        
+        projectFilesList.clear();
         
         for (String filename : srcFileList)
         {
@@ -616,13 +606,7 @@ public class CommandThread implements IDataEngine
             boolean fileLoaded = fm.loadFile(filename, processedFiles);
             
             m_curFile.lastEntry = m_srcTextEntryArray.size()-1;
-            // BUGFIX FOR: Empty files are displayed in a file list window
-            //             http://sourceforge.net/support/tracker.php?aid=1256026
-            //             added condition m_curFile.lastEntry>=m_curFile.firstEntry
-            if( fileLoaded && (m_curFile.lastEntry>=m_curFile.firstEntry) )
-            {
-                m_projWin.addFile(filepath, getNumberOfSegmentsTotal());
-            }
+            projectFilesList.put(filepath, m_curFile.lastEntry-m_curFile.firstEntry);
         }
         Core.getMainWindow().showStatusMessage(OStrings.getString("CT_LOAD_SRC_COMPLETE"));
         m_curFile = null;
@@ -630,8 +614,6 @@ public class CommandThread implements IDataEngine
 //                                  Call is too early 
 //        m_projWin.buildDisplay(); for MainWindow.getActiveFileName() 
 //                                  and doesn't seem useful
-        m_projWin.setVisible(true);
-        m_projWin.toFront();
         
         projectLoaded = true;
         
@@ -790,9 +772,7 @@ public class CommandThread implements IDataEngine
         Log.logRB("LD_ERROR", new Object[] {msg}); // NOI18N
         Log.log(e);
         Log.log("----------------------------"); // NOI18N
-        if( m_transFrame!=null ) {
-            Core.getMainWindow().displayError(msg, e);
-        }
+        Core.getMainWindow().displayError(msg, e);
     }
 
     /**
@@ -804,8 +784,7 @@ public class CommandThread implements IDataEngine
       * @author Henry Pijffers (henry.pijffers@saxnot.com)
       */
     public void displayErrorMessage(String message, Throwable error) {
-        if (m_transFrame != null)
-            m_transFrame.displayError(message, error);
+        Core.getMainWindow().displayError(message, error);
     }
 
 
@@ -847,9 +826,6 @@ public class CommandThread implements IDataEngine
     
     public String	sourceRoot()
     { return m_config.getSourceRoot();		}
-    
-    public MainWindow getTransFrame()
-    { return m_transFrame;	}
     
     public List<TransMemory>	getTransMemory()
     { return m_tmList;		}
@@ -908,7 +884,6 @@ public class CommandThread implements IDataEngine
     public synchronized void decreaseTranslated()
     {
         numberofTranslatedSegments--;
-        uiUpdateNumberOfTranslatedSegments();
     }
     
     /** Sygnals that the next increase is false -- it's orphane */
@@ -925,28 +900,7 @@ public class CommandThread implements IDataEngine
         else
         {
             numberofTranslatedSegments++;
-            uiUpdateNumberOfTranslatedSegments();
         }
-    }
-    
-    /** 
-     * Asynchronously queries ProjectFrame to update 
-     * the number of translated segments. 
-     */
-    private void uiUpdateNumberOfTranslatedSegments()
-    {
-        if( m_projWin==null || !m_projWin.isVisible() )
-            return;
-        
-        Thread torun = new Thread()
-        {
-            public void run()
-            {
-                m_projWin.updateNumberOfTranslatedSegments();
-            }
-        };
-        torun.setPriority(Thread.MIN_PRIORITY);
-        torun.start();
     }
 
     /**
@@ -963,6 +917,10 @@ public class CommandThread implements IDataEngine
         return m_legacyTMs;
     }
     
+    public Map<String, Integer> getProjectFiles() {
+        return projectFilesList;
+    }
+    
     // project name of strings loaded from TM - store globally so to not
     // pass seperately on each function call
     
@@ -972,9 +930,6 @@ public class CommandThread implements IDataEngine
      */
     private ProjectFileData	m_curFile;
     
-    MainWindow	m_transFrame;
-    private ProjectFrame	m_projWin;
-    
     /** maps text to strEntry obj */
     private Map<String,StringEntry> m_strEntryHash; 
     private List<StringEntry>	m_strEntryList;
@@ -982,6 +937,9 @@ public class CommandThread implements IDataEngine
     
     /** the list of legacy TMX files, each object is the list of string entries */
     private List<LegacyTM> m_legacyTMs;
+    
+    /** Segments count in project files. */
+    private Map<String,Integer> projectFilesList = new TreeMap<String, Integer>();
     
     private List<TransMemory>	m_tmList;
     private List<TransMemory>	m_orphanedList;

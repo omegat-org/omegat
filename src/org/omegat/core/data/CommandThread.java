@@ -34,7 +34,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -55,7 +54,6 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileData;
-import org.omegat.util.RequestPacket;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.TMXReader;
 import org.omegat.util.TMXWriter;
@@ -94,42 +92,14 @@ public class CommandThread implements IDataEngine
         m_legacyTMs = new ArrayList<LegacyTM>();
         m_orphanedList = new ArrayList<TransMemory>();
         m_modifiedFlag = false;
-        
-        m_requestQueue = new LinkedList<RequestPacket>();
+
         m_saveCount = -1;
     }
     
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
     // message handling for external requests
-    
-    public synchronized void messageBoardPost(RequestPacket pack)
-    {
-        messageBoard(true, pack);
-    }
-    
-    private synchronized void messageBoardCheck(RequestPacket pack)
-    {
-        messageBoard(false, pack);
-    }
-    
-    private synchronized void messageBoard(boolean post, RequestPacket pack)
-    {
-        if (CommandThread.core == null)
-            return;
-        if (post)
-        {
-            m_requestQueue.add(pack);
-        }
-        else
-        {
-            if (m_requestQueue.size() > 0)
-            {
-                pack.set(m_requestQueue.removeFirst());
-            }
-        }
-    }
-    
+   
     /**
      * Clears all hashes, lists etc.
      */
@@ -204,97 +174,6 @@ public class CommandThread implements IDataEngine
             
             // Project Loaded...
             Core.getMainWindow().showStatusMessage("");
-            
-            // enable normal saves
-            m_saveCount = 2;
-        }
-        catch( Exception e )
-        {
-            // any error
-            if( !projectClosing )
-                displayError(OStrings.getString("TF_LOAD_ERROR"), e);
-            else
-                Log.logRB("CT_CANCEL_LOAD");               // NOI18N
-        }
-        // Fix for bug 1571944 @author Henry Pijffers (henry.pijffers@saxnot.com)
-        catch (OutOfMemoryError oome) {
-            // Oh shit, we're all out of storage space!
-            // Of course we should've cleaned up after ourselves earlier,
-            // but since we didn't, do a bit of cleaning up now, otherwise
-            // we can't even inform the user about our slacking off.
-            m_strEntryHash.clear();
-            m_strEntryHash = null;
-            m_strEntryList.clear();
-            m_strEntryList = null;
-            m_srcTextEntryArray.clear();
-            m_srcTextEntryArray = null;
-            m_legacyTMs.clear();
-            m_legacyTMs = null;
-            m_tmList.clear();
-            m_tmList = null;
-            m_orphanedList.clear();
-            m_orphanedList = null;
-
-            // Well, that cleared up some, GC to the rescue!
-            System.gc();
-
-            // There, that should do it, now inform the user
-            Log.logErrorRB("OUT_OF_MEMORY");
-            Log.log(oome);
-            m_transFrame.displayError(OStrings.getString("OUT_OF_MEMORY"), oome);
-
-            // Just quit, we can't help it anyway
-            System.exit(0);
-        }
-    }
-    
-    private void requestLoad(RequestPacket pack)
-    {
-        MainWindow tf = (MainWindow) pack.obj;
-        // load new project
-        try
-        {
-            cleanUp();
-            
-            String evtStr;
-            
-            evtStr = OStrings.getString("CT_LOADING_PROJECT");
-            MessageRelay.uiMessageSetMessageText(tf, evtStr);
-            if (!loadProject((String)pack.parameter))
-            {
-                // loading of project cancelled
-                evtStr = OStrings.getString("CT_CANCEL_LOAD");
-                MessageRelay.uiMessageSetMessageText(tf, evtStr);
-                return;
-            }
-            MessageRelay.uiMessageDisplayEntry(tf);
-            if (m_saveCount == -1)
-            {
-                m_saveCount = 1;
-            }
-            
-            // Building up glossary
-            evtStr = OStrings.getString("CT_LOADING_GLOSSARIES");
-            MessageRelay.uiMessageSetMessageText(tf, evtStr);
-            MessageRelay.uiMessageSetMessageText(tf, OStrings.getString("CT_LOADING_PROJECT"));
-            
-            // load in translation database files
-            try
-            {
-                loadTM();
-            }
-            catch (IOException e)
-            {
-                String msg = OStrings.getString("TF_TM_LOAD_ERROR");
-                displayError(msg, e);
-                // allow project load to resume
-            }
-            
-            // build word count
-            Statistics.buildProjectStats(m_strEntryList, m_srcTextEntryArray, m_config, numberofTranslatedSegments);
-            
-            // Project Loaded...
-            MessageRelay.uiMessageSetMessageText(tf, "");  // NOI18N
             
             // enable normal saves
             m_saveCount = 2;
@@ -1083,8 +962,6 @@ public class CommandThread implements IDataEngine
     public List<LegacyTM> getMemory() {
         return m_legacyTMs;
     }
-    
-    private LinkedList<RequestPacket> m_requestQueue;
     
     // project name of strings loaded from TM - store globally so to not
     // pass seperately on each function call

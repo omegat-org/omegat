@@ -78,7 +78,5 @@ public interface IMainWindow {
      */
     void displayError(String errorText, Throwable ex);
     
-    void finishLoadProject();
     void clear();
-    void doCloseProject();
 }

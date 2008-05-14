@@ -111,17 +111,14 @@ public class MainWindowMenuHandler {
      * Close project.
      */
     public void projectCloseMenuItemActionPerformed() {
-        mainWindow.doCloseProject();
+        ProjectUICommands.projectClose();
     }
 
     /**
      * Save project.
      */
     public void projectSaveMenuItemActionPerformed() {
-        // commit the current entry first
-        Core.getEditor().commitEntry(true);
-        Core.getEditor().activateEntry();
-        mainWindow.doSave();
+       ProjectUICommands.projectSave();
     }
 
     /**
@@ -195,8 +192,10 @@ public class MainWindowMenuHandler {
         MainWindowUI.saveScreenLayout(mainWindow);
         Preferences.save();
 
-        if (mainWindow.isProjectLoaded())
-            mainWindow.doSave();
+        if (Core.getDataEngine().isProjectLoaded()) {
+            // TODO: change to SwingWorker
+            Core.getDataEngine().saveProject();
+        }
 
         // shut down
         if (CommandThread.core != null)

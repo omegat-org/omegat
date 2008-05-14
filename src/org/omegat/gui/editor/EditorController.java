@@ -40,8 +40,12 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.StringEntry;
+import org.omegat.core.events.IEntryEventListener;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.SourceTextEntry;
+import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
+import org.omegat.gui.main.MainWindowUI;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -107,10 +111,15 @@ public class EditorController implements IEditor {
     private SegmentHistory history = new SegmentHistory();
     
     private final EditorSettings settings = new EditorSettings();
+    
+    private final DockableScrollPane pane;
+    
+    private String previousFileName;
 
-    public EditorController(final MainWindow mainWindow, final EditorTextArea editor) {
+    public EditorController(final MainWindow mainWindow, final EditorTextArea editor, final DockableScrollPane pane) {
         this.mw = mainWindow;
         this.editor = editor;
+        this.pane = pane;
         editor.controller = this;
 
         // check this only once as it can be changed only at compile time
@@ -120,7 +129,34 @@ public class EditorController implements IEditor {
         m_segmentTagHasNumber = (zero > 4) && // 4 to reserve room for 10000 digit
                 (start.charAt(zero - 1) == '0') && (start.charAt(zero - 2) == '0') && (start.charAt(zero - 3) == '0');
         
-        showIntoduction();
+        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
+            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
+                updateState();
+            }
+        });
+        CoreEvents.registerEntryEventListener(new IEntryEventListener() {
+            public void onNewFile(String activeFileName) {
+                updateState();
+            }
+            public void onEntryActivated(StringEntry newEntry) {
+            }
+        });
+        updateState();
+    }
+    
+    private void updateState() {
+        if (!Core.getDataEngine().isProjectLoaded()) {
+            MainWindowUI.loadInstantStart(pane, editor);
+        }else {
+            String file = getCurrentFile();
+            String title = StaticUtils.format(OStrings
+                    .getString("GUI_SUBWINDOWTITLE_Editor"), file);
+            pane.setName(title);
+            if (pane.getViewport().getView() != editor) {
+                pane.setViewportView(editor);
+            }
+            editor.setEditable(true);
+        }
     }
 
     public SourceTextEntry getCurrentEntry() {
@@ -156,9 +192,6 @@ public class EditorController implements IEditor {
                 // clear old text
                 editor.setText(new String());
 
-                // update the title and the project window
-                if (mw.isProjectLoaded())
-                    mw.updateTitle();
                 mw.getProjectFrame().buildDisplay();
 
                 m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
@@ -432,6 +465,11 @@ public class EditorController implements IEditor {
             } // synchronize (editor)
 
             entryActivated = true;
+            if (previousFileName == null
+                    || !previousFileName.equals(getCurrentFile())) {
+                previousFileName = getCurrentFile();
+                CoreEvents.fireEntryNewFile(previousFileName);
+            }
         }
     }
 

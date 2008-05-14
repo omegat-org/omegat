@@ -29,6 +29,8 @@ import java.io.File;
 import org.omegat.core.Core;
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
 import org.omegat.util.gui.SwingWorker;
@@ -50,7 +52,7 @@ public class ProjectUICommands {
             // disabled in this case
             Core.getMainWindow().displayError(
                     "Please close the project first!",
-                    new Exception("Another project is open"));
+                    new Exception("FATAL: Another project is open"));
             return;
         }
 
@@ -63,7 +65,7 @@ public class ProjectUICommands {
 
         final File projectRootFolder = pfc.getSelectedFile();
         Core.getMainWindow().clear();
-        
+
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {
                 Core.getDataEngine().newLoadProject(
@@ -72,32 +74,112 @@ public class ProjectUICommands {
             }
 
             protected void done() {
+                Core.getEditor().setFirstEntry();
                 Core.getEditor().loadDocument();
-                Core.getEditor().setFirstEntry();                
                 Core.getEditor().activateEntry();
+                
+              //  m_projWin.uiUpdateImportButtonStatus();
+                
+               // m_projWin.setVisible(true);
+
             }
         }.execute();
     }
-    
+
     public static void projectReload() {
+        if (!Core.getDataEngine().isProjectLoaded()) {
+            // it shoudn't happen because menu item for save project must be
+            // disabled in this case
+            Core.getMainWindow().displayError("FATAL: Project not opened yet!",
+                    new Exception("Project not opened"));
+            return;
+        }
+        
         ProjectProperties config = CommandThread.core.getProjectProperties();
         final String projectRoot = config.getProjectRoot();
-        
-        Core.getMainWindow().doCloseProject();
-        
-        Core.getMainWindow().clear();
-        
+
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {
+                Core.getDataEngine().saveProject();
+
+                Core.getMainWindow().clear();
+
                 Core.getDataEngine().newLoadProject(
                         projectRoot + File.separator);
                 return null;
             }
 
             protected void done() {
+                Core.getEditor().setFirstEntry();
                 Core.getEditor().loadDocument();
-                Core.getEditor().setFirstEntry();                
                 Core.getEditor().activateEntry();
+            }
+        }.execute();
+    }
+
+    public static void projectSave() {
+        // commit the current entry first
+        Core.getEditor().commitEntry(true);
+        Core.getEditor().activateEntry();
+
+        if (!Core.getDataEngine().isProjectLoaded()) {
+            // it shoudn't happen because menu item for save project must be
+            // disabled in this case
+            Core.getMainWindow().displayError("FATAL: Project not opened yet!",
+                    new Exception("Project not opened"));
+            return;
+        }
+
+        new SwingWorker<Object>() {
+            protected Object doInBackground() throws Exception {
+                Core.getMainWindow().showStatusMessage(
+                        OStrings.getString("MW_STATUS_SAVING"));
+
+                Core.getDataEngine().saveProject();
+
+                Core.getMainWindow().showStatusMessage(
+                        OStrings.getString("MW_STATUS_SAVED"));
+
+                return null;
+            }
+
+            protected void done() {
+            }
+        }.execute();
+    }
+
+    public static void projectClose() {
+        if (!Core.getDataEngine().isProjectLoaded()) {
+            // it shoudn't happen because menu item for save project must be
+            // disabled in this case
+            Core.getMainWindow().displayError("FATAL: Project not opened yet!",
+                    new Exception("Project not opened"));
+            return;
+        }
+
+        new SwingWorker<Object>() {
+            protected Object doInBackground() throws Exception {
+                Core.getMainWindow().showStatusMessage(
+                        OStrings.getString("MW_STATUS_SAVING"));
+
+                Preferences.save();
+
+                Core.getDataEngine().saveProject();
+
+                Core.getMainWindow().showStatusMessage(
+                        OStrings.getString("MW_STATUS_SAVED"));
+
+                return null;
+            }
+
+            protected void done() {
+                Core.getMainWindow().clear();                
+                Core.getEditor().showIntoduction();
+                                
+                Core.getDataEngine().closeProject();
+               // showProgressMessage(OStrings.getString("MW_PROGRESS_DEFAULT"));
+               // showLengthMessage(OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
+
             }
         }.execute();
     }

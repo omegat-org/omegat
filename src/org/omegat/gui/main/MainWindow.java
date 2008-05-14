@@ -48,8 +48,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.core.data.CommandThread;
-import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.editor.EditorTextArea;
 import org.omegat.gui.filelist.ProjectFrame;
@@ -59,7 +60,6 @@ import org.omegat.gui.search.SearchWindow;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 import org.omegat.util.RequestPacket;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.WikiGet;
@@ -116,8 +116,13 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         additionalUIInit();
         oldInit();
-        
-        MainWindowUI.loadInstantStart(editorScroller, editor);
+                
+        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
+            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
+                updateTitle();
+            }
+        });
+        updateTitle();
     }
     
     /**
@@ -139,9 +144,7 @@ public class MainWindow extends JFrame implements IMainWindow {
      * not doable via NetBeans Form Editor
      */
     private void additionalUIInit()
-    {
-        updateTitle();
-        
+    {        
         setIconImage(ResourcesUtil.getIcon("/org/omegat/gui/resources/OmegaT_small.gif").getImage());
 
         m_projWin = new ProjectFrame(this);
@@ -156,28 +159,12 @@ public class MainWindow extends JFrame implements IMainWindow {
     /**
      * Sets the title of the main window appropriately
      */
-    public void updateTitle()
+    private void updateTitle()
     {
         String s = OStrings.getDisplayVersion();
         if(isProjectLoaded())
         {
-            s += " :: " + m_activeProj;                                         // NOI18N
-            try
-            {
-                //String file = m_activeFile.substring(CommandThread.core.sourceRoot().length());
-                String file = Core.getEditor().getCurrentFile();
- //               Log.log("file = "+file);
-                // RFE [1764103] Editor window name 
-                editorScroller.setName(StaticUtils.format( 
-                OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), 
-                                   new Object[] {file})); 
-            } catch( Exception e ) { }
-        }
-        // Fix for bug [1730935] Editor window still shows filename after closing project and
-        // RFE [1604238]: instant start display in the main window
-        else
-        {
-            MainWindowUI.loadInstantStart(editorScroller, editor);
+            s += " :: " + CommandThread.core.getProjectProperties().getProjectName();       // NOI18N
         }
         setTitle(s);
     }
@@ -187,7 +174,7 @@ public class MainWindow extends JFrame implements IMainWindow {
      */
     public void oldInit()
     {
-        m_activeProj = new String();
+        //m_activeProj = new String();
         //m_activeFile = new String();
         
         ////////////////////////////////
@@ -228,30 +215,6 @@ public class MainWindow extends JFrame implements IMainWindow {
         }
     }
     
-    /** Closes the project. */
-    public void doCloseProject()
-    {
-        Preferences.save();
-        
-        if (isProjectLoaded())
-            doSave();
-        m_projWin.reset();
-        synchronized (this) {m_projectLoaded = false;}
-
-        synchronized (this) {
-            editor.setText(OStrings.getString("TF_INTRO_MESSAGE"));
-        }
-        matches.clear();
-        glossary.clear();
-        
-        updateTitle();
-        uiUpdateOnProjectClose();
-        
-        Core.getDataEngine().closeProject();
-        showProgressMessage(OStrings.getString("MW_PROGRESS_DEFAULT"));
-        showLengthMessage(OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
-    }
-    
     /** Updates UI (enables/disables menu items) upon <b>closing</b> project */
     private void uiUpdateOnProjectClose()
     {
@@ -268,33 +231,6 @@ public class MainWindow extends JFrame implements IMainWindow {
             sw.dispose();
         }
         m_searches.clear();
-    }
-    
-    /** Updates UI (enables/disables menu items) upon <b>opening</b> project */
-    private void uiUpdateOnProjectOpen()
-    {
-        synchronized (editor) {
-            editor.setEditable(true);
-        }
-        
-        updateTitle();
-//        m_projWin.buildDisplay();
-        
-        m_projWin.uiUpdateImportButtonStatus();
-        
-        m_projWin.setVisible(true);
-    }
-    
-    void doSave()
-    {
-        if (!isProjectLoaded())
-            return;
-        
-        showStatusMessage(OStrings.getString("MW_STATUS_SAVING"));
-        
-        Core.getDataEngine().saveProject();
-        
-        showStatusMessage(OStrings.getString("MW_STATUS_SAVED"));
     }
     
     /**
@@ -323,7 +259,6 @@ public class MainWindow extends JFrame implements IMainWindow {
         matches.clear();
         glossary.clear();
         Core.getEditor().clearHistory();
-        editorScroller.setViewportView(editor);
     }
     
     /**
@@ -341,7 +276,6 @@ public class MainWindow extends JFrame implements IMainWindow {
         matches.clear();
         glossary.clear();
         Core.getEditor().clearHistory();
-        editorScroller.setViewportView(editor);
 
         RequestPacket load;
         load = new RequestPacket(RequestPacket.LOAD, this, projectRoot);
@@ -417,24 +351,6 @@ public class MainWindow extends JFrame implements IMainWindow {
             WikiGet.doWikiGet(remote_url, projectsource);
             ProjectUICommands.projectReload();
         }
-    }
-    
-    public synchronized void finishLoadProject()
-    {
-        SwingUtilities.invokeLater(new Runnable()
-        {
-            public synchronized void run()
-            {
-                m_activeProj = CommandThread.core.getProjectProperties().getProjectName();
-                //m_activeFile = new String();
-               // Core.getEditor().setFirstEntry();
-                
-                //Core.getEditor().loadDocument();
-                synchronized (this) {m_projectLoaded = true;}
-                
-                uiUpdateOnProjectOpen();
-            }
-        });
     }
     
     public void searchWindowClosed(SearchWindow searchWindow) {
@@ -542,14 +458,13 @@ public class MainWindow extends JFrame implements IMainWindow {
     /** Tells whether the project is loaded. */
     public synchronized boolean isProjectLoaded()
     {
-        return m_projectLoaded;
+        if (Core.getDataEngine()==null) return false;
+        return Core.getDataEngine().isProjectLoaded();
     }
     
     /** The font for main window (source and target text) and for match and glossary windows */
     Font m_font;
     
-    private String  m_activeProj;
-
     ProjectFrame m_projWin;
     public ProjectFrame getProjectFrame()
     {
@@ -558,12 +473,14 @@ public class MainWindow extends JFrame implements IMainWindow {
     
     Set<SearchWindow> m_searches; // set of all open search windows
     
-    public boolean m_projectLoaded;
-
     public boolean m_autoSpellChecking;
     
     public boolean autoSpellCheckingOn() {
         return m_autoSpellChecking;
+    }
+    
+    public DockableScrollPane getEditorScroller() {
+        return editorScroller;
     }
     
     JLabel lengthLabel;    

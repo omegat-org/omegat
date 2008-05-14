@@ -107,7 +107,7 @@ public class Core {
 
         dataEngine = CommandThread.core;
         mainWindow = me;
-        editor = new EditorController(me, me.editor);
+        editor = new EditorController(me, me.editor, me.getEditorScroller());
         tagValidation = new TagValidationTool(me);
         matcher = me.matches;
         tokenizer = createComponent(ITokenizer.class, new Tokenizer(), args);

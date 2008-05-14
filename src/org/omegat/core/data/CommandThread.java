@@ -242,7 +242,6 @@ public class CommandThread extends Thread implements IDataEngine
                 Core.getMainWindow().showStatusMessage(OStrings.getString("CT_CANCEL_LOAD"));
                 return;
             }
-            Core.getMainWindow().finishLoadProject();
            // MessageRelay.uiMessageDisplayEntry(tf);
             if (m_saveCount == -1)
             {
@@ -330,7 +329,6 @@ public class CommandThread extends Thread implements IDataEngine
                 MessageRelay.uiMessageSetMessageText(tf, evtStr);
                 return;
             }
-            tf.finishLoadProject();
             MessageRelay.uiMessageDisplayEntry(tf);
             if (m_saveCount == -1)
             {
@@ -535,6 +533,8 @@ public class CommandThread extends Thread implements IDataEngine
     /** Does actually save the Project's TMX file and preferences. */
     private void forceSave(boolean corruptionDanger)
     {
+        UIThreadsUtil.mustNotBeSwingThread();
+        
         Preferences.save();
         
         if (m_saveCount <= 0)

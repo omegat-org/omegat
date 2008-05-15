@@ -29,7 +29,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 
-import org.omegat.core.Core;
 import org.omegat.filters2.TranslationException;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
 import org.omegat.util.Language;
@@ -38,8 +37,6 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
-import org.omegat.util.gui.OmegaTFileChooser;
-import org.omegat.util.gui.OpenProjectFileChooser;
 
 /**
  * Storage for project properties.
@@ -218,28 +215,7 @@ public class ProjectProperties
     {
         reset();
         
-        File projectRootFolder = null;
-        try
-        {
-            projectRootFolder = new File(projectRoot);
-            if( !projectRootFolder.exists() )
-                projectRootFolder = null;
-        }
-        catch( Exception e )
-        {
-            projectRootFolder = null;
-        }
-        
-        if( projectRootFolder==null )
-        {
-            // select existing project file - open it
-            OmegaTFileChooser pfc = new OpenProjectFileChooser();
-            if (OmegaTFileChooser.APPROVE_OPTION != pfc.showOpenDialog(Core
-                    .getMainWindow().getApplicationFrame()))
-                return false;
-            
-            projectRootFolder = pfc.getSelectedFile();
-        }
+        File projectRootFolder = new File(projectRoot);
         
         projectRoot = projectRootFolder.getAbsolutePath() + File.separator;
         Preferences.setPreference(Preferences.CURRENT_FOLDER, projectRootFolder.getParent());

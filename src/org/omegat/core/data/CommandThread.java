@@ -37,7 +37,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -606,7 +605,14 @@ public class CommandThread implements IDataEngine
             boolean fileLoaded = fm.loadFile(filename, processedFiles);
             
             m_curFile.lastEntry = m_srcTextEntryArray.size()-1;
-            projectFilesList.put(filepath, m_curFile.lastEntry-m_curFile.firstEntry);
+
+            if( fileLoaded && (m_curFile.lastEntry>=m_curFile.firstEntry) )
+            {
+                FileInfo fi=new FileInfo();
+                fi.filePath=filepath;
+                fi.firstEntryIndex=getNumberOfSegmentsTotal();
+                projectFilesList.add(fi);
+            }
         }
         Core.getMainWindow().showStatusMessage(OStrings.getString("CT_LOAD_SRC_COMPLETE"));
         m_curFile = null;
@@ -917,7 +923,7 @@ public class CommandThread implements IDataEngine
         return m_legacyTMs;
     }
     
-    public Map<String, Integer> getProjectFiles() {
+    public List<FileInfo> getProjectFiles() {
         return projectFilesList;
     }
     
@@ -939,7 +945,7 @@ public class CommandThread implements IDataEngine
     private List<LegacyTM> m_legacyTMs;
     
     /** Segments count in project files. */
-    private Map<String,Integer> projectFilesList = new TreeMap<String, Integer>();
+    private List<FileInfo> projectFilesList = new ArrayList<FileInfo>();
     
     private List<TransMemory>	m_tmList;
     private List<TransMemory>	m_orphanedList;

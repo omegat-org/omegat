@@ -50,6 +50,7 @@ import javax.swing.text.html.HTMLDocument;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.CommandThread;
+import org.omegat.core.data.IDataEngine;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.HListener;
 import org.omegat.gui.main.MainWindow;
@@ -260,27 +261,26 @@ public class ProjectFrame extends JFrame
         int firstEntry = 1;
         int entriesUpToNow = 0;
         String currentFile = Core.getEditor().getCurrentFile();
-        for (Map.Entry<String, Integer> f : Core.getDataEngine()
-                .getProjectFiles().entrySet()) {
-//            String name = m_nameList.get(i);
-  //          entriesUpToNow = m_offsetList.get(i);
-    //        int size = 1+entriesUpToNow-firstEntry;
+        for (IDataEngine.FileInfo fi : Core.getDataEngine().getProjectFiles()) {
+// String name = m_nameList.get(i);
+            entriesUpToNow = fi.firstEntryIndex;
+            int size = 1+entriesUpToNow-firstEntry;
             
             String tableRowTag;
-            if (f.getKey().equals(currentFile))
+            if (fi.filePath.equals(currentFile))
                 tableRowTag = "<tr bgcolor=\"#C8DDF2\">\n";                     // NOI18N
             else
                 tableRowTag = "<tr>\n";                                         // NOI18N
             
             output.append(tableRowTag);                                         // NOI18N
             output.append("<td width=80%>");                                    // NOI18N
-            output.append("<a href=\""+firstEntry+"\">"+f.getKey()+"</a>");       // NOI18N
+            output.append("<a href=\""+firstEntry+"\">"+fi.filePath+"</a>");       // NOI18N
             output.append("</td>\n");                                           // NOI18N
             output.append("<td width=20% align=center>");                       // NOI18N
-            output.append(f.getValue());                                                // NOI18N
+            output.append(size);                                                // NOI18N
             output.append("</td>\n");                                           // NOI18N
             output.append("</tr>\n");                                           // NOI18N
-            
+
             firstEntry = entriesUpToNow+1;
         }
         

@@ -26,7 +26,6 @@ package org.omegat.core.data;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import org.omegat.filters2.TranslationException;
 
@@ -90,5 +89,10 @@ public interface IDataEngine {
      */
     List<LegacyTM> getMemory();
     
-    Map<String,Integer> getProjectFiles();
+    List<FileInfo> getProjectFiles();
+    
+    public static class FileInfo {
+        public String filePath;
+        public int firstEntryIndex;
+    }
 }

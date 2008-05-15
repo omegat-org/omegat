@@ -68,7 +68,6 @@ import org.omegat.util.gui.UIThreadsUtil;
  */
 public class CommandThread implements IDataEngine
 {
-    
     /**
      * One and only CommandThread object in the OmegaT.
      * <p>
@@ -170,8 +169,8 @@ public class CommandThread implements IDataEngine
             }
             catch (IOException e)
             {
-                String msg = OStrings.getString("TF_TM_LOAD_ERROR");
-                displayError(msg, e);
+                Log.logErrorRB(e, "TF_TM_LOAD_ERROR");
+                Core.getMainWindow().displayErrorRB(e, "TF_TM_LOAD_ERROR");
                 // allow project load to resume
             }
             
@@ -187,8 +186,10 @@ public class CommandThread implements IDataEngine
         catch( Exception e )
         {
             // any error
-            if( !projectClosing )
-                displayError(OStrings.getString("TF_LOAD_ERROR"), e);
+            if( !projectClosing ) {
+                Log.logErrorRB(e, "TF_LOAD_ERROR");
+                Core.getMainWindow().displayErrorRB(e, "TF_LOAD_ERROR");
+            }
             else
                 Log.logRB("CT_CANCEL_LOAD");               // NOI18N
         }
@@ -388,8 +389,9 @@ public class CommandThread implements IDataEngine
         }
         catch (IOException e)
         {
-            String msg = OStrings.getString("CT_ERROR_SAVING_PROJ");
-            displayError(msg, e);
+            Log.logErrorRB(e, "CT_ERROR_SAVING_PROJ");
+            Core.getMainWindow().displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
+            
             // try to rename backup file to original name
             if (!corruptionDanger)
             {
@@ -464,8 +466,8 @@ public class CommandThread implements IDataEngine
         catch(IOException e)
         {
             // trouble in tinsletown...
-            String msg = OStrings.getString("CT_ERROR_CREATING_PROJECT");
-            displayError(msg, e);
+            Log.logErrorRB(e, "CT_ERROR_CREATING_PROJECT");
+            Core.getMainWindow().displayErrorRB(e, "CT_ERROR_CREATING_PROJECT");
         }
     }
     
@@ -512,8 +514,8 @@ public class CommandThread implements IDataEngine
         catch(SecurityException se)
         {
             // file probably exists, but something's wrong
-            String msg = OStrings.getString("CT_ERROR_ACCESS_PROJECT_FILE");
-            displayError(msg, se);
+            Log.logErrorRB(se, "CT_ERROR_ACCESS_PROJECT_FILE");
+            Core.getMainWindow().displayErrorRB(se, "CT_ERROR_ACCESS_PROJECT_FILE");
             return;
         }
         
@@ -528,8 +530,8 @@ public class CommandThread implements IDataEngine
         }
         catch (IOException e)
         {
-            String msg = OStrings.getString("CT_ERROR_LOADING_PROJECT_FILE");
-            displayError(msg, e);
+            Log.logErrorRB(e, "CT_ERROR_LOADING_PROJECT_FILE");
+            Core.getMainWindow().displayErrorRB(e, "CT_ERROR_LOADING_PROJECT_FILE");
         }
     }
 
@@ -724,31 +726,6 @@ public class CommandThread implements IDataEngine
             return FORMAT_DATETIME_SUFFIX.format(new Date());
         }
     }
-
-    /**
-     * Writes the error info to the log and
-     * displays an error message.
-     */
-    public void displayError(String msg, Throwable e)
-    {
-        Log.logRB("LD_ERROR", new Object[] {msg}); // NOI18N
-        Log.log(e);
-        Log.log("----------------------------"); // NOI18N
-        Core.getMainWindow().displayError(msg, e);
-    }
-
-    /**
-      * Displays an error message
-      *
-      * @param message The message to display
-      * @param error   The error that caused the message to be displayed (may be null)
-      *
-      * @author Henry Pijffers (henry.pijffers@saxnot.com)
-      */
-    public void displayErrorMessage(String message, Throwable error) {
-        Core.getMainWindow().displayError(message, error);
-    }
-
 
     /**
      * Returns a Source Text Entry of a certain number.

@@ -71,12 +71,14 @@ public interface IMainWindow {
     /**
      * Display error.
      * 
-     * @param errorText
-     *                error text
      * @param ex
      *                exception to show
+     * @param errorKey
+     *                error message key in resource bundle
+     * @param params
+     *                error text parameters
      */
-    void displayError(String errorText, Throwable ex);
+    void displayErrorRB(Throwable ex, String errorKey, Object... params);
     
     void clear();
 }

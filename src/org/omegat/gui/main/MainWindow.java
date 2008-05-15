@@ -287,7 +287,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
             catch(IOException ioe)
             {
-                displayError(OStrings.getString("MAIN_ERROR_File_Import_Failed"), ioe);
+                displayErrorRB(ioe, "MAIN_ERROR_File_Import_Failed");
             }
         }        
     }
@@ -378,17 +378,21 @@ public class MainWindow extends JFrame implements IMainWindow {
     }
     
     /**
-     * Displays an error message.
-     *
-     * @param msg the message to show
-     * @param e exception occured. may be null
+     * {@inheritDoc}
      */
-    public void displayError(String msg, Throwable e)
+    public void displayErrorRB(Throwable ex, String errorKey, Object... params)
     {
+        String msg;
+        if (params != null) {
+            msg = StaticUtils.format(OStrings.getString(errorKey), params);
+        } else {
+            msg = OStrings.getString(errorKey);
+        }
+        
 	showStatusMessage(msg);
         String fulltext = msg;
-        if( e!=null )
-            fulltext+= "\n" + e.toString();                                     // NOI18N
+        if( ex!=null )
+            fulltext+= "\n" + ex.toString();                                     // NOI18N
         JOptionPane.showMessageDialog(this, fulltext, OStrings.getString("TF_ERROR"),
                 JOptionPane.ERROR_MESSAGE);
     }

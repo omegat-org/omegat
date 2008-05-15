@@ -131,9 +131,9 @@ public class MainWindowMenuHandler {
         try {
             Core.getDataEngine().compileProject();
         } catch (IOException e) {
-            Core.getMainWindow().displayError(OStrings.getString("TF_COMPILE_ERROR"), e);
+            Core.getMainWindow().displayErrorRB(e, "TF_COMPILE_ERROR");
         } catch (TranslationException te) {
-            Core.getMainWindow().displayError(OStrings.getString("TF_COMPILE_ERROR"), te);
+            Core.getMainWindow().displayErrorRB(te, "TF_COMPILE_ERROR");
         }
     }
 

@@ -202,4 +202,29 @@ public class Log {
             LOGGER.log(rec);
         }
     }
+
+    /**
+      * Writes an error message to the log (to be retrieved from the
+      * resource bundle), preceded by a line containing the error ID.
+      *
+      * While the error message can be localised, the error ID should not,
+      * so developers can determine what error was given by looking at the
+      * error ID, instead of trying to interpret localised messages.
+      *
+      * @param id         The key of the error message in the resource bundle
+      * @param parameters Parameters for the error message. These are
+      *                   inserted by using StaticUtils.format.
+      *
+      * @author Henry Pijffers (henry.pijffers@saxnot.com)
+      */
+    public static void logErrorRB(Throwable ex, String key, Object... parameters) {
+        if (LOGGER.isLoggable(Level.SEVERE)) {
+            LogRecord rec = new LogRecord(Level.SEVERE, key);
+            rec.setResourceBundle(OStrings.getResourceBundle());
+            rec.setParameters(parameters);
+            rec.setLoggerName(LOGGER.getName());
+            rec.setThrown(ex);
+            LOGGER.log(rec);
+        }
+    }
 }

@@ -34,6 +34,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.TransMemory;
 import org.omegat.core.matching.SourceTextEntry;
@@ -41,6 +42,7 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.search.SearchWindow;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
@@ -202,15 +204,16 @@ public class SearchThread extends Thread
                         {
                             // something bad happened
                             // alert user to badness
-                            String msg = OStrings.getString("ST_FILE_SEARCH_ERROR");
-                            CommandThread.core.displayError(msg, e);
+                            Log.logErrorRB(e, "ST_FILE_SEARCH_ERROR");
+                            Core.getMainWindow().displayErrorRB(e, "ST_FILE_SEARCH_ERROR");
+                            
                         }
                         catch (TranslationException te)
                         {
                             // something bad happened
                             // alert user to badness
-                            String msg = OStrings.getString("ST_FILE_SEARCH_ERROR");
-                            CommandThread.core.displayError(msg, te);
+                            Log.logErrorRB(te, "ST_FILE_SEARCH_ERROR");
+                            Core.getMainWindow().displayErrorRB(te, "ST_FILE_SEARCH_ERROR");
                         }
                     }
                     
@@ -229,8 +232,8 @@ public class SearchThread extends Thread
         }
         catch (RuntimeException re)
         {
-            String msg = OStrings.getString("ST_FATAL_ERROR");
-            CommandThread.core.displayError(msg, re);
+            Log.logErrorRB(re, "ST_FATAL_ERROR");
+            Core.getMainWindow().displayErrorRB(re, "ST_FATAL_ERROR");
             m_window.threadDied();
         }
     }

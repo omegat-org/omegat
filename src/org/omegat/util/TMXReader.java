@@ -34,6 +34,7 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.regex.Matcher;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.xml.XMLReader;
@@ -64,7 +65,6 @@ import org.xml.sax.SAXParseException;
  */
 public class TMXReader extends org.xml.sax.helpers.DefaultHandler 
 {
-                              
     /** 
       * Creates a new TMX Reader.
       * 
@@ -492,34 +492,18 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             Log.logRB("TMXR_INFO_READING_COMPLETE");
             Log.log("");
         }
-        catch (SAXParseException exception) {
-            // log error
-            Log.logErrorRB("TMXR_FATAL_ERROR_WHILE_PARSING",
-                new Object[]{String.valueOf(exception.getLineNumber()),
-                             String.valueOf(exception.getColumnNumber())});
-            Log.log(exception);
-
-            // display error
-            CommandThread.core.displayErrorMessage(
-                StaticUtils.format(
-                    OStrings.getString("TMXR_FATAL_ERROR_WHILE_PARSING__DISPLAY"),
-                    new Object[]{displayFilename,
-                                 String.valueOf(exception.getLineNumber()),
-                                 String.valueOf(exception.getColumnNumber())}),
-                exception);
-        }
-        catch (Exception exception)
-        {
-            // log exception
-            Log.logErrorRB("TMXR_EXCEPTION_WHILE_PARSING");
-            Log.log(exception);
-
-            // display error
-            CommandThread.core.displayErrorMessage(
-                StaticUtils.format(
-                    OStrings.getString("TMXR_EXCEPTION_WHILE_PARSING__DISPLAY"),
-                    new Object[]{displayFilename, Log.getLogLocation()}),
-                exception);
+        catch (SAXParseException ex) {
+            Log.logErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex
+                    .getLineNumber(), ex.getColumnNumber());
+            Core.getMainWindow().displayErrorRB(ex,
+                    "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(),
+                    ex.getColumnNumber());
+        } catch (Exception ex) {
+            Log.logErrorRB(ex, "TMXR_EXCEPTION_WHILE_PARSING", displayFilename,
+                    Log.getLogLocation());
+            Core.getMainWindow().displayErrorRB(ex,
+                    "TMXR_EXCEPTION_WHILE_PARSING", displayFilename,
+                    Log.getLogLocation());
         }
     }
 

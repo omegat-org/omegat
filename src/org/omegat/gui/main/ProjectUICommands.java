@@ -45,12 +45,8 @@ import org.omegat.util.gui.UIThreadsUtil;
 public class ProjectUICommands {
     public static void projectCreate() {
         UIThreadsUtil.mustBeSwingThread();
+
         if (Core.getDataEngine().isProjectLoaded()) {
-            // it shoudn't happen because menu item for open project must be
-            // disabled in this case
-            Core.getMainWindow().displayError(
-                    "Please close the project first!",
-                    new Exception("FATAL: Another project is open"));
             return;
         }
         
@@ -89,12 +85,8 @@ public class ProjectUICommands {
      */
     public static void projectOpen() {
         UIThreadsUtil.mustBeSwingThread();
+
         if (Core.getDataEngine().isProjectLoaded()) {
-            // it shoudn't happen because menu item for open project must be
-            // disabled in this case
-            Core.getMainWindow().displayError(
-                    "Please close the project first!",
-                    new Exception("FATAL: Another project is open"));
             return;
         }
 
@@ -129,11 +121,9 @@ public class ProjectUICommands {
     }
 
     public static void projectReload() {
+        UIThreadsUtil.mustBeSwingThread();
+
         if (!Core.getDataEngine().isProjectLoaded()) {
-            // it shoudn't happen because menu item for save project must be
-            // disabled in this case
-            Core.getMainWindow().displayError("FATAL: Project not opened yet!",
-                    new Exception("Project not opened"));
             return;
         }
         
@@ -160,17 +150,15 @@ public class ProjectUICommands {
     }
 
     public static void projectSave() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (!Core.getDataEngine().isProjectLoaded()) {
+            return;
+        }
+
         // commit the current entry first
         Core.getEditor().commitEntry(true);
         Core.getEditor().activateEntry();
-
-        if (!Core.getDataEngine().isProjectLoaded()) {
-            // it shoudn't happen because menu item for save project must be
-            // disabled in this case
-            Core.getMainWindow().displayError("FATAL: Project not opened yet!",
-                    new Exception("Project not opened"));
-            return;
-        }
 
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {
@@ -191,11 +179,9 @@ public class ProjectUICommands {
     }
 
     public static void projectClose() {
+        UIThreadsUtil.mustBeSwingThread();
+
         if (!Core.getDataEngine().isProjectLoaded()) {
-            // it shoudn't happen because menu item for save project must be
-            // disabled in this case
-            Core.getMainWindow().displayError("FATAL: Project not opened yet!",
-                    new Exception("Project not opened"));
             return;
         }
 

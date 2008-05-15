@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2008      Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -74,6 +75,7 @@ import org.openide.awt.Mnemonics;
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ProjectPropertiesDialog extends JDialog
 {
@@ -115,10 +117,8 @@ public class ProjectPropertiesDialog extends JDialog
         this.dialogType = dialogTypeValue;
 
         if (projFileName == null)
-            projectProperties.reset();
-
-        if (projFileName == null)
         {
+            projectProperties.reset();
             String sourceLocale = Preferences.getPreference(Preferences.SOURCE_LOCALE);
             if( !sourceLocale.equals(""))                                                   // NOI18N
                 projectProperties.setSourceLanguage(sourceLocale);
@@ -346,45 +346,19 @@ public class ProjectPropertiesDialog extends JDialog
         getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
 
         // if no project file specified, ask user to create one
-        if (projFileName == null)
+        if (dialogTypeValue == NEW_PROJECT)
         {
-            // have user select the project name and where they
-            //  want to put it.  use that information to derive the
-            //  location for project, source and loc directories
-            // open save dialog
-            NewProjectFileChooser ndc = new NewProjectFileChooser();
-            String label;
-            label = OStrings.getString("PP_SAVE_PROJECT_FILE");
-            ndc.setDialogTitle(label);
-
-            String curDir = Preferences.getPreference(Preferences.CURRENT_FOLDER);
-            if (curDir != null)
-            {
-                File dir = new File(curDir);
-                if (dir.exists() && dir.isDirectory())
-                {
-                    ndc.setCurrentDirectory(dir);
-                }
-            }
-
-            int val = ndc.showSaveDialog(this);
-            if (val != OmegaTFileChooser.APPROVE_OPTION)
-            {
-                m_dialogCancelled = true;
-                return;
-            }
-
             // create project dir (and higher dirs) if it doesn't exist yet
             // fix for bug 1476591 (wrong folders are used if project dir doesn't exist)
-            File projectDir = ndc.getSelectedFile();
+            File projectDir = new File(projFileName);
             if (!projectDir.exists())
                 projectDir.mkdirs();
 
             // set project and relative dirs
-            projectProperties.setProjectRoot(ndc.getSelectedFile().getAbsolutePath()
+            projectProperties.setProjectRoot(projectDir.getAbsolutePath()
                         + File.separator);
             projectProperties.setProjectFile(projectProperties.getProjectRoot() + OConsts.FILE_PROJECT);
-            Preferences.setPreference(Preferences.CURRENT_FOLDER, ndc.getSelectedFile().getParent());
+            Preferences.setPreference(Preferences.CURRENT_FOLDER, projectDir.getParent());
             projectProperties.setProjectName(projectProperties.getProjectFile().substring(projectProperties.getProjectRoot().length()));
             projectProperties.setSourceRoot(projectProperties.getProjectRoot() + OConsts.DEFAULT_SOURCE
                 + File.separator);

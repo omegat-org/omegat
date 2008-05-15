@@ -24,6 +24,7 @@
 
 package org.omegat.core.data;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -37,14 +38,19 @@ import org.omegat.filters2.TranslationException;
 public interface IDataEngine {
     /**
      * Create new project.
+     * 
+     * This method should be called in UI thread, because DataEngine will show
+     * project settings dialog. It's not good behavior and it should be chanegd
+     * in future.
      */
-    void createProject();
+    void createProject(File newProjectDir);
 
     /**
      * Loads project in a "big" sense -- loads project's properties, glossaryes,
      * tms, source files etc.
-     *
-     * @param projectRoot The folder where the project resides.
+     * 
+     * @param projectRoot
+     *                The folder where the project resides.
      */
     void loadProject(String projectDir) throws Exception;
 
@@ -91,9 +97,9 @@ public interface IDataEngine {
      *         loaded
      */
     List<LegacyTM> getMemory();
-    
+
     List<FileInfo> getProjectFiles();
-    
+
     public static class FileInfo {
         public String filePath;
         public int firstEntryIndex;

@@ -333,11 +333,11 @@ public class ProjectProperties
     /**
      * Displays dialogs to create a new project.
      */
-    public boolean createNew(Frame parentFrame)
+    public boolean createNew(Frame parentFrame, File dir)
     {
         // new project window; create project file
         ProjectPropertiesDialog newProjDialog = new ProjectPropertiesDialog(
-                parentFrame, this, null, ProjectPropertiesDialog.NEW_PROJECT);
+                parentFrame, this, dir.getAbsolutePath(), ProjectPropertiesDialog.NEW_PROJECT);
         if( !newProjDialog.dialogCancelled() )
         {
             newProjDialog.setVisible(true);

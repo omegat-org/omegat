@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2008 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -24,15 +25,19 @@
 
 package org.omegat.gui.dialogs;
 
+import java.io.File;
+
 import javax.swing.JOptionPane;
 
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.gui.OmegaTFileChooser;
 
 /**
  * A chooser for project's directory for a newly created project.
  *
  * @author Keith Godfrey
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class NewProjectFileChooser extends OmegaTFileChooser
 {
@@ -40,6 +45,18 @@ public class NewProjectFileChooser extends OmegaTFileChooser
     {
         setMultiSelectionEnabled(false);
         setFileHidingEnabled(true);
+
+        setDialogTitle(OStrings.getString("PP_SAVE_PROJECT_FILE"));
+        
+        String curDir = Preferences.getPreference(Preferences.CURRENT_FOLDER);
+        if (curDir != null)
+        {
+            File dir = new File(curDir);
+            if (dir.exists() && dir.isDirectory())
+            {
+                setCurrentDirectory(dir);
+            }
+        }
     }
     
     public void approveSelection()

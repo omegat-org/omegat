@@ -29,6 +29,7 @@ import java.io.File;
 import org.omegat.core.Core;
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.OmegaTFileChooser;
@@ -52,8 +53,16 @@ public class ProjectUICommands {
                     new Exception("FATAL: Another project is open"));
             return;
         }
-
-        Core.getDataEngine().createProject();
+        
+        // ask for new project dir
+        NewProjectFileChooser ndc = new NewProjectFileChooser();
+        int ndcResult = ndc.showSaveDialog(Core.getMainWindow().getApplicationFrame());
+        if (ndcResult != OmegaTFileChooser.APPROVE_OPTION) {
+            // user press 'Cancel' in project creation dialog
+            return;
+        }
+        
+        Core.getDataEngine().createProject(ndc.getSelectedFile());
 
         final String projectRoot = CommandThread.core.getProjectProperties()
                 .getProjectRoot();

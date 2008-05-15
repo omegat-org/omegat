@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
+               2008      Alex Buloichik
  Portions copyright 2007 Zoltan Bartko - bartkozoltan@bartkozoltan.com
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -63,6 +64,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Maxym Mykhalchuk
  * @author Bartko Zoltan
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class CommandThread implements IDataEngine
 {
@@ -438,84 +440,23 @@ public class CommandThread implements IDataEngine
         m_srcTextEntryArray.add(srcTextEntry);
     }
     
-    public void createProject()
+    /**
+     * {@inheritDoc}
+     */
+    public void createProject(final File newProjectDir)
     {
-        // create project directories
-        // save project files (.proj .handlers .ignore)
+        UIThreadsUtil.mustBeSwingThread();
         try
         {
-            if (!m_config.createNew(Core.getMainWindow().getApplicationFrame()))
+            if (!m_config.createNew(Core.getMainWindow().getApplicationFrame(), newProjectDir))
                 return;	// cancel pressed
             
-            // create project root directory
-            File proj = new File(m_config.getProjectRoot());
-            if (!proj.isDirectory())
-            {
-                if (!proj.mkdirs())
-                {
-                    String msg = OStrings.getString("CT_ERROR_CREATE");
-                    throw new IOException(msg);
-                }
-            }
-            
-            // create internal directory
-            File internal = new File(m_config.getProjectInternal());
-            if (!internal.isDirectory())
-            {
-                if (!internal.mkdirs())
-                {
-                    String msg = OStrings.getString("CT_ERROR_CREATE");
-                    throw new IOException(msg);
-                }
-            }
-            
-            // populate internal directory with project files
-            //buildDefaultHandlerFile(hand);
-            //buildDefaultIgnoreFile();
-            
-            // create src dir
-            File src = new File(m_config.getSourceRoot());
-            if (!src.isDirectory())
-            {
-                if (!src.mkdirs())
-                {
-                    String msg = OStrings.getString("CT_ERROR_CREATE") + "\n(.../src/)";      // NOI18N
-                    throw new IOException(msg);
-                }
-            }
-            
-            // create glos dir
-            File glos = new File(m_config.getGlossaryRoot());
-            if (!glos.isDirectory())
-            {
-                if (!glos.mkdirs())
-                {
-                    String msg = OStrings.getString("CT_ERROR_CREATE") + "\n(.../glos/)";     // NOI18N
-                    throw new IOException(msg);
-                }
-            }
-            
-            // create TM dir
-            File tm = new File(m_config.getTMRoot());
-            if (!tm.isDirectory())
-            {
-                if (!tm.mkdirs())
-                {
-                    String msg = OStrings.getString("CT_ERROR_CREATE") + "\n(.../tm/)";       // NOI18N
-                    throw new IOException(msg);
-                }
-            }
-            
-            // create loc dir
-            File loc = new File(m_config.getTargetRoot());
-            if (!loc.isDirectory())
-            {
-                if (!loc.mkdirs())
-                {
-                    String msg = OStrings.getString("CT_ERROR_CREATE") + "\n(.../target/)"; // NOI18N
-                    throw new IOException(msg);
-                }
-            }
+            createDirectory(m_config.getProjectRoot(), null);
+            createDirectory(m_config.getProjectInternal(), null);
+            createDirectory(m_config.getSourceRoot(), "src");
+            createDirectory(m_config.getGlossaryRoot(), "glos");
+            createDirectory(m_config.getTMRoot(), "tm");
+            createDirectory(m_config.getTargetRoot(), "target");
             
             m_config.buildProjFile();
             CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.CREATE);
@@ -525,6 +466,28 @@ public class CommandThread implements IDataEngine
             // trouble in tinsletown...
             String msg = OStrings.getString("CT_ERROR_CREATING_PROJECT");
             displayError(msg, e);
+        }
+    }
+    
+    /**
+     * Create one of project directory and  
+     * @param dir
+     * @param dirType
+     * @throws IOException
+     */
+    private void createDirectory(final String dir, final String dirType) throws IOException {
+        File d = new File(dir);
+        if (!d.isDirectory())
+        {
+            if (!d.mkdirs())
+            {
+                StringBuilder msg = new StringBuilder(OStrings
+                        .getString("CT_ERROR_CREATE"));
+                if (dirType != null) {
+                    msg.append("\n(.../").append(dirType).append("/)");
+                }
+                throw new IOException(msg.toString());
+            }
         }
     }
     

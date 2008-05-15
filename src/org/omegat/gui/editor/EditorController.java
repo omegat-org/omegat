@@ -147,6 +147,7 @@ public class EditorController implements IEditor {
     private void updateState() {
         if (!Core.getDataEngine().isProjectLoaded()) {
             MainWindowUI.loadInstantStart(pane, editor);
+            pane.getViewport().getView().requestFocus();
         }else {
             String file = getCurrentFile();
             String title = StaticUtils.format(OStrings

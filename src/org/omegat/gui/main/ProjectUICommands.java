@@ -61,7 +61,7 @@ public class ProjectUICommands {
         if (projectRoot != null && projectRoot.length() > 0) {
             new SwingWorker<Object>() {
                 protected Object doInBackground() throws Exception {
-                    Core.getDataEngine().newLoadProject(
+                    Core.getDataEngine().loadProject(
                             projectRoot + File.separator);
                     return null;
                 }
@@ -101,7 +101,7 @@ public class ProjectUICommands {
 
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {
-                Core.getDataEngine().newLoadProject(
+                Core.getDataEngine().loadProject(
                         projectRootFolder.getAbsolutePath() + File.separator);
                 return null;
             }
@@ -137,7 +137,7 @@ public class ProjectUICommands {
 
                 Core.getMainWindow().clear();
 
-                Core.getDataEngine().newLoadProject(
+                Core.getDataEngine().loadProject(
                         projectRoot + File.separator);
                 return null;
             }

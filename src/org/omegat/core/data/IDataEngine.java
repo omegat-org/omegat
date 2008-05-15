@@ -41,9 +41,12 @@ public interface IDataEngine {
     void createProject();
 
     /**
-     * Load project.
+     * Loads project in a "big" sense -- loads project's properties, glossaryes,
+     * tms, source files etc.
+     *
+     * @param projectRoot The folder where the project resides.
      */
-    void newLoadProject(String projectDir) throws Exception;
+    void loadProject(String projectDir) throws Exception;
 
     /**
      * Save project.

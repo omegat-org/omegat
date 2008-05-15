@@ -118,13 +118,16 @@ public class CommandThread implements IDataEngine
         m_srcTextEntryArray.clear();
         
         numberofTranslatedSegments = 0;
+        
+        // reset token list cache
+        Core.getTokenizer().clearCache();
     }
     
     /**
      * {@inheritDoc}
      * TODO: change to File parameter
      */
-    public void newLoadProject(String projectDir) throws Exception {
+    public void loadProject(String projectDir) throws Exception {
         UIThreadsUtil.mustNotBeSwingThread();
         // load new project
         try
@@ -132,13 +135,27 @@ public class CommandThread implements IDataEngine
             cleanUp();
             
             Core.getMainWindow().showStatusMessage(OStrings.getString("CT_LOADING_PROJECT"));
-            if (!loadProject(projectDir))
-            {
+            
+            // load project properties
+            if (!m_config.loadExisting(Core.getMainWindow().getApplicationFrame(), projectDir)) {
                 // loading of project cancelled
                 Core.getMainWindow().showStatusMessage(OStrings.getString("CT_CANCEL_LOAD"));
                 return;
+
             }
-           // MessageRelay.uiMessageDisplayEntry(tf);
+            
+            projectClosing = false;
+            
+            loadSourceFiles(projectDir);
+            
+            loadTranslations();
+            
+            projectLoaded = true;
+            
+            CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
+
+
+            // MessageRelay.uiMessageDisplayEntry(tf);
             if (m_saveCount == -1)
             {
                 m_saveCount = 1;
@@ -552,29 +569,15 @@ public class CommandThread implements IDataEngine
             displayError(msg, e);
         }
     }
-    
+
     /**
-     * Loads project in a "big" sense -- loads project's properties, glossaryes,
-     * tms, source files etc.
-     * <p>
-     * We may pass here the folder where the project resides
-     * or null, in which case FileChooser is brought up to select a project.
-     *
-     * @param projectRoot The folder where the project resides. If it's null,
-     *                     FileChooser is called to select a project.
+     * Load source files for project.
+     * 
+     * @param projectRoot project root dir
      */
-    public boolean loadProject(String projectRoot)
+    private void loadSourceFiles(String projectRoot)
             throws IOException, InterruptedIOException, TranslationException
     {
-        if (!m_config.loadExisting(Core.getMainWindow().getApplicationFrame(), projectRoot))
-            return false;
-
-        // reset token list cache
-        Core.getTokenizer().clearCache();
-        
-        projectClosing = false;
-        
-        // now open source files
         FilterMaster fm = FilterMaster.getInstance();
         
         List<String> srcFileList = new ArrayList<String>();
@@ -616,16 +619,6 @@ public class CommandThread implements IDataEngine
         }
         Core.getMainWindow().showStatusMessage(OStrings.getString("CT_LOAD_SRC_COMPLETE"));
         m_curFile = null;
-        loadTranslations();
-//                                  Call is too early 
-//        m_projWin.buildDisplay(); for MainWindow.getActiveFileName() 
-//                                  and doesn't seem useful
-        
-        projectLoaded = true;
-        
-        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
-
-        return true;
     }
     
     /** Locates and loads external TMX files with legacy translations. */

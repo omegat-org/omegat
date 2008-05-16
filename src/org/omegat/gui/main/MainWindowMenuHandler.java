@@ -139,10 +139,9 @@ public class MainWindowMenuHandler {
 
     /** Edits project's properties */
     public void projectEditMenuItemActionPerformed() {
-        ProjectProperties config = CommandThread.core.getProjectProperties();
         boolean changed = false;
         try {
-            changed = config.editProject(mainWindow);
+            changed = Core.getDataEngine().getProjectProperties().editProject(mainWindow);
         } catch (IOException ioe) {
             mainWindow.displayWarning(OStrings.getString("MW_ERROR_PROJECT_NOT_EDITABLE"), ioe);
         }

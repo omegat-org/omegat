@@ -84,6 +84,15 @@ public interface IDataEngine {
     boolean isProjectLoaded();
 
     /**
+     * Mark project as dirty, i.e. translated, then project should be saved.
+     */
+    void markAsDirty();
+    
+    void increaseTranslated();
+    
+    void decreaseTranslated();
+    
+    /**
      * Get all entries.
      * 
      * @return read-only list of project entries, or null if project not loaded

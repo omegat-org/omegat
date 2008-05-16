@@ -28,6 +28,7 @@ import java.util.Comparator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.omegat.core.Core;
 import org.omegat.core.matching.SourceTextEntry;
 
 
@@ -98,14 +99,14 @@ public class StringEntry
         {
             // tell the boss things have changed to indicate a save is in order
             // only if translation changed
-            CommandThread.core.markAsDirty();
+            Core.getDataEngine().markAsDirty();
             m_translation = trans;
 
             boolean is = !"".equals(m_translation);                             // NOI18N
             if( was && !is )
-                CommandThread.core.decreaseTranslated();
+                Core.getDataEngine().decreaseTranslated();
             else if( !was && is )
-                CommandThread.core.increaseTranslated();
+                Core.getDataEngine().increaseTranslated();
         }
     }
 

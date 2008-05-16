@@ -60,7 +60,7 @@ public class ProjectUICommands {
         
         Core.getDataEngine().createProject(ndc.getSelectedFile());
 
-        final String projectRoot = CommandThread.core.getProjectProperties()
+        final String projectRoot = Core.getDataEngine().getProjectProperties()
                 .getProjectRoot();
 
         if (projectRoot != null && projectRoot.length() > 0) {
@@ -127,8 +127,7 @@ public class ProjectUICommands {
             return;
         }
         
-        ProjectProperties config = CommandThread.core.getProjectProperties();
-        final String projectRoot = config.getProjectRoot();
+        final String projectRoot = Core.getDataEngine().getProjectProperties().getProjectRoot();
 
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {

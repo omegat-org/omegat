@@ -904,7 +904,7 @@ public class EditorController implements IEditor {
      *            one of the CASE_* values - except for case CASE_CYCLE.
      */
     private String doChangeCase(String input, CHANGE_CASE_TO toWhat) {
-        Locale locale = CommandThread.core.getProjectProperties().getTargetLanguage().getLocale();
+        Locale locale = Core.getDataEngine().getProjectProperties().getTargetLanguage().getLocale();
 
         switch (toWhat) {
         case LOWER:

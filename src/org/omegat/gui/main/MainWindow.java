@@ -162,7 +162,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         String s = OStrings.getDisplayVersion();
         if(isProjectLoaded())
         {
-            s += " :: " + CommandThread.core.getProjectProperties().getProjectName();       // NOI18N
+            s += " :: " + Core.getDataEngine().getProjectProperties().getProjectName();       // NOI18N
         }
         setTitle(s);
     }
@@ -252,7 +252,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         int result=chooser.showOpenDialog(this);
         if( result==OmegaTFileChooser.APPROVE_OPTION )
         {
-            String projectsource = CommandThread.core.getProjectProperties().getSourceRoot();
+            String projectsource = Core.getDataEngine().getProjectProperties().getSourceRoot();
             File sourcedir = new File(projectsource);
             File[] selFiles=chooser.getSelectedFiles();
             try
@@ -299,7 +299,7 @@ public class MainWindow extends JFrame implements IMainWindow {
 		OStrings.getString("TF_WIKI_IMPORT_TITLE"),
 		JOptionPane.OK_CANCEL_OPTION);
         String projectsource = 
-                CommandThread.core.getProjectProperties().getSourceRoot();
+                Core.getDataEngine().getProjectProperties().getSourceRoot();
          // [1762625] Only try to get MediaWiki page if a string has been entered 
         if ( (remote_url != null ) && (remote_url.trim().length() > 0) )
         {

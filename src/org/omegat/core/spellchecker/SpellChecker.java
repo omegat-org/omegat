@@ -43,6 +43,7 @@ import java.util.List;
 
 import org.dts.spell.dictionary.OpenOfficeSpellDictionary;
 import org.dts.spell.dictionary.SpellDictionary;
+import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.events.IProjectEventListener;
@@ -130,7 +131,7 @@ public class SpellChecker implements ISpellChecker {
         // initialize the spell checker - get the data from the preferences
         
         String language = 
-                CommandThread.core.getProjectProperties().getTargetLanguage()
+                Core.getDataEngine().getProjectProperties().getTargetLanguage()
                 .getLocaleCode();
         
         String dictionaryDir = Preferences.getPreference(
@@ -158,7 +159,7 @@ public class SpellChecker implements ISpellChecker {
             }            
             // find out the internal project directory
             String projectDir = 
-                    CommandThread.core.getProjectProperties().getProjectInternal();
+                    Core.getDataEngine().getProjectProperties().getProjectInternal();
 
             // load the ignore list
 

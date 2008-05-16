@@ -327,7 +327,7 @@ public class CommandThread implements IDataEngine
             forceSave(false);
     }
     
-    public synchronized void markAsDirty()
+    public void markAsDirty()
     {
         m_modifiedFlag = true;
     }
@@ -775,7 +775,7 @@ public class CommandThread implements IDataEngine
     }
 
     /** Sygnals that the number of translated segments decreased */
-    public synchronized void decreaseTranslated()
+    public void decreaseTranslated()
     {
         numberofTranslatedSegments--;
     }
@@ -787,7 +787,7 @@ public class CommandThread implements IDataEngine
     }
     
     /** Sygnals that the number of translated segments increased */
-    public synchronized void increaseTranslated()
+    public void increaseTranslated()
     {
         if( _dontCountNext )
             _dontCountNext = false;

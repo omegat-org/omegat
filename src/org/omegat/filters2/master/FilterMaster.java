@@ -46,6 +46,7 @@ import java.util.Set;
 
 import javax.swing.JOptionPane;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.segmentation.Rule;
@@ -198,7 +199,7 @@ public class FilterMaster
         StringBuffer res = new StringBuffer();
         res.append(bs);
         
-        if( CommandThread.core.getProjectProperties().isSentenceSegmentingEnabled() )
+        if( Core.getDataEngine().getProjectProperties().isSentenceSegmentingEnabled() )
         {
             List<StringBuffer> spaces = new ArrayList<StringBuffer>();
             List<Rule> brules = new ArrayList<Rule>();

@@ -35,7 +35,6 @@ import java.util.Stack;
 import java.util.regex.Matcher;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.CommandThread;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.xml.XMLReader;
 import org.xml.sax.Attributes;
@@ -184,7 +183,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             {
                 upgrade14X = getCreationToolVersion().compareTo(CTV_OMEGAT_1) <= 0;
                 upgradeSentSeg = SEG_PARAGRAPH.equals(getSegType()) && 
-                        CommandThread.core.getProjectProperties().isSentenceSegmentingEnabled();
+                        Core.getDataEngine().getProjectProperties().isSentenceSegmentingEnabled();
             }
             upgradeCheckComplete = true;
         }

@@ -32,7 +32,7 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.omegat.core.data.CommandThread;
+import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.util.Language;
 import org.omegat.util.PatternConsts;
@@ -302,7 +302,7 @@ public final class Segmenter
         if( sentences.size()<=0 )
             return "";                                                          // NOI18N
 	
-        ProjectProperties config = CommandThread.core.getProjectProperties();
+        ProjectProperties config = Core.getDataEngine().getProjectProperties();
         
         StringBuffer res = new StringBuffer();
         res.append(sentences.get(0));

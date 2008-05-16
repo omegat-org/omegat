@@ -87,8 +87,6 @@ public class CommandThread implements IDataEngine
         m_legacyTMs = new ArrayList<LegacyTM>();
         m_orphanedList = new ArrayList<TransMemory>();
         m_modifiedFlag = false;
-
-        m_saveCount = -1;
     }
     
     //////////////////////////////////////////////////////
@@ -100,14 +98,6 @@ public class CommandThread implements IDataEngine
      */
     public void cleanUp()
     {
-        if (m_strEntryList.size() > 0)
-        {
-            // disable future saves
-            if (m_saveCount >= 0)
-                m_saveCount = 1;
-            saveProject();
-        }
-        
         m_strEntryHash.clear();
         
         m_legacyTMs.clear();
@@ -154,13 +144,6 @@ public class CommandThread implements IDataEngine
             projectLoaded = true;
             
             CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
-
-
-            // MessageRelay.uiMessageDisplayEntry(tf);
-            if (m_saveCount == -1)
-            {
-                m_saveCount = 1;
-            }
                           
             // load in translation database files
             try
@@ -179,9 +162,6 @@ public class CommandThread implements IDataEngine
             
             // Project Loaded...
             Core.getMainWindow().showStatusMessage("");
-            
-            // enable normal saves
-            m_saveCount = 2;
         }
         catch( Exception e )
         {
@@ -358,11 +338,6 @@ public class CommandThread implements IDataEngine
         UIThreadsUtil.mustNotBeSwingThread();
         
         Preferences.save();
-        
-        if (m_saveCount <= 0)
-            return;
-        else if (m_saveCount == 1)
-            m_saveCount = 0;
         
         String s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
         if (corruptionDanger)
@@ -589,33 +564,18 @@ public class CommandThread implements IDataEngine
     /** Locates and loads external TMX files with legacy translations. */
     private void loadTM() throws IOException
     {
-        // build strEntryList for each file
-        // send to buildNearList
-        String [] fileList;
-        File f;
-        int i;
-        String fname;
-        
-        // foreach lang
-        // foreach file
-        // build string entry list
-        // call build near list (entry list, status+filename)
-        //buildNearList(m_strEntryList, status + " (" + fname + ")");
-        
-        String ext;
-        f = new File(m_config.getTMRoot());
-        fileList = f.list();
-        for (i=0; i<fileList.length; i++)
-        {
-            fname = fileList[i];
+        File f = new File(m_config.getTMRoot());
+        String[] fileList = f.list();
+        for (String file : fileList) {
+            String fname = file;
             int lastdot = fname.lastIndexOf('.');
             if (lastdot<0)
                 lastdot = fname.length();
-            ext = fname.substring(lastdot);
+            String ext = fname.substring(lastdot);
             fname = m_config.getTMRoot();
             if (!fname.endsWith(File.separator))
                 fname += File.separator;
-            fname += fileList[i];
+            fname += file;
             
             if (ext.equalsIgnoreCase(OConsts.TMX_EXTENSION))
                 loadTMXFile(fname, "UTF-8", false); // NOI18N
@@ -770,11 +730,6 @@ public class CommandThread implements IDataEngine
     { return m_tmList;		}
     
     /////////////////////////////////////////////////////////
-    
-    // count=0		save disabled
-    // count=1		one more save only
-    // count=2		regular mode
-    private int m_saveCount;
     
     private ProjectProperties m_config;
     

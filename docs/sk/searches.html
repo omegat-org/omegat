@@ -1,195 +1,124 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Vyhľadávanie - Používateľská príručka OmegaT 1.6.1</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Searches - OmegaT 1.7.3 User Manual</title>
 </head>
 <body>
 
-<h1>Vyhľadávanie</h1>
+	<h1>Vyhľadávanie</h1>
 
-<h2>Obsah</h2>
+	<ul>
+		<li><a href="#searchwindow">Okno hľadania</a>
+			<ul>
+				<li><a href="#calling">Calling up a search</a></li>
+				<li><a href="#location">Search location</a></li>
+			</ul>
+		</li>
+		<li><a href="#searchmethods">Metódy hľadania</a></li>
+		<li><a href="#usingwildcards">Using wild cards</a></li>
+		<li><a href="#usingregularexpressions">Using regular expressions</a></li>
+		<li><a href="#display">Zobrazenie výsledkov vyhľadávania</a></li>
+	</ul>
 
-<ul type="none">
-   <li>1. <a href="#Search_window">Okno hľadania</a></li>
-   <li>2. <a href="#Search_locations">Umiestnenia hľadania</a></li>
 
-   <li>3. <a href="#Search_methods">Metódy hľadania</a>
-
-      <ul type="none">
-         <li>3.1. <a href="#Exact searches">Presné hľadanie</a></li>
-         <li>3.2. <a href="#Keyword_searches">Hľadanie kľúčových slov</a></li>
-      </ul>
-   </li>
-
-   <li>4. <a href="#Searching_using_wildcards">Hľadanie pomocou zástupných znakov</a></li>
-
-   <li>5. <a href="#Searching_using_regular_expressions">Hľadanie pomocou regulárnych výrazov</a>
-
-      <ul>
-         <li>5.1. <a href="#Regular_Expressions_to_use_in_searches">Regulárne výrazy používané pri vyhľadávaní</a></li>
-         <li>5.2. <a href="#Short_summary_of_regular-expression_constructs">Krátky prehľad konštrukcií regulárnych výrazov</a></li>
-      </ul>
-   </li>
-</ul>
-
-<a name="Search_window"></a>
-<h2>Okno hľadania</h2>
-
-<p>OmegaT poskytuje silné množstvo vyhľadávacích funkcií.</p>
-
-<p>Otvorte vyhľadávacie okno pomocou <code>Ctrl+F</code> a zadajte slovo alebo frázu, ktoré chcete vyhľadať do poľa "Hľadať".</p>
-
-<p>Alebo, Vyberte slovo alebo frázu v editovacom poli (cieľový text aktívneho segmentu) a stlačte <code>Ctrl+F</code>. Slovo alebo fráza je v tomto prípade zadané do poľa "Hľadať" automaticky.</p>
-
-<p>Spustenie okna Hľadanie stále vytvorí jeho novú inštanciu. Ak ich zabudnete zatvárať, môžete skončiť s množstvom otvorených okien Hľadanie.</p>
-
-<p>Hľadania sa uskutočňujú v zdrojovej aj v cieľovej sekcii projektu.</p>
-
-<a name="Search_locations"></a>
-<h2>Umiestnenia hľadania</h2>
-
-<p>Vyberte umiestnenie pomocou zaškrtávacích polí.</p>
-
-<p>Môžete vybrať množstvo umiestnení pre vaše hľadanie:</p>
-
-<ul>
-   <li>Iba projekt (predvolené nastavenie)</li>
-   <li>Projekt ako aj referenčné prekladové pamäte v /tm/ (zaškrtnite <i>Prehľadávať prekladové pamäte</i>)</li>
-   <li>Jediný súbor alebo priečinok obsahujúci sadu súborov (zaškrtnite <i>Prehľadávať súbory</i>)</li>
-</ul>
-
-<p>V poslednom prípade, OmegaT bude prehľadávať iba súbory, ktoré môže čítať (Pozri <a href="fileFormats">Podporované formáty súborov</a>).</p>
-
-<a name="Search_methods"></a>
-<h2>Metódy hľadania</h2>
-
-<p>Vyberte metódu hľadania pomocou prepínacích tlačidiel.</p>
-
-<p>Môžete si vybrať medzi dvoma metódami hľadania:</p>
-
-<ul>
-   <li><strong>Presné hľadanie</strong>: Hľadá segmenty obsahujúce raťazec, ktorý ste zadali.</li>
-   <li><strong>Hľadanie kľúčových slov</strong>: Hľadá segmenty obsahujúce všetky kľúčové slová, ktoré ste zadali, v akomkoľvek poradí.</li>
-</ul>
-
-<p>Pre ktorúkoľvek z týchto metód môžete vybrať nasledujúce tri voľby:</p>
-
-<ul>
-   <li>
-      <strong>Rozlišovať veľkosť písmen</strong>: Ak je vybrané, hľadanie bude vykonané pre presný reťazec, ktorý ste zadali; ináč budú veľké písmená ignorované.</li>
-
-   <li>
-      <strong>Regulárne výrazy</strong>: Ak je vybrané, s hľadaným reťazcom sa bude zaobchádzať ako s regulárnym výrazom (v prípade hľadania kľúčového slova sa to bude brať ako viacnásobné výrazy).</li>
-
-   <li>
-      <strong>Prehľadávať prekladové pamäte</strong>: ak je vybrané, všetky prekladové pamäte sú zahrnuté v hľadaní.</li>
-</ul>
-
-<a name="Exact_searches"></a>
-<h2>Presné hľadanie</h2>
-
-<p>Presné hľadanie hľadá výraz, tj. ak je zadaných niekoľko slov, budú nájdené iba ak sa nachádzajú v presne rovnakom poradí. Presné hľadania sú podobné hľadanie "presného výrazu" v internetovom vyhľadávači ako Google.</p>
-
-<a name="Keyword_searches"></a>
-<h2>Hľadanie kľúčových slov</h2>
-
-<p>Vyberte "Hľadanie kľúčových slov" a zadajte akékoľvek množstvo samostatných slov, oddelených medzerami a v akomkoľvek poradí, a OmegaT zobrazí zoznam všetkých segmentov v ktorých sa všetky slová vyskytujú. Hľadania kľúčových slov sú podobné ako hľadanie "so všetkými slovami" v internetovom vyhľadávači ako Google (logika AND).</p>
-
-<a name="Searching_using_wildcards"></a>
-<h2>Hľadanie pomocou zástupných znakov</h2>
-
-<p>V presnom vyhľadávaní aj v hľadaní kľúčových slov, môžu byť použité zástupné vyhľadávacie znaky '<code>*</code>' a '<code>?</code>'. Pre použitie zástupných znakov sa uistite, že nie je vybratá voľba <strong>regulárne výrazy</strong>, ináč sú tieto znaky interpretované ako špeciálne znaky regulárnych výrazov.</p>
-
-<p>Zástupný znak '<code>?</code>' predstavuje akýkoľvek jediný znak, tj. '<code>b?d</code>' nájde výskyty '<code>bad</code>' a '<code>bid</code>'. Zástupný znak '<code>*</code>' predstavuje akýkoľvek znak alebo niekoľko znakov, tj. '<code>b*d</code>' nájde výskyty '<code>bad</code>', '<code>bid</code>', '<code>bold</code>' a '<code>band</code>'.</p>
-
-<p>Ak chcete vyhľadať segmenty obsahujúce tieto znaky, budete potrebovať zapnúť regulárne výrazy, a citovať ich tak, že pred nich pridáte spätné lomítko ('<code>\</code>'), tj. '<code>x\*y</code>' pre nájdenie výskytov '<code>x*y</code>' a '<code>x\?y</code>' pre nájdenie výskytov '<code>x?y</code>'.</p>
-
-<a name="Searching_using_regular_expressions"></a>
-<h2>Hľadanie pomocou regulárnych výrazov</h2>
-
-<p>Hľadanie regulárnych výrazov je mocný spôsob pre hľadanie výskytov reťazca. Je podobné ako normálne hľadanie, ale umožňuje oveľa väčšiu flexibilitu. Na webe môžete nájsť tutoriály (napríklad <a href="http://www.regular-expressions.info/quickstart.html" title="http://www.regular-expressions.info/quickstart.html" rel="nofollow">http://www.regular-expressions.info/quickstart.html</a>.)</p>
-
-<a name="Regular_Expressions_to_use_in_searches"></a>
-<h3>Regulárne výrazy pre použitie pri vyhľadávaní</h3>
-
-<p>Regulárne výrazy použité pri vyhľadávaní sú tie, ktoré podporuje Java. Ak potrebujete špecifickejšie informácie, prosím prezrite si <a href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
-
-<a name="Short_summary_of_regular-expression_constructs"></a>
-<h4>Krátky prehľad konštrukcií regulárnych výrazov</h4>
-
-<table border="0" width="80%" cellpadding="1" cellspacing="0" summary="Konštrukcie regulárnych výrazov, a čomu zodpovedajú">
-    <tr bgcolor="#DDEEFF"><th width="10%" align="left" id="construct">Konštrukcia </th><th align="left">Zodpovedajúce výrazy</th></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="flags">Označenia</th></tr>
-    <tr><td><tt>(?i)</tt></td><td>Umožňuje hľadanie bez ohľadu na veľkosť písmen (predvolene vzor rozlišuje veľkosť písmen).</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr><th align="left" colspan="2" id="characters">Znaky</th></tr>
-
-    <tr><td><strong>x</strong></td><td>Znak <strong>x</strong>, s výnimkou nasledujúcich...</td></tr>
-    <tr><td><tt>\u</tt><strong>hhhh</strong></td><td>Znak s hexadecimálnou hodnotou&nbsp;<tt>0x</tt><strong>hhhh</strong></td></tr>
-    <tr><td><tt>\t</tt></td><td>Znak tabulátora (<tt>'\u0009'</tt>)</td></tr>
-
-    <tr><td><tt>\n</tt></td><td>Znak nového riadku (konca riadku) (<tt>'\u000A'</tt>)</td></tr>
-    <tr><td><tt>\r</tt></td><td>Znak návratu vozíka (<tt>'\u000D'</tt>)</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="quot">Citácia</th></tr>
-
-    <tr><td><tt>\</tt></td><td>Nič, ale cituje nasledujúci znak. Toto sa vyžaduje ak by ste chceli zadanie metaznakov <code>!$()*+.&lt;&gt;?[\]^{|}</code> aby zodpovedali sami sebe.</td></tr>
-    <tr><td><tt>\\</tt></td><td>Napríklad, toto je znak spätného lomítka</td></tr>
-    <tr><td><tt>\Q</tt></td><td>Nič, ale cituje všetky znaky až po <tt>\E</tt></td></tr>
-
-    <tr><td><tt>\E</tt></td><td>Nič, ale končí citáciu začatú pomocou <tt>\Q</tt></td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="classes">Triedy znakov</th></tr>
-    <tr><td><tt>[abc]</tt></td><td><tt>a</tt>, <tt>b</tt>, alebo <tt>c</tt> (jednoduchá trieda)</td></tr>
-
-    <tr><td><tt>[^abc]</tt></td><td>Akýkoľvek znak s výnimkou <tt>a</tt>, <tt>b</tt>, alebo <tt>c</tt> (negácia)</td></tr>
-    <tr><td><tt>[a-zA-Z]</tt></td><td><tt>a</tt> až po <tt>z</tt> alebo <tt>A</tt> až po <tt>Z</tt>, vrátane (rozsah)</td></tr>
-
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="predef">Preddefinované triedy znakov</th></tr>
-    <tr><td><tt>.</tt></td><td>Akýkoľvek znak (okrem znakov ukončujúcich riadok)</td></tr>
-    <tr><td><tt>\d</tt></td><td>Číslica: <tt>[0-9]</tt></td></tr>
-    <tr><td><tt>\D</tt></td><td>Nečíslica: <tt>[^0-9]</tt></td></tr>
-
-    <tr><td><tt>\s</tt></td><td>Biely znak: <tt>[ \t\n\x0B\f\r]</tt></td></tr>
-    <tr><td><tt>\S</tt></td><td>Nebiely znak: <tt>[^\s]</tt></td></tr>
-    <tr><td><tt>\w</tt></td><td>Znak slova: <tt>[a-zA-Z_0-9]</tt></td></tr>
-    <tr><td><tt>\W</tt></td><td>Nie znak slova: <tt>[^\w]</tt></td></tr>
-
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="bounds">Označenie hraníc</th></tr>
-    <tr><td><tt>^</tt></td><td>Začiatok riadku</td></tr>
-    <tr><td><tt>$</tt></td><td>Koniec riadku</td></tr>
-    <tr><td><tt>\b</tt></td><td>Hranica slova</td></tr>
-
-    <tr><td><tt>\B</tt></td><td>Nie hranica slova</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="greedy">Viacnásobné kvantifikátory</th></tr>
-    <tr><td colspan="2">Tieto budú predstavovať toľko, koľko len môžu. Napríklad, <code>a+</code> bude zodpovedať <code>aaa</code> v <code>aaabbb</code></td></tr>
-
-    <tr><td><strong>X</strong><tt>?</tt></td><td><strong>X</strong>, raz alebo vôbec</td></tr>
-    <tr><td><strong>X</strong><tt>*</tt></td><td><strong>X</strong>, nula alebo viackrát</td></tr>
-    <tr><td><strong>X</strong><tt>+</tt></td><td><strong>X</strong>, raz alebo viackrát</td></tr>
-
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="reluc">Nedobrovoľné kvantifikátory</th></tr>
-    <tr><td colspan="2">Tieto budú predstavovať tak málo, ako len môžu. Napríklad, <code>a+?</code> bude zodpovedať prvému <code>a</code> v <code>aaabbb</code></td></tr>
-    <tr><td><strong>X</strong><tt>??</tt></td><td><strong>X</strong>, raz alebo vôbec</td></tr>
-
-    <tr><td><strong>X</strong><tt>*?</tt></td><td><strong>X</strong>, nula alebo viackrát</td></tr>
-    <tr><td><strong>X</strong><tt>+?</tt></td><td><strong>X</strong>, raz alebo viackrát</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="logical">Logické operátory</th></tr>
-
-    <tr><td><strong>XY</strong></td><td><strong>X</strong> nasledované <strong>Y</strong></td></tr>
-    <tr><td><strong>X</strong><tt>|</tt><strong>Y</strong></td><td>Buď <strong>X</strong>, alebo <strong>Y</strong></td></tr>
-
-    <tr><td><tt>(</tt><strong>XY</strong><tt>)</tt></td><td><strong>XY</strong> ako jediná skupina</td></tr>
-</table>
 
 <hr>
-<p><a href="legalNotices.html" title="Právne poznámky">Právne poznámky</a></p>
 
+	<a name="searchwindow" id="searchwindow"></a>
+	<h1>Okno hľadania</h1>
+
+	<a name="calling" id="calling"></a>
+	<h2>Calling up a search</h2>
+	
+	<p>OmegaT poskytuje silné množstvo vyhľadávacích funkcií. Call up the <strong>Search</strong> window with <code>Ctrl+F</code> and enter the word or phrase you wish to search for in the <strong>Search for</strong> box.</p>
+	
+	<p>Alternatively, in the Editor window, select a word or phrase in the editing field (target text of the active segment) and hit <code>Ctrl+F</code>. The word or phrase is entered in the <strong>Search for</strong> box automatically in this case.</p>
+
+	<p>Calling up the <strong>Search</strong> window anew will create a new instance of the window. Ak ich zabudnete zatvárať, môžete skončiť s množstvom otvorených okien Hľadanie.</p>
+	
+	<a name="location" id="location"></a>
+	<h2>Search location</h2>
+	
+	<p>Searches occur both in the source as well as in the target section of the project. You may search in</p>
+
+	<ul>
+		<li>the project only (default setting)</li>
+		<li>the project as well as in the reference translation memories in /tm/ (check <i>Search TMs</i>)</li>
+		<li>a single file or a folder containing a set of files (check <i>Search files</i>)</li>
+	</ul>
+
+	<p>V poslednom prípade, OmegaT bude prehľadávať iba súbory, ktoré môže čítať (Pozri <a href="filesToTranslate.html">Podporované formáty súborov</a>).</p>
+
+
+
+<hr>
+
+	<a name="searchmethods" id="searchmethods"></a>
+	<h1>Metódy hľadania</h1>
+
+	<p>Vyberte metódu hľadania pomocou prepínacích tlačidiel. Môžete si vybrať medzi dvoma metódami hľadania:</p>
+
+	<dl>
+		<dt><strong>exact search</strong></dt><dd>Search for segments containing of the string you specified.</dd>
+		<dt><strong>keyword search</strong></dt><dd>Search for segments containing all keywords you specified, in any order.</dd>
+	</dl>
+
+	<p>Pre ktorúkoľvek z týchto metód môžete vybrať nasledujúce tri voľby:</p>
+
+	<dl>
+		<dt><strong>case sensitive</strong></dt><dd>If selected, the search will be performed for the exact string specified; otherwise capitals will be ignored.</dd>
+		<dt><strong>regular expressions</strong></dt><dd>If selected, the search string will be treated as a regular expression (in case of a keyword search it will be treated as multiple expressions).</dd>
+		<dt><strong>search TMs</strong></dt><dd>if selected, all translation memories are included in the search.</dd>
+	</dl>
+
+	<p>An <strong>exact search</strong> looks for a phrase, i.e. if several words are entered, they are found only if they occur in exactly the same sequence. Presné hľadania sú podobné hľadanie "presného výrazu" v internetovom vyhľadávači ako Google.</p>
+
+	<p>Select <strong>keyword search</strong> to search for any number of individual words, separated by spaces and in any order. OmegaT will display a list of all segments in which all the words occur. Hľadania kľúčových slov sú podobné ako hľadanie "so všetkými slovami" v internetovom vyhľadávači ako Google (logika AND).</p>
+
+
+
+<hr>
+
+	<a name="usingwildcards" id="usingwildcards"></a>
+	<h1>Using wild cards</h1>
+
+	<p>In both exact and keyword searches, the wild card search characters '<code>*</code>' and '<code>?</code>' can be used. To use wild cards, make sure the option <strong>regular expressions</strong> is not selected, otherwise these characters are interpreted as special regular expression characters.</p>
+	
+	<p>The '<strong>*</strong>' character matches zero or more characters (the search term '<strong>run*</strong>' would match '<strong>run</strong>', '<strong>runs</strong>', and '<strong>running</strong>', for example).</p>
+	
+	<p>The '<strong>?</strong>' character matches exactly one character ('<strong>run?</strong>' would match '<strong>runs</strong>' and '<strong>rung</strong>', for example, but not '<strong>run</strong>' or '<strong>running</strong>').</p>
+
+	<p>If you wish to search for segments containing either <strong>*</strong> or <strong>?</strong>, you will need to switch on regular expressions, and escape these characters by prefixing a backslash ('\') to them, i.e. 'x\*y' to find instances of 'x*y' and 'x\?<code>y</code>' to find instances of '<code>x?y</code>'.</p>
+
+
+
+<hr>
+
+	<a name="usingregularexpressions" id="usingregularexpressions"></a>
+	<h1> Using regular expressions</h1>
+
+	<p>Hľadanie regulárnych výrazov je mocný spôsob pre hľadanie výskytov reťazca. It is similar to a wild card search, but allows far more flexibility.</p>
+	
+	<p>Regulárne výrazy použité pri vyhľadávaní sú tie, ktoré podporuje Java. Krátky prehľad je k dispozícii v dodatku <a href="regexp.html">Konštrukcie regulárnych výrazov</a>.</p>
+	
+	<p>Ak potrebujete špecifickejšie informácie, prosím prezrite si <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+		
+	<p>Na webe môžete nájsť tutoriály (napríklad <a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)</p>
+	
+<hr>
+
+	<a name="display" id="display"></a>
+	<h1>Zobrazenie výsledkov vyhľadávania</h1>
+	
+	<p>Stlačenie tlačidla pre vyhľadanie po zadaní reťazca do vyhľadávacieho poľa zobrazí všetky segmenty v projekte, ktoré obsahujú hľadaný reťazec. Keďže OmegaT zaobchádza so všetkými identickými segmentami ako s jedným celkom, zobrazí sa iba prvý jedinečný segment.</p>
+	
+	<p>Segmenty sú zobrazované v poradí v akom sa nachádzajú v projekte. Preložené segmenty sa zobrazia s pôvodným textom na vrchu a preloženým textom dole, nepreložené segmenty sa zobrazia iba s pôvodným textom.</p>
+
+	<p>Možete kliknúť na segment pre jeho aktivovanie v Editore pre zmenu. Potom sa môžete prepnúť späť do Okna hľadania a prejsť na ďalší nájdený segment aj pre jeho modifikáciu. Takýto vzor je užitočný pre robenie aktualizácií terminológie.</p>
+
+	<hr>
+	
+	<p><a href="legalNotices.htm">Právne poznámky</a></p>
 </body>
 </html>

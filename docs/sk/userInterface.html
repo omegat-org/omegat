@@ -1,328 +1,365 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Používateľské rozhranie - Používateľská príručka OmegaT 1.6.1</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Používateľské rozhranie - Používateľská príručka OmegaT 1.7.3</title>
 </head>
 <body>
 
-<h1>Používateľské rozhranie</h1>
-
-<h2>Obsah</h2>
-
-<ul type="none">
-   <li>1. <a href="#User_Interface_Items">Položky používateľského rozhrania</a>
-
-      <ul type="none">
-         <li>1.1. <a href="#Windows_you.27ll_use_most_of_the_time">Okná, ktoré budete používať väčšinu času</a></li>
-         <li>1.2. <a href="#Windows_you.27ll_use_sometimes">Okná, ktoré budete používať občas</a></li>
-         <li>1.3. <a href="#Dialogs_you.27ll_use_to_change_your_project_settings">Dialógové okná, ktoré budete používať na zmenu nastavení vášho projektu</a></li>
-      </ul>
-   </li>
-
-   <li>2. <a href="#OmegaT_Main_Window">Hlavné okno OmegaT</a>
-
-      <ul>
-         <li>2.1. <a href="#Editor_Pane">Okno editora</a></li>
-         <li>2.2. <a href="#Fuzzy_Matches">Približné preklady</a></li>
-         <li>2.3. <a href="#Glossary">Slovník</a></li>
-         <li>2.4. <a href="#Main_Menu">Hlavné menu</a></li>
-         <li>2.5. <a href="#Status_Bar">Stavová lišta</a></li>
-      </ul>
-   </li>
-
-   <li>3. <a href="#Other_Windows">Ostatné okná</a>
-
-      <ul>
-         <li>3.1. <a href="#Project_Files">Súbory projektu</a></li>
-         <li>3.2. <a href="#Search_Window">Okno hľadania</a></li>
-
-         <li>3.3. <a href="#Tag_Validation">Overenie tagov</a>
-
-            <ul>
-               <li>3.3.1. <a href="#Tag_validation_window">Okno overenia značiek (tagov)</a></li>
-               <li>3.3.2. <a href="#Tag_errors">Chyby značiek (tagov)</a></li>
-               <li>3.3.3. <a href="#Hints_for_tags_management">Tipy pre správu značiek (tagov)</a></li>
-            </ul>
-         </li>
-
-         <li>3.4. <a href="#Help_Browser">Prehliadač pomocníka</a></li>
-      </ul>
-   </li>
-
-   <li>4. <a href="#Dialogs">Dialógové okná</a></li>
-</ul>
-
-<a name="User_Interface_Items"></a>
-<h2>Položky používateľského rozhrania</h2>
-
-<p>Používateľské rozhranie OmegaT pozostáva z množstva položiek. Nižšie najprv zhrnieme všetky a potom popíšeme každú položku podrobnejšie.</p>
-
-<a name="Windows_you.27ll_use_most_of_the_time"></a>
-<h3>Okná, ktoré budete používať väčšinu času</h3>
-
-<ul>
-   <li>
-      <strong>Hlavné okno OmegaT</strong> s 3 podoknami:<ul>
-         <li><i>Okno editora</i> kde píšete a editujete preklad</li>
-         <li><i>Okno zobrazovača zhodných položiek</i> ktoré ukazuje najviac podobné segmenty z prekladových pamätí</li>
-         <li><i>Okno zobrazovača slovníka</i> s prekladom terminológie</li>
-         <li>A tiež <i>Hlavné menu</i> kde môžete pristupovať k väčšine funkcií OmegaT</li>
-         <li>Ako aj <i>Stavová lišta</i> v spodnej časti okna pre zobrazovanie správ týkajúcich sa priebehu práce</li>
-      </ul>
-   </li>
-
-   <li><strong>Okno Súbory projektu</strong> so zoznamom vašich preložiteľných súborov</li>
-   <li><strong>Okno hľadania</strong> používané pre nájdenie špecifických segmentov v projekte</li>
-</ul>
-
-<a name="Windows_you.27ll_use_sometimes"></a>
-<h3>Okná, ktoré budete používať občas</h3>
-
-<ul>
-   <li><strong>Okno overenia tagov</strong> pre detekciu chýb vo formátovaní preložených dokumentov</li>
-   <li><strong>Prehliadač pomocníka</strong> pre čítanie používateľskej príručky</li>
-</ul>
-
-<a name="Dialogs_you.27ll_use_to_change_your_project_settings"></a>
-<h3>Dialógové okná, ktoré budete používať na zmenu nastavení vášho projektu</h3>
-
-<ul>
-   <li><strong>Vlastnosti projektu</strong> na modifikáciu priečinkov projektu a jazykov.</li>
-   <li><strong>Písmo</strong> na modifikáciu písma, ktoré OmegaT používa na zobrazenie zdroja, prekladu, zhodných výrazov a pojmov v slovníku</li>
-   <li><strong>Filter súborov</strong> na úpravu zaobchádzania s podporovanými formátmi súborov</li>
-   <li><strong>Segmentácia</strong> na zmenu spôsobu akým je váš text segmentovaný do viet</li>
-   <li><strong>Nastavenie editácie</strong> na zmenu toho ako sa OmegaT správa keď prechádzate medzi segmentami</li>
-</ul>
-
-<a name="OmegaT_Main_Window"></a>
-<h2>Hlavné okno OmegaT</h2>
-
-<p>Hlavné okno pozostáva z troch podokien, hlavného menu a stavovej lišty.</p>
-
-<p>Môžete meniť pozíciu akéhokoľvek podokna alebo dokonca ho odpojiť do osobitného okna potiahnutím podokna za jeho názov. V závislosti od stavu podokna, sa môže v hornom pravom rohu podokna objaviť 5 rozličných znakov. Umiestnenie ukazovadla myši nad každý znak by malo zobrazoť bublinovú nápovedu.</p>
-
-<p>
-<img src="images/Minimize.gif" alt="Minimalizovať" width="18" height="18">zmenší podokno aby sa zobrazoval iba jeho názov v spodnej časti blízko stavovej lišty. <br> <img src="images/Maximize.gif" alt="Maximalizovať" width="18" height="18"> spôsobí, že podokno zaberie všetok dostupný priestor okna. <br> <img src="images/Restore.gif" alt="Obnoviť" width="18" height="18"> vráti podokno späť tam kde bolo pred tým ako bolo minimalizované alebo maximalizované. <br> <img src="images/Undock.gif" alt="Odpojiť" width="18" height="18"> odpojí podokno od hlavného okna do samostatného osobitného okna. <br> <img src="images/Dock.gif" alt="Pripojiť" width="18" height="18"> vráti podokno späť do hlavného okna.</p>
-
-<p>Je tiež možné umiestniť podokná tak, že sa budú prekrývať. V tom prípade budú podokná zobrazovať navrchu záložku. Kliknutie na záložku presunie podokno do popredia. Oddeľovače medzi podoknami možno ťahať pre zmenu veľkosti podokien.</p>
-
-<a name="Editor_Pane"></a>
-<h3>Okno editora</h3>
-
-<p>Tu budete písať a editovať preklad. Okno editora zobrazuje text čiastočne preloženého dokumentu: text, ktorý je už preložený je zobrazený preložený, a text, ktorý ešte nie je preložený sa zobrazuje v pôvodnom jazyku.</p>
-
-<p>Zobrazený text je rozdelený do segmentov, a môžete prechádzať cez dokument a dvojkliknúť na ktorákoľvek segment pre jeho editáciu.</p>
-
-<p>Jeden zo segmentov je aktívny. Jediný je zobrazený v dvoch častiach: horná časť je v pôvodnom jazyku, tučným písmom so zelenou farbou pozadia, spodná časť je pole editácie, ohraničené dvoma značkami: značka najviac vľavo je "&lt;segment nnnn&gt;" kde "nnnn" je číslo segmentu v projekte, značka najviac vpravo je "&lt;end segment&gt;". Mali by ste používať hornú časť ako referenciu a prepísať alebo modifikovať obsah editačného poľa aby obsahovalo preklad.</p>
-
-<pre>Táto veta bola preložená.
-
-Táto veta bola tiež preložená.
-
-<strong>Cette phrase est en train d'être traduite.</strong>
-&lt;segment 0003&gt;[Tu by ste mali napísať: Táto veta je práve prekladaná]&lt;end segment&gt;</pre>
-
-<p>V závislosti od <a href="translationEditing.html" title="Editácia prekladu">nastavenia editácie</a> môže byť editačné pole pre nepreložený segment prázdne alebo môže obsahovať iný text keď sa k nemu presuniete:</p>
-
-<ul>
-   <li>Zdrojový text</li>
-   <li>Preklad reťazca najpodobnejšieho tomu, ktorý idete prekladať.</li>
-</ul>
-
-<p>Keď prejdete na iný segment, preklad je overený a uložený.</p>
-
-<p>Ak chcete aby segment zostal nepreložený, jednoducho vyprázdnite editačné pole odstránením všetkého textu (vyberte všetko pomocou <code>Ctrl+A</code> a zmažte pomocou <code>Del</code>).</p>
-
-<p>V závislosti od volieb, ktoré nastavíte v <a href="translationEditing.html" title="Editácia prekladu">Nastavení editácie</a>, si OmegaT môže pamätať preklad keď je identický so zdrojom. Je to užitočné pre dokumenty, ktoré obsahujú obchodné značky, názvy alebo iné vlastné podstatné mená, alebo časti v treťom jazyku, ktorý nevyžaduje preklad.</p>
-
-<p>Viac podrobností nájdete v časti <a href="translationEditing.html" title="Editácia prekladu">Editácia prekladu</a>.</p>
-
-<a name="Fuzzy_Matches"></a>
-<h3>Približné preklady</h3>
-
-<p>Zobrazovač zhodných výrazov ukatuje najviac podobné segmenty z <a href="translationMemories.html" title="Prekladové pamäte">prekladových pamätí</a>, z prekladovej pamäte projektu vytvorenej počas prekladania vášho projektu, aj zo starých prekladových pamätí, ktoré importujete z vašich predchádzajúcich prác, alebo môžete získať od vášho klienta alebo prekladateľskej agentúry.</p>
-
-<p>Keď sa presuniete na nasledujúci segment, prvá približná zhoda (tá s najlepším stupňom zhody) je automaticky vybraná. Môžete vybrať ďalšiu <a href="keyboardShortcuts.html" title="Klávesové skratky OmegaT">stlačením <code>Ctrl+2</code>, <code>3</code>, <code>4</code>, alebo <code>5</code></a>, v závislosti od počtu dostupných zhodných výrazov.</p>
-
-<p>Pre použitie <strong>vybraného</strong> zhodného výrazu vo vašom preklade, použijte <a href="keyboardShortcuts.html" title="Klávesové skratky OmegaT"><code>Ctrl+R</code></a> pre nahradenie cieľového poľa nájdeným výrazom alebo použijte <a href="keyboardShortcuts.html" title="Klávesové skratky OmegaT"><code>Ctrl+I</code></a> pre jeho vloženie na pozíciu kurzora.</p>
-
-<p>Percento zhody sa približne vypočíta vzatím počtu spoločných slov v nájdenom a pôvodnom segmente a delením počtom slov v najdlhšom z tých dvoch.</p>
-
-<p>Vybraný približný preklad</p>
-
-<ul>
-   <li>Bude zvýraznený <strong>tučne</strong></li>
-   <li>Slová, ktoré chábajú zo segmentu, ktorý prekladáte budú <font color="blue"><strong>modré</strong></font></li>
-   <li>Tie slová blízko modrých alebo na pozíciách nepodobných originálu budú <font color="green"><strong>zelené</strong></font></li>
-</ul>
-
-<p>Uvažujte o segmente:</p>
-
-<pre>   <strong>Informácie o Jave a OmegaT</strong></pre>
-
-<p>Príslušný segment:</p>
-
-<pre>   <strong>Všeobecné poznámky o Jave a OmegaT</strong></pre>
-
-<p>bude zafarbený:</p>
-
-<pre>   <strong><font color="blue">Všeobecné poznámky</font> <font color="green">o</font> Jave a OmegaT</strong></pre>
-
-<p>a percento by malo byť okolo 3/5=<strong>60%</strong>
-</p>
-
-<a name="Glossary"></a>
-<h3>Slovník</h3>
-
-<p>Okno Slovník obsahuje preklad terminológie načítaný zo <a href="glossaries.html" title="Slovníky">súborov slovníka</a>. Ukazuje preklad pojmov nájdených v aktuálnom segmente, ale ukazuje ho iba za účelom odkazu, a neumožňuje vložiť alebo nahradiť pojem jeho prekladom. OmegaT tiež podporuje viacskovné pojmy, ale veľmi základnám spôsobom: ak sa obidve slová pojmu nájdu v aktuálnom segmente, pojem sa zobrazí.</p>
-
-<p>Formát pre terminológiu v okne Slovníka je</p>
-
-<pre>
-   'zdrojový pojem' = 'preklad pojmu'
-   Všeobecný komentár o pojme, ak existuje
-</pre>
-
-<a name="Main_Menu"></a>
-<h3>Hlavné menu</h3>
-
-<p>Samozrejme, môžete používať hlavné menu pre prístup ku všetkým funkciám OmegaT. Najpoužívanejšie funkcie sú dostupné pomocou <a href="keyboardShortcuts.html" title="Klávesové skratky OmegaT">klávesových skratiek</a>, takže keď si na nich zvyknete, nebudete už viac potrebovať prechádzať cez menu počas prekladania.</p>
-
-<p>Plný popis všetkých menu a položiek menu nájdete v dodatku <a href="menu.html" title="Hlavné menu">Hlavné menu</a>.</p>
-
-<a name="Status_Bar"></a>
-<h3>Stavová lišta</h3>
-
-<p>Stavová lišta zobrazuje správy vzťahujúce sa na beh práce v spodnej časti hlavného okna. Táto lišta dáva používateľovi oznamujúce správy o špecifických operáciách ktoré práve prebiehajú. Tiež zobrazuje množstvo približných prekladov a nájdených položiek v slovníku pre aktuálny segment.</p>
-
-<a name="Other_Windows"></a>
-<h2>Ostatné okná</h2>
-
-<a name="Project_Files"></a>
-<h3>Súbory projektu</h3>
-
-<p>Okno Súbory projektu dáva zoznam súborov projektu a zobrazuje ostatné informácie o projekte. Zobrazuje sa automaticky keď OmegaT načíta projekt. Keď je projekt otvorený, môžete používať <a href="keyboardShortcuts.html" title="Klávesové skratky OmegaT">skratku <code>Ctrl+L</code></a> v hlavnom okne na jeho zatvorenie keď je viditeľné, alebo otvorenie, keď je skryté.</p>
-
-<p>Vlastnosti Okna Súbory projektu:</p>
-
-<ul>
-   <li>Klikateľné zoznamy všetkých preložiteľných súborov v projekte. Tieto sú súbory nachádzajúce sa v priečinku zdrojových súborov, ktoré <a href="fileFormats.html" title="Podporované formáty súborov">môže OmegaT spracovať</a>. Kliknutie na niektorý súbor ho prenesie do Okna Editora na preklad.</li>
-   <li>Počet segmentov v každom súbore sa zobrazuje vedľa názvu súboru.</li>
-   <li>Počet jedinečných (odlišných) segmentov v celom projekte.</li>
-   <li>Počet jedinečných segmentov, ktoré ste už preložili. Aktualizuje sa pri každom preložení segmentu.</li>
-</ul>
-
-<p>Sada <strong>Jedinečných</strong> segmentov sa počíta vzatím všetkých segmentov a odstránením všetkých duplicitných segmentov aj s veľkosťou písmen ("Run" a "run" sa považujú za rozdielne).</p>
-
-<p>Pohľadom na rozdiel medzi "Počtom segmentov" a "Počtom jedinečných segmentov" dostanete približný prehľad o tom koľko opakovaní máte v texte. Čísla nedávajú jasné označenie ako dôležité sú opakovania: segmenty by mohli byť pomerne dlhé vety opakované niekoľko krát (máte šťastie!) alebo jednoducho kľúčové slová zapĺňajúce tabuľku (nemáte až také šťastie...)</p>
-
-<p>Je možné modifikovať počet segmentov/jedinečných segmentov modifikáciou pravidiel segmentácie. Také modifikácie by sa _nikdy_ nemali odohrávať po tom ako ste začali prekladať projekt. Viac informácií nájdete v časti <a href="segmentation.html" title="Segmentácia zdroja">pravidlá segmentácie</a>.</p>
-
-<p>Do projektu môžete pridať zdrojové súbory kliknutím na tlačidlo "Importovať zdrojové súbory...". Skopíruje vybrané súbory do adresára <code>/source</code> a znovu načíta projekt pre načítanie nových súborov.</p>
-
-<a name="Search_Window"></a>
-<h3>Okno hľadania</h3>
-
-<p>Okno hľadania budete používať na nájdenie špecifických segmentov v projekte. Naraz môže byť otvorených niekoľko okien hľadania. Pre otvorenie nového, použijte <a href="keyboardShortcuts.html" title="Klávesové skratky OmegaT"><code>Ctrl+F</code></a> v hlavnom okne.</p>
-
-<p>Okná pozostávajú z:</p>
-
-<ul>
-   <li>Vyhľadávacie pole pre zadanie hľadaného reťazca alebo kľúčových slov</li>
-   <li>Množstvo označení a prepínacích tlačidiel pre zmenu nastavení vyhľadávania</li>
-   <li>Klikateľný priestor pre zobrazenie výsledkov</li>
-</ul>
-
-<p>Stlačenie tlačidla pre vyhľadanie po zadaní reťazca do vyhľadávacieho poľa zobrazí všetky segmenty v projekte, ktoré obsahujú hľadaný reťazec. Keďže OmegaT zaobchádza zo všetkými rovnakými segmentami ako s jedným celkom -- ak zmeníte jeden z nich, všetky rovnaké segmenty sa aktualizujú, iba prvý jedinečný segment sa zobrazí.</p>
-
-<p>Segmenty sú zobrazované v poradí v akom sa nachádzajú v projekte. Preložené segmenty sa zobrazia s pôvodným textom na vrchu a preloženým textom dole, nepreložené segmenty sa zobrazia iba s pôvodným textom.</p>
-
-<p>Ak sa nájde reťazec v jednom zo súborov projektu, môžete naňho kliknúť aby ste ho zobrazili v Editore pre modifikáciu. Potom sa môžete prepnúť späť do Okna hľadania a prejsť na ďalší nájdený segment aj pre jeho modifikáciu. Takýto vzor je užitočný pre robenie masívnych aktualizácií terminológie.</p>
-
-<p>K dispozícii sú dva druhy vyhľadávania:</p>
-
-<ul>
-   <li>Presné vyhľadávanie hľadá zadaný reťazec v aktuálnom projekte alebo v akomkoľvek adresári alebo adresárovom strome. Presné hľadanie podporuje zástupné znaky * a ?. Znak '<strong>*'</strong> zastupuje nula alebo viac znakov (vyhľadávanému termínu '<strong>run*'</strong> by vyhoveli napríklad  '<strong>run'</strong>, '<strong>runs'</strong>, a '<strong>running'</strong>). &lt;segment 0620&gt; Znak '<strong>?'</strong> zastupuje presne jeden znak ('<strong>run?'</strong> by vyhoveli napríklad '<strong>runs'</strong> a '<strong>rung'</strong>, ale nie '<strong>run'</strong> alebo '<strong>running'</strong>). Táto operácia prehľadáva zdroj a preklad.</li>
-
-   <li>Vyhľadávanie kľúčových slov preskúma aktuálny projekt a vráti všetky segmenty obsahujúce všetky vyhľadávané slová, v akomkoľvek poradí.</li>
-</ul>
-
-<p>Môžete tiež hľadať v akomkoľvek adresári, ale majte na mysli, že OmegaT môže hľadať iba v <a href="fileFormats.html" title="Podporované formáty súborov">súboroch, ktoré podporuje</a>.</p>
-
-<a name="Tag_Validation"></a>
-<h3>Overenie tagov</h3>
-
-<a name="Tag_validation_window"></a>
-<h4>Okno overenia tagov</h4>
-
-<p>Okno overenia tagov sa používa na detekciu chýb vo formátovaní preložených dokumentov Pre otvorenie okna, použijte <a href="keyboardShortcuts.html" title="Klávesové skratky OmegaT"><code>Ctrl+T</code></a>.</p>
-
-<p>Okno obsahuje 3 stĺpcovú tabuľku s:</p>
-
-<ul>
-   <li>Klikateľným odkazom na segment s možnou chbou tagu</li>
-   <li>Obsah pôvodného segmentu</li>
-   <li>Obsah preloženého segmentu</li>
-</ul>
-
-<p>Kliknutie na odkaz spôsobí, že segment sa stane aktívnym v Editore.</p>
-
-<a name="Tag_errors"></a>
-<h4>Chyby tagov</h4>
-
-<p>Možná chyba tagu je jedna z nasledujúcich:</p>
-
-<ul>
-   <li>Tag bol v zdrjovom segmente ale bol vymazaný z preloženého segmentu.</li>
-   <li>Tag nebol prítomný v zdrojovom segmenteale bol omylom vložený do preloženého segmentu.</li>
-   <li>Poradie tagov bolo zmenené v preloženom segmente.</li>
-</ul>
-
-<a name="Hints_for_tags_management"></a>
-<h4>Tipy pre správu značiek (tagov)</h4>
-
-<p>Značky (Tagy) vo všeobecnosti predstavujú nejaký druh formátovania v pôvodnom texte. <strong>Zjednodušenie formátovania pôvodného textu</strong> vo veľkej miere prispieva k zníženiu počtu značiek. Zjednotenie použitých písem, veľkostí písem, farieb atď by malo byť brané do úvahy ak to je možné, pre zjdenodušenie prekladu a zníženie počtu možných chýb značiek.</p>
-
-<p>Ak chcete vidieť, čo sa môže robiť so značkami (tagmi), pozrite sa na sekciu <a href="formattedText.html#Tag_operations" title="Práca s formátovaným textom">Operácie so značkami (tagmi)</a>.</p>
-
-<p>Pamätejte, že ak vás tagy obťažujú a formátovanie nie je extrémne dôležité pre aktuálnu prácu, odstránenie väčšiny formátovania zo zdrojového dokumentu veľmi uľahčí preklad.</p>
-
-<p>Ak potrebujete vidieť značky (tagy) v OmegaT ale nepotrebujete ponechať väčšinu formátovania v preloženom dokumente nemusíte značky (tagy) do prekladu pridávať. V tom prípade <strong>venujte osobitnú pozornosť párom tagov</strong>. Ak zostane iba jeden tag z páru, poškodí formátovanie vášho dokumentu a spôsobí, že preložený dokument OpenOffice.org bude neplatný alebo preložený súbor HTML bude nečitateľný.</p>
-
-<p>Keďže značky (tagy) sú zahrnuté v samotnom texte, je možné použiť <a href="segmentation.html" title="Segmentácia zdroja">pravidlá segmentácie</a> na opätovné vytvorenie segmentov, ktoré obsahujú menej značiek (tagov). Toto je pokročilá vlastnosť a začínajúci používatelia by ju nemali používať.</p>
-
-<a name="Help_Browser"></a>
-<h3>Prehliadač pomocníka</h3>
-
-<p>Prehliadač pomocníka (ktorý zobrazuje túto príručku) môže byť spustený stlačením <a href="keyboardShortcuts.html" title="Klávesové skratky OmegaT">F1</a> alebo pomocou <strong>Pomocník -&gt; Používateľská príručka...</strong> in <a href="menu.html" title="Hlavné menu">main menu</a>.</p>
-
-<p>V okne uvidíte príručku a dve tlačidká: <strong>Späť</strong> a <strong>Obsah</strong>.</p>
-
-<p>Používateľská príručka je HTML dokument s odkazmi na rôzne kapitoly. Kliknutie na odkaz ako by ste to urobili vo webovom prehliadači prenesie požadovanú stránku dopredu.</p>
-
-<p>Používateľská príručka sa nachádza v podpriečinku <code>doc</code> v inštalačnom priečinku OmegaT, takže si môžete prezerať, napríklad, anglickú dokumentáciu, otvorením súboru <code>doc/en/index.hmtl</code> vo vašom webovom prehliadači. Týmto spôsobom budete môcť nasledovať aj externé odkazy, keďže vstavaný prehliadač pomocníka neprijíma externé internetové odkazy.</p>
-
-<a name="Dialogs"></a>
-<h2>Dialógové okná</h2>
-
-<p>Budete používať nižšie uvedené dialógové okná na zmenu nastavení OmegaT a projektov. Všetky sú popísané v osobitných sekciách, nižšie iba zhrňujeme načo môžu byť použité a ako ich môžete otvoriť.</p>
-
-<ul>
-   <li>
-      <a href="projectProperties.html" title="Vlastnosti projektu">Vlastnosti projektu</a> sa používajú na modifikáciu priečinkov projektu a jazykov. Môžete ho otvoriť stlačením <a href="keyboardShortcuts.html" title="Klávesové skratky OmegaT"><code>Ctrl+E</code></a> alebo pomocou <strong>Projekt -&gt; Vlastnosti...</strong> z <a href="menu.html" title="Hlavné menu">hlavného menu</a>.</li>
-
-   <li>
-      <a href="fontSettings.html" title="Nastavenia písma">Nastavenia písma</a> je dialógové okno na modifikáciu písma, ktoré používa OmegaT na zobrazenie zdroja, prekladu, zhodných výrazov a pojmov v slovníku. Volá sa pomocou položky <strong>Voľby -&gt; Písmo...</strong> v <a href="menu.html" title="Hlavné menu">hlavnom menu</a>.</li>
-
-   <li>Môžete používať <a href="fileFilters.html" title="Filtre súborov">Voľby filtra súborov</a> pre modifikáciu súborov, ktoré by mali byť obsluhované každým z <a href="fileFormts.html" title="Podporované formáty súborov">dostupných filtrov</a>.</li>
-
-   <li><a href="segmentation.html" title="Segmentácia zdroja">Dialógové okno Nastavenia segmentácie</a> vám dovoľuje meniť spôsob akým je váš text segmentovaný do viet. Všimnite si, že segmentácia podľa viet sa zapína/vypína v dialógovom okne <a href="projectProperties.html" title="Vlastnosti projektu">Vlastnosti projektu</a>.</li>
-
-   <li><a href="translationEditing.html" title="Editácia prekladu">Dialógové okno Nastavenie editácie</a> mení to ako sa bude OmegaT správať keď prechádzate medzi segmentami.</li>
-</ul>
+	<h1>Používateľské rozhranie</h1>
+
+	<ul>
+		<li><a href="#item">Položky používateľského rozhrania</a>
+			<ul>
+				<li><a href="#most">Okná, ktoré budete používať väčšinu času</a></li>
+				<li><a href="#some">Okná ktoré môžete občas používať</a></li>
+				<li><a href="#dialogs">Dialógové okná, ktoré budete používať na zmenu nastavení vášho projektu</a></li>
+			</ul>
+		</li>
+		<li><a href="#OmegaT_Main_Window">Hlavné okno OmegaT</a>
+			<ul>
+				<li><a href="#main">Operácie s hlavným oknom</a></li>
+				<li><a href="#Editor">Okno editora</a>
+					<ul>
+						<li><a href="#segment_display">Zobrazenie segmentu</a></li>
+						<li><a href="#edit_field">Obsah editačného poľa</a></li>
+					</ul>
+				</li>
+				<li><a href="#Match">Okno zhody</a>
+					<ul>
+						<li><a href="#match_sel">Výber približnej zhody</a></li>
+						<li><a href="#match_oper">Operácie s približne zhodnými výrazmi</a></li>
+						<li><a href="#match_display">Zobrazenie a informácie o zhodných výrazoch</a></li>
+					</ul>
+				</li>
+				<li><a href="#Glossary">Slovník</a></li>
+				<li><a href="#menu">Hlavné menu</a></li>
+				<li><a href="#bar">Stavová lišta</a></li>
+			</ul>
+		</li>
+		<li><a href="#Other_windows">Ostatné okná</a>
+			<ul>
+				<li><a href="#files">Súbory projektu</a>
+					<ul>
+						<li><a href="#proj_files">Vlastnosti Okna Súbory projektu:</a></li>
+						<li><a href="#unique">Jedinečné segmenty</a></li>
+						<li><a href="#adding_files">Pridávanie súborov do projektu</a></li>
+					</ul>
+				</li>
+				<li><a href="#search">Okno hľadania</a>
+					<ul>
+						<li><a href="#search_types">Typy vyhľadávania</a></li>
+						<li><a href="#wildcards_regexp">Zástupné znaky a regulárne výrazy</a></li>
+						<li><a href="#search_display">Zobrazenie výsledkov vyhľadávania</a></li>
+					</ul>
+				</li>
+				<li><a href="#tags">Overenie značiek</a></li>
+				<li><a href="#manual">Prehliadač pomocníka</a>
+					<ul>
+						<li><a href="#help">Pohyb v Prehliadači pomocníka</a></li>
+						<li><a href="#offline">Prehliadanie Používateľskej príručky offline</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#dialogs">Dialógové okná, ktoré budete používať na zmenu nastavení vášho projektu</a>
+			<ul>
+				<li><a href="projectProperties.html">Vlastnosti projektu</a></li>
+				<li><a href="fontSettings.html">Písmo</a></li>
+				<li><a href="fileFilters.html">Filtre súborov</a></li>
+				<li><a href="segmentation.html">Segmentácia</a></li>
+				<li><a href="translationEditing.html">Nastavenie editácie</a></li>
+			</ul>
+		</li>
+	</ul>
+<hr>
+
+	<a name="item" id="item"></a>
+	<h1>Položky používateľského rozhrania</h1>
+
+	<a name="most" id="most"></a>
+	<h2>Okná, ktoré budete používať väčšinu času</h2>
+
+	<dl>
+		<dt><strong>Hlavné okno OmegaT</strong> (<a href="#OmegaT_Main_Window">...</a>)</dt>
+		<dd>obsahuje Hlavné menu (<a href="#menu">...</a>), stavovú lištu (<a href="#bar">...</a>) a 3 podokná:<dl>
+				<dt>Okno editora (<a href="#Editor">...</a>)</dt>
+				<dd>kde píšete a editujete preklad</dd>
+				<dt>Okno zobrazovania zhody (<a href="#Match">...</a>)</dt>
+				<dd>s najpodobnejšími segmentami z prekladových pamätí</dd>
+				<dt>Okno zobrazenia slovníka (<a href="#Glossary">...</a>)</dt>
+				<dd>s prekladom terminológie</dd>
+			</dl>
+		</dd>
+		<dt><strong>Okno Súbory projektu</strong> (<a href="#files">...</a>)</dt>
+		<dd>so zoznamom vašich preložiteľných súborov</dd>
+		<dd>zobraziteľné pomocou <code>Ctrl+L</code>, zatvárané pomocou <code>esc</code>
+		<dt><strong>Okno hľadania</strong> (<a href="#search">...</a>)</dt>
+		<dd>pre hľadanie špecifických segmentov v projekte</dd>
+		<dd>zobraziteľné pomocou <code>Ctrl+F</code>, zatvárané pomocou <code>esc</code></dd>
+	</dl>
+
+	<a name="some" id="some"></a>
+	<h2>Okná ktoré môžete občas používať</h2>
+
+	<dl>
+		<dt><strong>Okno overenia značiek</strong> (<a href="#tags">...</a>)</dt>
+		<dd>pre kontrolu chýb značiek v prekladoch</dd>
+		<dd>zobraziteľné pomocou <code>Ctrl+T</code>, zatvára sa pomocou <code>esc</code></dd>
+		<dt><strong>Prehliadač pomocníka</strong> (<a href="#manual">...</a>)</dt>
+		<dd>pre čítanie používateľskej príručky</dd>
+		<dd>otvára sa pomocou <code>F1</code>, zatvára sa pomocou <code>esc</code></dd>
+	</dl>
+
+	<a name="dialogs" id="dialogs"></a>
+	<h2>Dialógové okná, ktoré budete používať na zmenu nastavení vášho projektu</h2>
+
+	<p>Budete používať nižšie uvedené dialógové okná na zmenu nastavení OmegaT a projektov. Všetky sú popísané v osobitných sekciách, nižšie iba zhrňujeme načo môžu byť použité a ako ich môžete otvoriť:</p>
+
+	<dl>
+		<dt><strong>Vlastnosti projektu</strong> (<a href="projectProperties.html">...</a>)</dt>
+		<dd>na modifikáciu priečinkov projektu a jazykov</dd>
+		<dd>otvára sa pomocou <code>Ctrl+E</code> alebo pomocou <strong>Projekt → Vlastnosti...</strong>, zatvára sa pomocou <code>esc</code></dd>
+		<dt><strong>Písmo</strong> (<a href="fontSettings.html">...</a>)</dt>
+		<dd>na modifikáciu písma, ktoré OmegaT používa na zobrazenie zdroja, prekladu, zhodných výrazov a pojmov v slovníku</dd>
+		<dd>otvára sa pomocou <strong>Voľby → Písmo...</strong>, zatvára sa pomocou <code>esc</code></dd>
+		<dt><strong>Filtre súborov</strong> (<a href="fileFilters.html">...</a>)</dt>
+		<dd>na úpravu zaobchádzania s podporovanými formátmi súborov</dd>
+		<dd>otvára sa pomocou <strong>Voľby → Filtre súborov...</strong>, zatvára sa pomocou <code>esc</code></dd>
+		<dt><strong>Segmentácia</strong> (<a href="segmentation.html">...</a>)</dt>
+		<dd>na zmenu spôsobu akým je váš text segmentovaný do viet</dd>
+		<dd>otvára sa pomocou <strong>Voľby → Segmentácia</strong>, zatvára sa pomocou <code>esc</code></dd>
+		<dt><strong>Nastavenie editácie</strong> (<a href="translationEditing.html">...</a>)</dt>
+		<dd>na zmenu toho ako sa OmegaT správa keď prechádzate medzi segmentami</dd>
+		<dd>otvára sa pomocou <strong>Voľby → Nastavenie editácie...</strong>, zatvára sa pomocou <code>esc</code></dd>
+	</dl>
 
 <hr>
-<p><a href="legalNotices.html" title="Právne poznámky">Právne poznámky</a></p>
 
+	<a name="OmegaT_Main_Window" id="OmegaT_Main_Window"></a>
+	<h1>Hlavné okno OmegaT</h1>
+
+	<a name="main" id="main"></a>
+	<h2>Operácie s hlavným oknom</h2>
+	
+	<p>Hlavné okno pozostáva z troch podokien, hlavného menu a stavovej lišty. Môžete meniť pozíciu akéhokoľvek podokna alebo dokonca ho odpojiť do osobitného okna potiahnutím podokna za jeho názov. V závislosti od stavu podokna, sa môže v hornom pravom rohu podokna objaviť 5 rozličných znakov. Umiestnenie ukazovadla myši nad každý znak by malo zobrazoť bublinovú nápovedu.</p>
+
+	<p>
+		<img src="images/Minimize.gif" name="graphics1" alt="Minimalizovať" align="bottom" width="18" height="18" border="0" id="graphics1">zmenší podokno aby sa zobrazoval iba jeho názov v spodnej časti blízko stavovej lišty.<br> <img src="images/Maximize.gif" name="graphics2" alt="Maximalizovať" align="bottom" width="18" height="18" border="0" id="graphics2"> spôsobí, že podokno zaberie všetok dostupný priestor okna.<br> <img src="images/Restore.gif" name="graphics3" alt="Obnoviť" align="bottom" width="18" height="18" border="0" id="graphics3"> vráti podokno späť tam kde bolo pred tým ako bolo minimalizované alebo maximalizované.<br> <img src="images/Undock.gif" name="graphics4" alt="Odpojiť" align="bottom" width="18" height="18" border="0" id="graphics4"> odpojí podokno od hlavného okna do samostatného osobitného okna.<br> <img src="images/Dock.gif" name="graphics5" alt="Pripojiť" align="bottom" width="18" height="18" border="0" id="graphics5"> vráti podokno späť do hlavného okna.</p>
+
+	<p>Je tiež možné umiestniť podokná tak, že sa budú prekrývať. V tom prípade budú podokná zobrazovať navrchu záložku. Kliknutie na záložku presunie podokno do popredia. Oddeľovače medzi podoknami možno ťahať pre zmenu veľkosti podokien.</p>
+
+	<a name="Editor" id="Editor"></a>
+	<h2>Okno editora</h2>
+
+	<p>Tu budete písať a editovať preklad.</p>
+	
+	<a name="segment_display" id="segment_display"></a>
+	<h3>Zobrazenie segmentu</h3>
+	
+	<p>Okno editora zobrazuje text čiastočne preloženého dokumentu: text, ktorý je už preložený je zobrazený preložený, a text, ktorý ešte nie je preložený sa zobrazuje v pôvodnom jazyku. Zobrazený text je rozdelený do segmentov, a môžete prechádzať cez dokument a dvojkliknúť na ktorákoľvek segment pre jeho editáciu.</p>
+	
+	<p>Jeden zo segmentov je aktívny. Jediný je zobrazený v dvoch častiach: horná časť je v pôvodnom jazyku, tučným písmom so zelenou farbou pozadia, spodná časť je pole editácie, ohraničené dvoma značkami: značka úplne vľavo je <strong><code>&lt;segment nnnn&gt;</code></strong> kde <strong><code>nnnn</code></strong> je číslo segmentu v projekte, značka úplne vpravo je <strong><code>&lt;end segment&gt;</code></strong>.</p>
+	
+	<p>Mali by ste používať hornú časť ako referenciu a prepísať alebo modifikovať Obsah editačného poľa aby obsahovalo preklad.</p>
+	
+	<table border="1">
+		<tr><td>
+			<table border="0" cellpadding="3">
+				<tr><td>Táto veta bola preložená.</td></tr>
+				<tr><td>Táto veta bola tiež preložená.</td></tr>
+				<tr bgcolor="#99ff99"><td><strong>Cette phrase est en train d'être traduite.</strong></td></tr>
+				<tr><td><strong><code>&lt;segment 0003&gt;</code></strong> [Tu by ste mali napísať svoj preklad] <strong><code>&lt;end segment&gt;</code></strong></td></tr>
+				<tr><td>Táto veta bude preložená ako nasledujúca.</td></tr>
+			</table>
+		</td></tr>
+	</table>
+
+	<a name="edit_field" id="edit_field"></a>
+	<h3>Obsah editačného poľa</h3>
+
+	<p>V závislosti od <a href="translationEditing.html">Nastavenia editácie</a> môže byť editačné pole pre nepreložený segment prázdne, môže obsahovať zdrojový text alebo preklad reťazca ktorý sa najviac podobá na ten ktorý idete prekladať.</p>
+
+	<p>Keď prejdete na iný segment, preklad je overený a uložený.</p>
+	
+	<p>Ak chcete aby segment zostal nepreložený, jednoducho vyprázdnite editačné pole odstránením všetkého textu (vyberte všetko pomocou <code>Ctrl+A</code> a zmažte pomocou <code>Del</code>).</p>
+	
+	<p>V závislosti od volieb, ktoré nastavíte v <a href="translationEditing.html">Nastavení editácie</a>, si OmegaT môže pamätať preklad keď je identický so zdrojom. Je to užitočné pre dokumenty, ktoré obsahujú obchodné značky, názvy alebo iné vlastné podstatné mená, alebo časti v treťom jazyku, ktorý nevyžaduje preklad.</p>
+
+	<p>Viac podrobností nájdete v časti <a href="translationEditing.html">Editácia prekladu</a>.</p>
+
+	<a name="Match" id="Match"></a>
+	<h2>Okno zhody</h2>
+
+	<p>Zobrazovač zhodných výrazov ukatuje najviac podobné segmenty z <a href="translationMemories.html">prekladových pamätí</a>, z prekladovej pamäte projektu vytvorenej počas prekladania vášho projektu, aj zo starých prekladových pamätí, ktoré importujete z vašich predchádzajúcich prác, alebo môžete získať od vášho klienta alebo prekladateľskej agentúry.</p>
+	
+	<a name="match_sel" id="match_sel"></a>
+	<h3>Výber približnej zhody</h3>
+	
+	<p>Keď sa presuniete na nasledujúci segment, prvá približná zhoda (tá s najlepším stupňom zhody) je automaticky vybraná. Môžete <a href="menu.html#shortcuts">vybrať</a> ďalšiu stlačením <code>Ctrl+2</code>, <code>3</code>, <code>4</code>, alebo <code>5</code>, v závislosti od počtu dostupných zhodných výrazov.</p>
+
+	<a name="match_oper" id="match_oper"></a>
+	<h3>Operácie s približne zhodnými výrazmi</h3>
+	
+	<p>Pre použitie <strong>vybraného</strong> zhodného výrazu vo vašom preklade, použijte <code><a href="menu.html#shortcuts">Ctrl+R</a></code> pre nahradenie cieľového poľa nájdeným výrazom alebo použijte <code><a href="menu.html#shortcuts">Ctrl+I</a></code> pre jeho vloženie na pozíciu kurzora.</p>
+	
+	<a name="match_display" id="match_display"></a>
+	<h3>Zobrazenie a informácie o zhodných výrazoch</h3>
+	
+	<p>Percento zhody sa približne rovná vzatiu počtu spoločných slov v nájdenom a pôvodnom segmente a deleniu počtom slov v najdlhšom z tých dvoch. Vybraný približne zhodný výraz bude zvýraznený <strong>tučným</strong>, slová ktoré chýbajú zo segmentu ktorý prekladáte budú zafarbené na <strong><font color="blue">modro</font></strong> a slovo v blízkosti chýbajúcich častí, bude <strong><font color="green">zelené</font></strong>.</p>
+
+	<p>Uvažujte o segmente:</p>
+
+	<pre>	<strong>Informácie o Jave a OmegaT</strong></pre>
+
+	<p>Príslušný segment:</p>
+
+	<pre>	<strong>Všeobecné poznámky o Jave a OmegaT</strong></pre>
+
+	<p>bude zafarbený:</p>
+
+	<pre>	<strong><font color="blue">Všeobecné poznámky</font> <font color="green">o</font> Jave a OmegaT</strong></pre>
+
+	<p>a percento by malo byť okolo 3/5=<strong>60%</strong></p>
+
+	<a name="Glossary" id="Glossary"></a>
+	<h2>Slovník</h2>
+
+	<p>Okno Slovník obsahuje preklad terminológie načítaný zo <a href="glossaries.html">súborov slovníka</a>.</p>
+	
+	<p>Ukazuje preklad pojmov nájdených v aktuálnom segmente, ale ukazuje ho iba za účelom odkazu, a neumožňuje vložiť alebo nahradiť pojem jeho prekladom.</p>
+	
+	<p>OmegaT tiež podporuje viacskovné pojmy, ale veľmi základnám spôsobom: ak sa obidve slová pojmu nájdu v aktuálnom segmente, pojem sa zobrazí. Formát pre terminológiu v okne Slovníka je:</p>
+
+	<pre> zdrojový pojem = preklad pojmu	Komentár k pojmu, ak existuje</pre>
+
+	<a name="menu" id="menu"></a>
+	<h2>Hlavné menu</h2>
+
+	<p>Samozrejme, môžete používať hlavné menu pre prístup ku všetkým funkciám OmegaT. Plný popis všetkých menu a položiek menu nájdete v dodatku <a href="menu.html#menu">Hlavné menu</a>.</p>
+
+	<p>Najpoužívanejšie funkcie sú dostupné pomocou <a href="menu.html#shortcuts">klávesových skratiek</a>, takže keď si na nich zvyknete, nebudete už viac potrebovať prechádzať cez menu počas prekladania.</p>
+	
+	<a name="bar" id="bar"></a>
+	<h2>Stavová lišta</h2>
+
+	<p>Stavová lišta zobrazuje správy vzťahujúce sa na aktuálne prebiehajúcu prácu v spodnej časti hlavného okna. Táto lišta dáva používateľovi oznamujúce správy o špecifických operáciách ktoré práve prebiehajú. Tiež zobrazuje množstvo približných prekladov a nájdených položiek v slovníku pre aktuálny segment.</p>
+
+<hr>
+
+	<a name="Other_windows" id="Other_windows"></a>
+	<h1>Ostatné okná</h1>
+
+	<a name="files" id="files"></a>
+	<h2>Súbory projektu</h2>
+
+	<p>Okno Súbory projektu dáva zoznam súborov projektu a zobrazuje ostatné informácie o projekte. Zobrazuje sa automaticky keď OmegaT načíta projekt. Pre jeho zavretie použijte <code>esc</code>, pre jeho otvorenie alebo prenesenie do popredia použijte <code>Ctrl+L</code>.</p>
+	
+	<a name="proj_files" id="proj_files"></a>
+	<h3>Vlastnosti Okna Súbory projektu:</h3>
+
+	<p>Zobrazujú sa nasledujúce informácie.</p>
+	
+	<ul>
+		<li> zoznam všetkých preložiteľných súborov v projekte.<br> Tieto sú súbory nachádzajúce sa v priečinku zdrojových súborov, ktoré <a href="filesToTranslate.html">môže OmegaT spracovať</a>.<br> Kliknutie na akýkoľvek súbor ho otvorí pre preklad</li>
+		<li>súbor aktuálne dostupný v okne Editora je zvýraznený modrým pozadím</li>
+		<li>počet segmentov v každom súbore sa zobrazuje vedľa názvu súboru.</li>
+		<li>počet jedinečných segmentov v celom projekte.</li>
+		<li>počet jedinečných segmentov ktoré sú už preložené. Aktualizuje sa pri každom preložení segmentu.</li>
+	</ul>
+
+	<a name="unique" id="unique"></a>
+	<h3>Jedinečné segmenty</h3>
+	
+	<p>Sada <strong>Jedinečných</strong> segmentov sa počíta vzatím všetkých segmentov a odstránením všetkých duplicitných segmentov aj s veľkosťou písmen ("Run" a "run" sa považujú za rozdielne).</p>
+
+	<p>Rozdiel medzi "Počtom segmentov" a "Počtom jedinečných segmentov" vám dá približnú predstavu o počte opakovaní v texte. Avšak všimnite si, že čísla nehovoria o tom aké závažné sú opakovania: mohlo by to znamenať relatívne dlhé vety ktoré sa niekoľkokrát opakujú (ak máte veľké šťastie!) alebo by to mohlo opisovať tabuľku kľúčových slov (ak nemáte šťastie...)</p>
+	
+	<p>Súbor <code>project_stats.txt</code> nachádzajúci sa v priečinku <code>/omegat</code> vášho projektu obsahuje podrobnejšie informácie o segmentoch pre každý súbor.</p>
+
+	<p>Je možné modifikovať počet segmentov/jedinečných segmentov modifikáciou pravidiel segmentácie. Také modifikácie by sa _nikdy_ nemali odohrávať po tom ako ste začali prekladať projekt. Viac informácií nájdete v časti <a href="segmentation.html">Pravidlá segmentácie</a>.</p>
+
+	<a name="adding_files" id="adding_files"></a>
+	<h3>Pridávanie súborov do projektu</h3>
+	
+	<p>Do projektu môžete pridať zdrojové súbory kliknutím na tlačidlo "Importovať zdrojové súbory...". Skopíruje vybrané súbory do adresára <code>/source</code> a znovu načíta projekt pre načítanie nových súborov. Môžete tiež pridať zdrojové súbory z internetových stránok, napísaných v MediaWiki, kliknutím na tlačidlo "Importovať z MediaWiki" zadaním príslušného URL.</p>
+
+	<a name="search" id="search"></a>
+	<h2>Okno hľadania</h2>
+
+	<p>Okno hľadania budete používať na nájdenie špecifických segmentov v projekte. Naraz môže byť otvorených niekoľko okien hľadania. Pre otvorenie nového, použijte <code><a href= "menu.html#shortcuts">Ctrl+F</a></code> v hlavnom okne.</p>
+	
+	<p>Okno hľadania pozostáva z textového poľa pre vyhľadávací reťazec alebo kľúčové slová, príznaky a prepínacie tlačidlá pre nastavenie vyhľadávania a oblasť zobrazenia obsahujúcu výsledky hľadania.</p>
+
+	<a name="search_types" id="search_types"></a>
+	<h3>Typy vyhľadávania</h3>
+	
+	<dl>
+		<dt>K dispozícii sú dva <a href="searches.html#searchmethods">druhy</a> vyhľadávania:</dt>
+		<dt><strong>presné hľadanie</strong></dt>
+		<dd>hľadá zadaný reťazec v aktuálnom projekte alebo v akomkoľvek adresári alebo adresárovom strome.</dd>
+		<dt><strong>hľadanie kľúčových slov</strong></dt>
+		<dd>preskúma aktuálny projekt a vráti všetky segmenty obsahujúce všetky vyhľadávané slová, v akomkoľvek poradí.</dd>
+	</dl>
+
+	<p>Vyhľadávanie sa vykoná aj v zdroji aj v preklade.</p>
+
+	<p>Môžete tiež hľadať v akomkoľvek adresári, ale majte na mysli, že OmegaT môže hľadať iba v <a href="filesToTranslate.html">súboroch, ktoré podporuje</a>.</p>
+	
+	<a name="wildcards_regexp" id="wildcards_regexp"></a>
+	<h3>Zástupné znaky a regulárne výrazy</h3>
+	
+	<p>Vyhľadávanie podporuje <a href="searches.html#usingwildcards">zástupné znaky</a> * a ? ako aj <a href="searches.html#usingregularexpressions">regulárne výrazy</a>.</p>
+
+	<a name="search_display" id="search_display"></a>
+	<h3>Zobrazenie výsledkov vyhľadávania</h3>
+	
+	<p>Stlačenie tlačidla pre vyhľadanie po zadaní reťazca do vyhľadávacieho poľa zobrazí všetky segmenty v projekte, ktoré obsahujú hľadaný reťazec. Keďže OmegaT zaobchádza so všetkými identickými segmentami ako s jedným celkom, zobrazí sa iba prvý jedinečný segment.</p>
+	
+	<p>Segmenty sú zobrazované v poradí v akom sa nachádzajú v projekte. Preložené segmenty sa zobrazia s pôvodným textom na vrchu a preloženým textom dole, nepreložené segmenty sa zobrazia iba s pôvodným textom.</p>
+
+	<p>Možete kliknúť na segment pre jeho aktivovanie v Editore pre zmenu. Potom sa môžete prepnúť späť do Okna hľadania a prejsť na ďalší nájdený segment aj pre jeho modifikáciu. Takýto vzor je užitočný pre robenie aktualizácií terminológie.</p>
+	
+	<a name="tags" id="tags"></a>
+	<h2>Overenie značiek</h2>
+
+	<p>Okno overenia značiek detekuje chyby značiek v preklade a vypíše ich.</p>
+	
+	<p>Pre otvorenie okna, použijte <code><a href="menu.html#shortcuts">Ctrl+T</a></code>.</p>
+	
+	<p>Okno obsahuje 3 stĺpcovú tabuľku s:</p>
+
+	<ul>
+		<li>odkaz na segment</li>
+		<li>obsah pôvodného segmentu</li>
+		<li>obsah preloženého segmentu</li>
+	</ul>
+	
+	<p>Značky sú zvýraznené tučným a modrým pre ľahké porovnanie medzi originálom a preloženým obsahom.<p>Kliknite na odkaz pre aktivovanie segmentu v Editore.</p>
+	
+	<p>Opravte chybu ak je to potrebné a stlačte <code><a href="menu.html#shortcuts">Ctrl+T</a></code> pre vrátenie sa k oknu overenia značiek pre opravu ďalších chýb.</p>
+
+	<p>Chyby <a href="formattedText.html#intro">značiek</a> sú <a href="formattedText.html#tag_operation">manipulácie so značkami</a> v preklade ktoré nereprodukujú rovnaké poradie značiek a ich počet ako je v pôvodnom segmente. Niektoré manipulácie so značkami sú potrebné a sú mierne, niektoré spôsobia problémy pri vytváraní preloženého dokumentu.</p>
+
+	<p>Značky vo všeobecnosti predstavujú nejaký druh formátovania v pôvodnom texte. <strong>Zjednodušenie formátovania pôvodného textu</strong> vo veľkej miere prispieva k zníženiu počtu značiek.</p>
+	
+	<a name="manual" id="manual"></a>
+	<h2>Prehliadač pomocníka</h2>
+
+	<p>Prehliadač pomocníka (ktorý zobrazuje túto príručku) môže byť spustený stlačením <a href="menu.html#shortcuts">F1</a> alebo pomocou <strong>Pomocník → Používateľská príručka...</strong> v <a href="menu.html">hlavnom menu</a>.</p>
+	
+	<a name="help" id="help"></a>
+	<h3>Pohyb v Prehliadači pomocníka</h3>
+	
+	<p>V okne uvidíte príručku a dve tlačidká: <strong>Späť</strong> a <strong>Obsah</strong>. Používateľská príručka je HTML dokument s odkazmi na rôzne kapitoly. Kliknutie na odkaz ako by ste to urobili vo webovom prehliadači prenesie požadovanú stránku dopredu.</p>
+
+	<a name="offline" id="offline"></a>
+	<h3>Prehliadanie Používateľskej príručky offline</h3>
+
+	<p>Používateľská príručka sa nachádza v podpriečinku <code>doc</code> v inštalačnom priečinku OmegaT, takže si môžete prezerať, napríklad, anglickú dokumentáciu, otvorením súboru <code>doc/en/index.hmtl</code> vo vašom prehliadači. Týmto spôsobom budete môcť nasledovať aj externé odkazy, keďže vstavaný prehliadač pomocníka neprijíma externé Internetové odkazy.</p>
+
+<hr>
+
+	<p><a href="legalNotices.htm">Právne poznámky</a></p>
 </body>
 </html>

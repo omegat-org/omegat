@@ -1,43 +1,71 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Vlastnosti projektu - Používateľská príručka OmegaT 1.6.1</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Vlastnosti projektu - Používateľská príručka OmegaT 1.7.3</title>
 </head>
 <body>
 
-<h1>Vlastnosti projektu</h1>
+	<h1>Vlastnosti projektu</h1>
 
-<p>Toto dialógové okno sa používa na modifikáciu priečinkov projektu a jazykov. Môže sa otvoriť stlačením <a href="keyboardShortcuts.html" title="Klávesové skratky OmegaT"><code>Ctrl+E</code></a> alebo spustením <strong>Projekt -&gt; Vlastnosti...</strong> z <a href="menu.html" title="Hlavné menu">hlavného menu</a>.</p>
+	<ul>
+		<li><a href="#dialog">Dialógové okno Vlastnosti</a>
+			<ul>
+				<li><a href="#language">Modifikácie jazyka</a></li>
+				<li><a href="#segments">Modifikácie segmentácie</a></li>
+				<li><a href="#folder">Modifikácie štruktúry priečinkov</a></li>
+			</ul>
+		</li>
+		<li><a href="#warning">Zmena vlastností projektu počas sedenia</a></li>
+	</ul>
+	
+<hr>
 
-<p>Dialógové okno obsahuje:</p>
+	<a name="dialog" id="dialog"></a>
+	<h1>Dialógové okno Vlastnosti</h1>
 
-<ul>
-   <li>Oblasť pre nastavenie zdrojového a cieľového jazyka projektu s rozbaľovacími menu</li>
-   <li>Označenie nastavení segmentácie</li>
-   <li>Oblasť pre nastavenie priečinkov projektu</li>
-</ul>
+	<p>Toto dialógové okno sa používa na modifikáciu priečinkov projektu a jazykov. Môže sa otvoriť stlačením <code><a href= "menu.html#shortcuts">Ctrl+E</a></code> alebo spustením <strong>Projekt → Vlastnosti...</strong> z <a href="menu.html">hlavného menu</a>. Dialógové okno obsahuje:</p>
 
-<p>Všetky polia sú editovateľné. Môžete buď zadať jazyky ručne alebo použiť rozbaľovacie menu. Môžete napísať názvy priečinkov ktoré ešte neexistujú, a OmegaT ich vytvorí za vás.</p>
+	<ul>
+		<li>Oblasť pre nastavenie zdrojového a cieľového jazyka projektu s rozbaľovacími menu</li>
+		<li>Označenie nastavení segmentácie</li>
+		<li>Oblasť pre nastavenie priečinkov projektu</li>
+	</ul>
 
-<a name="Modifying_Project_Properties_Half-Way"></a>
-<h3>Úprava vlastností projektu uprostred práce</h3>
+	<p>Všetky polia sú editovateľné. Môžete buď zadať jazyky ručne alebo použiť rozbaľovacie menu. Môžete napísať názvy priečinkov ktoré ešte neexistujú, a OmegaT ich vytvorí za vás.</p>
+	
 
-<p>Vždy je možné, ale nie odporúčané, modifikovať vlastnosti projektu počas prekladu. Keď sa preklad už začal, všetky nastavenia by mali byť považované za konečné, dokiaľ si neuvedomíte, že bola urobená veľká chyba.</p>
+	<a name="language" id="language"></a>
+	<h2>Zmena jazyka</h2>
+	
+	<p>Musíte mať na pamäti, že zmena jazykov môže spôsobiť, že vaše aktuálne používané prekladové pamäte sa stanú nepoužiteľnými, keďže ich jazyk sa už viac nemusí zhodovať s novými jazykmi.</p>
+	
+	<a name="segments" id="segments"></a>
+	<h2>Modifikácie segmentácie</h2>
+	
+	<p>Nastavenia segmentácie iba menia spôsob akým OmegaT zaobchádza so zdrojovými súbormi. Nemenia segmentáciu už jestvujúcich prekladových pamätí.</p>
+	
+	<p>Ak zmeníte nastavenia segmentácie, niektoré segmenty ktoré sú už preložené môžu byť rozdelené alebo spojené. Toto ich prekticky vráti do stavu "nepreložené" pretože nezodpovedajú segmentom zaznamenaným v pamäti projektu, dokonca hoci je tam aj starý a teraz nezodpovedajúci preklad.</p>
+	
+	<p>OmegaT môže <a href= "translationMemories.html#Upgrading_Translation_Memories">aktualizovať staré prekladové pamäte</a> ktoré nepoužívali segmentáciu podľa viet, ale nie naopak, a nie prekladovú pamäť projektu ak si to rozmyslíte uprostred prekladu.</p>
 
-<p>Špecificky:</p>
-
-<ul>
-   <li>Zmena jazykov môže spôsobiť, že aktuálne používané prekladové pamäte budú nepoužiteľné, keďže nemusia byť zhodné s novými jazykmi.</li>
-
-   <li>Zmena nastavení segmentácie môže spôsobiť rozdelenie alebo zlúčenie niektorých preložených segmentov, čo ich doslova vráti späť do "nepreloženého" stavu, dokonca aj keď je starý a teraz už nezhodný preklad stále v prekladovej pamäti. OmegaT môže <a href="translationMemories.html#Upgrading_Translation_Memories" title="Prekladové pamäte"> previesť na novšiu verziu staré prekladové pamäte</a>, ktoré nepoužívali segmentáciu podľa viet, ale nie naopak, a nie prekladovú pamäť projektu, ak si to rozmyslíte uprostred prekladu.</li>
-
-   <li>Zmena priečinkov projektu nepresunie súbory zo starých priečinkov do nových, takže riskujete, že skončíte v situácii, kde ani vy ani OmegaT nebude vedieť, čo priečinky skutočne znamenajú, a ktoré z nich sa používajú.</li>
-</ul>
-
-<p>Spôsoby ako chrániť vašu prácu nájdete v sekcii <a href="preventingDataLoss.html" title="Predchádzanie stratám údajov">Predchádzanie stratám údajov</a>.</p>
+	<a name="folder" id="folder"></a>
+	<h2>Modifikácie štruktúry priečinkov</h2>
+	
+	<p>V prípade, že máte v úmysle meniť priečinky projektu, pamätajte si, že to nepresunie zahrnuté súbory zo starých priečinkov do nových. Riskujete, že sa dostanete do situácie, kedy ani vy ani OmegaT nebude vedieť čo priečinky v skutočnosti znamenajú, a ktoré z nich sa používajú.</p>
 
 <hr>
-<p><a href="legalNotices.html" title="Právne poznámky">Právne poznámky</a></p>
 
+	<a name="warning" id="warning"></a>
+	<h1>Zmena vlastností projektu počas sedenia</h1>
+
+	<p>Je možné meniť vlastnosti projektu počas prekladového sedenia.</p>
+	
+	<p>Avšak, najbezpečnejším spôsobom je považovať všetky nastavenia za konečné keď je už preklad začatý - pokiaľ si samozrejme neuvedomíte, že ste urobili veľkú chybu. Spôsoby ako chrániť vašu prácu nájdete v sekcii <a href= "preventingDataLoss.html">Predchádzanie stratám údajov</a>.</p>
+
+
+	<hr>
+
+	<p><a href="legalNotices.htm">Právne poznámky</a></p>
 </body>
 </html>

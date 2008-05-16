@@ -147,11 +147,15 @@ under a minute in most cases.
 1.7.3 update 4 vs. 1.7.3 update 3
 
 
-  0 Enhancement
+  1 Enhancement
   1 Bugfixe
 
 ----------------------------------------------------------------------
 1.7.3 update 4
+
+  Other enhancements:
+
+  - Slovak localisation updated to 1.7.3 (UI, readme, instant start, documentation)
 
   Bug fixes:
 
@@ -355,7 +359,7 @@ Contains three new localisations (Simplified Chinese, Traditional Chinese and Cz
   - Simplified Chinese UI localisation + manual translation
   - French localisation updated to 1.7.1
   - Basque localisation updated to 1.7.1
-  - Slovac localisation updated to 1.7.1
+  - Slovak localisation updated to 1.7.1
   - Serbo-Croatian localisation updated to 1.7.1
   - Traditional Chinese 1.6.2 localisation
   - Dutch 1.6.2 localisation

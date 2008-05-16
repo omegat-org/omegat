@@ -1,209 +1,195 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Práca s formátovaným textom - Používateľská príručka OmegaT 1.6.1</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Práca s formátovaným textom - Používateľská príručka OmegaT 1.7.3</title>
 </head>
+
 <body>
-
-<h1>Práca s formátovaným textom</h1>
-
-<h2>Obsah</h2>
-
-<ul type="none">
-   <li>1. <a href="#Formatted_Text_in_OmegaT">Formátovaný text v OmegaT</a>
-
-      <ul type="none">
-         <li>1.1. <a href="#Tag_naming">Pomenovanie značiek (tagov)</a></li>
-         <li>1.2. <a href="#Tag_numbering">Číslovanie značiek (tagov)</a></li>
-         <li>1.3. <a href="#Pairs_and_singletons">Páry a samostatné jednotky</a></li>
-         <li>1.4. <a href="#Tags_and_sentence_segmenting">Značky (Tagy) a vetná segmentácia</a></li>
-
-         <li>1.5. <a href="#Tag_operations">Operácie so značkami (tagmi)</a>
-
-            <ul type="none">
-               <li>1.5.1. <a href="#Tag_group_duplication">Duplikácia skupiny značiek (tagov)</a></li>
-               <li>1.5.2. <a href="#Tag_group_deletion">Zmazanie skupiny značiek (tagov)</a></li>
-               <li>1.5.3. <a href="#Tag_group_order_modification">Modifikácia poradia skupiny značiek (tagov)</a></li>
-               <li>1.5.4. <a href="#Tag_group_nesting">Vnáranie skupiny značiek (tagov)</a></li>
-            </ul>
-         </li>
-
-         <li>1.6. <a href="#Tag_group_overlapping">Prekrývanie skupiny značiek (tagov)</a></li>
-         <li>1.7. <a href="#Tag_group_validation">Overenie skupiny značiek (tagov)</a></li>
-         <li>1.8. <a href="#Hints_for_tags_management">Tipy pre správu značiek (tagov)</a></li>
-         <li>1.9. <a href="#Important">Dôležité</a></li>
-      </ul>
-   </li>
-</ul>
-
-<a name="Formatted_Text_in_OmegaT"></a>
-<h2>Formátovaný text v OmegaT</h2>
-
-<p>Formátovacie informácie nachádzajúce sa v zdrojovom súbore je potrebné preniesť do cieľového súboru. OmegaT zobrazuje informácie o riadkovom (in-line) formátovaní podporovaných formátov (v súčasnosti DocBook, HTML, XHTML, OpenDocument, a OpenOffice.org) ako značky (tagy). Značky (Tagy) sa zvyčajne neberú do úvahy, pri zvažovaní podobnosti reťazcov pre účely nájdenia zhody. Značky (Tagy), ktoré ste reprodukovali v preloženom segmente budú prítomné v preloženom dokumente.</p>
-
-<a name="Tag_naming"></a>
-<h3>Pomenovanie značiek (tagov)</h3>
-
-<p>Značky (Tagy) pozostávajú z jedného až troch znakov a čísla. Jedinečné číslo umožňuje zoskupiť tie značky (tagy), ktoré si zodpovedajú, a rozlišovať značky (tagy), ktoré môžu mať rovnaký znak skratky, ale v skutočnosti sú rozličné.</p>
-
-<p>Znaky môžu alebo nemusia odrážať hodnotu formátovania, ktoré značka predstavuje (napr. tučné, kurzíva, atď.)</p>
-
-<a name="Tag_numbering"></a>
-<h3>Číslovanie značiek (tagov)</h3>
-
-<p>Značky (Tagy) sú číslované vzostupne podľa <strong>skupiny značiek (tagov)</strong>.</p>
-
-<p>To čo nazývame "skupinami značiek (tagov)" tu je buď jednotlivá značka (tag) (ako <code>&lt;br1&gt;</code>), samotná, alebo 2 značky (tagy) tvoriace pár (ako <code>&lt;f3&gt;</code> a <code>&lt;/f3&gt;</code>).</p>
-
-<p>V rámci segmentu, prvá skupina (pár alebo samostatný) dostane číslo <strong>0</strong>, druhá číslo <strong>1</strong> atď.</p>
-
-<p>Prvý príklad nižšie má 3 skupiny značiek (tagov) (pár, samostatný a potom ďalší pár), druhý príklad má iba jednu skupinu (pár).</p>
-
-<a name="Pairs_and_singletons"></a>
-<h3>Páry a samostatné jednotky</h3>
-
-<p>Značky (Tagy) môžu byť buď ako samostatné jednotky alebo v pároch.</p>
-
-<p>
-<strong>Samostatné značky (tagy)</strong> označujú formátovacie informácie, ktoré neovplyvňujú okolitý text (napríklad extra medzera alebo zlom riadku).</p>
-
-<pre>   <strong>&lt;segment 2132&gt;</strong>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;<strong>&lt;end segment&gt;</strong></pre>
-
-<p>
-<code><strong>&lt;br1&gt;</strong></code> je samostatná značka (tag) a neovplyvňuje žiaden okolitý text.</p>
-
-<p>
-<strong>Párové značky (tagy)</strong> zvyčajne označujú informácie o štýle, ktoré sa vzťahujú na text medzi otváracou značkou (tagom) a uzatváracou značkou (tagom) páru. Čokoľvek sa stane páru, otváracia značka (tag) by sa mala vždy nachádzať pred uzatváracou značkou (tagom).</p>
-
-<pre>   <strong>&lt;segment 3167&gt;</strong>Logovací súbor (&lt;f1&gt;log.txt&lt;/f1&gt;) pre záznam operácií a chýb.<strong>&lt;end segment&gt;</strong></pre>
-
-<p>
-<code><strong>&lt;f1&gt;</strong></code> a <code><strong>&lt;/f1&gt;</strong></code> sú v páre a ovplyvňujú <code><strong>log.txt</strong></code>.</p>
-
-<a name="Tags_and_sentence_segmenting"></a>
-<h3>Značky (Tagy) a vetná segmentácia</h3>
-
-<p>OmegaT vytvára svoje značky (tagy) pred tým, ako sa použije vetná segmentácia. V závislosti od pravidiel segmentácie, môžu značky (tagy) vyzerať ako keby nerešpektovali vyššie uvedené pravidlá číslovania a zoskupovania.</p>
-
-<pre>   <strong>&lt;segment 1554&gt;</strong> &lt;f0&gt;Pred: \. Po: \s&lt;/f0&gt;<strong>&lt;end segment&gt;</strong></pre>
-
-<p>Zdá sa, že tu nie je žiaden problém. Teraz, ak použijeme predvolené pravidlá segmentovania na tento segment (predvolené správanie sa OmegaT) dostaneme nasledujúci výsledok:</p>
-
-<pre>   <strong>&lt;segment 1990&gt;</strong> &lt;f0&gt;Pred: \. <strong>&lt;end segment&gt;</strong>
-
-   <strong>&lt;segment 1991&gt;</strong> Po: \s&lt;/f0&gt;<strong>&lt;end segment&gt;</strong></pre>
-
-<p>(Pravidlá segmentácie, ktoré sa použijú sú: <i>segmentovať po bodke nasledovanej medzerou</i>.)</p>
-
-<p>Tu vidíme, že segmenty vzaté samostatne nerešpektujú pravidlá párovania a číslovania: <code>&lt;f0&gt;</code> a <code>&lt;/f0&gt;</code> by mali byť spárované v rovnakom segmente, ale sú oddelené pravidlami segmentácie.</p>
-
-<p>V niektorých prípadoch to môže dokonca spôsobiť problémy pri preklade, keď značky (tagy) musia byť v cieľovom jazyku premiestnené aby odrážali slovosled toho jazyka (pozri <a href="#Tag_operations" title="Práca s formátovaným textom">Operácie so značkami (tagmi)</a> nižšie).</p>
-
-<a name="Tag_operations"></a>
-<h3>Operácie so značkami (tagmi)</h3>
-
-<p>So značkami (tagmi) treba zaobchádzať opatrne. Ak sú náhodne zmenené, formátovane koncového súboru môže byť poškodené. V najhoršom prípade sa súbor vôbec nemusí dať otvoriť; toto sa deje obzvlášť u súborov OpenOffice.org.</p>
-
-<a name="Tag_group_duplication"></a>
-<h4>Duplikácia skupiny značiek (tagov)</h4>
-
-<p>Pre duplikáciu skupín značiek (tagov) ich stačí skopírovať na ľubovoľnú pozíciu. Majte na pamäti, že v párovej skupine sa otváracia značka (tag) musí nachádzať pred uzatváracou značkou (tagom).</p>
-
-<p>Formátovanie predstavované skupinou, ktorú ste duplikovali bude použité na sekciu, kde ste ho použili.</p>
-
-<p>Príklad:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Toto formátovanie&lt;/f0&gt; bude duplikované tu.<strong>&lt;end segment&gt;</strong></pre>
-
-<p>Po duplikácii:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Ce format&lt;/f0&gt; a été &lt;f0&gt;copié ici&lt;/f0&gt;.<strong>&lt;end segment&gt;</strong></pre>
-
-<a name="Tag_group_deletion"></a>
-<h4>Zmazanie skupiny značiek (tagov)</h4>
-
-<p>Pre zmazanie skupín značiek (tagov), ich stačí odstrániť zo segmentu. Majte na pamäti, že párová skupina musí mať svoju otváraciu ako aj svoju uzatváraciu značku (tag) zmazanu aby sme zaistili, že všetky stopy formátovania sú správne vymazané, ináč by mohol byť preložený súbor poškodený a nemusel by sa dať otvoriť.</p>
-
-<p>Zmazaním skupiny značiek (tagov) odstránite príslušné formátovanie z preloženého súboru.</p>
-
-<p>Príklad:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Toto formátovanie&lt;/f0&gt; bude vymazané.<strong>&lt;end segment&gt;</strong></pre>
-
-<p>Po zmazaní:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>Ce format a été effacé.<strong>&lt;end segment&gt;</strong></pre>
-
-<a name="Tag_group_order_modification"></a>
-<h4>Modifikácia poradia skupiny značiek (tagov)</h4>
-
-<p>Pre zmenu poradia skupiny značiek (tagov) aby odrážalo inú štruktúru jazyka v preklade, jednoducho umiestnite skupinu značiek (tagov) tam kde by mala byť v preklade.</p>
-
-<p>Formátovanie bude nasledovať časť na ktorú sa vzťahuje.</p>
-
-<p>Príklad:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Formátovanie tu&lt;/f0&gt; a &lt;f1&gt;formátovanie tu&lt;/f1&gt; budú vzájomne presunuté.<strong>&lt;end segment&gt;</strong></pre>
-
-<p>Po zmene poradia:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f1&gt;Ce format&lt;/f1&gt; et &lt;f0&gt;ce format&lt;/f0&gt; ont été inversés.<strong>&lt;end segment&gt;</strong></pre>
-
-<a name="Tag_group_nesting"></a>
-<h4>Vnáranie skupiny značiek (tagov)</h4>
-
-<p>Modifikácia poradia skupiny značiek (tagov) môže vyústiť do vnorenia skupiny značiek (tagov) do inej skupiny značiek (tagov). Toto je možné pokiaľ uzatvárajúca skupina úplne uzatvára uzatvorenú skupinu. Zvláštnu pozornosť treba dávať pri vnáraní obzvlášť v prípade párov značiek (tagov), ktoré nie sú úplne presunuté do uzatváracej skupiny, ináč by mohol byť preložený súbor poškodený a nemusel by sa dať otvoriť.</p>
-
-<p>Na vnorenú časť sa budú vzťahovať obidve formátovania.</p>
-
-<p>Príklad:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Formátovanie&lt;/f0&gt; &lt;f1&gt;tu&lt;/f1&gt; bude vnorené.<strong>&lt;end segment&gt;</strong></pre>
-
-<p>Po vnorení:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Le format &lt;f1&gt;ici&lt;/f1&gt;&lt;/f0&gt; a été emboité dans le premier format.<strong>&lt;end segment&gt;</strong></pre>
-
-<a name="Tag_group_overlapping"></a>
-<h3>Prekrývanie skupiny značiek (tagov)</h3>
-
-<p>Prekrývanie je výsledkom zlej manupuláciem s pármi značiek (tagov) a určite bude mať za následok poškodenie formátovania a niekedy spôsobí, že sa preložený súbor vôvec nebude dať otvoriť.</p>
-
-<p>Príklad:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;formátovanie&lt;/f0&gt; &lt;f1&gt;tu&lt;/f1&gt; bude poškodené.<strong>&lt;end segment&gt;</strong></pre>
-
-<p>Po nesprávnej manipulácii:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;formátovanien &lt;f1&gt;tu&lt;/f0&gt; &lt;/f1&gt;je teraz veľmi poškodené.<strong>&lt;end segment&gt;</strong></pre>
-
-<a name="Tag_group_validation"></a>
-<h3>Overenie skupiny značiek (tagov)</h3>
-
-<p>Funkcia overenia značiek (tagov) (<a href="userInterface.html#Tag_Validation" title="Používateľské rozhranie">Overiť značky</a>) detekuje zmenené značky (tagy) (či už úmyselne alebo náhodou), a označí postihnuté segmenty. Použitie tejto funkcie otvorí dialógové okno s podozrivými porušenými alebo zlými značkami (tagmi) v dokumente.</p>
-
-<p>Táto funkcia môže byť užitočná pri hľadaní chýb v preložených značkovaných (tagovaných) textoch. Toto je často problémom v súboroch OpenDocument alebo OpenOffice.org, ktoré sa neotvoria kvôli problémom so značkami (tagmi) vytvorenými v procese prekladu. Opravenie značiek (tagov) a znovuvytvorenie cieľových dokumentov môže často odstrániť problém.</p>
-
-<a name="Hints_for_tags_management"></a>
-<h3>Tipy pre správu značiek (tagov)</h3>
-
-<p>Značky (Tagy) vo všeobecnosti predstavujú nejaký druh formátovania v pôvodnom texte. <strong>Zjednodušenie formátovania pôvodného textu</strong> vo veľkej miere prispieva k zníženiu počtu značiek. Zjednotenie použitých písem, veľkostí písem, farieb atď by malo byť brané do úvahy ak to je možné, pre zjednodušenie prekladu a zníženie počtu možných chýb značiek.</p>
-
-<p>Ak chcete vidieť, čo sa môže robiť so značkami (tagmi), pozrite sa na sekciu <a href="#Tag_operations" title="Práca s formátovaným textom">Operácie so značkami (tagmi)</a>.</p>
-
-<p>Pamätajte, že ak vás značky (tagy) obťažujú a formátovanie nie je extrémne dôležité pre aktuálnu prácu, odstránenie väčšiny formátovania zo zdrojového dokumentu veľmi uľahčí preklad.</p>
-
-<p>Ak potrebujete vidieť značky (tagy) v OmegaT ale nepotrebujete ponechať väčšinu formátovania v preloženom dokumente nemusíte značky (tagy) do prekladu pridávať. V tom prípade <strong>dávajte osobitnú pozornosť na páry značiek (tagov)</strong> keďže zabudnutie vymazania jednej časti páru poškodí formátovanie vášho dokumentu, čo spôsobí otváranie vášho dokumentu OpenOffice.org.</p>
-
-<p>Keďže značky (tagy) sú zahrnuté v samotnom texte, je možné použiť <a href="segmentation.html" title="Segmentácia zdroja">pravidlá segmentácie</a> na opätovné vytvorenie segmentov, ktoré obsahujú menej značiek (tagov). Toto je pokročilá vlastnosť a začínajúci používatelia by ju nemali používať.</p>
-
-<a name="Important"></a>
-<h3>Dôležité</h3>
-
-<p>Program OmegaT ešte nie je schopný detekovať chyby vo formátovaní plne automaticky, takže vás nemusí upozorniť ak urobíte chybu alebo zmeníte formátovanie aby lepšie vyhovovalo vášmu cieľovému jazyku. Avšak, niekedy bude váš preložený súbor vyzerať skomolený, a v prípade súborov OpenDocument / OpenOffice.org sa dokonca nebude dať otvoriť.</p>
+	<h1>Práca s formátovanými textami</h1>
+
+	<ul>
+		<li><a href="#intro">Formátovacie značky (tagy)</a>
+			<ul>
+				<li><a href="#naming">Pomenovanie značiek</a>
+				</li><li><a href="#numbering">Číslovanie značiek</a>
+				</li><li><a href="#pairs">Páry a samostatné jednotky</a>
+			</li></ul>
+		</li>
+		<li><a href="#tag_segmenting">Značky a vetná segmentácia</a></li>
+		<li><a href="#tag_operation">Operácie so značkami</a>
+			<ul>
+				<li><a href="#duplication">Duplikácia skupiny značiek</a>
+				</li><li><a href="#deletion">Zmazanie skupiny značiek</a>
+				</li><li><a href="#order">Modifikácia poradia skupiny značiek</a>
+				</li><li><a href="#nesting">Vnáranie skupiny značiek</a>
+			</li></ul>
+		</li>
+		<li><a href="#tag-overlapping">Prekrývanie skupiny značiek</a></li>
+		<li><a href="#tag_validation">Overenie skupiny značiek</a></li>
+		<li><a href="#tag_hints">Tipy pre správu značiek</a></li>
+	</ul>
+
+	<p>Formátovacie informácie nachádzajúce sa v zdrojovom súbore je potrebné preniesť do cieľového súboru. OmegaT zobrazuje informácie o riadkovom (in-line) formátovaní podporovaných formátov (v súčasnosti DocBook, HTML, XHTML, OpenDocument, a OpenOffice.org) ako značky. Značky sa zvyčajne neberú do úvahy, pri zvažovaní podobnosti reťazcov pre účely nájdenia zhody. Značky, ktoré ste reprodukovali v preloženom segmente budú prítomné v preloženom dokumente.</p>
 
 <hr>
-<p><a href="legalNotices.html" title="Právne poznámky">Právne poznámky</a></p>
 
+	<a name="intro" id="intro"></a>
+	<h1>Formátovacie značky (tagy)</h1>
+
+
+	<a name="naming" id="naming"></a>
+	<h2>Pomenovanie značiek</h2>
+
+	<p>Značky pozostávajú z jedného až troch znakov a čísla. Jedinečné číslo umožňuje zoskupiť tie značky, ktoré si zodpovedajú, a rozlišovať značky, ktoré môžu mať rovnaký znak skratky, ale v skutočnosti sú rozličné. Znaky môžu alebo nemusia odrážať hodnotu formátovania, ktoré značka predstavuje (napr. tučné, kurzíva, atď.)</p>
+
+	<a name="numbering" id="numbering"></a>
+	<h2>Číslovanie značiek</h2>
+
+	<p>Značky sú číslované vzostupne podľa <strong>skupiny značiek</strong>. To čo nazývame "skupinami značiek" tu je buď jednotlivá značka (ako <code><font color="red">&lt;br1&gt;</font></code>), samotná, alebo 2 značky tvoriace pár (ako <code><font color="red">&lt;f3&gt;</font></code> a <code><font color="red">&lt;/f3&gt;</font></code>). V rámci segmentu, prvá skupina (pár alebo samostatný) dostane číslo <strong>0</strong>, druhá číslo <strong>1</strong> atď. Prvý príklad nižšie má 3 skupiny značiek (pár, samostatný a potom ďalší pár), druhý príklad má iba jednu skupinu (pár).</p>
+
+	<a name="pairs" id="pairs"></a>
+	<h2>Páry a samostatné jednotky</h2>
+
+	<p>Značky môžu byť buď ako samostatné jednotky alebo v pároch. <strong>Samostatné značky</strong> označujú formátovacie informácie, ktoré neovplyvňujú okolitý text (napríklad extra medzera alebo zlom riadku).</p>
+
+	<pre>	<strong>&lt;segment 2132&gt;</strong><font color="red">&lt;b0&gt;</font>&lt;Ctr+N&gt;<font color="red">&lt;/b0&gt;</font>, <font color="red">&lt;br1&gt;</font><font color="red">&lt;b2&gt;</font>&lt;Enter&gt;<font color="red">&lt;/b2&gt;</font><strong>&lt;end segment&gt;</strong></pre>
+
+	<p><code><strong><font color="red">&lt;br1&gt;</font></strong></code> je samostatná značka a neovplyvňuje žiaden okolitý text. <strong>Párové značky</strong> zvyčajne označujú informácie o štýle, ktoré sa vzťahujú na text medzi otváracou značkou a uzatváracou značkou páru. Čokoľvek sa stane páru, otváracia značka by sa mala vždy nachádzať pred uzatváracou značkou.</p>
+
+	<pre>	<strong>&lt;segment 3167&gt;</strong>Logovací súbor (<font color="red"><font color="red"></font>log.txt<font color="red"></font></font>) pre záznam operácií a chýb.<strong>&lt;end segment&gt;</strong></pre>
+
+	<p><code><strong><font color="red">&lt;f1&gt;</font></strong></code> a <code><strong><font color="red">&lt;/f1&gt;</font></strong></code> sú v páre a ovplyvňujú <code><strong>log.txt</strong></code>.</p>
+
+<hr>
+
+	<a name="tag_segmenting" id="tag_segmenting"></a>
+	<h1>Značky a vetná segmentácia</h1>
+
+	<p>OmegaT vytvára svoje značky pred tým, ako sa použije vetná segmentácia. V závislosti od pravidiel segmentácie, môžu značky vyzerať ako keby nerešpektovali vyššie uvedené pravidlá číslovania a zoskupovania.</p>
+
+	<pre>	<strong>&lt;segment 1554&gt;</strong> <font color="red">&lt;f0&gt;</font>Pred: \. Po: \s<font color="red">&lt;/f0&gt;</font><strong>&lt;end segment&gt;</strong></pre>
+
+	<p>Zdá sa, že tu nie je žiaden problém. Teraz, ak použijeme predvolené pravidlá segmentovania na tento segment (predvolené správanie sa OmegaT) dostaneme nasledujúci výsledok:</p>
+
+	<pre>	<strong>&lt;segment 1990&gt;</strong> <font color="red">&lt;f0&gt;</font>Pred: \. <strong>&lt;end segment&gt;</strong>
+	<strong>&lt;segment 1991&gt;</strong> Po: \s<font color="red">&lt;/f0&gt;</font><strong>&lt;end segment&gt;</strong>
+	</pre>
+
+	<p>Pravidlá segmentácie, ktoré sa použijú sú: <i>segmentovať po bodke nasledovanej medzerou</i>. Vo vyššie uvedenom príklade vidíme, že segmenty vzaté samostatne nerešpektujú pravidlá párovania a číslovania: <code><font color="red">&lt;f0&gt;</font></code> a <code><font color="red">&lt;/f0&gt;</font></code> by mali byť spárované v rovnakom segmente, ale sú oddelené pravidlami segmentácie. V niektorých prípadoch to môže dokonca spôsobiť problémy pri preklade, keď značky musia byť v cieľovom jazyku premiestnené aby odrážali slovosled toho jazyka (pozri <a href="#Tag_operations">Operácie so značkami</a> nižšie).</p>
+
+<hr>
+
+	<a name="tag_operation" id="tag_operation"></a>
+	<h1>Operácie so značkami</h1>
+
+	<p>So značkami treba zaobchádzať opatrne. Ak sú náhodne zmenené, formátovane koncového súboru môže byť poškodené. Zdravý prístup je "Neopravuj, čo nie je pokazené". Avšak, je stále dobré vedieť, čo je možné a ako to urobiť.</p>
+
+	<a name="duplication" id="duplication"></a>
+	<h2>Duplikácia skupiny značiek:</h2>
+
+	<p>Pre duplikáciu skupín značiek ich stačí skopírovať na ľubovoľnú pozíciu. Majte na pamäti, že v párovej skupine sa otváracia značka musí nachádzať pred uzatváracou značkou. Formátovanie predstavované skupinou, ktorú ste duplikovali bude použité na sekciu, kde ste ho použili.</p>
+
+	<p>Príklad:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Toto formátovanie<font color="red">&lt;/f0&gt;</font> bude duplikované tu.<strong>&lt;end segment&gt;</strong></pre>
+
+	<p>Po duplikácii:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Toto formátovanie<font color="red">&lt;/f0&gt;</font> bolo <font color="red">&lt;f0&gt;</font>zduplikované tu<font color="red">&lt;/f0&gt;</font>.<strong>&lt;end segment&gt;</strong></pre>
+
+	<a name="deletion" id="deletion"></a>
+	<h2>Zmazanie skupiny značiek</h2>
+
+	<p>Pre zmazanie skupín značiek, ich stačí odstrániť zo segmentu. Majte na pamäti, že párová skupina musí mať svoju otváraciu ako aj svoju uzatváraciu značku zmazanú aby sme zaistili, že všetky stopy formátovania sú správne vymazané, ináč by mohol byť preložený súbor poškodený a nemusel by sa dať otvoriť. Zmazaním skupiny značiek odstránite príslušné formátovanie z preloženého súboru.</p>
+
+	<p>Príklad:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Toto formátovanie<font color="red">&lt;/f0&gt;</font> bude vymazané.<strong>&lt;end segment&gt;</strong></pre>
+
+	<p>Po zmazaní:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong>Toto formátovanie bolo vymazané.<strong>&lt;end segment&gt;</strong></pre>
+
+	<a name="order" id="order"></a>
+	<h2>Modifikácia poradia skupiny značiek</h2>
+
+	<p>Pre zmenu poradia skupiny značiek aby odrážalo inú štruktúru jazyka v preklade, jednoducho umiestnite skupinu značiek tam kde by mala byť v preklade. Formátovanie bude nasledovať časť na ktorú sa vzťahuje.</p>
+
+	<p>Príklad:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Formátovanie nula<font color="red">&lt;/f0&gt;</font> a <font color="red"><font color="red"></font>formátovanie jedna<font color="red"></font></font> budú invertované.<strong>&lt;end segment&gt;</strong></pre>
+
+	<p>Po zmene poradia:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red"><font color="red"></font>Formátovanie jedna<font color="red"></font></font> a <font color="red">&lt;f0&gt;</font>formátovanie nula<font color="red">&lt;/f0&gt;</font> boli invertované.<strong>&lt;end segment&gt;</strong></pre>
+
+	<a name="nesting" id="nesting"></a>
+	<h2>Vnáranie skupiny značiek</h2>
+
+	<p>Modifikácia poradia skupiny značiek môže vyústiť do vnorenia skupiny značiek do inej skupiny značiek. Toto je možné pokiaľ uzatvárajúca skupina úplne uzatvára uzatvorenú skupinu. Zvláštnu pozornosť treba dávať pri vnáraní obzvlášť v prípade párov značiek, ktoré nie sú úplne presunuté do uzatváracej skupiny, ináč by mohol byť preložený súbor poškodený a nemusel by sa dať otvoriť. Na vnorenú časť sa budú vzťahovať obidve formáty.</p>
+
+	<p>Príklad:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Formátovanie<font color="red">&lt;/f0&gt;</font> <font color="red"><font color="red"></font>jedna<font color="red"></font></font> bude vnorené do formátovania nula.<strong>&lt;end segment&gt;</strong></pre>
+
+	<p>Po vnorení:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Formátovanie <font color="red"><font color="red"></font>jedna<font color="red"></font></font><font color="red">&lt;/f0&gt;</font> bolo vnorené do formátovania nula.<strong>&lt;end segment&gt;</strong></pre>
+
+<hr>
+
+	<a name="tag-overlapping" id="tag-overlapping"></a>
+	<h1>Prekrývanie skupiny značiek</h1>
+
+	<p>Prekrývanie je výsledkom zlej manupulácie s pármi značiek a určite bude mať za následok poškodenie formátovania a niekedy spôsobí, že sa preložený súbor vôvec nebude dať otvoriť. Príklad:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Formátovanie<font color="red">&lt;/f0&gt;</font> <font color="red"><font color="red"></font>jedna<font color="red"></font></font> bude poškodené.<strong>&lt;end segment&gt;</strong></pre>
+
+	<p>Po nesprávnej manipulácii:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Formátovanie <font color="red"><font color="red"></font>jedna<font color="red">&lt;/f0&gt;</font> <font color="red"></font></font>je teraz veľmi poškodené.<strong>&lt;end segment&gt;</strong></pre>
+
+<hr>
+
+	<a name="tag_validation" id="tag_validation"></a>
+	<h1>Overenie skupiny značiek</h1>
+
+	<p>Funkcia na overenie značiek detekuje zmenené značky (či už urobené úmyselne alebo náhodou), a poukáže na postihnuté segmenty. Použitie tejto funkcie otvorí dialógové okno s podozrivými porušenými alebo zlými značkami v dokumente.</p>
+
+	<p>Táto funkcia môže byť užitočná pri hľadaní chýb v preložených značkovaných textoch. Toto je často problémom v súboroch OpenDocument alebo OpenOffice.org, ktoré sa neotvoria kvôli problémom so značkami vytvorenými v procese prekladu. Opravenie značiek a znovuvytvorenie cieľových dokumentov môže často odstrániť problém.</p>
+
+	<p>Pre otvorenie okna, použijte <code><a href="menu.html#shortcuts">Ctrl+T</a></code>.</p>
+	
+	<p>Okno obsahuje 3 stĺpcovú tabuľku s:</p>
+
+	<ul>
+		<li>odkaz na segment</li>
+		<li>obsah pôvodného segmentu</li>
+		<li>obsah preloženého segmentu</li>
+	</ul>
+	
+	<p>Značky sú zvýraznené tučným a modrým pre ľahké porovnanie medzi originálom a preloženým obsahom.<p>Kliknite na odkaz pre aktivovanie segmentu v Editore.</p>
+	
+	<p>Opravte chybu ak je to potrebné a stlačte <code><a href="menu.html#shortcuts">Ctrl+T</a></code> pre vrátenie sa k oknu overenia značiek pre opravu ďalších chýb.</p>
+
+	<p>Chyby <a href="formattedText.html#intro">značiek</a> sú <a href="formattedText.html#tag_operation">manipulácie so značkami</a> v preklade ktoré nereprodukujú rovnaké poradie značiek a ich počet ako je v pôvodnom segmente. Niektoré manipulácie so značkami sú potrebné a sú mierne, niektoré spôsobia problémy pri vytváraní preloženého dokumentu.</p>
+
+	<p>Značky vo všeobecnosti predstavujú nejaký druh formátovania v pôvodnom texte. <strong>Zjednodušenie formátovania pôvodného textu</strong> vo veľkej miere prispieva k zníženiu počtu značiek.</p>
+
+
+<hr>
+
+	<a name="tag_hints" id="tag_hints"></a>
+	<h1>Tipy pre správu značiek</h1>
+
+	<p>Značky vo všeobecnosti predstavujú nejaký druh formátovania v pôvodnom texte. <strong>Zjednodušenie formátovania pôvodného textu</strong> vo veľkej miere prispieva k zníženiu počtu značiek. Zjednotenie použitých písem, veľkostí písem, farieb atď by malo byť brané do úvahy ak to je možné, pre zjednodušenie prekladu a zníženie počtu možných chýb značiek. Ak chcete vidieť, čo sa môže robiť so značkami, pozrite sa na sekciu <a href="#Tag_operations">Operácie so značkami</a>. Pamätajte, že ak vás značky obťažujú a formátovanie nie je extrémne dôležité pre aktuálnu prácu, odstránenie väčšiny formátovania zo zdrojového dokumentu veľmi uľahčí preklad.</p>
+
+	<p>Ak potrebujete vidieť značky v OmegaT ale nepotrebujete ponechať väčšinu formátovania v preloženom dokumente nemusíte značky do prekladu pridávať. V tom prípade <strong>dávajte osobitnú pozornosť na páry značiek</strong> keďže zabudnutie vymazania jednej časti páru poškodí formátovanie vášho dokumentu, čo spôsobí otváranie vášho dokumentu OpenOffice.org. Keďže značky sú zahrnuté v samotnom texte, je možné použiť <a href="segmentation.html">pravidlá segmentácie</a> na vytvorenie segmentov s menším počtom značiek. Toto je pokročilá vlastnosť a na jej správne použitie je potrebná skúsenosť.</p>
+
+	<p><strong>Dôležité:</strong> Program OmegaT ešte nie je schopný detekovať chyby vo formátovaní plne automaticky, takže vás nemusí upozorniť ak urobíte chybu alebo zmeníte formátovanie aby lepšie vyhovovalo vášmu cieľovému jazyku. Avšak, niekedy bude váš preložený súbor vyzerať skomolený, a v prípade súborov OpenDocument / OpenOffice.org sa dokonca nebude dať otvoriť.</p>
+	<hr>
+
+	<p><a href="legalNotices.htm">Právne poznámky</a></p>
 </body>
 </html>

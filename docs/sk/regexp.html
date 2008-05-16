@@ -1,0 +1,192 @@
+<html>
+<head>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Regulárne výrazy - Používateľská príručka OmegaT 1.7.3</title>
+</head>
+<body>
+
+	<h1>Konštrukcie regulárnych výrazov</h1>
+
+	<p>Regulárne výrazy použité pri vyhľadávaní a segmentácii sú tie, ktoré podporuje Java. Ak potrebujete špecifickejšie informácie, prosím prezrite si <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+		
+	<p>Na webe môžete nájsť tutoriály (napríklad <a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)</p>
+
+
+	<table border="0" cellpadding="3" cellspacing="0">
+
+		<tr>
+			<td width="40%"><h2>Nasledujúca konštrukcia:</h2></td>
+			<td><h2>Zodpovedá nasledujúcej sekvencii:</h2></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Označenia</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>(?i)</code></td>
+			<td>Umožňuje hľadanie bez ohľadu na veľkosť písmen (predvolene vzor rozlišuje veľkosť písmen).</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Znaky</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>x</strong></td>
+			<td>Znak <strong>x</strong>, s výnimkou nasledujúcich...</td>
+		</tr>
+		<tr>
+			<td><code>\u</code><strong>hhhh</strong></td>
+			<td>Znak s hexadecimálnou hodnotou&nbsp;<code>0x</code><strong>hhhh</strong></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\t</code></td>
+			<td>Znak tabulátora (<code>'\u0009'</code>)</td>
+		</tr>
+		<tr>
+			<td><code>\n</code></td>
+			<td>Znak nového riadku (konca riadku) (<code>'\u000A'</code>)</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\r</code></td>
+			<td>Znak návratu vozíka (<code>'\u000D'</code>)</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Citácia</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\</code></td>
+			<td>Nič, ale cituje nasledujúci znak. Toto sa vyžaduje ak by ste chceli zadanie metaznakov <code>!$()*+.&lt;&gt;?[\]^{|}</code> aby zodpovedali sami sebe.</td>
+		</tr>
+		<tr>
+			<td><code>\\</code></td>
+			<td>Napríklad, toto je znak spätného lomítka</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\Q</code></td>
+			<td>Nič, ale cituje všetky znaky až po <code>\E</code></td>
+		</tr>
+		<tr>
+			<td><code>\E</code></td>
+			<td>Nič, ale končí citáciu začatú pomocou <code>\Q</code></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Triedy znakov</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>[abc]</code></td>
+			<td><code>a</code>, <code>b</code>, or <code>c</code> (jednoduchá tried)</td>
+		</tr>
+		<tr>
+			<td><code>[^abc]</code></td>
+			<td>Akýkoľvek znak s výnimkou <code>a</code>, <code>b</code>, or <code>c</code> (negácia)</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>[a-zA-Z]</code></td>
+			<td><code>a</code> až po <code>z</code> alebo <code>A</code> až po <code>Z</code>, vrátane (rozsah)</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Preddefinované triedy znakov</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>.</code></td>
+			<td>Akýkoľvek znak (okrem znakov ukončujúcich riadok)</td>
+		</tr>
+		<tr>
+			<td><code>\d</code></td>
+			<td>Číslica: <code>[0-9]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\D</code></td>
+			<td>Nečíslica: <code>[^0-9]</code></td>
+		</tr>
+		<tr>
+			<td><code>\s</code></td>
+			<td>Biely znak: <code>[ \t\n\x0B\f\r]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\S</code></td>
+			<td>Nebiely znak: <code>[^\s]</code></td>
+		</tr>
+		<tr>
+			<td><code>\w</code></td>
+			<td>Znak slova: <code>[a-zA-Z_0-9]</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\W</code></td>
+			<td>Nie znak slova: <code>[^\w]</code></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Označenie hraníc</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>^</code></td>
+			<td>Začiatok riadku</td>
+		</tr>
+		<tr>
+			<td><code>$</code></td>
+			<td>Koniec riadku</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>\b</code></td>
+			<td>Hranica slova</td>
+		</tr>
+		<tr>
+			<td><code>\B</code></td>
+			<td>Nie hranica slova</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Viacnásobné kvantifikátory</h3></td>
+		</tr>
+		<tr>
+			<td colspan="2">Tieto budú predstavovať toľko, koľko len môžu. Napríklad, <code>a+</code> bude zodpovedať <code>aaa</code> v <code>aaabbb</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>?</code></td>
+			<td><strong>X</strong>, raz alebo vôbec</td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>*</code></td>
+			<td><strong>X</strong>, nula alebo viackrát</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>+</code></td>
+			<td><strong>X</strong>, raz alebo viackrát</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Nedobrovoľné kvantifikátory</h3></td>
+		</tr>
+		<tr>
+			<td colspan="2">Tieto budú predstavovať tak málo, ako len môžu. Napríklad, <code>a+?</code> bude zodpovedať prvému <code>a</code> v <code>aaabbb</code></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>??</code></td>
+			<td><strong>X</strong>, raz alebo vôbec</td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>*?</code></td>
+			<td><strong>X</strong>, nula alebo viackrát</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>X</strong><code>+?</code></td>
+			<td><strong>X</strong>, raz alebo viackrát</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr><h3>Logické operátory</h3></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><strong>XY</strong></td>
+			<td><strong>X</strong> nasledované <strong>Y</strong></td>
+		</tr>
+		<tr>
+			<td><strong>X</strong><code>|</code><strong>Y</strong></td>
+			<td>Buď <strong>X</strong>, alebo <strong>Y</strong></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>(</code><strong>XY</strong><code>)</code></td>
+			<td><strong>XY</strong> ako jediná skupina</td>
+		</tr></table>
+
+	<hr>
+
+	<a href="legalNotices.htm">Právne poznámky</a>
+</body>
+</html>

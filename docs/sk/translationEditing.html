@@ -1,47 +1,54 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Editácia prekladu - Používateľská príručka OmegaT 1.6.1</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Editácia prekladu - Používateľská príručka OmegaT 1.7.3</title>
 </head>
 <body>
 
-<h1>Editácia prekladu</h1>
+	<h1>Nastavenie editačného poľa</h1>
 
-<p>Svoje súbory prekladáte prechádzaním zo segmentu na segment, a úpravou stále jedného segmentu. Pri presune medzi segmentami môže, ale nemusí, byť pole editácie zaplnené nejakým textom. Napríklad, pole editácie je vždy zaplnené existujúcim prekladom keď sa presuniete na preložený segment, takže môžete editovať svoj predchádzajúci preklad.</p>
+	<ul>
+		<li><a href="#auto_insert">Automatické vloženie zhodného výrazu</a></li>
+		<li><a href="#validation">Nemodifikovateľné segmenty</a></li>
+	</ul>
 
-<p>Avšak, keď sa presuniete na segment, ktorý ešte nie je preložený, môže OmegaT do segmentu vložiť text, ktorý nastavíte pre vkladanie, takže editujete spôsobom akým chcete:</p>
 
-<ul>
-   <li>OmegaT môže automaticky vkladať do poľa editácie zdrojový text. Toto je extrémne užitočné pre text obsahujúci veľa obchodných značiek a iných vlastných mien, ktoré je potrebné nechať nedotknuté. Choďte na <strong>Voľby -&gt; Nastavenie editácie...</strong> a uistite sa, že je vybraté prepínacie tlačidlo <strong>Zdrojový text</strong>.</li>
+	<p>Správanie sa editačného poľa možno nastaviť nasledujúcimi spôsobmi:</p>
+	
+	<ul>
+		<li>Automaticky vložiť najlepší zhodný výraz</li>
+		<li>Brať ako preložené segmenty identické s originálom</li>
+	</ul>
+	
+	<hr>
+	
+	<a name="auto_insert" id="auto_insert"></a>
+	<h1>Automatické vloženie zhodného výrazu</h1>
+	
+	<p>Svoje súbory prekladáte prechádzaním zo segmentu na segment, a pritom upravujete aktuálny segment. Pri presune medzi segmentami môžete chcieť aby bolo pole editácie vyplnené existujúcim prekladom alebo zdrojovým textom.</p>
+	
+	<p>Vo <strong>Voľby → Nastavenie editácie...</strong> vám OmegaT ponúka OmegaT nasledujúce alternatívy:</p>
 
-   <li>Alebo môže OmegaT nechať pole editácie prázdne. Táto voľba vám umožní vložiť preklad bez potreby odstraňovať zdrojový text, a tak vám ušetrí niekoľko úderov na klávesnicu (<code>Ctrl+A</code> a <code>Del</code>). Choďte na <srong>Voľby -&gt; Nastavenie editácie...</strong> a vyberte prepínacie tlačidlo <strong>Ponechať segment prázdny</strong>.</li>
-
-   <li>OmegaT môže tiež vložiť preklad reťazca najpodobnejšieho tomu, ktorý idete prekladať. Choďte na <strong>Voľby -&gt; Nastavenie editácie...</strong>, zaškrtnite označenie <strong>Vložiť najlepší nepresný preklad</strong>, prispôsobte minimálnu podobnosť, ktorú by mali mať zhodné položky na to, aby boli vložené automaticky.</li>
-</ul>
-
-<p>Pre nastavenie nasledujúcich vecí v OmegaT, prejdite na <strong>Voľby -&gt; Nastavenie editácie...</strong>, a...</p>
-
-<ul>
-   <li>Uistite sa, že je vybraté prepínacie tlačidlo <strong>Zdrojový text</strong>. Toto je predvolené nastavenie, takže najpravdepodobnejšie tam bude.</li>
-
-   <li>Vyberte prepínacie tlačidlo <strong>Ponechať segment prázdny</strong>.</li>
-
-   <li>Začkrtnite označenie <strong>Vložiť najlepší nepresný preklad</strong> a prispôsobte minimálnu podobnosť, ktorú by mali mať zhodné položky na to, aby boli vložené automaticky. Môžete tiež chcieť upraviť predponu na rozlíšenie vložených približných prekladov.</li>
-</ul>
-
-<p>... a kliknite na <strong>OK</strong>.</p>
-
-<a name="Text_To_Store"></a>
-<h2>Text pre vloženie</h2>
-
-<p>Dokumenty, ktoré potrebujete preložiť, môžu obsahovať obchodné značky, názvy alebo iné vlastné podstatné mená, ktoré musia byť rovnaké v preložených dokumentoch. Existujú dve stratégie pre segmenty, ktoré obsahujú iba takýto nemeniteľný text.</p>
-
-<p>Prvá, môžete si vybrať neprekladať takéto segmenty, hoci ak by ste si zabudli pamätať, že tieto segmenty sú nemeniteľné, mohli by ste ich preložiť počas revízie prekladu, keďže program OmegaT by tieto segmenty ohlásil ako nepreložené. Toto je predvolené.</p>
-
-<p>Druhá, môžete oznámiť programu OmegaT aby ukladal preklad, dokonca aj ak je zhodný so zdrojovým textom, takže OmegaT si bude pamätať, že ste si text prezreli a rozhodli ste sa ho preložiť rovnako. Choďte na <strong>Voľby -&gt; Nastavenie editácie...</strong> a zaškrtnite označenie <strong>Povoliť preklad rovnajúci sa zdroju</strong>.</p>
+	<dl>
+		<dt><strong>Zdrojový text</strong></dt><dd>môžete automaticky vkladať do poľa editácie zdrojový text. Toto je dosť užitočné pre text obsahujúci veľa obchodných značiek a iných vlastných mien, ktoré je potrebné nechať nedotknuté.</dd>
+		<dt><strong>Ponechať segment prázdny</strong></dt><dd>OmegaT ponechá pole editácie prázdne. Táto voľba vám umožní vložiť preklad bez potreby odstraňovať zdrojový text, a tak vám ušetrí niekoľko úderov na klávesnicu (<code>Ctrl+A</code> a <code>Del</code>).</dd>
+		<dt><strong>Vložiť najlepší nepresný preklad</strong></dt><dd>OmegaT vloží preklad reťazca najpodobnejšieho aktuálnemu zdroju, ak je nad prahom podobnosti môžete to v tomto prípade upraviť.</dd>
+	</dl>
 
 <hr>
-<p><a href="legalNotices.html" title="Právne poznámky">Právne poznámky</a></p>
 
+	<a name="validation" id="validation"></a>
+	<h1>Nemodifikovateľné segmenty</h1>
+
+	<p>Dokumenty, ktoré potrebujete preložiť, môžu obsahovať obchodné značky, názvy alebo iné vlastné podstatné mená, ktoré musia byť rovnaké v preložených dokumentoch. Existujú dve stratégie pre segmenty, ktoré obsahujú iba takýto nemeniteľný text.</p>
+
+	<p>Prvá, môžete sa rozhodnúť neprekladať takéto segmenty, hoci ak by ste si zabudli pamätať, že tieto segmenty sú nemeniteľné, mohli by ste ich preložiť počas revízie prekladu, keďže program OmegaT by tieto segmenty ohlásil ako nepreložené. Toto je predvolené.</p>
+
+	<p>Druhá, môžete oznámiť programu OmegaT aby ukladal preklad, dokonca aj ak je zhodný so zdrojovým textom, takže OmegaT si bude pamätať, že ste si text prezreli a rozhodli ste sa ho preložiť rovnako. Choďte na <strong>Voľby → Nastavenie editácie...</strong> a zaškrtnite označenie <strong>Povoliť preklad rovnajúci sa zdroju</strong>.</p>
+
+	<hr>
+
+	<p><a href="legalNotices.htm">Právne poznámky</a></p>
 </body>
 </html>

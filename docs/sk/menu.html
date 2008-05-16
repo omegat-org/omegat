@@ -1,179 +1,443 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Hlavné menu - Používateľská príručka OmegaT 1.6.1</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Menu OmegaT a klávesové skratky - Používateľská príručka OmegaT 1.7.3</title>
 </head>
 <body>
 
-<h1>Hlavné menu</h1>
+	<h1>Hlavné menu a klávesové skratky</h1>
+	
+	<ul>
+		<li><a href="#menu">Hlavné menu</a> <br>&nbsp;<table border="1" width="60%" cellpadding="3" cellspacing="0">
+			<tr bgcolor="#DDDDDD" align="center">
+				<td><a href="#ProjectMenu"><code>Projekt</code></a></td>
+				<td><a href="#EditMenu"><code>Upraviť</code></a></td>
+				<td><a href="#GoToMenu"><code>Prejsť na</code></a></td>
+				<td><a href="#ToolsMenu"><code>Nástroje</code></a></td>
+				<td><a href="#OptionsMenu"><code>Voľby</code></a></td>
+				<td><a href="#HelpMenu"><code>Pomocník</code></a></td>
+			</tr>
+			</table>
+		</li>
+	</ul>
+	<ul>
+		<li><a href="#shortcuts">Klávesové skratky</a>
+		<ul>
+			<li><a href="#Project_management">Správa projektu</a></li>
+			<li><a href="#Editing">Editovanie</a></li>
+			<li><a href="#Moving_around">Pohyb</a></li>
+			<li><a href="#Reference_windows">Referenčné okná</a></li>
+			<li><a href="#Other">Ostatné</a></li>
+		</ul>
+		</li>
+	</ul>
 
-<p>Všetky funkcie OmegaT sú dostupné cez lištu menu v hornej časti okna Editora. Väčšina funkcií je tiež dostupná cez <a href="keyboardShortcuts.html">klávesové skratky</a>.</p>
+	
+	<hr>
 
-<p>Vypísané skratky s <strong><code>Ctrl</code></strong> sú pre Windows, UNIX a UNIX-ovské operačné systémy s klávesnicami obsahujúcimi kláves <strong><code>Ctrl</code></strong> alebo <strong><code>Control</code></strong>. Používatelia Mac OS X by namiesto toho mali používať kláves Apple <img src="images/AppleKey.gif" alt="Kláves Apple" width="19" height="19">.</p>
+	<a name="menu" id="menu"></a>
+	<h1>Hlavné menu</h1>
+	
+	<p>Všetky funkcie OmegaT sú dostupné cez lištu menu v hornej časti okna Editora. Väčšina funkcií je tiež dostupná cez <a href= "menu.html#shortcuts">klávesové skratky</a>.</p>
 
-<h2>Obsah</h2>
-<ul type="none">
-   <li>1. <a href="#Project_Menu">Menu Projekt</a></li>
-   <li>2. <a href="#Edit_Menu">Menu Upraviť</a></li>
-   <li>3. <a href="#Go_to_Menu">Menu Prejsť na</a></li>
-   <li>4. <a href="#Tools_Menu">Menu Nástroje</a></li>
-   <li>5. <a href="#Options_Menu">Menu Voľby</a></li>
-   <li>6. <a href="#Help_Menu">Menu Pomocník</a></li>
-</ul>
+	<p>Skratky sa aktivujú stlačením <strong><code>Ctrl</code></strong> a písmena. Niektoré skratky obsahujú iné klávesy. Kvôli čitateľnosti, sú tu písmená písané veľkým písmom.</p>
+	
+	<p><strong><code>Ctrl</code></strong> je používané na Windows, UNIX a UNIX-ovských operačných systémoch s klávesnicami obsahujúcimi kláves <strong><code>Ctrl</code></strong> / <strong><code>Control</code></strong>. Používatelia Mac by myli namiesto toho čítať <strong><code>cmd+klávesa</code></strong>. Klávesa <strong><code>cmd</code></strong> má buď označenie <strong><code>command</code></strong> alebo značku <strong>jablko</strong> na klávesniciach Apple.</p>
 
-<a name="Project_Menu"></a>
-<h4>Menu Projekt</h4>
+	<p></p>
 
-<p>
-<dl>
-   <dt>Nový</dt>
-   <dd>Vytvorí a otvorí nový projekt. Dialógové okno pre vytvorenie projektu je rovnaké ako <a href="projectProperties.html">upraviť projekt</a>.</dd>
+		<table border="1" width="400" cellpadding="3" cellspacing="0">
+			<tr bgcolor="#DDDDDD" align="center">
+				<td><a href="#ProjectMenu"><code>Projekt</code></a></td>
+				<td><a href="#EditMenu"><code>Upraviť</code></a></td>
+				<td><a href="#GoToMenu"><code>Prejsť na</code></a></td>
+				<td><a href="#ToolsMenu"><code>Nástroje</code></a></td>
+				<td><a href="#OptionsMenu"><code>Voľby</code></a></td>
+				<td><a href="#HelpMenu"><code>Pomocník</code></a></td>
+			</tr>
+		</table>
+		<table border="0" cellpadding="5" cellspacing="0">
 
-   <dt>Otvoriť <code>&lt;Ctrl+O&gt;</code></dt>
-   <dd>Otvoriť predtým vytvorený projekt.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td id="ProjectMenu" colspan="3">
+			<hr><a name="ProjectMenu" id="ProjectMenu"></a><h2><code>Projekt</code></h2>
+			</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td width="25%"><code>Nový</code></td>
+			<td width="10%"></td>
+			<td>Vytvorí a otvorí nový projekt. Dialógové okno pre vytvorenie projektu je rovnaké ako <a href="projectProperties.html">upraviť projekt</a>.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Otvoriť</code></td>
+			<td><code>&lt;Ctrl+O&gt;</code></td>
+			<td>Otvoriť predtým vytvorený projekt.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Importovať zdrojové súbory...</code></td>
+			<td></td>
+			<td>Skopíruje vybrané súbory do priečinka <code>/source</code> a znovu načíta projekt pre načítanie nových súborov.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Import z MediaWiki...</code></td>
+			<td></td>
+			<td>Importuje jednotky zo stránok MediaWiki, na základe zadaného URL</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Znovu načítať</code></td>
+			<td></td>
+			<td>Znovu načíta projekt aby sa vzali do úvahy externé úpravy v zdrojových súboroch, staré prekladové pamäte alebo slovníky.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Zavrieť</code></td>
+			<td></td>
+			<td>Uloží preklad a zavrie projekt.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Uložiť</code></td>
+			<td><code>&lt;Ctrl+S&gt;</code></td>
+			<td>Uloží preklad do prekladovej pamäte projektu. OmegaT automaticky uloží preklad každých 10 minút, alebo pri zatvorení projektu, alebo pri ukončení OmegaT.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Vytvoriť preložené dokumenty</code></td>
+			<td></td>
+			<td>Vytvorí cieľové dokumenty založené na vašom preklade textu dokumentu. Dokumenty budú umiestnené v priečinku <code>/target</code>.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Vlastnosti</code></td>
+			<td><code>&lt;Ctrl+E&gt;</code></td>
+			<td>Zobrazí dialógové okno <a href="projectProperties.html">Vlastnosti projektu</a> pre úpravu jazykov projektu a umiestnení priečinkov projektu.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Súbory projektu...</code></td>
+			<td><code>&lt;Ctrl+L&gt;</code></td>
+			<td>Zavrie alebo otvorí <a href="userInterface.html#Project_Files">Okno súbory projektu</a> (záleží na tom či je otvorené alebo zavreté).</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Koniec</code></td>
+			<td><code>&lt;Ctrl+Q&gt;</code></td>
+			<td>Uloží projekt a ukončí OmegaT. Ak ste ešte neuložili projekt ručne potvrdí či by ste skutočne chceli skončiť.</td>
+		</tr>
 
-   <dt>Importovať zdrojové súbory...</dt>
-   <dd>Skopíruje vybrané súbory do adresára <code>/source</code> a znovu načíta projekt pre načítanie nových súborov.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td id="name" colspan="3">
+			<hr><a name="EditMenu" id="EditMenu"></a><h2><code>Upraviť</code></h2>
+			</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+		        <td></td>
+				<td colspan="2">Položky ktoré možno nájsť vo väčšine aplikácií (kopírovať/vystrihnúť/prilepiť) nie sú zobrazené v tomto menu ale sú dostupné cez klávesové skratky vášho systému. Napríklad:</td>
+			</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Kopírovať</code></td>
+			<td><code>&lt;Ctrl+C&gt;</code></td>
+			<td>Skopíruje vybraný text do schránky.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Vystrihnúť</code></td>
+			<td><code>&lt;Ctrl+X&gt;</code></td>
+			<td>Skopíruje vybraný text do schránky a zmaže vybraný text.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Prilepiť</code></td>
+			<td><code>&lt;Ctrl+V&gt;</code></td>
+			<td>Prilepí text zo schránky na pozíciu kurzora.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td></td>
+			<td colspan="2"><strong>Samotné menu obsahuje nasledujúce položky:</strong></td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Vrátiť posledný krok</code></td>
+			<td><code>&lt;Ctrl+Z&gt;</code></td>
+			<td>Prejde späť do stavu pred vykonaním poslednej editačnej činnosti. Nefunguje keď bol modifikovaný segment už potvrdený.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Zopakovať posledný krok</code></td>
+			<td><code>&lt;Ctrl+Y&gt;</code></td>
+			<td>Prejde späť do stavu pred zrušením poslednej editačnej činnosti. Nefunguje keď bol modifikovaný segment už potvrdený.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Prepísať preklad</code></td>
+			<td><code>&lt;Ctrl+R&gt;</code></td>
+			<td>Prepíše celý cieľový segment s aktuálne vybratým približným prekladom (predvolene je vybratá prvá nepresná zhoda).</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Vložiť preklad</code></td>
+			<td><code>&lt;Ctrl+I&gt;</code></td>
+			<td>Vloží aktuálne vybratý približný preklad na pozíciu kurzora. Táto funkcia nikdy neprepíše časť cieľového segmentu, dokonca aj keď je vybratá.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Prepísať zdroj</code></td>
+			<td><code>&lt;Shift+Ctrl+R&gt;</code></td>
+			<td>Prepíše celý cieľový segment zdrojom.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Vložiť zdroj</code></td>
+			<td><code>&lt;Shift+Ctrl+I&gt;</code></td>
+			<td>Vloží zdroj na pozíciu kurzora.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Hľadať v projekte...</code></td>
+			<td><code>&lt;Ctrl+F&gt;</code></td>
+			<td>Vytvorí nové <a href="userInterface.html#Search_Window">okno Hľadanie</a>.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Vybrať nájdené #N</code></td>
+			<td><code>&lt;Ctrl+#N&gt;</code></td>
+			<td>(#N je číslica od 1 do 5) - Vyberie Ntý približný preklad zobrazený v okne zhody pre nahradenie alebo vloženie do segmentu. Sekcia <a href= "userInterface.html#Fuzzy_Matches">Približné preklady</a> podrobne popisuje kódovanie farby.</td>
+		</tr>
 
-   <dt>Znovu načítať</dt>
-   <dd>Znovu načíta projekt aby sa vzali do úvahy externé úpravy v zdrojových súboroch, staré prekladové pamäte alebo slovníky.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td id="GotoMenu" colspan="3">
+			<hr><a name="GoToMenu" id="GoToMenu"></a><h2><code>Prejsť na</code></h2>
+			</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Nasledujúci nepreložený segment</code></td>
+			<td><code>&lt;Ctrl+U&gt;</code></td>
+			<td>Presunie sa na nasledujúci segment, ktorý nemá žiaden ekvivalent v prekladovej pamäti.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Nasledujúci segment</code></td>
+			<td><code>&lt;Ctrl+N&gt;</code> alebo <code>&lt;Enter&gt;</code> alebo <code>&lt;Tab&gt;</code></td>
+			<td>Prejde na nasledujúci segment. Ak je aktuálny segment je posledný v súbore, prejde na prvý segment nasledujúceho súboru.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Predchádzajúci segment</code></td>
+			<td><code>&lt;Ctrl+P&gt;</code> alebo <code>&lt;Ctrl+Enter&gt;</code> alebo <code>&lt;Ctrl+Tab&gt;</code></td>
+			<td>Prejde na predchádzajúci segment. Prejde na posledný segment predchádzajúceho súboru, ak je aktuálny segment prvý v súbore.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Číslo segmentu...</code></td>
+			<td><code>&lt;Ctrl+J&gt;</code></td>
+			<td>Segment sa otvorí po zadaní jeho čísla segmentu</td>
+		</tr>
 
-   <dt>Zavrieť</dt>
-   <dd>Uloží preklad a zavrie projekt.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td id="ToolsMenu" colspan="3">
+			<hr><a name="ToolsMenu" id="ToolsMenu"></a><h2><code>Nástroje</code></h2>
+			</td>
+		</tr>
 
-   <dt>Uložiť <code>&lt;Ctrl+S&gt;</code></dt>
-   <dd>Uloží preklad do prekladovej pamäte projektu. OmegaT automaticky uloží preklad každých 10 minút, alebo pri zatvorení projektu, alebo pri ukončení OmegaT.</dd>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Overiť značky</code></td>
+			<td><code>&lt;Ctrl+T&gt;</code></td>
+			<td>Skontroluje chýbajúce alebo nesprávne umiestnené značky vo formátovaných súboroch. Zobrazí zoznam segmentov s chybami v značkách. Sekcia <a href= "userInterface.html#Tag_Validation">Okno overenia značiek</a> obsahuje zoznam toho, čo tam vidíte, a <a href="formattedText.html">Práca s formátovanými textami</a> vám povie prečo.</td>
+		</tr>
 
-   <dt>Vytvoriť preložené dokumenty</dt>
-   <dd>Vytvorí cieľové dokumenty založené na vašom preklade textu dokumentu. Dokumenty budú umiestnené v adresári <code>/target</code>.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td id="OptionsMenu" colspan="3"><hr><h2><code>Voľby</code></h2></td>
+		</tr>
 
-   <dt>Vlastnosti <code>&lt;Ctrl+E&gt;</code></dt>
-   <dd>Zobrazí dialógové okno <a href="projectProperties.html">Vlastnosti projektu</a> pre úpravu jazykov projektu a umiestnení priečinkov projektu.</dd>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Používať Tab pre prechod</code></td>
+			<td></td>
+			<td>Nastaví kľúč potvrdenia segmentu na <code>&lt;Tab&gt;</code> namiesto predvoleného <code>&lt;Enter&gt;</code>. Táto voľba je užitočná pre niektoré  čínské, japonské alebo kórejské znakové vstupné systémy.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Písmo...</code></td>
+			<td></td>
+			<td>Zobrazí dialógové okno <a href="fontSettings.html">Nastavenia písma</a> pre zmenu písma zobrazenia textu. Používatelia starých počítačov by mali radšej meniť písmo pred otvorením projektu alebo pocítia zníženie výkonu. Omeškanie je najviditeľnejšie pri kombinácii G4 + Mac OS X + japončina.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Filtre súborov...</code></td>
+			<td></td>
+			<td>Zobrazí dilógové okno <a href="fileFilters.html">Filtre súborov</a> pre konfiguráciu zaobchádzania so súbormi a ich spracovania.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Segmentácia...</code></td>
+			<td></td>
+			<td>Otvorí dialógové okno <a href="segmentation.html">Segmentácia zdroja</a> pre nastavenie segmentácie textu.</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Nastavenie editácie...</code></td>
+			<td></td>
+			<td>Zobrazí dialógové okno <a href="translationEditing.html">Editácia prekladu</a> pre nastavenie Obsahu cieľového poľa pre ešte nepreložené segmenty.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>Obnoviť hlavné okno</code></td>
+			<td></td>
+			<td>Obnoví komponenty (editor, zobrazovač zhody, a zobrazovač slovníka) hlavného okna OmegaT na ich predvolený stav. Použijte túto vlastnosť v prípade, že ste odpojili, presunuli, alebo skryli jeden alebo viac komponentov, a nemôžete ich dostať späť do stavu v akom ich chcete mať.</td>
+		</tr>
 
-   <dt>Súbory projektu... <code>&lt;Ctrl+L&gt;</code></dt>
-   <dd>Zavrie a otvorí <a href="userInterface.html#Project_Files">Okno súbory projektu</a> (záleží na tom či je otvorené alebo zavreté).</dd>
+		<tr bgcolor="#FFFFFF">
+			<td id="HelpMenu" colspan="3">
+			<hr><a name="HelpMenu" id="HelpMenu"></a><h2><code>Pomocník</code></h2>
+			</td>
+		</tr>
 
-   <dt>Koniec <code>&lt;Ctrl+Q&gt;</code></dt>
-   <dd>Uloží projekt a ukončí OmegaT. Ak ste ešte neuložili projekt ručne potvrdí či by ste skutočne chceli skončiť.</dd>
-</dl>
-</p>
+		<tr bgcolor="#DDDDDD">
+			<td><code>Používateľská príručka...</code></td>
+			<td><code>&lt;F1&gt;</code></td>
+			<td>Otvorí <a href="userInterface.html#Help_Browser">Prehliadač pomocníka</a> s touto príručkou v osobitnom okne.</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td><code>O programe...</code></td>
+			<td></td>
+			<td>Zobrazí informácie o autorských právach, poďakovaniach a licencii.</td>
+		</tr>
+	</table>
+	<hr>
 
-<a name="Edit_Menu"></a>
-<h4>Menu Upraviť</h4>
+	<a name="shortcuts"></a>
+	<h1>Klávesové skratky</h1>
+	
+	<p>Nasledujúce skratky sú dostupné z hlavného okna. Keď je v popredí iné okno, kliknite na hlavné okno pre jeho presun do popredia alebo stlačte <strong><code>Esc</code></strong> pre zavretie toho okna.</p>
 
-<p>Položky ktoré možno nájsť vo väčšine aplikácií (kopírovať/vystrihnúť/prilepiť) nie sú zobrazené v tomto menu ale sú dostupné cez klávesové skratky vášho systému. Napríklad, pod Windows:</p>
+	<p>Skratky sa aktivujú stlačením <strong><code>Ctrl</code></strong> a písmena. Niektoré skratky obsahujú iné klávesy. Kvôli čitateľnosti, sú tu písmená písané veľkým písmom.</p>
+	
+	<p><strong><code>Ctrl</code></strong> je používané na Windows, UNIX a UNIX-ovských operačných systémoch s klávesnicami obsahujúcimi kláves <strong><code>Ctrl</code></strong> / <strong><code>Control</code></strong>. Používatelia Mac by myli namiesto toho čítať <strong><code>cmd+klávesa</code></strong>. Klávesa <strong><code>cmd</code></strong> má buď označenie <strong><code>command</code></strong> alebo značku <strong>jablko</strong> na klávesniciach Apple.</p>
 
-<p>
-<dl>
-   <dt>Kopírovať <code>&lt;Ctrl+C&gt;</code></dt>
-   <dd>Skopíruje vybraný text do schránky.</dd>
+	<ul>
+		<li><a href="#Project_management">Správa projektu</a></li>
+		<li><a href="#Editing">Editovanie</a></li>
+		<li><a href="#Moving_around">Pohyb</a></li>
+		<li><a href="#Reference_windows">Referenčné okná</a></li>
+		<li><a href="#Other">Ostatné</a></li>
+	</ul>
 
-   <dt>Vystrihnúť <code>&lt;Ctrl+X&gt;</code></dt>
-   <dd>Skopíruje vybraný text do schránky a zmaže vybraný text.</dd>
 
-   <dt>Prilepiť <code>&lt;Ctrl+V&gt;</code></dt>
-   <dd>Prilepí text zo schránky na pozíciu kurzora.</dd>
-</dl>
-</p>
+	<table border="0" cellpadding="3" cellspacing="0">
 
-<p>Samotné menu obsahuje nasledujúce položky:</p>
+		<tr bgcolor="#FFFFFF">
+			<td colspan="3">
+			<hr><a name="Project_management" id="Project_management"></a><h2>Správa projektu</h2>
+			</td>
+		</tr>
 
-<p>
-<dl>
-   <dt>Vrátiť posledný krok <code>&lt;Ctrl+Z&gt;</code></dt>
-   <dd>Prejde späť do stavu pred vykonaním poslednej editačnej činnosti. Nefunguje keď bol modifikovaný segment už potvrdený.</dd>
+		<tr bgcolor="#DDDDDD">
+			<td>Otvoriť projekt</td>
+			<td><code>&lt;Ctrl+O&gt;</code></td>
+			<td>Zobrazí dialógové okno pre nájdenie už existujúceho projektu</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td>Uložiť</td>
+			<td><code>&lt;Ctrl+S&gt;</code></td>
+			<td>Uloží aktuálnu prácu do súboru project_save.tmx umiestneného v priečinku projektu /omegat/</td>
+		</tr>
+		<tr bgcolor="#DDDDDD">
+			<td>Vlastnosti projektu</td>
+			<td><code>&lt;Ctrl+E&gt;</code></td>
+			<td>Zobrazí nastavenia projektu pre prípadné zmeny</td>
+		</tr>
 
-   <dt>Zopakovať posledný krok <code>&lt;Ctrl+Y&gt;</code></dt>
-   <dd>Prejde späť do stavu pred zrušením poslednej editačnej činnosti. Nefunguje keď bol modifikovaný segment už potvrdený.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td colspan="3">
+			<hr><a name="Editing" id="Editing"></a><h2>Editovanie</h2>
+			</td>
+		</tr>
 
-   <dt>Prepísať preklad <code>&lt;Ctrl+R&gt;</code></dt>
-   <dd>Prepíše celý cieľový segment s aktuálne vybratým približným prekladom (predvolene je vybratá prvá nepresná zhoda).</dd>
+		<tr bgcolor="#DDDDDD">
+			<td>Vrátiť posledný krok</td>
+			<td><code>&lt;Ctrl+Z&gt;</code></td>
+			<td>Odvolá posledné editačné akcie, v aktuálnom cieľovom segmente</td>
+		</tr>
 
-   <dt>Vložiť preklad <code>&lt;Ctrl+I&gt;</code></dt>
-   <dd>Vloží aktuálne vybratý približný preklad na pozíciu kurzora. Táto funkcia nikdy neprepíše časť cieľového segmentu, dokonca aj keď je vybratá.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td>Zopakovať posledný krok</td>
+			<td><code>&lt;Ctrl+Y&gt;</code></td>
+			<td>Znovu vykoná editačné akcie, ktoré boli práve odvolané, v aktuálnom cieľovom segmente</td>
+		</tr>
 
-   <dt>Prepísať zdroj <code>&lt;Shift+Ctrl+R&gt;</code></dt>
-   <dd>Prepíše celý cieľový segment zdrojom.</dd>
+		<tr bgcolor="#DDDDDD">
+			<td>Vybrať zhodné #N</td>
+			<td><code>&lt;Ctrl+#N&gt;</code></td>
+			<td>#N je číslica od 1 do 5. Skratka vyberie N<sup>tý</sup> zhodný výraz zobrazený v okne zhody (prvý zhodný výraz je vybratý predvolene)</td>
+		</tr>
 
-   <dt>Vložiť zdroj <code>&lt;Shift+Ctrl+I&gt;</code></dt>
-   <dd>Vloží zdroj na pozíciu kurzora.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td>Nahradiť nájdeným</td>
+			<td><code>&lt;Ctrl+R&gt;</code></td>
+			<td>Nahradí Obsah aktuálneho cieľového segmentu vybratým zhodným výrazom (prvý zhodný výraz je vybratý predvolene)</td>
+		</tr>
 
-   <dt>Hľadať v projekte... <code>&lt;Ctrl+F&gt;</code></dt>
-   <dd>Vytvorí nové <a href="userInterface.html#Search_Window">okno Hľadanie</a>.</dd>
+		<tr bgcolor="#DDDDDD">
+			<td>Vložiť nájdené</td>
+			<td><code>&lt;Ctrl+I&gt;</code></td>
+			<td>Vloží vybratý zhodný výraz na pozíciu kurzora v aktuálnom cieľovom segmente (prvý zhodný výraz je vybratý predvolene)</td>
+		</tr>
 
-   <dt>Vybrať približný preklad #N <code>&lt;Ctrl+N&gt;</code> (N je od 1 do 5)</dt>
-   <dd>Vyberie Ntý približný preklad zobrazený v okne zhody pre nahradenie alebo vloženie do segmentu. Sekcia <a href="userInterface.html#Fuzzy_Matches">Približné preklady</a> podrobne popisuje kódovanie farby.</dd>
-</dl>
-</p>
+		<tr bgcolor="#FFFFFF">
+			<td>Nahradiť zdrojom</td>
+			<td><code>&lt;Ctrl+Shift+R&gt;</code></td>
+			<td>Nahradí Obsah aktuálneho cieľového segmentu Obsahom zdrojového textu</td>
+		</tr>
 
-<a name="Go_to_Menu"></a>
-<h4>Menu Prejsť na</h4>
+		<tr bgcolor="#DDDDDD">
+			<td>Vložiť zdroj</td>
+			<td><code>&lt;Ctrl+Shift+I&gt;</code></td>
+			<td>Vloží Obsah zdrojového textu na pozíciu kurzora v aktuálnom cieľovom segmente</td>
+		</tr>
 
-<p>
-<dl>
-   <dt>Nasledujúci nepreložený segment <code>&lt;Ctrl+U&gt;</code></dt>
-   <dd>Presunie sa na nasledujúci segment, ktorý nemá žiaden ekvivalent v prekladovej pamäti.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td>Hľadať v projekte</td>
+			<td><code>&lt;Ctrl+F&gt;</code></td>
+			<td>Zobrazí dialógové okno pre vykonanie hľadania v projekte</td>
+		</tr>
 
-   <dt>Nasledujúci segment <code>&lt;Ctrl+N&gt;</code>, <code>&lt;Enter&gt;</code> / <code>&lt;Tab&gt;</code>
-   </dt>
-   <dd>Prejde na nasledujúci segment. Ak je aktuálny segment je posledný v súbore, prejde na prvý segment nasledujúceho súboru.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td colspan="3">
+			<hr><a name="Moving_around" id="Moving_around"></a><h2>Pohyb</h2>
+			</td>
+		</tr>
 
-   <dt>Predchádzajúci segment <code>&lt;Ctrl+P&gt;</code>, <code>&lt;Ctrl+Enter&gt;</code> / <code>&lt;Ctrl+Tab&gt;</code>
-   </dt>
-   <dd>Prejde na predchádzajúci segment. Prejde na posledný segment predchádzajúceho súboru, ak je aktuálny segment prvý v súbore.</dd>
-</dl>
-</p>
+		<tr bgcolor="#DDDDDD">
+			<td>Nasledujúci nepreložený segment</td>
+			<td><code>&lt;Ctrl+U&gt;</code></td>
+			<td>Presunie pole editácie na nasledujúci segment, ktorý nie je registrovaný v prekladovej pamäti projektu</td>
+		</tr>
 
-<a name="Tools_Menu"></a>
-<h4>Menu Nástroje</h4>
+		<tr bgcolor="#FFFFFF">
+			<td>Nasledujúci segment</td>
+			<td><code>&lt;Ctrl+N&gt;<br> Zadajte Return (Enter)</code></td>
+			<td>Presunie pole editácie na nasledujúci segment</td>
+		</tr>
 
-<p>
-<dl>
-   <dt>Overiť značky <code>&lt;Ctrl+T&gt;</code></dt>
-   <dd>Skontroluje chýbajúce alebo nesprávne umiestnené značky (tagy) vo formátovaných súboroch. Zobrazí zoznam segmentov s chybami v značkách (tagoch). Sekcia <a href="userInterface.html#Tag_Validation">Okno overenia tagov</a> obsahuje zoznam toho, čo tam vidíte, a <a href="formattedText.html">Práca s formátovaným textom</a> vám povie prečo.</dd>
-</dl>
-</p>
+		<tr bgcolor="#DDDDDD">
+			<td>Predchádzajúci segment</td>
+			<td><code>&lt;Ctrl+P&gt;</code></td>
+			<td>Presunie pole editácie na predchádzajúci segment</td>
+		</tr>
+		<tr bgcolor="#FFFFFF">
+			<td>Číslo segmentu...</td>
+			<td><code>&lt;Ctrl+J&gt;</code></td>
+			<td>presunie sa na zadané číslo segmentu</td>
+		</tr>
 
-<a name="Options_Menu"></a>
-<h4>Menu Voľby</h4>
+		<tr bgcolor="#FFFFFF">
+			<td colspan="3">
+			<hr><a name="Reference_windows" id="Reference_windows"></a><h2>Referenčné okná</h2>
+			</td>
+		</tr>
 
-<p>
-<dl>
-   <dt>Používať Tab pre prechod</dt>
-   <dd>Nastaví kľúč potvrdenia segmentu na <code>&lt;Tab&gt;</code> namiesto predvoleného <code>&lt;Enter&gt;</code>. Táto voľba je užitočná pre niektoré  čínské, japonské alebo kórejské znakové vstupné systémy.</dd>
+		<tr bgcolor="#DDDDDD">
+			<td>Výpis súborov projektu</td>
+			<td><code>&lt;Ctrl+L&gt;</code></td>
+			<td>Zobrazí zoznam Súborov projektu</td>
+		</tr>
 
-   <dt>Písmo...</dt>
-   <dd>Zobrazí dialógové okno <a href="fontSettings.html">Nastavenia písma</a> pre zmenu písma zobrazenia textu. Používatelia starých počítačov by mali radšej meniť písmo pred otvorením projektu alebo pocítia zníženie výkonu. Omeškanie je najviditeľnejšie pri kombinácii G4 + Mac OS X + japončina.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td colspan="3">
+			<hr><a name="Other" id="Other"></a><h2>Ostatné</h2>
+			</td>
+		</tr>
 
-   <dt>Filtre súborov...</dt>
-   <dd>Zobrazí dilógové okno <a href="fileFilters.html">Filtre súborov</a> pre konfiguráciu zaobchádzania so súbormi a ich spracovania.</dd>
+		<tr bgcolor="#DDDDDD">
+			<td>Overiť značky</td>
+			<td><code>&lt;Ctrl+T&gt;</code></td>
+			<td>Overí či všetky značky prítomné v zdrojovom texte sú prítomné aj v cieľovom texte.</td>
+		</tr>
 
-   <dt>Segmentácia...</dt>
-   <dd>Otvorí dialógové okno <a href="segmentation.html">Segmentácia zdroja</a> pre nastavenie segmentácie textu.</dd>
+		<tr bgcolor="#FFFFFF">
+			<td>Súbory Pomocníka</td>
+			<td><code>&lt;F1&gt;</code></td>
+			<td>Zobrazí súbory pomocníka OmegaT v samostatnom okne</td>
+		</tr>
+	</table>
+	<hr>
 
-   <dt>Nastavenie editácie...</dt>
-   <dd>Zobrazí dialógové okno <a href="translationEditing.html">Editácia prekladu</a> pre nastavenie obsahu cieľového poľa pre ešte nepreložené segmenty.</dd>
-
-   <dt>Obnoviť hlavné okno</dt>
-   <dd>Obnoví komponenty (editor, zobrazovač zhody, a zobrazovač slovníka) hlavného okna OmegaT na ich predvolený stav. Použijte túto vlastnosť v prípade, že ste odpojili, presunuli, alebo skryli jeden alebo viac komponentov, a nemôžete ich dostať späť do stavu v akom ich chcete mať.</dd>
-</dl>
-</p>
-
-<a name="Help_Menu"></a>
-<h4>Menu Pomocník</h4>
-
-<p>
-<dl>
-   <dt>Používateľská príručka... <code>&lt;F1&gt;</code></dt>
-   <dd>Otvorí <a href="userInterface.html#Help_Browser">Prehliadač pomocníka</a> s touto príručkou v osobitnom okne.</dd>
-
-   <dt>O programe...</dt>
-   <dd>Zobrazí informácie o autorských právach, poďakovaniach a licencii.</dd>
-</dl>
-</p>
-
-<hr>
-<p><a href="legalNotices.html" title="Právne poznámky">Právne poznámky</a></p>
-
+	<p><a href="legalNotices.htm">Právne poznámky</a></p>
 </body>
 </html>

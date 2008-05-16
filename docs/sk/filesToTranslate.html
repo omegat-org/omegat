@@ -1,84 +1,160 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Súbory na preklad - Používateľská príručka OmegaT 1.6.2</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Súbory na preklad - Používateľská príručka OmegaT 1.7.3</title>
 </head>
 <body>
 
-<h1>Súbory na preklad</h1>
+	<h1>Súbory na preklad</h1>
 
-<p>Pomocou OmegaT môžete priamo prekladať množstvo formátov súborov. V podstate existujú dva typy formátu súboru. Formáty <strong>obyčajného textu</strong> a formáty <strong>formátovaného textu</strong>.</p>
+	<ul>
+		<li><a href="#bidi">Jazyky písané sprava doľava</a>
+			<ul>
+				<li><a href="#bidi_transl">Preklad</a></li>
+				<li><a href="#bidi_create">Vytváranie preložených dokumentov</a></li>
+			</ul>
+		</li>
+		 <li>
+		    <a href="#formats">Formáty súborov</a>
+			<ul>
+				<li><a href="#plaintext">obyčajné textové súbory</a></li>
+				<li><a href="#tagged">Formátované textové súbory</a></li>
+				<li><a href="#specifics">Špecifiká formátov súborov</a></li>
+				<li><a href="#others">Iné formáty súborov</a>
+					<ul>
+						<li><a href="#ooo">OpenOffice.org</a></li>
+						<li><a href="#okapi">Okapi Framework</a></li>
+						<li><a href="#tt">Translate Toolkit</a></li>
+						<li><a href="#po4a">po4a</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
 
-<h2>Obsah</h2>
+	<hr>
 
-<ul type="none">
-   <li>1. <a href="#Plain_text_files">Obyčajné textové súbory</a></li>
-   <li>2. <a href="#Formatted_text_files">Formátované textové súbory</a></li>
-   <li>3. <a href="#File_formats_specifics">Špecifiká formátov súborov</a></li>
-   <li>4. <a href="#Other_file_formats">Iné formáty súborov</a></li>
-</ul>
+	<a name="bidi" id="bidi"></a>
+	<h1>Jazyky písané sprava doľava</h1>
+	
+	<a name="bidi_transl" id="bidi_transl"></a>
+	<h2>Preklad</h2>
 
-<a name="Plain_text_files"></a>
-<h3>obyčajné textové súbory</h3>
+	<p>Pri prekladaní do obojsmerných jazykov v OmegaT treba brať do úvahy dve veci: 1) vkladanie textu a 2) zobrazenie textu. Pri písaní RTL (sprava doľava) textu (napr. urdského, arabského atď.) a používaní and using LTR (zľava doprava) zobrazenia, čo je predvolené zobrazenie, nebude texty vždy zobrazený v poradí v akom bol zadaný. Toto nie je jasné keď sa zadáva iba RTL, a v prípadoch ako tento môže byť použité predvolené (LTR) zobrazenie.</p>
 
-<p>Obyčajné textové súbory obsahujú iba text, takže ich preklad je taký jednoduchý ako obyčajné písanie prekladu.</p>
+	<p>Avšak v mnohých prípadoch, keď je cieľovým jazykom RTL jazyk, bude potrebné vložiť LTR text. Napríklad, niektoré názvy produktov musia zostať v angličtine, alebo "fiktívny" text musí zostať vo svojej pôvodnej forme počas lokalizácie GUI reťazcov.</p>
 
-<p>V súčasnosti podporuje OmegaT nasledujúce formáty súborov v obyčajnom texte:</p>
+	<p>Keď sa LTR text vloží do RTL textu, nezobrazí sa v poradí v ktorom bol vložený. Aby to program OmegaT urobil, zobrazenie sa prepína pomocou <code>Ctrl+Shift+O</code>.</p>
+	
+	<p><strong>Poznámka:</strong> Rovnakú klávespovú skratku možno použiť na Mac OSX.</p>
+	
+	<p>Je tiež jednoduchšie vkladať RTL text keď bolo zobrazenie prepnuté na RTL, pretože v predvolenom zobrazení, pri vkladaní RTL textu, medzery ktoré sú vložené ako prvé sa objavia napravo od vloženého textu, a nasledujúci RTL znak sa potom objaví naľavo.</p>
 
-<ul>
-   <li>ASCII text (.txt, atď.)</li>
-   <li>Kódovaný text</li>
-   <li>Zdrojové balíčky Java (.properties)</li>
-   <li>PO súbory (.po)</li>
-   <li>INI súbory (kľúč=hodnota) (.ini)</li>
-</ul>
+	<p>Používanie <code>Ctrl+Shift+O</code> spôsobuje, že aj textový vstup aj zobrazenie v OmegaT sa zmení na RTL. Môže sa používať samostatne pre všetky tri okná (Editácia, Približné preklady a Slovník).</p>
 
-<p>V takýchto súboroch sa neuvažuje o tom, že by obsahovali viac formátovania ako "biele znaky" pre účely odsadenia/zarovnania.</p>
+	<a name="bidi_create" id="bidi_create"></a>
+	<h2>Vytváranie preložených dokumentov</h2>
+	
+	<p>Pri vytvorení preloženého dokumentu, jeho smer zobrazenia bude LTR, ako pôvodný dokument. Toto je nutné zmeniť manuálne. Každý výstupný formát má špecifický spôsob zaobchádzania so zobrazením RTL, podobnosti nájdete v príručkách pre príslušné aplikácie.<hr>
+	
+	<a name="formats" id="formats"></a>
+	<h1>Formáty súborov</h1>
 
-<p>Obyčajne sa upravujú pomocou textových editorov a vo všeobecnosti nie je možné aby si takéto formáty ponechali informácie o písme/farbe/okraji atď.</p>
+	<p>Pomocou OmegaT môžete prekladať súbory v mnohých formátoch. Existujú dva základné typy formátov súborov, formáty <strong>obyčajného textu</strong> a <strong>formátovaného textu</strong>.</p>
 
-<a name="Formatted_text_files"></a>
-<h3>Formátované textové súbory</h3>
+	<a name="plaintext" id="plaintext"></a>
+	<h2>obyčajné textové súbory</h2>
 
-<p>Formátované textové súbory obsahujú text ako aj informácie ako je typ písma, veľkosť, farba atď. Bežne sú vytvárané pomocou textových procesorov alebo editorov webových stránok.</p>
+	<p>Obyčajné textové súbory obsahujú iba text, takže ich preklad je taký jednoduchý ako obyčajné písanie prekladu.</p>
+	
+	<p>Existuje niekoľko <a href="plainText.html">metód</a> pre zadanie kódovania súboru aby sa jeho obsah zobrazil správne pri otvorení v OmegaT.</p>
 
-<p>V súčasnosti, OmegaT podporuje nasledujúce formáty pre formátovaný text:</p>
+	<p>V takýchto súboroch sa neuvažuje o tom, že by obsahovali viac formátovania ako "biele znaky" pre účely odsadenia/zarovnania. Obyčajne sa upravujú pomocou textových editorov a vo všeobecnosti nie je možné aby si takéto formáty ponechali informácie o písme/farbe/okraji atď.</p>
 
-<ul>
-   <li>súbory Microsoft Open XML</li>
-   <li>súbory OpenOffice.org</li>
-   <li>súbory OpenDocument</li>
-   <li>súbory (X)HTML</li>
-   <li>súbory HTML Help Compiler (HCC)</li>
-   <li>súbory DocBook</li>
-</ul>
+	<p>V súčasnosti podporuje OmegaT nasledujúce formáty súborov v obyčajnom texte:</p>
 
-<p>Takéto formáty súborov sa berú tak aby si ponechali informácie o formátovaní. Také informécie o formátovaní môžu byť také jednoduché ako <strong>toto je tučne</strong> alebo také zložité ako tabuľkové údaje s inou veľkosťou písma, farbou, umiestnením atď.</p>
+	<ul>
+		<li>ASCII text (.txt, atď.)</li>
+		<li>Kódovaný text</li>
+		<li>Zdrojové balíčky Java (.properties)</li>
+		<li>PO súbory (.po)</li>
+		<li>INI súbory (kľúč=hodnota) (.ini)</li>
+	</ul>
 
-<p>Vo väčšine prekladateľských zamestnaní sa považuje za dôležité aby preložený dokument vyzeral podobne ako originál. OmegaT vám to umožní urobiť označením znakov/slov, ktoré majú špeciálne formátovanie pomocou značiek s ktorými sa jednoducho narába.</p>
+	<p>Ostatné typy súborov obyčajného textu možno spracovať pomocou OmegaT <a href="fileFilters.html">priradením</a> ich prípony súboru k podporovanému typu súborov (napríklad, súbory <code>.pod</code> by mohli byť asociované s textovým filtrom ASCII) a ich predspracovaním špecifickými pravidlami <a href="segmentation.html">segmentácie</a>.</p>
 
-<p>Zjednodušenie formátovania pôvodného textu vo veľkej miere prispieva k zníženiu počtu značiek. Zjednotenie použitých písem, veľkostí písem, farieb atď by malo byť brané do úvahy ak to je možné, pre zjednodušenie prekladu a zníženie počtu možných chýb značiek.</p>
 
-<a name="File_formats_specifics"></a>
-<h3>Špecifiká formátov súborov</h3>
+	<a name="tagged" id="tagged"></a>
+	<h2>Formátované textové súbory</h2>
 
-<p>S väčšinou vyššie uvedených formátov súborov je potrebné zaobchádzať špecificky.</p>
+	<p>Formátované textové súbory obsahujú text ako aj informácie ako je typ písma, veľkosť, farba atď. Bežne sú vytvárané pomocou textových procesorov alebo editorov webových stránok.</p>
+	
+	<p>Takéto formáty súborov sa berú tak aby si ponechali informácie o formátovaní. Také informécie o formátovaní môžu byť také jednoduché ako <strong>toto je tučne</strong> alebo také zložité ako tabuľkové údaje s inou veľkosťou písma, farbou, umiestnením atď.</p>
+	
+	<p>Vo väčšine prekladateľských zamestnaní sa považuje za dôležité aby preložený dokument vyzeral podobne ako originál. OmegaT vám to umožní urobiť označením znakov/slov, ktoré majú špeciálne formátovanie pomocou <a href="formattedText.html">značiek</a> s ktorými sa jednoducho narába.</p>
+	
+	<p>Zjednodušenie formátovania pôvodného textu vo veľkej miere prispieva k zníženiu počtu značiek. Zjednotenie použitých písem, veľkostí písem, farieb atď by malo byť brané do úvahy ak to je možné, pre zjednodušenie prekladu a zníženie počtu možných <a href="userInterface.html#tags">chýb značiek</a>.</p>
 
-<p>Špecifické informácie o zaobchádzaní so všetkými vyššie uvedenými formátmi súborov nájdete v časti <a href="fileFormats.html" title="Podporované formáty súborov">Podporované formáty súborov</a> a <a href="fileFilters.html" title="Filtre súborov">Filtre súborov</a>.</p>
+	<p>V súčasnosti, OmegaT podporuje nasledujúce formáty pre formátovaný text:</p>
 
-<a name="Other_file_formats"></a>
-<h3>Iné formáty súborov</h3>
+	<ul>
+		<li>OpenOffice.org</li>
+		<li>OpenDocument</li>
+		<li>Microsoft Open XML</li>
+		<li>(X)HTML</li>
+		<li>HTML Help Compiler</li>
+		<li>DocBook</li>
+		<li>Okapi jednojazyčné XLIFF</li>
+	</ul>
 
-<p>Iné formáty súborov obyčajného textu alebo formátovaného textu môžu byť prístupné v OmegaT</p>
+	<p>Ostatné typy súborov formátovaného textu možno spracovať pomocou OmegaT <a href="fileFilters.html">priradením</a> ich prípony súboru k podporovanému typu súborov a ich predspracovaním špecifickými pravidlami <a href="segmentation.html">segmentácie</a>.</p>
 
-<p>Zhruba, množstvo formátov obyčajného textu (vrátane LaTex atď) môže byť prekladaných pomocou OmegaT pomocou konverzie do formátu PO.</p>
+	
+	<a name="specifics" id="specifics"></a>
+	<h2>Špecifiká formátov súborov</h2>
 
-<p>Podobne, množstvo formátov formátovaného textu (vrátane súborov Microsoft Office) môže byť prekladaných pomocou OmegaT pomocou konverzie do formátu Open Document.</p>
+	<p>Každý typ súboru sa v OmegaT spracuje iným spôsobom. Špecifické správanie možno nastaviť vo <a href="fileFilters.html">filtroch súborov</a>.<a name="others" id="others"></a>
+	<h2>Iné formáty súborov</h2>
 
-<p>Viac informácií nájdete v časti <a href="fileFormats.html" title="Podporované formáty súborov">Podporované formáty súborov</a>.</p>
+	<p>Iné formáty súborov obyčajného textu alebo formátovaného textu môžu byť prístupné v OmegaT.</p>
+	
+	<p>Na prevod nepodporovaných súborov do podporovaných formátov možno použiť externé nástroje. Preložený súbor bude potom potrebné previesť späť do pôvodného formátu. Týmto spôsobom, množstvo formátov obyčajného textu (vrátane LaTex atď) môže byť prekladaných pomocou OmegaT pomocou konverzie do formátu PO. Podobne, množstvo formátov formátovaného textu (vrátane súborov Microsoft Office) môže byť prekladaných pomocou OmegaT pomocou konverzie do formátu Open Document.</p>
+	
+	<p>Kvalita preloženého súboru bude závisieť na kvalite obojsmerného prevodu. Uistite sa, že ste otestovali všetky voľby pred vykonaním takýchto prevodov.</p>
+	
+	<p>Medzi dostupné konverzné nástroje patria:</p>
+	
+	<a name="ooo" id="ooo"></a>
+	<h3>OpenOffice.org</h3>
 
-<hr>
-<p><a href="legalNotices.html" title="Právne poznámky">Právne poznámky</a></p>
+	<p>OmegaT neponúka priamu podporu pre formáty Microsoft Office Word, Excel a PowerPoint. Avšak, OpenOffice.org (a varianty) môže byť použitý pre prevod týchto formátov do OpenDocument, ktorý OmegaT natívne podporuje.</p>
+	
+	<p><a href="http://www.openoffice.org/">oficiálna stránka OpenOffice.org</a></p>
 
+	<a name="okapi" id="okapi"></a>
+	<h3>Okapi Framework</h3>
+
+	<p>Nástroj extrakcie textu z Okapi Framework má možnosť vytvorenia stromu priečinkov projektu OmegaT. Je tiež možné vytvoriť špšcifický OmegaT XLIFF súbor. Okapi nedávno vydalo nástroje ktoré je možné spustiť pod Monom, slobodnou platformou dostupnou na väčšine operačných systémov.</p>
+
+	<p><a href="http://okapi.sourceforge.net/Release/Tikal/ReadMe_ForMono.htm">stránka vydania Okapi pre Mono</a>, <a href="http://okapi.sourceforge.net/Release/Shared/Help/tutorial_02.htm">tutoriál</a></p>
+
+	<a name="tt" id="tt"></a>
+	<h3>Translate Toolkit</h3>
+	
+	<p>Translate Toolkit, sada pythonových nástrojov, poskytuje používateľom niekoľko konvertorov do a z Portable Object, vrátane Mozilla .properties a dtd súborov, CSV súborov, Qt .ts súborov, XLIFF súborov. Obsahuje niekoľko nástrojov pre manipuláciu s takýmito súbormi pred alebo po ich preklade v OmegaT.</p>
+
+	<p><a href="http://translate.sourceforge.net/wiki/toolkit/index">oficiálna stránka Translate Toolkit</a></p>
+
+	<a name="po4a" id="po4a"></a>
+	<h3>po4a</h3>
+
+	<p>po4a je Debianovský perlový nástroj. Môže prevádzať formáty súborov ako LaTeX, TeX, POD atď do a z Portable Object.</p>
+
+	<p><a href="http://po4a.alioth.debian.org/">oficiálna stránka po4a</a></p>
+	
+	<hr>
+
+	<p><a href="legalNotices.htm">Právne poznámky</a></p>
 </body>
 </html>

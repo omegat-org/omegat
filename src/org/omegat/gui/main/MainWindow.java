@@ -220,10 +220,6 @@ public class MainWindow extends JFrame implements IMainWindow {
             editor.setEditable(false);
         }
 
-        // hide project file list
-        m_projWin.uiUpdateImportButtonStatus();
-        m_projWin.setVisible(false);
-
         // dispose other windows
         for (SearchWindow sw : m_searches) {
             sw.dispose();

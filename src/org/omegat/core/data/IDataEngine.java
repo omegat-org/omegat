@@ -103,5 +103,6 @@ public interface IDataEngine {
     public static class FileInfo {
         public String filePath;
         public int firstEntryIndex;
+        public int size;
     }
 }

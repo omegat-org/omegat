@@ -85,7 +85,9 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
      * {@inheritDoc}
      */
     public void setFont(final Font newFont) {
-        m_tagWin.setFont(newFont);
+        if (m_tagWin != null) {
+            m_tagWin.setFont(newFont);
+        }
     }
 
     public void onProjectChanged(final IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {

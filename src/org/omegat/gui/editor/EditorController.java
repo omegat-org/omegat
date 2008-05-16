@@ -194,8 +194,6 @@ public class EditorController implements IEditor {
                 // clear old text
                 editor.setText(new String());
 
-                mw.getProjectFrame().buildDisplay();
-
                 m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
 
                 m_xlFirstEntry = m_curEntry.getFirstInFile();

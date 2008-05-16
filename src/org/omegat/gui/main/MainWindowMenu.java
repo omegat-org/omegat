@@ -32,6 +32,8 @@ import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
@@ -64,6 +66,8 @@ import org.openide.awt.Mnemonics;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class MainWindowMenu implements ActionListener {
+    private static final Logger LOGGER = Logger.getLogger(MainWindowMenu.class.getName());
+    
     /** MainWindow instance. */
     protected final MainWindow mainWindow;
 
@@ -105,6 +109,7 @@ public class MainWindowMenu implements ActionListener {
         } catch (IllegalAccessException ex) {
             throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
         } catch (InvocationTargetException ex) {
+            LOGGER.log(Level.SEVERE, "Error execute method", ex);
             throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
         }
     }

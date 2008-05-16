@@ -244,9 +244,7 @@ public class ProjectFrame extends JFrame {
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() > 1) {
-                    gotoFile(table.rowAtPoint(e.getPoint()));
-                }
+                gotoFile(table.rowAtPoint(e.getPoint()));
             }
         });
         table.addKeyListener(new KeyAdapter() {

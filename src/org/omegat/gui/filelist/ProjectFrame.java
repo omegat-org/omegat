@@ -33,6 +33,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,12 +52,16 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.TableColumnModelEvent;
+import javax.swing.event.TableColumnModelListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableColumnModel;
@@ -97,6 +102,7 @@ public class ProjectFrame extends JFrame {
     private static final int LINE_SPACING = 6;
 
     private JTable tableFiles, tableTotal;
+    private JScrollPane scrollFiles;
     private AbstractTableModel modelFiles, modelTotal;
     private List<IDataEngine.FileInfo> files;
 
@@ -109,8 +115,8 @@ public class ProjectFrame extends JFrame {
     public ProjectFrame(MainWindow parent) {
         m_parent = parent;
 
-        tableFiles = createTableFiles();
-        tableTotal = createTableTotal();
+        createTableFiles();
+        createTableTotal();
 
         // set the position and size
         initWindowLayout();
@@ -122,26 +128,16 @@ public class ProjectFrame extends JFrame {
         gbc.fill = GridBagConstraints.BOTH;
         gbc.weightx = 1;
 
-        JScrollPane scroll = new JScrollPane(tableFiles,
+        scrollFiles = new JScrollPane(tableFiles,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         gbc.gridy = 0;
         gbc.weighty = 1;
-        cp.add(scroll, gbc);
-
-        gbc.gridy = 1;
-        gbc.weighty = 0;
-        JPanel sep = new JPanel();
-        cp.add(sep, gbc);
+        cp.add(scrollFiles, gbc);
 
         gbc.gridy = 2;
         gbc.weighty = 0;
         cp.add(tableTotal, gbc);
-
-        gbc.gridy = 3;
-        gbc.weighty = 0;
-        JPanel sep2 = new JPanel();
-        cp.add(sep2, gbc);
 
         m_addNewFileButton = new JButton();
         org.openide.awt.Mnemonics.setLocalizedText(m_addNewFileButton, OStrings
@@ -205,6 +201,7 @@ public class ProjectFrame extends JFrame {
                 case LOAD:
                     buildDisplay();
                     setVisible(true);
+                    buildTotalTableLayout();
                     toFront();
                 }
             }
@@ -226,7 +223,7 @@ public class ProjectFrame extends JFrame {
                 modelTotal.fireTableDataChanged();
             }
         });
-        
+
         CoreEvents
                 .registerFontChangedEventListener(new IFontChangedEventListener() {
                     public void onFontChanged(Font newFont) {
@@ -249,7 +246,7 @@ public class ProjectFrame extends JFrame {
             }
         });
     }
-    
+
     @Override
     public void setFont(Font f) {
         super.setFont(f);
@@ -322,12 +319,24 @@ public class ProjectFrame extends JFrame {
 
         files = Core.getDataEngine().getProjectFiles();
         modelFiles.fireTableDataChanged();
-
+        
         uiUpdateImportButtonStatus();
     }
+    
+    private void buildTotalTableLayout() {
+        scrollFiles.setBorder(BorderFactory.createEmptyBorder());
+        Border b2=scrollFiles.getBorder();
+        Insets i1=b2.getBorderInsets(tableFiles);
+        int sc=scrollFiles.getVerticalScrollBar().isVisible()?scrollFiles.getVerticalScrollBar().getWidth():0;
+        
+        GridBagLayout ly=(GridBagLayout)getContentPane().getLayout();
+        GridBagConstraints c=ly.getConstraints(tableTotal);
+        c.insets=new Insets(0,i1.left,0,sc);
+        ly.setConstraints(tableTotal, c);
+    }
 
-    private JTable createTableFiles() {
-        final JTable result = new JTable();
+    private void createTableFiles() {
+        tableFiles = new JTable();
         modelFiles = new AbstractTableModel() {
             public Object getValueAt(int rowIndex, int columnIndex) {
                 IDataEngine.FileInfo fi;
@@ -355,10 +364,10 @@ public class ProjectFrame extends JFrame {
                 return files.size();
             }
         };
-        result.setModel(modelFiles);
+        tableFiles.setModel(modelFiles);
 
-        result.setSelectionBackground(result.getBackground());
-        result.setSelectionForeground(result.getForeground());
+        tableFiles.setSelectionBackground(tableFiles.getBackground());
+        tableFiles.setSelectionForeground(tableFiles.getForeground());
 
         TableColumnModel columns = new DefaultTableColumnModel();
         TableColumn cFile = new TableColumn(0, 300);
@@ -371,15 +380,13 @@ public class ProjectFrame extends JFrame {
                 true));
         columns.addColumn(cFile);
         columns.addColumn(cCount);
-        result.setColumnModel(columns);
+        tableFiles.setColumnModel(columns);
 
-        result.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        return result;
+        tableFiles.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
-    private JTable createTableTotal() {
-        final JTable result = new JTable();
+    private void createTableTotal() {
+        tableTotal = new JTable();
         modelTotal = new AbstractTableModel() {
             public Object getValueAt(int rowIndex, int columnIndex) {
                 if (columnIndex == 0) {
@@ -414,7 +421,7 @@ public class ProjectFrame extends JFrame {
                 return 3;
             }
         };
-        result.setModel(modelTotal);
+        tableTotal.setModel(modelTotal);
 
         TableColumnModel columns = new DefaultTableColumnModel();
         TableColumn cFile = new TableColumn(0, 300);
@@ -425,14 +432,35 @@ public class ProjectFrame extends JFrame {
                 false));
         columns.addColumn(cFile);
         columns.addColumn(cCount);
-        result.setColumnModel(columns);
+        tableTotal.setColumnModel(columns);
 
-        result.setEnabled(false);
+        tableTotal.setEnabled(false);
         // result.setShowGrid(false);
 
-        result.setBorder(BorderFactory.createEmptyBorder(50, 5, 10, 5));
+        tableTotal.setBorder(BorderFactory.createEmptyBorder(50, 5, 10, 5));
+tableTotal.setShowGrid(false);
+        tableFiles.getColumnModel().addColumnModelListener(
+                new TableColumnModelListener() {
+                    public void columnAdded(TableColumnModelEvent e) {
+                    }
 
-        return result;
+                    public void columnMarginChanged(ChangeEvent e) {
+                        int w;
+                        w = tableFiles.getColumnModel().getColumn(0).getWidth();
+                        tableTotal.getColumnModel().getColumn(0).setMaxWidth(w);
+                        tableTotal.getColumnModel().getColumn(0).setMinWidth(w);
+                        tableTotal.getColumnModel().getColumn(0).setPreferredWidth(w);
+                    }
+
+                    public void columnMoved(TableColumnModelEvent e) {
+                    }
+
+                    public void columnRemoved(TableColumnModelEvent e) {
+                    }
+
+                    public void columnSelectionChanged(ListSelectionEvent e) {
+                    }
+                });
     }
 
     /**

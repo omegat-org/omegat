@@ -82,8 +82,6 @@ public class MainWindowUI {
         mainWindow.editor = new EditorTextArea(mainWindow);
         mainWindow.matches = new MatchesTextArea(mainWindow);
         mainWindow.glossary = new GlossaryTextArea();
-
-        mainWindow.m_autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
     }
 
     /**

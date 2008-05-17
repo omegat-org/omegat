@@ -44,7 +44,8 @@ public abstract class SwingWorker<T> {
     protected abstract T doInBackground() throws Exception;
 
     /** Callback which will be called in UI thread after task processed. */
-    protected abstract void done();
+    protected void done() {
+    }
 
     /**
      * Get task result, or throw exception from 'doInBackground'.

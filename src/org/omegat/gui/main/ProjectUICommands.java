@@ -27,8 +27,6 @@ package org.omegat.gui.main;
 import java.io.File;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.CommandThread;
-import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -70,12 +68,6 @@ public class ProjectUICommands {
                             projectRoot + File.separator);
                     return null;
                 }
-
-                protected void done() {
-                    Core.getEditor().setFirstEntry();
-                    Core.getEditor().loadDocument();
-                    Core.getEditor().activateEntry();
-                }
             }.execute();
         }
     }
@@ -106,17 +98,6 @@ public class ProjectUICommands {
                         projectRootFolder.getAbsolutePath() + File.separator);
                 return null;
             }
-
-            protected void done() {
-                Core.getEditor().setFirstEntry();
-                Core.getEditor().loadDocument();
-                Core.getEditor().activateEntry();
-                
-              //  m_projWin.uiUpdateImportButtonStatus();
-                
-               // m_projWin.setVisible(true);
-
-            }
         }.execute();
     }
 
@@ -138,12 +119,6 @@ public class ProjectUICommands {
                 Core.getDataEngine().loadProject(
                         projectRoot + File.separator);
                 return null;
-            }
-
-            protected void done() {
-                Core.getEditor().setFirstEntry();
-                Core.getEditor().loadDocument();
-                Core.getEditor().activateEntry();
             }
         }.execute();
     }

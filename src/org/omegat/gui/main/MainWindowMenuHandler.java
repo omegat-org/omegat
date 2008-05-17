@@ -405,27 +405,14 @@ public class MainWindowMenuHandler {
 
     public void viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed() {
         Core.getEditor().getSettings().setMarkTranslated(mainWindow.menu.viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected());
-
-        Core.getEditor().commitEntry(false);
-        Core.getEditor().loadDocument();
-        Core.getEditor().activateEntry();
     }
 
     public void viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed() {
         Core.getEditor().getSettings().setMarkUntranslated(mainWindow.menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
-
-        Core.getEditor().commitEntry(false);
-        Core.getEditor().loadDocument();
-        Core.getEditor().activateEntry();
     }
 
     public void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().commitEntry(false);
-
         Core.getEditor().getSettings().setDisplaySegmentSources(mainWindow.menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected());
-
-        Core.getEditor().loadDocument();
-        Core.getEditor().activateEntry();
     }
 
     public void toolsValidateTagsMenuItemActionPerformed() {
@@ -502,16 +489,15 @@ public class MainWindowMenuHandler {
         SpellcheckerConfigurationDialog sd = new SpellcheckerConfigurationDialog(mainWindow, Core.getDataEngine()
                 .getProjectProperties().getTargetLanguage());
         sd.setVisible(true);
+        
         if (sd.getReturnStatus() == SpellcheckerConfigurationDialog.RET_OK) {
-            mainWindow.m_autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
-            if (mainWindow.m_autoSpellChecking) {
+            boolean isNeedToSpell = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
+            if (isNeedToSpell) {
                 ISpellChecker sc = Core.getSpellChecker();
                 sc.destroy();
                 sc.initialize();
             }
-            Core.getEditor().commitEntry(false);
-            Core.getEditor().loadDocument();
-            Core.getEditor().activateEntry();
+            Core.getEditor().getSettings().setAutoSpellChecking(isNeedToSpell);            
         }
     }
 

@@ -554,7 +554,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
      * @param point : where should the popup be shown
      */
     private synchronized boolean createSpellCheckerPopUp(Point point) {
-        if (!mw.autoSpellCheckingOn())
+        if (!controller.getSettings().isAutoSpellChecking())
             return false;
         
         return EditorSpellChecking.createSpellCheckerPopUp(point, controller, this);

@@ -438,12 +438,6 @@ public class MainWindow extends JFrame implements IMainWindow {
     /** Set of all open search windows. */
     private final Set<SearchWindow> m_searches = new HashSet<SearchWindow>();
     
-    public boolean m_autoSpellChecking;
-    
-    public boolean autoSpellCheckingOn() {
-        return m_autoSpellChecking;
-    }
-    
     public DockableScrollPane getEditorScroller() {
         return editorScroller;
     }

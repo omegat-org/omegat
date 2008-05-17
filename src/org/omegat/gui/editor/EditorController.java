@@ -114,17 +114,21 @@ public class EditorController implements IEditor {
     /** Object which store history of moving by segments. */
     private SegmentHistory history = new SegmentHistory();
     
-    private final EditorSettings settings = new EditorSettings();
+    private final EditorSettings settings;
     
     private final DockableScrollPane pane;
     
     private String previousFileName;
+    
+    private enum SHOW_TYPE {INTRO, FIRST_ENTRY, NO_CHANGE};
 
     public EditorController(final MainWindow mainWindow, final EditorTextArea editor, final DockableScrollPane pane) {
         this.mw = mainWindow;
         this.editor = editor;
         this.pane = pane;
         editor.controller = this;
+        
+        settings = new EditorSettings(this);
 
         // check this only once as it can be changed only at compile time
         // should be OK, but localization might have messed it up
@@ -135,19 +139,33 @@ public class EditorController implements IEditor {
         
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-                updateState();
+                SHOW_TYPE showType;
+                switch (eventType) {
+                case CREATE:
+                    showType=SHOW_TYPE.FIRST_ENTRY;
+                    break;
+                case LOAD:
+                    showType=SHOW_TYPE.FIRST_ENTRY;
+                    break;
+                case CLOSE:
+                    showType=SHOW_TYPE.INTRO;
+                    break;
+                default:
+                    showType=SHOW_TYPE.NO_CHANGE;
+                }
+                updateState(showType);
             }
         });
         CoreEvents.registerEntryEventListener(new IEntryEventListener() {
             public void onNewFile(String activeFileName) {
-                updateState();
+                updateState(SHOW_TYPE.NO_CHANGE);
             }
             public void onEntryActivated(StringEntry newEntry) {
             }
         });
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                updateState();
+                updateState(SHOW_TYPE.INTRO);
             }
         });
         
@@ -163,13 +181,14 @@ public class EditorController implements IEditor {
                 });
     }
     
-    private void updateState() {
+    private void updateState(SHOW_TYPE showType) {
         UIThreadsUtil.mustBeSwingThread();
-        
-        if (!Core.getDataEngine().isProjectLoaded()) {
+
+        if (showType == SHOW_TYPE.INTRO
+                || !Core.getDataEngine().isProjectLoaded()) {
             MainWindowUI.loadInstantStart(pane, editor);
             pane.getViewport().getView().requestFocus();
-        }else {
+        } else {
             String file = getCurrentFile();
             String title = StaticUtils.format(OStrings
                     .getString("GUI_SUBWINDOWTITLE_Editor"), file);
@@ -177,6 +196,17 @@ public class EditorController implements IEditor {
             if (pane.getViewport().getView() != editor) {
                 pane.setViewportView(editor);
                 editor.requestFocus();
+            }
+            if (showType == SHOW_TYPE.FIRST_ENTRY) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        // need to run later because some other event listeners
+                        // should be called before
+                        m_curEntryNum = 0;
+                        loadDocument();
+                        activateEntry();
+                    }
+                });
             }
             editor.setEditable(true);
         }
@@ -213,7 +243,7 @@ public class EditorController implements IEditor {
      * displays source text. Also stores length of each displayed segment plus
      * its starting offset.
      */
-    public void loadDocument() {
+    protected void loadDocument() {
         UIThreadsUtil.mustBeSwingThread();
         synchronized (mw) {
             m_docReady = false;
@@ -271,7 +301,7 @@ public class EditorController implements IEditor {
                         xlDoc.insertString(totalLength, text, attributes);
 
                         // mark the incorrectly set words, if needed
-                        if (doSpellcheck && mw.m_autoSpellChecking) {
+                        if (doSpellcheck && settings.isAutoSpellChecking()) {
                             EditorSpellChecking.checkSpelling(totalLength, text, this, editor);
                         }
 
@@ -603,7 +633,7 @@ public class EditorController implements IEditor {
 
                 docSeg.length = replaceEntry(m_segmentStartOffset, totalLen, segmentSource, display_string, flags);
 
-                if (doCheckSpelling && mw.m_autoSpellChecking) {
+                if (doCheckSpelling && settings.isAutoSpellChecking()) {
                     wordList = EditorSpellChecking.checkSpelling(startOffset, display_string, this, editor);
                 }
 
@@ -793,12 +823,7 @@ public class EditorController implements IEditor {
             activateEntry();
         }
     }
-
-    //TODO: remove it
-    public void setFirstEntry() {
-        m_curEntryNum = 0;
-    }
-
+    
     /**
      * {@inheritDoc}
      */
@@ -1243,7 +1268,7 @@ public class EditorController implements IEditor {
     protected void checkSpelling(final boolean full) {
         UIThreadsUtil.mustBeSwingThread();
         
-        if (!mw.autoSpellCheckingOn())
+        if (!settings.isAutoSpellChecking())
             return;
         synchronized (editor) {
             EditorSpellChecking.checkSpelling(full, this, editor);

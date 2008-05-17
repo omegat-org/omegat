@@ -65,13 +65,6 @@ public interface IEditor {
     SourceTextEntry getCurrentEntry();
 
     /**
-     * Displays all segments in current document.
-     * 
-     * TODO threads.
-     */
-    void loadDocument();
-
-    /**
      * Activate entry for edit.
      * 
      * Must be called only from UI thread.
@@ -125,13 +118,6 @@ public interface IEditor {
      * Must be called only from UI thread.
      */
     void gotoEntry(int entryNum);
-
-    /**
-     * TODO: change it to setup first entry on the 'onProjectLoaded' event
-     * 
-     * Must be called only from UI thread.
-     */
-    void setFirstEntry();
 
     /**
      * Change case of the selected text or if none is selected, of the current
@@ -194,7 +180,11 @@ public interface IEditor {
      */
     void gotoHistoryBack();
 
-    /** Get settings instance. */
+    /**
+     * Get settings instance.
+     * 
+     * @return interface for read and change editor settings
+     */
     EditorSettings getSettings();
     
     /**

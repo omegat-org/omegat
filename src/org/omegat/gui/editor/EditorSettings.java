@@ -30,6 +30,7 @@ import javax.swing.text.AttributeSet;
 
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.Styles;
+import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * Editor behavior control settings.
@@ -37,16 +38,26 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class EditorSettings {
+    private final EditorController parent;
+
     private boolean useTabForAdvance;
     private boolean markTranslated;
     private boolean markUntranslated;
     private boolean displaySegmentSources;
+    private boolean autoSpellChecking;
 
-    protected EditorSettings() {
-        useTabForAdvance = Preferences.isPreference(Preferences.USE_TAB_TO_ADVANCE);
-        markTranslated = Preferences.isPreference(Preferences.MARK_TRANSLATED_SEGMENTS);
-        markUntranslated = Preferences.isPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS);
-        displaySegmentSources = Preferences.isPreference(Preferences.DISPLAY_SEGMENT_SOURCES);
+    protected EditorSettings(final EditorController parent) {
+        this.parent = parent;
+
+        useTabForAdvance = Preferences
+                .isPreference(Preferences.USE_TAB_TO_ADVANCE);
+        markTranslated = Preferences
+                .isPreference(Preferences.MARK_TRANSLATED_SEGMENTS);
+        markUntranslated = Preferences
+                .isPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS);
+        displaySegmentSources = Preferences
+                .isPreference(Preferences.DISPLAY_SEGMENT_SOURCES);
+        autoSpellChecking=Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
     }
 
     public char getAdvancerChar() {
@@ -73,7 +84,8 @@ public class EditorSettings {
 
     public void setUseTabForAdvance(boolean useTabForAdvance) {
         this.useTabForAdvance = useTabForAdvance;
-        Preferences.setPreference(Preferences.USE_TAB_TO_ADVANCE, useTabForAdvance);
+        Preferences.setPreference(Preferences.USE_TAB_TO_ADVANCE,
+                useTabForAdvance);
     }
 
     public boolean isMarkTranslated() {
@@ -81,8 +93,16 @@ public class EditorSettings {
     }
 
     public void setMarkTranslated(boolean markTranslated) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitEntry(false);
+
         this.markTranslated = markTranslated;
-        Preferences.setPreference(Preferences.MARK_TRANSLATED_SEGMENTS, markTranslated);
+        Preferences.setPreference(Preferences.MARK_TRANSLATED_SEGMENTS,
+                markTranslated);
+
+        parent.loadDocument();
+        parent.activateEntry();
     }
 
     public boolean isMarkUntranslated() {
@@ -90,8 +110,16 @@ public class EditorSettings {
     }
 
     public void setMarkUntranslated(boolean markUntranslated) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitEntry(false);
+
         this.markUntranslated = markUntranslated;
-        Preferences.setPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS, markUntranslated);
+        Preferences.setPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS,
+                markUntranslated);
+
+        parent.loadDocument();
+        parent.activateEntry();
     }
 
     /** display the segmetn sources or not */
@@ -100,7 +128,31 @@ public class EditorSettings {
     }
 
     public void setDisplaySegmentSources(boolean displaySegmentSources) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitEntry(false);
+
         this.displaySegmentSources = displaySegmentSources;
-        Preferences.setPreference(Preferences.DISPLAY_SEGMENT_SOURCES, displaySegmentSources);
+        Preferences.setPreference(Preferences.DISPLAY_SEGMENT_SOURCES,
+                displaySegmentSources);
+
+        parent.loadDocument();
+        parent.activateEntry();
+    }
+    
+    /** need to check spell or not */
+    public boolean isAutoSpellChecking() {
+        return autoSpellChecking;
+    }
+    
+    public void setAutoSpellChecking(boolean autoSpellChecking) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitEntry(false);
+        
+        this.autoSpellChecking = autoSpellChecking;
+        
+        parent.loadDocument();
+        parent.activateEntry();
     }
 }

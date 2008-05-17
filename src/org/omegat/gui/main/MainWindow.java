@@ -49,7 +49,6 @@ import javax.swing.WindowConstants;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.CommandThread;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.editor.EditorTextArea;
@@ -190,7 +189,7 @@ public class MainWindow extends JFrame implements IMainWindow {
    
     /** insert current fuzzy match at cursor position */
 
-    public synchronized void doInsertTrans()
+    public void doInsertTrans()
     {
         if (!isProjectLoaded())
             return;
@@ -202,7 +201,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     }
 
     /** replace entire edit area with active fuzzy match */
-    public synchronized void doRecycleTrans()
+    public void doRecycleTrans()
     {
         if (!isProjectLoaded())
             return;
@@ -216,10 +215,6 @@ public class MainWindow extends JFrame implements IMainWindow {
     /** Updates UI (enables/disables menu items) upon <b>closing</b> project */
     private void uiUpdateOnProjectClose()
     {
-        synchronized (editor) {
-            editor.setEditable(false);
-        }
-
         // dispose other windows
         for (SearchWindow sw : m_searches) {
             sw.dispose();
@@ -394,7 +389,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     }
 
     /** Tells whether the project is loaded. */
-    public synchronized boolean isProjectLoaded()
+    public boolean isProjectLoaded()
     {
         if (Core.getDataEngine()==null) return false;
         return Core.getDataEngine().isProjectLoaded();

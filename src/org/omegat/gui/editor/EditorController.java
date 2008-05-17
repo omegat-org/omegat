@@ -287,6 +287,8 @@ public class EditorController implements IEditor {
      * displayed if available.
      */
     public void activateEntry() {
+        UIThreadsUtil.mustBeSwingThread();
+        
         synchronized (mw) {
             if (!mw.isProjectLoaded())
                 return;
@@ -501,6 +503,8 @@ public class EditorController implements IEditor {
      *            If false, the translation will not be saved
      */
     public void commitEntry(final boolean forceCommit) {
+        UIThreadsUtil.mustBeSwingThread();
+        
         synchronized (mw) {
             if (!mw.isProjectLoaded())
                 return;
@@ -651,6 +655,8 @@ public class EditorController implements IEditor {
     }
 
     public void nextEntry() {
+        UIThreadsUtil.mustBeSwingThread();
+        
         synchronized (mw) {
             if (!mw.isProjectLoaded())
                 return;
@@ -669,6 +675,8 @@ public class EditorController implements IEditor {
     }
 
     public void prevEntry() {
+        UIThreadsUtil.mustBeSwingThread();
+        
         synchronized (mw) {
             if (!mw.isProjectLoaded())
                 return;
@@ -699,6 +707,8 @@ public class EditorController implements IEditor {
      * @author Maxym Mykhalchuk
      */
     public void nextUntranslatedEntry() {
+        UIThreadsUtil.mustBeSwingThread();
+        
         synchronized (mw) {
             // check if a document is loaded
             if (mw.isProjectLoaded() == false)
@@ -796,6 +806,8 @@ public class EditorController implements IEditor {
      *            lower, title, upper or cycle
      */
     public void changeCase(CHANGE_CASE_TO toWhat) {
+        UIThreadsUtil.mustBeSwingThread();
+        
         synchronized (editor) {
             int start = editor.getSelectionStart();
             int end = editor.getSelectionEnd();

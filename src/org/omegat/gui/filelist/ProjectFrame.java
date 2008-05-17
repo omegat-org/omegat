@@ -69,6 +69,7 @@ import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.IDataEngine;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IEntryEventListener;
+import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
@@ -225,6 +226,20 @@ public class ProjectFrame extends JFrame {
                 modelTotal.fireTableDataChanged();
             }
         });
+        
+        CoreEvents
+                .registerFontChangedEventListener(new IFontChangedEventListener() {
+                    public void onFontChanged(Font newFont) {
+                        ProjectFrame.this.setFont(newFont);
+                        tableFiles.setFont(newFont);
+                        tableTotal.setFont(new Font(newFont.getName(),
+                                Font.BOLD, newFont.getSize()));
+                        tableFiles.setRowHeight(newFont.getSize()
+                                + LINE_SPACING);
+                        tableTotal.setRowHeight(newFont.getSize()
+                                + LINE_SPACING);
+                    }
+                });
 
         tableFiles.addMouseListener(new MouseAdapter() {
             @Override
@@ -449,15 +464,6 @@ public class ProjectFrame extends JFrame {
         }
         entryIndex = fi.firstEntryIndex - fi.size + 1;
         Core.getEditor().gotoEntry(entryIndex);
-    }
-
-    /** Call this to set OmegaT-wide font for this window. */
-    public void setFont(Font f) {
-        super.setFont(f);
-        tableFiles.setFont(f);
-        tableTotal.setFont(new Font(f.getName(), Font.BOLD, f.getSize()));
-        tableFiles.setRowHeight(f.getSize() + LINE_SPACING);
-        tableTotal.setRowHeight(f.getSize() + LINE_SPACING);
     }
 
     /**

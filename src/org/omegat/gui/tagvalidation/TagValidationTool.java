@@ -24,7 +24,6 @@
 
 package org.omegat.gui.tagvalidation;
 
-import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,15 +77,6 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
             JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(), OStrings
                     .getString("TF_NOTICE_OK_TAGS"), OStrings.getString("TF_NOTICE_TITLE_TAGS"),
                     JOptionPane.INFORMATION_MESSAGE);
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setFont(final Font newFont) {
-        if (m_tagWin != null) {
-            m_tagWin.setFont(newFont);
         }
     }
 

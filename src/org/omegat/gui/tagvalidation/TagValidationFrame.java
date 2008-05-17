@@ -43,7 +43,10 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 
+import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.core.data.StringEntry;
+import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.gui.HListener;
 import org.omegat.gui.main.MainWindow;
@@ -100,6 +103,14 @@ public class TagValidationFrame extends JFrame
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(scroller, BorderLayout.CENTER);
         getContentPane().add(bbut, BorderLayout.SOUTH);
+        
+        CoreEvents
+                .registerFontChangedEventListener(new IFontChangedEventListener() {
+                    public void onFontChanged(Font newFont) {
+                        TagValidationFrame.this.setFont(newFont);
+                    }
+                });
+        setFont(Core.getMainWindow().getApplicationFont());
     }
     
     /** Call this to set OmegaT-wide font for the Tag Validation window. */

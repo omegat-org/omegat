@@ -25,6 +25,7 @@
 
 package org.omegat.gui.glossary;
 
+import java.awt.Font;
 import java.io.File;
 import java.util.List;
 
@@ -32,6 +33,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IEntryEventListener;
+import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -82,6 +84,12 @@ public class GlossaryTextArea extends javax.swing.JTextPane
                 new FindGlossaryThread(GlossaryTextArea.this, newEntry).start();
             }
         });
+        CoreEvents
+                .registerFontChangedEventListener(new IFontChangedEventListener() {
+                    public void onFontChanged(Font newFont) {
+                        GlossaryTextArea.this.setFont(newFont);
+                    }
+                });
     }
     
     /**

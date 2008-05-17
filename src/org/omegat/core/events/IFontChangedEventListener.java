@@ -22,17 +22,15 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **************************************************************************/
 
-package org.omegat.gui.tagvalidation;
+package org.omegat.core.events;
 
+import java.awt.Font;
 
 /**
- * Interface for tag validation.
+ * Listener interface for change font in components.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public interface ITagValidation {
-    /**
-     * Calls IDataEngine for get invalid tags list and show they.
-     */
-    void validateTags();
+public interface IFontChangedEventListener {
+    void onFontChanged(Font newFont);
 }

@@ -46,6 +46,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
+import org.omegat.core.CoreEvents;
 import org.omegat.gui.editor.EditorTextArea;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.matches.MatchesTextArea;
@@ -82,13 +83,6 @@ public class MainWindowUI {
         mainWindow.matches = new MatchesTextArea(mainWindow);
         mainWindow.glossary = new GlossaryTextArea();
 
-        String fontName = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_NAME, OConsts.TF_FONT_DEFAULT);
-        int fontSize = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_SIZE, OConsts.TF_FONT_SIZE_DEFAULT);
-
-        mainWindow.m_font = new Font(fontName, Font.PLAIN, fontSize);
-        mainWindow.editor.setFont(mainWindow.m_font);
-        mainWindow.matches.setFont(mainWindow.m_font);
-        mainWindow.glossary.setFont(mainWindow.m_font);
         mainWindow.m_autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
     }
 

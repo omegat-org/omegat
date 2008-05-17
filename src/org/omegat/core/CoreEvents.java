@@ -24,6 +24,7 @@
 
 package org.omegat.core;
 
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,7 @@ import javax.swing.SwingUtilities;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IEntryEventListener;
+import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.Log;
 
@@ -39,7 +41,7 @@ import org.omegat.util.Log;
  * Class for distribute main application events.
  * 
  * All events can be fired in any threads, but will be delivered to listeners
- * only in the UI thread.
+ * only in the UI thread. It's required for better threads synchronization.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
@@ -47,6 +49,7 @@ public class CoreEvents {
     private static final List<IProjectEventListener> projectEventListeners = new ArrayList<IProjectEventListener>();
     private static final List<IApplicationEventListener> applicationEventListeners = new ArrayList<IApplicationEventListener>();
     private static final List<IEntryEventListener> entryEventListeners = new ArrayList<IEntryEventListener>();
+    private static final List<IFontChangedEventListener> fontChangedEventListeners = new ArrayList<IFontChangedEventListener>();
 
     /** Register listener. */
     public static void registerProjectChangeListener(
@@ -93,6 +96,22 @@ public class CoreEvents {
             final IEntryEventListener listener) {
         synchronized (entryEventListeners) {
             entryEventListeners.remove(listener);
+        }
+    }
+
+    /** Register listener. */
+    public static void registerFontChangedEventListener(
+            final IFontChangedEventListener listener) {
+        synchronized (fontChangedEventListeners) {
+            fontChangedEventListeners.add(listener);
+        }
+    }
+
+    /** Unregister listener. */
+    public static void unregisterFontChangedEventListener(
+            final IFontChangedEventListener listener) {
+        synchronized (fontChangedEventListeners) {
+            fontChangedEventListeners.remove(listener);
         }
     }
 
@@ -161,6 +180,20 @@ public class CoreEvents {
                 synchronized (entryEventListeners) {
                     for (IEntryEventListener listener : entryEventListeners) {
                         listener.onEntryActivated(newEntry);
+                    }
+                }
+            }
+        });
+    }
+    
+    /** Fire event. */
+    public static void fireFontChanged(final Font newFont) {
+        Log.logInfoRB("LOG_INFO_EVENT_FONT_CHANGED");
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                synchronized (fontChangedEventListeners) {
+                    for (IFontChangedEventListener listener : fontChangedEventListeners) {
+                        listener.onFontChanged(newFont);
                     }
                 }
             }

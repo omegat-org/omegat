@@ -25,6 +25,7 @@
 
 package org.omegat.gui.matches;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -43,6 +44,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.StringData;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IEntryEventListener;
+import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.gui.main.MainWindow;
@@ -94,6 +96,12 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
                 new FindMatchesThread(MatchesTextArea.this, newEntry).start();
             }
         });
+        CoreEvents
+                .registerFontChangedEventListener(new IFontChangedEventListener() {
+                    public void onFontChanged(Font newFont) {
+                        MatchesTextArea.this.setFont(newFont);
+                    }
+                });
     }
 
     /**

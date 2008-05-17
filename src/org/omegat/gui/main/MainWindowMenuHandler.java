@@ -32,12 +32,9 @@ import java.io.IOException;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.swing.undo.CannotRedoException;
-import javax.swing.undo.CannotUndoException;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.CommandThread;
-import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.threads.DialogThread;
 import org.omegat.filters2.TranslationException;
@@ -51,7 +48,6 @@ import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.search.SearchWindow;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -461,25 +457,10 @@ public class MainWindowMenuHandler {
      * text (in main window) and for match and glossary windows.
      */
     public void optionsFontSelectionMenuItemActionPerformed() {
-        FontSelectionDialog dlg = new FontSelectionDialog(mainWindow, mainWindow.m_font);
+        FontSelectionDialog dlg = new FontSelectionDialog(Core.getMainWindow().getApplicationFrame(), Core.getMainWindow().getApplicationFont());
         dlg.setVisible(true);
         if (dlg.getReturnStatus() == FontSelectionDialog.RET_OK_CHANGED) {
-            // fonts have changed
-            // first commit current translation
-            Core.getEditor().commitEntry(false); // part of fix for bug 1409309
-            mainWindow.m_font = dlg.getSelectedFont();
-            synchronized (mainWindow.editor) {
-                mainWindow.editor.setFont(mainWindow.m_font);
-            }
-            mainWindow.matches.setFont(mainWindow.m_font);
-            mainWindow.glossary.setFont(mainWindow.m_font);
-            Core.getTagValidation().setFont(mainWindow.m_font);
-            if (mainWindow.m_projWin != null)
-                mainWindow.m_projWin.setFont(mainWindow.m_font);
-
-            Preferences.setPreference(OConsts.TF_SRC_FONT_NAME, mainWindow.m_font.getName());
-            Preferences.setPreference(OConsts.TF_SRC_FONT_SIZE, mainWindow.m_font.getSize());
-            Core.getEditor().activateEntry();
+            mainWindow.setApplicationFont(dlg.getSelectedFont());           
         }
     }
 

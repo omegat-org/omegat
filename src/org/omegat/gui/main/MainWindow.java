@@ -57,7 +57,9 @@ import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.gui.search.SearchWindow;
 import org.omegat.util.LFileCopy;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.WikiGet;
 import org.omegat.util.gui.OmegaTFileChooser;
@@ -108,6 +110,12 @@ public class MainWindow extends JFrame implements IMainWindow {
         });
 
         MainWindowUI.createMainComponents(this);
+        
+        // load default font from preferences
+        String fontName = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_NAME, OConsts.TF_FONT_DEFAULT);
+        int fontSize = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_SIZE, OConsts.TF_FONT_SIZE_DEFAULT);
+        m_font = new Font(fontName, Font.PLAIN, fontSize);
+        CoreEvents.fireFontChanged(m_font);
 
         getContentPane().add(MainWindowUI.initDocking(this), BorderLayout.CENTER);
 
@@ -135,6 +143,20 @@ public class MainWindow extends JFrame implements IMainWindow {
     public Font getApplicationFont() {
         return m_font;
     }
+    
+    /**
+     * Set new font to application.
+     * 
+     * @param newFont
+     *                new font
+     */
+    protected void setApplicationFont(final Font newFont) {
+        m_font = newFont;
+        Preferences.setPreference(OConsts.TF_SRC_FONT_NAME, newFont.getName());
+        Preferences.setPreference(OConsts.TF_SRC_FONT_SIZE, newFont.getSize());
+
+        CoreEvents.fireFontChanged(newFont);
+    }
 
     /**
      * Some additional actions to initialize UI,
@@ -145,7 +167,6 @@ public class MainWindow extends JFrame implements IMainWindow {
         setIconImage(ResourcesUtil.getIcon("/org/omegat/gui/resources/OmegaT_small.gif").getImage());
 
         m_projWin = new ProjectFrame(this);
-        m_projWin.setFont(m_font);
 
         statusLabel.setText(new String()+' ');
         
@@ -396,7 +417,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     }
     
     /** The font for main window (source and target text) and for match and glossary windows */
-    Font m_font;
+    private Font m_font;
     
     ProjectFrame m_projWin;
     public ProjectFrame getProjectFrame()

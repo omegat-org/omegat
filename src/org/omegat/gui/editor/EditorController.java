@@ -27,6 +27,7 @@
 
 package org.omegat.gui.editor;
 
+import java.awt.Font;
 import java.util.List;
 import java.util.Locale;
 
@@ -43,6 +44,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IEntryEventListener;
+import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.gui.main.DockableScrollPane;
@@ -148,6 +150,17 @@ public class EditorController implements IEditor {
                 updateState();
             }
         });
+        
+        CoreEvents
+                .registerFontChangedEventListener(new IFontChangedEventListener() {
+                    public void onFontChanged(Font newFont) {
+                        // fonts have changed
+                        // first commit current translation
+                        commitEntry(false); // part of fix for bug 1409309
+                        editor.setFont(newFont);
+                        activateEntry();
+                    }
+                });
     }
     
     private void updateState() {

@@ -46,8 +46,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
-import org.omegat.core.CoreEvents;
 import org.omegat.gui.editor.EditorTextArea;
+import org.omegat.gui.filelist.ProjectFrame;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.util.OConsts;
@@ -78,10 +78,16 @@ public class MainWindowUI {
     /**
      * Create main UI panels.
      */
-    public static void createMainComponents(final MainWindow mainWindow) {
+    public static void createMainComponents(final MainWindow mainWindow, final Font font) {
         mainWindow.editor = new EditorTextArea(mainWindow);
         mainWindow.matches = new MatchesTextArea(mainWindow);
         mainWindow.glossary = new GlossaryTextArea();
+        mainWindow.m_projWin = new ProjectFrame(mainWindow);
+        
+        mainWindow.editor.setFont(font);
+        mainWindow.matches.setFont(font);
+        mainWindow.matches.setFont(font);
+        mainWindow.m_projWin.setFont(font);
     }
 
     /**

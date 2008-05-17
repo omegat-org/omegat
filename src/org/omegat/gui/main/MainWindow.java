@@ -108,7 +108,12 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
         });
 
-        MainWindowUI.createMainComponents(this);
+        // load default font from preferences
+        String fontName = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_NAME, OConsts.TF_FONT_DEFAULT);
+        int fontSize = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_SIZE, OConsts.TF_FONT_SIZE_DEFAULT);
+        m_font = new Font(fontName, Font.PLAIN, fontSize);
+        
+        MainWindowUI.createMainComponents(this, m_font);
         
         getContentPane().add(MainWindowUI.initDocking(this), BorderLayout.CENTER);
 
@@ -124,12 +129,6 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
         });
         updateTitle();
-
-        // load default font from preferences
-        String fontName = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_NAME, OConsts.TF_FONT_DEFAULT);
-        int fontSize = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_SIZE, OConsts.TF_FONT_SIZE_DEFAULT);
-        m_font = new Font(fontName, Font.PLAIN, fontSize);
-        CoreEvents.fireFontChanged(m_font);
     }
     
     /**
@@ -167,8 +166,6 @@ public class MainWindow extends JFrame implements IMainWindow {
     private void additionalUIInit()
     {        
         setIconImage(ResourcesUtil.getIcon("/org/omegat/gui/resources/OmegaT_small.gif").getImage());
-
-        m_projWin = new ProjectFrame(this);
 
         statusLabel.setText(new String()+' ');
         

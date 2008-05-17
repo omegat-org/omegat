@@ -231,11 +231,6 @@ public class ProjectFrame extends JFrame {
                 .registerFontChangedEventListener(new IFontChangedEventListener() {
                     public void onFontChanged(Font newFont) {
                         ProjectFrame.this.setFont(newFont);
-                        tableFiles.setFont(newFont);
-                        tableTotal.setFont(new Font(newFont.getName(),
-                                Font.BOLD, newFont.getSize()));
-                        tableFiles.setRowHeight(newFont.getSize() + LINE_SPACING);
-                        tableTotal.setRowHeight(newFont.getSize() + LINE_SPACING);
                     }
                 });
 
@@ -253,6 +248,16 @@ public class ProjectFrame extends JFrame {
                 }
             }
         });
+    }
+    
+    @Override
+    public void setFont(Font f) {
+        super.setFont(f);
+
+        tableFiles.setFont(f);
+        tableTotal.setFont(new Font(f.getName(), Font.BOLD, f.getSize()));
+        tableFiles.setRowHeight(f.getSize() + LINE_SPACING);
+        tableTotal.setRowHeight(f.getSize() + LINE_SPACING);
     }
 
     /**

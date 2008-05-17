@@ -160,4 +160,6 @@ public interface IEditor {
     void undo();
     
     void redo();
+    
+    String getSelectedText();
 }

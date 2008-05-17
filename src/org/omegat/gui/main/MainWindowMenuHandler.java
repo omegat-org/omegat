@@ -235,15 +235,13 @@ public class MainWindowMenuHandler {
         if (!mainWindow.isProjectLoaded())
             return;
 
-        synchronized (mainWindow.editor) {
-            String selection = mainWindow.editor.getSelectedText();
-            if (selection != null)
-                selection.trim();
+        String selection = Core.getEditor().getSelectedText();
+        if (selection != null)
+            selection.trim();
 
-            SearchWindow search = new SearchWindow(mainWindow, selection);
-            search.setVisible(true);
-            mainWindow.addSearchWindow(search);
-        }
+        SearchWindow search = new SearchWindow(mainWindow, selection);
+        search.setVisible(true);
+        mainWindow.addSearchWindow(search);
     }
 
     /** Set active match to #1. */
@@ -305,12 +303,9 @@ public class MainWindowMenuHandler {
      * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public void gotoSegmentMenuItemActionPerformed() {
-        synchronized (mainWindow) {
             // Create a dialog for input
             final JOptionPane input = new JOptionPane(OStrings.getString("MW_PROMPT_SEG_NR_MSG"),
                     JOptionPane.PLAIN_MESSAGE, JOptionPane.OK_CANCEL_OPTION); // create
-            // option
-            // pane
             input.setWantsInput(true); // make it require input
             final JDialog dialog = new JDialog(mainWindow, OStrings.getString("MW_PROMPT_SEG_NR_TITLE"), true); // create
             // dialog
@@ -383,7 +378,7 @@ public class MainWindowMenuHandler {
 
             // Show the input dialog
             dialog.pack(); // make it look good
-            dialog.setLocationRelativeTo(mainWindow); // center it on the main
+            dialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame()); // center it on the main
             // window
             dialog.setVisible(true); // show it
 
@@ -398,7 +393,6 @@ public class MainWindowMenuHandler {
                 } catch (NumberFormatException e) {
                 }
             }
-        }
     }
 
     public void gotoHistoryBackMenuItemActionPerformed() {

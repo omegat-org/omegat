@@ -790,6 +790,8 @@ public class EditorController implements IEditor {
     }
 
     public void gotoEntry(final int entryNum) {
+        UIThreadsUtil.mustBeSwingThread();
+        
         synchronized (mw) {
             if (!mw.isProjectLoaded())
                 return;
@@ -1240,5 +1242,13 @@ public class EditorController implements IEditor {
             }
         } catch (CannotRedoException cue) {
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getSelectedText() {
+        UIThreadsUtil.mustBeSwingThread();
+        return editor.getSelectedText();
     }
 }

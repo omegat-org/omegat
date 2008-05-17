@@ -27,6 +27,7 @@ package org.omegat.util;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -389,6 +390,9 @@ public class Preferences
             // unsupported encoding - forget about it
             Log.logErrorRB("PM_UNSUPPORTED_ENCODING"); // NOI18N
             Log.log(e3);
+        }
+        catch (FileNotFoundException ex) {
+        	// there is no config file yet
         }
         catch (IOException e4)
         {

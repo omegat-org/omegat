@@ -94,7 +94,7 @@ import org.openide.awt.Mnemonics;
 public class ProjectFrame extends JFrame {
 
     private static final Color CURRENT_FILE_COLOR = new Color(0xC8DDF2);
-    private static final int LINE_SPACING = 16;
+    private static final int LINE_SPACING = 6;
 
     private JTable tableFiles, tableTotal;
     private AbstractTableModel modelFiles, modelTotal;
@@ -234,8 +234,8 @@ public class ProjectFrame extends JFrame {
                         tableFiles.setFont(newFont);
                         tableTotal.setFont(new Font(newFont.getName(),
                                 Font.BOLD, newFont.getSize()));
-                        tableFiles.setRowHeight(newFont.getSize() * 2);
-                        tableTotal.setRowHeight(newFont.getSize() * 2);
+                        tableFiles.setRowHeight(newFont.getSize() + LINE_SPACING);
+                        tableTotal.setRowHeight(newFont.getSize() + LINE_SPACING);
                     }
                 });
 
@@ -356,7 +356,7 @@ public class ProjectFrame extends JFrame {
         result.setSelectionForeground(result.getForeground());
 
         TableColumnModel columns = new DefaultTableColumnModel();
-        TableColumn cFile = new TableColumn(0, 200);
+        TableColumn cFile = new TableColumn(0, 300);
         cFile.setHeaderValue(OStrings.getString("PF_FILENAME"));
         cFile.setCellRenderer(new CustomRenderer(SwingConstants.LEFT, null,
                 true));
@@ -412,8 +412,8 @@ public class ProjectFrame extends JFrame {
         result.setModel(modelTotal);
 
         TableColumnModel columns = new DefaultTableColumnModel();
-        TableColumn cFile = new TableColumn(0, 200);
-        cFile.setCellRenderer(new CustomRenderer(SwingConstants.RIGHT, null,
+        TableColumn cFile = new TableColumn(0, 300);
+        cFile.setCellRenderer(new CustomRenderer(SwingConstants.LEFT, null,
                 false));
         TableColumn cCount = new TableColumn(1, 50);
         cCount.setCellRenderer(new CustomRenderer(SwingConstants.RIGHT, ",##0",

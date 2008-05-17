@@ -85,7 +85,6 @@ public class MainWindow extends JFrame implements IMainWindow {
     /** Creates new form MainWindow */
     public MainWindow()
     {
-        m_searches = new HashSet<SearchWindow>();
         menu = new MainWindowMenu(this, new MainWindowMenuHandler(this));
 
         setJMenuBar(menu.initComponents());
@@ -125,6 +124,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
                 updateTitle();
+                if (eventType==PROJECT_CHANGE_TYPE.CLOSE) {
+                    closeSearchWindows();
+                }
             }
         });
         updateTitle();
@@ -171,7 +173,6 @@ public class MainWindow extends JFrame implements IMainWindow {
         statusLabel.setText(new String()+' ');
         
         MainWindowUI.loadScreenLayout(this);
-        uiUpdateOnProjectClose();
     }
 
     /**
@@ -233,14 +234,27 @@ public class MainWindow extends JFrame implements IMainWindow {
         }
     }
     
-    /** Updates UI (enables/disables menu items) upon <b>closing</b> project */
-    private void uiUpdateOnProjectClose()
-    {
-        // dispose other windows
-        for (SearchWindow sw : m_searches) {
-            sw.dispose();
+    protected void addSearchWindow(SearchWindow newSearchWindow) {
+        synchronized (m_searches) {
+            m_searches.add(newSearchWindow);
         }
-        m_searches.clear();
+    }
+    
+
+    public void removeSearchWindow(SearchWindow searchWindow) {
+        synchronized (m_searches) {
+            m_searches.remove(searchWindow);
+        }
+    }
+    
+    private void closeSearchWindows() {
+        synchronized (m_searches) {
+            // dispose other windows
+            for (SearchWindow sw : m_searches) {
+                sw.dispose();
+            }
+            m_searches.clear();
+        }
     }
         
     /**
@@ -324,10 +338,6 @@ public class MainWindow extends JFrame implements IMainWindow {
         }
     }
     
-    public void searchWindowClosed(SearchWindow searchWindow) {
-        m_searches.remove(searchWindow);
-    }
-
     /**
      * Show message in status bar.
      * 
@@ -425,7 +435,8 @@ public class MainWindow extends JFrame implements IMainWindow {
         return m_projWin;
     }
     
-    Set<SearchWindow> m_searches; // set of all open search windows
+    /** Set of all open search windows. */
+    private final Set<SearchWindow> m_searches = new HashSet<SearchWindow>();
     
     public boolean m_autoSpellChecking;
     

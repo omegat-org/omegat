@@ -487,7 +487,7 @@ public class SearchWindow extends JFrame
             savePreferences();
 
             // notify main window
-            m_parent.searchWindowClosed(this);
+            m_parent.removeSearchWindow(this);
 
             if (m_thread != null)
                 m_thread.interrupt();

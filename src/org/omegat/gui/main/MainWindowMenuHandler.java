@@ -36,7 +36,6 @@ import javax.swing.JOptionPane;
 import org.omegat.core.Core;
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.spellchecker.ISpellChecker;
-import org.omegat.core.threads.DialogThread;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.dialogs.AboutDialog;
@@ -241,12 +240,9 @@ public class MainWindowMenuHandler {
             if (selection != null)
                 selection.trim();
 
-            // SearchThread srch = new SearchThread(this, selection);
-            // srch.start();
             SearchWindow search = new SearchWindow(mainWindow, selection);
-            DialogThread dt = new DialogThread(search);
-            dt.start();
-            mainWindow.m_searches.add(search);
+            search.setVisible(true);
+            mainWindow.addSearchWindow(search);
         }
     }
 

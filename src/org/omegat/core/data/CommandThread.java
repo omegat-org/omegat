@@ -528,6 +528,7 @@ public class CommandThread implements IDataEngine
         
         projectFilesList.clear();
         
+        int firstEntry = 0;
         for (String filename : srcFileList)
         {
             File file = new File(filename);
@@ -554,7 +555,9 @@ public class CommandThread implements IDataEngine
                 FileInfo fi=new FileInfo();
                 fi.filePath=filepath;
                 fi.firstEntryIndex=getNumberOfSegmentsTotal();
+                fi.size=getNumberOfSegmentsTotal()-firstEntry;
                 projectFilesList.add(fi);
+                firstEntry=getNumberOfSegmentsTotal();
             }
         }
         Core.getMainWindow().showStatusMessage(OStrings.getString("CT_LOAD_SRC_COMPLETE"));

@@ -26,7 +26,6 @@
 
 package org.omegat.gui.filelist;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -34,7 +33,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -53,7 +51,6 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -82,7 +79,9 @@ import org.openide.awt.Mnemonics;
 /**
  * A frame for project, showing all the files of the project.
  * 
- * Synchronized around ProjectFrame when displayed data changed.
+ * Object doesn't have any synchronization, because it just get one object (List
+ * files) from DataEngine. Instead, it check IndexOutOfBoundException when get
+ * data from this object.
  * 
  * @author Keith Godfrey
  * @author Kim Bruning
@@ -92,9 +91,12 @@ import org.openide.awt.Mnemonics;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ProjectFrame extends JFrame {
-    private JTable table;
-    private JLabel totalSegmentLabel, totalUniqueLabel, totalTranslatedLabel;
-    private JLabel totalSegment, totalUnique, totalTranslated;
+
+    private static final Color CURRENT_FILE_COLOR = new Color(0xC8DDF2);
+    private static final int LINE_SPACING = 16;
+
+    private JTable tableFiles, tableTotal;
+    private AbstractTableModel modelFiles, modelTotal;
     private List<IDataEngine.FileInfo> files;
 
     private JButton m_addNewFileButton;
@@ -103,61 +105,42 @@ public class ProjectFrame extends JFrame {
 
     private MainWindow m_parent;
 
-    private static final Color CURRENT_FILE_COLOR = new Color(0xC8DDF2);
-
     public ProjectFrame(MainWindow parent) {
         m_parent = parent;
 
-        table = new JTable();
-        
-        totalSegment = new JLabel();
-        totalUnique = new JLabel();
-        totalTranslated = new JLabel();
-        
-        totalSegmentLabel = new JLabel(OStrings.getString("GUI_PROJECT_TOTAL_SEGMENTS"));
-        totalUniqueLabel = new JLabel(OStrings.getString("GUI_PROJECT_UNIQUE_SEGMENTS"));
-        totalTranslatedLabel = new JLabel(OStrings.getString("GUI_PROJECT_TRANSLATED"));
+        tableFiles = createTableFiles();
+        tableTotal = createTableTotal();
 
         // set the position and size
         initWindowLayout();
 
         Container cp = getContentPane();
+        cp.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = 1;
 
-        JPanel dataPanel = new JPanel(new BorderLayout());
-        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        JScrollPane scroll = new JScrollPane(table,
+        JScrollPane scroll = new JScrollPane(tableFiles,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        dataPanel.add(scroll, BorderLayout.CENTER);
-
-        JPanel totalPanel = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(3, 3, 3, 20);
-        gbc.anchor = GridBagConstraints.EAST;
-
-        gbc.gridx = 0;
-
         gbc.gridy = 0;
-        totalPanel.add(totalSegmentLabel, gbc);
+        gbc.weighty = 1;
+        cp.add(scroll, gbc);
+
         gbc.gridy = 1;
-        totalPanel.add(totalUniqueLabel, gbc);
+        gbc.weighty = 0;
+        JPanel sep = new JPanel();
+        cp.add(sep, gbc);
+
         gbc.gridy = 2;
-        totalPanel.add(totalTranslatedLabel, gbc);
+        gbc.weighty = 0;
+        cp.add(tableTotal, gbc);
 
-        gbc.gridx = 1;
-
-        gbc.gridy = 0;
-        totalPanel.add(totalSegment, gbc);
-        gbc.gridy = 1;
-        totalPanel.add(totalUnique, gbc);
-        gbc.gridy = 2;
-        totalPanel.add(totalTranslated, gbc);
-        totalPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
-
-        dataPanel.add(totalPanel, BorderLayout.SOUTH);
-
-        cp.add(dataPanel, BorderLayout.CENTER);
+        gbc.gridy = 3;
+        gbc.weighty = 0;
+        JPanel sep2 = new JPanel();
+        cp.add(sep2, gbc);
 
         m_addNewFileButton = new JButton();
         org.openide.awt.Mnemonics.setLocalizedText(m_addNewFileButton, OStrings
@@ -201,7 +184,8 @@ public class ProjectFrame extends JFrame {
         bbut.add(m_wikiImportButton);
         bbut.add(m_closeButton);
         bbut.add(Box.createHorizontalGlue());
-        cp.add(bbut, "South"); // NOI18N
+        gbc.gridy = 5;
+        cp.add(bbut, gbc); // NOI18N
 
         Mnemonics.setLocalizedText(m_closeButton, OStrings
                 .getString("BUTTON_CLOSE"));
@@ -227,7 +211,9 @@ public class ProjectFrame extends JFrame {
 
         CoreEvents.registerEntryEventListener(new IEntryEventListener() {
             public void onNewFile(String activeFileName) {
-                table.repaint();
+                tableFiles.repaint();
+                tableTotal.repaint();
+                modelTotal.fireTableDataChanged();
             }
 
             /**
@@ -236,33 +222,24 @@ public class ProjectFrame extends JFrame {
              */
             public void onEntryActivated(StringEntry newEntry) {
                 UIThreadsUtil.mustBeSwingThread();
-                totalTranslated.setText(Integer.toString(CommandThread.core
-                        .getNumberofTranslatedSegments()));
+                modelTotal.fireTableDataChanged();
             }
         });
 
-        table.addMouseListener(new MouseAdapter() {
+        tableFiles.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                gotoFile(table.rowAtPoint(e.getPoint()));
+                gotoFile(tableFiles.rowAtPoint(e.getPoint()));
             }
         });
-        table.addKeyListener(new KeyAdapter() {
+        tableFiles.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-                    gotoFile(table.getSelectedRow());
+                    gotoFile(tableFiles.getSelectedRow());
                 }
             }
         });
-    }
-
-    private JLabel createTotalLabel(final String resourceKey) {
-        JLabel result = new JLabel(OStrings.getString(resourceKey));
-        Font f = result.getFont();
-        f = new Font(f.getName(), Font.BOLD, f.getSize());
-        result.setFont(f);
-        return result;
     }
 
     /**
@@ -320,68 +297,124 @@ public class ProjectFrame extends JFrame {
     }
 
     /**
-     * Initialize table columns.
-     */
-    private void setupTableColumns() {
-        TableColumnModel columns = new DefaultTableColumnModel();
-        TableColumn cFile = new TableColumn(0, 200);
-        cFile.setHeaderValue(OStrings.getString("PF_FILENAME"));
-        cFile.setCellRenderer(new ColorRenderer());
-        TableColumn cCount = new TableColumn(1, 50);
-        cCount.setHeaderValue(OStrings.getString("PF_NUM_SEGMENTS"));
-        cCount.setCellRenderer(new NumberRenderer());
-        columns.addColumn(cFile);
-        columns.addColumn(cCount);
-        table.setColumnModel(columns);
-    }
-
-    /**
      * Builds the table which lists all the project files.
      */
     public void buildDisplay() {
         UIThreadsUtil.mustBeSwingThread();
 
-        synchronized (this) {
-            files = Core.getDataEngine().getProjectFiles();
-            int firstEntry = 1;
-            int entriesUpToNow = 0;
-            for (IDataEngine.FileInfo fi : Core.getDataEngine()
-                    .getProjectFiles()) {
-                entriesUpToNow = fi.firstEntryIndex;
-                fi.size = 1 + entriesUpToNow - firstEntry;
-                firstEntry = entriesUpToNow + 1;
-            }
-            table.setModel(new AbstractTableModel() {
-                public Object getValueAt(int rowIndex, int columnIndex) {
-                    IDataEngine.FileInfo fi = files.get(rowIndex);
-                    switch (columnIndex) {
-                    case 0:
-                        return fi.filePath;
-                    case 1:
-                        return fi.size;
-                    default:
-                        return null;
-                    }
-                }
-
-                public int getColumnCount() {
-                    return 2;
-                }
-
-                public int getRowCount() {
-                    return files.size();
-                }
-            });
-            setupTableColumns();
-        }
-        totalSegment.setText(Integer.toString(CommandThread.core
-                .getNumberOfSegmentsTotal()));
-        totalUnique.setText(Integer.toString(CommandThread.core
-                .getNumberOfUniqueSegments()));
-        totalTranslated.setText(Integer.toString(CommandThread.core
-                .getNumberofTranslatedSegments()));
+        files = Core.getDataEngine().getProjectFiles();
+        modelFiles.fireTableDataChanged();
 
         uiUpdateImportButtonStatus();
+    }
+
+    private JTable createTableFiles() {
+        final JTable result = new JTable();
+        modelFiles = new AbstractTableModel() {
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                IDataEngine.FileInfo fi;
+                try {
+                    fi = files.get(rowIndex);
+                } catch (IndexOutOfBoundsException ex) {
+                    // data changed
+                    return null;
+                }
+                switch (columnIndex) {
+                case 0:
+                    return fi.filePath;
+                case 1:
+                    return fi.size;
+                default:
+                    return null;
+                }
+            }
+
+            public int getColumnCount() {
+                return 2;
+            }
+
+            public int getRowCount() {
+                return files.size();
+            }
+        };
+        result.setModel(modelFiles);
+
+        result.setSelectionBackground(result.getBackground());
+        result.setSelectionForeground(result.getForeground());
+
+        TableColumnModel columns = new DefaultTableColumnModel();
+        TableColumn cFile = new TableColumn(0, 200);
+        cFile.setHeaderValue(OStrings.getString("PF_FILENAME"));
+        cFile.setCellRenderer(new CustomRenderer(SwingConstants.LEFT, null,
+                true));
+        TableColumn cCount = new TableColumn(1, 50);
+        cCount.setHeaderValue(OStrings.getString("PF_NUM_SEGMENTS"));
+        cCount.setCellRenderer(new CustomRenderer(SwingConstants.RIGHT, ",##0",
+                true));
+        columns.addColumn(cFile);
+        columns.addColumn(cCount);
+        result.setColumnModel(columns);
+
+        result.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        return result;
+    }
+
+    private JTable createTableTotal() {
+        final JTable result = new JTable();
+        modelTotal = new AbstractTableModel() {
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                if (columnIndex == 0) {
+                    switch (rowIndex) {
+                    case 0:
+                        return OStrings.getString("GUI_PROJECT_TOTAL_SEGMENTS");
+                    case 1:
+                        return OStrings
+                                .getString("GUI_PROJECT_UNIQUE_SEGMENTS");
+                    case 2:
+                        return OStrings.getString("GUI_PROJECT_TRANSLATED");
+                    }
+                } else {
+                    switch (rowIndex) {
+                    case 0:
+                        return CommandThread.core.getNumberOfSegmentsTotal();
+                    case 1:
+                        return CommandThread.core.getNumberOfUniqueSegments();
+                    case 2:
+                        return CommandThread.core
+                                .getNumberofTranslatedSegments();
+                    }
+                }
+                return null;
+            }
+
+            public int getColumnCount() {
+                return 2;
+            }
+
+            public int getRowCount() {
+                return 3;
+            }
+        };
+        result.setModel(modelTotal);
+
+        TableColumnModel columns = new DefaultTableColumnModel();
+        TableColumn cFile = new TableColumn(0, 200);
+        cFile.setCellRenderer(new CustomRenderer(SwingConstants.RIGHT, null,
+                false));
+        TableColumn cCount = new TableColumn(1, 50);
+        cCount.setCellRenderer(new CustomRenderer(SwingConstants.RIGHT, ",##0",
+                false));
+        columns.addColumn(cFile);
+        columns.addColumn(cCount);
+        result.setColumnModel(columns);
+
+        result.setEnabled(false);
+        // result.setShowGrid(false);
+
+        result.setBorder(BorderFactory.createEmptyBorder(50, 5, 10, 5));
+
+        return result;
     }
 
     /**
@@ -407,71 +440,73 @@ public class ProjectFrame extends JFrame {
     private void gotoFile(int row) {
         int entryIndex;
 
-        synchronized (this) {
-            if (row < 0 || row > files.size()) {
-                return;
-            }
-            IDataEngine.FileInfo fi = files.get(row);
-            entryIndex = fi.firstEntryIndex - fi.size + 1;
+        IDataEngine.FileInfo fi;
+        try {
+            fi = files.get(row);
+        } catch (IndexOutOfBoundsException ex) {
+            // data changed
+            return;
         }
+        entryIndex = fi.firstEntryIndex - fi.size + 1;
         Core.getEditor().gotoEntry(entryIndex);
     }
 
     /** Call this to set OmegaT-wide font for this window. */
     public void setFont(Font f) {
         super.setFont(f);
-        table.setFont(f);
-        table.setRowHeight(f.getSize() + 2);
-        
-        Font bold=new Font(f.getName(), Font.BOLD, f.getSize());
-        totalSegment.setFont(bold);
-        totalUnique.setFont(bold);
-        totalTranslated.setFont(bold);
-        totalSegmentLabel.setFont(bold);
-        totalUniqueLabel.setFont(bold);
-        totalTranslatedLabel.setFont(bold);
+        tableFiles.setFont(f);
+        tableTotal.setFont(new Font(f.getName(), Font.BOLD, f.getSize()));
+        tableFiles.setRowHeight(f.getSize() + LINE_SPACING);
+        tableTotal.setRowHeight(f.getSize() + LINE_SPACING);
     }
 
     /**
-     * Renderer for display current file in different color.
+     * Render for table cells.
      */
-    private class ColorRenderer extends DefaultTableCellRenderer {
+    private class CustomRenderer extends DefaultTableCellRenderer {
+        protected DecimalFormat pattern;
+        private boolean showCurrentFile;
+
+        public CustomRenderer(final int alignment, final String decimalPattern,
+                final boolean showCurrentFile) {
+            setHorizontalAlignment(alignment);
+            this.showCurrentFile = showCurrentFile;
+            if (decimalPattern != null) {
+                pattern = new DecimalFormat(decimalPattern);
+            }
+        }
+
+        protected void setValue(Object value) {
+            if (pattern != null) {
+                super.setValue(pattern.format((Number) value));
+            } else {
+                super.setValue(value);
+            }
+        }
+
         @Override
         public Component getTableCellRendererComponent(JTable table,
                 Object value, boolean isSelected, boolean hasFocus, int row,
                 int column) {
             Component result = super.getTableCellRendererComponent(table,
                     value, isSelected, hasFocus, row, column);
-
-            IDataEngine.FileInfo fi;
-            synchronized (ProjectFrame.this) {
-                fi = files.get(row);
-            }
-            if (!isSelected) {
-                if (fi.filePath.equals(Core.getEditor().getCurrentFile())) {
-                    result.setBackground(CURRENT_FILE_COLOR);
-                } else {
-                    result.setBackground(table.getBackground());
+            if (showCurrentFile) {
+                IDataEngine.FileInfo fi;
+                try {
+                    fi = files.get(row);
+                } catch (IndexOutOfBoundsException ex) {
+                    // data changed
+                    fi = null;
                 }
-            } else {
-                result.setBackground(table.getSelectionBackground());
+                result.setBackground(table.getBackground());
+                if (fi != null
+                        && fi.filePath
+                                .equals(Core.getEditor().getCurrentFile())) {
+                    result.setBackground(CURRENT_FILE_COLOR);
+
+                }
             }
             return result;
-        }
-    }
-
-    /**
-     * Render for display right-aligned numbers.
-     */
-    private class NumberRenderer extends ColorRenderer {
-        protected DecimalFormat pattern = new DecimalFormat(",##0");
-
-        public NumberRenderer() {
-            setHorizontalAlignment(SwingConstants.RIGHT);
-        }
-
-        protected void setValue(Object value) {
-            super.setValue(pattern.format(value));
         }
     }
 }

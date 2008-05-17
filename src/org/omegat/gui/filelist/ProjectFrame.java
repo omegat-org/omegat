@@ -234,10 +234,8 @@ public class ProjectFrame extends JFrame {
                         tableFiles.setFont(newFont);
                         tableTotal.setFont(new Font(newFont.getName(),
                                 Font.BOLD, newFont.getSize()));
-                        tableFiles.setRowHeight(newFont.getSize()
-                                + LINE_SPACING);
-                        tableTotal.setRowHeight(newFont.getSize()
-                                + LINE_SPACING);
+                        tableFiles.setRowHeight(newFont.getSize() * 2);
+                        tableTotal.setRowHeight(newFont.getSize() * 2);
                     }
                 });
 

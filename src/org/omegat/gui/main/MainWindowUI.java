@@ -86,7 +86,7 @@ public class MainWindowUI {
         
         mainWindow.editor.setFont(font);
         mainWindow.matches.setFont(font);
-        mainWindow.matches.setFont(font);
+        mainWindow.glossary.setFont(font);
         mainWindow.m_projWin.setFont(font);
     }
 

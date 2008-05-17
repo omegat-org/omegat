@@ -27,10 +27,14 @@
 
 package org.omegat.gui.editor;
 
+import java.awt.Component;
 import java.awt.Font;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
@@ -49,7 +53,6 @@ import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
-import org.omegat.gui.main.MainWindowUI;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -81,6 +84,7 @@ public class EditorController implements IEditor {
     private final int IS_NOT_TRANSLATED = 2;
 
     private final EditorTextArea editor;
+    private JTextPane introPane;
     protected final MainWindow mw;
 
     private SourceTextEntry m_curEntry;
@@ -163,6 +167,10 @@ public class EditorController implements IEditor {
             public void onEntryActivated(StringEntry newEntry) {
             }
         });
+        
+        
+        loadIntro();
+        
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 updateState(SHOW_TYPE.INTRO);
@@ -184,19 +192,20 @@ public class EditorController implements IEditor {
     private void updateState(SHOW_TYPE showType) {
         UIThreadsUtil.mustBeSwingThread();
 
+        Component data;
+        String title;
+
         if (showType == SHOW_TYPE.INTRO
                 || !Core.getDataEngine().isProjectLoaded()) {
-            MainWindowUI.loadInstantStart(pane, editor);
+            data = introPane;
+            title = OStrings.getString("DOCKING_INSTANT_START_TITLE");
+
             pane.getViewport().getView().requestFocus();
         } else {
             String file = getCurrentFile();
-            String title = StaticUtils.format(OStrings
+            title = StaticUtils.format(OStrings
                     .getString("GUI_SUBWINDOWTITLE_Editor"), file);
-            pane.setName(title);
-            if (pane.getViewport().getView() != editor) {
-                pane.setViewportView(editor);
-                editor.requestFocus();
-            }
+            data = editor;
             if (showType == SHOW_TYPE.FIRST_ENTRY) {
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
@@ -208,8 +217,13 @@ public class EditorController implements IEditor {
                     }
                 });
             }
-            editor.setEditable(true);
         }
+
+        pane.setName(title);
+        if (pane.getViewport().getView() != data) {
+            pane.setViewportView(data);
+        }
+        data.requestFocus();
     }
 
     /**
@@ -227,15 +241,6 @@ public class EditorController implements IEditor {
         return fullName.substring(CommandThread.core.sourceRoot().length());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void showIntoduction() {
-        UIThreadsUtil.mustBeSwingThread();
-
-        editor.setText(OStrings.getString("TF_INTRO_MESSAGE"));
-    }
-    
     /**
      * Displays all segments in current document.
      * <p>
@@ -1319,5 +1324,53 @@ public class EditorController implements IEditor {
         UIThreadsUtil.mustBeSwingThread();
         
         return editor.getSelectedText();
+    }
+
+    /** Loads Instant start article */
+    private void loadIntro() {
+        try {
+            String language = detectInstantStartLanguage();
+            String filepath = StaticUtils.installDir() + File.separator
+                    + OConsts.HELP_DIR + File.separator + language
+                    + File.separator + OConsts.HELP_INSTANT_START;
+            introPane = new JTextPane();
+            introPane.setEditable(false);
+            introPane.setPage("file:///" + filepath);
+        } catch (IOException e) {
+            // editorScroller.setViewportView(editor);
+        }
+    }
+
+    /**
+     * Detects the language of the instant start guide (checks if present in
+     * default locale's language).
+     * 
+     * If there is no instant start guide in the default locale's language, "en"
+     * (English) is returned, otherwise the acronym for the default locale's
+     * language.
+     * 
+     * @author Henry Pijffers (henry.pijffers@saxnot.com)
+     */
+    private String detectInstantStartLanguage() {
+        // Get the system language and country
+        String language = Locale.getDefault().getLanguage().toLowerCase();
+        String country = Locale.getDefault().getCountry().toUpperCase();
+
+        // Check if there's a translation for the full locale (lang + country)
+        File isg = new File(StaticUtils.installDir() + File.separator
+                + OConsts.HELP_DIR + File.separator + language + "_" + country
+                + File.separator + OConsts.HELP_INSTANT_START);
+        if (isg.exists())
+            return language + "_" + country;
+
+        // Check if there's a translation for the language only
+        isg = new File(StaticUtils.installDir() + File.separator
+                + OConsts.HELP_DIR + File.separator + language + File.separator
+                + OConsts.HELP_INSTANT_START);
+        if (isg.exists())
+            return language;
+
+        // Default to English, if no translation exists
+        return "en";
     }
 }

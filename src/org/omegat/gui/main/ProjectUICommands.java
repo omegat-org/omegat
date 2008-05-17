@@ -176,7 +176,6 @@ public class ProjectUICommands {
 
             protected void done() {
                 Core.getMainWindow().clear();                
-                Core.getEditor().showIntoduction();
                                 
                 Core.getDataEngine().closeProject();
                // showProgressMessage(OStrings.getString("MW_PROGRESS_DEFAULT"));

@@ -44,13 +44,6 @@ public interface IEditor {
     }
 
     /**
-     * Show introduction text.
-     * 
-     * Must be called only from UI thread.
-     */
-    void showIntoduction();
-
-    /**
      * Get current file name which opened in editor.
      * 
      * Can be called from any threads.

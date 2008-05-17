@@ -99,18 +99,6 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
     {
         undoManager.die();
     }
-    /** Orders to undo a single edit. */
-    public synchronized void undoOneEdit()
-    {
-        if (undoManager.canUndo())
-            undoManager.undo();
-    }
-    /** Orders to redo a single edit. */
-    public synchronized void redoOneEdit()
-    {
-        if (undoManager.canRedo())
-            undoManager.redo();
-    }
     
     ////////////////////////////////////////////////////////////////////////
     // Mouse reaction

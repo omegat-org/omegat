@@ -35,6 +35,8 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Utilities;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -1199,5 +1201,31 @@ public class EditorController implements IEditor {
      */
     public EditorSettings getSettings() {
         return settings;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void undo() {
+        UIThreadsUtil.mustBeSwingThread();
+        try {
+            if (editor.undoManager.canUndo()) {
+                editor.undoManager.undo();
+            }
+        } catch (CannotUndoException cue) {
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void redo() {
+        UIThreadsUtil.mustBeSwingThread();
+        try {
+            if (editor.undoManager.canRedo()) {
+                editor.undoManager.redo();
+            }
+        } catch (CannotRedoException cue) {
+        }
     }
 }

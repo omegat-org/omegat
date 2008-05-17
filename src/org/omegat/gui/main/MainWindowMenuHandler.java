@@ -200,21 +200,11 @@ public class MainWindowMenuHandler {
     }
 
     public void editUndoMenuItemActionPerformed() {
-        try {
-            synchronized (mainWindow.editor) {
-                mainWindow.editor.undoOneEdit();
-            }
-        } catch (CannotUndoException cue) {
-        }
+        Core.getEditor().undo();
     }
 
     public void editRedoMenuItemActionPerformed() {
-        try {
-            synchronized (mainWindow.editor) {
-                mainWindow.editor.redoOneEdit();
-            }
-        } catch (CannotRedoException cue) {
-        }
+        Core.getEditor().redo();
     }
 
     public void editOverwriteTranslationMenuItemActionPerformed() {
@@ -230,22 +220,20 @@ public class MainWindowMenuHandler {
      * at cursor position
      */
     public void editOverwriteSourceMenuItemActionPerformed() {
-        synchronized (mainWindow) {
-            if (!mainWindow.isProjectLoaded())
-                return;
+        if (!mainWindow.isProjectLoaded())
+            return;
 
-            Core.getEditor().replaceEditText(Core.getEditor().getCurrentEntry().getSrcText());
-        }
+        Core.getEditor().replaceEditText(
+                Core.getEditor().getCurrentEntry().getSrcText());
     }
 
     /** inserts the source text of a segment at cursor position */
     public void editInsertSourceMenuItemActionPerformed() {
-        synchronized (mainWindow) {
-            if (!mainWindow.isProjectLoaded())
-                return;
+        if (!mainWindow.isProjectLoaded())
+            return;
 
-            Core.getEditor().insertText(Core.getEditor().getCurrentEntry().getSrcText());
-        }
+        Core.getEditor().insertText(
+                Core.getEditor().getCurrentEntry().getSrcText());
     }
 
     public void editFindInProjectMenuItemActionPerformed() {
@@ -292,27 +280,19 @@ public class MainWindowMenuHandler {
     }
 
     public void cycleSwitchCaseMenuItemActionPerformed() {
-        synchronized (mainWindow.editor) {
-            Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.CYCLE);
-        }
+        Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.CYCLE);
     }
 
     public void titleCaseMenuItemActionPerformed() {
-        synchronized (mainWindow.editor) {
-            Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.TITLE);
-        }
+        Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.TITLE);
     }
 
     public void upperCaseMenuItemActionPerformed() {
-        synchronized (mainWindow.editor) {
-            Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.UPPER);
-        }
+        Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.UPPER);
     }
 
     public void lowerCaseMenuItemActionPerformed() {
-        synchronized (mainWindow.editor) {
-            Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.LOWER);
-        }
+        Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.LOWER);
     }
 
     public void gotoNextUntranslatedMenuItemActionPerformed() {
@@ -430,15 +410,11 @@ public class MainWindowMenuHandler {
     }
 
     public void gotoHistoryBackMenuItemActionPerformed() {
-        synchronized (mainWindow) {
-            Core.getEditor().gotoHistoryBack();
-        }
+        Core.getEditor().gotoHistoryBack();
     }
 
     public void gotoHistoryForwardMenuItemActionPerformed() {
-        synchronized (mainWindow) {
-            Core.getEditor().gotoHistoryForward();
-        }
+        Core.getEditor().gotoHistoryForward();
     }
 
     public void viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed() {

@@ -156,4 +156,8 @@ public interface IEditor {
 
     /** Get settings instance. */
     EditorSettings getSettings();
+    
+    void undo();
+    
+    void redo();
 }

@@ -42,6 +42,13 @@ import org.omegat.util.Log;
 /**
  * Class which contains all components instances.
  * 
+ * Note about threads synchronization: each component must have only local
+ * synchronization. It mustn't synchronize around other components or some other
+ * objects.
+ * 
+ * Components which works in Swing UI thread can have other synchronization
+ * idea: it can not be synchronized to access to some data which changed only in UI thread.
+ * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class Core {

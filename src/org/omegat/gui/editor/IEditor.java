@@ -45,31 +45,43 @@ public interface IEditor {
 
     /**
      * Show introduction text.
+     * 
+     * Must be called only from UI thread.
      */
     void showIntoduction();
 
     /**
      * Get current file name which opened in editor.
+     * 
+     * Can be called from any threads.
      */
     String getCurrentFile();
 
     /**
      * Get current active entry.
+     * 
+     * Can be called from any threads.
      */
     SourceTextEntry getCurrentEntry();
 
     /**
      * Displays all segments in current document.
+     * 
+     * TODO threads.
      */
     void loadDocument();
 
     /**
      * Activate entry for edit.
+     * 
+     * Must be called only from UI thread.
      */
     void activateEntry();
 
     /**
      * Commits the translation. Translation will be saved.
+     * 
+     * Must be called only from UI thread.
      */
     void commitEntry();
 
@@ -78,21 +90,29 @@ public interface IEditor {
      * 
      * @param forceCommit
      *                If false, the translation will not be saved
+     *                
+     * Must be called only from UI thread.
      */
     void commitEntry(boolean forceCommit);
 
     /**
      * Move to next entry.
+     * 
+     * Must be called only from UI thread.
      */
     void nextEntry();
 
     /**
      * Move to previous entry.
+     * 
+     * Must be called only from UI thread.
      */
     void prevEntry();
 
     /**
      * Move to next untranslated entry.
+     * 
+     * Must be called only from UI thread.
      */
     void nextUntranslatedEntry();
 
@@ -101,11 +121,15 @@ public interface IEditor {
      * 
      * @param entryNum
      *                entry number
+     * 
+     * Must be called only from UI thread.
      */
     void gotoEntry(int entryNum);
 
     /**
      * TODO: change it to setup first entry on the 'onProjectLoaded' event
+     * 
+     * Must be called only from UI thread.
      */
     void setFirstEntry();
 
@@ -115,6 +139,8 @@ public interface IEditor {
      * 
      * @param newCase :
      *                lower, title, upper or cycle
+     *                
+     * Must be called only from UI thread.
      */
     void changeCase(CHANGE_CASE_TO newCase);
 
@@ -133,33 +159,64 @@ public interface IEditor {
      */
     boolean checkCaretForDelete(boolean forward);
 
-    /** replaces the entire edit area with a given text */
+    /**
+     * Replaces the entire edit area with a given text.
+     * 
+     * Must be called only from UI thread.
+     */
     void replaceEditText(String text);
 
-    /** inserts text at the cursor position */
+    /**
+     * Inserts text at the cursor position.
+     * 
+     * Must be called only from UI thread.
+     */
     void insertText(String text);
 
     /**
      * Clear history of moving by segments.
+     * 
+     * Must be called only from UI thread.
      */
     void clearHistory();
 
     /**
      * Go to next segment from history.
+     * 
+     * Must be called only from UI thread.
      */
     void gotoHistoryForward();
 
     /**
      * Go to previous segment from history.
+     * 
+     * Must be called only from UI thread.
      */
     void gotoHistoryBack();
 
     /** Get settings instance. */
     EditorSettings getSettings();
     
+    /**
+     * Undo editing.
+     * 
+     * Must be called only from UI thread.
+     */
     void undo();
     
+    /**
+     * Redo editing.
+     * 
+     * Must be called only from UI thread.
+     */
     void redo();
     
+    /**
+     * Get currently selected text.
+     * 
+     * @return selected text
+     * 
+     * Must be called only from UI thread.
+     */
     String getSelectedText();
 }

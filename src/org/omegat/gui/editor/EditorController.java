@@ -182,10 +182,16 @@ public class EditorController implements IEditor {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public SourceTextEntry getCurrentEntry() {
         return m_curEntry;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public String getCurrentFile() {
         String fullName = CommandThread.core.getSTE(m_curEntryNum).getSrcFile().name;
         return fullName.substring(CommandThread.core.sourceRoot().length());
@@ -196,6 +202,7 @@ public class EditorController implements IEditor {
      */
     public void showIntoduction() {
         UIThreadsUtil.mustBeSwingThread();
+
         editor.setText(OStrings.getString("TF_INTRO_MESSAGE"));
     }
     
@@ -504,6 +511,8 @@ public class EditorController implements IEditor {
      * if appropriate option is set in Workflow options dialog.
      */
     public void commitEntry() {
+        UIThreadsUtil.mustBeSwingThread();
+        
         commitEntry(true);
     }
 
@@ -785,10 +794,14 @@ public class EditorController implements IEditor {
         }
     }
 
+    //TODO: remove it
     public void setFirstEntry() {
         m_curEntryNum = 0;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void gotoEntry(final int entryNum) {
         UIThreadsUtil.mustBeSwingThread();
         
@@ -957,6 +970,8 @@ public class EditorController implements IEditor {
     /**
      * Checks whether the selection & caret is inside editable text, and changes
      * their positions accordingly if not.
+     * 
+     * TODO: make private
      */
     public void checkCaret() {
         synchronized (mw) {
@@ -1006,6 +1021,8 @@ public class EditorController implements IEditor {
      * 
      * @param forward
      * @return true if space is available
+     * 
+     * TODO: make private
      */
     public boolean checkCaretForDelete(final boolean forward) {
         synchronized (mw) {
@@ -1115,8 +1132,12 @@ public class EditorController implements IEditor {
         }
     }
 
-    /** replaces the entire edit area with a given text */
+    /**
+     * {@inheritDoc}
+     */
     public void replaceEditText(final String text) {
+        UIThreadsUtil.mustBeSwingThread();
+        
         synchronized (mw) {
             synchronized (editor) {
                 // build local offsets
@@ -1130,8 +1151,12 @@ public class EditorController implements IEditor {
         }
     }
 
-    /** inserts text at the cursor position */
+    /**
+     * {@inheritDoc}
+     */
     public void insertText(final String text) {
+        UIThreadsUtil.mustBeSwingThread();
+        
         synchronized (mw) {
             synchronized (editor) {
                 //            int pos = editor.getCaretPosition();
@@ -1145,6 +1170,8 @@ public class EditorController implements IEditor {
 
     /**
      * Calculate the position of the start of the current translation
+     * 
+     * TODO: make private
      */
     protected int getTranslationStart() {
         synchronized (mw) {
@@ -1156,6 +1183,8 @@ public class EditorController implements IEditor {
 
     /**
      * Calculcate the position of the end of the current translation
+     * 
+     * TODO: make private
      */
     protected int getTranslationEnd() {
         synchronized (mw) {
@@ -1169,6 +1198,8 @@ public class EditorController implements IEditor {
      * {@inheritDoc}
      */
     public void clearHistory() {
+        UIThreadsUtil.mustBeSwingThread();
+        
         history.clear();
     }
 
@@ -1176,6 +1207,8 @@ public class EditorController implements IEditor {
      * {@inheritDoc}
      */
     public void gotoHistoryBack() {
+        UIThreadsUtil.mustBeSwingThread();
+        
         int prevValue = history.back();
         if (prevValue != -1) {
             gotoEntry(prevValue + 1);
@@ -1186,6 +1219,8 @@ public class EditorController implements IEditor {
      * {@inheritDoc}
      */
     public void gotoHistoryForward() {
+        UIThreadsUtil.mustBeSwingThread();
+        
         int nextValue = history.forward();
         if (nextValue != -1) {
             gotoEntry(nextValue + 1);
@@ -1202,8 +1237,12 @@ public class EditorController implements IEditor {
      *                the keycode, to prevent multiple passes
      * @param full :
      *                if true, the whole segment is checked
+     *                
+     * TODO: make private               
      */
-    public void checkSpelling(final boolean full) {
+    protected void checkSpelling(final boolean full) {
+        UIThreadsUtil.mustBeSwingThread();
+        
         if (!mw.autoSpellCheckingOn())
             return;
         synchronized (editor) {
@@ -1213,6 +1252,8 @@ public class EditorController implements IEditor {
     
     /**
      * {@inheritDoc}
+     * 
+     * TODO
      */
     public EditorSettings getSettings() {
         return settings;
@@ -1223,6 +1264,7 @@ public class EditorController implements IEditor {
      */
     public void undo() {
         UIThreadsUtil.mustBeSwingThread();
+        
         try {
             if (editor.undoManager.canUndo()) {
                 editor.undoManager.undo();
@@ -1236,6 +1278,7 @@ public class EditorController implements IEditor {
      */
     public void redo() {
         UIThreadsUtil.mustBeSwingThread();
+        
         try {
             if (editor.undoManager.canRedo()) {
                 editor.undoManager.redo();
@@ -1249,6 +1292,7 @@ public class EditorController implements IEditor {
      */
     public String getSelectedText() {
         UIThreadsUtil.mustBeSwingThread();
+        
         return editor.getSelectedText();
     }
 }

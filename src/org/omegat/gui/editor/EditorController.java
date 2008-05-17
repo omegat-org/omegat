@@ -141,10 +141,16 @@ public class EditorController implements IEditor {
             public void onEntryActivated(StringEntry newEntry) {
             }
         });
-        updateState();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                updateState();
+            }
+        });
     }
     
     private void updateState() {
+        UIThreadsUtil.mustBeSwingThread();
+        
         if (!Core.getDataEngine().isProjectLoaded()) {
             MainWindowUI.loadInstantStart(pane, editor);
             pane.getViewport().getView().requestFocus();

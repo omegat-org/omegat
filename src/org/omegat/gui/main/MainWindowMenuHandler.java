@@ -246,27 +246,27 @@ public class MainWindowMenuHandler {
 
     /** Set active match to #1. */
     public void editSelectFuzzy1MenuItemActionPerformed() {
-        mainWindow.matches.setActiveMatch(0);
+        Core.getMatcher().setActiveMatch(0);
     }
 
     /** Set active match to #2. */
     public void editSelectFuzzy2MenuItemActionPerformed() {
-        mainWindow.matches.setActiveMatch(1);
+        Core.getMatcher().setActiveMatch(1);
     }
 
     /** Set active match to #3. */
     public void editSelectFuzzy3MenuItemActionPerformed() {
-        mainWindow.matches.setActiveMatch(2);
+        Core.getMatcher().setActiveMatch(2);
     }
 
     /** Set active match to #4. */
     public void editSelectFuzzy4MenuItemActionPerformed() {
-        mainWindow.matches.setActiveMatch(3);
+        Core.getMatcher().setActiveMatch(3);
     }
 
     /** Set active match to #5. */
     public void editSelectFuzzy5MenuItemActionPerformed() {
-        mainWindow.matches.setActiveMatch(4);
+        Core.getMatcher().setActiveMatch(4);
     }
 
     public void cycleSwitchCaseMenuItemActionPerformed() {

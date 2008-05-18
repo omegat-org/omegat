@@ -33,11 +33,17 @@ import org.omegat.core.matching.NearString;
 public interface IMatcher {
     /**
      * Get selected match.
+     * 
+     * Must be called from UI thread only.
      */
     NearString getActiveMatch();
     
     /**
-     * Get translation of best matched entry, or null if there is no matches.
+     * Set specified mathc as active.
+     * 
+     * @param index new active match
+     * 
+     * Must be called from UI thread only.
      */
-    // String getMatchedTranslation();
+    void setActiveMatch(int index);
 }

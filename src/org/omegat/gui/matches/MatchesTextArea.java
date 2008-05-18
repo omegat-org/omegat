@@ -107,7 +107,9 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
     /**
      * {@inheritDoc}
      */
-    public synchronized NearString getActiveMatch() {
+    public NearString getActiveMatch() {
+        UIThreadsUtil.mustBeSwingThread();
+        
         if (activeMatch < 0 || activeMatch >= matches.size()) {
             return null;
         } else {
@@ -119,7 +121,7 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
      * Sets the list of fuzzy matches to show in the pane. Each element of the list should be an instance of
      * {@link NearString}.
      */
-    protected synchronized void setMatches(final List<NearString> newMatches) {
+    protected void setMatches(final List<NearString> newMatches) {
         UIThreadsUtil.mustBeSwingThread();
 
         activeMatch = -1;
@@ -192,7 +194,7 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
      * Sets the index of an active match. It basically highlights the fuzzy match string selected. (numbers start from
      * 0)
      */
-    public synchronized void setActiveMatch(int activeMatch) {
+    public void setActiveMatch(int activeMatch) {
         UIThreadsUtil.mustBeSwingThread();
 
         if (activeMatch < 0 || activeMatch >= matches.size() || this.activeMatch == activeMatch) {
@@ -242,7 +244,7 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
         });
     }
 
-    private synchronized void onMouseClick(MouseEvent e) {
+    private void onMouseClick(MouseEvent e) {
         // is there anything?
         if (matches == null || matches.isEmpty())
             return;
@@ -277,7 +279,7 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
             JMenuItem item = popup.add(OStrings.getString("MATCHES_INSERT"));
             item.addActionListener(new ActionListener() {
                 // the action: insert this match
-                public synchronized void actionPerformed(ActionEvent e) {
+                public void actionPerformed(ActionEvent e) {
                     setActiveMatch(clicked);
                     mw.doInsertTrans();
                 }
@@ -285,7 +287,7 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
 
             item = popup.add(OStrings.getString("MATCHES_REPLACE"));
             item.addActionListener(new ActionListener() {
-                public synchronized void actionPerformed(ActionEvent e) {
+                public void actionPerformed(ActionEvent e) {
                     setActiveMatch(clicked);
                     mw.doRecycleTrans();
                 }

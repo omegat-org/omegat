@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2008 Didier Briel
+               2008 Didier Briel, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -21,7 +21,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.util;
 
@@ -32,286 +32,239 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.List;
 
+import org.omegat.core.data.ProjectProperties;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.xml.XMLBlock;
 import org.omegat.util.xml.XMLStreamReader;
 
 /**
- * Class that reads project definition file, returns project's properties,
- * and can save projects.
- *
+ * Class that reads and saves project definition file.
+ * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Didier Briel
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class ProjectFileStorage
-{
-	public ProjectFileStorage()
-	{
-		m_reader = new XMLStreamReader();
-		m_reader.killEmptyBlocks();
-		reset();
-	}
+public class ProjectFileStorage {
 
-	public void loadProjectFile(String filename)
-		throws IOException, TranslationException
-	{
-		m_reader.setStream(filename, "UTF-8");									// NOI18N
-		
-		// verify valid project file
-		XMLBlock blk;
-		List<XMLBlock> lst;
+    public static ProjectProperties loadProjectProperties(File projectDir)
+            throws IOException, TranslationException {
+        ProjectProperties result = new ProjectProperties(projectDir);
 
-		// advance to omegat tag
-		if (m_reader.advanceToTag("omegat") == null)					// NOI18N
-			return;
-		
-		// advance to project tag
-		if ((blk=m_reader.advanceToTag("project")) == null)		// NOI18N
-			return;
+        File inFile = new File(projectDir, OConsts.FILE_PROJECT);
 
-		String ver = blk.getAttribute("version");			// NOI18N
-		if (ver != null && !ver.equals(OConsts.PROJ_CUR_VERSION))
-		{
-			throw new TranslationException(
-                    StaticUtils.format(OStrings.getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"), 
-                    new Object[]{ver}));
-		}
-		
-		// if folder is in default locations, name stored as __DEFAULT__
-		m_root = filename.substring(0, 
-					filename.lastIndexOf(File.separator)) + File.separator;
+        XMLStreamReader m_reader = new XMLStreamReader();
+        m_reader.killEmptyBlocks();
+        m_reader.setStream(inFile.getAbsolutePath(), "UTF-8"); // NOI18N
 
-		lst = m_reader.closeBlock(blk);
-		if (lst == null)
-			return;
+        // verify valid project file
+        XMLBlock blk;
+        List<XMLBlock> lst;
 
-		for (int i=0; i<lst.size(); i++)
-		{
-			blk = lst.get(i);
-			if (blk.isClose())
-				continue;
+        // advance to omegat tag
+        if (m_reader.advanceToTag("omegat") == null) // NOI18N
+            return result;
 
-			if (blk.getTagName().equals("target_dir"))							// NOI18N
-			{
-				if (++i >= lst.size())
-					break;
-				blk = lst.get(i);
-				m_target = computeAbsolutePath(blk.getText(), OConsts.DEFAULT_TARGET);
-			}
-			else if (blk.getTagName().equals("source_dir"))						// NOI18N
-			{
-				if (++i >= lst.size())
-					break;
-				blk = lst.get(i);
-				m_source = computeAbsolutePath(blk.getText(), OConsts.DEFAULT_SOURCE);
-			}
-			else if (blk.getTagName().equals("tm_dir"))							// NOI18N
-			{
-				if (++i >= lst.size())
-					break;
-				blk = lst.get(i);
-				m_tm = computeAbsolutePath(blk.getText(), OConsts.DEFAULT_TM);
-			}
-			else if (blk.getTagName().equals("glossary_dir"))					// NOI18N
-			{
-				if (++i >= lst.size())
-					break;
-				blk = lst.get(i);
-				m_glossary = computeAbsolutePath(blk.getText(), OConsts.DEFAULT_GLOSSARY);
-			}
-			else if (blk.getTagName().equals("source_lang"))					// NOI18N
-			{
-				if (++i >= lst.size())
-					break;
-				blk = lst.get(i);
-				if (blk != null)
-					m_sourceLocale = blk.getText();
-			}
-			else if (blk.getTagName().equals("target_lang"))					// NOI18N
-			{
-				if (++i >= lst.size())
-					break;
-				blk = lst.get(i);
-				if (blk != null)
-					m_targetLocale = blk.getText();
-			}
-			else if (blk.getTagName().equals("sentence_seg"))					// NOI18N
-			{
-				if (++i >= lst.size())
-					break;
-				blk = lst.get(i);
-				if (blk != null)
-					m_sentenceSeg = blk.getText();
-			}
-		}
-    }
+        // advance to project tag
+        if ((blk = m_reader.advanceToTag("project")) == null) // NOI18N
+            return result;
 
-    /**
-     * Returns absolute path for any project's folder.
-     * Since 1.6.0 supports relative paths (RFE 1111956).
-     *
-     * @param relativePath relative path from project file.
-     * @param defaultName  default name for such a project's folder, if relativePath is "__DEFAULT__".
-     */
-	private String computeAbsolutePath(String relativePath, String defaultName)
-	{
-		if (OConsts.DEFAULT_FOLDER_MARKER.equals(relativePath))
-			return m_root + defaultName + File.separator;
-		else
-        {
-            try
-            {
-                // check if path starts with a system root
-                boolean startsWithRoot = false;
-                for (File root : File.listRoots()) {
-                    try // Under Windows and Java 1.4, there is an exception if
-                    {   // using getCanonicalPath on a non-existent drive letter
-                        // [1875331] Relative paths not working under Windows/Java 1.4
-                        startsWithRoot = 
-                                relativePath.startsWith(root.getCanonicalPath());
-                    }                    
-                    catch (IOException e)
-                    {
-                        startsWithRoot = false;
-                    }
-                    if (startsWithRoot)
-                        // path starts with a root --> path is already absolute
-                        return new File(relativePath).getCanonicalPath() + File.separator;
-                }
-
-                // path does not start with a system root --> relative to project root
-                return new File(m_root, relativePath).getCanonicalPath() + File.separator;
-            }
-            catch (IOException e)
-            {
-                return relativePath;
-            }
+        String ver = blk.getAttribute("version"); // NOI18N
+        if (ver != null && !ver.equals(OConsts.PROJ_CUR_VERSION)) {
+            throw new TranslationException(StaticUtils.format(OStrings
+                    .getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"),
+                    new Object[] { ver }));
         }
-	}
 
-    /**
-     * Returns relative path for any project's folder.
-     * If absolutePath has default location, returns "__DEFAULT__".
-     *
-     * @param absolutePath absolute path to project folder.
-     * @param defaultName  default name for such a project's folder.
-     * @since 1.6.0
-     */
-	private String computeRelativePath(String absolutePath, String defaultName)
-	{
-        if (absolutePath.equals(m_root + defaultName + File.separator))
-            return OConsts.DEFAULT_FOLDER_MARKER;
-        
-        try
-        {
-            // trying to look two folders up
-            String res = absolutePath;
-            File abs = new File(absolutePath).getCanonicalFile();
-            File root = new File(m_root).getCanonicalFile();
-            String prefix = new String();
-            for (int i=0; i<2; i++)
+        // if folder is in default locations, name stored as __DEFAULT__
+        String m_root = inFile.getParentFile().getAbsolutePath()
+                + File.separator;
+
+        lst = m_reader.closeBlock(blk);
+        if (lst == null)
+            return result;
+
+        for (int i = 0; i < lst.size(); i++) {
+            blk = lst.get(i);
+            if (blk.isClose())
+                continue;
+
+            if (blk.getTagName().equals("target_dir")) // NOI18N
             {
-                // File separator added to prevent "/MyProject EN-FR/"
-                // to be undesrtood as being inside "/MyProject/" [1879571]
-                if ( (abs.getPath()+File.separator).
-                        startsWith(root.getPath()+File.separator) )
-                {
-                    res = prefix + abs.getPath().substring(root.getPath().length());
-                    if (res.startsWith(File.separator))
-                        res = res.substring(1);
+                if (++i >= lst.size())
                     break;
-                }
-                else
-                {
-                    root = root.getParentFile();
-                    prefix+= File.separator + "..";                             // NOI18N
-                }
+                blk = lst.get(i);
+                result.setTargetRoot(computeAbsolutePath(m_root, blk.getText(),
+                        OConsts.DEFAULT_TARGET));
+            } else if (blk.getTagName().equals("source_dir")) // NOI18N
+            {
+                if (++i >= lst.size())
+                    break;
+                blk = lst.get(i);
+                result.setSourceRoot(computeAbsolutePath(m_root, blk.getText(),
+                        OConsts.DEFAULT_SOURCE));
+            } else if (blk.getTagName().equals("tm_dir")) // NOI18N
+            {
+                if (++i >= lst.size())
+                    break;
+                blk = lst.get(i);
+                result.setTMRoot(computeAbsolutePath(m_root, blk.getText(),
+                        OConsts.DEFAULT_TM));
+            } else if (blk.getTagName().equals("glossary_dir")) // NOI18N
+            {
+                if (++i >= lst.size())
+                    break;
+                blk = lst.get(i);
+                result.setGlossaryRoot(computeAbsolutePath(m_root, blk
+                        .getText(), OConsts.DEFAULT_GLOSSARY));
+            } else if (blk.getTagName().equals("source_lang")) // NOI18N
+            {
+                if (++i >= lst.size())
+                    break;
+                blk = lst.get(i);
+                if (blk != null)
+                    result.setSourceLanguage(blk.getText());
+            } else if (blk.getTagName().equals("target_lang")) // NOI18N
+            {
+                if (++i >= lst.size())
+                    break;
+                blk = lst.get(i);
+                if (blk != null)
+                    result.setTargetLanguage(blk.getText());
+            } else if (blk.getTagName().equals("sentence_seg")) // NOI18N
+            {
+                if (++i >= lst.size())
+                    break;
+                blk = lst.get(i);
+                if (blk != null)
+                    result.setSentenceSegmentingEnabled(Boolean
+                            .parseBoolean(blk.getText()));
             }
-            return res.replace(File.separatorChar, '/');
         }
-        catch (IOException e)
-        {
-            return absolutePath.replace(File.separatorChar, '/');
-        }
+
+        return result;
     }
 
     /**
      * Saves project file to disk.
      */
-	public void writeProjectFile(String filename) throws IOException
-	{
-		m_root = filename.substring(0, filename.lastIndexOf(File.separator));
-		m_root += File.separator;
+    public static void writeProjectFile(ProjectProperties props)
+            throws IOException {
+        File outFile = new File(props.getProjectRoot(), OConsts.FILE_PROJECT);
+        String m_root = outFile.getParentFile().getAbsolutePath()
+                + File.separator;
 
-		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(filename), OConsts.UTF8));
-		out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");             // NOI18N
-		out.write("<omegat>\n");                                                // NOI18N
-		out.write("  <project version=\"1.0\">\n");                             // NOI18N
-		out.write("    <source_dir>" +                                          // NOI18N
-                computeRelativePath(m_source, OConsts.DEFAULT_SOURCE) + 
-                "</source_dir>\n");                                             // NOI18N
-		out.write("    <target_dir>" +                                          // NOI18N
-                computeRelativePath(m_target, OConsts.DEFAULT_TARGET) + 
-                "</target_dir>\n");                                             // NOI18N
-		out.write("    <tm_dir>" +                                              // NOI18N
-                computeRelativePath(m_tm, OConsts.DEFAULT_TM) + 
-                "</tm_dir>\n");                                                 // NOI18N
-		out.write("    <glossary_dir>" +                                        // NOI18N
-                computeRelativePath(m_glossary, OConsts.DEFAULT_GLOSSARY) + 
-                "</glossary_dir>\n");                                           // NOI18N
-		out.write("    <source_lang>" + m_sourceLocale + "</source_lang>\n");   // NOI18N
-		out.write("    <target_lang>" + m_targetLocale + "</target_lang>\n");   // NOI18N
-		out.write("    <sentence_seg>" + m_sentenceSeg + "</sentence_seg>\n");  // NOI18N
-		out.write("  </project>\n");                                            // NOI18N
-		out.write("</omegat>\n");                                               // NOI18N
-		out.close();
-	}
-	
-	private void reset()
-	{
-		m_target = "";															// NOI18N
-		m_source = "";															// NOI18N
-		m_tm = "";																// NOI18N
-		m_glossary = "";														// NOI18N
-		m_sourceLocale = "";															// NOI18N
-		m_targetLocale = "";															// NOI18N
-		m_root = "";															// NOI18N
-	}
-	
-	public void	setTarget(String x)		{ m_target = x;		}
-	public void	setSource(String x)		{ m_source = x;		}
-	public void	setTM(String x)			{ m_tm = x;			}
-	public void	setGlossary(String x)	{ m_glossary = x;	}
+        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(outFile), OConsts.UTF8));
+        out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n"); // NOI18N
+        out.write("<omegat>\n"); // NOI18N
+        out.write("  <project version=\"1.0\">\n"); // NOI18N
+        out.write("    <source_dir>" + // NOI18N
+                computeRelativePath(m_root, props.getSourceRoot(),
+                        OConsts.DEFAULT_SOURCE) + "</source_dir>\n"); // NOI18N
+        out.write("    <target_dir>" + // NOI18N
+                computeRelativePath(m_root, props.getTargetRoot(),
+                        OConsts.DEFAULT_TARGET) + "</target_dir>\n"); // NOI18N
+        out.write("    <tm_dir>" + // NOI18N
+                computeRelativePath(m_root, props.getTMRoot(),
+                        OConsts.DEFAULT_TM) + "</tm_dir>\n"); // NOI18N
+        out.write("    <glossary_dir>" + // NOI18N
+                computeRelativePath(m_root, props.getGlossaryRoot(),
+                        OConsts.DEFAULT_GLOSSARY) + "</glossary_dir>\n"); // NOI18N
+        out.write("    <source_lang>" + props.getSourceLanguage()
+                + "</source_lang>\n"); // NOI18N
+        out.write("    <target_lang>" + props.getTargetLanguage()
+                + "</target_lang>\n"); // NOI18N
+        out.write("    <sentence_seg>" + props.isSentenceSegmentingEnabled()
+                + "</sentence_seg>\n"); // NOI18N
+        out.write("  </project>\n"); // NOI18N
+        out.write("</omegat>\n"); // NOI18N
+        out.close();
+    }
 
-	public void setSourceLang(String x)	{ m_sourceLocale = x;	}
-	public void setTargetLang(String x)	{ m_targetLocale = x;	}
-    
+    /**
+     * Returns absolute path for any project's folder. Since 1.6.0 supports
+     * relative paths (RFE 1111956).
+     * 
+     * @param relativePath
+     *                relative path from project file.
+     * @param defaultName
+     *                default name for such a project's folder, if relativePath
+     *                is "__DEFAULT__".
+     */
+    private static String computeAbsolutePath(String m_root,
+            String relativePath, String defaultName) {
+        if (OConsts.DEFAULT_FOLDER_MARKER.equals(relativePath))
+            return m_root + defaultName + File.separator;
+        else {
+            try {
+                // check if path starts with a system root
+                boolean startsWithRoot = false;
+                for (File root : File.listRoots()) {
+                    try // Under Windows and Java 1.4, there is an exception if
+                    { // using getCanonicalPath on a non-existent drive letter
+                        // [1875331] Relative paths not working under
+                        // Windows/Java 1.4
+                        startsWithRoot = relativePath.startsWith(root
+                                .getCanonicalPath());
+                    } catch (IOException e) {
+                        startsWithRoot = false;
+                    }
+                    if (startsWithRoot)
+                        // path starts with a root --> path is already absolute
+                        return new File(relativePath).getCanonicalPath()
+                                + File.separator;
+                }
 
-	public String getTarget()		{ return m_target;		}
-	public String getSource()		{ return m_source;		}
-	public String getTM()			{ return m_tm;			}
-	public String getGlossary()		{ return m_glossary;	}
-	public String getSourceLang()	{ return m_sourceLocale;		}
-	public String getTargetLang()	{ return m_targetLocale;		}
+                // path does not start with a system root --> relative to
+                // project root
+                return new File(m_root, relativePath).getCanonicalPath()
+                        + File.separator;
+            } catch (IOException e) {
+                return relativePath;
+            }
+        }
+    }
 
-    public String getSentenceSeg(){ return m_sentenceSeg; }
-    public void setSentenceSeg(String x){ m_sentenceSeg = x; }
-    
-	private XMLStreamReader		m_reader;
-	private String		m_target;
-	private String		m_source;
-	private String		m_tm;
-	private String		m_glossary;
+    /**
+     * Returns relative path for any project's folder. If absolutePath has
+     * default location, returns "__DEFAULT__".
+     * 
+     * @param absolutePath
+     *                absolute path to project folder.
+     * @param defaultName
+     *                default name for such a project's folder.
+     * @since 1.6.0
+     */
+    private static String computeRelativePath(String m_root,
+            String absolutePath, String defaultName) {
+        if (absolutePath.equals(m_root + defaultName + File.separator))
+            return OConsts.DEFAULT_FOLDER_MARKER;
 
-    private String		m_targetLocale;
-	private String		m_sourceLocale;
-    
-	private String		m_sentenceSeg;
-
-	private String		m_root;
-
+        try {
+            // trying to look two folders up
+            String res = absolutePath;
+            File abs = new File(absolutePath).getCanonicalFile();
+            File root = new File(m_root).getCanonicalFile();
+            String prefix = new String();
+            for (int i = 0; i < 2; i++) {
+                // File separator added to prevent "/MyProject EN-FR/"
+                // to be undesrtood as being inside "/MyProject/" [1879571]
+                if ((abs.getPath() + File.separator).startsWith(root.getPath()
+                        + File.separator)) {
+                    res = prefix
+                            + abs.getPath().substring(root.getPath().length());
+                    if (res.startsWith(File.separator))
+                        res = res.substring(1);
+                    break;
+                } else {
+                    root = root.getParentFile();
+                    prefix += File.separator + ".."; // NOI18N
+                }
+            }
+            return res.replace(File.separatorChar, '/');
+        } catch (IOException e) {
+            return absolutePath.replace(File.separatorChar, '/');
+        }
+    }
 }
-
-

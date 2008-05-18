@@ -43,20 +43,22 @@ public interface IDataEngine {
      * This method should be called in UI thread, because DataEngine will show
      * project settings dialog. It's not good behavior and it should be chanegd
      * in future.
-     * 
-     * TODO: rewrite for display dialog before really create project
      */
-    void createProject(File newProjectDir);
+    void createProject(File newProjectDir, ProjectProperties newProps);
 
     /**
      * Loads project in a "big" sense -- loads project's properties, glossaryes,
      * tms, source files etc.
      * 
-     * @param projectRoot
-     *                The folder where the project resides.
+     * @param newProps properties for new project
      */
-    void loadProject(String projectDir) throws Exception;
+    void loadProject(ProjectProperties newProps) throws Exception;
 
+    /**
+     * Save project properties only.
+     */
+    void saveProjectProperties() throws IOException;
+    
     /**
      * Save project.
      */

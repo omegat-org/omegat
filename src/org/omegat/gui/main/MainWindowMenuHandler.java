@@ -35,11 +35,13 @@ import javax.swing.JOptionPane;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.CommandThread;
+import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.FontSelectionDialog;
+import org.omegat.gui.dialogs.ProjectPropertiesDialog;
 import org.omegat.gui.dialogs.SpellcheckerConfigurationDialog;
 import org.omegat.gui.dialogs.WorkflowOptionsDialog;
 import org.omegat.gui.editor.IEditor;
@@ -134,19 +136,7 @@ public class MainWindowMenuHandler {
 
     /** Edits project's properties */
     public void projectEditMenuItemActionPerformed() {
-        boolean changed = false;
-        try {
-            changed = Core.getDataEngine().getProjectProperties().editProject(mainWindow);
-        } catch (IOException ioe) {
-            mainWindow.displayWarning(OStrings.getString("MW_ERROR_PROJECT_NOT_EDITABLE"), ioe);
-        }
-
-        if (changed) {
-            int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"), OStrings
-                    .getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
-            if (res == JOptionPane.YES_OPTION)
-                ProjectUICommands.projectReload();
-        }
+        ProjectUICommands.projectEditProperties();
     }
 
     public void viewFileListMenuItemActionPerformed() {

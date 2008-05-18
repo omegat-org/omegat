@@ -26,7 +26,9 @@
 
 package org.omegat.core.data;
 
+import java.awt.Frame;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.text.SimpleDateFormat;
@@ -45,12 +47,14 @@ import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
+import org.omegat.gui.dialogs.ProjectPropertiesDialog;
 import org.omegat.util.FileUtil;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.TMXReader;
 import org.omegat.util.TMXWriter;
@@ -82,7 +86,7 @@ public class CommandThread implements IDataEngine
     
     public CommandThread()
     {                
-        m_config = new ProjectProperties();
+        m_config = null;
         m_strEntryHash = new HashMap<String, StringEntry>(4096);
         m_strEntryList = new ArrayList<StringEntry>();
         m_srcTextEntryArray = new ArrayList<SourceTextEntry>(4096);
@@ -117,30 +121,29 @@ public class CommandThread implements IDataEngine
         Core.getTokenizer().clearCache();
     }
     
+    public void saveProjectProperties() throws IOException {
+        ProjectFileStorage.writeProjectFile(m_config);
+        Preferences.setPreference(Preferences.SOURCE_LOCALE, m_config.getSourceLanguage().getLocaleCode());
+        Preferences.setPreference(Preferences.TARGET_LOCALE, m_config.getTargetLanguage().getLocaleCode());
+    }
     /**
      * {@inheritDoc}
      * TODO: change to File parameter
      */
-    public synchronized void loadProject(String projectDir) throws Exception {
+    public synchronized void loadProject(final ProjectProperties props) throws Exception {
         UIThreadsUtil.mustNotBeSwingThread();
         // load new project
         try
         {
+            m_config = props;
+            
             cleanUp();
             
             Core.getMainWindow().showStatusMessage(OStrings.getString("CT_LOADING_PROJECT"));
             
-            // load project properties
-            if (!m_config.loadExisting(Core.getMainWindow().getApplicationFrame(), projectDir)) {
-                // loading of project cancelled
-                Core.getMainWindow().showStatusMessage(OStrings.getString("CT_CANCEL_LOAD"));
-                return;
-
-            }
-            
             projectClosing = false;
             
-            loadSourceFiles(projectDir);
+            loadSourceFiles(props.getProjectRoot());
             
             loadTranslations();
             
@@ -363,6 +366,8 @@ public class CommandThread implements IDataEngine
         
         try
         {
+            saveProjectProperties();
+            
             TMXWriter.buildTMXFile(s, false, true, false, m_config, m_strEntryList, m_orphanedList);
             m_modifiedFlag = false;
         }
@@ -424,14 +429,12 @@ public class CommandThread implements IDataEngine
     /**
      * {@inheritDoc}
      */
-    public synchronized void createProject(final File newProjectDir)
+    public synchronized void createProject(final File newProjectDir, final ProjectProperties newProps)
     {
         UIThreadsUtil.mustBeSwingThread();
+        m_config = newProps;
         try
         {
-            if (!m_config.createNew(Core.getMainWindow().getApplicationFrame(), newProjectDir))
-                return;	// cancel pressed
-            
             createDirectory(m_config.getProjectRoot(), null);
             createDirectory(m_config.getProjectInternal(), null);
             createDirectory(m_config.getSourceRoot(), "src");
@@ -439,7 +442,7 @@ public class CommandThread implements IDataEngine
             createDirectory(m_config.getTMRoot(), "tm");
             createDirectory(m_config.getTargetRoot(), "target");
             
-            m_config.buildProjFile();
+            saveProjectProperties();
             CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.CREATE);
         }
         catch(IOException e)

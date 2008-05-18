@@ -27,13 +27,13 @@ package org.omegat.gui.dialogs;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Box;
@@ -51,10 +51,10 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.Language;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.LanguageComboBoxRenderer;
@@ -108,25 +108,12 @@ public class ProjectPropertiesDialog extends JDialog
      *                          {@link #RESOLVE_DIRS} or {@link #EDIT_PROJECT}).
      */
     public ProjectPropertiesDialog(
-            Frame parentFrame,
             ProjectProperties projectProperties, 
             String projFileName, int dialogTypeValue)
     {
-        super(parentFrame, true);
+        super(Core.getMainWindow().getApplicationFrame(), true);
         this.projectProperties = projectProperties;
         this.dialogType = dialogTypeValue;
-
-        if (projFileName == null)
-        {
-            projectProperties.reset();
-            String sourceLocale = Preferences.getPreference(Preferences.SOURCE_LOCALE);
-            if( !sourceLocale.equals(""))                                                   // NOI18N
-                projectProperties.setSourceLanguage(sourceLocale);
-            
-            String targetLocale = Preferences.getPreference(Preferences.TARGET_LOCALE);
-            if( !targetLocale.equals("") )                                                // NOI18N
-                projectProperties.setTargetLanguage(targetLocale);
-        }
 
         Border emptyBorder = new EmptyBorder(2,0,2,0);
         Box centerBox = Box.createVerticalBox();
@@ -344,40 +331,6 @@ public class ProjectPropertiesDialog extends JDialog
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
         put(escape, "ESCAPE");                                                  // NOI18N
         getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
-
-        // if no project file specified, ask user to create one
-        if (dialogTypeValue == NEW_PROJECT)
-        {
-            // create project dir (and higher dirs) if it doesn't exist yet
-            // fix for bug 1476591 (wrong folders are used if project dir doesn't exist)
-            File projectDir = new File(projFileName);
-            if (!projectDir.exists())
-                projectDir.mkdirs();
-
-            // set project and relative dirs
-            projectProperties.setProjectRoot(projectDir.getAbsolutePath()
-                        + File.separator);
-            projectProperties.setProjectFile(projectProperties.getProjectRoot() + OConsts.FILE_PROJECT);
-            Preferences.setPreference(Preferences.CURRENT_FOLDER, projectDir.getParent());
-            projectProperties.setProjectName(projectProperties.getProjectFile().substring(projectProperties.getProjectRoot().length()));
-            projectProperties.setSourceRoot(projectProperties.getProjectRoot() + OConsts.DEFAULT_SOURCE
-                + File.separator);
-            projectProperties.setTargetRoot(projectProperties.getProjectRoot() + OConsts.DEFAULT_TARGET
-                + File.separator);
-            projectProperties.setGlossaryRoot(projectProperties.getProjectRoot() + OConsts.DEFAULT_GLOSSARY
-                + File.separator);
-            projectProperties.setTMRoot(projectProperties.getProjectRoot() + OConsts.DEFAULT_TM
-                + File.separator);
-        }
-        else
-        {
-            projectProperties.setProjectFile(projFileName);
-            projectProperties.setProjectRoot(projectProperties.getProjectFile().substring(0,
-                            projectProperties.getProjectFile().lastIndexOf(File.separator)+1));
-        }
-
-        projectProperties.setProjectInternal(projectProperties.getProjectRoot() + OConsts.DEFAULT_INTERNAL
-                + File.separator);
 
         m_srcRootField.setText(projectProperties.getSourceRoot());
         m_locRootField.setText(projectProperties.getTargetRoot());
@@ -697,6 +650,12 @@ public class ProjectPropertiesDialog extends JDialog
     /**
      * Whether the user cancelled the dialog.
      */
-    public boolean dialogCancelled()    { return m_dialogCancelled; }
     private boolean     m_dialogCancelled;
+
+    /**
+     * Return new properties or null if dialog cancelled.
+     */
+    public ProjectProperties getResult() {
+        return m_dialogCancelled ? null : projectProperties;
+    }
 }

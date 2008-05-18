@@ -26,10 +26,17 @@ package org.omegat.gui.main;
 
 import java.io.File;
 
+import javax.swing.JOptionPane;
+
 import org.omegat.core.Core;
+import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
+import org.omegat.gui.dialogs.ProjectPropertiesDialog;
+import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
 import org.omegat.util.gui.SwingWorker;
@@ -55,8 +62,23 @@ public class ProjectUICommands {
             // user press 'Cancel' in project creation dialog
             return;
         }
+        File dir = ndc.getSelectedFile();
+        dir.mkdirs();
         
-        Core.getDataEngine().createProject(ndc.getSelectedFile());
+        // ask about new project properties
+        ProjectPropertiesDialog newProjDialog = new ProjectPropertiesDialog(
+                new ProjectProperties(dir), dir.getAbsolutePath(), ProjectPropertiesDialog.NEW_PROJECT);
+        newProjDialog.setVisible(true);
+        newProjDialog.dispose();
+        
+        final ProjectProperties newProps = newProjDialog.getResult();
+        if (newProps == null) {
+            // user clicks on 'Cancel'
+            dir.delete();
+            return;
+        }
+
+        Core.getDataEngine().createProject(dir, newProps);
 
         final String projectRoot = Core.getDataEngine().getProjectProperties()
                 .getProjectRoot();
@@ -64,9 +86,17 @@ public class ProjectUICommands {
         if (projectRoot != null && projectRoot.length() > 0) {
             new SwingWorker<Object>() {
                 protected Object doInBackground() throws Exception {
-                    Core.getDataEngine().loadProject(
-                            projectRoot + File.separator);
+                    Core.getDataEngine().loadProject(newProps);
+                    Core.getDataEngine().saveProjectProperties();
                     return null;
+                }
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception ex) {
+                        Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                        Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    }
                 }
             }.execute();
         }
@@ -90,13 +120,56 @@ public class ProjectUICommands {
         }
 
         final File projectRootFolder = pfc.getSelectedFile();
+        
+        
+        // check if project okay
+        ProjectProperties props;
+        try {
+            props = ProjectFileStorage.loadProjectProperties(projectRootFolder);
+        } catch (Exception ex) {
+            Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+            Core.getMainWindow().displayErrorRB(ex,
+                    "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+            return;
+        }
+        
+        boolean needToSaveProperties = false;
+        while (!props.verifyProject()) {
+            needToSaveProperties = true;
+            // something wrong with the project - display open dialog
+            // to fix it
+            ProjectPropertiesDialog prj = new ProjectPropertiesDialog(props,
+                    new File(projectRootFolder, OConsts.FILE_PROJECT)
+                            .getAbsolutePath(),
+                    ProjectPropertiesDialog.RESOLVE_DIRS);
+            prj.setVisible(true);
+            props = prj.getResult();
+            prj.dispose();
+            if (props == null) {
+                // user clicks on 'Cancel'
+                return;
+            }
+        }
+
         Core.getMainWindow().clear();
 
+        final boolean saveProperties = needToSaveProperties;
+        final ProjectProperties newProps = props;
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {
-                Core.getDataEngine().loadProject(
-                        projectRootFolder.getAbsolutePath() + File.separator);
+                Core.getDataEngine().loadProject(newProps);
+                if (saveProperties) {
+                    Core.getDataEngine().saveProjectProperties();
+                }
                 return null;
+            }
+            protected void done() {
+                try {
+                    get();
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                }
             }
         }.execute();
     }
@@ -108,19 +181,24 @@ public class ProjectUICommands {
             return;
         }
         
-        final String projectRoot = Core.getDataEngine().getProjectProperties().getProjectRoot();
+        final ProjectProperties props = Core.getDataEngine().getProjectProperties();
 
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {
                 Core.getDataEngine().saveProject();
                 Core.getDataEngine().closeProject();
 
-                Core.getDataEngine().loadProject(
-                        projectRoot + File.separator);
+                Core.getDataEngine().loadProject(props);
                 return null;
             }
             protected void done() {
-                Core.getMainWindow().clear();
+                try {
+                    get();
+                    Core.getMainWindow().clear();
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                }
             }
         }.execute();
     }
@@ -150,6 +228,12 @@ public class ProjectUICommands {
             }
 
             protected void done() {
+                try {
+                    get();
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                }
             }
         }.execute();
     }
@@ -177,12 +261,61 @@ public class ProjectUICommands {
             }
 
             protected void done() {
-                Core.getMainWindow().clear();                
-                                
-                Core.getDataEngine().closeProject();
-               // showProgressMessage(OStrings.getString("MW_PROGRESS_DEFAULT"));
-               // showLengthMessage(OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
+                try {
+                    get();
+                    Core.getMainWindow().clear();
+                    Core.getDataEngine().closeProject();
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                }
+            }
+        }.execute();
+    }
+    
+    public static void projectEditProperties() {
+        UIThreadsUtil.mustBeSwingThread();
 
+        if (!Core.getDataEngine().isProjectLoaded()) {
+            return;
+        }
+
+        // displaying the dialog to change paths and other properties
+        ProjectPropertiesDialog prj = new ProjectPropertiesDialog(Core
+                .getDataEngine().getProjectProperties(), Core.getDataEngine()
+                .getProjectProperties().getProjectName(),
+                ProjectPropertiesDialog.EDIT_PROJECT);
+        prj.setVisible(true);
+        final ProjectProperties newProps = prj.getResult();
+        prj.dispose();
+        if (newProps == null) {
+            return;
+        }
+        int res = JOptionPane.showConfirmDialog(Core.getMainWindow()
+                .getApplicationFrame(), OStrings
+                .getString("MW_REOPEN_QUESTION"), OStrings
+                .getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
+        if (res != JOptionPane.YES_OPTION) {
+            return;
+        }
+        
+        new SwingWorker<Object>() {
+            protected Object doInBackground() throws Exception {
+                Core.getDataEngine().saveProject();
+                Core.getDataEngine().closeProject();
+
+                Core.getDataEngine().loadProject(newProps);
+                Core.getDataEngine().saveProjectProperties();
+                return null;
+            }
+            protected void done() {
+                try {
+                    get();
+                    Core.getMainWindow().clear();
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                }
             }
         }.execute();
     }

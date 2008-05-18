@@ -24,8 +24,7 @@
 
 package org.omegat.core.matching;
 
-import org.omegat.util.ProjectFileData;
-import org.omegat.core.*;
+import org.omegat.core.data.ProjectFileData;
 import org.omegat.core.data.StringEntry;
 
 /*

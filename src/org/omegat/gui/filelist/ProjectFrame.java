@@ -72,6 +72,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.IDataEngine;
+import org.omegat.core.data.StatisticsInfo;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
@@ -400,14 +401,14 @@ public class ProjectFrame extends JFrame {
                         return OStrings.getString("GUI_PROJECT_TRANSLATED");
                     }
                 } else {
+                    StatisticsInfo stat = Core.getDataEngine().getStatistics();
                     switch (rowIndex) {
                     case 0:
-                        return CommandThread.core.getNumberOfSegmentsTotal();
+                        return stat.numberOfSegmentsTotal;
                     case 1:
-                        return CommandThread.core.getNumberOfUniqueSegments();
+                        return stat.numberOfUniqueSegments;
                     case 2:
-                        return CommandThread.core
-                                .getNumberofTranslatedSegments();
+                        return stat.numberofTranslatedSegments;
                     }
                 }
                 return null;

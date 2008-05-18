@@ -46,6 +46,8 @@ import javax.swing.undo.CannotUndoException;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.CommandThread;
+import org.omegat.core.data.IDataEngine;
+import org.omegat.core.data.StatisticsInfo;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
@@ -348,12 +350,14 @@ public class EditorController implements IEditor {
                 if (CommandThread.core.getSTE(_i).isTranslated())
                     translatedInFile++;
             }
+            
+            StatisticsInfo stat = Core.getDataEngine().getStatistics();
 
             String pMsg = " " + Integer.toString(translatedInFile) + "/"
                     + Integer.toString(m_xlLastEntry - m_xlFirstEntry + 1) + " ("
-                    + Integer.toString(CommandThread.core.getNumberofTranslatedSegments()) + "/"
-                    + Integer.toString(CommandThread.core.getNumberOfUniqueSegments()) + ", "
-                    + Integer.toString(CommandThread.core.getNumberOfSegmentsTotal()) + ") ";
+                    + Integer.toString(stat.numberofTranslatedSegments) + "/"
+                    + Integer.toString(stat.numberOfUniqueSegments) + ", "
+                    + Integer.toString(stat.numberOfSegmentsTotal) + ") ";
             Core.getMainWindow().showProgressMessage(pMsg);
 
             String lMsg = " " + Integer.toString(m_curEntry.getSrcText().length()) + "/"
@@ -708,12 +712,15 @@ public class EditorController implements IEditor {
                 return;
 
             commitEntry();
-
-            m_curEntryNum++;
-            if (m_curEntryNum > m_xlLastEntry) {
-                if (m_curEntryNum >= CommandThread.core.getNumberOfSegmentsTotal())
-                    m_curEntryNum = 0;
-                loadDocument();
+            
+            IDataEngine dataEngine = Core.getDataEngine();
+            synchronized (dataEngine) {
+                m_curEntryNum++;
+                if (m_curEntryNum > m_xlLastEntry) {
+                    if (m_curEntryNum >= Core.getDataEngine().getAllEntries().size())
+                        m_curEntryNum = 0;
+                    loadDocument();
+                }
             }
 
             activateEntry();
@@ -721,22 +728,25 @@ public class EditorController implements IEditor {
 
     public void prevEntry() {
         UIThreadsUtil.mustBeSwingThread();
-        
-            if (!mw.isProjectLoaded())
-                return;
 
-            commitEntry();
+        if (!mw.isProjectLoaded())
+            return;
 
+        commitEntry();
+
+        IDataEngine dataEngine = Core.getDataEngine();
+        synchronized (dataEngine) {
             m_curEntryNum--;
             if (m_curEntryNum < m_xlFirstEntry) {
                 if (m_curEntryNum < 0)
-                    m_curEntryNum = CommandThread.core.getNumberOfSegmentsTotal() - 1;
+                    m_curEntryNum = Core.getDataEngine().getAllEntries().size() - 1;
                 // empty project bugfix:
                 if (m_curEntryNum < 0)
                     m_curEntryNum = 0;
                 loadDocument();
             }
-            activateEntry();
+        }
+        activateEntry();
     }
 
     /**
@@ -751,16 +761,18 @@ public class EditorController implements IEditor {
      */
     public void nextUntranslatedEntry() {
         UIThreadsUtil.mustBeSwingThread();
-        
-            // check if a document is loaded
-            if (mw.isProjectLoaded() == false)
-                return;
 
-            // save the current entry
-            commitEntry();
+        // check if a document is loaded
+        if (mw.isProjectLoaded() == false)
+            return;
 
+        // save the current entry
+        commitEntry();
+
+        IDataEngine dataEngine = Core.getDataEngine();
+        synchronized (dataEngine) {
             // get the total number of entries
-            int numEntries = CommandThread.core.getNumberOfSegmentsTotal();
+            int numEntries = Core.getDataEngine().getAllEntries().size();
 
             boolean found = false;
             int curEntryNum;
@@ -770,9 +782,10 @@ public class EditorController implements IEditor {
             // until an entry with no translation is found
             for (curEntryNum = m_curEntryNum + 1; curEntryNum < numEntries; curEntryNum++) {
                 // get the next entry
-                SourceTextEntry entry = CommandThread.core.getSTE(curEntryNum);
+                SourceTextEntry entry = Core.getDataEngine().getAllEntries().get(curEntryNum);
 
-                // check if the entry is not null, and whether it contains a translation
+                // check if the entry is not null, and whether it contains a
+                // translation
                 if (entry != null && entry.getTranslation().length() == 0) {
                     // we've found it
                     found = true;
@@ -786,9 +799,10 @@ public class EditorController implements IEditor {
             if (!found) {
                 for (curEntryNum = 0; curEntryNum < m_curEntryNum; curEntryNum++) {
                     // get the next entry
-                    SourceTextEntry entry = CommandThread.core.getSTE(curEntryNum);
+                    SourceTextEntry entry = Core.getDataEngine().getAllEntries().get(curEntryNum);
 
-                    // check if the entry is not null, and whether it contains a translation
+                    // check if the entry is not null, and whether it contains a
+                    // translation
                     if (entry != null && entry.getTranslation().length() == 0) {
                         // we've found it
                         found = true;
@@ -802,13 +816,16 @@ public class EditorController implements IEditor {
                 // mark the entry
                 m_curEntryNum = curEntryNum;
 
-                // load the document, if the segment is not in the current document
-                if (m_curEntryNum < m_xlFirstEntry || m_curEntryNum > m_xlLastEntry)
+                // load the document, if the segment is not in the current
+                // document
+                if (m_curEntryNum < m_xlFirstEntry
+                        || m_curEntryNum > m_xlLastEntry)
                     loadDocument();
             }
+        }
 
-            // activate the entry
-            activateEntry();
+        // activate the entry
+        activateEntry();
     }
     
     /**
@@ -816,26 +833,29 @@ public class EditorController implements IEditor {
      */
     public void gotoEntry(final int entryNum) {
         UIThreadsUtil.mustBeSwingThread();
-        
-            if (!mw.isProjectLoaded())
-                return;
 
-            commitEntry();
+        if (!mw.isProjectLoaded())
+            return;
 
+        commitEntry();
+
+        IDataEngine dataEngine = Core.getDataEngine();
+        synchronized (dataEngine) {
             m_curEntryNum = entryNum - 1;
             if (m_curEntryNum < m_xlFirstEntry) {
                 if (m_curEntryNum < 0)
-                    m_curEntryNum = CommandThread.core.getNumberOfSegmentsTotal() - 1;
+                    m_curEntryNum = dataEngine.getAllEntries().size() - 1;
                 // empty project bugfix:
                 if (m_curEntryNum < 0)
                     m_curEntryNum = 0;
                 loadDocument();
             } else if (m_curEntryNum > m_xlLastEntry) {
-                if (m_curEntryNum >= CommandThread.core.getNumberOfSegmentsTotal())
+                if (m_curEntryNum >= dataEngine.getAllEntries().size())
                     m_curEntryNum = 0;
                 loadDocument();
             }
-            activateEntry();
+        }
+        activateEntry();
     }
 
     /**

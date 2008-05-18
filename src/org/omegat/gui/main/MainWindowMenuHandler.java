@@ -332,10 +332,12 @@ public class MainWindowMenuHandler {
                             // Get the value entered by the user
                             String inputValue = (String) input.getInputValue();
 
+                            int maxNr = Core.getDataEngine().getAllEntries().size();
+                            
                             // Check if the user entered a value at all
                             if ((inputValue == null) || (inputValue.trim().length() == 0)) {
                                 // Show error message
-                                displayErrorMessage();
+                                displayErrorMessage(maxNr);
                                 return;
                             }
 
@@ -348,15 +350,15 @@ public class MainWindowMenuHandler {
                                 // If the exception is thrown, the user didn't
                                 // enter a number
                                 // Show error message
-                                displayErrorMessage();
+                                displayErrorMessage(maxNr);
                                 return;
                             }
 
                             // Check if the segment number is within bounds
-                            if (segmentNr < 1 || segmentNr > CommandThread.core.getNumberOfSegmentsTotal()) {
+                            if (segmentNr < 1 || segmentNr > maxNr) {
                                 // Tell the user he has to enter a number within
                                 // certain bounds
-                                displayErrorMessage();
+                                displayErrorMessage(maxNr);
                                 return;
                             }
                         }
@@ -369,10 +371,12 @@ public class MainWindowMenuHandler {
                     }
                 }
 
-                private void displayErrorMessage() {
-                    JOptionPane.showMessageDialog(dialog, StaticUtils.format(OStrings
-                            .getString("MW_SEGMENT_NUMBER_ERROR"), new Object[] { new Integer(CommandThread.core
-                            .getNumberOfSegmentsTotal()) }), OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
+                private void displayErrorMessage(int maxNr) {
+                    JOptionPane.showMessageDialog(dialog, StaticUtils
+                                .format(OStrings
+                                        .getString("MW_SEGMENT_NUMBER_ERROR"),
+                                        maxNr), OStrings.getString("TF_ERROR"),
+                                JOptionPane.ERROR_MESSAGE);
                 }
             });
 

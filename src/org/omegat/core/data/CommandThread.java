@@ -51,15 +51,18 @@ import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.ProjectFileData;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.TMXReader;
 import org.omegat.util.TMXWriter;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
- * CommandThread is a thread to asynchronously do the stuff
- *
+ * CommandThread is a thread to asynchronously do the stuff.
+ * 
+ * This is most important part for synchronization. All components which uses
+ * project data should be synchronized around IDataEngine instance. It will be
+ * good to change synchronization to read/write mode in future.
+ * 
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Maxym Mykhalchuk
@@ -96,7 +99,7 @@ public class CommandThread implements IDataEngine
     /**
      * Clears all hashes, lists etc.
      */
-    public void cleanUp()
+    private void cleanUp()
     {
         m_strEntryHash.clear();
         
@@ -118,7 +121,7 @@ public class CommandThread implements IDataEngine
      * {@inheritDoc}
      * TODO: change to File parameter
      */
-    public void loadProject(String projectDir) throws Exception {
+    public synchronized void loadProject(String projectDir) throws Exception {
         UIThreadsUtil.mustNotBeSwingThread();
         // load new project
         try
@@ -205,17 +208,22 @@ public class CommandThread implements IDataEngine
     }
     
     /**
-     * True if project loaded. TODO: use m_config for that in future.
-     */
-    private boolean projectLoaded = false;
-
-    /**
      * {@inheritDoc}
      */
-    public boolean isProjectLoaded() {
+    public synchronized boolean isProjectLoaded() {
         return projectLoaded;
     }
     
+    /**
+     * {@inheritDoc}
+     */
+    public synchronized StatisticsInfo getStatistics() {
+        StatisticsInfo info = new StatisticsInfo();
+        info.numberOfUniqueSegments = m_strEntryList.size();
+        info.numberofTranslatedSegments = numberofTranslatedSegments;
+        info.numberOfSegmentsTotal = m_srcTextEntryArray.size();
+        return info;
+    }
     
     private boolean projectClosing = false;
     /**
@@ -223,7 +231,7 @@ public class CommandThread implements IDataEngine
      * and if it's still being loaded, core thread shouldn't throw
      * any error.
      */
-    public void closeProject() {
+    public synchronized void closeProject() {
         projectLoaded = false;
         projectClosing = true;
         cleanUp();
@@ -232,7 +240,7 @@ public class CommandThread implements IDataEngine
     }
     
     /** Builds all translated files and creates fresh TM files. */
-    public void compileProject()
+    public synchronized void compileProject()
             throws IOException, TranslationException
     {
         if (m_strEntryHash.size() == 0)
@@ -247,7 +255,6 @@ public class CommandThread implements IDataEngine
         // - TMX Level 2, with OmegaT formatting tags wrapped in TMX inline tags
         try
         {
-            synchronized (this) {
                 // build TMX with OmegaT tags
                 String fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.OMEGAT_TMX
                         + OConsts.TMX_EXTENSION;
@@ -262,7 +269,6 @@ public class CommandThread implements IDataEngine
                 fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.LEVEL2_TMX
                         + OConsts.TMX_EXTENSION;
                 TMXWriter.buildTMXFile(fname, false, false, true, m_config, m_strEntryList, m_orphanedList);
-            }
         }
         catch (IOException e)
         {
@@ -321,13 +327,13 @@ public class CommandThread implements IDataEngine
     }
     
     /** Saves the translation memory and preferences */
-    public void saveProject()
+    public synchronized void saveProject()
     {
         if( isProjectModified() )
             forceSave(false);
     }
     
-    public void markAsDirty()
+    public synchronized void markAsDirty()
     {
         m_modifiedFlag = true;
     }
@@ -357,9 +363,7 @@ public class CommandThread implements IDataEngine
         
         try
         {
-            synchronized (this) {
-                TMXWriter.buildTMXFile(s, false, true, false, m_config, m_strEntryList, m_orphanedList);
-            }
+            TMXWriter.buildTMXFile(s, false, true, false, m_config, m_strEntryList, m_orphanedList);
             m_modifiedFlag = false;
         }
         catch (IOException e)
@@ -413,14 +417,14 @@ public class CommandThread implements IDataEngine
             m_strEntryList.add(strEntry);
             m_strEntryHash.put(srcText, strEntry);
         }
-        SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, getNumberOfSegmentsTotal());
+        SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, m_srcTextEntryArray.size());
         m_srcTextEntryArray.add(srcTextEntry);
     }
     
     /**
      * {@inheritDoc}
      */
-    public void createProject(final File newProjectDir)
+    public synchronized void createProject(final File newProjectDir)
     {
         UIThreadsUtil.mustBeSwingThread();
         try
@@ -554,10 +558,10 @@ public class CommandThread implements IDataEngine
             {
                 FileInfo fi=new FileInfo();
                 fi.filePath=filepath;
-                fi.firstEntryIndex=getNumberOfSegmentsTotal();
-                fi.size=getNumberOfSegmentsTotal()-firstEntry;
+                fi.firstEntryIndex=m_srcTextEntryArray.size();
+                fi.size=m_srcTextEntryArray.size()-firstEntry;
                 projectFilesList.add(fi);
-                firstEntry=getNumberOfSegmentsTotal();
+                firstEntry=m_srcTextEntryArray.size();
             }
         }
         Core.getMainWindow().showStatusMessage(OStrings.getString("CT_LOAD_SRC_COMPLETE"));
@@ -680,25 +684,20 @@ public class CommandThread implements IDataEngine
         }
     }
     
-    /** Format for TMX files backup suffix. */
-    protected static final SimpleDateFormat FORMAT_DATETIME_SUFFIX = new SimpleDateFormat("yyyyMMddHHmm");
-
     /** Formats date (in milliseconds) to YYYYMMDDHHMM form. */
-    private String millisToDateTime(final long millis) {
-        synchronized (FORMAT_DATETIME_SUFFIX) {
-            return FORMAT_DATETIME_SUFFIX.format(new Date());
-        }
+    private static String millisToDateTime(final long millis) {
+        return new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
     }
 
     /**
      * Returns a Source Text Entry of a certain number.
      * <p>
-     * Source text entry is an individual segment for
-     * translation pulled directly from the input files.
-     * There can be many SourceTextEntries having identical source
-     * language strings.
+     * Source text entry is an individual segment for translation pulled
+     * directly from the input files. There can be many SourceTextEntries having
+     * identical source language strings.
      * 
-     * Can be called from any thread.
+     * Can be called from any thread. Caller must be synchronized around
+     * IDataEngine.
      */
     public SourceTextEntry getSTE(int num)
     {
@@ -720,6 +719,20 @@ public class CommandThread implements IDataEngine
         }
     }
     
+    /**
+     * {@inheritDoc}
+     * 
+     * Can be called from any thread. Caller must be synchronized around
+     * IDataEngine.
+     */
+    public List<SourceTextEntry> getAllEntries() {
+        return m_srcTextEntryArray;
+    }
+
+    /**
+     * Can be called from any thread. Caller must be synchronized around
+     * IDataEngine.
+     */
     public StringEntry getStringEntry(String srcText)
     {
         return m_strEntryHash.get(srcText);
@@ -728,9 +741,17 @@ public class CommandThread implements IDataEngine
     ////////////////////////////////////////////////////////
     // simple project info
     
+    /**
+     * Can be called from any thread. Caller must be synchronized around
+     * IDataEngine.
+     */
     public String	sourceRoot()
     { return m_config.getSourceRoot();		}
     
+    /**
+     * Can be called from any thread. Caller must be synchronized around
+     * IDataEngine.
+     */
     public List<TransMemory>	getTransMemory()
     { return m_tmList;		}
     
@@ -740,6 +761,8 @@ public class CommandThread implements IDataEngine
     
     /**
      * Returns the active Project's Properties.
+     * 
+     * TODO: rewrite for synchronize ProjectProperties
      */
     public ProjectProperties getProjectProperties()
     {
@@ -756,43 +779,42 @@ public class CommandThread implements IDataEngine
         return m_modifiedFlag;
     }
     
-    /** Returns the total number of segments, including duplicates. */
-    public int getNumberOfSegmentsTotal()
-    {
-        return m_srcTextEntryArray.size();
-    }
-    
-    /** Returns the number of unique segments. */
-    public int getNumberOfUniqueSegments()
-    {
-        return m_strEntryList.size();
-    }
 
     /** The number of unique translated segments. */
     private int numberofTranslatedSegments;
     /** Signals that the next increase doesn't count -- it's orphane */
     private boolean _dontCountNext = false;
     
-    /** Returns the number of unique translated segments. */
-    public synchronized int getNumberofTranslatedSegments()
-    {
-        return numberofTranslatedSegments;
-    }
-
-    /** Sygnals that the number of translated segments decreased */
-    public void decreaseTranslated()
+   
+    /**
+     * Sygnals that the number of translated segments decreased 
+     * 
+     * Can be called from any thread. Caller must be synchronized around
+     * IDataEngine.
+     */
+    public synchronized void decreaseTranslated()
     {
         numberofTranslatedSegments--;
     }
     
-    /** Sygnals that the next increase is false -- it's orphane */
+    /** 
+     * Sygnals that the next increase is false -- it's orphane 
+     * 
+     * Can be called from any thread. Caller must be synchronized around
+     * IDataEngine.
+     */
     public synchronized void dontCountNextIncrement()
     {
         _dontCountNext = true;
     }
     
-    /** Sygnals that the number of translated segments increased */
-    public void increaseTranslated()
+    /** 
+     * Sygnals that the number of translated segments increased 
+     * 
+     * Can be called from any thread. Caller must be synchronized around
+     * IDataEngine.
+     */
+    public synchronized void increaseTranslated()
     {
         if( _dontCountNext )
             _dontCountNext = false;
@@ -804,18 +826,28 @@ public class CommandThread implements IDataEngine
 
     /**
      * {@inheritDoc}
+     * 
+     * Can be called from any thread. Caller must be synchronized around
+     * IDataEngine.
      */
-    public List<StringEntry> getAllEntries() {
+    public List<StringEntry> getAllTranslations() {
         return Collections.unmodifiableList(new ArrayList<StringEntry>(m_strEntryList));
     }
     
     /**
      * {@inheritDoc}
+     * 
+     * Can be called from any thread. Caller must be synchronized around
+     * IDataEngine.
      */
     public List<LegacyTM> getMemory() {
         return m_legacyTMs;
     }
-    
+
+    /**
+     * Can be called from any thread. Caller must be synchronized around
+     * IDataEngine.
+     */
     public List<FileInfo> getProjectFiles() {
         return projectFilesList;
     }
@@ -823,6 +855,11 @@ public class CommandThread implements IDataEngine
     // project name of strings loaded from TM - store globally so to not
     // pass seperately on each function call
     
+    /**
+     * True if project loaded. TODO: use m_config for that in future.
+     */
+    private boolean projectLoaded = false;
+
     /** 
      * Keeps track of file specific data to feed to SourceTextEntry objects
      * so they can have a bigger picture of what's where.
@@ -830,8 +867,12 @@ public class CommandThread implements IDataEngine
     private ProjectFileData	m_curFile;
     
     /** maps text to strEntry obj */
-    private Map<String,StringEntry> m_strEntryHash; 
+    private Map<String,StringEntry> m_strEntryHash;
+    
+    /** Unique segments list. Used for save TMX.  */
     private List<StringEntry>	m_strEntryList;
+    
+    /** List of all segments in project. */
     private List<SourceTextEntry>	m_srcTextEntryArray;
     
     /** the list of legacy TMX files, each object is the list of string entries */

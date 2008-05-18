@@ -31,7 +31,7 @@ import javax.swing.JOptionPane;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.CommandThread;
+import org.omegat.core.data.IDataEngine;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.SourceTextEntry;
@@ -103,8 +103,9 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
 
         StringEntry se;
 
-        for (int i = 0; i < CommandThread.core.getNumberOfSegmentsTotal(); i++) {
-            SourceTextEntry ste = CommandThread.core.getSTE(i);
+        IDataEngine dataEngine = Core.getDataEngine();
+        synchronized (dataEngine) {
+        for (SourceTextEntry ste : dataEngine.getAllEntries()) {
             se = ste.getStrEntry();
             s = se.getSrcText();
             t = se.getTranslation();
@@ -136,6 +137,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
 
             srcTags.clear();
             locTags.clear();
+        }
         }
         return suspects;
     }

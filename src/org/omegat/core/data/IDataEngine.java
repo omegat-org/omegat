@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.filters2.TranslationException;
 
 /**
@@ -42,6 +43,8 @@ public interface IDataEngine {
      * This method should be called in UI thread, because DataEngine will show
      * project settings dialog. It's not good behavior and it should be chanegd
      * in future.
+     * 
+     * TODO: rewrite for display dialog before really create project
      */
     void createProject(File newProjectDir);
 
@@ -93,11 +96,22 @@ public interface IDataEngine {
     void decreaseTranslated();
     
     /**
-     * Get all entries.
+     * Get all source segments.
+     */
+    List<SourceTextEntry> getAllEntries();
+    
+    /**
+     * Get statistics for project.
+     * @return
+     */
+    StatisticsInfo getStatistics();
+    
+    /**
+     * Get all unique segments.
      * 
      * @return read-only list of project entries, or null if project not loaded
      */
-    List<StringEntry> getAllEntries();
+    List<StringEntry> getAllTranslations();
 
     /**
      * Get all translation memory objects.

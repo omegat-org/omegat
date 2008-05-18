@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+ Copyright (C) 2008 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -22,17 +22,14 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.util;
+package org.omegat.core.data;
 
 /**
- * keeps track of specific attributes for project files
- *
- * @author Keith Godfrey
+ * Class for store some statistic data.
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
- public class ProjectFileData
- {
-     public String	name;
-     public int		firstEntry;
-     public int		lastEntry;
- }
-
+public class StatisticsInfo {
+    public int numberofTranslatedSegments;
+    public int numberOfUniqueSegments;
+    public int numberOfSegmentsTotal;
+}

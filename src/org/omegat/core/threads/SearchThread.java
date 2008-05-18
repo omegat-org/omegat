@@ -36,6 +36,7 @@ import java.util.regex.Pattern;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.CommandThread;
+import org.omegat.core.data.IDataEngine;
 import org.omegat.core.data.TransMemory;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.filters2.TranslationException;
@@ -279,10 +280,11 @@ public class SearchThread extends Thread
         m_numFinds = 0;
 
         // search through all project entries
-        int i;
-        for (i = 0; i < CommandThread.core.getNumberOfSegmentsTotal(); i++) {
+        IDataEngine dataEngine = Core.getDataEngine();
+        synchronized (dataEngine) {
+        for (int i = 0; i < dataEngine.getAllEntries().size(); i++) {
             // get the source and translation of the next entry
-            SourceTextEntry ste = CommandThread.core.getSTE(i);
+            SourceTextEntry ste = dataEngine.getAllEntries().get(i);
             String srcText = ste.getSrcText();
             String locText = ste.getTranslation();
 
@@ -295,6 +297,7 @@ public class SearchThread extends Thread
             // stop searching if the max. nr of hits has been reached
             if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS)
                 break;
+        }
         }
 
         // search the TM, if requested

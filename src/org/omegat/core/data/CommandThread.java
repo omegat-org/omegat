@@ -697,6 +697,8 @@ public class CommandThread implements IDataEngine
      * translation pulled directly from the input files.
      * There can be many SourceTextEntries having identical source
      * language strings.
+     * 
+     * Can be called from any thread.
      */
     public SourceTextEntry getSTE(int num)
     {

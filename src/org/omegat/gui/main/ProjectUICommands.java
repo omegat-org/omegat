@@ -113,12 +113,14 @@ public class ProjectUICommands {
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {
                 Core.getDataEngine().saveProject();
-
-                Core.getMainWindow().clear();
+                Core.getDataEngine().closeProject();
 
                 Core.getDataEngine().loadProject(
                         projectRoot + File.separator);
                 return null;
+            }
+            protected void done() {
+                Core.getMainWindow().clear();
             }
         }.execute();
     }

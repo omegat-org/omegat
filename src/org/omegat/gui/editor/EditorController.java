@@ -124,7 +124,7 @@ public class EditorController implements IEditor {
     
     private String previousFileName;
     
-    private enum SHOW_TYPE {INTRO, FIRST_ENTRY, NO_CHANGE};
+    private enum SHOW_TYPE {INTRO, EMPTY_PROJECT, FIRST_ENTRY, NO_CHANGE};
 
     public EditorController(final MainWindow mainWindow, final EditorTextArea editor, final DockableScrollPane pane) {
         this.mw = mainWindow;
@@ -250,10 +250,9 @@ public class EditorController implements IEditor {
      */
     protected void loadDocument() {
         UIThreadsUtil.mustBeSwingThread();
-        synchronized (mw) {
+        
             m_docReady = false;
 
-            synchronized (editor) {
                 // clear old text
                 editor.setText(new String());
 
@@ -330,10 +329,6 @@ public class EditorController implements IEditor {
                     docSeg.length = text.length();
                     m_docSegList[i] = docSeg;
                 }
-            } // synchronized (editor)
-
-            Thread.yield();
-        }
     }
 
     /**
@@ -346,7 +341,6 @@ public class EditorController implements IEditor {
     public void activateEntry() {
         UIThreadsUtil.mustBeSwingThread();
         
-        synchronized (mw) {
             if (!mw.isProjectLoaded())
                 return;
             int translatedInFile = 0;
@@ -366,7 +360,6 @@ public class EditorController implements IEditor {
                     + Integer.toString(m_curEntry.getTranslation().length()) + " ";
             Core.getMainWindow().showLengthMessage(lMsg);
 
-            synchronized (editor) {
                 history.insertNew(m_curEntryNum);
 
                 // update history menu items
@@ -526,16 +519,15 @@ public class EditorController implements IEditor {
                 editor.cancelUndo();
 
                 checkSpelling(true);
+                
+                
+                entryActivated = true;
+                if (previousFileName == null
+                        || !previousFileName.equals(getCurrentFile())) {
+                    previousFileName = getCurrentFile();
+                    CoreEvents.fireEntryNewFile(previousFileName);
+                }
                 CoreEvents.fireEntryActivated(m_curEntry.getStrEntry());
-            } // synchronize (editor)
-
-            entryActivated = true;
-            if (previousFileName == null
-                    || !previousFileName.equals(getCurrentFile())) {
-                previousFileName = getCurrentFile();
-                CoreEvents.fireEntryNewFile(previousFileName);
-            }
-        }
     }
 
     /**
@@ -564,7 +556,6 @@ public class EditorController implements IEditor {
     public void commitEntry(final boolean forceCommit) {
         UIThreadsUtil.mustBeSwingThread();
         
-        synchronized (mw) {
             if (!mw.isProjectLoaded())
                 return;
 
@@ -572,7 +563,6 @@ public class EditorController implements IEditor {
                 return;
             entryActivated = false;
 
-            synchronized (editor) {
                 AbstractDocument xlDoc = (AbstractDocument) editor.getDocument();
 
                 AttributeSet attributes = settings.getTranslatedAttributeSet();
@@ -709,14 +699,11 @@ public class EditorController implements IEditor {
                     }
                 }
                 editor.cancelUndo();
-            } // synchronize (editor)
-        }
     }
 
     public void nextEntry() {
         UIThreadsUtil.mustBeSwingThread();
         
-        synchronized (mw) {
             if (!mw.isProjectLoaded())
                 return;
 
@@ -730,13 +717,11 @@ public class EditorController implements IEditor {
             }
 
             activateEntry();
-        }
     }
 
     public void prevEntry() {
         UIThreadsUtil.mustBeSwingThread();
         
-        synchronized (mw) {
             if (!mw.isProjectLoaded())
                 return;
 
@@ -752,7 +737,6 @@ public class EditorController implements IEditor {
                 loadDocument();
             }
             activateEntry();
-        }
     }
 
     /**
@@ -768,7 +752,6 @@ public class EditorController implements IEditor {
     public void nextUntranslatedEntry() {
         UIThreadsUtil.mustBeSwingThread();
         
-        synchronized (mw) {
             // check if a document is loaded
             if (mw.isProjectLoaded() == false)
                 return;
@@ -826,7 +809,6 @@ public class EditorController implements IEditor {
 
             // activate the entry
             activateEntry();
-        }
     }
     
     /**
@@ -835,7 +817,6 @@ public class EditorController implements IEditor {
     public void gotoEntry(final int entryNum) {
         UIThreadsUtil.mustBeSwingThread();
         
-        synchronized (mw) {
             if (!mw.isProjectLoaded())
                 return;
 
@@ -855,7 +836,6 @@ public class EditorController implements IEditor {
                 loadDocument();
             }
             activateEntry();
-        }
     }
 
     /**
@@ -868,7 +848,6 @@ public class EditorController implements IEditor {
     public void changeCase(CHANGE_CASE_TO toWhat) {
         UIThreadsUtil.mustBeSwingThread();
         
-        synchronized (editor) {
             int start = editor.getSelectionStart();
             int end = editor.getSelectionEnd();
 
@@ -968,7 +947,6 @@ public class EditorController implements IEditor {
                 Log.log("bad location exception when changing case");
                 Log.log(ble);
             }
-        }
     }
 
     /**
@@ -1000,12 +978,8 @@ public class EditorController implements IEditor {
     /**
      * Checks whether the selection & caret is inside editable text, and changes
      * their positions accordingly if not.
-     * 
-     * TODO: make private
      */
-    public void checkCaret() {
-        synchronized (mw) {
-            synchronized (editor) {
+    protected void checkCaret() {
                 //int pos = m_editor.getCaretPosition();
                 int spos = editor.getSelectionStart();
                 int epos = editor.getSelectionEnd();
@@ -1041,8 +1015,6 @@ public class EditorController implements IEditor {
                         editor.setCaretPosition(end);
                     }
                 }
-            } // synchronized (editor)
-        }
     }
 
     /**
@@ -1051,12 +1023,8 @@ public class EditorController implements IEditor {
      * 
      * @param forward
      * @return true if space is available
-     * 
-     * TODO: make private
      */
-    public boolean checkCaretForDelete(final boolean forward) {
-        synchronized (mw) {
-            synchronized (editor) {
+    protected boolean checkCaretForDelete(final boolean forward) {
                 int pos = editor.getCaretPosition();
 
                 // make sure range doesn't overlap boundaries
@@ -1078,18 +1046,14 @@ public class EditorController implements IEditor {
                     if (pos <= start && epos <= start && spos <= start)
                         return false;
                 }
-            } // synchronized (editor)
 
             return true;
-        }
     }
 
     /**
      * replace the text in the editor and return the new length
      */
     private int replaceEntry(int offset, int length, String source, String translation, int flags) {
-        synchronized (mw) {
-            synchronized (editor) {
                 AbstractDocument xlDoc = (AbstractDocument) editor.getDocument();
 
                 int result = 0;
@@ -1158,8 +1122,6 @@ public class EditorController implements IEditor {
                 }
 
                 return result;
-            }
-        }
     }
 
     /**
@@ -1168,8 +1130,6 @@ public class EditorController implements IEditor {
     public void replaceEditText(final String text) {
         UIThreadsUtil.mustBeSwingThread();
         
-        synchronized (mw) {
-            synchronized (editor) {
                 // build local offsets
                 int start = getTranslationStart();
                 int end = getTranslationEnd();
@@ -1177,8 +1137,6 @@ public class EditorController implements IEditor {
                 // remove text
                 editor.select(start, end);
                 editor.replaceSelection(text);
-            }
-        }
     }
 
     /**
@@ -1187,41 +1145,25 @@ public class EditorController implements IEditor {
     public void insertText(final String text) {
         UIThreadsUtil.mustBeSwingThread();
         
-        synchronized (mw) {
-            synchronized (editor) {
                 //            int pos = editor.getCaretPosition();
                 //            editor.select(pos, pos);
                 // Removing the two lines above implements:
                 // RFE [ 1579488 ] overwriting with Ctrl+i
                 editor.replaceSelection(text);
-            }
-        }
     }
 
     /**
      * Calculate the position of the start of the current translation
-     * 
-     * TODO: make private
      */
     protected int getTranslationStart() {
-        synchronized (mw) {
-            synchronized (editor) {
                 return m_segmentStartOffset + m_sourceDisplayLength + OConsts.segmentStartStringFull.length();
-            }
-        }
     }
 
     /**
      * Calculcate the position of the end of the current translation
-     * 
-     * TODO: make private
      */
     protected int getTranslationEnd() {
-        synchronized (mw) {
-            synchronized (editor) {
                 return editor.getTextLength() - m_segmentEndInset - OConsts.segmentEndStringFull.length();
-            }
-        }
     }
 
     /**
@@ -1275,15 +1217,11 @@ public class EditorController implements IEditor {
         
         if (!settings.isAutoSpellChecking())
             return;
-        synchronized (editor) {
-            EditorSpellChecking.checkSpelling(full, this, editor);
-        }
+        EditorSpellChecking.checkSpelling(full, this, editor);
     }
     
     /**
      * {@inheritDoc}
-     * 
-     * TODO
      */
     public EditorSettings getSettings() {
         return settings;

@@ -74,7 +74,7 @@ public class MainWindowUI {
      * Create main UI panels.
      */
     public static void createMainComponents(final MainWindow mainWindow, final Font font) {
-        mainWindow.editor = new EditorTextArea(mainWindow);
+        mainWindow.editor = new EditorTextArea();
         mainWindow.matches = new MatchesTextArea(mainWindow);
         mainWindow.glossary = new GlossaryTextArea();
         mainWindow.m_projWin = new ProjectFrame(mainWindow);

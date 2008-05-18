@@ -70,10 +70,8 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
     protected EditorController controller;
     
     /** Creates new form BeanForm */
-    public EditorTextArea(MainWindow mainwindow)
-    {
-        this.mw = mainwindow;
-        
+    public EditorTextArea()
+    {        
         // allow custom editor kit to make custom underlines
         setEditorKit(new ExtendedEditorKit());
         
@@ -95,7 +93,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
     protected UndoManager undoManager;
     
     /** Orders to cancel all Undoable edits. */
-    public synchronized void cancelUndo()
+    public void cancelUndo()
     {
         undoManager.die();
     }
@@ -107,12 +105,8 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
     /**
      * Reacts to double mouse clicks.
      */
-    public synchronized void mouseClicked(MouseEvent e)
+    public void mouseClicked(MouseEvent e)
     {
-        // design-time
-        if (mw==null)
-            return;
-        
         // ignore mouse clicks until document is ready
         if (!controller.m_docReady)
             return;
@@ -161,7 +155,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
      * All real key event processing is done by processKeyEventBody
      **/
     
-    protected synchronized void processKeyEvent(KeyEvent e)
+    protected void processKeyEvent(KeyEvent e)
     {
         processKeyEventBody(e);
         String msg = " " + Integer.toString(controller.m_sourceDisplayLength) + "/" +
@@ -175,13 +169,9 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
      * outside of edit zone while maintaining normal functionality
      * across jvm versions.
      */
-    protected synchronized void processKeyEventBody(KeyEvent e)
+    protected void processKeyEventBody(KeyEvent e)
     {
-        // design-time
-        if (mw==null)
-            return;
-        
-        if (!mw.isProjectLoaded())
+        if (!Core.getDataEngine().isProjectLoaded())
         {
             if( (e.getModifiers()&CTRL_KEY_MASK)==CTRL_KEY_MASK ||
                     (e.getModifiers()&InputEvent.ALT_MASK)==InputEvent.ALT_MASK )
@@ -233,7 +223,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
         switch (keyChar)
         {
             case KeyEvent.VK_BACK_SPACE:
-                if (Core.getEditor().checkCaretForDelete(false))
+                if (controller.checkCaretForDelete(false))
                 {
                     // RFE [ 1579488 ] Ctrl+Backspace
                     if (e.getModifiers() == CTRL_DEL_MASK &&
@@ -255,7 +245,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                             else
                                 setSelectionStart(wordBeforeEnd);
                             // Check selection is within segment
-                            Core.getEditor().checkCaret(); 
+                            controller.checkCaret(); 
                             // Remove selection
                             replaceSelection("");                               // NOI18N
                             // Swallow key event
@@ -276,7 +266,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                 controller.checkSpelling(false);
                 return;
             case KeyEvent.VK_DELETE:
-                if (Core.getEditor().checkCaretForDelete(true))
+                if (controller.checkCaretForDelete(true))
                 {
                     // RFE [ 1579488 ] Ctrl+Delete
                     if (e.getModifiers()== CTRL_DEL_MASK &&
@@ -295,7 +285,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                             else
                                 setSelectionEnd(nextWord);
                             // Check selection is within segment
-                            Core.getEditor().checkCaret(); 
+                            controller.checkCaret(); 
                             // Remove selection
                             replaceSelection("");                               // NOI18N
                             // Swallow key event
@@ -329,7 +319,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
             super.processKeyEvent(e);
             
             // and then "refining" the selection
-            Core.getEditor().checkCaret();
+            controller.checkCaret();
             
             return;
         }
@@ -357,7 +347,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
         
         // every other key press should be within the editing zone
         //	so make sure the caret is there
-        Core.getEditor().checkCaret();
+        controller.checkCaret();
         
         // if user pressed enter, see what modifiers were pressed
         //	so determine what to do
@@ -474,7 +464,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                     setCaretPosition(start);
                 else
                     super.processKeyEvent(e);
-                Core.getEditor().checkCaret();
+                controller.checkCaret();
                 return;
             }
             else if (keyCode == KeyEvent.VK_DOWN		||
@@ -488,7 +478,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
                     setCaretPosition(end);
                 else
                     super.processKeyEvent(e);
-                Core.getEditor().checkCaret();
+                controller.checkCaret();
                 return;
             }
         }
@@ -516,19 +506,19 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
      * because this method does not count the length (costly operation),
      * instead it accounts document length by listening to document updates.
      */
-    public synchronized int getTextLength()
+    protected int getTextLength()
     {
         return textLength;
     }
     
     /** Accounting text length. */
-    public synchronized void removeUpdate(javax.swing.event.DocumentEvent e)
+    public void removeUpdate(javax.swing.event.DocumentEvent e)
     {
         textLength -= e.getLength();
     }
 
     /** Accounting text length. */
-    public synchronized void insertUpdate(javax.swing.event.DocumentEvent e)
+    public void insertUpdate(javax.swing.event.DocumentEvent e)
     {
         textLength += e.getLength();
     }
@@ -543,7 +533,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
      */
     public void replaceSelection(String string) 
     {
-        Core.getEditor().checkCaret();
+        controller.checkCaret();
         super.replaceSelection(string);
         controller.checkSpelling(true);
     }
@@ -553,7 +543,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
      * add and ignore. Works only for the active segment, for the translation
      * @param point : where should the popup be shown
      */
-    private synchronized boolean createSpellCheckerPopUp(Point point) {
+    private boolean createSpellCheckerPopUp(Point point) {
         if (!controller.getSettings().isAutoSpellChecking())
             return false;
         
@@ -564,7 +554,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
      * creates a popup menu for inactive segments - with an item allowing to go 
      * to the given segment.
      */
-    private synchronized boolean createGoToSegmentPopUp(Point point) {
+    private boolean createGoToSegmentPopUp(Point point) {
         final int mousepos = this.viewToModel(point);
         
         if (mousepos >= controller.getTranslationStart() - OConsts.segmentStartStringFull.length()
@@ -575,7 +565,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
 
         JMenuItem item = popup.add(OStrings.getString("MW_PROMPT_SEG_NR_TITLE"));
         item.addActionListener(new ActionListener() {
-              public synchronized void actionPerformed(ActionEvent e) {
+              public void actionPerformed(ActionEvent e) {
                 setCaretPosition(mousepos);
                 goToSegmentAtCaretLocation();
               }
@@ -595,7 +585,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
      * go to the segment specified by the caret position in the editor -
      * this code was in the key event handler previously
      */
-    private synchronized void goToSegmentAtCaretLocation() {
+    private void goToSegmentAtCaretLocation() {
         // user double clicked on view pane - goto entry
         // that was clicked
         int pos = getCaretPosition();

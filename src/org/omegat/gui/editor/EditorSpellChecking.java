@@ -49,6 +49,7 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Token;
 import org.omegat.util.gui.Styles;
+import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * Spell checking processing for editor.
@@ -60,7 +61,7 @@ import org.omegat.util.gui.Styles;
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class EditorSpellChecking {
+class EditorSpellChecking {
     private static final String IMPOSSIBLE = "Should not have happened, " + // NOI18N
             "report to http://sf.net/tracker/?group_id=68187&atid=520347"; // NOI18N
 
@@ -179,7 +180,7 @@ public class EditorSpellChecking {
                     item.addActionListener(new ActionListener() {
                         // the action: replace the word with the selected
                         // suggestion
-                        public synchronized void actionPerformed(ActionEvent e) {
+                        public void actionPerformed(ActionEvent e) {
                             try {
                                 int pos = editor.getCaretPosition();
                                 xlDoc.replace(wordStart, word.length(), replacement, controller.getSettings()
@@ -196,7 +197,7 @@ public class EditorSpellChecking {
                 if (suggestions.size() == 0) {
                     JMenuItem item = editor.popup.add(OStrings.getString("SC_NO_SUGGESTIONS"));
                     item.addActionListener(new ActionListener() {
-                        public synchronized void actionPerformed(ActionEvent e) {
+                        public void actionPerformed(ActionEvent e) {
                             // just hide the menu
                         }
                     });
@@ -232,7 +233,7 @@ public class EditorSpellChecking {
         return true;
     }
 
-    protected static class ChangeUserDictionary {
+    private static class ChangeUserDictionary {
         private final EditorController controller;
         private final EditorTextArea editor;
 
@@ -252,7 +253,8 @@ public class EditorSpellChecking {
          *                true for add, false for ignore
          */
         protected void addIgnoreWord(final String word, final int offset, final boolean add) {
-            synchronized (editor) {
+            UIThreadsUtil.mustBeSwingThread();
+            
                 if (add) {
                     Core.getSpellChecker().learnWord(word);
                 } else {
@@ -324,7 +326,6 @@ public class EditorSpellChecking {
                     Log.log(ex);
                 }
             }
-        }
     }
 
     /**
@@ -337,7 +338,6 @@ public class EditorSpellChecking {
      */
     protected static List<Token> checkSpelling(int start, String text, final EditorController controller,
             final EditorTextArea editor) {
-        synchronized (controller.mw) {
             // we have the translation and it should be spellchecked
             Token[] wordlist = Core.getTokenizer().tokenizeWordsForSpelling(text);
             List<Token> wrongWordList = new ArrayList<Token>();
@@ -362,6 +362,5 @@ public class EditorSpellChecking {
                 }
             }
             return wrongWordList;
-        }
     }
 }

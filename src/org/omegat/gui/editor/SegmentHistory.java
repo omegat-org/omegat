@@ -35,7 +35,7 @@ import java.util.List;
  * Since this class is a singleton, use getInstance() to find out the instance.
  * @author bartkoz
  */
-public class SegmentHistory {
+class SegmentHistory {
     /**
      * the pointer
      */

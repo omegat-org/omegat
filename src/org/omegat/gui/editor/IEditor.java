@@ -29,6 +29,8 @@ import org.omegat.core.matching.SourceTextEntry;
 /**
  * Interface for access to editor functionality.
  * 
+ * Almost all methods must be called from UI thread.
+ * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IEditor {
@@ -124,21 +126,6 @@ public interface IEditor {
     void changeCase(CHANGE_CASE_TO newCase);
 
     /**
-     * Checks whether the selection & caret is inside editable text, and changes
-     * their positions accordingly if not.
-     */
-    void checkCaret();
-
-    /**
-     * Make sure there's one character in the direction indicated for delete
-     * operation.
-     * 
-     * @param forward
-     * @return true if space is available
-     */
-    boolean checkCaretForDelete(boolean forward);
-
-    /**
      * Replaces the entire edit area with a given text.
      * 
      * Must be called only from UI thread.
@@ -177,6 +164,8 @@ public interface IEditor {
      * Get settings instance.
      * 
      * @return interface for read and change editor settings
+     * 
+     * Can be called from any thread.
      */
     EditorSettings getSettings();
     

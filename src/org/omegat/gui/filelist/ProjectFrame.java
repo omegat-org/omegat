@@ -436,10 +436,9 @@ public class ProjectFrame extends JFrame {
         tableTotal.setColumnModel(columns);
 
         tableTotal.setEnabled(false);
-        // result.setShowGrid(false);
 
         tableTotal.setBorder(BorderFactory.createEmptyBorder(50, 5, 10, 5));
-tableTotal.setShowGrid(false);
+        tableTotal.setShowGrid(true);
         tableFiles.getColumnModel().addColumnModelListener(
                 new TableColumnModelListener() {
                     public void columnAdded(TableColumnModelEvent e) {

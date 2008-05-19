@@ -30,7 +30,7 @@ under a minute in most cases.
 1.8.0 update 3 vs. 1.8.0 update 2
 
 
-   1 Enhancement
+   2 Enhancements
    0 Bugfixe
 ----------------------------------------------------------------------
 1.8.0 update 3
@@ -38,6 +38,7 @@ under a minute in most cases.
   Other enhancements:
 
   - Slovak localisation updated to 1.8 (UI)
+  - Dutch localisation updated to 1.8 (UI, readme)
 
 ----------------------------------------------------------------------
  OmegaT 1.8.0 update 2 Changes

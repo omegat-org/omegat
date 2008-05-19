@@ -37,6 +37,8 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -70,7 +72,6 @@ import javax.swing.table.TableColumnModel;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.IDataEngine;
 import org.omegat.core.data.StatisticsInfo;
 import org.omegat.core.data.StringEntry;
@@ -438,21 +439,19 @@ public class ProjectFrame extends JFrame {
         tableTotal.setEnabled(false);
 
         tableTotal.setBorder(BorderFactory.createEmptyBorder(50, 5, 10, 5));
-        tableTotal.setShowGrid(true);
         tableFiles.getColumnModel().addColumnModelListener(
                 new TableColumnModelListener() {
                     public void columnAdded(TableColumnModelEvent e) {
                     }
 
                     public void columnMarginChanged(ChangeEvent e) {
-                        int w;
-                        w = tableFiles.getColumnModel().getColumn(0).getWidth();
-                        tableTotal.getColumnModel().getColumn(0).setMaxWidth(w);
-                        tableTotal.getColumnModel().getColumn(0).setMinWidth(w);
-                        tableTotal.getColumnModel().getColumn(0).setPreferredWidth(w);
+                        changeTotalColumns();
                     }
 
                     public void columnMoved(TableColumnModelEvent e) {
+                        tableTotal.getColumnModel().moveColumn(
+                                e.getFromIndex(), e.getToIndex());
+                        changeTotalColumns();
                     }
 
                     public void columnRemoved(TableColumnModelEvent e) {
@@ -461,6 +460,25 @@ public class ProjectFrame extends JFrame {
                     public void columnSelectionChanged(ListSelectionEvent e) {
                     }
                 });
+        tableFiles.addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent e) {
+                changeTotalColumns();
+            }
+        });
+    }
+
+    /**
+     * Copy columns width from files to total table.
+     */
+    private void changeTotalColumns() {
+        for (int i = 0; i < tableFiles.getColumnCount(); i++) {
+            TableColumn f = tableFiles.getColumnModel().getColumn(i);
+            TableColumn t = tableTotal.getColumnModel().getColumn(i);
+
+            t.setMaxWidth(f.getWidth());
+            t.setMinWidth(f.getWidth());
+            t.setPreferredWidth(f.getWidth());
+        }
     }
 
     /**

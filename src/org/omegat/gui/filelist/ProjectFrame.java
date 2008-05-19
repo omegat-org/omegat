@@ -54,6 +54,7 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
@@ -123,8 +124,8 @@ public class ProjectFrame extends JFrame {
         // set the position and size
         initWindowLayout();
 
-        Container cp = getContentPane();
-        cp.setLayout(new GridBagLayout());
+        JPanel cp = new JPanel(new GridBagLayout());
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.fill = GridBagConstraints.BOTH;
@@ -140,6 +141,9 @@ public class ProjectFrame extends JFrame {
         gbc.gridy = 2;
         gbc.weighty = 0;
         cp.add(tableTotal, gbc);
+
+        cp.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        setContentPane(cp);
 
         m_addNewFileButton = new JButton();
         org.openide.awt.Mnemonics.setLocalizedText(m_addNewFileButton, OStrings
@@ -183,6 +187,7 @@ public class ProjectFrame extends JFrame {
         bbut.add(m_wikiImportButton);
         bbut.add(m_closeButton);
         bbut.add(Box.createHorizontalGlue());
+        bbut.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
         gbc.gridy = 5;
         cp.add(bbut, gbc); // NOI18N
 
@@ -321,19 +326,20 @@ public class ProjectFrame extends JFrame {
 
         files = Core.getDataEngine().getProjectFiles();
         modelFiles.fireTableDataChanged();
-        
+
         uiUpdateImportButtonStatus();
     }
-    
+
     private void buildTotalTableLayout() {
         scrollFiles.setBorder(BorderFactory.createEmptyBorder());
-        Border b2=scrollFiles.getBorder();
-        Insets i1=b2.getBorderInsets(tableFiles);
-        int sc=scrollFiles.getVerticalScrollBar().isVisible()?scrollFiles.getVerticalScrollBar().getWidth():0;
-        
-        GridBagLayout ly=(GridBagLayout)getContentPane().getLayout();
-        GridBagConstraints c=ly.getConstraints(tableTotal);
-        c.insets=new Insets(0,i1.left,0,sc);
+        Border b2 = scrollFiles.getBorder();
+        Insets i1 = b2.getBorderInsets(tableFiles);
+        int sc = scrollFiles.getVerticalScrollBar().isVisible() ? scrollFiles
+                .getVerticalScrollBar().getWidth() : 0;
+
+        GridBagLayout ly = (GridBagLayout) getContentPane().getLayout();
+        GridBagConstraints c = ly.getConstraints(tableTotal);
+        c.insets = new Insets(0, i1.left, 0, sc);
         ly.setConstraints(tableTotal, c);
     }
 

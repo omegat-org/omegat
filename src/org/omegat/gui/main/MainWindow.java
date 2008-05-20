@@ -64,6 +64,7 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.WikiGet;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.ResourcesUtil;
+import org.omegat.util.gui.UIThreadsUtil;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 
@@ -344,16 +345,12 @@ public class MainWindow extends JFrame implements IMainWindow {
     public void showStatusMessage(String str) {
         if (str.length() == 0)
             str = new String() + ' ';
-        if (SwingUtilities.isEventDispatchThread()) {
-            statusLabel.setText(str);
-        } else {
-            final String s = str;
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    statusLabel.setText(s);
-                }
-            });
-        }
+        final String s = str;
+        UIThreadsUtil.executeInSwingThread(new Runnable() {
+            public void run() {
+                statusLabel.setText(s);
+            }
+        });
     }
     
     /**
@@ -386,34 +383,44 @@ public class MainWindow extends JFrame implements IMainWindow {
      * @param msg the message to show
      * @param e exception occured. may be null
      */
-    public void displayWarning(String msg, Throwable e)
-    {
-	showStatusMessage(msg);
-        String fulltext = msg;
-        if( e!=null )
-            fulltext+= "\n" + e.toString();                                     // NOI18N
-        JOptionPane.showMessageDialog(this, fulltext, OStrings.getString("TF_WARNING"),
-                JOptionPane.WARNING_MESSAGE);
+    public void displayWarning(final String msg, final Throwable e) {
+        UIThreadsUtil.executeInSwingThread(new Runnable() {
+            public void run() {
+                showStatusMessage(msg);
+                String fulltext = msg;
+                if (e != null)
+                    fulltext += "\n" + e.toString(); // NOI18N
+                JOptionPane.showMessageDialog(MainWindow.this, fulltext,
+                        OStrings.getString("TF_WARNING"),
+                        JOptionPane.WARNING_MESSAGE);
+            }
+        });
     }
     
     /**
      * {@inheritDoc}
      */
-    public void displayErrorRB(Throwable ex, String errorKey, Object... params)
-    {
-        String msg;
-        if (params != null) {
-            msg = StaticUtils.format(OStrings.getString(errorKey), params);
-        } else {
-            msg = OStrings.getString(errorKey);
-        }
-        
-	showStatusMessage(msg);
-        String fulltext = msg;
-        if( ex!=null )
-            fulltext+= "\n" + ex.toString();                                     // NOI18N
-        JOptionPane.showMessageDialog(this, fulltext, OStrings.getString("TF_ERROR"),
-                JOptionPane.ERROR_MESSAGE);
+    public void displayErrorRB(final Throwable ex, final String errorKey,
+            final Object... params) {
+        UIThreadsUtil.executeInSwingThread(new Runnable() {
+            public void run() {
+                String msg;
+                if (params != null) {
+                    msg = StaticUtils.format(OStrings.getString(errorKey),
+                            params);
+                } else {
+                    msg = OStrings.getString(errorKey);
+                }
+
+                showStatusMessage(msg);
+                String fulltext = msg;
+                if (ex != null)
+                    fulltext += "\n" + ex.toString(); // NOI18N
+                JOptionPane.showMessageDialog(MainWindow.this, fulltext,
+                        OStrings.getString("TF_ERROR"),
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        });
     }
 
     /** Tells whether the project is loaded. */

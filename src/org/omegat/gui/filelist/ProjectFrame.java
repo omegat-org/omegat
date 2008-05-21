@@ -52,7 +52,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -98,7 +98,7 @@ import org.openide.awt.Mnemonics;
  * @author Zoltan Bartko
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class ProjectFrame extends JDialog {
+public class ProjectFrame extends JFrame {
 
     private static final Color CURRENT_FILE_COLOR = new Color(0xC8DDF2);
     private static final int LINE_SPACING = 6;

@@ -91,7 +91,7 @@ public class EditorController implements IEditor {
     protected final MainWindow mw;
 
     private SourceTextEntry m_curEntry;
-    protected int m_curEntryNum = -1;
+    protected int m_curEntryNum = 0;
 
     // starting offset and length of source lang in current segment
     protected int m_segmentStartOffset;
@@ -179,6 +179,7 @@ public class EditorController implements IEditor {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 updateState(SHOW_TYPE.INTRO);
+                pane.requestFocus();
             }
         });
         
@@ -234,7 +235,6 @@ public class EditorController implements IEditor {
         if (pane.getViewport().getView() != data) {
             pane.setViewportView(data);
         }
-        data.requestFocus();
     }
 
     /**

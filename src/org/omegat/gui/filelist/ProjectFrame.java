@@ -208,6 +208,7 @@ public class ProjectFrame extends JDialog {
                 case LOAD:
                     buildDisplay();
                     setVisible(true);
+                    tableFiles.requestFocus();
                     buildTotalTableLayout();
                 }
             }
@@ -325,6 +326,20 @@ public class ProjectFrame extends JDialog {
 
         files = Core.getDataEngine().getProjectFiles();
         modelFiles.fireTableDataChanged();
+
+        // need to copy to local vars against threads synchronization problems
+        final List<IDataEngine.FileInfo> fs = files;
+        // set current file as default selection
+        for (int i = 0; i < fs.size(); i++) {
+            if (fs.get(i).filePath.equals(Core.getEditor().getCurrentFile())) {
+                // set selection to currently edited file
+                tableFiles.getSelectionModel().setSelectionInterval(i, i);
+                // set current file visible in scroller
+                tableFiles.scrollRectToVisible(tableFiles.getCellRect(i, 0,
+                        true));
+                break;
+            }
+        }
 
         uiUpdateImportButtonStatus();
     }

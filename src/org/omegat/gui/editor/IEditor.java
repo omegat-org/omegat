@@ -113,6 +113,11 @@ public interface IEditor {
      * Must be called only from UI thread.
      */
     void gotoEntry(int entryNum);
+    
+    /**
+     * Set current focus to editor.
+     */
+    void requestFocus();
 
     /**
      * Change case of the selected text or if none is selected, of the current

@@ -115,7 +115,6 @@ public class ProjectFrame extends JDialog {
     private MainWindow m_parent;
 
     public ProjectFrame(MainWindow parent) {
-        super(parent, false);
         m_parent = parent;
 
         createTableFiles();
@@ -249,6 +248,7 @@ public class ProjectFrame extends JDialog {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyChar() == KeyEvent.VK_ENTER) {
                     gotoFile(tableFiles.getSelectedRow());
+                    e.consume();
                 }
             }
         });
@@ -327,11 +327,12 @@ public class ProjectFrame extends JDialog {
         files = Core.getDataEngine().getProjectFiles();
         modelFiles.fireTableDataChanged();
 
+        String currentFile = Core.getEditor().getCurrentFile();
         // need to copy to local vars against threads synchronization problems
         final List<IDataEngine.FileInfo> fs = files;
         // set current file as default selection
         for (int i = 0; i < fs.size(); i++) {
-            if (fs.get(i).filePath.equals(Core.getEditor().getCurrentFile())) {
+            if (fs.get(i).filePath.equals(currentFile)) {
                 // set selection to currently edited file
                 tableFiles.getSelectionModel().setSelectionInterval(i, i);
                 // set current file visible in scroller
@@ -533,6 +534,7 @@ public class ProjectFrame extends JDialog {
         }
         entryIndex = fi.firstEntryIndex - fi.size + 1;
         Core.getEditor().gotoEntry(entryIndex);
+        Core.getEditor().requestFocus();
     }
 
     /**

@@ -236,6 +236,13 @@ public class EditorController implements IEditor {
             pane.setViewportView(data);
         }
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void requestFocus() {
+        pane.getViewport().getView().requestFocus();
+    }
 
     /**
      * {@inheritDoc}

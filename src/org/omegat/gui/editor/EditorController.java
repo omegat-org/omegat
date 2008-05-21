@@ -241,7 +241,7 @@ public class EditorController implements IEditor {
      * {@inheritDoc}
      */
     public void requestFocus() {
-        pane.getViewport().getView().requestFocus();
+        pane.getViewport().getView().requestFocusInWindow();
     }
 
     /**

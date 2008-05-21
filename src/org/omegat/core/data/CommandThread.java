@@ -125,8 +125,8 @@ public class CommandThread implements IDataEngine
     
     public void saveProjectProperties() throws IOException {
         ProjectFileStorage.writeProjectFile(m_config);
-        Preferences.setPreference(Preferences.SOURCE_LOCALE, m_config.getSourceLanguage().getLocaleCode());
-        Preferences.setPreference(Preferences.TARGET_LOCALE, m_config.getTargetLanguage().getLocaleCode());
+        Preferences.setPreference(Preferences.SOURCE_LOCALE, m_config.getSourceLanguage().toString());
+        Preferences.setPreference(Preferences.TARGET_LOCALE, m_config.getTargetLanguage().toString());
     }
     /**
      * {@inheritDoc}

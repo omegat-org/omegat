@@ -86,7 +86,8 @@ public class EditorController implements IEditor {
     private final int IS_NOT_TRANSLATED = 2;
 
     private final EditorTextArea editor;
-    private JTextPane introPane;
+    private String introPaneTitle, emptyProjectPaneTitle;
+    private JTextPane introPane, emptyProjectPane;
     protected final MainWindow mw;
 
     private SourceTextEntry m_curEntry;
@@ -148,10 +149,12 @@ public class EditorController implements IEditor {
                 SHOW_TYPE showType;
                 switch (eventType) {
                 case CREATE:
-                    showType=SHOW_TYPE.FIRST_ENTRY;
-                    break;
                 case LOAD:
-                    showType=SHOW_TYPE.FIRST_ENTRY;
+                    if (!Core.getDataEngine().getAllEntries().isEmpty()) {
+                        showType = SHOW_TYPE.FIRST_ENTRY;
+                    } else {
+                        showType = SHOW_TYPE.EMPTY_PROJECT;
+                    }
                     break;
                 case CLOSE:
                     showType=SHOW_TYPE.INTRO;
@@ -171,7 +174,7 @@ public class EditorController implements IEditor {
         });
         
         
-        loadIntro();
+        createAdditionalPanes();
         
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -186,6 +189,7 @@ public class EditorController implements IEditor {
                         // first commit current translation
                         commitEntry(false); // part of fix for bug 1409309
                         editor.setFont(newFont);
+                        emptyProjectPane.setFont(newFont);
                         activateEntry();
                     }
                 });
@@ -194,33 +198,38 @@ public class EditorController implements IEditor {
     private void updateState(SHOW_TYPE showType) {
         UIThreadsUtil.mustBeSwingThread();
 
-        Component data;
-        String title;
+        Component data = null;
+        String title = null;
 
-        if (showType == SHOW_TYPE.INTRO
-                || !Core.getDataEngine().isProjectLoaded()) {
+        switch (showType) {
+        case INTRO:
             data = introPane;
-            title = OStrings.getString("DOCKING_INSTANT_START_TITLE");
-
-            pane.getViewport().getView().requestFocus();
-        } else {
-            String file = getCurrentFile();
+            title = introPaneTitle;
+            break;
+        case EMPTY_PROJECT:
+            data = emptyProjectPane;
+            title = emptyProjectPaneTitle;
+            break;
+        case FIRST_ENTRY:
+            m_curEntryNum = 0;
             title = StaticUtils.format(OStrings
-                    .getString("GUI_SUBWINDOWTITLE_Editor"), file);
+                    .getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
             data = editor;
-            if (showType == SHOW_TYPE.FIRST_ENTRY) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        // need to run later because some other event listeners
-                        // should be called before
-                        m_curEntryNum = 0;
-                        loadDocument();
-                        activateEntry();
-                    }
-                });
-            }
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    // need to run later because some other event listeners
+                    // should be called before
+                    loadDocument();
+                    activateEntry();
+                }
+            });
+            break;
+        case NO_CHANGE:
+            title = StaticUtils.format(OStrings
+                    .getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
+            data = editor;
+            break;
         }
-
         pane.setName(title);
         if (pane.getViewport().getView() != data) {
             pane.setViewportView(data);
@@ -1285,7 +1294,9 @@ public class EditorController implements IEditor {
     }
 
     /** Loads Instant start article */
-    private void loadIntro() {
+    private void createAdditionalPanes() {
+        introPaneTitle = OStrings.getString("DOCKING_INSTANT_START_TITLE");
+        ;
         try {
             String language = detectInstantStartLanguage();
             String filepath = StaticUtils.installDir() + File.separator
@@ -1297,6 +1308,13 @@ public class EditorController implements IEditor {
         } catch (IOException e) {
             // editorScroller.setViewportView(editor);
         }
+
+        emptyProjectPaneTitle = OStrings
+                .getString("TF_INTRO_EMPTYPROJECT_FILENAME");
+        emptyProjectPane = new JTextPane();
+        emptyProjectPane.setEditable(false);
+        emptyProjectPane.setText(OStrings.getString("TF_INTRO_EMPTYPROJECT"));
+        emptyProjectPane.setFont(Core.getMainWindow().getApplicationFont());
     }
 
     /**

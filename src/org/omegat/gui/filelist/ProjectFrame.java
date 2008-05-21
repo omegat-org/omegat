@@ -28,7 +28,6 @@ package org.omegat.gui.filelist;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -53,7 +52,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -99,7 +98,7 @@ import org.openide.awt.Mnemonics;
  * @author Zoltan Bartko
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class ProjectFrame extends JFrame {
+public class ProjectFrame extends JDialog {
 
     private static final Color CURRENT_FILE_COLOR = new Color(0xC8DDF2);
     private static final int LINE_SPACING = 6;
@@ -116,6 +115,7 @@ public class ProjectFrame extends JFrame {
     private MainWindow m_parent;
 
     public ProjectFrame(MainWindow parent) {
+        super(parent, false);
         m_parent = parent;
 
         createTableFiles();
@@ -209,7 +209,6 @@ public class ProjectFrame extends JFrame {
                     buildDisplay();
                     setVisible(true);
                     buildTotalTableLayout();
-                    toFront();
                 }
             }
         });

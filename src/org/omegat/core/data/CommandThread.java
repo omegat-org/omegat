@@ -26,9 +26,7 @@
 
 package org.omegat.core.data;
 
-import java.awt.Frame;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.text.SimpleDateFormat;
@@ -40,6 +38,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -47,7 +47,6 @@ import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.gui.dialogs.ProjectPropertiesDialog;
 import org.omegat.util.FileUtil;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
@@ -75,6 +74,9 @@ import org.omegat.util.gui.UIThreadsUtil;
  */
 public class CommandThread implements IDataEngine
 {
+    /** Local logger. */
+    private static final Logger LOGGER = Logger.getLogger(CommandThread.class
+            .getName());
     /**
      * One and only CommandThread object in the OmegaT.
      * <p>
@@ -710,15 +712,8 @@ public class CommandThread implements IDataEngine
         }
         catch( IndexOutOfBoundsException iobe )
         {
-            StringEntry str = new StringEntry(OStrings.getString("TF_INTRO_EMPTYPROJECT"));
-            str.setTranslation(" ");                                            // NOI18N
-            
-            ProjectFileData file = new ProjectFileData();
-            file.name = sourceRoot() + OStrings.getString("TF_INTRO_EMPTYPROJECT_FILENAME");
-            file.firstEntry = 0;
-            file.lastEntry = 0;
-            
-            return new SourceTextEntry(str, file, 0);
+            LOGGER.log(Level.SEVERE, "Invalid entry index: "+num, iobe);
+            throw iobe;
         }
     }
     

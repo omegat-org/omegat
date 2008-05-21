@@ -49,6 +49,7 @@ import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.search.SearchWindow;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
+import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -480,8 +481,18 @@ public class MainWindowMenuHandler {
      * Opens the spell checking window
      */
     public void optionsSpellCheckMenuItemActionPerformed() {
-        SpellcheckerConfigurationDialog sd = new SpellcheckerConfigurationDialog(mainWindow, Core.getDataEngine()
-                .getProjectProperties().getTargetLanguage());
+        Language currentLanguage = null;
+        if (Core.getDataEngine().isProjectLoaded()){              
+            currentLanguage = 
+                Core.getDataEngine().getProjectProperties().getTargetLanguage();
+        } else {
+            currentLanguage = 
+                new Language(
+                    Preferences.getPreference(Preferences.TARGET_LOCALE));
+        }
+            SpellcheckerConfigurationDialog sd = 
+                new SpellcheckerConfigurationDialog(mainWindow, currentLanguage);
+
         sd.setVisible(true);
         
         if (sd.getReturnStatus() == SpellcheckerConfigurationDialog.RET_OK) {

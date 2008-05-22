@@ -33,6 +33,7 @@ import junit.framework.TestSuite;
 
 import org.omegat.core.data.CommandThread;
 import org.omegat.gui.main.MainWindow;
+import org.omegat.util.Language;
 
 /**
  * Tests for OmegaT segmentation.
@@ -68,7 +69,7 @@ public class SegmenterTest extends TestCase
     public void testSegment()
     {
         List spaces = new ArrayList();
-        List segments = Segmenter.segment("<br7>\n\n<br5>\n\nother", spaces, new ArrayList());
+        List segments = Segmenter.segment(new Language("en"),"<br7>\n\n<br5>\n\nother", spaces, new ArrayList());
         if(segments.size()!=3 || !segments.get(0).toString().equals("<br7>") || 
                 !segments.get(1).toString().equals("<br5>") ||
                 !segments.get(2).toString().equals("other"))
@@ -85,8 +86,8 @@ public class SegmenterTest extends TestCase
         List spaces = new ArrayList();
         List brules = new ArrayList();
         String oldString = "<br7>\n\n<br5>\n\nother";
-        List segments = Segmenter.segment(oldString, spaces, brules);
-        String newString = Segmenter.glue(segments, spaces, brules);
+        List segments = Segmenter.segment(new Language("en"),oldString, spaces, brules);
+        String newString = Segmenter.glue(new Language("en"),new Language("fr"),segments, spaces, brules);
         if(!newString.equals(oldString))
             fail("Glue failed.");
     }

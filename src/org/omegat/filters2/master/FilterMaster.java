@@ -203,13 +203,15 @@ public class FilterMaster
         {
             List<StringBuffer> spaces = new ArrayList<StringBuffer>();
             List<Rule> brules = new ArrayList<Rule>();
-            List<String> segments = Segmenter.segment(entry, spaces, brules);
+            Language sourceLang = Core.getDataEngine().getProjectProperties().getSourceLanguage();
+            Language targetLang = Core.getDataEngine().getProjectProperties().getSourceLanguage();
+            List<String> segments = Segmenter.segment(sourceLang, entry, spaces, brules);
             for(int i=0; i<segments.size(); i++)
             {
                 String onesrc = segments.get(i);
                 segments.set(i, processSingleEntry(onesrc));
             }
-            res.append(Segmenter.glue(segments, spaces, brules));
+            res.append(Segmenter.glue(sourceLang, targetLang, segments, spaces, brules));
         }
         else
             res.append(processSingleEntry(entry));
@@ -895,8 +897,8 @@ public class FilterMaster
         res = res.replaceAll(targetRegexer(AbstractFilter.TFP_EXTENSION),
                 extension);
         
-        Language targetLang = new Language(
-                Preferences.getPreference(Preferences.TARGET_LOCALE));
+        
+        Language targetLang = Core.getDataEngine().getProjectProperties().getTargetLanguage();
         
         res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LOCALE),
                 targetLang.getLocaleCode());

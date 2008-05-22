@@ -29,6 +29,7 @@ import java.io.File;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
 
 /**
  * Storage for project properties.
@@ -40,25 +41,31 @@ import org.omegat.util.Preferences;
 public class ProjectProperties
 {
     /** Default constructor to initialize fields (to get no NPEs). */
-    public ProjectProperties(File projectDir)
-    {
+    public ProjectProperties(File projectDir) {
         setProjectName(projectDir.getName());
         setProjectRoot(projectDir.getAbsolutePath() + File.separator);
         setSourceRoot(projectRoot + OConsts.DEFAULT_SOURCE + File.separator);
         setTargetRoot(projectRoot + OConsts.DEFAULT_TARGET + File.separator);
         setGlossaryRoot(projectRoot + OConsts.DEFAULT_GLOSSARY + File.separator);
         setTMRoot(projectRoot + OConsts.DEFAULT_TM + File.separator);
-        setSourceLanguage("EN-US"); // NOI18N
-        setTargetLanguage("EN-GB"); // NOI18N
+
         setSentenceSegmentingEnabled(true);
-        
-        String sourceLocale = Preferences.getPreference(Preferences.SOURCE_LOCALE);
-        if( !sourceLocale.equals(""))                                                 
+
+        String sourceLocale = Preferences
+                .getPreference(Preferences.SOURCE_LOCALE);
+        if (!StringUtil.isEmpty(sourceLocale)) {
             setSourceLanguage(sourceLocale);
-        
-        String targetLocale = Preferences.getPreference(Preferences.TARGET_LOCALE);
-        if( !targetLocale.equals("") )                                                
+        } else {
+            setSourceLanguage("EN-US"); // NOI18N
+        }
+
+        String targetLocale = Preferences
+                .getPreference(Preferences.TARGET_LOCALE);
+        if (StringUtil.isEmpty(targetLocale)) {
             setTargetLanguage(targetLocale);
+        } else {
+            setTargetLanguage("EN-GB"); // NOI18N
+        }
     }
     
     /** Returns The Target (Compiled) Files Directory */

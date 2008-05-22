@@ -51,8 +51,8 @@ public class TMXWriter {
             final boolean levelTwo, final ProjectProperties m_config, final List<StringEntry> m_strEntryList,
             final List<TransMemory> m_orphanedList) throws IOException {
         // we got this far, so assume lang codes are proper
-        String sourceLocale = Preferences.getPreference(Preferences.SOURCE_LOCALE);
-        String targetLocale = Preferences.getPreference(Preferences.TARGET_LOCALE);
+        String sourceLocale = m_config.getSourceLanguage().toString();
+        String targetLocale = m_config.getTargetLanguage().toString();
         String segmenting;
         if (m_config.isSentenceSegmentingEnabled())
             segmenting = TMXReader.SEG_SENTENCE;

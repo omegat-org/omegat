@@ -78,6 +78,8 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         m_tarList           = new ArrayList<String>();
         m_properties        = new HashMap<String, String>();
         m_variantLanguages  = new HashSet<String>();
+        this.sourceLang = sourceLanguage;
+        this.targetLang = targetLanguage;
         this.sourceLanguage = sourceLanguage.getLanguage();
         this.targetLanguage = targetLanguage.getLanguage();
     }
@@ -390,8 +392,8 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         
         if (isUpgradeSentSeg())
         {
-            List<String> srcSegments = Segmenter.segment(source, null, null);
-            List<String> tarSegments = Segmenter.segment(translation, null, null);
+            List<String> srcSegments = Segmenter.segment(sourceLang, source, null, null);
+            List<String> tarSegments = Segmenter.segment(sourceLang, translation, null, null);
 
             int n = srcSegments.size();
             if( n==tarSegments.size() )
@@ -1094,6 +1096,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     private List<String>    m_tarList;
     private Map<String,String>     m_properties;       // Map<String, String> of TMX properties, specified in the header
     private Set<String>     m_variantLanguages; // Set of (user) acceptable variant languages
+    private Language sourceLang, targetLang;
     private String  sourceLanguage;     // Language/country code set by OmT: LL(-CC)
     private String  targetLanguage;     // Language/country code set by OmT: LL(-CC)
     private String  tmxSourceLanguage;  // Language/country code as specified in TMX header: LL(-CC)

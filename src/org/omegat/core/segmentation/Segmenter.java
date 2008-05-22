@@ -32,11 +32,8 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.omegat.core.Core;
-import org.omegat.core.data.ProjectProperties;
 import org.omegat.util.Language;
 import org.omegat.util.PatternConsts;
-import org.omegat.util.Preferences;
 
 /**
  * The class that sentences the paragraphs into sentences
@@ -67,9 +64,9 @@ public final class Segmenter
      * @param brules    list to store rules that account to breaks
      * @return list of sentences (String objects)
      */
-    public static List<String> segment(String paragraph, List<StringBuffer> spaces, List<Rule> brules)
+    public static List<String> segment(Language lang, String paragraph, List<StringBuffer> spaces, List<Rule> brules)
     {
-        List<String> segments = breakParagraph(paragraph, brules);
+        List<String> segments = breakParagraph(lang, paragraph, brules);
         List<String> sentences = new ArrayList<String>(segments.size());
         if (spaces == null)
             spaces = new ArrayList<StringBuffer>();
@@ -117,10 +114,9 @@ public final class Segmenter
      * @param paragraph the paragraph text
      * @param brules    list to store rules that account to breaks
      */
-    private static List<String> breakParagraph(String paragraph, List<Rule> brules)
+    private static List<String> breakParagraph(Language lang, String paragraph, List<Rule> brules)
     {
-        Language srclang = new Language(Preferences.getPreference(Preferences.SOURCE_LOCALE));
-        List<Rule> rules = SRX.getSRX().lookupRulesForLanguage(srclang);
+        List<Rule> rules = SRX.getSRX().lookupRulesForLanguage(lang);
         if (brules == null)
             brules = new ArrayList<Rule>();
 
@@ -297,13 +293,11 @@ public final class Segmenter
      * @param brules    rules that account to breaks
      * @return glued translated paragraph
      */
-    public static String glue(List<String> sentences, List<StringBuffer> spaces, List<Rule> brules)
+    public static String glue(Language sourceLang, Language targetLang, List<String> sentences, List<StringBuffer> spaces, List<Rule> brules)
     {
         if( sentences.size()<=0 )
             return "";                                                          // NOI18N
 	
-        ProjectProperties config = Core.getDataEngine().getProjectProperties();
-        
         StringBuffer res = new StringBuffer();
         res.append(sentences.get(0));
 	
@@ -313,7 +307,7 @@ public final class Segmenter
             sp.append(spaces.get(2*i-1));
             sp.append(spaces.get(2*i));
             
-            if (CJK_LANGUAGES.contains(config.getTargetLanguage().getLanguageCode()))
+            if (CJK_LANGUAGES.contains(targetLang))
             {
                 Rule rule = brules.get(i-1);
                 char lastChar = res.charAt(res.length() - 1);
@@ -322,7 +316,7 @@ public final class Segmenter
                        || !PatternConsts.SPACY_REGEX.matcher(rule.getAfterbreak()).matches()))
                     sp.setLength(0);
             }
-            else if (CJK_LANGUAGES.contains(config.getSourceLanguage().getLanguageCode()) && 
+            else if (CJK_LANGUAGES.contains(sourceLang) && 
                     sp.length()==0)
                 sp.append(" ");                                                 // NOI18N
 	    

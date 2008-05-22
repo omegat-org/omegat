@@ -255,8 +255,14 @@ public class EditorController implements IEditor {
      * {@inheritDoc}
      */
     public String getCurrentFile() {
-        String fullName = CommandThread.core.getSTE(m_curEntryNum).getSrcFile().name;
-        return fullName.substring(CommandThread.core.sourceRoot().length());
+        try {
+            String fullName = Core.getDataEngine().getAllEntries().get(
+                    m_curEntryNum).getSrcFile().name;
+            return fullName.substring(Core.getDataEngine()
+                    .getProjectProperties().getSourceRoot().length());
+        } catch (IndexOutOfBoundsException ex) {
+            return null;
+        }
     }
 
     /**

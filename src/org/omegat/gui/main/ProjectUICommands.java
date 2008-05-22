@@ -319,4 +319,33 @@ public class ProjectUICommands {
             }
         }.execute();
     }
+    
+    public static void projectCompile() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (!Core.getDataEngine().isProjectLoaded()) {
+            return;
+        }
+
+        // commit the current entry first
+        Core.getEditor().commitEntry(true);
+        Core.getEditor().activateEntry();
+
+        new SwingWorker<Object>() {
+            protected Object doInBackground() throws Exception {
+                Core.getDataEngine().saveProject();
+                Core.getDataEngine().compileProject();
+                return null;
+            }
+
+            protected void done() {
+                try {
+                    get();
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "TF_COMPILE_ERROR");
+                    Core.getMainWindow().displayErrorRB(ex, "TF_COMPILE_ERROR");
+                }
+            }
+        }.execute();
+    }
 }

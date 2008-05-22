@@ -248,12 +248,6 @@ public class CommandThread implements IDataEngine
     public synchronized void compileProject()
             throws IOException, TranslationException
     {
-        if (m_strEntryHash.size() == 0)
-            return;
-        
-        // save project first
-        saveProject();
-
         // build 3 TMX files:
         // - OmegaT-specific, with inline OmegaT formatting tags
         // - TMX Level 1, without formatting tags

@@ -28,20 +28,16 @@
 package org.omegat.gui.main;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.CommandThread;
-import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.spellchecker.ISpellChecker;
-import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.FontSelectionDialog;
-import org.omegat.gui.dialogs.ProjectPropertiesDialog;
 import org.omegat.gui.dialogs.SpellcheckerConfigurationDialog;
 import org.omegat.gui.dialogs.WorkflowOptionsDialog;
 import org.omegat.gui.editor.IEditor;
@@ -123,16 +119,7 @@ public class MainWindowMenuHandler {
      * Create translated documents.
      */
     public void projectCompileMenuItemActionPerformed() {
-        if (!mainWindow.isProjectLoaded())
-            return;
-
-        try {
-            Core.getDataEngine().compileProject();
-        } catch (IOException e) {
-            Core.getMainWindow().displayErrorRB(e, "TF_COMPILE_ERROR");
-        } catch (TranslationException te) {
-            Core.getMainWindow().displayErrorRB(te, "TF_COMPILE_ERROR");
-        }
+        ProjectUICommands.projectCompile();
     }
 
     /** Edits project's properties */

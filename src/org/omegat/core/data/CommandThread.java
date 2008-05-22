@@ -215,14 +215,14 @@ public class CommandThread implements IDataEngine
     /**
      * {@inheritDoc}
      */
-    public synchronized boolean isProjectLoaded() {
+    public boolean isProjectLoaded() {
         return projectLoaded;
     }
     
     /**
      * {@inheritDoc}
      */
-    public synchronized StatisticsInfo getStatistics() {
+    public StatisticsInfo getStatistics() {
         StatisticsInfo info = new StatisticsInfo();
         info.numberOfUniqueSegments = m_strEntryList.size();
         info.numberofTranslatedSegments = numberofTranslatedSegments;

@@ -412,10 +412,6 @@ public class CommandThread implements IDataEngine
         saveThread.resetTime();
     }
     
-    protected void internalSaveProject(final File outTmx) {
-        
-    }
-    
     /**
      * Creates a new Source Text Entry
      * (mapping between source file and a TM).

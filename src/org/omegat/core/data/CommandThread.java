@@ -86,6 +86,8 @@ public class CommandThread implements IDataEngine
      */
     public static CommandThread core;
     
+    private final SaveThread saveThread; 
+    
     public CommandThread()
     {                
         m_config = null;
@@ -96,6 +98,9 @@ public class CommandThread implements IDataEngine
         m_legacyTMs = new ArrayList<LegacyTM>();
         m_orphanedList = new ArrayList<TransMemory>();
         m_modifiedFlag = false;
+        
+        saveThread = new SaveThread();
+        saveThread.start();
     }
     
     //////////////////////////////////////////////////////
@@ -134,6 +139,9 @@ public class CommandThread implements IDataEngine
      */
     public synchronized void loadProject(final ProjectProperties props) throws Exception {
         UIThreadsUtil.mustNotBeSwingThread();
+        
+        saveThread.resetTime();
+
         // load new project
         try
         {
@@ -210,6 +218,8 @@ public class CommandThread implements IDataEngine
             // Just quit, we can't help it anyway
             System.exit(0);
         }
+        
+        saveThread.resetTime();
     }
     
     /**
@@ -342,6 +352,8 @@ public class CommandThread implements IDataEngine
     {
         UIThreadsUtil.mustNotBeSwingThread();
         
+        saveThread.resetTime();
+        
         Preferences.save();
         
         String s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
@@ -396,6 +408,12 @@ public class CommandThread implements IDataEngine
         Statistics.buildProjectStats(m_strEntryList, m_srcTextEntryArray, m_config, numberofTranslatedSegments);
 
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.SAVE);
+        
+        saveThread.resetTime();
+    }
+    
+    protected void internalSaveProject(final File outTmx) {
+        
     }
     
     /**

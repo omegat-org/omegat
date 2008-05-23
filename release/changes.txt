@@ -4,7 +4,7 @@
 2.0.0 vs. 1.8.0 update 3 
 
 
-  3 Enhancements
+  5 Enhancements
   0 Bugfix
 
 ----------------------------------------------------------------------
@@ -18,11 +18,17 @@
   - Shortcut for Reload/Close/Create translated documents
   http://sourceforge.net/support/tracker.php?aid=1618679  
 
+  - Additions to the log
+  http://sourceforge.net/support/tracker.php?aid=1632959   
+
   Other enhancements:
 
   - Zero load time. That is, data required for matching is now computed 
 "on-demand", which means the load time for any project should now be 
 under a minute in most cases.
+
+  - New log system, with log rotation, logging of concurrent instances, 
+and configurable content
 
 ----------------------------------------------------------------------
  OmegaT 1.8.0 update 3 Changes

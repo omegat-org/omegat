@@ -149,7 +149,7 @@ public class CommandThread implements IDataEngine
             
             cleanUp();
             
-            Core.getMainWindow().showStatusMessage(OStrings.getString("CT_LOADING_PROJECT"));
+            Core.getMainWindow().showStatusMessageRB("CT_LOADING_PROJECT");
             
             projectClosing = false;
             
@@ -177,7 +177,7 @@ public class CommandThread implements IDataEngine
             Statistics.buildProjectStats(m_strEntryList, m_srcTextEntryArray, m_config, numberofTranslatedSegments);
             
             // Project Loaded...
-            Core.getMainWindow().showStatusMessage("");
+            Core.getMainWindow().showStatusMessageRB(null);
         }
         catch( Exception e )
         {
@@ -325,12 +325,12 @@ public class CommandThread implements IDataEngine
                 continue;
             // shorten filename to that which is relative to src root
             String midName = filename.substring(srcRoot.length());
-            String message = StaticUtils.format(OStrings.getString("CT_COMPILE_FILE_MX"), new Object[] { midName });
-	    Core.getMainWindow().showStatusMessage(message);
+	        Core.getMainWindow().showStatusMessageRB("CT_COMPILE_FILE_MX",
+                    midName);
 
             fm.translateFile(srcRoot, midName, locRoot, processedFiles);
         }
-        Core.getMainWindow().showStatusMessage(OStrings.getString("CT_COMPILE_DONE_MX"));
+        Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX");
 
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
     }
@@ -517,7 +517,7 @@ public class CommandThread implements IDataEngine
             // since the source files may have changed since the last time
             //  they were loaded, load each string then look for it's
             //  owner
-            Core.getMainWindow().showStatusMessage(OStrings.getString("CT_LOAD_TMX"));
+            Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
             loadTMXFile(proj.getAbsolutePath(), "UTF-8", true); // NOI18N
         }
         catch (IOException e)
@@ -556,8 +556,8 @@ public class CommandThread implements IDataEngine
             // feed file name to project window
             String filepath = filename.substring(m_config.getSourceRoot().length());
             
-            Core.getMainWindow().showStatusMessage(StaticUtils.format(
-                OStrings.getString("CT_LOAD_FILE_MX"), new Object[] {filepath}));
+            Core.getMainWindow().showStatusMessageRB("CT_LOAD_FILE_MX",
+                    filepath);
             
             m_curFile = new ProjectFileData();
             m_curFile.name = filename;
@@ -577,7 +577,7 @@ public class CommandThread implements IDataEngine
                 firstEntry=m_srcTextEntryArray.size();
             }
         }
-        Core.getMainWindow().showStatusMessage(OStrings.getString("CT_LOAD_SRC_COMPLETE"));
+        Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
         m_curFile = null;
     }
     

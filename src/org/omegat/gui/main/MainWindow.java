@@ -44,7 +44,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 import org.omegat.core.Core;
@@ -335,24 +334,30 @@ public class MainWindow extends JFrame implements IMainWindow {
             ProjectUICommands.projectReload();
         }
     }
-    
+ 
     /**
-     * Show message in status bar.
-     * 
-     * @param str
-     *                message text
+     * {@inheritDoc}
      */
-    public void showStatusMessage(String str) {
-        if (str.length() == 0)
-            str = new String() + ' ';
-        final String s = str;
+    public void showStatusMessageRB(final String messageKey,
+            final Object... params) {
+        final String msg;
+        if (messageKey == null) {
+            msg = new String() + ' ';
+        } else {
+            if (params != null) {
+                msg = StaticUtils
+                        .format(OStrings.getString(messageKey), params);
+            } else {
+                msg = OStrings.getString(messageKey);
+            }
+        }
         UIThreadsUtil.executeInSwingThread(new Runnable() {
             public void run() {
-                statusLabel.setText(s);
+                statusLabel.setText(msg);
             }
         });
     }
-    
+
     /**
      * Show message in progress bar.
      * 
@@ -386,7 +391,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     public void displayWarning(final String msg, final Throwable e) {
         UIThreadsUtil.executeInSwingThread(new Runnable() {
             public void run() {
-                showStatusMessage(msg);
+                statusLabel.setText(msg);
                 String fulltext = msg;
                 if (e != null)
                     fulltext += "\n" + e.toString(); // NOI18N
@@ -412,7 +417,7 @@ public class MainWindow extends JFrame implements IMainWindow {
                     msg = OStrings.getString(errorKey);
                 }
 
-                showStatusMessage(msg);
+                statusLabel.setText(msg);
                 String fulltext = msg;
                 if (ex != null)
                     fulltext += "\n" + ex.toString(); // NOI18N

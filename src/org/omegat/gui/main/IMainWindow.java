@@ -45,12 +45,14 @@ public interface IMainWindow {
     Font getApplicationFont();
 
     /**
-     * Show message in status bar.
+     * Show message in status bar from resource bundle by key.
      * 
-     * @param messageText
-     *                message text
+     * @param messageKey
+     *                message key in resource bundle
+     * @param params
+     *                message parameters for formatting
      */
-    void showStatusMessage(String messageText);
+    void showStatusMessageRB(String messageKey, Object... params);
     
     /**
      * Show message in progress bar.

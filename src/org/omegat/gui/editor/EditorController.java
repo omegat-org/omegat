@@ -459,19 +459,17 @@ public class EditorController implements IEditor {
 
                 // <HP-experiment>
                 try {
-                    String msg;
                     if (nearLength > 0 && m_glossaryLength > 0) {
                         // display text indicating both categories exist
-                        msg = StaticUtils.format(OStrings.getString("TF_NUM_NEAR_AND_GLOSSARY"), nearLength,
+                        Core.getMainWindow().showStatusMessageRB("TF_NUM_NEAR_AND_GLOSSARY", nearLength,
                                 m_glossaryLength);
                     } else if (nearLength > 0) {
-                        msg = StaticUtils.format(OStrings.getString("TF_NUM_NEAR"), nearLength);
+                        Core.getMainWindow().showStatusMessageRB("TF_NUM_NEAR", nearLength);
                     } else if (m_glossaryLength > 0) {
-                        msg = StaticUtils.format(OStrings.getString("TF_NUM_GLOSSARY"), m_glossaryLength);
+                        Core.getMainWindow().showStatusMessageRB("TF_NUM_GLOSSARY", m_glossaryLength);
                     } else {
-                        msg = new String();
+                        Core.getMainWindow().showStatusMessageRB(null);
                     }
-                    Core.getMainWindow().showStatusMessage(msg);
                 } catch (Exception exception) {
                     Log.log("ERROR: exception while setting message text:");
                     Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");

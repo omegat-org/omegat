@@ -31,8 +31,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.omegat.core.Core;
-import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 
 /**
  * An independent stream to save project, created in order not to freese UI
@@ -84,13 +82,11 @@ class SaveThread extends Thread {
                             LOGGER.fine("Start project save from SaveThread");
                             Core.getDataEngine().saveProject();
                             LOGGER.fine("Finish project save from SaveThread");
-                            Core.getMainWindow().showStatusMessage(
-                                    StaticUtils.format(OStrings
-                                            .getString("ST_PROJECT_AUTOSAVED"),
-                                            new Object[] { DateFormat
-                                                    .getTimeInstance(
-                                                            DateFormat.SHORT)
-                                                    .format(new Date()) }));
+                            Core.getMainWindow().showStatusMessageRB(
+                                    "ST_PROJECT_AUTOSAVED",
+                                    DateFormat
+                                            .getTimeInstance(DateFormat.SHORT)
+                                            .format(new Date()));
                         }
                     }
                 }

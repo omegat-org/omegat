@@ -216,13 +216,11 @@ public class ProjectUICommands {
 
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {
-                Core.getMainWindow().showStatusMessage(
-                        OStrings.getString("MW_STATUS_SAVING"));
+                Core.getMainWindow().showStatusMessageRB("MW_STATUS_SAVING");
 
                 Core.getDataEngine().saveProject();
 
-                Core.getMainWindow().showStatusMessage(
-                        OStrings.getString("MW_STATUS_SAVED"));
+                Core.getMainWindow().showStatusMessageRB("MW_STATUS_SAVED");
 
                 return null;
             }
@@ -247,15 +245,13 @@ public class ProjectUICommands {
 
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {
-                Core.getMainWindow().showStatusMessage(
-                        OStrings.getString("MW_STATUS_SAVING"));
+                Core.getMainWindow().showStatusMessageRB("MW_STATUS_SAVING");
 
                 Preferences.save();
 
                 Core.getDataEngine().saveProject();
 
-                Core.getMainWindow().showStatusMessage(
-                        OStrings.getString("MW_STATUS_SAVED"));
+                Core.getMainWindow().showStatusMessageRB("MW_STATUS_SAVED");
 
                 return null;
             }

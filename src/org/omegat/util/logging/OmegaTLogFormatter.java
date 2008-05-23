@@ -27,6 +27,8 @@ package org.omegat.util.logging;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 import java.util.logging.Formatter;
 import java.util.logging.Level;
@@ -56,6 +58,20 @@ public class OmegaTLogFormatter extends Formatter {
     private boolean isMaskContainsText;
     private boolean isMaskContainsKey;
     private boolean isMaskContainsLoggerName;
+    private boolean isMaskContainsTime;
+    
+    private String defaultTimeFormat = "HH:mm:ss";
+
+    /**
+     * We have to use ThreadLocal for formatting time because DateFormat is not
+     * thread safe.
+     */
+    private ThreadLocal<SimpleDateFormat> timeFormatter = new ThreadLocal<SimpleDateFormat>() {
+        @Override
+        protected SimpleDateFormat initialValue() {
+            return new SimpleDateFormat(defaultTimeFormat);
+        }
+    };
 
     static {
         // get a positive random number
@@ -87,10 +103,16 @@ public class OmegaTLogFormatter extends Formatter {
         if (logMask == null) {
             logMask = "$mark: $level: $text $key";
         }
+        
+        String timeFormat = manager.getProperty(cname + ".timeFormat");
+        if (timeFormat != null) {
+            defaultTimeFormat = timeFormat;
+        }
 
         isMaskContainsKey = logMask.contains("$key");
         isMaskContainsLevel = logMask.contains("$level");
         isMaskContainsMark = logMask.contains("$mark");
+        isMaskContainsTime = logMask.contains("$time");
         isMaskContainsText = logMask.contains("$text");
         isMaskContainsThreadName = logMask.contains("$threadName");
         isMaskContainsLoggerName = logMask.contains("$loggerName");
@@ -140,6 +162,9 @@ public class OmegaTLogFormatter extends Formatter {
         String res = logMask;
         if (isMaskContainsMark) {
             res = res.replace("$mark", lineMark);
+        }
+        if (isMaskContainsTime) {
+            res = res.replace("$time", timeFormatter.get().format(new Date()));
         }
         if (isMaskContainsLoggerName) {
             res = res.replace("$loggerName", record.getLoggerName());

@@ -1,4 +1,4 @@
-﻿Deze vertaling is het werk van Dick Groskamp, copyright© 2008.
+Deze vertaling is het werk van Dick Groskamp, copyright© 2008.
 
 OmegaT 1.8.0, LeesMij-bestand
 

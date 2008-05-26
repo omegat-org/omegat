@@ -172,6 +172,8 @@ public class CommandThread implements IDataEngine
                 Core.getMainWindow().displayErrorRB(e, "TF_TM_LOAD_ERROR");
                 // allow project load to resume
             }
+
+            m_modifiedFlag = false;
             
             // build word count
             Statistics.buildProjectStats(m_strEntryList, m_srcTextEntryArray, m_config, numberofTranslatedSegments);

@@ -150,122 +150,6 @@ public class FilterMaster
     }
     
     /**
-     * This method is called by filters to:
-     * <ul>
-     * <li>Instruct OmegaT what source strings are translatable.
-     * <li>Get the translation of each source string.
-     * </ul>
-     *
-     * @param entry Translatable source string
-     * @return Translation of the source string. If there's no translation, 
-     * returns the source string itself.
-     */
-    public String processEntry(String entry)
-    {
-        // replacing all occurrences of single CR (\r) or CRLF (\r\n) by LF (\n)
-        // this is reversed at the end of the method
-        // fix for bug 1462566
-        boolean crlf = entry.indexOf("\r\n") > 0;
-        if (crlf)
-            entry = entry.replaceAll("\\r\\n", "\n");
-        boolean cr = entry.indexOf("\r") > 0;
-        if (cr)
-            entry = entry.replaceAll("\\r", "\n");
-
-        // Some special space handling: skip leading and trailing whitespace 
-        // and non-breaking-space
-        int len = entry.length();
-        int b = 0;
-        StringBuffer bs = new StringBuffer();
-        while( b<len && (Character.isWhitespace(entry.charAt(b)) || 
-                         entry.charAt(b)=='\u00A0') )
-        {
-            bs.append(entry.charAt(b));
-            b++;
-        }
-
-        int e = len-1;
-        StringBuffer es = new StringBuffer();
-        while( e>=b && (Character.isWhitespace(entry.charAt(e)) || 
-                        entry.charAt(e)=='\u00A0') )
-        {
-            es.append(entry.charAt(e));
-            e--;
-        }
-        es.reverse();
-
-        entry = StaticUtils.fixChars(entry.substring(b, e+1));
-        
-        StringBuffer res = new StringBuffer();
-        res.append(bs);
-        
-        if( Core.getDataEngine().getProjectProperties().isSentenceSegmentingEnabled() )
-        {
-            List<StringBuffer> spaces = new ArrayList<StringBuffer>();
-            List<Rule> brules = new ArrayList<Rule>();
-            Language sourceLang = Core.getDataEngine().getProjectProperties().getSourceLanguage();
-            Language targetLang = Core.getDataEngine().getProjectProperties().getSourceLanguage();
-            List<String> segments = Segmenter.segment(sourceLang, entry, spaces, brules);
-            for(int i=0; i<segments.size(); i++)
-            {
-                String onesrc = segments.get(i);
-                segments.set(i, processSingleEntry(onesrc));
-            }
-            res.append(Segmenter.glue(sourceLang, targetLang, segments, spaces, brules));
-        }
-        else
-            res.append(processSingleEntry(entry));
-        
-        res.append(es);
-
-        // replacing all occurrences of LF (\n) by either single CR (\r) or CRLF (\r\n)
-        // this is a reversal of the process at the beginning of this method
-        // fix for bug 1462566
-        String result = res.toString();
-        if (crlf)
-            result = result.replaceAll("\\n", "\r\n");
-        else if (cr)
-            result = result.replaceAll("\\n", "\r");
-
-        return result;
-    }
-    
-    /**
-     * Processes a single entry.
-     * This method doesn't perform any changes on the passed string.
-     *
-     * @param src Translatable source string
-     * @return Translation of the source string. If there's no translation, returns the source string itself.
-     */
-    private String processSingleEntry(String src)
-    {
-        // if the search thread is non-null, we're searching inside files
-        // else we're translating them
-        if( searchthread!=null )
-        {
-            searchthread.searchText(src);
-            return src;
-        }
-        else
-        {
-            StringEntry se = CommandThread.core.getStringEntry(src);
-            if( isMemorizing() )
-                CommandThread.core.addEntry(src);
-            if( se==null )
-            {
-                return src;
-            }
-            else
-            {
-                String s = se.getTranslation();
-                if( s==null || s.length()==0 )
-                    s = src;
-                return s;
-            }
-        }
-    }
-    
-    /**
      * OmegaT core calls this method to load a source file.
      *
      * @param filename  The name of the source file to load.
@@ -273,7 +157,7 @@ public class FilterMaster
      * @return          Whether the file was handled by one of OmegaT filters.
      * @see #translateFile(String, String, String)
      */
-    public boolean loadFile(String filename, Set<File> processedFiles)
+    public boolean loadFile(String filename, Set<File> processedFiles, IParseCallback parseCallback)
             throws IOException, TranslationException
     {
         try
@@ -288,11 +172,7 @@ public class FilterMaster
             String inEncoding = lookup.inEncoding;
             AbstractFilter filterObject = lookup.filterObject;
             
-            filterObject.setParseCallback(new IParseCallback() {
-                public String processEntry(String entry) {
-                    return FilterMaster.this.processEntry(entry);
-                }
-            });
+            filterObject.setParseCallback(parseCallback);
             
             List<File> files = filterObject.processFile(inFile, inEncoding, null, null);
             if (files!=null)
@@ -338,11 +218,11 @@ public class FilterMaster
      * @param processedFiles Set of already searched files.
      * @see #translateFile(String, String, String)
      */
-    public void searchFile(String filename, SearchThread searchthread, Set<File> processedFiles)
+    public void searchFile(String filename, SearchThread searchthread, Set<File> processedFiles, IParseCallback parseCallback)
             throws IOException, TranslationException
     {
         setSearchMode(searchthread);
-        loadFile(filename, processedFiles);
+        loadFile(filename, processedFiles, parseCallback);
         cancelSearchMode();
     }
     
@@ -363,7 +243,7 @@ public class FilterMaster
      * @param targetdir The folder to place the translated inFile to.
      * @param processedFiles Set of all already processed files not to redo them again.
      */
-    public void translateFile(String sourcedir, String filename, String targetdir, Set<File> processedFiles)
+    public void translateFile(String sourcedir, String filename, String targetdir, Set<File> processedFiles, IParseCallback parseCallback)
             throws IOException, TranslationException
     {
         setMemorizing(false);
@@ -397,11 +277,7 @@ public class FilterMaster
         
         AbstractFilter filterObject = lookup.filterObject;
         
-        filterObject.setParseCallback(new IParseCallback() {
-            public String processEntry(String entry) {
-                return FilterMaster.this.processEntry(entry);
-            }
-        });
+        filterObject.setParseCallback(parseCallback);
         
         List<File> files = filterObject.processFile(inFile, inEncoding, outFile, outEncoding);
         if (files!=null)

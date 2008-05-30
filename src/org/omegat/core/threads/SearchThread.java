@@ -35,10 +35,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.IDataEngine;
+import org.omegat.core.data.ParseEntry;
 import org.omegat.core.data.TransMemory;
 import org.omegat.core.matching.SourceTextEntry;
+import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.main.MainWindow;
@@ -344,7 +345,7 @@ public class SearchThread extends Thread
             // don't bother to tell handler what we're looking for -
             //	the search data is already known here (and the
             //	handler is in the same thread, so info is not volatile)
-            fm.searchFile(filename, this, processedFiles);
+            fm.searchFile(filename, this, processedFiles, parseCallback);
         }
     }
     
@@ -392,6 +393,22 @@ public class SearchThread extends Thread
             // found a match - do something about it
             foundString(-1, m_curFileName, seg, null);
     }
+    
+    private IParseCallback parseCallback = new ParseEntry() {
+        /**
+         * Processes a single entry. This method doesn't perform any changes on
+         * the passed string.
+         * 
+         * @param src
+         *                Translatable source string
+         * @return Translation of the source string. If there's no translation,
+         *         returns the source string itself.
+         */
+        protected String processSingleEntry(String src) {
+            searchText(src);
+            return src;
+        }
+    };
 
     private SearchWindow m_window;
     private boolean   m_searching;

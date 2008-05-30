@@ -44,6 +44,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.SourceTextEntry;
+import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.FileUtil;
@@ -76,14 +77,6 @@ public class CommandThread implements IDataEngine
     /** Local logger. */
     private static final Logger LOGGER = Logger.getLogger(CommandThread.class
             .getName());
-    /**
-     * One and only CommandThread object in the OmegaT.
-     * <p>
-     * <small>
-     * mihmax: Threading nightmare, IMHO.
-     * </small>
-     */
-    public static CommandThread core;
     
     private final SaveThread saveThread; 
     
@@ -329,7 +322,7 @@ public class CommandThread implements IDataEngine
 	        Core.getMainWindow().showStatusMessageRB("CT_COMPILE_FILE_MX",
                     midName);
 
-            fm.translateFile(srcRoot, midName, locRoot, processedFiles);
+            fm.translateFile(srcRoot, midName, locRoot, processedFiles, translateFilesCallback);
         }
         Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX");
 
@@ -564,7 +557,7 @@ public class CommandThread implements IDataEngine
             m_curFile.name = filename;
             m_curFile.firstEntry = m_srcTextEntryArray.size();
             
-            boolean fileLoaded = fm.loadFile(filename, processedFiles);
+            boolean fileLoaded = fm.loadFile(filename, processedFiles, loadFilesCallback);
             
             m_curFile.lastEntry = m_srcTextEntryArray.size()-1;
 
@@ -713,15 +706,6 @@ public class CommandThread implements IDataEngine
         return m_srcTextEntryArray;
     }
 
-    /**
-     * Can be called from any thread. Caller must be synchronized around
-     * IDataEngine.
-     */
-    public StringEntry getStringEntry(String srcText)
-    {
-        return m_strEntryHash.get(srcText);
-    }
-    
     ////////////////////////////////////////////////////////
     // simple project info
     
@@ -837,6 +821,55 @@ public class CommandThread implements IDataEngine
     public List<FileInfo> getProjectFiles() {
         return projectFilesList;
     }
+        
+    private IParseCallback loadFilesCallback = new ParseEntry() {
+        /**
+         * Processes a single entry. This method doesn't perform any changes on
+         * the passed string.
+         * 
+         * @param src
+         *                Translatable source string
+         * @return Translation of the source string. If there's no translation,
+         *         returns the source string itself.
+         */
+        protected String processSingleEntry(String src) {
+            StringEntry se = m_strEntryHash.get(src);
+            addEntry(src);
+
+            if (se == null) {
+                return src;
+            } else {
+                String s = se.getTranslation();
+                if (s == null || s.length() == 0)
+                    s = src;
+                return s;
+            }
+        }
+    };
+
+    private IParseCallback translateFilesCallback = new ParseEntry() {
+        /**
+         * Processes a single entry. This method doesn't perform any changes on
+         * the passed string.
+         * 
+         * @param src
+         *                Translatable source string
+         * @return Translation of the source string. If there's no translation,
+         *         returns the source string itself.
+         */
+        protected String processSingleEntry(String src) {
+            StringEntry se = m_strEntryHash.get(src);
+
+            if (se == null) {
+                return src;
+            } else {
+                String s = se.getTranslation();
+                if (s == null || s.length() == 0)
+                    s = src;
+                return s;
+            }
+        }
+    };
     
     // project name of strings loaded from TM - store globally so to not
     // pass seperately on each function call

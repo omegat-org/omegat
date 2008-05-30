@@ -44,6 +44,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
+import java.text.MessageFormat;
 import java.util.List;
 
 import javax.swing.AbstractAction;
@@ -56,6 +57,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
@@ -79,6 +81,7 @@ import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.MainWindow;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -108,6 +111,7 @@ public class ProjectFrame extends JFrame {
     private AbstractTableModel modelFiles, modelTotal;
     private List<IDataEngine.FileInfo> files;
 
+    private JTextArea statLabel;
     private JButton m_addNewFileButton;
     private JButton m_wikiImportButton;
     private JButton m_closeButton;
@@ -194,6 +198,15 @@ public class ProjectFrame extends JFrame {
                 .getString("BUTTON_CLOSE"));
         setTitle(OStrings.getString("PF_WINDOW_TITLE"));
 
+        statLabel = new JTextArea();
+        statLabel.setEditable(false);
+        statLabel.setFocusable(false);
+        statLabel.setLineWrap(true);
+        statLabel.setBackground(getBackground());
+        gbc.gridy = 6;
+        gbc.insets = new Insets(10, 0, 0, 0);
+        cp.add(statLabel, gbc);
+
         // Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         // setBounds((screenSize.width-600)/2, (screenSize.height-500)/2, 600,
         // 400);
@@ -262,6 +275,8 @@ public class ProjectFrame extends JFrame {
         tableTotal.setFont(new Font(f.getName(), Font.BOLD, f.getSize()));
         tableFiles.setRowHeight(f.getSize() + LINE_SPACING);
         tableTotal.setRowHeight(f.getSize() + LINE_SPACING);
+
+        statLabel.setFont(f);
     }
 
     /**
@@ -323,6 +338,13 @@ public class ProjectFrame extends JFrame {
      */
     public void buildDisplay() {
         UIThreadsUtil.mustBeSwingThread();
+
+        String statFile = Core.getDataEngine().getProjectProperties()
+                .getProjectInternal()
+                + OConsts.STATS_FILENAME;
+        String statText = MessageFormat.format(OStrings
+                .getString("PF_STAT_PATH"), statFile);
+        statLabel.setText(statText);
 
         files = Core.getDataEngine().getProjectFiles();
         modelFiles.fireTableDataChanged();

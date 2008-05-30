@@ -151,8 +151,6 @@ public class CommandThread implements IDataEngine
             
             projectLoaded = true;
             
-            CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
-                          
             // load in translation database files
             try
             {
@@ -167,6 +165,8 @@ public class CommandThread implements IDataEngine
 
             m_modifiedFlag = false;
             
+            CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
+
             // build word count
             Statistics.buildProjectStats(m_strEntryList, m_srcTextEntryArray, m_config, numberofTranslatedSegments);
             

@@ -184,16 +184,6 @@ public class ProjectFrame extends JFrame {
                 escape, "ESCAPE"); // NOI18N
         getRootPane().getActionMap().put("ESCAPE", escapeAction); // NOI18N
 
-        Box bbut = Box.createHorizontalBox();
-        bbut.add(Box.createHorizontalGlue());
-        bbut.add(m_addNewFileButton);
-        bbut.add(m_wikiImportButton);
-        bbut.add(m_closeButton);
-        bbut.add(Box.createHorizontalGlue());
-        bbut.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
-        gbc.gridy = 5;
-        cp.add(bbut, gbc); // NOI18N
-
         Mnemonics.setLocalizedText(m_closeButton, OStrings
                 .getString("BUTTON_CLOSE"));
         setTitle(OStrings.getString("PF_WINDOW_TITLE"));
@@ -203,9 +193,20 @@ public class ProjectFrame extends JFrame {
         statLabel.setFocusable(false);
         statLabel.setLineWrap(true);
         statLabel.setBackground(getBackground());
-        gbc.gridy = 6;
+        gbc.gridy = 5;
         gbc.insets = new Insets(10, 0, 0, 0);
         cp.add(statLabel, gbc);
+
+        Box bbut = Box.createHorizontalBox();
+        bbut.add(Box.createHorizontalGlue());
+        bbut.add(m_addNewFileButton);
+        bbut.add(m_wikiImportButton);
+        bbut.add(m_closeButton);
+        bbut.add(Box.createHorizontalGlue());
+        bbut.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
+        gbc.gridy = 6;
+        cp.add(bbut, gbc); // NOI18N
+
 
         // Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         // setBounds((screenSize.width-600)/2, (screenSize.height-500)/2, 600,

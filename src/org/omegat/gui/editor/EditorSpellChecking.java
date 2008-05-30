@@ -290,7 +290,7 @@ class EditorSpellChecking {
 
                     // iterate through the entries in this file
                     for (int i = controller.m_xlFirstEntry; i <= controller.m_xlLastEntry; i++) {
-                        SourceTextEntry ste = CommandThread.core.getSTE(i);
+                        SourceTextEntry ste = Core.getDataEngine().getAllEntries().get(i);
                         if (ste.isTranslated() && localCnt != localCur) {
                             // only translated and inactive made it
                             int translationStartOffset = segOffset;

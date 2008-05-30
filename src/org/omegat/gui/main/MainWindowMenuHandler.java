@@ -33,7 +33,6 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.CommandThread;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.dialogs.AboutDialog;
@@ -149,7 +148,7 @@ public class MainWindowMenuHandler {
     public void projectExitMenuItemActionPerformed() {
         boolean projectModified = false;
         if (mainWindow.isProjectLoaded())
-            projectModified = CommandThread.core.isProjectModified();
+            projectModified = Core.getDataEngine().isProjectModified();
 
         // RFE 1302358
         // Add Yes/No Warning before OmegaT quits

@@ -302,8 +302,9 @@ public class SearchThread extends Thread
 
         // search the TM, if requested
         if (m_tmSearch) {
+            synchronized (dataEngine) {
             // search all TM entries
-            for (TransMemory tm : CommandThread.core.getTransMemory()) {
+            for (TransMemory tm : Core.getDataEngine().getTransMemory()) {
                 String srcText = tm.source;
                 String locText = tm.target;
 
@@ -316,6 +317,7 @@ public class SearchThread extends Thread
                 // stop searching if the max. nr of hits has been reached
                 if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS)
                     break;
+            }
             }
         }
     }

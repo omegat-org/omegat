@@ -546,7 +546,7 @@ public class SearchWindow extends JFrame
                     Log.log(error);
                     return;
                 }
-                if (CommandThread.core != null && m_dirCB.isSelected())
+                if (m_dirCB.isSelected())
                 {
                     Preferences.setPreference(Preferences.SEARCHWINDOW_DIR, root);
                     // need to explicitly save preferences because project

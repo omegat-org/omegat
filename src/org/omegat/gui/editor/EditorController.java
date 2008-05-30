@@ -280,7 +280,7 @@ public class EditorController implements IEditor {
                 // clear old text
                 editor.setText(new String());
 
-                m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
+                m_curEntry = Core.getDataEngine().getAllEntries().get(m_curEntryNum);
 
                 m_xlFirstEntry = m_curEntry.getFirstInFile();
                 m_xlLastEntry = m_curEntry.getLastInFile();
@@ -304,7 +304,7 @@ public class EditorController implements IEditor {
                 for (int i = 0; i < xlEntries; i++) {
                     docSeg = new DocumentSegment();
 
-                    SourceTextEntry ste = CommandThread.core.getSTE(i + m_xlFirstEntry);
+                    SourceTextEntry ste = Core.getDataEngine().getAllEntries().get(i + m_xlFirstEntry);
                     String sourceText = ste.getSrcText();
                     String text = ste.getTranslation();
 
@@ -369,7 +369,7 @@ public class EditorController implements IEditor {
                 return;
             int translatedInFile = 0;
             for (int _i = m_xlFirstEntry; _i <= m_xlLastEntry; _i++) {
-                if (CommandThread.core.getSTE(_i).isTranslated())
+                if (Core.getDataEngine().getAllEntries().get(_i).isTranslated())
                     translatedInFile++;
             }
             
@@ -405,7 +405,7 @@ public class EditorController implements IEditor {
                     // FIX: m_curEntryNum = m_xlLastEntry;
                 }
                 // </HP-experiment>
-                m_curEntry = CommandThread.core.getSTE(m_curEntryNum);
+                m_curEntry = Core.getDataEngine().getAllEntries().get(m_curEntryNum);
                 String srcText = m_curEntry.getSrcText();
 
                 m_sourceDisplayLength = srcText.length();

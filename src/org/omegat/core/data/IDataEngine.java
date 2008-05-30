@@ -89,6 +89,11 @@ public interface IDataEngine {
     boolean isProjectLoaded();
 
     /**
+     * Is project modified ?
+     */
+    boolean isProjectModified();
+    
+    /**
      * Mark project as dirty, i.e. translated, then project should be saved.
      */
     void markAsDirty();
@@ -122,6 +127,12 @@ public interface IDataEngine {
      *         loaded
      */
     List<LegacyTM> getMemory();
+    
+    /**
+     * Get additional translation memory objects.
+     * @return list of additional memories
+     */
+    List<TransMemory> getTransMemory();
 
     List<FileInfo> getProjectFiles();
 

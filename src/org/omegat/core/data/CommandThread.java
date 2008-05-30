@@ -38,7 +38,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.omegat.core.Core;
@@ -703,29 +702,6 @@ public class CommandThread implements IDataEngine
     private static String millisToDateTime(final long millis) {
         return new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
     }
-
-    /**
-     * Returns a Source Text Entry of a certain number.
-     * <p>
-     * Source text entry is an individual segment for translation pulled
-     * directly from the input files. There can be many SourceTextEntries having
-     * identical source language strings.
-     * 
-     * Can be called from any thread. Caller must be synchronized around
-     * IDataEngine.
-     */
-    public SourceTextEntry getSTE(int num)
-    {
-        try
-        {
-            return m_srcTextEntryArray.get(num);
-        }
-        catch( IndexOutOfBoundsException iobe )
-        {
-            LOGGER.log(Level.SEVERE, "Invalid entry index: "+num, iobe);
-            throw iobe;
-        }
-    }
     
     /**
      * {@inheritDoc}
@@ -757,6 +733,8 @@ public class CommandThread implements IDataEngine
     { return m_config.getSourceRoot();		}
     
     /**
+     * {@inheritDoc}
+     * 
      * Can be called from any thread. Caller must be synchronized around
      * IDataEngine.
      */

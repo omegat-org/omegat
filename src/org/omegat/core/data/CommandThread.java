@@ -130,6 +130,7 @@ public class CommandThread implements IDataEngine
      * TODO: change to File parameter
      */
     public synchronized void loadProject(final ProjectProperties props) throws Exception {
+        LOGGER.info(OStrings.getString("LOG_DATAENGINE_LOAD_START"));
         UIThreadsUtil.mustNotBeSwingThread();
         
         saveThread.resetTime();
@@ -214,6 +215,7 @@ public class CommandThread implements IDataEngine
         }
         
         saveThread.resetTime();
+        LOGGER.info(OStrings.getString("LOG_DATAENGINE_LOAD_END"));
     }
     
     /**
@@ -245,6 +247,8 @@ public class CommandThread implements IDataEngine
         projectClosing = true;
         cleanUp();
 
+        LOGGER.info(OStrings.getString("LOG_DATAENGINE_CLOSE"));
+
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE);
     }
     
@@ -252,6 +256,8 @@ public class CommandThread implements IDataEngine
     public synchronized void compileProject()
             throws IOException, TranslationException
     {
+        LOGGER.info(OStrings.getString("LOG_DATAENGINE_COMPILE_START"));
+        UIThreadsUtil.mustNotBeSwingThread();
         // build 3 TMX files:
         // - OmegaT-specific, with inline OmegaT formatting tags
         // - TMX Level 1, without formatting tags
@@ -327,13 +333,18 @@ public class CommandThread implements IDataEngine
         Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX");
 
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
+        
+        LOGGER.info(OStrings.getString("LOG_DATAENGINE_COMPILE_END"));
     }
     
     /** Saves the translation memory and preferences */
     public synchronized void saveProject()
     {
-        if( isProjectModified() )
+        if (isProjectModified()) {
             forceSave(false);
+        } else {
+            LOGGER.info(OStrings.getString("LOG_DATAENGINE_SAVE_NONEED"));
+        }
     }
     
     public synchronized void markAsDirty()
@@ -344,6 +355,7 @@ public class CommandThread implements IDataEngine
     /** Does actually save the Project's TMX file and preferences. */
     private void forceSave(boolean corruptionDanger)
     {
+        LOGGER.info(OStrings.getString("LOG_DATAENGINE_SAVE_START"));
         UIThreadsUtil.mustNotBeSwingThread();
         
         saveThread.resetTime();
@@ -404,6 +416,7 @@ public class CommandThread implements IDataEngine
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.SAVE);
         
         saveThread.resetTime();
+        LOGGER.info(OStrings.getString("LOG_DATAENGINE_SAVE_END"));
     }
     
     /**
@@ -435,6 +448,7 @@ public class CommandThread implements IDataEngine
      */
     public synchronized void createProject(final File newProjectDir, final ProjectProperties newProps)
     {
+        LOGGER.info(OStrings.getString("LOG_DATAENGINE_CREATE_START"));
         UIThreadsUtil.mustBeSwingThread();
         m_config = newProps;
         try
@@ -455,6 +469,7 @@ public class CommandThread implements IDataEngine
             Log.logErrorRB(e, "CT_ERROR_CREATING_PROJECT");
             Core.getMainWindow().displayErrorRB(e, "CT_ERROR_CREATING_PROJECT");
         }
+        LOGGER.info(OStrings.getString("LOG_DATAENGINE_CREATE_END"));
     }
     
     /**

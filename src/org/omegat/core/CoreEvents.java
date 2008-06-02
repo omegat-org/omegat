@@ -118,9 +118,9 @@ public class CoreEvents {
     /** Fire event. */
     public static void fireProjectChange(
             final IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
-        Log.logInfoRB("LOG_INFO_EVENT_PROJECT_CHANGE", eventType);
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+                Log.logInfoRB("LOG_INFO_EVENT_PROJECT_CHANGE", eventType);
                 synchronized (projectEventListeners) {
                     for (IProjectEventListener listener : projectEventListeners) {
                         listener.onProjectChanged(eventType);
@@ -132,9 +132,9 @@ public class CoreEvents {
 
     /** Fire event. */
     public static void fireApplicationStartup() {
-        Log.logInfoRB("LOG_INFO_EVENT_APPLICATION_STARTUP");
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+                Log.logInfoRB("LOG_INFO_EVENT_APPLICATION_STARTUP");
                 synchronized (applicationEventListeners) {
                     for (IApplicationEventListener listener : applicationEventListeners) {
                         listener.onApplicationStartup();
@@ -146,9 +146,9 @@ public class CoreEvents {
 
     /** Fire event. */
     public static void fireApplicationShutdown() {
-        Log.logInfoRB("LOG_INFO_EVENT_APPLICATION_SHUTDOWN");
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+                Log.logInfoRB("LOG_INFO_EVENT_APPLICATION_SHUTDOWN");
                 synchronized (applicationEventListeners) {
                     for (IApplicationEventListener listener : applicationEventListeners) {
                         listener.onApplicationShutdown();
@@ -160,9 +160,9 @@ public class CoreEvents {
 
     /** Fire event. */
     public static void fireEntryNewFile(final String activeFileName) {
-        Log.logInfoRB("LOG_INFO_EVENT_ENTRY_NEWFILE", activeFileName);
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+                Log.logInfoRB("LOG_INFO_EVENT_ENTRY_NEWFILE", activeFileName);
                 synchronized (entryEventListeners) {
                     for (IEntryEventListener listener : entryEventListeners) {
                         listener.onNewFile(activeFileName);
@@ -174,9 +174,9 @@ public class CoreEvents {
 
     /** Fire event. */
     public static void fireEntryActivated(final StringEntry newEntry) {
-        Log.logInfoRB("LOG_INFO_EVENT_ENTRY_ACTIVATED");
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+                Log.logInfoRB("LOG_INFO_EVENT_ENTRY_ACTIVATED");
                 synchronized (entryEventListeners) {
                     for (IEntryEventListener listener : entryEventListeners) {
                         listener.onEntryActivated(newEntry);
@@ -188,9 +188,9 @@ public class CoreEvents {
     
     /** Fire event. */
     public static void fireFontChanged(final Font newFont) {
-        Log.logInfoRB("LOG_INFO_EVENT_FONT_CHANGED");
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+                Log.logInfoRB("LOG_INFO_EVENT_FONT_CHANGED");
                 synchronized (fontChangedEventListeners) {
                     for (IFontChangedEventListener listener : fontChangedEventListeners) {
                         listener.onFontChanged(newFont);

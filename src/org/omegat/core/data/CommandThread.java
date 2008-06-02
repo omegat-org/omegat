@@ -141,6 +141,10 @@ public class CommandThread implements IDataEngine
         // load new project
         try
         {
+            Preferences.setPreference(Preferences.CURRENT_FOLDER, new File(
+                    props.getProjectRoot()).getParentFile().getAbsolutePath());
+            Preferences.save();
+            
             m_config = props;
             
             cleanUp();

@@ -78,7 +78,8 @@ public class CommandThread implements IDataEngine
     private static final Logger LOGGER = Logger.getLogger(CommandThread.class
             .getName());
     
-    private final SaveThread saveThread; 
+    private final SaveThread saveThread;
+    private final CheckThread checkThread;
     
     public CommandThread()
     {                
@@ -93,6 +94,8 @@ public class CommandThread implements IDataEngine
         
         saveThread = new SaveThread();
         saveThread.start();
+        checkThread = new CheckThread();
+        checkThread.start();
     }
     
     //////////////////////////////////////////////////////

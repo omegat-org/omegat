@@ -29,14 +29,20 @@ import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 /**
  * Class for check thread locking. Should be disabled for production use, but
- * useful for debugging.
+ * useful for debugging. You can run "telnet 1122" or open
+ * "http://localhost:1122" in browser for receive threads dump into log.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class CheckThread extends Thread {
+    /** Local logger. */
+    private static final Logger LOGGER = Logger.getLogger(CheckThread.class
+            .getName());
+
     @Override
     public void run() {
         try {
@@ -48,15 +54,15 @@ public class CheckThread extends Thread {
                 long[] ids = mx.findMonitorDeadlockedThreads();
                 if (ids != null) {
                     for (long id : ids) {
-                        System.err.println("Deadlocked " + id);
+                        LOGGER.severe("Deadlocked " + id);
                     }
                 }
                 for (ThreadInfo ti : mx.getThreadInfo(mx.getAllThreadIds(), 8)) {
-                    System.err.println("Thread " + ti.getThreadId() + "("
+                    LOGGER.severe("Thread " + ti.getThreadId() + "("
                             + ti.getThreadName() + ") state="
                             + ti.getThreadState());
                     for (StackTraceElement st : ti.getStackTrace()) {
-                        System.err.println("    " + st);
+                        LOGGER.severe("    " + st);
                     }
                 }
             }

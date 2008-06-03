@@ -31,7 +31,6 @@ package org.omegat.core.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.omegat.core.Core;
 import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.IParseCallback;
@@ -45,6 +44,11 @@ import org.omegat.util.StaticUtils;
  * @author Henry Pijffers
  */
 public abstract class ParseEntry implements IParseCallback {
+    private final ProjectProperties m_config;
+
+    public ParseEntry(final ProjectProperties m_config) {
+        this.m_config = m_config;
+    }
     /**
      * This method is called by filters to:
      * <ul>
@@ -93,14 +97,11 @@ public abstract class ParseEntry implements IParseCallback {
         StringBuffer res = new StringBuffer();
         res.append(bs);
 
-        if (Core.getDataEngine().getProjectProperties()
-                .isSentenceSegmentingEnabled()) {
+        if (m_config.isSentenceSegmentingEnabled()) {
             List<StringBuffer> spaces = new ArrayList<StringBuffer>();
             List<Rule> brules = new ArrayList<Rule>();
-            Language sourceLang = Core.getDataEngine().getProjectProperties()
-                    .getSourceLanguage();
-            Language targetLang = Core.getDataEngine().getProjectProperties()
-                    .getSourceLanguage();
+            Language sourceLang = m_config.getSourceLanguage();
+            Language targetLang = m_config.getTargetLanguage();
             List<String> segments = Segmenter.segment(sourceLang, entry,
                     spaces, brules);
             for (int i = 0; i < segments.size(); i++) {

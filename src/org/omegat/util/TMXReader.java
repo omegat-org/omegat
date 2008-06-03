@@ -71,7 +71,8 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
       */
     public TMXReader(String   encoding,
                      Language sourceLanguage,
-                     Language targetLanguage) 
+                     Language targetLanguage,
+                     boolean isSegmentingEnabled) 
     {
         m_encoding          = encoding;
         m_srcList           = new ArrayList<String>();
@@ -82,6 +83,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         this.targetLang = targetLanguage;
         this.sourceLanguage = sourceLanguage.getLanguage();
         this.targetLanguage = targetLanguage.getLanguage();
+        this.isSegmentingEnabled = isSegmentingEnabled;
     }
     
     /** Returns the source language */
@@ -185,7 +187,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             {
                 upgrade14X = getCreationToolVersion().compareTo(CTV_OMEGAT_1) <= 0;
                 upgradeSentSeg = SEG_PARAGRAPH.equals(getSegType()) && 
-                        Core.getDataEngine().getProjectProperties().isSentenceSegmentingEnabled();
+                        isSegmentingEnabled;
             }
             upgradeCheckComplete = true;
         }
@@ -1113,6 +1115,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     private Stack<String>   currentElement;     // Stack of tag names up to the current parsing point
     private Stack<StringBuffer>   currentSub;         // Stack of sub segment buffers
     private String  currentProperty;    // Name of the current property being parsed (null if none)
+    private boolean isSegmentingEnabled;
 
     /**
       * Internal class to represent translation unit variants

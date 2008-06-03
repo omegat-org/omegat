@@ -28,6 +28,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.text.AttributeSet;
 
+import org.omegat.core.Core;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -101,8 +102,10 @@ public class EditorSettings {
         Preferences.setPreference(Preferences.MARK_TRANSLATED_SEGMENTS,
                 markTranslated);
 
-        parent.loadDocument();
-        parent.activateEntry();
+        if (Core.getDataEngine().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
     }
 
     public boolean isMarkUntranslated() {
@@ -118,8 +121,10 @@ public class EditorSettings {
         Preferences.setPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS,
                 markUntranslated);
 
-        parent.loadDocument();
-        parent.activateEntry();
+        if (Core.getDataEngine().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
     }
 
     /** display the segmetn sources or not */
@@ -136,8 +141,10 @@ public class EditorSettings {
         Preferences.setPreference(Preferences.DISPLAY_SEGMENT_SOURCES,
                 displaySegmentSources);
 
-        parent.loadDocument();
-        parent.activateEntry();
+        if (Core.getDataEngine().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
     }
     
     /** need to check spell or not */
@@ -152,7 +159,9 @@ public class EditorSettings {
         
         this.autoSpellChecking = autoSpellChecking;
         
-        parent.loadDocument();
-        parent.activateEntry();
+        if (Core.getDataEngine().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
     }
 }

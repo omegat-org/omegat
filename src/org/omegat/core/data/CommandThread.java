@@ -33,10 +33,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -44,7 +42,6 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.SourceTextEntry;
-import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.FileUtil;
@@ -82,16 +79,7 @@ public class CommandThread implements IDataEngine
     private final CheckThread checkThread;
     
     public CommandThread()
-    {                
-        m_config = null;
-        m_strEntryHash = new HashMap<String, StringEntry>(4096);
-        m_strEntryList = new ArrayList<StringEntry>();
-        m_srcTextEntryArray = new ArrayList<SourceTextEntry>(4096);
-        m_tmList = new ArrayList<TransMemory>();
-        m_legacyTMs = new ArrayList<LegacyTM>();
-        m_orphanedList = new ArrayList<TransMemory>();
-        m_modifiedFlag = false;
-        
+    {   
         saveThread = new SaveThread();
         saveThread.start();
         checkThread = new CheckThread();
@@ -106,38 +94,37 @@ public class CommandThread implements IDataEngine
      * Clears all hashes, lists etc.
      */
     private void cleanUp()
-    {
-        m_strEntryHash.clear();
-        
-        m_legacyTMs.clear();
-        
-        m_tmList.clear();
-        m_orphanedList.clear();
-        
-        m_strEntryList.clear();
-        m_srcTextEntryArray.clear();
-        
+    {       
         numberofTranslatedSegments = 0;
+        
+        //TODO: clear cache on event handling
         
         // reset token list cache
         Core.getTokenizer().clearCache();
     }
     
     public void saveProjectProperties() throws IOException {
-        ProjectFileStorage.writeProjectFile(m_config);
-        Preferences.setPreference(Preferences.SOURCE_LOCALE, m_config.getSourceLanguage().toString());
-        Preferences.setPreference(Preferences.TARGET_LOCALE, m_config.getTargetLanguage().toString());
+        ProjectFileStorage.writeProjectFile(currentProject.m_config);
+        Preferences.setPreference(Preferences.SOURCE_LOCALE, currentProject.m_config.getSourceLanguage().toString());
+        Preferences.setPreference(Preferences.TARGET_LOCALE, currentProject.m_config.getTargetLanguage().toString());
     }
     /**
      * {@inheritDoc}
      * TODO: change to File parameter
      */
-    public synchronized void loadProject(final ProjectProperties props) throws Exception {
+    public void loadProject(final ProjectProperties props) throws Exception {
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_LOAD_START"));
         UIThreadsUtil.mustNotBeSwingThread();
         
         saveThread.resetTime();
 
+        synchronized (CommandThread.this) {
+            currentProject = null;
+        }
+        cleanUp();
+        
+        ProjectContext newProject = new ProjectContext();
+        
         // load new project
         try
         {
@@ -145,24 +132,18 @@ public class CommandThread implements IDataEngine
                     props.getProjectRoot()).getParentFile().getAbsolutePath());
             Preferences.save();
             
-            m_config = props;
-            
-            cleanUp();
+            newProject.m_config = props;
             
             Core.getMainWindow().showStatusMessageRB("CT_LOADING_PROJECT");
+                        
+            loadSourceFiles(newProject);
             
-            projectClosing = false;
-            
-            loadSourceFiles(props.getProjectRoot());
-            
-            loadTranslations();
-            
-            projectLoaded = true;
+            loadTranslations(newProject);
             
             // load in translation database files
             try
             {
-                loadTM();
+                loadTM(newProject);
             }
             catch (IOException e)
             {
@@ -171,25 +152,18 @@ public class CommandThread implements IDataEngine
                 // allow project load to resume
             }
 
-            m_modifiedFlag = false;
-            
-            CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
-
             // build word count
-            Statistics.buildProjectStats(m_strEntryList, m_srcTextEntryArray, m_config, numberofTranslatedSegments);
+            Statistics.buildProjectStats(newProject.m_strEntryList, newProject.m_srcTextEntryArray, newProject.m_config, numberofTranslatedSegments);
             
             // Project Loaded...
             Core.getMainWindow().showStatusMessageRB(null);
+            
+            newProject.m_modifiedFlag = false;
         }
         catch( Exception e )
         {
-            // any error
-            if( !projectClosing ) {
                 Log.logErrorRB(e, "TF_LOAD_ERROR");
                 Core.getMainWindow().displayErrorRB(e, "TF_LOAD_ERROR");
-            }
-            else
-                Log.logRB("CT_CANCEL_LOAD");               // NOI18N
         }
         // Fix for bug 1571944 @author Henry Pijffers (henry.pijffers@saxnot.com)
         catch (OutOfMemoryError oome) {
@@ -197,18 +171,13 @@ public class CommandThread implements IDataEngine
             // Of course we should've cleaned up after ourselves earlier,
             // but since we didn't, do a bit of cleaning up now, otherwise
             // we can't even inform the user about our slacking off.
-            m_strEntryHash.clear();
-            m_strEntryHash = null;
-            m_strEntryList.clear();
-            m_strEntryList = null;
-            m_srcTextEntryArray.clear();
-            m_srcTextEntryArray = null;
-            m_legacyTMs.clear();
-            m_legacyTMs = null;
-            m_tmList.clear();
-            m_tmList = null;
-            m_orphanedList.clear();
-            m_orphanedList = null;
+            newProject.m_strEntryHash.clear();
+            newProject.m_strEntryList.clear();
+            newProject.m_srcTextEntryArray.clear();
+            newProject.m_legacyTMs.clear();
+            newProject.m_tmList.clear();
+            newProject.m_orphanedList.clear();
+            newProject = null;
 
             // Well, that cleared up some, GC to the rescue!
             System.gc();
@@ -221,7 +190,13 @@ public class CommandThread implements IDataEngine
             System.exit(0);
         }
         
+        synchronized (CommandThread.this) {
+            currentProject = newProject;
+        }
         saveThread.resetTime();
+
+        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
+
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_LOAD_END"));
     }
     
@@ -229,7 +204,7 @@ public class CommandThread implements IDataEngine
      * {@inheritDoc}
      */
     public boolean isProjectLoaded() {
-        return projectLoaded;
+        return currentProject != null;
     }
     
     /**
@@ -237,21 +212,21 @@ public class CommandThread implements IDataEngine
      */
     public StatisticsInfo getStatistics() {
         StatisticsInfo info = new StatisticsInfo();
-        info.numberOfUniqueSegments = m_strEntryList.size();
+        info.numberOfUniqueSegments = currentProject.m_strEntryList.size();
         info.numberofTranslatedSegments = numberofTranslatedSegments;
-        info.numberOfSegmentsTotal = m_srcTextEntryArray.size();
+        info.numberOfSegmentsTotal = currentProject.m_srcTextEntryArray.size();
         return info;
     }
     
-    private boolean projectClosing = false;
     /**
      * Signals to the core thread that a project is being closed now,
      * and if it's still being loaded, core thread shouldn't throw
      * any error.
      */
-    public synchronized void closeProject() {
-        projectLoaded = false;
-        projectClosing = true;
+    public void closeProject() {
+        synchronized (CommandThread.this) {
+            currentProject = null;
+        }
         cleanUp();
 
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_CLOSE"));
@@ -260,11 +235,17 @@ public class CommandThread implements IDataEngine
     }
     
     /** Builds all translated files and creates fresh TM files. */
-    public synchronized void compileProject()
+    public void compileProject()
             throws IOException, TranslationException
     {
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_COMPILE_START"));
         UIThreadsUtil.mustNotBeSwingThread();
+        
+        ProjectContext context;
+        synchronized (CommandThread.this) {
+            context = currentProject;
+        }
+        
         // build 3 TMX files:
         // - OmegaT-specific, with inline OmegaT formatting tags
         // - TMX Level 1, without formatting tags
@@ -272,19 +253,19 @@ public class CommandThread implements IDataEngine
         try
         {
                 // build TMX with OmegaT tags
-                String fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.OMEGAT_TMX
+                String fname = context.m_config.getProjectRoot() + context.m_config.getProjectName() + OConsts.OMEGAT_TMX
                         + OConsts.TMX_EXTENSION;
-                TMXWriter.buildTMXFile(fname, false, false, false, m_config, m_strEntryList, m_orphanedList);
+                TMXWriter.buildTMXFile(fname, false, false, false, context.m_config, context.m_strEntryList, context.m_orphanedList);
 
                 // build TMX level 1 compliant file
-                fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.LEVEL1_TMX
+                fname = context.m_config.getProjectRoot() + context.m_config.getProjectName() + OConsts.LEVEL1_TMX
                         + OConsts.TMX_EXTENSION;
-                TMXWriter.buildTMXFile(fname, true, false, false, m_config, m_strEntryList, m_orphanedList);
+                TMXWriter.buildTMXFile(fname, true, false, false, context.m_config, context.m_strEntryList, context.m_orphanedList);
 
                 // build three-quarter-assed TMX level 2 file
-                fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.LEVEL2_TMX
+                fname = context.m_config.getProjectRoot() + context.m_config.getProjectName() + OConsts.LEVEL2_TMX
                         + OConsts.TMX_EXTENSION;
-                TMXWriter.buildTMXFile(fname, false, false, true, m_config, m_strEntryList, m_orphanedList);
+                TMXWriter.buildTMXFile(fname, false, false, true, context.m_config, context.m_strEntryList, context.m_orphanedList);
         }
         catch (IOException e)
         {
@@ -297,8 +278,8 @@ public class CommandThread implements IDataEngine
         
         // build mirror directory of source tree
         List<String> fileList = new ArrayList<String>(256);
-        String srcRoot = m_config.getSourceRoot();
-        String locRoot = m_config.getTargetRoot();
+        String srcRoot = context.m_config.getSourceRoot();
+        String locRoot = context.m_config.getTargetRoot();
         StaticUtils.buildDirList(fileList, new File(srcRoot));
         
         for(String filename : fileList)
@@ -325,6 +306,8 @@ public class CommandThread implements IDataEngine
         
         Set<File> processedFiles = new HashSet<File>();
         
+        TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback(context);
+        
         for(String filename : fileList)
         {
             File file = new File(filename);
@@ -345,7 +328,7 @@ public class CommandThread implements IDataEngine
     }
     
     /** Saves the translation memory and preferences */
-    public synchronized void saveProject()
+    public void saveProject()
     {
         if (isProjectModified()) {
             forceSave(false);
@@ -354,9 +337,11 @@ public class CommandThread implements IDataEngine
         }
     }
     
-    public synchronized void markAsDirty()
+    public void markAsDirty()
     {
-        m_modifiedFlag = true;
+        synchronized (CommandThread.this) {
+            currentProject.m_modifiedFlag = true;
+        }
     }
     
     /** Does actually save the Project's TMX file and preferences. */
@@ -365,11 +350,16 @@ public class CommandThread implements IDataEngine
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_SAVE_START"));
         UIThreadsUtil.mustNotBeSwingThread();
         
+        ProjectContext saveContext;
+        synchronized (CommandThread.this) {
+            saveContext = currentProject;
+        }        
+        
         saveThread.resetTime();
         
         Preferences.save();
         
-        String s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
+        String s = saveContext.m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
         if (corruptionDanger)
         {
             s += OConsts.STATUS_RECOVER_EXTENSION;
@@ -389,8 +379,8 @@ public class CommandThread implements IDataEngine
         {
             saveProjectProperties();
             
-            TMXWriter.buildTMXFile(s, false, true, false, m_config, m_strEntryList, m_orphanedList);
-            m_modifiedFlag = false;
+            TMXWriter.buildTMXFile(s, false, true, false, saveContext.m_config, saveContext.m_strEntryList, saveContext.m_orphanedList);
+            saveContext.m_modifiedFlag = false;
         }
         catch (IOException e)
         {
@@ -400,7 +390,7 @@ public class CommandThread implements IDataEngine
             // try to rename backup file to original name
             if (!corruptionDanger)
             {
-                s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
+                s = saveContext.m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
                 File backup = new File(s + OConsts.BACKUP_EXTENSION);
                 File orig = new File(s);
                 if (backup.exists())
@@ -409,65 +399,49 @@ public class CommandThread implements IDataEngine
         }
 
         // if successful, delete backup file
-        if (!m_modifiedFlag && !corruptionDanger)
+        if (!saveContext.m_modifiedFlag && !corruptionDanger)
         {
-            s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
+            s = saveContext.m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
             File backup = new File(s + OConsts.BACKUP_EXTENSION);
             if (backup.exists())
                 backup.delete();
         }
 
         // update statistics
-        Statistics.buildProjectStats(m_strEntryList, m_srcTextEntryArray, m_config, numberofTranslatedSegments);
+        Statistics.buildProjectStats(saveContext.m_strEntryList, saveContext.m_srcTextEntryArray, saveContext.m_config, numberofTranslatedSegments);
 
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.SAVE);
         
         saveThread.resetTime();
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_SAVE_END"));
     }
-    
-    /**
-     * Creates a new Source Text Entry
-     * (mapping between source file and a TM).
-     * Also if there's no entry for <code>srcText</code> string yet,
-     * then adds a new String Entry to internal in-memory TM.
-     */
-    public synchronized void addEntry(String srcText)
-    {
-        // if the source string is empty, don't add it to TM
-        if( srcText.length()==0 || srcText.trim().length()==0 )
-            return;
-        
-        StringEntry strEntry = m_strEntryHash.get(srcText);
-        if (strEntry == null)
-        {
-            // entry doesn't exist yet - create and store it
-            strEntry = new StringEntry(srcText);
-            m_strEntryList.add(strEntry);
-            m_strEntryHash.put(srcText, strEntry);
-        }
-        SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, m_srcTextEntryArray.size());
-        m_srcTextEntryArray.add(srcTextEntry);
-    }
-    
+   
     /**
      * {@inheritDoc}
      */
-    public synchronized void createProject(final File newProjectDir, final ProjectProperties newProps)
+    public void createProject(final File newProjectDir, final ProjectProperties newProps)
     {
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_CREATE_START"));
         UIThreadsUtil.mustBeSwingThread();
-        m_config = newProps;
+        
+        ProjectContext newProject = new ProjectContext();
+        newProject.m_config = newProps;
         try
         {
-            createDirectory(m_config.getProjectRoot(), null);
-            createDirectory(m_config.getProjectInternal(), null);
-            createDirectory(m_config.getSourceRoot(), "src");
-            createDirectory(m_config.getGlossaryRoot(), "glos");
-            createDirectory(m_config.getTMRoot(), "tm");
-            createDirectory(m_config.getTargetRoot(), "target");
+            createDirectory(newProject.m_config.getProjectRoot(), null);
+            createDirectory(newProject.m_config.getProjectInternal(), null);
+            createDirectory(newProject.m_config.getSourceRoot(), "src");
+            createDirectory(newProject.m_config.getGlossaryRoot(), "glos");
+            createDirectory(newProject.m_config.getTMRoot(), "tm");
+            createDirectory(newProject.m_config.getTargetRoot(), "target");
             
             saveProjectProperties();
+            
+            synchronized (CommandThread.this) {
+                currentProject = newProject;
+            }
+            saveThread.resetTime();
+            
             CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.CREATE);
         }
         catch(IOException e)
@@ -506,15 +480,14 @@ public class CommandThread implements IDataEngine
     // protected functions
 
     /** Finds and loads project's TMX file with translations (project_save.tmx). */
-    private void loadTranslations()
+    private void loadTranslations(final ProjectContext newProject)
     {
-        File proj;
+        final File tmxFile = new File(newProject.m_config.getProjectInternal() + OConsts.STATUS_EXTENSION);
         try
         {
-            proj = new File(m_config.getProjectInternal() + OConsts.STATUS_EXTENSION);
-            if (!proj.exists())
+            if (!tmxFile.exists())
             {
-                Log.logErrorRB("CT_ERROR_CANNOT_FIND_TMX", new Object[] {proj}); // NOI18N
+                Log.logErrorRB("CT_ERROR_CANNOT_FIND_TMX", tmxFile.getAbsolutePath()); // NOI18N
                 // nothing to do here
                 return;
             }
@@ -534,7 +507,7 @@ public class CommandThread implements IDataEngine
             //  they were loaded, load each string then look for it's
             //  owner
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
-            loadTMXFile(proj.getAbsolutePath(), "UTF-8", true); // NOI18N
+            loadTMXFile(newProject, tmxFile.getAbsolutePath(), "UTF-8", true); // NOI18N
         }
         catch (IOException e)
         {
@@ -548,13 +521,13 @@ public class CommandThread implements IDataEngine
      * 
      * @param projectRoot project root dir
      */
-    private void loadSourceFiles(String projectRoot)
+    private void loadSourceFiles(final ProjectContext newProject)
             throws IOException, InterruptedIOException, TranslationException
     {
         FilterMaster fm = FilterMaster.getInstance();
         
         List<String> srcFileList = new ArrayList<String>();
-        File root = new File(m_config.getSourceRoot());
+        File root = new File(newProject.m_config.getSourceRoot());
         StaticUtils.buildFileList(srcFileList, root, true);
         
         Set<File> processedFiles = new HashSet<File>();
@@ -570,37 +543,40 @@ public class CommandThread implements IDataEngine
             
             // strip leading path information;
             // feed file name to project window
-            String filepath = filename.substring(m_config.getSourceRoot().length());
+            String filepath = filename.substring(newProject.m_config.getSourceRoot().length());
             
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_FILE_MX",
                     filepath);
             
-            m_curFile = new ProjectFileData();
+            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(newProject);
+            
+            ProjectFileData m_curFile = new ProjectFileData();
             m_curFile.name = filename;
-            m_curFile.firstEntry = m_srcTextEntryArray.size();
+            m_curFile.firstEntry = newProject.m_srcTextEntryArray.size();
+            
+            loadFilesCallback.setCurrentFile(m_curFile);
             
             boolean fileLoaded = fm.loadFile(filename, processedFiles, loadFilesCallback);
             
-            m_curFile.lastEntry = m_srcTextEntryArray.size()-1;
+            m_curFile.lastEntry = newProject.m_srcTextEntryArray.size()-1;
 
             if( fileLoaded && (m_curFile.lastEntry>=m_curFile.firstEntry) )
             {
                 FileInfo fi=new FileInfo();
                 fi.filePath=filepath;
-                fi.firstEntryIndex=m_srcTextEntryArray.size();
-                fi.size=m_srcTextEntryArray.size()-firstEntry;
+                fi.firstEntryIndex=newProject.m_srcTextEntryArray.size();
+                fi.size=newProject.m_srcTextEntryArray.size()-firstEntry;
                 projectFilesList.add(fi);
-                firstEntry=m_srcTextEntryArray.size();
+                firstEntry=newProject.m_srcTextEntryArray.size();
             }
         }
         Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
-        m_curFile = null;
     }
     
     /** Locates and loads external TMX files with legacy translations. */
-    private void loadTM() throws IOException
+    private void loadTM(final ProjectContext newProject) throws IOException
     {
-        File f = new File(m_config.getTMRoot());
+        File f = new File(newProject.m_config.getTMRoot());
         String[] fileList = f.list();
         for (String file : fileList) {
             String fname = file;
@@ -608,15 +584,15 @@ public class CommandThread implements IDataEngine
             if (lastdot<0)
                 lastdot = fname.length();
             String ext = fname.substring(lastdot);
-            fname = m_config.getTMRoot();
+            fname = newProject.m_config.getTMRoot();
             if (!fname.endsWith(File.separator))
                 fname += File.separator;
             fname += file;
             
             if (ext.equalsIgnoreCase(OConsts.TMX_EXTENSION))
-                loadTMXFile(fname, "UTF-8", false); // NOI18N
+                loadTMXFile(newProject, fname, "UTF-8", false); // NOI18N
             else if (ext.equalsIgnoreCase(OConsts.TMW_EXTENSION))
-                loadTMXFile(fname, "ISO-8859-1", false); // NOI18N
+                loadTMXFile(newProject, fname, "ISO-8859-1", false); // NOI18N
         }
     }
     
@@ -625,11 +601,12 @@ public class CommandThread implements IDataEngine
      * Either the one of the project with project's translation,
      * or the legacy ones.
      */
-    private void loadTMXFile(String fname, String encoding, boolean isProject)
+    private void loadTMXFile(final ProjectContext newProject, String fname, String encoding, boolean isProject)
             throws IOException
     {
-        TMXReader tmx = new TMXReader(encoding, 
-                m_config.getSourceLanguage(), m_config.getTargetLanguage());
+        TMXReader tmx = new TMXReader(encoding, newProject.m_config
+                .getSourceLanguage(), newProject.m_config.getTargetLanguage(),
+                newProject.m_config.isSentenceSegmentingEnabled());
 
         // Fix for bug 1583560 - force kill causes project_save.tmx destruction
         // Copy TMX file to temp file, so we can read the temp file,
@@ -665,12 +642,12 @@ public class CommandThread implements IDataEngine
             strOrphaneList = new ArrayList<StringEntry>();
             LegacyTM tm = new LegacyTM(
                     OStrings.getString("CT_ORPHAN_STRINGS"), strOrphaneList);
-            m_legacyTMs.add(tm);
+            newProject.m_legacyTMs.add(tm);
         }
         else
         {
             LegacyTM tm = new LegacyTM(new File(fname).getName(), strEntryList);
-            m_legacyTMs.add(tm);
+            newProject.m_legacyTMs.add(tm);
         }
 
         for (int i=0; i<num; i++)
@@ -680,7 +657,7 @@ public class CommandThread implements IDataEngine
 
             if (isProject)
             {
-                StringEntry se = m_strEntryHash.get(src);
+                StringEntry se = newProject.m_strEntryHash.get(src);
                 if( se==null )
                 {
                     // loading a project save file and the
@@ -688,8 +665,8 @@ public class CommandThread implements IDataEngine
                     //	must have changed
                     // remember it anyways
                     TransMemory tm = new TransMemory(src, trans, fname);
-                    m_orphanedList.add(tm);
-                    m_tmList.add(tm);
+                    newProject.m_orphanedList.add(tm);
+                    newProject.m_tmList.add(tm);
                     se = new StringEntry(src);
                     dontCountNextIncrement(); // orphane translation don't count
                     se.setTranslation(trans);
@@ -704,7 +681,7 @@ public class CommandThread implements IDataEngine
             {
                 // not in a project - remember this as a translation
                 //	memory string and add it to near list
-                m_tmList.add(new TransMemory(src, trans, fname));
+                newProject.m_tmList.add(new TransMemory(src, trans, fname));
                 StringEntry se = new StringEntry(src);
                 dontCountNextIncrement();   // external TMXes don't count
                 se.setTranslation(trans);
@@ -725,7 +702,7 @@ public class CommandThread implements IDataEngine
      * IDataEngine.
      */
     public List<SourceTextEntry> getAllEntries() {
-        return m_srcTextEntryArray;
+        return currentProject.m_srcTextEntryArray;
     }
 
     ////////////////////////////////////////////////////////
@@ -736,7 +713,7 @@ public class CommandThread implements IDataEngine
      * IDataEngine.
      */
     public String	sourceRoot()
-    { return m_config.getSourceRoot();		}
+    { return currentProject.m_config.getSourceRoot();		}
     
     /**
      * {@inheritDoc}
@@ -745,11 +722,9 @@ public class CommandThread implements IDataEngine
      * IDataEngine.
      */
     public List<TransMemory>	getTransMemory()
-    { return m_tmList;		}
+    { return currentProject.m_tmList;		}
     
     /////////////////////////////////////////////////////////
-    
-    private ProjectProperties m_config;
     
     /**
      * Returns the active Project's Properties.
@@ -758,17 +733,15 @@ public class CommandThread implements IDataEngine
      */
     public ProjectProperties getProjectProperties()
     {
-        return m_config;
+        return currentProject.m_config;
     }
-    
-    private boolean m_modifiedFlag;
     
     /**
      * Returns whether the project was modified.
      */
     public synchronized boolean isProjectModified()
     {
-        return m_modifiedFlag;
+        return currentProject.m_modifiedFlag;
     }
     
 
@@ -784,7 +757,7 @@ public class CommandThread implements IDataEngine
      * Can be called from any thread. Caller must be synchronized around
      * IDataEngine.
      */
-    public synchronized void decreaseTranslated()
+    public void decreaseTranslated()
     {
         numberofTranslatedSegments--;
     }
@@ -795,7 +768,7 @@ public class CommandThread implements IDataEngine
      * Can be called from any thread. Caller must be synchronized around
      * IDataEngine.
      */
-    public synchronized void dontCountNextIncrement()
+    public void dontCountNextIncrement()
     {
         _dontCountNext = true;
     }
@@ -806,7 +779,7 @@ public class CommandThread implements IDataEngine
      * Can be called from any thread. Caller must be synchronized around
      * IDataEngine.
      */
-    public synchronized void increaseTranslated()
+    public void increaseTranslated()
     {
         if( _dontCountNext )
             _dontCountNext = false;
@@ -823,7 +796,7 @@ public class CommandThread implements IDataEngine
      * IDataEngine.
      */
     public List<StringEntry> getAllTranslations() {
-        return Collections.unmodifiableList(new ArrayList<StringEntry>(m_strEntryList));
+        return Collections.unmodifiableList(new ArrayList<StringEntry>(currentProject.m_strEntryList));
     }
     
     /**
@@ -833,7 +806,7 @@ public class CommandThread implements IDataEngine
      * IDataEngine.
      */
     public List<LegacyTM> getMemory() {
-        return m_legacyTMs;
+        return currentProject.m_legacyTMs;
     }
 
     /**
@@ -844,7 +817,23 @@ public class CommandThread implements IDataEngine
         return projectFilesList;
     }
         
-    private IParseCallback loadFilesCallback = new ParseEntry() {
+    private static class LoadFilesCallback extends ParseEntry {
+        private final ProjectContext context;
+        
+        /**
+         * Keeps track of file specific data to feed to SourceTextEntry objects
+         * so they can have a bigger picture of what's where.
+         */
+        private ProjectFileData m_curFile;  
+
+        public LoadFilesCallback(final ProjectContext context) {
+            super(context.m_config);
+            this.context = context;
+        }
+        
+        protected void setCurrentFile(ProjectFileData file) {
+            m_curFile = file;
+        }
         /**
          * Processes a single entry. This method doesn't perform any changes on
          * the passed string.
@@ -855,7 +844,7 @@ public class CommandThread implements IDataEngine
          *         returns the source string itself.
          */
         protected String processSingleEntry(String src) {
-            StringEntry se = m_strEntryHash.get(src);
+            StringEntry se = context.m_strEntryHash.get(src);
             addEntry(src);
 
             if (se == null) {
@@ -867,9 +856,38 @@ public class CommandThread implements IDataEngine
                 return s;
             }
         }
+        /**
+         * Creates a new Source Text Entry
+         * (mapping between source file and a TM).
+         * Also if there's no entry for <code>srcText</code> string yet,
+         * then adds a new String Entry to internal in-memory TM.
+         */
+        private void addEntry(String srcText)
+        {
+            // if the source string is empty, don't add it to TM
+            if( srcText.length()==0 || srcText.trim().length()==0 )
+                return;
+            
+            StringEntry strEntry = context.m_strEntryHash.get(srcText);
+            if (strEntry == null)
+            {
+                // entry doesn't exist yet - create and store it
+                strEntry = new StringEntry(srcText);
+                context.m_strEntryList.add(strEntry);
+                context.m_strEntryHash.put(srcText, strEntry);
+            }
+            SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, context.m_srcTextEntryArray.size());
+            context.m_srcTextEntryArray.add(srcTextEntry);
+        }
     };
 
-    private IParseCallback translateFilesCallback = new ParseEntry() {
+    private static class TranslateFilesCallback extends ParseEntry {
+        private final ProjectContext context;
+
+        public TranslateFilesCallback(final ProjectContext context) {
+            super(context.m_config);
+            this.context = context;
+        }
         /**
          * Processes a single entry. This method doesn't perform any changes on
          * the passed string.
@@ -880,7 +898,7 @@ public class CommandThread implements IDataEngine
          *         returns the source string itself.
          */
         protected String processSingleEntry(String src) {
-            StringEntry se = m_strEntryHash.get(src);
+            StringEntry se = context.m_strEntryHash.get(src);
 
             if (se == null) {
                 return src;
@@ -892,36 +910,9 @@ public class CommandThread implements IDataEngine
             }
         }
     };
-    
-    // project name of strings loaded from TM - store globally so to not
-    // pass seperately on each function call
-    
-    /**
-     * True if project loaded. TODO: use m_config for that in future.
-     */
-    private boolean projectLoaded = false;
 
-    /** 
-     * Keeps track of file specific data to feed to SourceTextEntry objects
-     * so they can have a bigger picture of what's where.
-     */
-    private ProjectFileData	m_curFile;
-    
-    /** maps text to strEntry obj */
-    private Map<String,StringEntry> m_strEntryHash;
-    
-    /** Unique segments list. Used for save TMX.  */
-    private List<StringEntry>	m_strEntryList;
-    
-    /** List of all segments in project. */
-    private List<SourceTextEntry>	m_srcTextEntryArray;
-    
-    /** the list of legacy TMX files, each object is the list of string entries */
-    private List<LegacyTM> m_legacyTMs;
-    
+    private ProjectContext currentProject;
+        
     /** Segments count in project files. */
     private List<FileInfo> projectFilesList = new ArrayList<FileInfo>();
-    
-    private List<TransMemory>	m_tmList;
-    private List<TransMemory>	m_orphanedList;
 }

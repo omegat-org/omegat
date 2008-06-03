@@ -483,7 +483,7 @@ public class MainWindowMenuHandler {
         
         if (sd.getReturnStatus() == SpellcheckerConfigurationDialog.RET_OK) {
             boolean isNeedToSpell = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
-            if (isNeedToSpell) {
+            if (isNeedToSpell && Core.getDataEngine().isProjectLoaded()) {
                 ISpellChecker sc = Core.getSpellChecker();
                 sc.destroy();
                 sc.initialize();

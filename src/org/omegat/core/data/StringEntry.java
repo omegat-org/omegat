@@ -99,7 +99,6 @@ public class StringEntry
         {
             // tell the boss things have changed to indicate a save is in order
             // only if translation changed
-            Core.getDataEngine().markAsDirty();
             m_translation = trans;
 
             boolean is = !"".equals(m_translation);                             // NOI18N

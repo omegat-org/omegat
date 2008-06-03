@@ -260,7 +260,7 @@ public class EditorController implements IEditor {
                     m_curEntryNum).getSrcFile().name;
             return fullName.substring(Core.getDataEngine()
                     .getProjectProperties().getSourceRoot().length());
-        } catch (IndexOutOfBoundsException ex) {
+        } catch (Exception ex) {
             return null;
         }
     }
@@ -664,6 +664,7 @@ public class EditorController implements IEditor {
                         m_curEntry.setTranslation(new String());
                     else
                         m_curEntry.setTranslation(new_translation);
+                    Core.getDataEngine().markAsDirty();
 
                     // update the length parameters of all changed segments
                     // update strings in display

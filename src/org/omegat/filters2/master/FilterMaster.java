@@ -47,7 +47,6 @@ import java.util.Set;
 import javax.swing.JOptionPane;
 
 import org.omegat.core.Core;
-import org.omegat.core.threads.SearchThread;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.Instance;
@@ -158,20 +157,6 @@ public class FilterMaster
             throw new IOException(filename + "\n" + ioe);                       // NOI18N
         }
         return true;
-    }
-        
-    /**
-     * OmegaT core calls this method to search within a source file.
-     * (used for source files outside project source dir)
-     *
-     * @param filename  The name of the source file to search.
-     * @param processedFiles Set of already searched files.
-     * @see #translateFile(String, String, String)
-     */
-    public void searchFile(String filename, SearchThread searchthread, Set<File> processedFiles, IParseCallback parseCallback)
-            throws IOException, TranslationException
-    {
-        loadFile(filename, processedFiles, parseCallback);
     }
     
     /**

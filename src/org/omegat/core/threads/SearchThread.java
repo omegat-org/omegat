@@ -345,7 +345,7 @@ public class SearchThread extends Thread
             // don't bother to tell handler what we're looking for -
             //	the search data is already known here (and the
             //	handler is in the same thread, so info is not volatile)
-            fm.searchFile(filename, this, processedFiles, parseCallback);
+            fm.loadFile(filename, processedFiles, parseCallback);
         }
     }
     

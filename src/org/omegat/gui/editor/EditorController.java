@@ -45,7 +45,6 @@ import javax.swing.undo.CannotUndoException;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.CommandThread;
 import org.omegat.core.data.IDataEngine;
 import org.omegat.core.data.StatisticsInfo;
 import org.omegat.core.data.StringEntry;
@@ -279,8 +278,14 @@ public class EditorController implements IEditor {
 
                 // clear old text
                 editor.setText(new String());
+                
+                IDataEngine dataEngine=Core.getDataEngine();
+                List<SourceTextEntry> entries;
+                synchronized (Core.getDataEngine()) {
+                    entries = dataEngine.getAllEntries();
+                }
 
-                m_curEntry = Core.getDataEngine().getAllEntries().get(m_curEntryNum);
+                m_curEntry = entries.get(m_curEntryNum);
 
                 m_xlFirstEntry = m_curEntry.getFirstInFile();
                 m_xlLastEntry = m_curEntry.getLastInFile();
@@ -304,7 +309,7 @@ public class EditorController implements IEditor {
                 for (int i = 0; i < xlEntries; i++) {
                     docSeg = new DocumentSegment();
 
-                    SourceTextEntry ste = Core.getDataEngine().getAllEntries().get(i + m_xlFirstEntry);
+                    SourceTextEntry ste = entries.get(i + m_xlFirstEntry);
                     String sourceText = ste.getSrcText();
                     String text = ste.getTranslation();
 

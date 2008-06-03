@@ -77,7 +77,6 @@ class SaveThread extends Thread {
                     IDataEngine dataEngine = Core.getDataEngine();
                     // need to synchronize arounf DataENgine against change
                     // project loaded state
-                    synchronized (dataEngine) {
                         if (dataEngine.isProjectLoaded()) {
                             LOGGER.fine("Start project save from SaveThread");
                             Core.getDataEngine().saveProject();
@@ -88,7 +87,6 @@ class SaveThread extends Thread {
                                             .getTimeInstance(DateFormat.SHORT)
                                             .format(new Date()));
                         }
-                    }
                 }
             }
         } catch (InterruptedException ex) {

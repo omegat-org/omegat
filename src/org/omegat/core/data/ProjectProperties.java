@@ -232,9 +232,7 @@ public class ProjectProperties
     }
     
     private String projectName;
-    private String projectFile;
     private String projectRoot;
-    private String projectInternal;
     private String sourceRoot;
     private String targetRoot;
     private String glossaryRoot;
@@ -244,7 +242,4 @@ public class ProjectProperties
     private Language targetLanguage;
     
     private boolean sentenceSegmentingOn;
-    private boolean dontInsertSource;
-    private boolean insertBestMatch;
-    private int minimalSimilarity;
 }

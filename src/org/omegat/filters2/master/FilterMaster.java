@@ -47,10 +47,6 @@ import java.util.Set;
 import javax.swing.JOptionPane;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.CommandThread;
-import org.omegat.core.data.StringEntry;
-import org.omegat.core.segmentation.Rule;
-import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.IParseCallback;
@@ -129,26 +125,6 @@ public class FilterMaster
         return master;
     }
     
-
-    private boolean memorizing = false;
-    /**
-     * Call this to turn on/off memorizing passed strings
-     * in internal Translation Memory.
-     * Typically to be called by Search-in-files functionality.
-     */
-    private void setMemorizing(boolean value)
-    {
-        memorizing = value;
-    }
-    /**
-     * Returns whether we're memorizing passed strings
-     * in internal Translation Memory.
-     */
-    private boolean isMemorizing()
-    {
-        return memorizing && (searchthread==null);
-    }
-    
     /**
      * OmegaT core calls this method to load a source file.
      *
@@ -166,8 +142,6 @@ public class FilterMaster
             if( lookup==null )
                 return false;
 
-            setMemorizing(true);
-
             File inFile = new File(filename);
             String inEncoding = lookup.inEncoding;
             AbstractFilter filterObject = lookup.filterObject;
@@ -183,33 +157,9 @@ public class FilterMaster
             ioe.printStackTrace();
             throw new IOException(filename + "\n" + ioe);                       // NOI18N
         }
-        
-        setMemorizing(false);
         return true;
     }
-    
-    
-    private SearchThread searchthread = null;
-    /**
-     * When mode is set,
-     * strings are passed to supplied search thread.
-     *
-     * @param searchthread The Search Thread supplied.
-     */
-    private void setSearchMode(SearchThread searchthread)
-    {
-        setMemorizing(false);
-        this.searchthread = searchthread;
-    }
-    /**
-     * Cancels search mode.
-     */
-    private void cancelSearchMode()
-    {
-        this.searchthread = null;
-    }
-    
-    
+        
     /**
      * OmegaT core calls this method to search within a source file.
      * (used for source files outside project source dir)
@@ -221,9 +171,7 @@ public class FilterMaster
     public void searchFile(String filename, SearchThread searchthread, Set<File> processedFiles, IParseCallback parseCallback)
             throws IOException, TranslationException
     {
-        setSearchMode(searchthread);
         loadFile(filename, processedFiles, parseCallback);
-        cancelSearchMode();
     }
     
     /**
@@ -245,9 +193,7 @@ public class FilterMaster
      */
     public void translateFile(String sourcedir, String filename, String targetdir, Set<File> processedFiles, IParseCallback parseCallback)
             throws IOException, TranslationException
-    {
-        setMemorizing(false);
-        
+    {        
         LookupInformation lookup = lookupFilter(sourcedir+File.separator+filename);
         if( lookup==null )
         {

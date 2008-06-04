@@ -32,6 +32,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.omegat.core.CoreEvents;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Token;
 
@@ -57,11 +59,17 @@ public class Tokenizer implements ITokenizer {
     
     private static final Token[] EMPTY_TOKENS_LIST = new Token[0];
 
-    /** Removes all token lists from the cache. */
-    public void clearCache() {
-        synchronized (tokenCache) {
-            tokenCache.clear();
-        }
+    public Tokenizer() {
+        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
+            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
+                if (eventType == PROJECT_CHANGE_TYPE.CLOSE) {
+                    // clear cache
+                    synchronized (tokenCache) {
+                        tokenCache.clear();
+                    }
+                }
+            }
+        });
     }
 
     /**

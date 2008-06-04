@@ -67,9 +67,4 @@ public interface ITokenizer {
      * There is no sense to cache results.
      */
     Token[] tokenizeAllExactly(String str);
-
-    /**
-     * Clear cahed tokens.
-     */
-    void clearCache();
 }

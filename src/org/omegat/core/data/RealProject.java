@@ -132,24 +132,6 @@ public class RealProject implements IProject
         m_strEntryHash = Collections.unmodifiableMap(m_strEntryHash);
     }
     
-    
-    //////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////
-    // message handling for external requests
-   
-    /**
-     * Clears all hashes, lists etc.
-     */
-    private void cleanUp()
-    {       
-        numberofTranslatedSegments = 0;
-        
-        //TODO: clear cache on event handling
-        
-        // reset token list cache
-        Core.getTokenizer().clearCache();
-    }
-    
     public void saveProjectProperties() throws IOException {
         ProjectFileStorage.writeProjectFile(m_config);
         Preferences.setPreference(Preferences.SOURCE_LOCALE, m_config.getSourceLanguage().toString());
@@ -165,9 +147,7 @@ public class RealProject implements IProject
     private void loadProject(final ProjectProperties props) {
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_LOAD_START"));
         UIThreadsUtil.mustNotBeSwingThread();
-        
-        cleanUp();
-                
+                        
         // load new project
         try
         {
@@ -259,8 +239,6 @@ public class RealProject implements IProject
      * any error.
      */
     public void closeProject() {        
-        cleanUp();
-
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_CLOSE"));
     }
     

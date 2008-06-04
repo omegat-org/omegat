@@ -370,15 +370,23 @@ public class EditorController implements IEditor {
     public void activateEntry() {
         UIThreadsUtil.mustBeSwingThread();
         
+        if (pane.getViewport().getView() != editor) {
+            // editor not displayed
+            return;
+        }
+        
+        
+        IProject project = Core.getProject();
+        
             if (!mw.isProjectLoaded())
                 return;
             int translatedInFile = 0;
             for (int _i = m_xlFirstEntry; _i <= m_xlLastEntry; _i++) {
-                if (Core.getProject().getAllEntries().get(_i).isTranslated())
+                if (project.getAllEntries().get(_i).isTranslated())
                     translatedInFile++;
             }
             
-            StatisticsInfo stat = Core.getProject().getStatistics();
+            StatisticsInfo stat = project.getStatistics();
 
             String pMsg = " " + Integer.toString(translatedInFile) + "/"
                     + Integer.toString(m_xlLastEntry - m_xlFirstEntry + 1) + " ("
@@ -410,7 +418,7 @@ public class EditorController implements IEditor {
                     // FIX: m_curEntryNum = m_xlLastEntry;
                 }
                 // </HP-experiment>
-                m_curEntry = Core.getProject().getAllEntries().get(m_curEntryNum);
+                m_curEntry = project.getAllEntries().get(m_curEntryNum);
                 String srcText = m_curEntry.getSrcText();
 
                 m_sourceDisplayLength = srcText.length();

@@ -24,7 +24,6 @@
 
 package org.omegat.core.data;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -38,28 +37,12 @@ import org.omegat.filters2.TranslationException;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IProject {
-    /**
-     * Create new project.
-     * 
-     * This method should be called in UI thread, because DataEngine will show
-     * project settings dialog. It's not good behavior and it should be chanegd
-     * in future.
-     */
-    void createProject(File newProjectDir, ProjectProperties newProps);
-
-    /**
-     * Loads project in a "big" sense -- loads project's properties, glossaryes,
-     * tms, source files etc.
-     * 
-     * @param newProps properties for new project
-     */
-    void loadProject(ProjectProperties newProps) throws Exception;
 
     /**
      * Save project properties only.
      */
     void saveProjectProperties() throws IOException;
-    
+
     /**
      * Save project.
      */
@@ -93,27 +76,28 @@ public interface IProject {
      * Is project modified ?
      */
     boolean isProjectModified();
-    
+
     /**
      * Mark project as dirty, i.e. translated, then project should be saved.
      */
     void markAsDirty();
-    
+
     void increaseTranslated();
-    
+
     void decreaseTranslated();
-    
+
     /**
      * Get all source segments.
      */
     List<SourceTextEntry> getAllEntries();
-    
+
     /**
      * Get statistics for project.
+     * 
      * @return
      */
     StatisticsInfo getStatistics();
-    
+
     /**
      * Get all unique segments.
      * 
@@ -128,9 +112,10 @@ public interface IProject {
      *         loaded
      */
     List<LegacyTM> getMemory();
-    
+
     /**
      * Get additional translation memory objects.
+     * 
      * @return list of additional memories
      */
     List<TransMemory> getTransMemory();

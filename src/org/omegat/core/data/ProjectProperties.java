@@ -61,7 +61,7 @@ public class ProjectProperties
 
         String targetLocale = Preferences
                 .getPreference(Preferences.TARGET_LOCALE);
-        if (StringUtil.isEmpty(targetLocale)) {
+        if (!StringUtil.isEmpty(targetLocale)) {
             setTargetLanguage(targetLocale);
         } else {
             setTargetLanguage("EN-GB"); // NOI18N

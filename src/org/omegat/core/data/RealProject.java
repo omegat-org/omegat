@@ -33,8 +33,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -74,6 +76,51 @@ public class RealProject implements IProject
     /** Local logger. */
     private static final Logger LOGGER = Logger.getLogger(RealProject.class
             .getName());
+
+    private ProjectProperties m_config;
+
+    private boolean m_modifiedFlag;
+
+    /** maps text to strEntry obj */
+    private final Map<String, StringEntry> m_strEntryHash;
+
+    /** Unique segments list. Used for save TMX. */
+    private final List<StringEntry> m_strEntryList;
+
+    /** List of all segments in project. */
+    private final List<SourceTextEntry> m_srcTextEntryArray;
+
+    /** the list of legacy TMX files, each object is the list of string entries */
+    private final List<LegacyTM> m_legacyTMs;
+
+    private final List<TransMemory> m_tmList;
+    private final List<TransMemory> m_orphanedList;
+
+    /** Segments count in project files. */
+    private List<FileInfo> projectFilesList = new ArrayList<FileInfo>();
+    
+    /**
+     * Create new project instance.
+     * 
+     * @param props
+     *                project properties
+     * @param isNewProject
+     *                true if project need to be created
+     */
+    public RealProject(final ProjectProperties props, final boolean isNewProject) {
+        m_strEntryHash = new HashMap<String, StringEntry>(4096);
+        m_strEntryList = new ArrayList<StringEntry>();
+        m_srcTextEntryArray = new ArrayList<SourceTextEntry>(4096);
+        m_tmList = new ArrayList<TransMemory>();
+        m_legacyTMs = new ArrayList<LegacyTM>();
+        m_orphanedList = new ArrayList<TransMemory>();
+        
+        if (isNewProject) {
+            createProject(props);
+        } else {
+            loadProject(props);
+        }
+    }
     
     
     //////////////////////////////////////////////////////
@@ -94,27 +141,23 @@ public class RealProject implements IProject
     }
     
     public void saveProjectProperties() throws IOException {
-        ProjectFileStorage.writeProjectFile(currentProject.m_config);
-        Preferences.setPreference(Preferences.SOURCE_LOCALE, currentProject.m_config.getSourceLanguage().toString());
-        Preferences.setPreference(Preferences.TARGET_LOCALE, currentProject.m_config.getTargetLanguage().toString());
+        ProjectFileStorage.writeProjectFile(m_config);
+        Preferences.setPreference(Preferences.SOURCE_LOCALE, m_config.getSourceLanguage().toString());
+        Preferences.setPreference(Preferences.TARGET_LOCALE, m_config.getTargetLanguage().toString());
     }
+    
     /**
-     * {@inheritDoc}
-     * TODO: change to File parameter
+     * Load exist project in a "big" sense -- loads project's properties, glossaryes,
+     * tms, source files etc.
+     * 
+     * @param props properties for new project
      */
-    public void loadProject(final ProjectProperties props) throws Exception {
+    private void loadProject(final ProjectProperties props) {
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_LOAD_START"));
         UIThreadsUtil.mustNotBeSwingThread();
         
-        Core.getAutoSave().disable();
-
-        synchronized (RealProject.this) {
-            currentProject = null;
-        }
         cleanUp();
-        
-        ProjectContext newProject = new ProjectContext();
-        
+                
         // load new project
         try
         {
@@ -122,18 +165,18 @@ public class RealProject implements IProject
                     props.getProjectRoot()).getParentFile().getAbsolutePath());
             Preferences.save();
             
-            newProject.m_config = props;
+            m_config = props;
             
             Core.getMainWindow().showStatusMessageRB("CT_LOADING_PROJECT");
                         
-            loadSourceFiles(newProject);
+            loadSourceFiles();
             
-            loadTranslations(newProject);
+            loadTranslations();
             
             // load in translation database files
             try
             {
-                loadTM(newProject);
+                loadTM();
             }
             catch (IOException e)
             {
@@ -143,12 +186,12 @@ public class RealProject implements IProject
             }
 
             // build word count
-            Statistics.buildProjectStats(newProject.m_strEntryList, newProject.m_srcTextEntryArray, newProject.m_config, numberofTranslatedSegments);
+            Statistics.buildProjectStats(m_strEntryList, m_srcTextEntryArray, m_config, numberofTranslatedSegments);
             
             // Project Loaded...
             Core.getMainWindow().showStatusMessageRB(null);
             
-            newProject.m_modifiedFlag = false;
+            m_modifiedFlag = false;
         }
         catch( Exception e )
         {
@@ -161,13 +204,12 @@ public class RealProject implements IProject
             // Of course we should've cleaned up after ourselves earlier,
             // but since we didn't, do a bit of cleaning up now, otherwise
             // we can't even inform the user about our slacking off.
-            newProject.m_strEntryHash.clear();
-            newProject.m_strEntryList.clear();
-            newProject.m_srcTextEntryArray.clear();
-            newProject.m_legacyTMs.clear();
-            newProject.m_tmList.clear();
-            newProject.m_orphanedList.clear();
-            newProject = null;
+            m_strEntryHash.clear();
+            m_strEntryList.clear();
+            m_srcTextEntryArray.clear();
+            m_legacyTMs.clear();
+            m_tmList.clear();
+            m_orphanedList.clear();
 
             // Well, that cleared up some, GC to the rescue!
             System.gc();
@@ -179,13 +221,6 @@ public class RealProject implements IProject
             // Just quit, we can't help it anyway
             System.exit(0);
         }
-        
-        synchronized (RealProject.this) {
-            currentProject = newProject;
-        }
-        Core.getAutoSave().enable();
-
-        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
 
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_LOAD_END"));
     }
@@ -194,7 +229,7 @@ public class RealProject implements IProject
      * {@inheritDoc}
      */
     public boolean isProjectLoaded() {
-        return currentProject != null;
+        return true;
     }
     
     /**
@@ -202,9 +237,9 @@ public class RealProject implements IProject
      */
     public StatisticsInfo getStatistics() {
         StatisticsInfo info = new StatisticsInfo();
-        info.numberOfUniqueSegments = currentProject.m_strEntryList.size();
+        info.numberOfUniqueSegments = m_strEntryList.size();
         info.numberofTranslatedSegments = numberofTranslatedSegments;
-        info.numberOfSegmentsTotal = currentProject.m_srcTextEntryArray.size();
+        info.numberOfSegmentsTotal = m_srcTextEntryArray.size();
         return info;
     }
     
@@ -213,17 +248,10 @@ public class RealProject implements IProject
      * and if it's still being loaded, core thread shouldn't throw
      * any error.
      */
-    public void closeProject() {
-        Core.getAutoSave().disable();
-        
-        synchronized (RealProject.this) {
-            currentProject = null;
-        }
+    public void closeProject() {        
         cleanUp();
 
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_CLOSE"));
-
-        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE);
     }
     
     /** Builds all translated files and creates fresh TM files. */
@@ -232,12 +260,7 @@ public class RealProject implements IProject
     {
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_COMPILE_START"));
         UIThreadsUtil.mustNotBeSwingThread();
-        
-        ProjectContext context;
-        synchronized (RealProject.this) {
-            context = currentProject;
-        }
-        
+                
         // build 3 TMX files:
         // - OmegaT-specific, with inline OmegaT formatting tags
         // - TMX Level 1, without formatting tags
@@ -245,19 +268,19 @@ public class RealProject implements IProject
         try
         {
                 // build TMX with OmegaT tags
-                String fname = context.m_config.getProjectRoot() + context.m_config.getProjectName() + OConsts.OMEGAT_TMX
+                String fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.OMEGAT_TMX
                         + OConsts.TMX_EXTENSION;
-                TMXWriter.buildTMXFile(fname, false, false, false, context.m_config, context.m_strEntryList, context.m_orphanedList);
+                TMXWriter.buildTMXFile(fname, false, false, false, m_config, m_strEntryList, m_orphanedList);
 
                 // build TMX level 1 compliant file
-                fname = context.m_config.getProjectRoot() + context.m_config.getProjectName() + OConsts.LEVEL1_TMX
+                fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.LEVEL1_TMX
                         + OConsts.TMX_EXTENSION;
-                TMXWriter.buildTMXFile(fname, true, false, false, context.m_config, context.m_strEntryList, context.m_orphanedList);
+                TMXWriter.buildTMXFile(fname, true, false, false, m_config, m_strEntryList, m_orphanedList);
 
                 // build three-quarter-assed TMX level 2 file
-                fname = context.m_config.getProjectRoot() + context.m_config.getProjectName() + OConsts.LEVEL2_TMX
+                fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.LEVEL2_TMX
                         + OConsts.TMX_EXTENSION;
-                TMXWriter.buildTMXFile(fname, false, false, true, context.m_config, context.m_strEntryList, context.m_orphanedList);
+                TMXWriter.buildTMXFile(fname, false, false, true, m_config, m_strEntryList, m_orphanedList);
         }
         catch (IOException e)
         {
@@ -270,8 +293,8 @@ public class RealProject implements IProject
         
         // build mirror directory of source tree
         List<String> fileList = new ArrayList<String>(256);
-        String srcRoot = context.m_config.getSourceRoot();
-        String locRoot = context.m_config.getTargetRoot();
+        String srcRoot = m_config.getSourceRoot();
+        String locRoot = m_config.getTargetRoot();
         StaticUtils.buildDirList(fileList, new File(srcRoot));
         
         for(String filename : fileList)
@@ -298,7 +321,7 @@ public class RealProject implements IProject
         
         Set<File> processedFiles = new HashSet<File>();
         
-        TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback(context);
+        TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback();
         
         for(String filename : fileList)
         {
@@ -331,9 +354,7 @@ public class RealProject implements IProject
     
     public void markAsDirty()
     {
-        synchronized (RealProject.this) {
-            currentProject.m_modifiedFlag = true;
-        }
+            m_modifiedFlag = true;
     }
     
     /** Does actually save the Project's TMX file and preferences. */
@@ -341,17 +362,12 @@ public class RealProject implements IProject
     {
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_SAVE_START"));
         UIThreadsUtil.mustNotBeSwingThread();
-        
-        ProjectContext saveContext;
-        synchronized (RealProject.this) {
-            saveContext = currentProject;
-        }        
-        
+                
         Core.getAutoSave().disable();
         
         Preferences.save();
         
-        String s = saveContext.m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
+        String s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
         if (corruptionDanger)
         {
             s += OConsts.STATUS_RECOVER_EXTENSION;
@@ -371,8 +387,8 @@ public class RealProject implements IProject
         {
             saveProjectProperties();
             
-            TMXWriter.buildTMXFile(s, false, true, false, saveContext.m_config, saveContext.m_strEntryList, saveContext.m_orphanedList);
-            saveContext.m_modifiedFlag = false;
+            TMXWriter.buildTMXFile(s, false, true, false, m_config, m_strEntryList, m_orphanedList);
+            m_modifiedFlag = false;
         }
         catch (IOException e)
         {
@@ -382,7 +398,7 @@ public class RealProject implements IProject
             // try to rename backup file to original name
             if (!corruptionDanger)
             {
-                s = saveContext.m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
+                s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
                 File backup = new File(s + OConsts.BACKUP_EXTENSION);
                 File orig = new File(s);
                 if (backup.exists())
@@ -391,16 +407,16 @@ public class RealProject implements IProject
         }
 
         // if successful, delete backup file
-        if (!saveContext.m_modifiedFlag && !corruptionDanger)
+        if (!m_modifiedFlag && !corruptionDanger)
         {
-            s = saveContext.m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
+            s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
             File backup = new File(s + OConsts.BACKUP_EXTENSION);
             if (backup.exists())
                 backup.delete();
         }
 
         // update statistics
-        Statistics.buildProjectStats(saveContext.m_strEntryList, saveContext.m_srcTextEntryArray, saveContext.m_config, numberofTranslatedSegments);
+        Statistics.buildProjectStats(m_strEntryList, m_srcTextEntryArray, m_config, numberofTranslatedSegments);
 
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.SAVE);
         
@@ -409,32 +425,24 @@ public class RealProject implements IProject
     }
    
     /**
-     * {@inheritDoc}
+     * Create new project.
      */
-    public void createProject(final File newProjectDir, final ProjectProperties newProps)
+    private void createProject(final ProjectProperties newProps)
     {
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_CREATE_START"));
-        UIThreadsUtil.mustBeSwingThread();
+        UIThreadsUtil.mustNotBeSwingThread();
         
-        ProjectContext newProject = new ProjectContext();
-        newProject.m_config = newProps;
+        m_config = newProps;
         try
         {
-            createDirectory(newProject.m_config.getProjectRoot(), null);
-            createDirectory(newProject.m_config.getProjectInternal(), null);
-            createDirectory(newProject.m_config.getSourceRoot(), "src");
-            createDirectory(newProject.m_config.getGlossaryRoot(), "glos");
-            createDirectory(newProject.m_config.getTMRoot(), "tm");
-            createDirectory(newProject.m_config.getTargetRoot(), "target");
+            createDirectory(m_config.getProjectRoot(), null);
+            createDirectory(m_config.getProjectInternal(), null);
+            createDirectory(m_config.getSourceRoot(), "src");
+            createDirectory(m_config.getGlossaryRoot(), "glos");
+            createDirectory(m_config.getTMRoot(), "tm");
+            createDirectory(m_config.getTargetRoot(), "target");
             
-            saveProjectProperties();
-            
-            synchronized (RealProject.this) {
-                currentProject = newProject;
-            }
-            Core.getAutoSave().enable();
-            
-            CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.CREATE);
+            saveProjectProperties();            
         }
         catch(IOException e)
         {
@@ -472,9 +480,9 @@ public class RealProject implements IProject
     // protected functions
 
     /** Finds and loads project's TMX file with translations (project_save.tmx). */
-    private void loadTranslations(final ProjectContext newProject)
+    private void loadTranslations()
     {
-        final File tmxFile = new File(newProject.m_config.getProjectInternal() + OConsts.STATUS_EXTENSION);
+        final File tmxFile = new File(m_config.getProjectInternal() + OConsts.STATUS_EXTENSION);
         try
         {
             if (!tmxFile.exists())
@@ -499,7 +507,7 @@ public class RealProject implements IProject
             //  they were loaded, load each string then look for it's
             //  owner
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
-            loadTMXFile(newProject, tmxFile.getAbsolutePath(), "UTF-8", true); // NOI18N
+            loadTMXFile(tmxFile.getAbsolutePath(), "UTF-8", true); // NOI18N
         }
         catch (IOException e)
         {
@@ -513,13 +521,13 @@ public class RealProject implements IProject
      * 
      * @param projectRoot project root dir
      */
-    private void loadSourceFiles(final ProjectContext newProject)
+    private void loadSourceFiles()
             throws IOException, InterruptedIOException, TranslationException
     {
         FilterMaster fm = FilterMaster.getInstance();
         
         List<String> srcFileList = new ArrayList<String>();
-        File root = new File(newProject.m_config.getSourceRoot());
+        File root = new File(m_config.getSourceRoot());
         StaticUtils.buildFileList(srcFileList, root, true);
         
         Set<File> processedFiles = new HashSet<File>();
@@ -535,40 +543,40 @@ public class RealProject implements IProject
             
             // strip leading path information;
             // feed file name to project window
-            String filepath = filename.substring(newProject.m_config.getSourceRoot().length());
+            String filepath = filename.substring(m_config.getSourceRoot().length());
             
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_FILE_MX",
                     filepath);
             
-            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(newProject);
+            LoadFilesCallback loadFilesCallback = new LoadFilesCallback();
             
             ProjectFileData m_curFile = new ProjectFileData();
             m_curFile.name = filename;
-            m_curFile.firstEntry = newProject.m_srcTextEntryArray.size();
+            m_curFile.firstEntry = m_srcTextEntryArray.size();
             
             loadFilesCallback.setCurrentFile(m_curFile);
             
             boolean fileLoaded = fm.loadFile(filename, processedFiles, loadFilesCallback);
             
-            m_curFile.lastEntry = newProject.m_srcTextEntryArray.size()-1;
+            m_curFile.lastEntry = m_srcTextEntryArray.size()-1;
 
             if( fileLoaded && (m_curFile.lastEntry>=m_curFile.firstEntry) )
             {
                 FileInfo fi=new FileInfo();
                 fi.filePath=filepath;
-                fi.firstEntryIndex=newProject.m_srcTextEntryArray.size();
-                fi.size=newProject.m_srcTextEntryArray.size()-firstEntry;
+                fi.firstEntryIndex=m_srcTextEntryArray.size();
+                fi.size=m_srcTextEntryArray.size()-firstEntry;
                 projectFilesList.add(fi);
-                firstEntry=newProject.m_srcTextEntryArray.size();
+                firstEntry=m_srcTextEntryArray.size();
             }
         }
         Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
     }
     
     /** Locates and loads external TMX files with legacy translations. */
-    private void loadTM(final ProjectContext newProject) throws IOException
+    private void loadTM() throws IOException
     {
-        File f = new File(newProject.m_config.getTMRoot());
+        File f = new File(m_config.getTMRoot());
         String[] fileList = f.list();
         for (String file : fileList) {
             String fname = file;
@@ -576,15 +584,15 @@ public class RealProject implements IProject
             if (lastdot<0)
                 lastdot = fname.length();
             String ext = fname.substring(lastdot);
-            fname = newProject.m_config.getTMRoot();
+            fname = m_config.getTMRoot();
             if (!fname.endsWith(File.separator))
                 fname += File.separator;
             fname += file;
             
             if (ext.equalsIgnoreCase(OConsts.TMX_EXTENSION))
-                loadTMXFile(newProject, fname, "UTF-8", false); // NOI18N
+                loadTMXFile(fname, "UTF-8", false); // NOI18N
             else if (ext.equalsIgnoreCase(OConsts.TMW_EXTENSION))
-                loadTMXFile(newProject, fname, "ISO-8859-1", false); // NOI18N
+                loadTMXFile(fname, "ISO-8859-1", false); // NOI18N
         }
     }
     
@@ -593,12 +601,12 @@ public class RealProject implements IProject
      * Either the one of the project with project's translation,
      * or the legacy ones.
      */
-    private void loadTMXFile(final ProjectContext newProject, String fname, String encoding, boolean isProject)
+    private void loadTMXFile(String fname, String encoding, boolean isProject)
             throws IOException
     {
-        TMXReader tmx = new TMXReader(encoding, newProject.m_config
-                .getSourceLanguage(), newProject.m_config.getTargetLanguage(),
-                newProject.m_config.isSentenceSegmentingEnabled());
+        TMXReader tmx = new TMXReader(encoding, m_config
+                .getSourceLanguage(), m_config.getTargetLanguage(),
+                m_config.isSentenceSegmentingEnabled());
 
         // Fix for bug 1583560 - force kill causes project_save.tmx destruction
         // Copy TMX file to temp file, so we can read the temp file,
@@ -634,12 +642,12 @@ public class RealProject implements IProject
             strOrphaneList = new ArrayList<StringEntry>();
             LegacyTM tm = new LegacyTM(
                     OStrings.getString("CT_ORPHAN_STRINGS"), strOrphaneList);
-            newProject.m_legacyTMs.add(tm);
+            m_legacyTMs.add(tm);
         }
         else
         {
             LegacyTM tm = new LegacyTM(new File(fname).getName(), strEntryList);
-            newProject.m_legacyTMs.add(tm);
+            m_legacyTMs.add(tm);
         }
 
         for (int i=0; i<num; i++)
@@ -649,7 +657,7 @@ public class RealProject implements IProject
 
             if (isProject)
             {
-                StringEntry se = newProject.m_strEntryHash.get(src);
+                StringEntry se = m_strEntryHash.get(src);
                 if( se==null )
                 {
                     // loading a project save file and the
@@ -657,8 +665,8 @@ public class RealProject implements IProject
                     //	must have changed
                     // remember it anyways
                     TransMemory tm = new TransMemory(src, trans, fname);
-                    newProject.m_orphanedList.add(tm);
-                    newProject.m_tmList.add(tm);
+                    m_orphanedList.add(tm);
+                    m_tmList.add(tm);
                     se = new StringEntry(src);
                     dontCountNextIncrement(); // orphane translation don't count
                     se.setTranslation(trans);
@@ -673,7 +681,7 @@ public class RealProject implements IProject
             {
                 // not in a project - remember this as a translation
                 //	memory string and add it to near list
-                newProject.m_tmList.add(new TransMemory(src, trans, fname));
+                m_tmList.add(new TransMemory(src, trans, fname));
                 StringEntry se = new StringEntry(src);
                 dontCountNextIncrement();   // external TMXes don't count
                 se.setTranslation(trans);
@@ -694,7 +702,7 @@ public class RealProject implements IProject
      * IDataEngine.
      */
     public List<SourceTextEntry> getAllEntries() {
-        return currentProject.m_srcTextEntryArray;
+        return m_srcTextEntryArray;
     }
 
     ////////////////////////////////////////////////////////
@@ -705,7 +713,7 @@ public class RealProject implements IProject
      * IDataEngine.
      */
     public String	sourceRoot()
-    { return currentProject.m_config.getSourceRoot();		}
+    { return m_config.getSourceRoot();		}
     
     /**
      * {@inheritDoc}
@@ -714,7 +722,7 @@ public class RealProject implements IProject
      * IDataEngine.
      */
     public List<TransMemory>	getTransMemory()
-    { return currentProject.m_tmList;		}
+    { return m_tmList;		}
     
     /////////////////////////////////////////////////////////
     
@@ -725,15 +733,15 @@ public class RealProject implements IProject
      */
     public ProjectProperties getProjectProperties()
     {
-        return currentProject.m_config;
+        return m_config;
     }
     
     /**
      * Returns whether the project was modified.
      */
-    public synchronized boolean isProjectModified()
+    public boolean isProjectModified()
     {
-        return currentProject.m_modifiedFlag;
+        return m_modifiedFlag;
     }
     
 
@@ -788,7 +796,7 @@ public class RealProject implements IProject
      * IDataEngine.
      */
     public List<StringEntry> getAllTranslations() {
-        return Collections.unmodifiableList(new ArrayList<StringEntry>(currentProject.m_strEntryList));
+        return Collections.unmodifiableList(new ArrayList<StringEntry>(m_strEntryList));
     }
     
     /**
@@ -798,7 +806,7 @@ public class RealProject implements IProject
      * IDataEngine.
      */
     public List<LegacyTM> getMemory() {
-        return currentProject.m_legacyTMs;
+        return m_legacyTMs;
     }
 
     /**
@@ -809,18 +817,15 @@ public class RealProject implements IProject
         return projectFilesList;
     }
         
-    private static class LoadFilesCallback extends ParseEntry {
-        private final ProjectContext context;
-        
+    private class LoadFilesCallback extends ParseEntry {        
         /**
          * Keeps track of file specific data to feed to SourceTextEntry objects
          * so they can have a bigger picture of what's where.
          */
         private ProjectFileData m_curFile;  
 
-        public LoadFilesCallback(final ProjectContext context) {
-            super(context.m_config);
-            this.context = context;
+        public LoadFilesCallback() {
+            super(m_config);
         }
         
         protected void setCurrentFile(ProjectFileData file) {
@@ -836,7 +841,7 @@ public class RealProject implements IProject
          *         returns the source string itself.
          */
         protected String processSingleEntry(String src) {
-            StringEntry se = context.m_strEntryHash.get(src);
+            StringEntry se = m_strEntryHash.get(src);
             addEntry(src);
 
             if (se == null) {
@@ -860,25 +865,22 @@ public class RealProject implements IProject
             if( srcText.length()==0 || srcText.trim().length()==0 )
                 return;
             
-            StringEntry strEntry = context.m_strEntryHash.get(srcText);
+            StringEntry strEntry = m_strEntryHash.get(srcText);
             if (strEntry == null)
             {
                 // entry doesn't exist yet - create and store it
                 strEntry = new StringEntry(srcText);
-                context.m_strEntryList.add(strEntry);
-                context.m_strEntryHash.put(srcText, strEntry);
+                m_strEntryList.add(strEntry);
+                m_strEntryHash.put(srcText, strEntry);
             }
-            SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, context.m_srcTextEntryArray.size());
-            context.m_srcTextEntryArray.add(srcTextEntry);
+            SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, m_srcTextEntryArray.size());
+            m_srcTextEntryArray.add(srcTextEntry);
         }
     };
 
-    private static class TranslateFilesCallback extends ParseEntry {
-        private final ProjectContext context;
-
-        public TranslateFilesCallback(final ProjectContext context) {
-            super(context.m_config);
-            this.context = context;
+    private class TranslateFilesCallback extends ParseEntry {
+        public TranslateFilesCallback() {
+            super(m_config);
         }
         /**
          * Processes a single entry. This method doesn't perform any changes on
@@ -890,7 +892,7 @@ public class RealProject implements IProject
          *         returns the source string itself.
          */
         protected String processSingleEntry(String src) {
-            StringEntry se = context.m_strEntryHash.get(src);
+            StringEntry se = m_strEntryHash.get(src);
 
             if (se == null) {
                 return src;
@@ -901,10 +903,5 @@ public class RealProject implements IProject
                 return s;
             }
         }
-    };
-
-    private ProjectContext currentProject;
-        
-    /** Segments count in project files. */
-    private List<FileInfo> projectFilesList = new ArrayList<FileInfo>();
+    };        
 }

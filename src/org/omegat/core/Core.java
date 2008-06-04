@@ -26,6 +26,7 @@ package org.omegat.core;
 
 import org.omegat.core.data.CheckThread;
 import org.omegat.core.data.IAutoSave;
+import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SaveThread;
@@ -67,10 +68,16 @@ public class Core {
     private static IAutoSave saveThread;
 
 
-    /** Get data engine instance. */
+    /** Get project instance. */
     public static IProject getProject() {
         return currentProject;
     }
+
+    /** Set new current project. */
+    public static void setProject(final IProject newCurrentProject) {
+        currentProject = newCurrentProject;
+    }
+
 
     /** Get main windows instance. */
     public static IMainWindow getMainWindow() {
@@ -105,7 +112,7 @@ public class Core {
     public static IAutoSave getAutoSave() {
         return saveThread;
     }
-
+    
     /**
      * Initialize application core from exists main components instances.
      * 
@@ -118,7 +125,7 @@ public class Core {
         // bugfix - Serious threading issue, preventing OmegaT from showing up...
         //          http://sourceforge.net/support/tracker.php?aid=1216514
         // we start command thread here...
-        currentProject = new RealProject();
+        currentProject = new NotLoadedProject();
         
         me.setVisible(true);
 

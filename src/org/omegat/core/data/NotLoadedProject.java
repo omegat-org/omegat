@@ -24,45 +24,73 @@
 
 package org.omegat.core.data;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import org.omegat.core.matching.SourceTextEntry;
+import org.omegat.filters2.TranslationException;
 
 /**
- * Project context data. It includes all translation, source segments,
- * preferences and other project data which loaded and saved in project dir.
+ * Project implementation when project not really loaded.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class ProjectContext {
-    public ProjectProperties m_config;
+public class NotLoadedProject implements IProject {
 
-    public boolean m_modifiedFlag;
+    public void compileProject() throws IOException, TranslationException {
+    }
 
-    /** maps text to strEntry obj */
-    public final Map<String, StringEntry> m_strEntryHash;
+    public void closeProject() {
+    }
 
-    /** Unique segments list. Used for save TMX. */
-    public final List<StringEntry> m_strEntryList;
+    public void decreaseTranslated() {
+    }
 
-    /** List of all segments in project. */
-    public final List<SourceTextEntry> m_srcTextEntryArray;
+    public List<SourceTextEntry> getAllEntries() {
+        return null;
+    }
 
-    /** the list of legacy TMX files, each object is the list of string entries */
-    public final List<LegacyTM> m_legacyTMs;
+    public List<StringEntry> getAllTranslations() {
+        return null;
+    }
 
-    public final List<TransMemory> m_tmList;
-    public final List<TransMemory> m_orphanedList;
+    public List<LegacyTM> getMemory() {
+        return null;
+    }
 
-    public ProjectContext() {
-        m_strEntryHash = new HashMap<String, StringEntry>(4096);
-        m_strEntryList = new ArrayList<StringEntry>();
-        m_srcTextEntryArray = new ArrayList<SourceTextEntry>(4096);
-        m_tmList = new ArrayList<TransMemory>();
-        m_legacyTMs = new ArrayList<LegacyTM>();
-        m_orphanedList = new ArrayList<TransMemory>();
+    public List<FileInfo> getProjectFiles() {
+        return null;
+    }
+
+    public ProjectProperties getProjectProperties() {
+        return null;
+    }
+
+    public StatisticsInfo getStatistics() {
+        return null;
+    }
+
+    public List<TransMemory> getTransMemory() {
+        return null;
+    }
+
+    public void increaseTranslated() {
+    }
+
+    public boolean isProjectLoaded() {
+        return false;
+    }
+
+    public boolean isProjectModified() {
+        return false;
+    }
+
+    public void markAsDirty() {
+    }
+
+    public void saveProject() {
+    }
+
+    public void saveProjectProperties() throws IOException {
     }
 }

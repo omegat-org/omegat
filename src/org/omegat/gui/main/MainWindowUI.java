@@ -36,6 +36,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -52,7 +53,6 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.DockingUI;
 import org.openide.awt.Mnemonics;
 
-import com.vlsolutions.swing.docking.DockingConstants;
 import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.event.DockableStateWillChangeEvent;
 import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
@@ -107,11 +107,9 @@ public class MainWindowUI {
             }
         });
         mainWindow.desktop.addDockable(mainWindow.editorScroller);
-        mainWindow.desktop.split(mainWindow.editorScroller, mainWindow.matchesScroller, DockingConstants.SPLIT_RIGHT);
-        mainWindow.desktop
-                .split(mainWindow.matchesScroller, mainWindow.glossaryScroller, DockingConstants.SPLIT_BOTTOM);
-        mainWindow.desktop.setDockableWidth(mainWindow.editorScroller, 0.6);
-        mainWindow.desktop.setDockableHeight(mainWindow.matchesScroller, 0.7);
+        mainWindow.desktop.addDockable(mainWindow.matchesScroller);
+        mainWindow.desktop.addDockable(mainWindow.glossaryScroller);
+        resetDesktopLayout(mainWindow);
 
         return mainWindow.desktop;
     }
@@ -218,6 +216,30 @@ public class MainWindowUI {
             Preferences.setPreference(Preferences.MAINWINDOW_LAYOUT, layout);
         } catch (Exception e) {
             Preferences.setPreference(Preferences.MAINWINDOW_LAYOUT, new String());
+        }
+    }
+    
+
+    /**
+     * Restores defaults for all dockable parts. May be expanded in the future
+     * to reset the entire GUI to its defaults.
+     * 
+     * Note: The current implementation is just a quick hack, due to
+     * insufficient knowledge of the docking framework library.
+     * 
+     * @author Henry Pijffers (henry.pijffers@saxnot.com)
+     */
+    public static void resetDesktopLayout(final MainWindow mainWindow) {
+        try {
+            InputStream in = MainWindowUI.class.getResourceAsStream(
+                    "DockingDefaults.xml");
+            try {
+                mainWindow.desktop.readXML(in);
+            } finally {
+                in.close();
+            }
+        } catch (Exception exception) {
+            // eat silently, probably a bug in the docking framework
         }
     }
 }

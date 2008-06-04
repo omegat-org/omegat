@@ -27,11 +27,6 @@
 
 package org.omegat.gui.main;
 
-import java.io.ByteArrayInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -47,7 +42,6 @@ import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.search.SearchWindow;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
-import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -507,24 +501,9 @@ public class MainWindowMenuHandler {
     /**
      * Restores defaults for all dockable parts. May be expanded in the future
      * to reset the entire GUI to its defaults.
-     * 
-     * Note: The current implementation is just a quick hack, due to
-     * insufficient knowledge of the docking framework library.
-     * 
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public void optionsRestoreGUIMenuItemActionPerformed() {
-        try {
-            InputStream in = this.getClass().getResourceAsStream(
-                    "DockingDefaults.xml");
-            try {
-                mainWindow.desktop.readXML(in);
-            } finally {
-                in.close();
-            }
-        } catch (Exception exception) {
-            // eat silently, probably a bug in the docking framework
-        }
+        MainWindowUI.resetDesktopLayout(mainWindow);
     }
 
     /**

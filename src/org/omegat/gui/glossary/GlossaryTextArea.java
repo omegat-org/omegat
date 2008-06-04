@@ -119,7 +119,7 @@ public class GlossaryTextArea extends javax.swing.JTextPane
     }
     
     protected void loadGlossaries() {
-        final File dir = new File(Core.getDataEngine().getProjectProperties()
+        final File dir = new File(Core.getProject().getProjectProperties()
                 .getGlossaryRoot());
         new Thread() {
             public void run() {

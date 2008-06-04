@@ -51,7 +51,7 @@ public class ProjectUICommands {
     public static void projectCreate() {
         UIThreadsUtil.mustBeSwingThread();
 
-        if (Core.getDataEngine().isProjectLoaded()) {
+        if (Core.getProject().isProjectLoaded()) {
             return;
         }
         
@@ -78,16 +78,16 @@ public class ProjectUICommands {
             return;
         }
 
-        Core.getDataEngine().createProject(dir, newProps);
+        Core.getProject().createProject(dir, newProps);
 
-        final String projectRoot = Core.getDataEngine().getProjectProperties()
+        final String projectRoot = Core.getProject().getProjectProperties()
                 .getProjectRoot();
 
         if (projectRoot != null && projectRoot.length() > 0) {
             new SwingWorker<Object>() {
                 protected Object doInBackground() throws Exception {
-                    Core.getDataEngine().loadProject(newProps);
-                    Core.getDataEngine().saveProjectProperties();
+                    Core.getProject().loadProject(newProps);
+                    Core.getProject().saveProjectProperties();
                     return null;
                 }
                 protected void done() {
@@ -108,7 +108,7 @@ public class ProjectUICommands {
     public static void projectOpen() {
         UIThreadsUtil.mustBeSwingThread();
 
-        if (Core.getDataEngine().isProjectLoaded()) {
+        if (Core.getProject().isProjectLoaded()) {
             return;
         }
 
@@ -157,9 +157,9 @@ public class ProjectUICommands {
         final ProjectProperties newProps = props;
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {
-                Core.getDataEngine().loadProject(newProps);
+                Core.getProject().loadProject(newProps);
                 if (saveProperties) {
-                    Core.getDataEngine().saveProjectProperties();
+                    Core.getProject().saveProjectProperties();
                 }
                 return null;
             }
@@ -177,18 +177,18 @@ public class ProjectUICommands {
     public static void projectReload() {
         UIThreadsUtil.mustBeSwingThread();
 
-        if (!Core.getDataEngine().isProjectLoaded()) {
+        if (!Core.getProject().isProjectLoaded()) {
             return;
         }
         
-        final ProjectProperties props = Core.getDataEngine().getProjectProperties();
+        final ProjectProperties props = Core.getProject().getProjectProperties();
 
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {
-                Core.getDataEngine().saveProject();
-                Core.getDataEngine().closeProject();
+                Core.getProject().saveProject();
+                Core.getProject().closeProject();
 
-                Core.getDataEngine().loadProject(props);
+                Core.getProject().loadProject(props);
                 return null;
             }
             protected void done() {
@@ -206,7 +206,7 @@ public class ProjectUICommands {
     public static void projectSave() {
         UIThreadsUtil.mustBeSwingThread();
 
-        if (!Core.getDataEngine().isProjectLoaded()) {
+        if (!Core.getProject().isProjectLoaded()) {
             return;
         }
 
@@ -218,7 +218,7 @@ public class ProjectUICommands {
             protected Object doInBackground() throws Exception {
                 Core.getMainWindow().showStatusMessageRB("MW_STATUS_SAVING");
 
-                Core.getDataEngine().saveProject();
+                Core.getProject().saveProject();
 
                 Core.getMainWindow().showStatusMessageRB("MW_STATUS_SAVED");
 
@@ -239,7 +239,7 @@ public class ProjectUICommands {
     public static void projectClose() {
         UIThreadsUtil.mustBeSwingThread();
 
-        if (!Core.getDataEngine().isProjectLoaded()) {
+        if (!Core.getProject().isProjectLoaded()) {
             return;
         }
 
@@ -249,7 +249,7 @@ public class ProjectUICommands {
 
                 Preferences.save();
 
-                Core.getDataEngine().saveProject();
+                Core.getProject().saveProject();
 
                 Core.getMainWindow().showStatusMessageRB("MW_STATUS_SAVED");
 
@@ -260,7 +260,7 @@ public class ProjectUICommands {
                 try {
                     get();
                     Core.getMainWindow().clear();
-                    Core.getDataEngine().closeProject();
+                    Core.getProject().closeProject();
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
@@ -272,13 +272,13 @@ public class ProjectUICommands {
     public static void projectEditProperties() {
         UIThreadsUtil.mustBeSwingThread();
 
-        if (!Core.getDataEngine().isProjectLoaded()) {
+        if (!Core.getProject().isProjectLoaded()) {
             return;
         }
 
         // displaying the dialog to change paths and other properties
         ProjectPropertiesDialog prj = new ProjectPropertiesDialog(Core
-                .getDataEngine().getProjectProperties(), Core.getDataEngine()
+                .getProject().getProjectProperties(), Core.getProject()
                 .getProjectProperties().getProjectName(),
                 ProjectPropertiesDialog.EDIT_PROJECT);
         prj.setVisible(true);
@@ -297,11 +297,11 @@ public class ProjectUICommands {
         
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {
-                Core.getDataEngine().saveProject();
-                Core.getDataEngine().closeProject();
+                Core.getProject().saveProject();
+                Core.getProject().closeProject();
 
-                Core.getDataEngine().loadProject(newProps);
-                Core.getDataEngine().saveProjectProperties();
+                Core.getProject().loadProject(newProps);
+                Core.getProject().saveProjectProperties();
                 return null;
             }
             protected void done() {
@@ -319,7 +319,7 @@ public class ProjectUICommands {
     public static void projectCompile() {
         UIThreadsUtil.mustBeSwingThread();
 
-        if (!Core.getDataEngine().isProjectLoaded()) {
+        if (!Core.getProject().isProjectLoaded()) {
             return;
         }
 
@@ -329,8 +329,8 @@ public class ProjectUICommands {
 
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {
-                Core.getDataEngine().saveProject();
-                Core.getDataEngine().compileProject();
+                Core.getProject().saveProject();
+                Core.getProject().compileProject();
                 return null;
             }
 

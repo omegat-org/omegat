@@ -53,7 +53,7 @@ import javax.swing.text.PlainDocument;
 import javax.swing.text.StringContent;
 import javax.swing.undo.UndoManager;
 
-import org.omegat.core.data.CommandThread;
+import org.omegat.core.data.RealProject;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;

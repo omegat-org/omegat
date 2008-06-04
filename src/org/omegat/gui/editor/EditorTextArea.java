@@ -171,7 +171,7 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
      */
     protected void processKeyEventBody(KeyEvent e)
     {
-        if (!Core.getDataEngine().isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded())
         {
             if( (e.getModifiers()&CTRL_KEY_MASK)==CTRL_KEY_MASK ||
                     (e.getModifiers()&InputEvent.ALT_MASK)==InputEvent.ALT_MASK )

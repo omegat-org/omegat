@@ -31,7 +31,7 @@ import javax.swing.JOptionPane;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.IDataEngine;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.SourceTextEntry;
@@ -103,7 +103,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
 
         StringEntry se;
 
-        IDataEngine dataEngine = Core.getDataEngine();
+        IProject dataEngine = Core.getProject();
         synchronized (dataEngine) {
         for (SourceTextEntry ste : dataEngine.getAllEntries()) {
             se = ste.getStrEntry();

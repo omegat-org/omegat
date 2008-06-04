@@ -220,7 +220,7 @@ public class MainWindowMenu implements ActionListener {
         
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-                if (Core.getDataEngine().isProjectLoaded()) {
+                if (Core.getProject().isProjectLoaded()) {
                     onProjectStatusChanged(true);
                 } else {
                     onProjectStatusChanged(false);

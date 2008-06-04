@@ -32,11 +32,12 @@ import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.filters2.TranslationException;
 
 /**
- * Interface for access to data engine funtionality.
+ * Interface for access to loaded project. Each loaded project will be new
+ * instance of IProject.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public interface IDataEngine {
+public interface IProject {
     /**
      * Create new project.
      * 

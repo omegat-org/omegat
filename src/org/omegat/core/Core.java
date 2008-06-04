@@ -24,8 +24,8 @@
 
 package org.omegat.core;
 
-import org.omegat.core.data.CommandThread;
-import org.omegat.core.data.IDataEngine;
+import org.omegat.core.data.RealProject;
+import org.omegat.core.data.IProject;
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.Tokenizer;
 import org.omegat.core.spellchecker.ISpellChecker;
@@ -52,7 +52,7 @@ import org.omegat.util.Log;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class Core {
-    private static IDataEngine dataEngine;
+    private static IProject currentProject;
     private static IMainWindow mainWindow;
     private static IEditor editor;
     private static ITagValidation tagValidation;
@@ -61,8 +61,8 @@ public class Core {
     private static ISpellChecker spellChecker;
 
     /** Get data engine instance. */
-    public static IDataEngine getDataEngine() {
-        return dataEngine;
+    public static IProject getProject() {
+        return currentProject;
     }
 
     /** Get main windows instance. */
@@ -107,7 +107,7 @@ public class Core {
         // bugfix - Serious threading issue, preventing OmegaT from showing up...
         //          http://sourceforge.net/support/tracker.php?aid=1216514
         // we start command thread here...
-        dataEngine = new CommandThread();
+        currentProject = new RealProject();
         
         me.setVisible(true);
 

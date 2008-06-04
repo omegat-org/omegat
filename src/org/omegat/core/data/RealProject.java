@@ -57,11 +57,11 @@ import org.omegat.util.TMXWriter;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
- * CommandThread is a thread to asynchronously do the stuff.
+ * Loaded project implementation. Only translation could be changed after
+ * project will be loaded and setted by Core.setProject.
  * 
- * This is most important part for synchronization. All components which uses
- * project data should be synchronized around IDataEngine instance. It will be
- * good to change synchronization to read/write mode in future.
+ * All components can read all data directly without synchronization. All
+ * synchronization implemented inside RealProject.
  * 
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
@@ -69,16 +69,16 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Bartko Zoltan
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class CommandThread implements IDataEngine
+public class RealProject implements IProject
 {
     /** Local logger. */
-    private static final Logger LOGGER = Logger.getLogger(CommandThread.class
+    private static final Logger LOGGER = Logger.getLogger(RealProject.class
             .getName());
     
     private final SaveThread saveThread;
     private final CheckThread checkThread;
     
-    public CommandThread()
+    public RealProject()
     {   
         saveThread = new SaveThread();
         saveThread.start();
@@ -118,7 +118,7 @@ public class CommandThread implements IDataEngine
         
         saveThread.resetTime();
 
-        synchronized (CommandThread.this) {
+        synchronized (RealProject.this) {
             currentProject = null;
         }
         cleanUp();
@@ -190,7 +190,7 @@ public class CommandThread implements IDataEngine
             System.exit(0);
         }
         
-        synchronized (CommandThread.this) {
+        synchronized (RealProject.this) {
             currentProject = newProject;
         }
         saveThread.resetTime();
@@ -224,7 +224,7 @@ public class CommandThread implements IDataEngine
      * any error.
      */
     public void closeProject() {
-        synchronized (CommandThread.this) {
+        synchronized (RealProject.this) {
             currentProject = null;
         }
         cleanUp();
@@ -242,7 +242,7 @@ public class CommandThread implements IDataEngine
         UIThreadsUtil.mustNotBeSwingThread();
         
         ProjectContext context;
-        synchronized (CommandThread.this) {
+        synchronized (RealProject.this) {
             context = currentProject;
         }
         
@@ -339,7 +339,7 @@ public class CommandThread implements IDataEngine
     
     public void markAsDirty()
     {
-        synchronized (CommandThread.this) {
+        synchronized (RealProject.this) {
             currentProject.m_modifiedFlag = true;
         }
     }
@@ -351,7 +351,7 @@ public class CommandThread implements IDataEngine
         UIThreadsUtil.mustNotBeSwingThread();
         
         ProjectContext saveContext;
-        synchronized (CommandThread.this) {
+        synchronized (RealProject.this) {
             saveContext = currentProject;
         }        
         
@@ -437,7 +437,7 @@ public class CommandThread implements IDataEngine
             
             saveProjectProperties();
             
-            synchronized (CommandThread.this) {
+            synchronized (RealProject.this) {
                 currentProject = newProject;
             }
             saveThread.resetTime();

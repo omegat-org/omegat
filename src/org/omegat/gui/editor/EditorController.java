@@ -45,7 +45,7 @@ import javax.swing.undo.CannotUndoException;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.IDataEngine;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.StatisticsInfo;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IEntryEventListener;
@@ -149,7 +149,7 @@ public class EditorController implements IEditor {
                 switch (eventType) {
                 case CREATE:
                 case LOAD:
-                    if (!Core.getDataEngine().getAllEntries().isEmpty()) {
+                    if (!Core.getProject().getAllEntries().isEmpty()) {
                         showType = SHOW_TYPE.FIRST_ENTRY;
                     } else {
                         showType = SHOW_TYPE.EMPTY_PROJECT;
@@ -255,9 +255,9 @@ public class EditorController implements IEditor {
      */
     public String getCurrentFile() {
         try {
-            String fullName = Core.getDataEngine().getAllEntries().get(
+            String fullName = Core.getProject().getAllEntries().get(
                     m_curEntryNum).getSrcFile().name;
-            return fullName.substring(Core.getDataEngine()
+            return fullName.substring(Core.getProject()
                     .getProjectProperties().getSourceRoot().length());
         } catch (Exception ex) {
             return null;
@@ -279,9 +279,9 @@ public class EditorController implements IEditor {
                 // clear old text
                 editor.setText(new String());
                 
-                IDataEngine dataEngine=Core.getDataEngine();
+                IProject dataEngine=Core.getProject();
                 List<SourceTextEntry> entries;
-                synchronized (Core.getDataEngine()) {
+                synchronized (Core.getProject()) {
                     entries = dataEngine.getAllEntries();
                 }
 
@@ -374,11 +374,11 @@ public class EditorController implements IEditor {
                 return;
             int translatedInFile = 0;
             for (int _i = m_xlFirstEntry; _i <= m_xlLastEntry; _i++) {
-                if (Core.getDataEngine().getAllEntries().get(_i).isTranslated())
+                if (Core.getProject().getAllEntries().get(_i).isTranslated())
                     translatedInFile++;
             }
             
-            StatisticsInfo stat = Core.getDataEngine().getStatistics();
+            StatisticsInfo stat = Core.getProject().getStatistics();
 
             String pMsg = " " + Integer.toString(translatedInFile) + "/"
                     + Integer.toString(m_xlLastEntry - m_xlFirstEntry + 1) + " ("
@@ -410,7 +410,7 @@ public class EditorController implements IEditor {
                     // FIX: m_curEntryNum = m_xlLastEntry;
                 }
                 // </HP-experiment>
-                m_curEntry = Core.getDataEngine().getAllEntries().get(m_curEntryNum);
+                m_curEntry = Core.getProject().getAllEntries().get(m_curEntryNum);
                 String srcText = m_curEntry.getSrcText();
 
                 m_sourceDisplayLength = srcText.length();
@@ -669,7 +669,7 @@ public class EditorController implements IEditor {
                         m_curEntry.setTranslation(new String());
                     else
                         m_curEntry.setTranslation(new_translation);
-                    Core.getDataEngine().markAsDirty();
+                    Core.getProject().markAsDirty();
 
                     // update the length parameters of all changed segments
                     // update strings in display
@@ -739,11 +739,11 @@ public class EditorController implements IEditor {
 
             commitEntry();
             
-            IDataEngine dataEngine = Core.getDataEngine();
+            IProject dataEngine = Core.getProject();
             synchronized (dataEngine) {
                 m_curEntryNum++;
                 if (m_curEntryNum > m_xlLastEntry) {
-                    if (m_curEntryNum >= Core.getDataEngine().getAllEntries().size())
+                    if (m_curEntryNum >= Core.getProject().getAllEntries().size())
                         m_curEntryNum = 0;
                     loadDocument();
                 }
@@ -760,12 +760,12 @@ public class EditorController implements IEditor {
 
         commitEntry();
 
-        IDataEngine dataEngine = Core.getDataEngine();
+        IProject dataEngine = Core.getProject();
         synchronized (dataEngine) {
             m_curEntryNum--;
             if (m_curEntryNum < m_xlFirstEntry) {
                 if (m_curEntryNum < 0)
-                    m_curEntryNum = Core.getDataEngine().getAllEntries().size() - 1;
+                    m_curEntryNum = Core.getProject().getAllEntries().size() - 1;
                 // empty project bugfix:
                 if (m_curEntryNum < 0)
                     m_curEntryNum = 0;
@@ -795,10 +795,10 @@ public class EditorController implements IEditor {
         // save the current entry
         commitEntry();
 
-        IDataEngine dataEngine = Core.getDataEngine();
+        IProject dataEngine = Core.getProject();
         synchronized (dataEngine) {
             // get the total number of entries
-            int numEntries = Core.getDataEngine().getAllEntries().size();
+            int numEntries = Core.getProject().getAllEntries().size();
 
             boolean found = false;
             int curEntryNum;
@@ -808,7 +808,7 @@ public class EditorController implements IEditor {
             // until an entry with no translation is found
             for (curEntryNum = m_curEntryNum + 1; curEntryNum < numEntries; curEntryNum++) {
                 // get the next entry
-                SourceTextEntry entry = Core.getDataEngine().getAllEntries().get(curEntryNum);
+                SourceTextEntry entry = Core.getProject().getAllEntries().get(curEntryNum);
 
                 // check if the entry is not null, and whether it contains a
                 // translation
@@ -825,7 +825,7 @@ public class EditorController implements IEditor {
             if (!found) {
                 for (curEntryNum = 0; curEntryNum < m_curEntryNum; curEntryNum++) {
                     // get the next entry
-                    SourceTextEntry entry = Core.getDataEngine().getAllEntries().get(curEntryNum);
+                    SourceTextEntry entry = Core.getProject().getAllEntries().get(curEntryNum);
 
                     // check if the entry is not null, and whether it contains a
                     // translation
@@ -865,7 +865,7 @@ public class EditorController implements IEditor {
 
         commitEntry();
 
-        IDataEngine dataEngine = Core.getDataEngine();
+        IProject dataEngine = Core.getProject();
         synchronized (dataEngine) {
             m_curEntryNum = entryNum - 1;
             if (m_curEntryNum < m_xlFirstEntry) {
@@ -1006,7 +1006,7 @@ public class EditorController implements IEditor {
      *            one of the CASE_* values - except for case CASE_CYCLE.
      */
     private String doChangeCase(String input, CHANGE_CASE_TO toWhat) {
-        Locale locale = Core.getDataEngine().getProjectProperties().getTargetLanguage().getLocale();
+        Locale locale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
 
         switch (toWhat) {
         case LOWER:

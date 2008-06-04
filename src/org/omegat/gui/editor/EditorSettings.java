@@ -102,7 +102,7 @@ public class EditorSettings {
         Preferences.setPreference(Preferences.MARK_TRANSLATED_SEGMENTS,
                 markTranslated);
 
-        if (Core.getDataEngine().isProjectLoaded()) {
+        if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();
             parent.activateEntry();
         }
@@ -121,7 +121,7 @@ public class EditorSettings {
         Preferences.setPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS,
                 markUntranslated);
 
-        if (Core.getDataEngine().isProjectLoaded()) {
+        if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();
             parent.activateEntry();
         }
@@ -141,7 +141,7 @@ public class EditorSettings {
         Preferences.setPreference(Preferences.DISPLAY_SEGMENT_SOURCES,
                 displaySegmentSources);
 
-        if (Core.getDataEngine().isProjectLoaded()) {
+        if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();
             parent.activateEntry();
         }
@@ -159,7 +159,7 @@ public class EditorSettings {
         
         this.autoSpellChecking = autoSpellChecking;
         
-        if (Core.getDataEngine().isProjectLoaded()) {
+        if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();
             parent.activateEntry();
         }

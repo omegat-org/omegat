@@ -35,7 +35,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.IDataEngine;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.ParseEntry;
 import org.omegat.core.data.TransMemory;
 import org.omegat.core.matching.SourceTextEntry;
@@ -280,7 +280,7 @@ public class SearchThread extends Thread
         m_numFinds = 0;
 
         // search through all project entries
-        IDataEngine dataEngine = Core.getDataEngine();
+        IProject dataEngine = Core.getProject();
         synchronized (dataEngine) {
         for (int i = 0; i < dataEngine.getAllEntries().size(); i++) {
             // get the source and translation of the next entry
@@ -304,7 +304,7 @@ public class SearchThread extends Thread
         if (m_tmSearch) {
             synchronized (dataEngine) {
             // search all TM entries
-            for (TransMemory tm : Core.getDataEngine().getTransMemory()) {
+            for (TransMemory tm : Core.getProject().getTransMemory()) {
                 String srcText = tm.source;
                 String locText = tm.target;
 
@@ -345,7 +345,7 @@ public class SearchThread extends Thread
             //	the search data is already known here (and the
             //	handler is in the same thread, so info is not volatile)
             fm.loadFile(filename, processedFiles, new ParseEntry(Core
-                    .getDataEngine().getProjectProperties()) {                
+                    .getProject().getProjectProperties()) {                
                 protected String processSingleEntry(String src) {
                     searchText(src);
                     return src;

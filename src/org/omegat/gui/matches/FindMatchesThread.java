@@ -94,8 +94,8 @@ public class FindMatchesThread extends Thread {
 
     @Override
     public void run() {
-        final List<StringEntry> entries = Core.getDataEngine().getAllTranslations();
-        final List<LegacyTM> memory = Core.getDataEngine().getMemory();
+        final List<StringEntry> entries = Core.getProject().getAllTranslations();
+        final List<LegacyTM> memory = Core.getProject().getMemory();
         if (entries == null || memory == null) {
             // project is closed
             clear();

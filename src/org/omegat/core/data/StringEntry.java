@@ -103,9 +103,9 @@ public class StringEntry
 
             boolean is = !"".equals(m_translation);                             // NOI18N
             if( was && !is )
-                Core.getDataEngine().decreaseTranslated();
+                Core.getProject().decreaseTranslated();
             else if( !was && is )
-                Core.getDataEngine().increaseTranslated();
+                Core.getProject().increaseTranslated();
         }
     }
 

@@ -148,7 +148,7 @@ public class MainWindowMenuHandler {
     public void projectExitMenuItemActionPerformed() {
         boolean projectModified = false;
         if (mainWindow.isProjectLoaded())
-            projectModified = Core.getDataEngine().isProjectModified();
+            projectModified = Core.getProject().isProjectModified();
 
         // RFE 1302358
         // Add Yes/No Warning before OmegaT quits
@@ -163,9 +163,9 @@ public class MainWindowMenuHandler {
         MainWindowUI.saveScreenLayout(mainWindow);
         Preferences.save();
 
-        if (Core.getDataEngine().isProjectLoaded()) {
+        if (Core.getProject().isProjectLoaded()) {
             // TODO: change to SwingWorker
-            Core.getDataEngine().saveProject();
+            Core.getProject().saveProject();
         }
 
         System.exit(0);
@@ -309,7 +309,7 @@ public class MainWindowMenuHandler {
                             // Get the value entered by the user
                             String inputValue = (String) input.getInputValue();
 
-                            int maxNr = Core.getDataEngine().getAllEntries().size();
+                            int maxNr = Core.getProject().getAllEntries().size();
                             
                             // Check if the user entered a value at all
                             if ((inputValue == null) || (inputValue.trim().length() == 0)) {
@@ -468,9 +468,9 @@ public class MainWindowMenuHandler {
      */
     public void optionsSpellCheckMenuItemActionPerformed() {
         Language currentLanguage = null;
-        if (Core.getDataEngine().isProjectLoaded()){              
+        if (Core.getProject().isProjectLoaded()){              
             currentLanguage = 
-                Core.getDataEngine().getProjectProperties().getTargetLanguage();
+                Core.getProject().getProjectProperties().getTargetLanguage();
         } else {
             currentLanguage = 
                 new Language(
@@ -483,7 +483,7 @@ public class MainWindowMenuHandler {
         
         if (sd.getReturnStatus() == SpellcheckerConfigurationDialog.RET_OK) {
             boolean isNeedToSpell = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
-            if (isNeedToSpell && Core.getDataEngine().isProjectLoaded()) {
+            if (isNeedToSpell && Core.getProject().isProjectLoaded()) {
                 ISpellChecker sc = Core.getSpellChecker();
                 sc.destroy();
                 sc.initialize();

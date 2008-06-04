@@ -31,7 +31,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.omegat.core.data.CommandThread;
+import org.omegat.core.data.RealProject;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Language;
 

@@ -74,7 +74,7 @@ import javax.swing.table.TableColumnModel;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.IDataEngine;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.StatisticsInfo;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IEntryEventListener;
@@ -109,7 +109,7 @@ public class ProjectFrame extends JFrame {
     private JTable tableFiles, tableTotal;
     private JScrollPane scrollFiles;
     private AbstractTableModel modelFiles, modelTotal;
-    private List<IDataEngine.FileInfo> files;
+    private List<IProject.FileInfo> files;
 
     private JTextArea statLabel;
     private JButton m_addNewFileButton;
@@ -340,19 +340,19 @@ public class ProjectFrame extends JFrame {
     public void buildDisplay() {
         UIThreadsUtil.mustBeSwingThread();
 
-        String statFile = Core.getDataEngine().getProjectProperties()
+        String statFile = Core.getProject().getProjectProperties()
                 .getProjectInternal()
                 + OConsts.STATS_FILENAME;
         String statText = MessageFormat.format(OStrings
                 .getString("PF_STAT_PATH"), statFile);
         statLabel.setText(statText);
 
-        files = Core.getDataEngine().getProjectFiles();
+        files = Core.getProject().getProjectFiles();
         modelFiles.fireTableDataChanged();
 
         String currentFile = Core.getEditor().getCurrentFile();
         // need to copy to local vars against threads synchronization problems
-        final List<IDataEngine.FileInfo> fs = files;
+        final List<IProject.FileInfo> fs = files;
         // set current file as default selection
         for (int i = 0; i < fs.size(); i++) {
             if (fs.get(i).filePath.equals(currentFile)) {
@@ -385,7 +385,7 @@ public class ProjectFrame extends JFrame {
         tableFiles = new JTable();
         modelFiles = new AbstractTableModel() {
             public Object getValueAt(int rowIndex, int columnIndex) {
-                IDataEngine.FileInfo fi;
+                IProject.FileInfo fi;
                 try {
                     fi = files.get(rowIndex);
                 } catch (IndexOutOfBoundsException ex) {
@@ -446,7 +446,7 @@ public class ProjectFrame extends JFrame {
                         return OStrings.getString("GUI_PROJECT_TRANSLATED");
                     }
                 } else {
-                    StatisticsInfo stat = Core.getDataEngine().getStatistics();
+                    StatisticsInfo stat = Core.getProject().getStatistics();
                     switch (rowIndex) {
                     case 0:
                         return stat.numberOfSegmentsTotal;
@@ -541,14 +541,14 @@ public class ProjectFrame extends JFrame {
 
     /** Updates the Import Files button status. */
     public void uiUpdateImportButtonStatus() {
-        m_addNewFileButton.setEnabled(Core.getDataEngine().isProjectLoaded());
-        m_wikiImportButton.setEnabled(Core.getDataEngine().isProjectLoaded());
+        m_addNewFileButton.setEnabled(Core.getProject().isProjectLoaded());
+        m_wikiImportButton.setEnabled(Core.getProject().isProjectLoaded());
     }
 
     private void gotoFile(int row) {
         int entryIndex;
 
-        IDataEngine.FileInfo fi;
+        IProject.FileInfo fi;
         try {
             fi = files.get(row);
         } catch (IndexOutOfBoundsException ex) {
@@ -591,7 +591,7 @@ public class ProjectFrame extends JFrame {
             Component result = super.getTableCellRendererComponent(table,
                     value, isSelected, hasFocus, row, column);
             if (showCurrentFile) {
-                IDataEngine.FileInfo fi;
+                IProject.FileInfo fi;
                 try {
                     fi = files.get(row);
                 } catch (IndexOutOfBoundsException ex) {

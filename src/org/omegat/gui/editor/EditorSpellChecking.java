@@ -42,7 +42,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Utilities;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.CommandThread;
+import org.omegat.core.data.RealProject;
 import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -290,7 +290,7 @@ class EditorSpellChecking {
 
                     // iterate through the entries in this file
                     for (int i = controller.m_xlFirstEntry; i <= controller.m_xlLastEntry; i++) {
-                        SourceTextEntry ste = Core.getDataEngine().getAllEntries().get(i);
+                        SourceTextEntry ste = Core.getProject().getAllEntries().get(i);
                         if (ste.isTranslated() && localCnt != localCur) {
                             // only translated and inactive made it
                             int translationStartOffset = segOffset;

@@ -705,7 +705,7 @@ public class FilterMaster
                 extension);
         
         
-        Language targetLang = Core.getDataEngine().getProjectProperties().getTargetLanguage();
+        Language targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
         
         res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LOCALE),
                 targetLang.getLocaleCode());

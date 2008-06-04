@@ -74,12 +74,12 @@ class SaveThread extends Thread {
                 }
                 if (needToSaveNow) {
                     // Nobody didn't clear save flag. Then save project.
-                    IDataEngine dataEngine = Core.getDataEngine();
+                    IProject dataEngine = Core.getProject();
                     // need to synchronize arounf DataENgine against change
                     // project loaded state
                         if (dataEngine.isProjectLoaded()) {
                             LOGGER.fine("Start project save from SaveThread");
-                            Core.getDataEngine().saveProject();
+                            Core.getProject().saveProject();
                             LOGGER.fine("Finish project save from SaveThread");
                             Core.getMainWindow().showStatusMessageRB(
                                     "ST_PROJECT_AUTOSAVED",

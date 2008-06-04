@@ -20,16 +20,24 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
-package org.omegat.core.data;
+package org.omegat.core.threads;
 
 /**
- * Class for store some statistic data.
+ * Interface for support project autosaving.
+ * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class StatisticsInfo {
-    public int numberofTranslatedSegments;
-    public int numberOfUniqueSegments;
-    public int numberOfSegmentsTotal;
+public interface IAutoSave {
+    /**
+     * Disable autosaving. Required when project loading or saving time. When
+     * project closed, autosaving also disabled.
+     */
+    void disable();
+
+    /**
+     * Enable autosaving.
+     */
+    void enable();
 }

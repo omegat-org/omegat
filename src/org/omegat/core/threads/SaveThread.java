@@ -31,7 +31,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.IAutoSave;
 import org.omegat.core.data.IProject;
 
 /**

@@ -23,7 +23,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.core.data;
+package org.omegat.core.data.stat;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -35,6 +35,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.StringEntry;
 import org.omegat.core.matching.Tokenizer;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -55,7 +58,7 @@ public class Statistics {
      * character count of the project, the total number of unique segments, plus
      * the details for each file.
      */
-    protected static void buildProjectStats(final List<StringEntry> m_strEntryList,
+    public static void buildProjectStats(final List<StringEntry> m_strEntryList,
             final List<SourceTextEntry> m_srcTextEntryArray, final ProjectProperties m_config,
             final int numberofTranslatedSegments) {
         int I_WORDS = 0, I_WORDSLEFT = 1, I_CHARSNSP = 2, I_CHARSNSPLEFT = 3, I_CHARS = 4, I_CHARSLEFT = 5;

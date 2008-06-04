@@ -27,6 +27,7 @@ package org.omegat.core.data;
 import java.io.IOException;
 import java.util.List;
 
+import org.omegat.core.data.stat.StatisticsInfo;
 import org.omegat.filters2.TranslationException;
 
 /**

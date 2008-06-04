@@ -42,6 +42,8 @@ import java.util.logging.Logger;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.stat.Statistics;
+import org.omegat.core.data.stat.StatisticsInfo;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;

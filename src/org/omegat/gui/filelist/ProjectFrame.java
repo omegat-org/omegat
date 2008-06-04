@@ -219,10 +219,6 @@ public class ProjectFrame extends JFrame {
                     setVisible(false);
                     break;
                 case LOAD:
-                    buildDisplay();
-                    setVisible(true);
-                    tableFiles.requestFocus();
-                    buildTotalTableLayout();
                 case CREATE:
                     if (!Core.getProject().getAllEntries().isEmpty()) {
                         buildDisplay();
@@ -230,6 +226,7 @@ public class ProjectFrame extends JFrame {
                         tableFiles.requestFocus();
                         buildTotalTableLayout();
                     }
+                    break;
                 }
             }
         });

@@ -111,6 +111,7 @@ public class SpellChecker implements ISpellChecker {
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
                 switch (eventType) {
                 case LOAD:
+                case CREATE:
                     initialize();
                     break;
                 case CLOSE:

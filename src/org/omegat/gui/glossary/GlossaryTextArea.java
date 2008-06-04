@@ -65,6 +65,7 @@ public class GlossaryTextArea extends javax.swing.JTextPane
             public void onProjectChanged(final PROJECT_CHANGE_TYPE eventType) {
                 switch (eventType) {
                 case LOAD:
+                case CREATE:
                     loadGlossaries();
                     break;
                 case CLOSE:

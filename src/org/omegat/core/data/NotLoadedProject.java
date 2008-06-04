@@ -27,7 +27,6 @@ package org.omegat.core.data;
 import java.io.IOException;
 import java.util.List;
 
-import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.filters2.TranslationException;
 
 /**
@@ -50,7 +49,7 @@ public class NotLoadedProject implements IProject {
         return null;
     }
 
-    public List<StringEntry> getAllTranslations() {
+    public List<StringEntry> getUniqueEntries() {
         return null;
     }
 
@@ -85,12 +84,12 @@ public class NotLoadedProject implements IProject {
         return false;
     }
 
-    public void markAsDirty() {
-    }
-
     public void saveProject() {
     }
 
     public void saveProjectProperties() throws IOException {
+    }
+    
+    public void setTranslation(SourceTextEntry entry, String trans) {
     }
 }

@@ -46,12 +46,12 @@ import javax.swing.undo.CannotUndoException;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StatisticsInfo;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
@@ -279,11 +279,7 @@ public class EditorController implements IEditor {
                 // clear old text
                 editor.setText(new String());
                 
-                IProject dataEngine=Core.getProject();
-                List<SourceTextEntry> entries;
-                synchronized (Core.getProject()) {
-                    entries = dataEngine.getAllEntries();
-                }
+                List<SourceTextEntry> entries = Core.getProject().getAllEntries();
 
                 m_curEntry = entries.get(m_curEntryNum);
 
@@ -593,6 +589,8 @@ public class EditorController implements IEditor {
     public void commitEntry(final boolean forceCommit) {
         UIThreadsUtil.mustBeSwingThread();
         
+        IProject project = Core.getProject();
+        
             if (!mw.isProjectLoaded())
                 return;
 
@@ -674,10 +672,9 @@ public class EditorController implements IEditor {
                     // update memory
                     if (new_translation.equals(m_curEntry.getSrcText())
                             && !Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC))
-                        m_curEntry.setTranslation(new String());
+                        project.setTranslation(m_curEntry, new String());
                     else
-                        m_curEntry.setTranslation(new_translation);
-                    Core.getProject().markAsDirty();
+                        project.setTranslation(m_curEntry, new_translation);
 
                     // update the length parameters of all changed segments
                     // update strings in display
@@ -747,15 +744,12 @@ public class EditorController implements IEditor {
 
             commitEntry();
             
-            IProject dataEngine = Core.getProject();
-            synchronized (dataEngine) {
                 m_curEntryNum++;
                 if (m_curEntryNum > m_xlLastEntry) {
                     if (m_curEntryNum >= Core.getProject().getAllEntries().size())
                         m_curEntryNum = 0;
                     loadDocument();
                 }
-            }
 
             activateEntry();
     }
@@ -768,8 +762,6 @@ public class EditorController implements IEditor {
 
         commitEntry();
 
-        IProject dataEngine = Core.getProject();
-        synchronized (dataEngine) {
             m_curEntryNum--;
             if (m_curEntryNum < m_xlFirstEntry) {
                 if (m_curEntryNum < 0)
@@ -779,7 +771,6 @@ public class EditorController implements IEditor {
                     m_curEntryNum = 0;
                 loadDocument();
             }
-        }
         activateEntry();
     }
 
@@ -803,10 +794,9 @@ public class EditorController implements IEditor {
         // save the current entry
         commitEntry();
 
-        IProject dataEngine = Core.getProject();
-        synchronized (dataEngine) {
+        IProject project = Core.getProject();
             // get the total number of entries
-            int numEntries = Core.getProject().getAllEntries().size();
+            int numEntries = project.getAllEntries().size();
 
             boolean found = false;
             int curEntryNum;
@@ -816,7 +806,7 @@ public class EditorController implements IEditor {
             // until an entry with no translation is found
             for (curEntryNum = m_curEntryNum + 1; curEntryNum < numEntries; curEntryNum++) {
                 // get the next entry
-                SourceTextEntry entry = Core.getProject().getAllEntries().get(curEntryNum);
+                SourceTextEntry entry = project.getAllEntries().get(curEntryNum);
 
                 // check if the entry is not null, and whether it contains a
                 // translation
@@ -833,7 +823,7 @@ public class EditorController implements IEditor {
             if (!found) {
                 for (curEntryNum = 0; curEntryNum < m_curEntryNum; curEntryNum++) {
                     // get the next entry
-                    SourceTextEntry entry = Core.getProject().getAllEntries().get(curEntryNum);
+                    SourceTextEntry entry = project.getAllEntries().get(curEntryNum);
 
                     // check if the entry is not null, and whether it contains a
                     // translation
@@ -855,8 +845,7 @@ public class EditorController implements IEditor {
                 if (m_curEntryNum < m_xlFirstEntry
                         || m_curEntryNum > m_xlLastEntry)
                     loadDocument();
-            }
-        }
+            }        
 
         // activate the entry
         activateEntry();
@@ -874,7 +863,6 @@ public class EditorController implements IEditor {
         commitEntry();
 
         IProject dataEngine = Core.getProject();
-        synchronized (dataEngine) {
             m_curEntryNum = entryNum - 1;
             if (m_curEntryNum < m_xlFirstEntry) {
                 if (m_curEntryNum < 0)
@@ -888,7 +876,6 @@ public class EditorController implements IEditor {
                     m_curEntryNum = 0;
                 loadDocument();
             }
-        }
         activateEntry();
     }
 

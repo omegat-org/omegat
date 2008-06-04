@@ -27,7 +27,6 @@ package org.omegat.core.data;
 import java.io.IOException;
 import java.util.List;
 
-import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.filters2.TranslationException;
 
 /**
@@ -78,18 +77,18 @@ public interface IProject {
     boolean isProjectModified();
 
     /**
-     * Mark project as dirty, i.e. translated, then project should be saved.
-     */
-    void markAsDirty();
-
-    void increaseTranslated();
-
-    void decreaseTranslated();
-
-    /**
-     * Get all source segments.
+     * Get all source segments. It's unmodifiable list, so, there is no need
+     * synchronization to read it.
      */
     List<SourceTextEntry> getAllEntries();
+
+    /**
+     * Set translation for entry.
+     * 
+     * @param entry entry
+     * @param trans translation
+     */
+    void setTranslation(SourceTextEntry entry, String trans);
 
     /**
      * Get statistics for project.
@@ -103,10 +102,10 @@ public interface IProject {
      * 
      * @return read-only list of project entries, or null if project not loaded
      */
-    List<StringEntry> getAllTranslations();
+    List<StringEntry> getUniqueEntries();
 
     /**
-     * Get all translation memory objects.
+     * Get TM files from /tm/*.tmx dir.
      * 
      * @return read-only list of translation memories, or null if project not
      *         loaded
@@ -114,12 +113,15 @@ public interface IProject {
     List<LegacyTM> getMemory();
 
     /**
-     * Get additional translation memory objects.
+     * Entries from all /tm/*.tmx files and orphaned from project_save.tmx.
      * 
      * @return list of additional memories
      */
     List<TransMemory> getTransMemory();
 
+    /**
+     * Get info about each source file in project.
+     */
     List<FileInfo> getProjectFiles();
 
     public static class FileInfo {

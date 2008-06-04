@@ -43,7 +43,7 @@ import javax.swing.text.Utilities;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.RealProject;
-import org.omegat.core.matching.SourceTextEntry;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;

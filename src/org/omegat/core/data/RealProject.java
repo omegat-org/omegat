@@ -43,7 +43,6 @@ import java.util.logging.Logger;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.core.matching.SourceTextEntry;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.FileUtil;
@@ -82,19 +81,22 @@ public class RealProject implements IProject
     private boolean m_modifiedFlag;
 
     /** maps text to strEntry obj */
-    private final Map<String, StringEntry> m_strEntryHash;
+    private Map<String, StringEntry> m_strEntryHash;
 
     /** Unique segments list. Used for save TMX. */
-    private final List<StringEntry> m_strEntryList;
+    private List<StringEntry> m_strEntryList;
 
     /** List of all segments in project. */
-    private final List<SourceTextEntry> m_srcTextEntryArray;
+    private List<SourceTextEntry> m_srcTextEntryArray;
 
     /** the list of legacy TMX files, each object is the list of string entries */
-    private final List<LegacyTM> m_legacyTMs;
+    private List<LegacyTM> m_legacyTMs;
 
-    private final List<TransMemory> m_tmList;
-    private final List<TransMemory> m_orphanedList;
+    /** Entries from all /tm/*.tmx files and orphaned from project_save.tmx. */
+    private List<TransMemory> m_tmList;
+    
+    /** Orphaned entries from project_save.tmx. */
+    private List<TransMemory> m_orphanedList;
 
     /** Segments count in project files. */
     private List<FileInfo> projectFilesList = new ArrayList<FileInfo>();
@@ -120,6 +122,14 @@ public class RealProject implements IProject
         } else {
             loadProject(props);
         }
+        
+        // make requered collections unmodifiable
+        m_srcTextEntryArray = Collections.unmodifiableList(m_srcTextEntryArray);
+        m_legacyTMs = Collections.unmodifiableList(m_legacyTMs);
+        m_tmList = Collections.unmodifiableList(m_tmList);
+        m_orphanedList = Collections.unmodifiableList(m_orphanedList);
+        m_strEntryList = Collections.unmodifiableList(m_strEntryList);
+        m_strEntryHash = Collections.unmodifiableMap(m_strEntryHash);
     }
     
     
@@ -350,11 +360,6 @@ public class RealProject implements IProject
         } else {
             LOGGER.info(OStrings.getString("LOG_DATAENGINE_SAVE_NONEED"));
         }
-    }
-    
-    public void markAsDirty()
-    {
-            m_modifiedFlag = true;
     }
     
     /** Does actually save the Project's TMX file and preferences. */
@@ -668,13 +673,12 @@ public class RealProject implements IProject
                     m_orphanedList.add(tm);
                     m_tmList.add(tm);
                     se = new StringEntry(src);
-                    dontCountNextIncrement(); // orphane translation don't count
-                    se.setTranslation(trans);
+                    se.setTranslation(trans); // orphane translation don't count
                     strOrphaneList.add(se);
                 }
                 else
                 {
-                    se.setTranslation(trans);
+                    numberofTranslatedSegments += se.setTranslation(trans);
                 }
             }
             else
@@ -683,8 +687,7 @@ public class RealProject implements IProject
                 //	memory string and add it to near list
                 m_tmList.add(new TransMemory(src, trans, fname));
                 StringEntry se = new StringEntry(src);
-                dontCountNextIncrement();   // external TMXes don't count
-                se.setTranslation(trans);
+                se.setTranslation(trans); // external TMXes don't count
                 strEntryList.add(se);
             }
         }
@@ -697,9 +700,6 @@ public class RealProject implements IProject
     
     /**
      * {@inheritDoc}
-     * 
-     * Can be called from any thread. Caller must be synchronized around
-     * IDataEngine.
      */
     public List<SourceTextEntry> getAllEntries() {
         return m_srcTextEntryArray;
@@ -709,17 +709,7 @@ public class RealProject implements IProject
     // simple project info
     
     /**
-     * Can be called from any thread. Caller must be synchronized around
-     * IDataEngine.
-     */
-    public String	sourceRoot()
-    { return m_config.getSourceRoot();		}
-    
-    /**
      * {@inheritDoc}
-     * 
-     * Can be called from any thread. Caller must be synchronized around
-     * IDataEngine.
      */
     public List<TransMemory>	getTransMemory()
     { return m_tmList;		}
@@ -728,8 +718,6 @@ public class RealProject implements IProject
     
     /**
      * Returns the active Project's Properties.
-     * 
-     * TODO: rewrite for synchronize ProjectProperties
      */
     public ProjectProperties getProjectProperties()
     {
@@ -747,71 +735,31 @@ public class RealProject implements IProject
 
     /** The number of unique translated segments. */
     private int numberofTranslatedSegments;
-    /** Signals that the next increase doesn't count -- it's orphane */
-    private boolean _dontCountNext = false;
-    
-   
-    /**
-     * Sygnals that the number of translated segments decreased 
-     * 
-     * Can be called from any thread. Caller must be synchronized around
-     * IDataEngine.
-     */
-    public void decreaseTranslated()
-    {
-        numberofTranslatedSegments--;
-    }
-    
-    /** 
-     * Sygnals that the next increase is false -- it's orphane 
-     * 
-     * Can be called from any thread. Caller must be synchronized around
-     * IDataEngine.
-     */
-    public void dontCountNextIncrement()
-    {
-        _dontCountNext = true;
-    }
-    
-    /** 
-     * Sygnals that the number of translated segments increased 
-     * 
-     * Can be called from any thread. Caller must be synchronized around
-     * IDataEngine.
-     */
-    public void increaseTranslated()
-    {
-        if( _dontCountNext )
-            _dontCountNext = false;
-        else
-        {
-            numberofTranslatedSegments++;
-        }
-    }
 
     /**
      * {@inheritDoc}
-     * 
-     * Can be called from any thread. Caller must be synchronized around
-     * IDataEngine.
      */
-    public List<StringEntry> getAllTranslations() {
+    public List<StringEntry> getUniqueEntries() {
         return Collections.unmodifiableList(new ArrayList<StringEntry>(m_strEntryList));
     }
     
     /**
      * {@inheritDoc}
-     * 
-     * Can be called from any thread. Caller must be synchronized around
-     * IDataEngine.
+     */
+    public void setTranslation(final SourceTextEntry entry, final String trans) {
+        numberofTranslatedSegments += entry.setTranslation(trans);
+        m_modifiedFlag = true;
+    }
+    
+    /**
+     * {@inheritDoc}
      */
     public List<LegacyTM> getMemory() {
         return m_legacyTMs;
     }
 
     /**
-     * Can be called from any thread. Caller must be synchronized around
-     * IDataEngine.
+     * {@inheritDoc}
      */
     public List<FileInfo> getProjectFiles() {
         return projectFilesList;

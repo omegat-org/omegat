@@ -29,7 +29,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.omegat.core.Core;
-import org.omegat.core.matching.SourceTextEntry;
 
 
 /*
@@ -88,8 +87,10 @@ public class StringEntry
      * Sets the translation of the StringEntry.
      * If translation given is null or equal to the source, than
      * the empty string is set as a translation to indicate that there's no translation.
+     * 
+     * @return how translation count changed: +1 - added, -1 - substracted, 0 - not changed
      */
-    public void setTranslation(String trans)
+    protected int setTranslation(String trans)
     {
         if( trans==null )
             trans = "";                                                         // NOI18N
@@ -103,10 +104,11 @@ public class StringEntry
 
             boolean is = !"".equals(m_translation);                             // NOI18N
             if( was && !is )
-                Core.getProject().decreaseTranslated();
+                return -1;
             else if( !was && is )
-                Core.getProject().increaseTranslated();
+                return +1;
         }
+        return 0;
     }
 
     /**

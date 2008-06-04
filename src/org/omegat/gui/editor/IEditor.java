@@ -24,7 +24,7 @@
 
 package org.omegat.gui.editor;
 
-import org.omegat.core.matching.SourceTextEntry;
+import org.omegat.core.data.SourceTextEntry;
 
 /**
  * Interface for access to editor functionality.

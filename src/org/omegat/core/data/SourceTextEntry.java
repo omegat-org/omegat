@@ -22,10 +22,8 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.core.matching;
+package org.omegat.core.data;
 
-import org.omegat.core.data.ProjectFileData;
-import org.omegat.core.data.StringEntry;
 
 /*
  * Source text entry represents an individual segment for
@@ -98,9 +96,9 @@ public class SourceTextEntry
      * Sets the translation 
      * (shortcut for <code>getStrEntry().setTranslation(t)</code>). 
      */
-    public void setTranslation(String t)
+    protected int setTranslation(String t)
     {
-        m_strEntry.setTranslation(t);
+        return m_strEntry.setTranslation(t);
     }
     
     /** 

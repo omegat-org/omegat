@@ -23,7 +23,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **************************************************************************/
 
-package org.omegat.core.data;
+package org.omegat.core.threads;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -31,6 +31,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.IAutoSave;
+import org.omegat.core.data.IProject;
 
 /**
  * An independent stream to save project, created in order not to freese UI

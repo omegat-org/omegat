@@ -24,15 +24,15 @@
 
 package org.omegat.core;
 
-import org.omegat.core.data.CheckThread;
 import org.omegat.core.data.IAutoSave;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.NotLoadedProject;
-import org.omegat.core.data.SaveThread;
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.Tokenizer;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.SpellChecker;
+import org.omegat.core.threads.CheckThread;
+import org.omegat.core.threads.SaveThread;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.main.IMainWindow;

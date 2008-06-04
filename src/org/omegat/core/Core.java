@@ -26,9 +26,8 @@ package org.omegat.core;
 
 import org.omegat.core.data.CheckThread;
 import org.omegat.core.data.IAutoSave;
-import org.omegat.core.data.NotLoadedProject;
-import org.omegat.core.data.RealProject;
 import org.omegat.core.data.IProject;
+import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.SaveThread;
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.Tokenizer;

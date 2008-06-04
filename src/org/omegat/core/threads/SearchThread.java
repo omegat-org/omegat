@@ -276,13 +276,13 @@ public class SearchThread extends Thread
 
     private void searchProject()
     {
+        IProject project = Core.getProject();
         // reset the number of search hits
         m_numFinds = 0;
 
         // search through all project entries
         IProject dataEngine = Core.getProject();
-        synchronized (dataEngine) {
-        for (int i = 0; i < dataEngine.getAllEntries().size(); i++) {
+        for (int i = 0; i < project.getAllEntries().size(); i++) {
             // get the source and translation of the next entry
             SourceTextEntry ste = dataEngine.getAllEntries().get(i);
             String srcText = ste.getSrcText();
@@ -298,11 +298,9 @@ public class SearchThread extends Thread
             if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS)
                 break;
         }
-        }
 
         // search the TM, if requested
         if (m_tmSearch) {
-            synchronized (dataEngine) {
             // search all TM entries
             for (TransMemory tm : Core.getProject().getTransMemory()) {
                 String srcText = tm.source;
@@ -317,7 +315,6 @@ public class SearchThread extends Thread
                 // stop searching if the max. nr of hits has been reached
                 if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS)
                     break;
-            }
             }
         }
     }

@@ -28,8 +28,6 @@ import java.util.Comparator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.omegat.core.Core;
-
 
 /*
  * String entry represents a unique translatable string

@@ -75,16 +75,6 @@ public class RealProject implements IProject
     private static final Logger LOGGER = Logger.getLogger(RealProject.class
             .getName());
     
-    private final SaveThread saveThread;
-    private final CheckThread checkThread;
-    
-    public RealProject()
-    {   
-        saveThread = new SaveThread();
-        saveThread.start();
-        checkThread = new CheckThread();
-        checkThread.start();
-    }
     
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
@@ -116,7 +106,7 @@ public class RealProject implements IProject
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_LOAD_START"));
         UIThreadsUtil.mustNotBeSwingThread();
         
-        saveThread.resetTime();
+        Core.getAutoSave().disable();
 
         synchronized (RealProject.this) {
             currentProject = null;
@@ -193,7 +183,7 @@ public class RealProject implements IProject
         synchronized (RealProject.this) {
             currentProject = newProject;
         }
-        saveThread.resetTime();
+        Core.getAutoSave().enable();
 
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
 
@@ -224,6 +214,8 @@ public class RealProject implements IProject
      * any error.
      */
     public void closeProject() {
+        Core.getAutoSave().disable();
+        
         synchronized (RealProject.this) {
             currentProject = null;
         }
@@ -355,7 +347,7 @@ public class RealProject implements IProject
             saveContext = currentProject;
         }        
         
-        saveThread.resetTime();
+        Core.getAutoSave().disable();
         
         Preferences.save();
         
@@ -412,7 +404,7 @@ public class RealProject implements IProject
 
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.SAVE);
         
-        saveThread.resetTime();
+        Core.getAutoSave().enable();
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_SAVE_END"));
     }
    
@@ -440,7 +432,7 @@ public class RealProject implements IProject
             synchronized (RealProject.this) {
                 currentProject = newProject;
             }
-            saveThread.resetTime();
+            Core.getAutoSave().enable();
             
             CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.CREATE);
         }

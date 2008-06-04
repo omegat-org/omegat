@@ -39,25 +39,27 @@ import org.omegat.core.Core;
  * @author Keith Godfrey
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-class SaveThread extends Thread {
+public class SaveThread extends Thread implements IAutoSave {
     private static final Logger LOGGER = Logger.getLogger(SaveThread.class
             .getName());
 
     private static final int SAVE_DURATION = 10 * 60 * 1000; // 10 minutes;
 
     private boolean needToSaveNow;
+    private boolean enabled;
 
     public SaveThread() {
         setName("Save thread"); // NOI18N
     }
 
-    /**
-     * This method called from other thread. Somebody calls this method for
-     * start autosave waiting time again. It happen after each manual project
-     * saving or project loading.
-     */
-    public synchronized void resetTime() {
-        LOGGER.fine("Reset time for SaveThread");
+    public synchronized void disable() {
+        LOGGER.fine("Disable autosave");
+        enabled = false;
+    }
+
+    public synchronized void enable() {
+        LOGGER.fine("Enable autosave");
+        enabled = true;
         needToSaveNow = false;
         notify();
     }
@@ -72,21 +74,16 @@ class SaveThread extends Thread {
                     // sleep
                     wait(SAVE_DURATION);
                 }
-                if (needToSaveNow) {
-                    // Nobody didn't clear save flag. Then save project.
+                if (needToSaveNow && enabled) {
+                    // Wait finished by time and autosaving enabled.
                     IProject dataEngine = Core.getProject();
-                    // need to synchronize arounf DataENgine against change
-                    // project loaded state
-                        if (dataEngine.isProjectLoaded()) {
-                            LOGGER.fine("Start project save from SaveThread");
-                            Core.getProject().saveProject();
-                            LOGGER.fine("Finish project save from SaveThread");
-                            Core.getMainWindow().showStatusMessageRB(
-                                    "ST_PROJECT_AUTOSAVED",
-                                    DateFormat
-                                            .getTimeInstance(DateFormat.SHORT)
-                                            .format(new Date()));
-                        }
+                    LOGGER.fine("Start project save from SaveThread");
+                    dataEngine.saveProject();
+                    LOGGER.fine("Finish project save from SaveThread");
+                    Core.getMainWindow().showStatusMessageRB(
+                            "ST_PROJECT_AUTOSAVED",
+                            DateFormat.getTimeInstance(DateFormat.SHORT)
+                                    .format(new Date()));
                 }
             }
         } catch (InterruptedException ex) {

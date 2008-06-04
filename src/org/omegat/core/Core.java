@@ -24,8 +24,11 @@
 
 package org.omegat.core;
 
+import org.omegat.core.data.CheckThread;
+import org.omegat.core.data.IAutoSave;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.IProject;
+import org.omegat.core.data.SaveThread;
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.Tokenizer;
 import org.omegat.core.spellchecker.ISpellChecker;
@@ -59,6 +62,10 @@ public class Core {
     private static IMatcher matcher;
     private static ITokenizer tokenizer;
     private static ISpellChecker spellChecker;
+    
+    private static CheckThread checkThread;
+    private static IAutoSave saveThread;
+
 
     /** Get data engine instance. */
     public static IProject getProject() {
@@ -94,6 +101,10 @@ public class Core {
     public static ISpellChecker getSpellChecker() {
         return spellChecker;
     }
+    
+    public static IAutoSave getAutoSave() {
+        return saveThread;
+    }
 
     /**
      * Initialize application core from exists main components instances.
@@ -117,6 +128,13 @@ public class Core {
         matcher = me.matches;
         tokenizer = createComponent(ITokenizer.class, new Tokenizer(), args);
         spellChecker = new SpellChecker();
+        
+        checkThread = new CheckThread();
+        checkThread.start();
+        
+        SaveThread th = new SaveThread();
+        saveThread = th;
+        th.start();        
     }
     
     /**

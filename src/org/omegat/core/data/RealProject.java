@@ -121,9 +121,8 @@ public class RealProject implements IProject
         
         if (isNewProject) {
             createProject(props);
-        } else {
-            loadProject(props);
         }
+        loadProject(props);
         
         // make requered collections unmodifiable
         m_srcTextEntryArray = Collections.unmodifiableList(m_srcTextEntryArray);

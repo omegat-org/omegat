@@ -81,17 +81,12 @@ public class ProjectUICommands {
             return;
         }
 
-        // TODO: change code for create not in swing thread. Create also should
-        // load project.
-        ProjectFactory.createProject(newProps);
-
-        final String projectRoot = Core.getProject().getProjectProperties()
-                .getProjectRoot();
+        final String projectRoot = newProps.getProjectRoot();
 
         if (projectRoot != null && projectRoot.length() > 0) {
             new SwingWorker<Object>() {
                 protected Object doInBackground() throws Exception {
-                    ProjectFactory.loadProject(newProps);
+                    ProjectFactory.createProject(newProps);
                     Core.getProject().saveProjectProperties();
                     return null;
                 }

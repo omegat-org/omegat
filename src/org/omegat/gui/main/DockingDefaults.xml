@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<DockingDesktop version="2.0">
+ <DockingPanel>
+  <Split orientation="1" location="0.6">
+   <Dockable>
+    <Key dockName="EDITOR" />
+   </Dockable>
+   <Split orientation="0" location="0.7">
+    <Dockable>
+     <Key dockName="MATCHES" />
+    </Dockable>
+    <Dockable>
+     <Key dockName="GLOSSARY" />
+    </Dockable>
+   </Split>
+  </Split>
+ </DockingPanel>
+ <TabGroups></TabGroups>
+</DockingDesktop>

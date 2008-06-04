@@ -45,7 +45,6 @@ import org.dts.spell.dictionary.OpenOfficeSpellDictionary;
 import org.dts.spell.dictionary.SpellDictionary;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.RealProject;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -264,7 +263,7 @@ public class SpellChecker implements ISpellChecker {
         // if it is valid (learned), it is ok
         if (learnedList.contains(word) || ignoreList.contains(word))
             return true;
-        if (hunspell != null) {
+        if (pHunspell != null) {
             try {
                 if (0 != hunspell.Hunspell_spell(pHunspell, prepareString(word)))
                     return true;
@@ -288,7 +287,7 @@ public class SpellChecker implements ISpellChecker {
         if (isCorrect(word))
             return aList;
         
-        if (hunspell!=null) {        
+        if (pHunspell!=null) {        
             // the pointer to the string reference to be sent
             PointerByReference strings = new PointerByReference();
 
@@ -349,7 +348,7 @@ public class SpellChecker implements ISpellChecker {
     public void learnWord(String word) {
         if (!learnedList.contains(word)) {
             learnedList.add(word);
-            if (hunspell != null) {
+            if (pHunspell != null) {
                 try {
                     hunspell.Hunspell_put_word(pHunspell, prepareString(word));
                 } catch (UnsupportedEncodingException ex) {

@@ -28,6 +28,7 @@
 package org.omegat.gui.main;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -65,7 +66,9 @@ import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.ResourcesUtil;
 import org.omegat.util.gui.UIThreadsUtil;
 
+import com.vlsolutions.swing.docking.DockableState;
 import com.vlsolutions.swing.docking.DockingDesktop;
+import com.vlsolutions.swing.docking.FloatingDialog;
 
 /**
  * The main window of OmegaT application.
@@ -426,6 +429,50 @@ public class MainWindow extends JFrame implements IMainWindow {
                         JOptionPane.ERROR_MESSAGE);
             }
         });
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void lockUI() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        // lock application frame
+        setEnabled(false);
+        // lock undocked dockables
+        for(DockableState dock:desktop.getDockables() ) {
+            if (!dock.isDocked()) {
+                dock.getDockable().getComponent().setEnabled(false);
+                for(Container parent = dock.getDockable().getComponent().getParent(); parent!=null; parent=parent.getParent()) {
+                    if (parent instanceof FloatingDialog) {
+                        parent.setEnabled(false);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void unlockUI() {
+        UIThreadsUtil.mustBeSwingThread();
+        
+        // unlock undocked dockables
+        for(DockableState dock:desktop.getDockables() ) {
+            if (!dock.isDocked()) {
+                for(Container parent = dock.getDockable().getComponent().getParent(); parent!=null; parent=parent.getParent()) {
+                    if (parent instanceof FloatingDialog) {
+                        parent.setEnabled(true);
+                        break;
+                    }
+                }
+                dock.getDockable().getComponent().setEnabled(true);
+            }
+        }
+        // unlock application frame
+        setEnabled(true);
     }
 
     /** Tells whether the project is loaded. */

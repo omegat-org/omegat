@@ -38,6 +38,16 @@ public interface IMainWindow {
      * Get application frame.
      */
     JFrame getApplicationFrame();
+    
+    /**
+     * Lock UI for long-term operations.
+     */
+    void lockUI();
+    
+    /**
+     * Unlock UI after locking.
+     */
+    void unlockUI();
 
     /**
      * Get main application font.

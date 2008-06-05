@@ -65,7 +65,7 @@ public abstract class SwingWorker<T> {
      * Execute task.
      */
     public final void execute() {
-        Core.getMainWindow().getApplicationFrame().setEnabled(false);
+        Core.getMainWindow().lockUI();
         new Thread() {
             public void run() {
                 try {
@@ -78,8 +78,7 @@ public abstract class SwingWorker<T> {
                         try {
                             done();
                         } finally {
-                            Core.getMainWindow().getApplicationFrame()
-                                    .setEnabled(true);
+                            Core.getMainWindow().unlockUI();
                         }
                     }
                 });

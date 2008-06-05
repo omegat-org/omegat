@@ -190,7 +190,6 @@ public class ProjectFrame extends JFrame {
 
         statLabel = new JTextArea();
         statLabel.setEditable(false);
-        statLabel.setFocusable(false);
         statLabel.setLineWrap(true);
         statLabel.setBackground(getBackground());
         gbc.gridy = 5;

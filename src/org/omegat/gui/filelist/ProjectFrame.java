@@ -29,7 +29,6 @@ package org.omegat.gui.filelist;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -78,7 +77,6 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.data.stat.StatisticsInfo;
 import org.omegat.core.events.IEntryEventListener;
-import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OConsts;
@@ -104,7 +102,6 @@ import org.openide.awt.Mnemonics;
 public class ProjectFrame extends JFrame {
 
     private static final Color CURRENT_FILE_COLOR = new Color(0xC8DDF2);
-    private static final int LINE_SPACING = 6;
 
     private JTable tableFiles, tableTotal;
     private JScrollPane scrollFiles;
@@ -189,6 +186,7 @@ public class ProjectFrame extends JFrame {
         setTitle(OStrings.getString("PF_WINDOW_TITLE"));
 
         statLabel = new JTextArea();
+        statLabel.setFont(getFont());
         statLabel.setEditable(false);
         statLabel.setLineWrap(true);
         statLabel.setBackground(getBackground());
@@ -247,13 +245,6 @@ public class ProjectFrame extends JFrame {
             }
         });
 
-        CoreEvents
-                .registerFontChangedEventListener(new IFontChangedEventListener() {
-                    public void onFontChanged(Font newFont) {
-                        ProjectFrame.this.setFont(newFont);
-                    }
-                });
-
         tableFiles.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -269,18 +260,6 @@ public class ProjectFrame extends JFrame {
                 }
             }
         });
-    }
-
-    @Override
-    public void setFont(Font f) {
-        super.setFont(f);
-
-        tableFiles.setFont(f);
-        tableTotal.setFont(new Font(f.getName(), Font.BOLD, f.getSize()));
-        tableFiles.setRowHeight(f.getSize() + LINE_SPACING);
-        tableTotal.setRowHeight(f.getSize() + LINE_SPACING);
-
-        statLabel.setFont(f);
     }
 
     /**

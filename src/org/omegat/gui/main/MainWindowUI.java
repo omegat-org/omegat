@@ -71,8 +71,6 @@ public class MainWindowUI {
      */
     public static void createMainComponents(final MainWindow mainWindow, final Font font) {
         mainWindow.m_projWin = new ProjectFrame(mainWindow);
-        
-        mainWindow.m_projWin.setFont(font);
     }
 
     /**

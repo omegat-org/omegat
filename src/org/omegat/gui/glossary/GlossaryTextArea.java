@@ -35,6 +35,8 @@ import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.gui.main.DockableScrollPane;
+import org.omegat.util.OStrings;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -61,14 +63,21 @@ public class GlossaryTextArea extends javax.swing.JTextPane
         manager = new GlossaryManager();
         setEditable(false);
         
+        setFont(Core.getMainWindow().getApplicationFont());
+        
+        String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Glossary");
+        Core.getMainWindow().addDockable(new DockableScrollPane("GLOSSARY", title, this, true));
+        
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
             public void onProjectChanged(final PROJECT_CHANGE_TYPE eventType) {
                 switch (eventType) {
                 case LOAD:
                 case CREATE:
+                    clear();
                     loadGlossaries();
                     break;
                 case CLOSE:
+                    clear();
                     closeGlossaries();
                     break;
                 }

@@ -153,8 +153,6 @@ public class ProjectUICommands {
             }
         }
 
-        Core.getMainWindow().clear();
-
         final boolean saveProperties = needToSaveProperties;
         final ProjectProperties newProps = props;
         new SwingWorker<Object>() {
@@ -201,7 +199,6 @@ public class ProjectUICommands {
             protected void done() {
                 try {
                     get();
-                    Core.getMainWindow().clear();
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex,
@@ -268,7 +265,6 @@ public class ProjectUICommands {
             protected void done() {
                 try {
                     get();
-                    Core.getMainWindow().clear();
                     ProjectFactory.closeProject();
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
@@ -318,7 +314,6 @@ public class ProjectUICommands {
             protected void done() {
                 try {
                     get();
-                    Core.getMainWindow().clear();
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex,

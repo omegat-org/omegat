@@ -29,7 +29,6 @@ package org.omegat.gui.main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
@@ -43,10 +42,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import org.omegat.gui.editor.EditorTextArea;
 import org.omegat.gui.filelist.ProjectFrame;
-import org.omegat.gui.glossary.GlossaryTextArea;
-import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -74,14 +70,8 @@ public class MainWindowUI {
      * Create main UI panels.
      */
     public static void createMainComponents(final MainWindow mainWindow, final Font font) {
-        mainWindow.editor = new EditorTextArea();
-        mainWindow.matches = new MatchesTextArea(mainWindow);
-        mainWindow.glossary = new GlossaryTextArea();
         mainWindow.m_projWin = new ProjectFrame(mainWindow);
         
-        mainWindow.editor.setFont(font);
-        mainWindow.matches.setFont(font);
-        mainWindow.glossary.setFont(font);
         mainWindow.m_projWin.setFont(font);
     }
 
@@ -91,14 +81,6 @@ public class MainWindowUI {
     public static DockingDesktop initDocking(final MainWindow mainWindow) {
         DockingUI.initialize();
 
-        String matchesName = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches");
-        String glossaryName = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Glossary");
-
-        mainWindow.editorScroller = new DockableScrollPane("EDITOR", " ", mainWindow.editor, false);
-        mainWindow.editorScroller.setMinimumSize(new Dimension(100, 100));
-        mainWindow.matchesScroller = new DockableScrollPane("MATCHES", matchesName, mainWindow.matches, true);
-        mainWindow.glossaryScroller = new DockableScrollPane("GLOSSARY", glossaryName, mainWindow.glossary, true);
-
         mainWindow.desktop = new DockingDesktop();
         mainWindow.desktop.addDockableStateWillChangeListener(new DockableStateWillChangeListener() {
             public void dockableStateWillChange(DockableStateWillChangeEvent event) {
@@ -106,10 +88,6 @@ public class MainWindowUI {
                     event.cancel();
             }
         });
-        mainWindow.desktop.addDockable(mainWindow.editorScroller);
-        mainWindow.desktop.addDockable(mainWindow.matchesScroller);
-        mainWindow.desktop.addDockable(mainWindow.glossaryScroller);
-        resetDesktopLayout(mainWindow);
 
         return mainWindow.desktop;
     }

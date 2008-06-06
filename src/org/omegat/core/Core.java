@@ -35,9 +35,11 @@ import org.omegat.core.threads.IAutoSave;
 import org.omegat.core.threads.SaveThread;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
+import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.matches.IMatcher;
+import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.gui.tagvalidation.ITagValidation;
 import org.omegat.gui.tagvalidation.TagValidationTool;
 import org.omegat.util.Log;
@@ -65,6 +67,8 @@ public class Core {
     
     private static CheckThread checkThread;
     private static IAutoSave saveThread;
+    
+    private static GlossaryTextArea glossary;
 
 
     /** Get project instance. */
@@ -113,25 +117,21 @@ public class Core {
     }
     
     /**
-     * Initialize application core from exists main components instances.
-     * 
-     * TODO: change initialization for instantiate component instances, instead
-     * use already created instanced
+     * Initialize application components.
      */
     public static void initialize(final String[] args) {
-        MainWindow me = new MainWindow();
-        
-        // bugfix - Serious threading issue, preventing OmegaT from showing up...
-        //          http://sourceforge.net/support/tracker.php?aid=1216514
-        // we start command thread here...
+        // 1. Initialize project
         currentProject = new NotLoadedProject();
-        
-        me.setVisible(true);
 
-        mainWindow = me;
-        editor = new EditorController(me, me.editor, me.getEditorScroller());
+        // 2. Initialize application frame
+        MainWindow me = new MainWindow();
+        mainWindow = me;        
+
+        // 3. Initialize other components
+        editor = new EditorController(me);
         tagValidation = new TagValidationTool(me);
-        matcher = me.matches;
+        matcher = new MatchesTextArea(me);
+        glossary = new GlossaryTextArea();
         tokenizer = createComponent(ITokenizer.class, new Tokenizer(), args);
         spellChecker = new SpellChecker();
         

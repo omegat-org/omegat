@@ -50,12 +50,10 @@ import javax.swing.WindowConstants;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
-import org.omegat.gui.editor.EditorTextArea;
 import org.omegat.gui.filelist.ProjectFrame;
-import org.omegat.gui.glossary.GlossaryTextArea;
-import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.gui.search.SearchWindow;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.OConsts;
@@ -67,6 +65,7 @@ import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.ResourcesUtil;
 import org.omegat.util.gui.UIThreadsUtil;
 
+import com.vlsolutions.swing.docking.Dockable;
 import com.vlsolutions.swing.docking.DockableState;
 import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.FloatingDialog;
@@ -121,8 +120,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         
         getContentPane().add(MainWindowUI.initDocking(this), BorderLayout.CENTER);
 
-        additionalUIInit();
-        oldInit();
+        setIconImage(ResourcesUtil.getIcon("/org/omegat/gui/resources/OmegaT_small.gif").getImage());
                 
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
@@ -132,6 +130,16 @@ public class MainWindow extends JFrame implements IMainWindow {
                 }
             }
         });
+        
+        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
+            public void onApplicationStartup() {
+                MainWindowUI.resetDesktopLayout(MainWindow.this);
+                MainWindowUI.loadScreenLayout(MainWindow.this);
+            }
+            public void onApplicationShutdown() {
+            }
+        });
+        
         updateTitle();
     }
     
@@ -162,18 +170,12 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         CoreEvents.fireFontChanged(newFont);
     }
-
+    
     /**
-     * Some additional actions to initialize UI,
-     * not doable via NetBeans Form Editor
+     * {@inheritDoc}
      */
-    private void additionalUIInit()
-    {        
-        setIconImage(ResourcesUtil.getIcon("/org/omegat/gui/resources/OmegaT_small.gif").getImage());
-
-        statusLabel.setText(new String()+' ');
-        
-        MainWindowUI.loadScreenLayout(this);
+    public void addDockable(Dockable pane) {
+        desktop.addDockable(pane);
     }
 
     /**
@@ -189,25 +191,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         setTitle(s);
     }
     
-    /**
-     * Old Initialization.
-     */
-    public void oldInit()
-    {
-        //m_activeProj = new String();
-        //m_activeFile = new String();
-        
-        ////////////////////////////////
-        
-        enableEvents(0);
-    }
-    
     boolean layoutInitialized = false;
-    
-    ///////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////
-    // command handling
-
     
    
     /** insert current fuzzy match at cursor position */
@@ -256,16 +240,6 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
             m_searches.clear();
         }
-    }
-        
-    /**
-     * Loads a new project.
-     */
-    public void clear()
-    {
-        matches.clear();
-        glossary.clear();
-        Core.getEditor().clearHistory();
     }
         
     /**
@@ -504,23 +478,10 @@ public class MainWindow extends JFrame implements IMainWindow {
     
     /** Set of all open search windows. */
     private final Set<SearchWindow> m_searches = new HashSet<SearchWindow>();
-    
-    public DockableScrollPane getEditorScroller() {
-        return editorScroller;
-    }
-    
+        
     JLabel lengthLabel;    
     JLabel progressLabel;    
     JLabel statusLabel;
 
     DockingDesktop desktop;
-
-    DockableScrollPane editorScroller;
-    public EditorTextArea editor;
-    
-    DockableScrollPane matchesScroller;
-    public MatchesTextArea matches;
-    
-    DockableScrollPane glossaryScroller;
-    GlossaryTextArea glossary;
 }

@@ -28,6 +28,8 @@ import java.awt.Font;
 
 import javax.swing.JFrame;
 
+import com.vlsolutions.swing.docking.Dockable;
+
 /**
  * Interface for access to main window functionality.
  * 
@@ -38,12 +40,12 @@ public interface IMainWindow {
      * Get application frame.
      */
     JFrame getApplicationFrame();
-    
+
     /**
      * Lock UI for long-term operations.
      */
     void lockUI();
-    
+
     /**
      * Unlock UI after locking.
      */
@@ -63,7 +65,7 @@ public interface IMainWindow {
      *                message parameters for formatting
      */
     void showStatusMessageRB(String messageKey, Object... params);
-    
+
     /**
      * Show message in progress bar.
      * 
@@ -91,6 +93,13 @@ public interface IMainWindow {
      *                error text parameters
      */
     void displayErrorRB(Throwable ex, String errorKey, Object... params);
-    
-    void clear();
+
+    /**
+     * Add new dockable pane into application frame. This method called on
+     * application startup.
+     * 
+     * @param pane
+     *                dockable pane
+     */
+    void addDockable(Dockable pane);
 }

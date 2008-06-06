@@ -28,6 +28,7 @@
 package org.omegat.gui.editor;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
@@ -84,6 +85,7 @@ public class EditorController implements IEditor {
     private final int WITH_END_MARKERS = 1;
     private final int IS_NOT_TRANSLATED = 2;
 
+    private final DockableScrollPane pane;
     private final EditorTextArea editor;
     private String introPaneTitle, emptyProjectPaneTitle;
     private JTextPane introPane, emptyProjectPane;
@@ -121,17 +123,22 @@ public class EditorController implements IEditor {
     private SegmentHistory history = new SegmentHistory();
     
     private final EditorSettings settings;
-    
-    private final DockableScrollPane pane;
-    
+        
     private String previousFileName;
     
     private enum SHOW_TYPE {INTRO, EMPTY_PROJECT, FIRST_ENTRY, NO_CHANGE};
 
-    public EditorController(final MainWindow mainWindow, final EditorTextArea editor, final DockableScrollPane pane) {
+    public EditorController(final MainWindow mainWindow) {
         this.mw = mainWindow;
-        this.editor = editor;
-        this.pane = pane;
+        
+        editor = new EditorTextArea();
+        editor.setFont(Core.getMainWindow().getApplicationFont());
+        
+        pane = new DockableScrollPane("EDITOR", " ", editor, false);
+        pane.setMinimumSize(new Dimension(100, 100));
+        
+        Core.getMainWindow().addDockable(pane);
+        
         editor.controller = this;
         
         settings = new EditorSettings(this);
@@ -149,6 +156,7 @@ public class EditorController implements IEditor {
                 switch (eventType) {
                 case CREATE:
                 case LOAD:
+                    history.clear();
                     if (!Core.getProject().getAllEntries().isEmpty()) {
                         showType = SHOW_TYPE.FIRST_ENTRY;
                     } else {
@@ -156,6 +164,7 @@ public class EditorController implements IEditor {
                     }
                     break;
                 case CLOSE:
+                    history.clear();
                     showType=SHOW_TYPE.INTRO;
                     break;
                 default:
@@ -1205,15 +1214,6 @@ public class EditorController implements IEditor {
      */
     protected int getTranslationEnd() {
                 return editor.getTextLength() - m_segmentEndInset - OConsts.segmentEndStringFull.length();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void clearHistory() {
-        UIThreadsUtil.mustBeSwingThread();
-        
-        history.clear();
     }
 
     /**

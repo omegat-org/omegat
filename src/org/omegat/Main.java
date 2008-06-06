@@ -27,6 +27,7 @@ package org.omegat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import org.omegat.core.Core;
@@ -88,5 +89,12 @@ public class Main
         
         Core.initialize(args);
         CoreEvents.fireApplicationStartup();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                // setVisible can't be executed directly, because we need to
+                // call all application startup listeners for initialize UI
+                Core.getMainWindow().getApplicationFrame().setVisible(true);
+            }
+        });        
     }
 }

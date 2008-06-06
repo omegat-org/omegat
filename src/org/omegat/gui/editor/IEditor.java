@@ -145,13 +145,6 @@ public interface IEditor {
     void insertText(String text);
 
     /**
-     * Clear history of moving by segments.
-     * 
-     * Must be called only from UI thread.
-     */
-    void clearHistory();
-
-    /**
      * Go to next segment from history.
      * 
      * Must be called only from UI thread.

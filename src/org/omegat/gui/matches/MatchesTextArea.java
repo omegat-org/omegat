@@ -46,7 +46,10 @@ import org.omegat.core.data.StringData;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
+import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.events.IProjectEventListener.PROJECT_CHANGE_TYPE;
 import org.omegat.core.matching.NearString;
+import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -77,6 +80,12 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
     /** Creates new form MatchGlossaryPane */
     public MatchesTextArea(MainWindow mw) {
         this.mw = mw;
+        
+        setFont(Core.getMainWindow().getApplicationFont());
+        
+        String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches");
+        Core.getMainWindow().addDockable(new DockableScrollPane("MATCHES", title, this, true));
+        
         setEditable(false);
         setMinimumSize(new java.awt.Dimension(100, 50));
         addMouseListener(new MouseAdapter() {
@@ -102,6 +111,17 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
                         MatchesTextArea.this.setFont(newFont);
                     }
                 });
+        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
+            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
+                switch (eventType) {
+                case CREATE:
+                case LOAD:
+                case CLOSE:
+                    clear();
+                    break;
+                }
+            }
+        });        
     }
 
     /**
@@ -237,7 +257,7 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
         // stop find matches threads
         processedEntry = null;
 
-        SwingUtilities.invokeLater(new Runnable() {
+        UIThreadsUtil.executeInSwingThread(new Runnable() {
             public void run() {
                 setMatches(new ArrayList<NearString>());
             }

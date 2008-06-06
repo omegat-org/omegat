@@ -37,7 +37,6 @@ import java.util.List;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -47,7 +46,6 @@ import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.core.events.IProjectEventListener.PROJECT_CHANGE_TYPE;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;

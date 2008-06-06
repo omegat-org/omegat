@@ -145,7 +145,7 @@ public class MainWindowMenuHandler {
     /** Quits OmegaT */
     public void projectExitMenuItemActionPerformed() {
         boolean projectModified = false;
-        if (mainWindow.isProjectLoaded())
+        if (Core.getProject().isProjectLoaded())
             projectModified = Core.getProject().isProjectModified();
 
         // RFE 1302358
@@ -190,7 +190,7 @@ public class MainWindowMenuHandler {
      * at cursor position
      */
     public void editOverwriteSourceMenuItemActionPerformed() {
-        if (!mainWindow.isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded())
             return;
 
         Core.getEditor().replaceEditText(
@@ -199,7 +199,7 @@ public class MainWindowMenuHandler {
 
     /** inserts the source text of a segment at cursor position */
     public void editInsertSourceMenuItemActionPerformed() {
-        if (!mainWindow.isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded())
             return;
 
         Core.getEditor().insertText(
@@ -207,7 +207,7 @@ public class MainWindowMenuHandler {
     }
 
     public void editFindInProjectMenuItemActionPerformed() {
-        if (!mainWindow.isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded())
             return;
 
         String selection = Core.getEditor().getSelectedText();
@@ -431,7 +431,7 @@ public class MainWindowMenuHandler {
             // saving config
             FilterMaster.getInstance().saveConfig();
 
-            if (mainWindow.isProjectLoaded()) {
+            if (Core.getProject().isProjectLoaded()) {
                 // asking to reload a project
                 int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"), OStrings
                         .getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
@@ -452,7 +452,7 @@ public class MainWindowMenuHandler {
         SegmentationCustomizer segment_window = new SegmentationCustomizer(mainWindow);
         segment_window.setVisible(true);
 
-        if (segment_window.getReturnStatus() == SegmentationCustomizer.RET_OK && mainWindow.isProjectLoaded()) {
+        if (segment_window.getReturnStatus() == SegmentationCustomizer.RET_OK && Core.getProject().isProjectLoaded()) {
             // asking to reload a project
             int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"), OStrings
                     .getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);

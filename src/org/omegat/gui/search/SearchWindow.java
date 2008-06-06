@@ -53,7 +53,7 @@ import javax.swing.text.PlainDocument;
 import javax.swing.text.StringContent;
 import javax.swing.undo.UndoManager;
 
-import org.omegat.core.data.RealProject;
+import org.omegat.core.Core;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
@@ -291,7 +291,7 @@ public class SearchWindow extends JFrame
 
         m_viewer.setText(OStrings.getString("SW_VIEWER_TEXT"));
 
-        if (!par.isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded())
         {
             // restrict user to file only access
             m_dirCB.setSelected(true);

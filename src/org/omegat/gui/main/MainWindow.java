@@ -85,6 +85,25 @@ import com.vlsolutions.swing.docking.FloatingDialog;
 public class MainWindow extends JFrame implements IMainWindow {
     public final MainWindowMenu menu;
     
+    protected boolean layoutInitialized = false;
+
+    protected ProjectFrame m_projWin;
+    
+    /**
+     * The font for main window (source and target text) and for match and
+     * glossary windows
+     */
+    private Font m_font;
+
+    /** Set of all open search windows. */
+    private final Set<SearchWindow> m_searches = new HashSet<SearchWindow>();
+
+    protected JLabel lengthLabel;
+    protected JLabel progressLabel;
+    protected JLabel statusLabel;
+
+    protected DockingDesktop desktop;
+
     /** Creates new form MainWindow */
     public MainWindow()
     {
@@ -184,21 +203,17 @@ public class MainWindow extends JFrame implements IMainWindow {
     private void updateTitle()
     {
         String s = OStrings.getDisplayVersion();
-        if(isProjectLoaded())
-        {
-            s += " :: " + Core.getProject().getProjectProperties().getProjectName();       // NOI18N
+        if (Core.getProject().isProjectLoaded()) {
+            s += " :: "
+                    + Core.getProject().getProjectProperties().getProjectName(); // NOI18N
         }
         setTitle(s);
     }
-    
-    boolean layoutInitialized = false;
-    
    
     /** insert current fuzzy match at cursor position */
-
     public void doInsertTrans()
     {
-        if (!isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded())
             return;
         
         NearString near = Core.getMatcher().getActiveMatch();
@@ -210,7 +225,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     /** replace entire edit area with active fuzzy match */
     public void doRecycleTrans()
     {
-        if (!isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded())
             return;
         
         NearString near = Core.getMatcher().getActiveMatch();
@@ -458,30 +473,5 @@ public class MainWindow extends JFrame implements IMainWindow {
         }
         // unlock application frame
         setEnabled(true);
-    }
-
-    /** Tells whether the project is loaded. */
-    public boolean isProjectLoaded()
-    {
-        if (Core.getProject()==null) return false;
-        return Core.getProject().isProjectLoaded();
-    }
-    
-    /** The font for main window (source and target text) and for match and glossary windows */
-    private Font m_font;
-    
-    ProjectFrame m_projWin;
-    public ProjectFrame getProjectFrame()
-    {
-        return m_projWin;
-    }
-    
-    /** Set of all open search windows. */
-    private final Set<SearchWindow> m_searches = new HashSet<SearchWindow>();
-        
-    JLabel lengthLabel;    
-    JLabel progressLabel;    
-    JLabel statusLabel;
-
-    DockingDesktop desktop;
+    }    
 }

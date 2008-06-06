@@ -383,7 +383,7 @@ public class EditorController implements IEditor {
         
         IProject project = Core.getProject();
         
-            if (!mw.isProjectLoaded())
+            if (!Core.getProject().isProjectLoaded())
                 return;
             int translatedInFile = 0;
             for (int _i = m_xlFirstEntry; _i <= m_xlLastEntry; _i++) {
@@ -472,7 +472,6 @@ public class EditorController implements IEditor {
                 int replacedLength = replaceEntry(m_segmentStartOffset, docSeg.length, srcText, translation,
                         WITH_END_MARKERS);
 
-                StringEntry curEntry = m_curEntry.getStrEntry();
                 int nearLength = 0;// TODO: curEntry.getNearListTranslated().size();
 
                 // <HP-experiment>
@@ -600,7 +599,7 @@ public class EditorController implements IEditor {
         
         IProject project = Core.getProject();
         
-            if (!mw.isProjectLoaded())
+            if (!Core.getProject().isProjectLoaded())
                 return;
 
             if (!entryActivated)
@@ -712,7 +711,6 @@ public class EditorController implements IEditor {
 
                             int localEntry = entry - m_xlFirstEntry;
                             int offset = offsets[localEntry];
-                            int replacementLength = docSeg.length;
 
                             // replace old text w/ new
                             docSeg = m_docSegList[localEntry];
@@ -727,7 +725,6 @@ public class EditorController implements IEditor {
                             if (doCheckSpelling && wordList != null) {
                                 for (Token token : wordList) {
                                     int tokenStart = token.getOffset();
-                                    int tokenEnd = tokenStart + token.getLength();
                                     String word = token.getTextFromString(display_string);
 
                                     try {
@@ -748,7 +745,7 @@ public class EditorController implements IEditor {
     public void nextEntry() {
         UIThreadsUtil.mustBeSwingThread();
         
-            if (!mw.isProjectLoaded())
+            if (!Core.getProject().isProjectLoaded())
                 return;
 
             commitEntry();
@@ -766,7 +763,7 @@ public class EditorController implements IEditor {
     public void prevEntry() {
         UIThreadsUtil.mustBeSwingThread();
 
-        if (!mw.isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded())
             return;
 
         commitEntry();
@@ -797,7 +794,7 @@ public class EditorController implements IEditor {
         UIThreadsUtil.mustBeSwingThread();
 
         // check if a document is loaded
-        if (mw.isProjectLoaded() == false)
+        if (Core.getProject().isProjectLoaded() == false)
             return;
 
         // save the current entry
@@ -866,7 +863,7 @@ public class EditorController implements IEditor {
     public void gotoEntry(final int entryNum) {
         UIThreadsUtil.mustBeSwingThread();
 
-        if (!mw.isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded())
             return;
 
         commitEntry();

@@ -30,6 +30,7 @@ package org.omegat.gui.main;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
@@ -439,11 +440,16 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         // lock application frame
         setEnabled(false);
+        for (Frame f : Frame.getFrames()) {
+            f.setEnabled(false);
+        }
         // lock undocked dockables
-        for(DockableState dock:desktop.getDockables() ) {
+        for (DockableState dock : desktop.getDockables()) {
             if (!dock.isDocked()) {
                 dock.getDockable().getComponent().setEnabled(false);
-                for(Container parent = dock.getDockable().getComponent().getParent(); parent!=null; parent=parent.getParent()) {
+                for (Container parent = dock.getDockable().getComponent()
+                        .getParent(); parent != null; parent = parent
+                        .getParent()) {
                     if (parent instanceof FloatingDialog) {
                         parent.setEnabled(false);
                         break;
@@ -458,11 +464,13 @@ public class MainWindow extends JFrame implements IMainWindow {
      */
     public void unlockUI() {
         UIThreadsUtil.mustBeSwingThread();
-        
+
         // unlock undocked dockables
-        for(DockableState dock:desktop.getDockables() ) {
+        for (DockableState dock : desktop.getDockables()) {
             if (!dock.isDocked()) {
-                for(Container parent = dock.getDockable().getComponent().getParent(); parent!=null; parent=parent.getParent()) {
+                for (Container parent = dock.getDockable().getComponent()
+                        .getParent(); parent != null; parent = parent
+                        .getParent()) {
                     if (parent instanceof FloatingDialog) {
                         parent.setEnabled(true);
                         break;
@@ -470,6 +478,9 @@ public class MainWindow extends JFrame implements IMainWindow {
                 }
                 dock.getDockable().getComponent().setEnabled(true);
             }
+        }
+        for (Frame f : Frame.getFrames()) {
+            f.setEnabled(true);
         }
         // unlock application frame
         setEnabled(true);

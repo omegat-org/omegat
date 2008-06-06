@@ -217,12 +217,10 @@ public class ProjectFrame extends JFrame {
                     break;
                 case LOAD:
                 case CREATE:
-                    if (!Core.getProject().getAllEntries().isEmpty()) {
-                        buildDisplay();
-                        setVisible(true);
-                        tableFiles.requestFocus();
-                        buildTotalTableLayout();
-                    }
+                    buildDisplay();
+                    setVisible(true);
+                    tableFiles.requestFocus();
+                    buildTotalTableLayout();
                     break;
                 }
             }

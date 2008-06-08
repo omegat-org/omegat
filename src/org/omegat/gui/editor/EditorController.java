@@ -98,8 +98,6 @@ public class EditorController implements IEditor {
     protected int m_segmentStartOffset;
     protected int m_sourceDisplayLength;
     protected int m_segmentEndInset;
-    // text length of glossary, if displayed
-    private int m_glossaryLength;
 
     /** first entry number in current file. */
     protected int m_xlFirstEntry;
@@ -471,30 +469,6 @@ public class EditorController implements IEditor {
 
                 int replacedLength = replaceEntry(m_segmentStartOffset, docSeg.length, srcText, translation,
                         WITH_END_MARKERS);
-
-                int nearLength = 0;// TODO: curEntry.getNearListTranslated().size();
-
-                // <HP-experiment>
-                try {
-                    if (nearLength > 0 && m_glossaryLength > 0) {
-                        // display text indicating both categories exist
-                        Core.getMainWindow().showStatusMessageRB("TF_NUM_NEAR_AND_GLOSSARY", nearLength,
-                                m_glossaryLength);
-                    } else if (nearLength > 0) {
-                        Core.getMainWindow().showStatusMessageRB("TF_NUM_NEAR", nearLength);
-                    } else if (m_glossaryLength > 0) {
-                        Core.getMainWindow().showStatusMessageRB("TF_NUM_GLOSSARY", m_glossaryLength);
-                    } else {
-                        Core.getMainWindow().showStatusMessageRB(null);
-                    }
-                } catch (Exception exception) {
-                    Log.log("ERROR: exception while setting message text:");
-                    Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                    Log.log(exception);
-                    return; // deliberately breaking, to simulate previous behaviour
-                    // FIX: unknown
-                }
-                // </HP-experiment>
 
                 int offsetPrev = 0;
                 int localNum = m_curEntryNum - m_xlFirstEntry;

@@ -29,6 +29,7 @@ package org.omegat.gui.filelist;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -102,6 +103,7 @@ import org.openide.awt.Mnemonics;
 public class ProjectFrame extends JFrame {
 
     private static final Color CURRENT_FILE_COLOR = new Color(0xC8DDF2);
+    private static final int LINE_SPACING = 6;
 
     private JTable tableFiles, tableTotal;
     private JScrollPane scrollFiles;
@@ -204,6 +206,10 @@ public class ProjectFrame extends JFrame {
         gbc.gridy = 6;
         cp.add(bbut, gbc); // NOI18N
 
+        final Font f = tableFiles.getFont();
+        tableFiles.setRowHeight(f.getSize() + LINE_SPACING);
+        tableTotal.setRowHeight(f.getSize() + LINE_SPACING);
+        tableTotal.setFont(new Font(f.getName(), Font.BOLD, f.getSize()));
 
         // Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         // setBounds((screenSize.width-600)/2, (screenSize.height-500)/2, 600,

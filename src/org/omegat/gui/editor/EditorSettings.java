@@ -96,7 +96,7 @@ public class EditorSettings {
     public void setMarkTranslated(boolean markTranslated) {
         UIThreadsUtil.mustBeSwingThread();
 
-        parent.commitEntry(false);
+        parent.commitAndDeactivate();
 
         this.markTranslated = markTranslated;
         Preferences.setPreference(Preferences.MARK_TRANSLATED_SEGMENTS,
@@ -115,7 +115,7 @@ public class EditorSettings {
     public void setMarkUntranslated(boolean markUntranslated) {
         UIThreadsUtil.mustBeSwingThread();
 
-        parent.commitEntry(false);
+        parent.commitAndDeactivate();
 
         this.markUntranslated = markUntranslated;
         Preferences.setPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS,
@@ -135,7 +135,7 @@ public class EditorSettings {
     public void setDisplaySegmentSources(boolean displaySegmentSources) {
         UIThreadsUtil.mustBeSwingThread();
 
-        parent.commitEntry(false);
+        parent.commitAndDeactivate();
 
         this.displaySegmentSources = displaySegmentSources;
         Preferences.setPreference(Preferences.DISPLAY_SEGMENT_SOURCES,
@@ -155,7 +155,7 @@ public class EditorSettings {
     public void setAutoSpellChecking(boolean autoSpellChecking) {
         UIThreadsUtil.mustBeSwingThread();
 
-        parent.commitEntry(false);
+        parent.commitAndDeactivate();
         
         this.autoSpellChecking = autoSpellChecking;
         

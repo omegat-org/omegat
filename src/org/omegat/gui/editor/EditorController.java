@@ -194,10 +194,8 @@ public class EditorController implements IEditor {
                     public void onFontChanged(Font newFont) {
                         // fonts have changed
                         // first commit current translation
-                        commitEntry(false); // part of fix for bug 1409309
                         editor.setFont(newFont);
                         emptyProjectPane.setFont(newFont);
-                        activateEntry();
                     }
                 });
     }
@@ -551,24 +549,11 @@ public class EditorController implements IEditor {
      * <p>
      * Since 1.6: Translation equal to source may be validated as OK translation
      * if appropriate option is set in Workflow options dialog.
-     */
-    public void commitEntry() {
-        UIThreadsUtil.mustBeSwingThread();
-        
-        commitEntry(true);
-    }
-
-    /**
-     * Commits the translation. Reads current entry text and commit it to memory
-     * if it's changed. Also clears out segment markers while we're at it.
-     * <p>
-     * Since 1.6: Translation equal to source may be validated as OK translation
-     * if appropriate option is set in Workflow options dialog.
      * 
      * @param forceCommit
      *            If false, the translation will not be saved
      */
-    public void commitEntry(final boolean forceCommit) {
+    public void commitAndDeactivate() {
         UIThreadsUtil.mustBeSwingThread();
         
         IProject project = Core.getProject();
@@ -649,7 +634,6 @@ public class EditorController implements IEditor {
                     wordList = EditorSpellChecking.checkSpelling(startOffset, display_string, this, editor);
                 }
 
-                if (forceCommit) { // fix for 
                     String old_translation = m_curEntry.getTranslation();
                     // update memory
                     if (new_translation.equals(m_curEntry.getSrcText())
@@ -712,17 +696,25 @@ public class EditorController implements IEditor {
                             }
                         }
                     }
-                }
+                
                 editor.cancelUndo();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public void commitAndLeave() {
+        commitAndDeactivate();
+        activateEntry();
+    }
+    
     public void nextEntry() {
         UIThreadsUtil.mustBeSwingThread();
         
             if (!Core.getProject().isProjectLoaded())
                 return;
 
-            commitEntry();
+            commitAndDeactivate();
             
                 m_curEntryNum++;
                 if (m_curEntryNum > m_xlLastEntry) {
@@ -740,7 +732,7 @@ public class EditorController implements IEditor {
         if (!Core.getProject().isProjectLoaded())
             return;
 
-        commitEntry();
+        commitAndDeactivate();
 
             m_curEntryNum--;
             if (m_curEntryNum < m_xlFirstEntry) {
@@ -772,7 +764,7 @@ public class EditorController implements IEditor {
             return;
 
         // save the current entry
-        commitEntry();
+        commitAndDeactivate();
 
         IProject project = Core.getProject();
             // get the total number of entries
@@ -840,7 +832,7 @@ public class EditorController implements IEditor {
         if (!Core.getProject().isProjectLoaded())
             return;
 
-        commitEntry();
+        commitAndDeactivate();
 
         IProject dataEngine = Core.getProject();
             m_curEntryNum = entryNum - 1;

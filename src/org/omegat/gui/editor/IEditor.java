@@ -67,21 +67,18 @@ public interface IEditor {
     void activateEntry();
 
     /**
-     * Commits the translation. Translation will be saved.
+     * Commits the translation and deactivate entry. Translation will be saved.
      * 
      * Must be called only from UI thread.
      */
-    void commitEntry();
-
+    void commitAndDeactivate();
+    
     /**
-     * Commits the translation.
+     * Commits the translation and leave entry activated. Translation will be saved.
      * 
-     * @param forceCommit
-     *                If false, the translation will not be saved
-     *                
      * Must be called only from UI thread.
      */
-    void commitEntry(boolean forceCommit);
+    void commitAndLeave();
 
     /**
      * Move to next entry.

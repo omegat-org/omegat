@@ -183,6 +183,8 @@ public class ProjectUICommands {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
+        
+        Core.getEditor().commitAndLeave();
 
         final ProjectProperties props = Core.getProject()
                 .getProjectProperties();
@@ -216,8 +218,7 @@ public class ProjectUICommands {
         }
 
         // commit the current entry first
-        Core.getEditor().commitEntry(true);
-        Core.getEditor().activateEntry();
+        Core.getEditor().commitAndLeave();
 
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {
@@ -248,6 +249,8 @@ public class ProjectUICommands {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
+        
+        Core.getEditor().commitAndLeave();
 
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {
@@ -281,6 +284,8 @@ public class ProjectUICommands {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
+        
+        Core.getEditor().commitAndLeave();
 
         // displaying the dialog to change paths and other properties
         ProjectPropertiesDialog prj = new ProjectPropertiesDialog(Core
@@ -331,8 +336,7 @@ public class ProjectUICommands {
         }
 
         // commit the current entry first
-        Core.getEditor().commitEntry(true);
-        Core.getEditor().activateEntry();
+        Core.getEditor().commitAndLeave();
 
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {

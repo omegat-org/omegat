@@ -43,9 +43,11 @@ import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.search.SearchWindow;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.SwingWorker;
 
 /**
  * Handler for main menu items.
@@ -158,15 +160,29 @@ public class MainWindowMenuHandler {
             }
         }
 
-        MainWindowUI.saveScreenLayout(mainWindow);
-        Preferences.save();
+        new SwingWorker<Object>() {
+            protected Object doInBackground() throws Exception {
+                MainWindowUI.saveScreenLayout(mainWindow);
+                Preferences.save();
 
-        if (Core.getProject().isProjectLoaded()) {
-            // TODO: change to SwingWorker
-            Core.getProject().saveProject();
-        }
+                if (Core.getProject().isProjectLoaded()) {
+                    Core.getProject().saveProject();
+                }
 
-        System.exit(0);
+                return null;
+            }
+
+            protected void done() {
+                try {
+                    get();
+                    System.exit(0);
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    Core.getMainWindow().displayErrorRB(ex,
+                            "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                }
+            }
+        }.execute();
     }
 
     public void editUndoMenuItemActionPerformed() {

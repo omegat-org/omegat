@@ -200,7 +200,7 @@ public class OmegaTLogFormatter extends Formatter {
         } else if (Level.WARNING.getName().equals(logLevel.getName())) {
             result = OStrings.getString("LOG_LEVEL_WARNING");
         } else {
-            result = logLevel.getLocalizedName();
+            result = logLevel.getName();
         }
         return result.trim();
     }

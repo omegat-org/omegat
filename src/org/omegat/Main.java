@@ -27,6 +27,7 @@ package org.omegat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -87,7 +88,12 @@ public class Main
             Log.logErrorRB("MAIN_ERROR_CANT_INIT_OSLF");
         }
         
-        Core.initialize(args);
+        try {
+            Core.initialize(args);
+        } catch (Throwable ex) {
+            showError(ex);
+        }
+        
         CoreEvents.fireApplicationStartup();
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -96,5 +102,10 @@ public class Main
                 Core.getMainWindow().getApplicationFrame().setVisible(true);
             }
         });        
+    }
+    
+    public static void showError(Throwable ex) {
+        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), ex.getMessage(), OStrings.getString("STARTUP_ERRORBOX_TITLE"), JOptionPane.ERROR_MESSAGE);
+        System.exit(1);
     }
 }

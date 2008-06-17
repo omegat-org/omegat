@@ -24,6 +24,8 @@
 
 package org.omegat.core.segmentation;
 
+import gen.core.segmentation.Srx;
+
 import java.beans.ExceptionListener;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -37,6 +39,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -59,6 +63,22 @@ public class SRX implements Serializable, Cloneable
     private static final File configFile=new File(
             StaticUtils.getConfigDir()+CONF_SENTSEG);
             
+    static {
+        try {
+            JAXBContext.newInstance(Srx.class);
+        }catch(LinkageError ex ) {
+            throw new ExceptionInInitializerError(OStrings.getString("STARTUP_JAXB_LINKAGE_ERROR"));
+        } catch (JAXBException ex) {
+            if (ex.getMessage()!=null) {
+                throw new ExceptionInInitializerError(ex.getMessage());                
+            }
+            if (ex.getCause()!=null) {
+                throw new ExceptionInInitializerError(ex.getCause().getClass().getName()+": "+ex.getCause().getMessage());
+            }
+            throw new ExceptionInInitializerError(ex.getClass().getName());
+        }
+    }
+    
     /**
      * SRX factory method.
      * <p>

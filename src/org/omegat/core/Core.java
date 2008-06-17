@@ -28,6 +28,7 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.Tokenizer;
+import org.omegat.core.segmentation.SRX;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.core.threads.CheckThread;
@@ -119,7 +120,7 @@ public class Core {
     /**
      * Initialize application components.
      */
-    public static void initialize(final String[] args) {
+    public static void initialize(final String[] args) throws Exception {
         // 1. Initialize project
         currentProject = new NotLoadedProject();
 
@@ -140,7 +141,9 @@ public class Core {
         
         SaveThread th = new SaveThread();
         saveThread = th;
-        th.start();        
+        th.start();
+        
+        SRX.getSRX();
     }
     
     /**

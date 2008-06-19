@@ -54,6 +54,7 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.hhc.HHCFilter2;
 import org.omegat.filters2.html2.HTMLFilter2;
 import org.omegat.filters2.po.PoFilter;
+import org.omegat.filters2.subtitles.SrtFilter;
 import org.omegat.filters2.text.TextFilter;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 import org.omegat.filters2.text.ini.INIFilter;
@@ -89,7 +90,7 @@ public class FilterMaster
     public static String OT161_VERSION      = "1.6.1";                          // NOI18N
     public static String OT170_VERSION      = "1.7.0";                          // NOI18N
     /** Currently file filters support version. */
-    public static String CURRENT_VERSION = OT170_VERSION;
+    public static String CURRENT_VERSION = "2.0";
 
     /** Wrapper around filters storage in an XML file */
     private Filters  filters;
@@ -538,6 +539,7 @@ public class FilterMaster
         res.addFilter(new OneFilter(new OpenDocFilter(), false));
         res.addFilter(new OneFilter(new OpenXMLFilter(), false));
         res.addFilter(new OneFilter(new XLIFFFilter(), false));        
+        res.addFilter(new OneFilter(new SrtFilter(), false));
         return res;
     }
     

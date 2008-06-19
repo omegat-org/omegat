@@ -31,13 +31,15 @@ import org.omegat.filters2.subtitles.SrtFilter;
 public class SrtFilterTest extends TestFilterBase {
     public void testParse() throws Exception {
         List<String> lines = parse(new SrtFilter(),
-                "test/data/filters/srt/file-DieHard1.srt");
-        assertEquals("You don't like flying, do you?", lines.get(0));
-        assertEquals("What gives you that idea?", lines.get(1));
+                "test/data/filters/srt/file-SrtFilter.srt");
+        assertEquals(lines.size(), 3);
+        assertEquals("First title", lines.get(0));
+        assertEquals("Second title", lines.get(1));
+        assertEquals("Third title", lines.get(2));
     }
 
     public void testTranslate() throws Exception {
         translateText(new SrtFilter(),
-                "test/data/filters/srt/file-DieHard1.srt");
+                "test/data/filters/srt/file-SrtFilter.srt");
     }
 }

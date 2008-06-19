@@ -27,39 +27,14 @@ package org.omegat.gui.glossary;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.omegat.gui.glossary.GlossaryTextArea;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.omegat.core.TestCore;
 
 /**
  *
  * @author Maxym Mykhalchuk
  */
-public class GlossaryTextAreaTest extends TestCase
-{
-    
-    public GlossaryTextAreaTest(String testName)
-    {
-        super(testName);
-    }
-
-    protected void setUp() throws Exception
-    {
-    }
-
-    protected void tearDown() throws Exception
-    {
-    }
-
-    public static Test suite()
-    {
-        TestSuite suite = new TestSuite(GlossaryTextAreaTest.class);
-        
-        return suite;
-    }
-
+public class GlossaryTextAreaTest extends TestCore
+{    
     /**
      * Testing setGlossaryEntries of org.omegat.gui.main.GlossaryTextArea.
      */

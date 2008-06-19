@@ -27,11 +27,7 @@ package org.omegat.core.segmentation;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
-import org.omegat.core.data.RealProject;
+import org.omegat.core.TestCore;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Language;
 
@@ -40,29 +36,8 @@ import org.omegat.util.Language;
  *
  * @author Maxym Mykhalchuk
  */
-public class SegmenterTest extends TestCase
+public class SegmenterTest extends TestCore
 {
-    
-    public SegmenterTest(String testName)
-    {
-        super(testName);
-    }
-
-    protected void setUp() throws Exception
-    {
-    }
-
-    protected void tearDown() throws Exception
-    {
-    }
-
-    public static Test suite()
-    {
-        TestSuite suite = new TestSuite(SegmenterTest.class);
-        
-        return suite;
-    }
-
     /**
      * Test of segment method, of class org.omegat.core.segmentation.Segmenter.
      */

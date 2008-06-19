@@ -175,4 +175,22 @@ public class Core {
         }
         return defaultImplementation;
     }
+    
+    /**
+     * Set main window instance for unit tests.
+     * 
+     * @param mainWindow
+     */
+    protected static void setMainWindow(IMainWindow mainWindow) {
+        Core.mainWindow = mainWindow;
+    }
+    
+    /**
+     * Set project instance for unit tests.
+     * 
+     * @param currentProject
+     */
+    protected static void setCurrentProject(IProject currentProject) {
+        Core.currentProject = currentProject;
+    }
 }

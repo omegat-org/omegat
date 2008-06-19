@@ -216,7 +216,7 @@ OmegaT uses the following libraries:
   MRJ Adapter 1.0.8 by Steve Roy (LGPL License)
   http://homepage.mac.com/sroy/mrjadapter/
 
-  VLDocking Framework 2.0.6d by VLSolutions (CeCILL License)
+  VLDocking Framework 2.1.4 by VLSolutions (CeCILL License)
   http://www.vlsolutions.com/en/products/docking/
 
   Hunspell 1.1.12 by László Németh and others (LGPL License)

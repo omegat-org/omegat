@@ -36,7 +36,7 @@
 				<jar href="lib-mnemonics.jar" />
 				<jar href="MRJAdapter.jar" />
 				<jar href="swing-layout-1.0.jar" />
-				<jar href="vldocking_2.0.6d.jar" />
+				<jar href="vldocking_2.1.4.jar" />
 			</resources>
 			<resources os="Windows">
 				<nativelib href="hunspell-win.jar" />
@@ -64,7 +64,7 @@
 				<jar href="lib-mnemonics.jar" />
 				<jar href="MRJAdapter.jar" />
 				<jar href="swing-layout-1.0.jar" />
-				<jar href="vldocking_2.0.6d.jar" />
+				<jar href="vldocking_2.1.4.jar" />
 			</resources>
 			<resources os="Windows">
 				<nativelib href="hunspell-win.jar" />

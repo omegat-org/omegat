@@ -7,7 +7,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/jna.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/MRJAdapter.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/swing-layout-1.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/vldocking_2.0.6d.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jmyspell-core-1.0.0-beta-2.jar"/>
 	<classpathentry exported="true" kind="lib" path="test/lib/junit-4.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="test/lib/xmlunit-1.1.jar"/>
@@ -16,5 +15,6 @@
 	<classpathentry kind="lib" path="lib/jaxb-api.jar"/>
 	<classpathentry kind="lib" path="lib/jaxb-impl.jar"/>
 	<classpathentry kind="lib" path="lib/jsr173_1.0_api.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/vldocking_2.1.4.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

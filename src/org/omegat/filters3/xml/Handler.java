@@ -27,19 +27,17 @@ package org.omegat.filters3.xml;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+
 import javax.xml.parsers.SAXParser;
-import org.xml.sax.Attributes;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
-import org.xml.sax.ext.DeclHandler;
-import org.xml.sax.ext.LexicalHandler;
-import org.xml.sax.helpers.DefaultHandler;
 
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.Attribute;
@@ -48,6 +46,13 @@ import org.omegat.filters3.Entry;
 import org.omegat.filters3.Tag;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
+import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+import org.xml.sax.ext.DeclHandler;
+import org.xml.sax.ext.LexicalHandler;
+import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * The part of XML filter that actually does the job.
@@ -167,7 +172,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     }
     
     /** Throws a nice error message when SAX parser encounders fastal error. */
-    private void reportFatalError(SAXParseException e) throws SAXException
+    private void reportFatalError(SAXParseException e) throws SAXException, MalformedURLException, URISyntaxException
     {
         int linenum = e.getLineNumber();
         String filename;
@@ -210,64 +215,47 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     // Utility methods
     //////////////////////////////////////////////////////////////////////////
 
-    private String sourceFolder = null;
+    private String sourceFolderAbsolutePath = null;
     /** Returns source folder of the main file with trailing '/' (File.separator). */
-    private String getSourceFolder()
-    {
-        if (sourceFolder==null)
-        {
+    private String getSourceFolderAbsolutePath() {
+        if (sourceFolderAbsolutePath == null) {
             String res = inFile.getAbsoluteFile().getParent();
-            try
-            {
+            try {
                 res = inFile.getCanonicalFile().getParent();
-            } catch (IOException ex) { }
-            if (res.charAt(res.length()-1)!=File.separatorChar)
+            } catch (IOException ex) {
+            }
+            if (res.charAt(res.length() - 1) != File.separatorChar) {
                 res = res + File.separatorChar;
-            sourceFolder = res;
+            }
+            sourceFolderAbsolutePath = res;
         }
-        return sourceFolder;
+        return sourceFolderAbsolutePath;
     }
-    
-    /** Converts System ID URL (starting from file:) into file name. */
-    private String systemId2fileName(String systemId)
-    {
-        if (systemId.startsWith(START_FILESCHEMA))
-        {
-            // Unix: file:/home/smth
-            // Windows: file:///D:\home\smth
-            systemId = systemId.replace(File.separatorChar, '/');
-            systemId = systemId.substring(START_FILESCHEMA.length());
-            while (systemId.startsWith("/"))
-                systemId = systemId.substring(1);
-            
-            if (systemId.charAt(0)>='A' && systemId.charAt(0)<='Z' && systemId.charAt(1)==':')
-                systemId = systemId.replace('/', File.separatorChar); // Windows
-            else
-                systemId = '/' + systemId; // Unix
-        }
-        return systemId;
-    }
-    
+        
     /** Makes System ID not an absolute, but a relative one. */
-    private String localizeSystemId(String systemId)
+    private String localizeSystemId(String systemId) throws URISyntaxException, MalformedURLException
     {
         if (systemId.startsWith(START_FILESCHEMA))
         {
-            systemId = systemId2fileName(systemId);
-            if (systemId.startsWith(getSourceFolder()))
-                systemId = systemId.substring(getSourceFolder().length());
+            File thisOutFile=new File(new URL(systemId).toURI());
+            String thisOutPath=thisOutFile.getAbsolutePath();
+            
+            if (thisOutPath.startsWith(getSourceFolderAbsolutePath())) {
+                return thisOutPath.substring(getSourceFolderAbsolutePath().length());
+            }
         }
         return systemId;
     }
     
     /** Whether the file with given systemId is in source folder. */
-    private boolean isInSource(String systemId)
+    private boolean isInSource(String systemId) throws URISyntaxException, MalformedURLException
     {
         if (systemId.startsWith(START_FILESCHEMA))
         {
-            systemId = systemId2fileName(systemId);
-            if (systemId.startsWith(getSourceFolder()))
+            File thisOutFile=new File(new URL(systemId).toURI());
+            if (thisOutFile.getAbsolutePath().startsWith(getSourceFolderAbsolutePath())) {
                 return true;
+            }
         }
         return false;
     }
@@ -323,7 +311,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     }
 
     /** Resolves external entity and creates a new writer if it's an included file. */
-    public InputSource doResolve(String publicId, String systemId) throws SAXException, TranslationException, IOException
+    public InputSource doResolve(String publicId, String systemId) throws SAXException, TranslationException, IOException, URISyntaxException
     {
         if (dtd!=null && 
                 StaticUtils.equal(publicId, dtd.getPublicId()) && 
@@ -341,7 +329,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
             // checking if f
             if (systemId.startsWith(START_FILESCHEMA))
             {
-                if (!new File(systemId2fileName(systemId)).exists())
+                if (!new File(new URI(systemId)).exists())
                     entity = null;
             }
             
@@ -604,6 +592,10 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         {
             return doResolve(publicId, systemId);
         }
+        catch (URISyntaxException e)
+        {
+            throw new SAXException(e);
+        }
         catch (IOException e)
         {
             throw new SAXException(e);
@@ -707,7 +699,13 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
      */
     public void fatalError(org.xml.sax.SAXParseException e) throws SAXException 
     {
-        reportFatalError(e);
+        try {
+            reportFatalError(e);
+        } catch (MalformedURLException ex) {
+            throw new SAXException(ex);
+        } catch (URISyntaxException ex) {
+            throw new SAXException(ex);
+        }
     }
 
     /**
@@ -792,10 +790,17 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     {
         if (inDTD)
             return;
-        Entity entity = new Entity(name, publicId, localizeSystemId(systemId));
-        if (isInSource(systemId))
-            externalEntities.add(entity);
-        dtd.addEntity(entity);
+        try {
+            Entity entity = new Entity(name, publicId,
+                    localizeSystemId(systemId));
+            if (isInSource(systemId))
+                externalEntities.add(entity);
+            dtd.addEntity(entity);
+        } catch (MalformedURLException ex) {
+            throw new SAXException(ex);
+        } catch (URISyntaxException ex) {
+            throw new SAXException(ex);
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////

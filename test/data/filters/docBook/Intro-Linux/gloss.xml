@@ -1,0 +1,1774 @@
+<glossary id="glossary"><?dbhtml filename="gloss.html"?>
+  <title>Glossary</title>
+<abstract><para>This section contains an alphabetical overview of commands discussed in this document.</para></abstract>
+<glossdiv id="A"><title>A</title>
+
+  <glossentry id="a2ps">
+    <glossterm>a2ps</glossterm>
+    <glossdef>
+      <para>Format files for printing on a PostScript printer, see <xref linkend="sect_08_01_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="acroread">
+    <glossterm>acroread</glossterm>
+    <glossdef>
+      <para>PDF viewer, see <xref linkend="sect_08_01_02_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="adduser">
+    <glossterm>adduser</glossterm>
+    <glossdef>
+      <para>Create a new user or update default new user information.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="alias">
+    <glossterm>alias</glossterm>
+    <glossdef>
+      <para>Create a shell alias for a command.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="alsaconf">
+<glossterm>alsaconf</glossterm>
+<glossdef>
+<para>Configure sound card using the ALSA driver, see <xref linkend="sect_11_01_02" />.</para>
+</glossdef>
+</glossentry>
+
+<glossentry id="alsamixer">
+<glossterm>alsamixer</glossterm>
+<glossdef>
+<para>Tune ALSA sound device output, see <xref linkend="sect_11_02_02_03" />.</para>
+</glossdef>
+</glossentry>
+
+  <glossentry id="anacron">
+    <glossterm>anacron</glossterm>
+    <glossdef>
+      <para>Execute commands periodically, does not assume continuously running machine.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="apropos">
+    <glossterm>apropos</glossterm>
+    <glossdef>
+      <para>Search the whatis database for strings, see <xref linkend="sect_02_03_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+
+  <glossentry id="apt-get">
+    <glossterm>apt-get</glossterm>
+    <glossdef>
+      <para>APT package handling utility, see <xref linkend="sect_07_06_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="arecord">
+<glossterm>arecord</glossterm>
+<glossdef>
+<para>Record a sound sample, see <xref linkend="sect_11_02_03" />.</para>
+</glossdef>
+</glossentry>
+
+
+  <glossentry id="aspell">
+    <glossterm>aspell</glossterm>
+    <glossdef>
+      <para>Spell checker.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="at">
+    <glossterm>at, atq, atrm</glossterm>
+    <glossdef>
+      <para>Queue, examine or delete jobs for later execution, see <xref linkend="sect_04_01_02_02" /> and <xref linkend="sect_04_04_03" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="aumix">
+    <glossterm>aumix</glossterm>
+    <glossdef>
+      <para>Adjust audio mixer, see <xref linkend="sect_11_02_02_03" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="awk">
+    <glossterm>(g)awk</glossterm>
+    <glossdef>
+      <para>Pattern scanning and processing language.</para>
+    </glossdef>
+    </glossentry>
+
+</glossdiv>
+
+<glossdiv id="B"><title>B</title>
+  <glossentry id="bash">
+    <glossterm>bash</glossterm>
+    <glossdef>
+      <para>Bourne Again SHell, see <xref linkend="sect_03_02_03_02" /> and <xref linkend="sect_07_02_07" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="batch">
+    <glossterm>batch</glossterm>
+    <glossdef>
+      <para>Queue, examine or delete jobs for later execution, see <xref linkend="sect_04_01_02_02" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="bg">
+    <glossterm>bg</glossterm>
+    <glossdef>
+      <para>Run a job in the background, see <xref linkend="sect_04_01_02_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="bitmap">
+    <glossterm>bitmap</glossterm>
+    <glossdef>
+      <para>Bitmap editor and converter utilities for the X window System.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="bzip2">
+    <glossterm>bzip2</glossterm>
+    <glossdef>
+      <para>A block-sorting file compressor, see <xref linkend="sect_09_01_01_03" />.</para>
+    </glossdef>
+    </glossentry>
+</glossdiv>
+<glossdiv id="C"><title>C</title>
+<glossentry id="cardctl">
+<glossterm>cardctl</glossterm>
+<glossdef>
+<para>Manage PCMCIA cards, see <xref linkend="sect_10_02_03_03" />.</para>
+</glossdef>
+</glossentry>
+
+  <glossentry id="cat">
+    <glossterm>cat</glossterm>
+    <glossdef>
+      <para>Concatenate files and print to standard output, see <xref linkend="sect_02_02" /> and <xref linkend="sect_03_02_04" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="cd">
+    <glossterm>cd</glossterm>
+    <glossdef>
+      <para>Change directory, see <xref linkend="sect_02_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="cdp">
+    <glossterm>cdp/cdplay</glossterm>
+    <glossdef>
+      <para>An interactive text-mode program for controlling and playing
+       audio CD Roms under Linux, see <xref linkend="sect_11_02_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="cdparanoia">
+    <glossterm>cdparanoia</glossterm>
+    <glossdef>
+      <para>An audio CD reading utility which
+       includes extra data verification features, see <xref linkend="sect_11_02_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="cdrecord">
+    <glossterm>cdrecord</glossterm>
+    <glossdef>
+      <para>Record a CD-R, see <xref linkend="sect_09_02_02" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="chattr">
+    <glossterm>chattr</glossterm>
+    <glossdef>
+      <para>Change file attributes.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="chgrp">
+    <glossterm>chgrp</glossterm>
+    <glossdef>
+      <para>Change group ownership, see <xref linkend="sect_03_04_02_03" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="chkconfig">
+    <glossterm>chkconfig</glossterm>
+    <glossdef>
+      <para>Update or query run level information for system services, see <xref linkend="sect_04_02_05_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+
+  <glossentry id="chmod">
+    <glossterm>chmod</glossterm>
+    <glossdef>
+      <para>Change file access permissions, see <xref linkend="sect_03_04_01" />, <xref linkend="sect_03_04_02_01" /> and <xref linkend="sect_03_04_02_04" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="chown">
+    <glossterm>chown</glossterm>
+    <glossdef>
+      <para>Change file owner and group, see <xref linkend="sect_03_04_02_03" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="compress">
+<glossterm>compress</glossterm>
+<glossdef><para>Compress files.</para>
+</glossdef>
+</glossentry>
+  <glossentry id="cp">
+    <glossterm>cp</glossterm>
+    <glossdef>
+      <para>Copy files and directories, see <xref linkend="sect_03_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="crontab">
+    <glossterm>crontab</glossterm>
+    <glossdef>
+      <para>Maintain crontab files, see <xref linkend="sect_04_04_04" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="csh">
+    <glossterm>csh</glossterm>
+    <glossdef>
+      <para>Open a C shell, see <xref linkend="sect_03_02_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="cut">
+    <glossterm>cut</glossterm>
+    <glossdef>
+      <para>Remove sections from each line of file(s), see <xref linkend="sect_07_02_07_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+</glossdiv>
+<glossdiv id="D"><title>D</title>
+  <glossentry id="date">
+    <glossterm>date</glossterm>
+    <glossdef>
+      <para>Print or set system date and time.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="dd">
+    <glossterm>dd</glossterm>
+    <glossdef>
+      <para>Convert and copy a file (disk dump), see <xref linkend="sect_09_02_01_02" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="df">
+    <glossterm>df</glossterm>
+    <glossdef>
+      <para>Report file system disk usage, see <xref linkend="sect_03_01_02_03" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="dhcpcd">
+    <glossterm>dhcpcd</glossterm>
+    <glossdef>
+      <para>DHCP client daemon, see <xref linkend="sect_10_04_08" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="diff">
+    <glossterm>diff</glossterm>
+    <glossdef>
+      <para>Find differences between two files.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="dig">
+    <glossterm>dig</glossterm>
+    <glossdef>
+      <para>Send domain name query packets to name servers, see <xref linkend="sect_10_02_06_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="dmesg">
+    <glossterm>dmesg</glossterm>
+    <glossdef>
+      <para>Print or control the kernel ring buffer.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="du">
+    <glossterm>du</glossterm>
+    <glossdef>
+      <para>Estimate file space usage.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="dump">
+<glossterm>dump</glossterm>
+<glossdef>
+<para>Backup file system, see <xref linkend="sect_09_02_05" />.</para>
+</glossdef>
+</glossentry>
+
+</glossdiv>
+<glossdiv id="E"><title>E</title>
+
+  <glossentry id="echo">
+    <glossterm>echo</glossterm>
+    <glossdef>
+      <para>Display a line of text, see <xref linkend="sect_03_02_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="ediff">
+    <glossterm>ediff</glossterm>
+    <glossdef>
+      <para>Diff to English translator.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="egrep">
+    <glossterm>egrep</glossterm>
+    <glossdef>
+      <para>Extended grep.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="eject">
+    <glossterm>eject</glossterm>
+    <glossdef>
+      <para>Unmount and eject removable media, see <xref linkend="sect_07_06_05_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="emacs">
+    <glossterm>emacs</glossterm>
+    <glossdef>
+      <para>Start the Emacs editor, see <xref linkend="sect_06_01_02_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="exec">
+    <glossterm>exec</glossterm>
+    <glossdef>
+      <para>Invoke subprocess(es), see <xref linkend="sect_04_01_05_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="exit">
+    <glossterm>exit</glossterm>
+    <glossdef>
+      <para>Exit current shell, see <xref linkend="sect_02_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="export">
+    <glossterm>export</glossterm>
+    <glossdef>
+      <para>Add function(s) to the shell environment, see <xref linkend="sect_03_02_01" />, <xref linkend="sect_07_02_02" /> and <xref linkend="sect_07_02_06_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+</glossdiv>
+<glossdiv id="F"><title>F</title>
+
+  <glossentry id="fax2ps">
+    <glossterm>fax2ps</glossterm>
+    <glossdef>
+      <para>Convert a TIFF facsimile to PostScript, see <xref linkend="sect_08_01_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="fdformat">
+    <glossterm>fdformat</glossterm>
+    <glossdef>
+      <para>Format floppy disk, see <xref linkend="sect_09_02_01_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="fdisk">
+    <glossterm>fdisk</glossterm>
+    <glossdef>
+      <para>Partition table manipulator for Linux, see <xref linkend="sect_03_01_02_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="fetchmail">
+    <glossterm>fetchmail</glossterm>
+    <glossdef>
+      <para>Fetch mail from a POP, IMAP, ETRN or ODMR-capable server, see <xref linkend="sect_10_04_02_03" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="fg">
+    <glossterm>fg</glossterm>
+    <glossdef>
+      <para>Bring a job in the foreground, see <xref linkend="sect_04_01_02_01" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="file">
+    <glossterm>file</glossterm>
+    <glossdef>
+      <para>Determine file type, see <xref linkend="sect_03_03_01_02" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="find">
+    <glossterm>find</glossterm>
+    <glossdef>
+      <para>Find files, see <xref linkend="sect_03_03_03_03" />.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="firefox">
+<glossterm>firefox</glossterm>
+<glossdef>
+<para>Web browser, see <xref linkend="sect_10_04_03_02" />.</para>
+</glossdef>
+</glossentry>
+<glossentry id="fork">
+<glossterm>fork</glossterm>
+<glossdef>
+<para>Create a new process, see <xref linkend="sect_04_01_05_01" />.</para>
+</glossdef>
+</glossentry>
+
+  <glossentry id="formail">
+    <glossterm>formail</glossterm>
+    <glossdef>
+      <para>Mail (re)formatter, see <xref linkend="sect_10_04_02_03" />.</para>
+    </glossdef>
+    </glossentry>
+
+
+  <glossentry id="fortune">
+    <glossterm>fortune</glossterm>
+    <glossdef>
+      <para>Print a random, hopefully interesting adage.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="ftp">
+    <glossterm>ftp</glossterm>
+    <glossdef>
+      <para>Transfer files (unsafe unless anonymous account is used!)services, see <xref linkend="sect_10_04_04_02" />.</para>
+    </glossdef>
+    </glossentry>
+</glossdiv>
+<glossdiv id="G"><title>G</title>
+
+  <glossentry id="galeon">
+    <glossterm>galeon</glossterm>
+    <glossdef>
+      <para>Graphical web browser.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="gdm">
+    <glossterm>gdm</glossterm>
+    <glossdef>
+      <para>Gnome Display Manager, see <xref linkend="sect_04_02_04" />.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="gedit">
+<glossterm>gedit</glossterm>
+<glossdef>
+<para>GUI editor, see <xref linkend="sect_06_03_03_03" />.</para>
+</glossdef>
+</glossentry>
+
+  <glossentry id="getty">
+    <glossterm>(min/a)getty</glossterm>
+    <glossdef>
+      <para>Control console devices.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="gimp">
+    <glossterm>gimp</glossterm>
+    <glossdef>
+      <para>Image manipulation program.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="gpg">
+<glossterm>gpg</glossterm>
+<glossdef>
+<para>Encrypt, check and decrypt files, see <xref linkend="sect_09_04_01_02" />.</para>
+</glossdef>
+</glossentry>
+
+  <glossentry id="grep">
+    <glossterm>grep</glossterm>
+    <glossdef>
+      <para>Print lines matching a pattern, see <xref linkend="sect_03_03_03_04" /> and <xref linkend="sect_05_03_01" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="groff">
+    <glossterm>groff</glossterm>
+    <glossdef>
+      <para>Emulate nroff command with groff, see <xref linkend="sect_08_01_02" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="grub">
+    <glossterm>grub</glossterm>
+    <glossdef>
+      <para>The grub shell, see <xref linkend="sect_04_02_03" /> and <xref linkend="sect_07_06_04" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="gv">
+    <glossterm>gv</glossterm>
+    <glossdef>
+      <para>A PostScript and PDF viewer, see <xref linkend="sect_08_01_02_02" />.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="gvim">
+<glossterm>gvim</glossterm>
+<glossdef>
+<para>Graphical version of the <application>vIm</application> editor, see <xref linkend="sect_06_03_03_03" />.</para>
+</glossdef>
+</glossentry>
+
+  <glossentry id="gzip">
+    <glossterm>gzip</glossterm>
+    <glossdef>
+      <para>Compress or expand files, see <xref linkend="sect_09_01_01_03" />.</para>
+    </glossdef>
+    </glossentry>
+</glossdiv>
+<glossdiv id="H"><title>H</title>
+
+<glossentry id="halt">
+    <glossterm>halt</glossterm>
+    <glossdef>
+      <para>Stop the system, see <xref linkend="sect_04_02_06" />.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="head">
+    <glossterm>head</glossterm>
+    <glossdef>
+      <para>Output the first part of files, see <xref linkend="sect_03_03_04_03" />.</para>
+    </glossdef>
+    </glossentry>
+
+
+  <glossentry id="help">
+    <glossterm>help</glossterm>
+    <glossdef>
+      <para>Display help on a shell built-in command.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="host">
+    <glossterm>host</glossterm>
+    <glossdef>
+      <para>DNS lookup utility, see <xref linkend="sect_10_02_06_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="httpd">
+    <glossterm>httpd</glossterm>
+    <glossdef>
+      <para>Apache hypertext transfer protocol server, see <xref linkend="sect_10_02_03_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+</glossdiv>
+<glossdiv id="I"><title>I</title>
+
+<glossentry id="id">
+<glossterm>id</glossterm>
+    <glossdef>
+      <para>Print real and effective UIDs and GIDs, see <xref linkend="sect_03_04_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="ifconfig">
+    <glossterm>ifconfig</glossterm>
+    <glossdef>
+      <para>Configure network interface or show configuration, see <xref linkend="sect_10_01_02_03" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="info">
+<glossterm>info</glossterm>
+<glossdef>
+<para>Read Info documents, see <xref linkend="sect_02_03_03_01" />.</para>
+</glossdef>
+</glossentry>
+
+<glossentry id="init">
+    <glossterm>init</glossterm>
+    <glossdef>
+      <para>Process control initialization, see <xref linkend="sect_04_01_05_01" />, <xref linkend="sect_04_02_04" /> and <xref linkend="sect_04_02_05" />.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="insserv">
+<glossterm>insserv</glossterm>
+<glossdef>
+<para>Manage init scripts, see <xref linkend="sect_04_02_05_01" />.</para>
+</glossdef>
+</glossentry>
+
+
+  <glossentry id="iostat">
+    <glossterm>iostat</glossterm>
+    <glossdef>
+      <para>Display I/O statistics, see <xref linkend="sect_04_03_05_04" />.</para>
+    </glossdef>
+    </glossentry>
+
+
+<glossentry id="ip">
+    <glossterm>ip</glossterm>
+    <glossdef>
+      <para>Display/change network interface status, see <xref linkend="sect_10_01_02_03" />.</para>
+    </glossdef>
+    </glossentry>
+
+
+<glossentry id="ipchains">
+    <glossterm>ipchains</glossterm>
+    <glossdef>
+      <para>IP firewall administration, see <xref linkend="sect_10_05_04_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="iptables">
+    <glossterm>iptables</glossterm>
+    <glossdef>
+      <para>IP packet filter administration, see <xref linkend="sect_10_05_04_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+</glossdiv>
+<glossdiv id="J"><title>J</title>
+
+  <glossentry id="jar">
+    <glossterm>jar</glossterm>
+    <glossdef>
+      <para>Java archive tool, see <xref linkend="sect_09_01_01_04" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="jobs">
+    <glossterm>jobs</glossterm>
+    <glossdef>
+      <para>List backgrounded tasks.</para>
+    </glossdef>
+    </glossentry>
+</glossdiv>
+<glossdiv id="K"><title>K</title>
+
+<glossentry id="kdm">
+    <glossterm>kdm</glossterm>
+    <glossdef>
+      <para>Desktop manager for KDE, see <xref linkend="sect_04_02_04" />.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="kedit">
+<glossterm>kedit</glossterm>
+<glossdef>
+<para>KDE graphical editor, see <xref linkend="sect_06_03_03_03" />.</para>
+</glossdef>
+</glossentry>
+
+  <glossentry id="kill">
+    <glossterm>kill(all)</glossterm>
+    <glossdef>
+      <para>Terminate process(es), see <xref linkend="sect_04_01_02_01" />.</para>
+    </glossdef>
+    </glossentry>
+   
+<glossentry id="konqueror">
+<glossterm>konqueror</glossterm>
+<glossdef>
+<para>File manager, (help) browser, see <xref linkend="sect_03_03_02_01" />.</para>
+</glossdef>
+</glossentry>
+
+  <glossentry id="ksh">
+    <glossterm>ksh</glossterm>
+    <glossdef>
+      <para>Open a Korn shell, see <xref linkend="sect_03_02_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="kwrite">
+<glossterm>kwrite</glossterm>
+<glossdef>
+<para>KDE graphical editor, see <xref linkend="sect_06_03_03_03" />.</para>
+</glossdef>
+</glossentry>
+
+</glossdiv>
+<glossdiv id="L"><title>L</title>
+
+<glossentry id="less">
+<glossterm>less</glossterm>
+<glossdef>
+<para><command>more</command> with features, see <xref linkend="sect_03_03_04_02" />.</para>
+</glossdef>
+</glossentry>
+
+<glossentry id="lilo">
+    <glossterm>lilo</glossterm>
+    <glossdef>
+      <para>Linux boot loader, see <xref linkend="sect_04_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="links">
+    <glossterm>links</glossterm>
+    <glossdef>
+      <para>Text mode WWW browser, see <xref linkend="sect_10_02_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="ln">
+    <glossterm>ln</glossterm>
+    <glossdef>
+      <para>Make links between files, see <xref linkend="sect_03_03_05" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="loadkeys">
+    <glossterm>loadkeys</glossterm>
+    <glossdef>
+      <para>Load keyboard translation tables, see <xref linkend="sect_07_05_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="locate">
+    <glossterm>locate</glossterm>
+    <glossdef>
+      <para>Find files, see <xref linkend="sect_03_03_03_03" /> and <xref linkend="sect_04_04_04" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="logout">
+    <glossterm>logout</glossterm>
+    <glossdef>
+      <para>Close current shell, see <xref linkend="sect_02_01_03" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="lp">
+    <glossterm>lp</glossterm>
+    <glossdef>
+      <para>Send requests to the LP print service, see <xref linkend="sect_08_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="lpc">
+    <glossterm>lpc</glossterm>
+    <glossdef>
+      <para>Line printer control program, see <xref linkend="sect_08_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="lpq">
+    <glossterm>lpq</glossterm>
+    <glossdef>
+      <para>Print spool queue examination program, see <xref linkend="sect_08_01" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="lpr">
+    <glossterm>lpr</glossterm>
+    <glossdef>
+      <para>Offline print, see <xref linkend="sect_08_01" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="lprm">
+    <glossterm>lprm</glossterm>
+    <glossdef>
+      <para>Remove print requests, see <xref linkend="sect_08_01" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="ls">
+    <glossterm>ls</glossterm>
+    <glossdef>
+      <para>List directory content, see <xref linkend="sect_02_02" />, <xref linkend="sect_03_01_01_02" /> and <xref linkend="sect_03_03_01_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="lynx">
+    <glossterm>lynx</glossterm>
+    <glossdef>
+      <para>Text mode WWW browser, see <xref linkend="sect_10_02_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+</glossdiv>
+<glossdiv id="M"><title>M</title>
+  <glossentry id="mail">
+    <glossterm>mail</glossterm>
+    <glossdef>
+      <para>Send and receive mail, see <xref linkend="sect_10_04_02_03" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="man">
+    <glossterm>man</glossterm>
+    <glossdef>
+      <para>Read man pages, see <xref linkend="sect_02_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="mc">
+<glossterm>mc</glossterm>
+<glossdef>
+<para>Midnight COmmander, file manager, see <xref linkend="sect_03_03_02_01" />.</para>
+</glossdef>
+</glossentry>
+
+
+<glossentry id="mcopy">
+    <glossterm>mcopy</glossterm>
+    <glossdef>
+      <para>Copy MSDOS files to/from Unix.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="mdir">
+    <glossterm>mdir</glossterm>
+    <glossdef>
+      <para>Display an MSDOS directory.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="memusage">
+    <glossterm>memusage</glossterm>
+    <glossdef>
+      <para>Display memory usage, see <xref linkend="sect_04_03_05_03" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="memusagestat">
+    <glossterm>memusagestat</glossterm>
+    <glossdef>
+      <para>Display memory usage statistics, see <xref linkend="sect_04_03_05_03" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="mesg">
+    <glossterm>mesg</glossterm>
+    <glossdef>
+      <para>Control write access to your terminal, see <xref linkend="sect_04_01_06" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="mformat">
+    <glossterm>mformat</glossterm>
+    <glossdef>
+      <para>Add an MSDOS file system to a low-level formatted floppy disk, see <xref linkend="sect_09_02_01_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="mkbootdisk">
+    <glossterm>mkbootdisk</glossterm>
+    <glossdef>
+      <para>Creates a stand-alone boot floppy for the running system.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="mkdir">
+    <glossterm>mkdir</glossterm>
+    <glossdef>
+      <para>Create directory, see <xref linkend="sect_03_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="mkisofs">
+    <glossterm>mkisofs</glossterm>
+    <glossdef>
+      <para>Create a hybrid ISO9660 filesystem, see <xref linkend="sect_09_02_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="mplayer">
+    <glossterm>mplayer</glossterm>
+    <glossdef>
+      <para>Movie player/encoder for Linux, see <xref linkend="sect_11_02_02"/> and <xref linkend="sect_11_02_04" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="more">
+    <glossterm>more</glossterm>
+    <glossdef>
+      <para>Filter for displaying text one screen at the time, see <xref linkend="sect_03_03_04_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+
+<glossentry id="mount">
+    <glossterm>mount</glossterm>
+    <glossdef>
+      <para>Mount a file system or display information about mounted file systems, see <xref linkend="sect_07_06_05_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+
+<glossentry id="mozilla">
+    <glossterm>mozilla</glossterm>
+    <glossdef>
+      <para>Web browser, see <xref linkend="sect_10_02_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="mt">
+    <glossterm>mt</glossterm>
+    <glossdef>
+      <para>Control magnetic tape drive operation.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="mtr">
+    <glossterm>mtr</glossterm>
+    <glossdef>
+      <para>Network diagnostic tool.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="mv">
+    <glossterm>mv</glossterm>
+    <glossdef>
+      <para>Rename files, <xref linkend="sect_03_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+</glossdiv>
+<glossdiv id="N"><title>N</title>
+
+<glossentry id="named">
+    <glossterm>named</glossterm>
+    <glossdef>
+      <para>Internet domain name server, see <xref linkend="sect_10_04_07" />.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="nautilus">
+<glossterm>nautilus</glossterm>
+<glossdef>
+<para>File manager, see <xref linkend="sect_03_03_02_01" />.</para>
+</glossdef>
+    </glossentry>
+
+  <glossentry id="ncftp">
+    <glossterm>ncftp</glossterm>
+    <glossdef>
+      <para>Browser program for ftp services (insecure!), see <xref linkend="sect_10_04_04_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="netstat">
+    <glossterm>netstat</glossterm>
+    <glossdef>
+      <para>Print network connections, routing tables, interface statistics, masquerade connections, and multi-cast memberships, see <xref linkend="sect_10_01_02_05" /> and <xref linkend="sect_10_05_02" />.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="newgrp">
+<glossterm>newgrp</glossterm>
+<glossdef>
+<para>Log in to another group, see <xref linkend="sect_03_04_02_02" />.</para>
+</glossdef>
+</glossentry>
+
+  <glossentry id="nfsstat">
+    <glossterm>nfsstat</glossterm>
+    <glossdef>
+      <para>Print statistics about networked file systems.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="nice">
+    <glossterm>nice</glossterm>
+    <glossdef>
+      <para>Run a program with modified scheduling priority, see <xref linkend="sect_04_03_05_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="nmap">
+    <glossterm>nmap</glossterm>
+    <glossdef>
+      <para>Network exploration tool and security scanner.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="ntpd">
+<glossterm>ntpd</glossterm>
+<glossdef>
+<para>Network Time Protocol Daemon, see <xref linkend="sect_07_05_03" />.</para>
+</glossdef>
+</glossentry>
+<glossentry id="ntpdate">
+<glossterm>ntpdate</glossterm>
+<glossdef>
+<para>Set the date and time via an NTP server, see <xref linkend="sect_07_05_03" />.</para>
+</glossdef>
+</glossentry>
+
+
+
+<glossentry id="ntsysv">
+    <glossterm>ntsysv</glossterm>
+    <glossdef>
+      <para>Simple interface for configuring run levels, see <xref linkend="sect_04_02_05_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+</glossdiv>
+
+<glossdiv id="O"><title>O</title>
+  <glossentry id="ogle">
+    <glossterm>ogle</glossterm>
+    <glossdef>
+      <para>DVD player with support for DVD menus, see <xref linkend="sect_11_02_04" />.</para>
+    </glossdef>
+    </glossentry>
+
+</glossdiv>
+
+<glossdiv id="P"><title>P</title>
+  <glossentry id="passwd">
+    <glossterm>passwd</glossterm>
+    <glossdef>
+      <para>Change password, see <xref linkend="sect_02_02" /> and <xref linkend="sect_04_01_06" />.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="pccardctl">
+<glossterm>pccardctl</glossterm>
+<glossdef>
+<para>Manage PCMCIA cards, see <xref linkend="sect_10_02_03_03" />.</para>
+</glossdef>
+</glossentry>
+
+
+<glossentry id="pdf2ps">
+    <glossterm>pdf2ps</glossterm>
+    <glossdef>
+      <para>Ghostscript PDF to PostScript translator, see <xref linkend="sect_08_01_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="perl">
+    <glossterm>perl</glossterm>
+    <glossdef>
+      <para>Practical Extraction and Report Language.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="pg">
+    <glossterm>pg</glossterm>
+    <glossdef>
+      <para>Page through text output, see <xref linkend="sect_03_03_04_02" />.</para>
+    </glossdef>
+    </glossentry>
+    <glossentry id="pgrep">
+    <glossterm>pgrep</glossterm>
+    <glossdef>
+    <para>Look up processes based on name and other attributes, see <xref linkend="sect_04_01_04" />.</para>
+    </glossdef>
+    </glossentry>
+    
+  <glossentry id="ping">
+    <glossterm>ping</glossterm>
+    <glossdef>
+      <para>Send echo request to a host, see <xref linkend="sect_10_02_06_02" />.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="play">
+<glossterm>play</glossterm>
+<glossdef>
+<para>Play a sound sample, see <xref linkend="sect_11_02_03" />.</para>
+</glossdef>
+</glossentry>
+
+
+<glossentry id="pr">
+    <glossterm>pr</glossterm>
+    <glossdef>
+      <para>Convert text files for printing.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="printenv">
+    <glossterm>printenv</glossterm>
+    <glossdef>
+      <para>Print all or part of environment, see <xref linkend="sect_07_02_1" />.</para>
+    </glossdef>
+    </glossentry>
+
+
+  <glossentry id="procmail">
+    <glossterm>procmail</glossterm>
+    <glossdef>
+      <para>Autonomous mail processor, see <xref linkend="sect_10_04_02_03" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="ps">
+    <glossterm>ps</glossterm>
+    <glossdef>
+      <para>Report process status, see <xref linkend="sect_04_01_04" /> and <xref linkend="sect_04_03_05_04" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="pstree">
+    <glossterm>pstree</glossterm>
+    <glossdef>
+      <para>Display a tree of processes, see <xref linkend="sect_04_01_04" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="pwd">
+    <glossterm>pwd</glossterm>
+    <glossdef>
+      <para>Print present working directory, see <xref linkend="sect_02_02" />.</para>
+    </glossdef>
+    </glossentry>
+</glossdiv>
+<glossdiv id="Q"><title>Q</title>
+  <glossentry id="quota">
+    <glossterm>quota</glossterm>
+    <glossdef>
+      <para>Display disk usage and limits, see <xref linkend="sect_03_02_03_03" />.</para>
+    </glossdef>
+    </glossentry>
+</glossdiv>
+<glossdiv id="R"><title>R</title>
+
+  <glossentry id="rcp">
+    <glossterm>rcp</glossterm>
+    <glossdef>
+      <para>Remote copy (unsafe!)</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="rdesktop">
+	<glossterm>rdesktop</glossterm>
+	<glossdef>
+	<para>Remote Desktop Protocol client, see <xref linkend="sect_10_05_06" />.</para>
+	</glossdef>
+	</glossentry>
+
+<glossentry id="reboot">
+    <glossterm>reboot</glossterm>
+    <glossdef>
+      <para>Stop the system, see <xref linkend="sect_04_02_06" />.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="recode">
+<glossterm>recode</glossterm>
+<glossdef>
+<para>Convert files to another character set, see <xref linkend="sect_07_05_04" />.</para>
+</glossdef>
+</glossentry>
+
+  <glossentry id="renice">
+    <glossterm>renice</glossterm>
+    <glossdef>
+      <para>Alter priority of a running process, see <xref linkend="sect_04_03_05_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="restore">
+<glossterm>restore</glossterm>
+<glossdef>
+<para>Restore backups made with <command>dump</command>, see <xref linkend="sect_09_02_05" />.</para>
+</glossdef>
+</glossentry>
+
+  <glossentry id="rlogin">
+    <glossterm>rlogin</glossterm>
+    <glossdef>
+      <para>Remote login (telnet, insecure!), see <xref linkend="sect_10_05_02" /> and <xref linkend="sect_10_06_02" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="rm">
+    <glossterm>rm</glossterm>
+    <glossdef>
+      <para>Remove a file, see <xref linkend="sect_03_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="rmdir">
+    <glossterm>rmdir</glossterm>
+    <glossdef>
+      <para>Remove a directory, see <xref linkend="sect_03_03_02_03" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="roff">
+    <glossterm>roff</glossterm>
+    <glossdef>
+      <para>A survey of the roff typesetting system, see <xref linkend="sect_08_01_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="rpm">
+    <glossterm>rpm</glossterm>
+    <glossdef>
+      <para>RPM Package Manager, see <xref linkend="sect_07_06_02_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="rsh">
+    <glossterm>rsh</glossterm>
+    <glossdef>
+      <para>Remote shell (insecure!), see <xref linkend="sect_10_05_02" />.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="rsync">
+<glossterm>rsync</glossterm>
+<glossdef>
+<para>Synchronize two directories, see <xref linkend="sect_09_03" />.</para>
+</glossdef>
+</glossentry>
+
+</glossdiv>
+<glossdiv id="S"><title>S</title>
+  <glossentry id="scp">
+    <glossterm>scp</glossterm>
+    <glossdef>
+      <para>Secure remote copy, see <xref linkend="sect_10_05_04_01" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="screen">
+    <glossterm>screen</glossterm>
+    <glossdef>
+      <para>Screen manager with VT100 emulation, see <xref linkend="sect_04_01_02_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="set">
+    <glossterm>set</glossterm>
+    <glossdef>
+      <para>Display, set or change variable.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="setterm">
+    <glossterm>setterm</glossterm>
+    <glossdef>
+      <para>Set terminal attributes.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="sftp">
+    <glossterm>sftp</glossterm>
+    <glossdef>
+      <para>Secure (encrypted) ftp, see and <xref linkend="sect_10_05_04_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="sh">
+    <glossterm>sh</glossterm>
+    <glossdef>
+      <para>Open a standard shell, see <xref linkend="sect_03_02_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="shutdown">
+    <glossterm>shutdown</glossterm>
+    <glossdef>
+      <para>Bring the system down, see <xref linkend="sect_04_02_06" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="sleep">
+    <glossterm>sleep</glossterm>
+    <glossdef>
+      <para>Wait for a given period, see <xref linkend="sect_04_04_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="slocate">
+    <glossterm>slocate</glossterm>
+    <glossdef>
+      <para>Security Enhanced version of the GNU Locate, see <xref linkend="sect_03_03_03_03" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="slrnn">
+    <glossterm>slrnn</glossterm>
+    <glossdef>
+      <para>text mode Usenet client, see <xref linkend="sect_10_02_06" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="snort">
+    <glossterm>snort</glossterm>
+    <glossdef>
+      <para>Network intrusion detection tool.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="sort">
+    <glossterm>sort</glossterm>
+    <glossdef>
+      <para>Sort lines of text files, see <xref linkend="sect_05_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="spell">
+<glossterm>spell</glossterm>
+<glossdef>
+<para>Spell checker, see <xref linkend="sect_05_01_02_03" />.</para>
+</glossdef>
+</glossentry>
+
+  <glossentry id="ssh">
+    <glossterm>ssh</glossterm>
+    <glossdef>
+      <para>Secure shell, see <xref linkend="sect_10_05_04_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="ssh-keygen">
+    <glossterm>ssh-keygen</glossterm>
+    <glossdef>
+      <para>Authentication key generation, management and conversion, see <xref linkend="sect_10_05_04_05" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="stty">
+    <glossterm>stty</glossterm>
+    <glossdef>
+      <para>Change and print terminal line settings.</para>
+    </glossdef>
+    </glossentry>
+
+
+  <glossentry id="su">
+    <glossterm>su</glossterm>
+    <glossdef>
+      <para>Switch user, see <xref linkend="sect_03_02_01" />, <xref linkend="sect_07_06_03_02" /> and <xref linkend="sect_10_05_06" />.</para>
+    </glossdef>
+    </glossentry>
+</glossdiv>
+<glossdiv id="T"><title>T</title>
+
+<glossentry id="tac">
+    <glossterm>tac</glossterm>
+    <glossdef>
+      <para>Concatenate and print files in reverse, see <xref linkend="cat" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="tail">
+    <glossterm>tail</glossterm>
+    <glossdef>
+      <para>Output the last part of files, see <xref linkend="sect_03_03_04_03" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="talk">
+    <glossterm>talk</glossterm>
+    <glossdef>
+      <para>Talk to a user.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="tar">
+    <glossterm>tar</glossterm>
+    <glossdef>
+      <para>Archiving utility, see <xref linkend="sect_09_01_01_01" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="tcsh">
+    <glossterm>tcsh</glossterm>
+    <glossdef>
+      <para>Open a Turbo C shell, see <xref linkend="sect_03_02_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+    <glossentry id="telinit">
+    <glossterm>telinit</glossterm>
+    <glossdef>
+    <para>Process control initialization, see <xref linkend="sect_04_02_05" />.</para>
+    </glossdef>
+    </glossentry>
+    
+  <glossentry id="telnet">
+    <glossterm>telnet</glossterm>
+    <glossdef>
+      <para>User interface to the TELNET protocol (insecure!), see <xref linkend="sect_10_05_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="tex">
+    <glossterm>tex</glossterm>
+    <glossdef>
+      <para>Text formatting and typesetting, see <xref linkend="sect_08_01_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="time">
+    <glossterm>time</glossterm>
+    <glossdef>
+      <para>Time a simple command or give resource usage, see <xref linkend="sect_04_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+ <glossentry id="tin">
+    <glossterm>tin</glossterm>
+    <glossdef>
+      <para>News reading program, see <xref linkend="sect_10_02_06" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="top">
+    <glossterm>top</glossterm>
+    <glossdef>
+      <para>Display top CPU processes, see <xref linkend="sect_04_01_04" />, <xref linkend="sect_04_03_05_03" /> and <xref linkend="sect_04_03_05_04" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="touch">
+    <glossterm>touch</glossterm>
+    <glossdef>
+      <para>Change file timestamps, see <xref linkend="sect_07_01_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="traceroute">
+    <glossterm>traceroute</glossterm>
+    <glossdef>
+      <para>Print the route packets take to network host, see <xref linkend="sect_10_02_06_03" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="tripwire">
+    <glossterm>tripwire</glossterm>
+    <glossdef>
+      <para>A file integrity checker for UNIX systems, see <xref linkend="sect_10_05_05" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="troff">
+    <glossterm>troff</glossterm>
+    <glossdef>
+      <para>Format documents, see <xref linkend="sect_08_01_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="tvtime">
+      <glossterm>tvime</glossterm>
+    <glossdef>
+      <para>A high quality television application.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="twm">
+    <glossterm>twm</glossterm>
+    <glossdef>
+      <para>Tab Window Manager for the X Window System.</para>
+    </glossdef>
+    </glossentry>
+
+
+</glossdiv>
+<glossdiv id="U"><title>U</title>
+  <glossentry id="ulimit">
+    <glossterm>ulimit</glossterm>
+    <glossdef>
+      <para>Controll resources, see <xref linkend="sect_07_01_02_05" />.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="umask">
+    <glossterm>umask</glossterm>
+    <glossdef>
+      <para>Set user file creation mask, see <xref linkend="sect_03_04_02_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="umount">
+    <glossterm>umount</glossterm>
+    <glossdef>
+      <para>Unmount a file system.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="uncompress">
+    <glossterm>uncompress</glossterm>
+    <glossdef>
+      <para>Decompress compressed files.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="uniq">
+    <glossterm>uniq</glossterm>
+    <glossdef>
+      <para>Remove duplicate lines from a sorted file, see <xref linkend="sect_05_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="up2date">
+<glossterm>up2date</glossterm>
+<glossdef>
+<para>Update RPM packages, see <xref linkend="sect_07_06_03_03" />.</para>
+</glossdef>
+</glossentry>
+
+<glossentry id="update">
+    <glossterm>update</glossterm>
+    <glossdef>
+      <para>Kernel daemon to flush dirty buffers back to disk.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="update-rc.d">
+<glossterm>update-rc.d</glossterm>
+<glossdef>
+<para>Configure init scripts, see <xref linkend="sect_04_02_05_01" />.</para>
+</glossdef>
+</glossentry>
+
+  <glossentry id="uptime">
+    <glossterm>uptime</glossterm>
+    <glossdef>
+      <para>Display system uptime and average load, see <xref linkend="sect_04_01_04" /> and <xref linkend="sect_04_03_05_02" />.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="urpmi">
+<glossterm>urpmi</glossterm>
+<glossdef>
+<para>Update RPM packages, see <xref linkend="sect_07_06_03_03" />.</para>
+</glossdef>
+</glossentry>
+
+
+<glossentry id="userdel">
+    <glossterm>userdel</glossterm>
+    <glossdef>
+      <para>Delete a user account and related files.</para>
+    </glossdef>
+    </glossentry>
+
+</glossdiv>
+<glossdiv id="V"><title>V</title>
+  <glossentry id="vi">
+    <glossterm>vi(m)</glossterm>
+    <glossdef>
+      <para>Start the vi (improved) editor, see <xref linkend="sect_06_01_02_03" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="vimtutor">
+    <glossterm>vimtutor</glossterm>
+    <glossdef>
+      <para>The Vim tutor.</para>
+    </glossdef>
+    </glossentry>
+
+
+  <glossentry id="vmstat">
+    <glossterm>vmstat</glossterm>
+    <glossdef>
+      <para>Report virtual memory statistics, see <xref linkend="sect_04_03_05_04" />.</para>
+    </glossdef>
+    </glossentry>
+</glossdiv>
+<glossdiv id="W"><title>W</title>
+  <glossentry id="w">
+    <glossterm>w</glossterm>
+    <glossdef>
+      <para>Show who is logged on and what they are doing.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="wall">
+    <glossterm>wall</glossterm>
+    <glossdef>
+      <para>Send a message to everybody's terminal, see <xref linkend="sect_04_01_06" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="wc">
+    <glossterm>wc</glossterm>
+    <glossdef>
+      <para>Print the number of bytes, words and lines in files, see <xref linkend="sect_03_02_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="which">
+    <glossterm>which</glossterm>
+    <glossdef>
+      <para>Shows the full path of (shell) commands, see <xref linkend="sect_03_02_01" /> and <xref linkend="sect_03_03_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="who">
+    <glossterm>who</glossterm>
+    <glossdef>
+      <para>Show who is logged on, see <xref linkend="sect_04_01_06" />.</para>
+    </glossdef>
+    </glossentry>
+                                                                                
+  <glossentry id="whoami">
+    <glossterm>who am i</glossterm>
+    <glossdef>
+      <para>Print effective user ID.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="whois">
+    <glossterm>whois</glossterm>
+    <glossdef>
+      <para>Query a whois or nicname database, see <xref linkend="sect_10_02_06_04" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="write">
+    <glossterm>write</glossterm>
+    <glossdef>
+      <para>Send a message to another user, see <xref linkend="sect_04_01_06" />.</para>
+    </glossdef>
+    </glossentry>
+</glossdiv>
+<glossdiv id="X"><title>X</title>
+
+<glossentry id="xargs">
+<glossterm>xargs</glossterm>
+<glossdef>
+<para>Build and execute command lines from standard input, see <xref linkend="sect_03_03_03_03" />.</para>
+</glossdef>
+</glossentry>
+
+
+<glossentry id="xauth">
+    <glossterm>xauth</glossterm>
+    <glossdef>
+      <para>X authority file utility.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="xawtv">
+    <glossterm>xawtv</glossterm>
+    <glossdef>
+      <para>An X11 program for watching TV.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="xcdroast">
+    <glossterm>xcdroast</glossterm>
+    <glossdef>
+      <para>Graphical front end to cdrecord, see <xref linkend="sect_09_02_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="xclock">
+    <glossterm>xclock</glossterm>
+    <glossdef>
+      <para>Analog/digital clock for X.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="xconsole">
+    <glossterm>xconsole</glossterm>
+    <glossdef>
+      <para>Monitor system console messages with X.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="xdm">
+    <glossterm>xdm</glossterm>
+    <glossdef>
+      <para>X Display Manager with support for XDMCP, host chooser, see <xref linkend="sect_04_02_04" /> and <xref linkend="sect_07_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="xdvi">
+    <glossterm>xdvi</glossterm>
+    <glossdef>
+      <para>DVI viewer, see <xref linkend="sect_08_01_02_02" />.</para>
+    </glossdef>
+    </glossentry>
+<glossentry id="xedit">
+<glossterm>xedit</glossterm>
+<glossdef>
+<para>X Window graphical editor, see <xref linkend="sect_06_03_03_03" />.</para>
+</glossdef>
+</glossentry>
+
+
+<glossentry id="xfs">
+    <glossterm>xfs</glossterm>
+    <glossdef>
+      <para>X font server.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="xhost">
+    <glossterm>xhost</glossterm>
+    <glossdef>
+      <para>Server access control program for X, see <xref linkend="sect_10_05_03_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="xine">
+    <glossterm>xine</glossterm>
+    <glossdef>
+      <para>A free video player, see <xref linkend="sect_11_02_04" />.</para>    </glossdef>
+    </glossentry>
+
+
+<glossentry id="xinetd">
+    <glossterm>xinetd</glossterm>
+    <glossdef>
+      <para>The extended Internet services daemon, see <xref linkend="sect_10_04_01_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="xload">
+    <glossterm>xload</glossterm>
+    <glossdef>
+      <para>System load average display for X, see <xref linkend="sect_04_03_05_06" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="xlsfonts">
+    <glossterm>xlsfonts</glossterm>
+    <glossdef>
+      <para>Server font list displayer for X.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="xmms">
+    <glossterm>xmms</glossterm>
+    <glossdef>
+      <para>Audio player for X, see <xref linkend="sect_11_02_02_01" />.</para>
+    </glossdef>
+    </glossentry>
+
+<glossentry id="xpdf">
+    <glossterm>xpdf</glossterm>
+    <glossdef>
+      <para>PDF viewer, see <xref linkend="sect_08_01_02_02" />.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="xterm">
+    <glossterm>xterm</glossterm>
+    <glossdef>
+      <para>Terminal emulator for X.</para>
+    </glossdef>
+    </glossentry>
+</glossdiv>
+
+<glossdiv id="Y"><title>Y</title>
+<glossentry id="yast">
+<glossterm>yast</glossterm>
+<glossdef>
+<para>System administration tool on Novell SuSE Linux.</para>
+</glossdef>
+</glossentry>
+<glossentry id="yum">
+<glossterm>yum</glossterm>
+<glossdef>
+<para>Update RPM packages, see <xref linkend="sect_07_06_03_03" />.</para>
+</glossdef>
+</glossentry>
+
+</glossdiv>
+
+<glossdiv id="Z"><title>Z</title>
+
+  <glossentry id="zapping">
+    <glossterm>zapping</glossterm>
+    <glossdef>
+      <para>A TV viewer for the Gnome environment.</para>
+    </glossdef>
+    </glossentry>
+
+  <glossentry id="zcat">
+    <glossterm>zcat</glossterm>
+    <glossdef>
+      <para>Compress or expand files.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="zgrep">
+    <glossterm>zgrep</glossterm>
+    <glossdef>
+      <para>Search possibly compressed files for a regular expression.</para>
+    </glossdef>
+    </glossentry>
+  <glossentry id="zmore">
+    <glossterm>zmore</glossterm>
+    <glossdef>
+      <para>Filter for viewing compressed text.</para>
+    </glossdef>
+    </glossentry>
+</glossdiv>
+</glossary>

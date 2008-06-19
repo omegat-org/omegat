@@ -1,0 +1,252 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<chapter id="chap_08">
+<title>Printers and printing</title>
+<abstract>
+<para>In this chapter we will learn more about printers and printing files.  After reading this part, you will be able to:</para>
+<para>
+<itemizedlist>
+<listitem><para>Format documents</para></listitem>
+<listitem><para>Preview documents before sending them to the printer</para></listitem>
+<listitem><para>Choose a good printer that works with your Linux system</para></listitem>
+<listitem><para>Print files and check on printer status</para></listitem>
+<listitem><para>Troubleshoot printing problems</para></listitem>
+<listitem><para>Find necessary documentation to install a printer</para></listitem>
+</itemizedlist>
+</para>
+</abstract>
+<sect1 id="sect_08_01"><title>Printing files</title>
+<sect2 id="sect_08_01_01"><title>Command line printing</title>
+<sect3 id="sect_08_01_01_01"><title>Getting the file to the printer</title>
+<para>Printing from within an application is very easy, selecting the <menuchoice><guimenuitem>Print</guimenuitem></menuchoice> option from the menu.</para>
+<para>From the command<indexterm><primary>printing</primary><secondary>lp/lpr</secondary></indexterm> line, use the <command>lp<indexterm><primary>lp</primary></indexterm></command> or <command>lpr<indexterm><primary>lpr</primary></indexterm></command> command.</para>
+
+<cmdsynopsis><command>lp <filename>file(s)</filename></command></cmdsynopsis>
+<cmdsynopsis><command>lpr <filename>file(s)</filename></command></cmdsynopsis>
+
+<para>These commands can read from a pipe<indexterm><primary>I/O redirection</primary><secondary>printing</secondary></indexterm>, so you can print the output of commands using</para>
+
+<cmdsynopsis><command>command | lp</command></cmdsynopsis>
+
+<para>There are many options available to tune the page layout, the number of copies, the printer that you want to print to if you have more than one available, paper size, one-side or double-sided printing if your printer supports this feature, margins and so on.  Read the man pages for a complete overview.</para>
+</sect3>
+
+<sect3 id="sect_08_01_01_02"><title>Status of your print jobs</title>
+<para>Once the file is accepted in the print<indexterm><primary>printing</primary><secondary>status</secondary></indexterm> queue, an identification number for the print job is assigned:</para>
+
+<screen>
+<prompt>davy:~&gt;</prompt> <command>lp /etc/profile</command>
+request id is blob-253 (1 file(s))
+</screen>
+<para>To view (query) the print queue, use the <command>lpq<indexterm><primary>lpq</primary></indexterm></command> or <command>lpstat<indexterm><primary>lpstat</primary></indexterm></command> command.  When entered without arguments, it displays the contents of the default print queue.</para>
+<screen>
+<prompt>davy:~&gt;</prompt> <command>lpq</command>
+blob is ready and printing
+Rank	Owner	Job	File(s)		Total Size
+active	davy	253	profile		1024 bytes
+<prompt>davy:~&gt;</prompt> <command>lpstat</command>
+blob-253	davy	1024	Tue 25 Jul 2006 10:20_01 AM CEST
+</screen>
+
+</sect3>
+
+<sect3 id="sect_08_01_01_03"><title>Status of your printer</title>
+
+<para>Which is the default printer<indexterm><primary>printing</primary><secondary>status</secondary></indexterm> on a system that has access to multiple printers?</para>
+
+<cmdsynopsis><command>lpstat <option>-d</option></command></cmdsynopsis>
+<screen>
+<prompt>davy:~&gt;</prompt> <command>lpstat <option>-d</option></command>
+system default destination: blob
+</screen>
+<para>What is the status of my printer(s)?</para>
+
+<cmdsynopsis><command>lpstat <option>-p</option></command></cmdsynopsis>
+<screen>
+<prompt>davy:~&gt;</prompt> <command>lpstat <option>-p</option></command>
+printer blob now printing blob-253. enabled since Jan 01 18:01
+</screen>
+
+</sect3>
+
+<sect3 id="sect_08_01_01_04"><title>Removing jobs from the print queue</title>
+<para>If you don't like<indexterm><primary>printing</primary><secondary>remove jobs</secondary></indexterm> what you see from the status commands, use <command>lprm<indexterm><primary>lprm</primary></indexterm></command> or <command>cancel<indexterm><primary>cancel</primary></indexterm></command> to delete jobs.</para>
+
+<screen>
+<prompt>davy:~&gt;</prompt> <command>lprm <parameter>253</parameter></command>
+</screen>
+<para>In the graphical environment, you may see a popup window telling you that the job has been canceled.</para>
+<para>In larger environments, <command>lpc</command> may be used to control multiple printers.  See the <application>Info</application> or man pages on each command.</para>
+
+<para>There are many GUI print tools used as a front-end to <command>lp</command>, and most graphical applications have a print function that uses <command>lp</command>.  See the built-in Help functions and program specific documentation for more.</para>
+<note><title>Why are there two commands for every task related to printing?</title>
+<para>Printing on UNIX and alikes has a long history.  There used to be two rather different approaches: the BSD-style printing and the SystemV-style printing.  For compatibility, Linux with CUPS supports the commands from both styles.  Also note that <command>lp</command> does not behave exactly like <command>lpr</command>, <command>lpq</command> has somewhat different options than <command>lpstat</command> and <command>lprm</command> is almost, but not quite, like <command>cancel</command>.  Which one you use is not important, just pick the commands that you are comfortable with, or that you may know from previous experiences with UNIX-like systems.</para>
+
+</note>
+</sect3>
+</sect2>
+<sect2 id="sect_08_01_02"><title>Formatting</title>
+<sect3 id="sect_08_01_02_01"><title>Tools and languages</title>
+<para>If we want to get something sensible out of the printer, files should be formatted first.  Apart from an abundance of formatting software, Linux comes with the basic UNIX formatting tools and languages.</para>
+<para>Modern Linux systems support direct printing, without any formatting by the user, of a range of file types: text, PDF, PostScript and several image formats like PNG, JPEG, BMP and GIF.</para>
+
+<para>For those file formats that do need formatting, Linux comes with a lot of formatting<indexterm><primary>printing</primary><secondary>formatting tools</secondary></indexterm> tools, such as the <command>pdf2ps</command>, <command>fax2ps</command> and <command>a2ps</command> commands, that convert other formats to PostScript.  These commands can create files that can then be used on other systems that don't have all the conversion tools installed.</para>
+<para>Apart from these command line tools there are a lot of graphical word processing programs.  Several complete office suites are available, many are free.  These do the formatting automatically upon submission of a print job.  Just to name a few: <application>OpenOffice.org</application>, <application>KOffice</application>, <application>AbiWord</application>, <application>WordPerfect</application>, etc.</para>
+
+
+
+<para>The following are common languages<indexterm><primary>printing</primary><secondary>languages overview</secondary></indexterm> in a printing context:</para>
+
+<itemizedlist>
+<listitem><para><command>groff</command>: GNU version<indexterm><primary>groff</primary></indexterm> of the UNIX <command>roff</command> command.  It is a front-end to the groff document formatting system.  Normally it runs the <command>troff</command> command and a post-processor appropriate for the selected device.  It allows generation of PostScript files.</para></listitem>
+<listitem><para><application>TeX</application> and the macro<indexterm><primary>TeX</primary></indexterm> package <application>LaTeX</application>: one of the most widely used markup languages on UNIX systems.  Usually invoked as <command>tex</command>, it formats files and outputs a corresponding device-independent representation of the typeset document.</para>
+<para>Technical works are <emphasis>still</emphasis> frequently written in <application>LaTeX</application> because of its support for mathematic formulas, although efforts are being made at <ulink url="http://www.w3.org">W3C</ulink> (the World Wide Web Consortium) to include this feature in other applications.</para></listitem>
+<listitem><para>SGML<indexterm><primary>SGML</primary></indexterm> and XML<indexterm><primary>XML</primary></indexterm>: Free parsers are available for UNIX and Linux.  XML is the next generation SGML, it forms the basis for DocBook XML, a document system (this book is written in XML, for instance).</para></listitem>
+</itemizedlist>
+
+
+<tip><title>Printing documentation</title>
+<para>The man<indexterm><primary>man pages</primary><secondary>printing</secondary></indexterm> pages contain pre-formatted <command>troff<indexterm><primary>troff</primary></indexterm></command> data which has to be formatted before it can roll out of your printer.  Printing<indexterm><primary>printing</primary><secondary>man pages</secondary></indexterm> is done using the <option>-t</option> option to the <command>man</command> command:</para>
+<cmdsynopsis><command>man <option>-t</option> <parameter>command</parameter> &gt; <filename>man-command.ps</filename></command></cmdsynopsis>
+<para>Then print the PostScript file.  If a default print destination is configured for your system/account, you can just issue the command <command>man <option>-t</option> <parameter>command</parameter></command> to send the formatted page to the printer directly.</para>
+</tip>
+</sect3>
+<sect3 id="sect_08_01_02_02"><title>Previewing formatted files</title>
+<para>Anything that you can send to the printer can normally be sent to the screen as well.  Depending on the file format, you can use one of these commands<indexterm><primary>printing</primary><secondary>preview</secondary></indexterm>:</para>
+<itemizedlist>
+<listitem><para>PostScript files: with the <command>gv<indexterm><primary>gv</primary></indexterm></command> (GhostView) command.</para></listitem>
+<listitem><para>TeX dvi files: with <command>xdvi<indexterm><primary>xdvi</primary></indexterm></command>, or with <application>KDE</application>'s <command>kdvi<indexterm><primary>kdvi</primary></indexterm></command>.</para></listitem>
+<listitem><para>PDF files: <command>xpdf<indexterm><primary>xpdf</primary></indexterm></command>, <command>kpdf<indexterm><primary>kpdf</primary></indexterm></command>, <command>gpdf<indexterm><primary>gpdf</primary></indexterm></command> or Adobe's viewer, <command>acroread<indexterm><primary>acroread</primary></indexterm></command>, which is also available for free but is not free software.  Adobe's reader supports PDF 1.6, the others only support PDF versions up to 1.5.  The version of a PDF file can be determined using the <command>file</command> command.</para></listitem>
+<listitem><para>From within applications, such as Firefox or OpenOffice, you can usually select <menuchoice><guimenu>Print Preview</guimenu></menuchoice> from one of the menus.</para></listitem>
+</itemizedlist>
+</sect3>
+</sect2>
+
+</sect1>
+<sect1 id="sect_08_02"><title>The server side</title>
+<sect2 id="sect_08_02_01"><title>General</title>
+<para>Until a couple of years ago, the choice for Linux users was simple:  everyone ran the same old LPD from BSD's Net-2 code.  Then <application>LPRng</application> became more popular, but nowadays most modern Linux distributions use <ulink url="http://www.cups.org">CUPS</ulink>, the Common UNIX Printing System<indexterm><primary>printing</primary><secondary>CUPS</secondary></indexterm>.  <application>CUPS<indexterm><primary>CUPS</primary></indexterm></application> is an implementation of the Internet Printing Protocol (IPP), an HTTP-like RFC standard replacement protocol for the venerable (and clunky) LPD protocol.  CUPS is distributed under the GNU Public License.  CUPS is also the default print system on MacOS X.</para>
+</sect2>
+<sect2 id="sect_08_02_02"><title>Graphical printer configuration</title>
+<para>Most distributions come with a GUI for configuring networked and local (parallel port or USB) printers.  They let you choose the printer type from a list and allow easy<indexterm><primary>printers</primary><secondary>printer configuration</secondary></indexterm> testing.  You don't have to bother about syntax and location of configuration files.  Check your system documentation before you attempt installing your printer.</para>
+<para>CUPS can also be configured using a web interface that runs on port 631 on your computer.  To check if this feature is enabled, try browsing to <ulink url="localhost:631/help" /> or <ulink url="localhost:631/" />.</para>
+</sect2>
+<sect2 id="sect_08_02_04"><title>Buying a printer for Linux</title>
+<para>As more and more printer vendors make drivers for CUPS available, CUPS will allow easy connection with almost any printer<indexterm><primary>printers</primary><secondary>choosing</secondary></indexterm> that you can plug into a serial, parallel, or USB port, plus any printer on the network.  CUPS will ensure a uniform presentation to you and your applications of all different types of printers.</para>
+<para>Printers that only come with a Win9x driver could be problematic if they have no other support.  Check with <ulink url="http://linuxprinting.org/" /> when in doubt.</para>
+<para>In the past, your best choice would have been a printer with native PostScript support in the firmware, since nearly all UNIX or Linux software producing printable output, produces it in PostScript<indexterm><primary>printers</primary><secondary>PostScript</secondary></indexterm>, the publishing industry's printer control language of choice.  PostScript printers are usually a bit more expensive, but it is a device-independent, open programming language and you're always 100% sure that they will work.  These days, however, the importance of this rule of thumb is dwindling.</para>
+</sect2>
+
+</sect1>
+<sect1 id="sect_08_03"><title>Print problems</title>
+<para>In this section, we will discuss what you can do as a user when something goes wrong.  We won't discuss any problems that have to do with the daemon-part of the printing service, as that is a task for system administrators.</para>
+<sect2 id="sect_08_03_01"><title>Wrong file</title>
+<para>If you print the wrong file, the job may be canceled<indexterm><primary>printing</primary><secondary>troubleshooting</secondary></indexterm> using the command <command>lprm <parameter>jobID</parameter></command>, where jobID is in the form <emphasis>printername-printjobnumber</emphasis> (get it from information displayed by <command>lpq</command> or <command>lpstat</command>).  This will work when other jobs are waiting to be printed in this printer's queue.  However, you have to be really quick if you are the only one using this printer, since jobs are usually spooled and send to the printer in only seconds.  Once they arrive on the printer, it is too late to remove jobs using Linux tools.</para>
+<para>What you can try in those cases, or in cases where the wrong print driver is configured and only rubbish comes out of the printer, is power off the printer.  However, that might not be the best course of action, as you might cause paper jams and other irregularities.</para>
+</sect2>
+<sect2 id="sect_08_03_02">
+<title>My print hasn't come out</title>
+<para>Use the <command>lpq</command> command and see if you can spot your job:</para>
+<screen>
+<prompt>elly:~&gt;</prompt> <command>lpq</command>
+Printer: lp@blob
+ Queue: 2 printable jobs
+ Server: pid 29998 active
+ Unspooler: pid 29999 active
+ Status: waiting for subserver to exit at 09:43:20.699
+ Rank   Owner/ID             Class Job Files          Size Time
+1      elly@blob+997           A   997 (STDIN)         129 09:42:54
+2      elly@blob+22            A    22 /etc/profile    917 09:43:20
+</screen>
+<para>Lots of printers have web interfaces these days, which can display status information by typing the printer's IP address in your web browser:</para>
+<figure><title>Printer Status through web interface</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/brother-webinterface.eps" format="EPS"></imagedata>
+</imageobject>
+<imageobject>
+<imagedata fileref="images/brother-webinterface.png" format="PNG"></imagedata>
+</imageobject>
+<textobject>
+<phrase>This GUI shows printer status using your browser.  There is a trafic light indicating the status, and choices for managing the printer: view config, control panel, printer settings, online support and admin settings.</phrase>
+</textobject>
+</mediaobject>
+</figure>
+
+<note><title>CUPS web interface versus printer web interface</title>
+<para>Note that this is not the CUPS web interface and only works for printers supporting this feature.  Check the documentation of your printer.</para></note>
+
+
+<para>If your job ID is not there and not on the printer, contact your system administrator.  If your job ID is listed in the output, check that the printer is currently printing.  If so, just wait, your job will get done in due time.</para>
+<para>If the printer is not printing, check that it has paper, check the physical connections to both electricity and data network.  If that's okay, the printer may need restarting.  Ask your system admin for advice.</para>
+<para>In the case of a network printer, try printing from another host.  If the printer is reachable from your own host (see <xref linkend="chap_10" /> for the <command>ping</command> utility), you may try to put the formatted file on it, like <filename>file.ps</filename> in case of a PostScript printer, using an FTP client.  If that works, your print system is misconfigured.  If it doesn't work, maybe the printer doesn't understand the format you are feeding it.</para>
+<para>The <ulink url="http://www.linuxprinting.org">GNU/Linux Printing site</ulink> contains more tips and tricks.</para>
+</sect2>
+
+</sect1>
+<sect1 id="sect_08_05"><title>Summary</title>
+<para>The Linux print service comes with a set of printing tools based on the standard UNIX LPD tools, whether it be the SystemV or BSD implementation.  Below is a list of print-related commands.</para>
+<table frame="all"><title>New commands in chapter 8: Printing</title>
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead>
+<row>
+<entry>Command</entry><entry>Meaning</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><command>lpr</command> or <command>lp</command></entry><entry>Print file</entry>
+</row>
+<row>
+<entry><command>lpq</command> or <command>lpstat</command></entry><entry>Query print queue</entry>
+</row>
+<row>
+<entry><command>lprm</command> or <command>cancel</command></entry><entry>Remove print job</entry>
+</row>
+<row>
+<entry><command>acroread</command></entry><entry>PDF viewer</entry>
+</row>
+<row>
+<entry><command>groff</command></entry><entry>Formatting tool</entry>
+</row>
+<row>
+<entry><command>gv</command></entry><entry>PostScript viewer</entry>
+</row>
+<row>
+<entry><command>printconf</command></entry><entry>Configure printers</entry>
+</row>
+<row>
+<entry><command>xdvi</command></entry><entry>DVI viewer</entry>
+</row>
+<row>
+<entry><command>xpdf</command></entry><entry>PDF viewer</entry>
+</row>
+<row>
+<entry><command>*2ps</command></entry><entry>Convert file to PostScript</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+<sect1 id="sect_08_06"><title>Exercises</title>
+<para>Configuring and testing printers involves being in the possession of one, and having access to the <emphasis>root</emphasis> account.  If so, you may try:</para>
+<itemizedlist>
+<listitem><para>Installing the printer using the GUI on your system.</para></listitem>
+<listitem><para>Printing a test page using the GUI.</para></listitem>
+<listitem><para>Printing a test page using the <command>lp</command> command.</para></listitem>
+<listitem><para>Print from within an application, for example Mozilla or OpenOffice, by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Print</guimenuitem></menuchoice> from the menu.</para></listitem>
+<listitem><para>Disconnect the printer from the network or the local machine/print-server.  What happens when you try to print something?</para></listitem>
+</itemizedlist>
+<para>The following exercises can be done without printer or root access.</para>
+<itemizedlist>
+<listitem><para>Try to make PostScript files from different source files, (e.g. HTML, PDF, man pages).  Test the results with the <command>gv</command> viewer.</para></listitem>
+<listitem><para>Check that the print daemon is running.</para></listitem>
+<listitem><para>Print the files anyway.  What happens?</para></listitem>
+<listitem><para>Make a PostScript file using Mozilla.  Test it with <command>gv</command>.</para></listitem>
+<listitem><para>Convert it to PDF format.  Test with <command>xpdf</command>.</para></listitem>
+<listitem><para>How would you go about printing a GIF file from the command line?</para></listitem>
+<listitem><para>Use <command>a2ps</command> to print the <filename>/etc/profile</filename> file to an output file.  Test again with <command>gv</command>.  What happens if you don't specify an output file?</para></listitem>
+</itemizedlist>
+
+</sect1>
+</chapter>

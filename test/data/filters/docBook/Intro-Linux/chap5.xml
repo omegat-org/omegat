@@ -1,0 +1,333 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<chapter id="chap_05">
+<title>I/O redirection</title>
+<abstract>
+<para>This chapter describes more about the powerful UNIX mechanism of redirecting input, output and errors.  Topics include:</para>
+<para>
+<itemizedlist>
+<listitem><para>Standard input, output and errors</para></listitem>
+<listitem><para>Redirection operators</para></listitem>
+<listitem><para>How to use output of one command as input for another</para></listitem>
+<listitem><para>How to put output of a command in a file for later referrence</para></listitem>
+<listitem><para>How to append output of multiple commands to a file</para></listitem>
+<listitem><para>Input redirection</para></listitem>
+<listitem><para>Handling standard error messages</para></listitem>
+<listitem><para>Combining redirection of input, output and error streams</para></listitem>
+<listitem><para>Output filters</para></listitem>
+
+</itemizedlist>
+</para>
+</abstract>
+<sect1 id="sect_05_01"><title>Simple redirections</title>
+<sect2 id="sect_05_01_01"><title>What are standard input and standard output?</title>
+<para>
+Most Linux commands read input<indexterm><primary>input</primary><secondary>default input</secondary></indexterm>, such as a file or another attribute for the command, and write output.  By default, input is being given with the keyboard, and output<indexterm><primary>output</primary><secondary>default output</secondary></indexterm> is displayed on your screen.  Your keyboard is your<indexterm><primary>input</primary><secondary>standard input</secondary></indexterm> <emphasis>standard input</emphasis> (stdin<indexterm><primary>stdin</primary></indexterm>) device, and the screen or a particular terminal window is the <emphasis>standard output<indexterm><primary>output</primary><secondary>standard output</secondary></indexterm></emphasis> (stdout<indexterm><primary>stdout</primary></indexterm>) device.
+</para>
+<para>However, since Linux is a flexible system, these default settings don't necessarily have to be applied.  The standard output, for example, on a heavily monitored server in a large environment may be a printer.</para>
+</sect2>
+<sect2 id="sect_05_01_02"><title>The redirection operators</title>
+<sect3 id="sect_05_01_02_01"><title>Output redirection with &gt; and |</title>
+<para>Sometimes you will want to put output<indexterm><primary>output</primary><secondary>redirection with &gt;</secondary></indexterm> of a command in a file, or you may want to issue another command on the output of one command.  This is known as redirecting output.  Redirection is done using either the <quote>&gt;</quote> (greater-than symbol<indexterm><primary>greater-than</primary></indexterm>), or using the <quote>|</quote> (pipe<indexterm><primary>pipe</primary></indexterm>) operator which sends the standard output of one command to another command<indexterm><primary>output</primary><secondary>redirection with |</secondary></indexterm> as standard input.</para>
+<para>As we saw before, the <command>cat</command> command concatenates files and puts them all together to the standard output.  By redirecting this output to a file, this file name<indexterm><primary>I/O redirection</primary><secondary>saving output in a file</secondary></indexterm> will be created - or overwritten if it already exists, so take care.</para>
+<screen>
+<prompt>nancy:~&gt;</prompt> <command>cat test1</command>
+some words
+
+<prompt>nancy:~&gt;</prompt> <command>cat test2</command>
+some other words
+
+<prompt>nancy:~&gt;</prompt> <command>cat test1 test2 &gt; test3</command>
+
+<prompt>nancy:~&gt;</prompt> <command>cat test3</command>
+some words
+some other words
+</screen>
+
+<warning><title>Don't overwrite!</title>
+<para>Be careful not to overwrite existing (important) files when redirecting output.  Many shells, including <application>Bash</application>, have a built-in feature to protect you from that risk: <command>noclobber<indexterm><primary>Bash</primary><secondary>noclobber</secondary></indexterm></command>.  See the <application>Info</application> pages for more information.  In <application>Bash</application>, you would want to add the <command>set <option>-o</option> <parameter>noclobber<indexterm><primary>noclobber</primary></indexterm></parameter></command> command to your <filename>.bashrc<indexterm><primary>.bashrc</primary></indexterm></filename> configuration file in order to prevent<indexterm><primary>I/O redirection</primary><secondary>prevent overwrite</secondary></indexterm> accidental overwriting of files.</para></warning>
+
+
+<para>Redirecting <quote>nothing</quote> to an existing file is equal to emptying the file<indexterm><primary>I/O redirection</primary><secondary>emptying files</secondary></indexterm>:</para>
+<screen>
+<prompt>nancy:~&gt;</prompt> <command>ls -l list</command>
+-rw-rw-r--    1 nancy   nancy     117 Apr  2 18:09 list
+
+<prompt>nancy:~&gt;</prompt> <command>&gt; list</command>
+
+<prompt>nancy:~&gt;</prompt> <command>ls -l list</command>
+-rw-rw-r--    1 nancy   nancy       0 Apr  4 12:01 list
+</screen>
+<para>This process is called <emphasis>truncating<indexterm><primary>truncating</primary></indexterm></emphasis>.</para>
+<para>The same redirection to an nonexistent file will create a new empty file with the given name:</para>
+<screen>
+<prompt>nancy:~&gt;</prompt> <command>ls -l newlist</command>
+ls: newlist: No such file or directory
+
+<prompt>nancy:~&gt;</prompt> <command>&gt; newlist</command>
+
+<prompt>nancy:~&gt;</prompt> <command>ls -l newlist</command>
+-rw-rw-r--  1 nancy   nancy	    0 Apr  4 12:05 newlist
+</screen>
+<para><xref linkend="chap_07" /> gives some more examples on the use of this sort of redirection.</para>
+<para>Some examples using piping<indexterm><primary>piping</primary><secondary>examples</secondary></indexterm> of commands:</para>
+<para>To find a word within some text, display all lines matching <quote>pattern1</quote>, and exclude lines also matching <quote>pattern2</quote> from being displayed:</para>
+<cmdsynopsis><command>grep <parameter>pattern1</parameter> <filename>file</filename> | grep <option>-v</option> <parameter>pattern2</parameter></command></cmdsynopsis>
+<para>To display output of a directory listing one page at a time:</para>
+<cmdsynopsis><command>ls <option>-la</option> | less</command></cmdsynopsis>
+<para>To find a file in a directory:</para>
+<cmdsynopsis><command>ls <option>-l</option> | grep <parameter>part_of_file_name</parameter></command></cmdsynopsis>
+</sect3>
+<sect3 id="sect_05_01_02_02"><title>Input redirection</title>
+<para>In another case, you may want a file to be the input<indexterm><primary>input</primary><secondary>redirection</secondary></indexterm> for a command that normally wouldn't accept a file as an option.  This redirecting of input is done using the <quote>&lt;</quote> (less-than<indexterm><primary>less-than</primary></indexterm> symbol) operator.</para>
+<para>Below is an example of sending a file to somebody, using input redirection.</para>
+<screen>
+<prompt>andy:~&gt;</prompt> <command>mail mike@somewhere.org &lt; to_do</command>
+</screen>
+<para>If the user <emphasis>mike</emphasis> exists on the system, you don't need to type the full address.  If you want to reach somebody on the Internet, enter the fully qualified address as an argument to <command>mail</command>.</para>
+<para>This reads a bit more difficult than the beginner's <command>cat <filename>file</filename> | mail <parameter>someone</parameter></command>, but it is of course a much more elegant way of using the available tools.</para>
+</sect3>
+<sect3 id="sect_05_01_02_03"><title>Combining redirections</title>
+<para>The following example combines input and output redirection.  The file <filename>text.txt</filename> is first checked for spelling mistakes, and the output is redirected to an error log<indexterm><primary>I/O redirection</primary><secondary>combining</secondary></indexterm> file:</para>
+<para><command>spell &lt; <filename>text.txt</filename> &gt; <filename>error.log</filename></command></para>
+<para>The following command lists all commands that you can issue to examine another file when using <command>less</command>:</para>
+<screen>
+<prompt>mike:~&gt;</prompt> <command>less --help | grep -i examine</command>
+  :e [file]      Examine a new file.
+  :n          *  Examine the (N-th) next file from the command line.
+  :p          *  Examine the (N-th) previous file from the command line.
+  :x          *  Examine the first (or N-th) file from the command line.
+</screen>
+<para>The <option>-i</option> option is used for case-insensitive searches - remember that UNIX systems are very case-sensitive.</para>
+<para>If you want to save output of this command for future reference, redirect the output to a file:</para>
+<screen>
+<prompt>mike:~&gt;</prompt> <command>less --help | grep -i examine &gt; examine-files-in-less</command>
+
+<prompt>mike:~&gt;</prompt> <command>cat examine-files-in-less</command>
+  :e [file]      Examine a new file.
+  :n          *  Examine the (N-th) next file from the command line.
+  :p          *  Examine the (N-th) previous file from the command line.
+  :x          *  Examine the first (or N-th) file from the command line.
+</screen>
+<para>Output of one command can be piped into another command virtually as many times as you want, just as long as these commands would normally read input from standard input and write output to the standard output.  Sometimes they don't, but then there may be special options that instruct these commands to behave according to the standard definitions; so read the documentation (man and <application>Info</application> pages) of the commands you use if you should encounter errors.</para>
+<para>Again, make sure you don't use names of existing files that you still need.  Redirecting output to existing files will replace the content of those files.</para>
+
+</sect3>
+
+
+<sect3 id="sect_05_01_02_04"><title>The &gt;&gt; operator</title>
+<para>Instead of overwriting file data, you can also append text to an existing file using two subsequent<indexterm><primary>I/O redirection</primary><secondary>append output</secondary></indexterm> greater-than signs:</para>
+<para>Example:</para>
+<screen>
+<prompt>mike:~&gt;</prompt> <command>cat <filename>wishlist</filename></command>
+more money
+less work
+
+<prompt>mike:~&gt;</prompt> <command>date &gt;&gt; <filename>wishlist</filename></command>
+
+<prompt>mike:~&gt;</prompt> <command>cat <filename>wishlist</filename></command>
+more money
+less work
+Thu Feb 28 20:23:07 CET 2002
+</screen>
+<para>The <command>date</command> command would normally put the last line on the screen; now it is appended to the file <filename>wishlist</filename>.
+</para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="sect_05_02"><title>Advanced redirection features</title>
+<sect2 id="sect_05_02_01"><title>Use of file descriptors</title> 
+<para>There are three types of I/O, which each have their own identifier, called a file descriptor<indexterm><primary>file descriptors</primary><secondary>overview</secondary></indexterm>:</para>
+<itemizedlist>
+<listitem><para>standard input: 0</para></listitem>
+<listitem><para>standard output: 1</para></listitem>
+<listitem><para>standard error<indexterm><primary>standard error</primary></indexterm>: 2</para></listitem>
+</itemizedlist>
+
+<para>In the following descriptions, if the file descriptor number is omitted, and the first character of the redirection operator is &lt;, the redirection refers to the standard input (file descriptor 0).  If the first character of the redirection operator is &gt;, the redirection refers to the standard output (file descriptor 1).</para>
+
+<para>Some practical examples will make this more<indexterm><primary>file descriptors</primary><secondary>examples</secondary></indexterm> clear:</para>
+<cmdsynopsis><command>ls &gt; <filename>dirlist</filename> 2&gt;&amp;1</command></cmdsynopsis>
+<para>will direct both standard output and standard error to the file <filename>dirlist</filename>, while the command</para>
+<cmdsynopsis><command>ls 2&gt;&amp;1 &gt; <filename>dirlist</filename></command></cmdsynopsis> 
+<para>will only direct standard output to <filename>dirlist</filename>.  This can be a useful option for programmers.</para>
+
+<para>Things are getting quite complicated here, don't confuse the use of the ampersand here with the use of it in <xref linkend="sect_04_01_02_01" />, where the ampersand is used to run a process in the background.  Here, it merely serves as an indication that the number that follows is not a file name, but rather a location that the data stream is pointed to.  Also note that the bigger-than sign should not be separated by spaces from the number of the file descriptor.  If it would be separated, we would be pointing the output to a file again.  The example below demonstrates this:</para>
+<screen>
+<prompt>[nancy@asus /var/tmp]$ </prompt><command>ls 2> <filename>tmp</filename></command>
+
+<prompt>[nancy@asus /var/tmp]$ </prompt><command>ls -l <filename>tmp</filename></command>
+-rw-rw-r--  1 nancy nancy 0 Sept  7 12:58 tmp
+
+<prompt>[nancy@asus /var/tmp]$ </prompt><command>ls 2 > <filename>tmp</filename></command>
+ls: 2: No such file or directory
+</screen>
+<para>The first command that <emphasis>nancy</emphasis> executes is correct (eventhough no errors are generated and thus the file to which standard error is redirected is empty).  The second command expects that <filename>2</filename> is a file name, which does not exist in this case, so an error is displayed.</para>
+<para>All these features are explained in detail in the Bash Info pages.</para>
+</sect2>
+<sect2 id="sect_05_02_02"><title>Examples</title>
+<sect3 id="sect_05_02_02_01"><title>Analyzing errors</title>
+<para>If your process generates a lot of errors, this is a way to thoroughly examine them<indexterm><primary>file descriptors</primary><secondary>examples</secondary></indexterm>:</para>
+<cmdsynopsis><command>command 2&gt;&amp;1 | less</command></cmdsynopsis>
+<para>This is often used when creating new software using the <command>make</command> command, such as in:</para>
+<screen>
+<prompt>andy:~/newsoft&gt;</prompt> <command>make all 2&gt;&amp;1 | less</command>
+--output ommitted--
+</screen>
+</sect3>
+<sect3 id="sect_05_02_02_02"><title>Separating standard output from standard error</title>
+<para>Constructs<indexterm><primary>I/O redirection</primary><secondary>splitting stdout and stderr</secondary></indexterm> like these are often used by programmers, so that output is displayed in one terminal window, and errors in another.  Find out which pseudo terminal you are using issuing the <command>tty</command> command first:</para>
+<screen>
+<prompt>andy:~/newsoft&gt;</prompt> <command>make all 2&gt; /dev/pts/7</command>
+</screen>
+</sect3>
+
+<sect3 id="sect_05_02_02_03"><title>Writing to output and files simultaneously</title>
+<para>You can use the <command>tee<indexterm><primary>tee</primary></indexterm></command> command to copy input to standard<indexterm><primary>I/O redirection</primary><secondary>write to stdout and file</secondary></indexterm> output and one or more output files in one move.  Using the <option>-a</option> option to <command>tee</command> results in appending input to the file(s).  This command is useful if you want to both see and save output.  The <command>&gt;</command> and <command>&gt;&gt;</command> operators do not allow to perform both actions simultaneously.</para>
+<para>This tool is usually called on through a pipe (<command>|</command>), as demonstrated in the example below:</para>
+<screen>
+<prompt>mireille ~/test&gt;</prompt> <command>date | tee <filename>file1 file2</filename></command>
+Thu Jun 10 11:10:34 CEST 2004
+
+<prompt>mireille ~/test&gt;</prompt> <command>cat <filename>file1</filename></command>
+Thu Jun 10 11:10:34 CEST 2004
+
+<prompt>mireille ~/test&gt;</prompt> <command>cat <filename>file2</filename></command>
+Thu Jun 10 11:10:34 CEST 2004
+
+<prompt>mireille ~/test&gt;</prompt> <command>uptime | tee <option>-a</option> <filename>file2</filename></command>
+ 11:10:51 up 21 days, 21:21, 57 users,  load average: 0.04, 0.16, 0.26
+
+<prompt>mireille ~/test&gt;</prompt> <command>cat <filename>file2</filename></command>
+Thu Jun 10 11:10:34 CEST 2004
+ 11:10:51 up 21 days, 21:21, 57 users,  load average: 0.04, 0.16, 0.26
+</screen>
+
+
+</sect3>
+
+</sect2>
+</sect1>
+<sect1 id="sect_05_03">
+<title>Filters</title>
+<para>When a program performs operations on input and writes the result to the standard output, it is called a filter.  One of the most common uses of filters is to restructure output.  We'll discuss a couple of the most important filters below.</para>
+<sect2 id="sect_05_03_01"><title>More about grep</title>
+<para>As we saw in <xref linkend="sect_03_03_03_04" />, <command>grep<indexterm><primary>grep</primary><secondary>I/O redirection</secondary></indexterm></command> scans the output line per line, searching for matching patterns.  All lines containing the pattern will be printed to standard output.  This behavior can be reversed using the <option>-v</option> option.
+</para>
+<para>Some examples: suppose we want to know which files in a certain directory have been modified<indexterm><primary>filtering</primary><secondary>grep</secondary></indexterm> in February:</para>
+<screen>
+<prompt>jenny:~&gt;</prompt> <command>ls -la | grep Feb</command>
+</screen>
+<para>The <command>grep</command> command, like most commands, is case sensitive. Use the <option>-i</option> option to make no difference between upper and lower case.  A lot of GNU extensions are available as well, such as <option>--colour</option>, which is helpful to highlight searchterms in long lines, and <option>--after-context</option>, which prints the number of lines after the last matching line.  You can issue a recursive <command>grep</command> that searches all subdirectories of encountered directories using the <option>-r</option> option.  As usual, options can be combined.</para>
+<para>Regular expressions<indexterm><primary>regular expressions</primary><secondary>getting started</secondary></indexterm> can be used to further detail the exact character matches you want to select out of all the input lines.  The best way to start with regular expressions is indeed to read the <command>grep</command> documentation.  An excellent chapter is included in the <command>grep</command> <application>Info</application> page.  Since it would lead us too far discussing the ins and outs of regular expressions, it is strongly advised to start here if you want to know more about them.</para>
+<para>Play around a bit with <command>grep</command>, it will be worth the trouble putting some time in this most basic but very powerful filtering command.  The exercises at the end of this chapter will help you to get started, see <xref linkend="sect_05_05" />.</para>
+</sect2>
+<sect2 id="sect_05_03_02"><title>Filtering output</title>
+<para>The command <command>sort<indexterm><primary>sort</primary></indexterm></command> arranges lines in alphabetical<indexterm><primary>filtering</primary><secondary>sort</secondary></indexterm> order by default:</para>
+<screen>
+<prompt>thomas:~&gt;</prompt> <command>cat people-I-like | sort</command>
+Auntie Emmy
+Boyfriend
+Dad
+Grandma
+Mum
+My boss
+</screen>
+<para>But there are many more things <command>sort</command> can do.  Looking at the file size, for instance.  With this command, directory content is sorted smallest files<indexterm><primary>files</primary><secondary>size</secondary></indexterm> first, biggest<indexterm><primary>sort</primary><secondary>file size</secondary></indexterm> files last:</para>
+<cmdsynopsis><command>ls <option>-la</option> | sort <option>-nk</option> <parameter>5</parameter></command></cmdsynopsis>
+<note><title>Old sort syntax</title>
+<para>You might obtain the same result with <command>ls <option>-la</option> | sort <option>+4n</option></command>, but this is an old form which does not comply with the current standards.</para></note>
+<para>The <command>sort</command> command is also used in combination with the <command>uniq</command> program (or <command>sort <option>-u</option></command>) to sort output and filter out double<indexterm><primary>sort</primary><secondary>unique</secondary></indexterm> entries:</para>
+<screen>
+<prompt>thomas:~> </prompt><command>cat <filename>itemlist</filename></command>
+1
+4
+2
+5
+34
+567
+432
+567
+34
+555
+
+<prompt>thomas:~> </prompt><command>sort <filename>itemlist</filename> | uniq</command>
+1
+2
+34
+4
+432
+5
+555
+567
+</screen>
+</sect2>
+</sect1>
+<sect1 id="sect_05_04"><title>Summary</title>
+<para>In this chapter we learned how commands can be linked to each other, and how input from one command can be used as output for another command.</para>
+<para>Input/output redirection is a common task on UNIX and Linux machines.  This powerful mechanism allows flexible use of the building blocks UNIX is made of.</para>
+<para>The most commonly used redirections are <command>&gt;</command> and <command>|</command>.  Refer to <xref linkend="app3" /> for an overview of redirection commands and other shell constructs.</para>
+<table frame="all">
+<title>New commands in chapter 5: I/O redirection</title>
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead>
+<row>
+<entry>Command</entry><entry>Meaning</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><command>date</command></entry><entry>Display time and date information.</entry>
+</row>
+<row>
+<entry><command>set</command></entry><entry>Configure shell options.</entry>
+</row>
+<row>
+<entry><command>sort</command></entry><entry>Sort lines of text.</entry>
+</row>
+<row>
+<entry><command>uniq</command></entry><entry>Remove duplicate lines from a sorted file.</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect1>
+<sect1 id="sect_05_05"><title>Exercises</title>
+<para>These exercises give more examples on how to combine commands.  The main goal is to try and use the <keycap>Enter</keycap> key as little as possible.</para>
+<para>All exercises are done using a normal user ID, so as to generate some errors.  While you're at it, don't forget to read those man pages!</para>
+<itemizedlist>
+<listitem><para>Use the <command>cut</command> command on the output of a long directory listing in order to display only the file permissions.  Then pipe this output to <command>sort</command> and <command>uniq</command> to filter out any double lines.  Then use the <command>wc</command> to count the different permission types in this directory.</para></listitem>
+<listitem><para>Put the output of <command>date</command> in a file.  Append the output of <command>ls</command> to this file.  Send this file to your local mailbox (don't specify anything <email>@domain</email>, just the user name will do).  When using Bash, you will see a new mail notice upon success.</para></listitem>
+<listitem><para>List the devices in <filename>/dev</filename> which are currently used by your UID.  Pipe through <command>less</command> to view them properly.</para></listitem>
+<listitem><para>Issue the following commands as a non-privileged user.  Determine standard input, output and error for each command.</para>
+<itemizedlist>
+<listitem><para><cmdsynopsis><command>cat <filename>nonexistentfile</filename></command></cmdsynopsis></para></listitem>
+<listitem><para><cmdsynopsis><command>file <filename>/sbin/ifconfig</filename></command></cmdsynopsis></para></listitem>
+<listitem><para><cmdsynopsis><command>grep <parameter>root</parameter> <filename>/etc/passwd /etc/nofiles</filename> &gt; <filename>grepresults</filename></command></cmdsynopsis></para></listitem>
+<listitem><para><cmdsynopsis><command>/etc/init.d/sshd <parameter>start</parameter> &gt; <filename>/var/tmp/output</filename></command></cmdsynopsis></para></listitem>
+<listitem><para><cmdsynopsis><command>/etc/init.d/crond <parameter>start</parameter> &gt; <filename>/var/tmp/output</filename> 2&gt;&amp;1</command></cmdsynopsis></para></listitem>
+<para>Now check your results by issuing the commands again, now redirecting standardoutput to the file <filename>/var/tmp/output</filename> and standard error to the file <filename>/var/tmp/error</filename>.</para>
+</itemizedlist>
+
+</listitem>
+<listitem><para>How many processes are you currently running?</para></listitem>
+<listitem><para>How many invisible files are in your home directory?</para></listitem>
+<listitem><para>Use <command>locate</command> to find documentation about the kernel.</para></listitem>
+<listitem><para>Find out which file contains the following entry:</para>
+<screen>
+root:x:0:0:root:/root:/bin/bash
+</screen>
+<para>And this one:</para>
+<screen>
+system:		root
+</screen></listitem>
+<listitem><para>See what happens upon issuing this command:</para>
+<cmdsynopsis><command>&gt; time; date &gt;&gt; time; cat &lt; time</command></cmdsynopsis>
+</listitem>
+<listitem><para>What command would you use to check which script in <filename>/etc/init.d</filename> starts a given process?</para></listitem>
+</itemizedlist>
+
+</sect1>
+
+
+</chapter>

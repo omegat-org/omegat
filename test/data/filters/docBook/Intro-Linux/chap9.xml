@@ -1,0 +1,485 @@
+<?xml version ='1.0' encoding='UTF-8'?>
+<chapter id="chap_09">
+<title>Fundamental Backup Techniques</title>
+<abstract><para>Accidents will happen sooner or later.  In this chapter, we'll discuss how to get data to a safe place using other hosts, floppy disks, CD-ROMs and tapes.  We will also discuss the most popular compressing and archiving commands.</para>
+<para>Upon completion of this chapter, you will know how to:</para>
+<para>
+<itemizedlist>
+<listitem><para>Make, query and unpack file archives</para></listitem>
+<listitem><para>Handle floppy disks and make a boot disk for your system</para></listitem>
+<listitem><para>Write CD-ROMs</para></listitem>
+<listitem><para>Make incremental backups</para></listitem>
+<listitem><para>Create Java archives</para></listitem>
+<listitem><para>Find documentation to use other backup devices and programs</para></listitem>
+<listitem><para>Encrypt your data</para></listitem>
+</itemizedlist>
+</para>
+
+</abstract>
+
+<sect1 id="sect_09_01"><title>Introduction</title>
+<para>Although Linux is one of the safest operating systems in existence, and even if it is designed to keep on going, data can get lost.  Data loss is most often the consequence of user errors, but occasionally a system fault, such as a power or disk failure, is the cause, so it's always a good idea to keep an extra copy of sensitive and/or important data.</para>
+<sect2 id="sect_09_01_01"><title>Preparing your data</title>
+<sect3 id="sect_09_01_01_01"><title>Archiving with tar</title>
+<para>In most cases, we will first collect all the data to back up in a single archive file, which we will compress later on.  The process of archiving<indexterm><primary>archiving</primary><secondary>tools</secondary></indexterm> involves concatenating all listed files and taking out unnecessary blanks.  In Linux, this is commonly done with the <command>tar<indexterm><primary>tar</primary></indexterm></command> command.  <command>tar</command> was originally designed to archive<indexterm><primary>backups</primary><secondary>tar</secondary></indexterm> data on tapes, but it can also make archives, known as <emphasis>tarballs<indexterm><primary>tarballs</primary></indexterm></emphasis>.</para>
+<para><command>tar</command> has many options<indexterm><primary>tar</primary><secondary>options</secondary></indexterm>, the most important ones are cited below:</para>
+<itemizedlist>
+<listitem><para><option>-v</option>: verbose</para></listitem>
+<listitem><para><option>-t</option>: test, shows content of a tarball</para></listitem>
+<listitem><para><option>-x</option>: extract archive</para></listitem>
+<listitem><para><option>-c</option>: create archive</para></listitem>
+<listitem><para><option>-f</option> <filename>archivedevice</filename>: use <filename>archivedevice</filename> as source/destination for the tarball, the device defaults to the first tape device (usually <filename>/dev/st0</filename> or something similar)</para></listitem>
+<listitem><para><option>-j</option>: filter through <command>bzip2</command>, see <xref linkend="sect_09_01_01_02" /></para></listitem>
+</itemizedlist>
+<para>It is common to leave out the dash-prefix with <command>tar</command> options, as you can see from the examples below.</para>
+<note><title>Use GNU tar for compatibility</title>
+<para>The archives<indexterm><primary>tar</primary><secondary>GNU tar</secondary></indexterm> made with a proprietary <command>tar</command> version on one system, may be incompatible with <command>tar</command> on another proprietary system.  This may cause much headaches, such as if the archive needs to be recovered on a system that doesn't exist anymore.  Use the GNU <command>tar</command> version on all systems to prevent your system admin from bursting into tears.  Linux always uses GNU tar.  When working on other UNIX machines, enter <command>tar <option>--help</option></command> to find out which version you are using.  Contact your system admin if you don't see the word GNU somewhere.</para></note>
+<para>In the example below, an archive is created<indexterm><primary>tar</primary><secondary>example</secondary></indexterm> and unpacked.</para>
+<screen>
+<prompt>gaby:~&gt;</prompt> <command>ls images/</command>
+me+tux.jpg  nimf.jpg
+
+<prompt>gaby:~&gt;</prompt> <command>tar cvf images-in-a-dir.tar images/</command>
+images/
+images/nimf.jpg
+images/me+tux.jpg
+
+<prompt>gaby:~&gt;</prompt> <command>cd images</command>
+
+<prompt>gaby:~/images&gt;</prompt> <command>tar cvf images-without-a-dir.tar *.jpg</command>
+me+tux.jpg
+nimf.jpg
+
+<prompt>gaby:~/images&gt;</prompt> <command>cd</command>
+
+<prompt>gaby:~&gt;</prompt> <command>ls */*.tar</command>
+images/images-without-a-dir.tar
+
+<prompt>gaby:~&gt;</prompt> <command>ls *.tar</command>
+images-in-a-dir.tar 
+
+<prompt>gaby:~&gt;</prompt> <command>tar xvf images-in-a-dir.tar </command>
+images/
+images/nimf.jpg
+images/me+tux.jpg
+
+<prompt>gaby:~&gt;</prompt> <command>tar tvf images/images-without-dir.tar </command>
+-rw-r--r-- gaby/gaby  42888 1999-06-30 20:52:25 me+tux.jpg
+-rw-r--r-- gaby/gaby   7578 2000-01-26 12:58:46 nimf.jpg
+
+<prompt>gaby:~&gt;</prompt> <command>tar xvf images/images-without-a-dir.tar </command>
+me+tux.jpg
+nimf.jpg
+
+<prompt>gaby:~&gt;</prompt> <command>ls *.jpg</command>
+me+tux.jpg  nimf.jpg
+</screen>
+<para>This example also illustrates the difference between a tarred directory and a bunch of tarred files.  It is advisable to only compress directories, so files don't get spread all over when unpacking the tarball (which may be on another system, where you may not know which files were already there and which are the ones from the archive).</para>
+<para>When a tape drive is connected to your machine and configured by your system administrator, the file names ending in <filename>.tar</filename> are replaced with the tape<indexterm><primary>backups</primary><secondary>tape device</secondary></indexterm> device name, for example:</para>
+<para><command>tar <option>cvf</option> <filename>/dev/tape</filename> <filename>mail/</filename></command></para>
+<para>The directory <filename>mail</filename> and all the files it contains are compressed into a file that is written on the tape immediately.  A content listing is displayed because we used the verbose option.</para>
+</sect3>
+<sect3 id="sect_09_01_01_02"><title>Incremental backups with tar</title>
+<para>The <command>tar</command> tool supports the creation of incremental<indexterm><primary>tar</primary><secondary>incremental backups</secondary></indexterm> backups, using the <option>-N</option> option.  With this option, you can specify a date, and <command>tar</command> will check modification time of all specified files against this date.  If files are changed more recent than date, they will be included in the backup.  The example below uses the timestamp on a previous archive as the date value.  First, the initial archive is created and the timestamp on the initial backup file is shown.  Then a new file is created, upon which we take a new backup, containing only this new file:</para>
+<screen>
+<prompt>jimmy:~&gt;</prompt> <command>tar cvpf /var/tmp/javaproggies.tar java/*.java</command>
+java/btw.java
+java/error.java
+java/hello.java
+java/income2.java
+java/income.java
+java/inputdevice.java
+java/input.java
+java/master.java
+java/method1.java
+java/mood.java
+java/moodywaitress.java
+java/test3.java
+java/TestOne.java
+java/TestTwo.java
+java/Vehicle.java
+
+<prompt>jimmy:~&gt;</prompt> <command>ls -l /var/tmp/javaproggies.tar</command>
+-rw-rw-r-- 1 jimmy   jimmy   10240 Jan 21 11:58 /var/tmp/javaproggies.tar
+
+<prompt>jimmy:~&gt;</prompt> <command>touch java/newprog.java</command>
+
+<prompt>jimmy:~&gt;</prompt> <command>tar -N /var/tmp/javaproggies.tar \
+-cvp /var/tmp/incremental1-javaproggies.tar java/*.java 2&gt; /dev/null</command>
+java/newprog.java
+
+<prompt>jimmy:~&gt;</prompt> <command>cd /var/tmp/</command>
+
+<prompt>jimmy:~&gt;</prompt> <command>tar xvf incremental1-javaproggies.tar</command>
+java/newprog.java
+</screen>
+<para>Standard errors are redirected to <filename>/dev/null</filename>.  If you don't do this, <command>tar</command> will print a message for each unchanged file, telling you it won't be dumped.</para> 
+<para>This way of working has the disadvantage that it looks at timestamps on files.  Say that you download an archive into the directory containing your backups, and the archive contains files that have been created two years ago.  When checking the timestamps of those files against the timestamp on the initial archive, the new files will actually seem old to <command>tar</command>, and will not be included in an incremental backup made using the <option>-N</option> option.</para>
+<para>A better choice would be the <option>-g</option> option, which will create a list of files to backup.  When making incremental backups, files are checked against this list.  This is how it works:</para>
+<screen>
+<prompt>jimmy:~&gt;</prompt> <command>tar cvpf work-20030121.tar -g snapshot-20030121 work/</command>
+work/
+work/file1
+work/file2
+work/file3
+
+<prompt>jimmy:~&gt;</prompt> <command>file snapshot-20030121</command>
+snapshot-20030121: ASCII text
+</screen>
+<para>The next day, user <emphasis>jimmy</emphasis> works on <filename>file3</filename> a bit more, and creates <filename>file4</filename>.  At the end of the day, he makes a new backup:</para>
+<screen>
+<prompt>jimmy:~&gt;</prompt> <command>tar cvpf work-20030122.tar -g snapshot-20030121 work/</command>
+work/
+work/file3
+work/file4
+</screen>
+<para>These are some very simple examples, but you could also use this kind of command in a cronjob (see <xref linkend="sect_04_04_04" />), which specifies for instance a snapshot file for the weekly backup and one for the daily backup.  Snapshot files should be replaced when taking full backups, in that case.</para>
+<para>More information can be found in the <command>tar</command> documentation.</para>
+<tip><title>The real stuff</title>
+<para>As you could probably notice, <command>tar</command> is OK when we are talking about a simple directory, a set of files that belongs together.  There are tools that are easier to manage, however, when you want to archive entire partitions or disks or larger projects.  We just explain about <command>tar</command> here because it is a very popular tool for distributing archives.  It will happen quite often that you need to install a software that comes in a so-called <quote>compressed tarball</quote>.  See <xref linkend="sect_09_03" /> for an easier way to perform regular backups.</para>
+</tip>
+</sect3>
+<sect3 id="sect_09_01_01_03"><title>Compressing and unpacking with <command>gzip</command> or <command>bzip2</command></title>
+<para>
+Data, including tarballs, can be compressed<indexterm><primary>files</primary><secondary>compressing</secondary></indexterm> using zip tools.  The <command>gzip<indexterm><primary>gzip</primary></indexterm></command> command will add the suffix .gz to the file name and remove the original file.
+</para>
+<screen>
+<prompt>jimmy:~&gt;</prompt> <command>ls -la | grep tar</command>
+-rw-rw-r-- 1 jimmy  jimmy    61440 Jun  6 14:08 images-without-dir.tar
+
+<prompt>jimmy:~&gt;</prompt> <command>gzip images-without-dir.tar</command> 
+
+<prompt>jimmy:~&gt;</prompt> <command>ls -la images-without-dir.tar.gz </command>
+-rw-rw-r-- 1 jimmy  jimmy    50562 Jun  6 14:08 images-without-dir.tar.gz
+</screen>
+<para>Uncompress gzipped files with the <option>-d</option> option<indexterm><primary>files</primary><secondary>uncompressing</secondary></indexterm>.</para>
+<para><command>bzip2<indexterm><primary>bzip2</primary></indexterm></command> works in a similar way, but uses an improved compression algorithm, thus creating smaller files.  See the <command>bzip2</command> info pages for more.</para>
+
+<para>Linux software packages are often distributed in a gzipped tarball.  The sensible thing to do after unpacking that kind of archives is find the <filename>README<indexterm><primary>README</primary></indexterm></filename> and read it.  It will generally contain guidelines to installing the package.</para>
+<para>The GNU <command>tar</command> command is aware of gzipped<indexterm><primary>tar</primary><secondary>compressed files</secondary></indexterm> files.  Use the command</para>
+<cmdsynopsis><command>tar <option>zxvf</option> <filename>file.tar.gz</filename></command></cmdsynopsis>
+<para>for unzipping and untarring <filename>.tar.gz</filename> or <filename>.tgz</filename> files.  Use</para>
+<cmdsynopsis><command>tar <option>jxvf</option> <filename>file.tar.bz2</filename></command></cmdsynopsis>
+<para>for unpacking <command>tar</command> archives that were compressed with <command>bzip2</command>.</para> 
+</sect3>
+<sect3 id="sect_09_01_01_04"><title>Java archives</title>
+<para>The GNU project provides us with the <command>jar<indexterm><primary>jar</primary></indexterm></command> tool for creating Java archives.  It is a Java application that combines multiple files into a single JAR<indexterm><primary>archiving</primary><secondary>Java archives</secondary></indexterm> archive file.  While also being a general purpose archiving and compression tool, based on ZIP and the ZLIB compression format, <command>jar</command> was mainly designed to facilitate the packing of Java code, applets and/or applications in a single file.  When combined in a single archive, the components of a Java application, can be downloaded much faster.</para>
+<para>Unlike <command>tar</command>, <command>jar</command> compresses by default, independent from other tools - because it is basically the Java version of <command>zip</command>.  In addition, it allows individual entries in an archive to be signed by the author, so that origins can be authenticated.</para>
+<para>The syntax is almost identical as for the <command>tar</command> command, we refer to <command>info <parameter>jar</parameter></command> for specific differences.</para>
+<note><title>tar, jar and symbolic links</title>
+<para>One noteworthy feature not really mentioned in the standard documentation is that <command>jar</command> will follow symbolic links.  Data to which these links are pointing will be included in the archive.  The default in <command>tar</command> is to only backup the symbolic link, but this behavior can be changed using the <option>-h</option> to <command>tar</command>.</para>
+</note>
+
+</sect3>
+<sect3 id="sect_09_01_01_05"><title>Transporting your data</title>
+<para>Saving copies of your data on another host is a simple but accurate way of making backups.  See <xref linkend="chap_10" /> for more information on <command>scp</command>, <command>ftp</command> and more.</para>
+<para>In the next section we'll discuss local backup devices.</para>
+</sect3>
+</sect2>
+
+</sect1>
+<sect1 id="sect_09_02">
+<title>Moving your data to a backup device</title>
+<sect2 id="sect_09_02_01"><title>Making a copy on a floppy disk</title>
+<sect3 id="sect_09_02_01_01"><title>Formatting the floppy</title>
+<para>On most Linux systems, users have access to the floppy disk<indexterm><primary>archiving</primary><secondary>floppies</secondary></indexterm> device.  The name of the device may vary depending on the size and number of floppy drives, contact your system admin if you are unsure.  On some systems, there will likely be a link <filename>/dev/floppy</filename> pointing to the right device, probably <filename>/dev/fd0</filename> (the auto-detecting floppy device) or <filename>/dev/fd0H1440</filename> (set for 1,44MB floppies).</para>
+<para>
+<command>fdformat<indexterm><primary>fdformat</primary></indexterm></command> is the low-level floppy disk formatting tool.  It has the device name of the floppy disk as an option.  <command>fdformat</command> will display an error when the floppy is write-protected.
+</para>
+<screen>
+<prompt>emma:~&gt;</prompt> <command>fdformat /dev/fd0H1440</command>
+Double-sided, 80 tracks, 18 sec/track. Total capacity 1440 kB.
+Formatting ... done
+Verifying ... done
+<prompt>emma:~&gt;</prompt>
+</screen>
+<para>The <command>mformat<indexterm><primary>mformat</primary></indexterm></command> command (from the mtools package) is used to create DOS-compatible floppies which can then be accessed using the <command>mcopy</command>, <command>mdir</command> and other m-commands.</para>
+<para>Graphical tools are also available.</para>
+<figure><title>Floppy formatter</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/formatfloppy.eps" format="EPS"></imagedata></imageobject><imageobject>
+<imagedata fileref="images/formatfloppy.png" format="PNG"></imagedata>
+</imageobject>
+<textobject>
+<phrase>This GUI allows for chosing the FS type and density.</phrase>
+</textobject>
+</mediaobject>
+</figure>
+<para>After the floppy is formatted, it can be mounted into the file system and accessed as a normal, be it small, directory, usually via the <filename>/mnt/floppy</filename> entry.</para>
+<para>Should you need it, install the <command>mkbootdisk<indexterm><primary>mkbootdisk</primary></indexterm></command> utility, which makes a floppy from which the current system can boot.</para>
+</sect3>
+<sect3 id="sect_09_02_01_02"><title>Using the <command>dd</command> command to dump data</title>
+<para>The <command>dd<indexterm><primary>archiving</primary><secondary>dd</secondary></indexterm></command> command can be used to put data on a disk, or get it off again, depending on the given input and output devices.  An example<indexterm><primary>dd</primary></indexterm>:</para>
+<screen>
+<prompt>gaby:~&gt;</prompt> <command>dd if=images-without-dir.tar.gz of=/dev/fd0H1440</command>
+98+1 records in
+98+1 records out
+
+<prompt>gaby~&gt;</prompt> <command>dd if=/dev/fd0H1440 of=/var/tmp/images.tar.gz</command>
+2880+0 records in
+2880+0 records out
+
+<prompt>gaby:~&gt;</prompt> <command>ls /var/tmp/images*</command>
+/var/tmp/images.tar.gz
+
+</screen>
+<para>Note that the dumping is done on an unmounted device.  Floppies created using this method will not be mountable in the file system, but it is of course the way to go for creating boot or rescue disks.  For more information on the possibilities of <command>dd</command>, read the man pages.</para>
+<para>This tool is part of the GNU <emphasis>coreutils</emphasis> package.</para>
+<note><title>Dumping disks</title>
+<para>The <command>dd</command> command can also be used to make a raw dump of an entire hard disk.</para></note>
+</sect3>
+</sect2>
+<sect2 id="sect_09_02_02"><title>Making a copy with a CD-writer</title>
+<para>On some systems users are allowed to use the CD-writer<indexterm><primary>archiving</primary><secondary>CD-writer</secondary></indexterm> device.  Your data will need to be formatted first.  Use the <command>mkisofs<indexterm><primary>mkisofs</primary></indexterm></command> command to do this in the directory containing the files you want to backup.  Check with <command>df<indexterm><primary>df</primary></indexterm></command> that enough disk space is available, because a new file<indexterm><primary>CD images</primary><secondary>mkisofs example</secondary></indexterm> about the same size as the entire current directory will be created:</para>
+<screen>
+<prompt>[rose@blob recordables]</prompt> <command>df -h .</command>
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/hde5              19G   15G  3.2G  82% /home
+
+<prompt>[rose@blob recordables]</prompt> <command>du -h -s .</command>
+325M    .
+
+<prompt>[rose@blob recordables]</prompt> <command>mkisofs -J -r -o cd.iso .</command>
+&lt;--snap--&gt;
+making a lot of conversions
+&lt;--/snap--&gt;
+98.95% done, estimate finish Fri Apr  5 13:54:25 2002
+Total translation table size: 0
+Total rockridge attributes bytes: 35971
+Total directory bytes: 94208
+Path table size(bytes): 452
+Max brk space used 37e84
+166768 extents written (325 Mb)
+</screen>
+<para>The <option>-J</option> and <option>-r</option> options are used to make the CD-ROM mountable on different systems, see the man pages for more.  After<indexterm><primary>CD burning</primary><secondary>command line tools</secondary></indexterm> that, the CD<indexterm><primary>archiving</primary><secondary>burning a CD</secondary></indexterm> can be created using the <command>cdrecord<indexterm><primary>cdrecord</primary></indexterm></command> tool with appropriate options:</para>
+<screen>
+<prompt>[rose@blob recordables]</prompt> <command>cdrecord -dev 0,0,0 -speed=8 cd.iso</command>
+Cdrecord 1.10 (i686-pc-linux-gnu) (C) 1995-2001 Joerg Schilling
+scsidev: '0,0,0'
+scsibus: 0 target: 0 lun: 0
+Linux sg driver version: 3.1.20
+Using libscg version 'schily-0.5'
+Device type    : Removable CD-ROM
+Version        : 0
+Response Format: 1
+Vendor_info    : 'HP      '
+Identification : 'CD-Writer+ 8100 '
+Revision       : '1.0g'
+Device seems to be: Generic mmc CD-RW.
+Using generic SCSI-3/mmc CD-R driver (mmc_cdr).
+Driver flags   : SWABAUDIO
+Starting to write CD/DVD at speed 4 in write mode for single session.
+Last chance to quit, starting real write in 0 seconds. 
+Operation starts.
+</screen>
+<para>Depending on your CD-writer, you now have the time to smoke^H^H^H^H^H eat a healthy piece of fruit and/or get a cup of coffee.  Upon finishing the job, you will get a confirmation message:</para>
+<screen>
+Track 01: Total bytes read/written: 341540864/341540864 
+          (166768 sectors).
+</screen>
+<para>There are some graphical tools available to make it easier on you.  One of the popular ones is <command>xcdroast<indexterm><primary>CD burning</primary><secondary>graphical tools</secondary></indexterm></command>, which is freely available from <ulink url="http://www.xcdroast.org/">the X-CD-Roast web site<indexterm><primary>xcdroast</primary></indexterm></ulink> and is included on most systems and in the GNU directory.  Both the KDE and Gnome desktop managers have facilities to make your own CDs.</para>
+</sect2>
+<sect2 id="sect_09_02_03"><title>Backups on/from jazz drives, USB devices and other removables</title>
+<para>These devices are usually mounted into the file system.  After the mount procedure, they are accessed as normal directories, so you can use the standard commands for manipulating files.</para>
+<para>In the example below, images are copied from a USB<indexterm><primary>archiving</primary><secondary>USB devices</secondary></indexterm> camera to the hard disk:</para>
+<screen>
+<prompt>robin:~&gt;</prompt> <command>mount <filename>/mnt/camera</filename></command>
+
+<prompt>robin:~&gt;</prompt> <command>mount | grep <parameter>camera</parameter></command>
+/dev/sda1 on /mnt/camera type vfat (rw,nosuid,nodev)
+</screen>
+<para>If the camera<indexterm><primary>camera</primary><secondary>mounting</secondary></indexterm> is the only USB storage device that you ever connect to your system, this is safe.  But keep in mind that USB devices are assigned entries in <filename>/dev</filename> as they are connected to the system.  Thus, if you first connect a USB stick to your system, it will be on the <filename>/dev/sda</filename> entry, and if you connect your camera after that, it will be assigned to <filename>/dev/sdb</filename> - provided that you do not have any SCSI disks, which are also on <filename>/dev/sd*</filename>.  On newer systems, since kernel 2.6, a hotplug system called HAL (Hardware Abstraction Layer) ensures that users don't have to deal with this burden.  If you want to check where your device is, type <command>dmesg<indexterm><primary>USB</primary><secondary>dmesg</secondary></indexterm></command> after inserting<indexterm><primary>dmesg</primary></indexterm> it.</para>
+<para>You can now copy the files:</para>
+<screen>
+<prompt>robin:~&gt;</prompt> <command>cp -R /mnt/camera/* images/</command>
+
+<prompt>robin:~&gt;</prompt> <command>umount /mnt/camera</command>
+</screen>
+<para>Likewise, a jazz drive may be mounted on <filename>/mnt/jazz</filename>.</para>
+<para>Appropriate lines should be added in <filename>/etc/modules.conf<indexterm><primary>modules.conf</primary></indexterm></filename> and <filename>/etc/fstab<indexterm><primary>fstab</primary></indexterm></filename> to make this work.  Refer to specific hardware HOWTOs for more information.  On systems with a 2.6.x kernel or higher, you may also want to check the man pages for <command>modprobe</command> and <filename>modprobe.conf</filename>.</para> 
+</sect2>
+<sect2 id="sect_09_02_04"><title>Backing up data using a tape device</title>
+<para>This is done using <command>tar</command> (see above).  The <command>mt<indexterm><primary>mt</primary></indexterm></command> tool is used for controlling the magnetic tape<indexterm><primary>archiving</primary><secondary>tapes</secondary></indexterm> device, like <filename>/dev/st0</filename>.  Entire books have been written about tape backup, therefore, refer to our reading-list in <xref linkend="app2" /> for more information.  Keep in mind that databases might need other backup procedures because of their architecture.</para>
+<para>The appropriate backup commands are usually put in one of the <emphasis>cron</emphasis> directories in order to have them executed on a regular basis.  In larger environments, the freely available <ulink url="http://www.amanda.org">Amanda</ulink> backup suite or a commercial solution may be implemented to back up multiple machines.  Working with tapes, however, is a system administration task beyond the scope of this document.</para>
+</sect2>
+<sect2 id="sect_09_02_05"><title>Tools from your distribution</title>
+<para>Most Linux distributions offer their own tools<indexterm><primary>backups</primary><secondary>tools</secondary></indexterm> for making your life easy.  A short overview:</para>
+<itemizedlist>
+<listitem><para>SuSE: <application>YaST</application> now includes expanded backup and restore modules.</para></listitem>
+<listitem><para>RedHat: the <application>File Roller</application> tool provides visual management of (compressed) archives.  They seem to be in favour of the X-CD-Roast tool for moving backups to an external device.</para></listitem>
+<listitem><para>Mandrake: X-CD-Roast.</para></listitem>
+<listitem><para>Most distributions come with the BSD <command>dump<indexterm><primary>dump</primary></indexterm></command> and <command>restore<indexterm><primary>restore</primary></indexterm></command> utilities for making backups of <emphasis>ext2</emphasis> and <emphasis>ext3</emphasis> file systems.  This tool can write to a variety of devices and literally dumps the file(s) or file system bit per bit onto the specified device.  Like <command>dd</command>, this allows for backing up special file types such as the ones in <filename>/dev</filename>.</para></listitem>
+</itemizedlist>
+</sect2>
+
+</sect1>
+
+<sect1 id="sect_09_03"><title>Using rsync</title>
+<sect2 id="sect_09_03_01"><title>Introduction</title>
+<para>The <command>rsync<indexterm><primary>rsync</primary></indexterm></command> program is a fast and flexible tool for remote backup<indexterm><primary>backups</primary><secondary>rsync</secondary></indexterm>.  It is common on UNIX and UNIX-like systems, easy to configure and use in scripts.  While the <emphasis>r</emphasis> in <command>rsync</command> stands for <quote>remote</quote>, you do not need to take this all too literally.  Your <quote>remote</quote> device might just as well be a USB storage device or another partition on your hard disk, you do not need to have two separated machines.</para>
+</sect2>
+<sect2 id="sect_09_03_02"><title>An example: rsync to a USB storage device</title>
+<para>As discussed in <xref linkend="sect_03_01_02_03" />, we will first have to mount<indexterm><primary>USB</primary><secondary>mount device</secondary></indexterm> the device.  Possibly, this should be done as <emphasis>root</emphasis>:</para>
+<screen>
+<prompt>root@theserver# </prompt><command>mkdir <filename>/mnt/usbstore</filename></command>
+
+<prompt>root@theserver# </prompt><command>mount <option>-t vfat</option> <filename>/dev/sda1 /mnt/usbstore</filename></command>
+</screen>
+<note><title>Userfriendly</title>
+<para>More and more distributions give access to removable devices for non-prilileged users and mount USB devices, CD-ROMs and other removable devices automatically.</para>
+</note>
+<para>Note that this guideline requires USB support to be installed on your system.  See <ulink url="http://www.linux-usb.org/USB-guide/">the USB Guide</ulink> for help if this does not work.  Check with <command>dmesg</command> that <filename>/dev/sda1</filename> is indeed the device to mount.</para>
+<para>Then you can start the actual backup, for instance of the <filename>/home/karl</filename> directory:</para>
+<screen>
+<prompt>karl@theserver:~&gt; </prompt><command>rsync <option>-avz</option> <filename>/home/karl/ /mnt/usbstore</filename></command>
+</screen>
+<para>As usual, refer to the man pages for more.</para>
+</sect2>
+</sect1>
+<sect1 id="sect_09_04"><title>Encryption</title>
+<sect2 id="sect_09_04_01"><title>General remarks</title>
+<sect3 id="sect_09_04_01_01"><title>Why should you encrypt data?</title>
+<para>Encryption<indexterm><primary>encryption</primary><secondary>why?</secondary></indexterm> is synonym to secrecy.  In the context of backups, encryption can be very useful, for instance if you need to leave your backed up data in a place where you can not control access, such as the server of your provider.</para>
+<para>Apart from that, encryption can be applied to E-mails as well: normally, mail is not encrypted and it is often sent in the open over the netwerk or the Internet.  If your message contains sensitive information, better encrypt it.</para>
+</sect3>
+<sect3 id="sect_09_04_01_02"><title>GNU Privacy Guard</title>
+<para>On Linux systems you will find <application>GnuPG</application>, the <application>GNU Privacy Guard<indexterm><primary>encryption</primary><secondary>GnuPG</secondary></indexterm></application>, which is a suite of programs that are compatible with the PGP (<application>Pretty Good Privacy</application>) tools that are commercially available.</para>
+<para>In this guide we will only discuss the very simple usage of the encryption tools and show what you will need in order to generate an encryption key and use it to encrypt data for yourself, which you can then safely store in a public place.  More advanced usage directions can be found in the man pages of the various commands.</para>
+</sect3>
+</sect2>
+<sect2 id="sect_09_04_02"><title>Generate a key</title>
+<para>Before you can start encrypting your data, you need to create<indexterm><primary>encryption</primary><secondary>generate keys</secondary></indexterm> a pair of keys.  The pair consists of a private and a public key.  You can send the public key to correspondents, who can use it to encrypt data for you, which you decrypt with your private key.  You always keep the private key, never share it with somebody else, or they will be able to decrypt data that is only destined for you.  Just to make sure that no accidents happen, the private key is protected with a password.  The key pair is created using this command<indexterm><primary>gpg</primary></indexterm>:</para>
+<screen>
+<prompt>willy@ubuntu:~$ </prompt><command>gpg <option>--key-gen</option></command>
+gpg (GnuPG) 1.4.2.2; Copyright (C) 2005 Free Software Foundation, Inc.
+This program comes with ABSOLUTELY NO WARRANTY.
+This is free software, and you are welcome to redistribute it
+under certain conditions.  See the file COPYING for details.
+
+gpg: directory `/home/willy.gnupg' created
+gpg: new configuration file `/home/willy/.gnupg/gpg.conf' created
+gpg: WARNING: options in `/home/willy/.gnupg/gpg.conf' are not yet
+ active during this run
+gpg: keyring `/home/willy/.gnupg/secring.gpg' created
+gpg: keyring `/home/willy/.gnupg/pubring.gpg' created
+Please select what kind of key you want:
+    (1) DSA and Elgamal (default)
+    (2) DSA (sign only)
+    (5) RSA (sign only)
+Your selection? <command>1</command>
+DSA keypair will have 1024 bits.
+ELG-E keys may be between 1024 and 4096 bits long.
+What keysize do you want? (2048) <command>4096</command>
+Requested keysize is 4096 bits
+Please specify how long the key should be valid.
+         0 = key does not expire
+      &lt;n&gt;  = key expires in n days
+      &lt;n&gt;w = key expires in n weeks
+      &lt;n&gt;m = key expires in n month
+      &lt;n&gt;y = key expires in n years
+Key is valid for? (0) <command>0</command>
+Key does not expire at all
+Is this correct? (y/N) <command>y</command>
+
+You need a user ID to identify your key; the software constructs the
+user ID from the Real Name, Comment and Email Address in this form:
+    "Heinrich Heine (Der Dichter) &lt;heinrichh@duesseldorf.de&gt;"
+
+Real name: <command>Willy De Wandel</command>
+Email address: <command>wdw@mvg.vl</command>
+Comment: <command>Willem</command>
+You selected this USER-ID:
+    "Willy De Wandel (Willem) &lt;wdw@mvg.vl&gt;"
+
+Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? <command>O</command>
+You need a Passphrase to protect your secret key.
+					 
+Passphrase:
+</screen>
+<para>Now enetr your password.  This can be a phrase, the longer, the better, the only condition is that you should be able to remember it at all times.  For verification, you need to enter the same phrase again.</para>
+<para>Now the key pair is generated by a program that spawns random numbers and that is, among other factors, fed with the activity data of the system.  So it is a good idea to start some programs now, to move the mouse cursor or to type some random characters in a terminal window.  That way, the chances to generate a number that contains lots of different digits will be much bigger and the key will be more difficult to crack.</para>
+</sect2>
+<sect2 id="sect_09_04_03"><title>About your key</title>
+<para>When your key has been created, you will get a message about the <emphasis>fingerprint<indexterm><primary>fingerprint</primary></indexterm></emphasis>.  This is a sequence of 40 hexadecimal<indexterm><primary>encryption</primary><secondary>fingerprint</secondary></indexterm> numbers, which is so long that it is very, very hard to generate the same key twice, on any computer.  You can be rather sure that this is a unique sequence.  The short form of this key consists of your name, followed by the last 8 hexadecimal numbers.</para>
+<para>You can get information about your key as follows<indexterm><primary>encryption</primary><secondary>searching keys</secondary></indexterm>:</para>
+<screen>
+<prompt>willy@ubuntu:~$ </prompt><command>gpg <option>--list-keys</option></command>
+/home/willy/.gnupg/pubring.gpg
+------------------------------
+pub     1024D/BF5C3DBB 2006-08-08
+uid                    Willy De Wandel (Willem) &lt;wdw@mvg.vl&gt;
+sub     4096g/A3449CF7 2006-08-08
+</screen>
+<para>The <emphasis>key ID</emphasis> of this key<indexterm><primary>encryption</primary><secondary>key ID</secondary></indexterm> is <quote>BF5C3DBB</quote>.  You can send your key ID and your name to a <emphasis>key server</emphasis>, so that other people can get this info about you and use it to encrypt data for you.  Alternatively, you can send your public key directly to the people who need it.  The public part of your key is the long series of numbers that you see when using the <option>--export</option> option<indexterm><primary>encryption</primary><secondary>export public key</secondary></indexterm> to the <command>gpg</command> command:</para>
+<cmdsynopsis><command>gpg <option>--export -a</option></command></cmdsynopsis>
+<para>However, as far is this guide is concerned, we assume that you only need your key in order to encrypt and decrypt data for yourself.  Read the <command>gpg</command> man pages if you want to know more.</para>
+</sect2>
+<sect2 id="sect_09_04_04"><title>Encrypt data</title>
+<para>Now you can encrypt a <filename>.tar</filename> archive<indexterm><primary>files</primary><secondary>encrypting</secondary></indexterm> or a compressed archive, prior to saving it to a backup medium or transporting it to the backup server.  Use the <command>gpg</command> command<indexterm><primary>encryption</primary><secondary>creating encrypted files</secondary></indexterm> like this:</para>
+<cmdsynopsis><command>gpg <option>-e -r</option> <parameter>(part of) uid</parameter> <filename>archive</filename></command></cmdsynopsis>
+<para>The <option>-e</option> option tells <command>gpg</command> to encrypt, the <option>-r</option> option indicates who to encrypt for.  Keep in mind that only only the user name(s) following this <option>-r</option> option will be able to decrypt the data again.  An example:</para>
+<screen>
+<prompt>willy@ubuntu:~$ </prompt><command>gpg <option>-e -r</option> <parameter>Willy</parameter> <filename>/var/tmp/home-willy-20060808.tar</filename></command>
+</screen>
+</sect2>
+<sect2 id="sect_09_04_05"><title>Decrypting files</title>
+<para>Using the <option>-d</option> option, you can decrypt<indexterm><primary>files</primary><secondary>decrypting</secondary></indexterm> files that have been encrypted<indexterm><primary>encryption</primary><secondary>decrypting</secondary></indexterm> for you.  The data will scroll over your screen, but an encrypted copy will remain on disk.  So for file formats other than plain text, you will want to save the decrypted data, so that you can view them with the appropriate program.  This is done using the <option>-o</option> option to the <command>gpg</command> command:</para>
+<screen>
+<prompt>willy@ubuntu:~$ </prompt><command>gpg <option>-d -o</option> <filename>/var/tmp/home-willy-decrypt.tar /var/tmp/home-willy-20060808.tar.gpg</filename></command>
+
+You need a passphrase to unlock the secret key for
+user: "Willy De Wandel (Willem) &lt;wdw@mvg.vl&gt;"
+4096 ELG-E key, ID A3449CF7, created 2006-08-08 (main key ID BF5C3DBB)
+
+gpg: encrypted with 4096-bit ELG-E key, ID A3449CF7, created 2006-08-08
+        "Willy De Wandel (Willem) &lt;wdw@mvg.vl&gt;"
+</screen>
+<warning><title>No password = no data</title>
+<para>If you can not remember your password, the data is lost.  Not even the system administrator will be able to decrypt the data.  That is why a copy of important keys is sometimes kept in a sealed vault in a bank.</para>
+</warning>
+
+
+</sect2>
+</sect1>
+
+<sect1 id="sect_09_05"><title>Summary</title>
+<para>Here's a list of the commands involving file backup:</para>
+<table frame="all"><title>New commands in chapter 9: Backup</title>
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead>
+<row><entry>Command</entry><entry>Meaning</entry></row>
+</thead>
+<tbody>
+<row><entry><command>bzip2</command></entry><entry>A block-sorting file compressor.</entry></row>
+<row><entry><command>cdrecord</command></entry><entry>Record audio or data Compact Disks from a master.</entry></row>
+<row><entry><command>dd</command></entry><entry>Convert and copy a file</entry></row>
+<row><entry><command>fdformat</command></entry><entry>Low-level formats a floppy disk.</entry></row>
+<row><entry><command>gpg</command></entry><entry>Encrypt and decrypt data.</entry></row>
+<row><entry><command>gzip</command></entry><entry>Compress or expand files.</entry></row>
+<row><entry><command>mcopy</command></entry><entry>Copy MSDOS files to/from UNIX.</entry></row>
+<row><entry><command>mdir</command></entry><entry>Display an MSDOS directory.</entry></row>
+<row><entry><command>mformat</command></entry><entry>Add an MSDOS file system to a low-level formatted floppy disk.</entry></row>
+<row><entry><command>mkbootdisk</command></entry><entry>Creates a stand-alone boot floppy for the running system.</entry></row>
+<row><entry><command>mount</command></entry><entry>Mount a file system (integrate it with the current file system by connecting it to a mount point).</entry></row>
+<row><entry><command>rsync</command></entry><entry>Synchronize directories.</entry></row>
+<row><entry><command>tar</command></entry><entry>Tape archiving utility, also used for making archives on disk instead of on tape.</entry></row>
+<row><entry><command>umount</command></entry><entry>Unmount file systems.</entry></row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+<sect1 id="sect_09_06"><title>Exercises</title>
+<itemizedlist>
+<listitem><para>Make a backup copy of your home directory in <filename>/var/tmp</filename> using the <command>tar</command> command.  Then further compress the file using <command>gzip</command> or <command>bzip2</command>.  Make it a clean tarred file, one that doesn't make a mess when unpacking.</para></listitem>
+<listitem><para>Format a floppy and put some files from your home directory on it.  Switch floppies with another trainee and recover his/her floppy in your home directory.</para></listitem>
+<listitem><para>DOS format the floppy.  Use the <emphasis>mtools</emphasis> to put and delete files on it.</para></listitem>
+<listitem><para>What happens to an unformatted floppy when you want to mount it into the file system?</para></listitem>
+<listitem><para>If you have any USB storage, try to put a file on it.</para></listitem>
+<listitem><para>Using <command>rsync</command>, make a copy of your home directory to another local or remote file system.</para></listitem>
+<listitem><para>When leaving files on a network server, it's best to encrypt them.  Make a <filename>tar</filename> archive of your home directory and encrypt it.</para></listitem>
+</itemizedlist>
+
+</sect1>
+</chapter>

@@ -1,0 +1,814 @@
+<appendix id="app3">
+    <title>Shell Features</title>
+    <abstract>
+        <para>This document gives an overview of common shell features (the same in every shell
+            flavour) and differing shell features (shell specific features).</para>
+    </abstract>
+    <sect1>
+        <title>Common features</title>
+        <para> The following features are standard in every shell. Note that the stop, suspend,
+            jobs, bg and fg commands are only available on systems that support job control.</para>
+        <table frame="all">
+            <title>Common Shell Features</title>
+            <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                <thead>
+                    <row>
+                        <entry>Command</entry>
+                        <entry>Meaning</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>&gt;</entry>
+                        <entry>Redirect output</entry>
+                    </row>
+                    <row>
+                        <entry>&gt;&gt;</entry>
+                        <entry>Append to file</entry>
+                    </row>
+                    <row>
+                        <entry>&lt;</entry>
+                        <entry>Redirect input</entry>
+                    </row>
+                    <row>
+                        <entry>&lt;&lt;</entry>
+                        <entry>"Here" document (redirect input)</entry>
+                    </row>
+                    <row>
+                        <entry>|</entry>
+                        <entry>Pipe output</entry>
+                    </row>
+                    <row>
+                        <entry>&amp;</entry>
+                        <entry>Run process in background.</entry>
+                    </row>
+                    <row>
+                        <entry>;</entry>
+                        <entry>Separate commands on same line</entry>
+                    </row>
+                    <row>
+                        <entry>*</entry>
+                        <entry>Match any character(s) in filename</entry>
+                    </row>
+                    <row>
+                        <entry>?</entry>
+                        <entry>Match single character in filename</entry>
+                    </row>
+                    <row>
+                        <entry>[ ]</entry>
+                        <entry>Match any characters enclosed</entry>
+                    </row>
+                    <row>
+                        <entry>( )</entry>
+                        <entry>Execute in subshell</entry>
+                    </row>
+                    <row>
+                        <entry>` `</entry>
+                        <entry>Substitute output of enclosed command</entry>
+                    </row>
+                    <row>
+                        <entry>" "</entry>
+                        <entry>Partial quote (allows variable and command expansion)</entry>
+                    </row>
+                    <row>
+                        <entry>' '</entry>
+                        <entry>Full quote (no expansion)</entry>
+                    </row>
+                    <row>
+                        <entry>\</entry>
+                        <entry>Quote following character</entry>
+                    </row>
+                    <row>
+                        <entry>$var</entry>
+                        <entry>Use value for variable</entry>
+                    </row>
+                    <row>
+                        <entry>$$</entry>
+                        <entry>Process id</entry>
+                    </row>
+                    <row>
+                        <entry>$0</entry>
+                        <entry>Command name</entry>
+                    </row>
+                    <row>
+                        <entry>$n</entry>
+                        <entry>nth argument (n from 0 to 9)</entry>
+                    </row>
+                    <row>
+                        <entry>$*</entry>
+                        <entry>All arguments as a simple word</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <literal>#</literal>
+                        </entry>
+                        <entry>Begin comment</entry>
+                    </row>
+                    <row>
+                        <entry>bg</entry>
+                        <entry>Background execution</entry>
+                    </row>
+                    <row>
+                        <entry>break</entry>
+                        <entry>Break from loop statements</entry>
+                    </row>
+                    <row>
+                        <entry>cd</entry>
+                        <entry>Change directories</entry>
+                    </row>
+                    <row>
+                        <entry>continue</entry>
+                        <entry>Resume a program loop</entry>
+                    </row>
+                    <row>
+                        <entry>echo</entry>
+                        <entry>Display output</entry>
+                    </row>
+                    <row>
+                        <entry>eval</entry>
+                        <entry>Evaluate arguments</entry>
+                    </row>
+                    <row>
+                        <entry>exec</entry>
+                        <entry>Execute a new shell</entry>
+                    </row>
+                    <row>
+                        <entry>fg</entry>
+                        <entry>Foreground execution</entry>
+                    </row>
+                    <row>
+                        <entry>jobs</entry>
+                        <entry>Show active jobs</entry>
+                    </row>
+                    <row>
+                        <entry>kill</entry>
+                        <entry>Terminate running jobs</entry>
+                    </row>
+                    <row>
+                        <entry>newgrp</entry>
+                        <entry>Change to a new group</entry>
+                    </row>
+                    <row>
+                        <entry>shift</entry>
+                        <entry>Shift positional parameters</entry>
+                    </row>
+                    <row>
+                        <entry>stop</entry>
+                        <entry>Suspend a background job</entry>
+                    </row>
+                    <row>
+                        <entry>suspend</entry>
+                        <entry>Suspend a foreground job</entry>
+                    </row>
+                    <row>
+                        <entry>time</entry>
+                        <entry>Time a command</entry>
+                    </row>
+                    <row>
+                        <entry>umask</entry>
+                        <entry>Set or list file permissions</entry>
+                    </row>
+                    <row>
+                        <entry>unset</entry>
+                        <entry>Erase variable or function definitions</entry>
+                    </row>
+                    <row>
+                        <entry>wait</entry>
+                        <entry>Wait for a background job to finish</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </sect1>
+    <sect1>
+        <title>Differing features</title>
+        <para>The table below shows major differences between the standard shell
+            (<command>sh</command>), Bourne Again SHell (<command>bash</command>), Korn shell
+            (<command>ksh</command>) and the C shell (<command>csh</command>).</para>
+        <note>
+            <title>Shell compatibility</title>
+            <para>Since the Bourne Again SHell is a superset of <command>sh</command>, all
+                <command>sh</command> commands will also work in <command>bash</command> - but not
+                vice versa. <command>bash</command> has many more features of its own, and, as the
+                table below demonstrates, many features incorporated from other shells.</para>
+            <para>Since the Turbo C shell is a superset of <command>csh</command>, all
+                <command>csh</command> commands will work in <command>tcsh</command>, but not the
+                other way round.</para>
+        </note>
+        <table frame="all">
+            <title>Differing Shell Features</title>
+            <tgroup cols="5" align="left" colsep="1" rowsep="1">
+                <thead>
+                    <row>
+                        <entry>
+                            <command>sh</command>
+                        </entry>
+                        <entry>
+                            <command>bash</command>
+                        </entry>
+                        <entry>
+                            <command>ksh</command>
+                        </entry>
+                        <entry>
+                            <command>csh</command>
+                        </entry>
+                        <entry>Meaning/Action</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>$</entry>
+                        <entry>$</entry>
+                        <entry>$</entry>
+                        <entry>%</entry>
+                        <entry>Default user prompt</entry>
+                    </row>
+                    <row>
+                        <entry/>
+                        <entry>
+                            <command>&gt;|</command>
+                        </entry>
+                        <entry>
+                            <command>&gt;|</command>
+                        </entry>
+                        <entry>
+                            <command>&gt;!</command>
+                        </entry>
+                        <entry>Force redirection</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>&gt; <filename>file</filename> 2&gt;&amp;1</command>
+                        </entry>
+                        <entry>
+                            <command>&amp;&gt; <filename>file</filename>
+                            </command> or <command>&gt; <filename>file</filename> 2&gt;&amp;1</command>
+                        </entry>
+                        <entry>
+                            <command>&gt; <filename>file</filename> 2&gt;&amp;1</command>
+                        </entry>
+                        <entry>
+                            <command>&gt;&amp; <filename>file</filename>
+                            </command>
+                        </entry>
+                        <entry>Redirect stdout and stderr to <filename>file</filename>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry/>
+                        <entry>
+                            <command>{ }</command>
+                        </entry>
+                        <entry/>
+                        <entry>
+                            <command>{ }</command>
+                        </entry>
+                        <entry>Expand elements in list</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>`command`</command>
+                        </entry>
+                        <entry>
+                            <command>`command`</command> or <command>$(command)</command>
+                        </entry>
+                        <entry>
+                            <command>$(command)</command>
+                        </entry>
+                        <entry>
+                            <command>`command`</command>
+                        </entry>
+                        <entry>Substitute output of enclosed <command>command</command>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <varname>$HOME</varname>
+                        </entry>
+                        <entry>
+                            <varname>$HOME</varname>
+                        </entry>
+                        <entry>
+                            <varname>$HOME</varname>
+                        </entry>
+                        <entry>
+                            <varname>$home</varname>
+                        </entry>
+                        <entry>Home directory</entry>
+                    </row>
+                    <row>
+                        <entry/>
+                        <entry>~</entry>
+                        <entry>~</entry>
+                        <entry>~</entry>
+                        <entry>Home directory symbol</entry>
+                    </row>
+                    <row>
+                        <entry/>
+                        <entry>
+                            <filename>~+</filename>, <filename>~-</filename>, <command>dirs</command>
+                        </entry>
+                        <entry>
+                            <filename>~+</filename>, <filename>~-</filename>
+                        </entry>
+                        <entry>
+                            <filename>=-</filename>, <filename>=N</filename>
+                        </entry>
+                        <entry>Access directory stack</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>
+                                <varname>var</varname>=value</command>
+                        </entry>
+                        <entry>
+                            <command>
+                                <varname>VAR</varname>=value</command>
+                        </entry>
+                        <entry>
+                            <command>
+                                <varname>var</varname>=value</command>
+                        </entry>
+                        <entry>
+                            <command>set <varname>var</varname>=value</command>
+                        </entry>
+                        <entry>Variable assignment</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>export <varname>var</varname>
+                            </command>
+                        </entry>
+                        <entry>
+                            <command>export <varname>VAR</varname>=value</command>
+                        </entry>
+                        <entry>
+                            <command>export <varname>var</varname>=val</command>
+                        </entry>
+                        <entry>
+                            <command>setenv <varname>var</varname>
+                                <parameter>val</parameter>
+                            </command>
+                        </entry>
+                        <entry>Set environment variable</entry>
+                    </row>
+                    <row>
+                        <entry/>
+                        <entry>
+                            <varname>${nnnn}</varname>
+                        </entry>
+                        <entry>
+                            <varname>${nn}</varname>
+                        </entry>
+                        <entry/>
+                        <entry>More than 9 arguments can be referenced</entry>
+                    </row>
+                    <row>
+                        <entry>"<varname>$@</varname>"</entry>
+                        <entry>"<varname>$@</varname>"</entry>
+                        <entry>"<varname>$@</varname>"</entry>
+                        <entry/>
+                        <entry>All arguments as separate words</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <varname>$#</varname>
+                        </entry>
+                        <entry>
+                            <varname>$#</varname>
+                        </entry>
+                        <entry>
+                            <varname>$#</varname>
+                        </entry>
+                        <entry>
+                            <varname>$#argv</varname>
+                        </entry>
+                        <entry>Number of arguments</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <varname>$?</varname>
+                        </entry>
+                        <entry>
+                            <varname>$?</varname>
+                        </entry>
+                        <entry>
+                            <varname>$?</varname>
+                        </entry>
+                        <entry>
+                            <varname>$status</varname>
+                        </entry>
+                        <entry>Exit status of the most recently executed command</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <varname>$!</varname>
+                        </entry>
+                        <entry>
+                            <varname>$!</varname>
+                        </entry>
+                        <entry>
+                            <varname>$!</varname>
+                        </entry>
+                        <entry/>
+                        <entry>PID of most recently backgrounded process</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <varname>$-</varname>
+                        </entry>
+                        <entry>
+                            <varname>$-</varname>
+                        </entry>
+                        <entry>
+                            <varname>$-</varname>
+                        </entry>
+                        <entry/>
+                        <entry>Current options</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>. <filename>file</filename>
+                            </command>
+                        </entry>
+                        <entry>
+                            <command>source <filename>file</filename>
+                            </command> or <command>. <filename>file</filename>
+                            </command>
+                        </entry>
+                        <entry>
+                            <command>. <filename>file</filename>
+                            </command>
+                        </entry>
+                        <entry>
+                            <command>source <filename>file</filename>
+                            </command>
+                        </entry>
+                        <entry>Read commands in file</entry>
+                    </row>
+                    <row>
+                        <entry/>
+                        <entry>
+                            <command>alias x='y'</command>
+                        </entry>
+                        <entry>
+                            <command>alias x=y</command>
+                        </entry>
+                        <entry>
+                            <command>alias x y</command>
+                        </entry>
+                        <entry>Name <command>x</command> stands for command <command>y</command>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>case</command>
+                        </entry>
+                        <entry>
+                            <command>case</command>
+                        </entry>
+                        <entry>
+                            <command>case</command>
+                        </entry>
+                        <entry>
+                            <command>switch</command> or <command>case</command>
+                        </entry>
+                        <entry>Choose alternatives</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>done</command>
+                        </entry>
+                        <entry>
+                            <command>done</command>
+                        </entry>
+                        <entry>
+                            <command>done</command>
+                        </entry>
+                        <entry>
+                            <command>end</command>
+                        </entry>
+                        <entry>End a loop statement</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>esac</command>
+                        </entry>
+                        <entry>
+                            <command>esac</command>
+                        </entry>
+                        <entry>
+                            <command>esac</command>
+                        </entry>
+                        <entry>
+                            <command>endsw</command>
+                        </entry>
+                        <entry>End <command>case</command> or <command>switch</command>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>exit <parameter>n</parameter>
+                            </command>
+                        </entry>
+                        <entry>
+                            <command>exit <parameter>n</parameter>
+                            </command>
+                        </entry>
+                        <entry>
+                            <command>exit <parameter>n</parameter>
+                            </command>
+                        </entry>
+                        <entry>
+                            <command>exit <parameter>(expr)</parameter>
+                            </command>
+                        </entry>
+                        <entry>Exit with a status</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>for</command>/<command>do</command>
+                        </entry>
+                        <entry>
+                            <command>for</command>/<command>do</command>
+                        </entry>
+                        <entry>
+                            <command>for</command>/<command>do</command>
+                        </entry>
+                        <entry>
+                            <command>foreach</command>
+                        </entry>
+                        <entry>Loop through variables</entry>
+                    </row>
+                    <row>
+                        <entry/>
+                        <entry>
+                            <command>set <option>-f</option>
+                            </command>, <command>set <option>-o nullglob|dotglob|nocaseglob|noglob</option>
+                            </command>
+                        </entry>
+                        <entry/>
+                        <entry>
+                            <command>noglob</command>
+                        </entry>
+                        <entry>Ignore substitution characters for filename generation</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>hash</command>
+                        </entry>
+                        <entry>
+                            <command>hash</command>
+                        </entry>
+                        <entry>
+                            <command>alias <option>-t</option>
+                            </command>
+                        </entry>
+                        <entry>
+                            <command>hashstat</command>
+                        </entry>
+                        <entry>Display hashed commands (tracked aliases)</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>hash <parameter>cmds</parameter>
+                            </command>
+                        </entry>
+                        <entry>
+                            <command>hash <parameter>cmds</parameter>
+                            </command>
+                        </entry>
+                        <entry>
+                            <command>alias <option>-t</option>
+                                <parameter>cmds</parameter>
+                            </command>
+                        </entry>
+                        <entry>
+                            <command>rehash</command>
+                        </entry>
+                        <entry>Remember command locations</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>hash <option>-r</option>
+                            </command>
+                        </entry>
+                        <entry>
+                            <command>hash <option>-r</option>
+                            </command>
+                        </entry>
+                        <entry/>
+                        <entry>
+                            <command>unhash</command>
+                        </entry>
+                        <entry>Forget command locations</entry>
+                    </row>
+                    <row>
+                        <entry/>
+                        <entry>
+                            <command>history</command>
+                        </entry>
+                        <entry>
+                            <command>history</command>
+                        </entry>
+                        <entry>
+                            <command>history</command>
+                        </entry>
+                        <entry>List previous commands</entry>
+                    </row>
+                    <row>
+                        <entry/>
+                        <entry>
+                            <keycap>ArrowUp</keycap>+<keycap>Enter</keycap> or <command>!!</command>
+                        </entry>
+                        <entry>
+                            <command>r</command>
+                        </entry>
+                        <entry>
+                            <command>!!</command>
+                        </entry>
+                        <entry>Redo previous command</entry>
+                    </row>
+                    <row>
+                        <entry/>
+                        <entry>
+                            <command>!<parameter>str</parameter>
+                            </command>
+                        </entry>
+                        <entry>
+                            <command>r <parameter>str</parameter>
+                            </command>
+                        </entry>
+                        <entry>
+                            <command>!<parameter>str</parameter>
+                            </command>
+                        </entry>
+                        <entry>Redo last command that starts with <quote>str</quote>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry/>
+                        <entry>
+                            <command>!<parameter>cmd</parameter>:s/<parameter>x</parameter>/<parameter>y</parameter>/</command>
+                        </entry>
+                        <entry>
+                            <command>r <parameter>x</parameter>=<parameter>y</parameter>
+                                <parameter>cmd</parameter>
+                            </command>
+                        </entry>
+                        <entry>
+                            <command>!<parameter>cmd</parameter>:s/<parameter>x</parameter>/<parameter>y</parameter>/</command>
+                        </entry>
+                        <entry>Replace <quote>x</quote> with <quote>y</quote> in most recent command
+                            starting with <quote>cmd</quote>, then execute.</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>if [ <varname>$i</varname> -eq <parameter>5</parameter> ]</command>
+                        </entry>
+                        <entry>
+                            <command>if [ <varname>$i</varname> -eq <parameter>5</parameter> ]</command>
+                        </entry>
+                        <entry>
+                            <command>if ((<varname>i</varname>==<parameter>5</parameter>))</command>
+                        </entry>
+                        <entry>
+                            <command>if (<varname>$i</varname>==<parameter>5</parameter>)</command>
+                        </entry>
+                        <entry>Sample condition test</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>fi</command>
+                        </entry>
+                        <entry>
+                            <command>fi</command>
+                        </entry>
+                        <entry>
+                            <command>fi</command>
+                        </entry>
+                        <entry>
+                            <command>endif</command>
+                        </entry>
+                        <entry>End <command>if</command> statement</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>ulimit</command>
+                        </entry>
+                        <entry>
+                            <command>ulimit</command>
+                        </entry>
+                        <entry>
+                            <command>ulimit</command>
+                        </entry>
+                        <entry>
+                            <command>limit</command>
+                        </entry>
+                        <entry>Set resource limits</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>pwd</command>
+                        </entry>
+                        <entry>
+                            <command>pwd</command>
+                        </entry>
+                        <entry>
+                            <command>pwd</command>
+                        </entry>
+                        <entry>
+                            <command>dirs</command>
+                        </entry>
+                        <entry>Print working directory</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>read</command>
+                        </entry>
+                        <entry>
+                            <command>read</command>
+                        </entry>
+                        <entry>
+                            <command>read</command>
+                        </entry>
+                        <entry>
+                            <command>$&lt;</command>
+                        </entry>
+                        <entry>Read from terminal</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>trap <parameter>2</parameter>
+                            </command>
+                        </entry>
+                        <entry>
+                            <command>trap <parameter>2</parameter>
+                            </command>
+                        </entry>
+                        <entry>
+                            <command>trap <parameter>2</parameter>
+                            </command>
+                        </entry>
+                        <entry>
+                            <command>onintr</command>
+                        </entry>
+                        <entry>Ignore interrupts</entry>
+                    </row>
+                    <row>
+                        <entry/>
+                        <entry>
+                            <command>unalias</command>
+                        </entry>
+                        <entry>
+                            <command>unalias</command>
+                        </entry>
+                        <entry>
+                            <command>unalias</command>
+                        </entry>
+                        <entry>Remove aliases</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>until</command>
+                        </entry>
+                        <entry>
+                            <command>until</command>
+                        </entry>
+                        <entry>
+                            <command>until</command>
+                        </entry>
+                        <entry/>
+                        <entry>Begin <command>until</command> loop</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <command>while</command>/<command>do</command>
+                        </entry>
+                        <entry>
+                            <command>while</command>/<command>do</command>
+                        </entry>
+                        <entry>
+                            <command>while</command>/<command>do</command>
+                        </entry>
+                        <entry>
+                            <command>while</command>
+                        </entry>
+                        <entry>Begin <command>while</command> loop</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <para>The Bourne Again SHell has many more features not listed here. This table is just to
+            give you an idea of how this shell incorporates all useful ideas from other shells:
+            there are no blanks in the column for <command>bash</command>. More information on
+            features found only in Bash can be retrieved from the Bash info pages, in the
+                <quote>Bash Features</quote> section.</para>
+        <para>More information:</para>
+        <para>You should at least read one manual, being the manual of your shell. The preferred
+            choice would be <command>info bash</command>, <command>bash</command> being the GNU
+            shell and easiest for beginners. Print it out and take it home, study it whenever you
+            have 5 minutes.</para>
+        <para>See <xref linkend="app2"/> if you are having difficulties to assimilate shell commands.</para>
+    </sect1>
+</appendix>

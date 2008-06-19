@@ -1,0 +1,1685 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<chapter id="chap_03">
+<title>About files and the file system</title>
+<abstract>
+<para>After the initial exploration in <xref linkend="chap_02" />, we are ready to discuss the files and directories on a Linux system in more detail.  Many users have difficulties with Linux because they lack an overview of what kind of data is kept in which locations.  We will try to shine some light on the organization of files in the file system.
+</para>
+<para>We will also list the most important files and directories and use different methods of viewing the content of those files, and learn how files and directories can be created, moved and deleted.</para>
+<para>After completion of the exercises in this chapter, you will be able to:</para>
+<para>
+<itemizedlist>
+<listitem><para>Describe the layout of a Linux file system</para></listitem>
+<listitem><para>Display and set paths</para></listitem>
+<listitem><para>Describe the most important files, including kernel and shell</para></listitem>
+<listitem><para>Find lost and hidden files</para></listitem>
+<listitem><para>Create, move and delete files and directories</para></listitem>
+<listitem><para>Display contents of files</para></listitem>
+<listitem><para>Understand and use different link types</para></listitem>
+<listitem><para>Find out about file properties and change file permissions</para></listitem> 
+</itemizedlist>
+</para>
+</abstract>
+
+<sect1 id="sect_03_01"><title>General overview of the Linux file system</title>
+<sect2 id="sect_03_01_01"><title>Files</title>
+<sect3 id="sect_03_01_01_01"><title>General</title>
+<para>A simple description<indexterm><primary>files</primary><secondary>concept</secondary></indexterm> of the UNIX system, also applicable to Linux, is this:</para>
+<para><quote>On a UNIX system, everything is a file; if something is not a file, it is a process.</quote></para>
+<para>This statement is true because there are special<indexterm><primary>files</primary><secondary>abstraction</secondary></indexterm> files that are more than just files (named pipes and sockets, for instance), but to keep things simple, saying that everything is a file is an acceptable generalization.  A Linux system, just like UNIX, makes no difference between a file and a directory, since a directory is just a file containing names of other files.  Programs, services, texts, images, and so forth, are all files.  Input and output devices, and generally all devices, are considered to be files, according to the system.</para>
+<para>In order to manage all those files in an orderly fashion, man likes to think of them in an ordered tree-like structure<indexterm><primary>files</primary><secondary>structure</secondary></indexterm> on the hard disk, as we know from <application>MS-DOS</application> (Disk Operating System) for instance.  The large branches contain more branches, and the branches at the end contain the tree's leaves or normal files.  For now we will use this image of the tree, but we will find out later why this is not a fully accurate image.</para>
+</sect3>
+<sect3 id="sect_03_01_01_02"><title>Sorts of files</title>
+<para>Most files<indexterm><primary>files</primary><secondary>types</secondary></indexterm> are just files, called <emphasis>regular<indexterm><primary>regular files</primary><secondary></secondary></indexterm></emphasis> files; they contain normal data, for example text files, executable files or programs, input for or output from a program and so on.</para>
+<para>While it is reasonably safe to suppose that everything you encounter on a Linux system is a file, there are some exceptions.</para>
+<itemizedlist>
+<listitem><para><emphasis>Directories</emphasis>: files<indexterm><primary>directories</primary><secondary>definition</secondary></indexterm> that are lists of other files.</para></listitem>
+<listitem><para><emphasis>Special files</emphasis>: the mechanism<indexterm><primary>special files</primary><secondary>definition</secondary></indexterm> used for input and output.  Most special files are in <filename>/dev</filename>, we will discuss them later.</para></listitem>
+<listitem><para><emphasis>Links</emphasis>: a system<indexterm><primary>links</primary><secondary>definition</secondary></indexterm> to make a file or directory visible in multiple parts of the system's file tree.  We will talk about links in detail.</para></listitem>
+<listitem><para><emphasis>(Domain) sockets</emphasis>: a special<indexterm><primary>sockets</primary><secondary>definition</secondary></indexterm> file type, similar to TCP/IP sockets, providing inter-process networking protected by the file system's access control.</para></listitem>
+<listitem><para><emphasis>Named pipes</emphasis>: act<indexterm><primary>named pipes</primary><secondary>definition</secondary></indexterm> more or less like sockets and form a way for processes to communicate with each other, without using network socket semantics.</para></listitem>
+</itemizedlist>
+<para>The <option>-l</option> option to <command>ls<indexterm><primary>ls</primary></indexterm></command> displays the file type, using the first character of each input line:</para>
+<screen>
+<prompt>jaime:~/Documents&gt;</prompt> <command>ls -l</command>
+total 80
+-rw-rw-r--   1 jaime   jaime   31744 Feb 21 17:56 intro Linux.doc
+-rw-rw-r--   1 jaime   jaime   41472 Feb 21 17:56 Linux.doc
+drwxrwxr-x   2 jaime   jaime    4096 Feb 25 11:50 course
+</screen>
+<para>This table gives an overview of the characters determining the file type<indexterm><primary>files</primary><secondary>list of types</secondary></indexterm>:</para>
+<table frame="all">
+<title>File types in a long list</title>
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead>
+<row>
+<entry>Symbol</entry>
+<entry>Meaning</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry>-</entry><entry>Regular<indexterm><primary>dash</primary></indexterm> file</entry>
+</row>
+<row>
+<entry>d</entry><entry>Directory</entry>
+</row>
+<row>
+<entry>l</entry><entry>Link</entry>
+</row>
+<row>
+<entry>c</entry><entry>Special file</entry>
+</row>
+<row>
+<entry>s</entry><entry>Socket</entry>
+</row>
+<row>
+<entry>p</entry><entry>Named pipe</entry>
+</row>
+<row>
+<entry>b</entry><entry>Block device</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<para>In order not to always have to perform a long listing for seeing the file type, a lot of systems by default don't issue just <command>ls<indexterm><primary>ls</primary></indexterm></command>, but <command>ls <option>-F</option></command>, which suffixes file names with one of the characters <quote>/=*|@</quote> to indicate the file type.  To make it extra easy on the beginning user, both the <option>-F</option> and <option>--color<indexterm><primary>coloured ls output</primary></indexterm></option> options are usually combined, see <xref linkend="sect_03_03_01_01" />.  We will use <command>ls <option>-F</option></command> throughout this document for better readability.</para>
+
+<para>As a user, you only need to deal directly with plain files, executable files, directories and links.  The special file types are there for making your system do what you demand from it and are dealt with by system administrators and programmers.</para>
+
+
+<para>
+Now, before we look at the important files and directories, we need to know more about partitions.</para>
+</sect3>
+</sect2>
+<sect2 id="sect_03_01_02"><title>About partitioning</title>
+<sect3 id="sect_03_01_02_01"><title>Why partition?</title>
+<para>Most people have a vague knowledge of what partitions are, since every operating system has the ability to create or remove them.  It may seem strange that Linux uses more than one partition on the same disk, even when using the standard installation procedure, so some explanation is called for.</para>
+<para>One of the goals of having different partitions<indexterm><primary>partitions</primary><secondary>why?</secondary></indexterm> is to achieve higher data security in case of disaster.  By dividing the hard disk in partitions, data can be grouped and separated.  When an accident occurs, only the data in the partition that got the hit will be damaged, while the data on the other partitions will most likely survive. </para>
+<para>This principle dates from the days when Linux didn't have journaled<indexterm><primary>journaled file system</primary></indexterm> file systems and power failures might have lead to disaster.  The use of partitions remains for security and robustness reasons, so a breach on one part of the system doesn't automatically mean that the whole computer is in danger.  This is currently the most important reason for partitioning.  A simple example: a user creates a script, a program or a web application that starts filling up the disk.  If the disk contains only one big partition, the entire system will stop functioning if the disk is full.  If the user stores the data on a separate partition, then only that (data) partition will be affected, while the system partitions and possible other data partitions keep functioning.</para>
+<para>Mind that having a journaled file system only provides data security in case of power failure and sudden disconnection of storage devices.  This does not protect your data against bad blocks and logical errors in the file system.  In those cases, you should use a RAID (Redundant Array of Inexpensive Disks) solution.</para>
+</sect3>
+<sect3 id="sect_03_01_02_02"><title>Partition layout and types</title>
+<para>There are two kinds of major partitions<indexterm><primary>partitions</primary><secondary>types</secondary></indexterm> on a Linux system:</para>
+<itemizedlist>
+<listitem><para><emphasis>data partition<indexterm><primary>data partition</primary></indexterm></emphasis>: normal Linux system data, including the <emphasis>root partition</emphasis> containing all the data to start up and run the system; and </para></listitem>
+<listitem><para><emphasis>swap partition<indexterm><primary>swap partition</primary></indexterm></emphasis>: expansion of the computer's physical memory, extra memory on hard disk.</para></listitem>
+</itemizedlist>
+<para>Most systems contain a root partition, one or more data partitions and one or more swap partitions.  Systems in mixed environments may contain partitions for other system data, such as a partition with a FAT or VFAT file system for MS Windows data.</para>
+<para>Most Linux systems use <command>fdisk<indexterm><primary>fdisk</primary></indexterm></command> at installation time to set<indexterm><primary>partitions</primary><secondary>creation</secondary></indexterm> the partition type.  As you may have noticed during the exercise from Chapter 1, this usually happens automatically.  On some occasions, however, you may not be so lucky.  In such cases, you will need to select the partition type manually and even manually do the actual partitioning.  The standard Linux partitions have number 82 for swap and 83 for data, which can be journaled (ext3) or normal (ext2, on older systems).  The <command>fdisk</command> utility has built-in help, should you forget these values.</para>
+<para>Apart from these two, Linux supports a variety of other file system types, such as the relatively new Reiser file system, JFS, NFS, FATxx and many other file systems natively available on other (proprietary) operating systems.</para>
+
+<para>The standard root partition<indexterm><primary>partitions</primary><secondary>root partition</secondary></indexterm> (indicated with a single forward slash<indexterm><primary>slash</primary><secondary>forward</secondary></indexterm>, <emphasis>/</emphasis>) is about 100-500 MB, and contains<indexterm><primary>root partition</primary></indexterm> the system configuration files, most basic commands and server programs, system libraries, some temporary space and the home directory of the administrative user.  A standard installation requires about 250 MB for the root partition.</para>
+<para>Swap<indexterm><primary>swap partition</primary></indexterm> space (indicated with <emphasis>swap<indexterm><primary>partitions</primary><secondary>swap</secondary></indexterm></emphasis>) is only accessible for the system itself, and is hidden from view during normal operation.  Swap is the system that ensures, like on normal UNIX systems, that you can keep on working, whatever happens.  On Linux, you will virtually never see irritating messages like <emphasis>Out of memory, please close some applications first and try again</emphasis>, because of this extra memory.  The swap or virtual memory procedure has long been adopted by operating systems outside the UNIX world by now.</para>
+<para>Using memory on a hard disk is naturally slower than using the real memory chips of a computer, but having this little extra is a great comfort.  We will learn more about swap when we discuss processes in <xref linkend="chap_04" />.</para>
+<para>Linux generally counts on having twice the amount of physical memory in the form of swap space on the hard disk.  When installing a system, you have to know how you are going to do this.  An example<indexterm><primary>swap partition</primary><secondary>example</secondary></indexterm> on a system with 512 MB of RAM:</para>
+<itemizedlist>
+<listitem><para>1st possibility: one swap partition of 1 GB</para></listitem>
+<listitem><para>2nd possibility: two swap partitions of 512 MB</para></listitem>
+<listitem><para>3rd possibility: with two hard disks: 1 partition of 512 MB on each disk.</para></listitem>
+</itemizedlist>
+<para>The last option will give the best results when a lot of I/O is to be expected.</para>
+<para>Read the software documentation for specific guidelines.  Some applications, such as databases, might require more swap space.  Others, such as some handheld systems, might not have any swap at all by lack of a hard disk.  Swap space may also depend on your kernel version.</para>
+<para>The kernel is on a separate partition as well in many distributions, because it is the most important file of your system.  If this is the case, you will find that you also have a <emphasis>/boot<indexterm><primary>boot partition</primary></indexterm></emphasis> partition, holding your kernel(s) and accompanying data files.</para>
+<para>The rest of the hard disk(s) is generally divided in data partitions<indexterm><primary>data partitions</primary></indexterm>, although it may be that all of the non-system critical data resides on one partition, for example when you perform a standard workstation installation.  When non-critical data is separated on different partitions, it usually happens following<indexterm><primary>partitions</primary><secondary>layout</secondary></indexterm> a set pattern:</para>
+<itemizedlist>
+<listitem><para>a partition for user programs (<emphasis>/usr</emphasis>)</para></listitem>
+<listitem><para>a partition containing the users' personal data (<emphasis>/home</emphasis>)</para></listitem>
+<listitem><para>a partition to store temporary data like print- and mail-queues (<emphasis>/var</emphasis>)</para></listitem>
+<listitem><para>a partition for third party and extra software (<emphasis>/opt</emphasis>)</para></listitem>
+</itemizedlist>
+<para>Once the partitions are made, you can only add more.  Changing sizes or properties of existing partitions is possible but not advisable.</para>
+<para>The division of hard disks into partitions is determined by the system administrator.  On larger<indexterm><primary>partitions</primary><secondary>server layout</secondary></indexterm> systems, he or she may even spread one partition over several hard disks, using the appropriate software.  Most distributions allow for standard setups optimized for workstations (average users) and for general server purposes, but also accept customized partitions.  During the installation process you can define your own partition layout using either your distribution specific tool, which is usually a straight forward graphical interface, or <command>fdisk<indexterm><primary>fdisk</primary></indexterm></command>, a text-based tool for creating partitions and setting their properties.</para>
+<para>A workstation<indexterm><primary>partitions</primary><secondary>workstation layout</secondary></indexterm> or client installation is for use by mainly one and the same person.  The selected software for installation reflects this and the stress is on common user packages, such as nice desktop themes, development tools, client programs for E-mail, multimedia software, web and other services.  Everything is put together on one large partition, swap space twice the amount of RAM is added and your generic workstation is complete, providing the largest amount of disk space possible for personal use, but with the disadvantage of possible data integrity loss during problem situations.</para>
+<para>On a server, system data<indexterm><primary>partitions</primary><secondary>server layout</secondary></indexterm> tends to be separate from user data.  Programs that offer services are kept in a different place than the data handled by this service.  Different partitions will be created on such systems:</para>
+<itemizedlist> 
+<listitem><para>a partition with all data necessary to boot the machine</para></listitem>
+<listitem><para>a partition with configuration data and server programs</para></listitem>
+<listitem><para>one or more partitions containing the server data such as database tables, user mails, an ftp archive etc.</para></listitem>
+<listitem><para>a partition with user programs and applications</para></listitem>
+<listitem><para>one or more partitions for the user specific files (home directories)</para></listitem>
+<listitem><para>one or more swap partitions (virtual memory)</para></listitem>
+</itemizedlist> 
+
+<para>Servers usually have more memory and thus more swap space.  Certain server processes, such as databases, may require more swap space than usual; see the specific documentation for detailed information.  For better performance, swap is often divided into different swap partitions.</para>
+</sect3>
+<sect3 id="sect_03_01_02_03"><title>Mount points</title>
+<para>All partitions<indexterm><primary>partitions</primary><secondary>mount points</secondary></indexterm> are attached to the system via a mount point<indexterm><primary>mount point</primary></indexterm>.  The mount point defines the place of a particular data set in the file system.  Usually, all partitions are connected through the <emphasis>root</emphasis> partition<indexterm><primary>partitions</primary><secondary>root partition</secondary></indexterm>.  On this partition, which is indicated with the slash (/), directories are created.  These empty directories will be the starting point of the partitions that are attached to them.  An example: given a partition that holds the following directories:</para>
+<screen>
+videos/		cd-images/	pictures/
+</screen>
+<para>We want to attach<indexterm><primary>mount point</primary><secondary>example</secondary></indexterm> this partition in the filesystem in a directory called <filename>/opt/media</filename>.  In order to do this, the system administrator has to make sure that the directory <filename>/opt/media</filename> exists on the system.  Preferably, it should be an empty directory.  How this is done is explained later in this chapter.  Then, using the <command>mount</command> command, the administrator can attach the partition to the system.  When you look at the content of the formerly empty directory <filename>/opt/media</filename>, it will contain the files and directories that are on the mounted medium (hard disk or partition of a hard disk, CD, DVD, flash card, USB or other storage device).</para>
+<para>During system startup, all the partitions are thus mounted, as described in the file <filename>/etc/fstab<indexterm><primary>fstab</primary></indexterm></filename>.  Some partitions are not mounted by default, for instance if they are not constantly connected to the system, such like the storage used by your digital camera.  If well configured, the device will be mounted as soon as the system notices that it is connected, or it can be user-mountable, i.e. you don't need to be system administrator to attach and detach the device to and from the system.  There is an example in <xref linkend="sect_09_03" />.</para>
+
+<para>On a running system, information about the partitions and their mount points can be displayed using the <command>df<indexterm><primary>df</primary></indexterm></command> command (which stands for <emphasis>disk full</emphasis> or <emphasis>disk free</emphasis>).  In Linux, <command>df</command> is the GNU version, and supports the <option>-h</option> or <emphasis>human readable</emphasis> option which greatly improves readability.  Note that commercial UNIX machines commonly have their own versions of <command>df</command> and many other commands.  Their behavior is usually the same, though GNU versions of common tools often have more and better features.</para>
+<para>The <command>df</command> command only displays information about active non-swap partitions.  These can include partitions from other networked systems, like in the example below where the home directories are mounted from a file server on the network, a situation often encountered in corporate<indexterm><primary>df</primary><secondary>example</secondary></indexterm> environments.</para>
+<screen>
+<prompt>freddy:~&gt;</prompt> <command>df -h</command>
+Filesystem          Size  Used Avail Use% Mounted on
+/dev/hda8           496M  183M  288M  39% /
+/dev/hda1           124M  8.4M  109M   8% /boot
+/dev/hda5            19G   15G  2.7G  85% /opt
+/dev/hda6           7.0G  5.4G  1.2G  81% /usr
+/dev/hda7           3.7G  2.7G  867M  77% /var
+fs1:/home           8.9G  3.7G  4.7G  44% /.automount/fs1/root/home
+</screen>
+</sect3>
+</sect2>
+<sect2 id="sect_03_01_03"><title>More file system layout</title>
+<sect3 id="sect_03_01_03_01"><title>Visual</title>
+<para>For convenience, the Linux file system is usually thought of in a tree<indexterm><primary>file system</primary><secondary>layout</secondary></indexterm> structure.  On a standard Linux system you will find the layout generally follows the scheme presented<indexterm><primary>directory tree</primary></indexterm> below.</para>
+<figure><title>Linux file system layout</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/FS-layout.eps" format="EPS"></imagedata>
+</imageobject>
+<imageobject>
+<imagedata fileref="images/FS-layout.png" format="PNG"></imagedata>
+</imageobject>
+<textobject>
+<phrase>Graphical overview of Linux top level directories and most important subdirectories.</phrase>
+</textobject>
+</mediaobject>
+</figure>
+<para>This is a layout from a RedHat system.  Depending on the system admin, the operating system and the mission of the UNIX machine, the structure may vary, and directories may be left out or added at will.  The names are not even required; they are only a convention.</para>
+<para>The tree of the file system starts at the trunk or <emphasis>slash<indexterm><primary>slash</primary></indexterm></emphasis>, indicated by a forward slash (/).  This directory, containing all underlying directories and files, is also called the <emphasis>root directory<indexterm><primary>root directory</primary></indexterm></emphasis> or <quote>the root</quote> of the file system.</para>
+<para>Directories that are only one level below the root directory are often preceded by a slash, to indicate their position and prevent confusion with other directories that could have the same name.  When starting with a new system, it is always a good idea to take a look in the root directory<indexterm><primary>root directory</primary><secondary>example</secondary></indexterm>.  Let's see what you could run into:</para>
+<screen>
+<prompt>emmy:~&gt;</prompt> <command>cd /</command>
+<prompt>emmy:/&gt;</prompt> <command>ls</command>
+bin/   dev/  home/    lib/         misc/  opt/     root/  tmp/  var/
+boot/  etc/  initrd/  lost+found/  mnt/   proc/    sbin/  usr/
+</screen>
+<table frame="all">
+<title>Subdirectories of the root directory</title>
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead>
+<row>
+<entry>Directory</entry>
+<entry>Content</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry>/bin</entry>
+<entry>Common<indexterm><primary>bin</primary></indexterm> programs, shared by the system, the system administrator and the users.</entry>
+</row>
+
+<row>
+<entry>/boot</entry>
+<entry>The startup<indexterm><primary>boot</primary></indexterm> files and the kernel, <filename>vmlinuz</filename>.  In some recent distributions also <filename>grub</filename> data.  Grub is the <application>GRand Unified Boot</application> loader and is an attempt to get rid of the many different boot-loaders we know today.</entry>
+</row>
+<row><entry>/dev</entry>
+<entry>Contains references<indexterm><primary>dev</primary></indexterm> to all the CPU peripheral hardware, which are represented as files with special properties.</entry>
+</row>
+<row><entry>/etc</entry>
+<entry>Most important<indexterm><primary>etc</primary></indexterm> system configuration files are in <filename>/etc</filename>, this directory contains data similar to those in the Control Panel in Windows</entry></row>
+<row><entry>/home</entry>
+<entry>Home directories<indexterm><primary>home</primary></indexterm> of the common users.</entry>
+</row>
+<row><entry>/initrd</entry>
+<entry>(on some distributions) Information<indexterm><primary>initrd</primary></indexterm> for booting.  Do not remove!</entry>
+</row>
+<row><entry>/lib</entry>
+<entry>Library<indexterm><primary>lib</primary></indexterm> files, includes files for all kinds of programs needed by the system and the users.</entry>
+</row>
+<row><entry>/lost+found</entry>
+<entry>Every partition<indexterm><primary>lost+found</primary></indexterm> has a <filename>lost+found</filename> in its upper directory.  Files that were saved during failures are here.</entry>
+</row>
+<row><entry>/misc</entry>
+<entry>For miscellaneous<indexterm><primary>misc</primary></indexterm> purposes.</entry>
+</row>
+<row><entry>/mnt</entry>
+<entry>Standard mount<indexterm><primary>mnt</primary></indexterm> point for external file systems, e.g. a CD-ROM or a digital camera.</entry>
+</row>
+<row><entry>/net</entry>
+<entry>Standard mount point<indexterm><primary>net</primary></indexterm> for entire remote file systems</entry>
+</row>
+<row><entry>/opt</entry>
+<entry>Typically contains<indexterm><primary>opt</primary></indexterm> extra and third party software.</entry>
+</row>
+<row><entry>/proc</entry>
+<entry>A virtual<indexterm><primary>proc</primary></indexterm> file system containing information about system resources.  More information about the meaning of the files in <filename>proc</filename> is obtained by entering the command <command>man <parameter>proc</parameter></command> in a terminal window.  The file <filename>proc.txt</filename> discusses the virtual file system in detail.</entry>
+</row>
+<row><entry>/root</entry>
+<entry>The administrative<indexterm><primary>root</primary></indexterm> user's home directory.  Mind the difference between /, the root directory and /root, the home directory of the <emphasis>root</emphasis> user.</entry>
+</row>
+<row><entry>/sbin</entry>
+<entry>Programs<indexterm><primary>sbin</primary></indexterm> for use by the system and the system administrator.</entry>
+</row>
+<row><entry>/tmp</entry>
+<entry>Temporary<indexterm><primary>tmp</primary></indexterm> space for use by the system, cleaned upon reboot, so don't use this for saving any work!</entry>
+</row>
+<row><entry>/usr</entry>
+<entry>Programs<indexterm><primary>usr</primary></indexterm>, libraries, documentation etc. for all user-related programs.</entry>
+</row>
+<row><entry>/var</entry>
+<entry>Storage for all variable<indexterm><primary>var</primary></indexterm> files and temporary files created by users, such as log files, the mail queue, the print spooler area, space for temporary storage of files downloaded from the Internet, or to keep an image of a CD before burning it.</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+<para>How can you find out which partition a directory is on?  Using the <command>df</command> command with a dot (.) as an option shows the partition the current directory belongs to, and informs about the amount of space used<indexterm><primary>df</primary><secondary>example</secondary></indexterm> on this partition:</para>
+<screen>
+<prompt>sandra:/lib&gt;</prompt> <command>df -h .</command>
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/hda7             980M  163M  767M  18% /
+</screen>
+<para>As a general rule, every directory under the root directory is on the root partition, unless it has a separate entry in the full listing from <command>df</command> (or <command>df <option>-h</option></command> with no other options).</para>
+<para>Read more in <command>man <parameter>hier<indexterm><primary>file system</primary><secondary>hierarchy</secondary></indexterm></parameter></command>.</para>
+</sect3>
+
+<sect3 id="sect_03_01_03_02"><title>The file system in reality</title>
+<para>For most users and for most common system administration tasks, it is enough to accept that files and directories are ordered in a tree-like structure.  The computer, however, doesn't understand a thing about trees or tree-structures.</para> 
+<para>Every partition<indexterm><primary>partitions</primary><secondary>file system</secondary></indexterm> has its own file system.  By imagining all those file systems together, we can form an idea of the tree-structure of the entire system, but it is not as simple as that.  In a file system, a file is represented by an <emphasis>inode<indexterm><primary>inode</primary><secondary>definition</secondary></indexterm></emphasis>, a kind of serial number containing information about the actual data that makes up the file: to whom this file belongs, and where is it located on the hard disk.</para>
+<para>Every partition has its own set of inodes; throughout a system with multiple partitions, files with the same inode number can exist.</para>
+<para>Each inode describes a data structure on the hard disk, storing the properties of a file, including the physical location of the file data.  When a hard disk is initialized to accept data storage, usually during the initial system installation process or when adding extra disks to an existing system, a fixed number of inodes per partition is created.  This number will be the maximum amount of files, of all types (including directories, special files, links etc.) that can exist at the same time on the partition.  We typically count on having 1 inode per 2 to 8 kilobytes of storage.</para>
+<para>At the time a new file is created, it gets a free inode.  In that inode is the following<indexterm><primary>inode</primary><secondary>stored information</secondary></indexterm> information:</para>
+<itemizedlist>
+<listitem><para>Owner and group owner of the file.</para></listitem>
+<listitem><para>File type (regular, directory, ...)</para></listitem>
+<listitem><para>Permissions on the file <xref linkend="sect_03_04_01" /></para></listitem>
+<listitem><para>Date and time of creation, last read and change.</para></listitem>
+<listitem><para>Date and time this information has been changed in the inode.</para></listitem>
+<listitem><para>Number of links to this file (see later in this chapter).</para></listitem>
+<listitem><para>File size</para></listitem>
+<listitem><para>An address defining the actual location of the file data.</para></listitem>
+</itemizedlist>
+
+<para>The only information not included in an inode, is the file name and directory.  These are stored in the special directory files.  By comparing file names and inode numbers, the system can make up a tree-structure that the user understands.  Users can display inode numbers using the <option>-i</option> option to ls.  The inodes have their own separate space on the disk.</para>
+</sect3>
+</sect2>
+
+</sect1>
+<sect1 id="sect_03_02"><title>Orientation in the file system</title>
+<sect2 id="sect_03_02_01"><title>The path</title>
+<para>When you want the system<indexterm><primary>file system</primary><secondary>orientation</secondary></indexterm> to execute a command, you almost never have to give the full path to that command.  For example, we know that the <command>ls</command> command is in the <filename>/bin</filename> directory (check with <command>which <option>-a</option> <parameter>ls</parameter></command>), yet we don't have to enter the command <command>/bin/ls</command> for the computer to list the content of the current directory.</para>
+<para>The <varname>PATH<indexterm><primary>PATH</primary></indexterm></varname> environment variable takes care of this.  This variable lists those directories in the system where executable files can be found, and thus saves the user a lot of typing and memorizing locations of commands.  So the path naturally contains a lot of directories containing <filename>bin</filename> somewhere in their names, as the user below demonstrates.  The <command>echo<indexterm><primary>echo</primary></indexterm></command> command is used to display the content (<quote>$</quote>) of the variable <varname>PATH<indexterm><primary>PATH</primary><secondary>example</secondary></indexterm></varname>:</para>
+<screen>
+<prompt>rogier:&gt;</prompt> <command>echo $PATH</command>
+/opt/local/bin:/usr/X11R6/bin:/usr/bin:/usr/sbin/:/bin
+</screen>
+<para>In this example, the directories <filename>/opt/local/bin</filename>, <filename>/usr/X11R6/bin</filename>, <filename>/usr/bin</filename>, <filename>/usr/sbin</filename> and <filename>/bin</filename> are subsequently searched for the required program.  As soon as a match is found, the search is stopped, even if not every directory in the path has been searched.  This can lead to strange situations.  In the first example below, the user knows there is a program called <command>sendsms</command> to send an SMS message, and another user on the same system can use it, but she can't.  The difference is in the configuration of the <varname>PATH</varname> variable:</para>
+<screen>
+<prompt>[jenny@blob jenny]$</prompt> <command>sendsms</command>
+bash: sendsms: command not found
+[jenny@blob jenny]$ echo $PATH
+/bin:/usr/bin:/usr/bin/X11:/usr/X11R6/bin:/home/jenny/bin
+[jenny@blob jenny]$ su - tony
+Password:
+tony:~&gt;which sendsms
+sendsms is /usr/local/bin/sendsms
+
+tony:~&gt;echo $PATH
+/home/tony/bin.Linux:/home/tony/bin:/usr/local/bin:/usr/local/sbin:\
+/usr/X11R6/bin:/usr/bin:/usr/sbin:/bin:/sbin
+</screen>
+<para>Note the use of the <command>su<indexterm><primary>su</primary></indexterm></command> (switch user) facility, which allows you to run a shell in the environment of another user, on the condition that you know the user's password.</para>
+<para>A backslash<indexterm><primary>slash</primary><secondary>backslash</secondary></indexterm> indicates the continuation<indexterm><primary>backslash</primary></indexterm> of a line on the next, without an <keycap>Enter</keycap> separating one line from the other.</para>
+<para>In the next example, a user wants to call on the <command>wc<indexterm><primary>wc</primary></indexterm></command> (word count) command to check the number of lines in a file, but nothing happens and he has to break off his action using the <keycap>Ctrl</keycap>+<keycap>C</keycap> combination:</para>
+<screen>
+<prompt>jumper:~&gt;</prompt> <command>wc -l test</command>
+
+(Ctrl-C)
+<prompt>jumper:~&gt;</prompt> <command>which wc</command>
+wc is hashed (/home/jumper/bin/wc)
+
+<prompt>jumper:~&gt;</prompt> <command>echo $PATH</command>
+/home/jumper/bin:/usr/local/bin:/usr/local/sbin:/usr/X11R6/bin:\
+/usr/bin:/usr/sbin:/bin:/sbin
+</screen>
+<para>The use of the <command>which<indexterm><primary>which</primary></indexterm></command> command shows us that this user has a <filename>bin</filename>-directory in his home directory, containing a program that is also called <command>wc</command>.  Since the program in his home directory is found first when searching the paths upon a call for <command>wc</command>, this <quote>home-made</quote> program is executed, with input it probably doesn't understand, so we have to stop it.  To resolve this problem there are several ways (there are always several ways to solve a problem in UNIX/Linux): one answer could be to rename the user's <command>wc</command> program, or the user can give the full path to the exact command he wants, which can be found by using the <option>-a</option> option to the <command>which</command> command.</para>
+<para>If the user uses programs in the other directories more frequently, he can change his path to look in his own directories<indexterm><primary>PATH</primary><secondary>configuration</secondary></indexterm> last:</para>
+<screen>
+<prompt>jumper:~&gt;</prompt> <command>export PATH=/usr/local/bin:/usr/local/sbin:/usr/X11R6/bin:\
+/usr/bin:/usr/sbin:/bin:/sbin:/home/jumper/bin</command>
+</screen>
+<note><title>Changes are not permanent!</title>
+<para>Note that when using the <command>export</command> command in a shell, the changes are temporary and only valid for this session (until you log out).  Opening new sessions, even while the current one is still running, will not result in a new path in the new session.  We will see in <xref linkend="sect_07_02" /> how we can make these kinds of changes to the environment permanent, adding these lines to the shell configuration files.</para></note>
+
+</sect2>
+<sect2 id="sect_03_02_02"><title>Absolute and relative paths</title>
+<para>A path<indexterm><primary>paths</primary><secondary>types</secondary></indexterm>, which is the way you need to follow in the tree structure to reach a given file, can be described as starting from the trunk of the tree (the / or root directory).  In that case, the path starts with a slash and is called an absolute path<indexterm><primary>absolute paths</primary></indexterm>, since there can be no mistake: only one file on the system can comply.</para>
+<para>In the other case, the path doesn't start with a slash and confusion is possible between <filename>~/bin/wc</filename> (in the user's home directory) and <filename>bin/wc</filename> in <filename>/usr</filename>, from the previous example.  Paths that don't start with a slash are always relative<indexterm><primary>relative paths</primary></indexterm>.</para>
+<para>In relative paths we also use the . and .. indications for the current and the parent directory.  A couple of practical<indexterm><primary>paths</primary><secondary>examples</secondary></indexterm> examples:</para>
+<itemizedlist>
+<listitem>
+<para>When you want to compile source code, the installation documentation often instructs you to run the command <command>./configure</command>, which runs the <emphasis>configure</emphasis> program located in the current directory (that came with the new code), as opposed to running another configure program elsewhere on the system.</para></listitem>
+<listitem><para>In HTML files, relative paths are often used to make a set of pages easily movable to another place:</para>
+<screen>
+&lt;img alt="Garden with trees" src="../images/garden.jpg"&gt;
+</screen>
+</listitem>
+<listitem><para>Notice the difference one more time:</para>
+<screen>
+<prompt>theo:~&gt;</prompt> <command>ls /mp3</command>
+ls: /mp3: No such file or directory
+theo:~&gt;ls mp3/
+oriental/  pop/  sixties/
+</screen>
+</listitem>
+</itemizedlist>
+</sect2>
+<sect2 id="sect_03_02_03"><title>The most important files and directories</title>
+<sect3 id="sect_03_02_03_01"><title>The kernel</title>
+<para>The kernel<indexterm><primary>kernel</primary><secondary>functions</secondary></indexterm> is the heart of the system.  It manages the communication between the underlying hardware and the peripherals.  The kernel also makes sure that processes and daemons (server processes) are started and stopped at the exact right times.  The kernel has a lot of other important tasks, so many that there is a special kernel-development mailing list on this subject only, where huge amounts of information are shared.  It would lead us too far to discuss the kernel in detail.  For now it suffices to know that the kernel is the most important file on the system.</para>
+</sect3>
+<sect3 id="sect_03_02_03_02"><title>The shell</title>
+<sect4><title>What is a shell?</title>
+<para>When I was looking<indexterm><primary>shell</primary><secondary>definition</secondary></indexterm> for an appropriate explanation on the concept of a <emphasis>shell</emphasis>, it gave me more trouble than I expected.  All kinds of definitions are available, ranging from the simple comparison that <quote>the shell is the steering wheel of the car</quote>, to the vague definition in the Bash manual which says that <quote>bash is an sh-compatible command language interpreter,</quote> or an even more obscure expression, <quote>a shell manages the interaction between the system and its users</quote>.  A shell is much more than that.</para>
+<para>A shell can best be compared with a way of talking to the computer, a language.  Most users do know that other language, the point-and-click language of the desktop.  But in that language the computer is leading the conversation, while the user has the passive role of picking tasks from the ones presented.  It is very difficult for a programmer to include all options and possible uses of a command in the GUI-format.  Thus, GUIs are almost always less capable than the command or commands that form the backend.</para>
+<para>The shell, on the other hand, is an advanced way of communicating with the system, because it allows for two-way conversation and taking initiative.  Both partners in the communication are equal, so new ideas can be tested.  The shell allows the user to handle a system in a very flexible way. An additional asset is that the shell allows for task automation.</para>
+</sect4>
+<sect4><title>Shell types</title>
+<para>Just like people know different languages and dialects, the computer knows different shell<indexterm><primary>shell</primary><secondary>types</secondary></indexterm> types:</para>
+<itemizedlist>
+<listitem><para><command>sh<indexterm><primary>sh</primary></indexterm></command> or <application>Bourne Shell<indexterm><primary>Bourne Shell</primary></indexterm></application>: the original shell still used on UNIX systems and in UNIX related environments.  This is the basic shell, a small program with few features.  When in POSIX-compatible mode, <command>bash</command> will emulate this shell.</para></listitem>
+<listitem><para><command>bash<indexterm><primary>bash</primary></indexterm></command> or <application>Bourne Again SHell<indexterm><primary>Bourne Again SHell</primary></indexterm></application>: the standard GNU shell, intuitive and flexible.  Probably most advisable for beginning users while being at the same time a powerful tool for the advanced and professional user.  On Linux, <command>bash</command> is the standard shell for common users.  This shell is a so-called <emphasis>superset</emphasis> of the <application>Bourne</application> shell, a set of add-ons and plug-ins.  This means that the <application>Bourne Again SHell</application> is compatible with the <application>Bourne</application> shell: commands that work in <command>sh</command>, also work in <command>bash</command>.  However, the reverse is not always the case.  All examples and exercises in this book use <command>bash</command>.</para></listitem>
+<listitem><para><command>csh<indexterm><primary>csh</primary></indexterm></command> or <application>C Shell<indexterm><primary>C shell</primary></indexterm></application>: the syntax of this shell resembles that of the C programming language.  Sometimes asked for by programmers.</para></listitem>
+<listitem><para><command>tcsh<indexterm><primary>tcsh</primary></indexterm></command> or <application>Turbo C Shell</application>: a superset of the common <application>C Shell</application>, enhancing user-friendliness and speed.</para></listitem>
+<listitem><para><command>ksh<indexterm><primary>ksh</primary></indexterm></command> or the <application>Korn<indexterm><primary>Korn shell</primary></indexterm></application> shell: sometimes appreciated by people with a UNIX background.  A superset of the <application>Bourne</application> shell; with standard configuration a nightmare for beginning users.</para></listitem>
+</itemizedlist>
+
+<para>The file <filename>/etc/shells<indexterm><primary>shells</primary></indexterm></filename> gives an overview of known shells on a Linux system:</para>
+<screen>
+<prompt>mia:~&gt;</prompt> <command>cat /etc/shells</command>
+/bin/bash
+/bin/sh
+/bin/tcsh
+/bin/csh
+</screen>
+<note><title>Fake Bourne shell</title>
+<para>Note that <filename>/bin/sh</filename> is usually a link to <application>Bash<indexterm><primary>sh</primary></indexterm></application>, which will execute in <application>Bourne</application> shell compatible mode when called on this way.</para>
+</note>
+<para>Your default shell is set in the <filename>/etc/passwd<indexterm><primary>passwd</primary></indexterm></filename> file, like this line for user <emphasis>mia</emphasis>:</para>
+<screen>
+mia:L2NOfqdlPrHwE:504:504:Mia Maya:/home/mia:/bin/bash
+</screen>
+<para>To switch from one shell to another<indexterm><primary>shell</primary><secondary>switching</secondary></indexterm>, just enter the name of the new shell in the active terminal.  The system finds the directory where the name occurs using the <varname>PATH</varname> settings, and since a shell is an executable file (program), the current shell activates it and it gets executed.  A new prompt is usually shown, because each shell has its typical appearance:</para>
+<screen>
+<prompt>mia:~&gt;</prompt> <command>tcsh</command>
+<prompt>[mia@post21 ~]$</prompt>
+</screen>
+</sect4>
+<sect4><title>Which shell am I using?</title>
+<para>If you don't know which shell you are using, either check the line for your account in <filename>/etc/passwd</filename> or type the command<indexterm><primary>SHELL</primary></indexterm></para>
+<cmdsynopsis><command>echo <varname>$SHELL</varname></command></cmdsynopsis>
+</sect4>
+</sect3>
+<sect3 id="sect_03_02_03_03"><title>Your home directory</title>
+
+<para>Your home<indexterm><primary>home directory</primary><secondary>definition</secondary></indexterm> directory is your default destination when connecting to the system.  In most cases it is a subdirectory of <filename>/home<indexterm><primary>home</primary></indexterm></filename>, though this may vary.  Your home directory may be located on the hard disk of a remote file server; in that case your home directory may be found in <filename>/nethome/your_user_name</filename>.  In another case the system administrator may have opted for a less comprehensible layout and your home directory may be on <filename>/disk6/HU/07/jgillard</filename>.</para>
+<para>Whatever the path to your home directory<indexterm><primary>home directory</primary><secondary>path</secondary></indexterm>, you don't have to worry too much about it.  The correct path to your home directory is stored in the <varname>HOME<indexterm><primary>HOME</primary></indexterm></varname> environment variable, in case some program needs it.  With the <command>echo<indexterm><primary>echo</primary><secondary>example</secondary></indexterm></command> command you can display the content of this variable:</para>
+<screen>
+<prompt>orlando:~&gt;</prompt> <command>echo $HOME</command>
+/nethome/orlando
+</screen>
+<para>You can do whatever you like in your home<indexterm><primary>home directory</primary><secondary>usage</secondary></indexterm> directory.  You can put as many files in as many directories as you want, although the total amount of data and files is naturally limited because of the hardware and size of the partitions, and sometimes because the system administrator has applied a quota system.  Limiting disk usage was common practice when hard disk space was still expensive.  Nowadays, limits are almost exclusively applied in large environments.  You can see for yourself if a limit is set using the <command>quota<indexterm><primary>quota</primary></indexterm></command> command:</para>
+<screen>
+<prompt>pierre@lamaison:/&gt;</prompt> <command>quota -v</command>
+Diskquotas for user pierre (uid 501): none
+</screen>
+<para>In case quotas<indexterm><primary>home directory</primary><secondary>limitations</secondary></indexterm> have been set, you get a list of the limited partitions and their specific limitations.  Exceeding the limits may be tolerated during a grace period with fewer or no restrictions at all.  Detailed information can be found using the <command>info <parameter>quota</parameter></command> or <command>man <parameter>quota</parameter></command> commands.</para>
+<note><title>No Quota?</title>
+<para>If your system can not find the <command>quota</command>, then no limitation of file system usage is being applied.</para>
+</note>
+<para>Your home directory is indicated by a tilde<indexterm><primary>tilde</primary></indexterm> (~), shorthand for <filename>/path_to_home/user_name</filename>.  This same path is stored in the <varname>HOME</varname> variable, so you don't have to do anything to activate it.  A simple application: switch from <filename>/var/music/albums/arno/2001</filename> to <filename>images</filename> in your home directory using one elegant command:</para>
+<screen>
+<prompt>rom:/var/music/albums/arno/2001&gt;</prompt> <command>cd ~/images</command>
+
+<prompt>rom:~/images&gt;</prompt> <command>pwd</command>
+/home/rom/images
+</screen>
+<para>Later in this chapter we will talk about the commands for managing files and directories in order to keep your home directory tidy.</para>
+</sect3>
+</sect2>
+<sect2 id="sect_03_02_04"><title>The most important configuration files</title>
+<para>As we mentioned before, most configuration<indexterm><primary>configuration files</primary><secondary></secondary></indexterm> files are stored in the <filename>/etc<indexterm><primary>etc</primary></indexterm></filename> directory.  Content can be viewed using the <command>cat<indexterm><primary>cat</primary><secondary>syntax</secondary></indexterm></command> command, which sends text files to the standard output (usually your monitor).  The syntax is straight forward:</para>
+<cmdsynopsis><command>cat <filename>file1</filename> <filename>file2</filename> ... <filename>fileN</filename></command></cmdsynopsis>
+<para>In this section we try to give an overview of the most common configuration files.  This is certainly not a complete list.  Adding extra packages may also add extra configuration files in <filename>/etc</filename>.  When reading the configuration files, you will find that they are usually quite well commented and self-explanatory.  Some files also have man pages which contain extra documentation, such as <command>man <parameter>group</parameter></command>.</para>
+
+<table frame="all">
+<title>Most common configuration files</title>
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead>
+<row>
+<entry>File</entry>
+<entry>Information/service</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><filename>aliases<indexterm><primary>aliases</primary></indexterm></filename>
+                </entry>
+                <entry>Mail aliases file for use with the Sendmail and Postfix mail server.  Running a mail server on each and every system has long been common use in the UNIX world, and almost every Linux distribution still comes with a Sendmail package.  In this file local user names are matched with real names as they occur in E-mail addresses, or with other local addresses.    
+</entry>
+                </row>
+                <row><entry>
+                <filename>apache<indexterm><primary>apache</primary></indexterm></filename>
+                </entry><entry>Config files for the Apache web server.
+                </entry>
+                </row>
+        <row><entry>
+                <filename>bashrc<indexterm><primary>bashrc</primary></indexterm></filename>
+                </entry><entry>The system-wide configuration file for the Bourne Again SHell.  Defines functions and aliases for all users.  Other shells may have their own system-wide config files, like <filename>cshrc</filename>.
+</entry>
+                </row>
+
+                <row><entry>
+                <filename>crontab<indexterm><primary>crontab</primary></indexterm></filename> and the <filename>cron.*<indexterm><primary>cron.*</primary></indexterm></filename> directories
+                </entry><entry>Configuration of tasks that need to be executed periodically -  backups, updates of the system databases, cleaning of the system, rotating logs etc.  
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>default<indexterm><primary>default</primary></indexterm></filename>
+                </entry><entry>Default options for certain commands, such as <command>useradd</command>.
+</entry>
+                </row>
+
+                <row><entry>
+                <filename>filesystems<indexterm><primary>filesystems</primary></indexterm></filename>
+                </entry><entry>Known file systems: ext3, vfat, iso9660 etc.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>fstab<indexterm><primary>fstab</primary></indexterm></filename>
+                </entry><entry>Lists partitions and their <emphasis>mount points</emphasis>.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>ftp*<indexterm><primary>ftp*</primary></indexterm></filename>
+                </entry><entry>Configuration of the ftp-server: who can connect, what parts of the system are accessible etc.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>group<indexterm><primary>group</primary></indexterm></filename>
+                </entry><entry>Configuration file for user groups.  Use the shadow utilities <command>groupadd</command>, <command>groupmod</command> and <command>groupdel</command> to edit this file.  Edit manually only if you really know what you are doing.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>hosts<indexterm><primary>hosts</primary></indexterm></filename>
+                </entry><entry>A list of machines that can be contacted using the network, but without the need for a domain name service.  This has nothing to do with the system's network configuration, which is done in <filename>/etc/sysconfig</filename>.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>inittab<indexterm><primary>inittab</primary></indexterm></filename>
+                </entry><entry>Information for booting: mode, number of text consoles etc.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>issue<indexterm><primary>issue</primary></indexterm></filename>
+                </entry><entry>Information about the distribution (release version and/or kernel info).
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>ld.so.conf<indexterm><primary>ld.so.conf</primary></indexterm></filename>
+                </entry><entry>Locations of library files.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>lilo.conf<indexterm><primary>lilo.conf</primary></indexterm></filename>, <filename>silo.conf</filename>, <filename>aboot.conf</filename> etc.
+                </entry><entry>Boot information for the LInux LOader, the system for booting that is now gradually being replaced with GRUB.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>logrotate.*<indexterm><primary>logrotate.*</primary></indexterm></filename>
+                </entry><entry>Rotation of the logs, a system preventing the collection of huge amounts of log files.
+                </entry>
+                </row>
+<row><entry>
+                <filename>mail<indexterm><primary>mail</primary></indexterm></filename>
+                </entry>
+<entry>Directory containing instructions for the behavior of the mail server.</entry>
+                </row>
+
+
+                <row><entry>
+                <filename>modules.conf<indexterm><primary>modules.conf</primary></indexterm></filename>
+</entry><entry>Configuration of modules that enable special features (drivers).
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>motd<indexterm><primary>motd</primary></indexterm></filename>
+                </entry><entry>Message Of The Day: Shown to everyone who connects to the system (in text mode), may be used by the system admin to announce system services/maintenance etc.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>mtab<indexterm><primary>mtab</primary></indexterm></filename>
+                </entry><entry>Currently mounted file systems.  It is advised to never edit this file.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>nsswitch.conf<indexterm><primary>nsswitch.conf</primary></indexterm></filename>
+                </entry><entry>Order in which to contact the name resolvers when a process demands resolving of a host name.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>pam.d<indexterm><primary>pam.d</primary></indexterm></filename>
+                </entry><entry>Configuration of authentication modules.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>passwd<indexterm><primary>passwd</primary></indexterm></filename>
+                </entry><entry>Lists local users.  Use the shadow utilities <command>useradd</command>, <command>usermod</command> and <command>userdel</command> to edit this file.  Edit manually only when you really know what you are doing.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>printcap<indexterm><primary>printcap</primary></indexterm></filename>
+                </entry><entry>Outdated but still frequently used printer configuration file.  Don't edit this manually unless you really know what you are doing.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>profile<indexterm><primary>profile</primary></indexterm></filename>
+                </entry><entry>System wide configuration of the shell environment: variables, default properties of new files, limitation of resources etc.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>rc*<indexterm><primary>rc*</primary></indexterm></filename>
+                </entry><entry>Directories defining active services for each run level.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>resolv.conf<indexterm><primary>resolv.conf</primary></indexterm></filename>
+                </entry><entry>Order in which to contact DNS servers (Domain Name Servers only).
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>sendmail.cf<indexterm><primary>sendmail.cf</primary></indexterm></filename>
+                </entry><entry>Main config file for the Sendmail server.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>services<indexterm><primary>services</primary></indexterm></filename>
+                </entry><entry>Connections accepted by this machine (open ports).
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>sndconfig<indexterm><primary>sndconfig</primary></indexterm></filename> or <filename>sound<indexterm><primary>sound</primary></indexterm></filename>
+                </entry><entry>Configuration of the sound card and sound events.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>ssh<indexterm><primary>ssh</primary></indexterm></filename>
+                </entry><entry>Directory containing the config files for secure shell client and server.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>sysconfig<indexterm><primary>sysconfig</primary></indexterm></filename>
+                </entry><entry>Directory containing the system configuration files: mouse, keyboard, network, desktop, system clock, power management etc. (specific to RedHat)
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>X11<indexterm><primary>X11</primary></indexterm></filename>
+                </entry><entry>Settings for the graphical server, X.  RedHat uses XFree, which is reflected in the name of the main configuration file, XFree86Config.  Also contains the general directions for the window managers available on the system, for example <command>gdm</command>, <command>fvwm</command>, <command>twm</command>, etc.
+                </entry>
+                </row>
+
+                <row><entry>
+                <filename>xinetd.*<indexterm><primary>xinetd.*</primary></indexterm></filename> or <filename>inetd.conf<indexterm><primary>inetd.conf</primary></indexterm></filename>
+                </entry>
+<entry>Configuration files for Internet services that are run from the system's (extended) Internet services daemon (servers that don't run an independent daemon).</entry>
+                </row>
+
+</tbody>
+</tgroup>
+</table>
+
+<para>Throughout this guide we will learn more about these files and study some of them in detail.</para>
+
+</sect2>
+<sect2 id="sect_03_02_05"><title>The most common devices</title>
+<para>Devices<indexterm><primary>devices</primary><secondary>entries</secondary></indexterm>, generally every peripheral attachment of a PC that is not the CPU itself, is presented to the system as an entry in the <filename>/dev<indexterm><primary>dev</primary></indexterm></filename> directory.  One of the advantages of this UNIX-way of handling devices is that neither the user nor the system has to worry much about the specification of devices.</para>
+<para>Users that are new to Linux or UNIX in general are often overwhelmed by the amount of new names and concepts they have to learn.  That is why a list of common devices is included in this introduction.</para>
+<table frame="all"><title>Common devices</title>
+                <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                <thead>
+                <row>
+
+                <entry>Name</entry><entry>Device</entry></row>
+</thead>
+<tbody>
+                <row><entry><filename>cdrom<indexterm><primary>cdrom</primary></indexterm></filename></entry><entry>CD drive</entry></row>
+                <row><entry><filename>console<indexterm><primary>console</primary></indexterm></filename></entry><entry>Special entry for the currently used console.</entry></row>
+                <row><entry><filename>cua*<indexterm><primary>cua</primary></indexterm></filename></entry><entry>Serial ports</entry></row>
+<row><entry><filename>dsp*<indexterm><primary>dsp</primary></indexterm></filename></entry><entry>Devices for sampling and recording</entry></row>
+                <row><entry><filename>fd*<indexterm><primary>fd</primary></indexterm></filename></entry><entry>Entries for most kinds of floppy drives, the default is <filename>/dev/fd0</filename>, a floppy drive for 1.44 MB floppies.</entry></row>
+                <row><entry><filename>hd[a-t][1-16]<indexterm><primary>hd</primary></indexterm></filename></entry><entry>Standard support for IDE drives with maximum amount of partitions each.</entry></row>
+                <row><entry><filename>ir*<indexterm><primary>ir</primary></indexterm></filename></entry><entry>Infrared devices</entry></row>
+                <row><entry><filename>isdn*<indexterm><primary>isdn</primary></indexterm></filename></entry><entry>Management of ISDN connections</entry></row>
+                <row><entry><filename>js*<indexterm><primary>js</primary></indexterm></filename></entry><entry>Joystick(s)</entry></row>
+                <row><entry><filename>lp*<indexterm><primary>lp</primary></indexterm></filename></entry><entry>Printers</entry></row>
+                <row><entry><filename>mem<indexterm><primary>mem</primary></indexterm></filename></entry><entry>Memory</entry></row>
+                <row><entry><filename>midi*<indexterm><primary>midi</primary></indexterm></filename></entry><entry>midi player</entry></row>
+                <row><entry><filename>mixer*<indexterm><primary>mixer</primary></indexterm></filename> and <filename>music<indexterm><primary>music</primary></indexterm></filename></entry><entry>Idealized model of a mixer (combines or adds signals)</entry></row>
+                <row><entry><filename>modem<indexterm><primary>modem</primary></indexterm></filename></entry><entry>Modem</entry></row>
+                <row><entry><filename>mouse<indexterm><primary>mouse</primary></indexterm></filename> (also msmouse, logimouse, psmouse, input/mice, psaux)</entry><entry>All kinds of mouses</entry></row>
+                <row><entry><filename>null<indexterm><primary>null</primary></indexterm></filename></entry><entry>Bottomless garbage can</entry></row>
+                <row><entry><filename>par*<indexterm><primary>par</primary></indexterm></filename></entry><entry>Entries for parallel port support</entry></row>
+                <row><entry><filename>pty*<indexterm><primary>pty</primary></indexterm></filename></entry><entry>Pseudo terminals</entry></row>
+                <row><entry><filename>radio*<indexterm><primary>radio</primary></indexterm></filename></entry><entry>For Radio Amateurs (HAMs).</entry></row>
+                <row><entry><filename>ram*<indexterm><primary>ram</primary></indexterm></filename></entry><entry>boot device</entry></row>
+                <row><entry><filename>sd*<indexterm><primary>sd</primary></indexterm></filename></entry><entry>SCSI disks with their partitions</entry></row>
+                <row><entry><filename>sequencer<indexterm><primary>sequencer</primary></indexterm></filename></entry><entry>For audio applications using the synthesizer features of the sound card (MIDI-device controller)</entry></row>
+                <row><entry><filename>tty*<indexterm><primary>tty</primary></indexterm></filename></entry><entry>Virtual consoles simulating vt100 terminals.</entry></row>
+                <row><entry><filename>usb*<indexterm><primary>usb</primary></indexterm></filename></entry><entry>USB card and scanner</entry></row>
+                <row><entry><filename>video*<indexterm><primary>video</primary></indexterm></filename></entry><entry>For use with a graphics card supporting video.</entry></row>
+</tbody>
+</tgroup>
+</table>
+
+</sect2>
+
+<sect2 id="sect_03_02_06"><title>The most common variable files</title>
+
+<para>In the <filename>/var<indexterm><primary>var</primary></indexterm></filename> directory we find a set of directories for storing specific non-constant data (as opposed to the ls program or the system configuration files, which change relatively infrequently or never at all).  All files that change frequently<indexterm>variable files<primary></primary><secondary>overview</secondary></indexterm>, such as log files, mailboxes, lock files, spoolers etc. are kept in a subdirectory of <filename>/var</filename>.</para>
+<para>As a security measure these files are usually kept in separate parts from the main system files, so we can keep a close eye on them and set stricter permissions where necessary.  A lot of these files also need more permissions than usual, like <filename>/var/tmp<indexterm><primary>tmp</primary></indexterm></filename>, which needs to be writable for everyone.  A lot of user activity might be expected here, which might even be generated by anonymous Internet users connected to your system.  This is one reason why the <filename>/var</filename> directory<indexterm><primary>partitions</primary><secondary>var partition</secondary></indexterm>, including all its subdirectories, is usually on a separate partition.  This way, there is for instance no risk that a mail bomb, for instance, fills up the rest of the file system, containing more important data such as your programs and configuration files.</para>
+<note><title>/var/tmp and /tmp</title>
+<para>Files in <filename>/tmp<indexterm><primary>temporary files</primary></indexterm></filename> can be deleted without notice, by regular system tasks or because of a system reboot.  On some (customized) systems, also <filename>/var/tmp</filename> might behave unpredictably.  Nevertheless, since this is not the case by default, we advise to use the <filename>/var/tmp</filename> directory for saving temporary files.  When in doubt, check with your system administrator.  If you manage your own system, you can be reasonably sure that this is a safe place if you did not consciously change settings on <filename>/var/tmp</filename> (as root, a normal user can not do this).</para>
+<para>Whatever you do, try to stick to the privileges granted to a normal user - don't go saving files directly under the root (/) of the file system, don't put them in <filename>/usr</filename> or some subdirectory or in another reserved place.  This pretty much limits your access to safe file systems.</para>
+</note>
+<para>One of the main security systems on a UNIX system, which is naturally implemented on every Linux machine as well, is the log-keeping<indexterm><primary>security</primary><secondary>log files</secondary></indexterm> facility, which logs all user actions, processes, system events etc.  The configuration file of the so-called <emphasis>syslogdaemon<indexterm><primary>log files</primary><secondary>syslog</secondary></indexterm></emphasis> determines which and how long logged information will be kept.  The default location of all logs is <filename>/var/log</filename>, containing different files for access log, server logs, system messages etc.</para>
+<para>In <filename>/var</filename> we typically find server data, which is kept here to separate it from critical data such as the server program itself and its configuration files.  A typical example on Linux systems is <filename>/var/www</filename>, which contains the actual HTML pages<indexterm><primary>variable files</primary><secondary>web server data</secondary></indexterm>, scripts and images that a web server offers.  The FTP-tree of an FTP server (data that can be downloaded by a remote client) is also best kept in one of <filename>/var</filename>'s subdirectories.  Because this data is publicly accessible and often changeable by anonymous users, it is safer to keep it here, away from partitions or directories with sensitive data.</para>
+<para>On most workstation installations, <filename>/var/spool<indexterm><primary>spool</primary></indexterm></filename> will at least contain an <filename>at</filename> and a <filename>cron</filename> directory<indexterm><primary>variable files</primary><secondary>spool directories</secondary></indexterm>, containing scheduled tasks.  In office environments this directory usually contains <filename>lpd</filename> as well, which holds the print queue(s) and further printer configuration files, as well as the printer log files.</para>
+<para>On server<indexterm><primary>variable files</primary><secondary>mail</secondary></indexterm> systems we will generally find <filename>/var/spool/mail</filename>, containing incoming mails for local users, sorted in one file per user, the user's <quote>inbox</quote>.  A related directory is <filename>mqueue</filename>, the spooler area for unsent mail messages.  These parts of the system can be very busy on mail servers with a lot of users.  News servers also use the <filename>/var/spool</filename> area because of the enormous amounts of messages they have to process.</para>
+<para>The <filename>/var/lib/rpm</filename> directory is specific to RPM-based (RedHat Package Manager) distributions; it is where RPM package information is stored.  Other package managers generally also store their data somewhere in <filename>/var</filename>.</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="sect_03_03"><title>Manipulating files</title>
+<sect2 id="sect_03_03_01"><title>Viewing file properties</title>
+<sect3 id="sect_03_03_01_01"><title>More about ls</title>
+<para>Besides the name of the file, <command>ls<indexterm><primary>ls</primary></indexterm></command> can give a lot of other information, such as the file type, as we already discussed.  It can also show permissions<indexterm><primary>files</primary><secondary>properties</secondary></indexterm> on a file, file size, inode number, creation date and time, owners and amount of links to the file.  With the <option>-a</option> option to <command>ls</command>, files that are normally hidden from view can be displayed as well.  These are files that have a name starting with a dot.  A couple of typical examples include the configuration files in your home directory.  When you've worked with a certain system for a while, you will notice that tens of files and directories have been created that are not automatically listed in a directory index.  Next to that, every directory contains a file named just dot (.) and one with two dots (..)<indexterm><primary>dots</primary></indexterm>, which are used in combination with their inode number to determine the directory's position in the file system's tree structure.</para>
+<para>You should really read the <application>Info</application> pages about <command>ls</command>, since it is a very common command with a lot of useful options.  Options can be combined, as is the case with most UNIX commands and their options.  A common combination is <command>ls <option>-al</option></command>; it shows a long list of files and their properties as well as the destinations that any symbolic links point to.  <command>ls <option>-latr</option></command> displays the same files, only now in reversed order of the last change, so that the file changed most recently occurs at the bottom of the list.  Here are a couple of examples<indexterm><primary>ls</primary><secondary>example</secondary></indexterm>:</para>
+<screen>
+<prompt>krissie:~/mp3&gt;</prompt> <command>ls</command>
+Albums/  Radio/  Singles/  gene/  index.html
+
+<prompt>krissie:~/mp3&gt;</prompt> <command>ls -a</command>
+./   .thumbs  Radio     gene/
+../  Albums/  Singles/  index.html
+
+<prompt>krissie:~/mp3&gt;</prompt> <command>ls -l Radio/</command>
+total 8
+drwxr-xr-x    2 krissie krissie  4096 Oct 30  1999 Carolina/
+drwxr-xr-x    2 krissie krissie  4096 Sep 24  1999 Slashdot/
+
+<prompt>krissie:~/mp3&gt;</prompt> <command>ls -ld Radio/</command>
+drwxr-xr-x    4 krissie krissie  4096 Oct 30  1999 Radio/
+
+<prompt>krissie:~/mp3&gt;</prompt> <command>ls -ltr</command>
+total 20
+drwxr-xr-x    4 krissie krissie  4096 Oct 30  1999 Radio/
+-rw-r--r--    1 krissie krissie   453 Jan  7  2001 index.html
+drwxrwxr-x   30 krissie krissie  4096 Oct 20 17:32 Singles/
+drwxr-xr-x    2 krissie krissie  4096 Dec  4 23:22 gene/
+drwxrwxr-x   13 krissie krissie  4096 Dec 21 11:40 Albums/
+</screen>
+<para>On most Linux versions <command>ls</command> is <emphasis>aliased</emphasis> to color-ls<indexterm><primary>ls</primary><secondary>coloured output</secondary></indexterm> by default.  This feature allows to see the file type without using any options to <command>ls</command>.  To achieve this<indexterm><primary>file types</primary><secondary>colours</secondary></indexterm>, every file type has its own color.  The standard scheme is in <filename>/etc/DIR_COLORS</filename>:</para>
+<table frame="all"><title>Color-ls default color scheme</title>
+                <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                <thead>
+                <row>
+
+                <entry>Color</entry><entry>File type</entry></row>
+</thead>
+<tbody>
+                <row><entry>blue</entry><entry>directories</entry></row>
+                <row><entry>red</entry><entry>compressed archives</entry></row>
+                <row><entry>white</entry><entry>text files</entry></row>
+                <row><entry>pink</entry><entry>images</entry></row>
+                <row><entry>cyan</entry><entry>links</entry></row>
+                <row><entry>yellow</entry><entry>devices</entry></row>
+                <row><entry>green</entry><entry>executables</entry></row>
+                <row><entry>flashing red</entry><entry>broken links</entry></row>
+</tbody>
+</tgroup>
+</table>
+
+<para>More information is in the man page.  The same information was in earlier days displayed using suffixes to every non-standard file name.  For mono-color use (like printing a directory listing) and for general readability, this scheme is still<indexterm><primary>file types</primary><secondary>suffixes</secondary></indexterm> in use:</para>
+<table frame="all"><title>Default suffix scheme for ls</title>
+
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+                <thead>
+                <row>
+
+                <entry>Character</entry><entry>File type</entry></row>
+</thead>
+<tbody>
+                <row><entry>nothing</entry><entry>regular file</entry></row>
+                <row><entry>/</entry><entry>directory</entry></row>
+                <row><entry>*</entry><entry>executable file</entry></row>
+                <row><entry>@</entry><entry>link</entry></row>
+                <row><entry>=</entry><entry>socket</entry></row>
+                <row><entry>|</entry><entry>named pipe</entry></row>
+</tbody>
+</tgroup>
+</table>
+<para>A description of the full functionality and features of the <command>ls</command> command<indexterm><primary>coreutils</primary></indexterm> can be read with <command>info <parameter>coreutils ls</parameter></command>.</para>
+</sect3>
+<sect3 id="sect_03_03_01_02"><title>More tools</title>
+<para>To find out more about the kind of data we are dealing with, we use the <command>file<indexterm><primary>file</primary></indexterm></command> command.  By applying certain tests that check properties of a file in the file system, magic numbers and language tests, <command>file<indexterm><primary>file types</primary><secondary>determining</secondary></indexterm></command> tries to make an educated guess about the format of a file.  Some examples<indexterm><primary>file</primary><secondary>example</secondary></indexterm>:</para>
+<screen>
+<prompt>mike:~&gt;</prompt> <command>file Documents/</command>
+Documents/: directory
+
+<prompt>mike:~&gt;</prompt> <command>file high-tech-stats.pdf</command>
+high-tech-stats.pdf: PDF document, version 1.2
+
+<prompt>mike:~&gt;</prompt> <command>file Nari-288.rm</command>
+Nari-288.rm: RealMedia file
+
+<prompt>mike:~&gt;</prompt> <command>file bijlage10.sdw</command>
+bijlage10.sdw: Microsoft Office Document
+
+<prompt>mike:~&gt;</prompt> <command>file logo.xcf</command>
+logo.xcf: GIMP XCF image data, version 0, 150 x 38, RGB Color
+
+<prompt>mike:~&gt;</prompt> <command>file cv.txt</command>
+cv.txt: ISO-8859 text
+
+<prompt>mike:~&gt;</prompt> <command>file image.png</command>
+image.png: PNG image data, 616 x 862, 8-bit grayscale, non-interlaced
+
+<prompt>mike:~&gt;</prompt> <command>file figure</command>
+figure: ASCII text
+
+<prompt>mike:~&gt;</prompt> <command>file me+tux.jpg</command>
+me+tux.jpg: JPEG image data, JFIF standard 1.01, resolution (DPI),
+            "28 Jun 1999", 144 x 144
+
+<prompt>mike:~&gt;</prompt> <command>file 42.zip.gz</command>
+42.zip.gz: gzip compressed data, deflated, original filename,
+         `42.zip', last modified: Thu Nov  1 23:45:39 2001, os: Unix
+
+<prompt>mike:~&gt;</prompt> <command>file vi.gif</command>
+vi.gif: GIF image data, version 89a, 88 x 31
+
+<prompt>mike:~&gt;</prompt> <command>file slide1</command>
+slide1: HTML document text
+
+<prompt>mike:~&gt;</prompt> <command>file template.xls</command>
+template.xls: Microsoft Office Document
+
+<prompt>mike:~&gt;</prompt> <command>file abook.ps</command>
+abook.ps: PostScript document text conforming at level 2.0
+
+<prompt>mike:~&gt;</prompt> <command>file /dev/log</command>
+/dev/log: socket
+
+<prompt>mike:~&gt;</prompt> <command>file /dev/hda</command>
+/dev/hda: block special (3/0)
+</screen>
+<para>The <command>file</command> command has a series of options, among others the <option>-z</option> option to look into compressed files.  See <command>info <parameter>file</parameter></command> for a detailed description.  Keep in mind that the results of <command>file</command> are not absolute, it is only a guess.  In other words, <command>file</command> can be tricked.</para>
+
+<note><title>Why all the fuss about file types and formats?</title>
+<para>Shortly, we will discuss a couple of command-line tools for looking at <emphasis>plain text files</emphasis>.  These tools will not work when used on the wrong type of files.  In the worst case, they will crash your terminal and/or make a lot of beeping noises.  If this happens to you, just close the terminal session and start a new one.  But try to avoid it, because it is usually very disturbing for other people.</para>
+</note>
+</sect3>
+</sect2>
+
+<sect2 id="sect_03_03_02"><title>Creating and deleting files and directories</title>
+<sect3 id="sect_03_03_02_01"><title>Making a mess...</title>
+<para>... Is not a difficult thing to do.  Today almost every system is networked, so naturally files get copied from one machine to another.  And especially when working in a graphical environment, creating new files is a piece of cake and is often done without the approval of the user.  To illustrate the problem, here's the full content of a new user's directory, created on a standard RedHat system:</para>
+<screen>
+<prompt>[newuser@blob user]$</prompt> <command>ls -al</command>
+total 32
+drwx------   3 user 	user        4096 Jan 16 13:32 .
+drwxr-xr-x   6 root     root        4096 Jan 16 13:32 ..
+-rw-r--r--   1 user 	user      24 Jan 16 13:32 .bash_logout
+-rw-r--r--   1 user 	user     191 Jan 16 13:32 .bash_profile
+-rw-r--r--   1 user 	user     124 Jan 16 13:32 .bashrc
+drwxr-xr-x   3 user 	user    4096 Jan 16 13:32 .kde
+-rw-r--r--   1 user 	user    3511 Jan 16 13:32 .screenrc
+-rw-------   1 user 	user      61 Jan 16 13:32 .xauthDqztLr
+</screen>
+<para>On first sight, the content of a <quote>used</quote> home directory doesn't look that bad<indexterm><primary>home directory</primary><secondary>example</secondary></indexterm> either:</para>
+<screen>
+<prompt>olduser:~&gt;</prompt> <command>ls</command>
+app-defaults/ crossover/   Fvwm@     mp3/      OpenOffice.org638/
+articles/     Desktop/     GNUstep/  Nautilus/ staroffice6.0/
+bin/          Desktop1/    images/   nqc/      training/
+brol/         desktoptest/ Machines@ ns_imap/  webstart/
+C/            Documents/   mail/     nsmail/   xml/
+closed/       Emacs@       Mail/     office52/ Xrootenv.0
+</screen>
+<para>But when all the directories and files starting with a dot are included, there are 185 items in this directory.  This is because most applications have their own directories and/or files, containing user-specific settings, in the home directory of that user.  Usually these files are created the first time you start an application.  In some cases you will be notified when a non-existent directory needs to be created, but most of the time everything is done automatically.</para>
+<para>Furthermore, new files are created seemingly continuously because users want to save files, keep different versions of their work, use Internet applications, and download files and attachments to their local machine.  It doesn't stop.  It is clear that one definitely needs a scheme to keep an overview on things.</para>
+<para>In the next section, we will discuss our means of keeping order.  We only discuss text tools available to the shell, since the graphical tools are very intuitive and have the same look and feel as the well known point-and-click MS Windows-style file managers, including graphical help functions and other features you expect from this kind of applications.  The following list is an overview of the most popular file managers for GNU/Linux.  Most file managers can be started from the menu of your desktop manager, or by clicking your home directory icon, or from the command line, issuing these<indexterm><primary>file managers</primary><secondary>overview</secondary></indexterm> commands:</para>
+<itemizedlist>
+<listitem><para><command>nautilus<indexterm><primary>nautilus</primary></indexterm></command>: The default file manager in <application>Gnome</application>, the GNU desktop.  Excellent documentation about working with this tool can be found at <ulink url="http://www.gnome.org/learn/users-guide/latest/gosnautilus-1.html">http://www.gnome.org</ulink>.</para></listitem>
+<listitem><para><command>konqueror<indexterm><primary>konqueror</primary></indexterm></command>: The file manager typically used on a <application>KDE</application> desktop.  The handbook is at <ulink url="http://docs.kde.org/en/3.1/kdebase/konqueror/">http://docs.kde.org</ulink>.</para></listitem>
+<listitem><para><command>mc<indexterm><primary>mc</primary></indexterm></command>: <application>Midnight Commander</application>, the Unix file manager after the fashion of Norton Commander.  All documentation available from <ulink url="http://www.gnu.org/directory/midnightcommander.html">http://gnu.org/directory/</ulink> or a mirror, such as <ulink url="http://www.ibiblio.org" />.</para></listitem>
+</itemizedlist>
+<para>These applications are certainly worth giving a try and usually impress newcomers to Linux, if only because there is such a wide variety: these are only the most popular tools for managing directories and files, and many other projects are being developed.  Now let's find out about the internals and see how these graphical tools use common UNIX commands.</para>
+
+</sect3>
+<sect3 id="sect_03_03_02_03"><title>The tools</title>
+<sect4><title>Creating directories</title>
+<para>A way of keeping things in place is to give certain files specific default locations by creating<indexterm><primary>directories</primary><secondary>creation</secondary></indexterm> directories and subdirectories (or folders and sub-folders if you wish).  This is done with the <command>mkdir<indexterm><primary>mkdir</primary></indexterm></command> command:</para>
+<screen>
+<prompt>richard:~&gt;</prompt> <command>mkdir archive</command>
+
+<prompt>richard:~&gt;</prompt> <command>ls -ld archive</command>
+drwxrwxrwx  2 richard richard           4096 Jan 13 14:09 archive/
+</screen>
+<para>Creating directories and subdirectories in one step is done using the <option>-p</option> option:</para>
+<screen>
+<prompt>richard:~&gt;</prompt> <command>cd archive</command>
+
+<prompt>richard:~/archive&gt;</prompt> <command>mkdir 1999 2000 2001</command>
+
+<prompt>richard:~/archive&gt;</prompt> <command>ls</command>
+1999/  2000/  2001/
+
+<prompt>richard:~/archive&gt;</prompt> <command>mkdir 2001/reports/Restaurants-Michelin/</command>
+mkdir: cannot create directory `2001/reports/Restaurants-Michelin/':
+No such file or directory
+
+<prompt>richard:~/archive&gt;</prompt> <command>mkdir -p 2001/reports/Restaurants-Michelin/</command>
+
+<prompt>richard:~/archive&gt;</prompt> <command>ls 2001/reports/</command>
+Restaurants-Michelin/
+</screen>
+<para>If the new file needs other permissions than the default file creation permissions, the new access rights can be set in one move, still using the <command>mkdir</command> command, see the <application>Info</application> pages for more.  We are going to discuss access modes in the next section on file security.</para>
+<para>The name of a directory has to comply with the same rules as those applied on regular file names<indexterm><primary>files</primary><secondary>naming conventions</secondary></indexterm>.  One of the most important restrictions is that you can't have two files with the same name in one directory (but keep in mind that Linux is, like UNIX, a case sensitive operating system).  There are virtually no limits on the length of a file name, but it is usually kept shorter than 80 characters, so it can fit on one line of a terminal.  You can use any character you want in a file name, although it is advised to exclude characters that have a special meaning to the shell.  When in doubt, check with <xref linkend="app3" />.</para>
+</sect4>
+<sect4><title>Moving files</title>
+<para>Now that we have properly structured our home directory, it is time to clean up unclassified<indexterm><primary>files</primary><secondary>moving</secondary></indexterm> files using the <command>mv<indexterm><primary>mv</primary></indexterm></command> command:</para>
+<screen>
+<prompt>richard:~/archive&gt;</prompt> <command>mv ../report[1-4].doc reports/Restaurants-Michelin/</command>
+</screen>
+<para>This command is also applicable when renaming<indexterm><primary>files</primary><secondary>renaming</secondary></indexterm> files:</para>
+<screen>
+<prompt>richard:~&gt;</prompt> <command>ls To_Do</command>
+-rw-rw-r--    1 richard richard      2534 Jan 15 12:39 To_Do
+
+<prompt>richard:~&gt;</prompt> <command>mv To_Do done</command>
+
+<prompt>richard:~&gt;</prompt> <command>ls -l done</command>
+-rw-rw-r--    1 richard richard      2534 Jan 15 12:39 done
+</screen>
+<para>It is clear that only the name of the file changes.  All other properties remain the same.</para>
+<para>Detailed information about the syntax and features of the <command>mv</command> command can be found in the man or Info pages.  The use of this documentation should always be your first reflex when confronted with a problem.  The answer to your problem is likely to be in the system documentation.  Even experienced users read man pages every day, so beginning users should read them all the time.  After a while, you will get to know the most common options to the common commands, but you will still need the documentation as a primary source of information.  Note that the information contained in the HOWTOs, FAQs, man pages and other sources is slowly being merged into the Info pages, which are today the most up-to-date source of online (as in readily available on the system) documentation.</para>
+</sect4>
+<sect4><title>Copying files</title>
+<para>Copying<indexterm><primary>files</primary><secondary>copying</secondary></indexterm> files and directories is done with the <command>cp<indexterm><primary>cp</primary></indexterm></command> command.  A useful option is recursive copy (copy all underlying files and subdirectories), using the <option>-R</option> option to <command>cp</command>.  The general syntax is</para>
+<cmdsynopsis><command>cp <optional><option>-R</option></optional> <filename>fromfile</filename> <filename>tofile</filename></command></cmdsynopsis>
+<para>As an example the case of user <emphasis>newguy</emphasis>, who wants the same Gnome desktop settings user <emphasis>oldguy</emphasis> has.  One way to solve the problem is to copy the settings of <emphasis>oldguy</emphasis> to the home directory of <emphasis>newguy</emphasis>:</para>
+<screen>
+<prompt>victor:~&gt;</prompt> <command>cp -R ../oldguy/.gnome/ .</command>
+</screen>
+<para>This gives some errors involving file permissions, but all the errors have to do with private files that <emphasis>newguy</emphasis> doesn't need anyway.  We will discuss in the next part how to change these permissions in case they really are a problem.</para>
+
+</sect4>
+<sect4><title>Removing files</title>
+<para>Use the <command>rm<indexterm><primary>rm</primary></indexterm></command> command to remove<indexterm><primary>files</primary><secondary>removing</secondary></indexterm> single files, <command>rmdir<indexterm><primary>rmdir</primary><secondary></secondary></indexterm></command> to remove<indexterm><primary>directories</primary><secondary>removing</secondary></indexterm> empty directories.  (Use <command>ls <option>-a</option></command> to check whether a directory is empty or not).  The <command>rm</command> command also has options for removing non-empty directories with all their subdirectories, read the Info pages for these rather dangerous options.</para>
+<note><title>How empty can a directory be?</title>
+<para>It is normal that the directories . (dot) and .. (dot-dot) can't be removed, since they are also necessary in an empty directory to determine the directories ranking in the file system hierarchy.</para></note>
+<para>On Linux, just like on UNIX, there is no garbage can - at least not for the shell, although there are plenty of solutions for graphical use.  So once removed, a file is really gone, and there is generally no way to get it back unless you have backups, or you are really fast and have a real good system administrator.  To protect the beginning user from this malice, the interactive behavior<indexterm><primary>delete interactively</primary></indexterm> of the <command>rm<indexterm><primary>remove interactively</primary></indexterm></command>, <command>cp<indexterm><primary>copy interactively</primary></indexterm></command> and <command>mv<indexterm><primary>rename interactively</primary></indexterm></command> commands can be activated using the <option>-i</option> option.  In that case the system won't immediately act upon request.  Instead it will ask for confirmation, so it takes an additional click on the <keycap>Enter</keycap> key to inflict the damage:</para>
+<screen>
+<prompt>mary:~&gt;</prompt> <command>rm -ri archive/</command>
+rm: descend into directory `archive'? <command>y</command>
+rm: descend into directory `archive/reports'? <command>y</command>
+rm: remove directory `archive/reports'? <command>y</command>
+rm: descend into directory `archive/backup'? <command>y</command>
+rm: remove `archive/backup/sysbup200112.tar'? <command>y</command>
+rm: remove directory `archive/backup'? <command>y</command>
+rm: remove directory `archive'? <command>y</command>
+</screen>
+<para>We will discuss how to make this option the default in <xref linkend="chap_07" />, which discusses customizing your shell environment.</para> 
+</sect4>
+</sect3>
+</sect2>
+<sect2 id="sect_03_03_03"><title>Finding files</title>
+<sect3 id="sect_03_03_03_01"><title>Using shell features</title>
+<para>In the example on moving files we already saw how the shell<indexterm><primary>finding files</primary><secondary>using the shell</secondary></indexterm> can manipulate multiple files at once.  In that example, the shell finds out automatically what the user means by the requirements between the square<indexterm><primary>square braces</primary></indexterm> braces <quote>[</quote> and <quote>]</quote>.  The shell can substitute ranges<indexterm><primary>ranges</primary><secondary>substitution</secondary></indexterm> of numbers and upper or lower case characters alike.  It also substitutes as many characters as you want with an asterisk, and only one character with a question mark.</para>
+<para>All sorts of substitutions can be used simultaneously; the shell is very logical about it.  The <application>Bash</application> shell, for instance, has no problem with expressions like<indexterm><primary>shell</primary><secondary>substitution</secondary></indexterm> <command>ls <parameter>dirname/*/*/*[2-3]</parameter></command>.</para>
+<para>In other shells, the asterisk is commonly used to minimize the efforts of typing:  people would enter <command>cd <parameter>dir*</parameter></command> instead of <command>cd <filename>directory</filename></command>.  In <application>Bash</application> however, this is not necessary because the GNU shell has a feature called file name completion.  It means that you can type the first few characters of a command (anywhere) or a file (in the current directory) and if no confusion is possible, the shell will find out what you mean.   For example in a directory containing many files, you can check if there are any files beginning with the letter A just by typing <command>ls <parameter>A</parameter></command> and pressing the <keycap>Tab</keycap> key twice, rather than pressing <keycap>Enter</keycap>.  If there is only one file starting with <quote>A</quote>, this file will be shown as the argument to <command>ls</command> (or any shell command, for that matter) immediately.</para>
+
+</sect3>
+<sect3 id="sect_03_03_03_02"><title>Which</title>
+<para>A very simple way of looking<indexterm><primary>commands</primary><secondary>finding</secondary></indexterm> up files is using the <command>which<indexterm><primary>which</primary></indexterm></command> command, to look in the directories listed in the user's search path for the required file.  Of course, since the search path contains only paths to directories containing executable programs, <command>which</command> doesn't work for ordinary files.  The <command>which</command> command is useful when troubleshooting <quote>Command not Found<indexterm><primary>commands</primary><secondary>not found</secondary></indexterm></quote> problems.  In the example below, user <emphasis>tina</emphasis> can't use the <command>acroread</command> program, while her colleague has no troubles whatsoever on the same system.  The problem is similar to the <varname>PATH</varname> problem in the previous part: Tina's colleague tells her that he can see the required program in <filename>/opt/acroread/bin</filename>, but this directory is not in her path:</para>
+<screen>
+<prompt>tina:~&gt;</prompt> <command>which acroread</command>
+/usr/bin/which: no acroread in (/bin:/usr/bin:/usr/bin/X11)
+</screen>
+<para>The problem can be solved by giving the full path to the command to run, or by re-exporting the content of the <varname>PATH<indexterm><primary>PATH</primary><secondary>configuration</secondary></indexterm></varname> variable:</para>
+<screen>
+<prompt>tina:~&gt;</prompt> <command>export PATH=$PATH:/opt/acroread/bin</command>
+
+<prompt>tina:~&gt;</prompt> <command>echo $PATH</command>
+/bin:/usr/bin:/usr/bin/X11:/opt/acroread/bin
+</screen>
+<para>Using the <command>which</command> command also checks to see if a command is an alias for another command<indexterm><primary>commands</primary><secondary>aliases</secondary></indexterm>:</para>
+<screen>
+<prompt>gerrit:~&gt;</prompt> <command>which -a ls</command>
+ls is aliased to `ls -F --color=auto'
+ls is /bin/ls
+</screen>
+<para>If this does not work on your system, use the <command>alias</command> command:</para>
+<screen>
+<prompt>tille@www:~/mail$</prompt> <command>alias ls</command>
+alias ls='ls --color'
+</screen>
+</sect3>
+<sect3 id="sect_03_03_03_03"><title>Find and locate</title>
+<para>These are the real tools<indexterm><primary>finding files</primary><secondary>find</secondary></indexterm>, used when searching other paths beside those listed in the search path.  The <command>find<indexterm><primary>find</primary></indexterm></command> tool, known from UNIX, is very powerful, which may be the cause of a somewhat more difficult syntax.  GNU <command>find<indexterm><primary>files</primary><secondary>searching</secondary></indexterm></command>, however, deals with the syntax problems.  This command not only allows you to search file names, it can also accept file size, date of last change and other file properties as criteria for a search.  The most common use is for finding file<indexterm><primary>find</primary><secondary>example</secondary></indexterm> names:</para>
+<cmdsynopsis><command>find <filename>&lt;path&gt;</filename> <option>-name</option> <parameter>&lt;searchstring&gt;</parameter></command></cmdsynopsis>
+<para>This can be interpreted as <quote>Look in all files and subdirectories contained in a given path, and print the names of the files containing the search string in their name</quote> (not in their content).</para>
+<para>Another application of <command>find</command> is for searching files of a certain size, as in the example below, where user <emphasis>peter</emphasis> wants to find all files in the current directory or one of its subdirectories, that are bigger<indexterm><primary>files</primary><secondary>size</secondary></indexterm> than 5 MB:</para>
+<screen>
+<prompt>peter:~&gt;</prompt> <command>find . -size +5000k</command>
+psychotic_chaos.mp3
+</screen>
+<para>If you dig in the man pages, you will see that <command>find</command> can also perform operations on the found files.  A common example is removing files.  It is best to first test without the <option>-exec</option> option that the correct files are selected, after that the command can be rerun to delete the selected files.  Below, we search for files ending in <filename>.tmp</filename>:</para>
+<screen>
+<prompt>peter:~&gt; </prompt> <command>find . -name "*.tmp" -exec rm {} \;</command>
+
+<prompt>peter:~&gt;</prompt>
+</screen>
+<tip><title>Optimize!</title>
+<para>This command will call on <command>rm</command> as many times as a file answering the requirements is found.  In the worst case, this might be thousands or millions of times.  This is quite a load on your system.</para>
+<para>A more realistic way of working would be the use of a pipe (|) and the <command>xargs<indexterm><primary>xargs</primary></indexterm></command> tool with <command>rm</command> as an argument.  This way, the <command>rm</command> command is only called when the command line is full, instead of for every file.  See <xref linkend="chap_05" /> for more on using I/O redirection to ease everyday tasks.</para>
+</tip>
+<para>Later on (in 1999 according to the man pages, after 20 years of <command>find</command>), <command>locate<indexterm><primary>locate</primary></indexterm></command> was developed.  This program is easier<indexterm><primary>finding files</primary><secondary>locate</secondary></indexterm> to use, but more restricted than <command>find</command>, since its output is based on a file index database that is updated only once every day.  On the other hand, a search in the <command>locate</command> database uses less resources than <command>find</command> and therefore shows the results nearly instantly.</para>
+<para>Most Linux distributions use <command>slocate</command> these days, security enhanced locate, the modern version of <command>locate</command> that prevents users from getting output they have no right to read.  The files in <emphasis>root</emphasis>'s home directory are such an example, these are not normally accessible to the public.  A user who wants to find someone who knows about the <application>C shell</application> may issue the command <command>locate <filename>.cshrc</filename></command>, to display all users who have a customized configuration file for the <application>C shell</application>.  Supposing the users <emphasis>root</emphasis> and <emphasis>jenny</emphasis> are running <application>C shell</application>, then only the file <filename>/home/jenny/.cshrc</filename> will be displayed, and not the one in <emphasis>root</emphasis>'s home directory.  On most systems, <command>locate</command> is a symbolic link to the <command>slocate</command> program:</para>
+<screen>
+<prompt>billy:~&gt;</prompt> <command>ls -l /usr/bin/locate</command>
+lrwxrwxrwx 1 root slocate  7 Oct 28 14:18 /usr/bin/locate -&gt; slocate*
+</screen>
+<para>User <emphasis>tina</emphasis> could have used <command>locate</command> to find the application she wanted:</para>
+<screen>
+<prompt>tina:~&gt;</prompt> <command>locate acroread</command>
+/usr/share/icons/hicolor/16x16/apps/acroread.png
+/usr/share/icons/hicolor/32x32/apps/acroread.png
+/usr/share/icons/locolor/16x16/apps/acroread.png
+/usr/share/icons/locolor/32x32/apps/acroread.png
+/usr/local/bin/acroread
+/usr/local/Acrobat4/Reader/intellinux/bin/acroread
+/usr/local/Acrobat4/bin/acroread
+</screen>
+<para>Directories that don't contain the name <filename>bin</filename> can't contain the program - they don't contain executable files.  There are three possibilities left.  The file in <filename>/usr/local/bin</filename> is the one <emphasis>tina</emphasis> would have wanted: it is a link to the shell script that starts the actual program:</para>
+<screen>
+<prompt>tina:~&gt;</prompt> <command>file /usr/local/bin/acroread</command>
+/usr/local/bin/acroread: symbolic link to ../Acrobat4/bin/acroread
+
+<prompt>tina:~&gt;</prompt> <command>file /usr/local/Acrobat4/bin/acroread</command>
+/usr/local/Acrobat4/bin/acroread: Bourne shell script text executable
+
+<prompt>tina:~&gt;</prompt> <command>file /usr/local/Acrobat4/Reader/intellinux/bin/acroread</command>
+/usr/local/Acrobat4/Reader/intellinux/bin/acroread: ELF 32-bit LSB 
+executable, Intel 80386, version 1, dynamically linked (uses 
+shared libs), not stripped
+</screen>
+<para>In order to keep the path as short as possible, so the system doesn't have to search too long every time a user wants to execute a command, we add <filename>/usr/local/bin</filename> to the path and not the other directories, which only contain the binary files of one specific program, while <filename>/usr/local/bin</filename> contains other useful programs as well.</para>
+<para>Again, a description of the full features of <command>find</command> and <command>locate</command> can be found in the <application>Info</application> pages.</para>
+
+</sect3>
+
+<sect3 id="sect_03_03_03_04"><title>The grep command</title>
+<sect4 id="sect_03_03_03_04_01"><title>General line filtering</title>
+<para>A simple but powerful program, <command>grep<indexterm><primary>grep</primary></indexterm></command> is used for filtering<indexterm><primary>files</primary><secondary>searching content</secondary></indexterm> input lines and returning certain patterns to the output.  There are literally thousands of applications for the <command>grep</command> program.  In the example below, <emphasis>jerry</emphasis> uses <command>grep</command> to see how he did the thing with <command>find</command>:</para>
+<screen>
+<prompt>jerry:~&gt;</prompt> <command>grep -a find .bash_history</command>
+find . -name userinfo
+man find
+find ../ -name common.cfg
+</screen>
+<tip><title>Search history</title>
+<para>Also useful in these cases is the search<indexterm><primary>shell</primary><secondary>history</secondary></indexterm> function in <command>bash</command>, activated by pressing <keycap>Ctrl</keycap>+<keycap>R</keycap> at once, such as in the example where we want to check how we did that last <command>find</command> again:</para>
+<screen>
+<prompt>thomas ~&gt;</prompt> <command>^R</command> 
+(reverse-i-search)`find': find `/home/thomas` -name *.xml
+</screen>
+<para>Type your search string at the search prompt.  The more characters you type, the more restricted the search gets.  This reads the command history for this shell session (which is written to <filename>.bash_history</filename> in your home directory when you quit that session).  The most recent occurrence of your search string is shown.  If you want to see previous commands containing the same string, type <keycap>Ctrl</keycap>+<keycap>R</keycap> again.</para>
+<para>See the <application>Info</application> pages on <command>bash</command> for more.</para></tip>
+<para>All UNIXes with just a little bit of decency have an online dictionary.  So does Linux.  The dictionary is a list of known words in a file named <filename>words</filename>, located in <filename>/usr/share/dict</filename>.  To quickly check the correct spelling of a word, no graphical application<indexterm><primary>grep</primary><secondary>example</secondary></indexterm> is needed:</para>
+<screen>
+<prompt>william:~&gt;</prompt> <command>grep pinguin /usr/share/dict/words</command>
+
+<prompt>william:~&gt;</prompt> <command>grep penguin /usr/share/dict/words</command>
+penguin
+penguins
+</screen>
+<tip><title>Dictionary vs. word list</title>
+<para>Some distributions offer the <command>dict<indexterm><primary>dict</primary></indexterm></command> command, which offers more features than simply searching words in a list.</para>
+</tip>
+<para>Who is the owner of that home directory next to mine?  Hey, there's his telephone number!</para>
+<screen>
+<prompt>lisa:~&gt;</prompt> <command>grep gdbruyne /etc/passwd</command>
+gdbruyne:x:981:981:Guy Debruyne, tel 203234:/home/gdbruyne:/bin/bash
+</screen>
+<para>And what was the E-mail address of Arno again?</para>
+<screen>
+<prompt>serge:~/mail&gt;</prompt> <command>grep -i arno *</command>
+sent-mail: To: &lt;Arno.Hintjens@celeb.com&gt;
+sent-mail: On Mon, 24 Dec 2001, Arno.Hintjens@celeb.com wrote:
+</screen>
+<para><command>find</command> and <command>locate</command> are often used in combination with <command>grep</command> to define some serious queries.  For more information, see <xref linkend="chap_05" /> on I/O redirection.</para>
+</sect4>
+<sect4 id="sect_03_03_03_04_02"><title>Special characters</title>
+<para>Characters that have a special meaning to the shell have to be <emphasis>escaped<indexterm><primary>escape characters</primary></indexterm></emphasis>.  The escape character in <application>Bash</application> is backslash<indexterm><primary>backslash</primary></indexterm>, as in most shells; this takes away the special<indexterm><primary>grep</primary><secondary>special characters</secondary></indexterm> meaning of the following character.  The shell knows about quite some special characters, among the most common /, ., ? and *.  A full list can be found in the Info pages and documentation for your shell.</para>
+<para>For instance, say that you want to display the file <quote>*</quote> instead of all the files in a directory, you would have to use </para>
+<cmdsynopsis><command>less <filename>\*</filename></command></cmdsynopsis>
+<para>The same goes for filenames containing a space:</para>
+<cmdsynopsis><command>cat <filename>This\ File</filename></command></cmdsynopsis>
+</sect4>
+</sect3>
+
+</sect2>
+<sect2 id="sect_03_03_04"><title>More ways to view file content</title>
+<sect3 id="sect_03_03_04_01"><title>General</title>
+<para>Apart from <command>cat</command>, which really doesn't do much more than sending files to the standard output, there are other tools to view file content.</para>
+<para>The easiest way of course would be to use graphical tools instead of command line tools.  In the introduction we already saw a glimpse of an office application, <application>OpenOffice.org</application>.  Other examples are the <application>GIMP</application> (start up with <command>gimp<indexterm><primary>gimp</primary></indexterm></command> from the command line), the GNU Image Manipulation Program; <command>xpdf<indexterm><primary>xpdf</primary></indexterm></command> to view Portable Document Format files (PDF); <application>GhostView</application> (<command>gv<indexterm><primary>gv</primary></indexterm></command>) for viewing PostScript files; <application>Mozilla/FireFox</application>, <command>links</command> (a text mode browser), <application>Konqueror</application>, <application>Opera</application> and many others for web content; XMMS, <application>CDplay</application> and others for multimedia file content; <application>AbiWord</application>, <application>Gnumeric</application>, <application>KOffice</application> etc. for all kinds of office applications and so on.  There are thousands of Linux applications; to list them all would take days.</para>
+<para>Instead we keep concentrating on shell- or text-mode applications, which form the basics for all other applications.  These commands work best in a text environment on files containing text.  When in doubt, check first using the <command>file<indexterm><primary>file</primary></indexterm></command> command.</para>
+<para>So let's see what text tools we have that are useful to look inside files.</para>
+<note><title>Font problems</title>
+<para>Plain text tools such as the ones we will now be discussing, often have problems with <quote>plain</quote> text files because of the font encoding used in those files.  Special characters, such as accented alphabetical characters, Chinese characters and other characters from languages using different character sets than the default <emphasis>en_US</emphasis> encoding and so on, are then displayed the wrong way or replaced by unreadable rubbish.  These problems are discussed in <xref linkend="sect_07_05" />.</para>
+
+</note>
+</sect3>
+<sect3 id="sect_03_03_04_02"><title><quote><command>less</command> is <command>more</command></quote></title>
+<para>Undoubtedly you will hear someone say this phrase sooner or later when working in a UNIX environment.  A little bit of UNIX history explains this:</para>
+<itemizedlist>
+<listitem><para>First there was <command>cat<indexterm><primary>cat</primary></indexterm></command>.  Output was streamed in an uncontrollable way.</para>
+</listitem>
+<listitem><para>Then there was <command>pg<indexterm><primary>pg</primary></indexterm></command>, which may still be found on older UNIXes.  This command puts text to the output one page at the time.</para></listitem>
+<listitem><para>The <command>more<indexterm><primary>more</primary></indexterm></command> program was a revised version of <command>pg</command>.  This command is still available on every Linux system.</para></listitem>
+<listitem><para><command>less<indexterm><primary>less</primary></indexterm></command> is the GNU version of more and has extra features allowing highlighting of search strings, scrolling back etc.  The syntax is very simple:</para>
+<cmdsynopsis><command>less <filename>name_of_file</filename></command></cmdsynopsis>
+<para>More information is located in the <application>Info</application> pages.</para>
+</listitem>
+</itemizedlist>
+<para>You already know about pagers by now, because they are used for viewing the man pages.</para>
+</sect3>
+<sect3 id="sect_03_03_04_03"><title>The head and tail commands</title>
+<para>These two commands display the n first/last lines of a file respectively.  To see the last<indexterm><primary>tail</primary></indexterm> ten commands entered:</para>
+<screen>
+<prompt>tony:~&gt;</prompt> <command>tail -10 .bash_history </command>
+locate configure | grep bin
+man bash
+cd
+xawtv &amp;
+grep usable /usr/share/dict/words 
+grep advisable /usr/share/dict/words 
+info quota
+man quota
+echo $PATH
+frm
+</screen>
+<para><command>head<indexterm><primary>head</primary></indexterm></command> works similarly.  The <command>tail</command> command has a handy feature to continuously show the last n lines of a file that changes all the time.  This <option>-f</option> option is often used by system administrators to check on log files.  More information is located in the system documentation files.</para>
+</sect3>
+
+</sect2>
+<sect2 id="sect_03_03_05"><title>Linking files</title>
+<sect3 id="sect_03_03_05_01"><title>Link types</title>
+<para>Since we know more about files and their representation in the file system, understanding<indexterm><primary>files</primary><secondary>linking</secondary></indexterm> links (or shortcuts) is a piece of cake.  A link is nothing more than a way of matching two or more file names to the same set of file data.  There are two ways<indexterm><primary>links</primary><secondary>types</secondary></indexterm> to achieve this:</para>
+<itemizedlist>
+<listitem><para>Hard link<indexterm><primary>links</primary><secondary>hard links</secondary></indexterm>: Associate two or more file names with the same inode.  Hard links share the same data blocks on the hard disk, while they continue to behave as independent files.</para>
+<para>There is an immediate disadvantage: hard links can't span partitions, because inode numbers are only unique within a given partition.</para>
+</listitem>
+<listitem><para>Soft link or symbolic<indexterm><primary>links</primary><secondary>symbolic links</secondary></indexterm> link (or for short: symlink): a small file that is a pointer to another file.  A symbolic link contains the path to the target file instead of a physical location on the hard disk.  Since inodes are not used in this system, soft links can span across partitions.</para></listitem>
+</itemizedlist>
+<para>The two link types behave similar, but are not the same, as illustrated in the scheme<indexterm><primary>links</primary><secondary>mechanism</secondary></indexterm> below:</para>
+<figure><title>Hard and soft link mechanism</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/links.eps" format="EPS"></imagedata>
+</imageobject>
+<imageobject>
+<imagedata fileref="images/links.png" format="PNG"></imagedata>
+</imageobject>
+<textobject>
+<phrase>Hard links share the same inode<indexterm><primary>links</primary><secondary>inodes</secondary></indexterm>, symbolic links have their own inode that points to datablocks holding the filename of the original file that the link is pointing to.</phrase>
+</textobject>
+</mediaobject>
+</figure>
+<para>Note that removing the target file for a symbolic link makes the link useless.</para>
+<para>Each regular file is in principle a hardlink.  Hardlinks can not span across partitions, since they refer to inodes, and inode numbers are only unique within a given partition.</para>
+<para>It may be argued that there is a third kind of link, the <emphasis>user-space</emphasis> link<indexterm><primary>links</primary><secondary>user-space link</secondary></indexterm>, which is similar to a shortcut in MS Windows.  These are files containing meta-data which can only be interpreted by the graphical file manager.  To the kernel and the shell these are just normal files.  They may end in a <emphasis>.desktop</emphasis> or <emphasis>.lnk</emphasis> suffix; an example can be found in <filename>~/.gnome-desktop</filename>:</para>
+<screen>
+<prompt>[dupont@boulot .gnome-desktop]$</prompt> <command>cat La\ Maison\ Dupont</command>
+[Desktop Entry]
+Encoding=Legacy-Mixed
+Name=La Maison Dupont
+Type=X-nautilus-home
+X-Nautilus-Icon=temp-home
+URL=file:///home/dupont
+</screen>
+<para>This example is from a <application>KDE</application> desktop:</para>
+<screen>
+<prompt>[lena@venus Desktop]$</prompt> <command>cat camera</command>
+[Desktop Entry]
+Dev=/dev/sda1
+FSType=auto
+Icon=memory
+MountPoint=/mnt/camera
+Type=FSDevice
+X-KDE-Dynamic-Device=true
+</screen>
+<para>Creating this kind of link is easy enough using the features of your graphical environment.  Should you need help, your system documentation should be your first resort.</para>
+<para>In the next section, we will study the creation of UNIX-style symbolic links using the command line.</para>
+</sect3>
+<sect3 id="sect_03_03_05_02"><title>Creating symbolic links</title>
+<para>The symbolic<indexterm><primary>links</primary><secondary>creating</secondary></indexterm> link is particularly interesting for beginning users: they are fairly obvious to see and you don't need to worry about partitions.</para>
+<para>The command<indexterm><primary>symbolic links</primary></indexterm> to make links is <command>ln<indexterm><primary>ln</primary></indexterm></command>.  In order to create symlinks, you need to use the <option>-s</option> option:</para>
+<cmdsynopsis><command>ln <option>-s</option> <filename>targetfile</filename> <filename>linkname</filename></command></cmdsynopsis>
+<para>In the example below, user <emphasis>freddy</emphasis> creates a link in a subdirectory of his home directory to a directory on another part of the system:</para>
+<screen>
+<prompt>freddy:~/music&gt;</prompt> <command>ln -s /opt/mp3/Queen/ Queen</command>
+
+<prompt>freddy:~/music&gt;</prompt> <command>ls -l</command>
+lrwxrwxrwx  1 freddy  freddy  17 Jan 22 11:07 Queen -&gt; /opt/mp3/Queen
+</screen>
+<para>Symbolic links are always very small files, while hard links have the same size as the original file.</para>
+<para>The application of symbolic<indexterm><primary>links</primary><secondary>usage</secondary></indexterm> links is widespread.  They are often used to save disk space, to make a copy of a file in order to satisfy installation requirements of a new program that expects the file to be in another location, they are used to fix scripts that suddenly have to run in a new environment and can generally save a lot of work.  A system admin may decide to move the home directories of the users to a new location, <filename>disk2</filename> for instance, but if he wants everything to work like before, like the <filename>/etc/passwd</filename> file, with a minimum of effort he will create a symlink from <filename>/home</filename> to the new location <filename>/disk2/home</filename>.</para>
+</sect3> 
+</sect2>
+
+</sect1>
+<sect1 id="sect_03_04"><title>File security</title>
+<sect2 id="sect_03_04_01"><title>Access rights: Linux's first line of defense</title>
+<para>The Linux security model<indexterm><primary>files</primary><secondary>security</secondary></indexterm> is based on the one used on UNIX systems, and is as rigid as the UNIX security<indexterm><primary>security</primary><secondary>file permissions</secondary></indexterm> model (and sometimes even more), which is already quite robust.  On a Linux system, every file is owned by a user and a group user.  There is also a third category of users, those that are not the user owner and don't belong to the group owning the file.  For each category of users, read, write and execute permissions can be granted or denied.</para>
+<para>We already used the <emphasis>long</emphasis> option to list<indexterm><primary>ls</primary></indexterm> files using the <command>ls <option>-l</option></command> command, though for other reasons.  This command also displays<indexterm><primary>files</primary><secondary>display permissions</secondary></indexterm> file permissions<indexterm><primary>file permissions</primary><secondary>display</secondary></indexterm> for these three user categories; they are indicated by the nine characters that follow the first character, which is the file type indicator at the beginning of the file properties line.  As seen in the examples below, the first three characters in this series of nine display access rights for the actual user that owns the file.  The next three are for the group owner of the file, the last three for other users.  The permissions are always in the same order: read, write, execute for the user, the group and the others.  Some examples:</para>
+<screen>
+<prompt>marise:~&gt;</prompt> <command>ls -l To_Do</command>
+-rw-rw-r--    1 marise  users      5 Jan 15 12:39 To_Do
+<prompt>marise:~&gt;</prompt> <command>ls -l /bin/ls</command>
+-rwxr-xr-x    1 root    root   45948 Aug  9 15:01 /bin/ls*
+</screen>
+<para>The first file is a regular file (first dash).  Users with user name <emphasis>marise</emphasis> or users belonging to the group <emphasis>users</emphasis> can read and write (change/move/delete) the file, but they can't execute it (second and third dash).  All other users are only allowed to read this file, but they can't write or execute it (fourth and fifth dash).</para>
+<para>The second example is an executable file, the difference: everybody can run this program, but you need to be <emphasis>root</emphasis> to change it.</para>
+<para>The Info pages explain how the <command>ls</command> command handles display of access rights in detail, see the section <emphasis>What information is listed</emphasis>.</para>
+<para>For easy use with commands, both access rights or modes and user groups have<indexterm><primary>file permissions</primary><secondary>codes</secondary></indexterm> a code.  See the tables below.</para>
+<table frame="all">
+<title>Access mode codes</title>
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead>
+<row>
+<entry>Code</entry><entry>Meaning</entry> 
+</row>
+</thead>
+<tbody>
+<row>
+<entry>0 or -</entry><entry>The access right that is supposed to be on this place is not granted.</entry></row>
+<row>
+<entry>4 or r</entry><entry>read access is granted to the user category defined in this place</entry></row>
+<row>
+<entry>2 or w</entry><entry>write permission is granted to the user category defined in this place</entry></row>
+<row>
+<entry>1 or x</entry><entry>execute permission is granted to the user category defined in this place</entry></row>
+</tbody>
+</tgroup>
+</table>
+<table frame="all"><title>User group codes</title>
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead>
+<row>
+<entry>Code</entry><entry>Meaning</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry>u</entry><entry>user permissions</entry></row>
+<row>
+<entry>g</entry><entry>group permissions</entry></row>
+<row>
+<entry>o</entry><entry>permissions for others</entry></row>
+</tbody>
+</tgroup>
+</table>
+
+
+<para>This straight forward scheme is applied very strictly, which allows a high level of security even without network security.  Among other functions, the security scheme takes care of user access to programs, it can serve files on a need-to-know basis and protect sensitive data such as home directories and system configuration files.</para>
+<para>You should know what your user name<indexterm><primary>user name</primary><secondary>display</secondary></indexterm> is.  If you don't, it can be displayed using the <command>id<indexterm><primary>id</primary></indexterm></command> command, which also displays the default group you belong to and eventually other groups of which you are a member:</para>
+<screen>
+<prompt>tilly:~&gt;</prompt> <command>id</command>
+uid=504(tilly) gid=504(tilly) groups=504(tilly),100(users),2051(org)
+</screen>
+<para>Your user name is also stored in the environment variable <varname>USER</varname>:</para>
+<screen>
+<prompt>tilly:~&gt;</prompt> <command>echo $USER</command>
+tilly
+</screen>
+
+
+
+</sect2>
+<sect2 id="sect_03_04_02"><title>The tools</title>
+<sect3 id="sect_03_04_02_01"><title>The chmod command</title>
+<para>A normal consequence of applying strict file permissions<indexterm><primary>file permissions</primary><secondary>setting</secondary></indexterm>, and sometimes a nuisance, is that access rights will need to be changed for all kinds of reasons.  We use the <command>chmod<indexterm><primary>chmod</primary></indexterm></command> command to do this, and eventually <emphasis>to chmod<indexterm><primary>to chmod</primary></indexterm></emphasis> has become an almost acceptable English verb, meaning the changing of the access mode of a file.  The <command>chmod</command> command can be used with alphanumeric or numeric options, whatever you like best.</para>
+<para>The example<indexterm><primary>chmod</primary><secondary>example</secondary></indexterm> below uses alphanumeric options  in order to solve a problem that commonly occurs with new users:</para>
+<screen>
+<prompt>asim:~&gt;</prompt> <command>./hello</command>
+bash: ./hello: bad interpreter: Permission denied
+
+<prompt>asim:~&gt;</prompt> <command>cat hello</command>
+#!/bin/bash
+echo "Hello, World"
+
+<prompt>asim:~&gt;</prompt> <command>ls -l hello</command>
+-rw-rw-r--    1 asim    asim    32 Jan 15 16:29 hello
+
+<prompt>asim:~&gt;</prompt> <command>chmod u+x hello</command>
+
+<prompt>asim:~&gt;</prompt> <command>./hello</command>
+Hello, World
+
+<prompt>asim:~&gt;</prompt> <command>ls -l hello</command>
+-rwxrw-r--   1 asim    asim    32 Jan 15 16:29 hello*
+</screen>
+<para>The <command>+</command> and <command>-</command> operators are used to grant or deny a given right to a given group.  Combinations separated by commas are allowed.  The Info and man pages contain useful examples.  Here's another one, which makes the file from the previous example a private file to user <emphasis>asim</emphasis>:</para>
+<screen>
+<prompt>asim:~&gt;</prompt> <command>chmod u+rwx,go-rwx hello</command>
+
+<prompt>asim:~&gt;</prompt> <command>ls -l hello</command>
+-rwx------    1 asim    asim    32 Jan 15 16:29 hello*
+</screen>
+<para>The kind of problem resulting in an error message saying that permission is denied somewhere is usually a problem with access rights in most cases.  Also, comments like, <quote>It worked yesterday,</quote> and <quote>When I run this as root it works,</quote> are most likely caused by the wrong file permissions.</para>
+<para>When using <command>chmod</command> with numeric arguments, the values for each granted access right have to be counted together per group.  Thus we get a 3-digit number, which is the symbolic value for the settings <command>chmod</command> has to make.  The following table lists the most common<indexterm><primary>file permissions</primary><secondary>overview</secondary></indexterm> combinations:</para>
+<table frame="all">
+<title>File protection with chmod</title>
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead>
+<row>
+<entry>Command</entry><entry>Meaning</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><command>chmod <parameter>400</parameter> <filename>file</filename></command></entry><entry>To protect a file against accidental overwriting.</entry>
+</row>
+<row>
+<entry><command>chmod <parameter>500</parameter> <filename>directory</filename></command></entry><entry>To protect yourself from accidentally removing, renaming or moving files from this directory.</entry>
+</row>
+<row>
+<entry><command>chmod <parameter>600</parameter> <filename>file</filename></command></entry><entry>A private file only changeable by the user who entered this command.</entry>
+</row>
+<row>
+<entry><command>chmod <parameter>644</parameter> <filename>file</filename></command></entry><entry>A publicly readable file that can only be changed by the issuing user.</entry>
+</row>
+<row>
+<entry><command>chmod <parameter>660</parameter> <filename>file</filename></command></entry><entry>Users belonging to your group can change this file, others don't have any access to it at all.</entry>
+</row>
+<row>
+<entry><command>chmod <parameter>700</parameter> <filename>file</filename></command></entry><entry>Protects a file against any access from other users, while the issuing user still has full access.</entry>
+</row>
+<row>
+<entry><command>chmod <parameter>755</parameter> <filename>directory</filename></command></entry><entry>For files that should be readable and executable by others, but only changeable by the issuing user.</entry>
+</row>
+<row>
+<entry><command>chmod <parameter>775</parameter> <filename>file</filename></command></entry><entry>Standard file sharing mode for a group.</entry>
+</row>
+<row>
+<entry><command>chmod <parameter>777</parameter> <filename>file</filename></command></entry><entry>Everybody can do everything to this file.</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+<para>If you enter a number with less than three digits as an argument to <command>chmod</command>, omitted characters are replaced with zeros starting from the left.  There is actually a fourth digit on Linux systems, that precedes the first three and sets special access modes.  Everything about these and many more are located in the Info pages.</para>
+</sect3>
+<sect3 id="sect_03_04_02_02"><title>Logging on to another group</title>
+<para>When you type <command>id<indexterm><primary>id</primary></indexterm></command> on the command line, you get a list of all the groups<indexterm><primary>groups</primary><secondary>display</secondary></indexterm> that you can possibly belong to, preceded by your user name and ID and the group name and ID that you are currently connected with.  However, on many Linux systems you can only be actively logged in to one group at the time.  By default, this active or <emphasis>primary group<indexterm><primary>groups</primary><secondary>primary group</secondary></indexterm></emphasis> is the one that you get assigned from the <filename>/etc/passwd<indexterm><primary>passwd</primary></indexterm></filename> file.  The fourth field of this file holds users' primary group ID, which is looked up in the <filename>/etc/group<indexterm><primary>group</primary></indexterm></filename> file.  An example:</para>
+<screen>
+<prompt>asim:~&gt;</prompt> <command>id</command>
+uid=501(asim) gid=501(asim) groups=100(users),501(asim),3400(web)
+
+<prompt>asim:~&gt;</prompt> <command>grep <parameter>asim</parameter> <filename>/etc/passwd</filename></command>
+asim:x:501:501:Asim El Baraka:/home/asim:/bin/bash
+
+<prompt>asim:~&gt;</prompt> <command>grep <parameter>501</parameter> <filename>/etc/group</filename></command>
+asim:x:501:
+</screen>
+<para>The fourth field in the line from <filename>/etc/passwd</filename> contains the value <quote>501</quote>, which represents the group <emphasis>asim</emphasis> in the above example.  From <filename>/etc/group</filename> we can get the name matching this group ID.  When initially connecting to the system, this is the group that <emphasis>asim</emphasis> will belong to.</para>
+<note><title>User private group scheme</title>
+<para>In order to allow<indexterm><primary>groups</primary><secondary>user private groups</secondary></indexterm> more flexibility, most Linux systems follow the so-called <emphasis>user private group scheme</emphasis>, that assigns each user primarily to his or her own group.  This group is a group that only contains this particular user, hence the name <quote>private group</quote>.  Usually this group has the same name as the user login name, which can be a bit confusing.</para> 
+</note>
+<para>Apart from his own private group, user <emphasis>asim</emphasis> can also be in the groups <emphasis>users</emphasis> and <emphasis>web</emphasis>.  Because these are secondary groups to this user, he will need to use the <command>newgrp<indexterm><primary>newgrp</primary></indexterm></command> to log into any of these groups (use <command>gpasswd</command> for setting the group password first).  In the example<indexterm><primary>groups</primary><secondary>switching</secondary></indexterm>, <emphasis>asim</emphasis> needs to create files that are owned by the group <emphasis>web</emphasis>.</para>
+<screen>
+<prompt>asim:/var/www/html&gt;</prompt> <command>newgrp <parameter>web</parameter></command>
+
+<prompt>asim:/var/www/html&gt;</prompt> <command>id</command>
+uid=501(asim) gid=3400(web) groups=100(users),501(asim),3400(web)
+</screen>
+<para>When <emphasis>asim</emphasis> creates new files now, they will be in group ownership of the group <emphasis>web</emphasis> instead of being owned by the group <emphasis>asim</emphasis>:</para>
+<screen>
+<prompt>asim:/var/www/html&gt;</prompt> <command>touch <filename>test</filename></command>
+
+<prompt>asim:/var/www/html&gt;</prompt> <command>ls <option>-l</option> <filename>test</filename></command>
+-rw-rw-r--  1 asim web   0 Jun 10 15:38 test
+</screen>
+<para>Logging in to a new group prevents you from having to use <command>chown<indexterm><primary>chown</primary></indexterm></command> (see <xref linkend="sect_03_04_02_04" />) or calling your system administrator to change ownerships for you.</para>
+<para>See the manpage for <command>newgrp</command> for more information.</para>
+</sect3>
+<sect3 id="sect_03_04_02_03"><title>The file mask</title>
+<para>When a new file is saved somewhere, it is first subjected to the standard security procedure.  Files without permissions don't exist on Linux.  The standard file<indexterm><primary>files</primary><secondary>mask</secondary></indexterm> permission is determined by the <emphasis>mask<indexterm><primary>mask</primary></indexterm></emphasis> for new file creation.  The value of this mask can be displayed using the <command>umask<indexterm><primary>umask</primary></indexterm></command> command:</para>
+<screen>
+<prompt>bert:~&gt;</prompt> <command>umask</command>
+0002
+</screen>
+<para>Instead of adding the symbolic values to each other, as with <command>chmod</command>, for calculating the permission on a new file they need to be subtracted from the total possible access rights.  In the example above, however, we see 4 values displayed, yet there are only 3 permission categories: <emphasis>user</emphasis>, <emphasis>group</emphasis> and <emphasis>other</emphasis>.  The first zero is part of the special file attributes settings, which we will discuss in <xref linkend="sect_03_04_02_04" /> and <xref linkend="sect_04_01_06" />.  It might just as well be that this first zero is not displayed on your system when entering the <command>umask</command> command, and that you only see 3 numbers representing the default file creation mask.</para>
+<para>Each UNIX-like system has a system function for creating new files, which is called each time a user uses a program that creates new files, for instance, when downloading a file from the Internet, when saving a new text document and so on.  This function creates both new files and new directories.  Full read, write and execute permission is granted to everybody when creating a new directory.  When creating a new file, this function will grant read and write permissions for everybody, but set execute permissions to none for all user categories.  This, before the mask is applied, a directory has permissions <emphasis>777</emphasis> or <emphasis>rwxrwxrwx</emphasis>, a plain file <emphasis>666</emphasis> or <emphasis>rw-rw-rw-</emphasis>.</para>
+<para>The <emphasis>umask</emphasis> value is subtracted from these default permissions after the function has created the new file or directory.  Thus, a directory will have permissions of <emphasis>775</emphasis> by default, a file <emphasis>664</emphasis>, if the mask value is <emphasis>(0)002</emphasis>.  This is demonstrated in the example below:</para>
+<screen>
+<prompt>bert:~&gt;</prompt> <command>mkdir newdir</command>
+
+<prompt>bert:~&gt;</prompt> <command>ls -ld newdir</command>
+drwxrwxr-x    2 bert    bert		4096 Feb 28 13:45 newdir/
+
+<prompt>bert:~&gt;</prompt> <command>touch newfile</command>
+
+<prompt>bert:~&gt;</prompt> <command>ls -l newfile</command>
+-rw-rw-r--    1 bert    bert		   0 Feb 28 13:52 newfile
+</screen>
+<note><title>Files versus directories</title>
+<para>A directory gets more permissions by default: it always has the <emphasis>execute</emphasis> permission.  If it wouldn't have that, it would not be accessible.  Try this out by chmodding a directory 644!</para>
+</note>
+<para>If you log in to another group using the <command>newgrp</command> command, the mask remains unchanged.  Thus, if it is set to <emphasis>002</emphasis>, files and directories that you create while being in the new group will also be accessible to the other members of that group; you don't have to use <command>chmod</command>.</para>
+<para>The <emphasis>root<indexterm><primary>root</primary><secondary>file creation mask</secondary></indexterm></emphasis> user usually has stricter default file creation permissions:</para>
+<screen>
+[root@estoban root]# umask
+022
+</screen>
+<para>These defaults are set system-wide in the shell resource configuration files, for instance <filename>/etc/bashrc<indexterm><primary>bashrc</primary></indexterm></filename> or <filename>/etc/profile<indexterm><primary>profile</primary></indexterm></filename>.  You can change them in your own shell configuration file, see <xref linkend="chap_07" /> on customizing your shell environment.</para>
+
+</sect3>
+<sect3 id="sect_03_04_02_04"><title>Changing user and group ownership</title>
+<para>When a file<indexterm><primary>files</primary><secondary>changing ownership</secondary></indexterm> is owned by the wrong user or group<indexterm><primary>groups</primary><secondary>changing ownership</secondary></indexterm>, the error can be repaired with the <command>chown<indexterm><primary>chown</primary></indexterm></command> (change owner) and <command>chgrp<indexterm><primary>chgrp</primary></indexterm></command> (change group) commands.  Changing file ownership is a frequent system administrative task in environments where files need to be shared in a group.  Both commands are very flexible, as you can find out by using the <option>--help</option> option.</para>
+<para>The <command>chown</command> command can be applied to change both user and group ownership of a file, while <command>chgrp</command> only changes group ownership.  Of course the system will check if the user issuing one of these commands has sufficient permissions on the file(s) she wants to change.</para>
+<para>In order to only change the user ownership of a file, use this syntax<indexterm><primary>chown</primary><secondary>syntax</secondary></indexterm>:</para>
+<cmdsynopsis><command>chown <parameter>newuser</parameter> <filename>file</filename></command></cmdsynopsis>
+<para>If you use a colon after the user name (see the Info pages), group ownership will be changed as well, to the primary group of the user issuing the command.  On a Linux system, each user has his own group, so this form can be used to make files<indexterm><primary>chown</primary><secondary>example</secondary></indexterm> private:</para>
+<screen>
+<prompt>jacky:~&gt;</prompt> <command>id</command>
+uid=1304(jacky) gid=(1304) groups=1304(jacky),2034(pproject)
+
+<prompt>jacky:~&gt;</prompt> <command>ls -l my_report</command>
+-rw-rw-r--  1 jacky   project       29387 Jan 15 09:34 my_report
+
+<prompt>jacky:~&gt;</prompt> <command>chown jacky: my_report</command>
+
+<prompt>jacky:~&gt;</prompt> <command>chmod o-r my_report</command>
+
+<prompt>jacky:~&gt;</prompt> <command>ls -l my_report</command>
+-rw-rw----  1 jacky   jacky         29387 Jan 15 09:34 my_report
+</screen>
+<para>If <emphasis>jacky</emphasis> would like to share this file, without having to give everybody permission to write it, he can use the <command>chgrp</command> command<indexterm><primary>chgrp</primary><secondary>example</secondary></indexterm>:</para>
+<screen>
+<prompt>jacky:~&gt;</prompt> <command>ls -l report-20020115.xls</command>
+-rw-rw---- 1 jacky   jacky   45635 Jan 15 09:35 report-20020115.xls
+
+<prompt>jacky:~&gt;</prompt> <command>chgrp project report-20020115.xls</command>
+
+<prompt>jacky:~&gt;</prompt> <command>chmod o= report-20020115.xls</command>
+
+<prompt>jacky:~&gt;</prompt> <command>ls -l report-20020115.xls</command>
+-rw-rw---- 1 jacky   project 45635 Jan 15 09:35 report-20020115.xls
+</screen>
+<para>This way, users in the group <emphasis>project</emphasis> will be able to work on this file.  Users not in this group have no business with it at all.</para>
+<para>Both <command>chown</command> and <command>chgrp</command> can be used to change ownership<indexterm><primary>files</primary><secondary>change ownership recursively</secondary></indexterm> recursively, using the <option>-R</option> option.  In that case, all underlying files and subdirectories of a given directory will belong to the given user and/or group.</para>
+<note><title>Restrictions</title>
+<para>On most systems, the use of the <command>chown</command> and <command>chgrp</command> commands is restricted for non-privileged<indexterm><primary>chown</primary><secondary>restrictions</secondary></indexterm> users.  If you are not the administrator of the system, you can not change user nor group ownerships for security reasons.  If the usage of these commands would not be restricted, malicious users could assign ownership of files to other users and/or groups and change behavior of those users' environments and even cause damage to other users' files.</para>
+</note>
+</sect3>
+
+<sect3 id="sect_03_04_02_05"><title>Special modes</title>
+<para>For the system admin to not be bothered solving permission problems all the time, special access<indexterm><primary>file permissions</primary><secondary>special modes</secondary></indexterm> rights can be given to entire directories, or to separate programs.  There are three special modes:</para>
+<itemizedlist>
+<listitem><para>Sticky bit<indexterm><primary>sticky bit</primary></indexterm> mode: After execution of a job, the command is kept in the system memory.  Originally this was a feature used a lot to save memory: big jobs are loaded into memory only once.  But these days memory is inexpensive and there are better techniques to manage it, so it is not used anymore for its optimizing capabilities on single files.  When applied to an entire directory, however, the sticky bit has a different meaning.  In that case, a user can only change files in this directory when she is the user owner of the file or when the file has appropriate permissions.  This feature is used on directories like <filename>/var/tmp</filename>, that have to be accessible for everyone, but where it is not appropriate for users to change or delete each other's data.  The sticky bit is indicated by a <emphasis>t</emphasis> at the end of the file permission field:</para>
+<screen>
+<prompt>mark:~&gt;</prompt> <command>ls -ld /var/tmp</command>
+drwxrwxrwt   19 root     root         8192 Jan 16 10:37 /var/tmp/
+</screen>
+<para>The sticky bit is set using the command <command>chmod <parameter>o+t</parameter> <filename>directory</filename></command>.  The historic origin of the <quote>t</quote> is in UNIX' <emphasis>save Text access</emphasis> feature.</para>
+</listitem>
+<listitem><para>SUID<indexterm><primary>SUID</primary></indexterm> (set user ID<indexterm><primary>file permissions</primary><secondary>SUID</secondary></indexterm>) and SGID (set group ID<indexterm><primary>file permissions</primary><secondary>SGID</secondary></indexterm>): represented by the character <emphasis>s</emphasis> in the user or group permission field.  When this mode is set on an executable file, it will run with the user and group permissions on the file instead of with those of the user issuing the command, thus giving access to system resources.  We will discuss this further in <xref linkend="chap_04" />.</para>
+</listitem>
+
+<listitem><para>SGID<indexterm><primary>SGID</primary></indexterm> (set group ID) on a directory: in this special case every file created in the directory will have the same group owner as the directory itself (while normal behavior would be that new files are owned by the users who create them).  This way, users don't need to worry about file ownership when sharing directories:</para>
+<screen>
+<prompt>mimi:~&gt;</prompt> <command>ls -ld /opt/docs</command>
+drwxrws---  4 root    users          4096 Jul 25 2001 docs/
+
+<prompt>mimi:~&gt;</prompt> <command>ls -l /opt/docs</command>
+-rw-rw----  1 mimi    users        345672 Aug 30 2001-Council.doc
+</screen>
+<para>This is the standard way of sharing files<indexterm><primary>files</primary><secondary>sharing in a group</secondary></indexterm> in UNIX.</para>
+<note><title>Existing files are left unchanged!</title><para>Files that are being moved to a SGID directory but were created elsewhere keep their original user and group owner.  This may be confusing.</para></note>
+
+</listitem>
+</itemizedlist>
+</sect3>
+</sect2>
+
+</sect1>
+<sect1 id="sect_03_05"><title>Summary</title>
+<para>On UNIX, as on Linux, all entities are in some way or another presented to the system as files with the appropriate file properties.  Use of (predefined) paths allows the users and the system admin to find, read and manipulate files.</para>
+<para>We've made our first steps toward becoming an expert: we discussed the real and the fake structure of the file system, and we know about the Linux file security model, as well as several other security precautions that are taken on every system by default.</para>
+<para>The shell is the most important tool for interaction with the system.  We learned several shell commands in this chapter, which are listed in the table below.</para>
+<table frame="all">
+<title>New commands in chapter 3: Files and the file system</title>
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead>
+<row>
+<entry>Command</entry><entry>Meaning</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><command>bash</command></entry><entry>GNU shell program.</entry>
+</row>
+<row>
+<entry><command>cat <filename>file(s)</filename></command></entry><entry>Send content of file(s) to standard output.</entry>
+</row>
+<row>
+<entry><command>cd <filename>directory</filename></command></entry><entry>Enter <filename>directory</filename>.  <command>cd</command> is a <command>bash</command> built-in command.</entry>
+</row>
+<row>
+<entry><command>chgrp <parameter>newgroup</parameter> <filename>file(s)</filename></command></entry><entry>Change the group ownership of <filename>file(s)</filename> to <emphasis>newgroup</emphasis></entry>
+</row>
+<row>
+<entry><command>chmod <parameter>mode</parameter> <filename>file(s)</filename></command></entry><entry>Change access permissions on <filename>file(s)</filename></entry>
+</row>
+<row>
+<entry><command>chown <parameter>newowner</parameter><optional>:<optional>newgroup</optional></optional> <filename>file(s)</filename> </command></entry><entry>Change file owner and group ownership.</entry>
+</row>
+<row>
+<entry><command>cp <filename>sourcefile</filename> <filename>targetfile</filename></command></entry><entry>Copy <filename>sourcefile</filename> to <filename>targetfile</filename>.</entry>
+</row>
+<row>
+<entry><command>df <filename>file</filename></command></entry><entry>Reports on used disk space on the partition containing <filename>file</filename>.</entry>
+</row>
+<row>
+<entry><command>echo <parameter>string</parameter></command></entry><entry>Display a line of text</entry>
+</row>
+<row>
+<entry><command>export</command></entry><entry>Part of <command>bash</command> that announces variables and their values to the system.</entry>
+</row>
+<row>
+<entry><command>file <filename>filename</filename></command></entry><entry>Determine file type of <filename>filename</filename>.</entry>
+</row>
+<row>
+<entry><command>find <parameter>path</parameter> <parameter>expression</parameter></command></entry><entry>Find files in the file system hierarchy</entry>
+</row>
+<row>
+<entry><command>grep <parameter>PATTERN</parameter> <filename>file</filename></command></entry><entry>Print lines in <filename>file</filename> containing the search pattern.</entry>
+</row>
+<row>
+<entry><command>head <filename>file</filename></command></entry><entry>Send the first part of <filename>file</filename> to standard output</entry>
+</row>
+<row>
+<entry><command>id</command></entry><entry>Prints real and effective user name and groups.</entry>
+</row>
+<row>
+<entry><command>info <parameter>command</parameter></command></entry><entry>Read documentation about <command>command</command>.</entry></row>
+<row>
+<entry><command>less <filename>file</filename></command></entry><entry>View <filename>file</filename> with a powerful viewer.</entry>
+</row>
+<row>
+<entry><command>ln <filename>targetfile</filename> <filename>linkname</filename></command></entry><entry>Make a link with name <filename>linkname</filename> to <filename>targetfile</filename>.</entry>
+</row>
+<row>
+<entry><command>locate <parameter>searchstring</parameter></command></entry><entry>Print all accessible files matching the search pattern.</entry>
+</row>
+<row>
+<entry><command>ls <filename>file(s)</filename></command></entry><entry>Prints directory content.</entry>
+</row>
+<row>
+<entry><command>man <parameter>command</parameter></command></entry><entry>Format and display online (system) manual pages for <command>command</command>.</entry>
+</row>
+<row>
+<entry><command>mkdir <filename>newdir</filename></command></entry><entry>Make a new empty directory.</entry>
+</row>
+<row>
+<entry><command>mv <filename>oldfile</filename> <filename>newfile</filename></command></entry><entry>Rename or move <filename>oldfile</filename>.</entry>
+</row>
+<row>
+<entry><command>newgrp <parameter>groupname</parameter></command></entry><entry>Log in to a new group.</entry>
+</row>
+
+<row>
+<entry><command>pwd</command></entry><entry>Print the present or current working directory.</entry>
+</row>
+<row>
+<entry><command>quota</command></entry><entry>Show disk usage and limits.</entry>
+</row>
+<row>
+<entry><command>rm <filename>file</filename></command></entry><entry>Removes files and directories.</entry>
+</row>
+<row>
+<entry><command>rmdir <filename>file</filename></command></entry><entry>Removes directories.</entry>
+</row>
+<row>
+<entry><command>tail <filename>file</filename></command></entry><entry>Print the last part of <filename>file</filename>.</entry>
+</row>
+<row>
+<entry><command>umask <optional><parameter>value</parameter></optional></command></entry><entry>Show or change new file creation mode.</entry>
+</row>
+<row>
+<entry><command>wc <filename>file</filename></command></entry><entry>Counts lines, words and characters in <filename>file</filename>.</entry>
+</row>
+<row>
+<entry><command>which <parameter>command</parameter></command></entry><entry>Shows the full path to <command>command</command>.</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+<para>We also stressed the fact that you should READ THE MAN PAGES.  This documentation is your first-aid kit and contains the answers to many questions.  The above list contains the basic commands that you will use on a daily basis, but they can do much more than the tasks we've discussed here.  Reading the documentation will give you the control you need.</para>
+<para>Last but not least, a handy overview of file permissions:</para>
+<table frame="all">
+<title>File permissions</title>
+<tgroup cols="4" align="left" colsep="1" rowsep="1">
+<thead><row><entry>Who\What</entry><entry>r(ead)</entry><entry>w(rite)</entry><entry>(e)x(ecute)</entry></row>
+</thead>
+<tbody>
+<row><entry>u(ser)</entry><entry>4</entry><entry>2</entry><entry>1</entry></row>
+<row><entry>g(roup)</entry><entry>4</entry><entry>2</entry><entry>1</entry></row>
+<row><entry>o(ther)</entry><entry>4</entry><entry>2</entry><entry>1</entry></row>
+</tbody>
+</tgroup>
+</table>
+</sect1>
+<sect1 id="sect_03_06"><title>Exercises</title>
+
+<para>Just login with your common user ID.</para>
+
+<sect2 id="sect_03_06_01"><title>Partitions</title>
+<itemizedlist>
+<listitem><para>On which partition is your home directory?</para></listitem>
+<listitem><para>How many partitions are on your system?</para></listitem>
+<listitem><para>What is the total size of your Linux installation?</para></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="sect_03_06_02"><title>Paths</title>
+<itemizedlist>
+<listitem><para>Display your search path.</para></listitem>
+<listitem><para>Export a senseless path by entering, for instance, <command>export <varname>PATH</varname>=<replaceable>blah</replaceable></command> and try listing directory content.</para></listitem>
+<listitem><para>What is the path to your home directory?  How would another user reach your home directory starting from his own home directory, using a relative path?</para></listitem>
+<listitem><para>Go to the <filename>tmp</filename> directory in <filename>/var</filename>.</para></listitem>
+<listitem><para>Now go to <filename>share</filename> in <filename>/usr</filename> using only one command.  Change to <filename>doc</filename>.  What is your present working directory?</para></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="sect_03_06_03"><title>Tour of the system</title>
+<itemizedlist>
+<listitem><para>Change to the <filename>/proc</filename> directory.</para></listitem>
+<listitem><para>What CPU(s) is the system running on?</para></listitem>
+<listitem><para>How much RAM does it currently use?</para></listitem>
+<listitem><para>How much swap space do you have?</para></listitem>
+<listitem><para>What drivers are loaded?</para></listitem>
+<listitem><para>How many hours has the system been running?</para></listitem>
+<listitem><para>Which filesystems are known by your system?</para></listitem>
+<listitem><para>Change to <filename>/etc/rc.d | /etc/init.d | /etc/runlevels</filename> and choose the directory appropriate for your run level.</para></listitem>
+<listitem><para>What services should be running in this level?</para></listitem>
+<listitem><para>Which services run in graphical mode that don't run in text mode?</para></listitem>
+<listitem><para>Change to <filename>/etc</filename></para></listitem>
+<listitem><para>How long does the system keep the log file in which user logins are monitored?</para></listitem>
+<listitem><para>Which release are you running?</para></listitem>
+<listitem><para>Are there any issues or messages of the day?</para></listitem>
+<listitem><para>How many users are defined on your system?  Don't count them, let the computer do it for you!</para></listitem>
+<listitem><para>How many groups?</para></listitem>
+<listitem><para>Where is the time zone information kept?</para></listitem>
+<listitem><para>Are the HOWTOs installed on your system?</para></listitem>
+<listitem><para>Change to <filename>/usr/share/doc</filename>.</para></listitem>
+<listitem><para>Name three programs that come with the GNU <emphasis>coreutils</emphasis> package.</para></listitem>
+<listitem><para>Which version of <command>bash</command> is installed on this system?</para></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="sect_03_06_04"><title>Manipulating files</title>
+<itemizedlist>
+<listitem><para>Create a new directory in your home directory.</para></listitem>
+<listitem><para>Can you move this directory to the same level as your home directory?</para></listitem>
+<listitem><para>Copy all XPM files from <filename>/usr/share/pixmaps</filename> to the new directory.  What does XPM mean?</para></listitem>
+<listitem><para>List the files in reverse alphabetical order.</para></listitem>
+<listitem><para>Change to your home directory.  Create a new directory and copy all the files of the <filename>/etc</filename> directory into it.  Make sure that you also copy the files and directories which are in the subdirectories of <filename>/etc</filename>! (recursive copy)</para></listitem>
+<listitem><para>Change into the new directory and make a directory for files starting with an upper case character and one for files starting with a lower case character.  Move all the files to the appropriate directories.  Use as few commands as possible.</para></listitem>
+<listitem><para>Remove the remaining files.</para></listitem>
+<listitem><para>Delete the directory and its entire content using a single command.</para></listitem>
+<listitem><para>Use <command>grep</command> to find out which script starts the Font Server in the graphical run level.</para></listitem>
+<listitem><para>Where is the <emphasis>sendmail</emphasis> server program?</para></listitem>
+<listitem><para>Make a symbolic link in your home directory to <filename>/var/tmp</filename>.  Check that it really works.</para></listitem>
+<listitem><para>Make another symbolic link in your home directory to this link.   Check that it works.  Remove the first link and list directory content.  What happened to the second link?</para></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="sect_03_06_05"><title>File permissions</title>
+<itemizedlist>
+<listitem><para>Can you change file permissions on <filename>/home</filename>?</para></listitem>
+<listitem><para>What is your standard file creation mode?</para></listitem>
+<listitem><para>Change ownership of <filename>/etc</filename> to your own user and group.</para></listitem>
+<listitem><para>Change file permissions of <filename>~/.bashrc</filename> so that only you and your primary group can read it.</para></listitem>
+<listitem><para>Issue the command <command>locate <filename>root</filename></command>.  Do you notice anything special?</para></listitem>
+<listitem><para>Make a symbolic link to <filename>/root</filename>.  Can it be used?</para></listitem>
+</itemizedlist>
+</sect2>
+
+</sect1>
+
+</chapter>

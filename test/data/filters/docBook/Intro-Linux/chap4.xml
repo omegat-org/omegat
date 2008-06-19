@@ -1,0 +1,899 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<chapter id="chap_04">
+<title>Processes</title>
+
+<abstract>
+<para>Next to files, processes are the most important things on a UNIX/Linux system.  In this chapter, we will take a closer look at those processes.  We will learn more about:</para>
+<para>
+<itemizedlist>
+<listitem><para>Multi-user processing and multi-tasking</para></listitem>
+<listitem><para>Process types</para></listitem>
+<listitem><para>Controlling processes with different signals</para></listitem>
+<listitem><para>Process attributes</para></listitem>
+<listitem><para>The life cycle of a process</para></listitem>
+<listitem><para>System startup and shutdown</para></listitem>
+<listitem><para>SUID and SGID</para></listitem>
+<listitem><para>System speed and response</para></listitem>
+<listitem><para>Scheduling processes</para></listitem>
+<listitem><para>The Vixie cron system</para></listitem>
+<listitem><para>How to get the most out of your system</para></listitem>
+</itemizedlist>
+</para>
+</abstract>
+
+<sect1 id="sect_04_01"><title>Processes inside out</title>
+<sect2 id="sect_04_01_01"><title>Multi-user and multi-tasking</title>
+<para>Now that we are more used to our environment and we are able to communicate a little bit with our system, it is time to study the processes we can start in more detail.  Not every command starts a single process.  Some commands initiate a series of processes, such as <command>mozilla</command>; others, like <command>ls</command>, are executed as a single command.</para>
+<para>Furthermore, Linux is based on UNIX, where it has been common policy to have multiple users running multiple commands, at the same time and on the same system.  It is obvious that measures have to be taken to have the CPU manage all these processes, and that functionality has to be provided so users can switch between processes.  In some cases, processes will have to continue to run even when the user who started them logs out.  And users need a means to reactivate interrupted processes.</para>
+<para>We will explain the structure of Linux processes in the next sections.</para>
+</sect2>
+<sect2 id="sect_04_01_02"><title>Process types</title>
+<sect3 id="sect_04_01_02_01"><title>Interactive processes</title>
+<para>Interactive processes<indexterm><primary>processes</primary><secondary>interactive</secondary></indexterm> are initialized and controlled through a terminal session.  In other words, there has to be someone connected to the system to start these processes; they are not started automatically as part of the system functions.  These processes can run in the foreground<indexterm><primary>processes</primary><secondary>foreground</secondary></indexterm>, occupying the terminal that started the program, and you can't start other applications as long as this process is running in the foreground.  Alternatively, they can run in the background, so that the terminal in which you started the program can accept new commands while the program is running.  Until now, we mainly focussed on programs running in the foreground - the length of time taken to run them was too short to notice - but viewing a file with the <command>less</command> command is a good example of a command occupying the terminal session.  In this case, the activated program is waiting for you to do something.  The program is still connected to the terminal from where it was started, and the terminal is only useful for entering commands this program can understand.  Other commands will just result in errors or unresponsiveness of the system.</para>
+<para>While a process runs in the background<indexterm><primary>processes</primary><secondary>background</secondary></indexterm>, however, the user is not prevented from doing other things in the terminal in which he started the program, while it is running.</para>
+<para>The shell offers a feature called <emphasis>job control<indexterm><primary>job control</primary></indexterm></emphasis> which allows easy handling of multiple processes.  This mechanism<indexterm><primary>processes</primary><secondary>job control</secondary></indexterm> switches processes between the foreground and the background.  Using this system, programs can also be started in the background immediately.</para>
+<para>Running a process in the background is only useful for programs that don't need user input (via the shell).  Putting a job in the background is typically done when execution of a job is expected to take a long time.  In order to free the issuing terminal after entering the command, a trailing ampersand is added.  In the example, using graphical mode, we open an extra terminal window from the existing one:</para>
+<screen>
+<prompt>billy:~&gt;</prompt> <command>xterm &amp;</command>
+[1] 26558
+
+<prompt>billy:~&gt;</prompt> <command>jobs<indexterm><primary>jobs</primary></indexterm></command>
+[1]+  Running                 xterm &amp;
+</screen>
+<para>The full job control features are explained in detail in the <command>bash</command> <application>Info</application> pages, so only the frequently used job control<indexterm><primary>Bash</primary><secondary>job control</secondary></indexterm> applications are listed here<indexterm><primary>processes</primary><secondary>job control overview</secondary></indexterm>:</para>
+<table frame="all">
+  <title>Controlling processes</title>
+  <tgroup cols="2" align="left" colsep="1" rowsep="1">
+  <thead>
+    <row>
+<entry>(part of) command</entry>
+      <entry>Meaning</entry>
+</row>
+</thead>
+<tbody>
+<row><entry><command>regular_command</command></entry><entry>Runs this command in the foreground.</entry></row>
+<row><entry><command>command &amp;</command></entry><entry>Run this command in the background (release the terminal)</entry></row>
+<row><entry><command>jobs</command></entry><entry>Show commands running in the background.</entry></row>
+<row><entry><keycap>Ctrl</keycap>+<keycap>Z</keycap></entry><entry>Suspend (stop, but not quit) a process running in the foreground (suspend).</entry></row>
+<row><entry><keycap>Ctrl</keycap>+<keycap>C</keycap></entry><entry>Interrupt (terminate and quit) a process running in the foreground.</entry></row>
+<row><entry><parameter>%n</parameter></entry><entry>Every process running in the background gets a number assigned to it.  By using the % expression a job can be referred to using its number, for instance <command>fg <parameter>%2</parameter></command>.</entry></row>
+<row><entry><command>bg<indexterm><primary>bg</primary></indexterm></command></entry><entry>Reactivate a suspended program in the background.</entry></row>
+<row><entry><command>fg<indexterm><primary>fg</primary></indexterm></command></entry><entry>Puts the job back in the foreground.</entry></row>
+<row><entry><command>kill<indexterm><primary>kill</primary></indexterm></command></entry><entry>End a process (also see Shell Builtin Commands in the Info pages of <command>bash</command>)</entry></row>
+</tbody>
+</tgroup>
+</table>
+<para>More practical examples can be found in the exercises.</para>
+<para>Most UNIX systems are likely to be able to run <command>screen<indexterm><primary>screen</primary></indexterm></command>, which is useful when you actually want another shell to execute commands.  Upon calling <command>screen</command>, a new session is created with an accompanying shell and/or commands as specified, which you can then put out of the way.  In this new session you may do whatever it is you want to do.  All programs and operations will run independent of the issuing shell.  You can then detach this session, while the programs you started in it continue to run, even when you log out of the originating shell, and pick your <emphasis>screen</emphasis> up again any time you like.</para>
+<para>This program originates from a time when virtual consoles were not invented yet, and everything needed to be done using one text terminal.  To addicts, it still has meaning in Linux, even though we've had virtual consoles for almost ten years.</para>
+</sect3>
+<sect3 id="sect_04_01_02_02"><title>Automatic processes</title>
+<para>Automatic<indexterm><primary>processes</primary><secondary>automatic</secondary></indexterm> or batch processes are not connected to a terminal.  Rather, these are tasks that can be queued into a spooler area, where they wait to be executed on a FIFO (first-in, first-out) basis.  Such tasks can be executed using one of two criteria:</para>
+<itemizedlist>
+<listitem><para>At a certain date and time: done using the <command>at</command> command, which we will discuss in the second part of this chapter.</para></listitem>
+<listitem><para>At times when the total system load is low enough to accept extra jobs: done using the <command>batch<indexterm><primary>batch</primary></indexterm></command> command.  By default, tasks are put in a queue where they wait to be executed until the system load is lower than 0.8.  In large environments, the system administrator may prefer batch processing when large amounts of data have to be processed or when tasks demanding a lot of system resources have to be executed on an already loaded system.  Batch processing is also used for optimizing system performance.</para></listitem>
+</itemizedlist>
+</sect3>
+<sect3 id="sect_04_01_02_03"><title>Daemons</title>
+<para>Daemons<indexterm><primary>daemons</primary><secondary>definition</secondary></indexterm> are server processes<indexterm><primary>processes</primary><secondary>daemons</secondary></indexterm> that run continuously.  Most of the time, they are initialized at system startup and then wait in the background until their service is required.  A typical example is the networking daemon, <emphasis>xinetd</emphasis>, which is started in almost every boot procedure.  After the system is booted, the network daemon just sits and waits until a client program, such as an FTP client, needs to connect.</para>
+</sect3>
+
+</sect2>
+<sect2 id="sect_04_01_03"><title>Process attributes</title>
+<para>A process has a series of characteristics<indexterm><primary>processes</primary><secondary>properties</secondary></indexterm>, which can be viewed with the <command>ps<indexterm><primary>processes</primary><secondary>displaying</secondary></indexterm></command> command:</para>
+<itemizedlist>
+<listitem><para>The process ID or PID<indexterm><primary>PID</primary></indexterm>: a unique identification number used to refer to the process.</para></listitem>
+<listitem><para>The parent process ID or PPID<indexterm><primary>PPID</primary></indexterm>: the number of the process (PID) that started this process.</para></listitem>
+<listitem><para>Nice number: the degree of friendliness<indexterm><primary>processes</primary><secondary>nice number</secondary></indexterm> of this process toward other processes (not to be confused with process priority, which is calculated based on this nice number and recent CPU usage of the process).</para></listitem>
+<listitem><para>Terminal or TTY<indexterm><primary>TTY</primary></indexterm>: terminal to which the process is connected.</para></listitem>
+<listitem><para>User name of the real and effective user (RUID<indexterm><primary>RUID</primary></indexterm> and EUID<indexterm><primary>EUID</primary></indexterm>): the owner of the process.  The real owner is the user issuing the command, the effective user is the one determining access to system resources.  RUID and EUID are usually the same, and the process has the same access rights the issuing user would have.  An example to clarify this: the browser <command>mozilla</command> in <filename>/usr/bin</filename> is owned by user <emphasis>root</emphasis>:</para>
+<screen>
+<prompt>theo:~&gt;</prompt> <command>ls -l /usr/bin/mozilla</command>
+-rwxr-xr-x  1 root   root      4996 Nov 20 18:28 /usr/bin/mozilla*
+
+<prompt>theo:~&gt;</prompt> <command>mozilla &amp;</command>
+[1] 26595
+
+<prompt>theo:~&gt;</prompt> <command>ps -af</command>
+UID     PID  PPID C STIME TTY       TIME CMD
+theo  26601 26599 0 15:04 pts/5 00:00:00 /usr/lib/mozilla/mozilla-bin
+theo  26613 26569 0 15:04 pts/5 00:00:00 ps -af
+</screen>
+<para>When user<indexterm><primary>EUID</primary><secondary>example</secondary></indexterm> <emphasis>theo</emphasis> starts this program, the process itself and all processes started by the initial process, will be owned by user <emphasis>theo</emphasis> and not by the system administrator.  When <command>mozilla</command> needs access to certain files, that access will be determined by <emphasis>theo</emphasis>'s permissions and not by <emphasis>root</emphasis>'s.</para>
+</listitem>
+<listitem><para>Real and effective group owner (RGID<indexterm><primary>RGID</primary></indexterm> and EGID<indexterm><primary>EGID</primary></indexterm>): The real group owner of a process is the primary group of the user who started the process.  The effective group owner is usually the same, except when SGID access mode has been applied to a file.</para></listitem>
+</itemizedlist>
+</sect2>
+<sect2 id="sect_04_01_04"><title>Displaying process information</title>
+<para>The <command>ps</command> command is one of the tools for visualizing<indexterm><primary>processes</primary><secondary>displaying</secondary></indexterm> processes.  This command has several options which can be combined to display different process attributes.</para>
+<para>With no options specified, <command>ps</command> only gives information about the current shell and eventual processes<indexterm><primary>ps</primary><secondary>simple example</secondary></indexterm>:</para>
+<screen>
+<prompt>theo:~&gt;</prompt> <command>ps</command>
+  PID TTY          TIME CMD
+ 4245 pts/7    00:00:00 bash
+ 5314 pts/7    00:00:00 ps
+</screen>
+<para>Since this does not give enough information - generally, at least a hundred processes are running on your system - we will usually select particular processes out of the list of all processes, using the <command>grep</command> command in a <emphasis>pipe</emphasis>, see <xref linkend="sect_05_01_02_01" />, as in this line, which will select and display all processes owned by a particular<indexterm><primary>ps</primary><secondary>example with options</secondary></indexterm> user:</para>
+<cmdsynopsis><command>ps <option>-ef</option> | grep <parameter>username</parameter></command></cmdsynopsis>
+<para>This example shows all processes with a process name of <command>bash</command>, the most common login shell on Linux systems:</para>
+<screen>
+<prompt>theo:&gt;</prompt> <command>ps auxw | grep bash</command>
+brenda   31970  0.0  0.3  6080 1556 tty2   S  Feb23   0:00 -bash
+root     32043  0.0  0.3  6112 1600 tty4   S  Feb23   0:00 -bash
+theo     32581  0.0  0.3  6384 1864 pts/1  S  Feb23   0:00 bash
+theo     32616  0.0  0.3  6396 1896 pts/2  S  Feb23   0:00 bash
+theo     32629  0.0  0.3  6380 1856 pts/3  S  Feb23   0:00 bash
+theo      2214  0.0  0.3  6412 1944 pts/5  S  16:18   0:02 bash
+theo      4245  0.0  0.3  6392 1888 pts/7  S  17:26   0:00 bash
+theo      5427  0.0  0.1  3720  548 pts/7  S  19:22   0:00 grep bash
+</screen>
+<para>In these cases, the <command>grep</command> command finding lines containing the string <emphasis>bash</emphasis> is often displayed as well on systems that have a lot of idletime.  If you don't want this to happen, use the <command>pgrep<indexterm><primary>pgrep</primary></indexterm></command> command.</para>  
+<para>Bash shells are a special case: this process list also shows which ones are login shells (where you have to give your username and password, such as when you log in in textmode or do a remote login, as opposed to non-login shells, started up for instance by clicking a terminal window icon).  Such login shells are preceded with a dash (-).</para>
+
+<note><title>|?</title>
+<para>We will explain about the | operator in the next chapter, see <xref linkend="chap_05" />.</para>
+</note>
+
+<para>More info can be found the usual way: <command>ps <option>--help</option></command> or <command>man <parameter>ps</parameter></command>.  GNU <command>ps</command> supports different styles of option formats; the above examples don't contain errors.</para>
+<para>Note that <command>ps</command> only gives a momentary state of the active processes, it is a one-time recording.  The <command>top<indexterm><primary>top</primary></indexterm></command> program displays a more precise view by updating the results given by <command>ps</command> (with a bunch of options) once every five seconds, generating a new list of the processes causing the heaviest<indexterm><primary>processes</primary><secondary>continuous display</secondary></indexterm> load periodically, meanwhile integrating more information about the swap space in use and the state of the CPU, from the <filename>proc</filename> file system<indexterm><primary>top</primary><secondary>example</secondary></indexterm>:</para>
+<screen>
+ 12:40pm up 9 days, 6:00, 4 users, load average: 0.21, 0.11, 0.03
+89 processes: 86 sleeping, 3 running, 0 zombie, 0 stopped
+CPU states:  2.5% user,  1.7% system,  0.0% nice, 95.6% idle
+Mem:   255120K av, 239412K used, 15708K free, 756K shrd, 22620K buff
+Swap: 1050176K av, 76428K used, 973748K free, 82756K cached
+
+  PID USER  PRI NI SIZE  RSS SHARE STAT %CPU %MEM TIME COMMAND
+ 5005 root  14  0 91572  15M 11580 R    1.9  6.0  7:53 X
+19599 jeff  14  0  1024 1024   796 R    1.1  0.4  0:01 top
+19100 jeff   9  0  5288 4948  3888 R    0.5  1.9  0:24 gnome-terminal
+19328 jeff   9  0 37884  36M 14724 S    0.5 14.8  1:30 mozilla-bin
+    1 root   8  0   516  472   464 S    0.0  0.1  0:06 init
+    2 root   9  0     0    0     0 SW   0.0  0.0  0:02 keventd
+    3 root   9  0     0    0     0 SW   0.0  0.0  0:00 kapm-idled
+    4 root  19 19     0    0     0 SWN  0.0  0.0  0:00 ksoftirqd_CPU0
+    5 root   9  0     0    0     0 SW   0.0  0.0  0:33 kswapd
+    6 root   9  0     0    0     0 SW   0.0  0.0  0:00 kreclaimd
+    7 root   9  0     0    0     0 SW   0.0  0.0  0:00 bdflush
+    8 root   9  0     0    0     0 SW   0.0  0.0  0:05 kupdated
+    9 root  -1-20     0    0     0 SW&lt;  0.0  0.0  0:00 mdrecoveryd
+   13 root   9  0     0    0     0 SW   0.0  0.0  0:01 kjournald
+   89 root   9  0     0    0     0 SW   0.0  0.0  0:00 khubd
+  219 root   9  0     0    0     0 SW   0.0  0.0  0:00 kjournald
+  220 root   9  0     0    0     0 SW   0.0  0.0  0:00 kjournald
+</screen>
+<para>The first line of <command>top</command> contains the same information displayed by the <command>uptime<indexterm><primary>uptime</primary></indexterm></command> command:</para>
+<screen>
+<prompt>jeff:~&gt;</prompt> <command>uptime</command>
+  3:30pm, up 12 days, 23:29, 6 users, load average: 0.01, 0.02, 0.00
+</screen>
+<para>The data for these programs is stored among others in <filename>/var/run/utmp</filename> (information about currently connected users) and in the virtual file system <filename>/proc<indexterm><primary>proc</primary></indexterm></filename>, for example <filename>/proc/loadavg</filename> (average load information).  There are all sorts of graphical applications to view this data, such as the <application>Gnome System Monitor<indexterm><primary>Gnome System Monitor</primary></indexterm></application> and <emphasis>lavaps</emphasis>.  Over at <ulink url="http://www.freshmeat.net">FreshMeat</ulink> and <ulink url="http://www.sourceforge.org">SourceForge</ulink> you will find tens of applications that centralize this information along with other server data and logs from multiple servers on one (web) server, allowing monitoring of the entire IT infrastructure from one workstation.</para>
+
+<para>The relations<indexterm><primary>processes</primary><secondary>relations</secondary></indexterm> between processes can be visualized using the <command>pstree<indexterm><primary>pstree</primary></indexterm></command> command:</para>
+<screen>
+<prompt>sophie:~&gt;</prompt> <command>pstree</command>
+init-+-amd
+     |-apmd
+     |-2*[artsd]
+     |-atd
+     |-crond
+     |-deskguide_apple
+     |-eth0
+     |-gdm---gdm-+-X
+     |           `-gnome-session-+-Gnome
+     |                           |-ssh-agent
+     |                           `-true
+     |-geyes_applet
+     |-gkb_applet
+     |-gnome-name-serv
+     |-gnome-smproxy
+     |-gnome-terminal-+-bash---vim
+     |                |-bash
+     |                |-bash---pstree
+     |                |-bash---ssh
+     |                |-bash---mozilla-bin---mozilla-bin---3*[mozilla-bin]
+     |                `-gnome-pty-helper
+     |-gpm
+     |-gweather
+     |-kapm-idled
+     |-3*[kdeinit]
+     |-keventd
+     |-khubd
+     |-5*[kjournald]
+     |-klogd
+     |-lockd---rpciod
+     |-lpd
+     |-mdrecoveryd
+     |-6*[mingetty]
+     |-8*[nfsd]
+     |-nscd---nscd---5*[nscd]
+     |-ntpd
+     |-3*[oafd]
+     |-panel
+     |-portmap
+     |-rhnsd
+     |-rpc.mountd
+     |-rpc.rquotad
+     |-rpc.statd
+     |-sawfish
+     |-screenshooter_a
+     |-sendmail
+     |-sshd---sshd---bash---su---bash
+     |-syslogd
+     |-tasklist_applet
+     |-vmnet-bridge
+     |-xfs
+     `-xinetd-ipv6
+</screen>
+<para>The <option>-u</option> and <option>-a</option> options give additional information.  For more options and what they do, refer to the <application>Info</application> pages.</para>
+<para>In the next section, we will see how one process can create another.</para>
+
+</sect2>
+<sect2 id="sect_04_01_05"><title>Life and death of a process</title>
+<sect3 id="sect_04_01_05_01"><title>Process creation</title>
+<para>A new process<indexterm><primary>processes</primary><secondary>creation</secondary></indexterm> is created because an existing process makes an exact copy of itself.  This child process has the same environment as its parent, only the process ID number is different.  This procedure is called <emphasis>forking<indexterm><primary>processes</primary><secondary>forking</secondary></indexterm></emphasis>.</para>
+<para>After the forking process, the address space of the child process is overwritten with the new process data.  This is done through an <emphasis>exec<indexterm><primary>processes</primary><secondary>exec</secondary></indexterm></emphasis> call to the system.</para>
+<para>The <emphasis>fork-and-exec<indexterm><primary>fork-and-exec</primary></indexterm></emphasis> mechanism thus switches an old command with a new, while the environment in which the new program is executed remains the same, including configuration of input and output devices, environment variables and priority.  This mechanism is used to create all UNIX processes, so it also applies to the Linux operating system.  Even the first process, <command>init<indexterm><primary>init</primary></indexterm></command>, with process ID 1, is forked during the boot procedure in the so-called <emphasis>bootstrapping<indexterm><primary>bootstrapping</primary></indexterm></emphasis> procedure.</para>
+<para>This scheme illustrates the fork-and-exec mechanism.  The process ID changes after the fork procedure:</para>
+<figure><title>Fork-and-exec mechanism</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/fork-and-exec.eps" format="EPS"></imagedata>
+</imageobject>
+<imageobject>
+<imagedata fileref="images/fork-and-exec.png" format="PNG"></imagedata>
+</imageobject>
+<textobject>
+<phrase>Fork creates a new process with the same content as the parent in memory but a different PID, exec replaces the content with the actual data to be processed, PID stays the same.</phrase>
+</textobject>
+</mediaobject>
+</figure>
+
+<para>There are a couple of cases in which <command>init</command> becomes the parent of a process, while the process was not started by <command>init</command>, as we already saw in the <command>pstree</command> example.   Many programs, for instance, <emphasis>daemonize<indexterm><primary>processes</primary><secondary>daemonizing</secondary></indexterm></emphasis> their child processes, so they can keep on running when the parent stops or is being stopped.  A window manager is a typical example; it starts an <command>xterm</command> process that generates a shell that accepts commands.  The window manager then denies any further responsibility and passes the child process to <command>init</command>.  Using this mechanism, it is possible to change window managers without interrupting running applications.</para>
+<para>Every now and then things go wrong, even in good families.  In an exceptional case, a process might finish while the parent does not wait for the completion of this process.  Such an unburied process is called a <emphasis>zombie</emphasis> process<indexterm><primary>processes</primary><secondary>zombie</secondary></indexterm>.</para>
+</sect3>
+<sect3 id="sect_04_01_05_02"><title>Ending processes</title>
+<para>When a process<indexterm><primary>processes</primary><secondary>ending</secondary></indexterm> ends normally (it is not killed or otherwise unexpectedly interrupted), the program returns its <emphasis>exit status<indexterm><primary>exit status</primary></indexterm></emphasis> to the parent.  This exit status is a number returned by the program providing the results of the program's execution.  The system of returning information upon executing a job has its origin in the C programming language in which UNIX has been written.</para>
+<para>The return codes<indexterm><primary>processes</primary><secondary>return codes</secondary></indexterm> can then be interpreted by the parent, or in scripts.  The values of the return codes are program-specific.  This information can usually be found in the man pages of the specified program, for example the <command>grep</command> command returns <computeroutput>-1</computeroutput> if no matches are found, upon which a message on the lines of <quote>No files found</quote> can be printed.  Another example is the <application>Bash</application> builtin command <command>true</command>, which does nothing except return an exit status of 0, meaning success.</para>
+</sect3>
+<sect3 id="sect_04_01_05_03"><title>Signals</title>
+<para>Processes end<indexterm><primary>processes</primary><secondary>stopping</secondary></indexterm> because they receive a signal<indexterm><primary>processes</primary><secondary>signal</secondary></indexterm>.  There are multiple signals that you can send to a process.  Use the <command>kill<indexterm><primary>kill</primary></indexterm></command> command to send a signal to a process.  The command <command>kill <option>-l</option></command> shows a list of signals.  Most signals are for internal use by the system, or for programmers when they write code.  As a user, you will need the following signals<indexterm><primary>signals</primary><secondary>overview</secondary></indexterm>:</para>
+<table frame="all">
+<title>Common signals</title>
+<tgroup cols="3" align="left" colsep="1" rowsep="1">
+<thead>
+<row>
+<entry>Signal name</entry><entry>Signal number</entry><entry>Meaning</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry>SIGTERM<indexterm><primary>SIGTERM</primary></indexterm></entry><entry>15</entry><entry>Terminate the process in an orderly way.</entry>
+</row>
+<row>
+<entry>SIGINT<indexterm><primary>SIGINT</primary></indexterm></entry><entry>2</entry><entry>Interrupt the process.  A process can ignore this signal.</entry>
+</row>
+
+<row>
+<entry>SIGKILL<indexterm><primary>SIGKILL</primary></indexterm></entry><entry>9</entry><entry>Interrupt the process.  A process can not ignore this signal.</entry>
+</row>
+
+<row>
+<entry>SIGHUP<indexterm><primary>SIGHUP</primary></indexterm></entry><entry>1</entry><entry>For daemons: reread the configuration file.</entry>
+</row>
+
+</tbody>
+</tgroup>
+</table>
+<para>You can read more about default actions that are taken when sending a signal to a process in <command>man <option>7</option> <parameter>signal</parameter></command>.</para>
+</sect3>
+</sect2>
+<sect2 id="sect_04_01_06"><title>SUID and SGID</title>
+<para>As promised in the previous chapter, we will now discuss the special modes SUID<indexterm><primary>SUID</primary></indexterm> and SGID<indexterm><primary>SGID</primary></indexterm> in more detail.  These modes exist to provide normal users the ability to execute tasks they would normally not be able to do because of the tight file permission scheme used on UNIX based systems.  In the ideal situation special modes are used as sparsely as possible, since they include security risks.  Linux developers have generally tried to avoid them as much as possible.  The Linux <command>ps</command> version, for example, uses the information stored in the <filename>/proc</filename> file system, which is accessible to everyone, thus avoiding exposition of sensitive system data and resources to the general public.  Before that, and still on older UNIX systems, the <command>ps</command> program needed access to files such as <filename>/dev/mem<indexterm><primary>mem</primary></indexterm></filename> and <filename>/dev/kmem<indexterm><primary>kmem</primary></indexterm></filename>, which had disadvantages because of the permissions and ownerships on these files:</para>
+<screen>
+<prompt>rita:~&gt;</prompt> <command>ls -l /dev/*mem</command>
+crw-r-----    1 root     kmem       1,   2 Aug 30 22:30 /dev/kmem
+crw-r-----    1 root     kmem       1,   1 Aug 30 22:30 /dev/mem
+</screen>
+<para>With older versions of <command>ps</command>, it was not possible to start the program as a common user, unless special modes were applied to it.</para>
+<para>While we generally try to avoid applying any special modes, it is sometimes necessary to use an SUID.  An example is the mechanism for changing passwords.  Of course users will want to do this themselves instead of having their password set by the system administrator.  As we know, user names and passwords are listed in the <filename>/etc/passwd<indexterm><primary>passwd</primary></indexterm></filename> file, which has these access permissions and owners:</para>
+<screen>
+<prompt>bea:~&gt;</prompt> <command>ls -l /etc/passwd</command>
+-rw-r--r--    1 root     root     1267 Jan 16 14:43 /etc/passwd
+</screen>
+<para>Still, users need to be able to change their own information in this file.  This is achieved by giving the <command>passwd</command> program special permissions:</para>
+<screen>
+<prompt>mia:~&gt;</prompt> <command>which passwd</command>
+passwd is /usr/bin/passwd
+
+<prompt>mia:~&gt;</prompt> <command>ls -l /usr/bin/passwd</command>
+-r-s--x--x    1 root     root    13476 Aug  7 06:03 /usr/bin/passwd*
+</screen>
+<para>When called, the <command>passwd</command> command will run using the access permissions<indexterm><primary>file permissions</primary><secondary>SUID</secondary></indexterm> of <emphasis>root</emphasis>, thus enabling a common user to edit the password file which is owned by the system admin.</para>
+<para>SGID modes on a file don't occur nearly as frequently as SUID, because SGID often involves the creation of extra groups.  In some cases, however, we have to go through this trouble in order to build an elegant solution (don't worry about this too much -  the necessary groups are usually created upon installation).  This is the case for the <command>write<indexterm><primary>write</primary>4dwx<secondary></secondary></indexterm></command> and <command>wall<indexterm><primary>wall</primary></indexterm></command> programs, which are used to send messages to other users' terminals<indexterm><primary>terminal</primary><secondary>send a message</secondary></indexterm> (ttys).  The <command>write</command> command writes a message to a single user, while <command>wall</command> writes to all connected users.</para>
+<para>Sending text to another user's terminal or graphical display is normally not allowed.  In order to bypass this problem, a group has been created, which owns all terminal devices.  When the <command>write</command> and <command>wall</command> commands are granted SGID permissions, the commands will run using the access rights as applicable to this group, <emphasis>tty</emphasis> in the example.  Since this group has write access to the destination terminal, also a user having no permissions to use that terminal in any way can send messages to it.</para>
+<para>In the example below, user <emphasis>joe</emphasis> first finds out on which terminal his correspondent is connected, using the <command>who</command> command.  Then he sends her a message using the <command>write</command> command.  Also illustrated are the access rights on the <command>write</command> program and on the terminals occupied by the receiving user: it is clear that others than the user owner have no permissions<indexterm><primary>file permissions</primary><secondary>SGID</secondary></indexterm> on the device, except for the group owner, which can write to it.</para>
+<screen>
+<prompt>joe:~&gt;</prompt> <command>which write</command>
+write is /usr/bin/write
+
+<prompt>joe:~&gt;</prompt> <command>ls -l /usr/bin/write</command>
+-rwxr-sr-x    1 root     tty      8744 Dec  5 00:55 /usr/bin/write*
+
+<prompt>joe:~&gt;</prompt> <command>who<indexterm><primary>who</primary><secondary>example</secondary></indexterm></command>
+jenny     tty1     Jan 23 11:41
+jenny     pts/1    Jan 23 12:21 (:0)
+jenny     pts/2    Jan 23 12:22 (:0)
+jenny     pts/3    Jan 23 12:22 (:0)
+joe       pts/0    Jan 20 10:13 (lo.callhost.org)
+
+<prompt>joe:~&gt;</prompt> <command>ls -l /dev/tty1</command>
+crw--w----    1 jenny   tty  4,     1 Jan 23 11:41 /dev/tty1
+
+<prompt>joe:~&gt;</prompt> <command>write jenny tty1</command>
+hey Jenny, shall we have lunch together?
+^C
+</screen>
+<para>User <emphasis>jenny</emphasis> gets this on her screen:</para>
+<screen>
+Message from joe@lo.callhost.org on ptys/1 at 12:36 ...
+hey Jenny, shall we have lunch together?
+EOF
+</screen>
+<para>After receiving a message, the terminal can be cleared using the <keycap>Ctrl</keycap>+<keycap>L</keycap> key combination.  In order to receive no messages at all (except from the system administrator), use the <command>mesg</command> command.  To see which connected users accept messages from others use <command>who <option>-w</option></command>.  All features are fully explained in the <application>Info</application> pages of each command.</para>
+<note><title>Group names may vary</title>
+<para>The group scheme is specific to the distribution.  Other distributions may use other names or other solutions.</para></note>
+
+</sect2>
+
+</sect1>
+<sect1 id="sect_04_02"><title>Boot process, Init and shutdown</title>
+<sect2 id="sect_04_02_01"><title>Introduction</title>
+<para> One of the most powerful aspects of Linux concerns its open method of starting<indexterm><primary>boot</primary></indexterm> and stopping<indexterm><primary>shutdown</primary></indexterm> the operating system, where it loads specified programs using their particular configurations, permits you to change those configurations to control the boot process, and shuts down in a graceful and organized way.</para>
+<para> Beyond the question of controlling the boot or shutdown process, the open nature of Linux makes it much easier to determine the exact source of most problems associated with starting up or shutting down your system. A basic understanding of this process is quite beneficial to everybody who uses a Linux system.</para>
+<para>A lot of Linux systems use <command>lilo<indexterm><primary>boot</primary><secondary>LILO</secondary></indexterm></command>, the <application>LInux LOader<indexterm><primary>LILO</primary></indexterm></application> for booting operating systems.  We will only discuss GRUB<indexterm><primary>boot</primary><secondary>GRUB</secondary></indexterm>, however, which is easier to use and more flexible.  Should you need information about <command>lilo</command>, refer to the man pages and HOWTOs.  Both systems support dual boot installations, we refer to the HOWTOs on this subject for practical examples and background information.</para>
+</sect2>
+<sect2 id="sect_04_02_02"><title>The boot process</title>
+<para>When an x86 computer is booted, the processor looks at the end of the system memory for the BIOS<indexterm><primary>boot</primary><secondary>BIOS</secondary></indexterm> (Basic Input/Output System<indexterm><primary>BIOS</primary></indexterm>) and runs it. The BIOS program is written into permanent read-only memory and is always available for use. The BIOS provides the lowest level interface to peripheral devices and controls the first step of the boot process.</para>
+<para> The BIOS tests the system, looks for and checks peripherals, and then looks for a drive to use to boot the system. Usually it checks the floppy drive (or CD-ROM drive on many newer systems) for bootable media, if present, and then it looks to the hard drive. The order of the drives used for booting is usually controlled by a particular BIOS setting on the system.  Once Linux is installed on the hard drive of a system, the BIOS looks for a Master Boot Record<indexterm><primary>MBR</primary></indexterm> (MBR) starting at the first sector on the first hard drive, loads its contents into memory, then passes control to it.</para>
+<para> This MBR<indexterm><primary>boot</primary><secondary>MBR</secondary></indexterm> contains instructions on how to load the GRUB<indexterm><primary>GRUB</primary><secondary></secondary></indexterm> (or LILO) boot-loader, using a pre-selected operating system.  The MBR then loads the boot-loader<indexterm><primary>boot</primary><secondary>boot-loader</secondary></indexterm>, which takes over the process (if the boot-loader is installed in the MBR). In the default Red Hat Linux configuration, GRUB uses the settings in the MBR to display boot options in a menu.  Once GRUB has received the correct instructions for the operating system to start, either from its command line or configuration file, it finds the necessary boot file and hands off control of the machine to that operating system.</para>
+</sect2>
+<sect2 id="sect_04_02_03"><title>GRUB features</title>
+<para>This boot method is called <emphasis>direct loading<indexterm><primary>boot</primary><secondary>direct loading</secondary></indexterm></emphasis> because instructions are used to directly load the operating system, with no intermediary code between the boot-loaders and the operating system's main files (such as the kernel). The boot process used by other operating systems may differ slightly from the above, however. For example, Microsoft's DOS and Windows operating systems completely overwrite anything on the MBR when they are installed without incorporating any of the current MBR's configuration. This destroys any other information stored in the MBR by other operating systems, such as Linux. The Microsoft operating systems, as well as various other proprietary operating systems, are loaded using a chain loading boot method. With this method, the MBR points to the first sector of the partition holding the operating system, where it finds the special files necessary to actually boot that operating system.</para>
+<para>
+GRUB<indexterm><primary>GRUB</primary><secondary>features</secondary></indexterm> supports both boot methods, allowing you to use it with almost any operating system, most popular file systems, and almost any hard disk your BIOS can recognize.</para>
+<para>GRUB contains a number of other features; the most important include:</para>
+<itemizedlist>
+<listitem><para>GRUB provides a true command-based, pre-OS environment on x86 machines to allow maximum flexibility in loading operating systems with certain options or gathering information about the system.</para></listitem>
+<listitem><para>GRUB supports Logical Block Addressing (LBA<indexterm><primary>LBA</primary></indexterm>) mode, needed to access many IDE and all SCSI hard disks.  Before LBA, hard drives could encounter a 1024-cylinder limit, where the BIOS could not find a file after that point.</para></listitem>
+<listitem><para>GRUB's configuration file is read from the disk every time the system boots, preventing you from having to write over the MBR every time you change the boot options.</para></listitem>
+</itemizedlist>
+<para>A full description of GRUB may be found by issuing the <command>info <parameter>grub</parameter></command> command or at <ulink url="http://www.gnu.org/software/grub/">the GRUB site</ulink>.  The Linux Documentation Project has a <ulink url="http://www.tldp.org/HOWTO/mini/Multiboot-with-GRUB.html">Multiboot with GRUB Mini-HOWTO</ulink>.</para>
+</sect2>
+<sect2 id="sect_04_02_04"><title>Init</title>
+<para>The kernel, once it is loaded, finds <command>init<indexterm><primary>boot</primary><secondary>init</secondary></indexterm></command> in <filename>sbin</filename> and executes<indexterm><primary>init</primary></indexterm> it.</para>
+<para>When <command>init</command> starts, it becomes the parent or grandparent of all of the processes that start up automatically on your Linux system. The first thing <command>init</command> does, is reading its initialization file, <filename>/etc/inittab<indexterm><primary>inittab</primary></indexterm></filename>.  This instructs <command>init</command> to read an initial configuration script for the environment, which sets the path, starts swapping, checks the file systems, and so on. Basically, this step takes care of everything that your system needs to have done at system initialization: setting the clock, initializing serial ports and so forth.</para>
+<para> Then <command>init</command> continues to read the <filename>/etc/inittab</filename> file, which describes how the system should be set up in each run level and sets the default <emphasis>run level<indexterm><primary>run level</primary></indexterm></emphasis>.  A run level is a configuration of processes.  All UNIX-like systems can be run in different process configurations, such as the single user mode<indexterm><primary>single user mode</primary></indexterm>, which is referred to as run level 1 or run level S (or s).  In this mode, only the system administrator can connect to the system.  It is used to perform maintenance tasks without risks of damaging the system or user data.  Naturally, in this configuration we don't need to offer user services, so they will all be disabled.  Another run level is the reboot run level, or run level 6, which shuts down all running services according to the appropriate procedures and then restarts the system.</para>
+<para>Use the <command>who<indexterm><primary>run level</primary><secondary>display</secondary></indexterm></command> to check what your current<indexterm><primary>who</primary></indexterm> run level is:</para>
+<screen>
+<prompt>willy@ubuntu:~$ </prompt><command>who <option>-r</option></command>
+	run-level 2 2006-10-17 23:22		last=S
+</screen>
+
+<para>More about run levels in the next section, see <xref linkend="sect_04_02_05" />.</para>
+<para>After having determined the default run level for your system, <command>init</command> starts all of the background processes necessary for the system to run by looking in the appropriate <filename>rc</filename> directory<indexterm><primary>run level</primary><secondary>rc files</secondary></indexterm> for that run level.  <command>init</command> runs each of the kill<indexterm><primary>init</primary><secondary>kill scripts</secondary></indexterm> scripts (their file names start with a K) with a stop parameter.  It then runs all of the start<indexterm><primary>init</primary><secondary>start scripts</secondary></indexterm> scripts (their file names start with an S) in the appropriate run level directory so that all services and applications are started correctly. In fact, you can execute these same scripts manually after the system is finished booting with a command like <command>/etc/init.d/httpd <parameter>stop</parameter></command> or <command>service <parameter>httpd</parameter> <parameter>stop</parameter></command> logged in as <emphasis>root</emphasis>, in this case stopping the web server.</para>
+<note><title>Special case</title>
+<para>Note that on system startup, the scripts in <filename>rc2.d</filename> and <filename>rc3.d</filename> are usually executed.  In that case, no services are stopped (at least not permanently).  There are only services that are started.</para>
+</note>
+<para> None of the scripts<indexterm><primary>processes</primary><secondary>init scripts</secondary></indexterm> that actually start and stop the services are located<indexterm><primary>rc*.d</primary></indexterm> in <filename>/etc/rc&lt;x&gt;.d</filename>. Rather, all of the files in <filename>/etc/rc&lt;x&gt;.d</filename> are symbolic links that point to the actual scripts located in <filename>/etc/init.d</filename>. A symbolic link is nothing more than a file that points to another file, and is used in this case because it can be created and deleted without affecting the actual scripts that kill or start the services. The symbolic links to the various scripts are numbered in a particular order so that they start in that order. You can change the order in which the services start up or are killed by changing the name of the symbolic link that refers to the script that actually controls the service.  You can use the same number multiple times if you want a particular service started or stopped right before or after another service, as in the example below, listing the content of <filename>/etc/rc5.d</filename>, where <command>crond</command> and <command>xfs</command> are both started from a linkname starting with <quote>S90</quote>.  In this case, the scripts are started in alphabetical order.</para>
+
+<screen>
+<prompt>[jean@blub /etc/rc5.d]</prompt> <command>ls</command>
+K15httpd@     K45named@    S08ipchains@  S25netfs@      S85gpm@
+K16rarpd@     K46radvd@    S08iptables@  S26apmd@       S90crond@
+K20nfs@       K61ldap@     S09isdn@      S28autofs@     S90xfs@
+K20rstatd@    K65identd@   S10network@   S30nscd@       S95anacron@
+K20rusersd@   K74ntpd@     S12syslog@    S55sshd@       S95atd@
+K20rwalld@    K74ypserv@   S13portmap@   S56rawdevices@ S97rhnsd@
+K20rwhod@     K74ypxfrd@   S14nfslock@   S56xinetd@     S99local@
+K25squid@     K89bcm5820@  S17keytable@  S60lpd@
+K34yppasswdd@  S05kudzu@    S20random@    S80sendmail@
+</screen>
+<para>After <command>init</command> has progressed through the run levels to get to the default run level, the <filename>/etc/inittab</filename> script forks a <command>getty<indexterm><primary>getty</primary></indexterm></command> process for each virtual console (login prompt in text mode).  <command>getty</command> opens tty lines, sets their modes, prints the login prompt, gets the user's name, and then initiates a login process for that user.  This allows users to authenticate themselves to the system and use it.  By default, most systems offer 6 virtual consoles, but as you can see from the <filename>inittab</filename> file, this is configurable.</para>
+<para>
+<filename>/etc/inittab</filename> can also tell <command>init</command> how it should handle a user pressing <keycap>Ctrl</keycap>+<keycap>Alt</keycap>+<keycap>Delete</keycap> at the console. As the system should be properly shut down and restarted rather than immediately power-cycled, <command>init</command> is told to execute<indexterm><primary>shutdown</primary></indexterm> the command <command>/sbin/shutdown <option>-t3 -r</option> <parameter>now</parameter></command>, for instance, when a user hits those keys. In addition, <filename>/etc/inittab</filename> states what <command>init</command> should do in case of power failures, if your system has a UPS unit attached to it.</para>
+<para>
+On most RPM-based systems the graphical login screen is started in run level 5, where <filename>/etc/inittab</filename> runs a script called <filename>/etc/X11/prefdm<indexterm><primary>prefdm</primary></indexterm></filename>. The <filename>prefdm</filename> script runs the preferred X display manager, based on the contents of the <filename>/etc/sysconfig/desktop</filename> directory.  This is typically <command>gdm<indexterm><primary>gdm</primary></indexterm></command> if you run GNOME or <command>kdm<indexterm><primary>kdm</primary></indexterm></command> if you run KDE, but they can be mixed, and there's also the <command>xdm</command> that comes with a standard X installation.</para>
+<para>But there are other possibilities as well.  On Debian, for instance, there is an initscript for each of the display managers, and the content of the <filename>/etc/X11/default-display-manager</filename> is used to determine which one to start.  More about the graphical interface can be read in <xref linkend="sect_07_03" />.  Ultimately, your system documentation will explain the details about the higher level aspects of <command>init</command>.</para>
+<para>The <filename>/etc/default<indexterm><primary>default</primary></indexterm></filename> and/or <filename>/etc/sysconfig<indexterm><primary>sysconfig</primary></indexterm></filename> directories contain entries for a range of functions and services, these are all read at boot time.  The location of the directory containing system defaults might be somewhat different depending on your Linux distribution.</para>
+<para>Besides the graphical user environment, a lot of other services may be started as well.  But if all goes well, you should be looking at a login prompt or login screen when the boot process has finished.</para>
+
+<note><title>Other procedures</title>
+<para>We explained how SysV<indexterm><primary>init</primary><secondary>SysV/BSD</secondary></indexterm> <command>init</command> works on x86 based machines.  Startup procedures may vary on other architectures and distributions.  Other systems may use the BSD-style <command>init</command>, where startup files are not split up into multiple <filename>/etc/rc&lt;LEVEL&gt;.d</filename> directories.  It might also be possible that your system uses <filename>/etc/rc.d/init.d</filename> instead of <filename>/etc/init.d</filename>.</para></note>
+</sect2>
+<sect2 id="sect_04_02_05"><title>Init run levels</title>
+<para> The idea behind operating different<indexterm><primary>init</primary><secondary>run levels</secondary></indexterm> services at different run levels essentially revolves around the fact that different systems can be used in different ways. Some services cannot be used until the system is in a particular state, or <emphasis>mode</emphasis>, such as being ready for more than one user or having networking available.</para>
+<para>
+There are times in which you may want to operate the system in a lower mode.  Examples are fixing disk corruption problems in run level 1 so no other users can possibly be on the system, or leaving a server in run level 3 without an X session running. In these cases, running services that depend upon a higher system mode to function does not make sense because they will not work correctly anyway. By already having each service assigned to start when its particular run level is reached, you ensure an orderly start up process, and you can quickly change the mode of the machine without worrying about which services to manually start or stop.</para>
+<para>Available run levels are generally described in <filename>/etc/inittab</filename>, which is partially shown below:</para>
+<screen>
+
+#
+# inittab   This file describes how the INIT process should set up
+#           the system in a certain run-level.
+
+# Default run level. The run levels are:
+#   0 - halt (Do NOT set initdefault to this)
+#   1 - Single user mode
+#   2 - Multiuser, without NFS 
+#	(The same as 3, if you do not have networking)
+#   3 - Full multiuser mode
+#   4 - unused
+#   5 - X11
+#   6 - reboot (Do NOT set initdefault to this)
+# 
+id:5:initdefault:
+&lt;--cut--&gt;
+</screen>
+
+<para> Feel free to configure unused run levels (commonly run level 4) as you see fit. Many users configure those run levels in a way that makes the most sense for them while leaving the standard run levels as they are by default. This allows them to quickly move in and out of their custom configuration without disturbing the normal set of features at the standard run levels.</para>
+<para> If your machine gets into a state where it will not boot due to a bad <filename>/etc/inittab</filename> or will not let you log in because you have a corrupted <filename>/etc/passwd</filename> file (or if you have simply forgotten your password), boot into single-user mode.</para>
+<tip><title>No graphics?</title>
+<para>When you are working in text mode because you didn't get presented a graphical login screen on the console of your machine, you can normally switch to console 7 or up to have a graphical login.  If this is not the case, check the current run level using the command <command>who <option>-r</option></command>.  If it is set to something else than the original default from <filename>/etc/inittab</filename>, chances are that the system does not start up in graphical mode by default.  Contact your system administrator or read <command>man init</command> in that case.  Note that switching run levels<indexterm><primary>run levels</primary><secondary>switching</secondary></indexterm> is done preferably using the <command>telinit<indexterm><primary>telinit</primary></indexterm></command> command; switching from a text to a graphical console or vice versa does not involve a run level switch.</para>
+</tip>
+<para>The discussion of run levels, scripts and configurations in this guide tries to be as general as possible.  Lots of variations exist.  For instance, Gentoo Linux stores scripts in <filename>/etc/run levels</filename>.  Other systems might first run through (a) lower run level(s) and execute all the scripts in there before arriving at the final run level and executing those scripts.  Refer to your system documentation for more information.  You might also read through the scripts that are refered to in <filename>/etc/inittab</filename> to get a better comprehension of what happens on your system.</para>
+
+<sect3 id="sect_04_02_05_01"><title>Tools</title>
+<para>The <command>chkconfig<indexterm><primary>chkconfig</primary></indexterm></command> or <command>update-rc.d<indexterm><primary>update-rc.d</primary></indexterm></command> utilities, when installed on your system, provide a simple command-line tool for maintaining the <filename>/etc/init.d<indexterm><primary>init.d</primary></indexterm></filename> directory hierarchy. These relieve<indexterm><primary>init scripts</primary><secondary>administration</secondary></indexterm> system administrators from having to directly manipulate the numerous symbolic links in the directories under <filename>/etc/rc[x].d</filename>.</para>
+<para>
+In addition, some systems offer the <command>ntsysv<indexterm><primary>ntsysv</primary></indexterm></command> tool, which provides a text-based interface; you may find this easier to use than <command>chkconfig</command>'s command-line interface.  On SuSE Linux, you will find the <command>yast<indexterm><primary>yast</primary></indexterm></command> and <command>insserv<indexterm><primary>insserv</primary></indexterm></command> tools.  For Mandrake easy configuration, you may want to try <application>DrakConf<indexterm><primary>DrakConf</primary></indexterm></application>, which allows among other features switching between run levels 3 and 5.  In Mandriva this became the <application>Mandriva Linux Control Center</application>.</para>
+<para>
+Most distributions provide a graphical user interface for configuring processes, check with your system documentation.</para>
+<para>
+All of these utilities must be run as root.  The system administrator may also manually create the appropriate links in each run level directory in order to start or stop a service in a certain run level.</para>
+</sect3>
+</sect2>
+<sect2 id="sect_04_02_06"><title>Shutdown</title>
+<para>UNIX was not made to be shut down, but if you really must, use the <command>shutdown<indexterm><primary>shutdown</primary></indexterm></command> command.  After completing the shutdown procedure, the <option>-h</option> option will halt the system, while <option>-r</option> will reboot<indexterm><primary>reboot</primary></indexterm> it.</para>
+<para>The <command>reboot</command> and <command>halt<indexterm><primary>halt</primary></indexterm></command> commands are now able to invoke <command>shutdown</command> if run when the system is in run levels 1-5, and thus ensure proper shutdown of the system,but  it is a bad habit to get into, as not all UNIX/Linux versions have this feature.</para>
+<para>If your computer does not power itself down, you should not turn off the computer until you see a message indicating that the system is halted or finished shutting down, in order to give the system the time to unmount all partitions.  Being impatient may cause data loss.</para>
+
+</sect2>
+
+</sect1>
+<sect1 id="sect_04_03"><title>Managing processes</title>
+<sect2 id="sect_04_03_01"><title>Work for the system admin</title>
+<para>While managing system resources<indexterm><primary>processes</primary><secondary>managing</secondary></indexterm>, including processes, is a task for the local system administrator, it doesn't hurt a common user to know something about it, especially where his or her own processes and their optimal execution are concerned.</para>
+<para>We will explain a little bit on a theoretical level about system performance, though not as far as hardware optimization and other advanced procedures.  Instead, we will study the daily problems a common user is confronted with, and actions such a user can take to optimally use the resources available.  As we learn in the next section, this is mainly a matter of thinking before acting.</para>
+<figure><title>Can't you go faster?</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/trappen.eps" format="EPS"></imagedata>
+</imageobject>
+<imageobject>
+<imagedata fileref="images/trappen.png" format="PNG"></imagedata>
+</imageobject>
+<textobject>
+<phrase>Man-powered computer: one person works the pedals, one person works with the comp.</phrase>
+</textobject>
+</mediaobject>
+</figure>
+
+
+</sect2>
+<sect2 id="sect_04_03_02"><title>How long does it take?</title>
+<para>Bash offers a built-in <command>time<indexterm><primary>time</primary></indexterm></command> command that displays how long a command takes to execute.  The timing<indexterm><primary>processes</primary><secondary>timing</secondary></indexterm> is highly accurate and can be used on any command.  In the example below, it takes about a minute and a half to make this book:</para>
+
+
+<screen>
+<prompt>tilly:~/xml/src&gt;</prompt> <command>time make</command>
+Output written on abook.pdf (222 pages, 1619861 bytes).
+Transcript written on abook.log.
+
+real	1m41.056s
+user	1m31.190s
+sys	0m1.880s
+</screen>
+
+<para>The GNU <command>time</command> command in <filename>/usr/bin</filename> (as opposed to the shell built-in version) displays more information that can be formatted in different ways.  It also shows the exit status of the command, and the total elapsed time.  The same command as the above using the independent <command>time</command> gives this output:</para>
+
+<screen>
+<prompt>tilly:~/xml/src&gt;</prompt> <command>/usr/bin/time make</command>
+Output written on abook.pdf (222 pages, 1595027 bytes).
+Transcript written on abook.log.
+
+Command exited with non-zero status 2
+88.87user 1.74system 1:36.21elapsed 94%CPU 
+				(0avgtext+0avgdata 0maxresident)k
+0inputs+0outputs (2192major+30002minor)pagefaults 0swaps
+</screen>
+<para>Refer again to the Info pages for all the information.</para>
+
+</sect2>
+<sect2 id="sect_04_03_03"><title>Performance</title>
+<para>To a user, performance<indexterm><primary>system</primary><secondary>performance</secondary></indexterm> means quick execution of commands.  To a system manager, on the other hand, it means much more:  the system admin has to optimize system performance<indexterm><primary>performance</primary></indexterm> for the whole system, including users, all programs and daemons.  System performance can depend on a thousand tiny things which are not accounted for with the <command>time</command> command:</para>
+<itemizedlist>
+<listitem><para>the program executing is badly written or doesn't use the computer appropriately</para></listitem>
+<listitem><para>access to disks, controllers, display, all kinds of interfaces, etc.</para></listitem>
+<listitem><para>reachability of remote systems (network performance)</para></listitem>
+<listitem><para>amount of users on the system, amount of users actually working simultaneously</para></listitem>
+<listitem><para>time of day</para></listitem>
+<listitem><para>...</para></listitem>
+</itemizedlist>
+</sect2>
+<sect2 id="sect_04_03_04"><title>Load</title>
+<para>In short:  the load<indexterm><primary>system</primary><secondary>load</secondary></indexterm> depends on what is normal<indexterm><primary>load</primary></indexterm> for your system.  My old P133 running a firewall, SSH server, file server, a route daemon, a sendmail server, a proxy server and some other services doesn't complain with 7 users connected; the load is still 0 on average.  Some (multi-CPU) systems I've seen were quite happy with a load of 67.  There is only one way to find out - check the load regularly if you want to know what's normal.  If you don't, you will only be able to measure system load from the response time of the command line, which is a very rough measurement since this speed is influenced by a hundred other factors.</para>
+<para>Keep in mind that different systems will behave different with the same load average.  For example, a system with a graphics card supporting hardware acceleration will have no problem rendering 3D images, while the same system with a cheap VGA card will slow down tremendously while rendering.  My old P133 will become quite uncomfortable when I start the X server, but on a modern system you hardly notice the difference in the system load.</para>
+</sect2>
+<sect2 id="sect_04_03_05"><title>Can I do anything as a user?</title>
+<para>A big environment can slow you down.  If you have lots of environment variables set (instead of shell variables), long search paths that are not optimized (errors in setting the path environment variable) and more of those settings that are usually made <quote>on the fly</quote>, the system will need more time to search and read data.</para>
+<para>In X, window managers and desktop environments can be real CPU-eaters.  A really fancy desktop comes with a price, even when you can download it for free, since most desktops provide add-ons ad infinitum.  Modesty is a virtue if you don't buy a new computer every year.</para>
+<sect3 id="sect_04_03_05_01"><title>Priority</title>
+<para>The priority<indexterm><primary>processes</primary><secondary>priority</secondary></indexterm> or importance of a job is defined by it's <emphasis>nice</emphasis> number<indexterm><primary>nice number</primary></indexterm>.  A program with a high nice number is friendly to other programs, other users and the system; it is not an important job.  The lower the nice number, the more important a job is and the more resources it will take without sharing them.</para>
+<para>Making a job nicer by increasing its nice number is only useful for processes that use a lot of CPU time (compilers, math applications and the like).  Processes that always use a lot of I/O time are automatically rewarded by the system and given a higher priority (a lower nice number), for example keyboard input always gets highest priority on a system.</para>
+<para>Defining the priority of a program is done with the <command>nice<indexterm><primary>nice</primary></indexterm></command> command.</para>
+<para>Most systems also provide the BSD <command>renice<indexterm><primary>renice</primary></indexterm></command> command, which allows you to change the <emphasis>niceness</emphasis> of a running command.  Again, read the man page for your system-specific information.</para>
+<caution><title>Interactive programs</title>
+<para>It is NOT a good idea to <command>nice</command> or <command>renice</command> an interactive program or a job running in the foreground.</para></caution>
+<para>Use of these commands is usually a task for the system administrator.  Read the man page for more info on extra functionality available to the system administrator.</para>
+</sect3>
+<sect3 id="sect_04_03_05_02"><title>CPU resources</title>
+<para>On every Linux system, many programs want to use the CPU<indexterm><primary>system</primary><secondary>CPU resources</secondary></indexterm>(s) at the same time, even if you are the only user on the system.  Every program needs a certain amount of cycles on the CPU to run.  There may be times when there are not enough cycles because the CPU is too busy.  The <command>uptime<indexterm><primary>uptime</primary></indexterm></command> command is wildly inaccurate (it only displays averages, you have to know what is normal), but far from being useless.  There are some actions you can undertake if you think your CPU is to blame for the unresponsiveness of your system:</para>
+<itemizedlist>
+<listitem><para>Run heavy programs when the load is low.  This may be the case on your system during the night.  See next section for scheduling.</para></listitem>
+<listitem><para>Prevent the system from doing unnecessary work: stop daemons and programs that you don't use, use <command>locate</command> instead of a heavy <command>find</command>, ...</para></listitem>
+<listitem><para>Run big jobs with a low priority</para></listitem>
+</itemizedlist>
+<para>If none of these solutions are an option in your particular situation, you may want to upgrade your CPU.  On a UNIX machine this is a job for the system admin.</para>
+</sect3>
+<sect3 id="sect_04_03_05_03"><title>Memory resources</title>
+<para>When the currently running processes<indexterm><primary>system</primary><secondary>memory resources</secondary></indexterm> expect more memory than the system has physically available, a Linux system will not crash; it will start paging, or <emphasis>swapping<indexterm><primary>swapping</primary></indexterm></emphasis>, meaning the process uses the memory on disk or in swap space, moving contents of the physical memory (pieces of running programs or entire programs in the case of swapping) to disk, thus reclaiming the physical memory to handle more processes.  This slows the system down enormously since access to disk is much slower than access to memory.  The <command>top<indexterm><primary>top</primary></indexterm></command> command can be used to display memory and swap use.   Systems using glibc offer the <command>memusage</command> and <command>memusagestat</command> commands to visualize memory usage.</para>
+<para>If you find that a lot of memory and swap space are being used, you can try:</para>
+<itemizedlist>
+<listitem><para>Killing, stopping or renicing those programs that use a big chunk of memory</para></listitem>
+<listitem><para>Adding more memory (and in some cases more swap space) to the system.</para></listitem>
+<listitem><para>Tuning system performance, which is beyond the scope of this document.  See the reading list in <xref linkend="app1" /> for more.</para></listitem>
+</itemizedlist>
+</sect3>
+<sect3 id="sect_04_03_05_04"><title>I/O resources</title>
+<para>While I/O limitations<indexterm><primary>system</primary><secondary>I/O resources</secondary></indexterm> are a major cause of stress for system admins, the Linux system offers rather poor utilities to measure I/O performance.  The <command>ps<indexterm><primary>ps</primary></indexterm></command>, <command>vmstat<indexterm><primary>vmstat</primary></indexterm></command> and <command>top<indexterm><primary>top</primary></indexterm></command> tools give some indication about how many programs are waiting for I/O; <command>netstat<indexterm><primary>netstat</primary></indexterm></command> displays network interface statistics, but there are virtually no tools available to measure the I/O response to system load, and the <command>iostat<indexterm><primary>iostat</primary></indexterm></command> command gives a brief overview of general I/O usage.  Various graphical front-ends exist to put the output of these commands in a humanly understandable form.</para>
+<para>Each device has its own problems, but the bandwidth available to network interfaces and the  bandwidth available to disks are the two primary causes of bottlenecks in I/O performance.</para>
+<para>Network I/O problems:</para>
+<itemizedlist>
+<listitem><para>Network overload:</para>
+     <para>The amount of data transported over the network is larger than the network's capacity, resulting in slow execution of every network related task for all users.  They can be solved by cleaning up the network (which mainly involves disabling protocols and services that you don't need) or by reconfiguring the network (for example use of subnets, replacing hubs with switches, upgrading interfaces and equipment).</para>
+</listitem>
+<listitem><para>Network integrity problems:</para>
+     <para>Occurs when data is transferred incorrectly.  Solving this kind of problem can only be done by isolating the faulty element and replacing it.</para>
+</listitem>
+</itemizedlist>
+
+<para>Disk I/O problems:</para>
+<itemizedlist>
+<listitem><para>per-process transfer rate too low:</para>
+<para>Read or write speed for a single process is not sufficient.</para></listitem>
+<listitem><para>aggregate transfer rate too low:</para>
+<para>The maximum total bandwidth that the system can provide to all programs that run is not enough.</para></listitem>
+</itemizedlist>
+<para>This kind of problem is more difficult to detect, and usually takes extra hardware in order to re-divide data streams over buses, controllers and disks, if overloaded hardware is cause of the problem.  One solution to solve this is a RAID array configuration optimized for input and output actions.  This way, you get to keep the same hardware.  An upgrade to faster buses, controlers and disks is usually the other option.</para>
+<para>If overload is not the cause, maybe your hardware is gradually failing, or not well connected to the system.  Check contacts, connectors and plugs to start with.</para>
+</sect3>
+<sect3 id="sect_04_03_05_05"><title>Users</title>
+<para>Users can be divided in several classes, depending on their behavior with resource<indexterm><primary>users</primary><secondary>classification</secondary></indexterm> usage:</para>
+<itemizedlist>
+<listitem><para>Users who run a (large) number of small jobs: you, the beginning Linux user, for instance.</para></listitem> 
+<listitem><para>Users who run relatively few but large jobs: users running simulations, calculations, emulators or other programs that eat a lot of memory, and usually these users have accompanying large data files.</para></listitem>
+<listitem><para>Users who run few jobs but use a lot of CPU time (developers and the like).</para></listitem>
+</itemizedlist>
+<para>You can see that system requirements may vary for each class of users, and that it can be hard to satisfy everyone.  If you are on a multi-user system, it is useful (and fun) to find out habits of other users and the system, in order to get the most out of it for your specific purposes.</para>
+</sect3>
+<sect3 id="sect_04_03_05_06"><title>Graphical tools</title>
+<para>For the graphical environment, there are a whole bunch of monitoring<indexterm><primary>system</primary><secondary>monitoring</secondary></indexterm> tools available.  Below is a screen shot of the <application>Gnome System Monitor<indexterm><primary>monitoring</primary></indexterm></application>, which has features for displaying and searching process information, and monitoring<indexterm><primary>Gnome System Monitor</primary></indexterm> system resources:</para>
+<figure><title>Gnome System Monitor</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/system-monitor.eps" format="EPS"></imagedata></imageobject>
+<imageobject>
+<imagedata fileref="images/system-monitor.png" format="PNG"></imagedata>
+</imageobject>
+<textobject>
+<phrase>This GUI shows a graphic of how load and memory usage vary with time.</phrase>
+</textobject>
+</mediaobject>
+</figure>
+<para>There are also a couple of handy icons you can install in the task bar, such as a disk, memory and load monitor.  <command>xload<indexterm><primary>xload</primary></indexterm></command> is another small X application for monitoring system load.  Find your favorite!</para> 
+</sect3>
+<sect3 id="sect_04_03_05_07"><title>Interrupting your processes</title>
+<para>As a non-privileged user, you can only influence your own processes.  We already saw how you can display processes and filter out processes that belong to a particular user, and what possible restrictions can occur.  When you see that one of your processes is eating too much of the system's resources<indexterm><primary>processes</primary><secondary>manage load</secondary></indexterm>, there are two things that you can do:</para>
+<orderedlist>
+<listitem><para>Make the process use less resources without interrupting it;</para></listitem>
+<listitem><para>Stop the process altogether.</para></listitem>
+</orderedlist>
+<para>In the case that you want the process to continue to run, but you also want to give the other processes on the system a chance, you can <command>renice</command> the process.  Appart from using the <command>nice</command> or <command>renice</command> commands, <command>top<indexterm><primary>top</primary><secondary>changing process priority</secondary></indexterm></command> is an easy way of spotting the troublesome process(es) and reducing priority<indexterm><primary>processes</primary><secondary>changing priority</secondary></indexterm>.</para>
+<para>Identify the process in the <quote>NI</quote> column, it will most likely have a negative priority.  Type <command>r</command> and enter the process ID of the process that you want to renice.  Then enter the nice value, for instance <quote>20</quote>.  That means that from now on, this process will take 1/5 of the CPU cycles at the most.</para>
+<para>Examples of processes that you want to keep on running are emulators, virtual machines, compilers and so on.</para>
+
+<para>If you want to stop a process because it hangs or is going totally berserk in the way of I/O consumption, file creation or use of other system resources, use the <command>kill</command> command.  If you have the opportunity, first try to kill the process softly, sending it the <emphasis>SIGTERM<indexterm><primary>SIGTERM</primary></indexterm></emphasis> signal.  This is an instruction to terminate whatever it is doing, according to procedures as described in the code of the program<indexterm><primary>kill</primary><secondary>example</secondary></indexterm>:</para>
+<screen>
+<prompt>joe:~&gt;</prompt> <command>ps <option>-ef</option></command> | <command>grep <parameter>mozilla</parameter></command>
+joe    25822	1  0 Mar11 ?	00:34:04 /usr/lib/mozilla-1.4.1/mozilla-
+
+<prompt>joe:~&gt;</prompt> <command>kill <option>-15</option> <parameter>25822</parameter></command>
+</screen>
+<para>In the example above, user <emphasis>joe</emphasis> stopped his Mozilla browser because it hung.</para>
+<para>Some processes are a little bit harder to get rid of.  If you have the time, you might want to send them the SIGINT<indexterm><primary>SIGINT</primary></indexterm> signal to interrupt them.  If that does not do the trick either, use the strongest signal, SIGKILL<indexterm><primary>SIGKILL</primary></indexterm>.  In the example below, <emphasis>joe</emphasis> stops<indexterm><primary>kill</primary><secondary>example</secondary></indexterm> a <application>Mozilla</application> that is frozen:</para>
+<screen>
+<prompt>joe:~&gt;</prompt> <command>ps <option>-ef</option></command> | <command>grep <parameter>mozilla</parameter></command>
+joe    25915	1  0 Mar11 ?	00:15:06 /usr/lib/mozilla-1.4.1/mozilla-
+
+<prompt>joe:~&gt;</prompt> <command>kill <option>-9</option> <parameter>25915</parameter></command>
+
+<prompt>joe:~&gt;</prompt> <command>ps <option>-ef</option></command> | <command>grep <parameter>25915</parameter></command>
+joe	2634 32273 0 18:09 pts/4   00:00:00 grep 25915
+</screen>
+<para>In such cases, you might want to check that the process is really dead, using the <command>grep</command> filter again on the PID.  If this only returns the <command>grep</command> process, you can be sure that you succeeded in stopping the process.</para>
+<para>Among processes that are hard to kill is your shell.  And that is a good thing: if they would be easy to kill, you woud loose your shell every time you type <keycap>Ctrl</keycap>-<keycap>C</keycap> on the command line accidentally, since this is equivalent to sending a SIGINT.</para>
+<note><title>UNIX without pipes is almost unthinkable</title>
+<para>The usage of pipes (|) for using output of one command as input of another is explained in the next chapter, <xref linkend="chap_05" />.</para>
+</note>
+<para>In a graphical environment, the <command>xkill<indexterm><primary>xkill</primary></indexterm></command> program is very easy to use.  Just type the name of the command, followed by an <keycap>Enter</keycap> and select the window of the application that you want to stop.  It is rather dangerous because it sends a SIGKILL by default, so only use it when an application hangs.</para>
+</sect3>
+
+</sect2>
+
+</sect1>
+<sect1 id="sect_04_04"><title>Scheduling processes</title>
+<sect2 id="sect_04_04_01"><title>Use that idle time!</title>
+<para>A Linux system can have a lot to suffer from, but it usually suffers<indexterm><primary>processes</primary><secondary>scheduling</secondary></indexterm> only during office hours.  Whether in an office environment, a server room or at home, most Linux systems are just idling away during the morning, the evening, the nights and weekends.  Using this idle time can be a lot cheaper than buying those machines you'd absolutely need if you want everything done at the same time.</para>
+<para>There are three types<indexterm><primary>scheduling</primary><secondary>types</secondary></indexterm> of delayed execution:</para>
+<itemizedlist>
+<listitem><para>Waiting a little while and then resuming job execution, using the <command>sleep<indexterm><primary>sleep</primary></indexterm></command> command.  Execution time depends on the system time at the moment of submission.</para></listitem>
+<listitem><para>Running a command at a specified<indexterm><primary>at</primary></indexterm> time, using the <command>at</command> command.  Execution of the job(s) depends on system time, not the time of submission.</para></listitem>
+<listitem><para>Regularly running a command on a monthly, weekly, daily or hourly basis, using the <command>cron<indexterm><primary>cron</primary></indexterm></command> facilities.</para></listitem>
+</itemizedlist>
+<para>The following sections discuss each possibility.</para>
+</sect2>
+<sect2 id="sect_04_04_02"><title>The sleep command</title>
+<para>The Info page on sleep is probably one of the shortest there is.  All <command>sleep<indexterm><primary>scheduling</primary><secondary>sleep</secondary></indexterm></command> does is wait.  By default the time to wait is expressed in seconds.</para>
+<para>So why does it exist?  Some practical examples<indexterm><primary>sleep</primary><secondary>examples</secondary></indexterm>:</para>
+<para>Somebody calls you on the phone, you say "Yes I'll be with you in half an hour" but you're about drowned in work as it is and bound to forget your lunch:</para>
+<cmdsynopsis><command>(sleep <parameter>1800</parameter>; echo <parameter>"Lunch time.."</parameter>) &amp;</command></cmdsynopsis>
+<para>When you can't use the <command>at</command> command for some reason, it's five o'clock, you want to go home but there's still work to do and right now somebody is eating system resources:</para>
+<cmdsynopsis><command>(sleep <parameter>10000</parameter>; myprogram) &amp;</command></cmdsynopsis>
+<para>Make sure there's an auto-logout on your system, and that you log out or lock your desktop/office when submitting this kind of job, or run it in a <command>screen</command> session.</para>
+<para>When you run a series of printouts of large files, but you want other users to be able to print in between:</para>
+<cmdsynopsis><command>lp <filename>lotoftext</filename>; sleep <parameter>900</parameter>; lp <filename>hugefile</filename>; sleep <parameter>900</parameter>; lp <filename>anotherlargefile</filename></command></cmdsynopsis>
+<para>Printing files is discussed in <xref linkend="chap_08" />.</para>
+<para>Programmers often use the sleep command to halt script or program execution for a certain time.</para>
+</sect2>
+<sect2 id="sect_04_04_03"><title>The at command</title>
+<para>The <command>at</command> command<indexterm><primary>scheduling</primary><secondary>at</secondary></indexterm> executes commands at a given time, using your default shell unless you tell the command otherwise (see the man page).</para>
+<para>The options to <command>at</command> are rather user-friendly, which is demonstrated in the examples<indexterm><primary>at</primary><secondary>example</secondary></indexterm> below:</para>
+<screen>
+<prompt>steven@home:~&gt;</prompt> <command>at tomorrow + 2 days</command>
+warning: commands will be executed using (in order) a) $SHELL
+        b) login shell c) /bin/sh
+<prompt>at&gt;</prompt> <command> cat reports | mail myboss@mycompany</command>
+<prompt>at&gt;</prompt> &lt;EOT&gt;
+job 1 at 2001-06-16 12:36
+</screen>
+<para>Typing <keycap>Ctrl</keycap>+<keycap>D</keycap> quits the <command>at</command> utility and generates the <quote>EOT</quote> message.</para>
+<para>User <emphasis>steven</emphasis> does a strange thing here combining two commands; we will study this sort of practice in <xref linkend="chap_05" />, Redirecting Input and Output.</para>
+<screen>
+<prompt>steven@home:~&gt;</prompt> <command>at 0237</command>
+warning: commands will be executed using (in order) a) $SHELL
+        b) login shell c) /bin/sh
+<prompt>at&gt;</prompt> <command> cd new-programs</command>
+<prompt>at&gt;</prompt> <command> ./configure; make</command>
+<prompt>at&gt;</prompt> &lt;EOT&gt;
+job 2 at 2001-06-14 02:00
+</screen>
+<para>The <option>-m</option> option sends mail to the user when the job is done, or explains when a job can't be done.  The command <command>atq</command> lists jobs; perform this command before submitting jobs in order prevent them from starting at the same time as others.  With the <command>atrm</command> command you can remove scheduled jobs if you change your mind.</para>
+<para>It is a good idea to pick strange execution<indexterm><primary>scheduling</primary><secondary>execution time</secondary></indexterm> times, because system jobs are often run at <quote>round</quote> hours, as you can see in <xref linkend="sect_04_04_04" /> the next section.  For example, jobs are often run at exactly 1 o'clock in the morning (e.g. system indexing to update a standard locate database), so entering a time of 0100 may easily slow your system down rather than fire it up.  To prevent jobs from running all at the same time, you may also use the <command>batch<indexterm><primary>scheduling</primary><secondary>batch</secondary></indexterm></command> command, which queues processes and feeds the work in the queue to the system in an evenly balanced way, preventing excessive bursts of system resource usage.  See the Info pages for more information.</para>
+
+
+</sect2>
+<sect2 id="sect_04_04_04"><title>Cron and crontab</title>
+<para>The cron system is managed by the <command>cron</command> daemon<indexterm><primary>daemons</primary><secondary>cron</secondary></indexterm>.  It gets information about which programs and when they should run from the system's and users' crontab<indexterm><primary>scheduling</primary><secondary>cron</secondary></indexterm> entries.  Only the root user has access to the system crontabs, while each user should only have access to his own crontabs.  On some systems (some) users may not have access to the cron facility.</para>
+<para>At system startup the cron daemon searches <filename>/var/spool/cron/</filename> for crontab entries which are named after accounts in <filename>/etc/passwd</filename>, it searches <filename>/etc/cron.d/<indexterm><primary>cron.d</primary></indexterm></filename> and it searches <filename>/etc/crontab<indexterm><primary>crontab</primary></indexterm></filename>, then uses this information every minute to check if there is something to be done.  It executes commands as the user who owns the crontab file and mails any output of commands to the owner.</para>
+<para>On systems using <application>Vixie<indexterm><primary>cron</primary><secondary>Vixie cron</secondary></indexterm></application> cron, jobs that occur hourly, daily, weekly and monthly are kept in separate directories in <filename>/etc</filename> to keep an overview, as opposed to the standard UNIX cron function, where all tasks are entered into one big file.</para>
+<para>Example of a <application>Vixie</application> crontab<indexterm><primary>crontab</primary><secondary>example</secondary></indexterm> file:</para>
+<screen>
+<prompt>[root@blob /etc]#</prompt> <command>more crontab</command>
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+HOME=/
+
+# run-parts
+# commands to execute every hour
+01 * * * * root run-parts /etc/cron.hourly
+# commands to execute every day
+02 4 * * * root run-parts /etc/cron.daily
+# commands to execute every week
+22 4 * * 0 root run-parts /etc/cron.weekly
+commands to execute every month
+42 4 1 * * root run-parts /etc/cron.monthly
+</screen>
+<note><title>Alternative</title>
+<para>You could also use the <command>crontab <option>-l</option></command> command to display crontabs.</para>
+</note>
+<para>Some variables are set, and after that there's the actual scheduling, one line per job, starting with 5 time<indexterm><primary>cron</primary><secondary>crontab syntax</secondary></indexterm> and date fields.  The first field contains the minutes (from 0 to 59), the second defines the hour of execution (0-23), the third is day of the month (1-31), then the number of the month (1-12), the last is day of the week (0-7, both 0 and 7 are Sunday).  An asterisk in these fields represents the total acceptable range for the field.  Lists are allowed; to execute a job from Monday to Friday enter 1-5 in the last field, to execute a job on Monday, Wednesday and Friday enter 1,3,5.</para>
+<para>Then comes the user who should run the processes which are listed in the last column.  The example above is from a Vixie cron configuration where root runs the program <command>run-parts<indexterm><primary>run-parts</primary></indexterm></command> on regular intervals<indexterm><primary>cron</primary><secondary>run-parts</secondary></indexterm>, with the appropriate directories as options.  In these directories, the actual jobs to be executed at the scheduled time are stored as shell scripts, like this little script that is run daily to update the database used by the <command>locate</command> command:</para>
+<screen>
+<prompt>billy@ahost cron.daily]$</prompt> <command>cat slocate.cron</command>
+#!/bin/sh
+renice +19 -p $$ &gt;/dev/null 2&gt;&amp;1
+/usr/bin/updatedb -f "nfs,smbfs,ncpfs,proc,devpts" -e \
+"/tmp,/var/tmp, /usr/tmp,/afs,/net"
+</screen>
+<para>Users are supposed to edit their crontabs<indexterm><primary>cron</primary><secondary>edit crontab</secondary></indexterm> in a safe way using the <command>crontab <option>-e</option></command> command<indexterm><primary>crontab</primary></indexterm>.  This will prevent a user from accidentally opening more than one copy of his/her crontab file.  The default editor is <command>vi</command> (see <xref linkend="chap_06" />, but you can use any text editor, such as <command>gvim</command> or <command>gedit</command> if you feel more comfortable with a GUI editor.</para> 
+<para>When you quit, the system will tell you that a new crontab is installed.</para>
+<para>This crontab entry reminds <emphasis>billy</emphasis> to go to his sports club every Thursday night:</para>
+<screen>
+<prompt>billy:~&gt;</prompt> <command>crontab -l</command>
+# DO NOT EDIT THIS FILE - edit the master and reinstall.
+# (/tmp/crontab.20264 installed on Sun Jul 20 22:35:14 2003)
+# (Cron version -- $Id: chap4.xml,v 1.28 2007-09-19 12:22:26 tille Exp $)
+38 16 * * 3 mail -s "sports evening" billy
+</screen>
+<para>After adding a new scheduled task, the system will tell you that a new crontab is installed.  You do not need to restart the <command>cron</command> daemon for the changes to take effect.  In the example, <emphasis>billy</emphasis> added a new line pointing to a backup script:</para>
+<screen>
+<prompt>billy:~&gt;</prompt> <command>crontab -e</command>
+45 15 * * 3 mail -s "sports evening" billy
+4 4 * * 4,7 /home/billy/bin/backup.sh
+
+&lt;--write and quit--&gt;
+
+crontab: installing new crontab
+
+<prompt>billy:~&gt;</prompt>
+</screen>
+<para>The <filename>backup.sh</filename> script is executed every Thursday and Sunday.  See <xref linkend="sect_07_02_07" /> for an introduction to shell scripting. Keep in mind that output of commands, if any, is mailed to the owner of the crontab file.  If no mail service is configured, you might find the output of your commands in your local mailbox, <filename>/var/spool/mail/&lt;your_username&gt;</filename>, a plain text file.</para>
+<note><title>Who runs my commands?</title>
+<para>You don't have to specify the user who should run the commands.  They are executed with the user's own permissions by default.</para>
+</note>
+</sect2>
+
+</sect1>
+<sect1 id="sect_04_05"><title>Summary</title>
+<para>Linux is a multi-user, multi-tasking operating system that has a UNIX-like way of handling processes.  Execution speed of commands can depend on a thousand tiny things.  Among others, we learned a lot of new commands to visualize and handle processes.  Here's a list:</para>
+<table frame="all"><title>New commands in chapter 4: Processes</title>
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead>
+<row>
+<entry>Command</entry><entry>Meaning</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><command>at</command></entry><entry>Queue jobs for later execution.</entry>
+</row>
+<row>
+<entry><command>atq</command></entry><entry>Lists the user's pending jobs.</entry>
+</row>
+<row>
+<entry><command>atrm</command></entry><entry>Deletes jobs, determined by their job number.</entry>
+</row>
+<row>
+<entry><command>batch</command></entry><entry>Executes commands when system load level permits.</entry>
+</row>
+<row>
+<entry><command>crontab</command></entry><entry>Maintain crontab files for individual users.</entry>
+</row>
+<row>
+<entry><command>halt</command></entry><entry>Stop the system.</entry>
+</row>
+<row>
+<entry><command>init <parameter>run level</parameter></command></entry><entry>Process control initialization.</entry>
+</row>
+<row>
+<entry><command>jobs</command></entry><entry>Lists currently executing jobs.</entry>
+</row>
+<row>
+<entry><command>kill</command></entry><entry>Terminate a process.</entry>
+</row>
+<row>
+<entry><command>mesg</command></entry><entry>Control write access to your terminal.</entry>
+</row>
+<row>
+<entry><command>netstat</command></entry><entry>Display network connections, routing tables, interface statistics, masquerade connections and multicast memberships.</entry>
+</row>
+<row>
+<entry><command>nice</command></entry><entry>Run a program with modified scheduling priority.</entry>
+</row>
+<row>
+<entry><command>pgrep</command></entry><entry>Display processes.</entry>
+</row>
+<row>
+<entry><command>ps</command></entry><entry>Report process status.</entry>
+</row>
+<row>
+<entry><command>pstree</command></entry><entry>Display a tree of processes.</entry>
+</row>
+<row>
+<entry><command>reboot</command></entry><entry>Stop the system.</entry>
+</row>
+<row>
+<entry><command>renice</command></entry><entry>Alter priority of running processes.</entry>
+</row>
+<row>
+<entry><command>shutdown</command></entry><entry>Bring the system down.</entry>
+</row>
+<row>
+<entry><command>sleep</command></entry><entry>Delay for a specified time.</entry>
+</row>
+<row>
+<entry><command>time</command></entry><entry>Time a command or report resource usage.</entry>
+</row>
+<row>
+<entry><command>top</command></entry><entry>Display top CPU processes.</entry>
+</row>
+<row>
+<entry><command>uptime</command></entry><entry>Show how long the system has been running.</entry>
+</row>
+<row>
+<entry><command>vmstat</command></entry><entry>Report virtual memory statistics.</entry>
+</row>
+<row>
+<entry><command>w</command></entry><entry>Show who is logged on and what they are doing.</entry>
+</row>
+<row>
+<entry><command>wall</command></entry><entry>Send a message to everybody's terminals.</entry>
+</row>
+<row>
+<entry><command>who</command></entry><entry>Show who is logged on.</entry>
+</row>
+<row>
+<entry><command>write</command></entry><entry>Send a message to another user.</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+
+</sect1>
+<sect1 id="sect_04_06"><title>Exercises</title>
+<para>These are some exercises that will help you get the feel for processes running on your system.</para>
+<sect2><title>General</title>
+<itemizedlist>
+<listitem><para>Run <command>top</command> in one terminal while you do the exercises in another.</para></listitem>
+<listitem><para>Run the <command>ps</command> command.</para></listitem>
+<listitem><para>Read the man pages to find out how to display all your processes.</para></listitem>
+<listitem><para>Run the command <command>find <filename>/</filename></command>.  What effect does it have on system load?  Stop this command.</para></listitem>
+<listitem><para>In graphical mode, start the <command>xclock</command> program in the foreground.  Then let it run in the background.  Stop the program using the <command>kill</command> command.</para></listitem>
+<listitem><para>Run the <command>xcalc</command> directly in the background, so that the prompt of the issuing terminal is released.</para></listitem>
+<listitem><para>What does <command>kill <option>-9 -1</option></command> do?</para></listitem>
+<listitem><para>Open two terminals or terminal windows again and use <command>write</command> to send a message from one to the other.</para></listitem>
+<listitem><para>Issue the <command>dmesg</command> command.  What does it tell?</para></listitem>
+<listitem><para>How long does it take to execute <command>ls</command> in the current directory?</para></listitem>
+<listitem><para>Based on process entries in <filename>/proc</filename>, owned by your UID, how would you work to find out which processes these actually represent?</para></listitem>
+<listitem><para>How long has your system been running?</para></listitem>
+<listitem><para>Which is your current TTY?</para></listitem>
+<listitem><para>Name 3 processes that couldn't have had <command>init</command> as an initial parent.</para></listitem>
+<listitem><para>Name 3 commands which use SUID mode.  Explain why this is so.</para></listitem>
+<listitem><para>Name the commands that are generally causing the highest load on your system.</para></listitem>
+</itemizedlist>
+</sect2>
+<sect2><title>Booting, init etc.</title>
+<itemizedlist>
+<listitem><para>Can you reboot the system as a normal user?  Why is that?</para></listitem>
+<listitem><para>According to your current run level, name the steps that are taken during shutdown.</para></listitem>
+<listitem><para>How do you change the system run level?  Switch from your default run level to run level 1 and vice versa.</para></listitem>
+<listitem><para>Make a list of all the services and daemons that are started up when your system has booted.</para></listitem>
+<listitem><para>Which kernel is currently load at startup?</para></listitem>
+<listitem><para>Suppose you have to start some exotic server at boot time.  Up until now, you logged in after booting the system and started this server manually using a script named <filename>deliver_pizza</filename> in your home directory.  What do you have to do in order to have the service start up automatically in run level 4, which you defined for this purpose only?</para></listitem>
+</itemizedlist>
+</sect2>
+<sect2><title>Scheduling</title>
+<itemizedlist>
+<listitem><para>Use <command>sleep</command> to create a reminder that your pasta is ready in ten minutes.</para></listitem>
+<listitem><para>Create an <command>at</command> job that copies all files in your home directory to <filename>/var/tmp</filename> within half an hour.  You may want to create a sub-directory in <filename>/var/tmp</filename>.</para></listitem>
+<listitem><para>Make a cronjob that does this task every Monday to Friday during lunch.</para></listitem>
+<listitem><para>Check that it works.</para></listitem>
+<listitem><para>Make a mistake in the crontab entry, like issuing the nonexistent command <command>coppy</command> instead of <command>cp</command>.  What happens upon execution of the task?</para></listitem>
+</itemizedlist>
+</sect2>
+
+</sect1>
+</chapter>

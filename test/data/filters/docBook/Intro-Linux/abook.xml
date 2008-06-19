@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+
+<!ENTITY chap1 SYSTEM "chap1.xml">
+<!ENTITY chap2 SYSTEM "chap2.xml">
+<!ENTITY chap3 SYSTEM "chap3.xml">
+<!ENTITY chap4 SYSTEM "chap4.xml">
+<!ENTITY chap5 SYSTEM "chap5.xml">
+<!ENTITY chap6 SYSTEM "chap6.xml" >
+<!ENTITY chap7 SYSTEM "chap7.xml">
+<!ENTITY chap8 SYSTEM "chap8.xml">
+<!ENTITY chap9 SYSTEM "chap9.xml">
+<!ENTITY chap10 SYSTEM "chap10.xml">
+<!ENTITY chap11 SYSTEM "chap11.xml">
+<!ENTITY app1 SYSTEM "app1.xml">
+<!ENTITY app2 SYSTEM "app2.xml">
+<!ENTITY app3 SYSTEM "app3.xml">
+<!ENTITY gloss SYSTEM "gloss.xml">
+]>
+<book>
+    <bookinfo>
+        <title>Introduction to Linux</title>
+        <subtitle>A Hands on Guide</subtitle>
+        <authorgroup>
+            <author>
+                <firstname>Machtelt</firstname>
+                <surname>Garrels</surname>
+                <affiliation>
+                    <orgname>Garrels.be</orgname>
+                    <address>
+                        <email>tille wants no spam _at_ garrels dot be</email>
+                    </address>
+                </affiliation>
+            </author>
+        </authorgroup>
+        <edition>1.25</edition>
+        <pubdate>20070919</pubdate>
+        <copyright>
+            <year>2002</year>
+            <year>2003</year>
+            <year>2004</year>
+	    <year>2005</year>
+	    <year>2006</year>
+	    <year>2007</year>
+            <holder>Machtelt Garrels</holder>
+        </copyright>
+        <isbn>ISBN 90-808529-1-0</isbn>
+        <keywordset>
+            <keyword>Linux</keyword>
+            <keyword>Beginners</keyword>
+            <keyword>linux</keyword>
+            <keyword>start</keyword>
+            <keyword>Getting started</keyword>
+            <keyword>guide</keyword>
+            <keyword>Guide</keyword>
+            <keyword>Exercises</keyword>
+            <keyword>exercises</keyword>
+        </keywordset>
+    </bookinfo>
+    <preface>
+        <title>Introduction</title>
+        <section id="intro_01">
+            <title>Why this guide?</title>
+            <para>Many people still believe that learning Linux is difficult, or that only experts
+                can understand how a Linux system works. Though there is a lot of free documentation
+                available, the documentation is widely scattered on the Web, and often confusing,
+                since it is usually oriented toward experienced UNIX or Linux users. Today, thanks
+                to the advancements in development, Linux has grown in popularity both at home and
+                at work. The goal of this guide is to show people of all ages that Linux can be
+                simple and fun, and used for all kinds of purposes.</para>
+
+        </section>
+        <section id="intro_02">
+            <title>Who should read this book?</title>
+            <para> This guide was created as an overview of the Linux Operating System, geared
+                toward new users as an exploration tour and getting started guide, with exercises at
+                the end of each chapter. For more advanced trainees it can be a desktop reference,
+                and a collection of the base knowledge needed to proceed with system and network
+                administration. This book contains many real life examples derived from the author's
+                experience as a Linux system and network administrator, trainer and consultant. We
+                hope these examples will help you to get a better understanding of the Linux system
+                and that you feel encouraged to try out things on your own.</para>
+            <para>Everybody who wants to get a <quote>CLUE</quote>, a Command Line User Experience,
+                with Linux (and UNIX in general) will find this book useful.</para>
+
+        </section>
+        <section id="intro_03">
+            <title>New versions and availability</title>
+            <para>This document is published in the Guides section of the Linux Documentation
+                Project collection at <ulink url="http://www.tldp.org/guides.html"/>; you can also
+                download PDF and PostScript formatted versions here.</para>
+            <para>The most recent edition is available at<ulink
+                    url="http://tille.garrels.be/training/tldp/"> http://tille.garrels.be/training/tldp/</ulink>.</para>
+<para>The second edition of this guide is available in print from <ulink url="http://fultus.com/">Fultus.com Books</ulink> as paperback Print On Demand (POD) book.  Fultus <ulink url="http://store.fultus.com/product_info.php?products_id=140">distributes this document</ulink> through Ingram and Baker &amp; Taylor to many bookstores, including <ulink url="http://www.amazon.com/exec/obidos/ASIN/1596821124">Amazon.com</ulink>, <ulink url="http://www.amazon.co.uk/exec/obidos/ASIN/1596821124">Amazon.co.uk</ulink>, <ulink url="http://search.barnesandnoble.com/booksearch/isbninquiry.asp?ISBN=1596821124">BarnesAndNoble.com</ulink> and <ulink url="http://froogle.google.com/froogle?q=1596821124">Google's Froogle</ulink> global shopping portal and <ulink url="http://books.google.com/books?isbn=1596821124">Google Book Search</ulink>.</para>
+<figure><title>Introduction to Linux front cover</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/itl.jpg" format="JPG"></imagedata>
+</imageobject>
+<imageobject>
+<imagedata fileref="images/itl.eps" format="EPS"></imagedata>
+</imageobject>
+<textobject>
+<phrase>Front cover of the Intro to Linux guide, featuring a baby penguin that has just come out of the egg.</phrase>
+</textobject>
+</mediaobject>
+</figure>
+
+<para>The guide has been <ulink url="http://www.geocities.com/linuxparichay/">translated into Hindi</ulink> by:</para>
+<itemizedlist> 
+<listitem><para>Alok Kumar</para></listitem>
+<listitem><para>Dhananjay Sharma</para></listitem>
+<listitem><para>Kapil</para></listitem>
+<listitem><para>Puneet Goel</para></listitem>
+<listitem><para>Ravikant Yuyutsu</para></listitem>
+</itemizedlist> 
+<para>Andrea Montagner <ulink url="http://www.codex.altervista.org/introlinux.html">translated the guide into Italian</ulink>.</para>
+        </section>
+        <section id="intro_04">
+            <title>Revision History</title>
+            <para>
+                <revhistory>
+		<revision>
+		<revnumber>1.26</revnumber>
+		<date>20070919</date>
+		<authorinitials>MG</authorinitials>
+		<revremark>Comments from readers, license.</revremark>
+		</revision>
+		<revision>
+		<revnumber>1.25</revnumber>
+		<date>20070511</date>
+		<authorinitials>MG</authorinitials>
+		<revremark>Comments from readers, minor updates, E-mail etiquette, updated info about availability (thanks Oleg).</revremark>
+		</revision>
+	<revision>
+	<revnumber>1.24</revnumber>
+	<date>2006-11-01</date>
+	<authorinitials>MG</authorinitials>
+	<revremark>added index terms, prepared for second printed edition, added gpg and proxy info.</revremark>
+	</revision>
+		<revision>
+		<revnumber>1.23</revnumber>
+		<date>2006-07-25</date>
+		<authorinitials>MG and FK</authorinitials>
+		<revremark>Updates and corrections, removed app5 again, adapted license to enable inclusion in Debian docs.</revremark>
+		</revision>
+		<revision>
+		<revnumber>1.22</revnumber>
+		<date>2006-04-06</date>
+		<authorinitials>MG</authorinitials>
+		<revremark>chap8 revised completely, chap10: clarified examples, added ifconfig and cygwin info, revised network apps.</revremark>
+		</revision>
+		<revision>
+		<revnumber>1.21</revnumber>
+		<date>2006-03-14</date>
+		<authorinitials>MG</authorinitials>
+		<revremark>Added exercises in chap11, corrected newline errors, command overview completed for chapter 9, minor corrections in chap10.</revremark>
+		</revision>
+		<revision>
+		<revnumber>1.20</revnumber>
+		<date>2006-01-06</date>
+		<authorinitials>MG</authorinitials>
+		<revremark>Split chap7: audio stuff is now in separate chapter, chap11.xml.  Small revisions, updates for commands like aptitude, more on USB storage, Internet telephony, corrections from readers.</revremark>
+		</revision>
+<!--
+<revision>
+<revnumber>1.19</revnumber>
+<date>2005-09-07</date>
+<authorinitials>MG</authorinitials>
+<revremark>clarified file descriptors, exercises in chap3, corrected links, added more Debian refs, corrected language errors.</revremark>
+</revision>
+		    <revision>
+		        <revnumber>1.18</revnumber>
+			 <date>2005-05-23</date>
+			 <authorinitials>MG</authorinitials>
+			 <revremark>note about pagers, lots of clarifications, removed quite some RedHat-centric paragraphs, reviewed and updated lots in sound and video, removed xmms-mp3 stuff, added time zone info because I was just dealing with date and time, contrary to the title of the section, removed Mandrake refs.</revremark>
+		    </revision>
+		    <revision>
+			<revnumber>1.17</revnumber>
+			<date>2005-03-01</date>
+                        <authorinitials>MG</authorinitials>
+			<revremark>Lots of little details that were outdated, added several notes, removed tracer image, added info about new apps.</revremark>
+		    </revision>
+                    <revision>
+                        <revnumber>1.16</revnumber>
+                        <date>2004-12-06</date>
+                        <authorinitials>MG</authorinitials>
+                        <revremark>Changes because of domain move, minor corrections.</revremark>
+		    </revision>
+                    <revision>
+                        <revnumber>1.15</revnumber>
+                        <date>2004-07-09</date>
+                        <authorinitials>MG</authorinitials>
+                        <revremark>Added tracer image 1x1 pixel section and sect1, corrected wrong links in glossary, added textobjects for all images, made signal list and disk I/O problems list more clear.</revremark>
+		    </revision>
+		    <revision>
+                        <revnumber>1.14</revnumber>
+                        <date>2004-06-19</date>
+                        <authorinitials>MG</authorinitials>
+                        <revremark>Added tee command in chap5, corrected typos, acted upon remarks sent in by readers, added newgrp explanations, explained user private group scheme, added a remark on umask.</revremark>
+		    </revision>
+		    -->
+                    <revision>
+                        <revnumber>1.13</revnumber>
+                        <date>2004-04-27</date>
+			<authorinitials>MG</authorinitials>
+			<revremark>Last read-through before sending everything to Fultus for printout.  Added Fultus referrence in New Versions section, updated Conventions and Organization sections.  Minor changes in chapters 4, 5, 6 and 8, added rdesktop info in chapter 10, updated glossary, replaced references to fileutils with coreutils, thankyou to Hindi translators.</revremark>
+		    </revision>
+		    <!--
+                    <revision>
+                        <revnumber>1.12</revnumber>
+                        <date>2004-03-13</date>
+                        <authorinitials>MG</authorinitials>
+                        <revremark>Added KAudioCreator, deleted outdated Xcdroast pic, note on running gnome apps in KDE and vv., added tvtime and mplayer links, added sections about signals and stopping/renicing processes.</revremark>
+                    </revision>
+                    <revision>
+                        <revnumber>1.11</revnumber>
+                        <date>2004-02-02</date>
+                        <authorinitials>MG</authorinitials>
+                        <revremark>Completed bookinfo with ISBN.  Tried indentation and formatting, but oxygen tool didn't recognize screen sections -> had to roll back.</revremark>
+                    </revision>
+                    <revision>
+                        <revnumber>1.10</revnumber>
+                        <date>2004-01-06</date>
+                        <authorinitials>MG</authorinitials>
+                        <revremark>Changed encoding to UTF-8, rearranged revision history. Added a
+                            lot of markup in the screen sections to better distinguish prompts from
+                            commands; introduced warnings, cautions and tips.</revremark>
+                    </revision>
+                    <revision>
+                        <revnumber>1.9</revnumber>
+                        <date>2003-11-29</date>
+                        <authorinitials>MG</authorinitials>
+                        <revremark>Acted upon remarks from readers to clarify issues with compressed
+                            files, removable media; found a couple more spelling errors, added an
+                            extra example for cron and one for prompt settings; took out reference
+                            to Acrobat Reader and stuffit, which are not Open Source (pointing to a
+                            fancy flight simulator instead ;-) More on keyboard layout. Added RPM
+                            example, added yum package manager.</revremark>
+                    </revision>
+                    <revision>
+                        <revnumber>1.8</revnumber>
+                        <date>2003-09-16</date>
+                        <authorinitials>MG</authorinitials>
+                        <revremark>Added app5, corrected some minor details.</revremark>
+                    </revision>
+                    <revision>
+                        <revnumber>1.7</revnumber>
+                        <date>2003-07-26</date>
+                        <authorinitials>MG</authorinitials>
+                        <revremark>Added RPM and apt-get examples, corrected issues with tar
+                            incremental backup. Updated glossary and added links to sections within document.</revremark>
+                    </revision>
+                    <revision>
+                        <revnumber>1.6</revnumber>
+                        <date>2003-07-21</date>
+                        <authorinitials>MG</authorinitials>
+                        <revremark>Corrected details in chap 1 to 5, tried shorter lines in intro
+                            and chap1 to make it easier on translators using CVS. See what this
+                            gives: next update diffs should be more readable for these parts.</revremark>
+                    </revision>
+                    <revision>
+                        <revnumber>1.5</revnumber>
+                        <date>2003-06-17</date>
+                        <authorinitials>MG</authorinitials>
+                        <revremark>Redo of chapter 10 on Networking, left out some sections that
+                            were too complicated.</revremark>
+                    </revision>
+                    <revision>
+                        <revnumber>1.4</revnumber>
+                        <date>2003-04-27</date>
+                        <authorinitials>MG</authorinitials>
+                        <revremark>Added sound and video playing, chat/conference; got rid of
+                            redhat-config image and redhat printtool gui stuff; bash key
+                            combinations in chap2; XML keycap tag on all key combinations, parameter
+                            tag on arguments, guibutton tag for graphical buttons, menuchoice,
+                            guimenu and guimenuitem tags for GUI menu selections; replaced pico with
+                            ed, added piece about Linux in the office, replaced abiword image with
+                            openoffice screenshot; added conventions and organization sections in
+                            introduction; added konqueror screenshot in chap2; replaced
+                            system-monitor screenshot in chap4 with something more up to date;
+                            summary for chap2, checked exercises; added bash in app3 differing
+                            features; License section is now only invariant section.</revremark>
+                    </revision>
+                    <revision>
+                        <revnumber>1.3</revnumber>
+                        <date>2003-03-26</date>
+                        <authorinitials>MG</authorinitials>
+                        <revremark>grep and escape characters; exporting variables; more consequent
+                            about security issues; init and cron revised; window and desktop
+                            managers explanation; removed some more too RedHat specific stuff; added
+                            piece about (x)inetd; local authentication; text conversions and
+                            encoding; graphical help, graphical file managers, note on internet
+                            connections; spell check.</revremark>
+                    </revision>
+                    <revision>
+                        <revnumber>1.2</revnumber>
+                        <date>2003-02-28</date>
+                        <authorinitials>MG</authorinitials>
+                        <revremark>ps a bit better explained; more in getting started: help,
+                            whatis, apropos explained; more on find; chmod and umask still contained
+                            a couple of errors and incompletenesses; resized images that were too
+                            large to be printed; resized oversized text boxes for better print
+                            quality; updated glossary.</revremark>
+                    </revision>
+                    <revision>
+                        <revnumber>1.1</revnumber>
+                        <date>2003-01-22</date>
+                        <authorinitials>MG</authorinitials>
+                        <revremark>Bug fixes; removed some more too RedHat specific stuff; corrected
+                            minor errors; moved most recent version to decent URL; improved tar
+                            section, added something about jar.</revremark>
+                    </revision>
+                    <revision>
+                        <revnumber>1.0</revnumber>
+                        <date>2002-12-29</date>
+                        <authorinitials>MG</authorinitials>
+                        <revremark>Initial release for TLDP</revremark>
+                    </revision>
+		    -->
+                </revhistory>
+            </para>
+
+        </section>
+        <section id="intro_05">
+            <title>Contributions</title>
+            <para> Many thanks to all the people who shared their experiences. And especially to the
+                Belgian Linux users for hearing me out every day and always
+                being generous in their comments.</para>
+            <para>Also a special thought for Tabatha Marshall for doing a really thorough revision,
+                spell check and styling, and to Eugene Crosser for spotting the errors that we two
+                overlooked.</para>
+            <para>And thanks to all the readers who notified me about missing topics and who helped
+                to pick out the last errors, unclear definitions and typos by going through the
+                trouble of mailing me all their remarks. These are also the people who help me keep
+                this guide up to date, like Filipus Klutiero who did a complete review in 2005 and 2006 and helps me getting the guide into the Debian docs collection, and Alexey Eremenko who sent me the foundation for chapter 11.</para>
+<para>In 2006, Suresh Rajashekara created a Debian package of this documentation.</para>
+            <para>Finally, a big thank you for the volunteers who are currently translating this
+                document in French, Swedish, German, Farsi, Hindi and more. It is a big work that should
+                not be underestimated; I admire your courage.</para>
+
+        </section>
+        <section id="intro_06">
+            <title>Feedback</title>
+            <para> Missing information, missing links, missing characters? Mail it to the maintainer
+                of this document: <address>
+                    <email>tille wants no spam _at_ garrels dot be</email>
+                </address>
+            </para>
+            <para>Don't forget to check with the <ulink
+                    url="http://tille.garrels.be/training/tldp/">latest version</ulink> first!</para>
+
+        </section>
+        <section id="intro_07">
+            <title>Copyright information</title>
+<screen>
+* Copyright (c) 2002-2007, Machtelt Garrels
+* All rights reserved.
+* Redistribution and use in source and binary forms, with or without
+* modification, are permitted provided that the following conditions are met:
+*
+*     * Redistributions of source code must retain the above copyright
+*       notice, this list of conditions and the following disclaimer.
+*     * Redistributions in binary form must reproduce the above copyright
+*       notice, this list of conditions and the following disclaimer in the
+*       documentation and/or other materials provided with the distribution.
+*     * Neither the name of the author, Machtelt Garrels, nor the
+*       names of its contributors may be used to endorse or promote products
+*       derived from this software without specific prior written permission.
+*
+* THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS "AS IS" AND ANY
+* EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+* WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+* DISCLAIMED. IN NO EVENT SHALL THE AUTHOR AND CONTRIBUTORS BE LIABLE FOR ANY
+* DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+* (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+* LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+* ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+* (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+* SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</screen>
+            <para>The logos, trademarks and symbols used in this book are the properties of their
+                respective owners.</para>
+
+        </section>
+        <section id="intro_08">
+            <title>What do you need?</title>
+            <para>You will require a computer and a medium containing a Linux distribution. Most of
+                this guide applies to all Linux distributions - and UNIX in general. Apart from
+                time, there are no further specific requirements.</para>
+            <para>The <ulink url="http://www.tldp.org/HOWTO/Installation-HOWTO/"> Installation
+                HOWTO</ulink> contains helpful information on how to obtain Linux software and
+                install it on your computer. Hardware requirements and coexistence with other
+                operating systems are also discussed.</para>
+            <para>CD images can be downloaded from <ulink url="http://www.linux-iso.com/">
+                linux-iso.com</ulink> and many other locations, see <xref linkend="app1"/>.</para>
+            <para>An interesting alternative for those who don't dare to take the step of an actual
+                Linux installation on their machine are the Linux distributions that you can run
+                from a CD, such as the <ulink url="http://www.knoppix.com/"> Knoppix</ulink> distribution.</para>
+
+        </section>
+        <section id="intro_09">
+            <title>Conventions used in this document</title>
+            <para>The following typographic and usage conventions occur in this text:</para>
+            <table id="conventions" frame="all">
+                <title>Typographic and usage conventions</title>
+                <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                    <thead>
+                        <row>
+                            <entry>Text type</entry>
+                            <entry>Meaning</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>
+                                <quote>Quoted text</quote>
+                            </entry>
+                            <entry>Quotes from people, quoted computer output.</entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <screen>terminal view</screen>
+                            </entry>
+                            <entry>Literal computer input and output captured from the terminal,
+                                usually rendered with a light grey background.</entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <command>command</command>
+                            </entry>
+                            <entry>Name of a command that can be entered on the command line.</entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <varname>VARIABLE</varname>
+                            </entry>
+                            <entry>Name of a variable or pointer to content of a variable, as in <varname>$VARNAME</varname>.</entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <option>option</option>
+                            </entry>
+                            <entry>Option to a command, as in <quote>the <option>-a</option> option
+                                    to the <command>ls</command> command</quote>.</entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <parameter>argument</parameter>
+                            </entry>
+                            <entry>Argument to a command, as in <quote>read <command>man <parameter>ls</parameter>
+                                    </command>
+                                </quote>.</entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <prompt>prompt</prompt>
+                            </entry>
+                            <entry>
+                                User prompt, usually followed by a command that you type in a terminal window, like in <prompt>hilda@home&gt;</prompt> <command>ls <option>-l</option></command>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <cmdsynopsis>
+                                    <command>command <option>options</option>
+                                        <parameter>arguments</parameter>
+                                    </command>
+                                </cmdsynopsis>
+                            </entry>
+                            <entry>Command synopsis or general usage, on a separated line.</entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <filename>filename</filename>
+                            </entry>
+                            <entry>Name of a file or directory, for example <quote>Change to
+                                    the <filename>/usr/bin</filename> directory.</quote>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <keycap>Key</keycap>
+                            </entry>
+                            <entry>Keys to hit on the keyboard, such as <quote>type
+                                    <keycap>Q</keycap> to quit</quote>.</entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <guibutton>Button</guibutton>
+                            </entry>
+                            <entry>Graphical button to click, like the <guibutton>OK</guibutton> button.</entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <menuchoice>
+                                    <guimenu>Menu</guimenu>
+                                    <guimenuitem>Choice</guimenuitem>
+                                </menuchoice>
+                            </entry>
+                            <entry>Choice to select from a graphical menu, for instance: <quote>Select<menuchoice>
+                                        <guimenu>Help</guimenu>
+                                        <guimenuitem>About Mozilla</guimenuitem>
+                                    </menuchoice> in your browser.</quote>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <emphasis>Terminology</emphasis>
+                            </entry>
+                            <entry>Important term or concept: <quote>The Linux
+                                    <emphasis>kernel</emphasis> is the heart of the system.</quote>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <screen>\</screen>
+                            </entry>
+                            <entry>The backslash in a terminal view or command synopsis indicates an
+                                unfinished line. In other words, if you see a long command that is
+                                cut into multiple lines, \ means <quote>Don't press
+                                    <keycap>Enter</keycap> yet!</quote>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>See <xref linkend="chap_01"/>
+                            </entry>
+                            <entry>link to related subject within this guide.</entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://tille.garrels.be">The author</ulink>
+                            </entry>
+                            <entry>Clickable link to an external web resource.</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <para>The following images are used:</para>
+            <note>
+                <title>This is a note</title>
+                <para>It contains additional information or remarks.</para>
+            </note>
+            <caution>
+                <title>This is a caution</title>
+                <para>It means be careful.</para>
+            </caution>
+            <warning>
+                <title>This is a warning</title>
+                <para>Be <emphasis>very</emphasis> careful.</para>
+            </warning>
+            <tip>
+                <title>This is a tip</title>
+                <para>Tips and tricks.</para>
+            </tip>
+
+        </section>
+        <section id="intro_10">
+            <title>Organization of this document</title>
+            <para>This guide is part of the Linux Documentation Project and aims to be the foundation for all other materials that you can get from
+                the Project. As such, it provides you with the fundamental
+                knowledge needed by anyone who wants to start working with a Linux system, while at
+                the same time it tries to consciously avoid re-inventing the hot water. Thus, you
+                can expect this book to be incomplete and full of links to sources of additional
+                information on your system, on the Internet and in your system documentation.</para>
+            <para>The first chapter is an introduction to the subject on Linux; the next two discuss
+                absolute basic commands. Chapters 4 and 5 discuss some more advanced but still basic
+                topics. Chapter 6 is needed for continuing with the rest, since it discusses editing
+                files, an ability you need to pass from Linux newbie to Linux user. The following
+                chapters discuss somewhat more advanced topics that you will have to deal with in
+                everyday Linux use.</para>
+            <para>All chapters come with exercises that will test your preparedness for the next chapter.</para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <xref linkend="chap_01"/>: What is Linux, how did it come into existence, advantages and disadvantages, what does the future hold for Linux, 
+                        who should use it, installing your computer.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <xref linkend="chap_02"/>: Getting started, connecting to the system, basic
+                        commands, where to find help.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <xref linkend="chap_03"/>: The filesystem, important files and directories,
+                        managing files and directories, protecting your data.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <xref linkend="chap_04"/>: Understanding and managing processes, boot and
+                        shutdown procedures, postponing tasks, repetitive tasks.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <xref linkend="chap_05"/>: What are standard input, output and error and how
+                        are these features used from the command line.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <xref linkend="chap_06"/>: Why you should learn to work with an editor,
+                        discussion of the most common editors.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <xref linkend="chap_07"/>: Configuring your graphical, text and audio
+                        environment, settings for the non-native English speaking Linux user, tips
+                        for adding extra software.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <xref linkend="chap_08"/>: Converting files to a printable format, getting
+                        them out of the printer, hints for solving print problems.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <xref linkend="chap_09"/>: Preparing data to be backed up, discussion of
+                        various tools, remote backup.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <xref linkend="chap_10"/>: Overview of Linux networking tools and user
+                        applications, with a short discussion of the underlying service daemon
+                        programs and secure networking.</para>
+                </listitem>
+		<listitem>
+		<para><xref linkend="chap_11"/>: Sound and video, including Voice over IP and sound recording is discussed in this chapter.</para></listitem>
+                <listitem>
+                    <para>
+                        <xref linkend="app1"/>: Which books to read and sites to visit when you have
+                        finished reading this one.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <xref linkend="app2"/>: A comparison.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <xref linkend="app3"/>: If you ever get stuck, these tables might be an
+                        outcome. Also a good argument when your boss insists that YOU should use HIS
+                        favorite shell.</para>
+                </listitem>
+            </itemizedlist>
+
+        </section>
+    </preface>
+    <toc/> &chap1; &chap2; &chap3; &chap4; &chap5; &chap6; &chap7;
+    &chap8; &chap9; &chap10; &chap11; &app1; &app2; &app3; &gloss;
+<index/>
+</book>

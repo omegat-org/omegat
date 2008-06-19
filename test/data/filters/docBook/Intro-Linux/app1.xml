@@ -1,0 +1,332 @@
+<appendix id="app1">
+    <title>Where to go from here?</title>
+    <abstract>
+        <para>This document gives an overview of useful books and sites.</para>
+    </abstract>
+    <sect1>
+        <title>Useful Books</title>
+        <sect2>
+            <title>General Linux</title>
+            <itemizedlist>
+                <listitem>
+                    <para>"Linux in a Nutshell" by Ellen Siever, Jessica P. Hackman, Stephen
+                        Spainhour, Stephen Figgins, O'Reilly UK, ISBN 0596000251</para>
+                </listitem>
+                <listitem>
+                    <para>"Running Linux" by Matt Welsh, Matthias Kalle Dalheimer, Lar Kaufman,
+                        O'Reilly UK, ISBN 156592469X</para>
+                </listitem>
+                <listitem>
+                    <para>"Linux Unleashed" by Tim Parker, Bill Ball, David Pitts, Sams, ISBN 0672316889</para>
+                </listitem>
+                <listitem>
+                    <para>"When You Can't Find Your System Administrator" by Linda Mui, O'Reilly UK,
+                        ISBN 1565921046</para>
+                </listitem>
+                <listitem>
+                    <para>When you actually buy a distribution, it will contain a very decent user manual.</para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+        <sect2>
+            <title>Editors</title>
+            <itemizedlist>
+                <listitem>
+                    <para>"Learning the Vi Editor" by Linda Lamb and Arnold Robbins, O'Reilly UK,
+                        ISBN 1565924266</para>
+                </listitem>
+                <listitem>
+                    <para>"GNU Emacs Manual" by Richard M.Stallman, iUniverse.Com Inc., ISBN 0595100333</para>
+                </listitem>
+                <listitem>
+                    <para>"Learning GNU Emacs" by Debra Cameron, Bill Rosenblatt and Eric Raymond,
+                        O'Reilly UK, ISBN 1565921526</para>
+                </listitem>
+                <listitem>
+                    <para>"Perl Cookbook" by Tom Christiansen and Nathan Torkington, O'Reilly UK,
+                        ISBN 1565922433</para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+        <sect2>
+            <title>Shells</title>
+            <itemizedlist>
+                <listitem>
+                    <para>"Unix Shell Programming" by Stephen G.Kochan and Patrick H.Wood, Sams
+                        Publishing, ISBN 067248448X</para>
+                </listitem>
+                <listitem>
+                    <para>"Learning the Bash Shell" by Cameron Newham and Bill Rosenblatt, O'Reilly
+                        UK, ISBN 1565923472</para>
+                </listitem>
+                <listitem>
+                    <para>"The Complete Linux Shell Programming Training Course" by Ellie Quigley
+                        and Scott Hawkins, Prentice Hall PTR, ISBN 0130406767</para>
+                </listitem>
+                <listitem>
+                    <para>"Linux and Unix Shell Programming" by David Tansley, Addison Wesley
+                        Publishing Company, ISBN 0201674726</para>
+                </listitem>
+                <listitem>
+                    <para>"Unix C Shell Field Guide" by Gail and Paul Anderson, Prentice Hall, ISBN 013937468X</para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+        <sect2>
+            <title>X Window</title>
+            <itemizedlist>
+                <listitem>
+                    <para>"Gnome User's Guide" by the Gnome Community, iUniverse.Com Inc., ISBN 0595132251</para>
+                </listitem>
+                <listitem>
+                    <para>"KDE Bible" by Dave Nash, Hungry Minds Inc., ISBN 0764546929</para>
+                </listitem>
+                <listitem>
+                    <para>"The Concise Guide to XFree86 for Linux" by Aron HSiao, Que, ISBN 0789721821</para>
+                </listitem>
+                <listitem>
+                    <para>"The New XFree86" by Bill Ball, Prima Publishing, ISBN 0761531521</para>
+                </listitem>
+                <listitem>
+                    <para>"Beginning GTK+ and Gnome" by Peter Wright, Wrox Press, ISBN 1861003811</para>
+                </listitem>
+                <listitem>
+                    <para>"KDE 2.0 Development" by David Sweet and Matthias Ettrich, Sams
+                        Publishing, ISBN 0672318911</para>
+                </listitem>
+                <listitem>
+                    <para>"GTK+/Gnome Application Development" by Havoc Pennington, New Riders
+                        Publishing, ISBN 0735700788</para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+        <sect2>
+            <title>Networking</title>
+            <itemizedlist>
+                <listitem>
+                    <para>"TCP/IP Illustrated, Volume I: The Protocols" by W. Richard Stevens,
+                        Addison-Wesley Professional Computing Series, ISBN 0-201-63346-9</para>
+                </listitem>
+                <listitem>
+                    <para>"DNS and BIND" by Paul Albitz, Cricket Liu, Mike Loukides and Deborah
+                        Russell, O'Reilly &amp; Associates, ISBN 0596001584</para>
+                </listitem>
+                <listitem>
+                    <para>"The Concise Guide to DNS and BIND" by Nicolai Langfeldt, Que, ISBN 0789722739</para>
+                </listitem>
+                <listitem>
+                    <para>"Implementing LDAP" by Mark Wilcox, Wrox Press, ISBN 1861002211</para>
+                </listitem>
+                <listitem>
+                    <para>"Understanding and deploying LDAP directory services" by Tim Howes and
+                        co., Sams, ISBN 0672323168</para>
+                </listitem>
+                <listitem>
+                    <para>"Sendmail" by Brian Costales and Eric Allman, O'Reilly UK, ISBN 1565922220</para>
+                </listitem>
+                <listitem>
+                    <para>"Removing the Spam : Email Processing and Filtering" by Geoff Mulligan,
+                        Addison Wesley Publishing Company, ISBN 0201379570</para>
+                </listitem>
+                <listitem>
+                    <para>"Managing IMAP" by Dianna &amp; Kevin Mullet, O'Reilly UK, ISBN 059600012X</para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>
+    <sect1>
+        <title>Useful sites</title>
+        <sect2>
+            <title>General information</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.tldp.org">The Linux documentation project</ulink>:
+                        all docs, manpages, HOWTOs, FAQs</para>
+                </listitem>
+		<listitem>
+		    <para>
+		    	<ulink url="http://www.linuxquestions.org">LinuxQuestions.org</ulink>: forum, downloads, docs and much more</para>
+		</listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.google.com/linux">Google for Linux</ulink>: the
+                        specialized search engine</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://groups.google.com">Google Groups</ulink>: an archive of all newsgroup
+                        postings, including the comp.os.linux hierarchy</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://slashdot.org">Slashdot</ulink>: daily news</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.oreilly.com">http://www.oreilly.com</ulink>: books on
+                        Linux System and Network administration, Perl, Java, ...</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.posix.com/posix.html">POSIX</ulink>: the standard</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.linuxhq.com">Linux HQ</ulink>: Maintains a complete
+                        database of source, patches and documentation for various versions of the
+                        Linux kernel.</para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+        <sect2>
+            <title>Architecture Specific References</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.alphalinux.org">AlphaLinux</ulink>: Linux on Alpha
+                        architecture (e.g. Digital Workstation)</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.linux-mips.org">Linux-MIPS</ulink>: Linux on MIPS
+                        (e.g. SGI Indy)</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://tldp.org/LDP/Mobile-Guide/html/index.html">Linux on the Road</ulink>: Specific guidelines for installing and running Linux on
+                        laptops, PDAs, mobile phones and so on.  Configuration files for various models.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.mklinux.org">MkLinux</ulink>: Linux on Apple</para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+        <sect2>
+            <title>Distributions</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <ulink url="http://fedora.redhat.com/">The Fedora Project</ulink>:
+                        RedHat-sponsored community effort OS.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.mandriva.com">Mandriva</ulink>
+                    </para>
+                </listitem>
+		<listitem>
+		<para>
+			<ulink url="http://www.ubuntu.com">Ubuntu</ulink>
+		</para>
+		</listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.debian.org">Debian</ulink>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.turbolinux.com">TurboLinux</ulink>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.slackware.com">Slackware</ulink>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.suse.de">SuSE</ulink>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.linuxiso.org">LinuxISO.org</ulink>: CD images for all distributions.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.knoppix.org/">Knoppix</ulink>: distribution that runs
+                        from a CD, you don't need to install anything for this one.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.distrowatch.com/">DistroWatch.com</ulink>: find a
+                        Linux that goes with your style.</para>
+                </listitem>
+                <listitem>
+                    <para>...</para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+        <sect2>
+            <title>Software</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <ulink url="http://freshmeat.net">Freshmeat</ulink>: new software, software archives</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.openssh.org">OpenSSH</ulink>: Secure SHell site</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.openoffice.org">OpenOffice</ulink>: MS compatible
+                        Office Suite</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.kde.org">KDE</ulink>: K Desktop site</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.gnu.org">GNU</ulink>: GNU and GNU software</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.gnome.org">Gnome</ulink>: The official Gnome site</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.rpmfind.net">RPM Find</ulink>: all RPM packages</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.samba.org">Samba</ulink>: MS Windows file and print services</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.openldap.org">Home of the OpenLDAP Project</ulink>:
+                        OpenLDAP server/clients/utilities, FAQ and other documentation.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.sendmail.org">Sendmail Homepage</ulink>: A thorough
+                        technical discussion of Sendmail features, includes configuration examples.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://netfilter.samba.org">Netfilter</ulink>: contains assorted
+                        information about iptables: HOWTO, FAQ, guides, ...</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.gimp.org">Official GIMP website</ulink>: All
+                        information about the GNU Image Manipulation Program.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://sourceforge.net/">SourceForge.net</ulink>: Open SOurce
+                        software development site.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.vim.org/">vIm homepage</ulink>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>
+</appendix>

@@ -1,0 +1,1058 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<chapter id="chap_10"><title>Networking</title>
+<abstract>
+<para>When it comes to networking, Linux is your operating system of choice, not only because networking is tightly integrated with the OS itself and a wide variety of free tools and applications are available, but for the robustness under heavy loads that can only be achieved after years of debugging and testing in an Open Source project.</para>
+<para>Bookshelves full of information have been written about Linux and networking, but we will try to give an overview in this chapter.  After completing this, you will know more about</para>
+<para>
+<itemizedlist>
+<listitem><para>Supported networking protocols</para></listitem>
+<listitem><para>Network configuration files</para></listitem>
+<listitem><para>Commands for configuring and probing the network</para></listitem>
+<listitem><para>Daemons and client programs enabling different network applications</para></listitem>
+<listitem><para>File sharing and printing</para></listitem>
+<listitem><para>Remote execution of commands and applications</para></listitem>
+<listitem><para>Basic network interconnection</para></listitem>
+<listitem><para>Secure execution of remote applications</para></listitem>
+<listitem><para>Firewalls and intrusion detection</para></listitem>
+</itemizedlist>
+</para>
+</abstract>
+<sect1 id="sect_10_01"><title>Networking Overview</title>
+<sect2 id="sect_10_01_01"><title>The OSI Model</title>
+<para>A protocol<indexterm><primary>networking</primary><secondary>protocols</secondary></indexterm> is, simply put, a set of rules for communication.</para>
+<para>In order to get data over the network, for instance an E-mail from your computer to some computer at the other end of the world, lots of different hard- and software needs to work together.</para>
+<para>All these pieces of hardware and the different software programs speak different languages.  Imagine your E-mail program: it is able to talk to the computer operating system, through a specific protocol, but it is not able to talk to the computer hardware.  We need a special program in the operating system that performs this function.  In turn, the computer needs to be able to communicate with the telephone line or other Internet hookup method.  And behind the scenes, network connection hardware needs to be able to communicate in order to pass your E-mail from one appliance to the other, all the way to the destination computer.</para>
+<para>All these different types of communication protocols are classified in 7 layers, which are known as the <emphasis>Open Systems Interconnection Reference Model<indexterm><primary>networking</primary><secondary>OSI Model</secondary></indexterm></emphasis>, the <emphasis>OSI Model<indexterm><primary>OSI Model</primary></indexterm></emphasis> for short.  For easy understanding, this model is reduced to a 4-layer protocol description, as described in the table below:</para>
+<table id="layered_model" frame="all">
+<title>The simplified OSI Model</title>
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead>
+<row><entry>Layer name</entry><entry>Layer Protocols</entry></row>
+</thead>
+<tbody>
+<row><entry>Application layer</entry><entry>HTTP, DNS, SMTP, POP, ...</entry></row>
+<row><entry>Transport layer</entry><entry>TCP, UDP</entry></row>
+<row><entry>Network layer</entry><entry>IP, IPv6</entry></row>
+<row><entry>Network access layer</entry><entry>PPP, PPPoE, Ethernet</entry></row>
+</tbody>
+</tgroup>
+</table>
+
+
+<para>Each layer can only use the functionality of the layer below; each layer can only export functionality to the layer above.  In other words: layers communicate only with adjacent layers.  Let's take the example of your E-mail message again: you enter it through the application layer.  In your computer, it travels down the transport and network layer.  Your computer puts it on the network through the network access layer.  That is also the layer that will move the message around the world.  At the destination, the receiving computer will accept the message through it's own network layer, and will display it to the recepient using the transport and application layer.</para>
+
+<note><title>It's really much more complicated</title>
+<para>The above and following sections are included because you will come across some networking terms sooner or later; they will give you some starting points, should you want to find out about the details.</para>
+</note>
+</sect2>
+
+<sect2 id="sect_10_01_02"><title>Some popular networking protocols</title>
+<para>Linux supports many different networking<indexterm><primary>networking</primary><secondary>protocol overview</secondary></indexterm> protocols.  We list only the most important:</para>
+<sect3 id="sect_10_01_02_01"><title>TCP/IP</title>
+<para>The <emphasis>Transport Control Protocol<indexterm><primary>Transport Control Protocol</primary></indexterm></emphasis> and the <emphasis>Internet Protocol<indexterm><primary>Internet Protocol</primary></indexterm></emphasis> are the two most popular ways of communicating on the Internet.  A lot of applications, such as your browser and E-mail program, are built on top of this protocol suite.</para>
+<para>Very simply put, IP provides a solution for sending packets of information from one machine to another, while TCP<indexterm><primary>protocols</primary><secondary>TCP/IP</secondary></indexterm> ensures that the packets are arranged in streams, so that packets from different applications don't get mixed up, and that the packets are sent and received in the correct order.</para>
+<para>A good starting point for learning more about TCP and IP is in the following documents:</para>
+<itemizedlist>
+<listitem><para><command>man <option>7</option> <parameter>ip</parameter></command>: Describes the IPv4 protocol implementation on Linux (version 4 currently being the most wide-spread edition of the IP protocol).</para></listitem>
+<listitem><para><command>man <option>7</option> <parameter>tcp</parameter></command>: Implementation of the TCP protocol.</para></listitem>
+<listitem><para>RFC793, RFC1122, RFC2001 for TCP, and RFC791, RFC1122 and RFC1112 for IP.</para>
+<para>The <ulink url="http://www.ietf.org/rtf/">Request For Comments</ulink> documents contain the descriptions of networking standards, protocols, applications and implementation.  These documents are managed by the Internet Engineering Task Force<indexterm><primary>networking</primary><secondary>IETF</secondary></indexterm>, an international community concerned with the smooth operation of the Internet and the evolution and development of the Internet architecture.</para>
+<para>Your ISP usually has an RFC archive available, or you can browse the RFCs via <ulink url="http://www.ietf.org/rfc.html" />.</para>
+</listitem>
+</itemizedlist>
+
+
+</sect3>
+<sect3 id="sect_10_01_02_02"><title>TCP/IPv6</title>
+<para>Nobody expected the Internet to grow as fast as it does.  IP proved to have quite some disadvantages when a really large number of computers is in a network, the most important being the availability of unique addresses to assign to each machine participating.  Thus, IP version 6 was deviced to meet the needs of today's Internet.</para>
+<para>Unfortunately, not all applications and services support IPv6<indexterm><primary>protocols</primary><secondary>IPv6</secondary></indexterm>, yet.  A migration is currently being set in motion in many environments that can benefit from an upgrade to IPv6.  For some applications, the old protocol is still used, for applications that have been reworked the new version is already active.  So when checking your network configuration, sometimes it might be a bit confusing since all kinds of measures can be taken to hide one protocol from the other so as the two don't mix up connections.</para>
+<para>More information can be found in the following documents:</para>
+<itemizedlist>
+<listitem><para><command>man <option>7</option> <parameter>ipv6</parameter></command>: the Linux IPv6 protocol implementation.</para></listitem>
+<listitem><para>RFC1883 describing the IPv6 protocol.</para></listitem>
+</itemizedlist>
+
+</sect3>
+<sect3 id="sect_10_01_02_03"><title>PPP, SLIP, PLIP, PPPOE</title>
+<para>The Linux kernel has built-in support<indexterm><primary>protocols</primary><secondary>PPP</secondary></indexterm> for PPP (Point-to-Point-Protocol), SLIP (Serial Line IP), PLIP (Parallel Line IP) and PPPP Over EThernet. PPP is the most popular way individual users access their ISP (Internet Service Provider), although in densely populated areas it is often being replaced by PPPOE, the protocol used for ADSL (Asymmetric Digital Subscriber Line) connections.</para>
+<para>Most Linux distributions provide easy-to-use tools for setting up an Internet connection.  The only thing you basically need is a username and password to connect to your Internet Service Provider (ISP), and a telephone number in the case of PPP.  These data are entered in the graphical configuration tool, which will likely also allow for starting and stopping the connection to your provider.</para>
+</sect3>
+<sect3 id="sect_10_01_02_04"><title>ISDN</title>
+<para>The Linux kernel has built-in ISDN<indexterm><primary>protocols</primary><secondary>ISDN</secondary></indexterm> capabilities. Isdn4linux controls ISDN PC cards and can emulate a modem with the Hayes command set (<quote>AT</quote> commands). The possibilities range from simply using a terminal program to full connection to the Internet.</para>
+<para>Check your system documentation.</para>
+</sect3>
+<sect3 id="sect_10_01_02_05"><title>AppleTalk</title>
+<para>Appletalk is the name of Apple's<indexterm><primary>protocols</primary><secondary>AppleTalk</secondary></indexterm> internetworking stack. It allows a peer-to-peer network model which provides basic functionality such as file and printer sharing. Each machine can simultaneously act as a client and a server, and the software and hardware necessary are included with every Apple computer.</para>
+<para>Linux provides full AppleTalk networking. Netatalk is a kernel-level implementation of the AppleTalk Protocol Suite, originally for BSD-derived systems. It includes support for routing AppleTalk, serving UNIX and AFS file systems using AppleShare and serving UNIX printers and accessing AppleTalk printers.</para>
+</sect3>
+<sect3 id="sect_10_01_02_07"><title>SMB/NMB</title>
+<para>For compatibility with MS Windows environments, the Samba suite, including support for the NMB<indexterm><primary>protocols</primary><secondary>SMB/NMB</secondary></indexterm> and SMB protocols, can be installed on any UNIX-like system.  The Server Message Block protocol (also called Session Message Block, NetBIOS or LanManager protocol) is used on MS Windows 3.11, NT, 95/98, 2K and XP to share disks and printers.</para>
+<para>The basic functions of the Samba<indexterm><primary>networking</primary><secondary>Samba</secondary></indexterm> suite are:  sharing Linux drives with Windows machines, accessing SMB shares from Linux machines, sharing Linux printers with Windows machines and sharing Windows printers with Linux machines.</para>
+<para>Most Linux distributions provide a <emphasis>samba</emphasis> package, which does most of the server setup and starts up <command>smbd</command>, the Samba server, and <command>nmbd</command>, the netbios name server, at boot time by default.  Samba can be configured graphically, via a web interface or via the command line and text configuration files.  The daemons make a Linux machine appear as an MS Windows host in an MS Windows My Network Places/Network Neighbourhood window; a share from a Linux machine will be indistinguishable from a share on any other host in an MS Windows environment.</para>
+<para>More information can be found at the following locations:</para>
+<itemizedlist>
+<listitem><para><command>man <filename>smb.conf<indexterm><primary>smb.conf</primary></indexterm></filename></command>: describes the format of the main Samba configuration file.</para></listitem>
+<listitem><para>The <ulink url="http://www.samba.org/">Samba Project Documentation</ulink> (or check your local samba.org mirror) contains an easy to read installation and testing guide, which also explains how to configure your Samba server as a Primary Domain Controller.  All the man pages are also available here.</para></listitem>
+</itemizedlist>
+</sect3>
+<sect3 id="sect_10_01_02_08"><title>Miscellaneous protocols</title>
+<para>Linux also has support for Amateur Radio, WAN internetworking (X25, Frame Relay, ATM), InfraRed and other wireless connections, but since these protocols usually require special hardware, we won't discuss them in this document.</para>
+</sect3>
+</sect2>
+</sect1>
+<sect1 id="sect_10_02"><title>Network configuration and information</title>
+<sect2 id="sect_10_02_01"><title>Configuration of network interfaces</title>
+<para>All the big, userfriendly Linux distributions come with various graphical tools, allowing for easy setup of the computer in a local network, for connecting it to an Internet Service Provider or for wireless access.  These tools can be started up from the command line or from a menu<indexterm><primary>network configuration</primary><secondary>graphical tools</secondary></indexterm>:</para>
+<itemizedlist>
+<listitem><para>Ubuntu configuration is done selecting <menuchoice><guimenu>System</guimenu><guimenuitem>Administration</guimenuitem><guisubmenu>Networking</guisubmenu></menuchoice>.</para></listitem>
+<listitem><para>RedHat Linux comes with <command>redhat-config-network</command>, which has both a graphical and a text mode interface.</para></listitem>
+<listitem><para>Suse's YAST or YAST2 is an all-in-one configuration tool.</para></listitem>
+<listitem><para>Mandrake/Mandriva comes with a Network and Internet Configuration Wizard, which is preferably started up from Mandrake's Control Center.</para></listitem>
+<listitem><para>On Gnome systems: <command>gnome-network-preferences</command>.</para></listitem>
+<listitem><para>On KDE systems: <command>knetworkconf</command>.</para></listitem>
+</itemizedlist>
+<para>Your system documentation provides plenty of advice and information about availability and use of tools.</para>
+<para>Information that you will need to provide:</para>
+<itemizedlist>
+<listitem><para>For connecting to the local network, for instance with your home computers, or at work: hostname, domainname and IP address.  If you want to set up your own network, best do some more reading first.  At work, this information is likely to be given to your computer automatically when you boot it up.  When in doubt, it is better not to specify any information than making it up.</para></listitem>
+<listitem><para>For connecting to the Internet: username and password for your ISP, telephone number when using a modem.  Your ISP usually automatically assigns you an IP address and all the other things necessary for your Internet applications to work.</para></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="sect_10_02_02"><title>Network configuration files</title>
+<para>The graphical helper tools edit a specific set of network configuration files, using a couple of basic commands.  The exact names of the configuration files and their location in the file system is largely dependent on your Linux distribution and version.  However, a couple of network configuration files<indexterm><primary>network configuration</primary><secondary>files</secondary></indexterm> are common on all UNIX systems:</para>
+
+<sect3 id="sect_10_02_02_01"><title>/etc/hosts</title>
+<para>The <filename>/etc/hosts<indexterm><primary>hosts</primary></indexterm></filename> file always contains the <emphasis>localhost<indexterm><primary>localhost</primary></indexterm></emphasis> IP address, 127.0.0.1, which is used for interprocess communication.  Never remove this line!  Sometimes contains addresses of additional hosts, which can be contacted without using an external naming service such as DNS (the Domain Name Server).</para>
+<para>A sample <filename>hosts</filename> file for a small home network:</para>
+<screen>
+# Do not remove the following line, or various programs
+# that require network functionality will fail.
+127.0.0.1       localhost.localdomain   localhost
+192.168.52.10	tux.mylan.com		tux
+192.168.52.11	winxp.mylan.com		winxp
+</screen>
+<para>Read more in <command>man <filename>hosts</filename></command>.</para>
+</sect3>
+<sect3 id="sect_10_02_02_02"><title>/etc/resolv.conf</title>
+<para>The <filename>/etc/resolv.conf<indexterm><primary>resolv.conf</primary></indexterm></filename> file configures access to a DNS server, see <xref linkend="sect_10_04_07" />.  This file contains your domain name and the name server(s) to contact:</para>
+<screen>
+search mylan.com
+nameserver 193.134.20.4
+</screen>
+<para>Read more in the <filename>resolv.conf</filename> man page.</para>
+</sect3>
+<sect3 id="sect_10_02_02_03"><title>/etc/nsswitch.conf</title>
+<para>The <filename>/etc/nsswitch.conf<indexterm><primary>nsswitch.conf</primary></indexterm></filename> file defines the order in which to contact different name services.  For Internet use, it is important that <emphasis>dns</emphasis> shows up in the <quote>hosts</quote> line:</para>
+<screen>
+<prompt>[bob@tux ~]</prompt> <command>grep hosts /etc/nsswitch.conf</command>
+hosts:	files dns
+</screen>
+<para>This instructs your computer to look up hostnames and IP addresses first in the <filename>/etc/hosts</filename> file, and to contact the DNS server if a given host does not occur in the local <filename>hosts</filename> file.  Other possible name services to contact are LDAP, NIS and NIS+.</para>
+<para>More in <command>man <filename>nsswitch.conf</filename></command>.</para>
+</sect3>
+</sect2>
+
+<sect2 id="sect_10_02_03"><title>Network configuration commands</title>
+<sect3 id="sect_10_02_03_01"><title>The ip command</title>
+<para>The distribution-specific scripts and graphical tools are front-ends to <command>ip<indexterm><primary>ip</primary></indexterm></command> (or <command>ifconfig<indexterm><primary>ifconfig</primary></indexterm></command> and <command>route<indexterm><primary>route</primary></indexterm></command> on older systems) to display and configure the kernel's networking configuration.</para>
+<para>The <command>ip</command> command is used for assigning IP addresses to interfaces, for setting up routes to the Internet and to other networks, for displaying TCP/IP configurations etcetera.</para>
+<para>The following commands show IP address<indexterm><primary>networking</primary><secondary>display IP address</secondary></indexterm> and routing<indexterm><primary>networking</primary><secondary>display routes</secondary></indexterm> information:</para>
+
+<screen>
+<prompt>benny@home benny&gt;</prompt> <command>ip addr show</command>
+1: lo: &lt;LOOPBACK,UP&gt; mtu 16436 qdisc noqueue 
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 brd 127.255.255.255 scope host lo
+    inet6 ::1/128 scope host 
+2: eth0: &lt;BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc pfifo_fast qlen 100
+    link/ether 00:50:bf:7e:54:9a brd ff:ff:ff:ff:ff:ff
+    inet 192.168.42.15/24 brd 192.168.42.255 scope global eth0
+    inet6 fe80::250:bfff:fe7e:549a/10 scope link 
+
+<prompt>benny@home benny&gt;</prompt> <command>ip route show</command>
+192.168.42.0/24 dev eth0  scope link 
+127.0.0.0/8 dev lo  scope link 
+default via 192.168.42.1 dev eth0 
+
+</screen>
+<para>Things to note:</para>
+<itemizedlist>
+<listitem><para>two network interfaces, even on a system that has only one network interface card: <quote>lo</quote> is the local loop, used for internal network communication; <quote>eth0</quote> is a common<indexterm><primary>networking</primary><secondary>device names</secondary></indexterm> name for a <emphasis>real</emphasis> interface.  Do not ever change the local loop configuration, or your machine will start mallfunctioning!  Wireless interfaces are usually defined as <quote>wlan0</quote>; modem interfaces as <quote>ppp0</quote>, but there might be other names as well.</para></listitem>
+<listitem><para>IP addresses, marked with <quote>inet</quote>: the local loop<indexterm><primary>networking</primary><secondary>local loop</secondary></indexterm> always has 127.0.0.1, the physical interface can have any other combination.</para></listitem>
+<listitem><para>The hardware address of your interface, which might be required as part of the authentication procedure to connect to a network, is marked with <quote>ether</quote>.  The local loop has 6 pairs of all zeros, the physical loop has 6 pairs of hexadecimal characters, of which the first 3 pairs are vendor-specific.</para></listitem>
+</itemizedlist>
+</sect3>
+
+<sect3 id="sect_10_02_03_02"><title>The ifconfig command</title>
+<para>While <command>ip</command> is the most novel way to configure a Linux system, <command>ifconfig</command> is still very popular.  Use it without option for displaying network interface<indexterm><primary>networking</primary><secondary>show IP address</secondary></indexterm> information:</para>
+<screen>
+<prompt>els@asus:~$</prompt> <command>/sbin/ifconfig</command>
+eth0      Link encap:Ethernet  HWaddr 00:50:70:31:2C:14
+          inet addr:60.138.67.31  Bcast:66.255.255.255  Mask:255.255.255.192
+          inet6 addr: fe80::250:70ff:fe31:2c14/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:31977764 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:51896866 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:802207 txqueuelen:1000
+          RX bytes:2806974916 (2.6 GiB)  TX bytes:2874632613 (2.6 GiB)
+          Interrupt:11 Base address:0xec00
+										lo        Link encap:Local Loopback
+	  inet addr:127.0.0.1  Mask:255.0.0.0
+	  inet6 addr: ::1/128 Scope:Host
+	  UP LOOPBACK RUNNING  MTU:16436  Metric:1
+	  RX packets:765762 errors:0 dropped:0 overruns:0 frame:0
+	  TX packets:765762 errors:0 dropped:0 overruns:0 carrier:0
+	  collisions:0 txqueuelen:0
+	  RX bytes:624214573 (595.2 MiB)  TX bytes:624214573 (595.2 MiB)
+</screen>								      
+
+<para>Here, too, we note the most important aspects of the interface configuration:</para>
+<itemizedlist>
+<listitem><para>The IP address is marked with <quote>inet addr</quote>.</para></listitem>
+<listitem><para>The hardware address follows the <quote>HWaddr</quote> tag.</para></listitem>
+</itemizedlist>
+<para>Both <command>ifconfig</command> and <command>ip</command> display more detailed configuration information and a number of statistics about each interface and, maybe most important, whether it is <quote>UP</quote> and <quote>RUNNING</quote>.</para>
+</sect3>
+<sect3 id="sect_10_02_03_03"><title>PCMCIA commands</title>
+<para>On your laptop which you usually connect to the company network using the onboard Ethernet connection, but which you are now to configure for dial-in at home or in a hotel, you might need to activate the PCMCIA<indexterm><primary>networking</primary><secondary>PCMCIA</secondary></indexterm> card.  This is done using the <command>cardctl<indexterm><primary>cardctl</primary></indexterm></command> control utility, or the <command>pccardctl<indexterm><primary>pccardctl</primary></indexterm></command> on newer distributions.</para>
+<para>A usage example:</para>
+<cmdsynopsis><command>cardctl <parameter>insert</parameter></command></cmdsynopsis>
+<para>Now the card can be configured, either using the graphical or the command line interface.  Prior to taking the card out, use this command:</para>
+<cmdsynopsis><command>cardctl <parameter>eject</parameter></command></cmdsynopsis>
+<para>However, a good distribution should provide PCMCIA support in the network configuration tools, preventing users from having to execute PCMCIA commands manually.</para>
+</sect3>
+<sect3 id="sect_10_02_03_04"><title>More information</title>
+<para>Further discussion of network configuration is out of the scope of this document.  Your primary source for extra information is the man pages for the services you want to set up.  Additional reading:</para>
+<itemizedlist>
+<listitem><para><ulink url="http://www.tldp.org/HOWTO/Modem-HOWTO.html">The Modem-HOWTO</ulink>:  Help with selecting, connecting, configuring, trouble-shooting, and understanding analog modems for a PC.</para></listitem>
+<listitem><para><ulink url="http://www.tldp.org/HOWTO/HOWTO-INDEX/networking.html#NETGENERAL">LDP HOWTO Index, section 4.4</ulink>: categorized list of HOWTOs about general networking, protocols, dial-up, DNS, VPNs, bridging, routinfg, security and more.</para></listitem>
+<listitem><para>Most systems have a version of the <filename>ip-cref</filename> file (locate it using the <command>locate</command> command); the PS format of this file is viewable with for instance <command>gv</command>.</para></listitem>
+</itemizedlist>
+</sect3>
+</sect2>
+<sect2 id="sect_10_02_04"><title>Network interface names</title>
+<para>On a Linux machine, the device<indexterm><primary>networking</primary><secondary>device names</secondary></indexterm> name <emphasis>lo</emphasis> or the <emphasis>local loop</emphasis> is linked with the internal 127.0.0.1 address.  The computer will have a hard time making your applications work if this device is not present; it is always there, even on computers which are not networked.</para>
+<para>The first ethernet device, <emphasis>eth0</emphasis> in the case of a standard network interface card, points to your local LAN IP address.  Normal client machines only have one network interface card.  Routers, connecting networks together, have one network device for each network they serve.</para>
+<para>If you use a modem to connect to the Internet, your network device will probably be named <emphasis>ppp0</emphasis>.</para>
+<para>There are many more names, for instance for Virtual Private Network interfaces (VPNs), and multiple interfaces can be active simultaneously, so that the output of the <command>ifconfig</command> or <command>ip</command> commands might become quite extensive when no options are used.  Even multiple interfaces of the same type can be active.  In that case, they are numbered sequentially: the first will get the number 0, the second will get a suffix of 1, the third will get 2, and so on.  This is the case on many application servers, on machines which have a failover configuration, on routers, firewalls and many more.</para>
+</sect2>
+
+<sect2 id="sect_10_02_05"><title>Checking the host configuration with netstat</title>
+<para>Apart from the <command>ip</command> command for displaying<indexterm><primary>networking</primary><secondary>display routes</secondary></indexterm> the network configuration, there's the common <command>netstat</command> command which has a lot of options and is generally useful on any UNIX system.</para>
+<para>Routing information can be displayed with the <option>-nr</option> option to the <command>netstat</command> command:</para>
+<screen>
+<prompt>bob:~&gt;</prompt> <command>netstat -nr</command>
+Kernel IP routing table
+Destination  Gateway      Genmask       Flags MSS Window irtt Iface
+192.168.42.0 0.0.0.0      255.255.255.0 U      40 0         0 eth0
+127.0.0.0    0.0.0.0      255.0.0.0     U      40 0         0 lo
+0.0.0.0      192.168.42.1 0.0.0.0       UG     40 0         0 eth0
+</screen>
+<para>This is a typical client machine in an IP network. It only has one network device, <emphasis>eth0</emphasis>.  The <emphasis>lo</emphasis> interface is the local loop.</para>
+<note><title>The modern way</title>
+<para>The novel way to get this info from your system is by using the <command>ip</command> command:</para>
+<cmdsynopsis><command>ip <parameter>route show</parameter></command></cmdsynopsis>
+</note>
+<para>When this machine tries to contact a host that is on another network than its own, indicated by the line starting with 0.0.0.0, it will send the connection requests to the machine (router) with IP address 192.168.42.1, and it will use its primary interface, eth0, to do this.</para>
+<para>Hosts that are on the same network, the line starting with 192.168.42.0, will also be contacted through the primary network interface, but no router is necessary, the data are just put on the network.</para>
+<para>Machines can have much more complicated routing tables than this one, with lots of different <quote>Destination-Gateway</quote> pairs to connect to different networks.  If you have the occasion to connect to an application server, for instance at work, it is most educating to check the routing information.</para>
+</sect2>
+<sect2 id="sect_10_02_06"><title>Other hosts</title>
+<para>An impressive amount of tools is focused on network management and remote administration of Linux machines.  Your local Linux software mirror will offer plenty of those.  It would lead us too far to discuss them in this document, so please refer to the program-specific documentation.</para>
+<para>We will only discuss some common UNIX/Linux text tools in this section.</para>
+<sect3 id="sect_10_02_06_01"><title>The host command</title>
+<para>To display information on hosts<indexterm><primary>networking</primary><secondary>host lookup</secondary></indexterm> or domains, use the <command>host</command> command<indexterm><primary>host</primary></indexterm>:</para>
+<screen>
+<prompt>[emmy@pc10 emmy]$</prompt> <command>host www.eunet.be</command>
+www.eunet.be. has address 193.74.208.177
+
+<prompt>[emmy@pc10 emmy]$</prompt> <command>host -t any eunet.be</command>
+eunet.be. SOA dns.eunet.be. hostmaster.Belgium.EU.net. 
+  2002021300 28800 7200 604800 86400
+eunet.be. mail is handled by 50 pophost.eunet.be.
+eunet.be. name server ns.EU.net.
+eunet.be. name server dns.eunet.be.
+</screen>
+<para>Similar information can be displayed using the <command>dig<indexterm><primary>dig</primary></indexterm></command> command, which gives additional information about how records are stored in the name server.</para>
+</sect3>
+<sect3 id="sect_10_02_06_02"><title>The ping command</title>
+<para>To check if a host is alive, use <command>ping<indexterm><primary>ping</primary></indexterm></command>.  If your system is configured to send more than one packet, interrupt <command>ping</command> with the <keycap>Ctrl</keycap>+<keycap>C</keycap> key combination<indexterm><primary>networking</primary><secondary>check other hosts</secondary></indexterm>:</para>
+<screen>
+<prompt>[emmy@pc10 emmy]$</prompt> <command>ping a.host.be </command>
+PING a.host.be (1.2.8.3) from 80.20.84.26: 56(84) bytes of data.
+64 bytes from a.host.be(1.2.8.3):icmp_seq=0 ttl=244 time=99.977msec
+--- a.host.be ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/mdev = 99.977/99.977/99.977/0.000 ms
+</screen>
+</sect3>
+<sect3 id="sect_10_02_06_03"><title>The traceroute command</title>
+<para>To check the route that packets follow to a network host, use the <command>traceroute<indexterm><primary>traceroute</primary></indexterm></command> command<indexterm><primary>networking</primary><secondary>trace hosts</secondary></indexterm>:</para>
+<screen>
+<prompt>[emmy@pc10 emmy]$</prompt> <command>/usr/sbin/traceroute www.eunet.be</command>
+traceroute to www.eunet.be(193.74.208.177),30 hops max,38b packets
+1 blob (10.0.0.1)  
+       0.297ms  0.257ms  0.174ms
+2 adsl-65.myprovider.be (217.136.111.1) 
+       12.120ms 13.058ms 13.009ms
+3 194.78.255.177 (194.78.255.177)  
+       13.845ms 14.308ms 12.756ms
+4 gigabitethernet2-2.intl2.gam.brussels.skynet.be (195.238.2.226)
+       13.123ms 13.164ms 12.527ms
+5 pecbru2.car.belbone.be (194.78.255.118) 
+       16.336ms 13.889ms 13.028ms
+6 ser-2-1-110-ias-be-vil-ar01.kpnbelgium.be (194.119.224.9)
+       14.602ms 15.546ms 15.959ms
+7 unknown-195-207-939.eunet.be (195.207.93.49) 
+       16.514ms 17.661ms 18.889ms
+8 S0-1-0.Leuven.Belgium.EU.net (195.207.129.1) 
+       22.714ms 19.193ms 18.432ms
+9 dukat.Belgium.EU.net (193.74.208.178) 22.758ms * 25.263ms
+</screen>
+<para>On some systems, <command>traceroute</command> has been renamed to <command>tracepath</command>.</para>
+</sect3>
+<sect3 id="sect_10_02_06_04"><title>The whois command</title>
+<para>Specific domain name information can be queried using the <command>whois<indexterm><primary>whois</primary></indexterm></command> command, as is explained by many <command>whois</command> servers, like the one<indexterm><primary>networking</primary><secondary>info on hosts</secondary></indexterm> below:</para>
+<screen>
+<prompt>[emmy@pc10 emmy]$</prompt> <command>whois cnn.com</command>
+[whois.crsnic.net]
+
+Whois Server Version 1.3
+
+	$&lt;--snap server message--&gt;
+
+   Domain Name: CNN.COM
+   Registrar: NETWORK SOLUTIONS, INC.
+   Whois Server: whois.networksolutions.com
+   Referral URL: http://www.networksolutions.com
+   Name Server: TWDNS-01.NS.AOL.COM
+   Name Server: TWDNS-02.NS.AOL.COM
+   Name Server: TWDNS-03.NS.AOL.COM
+   Name Server: TWDNS-04.NS.AOL.COM
+   Updated Date: 12-mar-2002
+&gt;&gt;&gt; Last update of whois database: Fri, 5 Apr 2002 05:04:55 EST &lt;&lt;&lt;
+
+The Registry database contains ONLY .COM, .NET, .ORG, .EDU domains
+and Registrars.
+
+[whois.networksolutions.com]
+
+        $&lt;--snap server message--&gt;
+
+Registrant:
+Turner Broadcasting (CNN-DOM)
+   1 CNN Center
+   Atlanta, GA 30303
+
+   Domain Name: CNN.COM
+
+   Administrative Contact:
+        $&lt;--snap contactinfo--&gt;   
+   Technical Contact:
+        $&lt;--snap contactinfo--&gt;   
+   Billing Contact:
+	$&lt;--snap contactinfo--&gt;
+   Record last updated on 12-Mar-2002.
+   Record expires on 23-Sep-2009.
+   Record created on 22-Sep-1993.
+   Database last updated on 4-Apr-2002 20:10:00 EST.
+
+   Domain servers in listed order:
+
+   TWDNS-01.NS.AOL.COM		149.174.213.151
+   TWDNS-02.NS.AOL.COM		152.163.239.216
+   TWDNS-03.NS.AOL.COM		205.188.146.88
+   TWDNS-04.NS.AOL.COM		64.12.147.120
+</screen>
+<para>For other domain names than .com, .net, .org and .edu, you might need to specify the whois server, such as this one for .be domains:</para>
+<cmdsynopsis><command>whois <parameter>domain.be@whois.dns.be</parameter></command></cmdsynopsis>
+</sect3>
+</sect2>
+
+</sect1>
+<sect1 id="sect_10_04"><title>Internet/Intranet applications</title>
+<para>The Linux system is a great platform for offering networking services.  In this section, we will try to give an overview of most common network servers and applications.</para>
+<sect2 id="sect_10_04_01"><title>Server types</title>
+<sect3 id="sect_10_04_01_01"><title>Standalone server</title>
+<para>Offering a service to users can be approached in two ways.  A daemon or service can run in standalone mode, or it can be dependent on another service to be activated.</para>
+<para>Network services that are heavily and/or continuously used, usually run in the standalone mode<indexterm><primary>server types</primary><secondary>standalone</secondary></indexterm>: they are independent program daemons that are always running.  They are most likely started up at system boot time, and they wait for requests on the specific connection points or ports for which they are set up to listen.  When a request comes, it is processed, and the listening continues until the next request.  A web server is a typical example: you want it to be available 24 hours a day, and if it is too busy it should create more listening instances to serve simultaneous users.  Other examples are the large software archives such as <ulink url="http://sourceforge.net">Sourceforge</ulink> or <ulink url="http://tucows.com">your Tucows mirror</ulink>, which must handle thousands of FTP requests per day.</para>
+<para>An example of a standalone network service on your home computer might be the <command>named</command> (name daemon), a caching name server.  Standalone services have their own processes running, you can check any time using <command>ps</command>:</para>
+<screen>
+<prompt>bob:~&gt;</prompt> <command>ps auxw | grep named</command>
+named   908  0.0  1.0 14876 5108 ?   S  Mar14  0:07 named -u named
+</screen>
+<para>However, there are some services that you can use on your PC, even if there is no server process running for that services.  Examples could be the FTP service, the secure copy service or the finger service.  Those services have the Internet Daemon (<command>inetd</command>) listening in their place.</para>
+</sect3>
+<sect3 id="sect_10_04_01_02"><title>(x)inetd</title>
+<para>On your home PC, things are usually a bit calmer.  You may have a small network, for instance, and you may have to transfer files from one PC to another from time to time, using FTP or Samba (for connectivity with MS Windows machines).  In those cases, starting all the services<indexterm><primary>server types</primary><secondary>managed services</secondary></indexterm> which you only need occasionally and having them run all the time would be a waste of resources.  So in smaller setups, you will find the necessary daemons dependent on a central program, that listen on all the ports of the services for which it is responsible.</para>  
+<para>This super-server, the Internet services<indexterm><primary>daemons</primary><secondary>inetd</secondary></indexterm> daemon, is started up at system initialization time.  There are two common implementations: <command>inetd<indexterm><primary>inetd</primary></indexterm></command> and <command>xinetd<indexterm><primary>xinetd</primary></indexterm></command> (the extended Internet services daemon).  One or the other is usually running on every Linux system:</para>
+<screen>
+<prompt>bob:~&gt;</prompt> <command>ps -ef | grep inet</command>
+root  926   1 0 Mar14 ?   00:00:00 xinetd-ipv6 -stayalive -reuse \
+-pidfile /var/run/xinetd.pid
+</screen>
+<para>The services for which the Internet daemon is responsible, are listed in its configuration file, <filename>/etc/inetd.conf<indexterm><primary>inetd.conf</primary></indexterm></filename>, for <command>inetd</command>, and in the directory <filename>/etc/xinetd.d<indexterm><primary>xinetd.d</primary></indexterm></filename> for <command>xinetd</command>.  Commonly managed services include file share and print services, SSH, FTP, telnet, the Samba configuration daemon, talk and time services.</para>
+<para>As soon as a connection request is received, the central server will start an instance of the required server.  Thus, in the example below, when user <emphasis>bob</emphasis> starts an FTP session to the local host, an FTP daemon is running as long as the session is active:</para>
+<screen>
+<prompt>bob:~&gt;</prompt> <command>ps auxw | grep ftp</command>
+bob     793  0.1  0.2  3960 1076 pts/6    S    16:44   0:00 ncftp localhost
+ftp     794  0.7  0.5  5588 2608 ?        SN   16:44   0:00 ftpd: 
+localhost.localdomain: anonymous/bob@his.server.com: IDLE
+</screen>
+<para>Of course, the same happens when you open connections to remote hosts: either a daemon answers directly, or a remote <command>(x)inetd</command> starts the service you need and stops it when you quit.</para>
+</sect3>
+</sect2>
+
+<sect2 id="sect_10_04_02"><title>Mail</title>
+<sect3 id="sect_10_04_02_01"><title>Servers</title>
+<para><application>Sendmail<indexterm><primary>Sendmail</primary></indexterm></application> is the standard mail<indexterm><primary>mail</primary><secondary>servers overview</secondary></indexterm> server<indexterm><primary>servers</primary><secondary>mail</secondary></indexterm> program or Mail Transport Agent for UNIX platforms.  It is robust, scalable, and when properly configured with appropriate hardware, handles thousands of users without blinking.  More information about how to configure <application>Sendmail</application> is included with the <application>sendmail</application> and <application>sendmail-cf</application> packages, you may want to read the <filename>README</filename> and <filename>README.cf</filename> files in <filename>/usr/share/doc/sendmail</filename>.  The <command>man <parameter>sendmail</parameter></command> and <command>man <parameter>aliases</parameter></command> are also useful.</para>
+<para><application>Qmail<indexterm><primary>Qmail</primary></indexterm></application> is another mail server, gaining popularity because it claims to be more secure than <application>Sendmail</application>.  While <application>Sendmail</application> is a monolithic program, <application>Qmail</application> consists of smaller interacting program parts that can be better secured.  <application>Postfix<indexterm><primary>Postfix</primary></indexterm></application> is another mail server which is gaining popularity.</para>
+<para>These servers handle mailing lists, filtering, virus scanning and much more.  Free and commercial scanners are available for use with Linux.  Examples of mailing list<indexterm><primary>mail</primary><secondary>mailing lists</secondary></indexterm> software are <application>Mailman</application>, <application>Listserv</application>, <application>Majordomo</application> and <application>EZmlm</application>.  See the web page of your favorite virus scanner for information on Linux client and server support.  <application>Amavis</application> and <application>Spamassassin</application> are free implementations of a virus<indexterm><primary>mail</primary><secondary>anti-spam/anti-virus</secondary></indexterm> scanner and a spam scanner.</para>
+</sect3>
+<sect3 id="sect_10_04_02_02"><title>Remote mail servers</title>
+<para>The most popular protocols<indexterm><primary>mail</primary><secondary>protocols</secondary></indexterm> to access mail remotely are <emphasis>POP3<indexterm><primary>POP3</primary></indexterm></emphasis> and <emphasis>IMAP4<indexterm><primary>IMAP</primary></indexterm></emphasis>.  IMAP and POP both allow offline operation, remote access to new mail and they both rely on an SMTP server to send mail.</para>
+<para>While POP is a simple protocol, easy to implement and supported by almost any mail client, IMAP is to be preferred because:</para>
+<itemizedlist>
+<listitem><para>It can manipulate persistent message status flags.</para></listitem>
+<listitem><para>It can store as well as fetch mail messages.</para></listitem>
+<listitem><para>It can access and manage multiple mailboxes.</para></listitem>
+<listitem><para>It supports concurrent updates and shared mailboxes.</para></listitem>
+<listitem><para>It is also suitable for accessing Usenet messages and other documents.</para></listitem>
+<listitem><para>IMAP works both on-line and off-line.</para></listitem>
+<listitem><para>it is optimized for on-line performance, especially over low-speed links.</para></listitem>
+</itemizedlist>
+
+</sect3>
+<sect3 id="sect_10_04_02_03"><title>Mail user-agents</title>
+<para>There are plenty of both text and graphical E-mail<indexterm><primary>mail</primary><secondary>client applications</secondary></indexterm> clients, we'll just name a few of the common ones.  Pick your favorite.</para>
+<para>The UNIX <command>mail</command> command has been around for years, even before networking existed.  It is a simple interface to send messages and small files to other users, who can then save the message, redirect it, reply to it etcetera.</para>
+<para>While it is not commonly used as a client anymore, the <command>mail</command> program is still useful, for example to mail the output of a command to somebody:</para>
+<cmdsynopsis><command>mail <email>future.employer@whereIwant2work.com</email> &lt; <filename>cv.txt</filename></command></cmdsynopsis>
+<para>The <command>elm</command> mail reader is a much needed improvement to <command>mail</command>, and so is <command>pine</command> (Pine Is Not ELM).  The <command>mutt</command> mail reader is even more recent and offers features like threading.</para>
+<para>For those users who prefer a graphical interface to their mail (and a tennis elbow or a mouse arm), there are hundreds of options.  The most popular for new users are Mozilla Mail/Thunderbird, which has easy anti-spam configuring options, and Evolution, the MS Outlook clone.  Kmail is popular among KDE users.</para>
+
+  
+<figure><title>Evolution mail and news reader</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/evolution.eps" format="EPS"></imagedata></imageobject><imageobject>
+<imagedata fileref="images/evolution.png" format="PNG"></imagedata>
+</imageobject>
+<textobject>
+<phrase>Evolution E-mail client looks just like MS Outlook.</phrase>
+</textobject>
+</mediaobject>
+</figure>
+
+<para>There are also tens of web mail applications available, such as <application>Squirrelmail</application>, <application>Yahoo!</application> mail, <application>gmail</application> from Google and <application>Hotmail</application>.</para>
+<para>An overview is available via the <ulink url="http://www.tldp.org/HOWTO/Mail-User-HOWTO/index.html">Linux Mail User HOWTO</ulink>.</para>
+
+<para>Most Linux distributions include <command>fetchmail<indexterm><primary>fetchmail</primary></indexterm></command>, a mail-retrieval and forwarding utility.  It fetches mail from remote mail servers (POP, IMAP and some others) and forwards it to your local delivery system.  You can then handle the retrieved mail using normal mail clients.  It can be run in daemon mode to repeatedly poll one or more systems at a specified interval.  Information and usage examples can be found in the Info pages; the directory <filename>/usr/share/doc/fetchmail[-&lt;version&gt;]</filename> contains a full list of features and a FAQ for beginners.</para>
+
+<para>The <command>procmail<indexterm><primary>procmail</primary></indexterm></command> filter can be used for filtering incoming mail, to create mailing lists, to pre-process mail, to selectively forward mail and more.  The accompanying <command>formail<indexterm><primary>formail</primary></indexterm></command> program, among others, enables generation of auto-replies and splitting up mailboxes.  Procmail has been around for years on UNIX and Linux machines and is a very robust system, designed to work even in the worst circumstances.  More information may be found in the <filename>/usr/share/doc/procmail[-&lt;version&gt;]</filename> directory and in the man pages.</para>
+
+<note><title>A note on E-mail Etiquette</title>
+<para>Some people these days seem to think that an E-mail message shouldn't be too formal.  That depends, of course.  If you are writing to someone you don't know, best to keep some distance, just like you would do in a traditional letter.  And don't forget: people you don't know might be male or female...
+</para>
+</note>
+
+</sect3>
+
+</sect2>
+<sect2 id="sect_10_04_03"><title>Web</title>
+<sect3 id="sect_10_04_03_01"><title>The Apache Web Server</title>
+<para><application>Apache<indexterm><primary>Apache</primary></indexterm></application> is by far the most popular web<indexterm><primary>servers</primary><secondary>web</secondary></indexterm> server, used on more than half of all Internet web servers.  Most Linux distributions include <application>Apache</application>.  <application>Apache</application>'s advantages include its modular design, SSL support, stability and speed. Given the appropriate hardware and configuration it can support the highest loads.</para>
+<para>On Linux systems, the server configuration is usually done in the <filename>/etc/httpd</filename> directory.  The most important configuration file is <filename>httpd.conf</filename>; it is rather self-explanatory.  Should you need help, you can find it in the <command>httpd</command> man page or on the <ulink url="http://www.apache.org">Apache website</ulink>.</para>
+</sect3>
+<sect3 id="sect_10_04_03_02"><title>Web browsers</title>
+<para>A number of web browsers<indexterm><primary>web browsers</primary><secondary>overview</secondary></indexterm>, both free and commercial, exist for the Linux platform.  <application>Netscape Navigator</application> as the only decent option has long been a thing of the past, as <application>Mozilla/Firefox</application> offers a competitive alternative running on many other operating systems, like MS Windows and MacOS X as well.</para>
+<para>Amaya is the W3C browser.  Opera is a commercial browser, compact and fast.  Many desktop managers offer web browsing features in their file manager, like <command>nautilus</command>.</para>
+<para>Among the popular text based browsers are <command>lynx</command> and <command>links</command>.  You may need to define proxy servers in your shell, by setting the appropriate variables.  Text browsers are fast and handy when no graphical environment is available, such as when used in scripts.</para>
+</sect3>
+<sect3 id="sect_10_04_03_03"><title>Proxy servers</title>
+<sect4 id="sect_10_04_03_03_01"><title>What is a proxy server?</title>
+<para>Companies and organizations often want their users to use a proxy server<indexterm><primary>servers</primary><secondary>proxy</secondary></indexterm>.  Especially in environments with lots of users, a proxy server can enable faster downloads of web pages.  The proxy server stores web pages.  When a user asks for a web page that has already been requested previously, the proxy server will give that page to the user directly, so that s/he does not need to get it from the Internet, which would take longer.  Of course, measures can be taken so that the proxy server does a quick check and always serves the most recent version of a page.  In some environments, usage of the proxy server is compulsory, in other environments you may have the choice whether or not to use it.</para>
+</sect4>
+<sect4 id="sect_10_04_03_03_02"><title>Proxy configuration</title>
+<para>If you have the proxy server<indexterm><primary>proxy</primary><secondary>configuration</secondary></indexterm> name and port, it should be rather obvious to feed that information into your browser.  However, many (command line) applications depend on the variables <varname>http_proxy<indexterm><primary>http_proxy</primary></indexterm></varname> and <varname>ftp_proxy<indexterm><primary>ftp_proxy</primary></indexterm></varname> for correct functioning.  For your convenience, you might want to add a line like the following to your <filename>~/.bashrc<indexterm><primary>.bashrc</primary></indexterm></filename>:</para>
+<cmdsynopsis><command>export <varname>http_proxy</varname>=<parameter>http://username:password@proxy_server_name:port_number</parameter></command></cmdsynopsis>
+<para>For instance:</para>
+<cmdsynopsis><command>export <varname>http_proxy</varname>=<parameter>http://willy:Appelsi3ntj3@proxy:80</parameter></command></cmdsynopsis>
+<para>If you do not need to give a username and password, simply leave out everything before the <quote>@</quote> sign, this sign included.</para>
+</sect4>
+</sect3>
+</sect2>
+<sect2 id="sect_10_04_04"><title>File Transfer Protocol</title>
+<sect3 id="sect_10_04_04_01"><title>FTP servers</title>
+<para>On a Linux system, an FTP server<indexterm><primary>servers</primary><secondary>FTP</secondary></indexterm> is typically run from <command>xinetd</command>, using the <application>WU-ftpd</application> server<indexterm><primary>FTP</primary><secondary>servers</secondary></indexterm>, although the FTP server may be configured as a stand-alone server on systems with heavy FTP traffic.  See the exercises.</para>
+<para>Other FTP servers include among others <application>vsftpd</application>, <application>Ncftpd</application> and <application>Proftpd</application>.</para>
+<para>Most Linux distributions contain the <application>anonftp</application> package, which sets up an anonymous FTP server tree and accompanying configuration files.</para>
+</sect3>
+<sect3 id="sect_10_04_04_02"><title>FTP clients</title>
+<para>Most Linux distributions include<indexterm><primary>FTP</primary><secondary>clients</secondary></indexterm> <command>ncftp<indexterm><primary>ncftp</primary></indexterm></command>, an improved version of the common UNIX <command>ftp<indexterm><primary>ftp</primary></indexterm></command> command, which you may also know from the Windows command line.  The <command>ncftp</command> program offers extra features such as a nicer and more comprehensible user interface, file name completion, append and resume functions, bookmarking, session management and more:</para>
+<screen>
+<prompt>thomas:~&gt;</prompt> <command>ncftp blob</command>
+NcFTP 3.0.3 (April 15, 2001) by Mike Gleason (ncftp@ncftp.com).
+Connecting to blob...
+blob.some.net FTP server (Version wu-2.6.1-20) ready.
+Logging in...
+Guest login ok, access restrictions apply.
+Logged in to blob.
+<prompt>ncftp / &gt;</prompt> <command>help</command>
+Commands may be abbreviated.  'help showall' shows hidden and 
+unsupported commands.  
+'help &lt;command&gt;' gives a brief description of &lt;command&gt;.
+
+ascii      cat      help      lpage     open     quote    site     
+bgget      cd       jobs      lpwd      page     rename   type     
+bgput      chmod    lcd       lrename   pdir     rhelp    umask    
+bgstart    close    lchmod    lrm       pls      rm       version  
+binary     debug    lls       lrmdir    put      rmdir      
+bookmark   dir      lmkdir    ls        pwd      set        
+bookmarks  get      lookup    mkdir     quit     show       
+<prompt>ncftp / &gt;</prompt> 
+
+</screen>
+<para>Excellent help with lot of examples can be found in the man pages.  And again, a number of GUI applications are available.</para> 
+<warning><title>FTP is insecure!</title>
+<para>Don't use the File Transfer Protocol for non-anonymous login unless you know what you are doing.  Your user name and password might be captured by malevolent fellow network users!  Use secure<indexterm><primary>FTP</primary><secondary>secure FTP</secondary></indexterm> FTP instead; the <command>sftp<indexterm><primary>sftp</primary></indexterm></command> program comes with the Secure SHell suite, see <xref linkend="sect_10_05_04_04" />.</para></warning>
+</sect3>
+</sect2>
+<sect2 id="sect_10_04_05"><title>Chatting and conferencing</title>
+<para>Various clients<indexterm><primary>networking</primary><secondary>chatting and conferencing</secondary></indexterm> and systems are available in each distribution, replacing the old-style IRC text-based chat.  A short and incomplete list of the most popular programs:</para>
+<itemizedlist>
+<listitem><para><command>gaim</command>: multi-protocol instant messaging client for Linux, Windows and Mac, compatible with MSN Messenger, ICQ, IRC and much more; see the Info pages or <ulink url="http://gaim.sourceforge.net">the Gaim site</ulink> for more.</para></listitem>
+<listitem><para><command>xchat</command>: IRC client for the X window system:</para>
+<figure><title>X-Chat</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/xchat.eps" format="EPS"></imagedata></imageobject><imageobject>
+<imagedata fileref="images/xchat.png" format="PNG"></imagedata>
+</imageobject>
+</mediaobject>
+</figure>
+<para>The home page is at <ulink url="http://sourceforge.net/projects/xchat/">SourceForge</ulink>.</para>
+</listitem>
+<listitem><para>aMSN: an MSN clone.</para></listitem>
+<listitem><para><command>Konversation</command>, <command>kopete</command>, <command>KVIrc</command> and many other K-tools from the KDE suite.</para></listitem>
+<listitem><para><command>gnomemeeting</command>: videoconferencing program for UNIX (now <application>Ekiga</application>).</para></listitem>
+<listitem><para><command>jabber</command>: Open Source Instant Messenging platform, compatible with ICQ, AIM, Yahoo, MSN, IRC, SMTP and much more.</para></listitem>
+<listitem><para><command>psi</command>: jabber client, see <ulink url="http://psi.affinix.com/">the PSI Jabber Client Homepage</ulink>.</para></listitem>
+<listitem><para><command>skype</command>: program for making telephone-like calls over the Internet to other <application>Skype</application> users, see <ulink url="http://www.skype.com" /> for more info.  <application>Skype</application> is free but not open.</para></listitem>
+<listitem><para><application>Gizmo</application>: a free (but not open) phone for your computer, see <ulink url="http://www.gizmoproject.com" />.</para></listitem>
+</itemizedlist>
+
+
+</sect2>
+<sect2 id="sect_10_04_06"><title>News services</title>
+<para>Running a <application>Usenet</application> server<indexterm><primary>servers</primary><secondary>news</secondary></indexterm> involves a lot of expertise and fine-tuning, so refer to the <ulink url="http://www.isc.org">INN homepage</ulink> for more information.</para>
+<para>There are a couple of interesting newsgroups in the <emphasis>comp.*</emphasis> hierarchy, which can be accessed using a variety of text and graphical clients.  A lot of mail clients support newsgroup browsing as well, check your program or see your local Open Source software mirror for text clients such as <command>tin</command>, <command>slrnn</command> and <command>mutt</command>, or download Mozilla or one of a number of other graphical clients.</para>
+<para><ulink url="http://deja.com">Deja.com</ulink> keeps a searchable archive of all newsgroups, powered by Google.  This is a very powerful instrument for getting help: chances are very high that somebody has encountered your problem, found a solution and posted it in one of the newsgroups.</para>
+</sect2>
+<sect2 id="sect_10_04_07"><title>The Domain Name System</title>
+<para>All these applications need DNS<indexterm><primary>servers</primary><secondary>DNS</secondary></indexterm> services to match IP addresses to host names and vice versa.  A DNS server does not know all the IP addresses in the world, but networks with other DNS servers which it can query to find an unknown address.  Most UNIX systems can run <command>named<indexterm><primary>named</primary></indexterm></command>, which is part of the BIND (<application>Berkeley Internet Name Domain</application>) package distributed by the Internet Software Consortium<indexterm><primary>ISC</primary></indexterm>.  It can run as a stand-alone caching <emphasis>nameserver<indexterm><primary>nameserver</primary></indexterm></emphasis>, which is often done on Linux systems in order to speed up network access.</para>
+<para>Your main client configuration file is <filename>/etc/resolv.conf<indexterm><primary>resolv.conf</primary></indexterm></filename>, which determines the order in which Domain Name Servers are contacted:</para>
+<screen>
+search somewhere.org
+nameserver 192.168.42.1
+nameserver 193.74.208.137
+</screen>
+<para>More information can be found in the Info pages on <command>named</command>, in the <filename>/usr/share/doc/bind[-&lt;version&gt;]</filename> files and on the <ulink url="http://www.isc.org/products/BIND">Bind project</ulink> homepage.  The <ulink url="http://www.tldp.org/HOWTO/DNS-HOWTO.html">DNS HOWTO</ulink> covers the use of BIND as a DNS server.</para>
+</sect2>
+<sect2 id="sect_10_04_08"><title>DHCP</title>
+<para>DHCP<indexterm><primary>protocols</primary><secondary>DHCP</secondary></indexterm> is the <application>Dynamic Host Configuration Protocol<indexterm><primary>DHCP</primary></indexterm></application>, which is gradually replacing good old <command>bootp</command> in larger environments.  It is used to control<indexterm><primary>servers</primary><secondary>DHCP</secondary></indexterm> vital networking parameters such as IP addresses and name servers of hosts.  DHCP is backward compatible with <command>bootp</command>.  For configuring the server, you will need to read the HOWTO.</para>
+<para>DHCP client machines will usually be configured using a GUI that configures the <command>dhcpcd<indexterm><primary>dhcpcd</primary></indexterm></command>, the DHCP client daemon.  Check your system documentation if you need to configure your machine as a DHCP client.</para>
+</sect2>
+<sect2 id="sect_10_04_09"><title>Authentication services</title>
+<sect3 id="sect_10_04_09_01"><title>Traditional</title>
+<para>Traditionally, users are authenticated locally, using the information stored in <filename>/etc/passwd<indexterm><primary>passwd</primary></indexterm></filename> and <filename>/etc/shadow<indexterm><primary>shadow</primary></indexterm></filename> on each system.  But even when using a network service for authenticating<indexterm><primary>servers</primary><secondary>authentication</secondary></indexterm>, the local files will always be present to configure system accounts for administrative use, such as the root account, the daemon accounts and often accounts for additional programs and purposes.</para>
+<para>These files are often the first candidates for being examined by hackers, so make sure the permissions and ownerships are strictly set as should be:</para>
+<screen>
+<prompt>bob:~&gt;</prompt> <command>ls -l /etc/passwd /etc/shadow</command>
+-rw-r--r--    1 root     root         1803 Mar 10 13:08 /etc/passwd
+-r--------    1 root     root         1116 Mar 10 13:08 /etc/shadow
+</screen>
+</sect3>
+<sect3 id="sect_10_04_09_02"><title>PAM</title>
+<para>Linux can use PAM, the <application>Pluggable Authentication Module</application>, a flexible method of UNIX authentication.  Advantages of PAM<indexterm><primary>PAM</primary></indexterm>:</para>
+<itemizedlist>
+<listitem><para>A common authentication scheme that can be used with a wide variety of applications.
+</para></listitem>
+<listitem><para>PAM can be implemented with various applications without having to recompile the applications to specifically support PAM.</para></listitem>
+<listitem><para>Great flexibility and control over authentication for the administrator and application developer.
+</para></listitem>
+<listitem><para>Application developers do not need to develop their program to use a particular authentication scheme. Instead, they can focus purely on the details of their program.</para></listitem>
+</itemizedlist>
+<para>The directory <filename>/etc/pam.d</filename> contains the PAM configuration files (used to be <filename>/etc/pam.conf</filename>).  Each application or service has its own file.  Each line in the file has four elements:</para>
+<itemizedlist>
+<listitem><para><emphasis>Module</emphasis>:</para>
+<itemizedlist>
+<listitem><para><option>auth</option>: provides the actual authentication (perhaps asking for and checking a password) and sets credentials, such as group membership or Kerberos tickets.</para></listitem>
+<listitem><para><option>account</option>: checks to make sure that access is allowed for the user (the account has not expired, the user is allowed to log in at this time of day, and so on).</para></listitem>
+<listitem><para><option>password</option>: used to set passwords.</para></listitem>
+<listitem><para><option>session</option>: used after a user has been authenticated.  This module performs additional tasks which are needed to allow access (for example, mounting the user's home directory or making their mailbox available).</para>
+</listitem>
+</itemizedlist>
+
+<para>The order in which modules are stacked, so that multiple modules can be used, is very important.</para>
+
+</listitem>
+<listitem><para><emphasis>Control Flags</emphasis>: tell PAM which actions to take upon failure or success.  Values can be <option>required</option>, <option>requisite</option>, <option>sufficient</option> or <option>optional</option>.</para></listitem>
+<listitem><para><emphasis>Module Path</emphasis>: path to the pluggable module to be used, usually in <filename>/lib/security</filename>.</para></listitem>
+<listitem><para><emphasis>Arguments</emphasis>: information for the modules</para></listitem>
+</itemizedlist>
+<para>Shadow password files are automatically detected by PAM.</para>
+<para>More information can be found in the <command>pam</command> man pages or at <ulink url="http://www.kernel.org/pub/linux/libs/pam">the Linux-PAM project</ulink> homepage.</para>
+</sect3>
+<sect3 id="sect_10_04_09_03"><title>LDAP</title>
+<para>The Lightweight Directory Access Protocol<indexterm><primary>protocols</primary><secondary>LDAP</secondary></indexterm> is a client-server system for accessing global or local directory services over a network.  On Linux, the <application>OpenLDAP</application> implementation<indexterm><primary>LDAP</primary></indexterm> is used.  It includes <command>slapd<indexterm><primary>slapd</primary></indexterm></command>, a stand-alone server; <command>slurpd</command>, a stand-alone LDAP replication server; libraries implementing the LDAP protocol and a series of utilities, tools and sample clients.</para>
+<para> The main benefit of using LDAP is the consolidation of certain types of information within your organization. For example, all of the different lists of users within your organization can be merged into one LDAP directory. This directory can be queried by any LDAP-enabled applications that need this information. It can also be accessed by users who need directory information.
+</para><para>
+Other LDAP or X.500 Lite benefits include its ease of implementation (compared to X.500) and its well-defined Application Programming Interface (API), which means that the number of LDAP-enabled applications and LDAP gateways should increase in the future.
+</para><para>
+On the negative side, if you want to use LDAP, you will need LDAP-enabled applications or the ability to use LDAP gateways. While LDAP usage should only increase, currently there are not very many LDAP-enabled applications available for Linux. Also, while LDAP does support some access control, it does not possess as many security features as X.500.
+</para>
+<para> Since LDAP is an open and configurable protocol, it can be used to store almost any type of information relating to a particular organizational structure.  Common examples are mail address lookups, central authentication in combination with PAM, telephone directories and machine configuration databases.</para>
+<para>See your system specific information and the man pages for related commands such as <command>ldapmodify</command> and <command>ldapsearch</command> for details.  More information can be found in the <ulink url="http://www.tldp.org/HOWTO/LDAP-HOWTO.html">LDAP Linux HOWTO</ulink>, which discusses installation, configuration, running and maintenance of an LDAP server on Linux.  The author of this Introduction to Linux document also wrote an <ulink url="http://tille.garrels.be/training/ldap/">LDAP Operations HOWTO</ulink>, describing the basics everyone should know about when dealing with LDAP management, operations and integration of services.</para>
+</sect3>
+</sect2>
+
+</sect1>
+<sect1 id="sect_10_05"><title>Remote execution of applications</title>
+<sect2 id="sect_10_05_01"><title>Introduction</title>
+<para>There are a couple of different ways to execute commands or run programs on a remote<indexterm><primary>commands</primary><secondary>remote execution</secondary></indexterm> machine and have the output, be it text or graphics, sent to your workstation.  The connections<indexterm><primary>networking</primary><secondary>remote execution</secondary></indexterm> can be secure or insecure.  While it is of course advised to use secure connections instead of transporting your password over the network unencrypted, we will discuss some practical applications of the older (unsafe) mechanisms, as they are still useful in a modern networked environment, such as for troubleshooting or running exotic programs.</para>
+</sect2>
+<sect2 id="sect_10_05_02"><title>Rsh, rlogin and telnet</title>
+<para>The <command>rlogin<indexterm><primary>rlogin</primary></indexterm></command> and <command>rsh<indexterm><primary>rsh</primary></indexterm></command> commands for remote login and remote execution of commands are inherited from UNIX.  While seldom used because they are blatantly<indexterm><primary>remote execution</primary><secondary>security</secondary></indexterm> insecure, they still come with almost every Linux distribution for backward compatibility with UNIX programs.</para>
+<para>Telnet, on the other hand, is still commonly used, often by system and network administrators.  Telnet is one of the most powerful tools for remote access to files and remote administration, allowing connections from anywhere on the Internet.  Combined with an X server, remote graphical applications can be displayed locally.  There is no difference between working on the local machine and using the remote machine.</para>
+<para>Because the entire connection<indexterm><primary>security</primary><secondary>remote commands</secondary></indexterm> is unencrypted, allowing <command>telnet<indexterm><primary>telnet</primary></indexterm></command> connections involves taking high security risks.  For normal remote execution of programs, <application>Secure SHell</application> or <command>ssh<indexterm><primary>ssh</primary></indexterm></command> is advised.  We will discuss the secure method later in this section.</para>
+<para>However, <command>telnet</command> is still used in many cases.  Below are some examples in which a mail server and a web server are tested<indexterm><primary>telnet</primary><secondary>examples</secondary></indexterm> for replies:</para>
+<para>Checking that a mail server works:</para>
+<screen>
+<prompt>[jimmy@blob ~]</prompt> <command>telnet mailserver 25</command>
+Trying 192.168.42.1...
+Connected to mailserver.
+Escape character is '^]'.
+220 m1.some.net ESMTP Sendmail 8.11.6/8.11.6; 200302281626
+<command>ehlo some.net</command>
+250-m1.some.net Hello blob.some.net [10.0.0.1], pleased to meet you
+250-ENHANCEDSTATUSCODES
+250-8BITMIME
+250-SIZE
+250-DSN
+250-ONEX
+250-ETRN
+250-XUSR
+250 HELP
+<command>mail from: jimmy@some.net</command>
+250 2.1.0 jimmy@some.net... Sender ok
+<command>rcpt to: davy@some.net</command>
+250 2.1.5 davy@some.net... Recipient ok
+<command>data</command>
+354 Enter mail, end with "." on a line by itself
+<command>test</command>
+<command>.</command>
+250 2.0.0 g2MA1R619237 Message accepted for delivery
+<command>quit</command>
+221 2.0.0 m1.some.net closing connection
+Connection closed by foreign host.
+</screen>
+<para>Checking that a web server answers to basic requests:</para>
+<screen>
+<prompt>[jimmy@blob ~]</prompt> <command>telnet www.some.net 80</command>
+Trying 64.39.151.23...
+Connected to www.some.net.
+Escape character is '^]'.
+<command>HEAD / ;HTTP/1.1</command>
+
+HTTP/1.1 200 OK
+Date: Fri, 22 Mar 2002 10:05:14 GMT
+Server: Apache/1.3.22 (UNIX) (Red-Hat/Linux) 
+ mod_ssl/2.8.5 OpenSSL/0.9.6
+ DAV/1.0.2 PHP/4.0.6 mod_perl/1.24_01
+Last-Modified: Fri, 04 Jan 2002 08:21:00 GMT
+ETag: "70061-68-3c3565ec"
+Accept-Ranges: bytes
+Content-Length: 104
+Connection: close
+Content-Type: text/html
+
+Connection closed by foreign host.
+
+<prompt>[jimmy@blob ~]</prompt>
+</screen>
+<para>This is perfectly safe, because you never have to give a username and/or password for getting the data you want, so nobody can snoop that important information off the cable.</para>
+</sect2>
+<sect2 id="sect_10_05_03"><title>The X Window System</title>
+<sect3 id="sect_10_05_03_01"><title>X features</title>
+<para>As we already explained in Chapter 7 (see <xref linkend="sect_07_03_03" />), the <application>X Window<indexterm><primary>X Window</primary><secondary>features</secondary></indexterm></application> system comes with an X server which serves graphics to clients that need a display.</para>
+<para>It is important to realize the distinction between the X server and the X client application(s).  The X server controls the display directly and is responsible for all input and output via keyboard, mouse and display.  The X client, on the other hand, does not access the input and output devices directly.  It communicates with the X server which handles input and output.  It is the X client which does the real work, like computing values, running applications and so forth.  The X server only opens windows to handle input and output for the specified client.</para>
+<para>In normal operation (graphical mode), every Linux workstation is an X server to itself, even if it only runs client applications.  All the applications you are running (for example, <application>Gimp</application>, a terminal window, your browser, your office application, your CD playing tool, and so on) are clients to your X server.  Server and client are running on the same machine in this case.</para>
+<para>This client/server nature of the X system makes it an ideal environment for remote execution of applications and programs.  Because the process is actually being executed on the remote machine, very little CPU power is needed on the local host.  Such machines, purely acting as servers for X, are called X terminals and were once very popular.  More information may be found in the <ulink url="http://www.tldp.org/HOWTO/Remote-X-Apps.html">Remote X applications mini-HOWTO</ulink>.</para>
+</sect3>
+<sect3 id="sect_10_05_03_02"><title>Telnet and X</title>
+<para>If you would want to use <command>telnet</command> to display<indexterm><primary>remote execution</primary><secondary>X Window</secondary></indexterm> graphical applications running on a remote machine, you first need to give the remote machine access to your display (to your X server!) using the <command>xhost<indexterm><primary>xhost</primary></indexterm></command> command, by typing a command similar to the one below in a terminal window on your local machine:</para>
+<screen>
+<prompt>davy:~&gt;</prompt> <command>xhost +remote.machine.com</command>
+</screen>
+<para>After that, connect to the remote host and tell it to display graphics on the local machine by setting the environment variable <varname>DISPLAY<indexterm><primary>DISPLAY</primary></indexterm></varname>:</para>
+<screen>
+<prompt>[davy@remote ~]</prompt> <command>export DISPLAY="local.host.com:0.0"</command>
+</screen>
+<para>After completing this step, any application started in this terminal window will be displayed on your local desktop, using remote resources for computing, but your local graphical resources (your X server) for displaying the application.</para>
+<para>This procedure assumes that you have some sort of X server (<application>XFree86</application>, <application>X.org</application>, <application>Exceed</application>, <application>Cygwin</application>) already set up on the machine where you want to display images.  The architecture and operating system of the client machine are not important as long as they allow you to run an X server on it.</para>
+<para>Mind that displaying a terminal window from the remote machine is also considered to be a display of an image.</para>
+</sect3>
+</sect2>
+<sect2 id="sect_10_05_04"><title>The SSH suite</title>
+<sect3 id="sect_10_05_04_01"><title>Introduction</title>
+<para>Most UNIX and Linux systems now run <application>Secure SHell<indexterm><primary>Secure SHell</primary><secondary></secondary></indexterm></application> in order to leave out the security<indexterm><primary>security</primary><secondary>Secure SHell</secondary></indexterm> risks that came with <command>telnet</command>.  Most Linux systems will run a version of <application>OpenSSH</application>, an Open Source implementation of the SSH protocol, providing secure encrypted communications between untrusted hosts over an untrusted network.  In the standard setup X connections are automatically forwarded, but arbitrary TCP/IP ports may also be forwarded using a secure channel.</para>
+<para>The <command>ssh<indexterm><primary>ssh</primary></indexterm></command> client connects and logs into the specified host name.  The user must provide his identity to the remote machine as specified in the <filename>sshd_config<indexterm><primary>sshd_config</primary></indexterm></filename> file, which can usually be found in <filename>/etc/ssh</filename>.  The configuration file is rather self-explanatory and by defaults enables most common features.  Should you need help, you can find it in the <command>sshd</command> man pages.</para>
+<para>When the user's identity has been accepted by the server, the server either executes the given command, or logs into the machine and gives the user a normal shell on the remote machine.  All communication with the remote command or shell will be automatically encrypted.</para>
+<para>The session terminates when the command or shell on the remote machine exits and all X11 and TCP/IP connections have been closed.</para>
+<para>When connecting to a host for the first time, using any of the programs that are included in the SSH collection, you need to establish the authenticity of that host and acknowledge<indexterm><primary>Secure SHell</primary><secondary>example</secondary></indexterm> that you want to connect:</para>
+<screen>
+<prompt>lenny ~&gt;</prompt> <command>ssh blob</command>
+The authenticity of host 'blob (10.0.0.1)' can't be established.
+RSA fingerprint is 18:30:50:46:ac:98:3c:93:1a:56:35:09:8d:97:e3:1d.
+Are you sure you want to continue connecting (yes/no)? <command>yes</command>
+Warning: Permanently added 'blob,192.168.30.2' (RSA) to the list of 
+known hosts.
+Last login: Sat Dec 28 13:29:19 2002 from octarine
+This space for rent.
+
+<prompt>lenny is in ~</prompt>
+</screen>
+<para>It is important that you type <quote>yes</quote>, in three characters, not just <quote>y</quote>.  This edits your <filename>~/.ssh/known_hosts</filename> file, see <xref linkend="sect_10_03_04_03" />.</para>
+<para>If you just want to check something on a remote machine and then get your prompt back on the local host, you can give the commands that you want to execute remotely as arguments to <command>ssh</command>:</para>
+<screen>
+<prompt>lenny ~&gt;</prompt> <command>ssh blob who</command>
+jenny@blob's password:
+root     tty2         Jul 24 07:19
+lena	 tty3         Jul 23 22:24
+lena     0:	      Jul 25 22:03
+
+<prompt>lenny ~&gt;</prompt> <command>uname -n</command>
+magrat.example.com
+</screen>
+</sect3>
+<sect3 id="sect_10_05_04_02"><title>X11 and TCP forwarding</title>
+<para>If the <varname>X11Forwarding<indexterm><primary>Secure SHell</primary><secondary>X11Forwarding</secondary></indexterm></varname> entry is set to <emphasis>yes</emphasis> on the target machine and the user is using X applications, the <varname>DISPLAY<indexterm><primary>DISPLAY</primary></indexterm></varname> environment variable is set, the connection to the X11 display is automatically forwarded to the remote side in such a way that any X11 programs started from the shell will go through the encrypted channel, and the connection to the real X server will be made from the local machine.  The user should not manually set <varname>DISPLAY</varname>.  Forwarding of X11 connections can be configured on the command line or in the <command>sshd</command> configuration file.</para>
+<para>The value for <varname>DISPLAY</varname> set by <command>ssh</command> will point to the server machine, but with a display number greater than zero.  This is normal, and happens because <command>ssh</command> creates a <emphasis>proxy</emphasis> X server on the server machine (that runs the X client application) for forwarding the connections over the encrypted channel.</para>
+<para>This is all done automatically, so when you type in the name of a graphical application, it is displayed on your local machine and not on the remote host.  We use <command>xclock</command> in the example, since it is a small program which is generally installed and ideal for testing:</para>
+<figure><title>SSH X11 forwarding</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/ssh_X11.eps" format="EPS"></imagedata></imageobject>
+<imageobject>
+<imagedata fileref="images/ssh_X11.png" format="PNG"></imagedata>
+</imageobject>
+</mediaobject>
+</figure>
+<para>SSH will also automatically set up Xauthority data on the server machine.  For this purpose, it will generate a random authorization cookie, store it in <filename>Xauthority<indexterm><primary>Xauthority</primary></indexterm></filename> on the server, and verify that any forwarded connections carry this cookie and replace it by the real cookie when the connection is opened.  The real authentication cookie is never sent to the server machine (and no cookies are sent in the plain).</para>
+<para>Forwarding of arbitrary TCP/IP connections over the secure channel can be specified either on the command line or in a configuration file.</para>  
+<note><title>The X server</title>
+<para>This procedure assumes that you have a running X server on the client where you want to display the application from the remote host.  The client may be of different architecture and operating system than the remote host, as long as it can run an X server, such as <application>Cygwin</application> (which implements an <application>X.org</application> server for MS Windows clients and others) or <application>Exceed</application>, it should be possible to set up a remote connection with any Linux or UNIX machine.</para></note>
+</sect3>
+<sect3 id="sect_10_03_04_03"><title>Server authentication</title>
+<para>The <command>ssh</command> client/server system automatically maintains and checks a database containing identifications<indexterm><primary>Secure SHell</primary><secondary>server authentication</secondary></indexterm> for all hosts it has ever been used with.  Host keys are stored in <filename>$HOME/.ssh/known_hosts</filename> in the user's home directory.  Additionally, the file <filename>/etc/ssh/ssh_known_hosts</filename> is automatically checked for known hosts.  Any new hosts are automatically added to the user's file.  If a host's identification ever changes, <command>ssh</command> warns about this and disables password authentication to prevent a Trojan horse from getting the user's password.  Another purpose of this mechanism is to prevent man-in-the-middle attacks which could otherwise be used to circumvent the encryption.  In environments where high security is needed, <command>sshd</command> can even be configured to prevent logins to machines whose host keys have changed or are unknown.</para>
+</sect3>
+<sect3 id="sect_10_05_04_04"><title>Secure remote copying</title>
+<para>The SSH suite provides <command>scp<indexterm><primary>Secure SHell</primary><secondary>secure copy</secondary></indexterm></command> as a secure alternative to the <command>rcp</command> command that used to be popular when only <command>rsh</command> existed.  <command>scp<indexterm><primary>scp</primary></indexterm></command> uses <command>ssh</command> for data transfer, uses the same authentication and provides the same security as <command>ssh</command>.  Unlike <command>rcp</command>, <command>scp</command> will ask for passwords or passphrases if they are needed for authentication<indexterm><primary>scp</primary><secondary>example</secondary></indexterm>:</para>
+<screen>
+<prompt>lenny /var/tmp&gt;</prompt> <command>scp Schedule.sdc.gz blob:/var/tmp/</command>
+lenny@blob's password:
+Schedule.sdc.gz  100% |*****************************| 100 KB 00:00
+
+<prompt>lenny /var/tmp&gt;</prompt>
+</screen>
+<para>Any file name may contain a host and user specification to indicate that the file is to be copied to/from that host.  Copies between two remote hosts are permitted.  See the Info pages for more information.</para>
+<para>If you would rather use an FTP-like interface, use <command>sftp</command><indexterm><primary>sftp</primary><secondary>example</secondary></indexterm>:</para>
+<screen>
+<prompt>lenny /var/tmp&gt;</prompt> <command>sftp blob</command>
+Connecting to blob...
+lenny@blob's password:
+
+<prompt>sftp&gt;</prompt> <command>cd /var/tmp</command>
+
+<prompt>sftp&gt;</prompt> <command>get Sch*</command>
+Fetching /var/tmp/Schedule.sdc.gz to Schedule.sdc.gz
+
+<prompt>sftp&gt;</prompt> <command>bye</command>
+
+<prompt>lenny /var/tmp&gt;</prompt>
+</screen>
+<note><title>Secure copy or FTP GUIs</title>
+<para>Don't feel comfortable with the command line yet?  Try <application>Konqueror</application>'s capabilities for secure remote copy, or install <application>Putty</application>.</para>
+</note>
+</sect3>
+<sect3 id="sect_10_05_04_05"><title>Authentication keys</title>
+<para>The <command>ssh-keygen<indexterm><primary>ssh-keygen</primary></indexterm></command> command generates, manages and converts authentication<indexterm><primary>Secure SHell</primary><secondary>authentication keys</secondary></indexterm> keys for <command>ssh</command>.  It can create RSA keys for use by SSH protocol version 1 and RSA or DSA keys for use by SSH protocol version 2.</para>
+<para>Normally each user wishing to use SSH with RSA or DSA authentication runs this once to create the authentication key in <filename>$HOME/.ssh/identity</filename>, <filename>id_dsa</filename> or <filename>id_rsa</filename>.  Additionally, the system administrator may use this to generate host keys for the system.</para>
+<para>Normally this program generates the key and asks for a file in which to store the private key.  The public key is stored in a file with the same name but <emphasis>.pub</emphasis> appended.  The program also asks for a passphrase.  The passphrase may be empty to indicate no passphrase (host keys must have an empty passphrase), or it may be a string of arbitrary length.</para>
+<para>There is no way to recover a lost passphrase.  If the passphrase is lost or forgotten, a new key must be generated and copied to the corresponding public keys.</para>
+<para>We will study SSH keys in the exercises.  All information can be found in the man or <application>Info</application> pages.</para>
+</sect3>
+</sect2>
+<sect2 id="sect_10_05_05"><title>VNC</title>
+<para>VNC or <application>Virtual Network Computing</application> is in fact a remote display<indexterm><primary>VNC</primary></indexterm> system<indexterm><primary>remote execution</primary><secondary>VNC</secondary></indexterm> which allows viewing a desktop environment not only on the local machine on which it is running, but from anywhere on the Internet and from a wide variety of machines and architectures, including MS Windows and several UNIX distributions.  You could, for example, run MS Word on a Windows NT machine and display the output on your Linux desktop.  VNC provides servers as well as clients, so the opposite also works and it may thus be used to display Linux programs on Windows clients.  VNC is probably the easiest way to have X connections on a PC.  The following features make VNC different from a normal X server or commercial implementations:</para>
+<itemizedlist>
+<listitem><para>No state is stored at the viewer side:  you can leave your desk and resume from another machine, continuing where you left.  When you are running a PC X server, and the PC crashes or is restarted, all remote applications that you were running will die.  With VNC, they keep on running.</para></listitem>
+<listitem><para>It is small and simple, no installation needed, can be run from a floppy if needed.</para></listitem>
+<listitem><para>Platform independent with the Java client, runs on virtually everything that supports X.</para></listitem>
+<listitem><para>Sharable:  one desktop may be displayed on multiple viewers.</para></listitem>
+<listitem><para>Free.</para></listitem>
+</itemizedlist>
+<para>More information can be found in the VNC client man pages (<command>man <parameter>vncviewer</parameter></command>) or on the <ulink url="http://www.realvnc.com/">VNC website</ulink>.</para>
+</sect2>
+<sect2 id="sect_10_05_06"><title>The rdesktop protocol</title>
+<para>In order to ease management of MS Windows hosts, recent Linux distributions support the Remote Desktop Protocol (RDP<indexterm><primary>protocols</primary><secondary>RDP</secondary></indexterm>), which is implemented in the <command>rdesktop<indexterm><primary>rdesktop</primary></indexterm></command> client.  The protocol<indexterm><primary>remote execution</primary><secondary>RDP</secondary></indexterm> is used in a number of Microsoft products, including Windows NT Terminal Server, Windows 2000 Server, Windows XP and Windows 2003 Server.</para>
+<para>Surprise your friends (or management) with the fullscreen mode, multiple types of keyboard layouts and single application mode, just like the real thing.  The <command>man <parameter>rdesktop</parameter></command> manual provides more information.  The project's homepage is at <ulink url="http://www.rdesktop.org/" />.</para>
+</sect2>
+<sect2 id="sect_10_05_07"><title>Cygwin</title>
+
+<para><ulink url="http://www.cygwin.com">Cygwin</ulink> provides<indexterm><primary>remote execution</primary><secondary>Cygwin</secondary></indexterm> substantial UNIX functionality on MS Windows systems.  Apart from providing UNIX command line tools and graphical applications, it can also be used to display a Linux desktop on an MS Windows machine, using remote X.  From a <application>Cygwin Bash<indexterm><primary>Cygwin</primary></indexterm></application> shell, type the command</para>
+<cmdsynopsis><command>/usr/X11R6/bin/XWin.exe <option>-query</option> <parameter>your_linux_machine_name_or_IP</parameter></command></cmdsynopsis>
+<para>The connection is by default denied.  You need to change the <application>X Display Manager</application> (XDM) configuration and possibly the <application>X Font Server</application> (XFS) configuration to enable this type of connection, where you get a login screen on the remote machine.  Depending on your desktop manager (<application>Gnome</application>, <application>KDE</application>, other), you might have to change some configurations there, too.</para>
+<para>If you do not need to display the entire desktop, you can use SSH in <application>Cygwin</application>, just like explained in <xref linkend="sect_10_05_04" />. without all the fuss of editing configuration files.</para>
+</sect2>
+
+</sect1>
+<sect1 id="sect_10_06"><title>Security</title>
+<sect2 id="sect_10_06_01"><title>Introduction</title>
+<para>As soon as a computer is connected to the network, all kinds of abuse becomes possible, be it a UNIX-based or any other system.  Admittedly, mountains of papers have been spilled on this subject and it would lead us too far to discuss the subject of security<indexterm><primary>security</primary><secondary>considerations</secondary></indexterm> in detail.  There are, however, a couple of fairly logical things even a novice user can do to obtain a very secure system, because most break-ins are the result of ignorant or careless users.</para>
+<para>Maybe you are asking yourself if this all applies to you, using your computer at home or working at your office on a desktop in a fairly protected environment.  The questions you should be asking yourself, however, are more on the lines of:</para>
+<itemizedlist>
+<listitem><para>Do you want to be in control of your own system?</para></listitem>
+<listitem><para>Do you want to (unwittingly) participate in criminal activities?</para></listitem>
+<listitem><para>Do you want your equipment to be used by someone else?</para></listitem>
+<listitem><para>Do you want to take risks on losing your Internet connection?</para></listitem>
+<listitem><para>Do you want to rebuild your system every time it has been hacked?</para></listitem>
+<listitem><para>Do you want to risk personal or other data loss?</para></listitem>
+</itemizedlist>
+<para>Presuming you don't, we will quickly list the steps you can take to secure your machine.  Extended information can be found in the <ulink url="http://www.tldp.org/HOWTO/Security-HOWTO.html">Linux Security HOWTO</ulink>.</para>
+</sect2>
+<sect2 id="sect_10_06_02"><title>Services</title>
+<para>The goal is to run as few services<indexterm><primary>security</primary><secondary>disable services</secondary></indexterm> as possible.  If the number of ports that are open for the outside world are kept to a minimum, this is all the better to keep an overview.  If services can't be turned off for the local network, try to at least disable them for outside connections.</para>
+<para>A rule of thumb is that if you don't recognize a particular service, you probably won't need it anyway.  Also keep in mind that some services are not really meant to be used over the Internet.  Don't rely on what <emphasis>should</emphasis> be running, check which services are listening<indexterm><primary>security</primary><secondary>check open ports</secondary></indexterm> on what TCP ports using the <command>netstat<indexterm><primary>netstat</primary></indexterm></command> command:</para>
+<screen>
+<prompt>[elly@mars ~]</prompt> <command>netstat -l | grep tcp</command>
+tcp     0      0 *:32769                 *:*      LISTEN
+tcp     0      0 *:32771                 *:*      LISTEN
+tcp     0      0 *:printer               *:*      LISTEN
+tcp     0      0 *:kerberos_master       *:*      LISTEN
+tcp     0      0 *:sunrpc                *:*      LISTEN
+tcp     0      0 *:6001                  *:*      LISTEN
+tcp     0      0 *:785                   *:*      LISTEN
+tcp     0      0 localhost.localdom:smtp *:*      LISTEN
+tcp     0      0 *:ftp                   *:*      LISTEN
+tcp     0      0 *:ssh                   *:*      LISTEN
+tcp     0      0 ::1:x11-ssh-offset      *:*      LISTEN
+</screen>
+<para>Things to avoid:</para>
+<itemizedlist>
+<listitem><para><command>exec<indexterm><primary>exec</primary></indexterm></command>, <command>rlogin<indexterm><primary>rlogin</primary></indexterm></command> and <command>rsh<indexterm><primary>rsh</primary></indexterm></command>, and <command>telnet<indexterm><primary>telnet</primary></indexterm></command> just to be on the safe side.</para></listitem>
+<listitem><para>X11 on server machines.</para></listitem>
+<listitem><para>No lp if no printer is physically attached.</para></listitem>
+<listitem><para>No MS Windows hosts in the network, no Samba required.</para></listitem>
+<listitem><para>Don't allow FTP unless an FTP server is required.</para></listitem>
+<listitem><para>Don't allow NFS and NIS over the Internet, disable all related services on a stand-alone installation.</para></listitem>
+<listitem><para>Don't run an MTA if you're not actually on a mail server.</para></listitem>
+<listitem><para>...</para></listitem>
+</itemizedlist>
+<para>Stop running services using the <command>chkconfig</command> command, the initscripts or by editing the <command>(x)inetd</command> configuration files.
+</para>
+</sect2>
+<sect2 id="sect_10_06_03"><title>Update regularly</title>
+<para>Its ability to adapt quickly in an ever changing environment is what makes Linux thrive.  But it also creates a possibility that security updates<indexterm><primary>security</primary><secondary>updates</secondary></indexterm> have been released even while you are installing a brand new version, so the first thing you should do (and this goes for about any OS you can think of) after installing is getting the updates as soon as possible.  After that, update <emphasis>all</emphasis> the packages you use regularly.</para>
+<para>Some updates may require new configuration files, and old files may be replaced.  Check the documentation, and ensure that everything runs normal after updating.</para>
+<para>Most Linux distributions provide mailing list services for security update announcements, and tools for applying updates to the system.  General Linux only security issues are reported among others at <ulink url="http://linuxsecurity.com">Linuxsecurity.com</ulink>.</para>
+<para>Updating is an ongoing process, so it should be an almost daily habit.</para>
+</sect2>
+<sect2 id="sect_10_06_04"><title>Firewalls and access policies</title>
+<sect3 id="sect_10_06_04_01"><title>What is a firewall?</title>
+<para>In the previous section we already mentioned firewall<indexterm><primary>security</primary><secondary>firewall</secondary></indexterm> capabilities in Linux.  While firewall administration is one of the tasks of your network admin, you should know a couple of things about firewalls.</para>
+<para><emphasis>Firewall</emphasis> is a vague term that can mean anything that acts as a protective barrier between us and the outside world, generally the Internet.  A firewall can be a dedicated system or a specific application that provides this functionality. Or it can be a combination of components, including various combinations of hardware and software. Firewalls are built from <quote>rules</quote> that are used to define what is allowed to enter and/or exit a given system or network.</para>
+<para>After disabling unnecessary services, we now want to restrict accepted services as to allow only the minimum required connections.  A fine example is working from home: only the specific connection between your office and your home should be allowed, connections from other machines on the Internet should be blocked.</para>
+</sect3>
+<sect3 id="sect_10_06_04_02"><title>Packet filters</title>
+<para>The first line of defense is a <emphasis>packet filter<indexterm><primary>security</primary><secondary>packet filters</secondary></indexterm></emphasis>, which can look inside IP packets and make decisions based on the content.  Most common is the <application>Netfilter</application> package, providing the <command>iptables</command> command, a next generation packet filter for Linux.</para>
+<para>One of the most noteworthy enhancements in the newer kernels is the <emphasis>stateful inspection</emphasis> feature, which not only tells what is inside a packet, but also detects if a packet belongs or is related to a new or existing connection.</para>
+<para>The <application>Shoreline Firewall</application> or <application>Shorewall</application> for short is a front-end for the standard firewall functionality in Linux.</para>
+<para>More information can be found at <ulink url="http://www.netfilter.org/">the Netfilter/iptables project page</ulink>.</para>
+</sect3>
+<sect3 id="sect_10_06_04_03"><title>TCP wrappers</title>
+<para>TCP wrapping<indexterm><primary>security</primary><secondary>TCP wrappers</secondary></indexterm> provides much the same results as the packet filters, but works differently.  The wrapper actually accepts the connection attempt, then examines configuration files and decides whether to accept or reject the connection request.  It controls connections at the application level rather than at the network level.</para>
+<para>TCP wrappers are typically used with <command>xinetd</command> to provide host name and IP-address-based access control.  In addition, these tools include logging and utilization management capabilities that are easy to configure.</para>
+<para>The advantages of TCP wrappers are that the connecting client is unaware that wrappers are used, and that they operate separately from the applications they protect.</para>
+<para>The host based access is controlled in the <filename>hosts.allow</filename> and <filename>hosts.deny</filename> files.  More information can be found in the TCP wrapper documentation files in <filename>/usr/share/doc/tcp_wrappers[-&lt;version&gt;/]</filename> or <filename>/usr/share/doc/tcp</filename> and in the man pages for the host based access control files, which contain examples.</para>
+</sect3>
+<sect3 id="sect_10_07_04_04"><title>Proxies</title>
+<para>Proxies<indexterm><primary>servers</primary><secondary>proxy</secondary></indexterm> can perform various duties, not all of which have much to do with security. But the fact that they are an intermediary make proxies<indexterm><primary>security</primary><secondary>proxies</secondary></indexterm> a good place to enforce access control policies, limit direct connections through a firewall, and control how the network behind the proxy looks to the Internet.</para>
+<para>Usually in combination with a packet filter, but sometimes all by themselves, proxies provide an extra level of control.  More information can be found in the <ulink url="http://www.tldp.org/HOWTO/Firewall-HOWTO.html">Firewall HOWTO</ulink> or on the Squid website.</para>
+</sect3>
+<sect3 id="sect_10_07_04_05"><title>Access to individual applications</title>
+<para>Some servers may have their own access control features.  Common examples include <application>Samba</application>, <application>X Window</application>, <application>Bind</application>, <application>Apache</application> and CUPS.  For every service you want to offer check which configuration files apply.</para>
+</sect3>
+<sect3 id="sect_10_07_04_06"><title>Log files</title>
+<para>If anything, the UNIX way of logging<indexterm><primary>files</primary><secondary>logging</secondary></indexterm> all kinds of activities into all kinds of files confirms that <quote>it is doing something.</quote>  Of course, log<indexterm><primary>security</primary><secondary>logs</secondary></indexterm> files should be checked regularly, manually or automatically.  Firewalls and other means of access control tend to create huge amounts of log files, so the trick is to try and only log abnormal activities.</para></sect3>
+</sect2>
+<sect2 id="sect_10_07_05"><title>Intrusion detection</title>
+
+<para> Intrusion Detection Systems<indexterm><primary>security</primary><secondary>intrusion detection</secondary></indexterm> are designed to catch what might have gotten past the firewall. They can either be designed to catch an active break-in attempt in progress, or to detect a successful break-in after the fact. In the latter case, it is too late to prevent any damage, but at least we have early awareness of a problem.  There are two basic types of IDS:  those protecting networks, and those protecting individual hosts.</para>
+<para> For host based IDS, this is done with utilities that monitor the file system for changes. System files that have changed in some way, but should not change, are a dead give-away that something is amiss. Anyone who gets in and gets root access will presumably make changes to the system somewhere. This is usually the very first thing done, either so he can get back in through a backdoor, or to launch an attack against someone else, in which case, he has to change or add files to the system.  Some systems come with the <command>tripwire</command> monitoring system, which is documented at the <ulink url="http://www.tripwire.org">Tripwire Open Source Project</ulink> website.</para> 
+<para>Network intrusion detection is handled by a system that sees all the traffic that passes the firewall (not by portscanners, which advertise usable ports).  <ulink url="http://www.snort.org">Snort</ulink> is an Open Source example of such a program.  Whitehats.com features an open Intrusion detection database, <ulink url="http://www.whitehats.com">arachNIDS</ulink>.  </para>
+</sect2>
+<sect2 id="sect_10_07_06"><title>More tips</title>
+<para>Some general things<indexterm><primary>security</primary><secondary>tips</secondary></indexterm> you should keep in mind:</para>
+<itemizedlist>
+<listitem><para>Do not allow root logins.  UNIX developers came up with the <command>su</command> over two decades ago for extra security.</para></listitem>
+<listitem><para>Direct root access is always dangerous and susceptible to human errors, be it by allowing root login or by using the <command>su <option>-</option></command> command.  Rather than using <command>su</command>, it is even better to use <command>sudo</command> to only execute the command that you need extra permissions for, and to return afterwards to your own environment.</para></listitem>
+<listitem><para>Take passwords seriously.  Use shadow passwords.  Change your passwords regularly.</para></listitem>
+<listitem><para>Try to always use SSH or SSL.  Avoid <command>telnet</command>, FTP and E-mail clients and other client programs which send unencrypted passwords over the network.  Security is not only about securing your computer, it is also about securing your passwords.</para></listitem>
+<listitem><para>Limit resources using <command>quota</command> and/or <command>ulimit</command>.</para></listitem>
+<listitem><para>The mail for root should be delivered to, or at least read by, an actual person.</para></listitem>
+<listitem>
+<para>The <ulink url="http://www.sans.org">SANS institute</ulink> has more tips and tricks, sorted per distribution, with mailing list service.</para></listitem>
+<listitem><para>Check the origin of new software, get it from a trusted place/site.  Verify new packages before installing.</para></listitem>
+<listitem><para>When using a non-permanent Internet connection, shut it down as soon as you don't need it anymore.</para></listitem>
+<listitem><para>Run private services on odd ports instead of the ones expected by possible hackers.</para></listitem>
+<listitem><para>Know your system.  After a while, you can almost feel when something is happening.</para></listitem>
+</itemizedlist>
+</sect2>
+<sect2 id="sect_10_07_07"><title>Have I been hacked?</title>
+<para>How can you tell?  This is a checklist of suspicious<indexterm><primary>security</primary><secondary>intrusion detection</secondary></indexterm> events:</para>
+<itemizedlist>
+<listitem><para>Mysterious open ports, strange processes.</para></listitem>
+<listitem><para>System utilities (common commands) behaving strange.</para></listitem>
+<listitem><para>Login problems.</para></listitem>
+<listitem><para>Unexplained bandwidth usage.</para></listitem>
+<listitem><para>Damaged or missing log files, syslog daemon behaving strange.</para></listitem>
+<listitem><para>Interfaces in unusual modes.</para></listitem>
+<listitem><para>Unexpectedly modified configuration files.</para></listitem>
+<listitem><para>Strange entries in shell history files.</para></listitem>
+<listitem><para>Unidentified temporary files.</para></listitem>
+</itemizedlist>
+</sect2>
+<sect2 id="sect_10_07_08"><title>Recovering from intrusion</title>
+<para>In short, stay calm.  Then take the following actions<indexterm><primary>security</primary><secondary>recovery</secondary></indexterm> in this order:</para>
+<itemizedlist>
+<listitem><para>Disconnect the machine from the network.</para></listitem>
+<listitem><para>Try to find out as much as you can about how your security was breached.</para></listitem>
+<listitem><para>Backup important non-system data.  If possible, check these data against existing backups, made before the system was compromised, to ensure data integrity.</para></listitem>
+<listitem><para>Re-install the system.</para></listitem>
+<listitem><para>Use new passwords.</para></listitem>
+<listitem><para>Restore from system and data backups.</para></listitem>
+<listitem><para>Apply all available updates.</para></listitem>
+<listitem><para>Re-examine the system:  block off unnecessary services, check firewall rules and other access policies.</para></listitem>
+<listitem><para>Reconnect.</para></listitem>
+</itemizedlist>
+</sect2>
+
+</sect1>
+<sect1 id="sect_10_08"><title>Summary</title>
+<para>Linux and networking go hand in hand.  The Linux kernel has support for all common and most uncommon network protocols.  The standard UNIX networking tools are provided in each distribution.  Next to those, most distributions offer tools for easy network installation and management.</para>
+<para>Linux is well known as a stable platform for running various Internet services, the amount of Internet software is endless.  Like UNIX, Linux can be just as well used and administered from a remote location, using one of several solutions for remote execution of programs.</para>
+<para>We briefly touched the subject of security.  Linux is an ideal firewall system, light and cheap, but can be used in several other network functions such as routers and proxy servers.</para>
+<para>Increasing network security is mainly done by applying frequent updates and common sense.</para>
+<para>Here is an overview of network related commands:</para>
+<table frame="all">
+<title>New commands in chapter 10: Networking</title>
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead>
+<row>
+<entry>Command</entry><entry>Meaning</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><command>ftp</command></entry><entry>Transfer files to another host (insecure).</entry>
+</row>
+<row>
+<entry><command>host</command></entry><entry>Get information about networked hosts.</entry>
+</row>
+<row>
+<entry><command>ifconfig</command></entry><entry>Display IP address information.</entry>
+</row>
+<row>
+<entry><command>ip</command></entry><entry>Display IP address information.</entry>
+</row>
+<row>
+<entry><command>netstat</command></entry><entry>Display routing information and network statistics.</entry>
+</row>
+<row>
+<entry><command>ping</command></entry><entry>Send answer requests to other hosts.</entry>
+</row>
+<row>
+<entry><command>rdesktop</command></entry><entry>Display and MS Windows desktop on your Linux system.</entry>
+</row>
+<row>
+<entry><command>route</command></entry><entry>Show routing information.</entry>
+</row>
+<row>
+<entry><command>scp</command></entry><entry>Secure copy files to and from other hosts.</entry>
+</row>
+<row>
+<entry><command>sftp</command></entry><entry>Secure FTP files to and from other hosts.</entry>
+</row>
+<row>
+<entry><command>ssh</command></entry><entry>Make an encrypted connection to another host.</entry>
+</row>
+<row>
+<entry><command>ssh-keygen</command></entry><entry>Generate authentication keys for <application>Secure SHell</application>.</entry>
+</row>
+<row>
+<entry><command>telnet</command></entry><entry>Make an insecure connection to another hosts.</entry>
+</row>
+<row>
+<entry><command>tracepath/traceroute</command></entry><entry>Print the route that packets follow to another host.</entry>
+</row>
+<row>
+<entry><command>whois</command></entry><entry>Get information abotu a domain name.</entry>
+</row>
+<row>
+<entry><command>xclock</command></entry><entry>X Window clock application, handy for testing remote display.</entry>
+</row>
+<row>
+<entry><command>xhost</command></entry><entry>X Window access control tool.</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect1>
+<sect1 id="sect_10_09"><title>Exercises</title>
+
+<sect2 id="sect_10_09_01"><title>General networking</title>
+<itemizedlist>
+<listitem><para>Display network information for your workstation: IP address, routes, name servers.</para></listitem>
+<listitem><para>Suppose no DNS is available.  What would you do to reach your neighbour's machine without typing the IP address all the time?</para></listitem>
+<listitem><para>How would you permanently store proxy information for a text mode browser such as <command>links</command>?</para></listitem>
+<listitem><para>Which name servers handle the redhat.com domain?</para></listitem>
+<listitem><para>Send an E-mail to your local account.  Try two different ways to send and read it.  How can you check that it really arrived?</para></listitem>
+<listitem><para>Does your machine accept anonymous FTP connections?  How do you use the <command>ncftp</command> program to authenticate with your user name and password?</para></listitem>
+<listitem><para>Does your machine run a web server?  If not, make it do so.  Check the log files!</para></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="sect_10_09_02"><title>Remote connections</title>
+<itemizedlist>
+<listitem><para>From your local workstation, display a graphical application, such as <command>xclock</command> on your neighbour's screen.  The necessary accounts will have to be set up.  Use a secure connection!</para></listitem>
+<listitem><para>Set up SSH keys so you can connect to your neighbour's machine without having to enter a password.</para></listitem>
+<listitem><para>Make a backup copy of your home directory in <filename>/var/tmp</filename> on your neighbour's <quote>backup server,</quote> using <command>scp</command>.  Archive and compress before starting the data transfer!  Connect to the remote host using <command>ssh</command>, unpack the backup, and put one file back on the original machine using <command>sftp</command>.</para></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="sect_10_09_03"><title>Security</title>
+<itemizedlist>
+<listitem><para>Make a list of open (listening) ports on your machine.</para></listitem>
+<listitem><para>Supposing you want to run a web server.  Which services would you deactivate?  How would you do that?</para></listitem>
+<listitem><para>Install available updates.</para></listitem>
+<listitem><para>How can you see who connected to your system?</para></listitem>
+<listitem><para>Make a repetitive job that reminds you to change your password every month, and preferably the <emphasis>root</emphasis> password as well.</para></listitem>
+</itemizedlist>
+
+</sect2>
+
+</sect1>
+</chapter>

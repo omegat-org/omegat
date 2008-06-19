@@ -1,0 +1,259 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<chapter id="chap_11"><title>Sound and Video</title>
+<abstract>
+<para>This chapter addresses the following tasks (briefly, as the field of sound and video is very wide):</para>
+<itemizedlist>
+<listitem><para>Sound card configuration</para></listitem>
+<listitem><para>Playing CDs, copying CDs, </para></listitem>
+<listitem><para>Playing music files</para></listitem>
+<listitem><para>Volume control</para></listitem>
+<listitem><para>Video and television</para></listitem>
+<listitem><para>Recording sound</para></listitem>
+</itemizedlist>
+</abstract>
+<sect1 id="sect_11_01"><title>Audio Basics</title>
+<sect2 id="sect_11_01_01"><title>Installation</title>
+<para>Most likely, your system is already installed with audio<indexterm><primary>audio</primary><secondary>drivers</secondary></indexterm> drivers and the configuration was done at installation time.  Likewise, should you ever need to replace your audio hardware, most systems provide tools that allow easy setup and configuration of the device.  Most currently available 
+ plug-and-play sound cards should be recognized automatically.  If you can hear the samples that are played during configuration, just click <guibutton>OK</guibutton> 
+and everything will be set up for you.</para>
+<para>If your card is not detected automatically, you may be presented with a list of sound cards and/or of sound card properties from which to choose.  After that, you will have to provide the correct I/O port, IRQ and DMA settings.  Information about these settings can be found in your sound card documentation.  If you are on a dual boot system with MS Windows, this information can be found in the Windows Control Panel as well.</para>
+<note><title>If automatic sound card detection fails</title>
+<para>
+If your soundcard is not supported by default, you will need to apply other techniques.  These are described in the <ulink url="http://www.tldp.org/HOWTO/Sound-HOWTO/index.html">Linux Sound HOWTO</ulink>.</para>
+</note>
+</sect2>
+<sect2 id="sect_11_01_02"><title>Drivers and Architecture</title>
+<para>There are generally two types of sound architecture<indexterm><primary>audio</primary><secondary>architecture</secondary></indexterm>: the older Open Sound System or OSS<indexterm><primary>audio</primary><secondary>OSS</secondary></indexterm>, which works with every UNIX-like system, and the newer Advanced Linux Sound Architecture<indexterm><primary>audio</primary><secondary>ALSA</secondary></indexterm> or ALSA, that has better support for Linux, as the name indicates.  ALSA also has more features and allows for faster driver development.  We will focus here on the ALSA system.</para>
+
+<para>Today, almost all mainstream audio chipsets are supported.  Only some high-end professional solutions and some cards developed by manufacturers refusing to document their chipset specifications are unsupported.  An overview of supported devices can be found on the ALSA site at <ulink url="http://www.alsa-project.org/alsa-doc/index.php?vendor=All#matrix" />.</para>
+<para>Configuring systems installed with ALSA is done using the <command>alsaconf</command> tool.  Additionally, distributions usually provide their own tools for configuring the sound card; these tools might even integrate the old and the new way of handling sound devices.</para>
+</sect2>
+</sect1>
+<sect1 id="sect_11_02"><title>Sound and video playing</title>
+<sect2 id="sect_11_02_01"><title>CD playing and copying</title>
+<para>The <emphasis>cdp</emphasis> package<indexterm><primary>cdp</primary></indexterm> comes with most distributions and provides <command>cdp</command> or <command>cdplay<indexterm><primary>cdplay</primary></indexterm></command>, a text-based CD player<indexterm><primary>CD</primary><secondary>audio CD playing</secondary></indexterm>.  Desktop managers usually include a graphical tool, such as the <command>gnome-cd<indexterm><primary>gnome-cd</primary></indexterm></command> player in <application>Gnome</application>, that can be started from a menu.</para>
+<para>Be sure to understand the difference between an audio CD and a data CD.  
+You do not have to mount an audio CD into the file system in order to listen to it.  This is because the data on such a CD are not Linux file system data; they are accessed and sent to the audio output channel directly, using a CD player program.  If your CD is a data CD containing <filename>.mp3</filename> files, you will first need to mount it into the file system, and then use one of the programs that we discuss below in order to play the music.  How to mount CDs into the file system is explained in <xref linkend="sect_07_06_05" />.</para>
+<para>The <command>cdparanoia<indexterm><primary>cdparanoia</primary></indexterm></command> tool from the package with the same name
+ reads audio directly<indexterm><primary>CD</primary><secondary>audio CD ripping</secondary></indexterm> as data from the CD, without analog conversions, and writes data to a file or pipe in different formats, of which <filename>.wav</filename> is probably the most popular.  Various tools for conversion to other formats, formats,  
+ such as <filename>.mp3</filename>, come with most distributions or are downloadable as separate packages.  The GNU project provides several CD playing, ripping and encoding tools, database managers; see the <ulink url="http://www.gnu.org/directory/audio/">Free Software Directory, Audio section</ulink> for detailed information.</para>
+ <para>Audio-CD creation is eased, among many others, with the <command>kaudiocreator<indexterm><primary>kaudiocreator</primary></indexterm></command> tool from the KDE suite.  It comes with clear information from the KDE Help Center.</para>
+
+ <para>CD burning is covered in general in <xref linkend="sect_09_02_02" />.</para>
+ </sect2>
+ <sect2 id="sect_11_02_02"><title>Playing music files</title>
+ <sect3 id="sect_11_02_02_01"><title>mp3 files</title>
+ <para>The popular <filename>.mp3</filename> format<indexterm><primary>files</primary><secondary>music files</secondary></indexterm> is widely supported on Linux
+ machines.  Most distributions include multiple programs that can play these files.  Among many other applications, <application>XMMS</application>, which is presented in the screenshot below, is one of the most wide-spread, partially because it has the same look and feel as the Windows tool.</para>
+
+ <figure><title>XMMS mp3 player</title>
+ <mediaobject>
+ <imageobject>
+ <imagedata fileref="images/xmms.eps" format="EPS"></imagedata></imageobject><imageobject>
+ <imagedata fileref="images/xmms.png" format="PNG"></imagedata>
+ </imageobject>
+ <textobject>
+ <phrase>XMMS looks very familiar to MS Windows users, showing a hi-fi installation frontpanel.</phrase>
+ </textobject>
+ </mediaobject>
+ </figure>
+
+ <para>Also very popular for playing music are <application>AmaroK</application>, a KDE application that is steadily gaining popularity, and <application>MPlayer</application>, which can also play movies.</para>
+
+  <note><title>Restrictions</title>
+  <para>Some distributions don't allow you to play MP3's without modifying your configuration, this is due to license restrictions on the MP3 tools.  You might need to install extra software to be able to play your music.</para>
+  </note>
+<para>In text mode, you can use the <command>mplayer<indexterm><primary>mplayer</primary></indexterm></command> command:</para>
+<screen>
+<prompt>[tille@octarine ~]$ </prompt><command>mplayer <filename>/opt/mp3/oriental/*.mp3</filename></command>
+MPlayer 1.0pre7-RPM-3.4.2 (C) 2000-2005 MPlayer Team
+CPU: Advanced Micro Devices Duron Spitfire (Family: 6, Stepping: 1)
+Detected cache-line size is 64 bytes
+CPUflags:  MMX: 1 MMX2: 1 3DNow: 1 3DNow2: 1 SSE: 0 SSE2: 0
+Playing /opt/oldopt/mp3/oriental/Mazika_Diana-Krozon_Super-Star_Ensani-Ma-
+Bansak.mp3.
+Cache fill:  1.17% (98304 bytes)    Audio file detected.
+Clip info:
+Title: Ensani-Ma-Bansak.mp3
+Artist: Diana-Krozon
+Album: Super-Star
+Year:
+Comment:
+Genre: Unknown
+==========================================================================
+Opening audio decoder: [mp3lib] MPEG layer-2, layer-3
+mpg123: Can't rewind stream by 450 bits!
+AUDIO: 44100 Hz, 2 ch, s16le, 160.0 kbit/11.34% (ratio: 20000->176400)
+Selected audio codec: [mp3] afm:mp3lib (mp3lib MPEG layer-2, layer-3)
+==========================================================================
+Checking audio filter chain for 44100Hz/2ch/s16le -> 44100Hz/2ch/s16le...
+AF_pre: 44100Hz/2ch/s16le
+AO: [oss] 44100Hz 2ch s16le (2 bps)
+Building audio filter chain for 44100Hz/2ch/s16le -> 44100Hz/2ch/s16le...
+Video: no video
+Starting playback...
+A: 227.8 (03:23:.1) 1.8% 12%
+</screen>
+</sect3>
+<sect3 id="sect_11_02_02_02"><title>Other formats</title>
+<para>It would lead us too far to discuss all possible audio formats and ways to play them.  An (incomplete) overview of other common sound<indexterm><primary>audio</primary><secondary>applications</secondary></indexterm> playing and manipulating software:</para>
+<itemizedlist>
+<listitem><para>Ogg Vorbis: Free audio format: see <ulink url="http://www.gnu.org/directory/audio/ogg/">the GNU audio directory</ulink> for tools - they might be included in your distribution as well.  The format was developed because MP3 is patented.</para></listitem>
+<listitem><para>Real audio and video: <command>realplay</command> from <ulink url="http://real.com">RealNetworks</ulink>.</para></listitem>
+<listitem><para>SoX or Sound eXchange: actually a sound converter, comes with th
+e <command>play</command> program.  Plays <filename>.wav</filename>, <filename>.
+ogg</filename> and various other formats, including raw binary formats.</para></listitem>
+<listitem><para>Playmidi: a MIDI player, see the GNU directory.</para></listitem>
+<listitem><para>AlsaPlayer: from the Advanced Linux Sound Architecture project, 
+see the <ulink url="http://www.alsaplayer.org">AlsaPlayer web site</ulink>.</para></listitem>
+<listitem><para><command>mplayer</command>: plays just about anything, including
+ mp3 files.  More info on the <ulink url="http://www.mplayerhq.hu/">MPlayerHQ website</ulink>.</para></listitem>
+ <listitem><para><command>hxplay</command>: supports RealAudio and RealVideo, mp3, mp4 audio, Flash, wav and more, see <ulink url="http://www.helixdna.com">HelixDNA</ulink> (not all components of this software are completely free).</para></listitem>
+ <listitem><para><command>rhythmbox</command>: based on the <application>GStreamer</application> framework, can play everything supported in <application>GStreamer</application>, which claims to be able to play everything, see the <ulink url="http://www.rhythmbox.org">Rhythmbox</ulink> and <ulink url="http://gstreamer.freedesktop.org">GStreamer</ulink> sites.</para></listitem>
+ </itemizedlist>
+
+ <para>Check your system documentation and man pages for particular tools and detailed explanations on how to use them.</para>
+
+ <note><title>I don't have these applications on my system!</title>
+ <para>A lot of the tools and applications discussed in the above sections are optional software.  It is possible that such applications are not installed on your system by default, but that you can find them in your distribution as additional packages.  It might also very well be that the application that you are looking for is not in your distribution at all.  In that case, you need to download it from the application's web site.</para>
+ </note>
+ </sect3>
+<sect3 id="sect_11_02_02_03"><title>Volume control</title>
+<para><command>aumix<indexterm><primary>aumix</primary></indexterm></command> and <command>alsamixer<indexterm><primary>alsamixer</primary></indexterm></command> are two common text tools for adjusting audio<indexterm><primary>audio</primary><secondary>volume control</secondary></indexterm> controls.  Use the arrow keys to toggle settings.  The <command>alsamixer</command> has a graphical interface when started from the <application>Gnome</application> menu or as <command>gnome-alsamixer<indexterm><primary>gnome-alsamixer</primary></indexterm></command> from the command line.  The <command>kmix<indexterm><primary>kmix</primary></indexterm></command> tool does the same in KDE.</para>
+<para>Regardless of how you choose to listen to music or other sounds, remember that there may be other people who may not be interested in hearing you or your 
+computer.  Try to be courteous, especially in office environments.  Use a quality head-set, rather than the ones with the small ear pieces.  This is better for your ears and causes less distraction for your colleagues.</para>
+</sect3>
+</sect2>
+<sect2 id="sect_11_02_03"><title>Recording</title>
+<para>Various tools are again available that allow you to record voice and music.  For recording voice you can use <command>arecord<indexterm><primary>arecord</primary></indexterm></command> on the command<indexterm><primary>audio</primary><secondary>recording</secondary></indexterm> line:</para>
+<screen>
+<prompt>alexey@russia:~&gt;</prompt> <command>arecord <filename>/var/tmp/myvoice.wav</filename></command>
+Recording WAVE '/var/tmp/myvoice.wav' : Unsigned 8 bit, Rate 8000 Hz, Mono
+Aborted by signal Interrups...
+</screen>
+<para><quote>Interrupt</quote> means that the application has caught a <keycap>Ctrl</keycap>+<keycap>C</keycap>.  Play the sample using the simple <command>play</command> command.</para>
+<para>This is a good test that you can execute prior to testing applications that need voice input, like Voice over IP (VoIP).  Keep in mind that the microphone input should be activated.  If you don't hear your own voice, check your sound settings.  It often happens that the microphone is muted or on verry low volume.  This can be easily adjusted using <command>alsamixer</command> or your distribution-specific graphical interface to the sound system.</para>
+<para>In KDE you can start the <command>krec<indexterm><primary>krec</primary></indexterm></command> utility, <application>Gnome</application> provides the <command>gnome-sound-recorder<indexterm><primary>gnome-sound-recorder</primary></indexterm></command>.</para>
+</sect2>
+</sect1>
+<sect1 id="sect_11_02_04"><title>Video playing, streams and television watching</title>
+<para>Various players<indexterm><primary>video</primary><secondary>applications</secondary></indexterm> are available:</para>
+<itemizedlist>
+<listitem><para><command>xine</command>: a free video player</para></listitem>
+<listitem><para><command>ogle</command>: DVD player.</para></listitem>
+<listitem><para><command>okle</command>: KDE version of <command>ogle</command></para></listitem>
+<listitem><para><command>mplayer</command>: Movie Player for Linux</para></listitem>
+<listitem><para><command>totem</command>: plays both audio and video files, audio CDs, VCD and DVD.</para></listitem>
+<listitem><para><command>realplay</command>: from RealNetworks.</para></listitem>
+<listitem><para><command>hxplay</command>: a Real alternative, see <ulink url="http://helixcommunity.org">HelixDNA</ulink>.</para></listitem>
+<listitem><para><command>kaffeine</command>: media player for KDE3.</para></listitem>
+</itemizedlist>
+<para>Most likely, you will find one of these in your graphical menus.</para>
+<para>Keep in mind that all codecs necessary for viewing different types of video might not be on your system by default.  You can get a long way downloading <application>W32codecs</application> and <application>libdvdcss</application>.</para>
+<para>The <ulink url="http://www.tldp.org/">LDP</ulink> released a document that is very appropriate for this section.  It is entitled <ulink url="http://www.tldp.org/HOWTO/DVD-Playback-HOWTO/index.html">DVD Playback HOWTO</ulink> and describes the different tools available for viewing movies on a system that has a DVD drive.  It is a fine addition to the <ulink url="http://www.tldp.org/HOWTO/DVD-HOWTO.html">DVD HOWTO</ulink> that explains installation of the drive.</para>
+ <para>For watching TV there is choice of the following tools, among many others for watching and capturing TV, video and other streams:</para>
+ <itemizedlist>
+<listitem><para><command>tvtime</command>: great program with station management, interaction with teletext, film mode and <ulink url="http://tvtime.sourceforge
+.net/">much more</ulink>.</para></listitem>
+<listitem><para><command>zapping</command>: Gnome-specific TV viewer.</para></listitem>
+<listitem><para><command>xawtv</command>: X11 TV viewer.</para></listitem>
+</itemizedlist>
+</sect1>
+<sect1 id="sect_11_02_05"><title>Internet Telephony</title>
+<sect2 id="sect_11_02_05_01"><title>What is it?</title>
+<para>Internet telephony<indexterm><primary>VoIP</primary><secondary>what?</secondary></indexterm>, or more common, Voice over IP (VoIP) or digital telephony allows parties to exchange voice data flows over the network.  The big difference is that the data flows over a general purpose network, the Internet, contrary to conventional telephony, that uses a dedicated network of voice transmission lines.  The two networks can be connected, however, under special circumstances, but for now this is certainly not a standard.  In other words: it is very likely that you will not be able to call people who are using a conventional telephone.  If it is possible at all, it is likely that you will need to pay for a subscription.</para>
+<para>While there are currently various applications available for free download, both free and proprietary, there are some major drawbacks to telephony over the Internet.  Most noticably, the system is unreliable, it can be slow or there can be a lot of noise on the connection, and it can thus certainly not be used to replace conventional telephony - think about emergency calls.  While some providers take their precautions, there is no guarantee that you can reach the party that you want to call.</para>
+<para>Most applications currently do not use encryption, so be aware that it is potentially easy for someone to eavesdrop on your conversations.  If security is a concern for you, read the documentation that comes with your VoIP client.  Additionally, if you are using a firewall, it should be configured to allow incoming connections from anywhere, so using VoIP also includes taking risks on the level of site security.</para>
+</sect2>
+<sect2 id="sect_11_05_02"><title>What do you need?</title>
+<sect3 id="sect_11_05_02_01"><title>Server Side</title>
+<para>First of all, you need a provider offering the service<indexterm><primary>VoIP</primary><secondary>service providers</secondary></indexterm>.  This service might integrate traditional telephony and it might or might not be free.  Among others are <ulink url="http://www.sipphone.com/">SIPphone</ulink>, <ulink url="http://www.vonage.com/">Vonage</ulink>, <ulink url="http://www.lingo.com/">Lingo</ulink>, <ulink url="http://www.totaltalk.com/">AOL TotalTalk</ulink> and many locally accessible providers offering the so-called <quote>full phone service</quote>.  Internet phone service only is offered by <ulink url="http://www.skype.com/">Skype</ulink>, <ulink url="http://www.sipbroker.com/">SIP Broker</ulink>, <ulink url="http://www.google.com/talk/">Google</ulink> and many others.</para>
+<para>If you want to set up a server of your own, you might want to look into <ulink url="http://www.asterisk.org">Asterisk</ulink>.</para>
+</sect3>
+<sect3 id="sect_11_05_02_02"><title>Client Side</title>
+<para>On the client<indexterm><primary>VoIP</primary><secondary>clients</secondary></indexterm> side, the applications that you can use depend on your network configuration.  If you have a direct Internet connection, there won't be any problems, provided that you know on what server you can connect, and usually that you also have a username and password to authenticate to the service.</para>
+<para>If you are behind a firewall that does Network Address Translation (NAT), however, some services might not work, as they will only see the IP address of the firewall and not the address of your computer, which might well be unroutable over the Internet, for instance when you are in a company network and your IP address starts with 10., 192.168. or another non-routable subnet prefix.  This depends on the protocol that is used by the application.</para>
+<para>Also, available bandwidth might be a blocking factor: some applications are optimized for low bandwidth consumption, while others might require high bandwidth connections.  This depends on the codec that is used by the application.</para>
+<para>Among the most common applications are the Skype client, which has an interface that reminds of instant messaging, and <ulink url="http://www.counterpath.com/">X-Lite</ulink>, the free version of the <application>XTen softphone</application>, which looks like a mobile telephone.  However, while these programs are available for free download and very popular, they are not free as in free speech: they use proprietary protocols and/or are only available in binary packages, not in source format.</para>
+<para>Free <emphasis>and open</emphasis> VoIP clients are for instance <ulink url="http://www.gizmoproject.com/">Gizmo</ulink>, <ulink url="http://www.linphone.org">Linphone</ulink>, <ulink url="http://www.gnomemeeting.org/">GnomeMeeting</ulink> and <ulink url="http://www.wirlab.net/kphone/">KPhone</ulink>.</para>
+<tip><title>Client hardware</title>
+<para>While your computer, especially if it is a laptop PC, might have a built-in microphone, the result will be far better if you connect a headset.  If you have the choice, opt for a USB headset, as it functions independently from existing audio hardware.  Use <command>alsamixer</command> to configure input and output sound levels to your taste.</para>
+</tip>
+<para>VoIP applications are definitely a booming market.  Volunteers try to document the current status at <ulink url="http://www.voip-info.org/" />.</para>
+</sect3>
+</sect2>
+</sect1>
+<sect1 id="sect_11_03"><title>Summary</title>
+<para>The GNU/Linux platform is fully multi-media enabled.  A wide variety of devices like sound cards, tv-cards, headsets, microphones, CD and DVD players is supported.  The list of applications is sheer endless, that is why we needed to shortenthe list of new commands below and limit ourselves to general audio commands.</para>
+<table frame="all">
+<title>New commands in chapter 11: Audio</title>
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead>
+<row>
+<entry>Command</entry><entry>Meaning</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><command>alsaconf</command></entry><entry>Configure the ALSA sound system.</entry>
+</row>
+<row>
+<entry><command>alsamixer</command></entry><entry>Tune output levels of ALSA driver.</entry>
+</row>
+<row>
+<entry><command>arecord</command></entry><entry>Record a sound sample.</entry>
+</row>
+<row>
+<entry><command>aumix</command></entry><entry>Audio mixer tool.</entry>
+</row>
+<row>
+<entry><command>cdp</command></entry><entry>Play an audio CD.</entry>
+</row>
+<row>
+<entry><command>cdparanoia</command></entry><entry>Rip an audio CD.</entry>
+</row>
+<row>
+<entry><command>cdplay</command></entry><entry>Play an audio CD.</entry>
+</row>
+<row>
+<entry><command>gnome-alsamixer</command></entry><entry><application>Gnome</application> ALSA front-end.</entry>
+</row>
+<row>
+<entry><command>gnome-cd</command></entry><entry><application>Gnome</application> front-end for playing audio CDs.</entry>
+</row>
+<row>
+<entry><command>gnome-sound-recorder</command></entry><entry><application>Gnome</application> front-end for recording sound samples.</entry>
+</row>
+<row>
+<entry><command>kaudiocreator</command></entry><entry>KDE front-end for creating audio CDs.</entry>
+</row>
+<row>
+<entry><command>kmix</command></entry><entry>KDE front-end for sound settings.</entry>
+</row>
+<row>
+<entry><command>krec</command></entry><entry>KDE front-end for recording sound samples.</entry>
+</row>
+<row>
+<entry><command>mplayer</command></entry><entry>Multi-media player.</entry>
+</row>
+<row>
+<entry><command>play</command></entry><entry>Command line tool for playing sound samples.</entry>
+</row>
+
+</tbody>
+</tgroup>
+</table>
+</sect1>
+<sect1 id="sect_11_04"><title>Exercises</title>
+<orderedlist>
+<listitem><para>From the Gnome or KDE menu, open your sound configuration panel.  Make sure audio boxes or headset are connected to your system and find an output level that is comfortable for you.  Make sure, when your system is ALSA-compatible, that you use the appropriate panel.</para></listitem>
+<listitem><para>If you have a microphone, try recording a sample of your own voice.  Make sure the input volume is not too high, as this will result in high-pitched tones when you communicate with others, or in transfering background noise to the other party.  On the command line, you might even try to use <command>arecord</command> and <command>aplay</command> for recording and playing sound.</para></listitem>
+<listitem><para>Locate sound files on your system and try to play them.</para></listitem>
+<listitem><para>Insert an audio CD and try to play it.</para></listitem>
+<listitem><para>Find a chat partner and configure a VoIP program.  (You might need to install one first.)</para></listitem>
+<listitem><para>Can you listen to Internet radio?</para></listitem>
+<listitem><para>If you have a DVD player and a movie on a DVD disk, try to play it.</para></listitem>
+</orderedlist>
+
+</sect1>
+</chapter>

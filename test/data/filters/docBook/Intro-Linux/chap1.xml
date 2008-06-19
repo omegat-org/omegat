@@ -1,0 +1,728 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<chapter id="chap_01"><title>What is Linux?</title>
+
+<abstract>
+<para>We will start with an overview of how Linux became the operating system 
+it is today.  We will discuss past and future development and take a closer look
+ at the advantages and disadvantages of this system.  We will talk about 
+distributions, about Open Source in general and try to explain a little 
+something about GNU.</para>
+<para>This chapter answers questions like:</para>
+<para>
+<itemizedlist>
+<listitem><para>What is Linux?
+</para></listitem>
+<listitem><para>Where and how did Linux start?
+</para></listitem>
+<listitem><para>Isn't Linux that system where everything is done in text mode?
+</para></listitem>
+<listitem><para>Does Linux have a future or is it just hype?
+</para></listitem>
+<listitem><para>What are the advantages of using Linux?
+</para></listitem>
+<listitem><para>What are the disadvantages?
+</para></listitem>
+<listitem><para>What kinds of Linux are there and how do I choose the one that 
+fits me?
+</para></listitem>
+<listitem><para>What are the Open Source and GNU movements?
+</para></listitem>
+</itemizedlist>
+</para>
+</abstract>
+
+<sect1 id="sect_01_01"> 
+<title>History</title>
+
+<sect2 id="sect_01_01_01"><title>UNIX</title>
+<para>
+In order to understand the popularity of Linux, we need to travel back in time, 
+about 30 years ago...  
+</para>
+<para>Imagine computers<indexterm><primary>Linux</primary><secondary>origin</secondary></indexterm> as big as houses, even stadiums.  While the sizes of 
+those computers posed substantial problems, there was one thing that made this 
+even worse:  every computer had a different operating system.  Software was 
+always customized to serve a specific purpose, and software for one given system
+didn't run on another system.  Being able to work with one system didn't 
+automatically mean that you could work with another.  It was difficult, both 
+for the users and the system administrators.
+</para>
+<para>Computers were extremely expensive then, and sacrifices had to be made 
+even after the original purchase just to get the users to understand how they 
+worked.  The total cost per unit of computing power was enormous.
+</para>
+<para>Technologically the world was not quite that advanced, so they had to live
+with the size for another decade.  In 1969, a team of developers in the Bell 
+Labs laboratories started working on a solution for the software problem, to 
+address these compatibility issues.  They developed a new operating<indexterm><primary>UNIX</primary><secondary>origin</secondary></indexterm> system, 
+which was
+</para>
+<orderedlist>
+<listitem><para>Simple and elegant.
+</para></listitem> 
+<listitem><para>Written in the C programming language instead of in assembly 
+code.
+</para></listitem> 
+<listitem><para>Able to recycle code.
+</para></listitem> 
+</orderedlist>
+
+<para>The Bell Labs developers named their project <quote>UNIX.</quote></para>
+<para>
+The code recycling features were very important.  Until then, all commercially 
+available computer systems were written in a code specifically developed for one
+system.  UNIX on the other hand needed only a small piece of that special code, 
+which is now commonly named the kernel.  This kernel is the only piece of code 
+that needs to be adapted for every specific system and forms the base of the 
+UNIX system.  The operating system and all other functions were built around 
+this kernel and written in a higher programming language, C.  This language was 
+especially developed for creating the UNIX system.  Using this new technique, it
+was much easier to develop an operating system that could run on many different 
+types of hardware.
+</para>
+<para>The software vendors were quick to adapt, since they could sell ten times 
+more software almost effortlessly.  Weird new situations came in existence:  
+imagine for instance computers from different vendors communicating in the same 
+network, or users working on different systems without the need for extra 
+education to use another computer.  UNIX did a great deal to help users become 
+compatible with different systems.
+</para>
+<para>Throughout the next couple of decades the development of UNIX continued.  
+More things became possible to do and more hardware and software vendors added 
+support for UNIX to their products.
+</para>
+<para>UNIX was initially found only in very large environments with mainframes 
+and minicomputers (note that a PC is a <quote>micro</quote> computer).  You had 
+to work at a university, for the government or for large financial corporations 
+in order to get your hands on a UNIX system.
+</para>
+<para>But smaller computers were being developed, and by the end of the 80's, 
+many people had home computers.  By that time, there were several versions of 
+UNIX available for the PC architecture, but none of them were truly free and more important: they were all terribly slow, so most people ran MS DOS or Windows 3.1 on their home PCs.
+</para>
+</sect2>
+
+<sect2 id="sect_01_01_02"><title>Linus and Linux</title>
+<para>By the beginning of the 90s home PCs were finally powerful enough to run a full blown UNIX.  Linus<indexterm><primary>Linus</primary><secondary>creator</secondary></indexterm> Torvalds, a young man studying computer science at the university of
+Helsinki, thought it would be a good idea to have some sort of freely available 
+academic version of UNIX, and promptly started to code.  
+</para>
+<para>He started to ask questions, looking for answers and solutions that would 
+help him get UNIX on his PC.  Below is one of his first posts in comp.os.minix, 
+dating from 1991:
+</para>
+<screen>
+From: torvalds@klaava.Helsinki.FI (Linus Benedict Torvalds)
+Newsgroups: comp.os.minix
+Subject: Gcc-1.40 and a posix-question
+Message-ID: &lt;1991Jul3.100050.9886@klaava.Helsinki.FI&gt;
+Date: 3 Jul 91 10:00:50 GMT
+Hello netlanders,
+Due to a project I'm working on (in minix), I'm interested in the posix
+standard definition. Could somebody please point me to a (preferably)
+machine-readable format of the latest posix rules? Ftp-sites would be
+nice.
+</screen>
+<para>From the start, it was Linus' goal to have a free system<indexterm><primary>Linux</primary><secondary>goals</secondary></indexterm> that was 
+completely compliant with the original UNIX.  That is why he asked for POSIX 
+standards, POSIX still being the standard for UNIX.
+</para>
+<para>In those days plug-and-play wasn't invented yet, but so many people were 
+interested in having a UNIX system of their own, that this was only a small 
+obstacle.  New drivers became available for all kinds of new hardware, at a 
+continuously rising speed.  Almost as soon as a new piece of hardware became 
+available, someone bought it and submitted it to the Linux test, as the system 
+was gradually being called, releasing more free code for an ever wider range of 
+hardware.  These coders didn't stop at their PC's;  every piece of hardware they
+could find was useful for Linux.</para>
+<para>Back then, those people were called <quote>nerds</quote> or 
+<quote>freaks</quote>, but it didn't matter to them, as long as the supported 
+hardware list grew longer and longer.  Thanks to these people, Linux is now not 
+only ideal to run on new PC's, but is also the system of choice for old and 
+exotic hardware that would be useless if Linux didn't exist.
+</para>
+<para>Two years after Linus' post, there were 12000 Linux users.  The project, 
+popular with hobbyists, grew steadily, all the while staying within the bounds 
+of the POSIX standard.  All the features of UNIX were added over the next couple
+of years, resulting in the mature operating system Linux has become today.  
+Linux is a full UNIX clone, fit for use on workstations as well as on 
+middle-range and high-end servers.  Today, a lot of the important players on the 
+hard- and software market each have their team of Linux developers; at your 
+local dealer's you can even buy pre-installed Linux systems with official 
+support - eventhough there is still a lot of hard- and software that is not supported, too.
+</para>
+</sect2>
+
+<sect2 id="sect_01_01_03">
+<title>Current application of Linux systems</title>
+<para>Today Linux<indexterm><primary>Linux</primary><secondary>applications</secondary></indexterm> has joined the desktop market.  Linux developers concentrated 
+on networking and services in the beginning, and office applications have been 
+the last barrier to be taken down.  We don't like to admit that Microsoft is 
+ruling this market, so plenty of alternatives have been started over the last 
+couple of years to make Linux an acceptable choice as a workstation, providing 
+an easy user interface and MS compatible office applications like word 
+processors, spreadsheets, presentations and the like.
+</para>
+<para>On the server side, Linux is well-known as a stable and reliable platform,
+providing database and trading services for companies like Amazon, the 
+well-known online bookshop, US Post Office, the German army and many others.  
+Especially Internet providers and Internet service providers have grown fond of 
+Linux as firewall, proxy- and web server, and you will find a Linux box within 
+reach of every UNIX system administrator who appreciates a comfortable 
+management station.  Clusters of Linux machines are used in the creation of 
+movies such as <quote>Titanic</quote>, <quote>Shrek</quote> and others.  In 
+post offices, they are the nerve centers that route mail and in large search 
+engine, clusters are used to perform internet searches.These are only a few of 
+the thousands of heavy-duty jobs that Linux is performing day-to-day across the 
+world.
+</para>
+<para>It is also worth to note that modern Linux not only runs on workstations, 
+mid- and high-end servers, but also on <quote>gadgets</quote> like PDA's, 
+mobiles, a shipload of embedded applications and even on experimental 
+wristwatches.  This makes Linux the only operating system in the world covering 
+such a wide range of hardware.</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="sect_01_02">
+<title>The user interface</title>
+
+<sect2 id="sect_01_02_01">
+<title>Is Linux difficult?</title>
+<para>Whether Linux is difficult<indexterm><primary>Linux</primary><secondary>user interface</secondary></indexterm> to learn depends on the person you're asking.  
+Experienced UNIX users will say no, because Linux is an ideal operating system 
+for power-users and programmers, because it has been and is being developed by 
+such people.
+</para>
+<para>Everything a good programmer can wish for is available: compilers, 
+libraries, development and debugging tools.  These packages come with every 
+standard Linux distribution.  The C-compiler is included for free - as opposed to many UNIX distributions demanding licensing fees for this tool.  All the 
+documentation and manuals are there, and examples are often included to help you
+get started in no time.  It feels like UNIX and switching between UNIX and 
+Linux is a natural thing.
+</para>
+<para>In the early days of Linux, being an expert was kind of required to start 
+using the system.  Those who mastered Linux felt better than the rest of the 
+<quote>lusers</quote> who hadn't seen the light yet.  It was common practice to 
+tell a beginning user to <quote>RTFM</quote> (read the manuals).  While the 
+manuals were on every system, it was difficult to find the documentation, and 
+even if someone did, explanations were in such technical terms that the new user
+became easily discouraged from learning the system.
+</para>
+<para>The Linux-using community started to realize that if Linux was ever to be 
+an important player on the operating system market, there had to be some serious
+changes in the accessibility of the system.
+</para>
+</sect2>
+
+<sect2 id="sect_01_02_02">
+<title>Linux for non-experienced users</title>
+<para>Companies such as RedHat, SuSE and Mandriva have sprung up, providing 
+packaged Linux distributions suitable for mass consumption.  They integrated a 
+great deal of graphical user interfaces<indexterm><primary>Linux</primary><secondary>ease of use</secondary></indexterm> (GUIs<indexterm><primary>GUI</primary></indexterm>), developed by the community, in 
+order to ease management of programs and services.  As a Linux user today you 
+have all the means of getting to know your system inside out, but it is no 
+longer necessary to have that knowledge in order to make the system comply to 
+your requests.
+</para>
+<para>Nowadays you can log in graphically and start all required applications 
+without even having to type a single character, while you still have the ability
+to access the core of the system if needed.  Because of its structure, Linux 
+allows a user to grow into the system: it equally fits new and experienced 
+users.  New users are not forced to do difficult things, while experienced users
+are not forced to work in the same way they did when they first started learning
+Linux.
+</para>
+<para>While development in the service area continues, great things are being 
+done for desktop<indexterm><primary>desktop</primary><secondary>development</secondary></indexterm> users, generally considered as the group least likely to know 
+how a system works.  Developers of desktop applications are making incredible 
+efforts to make the most beautiful desktops you've ever seen, or to make your 
+Linux machine look just like your former MS Windows or an Apple workstation.  
+The latest developments also include 3D acceleration support and support for USB
+devices, single-click updates of system and packages, and so on.  Linux has 
+these, and tries to present all available services in a logical form that 
+ordinary people can understand.  Below is a short list containing some great 
+examples; these sites have a lot of screenshots that will give you a glimpse of 
+what Linux on the desktop<indexterm><primary>desktop</primary><secondary>look and feel</secondary></indexterm> can be like:
+</para>
+<itemizedlist>
+<listitem><para><ulink url="http://www.gnome.org" />
+</para></listitem>
+<listitem><para><ulink url="http://kde.org/screenshots/" />
+</para></listitem>
+<listitem><para><ulink url="http://www.openoffice.org" />
+</para></listitem>
+<listitem><para><ulink url="http://www.mozilla.org" /></para></listitem>
+</itemizedlist>
+</sect2>
+
+</sect1>
+
+<sect1 id="sect_01_03"><title>Does Linux have a future?</title>
+<sect2 id="sect_01_03_01"><title>Open Source</title>
+<para>The idea behind Open Source<indexterm><primary>Open Source</primary><secondary>what is it?</secondary></indexterm> software is rather simple: when programmers 
+can read, distribute and change code, the code will mature.  People can adapt 
+it, fix it, debug it, and they can do it at a speed that dwarfs the performance 
+of software developers at conventional companies.  This software will be more 
+flexible and of a better quality than software that has been developed using 
+the conventional channels, because more people have tested it in more different 
+conditions than the closed software developer ever can.
+</para>
+<para>The Open Source<indexterm><primary>Open Source</primary><secondary>achievements</secondary></indexterm> initiative started to make this clear to the commercial 
+world, and very slowly, commercial vendors are starting to see the point.  While
+lots of academics and technical people have already been convinced for 20 years 
+now that this is the way to go, commercial vendors needed applications like the 
+Internet to make them realize they can profit from Open Source.  Now Linux has 
+grown past the stage where it was almost exclusively an academic system, useful 
+only to a handful of people with a technical background.  Now Linux provides 
+more than the operating system: there is an entire infrastructure supporting the
+chain of effort of creating an operating system, of making and testing programs 
+for it, of bringing everything to the users, of supplying maintenance, updates 
+and support and customizations, etcetera.  Today, Linux is ready to accept the 
+challenge of a fast-changing world.
+</para>
+</sect2>
+
+<sect2 id="sect_01_03_02"><title>Ten years of experience at your service</title>
+<para>While Linux is probably the most well-known Open Source initiative, there 
+is another project that contributed enormously to the popularity of the Linux 
+operating system.  This project is called SAMBA<indexterm><primary>Open Source</primary><secondary>other projects</secondary></indexterm>, and its achievement is the 
+reverse engineering of the Server Message Block (SMB)/Common Internet File 
+System (CIFS) protocol used for file- and print-serving on PC-related machines, 
+natively supported by MS Windows NT and OS/2, and Linux.  Packages are now 
+available for almost every system and provide interconnection solutions in mixed
+environments using MS Windows protocols: Windows-compatible (up to and includingWinXP) file- and print-servers.
+</para>
+<para>Maybe even more successful than the SAMBA project is the Apache HTTP 
+server project.  The server runs on UNIX, Windows NT and many other operating 
+systems.  Originally known as <quote>A PAtCHy server</quote>, based on existing 
+code and a series of <quote>patch files</quote>, the name for the matured code 
+deserves to be connoted with the native American tribe of the Apache, well-known
+for their superior skills in warfare strategy and inexhaustible endurance.  
+Apache has been shown to be substantially faster, more stable and more 
+feature-full than many other web servers.  Apache is run on sites that get 
+millions of visitors per day, and while no official support is provided by the 
+developers, the Apache user community provides answers to all your questions.  
+Commercial support is now being provided by a number of third parties.
+</para>
+<para>In the category of office applications, a choice of <application>MS Office<indexterm><primary>desktop</primary><secondary>office</secondary></indexterm></application> suite clones
+is available, ranging from partial to full implementations of the applications 
+available on MS Windows workstations.  These initiatives helped a great deal to 
+make Linux acceptable for the desktop market, because the users don't need extra
+training to learn how to work with new systems.  With the desktop comes the 
+praise of the common users, and not only their praise, but also their specific 
+requirements, which are growing more intricate and demanding by the day.
+</para>
+<para>The Open Source<indexterm><primary>Open Source</primary><secondary>community</secondary></indexterm> community, consisting largely of people who have been 
+contributing for over half a decade, assures Linux' position as an important 
+player on the desktop market as well as in general IT application.  Paid 
+employees and volunteers alike are working diligently so that Linux can maintain
+a position in the market.  The more users, the more questions.  The Open Source 
+community makes sure answers keep coming, and watches the quality of the answers
+with a suspicious eye, resulting in ever more stability and accessibility.
+</para>
+<para>Listing all the available Linux software is beyond the scope of this 
+guide, as there are tens of thousands of packages.  Throughout this course we 
+will present you with the most common packages, which are almost all freely 
+available.  In order to take away some of the fear of the beginning user, here's
+a screenshot of one of your most-wanted programs.  You can see for yourself that
+no effort has been spared to make users who are switching from Windows feel at 
+home:
+</para>
+
+<figure><title>OpenOffice MS-compatible Spreadsheet</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/openoffice.png" format="PNG"></imagedata>
+</imageobject>
+<imageobject>
+<imagedata fileref="images/openoffice.eps" format="EPS"></imagedata>
+</imageobject>
+<textobject>
+<phrase>OpenOffice spreadsheet looks just like MS Office .xls file.</phrase>
+</textobject>
+</mediaobject>
+</figure>
+</sect2>
+
+</sect1>
+
+<sect1 id="sect_01_04"><title>Properties of Linux</title>
+
+<sect2 id="sect_01_04_01"><title>Linux Pros</title>
+
+<para>A lot of the advantages<indexterm><primary>Linux</primary><secondary>advantages</secondary></indexterm> of Linux are a consequence of Linux' origins, 
+deeply rooted in UNIX, except for the first advantage<indexterm><primary>Linux</primary><secondary>properties</secondary></indexterm>, of course:
+</para>
+
+<itemizedlist>
+	<listitem>
+	<para>Linux is free:</para>
+<para>As in free beer<indexterm><primary>Linux</primary><secondary>free</secondary></indexterm>, they say.  If you want to spend absolutely nothing, you 
+don't even have to pay the price of a CD.  Linux can be downloaded in its 
+entirety from the Internet completely for free.  No registration fees, no costs 
+per user, free updates, and freely available source code in case you want to 
+change the behavior of your system.
+</para>
+<para>Most of all, Linux is free as in free speech:</para>
+<para>The license commonly used is the GNU Public License<indexterm><primary>GNU</primary><secondary>public license</secondary></indexterm> (GPL<indexterm><primary>GPL</primary></indexterm>).  The license 
+says that anybody who may want to do so, has the right to change Linux and 
+eventually to redistribute a changed version, on the one condition that the code
+is still available after redistribution.  In practice, you are free to grab a 
+kernel image, for instance to add support for teletransportation machines or 
+time travel and sell your new code, as long as your customers can still have a 
+copy of that code.
+</para>
+	</listitem>
+	<listitem>
+	<para>Linux is portable to any hardware platform:</para>
+<para>A vendor who wants to sell a new type of computer and who doesn't know 
+what kind of OS his new machine will run (say the CPU in your car or washing 
+machine), can take a Linux kernel and make it work<indexterm><primary>Linux</primary><secondary>portability</secondary></indexterm> on his hardware, because 
+documentation related to this activity is freely available.
+</para>
+	</listitem>
+	<listitem>
+	<para>Linux was made to keep on running:</para>
+<para>As with UNIX<indexterm><primary>Linux</primary><secondary>robustness</secondary></indexterm>, a Linux system expects to run without rebooting all the 
+time.  That is why a lot of tasks are being executed at night or scheduled 
+automatically for other calm moments, resulting in higher availability during 
+busier periods and a more balanced use of the hardware.  This property allows 
+for Linux to be applicable also in environments where people don't have the time
+or the possibility to control their systems night and day.
+</para>
+	</listitem>
+	<listitem>
+	<para>Linux is secure and versatile:</para>
+<para>The security model used in Linux<indexterm><primary>Linux</primary><secondary>security</secondary></indexterm> is based on the UNIX idea of security, 
+which is known to be robust and of proven quality.  But Linux is not only fit 
+for use as a fort against enemy attacks from the Internet:  it will adapt 
+equally to other situations, utilizing the same high standards for security.  
+Your development machine or control station will be as secure as your firewall.
+</para> 
+	</listitem>
+	<listitem>
+	<para>Linux is scalable:</para>
+<para>From a Palmtop with 2 MB of memory to a petabyte storage cluster with 
+hundreds of nodes<indexterm><primary>Linux</primary><secondary>scalability</secondary></indexterm>: add or remove the appropriate packages and Linux fits all.  
+You don't need a supercomputer anymore, because you can use Linux to do big 
+things using the building blocks provided with the system.  If you want to do 
+little things, such as making an operating system for an embedded processor or 
+just recycling your old 486, Linux will do that as well.
+</para>
+	</listitem>
+        <listitem>
+        <para>The Linux OS and most Linux applications have very short debug-times:
+</para>
+<para>Because Linux<indexterm><primary>Linux</primary><secondary>bugs</secondary></indexterm> has been developed and tested by thousands of people, both 
+errors and people to fix them are usually found rather quickly.  It sometimes happens that 
+there are only a couple of hours between discovery and fixing of a bug.  
+</para>
+	</listitem>	
+</itemizedlist>
+</sect2>
+
+<sect2 id="sect_01_04_02"><title>Linux Cons</title>
+
+<itemizedlist>
+	<listitem>
+	<para>There are far too many different<indexterm><primary>Linux</primary><secondary>disadvantages</secondary></indexterm> distributions:</para>
+<para><quote>Quot capites, tot rationes</quote>, as the Romans already said:  the more 
+people, the more opinions.  At first glance, the amount of Linux distributions 
+can be frightening, or ridiculous, depending on your point of view.  But it also
+means that everyone will find what he or she needs.  You don't need to be an 
+expert to find a suitable release.
+</para>
+<para>When asked, generally every Linux user will say that the best distribution
+is the specific version he is using.  So which one should you choose?  Don't 
+worry too much about that: all releases contain more or less the same set of 
+basic packages.  On top of the basics, special third party software is added 
+making, for example, TurboLinux more suitable for the small and medium 
+enterprise, RedHat for servers and SuSE for workstations.  However, the 
+differences are likely to be very superficial.  The best strategy is to test a 
+couple of distributions; unfortunately not everybody has the time for this.  
+Luckily, there is plenty of advice on the subject of choosing your Linux.  
+A quick search on <ulink url="http://www.google.com/linux">Google</ulink>, using the keywords <quote>choosing your distribution</quote> brings up tens of
+links to good advise.  
+The <ulink url="http://www.tldp.org/HOWTO/Installation-HOWTO/">
+Installation HOWTO</ulink> also discusses choosing your distribution.
+</para>
+	</listitem>
+	<listitem>
+	<para>Linux is not very user friendly and confusing for beginners:
+</para>
+<para>
+It must be said that Linux, at least the core system, is less userfriendly to use than MS Windows and certainly more difficult than MacOS, but...  
+In light of its popularity, considerable effort has been made to make Linux 
+even easier to use, especially for new users. More information is being released
+daily, such as this guide, to help fill the gap for documentation available to
+users at all levels.
+</para>
+	</listitem>
+	<listitem>
+        <para>Is an Open Source product trustworthy?</para>
+<para>How can something that is free also be reliable<indexterm><primary>Open Source</primary><secondary>reliability</secondary></indexterm>?  Linux users have the 
+choice whether to use Linux or not, which gives them an enormous advantage 
+compared to users of proprietary software, who don't have that kind of freedom. 
+After long periods of testing, most Linux users come to the conclusion that 
+Linux is not only as good, but in many cases better and faster that the 
+traditional solutions.  If Linux were not trustworthy, it would have been long 
+gone, never knowing the popularity it has now, with millions of users.  Now 
+users can influence their systems and share their remarks with the community, 
+so the system gets better and better every day.  It is a project that is never 
+finished, that is true, but in an ever changing environment, Linux is also a 
+project that continues to strive for perfection.
+</para>
+        </listitem>
+</itemizedlist>
+</sect2>
+
+</sect1>
+
+<sect1 id="sect_01_05"><title>Linux Flavors</title>
+<sect2 id="sect_01_05_01"><title>Linux and GNU</title>
+
+<para>
+Although there are a large number of Linux implementations, you will find a lot 
+of similarities in the different distributions, if only because every Linux 
+machine is a box with building blocks that you may put together following your 
+own needs and views.  Installing the system is only the beginning of a longterm 
+relationship.  Just when you think you have a nice running system, Linux will 
+stimulate your imagination and creativeness, and the more you realize what 
+power the system can give you, the more you will try to redefine its limits. 
+</para>
+<para>Linux may appear different depending on the distribution<indexterm><primary>Linux</primary><secondary>distributions</secondary></indexterm>, your hardware 
+and personal taste, but the fundamentals on which all graphical and other 
+interfaces are built, remain the same.  The Linux system is based on GNU<indexterm><primary>GNU</primary><secondary>tools</secondary></indexterm> tools 
+(Gnu's Not UNIX<indexterm><primary>GNU</primary></indexterm>), which provide a set of standard ways to handle and use the 
+system.  All GNU tools are open source, so they can be installed on any system. 
+Most distributions offer pre-compiled packages of most common tools, such as RPM
+packages on RedHat and Debian packages (also called deb or dpkg) on Debian, so you needn't be a programmer 
+to install a package on your system.  However, if you are and like doing things 
+yourself, you will enjoy Linux all the better, since most distributions come 
+with a complete set of development tools, allowing installation of new software 
+purely from source code.  This setup also allows you to install software even if
+it does not exist in a pre-packaged form suitable for your system.
+</para> 
+<para>A list of common GNU<indexterm><primary>GNU</primary><secondary>examples</secondary></indexterm> software:</para>
+<itemizedlist>
+<listitem><para><application>Bash</application>: The GNU shell
+</para></listitem>
+<listitem><para><application>GCC</application>: The GNU C Compiler
+</para></listitem>
+<listitem><para><application>GDB</application>: The GNU Debugger
+</para></listitem>
+<listitem><para><application>Coreutils</application>: a set of basic UNIX-style utilities, such as <command>ls</command>, <command>cat</command> and <command>chmod</command></para></listitem>
+<listitem><para><application>Findutils</application>: to search and find files
+</para></listitem>
+<listitem><para><application>Fontutils</application>: to convert fonts from one format to another or make 
+new fonts
+</para></listitem>
+<listitem><para><application>The Gimp</application>: GNU Image Manipulation Program
+</para></listitem>
+<listitem><para><application>Gnome</application>: the GNU desktop environment
+</para></listitem>
+<listitem><para><application>Emacs</application>: a very powerful editor
+</para></listitem>
+<listitem><para><application>Ghostscript</application> and <application>Ghostview</application>: interpreter and graphical frontend 
+for PostScript files.
+</para></listitem>
+<listitem><para><application>GNU Photo</application>: software for interaction with digital cameras
+</para></listitem>
+<listitem><para><application>Octave</application>: a programming language, primarily intended to perform numerical computations and image processing.
+</para></listitem>
+<listitem><para><application>GNU SQL</application>: relational database system
+</para></listitem>
+<listitem><para><application>Radius</application>: a remote authentication and accounting server
+</para></listitem>
+<listitem><para>...
+</para></listitem>
+</itemizedlist>
+<para>Many commercial applications are available for Linux, and for more 
+information about these packages we refer to their specific documentation.  
+Throughout this guide we will only discuss freely available software, which 
+comes (in most cases) with a GNU license.
+</para>
+<para>To install missing<indexterm><primary>installing software</primary><secondary>package managers</secondary></indexterm> or new packages, you will need some form of software 
+management.  The most common implementations include RPM and dpkg.  RPM is the RedHat Package Manager, which is used on a variety of Linux 
+systems, eventhough the name does not suggest this.  Dpkg is the Debian package 
+management system, which uses an interface called <command>apt-get</command>, 
+that can manage RPM packages as well.  <application>Novell Ximian Red Carpet</application> is a third party 
+implementation of RPM with a graphical front-end.  Other third party software 
+vendors may have their own installation procedures, sometimes resembling the 
+InstallShield and such, as known on MS Windows and other platforms.  As you 
+advance into Linux, you will likely get in touch with one or more of these 
+programs.
+</para>
+</sect2>
+<sect2 id="sect_01_05_02"><title>GNU/Linux</title>
+<para>The Linux kernel (the <emphasis>bones</emphasis> of your system, see 
+<xref linkend="sect_03_02_03_01" />) is not part of the GNU<indexterm><primary>GNU</primary><secondary>GNU/Linux</secondary></indexterm> project but uses the
+same license as GNU software.  A great majority of utilities and development 
+tools (the <emphasis>meat</emphasis> of your system), which are not 
+Linux-specific, are taken from the GNU project.  Because any usable system must 
+contain both the kernel and at least a minimal set of utilities, some people 
+argue that such a system should be called a <emphasis>GNU/Linux</emphasis> 
+system.
+</para>
+<para>In order to obtain the highest possible degree of independence between 
+distributions, this is the sort of Linux that we will discuss throughout this 
+course.  If we are not talking about a GNU/Linux system, the specific 
+distribution, version or program name will be mentioned.
+</para>
+</sect2>
+<sect2 id="sect_01_05_03"><title>Which distribution should I install?</title>
+<para>Prior to installation<indexterm><primary>distributions</primary><secondary>how to chose?</secondary></indexterm>, the most important factor is your hardware.  Since 
+every Linux distribution contains the basic packages and can be built to meet 
+almost any requirement (because they all use the Linux kernel), you only need to
+consider if the distribution will run on your hardware.  LinuxPPC for example 
+has been made to run on Apple and other PowerPCs and does not run on an 
+ordinary x86 based PC.  LinuxPPC does run on the new Macs, but you can't use it 
+for some of the older ones with ancient bus technology.  Another tricky case is 
+Sun hardware, which could be an old SPARC CPU or a newer UltraSparc, both 
+requiring different versions of Linux.</para>
+<para>Some Linux distributions are optimized for certain processors, such as 
+Athlon CPUs, while they will at the same time run decent enough on the standard 
+486, 586 and 686 Intel processors.  Sometimes distributions for special CPUs 
+are not as reliable, since they are tested by fewer people.
+</para>
+<para>Most Linux distributions offer a set of programs for generic PCs with 
+special packages containing optimized kernels for the x86 Intel based CPUs.  
+These distributions are well-tested and maintained on a regular basis, focusing 
+on reliant server implementation and easy installation and update procedures.  
+Examples are Debian, Ubuntu, Fedora, SuSE and Mandriva, which are by far the most popular Linux 
+systems and generally considered easy to handle for the beginning user, while 
+not blocking professionals from getting the most out of their Linux machines.  
+Linux also runs decently on laptops and middle-range servers.  Drivers for new 
+hardware are included only after extensive testing, which adds to the stability 
+of a system.</para>
+<para>While the standard desktop might be <application>Gnome</application><indexterm><primary>desktop</primary><secondary>types</secondary></indexterm> on one system, another might 
+offer <application>KDE</application> by default.  Generally, both <application>Gnome</application> and <application>KDE</application> are available for all major Linux distributions.   Other window and desktop managers are available for more advanced users.</para>
+<para>The standard installation process allows users to choose between different basic
+setups, such as a workstation, where all packages needed for everyday use and 
+development are installed, or a server installation, where different network 
+services can be selected.  Expert users can install every combination of 
+packages they want during the initial installation process.
+</para>
+<para>The goal of this guide is to apply to all Linux distributions.  For your 
+own convenience, however, it is strongly advised that beginners stick to a 
+mainstream distribution<indexterm><primary>distributions</primary><secondary>mainstream</secondary></indexterm>, supporting all common hardware and applications by 
+default.  The following are very good choices for novices:
+</para>
+<itemizedlist>
+<listitem><para><ulink url="http://fedora.redhat.com">Fedora Core</ulink>
+</para></listitem>
+<listitem><para><ulink url="http://www.debian.org">Debian</ulink>
+</para></listitem>
+<listitem><para><ulink url="http://www.suse.de">SuSE Linux</ulink>
+</para></listitem>
+<listitem><para><ulink url="http://www.mandrake.com">Mandriva (former MandrakeSoft)</ulink>
+</para></listitem>
+<listitem><para><ulink url="http://www.knoppix.com">Knoppix</ulink>: an 
+operating system that runs from your CD-ROM, you don't need to install anything.
+</para></listitem>
+</itemizedlist>
+<para>Downloadable ISO-images<indexterm><primary>distributions</primary><secondary>ISO images</secondary></indexterm> can be obtained from <ulink url="http://www.linuxiso.org">LinuxISO.org</ulink>.  The main distributions can be purchased in any decent computer shop.
+</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="sect_01_06"><title>Summary</title>
+<para>In this chapter, we learned that:</para>
+<itemizedlist>
+<listitem><para>Linux is an implementation of UNIX.
+</para></listitem>
+<listitem><para>The Linux operating system is written in the C programming 
+language.
+</para></listitem>
+<listitem><para><quote>De gustibus et coloribus non disputandum est</quote>: there's a Linux 
+for everyone.
+</para></listitem>
+<listitem><para>Linux uses GNU tools, a set of freely available standard tools 
+for handling the operating system.
+</para></listitem>
+</itemizedlist>
+
+</sect1>
+
+<sect1 id="sect_01_07"><title>Exercises</title>
+<para>
+A practical exercise for starters: install Linux on your PC.  Read the 
+installation manual for your distribution and/or the Installation HOWTO and do 
+it.</para>
+
+<note>
+<title>Read the docs!</title>
+<para>
+Most errors stem from not reading the information provided during the install.  
+Reading the installation messages carefully is the first step on the road to 
+success.
+</para>
+</note>
+
+<para>Things you must know BEFORE starting a Linux installation:
+</para>
+<itemizedlist>
+<listitem><para>Will this distribution run on my hardware?</para>
+<para>Check with 
+<ulink url="http://www.tldp.org/HOWTO/Hardware-HOWTO/index.html">
+http://www.tldp.org/HOWTO/Hardware-HOWTO/index.html</ulink> when in doubt
+about compatibility of your hardware.
+</para>
+</listitem>
+<listitem><para>What kind of keyboard do I have (number of keys, layout)?  What 
+kind of mouse (serial/parallel, number of buttons)?  How many MB of RAM?
+</para></listitem>
+<listitem><para>Will I install a basic workstation or a server, or will I need 
+to select specific packages myself?
+</para></listitem>
+<listitem><para>Will I install from my hard disk, from a CD-ROM, or using the 
+network?  Should I adapt the BIOS for any of this?  Does the installation method
+require a boot disk?
+</para></listitem>
+<listitem><para>Will Linux be the only system on this computer, or will it be a 
+dual boot installation?  Should I make a large partition in order to install 
+virtual systems later on, or is this a virtual installation itself?
+</para></listitem>
+<listitem><para>Is this computer in a network?  What is its hostname, IP 
+address?  Are there any gateway servers or other important networked machines 
+my box should communicate with?
+</para>
+
+<caution><title>Linux expects to be networked</title>
+<para>Not using the network or configuring it incorrectly may result in slow 
+startup.
+</para>
+</caution>
+
+</listitem>
+<listitem><para>Is this computer a gateway/router/firewall?  (If you have to 
+think about this question, it probably isn't.)
+</para></listitem>
+<listitem><para>Partitioning: let the installation program do it for you this 
+time, we will discuss partitions in detail in <xref linkend="chap_03" />.  There
+is system-specific documentation available if you want to know everything about 
+it.  If your Linux distribution does not offer default partitioning, that probably means it is not suited for beginners.
+</para></listitem>
+<listitem><para>Will this machine start up in text mode or in graphical mode?
+</para></listitem>
+<listitem><para>Think of a good password for the administrator of this machine 
+(root).  Create a non-root user account (non-privileged access to the system).
+</para></listitem>
+<listitem><para>Do I need a rescue disk?  (recommended)
+</para></listitem>
+<listitem><para>Which languages do I want?
+</para></listitem>
+</itemizedlist>
+<para>The full checklist can be found at 
+<ulink url="http://www.tldp.org/HOWTO/Installation-HOWTO/index.html">
+http://www.tldp.org/HOWTO/Installation-HOWTO/index.html</ulink>.
+</para>
+<para>In the following chapters we will find out if the installation has been 
+successful.
+</para>
+
+</sect1>
+</chapter>

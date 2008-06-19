@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<chapter id="chap_06">
+<title>Text editors</title>
+<abstract>
+<para>In this chapter, we will discuss the importance of mastering an editor.  We will focus mainly on the Improved <command>vi</command> editor.</para>
+<para>After finishing this chapter, you will be able to:</para>
+<para>
+<itemizedlist>
+<listitem><para>Open and close files in text mode</para></listitem>
+<listitem><para>Edit files</para></listitem>
+<listitem><para>Search text</para></listitem>
+<listitem><para>Undo errors</para></listitem>
+<listitem><para>Merge files</para></listitem>
+<listitem><para>Recover lost files</para></listitem>
+<listitem><para>Find a program or suite for office use</para></listitem>
+</itemizedlist>
+</para>
+</abstract>
+<sect1 id="sect_06_01"><title>Text editors</title>
+<sect2 id="sect_06_01_01"><title>Why should I use an editor?</title>
+<para>It is very important<indexterm><primary>editors</primary><secondary>why?</secondary></indexterm> to be able to use at least one text mode editor.  Knowing how to use an editor on your system is the first step to independence.</para>
+<para>We will need to master an editor by the next chapter as we need it to edit files that influence our environment.  As an advanced user, you may want to start writing scripts, or books, develop websites or new programs.  Mastering an editor will immensely improve your productivity as well as your capabilities.</para>
+</sect2>
+<sect2 id="sect_06_01_02"><title>Which editor should I use?</title>
+<para>Our focus is on text editors<indexterm><primary>editors</primary><secondary>text editor overview</secondary></indexterm>, which can also be used on systems without a graphical environment and in terminal windows.  The additional advantage of mastering a text editor is in using it on remote machines.  Since you don't need to transfer the entire graphical environment over the network, working with text editors tremendously improves network speed.</para>
+<para>There are, as usual, multiple ways to handle the problem.  Let's see what editors are commonly available:</para>
+<!--
+<sect3 id="sect_06_01_02_01"><title>Ed</title>
+<para>The <command>ed<indexterm><primary>ed</primary></indexterm></command> editor is line-oriented and used to create, display, modify and otherwise manipulate text files, both interactively and by use in shell scripts.</para>
+<para><command>ed</command> is the original text editor on UNIX machines, and thus widely available.  For most purposes, however, it is superceded by full-screen editors such as <command>emacs</command> and <command>vi</command>, see below.</para>
+</sect3>
+-->
+<sect3 id="sect_06_01_02_02"><title>GNU Emacs</title>
+<para><application>Emacs<indexterm><primary>editors</primary><secondary>emacs</secondary></indexterm></application> is the extensible, customizable, self-documenting, real-time display editor, known on many UNIX and other systems.  The text being<indexterm><primary>emacs</primary></indexterm> edited is visible on the screen and is updated automatically as you type your commands.  It is a real-time editor because the display is updated very frequently, usually after each character or pair of characters you type.  This minimizes the amount of information you must keep in your head as you edit.  <application>Emacs</application> is called advanced because it provides facilities that go beyond simple insertion and deletion:  controlling subprocesses; automatic indentation of programs; viewing two or more files at once; editing formatted text; and dealing in terms of characters, words, lines, sentences, paragraphs, and pages, as well as expressions and comments in several different programming languages.</para>
+<para><emphasis>Self-documenting</emphasis> means that at any time you can type a special character, <keycap>Ctrl</keycap>+<keycap>H</keycap>, to find out what your options are.  You can also use it to find out what any command does, or to find all the commands that pertain to a topic.  <emphasis>Customizable</emphasis> means that you can change the definitions of <application>Emacs</application> commands in little ways.  For example, if you use a programming language in which comments start with <quote>&lt;**</quote> and end with <quote>**&gt;</quote>, you can tell the <application>Emacs</application> comment manipulation commands to use those strings.  Another sort of customization is rearrangement of the command set.  For example, if you prefer the four basic cursor motion commands (up, down, left and right) on keys in a diamond pattern on the keyboard, you can rebind the keys that way.</para>
+<para><emphasis>Extensible</emphasis> means that you can go beyond simple customization and write entirely new commands, programs in the Lisp language that are run by <application>Emacs</application>'s own <application>Lisp</application> interpreter.  <application>Emacs</application> is an <emphasis>online</emphasis> extensible system, which means that it is divided into many functions that call each other, any of which can be redefined in the middle of an editing session.  Almost any part of <application>Emacs</application> can be replaced without making a separate copy of all of <application>Emacs</application>.  Most of the editing commands of <application>Emacs</application> are written in <application>Lisp</application> already; the few exceptions could have been written in <application>Lisp</application> but are written in C for efficiency.  Although only a programmer can write an extension, anybody can use it afterward.</para>
+<para>When run under the X Window System (started as <command>xemacs</command>) <application>Emacs</application> provides its own menus and convenient bindings to mouse buttons.  But <application>Emacs</application> can provide many of the benefits of a window system on a text-only terminal.  For instance, you can look at or edit several files at once, move text between files, and edit files while running shell commands.</para> 
+
+</sect3>
+<sect3 id="sect_06_01_02_03"><title>Vi(m)</title>
+<para><application>Vim<indexterm><primary>editors</primary><secondary>vim</secondary></indexterm></application> stands for <quote>Vi IMproved</quote>.  It used to be <quote>Vi IMitation</quote>, but there are so many improvements that a name change was appropriate.  <application>Vim<indexterm><primary>vim</primary></indexterm></application> is a text editor which includes almost all the commands from the UNIX program <command>vi</command> and a lot of new ones.</para>
+<para>Commands in the <command>vi<indexterm><primary>vi</primary></indexterm></command> editor are entered using only the keyboard, which has the advantage that you can keep your fingers on the keyboard and your eyes on the screen, rather than moving your arm repeatedly to the mouse.  For those who want it, mouse support and a GUI version with scrollbars and menus can be activated.</para>
+<para>We will refer to <command>vi</command> or <command>vim</command> throughout this book for editing files, while you are of course free to use the editor of your choice.  However, we recommend to at least get the <command>vi</command> basics in the fingers, because it is the standard text editor on almost all UNIX systems, while <command>emacs</command> can be an optional package.  There may be small differences between different computers and terminals, but the main point is that if you can work with <command>vi</command>, you can survive on any UNIX system.</para>
+<para>Apart from the <command>vim</command> command, the <application>vIm</application> packages may also provide <command>gvim<indexterm><primary>vim</primary><secondary>gvim</secondary></indexterm></command>, the <application>Gnome</application> version of <command>vim</command>.  Beginning users might find this easier to use, because the menus offer help when you forgot or don't know how to perform a particular editing task using the standard <command>vim</command> commands.</para>
+</sect3>
+
+</sect2>
+
+
+</sect1>
+<sect1 id="sect_06_02"><title>Using the Vim editor</title>
+<sect2 id="sect_06_02_01"><title>Two modes</title>
+<para>The <command>vi</command> editor<indexterm><primary>vi</primary><secondary>modes</secondary></indexterm> is a very powerful tool and has a very extensive built-in manual, which you can activate using the <command>:help</command> command when the program is started (instead of using <command>man</command> or <command>info</command>, which don't contain nearly as much information).  We will only discuss the very basics here to get you started.</para>
+<para>What makes <command>vi</command> confusing to the beginner is that it can operate in two modes:  command mode and insert mode.  The editor always starts in command mode.  Commands move you through the text, search, replace, mark blocks and perform other editing tasks, and some of them switch the editor to insert mode.</para>
+<para>This means that each key has not one, but likely two meanings:  it can either represent a command for the editor when in command mode, or a character that you want in a text when in insert mode.</para>
+<note><title>Pronunciation</title>
+<para>It's pronounced <quote>vee-eye</quote>.</para></note>
+</sect2>
+<sect2 id="sect_06_02_02"><title>Basic commands</title>
+<sect3 id="sect_06_02_02_01"><title>Moving through the text</title>
+<para>Moving through the text is usually possible with the arrow keys<indexterm><primary>vi</primary><secondary>navigation</secondary></indexterm>.  If not, try:</para>
+<itemizedlist>
+<listitem><para><command>h</command> to move the cursor to the left</para></listitem>
+<listitem><para><command>l</command> to move it to the right</para></listitem>
+<listitem><para><command>k</command> to move up</para></listitem>
+<listitem><para><command>j</command> to move down</para></listitem>
+</itemizedlist>
+<para>SHIFT-G will put the prompt at the end of the document.</para>
+</sect3>
+<sect3 id="sect_06_02_02_02"><title>Basic operations</title>
+<para>These are some popular <command>vi</command> commands:</para>
+<itemizedlist>
+<listitem><para><command>n dd</command> will delete n lines starting from the current cursor position.</para></listitem>
+<listitem><para><command>n dw</command> will delete n words at the right side of the cursor.</para></listitem>
+<listitem><para><command>x</command> will delete the character on which the cursor is positioned</para></listitem>
+<listitem><para><command>:n</command> moves to line n of the file.</para></listitem>
+<listitem><para><command>:w</command> will save (write) the file</para></listitem>
+<listitem><para><command>:q</command> will exit the editor.</para></listitem>
+<listitem><para><command>:q!</command>  forces the exit when you want to quit a file containing unsaved changes.</para></listitem>
+<listitem><para><command>:wq</command> will save and exit</para></listitem>
+<listitem><para><command>:w newfile</command> will save the text to <filename>newfile</filename>.</para></listitem>
+<listitem><para><command>:wq!</command> overrides read-only permission (if you have the permission to override permissions, for instance when you are using the <emphasis>root</emphasis> account.</para></listitem>
+
+<listitem><para><command>/astring</command> will search the string in the file and position the cursor on the first match below its position.</para></listitem>
+<listitem><para><command>/</command> will perform the same search again, moving the cursor to the next match.</para></listitem>
+<listitem><para><command>:1, $s/word/anotherword/g</command> will replace <filename>word</filename> with <filename>anotherword</filename> throughout the file.</para></listitem>
+<listitem><para><command>yy</command> will copy a block of text.</para></listitem>
+<listitem><para><command>n p</command> will paste it n times.</para></listitem>
+<listitem><para><command>:recover</command> will recover a file after an unexpected interruption.</para></listitem>
+</itemizedlist>
+</sect3>
+<sect3 id="sect_06_02_02_03"><title>
+Commands that switch the editor to insert<indexterm><primary>vi</primary><secondary>insert mode</secondary></indexterm> mode</title>
+<itemizedlist>
+<listitem><para><command>a</command> will append: it moves the cursor one position to the right before switching to insert mode</para></listitem>
+<listitem><para><command>i</command> will insert</para></listitem>
+<listitem><para><command>o</command> will insert a blank line under the current cursor position and move the cursor to that line.</para></listitem>
+</itemizedlist>
+<para>Pressing the <keycap>Esc</keycap> key switches back to command mode.  If you're not sure what mode you're in because you use a really old version of <command>vi</command> that doesn't display an <quote>INSERT</quote> message, type <keycap>Esc</keycap> and you'll be sure to return to command mode.  It is possible that the system gives a little alert when you are already in command mode when hitting <keycap>Esc</keycap>, by beeping or giving a visual bell (a flash on the screen).  This is normal behavior.</para>
+</sect3>
+</sect2>
+<sect2 id="sect_06_02_03"><title>The easy way</title>
+<para>Instead of reading the text, which is quite boring, you can use the vimtutor to learn you first <application>Vim</application> commands.  This is a thirty minute tutorial<indexterm><primary>vim</primary><secondary>tutor</secondary></indexterm> that teaches the most basic <application>Vim</application> functionality in eight easy exercises.  While you can't learn everything about <command>vim</command> in just half an hour, the tutor is designed to describe enough of the commands that you will be able to easily use Vim as an all-purpose editor.</para>
+<para>In UNIX and MS Windows, if <application>Vim</application> has been properly installed, you can start this program from the shell or command line, entering the <command>vimtutor<indexterm><primary>vimtutor</primary></indexterm></command> command.  This will make a copy of the tutor file, so that you can edit it without the risk of damaging the original.  There are a few translated versions of the tutor.  To find out if yours is available, use the two-letter language code.  For French this would be <command>vimtutor <parameter>fr</parameter></command> (if installed on the system).</para>
+</sect2> 
+
+</sect1>
+<sect1 id="sect_06_03"><title>Linux in the office</title>
+<sect2 id="sect_06_03_01"><title>History</title>
+<para>Throughout the last decade<indexterm><primary>office suits</primary><secondary>history</secondary></indexterm> the office domain has typically been dominated by <application>MS Office</application>, and, let's face it: the Microsoft <application>Word</application>, <application>Excel</application> and <application>PowerPoint</application> formats are industry standards that you will have to deal with sooner or later.</para>
+<para>This monopoly situation of Microsoft proved to be a big disadvantage for getting new users to Linux, so a group of German developers started the StarOffice project, that was, and is still, aimed at making an MS Office clone.  Their company, StarDivision, was acquired by Sun Microsystems by the end of the 1990s, just before the 5.2 release.  Sun continues development but restricted access to the sources.  Nevertheless, development on the original set of sources continues in the Open Source community, which had to rename the project to <application>OpenOffice<indexterm><primary>OpenOffice.org</primary></indexterm></application>.  <application>OpenOffice</application> is now available for a variety of platforms, including MS Windows, Linux, MacOS and Solaris.  There is a screenshot in <xref linkend="sect_01_03_02" />.</para>
+<para>Almost simultaneously, a couple of other quite famous projects took off.  Also a very<indexterm><primary>office suites</primary><secondary>overview</secondary></indexterm> common alternative to using MS Office is <application>KOffice</application>, the office suite that used to be popular among SuSE users.  Like the original, this clone incorporates an MS <application>Word</application> and <application>Excel</application> compatible program, and much more.</para>
+<para>Smaller projects deal with particular programs of the MS example suite, such as <application>Abiword</application> and MS <application>Wordview</application> for compatibility with MS <application>Word</application> documents, and <application>Gnumeric</application> for viewing and creating <application>Excel</application> compatible spreadsheets.</para>
+</sect2>
+<sect2 id="sect_06_03_02"><title>Suites and programs</title>
+<para>Current distributions usually come with all the necessary tools.  Since these provide excellent guidelines and searchable indexes in the <menuchoice><guimenu>Help</guimenu></menuchoice> menus, we won't discuss them in detail.  For references, see you system documentation or the web sites of the projects, such as</para>
+
+<itemizedlist>
+<listitem><para><ulink url="http://www.openoffice.org">http://www.openoffice.org</ulink></para></listitem>
+<listitem><para><ulink url="http://www.koffice.org">http://www.koffice.org</ulink></para></listitem>
+<listitem><para><ulink url="http://freshmeat.net">Freshmeat</ulink> and <ulink url="http://sourceforge.org">SourceForge</ulink> for various other projects.</para></listitem>
+</itemizedlist>
+</sect2>
+<sect2 id="sect_06_03_03"><title>Remarks</title>
+<sect3 id="sect_06_03_03_01"><title>General use of office documents</title>
+<para>Try to limit<indexterm><primary>office suits</primary><secondary>best practice</secondary></indexterm> the use of office documents for the purposes they were meant for: the office.</para>
+<para>An example: it drives most Linux users crazy if you send them a mail that says in the body something like: <quote>Hello, I want to tell you something, see attach</quote>, and then the attachement proves to be an MS Word compatible document like: <quote>Hello my friend, how is your new job going and will you have time to have lunch with me tomorrow?</quote>  Also a bad idea is the attachment of your signature in such a file, for instance.  If you want to sign messages or files, use GPG, the PGP-compatible <application>GNU Privacy Guard</application> or SSL (Secure Socket Layer) certificates.</para>
+<para>These users are not annoyed because they are unable to read these documents, or because they are worried that these formats typically generate much larger files, but rather because of the implication that they are using MS Windows, and possibly because of the extra work of starting some additional programs.</para>
+</sect3>
+<sect3 id="sect_06_03_03_02"><title>System and user configuration files</title>
+<para>In the next chapter, we start configuring our environment, and this might include editing all kinds of files that determine how a program behave.</para>
+<para><emphasis>Don't edit these files with any office component!</emphasis></para>
+<para>The default file format specification  would make the program add several lines of code, defining the format of the file and the fonts used.  These lines won't be interpreted in the correct way by the programs depending on them, resulting in errors or a crash of the program reading the file.  In some cases, you can save the file as plain text, but you'll run into trouble when making this a habit.</para>
+</sect3>
+<sect3 id="sect_06_03_03_03"><title>But I want a graphical text editor!</title>
+<para>If you really<indexterm><primary>editors</primary><secondary>graphical editors</secondary></indexterm> insist, try <command>gedit</command>, <command>kedit</command>, <command>kwrite</command> or <command>xedit</command>; these programs only do text files, which is what we will be needing.  If you plan on doing anything serious, though, stick to a real text mode editor such as <command>vim</command> or <command>emacs</command>.</para>
+<para>An acceptable alternative is <command>gvim</command>, the <application>Gnome</application> version of <command>vim</command>.  You still need to use <command>vi</command> commands, but if you are stuck, you can look them up in the menus.</para>
+</sect3>
+</sect2>
+
+</sect1>
+<sect1 id="sect_06_04"><title>Summary</title>
+<para>In this chapter we learned to use an editor.  While it depends on your own individual preference which one you use, it is necessary to at least know how to use one editor.</para>
+<para>The <command>vi</command> editor is available on every UNIX system.</para>
+<para>Most Linux distributions include an office suite and a graphical text editor.</para>
+
+</sect1>
+<sect1 id="sect_06_05"><title>Exercises</title>
+<para>This chapter has only one exercise: start the <application>Vim</application> tutor by entering <command>vimtutor</command> in a terminal session, and get started.</para>
+<para>You may alternatively start <command>emacs</command> and type <keycap>Ctrl</keycap>+<keycap>H</keycap> and then <keycap>T</keycap> to invoke the self-paced <application>Emacs</application> tutorial.</para>
+<para>Practice is the only way!</para>
+
+</sect1>
+</chapter>

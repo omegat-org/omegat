@@ -1,0 +1,558 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<chapter id="chap_02"><title>Quickstart</title>
+<abstract>
+<para>In order to get the most out of this guide, we will immediately start with
+a practical chapter on connecting to the Linux system and doing some basic 
+things.
+</para>
+<para>We will discuss:</para>
+<para>
+<itemizedlist>
+<listitem><para>Connecting to the system
+</para></listitem>
+<listitem><para>Disconnecting from the system
+</para></listitem>
+<listitem><para>Text and graphic mode
+</para></listitem>
+<listitem><para>Changing your password
+</para></listitem>
+<listitem><para>Navigating through the file system
+</para></listitem>
+<listitem><para>Determining file type
+</para></listitem>
+<listitem><para>Looking at text files
+</para></listitem>
+<listitem><para>Finding help
+</para></listitem>
+</itemizedlist>
+</para>
+
+</abstract>
+<sect1 id="sect_02_01"><title>Logging in, activating the user interface and 
+logging out</title>
+<sect2 id="sect_02_01_01"><title>Introduction</title>
+<para>In order to work on a Linux system directly<indexterm><primary>login</primary><secondary>authentication</secondary></indexterm>, you will need to provide a 
+user name and password.  You always need to authenticate to the system.  As we 
+already mentioned in the exercise from <xref linkend="chap_01" />, most PC-based
+Linux systems have two basic modes for a system to run in: either quick and 
+sober in text console mode, which looks like <application>DOS</application> with mouse, multitasking and 
+multi-user features, or in graphical mode, which looks better but eats 
+more system resources.
+</para>
+</sect2>
+<sect2 id="sect_02_01_02"><title>Graphical mode</title>
+<para>This is the default nowadays on most desktop computers.  You know you will connect to the system using graphical mode when you are first asked for your user name, and then, in a new window, to type your password.</para>
+<para>To log in<indexterm><primary>login</primary><secondary>graphical</secondary></indexterm>, make sure the mouse pointer is in the login window, provide your user name and password to the system and click <guibutton>OK</guibutton> or press <keycap>Enter</keycap>.</para>
+<warning><title>Careful with that root account!</title>
+<para>It is generally considered<indexterm><primary>login</primary><secondary>root</secondary></indexterm> a bad idea to connect (graphically) using the <emphasis>root</emphasis> user name, the system adminstrator's account, since the use of graphics includes running a lot of extra programs, in root's case with a lot of extra permissions.  To keep all risks as low as possible, use a normal user account to connect graphically.  But there are enough risks to keep this in mind as a general advice, for all use of the root account: only log in as root when extra privileges are required.</para>
+</warning>
+<para>After entering your user name/password combination, it can take a little while before the graphical environment is started, depending on the CPU speed of your computer, on the software you use and on your personal settings.</para>
+<para>To continue, you will need to open a <emphasis>terminal window<indexterm><primary>terminal</primary><secondary>starting up</secondary></indexterm></emphasis> or <emphasis>xterm</emphasis> for short (X being the name for the underlying software supporting the graphical environment).  This program can be found in the <menuchoice><guimenu>Applications</guimenu><guimenuitem>Utilities</guimenuitem></menuchoice>, <menuchoice><guimenuitem>System Tools</guimenuitem></menuchoice> or <menuchoice><guimenuitem>Internet</guimenuitem></menuchoice> menu, depending on what window manager you are using.  There might be icons that you can use as a shortcut to get an xterm window as well, and clicking the right mouse button on the desktop background will usually present you with a menu containing a terminal window application.</para>
+<para>While browsing the menus<indexterm><primary>desktop</primary><secondary>menus</secondary></indexterm>, you will notice that a lot of things can be done without entering commands via the keyboard.  For most users, the good old point-'n'-click method of dealing with the computer will do.  But this guide is for future network and system administrators, who will need to meddle with the heart of the system.  They need a stronger tool than a mouse to handle all the tasks they will face.  This tool is the shell, and when in graphical mode, we activate our shell by opening a terminal window.</para>
+<para>The terminal window<indexterm><primary>terminal</primary><secondary>view</secondary></indexterm> is your control panel for the system.  Almost everything that follows is done using this simple but powerful text tool.  A terminal window should always show a command prompt when you open one.  This terminal shows a standard prompt, which displays the user's login name, and the current working directory, represented by the twiddle (<filename>~</filename>):</para>
+<figure><title>Terminal window</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/xterm.eps" format="EPS"></imagedata>
+</imageobject>
+<imageobject>
+<imagedata fileref="images/xterm.png" format="PNG"></imagedata>
+</imageobject>
+<textobject>
+<phrase>X terminal window when just opened displays a prompt.</phrase>
+</textobject>
+</mediaobject>
+</figure>
+<para>Another common form for a prompt is this one:</para>
+<screen>
+<prompt>[user@host dir]</prompt>
+</screen>
+<para>In the above example, <emphasis>user</emphasis> will be your login name, <emphasis>hosts</emphasis> the name of the machine you are working on, and <emphasis>dir</emphasis> an indication of your current location in the file system.</para>
+<para>Later we will discuss prompts and their behavior in detail.  For now, it suffices to know that prompts can display all kinds of information, but that they are not part of the commands you are giving to your system.</para>
+<para>To disconnect from the system in graphical<indexterm><primary>logout</primary><secondary>graphical</secondary></indexterm> mode, you need to close all terminal windows and other applications.  After that, hit the logout icon or find <menuchoice><guimenuitem>Log Out</guimenuitem></menuchoice> in the menu.  Closing everything is not really necessary, and the system can do this for you, but session management might put all currently open applications back on your screen when you connect again, which takes longer and is not always the desired effect.  However, this behavior is configurable.</para>
+<para>When you see the login screen again, asking to enter user name and password, logout was successful.</para>
+<note><title>Gnome or KDE?</title>
+<para>We mentioned both the <application>Gnome</application> and <application>KDE</application> desktops already a couple of times.  These are the two most popular ways of managing your desktop, although there are many, many others.  Whatever deskop you chose to work with is fine - as long as you know how to open a terminal window.  However, we will continue to refer to both <application>Gnome</application> and <application>KDE</application> for the most popular ways of achieving certain tasks.</para>
+</note>
+</sect2>
+
+<sect2 id="sect_02_01_03"><title>Text mode</title>
+<para>You know you're in text mode when the whole screen is black<indexterm><primary>login</primary><secondary>text mode</secondary></indexterm>, showing (in most cases white) characters.  A text mode<indexterm><primary>text mode</primary><secondary>view</secondary></indexterm> login screen typically shows some information about the machine you are working on, the name of the machine and a prompt waiting for you to log in:</para>
+
+<screen>
+
+RedHat Linux Release 8.0 (Psyche)
+
+blast login: _
+
+
+
+
+</screen>
+<para>The login is different from a graphical login, in that you have to hit the <keycap>Enter</keycap> key after providing your user name, because there are no buttons on the screen that you can click with the mouse.  Then you should type your password, followed by another <keycap>Enter</keycap>.  You won't see any indication that you are entering something, not even an asterisk, and you won't see the cursor move.  But this is normal on Linux and is done for security reasons.</para>
+<para>When the system has accepted you as a valid user, you may get some more information, called the <emphasis>message of the day</emphasis>, which can be anything.  Additionally, it is popular on UNIX systems to display a fortune cookie, which contains some general wise or unwise (this is up to you) thoughts.  After that, you will be given a shell, indicated with the same prompt that you would get in graphical mode.</para>
+<warning><title>Don't log in as root</title>
+<para>Also in text mode: log in as root<indexterm><primary>root</primary><secondary>login</secondary></indexterm> only to do setup and configuration that absolutely requires administrator privileges, such as adding users, installing software packages, and performing network and other system configuration.  Once you are finished, immediately leave the special account and resume your work as a non-privileged user.  Alternatively, some systems, like Ubuntu, force you to use <command>sudo<indexterm><primary>sudo</primary></indexterm></command>, so that you do not need direct access to the administrative account.</para>
+</warning>
+
+<para>Logging<indexterm><primary>text mode</primary><secondary>logout</secondary></indexterm> out is done by entering the <command>logout<indexterm><primary>logout</primary></indexterm></command> command, followed by <keycap>Enter</keycap>.  You are successfully disconnected from the system when you see the login screen again.</para>
+<caution><title>The power button</title>
+<para>While Linux was not meant to be shut off without application of the proper procedures for halting the system, hitting the power button<indexterm><primary>power button</primary></indexterm> is equivalent to starting those procedures <emphasis>on newer systems</emphasis>.  However, powering off<indexterm><primary>power off</primary></indexterm> an old system without going through the halting process might cause severe damage!  If you want to be sure, always use the <menuchoice><guimenu>Shut down</guimenu></menuchoice> option when you log out from the graphical interface, or, when on the login screen (where you have to give your user name and password) look around for a shutdown button.</para></caution>
+<para>Now that we know how to connect to and disconnect from the system, we're ready for our first commands.</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="sect_02_02"><title>Absolute basics</title>
+<sect2 id="sect_02_02_01"><title>The commands</title>
+<para>These are the quickies<indexterm><primary>commands</primary><secondary>basics</secondary></indexterm>, which we need to get started; we will discuss them later in more detail.</para>
+<table id="tab_02_01" frame="all">
+<title>Quickstart commands</title>
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead>
+<row>
+<entry>Command</entry>
+<entry>Meaning</entry>
+</row>
+</thead>
+
+<tbody>
+
+<row>
+<entry><command>ls</command></entry>
+<entry><para>Displays a list of files<indexterm><primary>ls</primary></indexterm> in the current working directory, like the <command>dir</command> command in DOS</para></entry>
+</row>
+
+<row>
+<entry><command>cd <filename>directory</filename></command></entry>
+<entry><para>change<indexterm><primary>cd</primary></indexterm> directories</para></entry>
+</row>
+
+<row>
+<entry><command>passwd</command></entry>
+<entry>change the password<indexterm><primary>passwd</primary></indexterm> for the current user</entry>
+</row>   
+
+<row>
+<entry><command>file <filename>filename</filename></command></entry>
+<entry>display file type<indexterm><primary>file</primary></indexterm> of file with name <filename>filename</filename></entry>
+</row>
+<row>
+<entry><command>cat <filename>textfile</filename></command></entry>
+<entry>throws<indexterm><primary>cat</primary></indexterm> content of <filename>textfile</filename> on the screen</entry>
+</row>
+<row><entry><command>pwd</command></entry>
+<entry>display<indexterm><primary>pwd</primary></indexterm> present working directory</entry>
+</row>
+<row>
+<entry><command>exit</command> or <command>logout</command></entry>
+<entry>leave<indexterm><primary>exit</primary></indexterm> this session</entry>
+</row>   
+<row>
+<entry><command>man <parameter>command</parameter></command></entry>
+<entry>read man<indexterm><primary>man</primary></indexterm> pages on <command>command</command></entry>
+</row>
+<row>
+<entry><command>info <parameter>command</parameter></command></entry>
+<entry>read Info<indexterm><primary>info</primary></indexterm> pages on <command>command</command></entry>
+</row>
+<row>
+<entry><command>apropos <parameter>string</parameter></command></entry>
+<entry>search<indexterm><primary>apropos</primary></indexterm> the <emphasis>whatis</emphasis> database for strings</entry>
+</row>
+
+</tbody>
+</tgroup>
+</table>
+</sect2>
+<sect2 id="sect_02_02_02"><title>General remarks</title>
+<para>You type these commands<indexterm><primary>commands</primary><secondary>entering</secondary></indexterm> after the prompt, in a terminal window in graphical mode or in text mode, followed by <keycap>Enter</keycap>.</para>
+<para>Commands can be issued by themselves, such as <command>ls<indexterm><primary>ls</primary></indexterm></command>.  A command behaves different when you specify an <emphasis>option<indexterm><primary>commands</primary><secondary>options</secondary></indexterm></emphasis>, usually preceded with a dash<indexterm><primary>dash</primary></indexterm> (-), as in <command>ls -a</command>.  The same option character may have a different meaning for another command.  GNU programs take long options<indexterm><primary>options</primary><secondary>long options</secondary></indexterm>, preceded by two dashes (--), like <command>ls --all</command>.  Some commands have no options.</para>
+<para>The argument(s)<indexterm><primary>commands</primary><secondary>arguments</secondary></indexterm> to a command are specifications for the object(s) on which you want the command to take effect.  An example is <command>ls <parameter>/etc</parameter></command>, where the directory <filename>/etc</filename> is the argument to the <command>ls</command> command.  This indicates that you want to see the content of that directory, instead of the default, which would be the content of the current directory, obtained by just typing <command>ls</command> followed by <keycap>Enter</keycap>.  Some commands require arguments, sometimes arguments are optional.</para>
+<para>You can find out whether a command takes options and arguments, and which ones are valid, by checking the online help for that command, see <xref linkend="sect_02_03" />.</para>
+<para>In Linux, like in UNIX, directories are separated using forward slashes<indexterm><primary>slash</primary><secondary>forward</secondary></indexterm>, like the ones used in web addresses (URLs).  We will discuss directory structure in-depth later.</para>
+<para>The symbols . and ..<indexterm><primary>dots</primary></indexterm> have special meaning when directories are concerned.  We will try to find out about those during the exercises, and more in the next chapter.</para>
+<para>Try to avoid logging in with or using the system administrator's<indexterm><primary>root login</primary></indexterm> account, <emphasis>root</emphasis>.  Besides doing your normal work, most tasks, including checking the system, collecting information etc., can be executed using a normal user account with no special permissions at all.  If needed, for instance when creating a new user or installing new software, the preferred way of obtaining root access is by switching user IDs, see <xref linkend="sect_03_02_01" /> for an example.</para>  
+<para>Almost all commands in this book can be executed without system administrator privileges.  In most cases, when issuing a command or starting a program as a non-privileged user, the system will warn you or prompt you for the root password when root access is required.  Once you're done, leave the application or session that gives you root privileges immediately.</para>
+<para>Reading documentation should become your second nature.  Especially in the beginning, it is important to read system documentation, manuals for basic commands, HOWTOs and so on.  Since the amount of documentation is so enormous, it is impossible to include all related documentation.  This book will try to guide you to the most appropriate documentation on every subject discussed, in order to stimulate the habit of reading the man pages.</para>
+</sect2>
+<sect2 id="sect_02_02_03"><title>Using Bash features</title>
+<para>Several special key<indexterm><primary>Bash</primary><secondary>features</secondary></indexterm> combinations allow you to do things easier and faster with the GNU shell, <application>Bash</application>, which is the default on almost any Linux system, see <xref linkend="sect_03_02_03_02" />.  Below is a list<indexterm><primary>key combinations</primary></indexterm> of the most commonly used features; you are strongly suggested to make a habit out of using them, so as to get the most out of your Linux experience from the very beginning.</para>
+
+<table id="tab_02_02" frame="all"><title>Key combinations in Bash</title>
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead>
+<row><entry>Key or key combination</entry><entry>Function</entry></row>
+</thead>
+<tbody>
+<row><entry><keycap>Ctrl</keycap>+<keycap>A</keycap></entry><entry>Move cursor to the beginning<indexterm><primary>Ctrl</primary></indexterm> of the command line.</entry></row>
+<row><entry><keycap>Ctrl</keycap>+<keycap>C</keycap></entry><entry>End a running program and return the prompt, see <xref linkend="chap_04" />.</entry></row>
+<row><entry><keycap>Ctrl</keycap>+<keycap>D</keycap></entry><entry>Log out of the current shell session, equal to typing <command>exit</command> or <command>logout</command>.</entry></row>
+<row><entry><keycap>Ctrl</keycap>+<keycap>E</keycap></entry><entry>Move cursor to the end of the command line.</entry></row>
+<row><entry><keycap>Ctrl</keycap>+<keycap>H</keycap></entry><entry>Generate backspace character.</entry></row>
+<row><entry><keycap>Ctrl</keycap>+<keycap>L</keycap></entry><entry>Clear this terminal.</entry></row>
+<row><entry><keycap>Ctrl</keycap>+<keycap>R</keycap></entry><entry>Search command history, see <xref linkend="sect_03_03_03_04" />.</entry></row>
+<row><entry><keycap>Ctrl</keycap>+<keycap>Z</keycap></entry><entry>Suspend a program, see <xref linkend="chap_04" />.</entry></row>
+<row><entry><keycap>ArrowLeft</keycap> and <keycap>ArrowRight</keycap></entry><entry>Move the cursor<indexterm><primary>arrows</primary></indexterm> one place to the left or right on the command line, so that you can insert characters at other places than just at the beginning and the end.</entry></row>
+<row><entry><keycap>ArrowUp</keycap> and <keycap>ArrowDown</keycap></entry><entry>Browse history.  Go to the line that you want to repeat, edit details if necessary, and press <keycap>Enter</keycap> to save time.</entry></row>
+<row><entry><keycap>Shift</keycap>+<keycap>PageUp</keycap> and <keycap>Shift</keycap>+<keycap>PageDown</keycap></entry><entry>Browse terminal<indexterm><primary>Shift</primary></indexterm> buffer (to see text that has "scrolled off" the screen).</entry></row>
+<row><entry><keycap>Tab</keycap></entry><entry>Command<indexterm><primary>tab</primary></indexterm> or filename completion; when multiple choices are possible, the system will either signal with an audio or visual bell, or, if too many choices are possible, ask you if you want to see them all.</entry></row>
+<row><entry><keycap>Tab</keycap> <keycap>Tab</keycap></entry><entry>Shows file or command completion possibilities.</entry></row>
+</tbody>
+</tgroup>
+</table>
+
+<para>The last two items in the above table may need some extra explanantions.  For instance, if you want to change into the directory<indexterm><primary>file name completion</primary><secondary></secondary></indexterm> <filename>directory_with_a_very_long_name</filename>, you are not going<indexterm><primary>Bash</primary><secondary>file name completion</secondary></indexterm> to type that very long name, no.  You just type on the command line <command>cd dir</command>, then you press <keycap>Tab</keycap> and the shell completes the name for you, if no other files are starting with the same three characters.  Of course, if there are no other items starting with <quote>d</quote>, then you might just as wel type <command>cd d</command> and then <keycap>Tab</keycap>.  If more than one file starts with the same characters, the shell will signal this to you, upon which you can hit <keycap>Tab</keycap> twice with short interval, and the shell presents the choices you have:</para>
+<screen>
+<prompt>your_prompt&gt;</prompt> <command>cd st</command>
+starthere	 stuff		stuffit
+</screen>
+<para>In the above example, if you type <quote>a</quote> after the first two characters and hit <keycap>Tab</keycap> again, no other possibilities are left, and the shell completes the directory name, without you having to type the string <quote>rthere</quote>:</para>
+<screen>
+<prompt>your_prompt&gt;</prompt> <command>cd starthere</command>
+</screen>
+<para>Of course, you'll still have to hit <keycap>Enter</keycap> to accept this choice.</para>
+<para>In the same example, if you type <quote>u</quote>, and then hit <keycap>Tab</keycap>, the shell will add the <quote>ff</quote> for you, but then it protests again, because multiple choices are possible.  If you type <keycap>Tab</keycap> <keycap>Tab</keycap> again, you'll see the choices; if you type one or more characters that make the choice unambiguous to the system, and <keycap>Tab</keycap> again, or <keycap>Enter</keycap> when you've reach the end of the file name that you want to choose, the shell completes the file name and changes you into that directory - if indeed it is a directory name.</para>
+<para>This works for all file names that are arguments to commands.</para>
+<para>The same goes for command name completion<indexterm><primary>command name completion</primary><secondary></secondary></indexterm>.  Typing <command>ls</command> and then hitting<indexterm><primary>Bash</primary><secondary>command name completion</secondary></indexterm> the <keycap>Tab</keycap> key twice, lists all the commands in your <varname>PATH</varname> (see <xref linkend="sect_03_02_01" />) that start with these two characters:</para>
+<screen>
+<prompt>your_prompt&gt;</prompt> <command>ls</command>
+ls           lsdev        lspci        lsraid       lsw
+lsattr       lsmod        lspgpot      lss16toppm
+lsb_release  lsof         lspnp        lsusb
+</screen>
+</sect2>
+
+</sect1>
+<sect1 id="sect_02_03"><title>Getting help</title>
+<sect2 id="sect_02_03_01"><title>Be warned</title>
+<para>GNU/Linux is all about becoming more self-reliant.  And as usual with this system, there are several ways to achieve the goal.  A common way of getting help is finding someone who knows, and however patient and peace-loving the Linux-using community will be, almost everybody will expect you to have tried one or more of the methods in this section before asking them, and the ways in which this viewpoint is expressed may be rather harsh if you prove not to have followed this basic rule.</para>
+</sect2>
+<sect2 id="sect_02_03_02"><title>The man pages</title>
+<para>A lot of beginning<indexterm><primary>man pages</primary><secondary>man man</secondary></indexterm> users fear the man (manual) pages, because they are an overwhelming source of documentation.  They are, however, very structured, as you will see from the example below on: <command>man <option>man</option></command>.</para>
+<para>Reading man pages is usually done in a terminal window when in graphical mode, or just in text mode if you prefer it.  Type the command<indexterm><primary>man</primary><secondary>example</secondary></indexterm> like this at the prompt, followed by <keycap>Enter</keycap>:</para>
+<screen>
+<prompt>yourname@yourcomp ~&gt;</prompt> <command>man <parameter>man</parameter></command>
+</screen>
+<para>The documentation for <command>man</command> will be displayed on your screen after you press <keycap>Enter</keycap>:</para>  
+<screen>
+man(1)                                                         man(1)
+
+
+
+NAME
+ man - format and display the on-line manual pages
+ manpath - determine user's search path for man pages
+
+SYNOPSIS
+ man [-acdfFhkKtwW] [--path] [-m system] [-p string] [-C config_file]
+ [-M pathlist] [-P pager] [-S section_list] [section] name ...
+
+
+DESCRIPTION
+ man formats and displays the on-line manual pages.  If you specify
+ section, man only looks in that section of the manual.  
+ name is normally the name of the manual page, which is typically the 
+ name of a  command, function, or file.  However, if name contains a 
+ slash (/) then man interprets it as a file specification, so that you
+ can do man ./foo.5 or even man /cd/foo/bar.1.gz.
+
+ See  below  for  a  description  of where man looks for the manual
+ page files.
+
+OPTIONS
+ -C  config_file
+lines 1-27
+</screen>
+<para>Browse to the next page using<indexterm><primary>man pages</primary><secondary>browsing</secondary></indexterm> the space bar.  You can go back to the previous page using the b-key.  When you reach the end, <command>man</command> will usually quit and you get the prompt back.  Type <keycap>q</keycap> if you want to leave the man page before reaching the end, or if the viewer does not quit automatically at the end of the page.</para>
+<note><title>Pagers</title>
+<para>The available key combinations for manipulating the man pages depend on the <emphasis>pager</emphasis> used in your distribution.  Most distributions use <command>less<indexterm><primary>less</primary><secondary>pager for man</secondary></indexterm></command> to view the man pages and to scroll around.  See <xref linkend="sect_03_03_04_02" /> for more info on pagers.</para>
+</note>
+<para>Each man page usually contains a couple of standard sections<indexterm><primary>man pages</primary><secondary>structure</secondary></indexterm>, as we can see from the <command>man <option>man</option></command> example:</para>
+<itemizedlist>
+<listitem><para>The first line contains the name of the command you are reading about, and the id of the section in which this man page is located.  The man pages are ordered in chapters.  Commands are likely to have multiple man pages, for example the man page from the user section, the man page from the system admin section, and the man page from the programmer section.</para></listitem>
+<listitem><para>The name of the command and a short description are given, which is used for building an index of the man pages.  You can look for any given search string in this index using the <command>apropos<indexterm><primary>apropos</primary></indexterm></command> command.</para></listitem>
+<listitem><para>The synopsis<indexterm><primary>commands</primary><secondary>synopsis</secondary></indexterm> of the command provides a technical notation of all the options and/or arguments this command can take.  You can think of an option as a way of executing the command.  The argument is what you execute it on.  Some commands have no options or no arguments.  Optional options and arguments are put in between<indexterm><primary>square braces</primary></indexterm> <quote>[</quote> and <quote>]</quote> to indicate that they can be left out.</para></listitem>
+<listitem><para>A longer description of the command is given.</para></listitem>
+<listitem><para>Options with their descriptions are listed.  Options can usually be combined.  If not so, this section will tell you about it.</para></listitem>
+<listitem><para>Environment describes the shell variables that influence the behavior of this command (not all commands have this).</para></listitem>
+<listitem><para>Sometimes sections specific to this command are provided.</para></listitem>
+<listitem><para>A reference to other man pages is given in the <quote>SEE ALSO</quote> section.  In between parentheses is the number of the man page section in which to find this command.  Experienced users often switch to the <quote>SEE ALSO</quote> part using the <command>/</command> command followed by the search string <literal>SEE</literal> and press <keycap>Enter</keycap>.</para></listitem>
+<listitem><para>Usually there is also information about known bugs (anomalies) and where to report new bugs you may find.</para></listitem>
+<listitem><para>There might also be author and copyright information.</para></listitem>
+</itemizedlist>
+<para>Some commands have multiple<indexterm><primary>commands</primary><secondary>multiple man pages</secondary></indexterm> man pages.  For instance, the <command>passwd</command> command has a man page<indexterm><primary>man pages</primary><secondary>sections</secondary></indexterm> in section 1 and another in section 5.  By default, the man page with the lowest number is shown.  If you want to see another section than the default, specify it after the <command>man</command> command:</para>
+<cmdsynopsis><command>man <option>5</option> <parameter>passwd</parameter></command></cmdsynopsis>
+<para>If you want to see all man pages about a command, one after the other, use the <option>-a</option> to man:</para>
+<cmdsynopsis><command>man <option>-a</option> <parameter>passwd</parameter></command></cmdsynopsis>
+<para>This way, when you reach the end of the first man page and press <keycap>SPACE</keycap> again, the man page from the next section will be displayed.</para>
+</sect2>
+<sect2 id="sect_02_03_03"><title>More info</title>
+<sect3 id="sect_02_03_03_01"><title>The Info pages</title>
+<para>In addition to the man pages, you can read the Info pages<indexterm><primary>Info pages</primary></indexterm> about a command, using the <command>info<indexterm><primary>info</primary></indexterm></command> command.  These usually contain more recent information and are somewhat easier to use.  The man pages for some commands refer to the Info pages.</para>
+<para>Get started by typing<indexterm><primary>info</primary><secondary>info info</secondary></indexterm> <command>info <parameter>info</parameter></command> in a terminal<indexterm><primary>info</primary><secondary>example</secondary></indexterm> window:</para>  
+<screen>
+File: info.info,  Node: Top,  Next: Getting Started,  Up: (dir)
+
+Info: An Introduction
+*********************
+
+   Info is a program, which you are using now, for reading
+documentation of computer programs.  The GNU Project distributes most
+of its on-line manuals in the Info format, so you need a program called
+"Info reader" to read the manuals.  One of such programs you are using
+now.
+
+   If you are new to Info and want to learn how to use it, type the
+command `h' now.  It brings you to a programmed instruction sequence.
+
+   To learn advanced Info commands, type `n' twice.  This brings you to
+`Info for Experts', skipping over the `Getting Started' chapter.
+
+* Menu:
+
+* Getting Started::             Getting started using an Info reader.
+* Advanced Info::               Advanced commands within Info.
+* Creating an Info File::       How to make your own Info file.
+--zz-Info: (info.info.gz)Top, 24 lines --Top-------------------------------
+Welcome to Info version 4.2. Type C-h for help, m for menu item.
+</screen>
+<para>Use the arrow<indexterm><primary>info pages</primary><secondary>browsing</secondary></indexterm> keys to browse through the text and move the cursor on a line starting with an asterisk, containing the keyword about which you want info, then hit <keycap>Enter</keycap>.  Use the <keycap>P</keycap> and <keycap>N</keycap> keys to go to the previous or next subject.  The space bar will move you one page further, no matter whether this starts a new subject or an Info page for another command.  Use <keycap>Q</keycap> to quit.  The <command>info</command> program has more information.</para>
+</sect3>
+<sect3 id="sect_02_03_03_02"><title>The whatis and apropos commands</title>
+<para>A short index of explanations for commands is available using the <command>whatis<indexterm><primary>whatis</primary><secondary>example</secondary></indexterm></command> command, like in the examples below:</para>
+<screen>
+<prompt>[your_prompt]</prompt> <command>whatis ls</command>
+ls                   (1)  - list directory contents
+</screen>
+<para>This displays short information about a command, and the first section in the collection of man pages that contains an appropriate page.</para>
+<para>If you don't know where to get started and which man page to read, <command>apropos<indexterm><primary>apropos</primary><secondary>example</secondary></indexterm></command> gives more information.  Say that you don't know how to start a browser, then you could enter the following command:</para>
+<screen>
+<prompt>another prompt&gt;</prompt> <command>apropos browser</command>
+Galeon [galeon](1)  - gecko-based GNOME web browser
+lynx           (1)  - a general purpose distributed information browser 
+	            for the World Wide Web
+ncftp          (1)  - Browser program for the File Transfer Protocol
+opera          (1)  - a graphical web browser
+pilot          (1)  - simple file system browser in the style of the 
+		    Pine Composer
+pinfo          (1)  - curses based lynx-style info browser
+pinfo [pman]   (1)  - curses based lynx-style info browser
+viewres        (1x)  - graphical class browser for Xt
+</screen>
+<para>After pressing <keycap>Enter</keycap> you will see that a lot of browser related stuff is on your machine: not only web browsers, but also file and FTP browsers, and browsers for documentation.  If you have development packages installed, you may also have the accompanying man pages dealing with writing programs having to do with browsers.  Generally, a command with a man page in section one, so one marked with <quote>(1)</quote>, is suitable for trying out as a user.  The user who issued the above <command>apropos</command> might consequently try to start the commands <command>galeon</command>, <command>lynx</command> or <command>opera</command>, since these clearly have to do with browsing the world wide web.</para>
+</sect3>
+<sect3 id="sect_02_03_03_03"><title>The --help option</title>
+<para>Most GNU commands support<indexterm><primary>options</primary><secondary>--help</secondary></indexterm> the <option>--help</option>, which gives a short explanation<indexterm><primary>help</primary><secondary>option</secondary></indexterm> about how to use the command and a list of available options.  Below is the output of this option with the <command>cat</command> command<indexterm><primary>help</primary><secondary>example</secondary></indexterm>:</para>
+<screen>
+<prompt>userprompt@host:</prompt> <command>cat --help</command>
+Usage: cat [OPTION] [FILE]...
+Concatenate FILE(s), or standard input, to standard output.
+
+  -A, --show-all           equivalent to -vET
+  -b, --number-nonblank    number nonblank output lines
+  -e                       equivalent to -vE
+  -E, --show-ends          display $ at end of each line
+  -n, --number             number all output lines
+  -s, --squeeze-blank      never more than one single blank line
+  -t                       equivalent to -vT
+  -T, --show-tabs          display TAB characters as ^I
+  -u                       (ignored)
+  -v, --show-nonprinting   use ^ and M- notation, 
+			   except for LFD and TAB
+      --help     display this help and exit
+      --version  output version information and exit
+
+With no FILE, or when FILE is -, read standard input.
+
+Report bugs to &lt;bug-textutils@gnu.org&gt;.
+</screen>
+</sect3>
+<sect3 id="sect_02_03_04"><title>Graphical help</title>
+<para>Don't despair if you prefer a graphical<indexterm><primary>help</primary><secondary>graphical</secondary></indexterm> user interface.  <application>Konqueror<indexterm><primary>Konqueror</primary><secondary></secondary></indexterm></application>, the default <application>KDE</application> file manager, provides painless and colourful access to the man and <application>Info</application> pages.  You may want to try <quote>info:info</quote> in the <emphasis>Location</emphasis> address bar, and you will get a browsable Info page about the <command>info</command> command.  Similarly, <quote>man:ls</quote> will present you with the man page for the <command>ls</command> command.  You even get command name completion: you will see the man pages for all the commands starting with <quote>ls</quote> in a scroll-down menu.  Entering <quote>info:/dir</quote> in the address location toolbar displays all the Info pages, arranged in utility categories.  Excellent <menuchoice><guimenu>Help</guimenu></menuchoice> content, including the Konqueror Handbook.  Start up from the menu or by typing the command <command>konqueror</command> in a terminal window, followed by <keycap>Enter</keycap>; see the screenshot<indexterm><primary>man pages</primary><secondary>graphical</secondary></indexterm> below.</para>
+
+<figure><title>Konqueror as help browser</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/konqueror.eps" format="EPS"></imagedata></imageobject><imageobject>
+<imagedata fileref="images/konqueror.png" format="PNG"></imagedata>
+</imageobject>
+<textobject>
+<phrase>Type "man:cat" in the location toolbar of Konqueror to display the cat man page.</phrase>
+</textobject>
+</mediaobject>
+</figure>
+<para>The <application>Gnome Help Browser<indexterm><primary>help</primary><secondary>Gnome Help</secondary></indexterm></application> is very user friendly as well.  You can start it selecting <menuchoice><guimenu>Applications</guimenu><guimenuitem>Help</guimenuitem></menuchoice> from the <application>Gnome</application> menu, by clicking the lifeguard icon on your desktop or by entering the command <command>gnome-help</command> in a terminal window.  The system documentation and man pages are easily browsable with a plain interface.</para>
+<para>The <command>nautilus<indexterm><primary>nautilus</primary></indexterm></command> file manager provides a searchable index of the man and <application>Info</application> pages, they are easily browsable and interlinked.  <application>Nautilus</application> is started from the command line, or clicking your home directory icon, or from the <application>Gnome</application> menu.</para>
+<para>The big advantage of GUIs for system documentation is that all information is completely interlinked, so you can click through in the <quote>SEE ALSO</quote> sections and wherever links to other man pages appear, and thus browse and acquire knowledge without interruption for hours at the time.</para> 
+</sect3>
+<sect3 id="sect_02_03_05"><title>Exceptions</title>
+<para>Some commands don't have separate documentation, because they are part of another<indexterm><primary>commands</primary><secondary>built-ins</secondary></indexterm> command.  <command>cd</command>, <command>exit</command>, <command>logout</command> and <command>pwd</command> are such exceptions.  They are part of your shell program and are called <emphasis>shell built-in</emphasis> commands.  For information about these, refer to the man or info page of your shell.  Most beginning Linux users have a Bash shell.  See <xref linkend="sect_03_02_03_02" /> for more about shells.</para>
+<para>If you have been changing your original system configuration, it might also be possible that man pages are still there, but not visible because your shell environment has changed.  In that case, you will need to check the <varname>MANPATH</varname> variable.  How to do this is explained in <xref linkend="sect_07_02_02" />.</para>
+<para>Some programs or packages only have a set of instructions or references in the directory <filename>/usr/share/doc<indexterm><primary>help</primary><secondary>/usr/share/doc</secondary></indexterm></filename>.  See <xref linkend="sect_03_03_04" /> to display.</para>
+<para>In the worst case, you may have removed the documentation from your system by accident (hopefully by accident, because it is a very bad idea to do this on purpose).  In that case, first try to make sure that there is really nothing appropriate left using a search tool, read on in <xref linkend="sect_03_03_03" />.  If so, you may have to re-install the package that contains the command to which the documentation applied, see <xref linkend="sect_07_06" />.</para>
+</sect3>
+</sect2>
+
+</sect1>
+<sect1 id="sect_02_04"><title>Summary</title>
+<para>Linux traditionally operates in text mode or in graphical mode.  Since CPU power and RAM are not the cost anymore these days, every Linux user can afford to work in graphical mode and will usually do so.  This does not mean that you don't have to know about text mode: we will work in the text environment throughout this course, using a terminal window.</para>
+<para>Linux encourages its users to acquire knowledge and to become independent.  Inevitably, you will have to read a lot of documentation to achieve that goal; that is why, as you will notice, we refer to extra documentation for almost every command, tool and problem listed in this book.  The more docs you read, the easier it will become and the faster you will leaf through manuals.  Make reading documentation a habit as soon as possible.  When you don't know the answer to a problem, refering to the documentation should become a second nature.</para>
+<para>We already learned some commands:</para>
+<table frame="all">
+<title>New commands in chapter 2: Basics</title>
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead>
+<row>
+<entry>Command</entry><entry>Meaning</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><command>apropos</command></entry><entry>Search information about a command or subject.</entry>
+</row>
+<row>
+<entry><command>cat</command></entry><entry>Show content of one or more files.</entry>
+</row>
+<row>
+<entry><command>cd</command></entry><entry>Change into another directory.</entry>
+</row>
+<row>
+<entry><command>exit</command></entry><entry>Leave a shell session.</entry>
+</row>
+<row>
+<entry><command>file</command></entry><entry>Get information about the content of a file.</entry>
+</row>
+<row>
+<entry><command>info</command></entry><entry>Read <application>Info</application> pages about a command.</entry>
+</row>
+<row>
+<entry><command>logout</command></entry><entry>Leave a shell session.</entry>
+</row>
+<row>
+<entry><command>ls</command></entry><entry>List directory content.</entry>
+</row>
+<row>
+<entry><command>man</command></entry><entry>Read manual pages of a command.</entry>
+</row>
+<row>
+<entry><command>passwd</command></entry><entry>Change your password.</entry>
+</row>
+<row>
+<entry><command>pwd</command></entry><entry>Display the current working directory.</entry>
+</row>
+
+
+</tbody>
+</tgroup>
+</table>
+</sect1>
+<sect1 id="sect_02_05"><title>Exercises</title>
+<para>Most of what we learn is by making mistakes and by seeing how things can go wrong.  These exercises are made to get you to read some error messages.  The order in which you do these exercises is important.</para>
+<para>Don't forget to use the Bash features on the command line: try to do the exercises typing as few characters as possible!</para>
+<sect2 id="sect_02_05_01"><title>Connecting and disconnecting</title>
+<para>
+<itemizedlist>
+<listitem><para>Determine whether you are working in text or in graphical mode.</para>
+<para>I am working in text/graphical mode.  (cross out what's not applicable)</para>
+</listitem>
+<listitem><para>Log in with the user name and password you made for yourself during the installation.</para>
+</listitem>
+<listitem><para>Log out.</para></listitem>
+<listitem><para>Log in again, using a non-existent user name</para>
+<para>-&gt; What happens?</para>
+</listitem>
+</itemizedlist>
+</para>
+</sect2>
+
+<sect2 id="sect_02_05_02"><title>Passwords</title>
+<para>Log in again with your user name and password.</para>
+<itemizedlist>
+<listitem><para>Change your password into <emphasis>P6p3.aa!</emphasis> and hit the <keycap>Enter</keycap> key.</para>
+<para>-&gt; What happens?</para>
+</listitem>
+<listitem><para>Try again, this time enter a password that is ridiculously easy, like <emphasis>123</emphasis> or <emphasis>aaa</emphasis>.</para>
+<para>-&gt; What happens?</para>
+</listitem>
+<listitem><para>Try again, this time don't enter a password but just hit the <keycap>Enter</keycap> key.</para>
+<para>-&gt; What happens?</para>
+</listitem>
+<listitem><para>Try the command <command>psswd</command> instead of <command>passwd</command></para>
+<para>-&gt; What happens?</para>
+</listitem>
+</itemizedlist>
+
+<warning><title>New password</title>
+<para>Unless you change your password back again to what it was before this exercise, it will be <quote>P6p3.aa!</quote>.  Change your password after this exercise!</para>
+<para>Note that some systems might not allow to recycle passwords, i.e. restore the original one within a certain amount of time or a certain amount of password changes, or both.</para>
+</warning>
+
+</sect2>
+
+<sect2 id="sect_02_05_03"><title>Directories</title>
+<para>These are some exercises to help you get the feel.</para>
+<itemizedlist>
+<listitem><para>Enter the command <command>cd <filename>blah</filename></command></para>
+<para>-&gt; What happens?</para>
+</listitem>
+<listitem><para>Enter the command <command>cd <filename>..</filename></command></para>
+<para>Mind the space between "cd" and ".."!  Use the <command>pwd</command> command.</para>
+<para>-&gt; What happens?</para>
+</listitem>
+<listitem><para>List the directory contents with the <command>ls</command> command.</para>
+<para>-&gt; What do you see?</para>
+<para>-&gt; What do you think these are?</para>
+<para>-&gt; Check using the <command>pwd</command> command.</para>
+</listitem>
+<listitem><para>Enter the <command>cd</command> command.</para>
+<para>-&gt; What happens?</para>
+</listitem>
+<listitem><para>Repeat step 2 two times.</para>
+<para>-&gt; What happens?</para>
+</listitem>
+<listitem><para>Display the content of this directory.</para></listitem>
+<listitem><para>Try the command <command>cd <filename>root</filename></command></para>
+<para>-&gt; What happens?</para>
+<para>-&gt; To which directories do you have access?</para>
+</listitem>
+<listitem><para>Repeat step 4.</para>
+<para>Do you know another possibility to get where you are now?</para>
+</listitem>
+</itemizedlist>
+</sect2>
+<sect2 id="sect_02_05_04"><title>Files</title>
+<itemizedlist>
+<listitem><para>Change directory to <filename>/</filename> and then to <filename>etc</filename>.  Type <command>ls</command>; if the output is longer than your screen, make the window longer, or try <keycap>Shift</keycap>+<keycap>PageUp</keycap> and <keycap>Shift</keycap>+<keycap>PageDown</keycap>.</para>
+<para>The file <filename>inittab</filename> contains the answer to the first question in this list.  Try the <command>file</command> command on it.</para>
+<para>-&gt; The file type of my <filename>inittab</filename> is  .....</para>
+</listitem>
+<listitem><para>Use the command <command>cat <filename>inittab</filename></command> and read the file.</para>
+<para>-&gt; What is the default mode of your computer?</para>
+</listitem>
+<listitem><para>Return to your home directory using the <command>cd</command> command.</para></listitem>
+<listitem><para>Enter the command <command>file <filename>.</filename></command></para>
+<para>-&gt; Does this help to find the meaning of <quote>.</quote>? </para>
+</listitem>
+<listitem><para>Can you look at "." using the <command>cat</command> command?</para>
+<para></para>
+</listitem>
+<listitem><para>Display help for the <command>cat</command> program, using the <option>--help</option> option.  Use the option for numbering of output lines to count how many users are listed in the file <filename>/etc/passwd</filename>.</para>
+</listitem>
+</itemizedlist>
+</sect2>
+<sect2 id="sect_02_05_05"><title>Getting help</title>
+<itemizedlist>
+<listitem><para>Read <command>man <parameter>intro</parameter></command></para></listitem>
+<listitem><para>Read <command>man <parameter>ls</parameter></command></para></listitem>
+<listitem><para>Read <command>info <parameter>passwd</parameter></command></para></listitem>
+<listitem><para>Enter the <command>apropos <option>pwd</option></command> command.</para></listitem>
+<listitem><para>Try <command>man</command> or <command>info</command> on <command>cd</command>.</para>
+<para>-&gt; How would you find out more about <command>cd</command>? </para>
+</listitem>
+<listitem><para>Read <command>ls <option>--help</option></command> and try it out.</para></listitem>
+</itemizedlist>
+</sect2>
+
+</sect1>
+</chapter>

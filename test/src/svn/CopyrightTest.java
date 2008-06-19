@@ -49,6 +49,10 @@ public class CopyrightTest extends TestCase {
         list(new File("test"), sourceFiles);
         ByteArrayOutputStream fdata = new ByteArrayOutputStream();
         for (File f : sourceFiles) {
+            if (f.getPath().replace('\\', '/').startsWith("src/gen/")) {
+                // skip jaxb generated files
+                continue;
+            }
             LFileCopy.copy(f, fdata);
             String data = fdata.toString("ISO-8859-1");
             checkNote(f, data);

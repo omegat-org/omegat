@@ -30,8 +30,10 @@ import org.omegat.filters3.xml.docbook.DocBookFilter;
 
 public class DocBookFilterTest extends TestFilterBase {
     public void testParse() throws Exception {
-        parse(new DocBookFilter(),
+        List<String> lines = parse(new DocBookFilter(),
                 "test/data/filters/docBook/file-DocBookFilter.xml");
+        boolean c=lines.contains("My String");
+        assertTrue("'My String' not defined'", c);
     }
 
     public void testTranslate() throws Exception {

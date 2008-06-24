@@ -43,6 +43,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import org.omegat.gui.filelist.ProjectFrame;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -165,6 +166,7 @@ public class MainWindowUI {
                 mainWindow.desktop.readXML(in);
                 in.close();
             } catch (Exception e) {
+                Log.log(e);
             }
         }
 
@@ -215,7 +217,7 @@ public class MainWindowUI {
                 in.close();
             }
         } catch (Exception exception) {
-            // eat silently, probably a bug in the docking framework
+            Log.log(exception);
         }
     }
 }

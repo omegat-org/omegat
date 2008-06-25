@@ -4,7 +4,7 @@
 2.0.0 vs. 1.8.0 update 3 
 
 
-  5 Enhancements
+  6 Enhancements
   0 Bugfix
 
 ----------------------------------------------------------------------
@@ -29,6 +29,8 @@ under a minute in most cases.
 
   - New log system, with log rotation, logging of concurrent instances, 
 and configurable content
+
+  - New SRT (subtitles) filter
 
 ----------------------------------------------------------------------
  OmegaT 1.8.0 update 3 Changes

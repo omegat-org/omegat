@@ -307,7 +307,7 @@ public final class Segmenter
             sp.append(spaces.get(2*i-1));
             sp.append(spaces.get(2*i));
             
-            if (CJK_LANGUAGES.contains(targetLang))
+            if (CJK_LANGUAGES.contains(targetLang.getLanguageCode()))
             {
                 Rule rule = brules.get(i-1);
                 char lastChar = res.charAt(res.length() - 1);
@@ -316,7 +316,7 @@ public final class Segmenter
                        || !PatternConsts.SPACY_REGEX.matcher(rule.getAfterbreak()).matches()))
                     sp.setLength(0);
             }
-            else if (CJK_LANGUAGES.contains(sourceLang) && 
+            else if (CJK_LANGUAGES.contains(sourceLang.getLanguageCode()) && 
                     sp.length()==0)
                 sp.append(" ");                                                 // NOI18N
 	    

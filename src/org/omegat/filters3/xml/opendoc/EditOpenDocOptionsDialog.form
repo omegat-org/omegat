@@ -119,6 +119,17 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateBookmarksCBradiosActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JCheckBox" name="translateBookmarkRefsCB">
+          <Properties>
+            <Property name="selected" type="boolean" value="true"/>         
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="OpenDoc_TRANSLATE_BOOKMARKREFS" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateBookmarkRefsCBradiosActionPerformed"/>
+          </Events>
+        </Component>
         <Component class="javax.swing.JCheckBox" name="translateNotesCB">
           <Properties>
             <Property name="selected" type="boolean" value="true"/>

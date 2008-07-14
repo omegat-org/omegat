@@ -57,6 +57,7 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
         {
             translateIndexesCB.setSelected(options.getTranslateIndexes());
             translateBookmarksCB.setSelected(options.getTranslateBookmarks());
+            translateBookmarkRefsCB.setSelected(options.getTranslateBookmarkRefs());
             translateNotesCB.setSelected(options.getTranslateNotes());
             translateCommentsCB.setSelected(options.getTranslateComments());           
         }
@@ -104,6 +105,7 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
         jLabel2 = new javax.swing.JLabel();
         translateIndexesCB = new javax.swing.JCheckBox();
         translateBookmarksCB = new javax.swing.JCheckBox();
+        translateBookmarkRefsCB = new javax.swing.JCheckBox();
         translateNotesCB = new javax.swing.JCheckBox();
         translateCommentsCB = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
@@ -166,6 +168,16 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
 
         jPanel1.add(translateBookmarksCB);
 
+        translateBookmarkRefsCB.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(translateBookmarkRefsCB, OStrings.getString("OpenDoc_TRANSLATE_BOOKMARKREFS"));
+        translateBookmarkRefsCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                translateBookmarkRefsCBradiosActionPerformed(evt);
+            }
+        });
+
+        jPanel1.add(translateBookmarkRefsCB);
+
         translateNotesCB.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(translateNotesCB, OStrings.getString("OpenDoc_TRANSLATE_NOTES"));
         translateNotesCB.addActionListener(new java.awt.event.ActionListener() {
@@ -210,6 +222,10 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
 // TODO add your handling code here:
     }//GEN-LAST:event_translateBookmarksCBradiosActionPerformed
 
+    private void translateBookmarkRefsCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateBookmarkRefsCBradiosActionPerformed
+// TODO add your handling code here:
+    }//GEN-LAST:event_translateBookmarkRefsCBradiosActionPerformed
+
     private void translateIndexesCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateIndexesCBradiosActionPerformed
     }//GEN-LAST:event_translateIndexesCBradiosActionPerformed
     
@@ -219,6 +235,7 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
         
         options.setTranslateIndexes(translateIndexesCB.isSelected());
         options.setTranslateBookmarks(translateBookmarksCB.isSelected());
+        options.setTranslateBookmarkRefs(translateBookmarkRefsCB.isSelected());
         options.setTranslateNotes(translateNotesCB.isSelected());
         options.setTranslateComments(translateCommentsCB.isSelected());
         
@@ -252,6 +269,7 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton okButton;
     private javax.swing.JCheckBox translateBookmarksCB;
+    private javax.swing.JCheckBox translateBookmarkRefsCB;
     private javax.swing.JCheckBox translateCommentsCB;
     private javax.swing.JCheckBox translateIndexesCB;
     private javax.swing.JCheckBox translateNotesCB;

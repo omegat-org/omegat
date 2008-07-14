@@ -180,6 +180,10 @@ public class OpenDocDialect extends DefaultXMLDialect
                      "text:name");                                              // NOI18N
             defineTranslatableTagAttribute("text:bookmark-ref", "text:ref-name");// NOI18N
         }
+        if (!options.getTranslateBookmarkRefs())
+        {
+            defineIntactTag("text:bookmark-ref");                               // NOI18N
+        }    
     
     }
 

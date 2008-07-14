@@ -38,10 +38,15 @@ and configurable content
 1.8.0 update 3 vs. 1.8.0 update 2
 
 
-   2 Enhancements
+   3 Enhancements
    1 Bugfixe
 ----------------------------------------------------------------------
 1.8.0 update 3
+
+  Implemented requests:
+
+  - OpenDoc: Allow to translate or not Bookmark references  
+  http://sourceforge.net/support/tracker.php?aid=2018244 
 
   Other enhancements:
 

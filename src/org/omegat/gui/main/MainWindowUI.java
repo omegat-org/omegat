@@ -162,6 +162,7 @@ public class MainWindowUI {
         if (layout.length() > 0) {
             byte[] bytes = StaticUtils.uudecode(layout);
             try {
+                Log.log("load desktop layout:" + new String(bytes, "UTF-8"));
                 ByteArrayInputStream in = new ByteArrayInputStream(bytes);
                 mainWindow.desktop.readXML(in);
                 in.close();

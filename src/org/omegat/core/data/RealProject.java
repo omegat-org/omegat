@@ -40,6 +40,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import javax.swing.JOptionPane;
+
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.stat.Statistics;
@@ -47,6 +49,7 @@ import org.omegat.core.data.stat.StatisticsInfo;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
+import org.omegat.gui.main.MainWindow;
 import org.omegat.util.FileUtil;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
@@ -208,6 +211,11 @@ public class RealProject implements IProject
             // There, that should do it, now inform the user
             Log.logErrorRB("OUT_OF_MEMORY");
             Log.log(oome);
+            
+            JOptionPane.showMessageDialog(Core.getMainWindow()
+                    .getApplicationFrame(),
+                    OStrings.getString("OUT_OF_MEMORY"), OStrings
+                            .getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
 
             // Just quit, we can't help it anyway
             System.exit(0);

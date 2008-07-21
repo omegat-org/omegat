@@ -191,6 +191,7 @@ public class MainWindowUI {
             mainWindow.desktop.writeXML(out);
             out.close();
             byte[] buf = out.toByteArray();
+            Log.log("save desktop layout:" + new String(buf, "UTF-8"));
             String layout = StaticUtils.uuencode(buf);
             Preferences.setPreference(Preferences.MAINWINDOW_LAYOUT, layout);
         } catch (Exception e) {

@@ -49,7 +49,6 @@ import org.omegat.core.data.stat.StatisticsInfo;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.gui.main.MainWindow;
 import org.omegat.util.FileUtil;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
@@ -104,7 +103,7 @@ public class RealProject implements IProject
     private List<TransMemory> m_orphanedList;
 
     /** Segments count in project files. */
-    private List<FileInfo> projectFilesList = new ArrayList<FileInfo>();
+    private List<FileInfo> projectFilesList;
     
     /**
      * Create new project instance.
@@ -524,7 +523,7 @@ public class RealProject implements IProject
         
         Set<File> processedFiles = new HashSet<File>();
         
-        projectFilesList.clear();
+        List<FileInfo> pfl = new ArrayList<FileInfo>();
         
         int firstEntry = 0;
         for (String filename : srcFileList)
@@ -558,10 +557,11 @@ public class RealProject implements IProject
                 fi.filePath=filepath;
                 fi.firstEntryIndex=m_srcTextEntryArray.size();
                 fi.size=m_srcTextEntryArray.size()-firstEntry;
-                projectFilesList.add(fi);
+                pfl.add(fi);
                 firstEntry=m_srcTextEntryArray.size();
             }
         }
+        projectFilesList = Collections.unmodifiableList(pfl);
         Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
     }
     

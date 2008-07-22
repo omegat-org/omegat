@@ -121,7 +121,8 @@ public interface IProject {
     List<TransMemory> getTransMemory();
 
     /**
-     * Get info about each source file in project.
+     * Get info about each source file in project. It's unmodifiable list, so,
+     * there is no need synchronization to read it.
      */
     List<FileInfo> getProjectFiles();
 

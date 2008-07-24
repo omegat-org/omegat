@@ -31,8 +31,6 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.Frame;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -84,8 +82,6 @@ import com.vlsolutions.swing.docking.FloatingDialog;
  */
 public class MainWindow extends JFrame implements IMainWindow {
     public final MainWindowMenu menu;
-    
-    protected boolean layoutInitialized = false;
 
     protected ProjectFrame m_projWin;
     
@@ -118,15 +114,6 @@ public class MainWindow extends JFrame implements IMainWindow {
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 menu.mainWindowMenuHandler.projectExitMenuItemActionPerformed();
-            }
-        });
-
-        addComponentListener(new ComponentAdapter() {
-            public void componentMoved(ComponentEvent e) {
-                MainWindowUI.saveScreenLayout(MainWindow.this);
-            }
-            public void componentResized(ComponentEvent e) {
-                MainWindowUI.saveScreenLayout(MainWindow.this);
             }
         });
 

@@ -170,17 +170,12 @@ public class MainWindowUI {
                 Log.log(e);
             }
         }
-
-        mainWindow.layoutInitialized = true;
     }
 
     /**
      * Stores screen layout (width, height, position, etc).
      */
     public static void saveScreenLayout(final MainWindow mainWindow) {
-        if (!mainWindow.layoutInitialized)
-            return;
-
         Preferences.setPreference(Preferences.MAINWINDOW_X, mainWindow.getX());
         Preferences.setPreference(Preferences.MAINWINDOW_Y, mainWindow.getY());
         Preferences.setPreference(Preferences.MAINWINDOW_WIDTH, mainWindow.getWidth());
@@ -211,6 +206,7 @@ public class MainWindowUI {
      */
     public static void resetDesktopLayout(final MainWindow mainWindow) {
         try {
+            Log.log("reset desktop layout");
             InputStream in = MainWindowUI.class.getResourceAsStream(
                     "DockingDefaults.xml");
             try {

@@ -556,6 +556,7 @@ public class RealProject implements IProject
                 FileInfo fi=new FileInfo();
                 fi.filePath=filepath;
                 fi.firstEntryIndex=m_srcTextEntryArray.size();
+                fi.firstEntryIndexInGlobalList=firstEntry;
                 fi.size=m_srcTextEntryArray.size()-firstEntry;
                 pfl.add(fi);
                 firstEntry=m_srcTextEntryArray.size();

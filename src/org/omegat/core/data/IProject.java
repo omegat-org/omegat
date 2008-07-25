@@ -129,6 +129,7 @@ public interface IProject {
     public static class FileInfo {
         public String filePath;
         public int firstEntryIndex;
+        public int firstEntryIndexInGlobalList;
         public int size;
     }
 }

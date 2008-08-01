@@ -36,6 +36,8 @@ import org.omegat.core.CoreEvents;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
+import com.vlsolutions.swing.docking.DockingDesktop;
+
 /**
  * The main OmegaT class, used to launch the programm.
  *
@@ -65,6 +67,9 @@ public class Main
             " ("+new Date()+") " +                                                    // NOI18N
             " Locale "+Locale.getDefault());                                          // NOI18N
 
+        Log.log("Docking Framework version: "
+                + DockingDesktop.getDockingFrameworkVersion());
+        
         Log.logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"), System.getProperty("java.version"), System
                 .getProperty("java.home"));
         Log.log("");

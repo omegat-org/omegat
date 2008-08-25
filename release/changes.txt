@@ -38,7 +38,7 @@ and configurable content
 1.8.0 update 3 vs. 1.8.0 update 2
 
 
-   3 Enhancements
+   4 Enhancements
    1 Bugfixe
 ----------------------------------------------------------------------
 1.8.0 update 3
@@ -52,6 +52,7 @@ and configurable content
 
   - Slovak localisation updated to 1.8 (UI)
   - Dutch localisation updated to 1.8 (UI, readme)
+  - Czech localisation updated to 1.8 (UI, readme)
 
   Bug fixes:
   - Extra space at the beginning of each segment in the German 
@@ -180,7 +181,7 @@ localization
 1.7.3 update 4 vs. 1.7.3 update 3
 
 
-  1 Enhancement
+  2 Enhancements
   3 Bugfixes
 
 ----------------------------------------------------------------------
@@ -189,6 +190,7 @@ localization
   Other enhancements:
 
   - Slovak localisation updated to 1.7.3 (UI, readme, instant start, documentation)
+  - Czech localisation updated to 1.7.3 (UI, readme, instant start, documentation)
 
   Bug fixes:
 

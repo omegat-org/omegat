@@ -1,122 +1,140 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Filtry souborů - OmegaT 1.6.2 Uživatelská příručka</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Filtry souborů - OmegaT 1.7.3 Uživatelská příručka</title>
 </head>
+
 <body>
+	<h1>Filtry souborů</h1>
 
-<h1>Filtry souborů</h1>
+	<ul>
+		<li><a href="#filter_dialog">Dialogové okno Filtry souborů</a>
+			<ul>
+				<li><a href="#filter_options">Možnosti filtrů</a></li>
+				<li><a href="#edit_dialog">Dialogové okno Editovat Filtr</a>
+					<ul>
+						<li><a href="#source_file_name">Typ zdrojového souboru, vzor názvu souboru</a></li>
+						<li><a href="#encoding">Kódování zdrojových a cílových souborů</a></li>
+						<li><a href="#target_file_name">Název cílového souboru</a>
+							<ul>
+								<li><a href="#pattern_dialog">Dialogové okno Přidat/Upravit vzor</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
 
-<h2>Obsah</h2></div>
-
-<ul type="none">
-   <li>1. <a href="#Introduction">Úvod</a>
-
-      <ul type="none">
-         <li>1.1. <a href="#File_types">Tipy souborů</a></li>
-         <li>1.2. <a href="#File_encodings">Kódování souborů</a></li>
-         <li>1.3. <a href="#Renaming_Translated_Files">Přejmenování přeložených souborů</a></li>
-      </ul>
-   </li>
-
-   <li>2. <a href="#File_Filters_Setup">Nastavení filtrů souborů</a>
-
-      <ul type="none">
-         <li><a href="#File_Filters_Dialog">Dialogové okno Filtry souborů</a></li>
-         <li><a href="#Edit_Filter_Dialog">Dialogové okno Editovat Filtr</a></li>
-         <li><a href="#Add.2FEdit_Pattern_Dialog">Dialogové okno Přidat/Upravit vzor</a></li>
-      </ul>
-   </li>
-</ul>
-
-<a name="Introduction"></a>
-<h2>Úvod</h2>
-
-<p>OmegaT obsahuje vysoce přizpůsobitelné filtry, které Vám umožňují nastavit většinu aspektů jejich práce.</p>
-
-<p>Filtry souborů jsou části kódu schopné:</p>
-
-<ul>
-   <li>Číst dokument v nějakém specifickém formátu. Např. soubory s prostým textem.</li>
-   <li>Extrahovat ze souboru přeložitelný obsah.</li>
-   <li>Automatizovat změny názvů souborů u přeložených dokumentů nahrazením přeložitelného obsahu jeho překladem.</li>
-</ul>
-
-<a name="File_types"></a>
-<h3>Typy souborů</h3>
-
-<p>Když OmegaT narazí na soubor ve svém zdrojovém adresáři (source), pokusí se vybrat filtr na základě přípony souboru. Přesněji, OmegaT se pokusí přiřadit vzory názvů zdrojových souborů každého filtru k názvu souboru. Například vzor <code>*.xhtml</code> se pak bude shodovat s jakýmkoliv souborem s příponou <code>.xhtml</code>. Pokud je nalezen vhodný filtr, soubor postupuje k dalšímu zpracování programem. Například ve výchozím nastavení se použije filtr XHTML pro zpracování souborů s příponou <code>.xhtml</code>. Můžete měnit nebo přidávat vzory názvů souborů pro soubory, které bude mít na starosti každý filtr.</p>
-
-<a name="File_encodings"></a>
-<h3>Kódování souborů</h3>
-
-<p>Soubory obsahující prostý text a soubory HTML mohou být uložené pomocí různého kódování. Zatímco soubory HTML mohou obsahovat metaúdaj o kódování a OmegaT ho použije pro přečtení souboru, u textových souborů není žádný univerzální způsob jak toto zadat. Pro textové, ale i HTML soubory bez deklarace kódování použije OmegaT kódování, které nastavíte pro konkrétní příponu. Například může být nastaveno, že soubory <code>.txt</code>  budou načítány s použitím výchozího kódování operačního systému. Můžete změnit kódování zdroje pro každý odlišný vzor názvu zdrojového souboru.</p>
-
-<p>Soubory HTML a soubory obsahující prostý text mohou být také napsané v jakémkoliv kódování. Například, když překládáte z francouzštiny do japonštiny, můžete buď nastavit filtr pro používání jednoho z japonských cílových kódování, nebo použít kódování Unicode UTF-8, UTF-16 nebo UTF-32. Implicitně je nastaveno, že kódování, ve kterém je uložený soubor, je stejné jako kódování, jaké bylo použito pro načtení souboru pro textové soubory, a UTF-8 pro HTML soubory. Všimněte si, že HTML filtr přidá do cílového souboru deklaraci kódování, takže prohlížeč ho již bude znát a nebude zobrazovat žádné chybné znaky.</p>
-
-<a name="Renaming_Translated_Files"></a>
-<h3>Přejmenování přeložených souborů</h3>
-
-<p>Někdy můžete chtít automaticky přejmenovat soubory které překládáte, např. přidat kód jazyka za název souboru. Můžete tak učinit v dialogovém okně Filtrů souborů pomocí vzoru názvu cílového souboru.</p>
-
-<a name="File_Filters_Setup"></a>
-<h2>Nastavení filtrů souborů</h2>
-
-<p>Většina uživatelů by se mohla spokojit s volbami filtrů souborů, které odpovídají výchozímu nastavení. Pokud Vám výchozí nastavení nevyhovuje, otevřete si hlavní dialogové okno z hlavního menu přes <strong>Možnosti -&gt; Filtry souborů ...</strong>. Pamatujte si, že změnit volby filtru můžete, jen když není otevřený žádný projekt, protože jinak je ovlivněn způsob tvorby přeložených souborů.</p>
-
-<a name="File_Filters_Dialog"></a>
-<h3>Dialogové okno Filtry souborů</h3>
-
-<p>Toto dialogové okno vypisuje dostupné filtry souborů.</p>
-
-<p>Pokud nechcete používat aplikaci OmegaT na překlad souborů nějakého určitého typu, můžete daný filtr vypnout odznačením zaškrtávacího políčka vedle jeho názvu. OmegaT pak při načítání projektů vynechá všechny příslušné soubory, a při vytváření cílových dokumentů je zkopíruje v nezměněné podobě. Později, když se rozhodnete použít filtr znovu, stačí zaškrtnout příslušné políčko.</p>
-
-<p>Pokud si náhodu změníte celou konfiguraci do nežádoucího stavu, klikněte na <strong>Výchozí nastavení</strong> pro návrat konfigurace filtrů souborů do výchozího funkčního stavu.</p>
-
-<p>Pro úpravu toho, v jakých kódováních bude filtr fungovat, vyberte filtr ze seznamu a klikněte na <strong>Editovat</strong>.</p>
-
-<a name="Edit_Filter_Dialog"></a>
-<h3>Dialogové okno Editovat Filtr</h3>
-
-<p>Dialogové okno vám dovolí nastavit vzory názvů zdrojových souborů pro soubory, které bude filtr zpracovávat, přizpůsobit si názvy přeložených souborů a vybrat, jaké kódování bude používat pro načtení souboru a uložení jeho přeloženého protějšku.</p>
-
-<p>Vzor názvu zdrojového souboru používá pravidla masky souborů v DOSu. Znak <code>*</code> může nahradit jakékoliv množství jakýchkoliv znaků, <code>?</code> nahrazuje jakýkoliv jeden znak, a všechny ostatní znaky mají svůj původní význam. Například, když chcete, aby byl textový filtr použitý na soubory čtimě (<code>ctime</code>, <code>cti.me</code> a <code>ctime.txt</code>) měli byste použít vzor <code>cti*</code>.</p>
-
-<p>Pole zdrojového a cílového kódování používají kombinovaná pole obsahující všechny podporovaná kódování. Všimněte si, že ne všechny filtry vám umožňují výběr kódování, protože fungují s formátem souborů, který umožňuje jen jediné kódování. Nastavení kódování na "&lt;auto&gt;" u formátů, které vám dovolují výběr kódování, znamená, že rozhodnutí o výběru formátu necháváte na programu OmegaT.
- Další postup je následovný:</p>
-
-<ul>
-   <li>OmegaT se může pokusit uhádnout kódování zdrojového souboru u souborů HTML/XHTML.</li>
-   <li>OmegaT použije předvolené kódování operačního systému pro textové soubory.</li>
-</ul>
-
-<p>Vzor názvu cílového souboru používá speciální syntaxi, takže pokud chcete editovat toto pole, měli byste raději kliknout na <strong>Editovat ...</strong> pro přechod na dialogové okno Upravit vzor.</p>
-
-<p>Pokud chcete, aby byl filtr použitý pro soubory vyhovující jednomu nebo více vzorům pro názvy zdrojových souborů, klikněte na <strong>Přidat ...</strong> pro přechod na dialogové okno Přidat vzor.</p>
-
-<p>Pokud chcete vrátit filtr na výchozí nastavení, klikněte na <strong>Výchozí nastavení</strong>.</p>
-
-<a name="Add.2FEdit_Pattern_Dialog"></a>
-<h3>Dialogové okno Přidat/Upravit vzor</h3>
-
-<p>Stejné dialogové okno se objeví, ať už chcete přidat vzor, nebo upravit nějaký konkrétní vzor. Jediná nová věc v něm je speciální editor vzoru názvu cílového souboru, všechna ostatní políčka byla popsána výše.</p>
-
-<p>Sekce Vzor názvu cílového souboru Vám umožňuje vytvořit název přeloženého souboru z různých částí.</p>
-
-<ul>
-   <li>Výchozí je <code>${filename}</code> -- celý název zdrojového souboru s příponou, takže název přeloženého souboru je stejný jako název zdrojového souboru.</li>
-   <li><code>${nameOnly}</code> - umožňuje vložit jen název zdrojového souboru bez přípony.</li>
-   <li><code>${extension}</code> -- přípona zdrojového souboru.</li>
-   <li><code>${targetLocale}</code> - kód cílového locale (tzn. místních nastavení) (ve formátu "xx_YY").</li>
-   <li><code>${targetLanguage}</code> - kód cílového jazyka a země současně (ve formátu "XX-YY").</li>
-   <li><code>${targetLanguageCode}</code> - pouze cílový jazyk ("XX").</li>
-   <li><code>${targetCoutryCode}</code> - pouze cílová země ("YY").</li>
-</ul>
-
-<p>Můžeme jednoduše přidat více proměnných, pokud nás požádáte a sdělíte nám, čeho se týká vaše oblíbená proměnná. Stačí navštívit <a href="http://groups.yahoo.com/group/OmegaT/">naši uživatelskou skupinu</a>.</p>
+	<p>OmegaT obsahuje vysoce přizpůsobitelné filtry, které vám umožňují nastavit většinu aspektů jejich práce. Filtry souborů jsou části kódu a jsou schopné:<ul>
+			<li>Číst dokument v určitém specifickém formátu. Např. soubory s prostým textem.</li>
+			<li>Extrahovat ze souboru přeložitelný obsah.</li>
+			<li>Automatizovat změny názvů souborů u přeložených dokumentů nahrazením přeložitelného obsahu jeho překladem.</li>
+		</ul>
+		<p>Většina uživatelů by se mohla spokojit s volbami filtrů souborů, které odpovídají výchozímu nastavení. Pokud vám výchozí nastavení nevyhovuje, otevřete si hlavní dialogové okno z hlavního menu přes <strong>Možnosti → Filtry souborů ...</strong>.</p>
+		<p><strong>Pozor!</strong> Když je projekt otevřen, může změna možností filtrů způsobit ztrátu dat. Pokud změníte volby segmentace, když je otevřený nějaký projekt, budete muset projekt znovu načíst, aby se změny projevily.</p>
 
 <hr>
-<p><a href="legalNotices.html" title="Právní poznámky">Právní poznámky</a></p>
 
+
+	<a name="filter_dialog" id="filter_dialog"></a>
+	<h1>Dialogové okno Filtry souborů</h1>
+
+	<p>Toto dialogové okno vypisuje dostupné filtry souborů. Pokud nechcete používat aplikaci OmegaT na překlad souborů nějakého určitého typu, můžete daný filtr vypnout odznačením zaškrtávacího políčka vedle jeho názvu. OmegaT pak při načítání projektů vynechá všechny příslušné soubory, a při vytváření cílových dokumentů je zkopíruje v nezměněné podobě. Později, když se rozhodnete použít filtr znovu, stačí příslušné políčko opět zaškrtnout.</p>
+
+	<p>Kliknutím na <strong>Výchozí nastavení</strong> obnovíte výchozí nastavení filtrů.</p>
+
+	<p>Pro úpravu toho, v jakých kódováních bude filtr fungovat, vyberte filtr ze seznamu a klikněte na <strong>Editovat</strong>.</p>
+	
+	<a name="filter_options" id="filter_options"></a>
+	<h2>Možnosti filtrů</h2>
+	
+	<p>Tři filtry mají specifické možnosti. Pro zmněnu možností vyberte filtr ze seznamu a klikněte na <strong>Možnosti</strong> Filtry s příslušnými dostupnými možnostmi jsou:<ul>
+			<li>Textové soubory<dl>
+					<dt>Segmentace odstavců podle zalomení řádků, prázdných řádků nebo nikdy</dt>
+					<dd>Pokud jsou pravidla větné segmentace aktivní, text bude nadále segmentován podle dostupných pravidel.</dd>
+				</dl>
+			</li>
+			<li>Soubory XHTML<dl>
+					<dt>Překlad atributů</dt>
+					<dd>Označené atributy se objeví jako segmenty v okně Editoru</dd>
+					<dt>Odstavec</dt>
+					<dd>&lt;br&gt; tag HTML vytvoří odstavec pro účely segmentace</dd>
+				</dl>
+			</li>
+			<li>Soubory HTML a XHTML<dl>
+					<dt>Deklarace kódování</dt>
+					<dd>OmegaT může přidat nebo přepsat deklaraci kódování souboru podle vybraného kódování cílového souboru.</dd>
+					<dt>Překlad atributů</dt>
+					<dd>Označené atributy se objeví jako segmenty v okně Editoru</dd>
+					<dt>Odstavec</dt>
+					<dd>&lt;br&gt; tag HTML vytvoří odstavec pro účely segmentace</dd>
+				</dl>
+			</li>
+		</ul>
+		<h2>Dialogové okno Editovat Filtr</h2>
+		<p>Dialogové okno vám dovolí nastavit vzory názvů zdrojových souborů pro soubory, které bude filtr zpracovávat, přizpůsobit si názvy přeložených souborů a vybrat, jaké kódování bude používat pro načtení souboru a uložení jeho přeloženého protějšku.</p>
+	
+	<p>Aby se daly upravovat vzory filtrů souborů, buď změníte daná pole přímo, nebo nakliknutím <strong>Editovat</strong>.<p>Klikněte na <strong>Přidat</strong> pro přidání nového vzoru filtru souborů.<p>K přidání vzoru nebo editaci konkrétního vzoru se používá stejné dialogové okno. Dialogové okno je užitečné, protože obsahuje speciální vzory názvů cílových souborů a editor vám umožňuje upravovat názvy výstupních souborů.</p>
+
+
+	<a name="source_file_name" id="source_file_name"></a>
+	<h3>Typ zdrojového souboru, vzor názvu souboru</h3>
+
+	<p>Když OmegaT narazí na soubor ve svém zdrojovém adresáři (source), pokusí se vybrat filtr na základě přípony souboru. Přesněji, OmegaT se pokusí přiřadit vzory názvů zdrojových souborů každého filtru k názvu souboru.</p>
+	
+	<p>Například vzor <code>*.xhtml</code> se pak bude shodovat s jakýmkoliv souborem s příponou <code>.xhtml</code>. Pokud je nalezen vhodný filtr, soubor postupuje k dalšímu zpracování programem. Například ve výchozím nastavení se použije filtr XHTML pro zpracování souborů s příponou <code>.xhtml</code>.</p>
+	
+	<p>Můžete měnit nebo přidávat vzory názvů souborů pro soubory, které bude mít na starosti každý filtr.</p>
+
+	<p>Vzory názvů zdrojových souborů používají náhradní znaky podobně jako v rámci funkce <strong>Hledat</strong>.</p>
+	
+	<p>Znak '<strong>*</strong>' reprezentuje nula nebo více znaků. Znak '<strong>?</strong>' reprezentuje jeden znak. Všechny ostatní znaky reprezentují sebe sama.</p>
+	
+	<p>Například, když chcete, aby byl textový filtr použitý na soubory čtimě (<code>ctime</code>, <code>cti.me</code> a <code>ctime.txt</code>) měli byste použít vzor <code>cti*</code>.</p>
+	
+	<a name="encoding" id="encoding"></a>
+	<h3>Kódování zdrojových a cílových souborů</h3>
+	
+	<p>Pouze omezené množství formátů souborů uvádí povinné kódování.</p>
+	
+	<p>Formáty souborů, které nespecifikují své kódování, použijí kódování, které zadáte v příponě odpovídající jeho názvu. Například může být implicitně nastaveno, že soubory <code>.txt</code> budou načítány s použitím výchozího kódování operačního systému. Můžete změnit kódování zdroje pro každý odlišný vzor názvu zdrojového souboru.</p>
+
+	<p>Takové soubory mohou být zapsány v jakémkoliv kódování. Při výchozím nastavení je kódování přeloženého souboru stejné jako kódování souboru výchozího.</p>
+
+	<p>Pole zdrojového a cílového kódování používají kombinovaná pole obsahující všechna podporovaná kódování. Volba <strong>&lt;auto&gt;</strong> ponechá výběr kódování na aplikaci OmegaT. Další postup je následovný:</p>
+
+	<ul>
+		<li>OmegaT najde kódování zdrojového souboru za užití jeho deklarace kódování, tedy pokud je nějaká deklarace k dispozici (soubory HTML, soubory založené na XML).</li>
+		<li>OmegaT použije povinné kódování pro vybrané formáty souborů (Java properties atd.)</li>
+		<li>OmegaT použije výchozí kódování operačního systému pro textové soubory.</li>
+	</ul>
+
+	<a name="target_file_name" id="target_file_name"></a>
+	<h3>Název cílového souboru</h3>
+
+	<p>Někdy můžete chtít automaticky přejmenovat soubory které překládáte, např. přidat kód jazyka za název souboru.</p>
+
+	<p>Vzor názvu cílového souboru používá speciální syntaxi, takže pokud chcete editovat toto pole, měli byste raději kliknout na <strong>Editovat ...</strong> a přejít tak do dialogového okna Upravit vzor. Pokud chcete vrátit filtr na výchozí nastavení, klikněte na <strong>Výchozí nastavení</strong>.</p>
+
+	<p>Taktéž můžete v dialogovém okně filtrů souborů upravit název přímo v poli vzoru názvu cílového souboru.</p>
+
+	<a name="pattern_dialog" id="pattern_dialog"></a>
+	<h4>Dialogové okno Přidat/Upravit vzor</h4>
+
+	<ul>
+		<li>Výchozí nastavení je <code>${filename}</code> -- celý název zdrojového souboru s příponou, takže název přeloženého souboru je stejný jako název zdrojového souboru.</li>
+		<li><code>${nameOnly}</code> - umožňuje vložit jen název zdrojového souboru bez přípony.</li>
+		<li><code>${extension}</code> -- přípona zdrojového souboru.</li>
+		<li><code>${targetLocale}</code> - kód cílového místního nastavení (ve formátu "xx_YY").</li>
+		<li><code>${targetLanguage}</code> - kód cílového jazyka a země (ve formátu "XX-YY").</li>
+		<li><code>${targetLanguageCode}</code> - pouze cílový jazyk ("XX").</li>
+		<li><code>${targetCoutryCode}</code> - pouze cílová země ("YY").</li>
+	</ul>
+	<hr>
+
+
+	<p><a href="legalNotices.html">Právní poznámky</a></p>
 </body>
 </html>

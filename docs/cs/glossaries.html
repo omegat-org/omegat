@@ -1,30 +1,110 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Slovníky - OmegaT 1.6.2 Uživatelská příručka</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Slovníky - OmegaT 1.7.3 Uživatelská příručka</title>
 </head>
 <body>
 
-<h1>Slovníky
-</h1>
+	<h1>Slovníky</h1>
 
-<p>Funkce slovníku je automatická. Pro použití existujícího slovníku ho po vytvoření projektu jednoduše umístěte do adresáře <code>/glossary</code>. Když je projekt otevřený, OmegaT automaticky detekuje soubory slovníku v tomto adresáři. Výrazy v aktivním segmentu, které OmegaT najde v souboru (souborech) slovníku se zobrazují v okně Slovník.</p>
+	<ul>
+		<li><a href="#usage">Používání</a></li>
+		<li><a href="#fileformat">Formát souboru</a></li>
+		<li><a href="#howtocreate">Jak vytvořit slovník</a>
+			<ul>
+				<li><a href="#text_editor">Použití textového editoru</a></li>
+				<li><a href="#spreadsheet">Použití tabulkového procesoru</a></li>
+				<li><a href="#multiterm">Použití Trados Multiterm</a></li>
+			</ul>
+		</li>
+		<li><a href="#commonglossaryproblems">Obecné problémy slovníku</a></li>
+	</ul>
 
-<p>Funkce slovníku nalezne jen přesné shody s položkou ve slovníku (tj. nenalezne skloňované tvary atd.).</p>
-
-<p>Nové záznamy mohou být přidané do souboru / souborů slovníku v průběhu překladu manuálně (např. v textovém editoru), ale nově vložené pojmy budou rozpoznané až po znovunačtení projektu.</p>
-
-<a name="File_Format"></a>
-<h2>Formát souboru</h2>
-
-<p>Soubory slovníku jsou soubory v prostém textu a obsahují tři sloupce; ve sloupcích oddělených tabulátorem se nachází zdrojový (první sloupec) a cílový (druhý sloupec) výraz. Třetí sloupec může být použitý pro dodatečné informace.</p>
-
-<p>Soubory slovníku mohou být buď v předvoleném kódování systému (v tomto případě by soubory měly mít příponu <code>.tab</code>) nebo v kódování UTF-8 (v tomto případě, by měly mít příponu <code>.utf8</code>).</p>
-
-<p>Například slovníky vytvořené pomocí funkce textového exportu Trados Multiterm mohou být používané přímo bez další změny, s podmínkou, že se opatří příponou <code>.tab</code> a pole zdrojového a cílového pojmu představují první dvě pole.</p>
+	<p>Slovníky představují soubory, které jsou pro použití v OmegaT tvořené a aktualizované ručně.</p>
+	
+	<p>Pokud projekt OmegaT obsahuje jeden či více slovníků, jakékoliv termíny ve slovníku, pokud jsou nalezené v aktivním segmentu, budou automaticky zobrazené v okně <a href="userInterface.html#Glossary">Slovník</a>.</p>
 
 <hr>
-<p><a href="legalNotices.html" title="Právní poznámky">Právní poznámky</a></p>
 
+	<a name="usage" id="usage"></a>
+	<h1>Používání</h1>
+
+	<p>Pro použití existujícího slovníku jej, jakmile vytvoříte projekt, jednoduše umístěte do adresáře <code>/glossary</code>. Když je projekt otevřený, OmegaT v tomto adresáři soubory slovníku automaticky detekuje.</p>
+	
+	<p>Výrazy v aktivním segmentu, které OmegaT najde v souboru (souborech) slovníku, se zobrazují v okně Slovník. Funkce slovníku nalezne jen přesné shody s položkou ve slovníku (tj. nenalezne skloňované tvary atd.).</p>
+
+	<p>Nové záznamy mohou být přidané do souboru / souborů slovníku v průběhu překladu manuálně (např. v textovém editoru), ale nově vložené pojmy budou rozpoznané až po znovunačtení projektu.</p>
+
+<hr>
+
+	<a name="fileformat" id="fileformat"></a>
+	<h1>Formát souboru</h1>
+
+	<p>Soubory slovníku představují jednoduché soubory v prostém textu a obsahují tři, pomocí tabulátoru oddělené sloupce, ve kterých se nachází zdrojový (první sloupec) a cílový (druhý sloupec) výraz. Třetí sloupec může být použit pro dodatečné informace.</p>
+
+	<p>Soubory slovníku mohou být buď v předvoleném kódování systému (v tomto případě by soubory měly mít příponu <code>.tab</code>), nebo v kódování UTF-8 (v tomto případě by měly mít příponu <code>.utf8</code>).</p>
+
+<hr>
+
+	<a name="howtocreate" id="howtocreate"></a>
+	<h1>Jak vytvořit slovník</h1>
+
+	<a name="text_editor" id="text_editor"></a>
+	<h2>Použití textového editoru</h2>
+
+	<p>Vytvořte soubor ve svém upřednostňovaném textovém editoru a soubor pojmenujte s koncovkou <code>.tab</code> jako např. <code>muj_slovnik.tab</code>.</p>
+
+	<p>Napište záznam ve zdrojovém jazyce, pak stiskněte klávesu <code>tabulátoru</code>, pak zadejte překlad v cílovém jazyce. Volitelně můžete přidat  komentář za druhým <code>tabulátorem</code>. Pro nový záznam stiskněte <code>Enter</code></p>
+	
+	<p>Po vložení všech záznamů dokument uložte. Pokud dané dva jazyky nesdílejí znakovou sadu, pak musí být soubor uložen v kódování UTF-8. V tomto případě soubor přejmenujte <code>muj_slovnik.utf8</code>.</p>
+
+	<a name="spreadsheet" id="spreadsheet"></a>
+	<h2>Použití tabulkového procesoru</h2>
+
+	<p>Pro uživatele Excelu nebo Calcu je tato metoda docela pohodlná, protože takovýto editor nabízí třídění, za podmínky, že nepotřebujete UTF-8.</p>
+
+	<p>Začněte s prázdným listem. Vložte své položky, každou na jeden řádek. Výrazy zdrojového jazyka jsou v prvním sloupci, slova cílového jazyka ve sloupci pravém; do třetího sloupce můžete volitelně vložit další poznámky.</p>
+	
+	<p>Když máte hotovo, uložte dokument: použijte funkci Soubor/Uložit jako.</p>
+	
+	<p>U Typu souboru vyberte Text (oddělený tabulátory, nebo CSV), nastavte <strong>druh rozdělení</strong> na <strong>tabelace</strong> a <strong>dělení slov</strong> na nic (vymažte cokoliv co by bylo v tomto poli). Použijte <code>.tab</code> jako příponu k souboru.</p>
+	
+	<p>Software se vás zeptá na pár otázek ohledně ztráty formátování nebo ohledně právě ukládaného dokumentu, jednoduše stiskněte OK.</p>
+	
+	<p>Použijte svého správce souborů pro potvrzení skutečnosti, že soubor je řádně pojmenován <code>muj_slovnik.tab</code> a ne <code>muj_slovnik.tab.csv</code> Pokud nutno, název opravte.</p>
+	
+	<p>Před uložením můžete, v případě nutnosti, označit kódování UTF-8. V tomto případě přejmenujte soubor na <code>muj_slovnik.utf8</code><a name="multiterm" id="multiterm"></a>
+	<h2>Použití Trados Multiterm</h2>
+	
+	<p>Slovníky vytvořené pomocí funkce textového exportu Trados Multiterm mohou být používané přímo bez další změny, s podmínkou, že se opatří příponou <code>.tab</code> a pole zdrojového (první sloupec) a cílového (druhý sloupec) pojmu představují první dvě pole.</p>
+
+<hr>
+
+	<a name="commonglossaryproblems" id="commonglossaryproblems"></a>
+	<h1>Obecné problémy slovníku</h1>
+
+	<dl>
+		<dt>Problém: Nezobrazují se žádné termíny ze slovníku.</dt>
+		<dd>Možné příčiny:<ul>
+			<li>ve složce "glossary" není žádný slovník</li>
+			<li>soubor slovníku je prázdný</li>
+			<li>soubor slovníku nemá správnou koncovku (.tab nebo .utf8)</li>
+			<li>soubor slovníku nemá správné kódování</li>
+			<li>v aktivním segmentu nejsou žádné termíny, které se kryjí s termíny ve slovníku</li>
+			<li>jeden nebo více z nahoře zmíněných problémů byl vyřešen, ale projekt nebyl nově načten</li>
+		</ul>
+		</dd>
+
+		<dt>Problém: V okně Slovníku se některé znaky nezobrazují správně (ale některé znaky jsou zobrazeny správě v okně Editoru).</dt>
+		<dd>Možné příčiny:<ul>
+			<li>koncovka neodpovídá kódování souboru</li>
+		</ul>
+		</dd>
+	</dl>
+	
+	<hr>
+
+	<p><a href="legalNotices.html">Právní poznámky</a></p>
 </body>
 </html>

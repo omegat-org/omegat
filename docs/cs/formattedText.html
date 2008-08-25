@@ -1,217 +1,197 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Práce s formátovaným textem - OmegaT 1.6.2 Uživatelská příručka</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Práce s formátovaným textem - OmegaT 1.7.3 Uživatelská příručka</title>
 </head>
+
 <body>
+	<h1>Práce s Formátovaným textem</h1>
 
-<h1>Práce s Formátovaným textem</h1>
+	<ul>
+		<li><a href="#intro">Formátovací tagy</a>
+			<ul>
+				<li><a href="#naming">Pojmenování tagů</a>
+				</li><li><a href="#numbering">Číslování tagů</a>
+				</li><li><a href="#pairs">Tagy párové a nepárové</a>
+			</li></ul>
+		</li>
+		<li><a href="#tag_segmenting">Tagy a větná segmentace</a></li>
+		<li><a href="#tag_operation">Operace s tagy</a>
+			<ul>
+				<li><a href="#duplication">Duplikace skupiny tagů</a>
+				</li><li><a href="#deletion">Vymazání skupiny tagů</a>
+				</li><li><a href="#order">Úprava pořadí skupiny tagů</a>
+				</li><li><a href="#nesting">Vnořování skupiny tagů:</a>
+			</li></ul>
+		</li>
+		<li><a href="#tag-overlapping">Překrývání skupiny tagů</a></li>
+		<li><a href="#tag_validation">Ověření skupiny tagů</a></li>
+		<li><a href="#tag_hints">Tipy pro správu tagů</a></li>
+	</ul>
 
-<h2>Obsah</h2>
-
-<ul type="none">
-   <li>1. <a href="#Formatted_Text_in_OmegaT">Formátovaný text v aplikaci OmegaT</a>
-
-      <ul type="none">
-         <li>1.1. <a href="#Tag_naming">Pojmenování tagů</a></li>
-         <li>1.2. <a href="#Tag_numbering">Číslování tagů</a></li>
-         <li>1.3. <a href="#Pairs_and_singletons">Tagy párové a nepárové</a></li>
-         <li>1.4. <a href="#Tags_and_sentence_segmenting">Tagy a větná segmentace</a></li>
-
-         <li>1.5. <a href="#Tag_operations">Operace s tagy</a>
-
-            <ul type="none">
-               <li>1.5.1. <a href="#Tag_group_duplication">Duplikace skupiny tagů</a></li>
-               <li>1.5.2. <a href="#Tag_group_deletion">Vymazání skupiny tagů</a></li>
-               <li>1.5.3. <a href="#Tag_group_order_modification">Úprava pořadí skupiny tagů</a></li>
-               <li>1.5.4. <a href="#Tag_group_nesting">Vnořování skupiny tagů</a></li>
-            </ul>
-         </li>
-
-         <li>1.6. <a href="#Tag_group_overlapping">Překrývání skupin tagů</a></li>
-         <li>1.7. <a href="#Tag_group_validation">Ověření skupiny tagů</a></li>
-         <li>1.8. <a href="#Hints_for_tags_management">Tipy pro správu tagů</a></li>
-         <li>1.9. <a href="#Important">Důležité</a></li>
-      </ul>
-   </li>
-</ul>
-
-<a name="Formatted_Text_in_OmegaT"></a>
-<h2>Formátovaný text v aplikaci OmegaT</h2>
-
-<p>Informace k formátování nacházející se ve zdrojovém souboru je potřebné přenést do cílového souboru. OmegaT zobrazuje informace o řádkovém formátování podporovaných formátů v podobě tagů (v současnosti DocBook, HTML, XHTML, Open Document a OpenOffice.org). Tagy se běžně nezohledňují při zvažování podobnosti řetězců pro účely nalezení shody. Tagy, které jste reprodukovali do přeloženého segmentu budou přítomny i v přeloženém dokumentu.
+	<p>Informace k formátování nacházející se ve zdrojovém souboru je potřebné přenést do cílového souboru. OmegaT zobrazuje informace o řádkovém formátování podporovaných formátů v podobě tagů (v současnosti DocBook, HTML, XHTML, Open Document a OpenOffice.org). Tagy se běžně nezohledňují při zvažování podobnosti řetězců pro účely nalezení shody. Tagy, které jste reprodukovali do přeloženého segmentu budou přítomny i v přeloženém dokumentu.
 </p>
 
-<a name="Tag_naming"></a>
-<h3>Pojmenování tagů
-</h3>
+<hr>
 
-<p>Tagy sestávají z jednoho až tří znaků a čísla.
- Jedinečné číslo umožňuje zopakovat stejné tagy, které si odpovídají, a rozlišovat tagy, které mohou nést znaky zkratky, ale ve skutečnosti jsou rozdílné.</p>
+	<a name="intro" id="intro"></a>
+	<h1>Formátovací tagy</h1>
 
-<p>Znaky mohou, ale nemusí, odrážet hodnotu formátování, které tag představuje (např. tučné, kurzíva, atd.)</p>
 
-<a name="Tag_numbering"></a>
-<h3>Číslování tagů</h3>
+	<a name="naming" id="naming"></a>
+	<h2>Pojmenování tagů</h2>
 
-<p>Tagy jsou číslované vzestupně, podle <strong>skupiny tagů</strong>.</p>
+	<p>Tagy se skládají z jednoho až tří znaků a čísla.
+ Jedinečné číslo umožňuje zopakovat stejné tagy, které si odpovídají, a rozlišovat tagy, které mohou nést znaky zkratky, ale ve skutečnosti jsou rozdílné. Znaky mohou ale nemusí odrážet hodnotu formátování, kterou reprezentují tagy (např. tučně, kurzíva, atd.)</p>
 
-<p>To co nazýváme "skupiny tagů" je buď jednoduchý, nepárový tag (jako <code>&lt;br1&gt;</code>) samotný, nebo dva tagy tvořící pár (jako <code>&lt;f3&gt;</code> a <code>&lt;/f3&gt;</code>).</p>
+	<a name="numbering" id="numbering"></a>
+	<h2>Číslování tagů</h2>
 
-<p>V rámci segmentu, první skupina (pár nebo samostatný) dostane číslo <strong>0</strong>, druhá číslo <strong>1</strong> atd.</p>
+	<p>Tagy jsou číslované vzestupně, podle <strong>skupiny tagů</strong>. To co nazýváme "skupiny tagů" je buď jednoduchý, nepárový tag (jako <code><font color="red">&lt;br1&gt;</font></code>) samotný, nebo dva tagy tvořící pár (jako <code><font color="red">&lt;f3&gt;</font></code> a <code><font color="red">&lt;/f3&gt;</font></code>). V rámci segmentu, první skupina (pár nebo samostatný tag) dostane číslo <strong>0</strong>, druhá číslo <strong>1</strong> atd. První příklad uvedený níže má tři skupiny tagů (pár, samostatný a pak další pár), druhý příklad má jen jednu skupinu (pár).</p>
 
-<p>První příklad uvedený níže má tři skupiny tagů (pár, samostatný a pak další pár), druhý příklad má jen jednu skupinu (pár).</p>
+	<a name="pairs" id="pairs"></a>
+	<h2>Tagy párové a nepárové</h2>
 
-<a name="Pairs_and_singletons"></a>
-<h3>Tagy párové a nepárové</h3>
+	<p>Tagy mohou být buď jako samostatné (tj. nepárové), nebo párové. <strong>Nepárové tagy</strong> označují formátovací informace, které neovlivňují okolní text (např. mezera navíc nebo zalomení řádku).</p>
 
-<p>Tagy mohou být buď jako samostatné (tj. nepárové) nebo párové.</p>
+	<pre>	<strong>&lt;segment 2132&gt;</strong><font color="red">&lt;b0&gt;</font>&lt;Ctr+N&gt;<font color="red">&lt;/b0&gt;</font>, <font color="red">&lt;br1&gt; </font><font color="red">&lt;b2&gt;</font>&lt;Enter&gt;<font color="red">&lt;/b2&gt;</font><strong>&lt;konec segmentu&gt;</strong></pre>
 
-<p>
-<strong>Nepárové tagy</strong> označují formátovací informace, které neovlivňují okolní text (např. mezera navíc nebo zlom řádku).</p>
+	<p><code><strong><font color="red">&lt;br1&gt;</font></strong></code> je nepárový tag a neovlivňuje žádný okolní text. <strong>Párové tagy</strong> obvykle označují informace o stylu, které se vztahují na text mezi otevíracím a uzavíracím tagem. Při používání párových tagů je nutno dbát na to, aby otevírací tag byl vždy umístěn před uzavíracím tagem.</p>
 
-<pre>   <strong>&lt;segment 2132&gt;</strong>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;<strong>&lt;end segment&gt;</strong></pre>
+	<pre>	<strong>&lt;segment 3167&gt;</strong>Log file (<font color="red"><font color="red"></font>log.txt<font color="red"></font></font>) for tracking operations and errors.<strong>&lt;konec segmentu&gt;</strong></pre>
 
-<p>
-<code><strong>&lt;br1&gt;</strong></code> je nepárový tag a neovlivňuje žádný okolní text.</p>
-
-<p>
-<strong>Párové tagy</strong> obvykle označují informace o stylu, které se vztahují na text mezi otevíracím a uzavíracím tagem. Při používání párových tagů je nutno dbát na to, aby otevírací tag byl vždy umístěn před uzavíracím tagem.</p>
-
-<pre>   <strong>&lt;segment 3167&gt;</strong>Log file (&lt;f1&gt;log.txt&lt;/f1&gt;) for tracking operations and errors.<strong>&lt;end segment&gt;</strong></pre>
-
-<p>
-<code><strong>&lt;f1&gt;</strong></code> a <code><strong>&lt;/f1&gt;</strong></code> jsou v páru a ovlivňují <code><strong>log.txt</strong></code>.</p>
-
-<a name="Tags_and_sentence_segmenting"></a>
-<h3>Tagy a větná segmentace</h3>
-
-<p>OmegaT vytváří své tagy před tím, než se použije větná segmentace. V závislosti na pravidlech segmentace, mohou tagy vypadat, jako by nerespektovaly výše uvedená pravidla číslování a seskupování.</p>
-
-<pre>   <strong>&lt;segment 1554&gt;</strong> &lt;c0&gt;Before: \. After: \s&lt;/c0&gt;<br> &lt;b2&gt;Note:&lt;/b2&gt;<br>
-"\." menas the character"."&lt;br3&gt; "\s" means any white space character <strong>&lt;end segment&gt;</strong></pre>
-
-<p>Uvedené příklady jsou prozatím bez jakýchkoliv problémů. Nyní, když použijeme předvolená pravidla segmentace na tento segment (chování OmegaT ve výchozím nastavení) dostaneme následující výsledek</p>
-
-<pre>   <strong>&lt;segment 1990&gt;</strong> &lt;c0&gt;Before: \. <strong>&lt;end segment&gt;</strong>
-
-   <strong>&lt;segment 1991&gt;</strong> After: \s&lt;/c0&gt;&lt;br1&gt; <strong>&lt;end segment&gt;</strong>
-
-   <strong>&lt;segment 1992&gt;</strong> &lt;b2&gt;Note:&lt;/b2&gt; "\." means the character "."&lt;br3&gt;<strong>&lt;end segment&gt;</strong>
-
-   <strong>&lt;segment 1993&gt;</strong> "\s" means any white space character <strong>&lt;end segment&gt;</strong></pre>
-
-<p>(Pravidla segmentace, která se zde použijí jsou: <i>segmentovat po úsecích následovaných mezerou</i> a <i>segmentovat po tagu zlomu řádku</i>.)</p>
-
-<p>Zde vidíme, že segmenty zpracované samostatně nerespektují pravidla párování a číslování: <code>&lt;co&gt;</code> a <code>&lt;/co&gt;</code> by měly být spárované ve stejném segmentu, zde jsou ale oddělené pravidly segmentace.</p>
-
-<p>V některých případech může formátování dokonce zapříčinit problémy při překladu, když tagy musí být v cílovém jazyce přemístěny tak, aby odrážely slovosled tohoto jazyka (viz <a href="#Tag_operations" title="Práce s Formátovaným textem">Operace s tagy</a> níže) </p>
-
-<a name="Tag_operations"></a>
-<h3>Operace s tagy</h3>
-
-<p>S tagy se musí zacházet opatrně. Pokud jsou náhodou změněny, formátování výsledného souboru může být poškozené. V nejhorším případě nebude možno soubor vůbec otevřít; toto se stává obzvláště u souborů OpenOffice.org</p>
-
-<a name="Tag_group_duplication"></a>
-<h4>Duplikace skupiny tagů</h4>
-
-<p>Pro duplikaci skupin tagů je stačí zkopírovat na libovolnou pozici. Mějte na paměti, že v párové skupině se otevírací tag musí nacházet před uzavíracím tagem.</p>
-
-<p>Formátování reprezentované skupinou, kterou jste duplikovali, bude použito na sekci, do které jste ji duplikovali.</p>
-
-<p>Příklad:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Toto formátování&lt;/f0&gt; bude duplikováno sem.<strong>&lt;end segment&gt;</strong></pre>
-
-<p>Po duplikaci:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Ce format&lt;/f0&gt; a été &lt;f0&gt;copié ici&lt;/f0&gt;.<strong>&lt;end segment&gt;</strong></pre>
-
-<a name="Tag_group_deletion"></a>
-<h4>Vymazání skupiny tagů</h4>
-
-<p>Pro vymazání skupin tagů stačí skupinu ze segmentu prostě odstranit. Mějte na paměti, že u párového tagu musí být smazán jak otevírací, tak uzavírací tag, aby se zajistilo, že všechny stopy formátování jsou správně vymazané, jinak by mohl být přeložený soubor poškozen a nemuselo by se podařit dokument otevřít.</p>
-
-<p>Vymazáním skupiny tagů odstraníte příslušné formátování z přeloženého souboru.</p>
-
-<p>Příklad:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Tento formát&lt;/f0&gt; bude vymazán.<strong>&lt;end segment&gt;</strong></pre>
-
-<p>Po vymazání:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>Ce format a été effacé.<strong>&lt;end segment&gt;</strong></pre>
-
-<a name="Tag_group_order_modification"></a>
-<h4>Úprava pořadí skupiny tagů</h4>
-
-<p>Pro změnu pořadí skupiny tagů tak, aby se formátování odráženo na jinou strukturu jazyka v překladu, jednoduše umístěte skupinu tagů tam, kde by měla být v překladu.</p>
-
-<p>Formátování bude ovlivňovat tu část, na kterou je aplikováno.</p>
-
-<p>Příklad:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Formátování zde&lt;/f0&gt; a &lt;f1&gt;formátování zde&lt;/f1&gt; bude vzájemně přesunuto.<strong>&lt;end segment&gt;</strong></pre>
-
-<p>Po změně pořadí:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f1&gt;Ce format&lt;/f1&gt; et &lt;f0&gt;ce format&lt;/f0&gt; ont été inversés.<strong>&lt;end segment&gt;</strong></pre>
-
-<a name="Tag_group_nesting"></a>
-<h4>Vnořování skupiny tagů:</h4>
-
-<p>Úprava pořadí skupiny tagů může vyústit ve vnoření skupiny tagů do jiné skupiny tagů. Toto je možné pouze dokud uzavírací skupina úplně zavírá uzavřenou skupinu. Zvláštní pozornost je třeba věnovat vnořování v případě párových tagů, které nejsou úplně přesunuté do uzavírací skupiny, jinak by mohl být přeložený soubor poškozen a mohlo by být znemožněno jeho otevření. </p>
-
-<p>Na vnořenou část se budou vztahovat oba způsoby formátování.</p>
-
-<p>Příklad:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;The formatting&lt;/f0&gt; &lt;f1&gt;here&lt;/f1&gt; is going to be nested.<strong>&lt;end segment&gt;</strong></pre>
-
-<p>Po vnoření:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Le format &lt;f1&gt;ici&lt;/f1&gt;&lt;/f0&gt; a été emboité dans le premier format.<strong>&lt;end segment&gt;</strong></pre>
-
-<a name="Tag_group_overlapping"></a>
-<h3>Překrývání skupiny tagů</h3>
-
-<p>Překrývání je výsledkem chybné manipulace s párovými tagy a určitě bude mít za následek poškození formátování a někdy může způsobit, že přeložený soubor nepůjde otevřít.</p>
-
-<p>Příklad:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Formátování&lt;/f0&gt; &lt;f1&gt;zde&lt;/f1&gt; bude poškozené.<strong>&lt;end segment&gt;</strong></pre>
-
-<p>Po chybné manipulaci:</p>
-
-<pre>   <strong>&lt;segment 0001&gt;</strong>&lt;f0&gt;Formátování &lt;f1&gt;zde&lt;/f0&gt;&lt;/f1&gt; je velmi poškozeno.<strong>&lt;end segment&gt;</strong></pre>
-
-<a name="Tag_group_validation"></a>
-<h3>Ověření skupiny tagů</h3>
-
-<p>Funkce ověření tagů (<a href="userInterface.html#Tag_Validation" title="Uživatelské rozhraní">Ověření tagů</a>) detekuje (ať již úmyslně nebo náhodou) změněné tagy, a označí příslušné segmenty. Použití této funkce otevře dialogové okno s podezřelými poruchami nebo chybnými tagy v dokumentu.</p>
-
-<p>Tato funkce může být užitečná při hledání chyb v přeložených tagovaných textech. Toto bývá často problémem v souborech OpenDocument nebo OpenOffice.org, které nelze otevřít kvůli problémům s tagy vytvořenými v procesu překladu. Opravení tagů a opětovné vytvoření cílových dokumentů může problém odstranit.</p>
-
-<a name="Hints_for_tags_management"></a>
-<h3>Tipy pro správu tagů</h3>
-
-<p>Tagy všeobecně představují nějaký druh formátování v původním textu. <strong>Zjednodušení formátování původního textu</strong> ve velké míře přispívá ke snížení počtu tagů. Za úmyslem zjednodušení překladu a snížení počtu možných chyb tagů lze sjednotit typy použitých písem, velikosti písem, barev atd.</p>
-
-<p>Pokud se chcete blíže seznámit s tím, co všechno se s tagy dá dělat, navštivte sekci <a href="#Tag_operations" title="Práce s Formátovaným textem">Operace s tagy</a>.</p>
-
-<p>Pamatujte, že pokud Vás tagy obtěžují a formátování není pro aktuální práci extrémně důležité, odstranění většiny formátování ze zdrojového dokumentu překlad velmi ulehčí.</p>
-
-<p>Pokud potřebujete vidět tagy v OmegaT, ale nepotřebujete ponechat většinu formátování v přeloženém dokumentu, nemusíte tagy do překladu přidávat. V tom případě <strong>věnujte zvláštní pozornost párovým tagům</strong>,  protože pokud zapomenete vymazat jednu část páru, poškodíte formátování Vašeho dokumentu, což může znemožnit otevření přeloženého dokumentu OpenOffice.org.</p>
-
-<p>Jakmile jsou tagy zahrnuté v samotném textu, je možné použít <a href="segmentation.html" title="Segmentace zdroje">pravidla segmentace</a> pro vytvoření segmentů, které obsahují méně tagů. Toto je pokročilá vlastnost a není přímo určena pro začínající uživatele.</p>
-
-<a name="Important"></a>
-<h3>Důležité</h3>
-
-<p>Program OmegaT ještě není schopen detekovat chyby ve formátování plně automaticky, takže Vás nemusí upozornit na každý případ, kdy uděláte chybu nebo změníte formátování, které jste upravili tak, aby lépe vyhovovalo Vašemu cílovému jazyku. Může se tedy stát, že Váš přeložený soubor bude vypadat zkresleně, a v případě souborů OpenDocument / OpenOffice.org může dokonce být znemožněno jeho otevření.</p>
+	<p><code><strong><font color="red">&lt;f1&gt;</font></strong></code> a <code><strong><font color="red">&lt;/f1&gt;</font></strong></code> jsou v páru a ovlivňují <code><strong>log.txt</strong></code>.</p>
 
 <hr>
-<p><a href="legalNotices.html" title="Právní poznámky">Právní poznámky</a></p>
 
+	<a name="tag_segmenting" id="tag_segmenting"></a>
+	<h1>Tagy a větná segmentace</h1>
+
+	<p>OmegaT vytváří své tagy před tím, než se použije větná segmentace. V závislosti na pravidlech segmentace, mohou tagy vypadat, jako by nerespektovaly výše uvedená pravidla číslování a seskupování.</p>
+
+	<pre>	<strong>&lt;segment 1554&gt;</strong> <font color="red">&lt;f0&gt;</font>Before: \. After: \s<font color="red">&lt;/f0&gt;</font><strong>&lt;konec segmentu&gt;</strong></pre>
+
+	<p>Uvedené příklady jsou prozatím bez jakýchkoliv problémů. Nyní, když použijeme předvolená pravidla segmentace na tento segment (chování OmegaT ve výchozím nastavení) dostaneme následující výsledek:</p>
+
+	<pre>	<strong>&lt;segment 1554&gt;</strong> <font color="red">&lt;f0&gt;</font>Before: \. <strong>&lt;konec segmentu&gt;</strong>
+	<strong>&lt;segment 1991&gt;</strong> After: \s<font color="red">&lt;/f0&gt;</font><strong>&lt;konec segmentu&gt;</strong>
+	</pre>
+
+	<p>Pravidla segmentace, která se zde použijí jsou:  <i>segmentovat po úsecích následovaných mezerou</i> . V uvedeném příkladu vidíme, že segmenty zpracované samostatně nerespektují pravidla párování a číslování: <code><font color="red">&lt;f0&gt;</font></code> a <code><font color="red">&lt;/f0&gt;</font></code> by měly být spárované ve stejném segmentu, zde jsou ale oddělené pravidly segmentace. V některých případech může formátování dokonce zapříčinit problémy při překladu, a to tehdy, když tagy musí být v cílovém jazyce přemístěny tak, aby odrážely slovosled tohoto jazyka (viz <a href="#Tag_operations">Operace s tagy</a> níže) </p>
+
+<hr>
+
+	<a name="tag_operation" id="tag_operation"></a>
+	<h1>Operace s tagy</h1>
+
+	<p>S tagy se musí zacházet opatrně. Pokud jsou náhodou změněny, formátování výsledného souboru může být poškozeno. Platný postup je "Nespojuj co není rozděleno". Nicméně je dobré vědět, co je možno provést a jak to provést.</p>
+
+	<a name="duplication" id="duplication"></a>
+	<h2>Duplikace skupiny tagů</h2>
+
+	<p>Pro duplikaci skupin tagů je stačí zkopírovat na libovolnou pozici. Mějte na paměti, že v párové skupině se otevírací tag musí nacházet před uzavíracím tagem. Formátování reprezentované skupinou, kterou jste duplikovali, bude použito na sekci, do které jste ji duplikovali.</p>
+
+	<p>Příklad:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Toto formátování<font color="red">&lt;/f0&gt;</font> bude duplikováno sem.<strong>&lt;konec segmentu&gt;</strong></pre>
+
+	<p>Po duplikaci:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Toto formátování<font color="red">&lt;/f0&gt;</font> bylo <font color="red">&lt;f0&gt;</font>duplikováno sem<font color="red">&lt;/f0&gt;</font>.<strong>&lt;konec segmentu&gt;</strong></pre>
+
+	<a name="deletion" id="deletion"></a>
+	<h2>Vymazání skupiny tagů</h2>
+
+	<p>Pro vymazání skupin tagů stačí skupinu ze segmentu prostě odstranit. Mějte na paměti, že u párového tagu musí být smazán jak otevírací, tak uzavírací tag, a tím se zajistilo, že všechny stopy formátování jsou správně vymazané, jinak by mohl být přeložený soubor poškozen a nemuselo by se podařit dokument otevřít. Vymazáním skupiny tagů odstraníte příslušné formátování z přeloženého souboru.</p>
+
+	<p>Příklad:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Toto formátování<font color="red">&lt;/f0&gt;</font> bude smazáno.<strong>&lt;konec segmentu&gt;</strong></pre>
+
+	<p>Po smazání:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong>Toto formátování bylo smazáno.<strong>&lt;konec segmentu&gt;</strong></pre>
+
+	<a name="order" id="order"></a>
+	<h2>Úprava pořadí skupiny tagů</h2>
+
+	<p>Když chcete změnit pořadí skupiny tagů tak, aby se formátování odráženo na jinou strukturu jazyka v překladu, jednoduše umístěte skupinu tagů tam, kde by měla být v překladu. Formátování bude ovlivňovat tu část, na kterou je aplikováno.</p>
+
+	<p>Příklad:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Formátování nula<font color="red">&lt;/f0&gt;</font> a <font color="red"><font color="red"></font>formátování jedna<font color="red"></font></font> bude vzájemně přesunuto.<strong>&lt;konec segmentu&gt;</strong></pre>
+
+	<p>Po změně pořadí:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red"><font color="red"></font>Formátování jedna<font color="red"></font></font> a <font color="red">&lt;f0&gt;</font>formátování nula<font color="red">&lt;/f0&gt;</font> bylo vzájemně přesunuto.<strong>&lt;konec segmentu&gt;</strong></pre>
+
+	<a name="nesting" id="nesting"></a>
+	<h2>Vnořování skupiny tagů:</h2>
+
+	<p>Úprava pořadí skupiny tagů může vyústit ve vnoření skupiny tagů do jiné skupiny tagů. Toto je možné pouze dokud uzavírací skupina úplně zavírá uzavřenou skupinu. Zvláštní pozornost je třeba věnovat vnořování v případě párových tagů, které nejsou úplně přesunuty do uzavírací skupiny, jinak by mohl být přeložený soubor poškozen a mohlo by být znemožněno jeho otevření.  Na vnořenou část se budou vztahovat oba způsoby formátování.</p>
+
+	<p>Příklad:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Formátování<font color="red">&lt;/f0&gt;</font> <font color="red"><font color="red"></font>jedna<font color="red"></font></font> bude vnořeno do formátování nula.<strong>&lt;konec segmentu&gt;</strong></pre>
+
+	<p>Po vnoření:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Formátování <font color="red"><font color="red"></font>jedna<font color="red"></font></font><font color="red">&lt;/f0&gt;</font> bylo vnořeno do formátování nula.<strong>&lt;konec segmentu&gt;</strong></pre>
+
+<hr>
+
+	<a name="tag-overlapping" id="tag-overlapping"></a>
+	<h1>Překrývání skupiny tagů</h1>
+
+	<p>Překrývání je výsledkem chybné manipulace s párovými tagy a určitě bude mít za následek poškození formátování a někdy může způsobit, že přeložený soubor nepůjde otevřít. Příklad:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Formátování<font color="red">&lt;/f0&gt;</font> <font color="red"><font color="red"></font>jedna<font color="red"></font></font> bude poškozeno.<strong>&lt;konec segmentu&gt;</strong></pre>
+
+	<p>Po chybné manipulaci:</p>
+
+	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Formátování <font color="red"><font color="red"></font>jedna<font color="red">&lt;/f0&gt;</font> <font color="red"></font></font>je nyní velmi poškozeno.<strong>&lt;konec segmentu&gt;</strong></pre>
+
+<hr>
+
+	<a name="tag_validation" id="tag_validation"></a>
+	<h1>Ověření skupiny tagů</h1>
+
+	<p>Funkce ověření tagů detekuje tagy, které byly ať již úmyslně nebo náhodou změněny, a označí příslušné segmenty. Použití této funkce otevře dialogové okno s podezřelými poruchami nebo chybnými tagy v dokumentu.</p>
+
+	<p>Tato funkce může být užitečná při hledání chyb v přeložených otagovaných textech. Toto bývá často problémem v souborech OpenDocument nebo OpenOffice.org, které nelze otevřít kvůli problémům s tagy vytvořenými v procesu překladu. Opravení tagů a opětovné vytvoření cílových dokumentů může problém odstranit.</p>
+
+	<p>Klávesovou zkratkou <code><a href="menu.html#shortcuts">Ctrl+T</a></code> otevřete okno Ověření tagů.</p>
+	
+	<p>Okno obsahuje tabulku o třech sloupcích s těmito údaji:</p>
+
+	<ul>
+		<li>odkaz na segment</li>
+		<li>obsah původního segmentu</li>
+		<li>obsah přeloženého segmentu</li>
+	</ul>
+	
+	<p>Tagy jsou zvýrazněné tučným modrým písmem a lze snadno srovnat původní obsah s obsahem přeloženým.<p>Pro aktivaci segmentu v Editoru klikněte na odkaz.</p>
+	
+	<p>Pokud je to nutné, opravte chybu a stiskněte <code><a href="menu.html#shortcuts">Ctrl+T</a></code> pro návrat k oknu Ověření tagů a tak můžete opravit případné další chyby.</p>
+
+	<p>Chyby <a href="formattedText.html#intro">tagů</a> vyvstávají z <a href="formattedText.html#tag_operation">manipulace tagů</a> během překladu, které opakují stejný pořádek a počet tagů, po vzoru původního segmentu. Některé změny tagů jsou nutné a neškodné, oproti tomu některé zapříčiní problémy při vytváření přeložených dokumentů.</p>
+
+	<p>Tagy všeobecně představují nějaký druh formátování v původním textu. <strong>Zjednodušení formátování původního textu</strong> ve velké míře přispívá ke snížení počtu tagů.</p>
+
+
+<hr>
+
+	<a name="tag_hints" id="tag_hints"></a>
+	<h1>Tipy pro správu tagů</h1>
+
+	<p>Tagy všeobecně představují nějaký druh formátování v původním textu. <strong>Zjednodušení formátování původního textu</strong> ve velké míře přispívá ke snížení počtu tagů. Za úmyslem zjednodušení překladu a snížení počtu možných chyb tagů lze sjednotit použité fonty, velikosti písem, barev atd. Pokud se chcete blíže seznámit s tím, co všechno se s tagy dá dělat, navštivte sekci <a href="#Tag_operations">Operace s tagy</a>. Pamatujte, že pokud vás tagy obtěžují a formátování není pro aktuální práci extrémně důležité, odstranění většiny formátování ze zdrojového dokumentu překlad velmi ulehčí.</p>
+
+	<p>Pokud potřebujete vidět tagy v OmegaT, ale nepotřebujete ponechat většinu formátování v přeloženém dokumentu, nemusíte tagy do překladu přidávat. V tom případě <strong>věnujte zvláštní pozornost párovým tagům</strong>,  protože pokud zapomenete vymazat jednu část páru, poškodíte formátování vašeho dokumentu, což může znemožnit otevření přeloženého dokumentu OpenOffice.org. Jakmile jsou tagy zahrnuté v samotném textu, je možné použít <a href="segmentation.html">pravidla segmentace</a> pro vytvoření segmentů, které obsahují méně tagů. Toto je pokročilá vlastnost a pro její řádnou aplikaci se předpokládají adekvátní zkušenosti.</p>
+
+	<p><strong>Důležité:</strong> Program OmegaT ještě není schopen detekovat chyby ve formátování plně automaticky, takže vás nemusí upozornit na každý případ, kdy uděláte chybu nebo změníte formátování, které jste upravili tak, aby lépe vyhovovalo vašemu cílovému jazyku. Může se tedy stát, že váš přeložený soubor bude vypadat zkresleně, a v případě souborů OpenDocument / OpenOffice.org může dokonce být znemožněno jeho otevření.</p>
+	<hr>
+
+	<p><a href="legalNotices.html">Právní poznámky</a></p>
 </body>
 </html>

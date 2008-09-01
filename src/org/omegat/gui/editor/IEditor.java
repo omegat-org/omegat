@@ -72,9 +72,10 @@ public interface IEditor {
      * Must be called only from UI thread.
      */
     void commitAndDeactivate();
-    
+
     /**
-     * Commits the translation and leave entry activated. Translation will be saved.
+     * Commits the translation and leave entry activated. Translation will be
+     * saved.
      * 
      * Must be called only from UI thread.
      */
@@ -105,12 +106,12 @@ public interface IEditor {
      * Goto entry with specified number.
      * 
      * @param entryNum
-     *                entry number
+     *            entry number
      * 
-     * Must be called only from UI thread.
+     *            Must be called only from UI thread.
      */
     void gotoEntry(int entryNum);
-    
+
     /**
      * Set current focus to editor.
      */
@@ -120,10 +121,10 @@ public interface IEditor {
      * Change case of the selected text or if none is selected, of the current
      * word.
      * 
-     * @param newCase :
-     *                lower, title, upper or cycle
-     *                
-     * Must be called only from UI thread.
+     * @param newCase
+     *            : lower, title, upper or cycle
+     * 
+     *            Must be called only from UI thread.
      */
     void changeCase(CHANGE_CASE_TO newCase);
 
@@ -160,30 +161,30 @@ public interface IEditor {
      * 
      * @return interface for read and change editor settings
      * 
-     * Can be called from any thread.
+     *         Can be called from any thread.
      */
     EditorSettings getSettings();
-    
+
     /**
      * Undo editing.
      * 
      * Must be called only from UI thread.
      */
     void undo();
-    
+
     /**
      * Redo editing.
      * 
      * Must be called only from UI thread.
      */
     void redo();
-    
+
     /**
      * Get currently selected text.
      * 
      * @return selected text
      * 
-     * Must be called only from UI thread.
+     *         Must be called only from UI thread.
      */
     String getSelectedText();
 }

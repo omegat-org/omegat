@@ -134,7 +134,6 @@ public class EditorController implements IEditor {
         this.mw = mainWindow;
 
         editor = new OmTextArea(this);
-        editor.setFont(Core.getMainWindow().getApplicationFont());
 
         pane = new DockableScrollPane("EDITOR", " ", editor, false);
         pane
@@ -195,8 +194,11 @@ public class EditorController implements IEditor {
                 .registerFontChangedEventListener(new IFontChangedEventListener() {
                     public void onFontChanged(Font newFont) {
                         // fonts have changed
-                        // first commit current translation
-                        editor.setFont(newFont);
+                        if (m_docSegList != null) {
+                            // segments displayed
+                            ((OmDocument) editor.getDocument())
+                                    .setFont(newFont);
+                        }
                         emptyProjectPane.setFont(newFont);
                     }
                 });
@@ -311,6 +313,7 @@ public class EditorController implements IEditor {
         doc.setDocumentFilter(new OmDocumentFilter());
 
         editor.setDocument(doc);
+        doc.setFont(Core.getMainWindow().getApplicationFont());
 
         doc.addUndoableEditListener(editor.undoManager);
     }

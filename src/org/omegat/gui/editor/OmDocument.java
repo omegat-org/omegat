@@ -418,7 +418,8 @@ class OmDocument extends AbstractDocument implements StyledDocument {
      * Set new font. It changes font for root element only, then all childs will
      * use it.
      * 
-     * @param newFont new font
+     * @param newFont
+     *            new font
      */
     public void setFont(Font newFont) {
         try {
@@ -429,12 +430,14 @@ class OmDocument extends AbstractDocument implements StyledDocument {
             root.addAttribute(StyleConstants.FontSize, newFont.getSize());
 
             // get root element view
-            View mainView=controller.editor.getUI().getRootView(controller.editor).getView(0);
+            View mainView = controller.editor.getUI().getRootView(
+                    controller.editor).getView(0);
 
             // create new views for segments
             View[] nv = new View[root.getElementCount()];
             for (int i = 0; i < nv.length; i++) {
-                nv[i] = controller.editor.getEditorKit().getViewFactory().create(root.getElement(i));
+                nv[i] = controller.editor.getEditorKit().getViewFactory()
+                        .create(root.getElement(i));
             }
             // replace view
             mainView.replace(0, mainView.getViewCount(), nv);

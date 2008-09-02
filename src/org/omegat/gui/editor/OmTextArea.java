@@ -27,6 +27,9 @@ package org.omegat.gui.editor;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -64,11 +67,26 @@ class OmTextArea extends JEditorPane {
         setEditorKit(new OmEditorKit());
 
         addMouseListener(mouseListener);
+
+        addKeyListener(keyListener);
     }
 
     /** Orders to cancel all Undoable edits. */
     public void cancelUndo() {
         undoManager.die();
+    }
+
+    /**
+     * Return OmDocument instaed just a Document. If editor was not initialized
+     * with OmDocument, it will contains other Document implementation. In this
+     * case we don't need it.
+     */
+    public OmDocument getOmDocument() {
+        try {
+            return (OmDocument) getDocument();
+        } catch (ClassCastException ex) {
+            return null;
+        }
     }
 
     protected MouseListener mouseListener = new MouseAdapter() {
@@ -85,6 +103,24 @@ class OmTextArea extends JEditorPane {
                 // fall back to go to segment
                 if (createGoToSegmentPopUp(e.getPoint()))
                     return;
+            }
+        }
+    };
+
+    protected KeyListener keyListener = new KeyAdapter() {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode() == KeyEvent.VK_HOME && e.getModifiersEx() == 0) {
+                // press HOME
+                setCaretPosition(getOmDocument().activeTranslationBegin
+                        .getOffset());
+                e.consume();
+            } else if (e.getKeyCode() == KeyEvent.VK_END
+                    && e.getModifiersEx() == 0) {
+                // press END
+                setCaretPosition(getOmDocument().activeTranslationEnd
+                        .getOffset());
+                e.consume();
             }
         }
     };
@@ -232,7 +268,7 @@ class OmTextArea extends JEditorPane {
         controller.spellCheckerThread.resetCache();
 
         // redraw segment
-        OmDocument xlDoc = (OmDocument) getDocument();
-        xlDoc.rebuildElementsForSegment(controller.displayedEntryIndex);
+        getOmDocument().rebuildElementsForSegment(
+                controller.displayedEntryIndex);
     }
 }

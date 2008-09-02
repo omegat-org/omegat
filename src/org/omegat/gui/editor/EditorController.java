@@ -196,8 +196,10 @@ public class EditorController implements IEditor {
                         // fonts have changed
                         if (m_docSegList != null) {
                             // segments displayed
-                            ((OmDocument) editor.getDocument())
-                                    .setFont(newFont);
+                            OmDocument doc = editor.getOmDocument();
+                            if (doc != null) {
+                                doc.setFont(newFont);
+                            }
                         }
                         emptyProjectPane.setFont(newFont);
                     }
@@ -336,7 +338,7 @@ public class EditorController implements IEditor {
         if (!Core.getProject().isProjectLoaded())
             return;
 
-        OmDocument doc = (OmDocument) editor.getDocument();
+        OmDocument doc = editor.getOmDocument();
         try {
             doc.replaceSegment(displayedEntryIndex, (OmEditorKit) editor
                     .getEditorKit(), true);
@@ -399,8 +401,8 @@ public class EditorController implements IEditor {
 
     protected void goToSegmentAtLocation(int location) {
         // clicked segment
-        int segmentAtLocation = ((OmDocument) editor.getDocument())
-                .getSegmentAtLocation(location);
+        int segmentAtLocation = editor.getOmDocument().getSegmentAtLocation(
+                location);
         commitAndDeactivate();
         displayedEntryIndex = segmentAtLocation;
         activateEntry();
@@ -421,7 +423,7 @@ public class EditorController implements IEditor {
     public void commitAndDeactivate() {
         UIThreadsUtil.mustBeSwingThread();
 
-        OmDocument doc = (OmDocument) editor.getDocument();
+        OmDocument doc = editor.getOmDocument();
 
         try {
             String newTrans = doc.extractTranslation();
@@ -825,16 +827,14 @@ public class EditorController implements IEditor {
      * Calculate the position of the start of the current translation
      */
     protected int getTranslationStart() {
-        return ((OmDocument) editor.getDocument()).activeTranslationBegin
-                .getOffset();
+        return editor.getOmDocument().activeTranslationBegin.getOffset();
     }
 
     /**
      * Calculcate the position of the end of the current translation
      */
     protected int getTranslationEnd() {
-        return ((OmDocument) editor.getDocument()).activeTranslationEnd
-                .getOffset();
+        return editor.getOmDocument().activeTranslationEnd.getOffset();
     }
 
     /**
@@ -878,8 +878,8 @@ public class EditorController implements IEditor {
             if (editor.undoManager.canUndo()) {
                 editor.undoManager.undo();
                 // rebuild elements if paragraphs changed
-                ((OmDocument) editor.getDocument())
-                        .rebuildElementsForSegment(displayedEntryIndex);
+                editor.getOmDocument().rebuildElementsForSegment(
+                        displayedEntryIndex);
             }
         } catch (CannotUndoException cue) {
             Log.log(cue);
@@ -896,8 +896,8 @@ public class EditorController implements IEditor {
             if (editor.undoManager.canRedo()) {
                 editor.undoManager.redo();
                 // rebuild elements if paragraphs changed
-                ((OmDocument) editor.getDocument())
-                        .rebuildElementsForSegment(displayedEntryIndex);
+                editor.getOmDocument().rebuildElementsForSegment(
+                        displayedEntryIndex);
             }
         } catch (CannotRedoException cue) {
             Log.log(cue);

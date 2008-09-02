@@ -27,9 +27,7 @@ package org.omegat.gui.editor;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -67,8 +65,6 @@ class OmTextArea extends JEditorPane {
         setEditorKit(new OmEditorKit());
 
         addMouseListener(mouseListener);
-
-        addKeyListener(keyListener);
     }
 
     /** Orders to cancel all Undoable edits. */
@@ -108,52 +104,110 @@ class OmTextArea extends JEditorPane {
     };
 
     /**
-     * Redefine some keys behavior.
+     * Redefine some keys behavior. We can't use key listeners, because we have
+     * to make something AFTER standard keys processing.
      */
-    protected KeyListener keyListener = new KeyAdapter() {
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if (isKey(e, KeyEvent.VK_HOME, 0)) {
-                // press HOME
-                setCaretPosition(getOmDocument().activeTranslationBegin
-                        .getOffset());
-                e.consume();
-            } else if (isKey(e, KeyEvent.VK_END, 0)) {
-                // press END
-                setCaretPosition(getOmDocument().activeTranslationEnd
-                        .getOffset());
-                e.consume();
-            } else if (isKey(e, KeyEvent.VK_TAB, 0)) {
-                // press TAB when 'Use TAB to advance'
-                if (controller.settings.isUseTabForAdvance()) {
-                    controller.nextEntry();
-                    e.consume();
-                }
-            } else if (isKey(e, KeyEvent.VK_TAB, KeyEvent.SHIFT_MASK)) {
-                // press Shift+TAB when 'Use TAB to advance'
-                if (controller.settings.isUseTabForAdvance()) {
-                    controller.prevEntry();
-                    e.consume();
-                }
-            } else if (isKey(e, KeyEvent.VK_ENTER, 0)) {
-                // press ENTER
-                if (!controller.settings.isUseTabForAdvance()) {
-                    controller.nextEntry();
-                    e.consume();
-                }
-            } else if (isKey(e, KeyEvent.VK_ENTER, KeyEvent.CTRL_MASK)) {
-                // press Ctrl+ENTER
-                if (!controller.settings.isUseTabForAdvance()) {
-                    controller.prevEntry();
-                    e.consume();
-                }
+    @Override
+    protected void processKeyEvent(KeyEvent e) {
+        if (e.getID() != KeyEvent.KEY_PRESSED) {
+            // key released
+            super.processKeyEvent(e);
+            return;
+        }
+
+        boolean processed = false;
+
+        // non-standard processing
+        if (isKey(e, KeyEvent.VK_TAB, 0)) {
+            // press TAB when 'Use TAB to advance'
+            if (controller.settings.isUseTabForAdvance()) {
+                controller.nextEntry();
+                processed = true;
+            }
+        } else if (isKey(e, KeyEvent.VK_TAB, KeyEvent.SHIFT_MASK)) {
+            // press Shift+TAB when 'Use TAB to advance'
+            if (controller.settings.isUseTabForAdvance()) {
+                controller.prevEntry();
+                processed = true;
+            }
+        } else if (isKey(e, KeyEvent.VK_ENTER, 0)) {
+            // press ENTER
+            if (!controller.settings.isUseTabForAdvance()) {
+                controller.nextEntry();
+                processed = true;
+            }
+        } else if (isKey(e, KeyEvent.VK_ENTER, KeyEvent.CTRL_MASK)) {
+            // press Ctrl+ENTER
+            if (!controller.settings.isUseTabForAdvance()) {
+                controller.prevEntry();
+                processed = true;
             }
         }
 
-        private boolean isKey(KeyEvent e, int code, int modifiers) {
-            return e.getKeyCode() == code && e.getModifiers() == modifiers;
+        // leave standard processing if need
+        if (processed) {
+            e.consume();
+        } else {
+            super.processKeyEvent(e);
         }
-    };
+
+        // some after-processing catches
+        if (!processed) {
+            if (e.getKeyCode() == KeyEvent.VK_HOME) {
+                // press HOME
+                checkAndFixCaret();
+            } else if (e.getKeyCode() == KeyEvent.VK_END) {
+                // press END
+                checkAndFixCaret();
+            }
+        }
+    }
+
+    /**
+     * Checks whether the selection & caret is inside editable text, and changes
+     * their positions accordingly if not.
+     */
+    private void checkAndFixCaret() {
+        // int pos = m_editor.getCaretPosition();
+        int spos = getSelectionStart();
+        int epos = getSelectionEnd();
+        /*
+         * int start = m_segmentStartOffset + m_sourceDisplayLength +
+         * OConsts.segmentStartStringFull.length();
+         */
+        int start = getOmDocument().activeTranslationBegin.getOffset();
+        // -1 for space before tag, -2 for newlines
+        /*
+         * int end = editor.getTextLength() - m_segmentEndInset -
+         * OConsts.segmentEndStringFull.length();
+         */
+        int end = getOmDocument().activeTranslationEnd.getOffset();
+
+        if (spos != epos) {
+            // dealing with a selection here - make sure it's w/in bounds
+            if (spos < start) {
+                setSelectionStart(start);
+            } else if (spos > end) {
+                setSelectionStart(end);
+            }
+            if (epos > end) {
+                setSelectionEnd(end);
+            } else if (epos < start) {
+                setSelectionStart(start);
+            }
+        } else {
+            // non selected text
+            if (spos < start) {
+                setCaretPosition(start);
+            } else if (spos > end) {
+                setCaretPosition(end);
+            }
+        }
+    }
+
+    private static boolean isKey(KeyEvent e, int code, int modifiers) {
+        return e.getKeyCode() == code && e.getModifiers() == modifiers;
+    }
 
     /**
      * creates a popup menu for inactive segments - with an item allowing to go

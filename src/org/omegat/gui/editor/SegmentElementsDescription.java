@@ -91,20 +91,32 @@ public class SegmentElementsDescription {
     public SegmentElementsDescription(OmDocument doc, StringBuilder text,
             SourceTextEntry ste, int segmentNumberInProject, boolean isActive) {
         this(doc, text, ste.getSrcText(), ste.getTranslation(), isActive,
-                segmentNumberInProject);
+                segmentNumberInProject, ste.getTranslation() != null
+                        && ste.getTranslation().length() > 0);
         this.ste = ste;
         this.segmentNumberInProject = segmentNumberInProject;
     }
 
+    /**
+     * Create description for active segment.
+     * 
+     * @param doc
+     * @param text
+     * @param sourceText
+     * @param translationText
+     * @param segmentNumber
+     */
     public SegmentElementsDescription(OmDocument doc, StringBuilder text,
+            CharSequence sourceText, String translationText, int segmentNumber) {
+        this(doc, text, sourceText, translationText, true, segmentNumber, true);
+    }
+
+    private SegmentElementsDescription(OmDocument doc, StringBuilder text,
             CharSequence sourceText, String translationText, boolean isActive,
-            int segmentNumber) {
+            int segmentNumber, boolean translationExists) {
         this.doc = doc;
 
         int offset = 0;
-
-        boolean translationExists = translationText != null
-                && translationText.length() > 0;
 
         EditorSettings settings = doc.controller.settings;
         if (isActive) {

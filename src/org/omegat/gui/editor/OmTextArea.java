@@ -121,6 +121,18 @@ class OmTextArea extends JEditorPane {
                 setCaretPosition(getOmDocument().activeTranslationEnd
                         .getOffset());
                 e.consume();
+            } else if (e.getKeyCode() == KeyEvent.VK_TAB && !e.isShiftDown()) {
+                // press TAB
+                if (controller.settings.isUseTabForAdvance()) {
+                    controller.nextEntry();
+                    e.consume();
+                }
+            } else if (e.getKeyCode() == KeyEvent.VK_TAB && e.isShiftDown()) {
+                // press Shift+TAB
+                if (controller.settings.isUseTabForAdvance()) {
+                    controller.prevEntry();
+                    e.consume();
+                }
             }
         }
     };

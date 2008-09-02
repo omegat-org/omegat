@@ -329,7 +329,7 @@ class OmDocument extends AbstractDocument implements StyledDocument {
 
             SegmentElementsDescription desc = new SegmentElementsDescription(
                     this, new StringBuilder(), segElement.ste.getSrcText(),
-                    currentTranslation, true, segElement.segmentNumberInProject);
+                    currentTranslation, segElement.segmentNumberInProject);
 
             Element[] added = desc.createElementsForSegment(this, segElement,
                     fullSegmentText, offsetFromDocumentBegin);

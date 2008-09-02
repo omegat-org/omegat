@@ -107,33 +107,51 @@ class OmTextArea extends JEditorPane {
         }
     };
 
+    /**
+     * Redefine some keys behavior.
+     */
     protected KeyListener keyListener = new KeyAdapter() {
         @Override
         public void keyPressed(KeyEvent e) {
-            if (e.getKeyCode() == KeyEvent.VK_HOME && e.getModifiersEx() == 0) {
+            if (isKey(e, KeyEvent.VK_HOME, 0)) {
                 // press HOME
                 setCaretPosition(getOmDocument().activeTranslationBegin
                         .getOffset());
                 e.consume();
-            } else if (e.getKeyCode() == KeyEvent.VK_END
-                    && e.getModifiersEx() == 0) {
+            } else if (isKey(e, KeyEvent.VK_END, 0)) {
                 // press END
                 setCaretPosition(getOmDocument().activeTranslationEnd
                         .getOffset());
                 e.consume();
-            } else if (e.getKeyCode() == KeyEvent.VK_TAB && !e.isShiftDown()) {
-                // press TAB
+            } else if (isKey(e, KeyEvent.VK_TAB, 0)) {
+                // press TAB when 'Use TAB to advance'
                 if (controller.settings.isUseTabForAdvance()) {
                     controller.nextEntry();
                     e.consume();
                 }
-            } else if (e.getKeyCode() == KeyEvent.VK_TAB && e.isShiftDown()) {
-                // press Shift+TAB
+            } else if (isKey(e, KeyEvent.VK_TAB, KeyEvent.SHIFT_MASK)) {
+                // press Shift+TAB when 'Use TAB to advance'
                 if (controller.settings.isUseTabForAdvance()) {
                     controller.prevEntry();
                     e.consume();
                 }
+            } else if (isKey(e, KeyEvent.VK_ENTER, 0)) {
+                // press ENTER
+                if (!controller.settings.isUseTabForAdvance()) {
+                    controller.nextEntry();
+                    e.consume();
+                }
+            } else if (isKey(e, KeyEvent.VK_ENTER, KeyEvent.CTRL_MASK)) {
+                // press Ctrl+ENTER
+                if (!controller.settings.isUseTabForAdvance()) {
+                    controller.prevEntry();
+                    e.consume();
+                }
             }
+        }
+
+        private boolean isKey(KeyEvent e, int code, int modifiers) {
+            return e.getKeyCode() == code && e.getModifiers() == modifiers;
         }
     };
 

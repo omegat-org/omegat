@@ -107,12 +107,15 @@ public class SegmentElementsDescription {
      * @param segmentNumber
      */
     public SegmentElementsDescription(OmDocument doc, StringBuilder text,
-            CharSequence sourceText, String translationText, int segmentNumber) {
+            String sourceText, String translationText, int segmentNumber) {
         this(doc, text, sourceText, translationText, true, segmentNumber, true);
     }
 
+    /**
+     * Create description for display segment.
+     */
     private SegmentElementsDescription(OmDocument doc, StringBuilder text,
-            CharSequence sourceText, String translationText, boolean isActive,
+            String sourceText, String translationText, boolean isActive,
             int segmentNumber, boolean translationExists) {
         this.doc = doc;
 
@@ -134,13 +137,25 @@ public class SegmentElementsDescription {
             offset += tx.length();
             translationBeginTagEnd = offset;
 
+            // add exist translation
             if (translationExists) {
                 text.append(translationText);
                 offset += translationText.length();
+                if (doc.controller.settings.isAutoSpellChecking()) {
+                    // spell it
+                    needToCheckSpelling = true;
+                    doc.controller.spellCheckerThread
+                            .addForCheck(translationText);
+                }
             } else if (!Preferences
                     .isPreference(Preferences.DONT_INSERT_SOURCE_TEXT)) {
                 text.append(sourceText);
                 offset += sourceText.length();
+                if (doc.controller.settings.isAutoSpellChecking()) {
+                    // spell it
+                    needToCheckSpelling = true;
+                    doc.controller.spellCheckerThread.addForCheck(sourceText);
+                }
             }
 
             // add end translation tag
@@ -161,16 +176,19 @@ public class SegmentElementsDescription {
             translationBeginTagStart = offset;
             translationBeginTagEnd = offset;
             if (translationExists) {
+                // add exist translation
                 text.append(translationText).append('\n');
                 offset += translationText.length() + 1;
                 translationAttrs = settings.isMarkTranslated() ? Styles.TRANSLATED
                         : null;
                 if (doc.controller.settings.isAutoSpellChecking()) {
+                    // spell it
                     needToCheckSpelling = true;
                     doc.controller.spellCheckerThread
                             .addForCheck(translationText);
                 }
             } else if (!doc.controller.settings.isDisplaySegmentSources()) {
+                // translation not exist - add source instead
                 text.append(sourceText).append('\n');
                 offset += sourceText.length() + 1;
                 translationAttrs = settings.isMarkUntranslated() ? Styles.UNTRANSLATED

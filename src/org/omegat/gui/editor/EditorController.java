@@ -95,8 +95,6 @@ public class EditorController implements IEditor {
     private JTextPane introPane, emptyProjectPane;
     protected final MainWindow mw;
 
-    protected int m_curEntryNum = 0;
-
     /** Currently displayed segments info. */
     protected OmDocument.OmElementSegment[] m_docSegList;
 
@@ -217,7 +215,8 @@ public class EditorController implements IEditor {
             title = emptyProjectPaneTitle;
             break;
         case FIRST_ENTRY:
-            m_curEntryNum = 0;
+            displayedFileIndex = 0;
+            displayedEntryIndex = 0;
             title = StaticUtils.format(OStrings
                     .getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
             data = editor;
@@ -336,7 +335,8 @@ public class EditorController implements IEditor {
 
         editor.cancelUndo();
 
-        history.insertNew(m_curEntryNum);
+        history
+                .insertNew(m_docSegList[displayedEntryIndex].segmentNumberInProject);
         // update history menu items
         mw.menu.gotoHistoryBackMenuItem.setEnabled(history.hasPrev());
         mw.menu.gotoHistoryForwardMenuItem.setEnabled(history.hasNext());
@@ -772,7 +772,7 @@ public class EditorController implements IEditor {
 
         int prevValue = history.back();
         if (prevValue != -1) {
-            gotoEntry(prevValue + 1);
+            gotoEntry(prevValue);
         }
     }
 
@@ -784,7 +784,7 @@ public class EditorController implements IEditor {
 
         int nextValue = history.forward();
         if (nextValue != -1) {
-            gotoEntry(nextValue + 1);
+            gotoEntry(nextValue);
         }
     }
 

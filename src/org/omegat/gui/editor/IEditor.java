@@ -106,7 +106,8 @@ public interface IEditor {
      * Goto entry with specified number.
      * 
      * @param entryNum
-     *            entry number
+     *            entry number, which starts from '1', i. e. number which
+     *            displayed for user
      * 
      *            Must be called only from UI thread.
      */

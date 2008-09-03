@@ -153,7 +153,9 @@ public class EditorController implements IEditor {
                 default:
                     showType = SHOW_TYPE.NO_CHANGE;
                 }
-                updateState(showType);
+                if (showType != SHOW_TYPE.NO_CHANGE) {
+                    updateState(showType);
+                }
             }
         });
         CoreEvents.registerEntryEventListener(new IEntryEventListener() {

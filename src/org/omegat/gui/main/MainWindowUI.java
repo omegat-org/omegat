@@ -162,7 +162,6 @@ public class MainWindowUI {
         if (layout.length() > 0) {
             byte[] bytes = StaticUtils.uudecode(layout);
             try {
-                Log.log("load desktop layout:" + new String(bytes, "UTF-8"));
                 ByteArrayInputStream in = new ByteArrayInputStream(bytes);
                 mainWindow.desktop.readXML(in);
                 in.close();
@@ -186,7 +185,6 @@ public class MainWindowUI {
             mainWindow.desktop.writeXML(out);
             out.close();
             byte[] buf = out.toByteArray();
-            Log.log("save desktop layout:" + new String(buf, "UTF-8"));
             String layout = StaticUtils.uuencode(buf);
             Preferences.setPreference(Preferences.MAINWINDOW_LAYOUT, layout);
         } catch (Exception e) {
@@ -206,7 +204,6 @@ public class MainWindowUI {
      */
     public static void resetDesktopLayout(final MainWindow mainWindow) {
         try {
-            Log.log("reset desktop layout");
             InputStream in = MainWindowUI.class.getResourceAsStream(
                     "DockingDefaults.xml");
             try {

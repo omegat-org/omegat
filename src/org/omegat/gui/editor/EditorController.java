@@ -95,21 +95,7 @@ public class EditorController implements IEditor {
     private JTextPane introPane, emptyProjectPane;
     protected final MainWindow mw;
 
-    private SourceTextEntry m_curEntry;
     protected int m_curEntryNum = 0;
-
-    // starting offset and length of source lang in current segment
-    protected int m_segmentStartOffset;
-    protected int m_sourceDisplayLength;
-    protected int m_segmentEndInset;
-
-    /** first entry number in current file. */
-    protected int m_xlFirstEntry;
-    /** last entry number in current file. */
-    protected int m_xlLastEntry;
-
-    // indicates the document is loaded and ready for processing
-    protected boolean m_docReady;
 
     /** Currently displayed segments info. */
     protected OmDocument.OmElementSegment[] m_docSegList;
@@ -561,65 +547,6 @@ public class EditorController implements IEditor {
             loadDocument();
         }
 
-        activateEntry();
-
-        if (true)
-            return;
-
-        IProject project = Core.getProject();
-        // get the total number of entries
-        int numEntries = project.getAllEntries().size();
-
-        boolean found = false;
-        int curEntryNum;
-
-        // iterate through the list of entries,
-        // starting at the current entry,
-        // until an entry with no translation is found
-        for (curEntryNum = m_curEntryNum + 1; curEntryNum < numEntries; curEntryNum++) {
-            // get the next entry
-            SourceTextEntry entry = project.getAllEntries().get(curEntryNum);
-
-            // check if the entry is not null, and whether it contains a
-            // translation
-            if (entry != null && entry.getTranslation().length() == 0) {
-                // we've found it
-                found = true;
-                // stop searching
-                break;
-            }
-        }
-
-        // if we haven't found untranslated entry till the end,
-        // trying to search for it from the beginning
-        if (!found) {
-            for (curEntryNum = 0; curEntryNum < m_curEntryNum; curEntryNum++) {
-                // get the next entry
-                SourceTextEntry entry = project.getAllEntries()
-                        .get(curEntryNum);
-
-                // check if the entry is not null, and whether it contains a
-                // translation
-                if (entry != null && entry.getTranslation().length() == 0) {
-                    // we've found it
-                    found = true;
-                    // stop searching
-                    break;
-                }
-            }
-        }
-
-        if (found) {
-            // mark the entry
-            m_curEntryNum = curEntryNum;
-
-            // load the document, if the segment is not in the current
-            // document
-            if (m_curEntryNum < m_xlFirstEntry || m_curEntryNum > m_xlLastEntry)
-                loadDocument();
-        }
-
-        // activate the entry
         activateEntry();
     }
 

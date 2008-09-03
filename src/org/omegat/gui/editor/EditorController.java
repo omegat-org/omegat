@@ -267,7 +267,7 @@ public class EditorController implements IEditor {
      * {@inheritDoc}
      */
     public SourceTextEntry getCurrentEntry() {
-        return m_curEntry;
+        return m_docSegList[displayedEntryIndex].ste;
     }
 
     /**

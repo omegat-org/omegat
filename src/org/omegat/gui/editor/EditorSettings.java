@@ -58,8 +58,7 @@ public class EditorSettings {
                 .isPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS);
         displaySegmentSources = Preferences
                 .isPreference(Preferences.DISPLAY_SEGMENT_SOURCES);
-        autoSpellChecking = Preferences
-                .isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
+        autoSpellChecking=Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
     }
 
     public char getAdvancerChar() {
@@ -147,20 +146,19 @@ public class EditorSettings {
             parent.activateEntry();
         }
     }
-
+    
     /** need to check spell or not */
     public boolean isAutoSpellChecking() {
         return autoSpellChecking;
     }
-
+    
     public void setAutoSpellChecking(boolean autoSpellChecking) {
         UIThreadsUtil.mustBeSwingThread();
-        if (Core.getProject().isProjectLoaded()) {
-            parent.commitAndDeactivate();
-        }
 
+        parent.commitAndDeactivate();
+        
         this.autoSpellChecking = autoSpellChecking;
-
+        
         if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();
             parent.activateEntry();

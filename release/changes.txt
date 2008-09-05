@@ -182,7 +182,7 @@ localization
 
 
   2 Enhancements
-  3 Bugfixes
+  4 Bugfixes
 
 ----------------------------------------------------------------------
 1.7.3 update 4
@@ -203,6 +203,8 @@ localization
   - DocBook: entities resolved only under Java 1.4
   http://sourceforge.net/support/tracker.php?aid=1825174 
 
+  - PO: Bad handling of double quotes after no-wrap
+  http://sourceforge.net/support/tracker.php?aid=2021007 
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 update 3 Changes

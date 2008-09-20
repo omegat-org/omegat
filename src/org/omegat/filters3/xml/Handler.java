@@ -1,9 +1,10 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2008 Martin Fleurke
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -59,6 +60,7 @@ import org.xml.sax.helpers.DefaultHandler;
  * This class is called back by SAXParser.
  *
  * @author Maxym Mykhalchuk
+ * @author Martin Fleurke
  */
 class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
 {
@@ -87,7 +89,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         else
             return mainWriter;
     }
-    
+
     /** Currently parsed external entity that has its own writer. */
     private Entity extEntity = null;
 
@@ -99,7 +101,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     Entry intacttagEntry = null;
     /** Current entry that collects the text surrounded by intact tag. */
     String intacttagName = null;
-    
+
     /** Now we collect out-of-turn entry. */
     private boolean collectingOutOfTurnText()
     {
@@ -111,9 +113,9 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     {
         return intacttagEntry!=null;
     }
-    
+
     /**
-     * Returns current entry we collect text into. 
+     * Returns current entry we collect text into.
      * If we collect normal text, returns {@link #entry},
      * else returns {@link #outofturnEntry}.
      */
@@ -126,24 +128,24 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         else
             return entry;
     }
-    
-    /** 
-     * External entities declared in source file. 
+
+    /**
+     * External entities declared in source file.
      * Each entry is of type {@link Entity}.
      */
     private List<Entity> externalEntities = new ArrayList<Entity>();
-    
-    /** 
-     * Internal entities declared in source file. 
+
+    /**
+     * Internal entities declared in source file.
      * A {@link Map} from {@link String}/entity name/ to {@link Entity}.
      */
     private Map<String,Entity> internalEntities = new HashMap<String, Entity>();
     /** Internal entity just started. */
     private Entity internalEntityStarted = null;
-    
+
     /** Currently collected text is wrapped in CDATA section. */
     private boolean inCDATA = false;
-    
+
     /** Whether we're curren */
     //private boolean inPreformattingTag = false;
 
@@ -152,14 +154,14 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     private DTD dtd = null;
     /** SAX parser parses DTD -- we don't extract translatable text from there */
     private boolean inDTD = false;
-    
-    /** 
+
+    /**
      * External files this handler has processed, because
      * they were included into main file.
      * Each entry is of type {@link File}.
      */
     private List<File> processedFiles = new ArrayList<File>();
-    /** 
+    /**
      * Returns external files this handler has processed, because
      * they were included into main file. Each entry is {@link File}.
      */
@@ -170,7 +172,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         else
             return null;
     }
-    
+
     /** Throws a nice error message when SAX parser encounders fastal error. */
     private void reportFatalError(SAXParseException e) throws SAXException, MalformedURLException, URISyntaxException
     {
@@ -187,15 +189,15 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         else
             filename = inFile.getAbsolutePath();
         throw new SAXException("\n"+StaticUtils.format(e.getMessage()+"\n" +       // NOI18N
-                OStrings.getString("XML_FATAL_ERROR"), 
+                OStrings.getString("XML_FATAL_ERROR"),
                 new Object[] {filename, new Integer(linenum)}));
     }
-    
+
     /**
      * Creates a new instance of Handler
      */
-    public Handler(SAXParser parser, Translator translator, XMLDialect dialect, 
-            File inFile, String inEncoding, File outFile, String outEncoding) 
+    public Handler(SAXParser parser, Translator translator, XMLDialect dialect,
+            File inFile, String inEncoding, File outFile, String outEncoding)
             throws IOException
     {
         this.parser = parser;
@@ -210,7 +212,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
 
     private static final String START_JARSCHEMA = "jar:";                       // NOI18N
     private static final String START_FILESCHEMA = "file:";                     // NOI18N
-    
+
     //////////////////////////////////////////////////////////////////////////
     // Utility methods
     //////////////////////////////////////////////////////////////////////////
@@ -231,7 +233,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         }
         return sourceFolderAbsolutePath;
     }
-        
+
     /** Makes System ID not an absolute, but a relative one. */
     private String localizeSystemId(String systemId) throws URISyntaxException, MalformedURLException
     {
@@ -239,14 +241,14 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         {
             File thisOutFile=new File(new URL(systemId).toURI());
             String thisOutPath=thisOutFile.getAbsolutePath();
-            
+
             if (thisOutPath.startsWith(getSourceFolderAbsolutePath())) {
                 return thisOutPath.substring(getSourceFolderAbsolutePath().length());
             }
         }
         return systemId;
     }
-    
+
     /** Whether the file with given systemId is in source folder. */
     private boolean isInSource(String systemId) throws URISyntaxException, MalformedURLException
     {
@@ -259,7 +261,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         }
         return false;
     }
-    
+
     /** Finds external entity by publicId and systemId. */
     private Entity findExternalEntity(String publicId, String systemId)
     {
@@ -269,7 +271,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         {
             if (entity.isInternal())
                 continue;
-            if (StaticUtils.equal(publicId, entity.getPublicId()) && 
+            if (StaticUtils.equal(publicId, entity.getPublicId()) &&
                     StaticUtils.equal(systemId, entity.getSystemId()))
                 return entity;
         }
@@ -277,7 +279,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     }
 
 
-    /** 
+    /**
      * Is called when the entity starts.
      * Tries to find out whether it's an internal entity, and if so,
      * turns on the trigger to queue entity, and not the text it represents,
@@ -289,10 +291,10 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
             return;
         internalEntityStarted = internalEntities.get(name);
     }
-    
-    /** 
+
+    /**
      * Is called when the entity is ended.
-     * Tries to find out whether it's an external entity 
+     * Tries to find out whether it's an external entity
      * we created a writer for, and if so,
      * closes the writer and nulls the entity.
      */
@@ -313,16 +315,16 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     /** Resolves external entity and creates a new writer if it's an included file. */
     public InputSource doResolve(String publicId, String systemId) throws SAXException, TranslationException, IOException, URISyntaxException
     {
-        if (dtd!=null && 
-                StaticUtils.equal(publicId, dtd.getPublicId()) && 
+        if (dtd!=null &&
+                StaticUtils.equal(publicId, dtd.getPublicId()) &&
                 ( StaticUtils.equal(systemId, dtd.getSystemId()) ||
                   StaticUtils.equal(localizeSystemId(systemId), dtd.getSystemId()) ))
         {
             inDTD = true;
         }
-        
-        if ( systemId!=null && 
-                (systemId.startsWith(START_JARSCHEMA) || 
+
+        if ( systemId!=null &&
+                (systemId.startsWith(START_JARSCHEMA) ||
                  systemId.startsWith(START_FILESCHEMA)) )
         {
             InputSource entity = new InputSource(systemId);
@@ -332,7 +334,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
                 if (!new File(new URI(systemId)).exists())
                     entity = null;
             }
-            
+
             if (entity!=null)
             {
                 if (!inDTD && outFile!=null && isInSource(systemId) && extEntity==null)
@@ -344,7 +346,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
                         //  1. it's not a DTD
                         //  2. it's in project's source folder
                         //  3. it's not during project load
-                        // then it's an external file, and we need to 
+                        // then it's an external file, and we need to
                         // write it as an external file
                         translateAndFlush();
                         File extFile = new File(outFile.getParentFile(), localizeSystemId(systemId));
@@ -367,7 +369,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
                 return new InputSource(new java.io.StringReader(new String()));
         }
     }
-    
+
     private void queueText(String s)
     {
         if (internalEntityStarted!=null && s.equals(internalEntityStarted.getValue()))
@@ -405,19 +407,23 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         }
         else
             xmltag = new XMLTag(tag, getShortcut(tag), Tag.TYPE_BEGIN, attributes);
-        
+
         currEntry().add(xmltag);
-        
+
         if (intacttag!=null)
             intacttagEntry = intacttag.getIntactContents();
-        
+
         if (!collectingIntactText())
         {
-            for (int i=0; i<xmltag.getAttributes().size(); i++) 
+            for (int i=0; i<xmltag.getAttributes().size(); i++)
             {
                 Attribute attr = xmltag.getAttributes().get(i);
-                if (dialect.getTranslatableAttributes().contains(attr.getName()) || 
-                        dialect.getTranslatableTagAttributes().containsPair(tag, attr.getName()))
+                if ((dialect.getTranslatableAttributes().contains(attr.getName())
+                     ||
+                     dialect.getTranslatableTagAttributes().containsPair(tag, attr.getName())
+                    )
+                   && dialect.validateTranslatableTagAttribute(tag, attr.getName(), xmltag.getAttributes() )
+                   )
                 {
                     attr.setValue(translator.translate(attr.getValue()));
                 }
@@ -446,7 +452,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     {
         currEntry().add(dtd);
     }
-    
+
     /** Is called when the tag is started. */
     private void start(String tag, Attributes attributes) throws SAXException, TranslationException
     {
@@ -465,7 +471,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
             queueTag(tag, attributes);
         }
     }
-    
+
     /** Is called when the tag is ended. */
     private void end(String tag) throws SAXException, TranslationException
     {
@@ -473,7 +479,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         {
             intacttagEntry = null;
             intacttagName = null;
-        } 
+        }
         else if (collectingOutOfTurnText() && isOutOfTurnTag(tag))
         {
             translateButDontFlash();
@@ -496,7 +502,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     {
         if (currEntry().size()==0)
             return;
-        
+
         String src = currEntry().sourceToShortcut();
         Element lead = currEntry().get(0);
         String translation;
@@ -512,10 +518,10 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
             if( compressed.equals(translation) )
                 translation = src;
         }
-        
+
         currEntry().setTranslation(translation);
     }
-    
+
     /**
      * One of the main methods of the XML filter:
      * it collects all the data, adjusts it, sends for translation,
@@ -539,37 +545,37 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     ///////////////////////////////////////////////////////////////////////////
     // Dialect Helper methods
     ///////////////////////////////////////////////////////////////////////////
-    
+
     /**
-     * Returns whether the tag starts a new paragraph. 
+     * Returns whether the tag starts a new paragraph.
      * Preformatting tags are also considered to start a new paragraph,
      * so if {@link #isPreformattingTag(String)} returns true,
      * this method will also return true.
      */
     private boolean isParagraphTag(String tag)
     {
-        return (dialect.getParagraphTags()!=null && dialect.getParagraphTags().contains(tag)) 
+        return (dialect.getParagraphTags()!=null && dialect.getParagraphTags().contains(tag))
                 || isPreformattingTag(tag);
     }
-    
+
     /** Returns whether the tag surrounds preformatted block of text. */
     private boolean isPreformattingTag(String tag)
     {
         return dialect.getPreformatTags()!=null && dialect.getPreformatTags().contains(tag);
     }
-    
+
     /** Returns whether the tag surrounds intact block of text which we shouldn't translate. */
     private boolean isIntactTag(String tag)
     {
         return dialect.getIntactTags()!=null && dialect.getIntactTags().contains(tag);
     }
-    
+
     /** Returns whether we face out of turn tag we should collect separately. */
     private boolean isOutOfTurnTag(String tag)
     {
         return dialect.getOutOfTurnTags()!=null && dialect.getOutOfTurnTags().contains(tag);
     }
-    
+
     /** Returns a shortcut for a tag. Queries dialect first, else returns null. */
     private String getShortcut(String tag)
     {
@@ -578,11 +584,11 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         else
             return null;
     }
-    
+
     //////////////////////////////////////////////////////////////////////////
     // Callback methods
     //////////////////////////////////////////////////////////////////////////
-    
+
     /**
      * Resolves an external entity.
      */
@@ -654,19 +660,19 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
             return;
         queueComment(new String(ch, start, length));
     }
-    
+
     /** Receive notification of the beginning of the document. */
     public void startDocument() throws SAXException
     {
         try
         {
             mainWriter.write("<?xml version=\"1.0\"?>\n");                      // NOI18N
-        } 
+        }
         catch (IOException e)
         {
             throw new SAXException(e);
         }
-        
+
         entry = new Entry();
     }
     /** Receive notification of the end of the document. */
@@ -682,7 +688,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
             }
             translateAndFlush();
             currWriter().close();
-        } 
+        }
         catch (TranslationException e)
         {
             throw new SAXException(e);
@@ -692,12 +698,12 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
             throw new SAXException(e);
         }
     }
-    
+
     /**
      * Report a fatal XML parsing error.
      * Is used to provide feedback.
      */
-    public void fatalError(org.xml.sax.SAXParseException e) throws SAXException 
+    public void fatalError(org.xml.sax.SAXParseException e) throws SAXException
     {
         try {
             reportFatalError(e);
@@ -743,14 +749,14 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     }
 
     /** Not used: Report the beginning of some internal and external XML entities. */
-    public void startEntity(String name) throws SAXException 
+    public void startEntity(String name) throws SAXException
     {
         doStartEntity(name);
     }
-    
+
     /**
      * Report the end of an entity.
-     * 
+     *
      * @param name The name of the entity that is ending.
      * @exception SAXException The application may raise an exception.
      * @see #startEntity
@@ -806,7 +812,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     ///////////////////////////////////////////////////////////////////////////
     // unused callbacks
     ///////////////////////////////////////////////////////////////////////////
-    
+
     /** Not used: An element type declaration. */
     public void elementDecl(String name, String model) { }
 

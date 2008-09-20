@@ -1,10 +1,10 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007 Martin Fleurke
+               2007-2008 Martin Fleurke
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -47,7 +48,7 @@ import org.omegat.util.OStrings;
  * A filter to translate HTML and XHTML files.
  * <p>
  * Some useful discussion why HTML filter should behave like it does,
- * happened on a 
+ * happened on a
  * <a href="http://sourceforge.net/support/tracker.php?aid=1364265">bug report</a>
  * devoted to compressing space.
  *
@@ -66,23 +67,29 @@ public class HTMLFilter2 extends AbstractFilter
 
     /** Stores the target encoding of HTML file. */
     private String targetEncoding;
-    
+
     /** A regular Expression Pattern to be matched to the strings to be translated.
      * If there is a match, the string should not be translated
      */
     private Pattern skipRegExpPattern;
-    
+
+    /** A map of attribute-name and attribute value pairs that,
+     *  if it exist in a meta-tag, indicates that the meta-tag 
+     *  should not be translated
+     */
+    private HashMap<String, String> skipMetaAttributes;
+
     /** The options of this filter */
     private HTMLOptions options;
-    
-    
+
+
     /**
      * Customized version of creating input reader for HTML files,
      * aware of encoding by using <code>EncodingAwareReader</code> class.
      *
      * @see HTMLReader
      */
-    public BufferedReader createReader(File infile, String encoding) 
+    public BufferedReader createReader(File infile, String encoding)
             throws UnsupportedEncodingException, IOException
     {
         HTMLReader hreader = new HTMLReader(infile.getAbsolutePath(), encoding);
@@ -95,22 +102,22 @@ public class HTMLFilter2 extends AbstractFilter
      *
      * @see HTMLWriter
      */
-    public BufferedWriter createWriter(File outfile, String encoding) 
+    public BufferedWriter createWriter(File outfile, String encoding)
             throws UnsupportedEncodingException, IOException
     {
         HTMLWriter hwriter;
         HTMLOptions options = (HTMLOptions) getOptions();
         if (encoding==null)
-            this.targetEncoding = sourceEncoding;            
+            this.targetEncoding = sourceEncoding;
         else
             this.targetEncoding = encoding;
-        
-        hwriter = new HTMLWriter(outfile.getAbsolutePath(), 
+
+        hwriter = new HTMLWriter(outfile.getAbsolutePath(),
                 this.targetEncoding, options);
         return new BufferedWriter(hwriter);
     }
 
-    public void processFile(BufferedReader infile, BufferedWriter outfile) 
+    public void processFile(BufferedReader infile, BufferedWriter outfile)
             throws IOException, TranslationException
     {
         StringBuffer all = null;
@@ -120,7 +127,7 @@ public class HTMLFilter2 extends AbstractFilter
             char cbuf[] = new char[1000];
             int len = -1;
             while( (len=infile.read(cbuf))>0 )
-                all.append(cbuf, 0, len);                
+                all.append(cbuf, 0, len);
         }
         catch( OutOfMemoryError e )
         {
@@ -129,7 +136,7 @@ public class HTMLFilter2 extends AbstractFilter
             System.gc();
             throw new IOException(OStrings.getString("HTML__FILE_TOO_BIG"));
         }
-        
+
         if (this.hasOptions()) // HHC filter has no options
         {
             this.options = (HTMLOptions) this.getOptions();
@@ -138,19 +145,28 @@ public class HTMLFilter2 extends AbstractFilter
         }
 
         // Prepare matcher
-        String skipRegExp = options.getskipRegExp();
-        if (skipRegExp != null && skipRegExp.length()>0) 
+        String skipRegExp = options.getSkipRegExp();
+        if (skipRegExp != null && skipRegExp.length()>0)
         {
-            try 
+            try
             {
         	this.skipRegExpPattern = Pattern.compile(skipRegExp, Pattern.CASE_INSENSITIVE);
-            } 
-            catch (PatternSyntaxException e) 
+            }
+            catch (PatternSyntaxException e)
             {
         	Log.log(e);
             }
         }
-        
+
+        //prepare set of attributes that indicate not to translate a meta-tag
+        String skipMetaString = options.getSkipMeta();
+        skipMetaAttributes = new HashMap<String, String>();
+        String[] skipMetaAttributesStringarray = skipMetaString.split(",");
+        for (int i=0; i<skipMetaAttributesStringarray.length; i++) {
+            String keyvalue = skipMetaAttributesStringarray[i].trim().toUpperCase();
+            skipMetaAttributes.put(keyvalue, "");
+        }
+
         Parser parser = new Parser();
         try
         {
@@ -162,28 +178,28 @@ public class HTMLFilter2 extends AbstractFilter
             System.out.println(pe);
         }
     }
-    
+
     //////////////////////////////////////////////////////////////////////////
-    
+
     /** Package-internal processEntry to give it to FilterVisitor */
     String privateProcessEntry(String entry)
     {
-    	if (skipRegExpPattern != null) 
-        {
-    	    if (skipRegExpPattern.matcher(entry).matches()) 
-            {
-//  	        System.out.println("Skipping \""+entry+"\"");
-    		return entry;
-    	    } 
-            else 
-            {
-//  		System.out.println("Using: \""+entry+"\"");
-    		return super.processEntry(entry);
-    	    }
-    	}
-    	return super.processEntry(entry);
+         if (skipRegExpPattern != null)
+         {
+             if (skipRegExpPattern.matcher(entry).matches())
+             {
+//               System.out.println("Skipping \""+entry+"\"");
+                 return entry;
+             }
+             else
+             {
+//              System.out.println("Using: \""+entry+"\"");
+                return super.processEntry(entry);
+            }
+        }
+        return super.processEntry(entry);
     }
-    
+
     //////////////////////////////////////////////////////////////////////////
 
     public boolean isTargetEncodingVariable()
@@ -216,12 +232,12 @@ public class HTMLFilter2 extends AbstractFilter
      * <p>
      * In English, the hint is as follows:
      * <br>
-     * Note: Source File Encoding setting affects only the HTML files that 
-     * have no encoding declaration inside. If HTML file has the encoding 
-     * declaration, it will be used disregarding any value you set in this 
+     * Note: Source File Encoding setting affects only the HTML files that
+     * have no encoding declaration inside. If HTML file has the encoding
+     * declaration, it will be used disregarding any value you set in this
      * dialog.
      */
-    public String getHint() 
+    public String getHint()
     {
         return OStrings.getString("HTML_NOTE");
     }
@@ -237,7 +253,7 @@ public class HTMLFilter2 extends AbstractFilter
 
     /**
      * (X)HTML Filter shows a <b>modal</b> dialog to edit its own options.
-     * 
+     *
      * @param currentOptions Current options to edit.
      * @return Updated filter options if user confirmed the changes, and current options otherwise.
      */
@@ -262,11 +278,16 @@ public class HTMLFilter2 extends AbstractFilter
     }
 
     /**
-     * Returns the encoding of the html writer (if already set) 
+     * Returns the encoding of the html writer (if already set)
      * @return the target encoding
      */
-    public String getTargetEncoding() 
+    public String getTargetEncoding()
     {
         return this.targetEncoding;
+    }
+
+    public boolean checkDoSkipMetaTag(String key, String value) {
+        return skipMetaAttributes.
+                containsKey(key.toUpperCase() + "=" + value.toUpperCase());
     }
 }

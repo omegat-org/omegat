@@ -1,10 +1,10 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007 Didier Briel, Martin Fleurke 
+               2007-2008 Didier Briel, Martin Fleurke
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -30,8 +30,11 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 
+import org.htmlparser.Attribute;
 import org.htmlparser.Node;
 import org.htmlparser.Remark;
 import org.htmlparser.Tag;
@@ -53,7 +56,7 @@ public class FilterVisitor extends NodeVisitor
     private HTMLFilter2 filter;
     private BufferedWriter writer;
     private HTMLOptions options;
-    
+
     public FilterVisitor(HTMLFilter2 htmlfilter, BufferedWriter bufwriter)
     {
         this.filter = htmlfilter;
@@ -69,18 +72,18 @@ public class FilterVisitor extends NodeVisitor
     /////////////////////////////////////////////////////////////////////////
     // Variable declaration
     /////////////////////////////////////////////////////////////////////////
-    
+
     /** Should the parser call us for this tag's ending tag and its inner tags. */
     boolean recurse = true;
-        
+
     /** Do we collect the translatable text now. */
     boolean text = false;
     /** The translatable text being collected. */
     // StringBuffer paragraph;
     /** Did the PRE block start (it means we mustn't compress the spaces). */
     boolean preformatting = false;
-    
-    /** 
+
+    /**
      * The list of non-paragraph tags before a chunk of text.
      * <ul>
      * <li>If a chunk of text follows, they get prepended to the translatable paragraph,
@@ -89,11 +92,11 @@ public class FilterVisitor extends NodeVisitor
      * </ul>
      */
     List<Node> befors;
-    
+
     /** The list of nodes forming a chunk of text. */
     List<Node> translatable;
 
-    /** 
+    /**
      * The list of non-paragraph tags following a chunk of text.
      * <ul>
      * <li>If another chunk of text follows, they get appended to the translatable paragraph,
@@ -101,7 +104,7 @@ public class FilterVisitor extends NodeVisitor
      * </ul>
      */
     List<Node> afters;
-    
+
     /** The tags behind the shortcuts */
     List<Tag> s_tags;
     /** The tag numbers of shorcutized tags */
@@ -135,7 +138,7 @@ public class FilterVisitor extends NodeVisitor
      */
     public void visitTag(Tag tag)
     {
-      
+
         if( isIntactTag(tag) )
         {
             if( text )
@@ -154,10 +157,9 @@ public class FilterVisitor extends NodeVisitor
 
             if( isPreformattingTag(tag) )
                 preformatting = true;
-
+            // Translate attributes of tags if they are not null.
             maybeTranslateAttribute(tag, "abbr");                               // NOI18N
             maybeTranslateAttribute(tag, "alt");                                // NOI18N
-            maybeTranslateAttribute(tag, "content");                            // NOI18N
             if (options.getTranslateHref())
                 maybeTranslateAttribute(tag, "href");                           // NOI18N
             if (options.getTranslateHreflang())
@@ -165,26 +167,46 @@ public class FilterVisitor extends NodeVisitor
             if (options.getTranslateLang())
                 maybeTranslateAttribute(tag, "lang");                           // NOI18N
             if( "IMG".equals(tag.getTagName()) &&                               // NOI18N
-                options.getTranslateSrc() )                                      
+                options.getTranslateSrc() )
                 maybeTranslateAttribute(tag, "src");                            // NOI18N
             maybeTranslateAttribute(tag, "summary");                            // NOI18N
             maybeTranslateAttribute(tag, "title");                              // NOI18N
             if( "INPUT".equals(tag.getTagName()) && (
-               options.getTranslateValue() 
-               || "submit".equalsIgnoreCase(tag.getAttribute("type"))           // NOI18N 
-               || "button".equalsIgnoreCase(tag.getAttribute("type"))           // NOI18N 
-               || "reset".equalsIgnoreCase(tag.getAttribute("type"))            // NOI18N 
-               && options.getTranslateButtonValue() ) )                                            
+               options.getTranslateValue()
+               || "submit".equalsIgnoreCase(tag.getAttribute("type"))           // NOI18N
+               || "button".equalsIgnoreCase(tag.getAttribute("type"))           // NOI18N
+               || "reset".equalsIgnoreCase(tag.getAttribute("type"))            // NOI18N
+               && options.getTranslateButtonValue() ) )
                 maybeTranslateAttribute(tag, "value");                          // NOI18N
+            // Special handling of meta-tag: depending on the other attributes
+            // the contents-attribute should or should not be translated.
+            // The group of attribute-value pairs indicating non-translation
+            // are stored in the configuration
+            if ( "META".equals(tag.getTagName()) ) {
+                Vector<Attribute> tagAttributes = tag.getAttributesEx();
+                Iterator<Attribute> i = tagAttributes.iterator();
+                boolean doSkipMetaTag = false;
+                while (i.hasNext() && doSkipMetaTag==false) {
+                    Attribute attribute = i.next();
+                    String name = attribute.getName();
+                    String value = attribute.getValue();
+                    if (name==null || value == null) 
+                        continue;
+                    doSkipMetaTag = this.filter.checkDoSkipMetaTag(name, value);
+                }
+                if (!doSkipMetaTag) {
+                    maybeTranslateAttribute(tag, "content");                    // NOI18N
+                }
+            }
 
             queuePrefix(tag);
         }
     }
-    
+
     /**
      * If the attribute of the tag is not empty,
      * it translates it as a separate segment.
-     * 
+     *
      * @param tag the tag object
      * @param key the name of the attribute
      */
@@ -197,9 +219,9 @@ public class FilterVisitor extends NodeVisitor
             tag.setAttribute(key, trans);
         }
     }
-    
+
     boolean firstcall = true;
-    
+
     /**
      * Called for each chunk of text (<code>StringNode</code>) visited.
      * @param string The string node being visited.
@@ -210,15 +232,15 @@ public class FilterVisitor extends NodeVisitor
         String trimmedtext = string.getText().trim();
         if( trimmedtext.length()>0 )
         {
-            // Hack around HTMLParser not being able to handle XHTML 
-            // RFE pending: 
+            // Hack around HTMLParser not being able to handle XHTML
+            // RFE pending:
             // http://sourceforge.net/tracker/index.php?func=detail&aid=1227222&group_id=24399&atid=381402
             if( firstcall && PatternConsts.XML_HEADER.matcher(trimmedtext).matches() )
             {
                 writeout(string.toHtml());
                 return;
             }
-            
+
             text = true;
             firstcall = false;
         }
@@ -263,7 +285,7 @@ public class FilterVisitor extends NodeVisitor
     {
         cleanup();
     }
-    
+
     /**
      * Called upon parsing completion.
      */
@@ -274,10 +296,10 @@ public class FilterVisitor extends NodeVisitor
         else
             flushbefors();
     }
-    
-    
+
+
     /**
-     * Does the tag lead to starting (ending) a paragraph. 
+     * Does the tag lead to starting (ending) a paragraph.
      * <p>
      * Contains code donated by JC to have dictionary list parsed as segmenting.
      * http://sourceforge.net/support/tracker.php?aid=1348792
@@ -315,9 +337,9 @@ public class FilterVisitor extends NodeVisitor
                 tagname.equals("HR") ||                                         // NOI18N
                 // Optional paragraph on BR
                 (tagname.equals("BR") && options.getParagraphOnBr());           // NOI18N
-                
+
     }
-    
+
     /** Should a contents of this tag be kept intact? */
     private boolean isIntactTag(Tag tag)
     {
@@ -334,7 +356,7 @@ public class FilterVisitor extends NodeVisitor
                 )
                 ;
     }
-    
+
     /** Is the tag space-preserving? */
     private boolean isPreformattingTag(Tag tag)
     {
@@ -344,7 +366,7 @@ public class FilterVisitor extends NodeVisitor
                 tagname.equals("TEXTAREA")                                      // NOI18N
                 ;
     }
-    
+
     /** Writes something to writer. */
     private void writeout(String something)
     {
@@ -357,9 +379,9 @@ public class FilterVisitor extends NodeVisitor
             System.out.println(ioe);
         }
     }
-    
+
     /**
-     * Ends the segment collection and sends the translatable text out 
+     * Ends the segment collection and sends the translatable text out
      * to OmegaT core,
      * and some extra tags to writer.
      */
@@ -375,14 +397,14 @@ public class FilterVisitor extends NodeVisitor
         int firstgood = 0;
         while( firstgood<firstgoodlimit )
         {
-            Node good_node = all.get(firstgood); 
+            Node good_node = all.get(firstgood);
             if( !(good_node instanceof Tag) )
             {
                 firstgood++;
                 continue;
             }
             Tag good = (Tag)good_node;
-            
+
             // trying to test
             int recursion = 1;
             boolean found = false;
@@ -410,13 +432,13 @@ public class FilterVisitor extends NodeVisitor
                     }
                 }
             }
-            // if we could find an ending, 
+            // if we could find an ending,
             // this is a "good one"
             if( found )
                 break;
             firstgood++;
         }
-        
+
         // writing out all tags before the "first good" one
         for(int i=0; i<firstgood;i++)
         {
@@ -426,7 +448,7 @@ public class FilterVisitor extends NodeVisitor
             else
                 writeout(node.getText());
         }
-        
+
 
         // detecting the last ending tag in 'afters'
         // that has its starting in the paragraph
@@ -436,14 +458,14 @@ public class FilterVisitor extends NodeVisitor
         int lastgood = all.size()-1;
         while( lastgood>lastgoodlimit )
         {
-            Node good_node = all.get(lastgood); 
+            Node good_node = all.get(lastgood);
             if( !(good_node instanceof Tag) )
             {
                 lastgood--;
                 continue;
             }
             Tag good = (Tag)good_node;
-            
+
             // trying to test
             int recursion = 1;
             boolean found = false;
@@ -471,13 +493,13 @@ public class FilterVisitor extends NodeVisitor
                     }
                 }
             }
-            // if we coud find a starting, 
+            // if we coud find a starting,
             // this is a "good one"
             if( found )
                 break;
             lastgood--;
         }
-        
+
         // appending all tags until "last good" one to paragraph text
         StringBuffer paragraph = new StringBuffer();
         // appending all tags starting from "first good" one to paragraph text
@@ -496,7 +518,7 @@ public class FilterVisitor extends NodeVisitor
 
         String uncompressed = paragraph.toString();
         String compressed = uncompressed;
-        
+
         // We're compressing the space if this paragraph wasn't inside <PRE> tag
         // But if the translator does not translate the paragraph,
         // then we write out the uncompressed version,
@@ -506,11 +528,11 @@ public class FilterVisitor extends NodeVisitor
 
         // getting the translation
         String translation = filter.privateProcessEntry(compressed);
-        
+
         // writing out uncompressed
         if( compressed.equals(translation) )
             translation = uncompressed;
-        
+
         // converting & < and > into &amp; &lt; and &gt; respectively
         // note that this doesn't change < and > of tag shortcuts
         translation = charsToEntities(translation);
@@ -518,7 +540,7 @@ public class FilterVisitor extends NodeVisitor
         translation = unshorcutize(translation);
         // writing out the paragraph into target file
         writeout(translation);
-        
+
         // writing out all tags after the "last good" one
         for(int i=lastgood+1; i<all.size();i++)
         {
@@ -531,7 +553,7 @@ public class FilterVisitor extends NodeVisitor
 
         cleanup();
     }
-    
+
     /**
      * Inits a new paragraph.
      */
@@ -548,7 +570,7 @@ public class FilterVisitor extends NodeVisitor
         s_shortcuts = new ArrayList<String>();
         s_nshortcuts = 0;
     }
-    
+
     /**
      * Creates and stores a shortcut for the tag.
      */
@@ -601,7 +623,7 @@ public class FilterVisitor extends NodeVisitor
             result.append("br");                                                // NOI18N
         else
             result.append(Character.toLowerCase(tag.getTagName().charAt(0)));
-        
+
         result.append(n);
         if(tag.isEmptyXmlTag()) // This only detects tags that already have a slash in the source,
             result.append('/'); // but ignores HTML 4.x style <br>, <img>, and similar tags without one
@@ -610,14 +632,14 @@ public class FilterVisitor extends NodeVisitor
         // if (tag.isEmptyXmlTag() || tag.getTagName().equals("BR") || tag.getTagName().equals("IMG"))
         //   result.append('/');
         result.append('>');
-        
+
         String shortcut = result.toString();
         s_tags.add(tag);
         s_tag_numbers.add(n);
         s_shortcuts.add(shortcut);
         paragraph.append(shortcut);
     }
-    
+
     /**
      * Recovers tag shortcuts into full tags.
      */
@@ -632,7 +654,7 @@ public class FilterVisitor extends NodeVisitor
                 Tag tag = s_tags.get(i);
                 try
                 {
-                    str = str.substring(0, pos) + 
+                    str = str.substring(0, pos) +
                             "<" + tag.getText() + ">" +                             // NOI18N
                             str.substring(pos+shortcut.length());
                 }
@@ -646,11 +668,11 @@ public class FilterVisitor extends NodeVisitor
         }
         return str;
     }
-    
-    /** 
+
+    /**
      * Queues the text to the translatable paragraph.
      * <p>
-     * Note that the queued text (if not-purely-whitespace) 
+     * Note that the queued text (if not-purely-whitespace)
      * will also append the previously queued tags and whitespace tags
      * to the translatable paragraph.
      * <p>
@@ -667,19 +689,19 @@ public class FilterVisitor extends NodeVisitor
         else
             afters.add(text);
     }
-    
-    /** 
-     * Queues the tag to the translatable paragraph. 
+
+    /**
+     * Queues the tag to the translatable paragraph.
      * <p>
      * Note that the tag is simply added to the queue,
-     * and will be appended to the translatable text only 
+     * and will be appended to the translatable text only
      * if some meaningful text follows it.
      */
     private void queueTranslatable(Tag tag)
     {
         afters.add(tag);
     }
-    
+
     /**
      * Queues up something, possibly before a text.
      * If the text is collected now, the tag is queued up as translatable
@@ -696,7 +718,7 @@ public class FilterVisitor extends NodeVisitor
             flushbefors();
             writeout("<"+tag.getText()+">");                                    // NOI18N
         }
-        else 
+        else
             befors.add(tag);
     }
 
@@ -711,7 +733,7 @@ public class FilterVisitor extends NodeVisitor
     {
         befors.add(text);
     }
-    
+
     /** Saves "Befors" to output stream and cleans the list. */
     private void flushbefors()
     {
@@ -724,7 +746,7 @@ public class FilterVisitor extends NodeVisitor
         }
         befors.clear();
     }
-    
+
     /** Named HTML Entities and corresponding numeric character references */
     private static final Object ENTITIES[][] =
     {
@@ -732,44 +754,44 @@ public class FilterVisitor extends NodeVisitor
         {"amp", new Integer(38)},                          // NOI18N
         {"lt", new Integer(60)},                          // NOI18N
         {"gt", new Integer(62)},                          // NOI18N
-                
-        //  Latin Extended-A 
-        {"OElig", new Integer(338)},                          // NOI18N // latin capital ligature OE, U+0152 ISOlat2 
-        {"oelig", new Integer(339)},                          // NOI18N // latin small ligature oe, U+0153 ISOlat2 
-        //  ligature is a misnomer, this is a separate character in some languages 
-        {"Scaron", new Integer(352)},                          // NOI18N // latin capital letter S with caron, U+0160 ISOlat2 
-        {"scaron", new Integer(353)},                          // NOI18N // latin small letter s with caron, U+0161 ISOlat2 
-        {"Yuml", new Integer(376)},                          // NOI18N // latin capital letter Y with diaeresis, U+0178 ISOlat2 
 
-        //  Spacing Modifier Letters 
-        {"circ", new Integer(710)},                          // NOI18N // modifier letter circumflex accent, U+02C6 ISOpub 
-        {"tilde", new Integer(732)},                          // NOI18N // small tilde, U+02DC ISOdia 
+        //  Latin Extended-A
+        {"OElig", new Integer(338)},                          // NOI18N // latin capital ligature OE, U+0152 ISOlat2
+        {"oelig", new Integer(339)},                          // NOI18N // latin small ligature oe, U+0153 ISOlat2
+        //  ligature is a misnomer, this is a separate character in some languages
+        {"Scaron", new Integer(352)},                          // NOI18N // latin capital letter S with caron, U+0160 ISOlat2
+        {"scaron", new Integer(353)},                          // NOI18N // latin small letter s with caron, U+0161 ISOlat2
+        {"Yuml", new Integer(376)},                          // NOI18N // latin capital letter Y with diaeresis, U+0178 ISOlat2
 
-        //  General Punctuation 
-        {"ensp", new Integer(8194)},                          // NOI18N // en space, U+2002 ISOpub 
-        {"emsp", new Integer(8195)},                          // NOI18N // em space, U+2003 ISOpub 
-        {"thinsp", new Integer(8201)},                          // NOI18N // thin space, U+2009 ISOpub 
-        {"zwnj", new Integer(8204)},                          // NOI18N // zero width non-joiner, U+200C NEW RFC 2070 
-        {"zwj", new Integer(8205)},                          // NOI18N // zero width joiner, U+200D NEW RFC 2070 
-        {"lrm", new Integer(8206)},                          // NOI18N // left-to-right mark, U+200E NEW RFC 2070 
-        {"rlm", new Integer(8207)},                          // NOI18N // right-to-left mark, U+200F NEW RFC 2070 
-        {"ndash", new Integer(8211)},                          // NOI18N // en dash, U+2013 ISOpub 
-        {"mdash", new Integer(8212)},                          // NOI18N // em dash, U+2014 ISOpub 
-        {"lsquo", new Integer(8216)},                          // NOI18N // left single quotation mark, U+2018 ISOnum 
-        {"rsquo", new Integer(8217)},                          // NOI18N // right single quotation mark, U+2019 ISOnum 
-        {"sbquo", new Integer(8218)},                          // NOI18N // single low-9 quotation mark, U+201A NEW 
-        {"ldquo", new Integer(8220)},                          // NOI18N // left double quotation mark, U+201C ISOnum 
-        {"rdquo", new Integer(8221)},                          // NOI18N // right double quotation mark, U+201D ISOnum 
-        {"bdquo", new Integer(8222)},                          // NOI18N // double low-9 quotation mark, U+201E NEW 
-        {"dagger", new Integer(8224)},                          // NOI18N // dagger, U+2020 ISOpub 
-        {"Dagger", new Integer(8225)},                          // NOI18N // double dagger, U+2021 ISOpub 
-        {"permil", new Integer(8240)},                          // NOI18N // per mille sign, U+2030 ISOtech 
-        {"lsaquo", new Integer(8249)},                          // NOI18N // single left-pointing angle quotation mark, U+2039 ISO proposed 
-                                       //  lsaquo is proposed but not yet ISO standardized 
-        {"rsaquo", new Integer(8250)},                          // NOI18N // single right-pointing angle quotation mark, U+203A ISO proposed 
-                                       //  rsaquo is proposed but not yet ISO standardized 
-        {"euro", new Integer(8364)},                          // NOI18N   // euro sign, U+20AC NEW                 
-                
+        //  Spacing Modifier Letters
+        {"circ", new Integer(710)},                          // NOI18N // modifier letter circumflex accent, U+02C6 ISOpub
+        {"tilde", new Integer(732)},                          // NOI18N // small tilde, U+02DC ISOdia
+
+        //  General Punctuation
+        {"ensp", new Integer(8194)},                          // NOI18N // en space, U+2002 ISOpub
+        {"emsp", new Integer(8195)},                          // NOI18N // em space, U+2003 ISOpub
+        {"thinsp", new Integer(8201)},                          // NOI18N // thin space, U+2009 ISOpub
+        {"zwnj", new Integer(8204)},                          // NOI18N // zero width non-joiner, U+200C NEW RFC 2070
+        {"zwj", new Integer(8205)},                          // NOI18N // zero width joiner, U+200D NEW RFC 2070
+        {"lrm", new Integer(8206)},                          // NOI18N // left-to-right mark, U+200E NEW RFC 2070
+        {"rlm", new Integer(8207)},                          // NOI18N // right-to-left mark, U+200F NEW RFC 2070
+        {"ndash", new Integer(8211)},                          // NOI18N // en dash, U+2013 ISOpub
+        {"mdash", new Integer(8212)},                          // NOI18N // em dash, U+2014 ISOpub
+        {"lsquo", new Integer(8216)},                          // NOI18N // left single quotation mark, U+2018 ISOnum
+        {"rsquo", new Integer(8217)},                          // NOI18N // right single quotation mark, U+2019 ISOnum
+        {"sbquo", new Integer(8218)},                          // NOI18N // single low-9 quotation mark, U+201A NEW
+        {"ldquo", new Integer(8220)},                          // NOI18N // left double quotation mark, U+201C ISOnum
+        {"rdquo", new Integer(8221)},                          // NOI18N // right double quotation mark, U+201D ISOnum
+        {"bdquo", new Integer(8222)},                          // NOI18N // double low-9 quotation mark, U+201E NEW
+        {"dagger", new Integer(8224)},                          // NOI18N // dagger, U+2020 ISOpub
+        {"Dagger", new Integer(8225)},                          // NOI18N // double dagger, U+2021 ISOpub
+        {"permil", new Integer(8240)},                          // NOI18N // per mille sign, U+2030 ISOtech
+        {"lsaquo", new Integer(8249)},                          // NOI18N // single left-pointing angle quotation mark, U+2039 ISO proposed
+                                       //  lsaquo is proposed but not yet ISO standardized
+        {"rsaquo", new Integer(8250)},                          // NOI18N // single right-pointing angle quotation mark, U+203A ISO proposed
+                                       //  rsaquo is proposed but not yet ISO standardized
+        {"euro", new Integer(8364)},                          // NOI18N   // euro sign, U+20AC NEW
+
         {"nbsp", new Integer(160)},                          // NOI18N
         {"iexcl", new Integer(161)},                          // NOI18N
         {"cent", new Integer(162)},                          // NOI18N
@@ -866,9 +888,9 @@ public class FilterVisitor extends NodeVisitor
         {"yacute", new Integer(253)},                          // NOI18N
         {"thorn", new Integer(254)},                          // NOI18N
         {"yuml", new Integer(255)},                          // NOI18N
-                
+
         {"fnof", new Integer(402)},                          // NOI18N
-                
+
         {"Alpha", new Integer(913)},                          // NOI18N
         {"Beta", new Integer(914)},                          // NOI18N
         {"Gamma", new Integer(915)},                          // NOI18N
@@ -928,13 +950,13 @@ public class FilterVisitor extends NodeVisitor
         {"Prime", new Integer(8243)},                          // NOI18N
         {"oline", new Integer(8254)},                          // NOI18N
         {"frasl", new Integer(8260)},                          // NOI18N
-    
+
         {"weierp", new Integer(8472)},                          // NOI18N
         {"image", new Integer(8465)},                          // NOI18N
         {"real", new Integer(8476)},                          // NOI18N
         {"trade", new Integer(8482)},                          // NOI18N
         {"alefsym", new Integer(8501)},                          // NOI18N
-    
+
         {"larr", new Integer(8592)},                          // NOI18N
         {"uarr", new Integer(8593)},                          // NOI18N
         {"rarr", new Integer(8594)},                          // NOI18N
@@ -946,7 +968,7 @@ public class FilterVisitor extends NodeVisitor
         {"rArr", new Integer(8658)},                          // NOI18N
         {"dArr", new Integer(8659)},                          // NOI18N
         {"hArr", new Integer(8660)},                          // NOI18N
-    
+
         {"forall", new Integer(8704)},                          // NOI18N
         {"part", new Integer(8706)},                          // NOI18N
         {"exist", new Integer(8707)},                          // NOI18N
@@ -985,16 +1007,16 @@ public class FilterVisitor extends NodeVisitor
         {"otimes", new Integer(8855)},                          // NOI18N
         {"perp", new Integer(8869)},                          // NOI18N
         {"sdot", new Integer(8901)},                          // NOI18N
-    
+
         {"lceil", new Integer(8968)},                          // NOI18N
         {"rceil", new Integer(8969)},                          // NOI18N
         {"lfloor", new Integer(8970)},                          // NOI18N
         {"rfloor", new Integer(8971)},                          // NOI18N
         {"lang", new Integer(9001)},                          // NOI18N
         {"rang", new Integer(9002)},                          // NOI18N
-    
+
         {"loz", new Integer(9674)},                          // NOI18N
-    
+
         {"spades", new Integer(9824)},                          // NOI18N
         {"clubs", new Integer(9827)},                          // NOI18N
         {"hearts", new Integer(9829)},                          // NOI18N
@@ -1030,8 +1052,7 @@ public class FilterVisitor extends NodeVisitor
                         {
                             // hex numeric entity
                             int n = i+3;
-                            char chh;
-                            while( n<strlen && isHexDigit(chh=str.charAt(n)) )
+                            while( n<strlen && isHexDigit(str.charAt(n)) )
                                 n++;
                             String s_entity = str.substring(i+3, n);
                             try
@@ -1063,8 +1084,7 @@ public class FilterVisitor extends NodeVisitor
                         {
                             // decimal entity
                             int n = i+2;
-                            char chh;
-                            while( n<strlen && isDecimalDigit(chh=str.charAt(n)) )
+                            while( n<strlen && isDecimalDigit(str.charAt(n)) )
                                 n++;
                             String s_entity = str.substring(i+2, n);
                             try
@@ -1097,8 +1117,7 @@ public class FilterVisitor extends NodeVisitor
                     {
                         // named entity?
                         int n = i+1;
-                        char chh;
-                        while( n<strlen && isLatinLetter(chh=str.charAt(n)) )
+                        while( n<strlen && isLatinLetter(str.charAt(n)) )
                             n++;
                         String s_entity = str.substring(i+1, n);
                         int n_entity = lookupEntity(s_entity);
@@ -1123,13 +1142,13 @@ public class FilterVisitor extends NodeVisitor
                         res.append(ch);
                     }
                     break;
-                default: 
+                default:
                     res.append(ch);
             }
         }
         return res.toString();
     }
-    
+
     /** Returns true if a char is a latin letter */
     private boolean isLatinLetter(char ch)
     {
@@ -1145,7 +1164,7 @@ public class FilterVisitor extends NodeVisitor
     {
         return (ch>='0' && ch<='9') || (ch>='a' && ch<='f') || (ch>='A' && ch<='F');
     }
-    
+
     /** returns a character for HTML entity, or -1 if the passed string is not an entity */
     private int lookupEntity(String entity)
     {
@@ -1158,10 +1177,10 @@ public class FilterVisitor extends NodeVisitor
         return -1;
     }
 
-    /** 
-     * Converts characters that must be converted 
-     * (&lt; &gt; &amp; '&nbsp;' (nbsp)) 
-     * into HTML entities 
+    /**
+     * Converts characters that must be converted
+     * (&lt; &gt; &amp; '&nbsp;' (nbsp))
+     * into HTML entities
      */
     private String charsToEntities(String str)
     {
@@ -1222,42 +1241,42 @@ public class FilterVisitor extends NodeVisitor
         String contents = res.toString();
         // Rewrite characters that cannot be encoded to html character strings.
         // Each character in the contents-string is checked. If a character
-        // can't be encoded, all its occurrences are replaced with the 
+        // can't be encoded, all its occurrences are replaced with the
         // html-equivalent string.
-        // Then, the next character is checked. 
-        // (The loop over the contents-string is restarted for the modified 
-        // content, but the starting-position will be the position where the 
+        // Then, the next character is checked.
+        // (The loop over the contents-string is restarted for the modified
+        // content, but the starting-position will be the position where the
         // last unencodable character was found)
         // [1802000] HTML filter loses html-encoded characters if not supported
         String encoding = this.filter.getTargetEncoding();
         if (encoding != null) {
-            CharsetEncoder charsetEncoder = 
+            CharsetEncoder charsetEncoder =
                     Charset.forName(encoding).newEncoder();
             int i=0;
             boolean notfinished = true;
             while (notfinished) {
-        	for (;i< contents.length(); i++) {
+                for (;i< contents.length(); i++) {
                     char x = contents.charAt(i);
-        	    if (!charsetEncoder.canEncode(x)) {
+                    if (!charsetEncoder.canEncode(x)) {
                         String regexp;
                         if (x=='[' || x=='\\' ||
                             x=='^'||x=='$'||x=='.'||x=='|'||x=='?'||x=='*'||
                             x=='+'||x=='('||x==')') {
-        		    // escape special regexp characters
-        		    regexp = "\\"+x;
-        		 } else 
-                             regexp = ""+x;
-        	        String replacement= "&#"+(int)x+';';
-        	        contents = contents.replaceAll(regexp, replacement);
-        		break;
-        	    }
+                            // escape special regexp characters
+                            regexp = "\\"+x;
+                        } else
+                            regexp = ""+x;
+                    String replacement= "&#"+(int)x+';';
+                    contents = contents.replaceAll(regexp, replacement);
+                    break;
+                    }
                 }
-                if (i == contents.length()) 
+                if (i == contents.length())
                     notfinished = false;
             }
         }
         return contents;
-    } 
-    
+    }
+
 }
 

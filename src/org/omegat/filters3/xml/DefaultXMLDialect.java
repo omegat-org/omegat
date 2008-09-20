@@ -1,9 +1,10 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2008 Martin Fleurke
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -30,6 +31,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import org.omegat.filters3.Attributes;
 import org.omegat.util.MultiMap;
 import org.xml.sax.InputSource;
 
@@ -37,12 +39,13 @@ import org.xml.sax.InputSource;
  * Helper class for describing a certain XML dialect.
  *
  * @author Maxym Mykhalchuk
+ * @author Martin Fleurke
  */
 public class DefaultXMLDialect implements XMLDialect
 {
     /** The set of defined paragraph tags. */
     private Set<String> paragraphTags = new HashSet<String>();
-    
+
     /** Defines paragraph tag. Allows duplicates. */
     public void defineParagraphTag(String tag)
     {
@@ -57,7 +60,7 @@ public class DefaultXMLDialect implements XMLDialect
 
     /** The set of defined tags that surround preformatted text. */
     private Set<String> preformatTags = new HashSet<String>();
-    
+
     /** Defines preformat tag. Allows duplicates. */
     public void definePreformatTag(String tag)
     {
@@ -72,7 +75,7 @@ public class DefaultXMLDialect implements XMLDialect
 
     /** The set of defined tags that surround intact text. */
     private Set<String> intactTags = new HashSet<String>();
-    
+
     /** Defines intact tag. Allows duplicates. */
     public void defineIntactTag(String tag)
     {
@@ -84,10 +87,10 @@ public class DefaultXMLDialect implements XMLDialect
         for (String tag : tags)
             defineIntactTag(tag);
     }
-    
+
     /** The set of defined paragraph tags. */
     private MultiMap<String,String> translatableTagAttributes = new MultiMap<String, String>();
-    
+
     /** Defines translatable attribute of a tag. */
     public void defineTranslatableTagAttribute(String tag, String attribute)
     {
@@ -105,10 +108,10 @@ public class DefaultXMLDialect implements XMLDialect
         for (String tag : tags)
             defineTranslatableTagAttribute(tag, attribute);
     }
-    
+
     /** The set of defined paragraph tags. */
     private Set<String> translatableAttributes = new HashSet<String>();
-    
+
     /** Defines always translatable attribute (no matter what tag it belongs to). */
     public void defineTranslatableAttribute(String attribute)
     {
@@ -122,15 +125,15 @@ public class DefaultXMLDialect implements XMLDialect
     }
 
     /**
-     * The set of defined out of turn tags that surround chunks of text 
-     * that should be translated separately, not breaking currently 
+     * The set of defined out of turn tags that surround chunks of text
+     * that should be translated separately, not breaking currently
      * collected text.
      */
     private Set<String> outOfTurnTags = new HashSet<String>();
-    
+
     /**
-     * Defines out of turn tag. Such tag surrounds chunk of text 
-     * that should be translated separately, not breaking currently 
+     * Defines out of turn tag. Such tag surrounds chunk of text
+     * that should be translated separately, not breaking currently
      * collected text.
      */
     public void defineOutOfTurnTag(String tag)
@@ -138,8 +141,8 @@ public class DefaultXMLDialect implements XMLDialect
         outOfTurnTags.add(tag);
     }
     /**
-     * Defines out of turn tags. Such tags surround chunks of text 
-     * that should be translated separately, not breaking currently 
+     * Defines out of turn tags. Such tags surround chunks of text
+     * that should be translated separately, not breaking currently
      * collected text.
      */
     public void defineOutOfTurnTags(String[] tags)
@@ -149,8 +152,8 @@ public class DefaultXMLDialect implements XMLDialect
     }
 
     Map<Integer, Pattern> constraints = new HashMap<Integer, Pattern>();
-    
-    /** 
+
+    /**
      * Defines a constraint to restrict supported subset of XML files.
      * There can be only one constraint of each type.
      *
@@ -161,10 +164,10 @@ public class DefaultXMLDialect implements XMLDialect
     {
         constraints.put(constraintType, template);
     }
-    
+
     Map<String,String> shortcuts = new HashMap<String, String>();
-    
-    /** 
+
+    /**
      * Defines a shortcut for a tag, useful for formatting tags.
      * Shortcut is a short form of a tag visible to translator,
      * and stored in OmegaT's flavor of TMX files.
@@ -176,9 +179,9 @@ public class DefaultXMLDialect implements XMLDialect
     {
         shortcuts.put(tag, shortcut);
     }
-    /** 
+    /**
      * Defines shortcuts for formatting tags.
-     * An alternative to calling {@link #defineShortcut(String,String)} 
+     * An alternative to calling {@link #defineShortcut(String,String)}
      * multiple times.
      *
      * @param mappings  Array of strings, where even elements (0th, 2nd, etc) are tags,
@@ -189,11 +192,11 @@ public class DefaultXMLDialect implements XMLDialect
         for (int i = 0; i < mappings.length/2; i++)
             defineShortcut(mappings[2*i], mappings[2*i+1]);
     }
-    
+
     ///////////////////////////////////////////////////////////////////////////
     // XMLDialect Interface Implementation
     ///////////////////////////////////////////////////////////////////////////
-    
+
     /**
      * Returns the set of defined paragraph tags.
      * <p>
@@ -213,7 +216,7 @@ public class DefaultXMLDialect implements XMLDialect
     {
         return preformatTags;
     }
-    
+
 
     /**
      * Returns the set of tags that surround intact portions of document,
@@ -225,7 +228,7 @@ public class DefaultXMLDialect implements XMLDialect
     {
         return intactTags;
     }
-    
+
     /**
      * Returns the multimap of translatable attributes of each tag.
      * <p>
@@ -234,6 +237,21 @@ public class DefaultXMLDialect implements XMLDialect
     public MultiMap<String, String> getTranslatableTagAttributes()
     {
         return translatableTagAttributes;
+    }
+
+    /**
+     * Returns for a given attribute of a given tag if the attribute should 
+     * be translated with the given other attributes present.
+     * If the tagAttribute is returned by getTranslatable(Tag)Attributes(),
+     * this function is called to further test the attribute within its context.
+     * This allows for example the XHTML filter to not translate the value
+     * attribute of an input-element, except when it is a button or submit or
+     * reset.
+     */
+    public Boolean validateTranslatableTagAttribute(String tag, 
+                                                    String attribute, 
+                                                    Attributes atts) {
+        return true;
     }
 
     /**
@@ -249,7 +267,7 @@ public class DefaultXMLDialect implements XMLDialect
     /**
      * Returns the set of "out-of-turn" tags.
      * Such tags specify chunks of text that should be translated separately,
-     * not breaking currently collected text entry. 
+     * not breaking currently collected text entry.
      * For example, footnotes in OpenDocument.
      * <p>
      * Each entry in a set should be a String class.
@@ -264,7 +282,7 @@ public class DefaultXMLDialect implements XMLDialect
      * There can be only one constraint of each type,
      * see CONSTRAINT_... constants.
      * <p>
-     * Each entry should map an {@link Integer} to a {@link Pattern} -- 
+     * Each entry should map an {@link Integer} to a {@link Pattern} --
      * regular expression for a specified constrained string.
      */
     public Map<Integer, Pattern> getConstraints()
@@ -284,7 +302,7 @@ public class DefaultXMLDialect implements XMLDialect
     /**
      * Returns the map of tags to their shortcuts.
      * <p>
-     * Each entry should map a {@link String} to a {@link String} -- 
+     * Each entry should map a {@link String} to a {@link String} --
      * a tag to its shortcut.
      */
     public Map<String,String> getShortcuts()

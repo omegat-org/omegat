@@ -4,7 +4,7 @@
 2.0.0 vs. 1.8.0 update 3 
 
 
-  6 Enhancements
+  7 Enhancements
   0 Bugfix
 
 ----------------------------------------------------------------------
@@ -31,6 +31,12 @@ under a minute in most cases.
 and configurable content
 
   - New SRT (subtitles) filter
+  
+  - XHTML filter: The options that existed in the HTML filter only have been 
+ported
+
+  - HTML and XHTML filter: It is now possible to select specifically which
+meta content is to be translated
 
 ----------------------------------------------------------------------
  OmegaT 1.8.0 update 3 Changes

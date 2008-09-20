@@ -1,10 +1,10 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007 Didier Briel, Martin Fleurke
+               2007-2008 Didier Briel, Martin Fleurke
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -50,7 +50,8 @@ import java.io.Serializable;
  * <li>[+] value (of buttons)
  * </ul>
  * Start a new paragraph on breaks (&lt;br&gt;) []<br>
- * Skip text matchin regExp []
+ * Skip text matchin regExp []<br>
+ * Skip content of meta-tag when any of the given attibutename-value pairs is present in the tag
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Martin Fleurke
@@ -71,7 +72,7 @@ public class HTMLOptions implements Serializable
 
     /**
      * Returns whether and when (X)HTML filter adds/rewrites encoding declaration.
-     * @return One of {@link #REWRITE_ALWAYS}, {@link #REWRITE_IFHEADER}, 
+     * @return One of {@link #REWRITE_ALWAYS}, {@link #REWRITE_IFHEADER},
      *                  {@link #REWRITE_IFMETA}, {@link #REWRITE_NEVER}.
      */
     public int getRewriteEncoding()
@@ -81,14 +82,14 @@ public class HTMLOptions implements Serializable
 
     /**
      * Sets when (X)HTML filter should add/rewrite encoding declaration.
-     * @param rewriteEncoding One of {@link #REWRITE_ALWAYS}, {@link #REWRITE_IFHEADER}, 
+     * @param rewriteEncoding One of {@link #REWRITE_ALWAYS}, {@link #REWRITE_IFHEADER},
      *                                  {@link #REWRITE_IFMETA}, {@link #REWRITE_NEVER}.
      */
     public void setRewriteEncoding(int rewriteEncoding)
     {
         this.rewriteEncoding = rewriteEncoding;
     }
-    
+
     /** Hold value of properties. */
     private boolean translateHref = true;
     private boolean translateSrc = true;
@@ -97,7 +98,15 @@ public class HTMLOptions implements Serializable
     private boolean translateValue = true;
     private boolean translateButtonValue = true;
     private boolean paragraphOnBr = false;
-    
+
+    private String skipRegExp = "";
+    private String skipMeta = "http-equiv=refresh," +
+                              "name=robots," +
+                              "name=revisit-after," +
+                              "http-equiv=expires," +
+                              "http-equiv=content-style-type," +
+                              "http-equiv=content-script-type";
+
     /**
      * Returns whether href attributes should be translated.
      */
@@ -113,7 +122,7 @@ public class HTMLOptions implements Serializable
     {
         this.translateHref = translateHref;
     }
-   
+
     /**
      * Returns whether src attributes should be translated.
      */
@@ -129,7 +138,7 @@ public class HTMLOptions implements Serializable
     {
         this.translateSrc = translateSrc;
     }
-    
+
     /**
      * Returns whether lang attributes should be translated.
      */
@@ -184,7 +193,7 @@ public class HTMLOptions implements Serializable
     {
         this.translateButtonValue = translateButtonValue;
     }
-    
+
     /**
      * Returns whether button value attributes should be translated.
      */
@@ -193,7 +202,7 @@ public class HTMLOptions implements Serializable
         return this.translateButtonValue;
     }
 
-   
+
    /**
      * Returns whether a new paragraph should be started on BR.
      */
@@ -209,23 +218,39 @@ public class HTMLOptions implements Serializable
     {
         this.paragraphOnBr = paragraphOnBr;
     }
-    
-    private String skipRegExp="";
-    
+
     /**
      * Returns the regular expression that matches text not to be translated
      */
-    public String getskipRegExp()
+    public String getSkipRegExp()
     {
         return this.skipRegExp;
     }
 
     /**
-     * Sets whether a new paragraph should be started on BR.
+     * Sets the regular expression that matches text not to be translated
      */
     public void setSkipRegExp(String skipRegExp)
     {
         this.skipRegExp = skipRegExp;
     }
-    
+
+    /**
+     * Returns the meta-tag attribute key-value pairs of which meta-tags 
+     * should not be translated
+     */
+    public String getSkipMeta()
+    {
+        return this.skipMeta;
+    }
+
+    /**
+     * Sets the meta-tag attribute key-value pairs of which meta-tags 
+     * should not be translated
+     */
+    public void setSkipMeta(String skipMeta)
+    {
+        this.skipMeta = skipMeta;
+    }
+
 }

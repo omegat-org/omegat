@@ -1,10 +1,10 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007 Didier Briel, Martin Fleurke
+               2007-2008 Didier Briel, Martin Fleurke
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -38,7 +38,7 @@ import org.omegat.util.OStrings;
  * Modal dialog to edit (X)HTML filter options.
  *
  * @author Maxym Mykhalchuk
- * @author Didier Briel  
+ * @author Didier Briel
  * @author Martin Fleurke
  */
 public class EditOptionsDialog extends javax.swing.JDialog
@@ -47,15 +47,15 @@ public class EditOptionsDialog extends javax.swing.JDialog
     public static final int RET_CANCEL = 0;
     /** A return status code - returned if OK button has been pressed */
     public static final int RET_OK = 1;
-    
+
     /** Creates new form EditOptionsDialog */
-    public EditOptionsDialog(java.awt.Dialog parent, 
+    public EditOptionsDialog(java.awt.Dialog parent,
                              HTMLOptions options)
     {
         super(parent, true);
         this.options = options;
         initComponents();
-             
+
         if (options!=null)
         {
             switch (options.getRewriteEncoding())
@@ -80,9 +80,10 @@ public class EditOptionsDialog extends javax.swing.JDialog
             translateValueCB.setSelected(options.getTranslateValue());
             translateButtonValueCB.setSelected(options.getTranslateButtonValue());
             paragraphOnBrCB.setSelected(options.getParagraphOnBr());
-            skipRegExpTF.setText(options.getskipRegExp());
+            skipRegExpTF.setText(options.getSkipRegExp());
+            skipMetaTF.setText(options.getSkipMeta());
         }
-        
+
         //  Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
         Action escapeAction = new AbstractAction()
@@ -96,21 +97,21 @@ public class EditOptionsDialog extends javax.swing.JDialog
         put(escape, "ESCAPE");                                                  // NOI18N
         getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
     }
-    
-    
+
+
     private HTMLOptions options;
     public HTMLOptions getOptions()
     {
         return options;
     }
-    
+
     private int returnStatus = RET_CANCEL;
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
     public int getReturnStatus()
     {
         return returnStatus;
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -139,6 +140,8 @@ public class EditOptionsDialog extends javax.swing.JDialog
         paragraphOnBrCB = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
         skipRegExpTF = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        skipMetaTF = new javax.swing.JTextField();
 
         setTitle(OStrings.getString("HTML_Filter_Options"));
         setResizable(false);
@@ -245,7 +248,7 @@ public class EditOptionsDialog extends javax.swing.JDialog
         });
 
         jPanel1.add(translateValueCB);
-        
+
         translateButtonValueCB.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(translateButtonValueCB, OStrings.getString("HTML_TRANSLATE_BUTTON_VALUE"));
         translateButtonValueCB.addActionListener(new java.awt.event.ActionListener() {
@@ -254,7 +257,7 @@ public class EditOptionsDialog extends javax.swing.JDialog
             }
         });
 
-        jPanel1.add(translateButtonValueCB);        
+        jPanel1.add(translateButtonValueCB);
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel3, OStrings.getString("HTML_PARAGRAPH_ON"));
         jPanel1.add(jLabel3);
@@ -279,6 +282,17 @@ public class EditOptionsDialog extends javax.swing.JDialog
 
         jPanel1.add(skipRegExpTF);
 
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel5, OStrings.getString("HTML_SKIPMETA"));
+        jPanel1.add(jLabel5);
+
+        skipMetaTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                skipMetaTFActionPerformed(evt);
+            }
+        });
+
+        jPanel1.add(skipMetaTF);
+
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -287,21 +301,21 @@ public class EditOptionsDialog extends javax.swing.JDialog
         setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void paragraphOnBrCBradiosActionPerformed(java.awt.event.ActionEvent evt) {                                                      
+    private void paragraphOnBrCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paragraphOnBrCBradiosActionPerformed
 // TODO add your handling code here:
-    }
-    private void translateValueCBradiosActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+    }//GEN-LAST:event_paragraphOnBrCBradiosActionPerformed
+
+    private void translateValueCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateValueCBradiosActionPerformed
 // TODO add your handling code here:
-    }                                                         
-                                                         
+    }//GEN-LAST:event_translateValueCBradiosActionPerformed
 
     private void translateHreflangCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateHreflangCBradiosActionPerformed
 // TODO add your handling code here:
-       }//GEN-LAST:event_translateValueCBradiosActionPerformed
-    
-    private void translateButtonValueCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateValueCBradiosActionPerformed
-   // TODO add your handling code here:
-       }//GEN-LAST:event_translateButtonValueCBradiosActionPerformed
+    }//GEN-LAST:event_translateHreflangCBradiosActionPerformed
+
+    private void translateButtonValueCBradiosActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+// TODO add your handling code here:
+    }                                                            
 
     private void translateLangCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateLangCBradiosActionPerformed
 // TODO add your handling code here:
@@ -313,10 +327,13 @@ public class EditOptionsDialog extends javax.swing.JDialog
 
     private void translateHrefCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateHrefCBradiosActionPerformed
     }//GEN-LAST:event_translateHrefCBradiosActionPerformed
-    
-    private void skipRegExpTFActionPerformed(java.awt.event.ActionEvent evt) {                                                      
-    }                                                     
-    
+
+    private void skipRegExpTFActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void skipMetaTFActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_okButtonActionPerformed
     {
         options = new HTMLOptions();
@@ -328,7 +345,7 @@ public class EditOptionsDialog extends javax.swing.JDialog
             options.setRewriteEncoding(HTMLOptions.REWRITE_IFMETA);
         else if (neverRB.isSelected())
             options.setRewriteEncoding(HTMLOptions.REWRITE_NEVER);
-        
+
         options.setTranslateHref(translateHrefCB.isSelected());
         options.setTranslateSrc(translateSrcCB.isSelected());
         options.setTranslateLang(translateLangCB.isSelected());
@@ -337,28 +354,29 @@ public class EditOptionsDialog extends javax.swing.JDialog
         options.setTranslateHreflang(translateHreflangCB.isSelected());
         options.setParagraphOnBr(paragraphOnBrCB.isSelected());
         options.setSkipRegExp(skipRegExpTF.getText());
-                
+        options.setSkipMeta(skipMetaTF.getText());
+
         doClose(RET_OK);
     }//GEN-LAST:event_okButtonActionPerformed
-    
+
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cancelButtonActionPerformed
     {
         doClose(RET_CANCEL);
     }//GEN-LAST:event_cancelButtonActionPerformed
-    
+
     /** Closes the dialog */
     private void closeDialog(java.awt.event.WindowEvent evt)//GEN-FIRST:event_closeDialog
     {
         doClose(RET_CANCEL);
     }//GEN-LAST:event_closeDialog
-    
+
     private void doClose(int retStatus)
     {
         returnStatus = retStatus;
         setVisible(false);
         dispose();
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton alwaysRB;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -370,11 +388,13 @@ public class EditOptionsDialog extends javax.swing.JDialog
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton neverRB;
     private javax.swing.JButton okButton;
     private javax.swing.JCheckBox paragraphOnBrCB;
     private javax.swing.JTextField skipRegExpTF;
+    private javax.swing.JTextField skipMetaTF;
     private javax.swing.JCheckBox translateHrefCB;
     private javax.swing.JCheckBox translateHreflangCB;
     private javax.swing.JCheckBox translateLangCB;

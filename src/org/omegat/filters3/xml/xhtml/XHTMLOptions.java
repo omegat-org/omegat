@@ -1,9 +1,10 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 Didier Briel
+               2008 Martin Fleurke
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -40,21 +41,35 @@ import java.io.Serializable;
  * <li>[+] lang
  * <li>[+] hreflang
  * <li>[+] value
+ * <li>[+] value (of buttons)
  * </ul>
- * Start a new paragraph on breaks (&lt;br&gt;) []
+ * Start a new paragraph on breaks (&lt;br&gt;) []<br>
+ * Skip text matchin regExp []
+ * Skip content of meta-tag when any of the given attibutename-value pairs is present in the tag
  * @author Didier Briel
+ * @author Martin Fleurke
  */
 public class XHTMLOptions implements Serializable
-{    
-     
+{
+
     /** Hold value of properties. */
     private boolean translateHref = true;
     private boolean translateSrc = true;
     private boolean translateLang = true;
     private boolean translateHreflang = true;
     private boolean translateValue = true;
+    private boolean translateButtonValue = true;
     private boolean paragraphOnBr = false;
-    
+
+    private String skipRegExp = "";
+    private String skipMeta= "http-equiv=Content-Type," +
+                             "http-equiv=refresh," +
+                             "name=robots," +
+                             "name=revisit-after," +
+                             "http-equiv=expires," + 
+                             "http-equiv=content-style-type," +
+                             "http-equiv=content-script-type";
+
     /**
      * Returns whether href attributes should be translated.
      */
@@ -70,7 +85,7 @@ public class XHTMLOptions implements Serializable
     {
         this.translateHref = translateHref;
     }
-   
+
     /**
      * Returns whether src attributes should be translated.
      */
@@ -86,7 +101,7 @@ public class XHTMLOptions implements Serializable
     {
         this.translateSrc = translateSrc;
     }
-    
+
     /**
      * Returns whether lang attributes should be translated.
      */
@@ -119,7 +134,15 @@ public class XHTMLOptions implements Serializable
         this.translateHreflang = translateHreflang;
     }
 
-   /**
+    /**
+     * Sets whether value attributes should be translated.
+     */
+    public void setTranslateValue(boolean translateValue)
+    {
+        this.translateValue = translateValue;
+    }
+
+    /**
      * Returns whether value attributes should be translated.
      */
     public boolean getTranslateValue()
@@ -128,13 +151,22 @@ public class XHTMLOptions implements Serializable
     }
 
     /**
-     * Sets whether value attributes should be translated.
+     * Sets whether button value attributes should be translated.
      */
-    public void setTranslateValue(boolean translateValue)
+    public void setTranslateButtonValue(boolean translateButtonValue)
     {
-        this.translateValue = translateValue;
-    }   
-    
+        this.translateButtonValue = translateButtonValue;
+    }
+
+    /**
+     * Returns whether button value attributes should be translated.
+     */
+    public boolean getTranslateButtonValue()
+    {
+        return this.translateButtonValue;
+    }
+
+
    /**
      * Returns whether a new paragraph should be started on BR.
      */
@@ -149,6 +181,38 @@ public class XHTMLOptions implements Serializable
     public void setParagraphOnBr(boolean paragraphOnBr)
     {
         this.paragraphOnBr = paragraphOnBr;
+    }
+
+    /**
+     * Returns the regular expression that matches text not to be translated
+     */
+    public String getSkipRegExp()
+    {
+        return this.skipRegExp;
+    }
+
+    /**
+     * Sets the regular expression that matches text not to be translated
+     */
+    public void setSkipRegExp(String skipRegExp)
+    {
+        this.skipRegExp = skipRegExp;
+    }
+
+    /**
+     * Returns the meta-tag attribute key-value pairs of which meta-tags should not be translated
+     */
+    public String getSkipMeta()
+    {
+        return this.skipMeta;
+    }
+
+    /**
+     * Sets the meta-tag attribute key-value pairs of which meta-tags should not be translated
+     */
+    public void setSkipMeta(String skipMeta)
+    {
+        this.skipMeta = skipMeta;
     }
 
 }

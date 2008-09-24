@@ -4,7 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
- Portions copyright 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
+               2007 Zoltan Bartko
+               2008 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -48,6 +49,8 @@ import org.omegat.util.xml.XMLStreamReader;
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers
+ * @author Zoltan Bartko - bartkozoltan@bartkozoltan.com
+ * @author Didier Briel
  */
 public class Preferences
 {
@@ -74,7 +77,9 @@ public class Preferences
     public static final String PROJECT_FILES_WINDOW_HEIGHT = "project_files_window_height"; // NOI18N
     public static final String PROJECT_FILES_WINDOW_X      = "project_files_window_x";      // NOI18N
     public static final String PROJECT_FILES_WINDOW_Y      = "project_files_window_y";      // NOI18N
-    
+    // Using the main font for the Project Files window
+    public static final String PROJECT_FILES_USE_FONT      = "project_files_use_font";      // NOI18N
+        
     // Search window size and position    
     public static final String SEARCHWINDOW_WIDTH           = "search_window_width";            // NOI18N
     public static final String SEARCHWINDOW_HEIGHT          = "search_window_height";           // NOI18N

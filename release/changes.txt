@@ -38,13 +38,16 @@ ported
   - HTML and XHTML filter: It is now possible to select specifically which
 meta content is to be translated
 
+  - New Project Files window. The keyboard can be used, and the Editor font
+can be applied or not with a new option in Options/Font.
+
 ----------------------------------------------------------------------
  OmegaT 1.8.0 update 3 Changes
 ----------------------------------------------------------------------
 1.8.0 update 3 vs. 1.8.0 update 2
 
 
-   4 Enhancements
+   5 Enhancements
    1 Bugfixe
 ----------------------------------------------------------------------
 1.8.0 update 3
@@ -53,6 +56,9 @@ meta content is to be translated
 
   - OpenDoc: Allow to translate or not Bookmark references  
   http://sourceforge.net/support/tracker.php?aid=2018244 
+
+  - Do not take user to first segment on project reload  
+  http://sourceforge.net/support/tracker.php?aid=1906198 
 
   Other enhancements:
 

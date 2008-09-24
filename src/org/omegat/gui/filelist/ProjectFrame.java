@@ -4,8 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Kim Bruning
-           (C) 2007 Zoltan Bartko
-               2008 Alex Buloichik
+               2007 Zoltan Bartko
+               2008 Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -78,6 +78,7 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.data.stat.StatisticsInfo;
 import org.omegat.core.events.IEntryEventListener;
+import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OConsts;
@@ -99,6 +100,7 @@ import org.openide.awt.Mnemonics;
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Zoltan Bartko
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public class ProjectFrame extends JFrame {
 
@@ -116,11 +118,14 @@ public class ProjectFrame extends JFrame {
     private JButton m_closeButton;
 
     private MainWindow m_parent;
-
-    public ProjectFrame(MainWindow parent) {
+    
+    private Font dialogFont;
+    
+      public ProjectFrame(MainWindow parent) {
         m_parent = parent;
 
         createTableFiles();
+        dialogFont = tableFiles.getFont();
         createTableTotal();
 
         // set the position and size
@@ -205,12 +210,7 @@ public class ProjectFrame extends JFrame {
         bbut.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
         gbc.gridy = 6;
         cp.add(bbut, gbc); // NOI18N
-
-        final Font f = tableFiles.getFont();
-        tableFiles.setRowHeight(f.getSize() + LINE_SPACING);
-        tableTotal.setRowHeight(f.getSize() + LINE_SPACING);
-        tableTotal.setFont(new Font(f.getName(), Font.BOLD, f.getSize()));
-
+        
         // Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         // setBounds((screenSize.width-600)/2, (screenSize.height-500)/2, 600,
         // 400);
@@ -238,7 +238,7 @@ public class ProjectFrame extends JFrame {
                 tableTotal.repaint();
                 modelTotal.fireTableDataChanged();
             }
-
+       
             /**
              * Updates the number of translated segments only, does not rebuild
              * the whole display.
@@ -249,6 +249,22 @@ public class ProjectFrame extends JFrame {
             }
         });
 
+        CoreEvents.registerFontChangedEventListener(new IFontChangedEventListener() {
+                    public void onFontChanged(Font newFont) {
+                        if  (!Preferences.isPreference(
+                                Preferences.PROJECT_FILES_USE_FONT))                           
+                            // We're using the standard dialog font
+                            newFont = dialogFont; 
+                        tableFiles.setFont(newFont);
+                        tableTotal.setFont(new Font(newFont.getName(),
+                                    Font.BOLD, newFont.getSize()));
+                        tableFiles.setRowHeight(newFont.getSize()
+                                    + LINE_SPACING);
+                        tableTotal.setRowHeight(newFont.getSize()
+                                    + LINE_SPACING);
+                   }
+        });
+                
         tableFiles.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -594,5 +610,21 @@ public class ProjectFrame extends JFrame {
             }
             return result;
         }
+    }
+@Override
+    public void setFont(Font f) {
+        super.setFont(f);
+
+        if (Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)){           
+            String fontName = Preferences.getPreference(OConsts.TF_SRC_FONT_NAME);
+            int fontSize = Integer.valueOf(
+                           Preferences.getPreference(OConsts.TF_SRC_FONT_SIZE)).
+                           intValue();
+            tableFiles.setFont(new Font(fontName, Font.PLAIN, fontSize));
+            tableTotal.setFont(new Font(fontName, Font.BOLD, fontSize));
+            tableFiles.setRowHeight(fontSize + LINE_SPACING);
+            tableTotal.setRowHeight(fontSize + LINE_SPACING);
+        }
+
     }
 }

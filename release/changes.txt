@@ -47,7 +47,7 @@ can be applied or not with a new option in Options/Font.
 1.8.0 update 3 vs. 1.8.0 update 2
 
 
-   5 Enhancements
+   6 Enhancements
    1 Bugfixe
 ----------------------------------------------------------------------
 1.8.0 update 3
@@ -62,10 +62,12 @@ can be applied or not with a new option in Options/Font.
 
   Other enhancements:
 
+  - The xml:lang attribute can be translated with the HTML filter
+  
   - Slovak localisation updated to 1.8 (UI)
   - Dutch localisation updated to 1.8 (UI, readme)
   - Czech localisation updated to 1.8 (UI, readme)
-
+  
   Bug fixes:
   - Extra space at the beginning of each segment in the German 
 localization

@@ -165,7 +165,10 @@ public class FilterVisitor extends NodeVisitor
             if (options.getTranslateHreflang())
                 maybeTranslateAttribute(tag, "hreflang");                       // NOI18N
             if (options.getTranslateLang())
+            {
                 maybeTranslateAttribute(tag, "lang");                           // NOI18N
+                maybeTranslateAttribute(tag, "xml:lang");                       // NOI18N
+            }
             if( "IMG".equals(tag.getTagName()) &&                               // NOI18N
                 options.getTranslateSrc() )
                 maybeTranslateAttribute(tag, "src");                            // NOI18N

@@ -394,7 +394,7 @@ public class StaticUtils
             // access to the os/user home properties is restricted,
             // the location of the config dir cannot be determined,
             // set the config dir to the current working dir
-            m_configDir = new File(".").getAbsolutePath();                      // NOI18N
+            m_configDir = new File(".").getAbsolutePath() + File.separator;     // NOI18N
 
             // log the exception, only do this after the config dir
             // has been set to the current working dir, otherwise
@@ -411,7 +411,7 @@ public class StaticUtils
                 (home == null) || (home.length() == 0))
         {
             // set the config dir to the current working dir
-            m_configDir = new File(".").getAbsolutePath();                      // NOI18N
+            m_configDir = new File(".").getAbsolutePath() + File.separator;     // NOI18N
             return m_configDir;
         }
         
@@ -481,7 +481,8 @@ public class StaticUtils
                     // set the config dir to the current working dir
                     if (!created) {
                         Log.logErrorRB("SU_CONFIG_DIR_CREATE_ERROR");
-                        m_configDir = new File(".").getAbsolutePath();          // NOI18N
+                        m_configDir = 
+                                new File(".").getAbsolutePath() + File.separator;// NOI18N
                     }
                 }
             }
@@ -489,7 +490,7 @@ public class StaticUtils
             {
                 // the system doesn't want us to write where we want to write
                 // reset the config dir to the current working dir
-                m_configDir = new File(".").getAbsolutePath();                  // NOI18N
+                m_configDir = new File(".").getAbsolutePath() + File.separator; // NOI18N
                 
                 // log the exception, but only after the config dir has been reset
                 Log.logErrorRB("SU_CONFIG_DIR_CREATE_ERROR");

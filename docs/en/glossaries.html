@@ -1,114 +1,182 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<title>Glossaries - OmegaT 1.7.3 User Manual</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <title>Glossaries - OmegaT 1.8 User Manual</title>
 </head>
+
 <body>
+  <h2>Glossaries</h2>
 
-	<h1>Glossaries</h1>
+  <ul>
+    <li>
+      <p><a href="#usage">Usage</a></p>
+    </li>
 
-	<ul>
-		<li><a href="#usage">Usage</a></li>
-		<li><a href="#fileformat">File format</a></li>
-		<li><a href="#howtocreate">How to create glossaries</a>
-			<ul>
-				<li><a href="#text_editor">Using a text editor</a></li>
-				<li><a href="#spreadsheet">Using a spreadsheet program</a></li>
-				<li><a href="#multiterm">Using Trados Multiterm</a></li>
-			</ul>
-		</li>
-		<li><a href="#commonglossaryproblems">Common glossary problems</a></li>
-	</ul>
+    <li>
+      <p><a href="#fileformat">File format</a></p>
+    </li>
 
-	<p>Glossaries are files that are created and updated manually for use in OmegaT.</p>
-	
-	<p>If an OmegaT project contains one or more glossaries, any terms in the glossary which are also found in the active segment will be automatically displayed in the <a href="userInterface.html#Glossary">Glossary viewer</a>.</p>
+    <li>
+      <p><a href="#howtocreate">How to create glossaries</a></p>
 
-<hr>
+      <ul>
+        <li>
+          <p><a href="#text_editor">Using a text editor</a></p>
+        </li>
+      </ul>
+    </li>
 
-	<a name="usage" id="usage"></a>
-	<h1>Usage</h1>
+    <li>
+      <p><a href="#spreadsheet">Using a spreadsheet program</a></p>
+    </li>
 
-	<p>To use an existing glossary, simply place it in the <code>/glossary</code> folder after creating the project. OmegaT automatically detects glossary files in this folder when a project is opened.</p>
-	
-	<p>Terms in the active segment which OmegaT finds in the glossary file(s) are displayed in the Glossary pane. The glossary function only finds exact matches with the glossary entry (i.e. not inflected forms etc.).</p>
+    <li>
+      <p><a href="#multiterm">Using Trados Multiterm</a></p>
+    </li>
 
-	<p>New terms can be added manually to the glossary file(s) during translation (for example in a text editor), but newly added terms will not be recognized until the project is reloaded.</p>
+    <li>
+      <p><a href="#commonglossaryproblems">Common glossary problems</a></p>
+    </li>
+  </ul>
 
-<hr>
+  <p>Glossaries are files that are created and updated manually for use in
+  OmegaT.</p>
 
-	<a name="fileformat" id="fileformat"></a>
-	<h1>File format</h1>
+  <p>If an OmegaT project contains one or more glossaries, any terms in the
+  glossary which are also found in the active segment will be automatically
+  displayed in the <a href="userInterface.html#Glossary">Glossary
+  viewer</a>.</p>
+  <hr>
 
-	<p>Glossary files are simply plain text files containing three-column, tab-delimited lists with the source and target terms in the first and second columns respectively. The third column can be used for additional information.</p>
+  <h2><a name="usage" id="usage"></a>Usage</h2>
 
-	<p>Glossary files can be either in system default encoding (in which case the files should have the extension <code>.tab</code>) or in UTF-8 (in which case, they should have the extension <code>.utf8</code>).</p>
+  <p>To use an existing glossary, simply place it in the <code>/glossary</code>
+  folder after creating the project. OmegaT automatically detects glossary
+  files in this folder when a project is opened. Terms in the active segment
+  which OmegaT finds in the glossary file(s) are displayed in the Glossary
+  pane:</p>
 
-<hr>
+  <p><br>
+  <br></p><img src="images/Glossary_pane.png" name="graphics1" alt=
+  "Glossary pane" align="left" width="328" height="150" border="0" id=
+  "graphics1"><br clear="left">
 
-	<a name="howtocreate" id="howtocreate"></a>
-	<h1>How to create glossaries</h1>
+  <p><br>
+  <br></p>
 
-	<a name="text_editor" id="text_editor"></a>
-	<h2>Using a text editor</h2>
+  <p>The glossary function only finds exact matches with the glossary entry
+  (i.e. not inflected forms etc.). New terms can be added manually to the
+  glossary file(s) during translation (for example in a text editor), but newly
+  added terms will not be recognized until the project is reloaded.</p>
+  <hr>
 
-	<p>Create a file in your preferred text editor and give it a relevant name with the extension <code>.tab</code> like <code>my_glossary.tab</code> for example.</p>
+  <h2><a name="fileformat" id="fileformat"></a>File format</h2>
 
-	<p>Type an entry in the source language, then the key <code>tab</code>, then the translation in the target language. You can add an optional comment after a second <code>tab</code>. Press <code>Enter</code> for a new entry.</p>
-	
-	<p>When all entries have been entered, Save the document. If the two languages do not share a character set then the file has to be saved in the UTF-8 encoding. In this case, rename it <code>my_glossary.utf8</code>.</p>
+  <p>Glossary files are simply plain text files containing three-column,
+  tab-delimited lists with the source and target terms in the first and second
+  columns respectively. The third column can be used for additional
+  information.</p>
 
-	<a name="spreadsheet" id="spreadsheet"></a>
-	<h2>Using a spreadsheet program</h2>
+  <p>Glossary files can be either in system default encoding (in which case the
+  files should have the extension <code>.tab</code>) or in UTF-8 (in which
+  case, they should have the extension <code>.utf8</code>).</p>
+  <hr>
 
-	<p>For Excel or Calc users this method is quite convenient, since it allows sorting, provided you don't need UTF-8.</p>
+  <h2><a name="howtocreate" id="howtocreate"></a>How to create glossaries</h2>
 
-	<p>Start with an empty sheet. Enter your items,one item per line. Source expressions are in the first column, target words in the second; you can enter optional comments in the third column.</p>
-	
-	<p>When finished, save the document: using File/Save as.</p>
-	
-	<p>In File type, select Text (tab delimited, or CSV), set the <strong>field delimiter</strong> to <strong>tabulation</strong> and the <strong>word separator</strong> to nothing (erase anything that is in the field). Use <code>.tab</code> for the file extension.</p>
-	
-	<p>The software will ask you a few questions about the format loss or the saved sheet but just press OK.</p>
-	
-	<p>Use your file manager to confirm the file is properly named <code>my_glossary.tab</code> and not <code>my_glossary.tab.csv</code>. Rectify if necessary.</p>
-	
-	<p>Before saving, you can select the UTF-8 encoding if necessary. In this case, rename the file <code>my_glossary.utf8</code>.
+  <h3><a name="text_editor" id="text_editor"></a>Using a text editor</h3>
 
-	<a name="multiterm" id="multiterm"></a>
-	<h2>Using Trados Multiterm</h2>
-	
-	<p>Glossaries created using Trados Multiterm's text export function for example can be used as OmegaT glossaries without further modification, provided they are given the file extension <code>.tab</code> and the source and target term fields are the first two fields respectively.</p>
+  <p>Create a file in your preferred text editor and give it a relevant name
+  with the extension <code>.tab</code> like <code>my_glossary.tab</code> for
+  example. Type an entry in the source language, then the key <code>tab</code>,
+  then the translation in the target language. You can add an optional comment
+  after a second <code>tab</code>. Press <code>Enter</code> for a new
+  entry.</p>
 
-<hr>
+  <p>When all entries have been entered, Save the document. If the two
+  languages do not share a character set then the file has to be saved in the
+  UTF-8 encoding. In this case, rename it <code>my_glossary.utf8</code>.</p>
 
-	<a name="commonglossaryproblems" id="commonglossaryproblems"></a>
-	<h1>Common glossary problems</h1>
+  <p>Hint:&nbsp;in the editor make sure, it does not automatically replace tab
+  characters with spaces. The best is to enable the display of special
+  characters, so you are sure to have the separating tab characters in the
+  file.</p>
 
-	<dl>
-		<dt>Problem: No glossary terms are displayed.</dt>
-		<dd>Possible causes:
-		<ul>
-			<li>no glossary file in the "glossary" folder</li>
-			<li>glossary file is empty</li>
-			<li>the glossary file does not have the correct extension (.tab or .utf8)</li>
-			<li>the glossary file does not have the correct encoding</li>
-			<li>there are no terms in the active segment which match any terms in the glossary</li>
-			<li>one or more of the above problems have been fixed, but the project has not been reloaded.</li>
-		</ul>
-		</dd>
+  <h3><a name="spreadsheet" id="spreadsheet"></a>Using a spreadsheet
+  program</h3>
 
-		<dt>Problem: In the glossary pane, some characters are not displayed properly (but the same characters are displayed properly in the Editing pane).</dt>
-		<dd>Possible causes:
-		<ul>
-			<li>the extension does not correspond to the file encoding.</li>
-		</ul>
-		</dd>
-	</dl>
-	
-	<hr>
+  <p>For Excel or Calc users this method is quite convenient, since it allows
+  sorting, provided you don't need UTF-8.</p>
 
-	<p><a href="legalNotices.html">Legal notices</a></p>
+  <p>Start with an empty sheet. Enter your items,one item per line. Source
+  expressions are in the first column, target words in the second; you can
+  enter optional comments in the third column. When finished, save the
+  document: using File/Save as.</p>
+
+  <p><a name="multiterm" id="multiterm"></a>In File type, select Text (tab
+  delimited, or CSV), set the <strong>field delimiter</strong> to
+  <strong>tabulation</strong> and the <strong>word separator</strong> to
+  nothing (erase anything that is in the field). Use <code>.tab</code> for the
+  file extension. The software will ask you a few questions about the format
+  loss or the saved sheet but just press OK. Use your file manager to confirm
+  the file is properly named <code>my_glossary.tab</code> and not
+  <code>my_glossary.tab.csv</code>. Rectify if necessary. Before saving, you
+  can select the UTF-8 encoding if necessary. In this case, rename the file
+  <code>my_glossary.utf8</code>.</p>
+
+  <h3>Using Trados Multiterm</h3>
+
+  <p>Glossaries created using Trados Multiterm's text export function for
+  example can be used as OmegaT glossaries without further modification,
+  provided they are given the file extension <code>.tab</code> and the source
+  and target term fields are the first two fields respectively. If you export
+  using the system option "Tab-delimited export", you will need to delete the
+  first 5 columns (Seq. Nr, Date created etc)&nbsp;before the two items of
+  interest.</p>
+  <hr>
+
+  <h2><a name="commonglossaryproblems" id="commonglossaryproblems"></a>Common
+  glossary problems</h2>
+
+  <dl>
+    <dt>Problem: No glossary terms are displayed.</dt>
+
+    <dd>Possible causes:</dd>
+  </dl>
+
+  <ul>
+    <li>no glossary file in the "glossary" folder</li>
+
+    <li>glossary file is empty</li>
+
+    <li>the items are not separated with a TAB character</li>
+
+    <li>the glossary file does not have the correct extension (.tab or
+    .utf8)</li>
+
+    <li>the glossary file does not have the correct encoding</li>
+
+    <li>there are no terms in the active segment which match any terms in the
+    glossary</li>
+
+    <li>one or more of the above problems may have been fixed, but the project
+    has not been reloaded.</li>
+  </ul>
+
+  <dl>
+    <dt>Problem: In the glossary pane, some characters are not displayed
+    properly (but the same characters are displayed properly in the Editing
+    pane).</dt>
+
+    <dd>Possible causes:</dd>
+  </dl>
+
+  <ul>
+    <li>the extension does not correspond to the file encoding.</li>
+  </ul>
+  <hr>
+
+  <p><a href="legalNotices.html">Legal notices</a></p>
 </body>
 </html>

@@ -1,147 +1,284 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<title>Source Segmentation - OmegaT 1.7.3 User Manual</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <title>Source Segmentation - OmegaT 1.8 User Manual</title>
 </head>
 
 <body>
-	<h1>Source segmentation</h1>
+  <h2>Source segmentation</h2>
 
-	<ul>
-		<li><a href="#structure">Structure level segmentation</a></li>
-		<li><a href="#sentence">Sentence level segmentation</a>
-			<ul>
-				<li><a href="#about">Segmentation rules</a></li>
-				<li><a href="#setup">Rules setup</a>
-					<ul>
-						<li><a href="#priority">Priority</a></li>
-						<li><a href="#creation">Rules creation</a></li>
-						<li><a href="#breal">Break/Exception</a></li>
-						<li><a href="#setup">Simple examples</a></li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-		<li><a href="regexp.html">Regular expression constructs</a></li>
-	</ul>
-	
-	<p>Translation memory tools work with textual units called segments. OmegaT has 2 ways to segment a text: paragraph segmentation and sentence segmentation.</p>
+  <ul>
+    <li>
+      <p><a href="#structure">Structure level
+      segmentation</a></p>
+    </li>
 
-	<p>In order to select the type of segmentation, select <strong>Project → Properties...</strong> from the main menu and use the available check box.</p>
+    <li>
+      <p><a href="#sentence">Sentence level
+      segmentation</a></p>
 
-	<p>If sentence segmentation has been selected, you can setup the rules by selecting <strong>Options → Segmentation...</strong> from the main menu.</p>
+      <ul>
+        <li>
+          <p><a href="#about">Segmentation
+          rules</a></p>
+        </li>
 
-	<p>Note that a good part of the development has been spent in developing dependable segmentation rules, so in a majority of cases you will not need to get involved with writing your own segmentation rules. On the other hand this functionality can be very useful in special cases, allowing you to translate what needs to be translated without running the danger of changing, what needs to stay as is.</p>
-	
-	<p><strong>Warning!</strong> Changing the filters options when a project is open may cause data loss. If you change segmentation options when a project is open, you will have to reload the project for the changes to take effect.</p>
+        <li>
+          <p><a href="#setup">Rules setup</a></p>
 
+          <ul>
+            <li>
+              <p><a href=
+              "#priority">Priority</a></p>
+            </li>
 
-	<hr>
-	<a name="structure" id="structure"></a>
-	<h1>Structure level segmentation</h1>
+            <li>
+              <p><a href=
+              "#creation">Rules creation</a></p>
+            </li>
 
-	<p>OmegaT first parses the text for structure-level segmentation. During this process it is only the structure of the source file that is used to produce segments.</p>
-	
-	<p>For example, <a href="fileFilters.html#filter_options">text files</a> may be segmented on line breaks, empty lines, or not be segmented at all. Files with formatting (OpenOffice.org documents, HTML documents, etc.) are segmented on block-level (paragraph) tags. Translatable object <a href="fileFilters.html#filter_options">attributes</a> in XHTML or HTML files can be extracted as separate segments.</p>
+            <li>
+              <p><a href=
+              "#break">Break/Exception</a></p>
+            </li>
 
-	<hr>
-	<a name="sentence" id="sentence"></a>
-	<h1>Sentence level segmentation</h1>
+            <li>
+              <p><a href=
+              "#examples">A few simple
+              examples</a></p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
 
-	<p>After segmenting the source file into logical units, OmegaT will further segment these blocks into sentences.</p>
-	
-	<a name="about" id="about"></a>
-	<h2>Segmentation rules</h2>
+    <li>
+      <p><a href="regexp.html">Regular expression constructs</a></p>
+    </li>
+  </ul>
 
-	<p>The process of segmenting can be pictured as follows: imagine the cursor move along the text, one character at a time. For each cursor position each rule is applied in the given order to see if the <strong>Before</strong> pattern applies the text on the left and the <strong>After</strong> pattern to the text on the right of the cursor. If the rule matches, the program stops the rules examination (&acute;for the exception rule) or creates a new segment (for the break rule).</p>
+  <p>Translation memory tools work with textual units called segments. OmegaT
+  has 2 ways to segment a text: paragraph segmentation and sentence
+  segmentation.In order to select the type of segmentation, select
+  <strong>Project → Properties...</strong> from the main menu and use the
+  available check box. Note that paragraph segmentation is pretty much outdated
+  and that for the majority of projects the sentence segmentation is a choice
+  to be preferred. If sentence segmentation has been selected, you can setup
+  the rules by selecting <strong>Options → Segmentation...</strong> from the
+  main menu.</p>
 
-	<p>The Sentence Segmentation has been implemented with the help of the <a href= "http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a> standard - please note that not all SRX features are supported. And it is not possible to import/export rules defined in SRX format. However, if you know how SRX works, you will already know a lot about how OmegaT does the segmentation.</p>
+  <p>Note that a good part of the development has been spent in developing
+  dependable segmentation rules, so in a majority of cases you will not need to
+  get involved with writing your own segmentation rules. On the other hand this
+  functionality can be very useful in special cases, allowing you to translate
+  what needs to be translated without running the danger of changing, what
+  needs to stay uncnhanged.</p>
 
-	<p>There's two kinds of rules:</p>
+  <p><strong>Warning!</strong> Changing the filters options while the project
+  is open, may result in the loss of data. If you change segmentation options
+  when a project is open, you will have to reload the project for the changes
+  to take effect.</p>
+  <hr>
 
-	<ul>
-		<li><strong>Break rules</strong> separate the source text into segments.
-		<p><strong>Example</strong>: <i>"Did it make sense? I was not sure."</i> should be separated in two segments.<br>
-		There should be a break rule for "<code>?</code>".</p></li>
-		<li><strong>Exception rules</strong> specify what parts of text should NOT be separated.
-		<p><strong>Example</strong>: <i>"Mrs. Dalloway "</i> should not be separated, so an exception rule should be established for Mrs (and Mr and Dr and prof etc), followed by a period.</p></li>
-	</ul>
+  <h2><a name="structure" id="structure"></a>Structure level segmentation</h2>
 
-	<p>The predefined break rules should be sufficient for most European languages and Japanese. Given the flexibility you may consider defining more exception rules for the language you translate from, to give you more meaningful and coherent segments.</p>
+  <p>OmegaT first parses the text for structure-level segmentation. During this
+  process it is only the structure of the source file that is used to produce
+  segments.</p>
 
-	<a name="setup" id="setup"></a>
-	<h2>Rules setup</h2>
+  <p>For example, <a href="fileFilters.html#filter_options">text files</a> may
+  be segmented on line breaks, empty lines, or not be segmented at all. Files
+  with formatting (OpenOffice.org documents, HTML documents, etc.) are
+  segmented on block-level (paragraph) tags. Translatable object <a href=
+  "fileFilters.html#filter_options">attributes</a> in XHTML or HTML files can
+  be extracted as separate segments.</p>
+  <hr>
 
+  <h2><a name="sentence" id="sentence"></a>Sentence level segmentation</h2>
 
-	<a name="priority" id="priority"></a>
-	<h3>Priority</h3>
+  <p>After segmenting the source file into logical units, OmegaT will further
+  segment these blocks into sentences.</p>
 
-	<p>All the segmentation rule sets with a matching Language Pattern are applied in the given order of priority, so rules for specific language should be higher than default ones.</p>
-	
-	<p>For example, rules for Canadian French (FR-CA) should be higher than rules for French (FR.*), and higher than Default (.*) ones. Then while translating from Canadian French your project will use the rules defined for this language, the rules for French, and the Default rules in a correct order.</p>
+  <h3><a name="about" id="about"></a>Segmentation rules</h3>
 
-	<a name="creation" id="creation"></a>
-	<h3>Rules creation</h3>
-	
-	<p>In order to create an empty set of rules, click <strong>Add</strong> in the upper half of the dialog. An empty line appears at the bottom of a table.</p>
-	
-	<p>Change the name of the rule set and the language pattern. Syntax of the language pattern conforms to <a href="regexp.html">regular expression</a> syntax. If your set of rules handles a language-country pair, we advise you to move it to the top using <strong>Move Up</strong> button. In order to edit a set of rules, simply click on it in a table, the rules of the set will appear in the bottom half of the window.</p>
+  <p>The process of segmenting can be pictured as follows: imagine the cursor
+  move along the text, one character at a time. For each cursor position each
+  rule is applied in the given order to see if the <strong>Before</strong>
+  pattern applies the text on the left and the <strong>After</strong> pattern
+  to the text on the right of the cursor. If the rule matches, the program
+  stops the rules examination (´for the exception rule) or creates a new
+  segment (for the break rule).</p>
 
-	<a name="break" id="break"></a>
-	<h3>Break/Exception</h3>
-	
-	<p>The Break/Exception check box determines whether it is a break rule (check box set) or an exception rule (check box unset). Two regular expressions Before and After specify what must be before and after some position so that it qualifies for exception rule or for break rule.</p>
+  <p>The Sentence Segmentation has been implemented with the help of the
+  <a href="http://www.lisa.org/standards/srx/">Segmentation Rules eXchange
+  (SRX)</a> standard - please note that not all SRX features are supported. And
+  it is not possible to import/export rules defined in SRX format. However, if
+  you know how SRX works, you will already know a lot about how OmegaT does the
+  segmentation.</p>
 
+  <p>There are two kinds of rules:</p>
 
-	<a name="examples" id="examples"></a>
-	<h3>A few simple examples</h3>
+  <ul>
+    <li>
+      <p><strong>Break rules</strong> separate the
+      source text into segments. For example, <i>"Did it make sense? I was not
+      sure."</i> should be separated in two segments means, there should be a
+      break rule for "<code>?</code>".</p>
+    </li>
 
-	<table border="0" cellpadding="4" cellspacing="0">
-		<tr bgcolor="#DDDDDD">
-			<td width="25%"><strong>Intention</strong></td>
-			<td><strong>Before</strong></td>
-			<td><strong>After</strong></td>
-			<td width="50%"><strong>Note</strong></td>
-		</tr>
-		<tr>
-			<td>set a segment after a period ('<code>.</code>') and before a space</td>
-			<td><code>\.</code></td>
-			<td><code>\s</code></td>
-			<td>"<code>\.</code>" means the character "<code>.</code>" "<code>\s</code>" means any white space character</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td>do not segment after Mr.</td>
-			<td><code>Mr\.</code></td>
-			<td><code>\s</code></td>
-			<td>It's an exception rule, so the rule check box must be unchecked</td>
-		</tr>
-		<tr>
-			<td><code>set a segment after</code> <code>"</code><code>&#12290;</code><code>"</code> <code>(Japanese period)</code></td>
-			<td><code>&#12290;</code> </td>
-			<td></td>
-			<td>Note that <i>after</i> is empty</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td>do not segment after M. Mr. Mrs. and Ms.</td>
-			<td><code>Mr??s??\.</code></td>
-			<td><code>\s</code></td>
-			<td>exception rule - see the use of ? in regular expressions (non-greedy identifier)</td>
-		</tr>
-	</table>
+    <li>
+      <p><strong>Exception rules</strong> specify what parts of text should NOT
+      be separated. In spite of the period, <i>"Mrs. Dalloway "</i> should not
+      be separated in two segments, so an exception rule should be established
+      for Mrs (and Mr and Dr and prof etc), followed by a period.</p>
+    </li>
+  </ul>
 
-	<hr>
-	<a name="regex" id="regex"></a>
-	<h1>Summary of regular-expression constructs</h1>
+  <p>The predefined break rules should be sufficient for most European
+  languages and Japanese. Given the flexibility you may consider defining more
+  exception rules for the language you translate from, to give you more
+  meaningful and coherent segments.</p>
 
-	<p>The regular expressions used in segmentation rules are those supported by Java. A short summary is available in the <a href="regexp.html">Regular Expressions Constructs</a> appendix.</p>
-	
-	<p>If you need more specific information, please consult <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
-		
-	<p>You can find simple tutorials on the web (<a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>, for example.)</p>
+  <h3><a name="setup" id="setup"></a>Rules setup</h3>
 
-	<hr>
+  <h3><a name="priority" id="priority"></a>Priority</h3>
 
-	<p><code><a href="legalNotices.html">Legal notices</a></code></p>
+  <p>All the segmentation rule sets with a matching Language Pattern are
+  applied in the given order of priority, so rules for specific language should
+  be higher than default ones. For example, rules for Canadian French (FR-CA)
+  should be higher than rules for French (FR.*), and higher than Default (.*)
+  ones. Then while translating from Canadian French your project will use the
+  rules defined for this language, the rules for French, and the Default rules
+  in a correct order.</p>
+
+  <h3><a name="creation" id="creation"></a></a>Rules creation</h3>
+
+  <p>In order to create an empty set of rules, click <strong>Add</strong> in
+  the upper half of the dialog. An empty line appears at the bottom of a table.
+  Change the name of the rule set and the language pattern. Syntax of the
+  language pattern conforms to <a href="regexp.html">regular expression</a>
+  syntax. If your set of rules handles a language-country pair, we advise you
+  to move it to the top using <strong>Move Up</strong> button. In order to edit
+  a set of rules, simply click on it in a table, the rules of the set will
+  appear in the bottom half of the window.</p>
+
+  <h3><a name="break" id="break"></a>Break/Exception</h3>
+
+  <p>The Break/Exception check box determines whether it is a break rule (check
+  box set) or an exception rule (check box unset). Two regular expressions
+  Before and After specify what must be before and after some position so that
+  it qualifies for exception rule or for break rule.</p>
+
+  <h3><a name="examples" id="examples"></a>A few simple examples</h3>
+
+  <table border="0" cellpadding="4" cellspacing="0">
+    <tr bgcolor="#DDDDDD">
+      <td width="26%">
+        <p><strong>Intention</strong></p>
+      </td>
+
+      <td>
+        <p><strong>Before</strong></p>
+      </td>
+
+      <td>
+        <p><strong>After</strong></p>
+      </td>
+
+      <td width="52%">
+        <p><strong>Note</strong></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="26%">
+        <p>set a segment after a period ('<code>.</code>') and before a
+        space</p>
+      </td>
+
+      <td>
+        <p><code>\.</code></p>
+      </td>
+
+      <td>
+        <p><code>\s</code></p>
+      </td>
+
+      <td width="52%">
+        <p>"<code>\.</code>" means the character "<code>.</code>"
+        "<code>\s</code>" means any white space character</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="26%">
+        <p>do not segment after Mr.</p>
+      </td>
+
+      <td>
+        <p><code>Mr\.</code></p>
+      </td>
+
+      <td>
+        <p><code>\s</code></p>
+      </td>
+
+      <td width="52%">
+        <p>It's an exception rule, so the rule check box must be unchecked</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="26%">
+        <p>set a segment after"。" (Japanese period)</p>
+      </td>
+
+      <td>
+        <p><span lang="zxx"><code>。</code></span></p>
+      </td>
+
+      <td></td>
+
+      <td width="52%">
+        <p>Note that <i>after</i> is empty</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="26%">
+        <p>do not segment after M. Mr. Mrs. and Ms.</p>
+      </td>
+
+      <td>
+        <p><code>Mr??s??\.</code></p>
+      </td>
+
+      <td>
+        <p><code>\s</code></p>
+      </td>
+
+      <td width="52%">
+        <p>exception rule - see the use of ? in regular expressions (non-greedy
+        identifier)</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2><a name="regex" id="regex"></a>Regular-expression constructs</h2>
+
+  <p>The regular expressions used in segmentation rules are those supported by
+  Java. A short summary is available in the <a href="regexp.html">Regular
+  Expressions Constructs</a> appendix. If you need more specific information,
+  please consult <a href=
+  "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+
+  <p>You can find simple tutorials on the web (<a href=
+  "http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>,
+  for example.)</p>
+  <hr>
+
+  <p><code><a href="legalNotices.html">Legal notices</a></code></p>
 </body>
 </html>

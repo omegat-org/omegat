@@ -1,197 +1,331 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<title>Working with Formatted Text - OmegaT 1.7.3 User Manual</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <title>Working with Formatted Text - OmegaT 1.8 User Manual</title>
 </head>
 
 <body>
-	<h1>Working with formatted texts</h1>
-
-	<ul>
-		<li><a href="#intro">Formatting tags</a>
-			<ul>
-				<li><a href="#naming">Tag naming</a>
-				<li><a href="#numbering">Tag numbering</a>
-				<li><a href="#pairs">Pairs and singletons</a>
-			</ul>
-		</li>
-		<li><a href="#tag_segmenting">Tags and sentence segmenting</a></li>
-		<li><a href="#tag_operation">Tag operations</a>
-			<ul>
-				<li><a href="#duplication">Tag group duplication</a>
-				<li><a href="#deletion">Tag group deletion</a>
-				<li><a href="#order">Tag group order modification</a>
-				<li><a href="#nesting">Tag group nesting</a>
-			</ul>
-		</li>
-		<li><a href="#tag-overlapping">Tag group overlapping</a></li>
-		<li><a href="#tag_validation">Tag group validation</a></li>
-		<li><a href="#tag_hints">Hints for tags management</a></li>
-	</ul>
-
-	<p>Formatting information present in the source file usually needs to be reproduced in the target file. OmegaT displays the in-line formatting information of supported formats (at present DocBook, HTML, XHTML, Open Document, and OpenOffice.org) as tags. Tags are usually not taken into account when considering string similarity for matching purposes. Tags that you have reproduced in the translated segment will be present in the translated document.</p>
-
-<hr>
-
-	<a name="intro" id="intro"></a>
-	<h1>Formatting tags</h1>
-
-
-	<a name="naming" id="naming"></a>
-	<h2>Tag naming</h2>
-
-	<p>The tags consist of one to three characters and a number. Unique number allows to group those tag that correspond to each other, and differentiate the tags that can have the same shortcut character, but are in fact different. The characters may or may not reflect the value of the formatting the tag represents (e.g. bold, italics, etc.)</p>
-
-	<a name="numbering" id="numbering"></a>
-	<h2>Tag numbering</h2>
-
-	<p>Tags are numbered in an incremental way by <strong>tag group</strong>. What we call "tag groups" here is either a single tag (like <code><font color="red">&lt;br1&gt;</font></code>), on its own, or 2 tags forming a pair (like <code><font color="red">&lt;f3&gt;</font></code> and <code><font color="red">&lt;/f3&gt;</font></code>). Within a segment, the first group (pair or singleton) gets the number <strong>0</strong>, the second the number <strong>1</strong> etc. The first example below has 3 tag groups (a pair, a singleton, and then another pair), the second example only has one group (a pair).</p>
-
-	<a name="pairs" id="pairs"></a>
-	<h2>Pairs and singletons</h2>
-
-	<p>Tags always come either in singletons or in pairs. <strong>Single tags</strong> indicate formatting information that does not affect the surrounding text (extra space or line break for example).</p>
-
-	<pre>	<strong>&lt;segment 2132&gt;</strong><font color="red">&lt;b0&gt;</font>&lt;Ctr+N&gt;<font color="red">&lt;/b0&gt;</font>, <font color="red">&lt;br1&gt;</font><font color="red">&lt;b2&gt;</font>&lt;Enter&gt;<font color="red">&lt;/b2&gt;</font><strong>&lt;end segment&gt;</strong></pre>
-
-	<p><code><strong><font color="red">&lt;br1&gt;</font></strong></code> is a single tag and does not affect any surrounding text. <strong>Paired tags</strong> usually indicate style information that applies to the text between the opening tag and the closing tag of a pair. Whatever happens to a pair, the opening tag should always come before the closing tag.</p>
-
-	<pre>	<strong>&lt;segment 3167&gt;</strong>Log file (<font color="red">&lt;f1&gt;</font>log.txt<font color="red">&lt;/f1&gt;</font>) for tracking operations and errors.<strong>&lt;end segment&gt;</strong></pre>
-
-	<p><code><strong><font color="red">&lt;f1&gt;</font></strong></code> and <code><strong><font color="red">&lt;/f1&gt;</font></strong></code> are paired and affect <code><strong>log.txt</strong></code>.</p>
-
-<hr>
-
-	<a name="tag_segmenting" id="tag_segmenting"></a>
-	<h1>Tags and sentence segmenting</h1>
-
-	<p>OmegaT creates its tags before sentences segmenting is applied. Depending on the segmenting rules, tags may look like they do not respect the above rules of numbering	and grouping.</p>
-
-	<pre>	<strong>&lt;segment 1554&gt;</strong> <font color="red">&lt;f0&gt;</font>Before: \. After: \s<font color="red">&lt;/f0&gt;</font><strong>&lt;end segment&gt;</strong></pre>
-
-	<p>There seems to be no problem here. Now, if we apply the default segmenting rules on this segment (the default OmegaT behaviour) we will have the following result:</p>
-
-	<pre>	<strong>&lt;segment 1990&gt;</strong> <font color="red">&lt;f0&gt;</font>Before: \. <strong>&lt;end segment&gt;</strong>
-	<strong>&lt;segment 1991&gt;</strong> After: \s<font color="red">&lt;/f0&gt;</font><strong>&lt;end segment&gt;</strong>
-	</pre>
-
-	<p>Segmenting rules that apply are: <i>segment after a period followed by a space</i> . In the above example we see that segments taken one by one do not respect the pairing and numbering rules:<code><font color="red">&lt;f0&gt;</font></code> and <code><font color="red">&lt;/f0&gt;</font></code> should be paired in the same segment, but are separated by the segmentation rules. In some cases that may even cause problems in the translation, when tags must be displaced in the target language to reflect the word order of that language (see <a href="#Tag_operations">Tag operations</a> below).</p>
-
-<hr>
-
-	<a name="tag_operation" id="tag_operation"></a>
-	<h1>Tag operations</h1>
-
-	<p>Care must be exercised with tags. If they are accidentally changed, the formatting of the final file may be corrupted. The sound approach is "Don't fix, what's not broken". However, it is still good to know, what is possible and how to do it.</p>
-
-	<a name="duplication" id="duplication"></a>
-	<h2>Tag group duplication:</h2>
-
-	<p>To duplicate tag groups, just copy them in the position of your choice. Keep in mind that in a pair group the opening tag must come before the closing tag. The formating represented by the group you duplicated will be applied to the section where you duplicated it.</p>
-
-	<p>Example:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>This formatting<font color="red">&lt;/f0&gt;</font> is going to be duplicated here.<strong>&lt;end segment&gt;</strong></pre>
-
-	<p>After duplication:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>This formatting<font color="red">&lt;/f0&gt;</font> has been <font color="red">&lt;f0&gt;</font>duplicated here<font color="red">&lt;/f0&gt;</font>.<strong>&lt;end segment&gt;</strong></pre>
-
-	<a name="deletion" id="deletion"></a>
-	<h2>Tag group deletion</h2>
-
-	<p>To delete tag groups, just remove them from the segment. Keep in mind that a pair group must have its opening as well as its closing tag deleted to ensure all traces of the formatting are properly erased, otherwise the translated file might be corrupted and may not open. By deleting a tag group you will remove the related formatting from the translated file.</p>
-
-	<p>Example:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>This formatting<font color="red">&lt;/f0&gt;</font> is going to be deleted.<strong>&lt;end segment&gt;</strong></pre>
-
-	<p>After deletion:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong>This formatting has been deleted.<strong>&lt;end segment&gt;</strong></pre>
-
-	<a name="order" id="order"></a>
-	<h2>Tag group order modification</h2>
-
-	<p>To change the order of a tag group to reflect a different language structure in the translation, simply put the tag group where it should be in the translation. The formatting will follow the part it is applied to.</p>
-
-	<p>Example:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Formatting zero<font color="red">&lt;/f0&gt;</font> and <font color="red">&lt;f1&gt;</font>formatting one<font color="red">&lt;/f1&gt;</font> are going to be inverted around.<strong>&lt;end segment&gt;</strong></pre>
-
-	<p>After order modification:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f1&gt;</font>Formatting one<font color="red">&lt;/f1&gt;</font> and <font color="red">&lt;f0&gt;</font>formatting zero<font color="red">&lt;/f0&gt;</font> have been inverted.<strong>&lt;end segment&gt;</strong></pre>
-
-	<a name="nesting" id="nesting"></a>
-	<h2>Tag group nesting</h2>
-
-	<p>Modifying a tag group order may result into nesting a tag group within another tag group. This is possible as long as the enclosing group totally encloses the enclosed group. Extra care must be taken with nesting especially in the case of tag pairs that are not fully moved inside an enclosing group otherwise the translated file might be corrupted and may not open. The nested part will have both formats apply to it.</p>
-
-	<p>Example:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Formatting<font color="red">&lt;/f0&gt;</font> <font color="red">&lt;f1&gt;</font>one<font color="red">&lt;/f1&gt;</font> is going to be nested inside formatting zero.<strong>&lt;end segment&gt;</strong></pre>
-
-	<p>After nesting:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Formatting <font color="red">&lt;f1&gt;</font>one<font color="red">&lt;/f1&gt;</font><font color="red">&lt;/f0&gt;</font> has been nested inside formatting zero.<strong>&lt;end segment&gt;</strong></pre>
-
-<hr>
-
-	<a name="tag-overlapping" id="tag-overlapping"></a>
-	<h1>Tag group overlapping</h1>
-
-	<p>Overlapping is the result of bad manipulations of tag pairs and will certainly result in formatting corruption and sometimes in the translating file not opening at all. Example:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Formatting<font color="red">&lt;/f0&gt;</font> <font color="red">&lt;f1&gt;</font>one<font color="red">&lt;/f1&gt;</font> is going to be messed up.<strong>&lt;end segment&gt;</strong></pre>
-
-	<p>After bad manipulation:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Formatting <font color="red">&lt;f1&gt;</font>one<font color="red">&lt;/f0&gt;</font> <font color="red">&lt;/f1&gt;</font>is very messed up now.<strong>&lt;end segment&gt;</strong></pre>
-
-<hr>
-
-	<a name="tag_validation" id="tag_validation"></a>
-	<h1>Tag group validation</h1>
-
-	<p>The validate tags function detects changed tags (whether done deliberately or by accident), and indicates the affected segments. Use of this function will open a dialog with any suspected broken or bad tags in a document.</p>
-
-	<p>This function can be useful for tracking down bugs in a translated tagged text. This is often a problem in OpenDocument or OpenOffice.org files that will not open due to tag problems created in the process of translation. Fixing the tags and recreating the target documents again can often remedy the problem.</p>
-
-	<p>To open the window, use <code><a href="menu.html#shortcuts">Ctrl+T</a></code>.</p>
-	
-	<p>The window features a 3 column table with:</p>
-
-	<ul>
-		<li>a link to the segment</li>
-		<li>contents of the original segment</li>
-		<li>contents of the translated segment</li>
-	</ul>
-	
-	<p>The tags are highlighted in bold blue for easy comparison between the original and the translated contents.
-
-	<p>Click on the link to activate the segment in the Editor.</p>
-	
-	<p>Correct the error if necessary and press <code><a href="menu.html#shortcuts">Ctrl+T</a></code> to return to the tag validation window to correct other errors.</p>
-
-	<p><a href="formattedText.html#intro">Tag</a> errors are <a href="formattedText.html#tag_operation">tag manipulations</a> in the translation that do not reproduce the same tag order and number as in the original segment. Some tag manipulations are necessary and are benign, some will cause problems when the translated document is created.</p>
-
-	<p>Tags generally represent some kind of formatting in the original text. <strong>Simplifying the original text formating</strong> greatly contributes to reducing the number of tags.</p>
-
-
-<hr>
-
-	<a name="tag_hints" id="tag_hints"></a>
-	<h1>Hints for tags management</h1>
-
-	<p>Tags generally represent some kind of formatting in the original text. <strong>Simplifying the original text formatting</strong> greatly contributes to reducing the number of tags. Unifying used fonts, font sizes, colors etc should be considered if possible, to simplify the translation and reduce the number of possible tag errors. Take a look at the <a href="#Tag_operations">Tag operations</a> section to see what can be done with tags. Remember that if tags bother you and formatting is not extremely relevant for the job at hand, removing most formatting from the source document will greatly ease the translation.</p>
-
-	<p>If you need to see the tags in OmegaT but do not need to retain most of the format in the translated document you are free not to add the tags to the translation. In this case <strong>pay extra attention to tag pairs</strong> since forgetting to delete one part of the pair will corrupt your document's formatting, which is what will keep a translated OpenOffice.org document to open. Since tags are included in the text itself, it is possible to use <a href="segmentation.html">Segmentation rules</a> to create segments with less tags. This is an advanced feature and experience is required to apply in properly.</p>
-
-	<p><strong>Important:</strong> OmegaT is not yet able to detect mistakes in formatting fully automatically, so it will not prompt you if you make an error or change formatting to fit your target language better. Sometimes, however, your translated file will look distorted, and in case of OpenDocument / OpenOffice.org files will even refuse to open.</p>
-	<hr>
-
-	<p><a href="legalNotices.html">Legal notices</a></p>
+  <h2>Working with formatted texts</h2>
+
+  <ul>
+    <li>
+      <p><a href="#intro">Formatting tags</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_segmenting">Tags and sentence
+      segmenting</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_operation">Tag
+      operations</a></p>
+    </li>
+
+    <li>
+      <p><a href=
+      "#nesting">Tag group nesting</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag-overlapping">Tag group
+      overlapping</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_validation">Tag group
+      validation</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_hints">Hints for tags management</a></p>
+    </li>
+  </ul>
+
+  <p>Formatting information present in the source file usually needs to be
+  reproduced in the target file. The in-line formatting information made
+  possible by the supported formats (at present DocBook, HTML, XHTML, Open
+  Document, and OpenOffice.org) is presented as tags in OmegaT. In a normal
+  case tags are ignored when considering the similarity between different texts
+  for matching purposes. Tags reproduced in the translated segment will be
+  present in the translated document.</p>
+  <hr>
+
+  <h3><a name="intro" id="intro"></a>Formatting tags</h3>
+
+  <p><a name="naming" id="naming"></a><b>Tag naming:</b> The tags consist of
+  one to three characters and a number. Unique number allows to group those tag
+  that correspond to each other, and differentiate the tags that can have the
+  same shortcut character, but are in fact different. The characters may or may
+  not reflect the value of the formatting the tag represents (e.g. bold,
+  italics, etc.)</p>
+
+  <p><a name="numbering" id="numbering"></a><b>Tag numbering:</b>Tags are
+  numbered in an incremental way by <strong>tag group</strong>. What we call
+  "tag groups" here is either a single tag (like <code><font color=
+  "#FF0000">&lt;br1&gt;</font></code>), on its own, or 2 tags forming a pair
+  (like <code><font color="#FF0000">&lt;f3&gt;</font></code> and
+  <code><font color="#FF0000">&lt;/f3&gt;</font></code>). Within a segment, the
+  first group (pair or singleton) gets the number <strong>0</strong>, the
+  second the number <strong>1</strong> etc. The first example below has 3 tag
+  groups (a pair, a singleton, and then another pair), the second example only
+  has one group (a pair).</p>
+
+  <p><a name="pairs" id="pairs"></a><b>Pairs and singletons:</b>Tags always
+  come either in singletons or in pairs. <strong>Single tags</strong> indicate
+  formatting information that does not affect the surrounding text (extra space
+  or line break for example).</p>
+  <pre>
+        <strong>&lt;segment 2132&gt;</strong><font color=
+"#FF0000">&lt;b0&gt;</font>&lt;Ctr+N&gt;<font color=
+"#FF0000">&lt;/b0&gt;</font>, <font color=
+"#FF0000">&lt;br1&gt;&lt;b2&gt;</font>&lt;Enter&gt;<font color=
+"#FF0000">&lt;/b2&gt;</font><strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p><code><strong><font color="#FF0000">&lt;br1&gt;</font></strong></code> is
+  a single tag and does not affect any surrounding text. <strong>Paired
+  tags</strong> usually indicate style information that applies to the text
+  between the opening tag and the closing tag of a pair. Whatever happens to a
+  pair, the opening tag should always come before the closing tag:</p>
+  <pre>
+        <strong>&lt;segment 3167&gt;</strong>Log file (<font color=
+"#FF0000">&lt;f1&gt;</font>log.txt<font color=
+"#FF0000">&lt;/f1&gt;</font>) for tracking operations and errors.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p><code><strong><font color="#FF0000">&lt;f1&gt;</font></strong></code>
+  <font size="3">and</font> <code><strong><font color=
+  "#FF0000">&lt;/f1&gt;</font></strong></code> are paired and affect the text
+  <code><strong>log.txt</strong></code>.</p>
+  <hr>
+
+  <h3><a name="tag_segmenting" id="tag_segmenting"></a>Tags and sentence
+  segmenting</h3>
+
+  <p>OmegaT creates its tags before sentences segmenting is applied. Depending
+  on the segmenting rules, it may appear as if tags do not respect the above
+  rules of numbering and grouping. Check the following text: "<em>Before: \.
+  After: \s"</em><font color="#FF0000">.</font> <font color="#000000">One would
+  expect segmentation as follows(&lt;f0&gt; and &lt;/f0&gt; stand for the start
+  and end of italics):</font></p>
+  <pre>
+        <strong>&lt;segment ....&gt;</strong> <font color=
+"#FF0000">&lt;f0&gt;</font>Before: \. After: \s<font color=
+"#FF0000">&lt;/f0&gt;</font><strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p>However, when the default segmenting rules are applied to this segment, we
+  will end with the following result:</p>
+  <pre>
+        <strong>&lt;segment 1990&gt;</strong> <font color=
+"#FF0000">&lt;f0&gt;</font>Before: \. <strong>&lt;end segment&gt;</strong>
+<strong>&lt;segment 1991&gt;</strong> After: \s<font color=
+"#FF0000">&lt;/f0&gt;</font><strong>&lt;end segment&gt;</strong>   
+</pre>
+
+  <p>Applying the rule <i>segment after a period followed by a space</i>
+  splices the original text in two segments, even if the two tags
+  <code><font color="#FF0000">&lt;f0&gt;</font></code> and <code><font color=
+  "#FF0000">&lt;/f0&gt;</font></code> should be kept together in the same
+  segment. In some cases that may even cause problems in the translation, when
+  tags must be placed differently in the target language to reflect the word
+  order of that language (see <a href="#tag_operation">Tag operations</a>
+  below).</p>
+  <hr>
+
+  <h3><a name="tag_operation" id="tag_operation"></a>Tag operations</h3>
+
+  <p>Care must be exercised with tags. If they are accidentally changed, the
+  formatting of the final file may be corrupted. The sound approach is "Don't
+  fix, what's not broken". However, it is still good to know, what is possible
+  and how to do it.</p>
+
+  <p><a name="duplication" id="duplication"></a><b>Tag group duplication:</b>
+  To duplicate tag groups, just copy them in the position of your choice. Keep
+  in mind that in a pair group the opening tag must come before the closing
+  tag. The formatting represented by the group you duplicated will be applied
+  to the section where you duplicated it.</p>
+
+  <p>Example:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#FF0000">&lt;f0&gt;</font>This formatting<font color=
+"#FF0000">&lt;/f0&gt;</font> is going to be duplicated here.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p>After duplication:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#FF0000">&lt;f0&gt;</font>This formatting<font color=
+"#FF0000">&lt;/f0&gt;</font> has been <font color=
+"#FF0000">&lt;f0&gt;</font>duplicated here<font color=
+"#FF0000">&lt;/f0&gt;</font>.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p><a name="deletion" id="deletion"></a><b>Tag group deletion:</b>To delete
+  tag groups, just remove them from the segment. Keep in mind that a pair group
+  must have its opening as well as its closing tag deleted to ensure that all
+  traces of the formatting are properly erased, otherwise the translated file
+  might get corrupted. By deleting a tag group you will remove the related
+  formatting from the translated file.</p>
+
+  <p>Example:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#FF0000">&lt;f0&gt;</font>This formatting<font color=
+"#FF0000">&lt;/f0&gt;</font> is going to be deleted.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p>After deletion:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong>This formatting has been deleted.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p><b>Modifying the order of tag groups:</b>To change the order of a tag
+  group to reflect a different language structure in the translation, simply
+  put the tag group where it should be in the translation. The formatting will
+  follow the part it is applied to.</p>
+
+  <p>Example:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#FF0000">&lt;f0&gt;</font>Formatting zero<font color=
+"#FF0000">&lt;/f0&gt;</font> and <font color=
+"#FF0000">&lt;f1&gt;</font>formatting one<font color=
+"#FF0000">&lt;/f1&gt;</font> are going to be inverted around.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p>After order modification:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#FF0000">&lt;f1&gt;</font>Formatting one<font color=
+"#FF0000">&lt;/f1&gt;</font> and <font color=
+"#FF0000">&lt;f0&gt;</font>formatting zero<font color=
+"#FF0000">&lt;/f0&gt;</font> have been inverted.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <h3><a name="nesting" id="nesting"></a>Tag group nesting</h3>
+
+  <p>Modifying a tag group order may result in the nesting of a tag group
+  within another tag group. This is fine as long as the enclosing group totally
+  encloses the enclosed group. In other words, when moving paired tags make
+  sure that both the opening and the closing tag have been move in the target
+  otherwise the translated file might be corrupted and may not open. The nested
+  part will then have both formats apply to it.</p>
+
+  <p>Example:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#FF0000">&lt;f0&gt;</font>Formatting<font color=
+"#FF0000">&lt;/f0&gt;</font> <font color=
+"#FF0000">&lt;f1&gt;</font>one<font color=
+"#FF0000">&lt;/f1&gt;</font> is going to be nested inside formatting zero.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p>After nesting:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#FF0000">&lt;f0&gt;</font>Formatting <font color=
+"#FF0000">&lt;f1&gt;</font>one<font color=
+"#FF0000">&lt;/f1&gt;&lt;/f0&gt;</font> has been nested inside formatting zero.<strong>&lt;end segment</strong>
+</pre>
+  <hr>
+
+  <h3><a name="tag-overlapping" id="tag-overlapping"></a>Tag group
+  overlapping</h3>
+
+  <p>Overlapping is the result of bad manipulations of tag pairs and will
+  certainly result in formatting corruption and sometimes in the translating
+  file not opening at all. Example:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#FF0000">&lt;f0&gt;</font>Formatting<font color=
+"#FF0000">&lt;/f0&gt;</font> <font color=
+"#FF0000">&lt;f1&gt;</font>one<font color=
+"#FF0000">&lt;/f1&gt;</font> is going to be messed up.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p>After bad manipulation:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#FF0000">&lt;f0&gt;</font>Formatting <font color=
+"#FF0000">&lt;f1&gt;</font>one<font color=
+"#FF0000">&lt;/f0&gt;</font> <font color=
+"#FF0000">&lt;/f1&gt;</font>is very messed up now.<strong>&lt;end segment&gt;</strong>
+</pre>
+  <hr>
+
+  <h3><a name="tag_validation" id="tag_validation"></a>Tag group
+  validation</h3>
+
+  <p>The validate tags function detects changed tags (whether done deliberately
+  or by accident), and shows the affected segments. Starting this function – by
+  pressing Ctrl+T - will open a window containing all segments in the file that
+  may have suspected broken or bad tags in the translation. Bugs in a
+  translated tagged text are often a problem in OpenDocument or OpenOffice.org
+  files as they may not open due to tag problems created in the process of
+  translation. Fixing the tags and recreating the target documents is easy with
+  the validate tags function.</p>
+
+  <p>The window, that opens on pressing Ctrl+T, features a 3 column table
+  with:</p>
+
+  <ul>
+    <li>
+      <p>a link to the segment</p>
+    </li>
+
+    <li>
+      <p>contents of the original segment</p>
+    </li>
+
+    <li>
+      <p>contents of the translated segment</p>
+    </li>
+  </ul>
+
+  <p>The tags are highlighted in bold blue for easy comparison between the
+  original and the translated contents. Click on the link to activate the
+  segment in the Editor. Correct the error if necessary and press
+  <code><a href="menu.html#shortcuts">Ctrl+T</a></code> to return to the tag
+  validation window to correct other errors. <a href="#intro">Tag</a> errors
+  are <a href="#tag_operation">tag manipulations</a> in the translation that do
+  not reproduce the same tag order and number as in the original segment. Some
+  tag manipulations are necessary and are benign, some will cause problems when
+  the translated document is created.</p>
+  <hr>
+
+  <h3><a name="tag_hints" id="tag_hints"></a>Hints for tags management</h3>
+
+  <p>Tags generally represent some kind of formatting of the original text.
+  <strong>Simplifying the original text
+  formatting</span></strong> greatly contributes to reducing the number of
+  tags. Unifying used fonts, font sizes, colors etc should be considered if
+  possible as it could simplify the translation and reduce the possibility for
+  tag errors. Take a look at the <a href="#tag_operation">Tag operations</a>
+  section to see what can be done with tags. Remember that if tags bother you
+  and formatting is not extremely relevant for the current translation,
+  removing tags may be the easiest way out of problems.</p>
+
+  <p>If you need to see tags in OmegaT but do not need to retain most of the
+  format in the translated document you are free not to include tags in the
+  translation. In this case <strong><span">pay extra
+  attention to tag pairs</span></strong> since deleting one side of the pair
+  but forgetting to delete the other one will certainly corrupt your document's
+  formatting. Since tags are included in the text itself, it is possible to use
+  <a href="segmentation.html">Segmentation rules</a> to create segments with
+  less tags. This is an advanced feature and some experience is required if you
+  want to apply it properly.</p>
+
+  <p><strong>Important:</strong> OmegaT is not yet able to detect mistakes in
+  formatting fully automatically, so it will not prompt you if you make an
+  error or change formatting to fit your target language better. Sometimes,
+  however, your translated file may look strange, and in case of OpenDocument /
+  OpenOffice.org files it may even refuse to open.</p>
+  <hr>
+
+  <p><a href="legalNotices.html">Legal notices</a></p>
 </body>
 </html>

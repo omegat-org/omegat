@@ -1,8 +1,19 @@
-body {
-	margin: 5px 5px 5px 5px;
-	padding: 0px;
-	font-family: sans-serif;
-	}
-table,h1,h2,h3 {
-	color: #036;
-	}
+table,h1,h2,h3,h4 {
+        color: #036;
+        font-family: sans-serif;
+      }
+h1    { font-size: 18; }
+h2    { font-size: 16; }
+h3    { font-size: 14; }
+h4    { font-size: 12; }
+
+p,dd,dt 	{
+        margin: 5px 5px 5px 5px;
+        padding: 0px;
+        font-family: serif;
+        color: #000;
+        }
+table_serif {
+        color: #000;
+        font-family: serif;
+      }

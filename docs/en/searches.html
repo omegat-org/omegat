@@ -1,124 +1,231 @@
 <html>
 <head>
 	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<title>Searches - OmegaT 1.7.3 User Manual</title>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <title>Searches - OmegaT 1.8 User Manual</title>
 </head>
+
 <body>
+  <h2>Searches</h2>
 
-	<h1>Searches</h1>
+  <ul>
+    <li>
+      <p><a href="#searchwindow">Search window</a></p>
 
-	<ul>
-		<li><a href="#searchwindow">Search window</a>
-			<ul>
-				<li><a href="#calling">Calling up a search</a></li>
-				<li><a href="#location">Search location</a></li>
-			</ul>
-		</li>
-		<li><a href="#searchmethods">Search methods</a></li>
-		<li><a href="#usingwildcards">Using wild cards</a></li>
-		<li><a href="#usingregularexpressions">Using regular expressions</a></li>
-		<li><a href="#display">Search results display</a></li>
-	</ul>
+      <ul>
+        <li>
+          <p><a href="#calling">Calling up a search</a></p>
+        </li>
 
+        <li>
+          <p><a href="#location">Search location</a></p>
+        </li>
+      </ul>
+    </li>
+  </ul>
 
+  <p><a href="#searchmethods">Search methods</a></p>
 
-<hr>
+  <p><a href="#usingwildcards">Using wild cards</a></p>
 
-	<a name="searchwindow" id="searchwindow"></a>
-	<h1>Search window</h1>
+  <p><a href="#usingregularexpressions">Using regular expressions</a></p>
 
-	<a name="calling" id="calling"></a>
-	<h2>Calling up a search</h2>
-	
-	<p>OmegaT provides a powerful range of search functions. Call up the <strong>Search</strong> window with <code>Ctrl+F</code> and enter the word or phrase you wish to search for in the <strong>Search for</strong> box.</p>
-	
-	<p>Alternatively, in the Editor window, select a word or phrase in the editing field (target text of the active segment) and hit <code>Ctrl+F</code>. The word or phrase is entered in the <strong>Search for</strong> box automatically in this case.</p>
+  <p><a href="#display">Search results display</a></p>
+  <hr>
 
-	<p>Calling up the <strong>Search</strong> window anew will create a new instance of the window. You may end up with a number of Search windows if you forget to close them.</p>
-	
-	<a name="location" id="location"></a>
-	<h2>Search location</h2>
-	
-	<p>Searches occur both in the source as well as in the target section of the project. You may search in</p>
+  <h2><a name="searchwindow" id="searchwindow"></a>Search window</h2><img src=
+  "images/TextSearch.png" name="graphics1" align="left" width="659" height=
+  "446" border="0" id="graphics1"><br clear="left">
 
-	<ul>
-		<li>the project only (default setting)</li>
-		<li>the project as well as in the reference translation memories in /tm/ (check <i>Search TMs</i>)</li>
-		<li>a single file or a folder containing a set of files (check <i>Search files</i>)</li>
-	</ul>
+  <p><br>
+  <br></p>
 
-	<p>In the latter case, OmegaT will only search the files it can read (See <a href="filesToTranslate.html">Supported File Formats</a>).</p>
+  <h3><a name="calling" id="calling"></a>Calling up a search</h3>
 
+  <p>OmegaT provides a powerful range of search functions. Call up the
+  <strong>Search</strong> window with <code>Ctrl+F</code> and enter the word or
+  phrase you wish to search for in the <strong>Search for</strong> box.
+  Alternatively, in the Editor window, select a word or phrase in the editing
+  field (target text of the active segment) and hit <code>Ctrl+F</code>. The
+  word or phrase is entered in the <strong>Search for</strong> box
+  automatically in this case.</p>
 
+  <p>Every call of the <strong>Search</strong> window creates its own new
+  window. Do not forget to close them, so that they do not clutter your
+  desktop.</p>
 
-<hr>
+  <h3><a name="location" id="location"></a>Search location</h3>
 
-	<a name="searchmethods" id="searchmethods"></a>
-	<h1>Search methods</h1>
+  <p>Searches occur both in the source as well as in the target section of the
+  project. You may search in</p>
 
-	<p>Select the method using the radio buttons. You can choose between two methods to search:</p>
+  <ul>
+    <li>
+      <p>the project only (default setting)</p>
+    </li>
 
-	<dl>
-		<dt><strong>exact search</strong></dt><dd>Search for segments containing of the string you specified.</dd>
-		<dt><strong>keyword search</strong></dt><dd>Search for segments containing all keywords you specified, in any order.</dd>
-	</dl>
+    <li>
+      <p>the project as well as in the reference translation memories in /tm/
+      (check <i>Search TMs</i>)</p>
+    </li>
 
-	<p>For either of these two methods you can select the following three options:</p>
+    <li>
+      <p>a single file or a folder containing a set of files (check <i>Search
+      files</i>)</p>
+    </li>
+  </ul>
 
-	<dl>
-		<dt><strong>case sensitive</strong></dt><dd>If selected, the search will be performed for the exact string specified; otherwise capitals will be ignored.</dd>
-		<dt><strong>regular expressions</strong></dt><dd>If selected, the search string will be treated as a regular expression (in case of a keyword search it will be treated as multiple expressions).</dd>
-		<dt><strong>search TMs</strong></dt><dd>if selected, all translation memories are included in the search.</dd>
-	</dl>
+  <p>when searching through files, OmegaT will restrict the search to files it
+  can read (See <a href="filesToTranslate.html">Supported File
+  Formats</a>).</p>
+  <hr>
 
-	<p>An <strong>exact search</strong> looks for a phrase, i.e. if several words are entered, they are found only if they occur in exactly the same sequence. Exact searches are similar to an "exact phrase" search in an Internet search engine such as Google.</p>
+  <h2><a name="searchmethods" id="searchmethods"></a>Search methods</h2>
 
-	<p>Select <strong>keyword search</strong> to search for any number of individual words, separated by spaces and in any order. OmegaT will display a list of all segments in which all the words occur. Keyword searches are similar to a search "with all of the words" in an Internet search engine such as Google (AND logic).</p>
+  <p>Select the method using the radio buttons. You can choose between two
+  methods to search:</p>
 
+  <table width="555" border="0" cellpadding="3" cellspacing="0">
+    <col width="115">
+    <col width="428">
 
+    <tr>
+      <td width="115">
+        <p><strong>exact search</strong></p>
+      </td>
 
-<hr>
+      <td width="428">
+        <p>Search for segments containing of the string you specified.</p>
+      </td>
+    </tr>
 
-	<a name="usingwildcards" id="usingwildcards"></a>
-	<h1>Using wild cards</h1>
+    <tr>
+      <td width="115">
+        <p><strong>keyword search</strong></p>
+      </td>
 
-	<p>In both exact and keyword searches, the wild card search characters '<code>*</code>' and '<code>?</code>' can be used. To use wild cards, make sure the option <strong>regular expressions</strong> is not selected, otherwise these characters are interpreted as special regular expression characters.</p>
-	
-	<p>The '<strong>*</strong>' character matches zero or more characters (the search term '<strong>run*</strong>' would match '<strong>run</strong>', '<strong>runs</strong>', and '<strong>running</strong>', for example).</p>
-	
-	<p>The '<strong>?</strong>' character matches exactly one character ('<strong>run?</strong>' would match '<strong>runs</strong>' and '<strong>rung</strong>', for example, but not '<strong>run</strong>' or '<strong>running</strong>').</p>
+      <td width="428">
+        <p>Search for segments containing all keywords you specified, in any
+        order.</p>
+      </td>
+    </tr>
+  </table>
 
-	<p>If you wish to search for segments containing either <strong>*</strong> or <strong>?</strong>, you will need to switch on regular expressions, and escape these characters by prefixing a backslash ('\') to them, i.e. 'x\*y' to find instances of 'x*y' and 'x\?<code>y</code>' to find instances of '<code>x?y</code>'.</p>
+  <p>An <strong>exact search</strong> looks for a phrase, i.e. if several words
+  are entered, they are found only if they occur in exactly the same sequence.
+  Exact searches are similar to an "exact phrase" search in an Internet search
+  engine such as Google.</p>
 
+  <p>Select <strong>keyword search</strong> to search for any number of
+  individual words, separated by spaces and in any order. OmegaT will display a
+  list of all segments in which all the words occur. Keyword searches are
+  similar to a search "with all of the words" in an Internet search engine such
+  as Google (AND logic).</p>
 
+  <p>For either of these two methods you can select the following three
+  options:</p>
 
-<hr>
+  <table width="556" border="0" cellpadding="3" cellspacing="0">
+    <col width="116">
+    <col width="428">
 
-	<a name="usingregularexpressions" id="usingregularexpressions"></a>
-	<h1> Using regular expressions</h1>
+    <tr>
+      <td width="116">
+        <p><strong>case sensitive</strong></p>
+      </td>
 
-	<p>A regular expression search is a powerful way to look for instances of a string. It is similar to a wild card search, but allows far more flexibility.</p>
-	
-	<p>The regular expressions used in searches are those supported by Java. A short summary is available in the <a href="regexp.html">Regular Expressions Constructs</a> appendix.</p>
-	
-	<p>If you need more specific information, please consult <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
-		
-	<p>You can find simple tutorials on the web (<a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>, for example.)</p>
-	
-<hr>
+      <td width="428">
+        <p>The search will be performed for the exact string specified;
+        otherwise capitals will be ignored.</p>
+      </td>
+    </tr>
 
-	<a name="display" id="display"></a>
-	<h1>Search results display</h1>
-	
-	<p>Pressing the search button after entering a string in the search field will display all the segments in the project that include the searched string. As OmegaT handles all the identical segments as one entity, only the first unique segment is shown.</p>
-	
-	<p>The segments are displayed in order of appearance in the project. Translated segments will be displayed with the original text at the top and the translated text at the bottom, non translated segments will be displayed in original text only.</p>
+    <tr>
+      <td width="116">
+        <p><strong>regular expressions</strong></p>
+      </td>
 
-	<p>You may click on a segment to bring it up in the Editor for modification. Then you may switch back to Search window and go to the next found segment to modify it too. Such a pattern is useful to do terminology updates.</p>
+      <td width="428">
+        <p>The search string will be treated as a regular expression (in case
+        of a keyword search it will be treated as multiple expressions).</p>
+      </td>
+    </tr>
 
-	<hr>
-	
-	<p><a href="legalNotices.html">Legal notices</a></p>
+    <tr>
+      <td width="116">
+        <p><strong>search TMs</strong></p>
+      </td>
+
+      <td width="428">
+        <p>All translation memories are included in the search.</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2><a name="usingwildcards" id="usingwildcards"></a>Using wild cards</h2>
+
+  <p>In both exact and keyword searches, the wild card search characters
+  '<code>*</code>' and '<code>?</code>' can be used. To use wild cards, make
+  sure the option <strong>regular expressions</strong> is not selected,
+  otherwise these characters are interpreted as special regular expression
+  characters.</p>
+
+  <ul>
+    <li>
+      <p>'<strong>*</strong>' matches zero or more characters. The search term
+      '<strong>run*</strong>' for example would match '<strong>run</strong>',
+      '<strong>runs</strong>', and '<strong>running</strong>'.</p>
+    </li>
+
+    <li>
+      <p>'<strong>?</strong>' matches any single character. For instance,
+      '<strong>run?</strong>' would match '<strong>runs</strong>' and
+      '<strong>rung</strong>', but not '<strong>run</strong>' or
+      '<strong>running</strong>'.</p>
+    </li>
+  </ul>
+
+  <p>If you wish to search for segments containing either <strong>*</strong> or
+  <strong>?</strong>, you will need to switch on regular expressions, and
+  escape these characters by prefixing a backslash ('\') to them, i.e. 'x\*y'
+  to find instances of 'x*y' and 'x\?<code>y</code>' to find instances of
+  '<code>x?y</code>'.</p>
+  <hr>
+
+  <h2><a name="usingregularexpressions" id="usingregularexpressions"></a>Using
+  regular expressions</h2>
+
+  <p>A regular expression search is a powerful way to look for instances of a
+  string. It is similar to a wild card search, but allows far more flexibility.
+  The regular expressions used in searches are those supported by Java. A short
+  summary is available in the <a href="regexp.html">Regular Expressions
+  Constructs</a> appendix. If you need more specific information, please
+  consult <a href=
+  "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+
+  <p>You can find simple tutorials on the web (<a href=
+  "http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>,
+  for example.)</p>
+  <hr>
+
+  <h2><a name="display" id="display"></a>Search results display</h2>
+
+  <p>Pressing the search button after entering a string in the search field
+  will display all the segments in the project that include the searched
+  string. As OmegaT handles all the identical segments as one entity, only the
+  first unique segment is shown.</p>
+
+  <p>The segments are displayed in order of appearance in the project.
+  Translated segments will be displayed with the original text at the top and
+  the translated text at the bottom, non translated segments will be displayed
+  in original text only.</p>
+
+  <p>Click on a segment to open it in the Editor for modifications. You may
+  then switch back to Search window for the next found segment, for instance to
+  control and if necessary adjust the terminology.</p>
+  <hr>
+
+  <p><a href="legalNotices.html">Legal notices</a></p>
 </body>
 </html>

@@ -1,54 +1,106 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<title>Translation Editing - OmegaT 1.7.3 User Manual</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <title>Translation Editing - OmegaT 1.8 User Manual</title>
 </head>
+
 <body>
+  <h2>Editing field behaviour</h2>
 
-	<h1>Editing field behaviour</h1>
+  <ul>
+    <li>
+      <p><a href="#auto_insert">Automatic match
+      insertion</a></p>
+    </li>
 
-	<ul>
-		<li><a href="#auto_insert">Automatic match insertion</a></li>
-		<li><a href="#validation">Segments not to modify</a></li>
-	</ul>
+    <li>
+      <p><a href="#validation">Segments not to modify</a></p>
+    </li>
+  </ul>
 
+  <p>The editing field can be set to behave the following ways:</p>
 
-	<p>The editing field can be set to behave the following ways:</p>
-	
-	<ul>
-		<li>Insert automatically the best match available</li>
-		<li>Consider as translated segments identical to the original</li>
-	</ul>
-	
-	<hr>
-	
-	<a name="auto_insert" id="auto_insert"></a>
-	<h1>Automatic match insertion</h1>
-	
-	<p>You translate your files by moving from segment to segment, at the same time editing the current segment. When moving between segments, you may wish the editing field were populated with the existing translation or with the source text.</p>
-	
-	<p>In <strong>Options → Editing Behaviour...</strong> OmegaT offers you the following alternatives:</p>
+  <ul>
+    <li>
+      <p>Insert automatically the best match
+      available</p>
+    </li>
 
-	<dl>
-		<dt><strong>The source text</strong></dt><dd>you may automatically populate the editing field with the source text. This is pretty useful for the text containing many trade marks and other proper nouns you need to leave intact.</dd>
-		<dt><strong>Leave the segment empty</strong></dt><dd>OmegaT will leave the editing field blank. This option allows you to enter the translation without the need to remove the source text, thus saving you a pair of keystrokes (<code>Ctrl+A</code> and <code>Del</code>).</dd>
-		<dt><strong>Insert the best fuzzy match</strong></dt><dd>OmegaT will insert the translation of the string most similar to the current source, if it is above the similarity threshold you can adjust in this case.</dd>
-	</dl>
+    <li>
+      <p>Consider as translated segments identical to the original</p>
+    </li>
+  </ul>
+  <hr>
 
-<hr>
+  <h2><a name="auto_insert" id="auto_insert"></a>Automatic match insertion</h2>
 
-	<a name="validation" id="validation"></a>
-	<h1>Segments not to modify</h1>
+  <p>You translate your files by moving from segment to segment, at the same
+  time editing the current segment. When moving between segments, you may wish
+  the editing field were populated with the existing translation or with the
+  source text.</p>
 
-	<p>Documents you need to translate might contain trade marks, names or other proper nouns that have to be the same in translated documents. There are two strategies for segments that contain only such invariable text.</p>
+  <p>In <strong>Options → Editing Behaviour...</strong> OmegaT offers you the
+  following alternatives:</p>
 
-	<p>First, you may decide not to translate such segments, though if you may fail to remember these are invariant and translate them later during the translation review, as OmegaT would report these segments as not translated. This is the default.</p>
+  <table cellpadding="2" cellspacing="2">
+    <tr valign="top">
+      <td>
+        <p><strong>The source text</strong></p>
+      </td>
 
-	<p>Second, you may tell OmegaT to store the translation even if it's equal to the source text, so that OmegaT remembers you have reviewed the text and decided to translate it the same. Go to <strong>Options → Editing Behaviour...</strong> and tick the flag <strong>Allow translation to be equal to source</strong>.</p>
+      <td>
+        <p>you may automatically populate the editing field with the source
+        text. This is pretty useful for the text containing many trade marks
+        and other proper nouns you need to leave intact.</p>
+      </td>
+    </tr>
 
-	<hr>
+    <tr valign="top">
+      <td>
+        <p><strong>Leave the segment empty</strong></p>
+      </td>
 
-	<p><a href="legalNotices.html">Legal notices</a></p>
+      <td>
+        <p>OmegaT will leave the editing field blank. This option allows you to
+        enter the translation without the need to remove the source text, thus
+        saving you a pair of keystrokes (<code>Ctrl+A</code> and
+        <code>Del</code>)</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td>
+        <p><strong>Insert the best fuzzy match</strong></p>
+      </td>
+
+      <td>
+        <p>OmegaT will insert the translation of the string most similar to the
+        current source, if it is above the similarity threshold you can adjust
+        in this case.</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2><a name="validation" id="validation"></a>Segments not to modify</h2>
+
+  <p>Documents you need to translate might contain trade marks, names or other
+  proper nouns that have to be the same in translated documents. There are two
+  strategies for segments that contain only such invariable text.</p>
+
+  <p>First, you may decide not to translate such segments, though if you may
+  fail to remember these are invariant and translate them later during the
+  translation review, as OmegaT would report these segments as not translated.
+  This is the default.</p>
+
+  <p>Second, you may tell OmegaT to store the translation even if it's equal to
+  the source text, so that OmegaT remembers you have reviewed the text and
+  decided to keep the target segment equal to the source. Go to <strong>Options
+  → Editing Behaviour...</strong> and tick the flag <strong>Allow translation
+  to be equal to source</strong>.</p>
+  <hr>
+
+  <p><a href="legalNotices.html">Legal notices</a></p>
 </body>
 </html>

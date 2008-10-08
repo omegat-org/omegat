@@ -1,0 +1,145 @@
+<html>
+<head>
+  <link rel="stylesheet" href="OmegaT.css" type="text/css">
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <title>File Filters - OmegaT 1.8 User Manual</title>
+</head>
+
+<body>
+  <h2>Spell checker</h2>
+  <hr>
+
+  <ul>
+    <li>
+      <p><a href="#introduction">Introduction</a></p>
+    </li>
+
+    <li>
+      <p><a href="#edit_dialog">Spell checker options</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Hints">Hints</a></p>
+    </li>
+  </ul>
+
+  <p><br></p>
+
+  <h3><a name="introduction" id="introduction"></a> Introduction</h3>
+
+  <p><br></p>
+
+  <p>To correct the spelling mistakes during the translation, the spell checker
+  can be installed and used to indicate words in the target text, that need to
+  be corrected. This should come as no surprise: OmegaT uses the <a href=
+  "http://hunspell.sourceforge.net/">Hunspell</a> spell checker, used among
+  others in OpenOffice, Firefox and Thunderbird. If you use any of these
+  programs, you may already have the essentials of the spell checker installed
+  and just need to get OmegaT connected.</p>
+
+  <p>Once the spell checker has been activated and the vocabulary for the
+  target language is available, the spell checker will monitor target segments,
+  that are being displayed in the editing pane. Questionable words get
+  underlined in wiggly red:</p>
+
+  <p><br>
+  <br></p><img src="images/SpellcheckingText.png" name="grafika1" alt=
+  "Spell checking the text" align="left" width="535" height="302" border="0"
+  id="grafika1"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>Right clicking on a highlighted word (<i>Artund</i> above) opens a
+  drop-down menu, where the suggestions for the correction are listed (<i>Art
+  und</i>) . Additionally you can ask the spell checker to <b>ignore all</b>
+  the occurrences of the word or <b>add it to the dictionary</b>. Note that
+  this is an online spell checker: if you have to do a global spell check of
+  texts you will have to browse through the text yourself and watch for wiggly
+  lines. The alternative is to spell check the target files with an editor, in
+  other words outside of OmegaT so the changes you may make will not be in the
+  translation memory.</p>
+
+  <p><br>
+  <br></p>
+
+  <h3><a name="edit_dialog" id="edit_dialog"></a>Spell checker options</h3>
+
+  <p>Clicking on <b>Options &gt; Spell checking...</b> will open the window
+  below:</p>
+
+  <p><br></p><img src="images/SpellcheckerSetup2.png" name="grafika2" alt=
+  "Spel checker setup" align="left" width="498" height="325" border="0" id=
+  "grafika2"><br clear="left">
+
+  <p><br></p>
+
+  <p>The above example contains already the available vocabularies. Initially
+  it will be unpopulated as you need to specify where OmegaT should look for
+  the vocabularies. Clicking on <strong>Choose...</strong> opens a dialog
+  window, where you can select the correct subfolder - the <b>Dictionary file
+  directory</b> - which is <i>C:\Program Files\OpenOffice.org
+  2.4\share\dict\ooo</i> in the above example. This is of course the directory
+  with existing Open Source vocabularies. OmegaT recognizes valid dictionaries
+  in that location and displays them. If the dictionary you want to use is
+  already there and visible to OmegaT, you're done. If that is not the case,
+  that is the list of available languages is empty, you can click
+  <b>Install</b> and let OmegaT look for available vocabularies. Select the
+  vocabularies in the pop-up window and then click <b>install</b>. The selected
+  languages will then get installed and appear in the spell checker setup
+  window (this may take a while ).</p>
+
+  <p>Please note that the installer depends on the Internet list of
+  dictionaries. OmegaT gets this list from <a href=
+  "http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/">
+  OpenOffice.org/contrib/dictionaries</a>. In case it is out of date, you will
+  have to hunt for the vocabularies yourself. Look for files with the name,
+  indicating the language used and having extensions <i>aff</i> and <i>dic.</i>
+  The OpenOffice.org Wiki contains probably the largest vocabulary collection
+  in <a href=
+  "http://wiki.services.openoffice.org/wiki/Dictionaries">OpenOffice.org Wiki
+  Dictionaries</a>. The dictionnaries compatible with OmegaT are the "Hunspell"
+  or "Myspell" dictionnaries.</p>
+
+  <p>Make sure the language code of the target files corresponds to the
+  dictionary's language code: an FR-FR dictionary will not work with an FR
+  target setting. You need to change the setting to FR-FR to have the spell
+  checker recognize the correct dictionary for your target.</p>
+
+  <h3><a name="Hints" id="Hints"></a>Hints</h3>
+
+  <p>Possible reasons for the spell checker not working:</p>
+
+  <ol>
+    <li>
+      <p>The check box “Automatically check the spelling of text” must be
+      checked.</p>
+    </li>
+
+    <li>
+      <p>Check that the target language code of your project against the
+      available vocabularies in the setup window. The spell checker determines
+      the language to use from the target language code: if the target language
+      is Brazilian Portuguese (PT_BR), the subdirectory with vocabularies must
+      contain the two vocabulary files, called pt_br.aff and pt_br.dic.</p>
+    </li>
+  </ol>
+
+  <p>In case you have a large body of text already translated, but then realize
+  the target language code of the project does not match the spell checker's
+  language code (you specified en as the language, but there's no en
+  vocabularies) you can simply copy the two corresponding files (for instance
+  pt_PT.arr and pt_PT.dic) and rename the copies (to pt._BR.arr and pt_BR.dic).
+  You may also change the language code in the project (from pt to pt_BR) ,
+  however you will have to propagate this change through all the TMX files in
+  the project, which is not the safest way to proceed.</p>
+
+  <p>Note that Uninstall physically deletes the highlighted vocabularies. If
+  they are part of OpenOffice as in the above case, they will disappear from
+  that application too. If for whatever reason you have to do that now and
+  again, it may make sense to copy the files involved to a different folder,
+  reserved just for OmegaT purposes.</p>
+
+  <p><a href="legalNotices.html">Legal notices</a></p>
+</body>
+</html>

@@ -44,10 +44,10 @@ can be applied or not with a new option in Options/Font.
 ----------------------------------------------------------------------
  OmegaT 1.8.0 update 3 Changes
 ----------------------------------------------------------------------
-1.8.0 update 3 vs. 1.8.0 update 2
+1.8.1 vs. 1.8.0 update 2
 
 
-   6 Enhancements
+   7 Enhancements
    1 Bugfixe
 ----------------------------------------------------------------------
 1.8.0 update 3
@@ -61,6 +61,8 @@ can be applied or not with a new option in Options/Font.
   http://sourceforge.net/support/tracker.php?aid=1906198 
 
   Other enhancements:
+
+  - Revised manual
 
   - The xml:lang attribute can be translated with the HTML filter
   

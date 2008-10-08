@@ -1,375 +1,656 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<title>The User Interface - OmegaT 1.7.3 User Manual</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <title>The User Interface - OmegaT 1.8 User Manual</title>
 </head>
+
 <body>
-
-	<h1>The User Interface</h1>
-
-	<ul>
-		<li><a href="#item">User interface items</a>
-			<ul>
-				<li><a href="#most">Windows you'll use most of the time</a></li>
-				<li><a href="#some">Windows you may use now and then</a></li>
-				<li><a href="#dialogs">Dialogs you'll use to change your project settings</a></li>
-			</ul>
-		</li>
-		<li><a href="#OmegaT_Main_Window">OmegaT main window</a>
-			<ul>
-				<li><a href="#main">Main window operations</a></li>
-				<li><a href="#Editor">Editor pane</a>
-					<ul>
-						<li><a href="#segment_display">Segment display</a></li>
-						<li><a href="#edit_field">Editing field contents</a></li>
-					</ul>
-				</li>
-				<li><a href="#Match">Match viewer</a>
-					<ul>
-						<li><a href="#match_sel">Fuzzy match selection</a></li>
-						<li><a href="#match_oper">Fuzzy match operations</a></li>
-						<li><a href="#match_display">Match display and information</a></li>
-					</ul>
-				</li>
-				<li><a href="#Glossary">Glossary</a></li>
-				<li><a href="#menu">Main menu</a></li>
-				<li><a href="#bar">Status bar</a></li>
-			</ul>
-		</li>
-		<li><a href="#Other_windows">Other windows</a>
-			<ul>
-				<li><a href="#files">Project files</a>
-					<ul>
-						<li><a href="#proj_files">Project Files Window features</a></li>
-						<li><a href="#unique">Unique segments</a></li>
-						<li><a href="#adding_files">Adding files to the project</a></li>
-					</ul>
-				</li>
-				<li><a href="#search">Search window</a>
-					<ul>
-						<li><a href="#search_types">Search types</a></li>
-						<li><a href="#wildcards_regexp">Wildcards and regular expressions</a></li>
-						<li><a href="#search_display">Search results display</a></li>
-					</ul>
-				</li>
-				<li><a href="#tags">Tag validation</a></li>
-				<li><a href="#manual">Help browser</a>
-					<ul>
-						<li><a href="#help">Help browser navigation</a></li>
-						<li><a href="#offline">User manual offline browsing</a></li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-		<li><a href="#dialogs">Dialogs you'll use to change your project settings</a>
-			<ul>
-				<li><a href="projectProperties.html">Project Properties</a></li>
-				<li><a href="fontSettings.html">Font</a></li>
-				<li><a href="fileFilters.html">File Filters</a></li>
-				<li><a href="segmentation.html">Segmentation</a></li>
-				<li><a href="translationEditing.html">Editing behaviour</a></li>
-			</ul>
-		</li>
-	</ul>
-<hr>
-
-	<a name="item" id="item"></a>
-	<h1>User interface items</h1>
-
-	<a name="most" id="most"></a>
-	<h2>Windows you'll use most of the time</h2>
-
-	<dl>
-		<dt><strong>OmegaT main window</strong> (<a href="#OmegaT_Main_Window">...</a>)</dt>
-		<dd>contains the Main menu (<a href="#menu">...</a>), status bar (<a href="#bar">...</a>) and 3 panes:
-			<dl>
-				<dt>Editor pane (<a href="#Editor">...</a>)</dt>
-				<dd>where you type and edit the translation</dd>
-				<dt>Match Viewer pane (<a href="#Match">...</a>)</dt>
-				<dd>with the most similar segments from translation memories</dd>
-				<dt>Glossary Viewer pane (<a href="#Glossary">...</a>)</dt>
-				<dd>with the terminology translation</dd>
-			</dl>
-		</dd>
-		<dt><strong>Project Files window</strong> (<a href="#files">...</a>)</dt>
-		<dd>with the list of your translatable files</dd>
-		<dd>triggered with <code>Ctrl+L</code>, dismissed with <code>esc</code>
-		<dt><strong>Search window</strong> (<a href="#search">...</a>)</dt>
-		<dd>to search for specific segments in the project</dd>
-		<dd>triggered with <code>Ctrl+F</code>, dismissed with <code>esc</code></dd>
-	</dl>
-
-	<a name="some" id="some"></a>
-	<h2>Windows you may use now and then</h2>
-
-	<dl>
-		<dt><strong>Tag Validation window</strong> (<a href="#tags">...</a>)</dt>
-		<dd>to check for tag mistakes in translations</dd>
-		<dd>triggered with <code>Ctrl+T</code>, dismissed with <code>esc</code></dd>
-		<dt><strong>Help browser</strong> (<a href="#manual">...</a>)</dt>
-		<dd>to read the user manual</dd>
-		<dd>triggered with <code>F1</code>, dismissed with <code>esc</code></dd>
-	</dl>
-
-	<a name="dialogs" id="dialogs"></a>
-	<h2>Dialogs you'll use to change your project settings</h2>
-
-	<p>You'll use the dialogs below to change OmegaT and project settings. All of them are described in separate sections, below we just summarize what they can be used for and how you may call them up:</p>
-
-	<dl>
-		<dt><strong>Project Properties</strong> (<a href="projectProperties.html">...</a>)</dt>
-		<dd>to modify the project folders and languages</dd>
-		<dd>triggered with <code>Ctrl+E</code> or with <strong>Project → Properties...</strong>, dismissed with <code>esc</code></dd>
-		<dt><strong>Font</strong> (<a href="fontSettings.html">...</a>)</dt>
-		<dd>to modify the font OmegaT uses for displaying source, translation, matches and glossary terms</dd>
-		<dd>triggered with <strong>Options → Font...</strong>, dismissed with <code>esc</code></dd>
-		<dt><strong>File filters</strong> (<a href="fileFilters.html">...</a>)</dt>
-		<dd>to adjust the handling of supported file formats</dd>
-		<dd>triggered with <strong>Options → File Filters...</strong>, dismissed with <code>esc</code></dd>
-		<dt><strong>Segmentation</strong> (<a href="segmentation.html">...</a>)</dt>
-		<dd>to change the way your text is segmented into sentences</dd>
-		<dd>triggered with <strong>Options → Segmentation</strong>, dismissed with <code>esc</code></dd>
-		<dt><strong>Editing Behaviour</strong> (<a href="translationEditing.html">...</a>)</dt>
-		<dd>to change how OmegaT behaves when you iterate between the segments</dd>
-		<dd>triggered with <strong>Options → Editing Behaviour...</strong>, dismissed with <code>esc</code></dd>
-	</dl>
-
-<hr>
-
-	<a name="OmegaT_Main_Window" id="OmegaT_Main_Window"></a>
-	<h1>OmegaT main window</h1>
-
-	<a name="main" id="main"></a>
-	<h2>Main window operations</h2>
-	
-	<p>Main window consists of three panes, main menu and a status bar. You can change the position of any pane or even undock it to a separate window by dragging the pane by its name. Depending on the pane status, 5 different signs can appear at the top right corner of the pane. Putting the mouse pointer over each sign should display a tool tip.</p>
-
-	<p>
-		<img src="images/Minimize.gif" name="graphics1" alt="Minimize" align="bottom" width="18" height="18" border="0" id="graphics1"> reduces the pane to show only its name at the bottom near the status bar.<br>
-		<img src="images/Maximize.gif" name="graphics2" alt="Maximize" align="bottom" width="18" height="18" border="0" id="graphics2"> makes the pane take all the available window space.<br>
-		<img src="images/Restore.gif" name="graphics3" alt="Restore" align="bottom" width="18" height="18" border="0" id="graphics3"> puts the pane back where it was before before it was minimized or maximized.<br>
-		<img src="images/Undock.gif" name="graphics4" alt="Undock" align="bottom" width="18" height="18" border="0" id="graphics4"> detaches the pane from the main window to a separate window of its own.<br>
-		<img src="images/Dock.gif" name="graphics5" alt="Dock" align="bottom" width="18" height="18" border="0" id="graphics5"> puts the pane back within the main window.
-	</p>
-
-	<p>It is also possible to put the panes so that they overlap. In this case the panes will display a tab at their top. Clicking on the tab will put the pane on the foreground. The separators between the panes can be dragged to resize panes.</p>
-
-	<a name="Editor" id="Editor"></a>
-	<h2>Editor pane</h2>
-
-	<p>Here you'll type and edit the translation.</p>
-	
-	<a name="segment_display" id="segment_display"></a>
-	<h3>Segment display</h3>
-	
-	<p>Editor pane displays the text of the partially translated document: the text already translated is displayed translated, and the text not yet translated is displayed in the original language. The displayed text is split into segments, and you may scroll through the document and double-click on any segment to edit it.</p>
-	
-	<p>One of the segments is active. It is the only one displayed in two parts: the upper part is in the original language, in bold characters with a green background color, the lower part is the editing field, delimited by two markers: the leftmost marker is <strong><code>&lt;segment nnnn&gt;</code></strong> where <strong><code>nnnn</code></strong> is a number of the segment in the project, the rightmost marker is <strong><code>&lt;end segment&gt;</code></strong>.</p>
-	
-	<p>You should use the upper part as a reference and overwrite or modify the Contents of the editing field to contain the translation.</p>
-	
-	<table border="1">
-		<tr><td>
-			<table border="0" cellpadding="3">
-				<tr><td>	This sentence has been translated.</td></tr>
-				<tr><td>	This sentence has been translated too.</td></tr>
-				<tr bgcolor="#99ff99"><td><strong>Cette phrase est en train d'être traduite.</strong></td></tr>
-				<tr><td><strong><code>&lt;segment 0003&gt;</code></strong>	[Here you should type your translation]	<strong><code>&lt;end segment&gt;</code></strong></td></tr>
-				<tr><td>	This sentence will be translated next.</td></tr>
-			</table>
-		</td></tr>
-	</table>
-
-	<a name="edit_field" id="edit_field"></a>
-	<h3>Editing field contents</h3>
-
-	<p>Depending on the <a href="translationEditing.html">Editing behaviour</a> the editing field for the untranslated segment may be empty, contain the source text or the translation of the string most similar to the one you are going to translate.</p>
-
-	<p>When you move to another segment, the translation is validated and stored.</p>
-	
-	<p>If you want the segment to stay untranslated, simply make the editing field empty by removing all the text (select all with <code>Ctrl+A</code> and delete with <code>Del</code>).</p>
-	
-	<p>Depending on the options you set in <a href="translationEditing.html">Editing Behaviour</a> settings, OmegaT may remember a translation when it is identical to the source. It is useful for documents that contain trade marks, names or other proper nouns, or parts in a third language that does not require translation.</p>
-
-	<p>See <a href="translationEditing.html">Translation editing</a> for more details.</p>
-
-	<a name="Match" id="Match"></a>
-	<h2>Match viewer</h2>
-
-	<p>Match viewer shows the most similar segments from <a href="translationMemories.html">translation memories</a>, both from project translation memory created while you translate your project, and from legacy translation memories you import from your earlier jobs, or you may receive from your client or translation agency.</p>
-	
-	<a name="match_sel" id="match_sel"></a>
-	<h3>Fuzzy match selection</h3>
-	
-	<p>When you move to the next segment, the first fuzzy match (the one with the best matching percentage) is automatically selected. You may <a href="menu.html#shortcuts">select</a> another one by pressing <code>Ctrl+2</code>, <code>3</code>, <code>4</code>, or <code>5</code>, depending on the number of available matches.</p>
-
-	<a name="match_oper" id="match_oper"></a>
-	<h3>Fuzzy match operations</h3>
-	
-	<p>To use the <strong>selected</strong> match in your translation, use <code><a href="menu.html#shortcuts">Ctrl+R</a></code> to replace the target field with that match or use <code><a href="menu.html#shortcuts">Ctrl+I</a></code> to insert it at the cursor position.</p>
-	
-	<a name="match_display" id="match_display"></a>
-	<h3>Match display and information</h3>
-	
-	<p>The matching percentage is roughly equivalent to taking the number of common words in the matched and the matching segment and dividing by the number of words in the longest of the two. The selected fuzzy match will be highlighted in <strong>bold</strong>, words that are missing from the segment you translate will be colored in <strong><font color="blue">blue</font></strong> and word adjacent to missing parts, will be <strong><font color="green">green</font></strong>.</p>
-
-	<p>Consider the segment:</p>
-
-	<pre>	<strong>Information about Java &amp; OmegaT</strong></pre>
-
-	<p>The matching segment:</p>
-
-	<pre>	<strong>General notes about Java &amp; OmegaT</strong></pre>
-
-	<p>will be colored:</p>
-
-	<pre>	<strong><font color="blue">General notes</font> <font color="green">about</font> Java &amp; OmegaT</strong></pre>
-
-	<p>and the percentage should be around 3/5=<strong>60%</strong></p>
-
-	<a name="Glossary" id="Glossary"></a>
-	<h2>Glossary</h2>
-
-	<p>Glossary pane features terminology translation loaded from <a href="glossaries.html">glossary files</a>.</p>
-	
-	<p>It shows translation of terms found in the current segment, but it only shows it for reference purposes, and does not allow to insert or replace the term with its translation.</p>
-	
-	<p>OmegaT also supports multi-word terms, but in a very basic manner: if both words of a term are found in current segment, the term is shown. The format for terminology in the Glossary pane is:</p>
-
-	<pre> source term = term translation	Comment about the term, if any</pre>
-
-	<a name="menu" id="menu"></a>
-	<h2>Main menu</h2>
-
-	<p>Obviously, you can use main menu to access all OmegaT functions. See the <a href="menu.html#menu">Main Menu</a> appendix for a full description of all menu's and menu items.</p>
-
-	<p>The most often used functions are accessible with <a href="menu.html#shortcuts">keyboard shortcuts</a>, so once you get accustomed to them, there will no longer be any need to browse through the menus while translating.</p>
-	
-	<a name="bar" id="bar"></a>
-	<h2>Status bar</h2>
-
-	<p>The status bar displays work flow related messages at the bottom of the main window. This bar gives the user feedback messages about specific operations that are in progress. It also displays the number of fuzzy and glossary matches for the current segment.</p>
-
-<hr>
-
-	<a name="Other_windows" id="Other_windows"></a>
-	<h1>Other windows</h1>
-
-	<a name="files" id="files"></a>
-	<h2>Project files</h2>
-
-	<p>Project Files window lists the project files and displays other project information. It is displayed automatically when OmegaT loads a project. To close it, use <code>esc</code>, to open it or call it to the front use <code>Ctrl+L</code>.</p>
-	
-	<a name="proj_files" id="proj_files"></a>
-	<h3>Project Files Window features</h3>
-
-	<p>The following information is displayed.</p>
-	
-	<ul>
-		<li>the list of all the translatable files in the project.<br>
-		These are the files present in the source files folder, that <a href="filesToTranslate.html">OmegaT can handle</a>.<br>
-		Clicking on any file will open it for translation</li>
-		<li>the file currently available in the Editor pane is highlighted with a blue background</li>
-		<li>the number of segments in each file is shown next to file name.</li>
-		<li>the number of unique segments in the whole project.</li>
-		<li>the number of unique segments already translated. It is updated each time you translate a segment.</li>
-	</ul>
-
-	<a name="unique" id="unique"></a>
-	<h3>Unique segments</h3>
-	
-	<p>The set of <strong>Unique</strong> segments is computed by taking all the segments and removing all the duplicate segments equal up to letter case ("Run" and "run" are thought different).</p>
-
-	<p>The difference between "Number of segments" and "Number of unique segments" gives you a rough idea of the number of repetitions in the text. Note however, that the numbers do not say how relevant the repetitions are: it could mean relatively long sentences repeated a number of times (very lucky!) or it could describe a table of keywords (not as lucky...)</p>
-	
-	<p>The <code>project_stats.txt</code> located in the <code>/omegat</code> folder of your project contains more detailed segment information per file.</p>
-
-	<p>It is possible to modify the number of segments/unique segments by modifying the segmentation rules. Such modifications should _never_ take place after you started translating the project. See the <a href="segmentation.html">Segmentation rules</a> for more information.</p>
-
-	<a name="adding_files" id="adding_files"></a>
-	<h3>Adding files to the project</h3>
-	
-	<p>You may add source files to the project by clicking on the "Import Source Files..." button. It copies the selected files to the <code>/source</code> directory and reloads the project to load the new files. You can also add source files from internet pages, written in MediaWiki, by clicking on "Import from MediaWiki" button and providing the corresponding URL.</p>
-
-	<a name="search" id="search"></a>
-	<h2>Search window</h2>
-
-	<p>You'll use search window to find specific segments in the project. There can be several search windows open simultaneously. To open a new one, use <code><a href= "menu.html#shortcuts">Ctrl+F</a></code> in main window.</p>
-	
-	<p>The search window consists of a text field for search string or keywords, flags and radio buttons for setting up the search and a display area containing the results of the search.</p>
-
-	<a name="search_types" id="search_types"></a>
-	<h3>Search types</h3>
-	
-	<dl>
-		<dt>There are two <a href="searches.html#searchmethods">types</a> of search available:</dt>
-		<dt><strong>exact searches</strong></dt>
-		<dd>look for the specified query string within the current project or in any directory or directory tree.</dd>
-		<dt><strong>keyword searches</strong></dt>
-		<dd>examine the current project and return all the segments containing all of the query words, in any order.</dd>
-	</dl>
-
-	<p>Searches are made on both the source and translation.</p>
-
-	<p>You may also search within any directory, but bear in mind that OmegaT can search only in <a href="filesToTranslate.html">files it supports</a>.</p>
-	
-	<a name="wildcards_regexp" id="wildcards_regexp"></a>
-	<h3>Wildcards and regular expressions</h3>
-	
-	<p>Searches supports the <a href="searches.html#usingwildcards">wild card characters</a> * and ? as well as <a href="searches.html#usingregularexpressions">regular expressions</a>.</p>
-
-	<a name="search_display" id="search_display"></a>
-	<h3>Search results display</h3>
-	
-	<p>Pressing the search button after entering a string in the search field will display all the segments in the project that include the searched string. As OmegaT handles all the identical segments as one entity, only the first unique segment is shown.</p>
-	
-	<p>The segments are displayed in order of appearance in the project. Translated segments will be displayed with the original text at the top and the translated text at the bottom, non translated segments will be displayed in original text only.</p>
-
-	<p>You may click on a segment to bring it up in the Editor for modification. Then you may switch back to Search window and go to the next found segment to modify it too. Such a pattern is useful to do terminology updates.</p>
-	
-	<a name="tags" id="tags"></a>
-	<h2>Tag validation</h2>
-
-	<p>The tag validation window detects the tag errors in the translation and lists them.</p>
-	
-	<p>To open the window, use <code><a href="menu.html#shortcuts">Ctrl+T</a></code>.</p>
-	
-	<p>The window features a 3 column table with:</p>
-
-	<ul>
-		<li>a link to the segment</li>
-		<li>contents of the original segment</li>
-		<li>contents of the translated segment</li>
-	</ul>
-	
-	<p>The tags are highlighted in bold blue for easy comparison between the original and the translated contents.
-
-	<p>Click on the link to activate the segment in the Editor.</p>
-	
-	<p>Correct the error if necessary and press <code><a href="menu.html#shortcuts">Ctrl+T</a></code> to return to the tag validation window to correct other errors.</p>
-
-	<p><a href="formattedText.html#intro">Tag</a> errors are <a href="formattedText.html#tag_operation">tag manipulations</a> in the translation that do not reproduce the same tag order and number as in the original segment. Some tag manipulations are necessary and are benign, some will cause problems when the translated document is created.</p>
-
-	<p>Tags generally represent some kind of formatting in the original text. <strong>Simplifying the original text formating</strong> greatly contributes to reducing the number of tags.</p>
-	
-	<a name="manual" id="manual"></a>
-	<h2>Help browser</h2>
-
-	<p>The help browser (which displays this manual) can be called by pressing <a href="menu.html#shortcuts">F1</a> or calling <strong>Help → User Manual...</strong> in <a href="menu.html">main menu</a>.</p>
-	
-	<a name="help" id="help"></a>
-	<h3>Help browser navigation</h3>
-	
-	<p>In the window you'll see the manual and two buttons: <strong>Back</strong> and <strong>Contents</strong>. The user manual is an HTML document with links to different chapters. Clicking on a link as you would do in a web browser brings the desired page to the front.</p>
-
-	<a name="offline" id="offline"></a>
-	<h3>User manual offline browsing</h3>
-
-	<p>The user manual is located in the <code>doc</code> subfolder under the OmegaT installation folder, so you may view, for instance, English documentation, by opening the <code>doc/en/index.html</code> file in your browser. This way you will be able to follow external links too, as the built-in help browser does not accept external Internet links.</p>
-
-<hr>
-
-	<p><a href="legalNotices.html">Legal notices</a></p>
+  <h2>The User Interface</h2>
+
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <ul>
+          <li>
+            <p><a href="#item">User interface items</a></p>
+
+            <ul>
+              <li>
+                <p><a href="#most">Windows you'll use most of the time</a></p>
+              </li>
+
+              <li>
+                <p><a href="#some">Windows you may use now and then</a></p>
+              </li>
+
+              <li>
+                <p><a href="#dialogs">Dialogs you'll use to change your project
+                settings</a></p>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <p><a href="#OmegaT_Main_Window">OmegaT main window</a></p>
+
+            <ul>
+              <li>
+                <p><a href="#Editor">Editor pane</a></p>
+              </li>
+
+              <li>
+                <p><a href="#Match">Match viewer</a></p>
+              </li>
+
+              <li>
+                <p><a href="#Glossary">Glossary</a></p>
+              </li>
+
+              <li>
+                <p><a href="#menu">Main menu</a></p>
+              </li>
+
+              <li>
+                <p><a href="#bar">Status bar</a></p>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <p><a href="#dialogs">Dialogs you'll use to change your project
+            settings</a></p>
+          </li>
+        </ul>
+      </td>
+
+      <td>
+        <ul>
+          <li>
+            <p><a href="#Other_windows">Other windows</a></p>
+
+            <ul>
+              <li>
+                <p><a href="#files">Project files</a></p>
+
+                <ul>
+                  <li>
+                    <p><a href="#proj_files">Project Files Window
+                    features</a></p>
+                  </li>
+
+                  <li>
+                    <p><a href="#unique">Unique segments</a></p>
+                  </li>
+
+                  <li>
+                    <p><a href="#adding_files">Adding files to the
+                    project</a></p>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <p><a href="#search">Search window</a></p>
+
+                <ul>
+                  <li>
+                    <p><a href="#search_types">Search types</a></p>
+                  </li>
+
+                  <li>
+                    <p><a href="#wildcards_regexp">Wildcards and regular
+                    expressions</a></p>
+                  </li>
+
+                  <li>
+                    <p><a href="#search_display">Search results display</a></p>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <p><a href="#tag_validation">Tag validation</a></p>
+              </li>
+
+              <li>
+                <p><a href="#manual">Help browser</a></p>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2><a name="item" id="item"></a>User interface items</h2>
+
+  <h3><a name="most" id="most"></a>Windows you'll use most of the time</h3>
+
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <col width="43*">
+    <col width="213*">
+
+    <tr>
+      <td width="24%">
+        <a name="OmegaT_Main_Window" id="OmegaT_Main_Window"></a>
+
+        <p><strong>OmegaT main window</strong></p>
+      </td>
+
+      <td width="83%">
+        <p>contains the Main menu, status bar and 3 panes:</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="24%">
+        <p>--- Editor pane</p>
+      </td>
+
+      <td width="83%">
+        <p>where you type and edit the translation</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="24%">
+        <p>--- Match Viewer pane</p>
+      </td>
+
+      <td width="83%">
+        <p>with the most similar segments from translation memories</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="24%">
+        <p>--- Glossary Viewer pane</p>
+      </td>
+
+      <td width="83%">
+        <p>with the terminology translation</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="24%">
+        <p><strong>Project Files window</strong></p>
+      </td>
+
+      <td width="83%">
+        <dl>
+          <dd>with the list of your translatable files, triggered with
+          <code>Ctrl+L</code>, closed with <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="24%">
+        <dl>
+          <dt><strong>Search window</strong></dt>
+        </dl>
+      </td>
+
+      <td width="83%">
+        <dl>
+          <dd>to search for specific segments in the project, riggered with
+          <code>Ctrl+F</code>, closed with <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+  </table>
+
+  <h3><a name="some" id="some"></a>Windows you may use now and then</h3>
+
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <col width="43*">
+    <col width="213*">
+
+    <tr>
+      <td width="23%">
+        <dl>
+          <dt><strong>Tag Validation window</strong></dt>
+        </dl>
+      </td>
+
+      <td width="83%">
+        <dl>
+          <dd>to check for tag mistakes in translations, triggered with
+          <code>Ctrl+T</code>, closed with <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="23%">
+        <dl>
+          <dt><strong>Help browser</strong></dt>
+        </dl>
+      </td>
+
+      <td width="83%">
+        <dl>
+          <dd>to read the user manual, closed with <code><b>esc</b></code></dd>
+        </dl>
+      </td>
+    </tr>
+  </table>
+
+  <h3><a name="dialogs" id="dialogs"></a>Dialogs you'll use to change your
+  project settings</h3>
+
+  <p>You'll use the dialogs below to change OmegaT and project settings. All of
+  them are described in separate sections, below we just summarize what they
+  can be used for and how you may call them up:</p>
+
+  <p><br></p>
+
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <col width="43*">
+    <col width="213*">
+
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>Project Properties</strong></dt>
+        </dl>
+      </td>
+
+      <td width="83%">
+        <dl>
+          <dd>to modify the project folders and languages , triggered with
+          <code>Ctrl+E</code> or with <strong>Project → Properties...</strong>,
+          closed with <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>Font</strong></dt>
+        </dl>
+      </td>
+
+      <td width="83%">
+        <dl>
+          <dd>to modify the font OmegaT uses for displaying source,
+          translation, matches and glossary terms, triggered with
+          <strong>Options → Font...</strong>, closed with <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>File filters</strong></dt>
+        </dl>
+      </td>
+
+      <td width="83%">
+        <dl>
+          <dd>to adjust the handling of supported file formats, triggered with
+          <strong>Options → File Filters...</strong>, closed with
+          <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>Segmentation</strong></dt>
+        </dl>
+      </td>
+
+      <td width="83%">
+        <dl>
+          <dd>to change the way your text is segmented into sentences,
+          triggered with <strong>Options → Segmentation</strong>, closed with
+          <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>Editing Behaviour</strong></dt>
+        </dl>
+      </td>
+
+      <td width="83%">
+        <dl>
+          <dd>to change how OmegaT behaves when you iterate between the
+          segments, triggered with <strong>Options → Editing
+          Behaviour...</strong>, closed with <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2>OmegaT main window</h2><img src="images/OmegaT_panes.png" name="grafika1"
+  alt="OmegaT panes" align="left" width="756" height="577" border="0" id=
+  "grafika1"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>Main window consists of three panes, main menu and a status bar.You can
+  change the position of any pane or even undock it to a separate window by
+  dragging the pane by its name. Depending on the pane status, different signs
+  can appear at its top right corner:</p>
+
+  <p><img src="images/Minimize.gif" name="graphics1" alt="Minimize" align=
+  "bottom" width="18" height="18" border="0" id="graphics1"> reduces the pane
+  to show only its name at the bottom near the status bar.<br>
+  <img src="images/Maximize.gif" name="graphics2" alt="Maximize" align="bottom"
+  width="18" height="18" border="0" id="graphics2"> makes the pane take all the
+  available window space.<br>
+  <img src="images/Restore.gif" name="graphics3" alt="Restore" align="bottom"
+  width="18" height="18" border="0" id="graphics3"> puts the pane back where it
+  was before before it was minimized or maximized.<br>
+  <img src="images/Undock.gif" name="graphics4" alt="Undock" align="bottom"
+  width="18" height="18" border="0" id="graphics4"> detaches the pane from the
+  main window to a separate window of its own.<br>
+  <img src="images/Dock.gif" name="graphics5" alt="Dock" align="bottom" width=
+  "18" height="18" border="0" id="graphics5"> puts the pane back within the
+  main window.</p>
+
+  <p>It is also possible to put the panes so that they overlap. In this case
+  the panes will display a tab at their top. Clicking on the tab will put the
+  pane on the foreground. The separators between the panes can be dragged to
+  resize panes.</p>
+
+  <h3><a name="Editor" id="Editor"></a>Editor pane</h3>
+
+  <p>Here you'll type and edit the translation. Editor pane displays the text
+  of the partially translated document: the text already translated is
+  displayed translated, and the text not yet translated is displayed in the
+  original language. The displayed text is split into segments, and you may
+  scroll through the document and double-click on any segment to edit it. In
+  the above case the already translated segments are shown in yellow, but you
+  may change the setup to suit your preferences (see menu <a href=
+  "menu.html">View).</a></p>
+
+  <p>One of the segments is the active segment. It is the only one that is
+  displayed in two parts: the upper part is in the original language, in bold
+  characters with a green background color, the lower part is the editing
+  field, delimited by two markers: the leftmost marker is
+  <strong><code>&lt;segment nnnn&gt;</code></strong> where
+  <strong><code>nnnn</code></strong> is a number of the segment in the project,
+  the rightmost marker is <strong><code>&lt;end segment&gt;</code></strong>.
+  You use the upper part as a reference and overwrite or modify the contents of
+  the editing field with your translation.</p>
+
+  <p>Depending on the <a href="translationEditing.html">Editing behaviour</a>
+  the editing field for the untranslated segment may be empty, contain the
+  source text or the translation of the string most similar to the one you are
+  going to translate. When you move to another segment, the translation is
+  validated and stored. If you want the segment to stay untranslated, simply
+  make the editing field empty by removing all the text (select all with
+  <code>Ctrl+A</code> and delete with <code>Del</code>). OmegaT may remember a
+  translation when it is identical to the source. It is useful for documents
+  that contain trade marks, names or other proper nouns, or parts in a third
+  language that does not require translation.</p>
+
+  <p>See <a href="translationEditing.html">Translation editing</a> for more
+  details.</p>
+
+  <h3><a name="Match" id="Match"></a>Match viewer</h3><img src=
+  "images/MatchesPane.png" name="grafika2" alt="OmegaT Match pane" align="left"
+  width="417" height="356" border="0" id="grafika2"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>Match viewer shows the most similar segments from <a href=
+  "translationMemories.html">translation memories</a>, both from project
+  translation memory created while you translate your project, and from legacy
+  translation memories you import from your earlier jobs, or you may receive
+  from your client or translation agency.</p>
+
+  <p>When you move to the next segment, the first fuzzy match (the one with the
+  best matching percentage) is automatically selected. You may <a href=
+  "menu.html#shortcuts">select</a> another one by pressing <code>Ctrl+2</code>,
+  <code>3</code>, <code>4</code>, or <code>5.</code>Of course, pressing
+  <code>Ctrl+5</code> will do nothing, if there is no match #5.</p>
+
+  <p>To use the <strong>selected</strong> match in your translation, use
+  <code><a href="menu.html#shortcuts">Ctrl+R</a></code> to replace the target
+  field with that match or use <code><a href=
+  "menu.html#shortcuts">Ctrl+I</a></code> to insert it at the cursor
+  position.</p>
+
+  <p>The matching percentage is roughly equivalent to taking the number of
+  common words in the matched and the matching segment and dividing by the
+  number of words in the longest of the two. The selected fuzzy match will be
+  highlighted in <strong>bold</strong>, words that are missing from the segment
+  you translate will be colored in <strong><font color=
+  "#0000FF">blue</font></strong> and word adjacent to missing parts in
+  <font color="#00FF00"><b>green</b></font>. In the above example the source
+  segment is <strong><i>Information about Java &amp; OmegaT.</i></strong> The
+  top match is 75%, because 3 out of 4 words (with &amp; getting ignored)
+  match. The line with the matching percentage also includes to source TMX,
+  where the match has been found. If there's no file name displayed, the source
+  is the default project translation memory. Orphan segments (the match #4)
+  describe segments in the default project translation memory without the
+  corresponding source segment.</p>
+
+  <p><br>
+  <br></p>
+
+  <h3><a name="Glossary" id="Glossary"></a>Glossary</h3>
+
+  <p>Glossary pane features terminology translation loaded from <a href=
+  "glossaries.html">glossary files</a>. It shows translation of terms found in
+  the current segment, but it only shows it for reference purposes, and does
+  not allow to insert or replace the term with its translation.</p><img src=
+  "images/Glossary_pane.png" name="grafika3" alt="OmegaT Glossary pane" align=
+  "left" width="328" height="150" border="0" id="grafika3"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>The source segment in the above example was “<i>In most translation jobs
+  it is considered important to have the translated document look similar to
+  the original.</i>”, and two words in it, document and translation were found
+  in the glossary file. OmegaT also supports multi-word terms, but in a very
+  basic manner: if both words of a term are found in current segment, the term
+  will be displayed.</p>
+
+  <h3><a name="menu" id="menu"></a>Main menu</h3>
+
+  <p>Obviously, you can use main menu to access all OmegaT functions. See the
+  <a href="menu.html#menu">Main Menu</a> appendix for a full description of all
+  menu's and menu items. The most often used functions are accessible with
+  <a href="menu.html#shortcuts">keyboard shortcuts</a>, so once you get
+  accustomed to them, there will no longer be any need to browse through the
+  menus while translating.</p>
+
+  <h3><a name="bar" id="bar"></a>Status bar</h3>
+
+  <p>The status bar displays work flow related messages at the bottom of the
+  main window. This bar gives the user feedback messages about specific
+  operations that are in progress. It also displays the number of fuzzy and
+  glossary matches for the current segment.</p>
+  <hr>
+
+  <h2><a name="other_windows" id="other_windows"></a>Other windows</h2>
+
+  <h3><a name="files" id="files"></a>Project files</h3>
+
+  <p>Project Files window lists the project files and displays other project
+  information. It is displayed automatically when OmegaT loads a project. To
+  close it, use <code>esc</code>, to open it or call it to the front use
+  <code>Ctrl+L</code>.</p>
+
+  <h3><a name="proj_files" id="proj_files"></a>Project Files Window
+  features</h3>
+
+  <p>The following information is displayed.</p>
+
+  <ul>
+    <li>
+      <p>the list of all the translatable files in the project.These are the
+      files present in the source files folder, that <a href=
+      "filesToTranslate.html">OmegaT can handle</a>. Clicking on any file will
+      open it for translation</p>
+    </li>
+
+    <li>
+      <p>the file currently available in the Editor pane is highlighted with a
+      blue background</p>
+    </li>
+
+    <li>
+      <p>the number of segments in each file is shown next to file name.</p>
+    </li>
+
+    <li>
+      <p>the number of unique segments in the whole project.</p>
+    </li>
+
+    <li>
+      <p>the number of unique segments already translated. It is updated each
+      time you translate a segment.</p>
+    </li>
+  </ul>
+
+  <h3><a name="unique" id="unique"></a>Unique segments</h3>
+
+  <p>The set of <strong>Unique</strong> segments is computed by taking all the
+  segments and removing all the duplicate segments equal up to letter case
+  ("Run" and "run" are thought different).</p>
+
+  <p>The difference between "Number of segments" and "Number of unique
+  segments" gives you a rough idea of the number of repetitions in the text.
+  Note however, that the numbers do not say how relevant the repetitions are:
+  it could mean relatively long sentences repeated a number of times (very
+  lucky!) or it could describe a table of keywords (not as lucky...) The
+  <code>project_stats.txt</code> located in the <code>/omegat</code> folder of
+  your project contains more detailed segment information per file.</p>
+
+  <p>It is possible to modify the number of segments/unique segments by
+  modifying the segmentation rules. This, however, should be avoided at all
+  costs, once you have started translating the project. See the <a href=
+  "segmentation.html">Segmentation rules</a> for more information.</p>
+
+  <h3><a name="adding_files" id="adding_files"></a>Adding files to the
+  project</h3>
+
+  <p>You may add source files to the project by clicking on the "Import Source
+  Files..." button. It copies the selected files to the <code>/source</code>
+  directory and reloads the project to load the new files. You can also add
+  source files from internet pages, written in MediaWiki, by clicking on
+  "Import from MediaWiki" button and providing the corresponding URL.</p>
+
+  <h3><a name="search" id="search"></a>Search window</h3>
+
+  <p>You'll use search window to find specific segments in the project. There
+  can be several search windows open simultaneously. To open a new one, use
+  <code><a href="menu.html#shortcuts">Ctrl+F</a></code> in main window. The
+  search window consists of a text field for search string or keywords, flags
+  and radio buttons for setting up the search and a display area containing the
+  results of the search.</p>
+
+  <h3><a name="search_types" id="search_types"></a>Search types</h3>
+
+  <dl>
+    <dt>There are two <a href="searches.html#searchmethods">types</a> of search
+    available:</dt>
+
+    <dt><strong>exact searches -</strong> look for the specified query string
+    within the current project or in any directory or directory tree.</dt>
+
+    <dt><strong>keyword searches -</strong> examine the current project and
+    return all the segments containing all of the query words, in any
+    order.</dt>
+  </dl>
+
+  <p>Searches are made on both the source and translation. You may also search
+  within any directory, but bear in mind that OmegaT can search only in
+  <a href="filesToTranslate.html">files it supports</a>.</p>
+
+  <h3><a name="wildcards_regexp" id="wildcards_regexp"></a>Wildcards and
+  regular expressions</h3>
+
+  <p>Searches supports the <a href="searches.html#usingwildcards">wild card
+  characters</a> * and ? as well as <a href=
+  "searches.html#usingregularexpressions">regular expressions</a>.</p>
+
+  <h3><a name="search_display" id="search_display"></a>Search results
+  display</h3>
+
+  <p>Pressing the search button after entering a string in the search field
+  will display all the segments in the project that include the searched
+  string. As OmegaT handles all the identical segments as one entity, only the
+  first unique segment is shown. The segments are displayed in order of
+  appearance in the project. Translated segments will be displayed with the
+  original text at the top and the translated text at the bottom, non
+  translated segments will be displayed in original text only.</p>
+
+  <p>You may click on a segment to bring it up in the Editor for modification.
+  Then you may switch back to Search window and go to the next found segment to
+  modify it too. Such a pattern is useful to do terminology updates.</p>
+
+  <h3><a name="tag_validation" id="tag_validation"></a>Tag validation</h3>
+
+  <p>The tag validation window detects the tag errors in the translation and
+  lists them. To open the window, use <code><a href=
+  "menu.html#shortcuts">Ctrl+T</a></code>. The window features a 3 column table
+  with a a link to the segment and its source and target contents:</p>
+
+  <p><img src="images/TagValidator.png" name="grafika4" alt=
+  "OmegaT Tag Validator" align="left" width="556" height="318" border="0" id=
+  "grafika4"><br clear="left">
+  <br>
+  <br></p>
+
+  <p>The tags are highlighted in bold blue for easy comparison between the
+  original and the translated contents. Click on the link to jump to the
+  segment in the Editor pane. Correct the error if necessary and press
+  <code><a href="menu.html#shortcuts">Ctrl+T</a></code> to return to the tag
+  validation window to correct other errors. In the first and third case above
+  tags are paired incorrectly, and in the second case the starting tag is
+  missing the &lt; sign.</p>
+
+  <p><a href="formattedText.html#intro">Tag</a> errors are <a href=
+  "formattedText.html#tag_operation">tag manipulations</a> in the translation
+  that do not reproduce the same tag order and number as in the original
+  segment. Some tag manipulations are necessary and are benign, some will cause
+  problems when the translated document is created. Tags generally represent
+  some kind of formatting in the original text. <strong>Simplifying the
+  original text formating</strong> greatly contributes to reducing the number
+  of tags.</p>
+
+  <h3>Help browser</h3>
+
+  <p>The help browser (which displays this manual) can be called by pressing
+  <a href="menu.html#shortcuts">F1</a> or calling <strong>Help → User
+  Manual...</strong> in <a href="menu.html">main menu</a>.</p>
+
+  <h3><a name="manual" id="manual"></a>Help browser navigation</h3>
+
+  <p>In the window you'll see the manual and two buttons: <strong>Back</strong>
+  and <strong>Contents</strong>. The user manual is an HTML document with links
+  to different chapters. Clicking on a link as you would do in a web browser
+  brings the desired page to the front.</p>
+
+  <h3>User manual off line browsing</h3>
+
+  <p>The user manual is located in the <code>doc</code> subfolder under the
+  OmegaT installation folder, so you may view, for instance, English
+  documentation, by opening the <code>doc/en/index.html</code> file in your
+  browser. This way you will be able to follow external links too, as the
+  built-in help browser does not accept external Internet links.</p>
+  <hr>
+
+  <p><a href="legalNotices.html">Legal notices</a></p>
 </body>
 </html>

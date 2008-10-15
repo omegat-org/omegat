@@ -70,7 +70,7 @@ can be applied or not with a new option in Options/Font.
   
   Bug fixes:
   - Extra space in each segment in the German localization
-  http://sourceforge.net/support/tracker.php?aid=2169106 
+  http://sourceforge.net/support/tracker.php?aid=2169447  
 
 ----------------------------------------------------------------------
  OmegaT 1.8.0 update 2 Changes

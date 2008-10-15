@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.0.0 Changes
 ----------------------------------------------------------------------
-2.0.0 vs. 1.8.0 update 3 
+2.0.0 vs. 1.8.1 
 
 
   7 Enhancements
@@ -42,15 +42,13 @@ meta content is to be translated
 can be applied or not with a new option in Options/Font.
 
 ----------------------------------------------------------------------
- OmegaT 1.8.0 update 3 Changes
-----------------------------------------------------------------------
 1.8.1 vs. 1.8.0 update 2
 
 
    7 Enhancements
    1 Bugfixe
 ----------------------------------------------------------------------
-1.8.0 update 3
+1.8.1 
 
   Implemented requests:
 
@@ -71,8 +69,8 @@ can be applied or not with a new option in Options/Font.
   - Czech localisation updated to 1.8 (UI, readme)
   
   Bug fixes:
-  - Extra space at the beginning of each segment in the German 
-localization
+  - Extra space in each segment in the German localization
+  http://sourceforge.net/support/tracker.php?aid=2169106 
 
 ----------------------------------------------------------------------
  OmegaT 1.8.0 update 2 Changes

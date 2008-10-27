@@ -199,11 +199,13 @@
 
       <td width="87%">
         <dl>
-          <dd style="margin-left: 0cm; margin-right: 0cm"><strong>Documents
-          and Settings\&lt;User Name&gt;\Application Data\OmegaT</strong>.
-          The bit before &lt;User Name&gt; might be different on some systems,
-          but usually it's there. The entire application data path is retrieved
-          through the environment variable %APPDATA%.</dd>
+          <dd><strong>2000 and XP: Documents
+          and Settings\&lt;User Name&gt;\Application Data\OmegaT</strong></dd>
+          <dd><strong>Vista: Users\&lt;User Name&gt;\AppData\Roaming\OmegaT</strong>
+          <dd><strong>Other: 
+          &lt;Something&gt;\OmegaT</strong> 
+          (&lt;Something&gt; corresponds to the location of the "home" folder 
+          as determined by Java.)
         </dl>
       </td>
     </tr>
@@ -240,6 +242,22 @@
         </dl>
       </td>
     </tr>
+    
+    <tr valign="top">
+      <td width="13%">
+        <dl>
+          <dt>Other</dt>
+        </dl>
+      </td>
+
+      <td width="87%">
+        <dl>
+          <dd><strong>&lt;User
+          Home&gt;</strong></dd>
+        </dl>
+      </td>
+    </tr>
+ 
   </table>
 
   <h3><a name="user_list" id="user_list"></a>User files list<br></h3>
@@ -257,7 +275,7 @@
 
       <td width="89%">
         <dl>
-          <dd>this file records
+          <dd>This file records
           Java error messages while OmegaT is running. When you think OmegaT is
           behaving erratically it is important to include this file or the
           relevant part in any <a href="website.html">trouble report</a>.</dd>

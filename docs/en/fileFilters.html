@@ -79,16 +79,27 @@
 
   <h3><a name="filter_options" id="filter_options"></a>Filters options</h3>
 
-  <p>Three filters (Text files, XHTML files and HTML and XHTML Files) have one
-  or several specific options from the list below. To modify the options select
-  the filter from the list and click <strong>Options</strong>. The available
-  options are:</p>
+  <p>Five filters (Text files, XHTML files, HTML and XHTML files,
+  OpenDocument/OpenOffice.org files and Microsoft Open XML files) have one or
+  several specific options. To modify the options select the filter from the
+  list and click on <strong>Options</strong>. The available options are:</p>
+
+  <h4>Text files</h4>
 
   <ul>
     <li>
       <p><i>Paragraph segmentation on line breaks, empty lines or never:</i> if
       sentence segmentation rules are active, the text will further be
       segmented according to the rules available.</p>
+    </li>
+  </ul>
+
+  <h4>HTML files and HTML and XHTML Files</h4>
+
+  <ul>
+    <li>
+      <p><i>Encoding declaration:</i> OmegaT may add or rewrite the file's
+      encoding declaration based on the target file selected encoding.</p>
     </li>
 
     <li>
@@ -97,14 +108,52 @@
     </li>
 
     <li>
-      <p><i>Paragraph on &lt;br&gt;</i> : The &lt;br&gt; HTML tag will create a
+      <p><i>Paragraph on &lt;br&gt;:</i> The &lt;br&gt; HTML tag will create a
       paragraph for segmentation purposes.</p>
     </li>
 
     <li>
-      <p><i>Encoding declaration:</i> OmegaT may add or rewrite the file's
-      encoding declaration based on the target file selected encoding.</p>
+      <p><i>Skip text matching regular expression:</i> The text matching the
+      regular expression will be skipped.</p>
     </li>
+  </ul>
+
+  <h4>OpenDocument/OpenOffice.org files</h4>
+
+  <p>The following elements can be translated or not. If translated, they will
+  appear as separate segments.</p>
+
+  <ul>
+    <li><i>Index entries</i></li>
+
+    <li>Bookmarks</li>
+
+    <li>Bookmark references</li>
+
+    <li>Notes</li>
+
+    <li>Comments</li>
+  </ul>
+
+  <h4>Microsoft Open XML files</h4>
+
+  <p>The following elements can be translated or not. If translated, they will
+  appear as separate segments.</p>
+
+  <ul>
+    <li><i>Hidden text (Word)</i></li>
+
+    <li><i>Comments (Word, Excel)</i></li>
+
+    <li><i>Footnotes (Word)</i></li>
+
+    <li><i>Endnotes (Word)</i></li>
+
+    <li><i>Header (Word)</i></li>
+
+    <li><i>Footer (Word)</i></li>
+
+    <li><i>Slide comments (PowerPoint)</i></li>
   </ul>
 
   <h3><a name="edit_dialog" id="edit_dialog"></a>Edit filter dialog</h3>
@@ -182,34 +231,33 @@
 
   <ul>
     <li>
-      <p>Default is <code>${filename}</code> -- full
-      filename of the source file with extension, so that the name of the
-      translated file is the same as the name of the source file.</p>
+      <p>Default is <code>${filename}</code> -- full filename of the source
+      file with extension, so that the name of the translated file is the same
+      as the name of the source file.</p>
     </li>
 
     <li>
-      <p><code>${nameOnly}</code> allows you to
-      insert only the name of the source file without the extension.</p>
+      <p><code>${nameOnly}</code> allows you to insert only the name of the
+      source file without the extension.</p>
     </li>
 
     <li>
-      <p><code>${extension}</code> -- the extension
-      of the source file.</p>
+      <p><code>${extension}</code> -- the extension of the source file.</p>
     </li>
 
     <li>
-      <p><code>${targetLocale}</code> - target
-      locale code (of a form "xx_YY").</p>
+      <p><code>${targetLocale}</code> - target locale code (of a form
+      "xx_YY").</p>
     </li>
 
     <li>
-      <p><code>${targetLanguage}</code> - the target
-      language and country code together (of a form "XX-YY").</p>
+      <p><code>${targetLanguage}</code> - the target language and country code
+      together (of a form "XX-YY").</p>
     </li>
 
     <li>
-      <p><code>${targetLanguageCode}</code> - the
-      target language only ("XX").</p>
+      <p><code>${targetLanguageCode}</code> - the target language only
+      ("XX").</p>
     </li>
 
     <li>
@@ -218,6 +266,18 @@
   </ul>
   <hr>
 
-  <p><a href="legalNotices.html">Legal notices</a></p>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Legal
+        notices</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Home</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Index of
+        contents</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

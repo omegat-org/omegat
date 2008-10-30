@@ -50,7 +50,7 @@ import java.io.Serializable;
  * <li>[+] value (of buttons)
  * </ul>
  * Start a new paragraph on breaks (&lt;br&gt;) []<br>
- * Skip text matchin regExp []<br>
+ * Skip text matching regExp []<br>
  * Skip content of meta-tag when any of the given attibutename-value pairs is present in the tag
  * @author Maxym Mykhalchuk
  * @author Didier Briel

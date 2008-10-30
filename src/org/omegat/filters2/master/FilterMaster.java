@@ -7,7 +7,7 @@
            (C) 2005-06 Henry Pijffers
            (C) 2006 Martin Wunderlich
            (C) 2006-2007 Didier Briel
-           (C) 2008 Martin Fleurke
+           (C) 2008 Martin Fleurke, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -51,6 +51,7 @@ import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
+import org.omegat.filters2.xtagqxp.XtagFilter;
 import org.omegat.filters2.hhc.HHCFilter2;
 import org.omegat.filters2.html2.HTMLFilter2;
 import org.omegat.filters2.po.PoFilter;
@@ -540,6 +541,7 @@ public class FilterMaster
         res.addFilter(new OneFilter(new OpenXMLFilter(), false));
         res.addFilter(new OneFilter(new XLIFFFilter(), false));        
         res.addFilter(new OneFilter(new SrtFilter(), false));
+        res.addFilter(new OneFilter(new XtagFilter(), false));       
         return res;
     }
     

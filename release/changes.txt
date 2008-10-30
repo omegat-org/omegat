@@ -41,6 +41,8 @@ meta content is to be translated
   - New Project Files window. The keyboard can be used, and the Editor font
 can be applied or not with a new option in Options/Font.
 
+  - New filter: CopyFlow Gold for QuarkXPress
+
 ----------------------------------------------------------------------
 1.8.1 vs. 1.8.0 update 2
 

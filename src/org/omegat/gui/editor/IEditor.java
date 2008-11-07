@@ -48,16 +48,24 @@ public interface IEditor {
     /**
      * Get current file name which opened in editor.
      * 
-     * Can be called from any threads.
+     * Can be called from any thread.
      */
     String getCurrentFile();
 
     /**
      * Get current active entry.
      * 
-     * Can be called from any threads.
+     * Can be called from any thread.
      */
     SourceTextEntry getCurrentEntry();
+    
+    /**
+     * Get current active entry number.
+     * 
+     * Can be called from any thread.
+     */
+    int getCurrentEntryNumber();
+    
 
     /**
      * Activate entry for edit.

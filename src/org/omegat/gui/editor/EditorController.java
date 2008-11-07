@@ -254,6 +254,14 @@ public class EditorController implements IEditor {
     public SourceTextEntry getCurrentEntry() {
         return m_curEntry;
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public int getCurrentEntryNumber() {
+        return m_curEntryNum;
+    }
+    
 
     /**
      * {@inheritDoc}

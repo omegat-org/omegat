@@ -44,6 +44,19 @@ can be applied or not with a new option in Options/Font.
   - New filter: CopyFlow Gold for QuarkXPress
 
 ----------------------------------------------------------------------
+ OmegaT 1.8.1 update 1 Changes
+----------------------------------------------------------------------
+1.8.1 update 1 vs. 1.8.1
+
+   0 Enhancements
+   1 Bugfixe
+----------------------------------------------------------------------
+1.8.1 update 1
+
+  Bug fixes:
+  - Non translatable text (<p:attrName>) was visible in the editor
+
+----------------------------------------------------------------------
 1.8.1 vs. 1.8.0 update 2
 
    8 Enhancements

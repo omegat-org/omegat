@@ -62,6 +62,7 @@ public class OpenXMLFilter extends AbstractFilter
     private static final Pattern DIGITS = Pattern.compile("(\\d+)\\.xml");      // NOI18N
 
     
+    private boolean optionsAlreadyRead = false;
     /**
      * Defines the documents to read according to options
      */
@@ -77,28 +78,32 @@ public class OpenXMLFilter extends AbstractFilter
     // PowerPoint
     "|(slide\\d+\\.xml)|(notesSlide\\d+\\.xml)"                                 
 */          
-        OpenXMLOptions options = (OpenXMLOptions) this.getOptions();
-        if (options == null)
-            options = new OpenXMLOptions();
+        if (!optionsAlreadyRead){
+            OpenXMLOptions options = (OpenXMLOptions) this.getOptions();
+            if (options == null)
+                options = new OpenXMLOptions();
+
+            if (options.getTranslateComments())
+                DOCUMENTS += "|(comments\\.xml)";                                   // NOI18N
+            if (options.getTranslateFootnotes())
+                DOCUMENTS += "|(footnotes\\.xml)";                                  // NOI18N
+            if (options.getTranslateEndnotes())
+                DOCUMENTS += "|(endnotes\\.xml)";                                   // NOI18N
+            if (options.getTranslateHeaders())
+                DOCUMENTS += "|(header\\d+\\.xml)";                                 // NOI18N
+            if (options.getTranslateFooters())
+                DOCUMENTS += "|(footer\\d+\\.xml)";                                 // NOI18N
+            DOCUMENTS += "|(sharedStrings\\.xml)";                                  // NOI18N    
+            if (options.getTranslateExcelComments())
+                DOCUMENTS += "|(comments\\d+\\.xml)";                               // NOI18N
+            DOCUMENTS += "|(slide\\d+\\.xml)";                                      // NOI18N
+            if (options.getTranslateSlideComments())
+                DOCUMENTS += "|(notesSlide\\d+\\.xml)";                             // NOI18N
+            TRANSLATABLE = Pattern.compile(DOCUMENTS);
+            optionsAlreadyRead = true;
+        }
+    }
         
-        if (options.getTranslateComments())
-            DOCUMENTS += "|(comments\\.xml)";                                   // NOI18N
-        if (options.getTranslateFootnotes())
-            DOCUMENTS += "|(footnotes\\.xml)";                                  // NOI18N
-        if (options.getTranslateEndnotes())
-            DOCUMENTS += "|(endnotes\\.xml)";                                   // NOI18N
-        if (options.getTranslateHeaders())
-            DOCUMENTS += "|(header\\d+\\.xml)";                                 // NOI18N
-        if (options.getTranslateFooters())
-            DOCUMENTS += "|(footer\\d+\\.xml)";                                 // NOI18N
-        DOCUMENTS += "|(sharedStrings\\.xml)";                                  // NOI18N    
-        if (options.getTranslateExcelComments())
-            DOCUMENTS += "|(comments\\d+\\.xml)";                               // NOI18N
-        DOCUMENTS += "|(slide\\d+\\.xml)";                                      // NOI18N
-        if (options.getTranslateSlideComments())
-            DOCUMENTS += "|(notesSlide\\d+\\.xml)";                             // NOI18N
-        TRANSLATABLE = Pattern.compile(DOCUMENTS);
-    }       
     
     /** Creates a new instance of OpenXMLFilter */
     public OpenXMLFilter()

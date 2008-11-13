@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-           (C) 2007 Didier Briel
+           (C) 2007-2008 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -76,7 +76,7 @@ public class OpenXMLFilter extends AbstractFilter
     // Excel
     "|(sharedStrings\\.xml)|(comments\\d+\\.xml)" +                             
     // PowerPoint
-    "|(slide\\d+\\.xml)|(notesSlide\\d+\\.xml)"                                 
+    "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)|(notesSlide\\d+\\.xml)"                                 
 */          
         if (!optionsAlreadyRead){
             OpenXMLOptions options = (OpenXMLOptions) this.getOptions();
@@ -84,21 +84,23 @@ public class OpenXMLFilter extends AbstractFilter
                 options = new OpenXMLOptions();
 
             if (options.getTranslateComments())
-                DOCUMENTS += "|(comments\\.xml)";                                   // NOI18N
+                DOCUMENTS += "|(comments\\.xml)";                               // NOI18N
             if (options.getTranslateFootnotes())
-                DOCUMENTS += "|(footnotes\\.xml)";                                  // NOI18N
+                DOCUMENTS += "|(footnotes\\.xml)";                              // NOI18N
             if (options.getTranslateEndnotes())
-                DOCUMENTS += "|(endnotes\\.xml)";                                   // NOI18N
+                DOCUMENTS += "|(endnotes\\.xml)";                               // NOI18N
             if (options.getTranslateHeaders())
-                DOCUMENTS += "|(header\\d+\\.xml)";                                 // NOI18N
+                DOCUMENTS += "|(header\\d+\\.xml)";                             // NOI18N
             if (options.getTranslateFooters())
-                DOCUMENTS += "|(footer\\d+\\.xml)";                                 // NOI18N
-            DOCUMENTS += "|(sharedStrings\\.xml)";                                  // NOI18N    
+                DOCUMENTS += "|(footer\\d+\\.xml)";                             // NOI18N
+            DOCUMENTS += "|(sharedStrings\\.xml)";                              // NOI18N    
             if (options.getTranslateExcelComments())
-                DOCUMENTS += "|(comments\\d+\\.xml)";                               // NOI18N
-            DOCUMENTS += "|(slide\\d+\\.xml)";                                      // NOI18N
+                DOCUMENTS += "|(comments\\d+\\.xml)";                           // NOI18N
+            DOCUMENTS += "|(slide\\d+\\.xml)";                                  // NOI18N
+            if (options.getTranslateSlideMasters())          
+                DOCUMENTS += "|(slideMaster\\d+\\.xml)";                        // NOI18N
             if (options.getTranslateSlideComments())
-                DOCUMENTS += "|(notesSlide\\d+\\.xml)";                             // NOI18N
+                DOCUMENTS += "|(notesSlide\\d+\\.xml)";                         // NOI18N
             TRANSLATABLE = Pattern.compile(DOCUMENTS);
             optionsAlreadyRead = true;
         }

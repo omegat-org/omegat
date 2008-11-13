@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2007 Didier Briel
+ Copyright (C) 2007-2008 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -42,6 +42,7 @@ import java.io.Serializable;
  * <li>[+] Header (Words)
  * <li>[+] Footer (Words)
  * <li>[+] Slide comments (PowerPoint)
+ * <li>[] Slide Masters (PowerPoint)
  * </ul>
  * @author Didier Briel
  */
@@ -57,6 +58,7 @@ public class OpenXMLOptions implements Serializable
     private boolean translateFooters = true;
     private boolean translateExcelComments = true;
     private boolean translateSlideComments = true;
+    private boolean translateSlideMasters = false;
     
     /**
      * Returns whether Hidden Text should be translated.
@@ -178,5 +180,21 @@ public class OpenXMLOptions implements Serializable
     public void setTranslateSlideComments(boolean translateSlideComments)
     {
         this.translateSlideComments = translateSlideComments;
-    }        
+    }     
+    
+    /**
+     * Returns whether Slide Masters should be translated.
+     */
+    public boolean getTranslateSlideMasters()
+    {
+        return this.translateSlideMasters;
+    }
+
+    /**
+     * Sets whether Slide Masters should be translated.
+     */
+    public void setTranslateSlideMasters(boolean translateSlideMasters)
+    {
+        this.translateSlideMasters = translateSlideMasters;
+    }
 }

@@ -4,8 +4,8 @@
 2.0.0 vs. 1.8.1 
 
 
-  7 Enhancements
-  0 Bugfix
+  11 Enhancements
+  0  Bugfix
 
 ----------------------------------------------------------------------
 2.0.0 
@@ -42,6 +42,8 @@ meta content is to be translated
 can be applied or not with a new option in Options/Font.
 
   - New filter: CopyFlow Gold for QuarkXPress
+
+  - OpenXML filter: New option to translate slide masters in PowerPoint documents
 
 ----------------------------------------------------------------------
  OmegaT 1.8.1 update 1 Changes

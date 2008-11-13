@@ -1,7 +1,7 @@
 ﻿@@TRANSLATION_NOTICE@@
 
 ==============================================================================
-  OmegaT 1.8.0, Read Me file
+  OmegaT 2.0.0, Read Me file
 
   1.  Information about OmegaT
   2.  What is OmegaT?
@@ -225,11 +225,9 @@ OmegaT uses the following libraries:
 
   Swing-Layout 1.0.2 (LGPL License)
 
-  Backport-util-concurrent (Public Domain)
-
-  Retroweaver 2.0.1 (Retroweaver License)
-
   Jmyspell 2.1.4 (LGPL License)
+
+  JAXB 2.1.7 (GPLv2 + classpath exception)
 
 ==============================================================================
  5.  Is OmegaT bugging you? Do you need help?

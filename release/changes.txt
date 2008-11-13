@@ -4,7 +4,7 @@
 2.0.0 vs. 1.8.1 
 
 
-  11 Enhancements
+  14 Enhancements
   0  Bugfix
 
 ----------------------------------------------------------------------
@@ -19,7 +19,16 @@
   http://sourceforge.net/support/tracker.php?aid=1618679  
 
   - Additions to the log
-  http://sourceforge.net/support/tracker.php?aid=1632959   
+  http://sourceforge.net/support/tracker.php?aid=1632959  
+
+  - Keep position after clicking a file 
+  http://sourceforge.net/support/tracker.php?aid=2150276 
+
+  - Project List to remain in front
+  http://sourceforge.net/support/tracker.php?aid=1808903 
+
+  - Rewrite thread use
+  http://sourceforge.net/support/tracker.php?aid=1581565  
 
   Other enhancements:
 

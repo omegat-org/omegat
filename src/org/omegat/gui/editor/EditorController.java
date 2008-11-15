@@ -217,6 +217,9 @@ public class EditorController implements IEditor {
             break;
         case FIRST_ENTRY:
             m_curEntryNum = 0;
+            m_xlFirstEntry = -1;
+            m_xlLastEntry = -1;
+            previousFileName = null;
             title = StaticUtils.format(OStrings
                     .getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
             data = editor;

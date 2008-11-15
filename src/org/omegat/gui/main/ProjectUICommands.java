@@ -184,7 +184,7 @@ public class ProjectUICommands {
             return;
         }
         
-        Core.getEditor().commitAndLeave();
+        Core.getEditor().commitAndDeactivate();
 
         final ProjectProperties props = Core.getProject()
                 .getProjectProperties();

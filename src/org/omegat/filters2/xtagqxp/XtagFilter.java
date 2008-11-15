@@ -60,6 +60,7 @@ public class XtagFilter extends AbstractFilter
         return new Instance[]
         {
             new Instance("*.tag", "UTF-16LE", "UTF-16LE"),                      // NOI18N
+            new Instance("*.xtg", "UTF-16LE", "UTF-16LE"),                      // NOI18N
         };
     }
 

@@ -1,4 +1,19 @@
 ----------------------------------------------------------------------
+ OmegaT 2.0.0 update 1 Changes
+----------------------------------------------------------------------
+2.0.0 update 1 vs. 2.0.0
+
+  1 Enhancement
+  0 Bugfix
+
+----------------------------------------------------------------------
+2.0.0 update 1
+
+  Other enhancements:
+
+  - Japanese localisation updated to 2.0 (UI)
+
+----------------------------------------------------------------------
  OmegaT 2.0.0 Changes
 ----------------------------------------------------------------------
 2.0.0 vs. 1.8.1 
@@ -53,6 +68,8 @@ can be applied or not with a new option in Options/Font.
   - New filter: CopyFlow Gold for QuarkXPress
 
   - OpenXML filter: New option to translate slide masters in PowerPoint documents
+
+  - Japanese localisation updated to 2.0 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 1.8.1 update 1 Changes

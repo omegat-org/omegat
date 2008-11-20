@@ -28,6 +28,7 @@
 package org.omegat.gui.editor;
 
 import java.awt.Component;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.io.File;
@@ -1282,13 +1283,13 @@ public class EditorController implements IEditor {
     /** Loads Instant start article */
     private void createAdditionalPanes() {
         introPaneTitle = OStrings.getString("DOCKING_INSTANT_START_TITLE");
-        ;
         try {
             String language = detectInstantStartLanguage();
             String filepath = StaticUtils.installDir() + File.separator
                     + OConsts.HELP_DIR + File.separator + language
                     + File.separator + OConsts.HELP_INSTANT_START;
             introPane = new JTextPane();
+            introPane.setComponentOrientation(ComponentOrientation.getOrientation(new Locale(language)));
             introPane.setEditable(false);
             introPane.setPage("file:///" + filepath);
         } catch (IOException e) {

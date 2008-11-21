@@ -64,9 +64,9 @@
   <p><a name="numbering" id="numbering"></a><b>Tag numbering:</b>Tags are
   numbered in an incremental way by <strong>tag group</strong>. What we call
   "tag groups" here is either a single tag (like <code><font color=
-  "#FF0000">&lt;br1&gt;</font></code>), on its own, or 2 tags forming a pair
-  (like <code><font color="#FF0000">&lt;f0&gt;</font></code> and
-  <code><font color="#FF0000">&lt;/f0&gt;</font></code>). Within a segment, the
+  "#Fb0000">&lt;br1&gt;</font></code>), on its own, or 2 tags forming a pair
+  (like <code><font color="#Fb0000">&lt;i0&gt;</font></code> and
+  <code><font color="#Fb0000">&lt;/i0&gt;</font></code>). Within a segment, the
   first group (pair or singleton) gets the number <strong>0</strong>, the
   second the number <strong>1</strong> etc. The first example below has 3 tag
   groups (a pair, a singleton, and then another pair), the second example only
@@ -78,26 +78,26 @@
   or line break for example).</p>
   <pre>
         <strong>&lt;segment 2132&gt;</strong><font color=
-"#FF0000">&lt;b0&gt;</font>&lt;Ctr+N&gt;<font color=
-"#FF0000">&lt;/b0&gt;</font>, <font color=
-"#FF0000">&lt;br1&gt;&lt;b2&gt;</font>&lt;Enter&gt;<font color=
-"#FF0000">&lt;/b2&gt;</font><strong>&lt;end segment&gt;</strong>
+"#Fb0000">&lt;b0&gt;</font>&lt;Ctr+N&gt;<font color=
+"#Fb0000">&lt;/b0&gt;</font>, <font color=
+"#Fb0000">&lt;br1&gt;&lt;b2&gt;</font>&lt;Enter&gt;<font color=
+"#Fb0000">&lt;/b2&gt;</font><strong>&lt;end segment&gt;</strong>
 </pre>
 
-  <p><code><strong><font color="#FF0000">&lt;br1&gt;</font></strong></code> is
+  <p><code><strong><font color="#Fb0000">&lt;br1&gt;</font></strong></code> is
   a single tag and does not affect any surrounding text. <strong>Paired
   tags</strong> usually indicate style information that applies to the text
   between the opening tag and the closing tag of a pair. Whatever happens to a
   pair, the opening tag should always come before the closing tag:</p>
   <pre>
         <strong>&lt;segment 3167&gt;</strong>Log file (<font color=
-"#FF0000">&lt;i1&gt;</font>log.txt<font color=
-"#FF0000">&lt;/i1&gt;</font>) for tracking operations and errors.<strong>&lt;end segment&gt;</strong>
+"#Fb0000">&lt;b0&gt;</font>log.txt<font color=
+"#Fb0000">&lt;/b0&gt;</font>) for tracking operations and errors.<strong>&lt;end segment&gt;</strong>
 </pre>
 
-  <p><code><strong><font color="#FF0000">&lt;i1&gt;</font></strong></code>
+  <p><code><strong><font color="#Fb0000">&lt;b0&gt;</font></strong></code>
   <font size="3">and</font> <code><strong><font color=
-  "#FF0000">&lt;/i1&gt;</font></strong></code> are paired and affect the text
+  "#Fb0000">&lt;/b0&gt;</font></strong></code> are paired and affect the text
   <code><strong>log.txt</strong></code>.</p>
   <hr>
 
@@ -107,28 +107,28 @@
   <p>OmegaT creates its tags before sentences segmenting is applied. Depending
   on the segmenting rules, it may appear as if tags do not respect the above
   rules of numbering and grouping. Check the following text: "<em>Before: \.
-  After: \s"</em><font color="#FF0000">.</font> <font color="#000000">One would
-  expect segmentation as follows(&lt;f0&gt; and &lt;/f0&gt; stand for the start
+  After: \s"</em><font color="#Fb0000">.</font> <font color="#000000">One would
+  expect segmentation as follows(&lt;b0&gt; and &lt;/b0&gt; stand for the start
   and end of italics):</font></p>
   <pre>
         <strong>&lt;segment ....&gt;</strong> <font color=
-"#FF0000">&lt;f0&gt;</font>Before: \. After: \s<font color=
-"#FF0000">&lt;/f0&gt;</font><strong>&lt;end segment&gt;</strong>
+"#Fb0000">&lt;b0&gt;</font>Before: \. After: \s<font color=
+"#Fb0000">&lt;/b0&gt;</font><strong>&lt;end segment&gt;</strong>
 </pre>
 
   <p>However, when the default segmenting rules are applied to this segment, we
   will end with the following result:</p>
   <pre>
         <strong>&lt;segment 1990&gt;</strong> <font color=
-"#FF0000">&lt;f0&gt;</font>Before: \. <strong>&lt;end segment&gt;</strong>
+"#Fb0000">&lt;b0&gt;</font>Before: \. <strong>&lt;end segment&gt;</strong>
 <strong>&lt;segment 1991&gt;</strong> After: \s<font color=
-"#FF0000">&lt;/f0&gt;</font><strong>&lt;end segment&gt;</strong>   
+"#Fb0000">&lt;/b0&gt;</font><strong>&lt;end segment&gt;</strong>   
 </pre>
 
   <p>Applying the rule <i>segment after a period followed by a space</i>
   splices the original text in two segments, even if the two tags
-  <code><font color="#FF0000">&lt;f0&gt;</font></code> and <code><font color=
-  "#FF0000">&lt;/f0&gt;</font></code> should be kept together in the same
+  <code><font color="#Fb0000">&lt;b0&gt;</font></code> and <code><font color=
+  "#Fb0000">&lt;/b0&gt;</font></code> should be kept together in the same
   segment. In some cases that may even cause problems in the translation, when
   tags must be placed differently in the target language to reflect the word
   order of that language (see <a href="#tag_operation">Tag operations</a>
@@ -151,17 +151,17 @@
   <p>Example:</p>
   <pre>
         <strong>&lt;segment 0001&gt;</strong><font color=
-"#FF0000">&lt;f0&gt;</font>This formatting<font color=
-"#FF0000">&lt;/f0&gt;</font> is going to be duplicated here.<strong>&lt;end segment&gt;</strong>
+"#Fb0000">&lt;b0&gt;</font>This formatting<font color=
+"#Fb0000">&lt;/b0&gt;</font> is going to be duplicated here.<strong>&lt;end segment&gt;</strong>
 </pre>
 
   <p>After duplication:</p>
   <pre>
         <strong>&lt;segment 0001&gt;</strong><font color=
-"#FF0000">&lt;f0&gt;</font>This formatting<font color=
-"#FF0000">&lt;/f0&gt;</font> has been <font color=
-"#FF0000">&lt;f0&gt;</font>duplicated here<font color=
-"#FF0000">&lt;/f0&gt;</font>.<strong>&lt;end segment&gt;</strong>
+"#Fb0000">&lt;b0&gt;</font>This formatting<font color=
+"#Fb0000">&lt;/b0&gt;</font> has been <font color=
+"#Fb0000">&lt;b0&gt;</font>duplicated here<font color=
+"#Fb0000">&lt;/b0&gt;</font>.<strong>&lt;end segment&gt;</strong>
 </pre>
 
   <p><a name="deletion" id="deletion"></a><b>Tag group deletion:</b>To delete
@@ -174,8 +174,8 @@
   <p>Example:</p>
   <pre>
         <strong>&lt;segment 0001&gt;</strong><font color=
-"#FF0000">&lt;f0&gt;</font>This formatting<font color=
-"#FF0000">&lt;/f0&gt;</font> is going to be deleted.<strong>&lt;end segment&gt;</strong>
+"#Fb0000">&lt;b0&gt;</font>This formatting<font color=
+"#Fb0000">&lt;/b0&gt;</font> is going to be deleted.<strong>&lt;end segment&gt;</strong>
 </pre>
 
   <p>After deletion:</p>
@@ -191,19 +191,19 @@
   <p>Example:</p>
   <pre>
         <strong>&lt;segment 0001&gt;</strong><font color=
-"#FF0000">&lt;f0&gt;</font>Formatting zero<font color=
-"#FF0000">&lt;/f0&gt;</font> and <font color=
-"#FF0000">&lt;f1&gt;</font>formatting one<font color=
-"#FF0000">&lt;/f1&gt;</font> are going to be inverted around.<strong>&lt;end segment&gt;</strong>
+"#Fb0000">&lt;b0&gt;</font>Formatting zero<font color=
+"#Fb0000">&lt;/b0&gt;</font> and <font color=
+"#Fb0000">&lt;b1&gt;</font>formatting one<font color=
+"#Fb0000">&lt;/b1&gt;</font> are going to be inverted around.<strong>&lt;end segment&gt;</strong>
 </pre>
 
   <p>After order modification:</p>
   <pre>
         <strong>&lt;segment 0001&gt;</strong><font color=
-"#FF0000">&lt;f1&gt;</font>Formatting one<font color=
-"#FF0000">&lt;/f1&gt;</font> and <font color=
-"#FF0000">&lt;f0&gt;</font>formatting zero<font color=
-"#FF0000">&lt;/f0&gt;</font> have been inverted.<strong>&lt;end segment&gt;</strong>
+"#Fb0000">&lt;b1&gt;</font>Formatting one<font color=
+"#Fb0000">&lt;/b1&gt;</font> and <font color=
+"#Fb0000">&lt;b0&gt;</font>formatting zero<font color=
+"#Fb0000">&lt;/b0&gt;</font> have been inverted.<strong>&lt;end segment&gt;</strong>
 </pre>
 
   <h3><a name="nesting" id="nesting"></a>Tag group nesting</h3>
@@ -218,18 +218,18 @@
   <p>Example:</p>
   <pre>
         <strong>&lt;segment 0001&gt;</strong><font color=
-"#FF0000">&lt;f0&gt;</font>Formatting<font color=
-"#FF0000">&lt;/f0&gt;</font> <font color=
-"#FF0000">&lt;f1&gt;</font>one<font color=
-"#FF0000">&lt;/f1&gt;</font> is going to be nested inside formatting zero.<strong>&lt;end segment&gt;</strong>
+"#Fb0000">&lt;b0&gt;</font>Formatting<font color=
+"#Fb0000">&lt;/b0&gt;</font> <font color=
+"#Fb0000">&lt;b1&gt;</font>one<font color=
+"#Fb0000">&lt;/b1&gt;</font> is going to be nested inside formatting zero.<strong>&lt;end segment&gt;</strong>
 </pre>
 
   <p>After nesting:</p>
   <pre>
         <strong>&lt;segment 0001&gt;</strong><font color=
-"#FF0000">&lt;f0&gt;</font>Formatting <font color=
-"#FF0000">&lt;f1&gt;</font>one<font color=
-"#FF0000">&lt;/f1&gt;&lt;/f0&gt;</font> has been nested inside formatting zero.<strong>&lt;end segment</strong>
+"#Fb0000">&lt;b0&gt;</font>Formatting <font color=
+"#Fb0000">&lt;b1&gt;</font>one<font color=
+"#Fb0000">&lt;/b1&gt;&lt;/b0&gt;</font> has been nested inside formatting zero.<strong>&lt;end segment</strong>
 </pre>
   <hr>
 
@@ -241,19 +241,19 @@
   file not opening at all. Example:</p>
   <pre>
         <strong>&lt;segment 0001&gt;</strong><font color=
-"#FF0000">&lt;f0&gt;</font>Formatting<font color=
-"#FF0000">&lt;/f0&gt;</font> <font color=
-"#FF0000">&lt;f1&gt;</font>one<font color=
-"#FF0000">&lt;/f1&gt;</font> is going to be messed up.<strong>&lt;end segment&gt;</strong>
+"#Fb0000">&lt;b0&gt;</font>Formatting<font color=
+"#Fb0000">&lt;/b0&gt;</font> <font color=
+"#Fb0000">&lt;b1&gt;</font>one<font color=
+"#Fb0000">&lt;/b1&gt;</font> is going to be messed up.<strong>&lt;end segment&gt;</strong>
 </pre>
 
   <p>After bad manipulation:</p>
   <pre>
         <strong>&lt;segment 0001&gt;</strong><font color=
-"#FF0000">&lt;f0&gt;</font>Formatting <font color=
-"#FF0000">&lt;f1&gt;</font>one<font color=
-"#FF0000">&lt;/f0&gt;</font> <font color=
-"#FF0000">&lt;/f1&gt;</font>is very messed up now.<strong>&lt;end segment&gt;</strong>
+"#Fb0000">&lt;b0&gt;</font>Formatting <font color=
+"#Fb0000">&lt;b1&gt;</font>one<font color=
+"#Fb0000">&lt;/b0&gt;</font> <font color=
+"#Fb0000">&lt;/b1&gt;</font>is very messed up now.<strong>&lt;end segment&gt;</strong>
 </pre>
   <hr>
 

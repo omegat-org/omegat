@@ -4,15 +4,25 @@
 2.0.0 update 1 vs. 2.0.0
 
   3 Enhancements
-  0 Bugfix
+  1 Bugfix
 
 ----------------------------------------------------------------------
 2.0.0 update 1
+
+  Bugs
+  
+  - Spellcheck EN-US: incorrect handling of hyphenated compounds
+  http://sourceforge.net/support/tracker.php?aid=1815736 
+  (Requires tokenizers from http://sourceforge.net/projects/omegat-plugins)
 
   Other enhancements:
 
   - The instant start is displayed correctly (right aligned) for RTL 
 languages
+  - OmegaT can use tokenizers to get stemming in fuzzy and glossary
+matches. 
+  (Requires tokenizers from http://sourceforge.net/projects/omegat-plugins)
+
   - Japanese localisation updated to 2.0 (UI)
   - Basque localisation updated to 2.0 (UI)
 

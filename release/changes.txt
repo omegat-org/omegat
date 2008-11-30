@@ -25,6 +25,7 @@ matches.
 
   - Japanese localisation updated to 2.0 (UI)
   - Basque localisation updated to 2.0 (UI)
+  - Slovenian localisation updated to 2.0 (UI) 
 
 ----------------------------------------------------------------------
  OmegaT 2.0.0 Changes
@@ -89,7 +90,7 @@ can be applied or not with a new option in Options/Font.
 ----------------------------------------------------------------------
 1.8.1 update 1 vs. 1.8.1
 
-   0 Enhancements
+   2 Enhancements
    2 Bugfixes
 ----------------------------------------------------------------------
 1.8.1 update 1
@@ -97,6 +98,11 @@ can be applied or not with a new option in Options/Font.
   Bug fixes:
   - PowerPoint: Non translatable text (<p:attrName>) was visible in the editor
   - Various corrections in the manual
+
+  Other enhancements:
+ 
+  - Japanese localisation updated to 1.8 (UI) 
+  - Slovenian localisation updated to 1.8 (UI) 
 
 ----------------------------------------------------------------------
 1.8.1 vs. 1.8.0 update 2

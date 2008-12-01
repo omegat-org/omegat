@@ -9,13 +9,11 @@
 ----------------------------------------------------------------------
 2.0.0 update 1
 
-  Bugs
-  
-  - Spellcheck EN-US: incorrect handling of hyphenated compounds
-  http://sourceforge.net/support/tracker.php?aid=1815736 
-  (Requires tokenizers from http://sourceforge.net/projects/omegat-plugins)
-  - PO Filter: \ is doubled for \t
-  http://sourceforge.net/support/tracker.php?aid=2149518
+  Implemented requests:
+  - Extra checks in TagValidator for PO linefeed
+  http://sourceforge.net/support/tracker.php?aid=2371683
+  - Extra check in TagValidator if printf variables in PO-file segments are correct
+  http://sourceforge.net/support/tracker.php?aid=2371713
 
   Other enhancements:
 
@@ -29,10 +27,14 @@ matches.
   - Basque localisation updated to 2.0 (UI)
   - Slovenian localisation updated to 2.0 (UI)
   
-  - extra checks in TagValidator for PO linefeed
-  http://sourceforge.net/support/tracker.php?aid=2371683
-  - extra check in TagValidator if printf variables in PO-file segments are correct
-  http://sourceforge.net/support/tracker.php?aid=2371713
+  Bugs fixes:
+    
+  - Spellcheck EN-US: incorrect handling of hyphenated compounds
+  http://sourceforge.net/support/tracker.php?aid=1815736 
+  (Requires tokenizers from http://sourceforge.net/projects/omegat-plugins)
+  - PO Filter: \ is doubled for \t
+  http://sourceforge.net/support/tracker.php?aid=2149518
+
 
 ----------------------------------------------------------------------
  OmegaT 2.0.0 Changes

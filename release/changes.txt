@@ -4,7 +4,7 @@
 2.0.0 update 1 vs. 2.0.0
 
   5 Enhancements
-  2 Bugfixes
+  1 Bugfixe
 
 ----------------------------------------------------------------------
 2.0.0 update 1
@@ -32,9 +32,6 @@ matches.
   - Spellcheck EN-US: incorrect handling of hyphenated compounds
   http://sourceforge.net/support/tracker.php?aid=1815736 
   (Requires tokenizers from http://sourceforge.net/projects/omegat-plugins)
-  - PO Filter: \ is doubled for \t
-  http://sourceforge.net/support/tracker.php?aid=2149518
-
 
 ----------------------------------------------------------------------
  OmegaT 2.0.0 Changes
@@ -99,19 +96,27 @@ can be applied or not with a new option in Options/Font.
 ----------------------------------------------------------------------
 1.8.1 update 1 vs. 1.8.1
 
-   2 Enhancements
-   2 Bugfixes
+   3 Enhancements
+   3 Bugfixes
 ----------------------------------------------------------------------
 1.8.1 update 1
 
-  Bug fixes:
-  - PowerPoint: Non translatable text (<p:attrName>) was visible in the editor
-  - Various corrections in the manual
+  Implemented requests:
+
+  - PO: transform \t to tabs and back
+  http://sourceforge.net/support/tracker.php?aid=2120936
 
   Other enhancements:
  
   - Japanese localisation updated to 1.8 (UI) 
   - Slovenian localisation updated to 1.8 (UI) 
+
+  Bug fixes:
+
+  - PowerPoint: Non translatable text (<p:attrName>) was visible in the editor
+  - Various corrections in the manual
+  - PO Filter: \ is doubled for \t
+  http://sourceforge.net/support/tracker.php?aid=2149518
 
 ----------------------------------------------------------------------
 1.8.1 vs. 1.8.0 update 2

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2008 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -24,6 +25,8 @@
 
 package org.omegat.core.segmentation;
 
+import gen.core.segmentation.Languagemap;
+import gen.core.segmentation.Languagerule;
 import gen.core.segmentation.Srx;
 
 import java.beans.ExceptionListener;
@@ -35,6 +38,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,10 +66,13 @@ public class SRX implements Serializable, Cloneable
     private static final String CONF_SENTSEG = "segmentation.conf";             // NOI18N
     private static final File configFile=new File(
             StaticUtils.getConfigDir()+CONF_SENTSEG);
+    
+    /** Context for JAXB rules processing. */
+    protected static final JAXBContext SRX_JAXB_CONTEXT;
             
     static {
         try {
-            JAXBContext.newInstance(Srx.class);
+            SRX_JAXB_CONTEXT = JAXBContext.newInstance(Srx.class);
         }catch(LinkageError ex ) {
             throw new ExceptionInInitializerError(OStrings.getString("STARTUP_JAXB_LINKAGE_ERROR"));
         } catch (JAXBException ex) {
@@ -294,9 +301,9 @@ public class SRX implements Serializable, Cloneable
                 if( DEF.equals(maprule.getLanguageCode()) )
                 {
                     maprule.setLanguage(LanguageCodes.DEFAULT_CODE);
-                    maprule.getRules().removeAll(DefaultRules.english());
-                    maprule.getRules().removeAll(DefaultRules.textFormat());
-                    maprule.getRules().removeAll(DefaultRules.htmlFormat());
+                    maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.ENGLISH_CODE));
+                    maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.F_TEXT_CODE));
+                    maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.F_HTML_CODE));
                 }
             }
         }
@@ -353,59 +360,41 @@ public class SRX implements Serializable, Cloneable
 
     // Patterns
     private static final String DEFAULT_RULES_PATTERN = ".*";                   // NOI18N
-    private static final String ENGLISH_RULES_PATTERN = "EN.*";                 // NOI18N
-    private static final String JAPANESE_RULES_PATTERN = "JA.*";                // NOI18N
-    private static final String RUSSIAN_RULES_PATTERN = "RU.*";                 // NOI18N
-    private static final String GERMAN_RULES_PATTERN = "DE.*";                  // NOI18N
     
     /**
      * Initializes default rules.
      */
-    private void initDefaults()
-    {
-        // Extensive set of German exceptions
-        getMappingRules().add(new MapRule(
-                LanguageCodes.GERMAN_CODE,
-                GERMAN_RULES_PATTERN, 
-                DefaultRules.german()));
-        
-        // Russian as an example
-        getMappingRules().add(new MapRule(
-                LanguageCodes.RUSSIAN_CODE,
-                RUSSIAN_RULES_PATTERN, 
-                DefaultRules.russian()));
-        
-        // now Japanese
-        getMappingRules().add(new MapRule(
-                LanguageCodes.JAPANESE_CODE,
-                JAPANESE_RULES_PATTERN, 
-                DefaultRules.japanese()));
+    private void initDefaults() {
+        try {
+            List<MapRule> newMap=new ArrayList<MapRule>();
+            URL rulesUrl = this.getClass().getResource("defaultRules.xml");
+            Srx data = (Srx) SRX_JAXB_CONTEXT.createUnmarshaller().unmarshal(rulesUrl);
 
-        // now English
-        getMappingRules().add(new MapRule(
-                LanguageCodes.ENGLISH_CODE,
-                ENGLISH_RULES_PATTERN, 
-                DefaultRules.english()));
+            for (Languagerule rules : data.getBody().getLanguagerules().getLanguagerule()) {
 
-        // default lingual rules
-        getMappingRules().add(new MapRule(
-                LanguageCodes.DEFAULT_CODE,
-                DEFAULT_RULES_PATTERN, 
-                DefaultRules.defaultLingual()));
+                String lang = rules.getLanguagerulename();
+                String pattern = DEFAULT_RULES_PATTERN;
+                for (Languagemap lm : data.getBody().getMaprules().getLanguagemap()) {
+                    if (lm.getLanguagerulename().equals(rules.getLanguagerulename())) {
+                        pattern = lm.getLanguagepattern();
+                        break;
+                    }
+                }
+                List<Rule> rulesList = new ArrayList<Rule>(rules.getRule().size());
+                for (gen.core.segmentation.Rule r : rules.getRule()) {
+                    boolean isBreak = "yes".equalsIgnoreCase(r.getBreak());
+                    rulesList.add(new Rule(isBreak, r.getBeforebreak().getContent(), r.getAfterbreak().getContent()));
+                }
 
-        // segmentation for text files
-        getMappingRules().add(new MapRule(
-                LanguageCodes.F_TEXT_CODE,
-                DEFAULT_RULES_PATTERN, 
-                DefaultRules.textFormat()));
-
-        // segmentation for (X)HTML files
-        getMappingRules().add(new MapRule(
-                LanguageCodes.F_HTML_CODE,
-                DEFAULT_RULES_PATTERN, 
-                DefaultRules.htmlFormat()));
+                newMap.add(new MapRule(lang, pattern, rulesList));
+            }
+            // set rules only if no errors
+            getMappingRules().addAll(newMap);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
-        
+    
     /**
      * Finds the rules for a certain language.
      * <p>

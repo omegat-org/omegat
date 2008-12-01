@@ -321,7 +321,7 @@ public class PoFilter extends AbstractFilter
     /**
      * Private processEntry to do pre- and postprocessing.<br>
      * The given entry is interpreted to a string (e.g. escaped quotes are unescaped, 
-     * '\n' is translated into newline character.)
+     * '\n' is translated into newline character, '\t' into tab character.)
      * then translated and then returned as a PO-string-notation (e.g. double 
      * quotes escaped, newline characters represented as '\n' and surrounded by 
      * double quotes, possibly split up over multiple lines)<Br>
@@ -340,23 +340,25 @@ public class PoFilter extends AbstractFilter
      * @return The translated entry, within double quotes on each line 
      * (thus ready to be printed to target file immediately)
      **/
-     private String privateProcessEntry(String entry, boolean nowrap)
-     {
-         // Removes escapes from quotes. ( \" becomes " unless the \
-         // was escaped itself.) The number of preceding slashes before \"
-         // should not be odd, else the \ is escaped and not part of \".
-         // The regex is: no backslash before an optional even number
-         // of backslashes before \". Replace only the \" with " and keep the
-         // other escaped backslashes )
-         entry = entry.replaceAll("(?<!\\\\)((\\\\\\\\)*)\\\\\"", "$1\"");      // NOI18N
-         // Interprets newline sequence, except when preceded by \
-         // \n becomes Linefeed, unless the \ was escaped itself.
-         // The number of preceding slashes before \n should not be  odd,
-         // else the \ is escaped and not part of \n.
-         // The regex is: no backslash before an optional even number of
-         // backslashes before \n. Replace only the \n with <newline> and keep
-         // the other escaped backslashes.
-         entry = entry.replaceAll("(?<!\\\\)((\\\\\\\\)*)\\\\n", "$1\n");       // NOI18N
+    private String privateProcessEntry(String entry, boolean nowrap)
+    {
+        // Removes escapes from quotes. ( \" becomes " unless the \
+        // was escaped itself.) The number of preceding slashes before \"
+        // should not be odd, else the \ is escaped and not part of \".
+        // The regex is: no backslash before an optional even number
+        // of backslashes before \". Replace only the \" with " and keep the
+        // other escaped backslashes )
+        entry = entry.replaceAll("(?<!\\\\)((\\\\\\\\)*)\\\\\"", "$1\"");       // NOI18N
+        // Interprets newline sequence, except when preceded by \
+        // \n becomes Linefeed, unless the \ was escaped itself.
+        // The number of preceding slashes before \n should not be  odd,
+        // else the \ is escaped and not part of \n.
+        // The regex is: no backslash before an optional even number of
+        // backslashes before \n. Replace only the \n with <newline> and keep
+        // the other escaped backslashes.
+        entry = entry.replaceAll("(?<!\\\\)((\\\\\\\\)*)\\\\n", "$1\n");        // NOI18N
+        //same for \t, the tab character
+        entry = entry.replaceAll("(?<!\\\\)((\\\\\\\\)*)\\\\t", "$1\t");        // NOI18N
         // Interprets newline sequence at the beginning of a line
         entry = entry.replaceAll("^\\\\n", "\\\n");                             // NOI18N
         // Removes escape from backslash
@@ -395,6 +397,9 @@ public class PoFilter extends AbstractFilter
             //start with empty string, to align all lines of translation
             translation = "\"\n\""+translation;                                 // NOI18N
         }
+        // Interprets tab chars. 'blah<tab>blah' becomes 'blah\tblah' 
+        //(<tab> representing the tab character '\u0009')
+        translation = translation.replace("\t", "\\t");                         // NOI18N
         return "\""+translation+"\"";                                           // NOI18N
     }
 }

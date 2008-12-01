@@ -4,7 +4,7 @@
 2.0.0 update 1 vs. 2.0.0
 
   3 Enhancements
-  1 Bugfix
+  2 Bugfixes
 
 ----------------------------------------------------------------------
 2.0.0 update 1
@@ -14,6 +14,8 @@
   - Spellcheck EN-US: incorrect handling of hyphenated compounds
   http://sourceforge.net/support/tracker.php?aid=1815736 
   (Requires tokenizers from http://sourceforge.net/projects/omegat-plugins)
+  - PO Filter: \ is doubled for \t
+  http://sourceforge.net/support/tracker.php?aid=2149518
 
   Other enhancements:
 

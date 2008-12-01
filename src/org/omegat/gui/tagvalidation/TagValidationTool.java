@@ -25,7 +25,10 @@
 package org.omegat.gui.tagvalidation;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
@@ -36,6 +39,7 @@ import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
 
 /**
@@ -102,6 +106,9 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
 
         StringEntry se;
 
+        // PO validation: pattern to detect printf variables (%s and %n\$s)
+        Pattern printfPattern = PatternConsts.PRINTF_VARS;
+
         for (SourceTextEntry ste : Core.getProject().getAllEntries()) {
             se = ste.getStrEntry();
             s = se.getSrcText();
@@ -111,7 +118,51 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
             // bugfix for http://sourceforge.net/support/tracker.php?aid=1209839
             if (t == null || t.length() == 0)
                 continue;
-
+            
+            // PO printf variables should be equal.
+            // we check this by adding the string "index+typespecifier" of every 
+            // found variable to a set.
+            // If the sets of the source and target are not equal, then there is
+            // a problem: either missing or extra variables, or the typespecifier
+            // has changed for the variable at the given index.
+            HashSet<String> printfSourceSet = new HashSet<String>();
+            Matcher printfMatcher = printfPattern.matcher(s);
+            int index=1;
+            while (printfMatcher.find()) {
+                String printfVariable = printfMatcher.group(0);
+                String argumentswapspecifier = printfMatcher.group(1);
+                if (argumentswapspecifier != null && argumentswapspecifier.endsWith("\\$")) {
+                    printfSourceSet.add(""+argumentswapspecifier.substring(0, argumentswapspecifier.length()-2)+printfVariable.substring(printfVariable.length()-1, printfVariable.length()));
+                } else {
+                    printfSourceSet.add(""+index+printfVariable.substring(printfVariable.length()-1, printfVariable.length()));
+                    index++;
+                }
+            }
+            HashSet<String> printfTargetSet = new HashSet<String>();
+            printfMatcher = printfPattern.matcher(t);
+            index=1;
+            while (printfMatcher.find()) {
+                String printfVariable = printfMatcher.group(0);
+                String argumentswapspecifier = printfMatcher.group(1);
+                if (argumentswapspecifier != null && argumentswapspecifier.endsWith("\\$")) {
+                    printfTargetSet.add(""+argumentswapspecifier.substring(0, argumentswapspecifier.length()-2)+printfVariable.substring(printfVariable.length()-1, printfVariable.length()));
+                } else {
+                    printfTargetSet.add(""+index+printfVariable.substring(printfVariable.length()-1, printfVariable.length()));
+                    index++;
+                }
+            }
+            if (!printfSourceSet.equals(printfTargetSet)) {
+                suspects.add(ste);
+                continue;
+            }
+            // check PO line ending:
+            Boolean s_ends_lf = s.endsWith("\n");
+            Boolean t_ends_lf = t.endsWith("\n");
+            if (s_ends_lf && !t_ends_lf || !s_ends_lf && t_ends_lf) {
+              suspects.add(ste);
+              continue;
+            }
+            // OmegaT tags check:
             // extract tags from src and loc string
             StaticUtils.buildTagList(s, srcTags);
             StaticUtils.buildTagList(t, locTags);

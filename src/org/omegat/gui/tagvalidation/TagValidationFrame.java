@@ -179,6 +179,7 @@ public class TagValidationFrame extends JFrame
         String htmld = str;
         htmld = htmld.replaceAll("\\<", "&lt;");                                // NOI18N
         htmld = htmld.replaceAll("\\>", "&gt;");                                // NOI18N
+        htmld = htmld.replaceAll("\n", "<br>");                                 // NOI18N
         return htmld;
     }
                    
@@ -187,9 +188,19 @@ public class TagValidationFrame extends JFrame
      */
     private String colorTags(String str, String color)
     {
+        //show OmegaT tags in bold and color
         Matcher tagMatch = PatternConsts.OMEGAT_HTML_TAG.matcher(str);
         str = tagMatch.replaceAll(
                 "<font color=\"" + color + "\"><b>$1</b></font>");              // NOI18N
+        //show linefeed as symbol
+        Matcher lfMatch = PatternConsts.HTML_BR.matcher(str);
+        ///simulate unicode symbol for linefeed "\u240A", which is not displayed correctly.
+        str = lfMatch.replaceAll(
+                "<font color=\"" + color + "\"><sup>L</sup>F<br></font>");      // NOI18N
+        //show printf variables in bold and color (e.g. %s and %n\$s)
+        Matcher varMatch = PatternConsts.PRINTF_VARS.matcher(str);
+        str = varMatch.replaceAll(
+                "<font color=\"" + color + "\"><b>$0</b></font>");              // NOI18N
         return str;
     }
    

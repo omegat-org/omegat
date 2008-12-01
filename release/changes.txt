@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 2.0.0 update 1 vs. 2.0.0
 
-  3 Enhancements
+  5 Enhancements
   2 Bugfixes
 
 ----------------------------------------------------------------------
@@ -27,7 +27,12 @@ matches.
 
   - Japanese localisation updated to 2.0 (UI)
   - Basque localisation updated to 2.0 (UI)
-  - Slovenian localisation updated to 2.0 (UI) 
+  - Slovenian localisation updated to 2.0 (UI)
+  
+  - extra checks in TagValidator for PO linefeed
+  http://sourceforge.net/support/tracker.php?aid=2371683
+  - extra check in TagValidator if printf variables in PO-file segments are correct
+  http://sourceforge.net/support/tracker.php?aid=2371713
 
 ----------------------------------------------------------------------
  OmegaT 2.0.0 Changes

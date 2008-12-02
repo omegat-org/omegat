@@ -12,15 +12,18 @@
   Implemented requests:
   - Extra checks in TagValidator for PO linefeed
   http://sourceforge.net/support/tracker.php?aid=2371683
+  
   - Extra check in TagValidator if printf variables in PO-file segments are correct
   http://sourceforge.net/support/tracker.php?aid=2371713
+  
+  - New English segmentation exceptions
+  http://sourceforge.net/support/tracker.php?aid=1974262 
 
   Other enhancements:
 
-  - The instant start is displayed correctly (right aligned) for RTL 
-languages
-  - OmegaT can use tokenizers to get stemming in fuzzy and glossary
-matches. 
+  - The instant start is displayed correctly (right aligned) for RTL languages
+
+  - OmegaT can use tokenizers to get stemming in fuzzy and glossary matches. 
   (Requires tokenizers from http://sourceforge.net/projects/omegat-plugins)
 
   - Japanese localisation updated to 2.0 (UI)
@@ -89,7 +92,7 @@ can be applied or not with a new option in Options/Font.
 
   - OpenXML filter: New option to translate slide masters in PowerPoint documents
 
-  - Japanese localisation updated to 2.0 (UI)
+  - French localisation updated to 2.0 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 1.8.1 update 1 Changes

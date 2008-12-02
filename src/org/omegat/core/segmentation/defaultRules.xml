@@ -1615,6 +1615,32 @@
      <beforebreak>\s[A-Z]\.</beforebreak>
      <afterbreak>\s</afterbreak>
     </rule>
+    <!--http://sourceforge.net/support/tracker.php?aid=2371683-->
+    <rule break="no">
+     <beforebreak>[apAP]\.?[mM]\.</beforebreak>
+     <afterbreak>\s[a-z]</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>Mt\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>No\.</beforebreak>
+     <afterbreak>\s\d</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>[Aa]pprox\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\d\smi?n\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\d\ssec\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    
    </languagerule>
 
    <!-- Default language-related segmentation rules -->

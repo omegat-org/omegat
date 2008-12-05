@@ -19,6 +19,10 @@
   - New English segmentation exceptions
   http://sourceforge.net/support/tracker.php?aid=1974262 
 
+  - Fuzzy Glossary Matching
+  http://sourceforge.net/support/tracker.php?aid=1374596  
+  (Requires tokenizers from http://sourceforge.net/projects/omegat-plugins)
+
   Other enhancements:
 
   - The instant start is displayed correctly (right aligned) for RTL languages

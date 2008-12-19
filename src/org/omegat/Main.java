@@ -24,6 +24,7 @@
 
 package org.omegat;
 
+import java.io.File;
 import java.util.Date;
 import java.util.Locale;
 
@@ -33,8 +34,11 @@ import javax.swing.UIManager;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.ProjectFactory;
+import org.omegat.core.data.ProjectProperties;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.ProjectFileStorage;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 
@@ -45,6 +49,8 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  */
 public class Main
 {
+    protected static String startProject;
+    
     public static void main(String[] args)
     {
         for (String arg : args) {
@@ -56,6 +62,8 @@ public class Main
             else if (arg.startsWith("resource-bundle=")) {
                 String filename = arg.substring(16);
                 OStrings.loadBundle(filename);
+            } else {
+                startProject = arg;
             }
         }
 
@@ -100,6 +108,17 @@ public class Main
         }
         
         CoreEvents.fireApplicationStartup();
+        
+        if (startProject != null) {
+            try {
+                ProjectProperties props = ProjectFileStorage
+                        .loadProjectProperties(new File(startProject));
+                ProjectFactory.loadProject(props);
+            } catch (Exception ex) {
+                showError(ex);
+            }
+        }
+        
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 // setVisible can't be executed directly, because we need to

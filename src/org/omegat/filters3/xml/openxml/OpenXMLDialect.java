@@ -55,6 +55,7 @@ public class OpenXMLDialect extends DefaultXMLDialect
             // Word
             "w:p",                                                              // NOI18N
             "w:tab",                                                            // NOI18N
+            "w:br",                                                             // NOI18N
             // Excel
             "si",                                                               // NOI18N
             // PowerPoint

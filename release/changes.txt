@@ -104,7 +104,7 @@ can be applied or not with a new option in Options/Font.
 1.8.1 update 1 vs. 1.8.1
 
    3 Enhancements
-   3 Bugfixes
+   4 Bugfixes
 ----------------------------------------------------------------------
 1.8.1 update 1
 
@@ -124,6 +124,9 @@ can be applied or not with a new option in Options/Font.
   - Various corrections in the manual
   - PO Filter: \ is doubled for \t
   http://sourceforge.net/support/tracker.php?aid=2149518
+  - OpenXML filter: Newline (<w:br>) was not defined as a paragraph tag
+  The change might require to revalidate the translation for some existing 
+segments
 
 ----------------------------------------------------------------------
 1.8.1 vs. 1.8.0 update 2

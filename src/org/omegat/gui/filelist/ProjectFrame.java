@@ -44,6 +44,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.List;
@@ -343,12 +344,18 @@ public class ProjectFrame extends JFrame {
     public void buildDisplay() {
         UIThreadsUtil.mustBeSwingThread();
 
+        String path;
         String statFileName = Core.getProject().getProjectProperties()
                 .getProjectInternal()
                 + OConsts.STATS_FILENAME;
         File statFile = new File(statFileName);
+        try {
+            path = statFile.getCanonicalPath();
+        } catch (IOException ex) {
+            path = statFile.getAbsolutePath();
+        }
         String statText = MessageFormat.format(OStrings
-                .getString("PF_STAT_PATH"), statFile.getAbsolutePath());
+                .getString("PF_STAT_PATH"), path);
         statLabel.setText(statText);
 
         files = Core.getProject().getProjectFiles();

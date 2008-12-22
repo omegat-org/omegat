@@ -43,6 +43,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.List;
@@ -342,11 +343,12 @@ public class ProjectFrame extends JFrame {
     public void buildDisplay() {
         UIThreadsUtil.mustBeSwingThread();
 
-        String statFile = Core.getProject().getProjectProperties()
+        String statFileName = Core.getProject().getProjectProperties()
                 .getProjectInternal()
                 + OConsts.STATS_FILENAME;
+        File statFile = new File(statFileName);
         String statText = MessageFormat.format(OStrings
-                .getString("PF_STAT_PATH"), statFile);
+                .getString("PF_STAT_PATH"), statFile.getAbsolutePath());
         statLabel.setText(statText);
 
         files = Core.getProject().getProjectFiles();

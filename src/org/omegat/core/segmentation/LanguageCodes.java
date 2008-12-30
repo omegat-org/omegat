@@ -42,6 +42,8 @@ public final class LanguageCodes
     public static final String JAPANESE_CODE = "Japanese";                     // NOI18N
     public static final String RUSSIAN_CODE = "Russian";                       // NOI18N
     public static final String GERMAN_CODE = "German";                         // NOI18N
+    public static final String CATALAN_CODE = "Catalan";                       // NOI18N
+    public static final String SPANISH_CODE = "Spanish";                       // NOI18N
     public static final String DEFAULT_CODE = "Default";                       // NOI18N
     public static final String F_TEXT_CODE = "Text";                           // NOI18N
     public static final String F_HTML_CODE = "HTML";                           // NOI18N
@@ -51,6 +53,8 @@ public final class LanguageCodes
     public static final String JAPANESE_KEY = "CORE_SRX_RULES_LANG_JAPANESE";  // NOI18N
     public static final String RUSSIAN_KEY = "CORE_SRX_RULES_LANG_RUSSIAN";    // NOI18N
     public static final String GERMAN_KEY = "CORE_SRX_RULES_LANG_GERMAN";      // NOI18N
+    public static final String CATALAN_KEY = "CORE_SRX_RULES_LANG_CATALAN";    // NOI18N
+    public static final String SPANISH_KEY = "CORE_SRX_RULES_LANG_SPANISH";    // NOI18N
     public static final String DEFAULT_KEY = "CORE_SRX_RULES_LANG_DEFAULT";    // NOI18N
     public static final String F_TEXT_KEY = "CORE_SRX_RULES_FORMATTING_TEXT";  // NOI18N
     public static final String F_HTML_KEY = "CORE_SRX_RULES_FORMATTING_HTML";  // NOI18N
@@ -64,6 +68,8 @@ public final class LanguageCodes
         codeKeyHash.put(JAPANESE_CODE, JAPANESE_KEY);
         codeKeyHash.put(RUSSIAN_CODE, RUSSIAN_KEY);
         codeKeyHash.put(GERMAN_CODE, GERMAN_KEY);
+        codeKeyHash.put(CATALAN_CODE, CATALAN_KEY);
+        codeKeyHash.put(SPANISH_CODE, SPANISH_KEY);      
         codeKeyHash.put(DEFAULT_CODE, DEFAULT_KEY);
         codeKeyHash.put(F_TEXT_CODE, F_TEXT_KEY);
         codeKeyHash.put(F_HTML_CODE, F_HTML_KEY);

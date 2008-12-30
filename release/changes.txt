@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 2.0.0 update 1 vs. 2.0.0
 
-  5 Enhancements
+  7 Enhancements
   1 Bugfixe
 
 ----------------------------------------------------------------------
@@ -22,6 +22,9 @@
   - Fuzzy Glossary Matching
   http://sourceforge.net/support/tracker.php?aid=1374596  
   (Requires tokenizers from http://sourceforge.net/projects/omegat-plugins)
+
+  - Catalan and Spanish segmentation rules
+  http://sourceforge.net/support/tracker.php?aid=2282491   
 
   Other enhancements:
 

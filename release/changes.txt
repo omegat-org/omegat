@@ -124,9 +124,12 @@ can be applied or not with a new option in Options/Font.
   Bug fixes:
 
   - PowerPoint: Non translatable text (<p:attrName>) was visible in the editor
+
   - Various corrections in the manual
+
   - PO Filter: \ is doubled for \t
   http://sourceforge.net/support/tracker.php?aid=2149518
+
   - OpenXML filter: Newline (<w:br>) was not defined as a paragraph tag
   The change might require to revalidate the translation for some existing 
 segments
@@ -159,8 +162,10 @@ segments
   - Serbo-Croatian localisation updated to 1.8 (UI, readme)
   
   Bug fixes:
+
   - Extra space in each segment in the German localization
   http://sourceforge.net/support/tracker.php?aid=2169447  
+
   - Vista: wrong location of configuration files
   http://sourceforge.net/support/tracker.php?aid=2200872   
 
@@ -185,12 +190,14 @@ segments
   
   - Spellchecking dialogs not dismissable with [esc]
   http://sourceforge.net/support/tracker.php?aid=1815506
+
   - Wrong Import file dialog title
   http://sourceforge.net/support/tracker.php?aid=1940081 
+
   - Hunspell not working on Linux 64-bit
+
   - Non-ascii char badly handled in hunspell lib loading on OS-X
   http://sourceforge.net/support/tracker.php?aid=1862199  
-
 
 ----------------------------------------------------------------------
  OmegaT 1.8.0 update 1 Changes

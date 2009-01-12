@@ -69,7 +69,8 @@ import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.FloatingDialog;
 
 /**
- * The main window of OmegaT application.
+ * The main window of OmegaT application (unless the application is started in 
+ * consoleMode.
  *
  * @author Keith Godfrey
  * @author Benjamin Siband
@@ -366,7 +367,7 @@ public class MainWindow extends JFrame implements IMainWindow {
      * Displays a warning message.
      *
      * @param msg the message to show
-     * @param e exception occured. may be null
+     * @param e exception occurred. may be null
      */
     public void displayWarning(final String msg, final Throwable e) {
         UIThreadsUtil.executeInSwingThread(new Runnable() {
@@ -461,4 +462,13 @@ public class MainWindow extends JFrame implements IMainWindow {
         // unlock application frame
         setEnabled(true);
     }    
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void showErrorDialogRB(String message, String title) {
+        JOptionPane.showMessageDialog(this.getApplicationFrame(),
+                OStrings.getString(message), OStrings
+                        .getString(title), JOptionPane.ERROR_MESSAGE);
+    }
 }

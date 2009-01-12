@@ -24,63 +24,12 @@
 
 package org.omegat.gui.main;
 
-import java.awt.Font;
-
-import javax.swing.JFrame;
-
-import com.vlsolutions.swing.docking.Dockable;
-
 /**
- * Interface for access to main window functionality.
+ * Interface for access to message window functionality.
  * 
- * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Martin Fleurke
  */
-public interface IMainWindow extends IMessageWindow {
-    /**
-     * Get application frame.
-     */
-    JFrame getApplicationFrame();
-
-    /**
-     * Lock UI for long-term operations.
-     */
-    void lockUI();
-
-    /**
-     * Unlock UI after locking.
-     */
-    void unlockUI();
-
-    /**
-     * Get main application font.
-     */
-    Font getApplicationFont();
-
-    /**
-     * Show message in status bar from resource bundle by key.
-     * 
-     * @param messageKey
-     *                message key in resource bundle
-     * @param params
-     *                message parameters for formatting
-     */
-    void showStatusMessageRB(String messageKey, Object... params);
-
-    /**
-     * Show message in progress bar.
-     * 
-     * @param messageText
-     *                message text
-     */
-    void showProgressMessage(String messageText);
-
-    /**
-     * Show message in length label.
-     * 
-     * @param messageText
-     *                message text
-     */
-    void showLengthMessage(String messageText);
+public interface IMessageWindow {
 
     /**
      * Display error.
@@ -95,11 +44,24 @@ public interface IMainWindow extends IMessageWindow {
     void displayErrorRB(Throwable ex, String errorKey, Object... params);
 
     /**
-     * Add new dockable pane into application frame. This method called on
-     * application startup.
+     * Show message in status window / - bar from resource bundle by key.
      * 
-     * @param pane
-     *                dockable pane
+     * @param messageKey
+     *                message key in resource bundle
+     * @param params
+     *                message parameters for formatting
      */
-    void addDockable(Dockable pane);
+    void showStatusMessageRB(String messageKey, Object... params);
+    
+    /**
+     * Show message in an ErrorDialog
+     * 
+     * @param message 
+     *                message key in resource bundle of message that is to be 
+     *                displayed 
+     * @param title 
+     *                title of dialog. message key in resource bundle of title 
+     *                that is to be displayed
+     */
+    void showErrorDialogRB(String message, String title);
 }

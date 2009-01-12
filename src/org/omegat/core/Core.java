@@ -37,7 +37,9 @@ import org.omegat.core.threads.SaveThread;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.glossary.GlossaryTextArea;
+import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.main.IMessageWindow;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.matches.MatchesTextArea;
@@ -60,16 +62,25 @@ import org.omegat.util.Log;
 public class Core {
     private static IProject currentProject;
     private static IMainWindow mainWindow;
+    private static IMessageWindow messageWindow;
     private static IEditor editor;
     private static ITagValidation tagValidation;
     private static IMatcher matcher;
     private static ITokenizer tokenizer;
     private static ISpellChecker spellChecker;
+    private static boolean consoleMode;
+    private static String preferredConfigDir;
     
     private static CheckThread checkThread;
     private static IAutoSave saveThread;
     
     private static GlossaryTextArea glossary;
+    
+    /**
+     * Toggle for quiet mode. In quiet mode, less info is printed to the screen.
+     * Quiet mode was introduced for the console mode.
+     */
+    private static boolean quiet_mode;
 
 
     /** Get project instance. */
@@ -83,9 +94,18 @@ public class Core {
     }
 
 
-    /** Get main windows instance. */
+    /** Get main window instance. */
     public static IMainWindow getMainWindow() {
         return mainWindow;
+    }
+    
+    /** Get message window instance. */
+    public static IMessageWindow getMessageWindow() {
+        if (getConsoleMode()) {
+            return messageWindow;
+        } else {
+            return mainWindow;
+        }
     }
 
     /** Get editor instance. */
@@ -117,6 +137,42 @@ public class Core {
         return saveThread;
     }
     
+    /** sets the application in console (scripting) mode. In console mode, the 
+     * GUI is not started, but the project loaded and translated and the program 
+     * ends. All informative messages are printed to the standard and error 
+     * outputs (the console) */
+    public static void setConsoleMode(boolean mode)
+    {
+        consoleMode = mode;
+    }
+
+    /** gets the value of console mode */
+    public static boolean getConsoleMode()
+    {
+        return consoleMode;
+    }
+
+    public static void setQuietMode(boolean enable) {
+        quiet_mode = enable;
+    }
+
+    public static boolean getQuietMode() {
+        return quiet_mode;
+    }
+
+    /** sets the preferred configuration directory to be used */
+    public static void setPreferredConfigDir(String configDir)
+    {
+        System.out.println("Preferred config-dir set to:"+configDir);
+        preferredConfigDir = configDir;
+    }
+
+    /** gets the preferred configuration directory */
+    public static String getPreferredConfigDir()
+    {
+        return preferredConfigDir;
+    }
+
     /**
      * Initialize application components.
      */
@@ -124,24 +180,36 @@ public class Core {
         // 1. Initialize project
         currentProject = new NotLoadedProject();
 
-        // 2. Initialize application frame
-        MainWindow me = new MainWindow();
-        mainWindow = me;        
+        if (getConsoleMode()) {
+            // 2. Initialize application window
+            ConsoleWindow me = new ConsoleWindow();
+            messageWindow = me;
+            
+            //3. Initialize other components. There are less in console (scripting) mode.
+            //we don't need editors, tag validators, matchers, spell checker or glossary.
+			tokenizer = createComponent(ITokenizer.class, new Tokenizer(), args);
+        } else {
+            // 2. Initialize application frame
+            MainWindow me = new MainWindow();
+            mainWindow = me;
 
-        // 3. Initialize other components
-        editor = new EditorController(me);
-        tagValidation = new TagValidationTool(me);
-        matcher = new MatchesTextArea(me);
-        glossary = new GlossaryTextArea();
-        tokenizer = createComponent(ITokenizer.class, new Tokenizer(), args);
-        spellChecker = new SpellChecker();
+            //3. Initialize other components
+            editor = new EditorController(me);
+            tagValidation = new TagValidationTool(me);
+            matcher = new MatchesTextArea(me);
+            glossary = new GlossaryTextArea();
+			tokenizer = createComponent(ITokenizer.class, new Tokenizer(), args);
+			spellChecker = new SpellChecker();
+        }
+
+        if (!getConsoleMode()) {
+            checkThread = new CheckThread();
+            checkThread.start();
         
-        checkThread = new CheckThread();
-        checkThread.start();
-        
-        SaveThread th = new SaveThread();
-        saveThread = th;
-        th.start();
+            SaveThread th = new SaveThread();
+            saveThread = th;
+            th.start();
+        }
         
         SRX.getSRX();
     }
@@ -157,7 +225,7 @@ public class Core {
      *                default component implementation instance
      * @param args
      *                command line
-     * @return component inmplementation
+     * @return component implementation
      */
     protected static <T> T createComponent(final Class<T> interfaceClass, final T defaultImplementation,
             final String[] args) {
@@ -193,4 +261,5 @@ public class Core {
     protected static void setCurrentProject(IProject currentProject) {
         Core.currentProject = currentProject;
     }
+
 }

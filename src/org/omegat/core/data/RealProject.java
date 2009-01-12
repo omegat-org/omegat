@@ -63,7 +63,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * Loaded project implementation. Only translation could be changed after
- * project will be loaded and setted by Core.setProject.
+ * project will be loaded and set by Core.setProject.
  * 
  * All components can read all data directly without synchronization. All
  * synchronization implemented inside RealProject.
@@ -126,7 +126,7 @@ public class RealProject implements IProject
         }
         loadProject(props);
         
-        // make requered collections unmodifiable
+        // make required collections unmodifiable
         m_srcTextEntryArray = Collections.unmodifiableList(m_srcTextEntryArray);
         m_legacyTMs = Collections.unmodifiableList(m_legacyTMs);
         m_tmList = Collections.unmodifiableList(m_tmList);
@@ -142,7 +142,7 @@ public class RealProject implements IProject
     }
     
     /**
-     * Load exist project in a "big" sense -- loads project's properties, glossaryes,
+     * Load exist project in a "big" sense -- loads project's properties, glossaries,
      * tms, source files etc.
      * 
      * @param props properties for new project
@@ -150,7 +150,7 @@ public class RealProject implements IProject
     private void loadProject(final ProjectProperties props) {
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_LOAD_START"));
         UIThreadsUtil.mustNotBeSwingThread();
-                        
+        
         // load new project
         try
         {
@@ -160,7 +160,7 @@ public class RealProject implements IProject
             
             m_config = props;
             
-            Core.getMainWindow().showStatusMessageRB("CT_LOADING_PROJECT");
+            Core.getMessageWindow().showStatusMessageRB("CT_LOADING_PROJECT");
                         
             loadSourceFiles();
             
@@ -174,7 +174,7 @@ public class RealProject implements IProject
             catch (IOException e)
             {
                 Log.logErrorRB(e, "TF_TM_LOAD_ERROR");
-                Core.getMainWindow().displayErrorRB(e, "TF_TM_LOAD_ERROR");
+                Core.getMessageWindow().displayErrorRB(e, "TF_TM_LOAD_ERROR");
                 // allow project load to resume
             }
 
@@ -182,14 +182,14 @@ public class RealProject implements IProject
             Statistics.buildProjectStats(m_strEntryList, m_srcTextEntryArray, m_config, numberofTranslatedSegments);
             
             // Project Loaded...
-            Core.getMainWindow().showStatusMessageRB(null);
+            Core.getMessageWindow().showStatusMessageRB(null);
             
             m_modifiedFlag = false;
         }
         catch( Exception e )
         {
                 Log.logErrorRB(e, "TF_LOAD_ERROR");
-                Core.getMainWindow().displayErrorRB(e, "TF_LOAD_ERROR");
+                Core.getMessageWindow().displayErrorRB(e, "TF_LOAD_ERROR");
         }
         // Fix for bug 1571944 @author Henry Pijffers (henry.pijffers@saxnot.com)
         catch (OutOfMemoryError oome) {
@@ -210,12 +210,9 @@ public class RealProject implements IProject
             // There, that should do it, now inform the user
             Log.logErrorRB("OUT_OF_MEMORY");
             Log.log(oome);
-            
-            JOptionPane.showMessageDialog(Core.getMainWindow()
-                    .getApplicationFrame(),
-                    OStrings.getString("OUT_OF_MEMORY"), OStrings
-                            .getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
-
+            Core.getMessageWindow().showErrorDialogRB(
+                    OStrings.getString("OUT_OF_MEMORY"),
+                    OStrings.getString("TF_ERROR"));
             // Just quit, we can't help it anyway
             System.exit(0);
         }
@@ -308,13 +305,13 @@ public class RealProject implements IProject
                 }
             }
         }
-        
+
         // build translated files
         FilterMaster fm = FilterMaster.getInstance();
-        
+
         fileList.clear();
         StaticUtils.buildFileList(fileList, new File(srcRoot), true);
-        
+
         Set<File> processedFiles = new HashSet<File>();
         
         TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback();
@@ -326,15 +323,14 @@ public class RealProject implements IProject
                 continue;
             // shorten filename to that which is relative to src root
             String midName = filename.substring(srcRoot.length());
-	        Core.getMainWindow().showStatusMessageRB("CT_COMPILE_FILE_MX",
-                    midName);
+            Core.getMessageWindow().showStatusMessageRB("CT_COMPILE_FILE_MX",
+                        midName);
 
             fm.translateFile(srcRoot, midName, locRoot, processedFiles, translateFilesCallback);
         }
-        Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX");
-
+        Core.getMessageWindow().showStatusMessageRB("CT_COMPILE_DONE_MX");
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
-        
+
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_COMPILE_END"));
     }
     
@@ -384,7 +380,7 @@ public class RealProject implements IProject
         catch (IOException e)
         {
             Log.logErrorRB(e, "CT_ERROR_SAVING_PROJ");
-            Core.getMainWindow().displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
+            Core.getMessageWindow().displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
             
             // try to rename backup file to original name
             if (!corruptionDanger)
@@ -439,7 +435,7 @@ public class RealProject implements IProject
         {
             // trouble in tinsletown...
             Log.logErrorRB(e, "CT_ERROR_CREATING_PROJECT");
-            Core.getMainWindow().displayErrorRB(e, "CT_ERROR_CREATING_PROJECT");
+            Core.getMessageWindow().displayErrorRB(e, "CT_ERROR_CREATING_PROJECT");
         }
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_CREATE_END"));
     }
@@ -487,7 +483,7 @@ public class RealProject implements IProject
         {
             // file probably exists, but something's wrong
             Log.logErrorRB(se, "CT_ERROR_ACCESS_PROJECT_FILE");
-            Core.getMainWindow().displayErrorRB(se, "CT_ERROR_ACCESS_PROJECT_FILE");
+            Core.getMessageWindow().displayErrorRB(se, "CT_ERROR_ACCESS_PROJECT_FILE");
             return;
         }
         
@@ -497,13 +493,13 @@ public class RealProject implements IProject
             // since the source files may have changed since the last time
             //  they were loaded, load each string then look for it's
             //  owner
-            Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
+            Core.getMessageWindow().showStatusMessageRB("CT_LOAD_TMX");
             loadTMXFile(tmxFile.getAbsolutePath(), "UTF-8", true); // NOI18N
         }
         catch (IOException e)
         {
             Log.logErrorRB(e, "CT_ERROR_LOADING_PROJECT_FILE");
-            Core.getMainWindow().displayErrorRB(e, "CT_ERROR_LOADING_PROJECT_FILE");
+                Core.getMessageWindow().displayErrorRB(e, "CT_ERROR_LOADING_PROJECT_FILE");
         }
     }
 
@@ -536,7 +532,7 @@ public class RealProject implements IProject
             // feed file name to project window
             String filepath = filename.substring(m_config.getSourceRoot().length());
             
-            Core.getMainWindow().showStatusMessageRB("CT_LOAD_FILE_MX",
+            Core.getMessageWindow().showStatusMessageRB("CT_LOAD_FILE_MX",
                     filepath);
             
             LoadFilesCallback loadFilesCallback = new LoadFilesCallback();
@@ -563,7 +559,7 @@ public class RealProject implements IProject
             }
         }
         projectFilesList = Collections.unmodifiableList(pfl);
-        Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
+        Core.getMessageWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
     }
     
     /** Locates and loads external TMX files with legacy translations. */

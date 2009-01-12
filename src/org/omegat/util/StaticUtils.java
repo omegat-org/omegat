@@ -26,6 +26,8 @@
 
 package org.omegat.util;
 
+import org.omegat.core.Core;
+
 import java.awt.GraphicsEnvironment;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -377,6 +379,14 @@ public class StaticUtils
         // if the configuration directory has already been determined, return it
         if (m_configDir != null)
             return m_configDir;
+
+        String preferredConfigDir = Core.getPreferredConfigDir();
+        if(preferredConfigDir!=null)
+        {
+            //use the preferred directory
+            m_configDir = new File(preferredConfigDir).getAbsolutePath() + File.separator;
+            return m_configDir;
+        }
         
         String os;   // name of operating system
         String home; // user home directory

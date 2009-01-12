@@ -81,7 +81,7 @@ public class SaveThread extends Thread implements IAutoSave {
                     LOGGER.fine("Start project save from SaveThread");
                     dataEngine.saveProject();
                     LOGGER.fine("Finish project save from SaveThread");
-                    Core.getMainWindow().showStatusMessageRB(
+                    Core.getMessageWindow().showStatusMessageRB(
                             "ST_PROJECT_AUTOSAVED",
                             DateFormat.getTimeInstance(DateFormat.SHORT)
                                     .format(new Date()));

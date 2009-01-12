@@ -1,14 +1,14 @@
 ----------------------------------------------------------------------
  OmegaT ?.?.? Changes
 ----------------------------------------------------------------------
-?.?.? vs. 2.0.0 update 1
+2.0.0 update 2 vs. 2.0.0 update 1
   1 Bugfix
 
 ----------------------------------------------------------------------
-?.?.?
+2.0.0 update 2
   
   Bug Fixes: 
-  - Fix for detection printf-variables with index specifier
+  - Fix for detection of printf-variables with index specifier
   (for feature http://sourceforge.net/support/tracker.php?aid=2371713)
 
 ----------------------------------------------------------------------

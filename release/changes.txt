@@ -2,12 +2,19 @@
  OmegaT 2.0.0 update 2 Changes
 ----------------------------------------------------------------------
 2.0.0 update 2 vs. 2.0.0 update 1
+
+  1 Enhancement
   1 Bugfix
 
 ----------------------------------------------------------------------
 2.0.0 update 2
   
+  Other enhancements:
+  
+  - Console mode, to be able to run OmegaT without user interface
+
   Bug Fixes: 
+
   - Fix for detection of printf-variables with index specifier
   (for feature http://sourceforge.net/support/tracker.php?aid=2371713)
 

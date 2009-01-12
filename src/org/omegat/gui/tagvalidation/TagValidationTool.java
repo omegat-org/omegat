@@ -131,8 +131,8 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
             while (printfMatcher.find()) {
                 String printfVariable = printfMatcher.group(0);
                 String argumentswapspecifier = printfMatcher.group(1);
-                if (argumentswapspecifier != null && argumentswapspecifier.endsWith("\\$")) {
-                    printfSourceSet.add(""+argumentswapspecifier.substring(0, argumentswapspecifier.length()-2)+printfVariable.substring(printfVariable.length()-1, printfVariable.length()));
+                if (argumentswapspecifier != null && argumentswapspecifier.endsWith("$")) {
+                    printfSourceSet.add(""+argumentswapspecifier.substring(0, argumentswapspecifier.length()-1)+printfVariable.substring(printfVariable.length()-1, printfVariable.length()));
                 } else {
                     printfSourceSet.add(""+index+printfVariable.substring(printfVariable.length()-1, printfVariable.length()));
                     index++;
@@ -144,8 +144,8 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
             while (printfMatcher.find()) {
                 String printfVariable = printfMatcher.group(0);
                 String argumentswapspecifier = printfMatcher.group(1);
-                if (argumentswapspecifier != null && argumentswapspecifier.endsWith("\\$")) {
-                    printfTargetSet.add(""+argumentswapspecifier.substring(0, argumentswapspecifier.length()-2)+printfVariable.substring(printfVariable.length()-1, printfVariable.length()));
+                if (argumentswapspecifier != null && argumentswapspecifier.endsWith("$")) {
+                    printfTargetSet.add(""+argumentswapspecifier.substring(0, argumentswapspecifier.length()-1)+printfVariable.substring(printfVariable.length()-1, printfVariable.length()));
                 } else {
                     printfTargetSet.add(""+index+printfVariable.substring(printfVariable.length()-1, printfVariable.length()));
                     index++;

@@ -2046,6 +2046,11 @@
      <beforebreak>\d\ssec\.</beforebreak>
      <afterbreak>\s</afterbreak>
     </rule>
+    <!--http://sourceforge.net/support/tracker.php?aid=2493485-->
+    <rule break="no">
+     <beforebreak>\s[vV][sS]?\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
     
    </languagerule>
 

@@ -3,12 +3,16 @@
 ----------------------------------------------------------------------
 2.0.0 update 2 vs. 2.0.0 update 1
 
-  1 Enhancement
+  2 Enhancement
   1 Bugfix
 
 ----------------------------------------------------------------------
 2.0.0 update 2
   
+  Implemented requests:
+  - New English exception
+  http://sourceforge.net/support/tracker.php?aid=2493485 
+
   Other enhancements:
   
   - Console mode, to be able to run OmegaT without user interface

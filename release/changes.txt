@@ -3,15 +3,19 @@
 ----------------------------------------------------------------------
 2.0.0 update 2 vs. 2.0.0 update 1
 
-  2 Enhancement
+  2 Enhancements
   1 Bugfix
 
 ----------------------------------------------------------------------
 2.0.0 update 2
   
   Implemented requests:
+
   - New English exception
   http://sourceforge.net/support/tracker.php?aid=2493485 
+
+  Changing the location of user files
+  http://sourceforge.net/support/tracker.php?aid=2317274  
 
   Other enhancements:
   

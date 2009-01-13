@@ -187,6 +187,7 @@ Code has been contributed by
   Alex Buloichik
   Sandra Jean Chua
   Martin Fleurke  
+  Wildrich Fourie
   Thomas Huriaux
   Fabián Mandelbaum
   Maxym Mykhalchuk 

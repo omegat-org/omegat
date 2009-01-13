@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 2.0.0 update 2 vs. 2.0.0 update 1
 
-  3 Enhancements
+  4 Enhancements
   1 Bugfix
 
 ----------------------------------------------------------------------
@@ -14,9 +14,12 @@
   - New English exception
   http://sourceforge.net/support/tracker.php?aid=2493485 
 
-  Changing the location of user files
+  - Changing the location of user files
   http://sourceforge.net/support/tracker.php?aid=2317274  
 
+  - Combine identical and similar glossary entries
+  http://sourceforge.net/support/tracker.php?aid=2505552 
+  
   Other enhancements:
   
   - Console mode, to be able to run OmegaT without user interface

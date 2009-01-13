@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Alex Buloichik
+               2009 Wildrich Fourie
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,6 +27,7 @@
 package org.omegat.gui.glossary;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.SwingUtilities;
@@ -54,6 +56,7 @@ import org.omegat.util.Token;
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Wildrich Fourie
  */
 public class FindGlossaryThread extends Thread {
     private final GlossaryTextArea glossaryController;
@@ -105,6 +108,24 @@ public class FindGlossaryThread extends Thread {
             }
         }
 
+        // After the matched entries have been tokenized and listed.
+        // We remove the duplicates and combine the synonyms.
+        // Then the matches are ordered to display the biggest matches first.
+        result = FilterGlossary(result);
+        for(int z=0; z < result.size(); z++)
+            for(int x=z+1; x < result.size()-1; x++)
+            {
+                GlossaryEntry zEntry = (GlossaryEntry)result.get(z);
+                GlossaryEntry xEntry = (GlossaryEntry)result.get(x);
+
+                if(xEntry.getSrcText().length() > zEntry.getSrcText().length())
+                {
+                    Object temp = result.get(x);
+                    result.set(x, result.get(z));
+                    result.set(z,(GlossaryEntry) temp);
+                }
+            }
+
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 if (glossaryController.processedEntry == processedEntry) {
@@ -112,5 +133,74 @@ public class FindGlossaryThread extends Thread {
                 }
             }
         });
+    }
+
+    
+    // Filter out doubles, and combine synonyms.
+    private List FilterGlossary(List glosEntries) {
+        List compactEntries = new LinkedList();
+        int entriesNum = glosEntries.size();
+
+        if (entriesNum != 0) {
+            if (entriesNum == 1) {
+                compactEntries.add(glosEntries.get(0));
+            } else {
+                for (int h = 0; h < entriesNum; h++) {
+                    List LocList = new LinkedList();
+
+                    GlossaryEntry nowEntry = (GlossaryEntry) glosEntries.get(h);
+
+                    // If the entry isn't empty split the seperate terms.
+                    if (!nowEntry.getSrcText().equals("")) {                    // NOI18N
+                        String[] SrcSplit = nowEntry.getLocText().split(", ");  // NOI18N
+                        for (int b = 0; b < SrcSplit.length; b++) {
+                            LocList.add(SrcSplit[b]);
+                        }
+
+                        for (int g = h + 1; g < entriesNum; g++) {
+                            GlossaryEntry thenEntry = 
+                                    (GlossaryEntry) glosEntries.get(g);
+
+                            if ( (nowEntry.getSrcText().
+                                    equals(thenEntry.getSrcText())) &&
+                                  (thenEntry.getCommentText(). 
+                                     equals(nowEntry.getCommentText())) 
+                                     // We only merge entries with equal 
+                                     // (or none) comments
+                               )
+                            {
+                                String[] LocArray = 
+                                        thenEntry.getLocText().split(", ");     // NOI18N
+                                for (int d = 0; d < LocArray.length; d++) {
+                                    if (!LocList.contains(LocArray[d])) {
+                                        LocList.add(LocArray[d]);
+                                        nowEntry.setLocText
+                                                (nowEntry.getLocText() + 
+                                                ", " + LocArray[d]);            // NOI18N
+                                    }
+                                }
+
+                                GlossaryEntry replaceEntry = 
+                                        new GlossaryEntry("", "", "");          // NOI18N
+                                glosEntries.set(g, replaceEntry);
+                            }
+                        }
+
+                        compactEntries.add(nowEntry);
+                    }
+                }
+            }
+        }
+
+        // Clean the GlossaryEntries
+        for(int c = glosEntries.size() - 1; c >= 0; c--)
+        {
+            if (((GlossaryEntry) glosEntries.get(c)).getSrcText().equals(""))
+            {
+                glosEntries.remove(c);
+            }
+        }
+
+        return compactEntries;
     }
 }

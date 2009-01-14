@@ -498,13 +498,13 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         catch (SAXParseException ex) {
             Log.logErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex
                     .getLineNumber(), ex.getColumnNumber());
-            Core.getMessageWindow().displayErrorRB(ex,
+            Core.getMainWindow().displayErrorRB(ex,
                     "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(),
                     ex.getColumnNumber());
         } catch (Exception ex) {
             Log.logErrorRB(ex, "TMXR_EXCEPTION_WHILE_PARSING", displayFilename,
                     Log.getLogLocation());
-            Core.getMessageWindow().displayErrorRB(ex,
+            Core.getMainWindow().displayErrorRB(ex,
                     "TMXR_EXCEPTION_WHILE_PARSING", displayFilename,
                     Log.getLogLocation());
         }

@@ -24,12 +24,15 @@
 
 package org.omegat.gui.main;
 
-import javax.swing.JOptionPane;
+import java.awt.Font;
 
-import org.omegat.core.Core;
+import javax.swing.JFrame;
+
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
-import org.omegat.util.gui.UIThreadsUtil;
+
+import com.vlsolutions.swing.docking.Dockable;
 
 /**
  * The main window of OmegaT application, if the program is started in 
@@ -37,7 +40,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  *
  * @author Martin Fleurke
  */
-public class ConsoleWindow implements IMessageWindow {
+public class ConsoleWindow implements IMainWindow {
     /**
      * {@inheritDoc}
      */
@@ -63,7 +66,7 @@ public class ConsoleWindow implements IMessageWindow {
      * Nothing is shown in quiet mode.
      */
     public void showStatusMessageRB(String messageKey, Object... params) {
-        if (Core.getQuietMode()) return;
+        if (Preferences.isQuietMode()) return;
 
         final String msg;
         if (messageKey == null) {
@@ -83,5 +86,27 @@ public class ConsoleWindow implements IMessageWindow {
      */
     public void showErrorDialogRB(String message, String title) {
         System.err.println(OStrings.getString(message));
+    }
+    
+    public void addDockable(Dockable pane) {
+        throw new NoSuchMethodError("Invalid call of ConsoleWindow");
+    }
+    public Font getApplicationFont() {
+        throw new NoSuchMethodError("Invalid call of ConsoleWindow");
+    }
+    public JFrame getApplicationFrame() {
+        throw new NoSuchMethodError("Invalid call of ConsoleWindow");
+    }
+    public void lockUI() {
+        throw new NoSuchMethodError("Invalid call of ConsoleWindow");
+    }
+    public void showLengthMessage(String messageText) {
+        throw new NoSuchMethodError("Invalid call of ConsoleWindow");
+    }
+    public void showProgressMessage(String messageText) {
+        throw new NoSuchMethodError("Invalid call of ConsoleWindow");
+    }
+    public void unlockUI() {
+        throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
 }

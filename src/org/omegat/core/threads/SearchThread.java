@@ -206,7 +206,7 @@ public class SearchThread extends Thread
                             // something bad happened
                             // alert user to badness
                             Log.logErrorRB(e, "ST_FILE_SEARCH_ERROR");
-                            Core.getMessageWindow().displayErrorRB(e, "ST_FILE_SEARCH_ERROR");
+                            Core.getMainWindow().displayErrorRB(e, "ST_FILE_SEARCH_ERROR");
                             
                         }
                         catch (TranslationException te)
@@ -214,7 +214,7 @@ public class SearchThread extends Thread
                             // something bad happened
                             // alert user to badness
                             Log.logErrorRB(te, "ST_FILE_SEARCH_ERROR");
-                            Core.getMessageWindow().displayErrorRB(te, "ST_FILE_SEARCH_ERROR");
+                            Core.getMainWindow().displayErrorRB(te, "ST_FILE_SEARCH_ERROR");
                         }
                     }
                     
@@ -234,7 +234,7 @@ public class SearchThread extends Thread
         catch (RuntimeException re)
         {
             Log.logErrorRB(re, "ST_FATAL_ERROR");
-            Core.getMessageWindow().displayErrorRB(re, "ST_FATAL_ERROR");
+            Core.getMainWindow().displayErrorRB(re, "ST_FATAL_ERROR");
             m_window.threadDied();
         }
     }

@@ -70,7 +70,7 @@ import com.vlsolutions.swing.docking.FloatingDialog;
 
 /**
  * The main window of OmegaT application (unless the application is started in 
- * consoleMode.
+ * consoleMode).
  *
  * @author Keith Godfrey
  * @author Benjamin Siband

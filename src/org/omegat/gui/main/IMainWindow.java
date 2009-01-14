@@ -35,7 +35,7 @@ import com.vlsolutions.swing.docking.Dockable;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public interface IMainWindow extends IMessageWindow {
+public interface IMainWindow {
     /**
      * Get application frame.
      */
@@ -93,6 +93,18 @@ public interface IMainWindow extends IMessageWindow {
      *                error text parameters
      */
     void displayErrorRB(Throwable ex, String errorKey, Object... params);
+
+    /**
+     * Show message in an ErrorDialog
+     * 
+     * @param message 
+     *                message key in resource bundle of message that is to be 
+     *                displayed 
+     * @param title 
+     *                title of dialog. message key in resource bundle of title 
+     *                that is to be displayed
+     */
+    void showErrorDialogRB(String message, String title);
 
     /**
      * Add new dockable pane into application frame. This method called on

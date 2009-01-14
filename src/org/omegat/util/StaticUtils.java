@@ -26,8 +26,6 @@
 
 package org.omegat.util;
 
-import org.omegat.core.Core;
-
 import java.awt.GraphicsEnvironment;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -380,11 +378,10 @@ public class StaticUtils
         if (m_configDir != null)
             return m_configDir;
 
-        String preferredConfigDir = Core.getPreferredConfigDir();
-        if(preferredConfigDir!=null)
-        {
-            //use the preferred directory
-            m_configDir = new File(preferredConfigDir).getAbsolutePath() + File.separator;
+        String cd = Preferences.getConfigDir();
+        if (cd != null) {
+            // use the forced specified directory
+            m_configDir = new File(cd).getAbsolutePath() + File.separator;
             return m_configDir;
         }
         

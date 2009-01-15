@@ -71,7 +71,7 @@ public class Main {
                 projectLocation = arg.substring(8);
                 runMode = RUN_MODE.CONSOLE_TRANSLATE;
             } else if (arg.startsWith("config-dir=")) {
-                RuntimePreferences.setConfigDir(arg.substring(12));
+                RuntimePreferences.setConfigDir(arg.substring(11));
             } else if (arg.startsWith("-quiet")) {
                 RuntimePreferences.setQuietMode(true);
             }

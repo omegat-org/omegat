@@ -38,8 +38,8 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
+import org.omegat.util.RuntimePreferences;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 
@@ -71,9 +71,9 @@ public class Main {
                 projectLocation = arg.substring(8);
                 runMode = RUN_MODE.CONSOLE_TRANSLATE;
             } else if (arg.startsWith("config-dir=")) {
-                Preferences.setConfigDir(arg.substring(11));
+                RuntimePreferences.setConfigDir(arg.substring(12));
             } else if (arg.startsWith("-quiet")) {
-                Preferences.setQuietMode(true);
+                RuntimePreferences.setQuietMode(true);
             }
         }
 

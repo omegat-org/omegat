@@ -441,25 +441,6 @@ public class Preferences
     // use array lists for orderly recovery of it for saving to disk
     private static List<String> m_nameList;
     private static List<String> m_valList;
-    private static Map<String,Integer>   m_preferenceMap;
-    
-    /** Quiet mode. */
-    private static boolean quietMode;
-    public static boolean isQuietMode() {
-        return quietMode;
-    }
-    public static void setQuietMode(boolean v) {
-        quietMode = v;
-    }
-    
-    /** Force use specified config dir. */ 
-    private static String configDir;
-    public static String getConfigDir() {
-        return configDir;
-    }
-    public static void setConfigDir(String configDir) {
-        Preferences.configDir = configDir;
-    }
-    
+    private static Map<String,Integer>   m_preferenceMap;    
 }
 

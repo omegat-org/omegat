@@ -29,7 +29,7 @@ import java.awt.Font;
 import javax.swing.JFrame;
 
 import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
+import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StaticUtils;
 
 import com.vlsolutions.swing.docking.Dockable;
@@ -66,7 +66,7 @@ public class ConsoleWindow implements IMainWindow {
      * Nothing is shown in quiet mode.
      */
     public void showStatusMessageRB(String messageKey, Object... params) {
-        if (Preferences.isQuietMode()) return;
+        if (RuntimePreferences.isQuietMode()) return;
 
         final String msg;
         if (messageKey == null) {

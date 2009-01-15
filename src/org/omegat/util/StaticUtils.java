@@ -378,7 +378,7 @@ public class StaticUtils
         if (m_configDir != null)
             return m_configDir;
 
-        String cd = Preferences.getConfigDir();
+        String cd = RuntimePreferences.getConfigDir();
         if (cd != null) {
             // use the forced specified directory
             m_configDir = new File(cd).getAbsolutePath() + File.separator;

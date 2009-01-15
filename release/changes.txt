@@ -133,6 +133,21 @@ can be applied or not with a new option in Options/Font.
   - French localisation updated to 2.0 (UI)
 
 ----------------------------------------------------------------------
+ OmegaT 1.8.1 update 2 Changes
+----------------------------------------------------------------------
+1.8.1 update 2 vs. 1.8.1 update 1
+
+   0 Enhancement
+   1 Bugfix
+----------------------------------------------------------------------
+1.8.1 update 2
+
+  Bug fixes:
+  
+  - PL "Create new project" too large on OSX
+  http://sourceforge.net/support/tracker.php?aid=1895406
+
+----------------------------------------------------------------------
  OmegaT 1.8.1 update 1 Changes
 ----------------------------------------------------------------------
 1.8.1 update 1 vs. 1.8.1

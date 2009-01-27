@@ -1,54 +1,93 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Urejanje prevoda - Priročnik za uporabnika OmegaT 1.7.3</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Urejanje prevoda - Priročnik za uporabnika OmegaT 1.8</title>
 </head>
+
 <body>
+  <h2>Kako se OmegaT vede pri urejanju</h2>
 
-	<h1>Kako se OmegaT vede pri urejanju</h1>
+  <ul>
+    <li>
+      <p><a href="#auto_insert">Samodejno vstavljanje cilja</a></p>
+    </li>
 
-	<ul>
-		<li><a href="#auto_insert">Samodejno vstavljanje cilja</a></li>
-		<li><a href="#validation">Segmenti, ki se jih ne spreminja</a></li>
-	</ul>
+    <li>
+      <p><a href="#validation">Segmenti, ki se jih ne spreminja</a></p>
+    </li>
+  </ul>
 
+  <p>Naslednje možnosti so na razpolago, kar se vedenja polja za urejanje tiče.:</p>
 
-	<p>Naslednje možnosti so na razpolago, kar se vedenja polja za urejanje tiče.:</p>
-	
-	<ul>
-		<li>Vstavi samodejno najboljši mehki zadetek </li>
-		<li>Segmente, ki so enaki originalu, je razumeti kot da so prevedeni.</li>
-	</ul>
-	
-	<hr>
-	
-	<a name="auto_insert" id="auto_insert"></a>
-	<h1>Samodejno vstavljanje cilja</h1>
-	
-	<p>Svoje datoteke prevajate korak za korakom, premikajoč se od segmenta do segmenta, pri čemer vedno prevajate en sam, tekoči segment. Ko prehajate od enega segmenta do drugega, bi mogoče želeli, da se ciljno polje napolni samo od sebe s predlogom za prevod ali z izvornim besedilom. </p>
-	
-	<p>OmegaT ima v ta namen v <strong>Možnosti → Vedenje pri prevajanju...</strong> naslednje možnosti:</p>
+  <ul>
+    <li>
+      <p>Vstavi samodejno najboljši mehki zadetek </p>
+    </li>
 
-	<dl>
-		<dt><strong>izvirno besedilo</strong></dt><dd>v izhodno polje lahko vstavljate samodejno izvorno besedilo.  To je zelo koristno, kadar segment vsebuje številne blagovne znamke ali lastna imena, ki se jih ne sme spreminjati.</dd>
-		<dt><strong>pusti segment prazen</strong></dt><dd>OmegaT lahko tudi pusti ciljno polje prazno. Če se odločite za to možnost, vam izvornega besedila ni treba več odstranjevati kot v zgornjem primeru (<code>Ctrl+A</code> in <code>Del</code>), , tako da si prihranite nekaj tipkanja.</dd>
-		<dt><strong>vstavi najboljši mehki zadetek </strong></dt><dd>OmegaT navsezadnje lahko tudi vstavi niz, ki je med že prevedenimi segmenti še najbolj podoben izvornemu besedilu, pod pogojem, da je njega podobnost nad mejo, ki jo lahko nastavite sami.</dd>
-	</dl>
+    <li>
+      <p>Segmente, ki so enaki originalu, je razumeti kot da so prevedeni.</p>
+    </li>
+  </ul>
+  <hr>
 
-<hr>
+  <h2><a name="auto_insert" id="auto_insert"></a>Samodejno vstavljanje cilja</h2>
 
-	<a name="validation" id="validation"></a>
-	<h1>Segmenti, ki se jih ne spreminja</h1>
+  <p>Svoje datoteke prevajate korak za korakom, premikajoč se od segmenta do segmenta, pri čemer vedno prevajate en sam, tekoči segment. Ko prehajate od enega segmenta do drugega, bi mogoče želeli, da se ciljno polje napolni samo od sebe s predlogom za prevod ali z izvornim besedilom. </p>
 
-	<p>dokumenti, ki jih prevajate, lahko vsebujejo blagovne znamke, imena ali druga lastna imena, ki morajo v prevedenem besedilu ostati enaka. Za segmente, ki vsebujejo nespremenljivo besedilo, sta na razpolago dve strategiji.</p>
+  <p>OmegaT ima v ta namen v <strong>Možnosti → Vedenje pri prevajanju...</strong> naslednje možnosti:</p>
 
-	<p>Prvič, lahko se odločite, da teh segmentov ne boste prevajali, vendar se lahko zgodi, da boste na to pozabili in jih kasneje vseeno prevedli, posebno zaradi tega, ker bo OmegaT javljal, da ti segmenti niso prevedeni. To je privzeto vedenje programa OmegaT.</p>
+  <table cellpadding="2" cellspacing="2">
+    <tr valign="top">
+      <td>
+        <p><strong>izvirno besedilo</strong></p>
+      </td>
 
-	<p>Drugič, OmegaT lahko daste vedeti, da naj prevod shrani tudi v primeru, da je identičen originalu, tako da si bo dejstvo, da ste segment pregledali, zapomnil in ga v bodoče prevedel oziroma prekopiral. Pojdite na <strong>Možnosti -&gt; Vedenje ob urejanju...</strong> in odkljukajte <strong>Dovoli, da sta prevod in izvor enaka</strong>.</p>
+      <td>
+        <p>v izhodno polje lahko vstavljate samodejno izvorno besedilo.  To je zelo koristno, kadar segment vsebuje številne blagovne znamke ali lastna imena, ki se jih ne sme spreminjati.</p>
+      </td>
+    </tr>
 
-	<hr>
+    <tr valign="top">
+      <td>
+        <p><strong>pusti segment prazen</strong></p>
+      </td>
 
-	<p><a href="legalNotices.html">Pravni poduk</a></p>
+      <td>
+        <p>OmegaT lahko tudi pusti ciljno polje prazno. Če se odločite za to možnost, vam izvornega besedila ni treba več odstranjevati kot v zgornjem primeru (<code>Ctrl+A</code> in <code>Del</code>), tako da si prihranite nekaj tipkanja.</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td>
+        <p><strong>vstavi najboljši mehki zadetek </strong></p>
+      </td>
+
+      <td>
+        <p>OmegaT navsezadnje lahko tudi vstavi niz, ki je med že prevedenimi segmenti še najbolj podoben izvornemu besedilu, pod pogojem, da je njega podobnost nad mejo, ki jo lahko nastavite sami.</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2><a name="validation" id="validation"></a>Segmenti, ki se jih ne spreminja</h2>
+
+  <p>dokumenti, ki jih prevajate, lahko vsebujejo blagovne znamke, imena ali druga lastna imena, ki morajo v prevedenem besedilu ostati enaka. Za segmente, ki vsebujejo nespremenljivo besedilo, sta na razpolago dve strategiji.</p>
+
+  <p>Prvič, lahko se odločite, da teh segmentov ne boste prevajali, vendar se lahko zgodi, da boste na to pozabili in jih kasneje vseeno prevedli, posebno zaradi tega, ker bo OmegaT javljal, da ti segmenti niso prevedeni. To je privzeto vedenje programa OmegaT.</p>
+
+  <p>Drugič, od OmegaT lahko zahtevate, da prevod shrani tudi v primeru, da je identičen originalu, tako da si bo dejstvo, da ste segment pregledali, zapomnil in ga v bodoče prevedel oziroma prekopiral. Pojdite na <strong>Možnosti -&gt; Vedenje ob urejanju...</strong> in odkljukajte <strong>Dovoli, da sta prevod in izvor enaka</strong>.</p>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Pravni poduk</a> </td>
+        <td style="text-align: center;"><a href="index.html">Domov</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Kazalo</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
 </body>
 </html>

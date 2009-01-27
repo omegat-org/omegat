@@ -1,144 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Segmetiranje izvora - Priročnik za uporabnika OmegaT 1.7.3</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Source Segmentation - OmegaT 1.8 User Manual</title>
 </head>
-
 <body>
-	<h1>Segmetiranje izvora</h1>
-
-	<ul>
-		<li><a href="#structure">Segmentacija na nivoju strukture</a></li>
-		<li><a href="#sentence">Segmentacija na nivoju povedi</a>
-			<ul>
-				<li><a href="#about">Pravila za segmentiranje</a></li>
-				<li><a href="#setup">Zasnova pravil</a>
-					<ul>
-						<li><a href="#priority">Prioriteta</a></li>
-						<li><a href="#creation">Ustvarjanje pravil</a></li>
-						<li><a href="#breal">prelom/izjema </a></li>
-						<li><a href="#setup">Enostavni primeri</a></li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-		<li><a href="regexp.html">Sestavki iz regularnih izrazov</a></li>
-	</ul>
-	
-	<p>Orodja za prevodni spomin obdelujejo besedilne enote, ki jih imenujemo segmenti. Besedila je na segmente mogoče razstaviti na več načinov.</p>
-
-	<p>Da izberete zaželeno vrsto segmentiranja, odprite v glavnem meniju <strong>Možnosti -&gt; Segmentiranje...</strong> in odkljukajte ustrezno izbirno polje..</p>
-
-	<p>Če ste se odločili za segmentiranje po povedih, lahko postavite pravila v glavnem meniju <strong>Možnosti -&gt; Segmentiranje...</strong>.</p>
-
-	<p>Zavedajte se pri tem, da je precejšen del razvoja šel v pripravo zanesljivih pravil za segmentiranje, tako da se vam v večini primerov ne bo treba ukvarjati z razvojem novih pravil. Po drugi strani je ta funkcionalnost lahko zelo koristna v posebnih primerih, saj lahko prevajate, ne da bi vam bilo treba skrbeti za tiste dele besedila, ki se ne smejo spremeniti. </p>
-	
-	<p><strong>Pozor!</strong> Če spreminjate možnosti za filtre pri odprtem projektu, lahko pride do izgube podatkov. Potem ko ste pravila za segmentiranje spremenili, morate odprt projekt zapreti in ponovno odpreti, šele potem bodo nova pravila začela veljati.</p>
-
-
-	<hr>
-	<a name="structure" id="structure"></a>
-	<h1>Segmentacija na nivoju strukture</h1>
-
-	<p>OmegaT besedilo najprej razstavi s segmentiranjem na ravni strukture. Med tem procesom se za tvorbo segmentov uporablja samo struktura izvirne datoteke.</p>
-	
-	<p>Na primer, <a href="fileFilters.html#filter_options">datoteke z enostavnim besedilom</a> se da segmentirati na osnovi novih ali praznih vrstic, ali pa je segmentiranje na nivoju strukture nemogoče.. Oblikovane datoteke (dokumenti OpenOffice.org,  XHTML in dokumenti HTML) se segmentirajo s pomočjo oznak na ravni bloka (odstavkov). Za ločevanje na segmente je mogoče uporabiti tudi prevedljive <a href="fileFilters.html#filter_options">atribute</a> predmetov (v datotekah XHTML ali HTML).</p>
-
-	<hr>
-	<a name="sentence" id="sentence"></a>
-	<h1>Segmentacija na nivoju povedi</h1>
-
-	<p>Potem ko je segmentiral izvorne datoteke v logične enote, bo OmegaT te bloke dodatno razbil na stavčne segmente.</p>
-	
-	<a name="about" id="about"></a>
-	<h2>Pravila za segmentiranje</h2>
-
-	<p>Segmentiranje si lahko predstavite na naslednji način: pred vami je izvorno besedilo, po katerem se, po en znak naenkrat, premika kazalka.. Za vsak položaj kazalke vzamemo vsa pravila v danem vrstnem redu in skušamo prilagoditi njihov vzorec <strong>pred</strong>  besedilu  tik na levi strani, vzorec <strong>po</strong> pa besedilu tik na desni strani kazalke.. Če pravilo ustreza, program neha pregledovati pravila ( v primeru, da gre za izjemno pravilo) ali pa ustvari nov segment (če gre za prelomno pravilo). </p>
-
-	<p>Povedna segmentacija  se izvaja s pomočjo standarda <a href= "http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a> - zavedajte se prosim, da implementacija ne podpira vseh možnosti SRX. Tudi ni mogoče pravil shranjevati ali nalagati v formatu SRX. V kolikor veste, kako SRX deluje, boste v vsakem primeru tudi vedeli, kako dela OmegaT, ker gre za več ali manj isto stvar.</p>
-
-	<p>Obstaja dvoje vrst pravil:</p>
-
-	<ul>
-		<li><strong>Prelomna pravila</strong> lomijo besedilo v segmente. <p><strong>Primer za prelomno pravilo</strong>: <i>"Ali je v redu? Nimam pojma."</i> lahko segmentiramo kot dva stavka, s tem da ju ločimo v dva segmenta <br> Za znak "<code>?</code>" bi moralo obstajati prelomno pravilo.</p></li>
-		<li><strong>Pravila za izjeme</strong> določajo, kateri deli besedila morajo ostati skupaj.<p><strong>Primer</strong>: <i>"Mrs. Dalloway "</i> ne bi smeli deliti, tako da je za Mrs (in mr, dr, prof itd), za katero se nahaja pika, definirati izjemno pravilo. </p></li>
-	</ul>
-
-	<p>Obstoječa prelomna pravila bi morala zadostovati za večino evropskih jezikov in za japonščino. Bi pa vam svetovali, da za jezik, iz katerega prevajate, definirati še dodatne izjeme, saj očitno ni mogoče za vse jezike določiti vseh možnih izjem hkrati.. </p>
-
-	<a name="setup" id="setup"></a>
-	<h2>Zasnova pravil</h2>
-
-
-	<a name="priority" id="priority"></a>
-	<h3>Prioriteta</h3>
-
-	<p>Vsa pravila za segmentiranje z ujemajočim jezikovnim vzorcem se uporablja v zahtevanem zaporedju, zato se morajo pravila za določeni jezik nahajati višje kot samodejna pravila.</p>
-	
-	<p>Primer: pravila za kanadsko francoščino (FR-CA) naj bodo višje kot pravila za francoščino (FR.*) in višje kot privzeta (.*) pravila. Tako bo vaš projekt, v katerem prevajate iz kanadske francoščine, uporabljal pravila v pravilnem zaporedju.</p>
-
-	<a name="creation" id="creation"></a>
-	<h3>Ustvarjanje pravil</h3>
-	
-	<p>Da odprete prazno zalogo pravil, kliknite na <strong>Dodaj</strong> v zgornji polovici dvogovora. Na dnu tabele se prikaže prazna vrstica.</p>
-	
-	<p>Spremenite ime pravila in jezikovni vzorec. Skladnja jezikovnega vzorca se ravna po pravilih za <a href="regexp.html">regularne izraze</a>. Če se vaša zaloga pravil tiče jezikovnega para, vam svetujemo, da ga z gumbom  <strong>Premakni navzgor</strong> prestavite na vrh. Pravilo uredite tako, da kliknete v tabelo in izbrani niz se bo prikazal v spodnjem delu okna.</p>
-
-	<a name="break" id="break"></a>
-	<h3>prelom/izjema </h3>
-	
-	<p>Potrdilno polje prelom/izjema določa, ali gre za prelomno pravilo (polje je označeno) ali pa za izjemo (polje ni označeno) . Regularna izraza Pred in Za določata, kaj se mora v besedilu nahajati pred dano točko in za njo, če naj se pravilo (prelom ali izjema) uveljavi.</p>
-
-
-	<a name="examples" id="examples"></a>
-	<h3>Nekaj enostavnih primerov</h3>
-
-	<table border="0" cellpadding="4" cellspacing="0">
-		<tr bgcolor="#DDDDDD">
-			<td width="25%"><strong>Namen</strong></td>
-			<td><strong>Pred</strong></td>
-			<td><strong>Za</strong></td>
-			<td width="50%"><strong>Opomba</strong></td>
-		</tr>
-		<tr>
-			<td>segmentirati za piko ('<code>.</code>') in pred presledkom</td>
-			<td><code>\.</code></td>
-			<td><code>\s</code></td>
-			<td>"<code>\.</code>" pomeni znak "<code>.</code>" "<code>\s</code>" pomeni katerikoli beli presledek</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td> ne segmentirati za Mr.</td>
-			<td><code>Mr\.</code></td>
-			<td><code>\s</code></td>
-			<td>Gre za izjemo, pazite zatorej, da izbirno polje za pravilo ne bo označeno</td>
-		</tr>
-		<tr>
-			<td><code>končaj segment za </code> <code>"</code><code>。</code><code>"</code> <code> (japonska pika)</code></td>
-			<td><code>。</code> </td>
-			<td></td>
-			<td>Kot vidite je <i>za</i> prazno</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td> ne segmentirati za M. Mr. Mrs. in Ms.</td>
-			<td><code>Mr??s??\.</code></td>
-			<td><code>\s</code></td>
-			<td>izjemno pravilo  - značilna je uporaba meta znaka ? v regularnih izrazih (nepožrešen identifikator)</td>
-		</tr>
-	</table>
-
-	<hr>
-	<a name="regex" id="regex"></a>
-	<h1>Povzetek sestavkov iz regularnih izrazov</h1>
-
-	<p>Na razpolago so regularni izrazi, ki jih podpira Java. Kratek povzetek pravil boste našli v prilogi  <a href="regexp.html">Sestavki iz regularnih izrazov</a>.</p>
-	
-	<p>Če potrebujete bolj konkretno informacijo, si prosimo oglejte <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
-		
-	<p>Enostavne primere lahko najdete na mreži (recimo <a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>e.)</p>
-
-	<hr>
-
-	<p><code><a href="legalNotices.html">Pravni poduk</a></code></p>
+<h2>Segmetiranje izvora</h2>
+<ul>
+  <li>
+    <p><a href="#structure">Segmentacija na nivoju strukture</a></p>
+  </li>
+  <li>
+    <p><a href="#sentence">Segmentacija na nivoju povedi</a></p>
+    <ul>
+      <li>
+        <p><a href="#about">Pravila za segmentiranje</a></p>
+      </li>
+      <li>
+        <p><a href="#setup">Zasnova pravil</a></p>
+        <ul>
+          <li>
+            <p><a href="#priority">Prioriteta</a></p>
+          </li>
+          <li>
+            <p><a href="#creation">Ustvarjanje pravil</a></p>
+          </li>
+          <li>
+            <p><a href="#break">prelom/izjema </a></p>
+          </li>
+          <li>
+            <p><a href="#examples">Nekaj enostavnih primerov</a></p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><a href="regexp.html">Sestavki iz regularnih izrazov</a></p>
+  </li>
+</ul>
+<p>Orodja za prevodni spomin obdelujejo besedilne enote, ki jih imenujemo segmenti. Besedila je na segmente mogoče razstaviti na več načinov. Da izberete zaželeno vrsto segmentiranja, odprite v glavnem meniju <strong>Možnosti -&gt; Segmentiranje...</strong> in odkljukajte ustrezno izbirno polje. Pomnite, da je segmentiranje po odstavkih precej zastarela metoda in da je v večini projektov bolje izbrati segmentiranje po stavkih.  Če ste se odločili za segmentiranje po povedih, lahko postavite pravila v glavnem meniju <strong>Možnosti -&gt; Segmentiranje...</strong>.</p>
+<p>Zavedajte se pri tem, da je precejšen del razvoja šel v pripravo zanesljivih pravil za segmentiranje, tako da se vam v večini primerov ne bo treba ukvarjati z razvojem novih pravil. Po drugi strani je ta funkcionalnost lahko zelo koristna v posebnih primerih, saj lahko prevajate, ne da bi vam bilo treba skrbeti za tiste dele besedila, ki se ne smejo spremeniti. </p>
+<p><strong>Pozor!</strong> Če spreminjate možnosti za filtre pri odprtem projektu, lahko pride do izgube podatkov. Potem ko ste pravila za segmentiranje spremenili, morate odprt projekt zapreti in ponovno odpreti, šele potem bodo nova pravila začela veljati.</p>
+<hr>
+<h2><a name="structure" id="structure"></a>Segmentacija na nivoju strukture</h2>
+<p>OmegaT besedilo najprej razstavi s segmentiranjem na ravni strukture. Med tem procesom se za tvorbo segmentov uporablja samo struktura izvirne datoteke.</p>
+<p>Na primer, <a href="fileFilters.html#filter_options">datoteke z enostavnim besedilom</a> se da segmentirati na osnovi novih ali praznih vrstic, ali pa je segmentiranje na nivoju strukture nemogoče. Oblikovane datoteke (dokumenti OpenOffice.org, XHTML in dokumenti HTML) se segmentirajo s pomočjo oznak na ravni bloka (odstavkov). Za ločevanje na segmente je mogoče uporabiti tudi prevedljive <a href="fileFilters.html#filter_options">atribute</a> predmetov (v datotekah XHTML ali HTML).</p>
+<hr>
+<h2><a name="sentence" id="sentence"></a>Segmentacija na nivoju povedi</h2>
+<p>Potem ko je segmentiral izvorne datoteke v logične enote, bo OmegaT te bloke dodatno razbil na stavčne segmente.</p>
+<h3><a name="about" id="about"></a>Pravila za segmentiranje</h3>
+<p>Segmentiranje si lahko predstavite na naslednji način: pred vami je izvorno besedilo, po katerem se, po en znak naenkrat, premika kazalka. Za vsak položaj kazalke vzamemo vsa pravila v danem vrstnem redu in skušamo prilagoditi njihov vzorec <strong>pred</strong> besedilu tik na levi strani, vzorec <strong>po</strong> pa besedilu tik na desni strani kazalke. Če pravilo ustreza, program neha pregledovati pravila ( v primeru, da gre za izjemno pravilo) ali pa ustvari nov segment (če gre za prelomno pravilo). </p>
+<p>Povedna segmentacija se izvaja s pomočjo standarda <a
+ href="http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a> - zavedajte se prosim, da implementacija ne podpira vseh možnosti SRX. Tudi ni mogoče pravil shranjevati ali nalagati v formatu SRX. V kolikor veste, kako SRX deluje, boste v vsakem primeru tudi vedeli, kako dela OmegaT, ker gre za več ali manj isto stvar.</p>
+<p>Obstajata dve vrsti pravil:</p>
+<ul>
+  <li>
+    <p><strong>Prelomna pravila</strong> lomijo besedilo v segmente.  Na primer <i>"Ali ima rep in glavo? Nimam pojma."</i> bi morali segmentirati kot dva stavka, tako da bi bilo potrebno prelomno pravilo za "<code>?</code>". </p>
+  </li>
+  <li>
+    <p><strong>Pravila za izjeme</strong> določajo, kateri deli besedila morajo ostati skupaj. Ne glede na piko <i>"gp. Dalloway"</i> ne bi smeli deliti, tako da je za gč. (in za g., dr., prof. itd.) treba definirati izjemno pravilo. </p>
+  </li>
+</ul>
+<p>Obstoječa prelomna pravila bi morala zadostovati za večino evropskih jezikov in za japonščino. Bi pa vam svetovali, da za jezik, iz katerega prevajate, definirati še dodatne izjeme, saj očitno ni mogoče za vse jezike določiti vseh možnih izjem hkrati.. </p>
+<h3><a name="setup" id="setup"></a>Zasnova pravil</h3>
+<h3><a name="priority" id="priority"></a>Prioriteta</h3>
+<p>Vsa pravila za segmentiranje z ujemajočim jezikovnim vzorcem se uporablja v zahtevanem zaporedju, zato se morajo pravila za določeni jezik nahajati višje kot samodejna pravila. Primer: pravila za kanadsko francoščino (FR-CA) naj bodo višje kot pravila za francoščino (FR.*) in višje kot privzeta (.*) pravila. Tako bo vaš projekt, v katerem prevajate iz kanadske francoščine, uporabljal pravila v pravilnem zaporedju.</p>
+<h3><a name="creation" id="creation"></a>Ustvarjanje pravil</h3>
+<p>Da odprete ali razširite prazno zalogo pravil, kliknite nanjo v zgornji polovici dvogovora. Pravila se bodo prikazala v spodnji polovici okna.</p>
+<p>Da odprete prazno zalogo pravil za nov jezikovni vzorec, <span style="font-family: Times New Roman;">,</span><font
+ color="black" face="Times New Roman" size="3"><span
+ style="font-size: 12pt; color: black;" lang="EN-US"> </span></font>kliknite na <strong>Dodaj</strong> v zgornji polovici dvogovora. Na dnu tabele se prikaže prazna vrstica <font color="black"
+ face="Times New Roman" size="3"><span
+ style="font-size: 12pt; color: black;" lang="EN-US">(lahko da boste morali zdrsniti navzdol v oknu, da se vam prikaže)</span></font> Spremenite ime pravila in jezikovni vzorec. Skladnja jezikovnega vzorca se ravna po pravilih za <a href="regexp.html">regularne izraze</a>. Če se vaša zaloga pravil tiče jezikovnega para, vam svetujemo, da ga z gumbom <strong>Premakni navzgor</strong> prestavite na vrh.&nbsp;</p>
+<h3><a name="break" id="break"></a>prelom/izjema </h3>
+<p>Potrdilno polje prelom/izjema določa, ali gre za prelomno pravilo (polje je označeno) ali pa za izjemo (polje ni označeno) . Regularna izraza Pred in Za določata, kaj se mora v besedilu nahajati pred dano točko in za njo, če naj se pravilo (prelom ali izjema) uveljavi.</p>
+<h3><a name="examples" id="examples"></a>Nekaj enostavnih primerov</h3>
+<table border="0" cellpadding="4" cellspacing="0">
+  <tbody>
+    <tr bgcolor="#dddddd">
+      <td width="26%">
+      <p><strong>Namen</strong></p>
+      </td>
+      <td>
+      <p><strong>Pred</strong></p>
+      </td>
+      <td>
+      <p><strong>Za</strong></p>
+      </td>
+      <td width="52%">
+      <p><strong>Opomba</strong></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="26%">
+      <p>segmentirati za piko ('<code>.</code>') in pred presledkom</p>
+      </td>
+      <td>
+      <p><code>\.</code></p>
+      </td>
+      <td>
+      <p><code>\s</code></p>
+      </td>
+      <td width="52%">
+      <p>"<code>\.</code>" pomeni znak "<code>.</code>" "<code>\s</code>" pomeni katerikoli beli presledek</p>
+      </td>
+    </tr>
+    <tr bgcolor="#dddddd">
+      <td width="26%">
+      <p> ne segmentirati za Mr.</p>
+      </td>
+      <td>
+      <p><code>Mr\.</code></p>
+      </td>
+      <td>
+      <p><code>\s</code></p>
+      </td>
+      <td width="52%">
+      <p>Gre za izjemo, pazite zatorej, da izbirno polje za pravilo ne bo označeno</p>
+      </td>
+    </tr>
+    <tr>
+      <td width="26%">
+      <p>končaj segment za "。" (japonsko piko)</p>
+      </td>
+      <td>
+      <p><span lang="zxx"><code>。</code></span></p>
+      </td>
+      <td></td>
+      <td width="52%">
+      <p>Kot vidite je <i>za</i> prazno</p>
+      </td>
+    </tr>
+    <tr bgcolor="#dddddd">
+      <td width="26%">
+      <p> ne segmentirati za M. Mr. Mrs. in Ms.</p>
+      </td>
+      <td>
+      <p><code>Mr??s??\.</code></p>
+      </td>
+      <td>
+      <p><code>\s</code></p>
+      </td>
+      <td width="52%">
+      <p>izjemno pravilo - značilna je uporaba meta znaka ? v regularnih izrazih (nepožrešen identifikator)</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<h2><a name="regex" id="regex"></a>Sestavki iz regularnih izrazov</h2>
+<p>Na razpolago so regularni izrazi, ki jih podpira Java. Kratek povzetek pravil boste našli v prilogi <a
+ href="regexp.html">Sestavki iz regularnih izrazov</a>. Če potrebujete bolj konkretno informacijo, si prosimo oglejte <a
+ href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+<p>Enostavne primere lahko najdete na mreži (recimo <a
+ href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>e.)</p>
+<hr>
+<table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="text-align: left;"><a href="legalNotices.html">Pravni poduk</a> </td>
+      <td style="text-align: center;"><a href="index.html">Domov</a> </td>
+      <td style="text-align: right;"><a href="xindex.html">Kazalo</a> </td>
+    </tr>
+  </tbody>
+</table>
 </body>
 </html>

@@ -1,0 +1,98 @@
+<html>
+<head>
+  <link rel="stylesheet" href="OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Črkovalnik - Priročnik za uporabnika OmegaT 1.8</title>
+</head>
+
+<body>
+  <h2>Črkovalnik</h2>
+  <hr>
+
+  <ul>
+    <li>
+      <p><a href="#introduction">Uvod</a></p>
+    </li>
+
+    <li>
+      <p><a href="#edit_dialog">Možnosti črkovalnika</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Hints">Namigi</a></p>
+    </li>
+  </ul>
+
+  <p><br></p>
+
+  <h3><a name="introduction" id="introduction"></a>Uvod</h3>
+
+  <p><br></p>
+
+  <p>Če si namestite črkovalnik, vam lahko sproti med prevajanjem pomaga popravljati napačno napisane besede. To ne bi smelo biti preveliko presenečenje: OmegaT uporablja črkovalnik <a href=
+  "http://hunspell.sourceforge.net/">Hunspell</a>, ki ga med drugim uporabljajo tudi OpenOffice.org, Firefox in Thunderbird. Če že uporabljate enega od teh programov, imate zelo verjetno že vse, kar je potrebno za uporabo v OmegaT - treba je samo še črkovalnik priključiti.</p>
+
+  <p>Ko ste črkovalnik aktivirali in poskrbeli za slovarje za ciljni jezik, bo črkovalnik nadzoroval ciljne segmente, ki jih je videti v podoknu za prevajanje. Sumljive besede bodo podčrtane z valovito črto rdeče barve:</p>
+
+  <p><br>
+  <br></p><img src="images/SpellcheckingText.png" name="grafika1" alt=
+  "Črkovanje besedila" align="left" width="535" height="302" border="0"
+  id="grafika1"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>Če desnokliknete na podčrtano besedo (<i>Artund</i> zgoraj), se odpre spustni meni s predlogi za popravke (<i>Art und</i>) . Poleg tega lahko v tem meniju zahtevate, da črkovalnik vse primere te besede <b>prezre</b> ali pa da besedo <b>doda v slovar</b>. Kot vidite, gre pri tem za sprotni črkovalnik: če želite pregledati celotno besedilo od začetka do konca, boste morali brskati po njem in paziti na rdeče vijuge. Možnost imate seveda še vedno, ciljno besedilo preveriti v urejevalniku,. vendar v tem primeru sprememb ne bo najti v prevodnem spominu OmegaT.</p>
+
+  <p><br>
+  <br></p>
+
+  <h3><a name="edit_dialog" id="edit_dialog"></a>Možnosti črkovalnika</h3>
+
+  <p>S klikom na <b>Možnosti &gt; Črkovanje...</b> odprete spodnje okno: </p>
+
+  <p><br></p><img src="images/SpellcheckerSetup2.png" name="grafika2" alt=
+  "Nastavitve za črkovalnik" align="left" width="498" height="325" border="0" id=
+  "grafika2"><br clear="left">
+
+  <p><br></p>
+
+  <p>V zgornjem primeru so slovarji že na razpolago.  Sprva bo to okno prazno, ker boste morali navesti, kje naj OmegaT slovarje poišče. Če kliknete na <strong>Izberi...</strong> se bo odprlo okno , v katerem lahko izberete <b>Imenik s slovarji</b>, v zgornjem primeru je to <i>C:\Program Files\OpenOffice.org 2.4\share\dict\ooo</i>. Gre seveda za podimenik, kjer se nahajajo že posneti slovarji za OpenOffice.org OmegaT bo v navedenem podimeniku našel vse veljavne slovarje in jih navedel v seznamu. Če se med navedenimi vnosi nahaja tudi vaš slovar, ste za OmegaT že naredili vse, kar je potrebno.  Če temu ni tako, to je, če je seznam jezikov na razpolago prazen, lahko kliknete na <b>Namesti</b>, in OmegaT poišče slovarje, ki so na razpolago. V pojavnem oknu izberite slovarje, ki jih želite, in kliknite na <b>namesti</b>. Izbrane slovarje se bo namestilo, nakar se bodo prikazali v oknu za nastavitve črkovalnika (lahko da bo to nekaj časa trajalo).</p>
+
+  <p>Pomnite, da se program za nameščanje zanaša na seznam slovarjev na Internetu. OmegaT si pri tem pomaga s seznamom na <a href=
+  "http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/"> OpenOffice.org/contrib/dictionaries</a>. V kolikor je ta seznam zastarel, boste morali sami na lov za slovarji. Iščite datoteke z imenom jezika in priponami <i>aff</i> in <i>dic.</i>. OpenOffice.org Wiki vsebuje verjetno največjo zbirko slovarjev pod naslovom <a href=
+  "http://wiki.services.openoffice.org/wiki/Dictionaries">OpenOffice.org Wiki Dictionaries</a>. Slovarji, ki jih OmegaT uporablja, so slovarji vrste "Hunspell" ali "Myspell"</p>
+
+  <p>Pazite, da bo koda za ciljne jezike ustrezala kodi slovarja: SL-SI slovar ne bo delal, če je za ciljni jezik v vašem projektu navedena koda SL. Spremeniti morate nastavitev za ciljni jezik, da bo črkovalnik postal aktiven (lahko tudi preimenujete datoteke črkovalnika, glej dalje). </p>
+
+  <h3><a name="Hints" id="Hints"></a>Namigi</h3>
+
+  <p>Razlogi, zakaj črkovalnik ne dela:</p>
+
+  <ol>
+    <li>
+      <p>Izbirno polje "Samodejno preverjaj črkovanje besedila" mora biti odkljukano.</p>
+    </li>
+
+    <li>
+      <p>Preverite, ali jezikovna koda črkovalnika odgovarja jezikovni kodi za ciljni jezik v vašem projektu. Črkovalnik določa jezik s pomočjo jezikovne kode za ciljni jezik: če je na primer ciljni jezik amerikanščina (EN_US), mora podimenik s slovarji vsebovati datoteki en_us.aff in en_us.dic</p>
+    </li>
+  </ol>
+
+  <p>V kolikor ste že prevedli velik del besedila, nakar ugotovite da si jezikovne kode ne ustrezajo (navedli ste na primer sl, ampak na razpolago imate datoteki z imenom sl_si), si lahko pomagate tako, da sl_SI.arr in sl_SI.dic preimenujete (ali prekopirate) v datoteki sl.arr in sl.dic.  Lahko seveda tudi popravite jezikovno kodo v projektu), vendar boste morali to spremembo izvesti na roko v vseh že končanih segmentih TMX.</p>
+
+  <p>Če označene slovarje odstranite z ukazom Odstrani, jih program zbriše. Če so, kot velja v zgornjem primeru, del namestitve OpenOffice.org, bodo slovarji izginili tudi iz te aplikacije.  Če morate iz kakršnegakoli vzroka to sem in tja izvesti, je smiselno, če prizadete datoteke prestavite za OmegaT kam drugam.</p>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Pravni poduk</a> </td>
+        <td style="text-align: center;"><a href="index.html">Domov</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Kazalo</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

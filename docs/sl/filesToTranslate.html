@@ -1,160 +1,241 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Datoteke za prevajanje - Priročnik za uporabnika OmegaT 1.7.3</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Datoteke za prevajanje - Priročnik za uporabnika OmegaT 1.8</title>
 </head>
+
 <body>
+  <h1>Datoteke za prevajanje</h1>
 
-	<h1>Datoteke za prevajanje</h1>
+  <p><a href="#RTLbidi">Jeziki z desno na levo</a></p>
 
-	<ul>
-		<li><a href="#bidi">Jeziki z desno na levo</a>
-			<ul>
-				<li><a href="#bidi_transl">Prevajanje</a></li>
-				<li><a href="#bidi_create">Ustvarjanje prevedenih dokumentov</a></li>
-			</ul>
-		</li>
-		 <li>
-		    <a href="#formats">Vrste datotek</a>
-			<ul>
-				<li><a href="#plaintext">Datoteke z navadnim besedilom</a></li>
-				<li><a href="#tagged">Datoteke s oblikovanim besedilom</a></li>
-				<li><a href="#specifics">Značilnosti vrst datotek</a></li>
-				<li><a href="#others">Ostale vrste datotek</a>
-					<ul>
-						<li><a href="#ooo">OpenOffice.org</a></li>
-						<li><a href="#okapi">Okapi Framework</a></li>
-						<li><a href="#tt">Orodje za prevajalce</a></li>
-						<li><a href="#po4a">po4a</a></li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-	</ul>
+  <ul>
+    <li>
+      <p><a href="#RTL_Changing_direction">Kako spreminjati smer vhodnega/prikazovanega besedila</a></p>
+    </li>
 
-	<hr>
+    <li>
+      <p><a href="#RTL_mixing">Kako mešati v segmentih nize LTR in RTL</a></p>
+    </li>
 
-	<a name="bidi" id="bidi"></a>
-	<h1>Jeziki z desno na levo</h1>
-	
-	<a name="bidi_transl" id="bidi_transl"></a>
-	<h2>Prevajanje</h2>
+    <li>
+      <p><a href="#RTL_tags">Oznake OmegaT v segmentih RTL</a></p>
+    </li>
 
-	<p>Pri prevajanju iz dvosmernih jezikov z OmegaT je treba upoštevati dva vidika : 1) vhodno besedilo in 2) prikaz besedila. Kadar se piše besedilo ( npr. v urdu, arabščini itd.) "desno na levo" (RTL), pri tem pa uporablja prikaz "z leve na desno" (LTR) , ki je privzet način za prikaz, se  besedilo ne bo vedno prikazovalo v vrstnem redu, v katerem se ga je vneslo.  Kadar se vnaša čisti RTL tekst,  to ni takoj očitno, vendar se v teh primerih privzeti način prikazovanja (LTR) lahko uporablja. </p>
+    <li>
+      <p><a href="#RTL_CreatingTranslatedDocuments">Kako ustvarjati dokumente RTL</a></p>
+    </li>
+  </ul>
 
-	<p>V veliko primerih pa je pri ciljnih jezikih vrste RTL potrebno v prevod vstavljati LTR besedilo.  Tako morajo na primer angleška imena izdelkov ostati v angleščini in ograde morajo med lokalizacijo nizov za uporabniški vmesnik ostati na istem mestu, kot so v originalu.  </p>
+  <p><a href="#formats">Vrste datotek</a></p>
 
-	<p>Če je LTR besedilo vsajeno v RTL tekst, ga program ne bo prikazoval v vrstnem redu, v katerem se ga je vnašalo. Prikaz lahko v OmegaT menjate z  <code>Ctrl+Shift+O</code>.</p>
-	
-	<p><strong>Pripomba:</strong> isto bližnjico lahko uporabite tudi na Mac OSX.</p>
-	
-	<p>RTL besedilo je tako laže vnašati, če je tudi prikaz v RTL načinu, ker se v privzetem načinu med vnašanjem RTL besedila presledki najprej prikažejo na desni strani vnosa, naslednji znak RTL pa potem na levi. </p>
+  <ul>
+    <li>
+      <p><a href="#plaintext">Datoteke z navadnim besedilom</a></p>
+    </li>
 
-	<p>Z  <code>Ctrl+Shift+O</code> OmegaT tako vhodno besedilo samo kot prikaz  prestavi v RTL. Bližnjico se lahko uporablja v vseh treh  podoknih (urejanje, mehka ujemanja in geslovnik).</p>
+    <li>
+      <p><a href="#tagged">Datoteke s oblikovanim besedilom</a></p>
+    </li>
 
-	<a name="bidi_create" id="bidi_create"></a>
-	<h2>Ustvarjanje prevedenih dokumentov</h2>
-	
-	<p>Med pisanjem prevedenega dokumenta bo smer prikaza LTR, kot v originalnem dokumentu. Potrebni so zato ročni popravki. Vsak izhodni format ima svoje posebne pristope, kar se prikaza RTL tiče, oglejte si priročnike dotičnih aplikacij za podrobnosti. <hr>
-	
-	<a name="formats" id="formats"></a>
-	<h1>Vrste datotek</h1>
+    <li>
+      <p><a href="#specifics">Značilnosti vrst datotek</a></p>
+    </li>
 
-	<p>Z OmegaT lahko neposredno prevajate datoteke iz cele vrste različnih formatov. V glavnem gre za dve vrsti datotečnih formatov, za datoteke z  <strong>enostavnim</strong> in za datoteke s  <strong>formatiranim</strong> besedilom.</p>
+    <li>
+      <p><a href="#others">Ostale vrste datotek</a></p>
 
-	<a name="plaintext" id="plaintext"></a>
-	<h2>Datoteke z navadnim besedilom</h2>
+      <ul>
+        <li>
+          <p><a href="#ooo">OpenOffice.org</a></p>
+        </li>
 
-	<p>Datoteke z navadnim besedilom vsebujejo samo besedilo, tako da njih prevajati ni kaj bolj zapleteno kot vnesti prevod vhodnega besedila.</p>
-	
-	<p>Da pri odpiranju vhodnih datotek ne pride do zmešnjave, kar se kodiranja tiče, ima OmegaT na razpolago več  <a href="plainText.html">metod</a> , kako navesti nabor znakov.</p>
+        <li>
+          <p><a href="#okapi">Okapi Framework</a></p>
+        </li>
 
-	<p>Za te datoteke je mogoče nastaviti, da ne vsebujejo drugega oblikovanja kot presledke, s katerimi zamikamo/poravnavamo besedilo v njih. Navadno se za oblikovanje uporabljajo urejevalniki besedila in v njih ni mogoče shranjevati dodatnih informacij, na primer pisave, barv, robov idr.</p>
+        <li>
+          <p><a href="#tt">Orodje za prevajalce</a></p>
+        </li>
 
-	<p>Trenutno podpira OmegaT naslednje vrste besedilnih datotek</p>
+        <li>
+          <p><a href="#po4a">po4a</a></p>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <hr>
 
-	<ul>
-		<li>besedila ASCII (.txt, itd.)</li>
-		<li>kodirana besedila</li>
-		<li>programski svežnji za Javo (.properties)</li>
-		<li>datoteke PO (.po)</li>
-		<li>datoteke INI (ključ=vrednost) (.ini)</li>
-	</ul>
+  <h3><a name="RTLbidi"></a>Jeziki z desno na levo</h3>
 
-	<p>Druge vrste datotek z enostavnim besedilom lahko  OmegaT obdeluje, če se te datoteke na osnovi njihovih pripon <a href="fileFilters.html">poveže</a> z eno od podprtih vrst datotek (na primer, da se <code>.slo</code> datoteke poveže s filtrom za ASCII besedila) in potem obdela s pomočjo navedenih pravil za <a href="./segmentation.html">segmentiranje</a>.</p>
+  <h4><a name="RTL_Changing_direction"></a>Kako spreminjati smer vhodnega/prikazovanega besedila</h4>Za vse naloge, ki jih OmegaT opravlja, lahko menjate med načinoma RTL in LTR za prikaz in vnos besedila s pomočjo Ctrl+Shift+O (črka O, ne ničla). Uporaba načina RTL v OmegaT nima nikakšrnega vpliva na to, kako se besedilo prikazuje v besedilu, ki se ga je z OmegaT prevedlo. Način prikazovanja prevedenih besedil boste morali prilagoditi v aplikaciji, ki se običajno uporablja zato, da se ta besedila prikazuje ali spreminja (pomagajte si z ustreznim priročnikom). S pritiskom na Ctrl+Shift+O se v OmegaT spremenita tako prikaz kot tudi vnos besedila v RTL. Bližnjico se lahko uporablja v vseh treh podoknih (urejanje, mehka ujemanja in geslovnik) ločeno. Prav tako je na razpolago v vseh drugih poljih za vnos, ki jih OmegaT pozna (okno za iskanje, pravila za segmentacijo ipd.)<p>Pomnite: uporabniki Mac uporabljajo isto bližnjico (in ne Cmd+Shift+O) .</p>
 
+  <h4><a name="RTL_mixing"></a>Kako mešati v segmentih nize LTR in RTL</h4>Kadar pišete besedilo, ki je v celoti RTL, je mogoče uporabljati prednastavljeni (LTR) prikaz. V veliko primerih pa je potrebno LTR besedilo vstavljati v RTL tekst. Na primer, oznake OmegaT, imena izdelkov, ki morajo ostati v izvornem (LTR) jeziku, ograde v datotekah za lokalizacijo, in števila v besedilu.  V takih primerih je treba preklopiti v način RTL, da se RTL (pravzaprav dvosmerno) besedilo prikaže pravilo.  Pripomniti je treba, da se v primeru, da je OmegaT v načinu RTL, na ta način prikazujeta tako izvorno kot ciljno besedilo. To pomeni tudi, da je v primeru, ko je izvorno besedilo LTR, ciljni jezik pa RTL (ali obratno) lahko treba menjati sem in tja med LTR in RTL, da po eni strani vidite izvorni tekst pravilno, in po drugi strani pravilno vnašate prevod.<h4><a name="RTL_tags"></a>Oznake OmegaT v segmentih RTL</h4>
 
-	<a name="tagged" id="tagged"></a>
-	<h2>Datoteke s oblikovanim besedilom</h2>
+  <p>Kot napisano zgoraj, so OmegaT oznake nizi LTR znakov.  V kolikor prevajate med RTL in LTR jezikoma, boste lahko da primorani pogosto menjati med obema načinoma, da po eni strani vidite prav oznake v izvoru, po drugi strani pa jih prav vnesete v ciljni segment.</p>
 
-	<p>Datoteke s formatiranim besedilom vsebuje tako besedilo kot tudi podatke o vrsti pisavi, velikosti, barvi itd. Običajno se jih obdeluje s posebnimi programi za dokumente in spletne strani</p>
-	
-	<p>Pri teh vrstah datotek se informacijo o oblikovanju shranjuje. Ta vrsta informacije je lahko tako enostavno, kot recimo  <strong>to je pisano krepko</strong>, ali pa tako zapletena, kot so tabelarični podatki z različnimi velikostmi pisave, barvami, položaji itd..</p>
-	
-	<p>V večini primerov naj bi bil prevod čim bolj podoben izvirniku. OmegaT to omogoča tako, da znake/besede, katerih funkcija je oblikovanje, opremi z <a href="formattedText.html">oznakami</a>, ki jih brez težav prilagajate.</p>
-	
-	<p>Če se oblikovanje izvirnega besedila poenostavi, je pozneje mnogo manj napak v oznakah. Poizkusite uskladiti uporabljene pisave, njihove velikosti, barve itd, saj s tem poenostavite prevajanje in zmanjšate število možnih <a href="userInterface.html#tags">napak v oznakah</a>.</p>
+  <p>Če izvorni dokumenti to omogočajo, svetujemo prevajalcem, da skušajo iz njih odstraniti stilne podatke, tako da je v OmegaT čim manj dela z oznakami.  Držite se namigov, ki je najti v poglavju Nasveti za ravnanje z oznakami Oznake obnavljajte pogosto (glejte <a href=
+  "userInterface.html#Tag_Validation">Preverjanje oznak)</a> in redno tvorite ciljne dokumente(glejte dalje in pa <a href="menu.html">Meni</a>), tako da se problemov v primeru, da pride do njih, hitreje in brez zapetljajev rešite. Premislite, če ne boste imeli manj dela, če prevedete najprej enostavno besedilo in podatke o stilu dodate ciljnemu besedilu kasneje v ustrezni aplikaciji.</p>
 
-	<p>Trenutno podpira OmegaT naslednje vrste oblikovanih besedil:</p>
+  <h4><a name="RTL_CreatingTranslatedDocuments" id=
+  "RTL_CreatingTranslatedDocuments"></a>Kako ustvarjati dokumente RTL</h4>
 
-	<ul>
-		<li>OpenOffice.org</li>
-		<li>datoteke OpenDocument</li>
-		<li>datoteke Microsoft Open XML</li>
-		<li>(X)HTML</li>
-		<li>datoteke za HTML Help Compiler</li>
-		<li>DocBook</li>
-		<li>Okapi enojezični XLIFF</li>
-	</ul>
+  <p>Pri tvorjenju prevodov bo smer prikaza enaka smeri v originalnih dokumentih. Če je originalni dokument LTR, je treba prikaz ciljnega dokumenta v ciljni aplikaciji na roko spremeniti v RTL. Vsak izhodni format ima svoje posebne pristope, kar se prikaza RTL tiče, oglejte si priročnike aplikacij za te namene za podrobnosti. </p>
 
-	<p>Druge vrste datotek z enostavnim besedilom lahko  OmegaT obdeluje, če se te datoteke na osnovi njihovih pripon <a href="fileFilters.html">poveže</a> z eno od podprtih vrst datotek in potem obdela s pomočjo navedenih pravil za <a href="./segmentation.html">segmentiranje</a>.</p>
+  <p>Da vam ne bi bilo treba spreminjati parametrov za prikaz v izhodnih datotekah vsakič, ko jih odprete, je včasih mogoče parametre v vhodnih datotekah tako spremeniti, da jih izhodne datoteke podedujejo. Tako spremembe so na primer mogoče pri datotekah OpenOffice.org</p>
+  <hr>
 
-	
-	<a name="specifics" id="specifics"></a>
-	<h2>Značilnosti vrst datotek</h2>
+  <h3><a name="formats" id="formats"></a>Vrste datotek</h3>
 
-	<p>OmegaT ravna z vsako vrsto datotek na svoj način. Pravila za ta namen se navaja v  <a href="fileFilters.html">datotečnih filtrih</a>.<a name="others" id="others"></a>
-	<h2>Ostale vrste datotek</h2>
+  <p>Z OmegaT lahko neposredno prevajate datoteke iz cele vrste različnih formatov. V glavnem gre za dve vrsti datotečnih formatov, za datoteke z <strong>enostavnim</strong> in za datoteke s <strong>formatiranim</strong> besedilom.</p>
 
-	<p>OmegaT omogoča tudi obdelavo drugih vrst datotek z navadnim ali oblikovanim besedilom.</p>
-	
-	<p>Datoteke v nepodprtem formatu lahko pretvorite v podprte datoteke s pomočjo zunanjih orodij. Prevedeno datoteko bo v tem primeru treba kasneje prevesti nazaj v originalni format. Tako je mogoče datoteke za celo vrsto formatov za enostavna besedila (med drugim LaTex itd.)  prevajati z OmegaT, če se jih najprej konvertira v PO format. Podobno lahko z OmegaT tudi obdelujete datoteke s formatiranim besedilom  (vključno z dokumenti Microsoft Office ) , če jih najprej pretvorite v obliko Open Document.</p>
-	
-	<p>Kvaliteta prevedenega besedila bo seveda odvisna od tega, kako uspešna je pretvorba na poti tja in nazaj. Prepričajte se najprej, da ste preverili vse možnosti, preden se lotite takih konverzij. </p>
-	
-	<p>Na razpolago so vam naslednja prosta orodja za pretvorbo:</p>
-	
-	<a name="ooo" id="ooo"></a>
-	<h3>OpenOffice.org</h3>
+  <h3><a name="plaintext" id="plaintext"></a>Datoteke z navadnim besedilom</h3>
 
-	<p>OmegaT ne podira ne posredno formatov za Microsoft Office Word, Excel in PowerPoint. Lahko pa uporabite OpenOffice.org (in različice) , da dokumente te vrste pretvorite v format OpenDocument, ki ga OmegaT podpira v nativni obliki.</p>
-	
-	<p><a href="http://www.openoffice.org/">Uradna stran OpenOffice.org</a></p>
+  <p>Datoteke z navadnim besedilom vsebujejo samo besedilo, tako da njih prevajati ni kaj bolj zapleteno kot vnesti prevod vhodnega besedila.</p>
 
-	<a name="okapi" id="okapi"></a>
-	<h3>Okapi Framework</h3>
+  <p>Da pri odpiranju vhodnih datotek ne pride do zmešnjave, kar se kodiranja tiče, ima OmegaT na razpolago več <a href="plainText.html">metod</a> , kako navesti nabor znakov.</p>
 
-	<p>Priročno orodje za ekstrakcijo besedilo v Okapi Framework ima možnost, da vam ustvari drevo s podimeniki za projekt  OmegaT. Prav tako lahko ustvarite specifične datoteke XLIFF za  OmegaT. Okapi je pred kratkim izdal orodja, ki tečejo pod Mono, to prosto platformo, ki je na razpolago za večino operacijskih sistemov.</p>
+  <p>Za te datoteke je mogoče nastaviti, da ne vsebujejo drugega oblikovanja kot presledke, s katerimi zamikamo/poravnavamo besedilo v njih. Navadno se za oblikovanje uporabljajo urejevalniki besedila in v njih ni mogoče shranjevati dodatnih informacij, na primer pisave, barv, robov idr.</p>
 
-	<p><a href="http://okapi.sourceforge.net/Release/Tikal/ReadMe_ForMono.htm">Okapi za Mono stran</a>, <a href="http://okapi.sourceforge.net/Release/Shared/Help/tutorial_02.htm">tutorial</a></p>
+  <p>Trenutno podpira OmegaT naslednje vrste besedilnih datotek</p>
 
-	<a name="tt" id="tt"></a>
-	<h3>Orodje za prevajalce</h3>
-	
-	<p>Škatla z orodjem za prevajalce, Translate Toolkit, vsebuje nabor orodij v python in omogoča uporabniku številne pretvorbe v ali iz Portable Object,med drugim za Mozilla .properties in datoteke dtd, CSV, Qt .ts, XLIFF. Poleg tega ima tudi na razpolago orodja, s katerimi lahko te datoteke obdelujete pred in po prevodu z OmegaT.</p>
+  <ul>
+    <li>
+      <p>besedila ASCII (.txt, itd.)</p>
+    </li>
 
-	<p><a href="http://translate.sourceforge.net/wiki/toolkit/index">Uradno spletišče Translate Toolkit</a></p>
+    <li>
+      <p>kodirana besedila</p>
+    </li>
 
-	<a name="po4a" id="po4a"></a>
-	<h3>po4a</h3>
+    <li>
+      <p>programski svežnji za Javo (.properties)</p>
+    </li>
 
-	<p>po4a je orodje v Debian perl. Konvertira datoteke v formatih, kot so LaTeX, TeX, POD v Portable Object format in nazaj.</p>
+    <li>
+      <p>datoteke PO (.po)</p>
+    </li>
 
-	<p><a href="http://po4a.alioth.debian.org/">Uradna stran po4a</a></p>
-	
-	<hr>
+    <li>
+      <p>datoteke INI (ključ=vrednost) (.ini)</p>
+    </li>
+  </ul>
 
-	<p><a href="legalNotices.html">Pravni poduk</a></p>
+  <p>Druge vrste datotek z enostavnim besedilom lahko OmegaT obdeluje, če se te datoteke na osnovi njihovih pripon <a href=
+  "fileFilters.html">poveže</a> z eno od podprtih vrst datotek (na primer, da se <code>.slo</code> datoteke poveže s filtrom za ASCII besedila) in potem obdela s pomočjo navedenih pravil za <a href=
+  "./segmentation.html">segmentiranje</a>.</p>
+
+  <h3><a name="tagged" id="tagged"></a>Datoteke s oblikovanim besedilom</h3>
+
+  <p>Datoteke s formatiranim besedilom vsebuje tako besedilo kot tudi podatke o vrsti pisavi, velikosti, barvi itd. Običajno se jih obdeluje s posebnimi programi za dokumente in spletne strani Pri teh vrstah datotek se informacijo o oblikovanju shranjuje. Ta vrsta informacije je lahko tako enostavno, kot recimo <strong>to je pisano krepko</strong>, ali pa tako zapletena, kot so tabelarični podatki z različnimi velikostmi pisave, barvami, položaji itd. V večini primerov naj bi bil prevod čim bolj podoben izvirniku. OmegaT v ta namen znake/besede, katerih funkcija je oblikovanje, opremi z <a href="formattedText.html">oznakami</a>, ki jih brez težav prilagajate. Če se formatiranje izvornega besedila lahko poenostavite, ima lahko za posledico znatno manj oznak kasneje. Poizkusite uskladiti uporabljene pisave, njihove velikosti, barve itd., saj s tem poenostavite prevajanje in zmanjšate število možnih <a href=
+  "userInterface.html#Tag_Validation">napak v oznakah</a>.</p>
+
+  <p><a name="specifics" id="specifics"></a>OmegaT ravna z vsako vrsto datotek na svoj način. Pravila za ta namen se navaja v <a href=
+  "fileFilters.html">datotečnih filtrih</a>. Trenutno podpira OmegaT naslednje vrste oblikovanih besedil:</p>
+
+  <ul>
+    <li>
+      <p>OpenOffice.org</p>
+    </li>
+
+    <li>
+      <p>datoteke OpenDocument</p>
+    </li>
+
+    <li>
+      <p>datoteke Microsoft Open XML</p>
+    </li>
+
+    <li>
+      <p>(X)HTML</p>
+    </li>
+
+    <li>
+      <p>datoteke za HTML Help Compiler</p>
+    </li>
+
+    <li>
+      <p>DocBook</p>
+    </li>
+
+    <li>
+      <p>Okapi enojezični XLIFF</p>
+    </li>
+  </ul>
+
+  <p>Druge vrste datotek z enostavnim besedilom lahko OmegaT obdeluje, če se te datoteke na osnovi njihovih pripon <a href=
+  "fileFilters.html">poveže</a> z eno od podprtih vrst datotek in potem obdela s pomočjo navedenih pravil za <a href=
+  "./segmentation.html">segmentiranje</a>.</p>
+
+  <h3><a name="others" id="others"></a>Ostale vrste datotek</h3>
+
+  <p>OmegaT omogoča tudi obdelavo drugih vrst datotek z navadnim ali oblikovanim besedilom.</p>
+
+  <p>Datoteke v nepodprtem formatu lahko pretvorite s pomočjo zunanjih orodij. Ne pozabite, da bo prevedeno datoteko v tem primeru treba kasneje prevesti nazaj v originalni format. Tako je mogoče datoteke za celo vrsto formatov za enostavna besedila (med drugim LaTex itd.) prevajati z OmegaT, če se jih najprej konvertira v PO format. Podobno lahko z OmegaT obdelujete tudi datoteke z oblikovanim besedilom (vključno z dokumenti Microsoft Office), če jih prej pretvorite v obliko Open Document.</p>
+
+  <p>Kvaliteta prevedenega besedila bo seveda odvisna od tega, kako uspešna je pretvorba na poti tja in nazaj. Prepričajte se najprej, da ste preverili vse možnosti, preden se lotite takih konverzij.  Na razpolago so vam naslednja prosta orodja za pretvorbo:</p>
+
+  <p><br></p>
+
+  <table width="100%" border="0" cellpadding="4" cellspacing="0">
+    <col width="50*">
+    <col width="206*">
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="ooo" id="ooo"></a>OpenOffice.org<a href=
+        "http://www.openoffice.org/"><br> OpenOffice.org uradna stran</a></p>
+      </td>
+
+      <td width="81%">
+        <p>Formatov za Microsoft Office Word, Excel in PowerPoint OmegaT ne podpira neposredno. Lahko pa uporabite OpenOffice.org (in različice) , da dokumente te vrste pretvorite v format OpenDocument, ki ga OmegaT podpira v nativni obliki.</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="okapi" id="okapi"></a>Okapi Framework<a href=
+        "http://okapi.sourceforge.net/Release/Tikal/ReadMe_ForMono.htm"><br> Okapi za Mono stran</a>, <a href=
+        "http://okapi.sourceforge.net/Release/Shared/Help/tutorial_02.htm">tutorial</a></p>
+      </td>
+
+      <td width="81%">
+        <p>Priročno orodje za ekstrakcijo besedilo v Okapi Framework ima možnost, da vam ustvari drevo s podimeniki za projekt OmegaT. Prav tako lahko ustvarite specifične datoteke XLIFF za OmegaT. Okapi je pred kratkim izdal orodja, ki tečejo pod Mono, to prosto platformo, ki je na razpolago za večino operacijskih sistemov.</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="tt" id="tt"></a>Translate Toolkit<br> <a href="http://translate.sourceforge.net/wiki/toolkit/index">Translate Toolkit uradna stran</a></p>
+      </td>
+
+      <td width="81%">
+        <p>Škatla z orodjem za prevajalce, Translate Toolkit, vsebuje nabor orodij v python in omogoča uporabniku številne pretvorbe v ali iz Portable Object,med drugim za Mozilla .properties in datoteke dtd, CSV, Qt .ts, XLIFF. Poleg tega ima tudi na razpolago orodja, s katerimi lahko te datoteke obdelujete pred in po prevodu z OmegaT.</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="po4a" id="po4a"></a>Po4a<br> <a href="http://po4a.alioth.debian.org/">po4a uradna stran</a></p>
+      </td>
+
+      <td width="81%">
+        <p>po4a je orodje v Debian perl. Konvertira datoteke v formatih, kot so LaTeX, TeX, POD v Portable Object format in nazaj.</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Pravni poduk</a> </td>
+        <td style="text-align: center;"><a href="index.html">Domov</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Kazalo</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
 </body>
 </html>

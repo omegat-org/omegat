@@ -1,192 +1,600 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Regularni izrazi -  Priročnik za uporabnika OmegaT 1.7.3</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Regularni izrazi - Priročnik za uporabnika OmegaT 1.8</title>
 </head>
+
 <body>
+  <h2>Sestavki iz regularnih izrazov</h2>
 
-	<h1>Sestavki iz regularnih izrazov</h1>
+  <p>The regular expressions used in searches and segmentation rules are those supported by Java. Če potrebujete bolj konkretno informacijo, si prosimo oglejte <a href=
+  "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
 
-	<p>The regular expressions used in searches and segmentation rules are those supported by Java. Če potrebujete bolj konkretno informacijo, si prosimo oglejte <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
-		
-	<p>Enostavne primere lahko najdete na mreži (recimo <a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>e.)</p>
+  <p>Enostavne primere lahko najdete na mreži (recimo <a href=
+  "http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>e.)<br>
+  <br></p>
+  <hr>
 
+  <table border="0" cellpadding="3" cellspacing="0">
+    <col width="15%">
+    <col width="80%">
 
-	<table border="0" cellpadding="3" cellspacing="0">
+    <tr>
+      <td width="355">
+        <h3>Konstrukt...</h3>
+      </td>
 
-		<tr>
-			<td width="40%"><h2>Naslednji sestavek:</h2></td>
-			<td><h2>ustreza naslednjemu zaporedju:</h2></td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Zastavice</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>(?i)</code></td>
-			<td>Omogoči iskanje brez razlikovanja velikih ali malih črk (privzeto vzorec ločuje velike in male črke).</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Znaki</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>x</strong></td>
-			<td>Znak <strong>x</strong>, razen v primeru...</td>
-		</tr>
-		<tr>
-			<td><code>\u</code><strong>hhhh</strong></td>
-			<td>Znak s heksadecimalno vrednostjo <code>0x</code><strong>hhhh</strong></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\t</code></td>
-			<td>Tabulator (<code>'\u0009'</code>)</td>
-		</tr>
-		<tr>
-			<td><code>\n</code></td>
-			<td>Znak za novo vrstico - line feed -(<code>'\u000A'</code>)</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\r</code></td>
-			<td>Znak za povratek voza - carriage return - (<code>'\u000D'</code>)</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Citiranje</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\</code></td>
-			<td>Nič, vendar citira naslednji znak. Potrebno, kadar želite enega od metaznakov <code>!$()*+.&lt;&gt;?[\]^{|}</code>navesti dobesedno.</td>
-		</tr>
-		<tr>
-			<td><code>\\</code></td>
-			<td>Na primer išče poševnico nazaj.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\Q</code></td>
-			<td>Nič, citira pa vse znake do <code>\E</code></td>
-		</tr>
-		<tr>
-			<td><code>\E</code></td>
-			<td>Nič, vendar konča s citiranjem, ki se je začelo z <code>\Q</code></td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Znakovni nizi</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>[abc]</code></td>
-			<td><code>a</code>, <code>b</code>, or <code>c</code> (enostavni razred)</td>
-		</tr>
-		<tr>
-			<td><code>[^abc]</code></td>
-			<td>Katerikoli znak z izjemo <code>a</code>, <code>b</code>, or <code>c</code> (zanikanje)</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>[a-zA-Z]</code></td>
-			<td><code>a</code> do <code>z</code> ali <code>A</code> do <code>Z</code>, vključno (obseg)</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Vnaprej definirani znakovni razredi</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>.</code></td>
-			<td>Katerikoli znak (z izjemo konca vrstice)</td>
-		</tr>
-		<tr>
-			<td><code>\d</code></td>
-			<td>Cifra: <code>[0-9]</code></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\D</code></td>
-			<td>Ne-cifra: <code>[^0-9]</code></td>
-		</tr>
-		<tr>
-			<td><code>\s</code></td>
-			<td>Znak za beli presledek: <code>[ \t\n\x0B\f\r]</code></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\S</code></td>
-			<td>Znaki, ki so beli presledek: <code>[^\s]</code></td>
-		</tr>
-		<tr>
-			<td><code>\w</code></td>
-			<td>Besedni znak: <code>[a-zA-Z_0-9]</code></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\W</code></td>
-			<td>Nebesedni znak: <code>[^\w]</code></td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Zadetki za meje</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>^</code></td>
-			<td>Začetek vrstice</td>
-		</tr>
-		<tr>
-			<td><code>$</code></td>
-			<td>Konec vrstice</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\b</code></td>
-			<td>Besedna meja</td>
-		</tr>
-		<tr>
-			<td><code>\B</code></td>
-			<td>Nebesedna meja</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Požrešni kvantifikatorji</h3></td>
-		</tr>
-		<tr>
-			<td colspan="2">Skušali bodo najti kolikor morejo. Na primer, <code>a+</code> bo ustrezalo <code>aaa</code> v <code>aaabbb</code></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>X</strong><code>?</code></td>
-			<td><strong>X</strong>, enkrat ali nikoli</td>
-		</tr>
-		<tr>
-			<td><strong>X</strong><code>*</code></td>
-			<td><strong>X</strong>, nič- ali večkrat</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>X</strong><code>+</code></td>
-			<td><strong>X</strong>, najmanj enkrat</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Nezahtevni kvantifikatorji (ki niso požrešni)</h3></td>
-		</tr>
-		<tr>
-			<td colspan="2">Našli bodo tako malo, kot se le da. Na primer, <code>a+?</code> bo našel prvi <code>a</code> v <code>aaabbb</code></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>X</strong><code>??</code></td>
-			<td><strong>X</strong>, enkrat ali nikoli</td>
-		</tr>
-		<tr>
-			<td><strong>X</strong><code>*?</code></td>
-			<td><strong>X</strong>, nič- ali večkrat</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>X</strong><code>+?</code></td>
-			<td><strong>X</strong>, najmanj enkrat</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Logični operatorji</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>XY</strong></td>
-			<td><strong>X</strong>, ki mu sledi <strong>Y</strong></td>
-		</tr>
-		<tr>
-			<td><strong>X</strong><code>|</code><strong>Y</strong></td>
-			<td>Ali <strong>X</strong> ali <strong>Y</strong></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>(</code><strong>XY</strong><code>)</code></td>
-			<td><strong>XY</strong> kot ena sama skupina</td>
-		</tr></table>
+      <td width="877">
+        <h3>...ustreza naslednjemu:</h3>
+      </td>
+    </tr>
 
-	<hr>
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
 
-	<a href="legalNotices.html">Pravni poduk</a>
+        <h3>Zastavice</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>(?i)</code></p>
+      </td>
+
+      <td width="877">
+        <p>Omogoči iskanje brez razlikovanja velikih ali malih črk (privzeto vzorec ločuje velike in male črke).</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
+
+        <h3>Znaki</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>x</code></p>
+      </td>
+
+      <td width="877">
+        <p>Znak <strong>x</strong>, razen v primeru...</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>\uhhhh</code></p>
+      </td>
+
+      <td width="877">
+        <p>Znak s heksadecimalno vrednostjo <code>0x</code><strong>hhhh</strong></p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>\t</code></p>
+      </td>
+
+      <td width="877">
+        <p>Tabulator (<code>'\u0009'</code>)</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>\n</code></p>
+      </td>
+
+      <td width="877">
+        <p>Znak za novo vrstico - line feed -(<code>'\u000A'</code>)</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>\r</code></p>
+      </td>
+
+      <td width="877">
+        <p>Znak za povratek voza - carriage return - (<code>'\u000D'</code>)</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><tt>\f</tt></p>
+      </td>
+
+      <td width="877">
+        <p>Znak za novo stran (<tt>'\u000C'</tt>)</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><tt>\a</tt>
+        </td>
+        
+        <td width="877">
+        <p>Znak za zvonec (<tt>'\u0007'</tt>)</p>
+      </td>
+     </tr>
+     
+      <tr>
+      <td width="355">
+        <p><tt>\e</tt>
+        </td>
+        
+        <td width="877">
+        <p>Ubežni znak (<tt>'\u001B'</tt>)</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><tt>\c</tt><i>x</i></p>
+      </td>
+
+      <td width="877">
+        <p>Kontrolni znak, ki ustreza <i>x</i></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="355">
+        <p><tt>\0</tt><i>n</i></p>
+      </td>
+
+      <td width="877">
+        <p>Znak z oktalno vrednostjo <tt>0</tt><i>n</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><tt>\0</tt><i>nn</i></p>
+      </td>
+
+      <td width="877">
+        <p>Znak z oktalno vrednostjo <tt>0</tt><i>nn</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</p>
+      </td>
+    </tr>
+
+      <tr>
+      <td width="355">
+        <p><tt>\0</tt><i>mnn</i></p>
+      </td>
+
+      <td width="877">
+        <p>Znak z oktalno vrednostjo <tt>0</tt><i>mnn</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>m</i>&nbsp;<tt>&lt;=</tt>&nbsp;3, 0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><tt>\x</tt><i>hh</i></p>
+      </td>
+
+      <td width="877">
+        <p>Znak z heksadecimalno vrednostjo <tt>0x</tt><i>hh</i></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
+
+        <h3>Citat</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>\</code></p>
+      </td>
+
+      <td width="877">
+        <p>Nič, vendar citira naslednji znak. Potrebno, kadar želite enega od metaznakov <code>!$()*+.&lt;&gt;?[\]^{|}</code>navesti dobesedno.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>\\</code></p>
+      </td>
+
+      <td width="877">
+        <p>Na primer išče poševnico nazaj.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>\Q</code></p>
+      </td>
+
+      <td width="877">
+        <p>Nič, citira pa vse znake do <code>\E</code></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>\E</code></p>
+      </td>
+
+      <td width="877">
+        <p>Nič, vendar zaključi citat, ki se je začel z <tt>\Q</tt></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
+
+        <h3>Razredi za Unicode bloke in kategorije</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code><tt>\p{InGreek}</tt></code></p>
+      </td>
+
+      <td width="877">
+        <p>Znak v grškem bloku (enostaven <a href=
+        "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html#ubc"> blok</a>)</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code><tt>\p{Lu}</tt></code></p>
+      </td>
+
+      <td width="877">
+        <p>Velika črka (enostavna <a href=
+        "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html#ubc"> kategorija</a>)</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code><tt>\p{Sc}</tt></code></p>
+      </td>
+
+      <td width="877">
+        <p>Znak za denarno enoto</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code><tt>\P{InGreek}</tt></code></p>
+      </td>
+
+      <td width="877">
+        <p>Katerikoli znak, razen znakov grškem bloku (negacija)</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355" height="33">
+        <p><code><tt>[\p{L}&amp;&amp;[^\p{Lu}]]</tt></code></p>
+      </td>
+
+      <td width="877">
+        <p>Kakršenkoli znak razen velikih črk (subtrakcija)</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
+
+        <h3>Znakovni nizi</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>[abc]</code></p>
+      </td>
+
+      <td width="877">
+        <p><code>a</code>, <code>b</code>, or <code>c</code> (enostavni razred)</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>[^abc]</code></p>
+      </td>
+
+      <td width="877">
+        <p>Katerikoli znak z izjemo <code>a</code>, <code>b</code>, or <code>c</code> (zanikanje)</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>[a-zA-Z]</code></p>
+      </td>
+
+      <td width="877">
+        <p><code>a</code> do <code>z</code> ali <code>A</code> do <code>Z</code>, vključno (obseg)</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
+
+        <h3>Vnaprej definirani znakovni razredi</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>.</code></p>
+      </td>
+
+      <td width="877">
+        <p>Katerikoli znak (z izjemo konca vrstice)</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>\d</code></p>
+      </td>
+
+      <td width="877">
+        <p>Cifra: <code>[0-9]</code></p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>\D</code></p>
+      </td>
+
+      <td width="877">
+        <p>Ne-cifra: <code>[^0-9]</code></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>\s</code></p>
+      </td>
+
+      <td width="877">
+        <p>Znak za beli presledek: <code>[ \t\n\x0B\f\r]</code></p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>\S</code></p>
+      </td>
+
+      <td width="877">
+        <p>Znaki, ki so beli presledek: <code>[^\s]</code></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>\w</code></p>
+      </td>
+
+      <td width="877">
+        <p>Besedni znak: <code>[a-zA-Z_0-9]</code></p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>\W</code></p>
+      </td>
+
+      <td width="877">
+        <p>Nebesedni znak: <code>[^\w]</code></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
+
+        <h3>Zadetki za meje</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>^</code></p>
+      </td>
+
+      <td width="877">
+        <p>Začetek vrstice</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>$</code></p>
+      </td>
+
+      <td width="877">
+        <p>Konec vrstice</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>\b</code></p>
+      </td>
+
+      <td width="877">
+        <p>Besedna meja</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>\B</code></p>
+      </td>
+
+      <td width="877">
+        <p>Nebesedna meja</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
+
+        <h3>Požrešni kvantifikatorji</h3>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <p>Skušali bodo najti, kolikor le morejo. Na primer, <code>a+</code> bo ustrezalo <code>aaa</code> v <code>aaabbb</code></p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><strong>X</strong><code>?</code></p>
+      </td>
+
+      <td width="877">
+        <p><strong>X</strong>, enkrat ali nikoli</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><strong>X</strong><code>*</code></p>
+      </td>
+
+      <td width="877">
+        <p><strong>X</strong>, nič- ali večkrat</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><strong>X</strong><code>+</code></p>
+      </td>
+
+      <td width="877">
+        <p><strong>X</strong>, najmanj enkrat</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
+
+        <h3>Nezahtevni kvantifikatorji (ki niso požrešni)</h3>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <p>Našli bodo tako malo, kot se le da. Na primer, <code>a+?</code> bo našel prvi <code>a</code> v <code>aaabbb</code></p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><strong>X</strong><code>??</code></p>
+      </td>
+
+      <td width="877">
+        <p><strong>X</strong>, enkrat ali nikoli</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><strong>X</strong><code>*?</code></p>
+      </td>
+
+      <td width="877">
+        <p><strong>X</strong>, nič- ali večkrat</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><strong>X</strong><code>+?</code></p>
+      </td>
+
+      <td width="877">
+        <p><strong>X</strong>, najmanj enkrat</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
+
+        <h3>Logični operatorji</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><strong>XY</strong></p>
+      </td>
+
+      <td width="877">
+        <p><strong>X</strong>, ki mu sledi <strong>Y</strong></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><strong>X</strong><code>|</code><strong>Y</strong></p>
+      </td>
+
+      <td width="877">
+        <p>Ali <strong>X</strong> ali <strong>Y</strong></p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>(</code><strong>XY</strong><code>)</code></p>
+      </td>
+
+      <td width="877">
+        <p><strong>XY</strong> kot ena sama skupina</p>
+      </td>
+    </tr>
+  </table>
+<hr>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Pravni poduk</a> </td>
+        <td style="text-align: center;"><a href="index.html">Domov</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Kazalo</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
 </body>
 </html>

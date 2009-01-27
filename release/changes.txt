@@ -23,7 +23,9 @@
   Other enhancements:
   
   - Console mode, to be able to run OmegaT without user interface
-
+ 
+  - Slovenian localisation updated to 2.0 (readme)
+  
   Bug Fixes: 
 
   - Fix for detection of printf-variables with index specifier
@@ -137,11 +139,15 @@ can be applied or not with a new option in Options/Font.
 ----------------------------------------------------------------------
 1.8.1 update 2 vs. 1.8.1 update 1
 
-   0 Enhancement
+   1 Enhancement
    1 Bugfix
 ----------------------------------------------------------------------
 1.8.1 update 2
 
+  Other enhancements:
+
+  - Slovenian localisation updated to 1.8 (instant start, documentation)
+  
   Bug fixes:
   
   - PL "Create new project" too large on OSX

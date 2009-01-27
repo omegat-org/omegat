@@ -1,365 +1,503 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Uporabniški vmesnik - Priročnik za uporabnika OmegaT 1.7.3</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Uporabniški vmesnik - Priročnik za uporabnika OmegaT 1.8</title>
 </head>
+
 <body>
+  <h2>Uporabniški vmesnik</h2>
 
-	<h1>Uporabniški vmesnik</h1>
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <ul>
+          <li>
+            <p><a href="#item">Elementi uporabniškega vmesnika</a></p>
 
-	<ul>
-		<li><a href="#item">Elementi uporabniškega vmesnika</a>
-			<ul>
-				<li><a href="#most">Okna, ki jih boste uporabljali ves čas</a></li>
-				<li><a href="#some">Okna, ki jih boste rabili sem in tja</a></li>
-				<li><a href="#dialogs">Pogovorna okna, v katerih boste spreminjati nastavitve projekta</a></li>
-			</ul>
-		</li>
-		<li><a href="#OmegaT_Main_Window">Glavno okno OmegaT</a>
-			<ul>
-				<li><a href="#main">Operacije na  glavnem oknu</a></li>
-				<li><a href="#Editor">Okno za urejanje</a>
-					<ul>
-						<li><a href="#segment_display">prikaz segmenta</a></li>
-						<li><a href="#edit_field">vsebina polja za urejanje</a></li>
-					</ul>
-				</li>
-				<li><a href="#Match">Prikaz predlogov</a>
-					<ul>
-						<li><a href="#match_sel">Izbiranje med mehkimi zadetki </a></li>
-						<li><a href="#match_oper">Operacije z mehkimi zadetki </a></li>
-						<li><a href="#match_display">Prikaz zadetka z informacijo</a></li>
-					</ul>
-				</li>
-				<li><a href="#Glossary">Geslovnik</a></li>
-				<li><a href="#menu">Glavni meni</a></li>
-				<li><a href="#bar">Statusna vrstica</a></li>
-			</ul>
-		</li>
-		<li><a href="#Other_windows">Druga okna</a>
-			<ul>
-				<li><a href="#files">Projektne datoteke</a>
-					<ul>
-						<li><a href="#proj_files">Lastnosti okna za projektne datoteke</a></li>
-						<li><a href="#unique">Enkratni segmenti</a></li>
-						<li><a href="#adding_files">Kako dodajati datoteke v projekt</a></li>
-					</ul>
-				</li>
-				<li><a href="#search">Okno za iskanje</a>
-					<ul>
-						<li><a href="#search_types">Vrste iskanja</a></li>
-						<li><a href="#wildcards_regexp">Nadomestni znaki in regularni izrazi</a></li>
-						<li><a href="#search_display">Prikaz rezultatov iskanja</a></li>
-					</ul>
-				</li>
-				<li><a href="#tags">Preverjanje oznak</a></li>
-				<li><a href="#manual">Brskalnik za pomoč</a>
-					<ul>
-						<li><a href="#help">Navigacija za brskalnik za pomoč</a></li>
-						<li><a href="#offline">Offline brskanje po priročniku za uporabnika</a></li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-		<li><a href="#dialogs">Pogovorna okna, v katerih boste spreminjati nastavitve projekta</a>
-			<ul>
-				<li><a href="projectProperties.html">Lastnosti projekta</a></li>
-				<li><a href="fontSettings.html">Pisava</a></li>
-				<li><a href="fileFilters.html">Datotečni filtri</a></li>
-				<li><a href="./segmentation.html">Segmentiranje</a></li>
-				<li><a href="translationEditing.html">Vedenje ob  urejanju…</a></li>
-			</ul>
-		</li>
-	</ul>
-<hr>
+            <ul>
+              <li>
+                <p><a href="#most">Okna, ki jih boste uporabljali ves čas</a></p>
+              </li>
 
-	<a name="item" id="item"></a>
-	<h1>Elementi uporabniškega vmesnika</h1>
+              <li>
+                <p><a href="#some">Okna, ki jih boste rabili sem in tja</a></p>
+              </li>
 
-	<a name="most" id="most"></a>
-	<h2>Okna, ki jih boste uporabljali ves čas</h2>
+              <li>
+                <p><a href="#dialogs">Pogovorna okna, v katerih boste spreminjati nastavitve projekta</a></p>
+              </li>
+            </ul>
+          </li>
 
-	<dl>
-		<dt><strong>Glavno okno OmegaT</strong> (<a href="#OmegaT_Main_Window">...</a>)</dt>
-		<dd>vsebuje glavni meni (<a href="#menu">...</a>), statusno vrstico (<a href="#bar">...</a>) in 3 podokna:<dl>
-				<dt>Okno za urejanje (<a href="#Editor">...</a>)</dt>
-				<dd> v katerem sestavljate in urejate svoj prevod</dd>
-				<dt>Podokno za zadetke (<a href="#Match">...</a>)</dt>
-				<dd>, kjer se nahajajo trenutnemu segmentu najbolj podobni že prevedeni segmenti iz prevodnega spomina.</dd>
-				<dt>Podokno za geslovnike (<a href="#Glossary">...</a>)</dt>
-				<dd> s prevodom terminologije</dd>
-			</dl>
-		</dd>
-		<dt><strong>Okno s projektnimi datotekami</strong> (<a href="#files">...</a>),</dt>
-		<dd>v katerem se nahaja seznam vaših prevedljivih datotek</dd>
-		<dd>sproži se ga z <code>Ctrl+L</code>, odstrani pa z  <code>esc</code>
-		<dt><strong>Okno za iskanje</strong> (<a href="#search">...</a>, </dt>
-		<dd>s pomočjo tega okna boste iskali segmente v projektu.</dd>
-		<dd>sproži se ga z <code>Ctrl+F</code>, odstrani pa z  <code>esc</code></dd>
-	</dl>
+          <li>
+            <p><a href="#OmegaT_Main_Window">Glavno okno OmegaT</a></p>
 
-	<a name="some" id="some"></a>
-	<h2>Okna, ki jih boste rabili sem in tja</h2>
+            <ul>
+              <li>
+                <p><a href="#Editor">Okno za urejanje</a></p>
+              </li>
 
-	<dl>
-		<dt><strong>Okno za preverjanje oznak</strong> (<a href="#tags">...</a>),</dt>
-		<dd>s pomočjo tega okna boste iskali napačne oznake v prevodih.</dd>
-		<dd>sproži se ga z <code>Ctrl+T</code>, odstrani pa z  <code>esc</code></dd>
-		<dt><strong>Brskalnik za pomoč</strong> (<a href="#manual">...</a>,</dt>
-		<dd>da brskate po priročniku za uporabnike</dd>
-		<dd>sproži se ga z <code>F1</code>, odstrani pa z  <code>esc</code></dd>
-	</dl>
+              <li>
+                <p><a href="#Match">Prikaz predlogov</a></p>
+              </li>
 
-	<a name="dialogs" id="dialogs"></a>
-	<h2>Pogovorna okna, v katerih boste spreminjati nastavitve projekta</h2>
+              <li>
+                <p><a href="#Glossary">Geslovnik</a></p>
+              </li>
 
-	<p>V pogovornih oknih spreminjate program OmegaT in nastavitve projekta. Vsak zase je opisan v posebnem podpoglavju, na tem mestu bomo samo povzeli, kaj je njihova naloga in kako pridete do njih.</p>
+              <li>
+                <p><a href="#menu">Glavni meni</a></p>
+              </li>
 
-	<dl>
-		<dt><strong>Lastnosti projekta</strong> (<a href="projectProperties.html">...</a>),</dt>
-		<dd>da prilagodite  imenike in jezike projekta.</dd>
-		<dd>sproži se ga z <code>Ctrl+E</code> ali z <strong>Projekt → Lastnosti...</strong>, odstrani pa z  <code>esc</code></dd>
-		<dt><strong>Pisava</strong> (<a href="fontSettings.html">...</a>),</dt>
-		<dd> da lahko izberete pisavo, s katero  OmegaT prikazuje izvorno besedilo in prevod, predloge zadetkov in izraze iz geslovnika</dd>
-		<dd>sproži se ga z <strong>Možnosti → Pisava...</strong>, odstrani pa z  <code>esc</code></dd>
-		<dt><strong>Filtri za datoteke…</strong> (<a href="fileFilters.html">...</a>),</dt>
-		<dd>da spremenite ravnanje za podprte formate datotek</dd>
-		<dd>sproži se ga z <strong>Možnosti → Filtri za datoteke...</strong>, odstrani pa z  <code>esc</code></dd>
-		<dt><strong>Segmentiranje</strong> (<a href="./segmentation.html">...</a>),</dt>
-		<dd> da spremenite način, kako se vaša besedila razstavlja v segmente</dd>
-		<dd>sproži se ga z <strong>Možnosti → Segmentiranje...</strong>, odstrani pa z  <code>esc</code></dd>
-		<dt><strong>Vedenje ob  urejanju</strong> (<a href="translationEditing.html">...</a>),</dt>
-		<dd>da navedete,  kako naj OmegaT ravna pri preskakovanju od segmenta do segmenta</dd>
-		<dd>sproži se ga z <strong>Možnosti → Vedenje ob  urejanju...</strong>, odstrani pa z  <code>esc</code></dd>
-	</dl>
+              <li>
+                <p><a href="#bar">Statusna vrstica</a></p>
+              </li>
+            </ul>
+          </li>
 
-<hr>
+          <li>
+            <p><a href="#dialogs">Pogovorna okna, v katerih boste spreminjati nastavitve projekta</a></p>
+          </li>
+        </ul>
+      </td>
 
-	<a name="OmegaT_Main_Window" id="OmegaT_Main_Window"></a>
-	<h1>Glavno okno OmegaT</h1>
+      <td>
+        <ul>
+          <li>
+            <p><a href="#Other_windows">Druga okna</a></p>
 
-	<a name="main" id="main"></a>
-	<h2>Operacije na  glavnem oknu</h2>
-	
-	<p>Glavno okno sestavljajo tri podokna, glavni meni in vrstica stanja. Položaj podoken lahko spremenite ali jih ločite, če podokno zgrabite za njegovo naslovno vrstico z imenom okna. Glede na stanje podokna se lahko v levem zgornjem kotu pokaže pet različnih znakov. Če  miško postavite na tak znak, boste dobili kratko informacijo o njem.</p>
+            <ul>
+              <li>
+                <p><a href="#files">Projektne datoteke</a></p>
 
-	<p>
-		<img src="images/Minimize.gif" name="graphics1" alt="Pomanjšaj" align="bottom" width="18" height="18" border="0" id="graphics1">pomanjša podokno tako, da je nad statusno vrstico nahaja samo še njegovo ime.<br> <img src="images/Maximize.gif" name="graphics2" alt="Maksimiraj" align="bottom" width="18" height="18" border="0" id="graphics2"> povzroči, da podokno zavzame celotno razpoložljivo okno<br> <img src="images/Restore.gif" name="graphics3" alt="Obnovi" align="bottom" width="18" height="18" border="0" id="graphics3"> vrne podokno tja, kjer je bilo preden se ga je zvečalo ali zmanjšalo.<br> <img src="images/Undock.gif" name="graphics4" alt="Odsidraj" align="bottom" width="18" height="18" border="0" id="graphics4"> loči podokno od glavnega okna, tako pa postane samostojno okno.<br> <img src="images/Dock.gif" name="graphics5" alt="Zasidraj" align="bottom" width="18" height="18" border="0" id="graphics5"> vrne podokno nazaj pod krov glavnega okna.</p>
+                <ul>
+                  <li>
+                    <p><a href="#proj_files">Lastnosti okna za projektne datoteke</a></p>
+                  </li>
 
-	<p>Podokna je mogoče urediti tudi tako, da se prekrivajo. V tem primeru bodo podokna na vrhu imela zavihek. Ko kliknete na zavihek, bo podokno skočilo v ospredje. Ločnice med podokni lahko vlečete in tako spreminjate velikost podokna.</p>
+                  <li>
+                    <p><a href="#unique">Enkratni segmenti</a></p>
+                  </li>
 
-	<a name="Editor" id="Editor"></a>
-	<h2>Okno za urejanje</h2>
+                  <li>
+                    <p><a href="#adding_files">Kako dodajati datoteke v projekt</a></p>
+                  </li>
+                </ul>
+              </li>
 
-	<p>Tu sestavljate in urejate svoj prevod.</p>
-	
-	<a name="segment_display" id="segment_display"></a>
-	<h3>prikaz segmenta</h3>
-	
-	<p>Urejevalnik prikazuje besedilo, ki je delno že prevedeno: že prevedeno besedilo prikazuje v ciljnem, neprevedeno pa v izvornem jeziku.  Med delom lahko drsite skozi dokument in z dvoklikom odprete kateri koli segment..{\cs6\f1\cf6\lang1024  &lt;/span&gt;}</p>
-	
-	<p>En od segmentov je aktiven. To je edini segment, ki ga urejevalnik kaže v dveh delih: v zgornjem delu, v zeleni barvi in krepki pisavi, je original, pod njim je polje za urejanje, ki ga omejujeta dve oznaki, na levi <strong><code>&lt;segment nnnn&gt;</code></strong>, kjer je <strong><code>nnnn</code></strong> številka segmenta v projektu, na desni pa oznaka za konec segmenta, <strong><code>&lt;end segment&gt;</code></strong>.</p>
-	
-	<p>Z zgornjim delom kot vzorcem prepišite ali spremenite vsebino v polju za urejanje, tako da bo vsebovala prevod originala.  </p>
-	
-	<table border="1">
-		<tr><td>
-			<table border="0" cellpadding="3">
-				<tr><td>Ta stavek smo prevedli.</td></tr>
-				<tr><td>Ta stavek smo ravno tako že prevedli.</td></tr>
-				<tr bgcolor="#99ff99"><td><strong>Cette phrase est en train d'être traduite.</strong></td></tr>
-				<tr><td><strong><code>&lt;segment 0003&gt;</code></strong>[Na tem mestu bi morali sedaj vnesti prevod]<strong><code>&lt;end segment&gt;</code></strong></td></tr>
-				<tr><td>	This sentence will be translated next.</td></tr>
-			</table>
-		</td></tr>
-	</table>
+              <li>
+                <p><a href="#search">Okno za iskanje</a></p>
 
-	<a name="edit_field" id="edit_field"></a>
-	<h3>vsebina polja za urejanje</h3>
+                <ul>
+                  <li>
+                    <p><a href="#search_types">Vrste iskanja</a></p>
+                  </li>
 
-	<p>Odvisno od <a href="translationEditing.html">vedenja ob urejanju</a> je lahko polje za urejanje prevoda prazno. lahko vsebuje izvorno besedilo ali pa predlog za prevod besedila, ki je še najbliže izvornemu segmentu.</p>
+                  <li>
+                    <p><a href="#wildcards_regexp">Nadomestni znaki in regularni izrazi</a></p>
+                  </li>
 
-	<p>Ko preskočite na drug segment, se prevod preveri in shrani.</p>
-	
-	<p>Če želite, da ostane segment nepreveden, enostavno iz prevoda odstranite ves tekst  (z <code>Ctrl+A</code> najprej vse izberite, potem pa zbrišite z <code>Del</code>).</p>
-	
-	<p>Odvisno od nastavitev za <a href="translationEditing.html">Vedenje ob urejanju</a>, si lahko OmegaT zapomni prevod, v kolikor je identičen izvornemu besedilu. To je praktično v dokumentih, ki vsebujejo blagovne znamke, imena ali besede v tretjem jeziku, ki jih ni treba prevajati. </p>
+                  <li>
+                    <p><a href="#search_display">Prikaz rezultatov iskanja</a></p>
+                  </li>
+                </ul>
+              </li>
 
-	<p>Glej <a href="translationEditing.html">Urejanje prevoda</a> za podrobnosti.</p>
+              <li>
+                <p><a href="#tag_validation">Preverjanje oznak</a></p>
+              </li>
 
-	<a name="Match" id="Match"></a>
-	<h2>Prikaz predlogov</h2>
+              <li>
+                <p><a href="#manual">Brskalnik za pomoč</a></p>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+  <hr>
 
-	<p>Kazalnik zadetkov kaže najbolj podobne segmente v  <a href="translationMemories.html">prevodnih spominih</a>, tako v spominu projekta, na katerem trenutno delate, kot v spominih, ki so vam na razpolago iz prejšnjih projektov ali ki vam jih je stranka ali agencija dala na razpolago.</p>
-	
-	<a name="match_sel" id="match_sel"></a>
-	<h3>Izbiranje med mehkimi zadetki </h3>
-	
-	<p>Ko odprete nov segment, se samodejno izbere prvi zadetek (to je zadetek z največjim odstotkom podobnosti). Lahko se <a href="menu.html#shortcuts">odločite</a> za kak drugi zadetek, s tem da  pritisnete <code>Ctrl+2</code>, <code>3</code>, <code>4</code>, or <code>5</code>, glede na zaporedno številko vašega izbranca.</p>
+  <h2><a name="item" id="item"></a>Elementi uporabniškega vmesnika</h2>
 
-	<a name="match_oper" id="match_oper"></a>
-	<h3>Operacije z mehkimi zadetki </h3>
-	
-	<p>Da <strong>izbrani</strong> zadetek vključite v svoj prevod, uporabite  <code><a href="menu.html#shortcuts">Ctrl+R</a></code> , s čimer zamenjate vsebino ciljnega polja z zadetkom, ali pa uporabite <code><a href="menu.html#shortcuts">Ctrl+I</a></code>, s čimer zadetek vstavite na mesto, kjer se nahaja kazalka.</p>
-	
-	<a name="match_display" id="match_display"></a>
-	<h3>Prikaz zadetka z informacijo</h3>
-	
-	<p>Odstotek podobnosti se računa kot ulomek števila besed, ki so skupne obema segmentoma, in celotnega števila besed v daljšem segmentu. Izbrani mehki zadetek je označen <strong>krepko</strong>, besede, ki v segmentu, ki ga prevajate, manjkajo, bodo označene <strong><font color="blue">modro</font></strong> . besede pa, ki mejijo na manjkajoče dele, bodo označene <strong><font color="green">zeleno</font></strong>.</p>
+  <h3><a name="most" id="most"></a>Okna, ki jih boste uporabljali ves čas</h3>
 
-	<p>Oglejmo si naslednji segment:</p>
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <col width="43*">
+    <col width="213*">
 
-	<pre>	<strong>  {\cs6\f1\cf6\lang1024  &lt;strong&gt;&lt;span style='font-family:"Courier New"'&gt;}Informacija o&nbsp; Javi in OmegaT{\cs6\f1\cf6\lang1024  &lt;/span&gt;&lt;/strong&gt;&lt;/span&gt;}</strong></pre>
+    <tr>
+      <td width="24%">
+        <a name="OmegaT_Main_Window" id="OmegaT_Main_Window"></a>
 
-	<p>Mehki zadetek za segment:</p>
+        <p><strong>Glavno okno OmegaT</strong></p>
+      </td>
 
-	<pre>	<strong>Splošne opombe o Javi in OmegaT</strong></pre>
+      <td width="83%">
+        <p>vsebuje glavni meni, statusno vrstico in 3 podokna:</p>
+      </td>
+    </tr>
 
-	<p>bo pobarvan takole:</p>
+    <tr>
+      <td width="24%">
+        <p>--- podokno za urejanje</p>
+      </td>
 
-	<pre>	<strong><font color="blue">Splošne opombe</font>  <font color="green"></font>o  Javi in OmegaT</strong></pre>
+      <td width="83%">
+        <p> v katerem sestavljate in urejate svoj prevod</p>
+      </td>
+    </tr>
 
-	<p>in procent bi moral biti  3/5=<strong>60%</strong></p>
+    <tr>
+      <td width="24%">
+        <p>--- podokno za zadetke</p>
+      </td>
 
-	<a name="Glossary" id="Glossary"></a>
-	<h2>Geslovnik</h2>
+      <td width="83%">
+        <p>, kjer se nahajajo trenutnemu segmentu najbolj podobni že prevedeni segmenti iz prevodnega spomina.</p>
+      </td>
+    </tr>
 
-	<p>Podokno za geslovnike prikazuje prevodno terminologijo v <a href="glossaries.html">datotekah geslovnikih</a>.</p>
-	
-	<p>V njem je prikazan prevod izrazov v tekočem segmentu, vendar le kot referenca, medtem ko vstavljanje ali zamenjava prevodov z izvirnikom.</p>
-	
-	<p>OmegaT podpira tudi izraze z več besedami, vendar na zelo enostaven način: če je v trenutnem segmentu najti obe besedi, se bo izraz pokazalo. Oblika izrazja, kot je prikazano v podokno za slovarje:</p>
+    <tr>
+      <td width="24%">
+        <p>- podokno za geslovnike</p>
+      </td>
 
-	<pre> &nbsp;&nbsp; 'izvirni izraz' = 'prevod izraza'  komentar o izrazu ali prazno</pre>
+      <td width="83%">
+        <p> s prevodom terminologije</p>
+      </td>
+    </tr>
 
-	<a name="menu" id="menu"></a>
-	<h2>Glavni meni</h2>
+    <tr>
+      <td width="24%">
+        <p><strong>Okno s projektnimi datotekami</strong></p>
+      </td>
 
-	<p>Očitno lahko glavni meni uporabljate za dostop do večine funkcij OmegaT. Glej prilogo <a href="menu.html#menu">Glavni meni</a>, kjer boste našli popoln opis menija in posameznih točk..</p>
+      <td width="83%">
+        <dl>
+          <dd>v katerem se nahaja seznam vaših prevedljivih datotek, odprete ga z <code>Ctrl+L</code>, zaprete z <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
 
-	<p>Najbolj pogosto uporabljene funkcije se da doseči z  <a href="menu.html#shortcuts">bližnjicami</a>, tako da se boste sčasoma odvadili, meni uporabljati med prevajanjem. </p>
-	
-	<a name="bar" id="bar"></a>
-	<h2>Statusna vrstica</h2>
+    <tr>
+      <td width="24%">
+        <dl>
+          <dt><strong>Okno za iskanje</strong></dt>
+        </dl>
+      </td>
 
-	<p>Statusna vrstica na dnu glavnega okna prikazuje sporočila o poteku dela. Ta vrstica tudi obvešča uporabnika o poteku konkretnih operacij, ki se izvajajo. Za trenutni segment pokaže tudi število ohlapnih zadetkov in zadetkov v slovarjih.</p>
+      <td width="83%">
+        <dl>
+          <dd>s pomočjo tega okna boste iskali segmente v projektu, odprete ga z <code>Ctrl+F</code>, zaprete z <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+  </table>
 
-<hr>
+  <h3><a name="some" id="some"></a>Okna, ki jih boste rabili sem in tja</h3>
 
-	<a name="Other_windows" id="Other_windows"></a>
-	<h1>Druga okna</h1>
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <col width="43*">
+    <col width="213*">
 
-	<a name="files" id="files"></a>
-	<h2>Projektne datoteke</h2>
+    <tr>
+      <td width="23%">
+        <dl>
+          <dt><strong>Okno za preverjanje oznak</strong></dt>
+        </dl>
+      </td>
 
-	<p>Okno s projektnimi datotekami kaže seznam datotek in ostale informacije o projektu. Prikaže se samodejno, ko OmegaT naloži projekt. Zaprete ga z <code>esc</code>, odprete ali prestavite v ospredje pa ga z  <code>Ctrl+L</code>.</p>
-	
-	<a name="proj_files" id="proj_files"></a>
-	<h3>Lastnosti okna za projektne datoteke</h3>
+      <td width="83%">
+        <dl>
+          <dd>s pomočjo tega okna boste iskali napačne oznake v prevodu, odprete ga z <code>Ctrl+T</code>, zaprete z <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
 
-	<p>Navaja se naslednje podatke.</p>
-	
-	<ul>
-		<li>Seznam vseh prevedljivih datotek v projektu.<br> To so datoteke, ki se nahajajo v izvornem imeniku in ki jih <a href="filesToTranslate.html">OmegaT zna obdelovati</a>.<br> Ko kliknete na eno od njih, se bo datoteka v urejevalniku, da lahko z njo začnete delati. </li>
-		<li>datoteka, ki se trenutno nahaja v urejevalniku, je podkrepljena z modro barvo. </li>
-		<li>Poleg imena datoteke je navedeno število segmentov v njej. </li>
-		<li>Število enkratnih (različnih) segmentov v celem projektu.</li>
-		<li>Število enkratnih segmentov, ki ste jih že prevedli.  Obnovi se vsakič, ko prevedete nov segment.</li>
-	</ul>
+    <tr>
+      <td width="23%">
+        <dl>
+          <dt><strong>Brskalnik za pomoč</strong></dt>
+        </dl>
+      </td>
 
-	<a name="unique" id="unique"></a>
-	<h3>Enkratni segmenti</h3>
-	
-	<p>Zalogo <strong>enkratnih</strong> segmentov se preračuna tako, da se vzame vse segmente in iz seznama odstrani vse dvojčke, ki so si enaki do velikih in malih črk ("Leto" in "leto" sta torej različna segmenta).</p>
+      <td width="83%">
+        <dl>
+          <dd>da brskate po priročniku za uporabnike, zaprete ga z <code><b>esc</b></code></dd>
+        </dl>
+      </td>
+    </tr>
+  </table>
 
-	<p>Iz razlike med  "številom segmentov" in "številom enkratnih segmentov" si lahko ustvarite grobo sliko o tem, koliko dela vas še čaka. Pomnite pa, da vam številke same ne dajejo jasne slike o tem, kako pomembne ponovitve so: segmenti so lahko relativno dolgi stavki, ki se pogostokrat ponavljajo (imate srečo!), lahko pa so na primer samo ključne besede, ki se ponavljajo od tabele do tabele (imate tudi srečo, samo ne posebno veliko...).</p>
-	
-	<p>Datoteka <code>project_stats.txt</code> se nahaja v podimeniku  <code>/omegat</code> vašega projekta in vsebuje dodatne podatke o vsebini datotek..</p>
+  <h3><a name="dialogs" id="dialogs"></a>Pogovorna okna, v katerih boste spreminjati nastavitve projekta</h3>
 
-	<p>Število segmentov/enkratnih segmentov lahko prilagodite, če spremenite pravila za segmentiranje. Ko ste enkrat začeli s projektom delati, se takih sprememb ne lotevajte. Glej <a href="./segmentation.html">pravila za segmentiranje</a> za dodatne podatke.</p>
+  <p>V pogovornih oknih spreminjate program OmegaT in nastavitve projekta. Vsak zase je opisan v posebnem podpoglavju, na tem mestu bomo samo povzeli, kaj je njihova naloga in kako pridete do njih.</p>
 
-	<a name="adding_files" id="adding_files"></a>
-	<h3>Kako dodajati datoteke v projekt</h3>
-	
-	<p>Glejte {\cs6\f1\cf6\lang1024  &lt;a href="segmentation.html" title="}Segmetiranje izvora{\cs6\f1\cf6\lang1024  "&gt;}pravila za segmentiranje{\cs6\f1\cf6\lang1024  &lt;/a&gt;} za dodatne podatke. Ukaz kopira izbrane datoteke v imenik <code>/source</code> in projekt ponovno naloži, tako da vsebuje tudi dodane datoteke. Dodate lahko tudi izvorne datoteke z spleta, ki so sestavljene v MediaWiki; v ta namen  kliknite na gumb "Uvozi iz MediaWiki" in vnesite zaželeni URL..</p>
+  <p><br></p>
 
-	<a name="search" id="search"></a>
-	<h2>Okno za iskanje</h2>
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <col width="43*">
+    <col width="213*">
 
-	<p>S pomočjo tega okna boste iskali segmente v projektu. Hkrati imate lahko odprtih več oken za iskanje. Da odprete novo okno za iskanje, pritisnite <code><a href= "menu.html#shortcuts">Ctrl+F</a></code> v glavnem oknu.</p>
-	
-	<p>Okno za iskanje ima polje za besedilo, v katerega vnašate iskano besedilo ali ključne besede, zastavice in gumbe za nastavitev iskanja in področje za prikaz rezultatov iskanja.</p>
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>Lastnosti projekta</strong></dt>
+        </dl>
+      </td>
 
-	<a name="search_types" id="search_types"></a>
-	<h3>Vrste iskanja</h3>
-	
-	<dl>
-		<dt>Na voljo sta <a href="searches.html#searchmethods">dve vrsti</a> iskanja:</dt>
-		<dt><strong>Eksaktno iskanje</strong></dt>
-		<dd>Eksaktna iskanja iščejo navedeni niz v trenutnem ali v kateremkoli imeniku ali drevesu.</dd>
-		<dt><strong>Iskanje s ključem</strong></dt>
-		<dd>Ključna iskanja preiščejo trenutni projekt in vrnejo vse segmente, ki vsebujejo vse besede v poizvedbi, in to v poljubnem vrstnem redu.</dd>
-	</dl>
+      <td width="83%">
+        <dl>
+          <dd>da navedete imenike in jezike projekta, sproži se ga z <code>Ctrl+E</code> ali z <strong>Projekt → Lastnosti...</strong>, odstrani pa z <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
 
-	<p>Išče se tako po izvoru kot tudi po prevodu.</p>
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>Pisava</strong></dt>
+        </dl>
+      </td>
 
-	<p>Iščete lahko po poljubnem imeniku, pomnite pri samo, da OmegaT išče samo po datotekah,  <a href="filesToTranslate.html">ki jih podpira</a>.</p>
-	
-	<a name="wildcards_regexp" id="wildcards_regexp"></a>
-	<h3>Nadomestni znaki in regularni izrazi</h3>
-	
-	<p>Iskanje podpira  <a href="searches.html#usingwildcards">nadomestna znaka</a> * and ? in pa  <a href="searches.html#usingregularexpressions">regularne izraze</a>.</p>
+      <td width="83%">
+        <dl>
+          <dd> da lahko izberete pisavo, s katero OmegaT prikazuje izvorno besedilo in prevod, predloge zadetkov in izraze iz geslovnika, odprete ga z <strong>Možnosti → Pisava</strong>, zaprete z <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
 
-	<a name="search_display" id="search_display"></a>
-	<h3>Prikaz rezultatov iskanja</h3>
-	
-	<p>Če vnesete niz za iskanje v polje in pritisnete gumb išči, bo program navedel vse segmente v projektu, ki iskani niz vsebujejo. OmegaT obravnava enake segmente kot eno samo enoto -- če spremenite enega od njih, se bodo spremenili vsi ostali enaki segmenti -- prikazan pa bo samo prvi.</p>
-	
-	<p>Segmente se prikazuje v vrstnem redu, v katerem nastopajo v projektu. Prevedeni segmenti bodo prikazani z izvirnikom zgoraj in prevodom pod njim, pri neprevedenih segmentih pa je prikazano samo izvirno besedilo.</p>
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>Datotečni filtri</strong></dt>
+        </dl>
+      </td>
 
-	<p>Če kliknete na povezavo, se segment odpre v urejevalniku. Potem lahko skočite nazaj v iskalno okno in si pogledate naslednji segment, ki ga boste morda tudi morali spremeniti. Če morate narediti večje spremembe izrazja, vam tak pristop delo lahko zelo olajša.</p>
-	
-	<a name="tags" id="tags"></a>
-	<h2>Preverjanje oznak</h2>
+      <td width="83%">
+        <dl>
+          <dd>da spremenite ravnanje za podprte formate datotek, odprete ga z <strong>Možnosti → Datotečni filtri</strong>, zaprete z <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
 
-	<p>Okno za preverjanje oznak vsebuje seznam napak v formatiranju prevedenih dokumentov</p>
-	
-	<p>To okno odprete z bližnjico &lt;<code><a href="menu.html#shortcuts">Ctrl+T</a></code>.</p>
-	
-	<p>V oknu se nahaja tabela s tremi stolpci:</p>
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>Segmentiranje</strong></dt>
+        </dl>
+      </td>
 
-	<ul>
-		<li>povezava na segment </li>
-		<li>vsebina izvirnega segmenta,</li>
-		<li>vsebina prevedenega segmenta.</li>
-	</ul>
-	
-	<p>Oznake so okrepljene v modri barvi, da je laže primerjati izvorni in ciljni segment.<p>Če kliknete na povezavo, se segment odpre v urejevalniku.</p>
-	
-	<p>Popravite po potrebi napake in pritisnite <code><a href="menu.html#shortcuts">Ctrl+T</a></code>, da se vrnete nazaj v okno za preverjanje napak.</p>
+      <td width="83%">
+        <dl>
+          <dd> da spremenite način, kako se vaša besedila razstavlja v segmente, odprete ga z <strong>Možnosti → Segmentiranje...</strong>, zaprete z <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
 
-	<p><a href="formattedText.html#intro">Napake v oznakah</a> so posledice <a href="formattedText.html#tag_operation">manipulacij na oznakah</a>, zaradi katerih se v ciljnem dokumentu oznake ne pojavljajo v istem vrstnem redu in številu kot pa v originalnem besedilu. Nekatere teh manipulacij so potrebne in dobronamerne, pri drugih bo prišlo do problemov, ko se ustvarja ciljni dokument. </p>
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>Vedenje ob urejanju</strong></dt>
+        </dl>
+      </td>
 
-	<p>Oznake navadno predstavljajo kak ukaz za oblikovanje izvirnega besedila. Če se formatiranje izvornega besedila lahko<strong> poenostavite</strong>, ima lahko za posledico znatno manj oznak kasneje.</p>
-	
-	<a name="manual" id="manual"></a>
-	<h2>Brskalnik za pomoč</h2>
+      <td width="83%">
+        <dl>
+          <dd>da navedete, kako naj OmegaT ravna pri preskakovanju od segmenta do segmenta, odprete ga z <strong>Možnosti → Vedenje ob urejanju…</strong>, zaprete z <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+  </table>
+  <hr>
 
-	<p>Brskalnik za pomoč (ki prikazuje tale priročnik) lahko pokličete s pritiskom na  <a href="menu.html#shortcuts">F1</a> ali prek točke  <strong>Pomoč -&gt; Priročnik za uporabnike...</strong> v <a href="menu.html">glavnem meniju</a>.</p>
-	
-	<a name="help" id="help"></a>
-	<h3>Navigacija za brskalnik za pomoč</h3>
-	
-	<p>V oknu boste videli priročnik in dva gumba: <strong>Nazaj</strong> in <strong>Kazalo</strong>. Priročnik za uporabnika je HTML dokument s povezavami na razna poglavja. Če kliknete na povezavo, kot bi to storili v brskalniku, se bo odprla želena stran.</p>
+  <h2>Glavno okno OmegaT</h2><img src="images/OmegaT_panes.png" name="grafika1"
+  alt="Podokna v OmegaT" align="left" width="756" height="577" border="0" id=
+  "grafika1"><br clear="left">
 
-	<a name="offline" id="offline"></a>
-	<h3>Offline brskanje po priročniku za uporabnika</h3>
+  <p><br>
+  <br></p>
 
-	<p>Priročnik za uporabnika se nahaja v podimeniku <code>doc</code> pod imenikom za namestitev  OmegaT, tako da lahko, na primer, pogledate angleško dokumentacijo, če v svojem brskalniku odprete <code>doc/en/index.hmtl</code>. Tako boste lahko sledili tudi zunanjim povezavam, ki jih interni brskalnik ne obvlada. </p>
+  <p>Glavno okno sestavljajo tri podokna, glavni meni in vrstica stanja. Položaj podoken lahko spremenite ali jih ločite, če podokno zgrabite za njegovo naslovno vrstico z imenom okna. Glede na stanje podokna se lahko v desnem zgornjem kotu prikazujejo različni znaki.</p>
 
-<hr>
+  <p><img src="images/Minimize.gif" name="graphics1" alt="Pomanjšaj" align=
+  "bottom" width="18" height="18" border="0" id="graphics1">pomanjša podokno tako, da je nad statusno vrstico nahaja samo še njegovo ime.<br> <img src="images/Maximize.gif" name="graphics2" alt="Maksimiraj" align="bottom"
+  width="18" height="18" border="0" id="graphics2"> povzroči, da podokno zavzame celotno razpoložljivo okno<br> <img src="images/Restore.gif" name="graphics3" alt="Obnovi" align="bottom"
+  width="18" height="18" border="0" id="graphics3"> vrne podokno tja, kjer je bilo preden se ga je zvečalo ali zmanjšalo.<br> <img src="images/Undock.gif" name="graphics4" alt="Odsidraj" align="bottom"
+  width="18" height="18" border="0" id="graphics4"> loči podokno od glavnega okna, tako pa postane samostojno okno.<br> <img src="images/Dock.gif" name="graphics5" alt="Zasidraj" align="bottom" width=
+  "18" height="18" border="0" id="graphics5"> vrne podokno nazaj pod krov glavnega okna.</p>
 
-	<p><a href="legalNotices.html">Pravni poduk</a></p>
+  <p>Podokna je mogoče urediti tudi tako, da se prekrivajo. V tem primeru bodo podokna na vrhu imela zavihek. Ko kliknete na zavihek, bo podokno skočilo v ospredje. Ločnice med podokni lahko vlečete in tako spreminjate velikost podokna.</p>
+
+  <h3><a name="Editor" id="Editor"></a>Okno za urejanje</h3>
+
+  <p>Tu sestavljate in urejate svoj prevod. Urejevalnik prikazuje besedilo, ki je delno že prevedeno: že prevedeno besedilo prikazuje v ciljnem, neprevedeno pa v izvornem jeziku.  Med delom lahko drsite skozi dokument in z dvoklikom odprete kateri koli segment.. V zgornjem primeru so že prevedeni segmenti označeni rumeno, lahko pa si nastavitev spremenite po svojem okusu (glejte meni <a href=
+  "menu.html">Prikaz</a>.)</p>
+
+  <p>En od segmentov je aktivni segment. To je edini segment, ki ga urejevalnik kaže v dveh delih: v zgornjem delu, v zeleni barvi in krepki pisavi, je original, pod njim je polje za urejanje, ki ga omejujeta dve oznaki, na levi <strong><code>&lt;segment nnnn&gt;</code></strong>, kjer je <strong><code>nnnn</code></strong> številka segmenta v projektu, na desni pa oznaka za konec segmenta, <strong><code>&lt;end segment&gt;</code></strong>. Z zgornjim delom kot vzorcem prepišite ali spremenite vsebino v polju za urejanje, tako da bo vsebovala prevod originala. </p>
+
+  <p>Odvisno od <a href="translationEditing.html">vedenja ob urejanju</a> je lahko polje za urejanje prevoda prazno. lahko vsebuje izvorno besedilo ali pa predlog za prevod besedila, ki je še najbliže izvornemu segmentu. Ko preskočite na drug segment, se prevod preveri in shrani. Če želite, da ostane segment nepreveden, enostavno iz prevoda odstranite ves tekst (z <code>Ctrl+A</code> najprej vse izberite, potem pa zbrišite z <code>Del</code>). OmegaT si lahko prevod, ki je identičen izvornemu besedilu, zapomne. To je praktično v dokumentih, ki vsebujejo blagovne znamke, imena ali besede v tretjem jeziku, ki jih ni treba prevajati. </p>
+
+  <p>Glej <a href="translationEditing.html">Urejanje prevoda</a> za podrobnosti.</p>
+
+  <h3><a name="Match" id="Match"></a>Prikaz predlogov</h3><img src=
+  "images/MatchesPane.png" name="grafika2" alt="Podokno OmegaT za zadetke" align="left"
+  width="417" height="356" border="0" id="grafika2"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>Kazalnik zadetkov kaže najbolj podobne segmente v <a href=
+  "translationMemories.html">prevodnih spominih</a>, tako v spominu projekta, na katerem trenutno delate, kot v spominih, ki so vam na razpolago iz prejšnjih projektov ali ki vam jih je stranka ali agencija dala na razpolago.</p>
+
+  <p>Ko odprete nov segment, se samodejno izbere prvi zadetek (to je zadetek z največjim odstotkom podobnosti). Lahko se <a href=
+  "menu.html#shortcuts">odločite</a> za kak drugi zadetek, s tem da pritisnete <code>Ctrl+2</code>, <code>3</code>, <code>4</code>, or <code>5</code>, glede na zaporedno številko vašega izbranca. Če pritisnete na primer na <code>Ctrl+5</code>, zadetka 5 pa ni, se seveda ne bo zgodilo nič.</p>
+
+  <p>Da <strong>izbrani</strong> zadetek vključite v svoj prevod, uporabite <code><a href="menu.html#shortcuts">Ctrl+R</a></code> , s čimer zamenjate vsebino ciljnega polja z zadetkom, ali pa uporabite <code><a href=
+  "menu.html#shortcuts">Ctrl+I</a></code>, s čimer zadetek vstavite na mesto, kjer se nahaja kazalka.</p>
+
+  <p>Odstotek podobnosti se računa kot ulomek števila besed, ki so skupne obema segmentoma, in celotnega števila besed v daljšem segmentu. Izbrani mehki zadetek je označen <strong>krepko</strong>, besede, ki v segmentu, ki ga prevajate, manjkajo, bodo označene <strong><font color=
+  "#0000FF">modro</font></strong>, besede pa, ki mejijo na manjkajoče dele, bodo označene <font color="#00FF00"><b>zeleno</b></font>. V zgornjem primeru je izvorni segment <strong><i>Information about Java &amp; OmegaT.</i></strong>. Najboljši zadetek je vreden 75%, ker se tri besede od štirih (&amp; pri tem ne šteje) skladajo.  Vrstica z odstotkom skladanja vsebuje tudi ime datoteke TMX, od koder predlog izhaja. Če ime ni navedeno, gre za prevodni spomin samega projekta.  Segmenti sirote (zadetek #4) so segmenti v prevodnem spominu projekta, za katere izvornega segmenta ni več najti.</p>
+
+  <p><br>
+  <br></p>
+
+  <h3><a name="Glossary" id="Glossary"></a>Geslovnik</h3>
+
+  <p>Podokno za geslovnike prikazuje prevodno terminologijo v <a href=
+  "glossaries.html">datotekah geslovnikih</a>. V njem je prikazan prevod izrazov v tekočem segmentu, vendar le kot referenca, medtem ko vstavljanje ali zamenjava prevodov z izvirnikom.</p><img src=
+  "images/Glossary_pane.png" name="grafika3" alt="Podokno OmegaT za geslovnike" align=
+  "left" width="328" height="150" border="0" id="grafika3"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>Izvorni segment v priimewru zgoraj je “<i>In most translation jobs it is considered important to have the translated document look similar to the original.</i>”, dve besedi, document in translation, je program našel v geslovniku, ki je na razpolago. OmegaT podpira tudi izraze z več besedami, vendar na zelo enostaven način: če je v trenutnem segmentu najti obe besedi, se bo izraz pokazalo.</p>
+
+  <h3><a name="menu" id="menu"></a>Glavni meni</h3>
+
+  <p>Očitno lahko glavni meni uporabljate za dostop do večine funkcij OmegaT. Glej prilogo <a href="menu.html#menu">Glavni meni</a>, kjer boste našli popoln opis menija in posameznih točk. Najbolj pogosto uporabljene funkcije se da doseči z <a href="menu.html#shortcuts">bližnjicami</a>, tako da se boste sčasoma odvadili, meni med prevajanjem uporabljati. </p>
+
+  <h3><a name="bar" id="bar"></a>Statusna vrstica</h3>
+
+  <p>Statusna vrstica na dnu glavnega okna prikazuje sporočila o poteku dela. Ta vrstica tudi obvešča uporabnika o poteku konkretnih operacij, ki se izvajajo. Za trenutni segment pokaže tudi število ohlapnih zadetkov in zadetkov v slovarjih.</p>
+  <hr>
+
+  <h2><a name="other_windows" id="other_windows"></a>Druga okna</h2>
+
+  <h3><a name="files" id="files"></a>Projektne datoteke</h3>
+
+  <p>Okno s projektnimi datotekami kaže seznam datotek in ostale informacije o projektu. Prikaže se samodejno, ko OmegaT naloži projekt. Zaprete ga z <code>esc</code>, odprete ali prestavite v ospredje pa ga z <code>Ctrl+L</code>.</p>
+
+  <h3><a name="proj_files" id="proj_files"></a>Lastnosti okna za projektne datoteke</h3>
+
+  <p>Navaja se naslednje podatke.</p>
+
+  <ul>
+    <li>
+      <p>seznam vseh prevedljivih datotek v projektu. To so datoteke, ki se nahajajo v izvornem imeniku in ki jih <a href=
+      "filesToTranslate.html">OmegaT zna obdelovati</a>. Ko kliknete na eno od njih, se bo datoteka v urejevalniku, da lahko z njo začnete delati. </p>
+    </li>
+
+    <li>
+      <p>datoteka, ki se trenutno nahaja v urejevalniku, je podkrepljena z modro barvo. </p>
+    </li>
+
+    <li>
+      <p>Poleg imena datoteke je navedeno število segmentov v njej. </p>
+    </li>
+
+    <li>
+      <p>Število enkratnih (različnih) segmentov v celem projektu.</p>
+    </li>
+
+    <li>
+      <p>Število enkratnih segmentov, ki ste jih že prevedli.  Obnovi se vsakič, ko prevedete nov segment.</p>
+    </li>
+  </ul>
+
+  <h3><a name="unique" id="unique"></a>Enkratni segmenti</h3>
+
+  <p>Zalogo <strong>enkratnih</strong> segmentov se preračuna tako, da se vzame vse segmente in iz seznama odstrani vse dvojčke, ki so si enaki do velikih in malih črk ("Leto" in "leto" sta torej različna segmenta).</p>
+
+  <p>Iz razlike med "številom segmentov" in "številom enkratnih segmentov" si lahko ustvarite grobo sliko o tem, koliko dela vas še čaka. Pomnite pa, da vam številke same ne dajejo jasne slike o tem, kako pomembne ponovitve so: segmenti so lahko relativno dolgi stavki, ki se pogostokrat ponavljajo (imate srečo!), lahko pa so na primer samo ključne besede, ki se ponavljajo od tabele do tabele (imate tudi srečo, samo ne posebno veliko...). Podrobnejšo statistiko boste našli v datoteki <code>project_stats.txt</code>, ki se nahaja v podimeniku the <code>/omegat</code>.</p>
+
+  <p>Število segmentov/enkratnih segmentov lahko prilagodite, če spremenite pravila za segmentiranje. V nobenem primeru pa se tega ne lotevajte, ko je projekt že stekel - obstaja namreč nevarnost, da že opravljeno delo ni več uporabno. Glej <a href=
+  "./segmentation.html">pravila za segmentiranje</a> za dodatne podatke.</p>
+
+  <h3><a name="adding_files" id="adding_files"></a>Kako dodajati datoteke v projekt</h3>
+
+  <p>Datoteke z izvornim besedilom lahko projektu dodajate s klikom na "Uvozi izvorne datoteke..." Ukaz kopira izbrane datoteke v imenik <code>/source</code> in projekt ponovno naloži, tako da vsebuje tudi dodane datoteke. Dodate lahko tudi izvorne datoteke z spleta, ki so sestavljene v MediaWiki; v ta namen kliknite na gumb "Uvozi iz MediaWiki" in vnesite zaželeni URL.</p>
+
+  <h3><a name="search" id="search"></a>Okno za iskanje</h3>
+
+  <p>S pomočjo tega okna boste iskali segmente v projektu. Hkrati imate lahko odprtih več oken za iskanje. Da odprete novo okno za iskanje, pritisnite <code><a href="menu.html#shortcuts">Ctrl+F</a></code> v glavnem oknu. Okno za iskanje ima polje za besedilo, v katerega vnašate iskano besedilo ali ključne besede, zastavice in gumbe za nastavitev iskanja in področje za prikaz rezultatov iskanja.</p>
+
+  <h3><a name="search_types" id="search_types"></a>Vrste iskanja</h3>
+
+  <dl>
+    <dt>Na voljo sta <a href="searches.html#searchmethods">dve vrsti</a> iskanja:</dt>
+
+    <dt><strong>Natančno iskanje -</strong> išče navedeni niz v trenutnem ali v katerem koli imeniku ali drevesu.</dt>
+
+    <dt><strong>Ključna iskanja - </strong>preiščejo trenutni projekt in vrnejo vse segmente, ki vsebujejo vse besede v poizvedbi, in to v poljubnem vrstnem redu.</dt>
+  </dl>
+
+  <p>Išče se tako po izvoru kot tudi po prevodu. Iščete lahko po poljubnem imeniku, pomnite pri samo, da OmegaT išče samo po datotekah, <a href="filesToTranslate.html">ki jih podpira</a>.</p>
+
+  <h3><a name="wildcards_regexp" id="wildcards_regexp"></a>Nadomestni znaki in regularni izrazi</h3>
+
+  <p>Iskanje podpira <a href="searches.html#usingwildcards">nadomestna znaka</a> * and ? in pa <a href=
+  "searches.html#usingregularexpressions">regularne izraze</a>.</p>
+
+  <h3><a name="search_display" id="search_display"></a>Prikaz rezultatov iskanja</h3>
+
+  <p>Če vnesete niz za iskanje v polje in pritisnete gumb išči, bo program navedel vse segmente v projektu, ki iskani niz vsebujejo. OmegaT obravnava enake segmente kot eno samo enoto -- če spremenite enega od njih, se bodo spremenili vsi ostali enaki segmenti -- prikazan pa bo samo prvi. Segmente se prikazuje v vrstnem redu, v katerem nastopajo v projektu. Prevedeni segmenti bodo prikazani z izvirnikom zgoraj in prevodom pod njim, pri neprevedenih segmentih pa je prikazano samo izvirno besedilo.</p>
+
+  <p>Če kliknete na povezavo, se segment odpre v urejevalniku. Potem lahko skočite nazaj v iskalno okno in si pogledate naslednji segment, ki ga boste morda tudi morali spremeniti. Če morate narediti večje spremembe izrazja, vam tak pristop delo lahko zelo olajša.</p>
+
+  <h3><a name="tag_validation" id="tag_validation"></a>Preverjanje oznak</h3>
+
+  <p>Okno za preverjanje oznak vsebuje seznam napak v formatiranju prevedenih dokumentov To okno odprete z bližnjico &lt;<code><a href=
+  "menu.html#shortcuts">Ctrl+T</a></code>. V oknu se nahaja tabela s tremi stolpci s povezavo na izvorno in prevedeno vsebino segmenta:</p>
+
+  <p><img src="images/TagValidator.png" name="grafika4" alt=
+  "Program za preverjanje oznak OmegaT" align="left" width="556" height="318" border="0" id=
+  "grafika4"><br clear="left">
+  <br>
+  <br></p>
+
+  <p>Oznake so okrepljene v modri barvi, da je laže primerjati izvorni in ciljni segment. S klikom na povezavo odprete vprašljivi segment v oknu za urejanje. Popravite po potrebi napake in pritisnite <code><a href="menu.html#shortcuts">Ctrl+T</a></code>, da se vrnete nazaj v okno za preverjanje napak. D drugime primeru zgoraj manjka v začetni oznaki &lt;, v ostalih dveh primerih so pari oznak napačno porazdeljeni.</p>
+
+  <p><a href="formattedText.html#intro">Napake v oznakah</a> so posledice <a href=
+  "formattedText.html#tag_operation">manipulacij na oznakah</a>, zaradi katerih se v ciljnem dokumentu oznake ne pojavljajo v istem vrstnem redu in številu kot pa v originalnem besedilu. Nekatere teh manipulacij so potrebne in dobronamerne, pri drugih bo prišlo do problemov, ko se ustvarja ciljni dokument.  Oznake navadno predstavljajo kak ukaz za oblikovanje izvirnega besedila. 
+<strong>Če lahko poenostavite izbirno besedilo</strong>, lahko občutno zmanjšate število napak. </p>
+
+  <h3>Brskalnik za pomoč</h3>
+
+  <p>Brskalnik za pomoč (ki prikazuje tale priročnik) lahko pokličete s pritiskom na <a href="menu.html#shortcuts">F1</a> ali prek točke <strong>Pomoč -&gt; Priročnik za uporabnike...</strong> v <a href="menu.html">glavnem meniju</a>.</p>
+
+  <h3><a name="manual" id="manual"></a>Navigacija za brskalnik za pomoč</h3>
+
+  <p>V oknu boste videli priročnik in dva gumba: <strong>Nazaj</strong> in <strong>Kazalo</strong>. Priročnik za uporabnika je HTML dokument s povezavami na razna poglavja. Če kliknete na povezavo, kot bi to storili v brskalniku, se bo odprla želena stran.</p>
+
+  <h3>Offline brskanje po priročniku za uporabnika</h3>
+
+  <p>Priročnik za uporabnika se nahaja v podimeniku <code>docs</code> pod imenikom za namestitev OmegaT, tako da lahko na primer pogledate angleško dokumentacijo, če v svojem brskalniku odprete <code>doc/en/index.hmtl</code>. Tako boste lahko sledili tudi zunanjim povezavam, ki jih interni brskalnik ne obvlada. </p>
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Pravni poduk</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Domov</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Kazalo</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

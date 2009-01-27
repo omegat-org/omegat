@@ -2,86 +2,84 @@
 <head>
 	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Kako delati s navadnim  besedilom - Priročnik za uporabnika OmegaT 1.7.3</title>
+	<title>Kako delati s navadnim besedilom - Priročnik za uporabnika OmegaT 1.8</title>
 </head>
 
 <body>
-	<h1>Kako delati s navadnim  besedilom</h1>
+	<h2>Kako delati s navadnim besedilom</h2>
 
 	<ul>
 		<li><a href="#Plain_Text_in_OmegaT">Privzeto kodiranje</a></li>
-		<li><a href="#Garbled_displays_3F">Zaslon je videti zmešan?</a></li>
-		<li><a href="#Character_sets_and_encodings">Nabori znakov in kodiranje</a></li>
-		<li><a href="#The_OmegaT_solution">Rešitev v  OmegaT</a></li>
+		<li><a href="#Garbled_displays_3F">Se je zaslonu zmešalo?</a></li>
+		<li><a href="#Character_sets_and_encoding">Nabori znakov in kodiranje</a></li>
+		<li><a href="#The_OmegaT_solution">Rešitev v OmegaT</a></li>
 	</ul>
 
 <hr>
 
 	<a name="Plain_Text_in_OmegaT" id="Plain_Text_in_OmegaT"></a>
-	<h1>Privzeto kodiranje</h1>
+	<h2>Privzeto kodiranje</h2>
 
-	<p>Datoteke z navadnim besedilom  - v večini primerov pripono <code>.txt</code> -  vsebujejo izključno samo informacijo v obliki besedila. Za datoteke z navadnim besedilom ni jasnega in enoličnega dogovora, kako računalniku sporočiti jezik, v katerem je besedilo sestavljeno.  Zelo poenostavljeno lahko rečemo, da računalnik za te datoteke privzame, da je njih vsebina napisana v jeziku, ki ga on sam, računalnik, uporablja. </p>
+	<p>Datoteke z navadnim besedilom - v večini primerov pripono <code>.txt</code> -  vsebujejo izključno samo informacijo v obliki besedila. Za datoteke z navadnim besedilom ni jasnega in enoličnega dogovora, kako računalniku sporočiti jezik, v katerem je besedilo sestavljeno.  Zelo poenostavljeno lahko rečemo, da računalnik za te datoteke privzame, da je njih vsebina napisana v jeziku, ki ga on sam, računalnik, uporablja. </p>
 
 <hr>
 
 	<a name="Garbled_displays_3F" id="Garbled_displays_3F"></a>
-	<h1>Zaslon je videti zmešan?</h1>
+	<h2>Se je zaslonu zmešalo?</h2>
 
 	<p>Ruski uporabnik računalnika bo zelo verjetno delal z računalnikom, ki ravno tako dela v ruščini. V večini primerov bo zato računalnik po pravici lahko privzel, da bodo datoteke vsebovale samo znake ruske cirilice.</p>
-
-	<p>Če pa se kot ruski prevajalec ukvarjate s prevajanjem iz japonščine, bo računalnik tudi zanje, v kolikor imajo format  za  <strong>običajna besedila</strong>, privzel, da gre za besedila v ruščini. V datoteki namreč ni podatkov, na osnovi katerih bi lahko računalnik sklepal na uporabljeni jezik.</p>
-
-	<p>Vsebina v japonščini bi lahko bila: </p>
-
-	<p>OmegaTとは、コンピュータを利用した翻訳ツールです。</p>
-
-	<p>Vendar jo bo vaš urejevalnik prikazal takole: </p>
+		<p>Če pa se kot ruski prevajalec ukvarjate s prevajanjem iz japonščine, bo računalnik tudi zanje, v kolikor imajo format za <strong>običajna besedila</strong>, privzel, da gre za besedila v ruščini. V datoteki namreč ni podatkov, na osnovi katerih bi lahko računalnik sklepal na uporabljeni jezik. Vsebina v japonščini bi lahko bila: </p>
+		<p>OmegaTとは、コンピュータを利用した翻訳ツールです。</p>
+		<br>
+		<p>Ker vaš iurejevalnik pričakuje, da bo besedilo v ruščini, bo stavek imel takle videz:</p>
 	<p>OmegaTВ∆ВЌБAГRГУГsГЕБ[Г^ВрЧШЧpВµВљЦ|ЦуГcБ[ГЛВ≅ВЈБB</p>
-
-	<p>Pričakuje pač, da gre za besedilo v ruščini.  Vendar zgornji stavek vsekakor ni v ruščini.  Gre za japonske znake, ki se jih napačno interpretira kot znake cirilice.</p>
+		<br>
+		<p>Segment pa je kot vemo daleč od ruščine, saj gre za japonske znake, ki se jih napačno interpretira kot znake cirilice.</p>
 	
-	<p>Tudi z  OmegaT ni nič drugače. OmegaT sklepa, da datoteke tipa  <strong>običajno besedilo</strong> vsebujejo tekste, ki se jih prikazuje z privzeto nastavitvijo računalnika. Če računalnik govori francosko in datoteke vsebujejo angleško besedilo,  ni težav, ravno tako tudi ne, če gre za slovenski računalnik  in na primer češčino.</p>
+	<p>Kot vse druge aplikacije tudi OmegaT ni imun za te težave. OmegaT lahko samo sklepa, da same po sebi datoteke tipa <strong>običajno besedilo</strong> vsebujejo tekste, ki se jih prikazuje z privzeto nastavitvijo računalnika. Če računalnik govori francosko in datoteke vsebujejo angleško besedilo, s tem ni težav, ravno tako tudi ne, če gre za slovenski računalnik in na primer češčino.</p>
 
 <hr>
 
-	<a name="Character_sets_and_encodings" id="Character_sets_and_encodings"></a>
-	<h1>Nabori znakov in kodiranje</h1>
+	<a name="Character_sets_and_encoding" id="Character_sets_and_encoding"></a>
+	<h2>Nabori znakov in kodiranje</h2>
 
-	<p>Kako da to gre za angleščino in francoščino, za ruščino in za japonščino pa ne? Vzrok je skupni <strong>nabor znakov</strong> za francoski in angleški jezik. Namreč <strong>Latin-1</strong>, ali ena od njegovih variant - recimo Latin-2 za slovenščino in češčino. Do nedavna ruščina in japonščina nista imela skupnega nabora znakov. Večina ruskih naborov znakov zato ne pozna japonskih znakov in obratno. Posledice ste imeli priložnost videti zgoraj. </p>
+	<p>Kako da to gre za angleščino in francoščino, za ruščino in za japonščino pa ne? Vzrok je skupni <strong>nabor znakov</strong> za francoski in angleški jezik. Z drugo besedo nabor <strong>Latin-1</strong>, ali ena od njegovih variant. Do nedavna ruščina in japonščina nista imela skupnega nabora znakov. Večina ruskih naborov znakov zato ne pozna japonskih znakov in obratno. Posledice ste imeli priložnost videti zgoraj. </p>
 
-	<p>Japonska stranka dela na japonskem računalniku in piše besedila v japonščini.  Kateri nabor znakov bo pri tem uporabljen, je odvisno od operacijskega sistema in drugih nastavitev, vendar je zelo neverjetno da bi izbrani (japonski) nabor znakov ruski računalnik lahko pravilno interpretiral.</p>
+	<p>Japonska stranka dela na japonskem računalniku in piše besedila v japonščini.  Kateri nabor znakov bo pri tem uporabljen, je odvisno od operacijskega sistema in drugih nastavitev, vendar je zelo malo verjetno, da bi izbrani (japonski) nabor znakov ruski računalnik lahko pravilno interpretiral.</p>
 
-	<p>Kako pa se tekstualna informacija na osnovi zahtevanega nabora znakov fizično posreduje  (to je, kako se <strong>zapisuje</strong> v datoteko, da jo računalnik lahko prebere in interpretira) , je odvisno od <strong>kodiranja</strong>. Ko računalnik datoteko bere, "dekodira" v skladu z kodiranjem informacijo v njej in jo potem v skladu z naborom znakov prikazuje. Poenostavljeno lahko rečemo, da določeno kodiranje odgovarja določenemu naboru znakov.</p>
+	<p>Kako pa se tekstualna informacija na osnovi zahtevanega nabora znakov fizično posreduje (to je, kako se zapisuje v datoteko, da jo računalnik lahko prebere in interpretira) , je odvisno od <strong>kodiranja</strong>. Ko računalnik datoteko bere, "dekodira" v skladu z kodiranjem informacijo v njej in jo potem v skladu z naborom znakov prikazuje. Poenostavljeno lahko rečemo, da določeno kodiranje odgovarja določenemu naboru znakov.</p>
 
 <hr>
 
 	<a name="The_OmegaT_solution" id="The_OmegaT_solution"></a>
-	<h1>Rešitev v  OmegaT</h1>
+	<h2>Rešitev v OmegaT</h2>
 
-	<p>V bistvu so na razpolago tri možnosti, da se v OmegaT ta problem reši.  Vse tri metode uporabljajo <a href="fileFilters.html">datotečne filtre</a> v meniju .<strong>Možnosti</strong></p>
+	<p>V bistvu so v OmegaT na razpolago tri možnosti, da se ta problem reši.  Pri tem uporabljajo <a href="fileFilters.html">datotečne filtre</a> v meniju .<strong>Možnosti</strong></p>
 	
 	<ol>
-		<li>Navedite kodiranje za svoje datoteke  <strong>z običajnim besedilom</strong>  - to je datoteke s pripono <code>.txt</code> <br> V odseku <strong>besedilne datoteke</strong> dvogovora <a href="fileFilters.html">datotečni filtri</a> spremenite <strong>Kodiranje izvornih datotek</strong> z <strong>&lt;avto&gt;</strong>  na kodiranje vaših datotek vrste <code>.txt</code>.</li><li>Spremenite pripone svojih datotek za enostavna besedila  - na primer iz <code>.txt</code> v <code>.jp</code> za navadna besedila v japonščini.<br> V odseku <strong>besedilne datoteke</strong> dvogovora <a href="fileFilters.html">datotečni filtri</a>  dodajte <code>*.jp</code> v <strong>Vzorec za imena datotek </strong> in potem za izvorne in ciljne datoteke s to pripono izberite ustrezno kodiranje.</li>
-
-		<li>Odprite svojo izvorno datoteko v urejevalniku, ki pravilno razume njeno kodo in datoteko shranite s kodiranjem "UTF-8". <br> Spremenite ji ime iz <code>karkoli.txt</code> v <code>karkoli.utf8</code>.<br> OmegaT bo datoteko odslej razumel kot datoteko vrste UTF-8.</li>
-    </ol>
-	<p>Trenutno podpira OmegaT naslednje vrste besedilnih datotek</p>
+		<li>Navedite kodiranje za svoje datoteke <strong> navadnim besedilom</strong> - t.j. datoteke s pripono <code>.txt</code> - : vodseku <strong>besedilne datoteke</strong> dvogovora <a href="fileFilters.html">datotečni filtri</a> vstavite za <strong>Kodiranje izvornih datotek</strong> namesto <strong>&lt;auto&gt;</strong> kodiranje, ki odgovarja vaši vrsti datotek <code>.txt</code>.</li><li>Spremenite pripone svojim datotekam z navadnim besedilom (na primer za navadne japonske tekste iz <code>.txt</code> v <code>.jp</code>):&nbsp;v odseku <strong>besedilne datoteke</strong> dvogovora <a href="fileFilters.html">datotečni filtri</a> dodajte novo pripono v <strong>Vzorec za imena datotek </strong> (na primer <code>*.jp</code>) in potem za izvorne in ciljne datoteke s to pripono izberite ustrezno kodiranje.</li>
+			<li>Spremenite kodiranje svojih datotek v Unicode: odprite svojo izvorno datoteko v urejevalniku, ki pravilno razume njeno kodo, in datoteko shranite s kodiranjem "UTF-8". Spremenite pripono datoteke iz <code>.txt</code> v <code>.utf8</code>. OmegaT bo datoteko odslej razumel kot datoteko vrste UTF-8.</li>
+		</ol>
+	<p>OmegaT ima na razpolago kratek seznam pripon, ki vam omogočajo lažje delo z navadnimi besedili:</p>
 
 	<ul>
 		<li>Datoteke vrste <code>.txt</code> OmegaT sam od sebe (<strong>avto</strong>) razume kot kodirane na privzeti način računalnika.</li>
-		<li>Za datoteke s pripono <code>.txt1</code> privzame OmegaT, da so kodirane v skladu z  ISO-8859-1 (koda, ki pokriva večino jezikov  <strong>zahodne Evrope</strong>).</li>
-		<li>Datoteke s pripono <code>.txt2</code>  razume OmegaT kot kodirane v ISO-8859-2 (v kodi, ki pokriva večino jezikov  <strong>srednje in vzhodne Evrope</strong>, med drugim tudi slovenščino).</li>
-		<li>Za datoteke s pripono <code>.utf8</code>  privzame OmegaT kodo UTF-8 (to je koda, ki vključuje skoraj <strong>vse</strong> jezike sveta, na primer hkrati angleščino, slovenščino, ruščino in japonščino).</li>
+		<li>Za datoteke s pripono <code>.txt1</code> privzame OmegaT, da so kodirane v skladu z ISO-8859-1 (koda, ki pokriva večino jezikov <strong>zahodne Evrope</strong>).</li>
+		<li>Datoteke s pripono <code>.txt2</code> razume OmegaT kot kodirane v ISO-8859-2 (v kodi, ki pokriva večino jezikov <strong>srednje in vzhodne Evrope</strong>, med drugim tudi slovenščino).</li>
+		<li>Za datoteke s pripono <code>.utf8</code> privzame OmegaT kodo UTF-8 (to je koda, ki vključuje skoraj <strong>vse</strong> jezike sveta, na primer hkrati angleščino, slovenščino, ruščino in japonščino).</li>
 	</ul>
+		<p>Nastavitev lahko preverite tudi sami, če izberete <strong>Filtri za datoteke</strong> v meniju <strong>Možnosti</strong>. Če imate na primer pred sabo datoteko v češčini (zelo verjetno zapisano v kodi <strong>ISO-8859-2</strong>) , vam ni treba drugega kot spremeniti pripono iz <code>.txt</code> v <code>.txt2</code> in OmegaT bo vsebino datoteke predstavil pravilno In pa - seveda -, če hočete imeti v bodoče mir, premislite, ali ne bi bilo najpametneje vse pretvoriti v Unicode, i.j. v UTF8 format. </p>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Pravni poduk</a> </td>
+        <td style="text-align: center;"><a href="index.html">Domov</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Kazalo</a> </td>
+      </tr>
+    </tbody>
+  </table>
 
-	<p>Nastavitev lahko preverite tudi sami, če izberete  <strong>Filtri za datoteke</strong> v meniju <strong>Možnosti</strong>.</p>
-
-	<p>Gre samo za pripomoček, s katerim vam OmegaT olajša delo z nekaterimi datekami z navadnim besedilom.</p>
-	
-	<p>Če imate na primer pred sabo datoteko v češčini (zewlo verjetno zapisano v kodi  <strong>ISO-8859-2</strong>) , vam ni treba drugega kot spremeniti pripono iz <code>.txt</code> v <code>.txt2</code> in OMegaT bo vsebino datoteke predstavil pravilno</p>
-
-	<hr>
-
-	<p><a href="legalNotices.html">Pravni poduk</a></p>
 </body>
 </html>

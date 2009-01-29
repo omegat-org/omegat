@@ -203,12 +203,12 @@ public class ProjectUICommands {
             protected void done() {
                 try {
                     get();
+                    Core.getEditor().gotoEntry(previousCurEntryNum); 
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex,
                             "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                }
-                Core.getEditor().gotoEntry(previousCurEntryNum);   
+                }  
             } 
         }.execute();
     }
@@ -310,6 +310,8 @@ public class ProjectUICommands {
         }
 
         new SwingWorker<Object>() {
+            int previousCurEntryNum = Core.getEditor().getCurrentEntryNumber() + 1;
+            
             protected Object doInBackground() throws Exception {
                 Core.getProject().saveProject();
                 ProjectFactory.closeProject();
@@ -322,6 +324,7 @@ public class ProjectUICommands {
             protected void done() {
                 try {
                     get();
+                    Core.getEditor().gotoEntry(previousCurEntryNum);   
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex,

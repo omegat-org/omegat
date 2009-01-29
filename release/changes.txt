@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 2.0.1 vs. 2.0.0 update 1
 
-  4 Enhancements
+  5 Enhancements
   1 Bugfix
 
 ----------------------------------------------------------------------
@@ -23,6 +23,9 @@
   Other enhancements:
   
   - Console mode, to be able to run OmegaT without user interface
+
+  - The list of files in the Project files window can be selected
+and copied to the clipboard.
  
   - Slovenian localisation updated to 2.0 (readme)
   

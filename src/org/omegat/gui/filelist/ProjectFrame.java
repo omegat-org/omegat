@@ -439,7 +439,7 @@ public class ProjectFrame extends JFrame {
         columns.addColumn(cCount);
         tableFiles.setColumnModel(columns);
 
-        tableFiles.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tableFiles.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
     }
 
     private void createTableTotal() {

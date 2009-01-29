@@ -143,7 +143,7 @@ can be applied or not with a new option in Options/Font.
 1.8.1 update 2 vs. 1.8.1 update 1
 
    1 Enhancement
-   1 Bugfix
+   2 Bugfixes
 ----------------------------------------------------------------------
 1.8.1 update 2
 
@@ -155,6 +155,9 @@ can be applied or not with a new option in Options/Font.
   
   - PL "Create new project" too large on OSX
   http://sourceforge.net/support/tracker.php?aid=1895406
+
+  - The content of external TMX level 2 tags is displayed
+  http://sourceforge.net/support/tracker.php?aid=1988491 
 
 ----------------------------------------------------------------------
  OmegaT 1.8.1 update 1 Changes

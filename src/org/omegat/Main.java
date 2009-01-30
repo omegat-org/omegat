@@ -27,6 +27,10 @@ package org.omegat;
 import java.io.File;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -34,6 +38,7 @@ import javax.swing.UIManager;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.util.Log;
@@ -49,32 +54,68 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Keith Godfrey
  */
 public class Main {
+    /** Application execution mode. */
     enum RUN_MODE {
-        GUI, CONSOLE_TRANSLATE
+        GUI, CONSOLE_TRANSLATE;
+        public static RUN_MODE parse(String s) {
+            try {
+                return valueOf(s.toUpperCase().replace('-', '_'));
+            } catch (Exception ex) {
+                // default mode
+                return GUI;
+            }
+        }
     };
 
+    /** Regexp for parse parameters. */
+    protected static final Pattern PARAM = Pattern
+            .compile("\\-\\-([A-Za-z\\-]+)(=(.+))?");
+
+    /** Project location for load on startup. */
+    protected static File projectLocation = null;
+
+    /** Execution command line parameters. */
+    protected static final Map<String, String> params = new TreeMap<String, String>();
+
+    /** Execution mode. */
     protected static RUN_MODE runMode = RUN_MODE.GUI;
 
     public static void main(String[] args) {
-        String projectLocation = "";
+
+        /*
+         * Parse command line arguments info map.
+         */
         for (String arg : args) {
-            if (arg.startsWith("locale=")) {
-                String language = arg.substring(7, 9);
-                String country = arg.length() > 10 ? arg.substring(10, 12)
-                        : null;
-                Locale.setDefault(country != null ? new Locale(language,
-                        country) : new Locale(language));
-            } else if (arg.startsWith("resource-bundle=")) {
-                String filename = arg.substring(16);
-                OStrings.loadBundle(filename);
-            } else if (arg.startsWith("project=")) {
-                projectLocation = arg.substring(8);
-                runMode = RUN_MODE.CONSOLE_TRANSLATE;
-            } else if (arg.startsWith("config-dir=")) {
-                RuntimePreferences.setConfigDir(arg.substring(11));
-            } else if (arg.startsWith("-quiet")) {
-                RuntimePreferences.setQuietMode(true);
+            Matcher m = PARAM.matcher(arg);
+            if (m.matches()) {
+                params.put(m.group(1), m.group(3));
+            } else {
+                if (arg.startsWith("resource-bundle=")) {
+                    // backward compatibility
+                    params.put("resource-bundle", arg.substring(16));
+                } else {
+                    File f = new File(arg);
+                    if (f.exists() && f.isDirectory()) {
+                        projectLocation = f;
+                    }
+                }
             }
+        }
+
+        runMode = RUN_MODE.parse(params.get("mode"));
+
+        String resourceBundle = params.get("resource-bundle");
+        if (resourceBundle != null) {
+            OStrings.loadBundle(resourceBundle);
+        }
+
+        String configDir = params.get("config-dir");
+        if (configDir != null) {
+            RuntimePreferences.setConfigDir(configDir);
+        }
+
+        if (params.containsKey("quiet")) {
+            RuntimePreferences.setQuietMode(true);
         }
 
         Log.log("\n"
@@ -91,10 +132,10 @@ public class Main {
 
         switch (runMode) {
         case GUI:
-            runGUI(args);
+            runGUI();
             break;
         case CONSOLE_TRANSLATE:
-            runConsoleTranslate(args, projectLocation);
+            runConsoleTranslate();
             break;
         }
     }
@@ -102,7 +143,7 @@ public class Main {
     /**
      * Execute standard GUI.
      */
-    protected static void runGUI(String[] args) {
+    protected static void runGUI() {
         Log.log("Docking Framework version: "
                 + DockingDesktop.getDockingFrameworkVersion());
         Log.log("");
@@ -126,12 +167,23 @@ public class Main {
         }
 
         try {
-            Core.initializeGUI(args);
+            Core.initializeGUI(params);
         } catch (Throwable ex) {
             showError(ex);
         }
 
         CoreEvents.fireApplicationStartup();
+
+        if (projectLocation != null) {
+            try {
+                ProjectProperties props = ProjectFileStorage
+                        .loadProjectProperties(projectLocation);
+                ProjectFactory.loadProject(props);
+            } catch (Exception ex) {
+                showError(ex);
+            }
+        }
+
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 // setVisible can't be executed directly, because we need to
@@ -144,26 +196,24 @@ public class Main {
     /**
      * Execute in console mode for translate.
      */
-    protected static void runConsoleTranslate(String[] args,
-            String projectLocation) {
+    protected static void runConsoleTranslate() {
         Log.log("Console mode");
         Log.log("");
 
         System.out.println("Initializing");
         try {
-            Core.initializeConsole(args);
+            Core.initializeConsole(params);
         } catch (Throwable ex) {
             showError(ex);
         }
         try {
             System.out.println("Loading Project");
-            File projectRootFolder = new File(projectLocation);
 
             // check if project okay
             ProjectProperties projectProperties = null;
             try {
                 projectProperties = ProjectFileStorage
-                        .loadProjectProperties(projectRootFolder);
+                        .loadProjectProperties(projectLocation);
                 if (!projectProperties.verifyProject()) {
                     System.out.println("Project kan niet geverifieerd worden");
                     System.exit(1);

@@ -24,6 +24,8 @@
 
 package org.omegat.core;
 
+import java.util.Map;
+
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.matching.ITokenizer;
@@ -54,7 +56,8 @@ import org.omegat.util.Log;
  * objects.
  * 
  * Components which works in Swing UI thread can have other synchronization
- * idea: it can not be synchronized to access to some data which changed only in UI thread.
+ * idea: it can not be synchronized to access to some data which changed only in
+ * UI thread.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
@@ -66,12 +69,11 @@ public class Core {
     private static IMatcher matcher;
     private static ITokenizer tokenizer;
     private static ISpellChecker spellChecker;
-    
+
     private static CheckThread checkThread;
     private static IAutoSave saveThread;
-    
-    private static GlossaryTextArea glossary;
 
+    private static GlossaryTextArea glossary;
 
     /** Get project instance. */
     public static IProject getProject() {
@@ -82,7 +84,6 @@ public class Core {
     public static void setProject(final IProject newCurrentProject) {
         currentProject = newCurrentProject;
     }
-
 
     /** Get main window instance. */
     public static IMainWindow getMainWindow() {
@@ -103,58 +104,60 @@ public class Core {
     public static IMatcher getMatcher() {
         return matcher;
     }
-    
+
     /** Get tokenizer component instance. */
     public static ITokenizer getTokenizer() {
         return tokenizer;
     }
-    
+
     /** Get spell checker instance. */
     public static ISpellChecker getSpellChecker() {
         return spellChecker;
     }
-    
+
     public static IAutoSave getAutoSave() {
         return saveThread;
     }
-    
+
     /**
      * Initialize application components.
      */
-    public static void initializeGUI(final String[] args) throws Exception {
+    public static void initializeGUI(final Map<String, String> params)
+            throws Exception {
         // 1. Initialize project
         currentProject = new NotLoadedProject();
 
         // 2. Initialize application frame
         MainWindow me = new MainWindow();
-        mainWindow = me;        
+        mainWindow = me;
 
         // 3. Initialize other components
         editor = new EditorController(me);
         tagValidation = new TagValidationTool(me);
         matcher = new MatchesTextArea(me);
         glossary = new GlossaryTextArea();
-        tokenizer = createComponent(ITokenizer.class, new Tokenizer(), args);
+        tokenizer = createComponent(ITokenizer.class, new Tokenizer(), params);
         spellChecker = new SpellChecker();
-        
+
         checkThread = new CheckThread();
         checkThread.start();
-        
+
         SaveThread th = new SaveThread();
         saveThread = th;
         th.start();
-        
+
         SRX.getSRX();
     }
 
     /**
      * Initialize application components.
      */
-    public static void initializeConsole(final String[] args) throws Exception {
+    public static void initializeConsole(final Map<String, String> params)
+            throws Exception {
         currentProject = new NotLoadedProject();
         mainWindow = new ConsoleWindow();
 
-        tokenizer = createComponent(ITokenizer.class, new Tokenizer(), args);
+        tokenizer = createComponent(ITokenizer.class, new Tokenizer(), params);
 
         SRX.getSRX();
     }
@@ -172,23 +175,19 @@ public class Core {
      *            command line
      * @return component implementation
      */
-    protected static <T> T createComponent(final Class<T> interfaceClass, final T defaultImplementation,
-            final String[] args) {
-        final String prefix = interfaceClass.getSimpleName() + "=";
-        String implClassName = null;
+    protected static <T> T createComponent(final Class<T> interfaceClass,
+            final T defaultImplementation, final Map<String, String> params) {
         try {
-            for (String arg : args) {
-                if (arg.startsWith(prefix)) {
-                    implClassName = arg.substring(prefix.length());
-                    return (T) Class.forName(implClassName).newInstance();
-                }
+            String implClassName = params.get(interfaceClass.getSimpleName());
+            if (implClassName != null) {
+                return (T) Class.forName(implClassName).newInstance();
             }
         } catch (Exception ex) {
             Log.log(ex);
         }
         return defaultImplementation;
     }
-    
+
     /**
      * Set main window instance for unit tests.
      * 
@@ -197,7 +196,7 @@ public class Core {
     protected static void setMainWindow(IMainWindow mainWindow) {
         Core.mainWindow = mainWindow;
     }
-    
+
     /**
      * Set project instance for unit tests.
      * 

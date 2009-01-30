@@ -491,8 +491,6 @@ public class ProjectFrame extends JFrame {
         columns.addColumn(cCount);
         tableTotal.setColumnModel(columns);
 
-        tableTotal.setEnabled(false);
-
         tableTotal.setBorder(BorderFactory.createEmptyBorder(50, 5, 10, 5));
         tableFiles.getColumnModel().addColumnModelListener(
                 new TableColumnModelListener() {

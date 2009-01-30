@@ -52,34 +52,31 @@
   <h3><a name="start" id="project_location"></a>Staring in console mode</h3>
 
   <p>To start OmegaT in console mode, some extra parameters have to be passed 
-  on startup. The most important is <code>project=&lt;project-dir&gt;</code>, and optionally 
-  <code>config-dir=&lt;config-dir&gt;</code>.
-  <p>Example: <code>$&gt; java -jar OmegaT.jar project=/path/to/project config-dir=/path/to/config-files/</code>
+  on startup. The most important is <code>&lt;project-dir&gt;</code>, and optionally 
+  <code>--config-dir=&lt;config-dir&gt;</code>.
+  <p>Example: <code>$&gt; java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-translate</code>
   </p>
   <p>Explanation:
-  <dl><dt><code>project=&lt;project-dir&gt;</code></dt>
+  <dl><dt><code>&lt;project-dir&gt;</code></dt>
   <dd>tells OmegaT where to find the 
   project to translate. If given, OmegaT starts in console mode and will 
   translate the given project.</dd> 
-  <dt><code>config-dir=&lt;config-dir&gt;</code></dt>
+  <dt><code>--config-dir=&lt;config-dir&gt;</code></dt>
   <dd>allows to tell OmegaT in which 
   directory the configuration files are stored. If not given, OmegaT reverts to 
   default values (OmegaT dir under user home, or if not available: the current 
   working directory).</dd>
+  <dt><code>--mode=console-translate</code></dt>
+  <dd>OmegaT starts in console mode and will 
+  translate the given project.
   </dl>
   
   <h3><a name="extra" id="extra"></a>Extra options</h3>
 
   <p>There is one extra command line parameter specific for the console mode: 
-  <code>-quiet</code>. In quiet mode, less info is logged to the screen. All 
+  <code>--quiet</code>. In quiet mode, less info is logged to the screen. All 
   messages that you would usually find in the status bar are not shown.<br>
-  Usage: <code>java -jar OmegaT.jar project=/path/to/project -quiet</code>
-  </p>
-
-  <p>Other parameters that are not documented elsewhere, but are available:
-  <dl><dt><code>locale=&lt;locale&gt;</code></dt>
-  <dd>override the default language of OmegaT (not of the translation!).</dd>
-  </dl>
+  Usage: <code>java -jar OmegaT.jar /path/to/project --quiet</code>
   </p>
 
   <hr>

@@ -7,6 +7,7 @@
                          Benjamin Siband, and Kim Bruning
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik
+               2008 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -33,6 +34,7 @@ import java.util.List;
  * Interface for access to spell checker.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public interface ISpellChecker {
 
@@ -41,6 +43,9 @@ public interface ISpellChecker {
 
     /** Destroy internal cache and free memory. */
     void destroy();
+
+    /** Save the word lists to disk */
+    void saveWordLists();
 
     /**
      * Check the word. If it is ignored or learned (valid), returns true.

@@ -4,7 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 Zoltan Bartko, Alex Buloichik
-               Home page: http://www.omegat.org/
+               2009 Didier Briel               
+               Home page: http://www.omegat.org/               
                Support center: http://groups.yahoo.com/group/OmegaT/
 
  This program is free software; you can redistribute it and/or modify
@@ -61,6 +62,7 @@ import com.sun.jna.ptr.PointerByReference;
  * 
  * @author Zoltan Bartko (bartkozoltan at bartkozoltan dot com)
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public class SpellChecker implements ISpellChecker {
     /**
@@ -165,12 +167,16 @@ public class SpellChecker implements ISpellChecker {
 
             ignoreFileName = projectDir + OConsts.IGNORED_WORD_LIST_FILE_NAME;
 
+            // Since we read from disk, we clean the list first
+            ignoreList = new ArrayList();
             fillWordList(ignoreFileName, ignoreList);
 
             // now the correct words
 
             learnedFileName = projectDir + OConsts.LEARNED_WORD_LIST_FILE_NAME;
 
+            // Since we read from disk, we clean the list first
+            learnedList = new ArrayList();
             fillWordList(learnedFileName, learnedList);
             if (hunspell != null) {
                 try {
@@ -192,10 +198,7 @@ public class SpellChecker implements ISpellChecker {
         if (pHunspell != null) {
             hunspell.Hunspell_destroy(pHunspell);
             
-            // write the ignored and learned words to the disk
-            dumpWordList(ignoreList, ignoreFileName);
-            dumpWordList(learnedList, learnedFileName);
-            
+            saveWordLists();
             pHunspell = null;
         }
         if (jmyspell != null) {
@@ -205,10 +208,18 @@ public class SpellChecker implements ISpellChecker {
     }
     
     /**
+     * Save the word lists to disk
+     */
+    public void saveWordLists(){
+        // Write the ignored and learned words to the disk
+        dumpWordList(ignoreList, ignoreFileName);
+        dumpWordList(learnedList, learnedFileName);
+    }
+
+    /**
      * fill the word list (ignore or learned) with contents from the disk
      */
-    private void fillWordList(String filename, List<String> list) {
-        list = new ArrayList<String>();
+    private void fillWordList(String filename, List<String> list) {         
         BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader(filename));

@@ -143,7 +143,7 @@ can be applied or not with a new option in Options/Font.
 1.8.1 update 2 vs. 1.8.1 update 1
 
    1 Enhancement
-   2 Bugfixes
+   3 Bugfixes
 ----------------------------------------------------------------------
 1.8.1 update 2
 
@@ -158,6 +158,9 @@ can be applied or not with a new option in Options/Font.
 
   - The content of external TMX level 2 tags is displayed
   http://sourceforge.net/support/tracker.php?aid=1988491 
+
+  - Spellcheck: words added to dictionary lost after restart
+  http://sourceforge.net/support/tracker.php?aid=1819355  
 
 ----------------------------------------------------------------------
  OmegaT 1.8.1 update 1 Changes

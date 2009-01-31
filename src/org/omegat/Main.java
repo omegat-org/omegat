@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2009 Martin Fleurke, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -52,6 +53,8 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * The main OmegaT class, used to launch the program.
  * 
  * @author Keith Godfrey
+ * @author Martin Fleurke
+ * @author Alex Buloichik
  */
 public class Main {
     /** Application execution mode. */
@@ -215,12 +218,13 @@ public class Main {
                 projectProperties = ProjectFileStorage
                         .loadProjectProperties(projectLocation);
                 if (!projectProperties.verifyProject()) {
-                    System.out.println("Project kan niet geverifieerd worden");
+                    System.out.println("The project cannot be verified");
                     System.exit(1);
                 }
             } catch (Exception ex) {
                 Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                System.out.println("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                System.out.println(OStrings.getString
+                        ("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));
                 System.exit(1);
             }
 

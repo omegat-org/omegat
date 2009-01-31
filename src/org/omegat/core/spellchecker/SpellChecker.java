@@ -168,7 +168,7 @@ public class SpellChecker implements ISpellChecker {
             ignoreFileName = projectDir + OConsts.IGNORED_WORD_LIST_FILE_NAME;
 
             // Since we read from disk, we clean the list first
-            ignoreList = new ArrayList();
+            ignoreList = new ArrayList<String>();
             fillWordList(ignoreFileName, ignoreList);
 
             // now the correct words
@@ -176,7 +176,7 @@ public class SpellChecker implements ISpellChecker {
             learnedFileName = projectDir + OConsts.LEARNED_WORD_LIST_FILE_NAME;
 
             // Since we read from disk, we clean the list first
-            learnedList = new ArrayList();
+            learnedList = new ArrayList<String>();
             fillWordList(learnedFileName, learnedList);
             if (hunspell != null) {
                 try {

@@ -2,7 +2,7 @@
   <dontWrapJar>true</dontWrapJar>
   <headerType>gui</headerType>
   <jar>OmegaT.jar</jar>
-  <outfile>C:\Documents and Settings\Didier\Mes documents\Devpt\18-SVN\release\win32-specific\OmegaT.exe</outfile>
+  <outfile>OmegaT.exe</outfile>
   <errTitle>OmegaT</errTitle>
   <cmdLine></cmdLine>
   <chdir></chdir>
@@ -12,7 +12,7 @@
   <customProcName>true</customProcName>
   <stayAlive>false</stayAlive>
   <manifest></manifest>
-  <icon>C:\Documents and Settings\Didier\Mes documents\Devpt\18-SVN\images\OmegaT.ico</icon>
+  <icon>..\..\Images\OmegaT.ico</icon>
   <jre>
     <path>jre</path>
     <minVersion>1.4.2</minVersion>

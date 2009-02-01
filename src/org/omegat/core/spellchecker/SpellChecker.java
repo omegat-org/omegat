@@ -56,6 +56,10 @@ import org.omegat.util.StaticUtils;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 /**
  * Spell check implementation for use Hunspell or JMySpell.
@@ -222,7 +226,8 @@ public class SpellChecker implements ISpellChecker {
     private void fillWordList(String filename, List<String> list) {         
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader(filename));
+            br = new BufferedReader(new InputStreamReader
+                    (new FileInputStream(filename), OConsts.UTF8));
             
             String thisLine;
             while ((thisLine = br.readLine()) != null) {
@@ -248,8 +253,9 @@ public class SpellChecker implements ISpellChecker {
     private void dumpWordList(List<String> list, String filename) {
         BufferedWriter bw = null;
         try {
-            bw = new BufferedWriter(new FileWriter(filename));
-            
+            bw = new BufferedWriter(new OutputStreamWriter
+                                 (new FileOutputStream(filename),OConsts.UTF8));
+
             for (String text : list) {
                 bw.write(text);
                 bw.newLine();

@@ -162,16 +162,15 @@ public class MainWindowMenuHandler {
             }
         }
 
-        // Save the list of learned and ignore words
-        ISpellChecker sc = Core.getSpellChecker();
-        sc.saveWordLists();
-
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {
                 MainWindowUI.saveScreenLayout(mainWindow);
                 Preferences.save();
 
                 if (Core.getProject().isProjectLoaded()) {
+                    // Save the list of learned and ignore words
+                    ISpellChecker sc = Core.getSpellChecker();
+                    sc.saveWordLists();
                     Core.getProject().saveProject();
                 }
 

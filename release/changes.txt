@@ -142,12 +142,15 @@ can be applied or not with a new option in Options/Font.
 ----------------------------------------------------------------------
 1.8.1 update 2 vs. 1.8.1 update 1
 
-   1 Enhancement
+   2 Enhancements
    3 Bugfixes
 ----------------------------------------------------------------------
 1.8.1 update 2
 
   Other enhancements:
+
+  Windows: Various corrections and enhancements to OmegaT.exe (the OmegaT 
+launcher), based on version 3.0.1 of Launch4J.
 
   - Slovenian localisation updated to 1.8 (instant start, documentation)
   

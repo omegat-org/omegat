@@ -2,22 +2,21 @@
   <dontWrapJar>true</dontWrapJar>
   <headerType>gui</headerType>
   <jar>OmegaT.jar</jar>
-  <outfile>C:\Documents and Settings\Didier\Bureau\Devpt\CVS-run\OmegaT.exe</outfile>
+  <outfile>C:\Documents and Settings\Didier\Mes documents\Devpt\18-SVN\release\win32-specific\OmegaT.exe</outfile>
   <errTitle>OmegaT</errTitle>
   <cmdLine></cmdLine>
   <chdir></chdir>
   <priority>normal</priority>
   <downloadUrl>http://java.com/download</downloadUrl>
-  <supportUrl></supportUrl>
+  <supportUrl>http://groups.yahoo.com/group/OmegaT/</supportUrl>
   <customProcName>true</customProcName>
   <stayAlive>false</stayAlive>
-  <icon>C:\Documents and Settings\Didier\Bureau\Devpt\OTDEV\omegat\images\OmegaT.ico</icon>
+  <manifest></manifest>
+  <icon>C:\Documents and Settings\Didier\Mes documents\Devpt\18-SVN\images\OmegaT.ico</icon>
   <jre>
     <path>jre</path>
     <minVersion>1.4.2</minVersion>
     <maxVersion></maxVersion>
-    <dontUsePrivateJres>false</dontUsePrivateJres>
-    <initialHeapSize>0</initialHeapSize>
-    <maxHeapSize>0</maxHeapSize>
+    <jdkPreference>preferJdk</jdkPreference>
   </jre>
 </launch4jConfig>

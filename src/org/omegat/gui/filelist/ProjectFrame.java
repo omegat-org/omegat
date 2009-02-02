@@ -106,7 +106,13 @@ import org.openide.awt.Mnemonics;
  */
 public class ProjectFrame extends JFrame {
 
-    private static final Color CURRENT_FILE_COLOR = new Color(0xC8DDF2);
+    private static final Color COLOR_STANDARD_FG = Color.BLACK;
+    private static final Color COLOR_STANDARD_BG = Color.WHITE;
+    private static final Color COLOR_CURRENT_FG = Color.BLACK;
+    private static final Color COLOR_CURRENT_BG = new Color(0xC8DDF2);
+    private static final Color COLOR_SELECTION_FG = Color.WHITE;
+    private static final Color COLOR_SELECTION_BG = new Color(0x2F77DA);
+
     private static final int LINE_SPACING = 6;
 
     private JTable tableFiles, tableTotal;
@@ -395,6 +401,11 @@ public class ProjectFrame extends JFrame {
 
     private void createTableFiles() {
         tableFiles = new JTable();
+        tableFiles.setForeground(COLOR_STANDARD_FG);
+        tableFiles.setBackground(COLOR_STANDARD_BG);
+        tableFiles.setSelectionForeground(COLOR_SELECTION_FG);
+        tableFiles.setSelectionBackground(COLOR_SELECTION_BG);
+
         modelFiles = new AbstractTableModel() {
             public Object getValueAt(int rowIndex, int columnIndex) {
                 IProject.FileInfo fi;
@@ -443,6 +454,11 @@ public class ProjectFrame extends JFrame {
 
     private void createTableTotal() {
         tableTotal = new JTable();
+        tableTotal.setForeground(COLOR_STANDARD_FG);
+        tableTotal.setBackground(COLOR_STANDARD_BG);
+        tableTotal.setSelectionForeground(COLOR_SELECTION_FG);
+        tableTotal.setSelectionBackground(COLOR_SELECTION_BG);
+
         modelTotal = new AbstractTableModel() {
             public Object getValueAt(int rowIndex, int columnIndex) {
                 if (columnIndex == 0) {
@@ -617,7 +633,8 @@ public class ProjectFrame extends JFrame {
                 if (fi != null
                         && fi.filePath
                                 .equals(Core.getEditor().getCurrentFile())) {
-                    result.setBackground(CURRENT_FILE_COLOR);
+                    result.setForeground(COLOR_CURRENT_FG);
+                    result.setBackground(COLOR_CURRENT_BG);
                 }
             }
             return result;

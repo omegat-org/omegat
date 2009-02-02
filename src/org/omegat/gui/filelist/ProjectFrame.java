@@ -120,10 +120,10 @@ public class ProjectFrame extends JFrame {
     private JButton m_closeButton;
 
     private MainWindow m_parent;
-    
+
     private Font dialogFont;
-    
-      public ProjectFrame(MainWindow parent) {
+
+    public ProjectFrame(MainWindow parent) {
         m_parent = parent;
 
         createTableFiles();
@@ -212,7 +212,7 @@ public class ProjectFrame extends JFrame {
         bbut.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
         gbc.gridy = 6;
         cp.add(bbut, gbc); // NOI18N
-        
+
         // Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         // setBounds((screenSize.width-600)/2, (screenSize.height-500)/2, 600,
         // 400);
@@ -240,7 +240,7 @@ public class ProjectFrame extends JFrame {
                 tableTotal.repaint();
                 modelTotal.fireTableDataChanged();
             }
-       
+
             /**
              * Updates the number of translated segments only, does not rebuild
              * the whole display.
@@ -251,22 +251,23 @@ public class ProjectFrame extends JFrame {
             }
         });
 
-        CoreEvents.registerFontChangedEventListener(new IFontChangedEventListener() {
+        CoreEvents
+                .registerFontChangedEventListener(new IFontChangedEventListener() {
                     public void onFontChanged(Font newFont) {
-                        if  (!Preferences.isPreference(
-                                Preferences.PROJECT_FILES_USE_FONT))                           
+                        if (!Preferences
+                                .isPreference(Preferences.PROJECT_FILES_USE_FONT))
                             // We're using the standard dialog font
-                            newFont = dialogFont; 
+                            newFont = dialogFont;
                         tableFiles.setFont(newFont);
                         tableTotal.setFont(new Font(newFont.getName(),
-                                    Font.BOLD, newFont.getSize()));
+                                Font.BOLD, newFont.getSize()));
                         tableFiles.setRowHeight(newFont.getSize()
-                                    + LINE_SPACING);
+                                + LINE_SPACING);
                         tableTotal.setRowHeight(newFont.getSize()
-                                    + LINE_SPACING);
-                   }
-        });
-                
+                                + LINE_SPACING);
+                    }
+                });
+
         tableFiles.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -423,9 +424,6 @@ public class ProjectFrame extends JFrame {
         };
         tableFiles.setModel(modelFiles);
 
-        tableFiles.setSelectionBackground(tableFiles.getBackground());
-        tableFiles.setSelectionForeground(tableFiles.getForeground());
-
         TableColumnModel columns = new DefaultTableColumnModel();
         TableColumn cFile = new TableColumn(0, 300);
         cFile.setHeaderValue(OStrings.getString("PF_FILENAME"));
@@ -439,7 +437,8 @@ public class ProjectFrame extends JFrame {
         columns.addColumn(cCount);
         tableFiles.setColumnModel(columns);
 
-        tableFiles.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tableFiles
+                .setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
     }
 
     private void createTableTotal() {
@@ -607,31 +606,38 @@ public class ProjectFrame extends JFrame {
                     // data changed
                     fi = null;
                 }
-                result.setBackground(table.getBackground());
+
+                if (isSelected) {
+                    super.setForeground(table.getSelectionForeground());
+                    super.setBackground(table.getSelectionBackground());
+                } else {
+                    super.setForeground(table.getForeground());
+                    super.setBackground(table.getBackground());
+                }
                 if (fi != null
                         && fi.filePath
                                 .equals(Core.getEditor().getCurrentFile())) {
                     result.setBackground(CURRENT_FILE_COLOR);
-
                 }
             }
             return result;
         }
     }
-@Override
+
+    @Override
     public void setFont(Font f) {
         super.setFont(f);
 
-        if (Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)){           
-            String fontName = Preferences.getPreference(OConsts.TF_SRC_FONT_NAME);
+        if (Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
+            String fontName = Preferences
+                    .getPreference(OConsts.TF_SRC_FONT_NAME);
             int fontSize = Integer.valueOf(
-                           Preferences.getPreference(OConsts.TF_SRC_FONT_SIZE)).
-                           intValue();
+                    Preferences.getPreference(OConsts.TF_SRC_FONT_SIZE))
+                    .intValue();
             tableFiles.setFont(new Font(fontName, Font.PLAIN, fontSize));
             tableTotal.setFont(new Font(fontName, Font.BOLD, fontSize));
             tableFiles.setRowHeight(fontSize + LINE_SPACING);
             tableTotal.setRowHeight(fontSize + LINE_SPACING);
         }
-
     }
 }

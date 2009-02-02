@@ -23,6 +23,8 @@
   Other enhancements:
   
   - Console mode, to be able to run OmegaT without user interface
+(For users of the tokenizers - http://sourceforge.net/projects/omegat-plugins -
+ITokenizer=<tokenizer> has to be replaced by --ITokenizer=<tokenizer>)
 
   - The list of files in the Project files window can be selected
 and copied to the clipboard.

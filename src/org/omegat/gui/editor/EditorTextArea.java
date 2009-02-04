@@ -5,8 +5,9 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Didier Briel and Tiago Saboga
-               2007 Zoltan Bartko - bartkozoltan@bartkozoltan.com
+               2007 Zoltan Bartko 
                2008 Andrzej Sawula, Alex Buloichik
+               2009 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -60,9 +61,10 @@ import org.omegat.util.gui.ExtendedEditorKit;
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Tiago Saboga
- * @author Zoltan Bartko
+ * @author Zoltan Bartko (bartkozoltan@bartkozoltan.com)
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public class EditorTextArea extends JTextPane implements MouseListener, DocumentListener
 {
@@ -204,11 +206,20 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
         }
         
         // for now, force all key presses to reset the cursor to
-        //	the editing region unless it's a ctrl-c (copy)
-        if( e.getID()==KeyEvent.KEY_PRESSED && e.getModifiers()==CTRL_KEY_MASK && keyCode == KeyEvent.VK_C
-            || e.getID() == KeyEvent.KEY_TYPED && e.getModifiers() == CTRL_KEY_MASK && keyChar=='\u0003' )
+        // the editing region unless it's a Ctrl+C (copy),
+        // Ctrl+Shift+C (export selection) or Ctr+F (find)
+        // The two latter shortcuts are harcoded, but these lines
+        // shouldn't be necessary with the new editor
+        if( e.getID()==KeyEvent.KEY_PRESSED
+                && (   (e.getModifiers()==CTRL_KEY_MASK)
+                    || (e.getModifiers()==CTRL_KEY_MASK + KeyEvent.SHIFT_MASK)
+                && (keyCode == KeyEvent.VK_C)) ||
+                (  (e.getModifiers()==CTRL_KEY_MASK )
+                && keyCode == KeyEvent.VK_F)
+            || e.getID() == KeyEvent.KEY_TYPED
+            && e.getModifiers() == CTRL_KEY_MASK && keyChar=='\u0003' )
         {
-            // control-c pressed or typed
+            // Ctrl+C pressed or typed or Ctrl+Shift+C or Ctrl+F
             super.processKeyEvent(e);
             return;
         }

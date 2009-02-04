@@ -7,6 +7,7 @@
                          Benjamin Siband, and Kim Bruning
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik
+               2009 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -65,6 +66,7 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
+import org.omegat.util.FileUtil;
 
 /**
  * Class for control all editor operations.
@@ -77,6 +79,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Zoltan Bartko - bartkozoltan@bartkozoltan.com
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public class EditorController implements IEditor {
 
@@ -281,6 +284,17 @@ public class EditorController implements IEditor {
         }
     }
 
+    /**
+     * Export the current source and target segments in text files.
+     */
+    private void exportCurrentSegment(){
+        String s1 = m_curEntry.getSrcText();
+        String s2 = m_curEntry.getTranslation();
+
+        FileUtil.writeScriptFile(s1, OConsts.SOURCE_EXPORT);                                   // NOI18N
+        FileUtil.writeScriptFile(s2, OConsts.TARGET_EXPORT);                                   // NOI18N
+    }
+    
     /**
      * Displays all segments in current document.
      * <p>
@@ -545,6 +559,8 @@ public class EditorController implements IEditor {
 
                 checkSpelling(true);
                 
+                if (Preferences.isPreference(Preferences.EXPORT_CURRENT_SEGMENT))
+                    exportCurrentSegment();
                 
                 entryActivated = true;
                 if (previousFileName == null

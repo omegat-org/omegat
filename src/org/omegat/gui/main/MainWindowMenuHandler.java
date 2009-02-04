@@ -43,12 +43,14 @@ import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.search.SearchWindow;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
+import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.SwingWorker;
+import org.omegat.util.OConsts;
 
 /**
  * Handler for main menu items.
@@ -146,6 +148,13 @@ public class MainWindowMenuHandler {
         }
     }
 
+    /**
+     * Empties the exported segments.
+     */
+    private void flushExportedSegments(){
+        FileUtil.writeScriptFile("", OConsts.SOURCE_EXPORT);                          // NOI18N
+        FileUtil.writeScriptFile("", OConsts.TARGET_EXPORT);                          // NOI18N
+    }
     /** Quits OmegaT */
     public void projectExitMenuItemActionPerformed() {
         boolean projectModified = false;
@@ -161,6 +170,8 @@ public class MainWindowMenuHandler {
                 return;
             }
         }
+
+        flushExportedSegments();
 
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {
@@ -227,6 +238,21 @@ public class MainWindowMenuHandler {
                 Core.getEditor().getCurrentEntry().getSrcText());
     }
 
+    public void editExportSelectionMenuItemActionPerformed() {
+        if (!Core.getProject().isProjectLoaded())
+            return;
+
+        String selection = Core.getEditor().getSelectedText();
+        if (selection == null) {
+            if ( Core.getEditor().getCurrentEntry().isTranslated() )
+                selection = Core.getEditor().getCurrentEntry().getTranslation();
+            else
+                selection = Core.getEditor().getCurrentEntry().getSrcText();
+        }
+
+        FileUtil.writeScriptFile(selection, OConsts.SELECTION_EXPORT);
+    }
+    
     public void editFindInProjectMenuItemActionPerformed() {
         if (!Core.getProject().isProjectLoaded())
             return;

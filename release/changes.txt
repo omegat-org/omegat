@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 2.0.1 vs. 2.0.0 update 1
 
-  5 Enhancements
+  8 Enhancements
   1 Bugfix
 
 ----------------------------------------------------------------------
@@ -19,6 +19,9 @@
 
   - Combine identical and similar glossary entries
   http://sourceforge.net/support/tracker.php?aid=2505552 
+
+  - Interface for scripting languages
+  http://sourceforge.net/support/tracker.php?aid=1989533  
   
   Other enhancements:
   
@@ -29,6 +32,8 @@ ITokenizer=<tokenizer> has to be replaced by --ITokenizer=<tokenizer>)
   - The list of files in the Project files window can be selected
 and copied to the clipboard.
  
+  - Ctrl+F uses the selection even outside the current target segment
+
   - Slovenian localisation updated to 2.0 (readme)
   
   Bug Fixes: 

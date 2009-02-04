@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
+               2009 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -24,8 +25,12 @@
 
 package org.omegat.util;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -33,6 +38,7 @@ import java.util.Comparator;
  * Files processing utilities.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public class FileUtil {
     private static final int MAX_BACKUPS = 10;
@@ -75,4 +81,35 @@ public class FileUtil {
             // we don't care
         }
     }
+
+    /**
+     * Writes a text into a UTF-8 text file in the script directory.
+     * 
+     * @param textToWrite The text to write in the file
+     * @param fileName The file name without path
+     */
+    public static void writeScriptFile(String textToWrite, String fileName) {
+        
+        BufferedWriter bw = null;
+        try {
+            fileName = StaticUtils.getScriptDir() + fileName;
+            textToWrite = textToWrite.
+                    replaceAll("\n", System.getProperty("line.separator"));
+            bw = new BufferedWriter(new OutputStreamWriter
+                                 (new FileOutputStream(fileName),OConsts.UTF8));
+            bw.write(textToWrite);
+        }
+        catch (Exception ex){
+            // Eat exception silently
+        } finally {
+              try {
+                    if (bw != null)
+                        bw.close();
+              } catch (IOException ex) {
+                 ex.printStackTrace();
+              }
+        }
+        
+    }
+
 }

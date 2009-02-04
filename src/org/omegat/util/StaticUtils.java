@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2007 Didier Briel, Zoltan Bartko, Alex Buloichik 
                2008 Didier Briel
+               2009 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -71,11 +72,23 @@ public class StaticUtils
 	 * Configuration directory on Mac OS X
 	 */
 	private final static String OSX_CONFIG_DIR = "/Library/Preferences/OmegaT/";// NOI18N
-	
+
+  	/**
+	 * Script directory
+	 */
+	private final static String SCRIPT_DIR = "script";                          // NOI18N
+
 	/**
 	 * Contains the location of the directory containing the configuration files.
 	 */
 	private static String m_configDir = null;
+
+	/**
+	 * Contains the location of the script dir containing the
+     * exported text files.
+	 */
+	private static String m_scriptDir = null;
+
     
     /**
      * Builds a list of format tags within the supplied string.
@@ -513,7 +526,41 @@ public class StaticUtils
         // we should have a correct, existing config dir now
         return m_configDir;
     }
-    
+
+    public static String getScriptDir() {
+        // If the script directory has already been determined, return it
+        if (m_scriptDir != null)
+            return m_scriptDir;
+
+        m_scriptDir = getConfigDir() + SCRIPT_DIR + File.separator;
+
+       try {
+           // Check if the directory exists
+           File dir = new File(m_scriptDir);
+           if (!dir.exists()) {
+               // Create the directory
+               boolean created = dir.mkdirs();
+
+               // If the directory could not be created,
+               // set the script directory to config directory
+               if (!created) {
+                   Log.logErrorRB("SU_SCRIPT_DIR_CREATE_ERROR");
+                   m_scriptDir = getConfigDir();
+               }
+            }
+        }
+        catch (SecurityException e) {
+            //The system doesn't want us to write where we want to write
+            // reset the script dir to the current config dir
+            m_scriptDir = getConfigDir();
+
+            // log the exception, but only after the script dir has been reset
+            Log.logErrorRB("SU_SCRIPT_DIR_CREATE_ERROR");
+            Log.log(e.toString());
+        }
+        return m_scriptDir;
+    }
+
     /**
       * Returns true if running on Mac OS X
       */

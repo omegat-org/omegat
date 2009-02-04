@@ -4,7 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
+               2007 Zoltan Bartko
+               2009 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -37,7 +38,8 @@ import java.io.File;
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
- * @author Zoltan Bartko
+ * @author Zoltan Bartko (bartkozoltan@bartkozoltan.com)
+ * @author Didier Briel
  */
 public class OConsts
 {
@@ -101,6 +103,13 @@ public class OConsts
     /** dictionary file extension */
     public static final String SC_DICTIONARY_EXTENSION = ".dic";    // NOI18N
     
+    /** The name of the file with the source exported segment */
+    public static final String SOURCE_EXPORT = "source.txt";                    // NOI18N
+    /** The name of the file with the target exported segment */
+    public static final String TARGET_EXPORT = "target.txt";                    // NOI18N
+    /** The name of the file with the exported selection */
+    public static final String SELECTION_EXPORT = "selection.txt";              // NOI18N
+
     /** The smallest threshold to detect a fuzzy match string */
     public static final int    FUZZY_MATCH_THRESHOLD    = 30;
     

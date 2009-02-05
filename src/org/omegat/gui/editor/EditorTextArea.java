@@ -211,13 +211,13 @@ public class EditorTextArea extends JTextPane implements MouseListener, Document
         // The two latter shortcuts are harcoded, but these lines
         // shouldn't be necessary with the new editor
         if( e.getID()==KeyEvent.KEY_PRESSED
-                && (   (e.getModifiers()==CTRL_KEY_MASK)
-                    || (e.getModifiers()==CTRL_KEY_MASK + KeyEvent.SHIFT_MASK)
-                && (keyCode == KeyEvent.VK_C)) ||
-                (  (e.getModifiers()==CTRL_KEY_MASK )
-                && keyCode == KeyEvent.VK_F)
-            || e.getID() == KeyEvent.KEY_TYPED
-            && e.getModifiers() == CTRL_KEY_MASK && keyChar=='\u0003' )
+                && (  ((e.getModifiers()==CTRL_KEY_MASK)
+                    || (e.getModifiers()==CTRL_KEY_MASK + KeyEvent.SHIFT_MASK))
+                && (keyCode == KeyEvent.VK_C))
+            ||  (   (   e.getModifiers()==CTRL_KEY_MASK)
+                && (keyCode == KeyEvent.VK_F))
+            || (e.getID() == KeyEvent.KEY_TYPED
+            && e.getModifiers() == CTRL_KEY_MASK && keyChar=='\u0003' ))
         {
             // Ctrl+C pressed or typed or Ctrl+Shift+C or Ctrl+F
             super.processKeyEvent(e);

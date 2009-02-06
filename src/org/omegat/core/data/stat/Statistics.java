@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
- Portions copyright 2007 Zoltan Bartko - bartkozoltan@bartkozoltan.com
+               2007 Zoltan Bartko
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -50,7 +50,7 @@ import org.omegat.util.StaticUtils;
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Maxym Mykhalchuk
- * @author Bartko Zoltan
+ * @author Zoltan Bartko (bartkozoltan@bartkozoltan.com)
  */
 public class Statistics {
     /**
@@ -232,7 +232,6 @@ public class Statistics {
 
         String tokenStr = new String();
 
-        /* try { // FIX: remove this when bug 1589484 is fixed */
         int start = breaker.first();
         for (int end = breaker.next(); end != BreakIterator.DONE; start = end, end = breaker.next()) {
             tokenStr = str.substring(start, end);
@@ -249,39 +248,5 @@ public class Statistics {
             }
         }
         return nTokens;
-
-        //        catch (IllegalArgumentException exception) { // FIX: remove this when bug 1589484 is fixed
-        //            String message =   "IllegalArgumentException caught!\n"
-        //                             + "Please report this to the OmegaT team, by going to the bug report at:\n"
-        //                             + "http://sourceforge.net/support/tracker.php?aid=1589484\n"
-        //                             + "and report the details below (location, string, breaker string, memory, stack trace)\n"
-        //                             + "Location: CommandThread.numberOfWords\n"
-        //                             + "String: [" + str + "]\n"
-        //                             + "Breaker string: [" + ((org.omegat.util.WordIterator)breaker).getString() + "]\n"
-        //                             + "Available memory: " + Runtime.getRuntime().freeMemory() + " bytes\n";
-        //            System.err.println(message + "Stack trace (below):");
-        //            System.err.println(exception.getMessage());
-        //            exception.printStackTrace(System.err);
-        //
-        //            displayErrorMessage(message + "Stack trace: see log file (" + StaticUtils.getLogLocation() + ")", exception);
-        //
-        //            return nTokens;
-        //        }
-        //        catch (StringIndexOutOfBoundsException exception) { // FIX: remove this when bug 1589484 is fixed
-        //            String message =   "StringIndexOutOfBoundsException caught!\n"
-        //                             + "Please report this to the OmegaT team, by going to the bug report at:\n"
-        //                             + "http://sourceforge.net/support/tracker.php?aid=1589484\n"
-        //                             + "and report the details below (location, string, breaker string, memory, stack trace)\n"
-        //                             + "Location: CommandThread.numberOfWords\n"
-        //                             + "String: [" + str + "]\n"
-        //                             + "Breaker string: [" + ((org.omegat.util.WordIterator)breaker).getString() + "]\n"
-        //                             + "Available memory: " + Runtime.getRuntime().freeMemory() + " bytes\n";
-        //            System.err.println(message + "Stack trace (below):");
-        //            System.err.println(exception.getMessage());
-        //            exception.printStackTrace(System.err);
-        //
-        //            displayErrorMessage(message + "Stack trace: see log file (" + StaticUtils.getLogLocation() + ")", exception);
-        //
-        //            return nTokens;
     }
 }

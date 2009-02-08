@@ -147,6 +147,20 @@ can be applied or not with a new option in Options/Font.
 ----------------------------------------------------------------------
  OmegaT 1.8.1 update 2 Changes
 ----------------------------------------------------------------------
+1.8.1 update 3 vs. 1.8.1 update 2
+
+   0 Enhancement
+   1 Bugfix
+----------------------------------------------------------------------
+1.8.1 update 3
+ 
+  Bug fixes:
+  - Tags are counted as characters in statistics
+  http://sourceforge.net/support/tracker.php?aid=1910909 
+
+----------------------------------------------------------------------
+ OmegaT 1.8.1 update 2 Changes
+----------------------------------------------------------------------
 1.8.1 update 2 vs. 1.8.1 update 1
 
    2 Enhancements

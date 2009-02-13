@@ -1,10 +1,9 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2009 Wildrich Fourie
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -30,7 +29,6 @@ package org.omegat.gui.glossary;
  * An entry in the glossary.
  *
  * @author Keith Godfrey
- * @author Wildrich Fourie
  */
 public class GlossaryEntry
 {
@@ -45,11 +43,6 @@ public class GlossaryEntry
 	public String	getLocText()	{ return m_loc;		}
 	public String	getCommentText()	{ return m_com;		}
 
-        public void     setLocText(String newLoc)
-        {
-            m_loc = newLoc;
-        }
-    
 	private String	m_src;
 	private String	m_loc;
 	private String	m_com;

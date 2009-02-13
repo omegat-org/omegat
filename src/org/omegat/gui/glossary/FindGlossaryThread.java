@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -27,6 +27,7 @@
 package org.omegat.gui.glossary;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -40,7 +41,7 @@ import org.omegat.util.Token;
 
 /**
  * Class for find glossary entries for current entry in editor.
- * 
+ *
  * This process looks up the source string entries, and find matched glossary
  * entries.
  * <p>
@@ -52,7 +53,7 @@ import org.omegat.util.Token;
  * <li>"Edit" vs "Editing the edit" - matches OK!
  * <li>"Edit" vs "Edit" - matches OK!
  * </ul>
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -63,7 +64,7 @@ public class FindGlossaryThread extends Thread {
 
     /**
      * Entry which processed currently.
-     * 
+     *
      * If entry in controller was changed, it means user was moved to other
      * entry, and there is no sense to continue.
      */
@@ -135,72 +136,178 @@ public class FindGlossaryThread extends Thread {
         });
     }
 
-    
-    // Filter out doubles, and combine synonyms.
-    private List FilterGlossary(List glosEntries) {
-        List compactEntries = new LinkedList();
-        int entriesNum = glosEntries.size();
+    private List FilterGlossary(List<GlossaryEntry> result)
+    {
+        // First check that entries exist in the list.
+        if(result.size() == 0)
+            return result;
 
-        if (entriesNum != 0) {
-            if (entriesNum == 1) {
-                compactEntries.add(glosEntries.get(0));
-            } else {
-                for (int h = 0; h < entriesNum; h++) {
-                    List LocList = new LinkedList();
+        List<GlossaryEntry> returnList = new LinkedList<GlossaryEntry>();
+        
+        // The default replace entry
+        GlossaryEntry replaceEntry = new GlossaryEntry("", "", "");        
 
-                    GlossaryEntry nowEntry = (GlossaryEntry) glosEntries.get(h);
+        //... Remove the duplicates from the list ..............................
+        boolean removedDuplicate = false;
+        for(int i=0; i < result.size(); i++)
+        {
+            GlossaryEntry nowEntry = result.get(i);
 
-                    // If the entry isn't empty split the seperate terms.
-                    if (!nowEntry.getSrcText().equals("")) {                    // NOI18N
-                        String[] SrcSplit = nowEntry.getLocText().split(", ");  // NOI18N
-                        for (int b = 0; b < SrcSplit.length; b++) {
-                            LocList.add(SrcSplit[b]);
+            if(nowEntry.getSrcText().equals(""))
+                continue;
+
+            for(int j=i+1; j < result.size(); j++)
+            {
+                GlossaryEntry thenEntry = result.get(j);
+
+                if(thenEntry.getSrcText().equals(""))
+                    continue;
+
+                // If the Entries are exactely the same, insert a blank entry.
+                if(nowEntry.getSrcText().equals(thenEntry.getSrcText()))
+                    if(nowEntry.getLocText().equals(thenEntry.getLocText()))
+                        if(nowEntry.getCommentText().
+                                  equals(thenEntry.getCommentText()))
+                        {
+                            result.set(j, replaceEntry);
+                            removedDuplicate = true;
                         }
+            }
+        }
+        //......................................................................
 
-                        for (int g = h + 1; g < entriesNum; g++) {
-                            GlossaryEntry thenEntry = 
-                                    (GlossaryEntry) glosEntries.get(g);
+        //-- Remove the blank entries from the list ----------------------------
+        if(removedDuplicate)
+        {
+            Iterator<GlossaryEntry> myIter = result.iterator();
+            List<GlossaryEntry> newList = new LinkedList<GlossaryEntry>();
 
-                            if ( (nowEntry.getSrcText().
-                                    equals(thenEntry.getSrcText())) &&
-                                  (thenEntry.getCommentText(). 
-                                     equals(nowEntry.getCommentText())) 
-                                     // We only merge entries with equal 
-                                     // (or none) comments
-                               )
-                            {
-                                String[] LocArray = 
-                                        thenEntry.getLocText().split(", ");     // NOI18N
-                                for (int d = 0; d < LocArray.length; d++) {
-                                    if (!LocList.contains(LocArray[d])) {
-                                        LocList.add(LocArray[d]);
-                                        nowEntry.setLocText
-                                                (nowEntry.getLocText() + 
-                                                ", " + LocArray[d]);            // NOI18N
-                                    }
-                                }
 
-                                GlossaryEntry replaceEntry = 
-                                        new GlossaryEntry("", "", "");          // NOI18N
-                                glosEntries.set(g, replaceEntry);
-                            }
+            while(myIter.hasNext())
+            {
+                GlossaryEntry checkEntry = myIter.next();
+                if(checkEntry.getSrcText().equals("") ||
+                   checkEntry.getLocText().equals(""))
+                    myIter.remove();
+                else
+                    newList.add(checkEntry);
+            }
+
+            result = newList;
+        }
+        //----------------------------------------------------------------------
+
+        //~~ Group items with same scrTxt ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~        
+        for(int i=0; i < result.size(); i++)
+        {
+            List<GlossaryEntry> srcList = new LinkedList<GlossaryEntry>();
+            GlossaryEntry nowEntry = result.get(i);
+
+            if(nowEntry.getSrcText().equals(""))
+                continue;
+
+            srcList.add(nowEntry);
+
+            for(int j=i+1; j < result.size(); j++)
+            {
+                GlossaryEntry thenEntry = result.get(j);
+
+                // Double check, needed?
+                if(thenEntry.getSrcText().equals(""))
+                    continue;
+
+                if(nowEntry.getSrcText().equals(thenEntry.getSrcText()))
+                {
+                    srcList.add(thenEntry);
+                    result.set(j, replaceEntry);
+                }
+            }
+
+            //·· Sort items with same locTxt ···································
+            List<GlossaryEntry> sortList = new LinkedList<GlossaryEntry>();
+            if(srcList.size() > 1)
+            {                
+                for(int k=0; k < srcList.size(); k++)
+                {
+                    GlossaryEntry srcNow = srcList.get(k);
+
+                    if(srcNow.getSrcText().equals(""))
+                        continue;
+
+                    sortList.add(srcNow);
+
+                    for(int l=k+1; l < srcList.size(); l++)
+                    {
+                        GlossaryEntry srcThen = srcList.get(l);
+
+                        if(srcThen.getSrcText().equals(""))
+                            continue;
+
+                        if(srcNow.getLocText().equals(srcThen.getLocText()))
+                        {
+                            sortList.add(srcThen);
+                            srcList.set(l, replaceEntry);
                         }
-
-                        compactEntries.add(nowEntry);
                     }
                 }
             }
-        }
-
-        // Clean the GlossaryEntries
-        for(int c = glosEntries.size() - 1; c >= 0; c--)
-        {
-            if (((GlossaryEntry) glosEntries.get(c)).getSrcText().equals(""))
+            else
             {
-                glosEntries.remove(c);
+                sortList = srcList;
             }
-        }
+            //··································································
 
-        return compactEntries;
+
+            //== Now put the sortedList together ===============================
+            String srcTxt = sortList.get(0).getSrcText();
+            String locTxt = sortList.get(0).getLocText();
+            String comTxt = "";
+
+            int comCounter = 1;
+
+            String prevLocTxt = sortList.get(0).getLocText();
+            String prevComTxt = sortList.get(0).getCommentText();
+
+            if(!prevComTxt.equals(""))
+                comTxt = comCounter + ". " + prevComTxt;
+
+            for(int m=1; m < sortList.size(); m++)
+            {
+                if(!sortList.get(m).getLocText().equals(prevLocTxt))
+                {
+                    comCounter++;
+                    prevLocTxt = sortList.get(m).getLocText();
+                    locTxt += ", " + prevLocTxt;
+                    // The Comments cannot be equal because all the duplicates 
+                    // have been removed earlier.
+                    if(!sortList.get(m).getCommentText().equals(""))
+                    {
+                        if(comTxt.equals(""))
+                            comTxt = comCounter + ". "
+                                    + sortList.get(m).getCommentText();
+                        else
+                            comTxt += "\n" + comCounter + ". "
+                                    + sortList.get(m).getCommentText();
+                    }
+                }
+                else
+                {                    
+                    if(!sortList.get(m).getCommentText().equals(""))
+                    {
+                        if(comTxt.equals(""))
+                            comTxt = comCounter + ". "
+                                    + sortList.get(m).getCommentText();
+                        else
+                            comTxt += "\n" + comCounter + ". "
+                                    + sortList.get(m).getCommentText();
+                    }
+                }                
+            }
+            GlossaryEntry combineEntry = new GlossaryEntry(srcTxt, locTxt, comTxt);
+            returnList.add(combineEntry);
+            //==================================================================
+        }
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        return returnList;
     }
 }

@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Alex Buloichik
-               2009 Wildrich Fourie
+               2009 Wildrich Fourie, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -58,6 +58,7 @@ import org.omegat.util.Token;
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Wildrich Fourie
+ * @author Didier Briel
  */
 public class FindGlossaryThread extends Thread {
     private final GlossaryTextArea glossaryController;
@@ -134,6 +135,23 @@ public class FindGlossaryThread extends Thread {
                 }
             }
         });
+    }
+
+    /**
+     * If a combined glossary entry contains ',', it needs to be bracketed by
+     * quotes, to prevent confusion when entries are combined. However, if
+     * the entry contains ';' or '"', it will automatically be bracketed by
+     * quotes.
+     * @param entry A glossary text entry
+     * @return A glossary text entry possibly bracketed by quotes
+     */
+    private String bracketEntry(String entry){
+
+        if ( entry.contains(",") &&
+             !( entry.contains(";") || entry.contains("\"") ) 
+            ) 
+            entry = '"' + entry + '"';   
+        return entry;
     }
 
     private List FilterGlossary(List<GlossaryEntry> result)
@@ -265,6 +283,8 @@ public class FindGlossaryThread extends Thread {
 
             int comCounter = 1;
 
+            locTxt = bracketEntry(locTxt);
+
             String prevLocTxt = sortList.get(0).getLocText();
             String prevComTxt = sortList.get(0).getCommentText();
 
@@ -277,7 +297,7 @@ public class FindGlossaryThread extends Thread {
                 {
                     comCounter++;
                     prevLocTxt = sortList.get(m).getLocText();
-                    locTxt += ", " + prevLocTxt;
+                    locTxt += ", " + bracketEntry(prevLocTxt);
                     // The Comments cannot be equal because all the duplicates 
                     // have been removed earlier.
                     if(!sortList.get(m).getCommentText().equals(""))

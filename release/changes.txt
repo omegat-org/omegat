@@ -1,24 +1,49 @@
 ----------------------------------------------------------------------
- OmegaT 2.0.1 update 1
+ OmegaT 2.0.2 
 ----------------------------------------------------------------------
-2.0.1 update 1 vs. 2.0.1
+2.0.2 vs. 2.0.1
 
-  0 Enhancement
-  1 Bugfix
+  2 Enhancements
+  5 Bugfixes
 ----------------------------------------------------------------------
 2.0.1 update 1
+
+  Other enhancements:
+
+  - Source and target segments are now, by default, left justified for LTR 
+languages and right justified for RTL languages depending on the
+languages of the project. It is still possible to switch with Shift+Ctrl+O,
+which has now three states: 
+- Justification according to languages (default)
+- Justification on the left
+- Justification on the right
+
+  - Ctrl+Page up and Ctrl+Page down go to the beginning/end of a document 
+(without entering the segment) 
 
   Bug Fixes: 
 
   - Glossary: unclear display if combined entries contain a ","
   http://sourceforge.net/support/tracker.php?aid=2628490 
 
+  - Bidi wrong justification
+  http://sourceforge.net/support/tracker.php?aid=1383289 
+
+  - OmegaT hangs at random
+  http://sourceforge.net/support/tracker.php?aid=1762277  
+
+  - Random hangs, exceptions in command line, nothing in log
+  http://sourceforge.net/support/tracker.php?aid=1817830 
+
+  - Confused display when RTL segment starts with LTR characters 
+  http://sourceforge.net/support/tracker.php?aid=1898522  
+
 ----------------------------------------------------------------------
  OmegaT 2.0.1
 ----------------------------------------------------------------------
 2.0.1 vs. 2.0.0 update 1
 
-  8 Enhancements
+  9 Enhancements
   1 Bugfix
 
 ----------------------------------------------------------------------
@@ -37,6 +62,9 @@
 
   - Interface for scripting languages
   http://sourceforge.net/support/tracker.php?aid=1989533  
+
+  - Specify project from command line
+  http://sourceforge.net/support/tracker.php?aid=1880170   
   
   Other enhancements:
   

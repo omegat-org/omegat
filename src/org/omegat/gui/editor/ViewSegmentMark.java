@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+ Copyright (C) 2008 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -20,28 +20,37 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.gui.editor;
 
-/**
- * Tiny class to represent one document segment.
- * As of now, only the display length is stored, maybe will be more in the future.
- *
- * @author Keith Godfrey
- * @author Maxym Mykhalchuk
- */
-class DocumentSegment
-{
-    /**
-     * Display Length -- the char count of the display value of the segment,
-     * i.e. translation if it exists, else source.
-     * It also includes the 2 newlines used for spacing
-     */
-     public int length;
-     
-     public String toString(){
-         return "length:"+length;
-}
-}
+import javax.swing.text.Element;
+import javax.swing.text.LabelView;
 
+/**
+ * Class for display segmentation marks. It better to paint marks by own
+ * component, because we will not have problems with RTL writing in this case.
+ * 
+ * @author Alex Buloichik (alex73mail@gmail.com)
+ */
+public class ViewSegmentMark extends LabelView {
+    private final boolean beginMark;
+
+    public ViewSegmentMark(Element elem) {
+        super(elem);
+        this.beginMark = ((OmDocument.OmElementSegmentMark) elem).isBeginMark;
+    }
+
+    public boolean isBeginMark() {
+        return beginMark;
+    }
+
+    /**
+     * Do not break view by several parts, because we will not be able to align
+     * it in RTL presentation.
+     */
+    @Override
+    public int getBreakWeight(int axis, float pos, float len) {
+        return BadBreakWeight;
+    }
+}

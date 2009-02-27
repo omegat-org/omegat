@@ -33,6 +33,8 @@ import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
+import org.omegat.gui.editor.ViewLabel;
+
 /**
  * Static attributes for text.
  *
@@ -105,8 +107,8 @@ public final class Styles
         // and IDEs.
         MISSPELLED = new SimpleAttributeSet();
         StyleConstants.setForeground(MISSPELLED, Color.black);
-        ExtendedLabelView.setCustomUnderline(MISSPELLED, 
-                ExtendedLabelView.RED_JAGGED_UNDERLINE);
+        ViewLabel.setCustomUnderline(MISSPELLED, 
+                ViewLabel.RED_JAGGED_UNDERLINE);
         
     }
     
@@ -128,8 +130,8 @@ public final class Styles
         StyleConstants.setBold(result, StyleConstants.isBold(toApply));
         StyleConstants.setUnderline(result, StyleConstants.isUnderline(toApply));
         // make sure the custom underlining is copied, too
-        ExtendedLabelView.setCustomUnderline(result, 
-                ExtendedLabelView.getCustomUnderline(toApply));
+        ViewLabel.setCustomUnderline(result, 
+                ViewLabel.getCustomUnderline(toApply));
         
         return result;
 }

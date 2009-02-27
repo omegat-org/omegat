@@ -22,9 +22,12 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.util.gui;
+package org.omegat.gui.editor;
 
 import javax.swing.text.*;
+
+import org.omegat.gui.editor.OmDocument;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Shape;
@@ -37,7 +40,7 @@ import java.awt.Shape;
  *
  * @author bartkoz
  */
-public class ExtendedLabelView extends LabelView {
+public class ViewLabel extends LabelView {
     
     /** no custom underline */
     public static final int NO_CUSTOM_UNDERLINE = -1;
@@ -57,7 +60,7 @@ public class ExtendedLabelView extends LabelView {
      * keeps it secret. */
     private Element element;
     
-    public ExtendedLabelView(Element elem) {
+    public ViewLabel(Element elem) {
         super(elem);
         element = elem;
     }
@@ -139,4 +142,22 @@ public class ExtendedLabelView extends LabelView {
     public static void setCustomUnderline(MutableAttributeSet a, int type) {
                 a.addAttribute(CustomUnderline, new Integer(type));
         }
+
+    /**
+     * Redefine for read background from parent element.
+     */
+    @Override
+    protected void setPropertiesFromAttributes() {
+        super.setPropertiesFromAttributes();
+
+        Element el = element;
+        while (el != null) {
+            AttributeSet attr = el.getAttributes();
+            if (attr.isDefined(StyleConstants.Background)) {
+                setBackground(((OmDocument) getDocument()).getBackground(attr));
+                break;
+            }
+            el = el.getParentElement();
+        }
+    }
 }

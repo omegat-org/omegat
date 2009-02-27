@@ -188,16 +188,21 @@ can be applied or not with a new option in Options/Font.
   - French localisation updated to 2.0 (UI)
 
 ----------------------------------------------------------------------
- OmegaT 1.8.1 update 2 Changes
+ OmegaT 1.8.1 update 3 Changes
 ----------------------------------------------------------------------
 1.8.1 update 3 vs. 1.8.1 update 2
 
-   0 Enhancement
+   1 Enhancement
    1 Bugfix
 ----------------------------------------------------------------------
 1.8.1 update 3
  
+  Other enhancements:
+
+  - New Welsh localisation (UI, readme, instant start)
+
   Bug fixes:
+
   - Tags are counted as characters in statistics
   http://sourceforge.net/support/tracker.php?aid=1910909 
 

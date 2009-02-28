@@ -1,3 +1,5 @@
+﻿Gwaith Rhoslyn Prys yw'r cyfieithiad hwn, copyright© 2009
+
 ==============================================================================
   Ffeil Darllen OmegaT 1.8
 

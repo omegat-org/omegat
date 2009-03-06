@@ -25,6 +25,8 @@
 
 package org.omegat.gui.editor;
 
+import java.awt.ComponentOrientation;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,6 +37,7 @@ import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.JEditorPane;
+import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
@@ -62,6 +65,9 @@ class OmTextArea extends JEditorPane {
     protected final UndoManager undoManager = new UndoManager();
 
     protected final EditorController controller;
+    
+    /** Label for draw segment marks. */
+    protected final JLabel segmentMarkLabel = new JLabel();
 
     public OmTextArea(EditorController controller) {
         this.controller = controller;
@@ -86,6 +92,26 @@ class OmTextArea extends JEditorPane {
         } catch (ClassCastException ex) {
             return null;
         }
+    }
+
+    /**
+     * Apply new font on segment mark label.
+     */
+    @Override
+    public void setFont(Font font) {
+        super.setFont(font);
+        if (segmentMarkLabel != null) {
+            segmentMarkLabel.setFont(new Font(font.getFontName(), Font.BOLD,
+                    font.getSize()));
+        }
+    }
+    
+    /**
+     * Getter for label for draw segment marks.
+     */
+    public JLabel getSegmentMarkLabel(final String text) {
+        segmentMarkLabel.setText(text);
+        return segmentMarkLabel;
     }
 
     protected MouseListener mouseListener = new MouseAdapter() {
@@ -164,6 +190,7 @@ class OmTextArea extends JEditorPane {
                 | KeyEvent.SHIFT_MASK)) {
             // handle Ctrl+Shift+O - toggle orientation LTR-RTL
             controller.toggleOrientation();
+            processed = true;
         } else if ((!mac && isKey(e, KeyEvent.VK_BACK_SPACE, KeyEvent.CTRL_MASK))
                 || (mac && isKey(e, KeyEvent.VK_BACK_SPACE, KeyEvent.ALT_MASK))) {
             // handle Ctrl+Backspace (Alt+Backspace for MacOS)

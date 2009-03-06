@@ -31,13 +31,13 @@ import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.event.DocumentEvent;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.BoxView;
 import javax.swing.text.CompositeView;
 import javax.swing.text.Element;
-import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.Position;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
@@ -150,6 +150,8 @@ public class OmDocument extends AbstractDocument implements StyledDocument {
 
             root.replace(0, 0, segElements);
 
+            putProperty( TextAttribute.RUN_DIRECTION, TextAttribute.RUN_DIRECTION_LTR );
+
             return segElements;
         } finally {
             writeUnlock();
@@ -213,11 +215,21 @@ public class OmDocument extends AbstractDocument implements StyledDocument {
                         desc.activeTranslationEndOffset);
             }
 
+            int updatedLen=Math.max(endSegmentPos-startSegmentPos, unflushedText.length());
+
             getData().flush(unflushedText, startSegmentPos,
                     endSegmentPos - startSegmentPos);
-
             // replace element
             root.replace(segmentIndex, 1, new Element[] { el });
+
+            /*
+             * We have to call 'postRemoveUpdate' for execute 'updateBidi'. It's
+             * not so good hack, but there is no way to execute it directly.
+             */
+            DefaultDocumentEvent chng = new DefaultDocumentEvent(
+                    startSegmentPos, updatedLen,
+                    DocumentEvent.EventType.CHANGE);
+            super.postRemoveUpdate(chng);
 
             // replace view
             View mainDocView = controller.editor.getUI().getRootView(
@@ -419,7 +431,9 @@ public class OmDocument extends AbstractDocument implements StyledDocument {
      */
     @Override
     public Element getParagraphElement(int pos) {
-        return root.getElement(root.getElementIndex(pos));
+        Element e= root.getElement(root.getElementIndex(pos));
+        Element p=e.getElement(e.getElementIndex(pos));
+        return p;
     }
 
     /**
@@ -574,9 +588,9 @@ public class OmDocument extends AbstractDocument implements StyledDocument {
         public OmElementSegPart(Element p, AttributeSet a, boolean langRTL) {
             super(p, a);
             this.langRTL = langRTL;
-            MutableAttributeSet attrs = (MutableAttributeSet) a;
-            attrs.addAttribute(TextAttribute.RUN_DIRECTION,
-                    new Boolean(langRTL));
+            addAttribute(TextAttribute.RUN_DIRECTION,
+                    langRTL ? TextAttribute.RUN_DIRECTION_RTL
+                            : TextAttribute.RUN_DIRECTION_LTR);
         }
 
         public String getName() {
@@ -720,13 +734,15 @@ public class OmDocument extends AbstractDocument implements StyledDocument {
     public class OmElementSegmentMark extends AbstractElement {
         protected final Position p0, p1;
         protected final boolean isBeginMark;
+        protected final String label;
 
         public OmElementSegmentMark(boolean isBeginMark, Element parent,
-                AttributeSet a, CharSequence text) {
+                AttributeSet a, String label) {
             super(parent, a);
             this.isBeginMark = isBeginMark;
+            this.label = label;
             p0 = getData().createUnflushedPosition(unflushedText.length());
-            unflushedText.append(text);
+            unflushedText.append(label.replaceAll(".", "-"));
             p1 = getData().createUnflushedPosition(unflushedText.length());
         }
 

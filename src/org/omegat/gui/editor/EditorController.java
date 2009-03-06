@@ -126,6 +126,7 @@ public class EditorController implements IEditor {
         this.mw = mainWindow;
 
         editor = new OmTextArea(this);
+        editor.setFont(Core.getMainWindow().getApplicationFont());
 
         pane = new DockableScrollPane("EDITOR", " ", editor, false);
         pane.setComponentOrientation(ComponentOrientation.getOrientation(Locale
@@ -198,6 +199,7 @@ public class EditorController implements IEditor {
                                 doc.setFont(newFont);
                             }
                         }
+                        editor.setFont(newFont);
                         emptyProjectPane.setFont(newFont);
                     }
                 });

@@ -1,54 +1,93 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Editace překladu - Omega 1.7.3 Uživatelská příručka</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Editace překladu - Omega 1.8 Uživatelská příručka</title>
 </head>
+
 <body>
+  <h2>Nastavení Pole editace</h2>
 
-	<h1>Nastavení Pole editace</h1>
+  <ul>
+    <li>
+      <p><a href="#auto_insert">Automatické vložení přibližného překladu</a></p>
+    </li>
 
-	<ul>
-		<li><a href="#auto_insert">Automatické vložení přibližného překladu</a></li>
-		<li><a href="#validation">Neupravovat segment</a></li>
-	</ul>
+    <li>
+      <p><a href="#validation">Neupravovat segment</a></p>
+    </li>
+  </ul>
 
+  <p>Chování pole editace můžeme nastavovat následujícími způsoby:</p>
 
-	<p>Chování pole editace můžeme nastavovat následujícími způsoby:</p>
-	
-	<ul>
-		<li>Automaticky vložit nejpřibližnější dostupný překlad</li>
-		<li>Segmenty, které se rovnají originálu, považovat za přeložené</li>
-	</ul>
-	
-	<hr>
-	
-	<a name="auto_insert" id="auto_insert"></a>
-	<h1>Automatické vložení přibližného překladu</h1>
-	
-	<p>Při překladu svých souborů přecházíte ze segmentu na segment, v daném okamžiku je pro úpravu aktivní jen jeden segment. Při přesunu mezi segmenty se nabízí možnost, aby  se pole pro editaci vyplnila buď dostupným překladem, nebo zdrojovým textem.</p>
-	
-	<p>V položce <strong>Možnosti → Nastavení editace...</strong> vám OmegaT nabízí následující volby:</p>
+  <ul>
+    <li>
+      <p>Automaticky vložit nejpřibližnější dostupný překlad</p>
+    </li>
 
-	<dl>
-		<dt><strong>Zdrojový text</strong></dt><dd>můžete automaticky vkládat zdrojový text do pole pro editaci. Toto je obzvláště užitečné pro text obsahující spoustu obchodních značek a jiných vlastních jmen, které je zapotřebí nechat nezměněné.</dd>
-		<dt><strong>Ponechat segment prázdný</strong></dt><dd>OmegaT ponechá pole pro editaci prázdné. Tato možnost vám umožní překládat bez potřeby odstraňovat zdrojový text, a tak vám ušetří množství přebytečných úderů na klávesy mazání (<code>Ctrl+A</code> a <code>Del</code>).</dd>
-		<dt><strong>Vložit nejpřibližnější překlad</strong></dt><dd>Omega vloží překlad řetězce, který je nejlépe odpovídá aktuálnímu zdroji, pokud je v tomto případě nastaven práh výše zmíněné podobnosti.</dd>
-	</dl>
+    <li>
+      <p>Segmenty, které se rovnají originálu, považovat za přeložené</p>
+    </li>
+  </ul>
+  <hr>
 
-<hr>
+  <h2><a name="auto_insert" id="auto_insert"></a>Automatické vložení přibližného překladu</h2>
 
-	<a name="validation" id="validation"></a>
-	<h1>Neupravovat segment</h1>
+  <p>Při překladu svých souborů přecházíte ze segmentu na segment, v daném okamžiku je pro úpravu aktivní jen jeden segment. Při přesunu mezi segmenty se nabízí možnost, aby  se pole pro editaci vyplnila buď dostupným překladem, nebo zdrojovým textem.</p>
 
-	<p>Dokumenty, které potřebujete přeložit, mohou obsahovat obchodní značky, názvy nebo jiná vlastní jména, která by měla v přeložených dokumentech zůstat stejná. Existují dva postupy pro segmenty, které obsahují jen takový neměnitelný text.</p>
+  <p>V položce <strong>Možnosti → Nastavení editace...</strong> vám OmegaT nabízí následující volby:</p>
 
-	<p>Za prvé, můžete se rozhodnout nepřekládat tyto segmenty, pokud byste si nezapamatovali, že tyto segmenty jsou neměnitelné, mohli byste je přeložit v průběhu revize překladu, a to v tom případě, že by program OmegaT tyto segmenty ohlásil jako nepřeložené. Toto odpovídá výchozímu nastavení.</p>
+  <table cellpadding="2" cellspacing="2">
+    <tr valign="top">
+      <td>
+        <p><strong>Zdrojový text</strong></p>
+      </td>
 
-	<p>Za druhé, můžete oznámit programu OmegaT, aby vkládal překlad, dokonce i pokud je shodný se zdrojovým textem, takže OmegaT si bude pamatovat, že jste si text prohlédli a rozhodli jste se ho přeložit jako ten samý text.  Přejděte na <strong>Možnosti→ Nastavení editace...</strong> a zaškrtněte označení <strong>Povolit překlad rovnající se zdroji</strong>.</p>
+      <td>
+        <p>můžete automaticky vkládat zdrojový text do pole pro editaci. Toto je obzvláště užitečné pro text obsahující spoustu obchodních značek a jiných vlastních jmen, které je zapotřebí nechat nezměněné.</p>
+      </td>
+    </tr>
 
-	<hr>
+    <tr valign="top">
+      <td>
+        <p><strong>Ponechat segment prázdný</strong></p>
+      </td>
 
-	<p><a href="legalNotices.html">Právní poznámky</a></p>
+      <td>
+        <p>OmegaT ponechá pole pro editaci prázdné. Tato možnost vám umožní překládat bez potřeby odstraňovat zdrojový text, a tak vám ušetří množství přebytečných úderů na klávesy mazání (<code>Ctrl+A</code> a <code>Del</code>).</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td>
+        <p><strong>Vložit nejpřibližnější překlad</strong></p>
+      </td>
+
+      <td>
+        <p>Omega vloží překlad řetězce, který je nejlépe odpovídá aktuálnímu zdroji, pokud je v tomto případě nastaven práh výše zmíněné podobnosti.</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2><a name="validation" id="validation"></a>Neupravovat segment</h2>
+
+  <p>Dokumenty, které potřebujete přeložit, mohou obsahovat obchodní značky, názvy nebo jiná vlastní jména, která by měla v přeložených dokumentech zůstat stejná. Existují dva postupy pro segmenty, které obsahují jen takový neměnitelný text.</p>
+
+  <p>Za prvé, můžete se rozhodnout nepřekládat tyto segmenty, pokud byste si nezapamatovali, že tyto segmenty jsou neměnitelné, mohli byste je přeložit v průběhu revize překladu, a to v tom případě, že by program OmegaT tyto segmenty ohlásil jako nepřeložené. Toto odpovídá výchozímu nastavení.</p>
+
+  <p>Za druhé, můžete oznámit programu OmegaT, aby vkládal překlad, dokonce i pokud je shodný se zdrojovým textem, takže OmegaT si bude pamatovat, že jste si text prohlédli a rozhodli jste se ho přeložit jako ten samý text.  Přejděte na <strong>Možnosti→ Nastavení editace...</strong> a zaškrtněte označení <strong>Povolit překlad rovnající se zdroji</strong>.</p>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Právní poznámky</a> </td>
+        <td style="text-align: center;"><a href="index.html">Obsah</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Tématický rejstřík</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
 </body>
 </html>

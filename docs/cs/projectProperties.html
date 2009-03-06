@@ -1,71 +1,79 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Vlastnosti projektu - OmegaT 1.6.2 Uživatelská příručka</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Vlastnosti projektu - OmegaT 1.8 Uživatelská příručka</title>
 </head>
+
 <body>
+  <h2>Vlastnosti projektu</h2>
 
-	<h1>Vlastnosti projektu</h1>
+  <ul>
+    <li>
+      <a href="#dialog">Dialogové okno Vlastnosti projektu</a>
 
-	<ul>
-		<li><a href="#dialog">Dialogové okno Vlastnosti projektu</a>
-			<ul>
-				<li><a href="#language">Jazykové úpravy</a></li>
-				<li><a href="#segments">Úpravy segmentace</a></li>
-				<li><a href="#folder">Úpravy adresářové struktury</a></li>
-			</ul>
-		</li>
-		<li><a href="#warning">Úpravy vlastností projektu během sezení</a></li>
-	</ul>
-	
-<hr>
+      <ul>
+        <li><a href="#language">Jazykové úpravy</a></li>
 
-	<a name="dialog" id="dialog"></a>
-	<h1>Dialogové okno Vlastnosti projektu</h1>
+        <li><a href="#segments">Úpravy segmentace</a></li>
 
-	<p>Toto dialogové okno se používá pro úpravu adresářů a jazyků projektu. Lze jej otevřít stiskem <code><a href= "menu.html#shortcuts">Ctrl+E</a></code> nebo volbou <strong>Projekt → Vlastnosti ...</strong> v rámci <a href="menu.html">hlavního menu</a>. Dialogové okno obsahuje:</p>
+        <li><a href="#folder">Úpravy adresářové struktury</a></li>
+      </ul>
+    </li>
 
-	<ul>
-		<li>Oblast s rozbalovacím menu pro nastavení zdrojového a cílového jazyka projektu </li>
-		<li>Označení nastavení segmentace</li>
-		<li>Oblast pro nastavení adresářů projektu</li>
-	</ul>
+    <li><a href="#warning">Úpravy vlastností projektu během sezení</a></li>
+  </ul>
+  <hr>
+  <a name="dialog" id="dialog"></a>
 
-	<p>Všechna pole lze editovat. Jazyky můžete zadat buď ručně, nebo použít rozbalovací menu. Můžete napsat názvy adresářů, které zatím nebyly vytvořeny, a OmegaT je vytvoří za vás.</p>
-	
+  <h2>Dialogové okno Vlastnosti projektu</h2>
 
-	<a name="language" id="language"></a>
-	<h2>Jazykové úpravy</h2>
-	
-	<p>Mějte na paměti, že změna jazyků může způsobit, že aktuálně používané překladové paměti budou nepoužitelné, pokud se už neshodují s nově nastavenými jazyky.</p>
-	
-	<a name="segments" id="segments"></a>
-	<h2>Úpravy segmentace</h2>
-	
-	<p>Nastavení segmentace upravuje způsob, jakým OmegaT nakládá se zdrojovými soubory. Neupravují segmentaci již existujících překladových pamětí.</p>
-	
-	<p>Pokud změníte nastavení segmentace, některé již přeložené segmenty se mohou rozštěpit nebo sloučit. To je prakticky navrátí do "nepřeloženého" stavu, protože neodpovídají segmentům uloženým v paměti projektu, dokonce i přesto, že dřívější a teď nekorespondující překlad je stále v projektu.</p>
-	
-	<p>OmegaT může <a href= "translationMemories.html#Upgrading_Translation_Memories">aktualizovat staré překladové paměti</a>, které nepoužívali segmentaci podle vět, ale ne naopak, a nemůže upgradovat překladovou paměť projektu, jak si rozmyslíte v průběhu překladu.</p>
+  <p>Toto dialogové okno se používá pro úpravu adresářů a jazyků projektu. Lze jej otevřít stiskem <code><a href="menu.html#shortcuts">Ctrl+E</a></code> nebo volbou <strong>Projekt → Vlastnosti ...</strong> v rámci <a href=
+  "menu.html">hlavního menu</a>. Dialogové okno obsahuje:</p>
 
-	<a name="folder" id="folder"></a>
-	<h2>Úpravy adresářové struktury</h2>
-	
-	<p>V případě, že zamýšlíte upravit adresáře projektu, mějte na paměti, že toto nepřesune obsažené soubory ze starých adresářů do nových. Riskujete, že skončíte v situaci, kdy ani vy ani OmegaT nebude vědět, které z adresářů se vůbec používají.</p>
+  <ul>
+    <li>Oblast s rozbalovacím menu pro nastavení zdrojového a cílového jazyka projektu </li>
 
-<hr>
+    <li>Označení nastavení segmentace</li>
 
-	<a name="warning" id="warning"></a>
-	<h1>Úpravy vlastností projektu během sezení</h1>
+    <li>Oblast pro nastavení adresářů projektu</li>
+  </ul>
 
-	<p>Během překládání je ještě možné upravovat vlastnosti projektu.</p>
-	
-	<p>Když už je překlad zahájen, měla by být veškerá nastavení považována za konečná, až na případ, že byste si uvědomili, že při nastavení vyvstala zásadní chyba. Způsoby jak ochránit vaši práci naleznete v sekci <a href= "preventingDataLoss.html">Prevence ztráty dat</a>.</p>
+  <p>Všechna pole lze editovat. Jazyky můžete zadat buď ručně, nebo použít rozbalovací menu. Můžete napsat názvy adresářů, které zatím nebyly vytvořeny, a OmegaT je vytvoří za vás.</p><a name="language" id="language"></a>
 
+  <h3>Jazykové úpravy</h3>
 
-	<hr>
+  <p>Mějte na paměti, že změna jazyků může způsobit, že aktuálně používané překladové paměti budou nepoužitelné, pokud se už neshodují s nově nastavenými jazyky.</p><a name="segments" id="segments"></a>
 
-	<p><a href="legalNotices.html">Právní poznámky</a></p>
+  <h3>Úpravy segmentace</h3>
+
+  <p>Nastavení segmentace upravuje způsob, jakým OmegaT nakládá se zdrojovými soubory. Neupravují segmentaci již existujících překladových pamětí.</p>
+
+  <p>Pokud změníte nastavení segmentace, některé již přeložené segmenty se mohou rozštěpit nebo sloučit. To je prakticky navrátí do „nepřeloženého“ stavu, protože neodpovídají segmentům uloženým v paměti projektu, dokonce i přesto, že dřívější a teď nekorespondující překlad je stále v projektu.</p>
+
+  <p>OmegaT může <a href="translationMemories.html#upgrading_TM">aktualizovat staré překladové paměti</a>, které nepoužívali segmentaci podle vět, ale ne naopak. Pokud změníte během překladu názor, překladová paměť už zůstane beze změny.</p><a name="folder" id=
+  "folder"></a>
+
+  <h3>Úpravy adresářové struktury</h3>
+
+  <p>V případě, že zamýšlíte upravit adresáře projektu, mějte na paměti, že toto nepřesune obsažené soubory ze starých adresářů do nových. Riskujete, že skončíte v situaci, kdy ani vy ani OmegaT nebude vědět, které z adresářů se vůbec používají.</p>
+  <hr>
+  <a name="warning" id="warning"></a>
+
+  <h2>Úpravy vlastností projektu během sezení</h2>
+
+  <p>Během překládání je ještě možné upravovat vlastnosti projektu. Když už je překlad zahájen, měla by být veškerá nastavení považována za konečná, až na případ, že byste si uvědomili, že při nastavení vyvstala zásadní chyba. Způsoby jak ochránit vaši práci naleznete v sekci <a href="preventingDataLoss.html">Prevence ztráty dat</a>.</p>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Právní poznámky</a> </td>
+        <td style="text-align: center;"><a href="index.html">Obsah</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Tématický rejstřík</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
 </body>
 </html>

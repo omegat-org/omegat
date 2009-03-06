@@ -192,7 +192,7 @@ can be applied or not with a new option in Options/Font.
 ----------------------------------------------------------------------
 1.8.1 update 3 vs. 1.8.1 update 2
 
-   1 Enhancement
+   2 Enhancements
    1 Bugfix
 ----------------------------------------------------------------------
 1.8.1 update 3
@@ -200,6 +200,7 @@ can be applied or not with a new option in Options/Font.
   Other enhancements:
 
   - New Welsh localisation (UI, readme, instant start)
+  - czech localisation updated to 1.8 (UI, readme, instant start, documentation)
 
   Bug fixes:
 

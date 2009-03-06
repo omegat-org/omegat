@@ -1,124 +1,188 @@
 <html>
 <head>
 	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Vyhledávání - OmegaT 1.7.3 Uživatelská příručka</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Vyhledávání - OmegaT 1.8 Uživatelská příručka</title>
 </head>
+
 <body>
+  <h2>Vyhledávání</h2>
 
-	<h1>Vyhledávání</h1>
+  <ul>
+    <li>
+      <p><a href="#searchwindow">Okno Hledat</a></p>
 
-	<ul>
-		<li><a href="#searchwindow">Okno Hledat</a>
-			<ul>
-				<li><a href="#calling">Spustit funkci Hledat</a></li>
-				<li><a href="#location">Umístění</a></li>
-			</ul>
-		</li>
-		<li><a href="#searchmethods">Metody vyhledávání</a></li>
-		<li><a href="#usingwildcards">Použití zástupných znaků</a></li>
-		<li><a href="#usingregularexpressions">Použití regulárních výrazů</a></li>
-		<li><a href="#display">Zobrazení výsledků hledání</a></li>
-	</ul>
+      <ul>
+        <li>
+          <p><a href="#calling">Spustit funkci Hledat</a></p>
+        </li>
+
+        <li>
+          <p><a href="#location">Umístění</a></p>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <p><a href="#searchmethods">Metody vyhledávání</a></p>
+
+  <p><a href="#usingwildcards">Použití zástupných znaků</a></p>
+
+  <p><a href="#usingregularexpressions">Použití regulárních výrazů</a></p>
+
+  <p><a href="#display">Zobrazení výsledků hledání</a></p>
+  <hr>
+
+  <h2><a name="searchwindow" id="searchwindow"></a>Okno Hledat</h2><img src=
+  "images/TextSearch.png" name="graphics1" align="left" width="659" height=
+  "446" border="0" id="graphics1" alt="Okno hledání v textu"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <h3><a name="calling" id="calling"></a>Spustit funkci Hledat</h3>
+
+  <p>OmegaT poskytuje množství výkonných vyhledávacích funkcí. Okno <strong>Hledat</strong> otevřete pomocí zkratky <code>Ctrl+F</code>, následně zadejte slovo nebo frázi, kterou chcete vyhledat do pole <strong>Hledat</strong>. Nebo označte slovo nebo frázi v editačním poli (cílový text aktivního segmentu) a stiskněte <code>Ctrl+F</code>. Slovo nebo fráze je v tomto případě zadané do pole <strong>Hledat</strong> automaticky.</p>
+
+  <p>Každým spuštěním okna <strong>Hledat</strong> se otevře nové samostatné okno. Nezapomeňte jej zavřít, aby vám tato okna nezahltila pracovní plochu.</p>
+
+  <h3><a name="location" id="location"></a>Umístění</h3>
+
+  <p>Vyhledávání probíhá jak ve zdrojové, tak i v cílové sekci projektu. Prohledávat lze</p>
+
+  <ul>
+    <li>
+      <p>pouze projekt (výchozí nastavení)</p>
+    </li>
+
+    <li>
+      <p>projekt a referenční překladové paměti v /tm/ (označte <i>Prohledávat překladové paměti</i>)</p>
+    </li>
+
+    <li>
+      <p>jednotlivý soubor nebo adresář obsahující sadu souborů (označte <i>Prohledávat soubory</i>)</p>
+    </li>
+  </ul>
+
+  <p>když procházíte soubory, bude OmegaT prohledávat jen takové soubory, které dokáže přečíst (vizte <a href="filesToTranslate.html">Podporované formáty souborů</a>).</p>
+  <hr>
+
+  <h2><a name="searchmethods" id="searchmethods"></a>Metody vyhledávání</h2>
+
+  <p>Vyberte metodu hledání pomocí přepínacích tlačítek. Můžete si vybrat mezi dvěma metodami hledání:</p>
+
+  <table width="555" border="0" cellpadding="3" cellspacing="0">
+    <col width="115">
+    <col width="428">
+
+    <tr>
+      <td width="115">
+        <p><strong>Přesné vyhledávání</strong></p>
+      </td>
+
+      <td width="428">
+        <p>Vyhledávání segmentů obsahujících zadaný řetězec.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="115">
+        <p><strong>Hledat podle klíčových slov</strong></p>
+      </td>
+
+      <td width="428">
+        <p>Hledá segmenty obsahující všechna klíčová slova, která jste zadali, v jakémkoliv pořadí.</p>
+      </td>
+    </tr>
+  </table>
+
+  <p><strong>Přesné vyhledávání</strong> hledá slovní spojení, tj. pokud je zadaných několik slov, budou tato nalezena jen pokud se nacházejí v přesně stejném pořadí. Přesné hledání je podobné hledání „přesného výrazu“ v internetovém vyhledávači typu Google.</p>
+
+  <p>Vyberte <strong>Hledat podle klíčových slov</strong> a bude se vyhledávat jakékoliv množství samostatných slov, oddělených mezerami a v jakémkoliv pořadí. OmegaT zobrazí seznam všech segmentů, ve kterých se všechna tato slova vyskytují. Vyhledávání podle klíčových slov je podobné jako hledání „se všemi slovy“ v internetovém vyhledávači typu Google (logika AND).</p>
+
+  <p>Pro kteroukoliv z těchto metod můžete vybrat následující tři volby:</p>
+
+  <table width="556" border="0" cellpadding="3" cellspacing="0">
+    <col width="116">
+    <col width="428">
+
+    <tr>
+      <td width="116">
+        <p><strong>Rozlišovat velikost písmen</strong></p>
+      </td>
+
+      <td width="428">
+        <p>Pokud je toto vybrané, hledání bude vykonané pro přesný řetězec, který jste zadali; jinak budou velká písmena ignorována.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="116">
+        <p><strong>Regulární výrazy</strong></p>
+      </td>
+
+      <td width="428">
+        <p>Výběr znamená, že s hledaným řetězcem se bude zacházet jako s regulárním výrazem (v případě hledání klíčového slova se to bude brát jako vícenásobný výraz).</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="116">
+        <p><strong>Prohledávat překladové paměti</strong></p>
+      </td>
+
+      <td width="428">
+        <p>Do procesu hledání zahrnuty všechny překladové paměti.</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2><a name="usingwildcards" id="usingwildcards"></a>Použití zástupných znaků</h2>
+
+  <p>V přesném vyhledávání, a i při hledání podle klíčových slov, mohou být použity zástupné vyhledávací znaky '<code>*</code>' a '<code>?</code>' . Pro použití zástupných znaků se ujistěte, že není vybrána volba <strong>regulární výrazy</strong>, jinak budou tyto znaky interpretovány jako speciální znaky regulárních výrazů.</p>
+
+  <ul>
+    <li>
+      <p>'<strong>*</strong>' reprezentuje nula nebo více znaků. Vyhledávané položce '<strong>run*</strong>' by například odpovídalo '<strong>run</strong>', '<strong>runs</strong>' a '<strong>running</strong>'.</p>
+    </li>
+
+    <li>
+      <p>'<strong>?</strong>' reprezentuje jeden znak. Například hledanému '<strong>run?</strong>' by odpovídalo '<strong>runs</strong>' a '<strong>rung</strong>', ale ne '<strong>run</strong>' nebo '<strong>running</strong>'.</p>
+    </li>
+  </ul>
+
+  <p>Pokud chcete vyhledat segmenty obsahující buď <strong>*</strong>, a nebo <strong>?</strong>, budete muset zapnout regulární výrazy a citovat je tak, že před ně přidáte zpětné lomítko ('\'), tj. '\*' pro nalezení výskytů  'x*y' a 'x\?<code>y</code>' pro nalezení výskytů ''<code>x?y</code>''.</p>
+  <hr>
+
+  <h2><a name="usingregularexpressions" id="usingregularexpressions"></a>Použití regulárních výrazů</h2>
+
+  <p>Vyhledávání pomocí regulárních výrazů představuje silný nástroj pro hledání výskytů daného řetězce. Je to podobné jako normální hledání, ale umožňuje daleko větší flexibilitu. Regulární výrazy použité při vyhledávání jsou takové, které podporuje Java. Krátký přehled je dostupný v dodatku <a href="regexp.html">Regulární výrazy</a> Pokud potřebujete bližší informace, navštivte prosím tuto stránku: <a href=
+  "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+
+  <p>Na internetu můžete najít jednoduché nápovědy (např. <a href=
+  "http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)</p>
+  <hr>
+
+  <h2><a name="display" id="display"></a>Zobrazení výsledků hledání</h2>
+
+  <p>Stisknutí tlačítka pro vyhledávání po zadání řetězce do vyhledávacího pole zobrazí všechny segmenty v projektu, které obsahují hledaný řetězec. Protože OmegaT zpracovává identické segmenty jako jednu entitu, zobrazuje se jen první jedinečný segment.</p>
+
+  <p>Segmenty jsou zobrazované v takovém pořadí, v jakém se nacházejí v projektu.  Přeložené segmenty se zobrazí s původním textem nahoře a přeloženým textem dole, nepřeložené segmenty se zobrazí jen s původním textem.</p>
+
+  <p>Pokud chcete segment zpracovávat v Editoru, stačí na něj kliknout. Potom se můžete vrátit zpět do okna Hledat a přejít na další nalezený segment, například abyste jej mohli upravit a pokud nutno přizpůsobit terminologii.</p>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Právní poznámky</a> </td>
+        <td style="text-align: center;"><a href="index.html">Obsah</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Tématický rejstřík</a> </td>
+      </tr>
+    </tbody>
+  </table>
 
 
-
-<hr>
-
-	<a name="searchwindow" id="searchwindow"></a>
-	<h1>Okno Hledat</h1>
-
-	<a name="calling" id="calling"></a>
-	<h2>Spustit funkci Hledat</h2>
-	
-	<p>OmegaT poskytuje množství výkonných vyhledávacích funkcí. Okno <strong>Hledat</strong> otevřete pomocí zkratky <code>Ctrl+F</code>, následně zadejte slovo nebo frázi, kterou chcete vyhledat do pole <strong>Hledat</strong>.</p>
-	
-	<p>Nebo označte slovo nebo frázi v editačním poli (cílový text aktivního segmentu) a stiskněte <code>Ctrl+F</code>. Slovo nebo fráze je v tomto případě zadáno do pole <strong>Hledat</strong> automaticky.</p>
-
-	<p>Opakované spuštění okna <strong>Hledat</strong> otevře nové samostatné okno. Pokud je zapomenete zavírat, může se stát, že bude otevřeno velké množství oken Hledat.</p>
-	
-	<a name="location" id="location"></a>
-	<h2>Umístění</h2>
-	
-	<p>Vyhledávání probíhá jak ve zdrojové, tak i v cílové sekci projektu. Prohledávat lze</p>
-
-	<ul>
-		<li>pouze projekt (výchozí nastavení)</li>
-		<li>projekt a referenční překladové paměti v /tm/ (označte <i>Prohledávat překladové paměti</i>)</li>
-		<li>jednotlivý soubor nebo adresář obsahující sadu souborů (označte <i>Prohledávat soubory</i>)</li>
-	</ul>
-
-	<p>U posledního případu, bude OmegaT prohledávat jen soubory, které dokáže přečíst (viz <a href="filesToTranslate.html">Podporované formáty souborů</a>).</p>
-
-
-
-<hr>
-
-	<a name="searchmethods" id="searchmethods"></a>
-	<h1>Metody vyhledávání</h1>
-
-	<p>Vyberte metodu hledání pomocí přepínacích tlačítek. Můžete si vybrat mezi dvěma metodami hledání:</p>
-
-	<dl>
-		<dt><strong>přesné vyhledávání</strong></dt><dd>Vyhledávání segmentů obsahujících zadaný řetězec.</dd>
-		<dt><strong>hledat podle klíčových slov</strong></dt><dd>Hledá segmenty obsahující všechna klíčová slova, která jste zadali, v jakémkoliv pořadí.</dd>
-	</dl>
-
-	<p>Pro kteroukoliv z těchto metod můžete vybrat následující tři volby:</p>
-
-	<dl>
-		<dt><strong>Rozlišovat velikost písmen</strong></dt><dd>Pokud je toto vybrané, hledání bude vykonané pro přesný řetězec, který jste zadali; jinak budou velká písmena ignorována.</dd>
-		<dt><strong>Regulární výrazy</strong></dt><dd>Výběr znamená, že s hledaným řetězcem se bude zacházet jako s regulárním výrazem (v případě hledání klíčového slova se to bude brát jako vícenásobný výraz).</dd>
-		<dt><strong>Prohledávat překladové paměti</strong></dt><dd>Když je toto vybráno, tak jsou v procesu hledání zahrnuty všechny překladové paměti.</dd>
-	</dl>
-
-	<p><strong>Přesné vyhledávání</strong> hledá slovní spojení, tj. pokud je zadaných několik slov, budou tato nalezena jen pokud se nacházejí v přesně stejném pořadí. Přesné hledání je podobné hledání "přesného výrazu" v internetovém vyhledávači typu Google.</p>
-
-	<p>Vyberte <strong>Hledat podle klíčových slov</strong> a bude se vyhledávat jakékoliv množství samostatných slov, oddělených mezerami a v jakémkoliv pořadí. OmegaT zobrazí seznam všech segmentů, ve kterých se všechna tato slova vyskytují. Vyhledávání podle klíčových slov je podobné jako hledání "se všemi slovy" v internetovém vyhledávači typu Google (logika AND).</p>
-
-
-
-<hr>
-
-	<a name="usingwildcards" id="usingwildcards"></a>
-	<h1>Použití zástupných znaků</h1>
-
-	<p>V přesném vyhledávání, a i při hledání podle klíčových slov, mohou být použity zástupné vyhledávací znaky '<code>*</code>' a '<code>?</code>' . Pro použití zástupných znaků se ujistěte, že není vybrána volba <strong>regulární výrazy</strong>, jinak budou tyto znaky interpretovány jako speciální znaky regulárních výrazů.</p>
-	
-	<p>Znak '<strong>*</strong>' zastupuje nula nebo více znaků (vyhledávané položce '<strong>run*</strong>' by například odpovídalo '<strong>run</strong>', '<strong>runs</strong>' a '<strong>running</strong>').</p>
-	
-	<p>Znak '<strong>?</strong>' zastupuje konkrétně jeden znak (hledanému '<strong>run?</strong>' by například odpovídalo '<strong>runs</strong>' a '<strong>rung</strong>', ale ne '<strong>run</strong>' nebo '<strong>running</strong>').</p>
-
-	<p>Pokud chcete vyhledat segmenty obsahující buď <strong>*</strong>, a nebo <strong>?</strong>, budete muset zapnout regulární výrazy a citovat je tak, že před ně přidáte zpětné lomítko ('\'), tj. '\*' pro nalezení výskytů  'x*y' a 'x\?<code>y</code>' pro nalezení výskytů ''<code>x?y</code>''.</p>
-
-
-
-<hr>
-
-	<a name="usingregularexpressions" id="usingregularexpressions"></a>
-	<h1>Použití regulárních výrazů</h1>
-
-	<p>Vyhledávání pomocí regulárních výrazů představuje silný nástroj pro hledání výskytů daného řetězce. Je to podobné jako normální hledání, ale umožňuje daleko větší flexibilitu.</p>
-	
-	<p>Regulární výrazy použité při vyhledávání jsou takové, které podporuje Java. Krátký přehled je dostupný v dodatku <a href="regexp.html">Regulární výrazy</a></p>
-	
-	<p>Pokud potřebujete bližší informace, navštivte prosím tuto stránku: <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">//java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
-		
-	<p>Na internetu můžete najít jednoduché nápovědy (např. <a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)</p>
-	
-<hr>
-
-	<a name="display" id="display"></a>
-	<h1>Zobrazení výsledků hledání</h1>
-	
-	<p>Stisknutí tlačítka pro vyhledávání po zadání řetězce do vyhledávacího pole zobrazí všechny segmenty v projektu, které obsahují hledaný řetězec. Protože OmegaT zpracovává identické segmenty jako jednu entitu, zobrazuje se jen první jedinečný segment.</p>
-	
-	<p>Segmenty jsou zobrazované v takovém pořadí, v jakém se nacházejí v projektu.  Přeložené segmenty se zobrazí s původním textem nahoře a přeloženým textem dole, nepřeložené segmenty se zobrazí jen s původním textem.</p>
-
-	<p>Pokud chcete segment zpracovávat v Editoru, stačí na něj kliknout. Potom se můžete vrátit zpět do okna Hledat a přejít na další nalezený segment, který můžete taktéž upravovat. Takovýto postup je užitečný zejména pro aktualizaci terminologie.</p>
-
-	<hr>
-	
-	<p><a href="legalNotices.html">Právní poznámky</a></p>
 </body>
 </html>

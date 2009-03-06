@@ -1,0 +1,98 @@
+<html>
+<head>
+  <link rel="stylesheet" href="OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Kontrola pravopisu - OmegaT 1.8 Uživatelská příručka</title>
+</head>
+
+<body>
+  <h2>Kontrola pravopisu</h2>
+  <hr>
+
+  <ul>
+    <li>
+      <p><a href="Úvod">Úvod</a></p>
+    </li>
+
+    <li>
+      <p><a href="#edit_dialog">Možnosti kontroly pravopisu</a></p>
+    </li>
+
+    <li>
+      <p><a href="Rady">Rady</a></p>
+    </li>
+  </ul>
+
+  <p><br></p>
+
+  <h3><a name="introduction" id="introduction"></a>Úvod</h3>
+
+  <p><br></p>
+
+  <p>Aby bylo možno opravovat překlepy a chyby během překladu, můžete si nainstalovat kontrolu pravopisu a tato funkce bude označovat slova v cílovém textu, který potřebujete opravit. Není to nic překvapivého: OmegaT používá kontrolu pravopisu <a href=
+  "http://hunspell.sourceforge.net/">Hunspell</a>, kterou mj. používají i programy jako OpenOffice.org, Firefox a Thunderbird. Pokud používáte některý z těchto programů, asi už máte nainstalovány soubory kontroly pravopisu a zbývá je už jen propojit s aplikací OmegaT.</p>
+
+  <p>Jakmile jednou kontrolu pravopisu aktivujete a pokud je dostupný slovník cílového jazyka, kontrola pravopisu bude kontrolovat cílové segmenty, které jsou zrovna zobrazené v okně Editoru. Sporná slova budou podtržena červenou vlnovkou:</p>
+
+  <p><br>
+  <br></p><img src="images/SpellcheckingText.png" name="grafika1" alt=
+  "Kontrola pravopisu v textu" align="left" width="535" height="302" border="0"
+  id="grafika1"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>Když kliknete pravým tlačítkem myši na zvýrazněné slovo (například zde <i>Artund</i>) objeví se rozbalovací menu, kde je vyobrazen seznam návrhů oprav (<i>Art und</i>). Navíc můžete při kontrole pravopisu volit možnosti <b>ignorovat vše</b>, a veškeré výskyty slova budou ignorovány, nebo <b>přidat do slovníku</b>. Jedná se ale o online kontrolu pravopisu: pokud provádíte souhrnnou kontrolu pravopisu textu, budete muset projít text sami a vyhledat podtržená slova. Jiný způsob jak zkontrolovat pravopis cílového souboru nabízí textový editor, jinými slovy mimo aplikaci OmegaT a to znamená, že provedené změny se neprojeví v překladové paměti.</p>
+
+  <p><br>
+  <br></p>
+
+  <h3><a name="edit_dialog" id="edit_dialog"></a>Možnosti kontroly pravopisu</h3>
+
+  <p>Klikněte na <b>Možnosti &gt; Kontrola pravopisu</b> a následně se otevře toto okno:</p>
+
+  <p><br></p><img src="images/SpellcheckerSetup2.png" name="grafika2" alt=
+  "Nastavení kontroly pravopisu" align="left" width="498" height="325" border="0" id=
+  "grafika2"><br clear="left">
+
+  <p><br></p>
+
+  <p>Výše uvedený příklad obsahuje dostupné slovníky. Zpočátku neuvidíte žádný slovník a bude nutno určit cíl, kde má OmegaT slovníky hledat. Kliknutím na <strong>Zvolit ...</strong> otevřete dialogové okno, ve kterém označíte požadovaný podadresář - <b>Adresář slovníků</b> - což je v našem případě <i>C:\Program Files\OpenOffice.org 2.4\share\dict\ooo</i>. Toto je zajisté adresář, ve kterém jsou uloženy slovníky Open source. OmegaT zde rozpozná platné slovníky a zobrazí je. Pokud se zde nachází slovík, který hledáte, a našla jej i OmegaT, máte vyhráno. Pokud tomu tak není, poznáte to podle prázdného pole, kde by normálně byly slovníky uvedeny, můžete kliknout na <b>Instalovat ...</b> a OmegaT se poohlédne po dostupných slovnících. Označte slovníky v pop-up okně a klikněte na <b>Instalovat</b>. Označené jazyky budou nainstalovány a zobrazí se v okně Nastavení kontroly pravopisu (instalace může chvíli trvat).</p>
+
+  <p>Mějte na paměti, že instalátor získává informace z internetu a podle toho tvoří seznam slovníků. OmegaT získává tento seznam z adresy <a href=
+  "http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/"> OpenOffice.org/contrib/dictionaries</a>. V případě, že tento odkaz již není aktuální, poohlédněte se po slovnících na internetu sami. Hledejte takové soubory, které už svým názvem naznačují jméno hledaného jazyka, a které mají koncovky <i>aff</i> a <i>dic.</i>. Stránky The OpenOffice.org Wiki obsahují v části <a href=
+  "http://wiki.services.openoffice.org/wiki/Dictionaries">OpenOffice.org Wiki Dictionaries</a> pravděpodobně největší sbírku slovníků. Slovníky kompatibilní s aplikací OmegaT jsou slovníky „Hunspell“ nebo „Myspell“.</p>
+
+  <p>Ujistěte se, že jazykový kód cílových souborů odpovídá jazykovému kódu slovníku: slovník FR-FR nebude spolupracovat s cílovým nastavením FR. Musíte změnit nastavení na FR-FR, aby Kontrola pravopisu správně rozeznala potřebný slovník pro váš cílový soubor.</p>
+
+  <h3><a name="Hints" id="Hints"></a>Rady</h3>
+
+  <p>Možné důvody proč Kontrola pravopisu nefunguje:</p>
+
+  <ol>
+    <li>
+      <p>Musíte mít zaškrtnuto políčko „Automaticky zkontrolovat pravopis textu“.</p>
+    </li>
+
+    <li>
+      <p>Zkontrolujte, zda jazykový kód cíle vašeho projektu odpovídá dostupným slovníkům v okně nastavení Kontroly pravopisu. Kontrola pravopisu určuje jazyk, který použije, podle jazykového kódu cíle: pokud je cílový jazyk Brazilská portugalština (PT_BR), musí podadresář se slovníky obsahovat dva slovníkové soubory pojmenované pt_br.aff a pt_br.dic.</p>
+    </li>
+  </ol>
+
+  <p>V případě, že jste již přeložili velkou část textu, ale až posléze jste si uvědomili, že kód cílového jazyka projektu nesouhlasí s kódem jazyka v Kontrole pravopisu (zadali jste EN jako jazyk, ale nemáte EN slovník) můžete jednoduše zkopírovat oba potřebné soubory (například pt_PT.arr a pt_PT.dic) a kopie přejmenovat (na pt_BR.arr a pt_BR.dic). Stejně tak můžete změnit kód jazyka v projektu (z pt na pt_BR), nicméně je pak nutno tuto změnu provést i ve všech souborech TMX ve vašem projektu, což ale není úplně bezpečné. </p>
+
+  <p>Pozor: volba Odinstalovat ... fyzicky smaže zvýrazněné slovníky. Pokud jsou slovníky součástí OpenOffice, jak v uvedeném příkladu, budou odstraněny i z této aplikace. Pokud z jakéhokoliv důvodu budete chtít slovníky opakovaně instalovat a odstraňovat, bude lepší zkopírovat potřebné soubory do jiného adresáře, který bude sloužit jen pro účely aplikace OmegaT.</p>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Právní poznámky</a> </td>
+        <td style="text-align: center;"><a href="index.html">Obsah</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Tématický rejstřík</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

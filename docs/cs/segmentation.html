@@ -1,144 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Segmentace zdroje - OmegaT 1.7.3 Uživatelská příručka</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Segmentace zdroje - OmegaT 1.8 Uživatelská příručka</title>
 </head>
-
 <body>
-	<h1>Segmentace zdroje</h1>
-
-	<ul>
-		<li><a href="#structure">Segmentace na úrovni struktury</a></li>
-		<li><a href="#sentence">Segmentace na úrovni vět</a>
-			<ul>
-				<li><a href="#about">Pravidla segmentace</a></li>
-				<li><a href="#setup">Nastavení pravidel</a>
-					<ul>
-						<li><a href="#priority">Priorita</a></li>
-						<li><a href="#creation">Vytváření pravidel</a></li>
-						<li><a href="#breal">Zlom/Výjimka</a></li>
-						<li><a href="#setup">Jednoduché příklady</a></li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-		<li><a href="regexp.html">Pojmy regulárních výrazů</a></li>
-	</ul>
-	
-	<p>Nástroje pro práci s překladovými paměťmi pracují s textovými jednotkami nazývanými segmenty. OmegaT má dva způsoby segmentace textu: segmentace podle odstavců a segmentace na úrovni vět.</p>
-
-	<p>Pro výběr typu segmentace, označte <strong>Projekt → Vlastnosti...</strong> z hlavního menu a použijte nabízené zaškrtávací políčko.</p>
-
-	<p>Pokud je vybráno Segmentace na úrovni vět, pak můžete nastavit pravidla vybráním položky <strong>Možnosti → Segmentace...</strong> v hlavním menu.</p>
-
-	<p>Povšimněte si, že velkou část vývoje zabralo sepsání spolehlivých segmentačních pravidel, takže ve většině případů nebudete potřebovat zapisovat vlastní pravidla segmentace. Na druhou stranu tato funkce může být velmi užitečná ve speciálních případech, umožňuje vám přeložit co potřebujete, a to bez riskování změn u případů, které mají zůstat nezměněny.</p>
-	
-	<p><strong>Pozor!</strong> Když je projekt otevřen, může změna možností filtrů způsobit ztrátu dat. Pokud změníte volby segmentace, když je otevřený nějaký projekt, budete muset projekt znovu načíst, aby se změny projevily.</p>
-
-
-	<hr>
-	<a name="structure" id="structure"></a>
-	<h1>Segmentace na úrovni struktury</h1>
-
-	<p>OmegaT nejprve zpracuje text pomocí segmentace na úrovni struktur. Během tohoto procesu je to jen struktura zdrojového souboru, která je použitá na vytvoření segmentů.</p>
-	
-	<p>Například <a href="fileFilters.html#filter_options">textové soubory</a> mohou být segmentovány podle zlomů řádků, prázdných řádků nebo vůbec nemusí být segmentovány na strukturální úrovni. Soubory s formátováním (OpenOffice.org, HTML, atd.) jsou segmentovány na úrovni tagů bloků (odstavce). <a href="fileFilters.html#filter_options">Atributy</a> přeložitelných objektů v souborech XHTML nebo HTML lze extrahovat jako samostatné segmenty.</p>
-
-	<hr>
-	<a name="sentence" id="sentence"></a>
-	<h1>Segmentace na úrovni vět</h1>
-
-	<p>Po segmentaci zdrojového souboru podle logických jednotek, bude OmegaT dále segmentovat tyto bloky do vět.</p>
-	
-	<a name="about" id="about"></a>
-	<h2>Pravidla segmentace</h2>
-
-	<p>Průběh segmentace lze znázornit následovně: představte si kurzor pohybující se v textu, vždy po jednom znaku. Pro každou pozici kurzoru je aplikováno každé pravidlo v zadaném pořadí, aby se ověřilo zda vzor <strong>Před</strong> platí pro text nalevo a vzor <strong>Za</strong> pro text vpravo za kurzorem. Pokud pravidlo lze aplikovat, program zastaví zkoušení pravidel (pro pravidlo 'výjimka') nebo vytvoří nový segment (pro pravidlo 'zlom')</p>
-
-	<p>Segmentace na úrovni vět byla realizována za pomoci standardu Výměny segmentačních pravidel:  <a href= "http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a> - prosím povšimněte si, že všechny rysy SRX jsou podporovány. A není možné importovat/exportovat pravidla ve formátu SRX. Pokud víte jak SRX pracuje, budete již vědět mnohé o tom, jak OmegaT provádí segmentaci.</p>
-
-	<p>Máme tu dva druhy pravidel:</p>
-
-	<ul>
-		<li><strong>Pravidlo zlomu</strong> rozdělí zdrojový text na segmenty.<p><strong>Příklad</strong>: <i>"Did it make sense? I was not sure."</i> by mělo být rozděleno na dva segmenty.<br> Mělo by zde být pravidlo rozdělování pro "<code>?</code>".</p></li>
-		<li><strong>Pravidlo výjimky</strong> udává, které části textu NEmají být rozděleny.<p><strong>Příklad</strong>: <i>"Mrs. Dalloway "</i> by nemělo být rozděleno, tzn. mělo by být založeno pravidlo výjimky pro Mrs, které je následováno tečkou (stejně tak Mr a Dr a prof atd.)</p></li>
-	</ul>
-
-	<p>Předdefinovaná pravidla by měla být dostatečná pro většinu evropských jazyků a Japonštinu. V rámci flexibility můžete zvážit definování více pravidel pro výjimky pro jazyk ze kterého překládáte, abyste získali smysluplnější a souvislejší segmenty.</p>
-
-	<a name="setup" id="setup"></a>
-	<h2>Nastavení pravidel</h2>
-
-
-	<a name="priority" id="priority"></a>
-	<h3>Priorita</h3>
-
-	<p>Všechny sady pravidel segmentace s odpovídajícím vzorem jazyka jsou použité v daném pořadí priority, takže pravidla pro konkrétní jazyk by měla být vyšší než ta z výchozího nastavení.</p>
-	
-	<p>Tak například, pravidla pro kanadskou francouzštinu (FR-CA) by měla být ve výchozím nastavení výše než pravidla pro francouzštinu (FR.*), a výše než (.*). Potom v průběhu překladu z kanadské francouzštiny bude váš projekt používat pravidla definované pro tento jazyk, pravidla pro francouzštinu, a předvolená pravidla ve správném pořadí.</p>
-
-	<a name="creation" id="creation"></a>
-	<h3>Vytváření pravidel</h3>
-	
-	<p>Pro vytvoření prázdné sady pravidel, klikněte na <strong>Přidat</strong> v horní polovině dialogového okna. Ve spodní části tabulky se objeví prázdný řádek.</p>
-	
-	<p>Změňte název sady pravidel a vzor jazyka. Syntaxe vzoru jazyka odpovídá syntaxi <a href="regexp.html">regulárních výrazů</a>. Pokud vaše sada pravidel platí pro pár jazyk-země, doporučujeme posunout ji nahoru pomocí tlačítka <strong>Přesunout nahoru</strong>. Pro editaci sady pravidel, jednoduše na ni klikněte v tabulce, pravidla sady se objeví ve spodní polovině okna.</p>
-
-	<a name="break" id="break"></a>
-	<h3>Zlom/Výjimka</h3>
-	
-	<p>Zatrhávací políčko Zlom/Výjimka určuje, zda se jedná o pravidlo Zlomu (zaškrtnut) nebo pravidlo výjimky (nezaškrtnuto). Dva regulární výrazy 'Vzor před' a 'Vzor za' specifikují, co by před a za nějakou pozicí mělo stát, aby se na ni vztahovalo pravidlo výjimky nebo rozdělení.</p>
-
-
-	<a name="examples" id="examples"></a>
-	<h3>Pár jednoduchých příkladů</h3>
-
-	<table border="0" cellpadding="4" cellspacing="0">
-		<tr bgcolor="#DDDDDD">
-			<td width="25%"><strong>Cíl</strong></td>
-			<td><strong>Před</strong></td>
-			<td><strong>Za</strong></td>
-			<td width="50%"><strong>Poznámka</strong></td>
-		</tr>
-		<tr>
-			<td>nastavit segment po tečce ('<code>.</code>') a před mezerou</td>
-			<td><code>\.</code></td>
-			<td><code>\s</code></td>
-			<td>"<code>\.</code>" znamená znak "<code>.</code>" "<code>\s</code>" znamená znak mezery</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td>nesegmentovat po Mr.</td>
-			<td><code>Mr\.</code></td>
-			<td><code>\s</code></td>
-			<td>Je pravidlo výjimky, takže zatrhávací políčko pravidla musí zůstat nezatrženo</td>
-		</tr>
-		<tr>
-			<td><code>segmentovat po</code> <code>"</code><code>。</code><code>"</code> <code>(japonská tečka)</code></td>
-			<td><code>。</code> </td>
-			<td></td>
-			<td>Všimněte si, že <i>Vzor za</i> je prázdné </td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td>nesegmentovat po M. Mr. Mrs. a Ms.</td>
-			<td><code>Mr??s??\.</code></td>
-			<td><code>\s</code></td>
-			<td>pravidlo výjimky - viz použití znaku '?' v regulárních výrazech (líné identifikátory)</td>
-		</tr>
-	</table>
-
-	<hr>
-	<a name="regex" id="regex"></a>
-	<h1>Přehled pojmů regulárních výrazů</h1>
-
-	<p>Regulární výrazy používané při vyhledávání a v segmentačních pravidlech jsou právě takové, jaké podporuje Java. Krátký přehled je dostupný v dodatku <a href="regexp.html">Regulární výrazy</a></p>
-	
-	<p>Pokud potřebujete bližší informace, navštivte prosím tuto stránku: <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">//java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
-		
-	<p>Na internetu můžete najít jednoduché nápovědy (např. <a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)</p>
-
-	<hr>
-
-	<p><code><a href="legalNotices.html">Právní poznámky</a></code></p>
+<h2>Segmentace zdroje</h2>
+<ul>
+  <li>
+    <p><a href="#structure">Segmentace na úrovni struktury</a></p>
+  </li>
+  <li>
+    <p><a href="#sentence">Segmentace na úrovni vět</a></p>
+    <ul>
+      <li>
+        <p><a href="#about">Pravidla segmentace</a></p>
+      </li>
+      <li>
+        <p><a href="#setup">Nastavení pravidel</a></p>
+        <ul>
+          <li>
+            <p><a href="#priority">Priorita</a></p>
+          </li>
+          <li>
+            <p><a href="#creation">Vytváření pravidel</a></p>
+          </li>
+          <li>
+            <p><a href="#break">Zlom/Výjimka</a></p>
+          </li>
+          <li>
+            <p><a href="#examples">Pár jednoduchých příkladů</a></p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><a href="regexp.html">Pojmy regulárních výrazů</a></p>
+  </li>
+</ul>
+<p>Nástroje pro práci s překladovými paměťmi pracují s textovými jednotkami nazývanými segmenty. OmegaT má dva způsoby segmentace textu: segmentace podle odstavců a segmentace na úrovni vět. Pro výběr typu segmentace, označte <strong>Projekt → Vlastnosti...</strong> z hlavního menu a použijte nabízené zaškrtávací políčko. Mějte na paměti, že segmentace podle odstavců je zastaralá metoda a vzhledem k charakteru většiny projektů je upřednostňovaná právě volba větné segmentace. Pokud je vybráno Segmentace na úrovni vět, pak můžete nastavit pravidla vybráním položky <strong>Možnosti → Segmentace...</strong> v hlavním menu.</p>
+<p>Povšimněte si, že velkou část vývoje zabralo sepsání spolehlivých segmentačních pravidel, takže ve většině případů nebudete potřebovat zapisovat vlastní pravidla segmentace. Na druhou stranu tato funkce může být velmi užitečná ve speciálních případech, umožňuje vám přeložit co potřebujete, a to bez riskování změn u případů, které mají zůstat nezměněny.</p>
+<p><strong>Pozor!</strong> V momentu když je projekt otevřen, může změna možností filtrů vyústit ve ztrátu dat. Pokud změníte volby segmentace, když je otevřený nějaký projekt, budete muset projekt znovu načíst, aby se změny projevily.</p>
+<hr>
+<h2><a name="structure" id="structure"></a>Segmentace na úrovni struktury</h2>
+<p>OmegaT nejprve zpracuje text pomocí segmentace na úrovni struktur. Během tohoto procesu je to jen struktura zdrojového souboru, která je použitá na vytvoření segmentů.</p>
+<p>Například <a href="fileFilters.html#filter_options">textové soubory</a> mohou být segmentovány podle zlomů řádků, prázdných řádků nebo vůbec nemusí být segmentovány na strukturální úrovni. Soubory s formátováním (OpenOffice.org, HTML, atd.) jsou segmentovány na úrovni tagů bloků (odstavce). <a href="fileFilters.html#filter_options">Atributy</a> přeložitelných objektů v souborech XHTML nebo HTML lze extrahovat jako samostatné segmenty.</p>
+<hr>
+<h2><a name="sentence" id="sentence"></a>Segmentace na úrovni vět</h2>
+<p>Po segmentaci zdrojového souboru podle logických jednotek, bude OmegaT dále segmentovat tyto bloky do vět.</p>
+<h3><a name="about" id="about"></a>Pravidla segmentace</h3>
+<p>Průběh segmentace lze znázornit následovně: představte si kurzor pohybující se v textu, vždy po jednom znaku. Pro každou pozici kurzoru je aplikováno každé pravidlo v zadaném pořadí, aby se ověřilo zda vzor <strong>Před</strong> platí pro text nalevo a vzor <strong>Za</strong> pro text vpravo za kurzorem. Pokud pravidlo lze aplikovat, program zastaví zkoušení pravidel (pro pravidlo 'výjimka') nebo vytvoří nový segment (pro pravidlo 'zlom')</p>
+<p>Segmentace na úrovni vět byla realizována za pomoci standardu Výměny segmentačních pravidel:  <a
+ href="http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a> - prosím povšimněte si, že všechny rysy SRX jsou podporovány. A není možné importovat/exportovat pravidla ve formátu SRX. Pokud víte jak SRX pracuje, budete již vědět mnohé o tom, jak OmegaT provádí segmentaci.</p>
+<p>Existují dva druhy pravidel:</p>
+<ul>
+  <li>
+    <p><strong>Pravidlo zlomu</strong> rozdělí zdrojový text na segmenty. Například: <i>„Did it make sense? I was not sure.“</i> by mělo být rozděleno na dva segmenty, mělo by tu být pravidlo rozdělování pro „<code>?</code>“.</p>
+  </li>
+  <li>
+    <p><strong>Pravidlo výjimky</strong> udává, které části textu NEmají být rozděleny. Nehledě na tečku v <i>„Mrs. Dalloway“</i> by zde neměl být text rozdělen, tzn. mělo by být založeno pravidlo výjimky pro Mrs, které je následováno tečkou (stejně tak Mr a Dr a prof atd.)</p>
+  </li>
+</ul>
+<p>Předdefinovaná pravidla by měla být dostatečná pro většinu evropských jazyků a Japonštinu. V rámci flexibility můžete zvážit definování více pravidel pro výjimky pro jazyk ze kterého překládáte, abyste získali smysluplnější a souvislejší segmenty.</p>
+<h3><a name="setup" id="setup"></a>Nastavení pravidel</h3>
+<h3><a name="priority" id="priority"></a>Priorita</h3>
+<p>Všechny sady pravidel segmentace s odpovídajícím vzorem jazyka jsou použité v daném pořadí priority, takže pravidla pro konkrétní jazyk by měla být vyšší než ta z výchozího nastavení. Tak například, pravidla pro kanadskou francouzštinu (FR-CA) by měla být ve výchozím nastavení výše než pravidla pro francouzštinu (FR.*), a výše než (.*). Potom v průběhu překladu z kanadské francouzštiny bude váš projekt používat pravidla definované pro tento jazyk, pravidla pro francouzštinu, a předvolená pravidla ve správném pořadí.</p>
+<h3><a name="creation" id="creation"></a>Vytváření pravidel</h3>
+<p>Pro úpravu nebo rozšíření již existující sady pravidel, jednoduše klikněte na danou sadu v horní tabulce. Pravidla dané sady se objeví v dolní části okna.</p>
+<p>Pro vytvoření prázdné sady pravidel pro nový jazykový vzor<span style="font-family: Times New Roman;">,</span> <font
+ color="black" face="Times New Roman" size="3"><span
+ style="font-size: 12pt; color: black;" lang="EN-US"> </span></font> klikněte na <strong>Přidat</strong> v horní polovině dialogového okna. Ve spodní části horní tabulky se objeví prázdný řádek <font color="black"
+ face="Times New Roman" size="3"><span
+ style="font-size: 12pt; color: black;" lang="EN-US">(abyste jej viděli, musíte srolovat dolů)</span></font>. Změňte název sady pravidel a vzor jazyka. Syntaxe vzoru jazyka odpovídá syntaxi <a href="regexp.html">regulárních výrazů</a>. Pokud vaše sada pravidel platí pro pár jazyk-země, doporučujeme posunout ji nahoru pomocí tlačítka <strong>Přesunout nahoru</strong>.&nbsp;</p>
+<h3><a name="break" id="break"></a>Zlom/Výjimka</h3>
+<p>Zatrhávací políčko Zlom/Výjimka určuje, zda se jedná o pravidlo Zlomu (zaškrtnut) nebo pravidlo výjimky (nezaškrtnuto). Dva regulární výrazy 'Vzor před' a 'Vzor za' specifikují, co by před a za nějakou pozicí mělo stát, aby se na ni vztahovalo pravidlo výjimky nebo rozdělení.</p>
+<h3><a name="examples" id="examples"></a>Pár jednoduchých příkladů</h3>
+<table border="0" cellpadding="4" cellspacing="0">
+  <tbody>
+    <tr bgcolor="#dddddd">
+      <td width="26%">
+      <p><strong>Cíl</strong></p>
+      </td>
+      <td>
+      <p><strong>Před</strong></p>
+      </td>
+      <td>
+      <p><strong>Za</strong></p>
+      </td>
+      <td width="52%">
+      <p><strong>Poznámka</strong></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="26%">
+      <p>nastavit segment po tečce ('<code>.</code>') a před mezerou</p>
+      </td>
+      <td>
+      <p><code>\.</code></p>
+      </td>
+      <td>
+      <p><code>\s</code></p>
+      </td>
+      <td width="52%">
+      <p>„<code>\.</code>“ znamená znak „<code>.</code>“ „<code>\s</code>“ znamená znak mezery</p>
+      </td>
+    </tr>
+    <tr bgcolor="#dddddd">
+      <td width="26%">
+      <p>nesegmentovat po Mr.</p>
+      </td>
+      <td>
+      <p><code>Mr\.</code></p>
+      </td>
+      <td>
+      <p><code>\s</code></p>
+      </td>
+      <td width="52%">
+      <p>Je pravidlo výjimky, takže zatrhávací políčko pravidla musí zůstat nezatrženo</p>
+      </td>
+    </tr>
+    <tr>
+      <td width="26%">
+      <p>segmentovat po „。“ (japonská tečka)</p>
+      </td>
+      <td>
+      <p><span lang="zxx"><code>。</code></span></p>
+      </td>
+      <td></td>
+      <td width="52%">
+      <p>Všimněte si, že <i>Vzor za</i> je prázdné </p>
+      </td>
+    </tr>
+    <tr bgcolor="#dddddd">
+      <td width="26%">
+      <p>nesegmentovat po M. Mr. Mrs. a Ms.</p>
+      </td>
+      <td>
+      <p><code>Mr??s??\.</code></p>
+      </td>
+      <td>
+      <p><code>\s</code></p>
+      </td>
+      <td width="52%">
+      <p>pravidlo výjimky - viz použití znaku '?' v regulárních výrazech (líné identifikátory)</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<h2><a name="regex" id="regex"></a>Pojmy regulárních výrazů.</h2>
+<p>Regulární výrazy používané při vyhledávání a v segmentačních pravidlech jsou právě takové, jaké podporuje Java. Krátký přehled je dostupný v dodatku <a
+ href="regexp.html">Regulární výrazy</a> Pokud potřebujete bližší informace, navštivte prosím tuto stránku: <a
+ href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+<p>Na internetu můžete najít jednoduché nápovědy (např. <a
+ href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)</p>
+<hr>
+<table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="text-align: left;"><a href="legalNotices.html">Právní poznámky</a> </td>
+      <td style="text-align: center;"><a href="index.html">Obsah</a> </td>
+      <td style="text-align: right;"><a href="xindex.html">Tématický rejstřík</a> </td>
+    </tr>
+  </tbody>
+</table>
 </body>
 </html>

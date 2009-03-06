@@ -1,192 +1,600 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Regulární výrazy - OmegaT 1.7.3 Uživatelská příručka</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Regulární výrazy - OmegaT 1.8 Uživatelská příručka</title>
 </head>
+
 <body>
+  <h2>Pojmy regulárních výrazů.</h2>
 
-	<h1>Pojmy regulárních výrazů.</h1>
+  <p>Regulární výrazy používané při vyhledávání a v segmentačních pravidlech jsou právě takové, jaké podporuje Java. Pokud potřebujete bližší informace, navštivte prosím tuto stránku: <a href=
+  "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">//java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
 
-	<p>Regulární výrazy používané při vyhledávání a v segmentačních pravidlech jsou právě takové, jaké podporuje Java. Pokud potřebujete bližší informace, navštivte prosím tuto stránku: <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">//java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
-		
-	<p>Na internetu můžete najít jednoduché nápovědy (např. <a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)</p>
+  <p>Na internetu můžete najít jednoduché nápovědy (např. <a href=
+  "http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)<br>
+  <br></p>
+  <hr>
 
+  <table border="0" cellpadding="3" cellspacing="0">
+    <col width="15%">
+    <col width="80%">
 
-	<table border="0" cellpadding="3" cellspacing="0">
+    <tr>
+      <td width="355">
+        <h3>Pojem ...</h3>
+      </td>
 
-		<tr>
-			<td width="40%"><h2>Následující pojem:</h2></td>
-			<td><h2>Srovnává následující sekvenci:</h2></td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Označení</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>(?i)</code></td>
-			<td>Umožňuje hledání bez ohledu na velikost písmen (ve výchozím nastavení se rozlišují velká a malá písmena).</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Znaky</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>x</strong></td>
-			<td>Znak <strong>x</strong>, s výjimkou následujících...</td>
-		</tr>
-		<tr>
-			<td><code>\u</code><strong>hhhh</strong></td>
-			<td>Znak s hexadecimální hodnotou&nbsp;<code>0x</code><strong>hhhh</strong></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\t</code></td>
-			<td>Znak tabulátoru (<code>'\u0009'</code>)</td>
-		</tr>
-		<tr>
-			<td><code>\n</code></td>
-			<td>Znak nového řádku (konce řádku) (<code>'\u000A'</code>)</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\r</code></td>
-			<td>Znak návratu vozíku (<code>'\u000D'</code>)</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Uvozující znaky</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\</code></td>
-			<td>Lomítko samo o sobě neznamená nic, ale uvozuje následující znak. Je vyžadováno, pokud byste chtěli zadání metaznaků <code>!$()*+.&lt;&gt;?[\]^{|}</code> tak, aby odpovídaly samy sobě.</td>
-		</tr>
-		<tr>
-			<td><code>\\</code></td>
-			<td>Například toto je znak pro hledání zpětného lomítka</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\Q</code></td>
-			<td>Nic neznamená, ale vymezuje všechny znaky až po <code>\E</code></td>
-		</tr>
-		<tr>
-			<td><code>\E</code></td>
-			<td>Nic neznamená, ale končí vymezení započaté pomocí <code>\Q</code></td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Třídy znaků</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>[abc]</code></td>
-			<td><code>a</code>, <code>b</code>, or <code>c</code> (jednoduchá třída)</td>
-		</tr>
-		<tr>
-			<td><code>[^abc]</code></td>
-			<td>Jakýkoliv znak mimo <code>a</code>, <code>b</code> nebo <code>c</code> (negace)</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>[a-zA-Z]</code></td>
-			<td><code>a</code> až po <code>z</code> nebo <code>A</code> až po <code>Z</code>, včetně (rozsah)</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Předdefinované třídy znaků</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>.</code></td>
-			<td>Jakýkoliv znak (kromě znaků ukončujících řádek)</td>
-		</tr>
-		<tr>
-			<td><code>\d</code></td>
-			<td>Číslice: <code>[0-9]</code></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\D</code></td>
-			<td>Ne-číslice: <code>[^0-9]</code></td>
-		</tr>
-		<tr>
-			<td><code>\s</code></td>
-			<td>Znak mezery: <code>[ \t\n\x0B\f\r]</code></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\S</code></td>
-			<td>Znak ne-mezery: <code>[^\s]</code></td>
-		</tr>
-		<tr>
-			<td><code>\w</code></td>
-			<td>Znak slova: <code>[a-zA-Z_0-9]</code></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\W</code></td>
-			<td>Znak ne-slova: <code>[^\w]</code></td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Označení hranic</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>^</code></td>
-			<td>Začátek řádku</td>
-		</tr>
-		<tr>
-			<td><code>$</code></td>
-			<td>Konec řádku</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\b</code></td>
-			<td>Hranice slova</td>
-		</tr>
-		<tr>
-			<td><code>\B</code></td>
-			<td>Hranice ne-slova</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Vícenásobné kvantifikátory</h3></td>
-		</tr>
-		<tr>
-			<td colspan="2">Tyto budou představovat tolik, kolik jen mohou. Například: <code>a+</code> bude odpovídat <code>aaa</code> v <code>aaabbb</code></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>X</strong><code>?</code></td>
-			<td><strong>X</strong>, jednou nebo vůbec</td>
-		</tr>
-		<tr>
-			<td><strong>X</strong><code>*</code></td>
-			<td><strong>X</strong>, nula- nebo vícekrát</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>X</strong><code>+</code></td>
-			<td><strong>X</strong>, jednou nebo vícekrát</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Líné kvantifikátory</h3></td>
-		</tr>
-		<tr>
-			<td colspan="2">Tyto budou představovat tak málo, jak jen mohou. Například: <code>a+?</code> bude odpovídat prvnímu <code>a</code> v <code>aaabbb</code></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>X</strong><code>??</code></td>
-			<td><strong>X</strong>, jednou nebo vůbec</td>
-		</tr>
-		<tr>
-			<td><strong>X</strong><code>*?</code></td>
-			<td><strong>X</strong>, nula- nebo vícekrát</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>X</strong><code>+?</code></td>
-			<td><strong>X</strong>, jednou nebo vícekrát</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Logické operátory</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>XY</strong></td>
-			<td><strong>X</strong> následované <strong>Y</strong></td>
-		</tr>
-		<tr>
-			<td><strong>X</strong><code>|</code><strong>Y</strong></td>
-			<td>Buď <strong>X</strong>, a nebo <strong>Y</strong></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>(</code><strong>XY</strong><code>)</code></td>
-			<td><strong>XY</strong> jako samostatná skupina</td>
-		</tr></table>
+      <td width="877">
+        <h3>... znamená:</h3>
+      </td>
+    </tr>
 
-	<hr>
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
 
-	<a href="legalNotices.html">Právní poznámky</a>
+        <h3>Označení</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>(?i)</code></p>
+      </td>
+
+      <td width="877">
+        <p>Umožňuje hledání bez ohledu na velikost písmen (ve výchozím nastavení se rozlišují velká a malá písmena).</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
+
+        <h3>Znaky</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>x</code></p>
+      </td>
+
+      <td width="877">
+        <p>Znak <strong>x</strong>, s výjimkou následujících...</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>\uhhhh</code></p>
+      </td>
+
+      <td width="877">
+        <p>Znak s hexadecimální hodnotou <code>0x</code><strong>hhhh</strong></p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>\t</code></p>
+      </td>
+
+      <td width="877">
+        <p>Znak tabulátoru (<code>'\u0009'</code>)</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>\n</code></p>
+      </td>
+
+      <td width="877">
+        <p>Znak nového řádku (konce řádku) (<code>'\u000A'</code>)</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>\r</code></p>
+      </td>
+
+      <td width="877">
+        <p>Znak posunu vozíku (<code>'\u000D'</code>)</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><tt>\f</tt></p>
+      </td>
+
+      <td width="877">
+        <p>Znak posunu o stránku (<tt>'\u000C'</tt>)</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><tt>\a</tt>
+        </td>
+        
+        <td width="877">
+        <p>Znak zvukové signalizace (<tt>'\u0007'</tt>)</p>
+      </td>
+     </tr>
+     
+      <tr>
+      <td width="355">
+        <p><tt>\e</tt>
+        </td>
+        
+        <td width="877">
+        <p>Znak změny (<tt>'\u001B'</tt>)</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><tt>\c</tt><i>x</i></p>
+      </td>
+
+      <td width="877">
+        <p>Řídící znak odpovídající <i>x</i></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="355">
+        <p><tt>\0</tt><i>n</i></p>
+      </td>
+
+      <td width="877">
+        <p>Znak s oktalovou/osmičkovou hodnotou  <tt>0</tt><i>n</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><tt>\0</tt><i>nn</i></p>
+      </td>
+
+      <td width="877">
+        <p>Znak s oktalovou/osmičkovou hodnotou  <tt>0</tt><i>nn</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</p>
+      </td>
+    </tr>
+
+      <tr>
+      <td width="355">
+        <p><tt>\0</tt><i>mnn</i></p>
+      </td>
+
+      <td width="877">
+        <p>Znak s oktalovou/osmičkovou hodnotou <tt>0</tt><i>mnn</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>m</i>&nbsp;<tt>&lt;=</tt>&nbsp;3, 0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><tt>\x</tt><i>hh</i></p>
+      </td>
+
+      <td width="877">
+        <p>Znak s hexadecimální hodnotou <tt>0x</tt><i>hhhh</i></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
+
+        <h3>Uvozující znaky</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>\</code></p>
+      </td>
+
+      <td width="877">
+        <p>Lomítko samo o sobě neznamená nic, ale uvozuje následující znak. Je vyžadováno, pokud byste chtěli zadání metaznaků <code>!$()*+.&lt;&gt;?[\]^{|}</code> tak, aby odpovídaly samy sobě.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>\\</code></p>
+      </td>
+
+      <td width="877">
+        <p>Například toto je znak pro hledání zpětného lomítka</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>\Q</code></p>
+      </td>
+
+      <td width="877">
+        <p>Nic neznamená, ale vymezuje všechny znaky až po <code>\E</code></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>\E</code></p>
+      </td>
+
+      <td width="877">
+        <p>Nic neznamená, ale končí vymezení započaté pomocí <tt>\Q</tt></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
+
+        <h3>Třídy sad a kategorií kódování Unicode</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code><tt>\p{InGreek}</tt></code></p>
+      </td>
+
+      <td width="877">
+        <p>Znak v Řecké sadě (jednoduchá <a href=
+        "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html#ubc">sada</a>)</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code><tt>\p{Lu}</tt></code></p>
+      </td>
+
+      <td width="877">
+        <p>Velké písmeno (jednoduchá <a href=
+        "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html#ubc">kategorie</a>)</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code><tt>\p{Sc}</tt></code></p>
+      </td>
+
+      <td width="877">
+        <p>Symbol měny</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code><tt>\P{InGreek}</tt></code></p>
+      </td>
+
+      <td width="877">
+        <p>Jakýkoliv znak mimo nějakého z Řecké sady (negace)</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355" height="33">
+        <p><code><tt>[\p{L}&amp;&amp;[^\p{Lu}]]</tt></code></p>
+      </td>
+
+      <td width="877">
+        <p>Jakékoliv písmeno mimo velkých (odečítání)</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
+
+        <h3>Třídy znaků</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>[abc]</code></p>
+      </td>
+
+      <td width="877">
+        <p><code>a</code>, <code>b</code>, or <code>c</code> (jednoduchá třída)</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>[^abc]</code></p>
+      </td>
+
+      <td width="877">
+        <p>Jakýkoliv znak mimo <code>a</code>, <code>b</code> nebo <code>c</code> (negace)</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>[a-zA-Z]</code></p>
+      </td>
+
+      <td width="877">
+        <p><code>a</code> až po <code>z</code> nebo <code>A</code> až po <code>Z</code>, včetně (rozsah)</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
+
+        <h3>Předdefinované třídy znaků</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>.</code></p>
+      </td>
+
+      <td width="877">
+        <p>Jakýkoliv znak (kromě znaků ukončujících řádek)</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>\d</code></p>
+      </td>
+
+      <td width="877">
+        <p>Číslice: <code>[0-9]</code></p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>\D</code></p>
+      </td>
+
+      <td width="877">
+        <p>Ne-číslice: <code>[^0-9]</code></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>\s</code></p>
+      </td>
+
+      <td width="877">
+        <p>Znak mezery: <code>[ \t\n\x0B\f\r]</code></p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>\S</code></p>
+      </td>
+
+      <td width="877">
+        <p>Znak ne-mezery: <code>[^\s]</code></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>\w</code></p>
+      </td>
+
+      <td width="877">
+        <p>Znak slova: <code>[a-zA-Z_0-9]</code></p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>\W</code></p>
+      </td>
+
+      <td width="877">
+        <p>Znak ne-slova: <code>[^\w]</code></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
+
+        <h3>Označení hranic</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>^</code></p>
+      </td>
+
+      <td width="877">
+        <p>Začátek řádku</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>$</code></p>
+      </td>
+
+      <td width="877">
+        <p>Konec řádku</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>\b</code></p>
+      </td>
+
+      <td width="877">
+        <p>Hranice slova</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><code>\B</code></p>
+      </td>
+
+      <td width="877">
+        <p>Hranice ne-slova</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
+
+        <h3>Vícenásobné kvantifikátory</h3>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <p>Tyto budou představovat tolik, kolik jen mohou. Například: <code>a+</code> bude odpovídat <code>aaa</code> v <code>aaabbb</code></p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><strong>X</strong><code>?</code></p>
+      </td>
+
+      <td width="877">
+        <p><strong>X</strong>, jednou nebo vůbec</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><strong>X</strong><code>*</code></p>
+      </td>
+
+      <td width="877">
+        <p><strong>X</strong>, nula- nebo vícekrát</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><strong>X</strong><code>+</code></p>
+      </td>
+
+      <td width="877">
+        <p><strong>X</strong>, jednou nebo vícekrát</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
+
+        <h3>Líné kvantifikátory</h3>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <p>Tyto budou představovat tak málo, jak jen mohou. Například: <code>a+?</code> bude odpovídat prvnímu <code>a</code> v <code>aaabbb</code></p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><strong>X</strong><code>??</code></p>
+      </td>
+
+      <td width="877">
+        <p><strong>X</strong>, jednou nebo vůbec</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><strong>X</strong><code>*?</code></p>
+      </td>
+
+      <td width="877">
+        <p><strong>X</strong>, nula- nebo vícekrát</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><strong>X</strong><code>+?</code></p>
+      </td>
+
+      <td width="877">
+        <p><strong>X</strong>, jednou nebo vícekrát</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" width="1238">
+        <hr>
+
+        <h3>Logické operátory</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><strong>XY</strong></p>
+      </td>
+
+      <td width="877">
+        <p><strong>X</strong> následované <strong>Y</strong></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="355">
+        <p><strong>X</strong><code>|</code><strong>Y</strong></p>
+      </td>
+
+      <td width="877">
+        <p>Buď <strong>X</strong>, a nebo <strong>Y</strong></p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="355">
+        <p><code>(</code><strong>XY</strong><code>)</code></p>
+      </td>
+
+      <td width="877">
+        <p><strong>XY</strong> jako samostatná skupina</p>
+      </td>
+    </tr>
+  </table>
+<hr>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Právní poznámky</a> </td>
+        <td style="text-align: center;"><a href="index.html">Obsah</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Tématický rejstřík</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
 </body>
 </html>

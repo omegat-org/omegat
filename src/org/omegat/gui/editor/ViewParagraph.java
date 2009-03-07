@@ -22,7 +22,7 @@ public class ViewParagraph extends ParagraphView {
     public ViewParagraph(final Element elem) {
         super(elem);
         OmElementSegPart segPart = (OmElementSegPart) elem.getParentElement();
-      //  strategy = new LayoutStrategy(segPart.isLangRTL());
+        strategy = new LayoutStrategy(segPart.isLangRTL());
         setJustification(segPart.isRightAligned() ? StyleConstants.ALIGN_RIGHT
                 : StyleConstants.ALIGN_LEFT);
     }
@@ -55,8 +55,6 @@ public class ViewParagraph extends ParagraphView {
     /**
      * Layout strategy for display begin/end mark correctly, i.e. at the end or
      * begin of line.
-     * 
-     * @deprecated
      */
     public static class LayoutStrategy extends FlowView.FlowStrategy {
         protected boolean isRTL;

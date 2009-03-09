@@ -27,30 +27,23 @@ public class ViewParagraph extends ParagraphView {
                 : StyleConstants.ALIGN_LEFT);
     }
 
-//    @Override
-//    public int getNextVisualPositionFrom(int pos, Bias b, Shape a,
-//            int direction, Bias[] biasRet) throws BadLocationException {
-//        int r = super.getNextVisualPositionFrom(pos, b, a, direction, biasRet);
-//        return r;
-//    }
-//
-//    @Override
-//    protected int getNextEastWestVisualPositionFrom(int pos, Bias b, Shape a,
-//            int direction, Bias[] biasRet) throws BadLocationException {
-//        int r;
-//        switch (direction) {
-//        case SwingConstants.WEST:
-//            r = pos - 1;
-//            break;
-//        case SwingConstants.EAST:
-//            r = pos + 1;
-//            break;
-//        default:
-//            r = pos;
-//            break;
-//        }
-//        return r;
-//    }
+    @Override
+    protected int getNextEastWestVisualPositionFrom(int pos, Bias b, Shape a,
+            int direction, Bias[] biasRet) throws BadLocationException {
+        int r;
+        switch (direction) {
+        case SwingConstants.WEST:
+            r = pos - 1;
+            break;
+        case SwingConstants.EAST:
+            r = pos + 1;
+            break;
+        default:
+            r = pos;
+            break;
+        }
+        return r;
+    }
 
     /**
      * Layout strategy for display begin/end mark correctly, i.e. at the end or

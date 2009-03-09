@@ -22,39 +22,41 @@ public class ViewParagraph extends ParagraphView {
     public ViewParagraph(final Element elem) {
         super(elem);
         OmElementSegPart segPart = (OmElementSegPart) elem.getParentElement();
-        strategy = new LayoutStrategy(segPart.isLangRTL());
+      //  strategy = new LayoutStrategy(segPart.isLangRTL());
         setJustification(segPart.isRightAligned() ? StyleConstants.ALIGN_RIGHT
                 : StyleConstants.ALIGN_LEFT);
     }
 
-    @Override
-    public int getNextVisualPositionFrom(int pos, Bias b, Shape a,
-            int direction, Bias[] biasRet) throws BadLocationException {
-        int r = super.getNextVisualPositionFrom(pos, b, a, direction, biasRet);
-        return r;
-    }
-
-    @Override
-    protected int getNextEastWestVisualPositionFrom(int pos, Bias b, Shape a,
-            int direction, Bias[] biasRet) throws BadLocationException {
-        int r;
-        switch (direction) {
-        case SwingConstants.WEST:
-            r = pos - 1;
-            break;
-        case SwingConstants.EAST:
-            r = pos + 1;
-            break;
-        default:
-            r = pos;
-            break;
-        }
-        return r;
-    }
+//    @Override
+//    public int getNextVisualPositionFrom(int pos, Bias b, Shape a,
+//            int direction, Bias[] biasRet) throws BadLocationException {
+//        int r = super.getNextVisualPositionFrom(pos, b, a, direction, biasRet);
+//        return r;
+//    }
+//
+//    @Override
+//    protected int getNextEastWestVisualPositionFrom(int pos, Bias b, Shape a,
+//            int direction, Bias[] biasRet) throws BadLocationException {
+//        int r;
+//        switch (direction) {
+//        case SwingConstants.WEST:
+//            r = pos - 1;
+//            break;
+//        case SwingConstants.EAST:
+//            r = pos + 1;
+//            break;
+//        default:
+//            r = pos;
+//            break;
+//        }
+//        return r;
+//    }
 
     /**
      * Layout strategy for display begin/end mark correctly, i.e. at the end or
      * begin of line.
+     * 
+     * @deprecated
      */
     public static class LayoutStrategy extends FlowView.FlowStrategy {
         protected boolean isRTL;

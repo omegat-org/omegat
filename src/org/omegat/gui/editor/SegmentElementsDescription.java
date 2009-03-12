@@ -266,12 +266,20 @@ public class SegmentElementsDescription {
         segMarkE.el = doc.new OmElementSegmentMark(false, segPartElement.el,
                 ATTR_SEGMENT_MARK, smTextE);
 
+        if (segPartElement.getChilds() == null) {
+            // Add empty line if there is no translated text. Required for
+            // create segment marks.
+            ElementWithChilds line = new ElementWithChilds();
+            line.el = doc.new OmElementParagraph(segPartElement.el, null);
+            segPartElement.addChild(line);
+        }
         ElementWithChilds lnFirst = segPartElement.getChilds().get(0);
-        lnFirst.getChilds().add(0, segMarkB);
+        
+        lnFirst.addFirstChild(segMarkB);
 
         ElementWithChilds lnLast = segPartElement.getChilds().get(
                 segPartElement.getChilds().size() - 1);
-        lnLast.getChilds().add(segMarkE);
+        lnLast.addChild(segMarkE);
 
         addEOL(segPartElement);
 
@@ -399,10 +407,13 @@ public class SegmentElementsDescription {
             this.el = el;
         }
 
+        public void addFirstChild(ElementWithChilds ch) {
+            ensureChilds();
+            childs.add(0, ch);
+        }
+
         public void addChild(ElementWithChilds ch) {
-            if (childs == null) {
-                childs = new ArrayList<ElementWithChilds>();
-            }
+            ensureChilds();
             childs.add(ch);
         }
 
@@ -412,6 +423,12 @@ public class SegmentElementsDescription {
 
         public List<ElementWithChilds> getChilds() {
             return childs;
+        }
+
+        public void ensureChilds() {
+            if (childs == null) {
+                childs = new ArrayList<ElementWithChilds>();
+            }
         }
 
         public void setChilds() {

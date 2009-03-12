@@ -742,7 +742,7 @@ public class OmDocument extends AbstractDocument implements StyledDocument {
             this.isBeginMark = isBeginMark;
             this.label = label;
             p0 = getData().createUnflushedPosition(unflushedText.length());
-            unflushedText.append(label.replaceAll(".", "-"));
+            unflushedText.append(label.replaceAll(".", "*"));
             p1 = getData().createUnflushedPosition(unflushedText.length());
         }
 

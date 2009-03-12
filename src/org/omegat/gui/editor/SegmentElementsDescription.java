@@ -248,21 +248,21 @@ public class SegmentElementsDescription {
         segPartElement.el = doc.new OmElementSegPart(parent, attrs, langIsRTL);
 
         ElementWithChilds segMarkB = new ElementWithChilds();
-        String smTextB = OConsts.segmentStartString.trim().replace("0000",
-                NUMBER_FORMAT.format(segmentNumberInProject));
+        String smTextB = ' ' + OConsts.segmentStartString.trim().replace(
+                "0000", NUMBER_FORMAT.format(segmentNumberInProject)) + ' ';
         segMarkB.el = doc.new OmElementSegmentMark(true, segPartElement.el,
                 ATTR_SEGMENT_MARK, smTextB);
 
-        activeTranslationBeginOffset = doc.unflushedText.length();
+        activeTranslationBeginOffset = doc.unflushedText.length() - 1;
         if (StringUtil.isEmpty(text)) {
-            addLines(segPartElement, "  ", false);
+            addLines(segPartElement, "", false);
         } else {
-            addLines(segPartElement, ' ' + text + ' ', needToCheckSpelling);
+            addLines(segPartElement, text, needToCheckSpelling);
         }
-        activeTranslationEndOffset = doc.unflushedText.length();
+        activeTranslationEndOffset = doc.unflushedText.length() + 1;
 
         ElementWithChilds segMarkE = new ElementWithChilds();
-        String smTextE = OConsts.segmentEndString.trim();
+        String smTextE = ' ' + OConsts.segmentEndString.trim() + ' ';
         segMarkE.el = doc.new OmElementSegmentMark(false, segPartElement.el,
                 ATTR_SEGMENT_MARK, smTextE);
 

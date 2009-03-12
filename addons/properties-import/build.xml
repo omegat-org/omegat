@@ -5,14 +5,15 @@
 
     <target name="-post-clean">
         <delete dir="lib"/>
-        <delete file="import_properties_1.3.zip"/>
+        <delete file="import_properties_1.4.zip"/>
         <delete file="properties-import.jar"/>
     </target>
         
     <target name="dist" depends="jar" description="Creates a ZIP distro of Properties Import">
         <copy file="../../dist/lib/lib-mnemonics.jar" todir="lib" />
-        <zip basedir="." destfile="import_properties_1.3.zip"
-                  includes="properties-import.jar lib/** readme.txt" />
+        <zip basedir="." destfile="import_properties_1.4.zip"
+                  includes="properties-import.jar lib/** readme.txt gpl-2.0.txt" />
+                  
     </target>
     
 </project>

@@ -112,11 +112,6 @@ public class SegmentElementsDescription {
             segElement.addChild(addInactiveSegPart(segElement.el, ste
                     .getSrcText(), ATTR_SOURCE, sourceLangIsRTL));
 
-            String markBeg = OConsts.segmentStartString.trim().replace("0000",
-                    NUMBER_FORMAT.format(segmentNumberInProject));
-
-            String markEnd = OConsts.segmentEndString.trim();
-
             String activeText;
             if (translationExists) {
                 // translation exist
@@ -143,7 +138,7 @@ public class SegmentElementsDescription {
             }
 
             segElement.addChild(addActiveSegPart(segElement.el, activeText,
-                    ATTR_NONE, markBeg, markEnd, targetLangIsRTL));
+                    ATTR_NONE, targetLangIsRTL));
         } else {
             /** Create for inactive segment. */
             if (settings.isDisplaySegmentSources()) {
@@ -159,10 +154,12 @@ public class SegmentElementsDescription {
                             .getTranslation());
                 }
                 segElement.addChild(addInactiveSegPart(segElement.el, ste
-                        .getTranslation(), settings.getTranslatedAttributeSet(), targetLangIsRTL));
+                        .getTranslation(),
+                        settings.getTranslatedAttributeSet(), targetLangIsRTL));
             } else if (!settings.isDisplaySegmentSources()) {
                 segElement.addChild(addInactiveSegPart(segElement.el, ste
-                        .getSrcText(), settings.getUntranslatedAttributeSet(), targetLangIsRTL));
+                        .getSrcText(), settings.getUntranslatedAttributeSet(),
+                        targetLangIsRTL));
             }
         }
 
@@ -185,11 +182,6 @@ public class SegmentElementsDescription {
     protected Element createTranslationElement(Element parent,
             final OmDocument.OmElementSegment seg, final String activeText,
             boolean targetLangIsRTL) {
-        String markBeg = OConsts.segmentStartString.trim().replace("0000",
-                NUMBER_FORMAT.format(segmentNumberInProject));
-
-        String markEnd = OConsts.segmentEndString.trim();
-
         if (doc.controller.settings.isAutoSpellChecking()) {
             // spell it
             needToCheckSpelling = true;
@@ -197,7 +189,7 @@ public class SegmentElementsDescription {
         }
 
         ElementWithChilds result = addActiveSegPart(parent, activeText,
-                ATTR_NONE, markBeg, markEnd, targetLangIsRTL);
+                ATTR_NONE, targetLangIsRTL);
 
         result.setChilds();
         return result.el;
@@ -242,16 +234,26 @@ public class SegmentElementsDescription {
      * @return segment part element
      */
     private ElementWithChilds addActiveSegPart(Element parent, String text,
-            AttributeSet attrs, String markBeg, String markEnd,
-            boolean langIsRTL) {
+            AttributeSet attrs, boolean langIsRTL) {
         ElementWithChilds segPartElement = new ElementWithChilds();
         segPartElement.el = doc.new OmElementSegPart(parent, attrs, langIsRTL);
 
         ElementWithChilds segMarkB = new ElementWithChilds();
-        String smTextB = ' ' + OConsts.segmentStartString.trim().replace(
-                "0000", NUMBER_FORMAT.format(segmentNumberInProject)) + ' ';
+
+        StringBuilder smTextB = new StringBuilder();
+        if (langIsRTL) {
+            // place space on the left of begin segment mark for RTL text
+            smTextB.append(' ');
+        }
+        smTextB.append(OConsts.segmentStartString.trim().replace("0000",
+                NUMBER_FORMAT.format(segmentNumberInProject)));
+        if (!langIsRTL) {
+            // place space on the right of begin segment mark for LTR text
+            smTextB.append(' ');
+        }
+
         segMarkB.el = doc.new OmElementSegmentMark(true, segPartElement.el,
-                ATTR_SEGMENT_MARK, smTextB);
+                ATTR_SEGMENT_MARK, smTextB.toString());
 
         activeTranslationBeginOffset = doc.unflushedText.length() - 1;
         if (StringUtil.isEmpty(text)) {
@@ -262,9 +264,19 @@ public class SegmentElementsDescription {
         activeTranslationEndOffset = doc.unflushedText.length() + 1;
 
         ElementWithChilds segMarkE = new ElementWithChilds();
-        String smTextE = ' ' + OConsts.segmentEndString.trim() + ' ';
+
+        StringBuilder smTextE = new StringBuilder();
+        if (!langIsRTL) {
+            // place space on the left of end segment mark for LTR text
+            smTextE.append(' ');
+        }
+        smTextE.append(OConsts.segmentEndString.trim());
+        if (langIsRTL) {
+            // place space on the right of end segment mark for RTL text
+            smTextE.append(' ');
+        }
         segMarkE.el = doc.new OmElementSegmentMark(false, segPartElement.el,
-                ATTR_SEGMENT_MARK, smTextE);
+                ATTR_SEGMENT_MARK, smTextE.toString());
 
         if (segPartElement.getChilds() == null) {
             // Add empty line if there is no translated text. Required for
@@ -274,7 +286,7 @@ public class SegmentElementsDescription {
             segPartElement.addChild(line);
         }
         ElementWithChilds lnFirst = segPartElement.getChilds().get(0);
-        
+
         lnFirst.addFirstChild(segMarkB);
 
         ElementWithChilds lnLast = segPartElement.getChilds().get(

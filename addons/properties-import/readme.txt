@@ -15,6 +15,7 @@ The sources are supplied inside the OmegaT sources distribution.
 
 ----------------------------------------------------------------------
 
+version 1.4_1: Corrected the Japanese localization
 version 1.4: Added the Japanese localization
 Version 1.3: Fixed a filecase bug (occuring only on Unixes)
 Version 1.2: Make it look nicer

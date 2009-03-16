@@ -4,7 +4,7 @@
 2.0.2 vs. 2.0.1
 
   2 Enhancements
-  5 Bugfixes
+  6 Bugfixes
 ----------------------------------------------------------------------
 2.0.1 update 1
 
@@ -37,6 +37,9 @@ which has now three states:
 
   - Confused display when RTL segment starts with LTR characters 
   http://sourceforge.net/support/tracker.php?aid=1898522  
+
+  - Pattern after in Text files segmentation rule contained "\s+" instead
+of " +"
 
 ----------------------------------------------------------------------
  OmegaT 2.0.1

@@ -2074,7 +2074,7 @@
      idea by Jean-Christophe Helary -->
     <rule break="yes">
      <beforebreak>\n</beforebreak>
-     <afterbreak>\s+</afterbreak>
+     <afterbreak> +</afterbreak>
     </rule>
    </languagerule>
 

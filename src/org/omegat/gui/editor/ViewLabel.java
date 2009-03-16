@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.gui.editor;
 
@@ -30,118 +30,92 @@ import org.omegat.gui.editor.OmDocument;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.Shape;
 
 /**
  * Special label view drawing custom colored normal and jagged underlines, as
- * seen on http://forum.java.sun.com/thread.jspa?threadID=5168528&messageID=9647272.
- *
+ * seen on
+ * http://forum.java.sun.com/thread.jspa?threadID=5168528&messageID=9647272.
+ * 
  * If you want to add new types, add a new unused constant and modify paint()
- *
+ * 
  * @author bartkoz
  */
 public class ViewLabel extends LabelView {
-    
-    /** no custom underline */
-    public static final int NO_CUSTOM_UNDERLINE = -1;
-    
-    /** red underline */
-    public static final int RED_UNDERLINE = 1;
-    
-    /** red custom underline */
-    public static final int RED_JAGGED_UNDERLINE = 2;
-    
     /**
-     * the string used to identify the attribute
+     * the element we are wrapping. We need to remember this because LabelView
+     * keeps it secret.
      */
-    public static final String CustomUnderline = "customUnderline";
-    
-    /** the element we are wrapping. We need to remember this because LabelView 
-     * keeps it secret. */
-    private Element element;
-    
+    private OmDocument.OmElementText element;
+
     public ViewLabel(Element elem) {
         super(elem);
-        element = elem;
+        element = (OmDocument.OmElementText) elem;
     }
-    
+
     /**
      * custom paint the thing. Except for the default it checks for any custom
      * underline prescription and then uses paintLine() or paintJaggedLine()
      */
     public void paint(Graphics g, Shape allocation) {
         super.paint(g, allocation);
-        int customUnderlineType = getCustomUnderline(element.getAttributes());
-        switch (customUnderlineType) {
-            case RED_UNDERLINE:
-                paintLine(g, allocation, Color.red);
-                break;
-            case RED_JAGGED_UNDERLINE:
-                paintJaggedLine(g, allocation, Color.red);
-                break;
-            // insert any further custom underline types here
-        };
+
+        if (element.misspelled != null) {
+            for (int i = 0; i < element.misspelled.size(); i++) {
+                // 'for' by index much faster than iterator 'for(v:list)'
+                OmDocument.MisspelledRegion reg = element.misspelled.get(i);
+                int regStart = element.getStartOffset() + reg.off;
+                int regEnd = regStart + reg.len;
+                try {
+                    if (regEnd <= getStartOffset()
+                            || regStart >= getEndOffset()) {
+                        // region is outside of this view
+                        continue;
+                    }
+                    Shape a = allocation;
+                    Rectangle b = (Rectangle) modelToView(regStart, a,
+                            Position.Bias.Forward);
+                    Rectangle e = (Rectangle) modelToView(regEnd, a,
+                            Position.Bias.Forward);
+                    Rectangle line = new Rectangle();
+                    line.x = b.x;
+                    line.y = b.y;
+                    line.width = e.x - b.x;
+                    line.height = b.height;
+                    if (a.intersects(line)) {
+                        paintJaggedLine(g, line, Color.red);
+                    }
+                } catch (BadLocationException ex) {
+                }
+            }
+        }
     }
-    
+
     /**
-     * paint a jagged underline
+     * paint a jagged underline for misspelled parts
      */
-    public void paintJaggedLine(Graphics g, Shape a, Color color) {
-        int y = (int) (a.getBounds().getY() + a.getBounds().getHeight());
+    protected void paintJaggedLine(Graphics g, Shape a, Color color) {
+        int y = (int) (a.getBounds().getY() + a.getBounds().getHeight() - 1);
         int x1 = (int) a.getBounds().getX();
         int x2 = (int) (a.getBounds().getX() + a.getBounds().getWidth());
-        
+
         Color old = g.getColor();
         g.setColor(color);
-        
+
         int w = 3;
         int h = 2;
-        
+
+        Shape prevClip = g.getClip();
+        g.setClip(a);
         for (int i = x1; i <= x2; i += w * 2) {
             g.drawArc(i + 0, y - h, w, h, 0, 180);
             g.drawArc(i + w, y - h, w, h, 180, 181);
         }
-        
+        g.setClip(prevClip);
+
         g.setColor(old);
     }
-    
-    /**
-     * paint a custom underline
-     */
-    public void paintLine(Graphics g, Shape a, Color color) {
-        int y = (int) (a.getBounds().getY() + a.getBounds().getHeight());
-        int x1 = (int) a.getBounds().getX();
-        int x2 = (int) (a.getBounds().getX() + a.getBounds().getWidth());
-        
-        Color old = g.getColor();
-        g.setColor(color);
-        
-        g.drawLine(x1, y - 2, x2, y - 2);
-        g.setColor(old);
-    }
-    
-    /**
-     * see if the attribute set has any custom underline.
-     * @return NO_CUSTOM_UNDERLINE if nothing found
-     */
-    public static int getCustomUnderline(AttributeSet a) {
-                Object o = a.getAttribute(CustomUnderline);
-                if (o != null) {
-                        try {
-                                return Integer.parseInt(o.toString());
-                        } catch (Exception x) {
-                                return NO_CUSTOM_UNDERLINE;
-                        }
-                }
-                return NO_CUSTOM_UNDERLINE;
-        }
-    
-    /**
-     * sets the custom underline type specified to the mutable attribute set
-     */
-    public static void setCustomUnderline(MutableAttributeSet a, int type) {
-                a.addAttribute(CustomUnderline, new Integer(type));
-        }
 
     /**
      * Redefine for read background from parent element.

@@ -69,7 +69,6 @@ public class SegmentElementsDescription {
     protected static final AttributeSet ATTR_SEGMENT_MARK = Styles.BOLD;
     protected static final AttributeSet ATTR_TRANS_TRANSLATED = Styles.TRANSLATED;
     protected static final AttributeSet ATTR_TRANS_UNTRANSLATED = Styles.UNTRANSLATED;
-    protected static final AttributeSet ATTR_MISSPELLED = Styles.MISSPELLED;
     protected static final AttributeSet ATTR_NONE = new SimpleAttributeSet();
 
     final SourceTextEntry ste;
@@ -362,9 +361,14 @@ public class SegmentElementsDescription {
         line.el = doc.new OmElementParagraph(segPartElement.el, null);
         ElementWithChilds text;
 
+        // add label element
+        OmDocument.OmElementText textEl = doc.new OmElementText(line.el, null,
+                partText);
+        text = new ElementWithChilds(textEl);
+        line.addChild(text);
+
         if (needSpellCheck) {
-            // add elements with check spelling
-            int prevFinished = 0;
+            // then define mispelled regions if required
             for (Token tok : Core.getTokenizer().tokenizeWordsForSpelling(
                     partText)) {
 
@@ -372,37 +376,13 @@ public class SegmentElementsDescription {
                         .getOffset()
                         + tok.getLength());
                 if (doc.controller.spellCheckerThread.isIncorrect(word)) {
-                    int tokBeg = tok.getOffset();
-                    int tokEnd = tok.getOffset() + tok.getLength();
-                    if (tokBeg > prevFinished) {
-                        // there is unhandled text before token
-                        text = new ElementWithChilds(doc.new OmElementText(
-                                line.el, null, partText.substring(prevFinished,
-                                        tokBeg)));
-                        line.addChild(text);
-                    }
-                    text = new ElementWithChilds(
-                            doc.new OmElementText(line.el, ATTR_MISSPELLED,
-                                    partText.substring(tokBeg, tokEnd)));
-                    line.addChild(text);
-                    prevFinished = tokEnd;
+                    textEl.addMisspelled(new OmDocument.MisspelledRegion(tok
+                            .getOffset(), tok.getLength()));
                 }
             }
-            if (prevFinished < partText.length()) {
-                // there is unhandled text before token
-                text = new ElementWithChilds(doc.new OmElementText(line.el,
-                        null, partText.substring(prevFinished)));
-                line.addChild(text);
-            }
-        } else {
-            // don't need to spell check. just add element
-            text = new ElementWithChilds(doc.new OmElementText(line.el, null,
-                    partText));
-            line.addChild(text);
         }
 
         segPartElement.addChild(line);
-        return;
     }
 
     /**

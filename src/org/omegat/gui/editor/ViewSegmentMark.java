@@ -43,18 +43,9 @@ import javax.swing.text.Position.Bias;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ViewSegmentMark extends View {
-    private final boolean beginMark;
 
     public ViewSegmentMark(Element elem) {
         super(elem);
-        this.beginMark = ((OmDocument.OmElementSegmentMark) elem).isBeginMark;
-    }
-
-    /**
-     * @deprecated
-     */
-    public boolean isBeginMark() {
-        return beginMark;
     }
 
     protected String getViewText() {

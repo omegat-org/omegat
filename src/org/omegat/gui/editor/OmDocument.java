@@ -27,7 +27,9 @@ package org.omegat.gui.editor;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.font.TextAttribute;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -675,6 +677,18 @@ public class OmDocument extends AbstractDocument implements StyledDocument {
             return null;
         }
     }
+    
+    /**
+     * Class for mark misspelled parts.
+     */
+    public static class MisspelledRegion {
+        protected final int off, len;
+
+        public MisspelledRegion(int off, int len) {
+            this.off = off;
+            this.len = len;
+        }
+    }
 
     /**
      * Implement own TextElement. We can't use standard LeafElement, because we
@@ -682,6 +696,7 @@ public class OmDocument extends AbstractDocument implements StyledDocument {
      */
     public class OmElementText extends AbstractElement {
         protected final Position p0, p1;
+        protected List<MisspelledRegion> misspelled;
 
         public OmElementText(Element parent, AttributeSet a, CharSequence text) {
             super(parent, a);
@@ -724,6 +739,13 @@ public class OmDocument extends AbstractDocument implements StyledDocument {
 
         public Enumeration<?> children() {
             return null;
+        }
+
+        public void addMisspelled(final MisspelledRegion reg) {
+            if (misspelled == null) {
+                misspelled = new ArrayList<MisspelledRegion>();
+            }
+            misspelled.add(reg);
         }
     }
 

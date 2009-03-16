@@ -26,14 +26,13 @@
 package org.omegat.util.gui;
 
 import java.awt.Color;
+
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
-
-import org.omegat.gui.editor.ViewLabel;
 
 /**
  * Static attributes for text.
@@ -56,10 +55,7 @@ public final class Styles
     
     /** untranslated text */
     public final static MutableAttributeSet UNTRANSLATED;
-    
-    /** misspelled text */
-    public final static MutableAttributeSet MISSPELLED;
-    
+        
     /** Disabled, i.e grayed out text. */
     public final static MutableAttributeSet DISABLED;
     
@@ -101,15 +97,7 @@ public final class Styles
         TEXT_EXTRA = new SimpleAttributeSet();
         StyleConstants.setForeground(TEXT_EXTRA, Color.blue);
         TEXT_BORDER = new SimpleAttributeSet();
-        StyleConstants.setForeground(TEXT_BORDER, Color.green);
-        
-        // using red custom jagged underline, as seen in fine word processors
-        // and IDEs.
-        MISSPELLED = new SimpleAttributeSet();
-        StyleConstants.setForeground(MISSPELLED, Color.black);
-        ViewLabel.setCustomUnderline(MISSPELLED, 
-                ViewLabel.RED_JAGGED_UNDERLINE);
-        
+        StyleConstants.setForeground(TEXT_BORDER, Color.green);        
     }
     
     /**
@@ -129,9 +117,6 @@ public final class Styles
         StyleConstants.setForeground(result, StyleConstants.getForeground(toApply));
         StyleConstants.setBold(result, StyleConstants.isBold(toApply));
         StyleConstants.setUnderline(result, StyleConstants.isUnderline(toApply));
-        // make sure the custom underlining is copied, too
-        ViewLabel.setCustomUnderline(result, 
-                ViewLabel.getCustomUnderline(toApply));
         
         return result;
 }

@@ -86,7 +86,7 @@ public class ViewLabel extends LabelView {
                     if (a.intersects(line)) {
                         paintJaggedLine(g, line, Color.red);
                     }
-                } catch (BadLocationException ex) {
+                } catch (Exception ex) {
                 }
             }
         }

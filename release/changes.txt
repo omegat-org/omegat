@@ -196,7 +196,7 @@ can be applied or not with a new option in Options/Font.
 1.8.1 update 3 vs. 1.8.1 update 2
 
    3 Enhancements
-   1 Bugfix
+   2 Bugfixes
 ----------------------------------------------------------------------
 1.8.1 update 3
  
@@ -216,6 +216,9 @@ can be applied or not with a new option in Options/Font.
 
   - Tags are counted as characters in statistics
   http://sourceforge.net/support/tracker.php?aid=1910909 
+
+  - French dictionary cannot be downloaded and installed
+  http://sourceforge.net/support/tracker.php?aid=2138846  
 
 ----------------------------------------------------------------------
  OmegaT 1.8.1 update 2 Changes

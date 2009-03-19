@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Didier Briel, Zoltan Bartko
                2008 Martin Fleurke
+               2009 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -135,7 +136,12 @@ public class PatternConsts
     
     /** Pattern for detecting remote dictionary file archives */
     public static final Pattern DICTIONARY_ZIP = Pattern.compile(
-            "\"([a-z]{1,8})(_([A-Z]{1,8})?)?\\.zip\"");
+//          "\"([a-z]{1,8})(_([A-Z]{1,8})?)?\\.zip\"");
+            // Hardcoded pattern to get the French dictionary
+            // (fr_FR_1-3-2.zip) in addition to the others
+            // The initial pattern is above.
+            // [ 2138846 ] French dictionary cannot be downloaded and installed
+            "\"([a-z]{1,8})(_([A-Z]{1,8})?)(_1-3-2)?\\.zip\"");
     
     /** Pattern for detecting the placeholders in a printf-function string
      *  which can occur in languages like php, C and others. 

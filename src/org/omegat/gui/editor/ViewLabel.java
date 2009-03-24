@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
+               2009 - Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -41,6 +42,7 @@ import java.awt.Shape;
  * If you want to add new types, add a new unused constant and modify paint()
  * 
  * @author bartkoz
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ViewLabel extends LabelView {
     /**
@@ -52,6 +54,14 @@ public class ViewLabel extends LabelView {
     public ViewLabel(Element elem) {
         super(elem);
         element = (OmDocument.OmElementText) elem;
+    }
+
+    /**
+     * Workaround against 1px vertical jumps.
+     */
+    @Override
+    public float getPreferredSpan(int axis) {
+        return Math.round(super.getPreferredSpan(axis));
     }
 
     /**

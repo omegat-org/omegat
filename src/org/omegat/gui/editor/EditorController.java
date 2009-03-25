@@ -174,6 +174,8 @@ public class EditorController implements IEditor {
         });
         CoreEvents.registerEntryEventListener(new IEntryEventListener() {
             public void onNewFile(String activeFileName) {
+                spellCheckerThread.resetCache();
+                
                 updateState(SHOW_TYPE.NO_CHANGE);
             }
 

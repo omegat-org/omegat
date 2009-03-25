@@ -146,6 +146,8 @@ public class EditorController implements IEditor {
 
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
+                spellCheckerThread.resetCache();
+                
                 SHOW_TYPE showType;
                 switch (eventType) {
                 case CREATE:

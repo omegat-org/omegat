@@ -26,18 +26,15 @@
 
 package org.omegat.core.spellchecker;
 
-import com.sun.jna.Native;
-import com.sun.jna.Pointer;
-import com.sun.jna.ptr.PointerByReference;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -46,6 +43,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.dts.spell.dictionary.OpenOfficeSpellDictionary;
 import org.dts.spell.dictionary.SpellDictionary;
@@ -58,6 +56,10 @@ import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 
+import com.sun.jna.Native;
+import com.sun.jna.Pointer;
+import com.sun.jna.ptr.PointerByReference;
+
 /**
  * Spell check implementation for use Hunspell or JMySpell.
  * 
@@ -66,6 +68,10 @@ import org.omegat.util.StaticUtils;
  * @author Didier Briel
  */
 public class SpellChecker implements ISpellChecker {
+    /** Local logger. */
+    private static final Logger LOGGER = Logger.getLogger(SpellChecker.class
+            .getName());
+
     /**
      * The spell checking interface
      */
@@ -150,6 +156,9 @@ public class SpellChecker implements ISpellChecker {
             if (hunspell != null) {
                 pHunspell = hunspell.Hunspell_create(affixName, dictionaryName);
                 encoding = hunspell.Hunspell_get_dic_encoding(pHunspell);
+                LOGGER
+                        .finer("Initialize SpellChecker by Hunspell for language '"
+                                + language + "' dictionary " + dictionaryName);
             } else {
                 try {
                     SpellDictionary dict = new OpenOfficeSpellDictionary(new File(dictionaryName), new File(affixName), false);
@@ -159,6 +168,9 @@ public class SpellChecker implements ISpellChecker {
                     Log.log("Error loading jmyspell: " + ex.getMessage());
                     return;
                 }
+                LOGGER
+                        .finer("Initialize SpellChecker by JMySpell for language '"
+                                + language + "' dictionary " + dictionaryName);
             }            
             // find out the internal project directory
             String projectDir = 

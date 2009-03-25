@@ -195,7 +195,7 @@ public class SpellChecker implements ISpellChecker {
                 try {
                     // load the learned words into the spell checker
                     for (int i = 0; i < learnedList.size(); i++) {
-                        hunspell.Hunspell_put_word(pHunspell, prepareString(learnedList.get(i)));
+                        addWord(pHunspell, prepareString((String) learnedList.get(i)));
                     }
                 } catch (UnsupportedEncodingException ex) {
                     Log.log("Unsupported encoding " + encoding);
@@ -328,29 +328,37 @@ public class SpellChecker implements ISpellChecker {
                 Log.log("Unsupported encoding "+encoding);
             }
 
+            Pointer[] pointerArray = null;
             Pointer pointer = strings.getValue();
-            Pointer[] pointerArray = pointer.getPointerArray(0,total);
+            if (pointer != null)
+            try {
+                pointerArray = pointer.getPointerArray(0,total);
+            } catch (NullPointerException ex) {
+              // Just eat exception
+            }
 
-            // convert it back
-            Charset charset = Charset.forName(encoding);
-            CharsetDecoder decoder = charset.newDecoder();
+            if (pointerArray != null) { // If there are sugggestions
+                // convert it back
+                Charset charset = Charset.forName(encoding);
+                CharsetDecoder decoder = charset.newDecoder();
 
-            for (int i = 0; i < total; i++) {
-                try {
-                    // get the string
-                    int bufferCursor = 0;
-                    byte[] buffer = new byte[100];
-                    byte current;
-                    while (bufferCursor < 100 && 
-                            (current = pointerArray[i].getByte(bufferCursor)) != 0) {
-                        buffer[bufferCursor]=current;
-                        bufferCursor++;
+                for (int i = 0; i < total; i++) {
+                    try {
+                        // get the string
+                        int bufferCursor = 0;
+                        byte[] buffer = new byte[100];
+                        byte current;
+                        while (bufferCursor < 100 &&
+                                (current = pointerArray[i].getByte(bufferCursor)) != 0) {
+                            buffer[bufferCursor]=current;
+                            bufferCursor++;
+                        }
+
+                        CharBuffer cbuf = decoder.decode(ByteBuffer.wrap(buffer));
+                        aList.add(cbuf.toString().trim());
+                    } catch (CharacterCodingException ex) {
+                        Log.log("Unsupported encoding "+encoding);
                     }
-
-                    CharBuffer cbuf = decoder.decode(ByteBuffer.wrap(buffer));
-                    aList.add(cbuf.toString().trim());
-                } catch (CharacterCodingException ex) {
-                    Log.log("Unsupported encoding "+encoding);
                 }
             }
         } else if (jmyspell != null) {
@@ -377,7 +385,7 @@ public class SpellChecker implements ISpellChecker {
             learnedList.add(word);
             if (pHunspell != null) {
                 try {
-                    hunspell.Hunspell_put_word(pHunspell, prepareString(word));
+                    addWord(pHunspell, prepareString(word));
                 } catch (UnsupportedEncodingException ex) {
                     Log.log("Unsupported encoding " + encoding);
                 }            
@@ -422,5 +430,42 @@ public class SpellChecker implements ISpellChecker {
         } 
         
         return System.mapLibraryName(libName);
+    }
+
+    /**
+     * If Hunspell_add is not supported, whether this has already
+     * be recorded in the log
+     */
+    private boolean addNotSupportedLogged = false;
+
+    /**
+     * Whether adding words to Hunspell works or not
+     */
+    private boolean addToHunspell = true;
+
+    /**
+     * Try to use Hunspell_add to add a word to the dictionnary.
+     * If that fails, try to use Hunspell_put_word
+     * (old Hunspell librairies). If that fails too, set hunspell to null
+     * @param pHunspell Pointer to the Hunspell class
+     * @param word Word to add
+     */
+    private void addWord(Pointer pHunspell, byte[] word){
+        if (!addToHunspell)
+            return;
+        try {
+            hunspell.Hunspell_add(pHunspell, word);
+        } catch (Error err1) {
+            if (!addNotSupportedLogged){
+                Log.log("Hunspell_add not supported");
+                addNotSupportedLogged = true;
+            }
+            try {
+                hunspell.Hunspell_put_word(pHunspell, word);
+            } catch (Error err2) {
+                Log.log("Hunspell_put_word not supported");
+                addToHunspell = false;
+            }
+        }
     }
 }

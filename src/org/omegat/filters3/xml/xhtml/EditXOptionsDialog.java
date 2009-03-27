@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2008 Didier Briel, Martin Fleurke
+               2009 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -54,18 +55,18 @@ public class EditXOptionsDialog extends javax.swing.JDialog
         super(parent, true);
         this.options = options;
         initComponents();
-        if (options!=null)
-        {
-            translateHrefCB.setSelected(options.getTranslateHref());
-            translateSrcCB.setSelected(options.getTranslateSrc());
-            translateLangCB.setSelected(options.getTranslateLang());
-            translateHreflangCB.setSelected(options.getTranslateHreflang());
-            translateValueCB.setSelected(options.getTranslateValue());
-            translateButtonValueCB.setSelected(options.getTranslateButtonValue());
-            paragraphOnBrCB.setSelected(options.getParagraphOnBr());
-            skipRegExpTF.setText(options.getSkipRegExp());
-            skipMetaTF.setText(options.getSkipMeta());
-        }
+        if (options==null)
+            options = new XHTMLOptions(); // Set default options
+
+        translateHrefCB.setSelected(options.getTranslateHref());
+        translateSrcCB.setSelected(options.getTranslateSrc());
+        translateLangCB.setSelected(options.getTranslateLang());
+        translateHreflangCB.setSelected(options.getTranslateHreflang());
+        translateValueCB.setSelected(options.getTranslateValue());
+        translateButtonValueCB.setSelected(options.getTranslateButtonValue());
+        paragraphOnBrCB.setSelected(options.getParagraphOnBr());
+        skipRegExpTF.setText(options.getSkipRegExp());
+        skipMetaTF.setText(options.getSkipMeta());
 
         //  Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);

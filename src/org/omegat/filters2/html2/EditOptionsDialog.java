@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2008 Didier Briel, Martin Fleurke
+               2009 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -56,33 +57,34 @@ public class EditOptionsDialog extends javax.swing.JDialog
         this.options = options;
         initComponents();
 
-        if (options!=null)
+        if (options==null)
+            options = new HTMLOptions(); // Set default options
+        
+        switch (options.getRewriteEncoding())
         {
-            switch (options.getRewriteEncoding())
-            {
-                case HTMLOptions.REWRITE_ALWAYS:
-                    alwaysRB.setSelected(true);
-                    break;
-                case HTMLOptions.REWRITE_IFHEADER:
-                    ifHasHeaderRB.setSelected(true);
-                    break;
-                case HTMLOptions.REWRITE_IFMETA:
-                    ifHasMetaRB.setSelected(true);
-                    break;
-                case HTMLOptions.REWRITE_NEVER:
-                    neverRB.setSelected(true);
-                    break;
-            }
-            translateHrefCB.setSelected(options.getTranslateHref());
-            translateSrcCB.setSelected(options.getTranslateSrc());
-            translateLangCB.setSelected(options.getTranslateLang());
-            translateHreflangCB.setSelected(options.getTranslateHreflang());
-            translateValueCB.setSelected(options.getTranslateValue());
-            translateButtonValueCB.setSelected(options.getTranslateButtonValue());
-            paragraphOnBrCB.setSelected(options.getParagraphOnBr());
-            skipRegExpTF.setText(options.getSkipRegExp());
-            skipMetaTF.setText(options.getSkipMeta());
+            case HTMLOptions.REWRITE_ALWAYS:
+                alwaysRB.setSelected(true);
+                break;
+            case HTMLOptions.REWRITE_IFHEADER:
+                ifHasHeaderRB.setSelected(true);
+                break;
+            case HTMLOptions.REWRITE_IFMETA:
+                ifHasMetaRB.setSelected(true);
+                break;
+            case HTMLOptions.REWRITE_NEVER:
+                neverRB.setSelected(true);
+                break;
         }
+        translateHrefCB.setSelected(options.getTranslateHref());
+        translateSrcCB.setSelected(options.getTranslateSrc());
+        translateLangCB.setSelected(options.getTranslateLang());
+        translateHreflangCB.setSelected(options.getTranslateHreflang());
+        translateValueCB.setSelected(options.getTranslateValue());
+        translateButtonValueCB.setSelected(options.getTranslateButtonValue());
+        paragraphOnBrCB.setSelected(options.getParagraphOnBr());
+        skipRegExpTF.setText(options.getSkipRegExp());
+        skipMetaTF.setText(options.getSkipMeta());
+        
 
         //  Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);

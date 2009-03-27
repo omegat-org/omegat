@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007-2008 Didier Briel
+               2007-2009 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -53,18 +53,18 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         super(parent, true);
         this.options = options;
         initComponents();
-        if (options!=null)
-        {
-            translateHiddenTextCB.setSelected(options.getTranslateHiddenText());
-            translateCommentsCB.setSelected(options.getTranslateComments());
-            translateFootnotesCB.setSelected(options.getTranslateFootnotes());
-            translateEndnotesCB.setSelected(options.getTranslateEndnotes());
-            translateHeadersCB.setSelected(options.getTranslateHeaders());
-            translateFootersCB.setSelected(options.getTranslateFooters());
-            translateExcelCommentsCB.setSelected(options.getTranslateExcelComments());
-            translateSlideCommentsCB.setSelected(options.getTranslateSlideComments());
-            translateSlideMastersCB.setSelected(options.getTranslateSlideMasters());
-        }
+        if (options==null)
+            options = new OpenXMLOptions(); // Set default options
+
+        translateHiddenTextCB.setSelected(options.getTranslateHiddenText());
+        translateCommentsCB.setSelected(options.getTranslateComments());
+        translateFootnotesCB.setSelected(options.getTranslateFootnotes());
+        translateEndnotesCB.setSelected(options.getTranslateEndnotes());
+        translateHeadersCB.setSelected(options.getTranslateHeaders());
+        translateFootersCB.setSelected(options.getTranslateFooters());
+        translateExcelCommentsCB.setSelected(options.getTranslateExcelComments());
+        translateSlideCommentsCB.setSelected(options.getTranslateSlideComments());
+        translateSlideMastersCB.setSelected(options.getTranslateSlideMasters());
         
         //  Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);

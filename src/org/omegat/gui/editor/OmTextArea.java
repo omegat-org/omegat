@@ -264,7 +264,7 @@ class OmTextArea extends JEditorPane {
      * Checks whether the selection & caret is inside editable text, and changes
      * their positions accordingly if not.
      */
-    private void checkAndFixCaret() {
+    void checkAndFixCaret() {
         OmDocument doc = getOmDocument();
         if (doc == null) {
             // doc is not active
@@ -335,6 +335,16 @@ class OmTextArea extends JEditorPane {
     public void paste() {
         checkAndFixCaret();
         super.paste();
+    }
+    
+    /**
+     * Allow to cut segment, even selection outside editable segment. In
+     * this case selection will be truncated into segment's boundaries.
+     */
+    @Override
+    public void cut() {
+        checkAndFixCaret();
+        super.cut();
     }
 
     /**

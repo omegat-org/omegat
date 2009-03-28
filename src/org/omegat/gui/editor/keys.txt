@@ -1,0 +1,50 @@
+This short text describes key behavior in the editor.
+
+Terms:
+ "move to inside segment" means, what caret will be moved to the begin of segment if previous position was before segment, and to the end of segment, if previous position was after segment
+
+Keys definitions:
+
+ Left: one char left, but not earlier than segment's begin
+ Right: one char right, but not later than segment's end
+ Ctrl+Left: one word left, but stay within the segment
+ Ctrl+Right: one word right, but stay within the segment
+
+ PgUp: move to one page up
+ PgDn: move to one page down
+
+ Home: to the begin of segment's line
+ End: to the end of segment's line
+ Ctrl+Home: to the beginning of the segment
+ Ctrl+End: to the ending of the segment
+ Ctrl+PgUp: to the beginning of the document(Mac: Cmd+PgUp)
+ Ctrl+PgDn: to the ending of the document(Mac: Cmd+PgDn)
+
+
+ Backspace: remove char before caret
+ Delete: remove char after caret
+ Ctrl+Backspace: remove to the begin of word(Mac: Alt+Backspace)
+ Ctrl+Delete: remove to the begin of next word(Mac: Alt+Delete)
+
+ Ctrl+Enter: previous segment(Mac: Cmd+Enter)
+ Ctrl+A: select full editable segment(Mac: Cmd+A)
+ Ctrl+Shift+O: RTL-LTR switch
+
+Keys definitions, which behavior differ than caret outside editable segment behavior:
+
+ Home: "move to inside segment"
+ End: "move to inside segment"
+
+ Backspace: nothing
+ Delete: nothing
+ Any char key, if clicked outside editable segment, will be ignored.
+
+
+ "Shift" key doesn't have own behavior - it just add selection from old to new caret position.
+All keys should move caret with the "Shift", like without "Shift"
+
+  Commands, which works even current selection is outside from editable segment. In this case selection will be corrected to segment's boundaries:
+1. Paste (Ctrl+V or Ctrl+Insert)
+2. Cut (Ctrl+X or Ctrl+Delete)
+3. Insert match (Ctrl+I)
+4. Insert source (Ctrl+Shift+I)  

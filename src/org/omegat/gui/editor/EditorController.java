@@ -917,6 +917,8 @@ public class EditorController implements IEditor {
      */
     public void insertText(final String text) {
         UIThreadsUtil.mustBeSwingThread();
+        
+        editor.checkAndFixCaret();
 
         editor.replaceSelection(text);
     }

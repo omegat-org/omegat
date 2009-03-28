@@ -395,6 +395,57 @@ public class OmDocument extends AbstractDocument implements StyledDocument {
         // replace view
         mainView.replace(0, mainView.getViewCount(), nv);
     }
+    
+    /**
+     * Hide misspelled word in all elements, because we added it into local
+     * dictionary or ignored words.
+     * 
+     * Travel by all elements and remove the same misspelled words.
+     * 
+     * @param word
+     */
+    void hideMisspelledWord(final String word) {
+        for (int i = 0; i < root.getElementCount(); i++) {
+            OmElementSegment seg = (OmElementSegment) root.getElement(i);
+            for (int j = 0; j < seg.getElementCount(); j++) {
+                if (!(seg.getElement(j) instanceof OmElementSegPart)) {
+                    continue;
+                }
+                OmElementSegPart segPart = (OmElementSegPart) seg.getElement(j);
+                for (int k = 0; k < segPart.getElementCount(); k++) {
+                    OmElementParagraph par = (OmElementParagraph) segPart
+                            .getElement(k);
+                    for (int l = 0; l < par.getElementCount(); l++) {
+                        if (!(par.getElement(l) instanceof OmElementText)) {
+                            continue;
+                        }
+                        OmElementText tx = (OmElementText) par.getElement(l);
+                        if (tx.misspelled == null) {
+                            continue;
+                        }
+                        for (int m = 0; m < tx.misspelled.size(); m++) {
+                            MisspelledRegion reg = tx.misspelled.get(m);
+                            if (reg.len == word.length()) {
+                                try {
+                                    String ew = getData().getString(reg.off,
+                                            reg.len);
+                                    if (word.equalsIgnoreCase(ew)) {
+                                        /*
+                                         * the same word, need to remove from
+                                         * misspelled list
+                                         */
+                                        tx.misspelled.remove(m);
+                                        m--;
+                                    }
+                                } catch (BadLocationException ex) {
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * Calculate segment index in specified location.

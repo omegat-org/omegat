@@ -97,6 +97,8 @@ public class ViewLabel extends LabelView {
                         paintJaggedLine(g, line, Color.red);
                     }
                 } catch (Exception ex) {
+                    // Hide exception on impossible draw misspelled word. It
+                    // shouldn't be throwned.
                 }
             }
         }

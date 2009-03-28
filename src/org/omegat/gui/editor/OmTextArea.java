@@ -481,7 +481,8 @@ class OmTextArea extends JEditorPane {
 
         controller.spellCheckerThread.resetCache();
 
-        // redraw segment
-        getOmDocument().replaceTranslationElements(null);
+        getOmDocument().hideMisspelledWord(word);
+        // redraw all segments
+        repaint();
     }
 }

@@ -79,6 +79,7 @@ public class XHTMLFilter extends XMLFilter
         {
             new Instance("*.html", null, null),
             new Instance("*.xhtml", null, null),
+            new Instance("*.xht", null, null),
         };
     }
 

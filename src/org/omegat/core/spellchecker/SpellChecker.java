@@ -301,7 +301,7 @@ public class SpellChecker implements ISpellChecker {
         } else if (jmyspell != null) {
             return jmyspell.isCorrect(word);
         } else {
-            return false;
+            return true;
         }
     }
     

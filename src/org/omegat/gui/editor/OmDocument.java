@@ -429,7 +429,7 @@ public class OmDocument extends AbstractDocument implements StyledDocument {
                                 try {
                                     String ew = getData().getString(reg.off,
                                             reg.len);
-                                    if (word.equalsIgnoreCase(ew)) {
+                                    if (word.equals(ew)) {
                                         /*
                                          * the same word, need to remove from
                                          * misspelled list

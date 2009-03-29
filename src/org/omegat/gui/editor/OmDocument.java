@@ -427,7 +427,8 @@ public class OmDocument extends AbstractDocument implements StyledDocument {
                             MisspelledRegion reg = tx.misspelled.get(m);
                             if (reg.len == word.length()) {
                                 try {
-                                    String ew = getData().getString(reg.off,
+                                    String ew = getData().getString(
+                                            reg.off + tx.getStartOffset(),
                                             reg.len);
                                     if (word.equals(ew)) {
                                         /*

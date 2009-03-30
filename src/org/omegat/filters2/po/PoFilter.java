@@ -118,7 +118,7 @@ public class PoFilter extends AbstractFilter
                 //Read the no-wrap comment, indicating that the creator of
                 //the po-file did not want long messages to be wrapped on 
                 //multiple lines.
-                //See �5.6.2 no-wrap of 
+                //See 5.6.2 no-wrap of 
                 //http://docs.oasis-open.org/xliff/v1.2/xliff-profile-po/xliff-profile-po-1.2-cd02.html 
                 //for an example.
                 nowrap = true;

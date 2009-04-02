@@ -199,6 +199,21 @@ can be applied or not with a new option in Options/Font.
   - French localisation updated to 2.0 (UI)
 
 ----------------------------------------------------------------------
+ OmegaT 1.8.1 update 4 Changes
+----------------------------------------------------------------------
+1.8.1 update 4 vs. 1.8.1 update 3
+
+   0 Enhancement
+   1 Bugfix
+----------------------------------------------------------------------
+1.8.1 update 4
+
+  Bug fixes:
+
+  - Hunspell and OmegaT could crash if a dictionary did not exist for
+a project's language
+
+----------------------------------------------------------------------
  OmegaT 1.8.1 update 3 Changes
 ----------------------------------------------------------------------
 1.8.1 update 3 vs. 1.8.1 update 2

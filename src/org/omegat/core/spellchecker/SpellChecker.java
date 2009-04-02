@@ -76,6 +76,8 @@ public class SpellChecker implements ISpellChecker {
      * The spell checking interface
      */
     private Hunspell hunspell;
+
+    private Hunspell hunspellSave;
     
     private org.dts.spell.SpellChecker jmyspell;
     
@@ -152,6 +154,23 @@ public class SpellChecker implements ISpellChecker {
 
             String dictionaryName = dictionaryDir + File.separator + language +
                     OConsts.SC_DICTIONARY_EXTENSION;
+            
+            // Prevents Hunspell from crashing if the dictionary doesn't exist
+            // That's a hack. Ideally, the fact that the Hunspell library
+            // could be loaded (i.e., hunspell != null) should be separated
+            // from the fact that there is
+            // a dictionary available for a given project
+            File dicFile = new File(dictionaryName);
+            if (!dicFile.exists()){
+                if (hunspell != null){
+                    hunspellSave = hunspell; // Save for the next project
+                    hunspell = null;
+                }
+                return;
+            }
+            if (hunspell == null && hunspellSave != null)
+                hunspell = hunspellSave;
+            // End of hack
 
             if (hunspell != null) {
                 pHunspell = hunspell.Hunspell_create(affixName, dictionaryName);

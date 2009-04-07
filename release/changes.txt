@@ -100,7 +100,7 @@ and copied to the clipboard.
 ----------------------------------------------------------------------
 2.0.0 update 1 vs. 2.0.0
 
-  7 Enhancements
+  8 Enhancements
   1 Bugfix
 
 ----------------------------------------------------------------------
@@ -129,6 +129,12 @@ and copied to the clipboard.
 
   - OmegaT can use tokenizers to get stemming in fuzzy and glossary matches. 
   (Requires tokenizers from http://sourceforge.net/projects/omegat-plugins)
+
+  - Three percentages are displayed in the match pane, corresponding to the three 
+steps of matching:
+1 Using stemming (if a tokenizer is used)
+2 Without stemming
+3 Taking everything into account (tags, numbers, punctuation)
 
   - Japanese localisation updated to 2.0 (UI)
   - Basque localisation updated to 2.0 (UI)

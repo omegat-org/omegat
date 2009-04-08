@@ -279,6 +279,8 @@ public class SpellChecker implements ISpellChecker {
      * dump word list to a file
      */
     private void dumpWordList(List<String> list, String filename) {
+        if (filename == null)
+            return;
         BufferedWriter bw = null;
         try {
             bw = new BufferedWriter(new OutputStreamWriter

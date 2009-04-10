@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 2.0.2 vs. 2.0.1
 
-  4 Enhancements
+  5 Enhancements
   8 Bugfixes
 ----------------------------------------------------------------------
 2.0.1 update 2
@@ -27,6 +27,8 @@ which has now three states:
 (without entering the segment) 
 
   - Update of some user interface texts for clarification purposes
+
+  - Spanish localisation updated to 2.0.2 (UI, readme, instant start) 
 
   Bug Fixes: 
 

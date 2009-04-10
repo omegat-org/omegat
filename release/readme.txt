@@ -220,7 +220,7 @@ OmegaT uses the following libraries:
   VLDocking Framework 2.1.4 by VLSolutions (CeCILL License)
   http://www.vlsolutions.com/en/products/docking/
 
-  Hunspell 1.1.12 by László Németh and others (LGPL License)
+  Hunspell by László Németh and others (LGPL License)
 
   JNA by Todd Fast, Timothy Wall and others (LGPL License)
 

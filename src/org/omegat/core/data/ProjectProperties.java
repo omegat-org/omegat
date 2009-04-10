@@ -201,32 +201,38 @@ public class ProjectProperties
     }
     
     /**
+     * Verify the correctness of a language or country code 
+     * @param code A string containing a language or country code
+     * @return <code>true</code> or <code>false</code>
+     */
+    private static boolean verifyLangCode(String code) {
+        // Make sure all values are characters
+        for (int i=0 ; i < code.length() ; i++) {
+            if (!Character.isLetter(code.charAt(i)))
+                return false;
+        }
+        if (new Language(code).getDisplayName().length()>0 ){
+                return true;
+        } else
+             return false;
+    }
+
+    /**
      * Verifies whether the language code is OK.
      */
-    public static boolean verifySingleLangCode(String code)
-    {
-        if( code.length()==2 )
-        {
-            // make sure both values are characters
-            if( Character.isLetter(code.charAt(0)) &&
-                    Character.isLetter(code.charAt(1)) &&
-                    new Language(code).getDisplayName().length()>0 )
-            {
+    public static boolean verifySingleLangCode(String code) {
+        if (code.length()==2 || code.length()==3) {
+            return verifyLangCode(code);
+        } else if (code.length() == 5 || code.length()==6) {
+            int shift = 0;
+            if (code.length()==6)
+                shift = 1;
+            if ((verifyLangCode(code.substring(0, 2 + shift))) &&
+                (code.charAt(2 + shift)=='-' || code.charAt(2 + shift)=='_') &&
+                (verifyLangCode(code.substring(3 + shift, 5 + shift))))
                 return true;
-            }
-        }
-        else if (code.length() == 5)
-        {
-            // make sure both values are characters
-            if( Character.isLetter(code.charAt(0)) &&
-                    Character.isLetter(code.charAt(1)) &&
-                    Character.isLetter(code.charAt(3)) &&
-                    Character.isLetter(code.charAt(4)) &&
-                    (code.charAt(2)=='-' || code.charAt(2)=='_') &&
-                    new Language(code).getDisplayName().length()>0 )
-            {
-                return true;
-            }
+            else
+                return false;
         }
         return false;
     }

@@ -217,11 +217,17 @@ can be applied or not with a new option in Options/Font.
 1.8.1 update 4 vs. 1.8.1 update 3
 
    0 Enhancement
-   1 Bugfix
+   3 Bugfixes
 ----------------------------------------------------------------------
 1.8.1 update 4
 
   Bug fixes:
+
+  - XML, stylesheet declaration removed from target
+  http://sourceforge.net/support/tracker.php?aid=1677412
+  
+  - XML, Processing Instructions removed from target document
+  http://sourceforge.net/support/tracker.php?aid=1662202  
 
   - Hunspell and OmegaT could crash if a dictionary did not exist for
 a project's language

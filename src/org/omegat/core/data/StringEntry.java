@@ -88,7 +88,7 @@ public class StringEntry
      * 
      * @return how translation count changed: +1 - added, -1 - substracted, 0 - not changed
      */
-    protected int setTranslation(String trans)
+    public int setTranslation(String trans)
     {
         if( trans==null )
             trans = "";                                                         // NOI18N

@@ -217,7 +217,7 @@ can be applied or not with a new option in Options/Font.
 1.8.1 update 4 vs. 1.8.1 update 3
 
    0 Enhancement
-   3 Bugfixes
+   4 Bugfixes
 ----------------------------------------------------------------------
 1.8.1 update 4
 
@@ -231,6 +231,9 @@ can be applied or not with a new option in Options/Font.
 
   - Hunspell and OmegaT could crash if a dictionary did not exist for
 a project's language
+
+  - DocBook filter: the tag <mrk> was declared as not containing 
+translatable content
 
 ----------------------------------------------------------------------
  OmegaT 1.8.1 update 3 Changes

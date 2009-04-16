@@ -57,7 +57,7 @@ public class XLIFFDialect extends DefaultXMLDialect
             "count-group",                                                      // NOI18N
             "alt-trans",                                                        // NOI18N
             "note",                                                             // NOI18N
-            "mrk",                                                              // NOI18N
+//            "mrk", only <mrk mtype="protected"> should be an intact tag       // NOI18N
             "ph",                                                               // NOI18N
             "bpt",                                                              // NOI18N
             "ept",                                                              // NOI18N

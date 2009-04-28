@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 2.0.2 vs. 2.0.1
 
-  5 Enhancements
+  6 Enhancements
   8 Bugfixes
 ----------------------------------------------------------------------
 2.0.1 update 2
@@ -12,6 +12,9 @@
 
   - Support for alpha-3 language codes of ISO 639-2 and 639-3
   http://sourceforge.net/support/tracker.php?aid=1570557 
+
+  - ResX file filter
+  http://sourceforge.net/support/tracker.php?aid=1908250 
 
   Other enhancements:
 

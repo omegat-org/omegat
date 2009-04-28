@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Martin Fleurke
+               2009 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -38,6 +39,7 @@ import org.xml.sax.InputSource;
  *
  * @author Maxym Mykhalchuk
  * @author Martin Fleurke
+ * @author Didier Briel
  */
 public interface XMLDialect
 {
@@ -92,6 +94,20 @@ public interface XMLDialect
     Boolean validateTranslatableTagAttribute(String tag, 
                                              String attribute, 
                                              Attributes atts);
+    /**
+     * For a given tag, return wether the content of this tag should be
+     * translated, depending on the content of one attribute and the presence
+     * or absence of other attributes.
+     * For instance, in the ResX filter,
+     * tags should not be translated when then contain the attribute "type", or
+     * when the attribute "name" starts with "&amp;gt";
+     * @param tag The tag that could be translated
+     * @param atts The list of the tag attributes
+     * @return <code>true</code> or <code>false</code>
+     */
+    Boolean validateTranslatableTag(String tag,
+                                    Attributes atts);
+    
 
     /**
      * Returns the set of translatable attributes (no matter what tag they belong to).

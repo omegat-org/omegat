@@ -62,6 +62,7 @@ import org.xml.sax.helpers.DefaultHandler;
  *
  * @author Maxym Mykhalchuk
  * @author Martin Fleurke
+ * @author Didier Briel
  */
 class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
 {
@@ -100,6 +101,9 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     Stack<Entry> outofturnEntries = new Stack<Entry>();
     /** Current entry that collects the text surrounded by intact tag. */
     Entry intacttagEntry = null;
+    /** Keep the attributes of an intact tag. */
+    org.omegat.filters3.Attributes intacttagAttributes = null;
+
     /** Current entry that collects the text surrounded by intact tag. */
     String intacttagName = null;
 
@@ -334,7 +338,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
             {
                 if (!new File(new URI(systemId)).exists())
                     entity = null;
-            }
+                }
 
             if (entity!=null)
             {
@@ -400,16 +404,18 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     {
         Tag xmltag;
         XMLIntactTag intacttag = null;
-        if (!collectingIntactText() && isIntactTag(tag))
+        if (!collectingIntactText() &&
+                isIntactTag(tag, XMLUtils.convertAttributes(attributes)))
         {
             intacttag = new XMLIntactTag(tag, getShortcut(tag), attributes);
             xmltag = intacttag;
             intacttagName = tag;
+            intacttagAttributes = XMLUtils.convertAttributes(attributes);
         }
-        else
+        else 
             xmltag = new XMLTag(tag, getShortcut(tag), Tag.TYPE_BEGIN, attributes);
 
-        currEntry().add(xmltag);
+            currEntry().add(xmltag);
 
         if (intacttag!=null)
             intacttagEntry = intacttag.getIntactContents();
@@ -480,10 +486,12 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     /** Is called when the tag is ended. */
     private void end(String tag) throws SAXException, TranslationException
     {
-        if (collectingIntactText() && isIntactTag(tag) && tag.equals(intacttagName))
+        if (collectingIntactText() && isIntactTag(tag, null)
+                && tag.equals(intacttagName))
         {
             intacttagEntry = null;
             intacttagName = null;
+            intacttagAttributes = null;
         }
         else if (collectingOutOfTurnText() && isOutOfTurnTag(tag))
         {
@@ -569,10 +577,22 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         return dialect.getPreformatTags()!=null && dialect.getPreformatTags().contains(tag);
     }
 
-    /** Returns whether the tag surrounds intact block of text which we shouldn't translate. */
-    private boolean isIntactTag(String tag)
+    /** Returns whether the tag surrounds intact block of text which we 
+     * shouldn't translate.
+     */
+    private boolean isIntactTag(String tag, org.omegat.filters3.Attributes atts)
     {
-        return dialect.getIntactTags()!=null && dialect.getIntactTags().contains(tag);
+        if (dialect.getIntactTags()!=null &&
+            dialect.getIntactTags().contains(tag))
+            return true;
+        else {
+            if (atts == null) {
+                if (tag.equals(intacttagName))
+                   atts = intacttagAttributes; // Restore attributes
+            }
+
+            return !dialect.validateTranslatableTag(tag, atts);
+        }
     }
 
     /** Returns whether we face out of turn tag we should collect separately. */

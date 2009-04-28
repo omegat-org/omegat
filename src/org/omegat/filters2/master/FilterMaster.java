@@ -4,10 +4,12 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-           (C) 2005-06 Henry Pijffers
-           (C) 2006 Martin Wunderlich
-           (C) 2006-2007 Didier Briel
-           (C) 2008 Martin Fleurke, Didier Briel
+               2005-2006 Henry Pijffers
+               2006 Martin Wunderlich
+               2006-2007 Didier Briel
+               2008 Martin Fleurke, Didier Briel
+               2009 Didier Briel
+
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -62,6 +64,7 @@ import org.omegat.filters2.text.ini.INIFilter;
 import org.omegat.filters3.xml.docbook.DocBookFilter;
 import org.omegat.filters3.xml.opendoc.OpenDocFilter;
 import org.omegat.filters3.xml.openxml.OpenXMLFilter;
+import org.omegat.filters3.xml.resx.ResXFilter;
 import org.omegat.filters3.xml.xhtml.XHTMLFilter;
 import org.omegat.filters3.xml.xliff.XLIFFFilter;
 import org.omegat.util.LFileCopy;
@@ -77,6 +80,9 @@ import org.omegat.util.StaticUtils;
  *
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers
+ * @author Martin Wunderlich
+ * @author Didier Briel
+ * @author Martin Fleurke
  */
 public class FilterMaster
 {
@@ -541,7 +547,8 @@ public class FilterMaster
         res.addFilter(new OneFilter(new OpenXMLFilter(), false));
         res.addFilter(new OneFilter(new XLIFFFilter(), false));        
         res.addFilter(new OneFilter(new SrtFilter(), false));
-        res.addFilter(new OneFilter(new XtagFilter(), false));       
+        res.addFilter(new OneFilter(new XtagFilter(), false));   
+        res.addFilter(new OneFilter(new ResXFilter(), false));
         return res;
     }
     

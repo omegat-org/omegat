@@ -1,3 +1,5 @@
 #!/bin/bash
-jre/bin/java -jar OmegaT.jar $*
+# readlink follows any symbolic links to get the real file
+REALOMEGATPATH=`dirname $(readlink -nf $0)`
+${REALOMEGATPATH}/jre/bin/java -jar ${REALOMEGATPATH}/OmegaT.jar $*
 

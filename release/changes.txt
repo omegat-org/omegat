@@ -215,6 +215,22 @@ can be applied or not with a new option in Options/Font.
   - French localisation updated to 2.0 (UI)
 
 ----------------------------------------------------------------------
+ OmegaT 1.8.1 update 5 Changes
+----------------------------------------------------------------------
+1.8.1 update 5 vs. 1.8.1 update 4
+
+   0 Enhancement
+   1 Bugfix
+
+----------------------------------------------------------------------
+1.8.1 update 5
+
+  Bug fixes:
+
+  - Linux startup script must be run from install dir
+  http://sourceforge.net/support/tracker.php?aid=2654430
+
+----------------------------------------------------------------------
  OmegaT 1.8.1 update 4 Changes
 ----------------------------------------------------------------------
 1.8.1 update 4 vs. 1.8.1 update 3

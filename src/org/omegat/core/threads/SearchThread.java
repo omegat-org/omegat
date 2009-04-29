@@ -4,7 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
- Portions Copyright 2006 Henry Pijffers
+               2006 Henry Pijffers
+               2009 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -56,6 +57,7 @@ import org.omegat.util.StaticUtils;
  *
  * @author Keith Godfrey
  * @author Henry Pijffers
+ * @author Didier Briel
  */
 public class SearchThread extends Thread
 {
@@ -97,13 +99,15 @@ public class SearchThread extends Thread
                               boolean keyword,
                               boolean caseSensitive,
                               boolean regex,
-                              boolean tm)
+                              boolean tm,
+                              boolean allResults)
     {
         if (!m_searching)
         {
             m_searchDir = rootDir;
             m_searchRecursive = recursive;
             m_tmSearch = tm;
+            m_allResults = allResults;
             m_searching = true;
             m_entrySet = new HashSet<String>(); // HP
 
@@ -255,11 +259,12 @@ public class SearchThread extends Thread
 
         if (entryNum >= 0)
         {
-            if (!m_entrySet.contains(src + target)) { // HP, duplicate entry prevention
+           if (!m_entrySet.contains(src + target) || m_allResults) { // HP, duplicate entry prevention
                 // entries are referenced at offset 1 but stored at offset 0
                 m_window.addEntry(entryNum+1, null, (entryNum+1)+"> "+src, target);	// NOI18N
-                m_entrySet.add(src + target); // HP
-            }
+                if (!m_allResults) // If we filter results
+                    m_entrySet.add(src + target); // HP
+           }
         }
         else
         {
@@ -402,6 +407,7 @@ public class SearchThread extends Thread
     private boolean   m_searchRecursive;
     private String    m_curFileName;
     private boolean   m_tmSearch;
+    private boolean   m_allResults;
     private Set<String>   m_entrySet; // HP: keeps track of previous results, to avoid duplicate entries
     private List<Matcher> m_matchers; // HP: contains a matcher for each search string
                                   //     (multiple if keyword search)

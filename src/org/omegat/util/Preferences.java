@@ -5,8 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2007 Zoltan Bartko
-               2008 Didier Briel
-               2009 Didier Briel
+               2008-2009 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -90,6 +89,7 @@ public class Preferences
     public static final String SEARCHWINDOW_CASE_SENSITIVE  = "search_window_case_sensitive";   // NOI18N
     public static final String SEARCHWINDOW_REG_EXPRESSIONS = "search_window_reg_expressions";  // NOI18N
     public static final String SEARCHWINDOW_TM_SEARCH       = "search_window_tm_search";        // NOI18N
+    public static final String SEARCHWINDOW_ALL_RESULTS     = "search_window_all_results";
     public static final String SEARCHWINDOW_DIR             = "search_window_dir";              // NOI18N
     public static final String SEARCHWINDOW_SEARCH_FILES    = "search_window_search_files";     // NOI18N
     public static final String SEARCHWINDOW_RECURSIVE       = "search_window_search_recursive"; // NOI18N

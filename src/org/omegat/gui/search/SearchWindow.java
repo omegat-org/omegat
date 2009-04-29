@@ -4,6 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2006 Henry Pijffers
+               2009 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -70,6 +72,7 @@ import org.openide.awt.Mnemonics;
  *
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
+ * @author Didier Briel
  */
 public class SearchWindow extends JFrame
 {
@@ -109,6 +112,7 @@ public class SearchWindow extends JFrame
         m_caseCB          = new JCheckBox();
         m_regexCB         = new JCheckBox();
         m_tmSearchCB      = new JCheckBox();
+        m_allResultsCB    = new JCheckBox();
 
         Box bOB = Box.createHorizontalBox();
         bOB.add(m_caseCB);
@@ -116,6 +120,7 @@ public class SearchWindow extends JFrame
         bOB.add(m_regexCB);
         bOB.add(Box.createHorizontalStrut(10));
         bOB.add(m_tmSearchCB);
+        bOB.add(m_allResultsCB);
 
         m_viewer = new EntryListPane(par);
         JScrollPane viewerScroller = new JScrollPane(m_viewer);
@@ -273,6 +278,14 @@ public class SearchWindow extends JFrame
             }
         });
 
+        m_allResultsCB.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // move focus to search edit field
+                m_searchField.requestFocus();
+            }
+        });
+
+
         m_dirCB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 updateOptionStatus();
@@ -371,9 +384,16 @@ public class SearchWindow extends JFrame
         // TM search
         String tmSearch = Preferences.getPreference(Preferences.SEARCHWINDOW_TM_SEARCH);
         if ((tmSearch == null) || (tmSearch.length() == 0))
-            tmSearch = "true"; // NOI18N
+            tmSearch = "true"; 
         m_tmSearchCB.setSelected(Boolean.valueOf(tmSearch).booleanValue());
         m_tmSearch = Boolean.valueOf(tmSearch).booleanValue();
+
+        // All results
+        String allResults = Preferences.getPreference(Preferences.SEARCHWINDOW_ALL_RESULTS);
+        if ((allResults == null) || (allResults.length() == 0))
+            allResults = "false";
+        m_allResultsCB.setSelected(Boolean.valueOf(allResults).booleanValue());
+
 
         // update the enabled/selected status of all options
         updateOptionStatus();
@@ -403,6 +423,8 @@ public class SearchWindow extends JFrame
                                   Boolean.toString(m_regexCB.isSelected()));
         Preferences.setPreference(Preferences.SEARCHWINDOW_TM_SEARCH,
                                   Boolean.toString(m_tmSearch)); // don't use radio button status!
+        Preferences.setPreference(Preferences.SEARCHWINDOW_ALL_RESULTS,
+                                  Boolean.toString(m_allResultsCB.isSelected()));
 
         // search dir options
         Preferences.setPreference(Preferences.SEARCHWINDOW_DIR, m_dirField.getText());
@@ -561,7 +583,8 @@ public class SearchWindow extends JFrame
                                    m_keywordSearchRB.isSelected(),
                                    m_caseCB.isSelected(),
                                    m_regexCB.isSelected(),
-                                   m_tmSearchCB.isSelected());
+                                   m_tmSearchCB.isSelected(),
+                                   m_allResultsCB.isSelected());
         }
     }
     
@@ -583,6 +606,7 @@ public class SearchWindow extends JFrame
         Mnemonics.setLocalizedText(m_caseCB, OStrings.getString("SW_CASE_SENSITIVE"));
         Mnemonics.setLocalizedText(m_regexCB, OStrings.getString("SW_REG_EXPRESSIONS"));
         Mnemonics.setLocalizedText(m_tmSearchCB, OStrings.getString("SW_SEARCH_TM"));
+        Mnemonics.setLocalizedText(m_allResultsCB, OStrings.getString("SW_ALL_RESULTS"));
 
         Mnemonics.setLocalizedText(m_dirLabel, OStrings.getString("SW_LOCATION"));
         Mnemonics.setLocalizedText(m_dirCB, OStrings.getString("SW_DIR_SEARCH"));
@@ -668,6 +692,7 @@ public class SearchWindow extends JFrame
     private JCheckBox m_caseCB;
     private JCheckBox m_regexCB;
     private JCheckBox m_tmSearchCB;
+    private JCheckBox m_allResultsCB;
 
     private boolean m_tmSearch = true;
 

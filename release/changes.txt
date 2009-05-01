@@ -3,8 +3,8 @@
 ----------------------------------------------------------------------
 2.0.2 vs. 2.0.1
 
-  7 Enhancements
-  8 Bugfixes
+  8 Enhancements
+  9 Bugfixes
 ----------------------------------------------------------------------
 2.0.1 update 2
 
@@ -18,6 +18,9 @@
 
   - Display all the instances of a segment in searches
   http://sourceforge.net/support/tracker.php?aid=1904497 
+
+  - Polish segmentation rules
+  http://sourceforge.net/support/tracker.php?aid=2783294 
 
   Other enhancements:
 
@@ -55,6 +58,9 @@ which has now three states:
 
   - Spellchecker slow down 
   http://sourceforge.net/support/tracker.php?aid=1908643 
+
+  - Over matching in segmentation rules
+  http://sourceforge.net/support/tracker.php?aid=2783299
 
   - Pattern after in Text files segmentation rule contained "\s+" instead
 of " +"

@@ -1679,7 +1679,7 @@
      <afterbreak>\s</afterbreak>
     </rule>
     <rule break="no">
-     <beforebreak>tel\.</beforebreak>
+     <beforebreak>\stel\.</beforebreak>
      <afterbreak>\s</afterbreak>
     </rule>
     <rule break="no">
@@ -1691,7 +1691,7 @@
      <afterbreak>\s</afterbreak>
     </rule>
     <rule break="no">
-     <beforebreak>ca\.</beforebreak>
+     <beforebreak>\sca\.</beforebreak>
      <afterbreak>\s</afterbreak>
     </rule>
     <rule break="no">
@@ -1723,7 +1723,7 @@
      <afterbreak>\s</afterbreak>
     </rule>
     <rule break="no">
-     <beforebreak>ed\.</beforebreak>
+     <beforebreak>\sed\.</beforebreak>
      <afterbreak>\s</afterbreak>
     </rule>
     <rule break="no">
@@ -1743,7 +1743,7 @@
      <afterbreak>\s</afterbreak>
     </rule>
     <rule break="no">
-     <beforebreak>min\.</beforebreak>
+     <beforebreak>\smin\.</beforebreak>
      <afterbreak>\s</afterbreak>
     </rule>
     <rule break="no">
@@ -2004,7 +2004,7 @@
      <afterbreak>\s</afterbreak>
     </rule>
     <rule break="no">
-     <beforebreak>tel\.</beforebreak>
+     <beforebreak>\stel\.</beforebreak>
      <afterbreak>\s</afterbreak>
     </rule>
     <!-- Following rules contributed by Jean-Christophe Helary
@@ -2054,6 +2054,55 @@
     
    </languagerule>
 
+  <!-- Polish exceptions
+       Contributed by Jimmy O Regan -->
+   <languagerule languagerulename="Polish">
+    <rule break="no">
+     <beforebreak>\sm\.in\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\snp\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sim\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\stzn\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\smarsz\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\spor\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sppor\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\ssierż\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sst\.\ssierż\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\sśw\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+    <rule break="no">
+     <beforebreak>\s[A-ZŁŚŻ]\.</beforebreak>
+     <afterbreak>\s</afterbreak>
+    </rule>
+  </languagerule>
+
    <!-- Default language-related segmentation rules -->
    <languagerule languagerulename="Default">
     <rule break="no">
@@ -2067,7 +2116,7 @@
      <afterbreak>\s</afterbreak>
     </rule>
    </languagerule>
-
+ 
    <!-- Text files format-related rule -->
    <languagerule languagerulename="Text">
     <!-- special handling for Text files to break on empty indented lines
@@ -2080,7 +2129,7 @@
 
    <!-- HTML format-related rule -->
    <languagerule languagerulename="HTML">
-    <!-- special handling for BR tag to segmenent on it
+    <!-- special handling for BR tag to segment on it
      idea by Jean-Christophe Helary -->
     <rule break="yes">
      <beforebreak>&lt;br\d+/?&gt;</beforebreak>
@@ -2095,6 +2144,7 @@
    <languagemap languagepattern="CA.*" languagerulename="Catalan" />
    <languagemap languagepattern="ES.*" languagerulename="Spanish" />
    <languagemap languagepattern="EN.*" languagerulename="English" />
+   <languagemap languagepattern="PL.*" languagerulename="Polish" />
    <languagemap languagepattern=".*" languagerulename="Default" />
    <languagemap languagepattern=".*" languagerulename="Text" />
    <languagemap languagepattern=".*" languagerulename="HTML" />

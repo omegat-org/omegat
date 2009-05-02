@@ -229,7 +229,7 @@ can be applied or not with a new option in Options/Font.
 1.8.1 update 5 vs. 1.8.1 update 4
 
    0 Enhancement
-   1 Bugfix
+   2 Bugfixes
 
 ----------------------------------------------------------------------
 1.8.1 update 5
@@ -238,6 +238,8 @@ can be applied or not with a new option in Options/Font.
 
   - Linux startup script must be run from install dir
   http://sourceforge.net/support/tracker.php?aid=2654430
+
+  - XLIFF filter: the content of <seg-source> was visible
 
 ----------------------------------------------------------------------
  OmegaT 1.8.1 update 4 Changes

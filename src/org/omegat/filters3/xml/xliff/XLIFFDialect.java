@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-           (C) 2007 Didier Briel
+           (C) 2007-2009 Didier Briel
  
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -63,6 +63,7 @@ public class XLIFFDialect extends DefaultXMLDialect
             "ept",                                                              // NOI18N
             "it",                                                               // NOI18N
             "context",                                                          // NOI18N
+            "seg-source",                                                       // NOI18N
         });
     }
 }

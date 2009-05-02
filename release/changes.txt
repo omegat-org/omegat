@@ -260,7 +260,7 @@ can be applied or not with a new option in Options/Font.
   - Hunspell and OmegaT could crash if a dictionary did not exist for
 a project's language
 
-  - DocBook filter: the tag <mrk> was declared as not containing 
+  - XLIFF filter: the tag <mrk> was declared as not containing 
 translatable content
 
 ----------------------------------------------------------------------

@@ -271,6 +271,39 @@ public class DefaultXMLDialect implements XMLDialect
                                            Attributes atts) {
         return true;
     }
+
+    /**
+     * For a given tag, return wether the content of this tag is a
+     * paragraph tag, depending on the content of one attribute
+     * (and/or the presence or absence of other attributes).
+     * For instance, in the XLIFF filter,
+     * the &lt;mark&gt; tag should start a new paragraph
+     * when the attribute "mtype" contains "seg".
+     * @param tag The tag that could be a paragraph tag
+     * @param atts The list of the tag attributes
+     * @return <code>true</code> or <code>false</code>
+     */
+    public Boolean validateParagraphTag(String tag,
+                                        Attributes atts) {
+        return false;
+    }
+
+     /**
+     * For a given tag, return wether the content of this tag is a
+     * preformat tag, depending on the content of one attribute
+     * (and/or the presence or absence of other attributes).
+     * For instance, in the XLIFF filter,
+     * the &lt;mark&gt; tag should be a preformat tag
+     * when the attribute "mtype" contains "seg".
+     * @param tag The tag that could be a preformat tag
+     * @param atts The list of the tag attributes
+     * @return <code>true</code> or <code>false</code>
+     */
+    public Boolean validatePreformatTag(String tag,
+                                 Attributes atts) {
+        return false;
+    }
+
     /**
      * Returns the set of translatable attributes (no matter what tag they belong to).
      * <p>

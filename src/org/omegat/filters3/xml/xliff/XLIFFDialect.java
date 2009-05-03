@@ -27,6 +27,8 @@
 package org.omegat.filters3.xml.xliff;
 
 import org.omegat.filters3.xml.DefaultXMLDialect;
+import org.omegat.filters3.Attributes;
+import org.omegat.filters3.Attribute;
 
 /**
  * This class specifies XLIFF XML Dialect.
@@ -65,5 +67,31 @@ public class XLIFFDialect extends DefaultXMLDialect
             "context",                                                          // NOI18N
             "seg-source",                                                       // NOI18N
         });
+
     }
+
+    /**
+     * In the XLIFF filter, the tag &lt;mrk&gt; is a
+     * preformat tag when the attribute "mtype" contains "seg".
+     * @param tag An XML tag
+     * @param atts The attributes associated with the tag
+     * @return <code>true</code> if this tag should be a preformat tag,
+      * <code>false</code> otherwise
+     */
+    public Boolean validatePreformatTag(String tag,
+                                        Attributes atts) {
+        if (!tag.equalsIgnoreCase("mrk")) // We test only "mrk"
+            return false;
+
+        if (atts != null) {
+            for (int i=0; i < atts.size(); i++) {
+               Attribute oneAttribute = atts.get(i);
+               if (oneAttribute.getName().equalsIgnoreCase("mtype") &&
+                   oneAttribute.getValue().equalsIgnoreCase("seg"))
+                   return true;
+            }
+        }
+        return false;
+    }
+
 }

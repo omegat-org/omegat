@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 2.0.2 vs. 2.0.1
 
-  8 Enhancements
+  9 Enhancements
   9 Bugfixes
 ----------------------------------------------------------------------
 2.0.1 update 2
@@ -34,6 +34,9 @@ which has now three states:
 
   - Ctrl+Page up and Ctrl+Page down go to the beginning/end of a document 
 (without entering the segment) 
+
+  - XLIFF filter: the segmentation of pre-segmented documents (tagged by
+<mrk mtype="seg"> is used.
 
   - Update of some user interface texts for clarification purposes
 

@@ -103,9 +103,19 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     Entry intacttagEntry = null;
     /** Keep the attributes of an intact tag. */
     org.omegat.filters3.Attributes intacttagAttributes = null;
+    /** Keep the attributes of paragraph tags. */
+    Stack<org.omegat.filters3.Attributes> paragraphTagAttributes =
+            new Stack<org.omegat.filters3.Attributes>();
+    /** Keep the attributes of preformat tags. */
+    Stack<org.omegat.filters3.Attributes> preformatTagAttributes =
+            new Stack<org.omegat.filters3.Attributes>();
 
     /** Current entry that collects the text surrounded by intact tag. */
     String intacttagName = null;
+    /** Names of possible paragraph tags. */
+    Stack<String> paragraphTagName = new Stack<String>();
+    /** Names of possible preformat tags. */
+    Stack<String> preformatTagName = new Stack<String>();
 
     /** Now we collect out-of-turn entry. */
     private boolean collectingOutOfTurnText()
@@ -473,11 +483,14 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
             currEntry().add(ootTag);
             outofturnEntries.push(ootTag.getEntry());
         }
-        else
-        {
-            if (isParagraphTag(tag) && !collectingOutOfTurnText() && !collectingIntactText())
-            {
-                translateAndFlush();
+        else {
+/*            paragraphTagName.push(tag);
+            paragraphTagAttributes.push(XMLUtils.convertAttributes(attributes));
+            preformatTagName.push(tag);
+            preformatTagAttributes.push(XMLUtils.convertAttributes(attributes));*/
+            if (isParagraphTag(tag, XMLUtils.convertAttributes(attributes)) &&
+                !collectingOutOfTurnText() && !collectingIntactText()) {
+                    translateAndFlush();
             }
             queueTag(tag, attributes);
         }
@@ -501,7 +514,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         else
         {
             queueEndTag(tag);
-            if (isParagraphTag(tag) && !collectingOutOfTurnText() && !collectingIntactText())
+            if (isParagraphTag(tag) && !collectingOutOfTurnText()
+                && !collectingIntactText())
                 translateAndFlush();
         }
     }
@@ -519,7 +533,9 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         String src = currEntry().sourceToShortcut();
         Element lead = currEntry().get(0);
         String translation;
-        if ((lead instanceof Tag) && isPreformattingTag(((Tag)lead).getTag()))
+        if ((lead instanceof Tag) &&
+             isPreformattingTag(((Tag)lead).getTag(),
+             ((Tag)lead).getAttributes()))
         {
             translation = translator.translate(src);
         }
@@ -565,16 +581,77 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
      * so if {@link #isPreformattingTag(String)} returns true,
      * this method will also return true.
      */
-    private boolean isParagraphTag(String tag)
-    {
-        return (dialect.getParagraphTags()!=null && dialect.getParagraphTags().contains(tag))
-                || isPreformattingTag(tag);
+    private boolean isParagraphTag(String tag,
+                                   org.omegat.filters3.Attributes atts) {
+        paragraphTagName.push(tag);
+        paragraphTagAttributes.push(atts);
+        preformatTagName.push(tag);
+        preformatTagAttributes.push(atts);
+
+        if ((dialect.getParagraphTags()!=null &&
+             dialect.getParagraphTags().contains(tag))
+            || isPreformattingTag(tag, atts))
+            return true;
+        else 
+            return dialect.validateParagraphTag(tag, atts);
     }
 
-    /** Returns whether the tag surrounds preformatted block of text. */
-    private boolean isPreformattingTag(String tag)
-    {
-        return dialect.getPreformatTags()!=null && dialect.getPreformatTags().contains(tag);
+    /**
+     * Returns whether the tag starts a new paragraph.
+     * It is called at the end of an element (&lt;/mrk&gt;), and thus
+     * doesn't provide attributes. Those are restored from the
+     * paragraphTagAttributes stack.
+     * @param tag A tag
+     * @return <code>true</code> or <code>false</false>
+     */
+    private boolean isParagraphTag(String tag) {
+        if ((dialect.getParagraphTags()!=null &&
+                 dialect.getParagraphTags().contains(tag))
+                || isPreformattingTag(tag))
+            return true;
+        else {
+            org.omegat.filters3.Attributes atts = null;
+            if (tag.equals(paragraphTagName.lastElement())) {
+                paragraphTagName.peek();
+                atts = paragraphTagAttributes.peek(); // Restore attributes
+            }
+            return dialect.validateParagraphTag(tag, atts);
+        }
+    }
+
+    /** Returns whether the tag surrounds preformatted block of text.
+     * @param tag A tag
+     * @return <code>true</code> or <code>false</false>
+     */
+    private boolean isPreformattingTag(String tag, 
+                                       org.omegat.filters3.Attributes atts) {
+        if (dialect.getPreformatTags()!=null &&
+            dialect.getPreformatTags().contains(tag))
+            return true;
+        else
+            return dialect.validatePreformatTag(tag, atts);
+    }
+
+   /** Returns whether the tag surrounds preformatted block of text.
+     * It is called at the end of an element (&lt;/mrk&gt;), and thus
+     * doesn't provide attributes. Those are restored from the
+     * preformatTagAttributes stack.
+     * @param tag A tag
+     * @return <code>true</code> or <code>false</false>
+     */
+    private boolean isPreformattingTag(String tag) {
+        if (dialect.getPreformatTags()!=null &&
+            dialect.getPreformatTags().contains(tag))
+            return true;
+        else {
+            org.omegat.filters3.Attributes atts = null;
+            if (tag.equals(preformatTagName.lastElement())) {
+                preformatTagName.peek();
+                atts = preformatTagAttributes.peek(); // Restore attributes
+            }
+            return dialect.validatePreformatTag(tag, atts);
+        }
+
     }
 
     /** Returns whether the tag surrounds intact block of text which we 

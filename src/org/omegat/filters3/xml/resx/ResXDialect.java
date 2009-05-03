@@ -66,15 +66,17 @@ public class ResXDialect extends DefaultXMLDialect
         if (!tag.equalsIgnoreCase("data")) // We test only "data"
             return true;
         
-        for (int i=0; i < atts.size(); i++) {
-           Attribute oneAttribute = atts.get(i);
-           if (oneAttribute.getName().equalsIgnoreCase("type") ||
-               oneAttribute.getName().equalsIgnoreCase("mimetype") ||
-              (oneAttribute.getName().equalsIgnoreCase("name") &&
-               (oneAttribute.getValue().startsWith("&gt;") ||
-               oneAttribute.getValue().endsWith("FieldName"))))
-               return false;
-           }
+        if (atts != null) {
+            for (int i=0; i < atts.size(); i++) {
+               Attribute oneAttribute = atts.get(i);
+               if (oneAttribute.getName().equalsIgnoreCase("type") ||
+                   oneAttribute.getName().equalsIgnoreCase("mimetype") ||
+                  (oneAttribute.getName().equalsIgnoreCase("name") &&
+                   (oneAttribute.getValue().startsWith("&gt;") ||
+                   oneAttribute.getValue().endsWith("FieldName"))))
+                   return false;
+            }
+        }
         return true;
     }
 }

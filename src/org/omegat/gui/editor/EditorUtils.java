@@ -49,6 +49,11 @@ public class EditorUtils {
      * Remove LTR/RTL direction chars(u202A,u202B,u202C) from beginning and
      * ending of string.
      * 
+     * We shouln't use 'removeDirectionChars' instead this method, because
+     * 'removeDirection' works much faster for chars in the beginning and in the
+     * ending of string. It required to display spell checker errors in the
+     * ViewLabel.
+     * 
      * @param str
      *            input string
      * @return string without direction chars
@@ -78,5 +83,16 @@ public class EditorUtils {
      */
     private static boolean isDirectionChar(final char ch) {
         return ch == '\u202A' || ch == '\u202B' || ch == '\u202C';
+    }
+
+    /**
+     * Remove invisible direction chars from string.
+     * 
+     * @param text
+     *            string with direction chars
+     * @return string without direction chars
+     */
+    public static String removeDirectionChars(String text) {
+        return text.replaceAll("[\u202A|\u202B|\u202C]", "");
     }
 }

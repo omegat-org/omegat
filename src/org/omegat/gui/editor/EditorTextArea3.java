@@ -339,6 +339,14 @@ public class EditorTextArea3 extends JEditorPane {
     }
 
     /**
+     * Remove invisible direction chars on the copy text into clipboard.
+     */
+    @Override
+    public String getSelectedText() {
+        return EditorUtils.removeDirectionChars(super.getSelectedText());
+    }
+
+    /**
      * creates a popup menu for inactive segments - with an item allowing to go
      * to the given segment.
      */

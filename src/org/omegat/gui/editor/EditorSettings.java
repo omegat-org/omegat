@@ -128,7 +128,7 @@ public class EditorSettings {
         }
     }
 
-    /** display the segmetn sources or not */
+    /** display the segment sources or not */
     public boolean isDisplaySegmentSources() {
         return displaySegmentSources;
     }

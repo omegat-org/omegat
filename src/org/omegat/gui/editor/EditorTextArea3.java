@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2008 Alex Buloichik
+ Copyright (C) 2009 Alex Buloichik
                2009 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -25,8 +25,6 @@
 
 package org.omegat.gui.editor;
 
-import java.awt.ComponentOrientation;
-import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,13 +35,21 @@ import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.JEditorPane;
-import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.BoxView;
+import javax.swing.text.ComponentView;
+import javax.swing.text.Element;
+import javax.swing.text.IconView;
+import javax.swing.text.ParagraphView;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledEditorKit;
 import javax.swing.text.Utilities;
+import javax.swing.text.View;
+import javax.swing.text.ViewFactory;
 import javax.swing.undo.UndoManager;
 
 import org.omegat.core.Core;
@@ -54,24 +60,25 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
- * New implementation of EditorPane. Only mouse handling required.
+ * Changes of standard JEditorPane implementation for support custom behavior.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  */
-class OmTextArea extends JEditorPane {
+public class EditorTextArea3 extends JEditorPane {
 
     /** Undo Manager to store edits */
     protected final UndoManager undoManager = new UndoManager();
 
     protected final EditorController controller;
-    
-    /** Label for draw segment marks. */
-    protected final JLabel segmentMarkLabel = new JLabel();
 
-    public OmTextArea(EditorController controller) {
+    public EditorTextArea3(EditorController controller) {
         this.controller = controller;
-        setEditorKit(new OmEditorKit());
+        setEditorKit(new StyledEditorKit() {
+            public ViewFactory getViewFactory() {
+                return factory3;
+            }
+        });
 
         addMouseListener(mouseListener);
     }
@@ -82,36 +89,16 @@ class OmTextArea extends JEditorPane {
     }
 
     /**
-     * Return OmDocument instaed just a Document. If editor was not initialized
+     * Return OmDocument instead just a Document. If editor was not initialized
      * with OmDocument, it will contains other Document implementation. In this
      * case we don't need it.
      */
-    public OmDocument getOmDocument() {
+    public Document3 getOmDocument() {
         try {
-            return (OmDocument) getDocument();
+            return (Document3) getDocument();
         } catch (ClassCastException ex) {
             return null;
         }
-    }
-
-    /**
-     * Apply new font on segment mark label.
-     */
-    @Override
-    public void setFont(Font font) {
-        super.setFont(font);
-        if (segmentMarkLabel != null) {
-            segmentMarkLabel.setFont(new Font(font.getFontName(), Font.BOLD,
-                    font.getSize()));
-        }
-    }
-    
-    /**
-     * Getter for label for draw segment marks.
-     */
-    public JLabel getSegmentMarkLabel(final String text) {
-        segmentMarkLabel.setText(text);
-        return segmentMarkLabel;
     }
 
     protected MouseListener mouseListener = new MouseAdapter() {
@@ -148,6 +135,8 @@ class OmTextArea extends JEditorPane {
 
         boolean mac = StaticUtils.onMacOSX();
 
+        Document3 doc = getOmDocument();
+
         // non-standard processing
         if (isKey(e, KeyEvent.VK_TAB, 0)) {
             // press TAB when 'Use TAB to advance'
@@ -183,8 +172,8 @@ class OmTextArea extends JEditorPane {
         } else if ((!mac && isKey(e, KeyEvent.VK_A, KeyEvent.CTRL_MASK))
                 || (mac && isKey(e, KeyEvent.VK_A, KeyEvent.META_MASK))) {
             // handling Ctrl+A manually (Cmd+A for MacOS)
-            setSelectionStart(controller.getTranslationStart());
-            setSelectionEnd(controller.getTranslationEnd());
+            setSelectionStart(doc.getTranslationStart());
+            setSelectionEnd(doc.getTranslationEnd());
             processed = true;
         } else if (isKey(e, KeyEvent.VK_O, KeyEvent.CTRL_MASK
                 | KeyEvent.SHIFT_MASK)) {
@@ -197,7 +186,7 @@ class OmTextArea extends JEditorPane {
             try {
                 int offset = getCaretPosition();
                 int prevWord = Utilities.getPreviousWord(this, offset);
-                int c = Math.max(prevWord, controller.getTranslationStart());
+                int c = Math.max(prevWord, doc.getTranslationStart());
                 setSelectionStart(c);
                 setSelectionEnd(offset);
                 replaceSelection("");
@@ -212,7 +201,7 @@ class OmTextArea extends JEditorPane {
             try {
                 int offset = getCaretPosition();
                 int nextWord = Utilities.getNextWord(this, offset);
-                int c = Math.min(nextWord, controller.getTranslationEnd());
+                int c = Math.min(nextWord, doc.getTranslationEnd());
                 setSelectionStart(offset);
                 setSelectionEnd(c);
                 replaceSelection("");
@@ -239,12 +228,15 @@ class OmTextArea extends JEditorPane {
         } else {
             if ((e.getModifiers() & (KeyEvent.CTRL_MASK | KeyEvent.META_MASK | KeyEvent.ALT_MASK)) == 0) {
                 // there is no Alt,Ctrl,Cmd keys, i.e. it's char
-                if (getOmDocument().isInsideActiveSegPart(getCaretPosition())) {
+                if (e.getKeyCode() != KeyEvent.VK_SHIFT) {
+                    // it's not a single 'shift' press
                     checkAndFixCaret();
                 }
             }
             super.processKeyEvent(e);
         }
+
+        controller.showLengthMessage();
 
         // some after-processing catches
         if (!processed && e.getKeyChar() != 0) {
@@ -265,13 +257,12 @@ class OmTextArea extends JEditorPane {
      * their positions accordingly if not.
      */
     void checkAndFixCaret() {
-        OmDocument doc = getOmDocument();
+        Document3 doc = getOmDocument();
         if (doc == null) {
             // doc is not active
             return;
         }
-        if (doc.activeTranslationBegin == null
-                || doc.activeTranslationEnd == null) {
+        if (!doc.isEditMode()) {
             return;
         }
 
@@ -282,13 +273,13 @@ class OmTextArea extends JEditorPane {
          * int start = m_segmentStartOffset + m_sourceDisplayLength +
          * OConsts.segmentStartStringFull.length();
          */
-        int start = doc.activeTranslationBegin.getOffset() + 1;
+        int start = doc.getTranslationStart();
         // -1 for space before tag, -2 for newlines
         /*
          * int end = editor.getTextLength() - m_segmentEndInset -
          * OConsts.segmentEndStringFull.length();
          */
-        int end = doc.activeTranslationEnd.getOffset() - 1;
+        int end = doc.getTranslationEnd();
 
         if (spos != epos) {
             // dealing with a selection here - make sure it's w/in bounds
@@ -336,10 +327,10 @@ class OmTextArea extends JEditorPane {
         checkAndFixCaret();
         super.paste();
     }
-    
+
     /**
-     * Allow to cut segment, even selection outside editable segment. In
-     * this case selection will be truncated into segment's boundaries.
+     * Allow to cut segment, even selection outside editable segment. In this
+     * case selection will be truncated into segment's boundaries.
      */
     @Override
     public void cut() {
@@ -354,9 +345,9 @@ class OmTextArea extends JEditorPane {
     private boolean createGoToSegmentPopUp(Point point) {
         final int mousepos = this.viewToModel(point);
 
-        if (mousepos >= controller.getTranslationStart()
+        if (mousepos >= getOmDocument().getTranslationStart()
                 - OConsts.segmentStartStringFull.length()
-                && mousepos <= controller.getTranslationEnd()
+                && mousepos <= getOmDocument().getTranslationEnd()
                         + OConsts.segmentStartStringFull.length())
             return false;
 
@@ -390,8 +381,8 @@ class OmTextArea extends JEditorPane {
         // where is the mouse
         int mousepos = viewToModel(point);
 
-        if (mousepos < controller.getTranslationStart()
-                || mousepos > controller.getTranslationEnd())
+        if (mousepos < getOmDocument().getTranslationStart()
+                || mousepos > getOmDocument().getTranslationEnd())
             return false;
 
         try {
@@ -399,7 +390,8 @@ class OmTextArea extends JEditorPane {
             final int wordStart = Utilities.getWordStart(this, mousepos);
             final int wordEnd = Utilities.getWordEnd(this, mousepos);
 
-            final String word = getText(wordStart, wordEnd - wordStart);
+            final String word = EditorUtils.removeDirection(getText(wordStart,
+                    wordEnd - wordStart));
 
             final AbstractDocument xlDoc = (AbstractDocument) getDocument();
 
@@ -422,8 +414,8 @@ class OmTextArea extends JEditorPane {
                                 xlDoc.replace(wordStart, word.length(),
                                         replacement, controller.getSettings()
                                                 .getTranslatedAttributeSet());
-                                //pos = Math.min(
-                                //        wordStart + replacement.length(), pos);
+                                // pos = Math.min(
+                                // wordStart + replacement.length(), pos);
                                 setCaretPosition(pos);
                             } catch (BadLocationException exc) {
                                 Log.log(exc);
@@ -491,8 +483,32 @@ class OmTextArea extends JEditorPane {
 
         controller.spellCheckerThread.resetCache();
 
-        getOmDocument().hideMisspelledWord(word);
-        // redraw all segments
+        // redraw segments
         repaint();
     }
+
+    /**
+     * Factory for create own view.
+     */
+    public static ViewFactory factory3 = new ViewFactory() {
+        public View create(Element elem) {
+            String kind = elem.getName();
+            if (kind != null) {
+                if (kind.equals(AbstractDocument.ContentElementName)) {
+                    return new ViewLabel(elem);
+                } else if (kind.equals(AbstractDocument.ParagraphElementName)) {
+                    return new ParagraphView(elem);
+                } else if (kind.equals(AbstractDocument.SectionElementName)) {
+                    return new BoxView(elem, View.Y_AXIS);
+                } else if (kind.equals(StyleConstants.ComponentElementName)) {
+                    return new ComponentView(elem);
+                } else if (kind.equals(StyleConstants.IconElementName)) {
+                    return new IconView(elem);
+                }
+            }
+
+            // default to text display
+            return new ViewLabel(elem);
+        }
+    };
 }

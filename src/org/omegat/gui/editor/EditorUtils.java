@@ -44,4 +44,39 @@ public class EditorUtils {
                 || "fa".equalsIgnoreCase(language)
                 || "ur".equalsIgnoreCase(language);
     }
+
+    /**
+     * Remove LTR/RTL direction chars(u202A,u202B,u202C) from beginning and
+     * ending of string.
+     * 
+     * @param str
+     *            input string
+     * @return string without direction chars
+     */
+    public static String removeDirection(final String str) {
+        String result = str;
+        if (result.length() > 0) {
+            if (isDirectionChar(result.charAt(0))) {
+                result = result.substring(1);
+            }
+        }
+        if (result.length() > 0) {
+            int last = result.length() - 1;
+            if (isDirectionChar(result.charAt(last))) {
+                result = result.substring(0, last);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Check if char is direction char(u202A,u202B,u202C).
+     * 
+     * @param ch
+     *            char to check
+     * @return true if it's direction char
+     */
+    private static boolean isDirectionChar(final char ch) {
+        return ch == '\u202A' || ch == '\u202B' || ch == '\u202C';
+    }
 }

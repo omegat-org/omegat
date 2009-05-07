@@ -37,12 +37,12 @@ import org.omegat.util.gui.UIThreadsUtil;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class OmDocumentFilter extends DocumentFilter {
+public class DocumentFilter3 extends DocumentFilter {
     @Override
     public void remove(FilterBypass fb, int offset, int length)
             throws BadLocationException {
         UIThreadsUtil.mustBeSwingThread();
-        if (isInsideTranslation(fb.getDocument(), offset, length)) {
+        if (isPossible(fb.getDocument(), offset, length)) {
             super.remove(fb, offset, length);
         }
     }
@@ -51,7 +51,7 @@ public class OmDocumentFilter extends DocumentFilter {
     public void insertString(FilterBypass fb, int offset, String string,
             AttributeSet attr) throws BadLocationException {
         UIThreadsUtil.mustBeSwingThread();
-        if (isInsideTranslation(fb.getDocument(), offset, 0)) {
+        if (isPossible(fb.getDocument(), offset, 0)) {
             super.insertString(fb, offset, string, attr);
         }
     }
@@ -60,21 +60,25 @@ public class OmDocumentFilter extends DocumentFilter {
     public void replace(FilterBypass fb, int offset, int length, String text,
             AttributeSet attrs) throws BadLocationException {
         UIThreadsUtil.mustBeSwingThread();
-        if (isInsideTranslation(fb.getDocument(), offset, length)) {
+        if (isPossible(fb.getDocument(), offset, length)) {
             super.replace(fb, offset, length, text, attrs);
         }
     }
 
-    private boolean isInsideTranslation(Document d, int offset, int length) {
-        OmDocument doc = (OmDocument) d;
-        if (doc.activeTranslationBegin == null
-                || doc.activeTranslationEnd == null) {
+    private boolean isPossible(Document d, int offset, int length) {
+        Document3 doc = (Document3) d;
+        if (doc.trustedChangesInProgress) {
+            // this call created by internal changes
+            return true;
+        }
+
+        if (!doc.isEditMode()) {
             // segment not active - change disabled
             return false;
         }
 
         // Is inside translation ?
-        return (offset >= doc.activeTranslationBegin.getOffset()+1 && offset
-                + length <= doc.activeTranslationEnd.getOffset()-1);
+        return (offset >= doc.getTranslationStart() && offset + length <= doc
+                .getTranslationEnd());
     }
 }

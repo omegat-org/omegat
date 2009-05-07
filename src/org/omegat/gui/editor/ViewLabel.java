@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
-               2009 - Alex Buloichik
+               2009 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,81 +25,94 @@
 
 package org.omegat.gui.editor;
 
-import javax.swing.text.*;
-
-import org.omegat.gui.editor.OmDocument;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.Shape;
 
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Element;
+import javax.swing.text.LabelView;
+import javax.swing.text.Position;
+
+import org.omegat.core.Core;
+import org.omegat.util.Token;
+
 /**
- * Special label view drawing custom colored normal and jagged underlines, as
- * seen on
- * http://forum.java.sun.com/thread.jspa?threadID=5168528&messageID=9647272.
- * 
- * If you want to add new types, add a new unused constant and modify paint()
+ * Custom implementation of view for display spell check errors.
  * 
  * @author bartkoz
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ViewLabel extends LabelView {
-    /**
-     * the element we are wrapping. We need to remember this because LabelView
-     * keeps it secret.
-     */
-    private OmDocument.OmElementText element;
 
-    public ViewLabel(Element elem) {
-        super(elem);
-        element = (OmDocument.OmElementText) elem;
+    public ViewLabel(final Element el) {
+        super(el);
     }
 
-    /**
-     * Workaround against 1px vertical jumps.
-     */
     @Override
-    public float getPreferredSpan(int axis) {
-        return Math.round(super.getPreferredSpan(axis));
-    }
+    public void paint(Graphics g, Shape a) {
+        super.paint(g, a);
 
-    /**
-     * custom paint the thing. Except for the default it checks for any custom
-     * underline prescription and then uses paintLine() or paintJaggedLine()
-     */
-    public void paint(Graphics g, Shape allocation) {
-        super.paint(g, allocation);
+        if (!(getElement().getDocument() instanceof Document3)) {
+            // document didn't created yet
+            return;
+        }
 
-        if (element.misspelled != null) {
-            for (int i = 0; i < element.misspelled.size(); i++) {
-                // 'for' by index much faster than iterator 'for(v:list)'
-                OmDocument.MisspelledRegion reg = element.misspelled.get(i);
-                int regStart = element.getStartOffset() + reg.off;
-                int regEnd = regStart + reg.len;
-                try {
-                    if (regEnd <= getStartOffset()
-                            || regStart >= getEndOffset()) {
-                        // region is outside of this view
-                        continue;
-                    }
-                    Shape a = allocation;
-                    Rectangle b = (Rectangle) modelToView(regStart, a,
-                            Position.Bias.Forward);
-                    Rectangle e = (Rectangle) modelToView(regEnd, a,
-                            Position.Bias.Forward);
-                    Rectangle line = new Rectangle();
-                    line.x = b.x;
-                    line.y = b.y;
-                    line.width = e.x - b.x;
-                    line.height = b.height;
-                    if (a.intersects(line)) {
+        int spellBegin = getStartOffset();
+        int spellEnd = getEndOffset();
+        Document3 doc = (Document3) getElement().getDocument();
+        int segmentAtLocation = -1;
+
+        // find current segment
+        for (int i = 0; i < doc.controller.m_docSegList.length; i++) {
+            if (doc.controller.m_docSegList[i]
+                    .isInsideSegment((spellBegin + spellEnd) / 2)) {
+                segmentAtLocation = i;
+                break;
+            }
+        }
+        if (segmentAtLocation < 0) {
+            // segment not found
+            return;
+        }
+
+        // check only required to spell part
+        SegmentBuilder seg = doc.controller.m_docSegList[segmentAtLocation];
+        spellBegin = Math.max(spellBegin, seg.getStartSpellPosition());
+        spellEnd = Math.min(spellEnd, seg.getEndSpellPosition());
+
+        if (spellBegin < spellEnd) {
+            // is need spell checking ?
+            try {
+                String text = doc.getText(spellBegin, spellEnd - spellBegin);
+                Token[] words = Core.getTokenizer().tokenizeWordsForSpelling(
+                        text);
+                for (Token w : words) {
+                    /*
+                     * Document can merge several 'insert's into one element,
+                     * so, direction chars could be added to word.
+                     */
+
+                    if (doc.controller.spellCheckerThread.isIncorrect(text
+                            .substring(w.getOffset(), w.getOffset()
+                                    + w.getLength()))) {
+                        Rectangle b = modelToView(spellBegin + w.getOffset(),
+                                a, Position.Bias.Forward).getBounds();
+                        Rectangle e = modelToView(
+                                spellBegin + w.getOffset() + w.getLength(), a,
+                                Position.Bias.Backward).getBounds();
+                        Rectangle line = new Rectangle();
+                        line.x = b.x;
+                        line.y = b.y;
+                        line.width = e.x - b.x;
+                        line.height = b.height;
                         paintJaggedLine(g, line, Color.red);
                     }
-                } catch (Exception ex) {
-                    // Hide exception on impossible draw misspelled word. It
-                    // shouldn't be throwned.
                 }
+            } catch (BadLocationException ex) {
+                // it shouldn't be throwed
+                ex.printStackTrace();
             }
         }
     }
@@ -127,23 +140,5 @@ public class ViewLabel extends LabelView {
         g.setClip(prevClip);
 
         g.setColor(old);
-    }
-
-    /**
-     * Redefine for read background from parent element.
-     */
-    @Override
-    protected void setPropertiesFromAttributes() {
-        super.setPropertiesFromAttributes();
-
-        Element el = element;
-        while (el != null) {
-            AttributeSet attr = el.getAttributes();
-            if (attr.isDefined(StyleConstants.Background)) {
-                setBackground(((OmDocument) getDocument()).getBackground(attr));
-                break;
-            }
-            el = el.getParentElement();
-        }
     }
 }

@@ -343,7 +343,8 @@ public class EditorTextArea3 extends JEditorPane {
      */
     @Override
     public String getSelectedText() {
-        return EditorUtils.removeDirectionChars(super.getSelectedText());
+        String st = super.getSelectedText();
+        return st != null ? EditorUtils.removeDirectionChars(st) : null;
     }
 
     /**

@@ -307,11 +307,11 @@ public class EditorTextArea3 extends JEditorPane {
      * Check if specified key pressed.
      * 
      * @param e
-     *            pressed key event
+     *                pressed key event
      * @param code
-     *            required key code
+     *                required key code
      * @param modifiers
-     *            required modifiers
+     *                required modifiers
      * @return true if checked key pressed
      */
     private static boolean isKey(KeyEvent e, int code, int modifiers) {
@@ -380,8 +380,8 @@ public class EditorTextArea3 extends JEditorPane {
      * create the spell checker popup menu - suggestions for a wrong word, add
      * and ignore. Works only for the active segment, for the translation
      * 
-     * @param point
-     *            : where should the popup be shown
+     * @param point :
+     *                where should the popup be shown
      */
     protected boolean createSpellCheckerPopUp(final Point point) {
         if (!controller.getSettings().isAutoSpellChecking())
@@ -421,10 +421,7 @@ public class EditorTextArea3 extends JEditorPane {
                             try {
                                 int pos = getCaretPosition();
                                 xlDoc.replace(wordStart, word.length(),
-                                        replacement, controller.getSettings()
-                                                .getTranslatedAttributeSet());
-                                // pos = Math.min(
-                                // wordStart + replacement.length(), pos);
+                                        replacement, null);
                                 setCaretPosition(pos);
                             } catch (BadLocationException exc) {
                                 Log.log(exc);
@@ -473,12 +470,12 @@ public class EditorTextArea3 extends JEditorPane {
     /**
      * add a new word to the spell checker or ignore a word
      * 
-     * @param word
-     *            : the word in question
-     * @param offset
-     *            : the offset of the word in the editor
-     * @param add
-     *            : true for add, false for ignore
+     * @param word :
+     *                the word in question
+     * @param offset :
+     *                the offset of the word in the editor
+     * @param add :
+     *                true for add, false for ignore
      */
     protected void addIgnoreWord(final String word, final int offset,
             final boolean add) {

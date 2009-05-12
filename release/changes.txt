@@ -40,7 +40,7 @@ which has now three states:
 
   - Update of some user interface texts for clarification purposes
 
-  - Spanish localisation updated to 2.0.2 (UI, readme, instant start) 
+  - Spanish localisation updated to 2.0.1 (UI, readme, instant start) 
 
   Bug Fixes: 
 

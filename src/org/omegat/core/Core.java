@@ -33,7 +33,6 @@ import org.omegat.core.matching.Tokenizer;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.SpellChecker;
-import org.omegat.core.threads.CheckThread;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.core.threads.SaveThread;
 import org.omegat.gui.editor.EditorController;
@@ -70,7 +69,6 @@ public class Core {
     private static ITokenizer tokenizer;
     private static ISpellChecker spellChecker;
 
-    private static CheckThread checkThread;
     private static IAutoSave saveThread;
 
     private static GlossaryTextArea glossary;
@@ -138,9 +136,6 @@ public class Core {
         glossary = new GlossaryTextArea();
         tokenizer = createComponent(ITokenizer.class, new Tokenizer(), params);
         spellChecker = new SpellChecker();
-
-        checkThread = new CheckThread();
-        checkThread.start();
 
         SaveThread th = new SaveThread();
         saveThread = th;

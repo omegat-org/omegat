@@ -162,15 +162,12 @@ public class SegmentBuilder {
 
         addInactiveSegPart(true, ste.getSrcText(), ATTR_SOURCE);
 
-        boolean needToCheckSpelling = false;
-
         String activeText;
         if (translationExists) {
             // translation exist
             activeText = ste.getTranslation();
             if (settings.isAutoSpellChecking()) {
                 // spell it
-                needToCheckSpelling = true;
                 doc.controller.spellCheckerThread.addForCheck(ste
                         .getTranslation());
             }
@@ -180,7 +177,6 @@ public class SegmentBuilder {
             activeText = ste.getSrcText();
             if (settings.isAutoSpellChecking()) {
                 // spell it
-                needToCheckSpelling = true;
                 doc.controller.spellCheckerThread.addForCheck(ste.getSrcText());
             }
         } else {
@@ -190,7 +186,7 @@ public class SegmentBuilder {
 
         addActiveSegPart(activeText, ATTR_ACTIVE);
 
-        if (needToCheckSpelling) {
+        if (settings.isAutoSpellChecking()) {
             beginSpellCheckPM1 = doc
                     .createPosition(activeTranslationBeginOffset - 1);
             endSpellCheckPM1 = doc

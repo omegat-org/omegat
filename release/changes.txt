@@ -3,8 +3,8 @@
 ----------------------------------------------------------------------
 2.0.2 vs. 2.0.1
 
-  9 Enhancements
-  9 Bugfixes
+  10 Enhancements
+   9 Bugfixes
 ----------------------------------------------------------------------
 2.0.2
 
@@ -21,6 +21,9 @@
 
   - Polish segmentation rules
   http://sourceforge.net/support/tracker.php?aid=2783294 
+
+  - Dutch segmentation rules
+  http://sourceforge.net/support/tracker.php?aid=2790334 
 
   Other enhancements:
 

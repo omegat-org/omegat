@@ -200,6 +200,9 @@ public class EditorController implements IEditor {
                 .registerFontChangedEventListener(new IFontChangedEventListener() {
                     public void onFontChanged(Font newFont) {
                         setFont(newFont);
+                        editor.revalidate();
+                        editor.repaint();
+
                         // fonts have changed
                         emptyProjectPane.setFont(baseFont);
                     }
@@ -262,6 +265,8 @@ public class EditorController implements IEditor {
     private void setFont(final Font font) {
         this.baseFont = font;
         this.boldFont = new Font(font.getFontName(), Font.BOLD, font.getSize());
+
+        editor.setFont(font);
     }
 
     /**

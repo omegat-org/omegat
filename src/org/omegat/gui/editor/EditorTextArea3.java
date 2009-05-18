@@ -155,6 +155,8 @@ public class EditorTextArea3 extends JEditorPane {
             if (!controller.settings.isUseTabForAdvance()) {
                 controller.nextEntry();
                 processed = true;
+            } else {
+                processed = true;
             }
         } else if ((!mac && isKey(e, KeyEvent.VK_ENTER, KeyEvent.CTRL_MASK))
                 || (mac && isKey(e, KeyEvent.VK_ENTER, KeyEvent.META_MASK))) {

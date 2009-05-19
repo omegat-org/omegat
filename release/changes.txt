@@ -4,13 +4,20 @@
 2.0.2 update 1 vs. 2.0.2
 
   1 Enhancement
-  0 Bugfix
+  2 Bugfixes
 ----------------------------------------------------------------------
 2.0.2 update 1
 
   Other enhancements:
 
   - Slovenian localisation updated to 2.0.1 (UI, readme) 
+
+  Bug Fixes: 
+
+  - The change of font wasn't applied immediately in the Editor
+  
+  - The Enter/Return key was creating a new line when Use TAB to Advance
+was checked
 
 ----------------------------------------------------------------------
  OmegaT 2.0.2 

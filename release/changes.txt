@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 2.0.2 update 1 vs. 2.0.2
 
-  1 Enhancement
+  2 Enhancements
   2 Bugfixes
 ----------------------------------------------------------------------
 2.0.2 update 1
@@ -11,6 +11,7 @@
   Other enhancements:
 
   - Slovenian localisation updated to 2.0.1 (UI, readme) 
+  - Japanese localisation updated to 2.0.2 (UI)
 
   Bug Fixes: 
 

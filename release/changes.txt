@@ -11,7 +11,7 @@
   Other enhancements:
 
   - Slovenian localisation updated to 2.0.1 (UI, readme) 
-  - Japanese localisation updated to 2.0.2 (UI)
+  - Japanese localisation updated to 2.0.2 (UI, Instant Start)
 
   Bug Fixes: 
 

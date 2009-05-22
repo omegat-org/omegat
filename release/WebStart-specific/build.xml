@@ -26,11 +26,12 @@
              includes="libhunspell.so" />
         <jar jarfile="${root}/build/webstart/hunspell-mac.jar" basedir="${root}/native" includes="libhunspell.dylib" />
 
-        <signjar jar="${root}/build/webstart/*.jar"
-                 keystore="${signkey.keystore}"
+        <signjar keystore="${signkey.keystore}"
                  alias="${signkey.alias}"
                  storepass="${signkey.storepass}"
-                 keypass="${signkey.keypass}" />
+                 keypass="${signkey.keypass}">
+            <fileset dir="${root}/build/webstart/" includes="*.jar"/>
+        </signjar>
 
         <mkdir dir="${root}/dist2" />
         <zip destfile="${root}/dist2/OmegaT-WebStart.zip" basedir="${root}/build/webstart" />

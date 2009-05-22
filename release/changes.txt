@@ -1,4 +1,25 @@
 ----------------------------------------------------------------------
+ OmegaT 2.0.3
+----------------------------------------------------------------------
+2.0.3 
+
+  2 Enhancements
+  0 Bugfixes
+----------------------------------------------------------------------
+2.0.3
+
+  Implemented requests:
+
+  - StarDict dictionaries support
+  http://sourceforge.net/support/tracker.php?aid=2795600
+
+  Other enhancements:
+
+  - Changes in glossary are detected automatically every second. The 
+modified glossaries are reloaded in memory transparently, without having to 
+reload the project.
+
+----------------------------------------------------------------------
  OmegaT 2.0.2 update 1
 ----------------------------------------------------------------------
 2.0.2 update 1 vs. 2.0.2

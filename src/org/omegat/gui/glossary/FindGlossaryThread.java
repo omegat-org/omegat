@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Alex Buloichik
-               2009 Wildrich Fourie, Didier Briel
+               2009 Wildrich Fourie, Didier Briel, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -31,17 +31,16 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.SwingUtilities;
-
 import org.omegat.core.Core;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.Tokenizer;
+import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.util.Token;
 
 /**
  * Class for find glossary entries for current entry in editor.
- *
+ * 
  * This process looks up the source string entries, and find matched glossary
  * entries.
  * <p>
@@ -53,47 +52,40 @@ import org.omegat.util.Token;
  * <li>"Edit" vs "Editing the edit" - matches OK!
  * <li>"Edit" vs "Edit" - matches OK!
  * </ul>
- *
+ * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Wildrich Fourie
  * @author Didier Briel
  */
-public class FindGlossaryThread extends Thread {
-    private final GlossaryTextArea glossaryController;
+public class FindGlossaryThread extends
+        EntryInfoSearchThread<List<GlossaryEntry>> {
 
-    /**
-     * Entry which processed currently.
-     *
-     * If entry in controller was changed, it means user was moved to other
-     * entry, and there is no sense to continue.
-     */
-    private final StringEntry processedEntry;
+    private final String src;
 
     private List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
 
-    public FindGlossaryThread(final GlossaryTextArea glossaryController,
-            final StringEntry entry) {
-        this.glossaryController = glossaryController;
-        this.processedEntry = entry;
+    private final GlossaryManager manager;
+
+    public FindGlossaryThread(final GlossaryTextArea pane,
+            final StringEntry newEntry, final GlossaryManager manager) {
+        super(pane, newEntry);
+        src = newEntry.getSrcText();
+        this.manager = manager;
     }
 
     @Override
-    public void run() {
+    protected List<GlossaryEntry> search() {
         // computer source entry tokens
-        Token[] strTokens = Core.getTokenizer().tokenizeWords(
-                processedEntry.getSrcText(), ITokenizer.StemmingMode.GLOSSARY);
+        Token[] strTokens = Core.getTokenizer().tokenizeWords(src,
+                ITokenizer.StemmingMode.GLOSSARY);
 
-        List<GlossaryEntry> entries = glossaryController.manager.getGlossaryEntries();
+        List<GlossaryEntry> entries = manager.getGlossaryEntries();
         if (entries != null) {
             for (GlossaryEntry glosEntry : entries) {
-                if (glossaryController.processedEntry != processedEntry) {
-                    // Processed entry changed, because user moved to other
-                    // entry.
-                    // I.e. we don't need to find and display data for old
-                    // entry.
-                    return;
+                if (isEntryChanged()) {
+                    return null;
                 }
 
                 // computer glossary entry tokens
@@ -113,99 +105,85 @@ public class FindGlossaryThread extends Thread {
         // After the matched entries have been tokenized and listed.
         // We remove the duplicates and combine the synonyms.
         // Then the matches are ordered to display the biggest matches first.
-        result = FilterGlossary(result);
-        for(int z=0; z < result.size(); z++)
-            for(int x=z+1; x < result.size()-1; x++)
-            {
-                GlossaryEntry zEntry = (GlossaryEntry)result.get(z);
-                GlossaryEntry xEntry = (GlossaryEntry)result.get(x);
+        result = filterGlossary(result);
+        for (int z = 0; z < result.size(); z++)
+            for (int x = z + 1; x < result.size() - 1; x++) {
+                GlossaryEntry zEntry = (GlossaryEntry) result.get(z);
+                GlossaryEntry xEntry = (GlossaryEntry) result.get(x);
 
-                if(xEntry.getSrcText().length() > zEntry.getSrcText().length())
-                {
+                if (xEntry.getSrcText().length() > zEntry.getSrcText().length()) {
                     Object temp = result.get(x);
                     result.set(x, result.get(z));
-                    result.set(z,(GlossaryEntry) temp);
+                    result.set(z, (GlossaryEntry) temp);
                 }
             }
-
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                if (glossaryController.processedEntry == processedEntry) {
-                    glossaryController.setGlossaryEntries(result);
-                }
-            }
-        });
+        return result;
     }
 
     /**
      * If a combined glossary entry contains ',', it needs to be bracketed by
-     * quotes, to prevent confusion when entries are combined. However, if
-     * the entry contains ';' or '"', it will automatically be bracketed by
-     * quotes.
-     * @param entry A glossary text entry
+     * quotes, to prevent confusion when entries are combined. However, if the
+     * entry contains ';' or '"', it will automatically be bracketed by quotes.
+     * 
+     * @param entry
+     *            A glossary text entry
      * @return A glossary text entry possibly bracketed by quotes
      */
-    private String bracketEntry(String entry){
+    private String bracketEntry(String entry) {
 
-        if ( entry.contains(",") &&
-             !( entry.contains(";") || entry.contains("\"") ) 
-            ) 
-            entry = '"' + entry + '"';   
+        if (entry.contains(",")
+                && !(entry.contains(";") || entry.contains("\"")))
+            entry = '"' + entry + '"';
         return entry;
     }
 
-    private List FilterGlossary(List<GlossaryEntry> result)
-    {
+    private List<GlossaryEntry> filterGlossary(List<GlossaryEntry> result) {
         // First check that entries exist in the list.
-        if(result.size() == 0)
+        if (result.size() == 0)
             return result;
 
         List<GlossaryEntry> returnList = new LinkedList<GlossaryEntry>();
-        
-        // The default replace entry
-        GlossaryEntry replaceEntry = new GlossaryEntry("", "", "");        
 
-        //... Remove the duplicates from the list ..............................
+        // The default replace entry
+        GlossaryEntry replaceEntry = new GlossaryEntry("", "", "");
+
+        // ... Remove the duplicates from the list
+        // ..............................
         boolean removedDuplicate = false;
-        for(int i=0; i < result.size(); i++)
-        {
+        for (int i = 0; i < result.size(); i++) {
             GlossaryEntry nowEntry = result.get(i);
 
-            if(nowEntry.getSrcText().equals(""))
+            if (nowEntry.getSrcText().equals(""))
                 continue;
 
-            for(int j=i+1; j < result.size(); j++)
-            {
+            for (int j = i + 1; j < result.size(); j++) {
                 GlossaryEntry thenEntry = result.get(j);
 
-                if(thenEntry.getSrcText().equals(""))
+                if (thenEntry.getSrcText().equals(""))
                     continue;
 
                 // If the Entries are exactely the same, insert a blank entry.
-                if(nowEntry.getSrcText().equals(thenEntry.getSrcText()))
-                    if(nowEntry.getLocText().equals(thenEntry.getLocText()))
-                        if(nowEntry.getCommentText().
-                                  equals(thenEntry.getCommentText()))
-                        {
+                if (nowEntry.getSrcText().equals(thenEntry.getSrcText()))
+                    if (nowEntry.getLocText().equals(thenEntry.getLocText()))
+                        if (nowEntry.getCommentText().equals(
+                                thenEntry.getCommentText())) {
                             result.set(j, replaceEntry);
                             removedDuplicate = true;
                         }
             }
         }
-        //......................................................................
+        // ......................................................................
 
-        //-- Remove the blank entries from the list ----------------------------
-        if(removedDuplicate)
-        {
+        // -- Remove the blank entries from the list
+        // ----------------------------
+        if (removedDuplicate) {
             Iterator<GlossaryEntry> myIter = result.iterator();
             List<GlossaryEntry> newList = new LinkedList<GlossaryEntry>();
 
-
-            while(myIter.hasNext())
-            {
+            while (myIter.hasNext()) {
                 GlossaryEntry checkEntry = myIter.next();
-                if(checkEntry.getSrcText().equals("") ||
-                   checkEntry.getLocText().equals(""))
+                if (checkEntry.getSrcText().equals("")
+                        || checkEntry.getLocText().equals(""))
                     myIter.remove();
                 else
                     newList.add(checkEntry);
@@ -213,70 +191,63 @@ public class FindGlossaryThread extends Thread {
 
             result = newList;
         }
-        //----------------------------------------------------------------------
+        // ----------------------------------------------------------------------
 
-        //~~ Group items with same scrTxt ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~        
-        for(int i=0; i < result.size(); i++)
-        {
+        // ~~ Group items with same scrTxt
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        for (int i = 0; i < result.size(); i++) {
             List<GlossaryEntry> srcList = new LinkedList<GlossaryEntry>();
             GlossaryEntry nowEntry = result.get(i);
 
-            if(nowEntry.getSrcText().equals(""))
+            if (nowEntry.getSrcText().equals(""))
                 continue;
 
             srcList.add(nowEntry);
 
-            for(int j=i+1; j < result.size(); j++)
-            {
+            for (int j = i + 1; j < result.size(); j++) {
                 GlossaryEntry thenEntry = result.get(j);
 
                 // Double check, needed?
-                if(thenEntry.getSrcText().equals(""))
+                if (thenEntry.getSrcText().equals(""))
                     continue;
 
-                if(nowEntry.getSrcText().equals(thenEntry.getSrcText()))
-                {
+                if (nowEntry.getSrcText().equals(thenEntry.getSrcText())) {
                     srcList.add(thenEntry);
                     result.set(j, replaceEntry);
                 }
             }
 
-            //·· Sort items with same locTxt ···································
+            // ·· Sort items with same locTxt
+            // ···································
             List<GlossaryEntry> sortList = new LinkedList<GlossaryEntry>();
-            if(srcList.size() > 1)
-            {                
-                for(int k=0; k < srcList.size(); k++)
-                {
+            if (srcList.size() > 1) {
+                for (int k = 0; k < srcList.size(); k++) {
                     GlossaryEntry srcNow = srcList.get(k);
 
-                    if(srcNow.getSrcText().equals(""))
+                    if (srcNow.getSrcText().equals(""))
                         continue;
 
                     sortList.add(srcNow);
 
-                    for(int l=k+1; l < srcList.size(); l++)
-                    {
+                    for (int l = k + 1; l < srcList.size(); l++) {
                         GlossaryEntry srcThen = srcList.get(l);
 
-                        if(srcThen.getSrcText().equals(""))
+                        if (srcThen.getSrcText().equals(""))
                             continue;
 
-                        if(srcNow.getLocText().equals(srcThen.getLocText()))
-                        {
+                        if (srcNow.getLocText().equals(srcThen.getLocText())) {
                             sortList.add(srcThen);
                             srcList.set(l, replaceEntry);
                         }
                     }
                 }
-            }
-            else
-            {
+            } else {
                 sortList = srcList;
             }
-            //··································································
+            // ··································································
 
-
-            //== Now put the sortedList together ===============================
+            // == Now put the sortedList together
+            // ===============================
             String srcTxt = sortList.get(0).getSrcText();
             String locTxt = sortList.get(0).getLocText();
             String comTxt = "";
@@ -288,21 +259,27 @@ public class FindGlossaryThread extends Thread {
             String prevLocTxt = sortList.get(0).getLocText();
             String prevComTxt = sortList.get(0).getCommentText();
 
-            if(!prevComTxt.equals(""))
+            if (!prevComTxt.equals(""))
                 comTxt = comCounter + ". " + prevComTxt;
 
-            for(int m=1; m < sortList.size(); m++)
-            {
-                if(!sortList.get(m).getLocText().equals(prevLocTxt))
-                {
+            for (int m = 1; m < sortList.size(); m++) {
+                if (!sortList.get(m).getLocText().equals(prevLocTxt)) {
                     comCounter++;
                     prevLocTxt = sortList.get(m).getLocText();
                     locTxt += ", " + bracketEntry(prevLocTxt);
-                    // The Comments cannot be equal because all the duplicates 
+                    // The Comments cannot be equal because all the duplicates
                     // have been removed earlier.
-                    if(!sortList.get(m).getCommentText().equals(""))
-                    {
-                        if(comTxt.equals(""))
+                    if (!sortList.get(m).getCommentText().equals("")) {
+                        if (comTxt.equals(""))
+                            comTxt = comCounter + ". "
+                                    + sortList.get(m).getCommentText();
+                        else
+                            comTxt += "\n" + comCounter + ". "
+                                    + sortList.get(m).getCommentText();
+                    }
+                } else {
+                    if (!sortList.get(m).getCommentText().equals("")) {
+                        if (comTxt.equals(""))
                             comTxt = comCounter + ". "
                                     + sortList.get(m).getCommentText();
                         else
@@ -310,24 +287,13 @@ public class FindGlossaryThread extends Thread {
                                     + sortList.get(m).getCommentText();
                     }
                 }
-                else
-                {                    
-                    if(!sortList.get(m).getCommentText().equals(""))
-                    {
-                        if(comTxt.equals(""))
-                            comTxt = comCounter + ". "
-                                    + sortList.get(m).getCommentText();
-                        else
-                            comTxt += "\n" + comCounter + ". "
-                                    + sortList.get(m).getCommentText();
-                    }
-                }                
             }
-            GlossaryEntry combineEntry = new GlossaryEntry(srcTxt, locTxt, comTxt);
+            GlossaryEntry combineEntry = new GlossaryEntry(srcTxt, locTxt,
+                    comTxt);
             returnList.add(combineEntry);
-            //==================================================================
+            // ==================================================================
         }
-        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         return returnList;
     }
 }

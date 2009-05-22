@@ -27,6 +27,8 @@ package org.omegat.gui.glossary;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.SwingUtilities;
+
 import org.omegat.core.TestCore;
 
 /**
@@ -38,13 +40,17 @@ public class GlossaryTextAreaTest extends TestCore
     /**
      * Testing setGlossaryEntries of org.omegat.gui.main.GlossaryTextArea.
      */
-    public void testSetGlossaryEntries()
+    public void testSetGlossaryEntries() throws Exception 
     {
-        List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
+        final List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
         entries.add(new GlossaryEntry("source1", "translation1", ""));
         entries.add(new GlossaryEntry("source2", "translation2", "comment2"));
-        GlossaryTextArea gta = new GlossaryTextArea();
-        gta.setGlossaryEntries(entries);
+        final GlossaryTextArea gta = new GlossaryTextArea();
+        SwingUtilities.invokeAndWait(new Runnable() {
+           public void run() {
+               gta.setFoundResult(entries);
+            } 
+        });
         String GTATEXT = "source1 = translation1\n\nsource2 = translation2\ncomment2\n\n";
         if (!gta.getText().equals(GTATEXT))
             fail("Glossary pane doesn't show what it should.");        
@@ -53,13 +59,17 @@ public class GlossaryTextAreaTest extends TestCore
     /**
      * Testing clear in org.omegat.gui.main.GlossaryTextArea.
      */
-    public void testClear()
+    public void testClear() throws Exception
     {
-        List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
+        final List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
         entries.add(new GlossaryEntry("source1", "translation1", ""));
         entries.add(new GlossaryEntry("source2", "translation2", "comment2"));
-        GlossaryTextArea gta = new GlossaryTextArea();
-        gta.setGlossaryEntries(entries);
+        final GlossaryTextArea gta = new GlossaryTextArea();
+        SwingUtilities.invokeAndWait(new Runnable() {
+            public void run() {
+                gta.setFoundResult(entries);
+             } 
+         });
         gta.clear();
         if (gta.getText().length()>0)
             fail("Glossary pane isn't empty.");

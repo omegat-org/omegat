@@ -38,6 +38,8 @@ import javax.swing.JEditorPane;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.BoxView;
@@ -53,6 +55,7 @@ import javax.swing.text.ViewFactory;
 import javax.swing.undo.UndoManager;
 
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -72,6 +75,8 @@ public class EditorTextArea3 extends JEditorPane {
 
     protected final EditorController controller;
 
+    protected String currentWord;
+
     public EditorTextArea3(EditorController controller) {
         this.controller = controller;
         setEditorKit(new StyledEditorKit() {
@@ -81,6 +86,24 @@ public class EditorTextArea3 extends JEditorPane {
         });
 
         addMouseListener(mouseListener);
+
+        addCaretListener(new CaretListener() {
+            public void caretUpdate(CaretEvent e) {
+                try {
+                    int start = Utilities.getWordStart(EditorTextArea3.this, e
+                            .getMark());
+                    int end = Utilities.getWordEnd(EditorTextArea3.this, e
+                            .getMark());
+                    String newWord = getText(start, end - start);
+                    if (!newWord.equals(currentWord)) {
+                        currentWord = newWord;
+                        CoreEvents.fireEditorNewWOrd(newWord);
+                    }
+                } catch (BadLocationException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
     /** Orders to cancel all Undoable edits. */
@@ -309,11 +332,11 @@ public class EditorTextArea3 extends JEditorPane {
      * Check if specified key pressed.
      * 
      * @param e
-     *                pressed key event
+     *            pressed key event
      * @param code
-     *                required key code
+     *            required key code
      * @param modifiers
-     *                required modifiers
+     *            required modifiers
      * @return true if checked key pressed
      */
     private static boolean isKey(KeyEvent e, int code, int modifiers) {
@@ -382,8 +405,8 @@ public class EditorTextArea3 extends JEditorPane {
      * create the spell checker popup menu - suggestions for a wrong word, add
      * and ignore. Works only for the active segment, for the translation
      * 
-     * @param point :
-     *                where should the popup be shown
+     * @param point
+     *            : where should the popup be shown
      */
     protected boolean createSpellCheckerPopUp(final Point point) {
         if (!controller.getSettings().isAutoSpellChecking())
@@ -472,12 +495,12 @@ public class EditorTextArea3 extends JEditorPane {
     /**
      * add a new word to the spell checker or ignore a word
      * 
-     * @param word :
-     *                the word in question
-     * @param offset :
-     *                the offset of the word in the editor
-     * @param add :
-     *                true for add, false for ignore
+     * @param word
+     *            : the word in question
+     * @param offset
+     *            : the offset of the word in the editor
+     * @param add
+     *            : true for add, false for ignore
      */
     protected void addIgnoreWord(final String word, final int offset,
             final boolean add) {

@@ -76,6 +76,8 @@ public class OConsts
     public static final String DEFAULT_GLOSSARY     = "glossary";               // NOI18N
     /** Project subfolder for legacy translation memories default name. */
     public static final String DEFAULT_TM           = "tm";                     // NOI18N
+    /** Project subfolder for dictionaries default name. */
+    public static final String DEFAULT_DICT         = "dictionary";             // NOI18N
     /** Project subfolder for project's translation memory. */
     public static final String DEFAULT_INTERNAL     = "omegat";                 // NOI18N
     

@@ -117,6 +117,13 @@ public class ProjectFileStorage {
                 blk = lst.get(i);
                 result.setGlossaryRoot(computeAbsolutePath(m_root, blk
                         .getText(), OConsts.DEFAULT_GLOSSARY));
+            } else if (blk.getTagName().equals("dictionary_dir")) // NOI18N
+            {
+                if (++i >= lst.size())
+                    break;
+                blk = lst.get(i);
+                result.setDictRoot(computeAbsolutePath(m_root, blk
+                        .getText(), OConsts.DEFAULT_DICT));
             } else if (blk.getTagName().equals("source_lang")) // NOI18N
             {
                 if (++i >= lst.size())
@@ -171,6 +178,9 @@ public class ProjectFileStorage {
         out.write("    <glossary_dir>" + // NOI18N
                 computeRelativePath(m_root, props.getGlossaryRoot(),
                         OConsts.DEFAULT_GLOSSARY) + "</glossary_dir>\n"); // NOI18N
+        out.write("    <dictionary_dir>" + // NOI18N
+                computeRelativePath(m_root, props.getDictRoot(),
+                        OConsts.DEFAULT_DICT) + "</dictionary_dir>\n"); // NOI18N
         out.write("    <source_lang>" + props.getSourceLanguage()
                 + "</source_lang>\n"); // NOI18N
         out.write("    <target_lang>" + props.getTargetLanguage()

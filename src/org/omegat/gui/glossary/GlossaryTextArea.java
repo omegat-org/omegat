@@ -21,124 +21,96 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.gui.glossary;
 
-import java.awt.Font;
-import java.io.File;
 import java.util.List;
 
 import org.omegat.core.Core;
-import org.omegat.core.CoreEvents;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringEntry;
-import org.omegat.core.events.IEntryEventListener;
-import org.omegat.core.events.IFontChangedEventListener;
-import org.omegat.core.events.IProjectEventListener;
+import org.omegat.gui.common.EntryInfoPane;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * This is a Glossary pane that displays glossary entries.
- *
+ * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
-public class GlossaryTextArea extends javax.swing.JTextPane
-{
-    /** Glossary manager instance.*/
-    protected final GlossaryManager manager;
+public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
+    /** Glossary manager instance. */
+    protected final GlossaryManager manager = new GlossaryManager(this);
 
     /**
      * Currently processed entry. Used to detect if user moved into new entry.
      * In this case, new find should be started.
      */
     protected StringEntry processedEntry;
-    
-    /** Creates new form MatchGlossaryPane */
-    public GlossaryTextArea()
-    {
-        manager = new GlossaryManager();
-        setEditable(false);
-        
-        setFont(Core.getMainWindow().getApplicationFont());
-        
-        String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Glossary");
-        Core.getMainWindow().addDockable(new DockableScrollPane("GLOSSARY", title, this, true));
-        
-        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
-            public void onProjectChanged(final PROJECT_CHANGE_TYPE eventType) {
-                switch (eventType) {
-                case LOAD:
-                case CREATE:
-                    clear();
-                    loadGlossaries();
-                    break;
-                case CLOSE:
-                    clear();
-                    closeGlossaries();
-                    break;
-                }
-            }
-        });
-        
-        // find glossary entries on every editor entry change
-        CoreEvents.registerEntryEventListener(new IEntryEventListener() {
-            public void onNewFile(String activeFileName) {
-            }
 
-            public void onEntryActivated(final StringEntry newEntry) {
-                processedEntry = newEntry;
-                new FindGlossaryThread(GlossaryTextArea.this, newEntry).start();
-            }
-        });
-        CoreEvents
-                .registerFontChangedEventListener(new IFontChangedEventListener() {
-                    public void onFontChanged(Font newFont) {
-                        GlossaryTextArea.this.setFont(newFont);
-                    }
-                });
+    /** Creates new form MatchGlossaryPane */
+    public GlossaryTextArea() {
+        super(true);
+
+        setEditable(false);
+
+        String title = OStrings
+                .getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Glossary");
+        Core.getMainWindow().addDockable(
+                new DockableScrollPane("GLOSSARY", title, this, true));
     }
-    
+
+    @Override
+    protected void onProjectOpen() {
+        clear();
+        manager.start();
+    }
+
+    @Override
+    protected void onProjectClose() {
+        clear();
+        manager.stop();
+    }
+
+    @Override
+    protected void startSearchThread(StringEntry newEntry) {
+        new FindGlossaryThread(GlossaryTextArea.this, newEntry, manager)
+                .start();
+    }
+
+    /**
+     * Refresh content on glossary file changed.
+     */
+    public void refresh() {
+        SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+        if (ste != null) {
+            startSearchThread(ste.getStrEntry());
+        }
+    }
+
     /**
      * Sets the list of glossary entries to show in the pane. Each element of
      * the list should be an instance of {@link GlossaryEntry}.
      */
-    protected void setGlossaryEntries(List<GlossaryEntry> entries)
-    {
+    protected void setFoundResult(List<GlossaryEntry> entries) {
         UIThreadsUtil.mustBeSwingThread();
-        
+
         StringBuffer buf = new StringBuffer();
-        for (GlossaryEntry entry : entries)
-        {
-            buf.append(entry.getSrcText() + " = " +                             // NOI18N
-                    entry.getLocText());                                        // NOI18N
-            if (entry.getCommentText().length()>0)
-                buf.append("\n" + entry.getCommentText());                      // NOI18N
-            buf.append("\n\n");                                                 // NOI18N
+        for (GlossaryEntry entry : entries) {
+            buf.append(entry.getSrcText() + " = " + entry.getLocText());
+            if (entry.getCommentText().length() > 0)
+                buf.append("\n" + entry.getCommentText());
+            buf.append("\n\n");
         }
         setText(buf.toString());
     }
-    
-    /** Clears up the pane. */
-    public void clear()
-    {
-        setText(new String());
-    }
-    
-    protected void loadGlossaries() {
-        final File dir = new File(Core.getProject().getProjectProperties()
-                .getGlossaryRoot());
-        new Thread() {
-            public void run() {
-                manager.loadGlossaryFiles(dir);
-            }
-        }.start();
-    }
 
-    protected void closeGlossaries() {
-        manager.clear();
+    /** Clears up the pane. */
+    public void clear() {
+        setText("");
     }
 }

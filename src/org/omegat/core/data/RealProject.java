@@ -428,6 +428,7 @@ public class RealProject implements IProject
             createDirectory(m_config.getSourceRoot(), "src");
             createDirectory(m_config.getGlossaryRoot(), "glos");
             createDirectory(m_config.getTMRoot(), "tm");
+            createDirectory(m_config.getDictRoot(), "dictionary");
             createDirectory(m_config.getTargetRoot(), "target");
             
             saveProjectProperties();            

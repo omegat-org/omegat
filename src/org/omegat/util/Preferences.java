@@ -64,6 +64,7 @@ public class Preferences
     public static final String SOURCE_FOLDER	= "source_folder";				// NOI18N
     public static final String TARGET_FOLDER	= "target_folder";				// NOI18N
     public static final String TM_FOLDER		= "tm_folder";                  // NOI18N
+    public static final String DICT_FOLDER      = "dict_folder";                  // NOI18N
     public static final String GLOSSARY_FOLDER	= "glossary_folder";            // NOI18N
     
     public static final String MAINWINDOW_WIDTH  = "screen_width";              // NOI18N

@@ -48,6 +48,7 @@ public class ProjectProperties
         setTargetRoot(projectRoot + OConsts.DEFAULT_TARGET + File.separator);
         setGlossaryRoot(projectRoot + OConsts.DEFAULT_GLOSSARY + File.separator);
         setTMRoot(projectRoot + OConsts.DEFAULT_TM + File.separator);
+        setDictRoot(projectRoot + OConsts.DEFAULT_DICT + File.separator);
 
         setSentenceSegmentingEnabled(true);
 
@@ -99,6 +100,17 @@ public class ProjectProperties
     public void setTMRoot(String tmRoot)
     {
         this.tmRoot = tmRoot;
+    }
+    
+    /** Returns The Dictionaries Files Directory */
+    public String getDictRoot()
+    {
+        return dictRoot;
+    }
+    /** Sets Dictionaries Files Directory */
+    public void setDictRoot(String dictRoot)
+    {
+        this.dictRoot = dictRoot;
     }
     
     /** Returns the name of the Project */
@@ -193,6 +205,12 @@ public class ProjectProperties
         File loc = new File(getTargetRoot());
         File gls = new File(getGlossaryRoot());
         File tmx = new File(getTMRoot());
+        File dict = new File(getDictRoot());
+        if (!dict.exists()) {
+            if (getDictRoot().equals(projectRoot + OConsts.DEFAULT_DICT + File.separator)) {
+                dict.mkdirs();
+            }
+        }
         
         if (src.exists() && loc.exists() && gls.exists() && tmx.exists())
             return true;
@@ -243,6 +261,7 @@ public class ProjectProperties
     private String targetRoot;
     private String glossaryRoot;
     private String tmRoot;
+    private String dictRoot;
     
     private Language sourceLanguage;
     private Language targetLanguage;

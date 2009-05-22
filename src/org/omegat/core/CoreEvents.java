@@ -32,6 +32,7 @@ import javax.swing.SwingUtilities;
 
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IApplicationEventListener;
+import org.omegat.core.events.IEditorEventListener;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
@@ -50,6 +51,7 @@ public class CoreEvents {
     private static final List<IApplicationEventListener> applicationEventListeners = new ArrayList<IApplicationEventListener>();
     private static final List<IEntryEventListener> entryEventListeners = new ArrayList<IEntryEventListener>();
     private static final List<IFontChangedEventListener> fontChangedEventListeners = new ArrayList<IFontChangedEventListener>();
+    private static final List<IEditorEventListener> editorEventListeners = new ArrayList<IEditorEventListener>();
 
     /** Register listener. */
     public static void registerProjectChangeListener(
@@ -114,6 +116,23 @@ public class CoreEvents {
             fontChangedEventListeners.remove(listener);
         }
     }
+    
+    /** Register listener. */
+    public static void registerEditorEventListener(
+            final IEditorEventListener listener) {
+        synchronized (editorEventListeners) {
+            editorEventListeners.add(listener);
+        }
+    }
+
+    /** Unregister listener. */
+    public static void unregisterEditorEventListener(
+            final IEditorEventListener listener) {
+        synchronized (editorEventListeners) {
+            editorEventListeners.remove(listener);
+        }
+    }
+
 
     /** Fire event. */
     public static void fireProjectChange(
@@ -199,4 +218,18 @@ public class CoreEvents {
             }
         });
     }
+    
+
+    /** Fire event. */
+    public static void fireEditorNewWOrd(final String newWord) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                synchronized (editorEventListeners) {
+                    for (IEditorEventListener listener : editorEventListeners) {
+                        listener.onNewWord(newWord);
+                    }
+                }
+            }
+        });
+    }    
 }

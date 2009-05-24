@@ -1,195 +1,235 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Werken met opgemaakte tekst - OmegaT 1.7.3 Gebruikershandleiding</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Werken met opgemaakte tekst - OmegaT 1.8 Gebruikershandleiding</title>
 </head>
 
 <body>
-	<h1>Werken met opgemaakte teksten</h1>
+  <h2>Werken met opgemaakte teksten</h2>
+
+  <ul>
+    <li>
+      <p><a href="#intro">Tags voor opmaak</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_segmenting">Tags en zin-segmentatie</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_operation">Tag-bewerkingen</a></p>
+    </li>
+
+    <li>
+      <p><a href=
+      "#nesting">Tag-groep nesten</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag-overlapping">Tag-groep overlappen</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_validation">Tag-groep validatie</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_hints">Hints voor tagbeheer</a></p>
+    </li>
+  </ul>
+
+  <p>Opmaakinformatie die aanwezig is in het bronbestand moet meestal worden gereproduceerd in het doelbestand. De in-regelige opmaakinformatie van ondersteunde formaten (momenteel DocBook, HTML, XHTML, Open Document en OpenOffice.org) wordt door OmegaT weergegeven als tags. In normale gevallen worden tags genegeerd bij het bepalen van de gelijkheid tussen de verschillende teksten voor overeenkomst-doeleinden. Tags die zijn gereproduceerd in het vertaalde segment zullen aanwezig zijn in het vertaalde document.</p>
+  <hr>
+
+  <h3><a name="intro" id="intro"></a>Tags voor opmaak</h3>
+
+  <p><a name="naming" id="naming"></a><b>Namen van tags:</b> De tags bestaan uit één tot drie tekens en een getal. Met unieke nummers kunnen de tags die met elkaar overeenkomen worden gegroepeerd en onderscheiden zich van de tags die dezelfde tekencombinatie hebben, maar in feite verschillend zijn. De tekens kunnen wel of niet de waarde vertegenwoordigen van de opmaak die de tag vertegenwoordigt (bijv.:  vet, cursief, etc.)</p>
+
+  <p><a name="numbering" id="numbering"></a><b>Nummeren van tags:</b>Tags worden op een oplopende manier genummerd door een <strong>tag-groep</strong>. Wat wij hier "tag-groepen" noemen is of één enkele tag (zoals <code><font color=
+  "#Fb0000">&lt;br1&gt;</font></code>) op zichzelf, of 2 tags die een paar vormen (zoals <code><font color="#Fb0000">&lt;i0&gt;</font></code> en <code><font color="#Fb0000">&lt;/i0&gt;</font></code>). Binnen een segment krijgt de eerste groep (paar of enkele) het nummer <strong>0</strong>, de tweede het nummer <strong>1</strong> etc. Het eerste voorbeeld hieronder heeft 3 tag-groepen (een paar, een enkele en dan nog een ander paar), het tweede voorbeeld heeft slechts één groep (een paar).</p>
+
+  <p><a name="pairs" id="pairs"></a><b>Paren en enkelen:</b>Tags bestaan altijd of als enkele of als paar. <strong>Enkele tags</strong> geven opmaakinformatie aan die niet van invloed is op de tekst er omheen (extra spatie of regeleinde bijvoorbeeld).</p>
+  <pre>
+        <strong>&lt;segment 2132&gt;</strong><font color=
+"#Fb0000">&lt;b0&gt;</font>&lt;Ctr+N&gt;<font color=
+"#Fb0000">&lt;/b0&gt;</font>, <font color=
+"#Fb0000">&lt;br1&gt;&lt;b2&gt;</font>&lt;Enter&gt;<font color=
+"#Fb0000">&lt;/b2&gt;</font><strong>&lt;einde segment&gt;</strong>
+</pre>
+
+  <p><code><strong><font color="#Fb0000">&lt;br1&gt;</font></strong></code> is een enkele tag en heeft geen effect op de omringende tekst. <strong>Tagparen</strong> geven gewoonlijk stijlinformatie weer die van toepassing is op de tekst tussen de openingstag en de sluitingstag van een paar. Wat er ook gebeurt met een paar, de openingstag moet altijd vóór de sluitingstag staan.</p>
+  <pre>
+        <strong>&lt;segment 3167&gt;</strong>Logbestand (<font color=
+"#Fb0000">&lt;b0&gt;</font>log.txt<font color=
+"#Fb0000">&lt;/b0&gt;</font>) voor het opsporen van bewerkingen en fouten.<strong>&lt;einde segment&gt;</strong>
+</pre>
+
+  <p><code><strong><font color="#Fb0000">&lt;b0&gt;</font></strong></code> <font size="3">en</font> <code><strong><font color=
+  "#Fb0000">&lt;/b0&gt;</font></strong></code> zijn een paar en hebben effect op de tekst <code><strong>log.txt</strong></code>.</p>
+  <hr>
+
+  <h3><a name="tag_segmenting" id="tag_segmenting"></a>Tags en zin-segmentatie</h3>
+
+  <p>OmegaT maakt zijn tags voordat zin-segmentatie wordt toegepast. Afhankelijk van de segmentatieregels zou het kunnen lijken dat tags geen rekening houden met de hierboven genoemde regels van nummeren en groeperen. Controleer de volgende tekst: "<em>Vóór: \. Na: \s"</em><font color="#Fb0000">.</font> <font color="#000000">Men zou de segmentatie als volgt verwachten(&lt;b0&gt; en &lt;/b0&gt; staan voor het begin en einde van cursief):</font></p>
+  <pre>
+        <strong>&lt;segment ....&gt;</strong> <font color=
+"#Fb0000">&lt;b0&gt;</font>Vóór: \. Na: \s<font color=
+"#Fb0000">&lt;/b0&gt;</font><strong>&lt;einde segment&gt;</strong>
+</pre>
+
+  <p>Als echter de standaard segmentatieregels op dit segment worden toegepast (het standaard OmegaT-gedrag) krijgen we het volgende resultaat:</p>
+  <pre>
+        <strong>&lt;segment 1990&gt;</strong> <font color=
+"#Fb0000">&lt;b0&gt;</font>Vóór: \. <strong>&lt;einde segment&gt;</strong>
+	<strong>&lt;segment 1991&gt;</strong> Na: \s<font color=
+"#Fb0000">&lt;/b0&gt;</font><strong>&lt;einde segment&gt;</strong>   
+</pre>
+
+  <p>Toepassen van de regel <i>segment na een punt gevolgd door een spatie</i> splitst de originele tekst in twee segmenten, zelfs als de twee tags <code><font color="#Fb0000">&lt;b0&gt;</font></code> en <code><font color=
+  "#Fb0000">&lt;/b0&gt;</font></code> bij elkaar zouden moeten zijn gehouden in hetzelfde segment. In sommige gevallen kan dat zelfs problemen geven in de vertaling, als tags moeten worden verplaatst in de doeltaal om de woordvolgorde van die taal weer te geven (zie <a href="#tag_operation">Tag-bewerkingen</a> hieronder).</p>
+  <hr>
+
+  <h3><a name="tag_operation" id="tag_operation"></a>Tag-bewerkingen</h3>
+
+  <p>Voorzichtigheid is geboden met tags. Als zij per ongeluk worden gewijzigd kan de opmaak van het uiteindelijke document corrupt worden. De juiste benadering is "Repareer niets wat niet stuk is". Het is echter toch goed om te weten wat mogelijk is en hoe dat te doen.</p>
+
+  <p><a name="duplication" id="duplication"></a><b>Dupliceren van tag-groepen:</b> Kopieer ze simpelweg naar de positie van uw keuze om tag-groepen te dupliceren. Onthoud dat in een paar de openingstag vóór de sluitingstag moet komen. De opmaak die wordt vertegenwoordigd door de groep die u dupliceerde zal worden toegepast op de sectie waar u het duplicaat plaatste.</p>
+
+  <p>Voorbeeld:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#Fb0000">&lt;b0&gt;</font>Deze opmaak<font color=
+"#Fb0000">&lt;/b0&gt;</font> wordt hier gedupliceerd.<strong>&lt;einde segment&gt;</strong>
+</pre>
+
+  <p>Na het dupliceren:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#Fb0000">&lt;b0&gt;</font>Deze opmaak<font color=
+"#Fb0000">&lt;/b0&gt;</font> is <font color=
+"#Fb0000">&lt;b0&gt;</font>hier gedupliceerd<font color=
+"#Fb0000">&lt;/b0&gt;</font>.<strong>&lt;einde segment&gt;</strong>
+</pre>
+
+  <p><a name="deletion" id="deletion"></a><b> Verwijderen van tag-groepen:</b>Verwijder ze eenvoudigweg uit het segment om tag-groepen te verwijderen. Onthoud dat van een paar zowel de openings- als de sluitingstag moet worden verwijderd om er voor te zorgen dat alle sporen van de opmaak correct worden uitgewist, anders zou het vertaalde bestand mogelijk beschadigd kunnen raken. Door een tag-groep te verwijderen verwijdert u de gerelateerde opmaak uit het vertaalde document.</p>
+
+  <p>Voorbeeld:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#Fb0000">&lt;b0&gt;</font>Deze opmaak<font color=
+"#Fb0000">&lt;/b0&gt;</font> zal worden verwijderd.<strong>&lt;einde segment&gt;</strong>
+</pre>
+
+  <p>Na het verwijderen:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong>Deze opmaak is verwijderd.<strong>&lt;einde segment&gt;</strong>
+</pre>
+
+  <p><b>Aanpassen van de volgorde van tag-groepen:</b>Plaats eenvoudigweg de tag-groep waar die zou moeten staan in de vertaling om de volgorde van een tag-groep te wijzigen om een andere taalstructuur in de vertaling weer te geven. De opmaak zal het gedeelte volgen waarop het is toegepast.</p>
+
+  <p>Voorbeeld:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#Fb0000">&lt;b0&gt;</font>Opmaak nul<font color=
+"#Fb0000">&lt;/b0&gt;</font> en <font color=
+"#Fb0000">&lt;b1&gt;</font>opmaak een<font color=
+"#Fb0000">&lt;/b1&gt;</font> worden omgedraaid.<strong>&lt;einde segment&gt;</strong>
+</pre>
+
+  <p>Na wijziging van de volgorde:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#Fb0000">&lt;b1&gt;</font>Opmaak een<font color=
+"#Fb0000">&lt;/b1&gt;</font> en <font color=
+"#Fb0000">&lt;b0&gt;</font>opmaak nul<font color=
+"#Fb0000">&lt;/b0&gt;</font> zijn omgedraaid.<strong>&lt;einde segment&gt;</strong>
+</pre>
+
+  <h3><a name="nesting" id="nesting"></a>Tag-groep nesten</h3>
+
+  <p>Wijzigen van de volgorde van een tag-groep kan resulteren in het nesten van een tag-groep binnen een andere tag-groep. Dit is prima zolang de omsluitende groep in zijn geheel de omsloten groep bevat. Met andere woorden, zorg er bij het verplaatsen van tagparen voor dat zowel de openings- als de sluitingstag in het doel worden verplaatst, anders zou het vertaalde bestand mogelijk beschadigd kunnen zijn en niet willen openen. Op het geneste deel zullen dan beide opmaken worden toegepast.</p>
+
+  <p>Voorbeeld:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#Fb0000">&lt;b0&gt;</font>Opmaak<font color=
+"#Fb0000">&lt;/b0&gt;</font> <font color=
+"#Fb0000">&lt;b1&gt;</font>een<font color=
+"#Fb0000">&lt;/b1&gt;</font> zal worden genest binnen opmaak nul.<strong>&lt;einde segment&gt;</strong>
+</pre>
+
+  <p>Na het nesten:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#Fb0000">&lt;b0&gt;</font>Opmaak <font color=
+"#Fb0000">&lt;b1&gt;</font>een<font color=
+"#Fb0000">&lt;/b1&gt;&lt;/b0&gt;</font> is genest binnen opmaak nul.<strong>&lt;einde segment&gt;</strong>
+</pre>
+  <hr>
+
+  <h3><a name="tag-overlapping" id="tag-overlapping"></a>Tag-groep overlappen</h3>
+
+  <p>Overlappen is het resultaat van slechte bewerkingen van tagparen en zullen zeker leiden tot beschadiging van de opmaak en soms tot het helemaal niet openen van het vertaalde document. Voorbeeld:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#Fb0000">&lt;b0&gt;</font>Opmaak<font color=
+"#Fb0000">&lt;/b0&gt;</font> <font color=
+"#Fb0000">&lt;b1&gt;</font>een<font color=
+"#Fb0000">&lt;/b1&gt;</font> wordt verminkt.<strong>&lt;einde segment&gt;</strong>
+</pre>
+
+  <p>Na de slechte bewerking:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#Fb0000">&lt;b0&gt;</font>Opmaak <font color=
+"#Fb0000">&lt;b1&gt;</font>een<font color=
+"#Fb0000">&lt;/b0&gt;</font> <font color=
+"#Fb0000">&lt;/b1&gt;</font> is nu vreselijk verminkt.<strong>&lt;einde segment&gt;</strong>
+</pre>
+  <hr>
+
+  <h3><a name="tag_validation" id="tag_validation"></a>Tag-groep validatie</h3>
+
+  <p>De functie Tags valideren detecteert gewijzigde tags (of dat met opzet is gedaan of per ongeluk) en toont de betrokken segmenten. Het activeren van deze functie – door op Ctrl+T te drukken - zal een dialoogvenster openen waarin alle segmenten uit het bestand, waarvan wordt vermoed dat ze zijn verbroken of slechte tags zijn, worden getoond. Fouten in een vertaalde getagde tekst zijn vaak een probleem in OpenDocument of OpenOffice.org bestanden die niet willen openen wegens problemen met tags die zijn gemaakt gedurende het vertaalproces. Repareren van de tags en het opnieuw samenstellen van de doeldocumenten is eenvoudig met de functie Tags valideren.</p>
+
+  <p>Het venster, dat wordt geopend door te drukken op Ctrl+T, heeft een kolom met 3 tabellen waarin:</p>
+
+  <ul>
+    <li>
+      <p>een koppeling naar het segment</p>
+    </li>
+
+    <li>
+      <p>inhoud van het originele segment</p>
+    </li>
+
+    <li>
+      <p>inhoud van het vertaalde segment</p>
+    </li>
+  </ul>
+
+  <p>De tags worden vet blauw geaccentueerd voor eenvoudige vergelijking tussen de originele en de vertaalde inhoud. Klik op de koppeling om het segment in het venster Bewerken te activeren. Verbeter, indien nodig, de fout en druk op <code><a href="menu.html#shortcuts">Ctrl+T</a></code> om terug te keren naar het venster Tags valideren om andere fouten te corrigeren. <a href="#intro">Tag</a>-fouten zijn <a href="#tag_operation">tagbewerkingen</a> in de vertaling die niet dezelfde tagvolgorde en nummering produceren als die in het originele segment. Sommige tagbewerkingen zijn noodzakelijk en zijn goedaardig, sommige zullen problemen veroorzaken als het vertaalde document wordt gemaakt.</p>
+  <hr>
+
+  <h3><a name="tag_hints" id="tag_hints"></a>Hints voor tagbeheer</h3>
+
+  <p>Tags vertegenwoordigen meestal enige vorm van opmaak van de originele tekst. <strong>Vereenvoudigen van de opmaak van de originele tekst</strong> draagt enorm bij aan het verminderen van het aantal tags. Het gelijk maken van gebruikte lettertypen, lettertype-afmetingen, kleuren etc. zou, indien mogelijk, moeten worden overwogen, om het vertalen te vereenvoudigen en het verminderen van mogelijke fouten in tags. Kijk eens in de sectie <a href="#tag_operation">Tag-bewerkingen</a> om te zien wat er met tags gedaan kan worden. Onthoud dat, als u last heeft van de tags en de opmaak niet buitengewoon relevant is voor de huidige vertaling, het verwijderen van tags de eenvoudigste manier kan zijn om uit de problemen te geraken.</p>
+
+  <p>Als u de tags moet zien in OmegaT maar de meeste opmaak niet behoeft te behouden in het vertaalde document staat het u vrij om de tags niet op te nemen in het vertaalde document. Let in dit geval <strong>extra op de tagparen</strong> omdat het verwijderen van één deel van het paar, maar het vergeten te verwijderen van het andere, de opmaak van uw document zal beschadigen. Omdat tags in de tekst zelf zijn opgenomen, is het mogelijk om <a href="segmentation.html">segmentatieregels</a> te gebruiken om segmenten te maken met minder tags. Dit is een geavanceerde voorziening en enige ervaring is vereist om die juist toe te passen.</p>
+
+  <p><strong>Belangrijk:</strong> OmegaT is nog niet in staat om fouten in de opmaak volautomatisch te detecteren, dus het zal geen signaal geven als u een fout maakt of de opmaak wijzigt zodat die beter bij uw doeltaal past. Soms zal uw vertaalde document er echter vervormd uitzien en, in geval van OpenDocument / OpenOffice.org-bestanden, zouden zelfs misschien weigeren te openen.</p>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Auteursrechten</a> </td>
+        <td style="text-align: center;"><a href="index.html">Home</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Inhoudsopgave</a> </td>
+      </tr>
+    </tbody>
+  </table>
 
-	<ul>
-		<li><a href="#intro">Tags voor opmaak</a>
-			<ul>
-				<li><a href="#naming">Tag benoemen</a>
-				</li><li><a href="#numbering">Tagnummering</a>
-				</li><li><a href="#pairs">Paren en enkelen</a>
-			</li></ul>
-		</li>
-		<li><a href="#tag_segmenting">Tags en zin-segmentatie</a></li>
-		<li><a href="#tag_operation">Tag-bewerkingen</a>
-			<ul>
-				<li><a href="#duplication">Tag-groep dupliceren</a>
-				</li><li><a href="#deletion">Tag-groep verwijderen</a>
-				</li><li><a href="#order">Tag-groep volgorde wijzigen</a>
-				</li><li><a href="#nesting">Tag-groep nesten</a>
-			</li></ul>
-		</li>
-		<li><a href="#tag-overlapping">Tag-groep overlappen</a></li>
-		<li><a href="#tag_validation">Tag-groep validatie</a></li>
-		<li><a href="#tag_hints">Hints voor tagbeheer</a></li>
-	</ul>
-
-	<p>Opmaakinformatie die aanwezig is in het bronbestand moet meestal worden gereproduceerd in het doelbestand. OmegaT geeft de in-regelige opmaakinformatie van ondersteunde formaten (momenteel DocBook, HTML, XHTML, Open Document en OpenOffice.org) weer als tags. Met tags wordt gewoonlijk geen rekening gehouden bij het bepalen van overeenkomsten tussen de tekenreeksen. Tags die u heeft gereproduceerd in het vertaalde segment zullen aanwezig zijn in het vertaalde document.</p>
-
-<hr>
-
-	<a name="intro" id="intro"></a>
-	<h1>Tags voor opmaak</h1>
-
-
-	<a name="naming" id="naming"></a>
-	<h2>Tag benoemen</h2>
-
-	<p>De tags bestaan uit één tot drie tekens en een getal. Met unieke nummers kunnen de tags die met elkaar overeenkomen worden gegroepeerd en onderscheiden zich van de tags die dezelfde tekencombinatie hebben, maar in feite verschillend zijn. De tekens kunnen wel of niet de waarde vertegenwoordigen van de opmaak die de tag vertegenwoordigt (bijv.: vet, cursief, etc.)</p>
-
-	<a name="numbering" id="numbering"></a>
-	<h2>Tagnummering</h2>
-
-	<p>Tags worden op een oplopende manier genummerd door een <strong>tag-groep</strong>. Wat wij hier "tag-groepen" noemen is of één enkele tag (zoals <code><font color="red">&lt;br1&gt;</font></code>) op zichzelf of 2 tags die een paar vormen (zoals <code><font color="red">&lt;f3&gt;</font></code> en <code><font color="red">&lt;/f3&gt;</font></code>). Binnen een segment krijgt de eerste groep (paar of enkele) het nummer <strong>0</strong>, de tweede het nummer <strong>1</strong> etc. Het eerste voorbeeld hieronder heeft 3 tag-groepen (een paar, een enkele en dan nog een ander paar), het tweede voorbeeld heeft slechts één groep (een paar).</p>
-
-	<a name="pairs" id="pairs"></a>
-	<h2>Paren en enkelen</h2>
-
-	<p>Tags bestaan altijd of als enkele of als paar. <strong>Enkele tags</strong> geven opmaakinformatie aan die niet van invloed is op de tekst er omheen (extra spatie of regeleinde bijvoorbeeld).</p>
-
-	<pre>	<strong>&lt;segment 2132&gt;</strong><font color="red">&lt;b0&gt;</font>&lt;Ctr+N&gt;<font color="red">&lt;/b0&gt;</font>, <font color="red">&lt;br1&gt;</font><font color="red">&lt;b2&gt;</font>&lt;Enter&gt;<font color="red">&lt;/b2&gt;</font><strong>&lt;einde segment&gt;</strong></pre>
-
-	<p><code><strong><font color="red">&lt;br1&gt;</font></strong></code> is een enkele tag en heeft geen effect op de omringende tekst. <strong>Tagparen</strong> geven gewoonlijk stijlinformatie weer die van toepassing is op de tekst tussen de openingstag en de sluitingstag van een paar. Wat er ook gebeurt met een paar, de openingstag moet altijd vóór de sluitingstag staan.</p>
-
-	<pre>	<strong>&lt;segment 3167&gt;</strong>Logbestand (<font color="red"><font color="red"></font>log.txt<font color="red"></font></font>) voor het opsporen van bewerkingen en fouten.<strong>&lt;einde segment&gt;</strong></pre>
-
-	<p><code><strong><font color="red">&lt;f1&gt;</font></strong></code> en <code><strong><font color="red">&lt;/f1&gt;</font></strong></code> zijn een paar en hebben effect op <code><strong>log.txt</strong></code>.</p>
-
-<hr>
-
-	<a name="tag_segmenting" id="tag_segmenting"></a>
-	<h1>Tags en zin-segmentatie</h1>
-
-	<p>OmegaT maakt zijn tags voordat zin-segmentatie wordt toegepast. Afhankelijk van de segmentatieregels kunnen tags er uitzien alsof zij geen rekening houden met de hierboven genoemde regels van nummeren en groeperen.</p>
-
-	<pre>	<strong>&lt;segment 1554&gt;</strong> <font color="red">&lt;f0&gt;</font>Voor: \. Na: \s<font color="red">&lt;/f0&gt;</font><strong>&lt;einde segment&gt;</strong></pre>
-
-	<p>Er schijnt hier geen probleem te zijn. Als we nu de standaard segmenteringsregels op dit segment toepassen (het standaard OmegaT-gedrag) krijgen we het volgende resultaat:</p>
-
-	<pre>	<strong>&lt;segment 1554&gt;</strong> <font color="red">&lt;f0&gt;</font>Voor: \. <strong>&lt;einde segment&gt;</strong>
-	<strong>&lt;segment 1991&gt;</strong> Na: \s<font color="red">&lt;/f0&gt;</font><strong>&lt;einde segment&gt;</strong>
-	</pre>
-
-	<p>Segmenteringregels die van toepassing zijn: <i>segment na een punt gevolgd door een spatie</i>. In het voorbeeld hierboven zien we dat segmenten die één voor één worden behandeld geen rekening houden met de paar- en nummeringregels: <code><font color="red">&lt;f0&gt;</font></code> en <code><font color="red">&lt;/f0&gt;</font></code> zouden in hetzelfde segment gepaard moeten zijn, maar worden gescheiden door de segmentatieregels. In sommige gevallen kan dat zelfs problemen geven in de vertaling, als tags moeten worden verplaatst in de doeltaal om de woordvolgorde van die taal weer te geven (zie <a href="#Tag_operations">Tag-bewerkingen</a> hieronder).</p>
-
-<hr>
-
-	<a name="tag_operation" id="tag_operation"></a>
-	<h1>Tag-bewerkingen</h1>
-
-	<p>Voorzichtigheid is geboden met tags. Als zij per ongeluk worden gewijzigd kan de opmaak van het uiteindelijke document corrupt worden. De juiste benadering is "Repareer niets wat niet stuk is". Het is echter toch goed om te weten wat mogelijk is en hoe dat te doen.</p>
-
-	<a name="duplication" id="duplication"></a>
-	<h2>Tag-groep dupliceren</h2>
-
-	<p>Kopieer ze simpelweg naar de positie van uw keuze om tag-groepen te dupliceren. Onthoud dat in een paar de openingstag vóór de sluitingstag moet komen. De opmaak die wordt vertegenwoordigd door de groep die u dupliceerde zal worden toegepast op de sectie waar u het duplicaat plaatste.</p>
-
-	<p>Voorbeeld:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Deze opmaak<font color="red">&lt;/f0&gt;</font> wordt hier gedupliceerd.<strong>&lt;einde segment&gt;</strong></pre>
-
-	<p>Na het dupliceren:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Deze opmaak<font color="red">&lt;/f0&gt;</font> is <font color="red">&lt;f0&gt;</font>hier gedupliceerd<font color="red">&lt;/f0&gt;</font>.<strong>&lt;einde segment&gt;</strong></pre>
-
-	<a name="deletion" id="deletion"></a>
-	<h2>Tag-groep verwijderen</h2>
-
-	<p>Verwijder ze eenvoudigweg uit het segment om tag-groepen te verwijderen. Onthoud dat van een paar zowel de openings- als de sluitingstag moet worden verwijderd om er voor te zorgen dat alle sporen van de opmaak correct worden uitgewist, anders zou het vertaalde bestand mogelijk corrupt zijn en niet willen openen. Door een tag-groep te verwijderen verwijdert u de gerelateerde opmaak uit het vertaalde document.</p>
-
-	<p>Voorbeeld:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Deze opmaak<font color="red">&lt;/f0&gt;</font> zal worden verwijderd.<strong>&lt;einde segment&gt;</strong></pre>
-
-	<p>Na het verwijderen:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong>Deze opmaak is verwijderd.<strong>&lt;einde segment&gt;</strong></pre>
-
-	<a name="order" id="order"></a>
-	<h2>Tag-groep volgorde wijzigen</h2>
-
-	<p>Plaats eenvoudigweg de tag-groep waar die zou moeten staan in de vertaling om de volgorde van een tag-groep te wijzigen om een andere taalstructuur in de vertaling weer te geven. De opmaak zal het gedeelte volgen waarop het is toegepast.</p>
-
-	<p>Voorbeeld:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Opmaak nul<font color="red">&lt;/f0&gt;</font> en <font color="red"><font color="red"></font>opmaak een<font color="red"></font></font> worden omgedraaid.<strong>&lt;einde segment&gt;</strong></pre>
-
-	<p>Na wijziging van de volgorde:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red"><font color="red"></font>Opmaak een<font color="red"></font></font> en <font color="red">&lt;f0&gt;</font>opmaak nul<font color="red">&lt;/f0&gt;</font> zijn omgedraaid.<strong>&lt;einde segment&gt;</strong></pre>
-
-	<a name="nesting" id="nesting"></a>
-	<h2>Tag-groep nesten</h2>
-
-	<p>Wijzigen van de volgorde van een tag-groep kan resulteren in het nesten van een tag-groep binnen een andere tag-groep. Dit is mogelijk zolang de omsluitende groep in zijn geheel de omsloten groep bevat. Extra voorzichtigheid bij het nesten is speciaal geboden in het geval met tagparen die niet geheel zijn verplaatst binnen een omsluitende groep omdat het vertaalde bestand corrupt kan zijn en niet zal openen. Op het geneste deel zullen beide opmaken worden toegepast.</p>
-
-	<p>Voorbeeld:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Opmaak<font color="red">&lt;/f0&gt;</font> <font color="red"><font color="red"></font>een<font color="red"></font></font> zal worden genest binnen opmaak nul.<strong>&lt;einde segment&gt;</strong></pre>
-
-	<p>Na het nesten:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Opmaak <font color="red"><font color="red"></font>een<font color="red"></font></font><font color="red">&lt;/f0&gt;</font> is genest binnen opmaak nul.<strong>&lt;einde segment&gt;</strong></pre>
-
-<hr>
-
-	<a name="tag-overlapping" id="tag-overlapping"></a>
-	<h1>Tag-groep overlappen</h1>
-
-	<p>Overlappen is het resultaat van slechte bewerkingen van tagparen en zullen zeker leiden tot opmaakcorruptie en soms tot het helemaal niet openen van het vertaalde document. Voorbeeld:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Opmaak<font color="red">&lt;/f0&gt;</font> <font color="red"><font color="red"></font>een<font color="red"></font></font> wordt verminkt.<strong>&lt;einde segment&gt;</strong></pre>
-
-	<p>Na de slechte bewerking:</p>
-
-	<pre>	<strong>&lt;segment 0001&gt;</strong><font color="red">&lt;f0&gt;</font>Opmaak <font color="red"><font color="red"></font>een<font color="red">&lt;/f0&gt;</font> <font color="red"></font></font> is nu vreselijk verminkt.<strong>&lt;einde segment&gt;</strong></pre>
-
-<hr>
-
-	<a name="tag_validation" id="tag_validation"></a>
-	<h1>Tag-groep validatie</h1>
-
-	<p>De functie Tags valideren detecteert gewijzigde tags (of dat met opzet is gedaan of per ongeluk) en geeft de beïnvloede segmenten aan. Het gebruiken van deze functie zal een dialoogvenster openen waarin de vermoedelijk verbroken of slechte tags in een document worden getoond.</p>
-
-	<p>Deze functie kan handig zijn bij het opsporen van fouten in een vertaalde tekst met tags. Dit is vaak een probleem in OpenDocument of OpenOffice.org bestanden die niet willen openen wegens tagproblemen die zijn gemaakt gedurende het vertaalproces. Repareren van de tags en het opnieuw samenstellen van de doeldocumenten kan dit probleem vaak oplossen.</p>
-
-	<p>Gebruik <code><a href="menu.html#shortcuts">Ctrl+T</a></code> om het venster te openen.</p>
-	
-	<p>Het venster heeft een kolom met 3 tabellen waarin:</p>
-
-	<ul>
-		<li>een koppeling naar het segment</li>
-		<li>inhoud van het originele segment</li>
-		<li>inhoud van het vertaalde segment</li>
-	</ul>
-	
-	<p>De tags worden vet blauw geaccentueerd voor eenvoudige vergelijking tussen de originele en de vertaalde inhoud.<p>Klik op de koppeling om het segment in het venster Bewerken te activeren.</p>
-	
-	<p>Verbeter indien nodig de fout en druk op <code><a href="menu.html#shortcuts">Ctrl+T</a></code> om terug te keren naar het venster Tags valideren om andere fouten te corrigeren.</p>
-
-	<p><a href="formattedText.html#intro">Tag</a>-fouten zijn <a href="formattedText.html#tag_operation">tagbewerkingen</a> in de vertaling die niet dezelfde tagvolgorde en nummering produceren als die in het originele segment. Sommige tagbewerkingen zijn noodzakelijk en zijn goedaardig, sommige zullen problemen veroorzaken als het vertaalde document wordt gemaakt.</p>
-
-	<p>Tags vertegenwoordigen meestal enige vorm van opmaak in de originele tekst. <strong>Vereenvoudigen van de opmaak van de originele tekst</strong> draagt enorm bij aan het verminderen van het aantal tags.</p>
-
-
-<hr>
-
-	<a name="tag_hints" id="tag_hints"></a>
-	<h1>Hints voor tagbeheer</h1>
-
-	<p>Tags vertegenwoordigen meestal enige vorm van opmaak in de originele tekst. <strong>Vereenvoudigen van de opmaak van de originele tekst</strong> draagt enorm bij aan het verminderen van het aantal tags. Het gelijk maken van gebruikte lettertypen, lettertype-afmetingen, kleuren etc zou indien mogelijk moeten worden overwogen, om het vertalen te vereenvoudigen en het verminderen van het aantal mogelijke fouten in tags. Kijk eens in de sectie <a href="#Tag_operations">Tag-bewerkingen</a> om te zien wat er met tags gedaan kan worden. Onthoud dat, als u last heeft van de tags en de opmaak niet buitengewoon relevant is voor de huidige taak, het verwijderen van de meeste opmaak uit het brondocument de vertaling enorm zal vereenvoudigen.</p>
-
-	<p>Als u de tags moet zien in OmegaT maar de meeste opmaak niet behoeft te behouden in het vertaalde document staat het u vrij om de tags niet op te nemen in het vertaalde document. <strong>Let in dit geval extra op de tagparen</strong> omdat het vergeten te verwijderen van een deel van het paar de opmaak van uw document corrupt zal maken, hetgeen een vertaald OpenOffice.org document zal verhinderen te openen. Omdat tags in de tekst zelf zijn opgenomen, is het mogelijk om <a href="segmentation.html">segmentatieregels</a> te gebruiken om segmenten te maken met minder tags. Dit is een geavanceerde voorziening en enige ervaring is vereist om die juist toe te passen.</p>
-
-	<p><strong>Belangrijk:</strong> OmegaT is nog niet in staat om fouten in de opmaak volautomatisch te detecteren, dus het zal geen signaal geven als u een fout maakt of de opmaak wijzigt zoadat die beter bij uw doeltaal past. Soms zal uw vertaalde document er echter vervormd uitzien en OpenDocument / OpenOffice.org bestanden zouden in dat geval misschien weigeren te openen.</p>
-	<hr>
-
-	<p><a href="legalNotices.html">Auteursrechten</a></p>
 </body>
 </html>

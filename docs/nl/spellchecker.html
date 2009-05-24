@@ -1,0 +1,98 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Spellingscontrole - OmegaT 1.8 Gebruikershandleiding</title>
+</head>
+
+<body>
+  <h2>Spellingscontrole</h2>
+  <hr>
+
+  <ul>
+    <li>
+      <p><a href="#introduction">Introductie</a></p>
+    </li>
+
+    <li>
+      <p><a href="#edit_dialog">Opties voor spellingscontrole</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Hints">Hints</a></p>
+    </li>
+  </ul>
+
+  <p><br></p>
+
+  <h3><a name="introduction" id="introduction"></a>Introductie</h3>
+
+  <p><br></p>
+
+  <p>De spellingscontrole kan worden geïnstalleerd en gebruikt om woorden in de doeltekst te markeren die gewijzigd moeten worden, om spelfouten tijdens de vertaling te kunnen corrigeren. Dit zou geen verrassing moeten zijn: OmegaT gebruikt de spellingscontrole van <a href=
+  "http://hunspell.sourceforge.net/">Hunspell</a>, onder meer gebruikt in OpenOffice.org, Firefox en Thunderbird. Indien u al één van deze programma's gebruikt, zult u vermoedelijk de essentiële onderdelen van de spellingscontrole al hebben geïnstalleerd en hoeft u alleen OmegaT maar te verbinden.</p>
+
+  <p>Als de spellingscontrole eenmaal is geactiveerd en het woordenboek voor de doeltaal beschikbaar is, zal de spellingscontrole de doelsegmenten, die worden weergegeven in het venster Bewerken, monitoren. Mogelijk onjuiste woorden worden onderstreept met een kronkelende rode lijn:</p>
+
+  <p><br>
+  <br></p><img src="images/SpellcheckingText.png" name="grafika1" alt=
+  "Spellingscontrole van de tekst" align="left" width="535" height="302" border="0"
+  id="grafika1"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>Klik met rechts op een geaccentueerd woord (<i>bewerkingsveld</i> boven) opent een menu dat openklapt, waar de suggesties voor de correctie worden opgesomd (<i>werkingsveld</i>). Aanvullend kunt u de spellingscontrole vragen om, voor de keren dat het woord voorkomt, <b>alles te negeren</b> of <b>aan het woordenboek toe te voegen</b>. Let er op dat dit een online spellingscontrole is: als u een volledige controle van de tekst wilt, moet u zelf door de tekst bladeren en zoeken naar de kronkelende rode lijnen. Het alternatief is om de spelling van de doelbestanden met een tekstverwerker te controleren, met andere woorden: buiten OmegaT om zodat de wijzigingen die u maakt niet in het vertaalgeheugen komen.</p>
+
+  <p><br>
+  <br></p>
+
+  <h3><a name="edit_dialog" id="edit_dialog"></a>Opties voor spellingscontrole</h3>
+
+  <p>Klikken op <b>Opties &gt; Spellingscontrole...</b> zal het onderstaande venster openen:</p>
+
+  <p><br></p><img src="images/SpellcheckerSetup2.png" name="grafika2" alt=
+  "Instellen spellingscontrole" align="left" width="498" height="325" border="0" id=
+  "grafika2"><br clear="left">
+
+  <p><br></p>
+
+  <p>Het bovenstaande voorbeeld bevat reeds de beschikbare woordenboeken. Initieel zal er niets in staan omdat u moet specificeren waar OmegaT moet zoeken naar de woordenboeken. Klikken op <strong>Kies...</strong> opent een dialoogvenster waar u de juiste submap kunt selecteren - de <b>map Woordenboek-bestand</b> - welke in bovenstaand voorbeeld <i>C:\Program Files\OpenOffice.org 2.4\share\dict\ooo</i> is. Dit is natuurlijk de map met de bestaande Open Source-woordenboeken. OmegaT herkent geldige woordenboeken op die locatie en geeft ze weer. Als het woordenboek dat u wilt gebruiken daar al staat en zichtbaar is voor OmegaT, bent u klaar. Als dat niet het geval is, dus als de lijst met beschikbare talen leeg is, kunt u klikken op <b>Installeren</b> en OmegaT laten zoeken naar beschikbare woordenboeken. Selecteer de woordenboeken in het pop-upvenster en klik dan op <b>installeren</b>. De geselecteerde talen zullen dan worden geïnstalleerd en verschijnen in het venster Instellen spellingscontrole (dit kan even duren).</p>
+
+  <p>Onthoud dat het installatieprogramma afhankelijk is van de lijst met woordenboeken op het internet. OmegaT haalt deze lijst van <a href=
+  "http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/"> OpenOffice.org/contrib/dictionaries</a>. In het geval dat die gedateerd is zult u zelf moeten zoeken naar de woordenboeken. Zoek naar bestanden met de naam, verwijzend naar de gebruikte taal en die de extensies <i>aff</i> en <i>dic.</i> hebben. De OpenOffice.org Wiki bevat waarschijnlijk de grootste collectie woordenboeken in <a href=
+  "http://wiki.services.openoffice.org/wiki/Dictionaries">OpenOffice.org Wiki Dictionaries</a>. De woordenboeken die compatibel zijn met OmegaT zijn de "Hunspell"- of "Myspell"-woordenboeken.</p>
+
+  <p>Zorg er voor dat de taalcode van de doelbestanden correspondeert met de taalcode van het woordenboek: een FR-FR woordenboek zal niet werken met de instelling FR voor het doel. U zult de instelling naar FR-FR moeten wijzigen om de spellingscontrole het juiste woordenboek voor uw doel te laten herkennen.</p>
+
+  <h3><a name="Hints" id="Hints"></a>Hints</h3>
+
+  <p>Mogelijke oorzaken voor het niet werken van de spellingscontrole:</p>
+
+  <ol>
+    <li>
+      <p>Het keuzevak “Automatische spellingscontrole” moet zijn geselecteerd.</p>
+    </li>
+
+    <li>
+      <p>Controleer de taalcode van uw doel met de beschikbare woordenboeken in het venster Instellen spellingscontrole. De spellingscontrole bepaalt de taal die het moet gebruiken uit de taalcode van het doel: als de taalcode voor het doel Braziliaans Portugees (PT_BR) is, moet de submap met woordenboeken de twee woordenboekbestanden, genaamd pt_br.aff en pt_br.dic, bevatten.</p>
+    </li>
+  </ol>
+
+  <p>In het geval dat u al een groot gedeelte van de tekst heeft vertaald, maar zich dan realiseert dat de taalcode van het project niet overeenkomt met de taalcode van de spellingscontrole (u specificeerde en als de taal, maar er zijn geen en- woordenboeken) kunt u eenvoudigweg de twee corresponderende bestanden (bijvoorbeeld pt_PT.arr en pt_PT.dic) kopiëren en de kopieën hernoemen (naar pt._BR.arr en pt_BR.dic). U kunt ook de taalcode van get project wijzigen (van pt naar pt_BR), maar dan zult u die wijziging ook moeten doorvoeren in alle TMX-bestanden in het project. wat niet de veiligste manier is om door te gaan.</p>
+
+  <p>Merk op dat Verwijderen de geaccentueerde woordenboeken fysiek verwijderd. Als zij, zoals in bovenstaand geval, deel uitmaken van OpenOffice.org zullen zij ook uit die toepassing verdwijnen. Het kan daarom verstandiger zijn om de betrokken bestanden te kopiëren naar een andere map, alleen gereserveerd voor OmegaT-doeleinden, indien u dat, om welke reden dan ook, zo nu en dan moet doen.</p>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Auteursrechten</a> </td>
+        <td style="text-align: center;"><a href="index.html">Home</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Inhoudsopgave</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

@@ -2,86 +2,84 @@
 <head>
 	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Werken met platte tekst - OmegaT 1.7.3 Gebruikershandleiding</title>
+	<title>Werken met platte tekst - OmegaT 1.8 Gebruikershandleiding</title>
 </head>
 
 <body>
-	<h1>Werken met platte tekst</h1>
+	<h2>Werken met platte tekst</h2>
 
 	<ul>
 		<li><a href="#Plain_text_in_OmegaT">Standaard codering</a></li>
 		<li><a href="#Garbled_displays_3F">Verminkte weergaven</a></li>
-		<li><a href="#Character_sets_and_encodings">Tekensets en coderingen</a></li>
+		<li><a href="#Character_sets_and_encoding">Tekensets en coderingen</a></li>
 		<li><a href="#The_OmegaT_solution">De OmegaT-oplossing</a></li>
 	</ul>
 
 <hr>
 
 	<a name="Plain_Text_in_OmegaT" id="Plain_Text_in_OmegaT"></a>
-	<h1>Standaard codering</h1>
+	<h2>Standaard codering</h2>
 
 	<p>Platte-tekst bestanden - meestal met een <code>.txt</code>. extensie - bevat uitsluitend tekstuele informatie. Er bestaat geen helder gedefinieerde manier om de computer te vertellen welke taal zij bevatten. In (erg) simpele woorden: dat betekent dat de computer per definitie aanneemt dat de tekst is geschreven in de taal die de computer zelf gebruikt.</p>
 
 <hr>
 
 	<a name="Garbled_displays_3F" id="Garbled_displays_3F"></a>
-	<h1>Verminkte weergaven</h1>
+	<h2>Verminkte weergaven</h2>
 
 	<p>Als u Russisch bent is het zeer waarschijnlijk dat uw computer ook in het Russisch werkt: de menu's zijn in het Russisch, de bestanden die u opent zijn in het Russisch etc. In de meeste gevallen maakt de computer de juiste aanname met betrekking tot bestanden in het algemeen: zij bevatten allemaal Russisch en niet-Russische tekens kunnen niet worden weergegeven.</p>
-
-	<p>Maar als u een Russische vertaler bent die vertaalt vanuit het Japans, zullen de Japanse bestanden die u zult krijgen, als zij <strong>platte tekst</strong>-bestanden zijn, door de computer waarschijnlijk worden geïnterpreteerd als zijnde bestanden die Russisch bevatten. Omdat er in het bestand zelf geen informatie aanwezig is die aan de computer duidelijk maakt in welke taal zij zijn geschreven.</p>
-
-	<p>De Japanse bestandsinhoud zou kunnen zijn:</p>
-
-	<p>OmegaTとは、コンピュータを利用した翻訳ツールです。</p>
-
-	<p>Maar uw tekstbewerkingsprogramma zou dit zeer goed weer kunnen geven als:</p>
+		<p>Maar als u een Russische vertaler bent die vertaalt vanuit het Japans, zullen de Japanse bestanden die u zult krijgen, als zij <strong>platte tekst</strong>-bestanden zijn, door de computer waarschijnlijk worden geïnterpreteerd als zijnde bestanden die Russisch bevatten. Omdat er in het bestand zelf geen informatie aanwezig is die aan de computer duidelijk maakt in welke taal zij zijn geschreven. De Japanse bestandsinhoud zou kunnen zijn:</p>
+		<p>OmegaTとは、コンピュータを利用した翻訳ツールです。</p>
+		<br>
+		<p>Omdat het verwacht dat de inhoud Russisch is zou uw tekstverwerkingsprogramma dit zeer goed weer kunnen geven als:</p>
 	<p>OmegaTВ∆ВЌБAГRГУГsГЕБ[Г^ВрЧШЧpВµВљЦ|ЦуГcБ[ГЛВ≅ВЈБB</p>
-
-	<p>Omdat het verwacht dat de inhoud Russisch is... Maar dit is geen Russisch. Dit zijn Japanse tekens die foutief worden weergegeven als Russische tekens.</p>
+		<br>
+		<p>Dit lijkt echter in niets op Russisch, dit zijn Japanse tekens die foutief worden weergegeven als Russische tekens.</p>
 	
-	<p>OmegaT is niet anders. OmegaT gaat er van uit dat <strong>platte tekst</strong>-bestanden tekst bevatten die automatisch kan worden weergegeven met behulp van de standaardinstellingen van de computer. Dat werkt prima als de computer werkt in het Frans en als u Engelse bestanden krijgt of als de computer Duits is en u Italiaanse bestanden krijgt.</p>
+	<p>Net als elke andere toepassing heeft ook OmegaT last van dit probleem. Het kan alleen aannemen dat als standaard <strong>platte tekst</strong>-bestanden kunnen worden weergegeven met behulp van de systeemstandaarden. Dat werkt prima als de computer bijvoorbeeld in het Frans werkt en u krijgt Engelse bestanden of als de computer Duits is en u met Italiaanse bestanden werkt.</p>
 
 <hr>
 
-	<a name="Character_sets_and_encodings" id="Character_sets_and_encodings"></a>
-	<h1>Tekensets en coderingen</h1>
+	<a name="Character_sets_and_encoding" id="Character_sets_and_encoding"></a>
+	<h2>Tekensets en coderingen</h2>
 
-	<p>Waarom zou dat wel werken met Engels en Frans maar niet met Russisch en Japans? Omdat Engels en Frans een algemene <strong>tekenset</strong> delen. Namelijk <strong>Latijns-1</strong> of een variatie daarop. Tot voor kort deelden Russisch en Japans geen tekensets. De meeste huidige Russische tekensets kunnen niet overweg met Japans en andersom. Het resultaat ziet eruit zoals hiervoor getoond.</p>
+	<p>Waarom zou dat wel werken met Engels en Frans maar niet met Russisch en Japans? Omdat Engels en Frans een algemene <strong>tekenset</strong> delen. Namelijk <strong>Latin-1</strong>, of een variatie daarvan. Tot voor kort deelden Russisch en Japans geen tekensets. De meeste huidige Russische tekensets kunnen niet overweg met Japans en andersom. Het resultaat heeft u hierboven gezien.</p>
 
-	<p>De Japanse cliënt werkt met een Japanse computer en maakt tekstbestanden die Japans bevatten. De tekenset die werd geselecteerd door de computer van de cliënt zal afhankelijk zijn van het besturingssysteem en van andere instellingen, maar het is zeer onwaarschijnlijk dat de gekozen (Japanse) tekenset juist zal worden geïnterpreteerd door de Russische computer.</p>
+	<p>De Japanse cliënt werkt met een Japanse computer en maakt tekstbestanden die Japans bevatten. De tekenset die werd geselecteerd door de computer van de cliënt zal afhankelijk zijn van het besturingssysteem en andere instellingen, maar het is zeer onwaarschijnlijk dat de gekozen (Japanse) tekenset juist zal worden geïnterpreteerd door de Russische computer.</p>
 
-	<p>En dan nu, hoe de tekstuele informatie in de gespecifieerde tekenset fysiek wordt verzonden (dat is: hoe wordt het in het bestand <strong>geschreven</strong> zodat de computer het kan interpreteren en weergeven) is afhankelijk van een <strong>codering</strong>. Als de computer het bestand leest, "decodeert" het de informatie overeenkomstig de codering en geeft het die weer overeenkomstig de tekenset. Algemeen gesproken correspondeert één codering met één tekenset...</p>
+	<p>Hoe de tekstuele informatie in de gespecificeerde tekenset fysiek wordt verzonden (dat is: welke numerieke codes gebruikt de computer om tekst te interpreteren en weer te geven) is afhankelijk van een <strong>codering</strong>. Als de computer het bestand leest, "decodeert" het de informatie overeenkomstig de codering en geeft het die weer overeenkomstig de tekenset. Algemeen gesproken correspondeert één codering met één tekenset...</p>
 
 <hr>
 
 	<a name="The_OmegaT_solution" id="The_OmegaT_solution"></a>
-	<h1>De OmegaT-oplossing</h1>
+	<h2>De OmegaT-oplossing</h2>
 
-	<p>Er bestaan in principe 3 manieren om dit op te lossen in OmegaT. De 3 manieren behelzen allemaal het gebruik van de <a href="fileFilters.html">bestandsfilters</a> in het menu <strong>Opties</strong>.</p>
+	<p>Er bestaan in principe drie manieren om dit op te lossen in OmegaT. Zij behelzen allemaal het gebruik van de <a href="fileFilters.html">bestandsfilters</a> in het menu <strong>Opties</strong>.</p>
 	
 	<ol>
-		<li>Specificeer de codering voor uw <strong>platte tekst</strong> bestanden - dat zijn bestanden met de extensie <code>.txt</code>.<br> Wijzig de <strong>Codering van bronbestanden</strong> van <strong>&lt;auto&gt;</strong> naar de codering die overeenkomt met uw bron <code>.txt</code>-bestand in de sectie <strong>Tekstbestanden</strong> van het dialoogvenster <strong>Bestandsfilters</strong>.</li><li>Wijzig de extensies van uw platte tekst-bronbestanden - bijvoorbeeld van <code>.txt</code> naar <code>.jp</code> voor Japanse platte teksten.<br> Voeg het <strong>Patroon voor bronbestandsnaam</strong>  <code>*.jp</code> toe en selecteer de juiste parameters voor de bron- en doelcodering in de sectie <strong>Tekstbestanden</strong> van het dialoogvenster <a href="fileFilters.html">Bestandsfilters</a>.</li>
-
-		<li>Open uw bronbestand in een tekstbewerker die zijn codering juist interpreteert en sla het bestand op met de codering "UTF-8".<br> Wijzig de bestandsextensie van <code>.txt</code> naar <code>.utf8</code>.<br> OmegaT zal het bestand automatisch interpreteren als een UTF-8-bestand.</li>
-    </ol>
-	<p>Momenteel is OmegaT als volgt ingesteld om platte tekst-bestanden te begrijpen</p>
+		<li>Specificeer de codering voor uw <strong>platte tekst</strong> bestanden - dat zijn bestanden met de extensie <code>.txt</code> - :&nbsp;wijzig, in de sectie <strong>Tekstbestanden</strong> van het dialoogvenster <a href="fileFilters.html">Bestandsfilters</a>, de <strong>Codering van bronbestand</strong> van <strong>&lt;auto&gt;</strong> naar de codering die overeenkomt met uw bron <code>.txt</code>-bestand.</li><li>Wijzig de extensies van uw platte tekst-bronbestanden - bijvoorbeeld van <code>.txt</code> naar <code>.jp</code> voor Japanse platte teksten.:&nbsp;voeg, in de sectie <strong>Tekstbestanden</strong> van het dialoogvenster <a href="fileFilters.html">Bestandsfilters</a>, een nieuw <strong>Patroon voor bronbestanden</strong> toe (bijvoorbeeld <code>*.jp)&nbsp;</code>en selecteer de toepasselijke parameters voor de bron- en doelcodering.</li>
+			<li>Wijzigen van de codering van uw bestanden naar Unicode:&nbsp;Open uw bronbestand in een tekstverwerker die zijn codering juist interpreteert en sla het bestand op met de codering "UTF-8". Wijzig de bestandsextensie van <code>.txt</code> naar <code>.utf8</code>. OmegaT zal het bestand automatisch interpreteren als een UTF8-bestand.</li>
+		</ol>
+	<p>OmegaT heeft standaard het volgende lijstje beschikbaar om het voor u eenvoudiger te maken om sommige platte tekstbestanden te behandelen.</p>
 
 	<ul>
-		<li><code>.txt</code>-bestanden worden automatisch (<strong>&lt;auto&gt;</strong>) door OmegaT geïnterpreteerd als zijnde gecodeerd in de computer's standaardcodering.</li>
+		<li><code>.txt</code>-bestanden worden automatisch (<strong>&lt;auto&gt;</strong>) door OmegaT geïnterpreteerd als zijnde gecodeerd in de standaard codering van de computer.</li>
 		<li><code>.txt1</code>-bestanden zijn bestanden in ISO-8859-1, geschikt voor de meeste <strong>West-Europese</strong> talen.</li>
 		<li><code>.txt2</code>-bestanden zijn bestanden in ISO-8859-2, die de meeste <strong>Centraal- en Oost-Europese</strong> talen ondervangt)</li>
 		<li><code>.utf8</code> bestanden worden door OmegaT geïnterpreteerd als zijnde gecodeerd in UTF-8 (een codering die bijna <strong>alle</strong> talen in de wereld ondervangt).</li>
 	</ul>
+		<p>U kunt dat zelf controleren door het item <strong>Bestandsfilters</strong> te selecteren in het menu <strong>Opties</strong>. Als u bijvoorbeeld een Tsjechisch tekstbestand (zeer waarschijnlijk geschreven in de code <strong>ISO-8859-2</strong>) hebt, hoeft u alleen maar de extensie te wijzigen van <code>.txt</code> naar <code>.txt2</code> en OmegaT zal de inhoud juist interpreteren. Indien u echter op zeker wilt spelen kunt u overwegen om dit soort bestanden te converteren naar Unicode, dat is: naar de bestandsindeling .utf8.</p>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Auteursrechten</a> </td>
+        <td style="text-align: center;"><a href="index.html">Home</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Inhoudsopgave</a> </td>
+      </tr>
+    </tbody>
+  </table>
 
-	<p>U kunt dat zelf controleren door het item <strong>Bestandsfilters</strong> te selecteren in het menu <strong>Opties</strong>.</p>
-
-	<p>OmegaT houdt dit lijstje bij om het voor u eenvoudiger te maken om sommige platte tekstbestanden te behandelen.</p>
-	
-	<p>Als u bijvoorbeeld een Tsjechisch tekstbestand (zeer waarschijnlijk geschreven in de <strong>ISO-8859-2</strong>-code) hebt, hoeft u alleen maar de extensie te wijzigen van <code>.txt</code> naar <code>.txt2</code> en OmegaT zal de inhoud juist interpreteren.</p>
-
-	<hr>
-
-	<p><a href="legalNotices.html">Auteursrechten</a></p>
 </body>
 </html>

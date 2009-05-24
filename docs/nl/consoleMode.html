@@ -1,0 +1,64 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Console-modus - OmegaT 2 Gebruikershandleiding</title>
+</head>
+
+<body>
+  <h1>OmegaT Console-modus</h1>
+
+  <ul>
+    <li>
+      <p><a href="#prerequisites">Vooraf vereist</a></p>
+    </li>
+
+    <li>
+      <p><a href="#start">Beginnen in console-modus</a></p>
+    </li>
+
+    <li>
+      <p><a href="#extra">Extra opties</a></p>
+
+      <p>&nbsp;</p>
+    </li>
+  </ul>
+
+  <p>Het doel van de console-modus is om OmegaT als vertaalgereeedchap te gebruiken in een script-omgeving. Indien wordt begonnen in de console-modus, wordt geen GUI geladen (dus het zal werken op elke console) en het opgegeven project zal automatisch worden vertaald.</p>
+
+  <hr>
+
+  <h3><a name="prerequisites" id="prerequisites"></a>Vooraf vereist</h3>
+
+  <p>Een geldig OmegaT-project moet aanwezig zijn om OmegaT uit te kunnen voeren. De locatie maakt niet uit omdat het bij de start toch al moet worden ingevuld in de opdrachtregel.<p>Indien u gewijzigde instellingen nodig hebt, moeten de configuratiebestanden aanwezig zijn. Dat kan op twee manieren worden bereikt:<ol><li>Voer OmegaT normaal uit (met de GUI) en maak de instellingen. Indien u OmegaT in console-modus start, zal het dezelfde instellingen gebruiken. Indien u OmegaT niet normaal kunt uitvoeren (geen grafische omgeving beschikbaar):</li><li>kopieer de instellingen vanaf een andere installatie van OmegaT op een andere machine naar een bepaalde map. De locatie maakt niet uit, omdat u die toch in kunt vullen in de opdrachtregel bij het starten. De relevante bestanden zijn filters.conf en segmentation.conf en kunnen worden gevonden in de beginmap van de gebruiker (Bijv. C:\Documents and Settings\<User>\OmegaT onder Windows, <User>/.omegat/ onder Linux)</li></ol></p>
+
+  <h3><a name="start" id="project_location"></a>Beginnen in console-modus</h3>
+
+  <p>Enkele extra parameters moeten bij het starten worden opgegeven om OmegaT in console-modus te starten. De meest belangrijke is <code>&lt;project-dir&gt;</code>, en optioneel <code>--config-dir=&lt;config-dir&gt;</code>.<p>Voorbeeld: <code>$&gt; java -jar OmegaT.jar /pad/naar/project --config-dir=/pad/naar/config-files/ --mode=console-translate</code>
+  </p>
+  <p>Uitleg:<dl><dt><code>&lt;project-dir&gt;</code></dt>
+  <dd>vertelt OmegaT waar het project dat vertaald moet worden kan worden gevonden. Indien opgegeven begint OmegaT in console-modus en zal het opgegeven project vertalen.</dd> 
+  <dt><code>--config-dir=&lt;config-dir&gt;</code></dt>
+  <dd>maakt het mogelijk om OmegaT te vertellen in welke map de configuratiebestanden zijn opgeslagen. Indien niet opgegeven gaat OmegaT terug naar de standaard waarden (OmegaT-dir onder beginmap van de gebruiker, of indien niet beschikbaar: de huidige werkmap).</dd>
+  <dt><code>--mode=console-translate</code></dt>
+  <dd>OmegaT start in console-modus en zal het opgegeven project vertalen.</dl>
+  
+  <h3><a name="extra" id="extra"></a>Extra opties</h3>
+
+  <p>Er is één extra parameter voor de opdrachtregel, specifiek voor de console-modus: <code>--quiet</code>. In de modus quiet, wordt er minder informatie gelogd op het scherm. Alle berichten die u normaal gesproken zou vinden in de statusbalk worden niet weergegeven.<br> Gebruik: <code>java -jar OmegaT.jar /pad/naar/project --quiet</code>
+  </p>
+
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Auteursrechten</a> </td>
+        <td style="text-align: center;"><a href="index.html">Home</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Inhoudsopgave</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

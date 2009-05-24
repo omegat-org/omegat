@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 2.0.3 
 
-  2 Enhancements
+  3 Enhancements
   0 Bugfixes
 ----------------------------------------------------------------------
 2.0.3
@@ -18,6 +18,8 @@
   - Changes in glossary are detected automatically every second. The 
 modified glossaries are reloaded in memory transparently, without having to 
 reload the project.
+
+  - Dutch localisation updated to 2.02 (UI, Instant Start, Readme, Documentation)
 
 ----------------------------------------------------------------------
  OmegaT 2.0.2 update 1

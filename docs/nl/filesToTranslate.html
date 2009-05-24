@@ -1,160 +1,241 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Te vertalen bestanden - OmegaT 1.6.2 Gebruikershandleiding</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Te vertalen bestanden - OmegaT 1.8 Gebruikershandleiding</title>
 </head>
+
 <body>
+  <h1>Te vertalen bestanden</h1>
 
-	<h1>Te vertalen bestanden</h1>
+  <p><a href="#RTLbidi">Van rechts naar links talen</a></p>
 
-	<ul>
-		<li><a href="#bidi">Van rechts naar links talen</a>
-			<ul>
-				<li><a href="#bidi_transl">Vertaling</a></li>
-				<li><a href="#bidi_create">Maken van vertaalde documenten</a></li>
-			</ul>
-		</li>
-		 <li>
-		    <a href="#formats">Bestandsformaten</a>
-			<ul>
-				<li><a href="#plaintext">Platte-tekst bestanden</a></li>
-				<li><a href="#tagged">Opgemaakte tekstbestanden</a></li>
-				<li><a href="#specifics">Specifieke bestandsformaten</a></li>
-				<li><a href="#others">Andere bestandsformaten</a>
-					<ul>
-						<li><a href="#ooo">OpenOffice.org</a></li>
-						<li><a href="#okapi">Okapi Framework</a></li>
-						<li><a href="#tt">Translate Toolkit</a></li>
-						<li><a href="#po4a">po4a</a></li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-	</ul>
+  <ul>
+    <li>
+      <p><a href="#RTL_Changing_direction">Wijzigen van de richting van invoeren/weergeven van tekst</a></p>
+    </li>
 
-	<hr>
+    <li>
+      <p><a href="#RTL_mixing">LTR- en RTL-tekenreeksen in segmenten mixen</a></p>
+    </li>
 
-	<a name="bidi" id="bidi"></a>
-	<h1>Van rechts naar links talen</h1>
-	
-	<a name="bidi_transl" id="bidi_transl"></a>
-	<h2>Vertaling</h2>
+    <li>
+      <p><a href="#RTL_tags">OmegaT-tags in RTL-segmenten</a></p>
+    </li>
 
-	<p>Bij het vertalen naar twee-richting talen in OmegaT zijn er twee dingen waarmee rekening moet worden gehouden: 1) tekstinvoer en 2) tekstweergave. Bij het schrijven van RTL-tekst (bijvoorbeeld Urdu, Arabisch etc.) en gebruiken van de LTR-weergave, wat de standaardweergave is, zal de tekst niet altijd worden weergegeven in de volgorde waarin die werd ingevoerd. Dit is niet vanzelfsprekend als pure RTL-tekst wordt ingevoerd en in deze gevallen kan de standaard (LTR) weergave worden gebruikt.</p>
+    <li>
+      <p><a href="#RTL_CreatingTranslatedDocuments">Vertaalde RTL-documenten maken</a></p>
+    </li>
+  </ul>
 
-	<p>Echter, in veel gevallen als de doeltaal een RTL-taal is, is het nodig om LTR-tekst in te bedden. Bijvoorbeeld: sommige productnamen moeten in het Engels blijven of plaatshouders moeten in hun originele vorm blijven, gedurende de localisatie van GUI-tekenreeksen.</p>
+  <p><a href="#formats">Bestandsformaten</a></p>
 
-	<p>Als LTR-tekst is ingebed in RTL-tekst, wordt het niet weergegeven in de volgorde waarin het werd ingevoerd. Om dit voor OmegaT te doen wordt geschakeld tussen de weergaven met behulp van <code>Ctrl+Shift+O</code>.</p>
-	
-	<p><strong>Opmerking:</strong> Dezelfde sneltoetscombinatie kan worden gebruikt op Mac OSX.</p>
-	
-	<p>Het is ook eenvoudiger om RTL-tekst in te voeren als de weergave is geschakeld naar RTL, omdat in de standaardweergave, als de RTL-tekst wordt ingevoerd, ingevoerde spaties eerst verschijnen aan de rechterzijde van de ingevoerde tekst en het RTL-teken verschijnt dan aan de linkerzijde.</p>
+  <ul>
+    <li>
+      <p><a href="#plaintext">Platte-tekst bestanden</a></p>
+    </li>
 
-	<p>Gebruiken van <code>Ctrl+Shift+O</code> zorgt er voor dat zowel de tekstinvoer als de weergave in OmegaT wordt gewijzigd naar RTL. Het kan afzonderlijk worden gebruikt voor alle drie vensters (Bewerken, Overeenkomsten en Woordenlijst).</p>
+    <li>
+      <p><a href="#tagged">Opgemaakte tekstbestanden</a></p>
+    </li>
 
-	<a name="bidi_create" id="bidi_create"></a>
-	<h2>Maken van vertaalde documenten</h2>
-	
-	<p>Als het vertaalde document wordt gemaakt zal de weergaverichting LTR zijn, net zoals het originele document. Dit moet handmatig worden gewijzigd. Elk uitvoerformaat heeft specifieke manieren om om te gaan met RTL-weergave, controleeer de relevante toepassingshandleidingen voor details.<hr>
-	
-	<a name="formats" id="formats"></a>
-	<h1>Bestandsformaten</h1>
+    <li>
+      <p><a href="#specifics">Specifieke bestandsformaten</a></p>
+    </li>
 
-	<p>Met OmegaT kunt u bestanden vertalen in een aantal bestandsformaten. Er zijn twee basale typen van bestandsformaten, de <strong>platte tekst</strong>- en de <strong>opgemaakte tekst</strong>-formaten.</p>
+    <li>
+      <p><a href="#others">Andere bestandsformaten</a></p>
 
-	<a name="plaintext" id="plaintext"></a>
-	<h2>Platte-tekst bestanden</h2>
+      <ul>
+        <li>
+          <p><a href="#ooo">OpenOffice.org</a></p>
+        </li>
 
-	<p>Platte tekst-bestanden bevatten alleen maar tekst, zodat hun vertaling zo eenvoudig is als het typen van die vertaling.</p>
-	
-	<p>Er zijn meerdere <a href="plainText.html">methoden</a> om de codering van een bestand te specificeren zodat de inhoud niet door elkaar wordt gegooid bij het openen in OmegaT.</p>
+        <li>
+          <p><a href="#okapi">Okapi Framework</a></p>
+        </li>
 
-	<p>Zulke bestanden worden geacht niet meer opmaak te bevatten dan "witte ruimten" voor inspringen-/uitlijningdoeleinden. Zij worden meestal gewijzigd in tekstbewerkers en het is in het algemeen niet mogelijk om in een dergelijk formaat lettertype/kleur/marges en dergelijke informatie te behouden.</p>
+        <li>
+          <p><a href="#tt">Translate Toolkit</a></p>
+        </li>
 
-	<p>Momenteel ondersteunt OmegaT de volgende platte tekst-formaten:</p>
+        <li>
+          <p><a href="#po4a">po4a</a></p>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <hr>
 
-	<ul>
-		<li>ASCII tekst (.txt, etc.)</li>
-		<li>Gecodeerde tekst</li>
-		<li>Java bronbundels (.properties)</li>
-		<li>PO-bestanden (.po)</li>
-		<li>INI (key=value) bestanden (.ini)</li>
-	</ul>
+  <h3><a name="RTLbidi"></a>Van rechts naar links talen</h3>
 
-	<p>Andere platte-tekst bestanden kunnen worden behandeld door OmegaT door hun bestandstype te <a href="fileFilters.html">koppelen</a> aan een ondersteund bestandstype (bijvoorbeeld <code>.pod</code>-bestanden zouden kunnen worden gekoppeld aan het ASCII tekstfilter) en ze voor te bewerken met specifieke <a href="segmentation.html">segmentatie</a>-regels.</p>
+  <h4><a name="RTL_Changing_direction"></a>Wijzigen van de richting van invoeren/weergeven van tekst</h4>Voor alle taken die kunnen worden uitgevoerd in OmegaT kunt u schakelen tussen de modi LTR-weergeven/invoeren en RTL-weergeven/invoeren door op Ctrl+Shift+O te drukken (dit is de letter O en niet het getal 0). Gebruiken van de modus RTL in OmegaT heeft geen enkele invloed op de modus weergeven van de vertaalde documenten die werden gemaakt in OmegaT. De modus weergeven van de vertaalde documenten zal moeten worden aangepast binnen de gewoonlijk gebruikte toepassing om ze weer te geven of te wijzigen (bekijk de relevante handleidingen voor de details). Gebruiken van Ctrl+Shift+O zorgt er voor dat zowel de tekstinvoer als de weergave in OmegaT wordt gewijzigd naar RTL. Door te klikken op het venster en te schakelen met de weergavemodus kan het afzonderlijk worden gebruikt voor alle drie vensters (Bewerken, Overeenkomsten en Woordenlijst). Het kan ook worden gebruikt in alle invoervelden in OmegaT (zoekvenster, segmentatieregels etc.)<p>Opmerking: Mac OSX gebruiken dezelfde toetscombinatie (en niet Cmd+Shift+O).</p>
 
+  <h4><a name="RTL_mixing"></a>LTR- en RTL-tekenreeksen in segmenten mixen</h4>Bij het schrijven van pure RTL-tekst, kan de standaard (LTR) weergave worden gebruikt. In veel gevallen is het echter noodzakelijk om LTR-tekst in RTL-tekst in te bedden. Bijvoorbeeld in OmegaT-tags, produktnamen die moeten worden behouden in de LTR-brontaal, tijdelijke plaatsaanduidingen in localisatie-bestanden en getallen in tekst. In dit soort gevallen is het noodzakelijk om te schakelen naar de modus RTL, zodat de RTL- (in feite meerdere richtingen) tekst correct wordt weergegeven. Waarbij dient te worden opgemerkt dat als OmegaT in de modus RTL staat, zowel de bron als het doel worden weergegeven in de modus RTL. Dit betekent dat als de brontaal in LTR is en de doeltaal is RTL, of vice versa, het nodig zou kunnen zijn om heen en weer te schakelen tussen de modi RTL en LTR om eenvoudiger de bron te bekijken  en het doel in te voeren in hun respectievelijke modus.<h4><a name="RTL_tags"></a>OmegaT-tags in RTL-segmenten</h4>
 
-	<a name="tagged" id="tagged"></a>
-	<h2>Opgemaakte tekstbestanden</h2>
+  <p>Zoals hierboven beschreven zijn OmegaT-tags LTR-tekenreeksen. Bij het vertalen tussen RTL- en LTR-talen kan het nodig zijn dat de vertaler, om de tags juist te lezen uit de bron en om ze dan juist in te voeren in het doel, vele malen moet schakelen tussen de modi LTR en RTL.</p>
 
-	<p>Opgemaakte ketsbestanden bevatten zowel tekst als informatie, zoals lettertype, afmeting, kleur etc. Zij worden normaal gesproken gemaakt met tekstbewerkingsprogramma's of programma's voor het maken van homepages.</p>
-	
-	<p>Zulke bestanden worden zodanig opgeslagen dat zij hun opmaakinformatie behouden. Zulke opmaakinformatie kan eenvoudig zijn zoals <strong>dit is vet</strong> of zo complex als tabelgegevens met verschillende lettertype-afmetingen, kleur, positie etc.</p>
-	
-	<p>In de meeste vertalingen wordt het belangrijk geacht dat het vertaalde document er uitziet zoals het origineel. OmegaT stelt u in staat om dit te doen door het markeren van de tekens/woorden die een speciale opmaak hebben met eenvoudig te bewerken tags.</p>
-	
-	<p>Vereenvoudigen van de originele tekstopmaak draagt enorm bij tot het verminderen van het aantal tags. Het gelijk maken van gebruikte lettertypen, lettertype-afmetingen, kleuren etc zou indien mogelijk moeten worden overwogen, om het vertalen te vereenvoudigen en het verminderen van het aantal mogelijke fouten in tags.</p>
+  <p>Indien het document het toelaat wordt het de vertaler sterk aangeraden om opmaakinformatie uit het originele document te verwijderen zodat er zo weinig mogelijk tags als nodig is in de OmegaT-interface verschijnen. Volg de aanwijzingen die worden gegeven in Hints voor tagbeheer. Valideer de tags regelmatig (zie <a href=
+  "userInterface.html#Tag_validation">Tag-validatie)</a> en maak met regelmatige tussenpozen vertaalde documenten (zie hieronder en <a href="menu.html">Menu</a>) om het eenvoudiger te maken om problemen te zien die opkomen. Het zou mogelijk moeten zijn om een platte tekst-versie van de tekst te vertalen en later de noodzakelijke opmaak in de relevante toepassing toe te passen.</p>
 
-	<p>Momenteel ondersteunt OmegaT de volgende formaten voor opgemaakte tekst:</p>
+  <h4><a name="RTL_CreatingTranslatedDocuments" id=
+  "RTL_CreatingTranslatedDocuments"></a>Vertaalde RTL-documenten maken</h4>
 
-	<ul>
-		<li>OpenOffice.org</li>
-		<li>OpenDocument</li>
-		<li>Microsoft Open XML</li>
-		<li>(X)HTML</li>
-		<li>HTML Help Compiler</li>
-		<li>DocBook</li>
-		<li>Okapi ééntalige XLIFF</li>
-	</ul>
+  <p>Als het vertaalde document wordt gemaakt zal de weergaverichting hetzelfde zijn als het originele document. Als het originele document LTR was, moet de weergaverichting van het doeldocument handmatig worden gewijzigd naar RTL in de toepassing waarin het wordt weergegeven. Elk uitvoerformaat heeft specifieke manieren om om te gaan met RTL-weergave, controleeer de relevante toepassingshandleidingen voor details.</p>
 
-	<p>Andere opgemaakte tekst-bestanden kunnen worden behandeld door OmegaT door hun bestandstype te <a href="fileFilters.html">koppelen</a> aan een ondersteund bestandstype en ze voor te bewerken met specifieke <a href="segmentation.html">segmentatie</a>-regels.</p>
+  <p>Het is soms mogelijk om de weergaveparameters voor het bronbestand te wijzigen zodat dergelijke parameters worden geërfd door de doelbestanden, om te vermijden dat de weergaveparameters voor de doelbestanden elke keer moeten worden gewijzigd als de bestanden worden geopend. Dergelijke aanpassingen zijn bijvoorbeeld mogelijk in OpenOffice.org bestanden.</p>
+  <hr>
 
-	
-	<a name="specifics" id="specifics"></a>
-	<h2>Specifieke bestandsformaten</h2>
+  <h3><a name="formats" id="formats"></a>Bestandsformaten</h3>
 
-	<p>Elk bestandstype wordt verschillend behandeld in OmegaT. Specifiek gedrag kan worden ingesteld in de <a href="fileFilters.html">bestandsfilters</a>.<a name="others" id="others"></a>
-	<h2>Andere bestandsformaten</h2>
+  <p>Met OmegaT kunt u bestanden vertalen in een aantal bestandsformaten. Er zijn twee basale typen van bestandsformaten, de <strong>platte tekst</strong>- en de <strong>opgemaakte tekst</strong>-formaten.</p>
 
-	<p>Andere platte tekst- of opgemaakte tekst-bestandsformaten zijn mogelijk toegankelijk met OmegaT.</p>
-	
-	<p>Externe programma's kunnen worden gebruikt om niet-ondersteunde bestanden te converteren naar ondersteunde formaten. Het vertaalde bestand zal weer geconverteerd moeten worden naar het originele formaat. Op deze manier kunnen een aantal platte-tekst formaten (inclusief LaTex etc) in OmegaT worden vertaald door ze te converteren naar het PO-formaat. Op dezelfde wijze kunnen een aantal opgemaakte tekst-formaten (inclusief Microsoft Office-bestanden) worden vertaald met OmegaT door ze te converteren naar het Open Document-formaat.</p>
-	
-	<p>De kwaliteit van het vertaalde bestand zal afhankelijk zijn van de kwaliteit van het heen-en weer converteren. Zorg ervoor dat u al uw opties heeft gecontroleerd voordat u doorgaat met dergelijke conversies.</p>
-	
-	<p>Beschikbare vrije conversieprogramma's zijn inclusief:</p>
-	
-	<a name="ooo" id="ooo"></a>
-	<h3>OpenOffice.org</h3>
+  <h3><a name="plaintext" id="plaintext"></a>Platte-tekst bestanden</h3>
 
-	<p>OmegaT biedt geen directe ondersteuning voor de Microsoft Office-formaten Word, Excel en PowerPoint. OpenOffice.org (en varianten) kunnen echter gebruikt worden om dergelijke formaten te converteren naar OpenDocument, dat OmegaT zelf ondersteund.</p>
-	
-	<p><a href="http://www.openoffice.org/">officiële pagina van OpenOffice.org</a></p>
+  <p>Platte tekst-bestanden bevatten alleen maar tekst, zodat hun vertaling zo eenvoudig is als het typen van die vertaling.</p>
 
-	<a name="okapi" id="okapi"></a>
-	<h3>Okapi Framework</h3>
+  <p>Er zijn meerdere <a href="plainText.html">methoden</a> om de codering van een bestand te specificeren zodat de inhoud niet door elkaar wordt gegooid bij het openen in OmegaT.</p>
 
-	<p>De Text Extraction Utility van het Okapi Framework heeft een optie voor het maken van een boomstructuur voor een OmegaT projectfolder. Het is ook mogelijk om een OmegaT specifiek XLIFF-bestand te maken. Okapi heeft recent programma's vrijgegeven die worden uitgevoerd onder Mono, een vrij platform dat beschikbaar is voor de meeste besturingssystemen.</p>
+  <p>Zulke bestanden worden geacht niet meer opmaak te bevatten dan "witte ruimten" voor inspringen-/uitlijningdoeleinden. Zij worden meestal gewijzigd in tekstbewerkers en het is in het algemeen niet mogelijk om in een dergelijk formaat lettertype/kleur/marges en dergelijke informatie te behouden.</p>
 
-	<p><a href="http://okapi.sourceforge.net/Release/Tikal/ReadMe_ForMono.htm">Okapi voor Mono uitgavepagina</a>, <a href="http://okapi.sourceforge.net/Release/Shared/Help/tutorial_02.htm">tutorial</a></p>
+  <p>Momenteel ondersteunt OmegaT de volgende platte tekst-formaten:</p>
 
-	<a name="tt" id="tt"></a>
-	<h3>Translate Toolkit</h3>
-	
-	<p>De Translate Toolkit, een python programma-verzameling, geeft gebruikers een aantal conversie-programma's naar en vanuit Portable Object, inclusief Mozilla .properties en dtd-bestanden, CSV-bestanden, Qt .ts-bestanden, XLIFF-bestanden. Het heeft een aantal programma's om dergelijke bestanden te bewerken vóór of ná hun vertaling in OmegaT.</p>
+  <ul>
+    <li>
+      <p>ASCII tekst (.txt, etc.)</p>
+    </li>
 
-	<p><a href="http://translate.sourceforge.net/wiki/toolkit/index">officiële pagina van Translate Toolkit</a></p>
+    <li>
+      <p>Gecodeerde tekst</p>
+    </li>
 
-	<a name="po4a" id="po4a"></a>
-	<h3>po4a</h3>
+    <li>
+      <p>Java bronbundels (.properties)</p>
+    </li>
 
-	<p>po4a is een Debian perl-programma. Het kan bestandsformaten zoals LaTeX, TeX, POD etc converteren naar en vanuit Portable Object.</p>
+    <li>
+      <p>PO-bestanden (.po)</p>
+    </li>
 
-	<p><a href="http://po4a.alioth.debian.org/">officiële pagina van po4a</a></p>
-	
-	<hr>
+    <li>
+      <p>INI (key=value) bestanden (.ini)</p>
+    </li>
+  </ul>
 
-	<p><a href="legalNotices.html">Auteursrechten</a></p>
+  <p>Andere platte-tekst bestanden kunnen worden behandeld door OmegaT door hun bestandstype te <a href=
+  "fileFilters.html">koppelen</a> aan een ondersteund bestandstype (bijvoorbeeld <code>.pod</code>-bestanden zouden kunnen worden gekoppeld aan het ASCII tekstfilter) en ze voor te bewerken met specifieke <a href=
+  "segmentation.html">segmentatie</a>-regels.</p>
+
+  <h3><a name="tagged" id="tagged"></a>Opgemaakte tekstbestanden</h3>
+
+  <p>Opgemaakte tekstbestanden bevatten zowel tekst als informatie, zoals lettertype, afmeting, kleur etc. Zij worden normaal gesproken gemaakt met tekstbewerkingsprogramma's of programma's voor het maken van homepages. Zulke bestanden worden zodanig opgeslagen dat zij hun opmaakinformatie behouden. Zulke opmaakinformatie kan eenvoudig zijn zoals <strong>dit is vet</strong> of zo complex als tabelgegevens met verschillende lettertype-afmetingen, kleur, positie etc. In de meeste vertalingen wordt het belangrijk geacht dat het vertaalde document er uitziet zoals het origineel. OmegaT stelt u in staat om dit te doen door het markeren van de tekens/woorden die een speciale opmaak hebben met eenvoudig te bewerken <a href="formattedText.html">tags</a>. Vereenvoudigen van de opmaak van de originele tekst draagt enorm bij aan het verminderen van het aantal tags. Het gelijk maken van gebruikte lettertypen, lettertype-afmetingen, kleuren etc zou indien mogelijk moeten worden overwogen, om het vertalen te vereenvoudigen en het verminderen van het aantal mogelijke <a href=
+  "userInterface.html#Tag_validation">fouten in tags</a>.</p>
+
+  <p><a name="specifics" id="specifics"></a>Elk bestandstype wordt verschillend behandeld in OmegaT. Specifiek gedrag kan worden ingesteld in de <a href=
+  "fileFilters.html">bestandsfilters</a>. Momenteel ondersteunt OmegaT de volgende formaten voor opgemaakte tekst:</p>
+
+  <ul>
+    <li>
+      <p>OpenOffice.org</p>
+    </li>
+
+    <li>
+      <p>OpenDocument</p>
+    </li>
+
+    <li>
+      <p>Microsoft Open XML</p>
+    </li>
+
+    <li>
+      <p>(X)HTML</p>
+    </li>
+
+    <li>
+      <p>HTML Help Compiler</p>
+    </li>
+
+    <li>
+      <p>DocBook</p>
+    </li>
+
+    <li>
+      <p>Okapi ééntalige XLIFF</p>
+    </li>
+  </ul>
+
+  <p>Andere opgemaakte tekst-bestanden kunnen worden behandeld door OmegaT door hun bestandstype te <a href=
+  "fileFilters.html">koppelen</a> aan een ondersteund bestandstype en ze voor te bewerken met specifieke <a href=
+  "segmentation.html">segmentatie</a>-regels.</p>
+
+  <h3><a name="others" id="others"></a>Andere bestandsformaten</h3>
+
+  <p>Andere platte tekst- of opgemaakte tekst-bestandsformaten kunnen mogelijk door OmegaT worden verwerkt.</p>
+
+  <p>Externe programma's kunnen worden gebruikt om bestanden te converteren naar ondersteunde formaten. Onthoudt echter dat de vertaalde bestanden weer terug moeten worden geconverteerd naar het originele formaat. Op deze manier kunnen een aantal platte-tekst formaten (inclusief LaTex etc) in OmegaT worden vertaald door ze te converteren naar het PO-formaat. Op dezelfde wijze kunnen een aantal opgemaakte tekst-formaten (inclusief Microsoft Office-bestanden) worden vertaald met OmegaT door ze te converteren naar het Open Document-formaat.</p>
+
+  <p>De kwaliteit van het vertaalde bestand zal afhankelijk zijn van de kwaliteit van het heen-en weer converteren. Zorg ervoor dat u al uw opties heeft gecontroleerd voordat u doorgaat met dergelijke conversies. Beschikbare vrije conversieprogramma's zijn inclusief:</p>
+
+  <p><br></p>
+
+  <table width="100%" border="0" cellpadding="4" cellspacing="0">
+    <col width="50*">
+    <col width="206*">
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="ooo" id="ooo"></a>OpenOffice.org<a href=
+        "http://www.openoffice.org/"><br> officiële pagina van OpenOffice.org</a></p>
+      </td>
+
+      <td width="81%">
+        <p>OmegaT biedt geen directe ondersteuning voor de Microsoft Office-formaten Word, Excel en PowerPoint. OpenOffice.org (en varianten) kunnen echter gebruikt worden om dergelijke formaten te converteren naar OpenDocument, dat OmegaT zelf ondersteund.</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="okapi" id="okapi"></a>Okapi Framework<a href=
+        "http://okapi.sourceforge.net/Release/Tikal/ReadMe_ForMono.htm"><br> Okapi voor Mono uitgavepagina</a>, <a href=
+        "http://okapi.sourceforge.net/Release/Shared/Help/tutorial_02.htm">handleiding</a></p>
+      </td>
+
+      <td width="81%">
+        <p>De Text Extraction Utility van het Okapi Framework heeft een optie voor het maken van een boomstructuur voor een OmegaT projectfolder. Het is ook mogelijk om een OmegaT specifiek XLIFF-bestand te maken. Okapi heeft recent programma's vrijgegeven die worden uitgevoerd onder Mono, een vrij platform dat beschikbaar is voor de meeste besturingssystemen.</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="tt" id="tt"></a>Translate Toolkit<br> <a href="http://translate.sourceforge.net/wiki/toolkit/index">officiële pagina van Translate Toolkit</a></p>
+      </td>
+
+      <td width="81%">
+        <p>De Translate Toolkit, een verzameling Python-programma's, geeft gebruikers een aantal conversie-programma's naar en vanuit Portable Object, inclusief Mozilla .properties en dtd-bestanden, CSV-bestanden, Qt .ts-bestanden, XLIFF-bestanden. Het heeft een aantal programma's om dergelijke bestanden te bewerken vóór of ná hun vertaling in OmegaT.</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="po4a" id="po4a"></a>po4a<br> <a href="http://po4a.alioth.debian.org/">officiële pagina van po4a</a></p>
+      </td>
+
+      <td width="81%">
+        <p>po4a is een Debian perl-programma. Het kan bestandsformaten zoals LaTeX, TeX, POD etc converteren naar en vanuit Portable Object.</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Auteursrechten</a> </td>
+        <td style="text-align: center;"><a href="index.html">Home</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Inhoudsopgave</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
 </body>
 </html>

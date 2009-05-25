@@ -283,11 +283,16 @@ can be applied or not with a new option in Options/Font.
 ----------------------------------------------------------------------
 1.8.1 update 5 vs. 1.8.1 update 4
 
-   0 Enhancement
+   2 Enhancements
    2 Bugfixes
 
 ----------------------------------------------------------------------
 1.8.1 update 5
+
+  Other enhancements:
+
+  - Russian documentation updated to 1.8 (UI, Instant Start, readme, documentation)
+  - Dutch localisation updated to 1.8 (Documentation)
 
   Bug fixes:
 

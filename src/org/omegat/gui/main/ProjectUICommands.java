@@ -27,6 +27,7 @@ package org.omegat.gui.main;
 import java.io.File;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectFactory;
@@ -203,7 +204,12 @@ public class ProjectUICommands {
             protected void done() {
                 try {
                     get();
-                    Core.getEditor().gotoEntry(previousCurEntryNum); 
+                    SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                            // activate entry later - after project will be loaded
+                            Core.getEditor().gotoEntry(previousCurEntryNum);
+                        }
+                    });
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex,

@@ -806,6 +806,11 @@ public class EditorController implements IEditor {
 
         if (!Core.getProject().isProjectLoaded())
             return;
+        
+        if (m_docSegList == null) {
+            // document didn't loaded yet
+            return;
+        }
 
         commitAndDeactivate();
 

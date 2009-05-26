@@ -42,6 +42,7 @@ import java.util.TreeSet;
 import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.util.DirectoryMonitor;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 
 /**
  * Class for load dictionaries.
@@ -49,8 +50,6 @@ import org.omegat.util.Log;
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
 public class DictionariesManager implements DirectoryMonitor.Callback {
-    protected static final String UTF8 = "UTF-8";
-
     protected DirectoryMonitor monitor;
     protected final Map<String, DictionaryInfo> infos = new TreeMap<String, DictionaryInfo>();
     private final DictionariesTextArea pane;
@@ -62,8 +61,8 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         this.pane = pane;
     }
 
-    public void start(final String projectDir) {
-        File dir = new File(projectDir, DICTIONARY_SUBDIR);
+    public void start(final String dictDir) {
+        File dir = new File(dictDir);
         monitor = new DirectoryMonitor(dir, this);
         monitor.start();
     }
@@ -111,7 +110,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
      */
     protected void loadIgnoreWords(final File f) throws IOException {
         BufferedReader rd = new BufferedReader(new InputStreamReader(
-                new FileInputStream(f), UTF8));
+                new FileInputStream(f), OConsts.UTF8));
         try {
             synchronized (ignoreWords) {
                 ignoreWords.clear();
@@ -133,7 +132,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
             File outFile = new File(monitor.getDir(), "ignore.txt");
             File outFileTmp = new File(monitor.getDir(), "ignore.txt.new");
             BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(outFileTmp), UTF8));
+                    new FileOutputStream(outFileTmp), OConsts.UTF8));
             try {
                 synchronized (ignoreWords) {
                     ignoreWords.add(word);

@@ -92,9 +92,7 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
     @Override
     protected void onProjectOpen() {
         clear();
-        manager
-                .start(Core.getProject().getProjectProperties()
-                        .getProjectRoot());
+        manager.start(Core.getProject().getProjectProperties().getDictRoot());
     }
 
     @Override

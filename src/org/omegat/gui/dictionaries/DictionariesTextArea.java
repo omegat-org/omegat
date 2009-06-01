@@ -116,10 +116,7 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
 
         HTMLDocument doc = (HTMLDocument) getDocument();
 
-        int i = displayedWords.indexOf(word);
-        if (i < 0) {
-            i = displayedWords.indexOf(word.toLowerCase());
-        }
+        int i = displayedWords.indexOf(word.toLowerCase());
         if (i >= 0) {
             final Element el = doc.getElement(Integer.toString(i));
             if (el != null) {
@@ -172,7 +169,7 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
             txt.append("</span></b>");
             txt.append(" - ").append(de.getArticle());
 
-            displayedWords.add(de.getWord());
+            displayedWords.add(de.getWord().toLowerCase());
             i++;
         }
         setText(txt.toString());

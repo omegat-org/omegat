@@ -105,14 +105,21 @@ public class SpellChecker implements ISpellChecker {
     
     /** Creates a new instance of SpellChecker */
     public  SpellChecker() {
-        String libraryPath = StaticUtils.installDir()
-            + File.separator
-            + OConsts.NATIVE_LIBRARY_DIR
-            + File.separator
-            + mapLibraryName(OConsts.SPELLCHECKER_LIBRARY_NAME);
+        String libraryPath;
+        if (Platform.isWebStart()) {
+            libraryPath = Native
+                    .getWebStartLibraryPath(OConsts.SPELLCHECKER_LIBRARY_NAME)
+                    + File.separator
+                    + mapLibraryName(OConsts.SPELLCHECKER_LIBRARY_NAME);
+        } else {
+            libraryPath = StaticUtils.installDir() + File.separator
+                    + OConsts.NATIVE_LIBRARY_DIR + File.separator
+                    + mapLibraryName(OConsts.SPELLCHECKER_LIBRARY_NAME);
+        }
         
         try {
             hunspell = (Hunspell) Native.loadLibrary(libraryPath, Hunspell.class);
+            Log.log("Hunspell loaded successfully from " + libraryPath);
         } catch (Exception ex) {
             Log.log("Error loading hunspell: "+ex.getMessage());
         } catch (Error err) {

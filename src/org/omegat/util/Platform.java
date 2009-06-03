@@ -72,4 +72,7 @@ public final class Platform {
         // TODO: check FS or do some other X11-specific test
         return !Platform.isWindows() && !Platform.isMac();
     }
+    public static final boolean isWebStart() {
+        return System.getProperty("javawebstart.version") != null;
+    }
 }

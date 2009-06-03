@@ -596,8 +596,8 @@ public class EditorController implements IEditor {
 
         int segmentAtLocation = 0;
         for (int i = 0; i < m_docSegList.length; i++) {
-            if (m_docSegList[i].isInsideSegment(location)) {
-                segmentAtLocation = i;
+            if (location < m_docSegList[i].getStartPosition()) {
+                segmentAtLocation = i - 1;
                 break;
             }
         }

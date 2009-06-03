@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.0.3
 ----------------------------------------------------------------------
-  3 Enhancements
+  4 Enhancements
   1 Bugfix
 ----------------------------------------------------------------------
 2.0.3
@@ -17,6 +17,9 @@
 modified glossaries are reloaded in memory transparently, without having to 
 reload the project. Glossaries are also read from nested folders, not only from 
 the root of /glossary.
+
+  - New index of documentations at the root of the /docs folder, identical
+to the one obtained in OmegaT.
 
   - Dutch localisation updated to 2.02 (UI, Instant Start, Readme, Documentation)
 

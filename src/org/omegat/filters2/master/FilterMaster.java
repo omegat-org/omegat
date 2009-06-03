@@ -8,7 +8,7 @@
                2006 Martin Wunderlich
                2006-2007 Didier Briel
                2008 Martin Fleurke, Didier Briel
-               2009 Didier Briel
+               2009 Didier Briel, Arno Peters
 
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -56,6 +56,7 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.xtagqxp.XtagFilter;
 import org.omegat.filters2.hhc.HHCFilter2;
 import org.omegat.filters2.html2.HTMLFilter2;
+import org.omegat.filters2.latex.LatexFilter;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.filters2.subtitles.SrtFilter;
 import org.omegat.filters2.text.TextFilter;
@@ -83,6 +84,7 @@ import org.omegat.util.StaticUtils;
  * @author Martin Wunderlich
  * @author Didier Briel
  * @author Martin Fleurke
+ * @author Arno Peters
  */
 public class FilterMaster
 {
@@ -397,14 +399,8 @@ public class FilterMaster
             checkIfAllFilterPluginsAreAvailable();
             
             // checking the version
- // DB Begin
             if (CURRENT_VERSION.compareTo(Preferences.getPreference(Preferences.FILTERS_VERSION))>0)
             {
-//                String filtersVersion = Preferences.getPreference(Preferences.FILTERS_VERSION);
-//                if (   !filtersVersion.equals(OT160FINAL_VERSION)
-//                    && (filtersVersion.compareTo(OT160RC12a_VERSION) < 0))
-//                {
-// DB End
                 // yep, the config file with filters settings is of the older version
 
                 // initing defaults
@@ -536,6 +532,7 @@ public class FilterMaster
     {
         Filters res = new Filters();
         res.addFilter(new OneFilter(new TextFilter(), false));
+        res.addFilter(new OneFilter(new LatexFilter(), false));
         res.addFilter(new OneFilter(new PoFilter(), false));
         res.addFilter(new OneFilter(new ResourceBundleFilter(), false));
         res.addFilter(new OneFilter(new XHTMLFilter(), false));

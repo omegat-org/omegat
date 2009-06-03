@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.0.3
 ----------------------------------------------------------------------
-  4 Enhancements
+  5 Enhancements
   1 Bugfix
 ----------------------------------------------------------------------
 2.0.3
@@ -10,6 +10,9 @@
 
   - StarDict dictionaries support
   http://sourceforge.net/support/tracker.php?aid=2795600
+
+  - LaTeX filter support
+  http://sourceforge.net/support/tracker.php?aid=2790332 
 
   Other enhancements:
 

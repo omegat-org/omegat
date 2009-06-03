@@ -125,9 +125,10 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
                     Rectangle rect = getUI().modelToView(this,
                             el.getStartOffset());
                     // show 2 lines
-                    rect.height *= 2;
-
-                    scrollRectToVisible(rect);
+                    if (rect != null) {
+                        rect.height *= 2;
+                        scrollRectToVisible(rect);
+                    }
                 } catch (BadLocationException ex) {
                     // shouldn't be throwed
                 }

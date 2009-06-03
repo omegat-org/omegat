@@ -30,6 +30,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Reader;
+import java.io.Writer;
 
 /**
  * Utility class for copying untranslatable files.
@@ -88,6 +90,15 @@ public class LFileCopy
         int readBytes;
         while ( (readBytes = src.read(b)) > 0)
             dest.write(b, 0, readBytes);
+    }
+
+    /** Transfers all data from reader to writer. Reader and writer are not closed. */
+    public static void copy(Reader src, Writer dest) throws IOException
+    {
+        char [] b = new char[BUFSIZE];
+        int readChars;
+        while ( (readChars = src.read(b)) > 0)
+            dest.write(b, 0, readChars);
     }
 
     /** Loads contents of a file into output stream. Output stream is not closed. */

@@ -1,43 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <project name="OmegaT-WebStart" default="pack" basedir=".">
-    <property name="root" value="../.." />
+	<property name="root" value="../.." />
 
-    <!-- Build WebStart pack -->
-    <target name="pack" depends="clean" description="Build WebStart pack">
-        <property file="webstart.properties" />
+	<!-- Build WebStart pack -->
+	<target name="pack" depends="clean" description="Build WebStart pack">
+		<property file="webstart.properties" />
 
-        <mkdir dir="${root}/build/webstart" />
-        <copy todir="${root}/build/webstart">
-            <fileset dir="." includes="*.jnlp" />
-            <!-- Replace @@HTTP_BASE@@ placeholder -->
-            <filterset begintoken="@@" endtoken="@@">
-                <filter token="HTTP_BASE" value="${webstart.codebase}" />
-            </filterset>
-        </copy>
+		<mkdir dir="${root}/build/webstart" />
+		<copy todir="${root}/build/webstart">
+			<fileset dir="." includes="*.jnlp" />
+			<!-- Replace @@HTTP_BASE@@ placeholder -->
+			<filterset begintoken="@@" endtoken="@@">
+				<filter token="HTTP_BASE" value="${webstart.codebase}" />
+			</filterset>
+		</copy>
 
-        <copy todir="${root}/build/webstart">
-            <fileset dir="${root}/lib" includes="**/*.jar" />
-            <fileset dir="${root}/lib-mnemonics/dist" includes="**/*.jar" />
-            <fileset dir="${root}/dist" includes="OmegaT.jar" />
-        </copy>
+		<copy todir="${root}/build/webstart">
+			<fileset dir="${root}/lib" includes="*.jar" />
+			<fileset dir="${root}/lib-mnemonics/dist" includes="**/*.jar" />
+			<fileset dir="${root}/dist" includes="OmegaT.jar" />
+		</copy>
 
-        <jar jarfile="${root}/build/webstart/hunspell-win.jar" basedir="${root}/native" includes="hunspell.dll" />
-        <jar jarfile="${root}/build/webstart/hunspell-lin-i386.jar"
-             basedir="${root}/native"
-             includes="libhunspell.so" />
-        <jar jarfile="${root}/build/webstart/hunspell-mac.jar" basedir="${root}/native" includes="libhunspell.dylib" />
+		<jar jarfile="${root}/build/webstart/docs.jar" basedir="${root}" includes="docs/**" />
 
-        <signjar keystore="${signkey.keystore}"
-                 alias="${signkey.alias}"
-                 storepass="${signkey.storepass}"
-                 keypass="${signkey.keypass}">
-            <fileset dir="${root}/build/webstart/" includes="*.jar"/>
-        </signjar>
+		<jar jarfile="${root}/build/webstart/hunspell-win.jar" basedir="${root}/native" includes="hunspell.dll" />
+		<jar jarfile="${root}/build/webstart/hunspell-lin-i386.jar" basedir="${root}/native" includes="libhunspell-i386.so" />
+		<jar jarfile="${root}/build/webstart/hunspell-lin-adm64.jar" basedir="${root}/native" includes="libhunspell-amd64.so" />
+		<jar jarfile="${root}/build/webstart/hunspell-mac.jar" basedir="${root}/native" includes="libhunspell.dylib" />
 
-        <mkdir dir="${root}/dist2" />
-        <zip destfile="${root}/dist2/OmegaT-WebStart.zip" basedir="${root}/build/webstart" />
-    </target>
+		<signjar keystore="${signkey.keystore}" alias="${signkey.alias}" storepass="${signkey.storepass}" keypass="${signkey.keypass}">
+			<fileset dir="${root}/build/webstart/" includes="*.jar" />
+		</signjar>
 
-    <target name="clean">
-        <delete dir="${root}/build/webstart" failonerror="false" />
-    </target>
+		<mkdir dir="${root}/dist2" />
+		<zip destfile="${root}/dist2/OmegaT-WebStart.zip" basedir="${root}/build/webstart" />
+	</target>
+
+	<target name="clean">
+		<delete dir="${root}/build/webstart" failonerror="false" />
+	</target>
 </project>

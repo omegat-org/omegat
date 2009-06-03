@@ -25,11 +25,11 @@
 	</security>
 
 	<resources>
-		<j2se version="1.5*" max-heap-size="256m"
+		<j2se version="1.5*"
 			href="http://java.sun.com/products/autodl/j2se">
 			<resources>
 				<jar href="OmegaT.jar" />
-				<!--jar href="docs.jar" /-->
+				<jar href="docs.jar" />
 				<jar href="htmlparser.jar" />
 				<jar href="jmyspell-core-1.0.0-beta-2.jar" />
 				<jar href="jna.jar" />
@@ -46,6 +46,9 @@
 			</resources>
 			<resources os="Linux" arch="i386">
 				<nativelib href="hunspell-lin-i386.jar" />
+			</resources>
+			<resources os="Linux" arch="amd64">
+				<nativelib href="hunspell-lin-amd64.jar" />
 			</resources>
 			<resources os="MacOS">
 				<nativelib href="hunspell-mac.jar" />
@@ -53,11 +56,11 @@
 		</j2se>
 	</resources>
 	<resources>
-		<j2se version="1.6+" max-heap-size="256m"
+		<j2se version="1.6+"
 			href="http://java.sun.com/products/autodl/j2se">
 			<resources>
 				<jar href="OmegaT.jar" />
-				<!--jar href="docs.jar" /-->
+				<jar href="docs.jar" />
 				<jar href="htmlparser.jar" />
 				<jar href="jmyspell-core-1.0.0-beta-2.jar" />
 				<jar href="jna.jar" />
@@ -74,6 +77,9 @@
 			</resources>
 			<resources os="Linux" arch="i386">
 				<nativelib href="hunspell-lin-i386.jar" />
+			</resources>
+			<resources os="Linux" arch="amd64">
+				<nativelib href="hunspell-lin-amd64.jar" />
 			</resources>
 			<resources os="MacOS">
 				<nativelib href="hunspell-mac.jar" />

@@ -22,7 +22,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **************************************************************************/
 
-package svn;
+package util;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -89,6 +89,8 @@ public class SetSvnProperties {
                 set("text/plain");
             } else if (filename.endsWith(".txt")) {
                 set("text/plain");
+            } else if (filename.endsWith(".srt")) {
+                set("text/plain");
             } else if (filename.endsWith(".xlf")) {
                 set("text/xml");
             } else {
@@ -102,7 +104,7 @@ public class SetSvnProperties {
             set("text/xml", "native");
         } else if (filename.endsWith(".java")) {
             set("text/x-java", "native");
-            if (filename.startsWith("./src/")) {
+            if (filename.contains("./src/")) {
                 setKeywords("Author Date Id Revision");
             }
         } else if (filename.equals("./release/l10n-project/omegat.project")) {
@@ -141,6 +143,8 @@ public class SetSvnProperties {
             set("image/gif");
         } else if (filename.endsWith(".png")) {
             set("image/png");
+        } else if (filename.endsWith(".jpg")) {
+            set("image/jpeg");
         } else if (filename.endsWith(".ico")) {
             set("image/x-icon");
         } else if (filename.endsWith(".html")) {
@@ -155,6 +159,12 @@ public class SetSvnProperties {
             set("text/plain", "native");
         } else if (filename.endsWith(".j2e")) {
             set("text/plain", "native");
+        } else if (filename.endsWith(".odt")) {
+            set("application/octet-stream");
+        } else if (filename.endsWith(".vpp")) {
+            set("application/zip");
+        } else if (filename.startsWith("./release/OmegaT")) {
+            set("text/plain");
         } else {
             System.out.println("unknown: " + filename);
         }

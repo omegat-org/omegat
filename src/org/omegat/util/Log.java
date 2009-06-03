@@ -25,10 +25,15 @@
 
 package org.omegat.util;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Properties;
+import java.util.logging.Formatter;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
@@ -55,7 +60,7 @@ public class Log {
             try {
                 InputStream in = new FileInputStream(usersLogSettings);
                 try {
-                    LogManager.getLogManager().readConfiguration(in);
+                    init(in);
                     loaded = true;
                 } finally {
                     in.close();
@@ -69,12 +74,61 @@ public class Log {
                 InputStream in = Log.class
                         .getResourceAsStream("/org/omegat/logger.properties");
                 try {
-                    LogManager.getLogManager().readConfiguration(in);
+                    init(in);
                 } finally {
                     in.close();
                 }
             } catch (IOException ex) {
                 LOGGER.log(Level.SEVERE, "Can't open file for logging", ex);
+            }
+        }
+    }
+    
+    /**
+     * Initialize handlers manually. Required for WebStart.
+     * 
+     * @param in settings
+     */
+    protected static void init(InputStream in) throws IOException {
+        Properties props = new Properties();
+        props.load(in);
+        String handlers = props.getProperty("handlers");
+        if (handlers != null) {
+            props.remove("handlers");
+
+            ByteArrayOutputStream b = new ByteArrayOutputStream();
+            props.store(b, null);
+            LogManager.getLogManager().readConfiguration(
+                    new ByteArrayInputStream(b.toByteArray()));
+
+            Logger rootLogger = LogManager.getLogManager().getLogger("");
+
+            // remove initialized handlers
+            for (Handler h : rootLogger.getHandlers()) {
+                rootLogger.removeHandler(h);
+            }
+
+            String[] hs = handlers.split(",");
+            for (String hn : hs) {
+                String word = hn.trim();
+                try {
+                    Class clz = Log.class.getClassLoader().loadClass(word);
+                    Handler h = (Handler) clz.newInstance();
+                    String fname = props.getProperty(word + ".formatter");
+                    if (fname != null) {
+                        Class clzF = Log.class.getClassLoader().loadClass(
+                                fname.trim());
+                        h.setFormatter((Formatter) clzF.newInstance());
+                    }
+                    String level = props.getProperty(word + ".level");
+                    if (level != null) {
+                        h.setLevel(Level.parse(level));
+                    }
+                    rootLogger.addHandler(h);
+                } catch (Exception ex) {
+                    System.err.println("Error in logger init: " + ex);
+                    ex.printStackTrace();
+                }
             }
         }
     }

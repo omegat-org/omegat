@@ -1,7 +1,7 @@
 ﻿@@TRANSLATION_NOTICE@@
 
 ==============================================================================
-  OmegaT 2.0.0, Read Me file
+  OmegaT 2.0, Read Me file
 
   1.  Information about OmegaT
   2.  What is OmegaT?
@@ -191,6 +191,7 @@ Code has been contributed by
   Thomas Huriaux
   Fabián Mandelbaum
   Maxym Mykhalchuk 
+  Arno Peters
   Henry Pijffers 
   Tiago Saboga
   Andrzej Sawuła

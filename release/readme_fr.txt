@@ -1,7 +1,7 @@
-﻿Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2008.
+Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2009.
 
 ==============================================================================
-  OmegaT 1.8.0 Fichier « Lisez-moi »
+  OmegaT 2.0, fichier « Lisez-moi »
 
   1.  Informations à propos d'OmegaT
   2.  Qu'est ce qu'OmegaT ?
@@ -150,9 +150,11 @@ Contributions au code :
   Alex Buloichik
   Sandra Jean Chua
   Martin Fleurke  
+  Wildrich Fourie
   Thomas Huriaux
   Fabián Mandelbaum
   Maxym Mykhalchuk 
+  Arno Peters
   Henry Pijffers 
   Tiago Saboga
   Andrzej Sawuła
@@ -178,20 +180,18 @@ OmegaT utilise les bibliothèques suivantes :
   MRJ Adapter par Steve Roy (licence LGPL)
   http://homepage.mac.com/sroy/mrjadapter/
 
-  VLDocking Framework 2.0 par VLSolutions (licence CeCILL)
+  VLDocking Framework 2.1.4 par VLSolutions (licence CeCILL)
   http://www.vlsolutions.com/fr/products/docking/
 
-  Hunspell 1.1.12 par László Németh et d'autres personnes (Licence LGPL)
+  Hunspell par László Németh et d'autres personnes (Licence LGPL)
 
   JNA par Todd Fast, Timothy Wall et d'autres personnes (Licence LGPL)
 
   Swing-Layout 1.0.2 (licence LGPL)
 
-  Backport-util-concurrent (domaine public)
-
-  Retroweaver 2.0.1 (licence Retroweaver)
-
   Jmyspell 2.1.4 (licence LGPL)
+
+  JAXB 2.1.7 (GPLv2 + classpath exception)
 
 ==============================================================================
  5.  Est-ce qu'OmegaT vous pose problème ? Avez-vous besoin d'aide ?

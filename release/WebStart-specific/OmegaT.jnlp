@@ -4,7 +4,7 @@
 	<information>
 		<title>OmegaT</title>
 		<vendor>OmegaT development team</vendor>
-		<homepage href="http://omegat.sf.net" />
+		<homepage href="http://www.omegat.org" />
 		<shortcut online="false">
 			<desktop />
 			<menu submenu="OmegaT from WebStart" />

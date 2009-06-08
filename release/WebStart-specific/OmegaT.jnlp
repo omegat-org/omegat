@@ -11,6 +11,7 @@
 		</shortcut>
 		<offline-allowed />
 
+<!--
 		<related-content href="readme.html">
 			<title>README</title>
 			<description>
@@ -19,7 +20,7 @@
 			</description>
 		</related-content>
 	</information>
-
+-->
 	<security>
 		<all-permissions />
 	</security>

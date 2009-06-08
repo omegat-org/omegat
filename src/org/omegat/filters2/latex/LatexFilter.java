@@ -319,7 +319,7 @@ public class LatexFilter extends AbstractFilter
 		while (m.find()) {
 		    String replace = "<n" + String.valueOf(counter) + ">";
 		    String[] subst = { reHarden(m.group(0)), reHarden(replace) };
-		    substituted.add(subst);
+		    substituted.addFirst(subst);
 		    m.appendReplacement(sb, replace);
 		    counter++;
 		}
@@ -357,10 +357,10 @@ public class LatexFilter extends AbstractFilter
 		    String[] s1 = {
 			reHarden(m.group(1)), reHarden(preReplace)
 		    };
-		    substituted.add(s1);
+		    substituted.addFirst(s1);
 
 		    String[] s2 = { reHarden("}"), reHarden(postReplace) };
-		    substituted.add(s2);
+		    substituted.addFirst(s2);
 
 		    String replace = (
 				      preReplace + "$2" + postReplace
@@ -405,7 +405,7 @@ public class LatexFilter extends AbstractFilter
 				 content + "}"), reHarden(replace)
 		    };
 
-		    substituted.add(subst);
+		    substituted.addFirst(subst);
 		    m.appendReplacement(sb, replace);
 		    counter++;
 		}
@@ -439,7 +439,7 @@ public class LatexFilter extends AbstractFilter
 	    while (m.find()) {
 		String replace = "<u" + String.valueOf(counter) + ">";
 		String[] subst = { reHarden(m.group(0)), reHarden(replace) };
-		substituted.add(subst);
+		substituted.addFirst(subst);
 		m.appendReplacement(sb, replace);
 		counter++;
 	    }
@@ -492,10 +492,8 @@ public class LatexFilter extends AbstractFilter
 	par = resubstituteTex(par);
 		
 	ListIterator<String[]> it = substituted.listIterator();
-	while (it.hasNext())
-	    it.next();
-	while (it.hasPrevious()) {
-	    String[] subst = it.previous();
+	while (it.hasNext()) {
+	    String[] subst = it.next();
 	    par = par.replaceAll(subst[1], subst[0]);
 	}
 

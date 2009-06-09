@@ -123,7 +123,7 @@ public class ProjectPropertiesDialog extends JDialog
         JTextArea m_messageArea = new JTextArea();
         m_messageArea.setEditable(false);
         m_messageArea.setBackground(
-                javax.swing.UIManager.getDefaults().getColor("Label.background")); // NOI18N
+                javax.swing.UIManager.getDefaults().getColor("Label.background")); 
         m_messageArea.setFont(new Label().getFont());
         Box bMes = Box.createHorizontalBox();
         bMes.setBorder(emptyBorder);
@@ -255,7 +255,7 @@ public class ProjectPropertiesDialog extends JDialog
 
         centerBox.add(dirsBox);
         
-        getContentPane().add(centerBox, "Center");                                      // NOI18N
+        getContentPane().add(centerBox, "Center");                                      
 
         JButton m_okButton = new JButton();
         Mnemonics.setLocalizedText(m_okButton, OStrings.getString("BUTTON_OK"));
@@ -268,7 +268,7 @@ public class ProjectPropertiesDialog extends JDialog
         southBox.add(m_okButton);
         southBox.add(Box.createHorizontalStrut(5));
         southBox.add(m_cancelButton);
-        getContentPane().add(southBox, "South");                                        // NOI18N
+        getContentPane().add(southBox, "South");                                        
         
         setResizable(false);
         
@@ -351,8 +351,8 @@ public class ProjectPropertiesDialog extends JDialog
             }
         };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
-        put(escape, "ESCAPE");                                                  // NOI18N
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+        put(escape, "ESCAPE");                                                  
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               
 
         m_srcRootField.setText(projectProperties.getSourceRoot());
         m_locRootField.setText(projectProperties.getTargetRoot());
@@ -409,7 +409,7 @@ public class ProjectPropertiesDialog extends JDialog
      */
     private void doBrowseDirectoy(int browseTarget, JTextField field)
     {
-        String title;                                                       // NOI18N
+        String title;                                                       
         switch (browseTarget)
         {
             case 1:
@@ -443,7 +443,7 @@ public class ProjectPropertiesDialog extends JDialog
         browser.setFileSelectionMode(OmegaTFileChooser.DIRECTORIES_ONLY);
 
         // check if the current directory as specified by the field exists
-        String curDir = (field != null) ? field.getText() : ""; // NOI18N
+        String curDir = (field != null) ? field.getText() : ""; 
         File curDirCheck = new File(curDir);
 
         // if the dir doesn't exist, use project dir and check if that exists
@@ -479,10 +479,10 @@ public class ProjectPropertiesDialog extends JDialog
             }
         }
 
-        if (curDir.equals(""))                                                  // NOI18N
+        if (curDir.equals(""))                                                  
             curDir = Preferences.getPreference(Preferences.CURRENT_FOLDER);
 
-        if (!curDir.equals(""))                                         // NOI18N
+        if (!curDir.equals(""))                                         
         {
             File dir = new File(curDir);
             if (dir.exists() && dir.isDirectory())

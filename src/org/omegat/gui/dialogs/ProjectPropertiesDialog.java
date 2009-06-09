@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2008      Alex Buloichik
+               2008-2009 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -227,19 +227,6 @@ public class ProjectPropertiesDialog extends JDialog
         dirsBox.add(bGlos);
         dirsBox.add(m_glosRootField);
 
-        JLabel m_locRootLabel = new JLabel();
-        Mnemonics.setLocalizedText(m_locRootLabel, OStrings.getString("PP_LOC_ROOT"));
-        Box bLoc = Box.createHorizontalBox();
-        bLoc.setBorder(emptyBorder);
-        bLoc.add(m_locRootLabel);
-        bLoc.add(Box.createHorizontalGlue());
-        JButton m_locBrowse = new JButton();
-        Mnemonics.setLocalizedText(m_locBrowse, OStrings.getString("PP_BUTTON_BROWSE_TAR"));
-        bLoc.add(m_locBrowse);
-        final JTextField m_locRootField = new JTextField();
-        dirsBox.add(bLoc);
-        dirsBox.add(m_locRootField);
-
         JLabel m_locDictLabel = new JLabel();
         Mnemonics.setLocalizedText(m_locDictLabel, OStrings.getString("PP_DICT_ROOT"));
         Box bDict = Box.createHorizontalBox();
@@ -252,6 +239,19 @@ public class ProjectPropertiesDialog extends JDialog
         final JTextField m_dictRootField = new JTextField();
         dirsBox.add(bDict);
         dirsBox.add(m_dictRootField);
+
+        JLabel m_locRootLabel = new JLabel();
+        Mnemonics.setLocalizedText(m_locRootLabel, OStrings.getString("PP_LOC_ROOT"));
+        Box bLoc = Box.createHorizontalBox();
+        bLoc.setBorder(emptyBorder);
+        bLoc.add(m_locRootLabel);
+        bLoc.add(Box.createHorizontalGlue());
+        JButton m_locBrowse = new JButton();
+        Mnemonics.setLocalizedText(m_locBrowse, OStrings.getString("PP_BUTTON_BROWSE_TAR"));
+        bLoc.add(m_locBrowse);
+        final JTextField m_locRootField = new JTextField();
+        dirsBox.add(bLoc);
+        dirsBox.add(m_locRootField);
 
         centerBox.add(dirsBox);
         

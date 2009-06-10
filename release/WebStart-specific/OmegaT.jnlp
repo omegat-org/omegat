@@ -19,8 +19,9 @@
 				the product
 			</description>
 		</related-content>
-	</information>
 -->
+	</information>
+
 	<security>
 		<all-permissions />
 	</security>

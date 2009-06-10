@@ -5,7 +5,7 @@
 
 	<!-- Build WebStart pack -->
 	<target name="pack" depends="clean" description="Build WebStart pack">
-		<property file="webstart.properties" />
+		<property file="../../../webstart.properties" />
 
 		<mkdir dir="${root}/build/webstart" />
 		<copy todir="${root}/build/webstart">

@@ -122,6 +122,9 @@ which has now three states:
 
   - Over matching in segmentation rules
   http://sourceforge.net/support/tracker.php?aid=2783299
+  
+  - "Mark untranslated" + "Display source"= opening problem
+  http://sourceforge.net/support/tracker.php?aid=1812310
 
   - Pattern after in Text files segmentation rule contained "\s+" instead
 of " +"

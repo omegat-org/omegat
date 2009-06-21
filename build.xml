@@ -185,7 +185,7 @@
         </zip>
     </target>
 
-    <!-- Builds a Linux (tar, gz) distribution -->    
+    <!-- Builds a Linux (tar, bz2) distribution -->    
    <target name="linux" description="Build Linux distro" depends="jar,release, check-jre-linux" if="jre-linux.exists">
         <mkdir dir="dist2"/>
         <mkdir dir="dist2/linux"/>
@@ -200,7 +200,7 @@
             <tarfileset dir="dist2/linux" excludes="OmegaT/OmegaT OmegaT/jre/bin/java"/>           
             <tarfileset dir="dist2/linux" includes="OmegaT/OmegaT OmegaT/jre/bin/java" filemode="755"/>
         </tar>
-        <gzip zipfile="dist2/OmegaT_${distversion}_Linux.tar.gz" src="dist2/OmegaT_${distversion}_Linux.tar"/>
+        <bzip2 zipfile="dist2/OmegaT_${distversion}_Linux.tar.bz2" src="dist2/OmegaT_${distversion}_Linux.tar"/>
    </target>
 
     <!-- Creates a Windows Installer -->

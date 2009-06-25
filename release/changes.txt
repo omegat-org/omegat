@@ -1,10 +1,22 @@
 ----------------------------------------------------------------------
+ OmegaT 2.0.3 update 1
+----------------------------------------------------------------------
+  1 Enhancement
+  0 Bugfix
+----------------------------------------------------------------------
+2.0.3 update 1 vs. 2.0.3
+
+  Other enhancements:
+
+  - Japanese localisation updated to 2.0.3 (UI, Instant Start)
+
+----------------------------------------------------------------------
  OmegaT 2.0.3
 ----------------------------------------------------------------------
   5 Enhancements
   1 Bugfix
 ----------------------------------------------------------------------
-2.0.3
+2.0.3 vs. 2.0.2 update 1
 
   Implemented requests:
 
@@ -24,7 +36,7 @@ the root of /glossary.
   - New index of documentations at the root of the /docs folder, identical
 to the one obtained in OmegaT.
 
-  - Dutch localisation updated to 2.02 (UI, Instant Start, Readme, Documentation)
+  - Dutch localisation updated to 2.0.2 (UI, Instant Start, Readme, Documentation)
 
   Bug Fixes:
 

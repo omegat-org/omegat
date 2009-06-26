@@ -26,8 +26,10 @@ Source: "OmegaT.jar"; DestDir: "{app}"
 Source: "license.txt"; DestDir: "{app}"
 Source: "doc-license.txt"; DestDir: "{app}"
 Source: "readme.txt"; DestDir: "{app}"; Flags: isreadme;
+Source: "readme_ar.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ar
 Source: "readme_ca.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ca ca_VAL
 Source: "readme_cs.txt"; DestDir: "{app}"; Flags: isreadme; Languages: cs
+;Source: "readme_cy.txt"; DestDir: "{app}"; Flags: isreadme; Languages: cy
 Source: "readme_eu.txt"; DestDir: "{app}"; Flags: isreadme; Languages: eu
 Source: "readme_fr.txt"; DestDir: "{app}"; Flags: isreadme; Languages: fr
 Source: "readme_hu.txt"; DestDir: "{app}"; Flags: isreadme; Languages: hu
@@ -39,6 +41,7 @@ Source: "readme_pt_BR.txt"; DestDir: "{app}"; Flags: isreadme; Languages: pt_BR
 Source: "readme_ru.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ru
 ;Source: "readme_sh.txt"; DestDir: "{app}"; Flags: isreadme; Languages: sh
 Source: "readme_sk.txt"; DestDir: "{app}"; Flags: isreadme; Languages: sk
+Source: "readme_sl.txt"; DestDir: "{app}"; Flags: isreadme; Languages: sl
 Source: "readme_sq.txt"; DestDir: "{app}"; Flags: isreadme; Languages: sq
 Source: "readme_tr.txt"; DestDir: "{app}"; Flags: isreadme; Languages: tr
 Source: "readme_zh_CN.txt"; DestDir: "{app}"; Flags: isreadme; Languages: zh_CN

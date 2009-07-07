@@ -73,7 +73,7 @@
 
   <p>- v ta namen v meniju izberite <strong>Projekt → Nov..</strong>.</p>
 
-  <p> Zakrmarite do imenika, v katerega bi želeli shraniti projektne datoteke, in vnesite ime za prevajalni projekt. Ime, ki ga vnesete, bo tudi ime projekta in projektnega imenika, v katerega se bo shranjevalo vse s prevajanjem zvezane datoteke.</p>
+  <p> Zakrmarite do imenika, v katerega bi želeli shraniti projektne datoteke, in vnesite ime za prevajalni projekt. Ime, ki ga vnesete, bo tudi ime projekta in projektnega imenika;  v ta imenik in njegove podimenike se bo shranjevalo vse s prevajanjem povezane datoteke.</p>
 
   <p>OmegaT vas bo z dvogovorom spodaj pozval, da potrdite ali pa spremenite projektne mape, ki jih bo ustvaril.</p>
 
@@ -84,7 +84,7 @@
   <p>Mesto podimenikov lahko potrdite, vendar prej preverite, ali <a href="languages.html">kodiranji</a> za izvirni in ciljni jezik ustrezata. V spustnem seznamu izberite kodo jezika (2 črki) ali kodo jezika in države (2 + 2 črki), lahko pa ju vnesete ročno (držite se vzorca z 2 črkama). Zapomnite si, kje se nahaja podimenik Target (s prevedenimi datotekami). Če želite, da OmegaT namesto po odstavkih segmentiranje izvede po povedih, znova preverite <a href="./segmentation.html">pravila za segmentiranje.</a></p>
 
   <p>Ko kliknete V redu in s tem potrdite nastavitve projekta, vas OmegaT pozove, da izberete izvirne dokumente za uvoz. Uvažate lahko posamezne datoteke ali celotne hierarhije (imenike in podimenike). Če uvozite napačne dokumente ali preveč dokumentov, jih lahko enostavno odstranite iz podimenika z izvirnimi datotekami v tem projektu OmegaT (na primer v sistemskem upravitelju datotek).</p>
-  <p>Seznam datotek, ki se jih bo prevajalo, lahko preverite v oknu <strong>Projektne datoteke</strong> (Meni: <strong>Projekt → Projektne datoteke...</strong>, v kolikor se ne prikaže sam od sebe). Če ste primorani spremeniti vsebino imenika Source, ne pozabite pred nadaljnjim delom ponovno naložiti projekta (Meni <strong>Projekt → Ponovno naloži</strong>). OmegaT samodejno odpre prvo datoteko na seznamu. Pomnite, da lahko OmegaT prevaja datoteke v spodaj navedenih <a href="filesToTranslate.html">formatih samo</a>, če ustrezajo vzorcem v <a href="fileFilters.html">datotečnih filtrih</a>. Druge datoteke bo pri odpiranju prezrl.</p>
+  <p>Seznam datotek, ki se jih bo prevajalo, lahko preverite v oknu <strong>Projektne datoteke</strong> (Meni:  <strong>Projekt → Projektne datoteke...</strong>, v kolikor se ne prikaže sam od sebe). Če ste primorani spremeniti vsebino imenika Source, ne pozabite pred nadaljnjim delom ponovno naložiti projekta (Meni:  <strong>Projekt → Ponovno naloži</strong>). OmegaT samodejno odpre prvo datoteko na seznamu. Pomnite, da lahko OmegaT prevaja datoteke v spodaj navedenih <a href="filesToTranslate.html">formatih samo</a>, če ustrezajo vzorcem v <a href="fileFilters.html">datotečnih filtrih</a>. Druge datoteke bo pri odpiranju prezrl.</p>
 
   <ul>
     <li>
@@ -132,7 +132,7 @@
 
   <p>Ko določite projekt in datoteke, ki jih je treba prevesti, OmegaT odpre prvo datoteko na seznamu.</p>
 
-  <p>Aktivni segment je označen zeleno, pod njim je v "ciljnem polju" kopija izvirnega besedila. (V tem trenutku so vsa besedila, ki se nahajajo izven ciljnega polja zavarovana in jih ne morete spreminjati ) Med oznaki <code>&lt;segment 0001&gt;</code> in <code>&lt;end segment&gt;</code> morate čez izvorno besedilo vtipkati svoj prevod.  Pritisnite na "<strong>ENTER</strong>", da skočite na naslednji segment. Opomba:</p>
+  <p>Aktivni segment je označen zeleno; pod njim je v "ciljnem polju" kopija izvirnega besedila. (V tem trenutku so vsa besedila, ki se nahajajo izven ciljnega polja zavarovana in jih ne morete spreminjati ) Med oznaki <code>&lt;segment 0001&gt;</code> in <code>&lt;end segment&gt;</code> morate čez izvorno besedilo vtipkati svoj prevod.  Pritisnite na "<strong>ENTER</strong>", da skočite na naslednji segment. Opomba:</p>
 
   <ul>
     <li>
@@ -148,7 +148,7 @@
     </li>
   </ul>
 
-  <p>Ko pritisnete na "<strong>ENTER</strong>", se na tihem pripeti več stvari: OmegaT doda oba dela segmenta (izvirnik in njegov prevod) v prevodni spomin in samodejno prevede še ostale identične segmente v drugih datotekah projekta. Hkrati preišče prevodni spomin in slovar ter zbere predloge za naslednji neprevedeni segment.</p>
+  <p>Ko pritisnete na "<strong>ENTER</strong>", se pripeti par stvari, ki jih ni videti :  OmegaT doda oba dela segmenta (izvorni del in njegov prevod) v prevodni spomin, poleg tega pa sam od sebe prevede še ostale identilčne segmente, ki jih je najti v ostalih datotekah projekta Hkrati preišče prevodni spomin in slovar ter zbere predloge za naslednji neprevedeni segment.</p>
 
   <h3><a name="tm" id="tm"></a>Kako uporabljati prevodni spomin in zadetke iz geslovnikov</h3>
 
@@ -180,7 +180,7 @@
 
   <ul>
     <li>
-      <p>Izberite v prikazovalniku zadetek, ki ga želite: s <code>Ctrl+2</code> drugi, s <code>Ctrl+3</code> tretji prikazani zadetek, itd.</p>
+      <p>Izberite v prikazovalniku zadetek, ki ga želite:  s <code>Ctrl+2</code> drugi, s <code>Ctrl+3</code> tretji prikazani zadetek, itd.</p>
     </li>
 
     <li>
@@ -197,23 +197,23 @@
 
   <h3><a name="searches" id="searches"></a>Kako iščete</h3>
 
-  <p>OmegaT nudi krepko zalogo funkcij za <a href="searches.html">iskanje</a> Odprite iskalno okno z <code>Ctrl+F</code> in vtipkajte besedo ali izraz, ki ga iščete, v polje "Išči:". Lahko tudi v ciljnem polju aktivnega segmenta izberete besede ali izraz, potem pa pritisnete na <code>Ctrl+F</code>. V tem primeru bo program iskani izraz ali besedo sam vnesel v polje "Išči".</p>
+  <p>OmegaT nudi krepko zalogo funkcij za <a href="searches.html">iskanje</a>. Odprite iskalno okno z <code>Ctrl+F</code> in vtipkajte besedo ali izraz, ki ga iščete, v polje "Išči:". Lahko tudi v ciljnem polju aktivnega segmenta izberete besede ali izraz, potem pa pritisnete na <code>Ctrl+F</code>. V tem primeru bo program iskani izraz ali besedo sam vnesel v polje "Išči".</p>
 
   <h3><a name="create_trans" id="create_trans"></a>Ustvarite prevedene dokumente</h3>
 
-  <p>Ko prevedete vse segmente (po potrebi tudi prej), OmegaT na podlagi prevodov, ki jih je shranil v spomin, obnovi vse izhodne dokumente. Da ustvarite ciljne dokumente, izberite v glavnem meniju <strong>Projekt -&gt; Ustvari prevedene dokumente</strong>. OmegaT sestavi prevode vseh datotek v projektnem imeniku Source, ne glede na to, ali so prevedene v celoti. Delne ali v celoti prevedene datoteke nato shrani v projektni imenik Target. Prevajanje zaključite s pregledom ciljnih datotek v ustrezni aplikaciji (brskalniku, urejevalniku besedil...) , da se prepričate, da je vsebina in oblikovanje prevoda v redu. Po potrebi lahko znova odprete OmegaT, opravite potrebne spremembe in znova ustvarite izhodne datoteke.</p>
+  <p>Ko prevedete vse segmente (po potrebi tudi prej), OmegaT na podlagi prevodov, ki jih je shranil v spomin, obnovi vse izhodne dokumente. Da ustvarite ciljne dokumente, izberite v glavnem meniju <strong>Projekt -&gt; Ustvari prevedene dokumente</strong>. OmegaT sestavi prevode vseh datotek v projektnem imeniku Source, ne glede na to, ali so prevedene v celoti. Delne ali v celoti prevedene datoteke nato shrani v projektni imenik Target. Prevajanje zaključite s pregledom ciljnih datotek v ustrezni aplikaciji (brskalniku, urejevalniku besedil...) , da se prepričate, da je vsebina in oblikovanje prevoda v redu. Po potrebi lahko znova odprete OmegaT in opravite potrebne spremembe; ne pozabite ponovno ustvariti izhodnih datotek.</p>
   <hr>
 
   <h2><a name="tags" id="tags"></a>Kako se lotiti besedila z oznakami</h2>
 
   <p>OmegaT pazi na to, da se oblikovanje izvirnih dokumentov (krepka ali ležeča pisava itd.) med prevajanjem ne zgubi, zato ukaze za oblikovanje spremeni v <a href=
-  "formattedText.html#intro">oznake</a>. Oznake OmegaT vsebujejo eno ali dve črki z eno ali več ciframi in pri parih oznak z znakom "/" (na primer: &lt;f0&gt;, &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt; itd.) Pri delu z oznakami morate paziti na to, da bodo v ciljni segment vključene na pravilnem mestu in v pravilnem zaporedju (glejte <a href=
+  "formattedText.html#intro">oznake</a>. Oznake OmegaT vsebujejo eno ali dve črki z eno ali več ciframi in pri parih oznak z znakom "/" (na primer:  &lt;f0&gt;, &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt; itd.). Pri delu z oznakami morate paziti na to, da bodo v ciljni segment vključene na pravilnem mestu in v pravilnem zaporedju (glejte <a href=
   "formattedText.html#Tag_operations">operacije z oznakami</a>).</p>
 
   <h3><a name="example" id="example"></a>Primer...</h3>
 
-  <p>V teh primerih so oznake označene z barvo, da jih je laže prepoznati; OmegaT jih ne bo posebej poudarjal. Oznake <font color="#0000FF">modre</font> barve bo OmegaT ignoriral, ker v celoti obkrožajo segment,  <font color=
-  "#008000">zelene</font> oznake OmegaT upošteva, ker se nahajajo znotraj segmenta. Tukaj je primer za segmentiranje v HTML:</p>
+  <p>V teh primerih so oznake označene z barvo, da jih je laže prepoznati; OmegaT jih ne bo posebej poudarjal. Oznake <font color="#0000FF">modre</font> barve bo OmegaT ignoriral, ker v celoti obkrožajo segment. Oznake, poudarjene <font color=
+  "#008000">zeleno</font>, mora OmegaT obdelati, ker se nahajajo znotraj segmenta. Tukaj je primer za segmentiranje v HTML:</p>
 
   <p><code><font color="#0000FF">&lt;p&gt;</font>Pisavo za prikaz je mogoče izbrati v dvogovoru </code> <code><font color=
   "#008000">&lt;b&gt;</font>Pisava za prikaz<font color=

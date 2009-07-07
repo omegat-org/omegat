@@ -333,10 +333,10 @@
 
   <h3><a name="Editor" id="Editor"></a>Okno za urejanje</h3>
 
-  <p>Tu sestavljate in urejate svoj prevod. Urejevalnik prikazuje besedilo, ki je delno že prevedeno: že prevedeno besedilo prikazuje v ciljnem, neprevedeno pa v izvornem jeziku.  Med delom lahko drsite skozi dokument in z dvoklikom odprete kateri koli segment.. V zgornjem primeru so že prevedeni segmenti označeni rumeno, lahko pa si nastavitev spremenite po svojem okusu (glejte meni <a href=
+  <p>Tu sestavljate in urejate svoj prevod. Urejevalnik prikazuje besedilo, ki je delno že prevedeno: prevedeno besedilo prikazuje v ciljnem, neprevedeno pa v izvirnem jeziku. {\cs6\f1\cf6\lang1024 &lt;span lang=SL&gt;}Prikazano besedilo je razdeljeno v segmente. Med delom lahko drsite skozi dokument in z dvoklikom odprete kateri koli segment.. V zgornjem primeru so že prevedeni segmenti označeni rumeno, lahko pa si nastavitev spremenite po svojem okusu (glejte meni <a href=
   "menu.html">Prikaz</a>.)</p>
 
-  <p>En od segmentov je aktivni segment. To je edini segment, ki ga urejevalnik kaže v dveh delih: v zgornjem delu, v zeleni barvi in krepki pisavi, je original, pod njim je polje za urejanje, ki ga omejujeta dve oznaki, na levi <strong><code>&lt;segment nnnn&gt;</code></strong>, kjer je <strong><code>nnnn</code></strong> številka segmenta v projektu, na desni pa oznaka za konec segmenta, <strong><code>&lt;end segment&gt;</code></strong>. Z zgornjim delom kot vzorcem prepišite ali spremenite vsebino v polju za urejanje, tako da bo vsebovala prevod originala. </p>
+  <p>En od segmentov je aktivni segment. To je edini segment, ki ga urejevalnik kaže v dveh delih: zgoraj, v krepki pisavi zelene barve, je izvirnik, pod njim je polje za urejanje, ki ga omejujeta dve oznaki: na levi je oznaka <strong><code>&lt;segment nnnn&gt;</code></strong> , pri čemer je <strong><code>nnnn</code></strong> številka segmenta v projektu, na desni pa se nahaja oznaka za konec segmenta  <strong><code>&lt;end segment&gt;</code></strong>.   Z zgornjim delom kot vzorcem prepišite ali spremenite vsebino v polju za urejanje, tako da bo vsebovala prevod originala. </p>
 
   <p>Odvisno od <a href="translationEditing.html">vedenja ob urejanju</a> je lahko polje za urejanje prevoda prazno. lahko vsebuje izvorno besedilo ali pa predlog za prevod besedila, ki je še najbliže izvornemu segmentu. Ko preskočite na drug segment, se prevod preveri in shrani. Če želite, da ostane segment nepreveden, enostavno iz prevoda odstranite ves tekst (z <code>Ctrl+A</code> najprej vse izberite, potem pa zbrišite z <code>Del</code>). OmegaT si lahko prevod, ki je identičen izvornemu besedilu, zapomne. To je praktično v dokumentih, ki vsebujejo blagovne znamke, imena ali besede v tretjem jeziku, ki jih ni treba prevajati. </p>
 
@@ -374,7 +374,7 @@
   <p><br>
   <br></p>
 
-  <p>Izvorni segment v priimewru zgoraj je “<i>In most translation jobs it is considered important to have the translated document look similar to the original.</i>”, dve besedi, document in translation, je program našel v geslovniku, ki je na razpolago. OmegaT podpira tudi izraze z več besedami, vendar na zelo enostaven način: če je v trenutnem segmentu najti obe besedi, se bo izraz pokazalo.</p>
+  <p>Izvorni segment v priimewru zgoraj je “<i>In most translation jobs it is considered important to have the translated document look similar to the original.</i>”, dve besedi, document in translation, je program našel v geslovniku, ki je na razpolago. OmegaT podpira tudi večbesedne izraze, vendar na zelo enostaven način: če je v trenutnem segmentu najti obe besedi, bo izraz prikazan.</p>
 
   <h3><a name="menu" id="menu"></a>Glavni meni</h3>
 
@@ -422,7 +422,7 @@
 
   <p>Zalogo <strong>enkratnih</strong> segmentov se preračuna tako, da se vzame vse segmente in iz seznama odstrani vse dvojčke, ki so si enaki do velikih in malih črk ("Leto" in "leto" sta torej različna segmenta).</p>
 
-  <p>Iz razlike med "številom segmentov" in "številom enkratnih segmentov" si lahko ustvarite grobo sliko o tem, koliko dela vas še čaka. Pomnite pa, da vam številke same ne dajejo jasne slike o tem, kako pomembne ponovitve so: segmenti so lahko relativno dolgi stavki, ki se pogostokrat ponavljajo (imate srečo!), lahko pa so na primer samo ključne besede, ki se ponavljajo od tabele do tabele (imate tudi srečo, samo ne posebno veliko...). Podrobnejšo statistiko boste našli v datoteki <code>project_stats.txt</code>, ki se nahaja v podimeniku the <code>/omegat</code>.</p>
+  <p>Iz razlike med "številom segmentov" in "številom enkratnih segmentov" si lahko ustvarite grobo sliko o tem, koliko dela vas še čaka. Pomnite pa, da vam številke same ne dajejo jasne slike o tem, kako pomembne ponovitve so:  segmenti so lahko relativno dolgi stavki, ki se pogostokrat ponavljajo (imate srečo!), lahko pa so na primer samo ključne besede, ki se ponavljajo od tabele do tabele (imate tudi srečo, samo ne posebno veliko...). Datoteka  <code>project_stats.txt</code>, ki se nahaja v imeniku <code>/omegat</code> projekta, vsebuje več podrobejše informacije za vsako datoteko v projektu. </p>
 
   <p>Število segmentov/enkratnih segmentov lahko prilagodite, če spremenite pravila za segmentiranje. V nobenem primeru pa se tega ne lotevajte, ko je projekt že stekel - obstaja namreč nevarnost, da že opravljeno delo ni več uporabno. Glej <a href=
   "./segmentation.html">pravila za segmentiranje</a> za dodatne podatke.</p>
@@ -473,7 +473,7 @@
 
   <p><a href="formattedText.html#intro">Napake v oznakah</a> so posledice <a href=
   "formattedText.html#tag_operation">manipulacij na oznakah</a>, zaradi katerih se v ciljnem dokumentu oznake ne pojavljajo v istem vrstnem redu in številu kot pa v originalnem besedilu. Nekatere teh manipulacij so potrebne in dobronamerne, pri drugih bo prišlo do problemov, ko se ustvarja ciljni dokument.  Oznake navadno predstavljajo kak ukaz za oblikovanje izvirnega besedila. 
-<strong>Če lahko poenostavite izbirno besedilo</strong>, lahko občutno zmanjšate število napak. </p>
+  <strong>Če lahko poenostavite izbirno besedilo</strong>, lahko občutno zmanjšate število napak. </p>
 
   <h3>Brskalnik za pomoč</h3>
 
@@ -481,7 +481,7 @@
 
   <h3><a name="manual" id="manual"></a>Navigacija za brskalnik za pomoč</h3>
 
-  <p>V oknu boste videli priročnik in dva gumba: <strong>Nazaj</strong> in <strong>Kazalo</strong>. Priročnik za uporabnika je HTML dokument s povezavami na razna poglavja. Če kliknete na povezavo, kot bi to storili v brskalniku, se bo odprla želena stran.</p>
+  <p>V oknu lahko vidite priročnik in dva gumba: <strong>Nazaj</strong> in <strong>Vsebina</strong>. Priročnik za uporabnika je HTML dokument s povezavami na razna poglavja. Če kliknete na povezavo, kot bi to storili v brskalniku, se bo odprla želena stran.</p>
 
   <h3>Offline brskanje po priročniku za uporabnika</h3>
 

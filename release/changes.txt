@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.0.3 update 1
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancements
   0 Bugfix
 ----------------------------------------------------------------------
 2.0.3 update 1 vs. 2.0.3
@@ -9,6 +9,8 @@
   Other enhancements:
 
   - Japanese localisation updated to 2.0.3 (UI, Instant Start)
+  - German localisation updated to 2.0.3 (UI, Instant Start, Readme)
+
 
 ----------------------------------------------------------------------
  OmegaT 2.0.3

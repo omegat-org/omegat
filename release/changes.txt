@@ -12,7 +12,6 @@
   - German localisation updated to 2.0.3 (UI, Instant Start, Readme)
   - Slovenian localisation updated to 2.0.3 (UI, Instant Start, Readme, documentation)
 
-
 ----------------------------------------------------------------------
  OmegaT 2.0.3
 ----------------------------------------------------------------------

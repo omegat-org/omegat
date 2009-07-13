@@ -594,7 +594,7 @@ public class EditorController implements IEditor {
     protected void goToSegmentAtLocation(int location) {
         // clicked segment
 
-        int segmentAtLocation = 0;
+        int segmentAtLocation = m_docSegList.length - 1;
         for (int i = 0; i < m_docSegList.length; i++) {
             if (location < m_docSegList[i].getStartPosition()) {
                 segmentAtLocation = i - 1;

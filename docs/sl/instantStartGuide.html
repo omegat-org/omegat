@@ -62,9 +62,9 @@
   <p>Zaslon OmegaT sestavljajo <a href="userInterface.html">tri ločena okna</a>. Vsakega od njih lahko z miško večate in manjšate. Na levi strani je urejevalnik, v katerega vnašate svoj prevod. Desno zgoraj je prikazovalnik zadetkov, kjer bodo prikazani zadetki iz prevodnega spomina. Pod njim se nahaja prikazovalnik slovarjev, kjer se bodo kazali zadetki iz slovarjev.</p>
 
   <p>V urejevalniku prikazuje OmegaT izvorno besedilo '<a href=
-  "./segmentation.html">segmentirano</a>' v povedi (ali v odstavke). Segmente prevajate po vrsti, drugega za drugim. Ko preidete z enega segmenta na drugega, se vaš prevod shrani v <a href="translationMemories.html">prevodni spomin</a>. Ko so enkrat vsi segmenti prevedi (ali pa prej, če tako zahtevate), bo OmegaT s pomočjo prevodnega spomina ustvaril v podimeniku "Target" dokumente v ciljnem jeziku.</p>
+  "./segmentation.html">segmentirano</a>' v povedi (ali v odstavke). Segmente prevajate po vrsti, drugega za drugim. Ko preidete z enega segmenta na drugega, se vaš prevod shrani v <a href="translationMemories.html">prevodni spomin</a>. Ko so enkrat vsi segmenti prevedeni (ali pa prej, če tako zahtevate), bo OmegaT s pomočjo prevodnega spomina ustvaril v mapi "Target" dokumente v ciljnem jeziku.</p>
 
-  <p>OmegaT vaše prevajalsko delo organizira v tako imenovane prevajalne projekte.  Za vsakega od njih OmegaT ustvari komplet imenikov. V njih shranjujete <a href="filesToTranslate.html">izvorne dokumente</a>, ki jih je treba prevesti, <a href="glossaries.html">geslovnike</a> in pa <a href="translationMemories.html">prevodne spomine</a>, ki jih boste morebiti potrebovali. OmegaT ustvari tudi ciljni imenik “Target”, ki bo vseboval prevedene dokumente.</p>
+  <p>OmegaT vaše prevajalsko delo organizira v tako imenovane prevajalne projekte.  Za vsakega od njih OmegaT ustvari svoj komplet map. V njih shranjujete <a href="filesToTranslate.html">izvorne dokumente</a>, ki jih je treba prevesti, <a href="glossaries.html">geslovnike</a> in pa <a href="translationMemories.html">prevodne spomine</a>, ki jih boste morebiti potrebovali. OmegaT ustvari tudi ciljno mapo “Target”, ki bo vsebovala prevedene dokumente.</p>
   <hr>
 
   <h2><a name="translate" id="translate"></a>Kako prevajati s pomočjo OmegaT</h2>
@@ -73,7 +73,7 @@
 
   <p>- v ta namen v meniju izberite <strong>Projekt → Nov..</strong>.</p>
 
-  <p> Zakrmarite do imenika, v katerega bi želeli shraniti projektne datoteke, in vnesite ime za prevajalni projekt. Ime, ki ga vnesete, bo tudi ime projekta in projektnega imenika;  v ta imenik in njegove podimenike se bo shranjevalo vse s prevajanjem povezane datoteke.</p>
+  <p> Zakrmarite do mape, v katero bi želeli shraniti projektne datoteke, in vnesite ime za prevajalni projekt. Ime, ki ga vnesete, bo tudi ime projekta in projektne mape;  v to mapo in njegove podimenike se bo shranjevalo vse s prevajanjem povezane datoteke.</p>
 
   <p>OmegaT vas bo z dvogovorom spodaj pozval, da potrdite ali pa spremenite projektne mape, ki jih bo ustvaril.</p>
 
@@ -81,9 +81,9 @@
   "images/NewProject.png" name="graphics3" alt="Okno za projektne nastavitve" align=
   "bottom" width="398" height="428" border="0" id="graphics3"></p>
 
-  <p>Mesto podimenikov lahko potrdite, vendar prej preverite, ali <a href="languages.html">kodiranji</a> za izvirni in ciljni jezik ustrezata. V spustnem seznamu izberite kodo jezika (2 črki) ali kodo jezika in države (2 + 2 črki), lahko pa ju vnesete ročno (držite se vzorca z 2 črkama). Zapomnite si, kje se nahaja podimenik Target (s prevedenimi datotekami). Če želite, da OmegaT namesto po odstavkih segmentiranje izvede po povedih, znova preverite <a href="./segmentation.html">pravila za segmentiranje.</a></p>
+  <p>Mesti za podimenike lahko potrdite, vendar prej preverite, ali <a href="languages.html">kodiranji</a> za izvirni in ciljni jezik ustrezata. V spustnem seznamu izberite kodo jezika (2 črki) ali kodo jezika in države (2 + 2 črki), lahko pa ju vnesete ročno (držite se vzorca z 2 črkama). Zapomnite si, kje se nahaja mapa Target (s prevedenimi datotekami). Če želite, da OmegaT namesto po odstavkih segmentiranje izvede po povedih, znova preverite <a href="./segmentation.html">pravila za segmentiranje.</a></p>
 
-  <p>Ko kliknete V redu in s tem potrdite nastavitve projekta, vas OmegaT pozove, da izberete izvirne dokumente za uvoz. Uvažate lahko posamezne datoteke ali celotne hierarhije (imenike in podimenike). Če uvozite napačne dokumente ali preveč dokumentov, jih lahko enostavno odstranite iz podimenika z izvirnimi datotekami v tem projektu OmegaT (na primer v sistemskem upravitelju datotek).</p>
+  <p>Ko kliknete V redu in s tem potrdite nastavitve projekta, vas OmegaT pozove, da izberete izvirne dokumente za uvoz. Uvažate lahko posamezne datoteke ali celotne hierarhije (imenike in podimenike). Če uvozite napačne dokumente ali preveč dokumentov, jih lahko enostavno odstranite iz mape z izvirnimi datotekami  (na primer s pomočjo sistemskega upravitelja za datoteke).</p>
   <p>Seznam datotek, ki se jih bo prevajalo, lahko preverite v oknu <strong>Projektne datoteke</strong> (Meni:  <strong>Projekt → Projektne datoteke...</strong>, v kolikor se ne prikaže sam od sebe). Če ste primorani spremeniti vsebino imenika Source, ne pozabite pred nadaljnjim delom ponovno naložiti projekta (Meni:  <strong>Projekt → Ponovno naloži</strong>). OmegaT samodejno odpre prvo datoteko na seznamu. Pomnite, da lahko OmegaT prevaja datoteke v spodaj navedenih <a href="filesToTranslate.html">formatih samo</a>, če ustrezajo vzorcem v <a href="fileFilters.html">datotečnih filtrih</a>. Druge datoteke bo pri odpiranju prezrl.</p>
 
   <ul>
@@ -148,7 +148,7 @@
     </li>
   </ul>
 
-  <p>Ko pritisnete na "<strong>ENTER</strong>", se pripeti par stvari, ki jih ni videti :  OmegaT doda oba dela segmenta (izvorni del in njegov prevod) v prevodni spomin, poleg tega pa sam od sebe prevede še ostale identilčne segmente, ki jih je najti v ostalih datotekah projekta Hkrati preišče prevodni spomin in slovar ter zbere predloge za naslednji neprevedeni segment.</p>
+  <p>Ko pritisnete na "<strong>ENTER</strong>", se pripeti par stvari, ki jih ni videti :  OmegaT doda oba dela segmenta (izvorni del in njegov prevod) v prevodni spomin, poleg tega pa sam od sebe prevede še ostale identične segmente, ki jih je najti v ostalih datotekah projekta Hkrati preišče prevodni spomin in slovar ter zbere predloge za naslednji neprevedeni segment.</p>
 
   <h3><a name="tm" id="tm"></a>Kako uporabljati prevodni spomin in zadetke iz geslovnikov</h3>
 
@@ -224,7 +224,7 @@
   <p><br>
   <br></p>
 
-  <p>OmegaT bo to prevod (v Afrikanščino!) prikazal takole:</p>
+  <p>OmegaT bo ta stavek (preveden v Afrikanščino!) prikazal takole:</p>
 
   <p><br>
   <br></p>

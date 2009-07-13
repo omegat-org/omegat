@@ -103,9 +103,9 @@
 
   <h3>Datoteke TMX in jezik</h3>
 
-  <p>TMX vsebujejo <i>prevodne enote</i>, ki jih sestavljajo enakovredni segmenti v različnih jezikih. Prevodno enoto sestavljata najmanj dve <i>varianti prevodne enote</i> (translation unit variation - tuv). Tako ena kot druga sta lahko bodisi izvirni ali ciljni segment.</p>
+  <p>TMX vsebujejo <i>prevodne enote</i>, ki jih sestavljajo enakovredni segmenti v različnih jezikih. Prevodno enoto sestavljata najmanj dve <i>varianti prevodne enote</i> (translation unit variation - tuv). Ena od njiju je izvorni, druga ciljni segment.</p>
 
-  <p>Nastavitve projekta določajo, katera od variant bo izvirni in katera ciljni jezik. OmegaT bo tako vzela <strong>tuv</strong> , ki po definiciji projekta odgovarja kodi za izvorni jezik in ga uporabila za izvorni segment, <strong>tuv</strong> s kodo ciljnega jezika pa bo uporabila kot ciljni segment.  OmegaT ju prepozna na osnovi naslednjih dveh standardnih konvencij::</p>
+  <p>Nastavitve projekta določajo, katera od obeh variant  velja za izvirni in katera za ciljni jezik. OmegaT bo tako vzela <strong>tuv</strong> , ki po definiciji projekta odgovarja kodi za izvorni jezik in ga uporabila za izvorni segment, <strong>tuv</strong> s kodo ciljnega jezika pa bo uporabila kot ciljni segment.  OmegaT ju prepozna na osnovi naslednjih dveh standardnih konvencij::</p>
 
   <ul>
     <li>v obliki dveh črk (npr.: <strong>SL</strong> za slovenščino, ali </li>
@@ -132,7 +132,7 @@
 
   <p>Kadar v projektu OmegaT ustvarjate ciljne dokumente, se prevodni spomin projekta shrani v korenskem imeniku projekta v obliki treh datotek (za njih opis glejte zgoraj). Te tri datoteke TMX&nbsp;(-<em>omegat.tmx</em>", "<em>-level1.tmx</em>" and "<em>-level2.tmx</em>") lahko razumete kot "izvozni prevodni spomin", t.j. kot dvojezičen povzetek vašega projekta, ki ga lahko izvozite za uporabo drugje. </p>
 
-  <p>V kolikor bi želeli prevodni spomin iz projekta, ki ste ga nekoč opravili, ponovno uporabiti (za projekt, ki je podoben prvotnemu ali ki uporablja podobno izrazoslovje), lahko uporabite te prevodne spomine kot "vhodne prevodne spomine", t.j. za uvoz v vaš novi projekt.  prekopirajte v ta namen zaželene datoteke v podimenik <em>\tm</em> novega projekta.</p>
+  <p>V kolikor bi želeli prevodni spomin iz projekta, ki ste ga nekoč opravili, ponovno uporabiti (za projekt, ki je podoben prvotnemu ali ki uporablja podobno izrazoslovje), lahko uporabite te prevodne spomine kot "vhodne prevodne spomine", t.j. za uvoz v vaš novi projekt.  prekopirajte v ta namen zaželene datoteke v mapo <em>\tm</em> novega projekta.</p>
 
   <p>Če ne zahtevate drugače, se bo podimenik <em>\tm</em> nahajal pod korenskim imenikom projekta (npr. ...<em>\MyProject\tm)</em>), lahko pa seveda v dvogovoru za lastnosti projekta izberete kak drug imenik. To je koristno v primeru, da pogosto uporabljate pretekle prevodne spomine, na primer, ker gre za isto temo ali isto stranko. V tem primeru se splača postopati takole:</p>
 
@@ -144,7 +144,7 @@
     <li>Kadar začnete z novim projektom, vendar z isto staro temo ali za isto stranko, izberite v dvogovoru <em>Projekt &gt; Lastnosti &gt; Uredi projekt</em> ustrezno vložišče kot podimenik za prevodni spomin.</li>
   </ul>
 
-  <p>Pretiravati pri tem seveda ni treba: ker se vse datoteke TMX v vložišču <em>/tm</em> uporabljajo hkrati, lahko hitro začnete dobivati po ducate zadetkov - ker je pač en in isti segment prisoten večkrat -. Pomagate si lahko tako, da začasno preimenujete nekatere od datotek v podimeniku <em>/tm</em> (namesto pripone TMX jim daste recimo pripono TMY), da več ne motijo, ko se je enkrat njih vsebina preselila v . <em>project_save.tmx</em></p>
+  <p>Pretiravati pri tem seveda ni treba: ker se vse datoteke TMX v vložišču <em>/tm</em> uporabljajo hkrati, lahko hitro začnete dobivati po ducate zadetkov - ker je pač en in isti segment prisoten večkrat -. Pomagate si lahko tako, da začasno preimenujete nekatere od datotek v mapi <em>/tm</em> (namesto pripone TMX jim daste recimo pripono TMY), da več ne motijo, ko se je enkrat njih vsebina preselila v . <em>project_save.tmx</em></p>
 
   <p><a name="using_memories" id="using_memories"></a></p>
 

@@ -27,7 +27,7 @@
 <p> OmegaT bo izraze v aktivnem segmentu poiskal v geslovnikih, ki so na razpolago, in prevode izrazov prikazal samodejno v <a href="userInterface.html#Glossary">prikaznem oknu za geslovnike</a></p>
 <hr>
 <h2><a name="usage" id="usage"></a>Uporaba</h2>
-<p>Obstoječi geslovnik lahko začnete uporabljati enostavno tako, da ga prekopirate v podimenik <span style="font-style: italic;">/glossary</span> . OmegaT geslovnike v tem podimeniku samodejno prepozna, ko projekt odprete. Izraze v aktivnem segmentu, ki jih najde v geslovniku oz. geslovnikih, OmegaT samodejno pokaže v podoknu za geslovnike:</p>
+<p>Obstoječi geslovnik lahko začnete uporabljati enostavno tako, da ga prekopirate v podmapo <span style="font-style: italic;">/glossary</span> . OmegaT geslovnike v tej mapi samodejno prepozna, ko projekt odprete. Izraze v aktivnem segmentu, ki jih najde v geslovniku oz. geslovnikih, OmegaT samodejno pokaže v podoknu za geslovnike:</p>
 <p><img src="images/Glossary_pane.png" name="graphics1"
  alt="Podokno za geslovnike" id="graphics1"
  style="border: 0px solid ; width: 321px; height: 147px;"><br>
@@ -37,7 +37,7 @@
 <p>Geslovniki so datoteke z besedilom v treh s tabulatorjem ločenih stolpcih: v prvem stolpcu je izvirni izraz, v drugem stolpcu pa njegov prevod v ciljnem jeziku. Tretji stolpec je namenjen dodatnim podatkom. Geslovnike so lahko kodirane v privzetem kodiranju sistema (v tem primeru morajo datoteke imeti pripono <code>.tab</code>) ali v UTF-8 (v tem primeru morajo datoteke imeti pripono <code>.utf8</code>). Unicode (UTF8) oblika je seveda iz razumljivih razlogov bolj primerna.</p>
 <hr>
 <h2><a name="howtocreate" id="howtocreate"></a>Kako ustvarjati geslovnike</h2>
-<br>Tu opisana metoda je zanesljiva, če ji sledite na pameten način. Potrebovali boste OpenOffice.org Writer zanjo, tako da si - če še niste - naložite in namestite OpenOffice.org. Zaženite OpenOffice.org in odprite nov dokument z besedilom, oziroma poženite "OpenOffice.org Writer".<br> <br> V prazen dokument vnašajte postavke v geslovniku, kot sledi:  izraz v izvornem jeziku, tabulator, izraz v ciljnem jeziku, tabulator, komentar ali razlago izraza, in nato Enter kot zaključek vrstice. Tabulator je znak na levi strani tastature. Če ne želite komentarja, lahko izpustite drugi tabulator. "Izraz" je lahko ena sama beseda ali pa fraza. Nadaljujte v naslednji vrstici na enak način z naslednjim izrazom in njegovim prevodom. Potem tretja vrstica s tretjim izrazom in tako dalje.<br> Ko ste končali z vnosom, boste pred seboj imeli dva "stolpca" izrazov, izvorne izraze na levi in na desni izraze v ciljnem jeziku, mogoče še tu in tam vnos v tretji stolpec - vaše komentaerje in pripombe. Tabulator (→ v primeru zgoraj)&nbsp; in Enter (¶&nbsp;) postaneta vidna, če kliknete na ikono &nbsp; ¶ v standardni orodni vrstici za Writer. Tukaj nekaj vrstic za angleško-nemški geslovnik)<br>
+<br>Tu opisana metoda je zanesljiva, če ji sledite na pameten način. Potrebovali boste OpenOffice.org Writer zanjo, tako da si - če še niste - naložite in namestite OpenOffice.org. Zaženite OpenOffice.org in odprite nov dokument z besedilom, oziroma poženite "OpenOffice.org Writer".<br> <br> V prazen dokument vnašajte postavke v geslovniku, kot sledi:  izraz v izvornem jeziku, tabulator, izraz v ciljnem jeziku, tabulator, komentar ali razlago izraza, in nato Enter kot zaključek vrstice. Tabulator je znak na levi strani tastature. Če ne želite komentarja, lahko izpustite drugi tabulator. "Izraz" je lahko ena sama beseda ali pa fraza. Nadaljujte v naslednji vrstici na enak način z naslednjim izrazom in njegovim prevodom. Potem tretja vrstica s tretjim izrazom in tako dalje.<br> Ko ste končali z vnosom, boste pred seboj imeli dva "stolpca" izrazov, izvorne izraze na levi in na desni izraze v ciljnem jeziku, mogoče še tu in tam vnos v tretji stolpec - vaše komentarje in pripombe. Tabulator (→ v primeru zgoraj)&nbsp; in Enter (¶&nbsp;) postaneta vidna, če kliknete na ikono &nbsp; ¶ v standardni orodni vrstici za Writer. Tukaj nekaj vrstic za angleško-nemški geslovnik)<br>
 <br>
 <div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp;
 word →Wort→das (-/e/s, Wörter/-e)¶</div>
@@ -49,23 +49,21 @@ dog →Hund→m, f Hündin&nbsp;¶</div>
 <div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp;
 horse→Pferd→n, m Hengst f Stute n Fohlen¶</div>
 <br>NE uporabljajte v OpenOffice.org možnosti za tvorjenje "stolpcev",  posamezne vnose ločite enostavno z enim znakom za tabulator.<br> <br> Ko ste zaključili z vnašanjem, izberite <span
- style="font-style: italic;">Datoteka &gt; Shrani kot</span> V "Ime datoteke" vnesite ime za svoj geslovnik, ki mu dodajte končnico "<span style="font-weight: bold;">.utf8</span>" (npr "<span style="font-style: italic;">MojPrvislovarček.utf8</span>"). V "<span style="font-style: italic;">Vrsta datoteke</span>", izberite"<span style="font-style: italic;">Kodirano besedilo (.txt.)</span>".&nbsp; Zbrišite izbirno polje "<span style="font-style: italic;">Samodejna končnica imena datoteke</span>":<span style="font-style: italic;"></span><br> <br> <img style="width: 478px; height: 313px;"
+ style="font-style: italic;">Datoteka &gt; Shrani kot</span> V "Ime datoteke" vnesite ime za svoj geslovnik, ki mu dodajte končnico "<span style="font-weight: bold;">.utf8</span>" (npr. "<span style="font-style: italic;">MojPrvislovarček.utf8</span>"). V "<span style="font-style: italic;">Vrsta datoteke</span>", izberite"<span style="font-style: italic;">Kodirano besedilo (.txt)</span>".&nbsp; Zbrišite izbirno polje "<span style="font-style: italic;">Samodejna končnica imena datoteke</span>":<span style="font-style: italic;"></span><br> <br> <img style="width: 478px; height: 313px;"
  alt="dvogovor za shranitev geslovnika"
  src="images/saveglossary.jpg"><br> <br> Kliknite na Shrani. Prikaže se dvogovor z dvema izbirama.<span
  style="font-style: italic;"></span><span style="font-style: italic;"></span>. Potrdite izbiro "<span style="font-style: italic;">Ohrani trenutno vrsto datoteke</span>". <br> <br> V dialogu za opcije ASCII datotek (glej dalje), izberite "<span style="font-style: italic;">Unicode (UTF-8)</span>":<br> <br> <img style="width: 510px; height: 158px;"
  alt="opcije za shranitev geslovnika kot ascii datoteko"
- src="./images/AsciiFilteroptions.jpg"><br> <br> Potrdite z OK.<br> <br> Ko ustvarjate projekt OmegaT, prekopirajte ali prestavite to datoteko v podimenik <span style="font-style: italic;">\glossary</span> novega projekta. Če je projekt že odprt, ga morate ponovno naložiti, ko ste datoteko prekopirali. Datoteko lahko med prevajanjem tudi dopolnjujete, vendar bo najnovejše stanje na razpolago šele, ko projekt ponovno naložite.<br> <br> Če je odprt segment s poznanimi izrazi, bo podokno za geslovnike prikazalo vse vnose, ki ustrezajo izrazom v izbornem segmentu in ki se nahajajo v geslovniku(ali geslovnikih - uporabljate lahko več kot samo enega).<h3><a name="multiterm" id="multiterm"></a>S pomočjo Trados Multiterm</h3>
+ src="./images/AsciiFilteroptions.jpg"><br> <br> Potrdite z OK.<br> <br> Ko ustvarjate projekt OmegaT, prekopirajte ali prestavite to datoteko v podmapo <span style="font-style: italic;">\glossary</span> novega projekta. Če je projekt že odprt, ga morate ponovno naložiti, ko ste datoteko prekopirali. Datoteko lahko med prevajanjem tudi dopolnjujete, vendar bo najnovejše stanje na razpolago šele, ko projekt ponovno naložite.<br> <br> Če je odprt segment s poznanimi izrazi, bo podokno za geslovnike prikazalo vse vnose, ki ustrezajo izrazom v izbornem segmentu in ki se nahajajo v geslovniku(ali geslovnikih - uporabljate lahko več kot samo enega).<h3><a name="multiterm" id="multiterm"></a>S pomočjo Trados Multiterm</h3>
 <p>Geslovnike, ki se jih uporablja v programu Multiterm, je mogoče po besedilnem izvozu brez sprememb uporabiti v slovarjih OmegaT, pod pogojem, da ste jim dali pripono <code>.tab</code> in da sta izvorni in ciljni jezik prva dva stolpca v njih Če izvažate s pomočjo sistemske možnosti "Tab-delimited export", boste morali zbrisati prvih pet stolpcev (Seq. Nr, Date created itd), ki se nahajajo pred vnosoma, ki sta zanimiva.</p>
 <hr>
 <h2><a name="commonglossaryproblems" id="commonglossaryproblems"></a>Pogosti problemi z geslovniki</h2>
 <dl>
-  <dt><span style="font-weight: bold;">Problem: </span>No
-glossary terms
-are displayed.</dt>
+  <dt><span style="font-weight: bold;">Problem: podokno za geslovnike je brez vsebine. </dt>
   <dd>Možni razlogi:</dd>
 </dl>
 <ul>
-  <li>v podimeniku "glossary" ni najti ustreznih datotek.</li>
+  <li>v mapi "glossary" ni najti ustreznih datotek.</li>
   <li>datoteka z gesli je prazna</li>
   <li>postavke niso ločene med seboj z znakom TAB</li>
   <li>datoteka nima pravilne pripone (.tab ali .utf8)</li>

@@ -39,7 +39,7 @@
     </li>
   </ul>
 
-  <p>Podatki o oblikovanju, ki so shranjeni v izvirni datoteki, se navadno potrebujejo tudi v datoteki s prevodom. PSproten prikaz informacij o oblikovanju (trenutno za datoteke vrste DocBook, HTML, XHTML, Open Document in OpenOffice.org), v obliki oznak v OmegaT Kadar se različna besedila primerja med seboj, da bi se ugotovilo, katerih predlog za prevod je najboljši, se oznako običajno zanemari. Oznake, ki se jih je preneslo v prevedeni segment, bodo prisotne tudi v prevedenem besedilu. </p>
+  <p>Podatki o oblikovanju, ki so shranjeni v izvirni datoteki, se navadno potrebujejo tudi v datoteki s prevodom. Sproten prikaz informacij o oblikovanju (trenutno za datoteke vrste DocBook, HTML, XHTML, Open Document in OpenOffice.org), v obliki oznak v OmegaT. Kadar se različna besedila primerja med seboj, da bi se ugotovilo, katerih predlog za prevod je najboljši, se oznako običajno zanemari. Oznake, ki se jih je preneslo v prevedeni segment, bodo prisotne tudi v prevedenem besedilu. </p>
   <hr>
 
   <h3><a name="intro" id="intro"></a>Kako oblikovati oznake</h3>
@@ -47,12 +47,12 @@
   <p><a name="naming" id="naming"></a><b>Poimenovanje oznak:</b> Oznake so sestavljene iz enega do treh znakov in števil. Na osnovi enolične številke je mogoče zbrati v skupino tiste oznake, ki spadajo skupaj, oziroma razlikovati med oznakami, ki imajo sicer isto kratico, pa se kljub temu med seboj razlikujejo. Znaki včasih nakazujejo vrsto oblikovanja, ki ga oznaka predstavlja (npr. krepko, ležeče itd.).</p>
 
   <p><a name="numbering" id="numbering"></a><b>Številčenje oznak:</b>Oznake se številči v rastočem vrstnem redu za <strong>skupine oznak</strong>. Pod izrazom "skupine oznak" je razumeti bodisi eno samo oznako (kot recimo <code><font color=
-  "#Fb0000">&lt;br1&gt;</font></code>), ki stojita sama zase, ali dve oznaki, ki tvorita par (kot na primer <code><font color="#Fb0000">&lt;i0&gt;</font></code> in <code><font color="#Fb0000">&lt;/i0&gt;</font></code>). Znotraj segmenta dobi prva skupina (par ali samec) številko <strong>0</strong>, druga številko <strong>1</strong> itd. Prvi primer spodaj ima 3 skupine oznak (par, samca in spet par), drugi primer pa ima eno skupino (par).</p>
+  "#Fb0000">&lt;br1&gt;</font></code>), ki stoji sama zase, ali dve oznaki, ki tvorita par (kot na primer <code><font color="#Fb0000">&lt;i0&gt;</font></code> in <code><font color="#Fb0000">&lt;/i0&gt;</font></code>). Znotraj segmenta dobi prva skupina (samec ali par) številko <strong>0</strong>, druga številko <strong>1</strong> itd. Prvi primer spodaj ima 3 skupine oznak (prvi par, enega samca in  drugi par), drugi primer pa ima eno skupino (par).</p>
 
   <p><a name="pairs" id="pairs"></a><b>Pari in samci:</b> oznake se vedno pojavljajo v parih ali kot samci. <strong>Posamezne oznake</strong> se nanašajo na oblikovalno informacijo, ki ne vpliva na okoliško besedilo (primer za to bi bil dodaten presledek ali pa nova vrstica).</p>
   <pre>
         <strong>&lt;segment 2132&gt;</strong><font color=
-"#Fb0000">&lt;b0&gt;</font>&lt;Ctr+N&gt;<font color=
+"#Fb0000">&lt;b0&gt;</font>&lt;Ctrl+N&gt;<font color=
 "#Fb0000">&lt;/b0&gt;</font>, <font color=
 "#Fb0000">&lt;br1&gt;&lt;b2&gt;</font>&lt;Enter&gt;<font color=
 "#Fb0000">&lt;/b2&gt;</font><strong>&lt;end segment&gt;</strong>
@@ -66,7 +66,7 @@
 </pre>
 
   <p><code><strong><font color="#Fb0000">&lt;b0&gt;</font></strong></code> <font size="3">in</font> <code><strong><font color=
-  "#Fb0000">&lt;/b0&gt;</font></strong></code> sta par, ki vpliva na <code><strong>log.txt</strong></code>.</p>
+  "#Fb0000">&lt;/b0&gt;</font></strong></code> tvorita par, ki vpliva na <code><strong>log.txt</strong></code>.</p>
   <hr>
 
   <h3><a name="tag_segmenting" id="tag_segmenting"></a>Oznake in segmentiranje povedi</h3>
@@ -74,7 +74,7 @@
   <p>OmegaT ustvari oznake, preden začne segmentirati besedilo. Glede na pravila segmentiranja bo morda videti, kot da oznake ne spoštujejo pravil za parjenje in številčenje, ki smo jih opisali zgoraj. Oglejte si tole besedilo:  "<em>Pred: \. Po: \s"</em><font color="#Fb0000">.</font> <font color="#000000">Pričakovati bi bilo segmentiranje, kot sledi (&lt;b0&gt; in &lt;/b0&gt; predstavljata začetek in konec kurzivnih črk):</font></p>
   <pre>
         <strong>&lt;segment ....&gt;</strong> <font color=
-"#Fb0000">&lt;b0&gt;</font>Before: \. Po: \s<font color=
+"#Fb0000">&lt;b0&gt;</font>Pred: \. Po: \s<font color=
 "#Fb0000">&lt;/b0&gt;</font><strong>&lt;end segment&gt;</strong>
 </pre>
 
@@ -123,7 +123,7 @@
 
   <p>Po brisanju:</p>
   <pre>
-        <strong>&lt;segment 0001&gt;</strong>To formatiranje smo zbrisali.<strong>&lt;end segment&gt;</strong>
+        <strong>&lt;segment 0001&gt;</strong>To formatiranje bomozbrisali.<strong>&lt;end segment&gt;</strong>
 </pre>
 
   <p><b>Spreminjanje vrstnega reda v skupinah oznak:</b> Če morate zaradi drugačne stavčne strukture v ciljnem jeziku spremeniti vrstni red oznak, enostavno prestavite skupino oznak na želeno mesto v prevodu. Oblikovanje bo veljalo za besedilo, kamor ste ga prestavili.</p>

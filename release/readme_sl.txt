@@ -79,15 +79,15 @@ V kolikor niste čisto prepričani, vam priporočamo uporabo verzije "standard" 
 
 Uporabniki Linux: vedite, da OmegaT ne bo delala s prostimi ali odprtokodnimi implementacijami Jave, ki jih je najti v številnih distribucijah Linuxa (kot je na primer Ubuntu), ker so ali zastarele ali nepopolne.  Naložite z naslova zgoraj Java Runtime Environment (JRE) podjetja Sun in jo namestite, ali pa naložite in namestite verzijo OmegaT, ki vsebuje JRE (.tar.gz datoteka z oznako "Linux").
 
-Uporabniki Mac: na MacOSX je Java že nameščena.
+Uporabniki Mac: na Mac OS X je Java že nameščena.
 
 Linux na sistemih PowerPC: priskrbeti si morate JRE podjetja IBM, ker SUN Jave za PPC sisteme ne podpira. Prenesete ga lahko z naslova:
     http://www-128.ibm.com/developerworks/java/jdk/linux/download.html 
 
 32. Namestitev
 * uporabniki Windows: poženite enostavno namestitveni program. Če želite, vam namestitveni program tudi pripravi bližnjice za OmegaT.
-* drugi: za namestitev OmegaT si morate samo ustvariti primeren imenik za OmegaT (npr. /usr/local/lib v Linuxu). Prekopirajte arhiv OmegaT zip ali tar.gz 
-'v ta podimenik in ga tu razpakirajte. 
+* drugi: za namestitev OmegaT si morate samo ustvariti ustrezno mapo za OmegaT (npr. /usr/local/lib v Linuxu). Prekopirajte arhiv OmegaT zip ali tar.gz 
+v to mapo in ga tu razpakirajte. 
 
 3.3 Zagon OmegaT
 OmegaT lahko zaženete na celo vrsto načinov.
@@ -99,7 +99,7 @@ To bo šlo samo v primeru, če je na vašem sistemu pripona .jar povezana z Javo
 
 * Z ukazno vrstico. Ukaz, s katerim se požene OmegaT, je:
 
-cd <imenik, v katerem se nahaja datoteka OmegaT.jar>
+cd <mapa, v kateri se nahaja datoteka OmegaT.jar>
 
 <pot in ime programa za izvajanje Jave> -jar OmegaT.jar
 
@@ -117,7 +117,7 @@ Ko ste izbrali ustrezen podmeni, mu dodajte podmeni / element z datoteka - nov p
 
 V polju "Ukaz" poiščite z gumbom za navigacijo vaš skript za zagon OmegaT in ga izberite. 
 
-Kliknite na ikono (desno od polj za ime/opis/komentar) - druge ikone - brskaj, in zakrmarite do podimenika /images v imeniku za aplikacijo OmegaT. Izberite ikono OmegaT.png.
+Kliknite na ikono (desno od polj za ime/opis/komentar) - druge ikone - brskaj, in zakrmarite do podimenika /images v mapi za aplikacijo OmegaT. Izberite ikono OmegaT.png.
 
 Shranite spremembe z datoteka - shrani.
 
@@ -204,7 +204,7 @@ OmegaT uporablja naslednje knjižnice:
 ==============================================================================
  5.  Vas OmegaT spravlja ob živce?  Potrebujete pomoč?
 
-Preden pošljete sporočilo o napaki, se prepričajte, da ste temeljito preverili dokumentacijo.  Lahko da boste tako odkrili kako lastnost OmegaT, ki vam je bila doslej skrita. Če pri pregledu log datoteke OmegaT log naletite na besede,kot so "Error", "Warning", "Exception", ali pa "died unexpectedly", potem ste lahko da naleteli na kaj resnega (datoteka log.txt se nahaja v imeniku z uporabnikovimi nastavitvami, poglejte v priročnik za natančnejšo lokacijo.
+Preden pošljete sporočilo o napaki, se prepričajte, da ste temeljito preverili dokumentacijo.  Lahko da boste tako odkrili kako lastnost OmegaT, ki vam je bila doslej skrita. Če pri pregledu log datoteke OmegaT log naletite na besede,kot so "Error", "Warning", "Exception", ali pa "died unexpectedly", potem ste lahko da naleteli na kaj resnega (datoteka log.txt se nahaja v mapi z uporabnikovimi nastavitvami, poglejte v priročnik za natančnejšo lokacijo.
 
 
 Kot naslednje lahko preverite odkrito nepravilnost z drugimi uporabniki in se prepričate, da napake še ni bila javljena. Ogledate si lahko tudi stran s poročili o napakah na SourceForge. Sporočilo o napaki pošljite samo, če ste prepričani, da ste kot prvi odkrili ponovljivo zaporedje korakov, ki vodijo do nezaželenih oziroma nepričakovanih posledic.
@@ -231,7 +231,5 @@ Včlanite se v Source Forge, da boste lahko zasledovali, kaj se z vašim poroči
 6.   Podatki o izdajah
 
 Podrobne podatke o spremembah v tej in v prejšnjih izdajah najdete v datoteki 'changes.txt'.
-
-
 
 ==============================================================================

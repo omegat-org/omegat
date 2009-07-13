@@ -1,0 +1,64 @@
+<html>
+<head>
+  <link rel="stylesheet" href="OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Konzolni način - priročnik za uporabnika OmegaT 2 </title>
+</head>
+
+<body>
+  <h1>Konzolni način OmegaT</h1>
+
+  <ul>
+    <li>
+      <p><a href="#prerequisites">Predpostavke</a></p>
+    </li>
+
+    <li>
+      <p><a href="#start">Kako začeti v konzolnem načinu</a></p>
+    </li>
+
+    <li>
+      <p><a href="#extra">Dodatne možnosti</a></p>
+
+      <p>&nbsp;</p>
+    </li>
+  </ul>
+
+  <p>Namen konzolnega načina je omogočiti, OmegaT uporabljati kot prevajalno orodje v scripting okolju. Če zaženete OmegaT v konzolnem načinu, se uporabniški vmesnik ne naloži (kar pomeni, da bo delal na katerikoli konzoli) in zahtevani projekt se samodejno prevede.</p>
+
+  <hr>
+
+  <h3><a name="prerequisites" id="prerequisites"></a>Predpostavke</h3>
+
+  <p>Da OmegaT steče, mora biti na razpolago pravilen OmegaT projekt.  Kje se nahaja, ni pomembno, ker je to treba tako ali tako navesti na ukazni vrstici.<p>Če potrebujete spremenjene nastavitve, morajo biti na razpolago tudi ustrezne datoteke s konfiguracijo. To lahko dosežete na dva načina: <ol><li>Poženite OmegaT na običajen način (z uporabniškim vmesnikom) in priredite nastavitve, kot želite.  Že sedaj zaženete OmegaT v konzolnem načinu, bo program uporabljal iste nastavitve. Če Vam OmegaT ni mogoče uporabljati na normalen način ( ker grafično okolje ni na razpolago) </li><li>prekopirajte nastavitvene datoteke z ene od instalacij OmegaT na drugem računalniku Kje se nahaja, ni pomembno, ker je to treba tako ali tako navesti na ukazni vrstici. Pomembni sta datoteki filters.conf in segmentation.conf, ki ju je najti v uporabnikovem domačem imeniku (npr. C:\Dokumenti in nastavitve\<User>\OmegaT pod Windows, <User>/.omegat/ pod Linux)</li></ol></p>
+
+  <h3><a name="start" id="project_location"></a>Kako začeti v konzolnem načinu</h3>
+
+  <p>Za uporabo OmegaT v konzolnem načinu je treba ob začetku navesti nekaj dodatnih parametrov.  Najpomembnejša med njimi sta  <code>&lt;project-dir&gt;</code>, in po želji <code>--config-dir=&lt;config-dir&gt;</code>.<p>Primer: <code>$&gt; java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-translate</code>
+  </p>
+  <p>Pojasnilo:<dl><dt><code>&lt;project-dir&gt;</code></dt>
+  <dd>navede za OmegaT, kje se nahaja projekt, ki ga je treba prevesti.  Če se ga navede, bo OmegaT začel delati v konzolnem načinu in navedeni projekt prevedel. </dd> 
+  <dt><code>--config-dir=&lt;config-dir&gt;</code></dt>
+  <dd>omogoča uporabniku, da za OmegaT navede imenik, v katerem se nahajajo datoteke za konfiguracijo. Če se tega podatka ne navede, bo OmegaT uporabil prednastavljene vrednosti (OmegaT dir pod domačim imenikom uporabnika ali če ta ne obstaja: trenutni imeni, v katerem se dela).</dd>
+  <dt><code>--mode=console-translate</code></dt>
+  <dd> OmegaT začne delati v konzolnem načinu in navedeni projekt prevede. </dl>
+  
+  <h3><a name="extra" id="extra"></a>Dodatne možnosti</h3>
+
+  <p>Dodatno je na razpolago še en parameter za ukazno vrstico, ki je specifičen za konzolni način: <code>--quiet</code>. V tihem načinu program na zaslon izpisuje manj podatkov.  Vsa sporočila, ki se jih običajno vidi v statusni vrstici, se več ne prikazujejo.<br> Uporaba: <code>java -jar OmegaT.jar /path/to/project --quiet</code>
+  </p>
+
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Pravni poduk</a> </td>
+        <td style="text-align: center;"><a href="index.html">Domov</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Kazalo</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

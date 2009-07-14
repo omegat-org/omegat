@@ -1,6 +1,6 @@
 Deze vertaling is het werk van Dick Groskamp, copyright© 2009.
 
-OmegaT 2.0.0, LeesMij-bestand
+OmegaT 2.0, LeesMij-bestand
 
   1.  Informatie over OmegaT
   2.  Wat is OmegaT?

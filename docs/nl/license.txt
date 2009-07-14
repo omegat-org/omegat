@@ -1,5 +1,5 @@
 		    GNU GENERAL PUBLIC LICENSE
-		       Version 2, June 1991
+		       Versie 2, Juni 1991
 
  Copyright (C) 1989, 1991 Free Software Foundation, Inc.
                        59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
@@ -56,8 +56,7 @@ patent must be licensed for everyone's free use or not licensed at all.
   The precise terms and conditions for copying, distribution and
 modification follow.
 
-		    GNU GENERAL PUBLIC LICENSE
-   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+		    TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
   0. This License applies to any program or other work which contains
 a notice placed by the copyright holder saying it may be distributed
@@ -92,7 +91,6 @@ of it, thus forming a work based on the Program, and copy and
 distribute such modifications or work under the terms of Section 1
 above, provided that you also meet all of these conditions:
 
-    a) You must cause the modified files to carry prominent notices
     stating that you changed the files and the date of any change.
 
     b) You must cause any work that you distribute or publish, that in
@@ -293,15 +291,9 @@ the "copyright" line and a pointer to where the full notice is found.
     <one line to give the program's name and a brief idea of what it does.>
     Copyright (C) <year>  <name of author>
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
+    Dit programma is vrije software; u mag het verder verspreiden en/of aanpassen onder de bepalingen van de GNU General Public License zoals die is gepubliceerd door de Free Software Foundation; ofwel versie 2 van die License of (naar uw eigen inzicht) een willekeurige latere versie.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+    Dit programma wordt gedistribueerd in de hoop dat het bruikbaar zal zijn, maar ZONDER ENIGE GARANTIE; zelfs zonder de impliciete garantie voor VERHANDELBAARHEID of GESCHIKTHEID VOOR EEN BEPAALD DOEL.  Kijk in de GNU General Public License voor meer details.
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software

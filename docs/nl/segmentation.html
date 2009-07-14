@@ -40,13 +40,13 @@
     <p><a href="regexp.html">Constructies van reguliere uitdrukkingen</a></p>
   </li>
 </ul>
-<p>Programma's met vertaalgeheugens werken met teksteenheden die segmenten worden genoemd. OmegaT heeft 2 manieren om een tekst te segmenteren: alineasegmentatie en zinsegmentatie. Selecteer <strong>Project → Eigenschappen...</strong> uit het hoofdmenu en gebruik het beschikbare keuzevak om het type van segmentatie te selecteren. Let er op dat alineasegmentatie al aardig gedateerd is en dat voor het grootste deel van de projecten zinsegmentatie de voorkeurskeuze is. Als zinsegmentatie is geselecteerd kunt u de regels instellen door <strong>Opties → Segmentatie...</strong> te selecteren uit het hoofdmenu.</p>
+<p>Programma's met vertaalgeheugens werken met teksteenheden die segmenten worden genoemd. OmegaT heeft 2 manieren om een tekst te segmenteren: alineasegmentatie en zinsegmentatie. Selecteer <strong>Project → Eigenschappen...</strong> uit het hoofdmenu en gebruik het beschikbare keuzevak om het type van segmentatie te selecteren. Let er op dat alineasegmentatie al aardig gedateerd is en dat voor het grootste deel van de projecten zinsegmentatie de voorkeur heeft. Als zinsegmentatie is geselecteerd kunt u de regels instellen door <strong>Opties → Segmentatie...</strong> te selecteren uit het hoofdmenu.</p>
 <p>Merk op dat een groot deel van de ontwikkeling is gaan zitten in het ontwikkelen van betrouwbare segmentatieregels, dus in de meeste gevallen zal het niet nodig zijn om uw eigen segmentatieregels te schrijven. Aan de andere kant kan deze functionaliteit in speciale gevallen bijzonder handig zijn door u toe te staan te vertalen wat vertaald moet worden, zonder daarbij het gevaar te lopen dat wat ongewijzigd moet blijven gewijzigd wordt.</p>
 <p><strong>Waarschuwing!</strong> Wijzigen van de filteropties terwijl een project is geopend, kan leiden tot gegevensverlies. Als u de segmentatie-opties wijzigt als een project geopend is moet u het project herladen vóórdat de wijzigingen effect hebben.</p>
 <hr>
 <h2><a name="structure" id="structure"></a>Segmentatie op structuurniveau</h2>
-<p>OmegaT parst eerst de tekst voor segmentatie op structuur-niveau. Gedurende dit proces wordt alleen de structuur van het brondocument gebruikt om segmenten te maken.</p>
-<p><a href="fileFilters.html#filter_options">Tekstbestanden</a> kunnen bijvoorbeeld gesegmenteerd worden op regeleinden, lege regels of helemaal niet gesegmenteerd worden. Bestanden met opmaak (OpenOffice.org-documenten, HTML-documenten, etc.) worden gesegmenteerd op blokniveau (alinea)tags. Vertaalbare object-<a href="fileFilters.html#filter_options">attributen</a> in XHTML of HTML-bestanden kunnen als afzonderlijke segmenten worden geëxtraheerd.</p>
+<p>OmegaT parst eerst de tekst voor segmentatie op structuurniveau. Gedurende dit proces wordt alleen de structuur van het brondocument gebruikt om segmenten te maken.</p>
+<p><a href="fileFilters.html#filter_options">Tekstbestanden</a> kunnen bijvoorbeeld gesegmenteerd worden op regeleinden, lege regels of helemaal niet gesegmenteerd worden. Bestanden met opmaak (OpenOffice.org-documenten, HTML-documenten, etc.) worden gesegmenteerd op blokniveau (alinea)tags. Vertaalbare object-<a href="fileFilters.html#filter_options">attributen</a> in XHTML- of HTML-bestanden kunnen als afzonderlijke segmenten worden geëxtraheerd.</p>
 <hr>
 <h2><a name="sentence" id="sentence"></a>Segmentatie op zinniveau</h2>
 <p>Nadat het bronbestand in logische eenheden is gesegmenteerd, zal OmegaT deze blokken verder segmenteren in zinnen.</p>
@@ -71,10 +71,9 @@
 <p>Klik eenvoudigweg op een verzameling van regels in de bovenste tabel om die te bewerken of uit te breiden. De regels van de verzameling zullen in het onderste gedeelte van het venster verschijnen.</p>
 <p><font
  color="black" face="Times New Roman" size="3"><span
- style="font-size: 12pt; color: black;" lang="en-US"> </span></font>Klik op <strong>Toevoegen</strong> in het bovenste gedeelte van het dialoogvenster<span style="font-family: Times New Roman;">,</span> om een lege verzameling van regels te maken voor een nieuw taalpatroon. Een lege regel zal aan de onderzijde van de bovenste tabel verschijnen <font color="black"
+ style="font-size: 12pt; color: black;" lang="NL"> </span></font>Klik op <strong>Toevoegen</strong> in het bovenste gedeelte van het dialoogvenster<span style="font-family: Times New Roman;">,</span> om een lege verzameling van regels te maken voor een nieuw taalpatroon. Een lege regel zal aan de onderzijde van de bovenste tabel verschijnen <font color="black"
  face="Times New Roman" size="3"><span
- style="font-size: 12pt; color: black;" lang="en-US">(u moet misschien naar beneden scrollen om die te zien)</span></font>. Wijzig de naam van de regelverzameling en het taalpatroon. De syntaxis van het taalpatroon komt overeen met de syntaxis voor &lt;a1&gt;reguliere uitdrukkingen&lt;/a1&gt;. Als uw regelverzameling een taal/land-paar betreft raden wij u aan om het naar boven te verplaatsen met de knop <span
- style="font-size: 12pt; color: black;" lang="en-US">Naar boven</span>.&nbsp;</p>
+ style="font-size: 12pt; color: black;" lang="NL">(u moet misschien naar beneden scrollen om die te zien)</span></font>. Wijzig de naam van de regelverzameling en het taalpatroon. De syntaxis van het taalpatroon komt overeen met de syntaxis voor <a href="regexp.html">reguliere uitdrukkingen</a>. Als uw regelverzameling een taal/land-paar betreft raden wij u aan om het naar boven te verplaatsen met de knop <strong>Naar boven</strong>.&nbsp;</p>
 <h3><a name="break" id="break"></a>Afbreken/Uitzondering</h3>
 <p>Het keuzevak Afbreken/Uitzondering bepaalt of het een afbreekregel (keuzevak geselecteerd) of een uitzonderingsregel is (keuzevak niet geselecteerd). Twee reguliere uitdrukkingen Voor en Na specificeren wat er voor en na een bepaalde positie staat zodat het voldoet aan de uitzonderingsregel of de afbreekregel.</p>
 <h3><a name="examples" id="examples"></a>Een paar eenvoudige voorbeelden</h3>
@@ -136,7 +135,7 @@
     </tr>
     <tr bgcolor="#dddddd">
       <td width="26%">
-      <p>niet segmenteren na M. Mr\. Mrs. en Ms.</p>
+      <p>niet segmenteren na M. Mr. Mrs. en Ms.</p>
       </td>
       <td>
       <p><code>Mr??s??\.</code></p>

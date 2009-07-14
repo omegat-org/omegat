@@ -107,13 +107,48 @@ public class StarDict implements IDictionary {
                 int bodyOffset = idx.readInt();
                 int bodyLength = idx.readInt();
                 String text = readArticleText(dataBytes, bodyOffset, bodyLength);
-                result.put(key, text);
+                addArticle(key, text, result);
             } else {
                 mem.write(b);
             }
         }
 
         return result;
+    }
+
+    /**
+     * Add new article to dictionary map. If article for this words was already
+     * read, it create array with all articles instead one article, and add new
+     * article to this array. It required to support multiple translations for
+     * one word in dictionary.
+     * 
+     * @param key
+     *            translated word
+     * @param text
+     *            translation article
+     * @param result
+     *            result map
+     */
+    private void addArticle(final String key, final String text,
+            final Map<String, Object> result) {
+        Object data = result.get(key);
+        if (data == null) {
+            data = text;
+        } else {
+            if (data instanceof String[]) {
+                String[] dobj = (String[]) data;
+                String[] d = new String[dobj.length + 1];
+                System.arraycopy(dobj, 0, d, 0, dobj.length);
+                d[d.length - 1] = text;
+                data = d;
+            } else {
+                String[] d = new String[2];
+                d[0] = (String) data;
+                d[1] = text;
+                data = d;
+            }
+        }
+        result.put(key, data);
     }
 
     /**

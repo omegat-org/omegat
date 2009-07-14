@@ -183,8 +183,15 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
                         data = di.info.get(word);
                     }
                     if (data != null) {
-                        String a = di.dict.readArticle(word, data);
-                        result.add(new DictionaryEntry(word, a));
+                        if (data.getClass().isArray()) {
+                            for (Object d : (Object[]) data) {
+                                String a = di.dict.readArticle(word, d);
+                                result.add(new DictionaryEntry(word, a));
+                            }
+                        } else {
+                            String a = di.dict.readArticle(word, data);
+                            result.add(new DictionaryEntry(word, a));
+                        }
                     }
                 } catch (Exception ex) {
                     Log.log(ex);

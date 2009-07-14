@@ -73,6 +73,7 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
         super(true);
 
         setContentType("text/html");
+        ((HTMLDocument)getDocument()).setPreservesUnknownTags(false);
 
         // setEditable(false);
         String title = OStrings

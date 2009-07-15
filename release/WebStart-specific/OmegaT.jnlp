@@ -39,6 +39,10 @@
 				<jar href="MRJAdapter.jar" />
 				<jar href="swing-layout-1.0.jar" />
 				<jar href="vldocking_2.1.4.jar" />
+				<jar href="activation.jar" />
+				<jar href="jaxb-api.jar" />
+				<jar href="jaxb-impl.jar" />
+				<jar href="jsr173_1.0_api.jar" />
 			</resources>
 			<resources os="Windows">
 				<nativelib href="hunspell-win.jar" />

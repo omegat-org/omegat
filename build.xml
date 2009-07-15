@@ -143,7 +143,7 @@
     </target>
 
     <!-- Copies all files to dist -->
-    <target name="release">
+    <target name="release" depends="docindexgen">
         <mkdir dir="dist"/>
         <copy todir="dist">
             <fileset dir="release" includes="*" excludes="readme.txt *-specific l10n-project"/>
@@ -271,7 +271,7 @@
     <!-- Builds all OmegaT products -->
     <target name="all" depends="l10n-pack,src,jar,zip,win, linux" />
 
-	<target name="gen" depends="jar">
+	<target name="gen">
 		<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
 			<classpath>
 				<fileset dir="lib" includes="**/*.jar" />
@@ -280,19 +280,21 @@
 		</taskdef>
 
 		<xjc schema="src/schemas/srx20.xsd" destdir="src" package="gen.core.segmentation" />
-		
-		<mkdir dir="build/genclasses"/>
+	</target>
+
+	<target name="docindexgen" depends="jar">
+		<mkdir dir="build/genclasses" />
 		<javac srcdir="gen/src" destdir="build/genclasses">
 			<classpath>
 				<fileset dir="lib" includes="**/*.jar" />
-				<pathelement path="build/classes"/>
+				<pathelement path="build/classes" />
 			</classpath>
 		</javac>
-		
+
 		<java classname="util.CreateDocIndexUtil">
 			<classpath>
-				<pathelement path="build/genclasses"/>
-					<pathelement path="build/classes"/>
+				<pathelement path="build/genclasses" />
+				<pathelement path="build/classes" />
 			</classpath>
 		</java>
 	</target>

@@ -1,224 +1,436 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Fitxers i directoris - Manual d'usuari de l'OmegaT 1.7.3</title>
+  <link rel="stylesheet" href="OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Fitxers i directoris - Manual d'usuari de l'OmegaT 1.8</title>
 </head>
+
 <body>
+  <h1>Fitxers i directoris de l'OmegaT</h1>
 
-	<h1>Fitxers i directoris de l'OmegaT</h1>
+  <ul>
+    <li>
+      <p><a href="#project">Fitxers del projecte de traducció</a></p>
+    </li>
 
-	<ul>
-		<li><a href="#project">Fitxers del projecte de traducció</a>
-			<ul>
-				<li><a href="#project_location">Ubicació dels fitxers del projecte</a></li>
-				<li><a href="#project_list">Llista dels fitxers del projecte</a></li>
-			</ul>
-		</li>
-		<li><a href="#user">Fitxers de l'usuari</a>
-			<ul>
-				<li><a href="#user_location">Ubicació dels fitxers de l'usuari</a></li>
-				<li><a href="#user_list">Llista dels fitxers de l'usuari</a></li>
-			</ul>
-		</li>
-		<li><a href="#application">Fitxers de l'aplicació</a>
-			<ul>
-				<li><a href="#application_list">Llista dels fitxers de l'aplicació</a></li>
-			</ul>
-		</li>
-	</ul>
+    <li>
+      <p><a href="#user">Fitxers de l'usuari</a></p>
+    </li>
 
-	<p>L'OmegaT treballa amb tres tipus de fitxers.</p>
+    <li>
+      <p><a href="#application">Fitxers de l'aplicació</a></p>
 
-	<dl>
-		<dt>Fitxers del projecte de traducció</dt><dd>Formen un projecte de traducció. Si els perdeu, pot afectar la integritat del projecte i la capacitat d'acabar una feina. Els fitxers del projecte són els fitxers més importants de l'OmegaT. Són els fitxers amb els quals treballareu diàriament durant la traducció.</dd>
-		<dt>Fitxers de configuració de l'usuari</dt><dd>Es creen quan modifiqueu el comportament de l'OmegaT mitjançant la configuració de preferències, accessible per a l'usuari. Si els perdeu, normalment farà que l'OmegaT torni a la configuració per defecte. A vegades, això pot provocar algun problema si us trobeu enmig d'una traducció.</dd>
-		<dt>Fitxers de l'aplicació</dt><dd>S'inclouen amb el paquet que heu baixat, i la majoria són necessaris per tal que l'OmegaT funcioni correctament. Si per algun motiu es perden aquests fitxers, baixeu l'OmegaT i torneu-lo a instal·lar per a restaurar-los.</dd>
-	</dl>
+      <p>&nbsp;</p>
+    </li>
+  </ul>
 
-<hr>
+  <p>L'OmegaT treballa amb tres tipus de fitxers.</p>
 
-	<a name="project"></a>
-	<h1>Fitxers del projecte de traducció</h1>
+  <ul>
+    <li>Fitxers del projecte de traducció: Formen un projecte de traducció. Si els perdeu, pot afectar la integritat del projecte i la capacitat d'acabar una feina. Els fitxers del projecte són els fitxers més importants de l'OmegaT. Són els fitxers amb els quals treballareu diàriament durant la traducció.</li>
 
-	<p>Un projecte de traducció de l'OmegaT està format per una sèrie de fitxers i directoris.</p>
+    <li>Fitxers de configuració de l'usuari: Es creen quan modifiqueu el comportament de l'OmegaT mitjançant la configuració de preferències, accessible per a l'usuari. Si els perdeu, normalment farà que l'OmegaT torni a la configuració per defecte. A vegades, això pot provocar algun problema si us trobeu enmig d'una traducció.</li>
 
-	<a name="project_location"></a>
-	<h2>Ubicació dels fitxers del projecte de traducció</h2>
+    <li>Fitxers de l'aplicació: S'inclouen amb el paquet que heu baixat, i la majoria són necessaris per tal que l'OmegaT funcioni correctament. Si per algun motiu es perden aquests fitxers, baixeu l'OmegaT i torneu-lo a instal·lar per tal de restaurar-los.</li>
+  </ul>
+  <hr>
 
-	<p>Quan creeu un projecte de traducció, l'OmegaT automàticament crea una llista de directoris, que més endavant servirà de dipòsit de fitxers, així com una sèrie de fitxers que s'utilitzaran per a establir algunes preferències del projecte i per a mantenir la memòria de traducció del projecte.</p>
+  <h3><a name="project" id="project"></a>Fitxers del projecte de traducció</h3>
 
-	<p>Per defecte, els directoris d'un projecte de traducció es troben agrupats dins d'un directori de projecte principal. Podeu escollir altres ubicacions alternatives per als directoris durant la creació del projecte o durant la traducció. D'aquesta manera, és possible seleccionar directoris ja existents o crear directoris en ubicacions que reflecteixin la vostra manera de treballar.</p>
+  <p>Un projecte de traducció de l'OmegaT està format per una sèrie de fitxers i directoris.</p>
 
-	<p>Per a canviar la ubicació dels directoris un cop ja heu <a href="instantStartGuide.html#create">creat</a> el projecte, seleccioneu <strong>Projecte → Propietats...</strong> i feu els <a href="projectProperties.html">canvis </a> necessaris.</p>
+  <h3><a name="project_location" id="project_location"></a>Ubicació dels fitxers del projecte de traducció</h3>
 
-	<a name="project_list"></a>
-	<h2>Llista dels fitxers del projecte de traducció</h2>
+  <p>Quan creeu un projecte de traducció, l'OmegaT automàticament crea una llista de directoris, que més endavant servirà de dipòsit de fitxers, així com una sèrie de fitxers que s'utilitzaran per establir algunes preferències del projecte i per mantenir la memòria de traducció del projecte. Per defecte, els directoris d'un projecte de traducció es troben agrupats dins d'una carpeta de projecte principal. Podeu escollir altres ubicacions alternatives per als directoris durant la creació del projecte o durant la traducció. D'aquesta manera, és possible seleccionar directoris ja existents o crear directoris en ubicacions que reflecteixin la vostra manera de treballar. Per canviar la ubicació dels directoris un cop ja heu creat el projecte, seleccioneu <strong>Projecte → Propietats...</strong> i feu els canvis necessaris.</p>
 
-	<p>Vist amb un navegador de fitxers, un projecte de traducció es veu igual que un directori normal i corrent. Des dels diàlegs de l'OmegaT, un projecte de traducció es mostra com un fitxer amb una icona de l'OmegaT associada. A l'OmegaT no li cal entrar dins la jerarquia del projecte per a obrir-lo. N'hi ha prou amb seleccionar l'element amb la icona de l'OmegaT.<p>Un projecte de traducció creat amb la configuració per defecte tindrà l'estructura següent:</p>
+  <h3><a name="project_list" id="project_list"></a>Llista dels fitxers del projecte de traducció</h3>
 
-	<dl>
-		<dt>/nom_projecte/</dt>
-		<dd>
-			<dl>
-				<dt>/omegat/</dt>
-				<dd>
-					<dl>
-						<dt>project_save.tmx (<a href="translationMemories.html">...</a>)</dt>
-						<dd>Aquest fitxer TMX es crea la primera vegada que deseu el projecte. Es tracta de la memòria de traducció de treball per al projecte. Amb la funció de desament automàtic implementada, s'actualitzarà automàticament en sortir de l'OmegaT. És la memòria de traducció que s'utilitzarà per a crear els fitxers traduïts.</dd>
-						<dt>project_save.tmx.AAAAMMDDHHNN.bak (<a href="translationMemories.html#TMX_backup">...</a>)</dt>
-						<dd>Aquí també es crearan una sèrie de fitxers TMX que segueixen aquest patró. Es tracta d'una còpia de seguretat del fitxer <strong>project_save.tmx</strong> i se'n crea una cada vegada que obriu un projecte, per tal que hi hagi una còpia de seguretat del contingut del fitxer <strong>project_save.tmx</strong> abans que es faci cap possible canvi que modifiqui aquest fitxer.</dd>
-						<dt>project_stats.txt (<a href="userInterface.html#files">...</a>)</dt>
-						<dd>Aquest fitxer de text es pot obrir en una aplicació de full de càlcul i conté informació de recompte de paraules i de segments. La informació és més detallada que la que es mostra a la finestra Fitxers del projecte.</dd>
-					</dl>
-				</dd>
-				<dt>/source/</dt>
-				<dd>Conté els <a href="filesToTranslate.html">fitxers</a> que s'inclouran al projecte i que cal traduir. Aquí hi podeu incloure tant fitxers com subdirectoris amb més fitxers o més subdirectoris.</dd>
-				<dt>/target/</dt>
-				<dd>Si hi ha un projecte obert, en seleccionar <strong>Projecte → Crea els documents traduïts</strong> tots els fitxers del directori <strong>/source/</strong>, tant si s'han traduït com si no, es reproduiran aquí amb la mateixa jerarquia de directoris per tal de reflectir l'estat actual de la traducció. En termes pràctics, l'OmegaT fusiona la informació de traducció desada a <strong>/omegat/project_save.tmx</strong> amb els documents de partida per a generar el contingut de <strong>/target/</strong>.</dd>
-				<dt>/tm/</dt>
-				<dd>En aquest directori hi heu de col·locar qualsevol <a href="translationMemories.html">memòria de traducció</a> externa que voleu utilitzar abans de carregar el projecte.</dd>
-				<dt>/glossary/</dt>
-				<dd>Conté els <a href="glossaries.html">fitxers de glossari</a> que voleu utilitzar. Els fitxers de glossari s'han de col·locar en aquest directori abans d'obrir el projecte.</dd>
-				<dt>omegat.project</dt>
-				<dd>L'OmegaT crea aquest fitxer automàticament en crear el projecte. Conté els <a href="projectProperties.html">paràmetres del projecte</a>. Els paràmetres que inclou aquest fitxer es poden modificar des de la finestra de propietats del projecte.</dd>
-				<dt>nom_projecte-omegat.tmx (<a href="translationMemories.html#TMX_files_location_and_purpose">...</a>)<br> nom_projecte-level1.tmx<br> nom_projecte-level2.tmx</dt>
-				<dd>Aquests fitxers contenen els segments de partida i els segments traduïts, que corresponen al contingut de la carpeta /source/ en el moment que es va crear (generalment en crear els fitxers traduïts).</dd>
-			</dl>
-		</dd>
-	</dl>
+  <p>Al diàleg de fitxer que obre l'OmegaT, un projecte de traducció es mostra com un fitxer amb una icona de l'OmegaT associada. Vist amb un navegador de fitxers, un projecte de traducció es veu igual que una carpeta normal i corrent.</p>
 
-<hr>
+  <p><br></p><img src="images/OmegaT_projects_and_subdirectories.png" name=
+  "grafika3" alt="Projectes i subdirectoris de l'OmegaT" align="left" border="1"
+  id="grafika3"><br clear="left">
 
-	<a name="user"></a>
-	<h1>Fitxers de l'usuari</h1>
+  <p><br>
+  <br></p>
 
-	<a name="user_location"></a>
-	<h2>Ubicació dels fitxers de l'usuari</h2>
+  <p>Per obrir un projecte de traducció, simplement cal seleccionar l'element amb la icona de l'OmegaT. Un projecte de traducció <b>Exemple_Projecte</b> creat amb la configuració per defecte es crearà com a una subcarpeta nova amb l'estructura següent:</p>
 
-	<p>A partir de l'OmegaT 1.6, els fitxers de l'usuari es desen en una ubicació separada, per tal que qualsevol versió de l'OmegaT hi pugui accedir. La ubicació depèn de la plataforma que utilitzeu:</p>
+  <p>&nbsp;</p>
 
-	<dl>
-		<dt>Windows:</dt>
-		<dd><strong>C:\Documentation and Settings\&lt;nom d'usuari&gt;\Application Data\OmegaT</strong>. La part d'abans del &lt;nom d'usuari&gt; pot ser diferent en alguns sistemes.  El camí complet de les dades d'aplicacions es por obtenir a partir de la variable d'entorn %APPDATA%.</dd>
-		<dt>Linux/Solaris/FreeBSD:</dt>
-		<dd><strong>&lt;directori de l'usuari&gt;/.omegat</strong> (.omegat és un directori; el punt del principi fa que no es mostri si no escriviu <code>ls -a</code> o una ordre equivalent).</dd>
-		<dt>MacOSX:</dt>
-		<dd><strong>&lt;directori de l'usuari&gt;/Library/Preferences/OmegaT</strong></dd>
-	</dl>
+  <ul>
+    <li><img src="images/Omegatproject.png" name="grafika1" alt=
+    "Projecte de l'OmegaT" align="left" border="0" id="grafika1"><br clear=
+    "left"></li>
+  </ul>En iniciar un projecte nou, la subcarpeta dels glossaris (<b>glossary</b>) serà buida. Aquí s'hi col·loquen els glossaris, si en teniu algun disponible per al projecte.<h3>Omegat</h3>
 
+  <dl>
+    <dt>La subcarpeta <b>omegat</b> contindrà com a mínim dos fitxers: el fitxer de memòria de traducció <em>project_save.tmx</em> (<a href="translationMemories.html">...</a>) i el fitxer d'estadístiques <em>project_stats.txt (<a href=
+    "userInterface.html#files">...</a>)</em>. El fitxer <em>project_save.tmx</em> és la memòria de traducció de treball per al projecte. Amb la funció de desament automàtic activada, s'actualitzarà automàticament en sortir de l'OmegaT. És la memòria de traducció que s'utilitzarà per crear els fitxers traduïts. En aquesta subcarpeta, posteriorment també s'hi aniran afegint una sèrie de fitxers TMX anomenats project_save.tmx.<i>&lt;data i hora</i>&gt;.bak (<a href=
+    "translationMemories.html#TMX_backup">...</a>). Són còpies de seguretat de la memòria de traducció del projecte. Se'n crea una cada vegada que obriu un projecte, que reflecteix el contingut de la memòria abans que la sessió actual la modifiqui</dt>
 
-	<a name="user_list"></a>
-	<h2>Llista dels fitxers de l'usuari</h2>
+    <dd>El fitxer <b>stats.txt</b> conté les estadístiques del projecte actual; es pot obrir en una aplicació de full de càlcul i conté informació de recompte de paraules i de segments. La informació és més detallada que la que es mostra a la finestra <em>Fitxers del projecte</em>.</dd>
 
-	<p>Els fitxers de l'usuari són:</p>
+    <dd><br clear="left">Els fitxers <strong>ignored_words.txt</strong> i <strong>learned_words.txt</strong> són fitxers reservats per al verificador ortogràfic en versions posteriors de l'OmegaT.</dd>
+  </dl>
 
-	<dl>
-		<dt>log.txt</dt>
-		<dd>En aquest fitxer s'hi registren els missatges d'error del Java mentre s'està executant l'OmegaT. Si creieu que l'OmegaT està funcionant incorrectament, és important que inclogueu aquest fitxer o la part rellevant en qualsevol <a href="website.html">informe d'error</a>.</dd>
-		<dt>omegat.prefs</dt>
-		<dd>Es tracta d'un fitxer XML. Conté la configuració de totes les opcions a les quals podeu accedir mitjançant la GUI, així com les dades de posició de la finestra.</dd>
-		<dt>filters.conf</dt>
-		<dd>Es tracta d'un fitxer XML. Conté totes les dades que s'han definit a les preferències dels <a href="fileFilters.html">filtres de fitxers</a>.</dd>
-		<dt>segmentation.conf</dt>
-		<dd>Es tracta d'un fitxer XML. Conté totes les dades que s'han definit a les preferències de la <a href="segmentation.html">segmentació per frases</a>.</dd>
-	</dl>
+  <h3>Source</h3>
 
-<hr>
+  <dl>
+    <dt>La subcarpeta source conté els fitxers que voleu traduir. Podeu especificar una subcarpeta nova i afegir els fitxers al projecte més tard des de la finestra Fitxers del projecte. L'estructura de la carpeta source pot ser qualsevol. Si els fitxers que voleu traduir formen part d'una estructura d'arbre, tan sols cal que n'especifiqueu la carpeta superior i l'OmegaT copiarà tots els fitxers i mantindrà l'estructura d'arbre intacta.</dt>
+  </dl>
 
-	<a name="applications"></a>
-	<h1>Fitxers de l'aplicació</h1>
+  <h3>Target</h3>
 
-	<p>L'OmegaT es distribueix com un paquet que podeu baixar des de SourceForge. En aquest capítol, es farà referència al <a href="installingAndRunning.html#Other_systems">paquet independent de la plataforma</a> que conté la aplicació en un format Java estàndard. Els altres paquets inclouen un paquet <code>.tar</code> per al Linux, un instal·lador per al Windows -amb un entorn d'execució de Java o sense-, un instal·lador per al MacOSX i un paquet amb el codi font per als desenvolupadors.</p>
-	
-	<p>Aquest paquet independent de la plataforma es pot utilitzar en <strong>qualsevol</strong> plataforma que tingui instal·lat un entorn d'execució de Java 1.4.2, que també inclou les plataformes per a les quals hi ha un paquet específic.</p>
+  <dl>
+    <dd>Si hi ha un projecte obert, en seleccionar <strong>Projecte → Crea els documents traduïts</strong> tots els fitxers de la carpeta <strong>/source/</strong>, tant si s'han traduït com si no, es reproduiran aquí amb la mateixa jerarquia de carpetes per tal de reflectir l'estat actual de la traducció. En termes pràctics, l'OmegaT fusiona la informació de traducció desada a <strong>/omegat/project_save.tmx</strong> amb els documents de partida per tal de generar el contingut de <strong>/target/</strong>.</dd>
+  </dl>
 
-	<p>El paquet independent de la plataforma es distribueix com un fitxer comprimit que, per a instal·lar-lo, heu de descomprimir al directori que vulgueu. Generalment, podeu descomprimir-lo fent doble clic al paquet que heu baixat. Un cop descomprimit, s'haurà creat un directori que conté els fitxers relacionats amb l'OmegaT.</p>
+  <h3>Tm</h3>
 
-	<dl>
-		<dt>Fitxer baixat:</dt>
-		<dd>OmegaT_1.7.3_Without_JRE.zip</dd>
-		<dt>Directori descomprimit:</dt>
-		<dd>/OmegaT_1.7.3_Without_JRE/</dd>
-	</dl>
+  <dl>
+    <dd>En aquesta subcarpeta s'hi poden col·Locar les memòries de traducció corresponents a traduccions anteriors. Cal que tinguin el format <b>tmx</b>. Utilitzeu les eines disponibles per tal de transformar-les des d'altres formats. Tingueu en compte que project_save.tmx és la memòria de traducció, que conté el text de partida i la corresponent traducció. No obstant, podeu utilitzar memòries de traducció antigues per tal de trobar els candidats més idonis per als segments sense traduir.</dd>
+  </dl>
 
-	<a name="application_list"></a>
-	<h2>Llista dels fitxers de l'aplicació</h2>
+  <h3>omegat.project</h3>
 
-	<p>El directori de l'OmegaT conté els fitxers següents:</p>
+  <dl>
+    <dd>L'OmegaT crea aquest fitxer automàticament en crear el projecte. Conté els <a href=
+    "projectProperties.html">paràmetres del projecte</a>. Els paràmetres que inclou aquest fitxer es poden modificar des de la finestra de propietats del projecte.</dd>
 
-	<dl>
-		<dt>/OmegaT_1.7.3_Without_JRE/</dt>
-		<dd>
-			<dl>
-				<dt>/docs/</dt>
-				<dd>Conté tots els fitxers del manual d'usuari. Podeu obrir-los en un navegador web per a accedir als enllaços externs.</dd>
-			</dl>
-		</dd>
-		<dd>
-			<dl>
-				<dt>/images/</dt>
-				<dd>Conté les icones i els gràfics del logotip.</dd>
-			</dl>
-		</dd>
-		<dd>
-			<dl>
-				<dt>/lib/</dt>
-				<dd>Conté els fitxers del Java. Són necessaris per tal que l'OmegaT funcioni correctament.</dd>
-			</dl>
-		</dd>
-		<dd>
-			<dl>
-				<dt>join.html</dt>
-				<dd>Es tracta d'un fitxer HTML normal que, en obrir-lo amb el navegador web, us redirigirà al grup d'usuaris de l'OmegaT del Yahoo Groups. Tot i que no cal que us hi subscriviu, si ho feu podreu accedir a alguns serveis addicionals, com l'accés a alguns fitxers i a enquestes, i també podreu participar als debats relacionats amb l'OmegaT. L'arxiu de missatges del grup és públic i per a consultar-lo no cal que us hi subscriviu.</dd>
-			</dl>
-		</dd>
-		<dd>
-			<dl>
-				<dt>changes.txt</dt>
-				<dd>Un fitxer que conté una llista detallada de les modificacions realitzades entre aquesta versió i les anteriors.</dd>
-			</dl>
-		</dd>
-		<dd>
-			<dl>
-				<dt>license.txt</dt>
-				<dd>La Llicència Pública General GNU. Aquesta llicència us permet fer diverses coses amb l'OmegaT, incloses la modificació i la distribució. Si esteu interessat en modificar o distribuir l'OmegaT, llegiu detingudament aquest document i assegureu-vos que, abans de fer res, en coneixeu totes les implicacions. En cas de dubte, pregunteu als membres del projecte directament enviant-los un missatge de correu des de la pàgina de SourceForge o enviant un missatge de correu públic al grup d'usuaris.</dd>
-			</dl>
-		</dd>
-		<dd>
-			<dl>
-				<dt>doc-license.txt</dt>
-				<dd>La Llicència Pública General GNU. Aquesta llicència cobreix la documentació. Vegeu-ne la descripció més amunt.</dd>
-			</dl>
-		</dd>
-		<dd>
-			<dl>
-				<dt>readme.txt</dt>
-				<dd>Aquest fitxer és molt important i cal que el llegiu abans d'iniciar l'OmegaT. Conté informació general sobre l'OmegaT, on podeu trobar més informació, com hi podeu contribuir, etc. Aquest fitxer s'ha traduït a diverses llengües.</dd>
-			</dl>
-		</dd>
-		<dd>
-			<dl>
-				<dt>OmegaT</dt>
-				<dd>Es tracta d'un fitxer de text que conté dues línies:<br> <code>#!/bin/bash</code><br> <code>java -jar OmegaT.jar $*</code><br> Aquest fitxer us pot ser útil si el convertiu en executable (<code>chmod +x OmegaT</code>) des de la <a href="installingAndRunning.html#command_line">línia d'ordres</a> i dins del directori <code>/OmegaT_1.7.3/</code>. A partir d'aquest moment, podreu iniciar l'OmegaT cridant aquest fitxer des de la línia d'ordres.</dd>
-			</dl>
-		</dd>
-		<dd>
-			<dl>
-				<dt>OmegaT.bat</dt>
-				<dd>Es tracta d'un fitxer de text que conté una línia:<br> <code>java -jar OmegaT.jar %*</code><br> S'utilitza per a executar l'OmegaT des de la <a href="installingAndRunning.html#command_line">línia d'ordres</a> del Windows.</dd>
-			</dl>
-		</dd>
-		<dd>
-			<dl>
-				<dt>OmegaT.jar</dt>
-				<dd>Aquest fitxer és l'aplicació principal. Per a executar l'OmegaT, o bé crideu aquest fitxer des de la línia d'ordres o executeu-lo des del gestor de fitxers (normalment, fent-hi doble clic).</dd>
-			</dl>
-		</dd>
-	</dl>
+    <dt>nom_projecte-omegat.tmx (<a href=
+    "translationMemories.html#TMX_files_location_and_purpose">...</a>)<br> nom_projecte-level1.tmx<br> nom_projecte-level2.tmx</dt>
 
-<hr>
+    <dd>Aquests fitxers contenen els segments de partida i els segments traduïts, que corresponen al contingut de la carpeta /source/ en el moment que es va crear (generalment en crear els fitxers traduïts).</dd>
+  </dl>
+  <hr>
 
-	<p><a href="legalNotices.html">Avisos legals</a></p>
+  <h3><a name="user" id="user"></a>Fitxers de l'usuari</h3>
+
+  <h3><a name="user_location" id="user_location"></a>Ubicació dels fitxers de l'usuari</h3>
+
+  <p>Els fitxers de l'usuari es desen en una ubicació separada, per tal que qualsevol versió de l'OmegaT hi pugui accedir. La ubicació depèn de la plataforma que utilitzeu:</p>
+
+  <table width="100%" border="1" cellpadding="4" cellspacing="0">
+    <col width="33*">
+    <col width="223*">
+
+    <tr valign="top">
+      <td width="13%">
+        <p>Windows</p>
+      </td>
+
+      <td width="87%">
+        <dl>
+          <dd><strong>2000 i XP: Documents and Settings\&lt;nom d'usuari&gt;\Application Data\OmegaT</strong></dd>
+          <dd><strong>Vista: Users\&lt;nom d'usuari&gt;\AppData\Roaming\OmegaT</strong>
+          <dd><strong>Altres: &lt;ubicació&gt;\OmegaT</strong> (&lt;ubicació&gt; és la ubicació de la carpeta "home" configurada per al Java).</dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="13%">
+        <dl>
+          <dt>
+          Linux/Solaris/FreeBSD</dt>
+        </dl>
+      </td>
+
+      <td width="87%">
+        <dl>
+          <dd><strong>&lt;directori de l'usuari&gt;/.omegat</strong> (.omegat és un directori; el punt del principi fa que no es mostri si no escriviu <code>ls -a</code> o una ordre equivalent).</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="13%">
+        <dl>
+          <dt>MacOSX</dt>
+        </dl>
+      </td>
+
+      <td width="87%">
+        <dl>
+          <dd><strong>&lt;directori de l'usuari&gt;/Library/Preferences/OmegaT</strong></dd>
+        </dl>
+      </td>
+    </tr>
+    
+    <tr valign="top">
+      <td width="13%">
+        <dl>
+          <dt>Altres</dt>
+        </dl>
+      </td>
+
+      <td width="87%">
+        <dl>
+          <dd><strong>&lt;directori de l'usuari&gt;</strong></dd>
+        </dl>
+      </td>
+    </tr>
+ 
+  </table>
+
+  <h3><a name="user_list" id="user_list"></a>Llista dels fitxers de l'usuari<br></h3>
+
+  <table width="100%" border="1" cellpadding="4" cellspacing="0">
+    <col width="27*">
+    <col width="229*">
+
+    <tr valign="top">
+      <td width="11%">
+        <dl>
+          <dt>log.txt</dt>
+        </dl>
+      </td>
+
+      <td width="89%">
+        <dl>
+          <dd>En aquest fitxer s'hi registren els missatges d'error del Java mentre s'està executant l'OmegaT. Si creieu que l'OmegaT està funcionant incorrectament, és important que inclogueu aquest fitxer o la part rellevant en qualsevol <a href="website.html">informe d'error</a>.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="11%">
+        <dl>
+          <dt>omegat.prefs</dt>
+        </dl>
+      </td>
+
+      <td width="89%">
+        <dl>
+          <dd>Fitxer XML que conté la configuració de totes les opcions a les quals podeu accedir mitjançant la GUI, així com les dades de posició de la finestra.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="11%">
+        <dl>
+          <dt>filters.conf</dt>
+        </dl>
+      </td>
+
+      <td width="89%">
+        <dl>
+          <dd>Fitxer XML que conté totes les dades que s'han definit a les preferències dels <a href="fileFilters.html">filtres de fitxers</a>.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="11%">
+        <dl>
+          <dt>
+          segmentation.conf</dt>
+        </dl>
+      </td>
+
+      <td width="89%">
+        <dl>
+          <dd>Fitxer XML que conté totes les dades que s'han definit a les preferències de la <a href="segmentation.html">segmentació per frases</a>.</dd>
+        </dl>
+      </td>
+    </tr>
+  </table>
+
+  <p><br>
+  <br></p>
+  <hr>
+
+  <h3><a name="application" id="application"></a>Fitxers de l'aplicació</h3>
+
+  <p>L'OmegaT es distribueix com un paquet que podeu baixar des de SourceForge. En aquest capítol, es farà referència al <a href=
+  "installingAndRunning.html#Other_systems">paquet independent de la plataforma</a> que conté l'aplicació en un format Java estàndard. Els altres paquets inclouen un paquet <code>.tar</code> per al Linux, un instal·lador per al Windows -amb un entorn d'execució de Java o sense-, un instal·lador per al MacOSX i un paquet amb el codi font per als desenvolupadors. Aquest paquet independent de la plataforma es pot utilitzar en <strong>qualsevol</strong> plataforma que tingui instal·lat un entorn d'execució de Java 1.4.2, que també inclou les plataformes per a les quals hi ha un paquet específic. El paquet independent de la plataforma es distribueix com un fitxer comprimit que, per instal·lar-lo, heu de descomprimir a la carpeta que vulgueu. Generalment, podeu descomprimir-lo fent doble clic al paquet que heu baixat. Un cop descomprimit, s'haurà creat una carpeta amb el següent contingut:</p>
+
+  <table width="100%" border="1" cellpadding="4" cellspacing="0">
+    <col width="19*">
+    <col width="237*">
+
+    <tr valign="top">
+      <td width="8%">
+        <p><b>Fitxer/<br> subcarpeta</b></p>
+      </td>
+
+      <td width="92%">
+        <p><b>Contingut</b></p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">/docs/</td>
+
+      <td width="92%">
+        <dl>
+          <dt>Conté tots els fitxers del manual d'usuari. Podeu obrir-los en un navegador web per accedir als enllaços externs.</dt>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>/images/</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dd>Conté les icones i els gràfics del logotip.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>/lib/</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dd>Conté els fitxers del Java. Són necessaris per tal que l'OmegaT funcioni correctament.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>join.html</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dd>Es tracta d'un fitxer HTML normal que, en obrir-lo amb el navegador web, us redirigirà al grup d'usuaris de l'OmegaT del Yahoo Groups. Tot i que no cal que us hi subscriviu, si ho feu podreu accedir a alguns serveis addicionals, com l'accés a alguns fitxers i a enquestes, i també podreu participar als debats relacionats amb l'OmegaT. L'arxiu de missatges del grup és públic i per consultar-lo no cal que us hi subscriviu.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>changes.txt</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dd>Un fitxer que conté una llista detallada de les modificacions realitzades entre aquesta versió i les anteriors.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>license.txt</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dd>La Llicència Pública General GNU. Aquesta llicència us permet fer diverses coses amb l'OmegaT, incloses la modificació i la distribució. Si esteu interessat en modificar o distribuir l'OmegaT, llegiu detingudament aquest document i assegureu-vos que, abans de fer res, en coneixeu totes les implicacions. En cas de dubte, pregunteu als membres del projecte directament enviant-los un missatge de correu des de la pàgina de SourceForge o enviant un missatge de correu públic al grup d'usuaris.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>doc-license.txt</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dd>La Llicència Pública General GNU. Aquesta llicència cobreix la documentació. Vegeu-ne la descripció més amunt.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>readme.txt</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dd>Aquest fitxer és molt important i cal que el llegiu abans d'iniciar l'OmegaT. Conté informació general sobre l'OmegaT, on podeu trobar més informació, com hi podeu contribuir, etc. Aquest fitxer s'ha traduït a diverses llengües.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>OmegaT</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dd>Un fitxer de text que conté dues línies:<br> <code>#!/bin/bash</code><br> <code>java -jar OmegaT.jar $*</code><br> Aquest fitxer us pot ser útil si el convertiu en executable (<code>chmod +x OmegaT</code>) des de la <a href=
+          "installingAndRunning.html#command_line">línia d'ordres</a> i dins del directori <code>/OmegaT_1.8/</code>. A partir d'aquest moment, podreu iniciar l'OmegaT cridant aquest fitxer des de la línia d'ordres.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>OmegaT.bat</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dd>Un fitxer de lot que s'utilitza per executar l'OmegaT des de la <a href=
+          "installingAndRunning.html#command_line">línia d'ordres</a> del Windows. Conté la línia següent:</dd>
+
+          <dd><code>java -jar
+          OmegaT.jar %*</code></dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>OmegaT.jar</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dt>L'aplicació principal de l'OmegaT. Per executar l'OmegaT, o bé crideu aquest fitxer des de la línia d'ordres o executeu-lo des del gestor de fitxers (normalment, fent-hi doble clic).</dt>
+        </dl>
+      </td>
+    </tr>
+  </table>
+
+  <dl>
+    <dd><br>
+    <br></dd>
+  </dl>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a> </td>
+        <td style="text-align: center;"><a href="index.html">Inici</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Índex</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
 </body>
 </html>

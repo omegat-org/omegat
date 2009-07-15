@@ -1,443 +1,1080 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Menú principal i dreceres de teclat de l'OmegaT - Manual d'usuari de l'OmegaT 1.7.3</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Menú principal i dreceres de teclat de l'OmegaT - Manual d'usuari de l'OmegaT 1.8</title>
 </head>
-<body>
 
-	<h1>Menú principal i dreceres de teclat</h1>
-	
-	<ul>
-		<li><a href="#menu">Menú principal</a> <br>&nbsp;<table border="1" width="60%" cellpadding="3" cellspacing="0">
-			<tr bgcolor="#DDDDDD" align="center">
-				<td><a href="#ProjectMenu"><code>Projecte</code></a></td>
-				<td><a href="#EditMenu"><code>Edita</code></a></td>
-				<td><a href="#GoToMenu"><code>Vés a</code></a></td>
-				<td><a href="#ToolsMenu"><code>Eines</code></a></td>
-				<td><a href="#OptionsMenu"><code>Opcions</code></a></td>
-				<td><a href="#HelpMenu"><code>Ajuda</code></a></td>
-			</tr>
-			</table>
-		</li>
-	</ul>
-	<ul>
-		<li><a href="#shortcuts">Dreceres de teclat</a>
-		<ul>
-			<li><a href="#Project_management">Gestió de projectes</a></li>
-			<li><a href="#Editing">Edició</a></li>
-			<li><a href="#Moving_around">Desplaçament</a></li>
-			<li><a href="#Reference_windows">Finestres de referència</a></li>
-			<li><a href="#Other">Altres</a></li>
-		</ul>
-		</li>
-	</ul>
+<body lang="en-US" dir="ltr">
+  <h2>Menú principal i dreceres de teclat</h2>
 
-	
-	<hr>
+  <h3><a href="#menu">Menú principal</a></h3>
 
-	<a name="menu" id="menu"></a>
-	<h1>Menú principal</h1>
-	
-	<p>Tota la funcionalitat de l'OmegaT està disponible a la barra de menú de la part superior de la finestra de l'editor. La majoria de les funcions també estan disponibles mitjançant <a href= "menu.html#shortcuts">dreceres de teclat</a>.</p>
+  <h3><a href="#shortcuts">Dreceres de teclat</a></h3>
 
-	<p>Les dreceres s'activen prement <strong><code>Ctrl</code></strong> i una lletra. Algunes dreceres requereixen també altres tecles. Per a millorar-ne la llegibilitat, les lletres estan escrites en majúscules.</p>
-	
-	<p><strong><code>Ctrl</code></strong> s'utilitza en sistemes operatius Windows, UNIX i similars a UNIX amb teclats que tenen la tecla <strong><code>Ctrl</code></strong> / <strong><code>Control</code></strong>. Els usuaris de Mac han d'utilitzar <strong><code>cmd+tecla</code></strong>. Als teclats d'Apple, la tecla <strong><code>cmd</code></strong> és la que té l'etiqueta <strong><code>command</code></strong> o té dibuixada una <strong>poma</strong>.</p>
+  <ul>
+    <li>
+      <p><a href="#Project_management">Gestió de projectes</a></p>
+    </li>
 
-	<p></p>
+    <li>
+      <p><a href="#Editing">Edició</a></p>
+    </li>
 
-		<table border="1" width="400" cellpadding="3" cellspacing="0">
-			<tr bgcolor="#DDDDDD" align="center">
-				<td><a href="#ProjectMenu"><code>Projecte</code></a></td>
-				<td><a href="#EditMenu"><code>Edita</code></a></td>
-				<td><a href="#GoToMenu"><code>Vés a</code></a></td>
-				<td><a href="#ToolsMenu"><code>Eines</code></a></td>
-				<td><a href="#OptionsMenu"><code>Opcions</code></a></td>
-				<td><a href="#HelpMenu"><code>Ajuda</code></a></td>
-			</tr>
-		</table>
-		<table border="0" cellpadding="5" cellspacing="0">
+    <li>
+      <p><a href="#Moving_around">Desplaçament</a></p>
+    </li>
 
-		<tr bgcolor="#FFFFFF">
-			<td id="ProjectMenu" colspan="3">
-			<hr><a name="ProjectMenu" id="ProjectMenu"></a><h2><code>Projecte</code></h2>
-			</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td width="25%"><code>Nou</code></td>
-			<td width="10%"></td>
-			<td>Crea i obre un projecte nou. El diàleg per a crear un projecte és el mateix que per a <a href="projectProperties.html">editar-lo</a>.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Obre</code></td>
-			<td><code>&lt;Ctrl+O&gt;</code></td>
-			<td>Obre un projecte creat prèviament.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Importa fitxers de partida...</code></td>
-			<td></td>
-			<td>Copia els fitxers seleccionats a la carpeta dels fitxers de partida (per defecte, "<code>/source</code>") i torna a carregar el projecte per tal de carregar els nous fitxers.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Importa des de MediaWiki...</code></td>
-			<td></td>
-			<td>Importa unitats de les pàgines MediaWiki, basades en l'URL especificat.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Torna a carregar</code></td>
-			<td></td>
-			<td>Torna a carregar el projecte per tal d'aplicar els canvis externs que s'hagin realitzat als fitxers de partida, a les memòries de traducció de referència o als glossaris.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Tanca</code></td>
-			<td></td>
-			<td>Desa la traducció i tanca el projecte.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Desa</code></td>
-			<td><code>&lt;Ctrl+S&gt;</code></td>
-			<td>Desa la traducció a la memòria de traducció del projecte. L'OmegaT desa automàticament la traducció cada 10 minuts, quan tanqueu el projecte o quan sortiu de l'OmegaT.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Crea els documents traduïts</code></td>
-			<td></td>
-			<td>Crea els documents d'arribada a partir de la traducció del text dels documents que heu realitzat. Els documents es desaran a la carpeta <code>/target</code>.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Propietats</code></td>
-			<td><code>&lt;Ctrl+E&gt;</code></td>
-			<td>Mostra el diàleg <a href="projectProperties.html">Edita el projecte</a>, que us permet editar les llengües del projecte i les ubicacions de les carpetes.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Fitxers del projecte...</code></td>
-			<td><code>&lt;Ctrl+L&gt;</code></td>
-			<td>Tanca o obre la finestra <a href="userInterface.html#Project_Files">Fitxers del projecte</a> (en funció de si està oberta o tancada).</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Surt</code></td>
-			<td><code>&lt;Ctrl+Q&gt;</code></td>
-			<td>Desa el projecte i surt de l'OmegaT. Si no heu desat el projecte manualment, us demanarà que confirmeu si realment voleu sortir.</td>
-		</tr>
+    <li>
+      <p><a href="#Reference_windows">Finestres de referència</a></p>
+    </li>
 
-		<tr bgcolor="#FFFFFF">
-			<td id="name" colspan="3">
-			<hr><a name="EditMenu" id="EditMenu"></a><h2><code>Edita</code></h2>
-			</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-		        <td></td>
-				<td colspan="2">Els elements que habitualment es troben a la majoria de les aplicacions (copia/retalla/enganxa) no es mostren en aquest menú, però estan disponibles mitjançant les dreceres del vostre sistema. Per exemple:</td>
-			</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Copia</code></td>
-			<td><code>&lt;Ctrl+C&gt;</code></td>
-			<td>Copia el text seleccionat al porta-retalls.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Retalla</code></td>
-			<td><code>&lt;Ctrl+X&gt;</code></td>
-			<td>Copia el text seleccionat al porta-retalls i el suprimeix.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Enganxa</code></td>
-			<td><code>&lt;Ctrl+V&gt;</code></td>
-			<td>Enganxa el text del porta-retalls a la posició del cursor.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td></td>
-			<td colspan="2"><strong>El menú Edita conté els elements següents:</strong></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Desfés l'última acció</code></td>
-			<td><code>&lt;Ctrl+Z&gt;</code></td>
-			<td>Torna a l'estat en què us trobàveu abans de realitzar l'última acció d'edició. Aquesta acció no funciona un cop validat el segment modificat.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Refés l'última acció</code></td>
-			<td><code>&lt;Ctrl+Y&gt;</code></td>
-			<td>Torna a l'estat en què us trobàveu abans de cancel·lar l'última acció d'edició. Aquesta acció no funciona un cop validat el segment modificat.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Reemplaça per la coincidència</code></td>
-			<td><code>&lt;Ctrl+R&gt;</code></td>
-			<td>Sobreescriu tot el segment d'arribada amb la coincidència parcial seleccionada (per defecte, se selecciona la primera coincidència).</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Insereix la coincidència</code></td>
-			<td><code>&lt;Ctrl+I&gt;</code></td>
-			<td>Insereix la coincidència parcial seleccionada a la posició del cursor. Aquesta funció mai no sobreescriurà cap fragment del segment d'arribada, fins i tot si està seleccionat.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Reemplaça pel text de partida</code></td>
-			<td><code>&lt;Maj+Ctrl+R&gt;</code></td>
-			<td>Sobreescriu tot el segment d'arribada amb el text de partida.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Insereix el text de partida</code></td>
-			<td><code>&lt;Maj+Ctrl+I&gt;</code></td>
-			<td>Insereix el text de partida a la posició del cursor.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Cerca al projecte...</code></td>
-			<td><code>&lt;Ctrl+F&gt;</code></td>
-			<td>Obre una finestra <a href="userInterface.html#Search_Window">Cerca de text</a> nova.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Selecciona la coincidència núm. N</code></td>
-			<td><code>&lt;Ctrl+#N&gt;</code></td>
-			<td>(#N és un dígit d'1 a 5) - Selecciona la coincidència parcial número N mostrada a la finestra de coincidències, per tal d'inserir-la al segment o de reemplaçar el segment per la coincidència. L'apartat <a href= "userInterface.html#Fuzzy_Matches">Coincidències parcials</a> descriu la codificació de colors en detall.</td>
-		</tr>
+    <li>
+      <p><a href="#Other">Altres</a></p>
+    </li>
+  </ul>
+  <hr>
 
-		<tr bgcolor="#FFFFFF">
-			<td id="GotoMenu" colspan="3">
-			<hr><a name="GoToMenu" id="GoToMenu"></a><h2><code>Vés a</code></h2>
-			</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Segment següent sense traduir</code></td>
-			<td><code>&lt;Ctrl+U&gt;</code></td>
-			<td>Avança fins al següent segment que no té equivalent a la memòria de traducció</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Segment següent</code></td>
-			<td><code>&lt;Ctrl+N&gt;</code> o bé <code>&lt;Retorn&gt;</code> o bé <code>&lt;Tab&gt;</code></td>
-			<td>Avança fins al segment següent. Si el segment actual és l'últim del fitxer, avança fins al primer segment del següent fitxer.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Segment anterior</code></td>
-			<td><code>&lt;Ctrl+P&gt;</code> o bé <code>&lt;Ctrl+Retorn&gt;</code> o bé <code>&lt;Ctrl+Tab&gt;</code></td>
-			<td>Avança fins al segment anterior. Si el segment actual és el primer del fitxer, avança fins a l'últim segment del fitxer anterior.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Número de segment...</code></td>
-			<td><code>&lt;Ctrl+J&gt;</code></td>
-			<td>S'obre el segment corresponent al número de segment especificat al diàleg.</td>
-		</tr>
+  <h2><a name="menu" id="menu"></a>Menú principal</h2>
 
-		<tr bgcolor="#FFFFFF">
-			<td id="ToolsMenu" colspan="3">
-			<hr><a name="ToolsMenu" id="ToolsMenu"></a><h2><code>Eines</code></h2>
-			</td>
-		</tr>
+  <p>Tota la funcionalitat de l'OmegaT està disponible a la barra de menú de la part superior de la finestra de l'editor. La majoria de les funcions també estan disponibles mitjançant <a href=
+  "#shortcuts">dreceres de teclat</a>. Les dreceres s'activen prement <strong>Ctrl</strong> i una lletra. Algunes dreceres requereixen també altres tecles. Per millorar-ne la llegibilitat, les lletres estan escrites en majúscules. <strong>Ctrl</strong> s'utilitza en sistemes operatius Windows, UNIX i similars a UNIX amb teclats que tenen la tecla <strong>Ctrl</strong> / <strong>Control</strong>. En canvi, els usuaris de Mac han d'utilitzar <strong>cmd+tecla</strong>. Als teclats d'Apple, la tecla <strong>cmd</strong> és la que té l'etiqueta <strong>command</strong> o té dibuixada una <strong>poma</strong>.</p>
 
-		<tr bgcolor="#DDDDDD">
-			<td><code>Valida les etiquetes</code></td>
-			<td><code>&lt;Ctrl+T&gt;</code></td>
-			<td>Comprova que no faltin etiquetes ni s'hagin modificat etiquetes en fitxers formatats. Mostra una llista dels segments que contenen errors d'etiquetes. L'apartat <a href= "userInterface.html#Tag_Validation">Finestra de validació de les etiquetes</a> en descriu el contingut i l'apartat <a href="formattedText.html">Com treballar amb text formatat</a> n'explica el motiu.</td>
-		</tr>
+  <table width="400" border="1" cellpadding="3" cellspacing="0">
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p align="center"><a href="#ProjectMenu">Projecte</a></p>
+      </td>
 
-		<tr bgcolor="#FFFFFF">
-			<td id="OptionsMenu" colspan="3"><hr><h2><code>Opcions</code></h2></td>
-		</tr>
+      <td>
+        <p align="center"><a href="#EditMenu">Edita</a></p>
+      </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td><code>Utilitza TAB per a avançar</code></td>
-			<td></td>
-			<td>Estableix la tecla de validació de segments en <code>&lt;Tab&gt;</code>, enlloc de la tecla per defecte <code>&lt;Retorn&gt;</code>. Aquesta opció és útil en alguns sistemes d'entrada de caràcters xinesos, japonesos o coreans.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Tipus de lletra...</code></td>
-			<td></td>
-			<td>Mostra el diàleg <a href="fontSettings.html">Tipus de lletra de visualització</a>, que us permet modificar el tipus de lletra de visualització del text. És millor que els usuaris d'ordinadors antics canviïn el tipus de lletra abans d'obrir un projecte, ja que el rendiment se'n pot ressentir. Aquest problema afecta de manera més negativa la combinació de G4 + Mac OS X + japonès.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Filtres de fitxers...</code></td>
-			<td></td>
-			<td>Mostra el diàleg <a href="fileFilters.html">Filtres de fitxers</a>, que us permet configurar la manera en què l'OmegaT analitzarà i processarà els fitxers.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Segmentació...</code></td>
-			<td></td>
-			<td>Mostra el diàleg <a href="segmentation.html">Configuració de la segmentació</a>, que us permet configurar la segmentació del text de partida.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Comportament de l'edició...</code></td>
-			<td></td>
-			<td>Mostra el diàleg <a href="translationEditing.html">Opcions de comportament de l'edició</a>, que us permet configurar el contingut del camp de traducció dels segments que encara no s'han traduït.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Restaura la finestra principal</code></td>
-			<td></td>
-			<td>Restaura els components (l'editor, el visualitzador de coincidències i el visualitzador de glossaris) de la finestra principal de l'OmegaT al seu estat per defecte. Utilitzeu aquesta funció si heu desacoblat, mogut o amagat algun component i no el podeu tornar a col·locar on voleu.</td>
-		</tr>
+      <td>
+        <p align="center"><a href="#GoToMenu">Vés a</a></p>
+      </td>
 
-		<tr bgcolor="#FFFFFF">
-			<td id="HelpMenu" colspan="3">
-			<hr><a name="HelpMenu" id="HelpMenu"></a><h2><code>Ajuda</code></h2>
-			</td>
-		</tr>
+      <td>
+        <p align="center"><a href="#ViewMenu">Visualització</a></p>
+      </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td><code>Manual d'usuari...</code></td>
-			<td><code>&lt;F1&gt;</code></td>
-			<td>Obre el <a href="userInterface.html#Help_Browser">Navegador de l'ajuda</a> amb aquest manual en una finestra separada.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Quant a...</code></td>
-			<td></td>
-			<td>Mostra la informació de copyright, crèdits i llicència.</td>
-		</tr>
-	</table>
-	<hr>
+      <td>
+        <p align="center"><a href="#ToolsMenu">Eines</a></p>
+      </td>
 
-	<a name="shortcuts"></a>
-	<h1>Dreceres de teclat</h1>
-	
-	<p>Les dreceres de teclat següents estan disponibles des de la finestra principal. Si hi ha una altra finestra en primer pla, feu clic a la finestra principal per a posar-la a primer pla o premeu <strong><code>Esc</code></strong> per a tancar-la.</p>
+      <td>
+        <p align="center"><a href="#OptionsMenu">Opcions</a></p>
+      </td>
 
-	<p>Les dreceres s'activen prement <strong><code>Ctrl</code></strong> i una lletra. Algunes dreceres requereixen també altres tecles. Per a millorar-ne la llegibilitat, les lletres estan escrites en majúscules.</p>
-	
-	<p><strong><code>Ctrl</code></strong> s'utilitza en sistemes operatius Windows, UNIX i similars a UNIX amb teclats que tenen la tecla <strong><code>Ctrl</code></strong> / <strong><code>Control</code></strong>. Els usuaris de Mac han d'utilitzar <strong><code>cmd+tecla</code></strong>. Als teclats d'Apple, la tecla <strong><code>cmd</code></strong> és la que té l'etiqueta <strong><code>command</code></strong> o té dibuixada una <strong>poma</strong>.</p>
+      <td>
+        <p align="center"><a href="#HelpMenu">Ajuda</a></p>
+      </td>
+    </tr>
+  </table>
 
-	<ul>
-		<li><a href="#Project_management">Gestió de projectes</a></li>
-		<li><a href="#Editing">Edició</a></li>
-		<li><a href="#Moving_around">Desplaçament</a></li>
-		<li><a href="#Reference_windows">Finestres de referència</a></li>
-		<li><a href="#Other">Altres</a></li>
-	</ul>
+  <table border="0" cellpadding="5" cellspacing="0">
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
 
+        <h3><a name="ProjectMenu" id="ProjectMenu"></a>Projecte</h3>
+      </td>
+    </tr>
 
-	<table border="0" cellpadding="3" cellspacing="0">
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Nou</code></p>
+      </td>
 
-		<tr bgcolor="#FFFFFF">
-			<td colspan="3">
-			<hr><a name="Project_management" id="Project_management"></a><h2>Gestió de projectes</h2>
-			</td>
-		</tr>
+      <td width="17%"></td>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Obre un projecte</td>
-			<td><code>&lt;Ctrl+O&gt;</code></td>
-			<td>Mostra un diàleg per a localitzar un projecte ja existent</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td>Desa</td>
-			<td><code>&lt;Ctrl+S&gt;</code></td>
-			<td>Desa la feina actual al fitxer project_save.tmx, que es troba a la carpeta /omegat/ del projecte</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td>Propietats del projecte</td>
-			<td><code>&lt;Ctrl+E&gt;</code></td>
-			<td>Mostra la configuració del projecte i permet modificar-la</td>
-		</tr>
+      <td>
+        <p>Crea i obre un projecte nou. El diàleg per crear un projecte és el mateix que per <a href="projectProperties.html">editar-lo</a>.</p>
+      </td>
+    </tr>
 
-		<tr bgcolor="#FFFFFF">
-			<td colspan="3">
-			<hr><a name="Editing" id="Editing"></a><h2>Edició</h2>
-			</td>
-		</tr>
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Obre</code></p>
+      </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Desfés l'última acció</td>
-			<td><code>&lt;Ctrl+Z&gt;</code></td>
-			<td>Desfà les últimes accions d'edició realitzades al segment d'arribada actiu</td>
-		</tr>
+      <td width="17%">
+        <p><code>Ctrl+O</code></p>
+      </td>
 
-		<tr bgcolor="#FFFFFF">
-			<td>Refés l'última acció</td>
-			<td><code>&lt;Ctrl+Y&gt;</code></td>
-			<td>Refà les accions d'edició que acabeu de desfer realitzades al segment d'arribada actiu</td>
-		</tr>
+      <td>
+        <p>Obre un projecte creat prèviament.</p>
+      </td>
+    </tr>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Selecciona la coincidència núm. N</td>
-			<td><code>&lt;Ctrl+#N&gt;</code></td>
-			<td>#N és un dígit d'1 a 5. La drecera selecciona la coincidència número N<sup></sup> que es mostra a la finestra de coincidències (per defecte, se selecciona la primera coincidència)</td>
-		</tr>
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Importa fitxers de partida...</code></p>
+      </td>
 
-		<tr bgcolor="#FFFFFF">
-			<td>Reemplaça per la coincidència</td>
-			<td><code>&lt;Ctrl+R&gt;</code></td>
-			<td>Reemplaça el contingut del segment d'arribada actiu per la coincidència seleccionada (per defecte, es reemplaça per la primera coincidència)</td>
-		</tr>
+      <td width="17%"></td>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Insereix la coincidència</td>
-			<td><code>&lt;Ctrl+I&gt;</code></td>
-			<td>Insereix la coincidència seleccionada a la posició del cursor del segment d'arribada actiu (per defecte, s'insereix la primera coincidència)</td>
-		</tr>
+      <td>
+        <p>Copia els fitxers seleccionats a la carpeta dels fitxers de partida (per defecte, "<code>/source</code>") i torna a carregar el projecte per tal de carregar els fitxers nous.</p>
+      </td>
+    </tr>
 
-		<tr bgcolor="#FFFFFF">
-			<td>Reemplaça pel text de partida</td>
-			<td><code>&lt;Ctrl+Maj+R&gt;</code></td>
-			<td>Reemplaça el contingut del segment d'arribada actiu pel contingut del text de partida</td>
-		</tr>
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Importa des de MediaWiki...</code></p>
+      </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Insereix el text de partida</td>
-			<td><code>&lt;Ctrl+Maj+I&gt;</code></td>
-			<td>Insereix el contingut del text de partida a la posició del cursor del segment d'arribada actiu</td>
-		</tr>
+      <td width="17%"></td>
 
-		<tr bgcolor="#FFFFFF">
-			<td>Cerca al projecte</td>
-			<td><code>&lt;Ctrl+F&gt;</code></td>
-			<td>Mostra un diàleg per a realitzar cerques dins del projecte</td>
-		</tr>
+      <td>
+        <p>Importa unitats de les pàgines MediaWiki, basades en l'URL especificat.</p>
+      </td>
+    </tr>
 
-		<tr bgcolor="#FFFFFF">
-			<td colspan="3">
-			<hr><a name="Moving_around" id="Moving_around"></a><h2>Desplaçament</h2>
-			</td>
-		</tr>
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Torna a carregar</code></p>
+      </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Segment següent sense traduir</td>
-			<td><code>&lt;Ctrl+U&gt;</code></td>
-			<td>Mou el camp d'edició actiu fins al següent segment que no estigui enregistrat a la memòria de traducció del projecte</td>
-		</tr>
+      <td width="17%"></td>
 
-		<tr bgcolor="#FFFFFF">
-			<td>Segment següent</td>
-			<td><code>&lt;Ctrl+N&gt;<br> Retorn</code></td>
-			<td>Mou el camp d'edició fins al segment següent</td>
-		</tr>
+      <td>
+        <p>Torna a carregar el projecte per tal d'aplicar els canvis externs que s'hagin realitzat als fitxers de partida, a les memòries de traducció de referència o als glossaris.</p>
+      </td>
+    </tr>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Segment anterior</td>
-			<td><code>&lt;Ctrl+P&gt;</code></td>
-			<td>Mou el camp d'edició fins al segment anterior</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td>Número de segment...</td>
-			<td><code>&lt;Ctrl+J&gt;</code></td>
-			<td>Va al número de segment especificat</td>
-		</tr>
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Tanca</code></p>
+      </td>
 
-		<tr bgcolor="#FFFFFF">
-			<td colspan="3">
-			<hr><a name="Reference_windows" id="Reference_windows"></a><h2>Finestres de referència</h2>
-			</td>
-		</tr>
+      <td width="17%"></td>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Llistat de fitxers del projecte</td>
-			<td><code>&lt;Ctrl+L&gt;</code></td>
-			<td>Mostra el llistat de fitxers del projecte</td>
-		</tr>
+      <td>
+        <p>Desa la traducció i tanca el projecte.</p>
+      </td>
+    </tr>
 
-		<tr bgcolor="#FFFFFF">
-			<td colspan="3">
-			<hr><a name="Other" id="Other"></a><h2>Altres</h2>
-			</td>
-		</tr>
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Desa</code></p>
+      </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Valida les etiquetes</td>
-			<td><code>&lt;Ctrl+T&gt;</code></td>
-			<td>Comprova que totes les etiquetes que existeixen al text de partida també apareguin al text d'arribada.</td>
-		</tr>
+      <td width="17%">
+        <p><code>Ctrl+S</code></p>
+      </td>
 
-		<tr bgcolor="#FFFFFF">
-			<td>Fitxers d'ajuda</td>
-			<td><code>&lt;F1&gt;</code></td>
-			<td>Mostra els fitxers d'ajuda de l'OmegaT en una finestra separada</td>
-		</tr>
-	</table>
-	<hr>
+      <td>
+        <p>Desa la traducció a la memòria de traducció del projecte. L'OmegaT desa automàticament la traducció cada 10 minuts, quan tanqueu el projecte o quan sortiu de l'OmegaT.</p>
+      </td>
+    </tr>
 
-	<p><a href="legalNotices.html">Avisos legals</a></p>
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Crea els documents traduïts</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Crea els documents d'arribada a partir de la traducció del text dels documents que heu realitzat. Els documents es desaran a la carpeta <code>/target</code>.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Propietats</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+E</code></p>
+      </td>
+
+      <td>
+        <p>Mostra el diàleg <a href="projectProperties.html">Edita el projecte</a>, que us permet editar les llengües del projecte i les ubicacions de les carpetes.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Fitxers del projecte...</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+L</code></p>
+      </td>
+
+      <td>
+        <p>Tanca o obre la finestra <a href="userInterface.html#Project_Files">Fitxers del projecte</a> (en funció de si està oberta o tancada).</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Surt</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+Q</code></p>
+      </td>
+
+      <td>
+        <p>Desa el projecte i surt de l'OmegaT. Si no heu desat el projecte manualment, us demanarà que confirmeu si realment voleu sortir.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="EditMenu" id="EditMenu"></a>Edita</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <p>Nota: Els elements que habitualment es troben a la majoria de les aplicacions (copia/retalla/enganxa) no es mostren en aquest menú, però estan disponibles mitjançant les dreceres del vostre sistema. Per exemple:</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Copia</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+C</code></p>
+      </td>
+
+      <td>
+        <p>Copia el text seleccionat al porta-retalls.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Retalla</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+X</code></p>
+      </td>
+
+      <td>
+        <p>Copia el text seleccionat al porta-retalls i el suprimeix.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Enganxa</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+V</code></p>
+      </td>
+
+      <td>
+        <p>Enganxa el text del porta-retalls a la posició del cursor.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <p><strong>El menú Edita conté els elements següents:</strong></p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Desfés l'última acció</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+Z</code></p>
+      </td>
+
+      <td>
+        <p>Torna a l'estat en què us trobàveu abans de realitzar l'última acció d'edició. Aquesta acció no funciona un cop validat el segment modificat.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Refés l'última acció</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+Y</code></p>
+      </td>
+
+      <td>
+        <p>Torna a l'estat en què us trobàveu abans de cancel·lar l'última acció d'edició. Aquesta acció no funciona un cop validat el segment modificat.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Reemplaça per la coincidència</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+R</code></p>
+      </td>
+
+      <td>
+        <p>Sobreescriu tot el segment d'arribada amb la coincidència parcial seleccionada (per defecte, se selecciona la primera coincidència).</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Insereix la coincidència</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+I</code></p>
+      </td>
+
+      <td>
+        <p>Insereix la coincidència parcial seleccionada a la posició del cursor. Aquesta funció sobreescriurà un fragment del segment d'arribada, si està seleccionat.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Reemplaça pel text de partida</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Maj+Ctrl+R</code></p>
+      </td>
+
+      <td>
+        <p>Sobreescriu tot el segment d'arribada amb el text de partida.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Insereix el text de partida</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Maj+Ctrl+I</code></p>
+      </td>
+
+      <td>
+        <p>Insereix el text de partida a la posició del cursor.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Cerca al projecte...</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+F</code></p>
+      </td>
+
+      <td>
+        <p>Obre una finestra <a href="userInterface.html#Search_Window">Cerca de text</a> nova.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Canvia les majúscules i minúscules a...</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Maj+F3</code></p>
+
+        <p><code>(vegeu el text)</code></p>
+      </td>
+
+      <td>
+        <p>Canvia les majúscules/minúscules del text ressaltat al segment traduït a l'opció seleccionada (minúscules, MAJÚSCULES o Majúscula Inicial). Utilitzeu Maj+F3 per alternar entre les tres opcions.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Selecciona la coincidència núm. N</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+#N</code></p>
+      </td>
+
+      <td>
+        <p>(#N és un dígit d'1 a 5) - Selecciona la coincidència parcial número N mostrada a la finestra de coincidències, per tal d'inserir-la al segment o de reemplaçar el segment per la coincidència. L'apartat <a href="userInterface.html#Fuzzy_Matches">Coincidències parcials</a> descriu la codificació de colors en detall.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="GoToMenu" id="GoToMenu"></a>Vés a</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Segment següent sense traduir</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+U</code></p>
+      </td>
+
+      <td>
+        <p>Avança fins al següent segment que no té equivalent a la memòria de traducció</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Segment següent</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+N</code> o bé <code>Retorn</code> o bé <code>Tab</code></p>
+      </td>
+
+      <td>
+        <p>Avança fins al segment següent. Si el segment actual és l'últim del fitxer, avança fins al primer segment del següent fitxer.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Segment anterior</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+P</code> o bé <code>Ctrl+Retorn</code> o bé <code>Ctrl+Tab</code></p>
+      </td>
+
+      <td>
+        <p>Retrocedeix fins al segment anterior. Si el segment actual és el primer del fitxer, avança fins a l'últim segment del fitxer anterior.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Número de segment...</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+J</code></p>
+      </td>
+
+      <td>
+        <p>S'obre el segment corresponent al número de segment especificat al diàleg.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Enrere en l'historial...</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+Maj+P</code></p>
+      </td>
+
+      <td>
+        <p>L'OmegaT recorda els segments que heu modificat. Amb aquesta ordre, podeu tornar a un segment o a diversos segments anteriors, en ordre cronològic, i més tard tornar al segment actual.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Endavant en l'historial...</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+Maj+N</code></p>
+      </td>
+
+      <td>
+        <p>Amb aquesta ordre, podeu tornar al segment que havíeu deixat quan heu seleccionat l'ordre "Enrere en l'historial".</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="ViewMenu" id="ViewMenu"></a>Visualització</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Marca els segments traduïts</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Si aquesta opció està activada, els segments traduïts es marcaran de color groc.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Marca els segments no traduïts</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Si aquesta opció està activada, els segments no traduïts es marcaran de color violeta.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Mostra els segments de partida</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Si aquesta opció està activada, els segments de partida es mostraran i es marcaran de color verd. Si no està activada, els segments de partida no es mostraran.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="ToolsMenu" id="ToolsMenu"></a>Eines</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Valida les etiquetes</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+T</code></p>
+      </td>
+
+      <td>
+        <p>Comprova que no faltin etiquetes ni s'hagin modificat etiquetes en fitxers formatats. Mostra una llista dels segments que contenen errors d'etiquetes. L'apartat <a href=
+        "userInterface.html#Tag_Validation">Finestra de validació de les etiquetes</a> en descriu el contingut i l'apartat <a href="formattedText.html">Com treballar amb text formatat</a> n'explica el motiu.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="OptionsMenu" id=
+        "OptionsMenu"></a><code>Opcions</code></h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Utilitza TAB per avançar</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Estableix la tecla de validació de segments en <code>Tab</code>, enlloc de la tecla per defecte <code>Retorn</code>. Aquesta opció és útil en alguns sistemes d'entrada de caràcters xinesos, japonesos o coreans.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Confirma sempre en sortir</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>El programa us demanarà sempre confirmació abans de tancar-se.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Tipus de lletra...</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Mostra el diàleg <a href="fontSettings.html">Tipus de lletra de visualització</a>, que us permet modificar el tipus de lletra de visualització del text. És millor que els usuaris d'ordinadors antics canviïn el tipus de lletra abans d'obrir un projecte, ja que el rendiment se'n pot ressentir. Aquest problema afecta de manera més negativa la combinació de G4 + Mac OS X + japonès.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Filtres de fitxers...</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Mostra el diàleg <a href="fileFilters.html">Filtres de fitxers</a>, que us permet configurar la manera en què l'OmegaT analitzarà i processarà els fitxers.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Segmentació...</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Mostra el diàleg <a href="segmentation.html">Configuració de la segmentació</a>, que us permet configurar la segmentació del text de partida.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Verificació ortogràfica...</code></p>
+      </td>
+      <td width="17%"></td>
+
+      <td>
+        <p>Mostra la finestra <a href="spellchecker.html">Configuració de la verificació ortogràfica</a>, on podeu instal·lar, configurar i activar el verificador ortogràfic.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Comportament de l'edició...</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Mostra el diàleg <a href="translationEditing.html">Opcions de comportament de l'edició</a>, que us permet configurar el contingut del camp de traducció dels segments que encara no s'han traduït.</p>
+
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Restaura la finestra principal</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Restaura els components (l'editor, el visualitzador de coincidències i el visualitzador de glossaris) de la finestra principal de l'OmegaT al seu estat per defecte. Utilitzeu aquesta funció si heu desacoblat, mogut o amagat algun component i no el podeu tornar a col·locar on voleu.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="HelpMenu" id="HelpMenu"></a>Ajuda</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Manual d'usuari...</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>F1</code></p>
+      </td>
+
+      <td>
+        <p>Obre el <a href="userInterface.html#Help_Browser">Navegador de l'ajuda</a> amb aquest manual en una finestra separada.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Quant a...</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Mostra la informació de copyright, crèdits i llicència.</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2><a name="shortcuts" id="shortcuts"></a>Dreceres de teclat</h2>
+
+  <p>Les dreceres de teclat següents estan disponibles des de la finestra principal. Si hi ha una altra finestra en primer pla, feu clic a la finestra principal per posar-la a primer pla o premeu <code><strong>Esc</strong></code> per tancar-la.</p>
+
+  <p>Les dreceres s'activen prement <code><strong>Ctrl</strong></code> i una lletra. Algunes dreceres requereixen també altres tecles. Per millorar-ne la llegibilitat, les lletres estan escrites en majúscules.</p>
+
+  <p><strong><code>Ctrl</code></strong> s'utilitza en sistemes operatius Windows, UNIX i similars a UNIX amb teclats que tenen la tecla <strong><code>Ctrl</code></strong> / <code><strong>Control</strong></code>. En canvi, els usuaris de Mac han d'utilitzar <code><strong>cmd+tecla</strong></code>. Als teclats d'Apple, la tecla <code><strong>cmd</strong></code> és la que té l'etiqueta <code><strong>command</strong></code> o té dibuixada una <strong>poma</strong>.</p>
+
+  <ul>
+    <li>
+      <p><a href="#Project_management">Gestió de projectes</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Editing">Edició</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Moving_around">Desplaçament</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Reference_windows">Finestres de referència</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Other">Altres</a></p>
+    </li>
+  </ul>
+
+  <table border="0" cellpadding="3" cellspacing="0">
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="Project_management" id="Project_management"></a>Gestió de projectes</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Obre un projecte</p>
+      </td>
+
+      <td>
+        <p><code>Ctrl+O</code></p>
+      </td>
+
+      <td>
+        <p>Mostra un diàleg per localitzar un projecte ja existent</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td>
+        <p>Desa</p>
+      </td>
+
+      <td>
+        <p><code>Ctrl+S</code></p>
+      </td>
+
+      <td>
+        <p>Desa la feina actual al fitxer project_save.tmx, que es troba a la carpeta /omegat/ del projecte</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Propietats del projecte</p>
+      </td>
+
+      <td>
+        <p><code>Ctrl+E</code></p>
+      </td>
+
+      <td>
+        <p>Mostra la configuració del projecte i permet modificar-la</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="Editing" id="Editing"></a>Edició</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Desfés l'última acció</p>
+      </td>
+
+      <td>
+        <p><code>Ctrl+Z</code></p>
+      </td>
+
+      <td>
+        <p>Desfà les últimes accions d'edició realitzades al segment d'arribada actiu</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td>
+        <p>Refés l'última acció</p>
+      </td>
+
+      <td>
+        <p><code>Ctrl+Y</code></p>
+      </td>
+
+      <td>
+        <p>Refà les accions d'edició que acabeu de desfer realitzades al segment d'arribada actiu</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Selecciona la coincidència núm. N</p>
+      </td>
+
+      <td>
+        <p><code>Ctrl+#N</code></p>
+      </td>
+
+      <td>
+        <p>#N és un dígit d'1 a 5. La drecera selecciona la coincidència número N<sup></sup> que es mostra a la finestra de coincidències (per defecte, se selecciona la primera coincidència)</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td>
+        <p>Reemplaça per la coincidència</p>
+      </td>
+
+      <td>
+        <p><code>Ctrl+R</code></p>
+      </td>
+
+      <td>
+        <p>Reemplaça el contingut del segment d'arribada actiu per la coincidència seleccionada (per defecte, es reemplaça per la primera coincidència)</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Insereix la coincidència</p>
+      </td>
+
+      <td>
+        <p><code>Ctrl+I</code></p>
+      </td>
+
+      <td>
+        <p>Insereix la coincidència seleccionada a la posició del cursor del segment d'arribada actiu (per defecte, s'insereix la primera coincidència)</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td>
+        <p>Reemplaça pel text de partida</p>
+      </td>
+
+      <td>
+        <p><code>Ctrl+Maj+R</code></p>
+      </td>
+
+      <td>
+        <p>Reemplaça el contingut del segment d'arribada actiu pel contingut del text de partida</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Insereix el text de partida</p>
+      </td>
+
+      <td>
+        <p><code>Ctrl+Maj+I</code></p>
+      </td>
+
+      <td>
+        <p>Insereix el contingut del text de partida a la posició del cursor del segment d'arribada actiu</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td>
+        <p>Cerca al projecte</p>
+      </td>
+
+      <td>
+        <p><code>Ctrl+F</code></p>
+      </td>
+
+      <td>
+        <p>Mostra un diàleg per realitzar cerques dins del projecte</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="Moving_around"></a>Desplaçament</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Segment següent sense traduir</p>
+      </td>
+
+      <td>
+        <p><code>Ctrl+U</code></p>
+      </td>
+
+      <td>
+        <p>Mou el camp d'edició actiu fins al següent segment que no estigui enregistrat a la memòria de traducció del projecte</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td>
+        <p>Segment següent</p>
+      </td>
+
+      <td>
+        <p><code>Ctrl+N<br> Retorn</code></p>
+      </td>
+
+      <td>
+        <p>Mou el camp d'edició fins al segment següent</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Segment anterior</p>
+      </td>
+
+      <td>
+        <p><code>Ctrl+P</code></p>
+      </td>
+
+      <td>
+        <p>Mou el camp d'edició fins al segment anterior</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td>
+        <p>Número de segment...</p>
+      </td>
+
+      <td>
+        <p><code>Ctrl+J</code></p>
+      </td>
+
+      <td>
+        <p>Va al número de segment especificat</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Enrere en l'historial...</p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+Maj+P</code></p>
+      </td>
+
+      <td>
+        <p>Torna a un segment enrere en l'historial</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td>
+        <p>Endavant en l'historial...</p>
+      </td>
+
+      <td width="17%">
+        <p><code>Ctrl+Maj+N</code></p>
+      </td>
+
+      <td>
+        <p>Torna a un segment endavant en l'historial</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="Reference_windows" id="Reference_windows"></a>Finestres de referència</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Llistat de fitxers del projecte</p>
+      </td>
+
+      <td>
+        <p><code>Ctrl+L</code></p>
+      </td>
+
+      <td>
+        <p>Mostra el llistat de fitxers del projecte</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="Other" id="Other"></a>Altres</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Valida les etiquetes</p>
+      </td>
+
+      <td>
+        <p><code>Ctrl+T</code></p>
+      </td>
+
+      <td>
+        <p>Obre la finestra de <a href="userInterface.html#Tag_Validation">validació de les etiquetes</a></p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td>
+        <p>Fitxers d'ajuda</p>
+      </td>
+
+      <td>
+        <p><code>F1</code></p>
+      </td>
+
+      <td>
+        <p>Mostra els fitxers d'ajuda de l'OmegaT en una finestra separada</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a> </td>
+        <td style="text-align: center;"><a href="index.html">Inici</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Índex</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
 </body>
 </html>

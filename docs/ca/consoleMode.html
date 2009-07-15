@@ -1,0 +1,64 @@
+<html>
+<head>
+  <link rel="stylesheet" href="OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Mode de consola - Manual d'usuari de l'OmegaT 2</title>
+</head>
+
+<body>
+  <h1>Mode de consola de l'OmegaT</h1>
+
+  <ul>
+    <li>
+      <p><a href="#prerequisites">Prerequisits</a></p>
+    </li>
+
+    <li>
+      <p><a href="#start">Inici en mode de consola</a></p>
+    </li>
+
+    <li>
+      <p><a href="#extra">Opcions addicionals</a></p>
+
+      <p>&nbsp;</p>
+    </li>
+  </ul>
+
+  <p>L'objectiu del mode de consola és utilitzar l'OmegaT com a una eina de traducció en un entorn d'scripts En iniciar l'OmegaT en mode de consola, no es carrega la interfície gràfica d'usuari (per tant, funcionarà en qualsevol consola) i el projecte especificat es traduirà automàticament.</p>
+
+  <hr>
+
+  <h3><a name="prerequisites" id="prerequisites"></a>Prerequisits</h3>
+
+  <p>Per executar a l'OmegaT, cal que hi hagi un projecte de l'OmegaT vàlid. La ubicació no és important, ja que de totes maneres l'haureu d'especificar a la línia d'ordres durant l'inici.<p>Si necessiteu utilitzar paràmetres diferents, cal que estiguin especificats als fitxers de configuració. Això es pot fer de dues maneres:<ol><li>Executeu l'OmegaT normalment (amb la interfície gràfica d'usuari) i definiu els paràmetres. Quan executeu l'OmegaT en mode de consola, s'utilitzaran els mateixos paràmetres. Si no podeu executar l'OmegaT normalment (per exemple, perquè no disposeu d'un entorn gràfic):</li><li>Copieu els fitxers de configuració d'alguna altra instal·lació de l'OmegaT (en una altra màquina) a un directori específic. La ubicació no és important, ja que la podeu especificar a la línia d'ordres durant l'inici. Els fitxers rellevants són filters.conf i segmentation.conf, que es troben al directori inicial de l'usuari (per exemple, C:\Documents and Settings\<User>\OmegaT al Windows, <User>/.omegat/ al Linux)</li></ol></p>
+
+  <h3><a name="start" id="project_location"></a>Inici en mode de consola</h3>
+
+  <p>Per iniciar l'OmegaT en mode de consola, cal especificar certs paràmetres addicionals durant l'inici. El més important és <code>&lt;dir-projecte&gt;</code> i, opcionalment, <code>--config-dir=&lt;dir-config&gt;</code>.<p>Exemple: <code>$&gt; java -jar OmegaT.jar /camí/al/projecte --config-dir=/camí/als/fitxers-config/ --mode=console-translate</code>
+  </p>
+  <p>Explicació:<dl><dt><code>&lt;dir-projecte&gt;</code></dt>
+  <dd>Indica a l'OmegaT on es troba el projecte que voleu traduir. Si s'especifica, l'OmegaT s'inicia en mode de consola i traduirà el projecte especificat.</dd> 
+  <dt><code>--config-dir=&lt;dir-config&gt;</code></dt>
+  <dd>Indica a l'OmegaT el directori on hi ha emmagatzemats els fitxers de configuració. Si no s'especifica, l'OmegaT utilitzarà els valors per defecte (el directori OmegaT dins del directori inicial de l'usuari, o si no està disponible, el directori de treball actual).</dd>
+  <dt><code>--mode=console-translate</code></dt>
+  <dd>L'OmegaT s'inicia en mode de consola i traduirà el projecte especificat.</dl>
+  
+  <h3><a name="extra" id="extra"></a>Opcions addicionals</h3>
+
+  <p>Hi ha un paràmetre de la línia d'ordres addicional específic per al mode de consola: <code>--quiet</code>. Si s'especifica, es mostra menys informació a la pantalla. No es mostra cap dels missatges que normalment es mostrarien a la barra d'estat.<br> Sintaxi: <code>java -jar OmegaT.jar /camí/al/projecte --quiet</code>
+  </p>
+
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a> </td>
+        <td style="text-align: center;"><a href="index.html">Inici</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Índex</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

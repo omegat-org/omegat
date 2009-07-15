@@ -1,0 +1,98 @@
+<html>
+<head>
+  <link rel="stylesheet" href="OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Verificador ortogràfic - Manual d'usuari de l'OmegaT 1.8</title>
+</head>
+
+<body>
+  <h2>Verificador ortogràfic</h2>
+  <hr>
+
+  <ul>
+    <li>
+      <p><a href="#introduction">Introducció</a></p>
+    </li>
+
+    <li>
+      <p><a href="#edit_dialog">Opcions del verificador ortogràfic</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Hints">Consells</a></p>
+    </li>
+  </ul>
+
+  <p><br></p>
+
+  <h3><a name="introduction" id="introduction"></a>Introducció</h3>
+
+  <p><br></p>
+
+  <p>Per corregir les errades ortogràfiques durant la traducció, podeu instal·lar un verificador ortogràfic i utilitzar-lo per veure les paraules del text traduït que necessiten alguna correcció. L'OmegaT utilitza el verificador ortogràfic <a href=
+  "http://hunspell.sourceforge.net/">Hunspell</a>, que s'utilitza, entre d'altres, a l'OpenOffice.org, al Firefox i al Thunderbird. Si utilitzeu algun d'aquests programes, és possible que ja tingueu instal·lats els components bàsics del verificador ortogràfic, i només us caldrà connectar l'OmegaT als diccionaris.</p>
+
+  <p>Un cop activat el verificador ortogràfic i si teniu disponible el diccionari corresponent a la llengua d'arribada, el verificador ortogràfic supervisarà els segments traduïts que es mostren a la subfinestra de l'editor. Les paraules dubtoses se subratllaran de color vermell en ziga-zaga:</p>
+
+  <p><br>
+  <br></p><img src="images/SpellcheckingText.png" name="grafika1" alt=
+  "Verificació ortogràfica del text" align="left" border="0"
+  id="grafika1"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>Si feu clic amb el botó dret en una paraula ressaltada, s'obrirà un menú emergent amb suggeriments de correcció. També podeu indicar al verificador ortogràfic que ignori totes les aparicions de la paraula (<b>Ignora'ls tots</b>) o que l'afegeixi al diccionari (<b>Afegeix al diccionari</b>). Tingueu en compte que es tracta d'un verificador ortogràfic en línia: si us cal realitzar una verificació ortogràfica global de tots els textos, haureu de navegar pel text cercant les línies vermelles en ziga-zaga. L'alternativa és verificar l'ortografia dels fitxers traduïts en un editor, és a dir, fora de l'OmegaT; per tant, els canvis que realitzeu no quedaran reflectits a la memòria de traducció.</p>
+
+  <p><br>
+  <br></p>
+
+  <h3><a name="edit_dialog" id="edit_dialog"></a>Opcions del verificador ortogràfic</h3>
+
+  <p>En fer clic a <b>Opcions &gt; Verificació ortogràfica...</b>, s'obrirà la finestra següent:</p>
+
+  <p><br></p><img src="images/SpellcheckerSetup2.png" name="grafika2" alt=
+  "Configuració de la verificació ortogràfica" align="left" border="0" id=
+  "grafika2"><br clear="left">
+
+  <p><br></p>
+
+  <p>L'exemple anterior ja té diccionaris disponibles. Inicialment, no hi apareixerà cap diccionari, i caldrà que especifiqueu la ubicació on l'OmegaT ha de cercar-los. En fer clic a <strong>Trieu...</strong>, s'obrirà una finestra de diàleg on podeu seleccionar la subcarpeta correcta: el <b>Directori dels fitxers de diccionari</b>, que a l'exemple anterior és <i>C:\Archivos de programa\OpenOffice.org 2.3\share\dict\ooo</i>. Aquest directori és el directori que conté els diccionaris de codi obert. L'OmegaT detecta els diccionaris vàlids d'aquesta ubicació i els mostra. Si el diccionari que voleu utilitzar ja hi apareix, no cal que feu res més. Si no és així, és a dir, si la llista de llengües disponibles és buida, podeu fer clic a <b>Instal·la</b> i deixar que l'OmegaT cerqui els diccionaris disponibles. Seleccioneu els diccionaris a la finestra emergent i feu clic a <b>Instal·la</b>. Els diccionaris seleccionats s'instal·laran i apareixeran a la finestra de configuració de la verificació ortogràfica (és possible que tardi una mica).</p>
+
+  <p>Tingueu en compte que l'instal·lador depèn d'una llista de diccionaris d'Internet. L'OmegaT obté la llista d'<a href=
+  "http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/">OpenOffice.org/contrib/dictionaries</a>. Si no està actualitzada, haureu de cercar els diccionaris pel vostre compte. Cerqueu fitxers que tinguin un nom que indiqui la llengua que voleu i que tinguin les extensions <i>aff</i> i <i>dic.</i> Possiblement, el Wiki de l'OpenOffice.org conté el recull de diccionaris més ampli: <a href=
+  "http://wiki.services.openoffice.org/wiki/Dictionaries">Diccionaris del Wiki de l'OpenOffice.org</a>. Els diccionaris compatibles amb l'OmegaT són els diccionaris "Hunspell" o "Myspell".</p>
+
+  <p>Assegureu-vos que el codi de llengua dels fitxers traduïts correspongui al codi de llengua del diccionari: un diccionari FR-FR no funcionarà si el paràmetre de fitxers traduïts és FR. Cal que canvieu el paràmetre a FR-FR per tal que el verificador ortogràfic pugui reconèixer el diccionari correcte per als fitxers traduïts.</p>
+
+  <h3><a name="Hints" id="Hints"></a>Consells</h3>
+
+  <p>Possibles causes que fan que no funcioni el verificador ortogràfic:</p>
+
+  <ol>
+    <li>
+      <p>El quadre de selecció “Verifica automàticament l'ortografia del text” ha d'estar activat.</p>
+    </li>
+
+    <li>
+      <p>Compareu el codi de llengua dels fitxers traduïts del vostre projecte amb el dels diccionaris disponibles a la finestra de configuració. El verificador ortogràfic determina la llengua que cal utilitzar a partir del codi de llengua dels fitxers traduïts: si el codi de llengua és portuguès de Brasil (PT_BR), la carpeta dels diccionaris ha de tenir dos fitxers de diccionari, anomenats pt_br.aff i pt_br.dic.</p>
+    </li>
+  </ol>
+
+  <p>Si ja heu traduït una bona part del text i llavors us adoneu que el codi de llengua dels fitxers traduïts del projecte no coincideix amb el codi de llengua del verificador ortogràfic (per exemple, heu especificat "en" com a llengua, però no hi ha cap diccionari per a "en"), podeu copiar els dos fitxers corresponents (per exemple pt_PT.arr i pt_PT.dic) i canviar el nom dels fitxers (per pt_BR.arr i pt_BR.dic). També podeu canviar el codi de llengua del projecte (de pt a pt_BR); no obstant, caldrà que propagueu aquest canvi per tots els fitxers TMX del projecte, que no és la manera més segura de procedir.</p>
+
+  <p>Tingueu en compte que l'opció Desinstal·la suprimeix físicament els diccionaris ressaltats. Si formen part de l'OpenOffice, com en el cas anterior, també desapareixeran d'aquesta aplicació. Si per qualsevol motiu heu de fer servir aquesta opció sovint, és recomanable que copieu els fitxers implicats en una altra carpeta, reservada només per a l'OmegaT.</p>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a> </td>
+        <td style="text-align: center;"><a href="index.html">Inici</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Índex</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

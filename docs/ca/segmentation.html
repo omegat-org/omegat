@@ -1,144 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Segmentació del text de partida - Manual d'usuari de l'OmegaT 1.7.3</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Segmentació del text de partida - Manual d'usuari de l'OmegaT 1.8</title>
 </head>
-
 <body>
-	<h1>Segmentació del text de partida</h1>
-
-	<ul>
-		<li><a href="#structure">Segmentació a nivell d'estructura</a></li>
-		<li><a href="#sentence">Segmentació a nivell de frase</a>
-			<ul>
-				<li><a href="#about">Regles de segmentació</a></li>
-				<li><a href="#setup">Configuració de les regles</a>
-					<ul>
-						<li><a href="#priority">Prioritat</a></li>
-						<li><a href="#creation">Creació de regles</a></li>
-						<li><a href="#breal">Divisió/Excepció</a></li>
-						<li><a href="#setup">Exemples senzills</a></li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-		<li><a href="regexp.html">Construccions d'expressions regulars</a></li>
-	</ul>
-	
-	<p>Les eines de memòria de traducció treballen amb unitats de text anomenades segments. L'OmegaT ofereix dues maneres de segmentar un text: segmentació per paràgrafs i segmentació per frases.</p>
-
-	<p>Per a seleccionar el tipus de segmentació, seleccioneu <strong>Projecte → Propietats...</strong> al menú principal i utilitzeu la casella de selecció corresponent.</p>
-
-	<p>Si heu seleccionat segmentació per frases, podeu configurar-ne les regles seleccionant <strong>Opcions → Segmentació...</strong> al menú principal.</p>
-
-	<p>Tingueu en compte que s'ha emprat molt de temps en el desenvolupament de regles de segmentació fiables; així doncs, per a la majoria dels casos no us caldrà modificar-les ni afegir-ne de pròpies. D'altra banda, aquesta funcionalitat és molt útil en casos especials, i us permet traduir només allò que cal traduir sense córrer el risc de canviar allò que ha de romandre invariable.</p>
-	
-	<p><strong>Avís!</strong> Si canvieu les opcions de filtres quan hi ha un projecte obert, es pot produir una pèrdua de dades. Si canvieu les opcions de segmentació quan hi ha un projecte obert, caldrà que torneu a carregar el projecte per tal d'aplicar els canvis.</p>
-
-
-	<hr>
-	<a name="structure" id="structure"></a>
-	<h1>Segmentació a nivell d'estructura</h1>
-
-	<p>L'OmegaT primer analitza el text per a trobar la segmentació a nivell d'estructura. Durant aquest procés, només s'utilitza l'estructura del fitxer de partida per a produir segments.</p>
-	
-	<p>Per exemple, els <a href="fileFilters.html#filter_options">fitxers de text</a> poden segmentar-se per salts de línia, per línies buides o bé no segmentar-se de cap manera. Els fitxers amb format (documents de l'OpenOffice.org, documents HTML, etc.) es segmenten a partir de les etiquetes de bloc (paràgraf). Els  <a href="fileFilters.html#filter_options">atributs </a> traduïbles d'objectes en fitxers XHTML o HTML es poden extreure en segments separats.</p>
-
-	<hr>
-	<a name="sentence" id="sentence"></a>
-	<h1>Segmentació a nivell de frase</h1>
-
-	<p>Un cop segmentat el fitxer de partida en unitats lògiques, l'OmegaT segmentarà addicionalment aquests blocs en frases.</p>
-	
-	<a name="about" id="about"></a>
-	<h2>Regles de segmentació</h2>
-
-	<p>El procés de segmentació es por il·lustrar d'aquesta manera: imagineu-vos que el cursor es va movent al llarg del text, caràcter per caràcter. A cada posició del cursor, s'aplica cada regla en l'ordre especificat per a veure si el <strong>Patró previ</strong> es pot aplicar al text situat a l'esquerra del cursor, i el <strong>Patró posterior</strong> al text situat a la dreta. Si la regla es pot aplicar, el programa atura l'exploració de regles (si es tracta d'una regla d'excepció) o crea un segment nou (si es tracta d'una regla de divisió).</p>
-
-	<p>La segmentació per frases s'ha implementar amb l'ajuda de l'estàndard <a href= "http://www.lisa.org/standards/srx/">SRX (Segmentation Rules eXchange, intercanvi de regles de segmentació)</a>; no obstant, tingueu en compte que l'OmegaT no és compatible amb totes les funcions d'SRX. No es poden importar ni exportar les regles definides amb format SRX. Però si enteneu com funciona l'SRX, ja sabreu com realitza la segmentació l'OmegaT.</p>
-
-	<p>Hi ha tos tipus de regles:</p>
-
-	<ul>
-		<li>Les <strong>regles de divisió</strong> separen el text de partida en segments.<p><strong>Exemple</strong>: <i>"Tenia sentit? No n'estava segur."</i> s'hauria de separar en dos segments.<br> Així doncs, hi hauria d'haver una regla de divisió per a "<code>?</code>".</p></li>
-		<li>Les <strong>regles d'excepció</strong> especifiquen quines parts de text NO s'han de separar.<p><strong>Exemple</strong>: <i>"Mrs. Dalloway "</i> no s'hauria de separar; per tant, s'hauria de definir una regla d'excepció per a "Mrs" (i "Mr", "Dr", "prof" etc.) seguit d'un punt.</p></li>
-	</ul>
-
-	<p>Les regles de divisió predefinides haurien de ser suficients per a la majoria de les llengües europees i per al japonès. Donada la gran flexibilitat, és recomanable que definiu més regles d'excepció per a la llengua a partir de la qual traduïu, per tal d'obtenir segments més significatius i coherents.</p>
-
-	<a name="setup" id="setup"></a>
-	<h2>Configuració de les regles</h2>
-
-
-	<a name="priority" id="priority"></a>
-	<h3>Prioritat</h3>
-
-	<p>Tots els conjunts de regles de segmentació que coincideixin amb un Patró de llengua s'aplicaran en l'ordre que es mostra al diàleg; per tant, les regles d'una llengua específica han de col·locar-se més amunt que les regles per defecte.</p>
-	
-	<p>Per exemple, les regles del francès de Canadà (FR-CA) haurien d'estar per sobre de les regles del francès (FR.*) i per sobre de les regles Per defecte (.*). D'aquesta manera, quan traduïu al francès de Canadà, el projecte utilitzarà primer les regles definides per a aquesta llengua; a continuació, les regles del francès i, finalment, les regles Per defecte.</p>
-
-	<a name="creation" id="creation"></a>
-	<h3>Creació de regles</h3>
-	
-	<p>Per a crear un conjunt de regles buit, feu clic a <strong>Afegeix</strong> de la part de dalt del diàleg. Apareixerà una línia buida al final de la taula.</p>
-	
-	<p>Canvieu el nom del conjunt de regles i el patró de llengua. La sintaxi del patró de llengua és la mateixa que la sintaxi d'una <a href="regexp.html">expressió regular</a>. Si el conjunt de regles correspon a una parella de llengua-país, es recomana que el col·loqueu al capdamunt mitjançant el botó <strong>Mou cap amunt</strong>. Per a editar un conjunt de regles, feu-hi clic a la taula i les regles del conjunt apareixeran a la part de sota de la finestra.</p>
-
-	<a name="break" id="break"></a>
-	<h3>Divisió/Excepció</h3>
-	
-	<p>La casella de selecció Divisió/Excepció determina si es tracta d'una regla de divisió (casella de selecció activada) o d'una regla d'excepció (casella de selecció desactivada). Les expressions regulars dels camps Patró previ i Patró posterior especifiquen el text que ha d'aparèixer abans i després d'una posició per tal que s'inclogui en la regla d'excepció o de divisió.</p>
-
-
-	<a name="examples" id="examples"></a>
-	<h3>Exemples senzills</h3>
-
-	<table border="0" cellpadding="4" cellspacing="0">
-		<tr bgcolor="#DDDDDD">
-			<td width="25%"><strong>Objectiu</strong></td>
-			<td><strong>Abans</strong></td>
-			<td><strong>Després</strong></td>
-			<td width="50%"><strong>Nota</strong></td>
-		</tr>
-		<tr>
-			<td>Definir un segment després d'un punt ('<code>.</code>') i abans d'un espai</td>
-			<td><code>\.</code></td>
-			<td><code>\s</code></td>
-			<td>"<code>\.</code>" representa el caràcter "<code>.</code>" "<code>\s</code>" representa qualsevol caràcter d'espai en blanc</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td>No segmentar després de Mr.</td>
-			<td><code>Mr\.</code></td>
-			<td><code>\s</code></td>
-			<td>És una regla d'excepció i, per tant, la casella de selecció cal que estigui desactivada</td>
-		</tr>
-		<tr>
-			<td><code>Definit un segment després de</code> <code>"</code><code>。</code><code>"</code> <code>(punt japonès)</code></td>
-			<td><code>。</code> </td>
-			<td></td>
-			<td>Fixeu-vos que <i>després</i> és buit</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td>No segmentar després d'M. Mr. Mrs. i Ms.</td>
-			<td><code>Mr??s??\.</code></td>
-			<td><code>\s</code></td>
-			<td>Regla d'excepció - vegeu l'ús de ? en expressions regulars (quantificador "no voraç")</td>
-		</tr>
-	</table>
-
-	<hr>
-	<a name="regex" id="regex"></a>
-	<h1>Resum de construccions d'expressions regulars</h1>
-
-	<p>Les expressions regulars que podeu utilitzar en les regles de segmentació són les que permet el Java. Hi ha disponible un breu resum a l'apèndix <a href="regexp.html">Construccions d'expressions regulars</a>.</p>
-	
-	<p>Si necessiteu informació més específica, visiteu <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
-		
-	<p>Podeu trobar guies d'aprenentatge senzilles al web (per exemple, <a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>).</p>
-
-	<hr>
-
-	<p><code><a href="legalNotices.html">Avisos legals</a></code></p>
+<h2>Segmentació del text de partida</h2>
+<ul>
+  <li>
+    <p><a href="#structure">Segmentació a nivell d'estructura</a></p>
+  </li>
+  <li>
+    <p><a href="#sentence">Segmentació a nivell de frase</a></p>
+    <ul>
+      <li>
+        <p><a href="#about">Regles de segmentació</a></p>
+      </li>
+      <li>
+        <p><a href="#setup">Configuració de les regles</a></p>
+        <ul>
+          <li>
+            <p><a href="#priority">Prioritat</a></p>
+          </li>
+          <li>
+            <p><a href="#creation">Creació de regles</a></p>
+          </li>
+          <li>
+            <p><a href="#break">Divisió/Excepció</a></p>
+          </li>
+          <li>
+            <p><a href="#examples">Exemples senzills</a></p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><a href="regexp.html">Construccions d'expressions regulars</a></p>
+  </li>
+</ul>
+<p>Les eines de memòria de traducció treballen amb unitats de text anomenades segments. L'OmegaT ofereix dues maneres de segmentar un text: segmentació per paràgrafs i segmentació per frases. Per seleccionar el tipus de segmentació, seleccioneu <strong>Projecte → Propietats...</strong> al menú principal i utilitzeu la casella de selecció corresponent. Tingueu en compte que la segmentació per paràgrafs és força obsoleta; per a la majoria de projectes, és preferible utilitzar la segmentació per frases. Si heu seleccionat la segmentació per frases, podeu configurar-ne les regles seleccionant <strong>Opcions → Segmentació...</strong> al menú principal.</p>
+<p>Tingueu en compte que s'ha emprat molt de temps en el desenvolupament de regles de segmentació fiables; així doncs, per a la majoria dels casos no us caldrà modificar-les ni afegir-ne de pròpies. D'altra banda, aquesta funcionalitat és molt útil en casos especials, ja que us permet traduir només allò que cal traduir sense córrer el risc de canviar allò que ha de romandre invariable.</p>
+<p><strong>Avís!</strong> Si canvieu les opcions de filtres quan hi ha un projecte obert, es pot produir una pèrdua de dades. Si canvieu les opcions de segmentació quan hi ha un projecte obert, caldrà que torneu a carregar el projecte per tal d'aplicar els canvis.</p>
+<hr>
+<h2><a name="structure" id="structure"></a>Segmentació a nivell d'estructura</h2>
+<p>L'OmegaT primer analitza el text per trobar la segmentació a nivell d'estructura. Durant aquest procés, només s'utilitza l'estructura del fitxer de partida per produir segments.</p>
+<p>Per exemple, els <a href="fileFilters.html#filter_options">fitxers de text</a> poden segmentar-se per salts de línia, per línies buides o bé no segmentar-se de cap manera. Els fitxers amb format (documents de l'OpenOffice.org, documents HTML, etc.) es segmenten a partir de les etiquetes de bloc (paràgraf). Els <a href="fileFilters.html#filter_options">atributs </a> traduïbles d'objectes en fitxers XHTML o HTML es poden extreure en segments separats.</p>
+<hr>
+<h2><a name="sentence" id="sentence"></a>Segmentació a nivell de frase</h2>
+<p>Un cop segmentat el fitxer de partida en unitats lògiques, l'OmegaT segmentarà addicionalment aquests blocs en frases.</p>
+<h3><a name="about" id="about"></a>Regles de segmentació</h3>
+<p>El procés de segmentació es pot il·lustrar d'aquesta manera: imagineu-vos que el cursor es va movent al llarg del text, caràcter per caràcter. A cada posició del cursor, s'aplica cada regla en l'ordre especificat per veure si el <strong>Patró previ</strong> es pot aplicar al text situat a l'esquerra del cursor, i el <strong>Patró posterior</strong> al text situat a la dreta. Si la regla es pot aplicar, el programa atura l'exploració de regles (si es tracta d'una regla d'excepció) o crea un segment nou (si es tracta d'una regla de divisió).</p>
+<p>La segmentació per frases s'ha implementar amb l'ajuda de l'estàndard <a
+ href="http://www.lisa.org/standards/srx/">SRX (Segmentation Rules eXchange, intercanvi de regles de segmentació)</a>; no obstant, tingueu en compte que l'OmegaT no és compatible amb totes les funcions d'SRX. No es poden importar ni exportar les regles definides amb format SRX. Però si enteneu com funciona l'SRX, ja sabreu com realitza la segmentació l'OmegaT.</p>
+<p>Hi ha dos tipus de regles:</p>
+<ul>
+  <li>
+    <p>Les <strong>regles de divisió</strong> separen el text de partida en segments. Per exemple, <i>"Tenia sentit? No n'estava segur."</i> s'hauria de separar en dos segments; així doncs, hi hauria d'haver una regla de divisió per a "<code>?</code>".</p>
+  </li>
+  <li>
+    <p>Les <strong>regles d'excepció</strong> especifiquen quines parts de text NO s'han de separar. Malgrat el punt, <i>"Mrs. Dalloway"</i> no s'hauria de separar en dos segments; per tant, s'hauria de definir una regla d'excepció per a "Mrs" (i "Mr", "Dr", "prof" etc.) seguit d'un punt.</p>
+  </li>
+</ul>
+<p>Les regles de divisió predefinides haurien de ser suficients per a la majoria de les llengües europees i per al japonès. Donada la gran flexibilitat, és recomanable que definiu més regles d'excepció per a la llengua a partir de la qual traduïu, per tal d'obtenir segments més significatius i coherents.</p>
+<h3><a name="setup" id="setup"></a>Configuració de les regles</h3>
+<h3><a name="priority" id="priority"></a>Prioritat</h3>
+<p>Tots els conjunts de regles de segmentació que coincideixin amb un Patró de llengua s'aplicaran en l'ordre que es mostra al diàleg; per tant, les regles d'una llengua específica han de col·locar-se més amunt que les regles per defecte. Per exemple, les regles del francès de Canadà (FR-CA) haurien d'estar per sobre de les regles del francès (FR.*) i per sobre de les regles Per defecte (.*). D'aquesta manera, quan traduïu al francès de Canadà, el projecte utilitzarà primer les regles definides per a aquesta llengua; a continuació, les regles del francès i, finalment, les regles Per defecte.</p>
+<h3><a name="creation" id="creation"></a>Creació de regles</h3>
+<p>Per editar o ampliar un conjunt de regles existent, feu-hi clic a la taula de la part superior. Les regles del conjunt apareixeran a la part de sota de la finestra.</p>
+<p>Per crear un conjunt de regles buit per un patró de llengua nou<span style="font-family: Times New Roman;">,</span><font
+ color="black" face="Times New Roman" size="3"><span
+ style="font-size: 12pt; color: black;" lang="EN-US"> </span></font> feu clic a <strong>Afegeix</strong> de la part de dalt del diàleg. Apareixerà una línia buida al final de la taula superior <font color="black"
+ face="Times New Roman" size="3"><span
+ style="font-size: 12pt; color: black;" lang="EN-US">(pot ser que us hàgiu de desplaçar cap avall per veure-la)</span></font>. Canvieu el nom del conjunt de regles i el patró de llengua. La sintaxi del patró de llengua respecta la sintaxi d'una <a href="regexp.html">expressió regular</a>. Si el conjunt de regles correspon a una parella de llengua-país, es recomana que el col·loqueu al capdamunt mitjançant el botó <strong>Mou cap amunt</strong>.&nbsp;</p>
+<h3><a name="break" id="break"></a>Divisió/Excepció</h3>
+<p>La casella de selecció Divisió/Excepció determina si es tracta d'una regla de divisió (casella de selecció activada) o d'una regla d'excepció (casella de selecció desactivada). Les expressions regulars dels camps Patró previ i Patró posterior especifiquen el text que ha d'aparèixer abans i després d'una posició per tal que s'inclogui en la regla d'excepció o de divisió.</p>
+<h3><a name="examples" id="examples"></a>Exemples senzills</h3>
+<table border="0" cellpadding="4" cellspacing="0">
+  <tbody>
+    <tr bgcolor="#dddddd">
+      <td width="26%">
+      <p><strong>Objectiu</strong></p>
+      </td>
+      <td>
+      <p><strong>Abans</strong></p>
+      </td>
+      <td>
+      <p><strong>Després</strong></p>
+      </td>
+      <td width="52%">
+      <p><strong>Nota</strong></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="26%">
+      <p>Definir un segment després d'un punt ('<code>.</code>') i abans d'un espai</p>
+      </td>
+      <td>
+      <p><code>\.</code></p>
+      </td>
+      <td>
+      <p><code>\s</code></p>
+      </td>
+      <td width="52%">
+      <p>"<code>\.</code>" representa el caràcter "<code>.</code>" "<code>\s</code>" representa qualsevol caràcter d'espai en blanc</p>
+      </td>
+    </tr>
+    <tr bgcolor="#dddddd">
+      <td width="26%">
+      <p>No segmentar després de Mr.</p>
+      </td>
+      <td>
+      <p><code>Mr\.</code></p>
+      </td>
+      <td>
+      <p><code>\s</code></p>
+      </td>
+      <td width="52%">
+      <p>És una regla d'excepció i, per tant, la casella de selecció cal que estigui desactivada</p>
+      </td>
+    </tr>
+    <tr>
+      <td width="26%">
+      <p>Definir un segment després de "。" (punt japonès)</p>
+      </td>
+      <td>
+      <p><span lang="zxx"><code>。</code></span></p>
+      </td>
+      <td></td>
+      <td width="52%">
+      <p>Fixeu-vos que <i>després</i> és buit</p>
+      </td>
+    </tr>
+    <tr bgcolor="#dddddd">
+      <td width="26%">
+      <p>No segmentar després de M. Mr. Mrs. i Ms.</p>
+      </td>
+      <td>
+      <p><code>Mr??s??\.</code></p>
+      </td>
+      <td>
+      <p><code>\s</code></p>
+      </td>
+      <td width="52%">
+      <p>Regla d'excepció - vegeu l'ús de ? en expressions regulars (quantificador "no voraç")</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<h2><a name="regex" id="regex"></a>Construccions d'expressions regulars</h2>
+<p>Les expressions regulars que podeu utilitzar en les regles de segmentació són les que permet el Java. Hi ha disponible un breu resum a l'apèndix <a
+ href="regexp.html">Construccions d'expressions regulars</a>. Si necessiteu informació més específica, visiteu <a
+ href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+<p>Podeu trobar guies d'aprenentatge senzilles al web (per exemple, <a
+ href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>).</p>
+<hr>
+<table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a> </td>
+      <td style="text-align: center;"><a href="index.html">Inici</a> </td>
+      <td style="text-align: right;"><a href="xindex.html">Índex</a> </td>
+    </tr>
+  </tbody>
+</table>
 </body>
 </html>

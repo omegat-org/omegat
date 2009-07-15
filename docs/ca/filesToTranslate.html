@@ -1,160 +1,241 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Fitxers per a traduir - Manual d'usuari de l'OmegaT 1.7.3</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Fitxers per traduir - Manual d'usuari de l'OmegaT 1.8</title>
 </head>
+
 <body>
+  <h1>Fitxers per traduir</h1>
 
-	<h1>Fitxers per a traduir</h1>
+  <p><a href="#RTLbidi">Llengües amb sistema d'escriptura de dreta a esquerra</a></p>
 
-	<ul>
-		<li><a href="#bidi">Llengües amb sistema d'escriptura de dreta a esquerra</a>
-			<ul>
-				<li><a href="#bidi_transl">Traducció</a></li>
-				<li><a href="#bidi_create">Creació dels documents traduïts</a></li>
-			</ul>
-		</li>
-		 <li>
-		    <a href="#formats">Formats de fitxer</a>
-			<ul>
-				<li><a href="#plaintext">Fitxers de text net</a></li>
-				<li><a href="#tagged">Fitxers de text formatat</a></li>
-				<li><a href="#specifics">Consideracions específiques sobre els formats de fitxer</a></li>
-				<li><a href="#others">Altres formats de fitxer</a>
-					<ul>
-						<li><a href="#ooo">OpenOffice.org</a></li>
-						<li><a href="#okapi">Okapi Framework</a></li>
-						<li><a href="#tt">Translate Toolkit</a></li>
-						<li><a href="#po4a">po4a</a></li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-	</ul>
+  <ul>
+    <li>
+      <p><a href="#RTL_Changing_direction">Canvi del sentit del text que es mostra i del text d'entrada</a></p>
+    </li>
 
-	<hr>
+    <li>
+      <p><a href="#RTL_mixing">Combinació de cadenes d'esquerra a dreta (LTR) i de dreta a esquerra (RTL) als segments</a></p>
+    </li>
 
-	<a name="bidi" id="bidi"></a>
-	<h1>Llengües amb sistema d'escriptura de dreta a esquerra</h1>
-	
-	<a name="bidi_transl" id="bidi_transl"></a>
-	<h2>Traducció</h2>
+    <li>
+      <p><a href="#RTL_tags">Etiquetes de l'OmegaT als segments de dreta a esquerra (RTL)</a></p>
+    </li>
 
-	<p>Quan traduïu a llengües bidireccionals amb l'OmegaT, hi ha dos aspectes a considerar: 1) l'entrada de text i 2) la visualització del text. Quan escriviu text de dreta a esquerra (p. ex. Urdu, Àrab, etc.) i utilitzeu una vista d'esquerra a dreta, que és la vista per defecte, el text no sempre es mostra en l'ordre en què s'ha introduït. Aquest problema no es fa palès quan s'està introduint purament text de dreta a esquerra, i en aquests casos es pot utilitzar la vista d'esquerra a dreta.</p>
+    <li>
+      <p><a href="#RTL_CreatingTranslatedDocuments">Creació dels documents de dreta a esquerra (RTL)</a></p>
+    </li>
+  </ul>
 
-	<p>Això no obstant, quan la llengua d'arribada té un sistema d'escriptura de dreta a esquerra, moltes vegades cal incloure text d'esquerra a dreta. Per exemple, és possible que alguns noms de producte s'hagin de deixar en anglès, o bé hi poden aparèixer marcadors que s'hagin de deixar en la forma original durant la localització de cadenes d'una interfície gràfica d'usuari (GUI).</p>
+  <p><a href="#formats">Formats de fitxer</a></p>
 
-	<p>Quan hi ha text d'esquerra a dreta incrustat en text de dreta a esquerra, no es mostra en l'ordre en què s'ha introduït. Per tal que l'OmegaT mostri l'ordre correcte, cal canviar la vista prement <code>Ctrl+Maj+O</code>.</p>
-	
-	<p><strong>Nota:</strong> Podeu utilitzar la mateixa drecera al Mac OSX.</p>
-	
-	<p>També és més fàcil entrar text de dreta a esquerra quan s'ha canviat a la vista de dreta a esquerra perquè, a la vista per defecte, quan s'introdueix text de dreta a esquerra, els espais apareixen a la dreta del text introduït i el següent caràcter de dreta a esquerra llavors apareix a l'esquerra.</p>
+  <ul>
+    <li>
+      <p><a href="#plaintext">Fitxers de text net</a></p>
+    </li>
 
-	<p>En prémer <code>Ctrl+Maj+O</code>, l'OmegaT canvia tant l'entrada de text com la visualització del text pel sistema de dreta a esquerra. Es pot utilitzar independentment per a les tres subfinestres (editor, coincidències parcials i glossari).</p>
+    <li>
+      <p><a href="#tagged">Fitxers de text formatat</a></p>
+    </li>
 
-	<a name="bidi_create" id="bidi_create"></a>
-	<h2>Creació dels documents traduïts</h2>
-	
-	<p>Quan creeu el document traduït, es mostrarà en sentit d'esquerra a dreta, com al document original. S'ha de canviar manualment. Cada format de fitxer té maneres específiques per a mostrar el text de dreta a esquerra; consulteu els manuals de l'aplicació corresponent per a obtenir més detalls.<hr>
-	
-	<a name="formats" id="formats"></a>
-	<h1>Formats de fitxer</h1>
+    <li>
+      <p><a href="#specifics">Consideracions específiques sobre els formats de fitxer</a></p>
+    </li>
 
-	<p>Amb l'OmegaT, podeu traduir fitxers en diversos formats. Bàsicament, hi ha dos tipus de formats de fitxer: el formats de <strong>text net</strong> i els de <strong>text formatat</strong>.</p>
+    <li>
+      <p><a href="#others">Altres formats de fitxer</a></p>
 
-	<a name="plaintext" id="plaintext"></a>
-	<h2>Fitxers de text net</h2>
+      <ul>
+        <li>
+          <p><a href="#ooo">OpenOffice.org</a></p>
+        </li>
 
-	<p>Els fitxers de text net només contenen text; per tant, el procés de traducció és tan senzill com escriure'n la traducció.</p>
-	
-	<p>Hi ha diversos <a href="plainText.html">mètodes</a> d'especificar la codificació del fitxer, per tal que el contingut no sigui il·legible en obrir-lo amb l'OmegaT.</p>
+        <li>
+          <p><a href="#okapi">Okapi Framework</a></p>
+        </li>
 
-	<p>Es considera que aquests fitxers no contenen cap més tipus de format a part dels "espais en blanc" amb finalitat de sagnat/alineació. Normalment es modifiquen mitjançant editors de textos i generalment aquest format no pot contenir informació de tipus de lletra, colors, marges, etc.</p>
+        <li>
+          <p><a href="#tt">Translate Toolkit</a></p>
+        </li>
 
-	<p>Actualment, l'OmegaT admet els següents formats de text net:</p>
+        <li>
+          <p><a href="#po4a">po4a</a></p>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <hr>
 
-	<ul>
-		<li>Text ASCII (.txt, etc.)</li>
-		<li>Text codificat</li>
-		<li>Paquets de recursos Java (.properties)</li>
-		<li>Fitxers PO (.po)</li>
-		<li>Fitxers INI (clau=valor) (.ini)</li>
-	</ul>
+  <h3><a name="RTLbidi"></a>Llengües amb sistema d'escriptura de dreta a esquerra</h3>
 
-	<p>L'OmegaT pot gestionar altres tipus de fitxers de text net <a href="fileFilters.html">associant-ne</a> l'extensió del fitxer amb un tipus de fitxer compatible (per exemple, els fitxers <code>.pod</code> podrien associar-se al filtre de text ASCII) i processant-los prèviament amb regles de <a href="segmentation.html">segmentació</a> específiques.</p>
+  <h4><a name="RTL_Changing_direction"></a>Canvi del sentit del text que es mostra i del text d'entrada</h4>En totes les tasques que es duen a terme amb l'OmegaT, podeu canviar entre el mode de visualització/entrada d'esquerra a dreta (LTR) i el mode de visualització/entrada de dreta a esquerra (RTL) prement Ctrl+Maj+O (és la lletra O, no el número 0). L'ús del mode de dreta a esquerra a l'OmegaT no té cap mena d'influència en el mode de visualització dels documents traduïts creats amb l'OmegaT. El mode de visualització dels documents traduïts s'hauran de modificar amb l'aplicació que s'utilitza habitualment per modificar-los (consulteu els manuals rellevants per obtenir més detalls). En prémer Ctrl+Maj+O, l'OmegaT canvia tant l'entrada de text com la visualització del text pel sistema de dreta a esquerra. Es pot utilitzar independentment per a les tres subfinestres (Editor, Coincidències parcials i Glossari). També pot utilitzar-se en tots els camps d'entrada de l'OmegaT (finestra de cerca, regles de segmentació, etc.)<p>Nota: Per al Mac OSX, s'utilitza la mateixa drecera (i no Cmd+Maj+O).</p>
 
+  <h4><a name="RTL_mixing"></a>Combinació de cadenes de dreta a esquerra (RTL) i d'esquerra a dreta (LTR) als segments</h4>Quan s'està introduint text purament de dreta a esquerra, es pot utilitzar la vista d'esquerra a dreta per defecte. No obstant, moltes vegades cal incloure text d'esquerra a dreta dins del text de dreta a esquerra. Per exemple, a les etiquetes de l'OmegaT, als noms de producte que s'hagin de deixar en la llengua de partida d'esquerra a dreta, als marcadors en fitxers de localització i a les xifres del text. En aquests casos, cal canviar al mode d'esquerra a dreta, per tal que el text de dreta a esquerra (de fet, bidireccional) es mostri correctament. Tingueu en compte que, quan l'OmegaT és en mode de dreta a esquerra, tant el text de partida com el traduït es mostraran en mode de dreta a esquerra. Això vol dir que, si la llengua de partida és d'esquerra a dreta i la llengua d'arribada és d'esquerra a dreta (o a la inversa), potser caldrà anar alternant entre els modes de dreta a esquerra i d'esquerra a dreta per veure fàcilment el text de partida i escriure'n la traducció en el mode corresponent.<h4><a name="RTL_tags"></a>Etiquetes de l'OmegaT als segments de dreta a esquerra (RTL)</h4>
 
-	<a name="tagged" id="tagged"></a>
-	<h2>Fitxers de text formatat</h2>
+  <p>Tal com ja s'ha esmentat més amunt, les etiquetes de l'OmegaT són cadenes d'esquerra a dreta. Quan es tradueix entre llengües de dreta a esquerra i d'esquerra a dreta, potser caldrà que el traductor vagi alternant diverses vegades entre els modes d'esquerra a dreta i de dreta a esquerra per tal de poder llegir les etiquetes del text de partida i escriure-les correctament al text traduït.</p>
 
-	<p>Els fitxers de text formatat contenen text i també informació com ara el tipus de lletra, la mida, el color, etc. Normalment es creen mitjançant processadors de textos o editors de pàgines web.</p>
-	
-	<p>Aquests formats de fitxer estan dissenyats de manera que conservin informació de format. La informació de format pot ser tan senzilla com <strong>això surt en negreta</strong> o tan complexa com les dades d'una taula amb diferents tipus de lletra, mides, colors, posicions, etc.</p>
-	
-	<p>En molts treballs de traducció, és considera important que l'aspecte del document traduït sigui el més similar possible que l'original. L'OmegaT ho fa possible marcant els caràcters o les paraules que tenen un format especial amb <a href="formattedText.html">etiquetes</a> fàcils de manipular.</p>
-	
-	<p>La simplificació del format del text original contribueix en gran mesura a la reducció del nombre d'etiquetes. Si és possible, cal considerar la possibilitat d'unificar els tipus de lletra utilitzats, les mides, els colors, etc. per tal de simplificar la traducció i reduir el nombre de possibles <a href="userInterface.html#tags">errors d'etiquetes</a>.</p>
+  <p>Si el document ho permet, és recomanable que el traductor elimini la informació d'estil del document original, per tal que a la interfície de l'OmegaT hi aparegui el mínim nombre d'etiquetes possible. Seguiu les instruccions de l'apartat Consells per a la gestió d'etiquetes. Si valideu sovint les etiquetes (vegeu <a href=
+  "userInterface.html#tag_validation">Validació de les etiquetes)</a> i creeu els documents traduïts en intervals regulars (vegeu més endavant i <a href="menu.html">Menú</a>), us serà més fàcil detectar els problemes potencials que puguin sorgir. Idealment, hauria d'ésser possible traduir una versió en text net del document i, posteriorment, afegir-hi la informació d'estil necessària en l'aplicació corresponent.</p>
 
-	<p>Actualment, l'OmegaT admet els següents formats de text formatat:</p>
+  <h4><a name="RTL_CreatingTranslatedDocuments" id=
+  "RTL_CreatingTranslatedDocuments"></a>Creació dels documents de dreta a esquerra (RTL)</h4>
 
-	<ul>
-		<li>OpenOffice.org</li>
-		<li>OpenDocument</li>
-		<li>Microsoft Open XML</li>
-		<li>(X)HTML</li>
-		<li>Compilador d'ajuda HTML</li>
-		<li>DocBook</li>
-		<li>XLIFF monolingües de l'Okapi</li>
-	</ul>
+  <p>Quan creeu el document traduït, es mostrarà en el mateix sentit que el document original. Si el sentit del document original és d'esquerra a dreta, el sentit del document traduït s'haurà de canviar manualment al mode de dreta a esquerra amb l'aplicació amb la qual es visualitzi el document. Cada format de fitxer té maneres específiques per mostrar el text de dreta a esquerra; consulteu els manuals de l'aplicació corresponent per obtenir més detalls.</p>
 
-	<p>L'OmegaT pot gestionar altres tipus de fitxers de text <a href="fileFilters.html">associant-ne</a> l'extensió del fitxer amb un tipus de fitxer compatible i processant-los prèviament amb regles de <a href="segmentation.html">segmentació</a> específiques.</p>
+  <p>Per evitar haver de canviar els paràmetres de visualització dels fitxers traduïts cada vegada que s'obren, a vegades és possible canviar els paràmetres de visualització dels fitxers de partida per tal que els fitxers de partida heretin aquests paràmetres. Per exemple, aquestes modificacions es poden dur a terme en fitxers de l'OpenOffice.org.</p>
+  <hr>
 
-	
-	<a name="specifics" id="specifics"></a>
-	<h2>Consideracions específiques sobre els formats de fitxer</h2>
+  <h3><a name="formats" id="formats"></a>Formats de fitxer</h3>
 
-	<p>L'OmegaT gestiona cada tipus de fitxer de manera diferent. Podeu configurar-ne el comportament específic mitjançant els <a href="fileFilters.html">filtres de fitxers</a>.<a name="others" id="others"></a>
-	<h2>Altres formats de fitxer</h2>
+  <p>Amb l'OmegaT, podeu traduir fitxers en diversos formats. Bàsicament, hi ha dos tipus de formats de fitxer: el format de <strong>text net</strong> i el de <strong>text formatat</strong>.</p>
 
-	<p>És possible que l'OmegaT pugui treballar amb altres formats de fitxer de text net o de text formatat.</p>
-	
-	<p>També podeu utilitzar eines externes per a convertir fitxers incompatibles en formats compatibles. Caldrà convertir el fitxer traduït al seu format original. Així, amb l'OmegaT es poden traduir diversos formats de text net (inclosos fitxers LaTex, etc.) mitjançant la conversió al format PO. De manera similar, amb l'OmegaT es poden traduir diversos formats de text formatat (inclosos fitxers del Microsoft Office) mitjançant la conversió al format Open Document.</p>
-	
-	<p>La qualitat del fitxer traduït dependrà de la qualitat de la conversió inicial i final. Assegureu-vos d'haver provat totes les opcions disponibles abans de realitzar aquests tipus de conversions.</p>
-	
-	<p>Algunes de les eines de conversió gratuïtes disponibles són:</p>
-	
-	<a name="ooo" id="ooo"></a>
-	<h3>OpenOffice.org</h3>
+  <h3><a name="plaintext" id="plaintext"></a>Fitxers de text net</h3>
 
-	<p>L'OmegaT no ofereix compatibilitat directa amb els formats del Microsoft Office (Word, Excel i PowerPoint). No obstant, podeu utilitzar l'OpenOffice.org (i les seves variants) per a convertir aquests formats a OpenDocument, que l'OmegaT admet de manera nativa.</p>
-	
-	<p><a href="http://www.openoffice.org/">Pàgina oficial de l'OpenOffice.org</a></p>
+  <p>Els fitxers de text net només contenen text; per tant, el procés de traducció és tan senzill com escriure'n la traducció.</p>
 
-	<a name="okapi" id="okapi"></a>
-	<h3>Okapi Framework</h3>
+  <p>Hi ha diversos <a href="plainText.html">mètodes</a> d'especificar la codificació del fitxer, per tal que el contingut no sigui il·legible en obrir-lo amb l'OmegaT.</p>
 
-	<p>L'eina d'extracció de text (Text Extraction Utility) de l'Okapi Framework té una opció per a crear un arbre de directoris de projecte de l'OmegaT. També pot crear un fitxer XLIFF específic per a l'OmegaT. Recentment, l'Okapi ha presentat eines que s'executen amb Mono, una plataforma gratuïta disponible per a la majoria de sistemes operatius.</p>
+  <p>Es considera que aquests fitxers no contenen cap més tipus de format a part dels "espais en blanc" amb finalitat de sagnat/alineació. Normalment es modifiquen mitjançant editors de textos i generalment aquest format no pot contenir informació de tipus de lletra, colors, marges, etc.</p>
 
-	<p><a href="http://okapi.sourceforge.net/Release/Tikal/ReadMe_ForMono.htm">Pàgina de la versió de l'Okapi per a Mono</a>, <a href="http://okapi.sourceforge.net/Release/Shared/Help/tutorial_02.htm">guia d'aprenentatge</a></p>
+  <p>Actualment, l'OmegaT admet els següents formats de text net:</p>
 
-	<a name="tt" id="tt"></a>
-	<h3>Translate Toolkit</h3>
-	
-	<p>El Translate Toolkit, un conjunt d'eines python, ofereix als usuaris una sèrie de convertidors a fitxers PO (Portable Object), que inclouen fitxers .properties i DTD del Mozilla, fitxers CSV, fitxers .ts del Qt  i fitxers XLIFF. Conté una sèrie d'eines per a manipular aquests tipus de fitxers abans i després de traduir-los amb l'OmegaT.</p>
+  <ul>
+    <li>
+      <p>Text ASCII (.txt, etc.)</p>
+    </li>
 
-	<p><a href="http://translate.sourceforge.net/wiki/toolkit/index">Pàgina oficial del Translate Toolkit</a></p>
+    <li>
+      <p>Text codificat</p>
+    </li>
 
-	<a name="po4a" id="po4a"></a>
-	<h3>po4a</h3>
+    <li>
+      <p>Paquets de recursos Java (.properties)</p>
+    </li>
 
-	<p>El po4a és una eina perl de Debian. Pot convertir formats de fitxer com ara LaTeX, TeX, POD, etc. a fitxers PO (Portable Object).</p>
+    <li>
+      <p>Fitxers PO (.po)</p>
+    </li>
 
-	<p><a href="http://po4a.alioth.debian.org/">Pàgina oficial del po4a</a></p>
-	
-	<hr>
+    <li>
+      <p>Fitxers INI (clau=valor) (.ini)</p>
+    </li>
+  </ul>
 
-	<p><a href="legalNotices.html">Avisos legals</a></p>
+  <p>L'OmegaT pot gestionar altres tipus de fitxers de text net <a href=
+  "fileFilters.html">associant-ne</a> l'extensió del fitxer amb un tipus de fitxer compatible (per exemple, els fitxers <code>.pod</code> podrien associar-se al filtre de text ASCII) i processant-los prèviament amb regles de <a href=
+  "segmentation.html">segmentació</a> específiques.</p>
+
+  <h3><a name="tagged" id="tagged"></a>Fitxers de text formatat</h3>
+
+  <p>Els fitxers de text formatat contenen text i també informació com ara el tipus de lletra, la mida, el color, etc. Normalment es creen mitjançant processadors de textos o editors de pàgines web. Aquests formats de fitxer estan dissenyats de manera que conservin informació de format. La informació de format pot ser tan senzilla com <strong>això surt en negreta</strong> o tan complexa com les dades d'una taula amb diferents tipus de lletra, mides, colors, posicions, etc. En molts treballs de traducció, es considera important que l'aspecte del document traduït sigui el més similar possible que l'original. L'OmegaT ho fa possible marcant els caràcters o les paraules que tenen un format especial amb <a href="formattedText.html">etiquetes</a> fàcils de manipular. La simplificació del format del text original contribueix en gran mesura a la reducció del nombre d'etiquetes. Si és possible, cal considerar la possibilitat d'unificar els tipus de lletra utilitzats, les mides, els colors, etc. per tal de simplificar la traducció i reduir el nombre de possibles <a href=
+  "userInterface.html#tag_validation">errors d'etiquetes</a>.</p>
+
+  <p><a name="specifics" id="specifics"></a>L'OmegaT gestiona cada tipus de fitxer de manera diferent. Podeu configurar-ne el comportament específic mitjançant els <a href=
+  "fileFilters.html">filtres de fitxers</a>. Actualment, l'OmegaT admet els següents formats de text formatat:</p>
+
+  <ul>
+    <li>
+      <p>OpenOffice.org</p>
+    </li>
+
+    <li>
+      <p>OpenDocument</p>
+    </li>
+
+    <li>
+      <p>Microsoft Open XML</p>
+    </li>
+
+    <li>
+      <p>(X)HTML</p>
+    </li>
+
+    <li>
+      <p>Compilador d'ajuda HTML</p>
+    </li>
+
+    <li>
+      <p>DocBook</p>
+    </li>
+
+    <li>
+      <p>XLIFF monolingües de l'Okapi</p>
+    </li>
+  </ul>
+
+  <p>L'OmegaT pot gestionar altres tipus de fitxers de text <a href=
+  "fileFilters.html">associant-ne</a> l'extensió del fitxer amb un tipus de fitxer compatible i processant-los prèviament amb regles de <a href=
+  "segmentation.html">segmentació</a> específiques.</p>
+
+  <h3><a name="others" id="others"></a>Altres formats de fitxer</h3>
+
+  <p>És possible que l'OmegaT també pugui processar altres formats de fitxer de text net o de text formatat.</p>
+
+  <p>Podeu utilitzar eines externes per convertir els fitxers en formats compatibles. Recordeu que caldrà convertir els fitxers traduïts al seu format original. Així, amb l'OmegaT es poden traduir diversos formats de text net (inclosos fitxers LaTex, etc.) mitjançant la conversió al format PO. De manera similar, amb l'OmegaT es poden traduir diversos formats de text formatat (inclosos fitxers del Microsoft Office) mitjançant la conversió al format Open Document.</p>
+
+  <p>La qualitat del fitxer traduït dependrà de la qualitat de la conversió inicial i final. Assegureu-vos d'haver provat totes les opcions disponibles abans de realitzar aquests tipus de conversions. Algunes de les eines de conversió gratuïtes disponibles són:</p>
+
+  <p><br></p>
+
+  <table width="100%" border="0" cellpadding="4" cellspacing="0">
+    <col width="50*">
+    <col width="206*">
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="ooo" id="ooo"></a>OpenOffice.org<a href=
+        "http://www.openoffice.org/"><br> Pàgina oficial de l'OpenOffice.org</a></p>
+      </td>
+
+      <td width="81%">
+        <p>L'OmegaT no ofereix compatibilitat directa amb els formats del Microsoft Office (Word, Excel i PowerPoint). No obstant, podeu utilitzar l'OpenOffice.org (i les seves variants) per convertir aquests formats a OpenDocument, que l'OmegaT admet de manera nativa.</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="okapi" id="okapi"></a>Okapi Framework<a href=
+        "http://okapi.sourceforge.net/Release/Tikal/ReadMe_ForMono.htm"><br> Pàgina de la versió de l'Okapi per a Mono</a>, <a href=
+        "http://okapi.sourceforge.net/Release/Shared/Help/tutorial_02.htm">guia d'aprenentatge</a></p>
+      </td>
+
+      <td width="81%">
+        <p>L'eina d'extracció de text (Text Extraction Utility) de l'Okapi Framework té una opció per crear un arbre de directoris de projecte de l'OmegaT. També pot crear un fitxer XLIFF específic per a l'OmegaT. Recentment, l'Okapi ha presentat eines que s'executen amb Mono, una plataforma gratuïta disponible per a la majoria de sistemes operatius.</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="tt" id="tt"></a>Translate Toolkit<br> <a href="http://translate.sourceforge.net/wiki/toolkit/index">Pàgina oficial del Translate Toolkit</a></p>
+      </td>
+
+      <td width="81%">
+        <p>El Translate Toolkit, un conjunt d'eines python, ofereix als usuaris una sèrie de convertidors a fitxers PO (Portable Object), que inclouen fitxers .properties i DTD del Mozilla, fitxers CSV, fitxers .ts del Qt i fitxers XLIFF. Conté una sèrie d'eines per manipular aquests tipus de fitxers abans i després de traduir-los amb l'OmegaT.</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="po4a" id="po4a"></a>Po4a<br> <a href="http://po4a.alioth.debian.org/">Pàgina oficial del po4a</a></p>
+      </td>
+
+      <td width="81%">
+        <p>El po4a és una eina perl de Debian. Pot convertir formats de fitxer com ara LaTeX, TeX, POD, etc. a fitxers PO (Portable Object).</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a> </td>
+        <td style="text-align: center;"><a href="index.html">Inici</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Índex</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
 </body>
 </html>

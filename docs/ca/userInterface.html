@@ -1,365 +1,502 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Interfície d'usuari - Manual d'usuari de l'OmegaT 1.7.3</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Interfície d'usuari - Manual d'usuari de l'OmegaT 1.8</title>
 </head>
+
 <body>
+  <h2>Interfície d'usuari</h2>
 
-	<h1>Interfície d'usuari</h1>
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <ul>
+          <li>
+            <p><a href="#item">Elements de la interfície d'usuari</a></p>
 
-	<ul>
-		<li><a href="#item">Elements de la interfície d'usuari</a>
-			<ul>
-				<li><a href="#most">Finestres que utilitzareu la major part del temps</a></li>
-				<li><a href="#some">Finestres que utilitzareu de tant en tant</a></li>
-				<li><a href="#dialogs">Diàlegs que utilitzareu per a canviar la configuració del projecte</a></li>
-			</ul>
-		</li>
-		<li><a href="#OmegaT_Main_Window">Finestra principal de l'OmegaT</a>
-			<ul>
-				<li><a href="#main">Operacions amb la finestra principal</a></li>
-				<li><a href="#Editor">Subfinestra de l'editor</a>
-					<ul>
-						<li><a href="#segment_display">Visualització dels segments</a></li>
-						<li><a href="#edit_field">Edició del contingut del camp</a></li>
-					</ul>
-				</li>
-				<li><a href="#Match">Visualitzador de coincidències</a>
-					<ul>
-						<li><a href="#match_sel">Selecció de coincidències parcials</a></li>
-						<li><a href="#match_oper">Operacions amb les coincidències parcials</a></li>
-						<li><a href="#match_display">Visualització i informació de les coincidències</a></li>
-					</ul>
-				</li>
-				<li><a href="#Glossary">Glossari</a></li>
-				<li><a href="#menu">Menú principal</a></li>
-				<li><a href="#bar">Barra d'estat</a></li>
-			</ul>
-		</li>
-		<li><a href="#Other_windows">Altres finestres</a>
-			<ul>
-				<li><a href="#files">Fitxers del projecte</a>
-					<ul>
-						<li><a href="#proj_files">Característiques de la finestra Fitxers del projecte</a></li>
-						<li><a href="#unique">Segments únics</a></li>
-						<li><a href="#adding_files">Com afegir fitxers al projecte</a></li>
-					</ul>
-				</li>
-				<li><a href="#search">Finestra de cerca</a>
-					<ul>
-						<li><a href="#search_types">Tipus de cerca</a></li>
-						<li><a href="#wildcards_regexp">Comodins i expressions regulars</a></li>
-						<li><a href="#search_display">Visualització dels resultats de la cerca</a></li>
-					</ul>
-				</li>
-				<li><a href="#tags">Validació de les etiquetes</a></li>
-				<li><a href="#manual">Navegador de l'ajuda</a>
-					<ul>
-						<li><a href="#help">Navegació pel navegador de l'ajuda</a></li>
-						<li><a href="#offline">Navegació fora de línia del manual d'usuari</a></li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-		<li><a href="#dialogs">Diàlegs que utilitzareu per a canviar la configuració del projecte</a>
-			<ul>
-				<li><a href="projectProperties.html">Propietats del projecte</a></li>
-				<li><a href="fontSettings.html">Tipus de lletra</a></li>
-				<li><a href="fileFilters.html">Filtres de fitxers</a></li>
-				<li><a href="segmentation.html">Segmentació</a></li>
-				<li><a href="translationEditing.html">Comportament de l'edició</a></li>
-			</ul>
-		</li>
-	</ul>
-<hr>
+            <ul>
+              <li>
+                <p><a href="#most">Finestres que utilitzareu la major part del temps</a></p>
+              </li>
 
-	<a name="item" id="item"></a>
-	<h1>Elements de la interfície d'usuari</h1>
+              <li>
+                <p><a href="#some">Finestres que utilitzareu de tant en tant</a></p>
+              </li>
 
-	<a name="most" id="most"></a>
-	<h2>Finestres que utilitzareu la major part del temps</h2>
+              <li>
+                <p><a href="#dialogs">Diàlegs que utilitzareu per canviar la configuració del projecte</a></p>
+              </li>
+            </ul>
+          </li>
 
-	<dl>
-		<dt><strong>Finestra principal de l'OmegaT</strong> (<a href="#OmegaT_Main_Window">...</a>)</dt>
-		<dd>Conté el menú principal (<a href="#menu">...</a>), la barra d'estat (<a href="#bar">...</a>) i tres subfinestres:<dl>
-				<dt>Subfinestra de l'editor (<a href="#Editor">...</a>)</dt>
-				<dd>On escriviu i editeu la traducció</dd>
-				<dt>Subfinestra del visualitzador de coincidències (<a href="#Match">...</a>)</dt>
-				<dd>Mostra els segments més similars trobats a les memòries de traducció</dd>
-				<dt>Subfinestra del visualitzador de glossaris (<a href="#Glossary">...</a>)</dt>
-				<dd>Mostra la traducció de la terminologia</dd>
-			</dl>
-		</dd>
-		<dt><strong>Finestra Fitxers del projecte</strong> (<a href="#files">...</a>)</dt>
-		<dd>Conté la llista dels fitxers traduïbles</dd>
-		<dd>S'obre prement <code>Ctrl+L</code> i es tanca prement <code>Esc</code>
-		<dt><strong>Finestra de cerca</strong> (<a href="#search">...</a>)</dt>
-		<dd>Permet cercar segments específics del projecte</dd>
-		<dd>S'obre prement <code>Ctrl+F</code> i es tanca prement <code>Esc</code></dd>
-	</dl>
+          <li>
+            <p><a href="#OmegaT_Main_Window">Finestra principal de l'OmegaT</a></p>
 
-	<a name="some" id="some"></a>
-	<h2>Finestres que utilitzareu de tant en tant</h2>
+            <ul>
+              <li>
+                <p><a href="#Editor">Subfinestra de l'editor</a></p>
+              </li>
 
-	<dl>
-		<dt><strong>Finestra de validació de les etiquetes</strong> (<a href="#tags">...</a>)</dt>
-		<dd>Permet comprovar possibles errors d'etiquetes a les traduccions</dd>
-		<dd>S'obre prement <code>Ctrl+T</code> i es tanca prement <code>Esc</code></dd>
-		<dt><strong>Navegador de l'ajuda</strong> (<a href="#manual">...</a>)</dt>
-		<dd>Permet consultar el manual d'usuari</dd>
-		<dd>S'obre prement <code>F1</code> i es tanca prement <code>Esc</code></dd>
-	</dl>
+              <li>
+                <p><a href="#Match">Visualitzador de coincidències</a></p>
+              </li>
 
-	<a name="dialogs" id="dialogs"></a>
-	<h2>Diàlegs que utilitzareu per a canviar la configuració del projecte</h2>
+              <li>
+                <p><a href="#Glossary">Glossari</a></p>
+              </li>
 
-	<p>Els següents diàlegs s'utilitzen per a canviar la configuració del projecte i de l'OmegaT. Tots estan descrits en altres apartats; a continuació només es resumeix la seva utilització i com es poden obrir:</p>
+              <li>
+                <p><a href="#menu">Menú principal</a></p>
+              </li>
 
-	<dl>
-		<dt><strong>Propietats del projecte</strong> (<a href="projectProperties.html">...</a>)</dt>
-		<dd>Permet modificar les carpetes i les llengües del projecte</dd>
-		<dd>S'obre prement <code>Ctrl+E</code> o seleccionant <strong>Projecte → Propietats...</strong> i es tanca prement <code>Esc</code></dd>
-		<dt><strong>Tipus de lletra</strong> (<a href="fontSettings.html">...</a>)</dt>
-		<dd>Permet modificar el tipus de lletra que l'OmegaT utilitza per al text de partida, per a la traducció, per a les coincidències i per als termes del glossari</dd>
-		<dd>S'obre seleccionant <strong>Opcions → Tipus de lletra...</strong> i es tanca prement <code>Esc</code></dd>
-		<dt><strong>Filtres de fitxers</strong> (<a href="fileFilters.html">...</a>)</dt>
-		<dd>Permet configurar la manipulació dels formats de fitxer compatibles</dd>
-		<dd>S'obre seleccionant <strong>Opcions → Filtres de fitxers...</strong> i es tanca prement <code>Esc</code></dd>
-		<dt><strong>Segmentació</strong> (<a href="segmentation.html">...</a>)</dt>
-		<dd>Permet canviar la manera en què el text es segmenta per frases</dd>
-		<dd>S'obre seleccionant <strong>Opcions → Segmentació...</strong> i es tanca prement <code>Esc</code></dd>
-		<dt><strong>Comportament de l'edició</strong> (<a href="translationEditing.html">...</a>)</dt>
-		<dd>Permet canviar el comportament de l'OmegaT en desplaçar-se pels segments</dd>
-		<dd>S'obre seleccionant <strong>Opcions → Comportament de l'edició...</strong> i es tanca prement <code>Esc</code></dd>
-	</dl>
+              <li>
+                <p><a href="#bar">Barra d'estat</a></p>
+              </li>
+            </ul>
+          </li>
 
-<hr>
+          <li>
+            <p><a href="#dialogs">Diàlegs que utilitzareu per canviar la configuració del projecte</a></p>
+          </li>
+        </ul>
+      </td>
 
-	<a name="OmegaT_Main_Window" id="OmegaT_Main_Window"></a>
-	<h1>Finestra principal de l'OmegaT</h1>
+      <td>
+        <ul>
+          <li>
+            <p><a href="#Other_windows">Altres finestres</a></p>
 
-	<a name="main" id="main"></a>
-	<h2>Operacions amb la finestra principal</h2>
-	
-	<p>La finestra principal té tres subfinestres, un menú principal i una barra d'estat. Podeu canviar la posició de qualsevol subfinestra o desacoblar-la en una finestra separada arrossegant la subfinestra per la barra de títol. En funció de l'estat de la subfinestra, poden mostrar-se 5 icones diferents a l'extrem superior dret de la subfinestra. Si col·loqueu el punter del ratolí en cada icona, es mostrarà l'indicador de funció.</p>
+            <ul>
+              <li>
+                <p><a href="#files">Fitxers del projecte</a></p>
 
-	<p>
-		<img src="images/Minimize.gif" name="graphics1" alt="Minimitza" align="bottom" width="18" height="18" border="0" id="graphics1">redueix la subfinestra de manera que només se'n vegi el nom i la col·loca a la part inferior, prop de la barra d'estat.<br> <img src="images/Maximize.gif" name="graphics2" alt="Maximitza" align="bottom" width="18" height="18" border="0" id="graphics2"> fa que la subfinestra ocupi tot l'espai disponible de la finestra.<br> <img src="images/Restore.gif" name="graphics3" alt="Restaura" align="bottom" width="18" height="18" border="0" id="graphics3"> restableix la subfinestra a la posició on era abans de maximitzar-la o minimitzar-la.<br> <img src="images/Undock.gif" name="graphics4" alt="Desacobla" align="bottom" width="18" height="18" border="0" id="graphics4"> desacobla la subfinestra de la finestra principal de manera que passa a ser una finestra independent.<br> <img src="images/Dock.gif" name="graphics5" alt="Acobla" align="bottom" width="18" height="18" border="0" id="graphics5"> torna a col·locar la subfinestra dins de la finestra principal.</p>
+                <ul>
+                  <li>
+                    <p><a href="#proj_files">Característiques de la finestra Fitxers del projecte</a></p>
+                  </li>
 
-	<p>Les subfinestres també es poden col·locar de manera que es superposin. En aquest cas, es mostrarà una pestanya per cada subfinestra a la part superior. En fer clic a la pestanya, la subfinestra passarà a primer pla. Els separadors de les subfinestres es poden arrossegar per tal de canviar-ne la mida.</p>
+                  <li>
+                    <p><a href="#unique">Segments únics</a></p>
+                  </li>
 
-	<a name="Editor" id="Editor"></a>
-	<h2>Subfinestra de l'editor</h2>
+                  <li>
+                    <p><a href="#adding_files">Com afegir fitxers al projecte</a></p>
+                  </li>
+                </ul>
+              </li>
 
-	<p>Aquí hi escriureu i editareu la traducció.</p>
-	
-	<a name="segment_display" id="segment_display"></a>
-	<h3>Visualització dels segments</h3>
-	
-	<p>La subfinestra de l'editor mostra el text del document traduït parcialment: el text que ja heu traduït apareix traduït, i el text que encara no heu traduït es mostra en la llengua original. El text està dividit en segments, i podeu desplaçar-vos pel document i fer doble clic en qualsevol segment per a editar-lo.</p>
-	
-	<p>Un dels segments és actiu. Es tracta de l'únic segment que es mostra en dues parts: a la part superior hi ha el text en la llengua original, en negreta i amb el fons de color verd, i a la part inferior hi ha el camp d'edició, delimitat per dos marcadors: el marcador esquerre <strong><code>&lt;segment nnnn&gt;</code></strong>, on <strong><code>nnnn</code></strong> és el número del segment dins del projecte, i el marcador dret <strong><code>&lt;fi del segment&gt;</code></strong>.</p>
-	
-	<p>El text de la part superior s'utilitza com a referència, i el camp d'edició s'utilitza per sobreescriure o modificar la traducció.</p>
-	
-	<table border="1">
-		<tr><td>
-			<table border="0" cellpadding="3">
-				<tr><td>Aquesta frase ja s'ha traduït.</td></tr>
-				<tr><td>Aquesta frase també ja s'ha traduït.</td></tr>
-				<tr bgcolor="#99ff99"><td><strong>Cette phrase est en train d'être traduite.</strong></td></tr>
-				<tr><td><strong><code>&lt;segment 0003&gt;</code></strong> [Aquí n'escriuríeu la traducció] <strong><code>&lt;fi del segment&gt;</code></strong></td></tr>
-				<tr><td>Aquesta frase es traduirà a continuació.</td></tr>
-			</table>
-		</td></tr>
-	</table>
+              <li>
+                <p><a href="#search">Finestra de cerca</a></p>
 
-	<a name="edit_field" id="edit_field"></a>
-	<h3>Edició del contingut del camp</h3>
+                <ul>
+                  <li>
+                    <p><a href="#search_types">Tipus de cerca</a></p>
+                  </li>
 
-	<p>En funció del <a href="translationEditing.html">comportament de l'edició</a> el camp d'edició pot mostrar-se buit, pot contenir el text de partida o pot contenir la traducció del segment més similar al que esteu traduint.</p>
+                  <li>
+                    <p><a href="#wildcards_regexp">Comodins i expressions regulars</a></p>
+                  </li>
 
-	<p>En passar a un altre segment, la traducció es valida i s'emmagatzema.</p>
-	
-	<p>Si voleu deixar el segment sense traduir, deixeu el camp d'edició buit, és a dir, elimineu-ne tot el text (podeu seleccionar-lo tot amb <code>Ctrl+A</code> i suprimir-lo amb <code>Supr</code>).</p>
-	
-	<p>En funció de les opcions especificades a les <a href="translationEditing.html">Opcions de comportament de l'edició</a>, l'OmegaT pot recordar una traducció tot i que sigui idèntica al text de partida. Això pot ser útil en documents que continguin marques registrades, noms propis o fragments en una tercera llengua que no s'han de traduir.</p>
+                  <li>
+                    <p><a href="#search_display">Visualització dels resultats de la cerca</a></p>
+                  </li>
+                </ul>
+              </li>
 
-	<p>Vegeu l'apartat <a href="translationEditing.html">Edició de la traducció</a> per a obtenir més detalls.</p>
+              <li>
+                <p><a href="#tag_validation">Validació de les etiquetes</a></p>
+              </li>
 
-	<a name="Match" id="Match"></a>
-	<h2>Visualitzador de coincidències</h2>
+              <li>
+                <p><a href="#manual">Navegador de l'ajuda</a></p>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+  <hr>
 
-	<p>El visualitzador de coincidències mostra els segments més similars trobats a les <a href="translationMemories.html">memòries de traducció</a>, tant a la memòria de traducció del projecte creada mentre aneu traduint el projecte, com a les memòries de traducció de referència procedents de projectes anteriors o que us ha proporcionat el client o l'agència de traducció.</p>
-	
-	<a name="match_sel" id="match_sel"></a>
-	<h3>Selecció de coincidències parcials</h3>
-	
-	<p>En passar al segment següent, la primera coincidència parcial (la que tingui el millor percentatge de coincidència) se seleccionarà automàticament. Podeu <a href="menu.html#shortcuts">seleccionar-ne</a> una altra prement <code>Ctrl+2</code>, <code>3</code>, <code>4</code> o <code>5</code>, segons el nombre de coincidències disponibles.</p>
+  <h2><a name="item" id="item"></a>Elements de la interfície d'usuari</h2>
 
-	<a name="match_oper" id="match_oper"></a>
-	<h3>Operacions amb les coincidències parcials</h3>
-	
-	<p>Si voleu utilitzar la coincidència <strong>seleccionada</strong> a la traducció, premeu <code><a href="menu.html#shortcuts">Ctrl+R</a></code> per a reemplaçar el camp d'edició per la coincidència, o premeu <code><a href="menu.html#shortcuts">Ctrl+I</a></code> per a inserir-la a la posició del cursor.</p>
-	
-	<a name="match_display" id="match_display"></a>
-	<h3>Visualització i informació de les coincidències</h3>
-	
-	<p>A grans trets, el percentatge de coincidència es calcula a partir del nombre de paraules comunes del segment actiu i del segment coincident dividit entre el nombre total de paraules del segment més llarg dels dos. La coincidència parcial seleccionada es ressaltarà en <strong>negreta</strong>, les paraules que falten al segment que esteu traduint es ressaltaran de color <strong><font color="blue">blau</font></strong> i les paraules adjacents a les parts que falten es ressaltaran de color <strong><font color="green">verd</font></strong>.</p>
+  <h3><a name="most" id="most"></a>Finestres que utilitzareu la major part del temps</h3>
 
-	<p>Per exemple, si el document de partida té el següent segment:</p>
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <col width="43*">
+    <col width="213*">
 
-	<pre>	<strong>Informació sobre el Java i l'OmegaT</strong></pre>
+    <tr>
+      <td width="24%">
+        <a name="OmegaT_Main_Window" id="OmegaT_Main_Window"></a>
 
-	<p>El segment coincident:</p>
+        <p><strong>Finestra principal de l'OmegaT</strong></p>
+      </td>
 
-	<pre>	<strong>Notes generals sobre el Java i l'OmegaT</strong></pre>
+      <td width="83%">
+        <p>Conté el menú principal, la barra d'estat i tres subfinestres:</p>
+      </td>
+    </tr>
 
-	<p>tindrà els següents colors:</p>
+    <tr>
+      <td width="24%">
+        <p>--- Subfinestra de l'editor</p>
+      </td>
 
-	<pre>	<strong><font color="blue">Notes generals</font> <font color="green">sobre</font> el Java i l'OmegaT</strong></pre>
+      <td width="83%">
+        <p>On escriviu i editeu la traducció</p>
+      </td>
+    </tr>
 
-	<p>i el percentatge seria aproximadament 4/7=<strong>57%</strong></p>
+    <tr>
+      <td width="24%">
+        <p>--- Subfinestra del visualitzador de coincidències</p>
+      </td>
 
-	<a name="Glossary" id="Glossary"></a>
-	<h2>Glossari</h2>
+      <td width="83%">
+        <p>Mostra els segments més similars trobats a les memòries de traducció</p>
+      </td>
+    </tr>
 
-	<p>La subfinestra de Glossari inclou les traduccions de terminologia carregades a partir de <a href="glossaries.html">fitxers de glossari</a>.</p>
-	
-	<p>Mostra la traducció dels termes que apareixen en el segment actual, però només els mostra com a referència, ja que no permet inserir ni reemplaçar-ne la traducció.</p>
-	
-	<p>L'OmegaT també admet termes formats per diverses paraules, però d'una manera força bàsica: si les dues paraules d'un terme apareixen en el segment, el terme es mostrarà. El format per a la terminologia de la subfinestra de Glossari és:</p>
+    <tr>
+      <td width="24%">
+        <p>--- Subfinestra del visualitzador de glossaris</p>
+      </td>
 
-	<pre> terme de partida = traducció del terme	Comentari sobre el terme, si n'hi ha cap</pre>
+      <td width="83%">
+        <p>Mostra la traducció de la terminologia</p>
+      </td>
+    </tr>
 
-	<a name="menu" id="menu"></a>
-	<h2>Menú principal</h2>
+    <tr>
+      <td width="24%">
+        <p><strong>Finestra dels fitxers del projecte</strong></p>
+      </td>
 
-	<p>Òbviament, podeu utilitzar el menú principal per a accedir a totes les funcions de l'OmegaT. Vegeu l'apèndix <a href="menu.html#menu">Menú principal</a> per a obtenir una descripció de tots els menús i els seus elements.</p>
+      <td width="83%">
+        <dl>
+          <dd>Conté la llista dels fitxers traduïbles. S'obre prement <code>Ctrl+L</code> i es tanca prement <code>Esc</code></dd>
+        </dl>
+      </td>
+    </tr>
 
-	<p>També podeu accedir a les funcions més utilitzades mitjançant <a href="menu.html#shortcuts">dreceres de teclat</a> i, quan us hàgiu acostumat a utilitzar-les, no us caldrà navegar pels menús durant la traducció.</p>
-	
-	<a name="bar" id="bar"></a>
-	<h2>Barra d'estat</h2>
+    <tr>
+      <td width="24%">
+        <dl>
+          <dt><strong>Finestra de cerca</strong></dt>
+        </dl>
+      </td>
 
-	<p>La barra d'estat mostra missatges relacionats amb el flux de treball a la part inferior de la finestra principal. Aquesta barra presenta a l'usuari missatges sobre les operacions en curs. També mostra el nombre de coincidències parcials i de termes del segment actual.</p>
+      <td width="83%">
+        <dl>
+          <dd>Permet cercar segments específics del projecte. S'obre prement <code>Ctrl+F</code> i es tanca prement <code>Esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+  </table>
 
-<hr>
+  <h3><a name="some" id="some"></a>Finestres que utilitzareu de tant en tant</h3>
 
-	<a name="Other_windows" id="Other_windows"></a>
-	<h1>Altres finestres</h1>
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <col width="43*">
+    <col width="213*">
 
-	<a name="files" id="files"></a>
-	<h2>Fitxers del projecte</h2>
+    <tr>
+      <td width="23%">
+        <dl>
+          <dt><strong>Finestra de validació de les etiquetes</strong></dt>
+        </dl>
+      </td>
 
-	<p>La finestra Fitxers del projecte llista els fitxers del projecte i mostra altra informació del projecte. S'obre automàticament en carregar un projecte a l'OmegaT. Per a tancar-la premeu <code>Esc</code> i per a obrir-la o posar-la en primer pla premeu <code>Ctrl+L</code>.</p>
-	
-	<a name="proj_files" id="proj_files"></a>
-	<h3>Característiques de la finestra Fitxers del projecte</h3>
+      <td width="83%">
+        <dl>
+          <dd>Permet comprovar possibles errors d'etiquetes a les traduccions. S'obre prement <code>Ctrl+T</code> i es tanca prement <code>Esc</code></dd>
+        </dl>
+      </td>
+    </tr>
 
-	<p>Es mostra la informació següent:</p>
-	
-	<ul>
-		<li>Llista de tots els fitxers traduïbles del projecte.<br> Inclou els fitxers de la carpeta dels fitxers de partida que són <a href="filesToTranslate.html">compatibles amb l'OmegaT</a>.<br> En fer clic en un fitxer, s'obrirà per tal que pugueu realitzar-ne la traducció.</li>
-		<li>El fitxer mostrat actualment a la subfinestra de l'editor es ressalta amb fons blau.</li>
-		<li>Al costat del nom de fitxer, es mostra el nombre de segments de cada fitxer.</li>
-		<li>El nombre de segments únics de tot el projecte.</li>
-		<li>El nombre de segments únics ja traduïts. S'actualitza cada vegada que traduïu un segment.</li>
-	</ul>
+    <tr>
+      <td width="23%">
+        <dl>
+          <dt><strong>Navegador de l'ajuda</strong></dt>
+        </dl>
+      </td>
 
-	<a name="unique" id="unique"></a>
-	<h3>Segments únics</h3>
-	
-	<p>El conjunt de segments <strong>únics</strong> es calcula agafant tots els segments i eliminant-ne tots els duplicats que, per a considerar-se com a duplicats, han de coincidir exactament a nivell de majúscules i minúscules ("Executa" i "executa" es consideren diferents).</p>
+      <td width="83%">
+        <dl>
+          <dd>Permet consultar el manual d'usuari. Es tanca prement <code><b>Esc</b></code></dd>
+        </dl>
+      </td>
+    </tr>
+  </table>
 
-	<p>Si mireu la diferència entre el "Nombre de segments" i el "Nombre de segments únics", podreu fer-vos una idea general de les repeticions que conté el text. No obstant, tingueu en compte que els nombres no indiquen la rellevància de les repeticions: és possible que es tracti de frases relativament llargues que es repeteixen diverses vegades (si teniu sort), o bé de paraules clau d'una taula (si no teniu tanta sort).</p>
-	
-	<p>El fitxer <code>project_stats.txt</code>, que es troba a la carpeta <code>/omegat</code> del projecte, conté informació de segments més detallada per fitxer.</p>
+  <h3><a name="dialogs" id="dialogs"></a>Diàlegs que utilitzareu per canviar la configuració del projecte</h3>
 
-	<p>És possible modificar el nombre de segments/segments únics modificant les regles de segmentació. Aquestes modificacions _mai_ no s'han de realitzar quan ja hàgiu començat a traduir el projecte. Vegeu l'apartat <a href="segmentation.html">Regles de segmentació</a> per a obtenir més informació.</p>
+  <p>Els següents diàlegs s'utilitzen per canviar la configuració del projecte i de l'OmegaT. Tots estan descrits en altres apartats; a continuació només es resumeix la seva utilització i com es poden obrir:</p>
 
-	<a name="adding_files" id="adding_files"></a>
-	<h3>Com afegir fitxers al projecte</h3>
-	
-	<p>Podeu afegir fitxers de partida al projecte fent clic al botó "Importa fitxers de partida..." D'aquesta manera, els fitxers es copien al directori dels fitxers de partida (per defecte, "<code>/source</code>") i es torna a carregar el projecte per a carregar els fitxers nous. També podeu afegir fitxer de partida a partir de pàgines d'Internet, escrites a MediaWiki, fent clic al botó "Importa des de MediaWiki" i especificant-ne l'URL corresponent.</p>
+  <p><br></p>
 
-	<a name="search" id="search"></a>
-	<h2>Finestra de cerca</h2>
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <col width="43*">
+    <col width="213*">
 
-	<p>La finestra de cerca us permet cercar segments específics del projecte. Podeu tenir diverses finestres de cerca obertes simultàniament. Per a obrir-ne una de nova, premeu <code><a href= "menu.html#shortcuts">Ctrl+F</a></code> des de la finestra principal.</p>
-	
-	<p>La finestra de cerca conté un camp de text per a cercar cadenes o paraules clau, caselles de selecció i botons d'opció per a configurar la cerca, i una àrea de visualització dels resultats de la cerca.</p>
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>Propietats del projecte</strong></dt>
+        </dl>
+      </td>
 
-	<a name="search_types" id="search_types"></a>
-	<h3>Tipus de cerca</h3>
-	
-	<dl>
-		<dt>Hi ha dos <a href="searches.html#searchmethods">tipus de cerca</a> disponibles:</dt>
-		<dt><strong>Cerques exactes</strong></dt>
-		<dd>Busquen la cadena de consulta especificada en l'àmbit del projecte actual o en qualsevol directori o arbre de directoris.</dd>
-		<dt><strong>Cerques per paraules clau</strong></dt>
-		<dd>Examinen el projecte actual i presenten els segments que contenen totes les paraules de la consulta (en qualsevol ordre).</dd>
-	</dl>
+      <td width="83%">
+        <dl>
+          <dd>Permet modificar les carpetes i les llengües del projecte. S'obre prement <code>Ctrl+E</code> o seleccionant <strong>Projecte → Propietats...</strong> i es tanca prement <code>Esc</code></dd>
+        </dl>
+      </td>
+    </tr>
 
-	<p>Les cerques es realitzen tant al text de partida com a la traducció.</p>
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>Tipus de lletra</strong></dt>
+        </dl>
+      </td>
 
-	<p>També podeu cerca dins d'un directori, però tingueu en compte que l'OmegaT només pot cercar dins dels <a href="filesToTranslate.html">fitxers compatibles</a>.</p>
-	
-	<a name="wildcards_regexp" id="wildcards_regexp"></a>
-	<h3>Comodins i expressions regulars</h3>
-	
-	<p>Les cerques permeten l'ús dels <a href="searches.html#usingwildcards">comodins</a> * i ?, així com d'<a href="searches.html#usingregularexpressions">expressions regulars</a>.</p>
+      <td width="83%">
+        <dl>
+          <dd>Permet modificar el tipus de lletra que l'OmegaT utilitza per al text de partida, per a la traducció, per a les coincidències i per als termes del glossari. S'obre seleccionant <strong>Opcions → Tipus de lletra...</strong> i es tanca prement <code>Esc</code></dd>
+        </dl>
+      </td>
+    </tr>
 
-	<a name="search_display" id="search_display"></a>
-	<h3>Visualització dels resultats de la cerca</h3>
-	
-	<p>En fer clic al botó Cerca un cop especificada una cadena al camp de cerca, es mostraran tots els segments del projecte que continguin la cadena que esteu cercant. Com que l'OmegaT tracta tots els segments idèntics com una única entitat, només es mostra el primer segment únic.</p>
-	
-	<p>Els segments es mostren en l'ordre en què apareixen al projecte. Si els segments estan traduïts, es mostra el text de partida a sobre i el text traduït a sota; en canvi, si els segments no s'han traduït, només es mostra el text de partida.</p>
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>Filtres de fitxers</strong></dt>
+        </dl>
+      </td>
 
-	<p>Podeu fer doble clic en un segment per a activar-lo a la finestra de l'editor. A continuació, podeu tornar a la finestra de cerca i per a anar al següent segment i modificar-lo. Aquest mètode és útil per a realitzar canvis globals de terminologia.</p>
-	
-	<a name="tags" id="tags"></a>
-	<h2>Validació de les etiquetes</h2>
+      <td width="83%">
+        <dl>
+          <dd>Permet configurar la manipulació dels formats de fitxer compatibles. S'obre seleccionant <strong>Opcions → Filtres de fitxers...</strong> i es tanca prement <code>Esc</code></dd>
+        </dl>
+      </td>
+    </tr>
 
-	<p>La finestra de validació de les etiquetes detecta els errors d'etiquetes de la traducció i els mostra en una llista.</p>
-	
-	<p>Per a obrir la finestra, premeu <code><a href="menu.html#shortcuts">Ctrl+T</a></code>.</p>
-	
-	<p>La finestra conté una taula amb tres columnes amb:</p>
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>Segmentació</strong></dt>
+        </dl>
+      </td>
 
-	<ul>
-		<li>Un enllaç al segment.</li>
-		<li>El contingut del segment original.</li>
-		<li>El contingut del segment traduït.</li>
-	</ul>
-	
-	<p>Les etiquetes estan ressaltades de color blau per a facilitar la comparació entre el contingut original i el traduït.<p>Feu clic a l'enllaç per a activar el segment a la finestra de l'editor.</p>
-	
-	<p>Corregiu l'error, si és necessari, i premeu <code><a href="menu.html#shortcuts">Ctrl+T</a></code> per a tornar a la finestra de validació de les etiquetes i corregir altres errors.</p>
+      <td width="83%">
+        <dl>
+          <dd>Permet canviar la manera en què el text es segmenta per frases. S'obre seleccionant <strong>Opcions → Segmentació...</strong> i es tanca prement <code>Esc</code></dd>
+        </dl>
+      </td>
+    </tr>
 
-	<p>Els errors d'<a href="formattedText.html#intro">etiquetes</a> corresponen a <a href="formattedText.html#tag_operation">manipulacions d'etiquetes</a> fetes a la traducció que han provocat un canvi de l'ordre o del nombre d'etiquetes del segment original. Algunes manipulacions d'etiquetes són necessàries i correctes, tot i que algunes altres provocaran problemes en crear el document traduït.</p>
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>Comportament de l'edició</strong></dt>
+        </dl>
+      </td>
 
-	<p>Generalment, les etiquetes representen algun tipus de format al text original. La <strong>simplificació del format del text original</strong> contribueix en gran mesura a la reducció del nombre d'etiquetes.</p>
-	
-	<a name="manual" id="manual"></a>
-	<h2>Navegador de l'ajuda</h2>
+      <td width="83%">
+        <dl>
+          <dd>Permet canviar el comportament de l'OmegaT en desplaçar-se pels segments. S'obre seleccionant <strong>Opcions → Comportament de l'edició...</strong> i es tanca prement <code>Esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+  </table>
+  <hr>
 
-	<p>El navegador de l'ajuda (on es mostra aquest manual) es pot obrir prement <a href="menu.html#shortcuts">F1</a> o seleccionant <strong>Ajuda → Manual d'usuari...</strong> al <a href="menu.html">menú principal</a>.</p>
-	
-	<a name="help" id="help"></a>
-	<h3>Navegació pel navegador de l'ajuda</h3>
-	
-	<p>A la finestra, es mostrarà el manual i dos botons: <strong>Enrere</strong> i <strong>Contingut</strong>. El manual d'usuari és un document HTML que enllaça amb els diferents capítols. En fer clic a un enllaç, tal com en qualsevol navegador web, s'obre la pàgina corresponent.</p>
+  <h2>Finestra principal de l'OmegaT</h2><img src="images/OmegaT_panes.png" name="grafika1"
+  alt="Subfinestres de l'OmegaT" align="left" border="0" id=
+  "grafika1"><br clear="left">
 
-	<a name="offline" id="offline"></a>
-	<h3>Navegació fora de línia del manual d'usuari</h3>
+  <p><br>
+  <br></p>
 
-	<p>El manual d'usuari es troba a la subcarpeta <code>doc</code> dins de la carpeta d'instal·lació de l'OmegaT i, per exemple, podeu veure la documentació en català obrint el fitxer <code>doc/ca/index.html</code> al navegador. D'aquesta manera, també podreu obrir els enllaços externs, ja que el navegador de l'ajuda integrat no permet els enllaços externs d'Internet.</p>
+  <p>La finestra principal té tres subfinestres, un menú principal i una barra d'estat. Podeu canviar la posició de qualsevol subfinestra o desacoblar-la en una finestra separada arrossegant la subfinestra per la barra de títol. En funció de l'estat de la subfinestra, poden mostrar-se icones diferents a l'extrem superior dret:</p>
 
-<hr>
+  <p><img src="images/Minimize.gif" name="graphics1" alt="Minimitza" align=
+  "bottom" width="18" height="18" border="0" id="graphics1">redueix la subfinestra de manera que només se'n vegi el nom i la col·loca a la part inferior, prop de la barra d'estat.<br> <img src="images/Maximize.gif" name="graphics2" alt="Maximitza" align="bottom"
+  width="18" height="18" border="0" id="graphics2"> fa que la subfinestra ocupi tot l'espai disponible de la finestra.<br> <img src="images/Restore.gif" name="graphics3" alt="Restaura" align="bottom"
+  width="18" height="18" border="0" id="graphics3"> restableix la subfinestra a la posició on era abans de maximitzar-la o minimitzar-la.<br> <img src="images/Undock.gif" name="graphics4" alt="Desacobla" align="bottom"
+  width="18" height="18" border="0" id="graphics4"> desacobla la subfinestra de la finestra principal de manera que passa a ser una finestra independent.<br> <img src="images/Dock.gif" name="graphics5" alt="Acobla" align="bottom" width=
+  "18" height="18" border="0" id="graphics5"> torna a col·locar la subfinestra dins de la finestra principal.</p>
 
-	<p><a href="legalNotices.html">Avisos legals</a></p>
+  <p>Les subfinestres també es poden col·locar de manera que es superposin. En aquest cas, es mostrarà una pestanya per cada subfinestra a la part superior. En fer clic a la pestanya, la subfinestra passarà a primer pla. Els separadors de les subfinestres es poden arrossegar per tal de canviar-ne la mida.</p>
+
+  <h3><a name="Editor" id="Editor"></a>Subfinestra de l'editor</h3>
+
+  <p>Aquí hi escriureu i editareu la traducció. La subfinestra de l'editor mostra el text del document traduït parcialment: el text que ja heu traduït apareix traduït, i el text que encara no heu traduït es mostra en la llengua original. El text està dividit en segments, i podeu desplaçar-vos pel document i fer doble clic en qualsevol segment per editar-lo. Al cas anterior, els segments ja traduïts es mostren de color groc, però podeu canviar-ne la configuració per tal d'ajustar-la a les vostres preferències (vegeu el menú <a href=
+  "menu.html">Visualització).</a></p>
+
+  <p>Un dels segments és el segment actiu. Es tracta de l'únic segment que es mostra en dues parts: a la part superior hi ha el text en la llengua original, en negreta i amb el fons de color verd, i a la part inferior hi ha el camp d'edició, delimitat per dos marcadors: el marcador esquerre <strong><code>&lt;segment nnnn&gt;</code></strong>, on <strong><code>nnnn</code></strong> és el número del segment dins del projecte, i el marcador dret <strong><code>&lt;fi del segment&gt;</code></strong>. El text de la part superior s'utilitza com a referència, i el camp d'edició s'utilitza per sobreescriure o modificar la traducció.</p>
+
+  <p>En funció del <a href="translationEditing.html">comportament de l'edició</a> el camp d'edició pot mostrar-se buit, pot contenir el text de partida o pot contenir la traducció del segment més similar al que esteu traduint. En passar a un altre segment, la traducció es valida i s'emmagatzema. Si voleu deixar el segment sense traduir, deixeu el camp d'edició buit, és a dir, elimineu-ne tot el text (podeu seleccionar-lo tot amb <code>Ctrl+A</code> i suprimir-lo amb <code>Supr</code>). L'OmegaT pot recordar una traducció tot i que sigui idèntica al text de partida. Això pot ser útil en documents que continguin marques registrades, noms propis o fragments en una tercera llengua que no s'han de traduir.</p>
+
+  <p>Vegeu l'apartat <a href="translationEditing.html">Edició de la traducció</a> per obtenir més detalls.</p>
+
+  <h3><a name="Match" id="Match"></a>Visualitzador de coincidències</h3><img src=
+  "images/MatchesPane.png" name="grafika2" alt="Subfinestra de coincidències de l'OmegaT" align="left"
+  border="0" id="grafika2"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>El visualitzador de coincidències mostra els segments més similars trobats a les <a href=
+  "translationMemories.html">memòries de traducció</a>, tant a la memòria de traducció del projecte creada mentre aneu traduint el projecte, com a les memòries de traducció de referència procedents de projectes anteriors o que us ha proporcionat el client o l'agència de traducció.</p>
+
+  <p>En passar al segment següent, la primera coincidència parcial (la que tingui el millor percentatge de coincidència) se seleccionarà automàticament. Podeu <a href=
+  "menu.html#shortcuts">seleccionar-ne</a> una altra prement <code>Ctrl+2</code>, <code>3</code>, <code>4</code> o <code>5</code>. Òbviament, si no hi ha cap coincidència número 5, prémer <code>Ctrl+5</code> no farà res.</p>
+
+  <p>Si voleu utilitzar la coincidència <strong>seleccionada</strong> a la traducció, premeu <code><a href="menu.html#shortcuts">Ctrl+R</a></code> per reemplaçar el camp d'edició per la coincidència, o premeu <code><a href=
+  "menu.html#shortcuts">Ctrl+I</a></code> per inserir-la a la posició del cursor.</p>
+
+  <p>A grans trets, el percentatge de coincidència es calcula a partir del nombre de paraules comunes del segment actiu i del segment coincident dividit entre el nombre total de paraules del segment més llarg dels dos. La coincidència parcial seleccionada es ressaltarà en <strong>negreta</strong>, les paraules que falten al segment que esteu traduint es ressaltaran de color <strong><font color=
+  "#0000FF">blau</font></strong> i les paraules adjacents a les parts que falten es ressaltaran de color <font color="#00FF00"><b>verd</b></font>. A l'exemple anterior, el segment de partida és <strong><i>Information about Java &amp; OmegaT.</i></strong> La coincidència superior és del 75%, ja que coincideixen 3 de 4 paraules (el caràcter "&amp;" s'omet). La línia que conté el percentatge de coincidència també inclou la memòria de traducció TMX d'on prové la coincidència. Si no es mostra cap nom de fitxer, vol dir que s'ha trobat a la memòria de traducció per defecte del projecte. Els segments orfes (la coincidència número 4) inclouen els segments de la memòria de traducció per defecte del projecte que no corresponen a cap segment dels fitxers de partida.</p>
+
+  <p><br>
+  <br></p>
+
+  <h3><a name="Glossary" id="Glossary"></a>Glossari</h3>
+
+  <p>La subfinestra de Glossari inclou les traduccions de terminologia carregades a partir de <a href=
+  "glossaries.html">fitxers de glossari</a>. Mostra la traducció dels termes que apareixen en el segment actual, però només els mostra com a referència, ja que no permet inserir ni reemplaçar-ne la traducció.</p><img src=
+  "images/Glossary_pane.png" name="grafika3" alt="Subfinestra de glossari de l'OmegaT" align=
+  "left" border="0" id="grafika3"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>EL segment de partida de l'exemple anterior és “<i>In most translation jobs it is considered important to have the translated document look similar to the original.</i>” i dues paraules del segment (document i translation) apareixen al fitxer de glossari. L'OmegaT també admet termes formats per diverses paraules, però d'una manera força bàsica: si les dues paraules d'un terme apareixen en el segment, el terme es mostrarà.</p>
+
+  <h3><a name="menu" id="menu"></a>Menú principal</h3>
+
+  <p>Òbviament, podeu utilitzar el menú principal per accedir a totes les funcions de l'OmegaT. Vegeu l'apèndix <a href="menu.html#menu">Menú principal</a> per obtenir una descripció de tots els menús i els seus elements. També podeu accedir a les funcions més utilitzades mitjançant <a href="menu.html#shortcuts">dreceres de teclat</a> i, quan us hàgiu acostumat a utilitzar-les, no us caldrà navegar pels menús durant la traducció.</p>
+
+  <h3><a name="bar" id="bar"></a>Barra d'estat</h3>
+
+  <p>La barra d'estat mostra missatges relacionats amb el flux de treball a la part inferior de la finestra principal. Aquesta barra presenta a l'usuari missatges sobre les operacions en curs. També mostra el nombre de coincidències parcials i de termes del segment actual.</p>
+  <hr>
+
+  <h2><a name="other_windows" id="other_windows"></a>Altres finestres</h2>
+
+  <h3><a name="files" id="files"></a>Fitxers del projecte</h3>
+
+  <p>La finestra Fitxers del projecte llista els fitxers del projecte i mostra altra informació del projecte. S'obre automàticament en carregar un projecte a l'OmegaT. Per tancar-la premeu <code>Esc</code> i per obrir-la o posar-la en primer pla premeu <code>Ctrl+L</code>.</p>
+
+  <h3><a name="proj_files" id="proj_files"></a>Característiques de la finestra Fitxers del projecte</h3>
+
+  <p>Es mostra la informació següent:</p>
+
+  <ul>
+    <li>
+      <p>Llista de tots els fitxers traduïbles del projecte. Inclou els fitxers de la carpeta dels fitxers de partida que són <a href=
+      "filesToTranslate.html">compatibles amb l'OmegaT</a>. En fer clic en un fitxer, s'obrirà per tal que pugueu realitzar-ne la traducció.</p>
+    </li>
+
+    <li>
+      <p>El fitxer mostrat actualment a la subfinestra de l'editor es ressalta amb fons blau.</p>
+    </li>
+
+    <li>
+      <p>Al costat del nom de fitxer, es mostra el nombre de segments de cada fitxer.</p>
+    </li>
+
+    <li>
+      <p>El nombre de segments únics de tot el projecte.</p>
+    </li>
+
+    <li>
+      <p>El nombre de segments únics ja traduïts. S'actualitza cada vegada que traduïu un segment.</p>
+    </li>
+  </ul>
+
+  <h3><a name="unique" id="unique"></a>Segments únics</h3>
+
+  <p>El conjunt de segments <strong>únics</strong> es calcula agafant tots els segments i eliminant-ne tots els duplicats que, per tal de considerar-se com a duplicats, han de coincidir exactament a nivell de majúscules i minúscules ("Executa" i "executa" es consideren diferents).</p>
+
+  <p>Si mireu la diferència entre el "Nombre de segments" i el "Nombre de segments únics", podreu fer-vos una idea general de les repeticions que conté el text. No obstant, tingueu en compte que els nombres no indiquen la rellevància de les repeticions: és possible que es tracti de frases relativament llargues que es repeteixen diverses vegades (si teniu sort), o bé de paraules clau d'una taula (si no teniu tanta sort). El fitxer <code>project_stats.txt</code>, que es troba a la carpeta <code>/omegat</code> del projecte, conté informació de segments més detallada per fitxer.</p>
+
+  <p>És possible modificar el nombre de segments/segments únics modificant les regles de segmentació. No obstant, cal que eviteu aquests tipus de modificacions una vegada que ja hàgiu començat a traduir el projecte. Vegeu l'apartat <a href=
+  "segmentation.html">Regles de segmentació</a> per obtenir més informació.</p>
+
+  <h3><a name="adding_files" id="adding_files"></a>Com afegir fitxers al projecte</h3>
+
+  <p>Podeu afegir fitxers de partida al projecte fent clic al botó "Importa fitxers de partida..." D'aquesta manera, els fitxers es copien a la carpeta dels fitxers de partida (per defecte, "<code>/source</code>") i es torna a carregar el projecte per tal de carregar els fitxers nous. També podeu afegir fitxer de partida a partir de pàgines d'Internet, escrites a MediaWiki, fent clic al botó "Importa des de MediaWiki" i especificant-ne l'URL corresponent.</p>
+
+  <h3><a name="search" id="search"></a>Finestra de cerca</h3>
+
+  <p>La finestra de cerca us permet cercar segments específics del projecte. Podeu tenir diverses finestres de cerca obertes simultàniament. Per obrir-ne una de nova, premeu <code><a href="menu.html#shortcuts">Ctrl+F</a></code> des de la finestra principal. La finestra de cerca conté un camp de text per cercar cadenes o paraules clau, caselles de selecció i botons d'opció per configurar la cerca, i una àrea de visualització dels resultats de la cerca.</p>
+
+  <h3><a name="search_types" id="search_types"></a>Tipus de cerca</h3>
+
+  <dl>
+    <dt>Hi ha dos <a href="searches.html#searchmethods">tipus de cerca</a> disponibles:</dt>
+
+    <dt>Les <strong>cerques exactes</strong> busquen la cadena de consulta especificada en l'àmbit del projecte actual o en qualsevol carpeta o arbre de carpetes.</dt>
+
+    <dt>Les <strong>cerques per paraules clau</strong> examinen el projecte actual i presenten els segments que contenen totes les paraules de la consulta (en qualsevol ordre).</dt>
+  </dl>
+
+  <p>Les cerques es realitzen tant al text de partida com a la traducció. També podeu cercar dins d'una carpeta, però tingueu en compte que l'OmegaT només pot cercar dins dels <a href="filesToTranslate.html">fitxers compatibles</a>.</p>
+
+  <h3><a name="wildcards_regexp" id="wildcards_regexp"></a>Comodins i expressions regulars</h3>
+
+  <p>Les cerques permeten l'ús dels <a href="searches.html#usingwildcards">comodins</a> * i ?, així com d'<a href=
+  "searches.html#usingregularexpressions">expressions regulars</a>.</p>
+
+  <h3><a name="search_display" id="search_display"></a>Visualització dels resultats de la cerca</h3>
+
+  <p>En fer clic al botó Cerca un cop especificada una cadena al camp de cerca, es mostraran tots els segments del projecte que continguin la cadena que esteu cercant. Com que l'OmegaT tracta tots els segments idèntics com una única entitat, només es mostra el primer segment únic. Els segments es mostren en l'ordre en què apareixen al projecte. Si els segments estan traduïts, es mostra el text de partida a sobre i el text traduït a sota; en canvi, si els segments no s'han traduït, només es mostra el text de partida.</p>
+
+  <p>Podeu fer doble clic en un segment per activar-lo a la finestra de l'editor. A continuació, podeu tornar a la finestra de cerca i per anar al següent segment i modificar-lo. Aquest mètode és útil per realitzar canvis globals de terminologia.</p>
+
+  <h3><a name="tag_validation" id="tag_validation"></a>Validació de les etiquetes</h3>
+
+  <p>La finestra de validació de les etiquetes detecta els errors d'etiquetes de la traducció i els mostra en una llista. Per obrir la finestra, premeu <code><a href=
+  "menu.html#shortcuts">Ctrl+T</a></code>. La finestra conté una taula amb tres columnes amb un enllaç al segment i amb el contingut del text de partida i del text traduït.</p>
+
+  <p><img src="images/TagValidator.png" name="grafika4" alt=
+  "Validació d'etiquetes de l'OmegaT" align="left" border="0" id=
+  "grafika4"><br clear="left">
+  <br>
+  <br></p>
+
+  <p>Les etiquetes estan ressaltades de color blau per facilitar la comparació entre el contingut original i el traduït. Feu clic a l'enllaç per anar al segment a la finestra de l'editor. Corregiu l'error, si és necessari, i premeu <code><a href="menu.html#shortcuts">Ctrl+T</a></code> per tornar a la finestra de validació de les etiquetes i corregir altres errors. Al primer i tercer cas de l'exemple anterior, les etiquetes estan emparellades incorrectament, i al segon cas, l'etiqueta d'inici no conté el caràcter &lt;.</p>
+
+  <p>Els errors d'<a href="formattedText.html#intro">etiquetes</a> corresponen a <a href=
+  "formattedText.html#tag_operation">manipulacions d'etiquetes</a> fetes a la traducció que han provocat un canvi de l'ordre o del nombre d'etiquetes del segment original. Algunes manipulacions d'etiquetes són necessàries i correctes, tot i que algunes altres provocaran problemes en crear el document traduït. Generalment, les etiquetes representen algun tipus de format al text original. La <strong>simplificació del format del text original</strong> contribueix en gran mesura a la reducció del nombre d'etiquetes.</p>
+
+  <h3>Navegador de l'ajuda</h3>
+
+  <p>El navegador de l'ajuda (on es mostra aquest manual) es pot obrir prement <a href="menu.html#shortcuts">F1</a> o seleccionant <strong>Ajuda → Manual d'usuari...</strong> al <a href="menu.html">menú principal</a>.</p>
+
+  <h3><a name="manual" id="manual"></a>Navegació pel navegador de l'ajuda</h3>
+
+  <p>A la finestra, es mostrarà el manual i dos botons: <strong>Enrere</strong> i <strong>Contingut</strong>. El manual d'usuari és un document HTML que enllaça amb els diferents capítols. En fer clic a un enllaç, tal com en qualsevol navegador web, s'obre la pàgina corresponent.</p>
+
+  <h3>Navegació fora de línia pel manual d'usuari</h3>
+
+  <p>El manual d'usuari es troba a la subcarpeta <code>docs</code> dins de la carpeta d'instal·lació de l'OmegaT i, per exemple, podeu veure la documentació en català obrint el fitxer <code>docs/ca/index.html</code> al navegador. D'aquesta manera, també podreu obrir els enllaços externs, ja que el navegador de l'ajuda integrat no permet els enllaços externs d'Internet.</p>
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Inici</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Índex</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

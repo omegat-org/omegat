@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.0.3 update 2
 ----------------------------------------------------------------------
-  2 Enhancements
+  3 Enhancements
   2 Bugfixes
 ----------------------------------------------------------------------
 2.0.3 update 2 vs. 2.0.3 update 1
@@ -11,6 +11,7 @@
 
   - Belarusian localisation updated to 2.0.3 (UI)
   - Dutch localisation updated to 2.0.3 (UI, Readme, Instant Start, Documentation)
+  - Catalanlocalisation updated to 2.0.3 (UI, Readme, Instant Start, Documentation)
 
   Bug Fixes:
   

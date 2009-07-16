@@ -1,17 +1,22 @@
 ----------------------------------------------------------------------
  OmegaT 2.0.3 update 2
 ----------------------------------------------------------------------
-  3 Enhancements
+  4 Enhancements
   2 Bugfixes
 ----------------------------------------------------------------------
 2.0.3 update 2 vs. 2.0.3 update 1
 
 
+  Implemented requests:
+
+  - Provide a Java Web Start version
+  http://sourceforge.net/support/tracker.php?aid=1793300
+
   Other enhancements:
 
   - Belarusian localisation updated to 2.0.3 (UI)
   - Dutch localisation updated to 2.0.3 (UI, Readme, Instant Start, Documentation)
-  - Catalanlocalisation updated to 2.0.3 (UI, Readme, Instant Start, Documentation)
+  - Catalan localisation updated to 2.0.3 (UI, Readme, Instant Start, Documentation)
 
   Bug Fixes:
   

@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Didier Briel, Alex Buloichik
+               2009 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -215,7 +216,13 @@ public class ProjectFileStorage {
                     { // using getCanonicalPath on a non-existent drive letter
                         // [1875331] Relative paths not working under
                         // Windows/Java 1.4
-                        startsWithRoot = relativePath.startsWith(root
+                        String platformRelativePath =
+                                relativePath.replace('/', File.separatorChar);
+                        // If a plaform-dependent form of relativePath is not
+                        // used, startWith will always fail under Windows,
+                        // because Windows uses C:\, while the path is stored as
+                        // C:/ in omegat.project
+                        startsWithRoot = platformRelativePath.startsWith(root
                                 .getCanonicalPath());
                     } catch (IOException e) {
                         startsWithRoot = false;
@@ -231,7 +238,7 @@ public class ProjectFileStorage {
                 return new File(m_root, relativePath).getCanonicalPath()
                         + File.separator;
             } catch (IOException e) {
-                return relativePath;
+                    return relativePath;
             }
         }
     }

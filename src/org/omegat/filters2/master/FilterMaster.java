@@ -62,6 +62,7 @@ import org.omegat.filters2.subtitles.SrtFilter;
 import org.omegat.filters2.text.TextFilter;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 import org.omegat.filters2.text.ini.INIFilter;
+import org.omegat.filters3.xml.android.AndroidFilter;
 import org.omegat.filters3.xml.docbook.DocBookFilter;
 import org.omegat.filters3.xml.opendoc.OpenDocFilter;
 import org.omegat.filters3.xml.openxml.OpenXMLFilter;
@@ -531,6 +532,7 @@ public class FilterMaster
     private Filters setupBuiltinFilters()
     {
         Filters res = new Filters();
+        res.addFilter(new OneFilter(new AndroidFilter(), false));
         res.addFilter(new OneFilter(new TextFilter(), false));
         res.addFilter(new OneFilter(new LatexFilter(), false));
         res.addFilter(new OneFilter(new PoFilter(), false));

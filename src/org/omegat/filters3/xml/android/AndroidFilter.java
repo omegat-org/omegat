@@ -167,7 +167,7 @@ public class AndroidFilter extends AbstractFilter {
                         nstr.getParentNode().replaceChild(newNode, nstr);
                         nstr = newNode;
                     }
-                } else if (isNamed(nstr, null, "string-array")) {
+                } else if (isNamed(nstr, null, "string-array") || isNamed(nstr, null, "plurals")) {
                     for (Node nit = nstr.getFirstChild(); nit != null; nit = nit
                             .getNextSibling()) {
                         if (nit.getNodeType() == Node.ELEMENT_NODE) {
@@ -195,8 +195,9 @@ public class AndroidFilter extends AbstractFilter {
                                         + nit.getLocalName());
                             }
                         }
-                    }
+                    }               
                 } else if (isNamed(nstr, null, "skip")) {
+                } else if (isNamed(nstr, null, "color")) {
                 } else {
                     throw new FormatException("Invalid tag: "
                             + nstr.getLocalName());

@@ -72,6 +72,10 @@ public class DirectoryMonitor extends Thread {
 
     @Override
     public void run() {
+        if (LOOKUP_PERIOD == 0) {
+            // don't check
+            return;
+        }
         setName(this.getClass().getSimpleName());
         setPriority(MIN_PRIORITY);
 

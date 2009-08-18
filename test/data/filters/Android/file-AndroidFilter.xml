@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<!-- Some comment -->
+	<string name="app_label">MyApp</string>
+	<!-- This is line for... -->
+	<string name="line"><font fgcolor="#ffffffff">Welcome !</font>
+		\nAdditional comment
+	</string>
+
+	<!-- Just for additional comments. -->
+	<skip />
+
+	<!-- Plural demo -->
+	<plurals name="Nminutes">
+		<!-- 1-minute -->
+		<item quantity="one">1 minute</item>
+		<!-- 2-minute or more -->
+		<item quantity="other"><xliff:g id="count">%d</xliff:g> minutes</item>
+	</plurals>
+
+</resources>

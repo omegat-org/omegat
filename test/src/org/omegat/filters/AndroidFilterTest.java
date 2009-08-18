@@ -31,8 +31,8 @@ public class AndroidFilterTest extends TestFilterBase {
     public void testParse() throws Exception {
         List<String> lines = parse(new AndroidFilter(),
                 "test/data/filters/Android/file-AndroidFilter.xml");
-        boolean c = lines.contains("View event");
-        assertTrue("'View event' not defined'", c);
+        boolean c = lines.contains("MyApp");
+        assertTrue("'MyApp' not defined'", c);
     }
 
     public void testTranslate() throws Exception {

@@ -25,38 +25,20 @@
 
 package org.omegat.filters3.xml.android;
 
-import org.omegat.filters2.Instance;
-import org.omegat.filters3.xml.XMLFilter;
-import org.omegat.util.OStrings;
+import java.util.regex.Pattern;
+
+import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
- * Filter for Android resources.
+ * XML dialect declaration for Android filter.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class AndroidFilter extends XMLFilter {
+public class AndroidDialect extends DefaultXMLDialect {
+    public static final Pattern ROOT_PATTERN = Pattern.compile("resources");
 
-    public AndroidFilter() {
-        super(new AndroidDialect());
-    }
-
-    /** Human-readable filter name. */
-    public String getFileFormatName() {
-        return OStrings.getString("Android_FILTER_NAME");
-    }
-
-    /** Extensions... */
-    public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.xml") };
-    }
-
-    /** Source encoding can not be varied by the user. */
-    public boolean isSourceEncodingVariable() {
-        return false;
-    }
-
-    /** Target encoding can not be varied by the user. */
-    public boolean isTargetEncodingVariable() {
-        return false;
+    public AndroidDialect() {
+        defineConstraint(CONSTRAINT_ROOT, ROOT_PATTERN);
+        defineParagraphTags(new String[] { "string", "item" });
     }
 }

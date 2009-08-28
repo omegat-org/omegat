@@ -80,16 +80,29 @@ public abstract class EntryInfoSearchThread<T> extends Thread {
 		if (isEntryChanged()) {
 			return;
 		}
-		final T result = search();
+		T result = null;
+		Exception error = null;
+		try {
+		   result = search();
+		} catch (Exception ex) {
+		   error = ex;  
+		}
 		if (isEntryChanged()) {
 			return;
 		}
+		
+		final T fresult = result;
+		final Exception ferror = error; 
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				if (isEntryChanged()) {
 					return;
 				}
-				pane.setFoundResult(result);
+				if (ferror != null) {
+				    pane.setError(ferror);
+				} else {
+				    pane.setFoundResult(fresult);
+				}
 			}
 		});
 	}
@@ -101,5 +114,5 @@ public abstract class EntryInfoSearchThread<T> extends Thread {
 	 * 
 	 * @return result of search
 	 */
-	protected abstract T search();
+	protected abstract T search() throws Exception;
 }

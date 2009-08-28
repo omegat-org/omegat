@@ -46,7 +46,7 @@ import org.omegat.core.events.IProjectEventListener;
 public abstract class EntryInfoPane<T> extends JTextPane implements
         IProjectEventListener, IEntryEventListener {
     StringEntry currentlyProcessedEntry;
-
+    
     public EntryInfoPane(final boolean useApplicationFont) {
         if (useApplicationFont) {
             setFont(Core.getMainWindow().getApplicationFont());
@@ -105,4 +105,12 @@ public abstract class EntryInfoPane<T> extends JTextPane implements
      *            found data
      */
     protected abstract void setFoundResult(T data);
+
+    /**
+     * Callback from search thread if error occured.
+     * 
+     * @param ex
+     */
+    protected void setError(Exception ex) {
+    }
 }

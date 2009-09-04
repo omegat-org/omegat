@@ -455,6 +455,11 @@ public class MainWindowMenuHandler {
                 mainWindow.menu.optionsAlwaysConfirmQuitCheckBoxMenuItem.isSelected());
     }
 
+    public void optionsGoogleTranslateMenuItemActionPerformed() {
+        Preferences.setPreference(Preferences.ALLOW_GOOGLE_TRANSLATE,
+                mainWindow.menu.optionsGoogleTranslateMenuItem.isSelected());
+    }
+
     /**
      * Displays the font dialog to allow selecting the font for source, target
      * text (in main window) and for match and glossary windows.

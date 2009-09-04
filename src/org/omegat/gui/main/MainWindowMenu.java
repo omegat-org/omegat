@@ -197,6 +197,7 @@ public class MainWindowMenu implements ActionListener {
         optionsMenu.add(optionsTabAdvanceCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_ADVANCE"));
         optionsMenu
                 .add(optionsAlwaysConfirmQuitCheckBoxMenuItem = createCheckboxMenuItem("MW_OPTIONSMENU_ALWAYS_CONFIRM_QUIT"));
+        optionsMenu.add(optionsGoogleTranslateMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_GOOGLETRANSLATE"));
         optionsMenu.add(new JSeparator());
         optionsMenu.add(optionsFontSelectionMenuItem = createMenuItem("TF_MENU_DISPLAY_FONT"));
         optionsMenu.add(optionsSetupFileFiltersMenuItem = createMenuItem("TF_MENU_DISPLAY_FILTERS"));
@@ -239,6 +240,7 @@ public class MainWindowMenu implements ActionListener {
     private void updateCheckboxesOnStart() {
         optionsTabAdvanceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isUseTabForAdvance());
         optionsAlwaysConfirmQuitCheckBoxMenuItem.setSelected(Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT));
+        optionsGoogleTranslateMenuItem.setSelected(Preferences.isPreference(Preferences.ALLOW_GOOGLE_TRANSLATE));
 
         viewMarkTranslatedSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkTranslated());
         viewMarkUntranslatedSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkUntranslated());
@@ -391,6 +393,7 @@ public class MainWindowMenu implements ActionListener {
     JMenuItem optionsSetupFileFiltersMenuItem;
     JMenuItem optionsSpellCheckMenuItem;
     JCheckBoxMenuItem optionsTabAdvanceCheckBoxMenuItem;
+    JCheckBoxMenuItem optionsGoogleTranslateMenuItem;
     JMenuItem optionsWorkflowMenuItem;
     JMenuItem projectCloseMenuItem;
     JMenuItem projectCompileMenuItem;

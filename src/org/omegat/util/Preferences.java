@@ -113,6 +113,8 @@ public class Preferences
     /** Always confirm Quit, even if the project is saved */
     public static final String ALWAYS_CONFIRM_QUIT     = "always_confirm_quit"; // NOI18N
     
+    public static final String ALLOW_GOOGLE_TRANSLATE = "allow_google_translate";
+    
     /** Mark the translated segments with a different color */
     public static final String MARK_TRANSLATED_SEGMENTS = "mark_translated_segments";   // NOI18N
     

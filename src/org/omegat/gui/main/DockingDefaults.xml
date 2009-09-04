@@ -21,6 +21,10 @@
 			<Key dockName="DICTIONARY" />
 			<RelativePosition x="0.6" y="0.7" w="0.4" h="0.3" />
 		</Dockable>
+		<Dockable>
+			<Key dockName="GOOGLE_TRANSLATE" />
+			<RelativePosition x="0.6" y="0.7" w="0.4" h="0.3" />
+		</Dockable>
 	</Border>
 
 	<TabGroups></TabGroups>

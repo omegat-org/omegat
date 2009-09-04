@@ -38,6 +38,7 @@ import org.omegat.core.threads.SaveThread;
 import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
+import org.omegat.gui.exttrans.GoogleTranslateTextArea;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainWindow;
@@ -73,6 +74,7 @@ public class Core {
     private static IAutoSave saveThread;
 
     private static GlossaryTextArea glossary;
+    private static GoogleTranslateTextArea googleTranslatePane;
     private static DictionariesTextArea dictionaries;
 
     /** Get project instance. */
@@ -136,6 +138,7 @@ public class Core {
         tagValidation = new TagValidationTool(me);
         matcher = new MatchesTextArea(me);
         glossary = new GlossaryTextArea();
+        googleTranslatePane = new GoogleTranslateTextArea();
         dictionaries = new DictionariesTextArea();
         tokenizer = createComponent(ITokenizer.class, new Tokenizer(), params);
         spellChecker = new SpellChecker();

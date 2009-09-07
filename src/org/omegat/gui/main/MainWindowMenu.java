@@ -156,6 +156,8 @@ public class MainWindowMenu implements ActionListener {
         editMenu.add(editOverwriteTranslationMenuItem = createMenuItem("TF_MENU_EDIT_RECYCLE"));
         editMenu.add(editInsertTranslationMenuItem = createMenuItem("TF_MENU_EDIT_INSERT"));
         editMenu.add(new JSeparator());
+        editMenu.add(editOverwriteMachineTranslationMenuItem = createMenuItem("TF_MENU_EDIT_OVERWRITE_MACHITE_TRANSLATION"));
+        editMenu.add(new JSeparator());
         editMenu.add(editOverwriteSourceMenuItem = createMenuItem("TF_MENU_EDIT_SOURCE_OVERWRITE"));
         editMenu.add(editInsertSourceMenuItem = createMenuItem("TF_MENU_EDIT_SOURCE_INSERT"));
         editMenu.add(new JSeparator());
@@ -365,6 +367,7 @@ public class MainWindowMenu implements ActionListener {
     JMenu editMenu;
     JMenuItem editOverwriteSourceMenuItem;
     JMenuItem editOverwriteTranslationMenuItem;
+    JMenuItem editOverwriteMachineTranslationMenuItem;
     JMenuItem editRedoMenuItem;
     JMenuItem editSelectFuzzy1MenuItem;
     JMenuItem editSelectFuzzy2MenuItem;

@@ -217,6 +217,10 @@ public class MainWindowMenuHandler {
         mainWindow.doInsertTrans();
     }
 
+    public void editOverwriteMachineTranslationMenuItemActionPerformed() {
+        Core.getEditor().replaceEditText(Core.getGoogleTranslatePane().getText());
+    }
+    
     /**
      * replaces entire edited segment text with a the source text of a segment
      * at cursor position

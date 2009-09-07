@@ -116,6 +116,10 @@ public class Core {
     public static ISpellChecker getSpellChecker() {
         return spellChecker;
     }
+    
+    public static GoogleTranslateTextArea getGoogleTranslatePane() {
+        return googleTranslatePane;
+    }
 
     public static IAutoSave getAutoSave() {
         return saveThread;

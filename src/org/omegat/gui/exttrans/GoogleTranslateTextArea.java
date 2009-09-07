@@ -120,9 +120,11 @@ public class GoogleTranslateTextArea extends EntryInfoPane<String> {
      */
     protected static String translate(final String text, final String from,
             final String to) throws Exception {
+        String trText = text.length() > 5000 ? text.substring(0, 4997) + "..."
+                : text;
         String url = GT_URL.replace("#sourceLang#", from).replace(
                 "#targetLang#", to)
-                + URLEncoder.encode(text, "UTF-8");
+                + URLEncoder.encode(trText, "UTF-8");
 
         String v = WikiGet.getURL(url);
         while (true) {

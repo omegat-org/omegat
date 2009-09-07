@@ -98,6 +98,7 @@ public class GoogleTranslateTextArea extends EntryInfoPane<String> {
     protected static String MARK_END = "\"}";
     protected static Pattern RE_UNICODE = Pattern
             .compile("\\\\u([0-9A-Fa-f]{4})");
+    protected static Pattern RE_HTML = Pattern.compile("&#([0-9]+);");
 
     /**
      * Call google api and parse JSON result.
@@ -124,9 +125,19 @@ public class GoogleTranslateTextArea extends EntryInfoPane<String> {
                 break;
             }
             String g = m.group();
-            char c = (char) Integer.parseInt(g.substring(2), 16);
+            char c = (char) Integer.parseInt(m.group(1), 16);
             v = v.replace(g, Character.toString(c));
         }
+        while (true) {
+            Matcher m = RE_HTML.matcher(v);
+            if (!m.find()) {
+                break;
+            }
+            String g = m.group();
+            char c = (char) Integer.parseInt(m.group(1));
+            v = v.replace(g, Character.toString(c));
+        }
+
         int beg = v.indexOf(MARK_BEG) + MARK_BEG.length();
         int end = v.indexOf(MARK_END, beg);
         String tr = v.substring(beg, end);

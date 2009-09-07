@@ -55,6 +55,12 @@ public class GoogleTranslateTextArea extends EntryInfoPane<String> {
     }
 
     @Override
+    protected void onProjectClose() {
+        UIThreadsUtil.mustBeSwingThread();
+        setText("");
+    }
+
+    @Override
     protected void startSearchThread(final StringEntry newEntry) {
         UIThreadsUtil.mustBeSwingThread();
         if (Preferences.isPreference(Preferences.ALLOW_GOOGLE_TRANSLATE)) {
@@ -128,6 +134,9 @@ public class GoogleTranslateTextArea extends EntryInfoPane<String> {
             char c = (char) Integer.parseInt(m.group(1), 16);
             v = v.replace(g, Character.toString(c));
         }
+        v = v.replace("&quot;", "&#34;");
+        v = v.replace("&nbsp;", "&#160;");
+        v = v.replace("&amp;", "&#38;");
         while (true) {
             Matcher m = RE_HTML.matcher(v);
             if (!m.find()) {

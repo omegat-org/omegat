@@ -127,6 +127,9 @@ public abstract class ParseEntry implements IParseCallback {
 
         return result;
     }
+    
+    public void readEntry(String source, String translation, boolean isFuzzy) {
+    }
 
     protected abstract String processSingleEntry(String src);
 }

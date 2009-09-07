@@ -31,4 +31,5 @@ package org.omegat.filters2;
  */
 public interface IParseCallback {
     String processEntry(String entry);
+    void readEntry(String source, String translation, boolean isFuzzy);
 }

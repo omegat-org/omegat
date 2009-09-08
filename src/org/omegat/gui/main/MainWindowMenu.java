@@ -248,6 +248,8 @@ public class MainWindowMenu implements ActionListener {
         viewMarkUntranslatedSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkUntranslated());
 
         viewDisplaySegmentSourceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isDisplaySegmentSources());
+        
+        updateEditOverwriteMachineTranslationMenuItem();
     }
 
     /**
@@ -345,7 +347,7 @@ public class MainWindowMenu implements ActionListener {
                 editMenu, editFindInProjectMenuItem, editInsertSourceMenuItem, editInsertTranslationMenuItem,
                 editOverwriteSourceMenuItem, editOverwriteTranslationMenuItem, editRedoMenuItem,
                 editSelectFuzzy1MenuItem, editSelectFuzzy2MenuItem, editSelectFuzzy3MenuItem, editSelectFuzzy4MenuItem,
-                editSelectFuzzy5MenuItem, editUndoMenuItem, switchCaseSubMenu,
+                editSelectFuzzy5MenuItem, editUndoMenuItem, switchCaseSubMenu, editOverwriteMachineTranslationMenuItem,
 
                 gotoMenu, gotoNextSegmentMenuItem, gotoNextUntranslatedMenuItem, gotoPreviousSegmentMenuItem,
                 gotoSegmentMenuItem,
@@ -358,6 +360,18 @@ public class MainWindowMenu implements ActionListener {
         for (JMenuItem item : itemsToSwitchOn) {
             item.setEnabled(isProjectOpened);
         }
+
+        updateEditOverwriteMachineTranslationMenuItem();
+    }
+
+    /**
+     * Enable or disable 'Override Machine Translation' menu item.
+     */
+    protected void updateEditOverwriteMachineTranslationMenuItem() {
+        editOverwriteMachineTranslationMenuItem
+                .setEnabled(Core.getProject().isProjectLoaded()
+                        && Preferences
+                                .isPreference(Preferences.ALLOW_GOOGLE_TRANSLATE));
     }
 
     JMenuItem cycleSwitchCaseMenuItem;

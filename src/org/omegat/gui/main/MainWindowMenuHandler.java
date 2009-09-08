@@ -49,6 +49,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.SwingWorker;
 import org.omegat.util.OConsts;
 
@@ -218,7 +219,11 @@ public class MainWindowMenuHandler {
     }
 
     public void editOverwriteMachineTranslationMenuItemActionPerformed() {
-        Core.getEditor().replaceEditText(Core.getGoogleTranslatePane().getText());
+        String tr = Core.getGoogleTranslatePane().getText();
+        if (!StringUtil.isEmpty(tr)) {
+            Core.getEditor().replaceEditText(
+                    Core.getGoogleTranslatePane().getText());
+        }
     }
     
     /**
@@ -462,6 +467,7 @@ public class MainWindowMenuHandler {
     public void optionsGoogleTranslateMenuItemActionPerformed() {
         Preferences.setPreference(Preferences.ALLOW_GOOGLE_TRANSLATE,
                 mainWindow.menu.optionsGoogleTranslateMenuItem.isSelected());
+        mainWindow.menu.updateEditOverwriteMachineTranslationMenuItem();
     }
 
     /**

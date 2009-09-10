@@ -20,17 +20,28 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters;
+
+import java.util.Map;
 
 import org.omegat.filters2.po.PoFilter;
 
 public class POFilterTest extends TestFilterBase {
     public void testParse() throws Exception {
-	parse(new PoFilter(), "test/data/filters/po/file-POFilter-be.po");
+        Map<String, String> data = parse2(new PoFilter(),
+                "test/data/filters/po/file-POFilter-be.po");
+        assertEquals(data.get("non-fuzzy"), "non-fuzzy translation");
+        assertEquals(data.get("fuzzy"), "[PO-fuzzy] fuzzy translation");
+        assertEquals(data.get("Delete Account"),
+                "[PO-fuzzy] Supprimer le compte");
+        assertEquals(data.get("Delete Accounts"),
+                "[PO-fuzzy] Supprimer des comptes");
     }
+
     public void testTranslate() throws Exception {
-	//translateText(new PoFilter(), "test/data/filters/po/file-POFilter-be.po");
+        // translateText(new PoFilter(),
+        // "test/data/filters/po/file-POFilter-be.po");
     }
 }

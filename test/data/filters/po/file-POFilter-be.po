@@ -3732,3 +3732,15 @@ msgstr "Зьмены для файлу страчаны"
 
 #~ msgid " Cannot set source routing (%s)"
 #~ msgstr "Немагчыма ўсталяваць разьмеркаваньне крыніцы (%s)"
+
+msgid "Delete Account"
+msgid_plural "Delete Accounts"
+msgstr[0] "Supprimer le compte"
+msgstr[1] "Supprimer des comptes"
+
+msgid "non-fuzzy"
+msgstr "non-fuzzy translation"
+
+#, fuzzy
+msgid "fuzzy"
+msgstr "fuzzy translation"

@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters2;
 
@@ -31,5 +31,21 @@ package org.omegat.filters2;
  */
 public interface IParseCallback {
     String processEntry(String entry);
-    void readEntry(String source, String translation, boolean isFuzzy);
+
+    /**
+     * Read entry from source file
+     * 
+     * @param id
+     *            ID in source file, or null if ID not suported by format
+     * @param source
+     *            source entry text
+     * @param translation
+     *            exist translation text
+     * @param isFuzzy
+     *            translation fuzzy flag
+     * @param comment
+     *            comment for entry, if format supports it
+     */
+    void readEntry(String id, String source, String translation,
+            boolean isFuzzy, String comment);
 }

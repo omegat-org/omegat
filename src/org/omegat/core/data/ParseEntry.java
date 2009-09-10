@@ -128,7 +128,84 @@ public abstract class ParseEntry implements IParseCallback {
         return result;
     }
     
-    public void readEntry(String source, String translation, boolean isFuzzy) {
+    /**
+     * This method is called by filters to add new entry in OmegaT after read it
+     * from source file.
+     * 
+     * @param id
+     *            ID of entry, if format supports it
+     * @param source
+     *            Translatable source string
+     * @param translation
+     *            exist source's string translation
+     * @param isFuzzy
+     *            flag for fuzzy translation
+     * @param comment
+     *            entry's comment, if format supports it
+     */
+    public void readEntry(String id, String source, String translation, boolean isFuzzy, String comment) {
+     // replacing all occurrences of single CR (\r) or CRLF (\r\n) by LF (\n)
+        // this is reversed at the end of the method
+        // fix for bug 1462566
+        boolean crlf = source.indexOf("\r\n") > 0;
+        if (crlf)
+            source = source.replaceAll("\\r\\n", "\n");
+        boolean cr = source.indexOf("\r") > 0;
+        if (cr)
+            source = source.replaceAll("\\r", "\n");
+
+        // Some special space handling: skip leading and trailing whitespace
+        // and non-breaking-space
+        int len = source.length();
+        int b = 0;
+        StringBuffer bs = new StringBuffer();
+        while (b < len
+                && (Character.isWhitespace(source.charAt(b)) || source.charAt(b) == '\u00A0')) {
+            bs.append(source.charAt(b));
+            b++;
+        }
+
+        int e = len - 1;
+        StringBuffer es = new StringBuffer();
+        while (e >= b
+                && (Character.isWhitespace(source.charAt(e)) || source.charAt(e) == '\u00A0')) {
+            es.append(source.charAt(e));
+            e--;
+        }
+        es.reverse();
+
+        source = StaticUtils.fixChars(source.substring(b, e + 1));
+
+        StringBuffer res = new StringBuffer();
+        res.append(bs);
+
+        if (m_config.isSentenceSegmentingEnabled()) {
+            List<StringBuffer> spaces = new ArrayList<StringBuffer>();
+            List<Rule> brules = new ArrayList<Rule>();
+            Language sourceLang = m_config.getSourceLanguage();
+            Language targetLang = m_config.getTargetLanguage();
+            List<String> segments = Segmenter.segment(sourceLang, source,
+                    spaces, brules);
+            for (int i = 0; i < segments.size(); i++) {
+                String onesrc = segments.get(i);
+                segments.set(i, processSingleEntry(onesrc));
+            }
+            res.append(Segmenter.glue(sourceLang, targetLang, segments, spaces,
+                    brules));
+        } else
+            res.append(processSingleEntry(source));
+        
+        res.append(es);
+
+        // replacing all occurrences of LF (\n) by either single CR (\r) or CRLF
+        // (\r\n)
+        // this is a reversal of the process at the beginning of this method
+        // fix for bug 1462566
+        String result = res.toString();
+        if (crlf)
+            result = result.replaceAll("\\n", "\r\n");
+        else if (cr)
+            result = result.replaceAll("\\n", "\r");
     }
 
     protected abstract String processSingleEntry(String src);

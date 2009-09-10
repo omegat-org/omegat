@@ -28,7 +28,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.custommonkey.xmlunit.XMLTestCase;
 import org.omegat.filters2.AbstractFilter;
@@ -54,8 +56,25 @@ public abstract class TestFilterBase extends XMLTestCase {
                     result.add(entry);
                 return entry;
             }
-            public void readEntry(String source, String translation,
-                    boolean isFuzzy) {
+            public void readEntry(String id, String source, String translation,
+                    boolean isFuzzy, String comment) {
+            }
+        });
+        filter.processFile(new File(filename), null, null, null);
+
+        return result;
+    }
+    
+    protected Map<String,String> parse2(AbstractFilter filter, String filename) throws Exception {
+        final Map<String,String> result = new HashMap<String, String>();
+
+        filter.setParseCallback(new IParseCallback() {
+            public String processEntry(String entry) {
+                return null;
+            }
+            public void readEntry(String id, String source, String translation,
+                    boolean isFuzzy, String comment) {
+                result.put(source, translation);
             }
         });
         filter.processFile(new File(filename), null, null, null);
@@ -68,8 +87,8 @@ public abstract class TestFilterBase extends XMLTestCase {
             public String processEntry(String entry) {
                 return entry;
             }
-            public void readEntry(String source, String translation,
-                    boolean isFuzzy) {
+            public void readEntry(String id, String source, String translation,
+                    boolean isFuzzy, String comment) {
             }
         });
         filter.processFile(new File(filename), null, outFile, null);

@@ -484,10 +484,6 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
             outofturnEntries.push(ootTag.getEntry());
         }
         else {
-/*            paragraphTagName.push(tag);
-            paragraphTagAttributes.push(XMLUtils.convertAttributes(attributes));
-            preformatTagName.push(tag);
-            preformatTagAttributes.push(XMLUtils.convertAttributes(attributes));*/
             if (isParagraphTag(tag, XMLUtils.convertAttributes(attributes)) &&
                 !collectingOutOfTurnText() && !collectingIntactText()) {
                     translateAndFlush();

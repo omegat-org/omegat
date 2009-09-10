@@ -29,12 +29,15 @@ package org.omegat.filters2.po;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
+import org.omegat.filters2.TranslationException;
 import org.omegat.util.OStrings;
 
 /**
@@ -90,6 +93,25 @@ public class PoFilter extends AbstractFilter {
         return true;
     }
 
+    public List<File> processFile(File inFile, String inEncoding, File outFile,
+            String outEncoding) throws IOException, TranslationException {
+        BufferedReader reader = createReader(inFile, inEncoding);
+        BufferedWriter writer;
+
+        if (outFile != null)
+            writer = createWriter(outFile, outEncoding);
+        else
+            writer = null;
+
+        processFile(reader, writer);
+
+        reader.close();
+        if (writer != null) {
+            writer.close();
+        }
+        return null;
+    }
+
     public void processFile(BufferedReader in, BufferedWriter out)
             throws IOException {
         // BOM (byte order mark) bugfix
@@ -143,8 +165,7 @@ public class PoFilter extends AbstractFilter {
                  * -profile-po-1.2-cd02.html for an example.
                  */
                 nowrap = true;
-                out.write(s);
-                out.write('\n');
+                eol(s);
                 continue;
             }
             Matcher m;
@@ -160,8 +181,7 @@ public class PoFilter extends AbstractFilter {
                     currentMode = MODE.MSGID_PLURAL;
                     sources[1].append(text);
                 }
-                out.write(s);
-                out.write('\n');
+                eol(s);
 
                 continue;
             }
@@ -195,13 +215,11 @@ public class PoFilter extends AbstractFilter {
                 switch (currentMode) {
                 case MSGID:
                     sources[0].append(text);
-                    out.write(s);
-                    out.write('\n');
+                    eol(s);
                     break;
                 case MSGID_PLURAL:
                     sources[1].append(text);
-                    out.write(s);
-                    out.write('\n');
+                    eol(s);
                     break;
                 case MSGSTR:
                     targets[0].append(text);
@@ -214,10 +232,16 @@ public class PoFilter extends AbstractFilter {
             }
 
             flushTranslation(currentMode);
-            out.write(s);
-            out.write("\n");
+            eol(s);
         }
         flushTranslation(currentMode);
+    }
+
+    protected void eol(String s) throws IOException {
+        if (out != null) {
+            out.write(s);
+            out.write('\n');
+        }
     }
 
     protected void align(int pair) {
@@ -244,26 +268,33 @@ public class PoFilter extends AbstractFilter {
                 return;
             } else {
                 // header
-                out.write("msgstr " + privateProcessEntry(targets[0]) + "\n");
+                if (out != null) {
+                    out.write("msgstr " + privateProcessEntry(sources[0])
+                            + "\n");
+                }
             }
             fuzzy = false;
         } else {
             // source exist
             if (sources[1].length() == 0) {
                 // non-plurals
-                out.write("msgstr " + privateProcessEntry(targets[0]) + "\n");
-
-                align(0);
+                if (out != null) {
+                    out.write("msgstr " + privateProcessEntry(sources[0])
+                            + "\n");
+                } else {
+                    align(0);
+                }
             } else {
                 // plurals
-                out
-                        .write("msgstr[0] " + privateProcessEntry(targets[0])
-                                + "\n");
-                out
-                        .write("msgstr[1] " + privateProcessEntry(targets[1])
-                                + "\n");
-                align(0);
-                align(1);
+                if (out != null) {
+                    out.write("msgstr[0] " + privateProcessEntry(sources[0])
+                            + "\n");
+                    out.write("msgstr[1] " + privateProcessEntry(sources[1])
+                            + "\n");
+                } else {
+                    align(0);
+                    align(1);
+                }
             }
             fuzzy = false;
         }
@@ -310,7 +341,8 @@ public class PoFilter extends AbstractFilter {
         String entry = unescape(en.toString());
 
         // Do real translation
-        String translation = entryProcessingCallback.processEntry(entry);
+        String translation = entryProcessingCallback
+                .getTranslation(null, entry);
 
         if (translation != null) {
             return "\"" + escape(translation) + "\"";

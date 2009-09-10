@@ -48,4 +48,15 @@ public interface IParseCallback {
      */
     void readEntry(String id, String source, String translation,
             boolean isFuzzy, String comment);
+
+    /**
+     * Get translation for output to compiled target.
+     * 
+     * @param id
+     *            ID in source file, or null if ID not suported by format
+     * @param source
+     *            source entry text
+     * @return translation or source if translation not exist
+     */
+    String getTranslation(String id, String source);
 }

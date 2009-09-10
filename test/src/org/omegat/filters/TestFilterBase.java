@@ -59,6 +59,9 @@ public abstract class TestFilterBase extends XMLTestCase {
             public void readEntry(String id, String source, String translation,
                     boolean isFuzzy, String comment) {
             }
+            public String getTranslation(String id, String source) {
+                return null;
+            }
         });
         filter.processFile(new File(filename), null, null, null);
 
@@ -76,6 +79,9 @@ public abstract class TestFilterBase extends XMLTestCase {
                     boolean isFuzzy, String comment) {
                 result.put(source, translation);
             }
+            public String getTranslation(String id, String source) {
+                return null;
+            }
         });
         filter.processFile(new File(filename), null, null, null);
 
@@ -89,6 +95,9 @@ public abstract class TestFilterBase extends XMLTestCase {
             }
             public void readEntry(String id, String source, String translation,
                     boolean isFuzzy, String comment) {
+            }
+            public String getTranslation(String id, String source) {
+                return null;
             }
         });
         filter.processFile(new File(filename), null, outFile, null);

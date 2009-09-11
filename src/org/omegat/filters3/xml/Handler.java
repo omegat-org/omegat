@@ -664,7 +664,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
                    atts = intacttagAttributes; // Restore attributes
             }
 
-            return !dialect.validateTranslatableTag(tag, atts);
+            return dialect.validateIntactTag(tag, atts);
         }
     }
 

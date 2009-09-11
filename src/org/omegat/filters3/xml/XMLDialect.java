@@ -105,7 +105,7 @@ public interface XMLDialect
      * @param atts The list of the tag attributes
      * @return <code>true</code> or <code>false</code>
      */
-    Boolean validateTranslatableTag(String tag,
+    Boolean validateIntactTag(String tag,
                                     Attributes atts);
 
      /**

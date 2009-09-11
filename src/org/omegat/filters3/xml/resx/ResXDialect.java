@@ -58,13 +58,13 @@ public class ResXDialect extends DefaultXMLDialect
      * "name" starts with &gt; or ends with "FieldName"
      * @param tag An XML tag
      * @param atts The attributes associated with the tag
-     * @return <code>true</code> if the content of this tag should be 
-     * translated, <code>false</code> otherwise
+     * @return <code>false</code> if the content of this tag should be
+     * translated, <code>true</code> otherwise
      */
-    public Boolean validateTranslatableTag(String tag,
+    public Boolean validateIntactTag(String tag,
                                            Attributes atts) {
         if (!tag.equalsIgnoreCase("data")) // We test only "data"
-            return true;
+            return false;
         
         if (atts != null) {
             for (int i=0; i < atts.size(); i++) {
@@ -74,9 +74,9 @@ public class ResXDialect extends DefaultXMLDialect
                   (oneAttribute.getName().equalsIgnoreCase("name") &&
                    (oneAttribute.getValue().startsWith("&gt;") ||
                    oneAttribute.getValue().endsWith("FieldName"))))
-                   return false;
+                   return true;
             }
         }
-        return true;
+        return false;
     }
 }

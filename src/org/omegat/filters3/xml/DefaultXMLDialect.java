@@ -267,9 +267,9 @@ public class DefaultXMLDialect implements XMLDialect
      * @param atts The list of the tag attributes
      * @return <code>true</code> or <code>false</code>
      */
-    public Boolean validateTranslatableTag(String tag,
+    public Boolean validateIntactTag(String tag,
                                            Attributes atts) {
-        return true;
+        return false;
     }
 
     /**

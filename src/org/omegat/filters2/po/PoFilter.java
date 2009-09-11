@@ -269,8 +269,7 @@ public class PoFilter extends AbstractFilter {
             } else {
                 // header
                 if (out != null) {
-                    out.write("msgstr " + privateProcessEntry(sources[0])
-                            + "\n");
+                    out.write("msgstr " + getTranslation(sources[0]) + "\n");
                 }
             }
             fuzzy = false;
@@ -279,18 +278,15 @@ public class PoFilter extends AbstractFilter {
             if (sources[1].length() == 0) {
                 // non-plurals
                 if (out != null) {
-                    out.write("msgstr " + privateProcessEntry(sources[0])
-                            + "\n");
+                    out.write("msgstr " + getTranslation(sources[0]) + "\n");
                 } else {
                     align(0);
                 }
             } else {
                 // plurals
                 if (out != null) {
-                    out.write("msgstr[0] " + privateProcessEntry(sources[0])
-                            + "\n");
-                    out.write("msgstr[1] " + privateProcessEntry(sources[1])
-                            + "\n");
+                    out.write("msgstr[0] " + getTranslation(sources[0]) + "\n");
+                    out.write("msgstr[1] " + getTranslation(sources[1]) + "\n");
                 } else {
                     align(0);
                     align(1);
@@ -337,7 +333,7 @@ public class PoFilter extends AbstractFilter {
      * @return The translated entry, within double quotes on each line (thus
      *         ready to be printed to target file immediately)
      **/
-    private String privateProcessEntry(StringBuilder en) {
+    private String getTranslation(StringBuilder en) {
         String entry = unescape(en.toString());
 
         // Do real translation

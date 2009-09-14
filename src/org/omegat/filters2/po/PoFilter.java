@@ -145,7 +145,7 @@ public class PoFilter extends AbstractFilter {
              */
             if (COMMENT_FUZZY.matcher(s).matches()) {
                 fuzzy = true;
-                s = "[po-fuzzy] " + s;
+                //s = "[po-fuzzy] " + s;
                 flushTranslation(currentMode);
                 continue;
             } else if (COMMENT_FUZZY_OTHER.matcher(s).matches()) {
@@ -190,10 +190,10 @@ public class PoFilter extends AbstractFilter {
                 String text = m.group(2);
                 if (m.group(1) == null) {
                     // non-plural lines
-                    if (fuzzy) {
-                        targets[0].append("[PO-fuzzy] ");
-                        fuzzy = false;
-                    }
+//                    if (fuzzy) {
+//                        targets[0].append("[PO-fuzzy] ");
+//                        fuzzy = false;
+//                    }
                     currentMode = MODE.MSGSTR;
                     targets[0].append(text);
                 } else {
@@ -257,7 +257,7 @@ public class PoFilter extends AbstractFilter {
         if (translation.length() == 0) {
             translation = null;
         }
-        entryProcessingCallback.readEntry(null, source, translation, fuzzy,
+        entryProcessingCallback.addEntry(null, source, translation, fuzzy,
                 null);
     }
 

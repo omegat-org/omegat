@@ -143,7 +143,7 @@ public abstract class ParseEntry implements IParseCallback {
      * @param comment
      *            entry's comment, if format supports it
      */
-    public void readEntry(String id, String source, String translation, boolean isFuzzy, String comment) {
+    public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment) {
         // replacing all occurrences of single CR (\r) or CRLF (\r\n) by LF (\n)
         // this is reversed at the end of the method
         // fix for bug 1462566
@@ -185,6 +185,14 @@ public abstract class ParseEntry implements IParseCallback {
             addSegment(id, 0, source, translation, isFuzzy, comment);
     }
     
+    /**
+     * Get translation for specified entry to write output file.
+     * 
+     * @param entry
+     *            entry ID
+     * @param source
+     *            source text
+     */
     public String getTranslation(String id, String source) {
         // replacing all occurrences of single CR (\r) or CRLF (\r\n) by LF (\n)
         // this is reversed at the end of the method

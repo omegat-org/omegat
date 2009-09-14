@@ -40,8 +40,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import javax.swing.JOptionPane;
-
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.stat.Statistics;
@@ -809,6 +807,38 @@ public class RealProject implements IProject
             }
             SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, m_srcTextEntryArray.size());
             m_srcTextEntryArray.add(srcTextEntry);
+        }
+
+        protected void addSegment(String id, int segmentIndex,
+                String segmentSource, String segmentTranslation,
+                boolean isFuzzy, String comment) {
+            // if the source string is empty, don't add it to TM
+            if (segmentSource.length() == 0
+                    || segmentSource.trim().length() == 0)
+                return;
+            StringEntry strEntry = m_strEntryHash.get(segmentSource);
+            if (strEntry == null) {
+                // entry doesn't exist yet - create and store it
+                strEntry = new StringEntry(segmentSource);
+                strEntry.setTranslation(segmentTranslation);
+                m_strEntryList.add(strEntry);
+                m_strEntryHash.put(segmentSource, strEntry);
+            }
+            SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, m_srcTextEntryArray.size());
+            m_srcTextEntryArray.add(srcTextEntry);
+        }
+        @Override
+        public String getTranslation(String id, String source) {
+            StringEntry se = m_strEntryHash.get(source);
+            
+            if (se == null) {
+                return source;
+            } else {
+                String s = se.getTranslation();
+                if (s == null || s.length() == 0)
+                    s = source;
+                return s;
+            }
         }
     };
 

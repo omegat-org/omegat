@@ -46,7 +46,7 @@ public interface IParseCallback {
      * @param comment
      *            comment for entry, if format supports it
      */
-    void readEntry(String id, String source, String translation,
+    void addEntry(String id, String source, String translation,
             boolean isFuzzy, String comment);
 
     /**
